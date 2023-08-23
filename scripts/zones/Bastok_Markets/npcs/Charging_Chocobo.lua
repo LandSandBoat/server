@@ -4,28 +4,27 @@
 -- Standard Merchant NPC
 -- !pos -301.531 -10.319 -157.237 235
 -----------------------------------
-local ID = require("scripts/zones/Bastok_Markets/IDs")
-require("scripts/globals/shop")
+local ID = zones[xi.zone.BASTOK_MARKETS]
 -----------------------------------
 local entity = {}
 
 entity.onTrigger = function(player, npc)
     local stock =
     {
-        12832,   191, 3,    -- Bronze Subligar
-        12816,  1646, 3,    -- Scale Cuisses
-        12817, 14131, 2,    -- Brass Cuisses
-        12800, 34776, 2,    -- Cuisses
-        12960,   117, 3,    -- Bronze Leggings
-        12944,   998, 3,    -- Scale Greaves
-        12945,  8419, 2,    -- Brass Greaves
-        12928, 21859, 2,    -- Plate Leggings
-        13080, 16891, 2,    -- Gorget
-        13192,   382, 3,    -- Leather Belt
-        13196, 10166, 3,    -- Silver Belt
-        12801, 58738, 1,    -- Mythril Cuisses
-        12929, 36735, 1,    -- Mythril Leggings
-        13198, 20037, 1,    -- Swordbelt
+        xi.item.BRONZE_SUBLIGAR,    216, 3,
+        xi.item.SCALE_CUISSES,     1861, 3,
+        xi.item.BRASS_CUISSES,    16074, 2,
+        xi.item.CUISSES,          39312, 2,
+        xi.item.MYTHRIL_CUISSES,  66399, 1,
+        xi.item.BRONZE_LEGGINGS,    133, 3,
+        xi.item.SCALE_GREAVES,     1128, 3,
+        xi.item.BRASS_GREAVES,     9518, 2,
+        xi.item.PLATE_LEGGINGS,   24710, 2,
+        xi.item.MYTHRIL_LEGGINGS, 41527, 1,
+        xi.item.GORGET,           19094, 2,
+        xi.item.LEATHER_BELT,       442, 3,
+        xi.item.SILVER_BELT,      11880, 3,
+        xi.item.SWORDBELT,        22651, 1,
     }
 
     player:showText(npc, ID.text.CHARGINGCHOCOBO_SHOP_DIALOG)

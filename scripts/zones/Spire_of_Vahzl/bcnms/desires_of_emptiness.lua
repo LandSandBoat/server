@@ -2,10 +2,6 @@
 -- Desires of Emptiness
 -- Spire of Vahzl mission battlefield
 -----------------------------------
-require("scripts/globals/battlefield")
-require("scripts/globals/missions")
-require("scripts/globals/titles")
------------------------------------
 local battlefieldObject = {}
 
 battlefieldObject.onBattlefieldTick = function(battlefield, tick)

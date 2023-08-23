@@ -3,7 +3,7 @@
 --  Mob: Qn'hpemde
 -- Jailor of Love Pet version
 -----------------------------------
-local ID = require("scripts/zones/AlTaieu/IDs")
+local ID = zones[xi.zone.ALTAIEU]
 -----------------------------------
 local entity = {}
 

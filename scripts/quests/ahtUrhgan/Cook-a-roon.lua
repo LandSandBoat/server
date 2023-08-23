@@ -2,10 +2,6 @@
 -- Cook-a-roon
 -- Ququroon !pos -2.400 -1 66.824 53
 -----------------------------------
-require('scripts/globals/quests')
-require('scripts/globals/npc_util')
-require('scripts/globals/interaction/quest')
------------------------------------
 
 local quest = Quest:new(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.COOK_A_ROON)
 
@@ -52,7 +48,7 @@ quest.sections =
                 end,
 
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, { xi.items.AHTAPOT, xi.items.ISTAKOZ, xi.items.ISTAVRIT, xi.items.ISTIRIDYE, xi.items.MERCANBALIGI }) then
+                    if npcUtil.tradeHasExactly(trade, { xi.item.AHTAPOT, xi.item.ISTAKOZ, xi.item.ISTAVRIT, xi.item.ISTIRIDYE, xi.item.MERCANBALIGI }) then
                         quest:setVar(player, 'Prog', math.random(2, 3))
                         return quest:progressEvent(243, { [7] = quest:getVar(player, 'Prog') })
                     end
@@ -63,7 +59,7 @@ quest.sections =
             {
                 [243] = function(player, csid, option, npc)
                     if quest:getVar(player, 'Prog') == 2 then
-                        npcUtil.giveItem(player, xi.items.BOWL_OF_NASHMAU_STEW)
+                        npcUtil.giveItem(player, xi.item.BOWL_OF_NASHMAU_STEW)
                     end
 
                     if quest:complete(player) then
@@ -85,7 +81,7 @@ quest.sections =
             ['Ququroon'] =
             {
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, { xi.items.AHTAPOT, xi.items.ISTAKOZ, xi.items.ISTAVRIT, xi.items.ISTIRIDYE, xi.items.MERCANBALIGI }) then
+                    if npcUtil.tradeHasExactly(trade, { xi.item.AHTAPOT, xi.item.ISTAKOZ, xi.item.ISTAVRIT, xi.item.ISTIRIDYE, xi.item.MERCANBALIGI }) then
                         quest:setVar(player, 'Prog', math.random(2, 3))
                         return quest:progressEvent(243, { [7] = quest:getVar(player, 'Prog') })
                     end
@@ -101,7 +97,7 @@ quest.sections =
                 [243] = function(player, csid, option, npc)
                     player:confirmTrade()
                     if quest:getVar(player, 'Prog') == 2 then
-                        npcUtil.giveItem(player, xi.items.BOWL_OF_NASHMAU_STEW)
+                        npcUtil.giveItem(player, xi.item.BOWL_OF_NASHMAU_STEW)
                     end
 
                     quest:setVar(player, 'Prog', 0)

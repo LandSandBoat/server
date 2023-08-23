@@ -4,9 +4,7 @@
 -- !pos -557.9 0.001 637.846 102
 -- Teleports Players to Abyssea - La Theine
 -----------------------------------
-require("scripts/globals/quests")
-require("scripts/globals/abyssea")
-local ID = require("scripts/zones/La_Theine_Plateau/IDs")
+local ID = zones[xi.zone.LA_THEINE_PLATEAU]
 -----------------------------------
 local entity = {}
 

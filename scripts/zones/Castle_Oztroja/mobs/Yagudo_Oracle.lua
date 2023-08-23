@@ -3,8 +3,7 @@
 --  Mob: Yagudo Oracle
 -- Note: PH for Quu Domi the Gallant
 -----------------------------------
-local ID = require("scripts/zones/Castle_Oztroja/IDs")
-require("scripts/globals/mobs")
+local ID = zones[xi.zone.CASTLE_OZTROJA]
 -----------------------------------
 local entity = {}
 

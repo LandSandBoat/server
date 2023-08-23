@@ -3,8 +3,6 @@
 --  NPC: Shattered Telepoint
 -- !pos 334 19 -60 102
 -----------------------------------
-require("scripts/globals/missions")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

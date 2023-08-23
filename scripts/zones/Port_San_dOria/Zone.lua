@@ -1,11 +1,7 @@
 -----------------------------------
 -- Zone: Port_San_dOria (232)
 -----------------------------------
-local ID = require('scripts/zones/Port_San_dOria/IDs')
 require('scripts/quests/flyers_for_regine')
-require('scripts/globals/conquest')
-require('scripts/globals/cutscenes')
-require('scripts/globals/missions')
 -----------------------------------
 local zoneObject = {}
 

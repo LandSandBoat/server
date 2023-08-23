@@ -1,8 +1,6 @@
 -----------------------------------
 -- Zone: none (49)
 -----------------------------------
-local ID = require('scripts/zones/none/IDs')
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

@@ -7,9 +7,7 @@
 -- TODO Allow players to cancel quest
 -- TODO Requre check for other 3 quests An Understanding General, A Generous General,
 -----------------------------------
-local ID = require("scripts/zones/Windurst_Woods/IDs")
-require("scripts/globals/crafting")
-require("scripts/globals/roe")
+local ID = zones[xi.zone.WINDURST_WOODS]
 -----------------------------------
 local entity = {}
 
@@ -102,7 +100,7 @@ entity.onEventFinish = function(player, csid, option, npc)
     if csid == 700 then
         player:setCharVar("moral", 2)
     elseif csid == 705 then
-        if npcUtil.giveItem(player, xi.items.YAGUDO_HEADDRESS_CUTTING) then
+        if npcUtil.giveItem(player, xi.item.YAGUDO_HEADDRESS_CUTTING) then
             player:setCharVar("moral", 4)
         end
     elseif csid == 10011 and option == 2 then
@@ -111,10 +109,10 @@ entity.onEventFinish = function(player, csid, option, npc)
         end
     elseif csid == 10011 and option == 1 then
         if player:getFreeSlotsCount() == 0 then
-            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.items.EARTH_CRYSTAL)
+            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.item.EARTH_CRYSTAL)
         else
-            player:addItem(xi.items.EARTH_CRYSTAL)
-            player:messageSpecial(ID.text.ITEM_OBTAINED, xi.items.EARTH_CRYSTAL)
+            player:addItem(xi.item.EARTH_CRYSTAL)
+            player:messageSpecial(ID.text.ITEM_OBTAINED, xi.item.EARTH_CRYSTAL)
             xi.crafting.signupGuild(player, xi.crafting.guild.CLOTHCRAFT)
         end
     else

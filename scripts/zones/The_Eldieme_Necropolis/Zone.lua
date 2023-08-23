@@ -1,10 +1,6 @@
 -----------------------------------
 -- Zone: The Eldieme Necropolis (195)
 -----------------------------------
-local ID = require('scripts/zones/The_Eldieme_Necropolis/IDs')
-require('scripts/globals/conquest')
-require('scripts/globals/treasure')
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

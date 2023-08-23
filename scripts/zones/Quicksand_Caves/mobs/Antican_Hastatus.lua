@@ -3,9 +3,7 @@
 --  Mob: Antican Hastatus
 -- Note: PH for Antican Magister
 -----------------------------------
-local ID = require("scripts/zones/Quicksand_Caves/IDs")
-require("scripts/globals/regimes")
-require("scripts/globals/mobs")
+local ID = zones[xi.zone.QUICKSAND_CAVES]
 -----------------------------------
 local entity = {}
 

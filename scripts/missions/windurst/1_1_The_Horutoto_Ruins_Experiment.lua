@@ -16,12 +16,9 @@
 -- _5cs (Gizmo #4)  : !pos 295 -3 19 192
 -- _5ct (Gizmo #5)  : !pos 353 -3 60 192
 -- _5cu (Gizmo #6)  : !pos 295 -3 100 192
-require('scripts/globals/missions')
-require('scripts/globals/npc_util')
-require('scripts/globals/interaction/mission')
 -----------------------------------
-local innerHorutotoRuinsID = require('scripts/zones/Inner_Horutoto_Ruins/IDs')
-local eastSarutabarutaID   = require('scripts/zones/East_Sarutabaruta/IDs')
+local innerHorutotoRuinsID = zones[xi.zone.INNER_HORUTOTO_RUINS]
+local eastSarutabarutaID   = zones[xi.zone.EAST_SARUTABARUTA]
 -----------------------------------
 
 local mission = Mission:new(xi.mission.log_id.WINDURST, xi.mission.id.windurst.THE_HORUTOTO_RUINS_EXPERIMENT)

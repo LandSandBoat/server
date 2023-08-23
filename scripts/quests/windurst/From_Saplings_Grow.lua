@@ -3,13 +3,8 @@
 -- Perih Vashai !pos 117 -3 92 241
 -- qm1 !pos -157 -8 198.2 113
 -----------------------------------
-require('scripts/globals/interaction/quest')
-require('scripts/globals/weaponskillids')
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
------------------------------------
-local windurstWoodsID = require('scripts/zones/Windurst_Woods/IDs')
-local capeTerigganID = require('scripts/zones/Cape_Teriggan/IDs')
+local windurstWoodsID = zones[xi.zone.WINDURST_WOODS]
+local capeTerigganID  = zones[xi.zone.CAPE_TERIGGAN]
 -----------------------------------
 
 local quest = Quest:new(xi.quest.log_id.WINDURST, xi.quest.id.windurst.FROM_SAPLINGS_GROW)
@@ -26,7 +21,7 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == QUEST_AVAILABLE and
-                player:canEquipItem(xi.items.BOW_OF_TRIALS, true) and
+                player:canEquipItem(xi.item.BOW_OF_TRIALS, true) and
                 player:getCharSkillLevel(xi.skill.ARCHERY) / 10 >= 250 and
                 not player:hasKeyItem(xi.keyItem.WEAPON_TRAINING_GUIDE)
         end,
@@ -44,8 +39,8 @@ quest.sections =
             {
                 [661] = function(player, csid, option, npc)
                     if
-                        player:hasItem(xi.items.BOW_OF_TRIALS) or
-                        npcUtil.giveItem(player, xi.items.BOW_OF_TRIALS)
+                        player:hasItem(xi.item.BOW_OF_TRIALS) or
+                        npcUtil.giveItem(player, xi.item.BOW_OF_TRIALS)
                     then
                         npcUtil.giveKeyItem(player, xi.keyItem.WEAPON_TRAINING_GUIDE)
                         quest:begin(player)
@@ -71,12 +66,12 @@ quest.sections =
                     elseif player:hasKeyItem(xi.ki.MAP_TO_THE_ANNALS_OF_TRUTH) then
                         return quest:event(665) -- cont 2
                     else
-                        return quest:event(662, 0, xi.items.BOW_OF_TRIALS, 0, 0, player:hasItem(xi.items.BOW_OF_TRIALS) and 2 or 0) -- cont 1
+                        return quest:event(662, 0, xi.item.BOW_OF_TRIALS, 0, 0, player:hasItem(xi.item.BOW_OF_TRIALS) and 2 or 0) -- cont 1
                     end
                 end,
 
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, xi.items.BOW_OF_TRIALS) then
+                    if npcUtil.tradeHasExactly(trade, xi.item.BOW_OF_TRIALS) then
                         local wsPoints = trade:getItem(0):getWeaponskillPoints()
 
                         if wsPoints < 300 then
@@ -91,8 +86,8 @@ quest.sections =
             onEventFinish =
             {
                 [662] = function(player, csid, option, npc)
-                    if option == 1 and not player:hasItem(xi.items.BOW_OF_TRIALS) then
-                        npcUtil.giveItem(player, xi.items.BOW_OF_TRIALS)
+                    if option == 1 and not player:hasItem(xi.item.BOW_OF_TRIALS) then
+                        npcUtil.giveItem(player, xi.item.BOW_OF_TRIALS)
                     elseif option == 3 then
                         player:delQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.FROM_SAPLINGS_GROW)
                         player:delKeyItem(xi.ki.WEAPON_TRAINING_GUIDE)

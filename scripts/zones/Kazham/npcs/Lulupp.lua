@@ -1,10 +1,7 @@
 -----------------------------------
 -- Area: Kazham
 --  NPC: Lulupp
--- Type: Standard NPC
 -- !pos -26.567 -3.5 -3.544 250
------------------------------------
-require("scripts/globals/pathfind")
 -----------------------------------
 local entity = {}
 
@@ -54,18 +51,18 @@ entity.onTrade = function(player, npc, trade)
 
     if opoOpoAndIStatus == QUEST_ACCEPTED then
         if progress == 0 or failed == 1 then
-            if trade:hasItemQty(xi.items.BROKEN_MITHRAN_FISHING_ROD, 1) then -- first or second time trading correctly
+            if trade:hasItemQty(xi.item.BROKEN_MITHRAN_FISHING_ROD, 1) then -- first or second time trading correctly
                 player:startEvent(219)
             elseif
-                trade:hasItemQty(xi.items.WORKBENCH, 1) or
-                trade:hasItemQty(xi.items.TEN_OF_COINS_CARD, 1) or
-                trade:hasItemQty(xi.items.HANDFUL_OF_THE_SANDS_OF_SILENCE, 1) or
-                trade:hasItemQty(xi.items.WANDERING_BULB, 1) or
-                trade:hasItemQty(xi.items.SET_OF_GIANT_FISH_BONES, 1) or
-                trade:hasItemQty(xi.items.BLACKENED_TOAD, 1) or
-                trade:hasItemQty(xi.items.WYVERN_SKULL, 1) or
-                trade:hasItemQty(xi.items.ROCK_OF_ANCIENT_SALT, 1) or
-                trade:hasItemQty(xi.items.LUCKY_EGG, 1)
+                trade:hasItemQty(xi.item.WORKBENCH, 1) or
+                trade:hasItemQty(xi.item.TEN_OF_COINS_CARD, 1) or
+                trade:hasItemQty(xi.item.HANDFUL_OF_THE_SANDS_OF_SILENCE, 1) or
+                trade:hasItemQty(xi.item.WANDERING_BULB, 1) or
+                trade:hasItemQty(xi.item.SET_OF_GIANT_FISH_BONES, 1) or
+                trade:hasItemQty(xi.item.BLACKENED_TOAD, 1) or
+                trade:hasItemQty(xi.item.WYVERN_SKULL, 1) or
+                trade:hasItemQty(xi.item.ROCK_OF_ANCIENT_SALT, 1) or
+                trade:hasItemQty(xi.item.LUCKY_EGG, 1)
             then
                 player:startEvent(229)
             end

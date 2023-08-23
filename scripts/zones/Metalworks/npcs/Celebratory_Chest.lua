@@ -4,8 +4,7 @@
 -- Type: Merchant NPC
 -- !pos 88.029 -20.170 -11.086 237
 -----------------------------------
-local ID = require("scripts/zones/Metalworks/IDs")
-require("scripts/globals/shop")
+local ID = zones[xi.zone.METALWORKS]
 -----------------------------------
 local entity = {}
 

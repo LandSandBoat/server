@@ -1484,14 +1484,14 @@ local helmInfo =
 
 local rocks =
 {
-    [xi.magic.element.FIRE   ] = xi.items.RED_ROCK,
-    [xi.magic.element.ICE    ] = xi.items.TRANSLUCENT_ROCK,
-    [xi.magic.element.WIND   ] = xi.items.GREEN_ROCK,
-    [xi.magic.element.EARTH  ] = xi.items.YELLOW_ROCK,
-    [xi.magic.element.THUNDER] = xi.items.PURPLE_ROCK,
-    [xi.magic.element.WATER  ] = xi.items.BLUE_ROCK,
-    [xi.magic.element.LIGHT  ] = xi.items.WHITE_ROCK,
-    [xi.magic.element.DARK   ] = xi.items.BLACK_ROCK,
+    [xi.magic.element.FIRE   ] = xi.item.RED_ROCK,
+    [xi.magic.element.ICE    ] = xi.item.TRANSLUCENT_ROCK,
+    [xi.magic.element.WIND   ] = xi.item.GREEN_ROCK,
+    [xi.magic.element.EARTH  ] = xi.item.YELLOW_ROCK,
+    [xi.magic.element.THUNDER] = xi.item.PURPLE_ROCK,
+    [xi.magic.element.WATER  ] = xi.item.BLUE_ROCK,
+    [xi.magic.element.LIGHT  ] = xi.item.WHITE_ROCK,
+    [xi.magic.element.DARK   ] = xi.item.BLACK_ROCK,
 }
 
 -----------------------------------
@@ -1627,7 +1627,7 @@ xi.helm.onTrade = function(player, npc, trade, helmType, csid, func)
                 player:getCharVar("[EGG_HUNT]DAILY_HELM") < VanadielUniqueDay()
             then
                 player:timer(3000, function(playerArg)
-                    if npcUtil.giveItem(playerArg, math.random(xi.items.A_EGG, xi.items.Z_EGG)) then
+                    if npcUtil.giveItem(playerArg, math.random(xi.item.A_EGG, xi.item.Z_EGG)) then
                         playerArg:setCharVar("[EGG_HUNT]DAILY_HELM", VanadielUniqueDay())
                         return
                     end

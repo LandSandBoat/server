@@ -4,25 +4,24 @@
 -- Standard Merchant NPC
 -- !pos -318.902 -10.319 -178.087 235
 -----------------------------------
-local ID = require("scripts/zones/Bastok_Markets/IDs")
-require("scripts/globals/shop")
+local ID = zones[xi.zone.BASTOK_MARKETS]
 -----------------------------------
 local entity = {}
 
 entity.onTrigger = function(player, npc)
     local stock =
     {
-        17321,    16, 1, -- Silver Arrow
-        17218, 14158, 1, -- Zamburak
-        17298,   294, 1, -- Tathlum
-        17318,     3, 2, -- Wooden Arrow
-        17337,    22, 2, -- Mythril Bolt
-        17320,     7, 3, -- Iron Arrow
-        5069,    199, 3, -- Scroll of Dark Threnody
-        5063,   1000, 3, -- Scroll of Ice Threnody
-        17216,   165, 3, -- Light Crossbow
-        17217,  2166, 3, -- Crossbow
-        17336,     5, 3, -- Crossbow Bolt
+        xi.item.WOODEN_ARROW,                4, 2,
+        xi.item.IRON_ARROW,                  8, 3,
+        xi.item.SILVER_ARROW,               18, 1,
+        xi.item.SCROLL_OF_DARK_THRENODY,   225, 3,
+        xi.item.SCROLL_OF_ICE_THRENODY,   1131, 3,
+        xi.item.LIGHT_CROSSBOW,            187, 3,
+        xi.item.CROSSBOW,                 2449, 3,
+        xi.item.ZAMBURAK,                16005, 1,
+        xi.item.CROSSBOW_BOLT,               6, 3,
+        xi.item.MYTHRIL_BOLT,               24, 2,
+        xi.item.TATHLUM,                   334, 1,
     }
 
     player:showText(npc, ID.text.MJOLL_SHOP_DIALOG)

@@ -1,11 +1,8 @@
 -----------------------------------
 -- Zone: Eastern_Altepa_Desert (114)
 -----------------------------------
-local ID = require('scripts/zones/Eastern_Altepa_Desert/IDs')
+local ID = zones[xi.zone.EASTERN_ALTEPA_DESERT]
 require('scripts/quests/i_can_hear_a_rainbow')
-require('scripts/globals/chocobo_digging')
-require('scripts/globals/conquest')
-require('scripts/globals/chocobo')
 require('scripts/missions/amk/helpers')
 -----------------------------------
 local zoneObject = {}

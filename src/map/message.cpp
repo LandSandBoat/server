@@ -140,26 +140,45 @@ namespace message
             }
             case MSG_CHAT_PARTY:
             {
-                CCharEntity* PChar = zoneutils::GetChar(ref<uint32>((uint8*)extra.data(), 0));
-                if (PChar)
+                uint32  partyid = ref<uint32>((uint8*)extra.data(), 0);
+                CParty* PParty  = nullptr;
+
+                // TODO: when Party/Alliance gets a rewrite, make a zoneutils::ForEachParty or some other accessor to reduce the amount of iterations significantly.
+                // clang-format off
+                zoneutils::ForEachZone([partyid, &PParty](CZone* PZone)
                 {
-                    if (PChar->PParty)
+                    PZone->ForEachChar([partyid, &PParty](CCharEntity* PChar)
                     {
-                        if (PChar->PParty->m_PAlliance != nullptr)
+                        if (PChar->PParty && PChar->PParty->GetPartyID() == partyid)
                         {
-                            for (auto& i : PChar->PParty->m_PAlliance->partyList)
-                            {
-                                CBasicPacket* newPacket = new CBasicPacket();
-                                memcpy(*newPacket, packet.data(), std::min<size_t>(packet.size(), PACKET_SIZE));
-                                i->PushPacket(ref<uint32>((uint8*)extra.data(), 4), 0, newPacket);
-                            }
+                            PParty = PChar->PParty;
+                            return;
                         }
-                        else
+                    });
+
+                    if (PParty)
+                    {
+                        return;
+                    }
+                });
+                // clang-format on
+
+                if (PParty)
+                {
+                    if (PParty->m_PAlliance != nullptr)
+                    {
+                        for (auto& currentParty : PParty->m_PAlliance->partyList)
                         {
                             CBasicPacket* newPacket = new CBasicPacket();
                             memcpy(*newPacket, packet.data(), std::min<size_t>(packet.size(), PACKET_SIZE));
-                            PChar->PParty->PushPacket(ref<uint32>((uint8*)extra.data(), 4), 0, newPacket);
+                            currentParty->PushPacket(ref<uint32>((uint8*)extra.data(), 4), 0, newPacket);
                         }
+                    }
+                    else
+                    {
+                        CBasicPacket* newPacket = new CBasicPacket();
+                        memcpy(*newPacket, packet.data(), std::min<size_t>(packet.size(), PACKET_SIZE));
+                        PParty->PushPacket(ref<uint32>((uint8*)extra.data(), 4), 0, newPacket);
                     }
                 }
                 break;

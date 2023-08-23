@@ -4,8 +4,6 @@
 -- Starts, Involved With, and Finishes Quest: 'A Certain Substitute Patrolman'
 -- !pos -154 4 -29 256
 -----------------------------------
-require("scripts/globals/missions")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

@@ -3,14 +3,13 @@
 --  NPC: ??? (Spawn Mahjlaef the Paintorn(ZNM T3))
 -- !pos 695 -7 527 79
 -----------------------------------
-local ID = require("scripts/zones/Caedarva_Mire/IDs")
-require("scripts/globals/npc_util")
+local ID = zones[xi.zone.CAEDARVA_MIRE]
 -----------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     if
-        npcUtil.tradeHas(trade, xi.items.BOUND_EXORCISM_TREATISE) and
+        npcUtil.tradeHas(trade, xi.item.BOUND_EXORCISM_TREATISE) and
         npcUtil.popFromQM(player, npc, ID.mob.MAHJLAEF_THE_PAINTORN)
     then
         player:confirmTrade()

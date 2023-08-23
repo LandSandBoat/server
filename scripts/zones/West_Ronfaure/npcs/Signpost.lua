@@ -3,7 +3,7 @@
 --  NPC: Signpost
 -- !zone 100
 -----------------------------------
-local ID = require("scripts/zones/West_Ronfaure/IDs")
+local ID = zones[xi.zone.WEST_RONFAURE]
 -----------------------------------
 local entity = {}
 

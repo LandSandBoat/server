@@ -2,9 +2,6 @@
 -- Area: Attohwa Chasm
 --  Mob: Xolotl
 -----------------------------------
-require("scripts/globals/titles")
-mixins = { require("scripts/mixins/claim_shield") }
------------------------------------
 local entity = {}
 
 entity.onMobSpawn = function(mob)

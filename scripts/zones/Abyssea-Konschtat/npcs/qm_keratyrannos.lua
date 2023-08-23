@@ -4,17 +4,16 @@
 -- Spawns Keratyrannos
 -- !pos -134.000 47.371 416.000 15
 -----------------------------------
-local ID = require('scripts/zones/Abyssea-Konschtat/IDs')
-require('scripts/globals/abyssea')
+local ID = zones[xi.zone.ABYSSEA_KONSCHTAT]
 -----------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    xi.abyssea.qmOnTrade(player, npc, trade, ID.mob.KERATYRANNOS, { xi.items.ARMORED_DRAGONHORN })
+    xi.abyssea.qmOnTrade(player, npc, trade, ID.mob.KERATYRANNOS, { xi.item.ARMORED_DRAGONHORN })
 end
 
 entity.onTrigger = function(player, npc)
-    xi.abyssea.qmOnTrigger(player, npc, 0, 0, { xi.items.ARMORED_DRAGONHORN })
+    xi.abyssea.qmOnTrigger(player, npc, 0, 0, { xi.item.ARMORED_DRAGONHORN })
 end
 
 entity.onEventUpdate = function(player, csid, option, npc)

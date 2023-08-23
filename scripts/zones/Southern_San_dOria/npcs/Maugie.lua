@@ -1,11 +1,8 @@
 -----------------------------------
 -- Area: Southern San d'Oria
 --  NPC: Maugie
--- Type: General Info NPC
 -----------------------------------
-local ID = require("scripts/zones/Southern_San_dOria/IDs")
 require("scripts/quests/flyers_for_regine")
-require("scripts/globals/quests")
 -----------------------------------
 local entity = {}
 

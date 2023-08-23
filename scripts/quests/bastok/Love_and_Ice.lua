@@ -5,11 +5,6 @@
 -- Carmelo           : !pos -146.476 -7.48 -10.889 236
 -- Mirror Pond (J-8) : !pos -96.165 1.518 -392.700 111
 -----------------------------------
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
-require('scripts/globals/titles')
-require('scripts/globals/interaction/quest')
------------------------------------
 
 local quest = Quest:new(xi.quest.log_id.BASTOK, xi.quest.id.bastok.LOVE_AND_ICE)
 
@@ -17,7 +12,7 @@ quest.reward =
 {
     fame     = 120,
     fameArea = xi.quest.fame_area.BASTOK,
-    item     = xi.items.LAMIA_HARP,
+    item     = xi.item.LAMIA_HARP,
     title    = xi.title.SORROW_DROWNER,
 }
 

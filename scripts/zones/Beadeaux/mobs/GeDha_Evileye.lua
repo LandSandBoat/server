@@ -4,7 +4,6 @@
 -- !pos -238 1 -202 254
 -----------------------------------
 mixins = { require("scripts/mixins/job_special") }
-require("scripts/globals/hunts")
 -----------------------------------
 local entity = {}
 

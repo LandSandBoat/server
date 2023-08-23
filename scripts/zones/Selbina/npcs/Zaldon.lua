@@ -5,11 +5,6 @@
 -- Starts and Finishes: Inside the Belly
 -- !pos -13 -7 -5 248
 -----------------------------------
-local ID = require("scripts/zones/Selbina/IDs")
-require("scripts/globals/npc_util")
-require("scripts/globals/quests")
-require("scripts/globals/titles")
------------------------------------
 local entity = {}
 
 -- data from http://wiki.ffxiclopedia.org/wiki/Inside_the_Belly
@@ -520,7 +515,6 @@ local function tradeFish(player, fishId)
             --     : because the cutscene gives away whether or not the trade was successful
             --     : or not, and it's possible for players to cheese this trade by force-dc-ing.
             player:confirmTrade()
-
             player:startEvent(166, 0, rewards[i].itemId)
             break
         end
@@ -575,7 +569,7 @@ entity.onTrade = function(player, npc, trade)
     if
         underTheSea == QUEST_ACCEPTED and
         not player:hasKeyItem(xi.ki.ETCHED_RING) and
-        npcUtil.tradeHas(trade, xi.items.FAT_GREEDIE)
+        npcUtil.tradeHas(trade, xi.item.FAT_GREEDIE)
     then
         if math.random(1, 100) <= 20 then
             player:startEvent(35) -- Ring found !
@@ -586,7 +580,7 @@ entity.onTrade = function(player, npc, trade)
     -- A BOY'S DREAM
     elseif
         player:getCharVar("aBoysDreamCS") == 5 and
-        npcUtil.tradeHasExactly(trade, xi.items.ODONTOTYRANNUS)
+        npcUtil.tradeHasExactly(trade, xi.item.ODONTOTYRANNUS)
     then
         player:startEvent(85)
 

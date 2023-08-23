@@ -3,9 +3,7 @@
 --  Mob: Stag Beetle
 -- Note: PH for Panzer Percival
 -----------------------------------
-local ID = require("scripts/zones/Jugner_Forest/IDs")
-require("scripts/globals/regimes")
-require("scripts/globals/mobs")
+local ID = zones[xi.zone.JUGNER_FOREST]
 -----------------------------------
 local entity = {}
 

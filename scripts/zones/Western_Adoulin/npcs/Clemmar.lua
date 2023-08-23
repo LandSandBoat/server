@@ -3,8 +3,6 @@
 --  NPC: Clemmar
 -- !pos -12 0 12 256
 -----------------------------------
-require("scripts/globals/missions")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

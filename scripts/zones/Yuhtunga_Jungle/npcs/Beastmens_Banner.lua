@@ -3,7 +3,7 @@
 --  NPC: Beastmen_s_Banner
 -- !pos -305.061 16.172 -438.904 123
 -----------------------------------
-local ID = require("scripts/zones/Yuhtunga_Jungle/IDs")
+local ID = zones[xi.zone.YUHTUNGA_JUNGLE]
 -----------------------------------
 local entity = {}
 

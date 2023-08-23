@@ -4,7 +4,7 @@
 -- Involved In Windurst Mission 7-1
 -- !zone 169
 -----------------------------------
-local ID = require("scripts/zones/Toraimarai_Canal/IDs")
+local ID = zones[xi.zone.TORAIMARAI_CANAL]
 -----------------------------------
 local entity = {}
 

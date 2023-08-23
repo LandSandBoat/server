@@ -3,13 +3,8 @@
 -- Jakoh_Wahcondalo !pos 101 -16 -115 250
 -- qm1 !pos 52.8 -1 19.9 212
 -----------------------------------
-require('scripts/globals/interaction/quest')
-require('scripts/globals/weaponskillids')
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
------------------------------------
-local kazhamID = require('scripts/zones/Kazham/IDs')
-local gustavTunnelID = require('scripts/zones/Gustav_Tunnel/IDs')
+local kazhamID       = zones[xi.zone.KAZHAM]
+local gustavTunnelID = zones[xi.zone.GUSTAV_TUNNEL]
 -----------------------------------
 
 local quest = Quest:new(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.CLOAK_AND_DAGGER)
@@ -25,7 +20,7 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == QUEST_AVAILABLE and
-                player:canEquipItem(xi.items.DAGGER_OF_TRIALS, true) and
+                player:canEquipItem(xi.item.DAGGER_OF_TRIALS, true) and
                 player:getCharSkillLevel(xi.skill.DAGGER) / 10 >= 230 and
                 not player:hasKeyItem(xi.keyItem.WEAPON_TRAINING_GUIDE)
         end,
@@ -43,8 +38,8 @@ quest.sections =
             {
                 [279] = function(player, csid, option, npc)
                     if
-                        player:hasItem(xi.items.DAGGER_OF_TRIALS) or
-                        npcUtil.giveItem(player, xi.items.DAGGER_OF_TRIALS)
+                        player:hasItem(xi.item.DAGGER_OF_TRIALS) or
+                        npcUtil.giveItem(player, xi.item.DAGGER_OF_TRIALS)
                     then
                         npcUtil.giveKeyItem(player, xi.keyItem.WEAPON_TRAINING_GUIDE)
                         quest:begin(player)
@@ -69,12 +64,12 @@ quest.sections =
                     elseif player:hasKeyItem(xi.ki.MAP_TO_THE_ANNALS_OF_TRUTH) then
                         return quest:event(283) -- cont 2
                     else
-                        return quest:event(280, 0, xi.items.DAGGER_OF_TRIALS, 0, 0, player:hasItem(xi.items.DAGGER_OF_TRIALS) and 2 or 0) -- cont 1
+                        return quest:event(280, 0, xi.item.DAGGER_OF_TRIALS, 0, 0, player:hasItem(xi.item.DAGGER_OF_TRIALS) and 2 or 0) -- cont 1
                     end
                 end,
 
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, xi.items.DAGGER_OF_TRIALS) then
+                    if npcUtil.tradeHasExactly(trade, xi.item.DAGGER_OF_TRIALS) then
                         local wsPoints = trade:getItem(0):getWeaponskillPoints()
 
                         if wsPoints < 300 then
@@ -91,9 +86,9 @@ quest.sections =
                 [280] = function(player, csid, option, npc)
                     if
                         option == 1 and
-                        not player:hasItem(xi.items.DAGGER_OF_TRIALS)
+                        not player:hasItem(xi.item.DAGGER_OF_TRIALS)
                     then
-                        npcUtil.giveItem(player, xi.items.DAGGER_OF_TRIALS)
+                        npcUtil.giveItem(player, xi.item.DAGGER_OF_TRIALS)
                     elseif option == 3 then
                         player:delQuest(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.CLOAK_AND_DAGGER)
                         player:delKeyItem(xi.ki.WEAPON_TRAINING_GUIDE)

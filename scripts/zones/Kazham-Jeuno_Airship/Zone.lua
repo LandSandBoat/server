@@ -1,8 +1,6 @@
 -----------------------------------
 -- Zone: Kazham-Jeuno_Airship
 -----------------------------------
-local ID = require('scripts/zones/Kazham-Jeuno_Airship/IDs')
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

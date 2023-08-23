@@ -5,9 +5,6 @@
 -- !addmission 12 20
 -- Levil : !pos -87.204 3.350 12.655 256
 -----------------------------------
-require('scripts/globals/missions')
-require('scripts/globals/interaction/mission')
------------------------------------
 
 local mission = Mission:new(xi.mission.log_id.SOA, xi.mission.id.soa.FRICTION_AND_FISSURES)
 

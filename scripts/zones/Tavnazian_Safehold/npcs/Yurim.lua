@@ -3,10 +3,6 @@
 --  NPC: Yurim
 -- !pos 83.697 -25.000 3.250 26
 -----------------------------------
-require("scripts/globals/missions")
-require("scripts/globals/npc_util")
-require("scripts/globals/quests")
------------------------------------
 local entity = {}
 
 -- base items
@@ -68,7 +64,7 @@ entity.onTrade = function(player, npc, trade)
         player:startEvent(529, gorget, earring, obi)
     elseif
         (nameOfScience == QUEST_ACCEPTED or nameOfScience == QUEST_COMPLETED) and
-        npcUtil.tradeHas(trade, xi.items.APPLE_PIE) and
+        npcUtil.tradeHas(trade, xi.item.APPLE_PIE) and
         itemInProgress > 0
     then
         -- apple pie hint

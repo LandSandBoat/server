@@ -3,8 +3,7 @@
 --  NPC: Warmachine
 -- !pos -345.236 -3.188 -976.563 4
 -----------------------------------
-local ID = require("scripts/zones/Bibiki_Bay/IDs")
-require("scripts/globals/missions")
+local ID = zones[xi.zone.BIBIKI_BAY]
 -----------------------------------
 local entity = {}
 

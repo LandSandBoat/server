@@ -1,8 +1,6 @@
 -----------------------------------
 -- Zone: Windurst-Jeuno_Airship
 -----------------------------------
-local ID = require('scripts/zones/Windurst-Jeuno_Airship/IDs')
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

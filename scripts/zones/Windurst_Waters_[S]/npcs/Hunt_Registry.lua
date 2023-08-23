@@ -2,8 +2,6 @@
 -- Area: Windurst Waters [S]
 --  NPC: Hunt Registry
 -----------------------------------
-require("scripts/globals/hunts")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

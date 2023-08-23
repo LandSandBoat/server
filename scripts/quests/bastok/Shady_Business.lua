@@ -4,9 +4,6 @@
 -- Log ID: 1, Quest ID: 8
 -- Talib : !pos -101.133 4.649 28.803 236
 -----------------------------------
-require('scripts/globals/quests')
-require('scripts/globals/interaction/quest')
------------------------------------
 
 local quest = Quest:new(xi.quest.log_id.BASTOK, xi.quest.id.bastok.SHADY_BUSINESS)
 
@@ -34,7 +31,7 @@ quest.sections =
                 end,
 
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, { { xi.items.CHUNK_OF_ZINC_ORE, 4 } }) then
+                    if npcUtil.tradeHasExactly(trade, { { xi.item.CHUNK_OF_ZINC_ORE, 4 } }) then
                         return quest:progressEvent(91)
                     end
                 end,

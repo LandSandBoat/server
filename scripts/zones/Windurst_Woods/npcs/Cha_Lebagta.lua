@@ -1,11 +1,8 @@
 -----------------------------------
 -- Area: Windurst Woods
 --  NPC: Cha Lebagta
--- Type: Standard NPC
 -- !pos 58.385 -6.249 216.670 241
 -- Involved in Quests: As Thick as Thieves, Mihgo's Amigo
------------------------------------
-require("scripts/globals/quests")
 -----------------------------------
 local entity = {}
 

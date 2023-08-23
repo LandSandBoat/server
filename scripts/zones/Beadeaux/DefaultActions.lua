@@ -1,4 +1,4 @@
-local ID = require("scripts/zones/Beadeaux/IDs")
+local ID = zones[xi.zone.BEADEAUX]
 
 return {
     ['_43b'] = { messageSpecial = ID.text.NOTHING_OUT_OF_ORDINARY },

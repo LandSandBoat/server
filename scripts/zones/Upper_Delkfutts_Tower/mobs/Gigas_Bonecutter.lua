@@ -3,9 +3,7 @@
 --  Mob: Gigas Bonecutter
 -- Note: PH for Enkelados
 -----------------------------------
-local ID = require("scripts/zones/Upper_Delkfutts_Tower/IDs")
-require("scripts/globals/regimes")
-require("scripts/globals/mobs")
+local ID = zones[xi.zone.UPPER_DELKFUTTS_TOWER]
 -----------------------------------
 local entity = {}
 

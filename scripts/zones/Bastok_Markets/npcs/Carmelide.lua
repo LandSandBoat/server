@@ -4,23 +4,22 @@
 -- Standard Merchant NPC
 -- !pos -151.693 -4.819 -69.635 235
 -----------------------------------
-local ID = require("scripts/zones/Bastok_Markets/IDs")
-require("scripts/globals/shop")
+local ID = zones[xi.zone.BASTOK_MARKETS]
 -----------------------------------
 local entity = {}
 
 entity.onTrigger = function(player, npc)
     local stock =
     {
-        806, 1713, 2,    -- Tourmaline
-        807, 1713, 2,    -- Sardonyx
-        800, 1713, 2,    -- Amethyst
-        814, 1713, 2,    -- Amber
-        795, 1713, 2,    -- Lapis Lazuli
-        809, 1713, 2,    -- Clear Topaz
-        799, 1713, 2,    -- Onyx
-        796, 1713, 2,    -- Light Opal
-        13454, 69, 3,    -- Copper Ring
+        xi.item.TOURMALINE,   1937, 2,
+        xi.item.SARDONYX,     1937, 2,
+        xi.item.AMETHYST,     1937, 2,
+        xi.item.AMBER,        1937, 2,
+        xi.item.LAPIS_LAZULI, 1937, 2,
+        xi.item.CLEAR_TOPAZ,  1937, 2,
+        xi.item.ONYX,         1937, 2,
+        xi.item.LIGHT_OPAL,   1937, 2,
+        xi.item.COPPER_RING,    79, 3,
     }
 
     player:showText(npc, ID.text.CARMELIDE_SHOP_DIALOG)

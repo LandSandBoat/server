@@ -6,11 +6,6 @@
 -- Mirror Pond !pos 251 1 219 111
 -- Fellow Emotes do not currently work
 -----------------------------------
--- require("scripts/globals/pets/fellow")
-require('scripts/globals/quests')
-require('scripts/globals/interaction/quest')
-require('scripts/globals/npc_util')
------------------------------------
 
 local quest = Quest:new(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.BLESSED_RADIANCE)
 
@@ -104,7 +99,7 @@ quest.sections = {
         [xi.zone.GIDDEUS] = {
             ['Harvesting_Point'] = {
                 onTrade = function(player, npc, trade)
-                    if quest:getVar(player, "Prog") == 1 and not player:hasKeyItem(xi.keyItem.MISTROOT) and npcUtil.tradeHasExactly(trade, xi.items.SICKLE) then
+                    if quest:getVar(player, "Prog") == 1 and not player:hasKeyItem(xi.keyItem.MISTROOT) and npcUtil.tradeHasExactly(trade, xi.item.SICKLE) then
                         if player:isFellowSpawned() then
 --                           player:getFellow():sendEntityEmote(player:getFellow(), xi.emote.HARVESTING, xi.emoteMode.MOTION)
                             player:setLocalVar("questHelm", xi.keyItem.MISTROOT)
@@ -134,7 +129,7 @@ quest.sections = {
         [xi.zone.JUGNER_FOREST] = {
             ['Logging_Point'] = {
                 onTrade = function(player, npc, trade)
-                    if quest:getVar(player, "Prog") == 1 and not player:hasKeyItem(xi.keyItem.LUNASCENT_LOG) and npcUtil.tradeHasExactly(trade, xi.items.HATCHET) then
+                    if quest:getVar(player, "Prog") == 1 and not player:hasKeyItem(xi.keyItem.LUNASCENT_LOG) and npcUtil.tradeHasExactly(trade, xi.item.HATCHET) then
                         if player:isFellowSpawned() then
 --                            player:getFellow():sendEntityEmote(player:getFellow(), xi.emote.LOGGING, xi.emoteMode.MOTION)
                             player:setLocalVar("questHelm", xi.keyItem.LUNASCENT_LOG)
@@ -164,7 +159,7 @@ quest.sections = {
         [xi.zone.MAZE_OF_SHAKHRAMI] = {
             ['Excavation_Point'] = {
                 onTrade = function(player, npc, trade)
-                    if quest:getVar(player, "Prog") == 1 and not player:hasKeyItem(xi.keyItem.GLIMMERING_MICA) and npcUtil.tradeHasExactly(trade, xi.items.PICKAXE) then
+                    if quest:getVar(player, "Prog") == 1 and not player:hasKeyItem(xi.keyItem.GLIMMERING_MICA) and npcUtil.tradeHasExactly(trade, xi.item.PICKAXE) then
                         if player:isFellowSpawned() then
 --                            player:getFellow():sendEntityEmote(player:getFellow(), xi.emote.EXCAVATION, xi.emoteMode.MOTION)
                             player:setLocalVar("questHelm", xi.keyItem.GLIMMERING_MICA)

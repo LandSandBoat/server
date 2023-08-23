@@ -4,39 +4,36 @@
 -- Orb Seller (BCNM)
 -- !pos -53.9 0 10.8 246
 -----------------------------------
-local ID = require("scripts/zones/Port_Jeuno/IDs")
-require("scripts/globals/npc_util")
------------------------------------
 local entity = {}
 
 local shamiSealItems =
 {
 --  Trade Item                     Seal ID, Retrieve Option,
-    [xi.items.BEASTMENS_SEAL       ] = { 0, 2 },
-    [xi.items.KINDREDS_SEAL        ] = { 1, 1 },
-    [xi.items.KINDREDS_CREST       ] = { 2, 3 },
-    [xi.items.HIGH_KINDREDS_CREST  ] = { 3, 4 },
-    [xi.items.SACRED_KINDREDS_CREST] = { 4, 5 },
+    [xi.item.BEASTMENS_SEAL       ] = { 0, 2 },
+    [xi.item.KINDREDS_SEAL        ] = { 1, 1 },
+    [xi.item.KINDREDS_CREST       ] = { 2, 3 },
+    [xi.item.HIGH_KINDREDS_CREST  ] = { 3, 4 },
+    [xi.item.SACRED_KINDREDS_CREST] = { 4, 5 },
 }
 
 local shamiOrbItems =
 {
 --  Item ID                        CS, PO, SealID, Cost,
-    [xi.items.CLOUDY_ORB     ] = {  5,  1,      0,   20, },
-    [xi.items.SKY_ORB        ] = {  9,  2,      0,   30, },
-    [xi.items.STAR_ORB       ] = {  9,  3,      0,   40, },
-    [xi.items.COMET_ORB      ] = {  9,  4,      0,   50, },
-    [xi.items.MOON_ORB       ] = {  9,  5,      0,   60, },
-    [xi.items.CLOTHO_ORB     ] = {  9,  6,      1,   30, },
-    [xi.items.LACHESIS_ORB   ] = {  9,  7,      1,   30, },
-    [xi.items.ATROPOS_ORB    ] = {  9,  8,      1,   30, },
-    [xi.items.THEMIS_ORB     ] = { 11,  9,      1,   99, },
-    [xi.items.PHOBOS_ORB     ] = { 11, 10,      2,   30, },
-    [xi.items.DEIMOS_ORB     ] = { 11, 11,      2,   50, },
-    [xi.items.ZELOS_ORB      ] = { 11, 12,      3,   30, },
-    [xi.items.BIA_ORB        ] = { 11, 13,      3,   50, },
-    [xi.items.MICROCOSMIC_ORB] = { 11, 14,      4,   10, },
-    [xi.items.MACROCOSMIC_ORB] = { 11, 15,      4,   20, },
+    [xi.item.CLOUDY_ORB     ] = {  5,  1,      0,   20, },
+    [xi.item.SKY_ORB        ] = {  9,  2,      0,   30, },
+    [xi.item.STAR_ORB       ] = {  9,  3,      0,   40, },
+    [xi.item.COMET_ORB      ] = {  9,  4,      0,   50, },
+    [xi.item.MOON_ORB       ] = {  9,  5,      0,   60, },
+    [xi.item.CLOTHO_ORB     ] = {  9,  6,      1,   30, },
+    [xi.item.LACHESIS_ORB   ] = {  9,  7,      1,   30, },
+    [xi.item.ATROPOS_ORB    ] = {  9,  8,      1,   30, },
+    [xi.item.THEMIS_ORB     ] = { 11,  9,      1,   99, },
+    [xi.item.PHOBOS_ORB     ] = { 11, 10,      2,   30, },
+    [xi.item.DEIMOS_ORB     ] = { 11, 11,      2,   50, },
+    [xi.item.ZELOS_ORB      ] = { 11, 12,      3,   30, },
+    [xi.item.BIA_ORB        ] = { 11, 13,      3,   50, },
+    [xi.item.MICROCOSMIC_ORB] = { 11, 14,      4,   10, },
+    [xi.item.MACROCOSMIC_ORB] = { 11, 15,      4,   20, },
 }
 
 local function getSealTradeOption(trade)

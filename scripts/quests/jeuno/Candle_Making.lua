@@ -4,11 +4,6 @@
 -- !addquest 3 22
 -- Rouliette : !pos -24 -2 11 244
 -----------------------------------
-require('scripts/globals/interaction/quest')
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
-require('scripts/globals/titles')
------------------------------------
 
 local quest = Quest:new(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.CANDLE_MAKING)
 
@@ -51,7 +46,7 @@ quest.sections =
             ['Rouliette'] =
             {
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, xi.items.LANOLIN_CUBE) then
+                    if npcUtil.tradeHasExactly(trade, xi.item.LANOLIN_CUBE) then
                         return quest:progressEvent(37)
                     end
                 end,

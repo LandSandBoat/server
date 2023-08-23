@@ -1,9 +1,7 @@
 -----------------------------------
 -- Zone: Mhaura (249)
 -----------------------------------
-local ID = require('scripts/zones/Mhaura/IDs')
-require('scripts/globals/conquest')
-require('scripts/globals/missions')
+local ID = zones[xi.zone.MHAURA]
 -----------------------------------
 local zoneObject = {}
 

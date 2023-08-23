@@ -1,13 +1,7 @@
 -----------------------------------
 -- Area: Port Windurst
 --  NPC: Kunchichi
--- Type: Standard NPC
 -- !pos -115.933 -4.25 109.533 240
------------------------------------
-require("scripts/globals/npc_util")
-require("scripts/globals/quests")
-require("scripts/globals/magic")
-require("scripts/globals/utils")
 -----------------------------------
 local entity = {}
 

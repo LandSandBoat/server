@@ -4,10 +4,7 @@
 -- Type: Map Vendor
 -- !pos -103.834 -0.65 -50.226 257
 -----------------------------------
-require('scripts/globals/npc_util')
-require('scripts/globals/utils')
------------------------------------
-local eastAdoulinID = require("scripts/zones/Eastern_Adoulin/IDs")
+local eastAdoulinID = zones[xi.zone.EASTERN_ADOULIN]
 -----------------------------------
 local entity = {}
 

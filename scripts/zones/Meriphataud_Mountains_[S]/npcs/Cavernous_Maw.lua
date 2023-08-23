@@ -4,8 +4,6 @@
 -- !pos 597 -32 279 97
 -- Teleports Players to Meriphataud Mountains
 -----------------------------------
-require("scripts/globals/maws")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

@@ -3,7 +3,7 @@
 -- Door: Gilded Doors (North)
 -- !pos 180 0 79 72
 -----------------------------------
-local ID = require("scripts/zones/Alzadaal_Undersea_Ruins/IDs")
+local ID = zones[xi.zone.ALZADAAL_UNDERSEA_RUINS]
 -----------------------------------
 local entity = {}
 

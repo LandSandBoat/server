@@ -4,19 +4,19 @@
 --  Receive Chamnaet Ice upon trading Cotton Pouch
 -- !pos -305.240 3.605 17.977
 -----------------------------------
-local ID = require("scripts/zones/Uleguerand_Range/IDs")
+local ID = zones[xi.zone.ULEGUERAND_RANGE]
 -----------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     -- Trade Cotton Pouch
-    if trade:hasItemQty(xi.items.COTTON_POUCH, 1) and trade:getItemCount() == 1 then
+    if trade:hasItemQty(xi.item.COTTON_POUCH, 1) and trade:getItemCount() == 1 then
         if player:getFreeSlotsCount() == 0 then
-            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.items.HANDFUL_OF_CHAMNAET_ICE) -- Chamnaet Ice
+            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.item.HANDFUL_OF_CHAMNAET_ICE) -- Chamnaet Ice
         else
             player:tradeComplete()
-            player:addItem(xi.items.HANDFUL_OF_CHAMNAET_ICE)
-            player:messageSpecial(ID.text.ITEM_OBTAINED, xi.items.HANDFUL_OF_CHAMNAET_ICE) -- Chamnaet Ice
+            player:addItem(xi.item.HANDFUL_OF_CHAMNAET_ICE)
+            player:messageSpecial(ID.text.ITEM_OBTAINED, xi.item.HANDFUL_OF_CHAMNAET_ICE) -- Chamnaet Ice
         end
     end
 end

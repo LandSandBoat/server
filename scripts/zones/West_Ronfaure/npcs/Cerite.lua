@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: West Ronfaure
 --  NPC: Cerite
--- Type: Standard NPC
 -- !pos -263.577 -72.999 425.885 100
 -----------------------------------
 local entity = {}

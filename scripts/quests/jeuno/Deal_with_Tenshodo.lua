@@ -4,11 +4,6 @@
 -- Log ID: 3, Quest ID: 26
 -- Garnev : !pos 30 4 -36 245
 -----------------------------------
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
-require('scripts/globals/titles')
-require('scripts/globals/interaction/quest')
------------------------------------
 
 local quest = Quest:new(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.DEAL_WITH_TENSHODO)
 
@@ -60,7 +55,7 @@ quest.sections =
             ['Garnev'] =
             {
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, xi.items.GOLD_ORCMASK) then
+                    if npcUtil.tradeHasExactly(trade, xi.item.GOLD_ORCMASK) then
                         return quest:progressEvent(166)
                     end
                 end,

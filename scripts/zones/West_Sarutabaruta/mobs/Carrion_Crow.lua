@@ -3,9 +3,7 @@
 --  Mob: Carrion Crow
 -- Note: PH for Nunyenunc
 -----------------------------------
-local ID = require("scripts/zones/West_Sarutabaruta/IDs")
-require("scripts/globals/regimes")
-require("scripts/globals/mobs")
+local ID = zones[xi.zone.WEST_SARUTABARUTA]
 -----------------------------------
 local entity = {}
 

@@ -3,9 +3,7 @@
 --  Mob: Sulfur Scorpion
 -- Note: PH for Tyrannic Turrok
 -----------------------------------
-local ID = require("scripts/zones/Ifrits_Cauldron/IDs")
-require("scripts/globals/regimes")
-require("scripts/globals/mobs")
+local ID = zones[xi.zone.IFRITS_CAULDRON]
 -----------------------------------
 local entity = {}
 

@@ -10,16 +10,12 @@
 -- Ranpi-Monpi (S) - !pos -115 -3 43 94
 -- Ranpi-Monpi     - !pos -116 -3 52 238
 -----------------------------------
-require('scripts/globals/interaction/quest')
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
------------------------------------
 
 local quest = Quest:new(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.THE_DAWN_OF_DELECTABILITY)
 
 quest.reward =
 {
-    item = xi.items.TRAINEE_KNIFE,
+    item = xi.item.TRAINEE_KNIFE,
 }
 
 quest.sections =
@@ -80,7 +76,7 @@ quest.sections =
             {
                 onTrade = function(player, npc, trade)
                     if
-                        npcUtil.tradeHasExactly(trade, { xi.items.PEPPERONI, xi.items.WALNUT, xi.items.DRAGON_FRUIT, xi.items.BASTORE_SWEEPER })
+                        npcUtil.tradeHasExactly(trade, { xi.item.PEPPERONI, xi.item.WALNUT, xi.item.DRAGON_FRUIT, xi.item.BASTORE_SWEEPER })
                     then
                         return quest:progressEvent(983)
                     end

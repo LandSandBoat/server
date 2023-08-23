@@ -3,14 +3,13 @@
 --  NPC: ??? (Kinepikwa)
 -- Allow player to spawn Kinepikwa with Peiste pellets
 -----------------------------------
-local ID = require("scripts/zones/Pashhow_Marshlands_[S]/IDs")
-require("scripts/globals/npc_util")
+local ID = zones[xi.zone.PASHHOW_MARSHLANDS_S]
 -----------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     if
-        npcUtil.tradeHas(trade, xi.items.JAR_OF_PEISTE_PELLETS) and
+        npcUtil.tradeHas(trade, xi.item.JAR_OF_PEISTE_PELLETS) and
         npcUtil.popFromQM(player, npc, ID.mob.KINEPIKWA, { hide = 0 })
     then
         player:confirmTrade()

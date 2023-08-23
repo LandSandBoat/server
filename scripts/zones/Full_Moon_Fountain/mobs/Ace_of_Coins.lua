@@ -4,7 +4,6 @@
 -- Windurst Mission 9-2
 -----------------------------------
 local global = require("scripts/zones/Full_Moon_Fountain/Globals")
-local ID = require("scripts/zones/Full_Moon_Fountain/IDs")
 -----------------------------------
 local entity = {}
 

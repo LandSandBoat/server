@@ -1,8 +1,6 @@
 -----------------------------------
 -- Zone: Phomiuna_Aqueducts (27)
 -----------------------------------
-local ID = require('scripts/zones/Phomiuna_Aqueducts/IDs')
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

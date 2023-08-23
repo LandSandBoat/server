@@ -7,11 +7,6 @@
 -- Phoochuchu      : !pos -4 -4 69 249
 -- _6i8 (Door)     : !pos 70 7 2 234
 -----------------------------------
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
-require('scripts/globals/titles')
-require('scripts/globals/interaction/quest')
------------------------------------
 
 local quest = Quest:new(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.A_THIEF_IN_NORG)
 
@@ -19,7 +14,7 @@ quest.reward =
 {
     fame = 60,
     fameArea = xi.quest.fame_area.NORG,
-    item = xi.items.MYOCHIN_KABUTO,
+    item = xi.item.MYOCHIN_KABUTO,
     title = xi.title.PARAGON_OF_SAMURAI_EXCELLENCE,
 }
 
@@ -110,7 +105,7 @@ quest.sections =
                 onTrade = function(player, npc, trade)
                     if
                         player:hasKeyItem(xi.ki.CHARRED_HELM) and
-                        npcUtil.tradeHasExactly(trade, xi.items.SPOOL_OF_GOLD_THREAD)
+                        npcUtil.tradeHasExactly(trade, xi.item.SPOOL_OF_GOLD_THREAD)
                     then
                         return quest:progressEvent(162)
                     end
@@ -124,7 +119,7 @@ quest.sections =
                     elseif questProgress == 5 then
                         return quest:progressEvent(166)
                     elseif questProgress == 6 then
-                        return quest:progressEvent(player:findItem(xi.items.BANISHING_CHARM) and 167 or 168)
+                        return quest:progressEvent(player:findItem(xi.item.BANISHING_CHARM) and 167 or 168)
                     elseif questProgress == 7 then
                         return quest:progressEvent(160)
                     elseif questProgress == 8 then
@@ -153,13 +148,13 @@ quest.sections =
                 end,
 
                 [166] = function(player, csid, option, npc)
-                    if npcUtil.giveItem(player, xi.items.BANISHING_CHARM) then
+                    if npcUtil.giveItem(player, xi.item.BANISHING_CHARM) then
                         quest:setVar(player, 'Prog', 6)
                     end
                 end,
 
                 [168] = function(player, csid, option, npc)
-                    npcUtil.giveItem(player, xi.items.BANISHING_CHARM)
+                    npcUtil.giveItem(player, xi.item.BANISHING_CHARM)
                 end,
             },
         },

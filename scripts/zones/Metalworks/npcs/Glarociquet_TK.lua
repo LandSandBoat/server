@@ -3,8 +3,6 @@
 --  NPC: Glarociquet, T.K.
 -- !pos 19 -16 -28 237
 -----------------------------------
-require("scripts/globals/conquest")
------------------------------------
 local entity = {}
 
 local guardNation = xi.nation.SANDORIA

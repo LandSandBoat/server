@@ -36,7 +36,7 @@ function onTrigger(player, arg1, arg2, arg3, arg4)
         local entityType = string.upper(arg3)
         if (entityType == 'NPC') or (entityType == 'MOB') then
             arg4 = tonumber(arg4)
-            if zone:getType() == xi.zoneType.INSTANCED then
+            if zone:getTypeMask() == xi.zoneType.INSTANCED then
                 local instance = player:getInstance()
                 targ = instance:getEntity(bit.band(arg4, 0xFFF), xi.objType[entityType])
             elseif entityType == 'NPC' then

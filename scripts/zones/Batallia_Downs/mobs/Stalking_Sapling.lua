@@ -3,9 +3,7 @@
 --  Mob: Stalking Sapling
 -- Note: PH for Tottering Toby
 -----------------------------------
-local ID = require("scripts/zones/Batallia_Downs/IDs")
-require("scripts/globals/regimes")
-require("scripts/globals/mobs")
+local ID = zones[xi.zone.BATALLIA_DOWNS]
 -----------------------------------
 local entity = {}
 

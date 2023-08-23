@@ -1,9 +1,6 @@
 -----------------------------------
 -- Zone: Mine_Shaft_2716 (13)
 -----------------------------------
-local ID = require('scripts/zones/Mine_Shaft_2716/IDs')
-require('scripts/globals/conquest')
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

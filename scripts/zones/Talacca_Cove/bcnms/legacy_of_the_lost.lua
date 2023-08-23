@@ -2,10 +2,6 @@
 -- Area: Talacca Cove
 -- BCNM: TOAU-34 Legacy of the Lost
 -----------------------------------
-require("scripts/globals/battlefield")
-require("scripts/globals/missions")
-require("scripts/globals/titles")
------------------------------------
 local battlefieldObject = {}
 
 battlefieldObject.onBattlefieldTick = function(battlefield, tick)

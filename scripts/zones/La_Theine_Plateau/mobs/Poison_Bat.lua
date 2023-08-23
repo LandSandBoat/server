@@ -2,7 +2,6 @@
 -- Area: La Theine Plateau
 --  Mob: Poison Bat
 -----------------------------------
-require("scripts/globals/regimes")
 require("scripts/quests/tutorial")
 -----------------------------------
 local entity = {}

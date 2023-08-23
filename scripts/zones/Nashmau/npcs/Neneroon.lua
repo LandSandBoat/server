@@ -4,7 +4,7 @@
 -- Type: Item Deliverer
 -- !pos -0.866    -5.999    36.942 53
 -----------------------------------
-local ID = require("scripts/zones/Nashmau/IDs")
+local ID = zones[xi.zone.NASHMAU]
 -----------------------------------
 local entity = {}
 

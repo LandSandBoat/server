@@ -2,7 +2,7 @@
 -- Area: Nyzul Isle (Nashmeira's Plea)
 --  Mob: Raubahn
 -----------------------------------
-local ID = require('scripts/zones/Nyzul_Isle/IDs')
+local ID = zones[xi.zone.NYZUL_ISLE]
 -----------------------------------
 local entity = {}
 

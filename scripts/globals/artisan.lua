@@ -80,7 +80,7 @@ end
 xi.artisan.moogleOnFinish = function(player, csid, option, npc)
     if option == 99 then -- Get Scroll
         if player:getCharVar("[artisan]nextScroll") < getMidnight() then
-            if npcUtil.giveItem(player, xi.items.SCROLL_OF_INSTANT_WARP) then
+            if npcUtil.giveItem(player, xi.item.SCROLL_OF_INSTANT_WARP) then
                 player:setCharVar("[artisan]nextScroll", getMidnight())
             end
         end

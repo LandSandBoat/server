@@ -3,8 +3,7 @@
 --  Mob: Tainted Flesh
 -- Note: Place holder for Hellion
 -----------------------------------
-local ID = require("scripts/zones/Labyrinth_of_Onzozo/IDs")
-require("scripts/globals/mobs")
+local ID = zones[xi.zone.LABYRINTH_OF_ONZOZO]
 -----------------------------------
 local entity = {}
 

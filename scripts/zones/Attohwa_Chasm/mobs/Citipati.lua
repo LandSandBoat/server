@@ -2,9 +2,6 @@
 -- Area: Attohwa Chasm
 --  Mob: Citipati
 -----------------------------------
-require("scripts/globals/hunts")
-mixins = { require("scripts/mixins/claim_shield") }
------------------------------------
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Windurst Waters (S)
 --  NPC: Uricca-Koricca
--- Type: Standard NPC
 -- !pos -102.221 -3 48.791 94
 -----------------------------------
 local entity = {}

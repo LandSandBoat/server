@@ -4,10 +4,6 @@
 -- Log ID: 4, Quest ID: 102
 -- Moogle : (Mog House, Home Nation)
 -----------------------------------
-require('scripts/globals/moghouse')
-require('scripts/globals/quests')
-require('scripts/globals/interaction/quest')
------------------------------------
 
 local quest = Quest:new(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.MOOGLES_IN_THE_WILD)
 
@@ -38,7 +34,7 @@ local questAvailable =
     ['Moogle'] =
     {
         onTrigger = function(player, npc)
-            return quest:progressEvent(30013, 0, 0, 0, 6, 0, xi.items.RAPTOR_MANTLE, xi.items.WOOL_HAT)
+            return quest:progressEvent(30013, 0, 0, 0, 6, 0, xi.item.RAPTOR_MANTLE, xi.item.WOOL_HAT)
         end,
     },
 
@@ -64,7 +60,7 @@ local questAccepted =
     ['Moogle'] =
     {
         onTrade = function(player, npc, trade)
-            if npcUtil.tradeHasExactly(trade, { xi.items.RAPTOR_MANTLE, xi.items.WOOL_HAT }) then
+            if npcUtil.tradeHasExactly(trade, { xi.item.RAPTOR_MANTLE, xi.item.WOOL_HAT }) then
                 return quest:progressEvent(30015)
             end
         end,
@@ -78,7 +74,7 @@ local questAccepted =
             end
 
             if questProgress == 0 then
-                return quest:progressEvent(30014, 0, 0, 0, 0, 0, xi.items.RAPTOR_MANTLE, xi.items.WOOL_HAT)
+                return quest:progressEvent(30014, 0, 0, 0, 0, 0, xi.item.RAPTOR_MANTLE, xi.item.WOOL_HAT)
             elseif
                 questProgress == 1 and
                 quest:getVar(player, 'Timer') < os.time()

@@ -6,11 +6,6 @@
 -- Torino-Samarino : !pos 105 -20 140 111
 -- Cermet Door     : !pos -183 0 190 204
 -----------------------------------
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
-require('scripts/globals/titles')
-require('scripts/globals/interaction/quest')
------------------------------------
 
 local quest = Quest:new(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CURSES_FOILED_A_GOLEM)
 
@@ -18,7 +13,7 @@ quest.reward =
 {
     fame     = 120,
     fameArea = xi.quest.fame_area.WINDURST,
-    item     = xi.items.SCROLL_OF_WARP_II,
+    item     = xi.item.SCROLL_OF_WARP_II,
     title    = xi.title.DOCTOR_SHANTOTTOS_FLAVOR_OF_THE_MONTH,
 }
 

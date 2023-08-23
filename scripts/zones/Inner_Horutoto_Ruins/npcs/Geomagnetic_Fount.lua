@@ -3,9 +3,6 @@
 --  NPC: Geomagnetic Fount
 -- !pos 41.312 0.001 81.860
 -----------------------------------
-local ID = require("scripts/zones/Inner_Horutoto_Ruins/IDs")
-require("scripts/globals/geomagnetic_fount")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

@@ -4,11 +4,7 @@
 -----------------------------------
 -- !addmission 13 48
 -----------------------------------
-require('scripts/globals/missions')
-require('scripts/globals/rhapsodies')
-require('scripts/globals/interaction/mission')
------------------------------------
-local portJeunoID = require("scripts/zones/Port_Jeuno/IDs")
+local portJeunoID = zones[xi.zone.PORT_JEUNO]
 -----------------------------------
 
 local mission = Mission:new(xi.mission.log_id.ROV, xi.mission.id.rov.CALL_TO_SERVE)
@@ -33,7 +29,7 @@ mission.sections =
                 onTrigger = function(player, npc)
                     if
                         mission:getVar(player, 'Retrieve') == 1 and
-                        npcUtil.giveItem(player, xi.items.CIPHER_OF_PRISHES_ALTER_EGO_II)
+                        npcUtil.giveItem(player, xi.item.CIPHER_OF_PRISHES_ALTER_EGO_II)
                     then
                         mission:complete(player)
                     end
@@ -85,10 +81,10 @@ mission.sections =
             {
                 [399] = function(player, csid, option, npc)
                     if player:getFreeSlotsCount() == 0 then
-                        player:messageSpecial(portJeunoID.text.MYSTIC_RETRIEVER, xi.items.CIPHER_OF_PRISHES_ALTER_EGO_II)
+                        player:messageSpecial(portJeunoID.text.MYSTIC_RETRIEVER, xi.item.CIPHER_OF_PRISHES_ALTER_EGO_II)
                         mission:setVar(player, 'Retrieve', 1)
                     else
-                        npcUtil.giveItem(player, xi.items.CIPHER_OF_PRISHES_ALTER_EGO_II)
+                        npcUtil.giveItem(player, xi.item.CIPHER_OF_PRISHES_ALTER_EGO_II)
                         mission:complete(player)
                     end
                 end,

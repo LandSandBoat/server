@@ -4,9 +4,7 @@
 -- Type: Smithing Guild Master
 -- !pos -193.584 10 148.655 231
 -----------------------------------
-local ID = require("scripts/zones/Northern_San_dOria/IDs")
-require("scripts/globals/crafting")
-require("scripts/globals/roe")
+local ID = zones[xi.zone.NORTHERN_SAN_DORIA]
 -----------------------------------
 local entity = {}
 
@@ -76,10 +74,10 @@ entity.onEventFinish = function(player, csid, option, npc)
         end
     elseif csid == 626 and option == 1 then
         if player:getFreeSlotsCount() == 0 then
-            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.items.FIRE_CRYSTAL)
+            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.item.FIRE_CRYSTAL)
         else
-            player:addItem(xi.items.FIRE_CRYSTAL)
-            player:messageSpecial(ID.text.ITEM_OBTAINED, xi.items.FIRE_CRYSTAL) -- Fire Crystal
+            player:addItem(xi.item.FIRE_CRYSTAL)
+            player:messageSpecial(ID.text.ITEM_OBTAINED, xi.item.FIRE_CRYSTAL) -- Fire Crystal
             xi.crafting.signupGuild(player, xi.crafting.guild.SMITHING)
         end
     else

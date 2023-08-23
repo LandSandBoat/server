@@ -3,9 +3,6 @@
 --  NPC: Geomagnetic Fount
 -- !pos 294.324 -17.043 99.687
 -----------------------------------
-local ID = require("scripts/zones/Palborough_Mines/IDs")
-require("scripts/globals/geomagnetic_fount")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

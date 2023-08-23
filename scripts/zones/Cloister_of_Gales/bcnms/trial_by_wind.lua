@@ -2,10 +2,7 @@
 -- Area: Cloister of Gales
 -- BCNM: Trial by Wind
 -----------------------------------
-local ID = require("scripts/zones/Cloister_of_Gales/IDs")
-require("scripts/globals/battlefield")
-require("scripts/globals/quests")
-require("scripts/globals/titles")
+local ID = zones[xi.zone.CLOISTER_OF_GALES]
 -----------------------------------
 local battlefieldObject = {}
 

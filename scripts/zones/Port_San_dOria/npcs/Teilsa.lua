@@ -5,14 +5,12 @@
 -- Only recieving Adv.Coupon and simple talk event are scrited
 -- This NPC participates in Quests and Missions
 -----------------------------------
-local ID = require("scripts/zones/Port_San_dOria/IDs")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     if
         trade:getItemCount() == 1 and
-        trade:hasItemQty(xi.items.ADVENTURER_COUPON, 1)
+        trade:hasItemQty(xi.item.ADVENTURER_COUPON, 1)
     then
         player:startEvent(612)
     end

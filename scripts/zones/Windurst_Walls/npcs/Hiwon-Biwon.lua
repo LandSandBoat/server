@@ -3,10 +3,6 @@
 --  NPC: Hiwon-Biwon
 -- Involved In Quest: Making Headlines, Curses, Foiled...Again!?
 -----------------------------------
-require("scripts/globals/npc_util")
-require("scripts/globals/quests")
-require("scripts/globals/utils")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

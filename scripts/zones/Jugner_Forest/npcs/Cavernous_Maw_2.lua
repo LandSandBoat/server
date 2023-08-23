@@ -4,9 +4,7 @@
 -- !pos 246.318 -0.709 5.706 104
 -- Teleports Players to Abyssea - Vunkerl
 -----------------------------------
-local ID = require("scripts/zones/Jugner_Forest/IDs")
-require("scripts/globals/abyssea")
-require("scripts/globals/quests")
+local ID = zones[xi.zone.JUGNER_FOREST]
 -----------------------------------
 local entity = {}
 

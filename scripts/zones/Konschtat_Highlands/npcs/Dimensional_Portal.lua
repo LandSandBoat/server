@@ -3,8 +3,7 @@
 --  NPC: Dimensional_Portal
 -- !pos 220.000 19.104 140.000 108
 -----------------------------------
-local ID = require("scripts/zones/Konschtat_Highlands/IDs")
-require("scripts/globals/missions")
+local ID = zones[xi.zone.KONSCHTAT_HIGHLANDS]
 -----------------------------------
 local entity = {}
 

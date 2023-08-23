@@ -4,7 +4,7 @@
 -- Involved in Quest: A purchase of Arms & Sin Hunting
 -- !pos 105 1 382 104
 -----------------------------------
-local ID = require("scripts/zones/Jugner_Forest/IDs")
+local ID = zones[xi.zone.JUGNER_FOREST]
 -----------------------------------
 local entity = {}
 

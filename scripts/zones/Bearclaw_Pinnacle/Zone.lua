@@ -1,8 +1,6 @@
 -----------------------------------
 -- Zone: Bearclaw_Pinnacle (6)
 -----------------------------------
-local ID = require('scripts/zones/Bearclaw_Pinnacle/IDs')
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

@@ -3,8 +3,7 @@
 --  Mob: Mousse
 -- Note: PH for Konjac
 -----------------------------------
-local ID = require("scripts/zones/Toraimarai_Canal/IDs")
-require("scripts/globals/mobs")
+local ID = zones[xi.zone.TORAIMARAI_CANAL]
 -----------------------------------
 local entity = {}
 

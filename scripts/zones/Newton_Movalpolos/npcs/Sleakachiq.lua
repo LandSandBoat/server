@@ -3,7 +3,7 @@
 --  NPC: Sleakachiq
 -- !pos 162.504 14.999 136.901 12
 -----------------------------------
-local ID = require("scripts/zones/Newton_Movalpolos/IDs")
+local ID = zones[xi.zone.NEWTON_MOVALPOLOS]
 -----------------------------------
 local entity = {}
 

@@ -2,8 +2,7 @@
 -- Area: Aht Urhgan Whitegate
 --  NPC: Abda Lurabda
 -----------------------------------
-local ID = require("scripts/zones/Aht_Urhgan_Whitegate/IDs")
-require("scripts/globals/pets")
+local ID = zones[xi.zone.AHT_URHGAN_WHITEGATE]
 -----------------------------------
 local entity = {}
 

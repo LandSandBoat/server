@@ -1,12 +1,9 @@
 -----------------------------------
 -- Area: Western Adoulin
 --  NPC: Pagnelle
--- Type: Standard NPC and Quest NPC
--- Starts, Involved with, and Finishes Quest: 'Raptor Rapture'
 -- !pos -8 0 -100 256
 -----------------------------------
-require("scripts/globals/quests")
-local ID = require("scripts/zones/Western_Adoulin/IDs")
+local ID = zones[xi.zone.WESTERN_ADOULIN]
 -----------------------------------
 local entity = {}
 

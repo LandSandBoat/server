@@ -86,15 +86,7 @@ zones[xi.zone.JUGNER_FOREST_S] =
 
     npc =
     {
-        LOGGING =
-        {
-            17113901,
-            17113902,
-            17113903,
-            17113904,
-            17113905,
-            17113906,
-        },
+        LOGGING = GetTableOfIDs('Logging_Point'),
     },
 }
 

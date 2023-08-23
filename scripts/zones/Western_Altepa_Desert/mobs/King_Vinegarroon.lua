@@ -2,9 +2,6 @@
 -- Area: Western Altepa Desert
 --   NM: King Vinegarroon
 -----------------------------------
-require("scripts/globals/titles")
-require("scripts/globals/mobs")
------------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)

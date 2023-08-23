@@ -2,7 +2,6 @@
 -- Area: La Theine Plateau
 --  Mob: Huge Wasp
 -----------------------------------
-require("scripts/globals/regimes")
 require("scripts/quests/tutorial")
 -----------------------------------
 local entity = {}

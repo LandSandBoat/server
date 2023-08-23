@@ -1,9 +1,7 @@
 -----------------------------------
 -- Zone: The_Garden_of_RuHmet (35)
 -----------------------------------
-local ID = require('scripts/zones/The_Garden_of_RuHmet/IDs')
-require('scripts/globals/conquest')
-require('scripts/globals/missions')
+local ID = zones[xi.zone.THE_GARDEN_OF_RUHMET]
 -----------------------------------
 local zoneObject = {}
 

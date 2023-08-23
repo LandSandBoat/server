@@ -3,8 +3,6 @@
 --  NPC: Spare Three
 --  Involved in quest: A Greeting Cardian
 -----------------------------------
-require("scripts/globals/quests")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

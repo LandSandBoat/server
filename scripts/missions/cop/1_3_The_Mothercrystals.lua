@@ -7,11 +7,6 @@
 -- Shattered Telepoint (La Theine) : !pos 334 19 -60 102
 -- Shattered Telepoint (Tahrongi)  : !pos 179 35 255 117
 -----------------------------------
-require('scripts/globals/interaction/mission')
-require('scripts/globals/missions')
-require('scripts/globals/titles')
-require("scripts/globals/teleports")
-require('scripts/globals/utils')
 require('scripts/missions/cop/helpers')
 -----------------------------------
 

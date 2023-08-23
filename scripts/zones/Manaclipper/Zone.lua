@@ -1,9 +1,7 @@
 -----------------------------------
 -- Zone: Manaclipper
 -----------------------------------
-local ID = require('scripts/zones/Manaclipper/IDs')
-require('scripts/globals/manaclipper')
-require('scripts/globals/conquest')
+local ID = zones[xi.zone.MANACLIPPER]
 -----------------------------------
 local zoneObject = {}
 

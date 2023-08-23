@@ -3,14 +3,13 @@
 --  NPC: ??? (Beryl-footed Molberry NM)
 -- !pos -57 0 4 159
 -----------------------------------
-local ID = require("scripts/zones/Temple_of_Uggalepih/IDs")
-require("scripts/globals/npc_util")
+local ID = zones[xi.zone.TEMPLE_OF_UGGALEPIH]
 -----------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     if
-        npcUtil.tradeHas(trade, xi.items.TONBERRY_RATTLE) and
+        npcUtil.tradeHas(trade, xi.item.TONBERRY_RATTLE) and
         npcUtil.popFromQM(player, npc, ID.mob.BERYL_FOOTED_MOLBERRY, { hide = 900 })
     then
         player:confirmTrade()

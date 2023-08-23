@@ -1,10 +1,9 @@
 -----------------------------------
 -- Area: Castle Zvahl Baileys
 --  NPC: Switchstix
--- Type: Standard NPC
 -- !pos 386.091 -13 -17.399 161
 -----------------------------------
-local ID = require("scripts/zones/Castle_Zvahl_Baileys/IDs")
+local ID = zones[xi.zone.CASTLE_ZVAHL_BAILEYS]
 -----------------------------------
 local entity = {}
 
@@ -194,7 +193,7 @@ entity.onTrade = function(player, npc, trade)
         local relic = relics[relicId]
         local relicDupe = player:getCharVar("RELIC_MAKE_ANOTHER")
 
-        if player:hasItem(relicId + 1) and not relicDupe == 1 then
+        if player:hasItem(relicId + 1) and relicDupe ~= 1 then
             player:startEvent(20, relicId)
         elseif currentRelic == 0 then
             if

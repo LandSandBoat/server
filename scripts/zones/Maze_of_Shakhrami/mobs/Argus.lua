@@ -2,8 +2,7 @@
 -- Area: Maze of Shakhrami
 --   NM: Argus
 -----------------------------------
-local ID = require("scripts/zones/Maze_of_Shakhrami/IDs")
-mixins = { require("scripts/mixins/claim_shield") }
+local ID = zones[xi.zone.MAZE_OF_SHAKHRAMI]
 -----------------------------------
 local entity = {}
 

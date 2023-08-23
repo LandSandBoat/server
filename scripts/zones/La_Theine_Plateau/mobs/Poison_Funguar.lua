@@ -2,9 +2,7 @@
 -- Area: La Theine Plateau
 --  Mob: Poison Funguar
 -----------------------------------
-local ID = require("scripts/zones/La_Theine_Plateau/IDs")
-require("scripts/globals/regimes")
-require("scripts/globals/mobs")
+local ID = zones[xi.zone.LA_THEINE_PLATEAU]
 require("scripts/quests/tutorial")
 -----------------------------------
 local entity = {}

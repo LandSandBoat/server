@@ -2,8 +2,6 @@
 -- Area: Sauromugue Champaign
 --  Mob: Diving Beetle
 -----------------------------------
-require("scripts/globals/regimes")
------------------------------------
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

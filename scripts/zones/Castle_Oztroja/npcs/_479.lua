@@ -4,9 +4,7 @@
 -- Involved in Mission "Saintly Invitation"
 -- !pos -99 -59 84 151
 -----------------------------------
-local ID = require("scripts/zones/Castle_Oztroja/IDs")
-require("scripts/globals/missions")
-require("scripts/globals/npc_util")
+local ID = zones[xi.zone.CASTLE_OZTROJA]
 -----------------------------------
 local entity = {}
 
@@ -14,7 +12,7 @@ entity.onTrade = function(player, npc, trade)
     local zPos = player:getZPos()
 
     if
-        npcUtil.tradeHas(trade, xi.items.JUDGMENT_KEY) and
+        npcUtil.tradeHas(trade, xi.item.JUDGMENT_KEY) and
         player:hasKeyItem(xi.ki.BALGA_CHAMPION_CERTIFICATE) and
         zPos >= 80 and zPos < 86
     then

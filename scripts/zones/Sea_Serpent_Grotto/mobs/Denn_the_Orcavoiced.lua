@@ -2,7 +2,6 @@
 -- Area: Sea Serpent Grotto
 --   NM: Denn the Orcavoiced
 -----------------------------------
-require("scripts/globals/hunts")
 mixins = { require("scripts/mixins/job_special") }
 -----------------------------------
 local entity = {}

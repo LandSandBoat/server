@@ -1,8 +1,6 @@
 -----------------------------------
 -- Zone: Xarcabard_[S] (137)
 -----------------------------------
-local ID = require('scripts/zones/Xarcabard_[S]/IDs')
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

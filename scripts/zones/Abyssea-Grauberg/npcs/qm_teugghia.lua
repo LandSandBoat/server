@@ -4,17 +4,16 @@
 -- Spawns Teugghia
 -- !pos -68 -6 656 254
 -----------------------------------
-local ID = require('scripts/zones/Abyssea-Grauberg/IDs')
-require('scripts/globals/abyssea')
+local ID = zones[xi.zone.ABYSSEA_GRAUBERG]
 -----------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    xi.abyssea.qmOnTrade(player, npc, trade, ID.mob.TEUGGHIA, { xi.items.NAIADS_LOCK, xi.items.UNSEELIE_EYE })
+    xi.abyssea.qmOnTrade(player, npc, trade, ID.mob.TEUGGHIA, { xi.item.NAIADS_LOCK, xi.item.UNSEELIE_EYE })
 end
 
 entity.onTrigger = function(player, npc)
-    xi.abyssea.qmOnTrigger(player, npc, 0, 0, { xi.items.NAIADS_LOCK, xi.items.UNSEELIE_EYE })
+    xi.abyssea.qmOnTrigger(player, npc, 0, 0, { xi.item.NAIADS_LOCK, xi.item.UNSEELIE_EYE })
 end
 
 entity.onEventUpdate = function(player, csid, option, npc)

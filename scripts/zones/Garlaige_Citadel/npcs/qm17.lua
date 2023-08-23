@@ -4,8 +4,7 @@
 -- Notes: Used to obtain Pouch of Weighted Stones
 -- !pos -354 0 262 200
 -----------------------------------
-require('scripts/globals/npc_util')
-local ID = require("scripts/zones/Garlaige_Citadel/IDs")
+local ID = zones[xi.zone.GARLAIGE_CITADEL]
 -----------------------------------
 local entity = {}
 

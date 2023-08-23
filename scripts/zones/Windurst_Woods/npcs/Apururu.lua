@@ -4,11 +4,7 @@
 -- Involved in Quests: The Kind Cardian, Can Cardians Cry?
 -- !pos -11 -2 13 241
 -----------------------------------
-local ID = require("scripts/zones/Windurst_Woods/IDs")
-require("scripts/globals/missions")
-require("scripts/globals/npc_util")
-require("scripts/globals/quests")
-require("scripts/globals/titles")
+local ID = zones[xi.zone.WINDURST_WOODS]
 -----------------------------------
 local entity = {}
 
@@ -50,14 +46,14 @@ entity.onTrade = function(player, npc, trade)
     -- THE KIND CARDIAN
     if
         player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_KIND_CARDIAN) == QUEST_ACCEPTED and
-        npcUtil.tradeHas(trade, xi.items.TEN_OF_CUPS_CARD)
+        npcUtil.tradeHas(trade, xi.item.TEN_OF_CUPS_CARD)
     then
         player:startEvent(397)
 
         -- CAN CARDIANS CRY?
     elseif
         player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CAN_CARDIANS_CRY) == QUEST_ACCEPTED and
-        npcUtil.tradeHas(trade, xi.items.BRUISED_STARFRUIT)
+        npcUtil.tradeHas(trade, xi.item.BRUISED_STARFRUIT)
     then
         player:startEvent(325, 0, 20000, 5000)
     end

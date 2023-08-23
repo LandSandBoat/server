@@ -1,8 +1,7 @@
 -----------------------------------
 -- Zone: Pashhow_Marshlands_[S] (90)
 -----------------------------------
-local ID = require('scripts/zones/Pashhow_Marshlands_[S]/IDs')
-require('scripts/globals/chocobo')
+local ID = zones[xi.zone.PASHHOW_MARSHLANDS_S]
 -----------------------------------
 local zoneObject = {}
 

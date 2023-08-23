@@ -3,8 +3,7 @@
 -- NPC:   Runic Lamp
 -- animition sub 1 == glow
 -----------------------------------
-local ID = require("scripts/zones/Nyzul_Isle/IDs")
-require("scripts/globals/nyzul")
+local ID = zones[xi.zone.NYZUL_ISLE]
 -----------------------------------
 local entity = {}
 

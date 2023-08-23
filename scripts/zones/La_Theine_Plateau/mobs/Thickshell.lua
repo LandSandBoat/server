@@ -2,7 +2,6 @@
 -- Area: La Theine Plateau
 --  Mob: Thickshell
 -----------------------------------
-require("scripts/globals/regimes")
 require("scripts/quests/tutorial")
 -----------------------------------
 local entity = {}

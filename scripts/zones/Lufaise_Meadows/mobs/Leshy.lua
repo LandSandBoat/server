@@ -2,7 +2,7 @@
 -- Area: Lufaise Meadows
 --  Mob: Leshy
 -----------------------------------
-local ID = require("scripts/zones/Lufaise_Meadows/IDs")
+local ID = zones[xi.zone.LUFAISE_MEADOWS]
 -----------------------------------
 local entity = {}
 

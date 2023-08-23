@@ -2,7 +2,6 @@
 -- Area: Den of Rancor
 --   NM: Bistre-hearted Malberry
 -----------------------------------
-require("scripts/globals/hunts")
 mixins =
 {
     require("scripts/mixins/families/tonberry"),

@@ -3,8 +3,7 @@
 --  NPC: Ezura-Romazura
 -- Standard Merchant NPC
 -----------------------------------
-local ID = require("scripts/zones/Windurst_Waters_[S]/IDs")
-require("scripts/globals/shop")
+local ID = zones[xi.zone.WINDURST_WATERS_S]
 -----------------------------------
 local entity = {}
 

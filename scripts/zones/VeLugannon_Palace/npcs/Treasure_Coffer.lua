@@ -3,8 +3,6 @@
 --  NPC: Treasure Coffer
 -- !zone 177
 -----------------------------------
-require("scripts/globals/treasure")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

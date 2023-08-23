@@ -1,9 +1,6 @@
 -----------------------------------
 -- Zone: Boneyard_Gully (8)
 -----------------------------------
-local ID = require('scripts/zones/Boneyard_Gully/IDs')
-require('scripts/globals/conquest')
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

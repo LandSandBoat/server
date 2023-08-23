@@ -4,7 +4,7 @@
 -- Type: Adventurer's Assistant
 -- !pos -33.161 -1 -61.303 245
 -----------------------------------
-local ID = require("scripts/zones/Lower_Jeuno/IDs")
+local ID = zones[xi.zone.LOWER_JEUNO]
 -----------------------------------
 local entity = {}
 

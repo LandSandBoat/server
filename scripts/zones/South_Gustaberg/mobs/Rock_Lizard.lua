@@ -3,9 +3,7 @@
 --  Mob: Rock Lizard
 -- Note: Place holder Leaping Lizzy
 -----------------------------------
-local ID = require("scripts/zones/South_Gustaberg/IDs")
-require("scripts/globals/regimes")
-require("scripts/globals/mobs")
+local ID = zones[xi.zone.SOUTH_GUSTABERG]
 -----------------------------------
 local entity = {}
 

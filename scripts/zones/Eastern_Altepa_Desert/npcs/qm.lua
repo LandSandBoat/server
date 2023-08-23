@@ -4,7 +4,7 @@
 -- Involved In Quest: A Craftsman's Work
 -- !pos 113 -7.972 -72 114
 -----------------------------------
-local ID = require("scripts/zones/Eastern_Altepa_Desert/IDs")
+local ID = zones[xi.zone.EASTERN_ALTEPA_DESERT]
 -----------------------------------
 local entity = {}
 

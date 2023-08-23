@@ -2,11 +2,6 @@
 -- Area: Cloister of Tremors
 -- BCNM: Trial by Earth
 -----------------------------------
-local ID = require("scripts/zones/Cloister_of_Tremors/IDs")
-require("scripts/globals/battlefield")
-require("scripts/globals/quests")
-require("scripts/globals/titles")
------------------------------------
 local battlefieldObject = {}
 
 battlefieldObject.onBattlefieldTick = function(battlefield, tick)

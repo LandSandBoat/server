@@ -2,8 +2,6 @@
 -- Area: Periqia
 --  NPC: Excaliace
 -----------------------------------
-local ID = require("scripts/zones/Periqia/IDs")
------------------------------------
 local entity = {}
 
 entity.onMobSpawn = function(mob)

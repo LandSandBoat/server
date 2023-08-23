@@ -1,11 +1,6 @@
 -----------------------------------
 -- Zone: Jugner_Forest_[S] (82)
 -----------------------------------
-local ID = require('scripts/zones/Jugner_Forest_[S]/IDs')
-require('scripts/globals/chocobo')
-require('scripts/globals/quests')
-require('scripts/globals/helm')
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

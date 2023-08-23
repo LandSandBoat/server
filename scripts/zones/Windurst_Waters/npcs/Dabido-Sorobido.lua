@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Windurst Waters
 --  NPC: Dabido-Sorobido
--- Type: Standard NPC
 -- !pos -93.586 -4.499 19.321 238
 -----------------------------------
 local entity = {}

@@ -1,21 +1,14 @@
 -----------------------------------
 -- Area: Aht Urhgan Whitegate
 --  NPC: Iruki-Waraki
--- Type: Standard NPC
 --  Involved in quest: No Strings Attached
 -- !pos 101.329 -6.999 -29.042 50
------------------------------------
-local ID = require("scripts/zones/Aht_Urhgan_Whitegate/IDs")
-require("scripts/globals/quests")
-require("scripts/globals/npc_util")
-require("scripts/globals/titles")
-require("scripts/globals/pets")
 -----------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     if
-        npcUtil.tradeHas(trade, { xi.items.FLASK_OF_SLEEPING_POTION, xi.items.CUP_OF_CHAI }) and
+        npcUtil.tradeHas(trade, { xi.item.FLASK_OF_SLEEPING_POTION, xi.item.CUP_OF_CHAI }) and
         player:getCharVar("OperationTeaTimeProgress") == 1
     then
         -- Chai, Sleeping Potion
@@ -87,7 +80,7 @@ entity.onEventFinish = function(player, csid, option, npc)
         player:setCharVar("TheWaywardAutomatonProgress", 1)
         player:addQuest(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.THE_WAYWARD_AUTOMATON)
     elseif csid == 776 then
-        npcUtil.completeQuest(player, xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.THE_WAYWARD_AUTOMATON, { item = xi.items.TURBO_ANIMATOR, var = "TheWaywardAutomatonProgress" })
+        npcUtil.completeQuest(player, xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.THE_WAYWARD_AUTOMATON, { item = xi.item.TURBO_ANIMATOR, var = "TheWaywardAutomatonProgress" })
     elseif csid == 778 then
         player:setCharVar("OperationTeaTimeProgress", 1)
         player:addQuest(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.OPERATION_TEATIME)

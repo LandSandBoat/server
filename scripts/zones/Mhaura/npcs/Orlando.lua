@@ -3,9 +3,6 @@
 --  NPC: Orlando
 -- !pos -37.268 -9 58.047 249
 -----------------------------------
-local ID = require("scripts/zones/Mhaura/IDs")
-require("scripts/globals/quests")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

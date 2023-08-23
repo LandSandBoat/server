@@ -6,10 +6,6 @@
 -- Malene : !pos -173 -5 64 235
 -- Enu    : !pos -253.673 -13 -92.326 235
 -----------------------------------
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
-require('scripts/globals/interaction/quest')
------------------------------------
 
 local quest = Quest:new(xi.quest.log_id.BASTOK, xi.quest.id.bastok.WISH_UPON_A_STAR)
 
@@ -17,7 +13,7 @@ quest.reward =
 {
     fame     = 50,
     fameArea = xi.quest.fame_area.BASTOK,
-    item     = { { xi.items.BAG_OF_CACTUS_STEMS, 4 } },
+    item     = { { xi.item.BAG_OF_CACTUS_STEMS, 4 } },
 }
 
 quest.sections =
@@ -84,7 +80,7 @@ quest.sections =
             ['Enu'] =
             {
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, xi.items.FALLEN_STAR) then
+                    if npcUtil.tradeHasExactly(trade, xi.item.FALLEN_STAR) then
                         local isNight = VanadielTOTD() == xi.time.NIGHT or VanadielTOTD() == xi.time.MIDNIGHT
 
                         if

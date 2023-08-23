@@ -3,8 +3,7 @@
 --  NPC: Cermet Portal
 -- !pos -419 0.1 356 35
 -----------------------------------
-local ID = require("scripts/zones/The_Garden_of_RuHmet/IDs")
-require("scripts/globals/missions")
+local ID = zones[xi.zone.THE_GARDEN_OF_RUHMET]
 -----------------------------------
 local entity = {}
 

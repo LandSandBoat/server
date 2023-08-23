@@ -2,9 +2,7 @@
 -- Area: Cloister of Flames
 -- BCNM: Trial-size Trial by Fire
 -----------------------------------
-local ID = require("scripts/zones/Cloister_of_Flames/IDs")
-require("scripts/globals/battlefield")
-require("scripts/globals/quests")
+local ID = zones[xi.zone.CLOISTER_OF_FLAMES]
 -----------------------------------
 local battlefieldObject = {}
 
@@ -38,9 +36,9 @@ battlefieldObject.onEventFinish = function(player, csid, option, npc)
             player:messageSpecial(ID.text.IFRIT_UNLOCKED, 0, 0, 0)
         end
 
-        if not player:hasItem(xi.items.SCROLL_OF_INSTANT_WARP) then
-            player:addItem(xi.items.SCROLL_OF_INSTANT_WARP)
-            player:messageSpecial(ID.text.ITEM_OBTAINED, xi.items.SCROLL_OF_INSTANT_WARP)
+        if not player:hasItem(xi.item.SCROLL_OF_INSTANT_WARP) then
+            player:addItem(xi.item.SCROLL_OF_INSTANT_WARP)
+            player:messageSpecial(ID.text.ITEM_OBTAINED, xi.item.SCROLL_OF_INSTANT_WARP)
         end
 
         player:addFame(xi.quest.fame_area.WINDURST, 30)

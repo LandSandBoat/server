@@ -3,14 +3,13 @@
 --  NPC: ??? (Spawn Experimental Lamia(ZNM T3))
 -- !pos -773 -11 322 79
 -----------------------------------
-local ID = require("scripts/zones/Caedarva_Mire/IDs")
-require("scripts/globals/npc_util")
+local ID = zones[xi.zone.CAEDARVA_MIRE]
 -----------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     if
-        npcUtil.tradeHas(trade, xi.items.CLUMP_OF_MYRRH) and
+        npcUtil.tradeHas(trade, xi.item.CLUMP_OF_MYRRH) and
         npcUtil.popFromQM(player, npc, ID.mob.EXPERIMENTAL_LAMIA)
     then
         player:confirmTrade()

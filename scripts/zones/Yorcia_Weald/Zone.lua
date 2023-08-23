@@ -1,8 +1,6 @@
 -----------------------------------
 -- Zone: Yorcia Weald
 -----------------------------------
-local ID = require('scripts/zones/Yorcia_Weald/IDs')
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

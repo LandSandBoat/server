@@ -4,7 +4,7 @@
 -- Involved in Quest: A Potter's Preference
 -- !pos 117 -21 432 196
 -----------------------------------
-local ID = require("scripts/zones/Gusgen_Mines/IDs")
+local ID = zones[xi.zone.GUSGEN_MINES]
 -----------------------------------
 local entity = {}
 

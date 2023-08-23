@@ -4,8 +4,7 @@
 -- Standard Merchant NPC
 -- !pos -48 -4 30 249
 -----------------------------------
-local ID = require("scripts/zones/Mhaura/IDs")
-require("scripts/globals/shop")
+local ID = zones[xi.zone.MHAURA]
 -----------------------------------
 local entity = {}
 

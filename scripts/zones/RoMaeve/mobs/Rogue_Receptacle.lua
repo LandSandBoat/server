@@ -2,9 +2,6 @@
 -- Area: RoMaeve
 --   NM: Rogue Receptacle
 -----------------------------------
-require("scripts/globals/hunts")
-require("scripts/globals/mobs")
------------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)

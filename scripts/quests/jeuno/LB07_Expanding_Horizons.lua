@@ -3,11 +3,8 @@
 -----------------------------------
 -- Log ID: 3, Quest ID: 134
 -- Nomad Moogle : !pos 10.012 1.453 121.883 243
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
-require('scripts/globals/interaction/quest')
 -----------------------------------
-local ruludeID = require('scripts/zones/RuLude_Gardens/IDs')
+local ruludeID = zones[xi.zone.RULUDE_GARDENS]
 -----------------------------------
 
 local quest = Quest:new(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.EXPANDING_HORIZONS)
@@ -65,7 +62,7 @@ quest.sections =
 
                 onTrade = function(player, npc, trade)
                     if
-                        npcUtil.tradeHasExactly(trade, { { xi.items.KINDREDS_CREST, 5 } }) and
+                        npcUtil.tradeHasExactly(trade, { { xi.item.KINDREDS_CREST, 5 } }) and
                         player:getMeritCount() > 3
                     then
                         return quest:progressEvent(10136)

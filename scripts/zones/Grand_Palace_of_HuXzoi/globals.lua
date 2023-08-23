@@ -1,7 +1,7 @@
 -- Zone: Grand Palace of Hu'Xzoi (34)
 -- Desc: this file contains functions that are shared by multiple luas in this zone's directory
 -----------------------------------
-local ID = require("scripts/zones/Grand_Palace_of_HuXzoi/IDs")
+local ID = zones[xi.zone.GRAND_PALACE_OF_HUXZOI]
 -----------------------------------
 
 local huxzoiGlobal = {}

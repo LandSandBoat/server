@@ -4,8 +4,7 @@
 -- Note: PH for Da'Dha Hundredmask
 -- Involved in Mission 3-1 (Bastok)
 -----------------------------------
-local ID = require("scripts/zones/Beadeaux/IDs")
-require("scripts/globals/mobs")
+local ID = zones[xi.zone.BEADEAUX]
 -----------------------------------
 local entity = {}
 

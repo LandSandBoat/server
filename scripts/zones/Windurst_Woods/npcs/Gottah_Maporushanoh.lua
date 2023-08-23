@@ -2,8 +2,6 @@
 -- Area: Windurst Woods
 --  NPC: Gottah Maporushanoh
 -----------------------------------
-require("scripts/globals/quests")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

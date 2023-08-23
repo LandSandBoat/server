@@ -1,8 +1,6 @@
 -----------------------------------
 -- Zone: Gwora-Corridor (278)
 -----------------------------------
-local ID = require('scripts/zones/Gwora-Corridor/IDs')
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

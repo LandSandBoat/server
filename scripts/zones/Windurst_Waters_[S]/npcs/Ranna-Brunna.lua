@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Windurst Waters (S)
 --  NPC: Ranna-Brunna
--- Type: Standard NPC
 -- !pos 123.085 -8.874 223.734 94
 -----------------------------------
 local entity = {}

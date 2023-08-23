@@ -3,8 +3,7 @@
 --  Mob: Olden Treant
 -- Note: Place holder Emergent Elm
 -----------------------------------
-local ID = require("scripts/zones/Bhaflau_Thickets/IDs")
-require("scripts/globals/mobs")
+local ID = zones[xi.zone.BHAFLAU_THICKETS]
 -----------------------------------
 local entity = {}
 

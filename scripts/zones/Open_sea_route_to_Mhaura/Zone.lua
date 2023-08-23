@@ -1,7 +1,7 @@
 -----------------------------------
 -- Zone: Open_sea_route_to_Mhaura (47)
 -----------------------------------
-local ID = require('scripts/zones/Open_sea_route_to_Mhaura/IDs')
+local ID = zones[xi.zone.OPEN_SEA_ROUTE_TO_MHAURA]
 -----------------------------------
 local zoneObject = {}
 

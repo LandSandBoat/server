@@ -4,22 +4,19 @@
 -- Starts and Finishes Quest: Father and Son, Sharpening the Sword, A Boy's Dream (start)
 -- !pos 4 -1 24 231
 -----------------------------------
-local ID = require("scripts/zones/Northern_San_dOria/IDs")
-require("scripts/globals/quests")
-require("scripts/globals/titles")
-require("scripts/globals/npc_util")
+local ID = zones[xi.zone.NORTHERN_SAN_DORIA]
 -----------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     if player:getCharVar("aBoysDreamCS") >= 3 then
         if
-            npcUtil.tradeHasExactly(trade, xi.items.GIANT_SHELL_BUG) and
+            npcUtil.tradeHasExactly(trade, xi.item.GIANT_SHELL_BUG) and
             player:getCharVar("aBoysDreamCS") == 3
         then
             player:startEvent(15) -- During Quest "A Boy's Dream" (trading bug) madame ?
         elseif
-            npcUtil.tradeHasExactly(trade, xi.items.ODONTOTYRANNUS) and
+            npcUtil.tradeHasExactly(trade, xi.item.ODONTOTYRANNUS) and
             player:getCharVar("aBoysDreamCS") == 4
         then
             player:startEvent(47) -- During Quest "A Boy's Dream" (trading odontotyrannus)
@@ -99,11 +96,11 @@ entity.onEventFinish = function(player, csid, option, npc)
         player:setCharVar("sharpeningTheSwordCS", 1)
     elseif csid == 44 then
         if player:getFreeSlotsCount() == 0 then
-            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.items.HONOR_SWORD)
+            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.item.HONOR_SWORD)
         else
             player:delKeyItem(xi.ki.ORDELLE_WHETSTONE)
-            player:addItem(xi.items.HONOR_SWORD)
-            player:messageSpecial(ID.text.ITEM_OBTAINED, xi.items.HONOR_SWORD) -- Honor Sword
+            player:addItem(xi.item.HONOR_SWORD)
+            player:messageSpecial(ID.text.ITEM_OBTAINED, xi.item.HONOR_SWORD) -- Honor Sword
             player:setCharVar("sharpeningTheSwordCS", 0)
             player:addFame(xi.quest.fame_area.SANDORIA, 30)
             player:completeQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.SHARPENING_THE_SWORD)

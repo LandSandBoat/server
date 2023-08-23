@@ -1,8 +1,6 @@
 -----------------------------------
 -- Zone: Throne_Room_[S] (156)
 -----------------------------------
-local ID = require('scripts/zones/Throne_Room_[S]/IDs')
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

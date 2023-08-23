@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Windurst Woods
 --  NPC: Hayah Dahbalesahma
--- Type: Standard NPC
 -- !pos -50.363 -1.292 -147.883 241
 -----------------------------------
 local entity = {}

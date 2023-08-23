@@ -7,10 +7,6 @@
 -- Mhaura, Take,         !pos  20.616  -8.000 69.757 249
 -- Mhaura, Numi Adaligo, !pos -80.332 -24.050 34.794 249
 -----------------------------------
-require('scripts/globals/quests')
-require('scripts/globals/npc_util')
-require('scripts/globals/interaction/quest')
------------------------------------
 
 local quest = Quest:new(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.RYCHARDE_THE_CHEF)
 
@@ -36,9 +32,9 @@ quest.sections =
             {
                 onTrigger = function(player, npc)
                     if quest:getVar(player, 'Prog') == 2 then
-                        quest:progressEvent(70, xi.items.DHALMEL_MEAT)
+                        quest:progressEvent(70, xi.item.DHALMEL_MEAT)
                     elseif quest:getVar(player, 'Prog') > 2 then
-                        quest:progressEvent(71, xi.items.DHALMEL_MEAT)
+                        quest:progressEvent(71, xi.item.DHALMEL_MEAT)
                     end
                 end,
             },
@@ -98,9 +94,9 @@ quest.sections =
                 end,
 
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, { { xi.items.DHALMEL_MEAT, 2 } }) then
+                    if npcUtil.tradeHasExactly(trade, { { xi.item.DHALMEL_MEAT, 2 } }) then
                         return quest:progressEvent(74) -- Quest completed dialog.
-                    elseif npcUtil.tradeHasExactly(trade, { { xi.items.DHALMEL_MEAT, 1 } }) then
+                    elseif npcUtil.tradeHasExactly(trade, { { xi.item.DHALMEL_MEAT, 1 } }) then
                         return quest:event(73) -- "That's not enough!" dialog.
                     end
                 end,

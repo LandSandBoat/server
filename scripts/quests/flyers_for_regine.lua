@@ -1,10 +1,6 @@
 -----------------------------------
 -- Flyers for Regine
 -----------------------------------
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
-require('scripts/globals/utils')
------------------------------------
 
 quests = quests or {}
 quests.flyers_for_regine = quests.flyers_for_regine or {}
@@ -87,7 +83,7 @@ end
 quests.flyers_for_regine.onTrade = function(player, npc, trade, ffrId)
     if
         player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.FLYERS_FOR_REGINE) == QUEST_ACCEPTED and
-        npcUtil.tradeHas(trade, xi.items.MAGICMART_FLYER)
+        npcUtil.tradeHas(trade, xi.item.MAGICMART_FLYER)
     then
         local zoneId = player:getZoneID()
         local ID = zones[zoneId]

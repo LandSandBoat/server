@@ -4,8 +4,7 @@
 -- Involved in Quest: The Holy Crest
 -- !pos 0 -8 -122 232
 -----------------------------------
-require("scripts/globals/quests")
-local ID = require("scripts/zones/Port_San_dOria/IDs")
+local ID = zones[xi.zone.PORT_SAN_DORIA]
 -----------------------------------
 local entity = {}
 
@@ -14,7 +13,7 @@ entity.onTrade = function(player, npc, trade)
         player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.CHASING_QUOTAS) == QUEST_ACCEPTED and
         player:getCharVar("ChasingQuotas_Progress") == 0 and
         trade:getItemCount() == 1 and
-        trade:hasItemQty(xi.items.GOLD_HAIRPIN, 1) and
+        trade:hasItemQty(xi.item.GOLD_HAIRPIN, 1) and
         trade:getGil() == 0
     then -- Trading gold hairpin only
             player:tradeComplete()
@@ -109,11 +108,11 @@ entity.onEventFinish = function(player, csid, option, npc)
         player:setCharVar("ChasingQuotas_date", 0)
     elseif csid == 15 then
         if player:getFreeSlotsCount() < 1 then
-            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.items.DRACHEN_BRAIS)
+            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.item.DRACHEN_BRAIS)
         else
             player:delKeyItem(xi.ki.RANCHURIOMES_LEGACY)
-            player:addItem(xi.items.DRACHEN_BRAIS)
-            player:messageSpecial(ID.text.ITEM_OBTAINED, xi.items.DRACHEN_BRAIS) -- Drachen Brais
+            player:addItem(xi.item.DRACHEN_BRAIS)
+            player:messageSpecial(ID.text.ITEM_OBTAINED, xi.item.DRACHEN_BRAIS) -- Drachen Brais
             player:addFame(xi.quest.fame_area.SANDORIA, 40)
             player:completeQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.CHASING_QUOTAS)
             player:setCharVar("ChasingQuotas_Progress", 0)

@@ -2,7 +2,7 @@
 -- Area: Sealion's Den
 --  Mob: Cherukiki
 -----------------------------------
-local ID = require("scripts/zones/Sealions_Den/IDs")
+local ID = zones[xi.zone.SEALIONS_DEN]
 mixins = { require("scripts/mixins/warriors_path_taru") }
 -----------------------------------
 local entity = {}

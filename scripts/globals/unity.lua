@@ -9,10 +9,10 @@ xi.unity = xi.unity or {}
 -- Table Format: Needs 10 RoE Objectives, All for One not set, All for One set, Unity Joined, Zone Directory Name
 local zoneEventIds =
 {
-    [xi.zone.SOUTHERN_SAN_DORIA ] = { 3528, 3525, 3526, 3529, "Southern_San_dOria" },
-    [xi.zone.BASTOK_MARKETS     ] = {  597,  594,  595,  598, "Bastok_Markets"     },
-    [xi.zone.WINDURST_WOODS     ] = {  878,  875,  876,  879, "Windurst_Woods"     },
-    [xi.zone.WESTERN_ADOULIN    ] = { 5148, 5145, 5146, 5149, "Western_Adoulin"    },
+    [xi.zone.SOUTHERN_SAN_DORIA] = { 3528, 3525, 3526, 3529 },
+    [xi.zone.BASTOK_MARKETS    ] = {  597,  594,  595,  598 },
+    [xi.zone.WINDURST_WOODS    ] = {  878,  875,  876,  879 },
+    [xi.zone.WESTERN_ADOULIN   ] = { 5148, 5145, 5146, 5149 },
 }
 
 -- Table Format: X, Y, Z, Rot, Zone ID
@@ -80,19 +80,19 @@ local unityOptions =
 
     [4] = -- Items (Item ID, askQuantity (0 = true), limitSize (99 = limit by accolades), cost)
     {
-        [ 0] = { xi.items.REFRACTIVE_CRYSTAL,          0, 99, 15000 },
-        [ 1] = { xi.items.SPECIAL_GOBBIEDIAL_KEY,      0, 99, 15000 },
-        [ 2] = { xi.items.SCROLL_OF_INSTANT_WARP,      1,  1, 10    },
-        [ 3] = { xi.items.SCROLL_OF_INSTANT_RERAISE,   1,  1, 10    },
-        [ 4] = { xi.items.SCROLL_OF_INSTANT_PROTECT,   1,  1, 10    },
-        [ 5] = { xi.items.SCROLL_OF_INSTANT_SHELL,     1,  1, 10    },
-        [ 6] = { xi.items.MOIST_ROLANBERRY,            0, 99, 10    },
-        [ 7] = { xi.items.CLUMP_OF_RAVAGED_MOKO_GRASS, 0, 99, 10    },
-        [ 8] = { xi.items.CAVORTING_WORM,              0, 99, 10    },
-        [ 9] = { xi.items.LEVIGATED_ROCK,              0, 99, 10    },
-        [10] = { xi.items.LITTLE_LUGWORM,              0, 99, 10    },
-        [11] = { xi.items.TRAINING_MANUAL,             0, 99, 10    },
-        [12] = { xi.items.PINCH_OF_PRIZE_POWDER,       0, 99, 10    },
+        [ 0] = { xi.item.REFRACTIVE_CRYSTAL,          0, 99, 15000 },
+        [ 1] = { xi.item.SPECIAL_GOBBIEDIAL_KEY,      0, 99, 15000 },
+        [ 2] = { xi.item.SCROLL_OF_INSTANT_WARP,      1,  1, 10    },
+        [ 3] = { xi.item.SCROLL_OF_INSTANT_RERAISE,   1,  1, 10    },
+        [ 4] = { xi.item.SCROLL_OF_INSTANT_PROTECT,   1,  1, 10    },
+        [ 5] = { xi.item.SCROLL_OF_INSTANT_SHELL,     1,  1, 10    },
+        [ 6] = { xi.item.MOIST_ROLANBERRY,            0, 99, 10    },
+        [ 7] = { xi.item.CLUMP_OF_RAVAGED_MOKO_GRASS, 0, 99, 10    },
+        [ 8] = { xi.item.CAVORTING_WORM,              0, 99, 10    },
+        [ 9] = { xi.item.LEVIGATED_ROCK,              0, 99, 10    },
+        [10] = { xi.item.LITTLE_LUGWORM,              0, 99, 10    },
+        [11] = { xi.item.TRAINING_MANUAL,             0, 99, 10    },
+        [12] = { xi.item.PINCH_OF_PRIZE_POWDER,       0, 99, 10    },
     },
 }
 
@@ -146,7 +146,7 @@ end
 
 function xi.unity.onEventUpdate(player, csid, option, npc)
     local zoneId               = player:getZoneID()
-    local ID                   = require(string.format("scripts/zones/%s/IDs", zoneEventIds[zoneId][5]))
+    local ID                   = zones[zoneId]
     local accolades            = player:getCurrency("unity_accolades")
     local weeklyAccoladesSpent = player:getCharVar("weekly_sparks_spent")
     local remainingLimit       = xi.settings.main.WEEKLY_EXCHANGE_LIMIT - player:getCharVar("weekly_accolades_spent")
@@ -195,7 +195,7 @@ end
 
 function xi.unity.onEventFinish(player, csid, option, npc)
     local zoneId    = player:getZoneID()
-    local ID        = require(string.format("scripts/zones/%s/IDs", zoneEventIds[zoneId][5]))
+    local ID        = zones[zoneId]
     local category  = bit.band(option, 0x1F)
     local selection = bit.rshift(option, 5) -- This may need tuning for other menu options
 

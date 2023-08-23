@@ -2,8 +2,6 @@
 -- Area: West Sarutabaruta [S]
 --   NM: Dark Ixion
 -----------------------------------
-require("scripts/globals/titles")
------------------------------------
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

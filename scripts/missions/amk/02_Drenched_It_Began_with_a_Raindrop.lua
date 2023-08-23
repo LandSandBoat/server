@@ -6,11 +6,6 @@
 -- QUADAV_BACKSCALE   : !additem 2758
 -- YAGUDO_CAULK       : !additem 2759
 -----------------------------------
-require('scripts/globals/missions')
-require('scripts/globals/moghouse')
-require('scripts/globals/npc_util')
-require('scripts/globals/interaction/mission')
------------------------------------
 
 local mission = Mission:new(xi.mission.log_id.AMK, xi.mission.id.amk.DRENCHED_IT_BEGAN_WITH_A_RAINDROP)
 
@@ -35,7 +30,7 @@ local moogleTriggerEvent =
     {
         onTrade = function(player, npc, trade)
             if
-                npcUtil.tradeHasExactly(trade, { xi.items.ORCISH_PLATE_ARMOR, xi.items.QUADAV_BACKSCALE, xi.items.YAGUDO_CAULK })
+                npcUtil.tradeHasExactly(trade, { xi.item.ORCISH_PLATE_ARMOR, xi.item.QUADAV_BACKSCALE, xi.item.YAGUDO_CAULK })
             then
                 return mission:progressEvent(30024)
             end

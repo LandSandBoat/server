@@ -2,8 +2,6 @@
 -- Area: The_Shrouded_Maw
 --  NPC: MementoCircle
 -----------------------------------
-require("scripts/globals/bcnm")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

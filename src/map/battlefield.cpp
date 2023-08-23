@@ -53,24 +53,24 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include <chrono>
 
 CBattlefield::CBattlefield(uint16 id, CZone* PZone, uint8 area, CCharEntity* PInitiator, bool isInteraction)
-: m_Record(BattlefieldRecord_t())
+: m_isMission(false)
+, m_ID(id)
+, m_Zone(PZone)
+, m_Area(area)
+, m_Record(BattlefieldRecord_t())
+, m_Rules(0)
 , m_StartTime(server_clock::now())
 , m_LastPromptTime(0s)
+, m_MaxParticipants(8)
+, m_LevelCap(0)
 , m_isInteraction(isInteraction)
 {
-    m_ID               = id;
-    m_Zone             = PZone;
-    m_Area             = area;
     m_Initiator.id     = PInitiator->id;
     m_Initiator.name   = PInitiator->name;
     m_Record.name      = "Meme";
     m_Record.time      = 24h;
     m_Record.partySize = 69;
     m_Tick             = m_StartTime;
-    m_isMission        = false;
-    m_Rules            = 0;
-    m_MaxParticipants  = 8;
-    m_LevelCap         = 0;
     m_RegisteredPlayers.emplace(PInitiator->id);
 }
 

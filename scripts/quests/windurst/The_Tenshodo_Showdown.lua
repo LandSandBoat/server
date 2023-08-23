@@ -6,10 +6,6 @@
 -- Harnek      : !pos 44 0 -19 245
 -- Elfriede    : !pos 61 -15 10 248
 -----------------------------------
-require('scripts/globals/interaction/quest')
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
------------------------------------
 
 local quest = Quest:new(xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_TENSHODO_SHOWDOWN)
 
@@ -17,7 +13,7 @@ quest.reward =
 {
     fame = 30,
     fameArea = xi.quest.fame_area.WINDURST,
-    item = xi.items.MARAUDERS_KNIFE,
+    item = xi.item.MARAUDERS_KNIFE,
 }
 
 quest.sections =
@@ -83,10 +79,10 @@ quest.sections =
             {
                 onTrade = function(player, npc, trade)
                     if
-                        npcUtil.tradeHasExactly(trade, xi.items.BOWL_OF_QUADAV_STEW) and
+                        npcUtil.tradeHasExactly(trade, xi.item.BOWL_OF_QUADAV_STEW) and
                         quest:getVar(player, 'Prog') == 2
                     then
-                        return quest:progressEvent(10004, 0, xi.ki.TENSHODO_ENVELOPE, xi.items.BOWL_OF_QUADAV_STEW)
+                        return quest:progressEvent(10004, 0, xi.ki.TENSHODO_ENVELOPE, xi.item.BOWL_OF_QUADAV_STEW)
                     end
                 end,
 
@@ -94,9 +90,9 @@ quest.sections =
                     local questProgress = quest:getVar(player, 'Prog')
 
                     if questProgress == 1 then
-                        return quest:progressEvent(10002, 0, xi.ki.TENSHODO_ENVELOPE, xi.items.BOWL_OF_QUADAV_STEW)
+                        return quest:progressEvent(10002, 0, xi.ki.TENSHODO_ENVELOPE, xi.item.BOWL_OF_QUADAV_STEW)
                     elseif questProgress == 2 then
-                        return quest:progressEvent(10003, 0, 0, xi.items.BOWL_OF_QUADAV_STEW)
+                        return quest:progressEvent(10003, 0, 0, xi.item.BOWL_OF_QUADAV_STEW)
                     end
                 end,
             },

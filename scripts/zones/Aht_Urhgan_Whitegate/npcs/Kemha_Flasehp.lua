@@ -4,15 +4,13 @@
 -- Type: Fishing Normal/Adv. Image Support
 -- !pos -28.4 -6 -98 50
 -----------------------------------
-require("scripts/globals/crafting")
-require("scripts/globals/npc_util")
-local ID = require("scripts/zones/Aht_Urhgan_Whitegate/IDs")
+local ID = zones[xi.zone.AHT_URHGAN_WHITEGATE]
 -----------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     if xi.crafting.hasJoinedGuild(player, xi.crafting.guild.FISHING) then
-        if npcUtil.tradeHas(trade, xi.items.IMPERIAL_BRONZE_PIECE) then
+        if npcUtil.tradeHas(trade, xi.item.IMPERIAL_BRONZE_PIECE) then
             if not player:hasStatusEffect(xi.effect.FISHING_IMAGERY) then
                 player:confirmTrade()
                 player:startEvent(643, 8, 0, 0, 0, 188, 0, 6, 0)

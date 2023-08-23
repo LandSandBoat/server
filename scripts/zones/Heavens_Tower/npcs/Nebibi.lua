@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Heavens Tower
 --  NPC: Nebibi
--- Type: Standard NPC
 -- !pos 23.539 -27.25 22.589 242
 -----------------------------------
 local entity = {}

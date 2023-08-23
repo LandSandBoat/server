@@ -3,13 +3,8 @@
 -- Oggbi !pos -159 -7 5 236
 -- qm1 !pos 20 17 -140 167
 -----------------------------------
-require('scripts/globals/interaction/quest')
-require('scripts/globals/weaponskillids')
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
------------------------------------
-local portBastokID = require('scripts/zones/Port_Bastok/IDs')
-local bostaunieuxID = require('scripts/zones/Bostaunieux_Oubliette/IDs')
+local portBastokID = zones[xi.zone.PORT_BASTOK]
+local bostaunieuxID = zones[xi.zone.BOSTAUNIEUX_OUBLIETTE]
 -----------------------------------
 
 local quest = Quest:new(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_WALLS_OF_YOUR_MIND)
@@ -26,7 +21,7 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == QUEST_AVAILABLE and
-                player:canEquipItem(xi.items.KNUCKLES_OF_TRIALS, true) and
+                player:canEquipItem(xi.item.KNUCKLES_OF_TRIALS, true) and
                 player:getCharSkillLevel(xi.skill.HAND_TO_HAND) / 10 >= 250 and
                 not player:hasKeyItem(xi.keyItem.WEAPON_TRAINING_GUIDE)
         end,
@@ -44,8 +39,8 @@ quest.sections =
             {
                 [286] = function(player, csid, option, npc)
                     if
-                        player:hasItem(xi.items.KNUCKLES_OF_TRIALS) or
-                        npcUtil.giveItem(player, xi.items.KNUCKLES_OF_TRIALS)
+                        player:hasItem(xi.item.KNUCKLES_OF_TRIALS) or
+                        npcUtil.giveItem(player, xi.item.KNUCKLES_OF_TRIALS)
                     then
                         npcUtil.giveKeyItem(player, xi.keyItem.WEAPON_TRAINING_GUIDE)
                         quest:begin(player)
@@ -69,13 +64,13 @@ quest.sections =
                     if player:hasKeyItem(xi.ki.ANNALS_OF_TRUTH) then
                         return quest:progressEvent(290)
                     else
-                        local hideReacquireMenuItem = (player:hasItem(xi.items.KNUCKLES_OF_TRIALS) or player:hasKeyItem(xi.ki.MAP_TO_THE_ANNALS_OF_TRUTH)) and 1 or 0
+                        local hideReacquireMenuItem = (player:hasItem(xi.item.KNUCKLES_OF_TRIALS) or player:hasKeyItem(xi.ki.MAP_TO_THE_ANNALS_OF_TRUTH)) and 1 or 0
                         return quest:event(287, hideReacquireMenuItem)
                     end
                 end,
 
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, xi.items.KNUCKLES_OF_TRIALS) then
+                    if npcUtil.tradeHasExactly(trade, xi.item.KNUCKLES_OF_TRIALS) then
                         local wsPoints = trade:getItem(0):getWeaponskillPoints()
 
                         if wsPoints < 300 then
@@ -90,8 +85,8 @@ quest.sections =
             onEventFinish =
             {
                 [287] = function(player, csid, option, npc)
-                    if option == 1 and not player:hasItem(xi.items.KNUCKLES_OF_TRIALS) then
-                        npcUtil.giveItem(player, xi.items.KNUCKLES_OF_TRIALS)
+                    if option == 1 and not player:hasItem(xi.item.KNUCKLES_OF_TRIALS) then
+                        npcUtil.giveItem(player, xi.item.KNUCKLES_OF_TRIALS)
                     elseif option == 2 then
                         player:delQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_WALLS_OF_YOUR_MIND)
                         player:delKeyItem(xi.ki.WEAPON_TRAINING_GUIDE)

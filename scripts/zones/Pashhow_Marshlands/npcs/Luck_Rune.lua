@@ -4,7 +4,7 @@
 --  Involved in Quest: Mhaura Fortune
 -- !pos 573.245 24.999 199.560 109
 -----------------------------------
-local ID = require("scripts/zones/Pashhow_Marshlands/IDs")
+local ID = zones[xi.zone.PASHHOW_MARSHLANDS]
 -----------------------------------
 local entity = {}
 

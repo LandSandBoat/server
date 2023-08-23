@@ -1,10 +1,7 @@
 -----------------------------------
 -- Area: Ordelle's Caves
 --  NPC: Rojaireaut
--- Type: Standard NPC
 -- !pos -91.781 -0.545 587.944 193
------------------------------------
-require("scripts/globals/quests")
 -----------------------------------
 local entity = {}
 

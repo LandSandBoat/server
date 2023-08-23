@@ -4,9 +4,7 @@
 -- Guild Merchant NPC: Leathercrafting Guild
 -- !pos -189.142 -8.800 14.449 230
 -----------------------------------
-local ID = require("scripts/zones/Southern_San_dOria/IDs")
-require("scripts/globals/shop")
-require("scripts/globals/npc_util")
+local ID = zones[xi.zone.SOUTHERN_SAN_DORIA]
 -----------------------------------
 local entity = {}
 
@@ -15,7 +13,7 @@ entity.onTrade = function(player, npc, trade)
     local flyerForRegine = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.FLYERS_FOR_REGINE)
 
     if flyerForRegine == 1 then
-        if npcUtil.tradeHasExactly(trade, xi.items.MAGICMART_FLYER) then
+        if npcUtil.tradeHasExactly(trade, xi.item.MAGICMART_FLYER) then
             player:messageSpecial(ID.text.FLYER_REFUSED)
         end
     end

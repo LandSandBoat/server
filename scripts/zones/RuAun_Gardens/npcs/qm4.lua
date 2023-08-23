@@ -4,14 +4,13 @@
 -- Allows players to spawn the HNM Suzaku with a Gem of the South and a Summerstone.
 -- !pos -514 -70 -264 130
 -----------------------------------
-local ID = require("scripts/zones/RuAun_Gardens/IDs")
-require("scripts/globals/npc_util")
+local ID = zones[xi.zone.RUAUN_GARDENS]
 -----------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     if
-        npcUtil.tradeHasExactly(trade, { xi.items.GEM_OF_THE_SOUTH, xi.items.SUMMERSTONE }) and
+        npcUtil.tradeHasExactly(trade, { xi.item.GEM_OF_THE_SOUTH, xi.item.SUMMERSTONE }) and
         npcUtil.popFromQM(player, npc, ID.mob.SUZAKU)
     then -- Gem of the South and Summerstone
         player:showText(npc, ID.text.SKY_GOD_OFFSET + 7)

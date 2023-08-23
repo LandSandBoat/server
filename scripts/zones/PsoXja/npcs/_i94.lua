@@ -4,7 +4,7 @@
 -- Notes: Blue Bracelet Door
 -- !pos -330.000 14.074 -261.600 9
 -----------------------------------
-local ID = require("scripts/zones/PsoXja/IDs")
+local ID = zones[xi.zone.PSOXJA]
 -----------------------------------
 local entity = {}
 

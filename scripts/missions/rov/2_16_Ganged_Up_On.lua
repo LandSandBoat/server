@@ -4,18 +4,14 @@
 -----------------------------------
 -- !addmission 13 80
 -----------------------------------
-require('scripts/globals/missions')
-require('scripts/globals/rhapsodies')
-require('scripts/globals/interaction/mission')
------------------------------------
-local pastSandoriaID = require('scripts/zones/Southern_San_dOria_[S]/IDs')
+local pastSandoriaID = zones[xi.zone.SOUTHERN_SAN_DORIA_S]
 -----------------------------------
 
 local mission = Mission:new(xi.mission.log_id.ROV, xi.mission.id.rov.GANGED_UP_ON)
 
 mission.reward =
 {
-    item        = xi.items.CIPHER_OF_LILISETTES_ALT_EGO_II,
+    item        = xi.item.CIPHER_OF_LILISETTES_ALT_EGO_II,
     nextMission = { xi.mission.log_id.ROV, xi.mission.id.rov.SACRIFICE },
 }
 
@@ -37,7 +33,7 @@ mission.sections =
 
                             mission:complete(player)
                         else
-                            player:messageName(pastSandoriaID.text.ITEM_CANNOT_BE_OBTAINED, nil, xi.items.CIPHER_OF_LILISETTES_ALT_EGO_II)
+                            player:messageName(pastSandoriaID.text.ITEM_CANNOT_BE_OBTAINED, nil, xi.item.CIPHER_OF_LILISETTES_ALT_EGO_II)
                         end
 
                         return mission:noAction()
@@ -91,7 +87,7 @@ mission.sections =
 
                         mission:complete(player)
                     else
-                        player:messageName(pastSandoriaID.text.CANNOT_OBTAIN_MYSTIC, nil, xi.items.CIPHER_OF_LILISETTES_ALT_EGO_II)
+                        player:messageName(pastSandoriaID.text.CANNOT_OBTAIN_MYSTIC, nil, xi.item.CIPHER_OF_LILISETTES_ALT_EGO_II)
                         mission:setVar(player, 'Status', 1)
                     end
                 end,

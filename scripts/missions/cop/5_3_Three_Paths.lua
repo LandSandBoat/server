@@ -28,13 +28,7 @@
 -- Yoran-Oran : !pos -109.987 -14 203.338 239
 -- Bearclaw Pinnacle (HP2) : !pos 379 23 -62.6 5
 -----------------------------------
-require('scripts/globals/interaction/mission')
-require('scripts/globals/missions')
-require('scripts/globals/npc_util')
-require('scripts/globals/titles')
-require('scripts/globals/utils')
------------------------------------
-local lowerDelkfuttsID = require("scripts/zones/Lower_Delkfutts_Tower/IDs")
+local lowerDelkfuttsID = zones[xi.zone.LOWER_DELKFUTTS_TOWER]
 -----------------------------------
 
 local mission = Mission:new(xi.mission.log_id.COP, xi.mission.id.cop.THREE_PATHS)
@@ -228,7 +222,7 @@ mission.sections =
                 onTrade = function(player, npc, trade)
                     if
                         player:getMissionStatus(mission.areaId, xi.mission.status.COP.LOUVERANCE) == 11 and
-                        npcUtil.tradeHasExactly(trade, xi.items.GOLD_KEY)
+                        npcUtil.tradeHasExactly(trade, xi.item.GOLD_KEY)
                     then
                         return mission:progressEvent(3)
                     end

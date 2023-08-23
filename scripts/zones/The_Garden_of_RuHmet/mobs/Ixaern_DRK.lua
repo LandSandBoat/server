@@ -6,9 +6,7 @@
 -- !pos -560 5.00 239 35
 -- !pos -600 5.00 440 35
 -----------------------------------
-local ID = require("scripts/zones/The_Garden_of_RuHmet/IDs")
 mixins = { require("scripts/mixins/job_special") }
-require("scripts/globals/mobskills")
 -----------------------------------
 local entity = {}
 

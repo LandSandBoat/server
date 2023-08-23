@@ -1,8 +1,6 @@
 -----------------------------------
 -- Zone: Ilrusi_Atoll (55)
 -----------------------------------
-local ID = require('scripts/zones/Ilrusi_Atoll/IDs')
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

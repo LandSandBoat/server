@@ -4,8 +4,7 @@
 -- Guild Merchant NPC: Clothcrafting Guild
 -- !pos 13.591 -7.287 8.569 248
 -----------------------------------
-local ID = require("scripts/zones/Selbina/IDs")
-require("scripts/globals/shop")
+local ID = zones[xi.zone.SELBINA]
 -----------------------------------
 local entity = {}
 

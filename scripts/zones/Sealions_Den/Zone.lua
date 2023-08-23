@@ -1,10 +1,6 @@
 -----------------------------------
 -- Zone: Sealions_Den (32)
 -----------------------------------
-local ID = require('scripts/zones/Sealions_Den/IDs')
-require('scripts/globals/conquest')
-require('scripts/globals/quests')
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

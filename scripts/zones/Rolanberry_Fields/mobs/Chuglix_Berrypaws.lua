@@ -2,7 +2,7 @@
 -- Area: Rolanberry Fields
 --   NM: Chuglix Berrypaws
 -----------------------------------
-local ID = require("scripts/zones/Rolanberry_Fields/IDs")
+local ID = zones[xi.zone.ROLANBERRY_FIELDS]
 mixins = { require("scripts/mixins/job_special") }
 -----------------------------------
 local entity = {}

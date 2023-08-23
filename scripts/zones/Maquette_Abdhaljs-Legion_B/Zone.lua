@@ -1,8 +1,6 @@
 -----------------------------------
 -- Zone: Maquette Abdhaljs-Legion B (287)
 -----------------------------------
-local ID = require('scripts/zones/Maquette_Abdhaljs-Legion_B/IDs')
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

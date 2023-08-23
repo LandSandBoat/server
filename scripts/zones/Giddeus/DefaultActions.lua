@@ -1,4 +1,4 @@
-local ID = require('scripts/zones/Giddeus/IDs')
+local ID = zones[xi.zone.GIDDEUS]
 
 return {
     ['Giddeus_Spring'] = { event = 54 },

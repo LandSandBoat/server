@@ -5,9 +5,7 @@
 -- Starts Children of the Rune
 -- !pos 100.580 -40.150 -63.830
 -----------------------------------
-require("scripts/globals/npc_util")
-require("scripts/globals/quests")
-local ID = require("scripts/zones/Eastern_Adoulin/IDs")
+local ID = zones[xi.zone.EASTERN_ADOULIN]
 -----------------------------------
 local entity = {}
 
@@ -95,7 +93,7 @@ entity.onEventFinish = function(player, csid, option, npc)
 
     -- Attempt to issue the Children of the Rune reward if the player has space.
     if player:getCharVar("RUN_COTR") == cotrStates.REWARD_PENDING then
-        if npcUtil.giveItem(player, xi.items.SOWILO_CLAYMORE) then  -- Sowilo Claymore
+        if npcUtil.giveItem(player, xi.item.SOWILO_CLAYMORE) then  -- Sowilo Claymore
             player:unlockJob(xi.job.RUN)
             player:messageSpecial(ID.text.YOU_CAN_NOW_BECOME, 1)  -- You can now become a rune fencer!
             npcUtil.giveKeyItem(player, xi.ki.JOB_GESTURE_RUNE_FENCER)

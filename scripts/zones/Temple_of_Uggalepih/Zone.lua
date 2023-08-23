@@ -1,10 +1,6 @@
 -----------------------------------
 -- Zone: Temple_of_Uggalepih (159)
 -----------------------------------
-local ID = require('scripts/zones/Temple_of_Uggalepih/IDs')
-require('scripts/globals/conquest')
-require('scripts/globals/treasure')
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

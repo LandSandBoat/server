@@ -2,9 +2,7 @@
 -- Area: Norg
 --  NPC: Magephaud
 -----------------------------------
-local ID = require("scripts/zones/Norg/IDs")
-require("scripts/globals/quests")
-require("scripts/globals/titles")
+local ID = zones[xi.zone.NORG]
 -----------------------------------
 local entity = {}
 
@@ -12,10 +10,10 @@ entity.onTrade = function(player, npc, trade)
     local everyonesGrudge = player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.EVERYONES_GRUDGE)
     if everyonesGrudge == QUEST_ACCEPTED then
         if
-            trade:hasItemQty(xi.items.GOLD_BEASTCOIN, 3) and
+            trade:hasItemQty(xi.item.GOLD_BEASTCOIN, 3) and
             trade:getItemCount() == 3
         then
-            player:startEvent(118, xi.items.GOLD_BEASTCOIN)
+            player:startEvent(118, xi.item.GOLD_BEASTCOIN)
         end
     end
 end
@@ -28,9 +26,9 @@ entity.onTrigger = function(player, npc)
         player:getCharVar("EVERYONES_GRUDGE_KILLS") >= 1 and
         nFame >= 2
     then
-        player:startEvent(116, xi.items.GOLD_BEASTCOIN)  -- Quest start - you have tonberry kills?! I got yo back ^.-
+        player:startEvent(116, xi.item.GOLD_BEASTCOIN)  -- Quest start - you have tonberry kills?! I got yo back ^.-
     elseif player:getCharVar("EveryonesGrudgeStarted")  == 1 then
-        player:startEvent(117, xi.items.GOLD_BEASTCOIN)
+        player:startEvent(117, xi.item.GOLD_BEASTCOIN)
     elseif player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.EVERYONES_GRUDGE) == QUEST_COMPLETED then
         player:startEvent(119)  -- After completion cs
     else

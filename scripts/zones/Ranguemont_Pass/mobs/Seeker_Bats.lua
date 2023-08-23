@@ -3,9 +3,7 @@
 --  Mob: Seeker Bats
 -- Note: PH for Gloom Eye
 -----------------------------------
-local ID = require("scripts/zones/Ranguemont_Pass/IDs")
-require("scripts/globals/regimes")
-require("scripts/globals/mobs")
+local ID = zones[xi.zone.RANGUEMONT_PASS]
 -----------------------------------
 local entity = {}
 

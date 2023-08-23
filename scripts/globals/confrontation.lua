@@ -129,8 +129,9 @@ xi.confrontation.start = function(player, npc, mobIds, winFunc, loseFunc)
     for _, member in ipairs(alliance) do
         -- Using the pop npc's ID as the "key"
         member:addStatusEffect(xi.effect.CONFRONTATION, lookupKey, 0, 0)
-        local effect = member:getStatusEffect(xi.effect.CONFRONTATION)
-        effect:setFlag(effect:getFlag() + xi.effectFlag.ON_ZONE)
+        -- local effect = member:getStatusEffect(xi.effect.CONFRONTATION)
+        -- TODO: confirm correct flags in sql, should need to set here and even if we did, we'd not use this method to add a flag
+        -- effect:setEffectFlags(effect:getEffectFlags() + xi.effectFlag.ON_ZONE)
         table.insert(registeredPlayerIds, member:getID())
     end
 

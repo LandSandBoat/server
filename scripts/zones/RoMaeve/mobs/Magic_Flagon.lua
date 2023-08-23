@@ -3,9 +3,7 @@
 --  Mob: Magic Flagon
 -- Note: PH for Nightmare Vase and Rogue Receptacle
 -----------------------------------
-local ID = require("scripts/zones/RoMaeve/IDs")
-require("scripts/globals/regimes")
-require("scripts/globals/mobs")
+local ID = zones[xi.zone.ROMAEVE]
 -----------------------------------
 local entity = {}
 

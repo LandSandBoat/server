@@ -4,8 +4,7 @@
 -- Type: Standard Merchant
 -- !pos 76.889 -7 -140.379 50
 -----------------------------------
-local ID = require("scripts/zones/Aht_Urhgan_Whitegate/IDs")
-require("scripts/globals/shop")
+local ID = zones[xi.zone.AHT_URHGAN_WHITEGATE]
 -----------------------------------
 local entity = {}
 

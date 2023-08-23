@@ -2,8 +2,7 @@
 -- Area: Pso'Xja
 --  NPC: Stone Gate
 -----------------------------------
-local ID = require("scripts/zones/PsoXja/IDs")
-require("scripts/globals/missions")
+local ID = zones[xi.zone.PSOXJA]
 -----------------------------------
 local entity = {}
 

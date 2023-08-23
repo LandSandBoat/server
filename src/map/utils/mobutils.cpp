@@ -204,7 +204,7 @@ namespace mobutils
         JOBTYPE   sJob     = PMob->GetSJob();
         uint8     mLvl     = PMob->GetMLevel();
         uint8     sLvl     = PMob->GetSLevel();
-        ZONE_TYPE zoneType = PMob->loc.zone->GetType();
+        ZONE_TYPE zoneType = PMob->loc.zone->GetTypeMask();
 
         uint8 mJobGrade = 0; // main jobs grade
         uint8 sJobGrade = 0; // subjobs grade
@@ -564,7 +564,7 @@ namespace mobutils
 
         PMob->m_Behaviour |= PMob->getMobMod(MOBMOD_BEHAVIOR);
 
-        if (zoneType == ZONE_TYPE::DUNGEON)
+        if (zoneType & ZONE_TYPE::DUNGEON)
         {
             SetupDungeonMob(PMob);
         }
@@ -572,7 +572,7 @@ namespace mobutils
         {
             SetupBattlefieldMob(PMob);
         }
-        else if (zoneType == ZONE_TYPE::DYNAMIS)
+        else if (zoneType & ZONE_TYPE::DYNAMIS)
         {
             SetupDynamisMob(PMob);
         }
@@ -878,7 +878,7 @@ namespace mobutils
 
     void SetupEventMob(CMobEntity* PMob)
     {
-        // event mob types will always have custom roaming
+        // event mob types will always have scripted roaming (any mob can have it scripted, but these ALWAYS do)
         PMob->m_roamFlags |= ROAMFLAG_SCRIPTED;
         PMob->setMobMod(MOBMOD_ROAM_RESET_FACING, 1);
         PMob->m_maxRoamDistance = 0.5f; // always go back to spawn
@@ -1032,16 +1032,15 @@ namespace mobutils
     }
 
     /*
-Loads up custom mob mods from mob_pool_mods and mob_family_mods table. This will allow you to customize
-a mobs regen rate, magic defense, triple attack rate from a table instead of hardcoding it.
+    Loads up mob mods from mob_pool_mods and mob_family_mods table. This will allow you to change
+    a mobs regen rate, magic defense, triple attack rate from a table instead of hardcoding it.
 
-Usage:
+    Usage:
 
-    Evil weapons have a magic defense boost. So pop that into mob_family_mods table.
-    Goblin Diggers have a vermin killer trait, so find its poolid and put it in mod_pool_mods table.
-
-*/
-    void LoadCustomMods()
+        Evil weapons have a magic defense boost. So pop that into mob_family_mods table.
+        Goblin Diggers have a vermin killer trait, so find its poolid and put it in mod_pool_mods table.
+    */
+    void LoadSqlModifiers()
     {
         // load family mods
         const char QueryFamilyMods[] = "SELECT familyid, modid, value, is_mob_mod FROM mob_family_mods;";
@@ -1188,9 +1187,9 @@ Usage:
         return nullptr;
     }
 
-    void AddCustomMods(CMobEntity* PMob)
+    void AddSqlModifiers(CMobEntity* PMob)
     {
-        // find my families custom mods
+        // find my families mods
         ModsList_t* PFamilyMods = GetMobFamilyMods(PMob->m_Family);
 
         if (PFamilyMods != nullptr)
@@ -1207,7 +1206,7 @@ Usage:
             }
         }
 
-        // find my pools custom mods
+        // find my pools mods
         ModsList_t* PPoolMods = GetMobPoolMods(PMob->m_Pool);
 
         if (PPoolMods != nullptr)
@@ -1224,7 +1223,7 @@ Usage:
             }
         }
 
-        // find my pools custom mods
+        // find my IDs mods
         ModsList_t* PSpawnMods = GetMobSpawnMods(PMob->id);
 
         if (PSpawnMods != nullptr)
@@ -1525,6 +1524,7 @@ Usage:
                 PMob->setMobMod(MOBMOD_DETECTION, sql->GetUIntData(70));
 
                 mobutils::InitializeMob(PMob);
+                mobutils::AddSqlModifiers(PMob);
             }
         }
         return PMob;

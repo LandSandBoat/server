@@ -5,9 +5,6 @@
 -- !addmission 5 29
 -- Rally Point: Red : !pos -106.071 -25.5 -52.841 137
 -----------------------------------
-require('scripts/globals/missions')
-require('scripts/globals/interaction/mission')
------------------------------------
 
 local mission = Mission:new(xi.mission.log_id.WOTG, xi.mission.id.wotg.THE_BATTLE_OF_XARCABARD)
 

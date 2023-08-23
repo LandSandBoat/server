@@ -3,9 +3,7 @@
 --  Mob: Antican Signifer
 -- Note: PH for Centurio X-I and Antican Proconsul
 -----------------------------------
-local ID = require("scripts/zones/Quicksand_Caves/IDs")
-require("scripts/globals/regimes")
-require("scripts/globals/mobs")
+local ID = zones[xi.zone.QUICKSAND_CAVES]
 -----------------------------------
 local entity = {}
 

@@ -3,8 +3,7 @@
 --  Mob: Bladmall
 --  ENM: Shell We Dance?
 -----------------------------------
-local ID = require("scripts/zones/Boneyard_Gully/IDs")
-require("scripts/globals/titles")
+local ID = zones[xi.zone.BONEYARD_GULLY]
 -----------------------------------
 local entity = {}
 

@@ -2,9 +2,6 @@
 -- Area: Qufim Island
 --   NM: Qoofim
 -----------------------------------
-require("scripts/globals/mobs")
-require("scripts/globals/hunts")
------------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)

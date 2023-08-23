@@ -4,9 +4,7 @@
 -- Involved in Quest: Gullible's Travels, Even More Gullible's Travels,
 -- Location: (I-7)
 -----------------------------------
-require("scripts/globals/quests")
-require("scripts/globals/titles")
-local ID = require("scripts/zones/Kazham/IDs")
+local ID = zones[xi.zone.KAZHAM]
 -----------------------------------
 local entity = {}
 
@@ -17,9 +15,12 @@ local pathNodes =
 }
 
 entity.onSpawn = function(npc)
-    npc:initNpcAi()
-    npc:setPos(xi.path.first(pathNodes))
-    npc:pathThrough(pathNodes, xi.path.flag.PATROL)
+    -- Ensure that the correct Magriffon is given pathing information.
+    if npc:getID() == ID.npc.MAGRIFFON then
+        npc:initNpcAi()
+        npc:setPos(xi.path.first(pathNodes))
+        npc:pathThrough(pathNodes, xi.path.flag.PATROL)
+    end
 end
 
 entity.onTrade = function(player, npc, trade)

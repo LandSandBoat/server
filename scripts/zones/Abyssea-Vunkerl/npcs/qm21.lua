@@ -4,8 +4,6 @@
 -- Spawns Bukhis
 -- !pos -201 -39 -295 217
 -----------------------------------
-require("scripts/globals/abyssea")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

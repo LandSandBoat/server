@@ -2,7 +2,7 @@
 -- Area: Newton Movalpolos
 --   NM: Goblin Collector
 ------------------------------
-local ID = require("scripts/zones/Newton_Movalpolos/IDs")
+local ID = zones[xi.zone.NEWTON_MOVALPOLOS]
 ------------------------------
 
 local entity = {}
@@ -13,7 +13,7 @@ entity.onMobSpawn = function(mob)
     mob:setMod(xi.mod.BIND_MEVA, 40)
     mob:setMod(xi.mod.GRAVITY_MEVA, 40)
     mob:setMod(xi.mod.TRIPLE_ATTACK, 20)
-    mob:showText(mob, ID.text.COLLECTOR_SPAWN, xi.items.PREMIUM_BAG)
+    mob:showText(mob, ID.text.COLLECTOR_SPAWN, xi.item.PREMIUM_BAG)
 end
 
 entity.onMobFight = function(mob, target)

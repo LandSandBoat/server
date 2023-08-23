@@ -10,11 +10,8 @@
 -- _6q2             : !pos 0.1 -49 37 242
 -- qm16             : !pos -239.442 -1.000 -18.870 159
 -- Qu'Hau Spring    : !pos 0 -29 64 122
-require('scripts/globals/interaction/mission')
-require('scripts/globals/missions')
-require('scripts/globals/npc_util')
 -----------------------------------
-local heavensTowerID = require("scripts/zones/Heavens_Tower/IDs")
+local heavensTowerID = zones[xi.zone.HEAVENS_TOWER]
 -----------------------------------
 
 local mission = Mission:new(xi.mission.log_id.WINDURST, xi.mission.id.windurst.MOON_READING)
@@ -22,7 +19,7 @@ local mission = Mission:new(xi.mission.log_id.WINDURST, xi.mission.id.windurst.M
 mission.reward =
 {
     gil   = 100000,
-    item  = xi.items.WINDURSTIAN_FLAG,
+    item  = xi.item.WINDURSTIAN_FLAG,
     rank  = 10,
     title = xi.title.VESTAL_CHAMBERLAIN,
 }
@@ -140,7 +137,7 @@ mission.sections =
                         -- an appropriate mission function.
 
                         if player:getFreeSlotsCount() == 0 then
-                            return mission:messageSpecial(heavensTowerID.text.ITEM_CANNOT_BE_OBTAINED, xi.items.WINDURSTIAN_FLAG)
+                            return mission:messageSpecial(heavensTowerID.text.ITEM_CANNOT_BE_OBTAINED, xi.item.WINDURSTIAN_FLAG)
                         else
                             return mission:progressEvent(407)
                         end

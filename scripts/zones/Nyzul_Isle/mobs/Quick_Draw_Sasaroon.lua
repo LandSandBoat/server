@@ -3,8 +3,6 @@
 -- Area: Nyzul Isle
 -- Info: Enemy Leader, Ranger
 -----------------------------------
-require('scripts/globals/nyzul')
------------------------------------
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

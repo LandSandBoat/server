@@ -6,9 +6,6 @@
 -- Velda-Galda : !pos 138.631 -2.112 61.658 94
 -- Radford     : !pos -205.303 -8.000 26.874 87
 -----------------------------------
-require('scripts/globals/missions')
-require('scripts/globals/interaction/mission')
------------------------------------
 
 local mission = Mission:new(xi.mission.log_id.WOTG, xi.mission.id.wotg.AFFAIRS_OF_STATE)
 

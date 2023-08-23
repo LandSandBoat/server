@@ -4,8 +4,7 @@
 -- Standard Merchant NPC
 -- !pos -25.749 -0.044 52.360 234
 -----------------------------------
-local ID = require("scripts/zones/Bastok_Mines/IDs")
-require("scripts/globals/shop")
+local ID = zones[xi.zone.BASTOK_MINES]
 -----------------------------------
 local entity = {}
 
@@ -15,13 +14,13 @@ end
 entity.onTrigger = function(player, npc)
     local stock =
     {
-        4442, 360, 1, -- Pineapple Juice
-        4391,  21, 2, -- Bretzel
-        4490, 432, 2, -- Pickled Herring
-        4424, 990, 2, -- Melon Juice
-        4499,  90, 3, -- Iron Bread
-        4376, 108, 3, -- Meat Jerky
-        4509,  10, 3, -- Distilled Water
+        xi.item.LOAF_OF_IRON_BREAD,         104, 3,
+        xi.item.BRETZEL,                     24, 2,
+        xi.item.STRIP_OF_MEAT_JERKY,        124, 3,
+        xi.item.PICKLED_HERRING,            499, 2,
+        xi.item.FLASK_OF_DISTILLED_WATER,    12, 3,
+        xi.item.BOTTLE_OF_PINEAPPLE_JUICE,  416, 1,
+        xi.item.BOTTLE_OF_MELON_JUICE,     1144, 2,
     }
 
     player:showText(npc, ID.text.GRISELDA_SHOP_DIALOG)

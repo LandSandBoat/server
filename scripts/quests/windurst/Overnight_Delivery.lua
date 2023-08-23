@@ -5,10 +5,6 @@
 -- Kenapa-Keppa  : !pos 27 -6 -199 238
 -- Kotan-Purutan : !pos 40.32 -9 44.24 249
 -----------------------------------
-require('scripts/globals/interaction/quest')
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
------------------------------------
 
 local quest = Quest:new(xi.quest.log_id.WINDURST, xi.quest.id.windurst.OVERNIGHT_DELIVERY)
 
@@ -16,7 +12,7 @@ quest.reward =
 {
     fame = 100,
     fameArea = xi.quest.fame_area.WINDURST,
-    item = xi.items.POWER_GI,
+    item = xi.item.POWER_GI,
 }
 
 quest.sections =

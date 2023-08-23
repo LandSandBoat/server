@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Windurst Waters (S)
 --  NPC: Prucco-Lurucco
--- Type: Standard NPC
 -- !pos 140.772 -3.499 132.942 94
 -----------------------------------
 local entity = {}

@@ -4,15 +4,14 @@
 -- Note: Used to spawn Yara Ma Yha Who
 -- !pos 271 0.001 -334 117
 -----------------------------------
-local ID = require("scripts/zones/Tahrongi_Canyon/IDs")
-require("scripts/globals/npc_util")
+local ID = zones[xi.zone.TAHRONGI_CANYON]
 -----------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     -- Trade Distilled water to Spawn Yara Ma Yha Who
     if
-        npcUtil.tradeHas(trade, xi.items.FLASK_OF_DISTILLED_WATER) and
+        npcUtil.tradeHas(trade, xi.item.FLASK_OF_DISTILLED_WATER) and
         not GetMobByID(ID.mob.YARA_MA_YHA_WHO):isSpawned()
     then
         if os.time() > npc:getLocalVar("tradeCooldown") then

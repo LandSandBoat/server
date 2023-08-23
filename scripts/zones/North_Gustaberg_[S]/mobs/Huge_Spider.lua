@@ -3,8 +3,7 @@
 --  Mob: Huge Spider
 -- Note: Place holder for Ankabut
 -----------------------------------
-local ID = require("scripts/zones/North_Gustaberg_[S]/IDs")
-require("scripts/globals/mobs")
+local ID = zones[xi.zone.NORTH_GUSTABERG_S]
 -----------------------------------
 local entity = {}
 

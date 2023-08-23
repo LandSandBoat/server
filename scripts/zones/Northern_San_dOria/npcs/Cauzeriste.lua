@@ -4,8 +4,7 @@
 -- Guild Merchant NPC: Woodworking Guild
 -- !pos -175.946 3.999 280.301 231
 -----------------------------------
-local ID = require("scripts/zones/Northern_San_dOria/IDs")
-require("scripts/globals/shop")
+local ID = zones[xi.zone.NORTHERN_SAN_DORIA]
 -----------------------------------
 local entity = {}
 

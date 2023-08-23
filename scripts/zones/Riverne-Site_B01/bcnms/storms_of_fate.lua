@@ -3,10 +3,7 @@
 -- Name: Storms of Fate
 -- !pos 299 -123 345 146
 -----------------------------------
-local ID = require("scripts/zones/Riverne-Site_B01/IDs")
-require("scripts/globals/battlefield")
-require("scripts/globals/quests")
-require("scripts/globals/titles")
+local ID = zones[xi.zone.RIVERNE_SITE_B01]
 -----------------------------------
 local battlefieldObject = {}
 

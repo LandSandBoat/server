@@ -4,7 +4,7 @@
 -- Involved in quest: Pirate's Chart
 -- !pos -160 4 -131 103
 -----------------------------------
-local ID = require("scripts/zones/Valkurm_Dunes/IDs")
+local ID = zones[xi.zone.VALKURM_DUNES]
 -----------------------------------
 local entity = {}
 

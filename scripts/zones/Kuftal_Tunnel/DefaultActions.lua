@@ -1,4 +1,4 @@
-local ID = require("scripts/zones/Kuftal_Tunnel/IDs")
+local ID = zones[xi.zone.KUFTAL_TUNNEL]
 
 return {
     ['qm3'] = { messageSpecial = ID.text.NOTHING_OUT_OF_ORDINARY },

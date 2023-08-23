@@ -4,10 +4,6 @@
 -- Starts Quest: Secret of the Damp Scroll
 -- !pos 68.729 -6.281 -6.432 252
 -----------------------------------
-require("scripts/globals/shop")
-require("scripts/globals/quests")
-require("scripts/globals/pathfind")
------------------------------------
 local entity = {}
 
 local pathNodes =
@@ -70,9 +66,9 @@ entity.onTrigger = function(player, npc)
         dampScroll == QUEST_AVAILABLE and
         player:getFameLevel(xi.quest.fame_area.NORG) >= 3 and
         mLvl >= 10 and
-        player:hasItem(xi.items.DAMP_SCROLL)
+        player:hasItem(xi.item.DAMP_SCROLL)
     then
-        player:startEvent(31, xi.items.DAMP_SCROLL) -- Start the quest
+        player:startEvent(31, xi.item.DAMP_SCROLL) -- Start the quest
     elseif dampScroll == QUEST_ACCEPTED then
         player:startEvent(32) -- Reminder Dialogue
     else

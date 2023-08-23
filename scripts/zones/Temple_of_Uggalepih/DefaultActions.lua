@@ -1,4 +1,4 @@
-local ID = require("scripts/zones/Temple_of_Uggalepih/IDs")
+local ID = zones[xi.zone.TEMPLE_OF_UGGALEPIH]
 
 return {
     ['_4fx'] = { messageSpecial = ID.text.DOOR_LOCKED },

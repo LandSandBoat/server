@@ -2,10 +2,7 @@
 -- Area: Cloister of Flames
 -- BCNM: Trial by Fire
 -----------------------------------
-local ID = require("scripts/zones/Cloister_of_Flames/IDs")
-require("scripts/globals/battlefield")
-require("scripts/globals/quests")
-require("scripts/globals/titles")
+local ID = zones[xi.zone.CLOISTER_OF_FLAMES]
 -----------------------------------
 local battlefieldObject = {}
 

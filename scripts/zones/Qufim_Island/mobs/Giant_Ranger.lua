@@ -3,9 +3,7 @@
 --  Mob: Giant Ranger
 -- Note: PH for Slippery Sucker
 -----------------------------------
-local ID = require("scripts/zones/Qufim_Island/IDs")
-require("scripts/globals/regimes")
-require("scripts/globals/mobs")
+local ID = zones[xi.zone.QUFIM_ISLAND]
 -----------------------------------
 local entity = {}
 

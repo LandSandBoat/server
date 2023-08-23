@@ -4,7 +4,7 @@
 -- Type: Pankration NPC
 -- !pos -599 0 45 71
 -----------------------------------
-local ID = require("scripts/zones/The_Colosseum/IDs")
+local ID = zones[xi.zone.THE_COLOSSEUM]
 -----------------------------------
 local entity = {}
 
@@ -14,13 +14,13 @@ entity.onTrade = function(player, npc, trade)
     local total = player:getCurrency("jetton")
     local max = 100000000
 
-    if trade:hasItemQty(xi.items.IMPERIAL_BRONZE_PIECE, count) then
+    if trade:hasItemQty(xi.item.IMPERIAL_BRONZE_PIECE, count) then
         result = 2 * count
-    elseif trade:hasItemQty(xi.items.IMPERIAL_SILVER_PIECE, count) then
+    elseif trade:hasItemQty(xi.item.IMPERIAL_SILVER_PIECE, count) then
         result = 10 * count
-    elseif trade:hasItemQty(xi.items.IMPERIAL_MYTHRIL_PIECE, count) then
+    elseif trade:hasItemQty(xi.item.IMPERIAL_MYTHRIL_PIECE, count) then
         result = 30 * count
-    elseif trade:hasItemQty(xi.items.IMPERIAL_GOLD_PIECE, count) then
+    elseif trade:hasItemQty(xi.item.IMPERIAL_GOLD_PIECE, count) then
         result = 200 * count
     end
 

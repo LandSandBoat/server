@@ -3,8 +3,7 @@
 --  NPC: Areebah
 -- Standard Merchant NPC
 -----------------------------------
-local ID = require("scripts/zones/Upper_Jeuno/IDs")
-require("scripts/globals/shop")
+local ID = zones[xi.zone.UPPER_JEUNO]
 -----------------------------------
 local entity = {}
 

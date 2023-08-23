@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Windurst Waters (S)
 --  NPC: Romaa Mihgo
--- Type: Standard NPC
 -- !pos -1.967 -3 -26.337 94
 -----------------------------------
 local entity = {}

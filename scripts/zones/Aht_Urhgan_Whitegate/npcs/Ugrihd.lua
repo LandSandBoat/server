@@ -4,9 +4,7 @@
 -- Coin Exchange Vendor
 -- !pos -63.079 -6 -28.571 50
 -----------------------------------
-local ID = require("scripts/zones/Aht_Urhgan_Whitegate/IDs")
------------------------------------
-require("scripts/globals/besieged")
+local ID = zones[xi.zone.AHT_URHGAN_WHITEGATE]
 -----------------------------------
 local entity = {}
 

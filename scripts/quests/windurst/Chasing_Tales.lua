@@ -8,11 +8,6 @@
 -- Hae Jakhya      : !pos -75.36 -7.4 -23.82 230
 -- TODO: This quest could be simplified with expanded use of Prog questVar.
 -----------------------------------
-require('scripts/globals/interaction/quest')
-require('scripts/globals/missions')
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
------------------------------------
 
 local quest = Quest:new(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CHASING_TALES)
 
@@ -44,7 +39,7 @@ quest.sections =
                     -- https://ffxiclopedia.fandom.com/wiki/Chasing_Tales
                     if
                         player:getNation() ~= xi.nation.WINDURST or
-                        not player:getCurrentMission(xi.mission.log_id.WINDURST) == xi.mission.id.windurst.THE_JESTER_WHOD_BE_KING
+                        player:getCurrentMission(xi.mission.log_id.WINDURST) ~= xi.mission.id.windurst.THE_JESTER_WHOD_BE_KING
                     then
                         return quest:progressEvent(403)
                     end

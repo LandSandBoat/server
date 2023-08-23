@@ -3,9 +3,6 @@
 
 -- Naja: !pos 22.700 -8.804 -45.591 50
 -----------------------------------
-require('scripts/globals/npc_util')
-require('scripts/globals/interaction/hidden_quest')
------------------------------------
 
 local quest = HiddenQuest:new("Invitation_Cards")
 
@@ -20,10 +17,10 @@ local invitationCards =
 local rewards =
 {
     [0] = { coin = 0,                               amount = 0 },
-    [1] = { coin = xi.items.IMPERIAL_BRONZE_PIECE,  amount = 1 },
-    [2] = { coin = xi.items.IMPERIAL_BRONZE_PIECE,  amount = 2 },
-    [3] = { coin = xi.items.IMPERIAL_BRONZE_PIECE,  amount = 3 },
-    [4] = { coin = xi.items.IMPERIAL_MYTHRIL_PIECE, amount = 1 },
+    [1] = { coin = xi.item.IMPERIAL_BRONZE_PIECE,  amount = 1 },
+    [2] = { coin = xi.item.IMPERIAL_BRONZE_PIECE,  amount = 2 },
+    [3] = { coin = xi.item.IMPERIAL_BRONZE_PIECE,  amount = 3 },
+    [4] = { coin = xi.item.IMPERIAL_MYTHRIL_PIECE, amount = 1 },
 }
 
 local function getCards(player)
@@ -82,7 +79,7 @@ quest.sections =
                     if option == 1 then
                         local cards, _, _ = getCards(player)
 
-                        player:updateEvent({ [0] = cards, [1] = xi.items.IMPERIAL_BRONZE_PIECE, [2] = 1, text_table = 0 })
+                        player:updateEvent({ [0] = cards, [1] = xi.item.IMPERIAL_BRONZE_PIECE, [2] = 1, text_table = 0 })
                     end
                 end,
             },
@@ -111,7 +108,7 @@ quest.sections =
                     if option == 3 then
                         local cards, _, _ = getCards(player)
 
-                        if npcUtil.giveItem(player, xi.items.IMPERIAL_BRONZE_PIECE) then
+                        if npcUtil.giveItem(player, xi.item.IMPERIAL_BRONZE_PIECE) then
                             deleteCards(player)
 
                             local count = quest:getVar(player, 'Prog')

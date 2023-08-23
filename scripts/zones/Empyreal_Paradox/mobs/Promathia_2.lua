@@ -3,9 +3,7 @@
 --  Mob: Promathia
 -- Note: Phase 2
 -----------------------------------
-local ID = require("scripts/zones/Empyreal_Paradox/IDs")
-require("scripts/globals/titles")
-require("scripts/globals/magic")
+local ID = zones[xi.zone.EMPYREAL_PARADOX]
 -----------------------------------
 local entity = {}
 

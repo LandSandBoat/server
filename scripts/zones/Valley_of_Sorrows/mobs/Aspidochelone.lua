@@ -2,9 +2,8 @@
 -- Area: Valley of Sorrows
 --  HNM: Aspidochelone
 -----------------------------------
-local ID = require("scripts/zones/Valley_of_Sorrows/IDs")
+local ID = zones[xi.zone.VALLEY_OF_SORROWS]
 mixins = { require("scripts/mixins/rage") }
-require("scripts/globals/titles")
 -----------------------------------
 local entity = {}
 

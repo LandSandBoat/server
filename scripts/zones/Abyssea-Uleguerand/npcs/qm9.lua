@@ -4,8 +4,6 @@
 -- Spawns Chillwing Hwitti
 -- !pos -484 -20 -85 253
 -----------------------------------
-require("scripts/globals/abyssea")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

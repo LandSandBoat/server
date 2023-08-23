@@ -3,13 +3,8 @@
 -- Iron Eater !pos 92 -19.6 2 237
 -- qm1 !pos -324 1 474 121
 -----------------------------------
-require('scripts/globals/interaction/quest')
-require('scripts/globals/weaponskillids')
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
------------------------------------
-local metalworksID = require('scripts/zones/Metalworks/IDs')
-local ziTahID = require('scripts/zones/The_Sanctuary_of_ZiTah/IDs')
+local metalworksID = zones[xi.zone.METALWORKS]
+local ziTahID      = zones[xi.zone.THE_SANCTUARY_OF_ZITAH]
 -----------------------------------
 
 local quest = Quest:new(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_WEIGHT_OF_YOUR_LIMITS)
@@ -26,7 +21,7 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == QUEST_AVAILABLE and
-                player:canEquipItem(xi.items.AXE_OF_TRIALS, true) and
+                player:canEquipItem(xi.item.AXE_OF_TRIALS, true) and
                 player:getCharSkillLevel(xi.skill.GREAT_AXE) / 10 >= 240 and
                 not player:hasKeyItem(xi.keyItem.WEAPON_TRAINING_GUIDE)
         end,
@@ -44,8 +39,8 @@ quest.sections =
             {
                 [790] = function(player, csid, option, npc)
                     if
-                        player:hasItem(xi.items.AXE_OF_TRIALS) or
-                        npcUtil.giveItem(player, xi.items.AXE_OF_TRIALS)
+                        player:hasItem(xi.item.AXE_OF_TRIALS) or
+                        npcUtil.giveItem(player, xi.item.AXE_OF_TRIALS)
                     then
                         npcUtil.giveKeyItem(player, xi.keyItem.WEAPON_TRAINING_GUIDE)
                         quest:begin(player)
@@ -69,13 +64,13 @@ quest.sections =
                     if player:hasKeyItem(xi.ki.ANNALS_OF_TRUTH) then
                         return quest:progressEvent(794) -- complete
                     else
-                        local hideReacquireMenuItem = (player:hasItem(xi.items.AXE_OF_TRIALS) or player:hasKeyItem(xi.ki.MAP_TO_THE_ANNALS_OF_TRUTH)) and 1 or 0
+                        local hideReacquireMenuItem = (player:hasItem(xi.item.AXE_OF_TRIALS) or player:hasKeyItem(xi.ki.MAP_TO_THE_ANNALS_OF_TRUTH)) and 1 or 0
                         return quest:event(791, hideReacquireMenuItem) -- cont 1
                     end
                 end,
 
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, xi.items.AXE_OF_TRIALS) then
+                    if npcUtil.tradeHasExactly(trade, xi.item.AXE_OF_TRIALS) then
                         local wsPoints = trade:getItem(0):getWeaponskillPoints()
 
                         if wsPoints < 300 then
@@ -90,8 +85,8 @@ quest.sections =
             onEventFinish =
             {
                 [791] = function(player, csid, option, npc)
-                    if option == 1 and not player:hasItem(xi.items.AXE_OF_TRIALS) then
-                        npcUtil.giveItem(player, xi.items.AXE_OF_TRIALS)
+                    if option == 1 and not player:hasItem(xi.item.AXE_OF_TRIALS) then
+                        npcUtil.giveItem(player, xi.item.AXE_OF_TRIALS)
                     elseif option == 2 then
                         player:delQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_WEIGHT_OF_YOUR_LIMITS)
                         player:delKeyItem(xi.ki.WEAPON_TRAINING_GUIDE)

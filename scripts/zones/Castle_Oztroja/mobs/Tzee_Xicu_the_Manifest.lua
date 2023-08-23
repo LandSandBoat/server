@@ -3,10 +3,8 @@
 --   NM: Tzee Xicu the Manifest
 -- TODO: messages should be zone-wide
 -----------------------------------
-local ID = require("scripts/zones/Castle_Oztroja/IDs")
+local ID = zones[xi.zone.CASTLE_OZTROJA]
 mixins = { require("scripts/mixins/job_special") }
-require("scripts/globals/titles")
-require("scripts/globals/mobs")
 -----------------------------------
 local entity = {}
 

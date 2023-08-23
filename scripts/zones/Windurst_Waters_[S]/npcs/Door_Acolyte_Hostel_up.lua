@@ -4,10 +4,6 @@
 -- Type: Quest NPC
 -- !pos 146.619, -8.525, 242.874 94
 -----------------------------------
-local ID = require("scripts/zones/Windurst_Waters_[S]/IDs")
-require("scripts/globals/missions")
-require("scripts/globals/quests")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

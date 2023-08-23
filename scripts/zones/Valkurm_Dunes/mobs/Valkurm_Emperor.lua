@@ -2,8 +2,6 @@
 -- Area: Valkurm Dunes
 --   NM: Valkurm Emperor
 -----------------------------------
-require("scripts/globals/hunts")
------------------------------------
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

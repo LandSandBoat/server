@@ -5,9 +5,9 @@ require("modules/module_utils")
 -----------------------------------
 -- ID Requires
 -----------------------------------
-local dragonsAeryID   = require("scripts/zones/Dragons_Aery/IDs")
-local valleySorrowsID = require("scripts/zones/Valley_of_Sorrows/IDs")
-local behemothDomID   = require("scripts/zones/Behemoths_Dominion/IDs")
+local dragonsAeryID   = zones[xi.zone.DRAGONS_AERY]
+local valleySorrowsID = zones[xi.zone.VALLEY_OF_SORROWS]
+local behemothDomID   = zones[xi.zone.BEHEMOTHS_DOMINION]
 
 -----------------------------------
 -- Module definition

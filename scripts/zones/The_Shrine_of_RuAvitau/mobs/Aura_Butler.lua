@@ -2,8 +2,6 @@
 -- Area: The Shrine of Ru'Avitau
 --  Mob: Aura Butler
 -----------------------------------
-require("scripts/globals/regimes")
------------------------------------
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Windurst Waters (S)
 --  NPC: Quartermaster
--- Type: Standard NPC
 -- !pos -60.200 -4.7 32.500 94
 -----------------------------------
 local entity = {}

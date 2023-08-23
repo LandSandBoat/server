@@ -415,15 +415,18 @@ enum class CONTINENT_TYPE : uint8
     OTHER_AREAS            = 4
 };
 
-enum class ZONE_TYPE : uint8
+enum ZONE_TYPE : uint16
 {
-    NONE              = 0,
-    CITY              = 1,
-    OUTDOORS          = 2,
-    DUNGEON           = 3,
-    UNUSED            = 4, // formerly BATTLEFIELD
-    DYNAMIS           = 5,
-    DUNGEON_INSTANCED = 6,
+    UNKNOWN   = 0x0000,
+    CITY      = 0x0001,
+    OUTDOORS  = 0x0002,
+    DUNGEON   = 0x0004,
+    SIGNET    = 0x0008,
+    SANCTION  = 0x0010, // 16
+    SIGIL     = 0x0020, // 32
+    IONIS     = 0x0040, // 64
+    DYNAMIS   = 0x0080, // 128
+    INSTANCED = 0x0100, // 256
 };
 
 enum GLOBAL_MESSAGE_TYPE
@@ -530,7 +533,7 @@ class CZone
 {
 public:
     ZONEID             GetID();
-    ZONE_TYPE          GetType();
+    ZONE_TYPE          GetTypeMask();
     REGION_TYPE        GetRegionID();
     CONTINENT_TYPE     GetContinentID();
     uint8              getLevelRestriction();

@@ -1,11 +1,7 @@
 -----------------------------------
 -- Area: Port Windurst
 --  NPC: Three of Clubs
--- Type: Standard NPC
 -- !pos -7.238 -5 106.982 240
------------------------------------
-require("scripts/globals/quests")
-require("scripts/globals/utils")
 -----------------------------------
 local entity = {}
 

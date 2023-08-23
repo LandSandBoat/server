@@ -2,11 +2,6 @@
 -- Temple of Uggalepih
 -- Sacrifical Chamber Mission Battlefield
 -----------------------------------
-local ID = require("scripts/zones/Sacrificial_Chamber/IDs")
-require("scripts/globals/battlefield")
-require("scripts/globals/missions")
-require("scripts/globals/titles")
------------------------------------
 local battlefieldObject = {}
 
 battlefieldObject.onBattlefieldTick = function(battlefield, tick)

@@ -37,8 +37,8 @@ struct ModsList_t
     std::vector<CModifier*> mobMods;
 
     ModsList_t()
+    : id(0)
     {
-        id = 0;
     }
 };
 
@@ -71,14 +71,14 @@ namespace mobutils
     uint16 GetBaseToRank(uint8 rank, uint16 level);
     void   GetAvailableSpells(CMobEntity* PMob);
     void   InitializeMob(CMobEntity* PMob);
-    void   LoadCustomMods();
+    void   LoadSqlModifiers();
 
     // get modifiers for pool / family / spawn
     ModsList_t* GetMobFamilyMods(uint16 familyId, bool create = false);
     ModsList_t* GetMobPoolMods(uint32 poolId, bool create = false);
     ModsList_t* GetMobSpawnMods(uint32 mobId, bool create = false);
 
-    void AddCustomMods(CMobEntity* PMob);
+    void AddSqlModifiers(CMobEntity* PMob);
 
     void        SetSpellList(CMobEntity*, uint16);
     CMobEntity* InstantiateAlly(uint32 groupid, uint16 zoneID, CInstance* = nullptr);

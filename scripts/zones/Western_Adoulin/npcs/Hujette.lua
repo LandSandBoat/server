@@ -5,11 +5,7 @@
 -- Involved with Quest: 'All the Way to the Bank'
 -- !pos 35 0 -56 256
 -----------------------------------
-local ID = require("scripts/zones/Western_Adoulin/IDs")
-require("scripts/globals/npc_util")
-require("scripts/globals/quests")
-require("scripts/globals/utils")
-require("scripts/globals/shop")
+local ID = zones[xi.zone.WESTERN_ADOULIN]
 -----------------------------------
 local entity = {}
 

@@ -4,14 +4,13 @@
 -- Involved in Quest: The Cold Light of Day
 -- !pos 744 0 -671 107
 -----------------------------------
-local ID = require("scripts/zones/South_Gustaberg/IDs")
-require("scripts/globals/npc_util")
+local ID = zones[xi.zone.SOUTH_GUSTABERG]
 -----------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     if
-        (npcUtil.tradeHas(trade, xi.items.QUUS) or npcUtil.tradeHas(trade, xi.items.QUUS_F2)) and
+        (npcUtil.tradeHas(trade, xi.item.QUUS) or npcUtil.tradeHas(trade, xi.item.QUUS_F2)) and
         npcUtil.popFromQM(player, npc, ID.mob.BUBBLY_BERNIE, { hide = 0 })
     then
         player:confirmTrade()

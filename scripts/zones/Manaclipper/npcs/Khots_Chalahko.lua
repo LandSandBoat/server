@@ -4,7 +4,7 @@
 -- Type: NPC
 -- !pos 0.019 -4.674 -18.782 3
 -----------------------------------
-local ID = require("scripts/zones/Manaclipper/IDs")
+local ID = zones[xi.zone.MANACLIPPER]
 -----------------------------------
 local entity = {}
 

@@ -3,9 +3,7 @@
 --  NPC: Komalata
 -- Standard Merchant NPC
 -----------------------------------
-local ID = require("scripts/zones/Tavnazian_Safehold/IDs")
-require("scripts/globals/missions")
-require("scripts/globals/shop")
+local ID = zones[xi.zone.TAVNAZIAN_SAFEHOLD]
 -----------------------------------
 local entity = {}
 

@@ -26,9 +26,9 @@ local keyType =
 local thiefKeyInfo =
 {
 --   Key                       Item ID                       Success Modifier
-    [keyType.THIEF_TOOLS ] = { xi.items.SET_OF_THIEFS_TOOLS, 0.1  },
-    [keyType.SKELETON_KEY] = { xi.items.SKELETON_KEY,        0.2  },
-    [keyType.LIVING_KEY  ] = { xi.items.LIVING_KEY,          0.15 },
+    [keyType.THIEF_TOOLS ] = { xi.item.SET_OF_THIEFS_TOOLS, 0.1  },
+    [keyType.SKELETON_KEY] = { xi.item.SKELETON_KEY,        0.2  },
+    [keyType.LIVING_KEY  ] = { xi.item.LIVING_KEY,          0.15 },
 }
 
 xi.treasure.treasureInfo =
@@ -255,11 +255,11 @@ xi.treasure.treasureInfo =
                     {
                         test = function(player)
                             return player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.SCATTERED_INTO_SHADOW) == QUEST_ACCEPTED and
-                                player:getCharVar("scatIntoShadowCS") == 1 and not player:hasItem(xi.items.BEAST_COLLAR)
+                                player:getCharVar("scatIntoShadowCS") == 1 and not player:hasItem(xi.item.BEAST_COLLAR)
                         end,
 
                         code = function(player)
-                            npcUtil.giveItem(player, xi.items.BEAST_COLLAR)
+                            npcUtil.giveItem(player, xi.item.BEAST_COLLAR)
                         end,
                     },
                 },

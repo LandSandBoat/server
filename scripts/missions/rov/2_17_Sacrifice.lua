@@ -5,11 +5,7 @@
 -- !addmission 13 83
 -- Ornate Door (_521) : !pos -700 -20.25 -303.398 89
 -----------------------------------
-require('scripts/globals/missions')
-require('scripts/globals/rhapsodies')
-require('scripts/globals/interaction/mission')
------------------------------------
-local walkOfEchoesID = require('scripts/zones/Walk_of_Echoes/IDs')
+local walkOfEchoesID = zones[xi.zone.WALK_OF_ECHOES]
 -----------------------------------
 
 local mission = Mission:new(xi.mission.log_id.ROV, xi.mission.id.rov.SACRIFICE)

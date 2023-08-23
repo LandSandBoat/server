@@ -5,10 +5,6 @@
 -- Starts Quest: Exit the Gambler
 -- !pos -156.253 11.999 253.691 231
 -----------------------------------
-require("scripts/globals/npc_util")
-require("scripts/globals/quests")
-require("scripts/globals/titles")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

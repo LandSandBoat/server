@@ -2,7 +2,7 @@
 -- Area: Oldton Movalpolos
 --  NPC: Rakorok
 -----------------------------------
-local ID = require("scripts/zones/Oldton_Movalpolos/IDs")
+local ID = zones[xi.zone.OLDTON_MOVALPOLOS]
 -----------------------------------
 local entity = {}
 

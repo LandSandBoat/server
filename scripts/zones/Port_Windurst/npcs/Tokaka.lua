@@ -3,8 +3,6 @@
 --  NPC: Tokaka
 -- Starts & Finishes Repeatable Quest: Something Fishy
 -----------------------------------
-require("scripts/globals/quests")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
@@ -13,10 +11,10 @@ entity.onTrade = function(player, npc, trade)
 
     if tokakaSpokenTo == 1 and not needToZone then
         if
-            trade:hasItemQty(xi.items.BASTORE_SARDINE, 1) and
+            trade:hasItemQty(xi.item.BASTORE_SARDINE, 1) and
             trade:getItemCount() == 1
         then
-            player:startEvent(210, xi.settings.main.GIL_RATE * 70, xi.items.BASTORE_SARDINE)
+            player:startEvent(210, xi.settings.main.GIL_RATE * 70, xi.item.BASTORE_SARDINE)
         end
     end
 end
@@ -28,10 +26,10 @@ entity.onTrigger = function(player, npc)
         if player:needToZone() then
             player:startEvent(211)
         else
-            player:startEvent(209, 0, xi.items.BASTORE_SARDINE)
+            player:startEvent(209, 0, xi.item.BASTORE_SARDINE)
         end
     elseif somethingFishy == QUEST_AVAILABLE then
-        player:startEvent(208, 0, xi.items.BASTORE_SARDINE)
+        player:startEvent(208, 0, xi.item.BASTORE_SARDINE)
     end
 end
 

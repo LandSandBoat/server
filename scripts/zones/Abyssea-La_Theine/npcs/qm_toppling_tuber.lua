@@ -4,17 +4,16 @@
 -- Spawns Toppling Tuber
 -- !pos -325 38 201 132
 -----------------------------------
-local ID = require('scripts/zones/Abyssea-La_Theine/IDs')
-require('scripts/globals/abyssea')
+local ID = zones[xi.zone.ABYSSEA_LA_THEINE]
 -----------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    xi.abyssea.qmOnTrade(player, npc, trade, ID.mob.TOPPLING_TUBER, { xi.items.GIANT_AGARICUS_MUSHROOM })
+    xi.abyssea.qmOnTrade(player, npc, trade, ID.mob.TOPPLING_TUBER, { xi.item.GIANT_AGARICUS_MUSHROOM })
 end
 
 entity.onTrigger = function(player, npc)
-    xi.abyssea.qmOnTrigger(player, npc, 0, 0, { xi.items.GIANT_AGARICUS_MUSHROOM })
+    xi.abyssea.qmOnTrigger(player, npc, 0, 0, { xi.item.GIANT_AGARICUS_MUSHROOM })
 end
 
 entity.onEventUpdate = function(player, csid, option, npc)

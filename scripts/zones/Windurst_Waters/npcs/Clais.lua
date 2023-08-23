@@ -4,8 +4,7 @@
 -- Involved In Quest: Hat in Hand
 -- !pos -31 -3 11 238
 -----------------------------------
-local ID = require("scripts/zones/Windurst_Waters/IDs")
-require("scripts/globals/utils")
+local ID = zones[xi.zone.WINDURST_WATERS]
 -----------------------------------
 local entity = {}
 

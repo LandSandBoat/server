@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Windurst Waters (S)
 --  NPC: Ruirara
--- Type: Standard NPC
 -- !pos -87.378 -2 -158.019 94
 -----------------------------------
 local entity = {}

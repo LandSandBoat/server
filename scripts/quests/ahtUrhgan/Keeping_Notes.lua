@@ -2,10 +2,6 @@
 -- Keeping Notes
 -- Ahkk Jharcham, Whitegate , !pos 0.1 -1 -76 50
 -----------------------------------
-require('scripts/globals/quests')
-require('scripts/globals/npc_util')
-require('scripts/globals/interaction/quest')
------------------------------------
 
 local quest = Quest:new(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.KEEPING_NOTES)
 
@@ -50,7 +46,7 @@ quest.sections =
                 end,
 
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, { xi.items.SHEET_OF_PARCHMENT, xi.items.JAR_OF_BLACK_INK }) then
+                    if npcUtil.tradeHasExactly(trade, { xi.item.SHEET_OF_PARCHMENT, xi.item.JAR_OF_BLACK_INK }) then
                         return quest:progressEvent(11)
                     else
                         return quest:event(14)
@@ -86,7 +82,7 @@ quest.sections =
                 end,
 
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, xi.items.SHEET_OF_PARCHMENT) then
+                    if npcUtil.tradeHasExactly(trade, xi.item.SHEET_OF_PARCHMENT) then
                         return quest:event(13)
                     else
                         return quest:event(14)

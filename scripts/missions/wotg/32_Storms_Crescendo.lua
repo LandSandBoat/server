@@ -5,10 +5,7 @@
 -- !addmission 5 31
 -- Rally Point: Green : !pos 54.013 -23.402 -203.103 137
 -----------------------------------
-require('scripts/globals/missions')
-require('scripts/globals/interaction/mission')
------------------------------------
-local pastXarcabardID = require('scripts/zones/Xarcabard_[S]/IDs')
+local pastXarcabardID = zones[xi.zone.XARCABARD_S]
 -----------------------------------
 
 local mission = Mission:new(xi.mission.log_id.WOTG, xi.mission.id.wotg.STORMS_CRESCENDO)

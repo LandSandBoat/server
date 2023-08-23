@@ -3,7 +3,7 @@
 --  Mob: Platoon Scorpion
 -- BCNM: Operation Desert Swarm
 -----------------------------------
-local ID = require("scripts/zones/Waughroon_Shrine/IDs")
+local ID = zones[xi.zone.WAUGHROON_SHRINE]
 -----------------------------------
 local entity = {}
 

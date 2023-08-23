@@ -1661,11 +1661,11 @@ xi.bcnm.onTrade = function(player, npc, trade, onUpdate)
         return false
 
     -- Chips for limbus
-    elseif npcUtil.tradeHasExactly(trade, { xi.items.SILVER_CHIP, xi.items.CERULEAN_CHIP, xi.items.ORCHID_CHIP }) then
+    elseif npcUtil.tradeHasExactly(trade, { xi.item.SILVER_CHIP, xi.item.CERULEAN_CHIP, xi.item.ORCHID_CHIP }) then
         itemId = -1
 
     -- Chips for limbus
-    elseif npcUtil.tradeHasExactly(trade, { xi.items.SMALT_CHIP, xi.items.SMOKY_CHIP, xi.items.CHARCOAL_CHIP, xi.items.MAGENTA_CHIP }) then
+    elseif npcUtil.tradeHasExactly(trade, { xi.item.SMALT_CHIP, xi.item.SMOKY_CHIP, xi.item.CHARCOAL_CHIP, xi.item.MAGENTA_CHIP }) then
         itemId = -2
 
     -- Orbs / Testimonies

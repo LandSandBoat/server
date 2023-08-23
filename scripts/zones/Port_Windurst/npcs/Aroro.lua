@@ -3,8 +3,7 @@
 --  NPC: Aroro
 -- Standard Merchant NPC
 -----------------------------------
-local ID = require("scripts/zones/Port_Windurst/IDs")
-require("scripts/globals/shop")
+local ID = zones[xi.zone.PORT_WINDURST]
 -----------------------------------
 local entity = {}
 

@@ -3,8 +3,6 @@
 --  NPC: Roderich
 -- Involved in Quests: The Fighting Fourth
 -----------------------------------
-require("scripts/globals/quests")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

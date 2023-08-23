@@ -2,8 +2,6 @@
 -- Area: Cloister of Tremors
 -- BCNM: Class Reunion
 -----------------------------------
-require("scripts/globals/battlefield")
------------------------------------
 local battlefieldObject = {}
 
 battlefieldObject.onBattlefieldTick = function(battlefield, tick)

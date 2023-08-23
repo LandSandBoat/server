@@ -2,7 +2,7 @@
 -- Area: Sealion's Den
 --  Mob: Tenzen
 -----------------------------------
-local ID = require("scripts/zones/Sealions_Den/IDs")
+local ID = zones[xi.zone.SEALIONS_DEN]
 local tenzenFunctions = require("scripts/zones/Sealions_Den/helpers/TenzenFunctions")
 -----------------------------------
 local entity = {}

@@ -2,7 +2,7 @@
 -- Area: QuBia_Arena
 -- Globals
 -----------------------------------
-local ID = require("scripts/zones/QuBia_Arena/IDs")
+local ID = zones[xi.zone.QUBIA_ARENA]
 local global = {}
 
 -----------------------------------

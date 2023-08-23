@@ -1,8 +1,7 @@
 -----------------------------------
 -- Zone: Grauberg_[S] (89)
 -----------------------------------
-local ID = require('scripts/zones/Grauberg_[S]/IDs')
-require('scripts/globals/helm')
+local ID = zones[xi.zone.GRAUBERG_S]
 -----------------------------------
 local zoneObject = {}
 

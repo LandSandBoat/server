@@ -3,7 +3,7 @@
 --  NPC: Prouminnet
 -- !pos -81 8 53 246
 -----------------------------------
-local ID = require("scripts/zones/Port_Jeuno/IDs")
+local ID = zones[xi.zone.PORT_JEUNO]
 -----------------------------------
 local entity = {}
 

@@ -4,10 +4,6 @@
 -- Log ID: 4, Quest ID: 30
 -- Keshab-Menjab : !pos -15.6 -8 52 249
 -----------------------------------
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
-require('scripts/globals/interaction/quest')
------------------------------------
 
 local quest = Quest:new(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.RECYCLING_RODS)
 
@@ -52,7 +48,7 @@ quest.sections =
                 end,
 
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, xi.items.CLEAN_SNAP_ROD) then
+                    if npcUtil.tradeHasExactly(trade, xi.item.CLEAN_SNAP_ROD) then
                         return quest:progressEvent(317)
                     else
                         return quest:event(316)

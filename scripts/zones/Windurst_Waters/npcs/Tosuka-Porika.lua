@@ -6,10 +6,7 @@
 -- Involved in Missions: Windurst 2-1/7-1/8-2, CoP 3-3
 -- !pos -26 -6 103 238
 -----------------------------------
-local ID = require("scripts/zones/Windurst_Waters/IDs")
-require("scripts/globals/missions")
-require("scripts/globals/npc_util")
-require("scripts/globals/quests")
+local ID = zones[xi.zone.WINDURST_WATERS]
 -----------------------------------
 local entity = {}
 

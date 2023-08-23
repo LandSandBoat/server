@@ -4,8 +4,7 @@
 -- Type: Purifies cursed items with their corresponding abjurations.
 -- !pos 98.108 -1 137.999 231
 -----------------------------------
-require('scripts/globals/abjurations')
-local nsandyID = require('scripts/zones/Northern_San_dOria/IDs')
+local nsandyID = zones[xi.zone.NORTHERN_SAN_DORIA]
 -----------------------------------
 local entity = {}
 

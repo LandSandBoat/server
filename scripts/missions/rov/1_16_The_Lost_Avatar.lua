@@ -5,11 +5,7 @@
 -- !addmission 13 36
 -- qm11 : !pos -409.553 17.356 -380.626 123
 -----------------------------------
-require('scripts/globals/missions')
-require('scripts/globals/npc_util')
-require('scripts/globals/interaction/mission')
------------------------------------
-local yuhtungaID = require("scripts/zones/Yuhtunga_Jungle/IDs")
+local yuhtungaID = zones[xi.zone.YUHTUNGA_JUNGLE]
 -----------------------------------
 
 local mission = Mission:new(xi.mission.log_id.ROV, xi.mission.id.rov.THE_LOST_AVATAR)

@@ -1,11 +1,7 @@
 -----------------------------------
 -- Area: Western Adoulin
 --  NPC: Bilp
--- Type: Standard NPC and Quest NPC
--- Starts and Involved with Quest: 'Scaredy-Cats'
 -- !pos -91 3 0 256
------------------------------------
-require("scripts/globals/quests")
 -----------------------------------
 local entity = {}
 

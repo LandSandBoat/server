@@ -6,10 +6,6 @@
 -- Walnut Door    : !pos 111 -41 41 26
 -- Sewer Entrance : !pos 28 -12 44 26
 -----------------------------------
-require('scripts/globals/interaction/mission')
-require('scripts/globals/missions')
-require('scripts/globals/utils')
------------------------------------
 
 local mission = Mission:new(xi.mission.log_id.COP, xi.mission.id.cop.CHAINS_AND_BONDS)
 
@@ -39,14 +35,14 @@ mission.sections =
             onEventUpdate =
             {
                 [111] = function(player, csid, option, npc)
-                    player:updateEvent(0, xi.items.DUCAL_GUARDS_RING)
+                    player:updateEvent(0, xi.item.DUCAL_GUARDS_RING)
                 end,
             },
 
             onEventFinish =
             {
                 [111] = function(player, csid, option, npc)
-                    if npcUtil.giveItem(player, xi.items.DUCAL_GUARDS_RING) then
+                    if npcUtil.giveItem(player, xi.item.DUCAL_GUARDS_RING) then
                         mission:setVar(player, 'Status', 1)
                     end
                 end,

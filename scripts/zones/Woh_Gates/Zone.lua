@@ -1,8 +1,6 @@
 -----------------------------------
 -- Zone: Woh Gates
 -----------------------------------
-local ID = require('scripts/zones/Woh_Gates/IDs')
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

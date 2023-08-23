@@ -2,8 +2,6 @@
 -- Area: Mog Dinghy
 -- !zone 280
 -----------------------------------
-local ID = require("scripts/zones/Mog_Garden/IDs")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

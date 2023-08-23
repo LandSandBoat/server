@@ -4,10 +4,7 @@
 -- Type: Sigil NPC
 -- !pos -31.869 -6.009 226.793 94
 -----------------------------------
-local ID = require("scripts/zones/Windurst_Waters_[S]/IDs")
-require("scripts/globals/campaign")
-require("scripts/globals/utils")
-require("scripts/globals/extravaganza")
+local ID = zones[xi.zone.WINDURST_WATERS_S]
 -----------------------------------
 local entity = {}
 

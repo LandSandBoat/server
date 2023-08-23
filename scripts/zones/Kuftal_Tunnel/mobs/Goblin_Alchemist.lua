@@ -2,8 +2,6 @@
 -- Area: Kuftal Tunnel
 --  Mob: Goblin Alchemist
 -----------------------------------
-require("scripts/globals/regimes")
------------------------------------
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

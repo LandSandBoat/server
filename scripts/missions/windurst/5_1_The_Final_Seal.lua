@@ -9,11 +9,6 @@
 -- Zokima-Rokima         : !pos 0 -16 124 239
 -- Vestal Chamber (_6q2) : !pos 0.1 -49 37 242
 -----------------------------------
-require('scripts/globals/missions')
-require('scripts/globals/npc_util')
-require('scripts/globals/titles')
-require('scripts/globals/interaction/mission')
------------------------------------
 
 local mission = Mission:new(xi.mission.log_id.WINDURST, xi.mission.id.windurst.THE_FINAL_SEAL)
 

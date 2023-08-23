@@ -4,8 +4,7 @@
 -- Used in quest Even More Gullible Travels
 -- !pos -468.876 -1 220.247 123 <many>
 -----------------------------------
-local ID = require("scripts/zones/Yuhtunga_Jungle/IDs")
-require("scripts/globals/quests")
+local ID = zones[xi.zone.YUHTUNGA_JUNGLE]
 -----------------------------------
 local entity = {}
 
@@ -94,14 +93,14 @@ entity.onEventFinish = function(player, csid, option, npc)
             player:setCharVar("BathedInScent", 1)
             player:setCharVar("RafflesiaScentDay", VanadielDayOfTheYear())
             player:setCharVar("RafflesiaScentYear", VanadielYear())
-            npcUtil.giveItem(player, xi.items.JAR_OF_RAFFLESIA_NECTAR)
+            npcUtil.giveItem(player, xi.item.JAR_OF_RAFFLESIA_NECTAR)
             player:messageSpecial(ID.text.FEEL_DIZZY) -- You feel slightly dizzy. You must have breathed in too much of the pollen.
             if evenmoreTravelsStatus == QUEST_ACCEPTED then
                 player:setCharVar("EVEN_MORE_GULLIBLES_PROGRESS", 2)
             end
         else
             player:setCharVar("FirstBlueRafflesiaCS", 1)
-            npcUtil.giveItem(player, xi.items.JAR_OF_RAFFLESIA_NECTAR)
+            npcUtil.giveItem(player, xi.item.JAR_OF_RAFFLESIA_NECTAR)
         end
     elseif csid == 22 and option == 1 then
         if
@@ -113,14 +112,14 @@ entity.onEventFinish = function(player, csid, option, npc)
             player:setCharVar("BathedInScent", 1)
             player:setCharVar("RafflesiaScentDay", VanadielDayOfTheYear())
             player:setCharVar("RafflesiaScentYear", VanadielYear())
-            npcUtil.giveItem(player, xi.items.JAR_OF_RAFFLESIA_NECTAR)
+            npcUtil.giveItem(player, xi.item.JAR_OF_RAFFLESIA_NECTAR)
             player:messageSpecial(ID.text.FEEL_DIZZY) -- You feel slightly dizzy. You must have breathed in too much of the pollen.
             if evenmoreTravelsStatus == QUEST_ACCEPTED then
                 player:setCharVar("EVEN_MORE_GULLIBLES_PROGRESS", 2)
             end
         else
             player:setCharVar("SecondBlueRafflesiaCS", 1)
-            npcUtil.giveItem(player, xi.items.JAR_OF_RAFFLESIA_NECTAR)
+            npcUtil.giveItem(player, xi.item.JAR_OF_RAFFLESIA_NECTAR)
         end
     elseif csid == 23 and option == 1 then
         if
@@ -132,14 +131,14 @@ entity.onEventFinish = function(player, csid, option, npc)
             player:setCharVar("BathedInScent", 1)
             player:setCharVar("RafflesiaScentDay", VanadielDayOfTheYear())
             player:setCharVar("RafflesiaScentYear", VanadielYear())
-            npcUtil.giveItem(player, xi.items.JAR_OF_RAFFLESIA_NECTAR)
+            npcUtil.giveItem(player, xi.item.JAR_OF_RAFFLESIA_NECTAR)
             player:messageSpecial(ID.text.FEEL_DIZZY) -- You feel slightly dizzy. You must have breathed in too much of the pollen.
             if evenmoreTravelsStatus == QUEST_ACCEPTED then
                 player:setCharVar("EVEN_MORE_GULLIBLES_PROGRESS", 2)
             end
         else
             player:setCharVar("ThirdBlueRafflesiaCS", 1)
-            npcUtil.giveItem(player, xi.items.JAR_OF_RAFFLESIA_NECTAR)
+            npcUtil.giveItem(player, xi.item.JAR_OF_RAFFLESIA_NECTAR)
         end
     end
 end

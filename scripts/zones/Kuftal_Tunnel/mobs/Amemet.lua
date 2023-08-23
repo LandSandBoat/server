@@ -2,7 +2,6 @@
 --  Area: Kuftal Tunnel
 --  NM: Amemet
 ---------------------------------
-require("scripts/globals/hunts")
 ---------------------------------
 local entity = {}
 

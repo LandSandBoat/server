@@ -1,10 +1,6 @@
 -----------------------------------
 -- Zone: VeLugannon_Palace (177)
 -----------------------------------
-local ID = require('scripts/zones/VeLugannon_Palace/IDs')
-require('scripts/globals/conquest')
-require('scripts/globals/treasure')
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

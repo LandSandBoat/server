@@ -5,9 +5,6 @@
 -- !addmission 12 5
 -- WESTERN_ADOULIN : !zone 256
 -----------------------------------
-require('scripts/globals/missions')
-require('scripts/globals/interaction/mission')
------------------------------------
 
 local mission = Mission:new(xi.mission.log_id.SOA, xi.mission.id.soa.HEARTWINGS_AND_THE_KINDHEARTED)
 

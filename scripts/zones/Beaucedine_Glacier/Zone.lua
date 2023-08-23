@@ -1,9 +1,8 @@
 -----------------------------------
 -- Zone: Beaucedine_Glacier (111)
 -----------------------------------
-local ID = require('scripts/zones/Beaucedine_Glacier/IDs')
+local ID = zones[xi.zone.BEAUCEDINE_GLACIER]
 require('scripts/quests/i_can_hear_a_rainbow')
-require('scripts/globals/conquest')
 -----------------------------------
 local zoneObject = {}
 

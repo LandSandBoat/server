@@ -7,11 +7,6 @@
 -- Osker   : !pos -61.42 8.2 94.2 244
 -- _6t2    : !pos -88.2 -7.65 -168.8 245
 -----------------------------------
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
-require('scripts/globals/titles')
-require('scripts/globals/interaction/quest')
------------------------------------
 
 local quest = Quest:new(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.CHOCOBOS_WOUNDS)
 
@@ -125,9 +120,9 @@ quest.sections =
             ['Chocobo'] =
             {
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, xi.items.BUNCH_OF_GYSAHL_GREENS) then
+                    if npcUtil.tradeHasExactly(trade, xi.item.BUNCH_OF_GYSAHL_GREENS) then
                         return quest:progressEvent(76)
-                    elseif npcUtil.tradeHasExactly(trade, xi.items.CLUMP_OF_GAUSEBIT_WILDGRASS) then
+                    elseif npcUtil.tradeHasExactly(trade, xi.item.CLUMP_OF_GAUSEBIT_WILDGRASS) then
                         if quest:getVar(player, 'Timer') <= os.time() then
                             return quest:progressEvent(chocoboFeedTrades[quest:getVar(player, 'Prog')])
                         else

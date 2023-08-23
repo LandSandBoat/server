@@ -3,8 +3,7 @@
 --  NPC: Keal
 -- Starts and Ends Quest: It's Not Your Vault
 -----------------------------------
-local ID = require("scripts/zones/Norg/IDs")
-require("scripts/globals/quests")
+local ID = zones[xi.zone.NORG]
 -----------------------------------
 local entity = {}
 
@@ -100,11 +99,11 @@ entity.onEventFinish = function(player, csid, option, npc)
         player:addQuest(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.ITS_NOT_YOUR_VAULT)
     elseif csid == 38 then
         if player:getFreeSlotsCount() == 0 then
-            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.items.SCROLL_OF_TONKO_ICHI)
+            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.item.SCROLL_OF_TONKO_ICHI)
         else
             player:delKeyItem(xi.ki.SEALED_IRON_BOX)
-            player:addItem(xi.items.SCROLL_OF_TONKO_ICHI) -- Scroll of Tonko: Ichi
-            player:messageSpecial(ID.text.ITEM_OBTAINED, xi.items.SCROLL_OF_TONKO_ICHI)
+            player:addItem(xi.item.SCROLL_OF_TONKO_ICHI) -- Scroll of Tonko: Ichi
+            player:messageSpecial(ID.text.ITEM_OBTAINED, xi.item.SCROLL_OF_TONKO_ICHI)
             player:addFame(xi.quest.fame_area.NORG, 50)
             player:completeQuest(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.ITS_NOT_YOUR_VAULT)
         end

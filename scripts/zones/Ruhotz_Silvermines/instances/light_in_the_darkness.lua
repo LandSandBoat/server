@@ -17,8 +17,7 @@
 -- - They have True Hearing.
 -- - Trusts are allowed.
 -----------------------------------
-require("scripts/globals/instance")
-local ID = require("scripts/zones/Ruhotz_Silvermines/IDs")
+local ID = zones[xi.zone.RUHOTZ_SILVERMINES]
 -----------------------------------
 local instanceObject = {}
 

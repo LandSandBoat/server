@@ -9,7 +9,7 @@ local entity = {}
 entity.onTrade = function(player, npc, trade)
     if
         trade:getItemCount() == 1 and
-        trade:hasItemQty(xi.items.IMPERIAL_SILVER_PIECE, 1)
+        trade:hasItemQty(xi.item.IMPERIAL_SILVER_PIECE, 1)
     then
         player:tradeComplete()
         player:setPos(-458, -16, 0, 189) -- using the pos method until the problem below is fixed

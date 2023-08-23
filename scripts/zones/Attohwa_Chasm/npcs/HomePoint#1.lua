@@ -2,8 +2,6 @@
 -- Area: Attohwa Chasm
 --  NPC: HomePoint#2
 -----------------------------------
-require("scripts/globals/homepoint")
------------------------------------
 local entity = {}
 
 local hpEvent = 8700

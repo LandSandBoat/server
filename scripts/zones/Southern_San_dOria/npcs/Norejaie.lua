@@ -4,11 +4,6 @@
 -- Type: Quest NPC - Involved in Eco-Warrior (San d'Oria)
 -- !pos 83.924 1 110.54 230
 -----------------------------------
-local ID = require("scripts/zones/Southern_San_dOria/IDs")
-require("scripts/globals/npc_util")
-require("scripts/globals/quests")
-require("scripts/globals/titles")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

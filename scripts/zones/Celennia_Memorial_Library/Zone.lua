@@ -1,8 +1,6 @@
 -----------------------------------
 -- Zone: Celennia Memorial Library (284)
 -----------------------------------
-local ID = require('scripts/zones/Celennia_Memorial_Library/IDs')
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

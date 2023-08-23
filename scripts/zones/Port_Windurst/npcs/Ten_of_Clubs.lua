@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Port Windurst
 --  NPC: Ten of Clubs
--- Type: Standard NPC
 -- !pos -229.393 -9.2 182.696 240
 -----------------------------------
 local entity = {}

@@ -2,8 +2,6 @@
 -- Area: Promyvion-Vahzl
 --   NM: Stray
 -----------------------------------
-require("scripts/globals/promyvion")
------------------------------------
 local entity = {}
 
 entity.onMobSpawn = function(mob)

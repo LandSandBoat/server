@@ -5,9 +5,7 @@
 --                        'The Curious Case of Melvien'
 -- !pos -9 0 67 256
 -----------------------------------
-local ID = require("scripts/zones/Western_Adoulin/IDs")
-require("scripts/globals/quests")
-require("scripts/globals/utils")
+local ID = zones[xi.zone.WESTERN_ADOULIN]
 -----------------------------------
 local entity = {}
 

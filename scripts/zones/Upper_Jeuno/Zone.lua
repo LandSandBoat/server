@@ -1,10 +1,6 @@
 -----------------------------------
 -- Zone: Upper_Jeuno (244)
 -----------------------------------
-local ID = require('scripts/zones/Upper_Jeuno/IDs')
-require('scripts/globals/conquest')
-require('scripts/globals/chocobo')
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

@@ -2,8 +2,6 @@
 -- Zone: Grand_Palace_of_HuXzoi (34)
 -----------------------------------
 local huxzoiGlobal = require('scripts/zones/Grand_Palace_of_HuXzoi/globals')
-local ID = require('scripts/zones/Grand_Palace_of_HuXzoi/IDs')
-require('scripts/globals/conquest')
 -----------------------------------
 local zoneObject = {}
 

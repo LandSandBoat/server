@@ -3,9 +3,7 @@
 --  Mob: Cursed Weapon
 -- Note: PH for Barbaric Weapon
 -----------------------------------
-local ID = require("scripts/zones/Xarcabard/IDs")
-require("scripts/globals/regimes")
-require("scripts/globals/mobs")
+local ID = zones[xi.zone.XARCABARD]
 -----------------------------------
 local entity = {}
 

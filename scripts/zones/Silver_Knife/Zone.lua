@@ -1,8 +1,6 @@
 -----------------------------------
 -- Zone: Silver Knife
 -----------------------------------
-local ID = require('scripts/zones/Silver_Knife/IDs')
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

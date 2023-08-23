@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Windurst Waters (S)
 --  NPC: Ajen-Myoojen
--- Type: Standard NPC
 -- !pos -44.542 -5.999 238.996 94
 -----------------------------------
 local entity = {}

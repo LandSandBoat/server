@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Heavens Tower
 --  NPC: Mashua
--- Type: Standard NPC
 -- !pos -7.399 -0.5 4.580 242
 -----------------------------------
 local entity = {}

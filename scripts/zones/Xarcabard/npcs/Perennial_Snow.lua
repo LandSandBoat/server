@@ -4,8 +4,7 @@
 -- Involved in Quests: The Circle of Time
 -- !pos 339 0 -379 112
 -----------------------------------
-local ID = require("scripts/zones/Xarcabard/IDs")
-require("scripts/globals/quests")
+local ID = zones[xi.zone.XARCABARD]
 -----------------------------------
 local entity = {}
 

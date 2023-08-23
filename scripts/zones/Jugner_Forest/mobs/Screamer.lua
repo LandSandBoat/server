@@ -2,8 +2,6 @@
 -- Area: Jugner Forest
 --  Mob: Screamer
 -----------------------------------
-require("scripts/globals/regimes")
------------------------------------
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

@@ -8,9 +8,6 @@
 -- Abd-al-Raziq  : !pos 126.7 2.0 -0.23 234
 -- Trodden Snow  : !pos -19.7 -17.3 104.4 126
 -----------------------------------
-require('scripts/globals/missions')
-require('scripts/globals/interaction/mission')
------------------------------------
 
 local mission = Mission:new(xi.mission.log_id.ASA, xi.mission.id.asa.THAT_WHICH_CURDLES_BLOOD)
 
@@ -55,17 +52,17 @@ mission.sections =
                 onTrigger = function(player, npc)
                     local potionInfo =
                     {
-                        { xi.items.ENFEEBLEMENT_KIT_OF_POISON, xi.items.FLASK_OF_POISON_POTION },
-                        { xi.items.ENFEEBLEMENT_KIT_OF_BLINDNES, xi.items.FLASK_OF_BLINDNESS_POTION },
-                        { xi.items.ENFEEBLEMENT_KIT_OF_SLEEP, xi.items.FLASK_OF_SLEEPING_POTION },
-                        { xi.items.ENFEEBLEMENT_KIT_OF_SILENCE, xi.items.FLASK_OF_SILENCING_POTION }
+                        { xi.item.ENFEEBLEMENT_KIT_OF_POISON, xi.item.FLASK_OF_POISON_POTION },
+                        { xi.item.ENFEEBLEMENT_KIT_OF_BLINDNES, xi.item.FLASK_OF_BLINDNESS_POTION },
+                        { xi.item.ENFEEBLEMENT_KIT_OF_SLEEP, xi.item.FLASK_OF_SLEEPING_POTION },
+                        { xi.item.ENFEEBLEMENT_KIT_OF_SILENCE, xi.item.FLASK_OF_SILENCING_POTION }
                     }
 
                     local kit = mission:getVar(player, 'Option')
 
                     for _, potionData in ipairs(potionInfo) do
                         if kit == potionData[1] then
-                            return mission:progressEvent(858, kit, xi.items.SHEET_OF_BAST_PARCHMENT, 0, xi.items.INFERIOR_COCOON, potionData[2], xi.items.EARTH_CRYSTAL)
+                            return mission:progressEvent(858, kit, xi.item.SHEET_OF_BAST_PARCHMENT, 0, xi.item.INFERIOR_COCOON, potionData[2], xi.item.EARTH_CRYSTAL)
                         end
                     end
                 end,
@@ -79,7 +76,7 @@ mission.sections =
                 onTrigger = function(player, npc)
                     local kit = mission:getVar(player, 'Option')
 
-                    return mission:progressEvent(944, kit, xi.items.SHEET_OF_FINE_PARCHMENT, xi.items.SHEET_OF_PARCHMENT, xi.items.SHEET_OF_PARCHMENT, xi.items.PUMICE_STONE, xi.items.DARK_CRYSTAL)
+                    return mission:progressEvent(944, kit, xi.item.SHEET_OF_FINE_PARCHMENT, xi.item.SHEET_OF_PARCHMENT, xi.item.SHEET_OF_PARCHMENT, xi.item.PUMICE_STONE, xi.item.DARK_CRYSTAL)
                 end,
             },
         },
@@ -91,7 +88,7 @@ mission.sections =
                 onTrigger = function(player, npc)
                     local kit = mission:getVar(player, 'Option')
 
-                    return mission:progressEvent(590, kit, xi.items.JAR_OF_ENCHANTED_INK, xi.items.JAR_OF_BLACK_INK, xi.items.DARK_CRYSTAL, xi.items.VIAL_OF_MAGICKED_BLOOD, xi.items.DARK_CRYSTAL)
+                    return mission:progressEvent(590, kit, xi.item.JAR_OF_ENCHANTED_INK, xi.item.JAR_OF_BLACK_INK, xi.item.DARK_CRYSTAL, xi.item.VIAL_OF_MAGICKED_BLOOD, xi.item.DARK_CRYSTAL)
                 end,
             },
         },

@@ -4,7 +4,9 @@
 require("scripts/globals/ability")
 require("scripts/globals/job_utils/dragoon")
 -----------------------------------
-local entity = {}
+xi = xi or {}
+xi.pets = xi.pets or {}
+xi.pets.wyvern = {}
 
 local wyvernCapabilities =
 {
@@ -108,7 +110,7 @@ local function doStatusBreath(target, player)
     return false
 end
 
-entity.onMobSpawn = function(mob)
+xi.pets.wyvern.onMobSpawn = function(mob)
     local master = mob:getMaster()
 
     if master:getMod(xi.mod.WYVERN_SUBJOB_TRAITS) > 0 then
@@ -192,7 +194,7 @@ local function removeWyvernLevels(mob)
     end
 end
 
-entity.onMobDeath = function(mob, player)
+xi.pets.wyvern.onMobDeath = function(mob, player)
     removeWyvernLevels(mob)
 
     local master  = mob:getMaster()
@@ -203,10 +205,8 @@ entity.onMobDeath = function(mob, player)
     master:removeListener("PET_WYVERN_EXP")
 end
 
-entity.onPetLevelRestriction = function(pet)
+xi.pets.wyvern.onPetLevelRestriction = function(pet)
     removeWyvernLevels(pet)
     pet:setLocalVar("wyvern_exp", 0)
     pet:setLocalVar("level_Ups", 0)
 end
-
-return entity

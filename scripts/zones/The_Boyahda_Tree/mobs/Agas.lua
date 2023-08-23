@@ -2,8 +2,6 @@
 -- Area: The Boyahda Tree
 --   NM: Agas
 -----------------------------------
-require("scripts/globals/quests")
------------------------------------
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

@@ -5,8 +5,7 @@
 -- Starts and Finishes Quests: Path of the Bard (just start), The Requiem (BARD AF2)
 -- !pos -22 0 -60 245
 -----------------------------------
-local ID = require("scripts/zones/Lower_Jeuno/IDs")
-require("scripts/globals/quests")
+local ID = zones[xi.zone.LOWER_JEUNO]
 -----------------------------------
 local entity = {}
 
@@ -15,7 +14,7 @@ entity.onTrade = function(player, npc, trade)
     if
         player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_REQUIEM) == QUEST_ACCEPTED and
         player:getCharVar("TheRequiemCS") == 2 and
-        trade:hasItemQty(xi.items.FLASK_OF_HOLY_WATER, 1) and
+        trade:hasItemQty(xi.item.FLASK_OF_HOLY_WATER, 1) and
         trade:getItemCount() == 1
     then
         player:startEvent(151)
@@ -97,15 +96,15 @@ entity.onEventFinish = function(player, csid, option, npc)
 
     elseif csid == 151 then
         player:setCharVar("TheRequiemCS", 3)
-        player:messageSpecial(ID.text.ITEM_OBTAINED, xi.items.FLASK_OF_HOLY_WATER) -- Holy Water (just message)
+        player:messageSpecial(ID.text.ITEM_OBTAINED, xi.item.FLASK_OF_HOLY_WATER) -- Holy Water (just message)
         player:setCharVar("TheRequiemRandom", math.random(1, 5)) -- pick a random sarcophagus
 
     elseif csid == 150 then
         if player:getFreeSlotsCount() == 0 then
-            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.items.CHORAL_SLIPPERS)
+            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.item.CHORAL_SLIPPERS)
         else
-            player:addItem(xi.items.CHORAL_SLIPPERS)
-            player:messageSpecial(ID.text.ITEM_OBTAINED, xi.items.CHORAL_SLIPPERS)
+            player:addItem(xi.item.CHORAL_SLIPPERS)
+            player:messageSpecial(ID.text.ITEM_OBTAINED, xi.item.CHORAL_SLIPPERS)
             player:addFame(xi.quest.fame_area.JEUNO, 30)
             player:completeQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_REQUIEM)
         end

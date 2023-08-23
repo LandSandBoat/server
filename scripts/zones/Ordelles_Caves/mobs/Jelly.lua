@@ -3,9 +3,7 @@
 --  Mob: Jelly
 -- Note: PH for Agar Agar
 -----------------------------------
-local ID = require("scripts/zones/Ordelles_Caves/IDs")
-require("scripts/globals/regimes")
-require("scripts/globals/mobs")
+local ID = zones[xi.zone.ORDELLES_CAVES]
 -----------------------------------
 local entity = {}
 

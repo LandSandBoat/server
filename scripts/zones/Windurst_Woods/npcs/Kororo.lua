@@ -1,14 +1,11 @@
 -----------------------------------
 -- Area: Windurst Woods
 --  NPC: Kororo
--- Type: Standard NPC
 -- !pos -11.883 -3.75 5.508 241
 -- Starts quest: A Greeting Cardian
 -- Involved in quests: Lost Chick
 -----------------------------------
-local ID = require("scripts/zones/Windurst_Woods/IDs")
-require("scripts/globals/quests")
-require("scripts/globals/titles")
+local ID = zones[xi.zone.WINDURST_WOODS]
 -----------------------------------
 local entity = {}
 
@@ -65,10 +62,10 @@ entity.onEventFinish = function(player, csid, option, npc)
         player:setCharVar("AGreetingCardian_Event", 4)
     elseif csid == 303 then
         if player:getFreeSlotsCount() == 0 then
-            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.items.TOURMALINE_EARRING) -- Tourmaline Earring
+            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.item.TOURMALINE_EARRING) -- Tourmaline Earring
         else
-            player:addItem(xi.items.TOURMALINE_EARRING)
-            player:messageSpecial(ID.text.ITEM_OBTAINED, xi.items.TOURMALINE_EARRING) -- Tourmaline Earring
+            player:addItem(xi.item.TOURMALINE_EARRING)
+            player:messageSpecial(ID.text.ITEM_OBTAINED, xi.item.TOURMALINE_EARRING) -- Tourmaline Earring
             player:addFame(xi.quest.fame_area.WINDURST, 30)
             player:completeQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.A_GREETING_CARDIAN)
             player:needToZone(true) -- zone before starting Legendary Plan B

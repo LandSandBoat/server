@@ -3,23 +3,20 @@
 --  NPC: Fyi_Chalmwoh
 -- !pos -39.273 -16.000 70.126 249
 -----------------------------------
-require("scripts/globals/quests")
-local ID = require("scripts/zones/Mhaura/IDs")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     --local rainingMannequins = player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.ITS_RAINING_MANNEQUINS)
     --if rainingMannequins == QUEST_COMPLETED then
     --    if
-    --        (npcUtil.tradeHasExactly(trade, { xi.items.HUME_M_MANNEQUIN }) or
-    --        npcUtil.tradeHasExactly(trade, { xi.items.HUME_F_MANNEQUIN }) or
-    --        npcUtil.tradeHasExactly(trade, { xi.items.ELVAAN_M_MANNEQUIN }) or
-    --        npcUtil.tradeHasExactly(trade, { xi.items.ELVAAN_F_MANNEQUIN }) or
-    --        npcUtil.tradeHasExactly(trade, { xi.items.TARUTARU_M_MANNEQUIN }) or
-    --        npcUtil.tradeHasExactly(trade, { xi.items.TARUTARU_F_MANNEQUIN }) or
-    --        npcUtil.tradeHasExactly(trade, { xi.items.MITHRA_MANNEQUIN }) or
-    --        npcUtil.tradeHasExactly(trade, { xi.items.GALKA_MANNEQUIN })) and
+    --        (npcUtil.tradeHasExactly(trade, { xi.item.HUME_M_MANNEQUIN }) or
+    --        npcUtil.tradeHasExactly(trade, { xi.item.HUME_F_MANNEQUIN }) or
+    --        npcUtil.tradeHasExactly(trade, { xi.item.ELVAAN_M_MANNEQUIN }) or
+    --        npcUtil.tradeHasExactly(trade, { xi.item.ELVAAN_F_MANNEQUIN }) or
+    --        npcUtil.tradeHasExactly(trade, { xi.item.TARUTARU_M_MANNEQUIN }) or
+    --        npcUtil.tradeHasExactly(trade, { xi.item.TARUTARU_F_MANNEQUIN }) or
+    --        npcUtil.tradeHasExactly(trade, { xi.item.MITHRA_MANNEQUIN }) or
+    --        npcUtil.tradeHasExactly(trade, { xi.item.GALKA_MANNEQUIN })) and
     --        player:getGil() >= 2000
     --    then
     --        player:startEvent(319, 2, 0, 100000, 2000, 0, 0, 4095, 0)

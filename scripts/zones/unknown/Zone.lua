@@ -1,8 +1,6 @@
 -----------------------------------
 -- Zone: unknown (0)
 -----------------------------------
-local ID = require('scripts/zones/unknown/IDs')
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

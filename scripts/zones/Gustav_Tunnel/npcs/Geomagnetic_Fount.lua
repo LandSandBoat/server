@@ -3,9 +3,6 @@
 --  NPC: Geomagnetic Fount
 -- !pos -71.932 -8.897 -209.707
 -----------------------------------
-local ID = require("scripts/zones/Gustav_Tunnel/IDs")
-require("scripts/globals/geomagnetic_fount")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

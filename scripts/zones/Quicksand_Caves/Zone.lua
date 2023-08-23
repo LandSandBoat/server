@@ -1,10 +1,7 @@
 -----------------------------------
 -- Zone: Quicksand_Caves (208)
 -----------------------------------
-local ID = require('scripts/zones/Quicksand_Caves/IDs')
-require('scripts/globals/conquest')
-require('scripts/globals/npc_util')
-require('scripts/globals/treasure')
+local ID = zones[xi.zone.QUICKSAND_CAVES]
 -----------------------------------
 local zoneObject = {}
 

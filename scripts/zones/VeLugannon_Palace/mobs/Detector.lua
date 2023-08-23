@@ -2,8 +2,7 @@
 -- Area: VeLugannon Palace
 --  Mob: Detector
 -----------------------------------
-local ID = require("scripts/zones/VeLugannon_Palace/IDs")
-require("scripts/globals/regimes")
+local ID = zones[xi.zone.VELUGANNON_PALACE]
 -----------------------------------
 local entity = {}
 

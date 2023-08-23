@@ -7,16 +7,12 @@
 -- Childerich   - !pos -313 16 -515 89
 -- qm3          - !pos 439 -40 79 89
 -----------------------------------
-require('scripts/globals/interaction/quest')
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
------------------------------------
 
 local quest = Quest:new(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.MESSAGE_ON_THE_WINDS)
 
 quest.reward =
 {
-    item = xi.items.SMART_GRENADE,
+    item = xi.item.SMART_GRENADE,
 }
 
 quest.sections =

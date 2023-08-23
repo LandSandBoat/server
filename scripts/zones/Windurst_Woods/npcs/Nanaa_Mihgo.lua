@@ -6,13 +6,7 @@
 -- Involved in Mission 2-1
 -- !pos 62 -4 240 241
 -----------------------------------
-local ID = require("scripts/zones/Windurst_Woods/IDs")
-require("scripts/globals/magic")
-require("scripts/globals/missions")
-require("scripts/globals/npc_util")
-require("scripts/globals/quests")
-require("scripts/globals/titles")
-require("scripts/globals/utils")
+local ID = zones[xi.zone.WINDURST_WOODS]
 -----------------------------------
 local entity = {}
 
@@ -39,7 +33,7 @@ local trustMemory = function(player)
     end
 
     -- 32 - hasItem(286) Nanaa Mihgo statue
-    if player:hasItem(xi.items.NANAA_MIHGO_STATUE) then
+    if player:hasItem(xi.item.NANAA_MIHGO_STATUE) then
         memories = memories + 32
     end
 

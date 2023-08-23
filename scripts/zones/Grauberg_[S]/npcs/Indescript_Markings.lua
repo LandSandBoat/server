@@ -3,8 +3,7 @@
 --  NPC: Indescript Markings
 -- Type: Quest
 -----------------------------------
-local ID = require("scripts/zones/Grauberg_[S]/IDs")
-require("scripts/globals/npc_util")
+local ID = zones[xi.zone.GRAUBERG_S]
 -----------------------------------
 local entity = {}
 

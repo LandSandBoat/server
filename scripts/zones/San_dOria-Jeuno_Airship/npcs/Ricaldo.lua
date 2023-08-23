@@ -2,7 +2,7 @@
 -- Area: San d'Oria-Jeuno Airship
 --  NPC: Ricaldo
 -----------------------------------
-local ID = require("scripts/zones/San_dOria-Jeuno_Airship/IDs")
+local ID = zones[xi.zone.SAN_DORIA_JEUNO_AIRSHIP]
 -----------------------------------
 local entity = {}
 

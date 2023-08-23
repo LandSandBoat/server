@@ -5,10 +5,7 @@
 -- !pos -3 0 11 245
 -----------------------------------
 require("scripts/zones/Lower_Jeuno/globals")
-local ID = require("scripts/zones/Lower_Jeuno/IDs")
-require("scripts/globals/npc_util")
-require("scripts/globals/quests")
-require("scripts/globals/titles")
+local ID = zones[xi.zone.LOWER_JEUNO]
 -----------------------------------
 local entity = {}
 

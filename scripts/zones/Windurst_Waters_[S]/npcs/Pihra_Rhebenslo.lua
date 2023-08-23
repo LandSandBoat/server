@@ -3,8 +3,6 @@
 --  NPC: Pihra_Rhebenslo
 -- Armor Storage NPC
 -----------------------------------
-require("scripts/globals/armorstorage")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

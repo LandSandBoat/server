@@ -2,7 +2,7 @@
 -- Area: Rabao
 --  NPC: Nomad Moogle
 -----------------------------------
-local ID = require("scripts/zones/Rabao/IDs")
+local ID = zones[xi.zone.RABAO]
 -----------------------------------
 local entity = {}
 

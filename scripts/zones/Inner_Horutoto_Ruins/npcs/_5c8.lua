@@ -6,7 +6,7 @@
 -- or if player has the KeyItem "portal charm".
 -- !pos -259 -1 -20 192
 -----------------------------------
-local ID = require("scripts/zones/Inner_Horutoto_Ruins/IDs")
+local ID = zones[xi.zone.INNER_HORUTOTO_RUINS]
 -----------------------------------
 local entity = {}
 

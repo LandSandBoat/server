@@ -43,6 +43,7 @@ zones[xi.zone.KAZHAM] =
     },
     npc =
     {
+        MAGRIFFON = GetFirstID('Magriffon'),
     },
 }
 

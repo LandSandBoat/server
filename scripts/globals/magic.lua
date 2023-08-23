@@ -116,7 +116,7 @@ local function getSpellBonusAcc(caster, target, spell, params)
         magicAccBonus = magicAccBonus + 256
     end
 
-    local skillchainTier, _ = FormMagicBurst(element, target)
+    local skillchainTier, _ = xi.magicburst.formMagicBurst(element, target)
 
     -- Add acc for skillchains
     if skillchainTier > 0 then
@@ -268,7 +268,7 @@ local function calculateMagicBurst(caster, spell, target, params)
 
     -- Obtain second multiplier from skillchain
     -- Starts at 35% damage bonus, increases by 10% for every additional weaponskill in the chain
-    local skillchainTier, skillchainCount = FormMagicBurst(spell:getElement(), target)
+    local skillchainTier, skillchainCount = xi.magicburst.formMagicBurst(spell:getElement(), target)
 
     if skillchainTier > 0 then
         if skillchainCount == 1 then -- two weaponskills

@@ -3,7 +3,7 @@
 --  NPC: Beastmen_s_Banner
 -- !pos -257 8 -249 114
 -----------------------------------
-local ID = require("scripts/zones/Eastern_Altepa_Desert/IDs")
+local ID = zones[xi.zone.EASTERN_ALTEPA_DESERT]
 -----------------------------------
 local entity = {}
 

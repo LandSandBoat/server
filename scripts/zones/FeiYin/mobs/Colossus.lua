@@ -3,8 +3,7 @@
 --  Mob: Colossus
 -- Note: PH for Goliath
 -----------------------------------
-require("scripts/globals/regimes")
-require("scripts/globals/mobs")
+local ID = zones[xi.zone.FEIYIN]
 -----------------------------------
 local entity = {}
 

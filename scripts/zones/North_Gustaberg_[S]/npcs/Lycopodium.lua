@@ -3,9 +3,7 @@
 --  NPC: Lycopodium
 -- !pos -275.953 12.333 262.368 88
 -----------------------------------
-local ID = require("scripts/zones/Garlaige_Citadel_[S]/IDs")
-require("scripts/globals/npc_util")
-require("scripts/globals/utils")
+local ID = zones[xi.zone.GARLAIGE_CITADEL_S]
 -----------------------------------
 local entity = {}
 

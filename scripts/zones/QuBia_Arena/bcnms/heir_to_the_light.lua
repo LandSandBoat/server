@@ -2,10 +2,6 @@
 -- Heir to the Light
 -- Qu'Bia Arena mission battlefield
 -----------------------------------
-require("scripts/globals/battlefield")
-require("scripts/globals/missions")
-local ID = require("scripts/zones/QuBia_Arena/IDs")
------------------------------------
 local battlefieldObject = {}
 
 battlefieldObject.onBattlefieldTick = function(battlefield, tick)

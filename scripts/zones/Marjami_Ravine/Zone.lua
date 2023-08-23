@@ -1,8 +1,6 @@
 -----------------------------------
 -- Zone: Marjami Ravine
 -----------------------------------
-local ID = require('scripts/zones/Marjami_Ravine/IDs')
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

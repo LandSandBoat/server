@@ -57,87 +57,69 @@
 #include <cstring>
 
 CMobEntity::CMobEntity()
+: m_AllowRespawn(false)
+, m_RespawnTime(300)
+, m_DropItemTime(0)
+, m_DropID(0)
+, m_minLevel(1)
+, m_maxLevel(1)
+, HPmodifier(0)
+, MPmodifier(0)
+, HPscale(1.0)
+, MPscale(1.0)
+, m_roamFlags(ROAMFLAG_NONE)
+, m_specialFlags(SPECIALFLAG_NONE)
+, m_StatPoppedMobs(false)
+, strRank(3)
+, dexRank(3)
+, vitRank(3)
+, agiRank(3)
+, intRank(3)
+, mndRank(3)
+, chrRank(3)
+, attRank(3)
+, defRank(3)
+, accRank(3)
+, evaRank(3)
+, m_dmgMult(100)
+, m_disableScent(false)
+, m_maxRoamDistance(50.0f)
+, m_Type(MOBTYPE_NORMAL)
+, m_Aggro(false)
+, m_TrueDetection(false)
+, m_Link(0)
+, m_isAggroable(false)
+, m_Behaviour(BEHAVIOUR_NONE)
+, m_SpawnType(SPAWNTYPE_NORMAL)
+, m_battlefieldID(0)
+, m_bcnmID(0)
+, m_giveExp(false)
+, m_neutral(false)
+, m_Element(0)
+, m_HiPCLvl(0)
+, m_HiPartySize(0)
+, m_THLvl(0)
+, m_ItemStolen(false)
+, m_Family(0)
+, m_SuperFamily(0)
+, m_MobSkillList(0)
+, m_Pool(0)
+, m_flags(0)
+, m_name_prefix(0)
+, m_unk0(0)
+, m_unk1(8)
+, m_unk2(0)
+, m_CallForHelpBlocked(false)
+, m_IsClaimable(true)
 {
     TracyZoneScoped;
-    objtype = TYPE_MOB;
-
-    m_DropID = 0;
-
-    m_minLevel = 1;
-    m_maxLevel = 1;
-
-    HPscale = 1.0;
-    MPscale = 1.0;
-    m_flags = 0;
-
-    m_unk0 = 0;
-    m_unk1 = 8;
-    m_unk2 = 0;
-
-    m_CallForHelpBlocked = false;
-
-    allegiance = ALLEGIANCE_TYPE::MOB;
-
-    // default to normal roaming
-    m_roamFlags    = ROAMFLAG_NONE;
-    m_specialFlags = SPECIALFLAG_NONE;
-    m_name_prefix  = 0;
-    m_MobSkillList = 0;
-
-    m_AllowRespawn = false;
-    m_DropItemTime = 0;
-    m_Family       = 0;
-    m_SuperFamily  = 0;
-    m_Type         = MOBTYPE_NORMAL;
-    m_Behaviour    = BEHAVIOUR_NONE;
-    m_SpawnType    = SPAWNTYPE_NORMAL;
-    m_EcoSystem    = ECOSYSTEM::UNCLASSIFIED;
-    m_Element      = 0;
-    m_HiPCLvl      = 0;
-    m_HiPartySize  = 0;
-    m_THLvl        = 0;
-    m_ItemStolen   = false;
-
-    HPmodifier = 0;
-    MPmodifier = 0;
-
-    strRank = 3;
-    vitRank = 3;
-    dexRank = 3;
-    agiRank = 3;
-    intRank = 3;
-    mndRank = 3;
-    chrRank = 3;
-    attRank = 3;
-    defRank = 3;
-    accRank = 3;
-    evaRank = 3;
-
-    m_dmgMult = 100;
-
-    m_giveExp       = false;
-    m_neutral       = false;
-    m_Aggro         = false;
-    m_TrueDetection = false;
-    m_Link          = 0;
-    m_isAggroable   = false;
-    m_battlefieldID = 0;
-    m_bcnmID        = 0;
-
-    m_maxRoamDistance = 50.0f;
-    m_disableScent    = false;
-
-    m_Pool        = 0;
-    m_RespawnTime = 300;
+    objtype     = ENTITYTYPE::TYPE_MOB;
+    allegiance  = ALLEGIANCE_TYPE::MOB;
+    m_EcoSystem = ECOSYSTEM::UNCLASSIFIED;
 
     m_SpellListContainer = nullptr;
     PEnmityContainer     = new CEnmityContainer(this);
     SpellContainer       = new CMobSpellContainer(this);
-
-    // For Dyna Stats
-    m_StatPoppedMobs = false;
-
-    m_IsClaimable = true;
 
     PAI = std::make_unique<CAIContainer>(this, std::make_unique<CPathFind>(this), std::make_unique<CMobController>(this), std::make_unique<CTargetFind>(this));
 }
@@ -996,8 +978,8 @@ void CMobEntity::DropItems(CCharEntity* PChar)
         // clang-format on
     }
 
-    ZONE_TYPE zoneType  = zoneutils::GetZone(PChar->getZone())->GetType();
-    bool      validZone = !(this->m_Type & MOBTYPE_BATTLEFIELD) && zoneType != ZONE_TYPE::DYNAMIS;
+    ZONE_TYPE zoneType  = zoneutils::GetZone(PChar->getZone())->GetTypeMask();
+    bool      validZone = !(this->m_Type & MOBTYPE_BATTLEFIELD) && !(zoneType & ZONE_TYPE::DYNAMIS);
 
     // Check if mob can drop seals -- mobmod to disable drops, zone type isnt battlefield/dynamis, mob is stronger than Too Weak, or mobmod for EXP bonus is -100 or lower (-100% exp)
     if (!getMobMod(MOBMOD_NO_DROPS) && validZone && charutils::CheckMob(m_HiPCLvl, GetMLevel()) > EMobDifficulty::TooWeak && getMobMod(MOBMOD_EXP_BONUS) > -100)

@@ -3,9 +3,7 @@
 --  NPC: Rosswald
 -- Zulkheim Regional Merchant
 -----------------------------------
-local ID = require("scripts/zones/Port_Bastok/IDs")
-require("scripts/globals/conquest")
-require("scripts/globals/shop")
+local ID = zones[xi.zone.PORT_BASTOK]
 -----------------------------------
 local entity = {}
 
@@ -18,13 +16,13 @@ entity.onTrigger = function(player, npc)
     else
         local stock =
         {
-            4372,   44,    -- Giant Sheep Meat
-            622,    44,    -- Dried Marjoram
-            610,    55,    -- San d'Orian Flour
-            611,    36,    -- Rye Flour
-            1840, 1840,    -- Semolina
-            4366,   22,    -- La Theine Cabbage
-            4378,   55,    -- Selbina Milk
+            xi.item.SLICE_OF_GIANT_SHEEP_MEAT,   49,
+            xi.item.PINCH_OF_DRIED_MARJORAM,     49,
+            xi.item.BAG_OF_SAN_DORIAN_FLOUR,     62,
+            xi.item.BAG_OF_RYE_FLOUR,            41,
+            xi.item.BAG_OF_SEMOLINA,           2080,
+            xi.item.LA_THEINE_CABBAGE,           24,
+            xi.item.JUG_OF_SELBINA_MILK,         62,
         }
 
         player:showText(npc, ID.text.ROSSWALD_OPEN_DIALOG)

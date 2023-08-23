@@ -3,8 +3,7 @@
 --  Mob: Wamoura
 -- Note: PH for Ignamoth
 -----------------------------------
-local ID = require("scripts/zones/Mount_Zhayolm/IDs")
-require("scripts/globals/mobs")
+local ID = zones[xi.zone.MOUNT_ZHAYOLM]
 -----------------------------------
 local entity = {}
 

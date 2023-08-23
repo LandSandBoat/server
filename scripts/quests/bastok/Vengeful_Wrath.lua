@@ -4,10 +4,6 @@
 -- Log ID: 1, Quest ID: 32
 -- Goraow : !pos 38 .1 14 234
 -----------------------------------
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
-require('scripts/globals/interaction/quest')
------------------------------------
 
 local quest = Quest:new(xi.quest.log_id.BASTOK, xi.quest.id.bastok.VENGEFUL_WRATH)
 
@@ -49,7 +45,7 @@ quest.sections =
             ['Goraow'] =
             {
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, xi.items.QUADAV_HELM) then
+                    if npcUtil.tradeHasExactly(trade, xi.item.QUADAV_HELM) then
                         return quest:progressEvent(107)
                     end
                 end,

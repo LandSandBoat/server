@@ -4,11 +4,6 @@
 -- Log ID: 1, Quest ID: 41
 -- Foss : !pos -283 -12 -37 235
 -----------------------------------
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
-require('scripts/globals/titles')
-require('scripts/globals/interaction/quest')
------------------------------------
 
 local quest = Quest:new(xi.quest.log_id.BASTOK, xi.quest.id.bastok.BUCKETS_OF_GOLD)
 
@@ -52,7 +47,7 @@ quest.sections =
             ['Foss'] =
             {
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, { { xi.items.RUSTY_BUCKET, 5 } }) then
+                    if npcUtil.tradeHasExactly(trade, { { xi.item.RUSTY_BUCKET, 5 } }) then
                         return quest:progressEvent(272)
                     end
                 end,

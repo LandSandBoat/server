@@ -4,8 +4,6 @@
 -- Spawns Durinn
 -- !pos -571 -47 -554 217
 -----------------------------------
-require("scripts/globals/abyssea")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

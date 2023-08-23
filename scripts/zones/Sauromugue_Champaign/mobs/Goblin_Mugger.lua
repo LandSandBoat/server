@@ -2,9 +2,7 @@
 -- Area: Sauromugue Champaign
 --  Mob: Goblin Mugger
 -----------------------------------
-local ID = require("scripts/zones/Sauromugue_Champaign/IDs")
-require("scripts/globals/missions")
-require("scripts/globals/regimes")
+local ID = zones[xi.zone.SAUROMUGUE_CHAMPAIGN]
 -----------------------------------
 local entity = {}
 

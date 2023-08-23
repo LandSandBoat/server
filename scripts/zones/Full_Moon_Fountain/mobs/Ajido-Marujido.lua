@@ -3,8 +3,7 @@
 --  Mob: Ajido-Marujido
 -- Ally during Windurst Mission 9-2
 -----------------------------------
-local ID = require("scripts/zones/Full_Moon_Fountain/IDs")
-require("scripts/globals/magic")
+local ID = zones[xi.zone.FULL_MOON_FOUNTAIN]
 -----------------------------------
 local entity = {}
 

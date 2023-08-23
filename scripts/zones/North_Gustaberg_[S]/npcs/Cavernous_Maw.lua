@@ -4,8 +4,6 @@
 -- !pos 466 0 479 88
 -- Teleports Players to North Gustaberg
 -----------------------------------
-require("scripts/globals/maws")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

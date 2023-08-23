@@ -4,8 +4,6 @@
 -- Spawns Koghatu
 -- !pos -108 -175 4 253
 -----------------------------------
-require("scripts/globals/abyssea")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

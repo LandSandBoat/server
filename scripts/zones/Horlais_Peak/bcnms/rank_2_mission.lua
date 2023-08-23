@@ -2,10 +2,6 @@
 -- Rank 2 Final Mission
 -- Horlais Peak mission battlefield
 -----------------------------------
-require("scripts/globals/battlefield")
-require("scripts/globals/missions")
-require("scripts/globals/npc_util")
------------------------------------
 local battlefieldObject = {}
 
 battlefieldObject.onBattlefieldTick = function(battlefield, tick)

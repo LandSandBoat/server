@@ -1,11 +1,9 @@
 -----------------------------------
 -- Area: Kazham
 --  NPC: Gatih Mijurabi
--- Type: Standard NPC
 -- !pos 58.249 -13.086 -49.084 250
 -----------------------------------
-local ID = require("scripts/zones/Kazham/IDs")
-require("scripts/globals/quests")
+local ID = zones[xi.zone.KAZHAM]
 -----------------------------------
 local entity = {}
 
@@ -39,11 +37,11 @@ entity.onEventFinish = function(player, csid, option, npc)
         player:addQuest(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.PERSONAL_HYGIENE)
     elseif csid == 193 then
         if player:getFreeSlotsCount() == 0 then
-            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.items.MITHRAN_STONE)
+            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.item.MITHRAN_STONE)
         else
             player:completeQuest(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.PERSONAL_HYGIENE)
-            player:addItem(xi.items.MITHRAN_STONE)
-            player:messageSpecial(ID.text.ITEM_OBTAINED, xi.items.MITHRAN_STONE)
+            player:addItem(xi.item.MITHRAN_STONE)
+            player:messageSpecial(ID.text.ITEM_OBTAINED, xi.item.MITHRAN_STONE)
         end
     end
 end

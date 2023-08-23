@@ -1,9 +1,7 @@
 -----------------------------------
 -- Zone: Bastok_Markets_[S] (87)
 -----------------------------------
-local ID = require('scripts/zones/Bastok_Markets_[S]/IDs')
-require('scripts/globals/chocobo')
-require('scripts/globals/extravaganza')
+local ID = zones[xi.zone.BASTOK_MARKETS_S]
 -----------------------------------
 local zoneObject = {}
 

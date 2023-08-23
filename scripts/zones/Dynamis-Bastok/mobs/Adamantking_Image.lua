@@ -2,8 +2,6 @@
 -- Area: Dynamis - Bastok
 --  Mob: Adamantking Image
 -----------------------------------
-require("scripts/globals/dynamis")
------------------------------------
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

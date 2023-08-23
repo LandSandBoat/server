@@ -2,10 +2,7 @@
 -- Area: Cloister of Frost
 -- BCNM: Trial by Ice
 -----------------------------------
-local ID = require("scripts/zones/Cloister_of_Frost/IDs")
-require("scripts/globals/battlefield")
-require("scripts/globals/quests")
-require("scripts/globals/titles")
+local ID = zones[xi.zone.CLOISTER_OF_FROST]
 -----------------------------------
 local battlefieldObject = {}
 

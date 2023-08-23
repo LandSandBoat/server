@@ -1,8 +1,6 @@
 -----------------------------------
 -- Zone: Desuetia Empyreal Paradox (290)
 -----------------------------------
-local ID = require('scripts/zones/Desuetia_Empyreal_Paradox/IDs')
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

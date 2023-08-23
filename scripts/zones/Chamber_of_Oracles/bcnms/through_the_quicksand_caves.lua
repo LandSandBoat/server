@@ -3,9 +3,6 @@
 -- Name: Zilart Mission 6
 -- !pos -221 -24 19 206
 -----------------------------------
-require("scripts/globals/battlefield")
-require("scripts/globals/missions")
------------------------------------
 local battlefieldObject = {}
 
 battlefieldObject.onBattlefieldTick = function(battlefield, tick)

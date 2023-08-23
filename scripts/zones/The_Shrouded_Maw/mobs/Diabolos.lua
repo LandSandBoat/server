@@ -2,7 +2,7 @@
 -- Area: The Shrouded Maw
 --  Mob: Diabolos
 -----------------------------------
-local ID = require("scripts/zones/The_Shrouded_Maw/IDs")
+local ID = zones[xi.zone.THE_SHROUDED_MAW]
 -----------------------------------
 local entity = {}
 

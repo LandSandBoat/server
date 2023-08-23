@@ -3,8 +3,7 @@
 --  Mob: Qiqirn Archaeologist
 -- Note: PH for Bluestreak Gyugyuroon
 -----------------------------------
-local ID = require("scripts/zones/Aydeewa_Subterrane/IDs")
-require("scripts/globals/mobs")
+local ID = zones[xi.zone.AYDEEWA_SUBTERRANE]
 -----------------------------------
 local entity = {}
 

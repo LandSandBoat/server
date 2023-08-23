@@ -1,8 +1,7 @@
 -----------------------------------
 -- Zone: East_Ronfaure_[S] (81)
 -----------------------------------
-local ID = require('scripts/zones/East_Ronfaure_[S]/IDs')
-require('scripts/globals/helm')
+local ID = zones[xi.zone.EAST_RONFAURE_S]
 -----------------------------------
 local zoneObject = {}
 

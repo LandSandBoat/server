@@ -4,9 +4,6 @@
 -- Starts and Finishes Quest: EVIL_AT_THE_INLET
 -- !pos 129 -34 26 171
 -----------------------------------
-require("scripts/globals/npc_util")
-require("scripts/globals/quests")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

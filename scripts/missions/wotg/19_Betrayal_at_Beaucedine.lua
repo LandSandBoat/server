@@ -5,10 +5,7 @@
 -- !addmission 5 18
 -- Regal Pawprints : -15.066 -40.249 -217.276 136
 -----------------------------------
-require('scripts/globals/missions')
-require('scripts/globals/interaction/mission')
------------------------------------
-local pastBeaucedineID = require('scripts/zones/Beaucedine_Glacier_[S]/IDs')
+local pastBeaucedineID = zones[xi.zone.BEAUCEDINE_GLACIER_S]
 -----------------------------------
 
 local mission = Mission:new(xi.mission.log_id.WOTG, xi.mission.id.wotg.BETRAYAL_AT_BEAUCEDINE)

@@ -2,8 +2,7 @@
 -- Area: Northern San d'Oria
 --  NPC: Charlaimagnat
 -----------------------------------
-local ID = require("scripts/zones/Northern_San_dOria/IDs")
-require("scripts/globals/quests")
+local ID = zones[xi.zone.NORTHERN_SAN_DORIA]
 -----------------------------------
 local entity = {}
 
@@ -43,10 +42,10 @@ entity.onEventFinish = function(player, csid, option, npc)
         player:delKeyItem(xi.ki.LETTER_FROM_ALFESAR)
     elseif csid == 705 then
         if player:getFreeSlotsCount() == 0 then -- does the player have space
-            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.items.SCROLL_OF_TELEPORT_ALTEP)
+            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.item.SCROLL_OF_TELEPORT_ALTEP)
         else -- give player teleport-altep
-            player:addItem(xi.items.SCROLL_OF_TELEPORT_ALTEP)
-            player:messageSpecial(ID.text.ITEM_OBTAINED, xi.items.SCROLL_OF_TELEPORT_ALTEP)
+            player:addItem(xi.item.SCROLL_OF_TELEPORT_ALTEP)
+            player:messageSpecial(ID.text.ITEM_OBTAINED, xi.item.SCROLL_OF_TELEPORT_ALTEP)
             player:addFame(xi.quest.fame_area.SELBINA_RABAO, 30)
             player:completeQuest(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.THE_MISSING_PIECE)
         end

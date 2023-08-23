@@ -3,9 +3,7 @@
 --  Mob: Clipper
 -- Note: PH for Cargo Crab Colin
 -----------------------------------
-local ID = require("scripts/zones/Korroloka_Tunnel/IDs")
-require("scripts/globals/regimes")
-require("scripts/globals/mobs")
+local ID = zones[xi.zone.KORROLOKA_TUNNEL]
 -----------------------------------
 local entity = {}
 

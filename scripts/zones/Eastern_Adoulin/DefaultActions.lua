@@ -1,4 +1,4 @@
-local ID = require("scripts/zones/Eastern_Adoulin/IDs")
+local ID = zones[xi.zone.EASTERN_ADOULIN]
 
 return {
     ['Door_Boarding_House'] = { messageSpecial = ID.text.NOTHING_OUT_OF_ORDINARY },

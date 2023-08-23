@@ -3,11 +3,6 @@
 --  NPC: Ajithaam
 -- !pos -82 0.1 160 244
 -----------------------------------
-local ID = require("scripts/zones/Upper_Jeuno/IDs")
-require("scripts/globals/teleports")
-require("scripts/globals/missions")
-require("scripts/globals/quests")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

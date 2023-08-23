@@ -3,8 +3,7 @@
 --  NPC: ??? (Tonberry Rattle ITEM)
 -- !pos 269 0 91 159
 -----------------------------------
-local ID = require("scripts/zones/Temple_of_Uggalepih/IDs")
-require("scripts/globals/npc_util")
+local ID = zones[xi.zone.TEMPLE_OF_UGGALEPIH]
 -----------------------------------
 local entity = {}
 
@@ -12,8 +11,8 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if not player:hasItem(xi.items.TONBERRY_RATTLE) then
-        if npcUtil.giveItem(player, xi.items.TONBERRY_RATTLE) then -- Tonberry Rattle
+    if not player:hasItem(xi.item.TONBERRY_RATTLE) then
+        if npcUtil.giveItem(player, xi.item.TONBERRY_RATTLE) then -- Tonberry Rattle
             npc:setStatus(xi.status.DISAPPEAR)
             npc:updateNPCHideTime(7200) -- 2 hours
             -- TODO: ??? reappears at new position

@@ -1,9 +1,7 @@
 -----------------------------------
 -- Chains of Promathia Helpers
 -----------------------------------
-require('scripts/globals/missions')
------------------------------------
-local hallID = require('scripts/zones/Hall_of_Transference/IDs')
+local hallID = zones[xi.zone.HALL_OF_TRANSFERENCE]
 -----------------------------------
 xi = xi or {}
 xi.cop = xi.cop or {}

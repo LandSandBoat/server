@@ -4,17 +4,12 @@
 -- Starts and Finishes Quest: Sleepless Nights
 -- !pos 158 -6 17 230
 -----------------------------------
-require("scripts/globals/titles")
-require("scripts/globals/shop")
-require("scripts/globals/quests")
-local ID = require("scripts/zones/Southern_San_dOria/IDs")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     if player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.SLEEPLESS_NIGHTS) == QUEST_ACCEPTED then
         if
-            trade:hasItemQty(xi.items.JUG_OF_MARYS_MILK, 1) and
+            trade:hasItemQty(xi.item.JUG_OF_MARYS_MILK, 1) and
             trade:getItemCount() == 1
         then
             player:startEvent(84)

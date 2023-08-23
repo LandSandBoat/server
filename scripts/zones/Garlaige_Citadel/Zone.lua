@@ -1,9 +1,7 @@
 -----------------------------------
 -- Zone: Garlaige_Citadel (200)
 -----------------------------------
-local ID = require('scripts/zones/Garlaige_Citadel/IDs')
-require('scripts/globals/conquest')
-require('scripts/globals/treasure')
+local ID = zones[xi.zone.GARLAIGE_CITADEL]
 -----------------------------------
 local zoneObject = {}
 

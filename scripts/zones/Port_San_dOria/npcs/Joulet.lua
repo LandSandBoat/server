@@ -4,10 +4,7 @@
 --  Starts The Competition
 -- !pos -18 -2 -45 232
 -----------------------------------
-local ID = require("scripts/zones/Port_San_dOria/IDs")
-require("scripts/globals/npc_util")
-require("scripts/globals/quests")
-require("scripts/globals/titles")
+local ID = zones[xi.zone.PORT_SAN_DORIA]
 -----------------------------------
 local entity = {}
 
@@ -17,8 +14,8 @@ end
 
 entity.onTrade = function(player, npc, trade)
     local count = trade:getItemCount()
-    local moatCarp = trade:getItemQty(xi.items.MOAT_CARP)
-    local forestCarp = trade:getItemQty(xi.items.FOREST_CARP)
+    local moatCarp = trade:getItemQty(xi.item.MOAT_CARP)
+    local forestCarp = trade:getItemQty(xi.item.FOREST_CARP)
     local fishCountVar = player:getCharVar("theCompetitionFishCountVar")
     local totalFish = moatCarp + forestCarp + fishCountVar
 
@@ -66,11 +63,11 @@ end
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 307 then
         if player:getFreeSlotsCount() == 0 then
-            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.items.LU_SHANGS_FISHING_ROD)
+            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.item.LU_SHANGS_FISHING_ROD)
         else
             player:tradeComplete()
-            player:addItem(xi.items.LU_SHANGS_FISHING_ROD)
-            player:messageSpecial(ID.text.ITEM_OBTAINED, xi.items.LU_SHANGS_FISHING_ROD)
+            player:addItem(xi.item.LU_SHANGS_FISHING_ROD)
+            player:messageSpecial(ID.text.ITEM_OBTAINED, xi.item.LU_SHANGS_FISHING_ROD)
             player:addTitle(xi.title.CARP_DIEM)
             player:addKeyItem(xi.ki.TESTIMONIAL)
             player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.TESTIMONIAL)

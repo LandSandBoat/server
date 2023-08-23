@@ -1,10 +1,6 @@
 -----------------------------------
 -- Zone: Dynamis-Qufim
 -----------------------------------
-local ID = require('scripts/zones/Dynamis-Qufim/IDs')
-require('scripts/globals/conquest')
-require('scripts/globals/dynamis')
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

@@ -2,10 +2,7 @@
 -- Area: Cloister of Storms
 -- BCNM: Trial by Lightning
 -----------------------------------
-local ID = require("scripts/zones/Cloister_of_Storms/IDs")
-require("scripts/globals/battlefield")
-require("scripts/globals/quests")
-require("scripts/globals/titles")
+local ID = zones[xi.zone.CLOISTER_OF_STORMS]
 -----------------------------------
 local battlefieldObject = {}
 

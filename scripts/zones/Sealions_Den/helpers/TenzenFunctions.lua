@@ -1,4 +1,4 @@
-local ID = require("scripts/zones/Sealions_Den/IDs")
+local ID = zones[xi.zone.SEALIONS_DEN]
 
 local tenzenFunctions = {}
 

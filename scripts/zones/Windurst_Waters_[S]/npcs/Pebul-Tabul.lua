@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Windurst Waters (S)
 --  NPC: Pebul-Tabul
--- Type: Standard NPC
 -- !pos -68.500 -4.5 3.694 94
 -----------------------------------
 local entity = {}

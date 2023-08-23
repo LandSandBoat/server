@@ -6,9 +6,7 @@
 -- !pos 257.650 -5.180 -699.999 35 | Tarutaru Tower
 -- !pos 577.648 -5.180 -700.000 35 | Galka Tower
 -----------------------------------
-local ID = require("scripts/zones/The_Garden_of_RuHmet/IDs")
-require("scripts/globals/missions")
-require("scripts/globals/titles")
+local ID = zones[xi.zone.THE_GARDEN_OF_RUHMET]
 -----------------------------------
 local entity = {}
 

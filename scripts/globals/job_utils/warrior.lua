@@ -21,7 +21,7 @@ end
 xi.job_utils.warrior.checkTomahawk = function(player, target, ability)
     local ammoID = player:getEquipID(xi.slot.AMMO)
 
-    if ammoID == xi.items.THROWING_TOMAHAWK then
+    if ammoID == xi.item.THROWING_TOMAHAWK then
         return 0, 0
     else
         return xi.msg.basic.CANNOT_PERFORM, 0

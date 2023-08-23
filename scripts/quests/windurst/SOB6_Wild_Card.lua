@@ -3,10 +3,6 @@
 --
 -- Honoi-Gumoi: !pos -195 -11 -120 238
 -----------------------------------
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
-require('scripts/globals/titles')
-require('scripts/globals/interaction/quest')
 
 local quest = Quest:new(xi.quest.log_id.WINDURST, xi.quest.id.windurst.WILD_CARD)
 
@@ -78,7 +74,7 @@ quest.sections =
             ['_6n2'] =
             {
                 onTrigger = function(player, npc)
-                    if quest:getVar(player, 'Prog') == 2 then -- First meeting at house of hero.
+                    if quest:getVar(player, 'Prog') == 1 then -- First meeting at house of hero.
                         if player:getRank(xi.nation.WINDURST) < 9 then
                             return quest:progressEvent(386) -- Meet Joker.
                         else
@@ -97,23 +93,23 @@ quest.sections =
             onEventFinish =
             {
                 [386] = function(player, csid, option, npc)
-                    quest:setVar(player, 'Prog', 3) -- 3 = Met Joker. Sets 2nd CS in Windurst Walls with either Joker or Apururu.
+                    quest:setVar(player, 'Prog', 2) -- 2 = Met Joker. Sets 2nd CS in Windurst Walls with either Joker or Apururu.
                 end,
 
                 [387] = function(player, csid, option, npc)
                     player:delKeyItem(xi.ki.JOKER_CARD)
                     npcUtil.giveCurrency(player, 'gil', 8000)
-                    quest:setVar(player, 'Prog', 5)
+                    quest:setVar(player, 'Prog', 4)
                 end,
 
                 [388] = function(player, csid, option, npc)
-                    quest:setVar(player, 'Prog', 4) -- 4 = Met Apururu. Sets 2nd CS in Windurst Woods with Apururu.
+                    quest:setVar(player, 'Prog', 3) -- 3 = Met Apururu. Sets 2nd CS in Windurst Woods with Apururu.
                 end,
 
                 [389] = function(player, csid, option, npc)
                     player:delKeyItem(xi.ki.JOKER_CARD)
                     npcUtil.giveCurrency(player, 'gil', 8000)
-                    quest:setVar(player, 'Prog', 5)
+                    quest:setVar(player, 'Prog', 4)
                 end,
             },
         },
@@ -123,7 +119,7 @@ quest.sections =
             ['Honoi-Gomoi'] =
             {
                 onTrigger = function(player, npc)
-                    if quest:getVar(player, 'Prog') == 5 then
+                    if quest:getVar(player, 'Prog') == 4 then
                         return quest:progressEvent(782) -- Quest Complete.
                     else
                         return quest:event(781) -- Reminder text.
@@ -146,7 +142,7 @@ quest.sections =
             ['Apururu'] =
             {
                 onTrigger = function(player, npc)
-                    if quest:getVar(player, 'Prog') == 4 then
+                    if quest:getVar(player, 'Prog') == 3 then
                         return quest:progressEvent(600) -- 2nd meeting with Apururu after meeting him in Hero's hause.
                     end
                 end,
@@ -157,7 +153,7 @@ quest.sections =
                 [600] = function(player, csid, option, npc)
                     player:delKeyItem(xi.ki.JOKER_CARD)
                     npcUtil.giveCurrency(player, 'gil', 8000)
-                    quest:setVar(player, 'Prog', 5)
+                    quest:setVar(player, 'Prog', 4)
                 end,
             },
         },

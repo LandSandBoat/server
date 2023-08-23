@@ -1,9 +1,6 @@
 -----------------------------------
 -- Zone: Batallia_Downs_[S] (84)
 -----------------------------------
-local ID = require('scripts/zones/Batallia_Downs_[S]/IDs')
-require('scripts/globals/voidwalker')
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

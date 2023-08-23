@@ -3,9 +3,6 @@
 --  NPC: Geomagnetic Fount
 -- !pos 51.805 -2.495 6.825
 -----------------------------------
-local ID = require("scripts/zones/The_Eldieme_Necropolis/IDs")
-require("scripts/globals/geomagnetic_fount")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

@@ -1244,9 +1244,9 @@ function xi.pet.spawnPet(player, petID)
                 local power = pathos.power
 
                 pet:addStatusEffectEx(effect, effect, power, 0, 0)
-                pet:getStatusEffect(effect):unsetFlag(xi.effectFlag.DISPELABLE)
-                pet:getStatusEffect(effect):unsetFlag(xi.effectFlag.ERASABLE)
-                pet:getStatusEffect(effect):setFlag(xi.effectFlag.ON_ZONE_PATHOS)
+                pet:getStatusEffect(effect):delEffectFlag(xi.effectFlag.DISPELABLE)
+                pet:getStatusEffect(effect):delEffectFlag(xi.effectFlag.ERASABLE)
+                pet:getStatusEffect(effect):addEffectFlag(xi.effectFlag.ON_ZONE_PATHOS)
             end
         end
     end

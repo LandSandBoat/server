@@ -4,8 +4,6 @@
 -- Unlocks: Geo-Gravity
 -- !pos 232.687 -0.500 152.658 262
 -----------------------------------
-require("scripts/globals/geomantic_reservoir")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

@@ -2,9 +2,6 @@
 -- Area: Outer Horutoto Ruins
 --   NM: Desmodont
 -----------------------------------
-require("scripts/globals/hunts")
-require("scripts/globals/mobs")
------------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)

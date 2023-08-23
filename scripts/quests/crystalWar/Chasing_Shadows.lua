@@ -8,10 +8,6 @@
 -- Sunken Footprint  : !pos 188.429 -27.623 163.764 137
 -- Fresh Snowmelt    : !pos -71.660 -2.58 450.114 84
 -----------------------------------
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
-require('scripts/globals/interaction/quest')
------------------------------------
 local pastBatalliaID = zones[xi.zone.BATALLIA_DOWNS_S]
 -----------------------------------
 
@@ -19,7 +15,7 @@ local quest = Quest:new(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.CHAS
 
 quest.reward =
 {
-    item = xi.items.DARKSTEEL_SHEET,
+    item = xi.item.DARKSTEEL_SHEET,
 }
 
 quest.sections =

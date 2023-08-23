@@ -3,18 +3,14 @@
 --  NPC:??? (qm3)
 -- Involved in Quest: I Can Hear A Rainbow
 -----------------------------------
-local ID = require("scripts/zones/La_Theine_Plateau/IDs")
-require("scripts/globals/npc_util")
-require("scripts/globals/quests")
-require("scripts/globals/titles")
-require("scripts/globals/utils")
+local ID = zones[xi.zone.LA_THEINE_PLATEAU]
 -----------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     if
         player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.I_CAN_HEAR_A_RAINBOW) == QUEST_ACCEPTED and
-        npcUtil.tradeHas(trade, xi.items.CARBUNCLES_RUBY) and
+        npcUtil.tradeHas(trade, xi.item.CARBUNCLES_RUBY) and
         utils.mask.isFull(player:getCharVar("I_CAN_HEAR_A_RAINBOW"), 7)
     then
         player:startEvent(124)

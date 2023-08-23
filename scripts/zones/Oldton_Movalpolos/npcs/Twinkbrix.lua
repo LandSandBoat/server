@@ -4,10 +4,6 @@
 -- Type: Warp NPC
 -- !pos -292.779 6.999 -263.153 11
 -----------------------------------
-local ID = require("scripts/zones/Oldton_Movalpolos/IDs")
-require("scripts/globals/teleports")
-require("scripts/globals/npc_util")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

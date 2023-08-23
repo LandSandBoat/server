@@ -1,12 +1,7 @@
 -----------------------------------
 -- Area: Western Adoulin
 --  NPC: Kongramm
--- Type: Standard NPC, Mission NPC, and Quest NPC
---  Involved with Mission: 'A Curse From The Past'
---  Involved with Quests: 'A Certain Substitute Patrolman' and 'Transporting'
 -- !pos 61 32 138 256
------------------------------------
-require("scripts/globals/missions")
 -----------------------------------
 local entity = {}
 

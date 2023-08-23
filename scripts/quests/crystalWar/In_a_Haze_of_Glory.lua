@@ -6,16 +6,12 @@
 -- Diordinne     : !pos -107.785 0 193.665 164
 -- Wooden Crates : !pos -0.717 3.347 -99.535 164
 -----------------------------------
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
-require('scripts/globals/interaction/quest')
------------------------------------
 
 local quest = Quest:new(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.IN_A_HAZE_OF_GLORY)
 
 quest.reward =
 {
-    item = xi.items.FULLMETAL_BULLET,
+    item = xi.item.FULLMETAL_BULLET,
 }
 
 quest.sections =

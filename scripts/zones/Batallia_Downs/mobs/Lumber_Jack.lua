@@ -3,7 +3,6 @@
 --   NM: Lumber Jack
 -----------------------------------
 mixins = { require("scripts/mixins/job_special") }
-require("scripts/globals/mobs")
 -----------------------------------
 local entity = {}
 

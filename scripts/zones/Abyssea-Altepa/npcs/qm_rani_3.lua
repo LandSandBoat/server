@@ -4,8 +4,7 @@
 -- Spawns Rani
 -- !pos 102 0 -151 218
 -----------------------------------
-local ID = require('scripts/zones/Abyssea-Altepa/IDs')
-require('scripts/globals/abyssea')
+local ID = zones[xi.zone.ABYSSEA_ALTEPA]
 -----------------------------------
 local entity = {}
 

@@ -2,7 +2,6 @@
 -- Area: Tahrongi Canyon
 --  Mob: Strolling Sapling
 -----------------------------------
-require("scripts/globals/regimes")
 require("scripts/quests/tutorial")
 -----------------------------------
 local entity = {}

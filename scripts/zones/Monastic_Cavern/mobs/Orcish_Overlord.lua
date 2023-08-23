@@ -4,7 +4,7 @@
 -- Note: PH for Overlord Bakgodek
 -- TODO: messages should be zone-wide
 -----------------------------------
-local ID = require("scripts/zones/Monastic_Cavern/IDs")
+local ID = zones[xi.zone.MONASTIC_CAVERN]
 mixins = { require("scripts/mixins/job_special") }
 -----------------------------------
 local entity = {}

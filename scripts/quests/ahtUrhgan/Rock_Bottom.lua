@@ -2,10 +2,6 @@
 -- Rock Bottom
 -- !pos 838.243 -14.475 231.871 61
 -----------------------------------
-require('scripts/globals/quests')
-require('scripts/globals/npc_util')
-require('scripts/globals/interaction/quest')
------------------------------------
 
 local quest = Quest:new(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.ROCK_BOTTOM)
 
@@ -49,13 +45,13 @@ quest.sections =
                 onTrade = function(player, npc, trade)
                     if
                         quest:getVar(player, 'Prog') == 1 and
-                        npcUtil.tradeHasExactly(trade, xi.items.PICKAXE)
+                        npcUtil.tradeHasExactly(trade, xi.item.PICKAXE)
                     then
                         return quest:progressEvent(8)
                     elseif
                         not player:needToZone() and
                         quest:getVar(player, 'Prog') == 2 and
-                        npcUtil.tradeHas(trade, { xi.items.MYTHRIL_PICK, xi.items.MYTHRIL_PICK_HQ }, true, true)
+                        npcUtil.tradeHas(trade, { xi.item.MYTHRIL_PICK, xi.item.MYTHRIL_PICK_HQ }, true, true)
                     then
                         return quest:progressEvent(9, { [0] = trade:getItemId() })
                     end

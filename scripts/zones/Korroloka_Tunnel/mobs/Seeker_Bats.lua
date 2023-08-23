@@ -2,8 +2,6 @@
 -- Area: Korroloka Tunnel
 --  Mob: Seeker Bats
 -----------------------------------
-require("scripts/globals/regimes")
------------------------------------
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

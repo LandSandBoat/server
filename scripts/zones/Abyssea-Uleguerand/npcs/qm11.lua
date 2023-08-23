@@ -4,8 +4,6 @@
 -- Spawns Pantokrator
 -- !pos -199 -175 155 253
 -----------------------------------
-require("scripts/globals/abyssea")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

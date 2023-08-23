@@ -3,7 +3,7 @@
 --  Mob: Prishe
 -- Chains of Promathia 8-4 BCNM Fight
 -----------------------------------
-local ID = require("scripts/zones/Empyreal_Paradox/IDs")
+local ID = zones[xi.zone.EMPYREAL_PARADOX]
 -----------------------------------
 local entity = {}
 

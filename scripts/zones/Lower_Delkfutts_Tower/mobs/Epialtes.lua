@@ -2,7 +2,6 @@
 -- Area: Lower Delkfutt's Tower
 --   NM: Epialtes
 -----------------------------------
-require("scripts/globals/hunts")
 mixins = { require("scripts/mixins/job_special") }
 -----------------------------------
 local entity = {}

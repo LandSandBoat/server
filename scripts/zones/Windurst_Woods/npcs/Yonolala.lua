@@ -3,8 +3,6 @@
 -- NPC : Yonolala
 -- Unity NPC
 -----------------------------------
-require("scripts/globals/unity")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

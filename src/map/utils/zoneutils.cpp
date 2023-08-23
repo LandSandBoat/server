@@ -312,7 +312,7 @@ namespace zoneutils
 
                             uint32 NpcID = sql->GetUIntData(1);
 
-                            if (PZone->GetType() != ZONE_TYPE::DUNGEON_INSTANCED)
+                            if (!(PZone->GetTypeMask() & ZONE_TYPE::INSTANCED))
                             {
                                 CNpcEntity* PNpc = new CNpcEntity;
                                 PNpc->targid     = NpcID & 0xFFF;
@@ -430,9 +430,9 @@ namespace zoneutils
                     {
                         while (sql->NextRow() == SQL_SUCCESS)
                         {
-                            ZONE_TYPE zoneType = PZone->GetType();
+                            ZONE_TYPE zoneType = PZone->GetTypeMask();
 
-                            if (zoneType != ZONE_TYPE::DUNGEON_INSTANCED)
+                            if (!(zoneType & ZONE_TYPE::INSTANCED))
                             {
                                 CMobEntity* PMob = new CMobEntity;
 
@@ -573,7 +573,7 @@ namespace zoneutils
                                     PMob->m_Type & MOBTYPE_FISHED ||
                                     PMob->m_Type & MOBTYPE_BATTLEFIELD ||
                                     PMob->m_Type & MOBTYPE_NOTORIOUS ||
-                                    zoneType == ZONE_TYPE::DYNAMIS)
+                                    zoneType & ZONE_TYPE::DYNAMIS)
                                 {
                                     PMob->setMobMod(MOBMOD_CHARMABLE, 0);
                                 }
@@ -651,7 +651,7 @@ namespace zoneutils
 
             PZone->ForEachMob([](CMobEntity* PMob)
             {
-                mobutils::AddCustomMods(PMob);
+                mobutils::AddSqlModifiers(PMob);
 
                 luautils::OnMobInitialize(PMob);
                 luautils::ApplyMixins(PMob);
@@ -693,7 +693,7 @@ namespace zoneutils
         {
             ZONE_TYPE zoneType    = static_cast<ZONE_TYPE>(sql->GetUIntData(0));
             uint8     restriction = static_cast<uint8>(sql->GetUIntData(1));
-            if (zoneType == ZONE_TYPE::DUNGEON_INSTANCED)
+            if (zoneType & ZONE_TYPE::INSTANCED)
             {
                 return new CZoneInstance((ZONEID)ZoneID, GetCurrentRegion(ZoneID), GetCurrentContinent(ZoneID), restriction);
             }

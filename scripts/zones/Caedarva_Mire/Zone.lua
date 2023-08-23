@@ -1,10 +1,7 @@
 -----------------------------------
 -- Zone: Caedarva_Mire (79)
 -----------------------------------
-local ID = require('scripts/zones/Caedarva_Mire/IDs')
-require('scripts/globals/missions')
-require('scripts/globals/titles')
-require('scripts/globals/helm')
+local ID = zones[xi.zone.CAEDARVA_MIRE]
 -----------------------------------
 local zoneObject = {}
 

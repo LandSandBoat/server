@@ -2,8 +2,6 @@
 -- Area: Sacrarium
 --   NM: Keremet
 -----------------------------------
-require("scripts/globals/missions")
------------------------------------
 local entity = {}
 
 entity.onMobFight = function(mob, target)

@@ -3,9 +3,7 @@
 --  NPC: Sealed Entrance (Sealed_Entrance_3)
 -- !pos -340.000 1.825 -364.825 95
 -----------------------------------
-local ID = require("scripts/zones/West_Sarutabaruta_[S]/IDs")
-require("scripts/globals/quests")
-require("scripts/globals/utils")
+local ID = zones[xi.zone.WEST_SARUTABARUTA_S]
 -----------------------------------
 local entity = {}
 

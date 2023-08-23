@@ -4,11 +4,6 @@
 -- Log ID: 0, Quest ID: 5
 -- Hanaa Punaa : !pos -179.726 -8.8 27.574 230
 -----------------------------------
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
-require('scripts/globals/titles')
-require('scripts/globals/interaction/quest')
------------------------------------
 
 local quest = Quest:new(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_SEAMSTRESS)
 
@@ -17,7 +12,7 @@ quest.reward =
     fame = 30,
     fameArea = xi.quest.fame_area.SANDORIA,
     -- Repeatable Items handled within the Trigger:
-    -- item = xi.items.LEATHER_GLOVES,
+    -- item = xi.item.LEATHER_GLOVES,
     -- title = xi.title.SILENCER_OF_THE_LAMBS,
 }
 
@@ -85,7 +80,7 @@ quest.sections =
             ['Hanaa_Punaa'] =
             {
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, { { xi.items.SHEEPSKIN, 3 } }) then
+                    if npcUtil.tradeHasExactly(trade, { { xi.item.SHEEPSKIN, 3 } }) then
                         return quest:progressEvent(530)
                     end
                 end,
@@ -94,7 +89,7 @@ quest.sections =
             onEventFinish =
             {
                 [530] = function(player, csid, option, npc)
-                    if npcUtil.giveItem(player, xi.items.LEATHER_GLOVES, { fromTrade = true }) then
+                    if npcUtil.giveItem(player, xi.item.LEATHER_GLOVES, { fromTrade = true }) then
                         player:confirmTrade()
                         player:addTitle(xi.title.SILENCER_OF_THE_LAMBS)
                         if not player:hasCompletedQuest(quest.areaId, quest.questId) then

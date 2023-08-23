@@ -6,11 +6,7 @@
 -- Kupipi    : !pos 2 0.1 30 242
 -- Melek     : !pos -80.6 -5.5 157.3 240
 -----------------------------------
-require('scripts/globals/missions')
-require('scripts/globals/npc_util')
-require('scripts/globals/interaction/mission')
------------------------------------
-local portWindurstID = require('scripts/zones/Port_Windurst/IDs')
+local portWindurstID = zones[xi.zone.PORT_WINDURST]
 -----------------------------------
 
 local mission = Mission:new(xi.mission.log_id.BASTOK, xi.mission.id.bastok.THE_EMISSARY_WINDURST2)

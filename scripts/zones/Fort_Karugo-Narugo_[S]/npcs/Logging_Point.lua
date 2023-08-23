@@ -2,8 +2,6 @@
 -- Area: Fort Karugo-Narugo [S]
 --  NPC: Logging Point
 -----------------------------------
-require("scripts/globals/helm")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

@@ -3,8 +3,7 @@
 --  NPC: ??? (Tuning Out)
 -- !pos 362.586 3.999 220.106 123
 -----------------------------------
-local ID = require("scripts/zones/Yuhtunga_Jungle/IDs")
-require("scripts/globals/npc_util")
+local ID = zones[xi.zone.YUHTUNGA_JUNGLE]
 -----------------------------------
 local entity = {}
 

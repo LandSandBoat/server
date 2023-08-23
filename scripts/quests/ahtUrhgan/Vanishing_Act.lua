@@ -4,16 +4,12 @@
 -- Fochacha, Whitegate , !pos 3 -1 -10.781 50
 -- Qutiba, Whitegate, !pos 92 -7.5 -130 50
 -----------------------------------
-require('scripts/globals/quests')
-require('scripts/globals/npc_util')
-require('scripts/globals/interaction/quest')
------------------------------------
 
 local quest = Quest:new(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.VANISHING_ACT)
 
 quest.reward =
 {
-    item = xi.items.IMPERIAL_SILVER_PIECE
+    item = xi.item.IMPERIAL_SILVER_PIECE
 }
 
 quest.sections =
@@ -146,7 +142,7 @@ quest.sections =
             {
                 onTrade = function(player, npc, trade)
                     if
-                        npcUtil.tradeHasExactly(trade, xi.items.SICKLE) and
+                        npcUtil.tradeHasExactly(trade, xi.item.SICKLE) and
                         quest:getVar(player, 'Prog') == 2 and
                         not player:hasKeyItem(xi.ki.RAINBOW_BERRY)
                     then

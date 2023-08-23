@@ -4,8 +4,6 @@
 -- Allows players to spawn the Jailer of Justice by trading the Second Virtue, Deed of Moderation, and HQ Xzomit Organ to a ???.
 -- !pos , -278 0 -463
 -----------------------------------
-local ID = require("scripts/zones/AlTaieu/IDs")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

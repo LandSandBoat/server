@@ -15,7 +15,7 @@ function getRoeRecords(triggers)
 
         [1] =
         { -- First Step Forward +
-            reward = { item = { { xi.items.STRIP_OF_MEAT_JERKY, 6 } }, keyItem = xi.ki.MEMORANDOLL, sparks = 100, xp = 300 }
+            reward = { item = { { xi.item.STRIP_OF_MEAT_JERKY, 6 } }, keyItem = xi.ki.MEMORANDOLL, sparks = 100, xp = 300 }
         },
 
         [2] =
@@ -51,27 +51,27 @@ function getRoeRecords(triggers)
 
         [932] =
         { -- Call Forth an Alter Ego (gives Cipher: Valaineral)
-            reward = { sparks = 100, xp = 300, item = { xi.items.CIPHER_OF_VALAINERALS_ALTER_EGO } }
+            reward = { sparks = 100, xp = 300, item = { xi.item.CIPHER_OF_VALAINERALS_ALTER_EGO } }
         },
 
         [933] =
         { -- Alter Ego: Valaineral (gives Cipher: Mihli)
-            reward = { sparks = 100, xp = 300, item = { xi.items.CIPHER_OF_MIHLIS_ALTER_EGO } }
+            reward = { sparks = 100, xp = 300, item = { xi.item.CIPHER_OF_MIHLIS_ALTER_EGO } }
         },
 
         [934] =
         { -- Alter Ego: Mihli Aliapoh (gives Cipher: Tenzen)
-            reward = { sparks = 100, xp = 300, item = { xi.items.CIPHER_OF_TENZENS_ALTER_EGO } }
+            reward = { sparks = 100, xp = 300, item = { xi.item.CIPHER_OF_TENZENS_ALTER_EGO } }
         },
 
         [935] =
         { -- Alter Ego: Tenzen (gives Cipher: Adelheid)
-            reward = { sparks = 100, xp = 300, item = { xi.items.CIPHER_OF_ADELHEIDS_ALTER_EGO } }
+            reward = { sparks = 100, xp = 300, item = { xi.item.CIPHER_OF_ADELHEIDS_ALTER_EGO } }
         },
 
         [936] =
         { -- Alter Ego: Adelheid (gives Cipher: Joachim)
-            reward = { sparks = 100, xp = 300, item = { xi.items.CIPHER_OF_JOACHIMS_ALTER_EGO } }
+            reward = { sparks = 100, xp = 300, item = { xi.item.CIPHER_OF_JOACHIMS_ALTER_EGO } }
         },
 
         [937] =
@@ -106,7 +106,7 @@ function getRoeRecords(triggers)
             {
                 sparks = 200,
                 xp = 300,
-                item = { { xi.items.MOG_KUPON_A_PK109, 5 } },
+                item = { { xi.item.MOG_KUPON_A_PK109, 5 } },
             }
         },
 
@@ -122,7 +122,7 @@ function getRoeRecords(triggers)
             {
                 sparks = 200,
                 xp = 200,
-                item = { xi.items.MOG_KUPON_W_EMI }
+                item = { xi.item.MOG_KUPON_W_EMI }
             }
         },
 
@@ -138,7 +138,7 @@ function getRoeRecords(triggers)
             {
                 sparks = 200,
                 xp = 200,
-                item = { xi.items.MOG_KUPON_A_EMI }
+                item = { xi.item.MOG_KUPON_A_EMI }
             }
         },
 
@@ -154,7 +154,7 @@ function getRoeRecords(triggers)
             {
                 sparks = 200,
                 xp = 200,
-                item = { xi.items.MOG_KUPON_A_EMI }
+                item = { xi.item.MOG_KUPON_A_EMI }
             }
         },
 
@@ -170,7 +170,7 @@ function getRoeRecords(triggers)
             {
                 sparks = 200,
                 xp = 300,
-                item = { xi.items.CIPHER_OF_KORU_MORUS_ALTER_EGO }
+                item = { xi.item.CIPHER_OF_KORU_MORUS_ALTER_EGO }
             }
         },
 
@@ -221,56 +221,56 @@ function getRoeRecords(triggers)
         [108] =
         { -- Woodworking: Padded Box
             trigger = triggers.synthSuccess,
-            reqs = { itemID = set { xi.items.PADDED_BOX } },
+            reqs = { itemID = set { xi.item.PADDED_BOX } },
             reward = { sparks = 100, xp = 500 },
         },
 
         [109] =
         { -- Smithing: Bronze Knife
             trigger = triggers.synthSuccess,
-            reqs = { itemID = set { xi.items.BRONZE_KNIFE, xi.items.BRONZE_KNIFE_P1 } },
+            reqs = { itemID = set { xi.item.BRONZE_KNIFE, xi.item.BRONZE_KNIFE_P1 } },
             reward = { sparks = 100, xp = 500 },
         },
 
         [110] =
         { -- Goldsmithing: Copper Ring
             trigger = triggers.synthSuccess,
-            reqs = { itemID = set { xi.items.COPPER_RING, xi.items.COPPER_RING_P1 } },
+            reqs = { itemID = set { xi.item.COPPER_RING, xi.item.COPPER_RING_P1 } },
             reward = { sparks = 100, xp = 500 },
         },
 
         [111] =
         { -- Weaving: Headgear
             trigger = triggers.synthSuccess,
-            reqs = { itemID = set { xi.items.HEADGEAR, xi.items.HEADGEAR_P1 } },
+            reqs = { itemID = set { xi.item.HEADGEAR, xi.item.HEADGEAR_P1 } },
             reward = { sparks = 100, xp = 500 },
         },
 
         [112] =
         { -- Tanning: Leather Bandana
             trigger = triggers.synthSuccess,
-            reqs = { itemID = set { xi.items.LEATHER_BANDANA, xi.items.LEATHER_BANDANA_P1 } },
+            reqs = { itemID = set { xi.item.LEATHER_BANDANA, xi.item.LEATHER_BANDANA_P1 } },
             reward = { sparks = 100, xp = 500 },
         },
 
         [113] =
         { -- Boneworking: Shell Powder
             trigger = triggers.synthSuccess,
-            reqs = { itemID = set { xi.items.PONZE_OF_SHELL_POWDER } },
+            reqs = { itemID = set { xi.item.PONZE_OF_SHELL_POWDER } },
             reward = { sparks = 100, xp = 500 },
         },
 
         [114] =
         { -- Alchemy: Black Ink
             trigger = triggers.synthSuccess,
-            reqs = { itemID = set { xi.items.JAR_OF_BLACK_INK } },
+            reqs = { itemID = set { xi.item.JAR_OF_BLACK_INK } },
             reward = { sparks = 100, xp = 500 },
         },
 
         [115] =
         { -- Cooking: Pebble Soup
             trigger = triggers.synthSuccess,
-            reqs = { itemID = set { xi.items.BOWL_OF_PEBBLE_SOUP, xi.items.BOWL_OF_WISDOM_SOUP } },
+            reqs = { itemID = set { xi.item.BOWL_OF_PEBBLE_SOUP, xi.item.BOWL_OF_WISDOM_SOUP } },
             reward = { sparks = 100, xp = 500 },
         },
 
@@ -1347,7 +1347,7 @@ function getRoeRecords(triggers)
             trigger = triggers.missionComplete,
             reqs = { missionComplete = { xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.SMASH_THE_ORCISH_SCOUTS } },
             flags = set { "retro" },
-            reward = { item = { { xi.items.FIRE_CRYSTAL, 6 } }, sparks = 300, xp = 500 },
+            reward = { item = { { xi.item.FIRE_CRYSTAL, 6 } }, sparks = 300, xp = 500 },
         },
 
         [1314] =
@@ -1355,7 +1355,7 @@ function getRoeRecords(triggers)
             trigger = triggers.missionComplete,
             reqs = { missionComplete = { xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.BAT_HUNT } },
             flags = set { "retro" },
-            reward = { item = { { xi.items.ICE_CRYSTAL, 6 } }, sparks = 300, xp = 500 },
+            reward = { item = { { xi.item.ICE_CRYSTAL, 6 } }, sparks = 300, xp = 500 },
         },
 
         [1315] =
@@ -1363,7 +1363,7 @@ function getRoeRecords(triggers)
             trigger = triggers.missionComplete,
             reqs = { missionComplete = { xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.SAVE_THE_CHILDREN } },
             flags = set { "retro" },
-            reward = { item = { { xi.items.FIRE_CRYSTAL, 6 } }, sparks = 300, xp = 500 },
+            reward = { item = { { xi.item.FIRE_CRYSTAL, 6 } }, sparks = 300, xp = 500 },
         },
 
         [1316] =
@@ -1371,7 +1371,7 @@ function getRoeRecords(triggers)
             trigger = triggers.missionComplete,
             reqs = { missionComplete = { xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.THE_RESCUE_DRILL } },
             flags = set { "retro" },
-            reward = { item = { { xi.items.ICE_CRYSTAL, 6 } }, sparks = 300, xp = 500 },
+            reward = { item = { { xi.item.ICE_CRYSTAL, 6 } }, sparks = 300, xp = 500 },
         },
 
         [1317] =
@@ -1379,7 +1379,7 @@ function getRoeRecords(triggers)
             trigger = triggers.missionComplete,
             reqs = { missionComplete = { xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.THE_DAVOI_REPORT } },
             flags = set { "retro" },
-            reward = { item = { { xi.items.FIRE_CRYSTAL, 6 } }, sparks = 300, xp = 500 },
+            reward = { item = { { xi.item.FIRE_CRYSTAL, 6 } }, sparks = 300, xp = 500 },
         },
 
         [1318] =
@@ -1387,7 +1387,7 @@ function getRoeRecords(triggers)
             trigger = triggers.missionComplete,
             reqs = { missionComplete = { xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.JOURNEY_ABROAD } },
             flags = set { "retro" },
-            reward = { item = { { xi.items.ICE_CRYSTAL, 6 } }, sparks = 300, xp = 500 },
+            reward = { item = { { xi.item.ICE_CRYSTAL, 6 } }, sparks = 300, xp = 500 },
         },
 
         [1319] =
@@ -1395,7 +1395,7 @@ function getRoeRecords(triggers)
             trigger = triggers.missionComplete,
             reqs = { missionComplete = { xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.INFILTRATE_DAVOI } },
             flags = set { "retro" },
-            reward = { item = { { xi.items.FIRE_CRYSTAL, 6 } }, sparks = 300, xp = 500 },
+            reward = { item = { { xi.item.FIRE_CRYSTAL, 6 } }, sparks = 300, xp = 500 },
         },
 
         [1320] =
@@ -1403,7 +1403,7 @@ function getRoeRecords(triggers)
             trigger = triggers.missionComplete,
             reqs = { missionComplete = { xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.THE_CRYSTAL_SPRING } },
             flags = set { "retro" },
-            reward = { item = { { xi.items.ICE_CRYSTAL, 6 } }, sparks = 300, xp = 500 },
+            reward = { item = { { xi.item.ICE_CRYSTAL, 6 } }, sparks = 300, xp = 500 },
         },
 
         [1321] =
@@ -1411,7 +1411,7 @@ function getRoeRecords(triggers)
             trigger = triggers.missionComplete,
             reqs = { missionComplete = { xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.APPOINTMENT_TO_JEUNO } },
             flags = set { "retro" },
-            reward = { item = { { xi.items.FIRE_CRYSTAL, 8 } }, sparks = 300, xp = 500 },
+            reward = { item = { { xi.item.FIRE_CRYSTAL, 8 } }, sparks = 300, xp = 500 },
         },
 
         [1322] =
@@ -1419,7 +1419,7 @@ function getRoeRecords(triggers)
             trigger = triggers.missionComplete,
             reqs = { missionComplete = { xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.MAGICITE } },
             flags = set { "retro" },
-            reward = { item = { { xi.items.ICE_CRYSTAL, 8 } }, sparks = 300, xp = 500 },
+            reward = { item = { { xi.item.ICE_CRYSTAL, 8 } }, sparks = 300, xp = 500 },
         },
 
         [1323] =
@@ -1427,7 +1427,7 @@ function getRoeRecords(triggers)
             trigger = triggers.missionComplete,
             reqs = { missionComplete = { xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.THE_RUINS_OF_FEI_YIN } },
             flags = set { "retro" },
-            reward = { item = { { xi.items.FIRE_CRYSTAL, 8 } }, sparks = 300, xp = 500 },
+            reward = { item = { { xi.item.FIRE_CRYSTAL, 8 } }, sparks = 300, xp = 500 },
         },
 
         [1324] =
@@ -1435,7 +1435,7 @@ function getRoeRecords(triggers)
             trigger = triggers.missionComplete,
             reqs = { missionComplete = { xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.THE_SHADOW_LORD } },
             flags = set { "retro" },
-            reward = { item = { { xi.items.ICE_CRYSTAL, 8 } }, sparks = 300, xp = 500 },
+            reward = { item = { { xi.item.ICE_CRYSTAL, 8 } }, sparks = 300, xp = 500 },
         },
 
         [1325] =
@@ -1443,7 +1443,7 @@ function getRoeRecords(triggers)
             trigger = triggers.missionComplete,
             reqs = { missionComplete = { xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.LEAUTES_LAST_WISHES } },
             flags = set { "retro" },
-            reward = { item = { { xi.items.FIRE_CRYSTAL, 10 } }, sparks = 300, xp = 500 },
+            reward = { item = { { xi.item.FIRE_CRYSTAL, 10 } }, sparks = 300, xp = 500 },
         },
 
         [1326] =
@@ -1451,7 +1451,7 @@ function getRoeRecords(triggers)
             trigger = triggers.missionComplete,
             reqs = { missionComplete = { xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.RANPERRES_FINAL_REST } },
             flags = set { "retro" },
-            reward = { item = { { xi.items.ICE_CRYSTAL, 10 } }, sparks = 300, xp = 500 },
+            reward = { item = { { xi.item.ICE_CRYSTAL, 10 } }, sparks = 300, xp = 500 },
         },
 
         [1327] =
@@ -1459,7 +1459,7 @@ function getRoeRecords(triggers)
             trigger = triggers.missionComplete,
             reqs = { missionComplete = { xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.PRESTIGE_OF_THE_PAPSQUE } },
             flags = set { "retro" },
-            reward = { item = { { xi.items.FIRE_CRYSTAL, 10 } }, sparks = 300, xp = 500 },
+            reward = { item = { { xi.item.FIRE_CRYSTAL, 10 } }, sparks = 300, xp = 500 },
         },
 
         [1328] =
@@ -1467,7 +1467,7 @@ function getRoeRecords(triggers)
             trigger = triggers.missionComplete,
             reqs = { missionComplete = { xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.THE_SECRET_WEAPON } },
             flags = set { "retro" },
-            reward = { item = { { xi.items.ICE_CRYSTAL, 10 } }, sparks = 300, xp = 500 },
+            reward = { item = { { xi.item.ICE_CRYSTAL, 10 } }, sparks = 300, xp = 500 },
         },
 
         [1329] =
@@ -1475,7 +1475,7 @@ function getRoeRecords(triggers)
             trigger = triggers.missionComplete,
             reqs = { missionComplete = { xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.COMING_OF_AGE } },
             flags = set { "retro" },
-            reward = { item = { { xi.items.FIRE_CRYSTAL, 12 } }, sparks = 300, xp = 500 },
+            reward = { item = { { xi.item.FIRE_CRYSTAL, 12 } }, sparks = 300, xp = 500 },
         },
 
         [1330] =
@@ -1483,7 +1483,7 @@ function getRoeRecords(triggers)
             trigger = triggers.missionComplete,
             reqs = { missionComplete = { xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.LIGHTBRINGER } },
             flags = set { "retro" },
-            reward = { item = { { xi.items.ICE_CRYSTAL, 12 } }, sparks = 300, xp = 500 },
+            reward = { item = { { xi.item.ICE_CRYSTAL, 12 } }, sparks = 300, xp = 500 },
         },
 
         [1331] =
@@ -1491,7 +1491,7 @@ function getRoeRecords(triggers)
             trigger = triggers.missionComplete,
             reqs = { missionComplete = { xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.BREAKING_BARRIERS } },
             flags = set { "retro" },
-            reward = { item = { { xi.items.FIRE_CRYSTAL, 12 } }, sparks = 300, xp = 500 },
+            reward = { item = { { xi.item.FIRE_CRYSTAL, 12 } }, sparks = 300, xp = 500 },
         },
 
         [1332] =
@@ -1499,7 +1499,7 @@ function getRoeRecords(triggers)
             trigger = triggers.missionComplete,
             reqs = { missionComplete = { xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.THE_HEIR_TO_THE_LIGHT } },
             flags = set { "retro" },
-            reward = { item = { { xi.items.ICE_CRYSTAL, 12 } }, sparks = 300, xp = 500 },
+            reward = { item = { { xi.item.ICE_CRYSTAL, 12 } }, sparks = 300, xp = 500 },
         },
 
         -----------------------------------
@@ -1511,7 +1511,7 @@ function getRoeRecords(triggers)
             trigger = triggers.missionComplete,
             reqs = { missionComplete = { xi.mission.log_id.BASTOK, xi.mission.id.bastok.THE_ZERUHN_REPORT } },
             flags = set { "retro" },
-            reward = { item = { { xi.items.LIGHTNING_CRYSTAL, 6 } }, sparks = 300, xp = 500 },
+            reward = { item = { { xi.item.LIGHTNING_CRYSTAL, 6 } }, sparks = 300, xp = 500 },
         },
 
         [1334] =
@@ -1519,7 +1519,7 @@ function getRoeRecords(triggers)
             trigger = triggers.missionComplete,
             reqs = { missionComplete = { xi.mission.log_id.BASTOK, xi.mission.id.bastok.GEOLOGICAL_SURVEY } },
             flags = set { "retro" },
-            reward = { item = { { xi.items.WATER_CRYSTAL, 6 } }, sparks = 300, xp = 500 },
+            reward = { item = { { xi.item.WATER_CRYSTAL, 6 } }, sparks = 300, xp = 500 },
         },
 
         [1335] =
@@ -1527,7 +1527,7 @@ function getRoeRecords(triggers)
             trigger = triggers.missionComplete,
             reqs = { missionComplete = { xi.mission.log_id.BASTOK, xi.mission.id.bastok.FETICHISM } },
             flags = set { "retro" },
-            reward = { item = { { xi.items.LIGHTNING_CRYSTAL, 6 } }, sparks = 300, xp = 500 },
+            reward = { item = { { xi.item.LIGHTNING_CRYSTAL, 6 } }, sparks = 300, xp = 500 },
         },
 
         [1336] =
@@ -1535,7 +1535,7 @@ function getRoeRecords(triggers)
             trigger = triggers.missionComplete,
             reqs = { missionComplete = { xi.mission.log_id.BASTOK, xi.mission.id.bastok.THE_CRYSTAL_LINE } },
             flags = set { "retro" },
-            reward = { item = { { xi.items.WATER_CRYSTAL, 6 } }, sparks = 300, xp = 500 },
+            reward = { item = { { xi.item.WATER_CRYSTAL, 6 } }, sparks = 300, xp = 500 },
         },
 
         [1337] =
@@ -1543,7 +1543,7 @@ function getRoeRecords(triggers)
             trigger = triggers.missionComplete,
             reqs = { missionComplete = { xi.mission.log_id.BASTOK, xi.mission.id.bastok.WADING_BEASTS } },
             flags = set { "retro" },
-            reward = { item = { { xi.items.LIGHTNING_CRYSTAL, 6 } }, sparks = 300, xp = 500 },
+            reward = { item = { { xi.item.LIGHTNING_CRYSTAL, 6 } }, sparks = 300, xp = 500 },
         },
 
         [1338] =
@@ -1551,7 +1551,7 @@ function getRoeRecords(triggers)
             trigger = triggers.missionComplete,
             reqs = { missionComplete = { xi.mission.log_id.BASTOK, xi.mission.id.bastok.THE_EMISSARY } },
             flags = set { "retro" },
-            reward = { item = { { xi.items.WATER_CRYSTAL, 6 } }, sparks = 300, xp = 500 },
+            reward = { item = { { xi.item.WATER_CRYSTAL, 6 } }, sparks = 300, xp = 500 },
         },
 
         [1339] =
@@ -1559,7 +1559,7 @@ function getRoeRecords(triggers)
             trigger = triggers.missionComplete,
             reqs = { missionComplete = { xi.mission.log_id.BASTOK, xi.mission.id.bastok.THE_FOUR_MUSKETEERS } },
             flags = set { "retro" },
-            reward = { item = { { xi.items.LIGHTNING_CRYSTAL, 6 } }, sparks = 300, xp = 500 },
+            reward = { item = { { xi.item.LIGHTNING_CRYSTAL, 6 } }, sparks = 300, xp = 500 },
         },
 
         [1340] =
@@ -1567,7 +1567,7 @@ function getRoeRecords(triggers)
             trigger = triggers.missionComplete,
             reqs = { missionComplete = { xi.mission.log_id.BASTOK, xi.mission.id.bastok.TO_THE_FORSAKEN_MINES } },
             flags = set { "retro" },
-            reward = { item = { { xi.items.WATER_CRYSTAL, 6 } }, sparks = 300, xp = 500 },
+            reward = { item = { { xi.item.WATER_CRYSTAL, 6 } }, sparks = 300, xp = 500 },
         },
 
         [1341] =
@@ -1575,7 +1575,7 @@ function getRoeRecords(triggers)
             trigger = triggers.missionComplete,
             reqs = { missionComplete = { xi.mission.log_id.BASTOK, xi.mission.id.bastok.JEUNO } },
             flags = set { "retro" },
-            reward = { item = { { xi.items.LIGHTNING_CRYSTAL, 8 } }, sparks = 300, xp = 500 },
+            reward = { item = { { xi.item.LIGHTNING_CRYSTAL, 8 } }, sparks = 300, xp = 500 },
         },
 
         [1342] =
@@ -1583,7 +1583,7 @@ function getRoeRecords(triggers)
             trigger = triggers.missionComplete,
             reqs = { missionComplete = { xi.mission.log_id.BASTOK, xi.mission.id.bastok.MAGICITE } },
             flags = set { "retro" },
-            reward = { item = { { xi.items.WATER_CRYSTAL, 8 } }, sparks = 300, xp = 500 },
+            reward = { item = { { xi.item.WATER_CRYSTAL, 8 } }, sparks = 300, xp = 500 },
         },
 
         [1343] =
@@ -1591,7 +1591,7 @@ function getRoeRecords(triggers)
             trigger = triggers.missionComplete,
             reqs = { missionComplete = { xi.mission.log_id.BASTOK, xi.mission.id.bastok.DARKNESS_RISING } },
             flags = set { "retro" },
-            reward = { item = { { xi.items.LIGHTNING_CRYSTAL, 8 } }, sparks = 300, xp = 500 },
+            reward = { item = { { xi.item.LIGHTNING_CRYSTAL, 8 } }, sparks = 300, xp = 500 },
         },
 
         [1344] =
@@ -1599,7 +1599,7 @@ function getRoeRecords(triggers)
             trigger = triggers.missionComplete,
             reqs = { missionComplete = { xi.mission.log_id.BASTOK, xi.mission.id.bastok.XARCABARD_LAND_OF_TRUTHS } },
             flags = set { "retro" },
-            reward = { item = { { xi.items.WATER_CRYSTAL, 8 } }, sparks = 300, xp = 500 },
+            reward = { item = { { xi.item.WATER_CRYSTAL, 8 } }, sparks = 300, xp = 500 },
         },
 
         [1345] =
@@ -1607,7 +1607,7 @@ function getRoeRecords(triggers)
             trigger = triggers.missionComplete,
             reqs = { missionComplete = { xi.mission.log_id.BASTOK, xi.mission.id.bastok.RETURN_OF_THE_TALEKEEPER } },
             flags = set { "retro" },
-            reward = { item = { { xi.items.LIGHTNING_CRYSTAL, 10 } }, sparks = 300, xp = 500 },
+            reward = { item = { { xi.item.LIGHTNING_CRYSTAL, 10 } }, sparks = 300, xp = 500 },
         },
 
         [1346] =
@@ -1615,7 +1615,7 @@ function getRoeRecords(triggers)
             trigger = triggers.missionComplete,
             reqs = { missionComplete = { xi.mission.log_id.BASTOK, xi.mission.id.bastok.THE_PIRATES_COVE } },
             flags = set { "retro" },
-            reward = { item = { { xi.items.WATER_CRYSTAL, 10 } }, sparks = 300, xp = 500 },
+            reward = { item = { { xi.item.WATER_CRYSTAL, 10 } }, sparks = 300, xp = 500 },
         },
 
         [1347] =
@@ -1623,7 +1623,7 @@ function getRoeRecords(triggers)
             trigger = triggers.missionComplete,
             reqs = { missionComplete = { xi.mission.log_id.BASTOK, xi.mission.id.bastok.THE_FINAL_IMAGE } },
             flags = set { "retro" },
-            reward = { item = { { xi.items.LIGHTNING_CRYSTAL, 10 } }, sparks = 300, xp = 500 },
+            reward = { item = { { xi.item.LIGHTNING_CRYSTAL, 10 } }, sparks = 300, xp = 500 },
         },
 
         [1348] =
@@ -1631,7 +1631,7 @@ function getRoeRecords(triggers)
             trigger = triggers.missionComplete,
             reqs = { missionComplete = { xi.mission.log_id.BASTOK, xi.mission.id.bastok.ON_MY_WAY } },
             flags = set { "retro" },
-            reward = { item = { { xi.items.WATER_CRYSTAL, 10 } }, sparks = 300, xp = 500 },
+            reward = { item = { { xi.item.WATER_CRYSTAL, 10 } }, sparks = 300, xp = 500 },
         },
 
         [1349] =
@@ -1639,7 +1639,7 @@ function getRoeRecords(triggers)
             trigger = triggers.missionComplete,
             reqs = { missionComplete = { xi.mission.log_id.BASTOK, xi.mission.id.bastok.THE_CHAINS_THAT_BIND_US } },
             flags = set { "retro" },
-            reward = { item = { { xi.items.LIGHTNING_CRYSTAL, 12 } }, sparks = 300, xp = 500 },
+            reward = { item = { { xi.item.LIGHTNING_CRYSTAL, 12 } }, sparks = 300, xp = 500 },
         },
 
         [1350] =
@@ -1647,7 +1647,7 @@ function getRoeRecords(triggers)
             trigger = triggers.missionComplete,
             reqs = { missionComplete = { xi.mission.log_id.BASTOK, xi.mission.id.bastok.ENTER_THE_TALEKEEPER } },
             flags = set { "retro" },
-            reward = { item = { { xi.items.WATER_CRYSTAL, 12 } }, sparks = 300, xp = 500 },
+            reward = { item = { { xi.item.WATER_CRYSTAL, 12 } }, sparks = 300, xp = 500 },
         },
 
         [1351] =
@@ -1655,7 +1655,7 @@ function getRoeRecords(triggers)
             trigger = triggers.missionComplete,
             reqs = { missionComplete = { xi.mission.log_id.BASTOK, xi.mission.id.bastok.THE_SALT_OF_THE_EARTH } },
             flags = set { "retro" },
-            reward = { item = { { xi.items.LIGHTNING_CRYSTAL, 12 } }, sparks = 300, xp = 500 },
+            reward = { item = { { xi.item.LIGHTNING_CRYSTAL, 12 } }, sparks = 300, xp = 500 },
         },
 
         [1352] =
@@ -1663,7 +1663,7 @@ function getRoeRecords(triggers)
             trigger = triggers.missionComplete,
             reqs = { missionComplete = { xi.mission.log_id.BASTOK, xi.mission.id.bastok.WHERE_TWO_PATHS_CONVERGE } },
             flags = set { "retro" },
-            reward = { item = { { xi.items.WATER_CRYSTAL, 12 } }, sparks = 300, xp = 500 },
+            reward = { item = { { xi.item.WATER_CRYSTAL, 12 } }, sparks = 300, xp = 500 },
         },
 
         -----------------------------------
@@ -1675,7 +1675,7 @@ function getRoeRecords(triggers)
             trigger = triggers.missionComplete,
             reqs = { missionComplete = { xi.mission.log_id.WINDURST, xi.mission.id.windurst.THE_HORUTOTO_RUINS_EXPERIMENT } },
             flags = set { "retro" },
-            reward = { item = { { xi.items.WIND_CRYSTAL, 6 } }, sparks = 300, xp = 500 },
+            reward = { item = { { xi.item.WIND_CRYSTAL, 6 } }, sparks = 300, xp = 500 },
         },
 
         [1354] =
@@ -1683,7 +1683,7 @@ function getRoeRecords(triggers)
             trigger = triggers.missionComplete,
             reqs = { missionComplete = { xi.mission.log_id.WINDURST, xi.mission.id.windurst.THE_HEART_OF_THE_MATTER } },
             flags = set { "retro" },
-            reward = { item = { { xi.items.EARTH_CRYSTAL, 6 } }, sparks = 300, xp = 500 },
+            reward = { item = { { xi.item.EARTH_CRYSTAL, 6 } }, sparks = 300, xp = 500 },
         },
 
         [1355] =
@@ -1691,7 +1691,7 @@ function getRoeRecords(triggers)
             trigger = triggers.missionComplete,
             reqs = { missionComplete = { xi.mission.log_id.WINDURST, xi.mission.id.windurst.THE_PRICE_OF_PEACE } },
             flags = set { "retro" },
-            reward = { item = { { xi.items.WIND_CRYSTAL, 6 } }, sparks = 300, xp = 500 },
+            reward = { item = { { xi.item.WIND_CRYSTAL, 6 } }, sparks = 300, xp = 500 },
         },
 
         [1356] =
@@ -1699,7 +1699,7 @@ function getRoeRecords(triggers)
             trigger = triggers.missionComplete,
             reqs = { missionComplete = { xi.mission.log_id.WINDURST, xi.mission.id.windurst.LOST_FOR_WORDS } },
             flags = set { "retro" },
-            reward = { item = { { xi.items.EARTH_CRYSTAL, 6 } }, sparks = 300, xp = 500 },
+            reward = { item = { { xi.item.EARTH_CRYSTAL, 6 } }, sparks = 300, xp = 500 },
         },
 
         [1357] =
@@ -1707,7 +1707,7 @@ function getRoeRecords(triggers)
             trigger = triggers.missionComplete,
             reqs = { missionComplete = { xi.mission.log_id.WINDURST, xi.mission.id.windurst.A_TESTING_TIME } },
             flags = set { "retro" },
-            reward = { item = { { xi.items.WIND_CRYSTAL, 6 } }, sparks = 300, xp = 500 },
+            reward = { item = { { xi.item.WIND_CRYSTAL, 6 } }, sparks = 300, xp = 500 },
         },
 
         [1358] =
@@ -1717,7 +1717,7 @@ function getRoeRecords(triggers)
             trigger = triggers.missionComplete,
             reqs = { missionComplete = { xi.mission.log_id.WINDURST, xi.mission.id.windurst.THE_THREE_KINGDOMS } },
             flags = set { "retro" },
-            reward = { item = { { xi.items.EARTH_CRYSTAL, 6 } }, sparks = 300, xp = 500 },
+            reward = { item = { { xi.item.EARTH_CRYSTAL, 6 } }, sparks = 300, xp = 500 },
         },
 
         [1359] =
@@ -1725,7 +1725,7 @@ function getRoeRecords(triggers)
             trigger = triggers.missionComplete,
             reqs = { missionComplete = { xi.mission.log_id.WINDURST, xi.mission.id.windurst.TO_EACH_HIS_OWN_RIGHT } },
             flags = set { "retro" },
-            reward = { item = { { xi.items.WIND_CRYSTAL, 6 } }, sparks = 300, xp = 500 },
+            reward = { item = { { xi.item.WIND_CRYSTAL, 6 } }, sparks = 300, xp = 500 },
         },
 
         [1360] =
@@ -1733,7 +1733,7 @@ function getRoeRecords(triggers)
             trigger = triggers.missionComplete,
             reqs = { missionComplete = { xi.mission.log_id.WINDURST, xi.mission.id.windurst.WRITTEN_IN_THE_STARS } },
             flags = set { "retro" },
-            reward = { item = { { xi.items.EARTH_CRYSTAL, 6 } }, sparks = 300, xp = 500 },
+            reward = { item = { { xi.item.EARTH_CRYSTAL, 6 } }, sparks = 300, xp = 500 },
         },
 
         [1361] =
@@ -1741,7 +1741,7 @@ function getRoeRecords(triggers)
             trigger = triggers.missionComplete,
             reqs = { missionComplete = { xi.mission.log_id.WINDURST, xi.mission.id.windurst.A_NEW_JOURNEY } },
             flags = set { "retro" },
-            reward = { item = { { xi.items.WIND_CRYSTAL, 8 } }, sparks = 300, xp = 500 },
+            reward = { item = { { xi.item.WIND_CRYSTAL, 8 } }, sparks = 300, xp = 500 },
         },
 
         [1362] =
@@ -1749,7 +1749,7 @@ function getRoeRecords(triggers)
             trigger = triggers.missionComplete,
             reqs = { missionComplete = { xi.mission.log_id.WINDURST, xi.mission.id.windurst.MAGICITE } },
             flags = set { "retro" },
-            reward = { item = { { xi.items.EARTH_CRYSTAL, 8 } }, sparks = 300, xp = 500 },
+            reward = { item = { { xi.item.EARTH_CRYSTAL, 8 } }, sparks = 300, xp = 500 },
         },
 
         [1363] =
@@ -1757,7 +1757,7 @@ function getRoeRecords(triggers)
             trigger = triggers.missionComplete,
             reqs = { missionComplete = { xi.mission.log_id.WINDURST, xi.mission.id.windurst.THE_FINAL_SEAL } },
             flags = set { "retro" },
-            reward = { item = { { xi.items.WIND_CRYSTAL, 8 } }, sparks = 300, xp = 500 },
+            reward = { item = { { xi.item.WIND_CRYSTAL, 8 } }, sparks = 300, xp = 500 },
         },
 
         [1364] =
@@ -1765,7 +1765,7 @@ function getRoeRecords(triggers)
             trigger = triggers.missionComplete,
             reqs = { missionComplete = { xi.mission.log_id.WINDURST, xi.mission.id.windurst.THE_SHADOW_AWAITS } },
             flags = set { "retro" },
-            reward = { item = { { xi.items.EARTH_CRYSTAL, 8 } }, sparks = 300, xp = 500 },
+            reward = { item = { { xi.item.EARTH_CRYSTAL, 8 } }, sparks = 300, xp = 500 },
         },
 
         [1365] =
@@ -1773,7 +1773,7 @@ function getRoeRecords(triggers)
             trigger = triggers.missionComplete,
             reqs = { missionComplete = { xi.mission.log_id.WINDURST, xi.mission.id.windurst.FULL_MOON_FOUNTAIN } },
             flags = set { "retro" },
-            reward = { item = { { xi.items.WIND_CRYSTAL, 10 } }, sparks = 300, xp = 500 },
+            reward = { item = { { xi.item.WIND_CRYSTAL, 10 } }, sparks = 300, xp = 500 },
         },
 
         [1366] =
@@ -1781,7 +1781,7 @@ function getRoeRecords(triggers)
             trigger = triggers.missionComplete,
             reqs = { missionComplete = { xi.mission.log_id.WINDURST, xi.mission.id.windurst.SAINTLY_INVITATION } },
             flags = set { "retro" },
-            reward = { item = { { xi.items.EARTH_CRYSTAL, 10 } }, sparks = 300, xp = 500 },
+            reward = { item = { { xi.item.EARTH_CRYSTAL, 10 } }, sparks = 300, xp = 500 },
         },
 
         [1367] =
@@ -1789,7 +1789,7 @@ function getRoeRecords(triggers)
             trigger = triggers.missionComplete,
             reqs = { missionComplete = { xi.mission.log_id.WINDURST, xi.mission.id.windurst.THE_SIXTH_MINISTRY } },
             flags = set { "retro" },
-            reward = { item = { { xi.items.WIND_CRYSTAL, 10 } }, sparks = 300, xp = 500 },
+            reward = { item = { { xi.item.WIND_CRYSTAL, 10 } }, sparks = 300, xp = 500 },
         },
 
         [1368] =
@@ -1797,7 +1797,7 @@ function getRoeRecords(triggers)
             trigger = triggers.missionComplete,
             reqs = { missionComplete = { xi.mission.log_id.WINDURST, xi.mission.id.windurst.AWAKENING_OF_THE_GODS } },
             flags = set { "retro" },
-            reward = { item = { { xi.items.EARTH_CRYSTAL, 10 } }, sparks = 300, xp = 500 },
+            reward = { item = { { xi.item.EARTH_CRYSTAL, 10 } }, sparks = 300, xp = 500 },
         },
 
         [1369] =
@@ -1805,7 +1805,7 @@ function getRoeRecords(triggers)
             trigger = triggers.missionComplete,
             reqs = { missionComplete = { xi.mission.log_id.WINDURST, xi.mission.id.windurst.VAIN } },
             flags = set { "retro" },
-            reward = { item = { { xi.items.WIND_CRYSTAL, 12 } }, sparks = 300, xp = 500 },
+            reward = { item = { { xi.item.WIND_CRYSTAL, 12 } }, sparks = 300, xp = 500 },
         },
 
         [1370] =
@@ -1813,7 +1813,7 @@ function getRoeRecords(triggers)
             trigger = triggers.missionComplete,
             reqs = { missionComplete = { xi.mission.log_id.WINDURST, xi.mission.id.windurst.THE_JESTER_WHOD_BE_KING } },
             flags = set { "retro" },
-            reward = { item = { { xi.items.EARTH_CRYSTAL, 12 } }, sparks = 300, xp = 500 },
+            reward = { item = { { xi.item.EARTH_CRYSTAL, 12 } }, sparks = 300, xp = 500 },
         },
 
         [1371] =
@@ -1821,7 +1821,7 @@ function getRoeRecords(triggers)
             trigger = triggers.missionComplete,
             reqs = { missionComplete = { xi.mission.log_id.WINDURST, xi.mission.id.windurst.DOLL_OF_THE_DEAD } },
             flags = set { "retro" },
-            reward = { item = { { xi.items.WIND_CRYSTAL, 12 } }, sparks = 300, xp = 500 },
+            reward = { item = { { xi.item.WIND_CRYSTAL, 12 } }, sparks = 300, xp = 500 },
         },
 
         [1372] =
@@ -1829,7 +1829,7 @@ function getRoeRecords(triggers)
             trigger = triggers.missionComplete,
             reqs = { missionComplete = { xi.mission.log_id.WINDURST, xi.mission.id.windurst.MOON_READING } },
             flags = set { "retro" },
-            reward = { item = { { xi.items.EARTH_CRYSTAL, 12 } }, sparks = 300, xp = 500 },
+            reward = { item = { { xi.item.EARTH_CRYSTAL, 12 } }, sparks = 300, xp = 500 },
         },
 
         -----------------------------------
@@ -1841,7 +1841,7 @@ function getRoeRecords(triggers)
             trigger = triggers.missionComplete,
             reqs = { missionComplete = { xi.mission.log_id.ROV, xi.mission.id.rov.FLAMES_OF_PRAYER } },
             flags = set { "retro" },
-            reward = { item = { { xi.items.COPPER_AMAN_VOUCHER, 2 } }, sparks = 300, xp = 500 },
+            reward = { item = { { xi.item.COPPER_AMAN_VOUCHER, 2 } }, sparks = 300, xp = 500 },
         },
 
         [1374] =
@@ -1849,7 +1849,7 @@ function getRoeRecords(triggers)
             trigger = triggers.missionComplete,
             reqs = { missionComplete = { xi.mission.log_id.ROV, xi.mission.id.rov.A_LAND_AFTER_TIME } },
             flags = set { "retro" },
-            reward = { item = { { xi.items.COPPER_AMAN_VOUCHER, 2 } }, sparks = 300, xp = 500 },
+            reward = { item = { { xi.item.COPPER_AMAN_VOUCHER, 2 } }, sparks = 300, xp = 500 },
         },
 
         [1375] =
@@ -1857,7 +1857,7 @@ function getRoeRecords(triggers)
             trigger = triggers.missionComplete,
             reqs = { missionComplete = { xi.mission.log_id.ROV, xi.mission.id.rov.SET_FREE } },
             flags = set { "retro" },
-            reward = { item = { { xi.items.COPPER_AMAN_VOUCHER, 2 } }, sparks = 300, xp = 500 },
+            reward = { item = { { xi.item.COPPER_AMAN_VOUCHER, 2 } }, sparks = 300, xp = 500 },
         },
 
         [1416] =
@@ -1865,7 +1865,7 @@ function getRoeRecords(triggers)
             trigger = triggers.missionComplete,
             reqs = { missionComplete = { xi.mission.log_id.ROV, xi.mission.id.rov.CRASHING_WAVES } },
             flags = set { "retro" },
-            reward = { item = { { xi.items.COPPER_AMAN_VOUCHER, 2 } }, sparks = 300, xp = 500 },
+            reward = { item = { { xi.item.COPPER_AMAN_VOUCHER, 2 } }, sparks = 300, xp = 500 },
         },
 
         -----------------------------------
@@ -2253,7 +2253,7 @@ function getRoeRecords(triggers)
             trigger = triggers.mobKill,
             goal = 500,
             reqs = { mobXP = true },
-            reward = { sparks = 2000, xp = 6000, item = { xi.items.PLUTON_CASE } },
+            reward = { sparks = 2000, xp = 6000, item = { xi.item.PLUTON_CASE } },
         },
 
         [14] =
@@ -2261,7 +2261,7 @@ function getRoeRecords(triggers)
             trigger = triggers.mobKill,
             goal = 750,
             reqs = { mobXP = true },
-            reward = { sparks = 5000, xp = 10000, item = { xi.items.PLUTON_BOX } },
+            reward = { sparks = 5000, xp = 10000, item = { xi.item.PLUTON_BOX } },
         },
 
         [15] =
@@ -2311,7 +2311,7 @@ function getRoeRecords(triggers)
             trigger = triggers.dmgDealt,
             goal = 100,
             reqs = { dmgMin = 2000 },
-            reward = { sparks = 2000, xp = 5000, item = { { xi.items.COPPER_AMAN_VOUCHER, 6 } } },
+            reward = { sparks = 2000, xp = 5000, item = { { xi.item.COPPER_AMAN_VOUCHER, 6 } } },
         },
 
         [19] =
@@ -2351,7 +2351,7 @@ function getRoeRecords(triggers)
             trigger = triggers.dmgDealt,
             goal = 10,
             reqs = { dmgMin = 1110, dmgMax = 1120 },
-            reward = { sparks = 300, xp = 1500, item = { { xi.items.COPPER_AMAN_VOUCHER, 2 } } },
+            reward = { sparks = 300, xp = 1500, item = { { xi.item.COPPER_AMAN_VOUCHER, 2 } } },
         },
 
         [29] =
@@ -2360,7 +2360,7 @@ function getRoeRecords(triggers)
             goal = 100000,
             increment = 0,
             notify = 5000,
-            reward = { sparks = 1000, xp = 5000, item = { xi.items.BEITETSU_PARCEL } },
+            reward = { sparks = 1000, xp = 5000, item = { xi.item.BEITETSU_PARCEL } },
             check = function(self, player, params)
                 if params.dmg and params.dmg > 0 then
                     params.progress = params.progress + params.dmg
@@ -2377,7 +2377,7 @@ function getRoeRecords(triggers)
             goal = 200000,
             increment = 0,
             notify = 10000,
-            reward = { sparks = 3000, xp = 7000, item = { xi.items.BEITETSU_BOX } },
+            reward = { sparks = 3000, xp = 7000, item = { xi.item.BEITETSU_BOX } },
             check = function(self, player, params)
                 if params.dmg and params.dmg > 0 then
                     params.progress = params.progress + params.dmg
@@ -2394,7 +2394,7 @@ function getRoeRecords(triggers)
             goal = 300000,
             increment = 0,
             notify = 10000,
-            reward = { sparks = 3000, xp = 7000, item = { xi.items.BEITETSU_BOX } },
+            reward = { sparks = 3000, xp = 7000, item = { xi.item.BEITETSU_BOX } },
             check = function(self, player, params)
                 if params.dmg and params.dmg > 0 then
                     params.progress = params.progress + params.dmg
@@ -2411,7 +2411,7 @@ function getRoeRecords(triggers)
             goal = 10000,
             increment = 0,
             notify = 500,
-            reward = { sparks = 1000, xp = 2500, item = { xi.items.BOULDER_CASE } },
+            reward = { sparks = 1000, xp = 2500, item = { xi.item.BOULDER_CASE } },
             check = function(self, player, params)
                 if params.heal and params.heal > 0 then
                     params.progress = params.progress + params.heal
@@ -2428,7 +2428,7 @@ function getRoeRecords(triggers)
             goal = 20000,
             increment = 0,
             notify = 1000,
-            reward = { sparks = 3000, xp = 7000, item = { xi.items.BOULDER_BOX } },
+            reward = { sparks = 3000, xp = 7000, item = { xi.item.BOULDER_BOX } },
             check = function(self, player, params)
                 if params.heal and params.heal > 0 then
                     params.progress = params.progress + params.heal
@@ -2445,7 +2445,7 @@ function getRoeRecords(triggers)
             goal = 30000,
             increment = 0,
             notify = 1000,
-            reward = { sparks = 3000, xp = 7000, item = { xi.items.BOULDER_BOX } },
+            reward = { sparks = 3000, xp = 7000, item = { xi.item.BOULDER_BOX } },
             check = function(self, player, params)
                 if params.heal and params.heal > 0 then
                     params.progress = params.progress + params.heal
@@ -2462,7 +2462,7 @@ function getRoeRecords(triggers)
             goal = 10000,
             increment = 0,
             notify = 500,
-            reward = { sparks = 1000, xp = 1000, item = { { xi.items.COPPER_AMAN_VOUCHER, 2 } } },
+            reward = { sparks = 1000, xp = 1000, item = { { xi.item.COPPER_AMAN_VOUCHER, 2 } } },
             check = function(self, player, params)
                 if params.dmg and params.dmg > 0 then
                     params.progress = params.progress + params.dmg
@@ -2479,7 +2479,7 @@ function getRoeRecords(triggers)
             goal = 20000,
             increment = 0,
             notify = 1000,
-            reward = { sparks = 3000, xp = 5000, item = { { xi.items.COPPER_AMAN_VOUCHER, 4 } } },
+            reward = { sparks = 3000, xp = 5000, item = { { xi.item.COPPER_AMAN_VOUCHER, 4 } } },
             check = function(self, player, params)
                 if params.dmg and params.dmg > 0 then
                     params.progress = params.progress + params.dmg
@@ -2496,7 +2496,7 @@ function getRoeRecords(triggers)
             goal = 30000,
             increment = 0,
             notify = 1000,
-            reward = { sparks = 3000, xp = 5000, item = { { xi.items.COPPER_AMAN_VOUCHER, 6 } } },
+            reward = { sparks = 3000, xp = 5000, item = { { xi.item.COPPER_AMAN_VOUCHER, 6 } } },
             check = function(self, player, params)
                 if params.dmg and params.dmg > 0 then
                     params.progress = params.progress + params.dmg
@@ -2527,7 +2527,7 @@ function getRoeRecords(triggers)
             trigger = triggers.healAlly,
             goal = 100,
             reqs = { healMin = 750 },
-            reward = { sparks = 3000, xp = 7000, item = { xi.items.PLUTON_BOX } },
+            reward = { sparks = 3000, xp = 7000, item = { xi.item.PLUTON_BOX } },
         },
 
         -----------------------------------
@@ -2550,7 +2550,7 @@ function getRoeRecords(triggers)
         { -- Spoils - Fire Crystals
             trigger = triggers.itemLooted,
             goal = 10,
-            reqs = { itemID = set { xi.items.FIRE_CRYSTAL } },
+            reqs = { itemID = set { xi.item.FIRE_CRYSTAL } },
             flags = set { "repeat" },
             reward = { sparks = 200, xp = 1000, accolades = 20 },
         },
@@ -2559,7 +2559,7 @@ function getRoeRecords(triggers)
         { -- Spoils - Ice Crystals
             trigger = triggers.itemLooted,
             goal = 10,
-            reqs = { itemID = set { xi.items.ICE_CRYSTAL } },
+            reqs = { itemID = set { xi.item.ICE_CRYSTAL } },
             flags = set { "repeat" },
             reward = { sparks = 200, xp = 1000, accolades = 20 },
         },
@@ -2568,7 +2568,7 @@ function getRoeRecords(triggers)
         { -- Spoils - Wind Crystals
             trigger = triggers.itemLooted,
             goal = 10,
-            reqs = { itemID = set { xi.items.WIND_CRYSTAL } },
+            reqs = { itemID = set { xi.item.WIND_CRYSTAL } },
             flags = set { "repeat" },
             reward = { sparks = 200, xp = 1000, accolades = 20 },
         },
@@ -2577,7 +2577,7 @@ function getRoeRecords(triggers)
         { -- Spoils - Earth Crystals
             trigger = triggers.itemLooted,
             goal = 10,
-            reqs = { itemID = set { xi.items.EARTH_CRYSTAL } },
+            reqs = { itemID = set { xi.item.EARTH_CRYSTAL } },
             flags = set { "repeat" },
             reward = { sparks = 200, xp = 1000, accolades = 20 },
         },
@@ -2586,7 +2586,7 @@ function getRoeRecords(triggers)
         { -- Spoils - Lightning Crystals
             trigger = triggers.itemLooted,
             goal = 10,
-            reqs = { itemID = set { xi.items.LIGHTNING_CRYSTAL } },
+            reqs = { itemID = set { xi.item.LIGHTNING_CRYSTAL } },
             flags = set { "repeat" },
             reward = { sparks = 200, xp = 1000, accolades = 20 },
         },
@@ -2595,7 +2595,7 @@ function getRoeRecords(triggers)
         { -- Spoils - Water Crystals
             trigger = triggers.itemLooted,
             goal = 10,
-            reqs = { itemID = set { xi.items.WATER_CRYSTAL } },
+            reqs = { itemID = set { xi.item.WATER_CRYSTAL } },
             flags = set { "repeat" },
             reward = { sparks = 200, xp = 1000, accolades = 20 },
         },
@@ -2604,7 +2604,7 @@ function getRoeRecords(triggers)
         { -- Spoils - Light Crystals
             trigger = triggers.itemLooted,
             goal = 10,
-            reqs = { itemID = set { xi.items.LIGHT_CRYSTAL } },
+            reqs = { itemID = set { xi.item.LIGHT_CRYSTAL } },
             flags = set { "repeat" },
             reward = { sparks = 200, xp = 1000, accolades = 20 },
         },
@@ -2613,7 +2613,7 @@ function getRoeRecords(triggers)
         { -- Spoils - Dark Crystals
             trigger = triggers.itemLooted,
             goal = 10,
-            reqs = { itemID = set { xi.items.DARK_CRYSTAL } },
+            reqs = { itemID = set { xi.item.DARK_CRYSTAL } },
             flags = set { "repeat" },
             reward = { sparks = 200, xp = 1000, accolades = 20 },
         },
@@ -2622,7 +2622,7 @@ function getRoeRecords(triggers)
         { -- Spoils - Flame Geode
             trigger = triggers.itemLooted,
             goal = 3,
-            reqs = { itemID = set { xi.items.FLAME_GEODE } },
+            reqs = { itemID = set { xi.item.FLAME_GEODE } },
             flags = set { "repeat" },
             reward = { sparks = 200, xp = 1000, accolades = 20 },
         },
@@ -2631,7 +2631,7 @@ function getRoeRecords(triggers)
         { -- Spoils - Snow Geode
             trigger = triggers.itemLooted,
             goal = 3,
-            reqs = { itemID = set { xi.items.SNOW_GEODE } },
+            reqs = { itemID = set { xi.item.SNOW_GEODE } },
             flags = set { "repeat" },
             reward = { sparks = 200, xp = 1000, accolades = 20 },
         },
@@ -2640,7 +2640,7 @@ function getRoeRecords(triggers)
         { -- Spoils - Breeze Geode
             trigger = triggers.itemLooted,
             goal = 3,
-            reqs = { itemID = set { xi.items.BREEZE_GEODE } },
+            reqs = { itemID = set { xi.item.BREEZE_GEODE } },
             flags = set { "repeat" },
             reward = { sparks = 200, xp = 1000, accolades = 20 },
         },
@@ -2649,7 +2649,7 @@ function getRoeRecords(triggers)
         { -- Spoils - Soil Geode
             trigger = triggers.itemLooted,
             goal = 3,
-            reqs = { itemID = set { xi.items.SOIL_GEODE } },
+            reqs = { itemID = set { xi.item.SOIL_GEODE } },
             flags = set { "repeat" },
             reward = { sparks = 200, xp = 1000, accolades = 20 },
         },
@@ -2658,7 +2658,7 @@ function getRoeRecords(triggers)
         { -- Spoils - Thunder Geode
             trigger = triggers.itemLooted,
             goal = 3,
-            reqs = { itemID = set { xi.items.THUNDER_GEODE } },
+            reqs = { itemID = set { xi.item.THUNDER_GEODE } },
             flags = set { "repeat" },
             reward = { sparks = 200, xp = 1000, accolades = 20 },
         },
@@ -2667,7 +2667,7 @@ function getRoeRecords(triggers)
         { -- Spoils - Aqua Geode
             trigger = triggers.itemLooted,
             goal = 3,
-            reqs = { itemID = set { xi.items.AQUA_GEODE } },
+            reqs = { itemID = set { xi.item.AQUA_GEODE } },
             flags = set { "repeat" },
             reward = { sparks = 200, xp = 1000, accolades = 20 },
         },
@@ -2676,7 +2676,7 @@ function getRoeRecords(triggers)
         { -- Spoils - Light Geode
             trigger = triggers.itemLooted,
             goal = 3,
-            reqs = { itemID = set { xi.items.LIGHT_GEODE } },
+            reqs = { itemID = set { xi.item.LIGHT_GEODE } },
             flags = set { "repeat" },
             reward = { sparks = 200, xp = 1000, accolades = 20 },
         },
@@ -2685,7 +2685,7 @@ function getRoeRecords(triggers)
         { -- Spoils - Shadow Geode
             trigger = triggers.itemLooted,
             goal = 3,
-            reqs = { itemID = set { xi.items.SHADOW_GEODE } },
+            reqs = { itemID = set { xi.item.SHADOW_GEODE } },
             flags = set { "repeat" },
             reward = { sparks = 200, xp = 1000, accolades = 20 },
         },
@@ -2694,7 +2694,7 @@ function getRoeRecords(triggers)
         { -- Spoils - Ifritite
             trigger = triggers.itemLooted,
             goal = 3,
-            reqs = { itemID = set { xi.items.IFRITITE } },
+            reqs = { itemID = set { xi.item.IFRITITE } },
             flags = set { "repeat" },
             reward = { sparks = 200, xp = 1000, accolades = 20 },
         },
@@ -2703,7 +2703,7 @@ function getRoeRecords(triggers)
         { -- Spoils - Shivite
             trigger = triggers.itemLooted,
             goal = 3,
-            reqs = { itemID = set { xi.items.SHIVITE } },
+            reqs = { itemID = set { xi.item.SHIVITE } },
             flags = set { "repeat" },
             reward = { sparks = 200, xp = 1000, accolades = 20 },
         },
@@ -2712,7 +2712,7 @@ function getRoeRecords(triggers)
         { -- Spoils - Garudite
             trigger = triggers.itemLooted,
             goal = 3,
-            reqs = { itemID = set { xi.items.GARUDITE } },
+            reqs = { itemID = set { xi.item.GARUDITE } },
             flags = set { "repeat" },
             reward = { sparks = 200, xp = 1000, accolades = 20 },
         },
@@ -2721,7 +2721,7 @@ function getRoeRecords(triggers)
         { -- Spoils - Titanite
             trigger = triggers.itemLooted,
             goal = 3,
-            reqs = { itemID = set { xi.items.TITANITE } },
+            reqs = { itemID = set { xi.item.TITANITE } },
             flags = set { "repeat" },
             reward = { sparks = 200, xp = 1000, accolades = 20 },
         },
@@ -2730,7 +2730,7 @@ function getRoeRecords(triggers)
         { -- Spoils - Ramuite
             trigger = triggers.itemLooted,
             goal = 3,
-            reqs = { itemID = set { xi.items.RAMUITE } },
+            reqs = { itemID = set { xi.item.RAMUITE } },
             flags = set { "repeat" },
             reward = { sparks = 200, xp = 1000, accolades = 20 },
         },
@@ -2739,7 +2739,7 @@ function getRoeRecords(triggers)
         { -- Spoils - Leviatite
             trigger = triggers.itemLooted,
             goal = 3,
-            reqs = { itemID = set { xi.items.LEVIATITE } },
+            reqs = { itemID = set { xi.item.LEVIATITE } },
             flags = set { "repeat" },
             reward = { sparks = 200, xp = 1000, accolades = 20 },
         },
@@ -2748,7 +2748,7 @@ function getRoeRecords(triggers)
         { -- Spoils - Carbite
             trigger = triggers.itemLooted,
             goal = 3,
-            reqs = { itemID = set { xi.items.CARBITE } },
+            reqs = { itemID = set { xi.item.CARBITE } },
             flags = set { "repeat" },
             reward = { sparks = 200, xp = 1000, accolades = 20 },
         },
@@ -2757,7 +2757,7 @@ function getRoeRecords(triggers)
         { -- Spoils - Fenrite
             trigger = triggers.itemLooted,
             goal = 3,
-            reqs = { itemID = set { xi.items.FENRITE } },
+            reqs = { itemID = set { xi.item.FENRITE } },
             flags = set { "repeat" },
             reward = { sparks = 200, xp = 1000, accolades = 20 },
         },
@@ -2770,7 +2770,7 @@ function getRoeRecords(triggers)
         { -- Spoils - Bat Wing
             trigger = triggers.itemLooted,
             goal = 2,
-            reqs = { itemID = set { xi.items.BAT_WING } },
+            reqs = { itemID = set { xi.item.BAT_WING } },
             flags = set { "repeat" },
             reward = { sparks = 100, xp = 300, accolades = 10 },
         },
@@ -2779,7 +2779,7 @@ function getRoeRecords(triggers)
         { -- Spoils - Black Tiger Fang
             trigger = triggers.itemLooted,
             goal = 2,
-            reqs = { itemID = set { xi.items.BLACK_TIGER_FANG } },
+            reqs = { itemID = set { xi.item.BLACK_TIGER_FANG } },
             flags = set { "repeat" },
             reward = { sparks = 100, xp = 300, accolades = 10 },
         },
@@ -2788,7 +2788,7 @@ function getRoeRecords(triggers)
         { -- Spoils - Flint Stone
             trigger = triggers.itemLooted,
             goal = 2,
-            reqs = { itemID = set { xi.items.FLINT_STONE } },
+            reqs = { itemID = set { xi.item.FLINT_STONE } },
             flags = set { "repeat" },
             reward = { sparks = 100, xp = 300, accolades = 10 },
         },
@@ -2797,7 +2797,7 @@ function getRoeRecords(triggers)
         { -- Spoils - Rabbit Hide
             trigger = triggers.itemLooted,
             goal = 2,
-            reqs = { itemID = set { xi.items.RABBIT_HIDE } },
+            reqs = { itemID = set { xi.item.RABBIT_HIDE } },
             flags = set { "repeat" },
             reward = { sparks = 100, xp = 300, accolades = 10 },
         },
@@ -2806,7 +2806,7 @@ function getRoeRecords(triggers)
         { -- Spoils - Honey
             trigger = triggers.itemLooted,
             goal = 2,
-            reqs = { itemID = set { xi.items.POT_OF_HONEY } },
+            reqs = { itemID = set { xi.item.POT_OF_HONEY } },
             flags = set { "repeat" },
             reward = { sparks = 100, xp = 300, accolades = 10 },
         },
@@ -2815,7 +2815,7 @@ function getRoeRecords(triggers)
         { -- Spoils - Sheepskin
             trigger = triggers.itemLooted,
             goal = 2,
-            reqs = { itemID = set { xi.items.SHEEPSKIN } },
+            reqs = { itemID = set { xi.item.SHEEPSKIN } },
             flags = set { "repeat" },
             reward = { sparks = 100, xp = 300, accolades = 10 },
         },
@@ -2824,7 +2824,7 @@ function getRoeRecords(triggers)
         { -- Spoils - Lizard Skin
             trigger = triggers.itemLooted,
             goal = 2,
-            reqs = { itemID = set { xi.items.LIZARD_SKIN } },
+            reqs = { itemID = set { xi.item.LIZARD_SKIN } },
             flags = set { "repeat" },
             reward = { sparks = 100, xp = 300, accolades = 10 },
         },
@@ -2833,7 +2833,7 @@ function getRoeRecords(triggers)
         { -- Spoils - Beetle Shell
             trigger = triggers.itemLooted,
             goal = 2,
-            reqs = { itemID = set { xi.items.BEETLE_SHELL } },
+            reqs = { itemID = set { xi.item.BEETLE_SHELL } },
             flags = set { "repeat" },
             reward = { sparks = 100, xp = 300, accolades = 10 },
         },
@@ -2842,7 +2842,7 @@ function getRoeRecords(triggers)
         { -- Spoils - Zeruhn Soot
             trigger = triggers.itemLooted,
             goal = 2,
-            reqs = { itemID = set { xi.items.PINCH_OF_ZERUHN_SOOT } },
+            reqs = { itemID = set { xi.item.PINCH_OF_ZERUHN_SOOT } },
             flags = set { "repeat" },
             reward = { sparks = 100, xp = 300, accolades = 10 },
         },
@@ -2851,7 +2851,7 @@ function getRoeRecords(triggers)
         { -- Spoils - Silver Name Tag
             trigger = triggers.itemLooted,
             goal = 1,
-            reqs = { itemID = set { xi.items.SILVER_NAME_TAG } },
+            reqs = { itemID = set { xi.item.SILVER_NAME_TAG } },
             flags = set { "repeat" },
             reward = { sparks = 100, xp = 300, accolades = 10 },
         },
@@ -2860,7 +2860,7 @@ function getRoeRecords(triggers)
         { -- Spoils - Quadav Helm
             trigger = triggers.itemLooted,
             goal = 2,
-            reqs = { itemID = set { xi.items.QUADAV_HELM } },
+            reqs = { itemID = set { xi.item.QUADAV_HELM } },
             flags = set { "repeat" },
             reward = { sparks = 100, xp = 300, accolades = 10 },
         },
@@ -2869,7 +2869,7 @@ function getRoeRecords(triggers)
         { -- Spoils - Treant Bulb
             trigger = triggers.itemLooted,
             goal = 2,
-            reqs = { itemID = set { xi.items.TREANT_BULB } },
+            reqs = { itemID = set { xi.item.TREANT_BULB } },
             flags = set { "repeat" },
             reward = { sparks = 100, xp = 300, accolades = 10 },
         },
@@ -2878,7 +2878,7 @@ function getRoeRecords(triggers)
         { -- Spoils - Wild Onion
             trigger = triggers.itemLooted,
             goal = 2,
-            reqs = { itemID = set { xi.items.WILD_ONION } },
+            reqs = { itemID = set { xi.item.WILD_ONION } },
             flags = set { "repeat" },
             reward = { sparks = 100, xp = 300, accolades = 10 },
         },
@@ -2887,7 +2887,7 @@ function getRoeRecords(triggers)
         { -- Spoils - Sleepshroom
             trigger = triggers.itemLooted,
             goal = 2,
-            reqs = { itemID = set { xi.items.SLEEPSHROOM } },
+            reqs = { itemID = set { xi.item.SLEEPSHROOM } },
             flags = set { "repeat" },
             reward = { sparks = 100, xp = 300, accolades = 10 },
         },
@@ -2896,7 +2896,7 @@ function getRoeRecords(triggers)
         { -- Spoils - Sand Bat Fang
             trigger = triggers.itemLooted,
             goal = 2,
-            reqs = { itemID = set { xi.items.SAND_BAT_FANG } },
+            reqs = { itemID = set { xi.item.SAND_BAT_FANG } },
             flags = set { "repeat" },
             reward = { sparks = 100, xp = 300, accolades = 10 },
         },
@@ -2905,7 +2905,7 @@ function getRoeRecords(triggers)
         { -- Spoils - Zinc Ore
             trigger = triggers.itemLooted,
             goal = 2,
-            reqs = { itemID = set { xi.items.CHUNK_OF_ZINC_ORE } },
+            reqs = { itemID = set { xi.item.CHUNK_OF_ZINC_ORE } },
             flags = set { "repeat" },
             reward = { sparks = 100, xp = 300, accolades = 10 },
         },
@@ -2914,7 +2914,7 @@ function getRoeRecords(triggers)
         { -- Spoils - Giant Bird Feather
             trigger = triggers.itemLooted,
             goal = 2,
-            reqs = { itemID = set { xi.items.GIANT_BIRD_FEATHER } },
+            reqs = { itemID = set { xi.item.GIANT_BIRD_FEATHER } },
             flags = set { "repeat" },
             reward = { sparks = 100, xp = 300, accolades = 10 },
         },
@@ -2923,7 +2923,7 @@ function getRoeRecords(triggers)
         { -- Spoils - Three-leaf Mandragora Bud
             trigger = triggers.itemLooted,
             goal = 1,
-            reqs = { itemID = set { xi.items.THREE_LEAF_MANDRAGORA_BUD } },
+            reqs = { itemID = set { xi.item.THREE_LEAF_MANDRAGORA_BUD } },
             flags = set { "repeat" },
             reward = { sparks = 100, xp = 300, accolades = 10 },
         },
@@ -2932,7 +2932,7 @@ function getRoeRecords(triggers)
         { -- Spoils - Four-leaf Mandragora Bud
             trigger = triggers.itemLooted,
             goal = 1,
-            reqs = { itemID = set { xi.items.FOUR_LEAF_MANDRAGORA_BUD } },
+            reqs = { itemID = set { xi.item.FOUR_LEAF_MANDRAGORA_BUD } },
             flags = set { "repeat" },
             reward = { sparks = 100, xp = 300, accolades = 10 },
         },
@@ -2941,7 +2941,7 @@ function getRoeRecords(triggers)
         { -- Spoils - Cornette
             trigger = triggers.itemLooted,
             goal = 2,
-            reqs = { itemID = set { xi.items.CORNETTE } },
+            reqs = { itemID = set { xi.item.CORNETTE } },
             flags = set { "repeat" },
             reward = { sparks = 100, xp = 300, accolades = 10 },
         },
@@ -2950,7 +2950,7 @@ function getRoeRecords(triggers)
         { -- Spoils - Yuhtunga Sulfur
             trigger = triggers.itemLooted,
             goal = 1,
-            reqs = { itemID = set { xi.items.PINCH_OF_YUHTUNGA_SULFUR } },
+            reqs = { itemID = set { xi.item.PINCH_OF_YUHTUNGA_SULFUR } },
             flags = set { "repeat" },
             reward = { sparks = 100, xp = 300, accolades = 10 },
         },
@@ -2959,7 +2959,7 @@ function getRoeRecords(triggers)
         { -- Spoils - Snobby Letter
             trigger = triggers.itemLooted,
             goal = 1,
-            reqs = { itemID = set { xi.items.SNOBBY_LETTER } },
+            reqs = { itemID = set { xi.item.SNOBBY_LETTER } },
             flags = set { "repeat" },
             reward = { sparks = 100, xp = 300, accolades = 10 },
         },
@@ -2968,7 +2968,7 @@ function getRoeRecords(triggers)
         { -- Spoils - Yagudo Bead Necklace
             trigger = triggers.itemLooted,
             goal = 2,
-            reqs = { itemID = set { xi.items.YAGUDO_BEAD_NECKLACE } },
+            reqs = { itemID = set { xi.item.YAGUDO_BEAD_NECKLACE } },
             flags = set { "repeat" },
             reward = { sparks = 100, xp = 300, accolades = 10 },
         },
@@ -2977,7 +2977,7 @@ function getRoeRecords(triggers)
         { -- Spoils - Woozyshroom
             trigger = triggers.itemLooted,
             goal = 2,
-            reqs = { itemID = set { xi.items.WOOZYSHROOM } },
+            reqs = { itemID = set { xi.item.WOOZYSHROOM } },
             flags = set { "repeat" },
             reward = { sparks = 100, xp = 300, accolades = 10 },
         },
@@ -2986,7 +2986,7 @@ function getRoeRecords(triggers)
         { -- Spoils - Beehive Chip
             trigger = triggers.itemLooted,
             goal = 2,
-            reqs = { itemID = set { xi.items.BEEHIVE_CHIP } },
+            reqs = { itemID = set { xi.item.BEEHIVE_CHIP } },
             flags = set { "repeat" },
             reward = { sparks = 100, xp = 300, accolades = 10 },
         },
@@ -2995,7 +2995,7 @@ function getRoeRecords(triggers)
         { -- Spoils - Remi Shell
             trigger = triggers.itemLooted,
             goal = 2,
-            reqs = { itemID = set { xi.items.REMI_SHELL } },
+            reqs = { itemID = set { xi.item.REMI_SHELL } },
             flags = set { "repeat" },
             reward = { sparks = 100, xp = 300, accolades = 10 },
         },
@@ -3004,7 +3004,7 @@ function getRoeRecords(triggers)
         { -- Spoils - Twinstone Earring
             trigger = triggers.itemLooted,
             goal = 2,
-            reqs = { itemID = set { xi.items.TWINSTONE_EARRING } },
+            reqs = { itemID = set { xi.item.TWINSTONE_EARRING } },
             flags = set { "repeat" },
             reward = { sparks = 100, xp = 300, accolades = 10 },
         },
@@ -3019,7 +3019,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set { 100 } },
             flags = set { "repeat" },
-            reward = { sparks = 10, xp = 500, accolades = 5, item = { xi.items.BOWL_OF_NAVARIN } },
+            reward = { sparks = 10, xp = 500, accolades = 5, item = { xi.item.BOWL_OF_NAVARIN } },
         },
 
         [216] =
@@ -3035,7 +3035,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set { 101 } },
             flags = set { "repeat" },
-            reward = { sparks = 10, xp = 500, accolades = 5, item = { xi.items.BRASS_HARNESS } },
+            reward = { sparks = 10, xp = 500, accolades = 5, item = { xi.item.BRASS_HARNESS } },
         },
 
         [218] =
@@ -3051,7 +3051,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set { 140 } },
             flags = set { "repeat" },
-            reward = { sparks = 10, xp = 500, accolades = 5, item = { xi.items.SARDONYX_EARRING } },
+            reward = { sparks = 10, xp = 500, accolades = 5, item = { xi.item.SARDONYX_EARRING } },
         },
 
         [220] =
@@ -3067,7 +3067,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set { 141 } },
             flags = set { "repeat" },
-            reward = { sparks = 10, xp = 500, accolades = 5, item = { xi.items.AMETHYST_EARRING } },
+            reward = { sparks = 10, xp = 500, accolades = 5, item = { xi.item.AMETHYST_EARRING } },
         },
 
         [222] =
@@ -3083,7 +3083,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set { 142 } },
             flags = set { "repeat" },
-            reward = { sparks = 10, xp = 500, accolades = 5, item = { xi.items.ONYX_EARRING } },
+            reward = { sparks = 10, xp = 500, accolades = 5, item = { xi.item.ONYX_EARRING } },
         },
 
         [224] =
@@ -3099,7 +3099,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set { 190 } },
             flags = set { "repeat" },
-            reward = { sparks = 10, xp = 100, accolades = 5, item = { xi.items.OPAL_RING } },
+            reward = { sparks = 10, xp = 100, accolades = 5, item = { xi.item.OPAL_RING } },
         },
 
         [226] =
@@ -3115,7 +3115,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set { 167 } },
             flags = set { "repeat" },
-            reward = { sparks = 15, xp = 100, accolades = 5, item = { xi.items.ACCURA_CAPE } },
+            reward = { sparks = 15, xp = 100, accolades = 5, item = { xi.item.ACCURA_CAPE } },
         },
 
         [228] =
@@ -3131,7 +3131,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set { 103 } },
             flags = set { "repeat" },
-            reward = { sparks = 11, xp = 550, accolades = 5, item = { xi.items.SILVER_RING } },
+            reward = { sparks = 11, xp = 550, accolades = 5, item = { xi.item.SILVER_RING } },
         },
 
         [230] =
@@ -3147,7 +3147,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set { 108 } },
             flags = set { "repeat" },
-            reward = { sparks = 11, xp = 550, accolades = 5, item = { xi.items.LAPIS_LAZULI_RING } },
+            reward = { sparks = 11, xp = 550, accolades = 5, item = { xi.item.LAPIS_LAZULI_RING } },
         },
 
         [232] =
@@ -3163,7 +3163,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set { 196 } },
             flags = set { "repeat" },
-            reward = { sparks = 11, xp = 100, accolades = 5, item = { xi.items.AMETHYST_RING } },
+            reward = { sparks = 11, xp = 100, accolades = 5, item = { xi.item.AMETHYST_RING } },
         },
 
         [234] =
@@ -3179,7 +3179,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set { 102 } },
             flags = set { "repeat" },
-            reward = { sparks = 11, xp = 550, accolades = 5, item = { xi.items.SARDONYX_RING } },
+            reward = { sparks = 11, xp = 550, accolades = 5, item = { xi.item.SARDONYX_RING } },
         },
 
         [236] =
@@ -3195,7 +3195,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set { 193 } },
             flags = set { "repeat" },
-            reward = { sparks = 12, xp = 100, accolades = 5, item = { xi.items.CLEAR_RING } },
+            reward = { sparks = 12, xp = 100, accolades = 5, item = { xi.item.CLEAR_RING } },
         },
 
         [238] =
@@ -3215,7 +3215,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set { 104 } },
             flags = set { "repeat" },
-            reward = { sparks = 12, xp = 600, accolades = 5, item = { { xi.items.MEAT_MITHKABOB, 12 } } },
+            reward = { sparks = 12, xp = 600, accolades = 5, item = { { xi.item.MEAT_MITHKABOB, 12 } } },
         },
 
         [240] =
@@ -3231,7 +3231,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set { 105 } },
             flags = set { "repeat" },
-            reward = { sparks = 13, xp = 650, accolades = 5, item = { xi.items.INVISIBLE_MANTLE } },
+            reward = { sparks = 13, xp = 650, accolades = 5, item = { xi.item.INVISIBLE_MANTLE } },
         },
 
         [242] =
@@ -3247,7 +3247,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set { 195 } },
             flags = set { "repeat" },
-            reward = { sparks = 14, xp = 100, accolades = 5, item = { xi.items.SWORDBELT } },
+            reward = { sparks = 14, xp = 100, accolades = 5, item = { xi.item.SWORDBELT } },
         },
 
         [244] =
@@ -3263,7 +3263,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set { 149 } },
             flags = set { "repeat" },
-            reward = { sparks = 13, xp = 650, accolades = 5, item = { xi.items.BANDED_MAIL } },
+            reward = { sparks = 13, xp = 650, accolades = 5, item = { xi.item.BANDED_MAIL } },
         },
 
         [246] =
@@ -3279,7 +3279,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set { 106 } },
             flags = set { "repeat" },
-            reward = { sparks = 10, xp = 500, accolades = 5, item = { xi.items.JACK_O_LANTERN } },
+            reward = { sparks = 10, xp = 500, accolades = 5, item = { xi.item.JACK_O_LANTERN } },
         },
 
         [248] =
@@ -3295,7 +3295,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set { 107 } },
             flags = set { "repeat" },
-            reward = { sparks = 10, xp = 500, accolades = 5, item = { xi.items.DOUBLET } },
+            reward = { sparks = 10, xp = 500, accolades = 5, item = { xi.item.DOUBLET } },
         },
 
         [250] =
@@ -3311,7 +3311,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set { 172 } },
             flags = set { "repeat" },
-            reward = { sparks = 10, xp = 100, accolades = 5, item = { xi.items.AMBER_EARRING } },
+            reward = { sparks = 10, xp = 100, accolades = 5, item = { xi.item.AMBER_EARRING } },
         },
 
         [252] =
@@ -3320,7 +3320,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set { 143 } },
             flags = set { "repeat" },
-            reward = { sparks = 10, xp = 500, accolades = 5, item = { xi.items.TOURMALINE_EARRING } },
+            reward = { sparks = 10, xp = 500, accolades = 5, item = { xi.item.TOURMALINE_EARRING } },
         },
 
         [253] =
@@ -3336,7 +3336,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set { 191 } },
             flags = set { "repeat" },
-            reward = { sparks = 10, xp = 100, accolades = 5, item = { xi.items.AMBER_RING } },
+            reward = { sparks = 10, xp = 100, accolades = 5, item = { xi.item.AMBER_RING } },
         },
 
         [255] =
@@ -3352,7 +3352,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set { 109 } },
             flags = set { "repeat" },
-            reward = { sparks = 12, xp = 600, accolades = 5, item = { { xi.items.PLATE_OF_CRAB_SUSHI, 12 } } },
+            reward = { sparks = 12, xp = 600, accolades = 5, item = { { xi.item.PLATE_OF_CRAB_SUSHI, 12 } } },
         },
 
         [257] =
@@ -3368,7 +3368,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set { 110 } },
             flags = set { "repeat" },
-            reward = { sparks = 12, xp = 600, accolades = 5, item = { xi.items.HIGH_BREATH_MANTLE } },
+            reward = { sparks = 12, xp = 600, accolades = 5, item = { xi.item.HIGH_BREATH_MANTLE } },
         },
 
         [259] =
@@ -3384,7 +3384,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set { 197 } },
             flags = set { "repeat" },
-            reward = { sparks = 14, xp = 100, accolades = 5, item = { xi.items.CORSETTE } },
+            reward = { sparks = 14, xp = 100, accolades = 5, item = { xi.item.CORSETTE } },
         },
 
         [261] =
@@ -3400,7 +3400,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set { 147 } },
             flags = set { "repeat" },
-            reward = { sparks = 13, xp = 650, accolades = 5, item = { xi.items.BRIGANDINE_ARMOR } },
+            reward = { sparks = 13, xp = 650, accolades = 5, item = { xi.item.BRIGANDINE_ARMOR } },
         },
 
         [263] =
@@ -3420,7 +3420,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set { 115 } },
             flags = set { "repeat" },
-            reward = { sparks = 10, xp = 500, accolades = 5, item = { xi.items.CUP_OF_CHOCOMILK } },
+            reward = { sparks = 10, xp = 500, accolades = 5, item = { xi.item.CUP_OF_CHOCOMILK } },
         },
 
         [265] =
@@ -3436,7 +3436,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set { 116 } },
             flags = set { "repeat" },
-            reward = { sparks = 10, xp = 500, accolades = 5, item = { xi.items.LINEN_ROBE } },
+            reward = { sparks = 10, xp = 500, accolades = 5, item = { xi.item.LINEN_ROBE } },
         },
 
         [267] =
@@ -3452,7 +3452,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set { 145 } },
             flags = set { "repeat" },
-            reward = { sparks = 10, xp = 500, accolades = 5, item = { xi.items.OPAL_EARRING } },
+            reward = { sparks = 10, xp = 500, accolades = 5, item = { xi.item.OPAL_EARRING } },
         },
 
         [269] =
@@ -3468,7 +3468,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set { 169 } },
             flags = set { "repeat" },
-            reward = { sparks = 15, xp = 100, accolades = 5, item = { xi.items.RED_CAPE } },
+            reward = { sparks = 15, xp = 100, accolades = 5, item = { xi.item.RED_CAPE } },
         },
 
         [271] =
@@ -3484,7 +3484,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set { 192 } },
             flags = set { "repeat" },
-            reward = { sparks = 10, xp = 100, accolades = 5, item = { xi.items.CLEAR_EARRING } },
+            reward = { sparks = 10, xp = 100, accolades = 5, item = { xi.item.CLEAR_EARRING } },
         },
 
         [273] =
@@ -3500,7 +3500,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set { 194 } },
             flags = set { "repeat" },
-            reward = { sparks = 10, xp = 100, accolades = 5, item = { xi.items.LAPIS_LAZULI_EARRING } },
+            reward = { sparks = 10, xp = 100, accolades = 5, item = { xi.item.LAPIS_LAZULI_EARRING } },
         },
 
         [275] =
@@ -3516,7 +3516,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set { 118 } },
             flags = set { "repeat" },
-            reward = { sparks = 12, xp = 600, accolades = 5, item = { xi.items.ONYX_RING } },
+            reward = { sparks = 12, xp = 600, accolades = 5, item = { xi.item.ONYX_RING } },
         },
 
         [277] =
@@ -3532,7 +3532,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set { 117 } },
             flags = set { "repeat" },
-            reward = { sparks = 11, xp = 550, accolades = 5, item = { xi.items.TOURMALINE_RING } },
+            reward = { sparks = 11, xp = 550, accolades = 5, item = { xi.item.TOURMALINE_RING } },
         },
 
         [279] =
@@ -3548,7 +3548,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set { 198 } },
             flags = set { "repeat" },
-            reward = { sparks = 12, xp = 100, accolades = 5, item = { xi.items.BONE_EARRING } },
+            reward = { sparks = 12, xp = 100, accolades = 5, item = { xi.item.BONE_EARRING } },
         },
 
         [281] =
@@ -3564,7 +3564,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set { 119 } },
             flags = set { "repeat" },
-            reward = { sparks = 12, xp = 600, accolades = 5, item = { { xi.items.APPLE_PIE, 12 } } },
+            reward = { sparks = 12, xp = 600, accolades = 5, item = { { xi.item.APPLE_PIE, 12 } } },
         },
 
         [283] =
@@ -3580,7 +3580,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set { 120 } },
             flags = set { "repeat" },
-            reward = { sparks = 13, xp = 650, accolades = 5, item = { xi.items.BLACK_CAPE } },
+            reward = { sparks = 13, xp = 650, accolades = 5, item = { xi.item.BLACK_CAPE } },
         },
 
         [285] =
@@ -3596,7 +3596,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set { 200 } },
             flags = set { "repeat" },
-            reward = { sparks = 14, xp = 100, accolades = 5, item = { xi.items.QIQIRN_SASH } },
+            reward = { sparks = 14, xp = 100, accolades = 5, item = { xi.item.QIQIRN_SASH } },
         },
 
         [287] =
@@ -3612,7 +3612,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set { 151 } },
             flags = set { "repeat" },
-            reward = { sparks = 13, xp = 650, accolades = 5, item = { xi.items.PYRO_ROBE } },
+            reward = { sparks = 13, xp = 650, accolades = 5, item = { xi.item.PYRO_ROBE } },
         },
 
         [289] =
@@ -3632,7 +3632,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set { 111 } },
             flags = set { "repeat" },
-            reward = { sparks = 14, xp = 700, accolades = 5, item = { xi.items.MOHBWA_SCARF } },
+            reward = { sparks = 14, xp = 700, accolades = 5, item = { xi.item.MOHBWA_SCARF } },
         },
 
         [291] =
@@ -3648,7 +3648,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set { 166 } },
             flags = set { "repeat" },
-            reward = { sparks = 11, xp = 100, accolades = 5, item = { xi.items.BEETLE_EARRING } },
+            reward = { sparks = 11, xp = 100, accolades = 5, item = { xi.item.BEETLE_EARRING } },
         },
 
         [293] =
@@ -3664,7 +3664,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set { 204 } },
             flags = set { "repeat" },
-            reward = { sparks = 14, xp = 100, accolades = 5, item = { xi.items.TORTOISE_EARRING } },
+            reward = { sparks = 14, xp = 100, accolades = 5, item = { xi.item.TORTOISE_EARRING } },
         },
 
         [295] =
@@ -3680,7 +3680,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set { 112 } },
             flags = set { "repeat" },
-            reward = { sparks = 14, xp = 700, accolades = 5, item = { xi.items.GOLD_EARRING } },
+            reward = { sparks = 14, xp = 700, accolades = 5, item = { xi.item.GOLD_EARRING } },
         },
 
         [297] =
@@ -3696,7 +3696,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set { 161 } },
             flags = set { "repeat" },
-            reward = { sparks = 15, xp = 750, accolades = 5, item = { xi.items.HI_POTION_TANK } },
+            reward = { sparks = 15, xp = 750, accolades = 5, item = { xi.item.HI_POTION_TANK } },
         },
 
         [299] =
@@ -3712,7 +3712,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set { 162 } },
             flags = set { "repeat" },
-            reward = { sparks = 15, xp = 750, accolades = 5, item = { xi.items.HI_ETHER_TANK } },
+            reward = { sparks = 15, xp = 750, accolades = 5, item = { xi.item.HI_ETHER_TANK } },
         },
 
         [301] =
@@ -3728,7 +3728,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set { 126 } },
             flags = set { "repeat" },
-            reward = { sparks = 13, xp = 650, accolades = 5, item = { xi.items.FOCUS_COLLAR } },
+            reward = { sparks = 13, xp = 650, accolades = 5, item = { xi.item.FOCUS_COLLAR } },
         },
 
         [303] =
@@ -3744,7 +3744,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set { 184 } },
             flags = set { "repeat" },
-            reward = { sparks = 13, xp = 100, accolades = 5, item = { { xi.items.CONE_OF_SNOLL_GELATO, 12 } } },
+            reward = { sparks = 13, xp = 100, accolades = 5, item = { { xi.item.CONE_OF_SNOLL_GELATO, 12 } } },
         },
 
         [305] =
@@ -3760,7 +3760,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set { 157 } },
             flags = set { "repeat" },
-            reward = { sparks = 13, xp = 100, accolades = 5, item = { { xi.items.PLATE_OF_SOLE_SUSHI, 12 } } },
+            reward = { sparks = 13, xp = 100, accolades = 5, item = { { xi.item.PLATE_OF_SOLE_SUSHI, 12 } } },
         },
 
         [307] =
@@ -3776,7 +3776,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set { 158 } },
             flags = set { "repeat" },
-            reward = { sparks = 14, xp = 100, accolades = 5, item = { { xi.items.YELLOW_CURRY_BUN, 12 } } },
+            reward = { sparks = 14, xp = 100, accolades = 5, item = { { xi.item.YELLOW_CURRY_BUN, 12 } } },
         },
 
         [309] =
@@ -3792,7 +3792,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set { 127 } },
             flags = set { "repeat" },
-            reward = { sparks = 14, xp = 100, accolades = 5, item = { { xi.items.FISH_MITHKABOB, 12 } } },
+            reward = { sparks = 14, xp = 100, accolades = 5, item = { { xi.item.FISH_MITHKABOB, 12 } } },
         },
 
         -----------------------------------
@@ -4218,7 +4218,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set { 121 } },
             flags = set { "repeat" },
-            reward = { sparks = 12, xp = 600, accolades = 5, item = { { xi.items.FLASK_OF_ECHO_DROPS, 12 } } },
+            reward = { sparks = 12, xp = 600, accolades = 5, item = { { xi.item.FLASK_OF_ECHO_DROPS, 12 } } },
         },
 
         [392] =
@@ -4227,7 +4227,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set { 122 } },
             flags = set { "repeat" },
-            reward = { sparks = 16, xp = 800, accolades = 5, item = { { xi.items.BOTTLE_OF_MULSUM, 12 } } },
+            reward = { sparks = 16, xp = 800, accolades = 5, item = { { xi.item.BOTTLE_OF_MULSUM, 12 } } },
         },
 
         [394] =
@@ -4236,7 +4236,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set { 153 } },
             flags = set { "repeat" },
-            reward = { sparks = 16, xp = 100, accolades = 5, item = { { xi.items.FLASK_OF_DEODORIZER, 12 } } },
+            reward = { sparks = 16, xp = 100, accolades = 5, item = { { xi.item.FLASK_OF_DEODORIZER, 12 } } },
         },
 
         [396] =
@@ -4245,7 +4245,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set { 154 } },
             flags = set { "repeat" },
-            reward = { sparks = 17, xp = 850, accolades = 5, item = { xi.items.SUPER_ETHER } },
+            reward = { sparks = 17, xp = 850, accolades = 5, item = { xi.item.SUPER_ETHER } },
         },
 
         [398] =
@@ -4254,7 +4254,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set { 114 } },
             flags = set { "repeat" },
-            reward = { sparks = 13, xp = 650, accolades = 5, item = { { xi.items.PINCH_OF_PRISM_POWDER, 12 } } },
+            reward = { sparks = 13, xp = 650, accolades = 5, item = { { xi.item.PINCH_OF_PRISM_POWDER, 12 } } },
         },
 
         [400] =
@@ -4263,7 +4263,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set { 125 } },
             flags = set { "repeat" },
-            reward = { sparks = 14, xp = 700, accolades = 5, item = { { xi.items.POT_OF_SILENT_OIL, 12 } } },
+            reward = { sparks = 14, xp = 700, accolades = 5, item = { { xi.item.POT_OF_SILENT_OIL, 12 } } },
         },
 
         [402] =
@@ -4272,7 +4272,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set { 208 } },
             flags = set { "repeat" },
-            reward = { sparks = 15, xp = 100, accolades = 5, item = { xi.items.GAIA_MANTLE } },
+            reward = { sparks = 15, xp = 100, accolades = 5, item = { xi.item.GAIA_MANTLE } },
         },
 
         [404] =
@@ -4281,7 +4281,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set { 212 } },
             flags = set { "repeat" },
-            reward = { sparks = 16, xp = 100, accolades = 5, item = { xi.items.JESTERS_CAPE } },
+            reward = { sparks = 16, xp = 100, accolades = 5, item = { xi.item.JESTERS_CAPE } },
         },
 
         [406] =
@@ -4290,7 +4290,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set { 174 } },
             flags = set { "repeat" },
-            reward = { sparks = 14, xp = 100, accolades = 5, item = { xi.items.PEISTE_MANTLE } },
+            reward = { sparks = 14, xp = 100, accolades = 5, item = { xi.item.PEISTE_MANTLE } },
         },
 
         [408] =
@@ -4299,7 +4299,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set { 113 } },
             flags = set { "repeat" },
-            reward = { sparks = 16, xp = 800, accolades = 5, item = { xi.items.BEAK_NECKLACE } },
+            reward = { sparks = 16, xp = 800, accolades = 5, item = { xi.item.BEAK_NECKLACE } },
         },
 
         [410] =
@@ -4308,7 +4308,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set { 128 } },
             flags = set { "repeat" },
-            reward = { sparks = 16, xp = 800, accolades = 5, item = { xi.items.CORAL_GORGET } },
+            reward = { sparks = 16, xp = 800, accolades = 5, item = { xi.item.CORAL_GORGET } },
         },
 
         [412] =
@@ -4317,7 +4317,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set { 123 } },
             flags = set { "repeat" },
-            reward = { sparks = 13, xp = 650, accolades = 5, item = { xi.items.TORQUE } },
+            reward = { sparks = 13, xp = 650, accolades = 5, item = { xi.item.TORQUE } },
         },
 
         -----------------------------------
@@ -4330,7 +4330,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set { 176 } },
             flags = set { "repeat" },
-            reward = { sparks = 13, xp = 100, accolades = 5, item = { xi.items.BROCADE_OBI } },
+            reward = { sparks = 13, xp = 100, accolades = 5, item = { xi.item.BROCADE_OBI } },
         },
 
         [416] =
@@ -4339,7 +4339,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set { 124 } },
             flags = set { "repeat" },
-            reward = { sparks = 13, xp = 650, accolades = 5, item = { xi.items.TWINTHREAD_OBI } },
+            reward = { sparks = 13, xp = 650, accolades = 5, item = { xi.item.TWINTHREAD_OBI } },
         },
 
         [418] =
@@ -4348,7 +4348,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set { 159 } },
             flags = set { "repeat" },
-            reward = { sparks = 15, xp = 100, accolades = 5, item = { xi.items.PEISTE_BELT } },
+            reward = { sparks = 15, xp = 100, accolades = 5, item = { xi.item.PEISTE_BELT } },
         },
 
         [420] =
@@ -4357,7 +4357,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set { 160 } },
             flags = set { "repeat" },
-            reward = { sparks = 16, xp = 100, accolades = 5, item = { xi.items.RAINBOW_OBI } },
+            reward = { sparks = 16, xp = 100, accolades = 5, item = { xi.item.RAINBOW_OBI } },
         },
 
         [422] =
@@ -4366,7 +4366,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set { 205 } },
             flags = set { "repeat" },
-            reward = { sparks = 16, xp = 100, accolades = 5, item = { xi.items.SUN_EARRING } },
+            reward = { sparks = 16, xp = 100, accolades = 5, item = { xi.item.SUN_EARRING } },
         },
 
         [424] =
@@ -4375,7 +4375,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set { 130 } },
             flags = set { "repeat" },
-            reward = { sparks = 70, xp = 850, accolades = 7, item = { xi.items.PURPLE_EARRING } },
+            reward = { sparks = 70, xp = 850, accolades = 7, item = { xi.item.PURPLE_EARRING } },
         },
 
         [426] =
@@ -4384,7 +4384,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set { 177 } },
             flags = set { "repeat" },
-            reward = { sparks = 70, xp = 100, accolades = 7, item = { xi.items.YELLOW_EARRING } },
+            reward = { sparks = 70, xp = 100, accolades = 7, item = { xi.item.YELLOW_EARRING } },
         },
 
         [428] =
@@ -4393,7 +4393,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set { 178 } },
             flags = set { "repeat" },
-            reward = { sparks = 70, xp = 100, accolades = 7, item = { xi.items.GREEN_EARRING } },
+            reward = { sparks = 70, xp = 100, accolades = 7, item = { xi.item.GREEN_EARRING } },
         },
 
         [430] =
@@ -4402,7 +4402,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set { 213 } },
             flags = set { "repeat" },
-            reward = { sparks = 14, xp = 700, accolades = 5, item = { xi.items.ZIRCON_EARRING } },
+            reward = { sparks = 14, xp = 700, accolades = 5, item = { xi.item.ZIRCON_EARRING } },
         },
 
         [432] =
@@ -4411,7 +4411,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set { 173 } },
             flags = set { "repeat" },
-            reward = { sparks = 12, xp = 600, accolades = 5, item = { xi.items.AQUAMARINE_EARRING } },
+            reward = { sparks = 12, xp = 600, accolades = 5, item = { xi.item.AQUAMARINE_EARRING } },
         },
 
         -----------------------------------
@@ -4424,7 +4424,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set { 11 } },
             flags = set { "repeat" },
-            reward = { sparks = 13, xp = 650, accolades = 5, item = { xi.items.MOON_EARRING } },
+            reward = { sparks = 13, xp = 650, accolades = 5, item = { xi.item.MOON_EARRING } },
         },
 
         [436] =
@@ -4433,7 +4433,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set { 12 } },
             flags = set { "repeat" },
-            reward = { sparks = 16, xp = 800, accolades = 5, item = { xi.items.NIGHT_EARRING } },
+            reward = { sparks = 16, xp = 800, accolades = 5, item = { xi.item.NIGHT_EARRING } },
         },
 
         [438] =
@@ -4442,7 +4442,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set { 24 } },
             flags = set { "repeat" },
-            reward = { sparks = 13, xp = 650, accolades = 5, item = { xi.items.MELODY_EARRING } },
+            reward = { sparks = 13, xp = 650, accolades = 5, item = { xi.item.MELODY_EARRING } },
         },
 
         [440] =
@@ -4451,7 +4451,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set { 25 } },
             flags = set { "repeat" },
-            reward = { sparks = 13, xp = 650, accolades = 5, item = { xi.items.ERIS_EARRING } },
+            reward = { sparks = 13, xp = 650, accolades = 5, item = { xi.item.ERIS_EARRING } },
         },
 
         [442] =
@@ -4460,7 +4460,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set { 27 } },
             flags = set { "repeat" },
-            reward = { sparks = 13, xp = 650, accolades = 5, item = { xi.items.FANG_EARRING } },
+            reward = { sparks = 13, xp = 650, accolades = 5, item = { xi.item.FANG_EARRING } },
         },
 
         [444] =
@@ -4469,7 +4469,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set { 30 } },
             flags = set { "repeat" },
-            reward = { sparks = 13, xp = 650, accolades = 5, item = { xi.items.CARAPACE_RING } },
+            reward = { sparks = 13, xp = 650, accolades = 5, item = { xi.item.CARAPACE_RING } },
         },
 
         [446] =
@@ -4478,7 +4478,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set { 29 } },
             flags = set { "repeat" },
-            reward = { sparks = 14, xp = 700, accolades = 5, item = { xi.items.TRUMPET_RING } },
+            reward = { sparks = 14, xp = 700, accolades = 5, item = { xi.item.TRUMPET_RING } },
         },
 
         [448] =
@@ -4487,7 +4487,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set { 28 } },
             flags = set { "repeat" },
-            reward = { sparks = 14, xp = 700, accolades = 5, item = { xi.items.SUN_RING } },
+            reward = { sparks = 14, xp = 700, accolades = 5, item = { xi.item.SUN_RING } },
         },
 
         [450] =
@@ -4496,7 +4496,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set { 16 } },
             flags = set { "repeat" },
-            reward = { sparks = 12, xp = 600, accolades = 5, item = { xi.items.FLUORITE_RING } },
+            reward = { sparks = 12, xp = 600, accolades = 5, item = { xi.item.FLUORITE_RING } },
         },
 
         [452] =
@@ -4505,7 +4505,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set { 18 } },
             flags = set { "repeat" },
-            reward = { sparks = 12, xp = 600, accolades = 5, item = { xi.items.CHRYSOBERYL_RING } },
+            reward = { sparks = 12, xp = 600, accolades = 5, item = { xi.item.CHRYSOBERYL_RING } },
         },
 
         [454] =
@@ -4514,7 +4514,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set { 20 } },
             flags = set { "repeat" },
-            reward = { sparks = 12, xp = 600, accolades = 5, item = { xi.items.JADEITE_RING } },
+            reward = { sparks = 12, xp = 600, accolades = 5, item = { xi.item.JADEITE_RING } },
         },
 
         [456] =
@@ -4523,7 +4523,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set { 22 } },
             flags = set { "repeat" },
-            reward = { sparks = 14, xp = 700, accolades = 5, item = { xi.items.ZIRCON_RING } },
+            reward = { sparks = 14, xp = 700, accolades = 5, item = { xi.item.ZIRCON_RING } },
         },
 
         -----------------------------------
@@ -4536,7 +4536,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set { 33 } },
             flags = set { "repeat" },
-            reward = { sparks = 70, xp = 850, accolades = 7, item = { xi.items.AQUAMARINE_RING } },
+            reward = { sparks = 70, xp = 850, accolades = 7, item = { xi.item.AQUAMARINE_RING } },
         },
 
         [460] =
@@ -4545,7 +4545,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set { 34 } },
             flags = set { "repeat" },
-            reward = { sparks = 70, xp = 850, accolades = 7, item = { xi.items.MOON_RING } },
+            reward = { sparks = 70, xp = 850, accolades = 7, item = { xi.item.MOON_RING } },
         },
 
         [462] =
@@ -4554,7 +4554,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set { 35 } },
             flags = set { "repeat" },
-            reward = { sparks = 80, xp = 900, accolades = 8, item = { xi.items.MOONRING_BLADE } },
+            reward = { sparks = 80, xp = 900, accolades = 8, item = { xi.item.MOONRING_BLADE } },
         },
 
         [464] =
@@ -4563,7 +4563,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set { 2 } },
             flags = set { "repeat" },
-            reward = { sparks = 11, xp = 550, accolades = 5, item = { xi.items.PAINITE_RING } },
+            reward = { sparks = 11, xp = 550, accolades = 5, item = { xi.item.PAINITE_RING } },
         },
 
         [468] =
@@ -4572,7 +4572,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set { 4 } },
             flags = set { "repeat" },
-            reward = { sparks = 13, xp = 650, accolades = 5, item = { xi.items.HARD_LEATHER_RING } },
+            reward = { sparks = 13, xp = 650, accolades = 5, item = { xi.item.HARD_LEATHER_RING } },
         },
 
         [472] =
@@ -4581,7 +4581,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set { 7 } },
             flags = set { "repeat" },
-            reward = { sparks = 13, xp = 650, accolades = 5, item = { xi.items.DEMONS_RING } },
+            reward = { sparks = 13, xp = 650, accolades = 5, item = { xi.item.DEMONS_RING } },
         },
 
         [474] =
@@ -4590,7 +4590,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set { 9 } },
             flags = set { "repeat" },
-            reward = { sparks = 14, xp = 700, accolades = 5, item = { xi.items.GOLD_RING } },
+            reward = { sparks = 14, xp = 700, accolades = 5, item = { xi.item.GOLD_RING } },
         },
 
         [476] =
@@ -4599,7 +4599,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set { 5 } },
             flags = set { "repeat" },
-            reward = { sparks = 16, xp = 800, accolades = 5, item = { xi.items.BEHEMOTH_MANTLE } },
+            reward = { sparks = 16, xp = 800, accolades = 5, item = { xi.item.BEHEMOTH_MANTLE } },
         },
 
         -----------------------------------
@@ -4612,7 +4612,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set { 52 } },
             flags = set { "repeat" },
-            reward = { sparks = 60, xp = 800, accolades = 6, item = { xi.items.TOWER_SHIELD } },
+            reward = { sparks = 60, xp = 800, accolades = 6, item = { xi.item.TOWER_SHIELD } },
         },
 
         [535] =
@@ -4621,7 +4621,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set { 65 } },
             flags = set { "repeat" },
-            reward = { sparks = 70, xp = 850, accolades = 7, item = { xi.items.RITTER_SHIELD } },
+            reward = { sparks = 70, xp = 850, accolades = 7, item = { xi.item.RITTER_SHIELD } },
         },
 
         [537] =
@@ -4630,7 +4630,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set { 51 } },
             flags = set { "repeat" },
-            reward = { sparks = 60, xp = 800, accolades = 6, item = { xi.items.ARACHNE_OBI } },
+            reward = { sparks = 60, xp = 800, accolades = 6, item = { xi.item.ARACHNE_OBI } },
         },
 
         [539] =
@@ -4639,7 +4639,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set { 68 } },
             flags = set { "repeat" },
-            reward = { sparks = 60, xp = 800, accolades = 6, item = { xi.items.KOENIGS_BELT } },
+            reward = { sparks = 60, xp = 800, accolades = 6, item = { xi.item.KOENIGS_BELT } },
         },
 
         [541] =
@@ -4648,7 +4648,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set { 62 } },
             flags = set { "repeat" },
-            reward = { sparks = 70, xp = 850, accolades = 7, item = { xi.items.MARID_BELT } },
+            reward = { sparks = 70, xp = 850, accolades = 7, item = { xi.item.MARID_BELT } },
         },
 
         [543] =
@@ -4657,7 +4657,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set { 61 } },
             flags = set { "repeat" },
-            reward = { sparks = 70, xp = 850, accolades = 7, item = { xi.items.PEACE_CAPE } },
+            reward = { sparks = 70, xp = 850, accolades = 7, item = { xi.item.PEACE_CAPE } },
         },
 
         [545] =
@@ -4666,7 +4666,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set { 79 } },
             flags = set { "repeat" },
-            reward = { sparks = 60, xp = 800, accolades = 6, item = { xi.items.TARUTARU_SASH } },
+            reward = { sparks = 60, xp = 800, accolades = 6, item = { xi.item.TARUTARU_SASH } },
         },
 
         [547] =
@@ -4675,7 +4675,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set { 54 } },
             flags = set { "repeat" },
-            reward = { sparks = 70, xp = 850, accolades = 7, item = { xi.items.LYNX_MANTLE } },
+            reward = { sparks = 70, xp = 850, accolades = 7, item = { xi.item.LYNX_MANTLE } },
         },
 
         [549] =
@@ -4684,7 +4684,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set { 72 } },
             flags = set { "repeat" },
-            reward = { sparks = 70, xp = 850, accolades = 7, item = { xi.items.RAINBOW_CAPE } },
+            reward = { sparks = 70, xp = 850, accolades = 7, item = { xi.item.RAINBOW_CAPE } },
         },
 
         -----------------------------------
@@ -4697,7 +4697,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set { 81 } },
             flags = set { "repeat" },
-            reward = { sparks = 11, xp = 550, accolades = 5, item = { xi.items.COEURL_GORGET } },
+            reward = { sparks = 11, xp = 550, accolades = 5, item = { xi.item.COEURL_GORGET } },
         },
 
         [555] =
@@ -4706,7 +4706,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set { 82 } },
             flags = set { "repeat" },
-            reward = { sparks = 14, xp = 700, accolades = 5, item = { xi.items.HOPLON } },
+            reward = { sparks = 14, xp = 700, accolades = 5, item = { xi.item.HOPLON } },
         },
 
         [557] =
@@ -4715,7 +4715,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set { 84 } },
             flags = set { "repeat" },
-            reward = { sparks = 12, xp = 600, accolades = 5, item = { xi.items.JEWELED_COLLAR } },
+            reward = { sparks = 12, xp = 600, accolades = 5, item = { xi.item.JEWELED_COLLAR } },
         },
 
         [559] =
@@ -4724,7 +4724,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set { 85 } },
             flags = set { "repeat" },
-            reward = { sparks = 70, xp = 850, accolades = 7, item = { xi.items.ORICHALCUM_EARRING } },
+            reward = { sparks = 70, xp = 850, accolades = 7, item = { xi.item.ORICHALCUM_EARRING } },
         },
 
         [561] =
@@ -4733,7 +4733,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set { 175 } },
             flags = set { "repeat" },
-            reward = { sparks = 16, xp = 800, accolades = 5, item = { xi.items.SMILODON_MANTLE } },
+            reward = { sparks = 16, xp = 800, accolades = 5, item = { xi.item.SMILODON_MANTLE } },
         },
 
         [563] =
@@ -4742,7 +4742,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set { 88 } },
             flags = set { "repeat" },
-            reward = { sparks = 11, xp = 550, accolades = 5, item = { xi.items.DARKSTEEL_NODOWA } },
+            reward = { sparks = 11, xp = 550, accolades = 5, item = { xi.item.DARKSTEEL_NODOWA } },
         },
 
         [565] =
@@ -4751,7 +4751,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set { 89 } },
             flags = set { "repeat" },
-            reward = { sparks = 13, xp = 650, accolades = 5, item = { xi.items.PLATINUM_EARRING } },
+            reward = { sparks = 13, xp = 650, accolades = 5, item = { xi.item.PLATINUM_EARRING } },
         },
 
         [567] =
@@ -4760,7 +4760,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set { 83 } },
             flags = set { "repeat" },
-            reward = { sparks = 13, xp = 650, accolades = 5, item = { xi.items.PHANTOM_EARRING } },
+            reward = { sparks = 13, xp = 650, accolades = 5, item = { xi.item.PHANTOM_EARRING } },
         },
 
         [569] =
@@ -4769,7 +4769,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set { 90 } },
             flags = set { "repeat" },
-            reward = { sparks = 16, xp = 800, accolades = 5, item = { xi.items.CORAL_EARRING } },
+            reward = { sparks = 16, xp = 800, accolades = 5, item = { xi.item.CORAL_EARRING } },
         },
 
         [571] =
@@ -4778,7 +4778,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set { 91 } },
             flags = set { "repeat" },
-            reward = { sparks = 13, xp = 650, accolades = 5, item = { xi.items.DARKSTEEL_SHIELD } },
+            reward = { sparks = 13, xp = 650, accolades = 5, item = { xi.item.DARKSTEEL_SHIELD } },
         },
 
         [573] =
@@ -4787,7 +4787,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set { 92 } },
             flags = set { "repeat" },
-            reward = { sparks = 70, xp = 850, accolades = 7, item = { xi.items.STAR_EARRING } },
+            reward = { sparks = 70, xp = 850, accolades = 7, item = { xi.item.STAR_EARRING } },
         },
 
         [575] =
@@ -4796,7 +4796,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set { 171 } },
             flags = set { "repeat" },
-            reward = { sparks = 16, xp = 800, accolades = 5, item = { xi.items.CRIMSON_EARRING } },
+            reward = { sparks = 16, xp = 800, accolades = 5, item = { xi.item.CRIMSON_EARRING } },
         },
 
         -----------------------------------
@@ -4809,7 +4809,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set { 95 } },
             flags = set { "repeat" },
-            reward = { sparks = 11, xp = 550, accolades = 5, item = { xi.items.DARKSTEEL_GORGET } },
+            reward = { sparks = 11, xp = 550, accolades = 5, item = { xi.item.DARKSTEEL_GORGET } },
         },
 
         [579] =
@@ -4818,7 +4818,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set { 96 } },
             flags = set { "repeat" },
-            reward = { sparks = 12, xp = 600, accolades = 5, item = { xi.items.WIVRE_GORGET } },
+            reward = { sparks = 12, xp = 600, accolades = 5, item = { xi.item.WIVRE_GORGET } },
         },
 
         [581] =
@@ -4827,7 +4827,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set { 97 } },
             flags = set { "repeat" },
-            reward = { sparks = 13, xp = 650, accolades = 5, item = { xi.items.DARKSTEEL_BUCKLER } },
+            reward = { sparks = 13, xp = 650, accolades = 5, item = { xi.item.DARKSTEEL_BUCKLER } },
         },
 
         [583] =
@@ -4836,7 +4836,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set { 98 } },
             flags = set { "repeat" },
-            reward = { sparks = 13, xp = 650, accolades = 5, item = { xi.items.WIVRE_SHIELD } },
+            reward = { sparks = 13, xp = 650, accolades = 5, item = { xi.item.WIVRE_SHIELD } },
         },
 
         [585] =
@@ -4845,7 +4845,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set { 99 } },
             flags = set { "repeat" },
-            reward = { sparks = 70, xp = 850, accolades = 7, item = { xi.items.CRIMSON_RING } },
+            reward = { sparks = 70, xp = 850, accolades = 7, item = { xi.item.CRIMSON_RING } },
         },
 
         [587] =
@@ -4854,7 +4854,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set { 164 } },
             flags = set { "repeat" },
-            reward = { sparks = 16, xp = 800, accolades = 5, item = { xi.items.ORICHALCUM_RING } },
+            reward = { sparks = 16, xp = 800, accolades = 5, item = { xi.item.ORICHALCUM_RING } },
         },
 
         [589] =
@@ -4863,7 +4863,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set { 136 } },
             flags = set { "repeat" },
-            reward = { sparks = 70, xp = 850, accolades = 7, item = { xi.items.STAR_RING } },
+            reward = { sparks = 70, xp = 850, accolades = 7, item = { xi.item.STAR_RING } },
         },
 
         [591] =
@@ -4872,7 +4872,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set { 137 } },
             flags = set { "repeat" },
-            reward = { sparks = 80, xp = 900, accolades = 8, item = { xi.items.ACHERON_SHIELD } },
+            reward = { sparks = 80, xp = 900, accolades = 8, item = { xi.item.ACHERON_SHIELD } },
         },
 
         [593] =
@@ -4881,7 +4881,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set { 138 } },
             flags = set { "repeat" },
-            reward = { sparks = 80, xp = 900, accolades = 8, item = { xi.items.OROCHI_NODOWA } },
+            reward = { sparks = 80, xp = 900, accolades = 8, item = { xi.item.OROCHI_NODOWA } },
         },
 
         [595] =
@@ -4890,7 +4890,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set { 155 } },
             flags = set { "repeat" },
-            reward = { sparks = 80, xp = 900, accolades = 8, item = { xi.items.CERBERUS_RING } },
+            reward = { sparks = 80, xp = 900, accolades = 8, item = { xi.item.CERBERUS_RING } },
         },
 
         -----------------------------------
@@ -4903,7 +4903,7 @@ function getRoeRecords(triggers)
             goal = 30,
             reqs = { zone = set { 132 } },
             flags = set { "repeat" },
-            reward = { sparks = 80, xp = 900, accolades = 8, item = { xi.items.MUZZLING_COLLAR } },
+            reward = { sparks = 80, xp = 900, accolades = 8, item = { xi.item.MUZZLING_COLLAR } },
         },
 
         [614] =
@@ -4912,7 +4912,7 @@ function getRoeRecords(triggers)
             goal = 30,
             reqs = { zone = set { 15 } },
             flags = set { "repeat" },
-            reward = { sparks = 80, xp = 900, accolades = 8, item = { xi.items.AL_ZAHBI_SASH } },
+            reward = { sparks = 80, xp = 900, accolades = 8, item = { xi.item.AL_ZAHBI_SASH } },
         },
 
         [615] =
@@ -4921,7 +4921,7 @@ function getRoeRecords(triggers)
             goal = 30,
             reqs = { zone = set { 45 } },
             flags = set { "repeat" },
-            reward = { sparks = 80, xp = 900, accolades = 8, item = { xi.items.SANCTUARY_OBI } },
+            reward = { sparks = 80, xp = 900, accolades = 8, item = { xi.item.SANCTUARY_OBI } },
         },
 
         [616] =
@@ -4930,7 +4930,7 @@ function getRoeRecords(triggers)
             goal = 30,
             reqs = { zone = set { 215 } },
             flags = set { "repeat" },
-            reward = { sparks = 80, xp = 900, accolades = 8, item = { xi.items.BEIR_BELT } },
+            reward = { sparks = 80, xp = 900, accolades = 8, item = { xi.item.BEIR_BELT } },
         },
 
         [617] =
@@ -4939,7 +4939,7 @@ function getRoeRecords(triggers)
             goal = 30,
             reqs = { zone = set { 216 } },
             flags = set { "repeat" },
-            reward = { sparks = 80, xp = 900, accolades = 8, item = { xi.items.AISANCE_MANTLE } },
+            reward = { sparks = 80, xp = 900, accolades = 8, item = { xi.item.AISANCE_MANTLE } },
         },
 
         [618] =
@@ -4948,7 +4948,7 @@ function getRoeRecords(triggers)
             goal = 30,
             reqs = { zone = set { 217 } },
             flags = set { "repeat" },
-            reward = { sparks = 80, xp = 900, accolades = 8, item = { xi.items.ELOQUENCE_CAPE } },
+            reward = { sparks = 80, xp = 900, accolades = 8, item = { xi.item.ELOQUENCE_CAPE } },
         },
 
         [619] =
@@ -4957,7 +4957,7 @@ function getRoeRecords(triggers)
             goal = 30,
             reqs = { zone = set { 218 } },
             flags = set { "repeat" },
-            reward = { sparks = 80, xp = 900, accolades = 8, item = { xi.items.VIGILANCE_MANTLE } },
+            reward = { sparks = 80, xp = 900, accolades = 8, item = { xi.item.VIGILANCE_MANTLE } },
         },
 
         [620] =
@@ -4966,7 +4966,7 @@ function getRoeRecords(triggers)
             goal = 30,
             reqs = { zone = set { 253 } },
             flags = set { "repeat" },
-            reward = { sparks = 80, xp = 900, accolades = 8, item = { xi.items.AREWE_RING } },
+            reward = { sparks = 80, xp = 900, accolades = 8, item = { xi.item.AREWE_RING } },
         },
 
         [621] =
@@ -4975,7 +4975,7 @@ function getRoeRecords(triggers)
             goal = 30,
             reqs = { zone = set { 254 } },
             flags = set { "repeat" },
-            reward = { sparks = 80, xp = 900, accolades = 8, item = { xi.items.AREWE_RING } },
+            reward = { sparks = 80, xp = 900, accolades = 8, item = { xi.item.AREWE_RING } },
         },
 
         -----------------------------------
@@ -4987,7 +4987,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { mobName = set { "Eschan_Yztarg" }, zone = set { 288 } },
             flags = set { "repeat" },
-            reward = { sparks = 300, xp = 900, capacity = 150, accolades = 30, item = { xi.items.SILT_POUCH } },
+            reward = { sparks = 300, xp = 900, capacity = 150, accolades = 30, item = { xi.item.SILT_POUCH } },
         },
 
         [886] =
@@ -4996,7 +4996,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { mobName = set { "Eschan_Bugard" }, zone = set { 288 } },
             flags = set { "repeat" },
-            reward = { sparks = 300, xp = 900, capacity = 150, accolades = 30, item = { xi.items.SILT_POUCH } },
+            reward = { sparks = 300, xp = 900, capacity = 150, accolades = 30, item = { xi.item.SILT_POUCH } },
         },
 
         [887] =
@@ -5005,7 +5005,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { mobName = set { "Eschan_Tarichuk" }, zone = set { 288 } },
             flags = set { "repeat" },
-            reward = { sparks = 300, xp = 900, capacity = 150, accolades = 30, item = { xi.items.SILT_POUCH } },
+            reward = { sparks = 300, xp = 900, capacity = 150, accolades = 30, item = { xi.item.SILT_POUCH } },
         },
 
         [888] =
@@ -5014,7 +5014,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { mobName = set { "Eschan_Shadow_Dragon" }, zone = set { 288 } },
             flags = set { "repeat" },
-            reward = { sparks = 300, xp = 900, capacity = 150, accolades = 30, item = { xi.items.SILT_POUCH } },
+            reward = { sparks = 300, xp = 900, capacity = 150, accolades = 30, item = { xi.item.SILT_POUCH } },
         },
 
         [889] =
@@ -5023,7 +5023,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { mobName = set { "Eschan_Mosquito" }, zone = set { 288 } },
             flags = set { "repeat" },
-            reward = { sparks = 300, xp = 900, capacity = 150, accolades = 30, item = { xi.items.BEAD_POUCH } },
+            reward = { sparks = 300, xp = 900, capacity = 150, accolades = 30, item = { xi.item.BEAD_POUCH } },
         },
 
         [901] =
@@ -5032,7 +5032,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { mobName = set { "Eschan_Puk" }, zone = set { 288 } },
             flags = set { "repeat" },
-            reward = { sparks = 300, xp = 900, capacity = 150, accolades = 30, item = { xi.items.BEAD_POUCH } },
+            reward = { sparks = 300, xp = 900, capacity = 150, accolades = 30, item = { xi.item.BEAD_POUCH } },
         },
 
         [902] =
@@ -5041,7 +5041,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { mobName = set { "Eschan_Opo-opo" }, zone = set { 288 } },
             flags = set { "repeat" },
-            reward = { sparks = 300, xp = 900, capacity = 150, accolades = 30, item = { xi.items.BEAD_POUCH } },
+            reward = { sparks = 300, xp = 900, capacity = 150, accolades = 30, item = { xi.item.BEAD_POUCH } },
         },
 
         [903] =
@@ -5050,7 +5050,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { mobName = set { "Eschan_Ilaern" }, zone = set { 289 } },
             flags = set { "repeat" },
-            reward = { sparks = 300, xp = 900, capacity = 150, accolades = 30, item = { xi.items.SILT_POUCH } },
+            reward = { sparks = 300, xp = 900, capacity = 150, accolades = 30, item = { xi.item.SILT_POUCH } },
         },
 
         [904] =
@@ -5059,7 +5059,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { mobName = set { "Eschan_Phuabo" }, zone = set { 289 } },
             flags = set { "repeat" },
-            reward = { sparks = 300, xp = 900, capacity = 150, accolades = 30, item = { xi.items.BEAD_POUCH } },
+            reward = { sparks = 300, xp = 900, capacity = 150, accolades = 30, item = { xi.item.BEAD_POUCH } },
         },
 
         [905] =
@@ -5068,7 +5068,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { mobName = set { "Eschan_Euvhi" }, zone = set { 289 } },
             flags = set { "repeat" },
-            reward = { sparks = 300, xp = 900, capacity = 150, accolades = 30, item = { xi.items.SILT_POUCH } },
+            reward = { sparks = 300, xp = 900, capacity = 150, accolades = 30, item = { xi.item.SILT_POUCH } },
         },
 
         [906] =
@@ -5077,7 +5077,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { mobName = set { "Eschan_Clionid" }, zone = set { 289 } },
             flags = set { "repeat" },
-            reward = { sparks = 300, xp = 900, capacity = 150, accolades = 30, item = { xi.items.BEAD_POUCH } },
+            reward = { sparks = 300, xp = 900, capacity = 150, accolades = 30, item = { xi.item.BEAD_POUCH } },
         },
 
         [907] =
@@ -5086,7 +5086,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { mobName = set { "Eschan_Hpemde" }, zone = set { 289 } },
             flags = set { "repeat" },
-            reward = { sparks = 300, xp = 900, capacity = 150, accolades = 30, item = { xi.items.SILT_POUCH } },
+            reward = { sparks = 300, xp = 900, capacity = 150, accolades = 30, item = { xi.item.SILT_POUCH } },
         },
 
         [908] =
@@ -5095,7 +5095,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { mobName = set { "Eschan_Amoeban" }, zone = set { 289 } },
             flags = set { "repeat" },
-            reward = { sparks = 300, xp = 900, capacity = 150, accolades = 30, item = { xi.items.BEAD_POUCH } },
+            reward = { sparks = 300, xp = 900, capacity = 150, accolades = 30, item = { xi.item.BEAD_POUCH } },
         },
 
         [909] =
@@ -5104,7 +5104,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { mobName = set { "Eschan_Xzomit" }, zone = set { 289 } },
             flags = set { "repeat" },
-            reward = { sparks = 300, xp = 900, capacity = 150, accolades = 30, item = { xi.items.SILT_POUCH } },
+            reward = { sparks = 300, xp = 900, capacity = 150, accolades = 30, item = { xi.item.SILT_POUCH } },
         },
 
         [910] =
@@ -5113,7 +5113,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { mobName = set { "Eschan_Murex" }, zone = set { 289 } },
             flags = set { "repeat" },
-            reward = { sparks = 300, xp = 900, capacity = 150, accolades = 30, item = { xi.items.BEAD_POUCH } },
+            reward = { sparks = 300, xp = 900, capacity = 150, accolades = 30, item = { xi.item.BEAD_POUCH } },
         },
 
         [911] =
@@ -5122,7 +5122,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { mobName = set { "Eschan_Ghrah" }, zone = set { 289 } },
             flags = set { "repeat" },
-            reward = { sparks = 300, xp = 900, capacity = 150, accolades = 30, item = { xi.items.SILT_POUCH } },
+            reward = { sparks = 300, xp = 900, capacity = 150, accolades = 30, item = { xi.item.SILT_POUCH } },
         },
 
         [912] =
@@ -5131,7 +5131,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { mobName = set { "Eschan_Limule" }, zone = set { 289 } },
             flags = set { "repeat" },
-            reward = { sparks = 300, xp = 900, capacity = 150, accolades = 30, item = { xi.items.BEAD_POUCH } },
+            reward = { sparks = 300, xp = 900, capacity = 150, accolades = 30, item = { xi.item.BEAD_POUCH } },
         },
 
         [885] =
@@ -5296,7 +5296,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { mobName = set { "Obstreperous_Panopt" }, zone = set { 291 } },
             flags = set { "repeat" },
-            reward = { sparks = 300, xp = 900, capacity = 150, accolades = 30, item = { xi.items.BEAD_POUCH } },
+            reward = { sparks = 300, xp = 900, capacity = 150, accolades = 30, item = { xi.item.BEAD_POUCH } },
         },
 
         [944] =
@@ -5305,7 +5305,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { mobName = set { "Snaggletoothed_Tiger" }, zone = set { 291 } },
             flags = set { "repeat" },
-            reward = { sparks = 300, xp = 900, capacity = 150, accolades = 30, item = { xi.items.SILT_POUCH } },
+            reward = { sparks = 300, xp = 900, capacity = 150, accolades = 30, item = { xi.item.SILT_POUCH } },
         },
 
         [945] =
@@ -5314,7 +5314,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { mobName = set { "Agitated_Chapuli" }, zone = set { 291 } },
             flags = set { "repeat" },
-            reward = { sparks = 300, xp = 900, capacity = 150, accolades = 30, item = { xi.items.BEAD_POUCH } },
+            reward = { sparks = 300, xp = 900, capacity = 150, accolades = 30, item = { xi.item.BEAD_POUCH } },
         },
 
         [946] =
@@ -5323,7 +5323,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { mobName = set { "Indomitable_Faaz" }, zone = set { 291 } },
             flags = set { "repeat" },
-            reward = { sparks = 300, xp = 900, capacity = 150, accolades = 30, item = { xi.items.SILT_POUCH } },
+            reward = { sparks = 300, xp = 900, capacity = 150, accolades = 30, item = { xi.item.SILT_POUCH } },
         },
 
         [947] =
@@ -5332,7 +5332,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { mobName = set { "Territorial_Mantis" }, zone = set { 291 } },
             flags = set { "repeat" },
-            reward = { sparks = 300, xp = 900, capacity = 150, accolades = 30, item = { xi.items.BEAD_POUCH } },
+            reward = { sparks = 300, xp = 900, capacity = 150, accolades = 30, item = { xi.item.BEAD_POUCH } },
         },
 
         [948] =
@@ -5341,7 +5341,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { mobName = set { "Devouring_Mosquito" }, zone = set { 291 } },
             flags = set { "repeat" },
-            reward = { sparks = 300, xp = 900, capacity = 150, accolades = 30, item = { xi.items.SILT_POUCH } },
+            reward = { sparks = 300, xp = 900, capacity = 150, accolades = 30, item = { xi.item.SILT_POUCH } },
         },
 
         [949] =
@@ -5350,7 +5350,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { mobName = set { "Lentic_Toad" }, zone = set { 291 } },
             flags = set { "repeat" },
-            reward = { sparks = 300, xp = 900, capacity = 150, accolades = 30, item = { xi.items.BEAD_POUCH } },
+            reward = { sparks = 300, xp = 900, capacity = 150, accolades = 30, item = { xi.item.BEAD_POUCH } },
         },
 
         [950] =
@@ -5359,7 +5359,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { mobName = set { "Quarrelsome_Hippogryph" }, zone = set { 291 } },
             flags = set { "repeat" },
-            reward = { sparks = 300, xp = 900, capacity = 150, accolades = 30, item = { xi.items.SILT_POUCH } },
+            reward = { sparks = 300, xp = 900, capacity = 150, accolades = 30, item = { xi.item.SILT_POUCH } },
         },
 
         [951] =
@@ -5368,7 +5368,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { mobName = set { "Rampaging_Beetle" }, zone = set { 291 } },
             flags = set { "repeat" },
-            reward = { sparks = 300, xp = 900, capacity = 150, accolades = 30, item = { xi.items.BEAD_POUCH } },
+            reward = { sparks = 300, xp = 900, capacity = 150, accolades = 30, item = { xi.item.BEAD_POUCH } },
         },
 
         [952] =
@@ -5377,7 +5377,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { mobName = set { "Glowering_Ladybug" }, zone = set { 291 } },
             flags = set { "repeat" },
-            reward = { sparks = 300, xp = 900, capacity = 150, accolades = 30, item = { xi.items.SILT_POUCH } },
+            reward = { sparks = 300, xp = 900, capacity = 150, accolades = 30, item = { xi.item.SILT_POUCH } },
         },
 
         [953] =
@@ -5386,7 +5386,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { mobName = set { "Lucani" }, zone = set { 291 } },
             flags = set { "repeat" },
-            reward = { sparks = 300, xp = 900, capacity = 150, accolades = 30, item = { xi.items.SILT_POUCH } },
+            reward = { sparks = 300, xp = 900, capacity = 150, accolades = 30, item = { xi.item.SILT_POUCH } },
         },
 
         [943] =
@@ -5498,7 +5498,7 @@ function getRoeRecords(triggers)
             goal = 5,
             reqs = { zone = set { 101 } },
             flags = set { "repeat" },
-            reward = { sparks = 100, xp = 500, accolades = 10, item = { { xi.items.HATCHET, 12 } } },
+            reward = { sparks = 100, xp = 500, accolades = 10, item = { { xi.item.HATCHET, 12 } } },
         },
 
         [181] =
@@ -5507,7 +5507,7 @@ function getRoeRecords(triggers)
             goal = 5,
             reqs = { zone = set { 140 } },
             flags = set { "repeat" },
-            reward = { sparks = 100, xp = 500, accolades = 10, item = { { xi.items.HATCHET, 12 } } },
+            reward = { sparks = 100, xp = 500, accolades = 10, item = { { xi.item.HATCHET, 12 } } },
         },
 
         [182] =
@@ -5516,7 +5516,7 @@ function getRoeRecords(triggers)
             goal = 5,
             reqs = { zone = set { 196 } },
             flags = set { "repeat" },
-            reward = { sparks = 100, xp = 500, accolades = 10, item = { { xi.items.PICKAXE, 12 } } },
+            reward = { sparks = 100, xp = 500, accolades = 10, item = { { xi.item.PICKAXE, 12 } } },
         },
 
         [183] =
@@ -5525,7 +5525,7 @@ function getRoeRecords(triggers)
             goal = 5,
             reqs = { zone = set { 104 } },
             flags = set { "repeat" },
-            reward = { sparks = 100, xp = 500, accolades = 10, item = { { xi.items.HATCHET, 12 } } },
+            reward = { sparks = 100, xp = 500, accolades = 10, item = { { xi.item.HATCHET, 12 } } },
         },
 
         [184] =
@@ -5534,7 +5534,7 @@ function getRoeRecords(triggers)
             goal = 5,
             reqs = { zone = set { 172 } },
             flags = set { "repeat" },
-            reward = { sparks = 100, xp = 500, accolades = 10, item = { { xi.items.PICKAXE, 12 } } },
+            reward = { sparks = 100, xp = 500, accolades = 10, item = { { xi.item.PICKAXE, 12 } } },
         },
 
         [185] =
@@ -5543,7 +5543,7 @@ function getRoeRecords(triggers)
             goal = 5,
             reqs = { zone = set { 143 } },
             flags = set { "repeat" },
-            reward = { sparks = 100, xp = 500, accolades = 10, item = { { xi.items.PICKAXE, 12 } } },
+            reward = { sparks = 100, xp = 500, accolades = 10, item = { { xi.item.PICKAXE, 12 } } },
         },
 
         [186] =
@@ -5552,7 +5552,7 @@ function getRoeRecords(triggers)
             goal = 5,
             reqs = { zone = set { 115 } },
             flags = set { "repeat" },
-            reward = { sparks = 100, xp = 500, accolades = 10, item = { { xi.items.SICKLE, 12 } } },
+            reward = { sparks = 100, xp = 500, accolades = 10, item = { { xi.item.SICKLE, 12 } } },
         },
 
         [187] =
@@ -5561,7 +5561,7 @@ function getRoeRecords(triggers)
             goal = 5,
             reqs = { zone = set { 145 } },
             flags = set { "repeat" },
-            reward = { sparks = 100, xp = 500, accolades = 10, item = { { xi.items.SICKLE, 12 } } },
+            reward = { sparks = 100, xp = 500, accolades = 10, item = { { xi.item.SICKLE, 12 } } },
         },
 
         [188] =
@@ -5570,7 +5570,7 @@ function getRoeRecords(triggers)
             goal = 5,
             reqs = { zone = set { 118 } },
             flags = set { "repeat" },
-            reward = { sparks = 100, xp = 500, accolades = 10, item = { { xi.items.HATCHET, 12 } } },
+            reward = { sparks = 100, xp = 500, accolades = 10, item = { { xi.item.HATCHET, 12 } } },
         },
 
         [189] =
@@ -5579,7 +5579,7 @@ function getRoeRecords(triggers)
             goal = 5,
             reqs = { zone = set { 117 } },
             flags = set { "repeat" },
-            reward = { sparks = 100, xp = 500, accolades = 10, item = { { xi.items.PICKAXE, 12 } } },
+            reward = { sparks = 100, xp = 500, accolades = 10, item = { { xi.item.PICKAXE, 12 } } },
         },
 
         [190] =
@@ -5588,7 +5588,7 @@ function getRoeRecords(triggers)
             goal = 5,
             reqs = { zone = set { 198 } },
             flags = set { "repeat" },
-            reward = { sparks = 100, xp = 500, accolades = 10, item = { { xi.items.PICKAXE, 12 } } },
+            reward = { sparks = 100, xp = 500, accolades = 10, item = { { xi.item.PICKAXE, 12 } } },
         },
 
         [389] =
@@ -5597,7 +5597,7 @@ function getRoeRecords(triggers)
             goal = 5,
             reqs = { zone = set { 142 } },
             flags = set { "repeat" },
-            reward = { sparks = 100, xp = 500, accolades = 10, item = { { xi.items.PICKAXE, 12 } } },
+            reward = { sparks = 100, xp = 500, accolades = 10, item = { { xi.item.PICKAXE, 12 } } },
         },
 
         -----------------------------------
@@ -5614,7 +5614,7 @@ function getRoeRecords(triggers)
             goal = 5,
             reqs = { zone = set { 123 } },
             flags = set { "repeat" },
-            reward = { sparks = 100, xp = 500, accolades = 10, item = { { xi.items.HATCHET, 12 } } },
+            reward = { sparks = 100, xp = 500, accolades = 10, item = { { xi.item.HATCHET, 12 } } },
         },
 
         [479] =
@@ -5623,7 +5623,7 @@ function getRoeRecords(triggers)
             goal = 5,
             reqs = { zone = set { 124 } },
             flags = set { "repeat" },
-            reward = { sparks = 100, xp = 500, accolades = 10, item = { { xi.items.HATCHET, 12 } } },
+            reward = { sparks = 100, xp = 500, accolades = 10, item = { { xi.item.HATCHET, 12 } } },
         },
 
         [480] =
@@ -5632,7 +5632,7 @@ function getRoeRecords(triggers)
             goal = 5,
             reqs = { zone = set { 205 } },
             flags = set { "repeat" },
-            reward = { sparks = 100, xp = 500, accolades = 10, item = { { xi.items.PICKAXE, 12 } } },
+            reward = { sparks = 100, xp = 500, accolades = 10, item = { { xi.item.PICKAXE, 12 } } },
         },
 
         [485] =
@@ -5641,7 +5641,7 @@ function getRoeRecords(triggers)
             goal = 5,
             reqs = { zone = set { 173 } },
             flags = set { "repeat" },
-            reward = { sparks = 100, xp = 500, accolades = 10, item = { { xi.items.PICKAXE, 12 } } },
+            reward = { sparks = 100, xp = 500, accolades = 10, item = { { xi.item.PICKAXE, 12 } } },
         },
 
         -----------------------------------
@@ -5654,7 +5654,7 @@ function getRoeRecords(triggers)
             goal = 5,
             reqs = { zone = set { 11 } },
             flags = set { "repeat" },
-            reward = { sparks = 100, xp = 500, accolades = 10, item = { { xi.items.PICKAXE, 12 } } },
+            reward = { sparks = 100, xp = 500, accolades = 10, item = { { xi.item.PICKAXE, 12 } } },
         },
 
         [482] =
@@ -5663,7 +5663,7 @@ function getRoeRecords(triggers)
             goal = 5,
             reqs = { zone = set { 12 } },
             flags = set { "repeat" },
-            reward = { sparks = 100, xp = 500, accolades = 10, item = { { xi.items.PICKAXE, 12 } } },
+            reward = { sparks = 100, xp = 500, accolades = 10, item = { { xi.item.PICKAXE, 12 } } },
         },
 
         [483] =
@@ -5672,7 +5672,7 @@ function getRoeRecords(triggers)
             goal = 5,
             reqs = { zone = set { 24 } },
             flags = set { "repeat" },
-            reward = { sparks = 100, xp = 500, accolades = 10, item = { { xi.items.HATCHET, 12 } } },
+            reward = { sparks = 100, xp = 500, accolades = 10, item = { { xi.item.HATCHET, 12 } } },
         },
 
         [484] =
@@ -5681,7 +5681,7 @@ function getRoeRecords(triggers)
             goal = 5,
             reqs = { zone = set { 25 } },
             flags = set { "repeat" },
-            reward = { sparks = 100, xp = 500, accolades = 10, item = { { xi.items.HATCHET, 12 } } },
+            reward = { sparks = 100, xp = 500, accolades = 10, item = { { xi.item.HATCHET, 12 } } },
         },
 
         [486] =
@@ -5690,7 +5690,7 @@ function getRoeRecords(triggers)
             goal = 5,
             reqs = { zone = set { 2 } },
             flags = set { "repeat" },
-            reward = { sparks = 100, xp = 500, accolades = 10, item = { { xi.items.HATCHET, 12 } } },
+            reward = { sparks = 100, xp = 500, accolades = 10, item = { { xi.item.HATCHET, 12 } } },
         },
 
         [487] =
@@ -5699,7 +5699,7 @@ function getRoeRecords(triggers)
             goal = 5,
             reqs = { zone = set { 7 } },
             flags = set { "repeat" },
-            reward = { sparks = 100, xp = 500, accolades = 10, item = { { xi.items.PICKAXE, 12 } } },
+            reward = { sparks = 100, xp = 500, accolades = 10, item = { { xi.item.PICKAXE, 12 } } },
         },
 
         -----------------------------------
@@ -5712,7 +5712,7 @@ function getRoeRecords(triggers)
             goal = 5,
             reqs = { zone = set { 52 } },
             flags = set { "repeat" },
-            reward = { sparks = 100, xp = 500, accolades = 10, item = { { xi.items.SICKLE, 12 } } },
+            reward = { sparks = 100, xp = 500, accolades = 10, item = { { xi.item.SICKLE, 12 } } },
         },
 
         [600] =
@@ -5721,7 +5721,7 @@ function getRoeRecords(triggers)
             goal = 5,
             reqs = { zone = set { 65 } },
             flags = set { "repeat" },
-            reward = { sparks = 100, xp = 500, accolades = 10, item = { { xi.items.HATCHET, 12 } } },
+            reward = { sparks = 100, xp = 500, accolades = 10, item = { { xi.item.HATCHET, 12 } } },
         },
 
         [601] =
@@ -5730,7 +5730,7 @@ function getRoeRecords(triggers)
             goal = 5,
             reqs = { zone = set { 51 } },
             flags = set { "repeat" },
-            reward = { sparks = 100, xp = 500, accolades = 10, item = { { xi.items.SICKLE, 12 } } },
+            reward = { sparks = 100, xp = 500, accolades = 10, item = { { xi.item.SICKLE, 12 } } },
         },
 
         [602] =
@@ -5739,7 +5739,7 @@ function getRoeRecords(triggers)
             goal = 5,
             reqs = { zone = set { 62 } },
             flags = set { "repeat" },
-            reward = { sparks = 100, xp = 500, accolades = 10, item = { { xi.items.PICKAXE, 12 } } },
+            reward = { sparks = 100, xp = 500, accolades = 10, item = { { xi.item.PICKAXE, 12 } } },
         },
 
         [603] =
@@ -5748,7 +5748,7 @@ function getRoeRecords(triggers)
             goal = 5,
             reqs = { zone = set { 61 } },
             flags = set { "repeat" },
-            reward = { sparks = 100, xp = 500, accolades = 10, item = { { xi.items.PICKAXE, 12 } } },
+            reward = { sparks = 100, xp = 500, accolades = 10, item = { { xi.item.PICKAXE, 12 } } },
         },
 
         [604] =
@@ -5757,7 +5757,7 @@ function getRoeRecords(triggers)
             goal = 5,
             reqs = { zone = set { 79 } },
             flags = set { "repeat" },
-            reward = { sparks = 100, xp = 500, accolades = 10, item = { { xi.items.HATCHET, 12 } } },
+            reward = { sparks = 100, xp = 500, accolades = 10, item = { { xi.item.HATCHET, 12 } } },
         },
 
         -----------------------------------
@@ -5770,7 +5770,7 @@ function getRoeRecords(triggers)
             goal = 5,
             reqs = { zone = set { 81 } },
             flags = set { "repeat" },
-            reward = { sparks = 100, xp = 500, accolades = 10, item = { { xi.items.HATCHET, 12 } } },
+            reward = { sparks = 100, xp = 500, accolades = 10, item = { { xi.item.HATCHET, 12 } } },
         },
 
         [607] =
@@ -5779,7 +5779,7 @@ function getRoeRecords(triggers)
             goal = 5,
             reqs = { zone = set { 82 } },
             flags = set { "repeat" },
-            reward = { sparks = 100, xp = 500, accolades = 10, item = { { xi.items.HATCHET, 12 } } },
+            reward = { sparks = 100, xp = 500, accolades = 10, item = { { xi.item.HATCHET, 12 } } },
         },
 
         [608] =
@@ -5788,7 +5788,7 @@ function getRoeRecords(triggers)
             goal = 5,
             reqs = { zone = set { 88 } },
             flags = set { "repeat" },
-            reward = { sparks = 100, xp = 500, accolades = 10, item = { { xi.items.PICKAXE, 12 } } },
+            reward = { sparks = 100, xp = 500, accolades = 10, item = { { xi.item.PICKAXE, 12 } } },
         },
 
         [609] =
@@ -5797,7 +5797,7 @@ function getRoeRecords(triggers)
             goal = 5,
             reqs = { zone = set { 89 } },
             flags = set { "repeat" },
-            reward = { sparks = 100, xp = 500, accolades = 10, item = { { xi.items.SICKLE, 12 } } },
+            reward = { sparks = 100, xp = 500, accolades = 10, item = { { xi.item.SICKLE, 12 } } },
         },
 
         [610] =
@@ -5806,7 +5806,7 @@ function getRoeRecords(triggers)
             goal = 5,
             reqs = { zone = set { 95 } },
             flags = set { "repeat" },
-            reward = { sparks = 100, xp = 500, accolades = 10, item = { { xi.items.SICKLE, 12 } } },
+            reward = { sparks = 100, xp = 500, accolades = 10, item = { { xi.item.SICKLE, 12 } } },
         },
 
         [611] =
@@ -5815,7 +5815,7 @@ function getRoeRecords(triggers)
             goal = 5,
             reqs = { zone = set { 96 } },
             flags = set { "repeat" },
-            reward = { sparks = 100, xp = 500, accolades = 10, item = { { xi.items.HATCHET, 12 } } },
+            reward = { sparks = 100, xp = 500, accolades = 10, item = { { xi.item.HATCHET, 12 } } },
         },
 
         -----------------------------------
@@ -5858,7 +5858,7 @@ function getRoeRecords(triggers)
             trigger = triggers.mobKill,
             reqs = { mobID = set { 17506670 } },
             flags = set { "repeat" },
-            reward = { sparks = 1000, xp = 5000, accolades = 100, item = { xi.items.COPPER_AMAN_VOUCHER } },
+            reward = { sparks = 1000, xp = 5000, accolades = 100, item = { xi.item.COPPER_AMAN_VOUCHER } },
         },
 
         [728] =
@@ -5921,7 +5921,7 @@ function getRoeRecords(triggers)
             trigger = triggers.mobKill,
             reqs = { mobID = set { 16912848 } },
             flags = set { "repeat" },
-            reward = { sparks = 1000, xp = 5000, accolades = 100, item = { xi.items.COPPER_AMAN_VOUCHER } },
+            reward = { sparks = 1000, xp = 5000, accolades = 100, item = { xi.item.COPPER_AMAN_VOUCHER } },
         },
 
         [812] =
@@ -6212,7 +6212,7 @@ function getRoeRecords(triggers)
         { -- Spoils - Ivory Chip
             trigger = triggers.itemLooted,
             goal = 1,
-            reqs = { itemID = set { xi.items.IVORY_CHIP } },
+            reqs = { itemID = set { xi.item.IVORY_CHIP } },
             flags = set { "repeat" },
             reward = { sparks = 300, xp = 1500, accolades = 30 },
         },
@@ -6221,7 +6221,7 @@ function getRoeRecords(triggers)
         { -- Spoils - Scarlet Chip
             trigger = triggers.itemLooted,
             goal = 1,
-            reqs = { itemID = set { xi.items.SCARLET_CHIP } },
+            reqs = { itemID = set { xi.item.SCARLET_CHIP } },
             flags = set { "repeat" },
             reward = { sparks = 300, xp = 1500, accolades = 30 },
         },
@@ -6230,7 +6230,7 @@ function getRoeRecords(triggers)
         { -- Spoils - Emerald Chip
             trigger = triggers.itemLooted,
             goal = 1,
-            reqs = { itemID = set { xi.items.EMERALD_CHIP } },
+            reqs = { itemID = set { xi.item.EMERALD_CHIP } },
             flags = set { "repeat" },
             reward = { sparks = 300, xp = 1500, accolades = 30 },
         },
@@ -6239,7 +6239,7 @@ function getRoeRecords(triggers)
         { -- Spoils - Orchid Chip
             trigger = triggers.itemLooted,
             goal = 1,
-            reqs = { itemID = set { xi.items.ORCHID_CHIP } },
+            reqs = { itemID = set { xi.item.ORCHID_CHIP } },
             flags = set { "repeat" },
             reward = { sparks = 300, xp = 1500, accolades = 30 },
         },
@@ -6248,7 +6248,7 @@ function getRoeRecords(triggers)
         { -- Spoils - Cerulean Chip
             trigger = triggers.itemLooted,
             goal = 1,
-            reqs = { itemID = set { xi.items.CERULEAN_CHIP } },
+            reqs = { itemID = set { xi.item.CERULEAN_CHIP } },
             flags = set { "repeat" },
             reward = { sparks = 300, xp = 1500, accolades = 30 },
         },
@@ -6257,7 +6257,7 @@ function getRoeRecords(triggers)
         { -- Spoils - Silver Chip
             trigger = triggers.itemLooted,
             goal = 1,
-            reqs = { itemID = set { xi.items.SILVER_CHIP } },
+            reqs = { itemID = set { xi.item.SILVER_CHIP } },
             flags = set { "repeat" },
             reward = { sparks = 300, xp = 1500, accolades = 30 },
         },
@@ -6266,7 +6266,7 @@ function getRoeRecords(triggers)
         { -- Spoils - Smoky Chip
             trigger = triggers.itemLooted,
             goal = 1,
-            reqs = { itemID = set { xi.items.SMOKY_CHIP } },
+            reqs = { itemID = set { xi.item.SMOKY_CHIP } },
             flags = set { "repeat" },
             reward = { sparks = 300, xp = 1500, accolades = 30 },
         },
@@ -6275,7 +6275,7 @@ function getRoeRecords(triggers)
         { -- Spoils - Magenta Chip
             trigger = triggers.itemLooted,
             goal = 1,
-            reqs = { itemID = set { xi.items.MAGENTA_CHIP } },
+            reqs = { itemID = set { xi.item.MAGENTA_CHIP } },
             flags = set { "repeat" },
             reward = { sparks = 300, xp = 1500, accolades = 30 },
         },
@@ -6284,7 +6284,7 @@ function getRoeRecords(triggers)
         { -- Spoils - Charcoal Chip
             trigger = triggers.itemLooted,
             goal = 1,
-            reqs = { itemID = set { xi.items.CHARCOAL_CHIP } },
+            reqs = { itemID = set { xi.item.CHARCOAL_CHIP } },
             flags = set { "repeat" },
             reward = { sparks = 300, xp = 1500, accolades = 30 },
         },
@@ -6293,7 +6293,7 @@ function getRoeRecords(triggers)
         { -- Spoils - Smalt Chip
             trigger = triggers.itemLooted,
             goal = 1,
-            reqs = { itemID = set { xi.items.SMALT_CHIP } },
+            reqs = { itemID = set { xi.item.SMALT_CHIP } },
             flags = set { "repeat" },
             reward = { sparks = 300, xp = 1500, accolades = 30 },
         },
@@ -6303,7 +6303,7 @@ function getRoeRecords(triggers)
             trigger = triggers.mobKill,
             reqs = { mobID = set { 16928966 } },
             flags = set { "repeat" },
-            reward = { sparks = 1000, xp = 5000, accolades = 100, item = { xi.items.COPPER_AMAN_VOUCHER } },
+            reward = { sparks = 1000, xp = 5000, accolades = 100, item = { xi.item.COPPER_AMAN_VOUCHER } },
         },
 
         [783] =
@@ -6311,7 +6311,7 @@ function getRoeRecords(triggers)
             trigger = triggers.mobKill,
             reqs = { mobID = set { 16933124 } },
             flags = set { "repeat" },
-            reward = { sparks = 1000, xp = 5000, accolades = 100, item = { xi.items.COPPER_AMAN_VOUCHER } },
+            reward = { sparks = 1000, xp = 5000, accolades = 100, item = { xi.item.COPPER_AMAN_VOUCHER } },
         },
 
         -----------------------------------
@@ -6543,7 +6543,7 @@ function getRoeRecords(triggers)
             trigger = triggers.levelUp,
             reqs = { jobLvl = { xi.job.WAR, 30 } },
             flags = set { "retro" },
-            reward = { sparks = 100, xp = 500, item = { { xi.items.COPY_OF_DEATH_FOR_DIMWITS, 12 } } },
+            reward = { sparks = 100, xp = 500, item = { { xi.item.COPY_OF_DEATH_FOR_DIMWITS, 12 } } },
         },
 
         [1201] =
@@ -6551,7 +6551,7 @@ function getRoeRecords(triggers)
             trigger = triggers.levelUp,
             reqs = { jobLvl = { xi.job.WAR, 50 } },
             flags = set { "retro" },
-            reward = { sparks = 200, xp = 500, item = { { xi.items.COPY_OF_STRIKING_BULLS_DIARY, 12 } } },
+            reward = { sparks = 200, xp = 500, item = { { xi.item.COPY_OF_STRIKING_BULLS_DIARY, 12 } } },
         },
 
         [1202] =
@@ -6559,7 +6559,7 @@ function getRoeRecords(triggers)
             trigger = triggers.levelUp,
             reqs = { jobLvl = { xi.job.WAR, 75 } },
             flags = set { "retro" },
-            reward = { sparks = 300, xp = 500, item = { { xi.items.RAVAGERS_SEAL_FEET, 4 } } },
+            reward = { sparks = 300, xp = 500, item = { { xi.item.RAVAGERS_SEAL_FEET, 4 } } },
         },
 
         [1203] =
@@ -6567,7 +6567,7 @@ function getRoeRecords(triggers)
             trigger = triggers.levelUp,
             reqs = { jobLvl = { xi.job.WAR, 99 } },
             flags = set { "retro" },
-            reward = { sparks = 400, xp = 500, item = { { xi.items.COPY_OF_REMS_TALE_CHAPTER_1, 2 } } },
+            reward = { sparks = 400, xp = 500, item = { { xi.item.COPY_OF_REMS_TALE_CHAPTER_1, 2 } } },
         },
 
         [1204] =
@@ -6575,7 +6575,7 @@ function getRoeRecords(triggers)
             trigger = triggers.levelUp,
             reqs = { jobLvl = { xi.job.MNK, 30 } },
             flags = set { "retro" },
-            reward = { sparks = 100, xp = 500, item = { { xi.items.COPY_OF_MIKHES_MEMO, 12 } } },
+            reward = { sparks = 100, xp = 500, item = { { xi.item.COPY_OF_MIKHES_MEMO, 12 } } },
         },
 
         [1205] =
@@ -6583,7 +6583,7 @@ function getRoeRecords(triggers)
             trigger = triggers.levelUp,
             reqs = { jobLvl = { xi.job.MNK, 50 } },
             flags = set { "retro" },
-            reward = { sparks = 200, xp = 500, item = { { xi.items.COPY_OF_KAYEEL_PAYEELS_MEMOIRS, 12 } } },
+            reward = { sparks = 200, xp = 500, item = { { xi.item.COPY_OF_KAYEEL_PAYEELS_MEMOIRS, 12 } } },
         },
 
         [1206] =
@@ -6591,7 +6591,7 @@ function getRoeRecords(triggers)
             trigger = triggers.levelUp,
             reqs = { jobLvl = { xi.job.MNK, 75 } },
             flags = set { "retro" },
-            reward = { sparks = 300, xp = 500, item = { { xi.items.TANTRA_SEAL_FEET, 4 } } },
+            reward = { sparks = 300, xp = 500, item = { { xi.item.TANTRA_SEAL_FEET, 4 } } },
         },
 
         [1207] =
@@ -6599,7 +6599,7 @@ function getRoeRecords(triggers)
             trigger = triggers.levelUp,
             reqs = { jobLvl = { xi.job.MNK, 99 } },
             flags = set { "retro" },
-            reward = { sparks = 400, xp = 500, item = { { xi.items.COPY_OF_REMS_TALE_CHAPTER_2, 2 } } },
+            reward = { sparks = 400, xp = 500, item = { { xi.item.COPY_OF_REMS_TALE_CHAPTER_2, 2 } } },
         },
 
         [1208] =
@@ -6607,7 +6607,7 @@ function getRoeRecords(triggers)
             trigger = triggers.levelUp,
             reqs = { jobLvl = { xi.job.WHM, 30 } },
             flags = set { "retro" },
-            reward = { sparks = 100, xp = 500, item = { { xi.items.COPY_OF_COVEFFE_BARROWS_MUSINGS, 12 } } },
+            reward = { sparks = 100, xp = 500, item = { { xi.item.COPY_OF_COVEFFE_BARROWS_MUSINGS, 12 } } },
         },
 
         [1209] =
@@ -6615,7 +6615,7 @@ function getRoeRecords(triggers)
             trigger = triggers.levelUp,
             reqs = { jobLvl = { xi.job.WHM, 50 } },
             flags = set { "retro" },
-            reward = { sparks = 200, xp = 500, item = { { xi.items.COPY_OF_ALTANAS_HYMN, 12 } } },
+            reward = { sparks = 200, xp = 500, item = { { xi.item.COPY_OF_ALTANAS_HYMN, 12 } } },
         },
 
         [1210] =
@@ -6623,7 +6623,7 @@ function getRoeRecords(triggers)
             trigger = triggers.levelUp,
             reqs = { jobLvl = { xi.job.WHM, 75 } },
             flags = set { "retro" },
-            reward = { sparks = 300, xp = 500, item = { { xi.items.ORISON_SEAL_FEET, 4 } } },
+            reward = { sparks = 300, xp = 500, item = { { xi.item.ORISON_SEAL_FEET, 4 } } },
         },
 
         [1211] =
@@ -6631,7 +6631,7 @@ function getRoeRecords(triggers)
             trigger = triggers.levelUp,
             reqs = { jobLvl = { xi.job.WHM, 99 } },
             flags = set { "retro" },
-            reward = { sparks = 400, xp = 500, item = { { xi.items.COPY_OF_REMS_TALE_CHAPTER_3, 2 } } },
+            reward = { sparks = 400, xp = 500, item = { { xi.item.COPY_OF_REMS_TALE_CHAPTER_3, 2 } } },
         },
 
         [1212] =
@@ -6639,7 +6639,7 @@ function getRoeRecords(triggers)
             trigger = triggers.levelUp,
             reqs = { jobLvl = { xi.job.BLM, 30 } },
             flags = set { "retro" },
-            reward = { sparks = 100, xp = 500, item = { { xi.items.BOUNTY_LIST, 12 } } },
+            reward = { sparks = 100, xp = 500, item = { { xi.item.BOUNTY_LIST, 12 } } },
         },
 
         [1213] =
@@ -6647,7 +6647,7 @@ function getRoeRecords(triggers)
             trigger = triggers.levelUp,
             reqs = { jobLvl = { xi.job.BLM, 50 } },
             flags = set { "retro" },
-            reward = { sparks = 200, xp = 500, item = { { xi.items.COPY_OF_DARK_DEEDS, 12 } } },
+            reward = { sparks = 200, xp = 500, item = { { xi.item.COPY_OF_DARK_DEEDS, 12 } } },
         },
 
         [1214] =
@@ -6655,7 +6655,7 @@ function getRoeRecords(triggers)
             trigger = triggers.levelUp,
             reqs = { jobLvl = { xi.job.BLM, 75 } },
             flags = set { "retro" },
-            reward = { sparks = 300, xp = 500, item = { { xi.items.GOETIA_SEAL_FEET, 4 } } },
+            reward = { sparks = 300, xp = 500, item = { { xi.item.GOETIA_SEAL_FEET, 4 } } },
         },
 
         [1215] =
@@ -6663,7 +6663,7 @@ function getRoeRecords(triggers)
             trigger = triggers.levelUp,
             reqs = { jobLvl = { xi.job.BLM, 99 } },
             flags = set { "retro" },
-            reward = { sparks = 400, xp = 500, item = { { xi.items.COPY_OF_REMS_TALE_CHAPTER_4, 2 } } },
+            reward = { sparks = 400, xp = 500, item = { { xi.item.COPY_OF_REMS_TALE_CHAPTER_4, 2 } } },
         },
 
         [1216] =
@@ -6671,7 +6671,7 @@ function getRoeRecords(triggers)
             trigger = triggers.levelUp,
             reqs = { jobLvl = { xi.job.RDM, 30 } },
             flags = set { "retro" },
-            reward = { sparks = 100, xp = 500, item = { { xi.items.INVESTIGATIVE_REPORT, 12 } } },
+            reward = { sparks = 100, xp = 500, item = { { xi.item.INVESTIGATIVE_REPORT, 12 } } },
         },
 
         [1217] =
@@ -6679,7 +6679,7 @@ function getRoeRecords(triggers)
             trigger = triggers.levelUp,
             reqs = { jobLvl = { xi.job.RDM, 50 } },
             flags = set { "retro" },
-            reward = { sparks = 200, xp = 500, item = { { xi.items.COPY_OF_AID_FOR_ALL, 12 } } },
+            reward = { sparks = 200, xp = 500, item = { { xi.item.COPY_OF_AID_FOR_ALL, 12 } } },
         },
 
         [1218] =
@@ -6687,7 +6687,7 @@ function getRoeRecords(triggers)
             trigger = triggers.levelUp,
             reqs = { jobLvl = { xi.job.RDM, 75 } },
             flags = set { "retro" },
-            reward = { sparks = 300, xp = 500, item = { { xi.items.ESTOQUEURS_SEAL_FEET, 4 } } },
+            reward = { sparks = 300, xp = 500, item = { { xi.item.ESTOQUEURS_SEAL_FEET, 4 } } },
         },
 
         [1219] =
@@ -6695,7 +6695,7 @@ function getRoeRecords(triggers)
             trigger = triggers.levelUp,
             reqs = { jobLvl = { xi.job.RDM, 99 } },
             flags = set { "retro" },
-            reward = { sparks = 400, xp = 500, item = { { xi.items.COPY_OF_REMS_TALE_CHAPTER_5, 2 } } },
+            reward = { sparks = 400, xp = 500, item = { { xi.item.COPY_OF_REMS_TALE_CHAPTER_5, 2 } } },
         },
 
         [1220] =
@@ -6703,7 +6703,7 @@ function getRoeRecords(triggers)
             trigger = triggers.levelUp,
             reqs = { jobLvl = { xi.job.THF, 30 } },
             flags = set { "retro" },
-            reward = { sparks = 100, xp = 500, item = { { xi.items.DAGGER_ENCHIRIDION, 12 } } },
+            reward = { sparks = 100, xp = 500, item = { { xi.item.DAGGER_ENCHIRIDION, 12 } } },
         },
 
         [1221] =
@@ -6711,7 +6711,7 @@ function getRoeRecords(triggers)
             trigger = triggers.levelUp,
             reqs = { jobLvl = { xi.job.THF, 50 } },
             flags = set { "retro" },
-            reward = { sparks = 200, xp = 500, item = { { xi.items.COPY_OF_SWING_AND_STAB, 12 } } },
+            reward = { sparks = 200, xp = 500, item = { { xi.item.COPY_OF_SWING_AND_STAB, 12 } } },
         },
 
         [1222] =
@@ -6719,7 +6719,7 @@ function getRoeRecords(triggers)
             trigger = triggers.levelUp,
             reqs = { jobLvl = { xi.job.THF, 75 } },
             flags = set { "retro" },
-            reward = { sparks = 300, xp = 500, item = { { xi.items.RAIDERS_SEAL_FEET, 4 } } },
+            reward = { sparks = 300, xp = 500, item = { { xi.item.RAIDERS_SEAL_FEET, 4 } } },
         },
 
         [1223] =
@@ -6727,7 +6727,7 @@ function getRoeRecords(triggers)
             trigger = triggers.levelUp,
             reqs = { jobLvl = { xi.job.THF, 99 } },
             flags = set { "retro" },
-            reward = { sparks = 400, xp = 500, item = { { xi.items.COPY_OF_REMS_TALE_CHAPTER_6, 2 } } },
+            reward = { sparks = 400, xp = 500, item = { { xi.item.COPY_OF_REMS_TALE_CHAPTER_6, 2 } } },
         },
 
         -----------------------------------
@@ -6739,7 +6739,7 @@ function getRoeRecords(triggers)
             trigger = triggers.levelUp,
             reqs = { jobLvl = { xi.job.PLD, 30 } },
             flags = set { "retro" },
-            reward = { sparks = 100, xp = 500, item = { { xi.items.COPY_OF_SWING_AND_STAB, 12 } } },
+            reward = { sparks = 100, xp = 500, item = { { xi.item.COPY_OF_SWING_AND_STAB, 12 } } },
         },
 
         [1225] =
@@ -6747,7 +6747,7 @@ function getRoeRecords(triggers)
             trigger = triggers.levelUp,
             reqs = { jobLvl = { xi.job.PLD, 50 } },
             flags = set { "retro" },
-            reward = { sparks = 200, xp = 500, item = { { xi.items.COPY_OF_THE_SUCCESSOR, 12 } } },
+            reward = { sparks = 200, xp = 500, item = { { xi.item.COPY_OF_THE_SUCCESSOR, 12 } } },
         },
 
         [1226] =
@@ -6755,7 +6755,7 @@ function getRoeRecords(triggers)
             trigger = triggers.levelUp,
             reqs = { jobLvl = { xi.job.PLD, 75 } },
             flags = set { "retro" },
-            reward = { sparks = 300, xp = 500, item = { { xi.items.CREED_SEAL_FEET, 4 } } },
+            reward = { sparks = 300, xp = 500, item = { { xi.item.CREED_SEAL_FEET, 4 } } },
         },
 
         [1227] =
@@ -6763,7 +6763,7 @@ function getRoeRecords(triggers)
             trigger = triggers.levelUp,
             reqs = { jobLvl = { xi.job.PLD, 99 } },
             flags = set { "retro" },
-            reward = { sparks = 400, xp = 500, item = { { xi.items.COPY_OF_REMS_TALE_CHAPTER_2, 2 } } },
+            reward = { sparks = 400, xp = 500, item = { { xi.item.COPY_OF_REMS_TALE_CHAPTER_2, 2 } } },
         },
 
         [1228] =
@@ -6771,7 +6771,7 @@ function getRoeRecords(triggers)
             trigger = triggers.levelUp,
             reqs = { jobLvl = { xi.job.DRK, 30 } },
             flags = set { "retro" },
-            reward = { sparks = 100, xp = 500, item = { { xi.items.COPY_OF_LUDWIGS_REPORT, 12 } } },
+            reward = { sparks = 100, xp = 500, item = { { xi.item.COPY_OF_LUDWIGS_REPORT, 12 } } },
         },
 
         [1229] =
@@ -6779,7 +6779,7 @@ function getRoeRecords(triggers)
             trigger = triggers.levelUp,
             reqs = { jobLvl = { xi.job.DRK, 50 } },
             flags = set { "retro" },
-            reward = { sparks = 200, xp = 500, item = { { xi.items.COPY_OF_MIEUSELOIRS_DIARY, 12 } } },
+            reward = { sparks = 200, xp = 500, item = { { xi.item.COPY_OF_MIEUSELOIRS_DIARY, 12 } } },
         },
 
         [1230] =
@@ -6787,7 +6787,7 @@ function getRoeRecords(triggers)
             trigger = triggers.levelUp,
             reqs = { jobLvl = { xi.job.DRK, 75 } },
             flags = set { "retro" },
-            reward = { sparks = 300, xp = 500, item = { { xi.items.BALE_SEAL_FEET, 4 } } },
+            reward = { sparks = 300, xp = 500, item = { { xi.item.BALE_SEAL_FEET, 4 } } },
         },
 
         [1231] =
@@ -6795,7 +6795,7 @@ function getRoeRecords(triggers)
             trigger = triggers.levelUp,
             reqs = { jobLvl = { xi.job.DRK, 99 } },
             flags = set { "retro" },
-            reward = { sparks = 400, xp = 500, item = { { xi.items.COPY_OF_REMS_TALE_CHAPTER_3, 2 } } },
+            reward = { sparks = 400, xp = 500, item = { { xi.item.COPY_OF_REMS_TALE_CHAPTER_3, 2 } } },
         },
 
         [1232] =
@@ -6803,7 +6803,7 @@ function getRoeRecords(triggers)
             trigger = triggers.levelUp,
             reqs = { jobLvl = { xi.job.BST, 30 } },
             flags = set { "retro" },
-            reward = { sparks = 100, xp = 500, item = { { xi.items.COPY_OF_STRIKING_BULLS_DIARY, 12 } } },
+            reward = { sparks = 100, xp = 500, item = { { xi.item.COPY_OF_STRIKING_BULLS_DIARY, 12 } } },
         },
 
         [1233] =
@@ -6811,7 +6811,7 @@ function getRoeRecords(triggers)
             trigger = triggers.levelUp,
             reqs = { jobLvl = { xi.job.BST, 50 } },
             flags = set { "retro" },
-            reward = { sparks = 200, xp = 500, item = { { xi.items.COPY_OF_LUDWIGS_REPORT, 12 } } },
+            reward = { sparks = 200, xp = 500, item = { { xi.item.COPY_OF_LUDWIGS_REPORT, 12 } } },
         },
 
         [1234] =
@@ -6819,7 +6819,7 @@ function getRoeRecords(triggers)
             trigger = triggers.levelUp,
             reqs = { jobLvl = { xi.job.BST, 75 } },
             flags = set { "retro" },
-            reward = { sparks = 300, xp = 500, item = { { xi.items.FERINE_SEAL_FEET, 4 } } },
+            reward = { sparks = 300, xp = 500, item = { { xi.item.FERINE_SEAL_FEET, 4 } } },
         },
 
         [1235] =
@@ -6827,7 +6827,7 @@ function getRoeRecords(triggers)
             trigger = triggers.levelUp,
             reqs = { jobLvl = { xi.job.BST, 99 } },
             flags = set { "retro" },
-            reward = { sparks = 400, xp = 500, item = { { xi.items.COPY_OF_REMS_TALE_CHAPTER_4, 2 } } },
+            reward = { sparks = 400, xp = 500, item = { { xi.item.COPY_OF_REMS_TALE_CHAPTER_4, 2 } } },
         },
 
         [1236] =
@@ -6835,7 +6835,7 @@ function getRoeRecords(triggers)
             trigger = triggers.levelUp,
             reqs = { jobLvl = { xi.job.BRD, 30 } },
             flags = set { "retro" },
-            reward = { sparks = 100, xp = 500, item = { { xi.items.COPY_OF_BREEZY_LIBRETTO, 12 } } },
+            reward = { sparks = 100, xp = 500, item = { { xi.item.COPY_OF_BREEZY_LIBRETTO, 12 } } },
         },
 
         [1237] =
@@ -6843,7 +6843,7 @@ function getRoeRecords(triggers)
             trigger = triggers.levelUp,
             reqs = { jobLvl = { xi.job.BRD, 50 } },
             flags = set { "retro" },
-            reward = { sparks = 200, xp = 500, item = { { xi.items.CAVERNOUS_SCORE, 12 } } },
+            reward = { sparks = 200, xp = 500, item = { { xi.item.CAVERNOUS_SCORE, 12 } } },
         },
 
         [1238] =
@@ -6851,7 +6851,7 @@ function getRoeRecords(triggers)
             trigger = triggers.levelUp,
             reqs = { jobLvl = { xi.job.BRD, 75 } },
             flags = set { "retro" },
-            reward = { sparks = 300, xp = 500, item = { { xi.items.AOIDOS_SEAL_FEET, 4 } } },
+            reward = { sparks = 300, xp = 500, item = { { xi.item.AOIDOS_SEAL_FEET, 4 } } },
         },
 
         [1239] =
@@ -6859,7 +6859,7 @@ function getRoeRecords(triggers)
             trigger = triggers.levelUp,
             reqs = { jobLvl = { xi.job.BRD, 99 } },
             flags = set { "retro" },
-            reward = { sparks = 400, xp = 500, item = { { xi.items.COPY_OF_REMS_TALE_CHAPTER_5, 2 } } },
+            reward = { sparks = 400, xp = 500, item = { { xi.item.COPY_OF_REMS_TALE_CHAPTER_5, 2 } } },
         },
 
         [1240] =
@@ -6867,7 +6867,7 @@ function getRoeRecords(triggers)
             trigger = triggers.levelUp,
             reqs = { jobLvl = { xi.job.RNG, 30 } },
             flags = set { "retro" },
-            reward = { sparks = 100, xp = 500, item = { { xi.items.COPY_OF_PERIHS_PRIMER, 12 } } },
+            reward = { sparks = 100, xp = 500, item = { { xi.item.COPY_OF_PERIHS_PRIMER, 12 } } },
         },
 
         [1241] =
@@ -6875,7 +6875,7 @@ function getRoeRecords(triggers)
             trigger = triggers.levelUp,
             reqs = { jobLvl = { xi.job.RNG, 50 } },
             flags = set { "retro" },
-            reward = { sparks = 200, xp = 500, item = { { xi.items.COPY_OF_BARRELS_OF_FUN, 12 } } },
+            reward = { sparks = 200, xp = 500, item = { { xi.item.COPY_OF_BARRELS_OF_FUN, 12 } } },
         },
 
         [1242] =
@@ -6883,7 +6883,7 @@ function getRoeRecords(triggers)
             trigger = triggers.levelUp,
             reqs = { jobLvl = { xi.job.RNG, 75 } },
             flags = set { "retro" },
-            reward = { sparks = 300, xp = 500, item = { { xi.items.SYLVAN_SEAL_FEET, 4 } } },
+            reward = { sparks = 300, xp = 500, item = { { xi.item.SYLVAN_SEAL_FEET, 4 } } },
         },
 
         [1243] =
@@ -6891,7 +6891,7 @@ function getRoeRecords(triggers)
             trigger = triggers.levelUp,
             reqs = { jobLvl = { xi.job.RNG, 99 } },
             flags = set { "retro" },
-            reward = { sparks = 400, xp = 500, item = { { xi.items.COPY_OF_REMS_TALE_CHAPTER_1, 2 } } },
+            reward = { sparks = 400, xp = 500, item = { { xi.item.COPY_OF_REMS_TALE_CHAPTER_1, 2 } } },
         },
 
         [1244] =
@@ -6899,7 +6899,7 @@ function getRoeRecords(triggers)
             trigger = triggers.levelUp,
             reqs = { jobLvl = { xi.job.SAM, 30 } },
             flags = set { "retro" },
-            reward = { sparks = 100, xp = 500, item = { { xi.items.COPY_OF_NOILLURIES_LOG, 12 } } },
+            reward = { sparks = 100, xp = 500, item = { { xi.item.COPY_OF_NOILLURIES_LOG, 12 } } },
         },
 
         [1245] =
@@ -6907,7 +6907,7 @@ function getRoeRecords(triggers)
             trigger = triggers.levelUp,
             reqs = { jobLvl = { xi.job.SAM, 50 } },
             flags = set { "retro" },
-            reward = { sparks = 200, xp = 500, item = { { xi.items.COPY_OF_CLASH_OF_TITANS, 12 } } },
+            reward = { sparks = 200, xp = 500, item = { { xi.item.COPY_OF_CLASH_OF_TITANS, 12 } } },
         },
 
         [1246] =
@@ -6915,7 +6915,7 @@ function getRoeRecords(triggers)
             trigger = triggers.levelUp,
             reqs = { jobLvl = { xi.job.SAM, 75 } },
             flags = set { "retro" },
-            reward = { sparks = 300, xp = 500, item = { { xi.items.UNKAI_SEAL_FEET, 4 } } },
+            reward = { sparks = 300, xp = 500, item = { { xi.item.UNKAI_SEAL_FEET, 4 } } },
         },
 
         [1247] =
@@ -6923,7 +6923,7 @@ function getRoeRecords(triggers)
             trigger = triggers.levelUp,
             reqs = { jobLvl = { xi.job.SAM, 99 } },
             flags = set { "retro" },
-            reward = { sparks = 300, xp = 500, item = { { xi.items.COPY_OF_REMS_TALE_CHAPTER_2, 2 } } },
+            reward = { sparks = 300, xp = 500, item = { { xi.item.COPY_OF_REMS_TALE_CHAPTER_2, 2 } } },
         },
 
         -----------------------------------
@@ -6935,7 +6935,7 @@ function getRoeRecords(triggers)
             trigger = triggers.levelUp,
             reqs = { jobLvl = { xi.job.NIN, 30 } },
             flags = set { "retro" },
-            reward = { sparks = 100, xp = 500, item = { { xi.items.COPY_OF_KAGETORAS_DIARY, 12 } } },
+            reward = { sparks = 100, xp = 500, item = { { xi.item.COPY_OF_KAGETORAS_DIARY, 12 } } },
         },
 
         [1249] =
@@ -6943,7 +6943,7 @@ function getRoeRecords(triggers)
             trigger = triggers.levelUp,
             reqs = { jobLvl = { xi.job.NIN, 50 } },
             flags = set { "retro" },
-            reward = { sparks = 200, xp = 500, item = { { xi.items.COPY_OF_YOMIS_DIAGRAM, 12 } } },
+            reward = { sparks = 200, xp = 500, item = { { xi.item.COPY_OF_YOMIS_DIAGRAM, 12 } } },
         },
 
         [1250] =
@@ -6951,7 +6951,7 @@ function getRoeRecords(triggers)
             trigger = triggers.levelUp,
             reqs = { jobLvl = { xi.job.NIN, 75 } },
             flags = set { "retro" },
-            reward = { sparks = 300, xp = 500, item = { { xi.items.IGA_SEAL_FEET, 4 } } },
+            reward = { sparks = 300, xp = 500, item = { { xi.item.IGA_SEAL_FEET, 4 } } },
         },
 
         [1251] =
@@ -6959,7 +6959,7 @@ function getRoeRecords(triggers)
             trigger = triggers.levelUp,
             reqs = { jobLvl = { xi.job.NIN, 99 } },
             flags = set { "retro" },
-            reward = { sparks = 400, xp = 500, item = { { xi.items.COPY_OF_REMS_TALE_CHAPTER_3, 2 } } },
+            reward = { sparks = 400, xp = 500, item = { { xi.item.COPY_OF_REMS_TALE_CHAPTER_3, 2 } } },
         },
 
         [1252] =
@@ -6967,7 +6967,7 @@ function getRoeRecords(triggers)
             trigger = triggers.levelUp,
             reqs = { jobLvl = { xi.job.DRG, 30 } },
             flags = set { "retro" },
-            reward = { sparks = 100, xp = 500, item = { { xi.items.COPY_OF_CLASH_OF_TITANS, 12 } } },
+            reward = { sparks = 100, xp = 500, item = { { xi.item.COPY_OF_CLASH_OF_TITANS, 12 } } },
         },
 
         [1253] =
@@ -6975,7 +6975,7 @@ function getRoeRecords(triggers)
             trigger = triggers.levelUp,
             reqs = { jobLvl = { xi.job.DRG, 50 } },
             flags = set { "retro" },
-            reward = { sparks = 200, xp = 500, item = { { xi.items.COPY_OF_KAYEEL_PAYEELS_MEMOIRS, 12 } } },
+            reward = { sparks = 200, xp = 500, item = { { xi.item.COPY_OF_KAYEEL_PAYEELS_MEMOIRS, 12 } } },
         },
 
         [1254] =
@@ -6983,7 +6983,7 @@ function getRoeRecords(triggers)
             trigger = triggers.levelUp,
             reqs = { jobLvl = { xi.job.DRG, 75 } },
             flags = set { "retro" },
-            reward = { sparks = 300, xp = 500, item = { { xi.items.LANCERS_SEAL_FEET, 4 } } },
+            reward = { sparks = 300, xp = 500, item = { { xi.item.LANCERS_SEAL_FEET, 4 } } },
         },
 
         [1255] =
@@ -6991,7 +6991,7 @@ function getRoeRecords(triggers)
             trigger = triggers.levelUp,
             reqs = { jobLvl = { xi.job.DRG, 99 } },
             flags = set { "retro" },
-            reward = { sparks = 400, xp = 500, item = { { xi.items.COPY_OF_REMS_TALE_CHAPTER_4, 2 } } },
+            reward = { sparks = 400, xp = 500, item = { { xi.item.COPY_OF_REMS_TALE_CHAPTER_4, 2 } } },
         },
 
         [1256] =
@@ -6999,7 +6999,7 @@ function getRoeRecords(triggers)
             trigger = triggers.levelUp,
             reqs = { jobLvl = { xi.job.SMN, 30 } },
             flags = set { "retro" },
-            reward = { sparks = 100, xp = 500, item = { { xi.items.COPY_OF_ASTRAL_HOMELAND, 12 } } },
+            reward = { sparks = 100, xp = 500, item = { { xi.item.COPY_OF_ASTRAL_HOMELAND, 12 } } },
         },
 
         [1257] =
@@ -7007,7 +7007,7 @@ function getRoeRecords(triggers)
             trigger = triggers.levelUp,
             reqs = { jobLvl = { xi.job.SMN, 50 } },
             flags = set { "retro" },
-            reward = { sparks = 200, xp = 500, item = { { xi.items.COPY_OF_KAYEEL_PAYEELS_MEMOIRS, 12 } } },
+            reward = { sparks = 200, xp = 500, item = { { xi.item.COPY_OF_KAYEEL_PAYEELS_MEMOIRS, 12 } } },
         },
 
         [1258] =
@@ -7015,7 +7015,7 @@ function getRoeRecords(triggers)
             trigger = triggers.levelUp,
             reqs = { jobLvl = { xi.job.SMN, 75 } },
             flags = set { "retro" },
-            reward = { sparks = 300, xp = 500, item = { { xi.items.CALLERS_SEAL_FEET, 4 } } },
+            reward = { sparks = 300, xp = 500, item = { { xi.item.CALLERS_SEAL_FEET, 4 } } },
         },
 
         [1259] =
@@ -7023,7 +7023,7 @@ function getRoeRecords(triggers)
             trigger = triggers.levelUp,
             reqs = { jobLvl = { xi.job.SMN, 99 } },
             flags = set { "retro" },
-            reward = { sparks = 400, xp = 500, item = { { xi.items.COPY_OF_REMS_TALE_CHAPTER_5, 2 } } },
+            reward = { sparks = 400, xp = 500, item = { { xi.item.COPY_OF_REMS_TALE_CHAPTER_5, 2 } } },
         },
 
         [1260] =
@@ -7031,7 +7031,7 @@ function getRoeRecords(triggers)
             trigger = triggers.levelUp,
             reqs = { jobLvl = { xi.job.BLU, 30 } },
             flags = set { "retro" },
-            reward = { sparks = 100, xp = 500, item = { { xi.items.COPY_OF_SWING_AND_STAB, 12 } } },
+            reward = { sparks = 100, xp = 500, item = { { xi.item.COPY_OF_SWING_AND_STAB, 12 } } },
         },
 
         [1261] =
@@ -7039,7 +7039,7 @@ function getRoeRecords(triggers)
             trigger = triggers.levelUp,
             reqs = { jobLvl = { xi.job.BLU, 50 } },
             flags = set { "retro" },
-            reward = { sparks = 200, xp = 500, item = { { xi.items.COPY_OF_LIFE_FORM_STUDY, 12 } } },
+            reward = { sparks = 200, xp = 500, item = { { xi.item.COPY_OF_LIFE_FORM_STUDY, 12 } } },
         },
 
         [1262] =
@@ -7047,7 +7047,7 @@ function getRoeRecords(triggers)
             trigger = triggers.levelUp,
             reqs = { jobLvl = { xi.job.BLU, 75 } },
             flags = set { "retro" },
-            reward = { sparks = 300, xp = 500, item = { { xi.items.MAVI_SEAL_FEET, 4 } } },
+            reward = { sparks = 300, xp = 500, item = { { xi.item.MAVI_SEAL_FEET, 4 } } },
         },
 
         [1263] =
@@ -7055,7 +7055,7 @@ function getRoeRecords(triggers)
             trigger = triggers.levelUp,
             reqs = { jobLvl = { xi.job.BLU, 99 } },
             flags = set { "retro" },
-            reward = { sparks = 400, xp = 500, item = { { xi.items.COPY_OF_REMS_TALE_CHAPTER_1, 2 } } },
+            reward = { sparks = 400, xp = 500, item = { { xi.item.COPY_OF_REMS_TALE_CHAPTER_1, 2 } } },
         },
 
         [1264] =
@@ -7063,7 +7063,7 @@ function getRoeRecords(triggers)
             trigger = triggers.levelUp,
             reqs = { jobLvl = { xi.job.COR, 30 } },
             flags = set { "retro" },
-            reward = { sparks = 100, xp = 500, item = { { xi.items.DAGGER_ENCHIRIDION, 12 } } },
+            reward = { sparks = 100, xp = 500, item = { { xi.item.DAGGER_ENCHIRIDION, 12 } } },
         },
 
         [1265] =
@@ -7071,7 +7071,7 @@ function getRoeRecords(triggers)
             trigger = triggers.levelUp,
             reqs = { jobLvl = { xi.job.COR, 50 } },
             flags = set { "retro" },
-            reward = { sparks = 200, xp = 500, item = { { xi.items.COPY_OF_BARRELS_OF_FUN, 12 } } },
+            reward = { sparks = 200, xp = 500, item = { { xi.item.COPY_OF_BARRELS_OF_FUN, 12 } } },
         },
 
         [1266] =
@@ -7079,7 +7079,7 @@ function getRoeRecords(triggers)
             trigger = triggers.levelUp,
             reqs = { jobLvl = { xi.job.COR, 75 } },
             flags = set { "retro" },
-            reward = { sparks = 300, xp = 500, item = { { xi.items.NAVARCHS_SEAL_FEET, 4 } } },
+            reward = { sparks = 300, xp = 500, item = { { xi.item.NAVARCHS_SEAL_FEET, 4 } } },
         },
 
         [1267] =
@@ -7087,7 +7087,7 @@ function getRoeRecords(triggers)
             trigger = triggers.levelUp,
             reqs = { jobLvl = { xi.job.COR, 99 } },
             flags = set { "retro" },
-            reward = { sparks = 400, xp = 500, item = { { xi.items.COPY_OF_REMS_TALE_CHAPTER_2, 2 } } },
+            reward = { sparks = 400, xp = 500, item = { { xi.item.COPY_OF_REMS_TALE_CHAPTER_2, 2 } } },
         },
 
         [1268] =
@@ -7095,7 +7095,7 @@ function getRoeRecords(triggers)
             trigger = triggers.levelUp,
             reqs = { jobLvl = { xi.job.PUP, 30 } },
             flags = set { "retro" },
-            reward = { sparks = 100, xp = 500, item = { { xi.items.COPY_OF_MIKHES_MEMO, 12 } } },
+            reward = { sparks = 100, xp = 500, item = { { xi.item.COPY_OF_MIKHES_MEMO, 12 } } },
         },
 
         [1269] =
@@ -7103,7 +7103,7 @@ function getRoeRecords(triggers)
             trigger = triggers.levelUp,
             reqs = { jobLvl = { xi.job.PUP, 50 } },
             flags = set { "retro" },
-            reward = { sparks = 200, xp = 500, item = { { xi.items.DAGGER_ENCHIRIDION, 12 } } },
+            reward = { sparks = 200, xp = 500, item = { { xi.item.DAGGER_ENCHIRIDION, 12 } } },
         },
 
         [1270] =
@@ -7111,7 +7111,7 @@ function getRoeRecords(triggers)
             trigger = triggers.levelUp,
             reqs = { jobLvl = { xi.job.PUP, 75 } },
             flags = set { "retro" },
-            reward = { sparks = 300, xp = 500, item = { { xi.items.CIRQUE_SEAL_FEET, 4 } } },
+            reward = { sparks = 300, xp = 500, item = { { xi.item.CIRQUE_SEAL_FEET, 4 } } },
         },
 
         [1271] =
@@ -7119,7 +7119,7 @@ function getRoeRecords(triggers)
             trigger = triggers.levelUp,
             reqs = { jobLvl = { xi.job.PUP, 99 } },
             flags = set { "retro" },
-            reward = { sparks = 400, xp = 500, item = { { xi.items.COPY_OF_REMS_TALE_CHAPTER_3, 2 } } },
+            reward = { sparks = 400, xp = 500, item = { { xi.item.COPY_OF_REMS_TALE_CHAPTER_3, 2 } } },
         },
 
         -----------------------------------
@@ -7131,7 +7131,7 @@ function getRoeRecords(triggers)
             trigger = triggers.levelUp,
             reqs = { jobLvl = { xi.job.DNC, 30 } },
             flags = set { "retro" },
-            reward = { sparks = 100, xp = 500, item = { { xi.items.DAGGER_ENCHIRIDION, 12 } } },
+            reward = { sparks = 100, xp = 500, item = { { xi.item.DAGGER_ENCHIRIDION, 12 } } },
         },
 
         [1273] =
@@ -7139,7 +7139,7 @@ function getRoeRecords(triggers)
             trigger = triggers.levelUp,
             reqs = { jobLvl = { xi.job.DNC, 50 } },
             flags = set { "retro" },
-            reward = { sparks = 200, xp = 500, item = { { xi.items.COPY_OF_MIKHES_MEMO, 12 } } },
+            reward = { sparks = 200, xp = 500, item = { { xi.item.COPY_OF_MIKHES_MEMO, 12 } } },
         },
 
         [1274] =
@@ -7147,7 +7147,7 @@ function getRoeRecords(triggers)
             trigger = triggers.levelUp,
             reqs = { jobLvl = { xi.job.DNC, 75 } },
             flags = set { "retro" },
-            reward = { sparks = 300, xp = 500, item = { { xi.items.CHARIS_SEAL_FEET, 4 } } },
+            reward = { sparks = 300, xp = 500, item = { { xi.item.CHARIS_SEAL_FEET, 4 } } },
         },
 
         [1275] =
@@ -7155,7 +7155,7 @@ function getRoeRecords(triggers)
             trigger = triggers.levelUp,
             reqs = { jobLvl = { xi.job.DNC, 99 } },
             flags = set { "retro" },
-            reward = { sparks = 400, xp = 500, item = { { xi.items.COPY_OF_REMS_TALE_CHAPTER_4, 2 } } },
+            reward = { sparks = 400, xp = 500, item = { { xi.item.COPY_OF_REMS_TALE_CHAPTER_4, 2 } } },
         },
 
         [1276] =
@@ -7163,7 +7163,7 @@ function getRoeRecords(triggers)
             trigger = triggers.levelUp,
             reqs = { jobLvl = { xi.job.SCH, 30 } },
             flags = set { "retro" },
-            reward = { sparks = 100, xp = 500, item = { { xi.items.COPY_OF_KAYEEL_PAYEELS_MEMOIRS, 12 } } },
+            reward = { sparks = 100, xp = 500, item = { { xi.item.COPY_OF_KAYEEL_PAYEELS_MEMOIRS, 12 } } },
         },
 
         [1277] =
@@ -7171,7 +7171,7 @@ function getRoeRecords(triggers)
             trigger = triggers.levelUp,
             reqs = { jobLvl = { xi.job.SCH, 50 } },
             flags = set { "retro" },
-            reward = { sparks = 200, xp = 500, item = { { xi.items.COPY_OF_FERREOUSS_DIARY, 12 } } },
+            reward = { sparks = 200, xp = 500, item = { { xi.item.COPY_OF_FERREOUSS_DIARY, 12 } } },
         },
 
         [1278] =
@@ -7179,7 +7179,7 @@ function getRoeRecords(triggers)
             trigger = triggers.levelUp,
             reqs = { jobLvl = { xi.job.SCH, 75 } },
             flags = set { "retro" },
-            reward = { sparks = 300, xp = 500, item = { { xi.items.SAVANTS_SEAL_FEET, 4 } } },
+            reward = { sparks = 300, xp = 500, item = { { xi.item.SAVANTS_SEAL_FEET, 4 } } },
         },
 
         [1279] =
@@ -7187,7 +7187,7 @@ function getRoeRecords(triggers)
             trigger = triggers.levelUp,
             reqs = { jobLvl = { xi.job.SCH, 99 } },
             flags = set { "retro" },
-            reward = { sparks = 400, xp = 500, item = { { xi.items.COPY_OF_REMS_TALE_CHAPTER_5, 2 } } },
+            reward = { sparks = 400, xp = 500, item = { { xi.item.COPY_OF_REMS_TALE_CHAPTER_5, 2 } } },
         },
 
         [1280] =
@@ -7195,7 +7195,7 @@ function getRoeRecords(triggers)
             trigger = triggers.levelUp,
             reqs = { jobLvl = { xi.job.GEO, 30 } },
             flags = set { "retro" },
-            reward = { sparks = 100, xp = 500, item = { { xi.items.COPY_OF_HROHJS_RECORD, 12 } } },
+            reward = { sparks = 100, xp = 500, item = { { xi.item.COPY_OF_HROHJS_RECORD, 12 } } },
         },
 
         [1281] =
@@ -7203,7 +7203,7 @@ function getRoeRecords(triggers)
             trigger = triggers.levelUp,
             reqs = { jobLvl = { xi.job.GEO, 50 } },
             flags = set { "retro" },
-            reward = { sparks = 200, xp = 500, item = { { xi.items.COPY_OF_THE_BELL_TOLLS, 12 } } },
+            reward = { sparks = 200, xp = 500, item = { { xi.item.COPY_OF_THE_BELL_TOLLS, 12 } } },
         },
 
         [1282] =
@@ -7211,7 +7211,7 @@ function getRoeRecords(triggers)
             trigger = triggers.levelUp,
             reqs = { jobLvl = { xi.job.GEO, 75 } },
             flags = set { "retro" },
-            reward = { sparks = 300, xp = 500, item = { { xi.items.PLATE_OF_INDI_FRAILTY, 1 } } },
+            reward = { sparks = 300, xp = 500, item = { { xi.item.PLATE_OF_INDI_FRAILTY, 1 } } },
         },
 
         [1283] =
@@ -7219,7 +7219,7 @@ function getRoeRecords(triggers)
             trigger = triggers.levelUp,
             reqs = { jobLvl = { xi.job.GEO, 99 } },
             flags = set { "retro" },
-            reward = { sparks = 400, xp = 500, item = { { xi.items.COPY_OF_REMS_TALE_CHAPTER_6, 1 } } },
+            reward = { sparks = 400, xp = 500, item = { { xi.item.COPY_OF_REMS_TALE_CHAPTER_6, 1 } } },
         },
 
         [1284] =
@@ -7227,7 +7227,7 @@ function getRoeRecords(triggers)
             trigger = triggers.levelUp,
             reqs = { jobLvl = { xi.job.RUN, 30 } },
             flags = set { "retro" },
-            reward = { sparks = 100, xp = 500, item = { { xi.items.COPY_OF_MIEUSELOIRS_DIARY, 12 } } },
+            reward = { sparks = 100, xp = 500, item = { { xi.item.COPY_OF_MIEUSELOIRS_DIARY, 12 } } },
         },
 
         [1285] =
@@ -7235,7 +7235,7 @@ function getRoeRecords(triggers)
             trigger = triggers.levelUp,
             reqs = { jobLvl = { xi.job.RUN, 50 } },
             flags = set { "retro" },
-            reward = { sparks = 200, xp = 500, item = { { xi.items.COPY_OF_SWING_AND_STAB, 12 } } },
+            reward = { sparks = 200, xp = 500, item = { { xi.item.COPY_OF_SWING_AND_STAB, 12 } } },
         },
 
         [1286] =
@@ -7243,7 +7243,7 @@ function getRoeRecords(triggers)
             trigger = triggers.levelUp,
             reqs = { jobLvl = { xi.job.RUN, 75 } },
             flags = set { "retro" },
-            reward = { sparks = 300, xp = 500, item = { { xi.items.SCROLL_OF_CRUSADE, 1 } } },
+            reward = { sparks = 300, xp = 500, item = { { xi.item.SCROLL_OF_CRUSADE, 1 } } },
         },
 
         [1287] =
@@ -7251,7 +7251,7 @@ function getRoeRecords(triggers)
             trigger = triggers.levelUp,
             reqs = { jobLvl = { xi.job.RUN, 99 } },
             flags = set { "retro" },
-            reward = { sparks = 400, xp = 500, item = { { xi.items.COPY_OF_REMS_TALE_CHAPTER_7, 1 } } },
+            reward = { sparks = 400, xp = 500, item = { { xi.item.COPY_OF_REMS_TALE_CHAPTER_7, 1 } } },
         },
 
         -----------------------------------
@@ -7735,7 +7735,7 @@ function getRoeRecords(triggers)
         { -- Spoils - Bat Fangs (UC)
             trigger = triggers.itemLooted,
             goal = 5,
-            reqs = { itemID = set { xi.items.BAT_FANG }, unityLeader = xi.roe.leaders.PIEUJE },
+            reqs = { itemID = set { xi.item.BAT_FANG }, unityLeader = xi.roe.leaders.PIEUJE },
             flags = set { "unity" },
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
@@ -7822,7 +7822,7 @@ function getRoeRecords(triggers)
         { -- Spoils - Bomb Ash (UC)
             trigger = triggers.itemLooted,
             goal = 5,
-            reqs = { itemID = set { xi.items.PINCH_OF_BOMB_ASH }, unityLeader = xi.roe.leaders.PIEUJE },
+            reqs = { itemID = set { xi.item.PINCH_OF_BOMB_ASH }, unityLeader = xi.roe.leaders.PIEUJE },
             flags = set { "unity" },
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
@@ -7918,7 +7918,7 @@ function getRoeRecords(triggers)
         { -- Spoils - Cockatrice Meat (UC)
             trigger = triggers.itemLooted,
             goal = 5,
-            reqs = { itemID = set { xi.items.SLICE_OF_COCKATRICE_MEAT }, unityLeader = xi.roe.leaders.AYAME },
+            reqs = { itemID = set { xi.item.SLICE_OF_COCKATRICE_MEAT }, unityLeader = xi.roe.leaders.AYAME },
             flags = set { "unity" },
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
@@ -8005,7 +8005,7 @@ function getRoeRecords(triggers)
         { -- Spoils - Land Crab Meat (UC)
             trigger = triggers.itemLooted,
             goal = 5,
-            reqs = { itemID = set { xi.items.LAND_CRAB_MEAT }, unityLeader = xi.roe.leaders.AYAME },
+            reqs = { itemID = set { xi.item.LAND_CRAB_MEAT }, unityLeader = xi.roe.leaders.AYAME },
             flags = set { "unity" },
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
@@ -8101,7 +8101,7 @@ function getRoeRecords(triggers)
         { -- Spoils - Sleepshroom (UC)
             trigger = triggers.itemLooted,
             goal = 5,
-            reqs = { itemID = set { xi.items.SLEEPSHROOM }, unityLeader = xi.roe.leaders.INVINCIBLE_SHIELD },
+            reqs = { itemID = set { xi.item.SLEEPSHROOM }, unityLeader = xi.roe.leaders.INVINCIBLE_SHIELD },
             flags = set { "unity" },
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
@@ -8188,7 +8188,7 @@ function getRoeRecords(triggers)
         { -- Spoils - Raptor Skin (UC)
             trigger = triggers.itemLooted,
             goal = 5,
-            reqs = { itemID = set { xi.items.RAPTOR_SKIN }, unityLeader = xi.roe.leaders.INVINCIBLE_SHIELD },
+            reqs = { itemID = set { xi.item.RAPTOR_SKIN }, unityLeader = xi.roe.leaders.INVINCIBLE_SHIELD },
             flags = set { "unity" },
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
@@ -8284,7 +8284,7 @@ function getRoeRecords(triggers)
         { -- Spoils - Silk Thread (UC)
             trigger = triggers.itemLooted,
             goal = 5,
-            reqs = { itemID = set { xi.items.SPOOL_OF_SILK_THREAD }, unityLeader = xi.roe.leaders.APURURU },
+            reqs = { itemID = set { xi.item.SPOOL_OF_SILK_THREAD }, unityLeader = xi.roe.leaders.APURURU },
             flags = set { "unity" },
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
@@ -8371,7 +8371,7 @@ function getRoeRecords(triggers)
         { -- Spoils - Saruta Cotton (UC)
             trigger = triggers.itemLooted,
             goal = 5,
-            reqs = { itemID = set { xi.items.BALL_OF_SARUTA_COTTON }, unityLeader = xi.roe.leaders.APURURU },
+            reqs = { itemID = set { xi.item.BALL_OF_SARUTA_COTTON }, unityLeader = xi.roe.leaders.APURURU },
             flags = set { "unity" },
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
@@ -8467,7 +8467,7 @@ function getRoeRecords(triggers)
         { -- Spoils - Spider Web (UC)
             trigger = triggers.itemLooted,
             goal = 5,
-            reqs = { itemID = set { xi.items.SPIDER_WEB }, unityLeader = xi.roe.leaders.MAAT },
+            reqs = { itemID = set { xi.item.SPIDER_WEB }, unityLeader = xi.roe.leaders.MAAT },
             flags = set { "unity" },
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
@@ -8554,7 +8554,7 @@ function getRoeRecords(triggers)
         { -- Spoils - Hecteyes Eye (UC)
             trigger = triggers.itemLooted,
             goal = 5,
-            reqs = { itemID = set { xi.items.HECTEYES_EYE }, unityLeader = xi.roe.leaders.MAAT },
+            reqs = { itemID = set { xi.item.HECTEYES_EYE }, unityLeader = xi.roe.leaders.MAAT },
             flags = set { "unity" },
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
@@ -8650,7 +8650,7 @@ function getRoeRecords(triggers)
         { -- Spoils - Doll Shard (UC)
             trigger = triggers.itemLooted,
             goal = 5,
-            reqs = { itemID = set { xi.items.DOLL_SHARD }, unityLeader = xi.roe.leaders.ALDO },
+            reqs = { itemID = set { xi.item.DOLL_SHARD }, unityLeader = xi.roe.leaders.ALDO },
             flags = set { "unity" },
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
@@ -8737,7 +8737,7 @@ function getRoeRecords(triggers)
         { -- Spoils - Bird Egg (UC)
             trigger = triggers.itemLooted,
             goal = 5,
-            reqs = { itemID = set { xi.items.BIRD_EGG }, unityLeader = xi.roe.leaders.ALDO },
+            reqs = { itemID = set { xi.item.BIRD_EGG }, unityLeader = xi.roe.leaders.ALDO },
             flags = set { "unity" },
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
@@ -8833,7 +8833,7 @@ function getRoeRecords(triggers)
         { -- Spoils - Scorpion Claw (UC)
             trigger = triggers.itemLooted,
             goal = 5,
-            reqs = { itemID = set { xi.items.SCORPION_CLAW }, unityLeader = xi.roe.leaders.JAKOH_WAHCONDALO },
+            reqs = { itemID = set { xi.item.SCORPION_CLAW }, unityLeader = xi.roe.leaders.JAKOH_WAHCONDALO },
             flags = set { "unity" },
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
@@ -8920,7 +8920,7 @@ function getRoeRecords(triggers)
         { -- Spoils - Black Tiger Fang (UC)
             trigger = triggers.itemLooted,
             goal = 5,
-            reqs = { itemID = set { xi.items.BLACK_TIGER_FANG }, unityLeader = xi.roe.leaders.JAKOH_WAHCONDALO },
+            reqs = { itemID = set { xi.item.BLACK_TIGER_FANG }, unityLeader = xi.roe.leaders.JAKOH_WAHCONDALO },
             flags = set { "unity" },
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
@@ -9016,7 +9016,7 @@ function getRoeRecords(triggers)
         { -- Spoils - Puk Wing (UC)
             trigger = triggers.itemLooted,
             goal = 5,
-            reqs = { itemID = set { xi.items.PUK_WING }, unityLeader = xi.roe.leaders.NAJA_SALAHEEM },
+            reqs = { itemID = set { xi.item.PUK_WING }, unityLeader = xi.roe.leaders.NAJA_SALAHEEM },
             flags = set { "unity" },
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
@@ -9104,7 +9104,7 @@ function getRoeRecords(triggers)
         { -- Spoils - Dhalmel Meat (UC)
             trigger = triggers.itemLooted,
             goal = 5,
-            reqs = { itemID = set { xi.items.DHALMEL_MEAT }, unityLeader = xi.roe.leaders.NAJA_SALAHEEM },
+            reqs = { itemID = set { xi.item.DHALMEL_MEAT }, unityLeader = xi.roe.leaders.NAJA_SALAHEEM },
             flags = set { "unity" },
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
@@ -9200,7 +9200,7 @@ function getRoeRecords(triggers)
         { -- Spoils - Beetle Shell (UC)
             trigger = triggers.itemLooted,
             goal = 5,
-            reqs = { itemID = set { xi.items.BEETLE_SHELL }, unityLeader = xi.roe.leaders.FLAVIRIA },
+            reqs = { itemID = set { xi.item.BEETLE_SHELL }, unityLeader = xi.roe.leaders.FLAVIRIA },
             flags = set { "unity" },
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
@@ -9287,7 +9287,7 @@ function getRoeRecords(triggers)
         { -- Spoils - Bone Chip (UC)
             trigger = triggers.itemLooted,
             goal = 5,
-            reqs = { itemID = set { xi.items.BONE_CHIP }, unityLeader = xi.roe.leaders.FLAVIRIA },
+            reqs = { itemID = set { xi.item.BONE_CHIP }, unityLeader = xi.roe.leaders.FLAVIRIA },
             flags = set { "unity" },
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
@@ -9383,7 +9383,7 @@ function getRoeRecords(triggers)
         { -- Spoils - Rotten Meat (UC)
             trigger = triggers.itemLooted,
             goal = 5,
-            reqs = { itemID = set { xi.items.PIECE_OF_ROTTEN_MEAT }, unityLeader = xi.roe.leaders.YORAN_ORAN },
+            reqs = { itemID = set { xi.item.PIECE_OF_ROTTEN_MEAT }, unityLeader = xi.roe.leaders.YORAN_ORAN },
             flags = set { "unity" },
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
@@ -9470,7 +9470,7 @@ function getRoeRecords(triggers)
         { -- Spoils - Dullahan Armor (UC)
             trigger = triggers.itemLooted,
             goal = 5,
-            reqs = { itemID = set { xi.items.SUIT_OF_DULLAHAN_ARMOR }, unityLeader = xi.roe.leaders.YORAN_ORAN },
+            reqs = { itemID = set { xi.item.SUIT_OF_DULLAHAN_ARMOR }, unityLeader = xi.roe.leaders.YORAN_ORAN },
             flags = set { "unity" },
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
@@ -9568,7 +9568,7 @@ function getRoeRecords(triggers)
         { -- Spoils - Demon Horn (UC)
             trigger = triggers.itemLooted,
             goal = 5,
-            reqs = { itemID = set { xi.items.DEMON_HORN }, unityLeader = xi.roe.leaders.SYLVIE },
+            reqs = { itemID = set { xi.item.DEMON_HORN }, unityLeader = xi.roe.leaders.SYLVIE },
             flags = set { "unity" },
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
@@ -9655,7 +9655,7 @@ function getRoeRecords(triggers)
         { -- Spoils - Twitherym Wing (UC)
             trigger = triggers.itemLooted,
             goal = 5,
-            reqs = { itemID = set { xi.items.TWITHERYM_WING }, unityLeader = xi.roe.leaders.SYLVIE },
+            reqs = { itemID = set { xi.item.TWITHERYM_WING }, unityLeader = xi.roe.leaders.SYLVIE },
             flags = set { "unity" },
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
@@ -9715,7 +9715,7 @@ function getRoeRecords(triggers)
             goal = 30,
             reqs = { mobXP = true },
             flags = set { "daily" },
-            reward = { sparks = 100, xp = 500, accolades = 300, item = { xi.items.COPPER_AMAN_VOUCHER } },
+            reward = { sparks = 100, xp = 500, accolades = 300, item = { xi.item.COPPER_AMAN_VOUCHER } },
         },
 
         [4083] =
@@ -9723,7 +9723,7 @@ function getRoeRecords(triggers)
             trigger = triggers.buffAlly,
             goal = 20,
             flags = set { "daily" },
-            reward = { sparks = 300, xp = 1500, accolades = 300, item = { xi.items.COPPER_AMAN_VOUCHER } },
+            reward = { sparks = 300, xp = 1500, accolades = 300, item = { xi.item.COPPER_AMAN_VOUCHER } },
         },
 
         [4084] =
@@ -9732,7 +9732,7 @@ function getRoeRecords(triggers)
             goal = 100,
             reqs = { healMin = 500 },
             flags = set { "daily" },
-            reward = { sparks = 300, xp = 1500, accolades = 300, item = { xi.items.COPPER_AMAN_VOUCHER } },
+            reward = { sparks = 300, xp = 1500, accolades = 300, item = { xi.item.COPPER_AMAN_VOUCHER } },
         },
 
         -----------------------------------
@@ -9745,7 +9745,7 @@ function getRoeRecords(triggers)
             goal = 20,
             reqs = { mobXP = true, zoneNot = xi.expansionAreas.abyssea, mobSystem = set { xi.eco.AQUAN } },
             flags = set { "timed", "repeat" },
-            reward = { sparks = 300, xp = 1500, accolades = 300, item = { xi.items.COPPER_AMAN_VOUCHER } },
+            reward = { sparks = 300, xp = 1500, accolades = 300, item = { xi.item.COPPER_AMAN_VOUCHER } },
         },
 
         [4009] =
@@ -9754,7 +9754,7 @@ function getRoeRecords(triggers)
             goal = 20,
             reqs = { mobXP = true, zoneNot = xi.expansionAreas.abyssea, mobSystem = set { xi.eco.BEAST } },
             flags = set { "timed", "repeat" },
-            reward = { sparks = 300, xp = 1500, accolades = 300, item = { xi.items.COPPER_AMAN_VOUCHER } },
+            reward = { sparks = 300, xp = 1500, accolades = 300, item = { xi.item.COPPER_AMAN_VOUCHER } },
         },
 
         [4010] =
@@ -9763,7 +9763,7 @@ function getRoeRecords(triggers)
             goal = 20,
             reqs = { mobXP = true, zoneNot = xi.expansionAreas.abyssea, mobSystem = set { xi.eco.PLANTOID } },
             flags = set { "timed", "repeat" },
-            reward = { sparks = 300, xp = 1500, accolades = 300, item = { xi.items.COPPER_AMAN_VOUCHER } },
+            reward = { sparks = 300, xp = 1500, accolades = 300, item = { xi.item.COPPER_AMAN_VOUCHER } },
         },
 
         [4011] =
@@ -9772,7 +9772,7 @@ function getRoeRecords(triggers)
             goal = 20,
             reqs = { mobXP = true, zoneNot = xi.expansionAreas.abyssea, mobSystem = set { xi.eco.LIZARD } },
             flags = set { "timed", "repeat" },
-            reward = { sparks = 300, xp = 1500, accolades = 300, item = { xi.items.COPPER_AMAN_VOUCHER } },
+            reward = { sparks = 300, xp = 1500, accolades = 300, item = { xi.item.COPPER_AMAN_VOUCHER } },
         },
 
         [4012] =
@@ -9781,7 +9781,7 @@ function getRoeRecords(triggers)
             goal = 20,
             reqs = { mobXP = true, zoneNot = xi.expansionAreas.abyssea, mobSystem = set { xi.eco.VERMIN } },
             flags = set { "timed", "repeat" },
-            reward = { sparks = 300, xp = 1500, accolades = 300, item = { xi.items.COPPER_AMAN_VOUCHER } },
+            reward = { sparks = 300, xp = 1500, accolades = 300, item = { xi.item.COPPER_AMAN_VOUCHER } },
         },
 
         [4013] =
@@ -9790,7 +9790,7 @@ function getRoeRecords(triggers)
             goal = 5000,
             increment = 0,
             flags = set { "timed", "repeat" },
-            reward = { sparks = 300, xp = 1500, accolades = 300, item = { xi.items.COPPER_AMAN_VOUCHER } },
+            reward = { sparks = 300, xp = 1500, accolades = 300, item = { xi.item.COPPER_AMAN_VOUCHER } },
             check = function(self, player, params)
                 if params.exp and params.exp > 0 then
                     params.progress = params.progress + params.exp
@@ -9805,9 +9805,9 @@ function getRoeRecords(triggers)
         { -- Spoils (Seals)
             trigger = triggers.itemLooted,
             goal = 3,
-            reqs = { itemID = set { xi.items.BEASTMENS_SEAL, xi.items.KINDREDS_SEAL, xi.items.KINDREDS_CREST, xi.items.HIGH_KINDREDS_CREST, xi.items.SACRED_KINDREDS_CREST } },
+            reqs = { itemID = set { xi.item.BEASTMENS_SEAL, xi.item.KINDREDS_SEAL, xi.item.KINDREDS_CREST, xi.item.HIGH_KINDREDS_CREST, xi.item.SACRED_KINDREDS_CREST } },
             flags = set { "timed", "repeat" },
-            reward = { sparks = 300, xp = 1500, accolades = 300, item = { xi.items.COPPER_AMAN_VOUCHER } },
+            reward = { sparks = 300, xp = 1500, accolades = 300, item = { xi.item.COPPER_AMAN_VOUCHER } },
         },
 
         [4015] =
@@ -9816,7 +9816,7 @@ function getRoeRecords(triggers)
             goal = 20,
             reqs = { mobXP = true, zoneNot = xi.expansionAreas.abyssea, mobSystem = set { xi.eco.BIRD } },
             flags = set { "timed", "repeat" },
-            reward = { sparks = 300, xp = 1500, accolades = 300, item = { xi.items.COPPER_AMAN_VOUCHER } },
+            reward = { sparks = 300, xp = 1500, accolades = 300, item = { xi.item.COPPER_AMAN_VOUCHER } },
         },
 
         [4016] =
@@ -9825,7 +9825,7 @@ function getRoeRecords(triggers)
             goal = 20,
             reqs = { mobXP = true, zoneNot = xi.expansionAreas.abyssea, mobSystem = set { xi.eco.AMORPH } },
             flags = set { "timed", "repeat" },
-            reward = { sparks = 300, xp = 1500, accolades = 300, item = { xi.items.COPPER_AMAN_VOUCHER } },
+            reward = { sparks = 300, xp = 1500, accolades = 300, item = { xi.item.COPPER_AMAN_VOUCHER } },
         },
 
         [4017] =
@@ -9834,7 +9834,7 @@ function getRoeRecords(triggers)
             goal = 20,
             reqs = { mobXP = true, zoneNot = xi.expansionAreas.abyssea, mobSystem = set { xi.eco.UNDEAD } },
             flags = set { "timed", "repeat" },
-            reward = { sparks = 300, xp = 1500, accolades = 300, item = { xi.items.COPPER_AMAN_VOUCHER } },
+            reward = { sparks = 300, xp = 1500, accolades = 300, item = { xi.item.COPPER_AMAN_VOUCHER } },
         },
 
         [4018] =
@@ -9843,14 +9843,14 @@ function getRoeRecords(triggers)
             goal = 20,
             reqs = { mobXP = true, zoneNot = xi.expansionAreas.abyssea, mobSystem = set { xi.eco.ARCANA } },
             flags = set { "timed", "repeat" },
-            reward = { sparks = 300, xp = 1500, accolades = 300, item = { xi.items.COPPER_AMAN_VOUCHER } },
+            reward = { sparks = 300, xp = 1500, accolades = 300, item = { xi.item.COPPER_AMAN_VOUCHER } },
         },
 
         [4019] =
         { -- Crack Treasure Caskets (Triggered from caskets.lua)
             goal = 10,
             flags = set { "timed", "repeat" },
-            reward = { sparks = 300, xp = 1500, accolades = 300, item = { xi.items.COPPER_AMAN_VOUCHER } },
+            reward = { sparks = 300, xp = 1500, accolades = 300, item = { xi.item.COPPER_AMAN_VOUCHER } },
         },
 
         [4020] =
@@ -9859,7 +9859,7 @@ function getRoeRecords(triggers)
             goal = 20,
             reqs = { mobXP = true, atkType = xi.attackType.PHYSICAL },
             flags = set { "timed", "repeat" },
-            reward = { sparks = 300, xp = 1500, accolades = 300, item = { xi.items.COPPER_AMAN_VOUCHER } },
+            reward = { sparks = 300, xp = 1500, accolades = 300, item = { xi.item.COPPER_AMAN_VOUCHER } },
         },
 
         [4021] =
@@ -9868,7 +9868,7 @@ function getRoeRecords(triggers)
             goal = 20,
             reqs = { mobXP = true, atkType = xi.attackType.MAGICAL },
             flags = set { "timed", "repeat" },
-            reward = { sparks = 300, xp = 1500, accolades = 300, item = { xi.items.COPPER_AMAN_VOUCHER } },
+            reward = { sparks = 300, xp = 1500, accolades = 300, item = { xi.item.COPPER_AMAN_VOUCHER } },
         },
 
         -----------------------------------

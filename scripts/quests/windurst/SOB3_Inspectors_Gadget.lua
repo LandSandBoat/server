@@ -3,11 +3,6 @@
 --
 -- Kohlo-Lakolo, !pos -26.8 -6 190 240
 -----------------------------------
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
-require('scripts/globals/titles')
-require('scripts/globals/interaction/quest')
------------------------------------
 
 local quest = Quest:new(xi.quest.log_id.WINDURST, xi.quest.id.windurst.INSPECTORS_GADGET)
 
@@ -15,7 +10,7 @@ quest.reward =
 {
     fame     = 10,
     fameArea = xi.quest.fame_area.WINDURST,
-    item     = xi.items.HEKO_OBI,
+    item     = xi.item.HEKO_OBI,
     title    = xi.title.FAKE_MOUSTACHED_INVESTIGATOR,
 }
 
@@ -116,7 +111,7 @@ quest.sections =
                 onTrade = function(player, npc, trade)
                     if
                         quest:getVar(player, 'Prog') == 2 and
-                        npcUtil.tradeHasExactly(trade, { { xi.items.BALL_OF_SARUTA_COTTON, 4 } }) and
+                        npcUtil.tradeHasExactly(trade, { { xi.item.BALL_OF_SARUTA_COTTON, 4 } }) and
                         not player:hasKeyItem(xi.ki.FAKE_MOUSTACHE)
                     then
                         return quest:progressEvent(552)

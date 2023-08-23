@@ -1,8 +1,6 @@
 -----------------------------------
 -- Zone: Navukgo_Execution_Chamber (64)
 -----------------------------------
-local ID = require('scripts/zones/Navukgo_Execution_Chamber/IDs')
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

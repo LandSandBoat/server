@@ -6,10 +6,7 @@
 -- Involved in Quest: Lure of the Wildcat (San d'Oria)
 -- !pos -105 0.1 72 233
 -----------------------------------
-local ID = require("scripts/zones/Chateau_dOraguille/IDs")
-require("scripts/globals/missions")
-require("scripts/globals/quests")
-require("scripts/globals/utils")
+local ID = zones[xi.zone.CHATEAU_DORAGUILLE]
 -----------------------------------
 local entity = {}
 
@@ -19,7 +16,7 @@ entity.onTrade = function(player, npc, trade)
     -- HER MAJESTY'S GARDEN (derfland humus)
     if
         herMajestysGarden == QUEST_ACCEPTED and
-        trade:hasItemQty(xi.items.CHUNK_OF_DERFLAND_HUMUS, 1) and
+        trade:hasItemQty(xi.item.CHUNK_OF_DERFLAND_HUMUS, 1) and
         trade:getItemCount() == 1
     then
         player:startEvent(83)
@@ -80,8 +77,8 @@ entity.onEventFinish = function(player, csid, option, npc)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.MOON_RING)
     elseif csid == 96 then
         if player:getFreeSlotsCount() ~= 0 then
-            player:addItem(xi.items.CHORAL_JUSTAUCORPS)
-            player:messageSpecial(ID.text.ITEM_OBTAINED, xi.items.CHORAL_JUSTAUCORPS)
+            player:addItem(xi.item.CHORAL_JUSTAUCORPS)
+            player:messageSpecial(ID.text.ITEM_OBTAINED, xi.item.CHORAL_JUSTAUCORPS)
             player:completeQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_CIRCLE_OF_TIME)
             player:addTitle(xi.title.PARAGON_OF_BARD_EXCELLENCE)
             player:setCharVar("circleTime", 0)

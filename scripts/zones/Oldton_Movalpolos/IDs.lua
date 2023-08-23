@@ -37,15 +37,7 @@ zones[xi.zone.OLDTON_MOVALPOLOS] =
         SCRAWLED_WRITING = 16822469,
         OVERSEER_BASE    = GetFirstID('Conquest_Banner'),
         TREASURE_CHEST   = 16822531,
-        MINING =
-        {
-            16822525,
-            16822526,
-            16822527,
-            16822528,
-            16822529,
-            16822530,
-        },
+        MINING           = GetTableOfIDs('Mining_Point'),
     },
 }
 

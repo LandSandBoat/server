@@ -4,8 +4,7 @@
 -- Involved in Quest: Unforgiven
 -- !pos -20.814 -22 8.399 26
 -----------------------------------
-local ID = require("scripts/zones/Tavnazian_Safehold/IDs")
-require("scripts/globals/quests")
+local ID = zones[xi.zone.TAVNAZIAN_SAFEHOLD]
 -----------------------------------
 local entity = {}
 

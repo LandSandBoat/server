@@ -4,10 +4,6 @@
 -- !pos -445 0 342
 -- Quest NPC
 -----------------------------------
-require("scripts/globals/campaign")
-require("scripts/globals/titles")
-require("scripts/globals/quests")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
@@ -16,7 +12,7 @@ entity.onTrade = function(player, npc, trade)
         player:getCharVar("KnotQuiteThere") == 1
     then
         if
-            trade:hasItemQty(xi.items.ONE_HUNDRED_EIGHT_KNOT_QUIPU, 1) and
+            trade:hasItemQty(xi.item.ONE_HUNDRED_EIGHT_KNOT_QUIPU, 1) and
             trade:getGil() == 0 and
             trade:getItemCount() == 1
         then

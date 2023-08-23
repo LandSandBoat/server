@@ -3,8 +3,7 @@
 --  NPC: qm1 (???)
 -- Involved in Quest "The Siren's Tear"
 -----------------------------------
-local ID = require("scripts/zones/North_Gustaberg/IDs")
-require("scripts/globals/quests")
+local ID = zones[xi.zone.NORTH_GUSTABERG]
 -----------------------------------
 local entity = {}
 
@@ -64,9 +63,9 @@ entity.onEventFinish = function(player, csid, option, npc)
             player:getEquipID(xi.slot.MAIN) == 0 and
             player:getEquipID(xi.slot.SUB) == 0
         then
-            if player:hasItem(xi.items.SIRENS_TEAR) then
-                player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED_TWICE, xi.items.SIRENS_TEAR)
-            elseif npcUtil.giveItem(player, xi.items.SIRENS_TEAR) then
+            if player:hasItem(xi.item.SIRENS_TEAR) then
+                player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED_TWICE, xi.item.SIRENS_TEAR)
+            elseif npcUtil.giveItem(player, xi.item.SIRENS_TEAR) then
                 resetSirenTear(npc)
             end
         else

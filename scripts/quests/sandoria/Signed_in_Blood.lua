@@ -5,16 +5,12 @@
 -- Abelard !pos -52 -11 -13 248
 -- TORN_OUT_PAGES !addkeyitem 626
 -----------------------------------
-require('scripts/globals/interaction/quest')
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
------------------------------------
 
 local quest = Quest:new(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.SIGNED_IN_BLOOD)
 
 quest.reward =
 {
-    item = xi.items.CUNNING_EARRING,
+    item = xi.item.CUNNING_EARRING,
     gil  = 3500,
 }
 
@@ -32,7 +28,7 @@ quest.sections =
             ['Sobane'] =
             {
                 onTrigger = function(player, npc)
-                    return quest:progressEvent(732, 0, xi.items.CATHEDRAL_TAPESTRY)
+                    return quest:progressEvent(732, 0, xi.item.CATHEDRAL_TAPESTRY)
                 end,
             },
 
@@ -58,12 +54,12 @@ quest.sections =
             ['Sobane'] =
             {
                 onTrigger = function(player, npc)
-                    return quest:event(733, 0, xi.items.CATHEDRAL_TAPESTRY)
+                    return quest:event(733, 0, xi.item.CATHEDRAL_TAPESTRY)
                 end,
 
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHas(trade, xi.items.CATHEDRAL_TAPESTRY) then
-                        return quest:progressEvent(734, 0, xi.items.CATHEDRAL_TAPESTRY)
+                    if npcUtil.tradeHas(trade, xi.item.CATHEDRAL_TAPESTRY) then
+                        return quest:progressEvent(734, 0, xi.item.CATHEDRAL_TAPESTRY)
                     end
                 end,
             },

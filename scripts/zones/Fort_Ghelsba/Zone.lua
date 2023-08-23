@@ -1,10 +1,6 @@
 -----------------------------------
 -- Zone: Fort_Ghelsba (141)
 -----------------------------------
-local ID = require('scripts/zones/Fort_Ghelsba/IDs')
-require('scripts/globals/conquest')
-require('scripts/globals/treasure')
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

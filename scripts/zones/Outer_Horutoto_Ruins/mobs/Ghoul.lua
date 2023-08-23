@@ -3,8 +3,7 @@
 --  Mob: Ghoul
 -- Note: Place holder for Ah Puch
 -----------------------------------
-local ID = require("scripts/zones/Outer_Horutoto_Ruins/IDs")
-require("scripts/globals/mobs")
+local ID = zones[xi.zone.OUTER_HORUTOTO_RUINS]
 -----------------------------------
 local entity = {}
 

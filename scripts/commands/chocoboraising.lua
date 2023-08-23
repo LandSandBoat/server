@@ -129,7 +129,7 @@ function onTrigger(player)
         table.insert(menu.options, {
             "Give Egg",
             function(playerArg)
-                npcUtil.giveItem(playerArg, xi.items.CHOCOBO_EGG_SLIGHTLY_WARM)
+                npcUtil.giveItem(playerArg, xi.item.CHOCOBO_EGG_SLIGHTLY_WARM)
             end,
         })
 

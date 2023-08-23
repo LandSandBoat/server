@@ -4,9 +4,7 @@
 -- !pos -299 -62 -18
 -- Involved in Quests: Over The Hills And Far Away
 -----------------------------------
-local ID = require("scripts/zones/Uleguerand_Range/IDs")
-require("scripts/globals/npc_util")
-require("scripts/globals/titles")
+local ID = zones[xi.zone.ULEGUERAND_RANGE]
 -----------------------------------
 local entity = {}
 
@@ -19,7 +17,7 @@ entity.onTrade = function(player, npc, trade)
     -- Taking a logical guess what criteria displays what message.
     if
         overTheHillsAndFarAway == QUEST_ACCEPTED and
-        npcUtil.tradeHas(trade, xi.items.MOBLIN_HOTROK)
+        npcUtil.tradeHas(trade, xi.item.MOBLIN_HOTROK)
     then
         -- 1729 = Moblin Hotrok
         if player:getMissionStatus(xi.mission.log_id.COP, xi.mission.status.COP.LOUVERANCE) == 14 then
@@ -57,7 +55,7 @@ entity.onTrigger = function(player, npc)
         player:messageSpecial(ID.text.NOTHING_OUT_OF_ORDINARY)
     elseif overTheHillsAndFarAway == QUEST_ACCEPTED then
         player:messageSpecial(ID.text.SOMETHING_GLITTERING)
-        player:messageSpecial(ID.text.WHAT_LIES_BENEATH, 0, xi.items.MOBLIN_HOTROK)
+        player:messageSpecial(ID.text.WHAT_LIES_BENEATH, 0, xi.item.MOBLIN_HOTROK)
     else
         player:messageSpecial(ID.text.SOMETHING_GLITTERING_BUT)
     end

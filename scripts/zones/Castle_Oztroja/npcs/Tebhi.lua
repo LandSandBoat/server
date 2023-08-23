@@ -7,7 +7,7 @@ local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     if
-        trade:hasItemQty(xi.items.BEAST_COLLAR, 1) and
+        trade:hasItemQty(xi.item.BEAST_COLLAR, 1) and
         trade:getItemCount() == 1
     then
         player:tradeComplete()

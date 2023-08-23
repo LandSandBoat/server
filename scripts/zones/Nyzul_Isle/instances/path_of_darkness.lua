@@ -2,9 +2,7 @@
 -- TOAU-42: Path of Darkness
 -- !instance 7700
 -----------------------------------
-local ID = require("scripts/zones/Nyzul_Isle/IDs")
-require("scripts/globals/instance")
-require("scripts/globals/missions")
+local ID = zones[xi.zone.NYZUL_ISLE]
 -----------------------------------
 local instanceObject = {}
 
@@ -51,7 +49,7 @@ instanceObject.afterInstanceRegister = function(player)
         player:messageSpecial(ID.text.FADES_INTO_NOTHINGNESS, xi.ki.NYZUL_ISLE_ROUTE)
     end
 
-    player:addTempItem(xi.items.UNDERSEA_RUINS_FIREFLIES)
+    player:addTempItem(xi.item.UNDERSEA_RUINS_FIREFLIES)
 end
 
 -- Instance "tick"

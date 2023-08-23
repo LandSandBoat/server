@@ -2,8 +2,6 @@
 -- Area: Crawlers' Nest
 --  Mob: Worker Crawler
 -----------------------------------
-require("scripts/globals/regimes")
------------------------------------
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

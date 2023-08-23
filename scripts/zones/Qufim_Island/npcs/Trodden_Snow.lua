@@ -5,9 +5,7 @@
 -- Mission: ASA - SUGAR_COATED_DIRECTIVE
 -- !pos -19 -17 104 126
 -----------------------------------
-local ID = require("scripts/zones/Qufim_Island/IDs")
-require("scripts/globals/missions")
-require("scripts/globals/npc_util")
+local ID = zones[xi.zone.QUFIM_ISLAND]
 -----------------------------------
 local entity = {}
 

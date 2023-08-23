@@ -6,18 +6,14 @@
 -- Lathuya         : !pos -95.081 -6 31.638 50
 -- Aydeewa (Blank) : !pos 342.129 36.509 -24.856 68
 -----------------------------------
-require('scripts/globals/interaction/quest')
-require('scripts/globals/quests')
-require('scripts/globals/npc_util')
------------------------------------
-local whitegateID = require("scripts/zones/Aht_Urhgan_Whitegate/IDs")
+local whitegateID = zones[xi.zone.AHT_URHGAN_WHITEGATE]
 -----------------------------------
 
 local quest = Quest:new(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.OMENS)
 
 quest.reward =
 {
-    item = xi.items.MAGUS_CHARUQS,
+    item = xi.item.MAGUS_CHARUQS,
     title = xi.title.IMMORTAL_LION,
 }
 

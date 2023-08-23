@@ -3,8 +3,6 @@
 --  NPC: Undulating Confluence
 -- !pos -0.163 -34.106 -471.971 289
 -----------------------------------
-local ID = require("scripts/zones/Escha_ZiTah/IDs")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

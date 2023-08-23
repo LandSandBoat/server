@@ -14,8 +14,7 @@
 -- !pos 199.38 -22.559 60
 -- !pos -200.679 -8.57 60
 -----------------------------------
-require("scripts/globals/missions")
-local ID = require("scripts/zones/Phomiuna_Aqueducts/IDs")
+local ID = zones[xi.zone.PHOMIUNA_AQUEDUCTS]
 -----------------------------------
 local entity = {}
 

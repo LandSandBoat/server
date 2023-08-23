@@ -4,8 +4,7 @@
 -- Guild Merchant NPC: Fishing Guild
 -- !pos -175.185 -3.324 70.445 240
 -----------------------------------
-require("scripts/globals/shop")
-local ID = require("scripts/zones/Port_Windurst/IDs")
+local ID = zones[xi.zone.PORT_WINDURST]
 -----------------------------------
 local entity = {}
 

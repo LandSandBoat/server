@@ -3,8 +3,7 @@
 --  Mob: Goblin Leecher
 -- Note: PH for Slendlix Spindlethumb
 -----------------------------------
-local ID = require("scripts/zones/Inner_Horutoto_Ruins/IDs")
-require("scripts/globals/mobs")
+local ID = zones[xi.zone.INNER_HORUTOTO_RUINS]
 -----------------------------------
 local entity = {}
 

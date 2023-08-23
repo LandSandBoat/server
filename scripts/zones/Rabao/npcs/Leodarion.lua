@@ -4,11 +4,7 @@
 -- Involved in Quest: 20 in Pirate Years, I'll Take the Big Box, True Will
 -- !pos -50 8 40 247
 -----------------------------------
-require("scripts/globals/npc_util")
-require("scripts/globals/quests")
-require("scripts/globals/titles")
-require("scripts/globals/shop")
-local ID = require("scripts/zones/Rabao/IDs")
+local ID = zones[xi.zone.RABAO]
 -----------------------------------
 local entity = {}
 
@@ -17,7 +13,7 @@ entity.onTrade = function(player, npc, trade)
         player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.I_LL_TAKE_THE_BIG_BOX) == QUEST_ACCEPTED and
         player:getCharVar("illTakeTheBigBoxCS") == 2
     then
-        if trade:hasItemQty(xi.items.OAK_POLE, 1) and trade:getItemCount() == 1 then -- Trade Oak Pole
+        if trade:hasItemQty(xi.item.OAK_POLE, 1) and trade:getItemCount() == 1 then -- Trade Oak Pole
             player:startEvent(92)
         end
     end

@@ -2,9 +2,6 @@
 -- Area: The_Garden_of_RuHmet
 -- Name: When Angels Fall
 -----------------------------------
-require("scripts/globals/battlefield")
-require("scripts/globals/missions")
------------------------------------
 local battlefieldObject = {}
 
 battlefieldObject.onBattlefieldTick = function(battlefield, tick)

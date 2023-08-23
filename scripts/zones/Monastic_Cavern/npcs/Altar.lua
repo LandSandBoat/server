@@ -4,8 +4,7 @@
 -- Involved in Quests: The Circle of Time
 -- !pos 108 -2 -144 150
 -----------------------------------
-local ID = require("scripts/zones/Monastic_Cavern/IDs")
-require("scripts/globals/quests")
+local ID = zones[xi.zone.MONASTIC_CAVERN]
 -----------------------------------
 local entity = {}
 

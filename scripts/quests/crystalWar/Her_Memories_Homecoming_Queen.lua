@@ -9,9 +9,6 @@
 -- Halver     : !pos 2 0.1 0.1 233
 -- Gravestone : !pos 149.728 -5.109 -395.121 105
 -----------------------------------
-require('scripts/globals/missions')
-require('scripts/globals/interaction/quest')
-require('scripts/globals/quests')
 require('scripts/missions/wotg/helpers')
 -----------------------------------
 
@@ -225,7 +222,7 @@ quest.sections =
             {
                 onTrade = function(player, npc, trade)
                     if
-                        npcUtil.tradeHasExactly(trade, xi.items.LILAC) and
+                        npcUtil.tradeHasExactly(trade, xi.item.LILAC) and
                         quest:getVar(player, 'Prog3') == 2
                     then
                         player:confirmTrade()

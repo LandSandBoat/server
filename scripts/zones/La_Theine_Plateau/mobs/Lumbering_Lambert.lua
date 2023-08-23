@@ -2,10 +2,8 @@
 -- Area: La Theine Plateau
 --  Mob: Lumbering Lambert
 -----------------------------------
-local ID = require("scripts/zones/La_Theine_Plateau/IDs")
+local ID = zones[xi.zone.LA_THEINE_PLATEAU]
 require("scripts/quests/tutorial")
-require("scripts/globals/hunts")
-require("scripts/globals/mobs")
 -----------------------------------
 local entity = {}
 

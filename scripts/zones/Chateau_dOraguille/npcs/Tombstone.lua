@@ -2,7 +2,7 @@
 -- Area: Chateau d'Oraguille
 --  NPC: Tombstone
 -----------------------------------
-local ID = require("scripts/zones/Chateau_dOraguille/IDs")
+local ID = zones[xi.zone.CHATEAU_DORAGUILLE]
 -----------------------------------
 local entity = {}
 

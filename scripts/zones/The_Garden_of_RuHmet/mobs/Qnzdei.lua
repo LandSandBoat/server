@@ -2,7 +2,7 @@
 -- Area: The Garden of Ru'Hmet
 --  MOB: Aw'Zdei
 -----------------------------------
-local ID = require("scripts/zones/The_Garden_of_RuHmet/IDs")
+local ID = zones[xi.zone.THE_GARDEN_OF_RUHMET]
 mixins = { require("scripts/mixins/families/zdei") }
 -----------------------------------
 local entity = {}

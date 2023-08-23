@@ -2,8 +2,6 @@
 -- Area: Promyvion - Vahzl
 --   NM: Provoker
 -----------------------------------
-require("scripts/globals/magic")
------------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)

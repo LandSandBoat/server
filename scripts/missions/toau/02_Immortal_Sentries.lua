@@ -9,15 +9,12 @@
 -- Nareema       : !pos 518.387 -24.707 -467.297 79
 -- Waudeen       : !pos 673.882 -23.995 367.604 61
 -- Naja Salaheem : !pos 22.700 -8.804 -45.591 50
-require('scripts/globals/missions')
-require('scripts/globals/npc_util')
-require('scripts/globals/interaction/mission')
 -----------------------------------
-local whitegateID = require('scripts/zones/Aht_Urhgan_Whitegate/IDs')
-local arrapagoID  = require('scripts/zones/Arrapago_Reef/IDs')
-local bhaflauID   = require('scripts/zones/Bhaflau_Thickets/IDs')
-local caedarvaID  = require('scripts/zones/Caedarva_Mire/IDs')
-local zhayolmID   = require('scripts/zones/Mount_Zhayolm/IDs')
+local whitegateID = zones[xi.zone.AHT_URHGAN_WHITEGATE]
+local arrapagoID  = zones[xi.zone.ARRAPAGO_REEF]
+local bhaflauID   = zones[xi.zone.BHAFLAU_THICKETS]
+local caedarvaID  = zones[xi.zone.CAEDARVA_MIRE]
+local zhayolmID   = zones[xi.zone.MOUNT_ZHAYOLM]
 -----------------------------------
 
 local mission = Mission:new(xi.mission.log_id.TOAU, xi.mission.id.toau.IMMORTAL_SENTRIES)

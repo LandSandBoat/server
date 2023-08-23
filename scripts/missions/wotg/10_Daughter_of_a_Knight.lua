@@ -8,11 +8,8 @@
 -- Humus-rich Earth (past)    : !pos -510.535 7.568 289.283 82
 -- Humus-rich Earth (present) : !pos -510.535 7.568 289.283 104
 -----------------------------------
-require('scripts/globals/missions')
-require('scripts/globals/interaction/mission')
------------------------------------
-local pastJugnerID = require('scripts/zones/Jugner_Forest_[S]/IDs')
-local presentJugnerID = require('scripts/zones/Jugner_Forest/IDs')
+local pastJugnerID = zones[xi.zone.JUGNER_FOREST_S]
+local presentJugnerID = zones[xi.zone.JUGNER_FOREST]
 -----------------------------------
 
 local mission = Mission:new(xi.mission.log_id.WOTG, xi.mission.id.wotg.DAUGHTER_OF_A_KNIGHT)
@@ -62,7 +59,7 @@ mission.sections =
             ['Amaura'] =
             {
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, xi.items.CERNUNNOS_BULB) then
+                    if npcUtil.tradeHasExactly(trade, xi.item.CERNUNNOS_BULB) then
                         -- TODO: What are these args from caps?
                         -- Observed : 647298804, 0, 1743, 1, 759, 600, 0, 4
                         return mission:progressEvent(937, 0, 2)
@@ -103,16 +100,16 @@ mission.sections =
             ['Humus-rich_Earth'] =
             {
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, xi.items.CERNUNNOS_BULB) then
+                    if npcUtil.tradeHasExactly(trade, xi.item.CERNUNNOS_BULB) then
                         player:confirmTrade()
                         player:setMissionStatus(mission.areaId, 3)
 
-                        return mission:messageSpecial(pastJugnerID.text.YOU_PLANT_ITEM, xi.items.CERNUNNOS_BULB)
+                        return mission:messageSpecial(pastJugnerID.text.YOU_PLANT_ITEM, xi.item.CERNUNNOS_BULB)
                     end
                 end,
 
                 onTrigger = function(player, npc)
-                    return mission:messageSpecial(pastJugnerID.text.IDEAL_PLACE_TO_PLANT_ITEM, xi.items.CERNUNNOS_BULB)
+                    return mission:messageSpecial(pastJugnerID.text.IDEAL_PLACE_TO_PLANT_ITEM, xi.item.CERNUNNOS_BULB)
                 end,
             },
         },
@@ -139,7 +136,7 @@ mission.sections =
             ['Humus-rich_Earth'] =
             {
                 onTrigger = function(player, npc)
-                    return mission:messageSpecial(pastJugnerID.text.ITEM_IS_PLANTED_HERE, xi.items.CERNUNNOS_BULB)
+                    return mission:messageSpecial(pastJugnerID.text.ITEM_IS_PLANTED_HERE, xi.item.CERNUNNOS_BULB)
                 end,
             }
         },

@@ -5,10 +5,6 @@
 -- Bastok Mission 3.3 "Appointment to Jeuno"
 -- !pos 596 16 -19 184
 -----------------------------------
-local ID = require("scripts/zones/Lower_Delkfutts_Tower/IDs")
-require("scripts/globals/missions")
-require("scripts/globals/npc_util")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

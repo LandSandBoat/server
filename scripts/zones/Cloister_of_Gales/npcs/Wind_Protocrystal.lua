@@ -4,9 +4,7 @@
 -- Involved in Quests: Trial by Wind, Trial Size Trial By Wind
 -- !pos -361 1 -381 201
 -----------------------------------
-require("scripts/globals/missions")
-require("scripts/globals/bcnm")
-local ID = require("scripts/zones/Cloister_of_Gales/IDs")
+local ID = zones[xi.zone.CLOISTER_OF_GALES]
 -----------------------------------
 local entity = {}
 

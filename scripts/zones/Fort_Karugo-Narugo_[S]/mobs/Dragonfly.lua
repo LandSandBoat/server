@@ -3,8 +3,7 @@
 --  Mob: Dragonfly
 -- Note: PH for Demoiselle Desolee
 -----------------------------------
-local ID = require("scripts/zones/Fort_Karugo-Narugo_[S]/IDs")
-require("scripts/globals/mobs")
+local ID = zones[xi.zone.FORT_KARUGO_NARUGO_S]
 -----------------------------------
 local entity = {}
 

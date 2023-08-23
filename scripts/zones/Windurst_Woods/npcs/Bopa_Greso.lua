@@ -1,10 +1,7 @@
 -----------------------------------
 -- Area: Windurst Woods
 --  NPC: Bopa Greso
--- Type: Standard NPC
 -- !pos 59.773 -6.249 216.766 241
------------------------------------
-require("scripts/globals/quests")
 -----------------------------------
 local entity = {}
 

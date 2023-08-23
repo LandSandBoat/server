@@ -4,11 +4,6 @@
 -- Log ID: 1, Quest ID: 46
 -- Yazan : !pos -20.06 -3.3 24.471 236
 -----------------------------------
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
-require('scripts/globals/titles')
-require('scripts/globals/interaction/quest')
------------------------------------
 
 local quest = Quest:new(xi.quest.log_id.BASTOK, xi.quest.id.bastok.BITE_THE_DUST)
 
@@ -51,7 +46,7 @@ quest.sections =
             ['Yazan'] =
             {
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, xi.items.SAND_BAT_FANG) then
+                    if npcUtil.tradeHasExactly(trade, xi.item.SAND_BAT_FANG) then
                         return quest:progressEvent(193)
                     end
                 end,

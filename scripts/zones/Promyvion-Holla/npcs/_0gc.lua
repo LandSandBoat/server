@@ -2,8 +2,7 @@
 -- Area: Promyvion Holla
 --  NPC: Memory Flux 4th floor
 -----------------------------------
-local ID = require("scripts/zones/Promyvion-Holla/IDs")
-require("scripts/globals/quests")
+local ID = zones[xi.zone.PROMYVION_HOLLA]
 -----------------------------------
 local entity = {}
 

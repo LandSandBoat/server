@@ -2,9 +2,6 @@
 -- Rank 5 Mission
 -- Qu'Bia Arena mission battlefield
 -----------------------------------
-local ID = require("scripts/zones/QuBia_Arena/IDs")
-require("scripts/globals/battlefield")
------------------------------------
 local battlefieldObject = {}
 
 battlefieldObject.onBattlefieldTick = function(battlefield, tick)

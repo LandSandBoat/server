@@ -2,9 +2,7 @@
 -- Area: Eastern Altepa Desert
 --   NM: Sabotender Corrido
 -----------------------------------
-require("scripts/globals/hunts")
 mixins = { require("scripts/mixins/job_special") }
-require("scripts/globals/mobs")
 -----------------------------------
 local entity = {}
 

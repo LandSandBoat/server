@@ -3,8 +3,7 @@
 --  NPC: Galzerio
 -- Standard Merchant NPC
 -----------------------------------
-local ID = require("scripts/zones/Bastok_Mines/IDs")
-require("scripts/globals/shop")
+local ID = zones[xi.zone.BASTOK_MINES]
 -----------------------------------
 local entity = {}
 
@@ -14,22 +13,20 @@ end
 entity.onTrigger = function(player, npc)
     local stock =
     {
-        13198, 19602, 1,    --Swordbelt
-        17389,   486, 1,    --Bamboo Fishing Rod
-        17396,     3, 2,    --Little Worm
-        17390,   212, 2,    --Yew Fishing Rod
-        13196, 10054, 3,    --Silver Belt
-        17395,    10, 3,    --Lugworm
-        17391,    64, 3,    --Willow Fishing Rod
-        12600,   216, 3,    --Robe
-        12728,   118, 3,    --Cuffs
-        12856,   172, 3,    --Slops
-        12984,   111, 3,    --Ash Clogs
-        12464,  1742, 3,    --Headgear
-        12592,  2470, 3,    --Doublet
-        12720,  1363, 3,    --Gloves
-        12848,  1899, 3,    --Brais
-        12976,  1269, 3,    --Gaiters
+        xi.item.LUGWORM,              12, 3,
+        xi.item.LITTLE_WORM,           4, 2,
+        xi.item.BAMBOO_FISHING_ROD,  561, 1,
+        xi.item.YEW_FISHING_ROD,     245, 2,
+        xi.item.WILLOW_FISHING_ROD,   74, 3,
+        xi.item.ROBE,                249, 3,
+        xi.item.CUFFS,               137, 3,
+        xi.item.SLOPS,               199, 3,
+        xi.item.ASH_CLOGS,           128, 3,
+        xi.item.HEADGEAR,           2013, 3,
+        xi.item.DOUBLET,            2854, 3,
+        xi.item.GLOVES,             1575, 3,
+        xi.item.BRAIS,              2194, 3,
+        xi.item.GAITERS,            1466, 3,
     }
 
     player:showText(npc, ID.text.GELZERIO_SHOP_DIALOG)

@@ -8,10 +8,6 @@
 -- Ququroon       : !pos -2.400 -1 66.824 53
 -- Kyokyoroon     : !pos 18.020 -6.000 10.467 53
 -----------------------------------
-require('scripts/globals/quests')
-require('scripts/globals/utils')
-require('scripts/globals/interaction/quest')
------------------------------------
 
 local quest = Quest:new(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.RAT_RACE)
 
@@ -19,9 +15,9 @@ quest.reward =
 {
     item =
     {
-        { xi.items.IMPERIAL_GOLD_PIECE,    2 },
-        { xi.items.IMPERIAL_MYTHRIL_PIECE, 2 },
-        { xi.items.IMPERIAL_SILVER_PIECE,  3 },
+        { xi.item.IMPERIAL_GOLD_PIECE,    2 },
+        { xi.item.IMPERIAL_MYTHRIL_PIECE, 2 },
+        { xi.item.IMPERIAL_SILVER_PIECE,  3 },
     },
 }
 
@@ -78,7 +74,7 @@ quest.sections =
                 onTrade = function(player, npc, trade)
                     if
                         quest:getVar(player, 'Prog') == 2 and
-                        npcUtil.tradeHas(trade, xi.items.IMPERIAL_BRONZE_PIECE)
+                        npcUtil.tradeHas(trade, xi.item.IMPERIAL_BRONZE_PIECE)
                     then
                         return quest:progressEvent(850)
                     end
@@ -126,7 +122,7 @@ quest.sections =
                 onTrade = function(player, npc, trade)
                     if
                         quest:getVar(player, 'Prog') == 5 and
-                        npcUtil.tradeHasExactly(trade, xi.items.BOWL_OF_NASHMAU_STEW)
+                        npcUtil.tradeHasExactly(trade, xi.item.BOWL_OF_NASHMAU_STEW)
                     then
                         return quest:progressEvent(311)
                     end
@@ -146,7 +142,7 @@ quest.sections =
                 onTrade = function(player, npc, trade)
                     if
                         quest:getVar(player, 'Prog') == 4 and
-                        npcUtil.tradeHasExactly(trade, { xi.items.AHTAPOT, xi.items.ISTAKOZ, xi.items.ISTAVRIT, xi.items.ISTIRIDYE, xi.items.MERCANBALIGI })
+                        npcUtil.tradeHasExactly(trade, { xi.item.AHTAPOT, xi.item.ISTAKOZ, xi.item.ISTAVRIT, xi.item.ISTIRIDYE, xi.item.MERCANBALIGI })
                     then
                         return quest:progressEvent(310)
                     end
@@ -172,7 +168,7 @@ quest.sections =
                 end,
 
                 [310] = function(player, csid, option, npc)
-                    if npcUtil.giveItem(player, xi.items.BOWL_OF_NASHMAU_STEW) then
+                    if npcUtil.giveItem(player, xi.item.BOWL_OF_NASHMAU_STEW) then
                         player:confirmTrade()
                         quest:setVar(player, 'Prog', 5)
                     end

@@ -4,11 +4,6 @@
 -- Log ID: 3, Quest ID: 3
 -- Derrick : !pos -32 -1 -7 245
 -----------------------------------
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
-require('scripts/globals/titles')
-require('scripts/globals/interaction/quest')
------------------------------------
 
 local quest = Quest:new(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.SAVE_THE_CLOCK_TOWER)
 
@@ -37,7 +32,7 @@ local petitionOnTrade = function(player, npc, trade)
     local npcData = petitionNpcData[npc:getName()]
 
     if
-        npcUtil.tradeHasExactly(trade, xi.items.CLOCK_TOWER_PETITION) and
+        npcUtil.tradeHasExactly(trade, xi.item.CLOCK_TOWER_PETITION) and
         not quest:isVarBitsSet(player, 'Prog', npcData[1])
     then
         return quest:progressEvent(npcData[2], 9 - utils.mask.countBits(quest:getVar(player, 'Prog')))
@@ -78,7 +73,7 @@ quest.sections =
                 [230] = function(player, csid, option, npc)
                     if
                         option == 20 and
-                        npcUtil.giveItem(player, xi.items.CLOCK_TOWER_PETITION)
+                        npcUtil.giveItem(player, xi.item.CLOCK_TOWER_PETITION)
                     then
                         quest:begin(player)
                     end
@@ -103,7 +98,7 @@ quest.sections =
             {
                 onTrade = function(player, npc, trade)
                     if
-                        npcUtil.tradeHasExactly(trade, xi.items.CLOCK_TOWER_PETITION) and
+                        npcUtil.tradeHasExactly(trade, xi.item.CLOCK_TOWER_PETITION) and
                         utils.mask.countBits(quest:getVar(player, 'Prog')) == 10
                     then
                         return quest:progressEvent(231)
@@ -131,7 +126,7 @@ quest.sections =
 
                     if
                         option == 30 and
-                        npcUtil.giveItem(player, xi.items.CLOCK_TOWER_PETITION)
+                        npcUtil.giveItem(player, xi.item.CLOCK_TOWER_PETITION)
                     then
                         quest:setVar(player, 'Prog', 0)
                     end

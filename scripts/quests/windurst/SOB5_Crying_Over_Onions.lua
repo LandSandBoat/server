@@ -3,11 +3,6 @@
 --
 -- Kohlo-Lakolo, !pos -26.8 -6 190 240
 -----------------------------------
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
-require('scripts/globals/titles')
-require('scripts/globals/interaction/quest')
------------------------------------
 
 local quest = Quest:new(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CRYING_OVER_ONIONS)
 
@@ -54,7 +49,7 @@ quest.sections =
             onEventFinish =
             {
                 [449] = function(player, csid, option, npc)
-                    if npcUtil.giveItem(player, xi.items.BOUNCER_CLUB) then
+                    if npcUtil.giveItem(player, xi.item.BOUNCER_CLUB) then
                         quest:setVar(player, 'Reward', 1)
                         quest:setMustZone(player)
                     end
@@ -156,7 +151,7 @@ quest.sections =
             {
                 onTrigger = function(player, npc)
                     if quest:getVar(player, 'Prog') == 0 then
-                        return quest:progressEvent(774, 0, xi.items.STAR_SPINEL)
+                        return quest:progressEvent(774, 0, xi.item.STAR_SPINEL)
                     elseif quest:getVar(player, 'Prog') == 1 or quest:getVar(player, 'Prog') == 2 then
                         return quest:event(777) -- Reminder text before trade.
                     elseif quest:getVar(player, 'Prog') == 3 then
@@ -169,9 +164,9 @@ quest.sections =
                 onTrade = function(player, npc, trade)
                     if
                         (quest:getVar(player, 'Prog') == 1 or quest:getVar(player, 'Prog') == 2) and
-                        npcUtil.tradeHasExactly(trade, xi.items.STAR_SPINEL)
+                        npcUtil.tradeHasExactly(trade, xi.item.STAR_SPINEL)
                     then
-                        return quest:progressEvent(775, 0, xi.items.STAR_SPINEL)
+                        return quest:progressEvent(775, 0, xi.item.STAR_SPINEL)
                     end
                 end,
             },
@@ -183,7 +178,7 @@ quest.sections =
                 end,
 
                 [775] = function(player, csid, option, npc)
-                    if npcUtil.giveItem(player, xi.items.STAR_NECKLACE) then
+                    if npcUtil.giveItem(player, xi.item.STAR_NECKLACE) then
                         player:confirmTrade()
                         quest:setVar(player, 'Prog', 3)
                     end

@@ -3,9 +3,7 @@
 --  Mob: Fallen Major
 -- Note: Place holder Hovering Hotpot
 -----------------------------------
-local ID = require("scripts/zones/Garlaige_Citadel/IDs")
-require("scripts/globals/regimes")
-require("scripts/globals/mobs")
+local ID = zones[xi.zone.GARLAIGE_CITADEL]
 -----------------------------------
 local entity = {}
 

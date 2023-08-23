@@ -4,8 +4,7 @@
 -- Note: Spawned by Rubious Crystals for PM 8-1
 -----------------------------------
 mixins = { require("scripts/mixins/job_special") }
-local ID = require("scripts/zones/AlTaieu/IDs")
-require("scripts/globals/missions")
+local ID = zones[xi.zone.ALTAIEU]
 -----------------------------------
 local entity = {}
 

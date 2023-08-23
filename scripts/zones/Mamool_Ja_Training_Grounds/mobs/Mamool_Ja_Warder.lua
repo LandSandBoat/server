@@ -3,9 +3,7 @@
 --  MOB: Mamool Ja Warder (NIN, WHM, BST)
 -----------------------------------
 mixins = { require("scripts/mixins/weapon_break") }
-local ID = require("scripts/zones/Mamool_Ja_Training_Grounds/IDs")
-require("scripts/globals/assault")
-require("scripts/globals/utils")
+local ID = zones[xi.zone.MAMOOL_JA_TRAINING_GROUNDS]
 -----------------------------------
 local entity = {}
 

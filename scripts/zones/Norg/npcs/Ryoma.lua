@@ -4,9 +4,7 @@
 -- Start and Finish Quest: 20 in Pirate Years, I'll Take the Big Box, True Will, Bugi Soden
 -- !pos -23 0 -9 252
 -----------------------------------
-local ID = require("scripts/zones/Norg/IDs")
-require("scripts/globals/quests")
-require("scripts/globals/shop")
+local ID = zones[xi.zone.NORG]
 -----------------------------------
 local entity = {}
 
@@ -57,13 +55,13 @@ entity.onEventFinish = function(player, csid, option, npc)
         player:setCharVar("twentyInPirateYearsCS", 1)
     elseif csid == 134 then
         if player:getFreeSlotsCount() <= 1 then
-            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.items.ANJU)
+            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.item.ANJU)
         else
             player:delKeyItem(xi.ki.TRICK_BOX)
-            player:addItem(xi.items.ANJU)
-            player:addItem(xi.items.ZUSHIO)
-            player:messageSpecial(ID.text.ITEM_OBTAINED, xi.items.ANJU) -- Anju
-            player:messageSpecial(ID.text.ITEM_OBTAINED, xi.items.ZUSHIO) -- Zushio
+            player:addItem(xi.item.ANJU)
+            player:addItem(xi.item.ZUSHIO)
+            player:messageSpecial(ID.text.ITEM_OBTAINED, xi.item.ANJU) -- Anju
+            player:messageSpecial(ID.text.ITEM_OBTAINED, xi.item.ZUSHIO) -- Zushio
             player:needToZone()
             player:setCharVar("twentyInPirateYearsCS", 0)
             player:addFame(xi.quest.fame_area.NORG, 30)

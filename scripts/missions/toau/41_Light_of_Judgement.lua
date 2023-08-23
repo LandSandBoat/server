@@ -5,10 +5,6 @@
 -- !addmission 4 39
 -- Rodin-Comidin : !pos 17.205 -5.999 51.161 50
 -----------------------------------
-require('scripts/globals/missions')
-require('scripts/globals/npc_util')
-require('scripts/globals/interaction/mission')
------------------------------------
 
 local mission = Mission:new(xi.mission.log_id.TOAU, xi.mission.id.toau.LIGHT_OF_JUDGMENT)
 

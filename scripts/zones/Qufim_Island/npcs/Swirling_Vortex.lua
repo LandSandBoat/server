@@ -4,9 +4,7 @@
 -- Entrance to Qufim Island
 -- !pos -436.000 -13.499 340.117 126
 -----------------------------------
-local ID = require("scripts/zones/Qufim_Island/IDs")
-require("scripts/globals/teleports")
-require("scripts/globals/missions")
+local ID = zones[xi.zone.QUFIM_ISLAND]
 -----------------------------------
 local entity = {}
 

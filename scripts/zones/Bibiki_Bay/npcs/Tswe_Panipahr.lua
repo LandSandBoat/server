@@ -4,7 +4,7 @@
 -- Type: Manaclipper
 -- !pos 484.604 -4.035 729.671 4
 -----------------------------------
-local ID = require("scripts/zones/Bibiki_Bay/IDs")
+local ID = zones[xi.zone.BIBIKI_BAY]
 -----------------------------------
 local entity = {}
 

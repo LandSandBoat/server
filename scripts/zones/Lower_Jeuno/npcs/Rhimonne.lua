@@ -2,8 +2,7 @@
 -- Area: Lower Jeuno
 --  NPC: Rhimonne
 -----------------------------------
-local ID = require("scripts/zones/Lower_Jeuno/IDs")
-require("scripts/globals/shop")
+local ID = zones[xi.zone.LOWER_JEUNO]
 -----------------------------------
 local entity = {}
 

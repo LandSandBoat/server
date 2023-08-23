@@ -6,10 +6,6 @@
 -- Cid       : !pos -12 -12 1 237
 -- Iron Gate : !pos 612 132 774 32
 -----------------------------------
-require('scripts/globals/interaction/mission')
-require('scripts/globals/missions')
-require('scripts/globals/utils')
------------------------------------
 
 local mission = Mission:new(xi.mission.log_id.COP, xi.mission.id.cop.ONE_TO_BE_FEARED)
 

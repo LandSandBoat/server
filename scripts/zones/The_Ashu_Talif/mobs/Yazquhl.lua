@@ -2,7 +2,7 @@
 -- Area: The Ashu Talif (Against All Odds)
 --  Mob: Yazquhl
 -----------------------------------
-local ID = require("scripts/zones/The_Ashu_Talif/IDs")
+local ID = zones[xi.zone.THE_ASHU_TALIF]
 mixins = { require("scripts/mixins/job_special") }
 -----------------------------------
 local entity = {}

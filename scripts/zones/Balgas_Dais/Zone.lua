@@ -1,9 +1,6 @@
 -----------------------------------
 -- Zone: Balgas_Dais (146)
 -----------------------------------
-local ID = require('scripts/zones/Balgas_Dais/IDs')
-require('scripts/globals/conquest')
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

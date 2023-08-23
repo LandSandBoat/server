@@ -4,9 +4,7 @@
 -- Starts and Finishes Quest: Healing the Land,
 -- !pos 129 -6 96 231
 -----------------------------------
-require("scripts/globals/titles")
-require("scripts/globals/quests")
-local ID = require("scripts/zones/Northern_San_dOria/IDs")
+local ID = zones[xi.zone.NORTHERN_SAN_DORIA]
 -----------------------------------
 local entity = {}
 
@@ -68,11 +66,11 @@ entity.onEventFinish = function(player, csid, option, npc)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.SEAL_OF_BANISHING)
     elseif csid == 683 then
         if player:getFreeSlotsCount() == 0 then
-            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.items.SCROLL_OF_TELEPORT_HOLLA)
+            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.item.SCROLL_OF_TELEPORT_HOLLA)
         else
             player:addTitle(xi.title.PILGRIM_TO_HOLLA)
-            player:addItem(xi.items.SCROLL_OF_TELEPORT_HOLLA)
-            player:messageSpecial(ID.text.ITEM_OBTAINED, xi.items.SCROLL_OF_TELEPORT_HOLLA) -- Scroll of Teleport-Holla
+            player:addItem(xi.item.SCROLL_OF_TELEPORT_HOLLA)
+            player:messageSpecial(ID.text.ITEM_OBTAINED, xi.item.SCROLL_OF_TELEPORT_HOLLA) -- Scroll of Teleport-Holla
             player:needToZone(true)
             player:addFame(xi.quest.fame_area.SANDORIA, 30)
             player:completeQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.HEALING_THE_LAND)
@@ -81,11 +79,11 @@ entity.onEventFinish = function(player, csid, option, npc)
         player:addQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.SORCERY_OF_THE_NORTH)
     elseif csid == 687 then
         if player:getFreeSlotsCount() == 0 then
-            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.items.SCROLL_OF_TELEPORT_VAHZL)
+            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.item.SCROLL_OF_TELEPORT_VAHZL)
         else
             player:delKeyItem(xi.ki.FEIYIN_MAGIC_TOME)
-            player:addItem(xi.items.SCROLL_OF_TELEPORT_VAHZL)
-            player:messageSpecial(ID.text.ITEM_OBTAINED, xi.items.SCROLL_OF_TELEPORT_VAHZL) -- Scroll of Teleport-Vahzl
+            player:addItem(xi.item.SCROLL_OF_TELEPORT_VAHZL)
+            player:messageSpecial(ID.text.ITEM_OBTAINED, xi.item.SCROLL_OF_TELEPORT_VAHZL) -- Scroll of Teleport-Vahzl
             player:addFame(xi.quest.fame_area.SANDORIA, 30)
             player:completeQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.SORCERY_OF_THE_NORTH)
         end

@@ -2,8 +2,6 @@
 -- Area: Dangruf Wadi
 --  Mob: Fume Lizard
 -----------------------------------
-require("scripts/globals/regimes")
------------------------------------
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

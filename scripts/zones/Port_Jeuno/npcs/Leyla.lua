@@ -3,8 +3,7 @@
 --  NPC: Leyla
 -- Standard Merchant NPC
 -----------------------------------
-local ID = require("scripts/zones/Port_Jeuno/IDs")
-require("scripts/globals/shop")
+local ID = zones[xi.zone.PORT_JEUNO]
 -----------------------------------
 local entity = {}
 

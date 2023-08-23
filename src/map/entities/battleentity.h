@@ -33,7 +33,7 @@
 #include "party.h"
 #include "trait.h"
 
-enum DEATH_TYPE
+enum class DEATH_TYPE : uint8
 {
     NONE        = 0,
     PHYSICAL    = 1,
@@ -487,20 +487,20 @@ struct apAction_t
     uint16         spikesMessage;    // 10 bits
 
     apAction_t()
-    : reaction(REACTION::NONE)
+    : ActionTarget(nullptr)
+    , reaction(REACTION::NONE)
+    , animation(0)
     , speceffect(SPECEFFECT::NONE)
+    , knockback(0)
+    , param(0)
+    , messageID(0)
     , additionalEffect(SUBEFFECT_NONE)
+    , addEffectParam(0)
+    , addEffectMessage(0)
     , spikesEffect(SUBEFFECT_NONE)
+    , spikesParam(0)
+    , spikesMessage(0)
     {
-        ActionTarget     = nullptr;
-        animation        = 0;
-        param            = 0;
-        messageID        = 0;
-        addEffectParam   = 0;
-        addEffectMessage = 0;
-        spikesParam      = 0;
-        spikesMessage    = 0;
-        knockback        = 0;
     }
 };
 

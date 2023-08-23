@@ -4,8 +4,7 @@
 -- Alchemy Adv. Synthesis Image Support
 -- !pos 123.5 2 1 234
 -----------------------------------
-local ID = require("scripts/zones/Bastok_Mines/IDs")
-require("scripts/globals/crafting")
+local ID = zones[xi.zone.BASTOK_MINES]
 -----------------------------------
 local entity = {}
 

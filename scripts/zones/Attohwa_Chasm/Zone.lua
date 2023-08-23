@@ -1,8 +1,7 @@
 -----------------------------------
 -- Zone: Attohwa_Chasm (7)
 -----------------------------------
-local ID = require('scripts/zones/Attohwa_Chasm/IDs')
-require('scripts/globals/helm')
+local ID = zones[xi.zone.ATTOHWA_CHASM]
 -----------------------------------
 local zoneObject = {}
 

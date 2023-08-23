@@ -2,8 +2,6 @@
 -- Area: Lower Delkfutt's Tower
 --   NM: Tyrant
 -----------------------------------
-require("scripts/globals/hunts")
------------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)

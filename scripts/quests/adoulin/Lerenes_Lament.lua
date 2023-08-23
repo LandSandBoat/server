@@ -4,11 +4,7 @@
 -- !addquest 9 126
 -- Lerene : !pos -46.876 -179.334 -28.602 274
 -----------------------------------
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
-require('scripts/globals/interaction/quest')
------------------------------------
-local outerRaKaznarID = require('scripts/zones/Outer_RaKaznar/IDs')
+local outerRaKaznarID = zones[xi.zone.OUTER_RAKAZNAR]
 -----------------------------------
 
 local quest = Quest:new(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.LERENES_LAMENT)
@@ -51,7 +47,7 @@ quest.sections =
             ['Lerene'] =
             {
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, { { xi.items.SQUARE_OF_ANCESTRAL_CLOTH, 2 } }) then
+                    if npcUtil.tradeHasExactly(trade, { { xi.item.SQUARE_OF_ANCESTRAL_CLOTH, 2 } }) then
                         return quest:progressEvent(24)
                     end
                 end,
