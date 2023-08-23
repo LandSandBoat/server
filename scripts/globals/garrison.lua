@@ -8,11 +8,6 @@ require('scripts/globals/mobs')
 require('scripts/globals/npc_util')
 require('scripts/globals/pathfind')
 require('scripts/globals/utils')
-<<<<<<< HEAD
-require('scripts/globals/zone')
-=======
-require('scripts/globals/pathfind')
->>>>>>> Removed deprecated requires
 -----------------------------------
 xi = xi or {}
 xi.garrison = xi.garrison or {}
