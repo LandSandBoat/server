@@ -4,8 +4,19 @@
 xi = xi or {}
 xi.garrison = xi.garrison or {}
 
--- Name is Determined by Nation and LevelCap
--- Names in order of xi.nation values (sandoria, bastok, windurst)
+-- Garrison Progression
+xi.garrison.state =
+{
+    SPAWN_NPCS          = 0,
+    BATTLE              = 1,
+    SPAWN_MOBS          = 2,
+    SPAWN_BOSS          = 3,
+    ADVANCE_WAVE        = 4,
+    GRANT_LOOT          = 5,
+    ENDED               = 6,
+}
+
+-- Name is Determined by Nation and LevelCap (sandoria, bastok, windurst)
 xi.garrison.allyNames =
 {
     [20] = { "Patrician",       "Recruit",         "Candidate"       },

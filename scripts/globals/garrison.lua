@@ -12,19 +12,6 @@ require('scripts/globals/utils')
 xi = xi or {}
 xi.garrison = xi.garrison or {}
 
-xi.garrison.state =
-{
-    SPAWN_NPCS          = 0,
-    BATTLE              = 1,
-    SPAWN_MOBS          = 2,
-    SPAWN_BOSS          = 3,
-    ADVANCE_WAVE        = 4,
-    GRANT_LOOT          = 5,
-    ENDED               = 6,
-}
-
-xi.garrison.tickIntervalMs = 1000
-
 -----------------------------------
 -- Helpers: Logging / Messaging
 -----------------------------------
@@ -345,7 +332,7 @@ xi.garrison.watchdog = nil -- prototype
 xi.garrison.watchdog = function(npc)
     npc:timer(5000, function(npcArg)
         local zoneData     = xi.garrison.zoneData[npcArg:getZoneID()]
-        local tickInterval = 2 * xi.garrison.tickIntervalMs / 1000
+        local tickInterval = 2
 
         if
             zoneData.isRunning and
@@ -563,7 +550,7 @@ xi.garrison.tick = function(npc)
 
     -- Keep running tick until done
     if zoneData.isRunning then
-        npc:timer(xi.garrison.tickIntervalMs, function(npcArg)
+        npc:timer(1000, function(npcArg)
             xi.garrison.tick(npcArg)
         end)
     end
