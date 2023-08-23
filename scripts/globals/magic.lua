@@ -1091,14 +1091,6 @@ function canOverwrite(target, effect, power, mod)
     return true
 end
 
-function calculateDurationForLvl(duration, spellLvl, targetLvl)
-    if targetLvl < spellLvl then
-        return duration * targetLvl / spellLvl
-    end
-
-    return duration
-end
-
 function calculateDuration(duration, magicSkill, spellGroup, caster, target, useComposure)
     local casterJob = caster:getMainJob()
 

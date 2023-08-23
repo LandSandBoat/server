@@ -28,7 +28,12 @@ spellObject.onSpellCast = function(caster, target, spell)
     pAbs = utils.clamp(pAbs, 1, xi.settings.main.STONESKIN_CAP)
 
     local duration = calculateDuration(300, spell:getSkillType(), spell:getSpellGroup(), caster, target)
-    duration = calculateDurationForLvl(duration, 28, target:getMainLvl())
+
+    -- Reduce duration if the target is below Stoneskin's level (formerly calculateDurationForLvl)
+    local targetLvl = target:getMainLvl()
+    if targetLvl < 28 then
+        duration = duration * targetLvl / 28
+    end
 
     local final = pAbs + pEquipMods
     if target:addStatusEffect(xi.effect.STONESKIN, final, 0, duration, 0, 0, 4) then
