@@ -1,58 +1,12 @@
 -----------------------------------
 -- Records of Eminence
 -----------------------------------
-require("scripts/globals/npc_util")
-require("scripts/globals/quests")
+require('scripts/globals/npc_util')
+require('scripts/globals/quests')
+require('scripts/globals/roe_records')
 -----------------------------------
 xi = xi or {}
 xi.roe = xi.roe or {}
-
------------------------------------
--- Leaders
------------------------------------
-xi.roe.leaders =
-{
-    NONE              = 0,
-    PIEUJE            = 1,
-    AYAME             = 2,
-    INVINCIBLE_SHIELD = 3,
-    APURURU           = 4,
-    MAAT              = 5,
-    ALDO              = 6,
-    JAKOH_WAHCONDALO  = 7,
-    NAJA_SALAHEEM     = 8,
-    FLAVIRIA          = 9,
-    YORAN_ORAN        = 10,
-    SYLVIE            = 11,
-}
-
------------------------------------
--- Triggers
------------------------------------
-
-xi.roe.triggers =
-{
-    mobKill = 1,            -- Player kills a Mob (Counts for mobs killed by partymembers)
-    wSkillUse = 2,          -- Player Weapon skill used
-    itemLooted = 3,         -- Player successfully loots an item
-    synthSuccess = 4,       -- Player synth success
-    dmgTaken = 5,           -- Player takes Damage
-    dmgDealt = 6,           -- Player deals Damage
-    expGain = 7,            -- Player gains EXP
-    healAlly = 8,           -- Player heals self/ally with spell
-    buffAlly = 9,           -- Player buffs ally
-    levelUp = 10,           -- Player levelup
-    questComplete = 11,     -- Player completes quest
-    missionComplete = 12,   -- Player completes mission
-    helmSuccess = 13,       -- Player has a successful harvesting event
-    chocoboDigSuccess = 14, -- Player successfully chocobo digs
-    unityChat = 15,         -- Player uses Unity Chat
-    magicBurst = 16,        -- Player performs a Magic Burst
-    healUnityAlly = 17,     -- Player heals someone in their party/alliance with the same Unity
-    talkToRoeNpc = 18,      -- Player talk to RoE
-}
-
-local triggers = xi.roe.triggers
 
 -----------------------------------
 -- Checks
@@ -167,9 +121,6 @@ if xi.settings.main.ENABLE_ROE and xi.settings.main.ENABLE_ROE_TIMED > 0 then
     RoeParseTimed(timedSchedule)
 end
 
-dofile("scripts/globals/roe_records.lua")
-local records = getRoeRecords(triggers)
-
 local defaults =
 {
     check = masterCheck,        -- Check function should return true/false
@@ -190,13 +141,13 @@ local defaults =
 }
 
 -- Apply defaults for records
-for _, v in pairs(records) do
+for _, v in pairs(xi.roe.records) do
     setmetatable(v, { __index = defaults })
 end
 
 -- Build global map of implemented records.
 -- This is used to deny taking records which aren't implemented in the above table.
-RoeParseRecords(records)
+RoeParseRecords(xi.roe.records)
 
 --[[ --------------------------------------------------------------------------
     Complete a record of eminence. This is for internal roe use only.
@@ -217,7 +168,7 @@ RoeParseRecords(records)
     })
 --------------------------------------------------------------------------- --]]
 local function completeRecord(player, record)
-    local recordEntry = records[record]
+    local recordEntry = xi.roe.records[record]
     local recordFlags = recordEntry.flags
     local rewards = recordEntry.reward
 
@@ -300,7 +251,7 @@ function xi.roe.onRecordTrigger(player, recordID, params)
     params = params or {}
     params.progress = params.progress or player:getEminenceProgress(recordID)
 
-    local entry = records[recordID]
+    local entry = xi.roe.records[recordID]
     local isClaiming = params.claim
 
     if entry and params.progress then

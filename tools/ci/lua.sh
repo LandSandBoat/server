@@ -79,7 +79,6 @@ global_objects=(
     applyResistanceAddEffect
 
     RoeParseTimed
-    getRoeRecords
     RoeParseRecords
 
     cmdprops

@@ -886,7 +886,7 @@ xi.spells.damage.useDamageSpell = function(caster, target, spell)
         -- Add "Magic Burst!" message
         if magicBurst > 1 then
             spell:setMsg(xi.msg.basic.MAGIC_BURST_DAMAGE)
-            caster:triggerRoeEvent(xi.roe.triggers.magicBurst)
+            caster:triggerRoeEvent(xi.roeTrigger.MAGIC_BURST)
         end
     end
 
