@@ -141,7 +141,6 @@ global_objects=(
 )
 
 ignores=(
-    "unused variable ID"
 )
 
 ignore_rules=(

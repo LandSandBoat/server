@@ -1,4 +1,4 @@
-local ID = zones[xi.zone.BASTOK_MARKETS]
+-- local ID = zones[xi.zone.BASTOK_MARKETS]
 
 return {
     ['Alert_Gaze']  = { event = 131 },

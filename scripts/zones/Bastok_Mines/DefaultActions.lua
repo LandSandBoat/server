@@ -1,4 +1,4 @@
-local ID = zones[xi.zone.BASTOK_MINES]
+-- local ID = zones[xi.zone.BASTOK_MINES]
 
 return {
     ['Babenn']         = { event = 40 },

@@ -25,8 +25,6 @@ entity.onTrigger = function(player, npc)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.ALTEPA_POLISHING_STONE)
         player:setCharVar("aCraftsmanWork", 2)
         player:setCharVar("Decurio_I_IIIKilled", 0)
-    else
-        player:messageSpecial(ID.text.NOTHING_OUT_OF_ORDINARY)
     end
 end
 
