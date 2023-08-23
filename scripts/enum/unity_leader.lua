@@ -1,6 +1,6 @@
 xi = xi or {}
 
-xi.unityLeaders =
+xi.unityLeader =
 {
     NONE              = 0,
     PIEUJE            = 1,

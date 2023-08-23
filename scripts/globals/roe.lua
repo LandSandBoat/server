@@ -1,8 +1,9 @@
 -----------------------------------
 -- Records of Eminence
 -----------------------------------
-require("scripts/globals/npc_util")
-require("scripts/globals/quests")
+require('scripts/globals/npc_util')
+require('scripts/globals/quests')
+require('scripts/globals/roe_records')
 -----------------------------------
 xi = xi or {}
 xi.roe = xi.roe or {}
@@ -120,9 +121,6 @@ if xi.settings.main.ENABLE_ROE and xi.settings.main.ENABLE_ROE_TIMED > 0 then
     RoeParseTimed(timedSchedule)
 end
 
-dofile("scripts/globals/roe_records.lua")
-local records = getRoeRecords(xi.roeTriggers)
-
 local defaults =
 {
     check = masterCheck,        -- Check function should return true/false
@@ -143,13 +141,13 @@ local defaults =
 }
 
 -- Apply defaults for records
-for _, v in pairs(records) do
+for _, v in pairs(xi.roe.records) do
     setmetatable(v, { __index = defaults })
 end
 
 -- Build global map of implemented records.
 -- This is used to deny taking records which aren't implemented in the above table.
-RoeParseRecords(records)
+RoeParseRecords(xi.roe.records)
 
 --[[ --------------------------------------------------------------------------
     Complete a record of eminence. This is for internal roe use only.
@@ -170,7 +168,7 @@ RoeParseRecords(records)
     })
 --------------------------------------------------------------------------- --]]
 local function completeRecord(player, record)
-    local recordEntry = records[record]
+    local recordEntry = xi.roe.records[record]
     local recordFlags = recordEntry.flags
     local rewards = recordEntry.reward
 
@@ -253,7 +251,7 @@ function xi.roe.onRecordTrigger(player, recordID, params)
     params = params or {}
     params.progress = params.progress or player:getEminenceProgress(recordID)
 
-    local entry = records[recordID]
+    local entry = xi.roe.records[recordID]
     local isClaiming = params.claim
 
     if entry and params.progress then
