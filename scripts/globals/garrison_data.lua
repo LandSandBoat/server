@@ -22,7 +22,7 @@ xi.garrison.allyNames =
     [20] = { "Patrician",       "Recruit",         "Candidate"       },
     [30] = { "Trader",          "Mariner",         "Scholar"         },
     [40] = { "TempleKnight",    "GoldMusketeer",   "WizeWizard"      },
-    [50] = { "RoyalGuard",      "GoldMusketeer",   "Patriarch"       },
+    [50] = { "RoyalGuard",      "Commander",       "Patriarch"       },
     [99] = { "MilitaryAttache", "MilitaryAttache", "MilitaryAttache" },
 }
 
@@ -77,7 +77,8 @@ xi.garrison.allyLooks =
 
         [xi.nation.BASTOK] =
         {
-            -- (Missing capture)
+            "0x0100040873100020003000400050006000700000",
+            "0x01000B0841100F200F300F400F50D86000700000",
         },
 
         [xi.nation.WINDURST] =
@@ -117,7 +118,8 @@ xi.garrison.allyLooks =
 
         [xi.nation.BASTOK] =
         {
-            -- (Missing capture)
+            "0x01000C0133106420433064404350866086700000",
+            "0x0100010216104120413041404150CA6000700000",
         },
 
         [xi.nation.WINDURST] =
@@ -131,7 +133,8 @@ xi.garrison.allyLooks =
     {
         [xi.nation.SANDORIA] =
         {
-            -- (Missing capture)
+            "0x010005011D1071201D301D401D50206130700000",
+            "0x0100020841107120413041404150036130700000",
         },
 
         [xi.nation.BASTOK] =
@@ -337,7 +340,7 @@ xi.garrison.zoneData =
         textRegion  = 5,
         levelCap    = 30,
         mobBoss     = "Cobalt_Quadav",
-        pos         = nil, -- Needs capture
+        pos         = { 458, 23, 420, 160 },
         xChange     = -2,
         zChange     = -2,
         xSecondLine = 2,
@@ -351,7 +354,7 @@ xi.garrison.zoneData =
         textRegion  = 6,
         levelCap    = 30,
         mobBoss     = "Goblin_Guide",
-        pos         = nil, -- Needs capture
+        pos         = { -484, -30, 60, 64 },
         xChange     = -2,
         zChange     = 0,
         xSecondLine = 0,
@@ -435,7 +438,7 @@ xi.garrison.zoneData =
         textRegion  = 9,
         levelCap    = 50,
         mobBoss     = "Demon_Aristocrat",
-        pos         = nil, -- Needs capture
+        pos         = { 219, -21, 208, 64 },
         xChange     = 2,
         zChange     = 0,
         xSecondLine = 0,

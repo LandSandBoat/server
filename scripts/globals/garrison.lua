@@ -12,6 +12,8 @@ require('scripts/globals/utils')
 xi = xi or {}
 xi.garrison = xi.garrison or {}
 
+local enableDebugPrints = false -- If true, garrison will print out debug messages in logs as well as players as smes.
+
 local nationName =
 {
     [xi.nation.SANDORIA] = "San d'Oria",
@@ -22,31 +24,35 @@ local nationName =
 }
 
 -----------------------------------
--- Local Utilities.
+-- Debug Utilities.
 -----------------------------------
 
 -- Prints the given message if DEBUG_GARRISON is enabled
 local function debugLog(msg)
-    if xi.settings.main.DEBUG_GARRISON then
+    if enableDebugPrints then
         print("[Garrison]: " .. msg)
     end
 end
 
 -- Prints the given message with printf if DEBUG_GARRISON is enabled
 local function debugLogf(msg, ...)
-    if xi.settings.main.DEBUG_GARRISON then
+    if enableDebugPrints then
         printf("[Garrison]: " .. msg, ...)
     end
 end
 
 -- Shows the given server message to all players if DEBUG_GARRISON is enabled
 local function debugPrintToPlayers(players, msg)
-    if xi.settings.main.DEBUG_GARRISON then
+    if enableDebugPrints then
         for _, player in pairs(players) do
             player:PrintToPlayer(msg)
         end
     end
 end
+
+-----------------------------------
+-- Local Utilities.
+-----------------------------------
 
 -- Sends a message packet to all players
 local function messagePlayers(npc, players, msg)
