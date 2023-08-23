@@ -11,8 +11,8 @@ xi.events.mogBonanza.entities = xi.events.mogBonanza.entities or {}
 
 local localSettings =
 {
-    PEARL_COST            = 200000, -- NOTE: This number is hardcoded in the event
-    MAX_PEARLS            = 1,
+    PEARL_COST            = 300000, -- NOTE: This number is hardcoded in the event
+    MAX_PEARLS            = 3,
     DISABLE_PRIMEVAL_BREW = 1,      -- 0 will turn on the prank the moogle shows when purchasing
 
     -- 0x55: New Year's Nomad Mog Bonanza 2021
