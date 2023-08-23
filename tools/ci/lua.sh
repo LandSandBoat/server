@@ -117,9 +117,6 @@ global_objects=(
     handleNinjutsuDebuff
     handleThrenody
     isValidHealTarget
-    takeAbilityDamage
-
-    AbilityFinalAdjustments
 
     TPMOD_NONE
     TPMOD_CHANCE
