@@ -4,7 +4,6 @@
 -- !pos 70 -1.5 140 27
 -----------------------------------
 local ID = require('scripts/zones/Phomiuna_Aqueducts/IDs')
-require('scripts/globals/items')
 require('scripts/globals/npc_util')
 -----------------------------------
 local entity = {}

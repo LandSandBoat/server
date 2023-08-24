@@ -3,7 +3,6 @@
 -- Adaman Bullet Pouch
 -- When used, you will obtain one stack of Adaman Bullets
 -----------------------------------
-require("scripts/globals/items")
 require("scripts/globals/msg")
 -----------------------------------
 local itemObject = {}

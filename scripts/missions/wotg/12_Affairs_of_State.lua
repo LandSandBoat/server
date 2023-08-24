@@ -6,7 +6,6 @@
 -- Velda-Galda : !pos 138.631 -2.112 61.658 94
 -- Radford     : !pos -205.303 -8.000 26.874 87
 -----------------------------------
-require('scripts/globals/keyitems')
 require('scripts/globals/missions')
 require('scripts/globals/interaction/mission')
 require('scripts/globals/zone')

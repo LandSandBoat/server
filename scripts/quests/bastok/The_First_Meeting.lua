@@ -5,8 +5,6 @@
 -- Oggbi         : !pos -159 -7 5 236
 -- Hide Flap (2) : !pos -124 3 -43 149
 -----------------------------------
-require('scripts/globals/items')
-require('scripts/globals/keyitems')
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
 require('scripts/globals/utils')

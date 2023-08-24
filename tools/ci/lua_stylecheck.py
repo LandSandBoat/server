@@ -28,9 +28,11 @@ deprecated_functions = [
 ]
 
 deprecated_requires = [
+    "scripts/globals/items",
     "scripts/globals/keyitems",
-    "scripts/globals/status",
+    "scripts/globals/loot",
     "scripts/globals/settings",
+    "scripts/globals/status",
     "scripts/enum",
 ]
 

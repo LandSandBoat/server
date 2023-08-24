@@ -5,7 +5,6 @@
 -- Dauperiat !gotoid 17723525
 -- Halver !gotoid 17731591
 -----------------------------------
-require('scripts/globals/items')
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
 require('scripts/globals/zone')

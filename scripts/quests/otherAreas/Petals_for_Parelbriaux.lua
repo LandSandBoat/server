@@ -7,8 +7,6 @@
 -- Ondieulix   : !pos 6 -25 65
 -- ???         : !pos -210 -15 274
 -----------------------------------
-require('scripts/globals/items')
-require('scripts/globals/keyitems')
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
 require('scripts/globals/titles')

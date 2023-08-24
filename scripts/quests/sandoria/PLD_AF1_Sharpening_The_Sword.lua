@@ -6,7 +6,6 @@
 -- Sobane: !gotoid 17719322
 -- Stalagmite: !gotoid 17568175
 -----------------------------------
-require('scripts/globals/items')
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
 require('scripts/globals/interaction/quest')

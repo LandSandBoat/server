@@ -4,8 +4,6 @@
 -- Log ID: 3, Quest ID: 91
 -- Faursel : !pos 37.985 3.118 -45.208 245
 -----------------------------------
-require('scripts/globals/items')
-require('scripts/globals/keyitems')
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
 require('scripts/globals/teleports')

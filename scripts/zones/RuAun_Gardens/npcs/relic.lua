@@ -4,7 +4,6 @@
 -- !pos -241 -12 332 130
 -----------------------------------
 local ID = require("scripts/zones/RuAun_Gardens/IDs")
-require("scripts/globals/items")
 require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}

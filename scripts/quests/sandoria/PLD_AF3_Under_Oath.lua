@@ -10,7 +10,6 @@
 -- Village Well: !pos -34 3 -219 149
 -- Ailbeche: !gotoid 17723401
 -----------------------------------
-require('scripts/globals/items')
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
 require('scripts/globals/interaction/quest')

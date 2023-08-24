@@ -4,7 +4,6 @@
 -- Breaks up a Heavy Metal Pouch
 -----------------------------------
 require("scripts/globals/msg")
-require("scripts/globals/items")
 -----------------------------------
 local itemObject = {}
 

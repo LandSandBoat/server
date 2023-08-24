@@ -7,7 +7,6 @@
 -- Outpost Gate !pos
 -- ???          !pos
 -----------------------------------
-require('scripts/globals/items')
 require('scripts/globals/quests')
 require("scripts/globals/missions")
 require('scripts/globals/zone')

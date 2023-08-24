@@ -4,7 +4,6 @@
 -- Turn into a stack of fire crystals
 -----------------------------------
 require("scripts/globals/msg")
-require("scripts/globals/items")
 -----------------------------------
 local itemObject = {}
 

@@ -2,7 +2,6 @@
 -- Custom Treasure Chest System
 -----------------------------------
 require("modules/module_utils")
-require("scripts/globals/items")
 require("scripts/globals/npc_util")
 local customUtil = require("modules/custom/content/custom_util")
 -----------------------------------

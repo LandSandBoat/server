@@ -6,7 +6,6 @@
 -- Zexu      : !pos 31.511 -9.001 23.496 249
 -- Celestina : !pos -37.624 -16.050 75.681 249
 -----------------------------------
-require('scripts/globals/items')
 require('scripts/globals/quests')
 require('scripts/globals/zone')
 require('scripts/globals/interaction/quest')

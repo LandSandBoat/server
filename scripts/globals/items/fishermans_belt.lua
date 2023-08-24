@@ -8,7 +8,6 @@
 -- Duration: 2 Earth Hours
 -- Fishing Skill +2
 -----------------------------------
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

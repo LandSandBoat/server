@@ -4,7 +4,6 @@
 local ID = require('scripts/zones/Xarcabard/IDs')
 require('scripts/quests/i_can_hear_a_rainbow')
 require('scripts/globals/conquest')
-require('scripts/globals/keyitems')
 require('scripts/globals/teleports')
 require('scripts/globals/utils')
 require('scripts/globals/zone')

@@ -6,8 +6,6 @@
 -- Mhaura,  Take,    !pos 20.616  -8.000 69.757 249
 -- Selbina, Valgeir, !pos 57.496 -15.273 20.229 248
 -----------------------------------
-require('scripts/globals/items')
-require('scripts/globals/keyitems')
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
 require('scripts/globals/titles')

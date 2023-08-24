@@ -9,7 +9,6 @@
 -- Corroded Door  : !pos -385.602 21.970 456.359 90
 -----------------------------------
 require('scripts/globals/interaction/quest')
-require('scripts/globals/items')
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
 require('scripts/globals/titles')

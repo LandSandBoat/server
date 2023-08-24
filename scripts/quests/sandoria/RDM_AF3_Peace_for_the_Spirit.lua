@@ -9,7 +9,6 @@
 -- Dry Fountain !gotoid 17613243
 -- Oaken Box !gotoid 17596815
 -----------------------------------
-require('scripts/globals/items')
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
 require('scripts/globals/titles')

@@ -4,7 +4,6 @@
 -- Log ID: 1, Quest ID: 46
 -- Yazan : !pos -20.06 -3.3 24.471 236
 -----------------------------------
-require('scripts/globals/items')
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
 require('scripts/globals/titles')

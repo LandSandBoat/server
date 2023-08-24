@@ -2,7 +2,6 @@
 -- ID: 19001
 -- Item: Gastraphetes
 -----------------------------------
-require("scripts/globals/items")
 require("scripts/globals/msg")
 require("scripts/globals/npc_util")
 -----------------------------------

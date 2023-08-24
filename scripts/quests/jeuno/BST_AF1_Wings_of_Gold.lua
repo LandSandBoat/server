@@ -7,7 +7,6 @@
 -- MIDDLE_DELKFUTTS_TOWER: !gotoid 17420676
 
 -----------------------------------
-require('scripts/globals/items')
 require('scripts/globals/quests')
 require('scripts/globals/zone')
 require('scripts/globals/interaction/quest')

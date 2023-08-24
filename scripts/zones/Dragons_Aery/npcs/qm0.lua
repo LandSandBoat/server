@@ -5,7 +5,6 @@
 -- !pos -81 32 2 178
 -----------------------------------
 local ID = require("scripts/zones/Dragons_Aery/IDs")
-require('scripts/globals/items')
 require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}

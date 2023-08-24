@@ -3,7 +3,6 @@
 -- Creek Top +1
 -- Dispense: Berry Snowcone
 -----------------------------------
-require("scripts/globals/items")
 require("scripts/globals/msg")
 -----------------------------------
 local itemObject = {}

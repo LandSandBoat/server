@@ -1,7 +1,6 @@
 -----------------------------------
 -- Seasonal Events Handler
 -----------------------------------
------------------------------------
 xi = xi or {}
 xi.events = xi.events or {}
 xi.events.handler = xi.events.handler or {}

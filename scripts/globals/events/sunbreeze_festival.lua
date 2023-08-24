@@ -1,7 +1,6 @@
 ------------------------------------
 -- Starlight Celebration
 ------------------------------------
-------------------------------------
 xi = xi or {}
 xi.events = xi.events or {}
 xi.events.sunbreeze_festival = xi.events.sunbreeze_festival or {}

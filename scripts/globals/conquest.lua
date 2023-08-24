@@ -3,7 +3,6 @@
 -----------------------------------
 require("scripts/globals/extravaganza")
 require("scripts/globals/garrison")
-require("scripts/globals/items")
 require("scripts/globals/teleports")
 require("scripts/globals/missions")
 require("scripts/globals/npc_util")

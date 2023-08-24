@@ -8,8 +8,6 @@
 -- qm2 Leeches: !gotoid 17486241
 -- Ryoma: !gotoid 17809466
 -----------------------------------
-require('scripts/globals/items')
-require('scripts/globals/keyitems')
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
 require('scripts/globals/zone')

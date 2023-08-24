@@ -3,7 +3,6 @@
 -- Item Effect: +5% MP
 -- Duration 3 Minutes
 -----------------------------------
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

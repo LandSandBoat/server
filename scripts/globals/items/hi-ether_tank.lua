@@ -4,7 +4,6 @@
 -- When used, you will obtain one hi-ether
 -----------------------------------
 require("scripts/globals/msg")
-require("scripts/globals/items")
 -----------------------------------
 local itemObject = {}
 

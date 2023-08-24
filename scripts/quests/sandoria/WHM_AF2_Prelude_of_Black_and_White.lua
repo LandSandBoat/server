@@ -4,7 +4,6 @@
 -- Prince Regent's Rm: !gotoid 17731625
 -- Narcheral: !gotoid 17723585
 -----------------------------------
-require('scripts/globals/items')
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
 require('scripts/globals/interaction/quest')

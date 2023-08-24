@@ -2,7 +2,6 @@
 -- Garrison Data
 -----------------------------------
 require("scripts/globals/zone")
-require("scripts/globals/items")
 -----------------------------------
 xi = xi or {}
 xi.garrison = xi.garrison or {}

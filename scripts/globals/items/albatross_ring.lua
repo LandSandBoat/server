@@ -6,7 +6,6 @@
 -- Bonus: +30s to Fishing Stamina
 -- Duration: 20:00 min
 -----------------------------------------
------------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

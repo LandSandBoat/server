@@ -3,8 +3,6 @@
 -- Log ID: 6, Quest ID: 93
 -- Naja Salaheem !pos 26 -8 -45.5 50
 -----------------------------------
-require('scripts/globals/keyitems')
-require('scripts/globals/items')
 require('scripts/globals/quests')
 require('scripts/globals/npc_util')
 require('scripts/globals/interaction/quest')

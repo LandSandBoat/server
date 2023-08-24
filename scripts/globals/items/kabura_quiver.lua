@@ -4,7 +4,6 @@
 -- When used, you will obtain one stack of Kabura Arrows
 -----------------------------------
 require("scripts/globals/msg")
-require("scripts/globals/items")
 -----------------------------------
 local itemObject = {}
 

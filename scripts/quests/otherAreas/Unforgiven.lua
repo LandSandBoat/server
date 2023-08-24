@@ -6,7 +6,6 @@
 -- Pradiulot !pos -20.814 -22 8.399 26
 -- ???       !pos 110.714 -40.856 -53.154 26
 -----------------------------------
-require('scripts/globals/keyitems')
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
 require('scripts/globals/zone')

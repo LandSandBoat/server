@@ -10,8 +10,6 @@
 -- Hakkuru-Rinkuru     : !pos -111 -4 101 240
 -- Gate: Magical Gizmo : !pos -291 0 -659 194
 require('scripts/globals/interaction/mission')
-require('scripts/globals/items')
-require('scripts/globals/keyitems')
 require('scripts/globals/missions')
 require('scripts/globals/npc_util')
 require('scripts/globals/zone')

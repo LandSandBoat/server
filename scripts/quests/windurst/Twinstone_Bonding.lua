@@ -5,7 +5,6 @@
 -- Gioh Ajirhri : !pos 107 -5 174 241
 -----------------------------------
 require('scripts/globals/interaction/quest')
-require("scripts/globals/items")
 require("scripts/globals/npc_util")
 require('scripts/globals/quests')
 require('scripts/globals/titles')
