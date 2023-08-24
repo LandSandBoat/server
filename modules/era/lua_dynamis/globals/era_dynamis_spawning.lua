@@ -602,7 +602,7 @@ xi.dynamis.nonStandardDynamicSpawn = function(mobIndex, oMob, forceLink, zoneID,
             ["onMobSpawn"] = { function(mob) xi.dynamis.setNightmareStats(mob) end },
             ["onMobEngaged"] = { function(mob, target) end },
             ["onMobFight"] = { function(mob) end },
-            ["onMobRoam"] = { function(mob) xi.dynamis.mobOnRoam(mob) end },
+            ["onMobRoam"] = { function(mob) end },
             ["mixins"] = {  }
         },
         ["Beastmen"] =
