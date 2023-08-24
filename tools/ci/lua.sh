@@ -93,7 +93,6 @@ global_objects=(
     adjustForTarget
     calculateDuration
     calculateMagicDamage
-    calculatePotency
     canOverwrite
     doEnspell
     finalMagicAdjustments
