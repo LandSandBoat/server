@@ -4,7 +4,6 @@
 -----------------------------------
 require("scripts/globals/appraisal")
 require("scripts/globals/assault")
-require("scripts/globals/items")
 -----------------------------------
 local entity = {}
 

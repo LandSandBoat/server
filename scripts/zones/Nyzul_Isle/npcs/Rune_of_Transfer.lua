@@ -4,7 +4,6 @@
 -- Notes: Displays currentFloor floor objective, activates when objective completed.
 -----------------------------------
 local ID = require("scripts/zones/Nyzul_Isle/IDs")
-require("scripts/globals/keyitems")
 require("scripts/globals/nyzul")
 require("scripts/globals/utils")
 require("scripts/zones/Nyzul_Isle/instances/nyzul_isle_investigation")

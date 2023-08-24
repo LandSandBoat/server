@@ -6,7 +6,6 @@
 -- Bonus: The effect of the ring dramatically increases the rate of stamina drain of a fish while you try to reel it in.
 -- Duration: 20:00 min
 -----------------------------------------
------------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

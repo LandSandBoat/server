@@ -5,7 +5,6 @@
 -- !pos -15.193 0.000 31.356 53
 -----------------------------------
 require("scripts/globals/shop")
-require("scripts/globals/keyitems")
 local ID = require("scripts/zones/Nashmau/IDs")
 -----------------------------------
 local entity = {}

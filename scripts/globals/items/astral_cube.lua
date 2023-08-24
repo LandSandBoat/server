@@ -3,7 +3,6 @@
 -- Item: Astral Cube
 -- Item Effect: Grant Astral cube key item
 -----------------------------------
-require("scripts/globals/keyitems")
 require("scripts/globals/msg")
 -----------------------------------
 local itemObject = {}

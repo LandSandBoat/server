@@ -3,7 +3,6 @@
 --  NPC: Zon-Fobun
 -- !pos -241.293 -3 63.406 235
 -----------------------------------
-require("scripts/globals/keyitems")
 require("scripts/globals/npc_util")
 require("scripts/globals/quests")
 require("scripts/globals/pathfind")

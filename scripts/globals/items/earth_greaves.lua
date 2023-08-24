@@ -4,7 +4,6 @@
 -- Item Effect: Grants Wyvren Stoneskin (200)
 -- Duration: Not stated on wiki
 -----------------------------------------
------------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

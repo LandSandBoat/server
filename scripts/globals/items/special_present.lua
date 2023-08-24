@@ -5,7 +5,6 @@
 -----------------------------------
 require('scripts/globals/npc_util')
 require("scripts/globals/msg")
-require("scripts/globals/items")
 -----------------------------------
 local itemObject = {}
 

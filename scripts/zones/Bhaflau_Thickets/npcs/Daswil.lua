@@ -4,7 +4,6 @@
 -- Type: Assault
 -- !pos -208.720 -12.889 -779.713 52
 -----------------------------------
-require("scripts/globals/keyitems")
 require("scripts/globals/missions")
 require("scripts/globals/quests")
 local ID = require("scripts/zones/Bhaflau_Thickets/IDs")

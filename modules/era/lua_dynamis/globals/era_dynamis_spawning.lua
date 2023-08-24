@@ -5,7 +5,6 @@
 --       Module Required Scripts          --
 --------------------------------------------
 require("scripts/globals/battlefield")
-require("scripts/globals/keyitems")
 require("scripts/globals/missions")
 require("scripts/globals/npc_util")
 require("scripts/globals/titles")

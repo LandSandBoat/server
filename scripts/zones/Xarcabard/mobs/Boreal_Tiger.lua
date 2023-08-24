@@ -5,8 +5,6 @@
 -- !pos 341 -29 370 112
 -----------------------------------
 local ID = require("scripts/zones/Xarcabard/IDs")
-mixins = { require("scripts/mixins/job_special") }
-require("scripts/globals/keyitems")
 require("scripts/globals/quests")
 -----------------------------------
 local entity = {}

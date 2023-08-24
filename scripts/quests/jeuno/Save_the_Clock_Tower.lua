@@ -4,8 +4,6 @@
 -- Log ID: 3, Quest ID: 3
 -- Derrick : !pos -32 -1 -7 245
 -----------------------------------
-require('scripts/globals/items')
-require('scripts/globals/keyitems')
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
 require('scripts/globals/titles')

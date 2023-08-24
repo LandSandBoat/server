@@ -4,8 +4,6 @@
 -- Log ID: 3, Quest ID: 25
 -- Imasuke : !pos -165 11 94 246
 -----------------------------------
-require('scripts/globals/items')
-require('scripts/globals/keyitems')
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
 require('scripts/globals/titles')

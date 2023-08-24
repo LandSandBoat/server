@@ -4,8 +4,6 @@
 -- Log ID: 5, Quest ID: 162
 -- Cermet Headstone : !pos 235 0 280 121
 -----------------------------------
-require('scripts/globals/items')
-require('scripts/globals/keyitems')
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
 require('scripts/globals/titles')

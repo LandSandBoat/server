@@ -1,6 +1,5 @@
 require('scripts/globals/abyssea')
 require("scripts/globals/gear_sets")
-require("scripts/globals/keyitems")
 require("scripts/globals/quests")
 require("scripts/globals/teleports")
 require("scripts/globals/titles")

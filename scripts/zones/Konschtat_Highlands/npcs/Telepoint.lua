@@ -4,8 +4,6 @@
 -- !pos 220.000 19.104 300.000 106
 -----------------------------------
 local ID = require("scripts/zones/Konschtat_Highlands/IDs")
-require("scripts/globals/items")
-require("scripts/globals/keyitems")
 require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}

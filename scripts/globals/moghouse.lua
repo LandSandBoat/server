@@ -1,7 +1,6 @@
 -----------------------------------
 -- Mog House related functions
 -----------------------------------
-require('scripts/globals/items')
 require('scripts/globals/utils')
 require("scripts/globals/npc_util")
 require("scripts/globals/quests")

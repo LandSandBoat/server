@@ -4,7 +4,6 @@
 -- Involved in quest "An Explorer's Footsteps"
 -- !pos 450.741 2.110 -290.736 119
 -----------------------------------
-require("scripts/globals/items")
 require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}

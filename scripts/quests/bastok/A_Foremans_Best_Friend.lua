@@ -4,8 +4,6 @@
 -- Log ID: 1, Quest ID: 9
 -- Gudav : !pos -3.286 1.407 50.591 236
 -----------------------------------
-require('scripts/globals/items')
-require('scripts/globals/keyitems')
 require('scripts/globals/quests')
 require('scripts/globals/zone')
 require('scripts/globals/interaction/quest')

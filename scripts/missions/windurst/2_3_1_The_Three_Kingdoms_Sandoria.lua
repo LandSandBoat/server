@@ -7,8 +7,6 @@
 -- Warchief Vatgit : !pos -74.960 -34.692 256.968 140
 -- Kasaroro        : !pos -72 -3 34 231
 -----------------------------------
-require('scripts/globals/items')
-require('scripts/globals/keyitems')
 require('scripts/globals/missions')
 require('scripts/globals/npc_util')
 require('scripts/globals/titles')

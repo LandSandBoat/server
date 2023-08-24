@@ -4,7 +4,6 @@
 -- Nouveil !pos 123 0 106 231
 -- Cheval_River !pos 223 -58 426 101
 -----------------------------------
-require('scripts/globals/items')
 require('scripts/globals/quests')
 require('scripts/globals/interaction/quest')
 require('scripts/globals/npc_util')

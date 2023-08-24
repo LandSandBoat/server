@@ -6,8 +6,6 @@
 -- Tiger Bones: !pos 666 -8 -379 120
 -- Keeping Old Sabertooth and Tiger Bones in separate lua's due to special functions.
 -----------------------------------
-require('scripts/globals/items')
-require("scripts/globals/keyitems")
 require('scripts/globals/quests')
 require('scripts/globals/zone')
 require('scripts/globals/interaction/quest')

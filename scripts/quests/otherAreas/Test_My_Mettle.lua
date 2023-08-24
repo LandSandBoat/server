@@ -5,7 +5,6 @@
 -- Devean        : !pos 39.858 -14.558 40.009 248
 -- power_sandals : !additem 13012
 -----------------------------------
-require('scripts/globals/items')
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
 require('scripts/globals/zone')

@@ -4,7 +4,6 @@
 -- Log ID: 1, Quest ID: 32
 -- Goraow : !pos 38 .1 14 234
 -----------------------------------
-require('scripts/globals/items')
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
 require('scripts/globals/zone')

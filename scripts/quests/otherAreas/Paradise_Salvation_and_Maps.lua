@@ -4,8 +4,6 @@
 -- Log ID: 4, Quest ID: 68
 -- Nivorajean   : !pos 15.890 -22 13.322
 -----------------------------------
-require('scripts/globals/items')
-require('scripts/globals/keyitems')
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
 require('scripts/globals/treasure')

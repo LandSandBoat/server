@@ -5,7 +5,6 @@
 -- Rosel    : !pos 69.895 0 41.073 230
 -- Guilerme : !pos -4.5 0 99 231
 -----------------------------------
-require('scripts/globals/keyitems')
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
 require('scripts/globals/titles')

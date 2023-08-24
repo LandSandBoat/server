@@ -5,7 +5,6 @@
 -- Involved in Missions: 3-1, 5-2, 8-2
 -- !pos -38 -3 73 233
 -----------------------------------
-require("scripts/globals/keyitems")
 require("scripts/globals/missions")
 require("scripts/globals/quests")
 require("scripts/globals/titles")

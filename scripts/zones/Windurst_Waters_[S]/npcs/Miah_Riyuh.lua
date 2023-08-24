@@ -4,7 +4,6 @@
 -- !pos 5.323 -2 37.462 94
 -----------------------------------
 local ID = require("scripts/zones/Windurst_Waters_[S]/IDs")
-require("scripts/globals/keyitems")
 require("scripts/globals/missions")
 require("scripts/globals/quests")
 require("scripts/globals/titles")

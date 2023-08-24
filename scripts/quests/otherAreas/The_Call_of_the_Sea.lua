@@ -7,7 +7,6 @@
 -- Anteurephiaux !pos 74 -24 5
 -- ???           !pos
 -----------------------------------
-require('scripts/globals/items')
 require('scripts/globals/moghouse')
 require('scripts/globals/quests')
 require('scripts/globals/zone')

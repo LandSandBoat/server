@@ -5,7 +5,6 @@
 -----------------------------------
 local ID = require("scripts/zones/Throne_Room/IDs")
 require("scripts/globals/battlefield")
-require("scripts/globals/items")
 require("scripts/globals/zone")
 -----------------------------------
 

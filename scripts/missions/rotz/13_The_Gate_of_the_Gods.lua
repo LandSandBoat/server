@@ -7,7 +7,6 @@
 -- RuAun_Gardens     : !zone 130
 -----------------------------------
 require('scripts/globals/interaction/mission')
-require('scripts/globals/keyitems')
 require('scripts/globals/missions')
 require('scripts/globals/titles')
 require('scripts/globals/zone')

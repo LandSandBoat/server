@@ -5,7 +5,6 @@
 -- Black Mud      : !pos 63.514 7 -0.972 234
 -- Waterfall Base : !pos -217.594 98.644 464.722 106
 -----------------------------------
-require('scripts/globals/items')
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
 require('scripts/globals/titles')

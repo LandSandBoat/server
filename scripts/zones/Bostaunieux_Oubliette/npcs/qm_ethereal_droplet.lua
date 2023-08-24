@@ -4,7 +4,6 @@
 -- Notes: Grants "Ethereal droplet" temporary item.
 -----------------------------------
 local ID = require("scripts/zones/Reisenjima/IDs")
-require("scripts/globals/items")
 -----------------------------------
 
 local entity = {}

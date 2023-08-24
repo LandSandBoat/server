@@ -6,7 +6,6 @@
 -- !pos 70 -24 21 167
 -----------------------------------
 local ID = require("scripts/zones/Bostaunieux_Oubliette/IDs")
-require("scripts/globals/keyitems")
 require("scripts/globals/npc_util")
 require("scripts/globals/pathfind")
 require("scripts/globals/quests")

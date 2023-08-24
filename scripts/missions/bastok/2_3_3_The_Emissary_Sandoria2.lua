@@ -7,8 +7,6 @@
 -- Helaku  : !pos 49 -2 -12 231
 -- Halver  : !pos 2 0.1 0.1 233
 -----------------------------------
-require('scripts/globals/items')
-require('scripts/globals/keyitems')
 require('scripts/globals/missions')
 require('scripts/globals/npc_util')
 require('scripts/globals/titles')

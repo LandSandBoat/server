@@ -1,7 +1,6 @@
 -----------------------------------
 --  Mob: Beorth
 -----------------------------------
-require("scripts/globals/keyitems")
 require("scripts/globals/voidwalker")
 -----------------------------------
 

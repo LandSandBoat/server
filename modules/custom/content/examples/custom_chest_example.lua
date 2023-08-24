@@ -2,7 +2,6 @@
 -- Custom Treasure Chest (Example)
 -----------------------------------
 require("modules/module_utils")
-require("scripts/globals/items")
 local chest = require("modules/custom/content/custom_chest")
 -----------------------------------
 local m = Module:new("custom_chest_example")

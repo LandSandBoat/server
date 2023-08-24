@@ -3,7 +3,6 @@
 -- Seki Shuriken Pouch
 -- When used, you will obtain one stack of Seki Shurikens
 -----------------------------------
-require("scripts/globals/items")
 require("scripts/globals/msg")
 -----------------------------------
 local itemObject = {}

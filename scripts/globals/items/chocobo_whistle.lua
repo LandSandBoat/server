@@ -6,7 +6,6 @@
 --    Can't normally use enchantments when level sync'd below items level so no need to check.
 --    Per wiki, can actually obtain without license, but cannot use, so we DO check that.
 -----------------------------------
-require("scripts/globals/keyitems")
 require("scripts/globals/msg")
 -----------------------------------
 local itemObject = {}

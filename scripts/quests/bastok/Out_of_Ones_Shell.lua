@@ -4,7 +4,6 @@
 -- Log ID: 1, Quest ID: 5
 -- Ronan : !pos 84.712 -8.772 20.301 236
 -----------------------------------
-require('scripts/globals/items')
 require('scripts/globals/quests')
 require('scripts/globals/titles')
 require('scripts/globals/zone')

@@ -3,7 +3,6 @@
 -----------------------------------
 require("scripts/globals/shop")
 require("modules/module_utils")
-require("scripts/globals/items")
 require("scripts/globals/helm")
 
 local m = Module:new("era_helm")

@@ -4,7 +4,6 @@
 --  Log ID: 3, Quest ID: 27
 --  NPC: Bluffnix:  !pos -43 6 -115 245
 -----------------------------------
-require('scripts/globals/items')
 require('scripts/quests/jeuno/helpers')
 -----------------------------------
 local lowerJeunoID = require('scripts/zones/Lower_Jeuno/IDs')

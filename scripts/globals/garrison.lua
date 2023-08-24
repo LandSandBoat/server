@@ -3,7 +3,6 @@
 -----------------------------------
 require('scripts/globals/common')
 require('scripts/globals/garrison_data')
-require('scripts/globals/items')
 require('scripts/globals/mobs')
 require('scripts/globals/npc_util')
 require('scripts/globals/pathfind')

@@ -4,7 +4,6 @@
 -- Starts and Finishes Quest: The Goblin Tailor
 -- !pos -36.010 4.499 -139.714 245
 -----------------------------------
-require("scripts/globals/keyitems")
 require("scripts/globals/npc_util")
 require("scripts/globals/quests")
 -----------------------------------

@@ -4,7 +4,6 @@
 -- Item Effect: Crit Rate +7% **Needs validation**
 -- Duration: 3 Minutes
 -----------------------------------
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

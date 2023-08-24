@@ -4,7 +4,6 @@
 -- Log ID: 0, Quest ID: 26
 -- Pagisalis: !gotoid 17723424
 -----------------------------------
-require('scripts/globals/items')
 require('scripts/globals/quests')
 require('scripts/globals/zone')
 require('scripts/globals/interaction/quest')

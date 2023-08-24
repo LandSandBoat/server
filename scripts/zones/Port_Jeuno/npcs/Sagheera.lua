@@ -4,7 +4,6 @@
 -- !pos -3 0.1 -9 246
 -----------------------------------
 local ID = require("scripts/zones/Port_Jeuno/IDs")
-require("scripts/globals/keyitems")
 require("scripts/globals/npc_util")
 require("scripts/globals/quests")
 require("scripts/globals/utils")

@@ -2,7 +2,6 @@
 -- Beastmen Treasure side quests
 -- https://ffxiclopedia.fandom.com/wiki/Beastmen_Treasure
 -----------------------------------
-require('scripts/globals/keyitems')
 require('scripts/globals/quests')
 require('scripts/globals/zone')
 -----------------------------------

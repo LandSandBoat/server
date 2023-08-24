@@ -4,7 +4,6 @@
 -- !pos 660 -27 328 61
 -----------------------------------
 local ID = require("scripts/zones/Mount_Zhayolm/IDs")
-require("scripts/globals/keyitems")
 -----------------------------------
 local entity = {}
 

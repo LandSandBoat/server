@@ -4,8 +4,6 @@
 -- Log ID: 3, Quest ID: 86
 -- Rulude: !pos -0.3 3.0 23.1 243
 -----------------------------------
-require('scripts/globals/items')
-require('scripts/globals/keyitems')
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
 require('scripts/globals/zone')

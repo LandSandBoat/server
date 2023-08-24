@@ -5,7 +5,6 @@
 -- !addmission 5 51
 -- Lion Springs Door : !pos 96 0 106 80
 -----------------------------------
-require('scripts/globals/keyitems')
 require('scripts/globals/missions')
 require('scripts/globals/interaction/mission')
 require('scripts/globals/zone')

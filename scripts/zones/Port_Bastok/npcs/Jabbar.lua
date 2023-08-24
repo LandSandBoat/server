@@ -7,7 +7,6 @@
 -----------------------------------
 require("scripts/globals/shop")
 require("scripts/globals/quests")
-require("scripts/globals/keyitems")
 local ID = require("scripts/zones/Port_Bastok/IDs")
 -----------------------------------
 local entity = {}

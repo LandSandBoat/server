@@ -4,7 +4,6 @@
 -- Log ID: 0, Quest ID: 8
 -- Raimbroy : !pos -141 -3 34.6 230
 -----------------------------------
-require('scripts/globals/items')
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
 require('scripts/globals/titles')

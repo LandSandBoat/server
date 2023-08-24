@@ -3,7 +3,6 @@
 --  NPC: Memory Flux 4th floor
 -----------------------------------
 local ID = require("scripts/zones/Promyvion-Mea/IDs")
-require("scripts/globals/keyitems")
 require("scripts/globals/quests")
 -----------------------------------
 local entity = {}

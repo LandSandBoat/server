@@ -3,7 +3,6 @@
 -- desc: depletes a HELM node and prints the results
 -----------------------------------
 require("scripts/globals/helm")
-require("scripts/globals/items")
 -----------------------------------
 
 cmdprops =
@@ -46,6 +45,7 @@ function onTrigger(player)
         else
             items[item] = items[item] + 1
         end
+
         breaks = breaks + xi.helm.doesToolBreak(player, helmType)
 
         local uses = (target:getLocalVar("uses") - 1) % 4
@@ -71,5 +71,6 @@ Breaks: %d
     else
         printStr = printStr.."Gathered no items."
     end
+
     player:PrintToPlayer(printStr)
 end

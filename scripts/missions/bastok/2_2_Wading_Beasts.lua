@@ -9,7 +9,6 @@
 -- Rashid  : !pos -8.444 -2 -123.575 234
 -- Alois   : !pos 96 -20 14 237
 -----------------------------------
-require('scripts/globals/items')
 require('scripts/globals/missions')
 require('scripts/globals/npc_util')
 require('scripts/globals/interaction/mission')

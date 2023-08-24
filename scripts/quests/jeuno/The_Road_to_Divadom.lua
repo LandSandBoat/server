@@ -6,7 +6,6 @@
 -- Rhea Myuliah    : !pos -56.220 -1 101.805 244
 -- Glowing Pebbles : !pos 104.2 4.1 443.6 82
 require('scripts/globals/interaction/quest')
-require('scripts/globals/items')
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
 require('scripts/globals/titles')

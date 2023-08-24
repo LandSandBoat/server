@@ -4,7 +4,6 @@
 -- Type: Map Vendor
 -- !pos -103.834 -0.65 -50.226 257
 -----------------------------------
-require('scripts/globals/keyitems')
 require('scripts/globals/npc_util')
 require('scripts/globals/utils')
 -----------------------------------

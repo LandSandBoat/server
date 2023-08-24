@@ -5,10 +5,8 @@
 -----------------------------------
 require('scripts/globals/interaction/quest')
 require('scripts/globals/weaponskillids')
-require('scripts/globals/keyitems')
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
-require('scripts/globals/items')
 -----------------------------------
 local bostaunieuxID = require('scripts/zones/Bostaunieux_Oubliette/IDs')
 local denOfRancorID = require('scripts/zones/Den_of_Rancor/IDs')

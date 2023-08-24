@@ -4,7 +4,6 @@
 -- !pos -173 26 252 176
 -----------------------------------
 local ID = require("scripts/zones/Sea_Serpent_Grotto/IDs")
-require("scripts/globals/keyitems")
 require("scripts/globals/quests")
 -----------------------------------
 local entity = {}

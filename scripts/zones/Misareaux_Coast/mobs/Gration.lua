@@ -4,7 +4,6 @@
 -----------------------------------
 local ID = require("scripts/zones/Misareaux_Coast/IDs")
 mixins = { require("scripts/mixins/fomor_hate") }
-require("scripts/globals/items")
 -----------------------------------
 local entity = {}
 

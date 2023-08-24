@@ -4,7 +4,6 @@
 --  Notes: Invokes collective hatred to spite a single target.
 --   Damage done is 5x the amount of tonberries you have killed! For NM's using this it is 50 x damage.
 -----------------------------------
-require("scripts/globals/items")
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

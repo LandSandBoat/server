@@ -3,7 +3,6 @@
 --  NPC: Omiro-Zamiro
 -- !pos 3 7 -54 246
 -----------------------------------
-require("scripts/globals/keyitems")
 -----------------------------------
 local entity = {}
 

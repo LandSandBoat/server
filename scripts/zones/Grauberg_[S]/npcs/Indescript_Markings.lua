@@ -4,7 +4,6 @@
 -- Type: Quest
 -----------------------------------
 local ID = require("scripts/zones/Grauberg_[S]/IDs")
-require("scripts/globals/keyitems")
 require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}

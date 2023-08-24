@@ -4,7 +4,6 @@
 --  Quest: Peace for the Spirit
 -----------------------------------
 require("scripts/globals/regimes")
-require("scripts/globals/keyitems")
 -----------------------------------
 local entity = {}
 

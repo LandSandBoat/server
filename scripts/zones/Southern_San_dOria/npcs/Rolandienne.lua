@@ -5,7 +5,6 @@
 -----------------------------------
 local ID = require("scripts/zones/Southern_San_dOria/IDs")
 require("scripts/globals/sparkshop")
-require("scripts/globals/keyitems")
 require("scripts/globals/msg")
 require("scripts/globals/roe")
 -----------------------------------

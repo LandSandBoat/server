@@ -3,7 +3,6 @@
 --  NPC: Green Thumb Moogle
 -----------------------------------
 local ID = require("scripts/zones/Mog_Garden/IDs")
-require('scripts/globals/items')
 require("scripts/globals/moghouse")
 require("scripts/globals/shop")
 -----------------------------------

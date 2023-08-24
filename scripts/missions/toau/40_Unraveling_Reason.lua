@@ -5,10 +5,8 @@
 -- !addmission 4 39
 -- Pherimociel : !pos -31.627 1.002 67.956 243
 -----------------------------------
-require('scripts/globals/items')
 require('scripts/globals/missions')
 require('scripts/globals/npc_util')
-require('scripts/globals/keyitems')
 require('scripts/globals/interaction/mission')
 require('scripts/globals/zone')
 -----------------------------------

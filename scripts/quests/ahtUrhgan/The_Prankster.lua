@@ -3,7 +3,6 @@
 -- Ahaadah, Whitegate, !pos 93 -68 -6 106
 -- qm4, Bhaflau Thicket, !pos 460 -14 256
 -----------------------------------
-require('scripts/globals/items')
 require('scripts/globals/quests')
 require('scripts/globals/npc_util')
 require('scripts/globals/zone')

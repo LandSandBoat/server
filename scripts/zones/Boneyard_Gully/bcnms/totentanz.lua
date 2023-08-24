@@ -4,7 +4,6 @@
 -- !addkeyitem MIASMA_FILTER
 -----------------------------------
 require("scripts/globals/battlefield")
-require("scripts/globals/keyitems")
 -----------------------------------
 local battlefieldObject = {}
 

@@ -3,7 +3,6 @@
 --  Mob: Wanzo-Unzozo
 -- Type: Quest mob (Escort for Hire - Windurst)
 -----------------------------------
-require("scripts/globals/keyitems")
 require("scripts/globals/pathfind")
 require("scripts/globals/quests")
 -----------------------------------

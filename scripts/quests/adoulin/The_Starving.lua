@@ -4,7 +4,6 @@
 -- !addquest 9 84
 -- Westerly Breeze : !pos 62 32 123 256
 -----------------------------------
-require('scripts/globals/items')
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
 require('scripts/globals/interaction/quest')

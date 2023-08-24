@@ -8,8 +8,6 @@
 -- complete this quest even with no fame.
 -----------------------------------
 local ID = require("scripts/zones/Selbina/IDs")
-require("scripts/globals/items")
-require("scripts/globals/keyitems")
 require("scripts/globals/missions")
 require("scripts/globals/npc_util")
 require("scripts/globals/quests")

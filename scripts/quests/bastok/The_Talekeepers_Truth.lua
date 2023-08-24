@@ -6,8 +6,6 @@
 -- Deidogg       : !pos -13 7 29 234
 -- qm_talekeeper : !pos 15 -31 -94 143
 -----------------------------------
-require('scripts/globals/items')
-require('scripts/globals/keyitems')
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
 require('scripts/globals/utils')

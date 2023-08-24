@@ -4,7 +4,6 @@
 -- Log ID: 4, Quest ID: 100
 -- Moogle : (Mog House, Home Nation)
 -----------------------------------
-require('scripts/globals/items')
 require('scripts/globals/moghouse')
 require('scripts/globals/quests')
 require('scripts/globals/zone')

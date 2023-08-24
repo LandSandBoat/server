@@ -5,7 +5,6 @@
 -- !zone 231
 -----------------------------------
 require("scripts/globals/titles")
-require("scripts/globals/keyitems")
 require("scripts/globals/shop")
 require("scripts/globals/quests")
 local ID = require("scripts/zones/Northern_San_dOria/IDs")

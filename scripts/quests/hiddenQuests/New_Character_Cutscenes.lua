@@ -3,7 +3,6 @@
 -----------------------------------
 require('scripts/globals/cutscenes')
 require('scripts/globals/interaction/hidden_quest')
-require('scripts/globals/items')
 require('scripts/globals/npc_util')
 require('scripts/globals/zone')
 -----------------------------------

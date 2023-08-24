@@ -11,7 +11,6 @@
 -- Rolanberry Fields [S]    : !pos -198 8 360 91
 -- Sauromugue Champaign [S] : !pos 369 8 -227 98
 -----------------------------------
-require('scripts/globals/keyitems')
 require('scripts/globals/missions')
 require('scripts/globals/rhapsodies')
 require('scripts/globals/zone')

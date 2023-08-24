@@ -5,7 +5,6 @@
 -----------------------------------
 local ID = require("scripts/zones/Bastok_Markets/IDs")
 require("scripts/globals/sparkshop")
-require("scripts/globals/keyitems")
 require("scripts/globals/msg")
 require("scripts/globals/roe")
 -----------------------------------

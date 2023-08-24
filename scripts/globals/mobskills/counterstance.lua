@@ -2,7 +2,6 @@
 -- Mobskill: Counterstance
 -- Increases chance to counter but lowers defense.
 -----------------------------------
------------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(mob, target, skill)

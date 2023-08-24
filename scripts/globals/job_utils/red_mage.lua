@@ -1,7 +1,6 @@
 -----------------------------------
 -- Red Mage Job Utilities
 -----------------------------------
-require('scripts/globals/items')
 require("scripts/globals/msg")
 require("scripts/globals/utils")
 -----------------------------------

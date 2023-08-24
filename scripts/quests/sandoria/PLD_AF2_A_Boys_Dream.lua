@@ -9,8 +9,6 @@
 -- Zaldon: !gotoid 17793047
 -- Prince Trion Room !pos -38 -3 73 233
 -----------------------------------
-require('scripts/globals/items')
-require("scripts/globals/keyitems")
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
 require('scripts/globals/interaction/quest')
