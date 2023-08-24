@@ -2,7 +2,6 @@
 --      Tavnazia Era Module      --
 -----------------------------------
 require("scripts/globals/zone")
-require("scripts/globals/spell_data")
 require("scripts/globals/utils")
 require("scripts/globals/dynamis")
 -----------------------------------

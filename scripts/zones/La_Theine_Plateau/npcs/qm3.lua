@@ -4,7 +4,6 @@
 -- Involved in Quest: I Can Hear A Rainbow, Waking the Beast
 -----------------------------------
 local ID = require("scripts/zones/La_Theine_Plateau/IDs")
-require("scripts/globals/spell_data")
 require("scripts/globals/npc_util")
 require("scripts/globals/quests")
 require("scripts/globals/titles")

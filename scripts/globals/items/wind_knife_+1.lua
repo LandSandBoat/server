@@ -3,8 +3,6 @@
 -- wind_knife_+1
 -- Enchantment: Casts Aero
 -----------------------------------
-require("scripts/globals/spell_data")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)
