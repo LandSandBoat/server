@@ -432,8 +432,9 @@ local cutscenes =
     RAN_AWAY = 39,
     -- 40: Player gives the chocobo x
     -- 48: Happy to see you
-    HANGS_HEAD_IN_SHAME = 51, -- Hangs its head in shame
-    HAVENT_SEEN_YOU     = 53, -- Haven't seen you around, chocobo is sleeping (dispose of white handkerchief)
+    INTERESTED_IN_YOUR_STORY = 50,
+    HANGS_HEAD_IN_SHAME      = 51, -- Hangs its head in shame
+    HAVENT_SEEN_YOU          = 53, -- Haven't seen you around, chocobo is sleeping (dispose of white handkerchief)
     -- 54: Accept white handkerchief
     CRYING_AT_NIGHT = 69, -- White handkerchief
     -- 70: Chocobo full of energy!
@@ -1629,12 +1630,16 @@ xi.chocoboRaising.onEventUpdateVCSTrainer = function(player, csid, option, npc)
                     -- TODO: Chance to learn skill
                 end
 
+                local storyMask = 0xFFFFFF9C
+
+                chocoState = onRaisingEventPlayout(player, cutscenes.INTERESTED_IN_YOUR_STORY, chocoState)
                 player:updateEventString(chocoState.first_name, chocoState.last_name, chocoState.first_name, chocoState.last_name, 0, 0, 0, 0, 0, 0, 0)
-                player:updateEvent(306, 0, 0xFFFFFF9C, 0, 5, 0, 0, 3)
+                player:updateEvent(getCutsceneWithOffset(player, cutscenes.INTERESTED_IN_YOUR_STORY), 0, storyMask, 0, chocoState.stage, 0, 0, 3)
             end,
 
             [13298] = function() -- Scold the chocobo
                 chocoState = onRaisingEventPlayout(player, cutscenes.HANGS_HEAD_IN_SHAME, chocoState)
+                player:updateEventString(chocoState.first_name, chocoState.last_name, chocoState.first_name, chocoState.last_name, 0, 0, 0, 0, 0, 0, 0)
                 player:updateEvent(getCutsceneWithOffset(player, cutscenes.HANGS_HEAD_IN_SHAME), 0, 0, 0, chocoState.stage, 0, 0, 0)
             end,
 
