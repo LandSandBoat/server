@@ -37,12 +37,8 @@ end
 -- NOTE: This is called after onInstanceZoneIn for the fade in cutscene.
 -- onInstanceZoneIn does not consider event returns.
 zoneObject.onZoneIn = function(player, prevZone)
-    local cs = -1
-
     -- This event is common to all zone in, and is fade from black
-    cs = 51
-
-    return cs
+    return 51
 end
 
 zoneObject.onTriggerAreaEnter = function(player, triggerArea)

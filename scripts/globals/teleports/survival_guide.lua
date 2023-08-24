@@ -96,10 +96,8 @@ xi.survivalGuide.onEventUpdate = function(player, csid, option, npc)
 
         if choice ~= optionMap.TELEPORT_MENU then
             if choice == optionMap.ADD_FAVORITE then
-                local temp = 0
-
                 for x = 1, 9 do
-                    temp = favorites[x]
+                    local temp = favorites[x]
                     favorites[x] = index
                     index = temp
                 end

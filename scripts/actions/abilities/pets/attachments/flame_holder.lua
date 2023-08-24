@@ -26,19 +26,13 @@ attachmentObject.onEquip = function(automaton)
 
         local master = pet:getMaster()
         local maneuvers = master:countEffect(xi.effect.FIRE_MANEUVER)
-        local amount = 0
-        if maneuvers == 1 then
-            amount = 25
-            pet:setLocalVar("flameholdermaneuvers", 1)
-        elseif maneuvers == 2 then
-            amount = 50
-            pet:setLocalVar("flameholdermaneuvers", 2)
-        elseif maneuvers == 3 then
-            amount = 75
-            pet:setLocalVar("flameholdermaneuvers", 3)
-        else
+
+        if maneuvers < 1 or maneuvers > 3 then
             return
         end
+
+        local amount = 25 * maneuvers
+        pet:setLocalVar("flameholdermaneuvers", maneuvers)
 
         pet:addMod(xi.mod.WEAPONSKILL_DAMAGE_BASE, amount)
         pet:setLocalVar("flameholder", amount)

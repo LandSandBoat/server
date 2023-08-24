@@ -37,11 +37,9 @@ entity.onMobDeath = function(mob, player, optParams)
 end
 
 entity.onMobDespawn = function(mob)
-    local saplingsRespawn = 0
+    local saplingsRespawn = math.random(1800, 3600) -- 30 to 60 minutes
     if mob:getLocalVar("wasKilled") == 1 then
         saplingsRespawn = math.random(216000, 259200) -- 60 to 72 hours
-    else
-        saplingsRespawn = math.random(1800, 3600) -- 30 to 60 minutes
     end
 
     mob:timer(saplingsRespawn * 1000, function(mobArg)

@@ -1233,9 +1233,9 @@ xi.regime.bookOnEventFinish = function(player, option, regimeType)
             end,
 
             ['PROTECT'] = function()
-                local mLvl = player:getMainLvl()
-                local power = 0
-                local tier = 0
+                local mLvl  = player:getMainLvl()
+                local power = 220
+                local tier  = 5
 
                 if mLvl < 27 then
                     power = 20
@@ -1249,9 +1249,6 @@ xi.regime.bookOnEventFinish = function(player, option, regimeType)
                 elseif mLvl < 76 then
                     power = 140
                     tier = 4
-                else
-                    power = 220
-                    tier = 5
                 end
 
                 local bonus = 0
@@ -1266,8 +1263,10 @@ xi.regime.bookOnEventFinish = function(player, option, regimeType)
 
             ['SHELL'] = function()
                 local mLvl  = player:getMainLvl()
-                local power = 0
-                local tier  = 0
+
+                -- Shell V (75/256)
+                local power = 2930
+                local tier  = 5
 
                 if mLvl < 37 then
                     power = 1055 -- Shell I   (27/256)
@@ -1281,9 +1280,6 @@ xi.regime.bookOnEventFinish = function(player, option, regimeType)
                 elseif mLvl < 76 then
                     power = 2617 -- Shell IV  (67/256)
                     tier = 4
-                else
-                    power = 2930 -- Shell V   (75/256)
-                    tier = 5
                 end
 
                 local bonus = 0

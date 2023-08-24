@@ -698,8 +698,6 @@ xi.mission.getMissionRankPoints = function(player, missionID)
     elseif missionID == 21 then crystals = 148                    -- 5 additional stacks needed, plus mission reward of 31,
     elseif missionID == 22 then crystals = 96                    -- 8 stacks needed (higher value chosen so final rank bar requirement is closer to 90%)
     elseif missionID == 23 then crystals = 228                    -- Additional 8 stacks needed, plus mission reward of 36 (87% rank bar)
-    else
-        crystals = 0
     end
 
     local pointsNeeded = 1024 * (crystals - 0.25) / (3 * rankPointMath(player:getRank(player:getNation())))
@@ -723,7 +721,7 @@ local missionType =
 }
 
 local function getRequiredRank(missionId)
-    local requiredRank = 0
+    local requiredRank = 2
 
     if
         missionId <= 2
@@ -735,8 +733,6 @@ local function getRequiredRank(missionId)
         requiredRank = 4
     elseif missionId >= 14 then
         requiredRank = math.floor((missionId - 14) / 2) + 5
-    else
-        requiredRank = 2
     end
 
     return requiredRank
@@ -785,7 +781,7 @@ xi.mission.getMissionMask = function(player)
         end
     end
 
-    local missionMask = 0
+    local missionMask = utils.MAX_INT32 - repeatMission - firstMission
     if
         player:getCurrentMission(nation) == xi.mission.id.nation.NONE and
         rank == 5 and
@@ -796,8 +792,6 @@ xi.mission.getMissionMask = function(player)
         -- Use previous logic to require missionStatus of 8, but no mission set (instead of ARCHLICH)
         -- NOTE: For some reason, previous implementation starts with status this high.  This should change in the future.
         missionMask = utils.MAX_INT32 - 16384
-    else
-        missionMask = utils.MAX_INT32 - repeatMission - firstMission
     end
 
     return missionMask, repeatMission

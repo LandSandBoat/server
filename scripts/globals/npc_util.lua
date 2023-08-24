@@ -166,9 +166,9 @@ end
 -- RETURN: table index
 function npcUtil.pickNewPosition(npcID, positionTable, allowCurrentPosition)
     local npc = GetNPCByID(npcID)
-    local positionIndex = 1 -- Default to position one in the table if it can't be found.
-    local tableSize = 0
-    local newPosition = 0
+    local positionIndex  = 1 -- Default to position one in the table if it can't be found.
+    local tableSize      = 0
+    local newPosition    = math.random(1, tableSize)
     allowCurrentPosition = allowCurrentPosition or false
 
     for i, v in ipairs(positionTable) do   -- Looking for the current position
@@ -192,8 +192,6 @@ function npcUtil.pickNewPosition(npcID, positionTable, allowCurrentPosition)
         repeat
             newPosition = math.random(1, tableSize)
         until (newPosition ~= positionIndex)
-    else
-        newPosition = math.random(1, tableSize)
     end
 
     return { ["x"] = positionTable[newPosition][1], ["y"] = positionTable[newPosition][2], ["z"] = positionTable[newPosition][3] }
@@ -416,10 +414,8 @@ function npcUtil.giveKeyItem(player, keyitems, msgId)
     local ID = zones[player:getZoneID()]
 
     -- create table of keyitems
-    local givenKeyItems = {}
-    if type(keyitems) == "number" then
-        givenKeyItems = { keyitems }
-    elseif type(keyitems) == "table" then
+    local givenKeyItems = { keyitems }
+    if type(keyitems) == "table" then
         givenKeyItems = keyitems
     else
         print(string.format("ERROR: invalid keyitems parameter given to npcUtil.giveKeyItem in zone %s.", player:getZoneName()))

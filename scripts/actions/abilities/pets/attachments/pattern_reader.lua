@@ -16,7 +16,7 @@ attachmentObject.onEquip = function(automaton)
             local tick = VanadielTime()
             local dt = tick - lasttick
             local prevamount = pet:getLocalVar("patternreader")
-            local amount = 0
+            local amount
             if maneuvers > 0 then
                 amount = maneuvers * dt
                 if (amount + prevamount) > 30 then
