@@ -80,37 +80,106 @@ local glow =
     LIGHT_BLUE = 100,
 }
 
--- TODO: Condition enum
+local conditions =
+{
+    -- Negative
+    ILL      = 0,
+    VERY_ILL = 1,
+    SICK     = 2,
+    INJURED  = 3,
+    SPOILED  = 4,
+    BORED    = 5,
+    LOVESICK = 6,
+    RUN_AWAY = 7,
+
+    -- Positive
+    HIGH_SPIRITS       = 8,
+    PERKY              = 9,
+    EXTREMELY_HAPPY    = 10,
+    FULL_OF_ENERGY_1   = 11,
+    FULL_OF_ENERGY_2   = 12,
+    BRIGHT_AND_FOCUSED = 13,
+}
+
+local hasCondition = function(chocoState)
+    return chocoState.conditions > 0
+end
+
+local getCondition = function(chocoState, condition)
+    return utils.mask.getBit(chocoState.conditions, condition)
+end
+
+local setCondition = function(chocoState, condition, value)
+    chocoState.conditions = utils.mask.setBit(chocoState.conditions, condition, value)
+end
+
+local conditionsHealedByItems =
+{
+    [conditions.ILL] =
+    {
+        xi.item.CLUMP_OF_TOKOPEKKO_WILDGRASS,
+        xi.item.CELERITY_SALAD,
+    },
+    [conditions.VERY_ILL] =
+    {
+        xi.item.CLUMP_OF_TOKOPEKKO_WILDGRASS,
+        xi.item.CELERITY_SALAD,
+    },
+    [conditions.SICK] =
+    {
+        xi.item.CLUMP_OF_GARIDAV_WILDGRASS,
+        xi.item.CELERITY_SALAD,
+    },
+    [conditions.INJURED] =
+    {
+        xi.item.CLUMP_OF_GAUSEBIT_WILDGRASS,
+        xi.item.CELERITY_SALAD,
+    },
+    [conditions.SPOILED] =
+    {
+        xi.item.CELERITY_SALAD,
+    },
+    [conditions.BORED] =
+    {
+        xi.item.CELERITY_SALAD,
+    },
+    [conditions.LOVESICK] =
+    {
+        xi.item.CELERITY_SALAD,
+    },
+}
+utils.unused(conditionsHealedByItems)
+
 -- TODO: Make sure stat changes are clamped 0-255!
 
 local validFoods =
 {
---  [itemId]                                = { hunger, affection, energy, strength, endurance, discernment, receptivity, randomAttribute, healsCondition, glow }
-    [xi.item.BUNCH_OF_GYSAHL_GREENS]       = { 25, 10,   0, 0, 0, 0, 0, 0, 0, glow.RED    },
-    [xi.item.BUNCH_OF_SHARUG_GREENS]       = { 25, 10,   0, 0, 0, 0, 0, 0, 0, glow.RED    },
-    [xi.item.BUNCH_OF_AZOUPH_GREENS]       = { 25, 10,   0, 0, 0, 0, 0, 0, 0, glow.RED    },
-    [xi.item.CARROT_PASTE]                 = { 25, 10,   0, 0, 0, 0, 0, 0, 0, glow.RED    },
-    [xi.item.HERB_PASTE]                   = { 25, 10,   0, 0, 0, 0, 0, 0, 0, glow.RED    },
-    [xi.item.VEGETABLE_PASTE]              = { 25, 10,   0, 0, 0, 0, 0, 0, 0, glow.RED    },
-    [xi.item.WORM_PASTE]                   = { 25, 10,   0, 0, 0, 0, 0, 0, 0, glow.RED    },
-    [xi.item.VOMP_CARROT]                  = { 25, 10,   0, 0, 0, 0, 0, 0, 0, glow.RED    },
-    [xi.item.SAN_DORIAN_CARROT]            = { 25, 10,   0, 0, 0, 0, 0, 0, 0, glow.RED    },
-    [xi.item.ZEGHAM_CARROT]                = { 25, 10,   0, 0, 0, 0, 0, 0, 0, glow.BLUE   },
-    [xi.item.CLUMP_OF_GAUSEBIT_WILDGRASS]  = { 25, 10,   0, 0, 0, 0, 0, 0, 0, glow.YELLOW },
-    [xi.item.CLUMP_OF_GARIDAV_WILDGRASS]   = { 25, 10,   0, 0, 0, 0, 0, 0, 0, glow.YELLOW },
-    [xi.item.CLUMP_OF_TOKOPEKKO_WILDGRASS] = { 25, 10,   0, 0, 0, 0, 0, 0, 0, glow.YELLOW },
-    [xi.item.CHOCOLIXIR]                   = { 50,  0, 100, 0, 0, 0, 0, 0, 0, glow.YELLOW },
-    [xi.item.HI_CHOCOLIXIR]                = { 25,  0, 100, 0, 0, 0, 0, 0, 0, glow.YELLOW },
-    [xi.item.CHOCOTONIC]                   = { 25, 10,   0, 0, 0, 0, 0, 0, 0, glow.YELLOW },
-    [xi.item.CUPID_WORM]                   = { 25, 10,   0, 0, 0, 0, 0, 0, 0, glow.BLUE   },
-    [xi.item.GREGARIOUS_WORM]              = { 25, 10,   0, 0, 0, 0, 0, 0, 0, glow.YELLOW },
-    [xi.item.PARASITE_WORM]                = { 25, 10,   0, 0, 0, 0, 0, 0, 0, glow.BLUE   },
-    [xi.item.TORNADO_SALAD]                = { 25, 10,   0, 0, 0, 0, 0, 0, 0, glow.GREEN  },
-    [xi.item.CELERITY_SALAD]               = { 25, 10,   0, 0, 0, 0, 0, 0, 0, glow.GREEN  },
-    [xi.item.LETHE_POTAGE]                 = { 25, 10,   0, 0, 0, 0, 0, 0, 0, glow.GREEN  },
-    [xi.item.LETHE_CONSOMME]               = { 25, 10,   0, 0, 0, 0, 0, 0, 0, glow.GREEN  },
-    [xi.item.LA_THEINE_MILLET]             = { 25, 10,   0, 0, 0, 0, 0, 0, 0, glow.GREEN  },
---  [xi.item.SCROLL_OF_INSTANT_WARP]       = { 0, 0, 0, 0, 0, 0, 0, 0, 0, glow.WARP },
+--  [itemId]                                = { hunger, affection, energy, strength, endurance, discernment, receptivity, randomAttribute, glow }
+    [xi.item.BUNCH_OF_GYSAHL_GREENS]       = { 25, 10,   0, 0, 0, 0, 0, 0, glow.RED    },
+    [xi.item.BUNCH_OF_SHARUG_GREENS]       = { 25, 10,   0, 0, 0, 0, 0, 0, glow.RED    },
+    [xi.item.BUNCH_OF_AZOUPH_GREENS]       = { 25, 10,   0, 0, 0, 0, 0, 0, glow.RED    },
+    [xi.item.CARROT_PASTE]                 = { 25, 10,   0, 0, 0, 0, 0, 0, glow.RED    },
+    [xi.item.HERB_PASTE]                   = { 25, 10,   0, 0, 0, 0, 0, 0, glow.RED    },
+    [xi.item.VEGETABLE_PASTE]              = { 25, 10,   0, 0, 0, 0, 0, 0, glow.RED    },
+    [xi.item.WORM_PASTE]                   = { 25, 10,   0, 0, 0, 0, 0, 0, glow.RED    },
+    [xi.item.VOMP_CARROT]                  = { 25, 10,   0, 0, 0, 0, 0, 0, glow.RED    },
+    [xi.item.SAN_DORIAN_CARROT]            = { 25, 10,   0, 0, 0, 0, 0, 0, glow.RED    },
+    [xi.item.ZEGHAM_CARROT]                = { 25, 10,   0, 0, 0, 0, 0, 0, glow.BLUE   },
+    [xi.item.CLUMP_OF_GAUSEBIT_WILDGRASS]  = { 25, 10,   0, 0, 0, 0, 0, 0, glow.YELLOW },
+    [xi.item.CLUMP_OF_GARIDAV_WILDGRASS]   = { 25, 10,   0, 0, 0, 0, 0, 0, glow.YELLOW },
+    [xi.item.CLUMP_OF_TOKOPEKKO_WILDGRASS] = { 25, 10,   0, 0, 0, 0, 0, 0, glow.YELLOW },
+    [xi.item.CHOCOLIXIR]                   = { 50,  0, 100, 0, 0, 0, 0, 0, glow.YELLOW },
+    [xi.item.HI_CHOCOLIXIR]                = { 25,  0, 100, 0, 0, 0, 0, 0, glow.YELLOW },
+    [xi.item.CHOCOTONIC]                   = { 25, 10,   0, 0, 0, 0, 0, 0, glow.YELLOW },
+    [xi.item.CUPID_WORM]                   = { 25, 10,   0, 0, 0, 0, 0, 0, glow.BLUE   },
+    [xi.item.GREGARIOUS_WORM]              = { 25, 10,   0, 0, 0, 0, 0, 0, glow.YELLOW },
+    [xi.item.PARASITE_WORM]                = { 25, 10,   0, 0, 0, 0, 0, 0, glow.BLUE   },
+    [xi.item.TORNADO_SALAD]                = { 25, 10,   0, 0, 0, 0, 0, 0, glow.GREEN  },
+    [xi.item.CELERITY_SALAD]               = { 25, 10,   0, 0, 0, 0, 0, 0, glow.GREEN  },
+    [xi.item.LETHE_POTAGE]                 = { 25, 10,   0, 0, 0, 0, 0, 0, glow.GREEN  },
+    [xi.item.LETHE_CONSOMME]               = { 25, 10,   0, 0, 0, 0, 0, 0, glow.GREEN  },
+    [xi.item.LA_THEINE_MILLET]             = { 25, 10,   0, 0, 0, 0, 0, 0, glow.GREEN  },
+--  [xi.item.SCROLL_OF_INSTANT_WARP]       = { 0, 0, 0, 0, 0, 0, 0, 0, glow.WARP },
 }
 
 -- Items that can be found on a walk in a certain area
@@ -726,7 +795,7 @@ local onRaisingEventPlayout = function(player, csOffset, chocoState)
             -- TODO: Make sure these are clamped!
             chocoState.affection = chocoState.affection - 10
 
-            -- TODO: Remove 'Spoiled' status effect
+            setCondition(chocoState, conditions.SPOILED, false)
         end,
 
         [cutscenes.COMPETE_WITH_OTHERS] = function()
@@ -737,18 +806,7 @@ local onRaisingEventPlayout = function(player, csOffset, chocoState)
             -- "Increases affection slightly - confirmed."
             chocoState.affection = chocoState.affection + 1
 
-            -- TODO: Remove "bored and restless" status effect
-        end,
-
-        [cutscenes.COMPETE_WITH_OTHERS] = function()
-            -- TODO: Take in a multiplier to account for merged time ranges
-            -- TODO: Add settings multipliers
-            -- TODO: Make sure these are clamped!
-
-            -- "Increases affection slightly - confirmed."
-            chocoState.affection = chocoState.affection + 1
-
-            -- TODO: Remove "bored and restless" status effect
+            setCondition(chocoState, conditions.BORED, false)
         end,
     }
 
@@ -899,6 +957,30 @@ xi.chocoboRaising.initChocoboData = function(player)
         local event = { age, { possibleCarePlanEvent } }
 
         table.insert(events, event)
+
+        -- If the chocobo doesn't have any conditions, roll to see if they get one
+        if not hasCondition(chocoState) then
+            for _, condition in pairs(conditions) do
+                -- TODO: Use stats and history instead of pure chance to see what
+                --     : conditions might happen
+                if utils.chance(5) then
+                    setCondition(chocoState, condition, true)
+                    break
+                end
+            end
+        end
+
+        -- For each condition, if chocobo has that condition, play
+        -- out relevant CS.
+        for _, condition in pairs(conditions) do
+            if getCondition(chocoState, condition) then
+                -- TODO: Mark that we've played this CS today so we don't immediately resolve it
+                utils.unused()
+            end
+        end
+
+        -- TODO: For each condition that the chocobo has, if they haven't JUST
+        --     : had the CS play for it, roll 50% to see if it resolved on its own.
 
         -- Handle age-up cs's
         for _, entry in pairs(ageBoundaries) do
@@ -1337,6 +1419,20 @@ xi.chocoboRaising.onEventUpdateVCSTrainer = function(player, csid, option, npc)
 
                     -- TODO: Handle item effects
 
+                    if hasCondition(chocoState) then
+                        for _, condition in pairs(chocoState.conditions) do
+                            if getCondition(chocoState, condition) then
+                                local foodCureTable = conditionsHealedByItems[condition]
+                                if foodCureTable then
+                                    if utils.contains(itemId, foodCureTable) then
+                                        -- TODO: Play CS for healing condition, or messaging?
+                                        setCondition(chocoState, condition, false)
+                                    end
+                                end
+                            end
+                        end
+                    end
+
                     local reaction = 1
 
                     local hungerLevel = hunger.COMPLETELY_FULL
@@ -1697,12 +1793,14 @@ xi.chocoboRaising.onEventUpdateVCSTrainer = function(player, csid, option, npc)
                 chocoState = onRaisingEventPlayout(player, cutscenes.INTERESTED_IN_YOUR_STORY, chocoState)
                 player:updateEventString(chocoState.first_name, chocoState.last_name, chocoState.first_name, chocoState.last_name, 0, 0, 0, 0, 0, 0, 0)
                 player:updateEvent(getCutsceneWithOffset(player, cutscenes.INTERESTED_IN_YOUR_STORY), 0, storyMask, 0, chocoState.stage, 0, 0, 3)
+                updateChocoState(player, chocoState)
             end,
 
             [13298] = function() -- Scold the chocobo
                 chocoState = onRaisingEventPlayout(player, cutscenes.HANGS_HEAD_IN_SHAME, chocoState)
                 player:updateEventString(chocoState.first_name, chocoState.last_name, chocoState.first_name, chocoState.last_name, 0, 0, 0, 0, 0, 0, 0)
                 player:updateEvent(getCutsceneWithOffset(player, cutscenes.HANGS_HEAD_IN_SHAME), 0, 0, 0, chocoState.stage, 0, 0, 0)
+                updateChocoState(player, chocoState)
             end,
 
             [13554] = function() -- Compete with others
@@ -1720,17 +1818,20 @@ xi.chocoboRaising.onEventUpdateVCSTrainer = function(player, csid, option, npc)
                 end
 
                 local winnerStr =
-                ({
+                {
                     [0] = "Player",
                     [1] = "Tie",
                     [2] = "Rival",
-                })[winner]
+                }
 
-                debug("Competition Winner: " .. winnerStr)
+                debug("Competition Winner: " .. winnerStr[winner])
+
+                -- TODO: Track wins in chocoState+db, only need to track up to 3
 
                 chocoState = onRaisingEventPlayout(player, cutscenes.COMPETE_WITH_OTHERS, chocoState)
                 player:updateEventString(chocoState.first_name, chocoState.last_name, chocoState.first_name, chocoState.last_name, 0, 0, 0, 0, 0, 0, 0)
                 player:updateEvent(getCutsceneWithOffset(player, cutscenes.COMPETE_WITH_OTHERS), 0, winner, 0, chocoState.stage, 0, 0, 0)
+                updateChocoState(player, chocoState)
             end,
 
             [250] = function() -- Set Basic Care (menu)
