@@ -63,6 +63,7 @@ xi.garrison.allyLooks =
         {
             "0x010007070110322032300E401550AC6000700000",
             "0x01000E0718101820183015401850B76024700000",
+            "0x01000F0514106920693069406950656028700000",
         },
     },
     [30] =
@@ -79,6 +80,7 @@ xi.garrison.allyLooks =
         {
             "0x0100040873100020003000400050006000700000",
             "0x01000B0841100F200F300F400F50D86000700000",
+            "0x01000F0120100F2000300F407A50AC6000700000",
         },
 
         [xi.nation.WINDURST] =
@@ -86,6 +88,7 @@ xi.garrison.allyLooks =
             "0x01000B051C1073201430144014506C6000700000",
             "0x0100010777106920693066406950B46000700000",
             "0x010000067D107820033066406850E96000700000",
+            "0x01000605731069201F3008407350E86000700000",
         },
     },
     [40] =
@@ -106,14 +109,18 @@ xi.garrison.allyLooks =
 
         [xi.nation.WINDURST] =
         {
-            -- (Missing capture)
+            "0x0100050700104A20003000400650396127700000",
+            "0x01000D0634106D206D306D406D501A6123700000",
         },
     },
     [50] =
     {
         [xi.nation.SANDORIA] =
         {
-            -- (Missing capture)
+            "0x010008037210722072301C401C50616000700000",
+            "0x01000E03421025204230394042508F608F700000",
+            "0x010004047910672042300E404250896089700000",
+            "0x01000304401022204030404040504A6000700000",
         },
 
         [xi.nation.BASTOK] =
@@ -298,7 +305,7 @@ xi.garrison.zoneData =
         textRegion  = 2,
         levelCap    = 20,
         mobBoss     = "Yagudo_Condottiere",
-        pos         = { -21, -12, 327, 128 },
+        pos         = { -19.000, -13.312, 323.000, 128 },
         xChange     = 0,
         zChange     = 2,
         xSecondLine = 2,
@@ -326,7 +333,7 @@ xi.garrison.zoneData =
         textRegion  = 4,
         levelCap    = 30,
         mobBoss     = "Orcish_Colonel",
-        pos         = nil, -- Needs capture
+        pos         = { 60.000, 0.499, -1.000, 192 },
         xChange     = -2,
         zChange     = 0,
         xSecondLine = 0,
@@ -340,7 +347,7 @@ xi.garrison.zoneData =
         textRegion  = 5,
         levelCap    = 30,
         mobBoss     = "Cobalt_Quadav",
-        pos         = { 458, 23, 420, 160 },
+        pos         = { 462.000, 23.528, 420.000, 160 },
         xChange     = -2,
         zChange     = -2,
         xSecondLine = 2,
@@ -368,7 +375,7 @@ xi.garrison.zoneData =
         textRegion  = 7,
         levelCap    = 30,
         mobBoss     = "Yagudo_Missionary",
-        pos         = nil, -- Needs capture
+        pos         = { -293.000, 16.924, 412.000, 96 },
         xChange     = 2,
         zChange     = -2,
         xSecondLine = 0,
@@ -382,7 +389,7 @@ xi.garrison.zoneData =
         textRegion  = 10,
         levelCap    = 30,
         mobBoss     = "Hunting_Chief",
-        pos         = nil, -- Needs capture
+        pos         = { -251.000, -20.399, 304.000, 64 },
         xChange     = -2,
         zChange     = 0,
         xSecondLine = 0,
@@ -396,7 +403,7 @@ xi.garrison.zoneData =
         textRegion  = 8,
         levelCap    = 40,
         mobBoss     = "Gigas_Overseer",
-        pos         = nil, -- Needs capture
+        pos         = { -22.000, -59.900, -112.000, 128 },
         xChange     = -2,
         zChange     = -1,
         xSecondLine = 0,
@@ -410,7 +417,7 @@ xi.garrison.zoneData =
         textRegion  = 11,
         levelCap    = 40,
         mobBoss     = "Goblin_Doyen",
-        pos         = { -43, 1, -140, 180 },
+        pos         = { -40.000, 0.299, -136.000, 192 },
         xChange     = -2,
         zChange     = 0,
         xSecondLine = 0,
@@ -466,7 +473,7 @@ xi.garrison.zoneData =
         textRegion  = 15,
         levelCap    = 50,
         mobBoss     = "Tonberry_Decimator",
-        pos         = { 214, 1, -80, 0 },
+        pos         = { 210.000, -0.049, -85.000, 32 },
         xChange     = 1,
         zChange     = 2,
         xSecondLine = 2,
