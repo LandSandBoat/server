@@ -663,6 +663,22 @@ local condenseEvents = function(player, chocoState, events)
     return condensedEvents
 end
 
+local updateChocoState = function(player, chocoState)
+    -- Update age and last_update_age
+    chocoState.age = math.floor((os.time() - chocoState.created) / xi.chocoboRaising.dayLength) + 1
+    chocoState.last_update_age = chocoState.age
+
+    debug("Writing chocoState.age & last_update_age:", chocoState.last_update_age)
+
+    -- Write to cache
+    xi.chocoboRaising.chocoState[player:getID()] = chocoState
+
+    -- Write to db
+    player:setChocoboRaisingInfo(chocoState)
+
+    return chocoState
+end
+
 local onRaisingEventPlayout = function(player, csOffset, chocoState)
     switch (csOffset): caseof
     {
@@ -677,6 +693,19 @@ local onRaisingEventPlayout = function(player, csOffset, chocoState)
 
             chocoState.affection = chocoState.affection - 1
             chocoState.energy    = chocoState.energy - 1
+        end,
+
+        [cutscenes.ADULT_2_TO_ADULT_3] = function()
+            -- You waited too long to name your chocobo, trainer is going to do it for you!
+            if
+                chocoState.first_name == "Chocobo" and
+                chocoState.last_name == "Chocobo"
+            then
+                -- Pick a name at random: First name only
+                chocoState.first_name = xi.chocoboNames.getRandomName()
+                chocoState.last_name = ""
+                updateChocoState(player, chocoState)
+            end
         end,
 
         [cutscenes.CRYING_AT_NIGHT] = function()
@@ -831,6 +860,9 @@ xi.chocoboRaising.initChocoboData = function(player)
     for _ = 1, plan4Length do
         table.insert(possibleCarePlanFuture, plan4Type)
     end
+
+    -- TODO: Remove careplan energy from this
+    chocoState.energy = 100
 
     for idx = 1, reportLength do
         local possibleCarePlanEvent = possibleCarePlanFuture[idx]
@@ -1447,7 +1479,7 @@ xi.chocoboRaising.onEventUpdateVCSTrainer = function(player, csid, option, npc)
 
                     -- If not holding an item, it's possible to find an item
                     if chocoState.held_item == 0 then
-                        --table.insert(possibleEvents, 1)
+                        table.insert(possibleEvents, 1)
                     end
 
                     -- If you haven't completed the White Handkerchief quest yet
