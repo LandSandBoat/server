@@ -36,6 +36,67 @@ local function mergen(...)
     return res
 end
 
+-- https://stackoverflow.com/questions/49979017/how-to-get-current-function-call-stack-depth-in-lua
+-- NOTE: Supposedly this is slow. Only use this during debugging and not for live!
+function utils.getStackDepth()
+    local depth = 0
+    while true do
+        if not debug.getinfo(3 + depth) then
+            break
+        end
+
+        depth = depth + 1
+    end
+
+    return depth
+end
+
+-- https://www.lua.org/pil/23.1.1.html
+function utils.getObjectFromScope(objName, depth)
+    local idx = 1
+    while true do
+        local name, value = debug.getlocal(depth, idx)
+        if not name then
+            break
+        end
+
+        if name == objName then
+            return value
+        end
+
+        idx = idx + 1
+    end
+
+    return nil
+end
+
+function utils.getDebugPrinter(printEntityName, settingOrCondition, prefix)
+    return function(...)
+        if settingOrCondition then
+            local t = nil
+            if prefix then
+                t = { prefix, ... }
+            else
+                t = { ... }
+            end
+
+            local str = tostring(unpack(t))
+
+            print(str)
+
+            local depth  = utils.getStackDepth()
+            local player = utils.getObjectFromScope(printEntityName, depth + 1)
+            if player then
+                player:PrintToPlayer(str, xi.msg.channel.SYSTEM_3, "")
+            end
+        end
+    end
+end
+
+function utils.getDebugPlayerPrinter(settingOrCondition, prefix)
+    return utils.getDebugPrinter("player", settingOrCondition, prefix)
+end
+
 function utils.bind(func, ...)
     local args = packn(...)
     return function(...)

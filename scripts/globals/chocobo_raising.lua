@@ -35,13 +35,7 @@ xi = xi or {}
 xi.chocoboRaising = xi.chocoboRaising or {}
 xi.chocoboRaising.chocoState = xi.chocoboRaising.chocoState or {}
 
-local debug = function(player, ...)
-    if xi.settings.main.DEBUG_CHOCOBO_RAISING then
-        local t = { ... }
-        print(unpack(t))
-        player:PrintToPlayer(table.concat(t, " "), xi.msg.channel.SYSTEM_3, "")
-    end
-end
+local debug = utils.getDebugPlayerPrinter(xi.settings.main.DEBUG_CHOCOBO_RAISING)
 
 -----------------------------------
 -- Settings
@@ -625,9 +619,9 @@ local condenseEvents = function(player, chocoState, events)
     local currentEventCSTable = nil
 
     -- Each event is a table of cs's
-    debug(player, "Raw Events")
+    debug("Raw Events")
     for _, entry in pairs(events) do
-        debug(player, "Day", entry[1], ":", entry[2][1])
+        debug("Day", entry[1], ":", entry[2][1])
         -- Only condense days with the same table contents
         if compareTables(entry[2], currentEventCSTable) then
             -- Increase the span
@@ -648,9 +642,9 @@ local condenseEvents = function(player, chocoState, events)
     -- Final "cut"
     cutEvent(condensedEvents, currentStartDay, currentEndDay, currentEventCSTable)
 
-    debug(player, "Condensed Events & Spans")
+    debug("Condensed Events & Spans")
     for _, entry in pairs(condensedEvents) do
-        debug(player, "Days", entry[1], "to", entry[2], ":", entry[3][1])
+        debug("Days", entry[1], "to", entry[2], ":", entry[3][1])
     end
 
     return condensedEvents
@@ -693,7 +687,7 @@ local handleCSUpdate = function(player, chocoState, doEventUpdate)
     local locationOffset = raisingLocation[player:getZoneID()] * 256
     local csToPlay = locationOffset + csOffset
 
-    debug(player, "Playing CS: " .. csToPlay .. " (" .. csOffset .. ")")
+    debug("Playing CS: " .. csToPlay .. " (" .. csOffset .. ")")
     table.remove(chocoState.csList, 1)
 
     local currentAgeOfChocoboDuringCutscene = 0
@@ -730,7 +724,7 @@ local updateChocoState = function(player, chocoState)
     chocoState.age = math.floor((os.time() - chocoState.created) / xi.chocoboRaising.dayLength) + 1
     chocoState.last_update_age = chocoState.age
 
-    debug(player, "Writing chocoState.age & last_update_age:", chocoState.last_update_age)
+    debug("Writing chocoState.age & last_update_age:", chocoState.last_update_age)
 
     -- Write to cache
     xi.chocoboRaising.chocoState[player:getID()] = chocoState
@@ -757,8 +751,8 @@ xi.chocoboRaising.initChocoboData = function(player)
 
     chocoState.age = math.floor((os.time() - chocoState.created) / xi.chocoboRaising.dayLength) + 1
 
-    debug(player, "chocoState.age = " .. chocoState.age)
-    debug(player, "chocoState.last_update_age = " .. chocoState.last_update_age)
+    debug("chocoState.age = " .. chocoState.age)
+    debug("chocoState.last_update_age = " .. chocoState.last_update_age)
 
     chocoState.affectionRank = affectionRank.LIKES
 
@@ -780,7 +774,7 @@ xi.chocoboRaising.initChocoboData = function(player)
     chocoState.report.day_end   = chocoState.age
     local reportLength = chocoState.report.day_end - chocoState.report.day_start
 
-    debug(player, "reportLength", reportLength)
+    debug("reportLength", reportLength)
 
     chocoState.last_update_age = chocoState.age
 
@@ -1007,7 +1001,7 @@ xi.chocoboRaising.onEventUpdateVCSTrainer = function(player, csid, option, npc)
             return
         end
 
-        debug(player, string.format("CS Update: %i", option))
+        debug(string.format("CS Update: %i", option))
 
         -- Setting the name for a chocobo: when the name is
         -- applied from the menu the name offsets (from the menu)
@@ -1045,14 +1039,14 @@ xi.chocoboRaising.onEventUpdateVCSTrainer = function(player, csid, option, npc)
                 chocoState.first_name = fname
                 chocoState.last_name = lname
 
-                debug(player, string.format("%s updating chocobo name: %s", player:getName(), fullnamekey))
+                debug(string.format("%s updating chocobo name: %s", player:getName(), fullnamekey))
 
                 -- Write to cache
                 xi.chocoboRaising.chocoState[player:getID()] = chocoState
 
                 -- Set synthetic CS option for later CSs
                 option = 0xFF
-                debug(player, string.format("CS (Synthetic) Update: %i", option))
+                debug(string.format("CS (Synthetic) Update: %i", option))
             end
         end
 
