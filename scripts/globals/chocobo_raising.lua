@@ -434,6 +434,7 @@ local cutscenes =
     -- 48: Happy to see you
     INTERESTED_IN_YOUR_STORY = 50,
     HANGS_HEAD_IN_SHAME      = 51, -- Hangs its head in shame
+    COMPETE_WITH_OTHERS      = 52,
     HAVENT_SEEN_YOU          = 53, -- Haven't seen you around, chocobo is sleeping (dispose of white handkerchief)
     -- 54: Accept white handkerchief
     CRYING_AT_NIGHT = 69, -- White handkerchief
@@ -726,6 +727,28 @@ local onRaisingEventPlayout = function(player, csOffset, chocoState)
             chocoState.affection = chocoState.affection - 10
 
             -- TODO: Remove 'Spoiled' status effect
+        end,
+
+        [cutscenes.COMPETE_WITH_OTHERS] = function()
+            -- TODO: Take in a multiplier to account for merged time ranges
+            -- TODO: Add settings multipliers
+            -- TODO: Make sure these are clamped!
+
+            -- "Increases affection slightly - confirmed."
+            chocoState.affection = chocoState.affection + 1
+
+            -- TODO: Remove "bored and restless" status effect
+        end,
+
+        [cutscenes.COMPETE_WITH_OTHERS] = function()
+            -- TODO: Take in a multiplier to account for merged time ranges
+            -- TODO: Add settings multipliers
+            -- TODO: Make sure these are clamped!
+
+            -- "Increases affection slightly - confirmed."
+            chocoState.affection = chocoState.affection + 1
+
+            -- TODO: Remove "bored and restless" status effect
         end,
     }
 
@@ -1410,7 +1433,7 @@ xi.chocoboRaising.onEventUpdateVCSTrainer = function(player, csid, option, npc)
                 local watchOverChocobo = 0x01
                 local tellAStory = 0x02
                 local scoldTheChocobo = 0x04
-                -- local competeWithOthers = 0x08
+                local competeWithOthers = 0x08
                 local goOnAWalkShort = 0x10
                 local goOnAWalkRegular = 0x20
                 local goOnAWalkLong = 0x40
@@ -1425,6 +1448,9 @@ xi.chocoboRaising.onEventUpdateVCSTrainer = function(player, csid, option, npc)
                     mask = mask - tellAStory - goOnAWalkRegular
                     -- TODO: Is this unlocked per-chocobo, or per-player?
                     -- TODO: competeWithOthers: Available at adolescent stage; You must go on a regular walk to unlock this.
+                    if true then
+                        mask = mask - competeWithOthers
+                    end
                 end
 
                 if chocoState.stage >= stage.ADULT_1 then
@@ -1680,9 +1706,31 @@ xi.chocoboRaising.onEventUpdateVCSTrainer = function(player, csid, option, npc)
             end,
 
             [13554] = function() -- Compete with others
-                player:updateEventString(chocoState.first_name, chocoState.last_name, chocoState.first_name, chocoState.last_name,
-                    (4163), 67, 0, 0, 0, 0, 0)
-                player:updateEvent(820, 18017, 0, 72, 3, 254, 46, 1)
+                -- player:updateEventString(chocoState.first_name, chocoState.last_name, chocoState.first_name, chocoState.last_name,
+                --     4163, 67, 0, 0, 0, 0, 0)
+                -- player:updateEvent(820, 18017, 0, 72, 3, 254, 46, 1)
+
+                -- 0: player chocobo, 1: tie, 2: rival chocobo
+                -- NOTE: The guides claim that the winner is random, so
+                --     : let's make it 50/50 to start with, and then a small
+                --     : chance on top for a tie.
+                local winner = utils.randomEntry({ 0, 2 })
+                if utils.chance(5) then
+                    winner = 1
+                end
+
+                local winnerStr =
+                ({
+                    [0] = "Player",
+                    [1] = "Tie",
+                    [2] = "Rival",
+                })[winner]
+
+                debug("Competition Winner: " .. winnerStr)
+
+                chocoState = onRaisingEventPlayout(player, cutscenes.COMPETE_WITH_OTHERS, chocoState)
+                player:updateEventString(chocoState.first_name, chocoState.last_name, chocoState.first_name, chocoState.last_name, 0, 0, 0, 0, 0, 0, 0)
+                player:updateEvent(getCutsceneWithOffset(player, cutscenes.COMPETE_WITH_OTHERS), 0, winner, 0, chocoState.stage, 0, 0, 0)
             end,
 
             [250] = function() -- Set Basic Care (menu)
@@ -1701,6 +1749,7 @@ xi.chocoboRaising.onEventUpdateVCSTrainer = function(player, csid, option, npc)
                     bit.lshift(plan3Length,  16) + bit.lshift(plan3Type,  19) +
                     bit.lshift(plan4Length,  24) + bit.lshift(plan4Type,  27)
 
+                -- TODO: Set up mask for relevant stage
                 local menuMask = 0 -- 0x7FFFFFFE
 
                 player:updateEvent(250, planInfo, 0, 0, 0, 0, 0, menuMask)
@@ -1727,8 +1776,8 @@ xi.chocoboRaising.onEventUpdateVCSTrainer = function(player, csid, option, npc)
                 player:updateEvent(0, 0, 0, 0, 0, 0, 0, 0)
             end,
 
-            [1241] = function() -- Unknown
-                print('ChocoboRaising: Unknown update: 1241')
+            [1241] = function() -- Called during "Compete with Others"
+                -- Appears to always be blank
                 player:updateEvent(0, 0, 0, 0, 0, 0, 0, 0)
             end,
 
