@@ -16,7 +16,7 @@ local allyNames =
     [20] = { "Patrician",       "Recruit",         "Candidate"       },
     [30] = { "Trader",          "Mariner",         "Scholar"         },
     [40] = { "TempleKnight",    "GoldMusketeer",   "WizeWizard"      },
-    [50] = { "RoyalGuard",      "GoldMusketeer",   "Patriarch"       },
+    [50] = { "RoyalGuard",      "Commander",       "Patriarch"       },
     [99] = { "MilitaryAttache", "MilitaryAttache", "MilitaryAttache" },
 }
 
@@ -74,9 +74,10 @@ local allyLooks =
 
         [xi.nation.BASTOK] =
         {
+            "0x0100040873100020003000400050006000700000",
+            "0x01000B0841100F200F300F400F50D86000700000",
             "0x0100010814102720173015401550006000700000", -- Ferocious_Artisan
             "0x01000E020F100720003003400750006000700000", -- Suzel
-            "0x010003011C100E20083068401F50626000700000", -- Guda (16883811)
         },
 
         [xi.nation.WINDURST] =
@@ -122,8 +123,8 @@ local allyLooks =
 
         [xi.nation.BASTOK] =
         {
-            "0x01000C011C1073208330804068504E6000700000", -- Masis (16883819)
-            "0x010009081C108A2008308A40085019611D700000", -- Ironclad_Gorilla
+            "0x01000C0133106420433064404350866086700000",
+            "0x0100010216104120413041404150CA6000700000",
             "0x01000D0801101620053019400C505C6000700000", -- Iron Eater (17748016)
         },
 
@@ -138,9 +139,8 @@ local allyLooks =
     {
         [xi.nation.SANDORIA] =
         {
-            "0x010009031A10812088303C408850CF6000700000", -- Morangeart
-            "0x01000E0388108820883088408850186100700000", -- Quelveuiat
-            "0x01000F0304102220093009400950006000700000", -- Jaucribaix
+            "0x010005011D1071201D301D401D50206130700000",
+            "0x0100020841107120413041404150036130700000",
         },
 
         [xi.nation.BASTOK] =
@@ -190,14 +190,14 @@ local posData =
     [xi.zone.WEST_SARUTABARUTA]      = {  -21, -12,  327, 128 },
     [xi.zone.VALKURM_DUNES]          = {  149,  -8,   94,  32 },
     [xi.zone.JUGNER_FOREST]          = {   54,   1,   -1, 210 }, -- Needs capture
-    [xi.zone.PASHHOW_MARSHLANDS]     = {  458,  24,  421, 130 }, -- Needs capture
-    [xi.zone.BUBURIMU_PENINSULA]     = { -485, -29,   58,   0 }, -- Needs capture
+    [xi.zone.PASHHOW_MARSHLANDS]     = {  458,  23,  420, 160 },
+    [xi.zone.BUBURIMU_PENINSULA]     = { -484, -30,   60,  64 },
     [xi.zone.MERIPHATAUD_MOUNTAINS]  = { -299,  17,  411,  30 }, -- Needs capture
     [xi.zone.QUFIM_ISLAND]           = { -247, -19,  310,   0 }, -- Needs capture
     [xi.zone.BEAUCEDINE_GLACIER]     = {  -25, -60, -110, 220 }, -- Needs capture
     [xi.zone.THE_SANCTUARY_OF_ZITAH] = {  -43,   1, -140, 180 },
     [xi.zone.YUHTUNGA_JUNGLE]        = { -248,   1, -392, 180 },
-    [xi.zone.XARCABARD]              = {  216, -22,  208,  90 }, -- Needs capture
+    [xi.zone.XARCABARD]              = {  219, -21,  208,  64 },
     [xi.zone.EASTERN_ALTEPA_DESERT]  = { -245,  -9, -249,   0 },
     [xi.zone.YHOATOR_JUNGLE]         = {  214,   1,  -80,   0 },
     [xi.zone.CAPE_TERIGGAN]          = { -174,   8,  -61,   0 },

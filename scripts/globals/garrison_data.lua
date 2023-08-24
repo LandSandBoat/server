@@ -4,14 +4,25 @@
 xi = xi or {}
 xi.garrison = xi.garrison or {}
 
--- Name is Determined by Nation and LevelCap
--- Names in order of xi.nation values (sandoria, bastok, windurst)
+-- Garrison Progression
+xi.garrison.state =
+{
+    SPAWN_NPCS          = 0,
+    BATTLE              = 1,
+    SPAWN_MOBS          = 2,
+    SPAWN_BOSS          = 3,
+    ADVANCE_WAVE        = 4,
+    GRANT_LOOT          = 5,
+    ENDED               = 6,
+}
+
+-- Name is Determined by Nation and LevelCap (sandoria, bastok, windurst)
 xi.garrison.allyNames =
 {
     [20] = { "Patrician",       "Recruit",         "Candidate"       },
     [30] = { "Trader",          "Mariner",         "Scholar"         },
     [40] = { "TempleKnight",    "GoldMusketeer",   "WizeWizard"      },
-    [50] = { "RoyalGuard",      "GoldMusketeer",   "Patriarch"       },
+    [50] = { "RoyalGuard",      "Commander",       "Patriarch"       },
     [99] = { "MilitaryAttache", "MilitaryAttache", "MilitaryAttache" },
 }
 
@@ -66,7 +77,8 @@ xi.garrison.allyLooks =
 
         [xi.nation.BASTOK] =
         {
-            -- (Missing capture)
+            "0x0100040873100020003000400050006000700000",
+            "0x01000B0841100F200F300F400F50D86000700000",
         },
 
         [xi.nation.WINDURST] =
@@ -106,7 +118,8 @@ xi.garrison.allyLooks =
 
         [xi.nation.BASTOK] =
         {
-            -- (Missing capture)
+            "0x01000C0133106420433064404350866086700000",
+            "0x0100010216104120413041404150CA6000700000",
         },
 
         [xi.nation.WINDURST] =
@@ -120,7 +133,8 @@ xi.garrison.allyLooks =
     {
         [xi.nation.SANDORIA] =
         {
-            -- (Missing capture)
+            "0x010005011D1071201D301D401D50206130700000",
+            "0x0100020841107120413041404150036130700000",
         },
 
         [xi.nation.BASTOK] =
@@ -219,114 +233,30 @@ xi.garrison.waves =
         -- 1 Party
         [1] =
         {
-            -- Wave 1
-            -- 2 Mobs at once
-            [1] =
-            {
-                2
-            },
-            -- Wave 2
-            -- 2 Mobs every `delayBetweenGroups`
-            -- 4 total
-            [2] =
-            {
-                2,
-                2
-            },
-            -- Wave 3
-            -- 2 Mobs every `delayBetweenGroups`
-            -- 6 total
-            [3] =
-            {
-                2,
-                2,
-                2
-            },
-            -- Wave 4
-            -- 2 Mobs every `delayBetweenGroups`
-            -- 8 total
-            -- Boss spawns after all 8 are killed
-            [4] =
-            {
-                2,
-                2,
-                2,
-                2
-            }
+            [1] = { 2 },         -- Wave 1: 2 Mobs.
+            [2] = { 2, 2 },      -- Wave 2: 2 Mobs + 2 Mobs after "delayBetweenGroups". 4 total.
+            [3] = { 2, 2, 2 },   -- Wave 3: 2 Mobs + 2 Mobs after every "delayBetweenGroups". 6 total.
+            [4] = { 2, 2, 2, 2 } -- Wave 4: 2 Mobs + 2 Mobs after every "delayBetweenGroups". 8 total. Boss after all 8.
         },
+
         -- 2 Parties
         [2] =
         {
-            -- Wave 1
-            -- 4 Mobs at once
-            [1] =
-            {
-                4
-            },
-            -- Wave 2
-            -- 4 Mobs
-            -- 2 Mobs after `delayBetweenGroups`
-            [2] =
-            {
-                4,
-                2
-            },
-            -- Wave 3
-            -- 4 Mobs
-            -- 2 Mobs after `delayBetweenGroups`
-            -- 2 Mobs after 2 * `delayBetweenGroups`
-            [3] =
-            {
-                4,
-                2,
-                2
-            },
-            -- Wave 4
-            -- 4 Mobs
-            -- 2 Mobs after `delayBetweenGroups`
-            -- 2 Mobs after 2 * `delayBetweenGroups`
-            -- Boss after all 8 mobs are killed
-            [4] =
-            {
-                4,
-                2,
-                2,
-            }
+            [1] = { 4 },       -- Wave 1: 4 Mobs.
+            [2] = { 4, 2 },    -- Wave 2: 4 Mobs + 2 Mobs after every "delayBetweenGroups". 6 total.
+            [3] = { 4, 2, 2 }, -- Wave 3: 4 Mobs + 2 Mobs after every "delayBetweenGroups". 8 total.
+            [4] = { 4, 2, 2 }, -- Wave 4: 4 Mobs + 2 Mobs after every "delayBetweenGroups". 8 total. Boss after all 8.
         },
+
         -- 3 Parties
-        -- Only 3 waves with 3 parties.
-        -- I don't understand the thinking behind this, but this matches the two videos
-        -- I found showing garrison gameplay with 3 parties.
         [3] =
         {
-            -- Wave 1
-            -- 4 Mobs at once
-            [1] =
-            {
-                4,
-                2
-            },
-            -- Wave 2
-            -- 6 Mobs
-            -- 2 Mobs after `delayBetweenGroups`
-            [2] =
-            {
-                6,
-                2
-            },
-            -- Wave 3
-            -- 4 Mobs
-            -- 2 Mobs after `delayBetweenGroups`
-            -- 2 Mobs after 2 * `delayBetweenGroups`
-            -- Boss after all 8 mobs are killed
-            [3] =
-            {
-                4,
-                2,
-                2
-            },
+            [1] = { 4, 2 },    -- Wave 1: 4 Mobs + 2 Mobs after "delayBetweenGroups". 6 total.
+            [2] = { 6, 2 },    -- Wave 2: 6 Mobs + 2 Mobs after "delayBetweenGroups". 8 total.
+            [3] = { 4, 2, 2 }, -- Wave 3: 4 Mobs + 2 Mobs after every "delayBetweenGroups". 8 total. Boss after all 8.
         },
     },
+
     -- How many seconds before each group spawns
     delayBetweenGroups = 15,
 }
@@ -410,7 +340,7 @@ xi.garrison.zoneData =
         textRegion  = 5,
         levelCap    = 30,
         mobBoss     = "Cobalt_Quadav",
-        pos         = nil, -- Needs capture
+        pos         = { 458, 23, 420, 160 },
         xChange     = -2,
         zChange     = -2,
         xSecondLine = 2,
@@ -424,7 +354,7 @@ xi.garrison.zoneData =
         textRegion  = 6,
         levelCap    = 30,
         mobBoss     = "Goblin_Guide",
-        pos         = nil, -- Needs capture
+        pos         = { -484, -30, 60, 64 },
         xChange     = -2,
         zChange     = 0,
         xSecondLine = 0,
@@ -508,7 +438,7 @@ xi.garrison.zoneData =
         textRegion  = 9,
         levelCap    = 50,
         mobBoss     = "Demon_Aristocrat",
-        pos         = nil, -- Needs capture
+        pos         = { 219, -21, 208, 64 },
         xChange     = 2,
         zChange     = 0,
         xSecondLine = 0,
