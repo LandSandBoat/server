@@ -1281,14 +1281,17 @@ xi.chocoboRaising.onEventUpdateVCSTrainer = function(player, csid, option, npc)
                     retireOrGiveUp
 
                 if chocoState.stage >= stage.CHICK then
+                    utils.unused()
                     --menuFlags = menuFlags
                 end
 
                 if chocoState.stage >= stage.ADOLESCENT then
+                    utils.unused()
                     -- menuFlags = menuFlags
                 end
 
                 if chocoState.stage >= stage.ADULT_1 then
+                    utils.unused()
                     -- menuFlags = menuFlags
                 end
 
@@ -1659,6 +1662,7 @@ xi.chocoboRaising.onEventUpdateVCSTrainer = function(player, csid, option, npc)
                 -- A chocobo must have a DSC of D (A bit deficient, 64-95) or
                 -- higher to have a chance at learning a skill from a story
                 if chocoState.discernment >= 64 then
+                    utils.unused()
                     -- TODO: Chance to learn skill
                 end
 
