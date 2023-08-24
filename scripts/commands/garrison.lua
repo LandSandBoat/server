@@ -33,6 +33,8 @@ function onTrigger(player, command, target)
             error(player, string.format("Player named '%s' not found", target))
             return
         end
+    else -- targ == nil, select player
+        targ = player
     end
 
     -- Validate target
