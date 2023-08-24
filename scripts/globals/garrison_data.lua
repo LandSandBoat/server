@@ -19,11 +19,11 @@ xi.garrison.state =
 -- Name is Determined by Nation and LevelCap (sandoria, bastok, windurst)
 xi.garrison.allyNames =
 {
-    [20] = { "Patrician",       "Recruit",         "Candidate"       },
-    [30] = { "Trader",          "Mariner",         "Scholar"         },
-    [40] = { "TempleKnight",    "GoldMusketeer",   "WizeWizard"      },
-    [50] = { "RoyalGuard",      "Commander",       "Patriarch"       },
-    [99] = { "MilitaryAttache", "MilitaryAttache", "MilitaryAttache" },
+    [20] = { [xi.nation.SANDORIA] = "Patrician",       [xi.nation.BASTOK] = "Recruit",         [xi.nation.WINDURST] = "Candidate"       },
+    [30] = { [xi.nation.SANDORIA] = "Trader",          [xi.nation.BASTOK] = "Mariner",         [xi.nation.WINDURST] = "Scholar"         },
+    [40] = { [xi.nation.SANDORIA] = "TempleKnight",    [xi.nation.BASTOK] = "GoldMusketeer",   [xi.nation.WINDURST] = "WizeWizard"      },
+    [50] = { [xi.nation.SANDORIA] = "RoyalGuard",      [xi.nation.BASTOK] = "Commander",       [xi.nation.WINDURST] = "Patriarch"       },
+    [99] = { [xi.nation.SANDORIA] = "MilitaryAttache", [xi.nation.BASTOK] = "MilitaryAttache", [xi.nation.WINDURST] = "MilitaryAttache" },
 }
 
 -- Group Ids are different per cap due to min / max level requirements
