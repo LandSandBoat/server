@@ -617,7 +617,7 @@ void HandleAuctionHouseRequest(CTCPRequestPacket& PTCPRequest)
     // 9 - name
     std::string OrderByString = "ORDER BY";
     uint8       paramCount    = ref<uint8>(data, 0x12);
-    for (uint8 i = 0; i < paramCount; ++i) // параметры сортировки предметов
+    for (uint8 i = 0; i < paramCount; ++i) // Item sort options
     {
         uint8 param = ref<uint32>(data, 0x18 + 8 * i);
         ShowInfo(" Param%u: %u", i, param);
@@ -684,7 +684,7 @@ void HandleAuctionHouseHistory(CTCPRequestPacket& PTCPRequest)
 
 search_req _HandleSearchRequest(CTCPRequestPacket& PTCPRequest)
 {
-    // This function constructs a `search_req` based on which query should be send to the database.
+    // This function constructs a `search_req` based on which query should be sent to the database.
     // The results from the database will eventually be sent to the client.
 
     uint32 bitOffset = 0;
@@ -730,7 +730,7 @@ search_req _HandleSearchRequest(CTCPRequestPacket& PTCPRequest)
 
         if ((EntryType != SEARCH_FRIEND) && (EntryType != SEARCH_LINKSHELL) && (EntryType != SEARCH_COMMENT) && (EntryType != SEARCH_FLAGS2))
         {
-            if ((bitOffset + 3) >= workloadBits) // so 0000000 at the end does not get interpret as name entry
+            if ((bitOffset + 3) >= workloadBits) // so 0000000 at the end does not get interpreted as name entry
             {
                 bitOffset = workloadBits;
                 break;
@@ -920,7 +920,7 @@ search_req _HandleSearchRequest(CTCPRequestPacket& PTCPRequest)
     }
 
     return sr;
-    // не обрабатываем последние биты, что мешает в одну кучу
+    // Do not process the last bits, which can interfere with other operations
     // For example: "/blacklist delete Name" and "/sea all Name"
 }
 
