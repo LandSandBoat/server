@@ -762,7 +762,7 @@ xi.garrison.onTrade = function(player, npc, trade, guardNation)
     local zoneData = xi.garrison.zoneData[zoneID]
 
     -- If info is missing, a debug message will be logged and Garrison will not begin
-    if xi.garrison.getAllyInfo(zoneData, nationID) == nil then
+    if xi.garrison.getAllyInfo(zoneID, zoneData, nationID) == nil then
         player:PrintToPlayer("Garrison is currently unavailable for this region.", xi.msg.channel.SYSTEM_3)
         debugLog("Garrison was cancelled due to missing data.")
 
