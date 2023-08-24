@@ -179,6 +179,8 @@ xi.garrison.spawnNPC = function(zone, zoneData, pos, name, groupId, look)
         specialSpawnAnimation = true,
     })
 
+    debugLogf("NPC: %s (%d), Level: %d, HP: %d", mob:getName(), mob:getID(), mob:getMainLvl(), mob:getHP())
+
     -- Use the mob object as you normally would
     mob:setSpawn(pos[1], pos[2], pos[3], pos[4])
     mob:setMobMod(xi.mobMod.NO_DROPS, 1)
