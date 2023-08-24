@@ -104,7 +104,6 @@ global_objects=(
     getBaseCureOld
     getElementalDamageReduction
     getElementalDebuffDOT
-    getFlourishAnimation
     getHelixDuration
     getMagicHitRate
     getMagicResist
@@ -126,10 +125,6 @@ global_objects=(
     INT_BASED
     CHR_BASED
     MND_BASED
-    BluePhysicalSpell
-    BlueMagicalSpell
-    BlueFinalAdjustments
-    getBlueEffectDuration
 
     ForceCrash
     BuildString
@@ -154,4 +149,3 @@ ignore_rules=(
 --ignore ${ignores[@]} ${ignore_rules[@]} | grep -v "Total:"
 
 python3 ./tools/ci/lua_stylecheck.py ${target}
-
