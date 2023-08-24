@@ -620,6 +620,10 @@ end
 -- used for tables that do not define specific indices.
 -- See: Sigil NPCs
 function utils.contains(value, collection)
+    if collection == nil then
+        return false
+    end
+
     for _, v in pairs(collection) do
         if value == v then
             return true

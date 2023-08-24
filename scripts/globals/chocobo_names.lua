@@ -1,14 +1,14 @@
 ----------------------------------
 -- Chocobo Names (for Chocobo Raising Menu)
---
--- NOTE: These are just to map the index from
---       the menu to a name string.
---       This is not customisable!
 ----------------------------------
 require('scripts/globals/utils')
 ----------------------------------
 
 xi = xi or {}
+
+-- NOTE: These are just to map the index from
+--       the menu to a name string.
+--       This is not customisable!
 xi.chocoboNames =
 {
     -- 1-letter
