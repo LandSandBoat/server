@@ -252,14 +252,6 @@ xi.settings.main =
     -- Please visit scripts/globals/events/login_campaign.lua for assigning the correct campaign dates.
     ENABLE_LOGIN_CAMPAIGN = 0,
 
-    -- GARRISON
-    GARRISON_LOCKOUT             = 1800,  -- Time in seconds before a new garrison can be started (default: 1800)
-    GARRISON_TIME_LIMIT          = 1800,  -- Time in seconds before lose ongoing garrison (default: 1800)
-    GARRISON_ONCE_PER_WEEK       = 0,     -- Set to 1 to bypass the limit of one garrison per Conquest Tally Week.
-    GARRISON_PARTY_LIMIT         = 18,    -- Set to max party members you want to do garrison (default: 18).
-    GARRISON_NATION_BYPASS       = 0,     -- Set to 1 to bypass the nation requirement.
-    GARRISON_RANK                = 2,     -- Set to minumum Nation Rank to start Garrison (default: 2).
-
     -- NYZUL
     RUNIC_DISK_SAVE      = true, -- Allow anyone participating in Nyzul to save progress. Set to false so only initiator can save progress.
     ENABLE_NYZUL_CASKETS = true, -- Enable Treasure casket pops from NMs.
