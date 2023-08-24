@@ -713,7 +713,7 @@ namespace conquest
             charutils::AddPoints(PChar, charutils::GetConquestPointsName(PChar).c_str(), points);
             GainInfluencePoints(PChar, points / 2);
         }
-        return 0; // added conquest points (пока не вижу в этом определенного смысла)
+        return 0; // added conquest points
     }
 
     // GetConquestInfluence(region,nation)
