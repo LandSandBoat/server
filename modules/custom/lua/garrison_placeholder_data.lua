@@ -16,6 +16,7 @@ local additionalAllyLooks =
         [xi.nation.SANDORIA] =
         {
             "0x010004041C106E20833080406850836083700000", -- Fouagine
+            "0x01000A041C103C206C306C406C503C6000700000", -- Ferchinne
         },
 
         [xi.nation.BASTOK] =
@@ -37,20 +38,20 @@ local additionalAllyLooks =
 
         [xi.nation.BASTOK] =
         {
-            "0x0100010814102720173015401550006000700000", -- Ferocious_Artisan
             "0x01000E020F100720003003400750006000700000", -- Suzel
         },
 
         [xi.nation.WINDURST] =
         {
-            "0x0100020700100220023002400250006000700000", -- Naih_Arihmepp
+            --
         },
     },
     [40] =
     {
         [xi.nation.SANDORIA] =
         {
-            "0x010009081C108A2008308A40085019611D700000", -- Ironclad_Gorilla
+            "0x01000D0323108A20803088408050056100700000", -- Parelbriaux
+            "0x01000101141019200C3002400250056000700000", -- Petva
         },
 
         [xi.nation.BASTOK] =
@@ -60,7 +61,6 @@ local additionalAllyLooks =
 
         [xi.nation.WINDURST] =
         {
-            "0x01000C05141019200C3002400250006000700000", -- Voidwatch officer (17752374)
             "0x0100000500100220023002400250006000700000", -- Taraihi-Perunhi
             "0x01000306461118205230B8408550006000700000", -- Wetata
         },
@@ -69,19 +69,18 @@ local additionalAllyLooks =
     {
         [xi.nation.SANDORIA] =
         {
-            "0x01000A041C103C206C306C406C503C6000700000", -- Ferchinne
-            "0x01000D0323108A20803088408050056100700000", -- Parelbriaux
-            "0x01000101141019200C3002400250056000700000", -- Petva
+            --
         },
 
         [xi.nation.BASTOK] =
         {
             "0x01000D0801101620053019400C505C6000700000", -- Iron Eater (17748016)
+            "0x0100010814102720173015401550006000700000", -- Ferocious_Artisan
         },
 
         [xi.nation.WINDURST] =
         {
-            --
+            "0x0100020700100220023002400250006000700000", -- Naih_Arihmepp
         },
     },
     [99] =
