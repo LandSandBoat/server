@@ -304,13 +304,11 @@ local function pickMobs(instance)
 
             if spawnedNMs > 0 then
                 local floorSection = math.floor(currentFloor / 20) + 1
-                local mobGroup = 0
                 local floorNMs = {}
 
+                local mobGroup = xi.nyzul.randomNMs.oddFloor[floorSection]
                 if currentFloor % 2 == 0 then
                     mobGroup = xi.nyzul.randomNMs.evenFloor[floorSection]
-                else
-                    mobGroup = xi.nyzul.randomNMs.oddFloor[floorSection]
                 end
 
                 for i = 1, #mobGroup do

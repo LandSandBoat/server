@@ -269,15 +269,13 @@ g_mixins.job_special = function(jobSpecialMob)
     -- these defaults can be overwritten by using xi.mix.jobSpecial.config() in onMobSpawn.
 
     jobSpecialMob:addListener("SPAWN", "JOB_SPECIAL_SPAWN", function(mob)
-        local ability = nil
-        local mJob = mob:getMainJob()
+        local mJob    = mob:getMainJob()
+        local ability = job2hr[mJob]
 
         if mJob == xi.job.RNG then
             ability = familyEES[mob:getFamily()]
         elseif mJob == xi.job.SMN and mob:isInDynamis() then
             ability = xi.jsa.ASTRAL_FLOW_MAAT
-        else
-            ability = job2hr[mJob]
         end
 
         if ability then

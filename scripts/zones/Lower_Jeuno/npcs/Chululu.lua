@@ -106,7 +106,7 @@ end
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 28 and option == 0 then
         local rand = math.random(1, 4)
-        local card = 0
+        local card = xi.item.TARUT_CARD_THE_FOOL
 
         if rand == 1 then
             card = xi.item.TARUT_CARD_DEATH
@@ -114,8 +114,6 @@ entity.onEventFinish = function(player, csid, option, npc)
             card = xi.item.TARUT_CARD_THE_HERMIT
         elseif rand == 3 then
             card = xi.item.TARUT_CARD_THE_KING
-        else
-            card = xi.item.TARUT_CARD_THE_FOOL
         end
 
         if player:getFreeSlotsCount() == 0 then
@@ -148,7 +146,7 @@ entity.onEventFinish = function(player, csid, option, npc)
         option == 0
     then -- ALL_IN_THE_CARDS started, repeated, or additional cards given
         local rand = math.random(1, 4)
-        local card = 0
+        local card = xi.item.TARUT_CARD_THE_FOOL
 
         if rand == 1 then
             card = xi.item.TARUT_CARD_DEATH
@@ -156,8 +154,6 @@ entity.onEventFinish = function(player, csid, option, npc)
             card = xi.item.TARUT_CARD_THE_HERMIT
         elseif rand == 3 then
             card = xi.item.TARUT_CARD_THE_KING
-        else
-            card = xi.item.TARUT_CARD_THE_FOOL
         end
 
         if npcUtil.giveItem(player, { { card, 5 } }) then

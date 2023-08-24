@@ -224,11 +224,10 @@ local function getSpellBonusAcc(caster, target, spell, params)
 end
 
 local function calculateMagicHitRate(magicacc, magiceva, percentBonus, casterLvl, targetLvl)
-    local p = 0
     --add a scaling bonus or penalty based on difference of targets level from caster
     local levelDiff = utils.clamp(casterLvl - targetLvl, -5, 5)
 
-    p = 70 - 0.5 * (magiceva - magicacc) + levelDiff * 3 + percentBonus
+    local p = 70 - 0.5 * (magiceva - magicacc) + levelDiff * 3 + percentBonus
 
     return utils.clamp(p, 5, 95)
 end
@@ -610,7 +609,7 @@ end
 -- Returns resistance value from given magic hit rate (p)
 function getMagicResist(magicHitRate)
     local p = magicHitRate / 100
-    local resist = 1
+    local resist = 1.0
 
     -- Resistance thresholds based on p.  A higher p leads to lower resist rates, and a lower p leads to higher resist rates.
     local half      = (1 - p)
@@ -628,8 +627,6 @@ function getMagicResist(magicHitRate)
         resist = 0.25
     elseif resvar <= half then
         resist = 0.5
-    else
-        resist = 1.0
     end
 
     return resist
@@ -872,7 +869,7 @@ function addBonuses(caster, spell, target, dmg, params)
     end
 
     dmg = math.floor(dmg * burst)
-    local mabbonus = 0
+    local mabbonus
     local spellId = spell:getID()
 
     if spellId >= 245 and spellId <= 248 then -- Drain/Aspir (II)

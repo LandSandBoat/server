@@ -12,7 +12,6 @@ end
 
 entity.onTrigger = function(player, npc)
     local runicPortals  = player:getTeleport(xi.teleport.type.RUNIC_PORTAL)
-    local validTeleport = 0
     local assaultOrders =
     {
         [0] = { KI = xi.ki.LEUJAOAM_ASSAULT_ORDERS,   tele = 0x02, valid = 2,  event = 120 },
@@ -26,7 +25,7 @@ entity.onTrigger = function(player, npc)
     if xi.assault.hasOrders(player) then
         for k, v in pairs(assaultOrders) do
             if player:hasKeyItem(v.KI) then
-                validTeleport = bit.band(runicPortals, v.tele)
+                local validTeleport = bit.band(runicPortals, v.tele)
                 player:messageSpecial(ID.text.CONFIRMING, v.KI)
 
                 if validTeleport == v.valid then

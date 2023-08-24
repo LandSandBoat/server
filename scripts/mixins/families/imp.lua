@@ -12,12 +12,10 @@ g_mixins.families.imp = function(impMob)
         if random <= 20 and mob:getAnimationSub() == 0 then
             mob:setAnimationSub(1)
             if mob:getLocalVar("hornDisabled") ~= 1 then
-                local time = 0
+                local time = 25 + (math.ceil(random / 5) * 5)
 
                 if random <= 2 then
                     time = 60
-                else
-                    time = 25 + (math.ceil(random / 5) * 5)
                 end
 
                 mob:timer(time * 1000, function(mobArg)

@@ -33,13 +33,13 @@ local killCounter = function(mob, player, optParams)
 end
 
 local assessment = function(player, npc)
-    local startTime = mission:getVar(player, "StartTime")
-    local startDay = mission:getVar(player, "StartDay")
-    local startHour = mission:getVar(player, "StartHour")
+    local startTime     = mission:getVar(player, "StartTime")
+    local startDay      = mission:getVar(player, "StartDay")
+    local startHour     = mission:getVar(player, "StartHour")
     local secondsPassed = os.time() - startTime
-    local hoursPassed = 0
-    local killCount = mission:getVar(player, "KillCount")
-    local completed = player:hasCompletedMission(mission.areaId, mission.missionId)
+    local hoursPassed   = VanadielHour()
+    local killCount     = mission:getVar(player, "KillCount")
+    local completed     = player:hasCompletedMission(mission.areaId, mission.missionId)
 
     -- player took too long to speak under requirements in time, so they fail mission
     if
@@ -76,14 +76,14 @@ local assessment = function(player, npc)
     -- player hasn't waited long enough to be assessed
     else
         if VanadielDayOfTheYear() == startDay then
-            hoursPassed = VanadielHour() - startHour
+            hoursPassed = hoursPassed - startHour
         elseif VanadielDayOfTheYear() == startDay + 1 then
-            hoursPassed = VanadielHour() - startHour + 24
+            hoursPassed = hoursPassed - startHour + 24
         else
             if completed then
-                hoursPassed = (24 - startHour) + VanadielHour() + 24
+                hoursPassed = (24 - startHour) + hoursPassed + 24
             else
-                hoursPassed = (24 - startHour) + VanadielHour()
+                hoursPassed = (24 - startHour) + hoursPassed
             end
         end
 

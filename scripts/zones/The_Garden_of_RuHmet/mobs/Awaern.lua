@@ -8,16 +8,14 @@ local ID = zones[xi.zone.THE_GARDEN_OF_RUHMET]
 local entity = {}
 
 entity.onMobSpawn = function(mob)
-    local IxAernDRGPH = GetServerVariable("[SEA]IxAernDRG_PH") -- Should be be the ID of the mob that spawns the actual PH
-
     -- Pick the Ix'Aern (DRG) PH if the server doesn't have one, and the if the actual PH/NM isn't up. Then, set it.
     if
         not GetMobByID(ID.mob.IXAERN_DRG):isSpawned() and
         GetServerVariable("[SEA]IxAernDRG_PH") == 0
     then
         -- This should be cleared when the mob is killed.
-        local groups = ID.mob.AWAERN_DRG_GROUPS
-        IxAernDRGPH = groups[math.random(1, #groups)] + math.random(0, 2) -- The 4th mobid in each group is a pet. F that son
+        local groups      = ID.mob.AWAERN_DRG_GROUPS
+        local IxAernDRGPH = groups[math.random(1, #groups)] + math.random(0, 2) -- The 4th mobid in each group is a pet. F that son
         SetServerVariable("[SEA]IxAernDRG_PH", IxAernDRGPH)
     end
 end

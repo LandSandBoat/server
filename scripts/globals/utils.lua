@@ -73,11 +73,9 @@ end
 function utils.getDebugPrinter(printEntityName, settingOrCondition, prefix)
     return function(...)
         if settingOrCondition then
-            local t = nil
+            local t = { ... }
             if prefix then
                 t = { prefix, ... }
-            else
-                t = { ... }
             end
 
             local str = tostring(unpack(t))
@@ -335,7 +333,6 @@ function utils.takeShadows(target, dmg, shadowbehav)
 end
 
 function utils.conalDamageAdjustment(attacker, target, skill, maxDamage, minimumPercentage)
-    local finalDamage = 1
     -- #TODO: Currently all cone attacks use static 45 degree (360 scale) angles in core, when cone attacks
     -- have different angles and there's a method to fetch the angle, use a line like the below
     -- local coneAngle = skill:getConalAngle()
@@ -360,7 +357,7 @@ function utils.conalDamageAdjustment(attacker, target, skill, maxDamage, minimum
     local damagePerAngle   = (maxDamage - minimumDamage) / coneAngle
     local additionalDamage = damagePerAngle * conalAnglePower
 
-    finalDamage = math.max(1, math.ceil(minimumDamage + additionalDamage))
+    local finalDamage = math.max(1, math.ceil(minimumDamage + additionalDamage))
 
     return finalDamage
 end
@@ -427,7 +424,7 @@ local skillLevelTable =
 -- Get the corresponding table entry to use in skillLevelTable based on level range
 -- TODO: Minval for ranges 2 and 3 in the conditional is probably not necessary
 local function getSkillLevelIndex(level, rank)
-    local rangeId = 0
+    local rangeId = 100
 
     if level <= 50 then
         rangeId = 1
@@ -443,8 +440,6 @@ local function getSkillLevelIndex(level, rank)
         rangeId = 80
     elseif level <= 99 then
         rangeId = 90
-    else
-        rangeId = 100
     end
 
     return rangeId

@@ -310,7 +310,6 @@ local function getQMLogInfo(cmdParamText, logNameTable)
     end
 
     local logName
-    local ret = nil
     local logIdNum = tonumber(cmdParamText)
 
     if logIdNum ~= nil then
@@ -320,7 +319,7 @@ local function getQMLogInfo(cmdParamText, logNameTable)
     end
 
     if logName ~= nil then
-        ret = qmLogInfo[logName]
+        local ret = qmLogInfo[logName]
 
         if
             type(ret) == "table" and

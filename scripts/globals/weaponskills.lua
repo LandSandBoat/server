@@ -1161,10 +1161,8 @@ xi.weaponskills.cMeleeRatio = function(attacker, defender, params, ignoredDef, t
         cratio = 0
     end
 
-    local pdifmin = 0
-    local pdifmax = 0
-
     -- max
+    local pdifmax = 3
     if cratio < 0.5 then
         pdifmax = cratio + 0.5
     elseif cratio < 0.7 then
@@ -1175,11 +1173,10 @@ xi.weaponskills.cMeleeRatio = function(attacker, defender, params, ignoredDef, t
         pdifmax = cratio * 0.25 + cratio
     elseif cratio < 2.625 then
         pdifmax = cratio + 0.375
-    else
-        pdifmax = 3
     end
 
     -- min
+    local pdifmin = cratio - 0.375
     if cratio < 0.38 then
         pdifmin = 0
     elseif cratio < 1.25 then
@@ -1188,8 +1185,6 @@ xi.weaponskills.cMeleeRatio = function(attacker, defender, params, ignoredDef, t
         pdifmin = 1
     elseif cratio < 2.44 then
         pdifmin = cratio * 1176 / 1024 - 775 / 1024
-    else
-        pdifmin = cratio - 0.375
     end
 
     local pdif = {}
