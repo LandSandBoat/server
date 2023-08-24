@@ -49,6 +49,9 @@ void lua_init()
     // Bind print(...) globally
     lua.set_function("print", &lua_print);
 
+    // Bind tostring(...) globally
+    lua.set_function("tostring", &lua_to_string);
+
     // Attempt to startup lldebugger
     auto result = lua["require"]("lldebugger");
     if (result.valid())
@@ -61,7 +64,7 @@ void lua_init()
 /**
  * @brief
  */
-std::string lua_to_string(sol::object const& obj, std::size_t depth)
+std::string lua_to_string_depth(sol::object const& obj, std::size_t depth)
 {
     switch (obj.get_type())
     {
@@ -128,11 +131,11 @@ std::string lua_to_string(sol::object const& obj, std::size_t depth)
             {
                 if (keyObj.get_type() == sol::type::string)
                 {
-                    stringVec.emplace_back(fmt::format("{}{}: {}", indent, lua_to_string(keyObj), lua_to_string(valObj, depth + 1)));
+                    stringVec.emplace_back(fmt::format("{}{}: {}", indent, lua_to_string_depth(keyObj, 0), lua_to_string_depth(valObj, depth + 1)));
                 }
                 else
                 {
-                    stringVec.emplace_back(fmt::format("{}{}", indent, lua_to_string(valObj, depth + 1)));
+                    stringVec.emplace_back(fmt::format("{}{}", indent, lua_to_string_depth(valObj, depth + 1)));
                 }
             }
 
@@ -158,7 +161,7 @@ std::string lua_to_string(sol::object const& obj, std::size_t depth)
 /**
  * @brief
  */
-void lua_print(sol::variadic_args va)
+std::string lua_to_string(sol::variadic_args va)
 {
     TracyZoneScoped;
 
@@ -175,9 +178,19 @@ void lua_print(sol::variadic_args va)
         }
         else
         {
-            vec.emplace_back(lua_to_string(va[i]));
+            vec.emplace_back(lua_to_string_depth(va[i], 0));
         }
     }
 
-    ShowLua(fmt::format("{}", fmt::join(vec.begin(), vec.end(), " ")).c_str());
+    return fmt::format("{}", fmt::join(vec.begin(), vec.end(), " "));
+}
+
+/**
+ * @brief
+ */
+void lua_print(sol::variadic_args va)
+{
+    TracyZoneScoped;
+
+    ShowLua(lua_to_string(va).c_str());
 }
