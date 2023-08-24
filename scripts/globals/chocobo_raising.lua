@@ -394,9 +394,11 @@ utils.unused(hunger)
 
 local cutscenes =
 {
-    -- SANDORIA OFFSET: 256
-    -- BASTOK OFFSET: 512
-    -- WINDURST OFFSET: 768
+    -- Each cutscene needs this offset added to them before they can be used,
+    -- depending on the zone
+    SANDORIA_OFFSET = 256,
+    BASTOK_OFFSET   = 512,
+    WINDURST_OFFSET = 768,
 
     -- EGG ONWARDS:
     REPORT_BASIC_CARE = 0,
@@ -430,8 +432,9 @@ local cutscenes =
     RAN_AWAY = 39,
     -- 40: Player gives the chocobo x
     -- 48: Happy to see you
-    -- 51: Hangs its head in shame
-    HAVENT_SEEN_YOU = 53, -- Haven't seen you around, chocobo is sleeping (dispose of white handkerchief)
+    INTERESTED_IN_YOUR_STORY = 50,
+    HANGS_HEAD_IN_SHAME      = 51, -- Hangs its head in shame
+    HAVENT_SEEN_YOU          = 53, -- Haven't seen you around, chocobo is sleeping (dispose of white handkerchief)
     -- 54: Accept white handkerchief
     CRYING_AT_NIGHT = 69, -- White handkerchief
     -- 70: Chocobo full of energy!
@@ -440,6 +443,16 @@ local cutscenes =
     CALMED_DOWN = 77,
     -- 84: Sleeping well thanks to White Handkerchief
 }
+
+local getCutsceneWithOffset = function(player, cutscene)
+    local cutsceneOffsets =
+    {
+        [xi.zone.SOUTHERN_SAN_DORIA] = cutscenes.SANDORIA_OFFSET,
+        [xi.zone.BASTOK_MINES]       = cutscenes.BASTOK_OFFSET,
+        [xi.zone.WINDURST_WOODS]     = cutscenes.WINDURST_OFFSET,
+    }
+    return cutscene + cutsceneOffsets[player:getZoneID()]
+end
 
 xi.chocoboRaising.newChocobo = function(player, egg)
     local newChoco = {}
@@ -675,6 +688,15 @@ local onRaisingEventPlayout = function(player, csOffset, chocoState)
         [cutscenes.HAVENT_SEEN_YOU] = function()
             player:delKeyItem(xi.ki.WHITE_HANDKERCHIEF)
             player:setCharVar("[choco]WH_TIME", 0)
+        end,
+
+        [cutscenes.HANGS_HEAD_IN_SHAME] = function()
+            -- TODO: Take in a multiplier to account for merged time ranges
+            -- TODO: Add settings multipliers
+            -- TODO: Make sure these are clamped!
+            chocoState.affection = chocoState.affection - 10
+
+            -- TODO: Remove "Spoiled" status effect
         end,
     }
 
@@ -1608,13 +1630,17 @@ xi.chocoboRaising.onEventUpdateVCSTrainer = function(player, csid, option, npc)
                     -- TODO: Chance to learn skill
                 end
 
+                local storyMask = 0xFFFFFF9C
+
+                chocoState = onRaisingEventPlayout(player, cutscenes.INTERESTED_IN_YOUR_STORY, chocoState)
                 player:updateEventString(chocoState.first_name, chocoState.last_name, chocoState.first_name, chocoState.last_name, 0, 0, 0, 0, 0, 0, 0)
-                player:updateEvent(306, 0, 0xFFFFFF9C, 0, 5, 0, 0, 3)
+                player:updateEvent(getCutsceneWithOffset(player, cutscenes.INTERESTED_IN_YOUR_STORY), 0, storyMask, 0, chocoState.stage, 0, 0, 3)
             end,
 
             [13298] = function() -- Scold the chocobo
-                -- TODO: Only tested on Chick
-                player:updateEvent(307, 5931, 0, 0, 6, 0, 0, 2)
+                chocoState = onRaisingEventPlayout(player, cutscenes.HANGS_HEAD_IN_SHAME, chocoState)
+                player:updateEventString(chocoState.first_name, chocoState.last_name, chocoState.first_name, chocoState.last_name, 0, 0, 0, 0, 0, 0, 0)
+                player:updateEvent(getCutsceneWithOffset(player, cutscenes.HANGS_HEAD_IN_SHAME), 0, 0, 0, chocoState.stage, 0, 0, 0)
             end,
 
             [13554] = function() -- Compete with others
