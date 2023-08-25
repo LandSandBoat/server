@@ -94,6 +94,69 @@ xi.chocoboRaising.ridingTimeCap     = 45
 -- Red Race Silks add 1 rank
 -- Leads to absolute max of: 17 + (4 * 9): 53 -> clamped to 45
 
+-- These act as multipliers for adding per-rank bonuses to things.
+-- F gives base + (0 * bonus)
+-- SS gives base + (7 * bonus)
+local skillRanks =
+{
+    F_POOR                = 0,
+    E_SUBSTANDARD         = 1,
+    D_A_BIT_DEFICIENT     = 2,
+    C_AVERAGE             = 3,
+    B_BETTER_THAN_AVERAGE = 4,
+    A_IMPRESSIVE          = 5,
+    S_OUTSTANDING         = 6,
+    SS_FIRST_CLASS        = 7,
+}
+
+local skillRankBoundaries =
+{
+    F_POOR                = 31,
+    E_SUBSTANDARD         = 63,
+    D_A_BIT_DEFICIENT     = 95,
+    C_AVERAGE             = 127,
+    B_BETTER_THAN_AVERAGE = 159,
+    A_IMPRESSIVE          = 191,
+    S_OUTSTANDING         = 223,
+    SS_FIRST_CLASS        = 255,
+}
+
+local skillToSkillRank = function(skill)
+    local rank = skillRanks.F_POOR
+
+    -- Since pairs isn't guaranteed to iterate in order, we have
+    -- do check against ranks and see if things are greater than
+    -- our best-found rank
+    for idx, boundary in pairs(skillRankBoundaries) do
+        if skill >= boundary and skillRanks[idx] > rank then
+            rank = skillRanks[idx]
+        end
+    end
+
+    return rank
+end
+
+xi.chocoboRaising.getPlayerRidingSpeedAndTime = function(player)
+    local baseSpeed = xi.chocoboRaising.ridingSpeedBase
+    local baseTime  = xi.chocoboRaising.ridingTimeBase
+
+    -- TODO: This should be looking up your registered chocobo, not your
+    --     : current raising chocobo.
+    local chocoState = player:getChocoboRaisingInfo()
+    if chocoState == nil then
+        -- TODO: Log
+        return baseSpeed, baseTime
+    end
+
+    local strRank = skillToSkillRank(chocoState.strength)
+    local endRank = skillToSkillRank(chocoState.endurance)
+
+    local outSpeed = utils.clamp(baseSpeed + (strRank * xi.chocoboRaising.ridingSpeedPerRank), 0, xi.chocoboRaising.ridingSpeedCap)
+    local outTime  = utils.clamp(baseTime  + (endRank * xi.chocoboRaising.ridingTimePerRank), 0, xi.chocoboRaising.ridingTimeCap)
+
+    return outSpeed, outTime
+end
+
 -- NOTE: These are animation effects, so you can use warp etc.
 local glow =
 {
@@ -219,6 +282,10 @@ local handleStatChange = function(stat, change, max)
     elseif change < 0 then
         change = change * xi.settings.main.CHOCOBO_RAISING_STAT_NEG_MULTIPLIER
     end
+
+    -- TODO: Enum for which stat is changing?
+    -- TODO: Handle Green Racing Silks here for energy?
+    -- https://ffxiclopedia.fandom.com/wiki/Green_Race_Silks
 
     stat = utils.clamp(stat + change, 0, max)
 
@@ -575,6 +642,8 @@ local hunger =
 }
 utils.unused(hunger)
 
+-- TODO: Combine carePlanData with this cutscenes table, so cutscenes have associated
+--     : stat changes that can be looked up and applied.
 local cutscenes =
 {
     -- Each cutscene needs this offset added to them before they can be used,
@@ -949,6 +1018,7 @@ local onRaisingEventPlayout = function(player, csOffset, chocoState)
         [cutscenes.HANGS_HEAD_IN_SHAME] = function()
             -- TODO: Take in a multiplier to account for merged time ranges
             chocoState.affection = handleStatChange(chocoState.affection, -10, 255)
+            chocoState.energy    = handleStatChange(chocoState.energy, -5, 100)
             setCondition(chocoState, conditions.SPOILED, false)
         end,
 
@@ -956,6 +1026,7 @@ local onRaisingEventPlayout = function(player, csOffset, chocoState)
             -- TODO: Take in a multiplier to account for merged time ranges
             -- "Increases affection slightly - confirmed."
             chocoState.affection = handleStatChange(chocoState.affection, 1, 255)
+            chocoState.energy    = handleStatChange(chocoState.energy, -5, 100)
             setCondition(chocoState, conditions.BORED, false)
         end,
     }
