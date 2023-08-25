@@ -121,7 +121,7 @@ local skillRankBoundaries =
     SS_FIRST_CLASS        = 255,
 }
 
-local skillToSkillRank = function(skill)
+local numberToRank = function(skill)
     local rank = skillRanks.F_POOR
 
     -- Since pairs isn't guaranteed to iterate in order, we have
@@ -148,8 +148,8 @@ xi.chocoboRaising.getPlayerRidingSpeedAndTime = function(player)
         return baseSpeed, baseTime
     end
 
-    local strRank = skillToSkillRank(chocoState.strength)
-    local endRank = skillToSkillRank(chocoState.endurance)
+    local strRank = numberToRank(chocoState.strength)
+    local endRank = numberToRank(chocoState.endurance)
 
     local outSpeed = utils.clamp(baseSpeed + (strRank * xi.chocoboRaising.ridingSpeedPerRank), 0, xi.chocoboRaising.ridingSpeedCap)
     local outTime  = utils.clamp(baseTime  + (endRank * xi.chocoboRaising.ridingTimePerRank), 0, xi.chocoboRaising.ridingTimeCap)
@@ -295,16 +295,6 @@ end
 local handleCarePlan = function(player, chocoState, carePlan)
     -- TODO: Take in a multiplier to account for merged time ranges
 
-    debug(
-        string.format("Care Plan: %d (before), str: %d, end: %d, dsc: %d, rcp: %d, aff: %d, energy: %d",
-        carePlan,
-        chocoState.strength,
-        chocoState.endurance,
-        chocoState.discernment,
-        chocoState.receptivity,
-        chocoState.affection,
-        chocoState.energy))
-
     chocoState.strength    = handleStatChange(chocoState.strength   , carePlanData[carePlan][1], 255)
     chocoState.endurance   = handleStatChange(chocoState.endurance  , carePlanData[carePlan][2], 255)
     chocoState.discernment = handleStatChange(chocoState.discernment, carePlanData[carePlan][3], 255)
@@ -312,20 +302,10 @@ local handleCarePlan = function(player, chocoState, carePlan)
     chocoState.affection   = handleStatChange(chocoState.affection  , carePlanData[carePlan][5], 255)
     chocoState.energy      = handleStatChange(chocoState.energy     , carePlanData[carePlan][6], 100)
 
-    debug(
-        string.format("Care Plan: %d (after), str: %d, end: %d, dsc: %d, rcp: %d, aff: %d, energy: %d",
-        carePlan,
-        chocoState.strength,
-        chocoState.endurance,
-        chocoState.discernment,
-        chocoState.receptivity,
-        chocoState.affection,
-        chocoState.energy))
-
     local payment = carePlanData[carePlan][7]
     if payment then
         payment = payment * xi.settings.main.CHOCOBO_RAISING_GIL_MULTIPLIER
-        debug(string.format("Care Plan Payment: %d", payment))
+        debug(string.format('Care Plan Payment: %d', payment))
 
         -- TODO: Handle payment
     end
@@ -921,7 +901,7 @@ local updateChocoState = function(player, chocoState)
     chocoState.age = math.floor((os.time() - chocoState.created) / xi.chocoboRaising.dayLength) + 1
     chocoState.last_update_age = chocoState.age
 
-    debug(string.format("Writing chocoState to cache and db. age: %d, last_update_age: %d", chocoState.age, chocoState.last_update_age))
+    debug(string.format('Writing chocoState to cache and db. age: %d, last_update_age: %d', chocoState.age, chocoState.last_update_age))
 
     -- Write to cache
     xi.chocoboRaising.chocoState[player:getID()] = chocoState
@@ -995,12 +975,12 @@ local onRaisingEventPlayout = function(player, csOffset, chocoState)
         [cutscenes.ADULT_2_TO_ADULT_3] = function()
             -- You waited too long to name your chocobo, trainer is going to do it for you!
             if
-                chocoState.first_name == "Chocobo" and
-                chocoState.last_name == "Chocobo"
+                chocoState.first_name == 'Chocobo' and
+                chocoState.last_name == 'Chocobo'
             then
                 -- Pick a name at random: First name only
                 chocoState.first_name = xi.chocoboNames.getRandomName()
-                chocoState.last_name = ""
+                chocoState.last_name = ''
             end
         end,
 
@@ -1024,7 +1004,7 @@ local onRaisingEventPlayout = function(player, csOffset, chocoState)
 
         [cutscenes.COMPETE_WITH_OTHERS] = function()
             -- TODO: Take in a multiplier to account for merged time ranges
-            -- "Increases affection slightly - confirmed."
+            -- 'Increases affection slightly - confirmed.'
             chocoState.affection = handleStatChange(chocoState.affection, 1, 255)
             chocoState.energy    = handleStatChange(chocoState.energy, -5, 100)
             setCondition(chocoState, conditions.BORED, false)
@@ -1064,29 +1044,13 @@ local handleCSUpdate = function(player, chocoState, doEventUpdate)
 
     chocoState = onRaisingEventPlayout(player, csOffset, chocoState)
 
-    -- Skip the event updates during "Skip Report"
+    -- Skip the event updates during 'Skip Report'
     if doEventUpdate then
         player:updateEventString(chocoState.first_name, chocoState.last_name, chocoState.first_name, chocoState.first_name,
             0, 0, 0, 0, 0, 0, 0, 0)
         player:updateEvent(#chocoState.csList, csToPlay, 0, chocoState.colour,
             chocoState.stage, 0, currentAgeOfChocoboDuringCutscene, 1)
     end
-
-    return chocoState
-end
-
-local updateChocoState = function(player, chocoState)
-    -- Update age and last_update_age
-    chocoState.age = math.floor((os.time() - chocoState.created) / xi.chocoboRaising.dayLength) + 1
-    chocoState.last_update_age = chocoState.age
-
-    debug('Writing chocoState.age & last_update_age:', chocoState.last_update_age)
-
-    -- Write to cache
-    xi.chocoboRaising.chocoState[player:getID()] = chocoState
-
-    -- Write to db
-    player:setChocoboRaisingInfo(chocoState)
 
     return chocoState
 end
@@ -1639,9 +1603,10 @@ xi.chocoboRaising.onEventUpdateVCSTrainer = function(player, csid, option, npc)
                 player:confirmTrade()
 
                 for idx, itemId in ipairs(chocoState.foodGiven) do
-                    local itemData = validFoods[itemId]
+                    local itemData     = validFoods[itemId]
+                    local hungerAmount = itemData[1]
                     local energyAmount = itemData[3]
-                    local glowColour = itemData[10]
+                    local glowColour   = itemData[10]
 
                     player:messageSpecial(ID.text.CHOCOBO_FEEDING_ITEM, itemId, idx)
 
@@ -1663,8 +1628,7 @@ xi.chocoboRaising.onEventUpdateVCSTrainer = function(player, csid, option, npc)
 
                     local reaction = 1
 
-                    local hungerLevel = hunger.COMPLETELY_FULL
-
+                    chocoState.hunger = utils.clamp(chocoState.hunger + hungerAmount, 0, 255)
                     chocoState.energy = utils.clamp(chocoState.energy + energyAmount, 0, 100)
 
                     -- If multiple items, glow is always green
@@ -1672,7 +1636,7 @@ xi.chocoboRaising.onEventUpdateVCSTrainer = function(player, csid, option, npc)
                         glowColour = glow.GREEN
                     end
 
-                    player:updateEvent(10, glowColour, 0, 0, reaction, hungerLevel, 0, 0)
+                    player:updateEvent(10, glowColour, 0, 0, reaction, numberToRank(chocoState.hunger), 0, 0)
                 end
 
                 chocoState.foodGiven = nil
@@ -2047,22 +2011,22 @@ xi.chocoboRaising.onEventUpdateVCSTrainer = function(player, csid, option, npc)
 
                 local winnerStr =
                 {
-                    [0] = "Player",
-                    [1] = "Tie",
-                    [2] = "Rival",
+                    [0] = 'Player',
+                    [1] = 'Tie',
+                    [2] = 'Rival',
                 }
 
-                debug("Competition Winner: " .. winnerStr[winner])
+                debug('Competition Winner: ' .. winnerStr[winner])
 
                 -- TODO: Use relevant name for area
-                local rivalsName = "Hero"
+                local rivalsName = 'Hero'
 
                 -- TODO: Hook up rival's look
 
                 -- TODO: Track wins in chocoState+db, only need to track up to 3
 
                 chocoState = onRaisingEventPlayout(player, cutscenes.COMPETE_WITH_OTHERS, chocoState)
-                player:updateEventString(chocoState.first_name, rivalsName, "", "", 0, 0, 0, 0, 0, 0, 0)
+                player:updateEventString(chocoState.first_name, rivalsName, '', '', 0, 0, 0, 0, 0, 0, 0)
                 player:updateEvent(getCutsceneWithOffset(player, cutscenes.COMPETE_WITH_OTHERS), 0, winner, 0, chocoState.stage, 0, 0, 0)
             end,
 
@@ -2109,7 +2073,7 @@ xi.chocoboRaising.onEventUpdateVCSTrainer = function(player, csid, option, npc)
                 player:updateEvent(0, 0, 0, 0, 0, 0, 0, 0)
             end,
 
-            [1241] = function() -- Called during "Compete with Others"
+            [1241] = function() -- Called during 'Compete with Others'
                 -- Appears to always be blank
                 player:updateEvent(0, 0, 0, 0, 0, 0, 0, 0)
             end,
