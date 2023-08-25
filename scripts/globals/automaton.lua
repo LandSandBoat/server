@@ -187,6 +187,8 @@ local function getRefreshModValue(pet, attachmentName, numManeuvers)
     return regenRefreshFormulas[attachmentName][1][numManeuvers + 1] + petMaxMP * (regenRefreshFormulas[attachmentName][2][numManeuvers + 1] / 100)
 end
 
+-- TODO: This may still be necessary with future updates
+--[[
 local function isOpticFiber(attachmentName)
     if string.find(attachmentName, 'optic_fiber') ~= nil then
         return true
@@ -194,6 +196,7 @@ local function isOpticFiber(attachmentName)
 
     return false
 end
+]]--
 
 -- Global functions to handle attachment equip, unequip, maneuver and performance changes
 -- NOTE: Core is 0-indexed for maneuvers, yet the table above is 1-indexed, and Maneuvers
@@ -256,14 +259,6 @@ xi.automaton.updateAttachmentModifier = function(pet, attachment, maneuvers)
             end
 
             pet:setLocalVar(attachmentName .. k, modValue)
-
-            local master = pet:getMaster()
-            if
-                master and
-                isOpticFiber(attachmentName)
-            then
-                master:updateAttachments()
-            end
         end
     end
 end
