@@ -2,7 +2,6 @@
 -- Area: Attohwa Chasm
 --  NPC: Miasma
 -----------------------------------
------------------------------------
 local entity = {}
 
 entity.onTimeTrigger = function(npc, triggerID)

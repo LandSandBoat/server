@@ -3,7 +3,6 @@
 -- Dispels all buffs including food. Lowers Enmity.
 -----------------------------------
 require("scripts/globals/mobskills")
-require("scripts/globals/msg")
 -----------------------------------
 local mobskillObject = {}
 

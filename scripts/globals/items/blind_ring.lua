@@ -3,8 +3,6 @@
 -- Item: Blind Ring
 -- Item Effect: Enchantment Blind
 -----------------------------------------
-require("scripts/globals/msg")
------------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, player)

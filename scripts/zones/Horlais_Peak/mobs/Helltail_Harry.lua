@@ -3,7 +3,6 @@
 --  Mob: Helltail Harry
 -- BCNM: Tails of Woe
 -----------------------------------
------------------------------------
 local entity = {}
 
 entity.onMobSpawn = function(mob)

@@ -1,7 +1,6 @@
 -----------------------------------
 -- Thief Job Utilities
 -----------------------------------
-require("scripts/globals/msg")
 require("scripts/globals/quests")
 require("scripts/globals/utils")
 -----------------------------------

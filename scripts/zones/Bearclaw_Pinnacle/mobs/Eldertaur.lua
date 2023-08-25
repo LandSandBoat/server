@@ -3,7 +3,6 @@
 --  Mob: Eldertaur
 --  ENM: Brothers
 -----------------------------------
------------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)

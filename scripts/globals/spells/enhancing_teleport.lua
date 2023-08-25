@@ -2,7 +2,6 @@
 -- Teleport Spell Utilities
 -----------------------------------
 require("scripts/globals/teleports")
-require("scripts/globals/msg")
 -----------------------------------
 xi = xi or {}
 xi.spells = xi.spells or {}

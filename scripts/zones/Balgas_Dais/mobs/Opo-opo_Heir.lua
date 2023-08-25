@@ -3,7 +3,6 @@
 --  Mob: Opo-opo Heir
 -- BCNM: Royal Succession
 -----------------------------------
------------------------------------
 local entity = {}
 
 entity.onMobSpawn = function(mob)

@@ -3,7 +3,6 @@
 -- Gives mobs regain for designated amount of time
 -----------------------------------
 require("scripts/globals/mobskills")
-require("scripts/globals/msg")
 -----------------------------------
 local mobskillObject = {}
 

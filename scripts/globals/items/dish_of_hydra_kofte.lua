@@ -13,8 +13,6 @@
 -- Ranged ATT Cap 150
 -- Poison Resist 5
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

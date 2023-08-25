@@ -3,7 +3,6 @@
 --  mob: Peerifool
 --  Quest: One Good Deed?
 -----------------------------------
------------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)

@@ -3,7 +3,6 @@
 --  Mob: Tsuchigumo
 -- Involved in Quest: 20 in Pirate Years
 -----------------------------------
------------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)

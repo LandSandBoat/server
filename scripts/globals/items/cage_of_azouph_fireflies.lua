@@ -3,7 +3,6 @@
 -- Azouph Fireflies
 -- Transports the user to Azouph Isle
 -----------------------------------
-require("scripts/globals/msg")
 require("scripts/globals/teleports")
 require("scripts/globals/zone")
 -----------------------------------

@@ -4,7 +4,6 @@
 -- Involved In Quest: Dark Puppet
 -- !pos -51 0.1 3 193
 -----------------------------------
------------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)

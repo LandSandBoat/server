@@ -3,7 +3,6 @@
 --  Mob: Chaos Wyvern
 -- KSNM: Eye of the Storm
 -----------------------------------
------------------------------------
 local entity = {}
 
 entity.onMobSpawn = function(mob)

@@ -2,7 +2,6 @@
 -- func: gettraits
 -- desc: prints list of all traits
 ---------------------------------------------------------------------------------------------------
-require("scripts/globals/msg")
 
 cmdprops =
 {

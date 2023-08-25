@@ -3,7 +3,6 @@
 -- Temporarily blinds an enemy, greatly lowering its accuracy.
 -----------------------------------
 require("scripts/globals/magic")
-require("scripts/globals/msg")
 -----------------------------------
 local spellObject = {}
 

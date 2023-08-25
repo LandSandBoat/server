@@ -4,8 +4,6 @@
 -- Item Effect: VIT +7
 -- Duration: 3 minutes
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

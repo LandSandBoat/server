@@ -1,7 +1,6 @@
 -----------------------------------
 -- ABILITIES
 -----------------------------------
-require("scripts/globals/msg")
 
 xi = xi or {}
 
@@ -740,7 +739,10 @@ function AbilityFinalAdjustments(dmg, mob, skill, target, skilltype, skillparam,
     end
 
     -- handle super jump
-    if target:hasStatusEffect(xi.effect.ALL_MISS) and target:getStatusEffect(xi.effect.ALL_MISS):getPower() > 1 then
+    if
+        target:hasStatusEffect(xi.effect.ALL_MISS) and
+        target:getStatusEffect(xi.effect.ALL_MISS):getPower() > 1
+    then
         skill:setMsg(xi.msg.basic.JA_MISS_2)
         return 0
     end

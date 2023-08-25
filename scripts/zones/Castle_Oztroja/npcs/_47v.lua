@@ -4,7 +4,6 @@
 -- Notes: Opens door _472 from behind
 -- !pos -61 0 -36 151
 -----------------------------------
------------------------------------
 local entity = {}
 
 entity.onTrigger = function(player, npc)

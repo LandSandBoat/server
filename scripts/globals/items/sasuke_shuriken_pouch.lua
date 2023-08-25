@@ -3,8 +3,6 @@
 -- Sasu. Sh. Pouch
 -- A small leather pouch made for storing sasuke shuriken.
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

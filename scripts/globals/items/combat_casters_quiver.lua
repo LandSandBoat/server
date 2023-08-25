@@ -3,8 +3,6 @@
 -- Combat Caster's Quiver
 -- When used, you will obtain one Combat Caster's Arrow
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

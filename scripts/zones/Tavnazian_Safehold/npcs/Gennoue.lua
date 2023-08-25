@@ -3,7 +3,6 @@
 --  NPC: Gennoue
 -- Type: Weather Reporter
 -----------------------------------
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

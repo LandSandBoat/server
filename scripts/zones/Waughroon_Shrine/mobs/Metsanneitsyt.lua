@@ -3,7 +3,6 @@
 --  Mob: Metsanneitsyt
 -- BCNM: Grove Guardians
 -----------------------------------
------------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)

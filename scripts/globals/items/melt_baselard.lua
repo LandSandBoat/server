@@ -4,8 +4,6 @@
 -- Item Effect: MP +9
 -- Duration:
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

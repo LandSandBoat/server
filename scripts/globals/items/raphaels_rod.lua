@@ -3,8 +3,6 @@
 -- Raphael's Rod
 -- Grants Reraise III.
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

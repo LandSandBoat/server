@@ -3,7 +3,6 @@
 --  Mob: Myrmidon Spo-spo
 -- BCNM: Royal Succession
 -----------------------------------
------------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)

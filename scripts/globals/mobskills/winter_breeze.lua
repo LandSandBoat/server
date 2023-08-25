@@ -4,7 +4,6 @@
 -- Description: AoE Dispel (Only removes one effect) and Stun
 -----------------------------------
 require("scripts/globals/mobskills")
-require("scripts/globals/msg")
 -----------------------------------
 local mobskillObject = {}
 

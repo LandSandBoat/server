@@ -7,8 +7,6 @@
 -- Vitality +1
 -- Resist Amnesia +20
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

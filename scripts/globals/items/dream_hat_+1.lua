@@ -3,8 +3,6 @@
 -- Dream Hat +1
 -- Dispenses Ginger Cookies
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

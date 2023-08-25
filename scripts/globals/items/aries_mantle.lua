@@ -3,8 +3,6 @@
 -- Item: Aries Mantle
 -- Enchantment: Sleep
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

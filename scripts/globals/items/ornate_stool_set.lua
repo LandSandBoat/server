@@ -3,8 +3,6 @@
 -- Item: Ornate Stool
 -- Item Effect: Grant Ornate stool key item
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 local keyItemId = xi.ki.ORNATE_STOOL

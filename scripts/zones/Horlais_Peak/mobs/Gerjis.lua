@@ -3,7 +3,6 @@
 --  Mob: Gerjis
 -- BCNM: Eye of the Tiger
 -----------------------------------
------------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)

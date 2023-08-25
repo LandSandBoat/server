@@ -3,8 +3,6 @@
 -- Icarus Wing
 -- Increases TP of the user by 1000
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

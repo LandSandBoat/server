@@ -3,7 +3,6 @@
 -- Mob: Watch Hippogryph
 -- ENM: Beloved of the Atlantes
 -----------------------------------
------------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)

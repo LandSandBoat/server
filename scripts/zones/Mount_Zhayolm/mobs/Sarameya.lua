@@ -8,7 +8,6 @@
 -----------------------------------
 mixins = { require("scripts/mixins/rage") }
 require("scripts/globals/magic")
-require("scripts/globals/msg")
 -----------------------------------
 local entity = {}
 

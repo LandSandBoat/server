@@ -2,8 +2,6 @@
 -- ID: 5443
 -- magnus_stone_pouch
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

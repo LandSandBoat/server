@@ -3,8 +3,6 @@
 -- Item: Lucid Ether III
 -- Item Effect: Restores 1000 MP
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

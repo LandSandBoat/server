@@ -4,7 +4,6 @@
 -- Effect: Summon Water Spirit Pet
 -----------------------------------
 require("scripts/globals/pets")
-require("scripts/globals/msg")
 -----------------------------------
 local itemObject = {}
 

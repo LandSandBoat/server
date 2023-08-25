@@ -304,7 +304,7 @@ void CLuaBaseEntity::messageText(CLuaBaseEntity* PLuaBaseEntity, uint16 messageI
  *  Purpose : Displays either standad messages to a PC or custom text
  *  Example : player:PrintToPlayer("Hello!", xi.msg.channel.NS_SAY)
  *          : player:PrintToPlayer(string.format("Hello, %s!", player:getName()), xi.msg.channel.SYSTEM_1)
- *  Notes   : see scripts/globals/msg.lua for message channels
+ *  Notes   : see scripts/enum/msg.lua for message channels
  *          : Can modify the name shown through explicit declaration
  ************************************************************************/
 

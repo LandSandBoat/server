@@ -4,7 +4,6 @@
 -- Involved In Quest: Wild Card
 -- !pos -95 16 -31 169
 -----------------------------------
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

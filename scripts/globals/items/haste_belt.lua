@@ -3,8 +3,6 @@
 -- Item: Haste Belt
 -- Item Effect: 10% haste
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

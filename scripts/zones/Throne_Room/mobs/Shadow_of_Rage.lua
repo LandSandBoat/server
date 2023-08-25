@@ -3,7 +3,6 @@
 --  Mob: Shadow of Rage
 -- Mission 9-2 BCNM Fight
 -----------------------------------
------------------------------------
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

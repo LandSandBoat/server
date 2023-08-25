@@ -10,8 +10,6 @@
 -- Ranged Attack +14% (cap 90)
 -- HP recovered while healing +9
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

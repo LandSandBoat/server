@@ -3,8 +3,6 @@
 -- Goblin Belt
 -- Enchantment: 60Min, Costume - Goblin (dagger)
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

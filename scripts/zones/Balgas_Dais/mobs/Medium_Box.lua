@@ -3,7 +3,6 @@
 --   NM: Medium Box
 -- BCNM: Treasures and Tribulations
 -----------------------------------
------------------------------------
 local entity = {}
 
 local function replaceWithCrate(mob)

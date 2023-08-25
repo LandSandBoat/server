@@ -7,8 +7,6 @@
 -- Magic Cap 60
 -- Vitality 2
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

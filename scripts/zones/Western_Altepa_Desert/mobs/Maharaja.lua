@@ -5,7 +5,6 @@
 -- Involved in Quest: Inheritance
 -- !pos -652.3 0.2 -341.5 125
 -----------------------------------
------------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)

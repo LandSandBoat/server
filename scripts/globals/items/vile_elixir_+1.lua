@@ -3,8 +3,6 @@
 -- Item: Vile Elixir +1
 -- Item Effect: Instantly restores 55% of HP and MP
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

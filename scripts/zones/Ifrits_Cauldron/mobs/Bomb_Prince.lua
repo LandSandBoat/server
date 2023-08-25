@@ -2,7 +2,6 @@
 -- Area: Ifrit's Cauldron
 --   NM: Bomb Prince
 -----------------------------------
------------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)

@@ -3,8 +3,6 @@
 -- Old Bullet Box
 -- When used, you will obtain one partial stack of Antique Bullets
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

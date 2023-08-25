@@ -2,7 +2,6 @@
 -- Area: Port Bastok
 --  NPC: Aishah
 -----------------------------------
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

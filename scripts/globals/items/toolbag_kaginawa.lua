@@ -3,8 +3,6 @@
 -- Toolbag Kagi
 -- When used, you will obtain one stack of kaginawa
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

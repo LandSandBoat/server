@@ -4,7 +4,6 @@
 -----------------------------------
 require("scripts/globals/magic")
 require("scripts/globals/pets")
-require("scripts/globals/msg")
 -----------------------------------
 local spellObject = {}
 

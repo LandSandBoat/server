@@ -2,7 +2,6 @@
 -- Global Casket utility script
 -----------------------------------
 require("scripts/globals/casket_loot")
-require("scripts/globals/msg")
 require("scripts/globals/roe")
 -----------------------------------
 
@@ -190,7 +189,10 @@ local function dropChance(player)
     end
 
     local rand = math.random()
-    if rand < utils.clamp(xi.settings.main.CASKET_DROP_RATE + kupowersMMBPower + prowessCasketsPower, 0, 1) and not player:hasStatusEffect(xi.effect.CONFRONTATION) then
+    if
+        rand < utils.clamp(xi.settings.main.CASKET_DROP_RATE + kupowersMMBPower + prowessCasketsPower, 0, 1) and
+        not player:hasStatusEffect(xi.effect.CONFRONTATION)
+    then
         return true
     end
 

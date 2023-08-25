@@ -3,7 +3,6 @@
 --  Mob: Shredded Samson
 -- BCNM: Celery
 -----------------------------------
------------------------------------
 local entity = {}
 
 entity.onMobEngaged = function(mob, target)

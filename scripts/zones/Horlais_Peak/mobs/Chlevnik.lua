@@ -3,7 +3,6 @@
 -- Mob: Chlevnik
 -- KSNM99
 -----------------------------------
------------------------------------
 local entity = {}
 
 entity.onMobSpawn = function(mob)

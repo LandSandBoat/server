@@ -17,8 +17,6 @@
 -- DELAY -80
 -- ACC 12
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

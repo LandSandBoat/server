@@ -10,8 +10,6 @@
 -- HP 7% Cap 50
 -- Evasion 5
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

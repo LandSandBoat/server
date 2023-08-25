@@ -3,8 +3,6 @@
 -- Mithran Rice Cake
 -- Enchantment: 60Min, Costume - Mithra Child
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

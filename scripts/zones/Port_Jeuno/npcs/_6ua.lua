@@ -3,7 +3,6 @@
 --  NPC: Door: Departures Exit (for Bastok)
 -- !pos -61 7 -54 246
 -----------------------------------
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

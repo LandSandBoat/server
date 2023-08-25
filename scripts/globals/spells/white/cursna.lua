@@ -2,8 +2,6 @@
 -- Spell: Cursna
 -- Removes curse and bane from target.
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

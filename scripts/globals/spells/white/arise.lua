@@ -1,8 +1,6 @@
 -----------------------------------
 -- Spell: Arise
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

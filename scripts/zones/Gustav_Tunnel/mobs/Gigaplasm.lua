@@ -3,7 +3,6 @@
 --   NM: Gigaplasm
 -- Note: Part of mission "The Salt of the Earth"
 -----------------------------------
------------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)

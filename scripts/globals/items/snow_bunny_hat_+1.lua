@@ -3,8 +3,6 @@
 -- Snow bunny Hat +1
 -- Enchantment: 60Min, Costume - White Rarab
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

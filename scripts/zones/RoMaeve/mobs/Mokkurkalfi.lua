@@ -3,7 +3,6 @@
 --   NM: Mokkurkalfi
 -- Note: spawned during mission "The Final Image"
 -----------------------------------
------------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)

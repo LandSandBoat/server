@@ -3,8 +3,6 @@
 -- Toolbag Tsura
 -- When used, you will obtain one stack of tsurara
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

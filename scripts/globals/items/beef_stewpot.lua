@@ -11,8 +11,6 @@
 -- Attack +18% Cap 40
 -- Evasion +5
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

@@ -4,7 +4,6 @@
 -- Used by Nidhogg at will
 -----------------------------------
 require("scripts/globals/mobskills")
-require("scripts/globals/msg")
 -----------------------------------
 local mobskillObject = {}
 

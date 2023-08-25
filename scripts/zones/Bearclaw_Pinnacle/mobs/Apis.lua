@@ -3,7 +3,6 @@
 --  Mob: Apis
 --  ENM: Holy Cow
 -----------------------------------
------------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)

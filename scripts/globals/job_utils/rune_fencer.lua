@@ -2,7 +2,6 @@
 -- Rune Fencer Job Utilities
 -----------------------------------
 require("scripts/globals/ability")
-require("scripts/globals/msg")
 require("scripts/globals/weaponskills")
 require("scripts/globals/jobpoints")
 require("scripts/globals/spells/damage_spell")

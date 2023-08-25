@@ -3,7 +3,6 @@
 -- Mob: Generic Doll
 -- BCNM: Factory Rejects
 -----------------------------------
------------------------------------
 local entity = {}
 
 entity.onMobSpawn = function(mob)

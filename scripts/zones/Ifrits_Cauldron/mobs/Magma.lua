@@ -2,7 +2,6 @@
 -- Area: Ifrit's Cauldron
 --   NM: Magma
 -----------------------------------
------------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)

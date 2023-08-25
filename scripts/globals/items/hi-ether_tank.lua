@@ -3,8 +3,6 @@
 -- Hi-Ether Tank
 -- When used, you will obtain one hi-ether
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

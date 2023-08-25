@@ -14,7 +14,6 @@
 -- Combos: Clear Mind
 -----------------------------------
 require("scripts/globals/bluemagic")
-require("scripts/globals/msg")
 -----------------------------------
 local spellObject = {}
 

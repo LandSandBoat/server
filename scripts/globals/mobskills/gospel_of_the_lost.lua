@@ -11,7 +11,6 @@
 -- "Mine existence...stretches into infinity..."
 -----------------------------------
 require("scripts/globals/mobskills")
-require("scripts/globals/msg")
 -----------------------------------
 local mobskillObject = {}
 

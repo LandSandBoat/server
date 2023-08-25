@@ -5,7 +5,6 @@
 -- Involved in Quest: Shoot First, Ask Questions Later
 -- !pos -18 -19.2 -176.4 153
 -----------------------------------
------------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)

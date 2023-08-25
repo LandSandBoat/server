@@ -5,8 +5,6 @@
 -- TP Required: 20%
 -- Recast Time: 00:15
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)

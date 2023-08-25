@@ -3,7 +3,6 @@
 --  Mob: Opo-opo Monarch
 -- BCNM: Royal Succession
 -----------------------------------
------------------------------------
 local entity = {}
 
 entity.onMobFight = function(mob, target)

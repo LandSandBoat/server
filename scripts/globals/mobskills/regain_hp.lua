@@ -4,8 +4,6 @@
 -- Description: Regain HP for party members within area of effect.
 --
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

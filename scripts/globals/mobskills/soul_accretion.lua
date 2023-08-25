@@ -3,7 +3,6 @@
 -- Drains 3 effects from target
 -----------------------------------
 require("scripts/globals/mobskills")
-require("scripts/globals/msg")
 -----------------------------------
 local mobskillObject = {}
 

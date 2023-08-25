@@ -3,7 +3,6 @@
 --  NPC: Quasim
 -- Adventurer's Assistant
 -----------------------------------
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

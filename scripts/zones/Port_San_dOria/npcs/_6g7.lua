@@ -3,7 +3,6 @@
 --  NPC: Door: Arrivals Entrance
 -- !pos -24 -8 15 232
 -----------------------------------
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

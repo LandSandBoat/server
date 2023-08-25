@@ -3,7 +3,6 @@
 --  NPC: Fulchia
 --  General Info NPC
 -----------------------------------
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

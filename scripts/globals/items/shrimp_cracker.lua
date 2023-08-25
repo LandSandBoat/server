@@ -9,8 +9,6 @@
 -- Resist Virus +10
 -- HP Recovered While Healing 8
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

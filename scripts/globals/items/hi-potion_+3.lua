@@ -3,8 +3,6 @@
 -- Item: Hi-Potion +3
 -- Item Effect: Restores 130 HP
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

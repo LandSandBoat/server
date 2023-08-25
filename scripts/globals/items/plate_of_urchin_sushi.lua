@@ -9,8 +9,6 @@
 -- Accuracy % 15 (cap 72)
 -- Ranged ACC % 15 (cap 72)
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

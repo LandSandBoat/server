@@ -3,7 +3,6 @@
 -- Mob: Thunder Elemental
 -- Quest: Waking the Beast
 -----------------------------------
------------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)

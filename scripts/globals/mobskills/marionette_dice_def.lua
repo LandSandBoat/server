@@ -4,7 +4,6 @@
 -- Notes: Used by Moblin Fantoccini in ENM: "Pulling the strings"
 -----------------------------------
 require("scripts/globals/mobskills")
-require("scripts/globals/msg")
 -----------------------------------
 local mobskillObject = {}
 

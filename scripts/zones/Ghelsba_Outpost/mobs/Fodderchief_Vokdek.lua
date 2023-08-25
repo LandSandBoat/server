@@ -3,7 +3,6 @@
 --   NM: Fodderchief Vokdek
 -- Involved in Mission: Save the Children
 -----------------------------------
------------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)

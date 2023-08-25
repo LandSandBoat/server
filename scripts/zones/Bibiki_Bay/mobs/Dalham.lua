@@ -2,7 +2,6 @@
 -- Area: Bibiki Bay
 -- NM: Dalham
 -----------------------------------
------------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)

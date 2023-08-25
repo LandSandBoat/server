@@ -3,8 +3,6 @@
 -- Item: Rebirth Feather
 -- Status Effect: Reraise III
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

@@ -3,7 +3,6 @@
 -----------------------------------
 require("scripts/globals/ability")
 require("scripts/globals/job_utils/dragoon")
-require("scripts/globals/msg")
 -----------------------------------
 local entity = {}
 

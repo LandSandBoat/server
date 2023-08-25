@@ -7,7 +7,6 @@
 -- Notes: Can be any (positive) buff, including food. Will drain about 100HP if it can't take any buffs
 -----------------------------------
 require("scripts/globals/mobskills")
-require("scripts/globals/msg")
 -----------------------------------
 local mobskillObject = {}
 

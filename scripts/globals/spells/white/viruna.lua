@@ -2,8 +2,6 @@
 -- Spell: Viruna
 -- Removes disease or plague from target.
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

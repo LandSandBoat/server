@@ -2,7 +2,6 @@
 -- Spell: Frazzle II
 -----------------------------------
 require("scripts/globals/magic")
-require("scripts/globals/msg")
 require("scripts/globals/utils")
 -----------------------------------
 local spellObject = {}

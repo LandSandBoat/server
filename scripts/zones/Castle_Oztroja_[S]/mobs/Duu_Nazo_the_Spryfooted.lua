@@ -2,7 +2,6 @@
 -- Area: Castle Oztroja [S]
 --   NM: Duu Nazo the Spryfooted
 -----------------------------------
------------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)

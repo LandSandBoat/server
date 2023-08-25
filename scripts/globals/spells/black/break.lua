@@ -3,7 +3,6 @@
 -- Petrifies an enemy, preventing it from acting.
 -----------------------------------
 require("scripts/globals/magic")
-require("scripts/globals/msg")
 -----------------------------------
 local spellObject = {}
 

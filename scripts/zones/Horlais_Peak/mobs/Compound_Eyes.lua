@@ -3,7 +3,6 @@
 --  Mob: Combound Eyes
 -- BCNM: Under Observation
 -----------------------------------
------------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)

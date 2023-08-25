@@ -2,7 +2,6 @@
 -- Area: Palborough Mines
 --  NPC: @3z0
 -----------------------------------
------------------------------------
 local entity = {}
 
 entity.onSpawn = function(npc)

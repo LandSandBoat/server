@@ -14,8 +14,6 @@
 -- Accuracy 5
 -- Resist Paralyze +4
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

@@ -2,7 +2,6 @@
 -- Records of Eminence
 -----------------------------------
 require("scripts/globals/npc_util")
-require("scripts/globals/msg")
 require("scripts/globals/quests")
 -----------------------------------
 
