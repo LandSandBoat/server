@@ -12,7 +12,7 @@ abilityObject.onPetAbility = function(target, pet, skill, summoner)
     local duration = 180 + bonusTime
 
     local moon = VanadielMoonPhase()
-    local buffvalue = 0
+    local buffvalue = 1
     if moon > 90 then
         buffvalue = 7
     elseif moon > 75 then
@@ -25,8 +25,6 @@ abilityObject.onPetAbility = function(target, pet, skill, summoner)
         buffvalue = 3
     elseif moon > 10 then
         buffvalue = 2
-    else
-        buffvalue = 1
     end
 
     target:delStatusEffect(xi.effect.STR_BOOST)

@@ -19,7 +19,7 @@ end
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     -- try to drain buff
     local effect = mob:stealStatusEffect(target, xi.effectFlag.DISPELABLE)
-    local dmg = 0
+    local dmg
 
     if effect ~= 0 then
         skill:setMsg(xi.msg.basic.EFFECT_DRAINED)

@@ -10,7 +10,7 @@ end
 abilityObject.onPetAbility = function(target, pet, skill)
     --randomly give str/dex/vit/agi/int/mnd/chr (+12)
     local effect = math.random()
-    local effectid = xi.effect.STR_BOOST
+    local effectid = xi.effect.CHR_BOOST
     if effect <= 0.14 then --STR
         effectid = xi.effect.STR_BOOST
     elseif effect <= 0.28 then --DEX
@@ -23,8 +23,6 @@ abilityObject.onPetAbility = function(target, pet, skill)
         effectid = xi.effect.INT_BOOST
     elseif effect <= 0.84 then --MND
         effectid = xi.effect.MND_BOOST
-    else --CHR
-        effectid = xi.effect.CHR_BOOST
     end
 
     target:addStatusEffect(effectid, math.random(12, 14), 0, 90)
