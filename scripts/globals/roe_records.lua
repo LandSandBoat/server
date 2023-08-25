@@ -5,8 +5,14 @@ require("scripts/globals/expansion_areas")
 require("scripts/globals/missions")
 require("scripts/globals/quests")
 -----------------------------------
+xi = xi or {}
+xi.roe = xi.roe or {}
 
-local recordList =
+-- NOTE: This file calls the roe global init function at the end to populate default
+-- values that may be missing.  This same behavior happens in the roe global as well
+-- to ensure that whichever is loaded last will always have accurate information.
+
+xi.roe.records =
 {
     -----------------------------------
     -- Tutorial -> Basics
@@ -9628,4 +9634,6 @@ local recordList =
     },
 }
 
-return recordList
+if xi.roe.initialize then
+    xi.roe.initialize()
+end
