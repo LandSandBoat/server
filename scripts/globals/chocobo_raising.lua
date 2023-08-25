@@ -43,8 +43,9 @@ local debug = utils.getDebugPlayerPrinter(xi.settings.main.DEBUG_CHOCOBO_RAISING
 
 -- Length of a day, in seconds (default is 1x day Earth time, in seconds)
 -- Other reasonable settings:
--- One Vana'diel day: 3456 seconds - 57 minutes, 36 seconds Earth time (1/25 of one Earth day)
+-- One Earth day: 86400 seconds (default)
 -- One Vana'diel week: 27648 seconds - 7 hours, 40 minutes, 48 seconds Earth time
+-- One Vana'diel day: 3456 seconds - 57 minutes, 36 seconds Earth time (1/25 of one Earth day)
 xi.chocoboRaising.dayLength = 86400
 
 xi.chocoboRaising.daysToChick      = 4
@@ -54,7 +55,10 @@ xi.chocoboRaising.daysToAdult2     = 43 -- 'You've done a great job raising this
 xi.chocoboRaising.daysToAdult3     = 64 -- 'Chocobo's growth seems to have stabilized. The animal has developed quite a distinguished air.'
 xi.chocoboRaising.daysToAdult4     = 129 -- Retirement
 
+-- TODO: Make sure all settings are plainly described.
 -- TODO: Add settings to disable retirement, with/without infinite stat growth.
+-- xi.settings.main.CHOCOBO_RAISING_DISABLE_RETIREMENT  = false, -- true/false.
+-- xi.settings.main.CHOCOBO_RAISING_STAT_GROWTH_CAP     = 512,   -- int.
 
 -- Maximum randomness applied to walkEnergyAmount for a given walk
 local walkEnergyRandomness = 5
@@ -149,6 +153,94 @@ local conditionsHealedByItems =
     },
 }
 utils.unused(conditionsHealedByItems)
+
+local carePlans =
+{
+    BASIC_CARE               = 0,
+    RESTING                  = 1,
+    TAKING_A_WALK            = 2,
+    LISTENING_TO_MUSIC       = 3,
+    EXERCISING_ALONE         = 4,
+    EXCERCISING_IN_A_GROUP   = 5,
+    PLAYING_WITH_CHILDREN    = 6,
+    PLAYING_WITH_CHOCOBOS    = 7,
+    CARRYING_PACKAGES        = 8,
+    EXHIBITING_TO_THE_PUBLIC = 9,
+    DELIVERING_MESSAGES      = 10,
+    DIGGING_FOR_TREASURE     = 11,
+    ACTING_IN_A_PLAY         = 12,
+}
+
+-- http://www.playonline.com/pcd/update/ff11us/20060822VOL2B1/table03en.jpg
+-- minor: 1, moderate: 5, major: 10
+-- strength, endurance, discernment, receptivity, affection, energy, payment
+local carePlanData =
+{
+    [carePlans.BASIC_CARE              ] = {  1,  1,  1,  1,  -1,  -1, nil },
+    [carePlans.RESTING                 ] = {  0,  0,  0,  0,   0,   1, nil },
+    [carePlans.TAKING_A_WALK           ] = {  1,  1, -1, -1,  -1,  -1, nil },
+    [carePlans.LISTENING_TO_MUSIC      ] = { -1, -1,  1,  1,  -1,  -1, nil },
+    [carePlans.EXERCISING_ALONE        ] = {  1,  0, -1, -1,  -1,  -1, nil },
+    [carePlans.EXCERCISING_IN_A_GROUP  ] = {  0,  1, -1, -1,  -1,  -1, nil },
+    [carePlans.PLAYING_WITH_CHILDREN   ] = { -1, -1,  1,  0,  -1,  -1, nil },
+    [carePlans.PLAYING_WITH_CHOCOBOS   ] = { -1, -1,  0,  1,  -1,  -1, nil },
+    [carePlans.CARRYING_PACKAGES       ] = {  5,  5, -5, -5, -10,  -5, 100 },
+    [carePlans.EXHIBITING_TO_THE_PUBLIC] = { -5, -5,  5,  5, -10,  -5, 100 },
+    [carePlans.DELIVERING_MESSAGES     ] = { 10,  0,  0, -5, -10, -10, 100 },
+    [carePlans.DIGGING_FOR_TREASURE    ] = {  0, -5, 10,  0, -10, -10, 100 },
+    [carePlans.ACTING_IN_A_PLAY        ] = { -5,  0,  0, 10, -10, -10, 100 },
+}
+
+local handleStatChange = function(stat, change, max)
+    if change > 0 then
+        change = change * xi.settings.main.CHOCOBO_RAISING_STAT_POS_MULTIPLIER
+    elseif change < 0 then
+        change = change * xi.settings.main.CHOCOBO_RAISING_STAT_NEG_MULTIPLIER
+    end
+
+    stat = utils.clamp(stat + change, 0, max)
+
+    return stat
+end
+
+local handleCarePlan = function(player, chocoState, carePlan)
+    -- TODO: Take in a multiplier to account for merged time ranges
+
+    debug(
+        string.format("Care Plan: %d (before), str: %d, end: %d, dsc: %d, rcp: %d, aff: %d, energy: %d",
+        carePlan,
+        chocoState.strength,
+        chocoState.endurance,
+        chocoState.discernment,
+        chocoState.receptivity,
+        chocoState.affection,
+        chocoState.energy))
+
+    chocoState.strength    = handleStatChange(chocoState.strength   , carePlanData[carePlan][1], 255)
+    chocoState.endurance   = handleStatChange(chocoState.endurance  , carePlanData[carePlan][2], 255)
+    chocoState.discernment = handleStatChange(chocoState.discernment, carePlanData[carePlan][3], 255)
+    chocoState.receptivity = handleStatChange(chocoState.receptivity, carePlanData[carePlan][4], 255)
+    chocoState.affection   = handleStatChange(chocoState.affection  , carePlanData[carePlan][5], 255)
+    chocoState.energy      = handleStatChange(chocoState.energy     , carePlanData[carePlan][6], 100)
+
+    debug(
+        string.format("Care Plan: %d (after), str: %d, end: %d, dsc: %d, rcp: %d, aff: %d, energy: %d",
+        carePlan,
+        chocoState.strength,
+        chocoState.endurance,
+        chocoState.discernment,
+        chocoState.receptivity,
+        chocoState.affection,
+        chocoState.energy))
+
+    local payment = carePlanData[carePlan][7]
+    if payment then
+        payment = payment * xi.settings.main.CHOCOBO_RAISING_GIL_MULTIPLIER
+        debug(string.format("Care Plan Payment: %d", payment))
+
+        -- TODO: Handle payment
+    end
+end
 
 -- TODO: Make sure stat changes are clamped 0-255!
 
@@ -752,19 +844,63 @@ end
 local onRaisingEventPlayout = function(player, csOffset, chocoState)
     switch (csOffset): caseof
     {
+        -- EGG ONWARDS:
         [cutscenes.REPORT_BASIC_CARE] = function()
-            -- TODO: Take in a multiplier to account for merged time ranges
-            -- TODO: Add settings multipliers
-            -- TODO: Make sure these are clamped!
-            chocoState.strength    = chocoState.strength + 1
-            chocoState.endurance   = chocoState.endurance + 1
-            chocoState.discernment = chocoState.discernment + 1
-            chocoState.receptivity = chocoState.receptivity + 1
-
-            chocoState.affection = chocoState.affection - 1
-            chocoState.energy    = chocoState.energy - 1
+            handleCarePlan(player, chocoState, carePlans.BASIC_CARE)
         end,
 
+        -- CHICK ONWARDS:
+        [cutscenes.REPORT_REST] = function()
+            handleCarePlan(player, chocoState, carePlans.RESTING)
+        end,
+
+        [cutscenes.REPORT_TAKE_A_WALK] = function()
+            handleCarePlan(player, chocoState, carePlans.TAKING_A_WALK)
+        end,
+
+        [cutscenes.REPORT_LISTEN_TO_MUSIC] = function()
+            handleCarePlan(player, chocoState, carePlans.LISTENING_TO_MUSIC)
+        end,
+
+        -- ADOLESCENT ONWARDS:
+        [cutscenes.REPORT_EXERCISE_ALONE] = function()
+            handleCarePlan(player, chocoState, carePlans.EXERCISING_ALONE)
+        end,
+
+        [cutscenes.REPORT_EXERCISE_IN_A_GROUP] = function()
+            handleCarePlan(player, chocoState, carePlans.EXCERCISING_IN_A_GROUP)
+        end,
+
+        [cutscenes.REPORT_INTERACT_WITH_CHILDREN] = function()
+            handleCarePlan(player, chocoState, carePlans.PLAYING_WITH_CHILDREN)
+        end,
+
+        [cutscenes.REPORT_INTERACT_WITH_CHOCOBOS] = function()
+            handleCarePlan(player, chocoState, carePlans.PLAYING_WITH_CHOCOBOS)
+        end,
+
+        [cutscenes.REPORT_CARRY_PACKAGES] = function()
+            handleCarePlan(player, chocoState, carePlans.CARRYING_PACKAGES)
+        end,
+
+        [cutscenes.REPORT_EXHIBIT_TO_THE_PUBLIC] = function()
+            handleCarePlan(player, chocoState, carePlans.EXHIBITING_TO_THE_PUBLIC)
+        end,
+
+        -- ADULT ONWARDS:
+        [cutscenes.REPORT_DELIVER_MESSAGES] = function()
+            handleCarePlan(player, chocoState, carePlans.DELIVERING_MESSAGES)
+        end,
+
+        [cutscenes.REPORT_DIG_FOR_TREASURE] = function()
+            handleCarePlan(player, chocoState, carePlans.DIGGING_FOR_TREASURE)
+        end,
+
+        [cutscenes.REPORT_ACT_IN_A_PLAY] = function()
+            handleCarePlan(player, chocoState, carePlans.ACTING_IN_A_PLAY)
+        end,
+
+        -- Growth CSs
         [cutscenes.ADULT_2_TO_ADULT_3] = function()
             -- You waited too long to name your chocobo, trainer is going to do it for you!
             if
@@ -791,21 +927,14 @@ local onRaisingEventPlayout = function(player, csOffset, chocoState)
 
         [cutscenes.HANGS_HEAD_IN_SHAME] = function()
             -- TODO: Take in a multiplier to account for merged time ranges
-            -- TODO: Add settings multipliers
-            -- TODO: Make sure these are clamped!
-            chocoState.affection = chocoState.affection - 10
-
+            chocoState.affection = handleStatChange(chocoState.affection, -10, 255)
             setCondition(chocoState, conditions.SPOILED, false)
         end,
 
         [cutscenes.COMPETE_WITH_OTHERS] = function()
             -- TODO: Take in a multiplier to account for merged time ranges
-            -- TODO: Add settings multipliers
-            -- TODO: Make sure these are clamped!
-
             -- "Increases affection slightly - confirmed."
-            chocoState.affection = chocoState.affection + 1
-
+            chocoState.affection = handleStatChange(chocoState.affection, 1, 255)
             setCondition(chocoState, conditions.BORED, false)
         end,
     }
@@ -841,6 +970,7 @@ local handleCSUpdate = function(player, chocoState, doEventUpdate)
 
     chocoState = onRaisingEventPlayout(player, csOffset, chocoState)
 
+    -- Skip the event updates during "Skip Report"
     if doEventUpdate then
         player:updateEventString(chocoState.first_name, chocoState.last_name, chocoState.first_name, chocoState.first_name,
             0, 0, 0, 0, 0, 0, 0, 0)

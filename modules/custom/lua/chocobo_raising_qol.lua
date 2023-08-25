@@ -1,4 +1,3 @@
-
 -----------------------------------
 -- Make Chocobo Raising more reasonable for modern times
 -- - Make growth boundaries more reasonable
