@@ -17,12 +17,12 @@ spellObject.onMagicCastingCheck = function(caster, target, spell)
 end
 
 spellObject.onSpellCast = function(caster, target, spell)
-    local divisor = 0
-    local constant = 0
-    local basepower = 0
-    local power = 0
-    local basecure = 0
-    local final = 0
+    local divisor
+    local constant
+    local basepower
+    local power
+    local basecure
+    local final
 
     local minCure = 10
     if xi.settings.main.USE_OLD_CURE_FORMULA then

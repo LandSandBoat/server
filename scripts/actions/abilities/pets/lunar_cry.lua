@@ -9,7 +9,8 @@ end
 
 abilityObject.onPetAbility = function(target, pet, skill)
     local moon = VanadielMoonPhase()
-    local buffvalue = 0
+    local buffvalue = 1
+
     if moon > 90 then
         buffvalue = 31
     elseif moon > 75 then
@@ -22,8 +23,6 @@ abilityObject.onPetAbility = function(target, pet, skill)
         buffvalue = 11
     elseif moon > 10 then
         buffvalue = 6
-    else
-        buffvalue = 1
     end
 
     target:delStatusEffect(xi.effect.ACCURACY_DOWN)

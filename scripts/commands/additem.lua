@@ -17,7 +17,7 @@ end
 function onTrigger(player, item, quantity, aug0, aug0val, aug1, aug1val, aug2, aug2val, aug3, aug3val, trialId)
     -- Load needed text ids for players current zone..
     local ID = zones[player:getZoneID()]
-    local itemToGet = 0
+    local itemToGet
 
     -- validate item
     if item == nil then

@@ -45,7 +45,7 @@ spellObject.onSpellCast = function(caster, target, spell)
     -- http://wiki.ffo.jp/html/1954.html
     -- this is a tiered calculation that has at least three tiers,
     -- so I'll use breakpoints for human readability
-    local dotdmg = 0
+    local dotdmg = 5
     if     skillLvl > 400 then dotdmg = 17
     elseif skillLvl > 373 then dotdmg = 16
     elseif skillLvl > 346 then dotdmg = 15
@@ -58,7 +58,6 @@ spellObject.onSpellCast = function(caster, target, spell)
     elseif skillLvl > 211 then dotdmg =  8
     elseif skillLvl > 171 then dotdmg =  7
     elseif skillLvl > 131 then dotdmg =  6
-    else                       dotdmg =  5
     end
 
     -- Do it!

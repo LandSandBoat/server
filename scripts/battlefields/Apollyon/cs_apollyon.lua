@@ -72,14 +72,12 @@ function content:onBattlefieldTick(battlefield, tick)
 
     -- Determine which boss should aggro next
     local previousBoss = battlefield:getLocalVar("AutoAggro")
-    local nextBoss     = 0
+    local nextBoss     = ID.CS_APOLLYON.mob.CARNAGECHIEF_JACKBODOKK
 
     if previousBoss == ID.CS_APOLLYON.mob.CARNAGECHIEF_JACKBODOKK then
         nextBoss = ID.CS_APOLLYON.mob.DEE_WAPA_THE_DESOLATOR
     elseif previousBoss == ID.CS_APOLLYON.mob.DEE_WAPA_THE_DESOLATOR then
         nextBoss = ID.CS_APOLLYON.mob.NAQBA_CHIRURGEON
-    else
-        nextBoss = ID.CS_APOLLYON.mob.CARNAGECHIEF_JACKBODOKK
     end
 
     local boss = GetMobByID(nextBoss)

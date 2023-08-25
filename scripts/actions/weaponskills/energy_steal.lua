@@ -9,7 +9,7 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
 
     local startingAnchor = math.floor(tp / 1000)
 
-    local multiplier = 0
+    local multiplier
 
     if tp >= 3000 then
         multiplier = fTPAnchors[3]

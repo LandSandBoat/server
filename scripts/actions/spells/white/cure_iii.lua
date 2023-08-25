@@ -10,12 +10,12 @@ spellObject.onMagicCastingCheck = function(caster, target, spell)
 end
 
 spellObject.onSpellCast = function(caster, target, spell)
-    local divisor = 0
-    local constant = 0
-    local basepower = 0
-    local power = 0
-    local basecure = 0
-    local final = 0
+    local divisor
+    local constant
+    local basepower
+    local power
+    local basecure
+    local final
 
     local minCure = 130
     if xi.settings.main.USE_OLD_CURE_FORMULA then
@@ -66,14 +66,12 @@ spellObject.onSpellCast = function(caster, target, spell)
             caster:hasStatusEffect(xi.effect.AFFLATUS_SOLACE) and
             not target:hasStatusEffect(xi.effect.STONESKIN)
         then
-            local solaceStoneskin = 0
+            local solaceStoneskin = math.floor(final * 0.25)
             local equippedBody = caster:getEquipID(xi.slot.BODY)
             if equippedBody == 11186 then
                 solaceStoneskin = math.floor(final * 0.30)
             elseif equippedBody == 11086 then
                 solaceStoneskin = math.floor(final * 0.35)
-            else
-                solaceStoneskin = math.floor(final * 0.25)
             end
 
             solaceStoneskin = solaceStoneskin * (1 + caster:getMerit(xi.merit.ANIMUS_SOLACE) / 100)

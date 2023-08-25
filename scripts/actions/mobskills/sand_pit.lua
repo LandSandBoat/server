@@ -22,6 +22,7 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
         local spawnId = 0
 
         -- Spawn an Executioner Antlion. There are only 5 in the database.
+        -- If they are all up, then don't spawn any more.
         if not GetMobByID(mob:getID() + 1):isSpawned() then -- if not spawned, set variable to spawn later.
             spawnId = mob:getID() + 1
         elseif not GetMobByID(mob:getID() + 2):isSpawned() then
@@ -32,8 +33,6 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
             spawnId = mob:getID() + 4
         elseif not GetMobByID(mob:getID() + 5):isSpawned() then
             spawnId = mob:getID() + 5
-        else
-            spawnId = 0 -- If they are all up, then don't spawn any more.
         end
 
         if spawnId > 0 then

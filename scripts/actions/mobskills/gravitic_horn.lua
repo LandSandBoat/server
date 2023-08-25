@@ -16,15 +16,12 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    local currentHP = target:getHP()
-    -- remove all by 5%
-    local baseDamage = 0
+    local currentHP  = target:getHP()
+    local baseDamage = currentHP
 
     -- estimation based on "Throat Stab-like damage"
     if currentHP / target:getMaxHP() > 0.2 then
         baseDamage = currentHP * .95
-    else
-        baseDamage = currentHP
     end
 
     -- Because shell matters, but we don't want to calculate damage normally via xi.mobskills.mobMagicalMove since this is a % attack

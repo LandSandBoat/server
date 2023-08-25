@@ -17,9 +17,9 @@ cmdprops =
 }
 
 -- Forward declarations (required)
-local menu  = {}
-local page1 = {}
-local page2 = {}
+local menu
+local page1
+local page2
 
 -- We need just a tiny delay to let the previous menu context be cleared out
 -- "New pages" are actually just whole new menus!

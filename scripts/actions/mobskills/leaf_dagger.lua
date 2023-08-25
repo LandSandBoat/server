@@ -21,12 +21,9 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.PIERCING, info.hitslanded)
 
     local typeEffect = xi.effect.POISON
-    local power = mob:getMainLvl() / 10
-    if power < 1 then
-        power = 1
-    end
+    local power      = math.max(1, mob:getMainLvl() / 10.0)
 
-    xi.mobskills.mobPhysicalStatusEffectMove(mob, target, skill, typeEffect, 1, 3, 18)
+    xi.mobskills.mobPhysicalStatusEffectMove(mob, target, skill, typeEffect, power, 3, 18)
 
     target:takeDamage(dmg, mob, xi.attackType.PHYSICAL, xi.damageType.PIERCING)
     return dmg

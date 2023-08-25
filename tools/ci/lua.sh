@@ -136,7 +136,7 @@ ignores=(
 )
 
 ignore_rules=(
-    311 # value assigned to variable <> is unused
+    #311 # value assigned to variable <> is unused
     542 # empty if branch
 )
 

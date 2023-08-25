@@ -52,7 +52,7 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
         bonusTP = 0
     }
 
-    local damage = 0
+    local damage
 
     if target:getObjType() ~= xi.objType.MOB then -- this isn't correct but might as well use what was originally here if someone uses this on a non-mob
         if xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES then

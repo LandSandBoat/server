@@ -20,7 +20,7 @@ function onTrigger(player, craftName, tier, target)
     end
 
     local skillID = tonumber(craftName) or xi.skill[string.upper(craftName)]
-    local targ = nil
+    local targ
 
     if skillID == nil or skillID < 48 or skillID > 57 then
         error(player, "You must specify a valid craft skill.")

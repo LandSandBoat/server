@@ -11,9 +11,8 @@ end
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local typeEffect = 0
     local currentMsg = xi.msg.basic.NONE
-    local msg = xi.msg.basic.NONE
 
-    msg = xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.CURSE_I, 25, 0, 300)
+    local msg = xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.CURSE_I, 25, 0, 300)
 
     if msg == xi.msg.basic.SKILL_ENFEEB_IS then
         typeEffect = xi.effect.CURSE_I

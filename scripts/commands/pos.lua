@@ -78,7 +78,6 @@ function onTrigger(player, arg)
         player:PrintToPlayer(string.format("%s's position: X %.4f  Y %.4f  Z %.4f  Rot %i  (Zone: %i)", targ:getName(), targ:getXPos(), targ:getYPos(), targ:getZPos(), targ:getRotPos(), targ:getZoneID()), xi.msg.channel.SYSTEM_3)
     else
         if zoneId == nil then
-            zoneId = targ:getZoneID()
             targ:setPos(x, y, z, 0)
         else
             targ:setPos(x, y, z, 0, zoneId)

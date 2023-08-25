@@ -19,7 +19,6 @@ end
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     -- try to drain buff
     local effect = mob:stealStatusEffect(target, xi.effectFlag.DISPELABLE)
-    local dmg = 0
 
     if effect ~= 0 then
         skill:setMsg(xi.msg.basic.EFFECT_DRAINED)
@@ -27,12 +26,12 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     else
         -- time to drain HP. 50-100
         local power = math.random(0, 51) + 50
-        dmg = xi.mobskills.mobFinalAdjustments(power, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.DARK, xi.mobskills.shadowBehavior.IGNORE_SHADOWS)
+        local dmg   = xi.mobskills.mobFinalAdjustments(power, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.DARK, xi.mobskills.shadowBehavior.IGNORE_SHADOWS)
 
         skill:setMsg(xi.mobskills.mobPhysicalDrainMove(mob, target, skill, xi.mobskills.drainType.HP, dmg))
     end
 
-    return dmg
+    return 0
 end
 
 return mobskillObject

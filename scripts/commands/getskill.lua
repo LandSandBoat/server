@@ -20,7 +20,7 @@ function onTrigger(player, skillName, target)
     end
 
     local skillID = tonumber(skillName) or xi.skill[string.upper(skillName)]
-    local targ = nil
+    local targ
 
     if
         skillID == nil or

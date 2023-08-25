@@ -17,7 +17,7 @@ end
 function onTrigger(player, arg1, arg2, arg3)
     local zone = player:getZone()
     local varName = arg1
-    local targ = arg3
+    local targ
 
     if varName == nil then
         error(player, "You must provide a variable name.")
