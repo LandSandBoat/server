@@ -15,16 +15,13 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    local realDmg = 0
-    local power = 5
+    local power   = 5
+    local realDmg = power * target:getCharVar("EVERYONES_GRUDGE_KILLS") -- Damage is 5 times the amount you have killed
 
     if target:getID() > 100000 then
         realDmg = power * math.random(30, 100)
-    else
-        realDmg = power * target:getCharVar("EVERYONES_GRUDGE_KILLS") -- Damage is 5 times the amount you have killed
-        if mob:isNM() then
-            realDmg = realDmg * 10 -- sets the multiplier to 50 for NM's
-        end
+    elseif mob:isNM() then
+        realDmg = realDmg * 10 -- sets the multiplier to 50 for NM's
     end
 
     target:takeDamage(realDmg, mob, xi.attackType.MAGICAL, xi.damageType.ELEMENTAL)

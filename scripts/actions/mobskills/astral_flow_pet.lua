@@ -42,7 +42,7 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
 
     -- Find proper pet skill
     local petFamily = pet:getFamily()
-    local skillId = 0
+    local skillId = 919
 
     if     petFamily == 34 or petFamily == 379 then skillId = 919 -- carbuncle searing light
     elseif petFamily == 36 or petFamily == 381 then skillId = 839 -- fenrir    howling moon
@@ -54,7 +54,6 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     elseif petFamily == 45 or petFamily == 388 then skillId = 914 -- titan     earthen fury
     else
         printf("[astral_flow_pet] received unexpected pet family %i. Defaulted skill to Searing Light.", petFamily)
-        skillId = 919 -- searing light
     end
 
     pet:useMobAbility(skillId)

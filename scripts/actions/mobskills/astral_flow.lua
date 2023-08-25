@@ -20,12 +20,10 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     skill:setMsg(xi.msg.basic.USES)
 
     local mobID  = mob:getID()
-    local avatar = 0
+    local avatar = mobID + 2 -- default offset
 
     if avatarOffsets[mobID] then
         avatar = mobID + avatarOffsets[mobID]
-    else
-        avatar = mobID + 2 -- default offset
     end
 
     if not GetMobByID(avatar):isSpawned() then
