@@ -43688,6 +43688,39 @@ INSERT INTO `item_mods` VALUES (21528,25,40); -- ACC: 40
 INSERT INTO `item_mods` VALUES (21529,8,30);  -- STR: 30
 INSERT INTO `item_mods` VALUES (21529,25,40); -- ACC: 40
 
+-- Prime Fists
+INSERT INTO `item_mods` VALUES (21531,404,1); -- REGEN_DOWN: -1
+INSERT INTO `item_mods` VALUES (21531,405,1); -- REFRESH_DOWN: -1
+
+-- Varga Purnikawa (Incomplete)
+INSERT INTO `item_mods` VALUES (21532,404,1); -- REGEN_DOWN: -1
+INSERT INTO `item_mods` VALUES (21532,405,1); -- REFRESH_DOWN: -1
+
+-- Varga Purnikawa (Level 119)
+INSERT INTO `item_mods` VALUES (21533,8,25);   -- STR: 25
+INSERT INTO `item_mods` VALUES (21533,9,25);   -- DEX: 25
+INSERT INTO `item_mods` VALUES (21533,25,25);  -- ACC: 25
+INSERT INTO `item_mods` VALUES (21533,30,25);  -- MACC: 25
+INSERT INTO `item_mods` VALUES (21533,165,10); -- CRITHITRATE: 10%
+
+-- Varga Purnikawa (Level 119 II)
+INSERT INTO `item_mods` VALUES (21534,8,30);    -- STR: 30
+INSERT INTO `item_mods` VALUES (21534,9,30);    -- DEX: 30
+INSERT INTO `item_mods` VALUES (21534,25,30);   -- ACC: 30
+INSERT INTO `item_mods` VALUES (21534,30,30);   -- MACC: 30
+INSERT INTO `item_mods` VALUES (21534,165,12);  -- CRITHITRATE: 12%
+INSERT INTO `item_mods` VALUES (21534,355,231); -- ADDS_WEAPONSKILL: Maru Kala
+-- TODO: Aftermath (Incl. Automaton): Physical damage limit+
+
+-- Varga Purnikawa (Level 119 III)
+INSERT INTO `item_mods` VALUES (21535,8,35);    -- STR: 35
+INSERT INTO `item_mods` VALUES (21535,9,35);    -- DEX: 35
+INSERT INTO `item_mods` VALUES (21535,25,35);   -- ACC: 35
+INSERT INTO `item_mods` VALUES (21535,30,35);   -- MACC: 35
+INSERT INTO `item_mods` VALUES (21535,165,15);  -- CRITHITRATE: 15%
+INSERT INTO `item_mods` VALUES (21535,355,231); -- ADDS_WEAPONSKILL: Maru Kala
+-- TODO: Aftermath (Incl. Automaton): Physical damage limit+
+
 -- Arasy Knife
 INSERT INTO `item_mods` VALUES (21554,9,6);     -- DEX: 6
 INSERT INTO `item_mods` VALUES (21554,11,6);    -- AGI: 6
