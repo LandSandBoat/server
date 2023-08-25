@@ -259,8 +259,13 @@ xi.settings.main =
 
     -- CHOCOBO RAISING (HEAVILY-IN-DEVELOPMENT, USE AT YOUR OWN RISK)
     -- GM command: `!chocoboraising`
-    ENABLE_CHOCOBO_RAISING = false, -- true/false. Enable Chocobo Raising features.
-    DEBUG_CHOCOBO_RAISING  = false, -- true/false. Enable verbose debug logging for Chocobo Raising (visible by players).
+    ENABLE_CHOCOBO_RAISING              = false, -- true/false. Enable Chocobo Raising features.
+    DEBUG_CHOCOBO_RAISING               = false, -- true/false. Enable verbose debug logging for Chocobo Raising (visible by players).
+    CHOCOBO_RAISING_STAT_POS_MULTIPLIER = 1.0,   -- float. Multiplier for positive stat changes. Default 1.0.
+    CHOCOBO_RAISING_STAT_NEG_MULTIPLIER = 1.0,   -- float. Multiplier for negative stat changes. Default 1.0.
+    CHOCOBO_RAISING_GIL_MULTIPLIER      = 1.0,   -- float. Multiplier for gil recieved through chocobo actions (care plans, etc.). Default 1.0.
+    CHOCOBO_RAISING_DISABLE_RETIREMENT  = false, -- true/false.
+    CHOCOBO_RAISING_STAT_GROWTH_CAP     = 512,   -- int.
 
     -- MISC
     RIVERNE_PORTERS              = 120,   -- Time in seconds that Unstable Displacements in Cape Riverne stay open after trading a scale.
