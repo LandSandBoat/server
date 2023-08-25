@@ -215,6 +215,8 @@ namespace luautils
         lua.set_function("GetCachedInstanceScript", &luautils::GetCachedInstanceScript);
         lua.set_function("GetItemIDByName", &luautils::GetItemIDByName);
         lua.set_function("SendLuaFuncStringToZone", &luautils::SendLuaFuncStringToZone);
+        lua.set_function("RoeParseRecords", &roeutils::ParseRecords);
+        lua.set_function("RoeParseTimed", &roeutils::ParseTimedSchedule);
 
         // This binding specifically exists to forcefully crash the server.
         // clang-format off
@@ -250,7 +252,6 @@ namespace luautils
         // Load globals
         // Truly global files first
         lua.safe_script_file("./scripts/globals/common.lua");
-        roeutils::init(); // TODO: Get rid of the need to do this
 
         // Load global enums
         for (auto const& entry : sorted_directory_iterator<std::filesystem::directory_iterator>("./scripts/enum"))
