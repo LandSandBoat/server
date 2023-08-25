@@ -72,6 +72,28 @@ local walkEventChance = 33
 -- The amount of energy taken by: watch over chocobo
 local watchOverEnergy = 5
 
+-- https://www.bg-wiki.com/ffxi/Category:Chocobo_Raising
+-- Rental chocobos are bred for speed and endurance, so they are automatically at the capped mount speed (+100% of base movement speed) and riding time.
+-- Personal chocobos will need the highest Speed rating and the ability Gallop in order to move at the same speed.
+-- F is the base grade (0 ranks), up through A to S to SS (+7 ranks)
+-- Max ranks is +9: with skills and relevant silks.
+
+-- Chocobo Speed Ratings
+xi.chocoboRaising.ridingSpeedBase    =  80
+xi.chocoboRaising.ridingSpeedPerRank = 2.5
+xi.chocoboRaising.ridingSpeedCap     = 100
+-- Ability: Gallop adds 1 rank
+-- Purple Race Silks add 1 rank
+-- Leads to absolute max of: 80 + (2.5 * 9): 102.5 -> clamped to 100
+
+-- Chocobo Endurance Ratings (minutes)
+xi.chocoboRaising.ridingTimeBase    = 17
+xi.chocoboRaising.ridingTimePerRank =  4
+xi.chocoboRaising.ridingTimeCap     = 45
+-- Ability: Canter adds 1 rank
+-- Red Race Silks add 1 rank
+-- Leads to absolute max of: 17 + (4 * 9): 53 -> clamped to 45
+
 -- NOTE: These are animation effects, so you can use warp etc.
 local glow =
 {
@@ -830,7 +852,7 @@ local updateChocoState = function(player, chocoState)
     chocoState.age = math.floor((os.time() - chocoState.created) / xi.chocoboRaising.dayLength) + 1
     chocoState.last_update_age = chocoState.age
 
-    debug("Writing chocoState.age & last_update_age:", chocoState.last_update_age)
+    debug(string.format("Writing chocoState to cache and db. age: %d, last_update_age: %d", chocoState.age, chocoState.last_update_age))
 
     -- Write to cache
     xi.chocoboRaising.chocoState[player:getID()] = chocoState
@@ -910,7 +932,6 @@ local onRaisingEventPlayout = function(player, csOffset, chocoState)
                 -- Pick a name at random: First name only
                 chocoState.first_name = xi.chocoboNames.getRandomName()
                 chocoState.last_name = ""
-                updateChocoState(player, chocoState)
             end
         end,
 
@@ -938,6 +959,8 @@ local onRaisingEventPlayout = function(player, csOffset, chocoState)
             setCondition(chocoState, conditions.BORED, false)
         end,
     }
+
+    updateChocoState(player, chocoState)
 
     return chocoState
 end
@@ -1245,6 +1268,10 @@ xi.chocoboRaising.startCutscene = function(player, npc, trade)
     player:startEventString(mainCsid, chocoState.first_name, chocoState.last_name, chocoState.first_name, chocoState.last_name,
         isTradeEvent, infoFlag, chocoState.sex, 0, 0, 0, 0, 0)
 end
+
+-----------------------------------
+-- VCS Trainer Interactions
+-----------------------------------
 
 xi.chocoboRaising.onTradeVCSTrainer = function(player, npc, trade)
     if not xi.settings.main.ENABLE_CHOCOBO_RAISING then
@@ -1956,12 +1983,16 @@ xi.chocoboRaising.onEventUpdateVCSTrainer = function(player, csid, option, npc)
 
                 debug("Competition Winner: " .. winnerStr[winner])
 
+                -- TODO: Use relevant name for area
+                local rivalsName = "Hero"
+
+                -- TODO: Hook up rival's look
+
                 -- TODO: Track wins in chocoState+db, only need to track up to 3
 
                 chocoState = onRaisingEventPlayout(player, cutscenes.COMPETE_WITH_OTHERS, chocoState)
-                player:updateEventString(chocoState.first_name, chocoState.last_name, chocoState.first_name, chocoState.last_name, 0, 0, 0, 0, 0, 0, 0)
+                player:updateEventString(chocoState.first_name, rivalsName, "", "", 0, 0, 0, 0, 0, 0, 0)
                 player:updateEvent(getCutsceneWithOffset(player, cutscenes.COMPETE_WITH_OTHERS), 0, winner, 0, chocoState.stage, 0, 0, 0)
-                updateChocoState(player, chocoState)
             end,
 
             [250] = function() -- Set Basic Care (menu)
