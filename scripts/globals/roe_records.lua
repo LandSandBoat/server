@@ -5,10 +5,8 @@ require("scripts/globals/expansion_areas")
 require("scripts/globals/missions")
 require("scripts/globals/quests")
 -----------------------------------
-xi = xi or {}
-xi.roe = xi.roe or {}
 
-xi.roe.records =
+local recordList =
 {
     -----------------------------------
     -- Tutorial -> Basics
@@ -9629,3 +9627,5 @@ xi.roe.records =
         flags = set { "hidden" },
     },
 }
+
+return recordList

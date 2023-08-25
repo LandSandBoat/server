@@ -3,7 +3,8 @@
 -----------------------------------
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
-require('scripts/globals/roe_records')
+-----------------------------------
+local recordList = require('scripts/globals/roe_records')
 -----------------------------------
 xi = xi or {}
 xi.roe = xi.roe or {}
@@ -141,13 +142,13 @@ local defaults =
 }
 
 -- Apply defaults for records
-for _, v in pairs(xi.roe.records) do
+for _, v in pairs(recordList) do
     setmetatable(v, { __index = defaults })
 end
 
 -- Build global map of implemented records.
 -- This is used to deny taking records which aren't implemented in the above table.
-RoeParseRecords(xi.roe.records)
+RoeParseRecords(recordList)
 
 --[[ --------------------------------------------------------------------------
     Complete a record of eminence. This is for internal roe use only.
@@ -168,7 +169,7 @@ RoeParseRecords(xi.roe.records)
     })
 --------------------------------------------------------------------------- --]]
 local function completeRecord(player, record)
-    local recordEntry = xi.roe.records[record]
+    local recordEntry = recordList[record]
     local recordFlags = recordEntry.flags
     local rewards = recordEntry.reward
 
@@ -251,7 +252,7 @@ function xi.roe.onRecordTrigger(player, recordID, params)
     params = params or {}
     params.progress = params.progress or player:getEminenceProgress(recordID)
 
-    local entry = xi.roe.records[recordID]
+    local entry = recordList[recordID]
     local isClaiming = params.claim
 
     if entry and params.progress then
