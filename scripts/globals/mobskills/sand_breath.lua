@@ -11,7 +11,12 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.BLINDNESS, 20, 0, 180)
+    local power = 20
+    if skill:getID() == 1873 then -- Nightmare Leech - -80 acc BLINDNESS
+        power = 80
+    end
+
+    xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.BLINDNESS, power, 0, 180)
 
     local dmgmod = xi.mobskills.mobBreathMove(mob, target, 0.085, 1, xi.magic.ele.EARTH, 333)
 

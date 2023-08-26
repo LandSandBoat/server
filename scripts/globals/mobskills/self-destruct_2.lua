@@ -17,6 +17,10 @@ end
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local damage = skill:getMobHP() / 6
 
+    if skill:getID() == 1855 then -- Nightmare Cluster - increased damage
+        damage = skill:getMobHP() / 2
+    end
+
     -- Razon - ENM: Fire in the Sky
     if mob:getHPP() <= 33 and mob:getPool() == 3333 then
         damage = 0
