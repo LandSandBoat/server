@@ -187,8 +187,6 @@ local function getRefreshModValue(pet, attachmentName, numManeuvers)
     return regenRefreshFormulas[attachmentName][1][numManeuvers + 1] + petMaxMP * (regenRefreshFormulas[attachmentName][2][numManeuvers + 1] / 100)
 end
 
--- TODO: This may still be necessary with future updates
---[[
 local function isOpticFiber(attachmentName)
     if string.find(attachmentName, 'optic_fiber') ~= nil then
         return true
@@ -196,7 +194,24 @@ local function isOpticFiber(attachmentName)
 
     return false
 end
-]]--
+
+-- Due to load order, we can't expect to determine Optic Fiber enhancements on change.
+-- For maneuvers, calculate this based on the number of light maneuvers that are active.
+local function calculatePerformanceBoost(pet, numManeuvers)
+    local master = pet:getMaster()
+    local performanceBoost = 0
+
+    local numLightManeuvers = master and master:countEffect(xi.effect.LIGHT_MANEUVER) or 0
+    for _, attachmentObj in ipairs(pet:getAttachments()) do
+        local attachmentName = attachmentObj:getName()
+
+        if isOpticFiber(attachmentName) then
+            performanceBoost = performanceBoost + attachmentModifiers[attachmentName][1][2][numLightManeuvers + 1]
+        end
+    end
+
+    return performanceBoost
+end
 
 -- Global functions to handle attachment equip, unequip, maneuver and performance changes
 -- NOTE: Core is 0-indexed for maneuvers, yet the table above is 1-indexed, and Maneuvers
@@ -225,11 +240,18 @@ end
 
 xi.automaton.updateAttachmentModifier = function(pet, attachment, maneuvers)
     local attachmentName = attachment:getName()
-    local modTable = attachmentModifiers[attachmentName]
+    local modTable       = attachmentModifiers[attachmentName]
 
-    for k, modList in ipairs(modTable) do
-        local previousMod = pet:getLocalVar(attachmentName .. k)
+    for attachmentModPos, modList in ipairs(modTable) do
+        local previousMod = pet:getLocalVar(attachmentName .. attachmentModPos)
         local modValue = 0
+
+        -- Local Vars are uint.  In all cases, a negative modifier carries
+        -- for all number of maneuvers, so if the last entry is negative,
+        -- restore this as a negative value.
+        if modList[2][4] and modList[2][4] < 0 then
+            previousMod = previousMod * -1
+        end
 
         -- Get base modifier value
         if modList[1] == xi.mod.REGEN then
@@ -240,9 +262,9 @@ xi.automaton.updateAttachmentModifier = function(pet, attachment, maneuvers)
             modValue = modList[2][maneuvers + 1]
         end
 
-        -- Apply Automaton Performance Boost if applicable
+        -- Apply Automaton Performance Boost if applicable.
         if modList[3] then
-            modValue = math.floor(modValue * (1 + pet:getMod(xi.mod.AUTO_PERFORMANCE_BOOST) / 100))
+            modValue = math.floor(modValue * (1 + calculatePerformanceBoost(pet, maneuvers) / 100))
         end
 
         if modValue ~= previousMod then
@@ -258,7 +280,17 @@ xi.automaton.updateAttachmentModifier = function(pet, attachment, maneuvers)
                 pet:addMod(modList[1], modValue)
             end
 
-            pet:setLocalVar(attachmentName .. k, modValue)
+            pet:setLocalVar(attachmentName .. attachmentModPos, math.abs(modValue))
+
+            -- If this is an Optic Fiber, there may be other maneuvers and attachments that need to be
+            -- updated.
+            local master = pet:getMaster()
+            if
+                master and
+                isOpticFiber(attachmentName)
+            then
+                master:updateAttachments()
+            end
         end
     end
 end

@@ -750,6 +750,8 @@ public:
     uint8 getActiveManeuverCount();
     void  removeOldestManeuver();
     void  removeAllManeuvers();
+    auto  getAttachment(uint8 slotId) -> std::optional<CLuaItem>;
+    auto  getAttachments() -> sol::table;
     void  updateAttachments();
     void  reduceBurden(float percentReduction, sol::object const& intReductionObj);
     bool  isExceedingElementalCapacity();

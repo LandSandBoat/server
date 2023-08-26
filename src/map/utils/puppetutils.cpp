@@ -127,6 +127,9 @@ namespace puppetutils
                     }
                 }
 
+                // After the Automaton has all attachments set, make sure we update for Optic Fiber
+                puppetutils::UpdateAttachments(PChar);
+
                 // Set burden based on JP
                 PChar->PAutomaton->setAllBurden(30 - PChar->PJobPoints->GetJobPointValue(JP_ACTIVATE_EFFECT));
 
@@ -714,9 +717,7 @@ namespace puppetutils
                         }
                         else
                         {
-                            // Note: This is called before the new maneuver count is known.  Send GetStatusEffectsCount - 1 to reflect
-                            // the new value.
-                            luautils::OnManeuverLose(PAutomaton, PAttachment, PChar->StatusEffectContainer->GetEffectsCount(maneuver) - 1);
+                            luautils::OnManeuverLose(PAutomaton, PAttachment, PChar->StatusEffectContainer->GetEffectsCount(maneuver));
                         }
                     }
                 }
