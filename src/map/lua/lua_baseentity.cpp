@@ -14524,6 +14524,61 @@ void CLuaBaseEntity::removeAllManeuvers()
 }
 
 /************************************************************************
+ *  Function: getAttachment(slotId)
+ *  Purpose : Gets the attachment of an automaton in the slot specified
+ *  Example : pet:getAttachment(1)
+ ************************************************************************/
+
+std::optional<CLuaItem> CLuaBaseEntity::getAttachment(uint8 slotId)
+{
+    auto* PAutomaton = dynamic_cast<CAutomatonEntity*>(m_PBaseEntity);
+
+    if (PAutomaton == nullptr)
+    {
+        ShowWarning("Invalid Entity accessing function.");
+        return std::nullopt;
+    }
+
+    uint8 slotItem = PAutomaton->getAttachment(slotId);
+    if (slotItem != 0)
+    {
+        return CLuaItem(itemutils::GetItemPointer(0x2100 + slotItem)); // TODO: Stop storing by offset
+    }
+
+    return std::nullopt;
+}
+
+/************************************************************************
+ *  Function: getAttachments()
+ *  Purpose : Returns a table of attachment items equipped by an Automaton
+ *  Example : pet:getAttachments()
+ ************************************************************************/
+
+sol::table CLuaBaseEntity::getAttachments()
+{
+    auto* PAutomaton = dynamic_cast<CAutomatonEntity*>(m_PBaseEntity);
+
+    if (PAutomaton == nullptr)
+    {
+        ShowWarning("Invalid Entity accessing function.");
+        return sol::lua_nil;
+    }
+
+    auto attachmentTable = lua.create_table();
+    for (uint8 attachmentSlot = 0; attachmentSlot < 12; ++attachmentSlot)
+    {
+        uint8 attachmentItemId = PAutomaton->getAttachment(attachmentSlot);
+
+        if (attachmentItemId != 0)
+        {
+            attachmentTable[attachmentSlot] = CLuaItem(itemutils::GetItemPointer(0x2100 + attachmentItemId));
+        }
+    }
+
+    return attachmentTable;
+}
+
+/************************************************************************
  *  Function: updateAttachments()
  *  Purpose : Updates all of the attachments
  *  Example : master:updateAttachments()
@@ -17407,6 +17462,8 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("getActiveManeuverCount", CLuaBaseEntity::getActiveManeuverCount);
     SOL_REGISTER("removeOldestManeuver", CLuaBaseEntity::removeOldestManeuver);
     SOL_REGISTER("removeAllManeuvers", CLuaBaseEntity::removeAllManeuvers);
+    SOL_REGISTER("getAttachment", CLuaBaseEntity::getAttachment);
+    SOL_REGISTER("getAttachments", CLuaBaseEntity::getAttachments);
     SOL_REGISTER("updateAttachments", CLuaBaseEntity::updateAttachments);
     SOL_REGISTER("reduceBurden", CLuaBaseEntity::reduceBurden);
 
