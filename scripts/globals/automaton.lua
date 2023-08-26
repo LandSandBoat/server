@@ -197,7 +197,7 @@ end
 
 -- Due to load order, we can't expect to determine Optic Fiber enhancements on change.
 -- For maneuvers, calculate this based on the number of light maneuvers that are active.
-local function calculatePerformanceBoost(pet, numManeuvers)
+local function calculatePerformanceBoost(pet)
     local master = pet:getMaster()
     local performanceBoost = 0
 
@@ -264,7 +264,7 @@ xi.automaton.updateAttachmentModifier = function(pet, attachment, maneuvers)
 
         -- Apply Automaton Performance Boost if applicable.
         if modList[3] then
-            modValue = math.floor(modValue * (1 + calculatePerformanceBoost(pet, maneuvers) / 100))
+            modValue = math.floor(modValue * (1 + calculatePerformanceBoost(pet) / 100))
         end
 
         if modValue ~= previousMod then
