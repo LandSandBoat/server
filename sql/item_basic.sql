@@ -11945,7 +11945,7 @@ INSERT INTO `item_basic` VALUES (14612,0,'serenity_ring_+1','serenity_ring_+1',1
 INSERT INTO `item_basic` VALUES (14613,0,'vigor_ring_+1','vigor_ring_+1',1,2080,25,0,4150);
 INSERT INTO `item_basic` VALUES (14614,0,'mystic_ring_+1','mystic_ring_+1',1,2080,25,0,4150);
 INSERT INTO `item_basic` VALUES (14615,0,'allure_ring_+1','allure_ring_+1',1,2080,25,0,4238);
-INSERT INTO `item_basic` VALUES (14616,0,'triton_ring','triton_ring',1,2080,25,0,3997);
+INSERT INTO `item_basic` VALUES (14616,0,'triton_ring','triton_ring',1,2080,25,0,31450);
 INSERT INTO `item_basic` VALUES (14617,0,'nimble_ring_+1','nimble_ring_+1',1,2080,25,0,5533);
 INSERT INTO `item_basic` VALUES (14618,0,'triumph_ring_+1','triumph_ring_+1',1,2080,25,0,11592);
 INSERT INTO `item_basic` VALUES (14619,0,'omniscient_ring_+1','omn._ring_+1',1,2080,25,0,5533);
@@ -11985,7 +11985,7 @@ INSERT INTO `item_basic` VALUES (14652,0,'protean_ring','protean_ring',1,2052,0,
 INSERT INTO `item_basic` VALUES (14653,0,'variable_ring','variable_ring',1,2052,0,0,1229);
 INSERT INTO `item_basic` VALUES (14654,0,'poisona_ring','poisona_ring',1,3108,25,0,3965);
 INSERT INTO `item_basic` VALUES (14655,0,'venerer_ring','venerer_ring',1,34852,25,0,380);
-INSERT INTO `item_basic` VALUES (14656,0,'poseidons_ring','poseidons_ring',1,3108,25,0,3997);
+INSERT INTO `item_basic` VALUES (14656,0,'poseidons_ring','poseidons_ring',1,3108,25,0,45795);
 INSERT INTO `item_basic` VALUES (14657,0,'ducal_guards_ring','dcl.grd._ring',1,60480,0,0,1918);
 INSERT INTO `item_basic` VALUES (14658,0,'atlauas_ring','atlauas_ring',1,34820,25,0,11250);
 INSERT INTO `item_basic` VALUES (14659,0,'hercules_ring','hercules_ring',1,34820,25,0,11000);

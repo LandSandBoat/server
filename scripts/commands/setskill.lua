@@ -2,8 +2,6 @@
 -- func: setskill <skill name or ID> <skill level> <target>
 -- desc: sets target's level of specified skill
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 
 cmdprops =
 {

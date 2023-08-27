@@ -4,8 +4,6 @@
 -- Zones to Outer Ra'Kaznar (zone 274)
 -- !pos -34.549 -181.334 -20.031 274
 -----------------------------------
-require("scripts/globals/settings")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

@@ -3,9 +3,6 @@
 -- Mythril Bolt Quiver
 -- When used, you will obtain one stack of Mythril Bolts
 -----------------------------------
-require("scripts/globals/msg")
-require("scripts/globals/items")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

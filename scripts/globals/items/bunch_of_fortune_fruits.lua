@@ -6,8 +6,6 @@
 -- Charisma +7
 -- may have unknown hidden effects
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

@@ -2,7 +2,6 @@
 -- Slowga
 -----------------------------------
 require("scripts/globals/mobskills")
-require("scripts/globals/msg")
 -----------------------------------
 local abilityObject = {}
 

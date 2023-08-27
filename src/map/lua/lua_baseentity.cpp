@@ -304,7 +304,7 @@ void CLuaBaseEntity::messageText(CLuaBaseEntity* PLuaBaseEntity, uint16 messageI
  *  Purpose : Displays either standad messages to a PC or custom text
  *  Example : player:PrintToPlayer("Hello!", xi.msg.channel.NS_SAY)
  *          : player:PrintToPlayer(string.format("Hello, %s!", player:getName()), xi.msg.channel.SYSTEM_1)
- *  Notes   : see scripts/globals/msg.lua for message channels
+ *  Notes   : see scripts/enum/msg.lua for message channels
  *          : Can modify the name shown through explicit declaration
  ************************************************************************/
 
@@ -344,31 +344,44 @@ void CLuaBaseEntity::PrintToArea(std::string const& message, sol::object const& 
 
     // see scripts\globals\msg.lua or src\map\packets\chat_message.h for values
     CHAT_MESSAGE_TYPE messageLook  = (arg1 == sol::lua_nil) ? MESSAGE_SYSTEM_1 : arg1.as<CHAT_MESSAGE_TYPE>();
-    uint8             messageRange = (arg2 == sol::lua_nil) ? 0 : arg2.as<uint8>();
+    uint8             messageRange = (arg2 == sol::lua_nil) ? MESSAGE_AREA_SYSTEM : arg2.as<CHAT_MESSAGE_AREA>();
     std::string       name         = (arg3 == sol::lua_nil) ? std::string() : arg3.as<std::string>();
 
-    if (messageRange == 0) // All zones world wide
+    if (messageRange == MESSAGE_AREA_SYSTEM)
     {
         message::send(MSG_CHAT_SERVMES, nullptr, 0, new CChatMessagePacket(PChar, messageLook, message, name));
     }
-    else if (messageRange == 1) // Say range
+    else if (messageRange == MESSAGE_AREA_SAY)
     {
         PChar->loc.zone->PushPacket(PChar, CHAR_INRANGE, new CChatMessagePacket(PChar, messageLook, message, name));
+        PChar->loc.zone->PushPacket(PChar, CHAR_INRANGE_SELF, new CChatMessagePacket(PChar, messageLook, message, name));
     }
-    else if (messageRange == 2) // Shout
+    else if (messageRange == MESSAGE_AREA_SHOUT)
     {
         PChar->loc.zone->PushPacket(PChar, CHAR_INSHOUT, new CChatMessagePacket(PChar, messageLook, message, name));
+        PChar->loc.zone->PushPacket(PChar, CHAR_INRANGE_SELF, new CChatMessagePacket(PChar, messageLook, message, name));
     }
-    else if (messageRange == 3) // Party and Alliance
+    else if (messageRange == MESSAGE_AREA_PARTY)
     {
         message::send(MSG_CHAT_PARTY, nullptr, 0, new CChatMessagePacket(PChar, messageLook, message, name));
+        PChar->loc.zone->PushPacket(PChar, CHAR_INRANGE_SELF, new CChatMessagePacket(PChar, messageLook, message, name));
     }
-    else if (messageRange == 4) // Yell zones only
+    else if (messageRange == MESSAGE_AREA_YELL)
     {
         message::send(MSG_CHAT_YELL, nullptr, 0, new CChatMessagePacket(PChar, messageLook, message, name));
+        PChar->loc.zone->PushPacket(PChar, CHAR_INRANGE_SELF, new CChatMessagePacket(PChar, messageLook, message, name));
+    }
+    else if (messageRange == MESSAGE_AREA_UNITY)
+    {
+        message::send(MSG_CHAT_UNITY, nullptr, 0, new CChatMessagePacket(PChar, messageLook, message, name));
+        PChar->loc.zone->PushPacket(PChar, CHAR_INRANGE_SELF, new CChatMessagePacket(PChar, messageLook, message, name));
+    }
+    else
+    {
+        ShowError("CLuaBaseEntity::PrintToArea : invalid message area/messageRange value %u given by script.", messageRange);
     }
     /*
-    Todo: Unity, LS 1 and LS 2 for the lols?
+    Todo: Assist channels
     */
 }
 
@@ -1589,6 +1602,43 @@ void CLuaBaseEntity::lookAt(sol::object const& arg0, sol::object const& arg1, so
 }
 
 /************************************************************************
+ *  Function: facePlayer()
+ *  Purpose : change entities rotation to the direction of a player
+ *  Example : npc:facePlayer(player, true/false)
+ *  Notes   : Arbitrary points are not supported!
+ *            Bool set "false" changes the facing for everyone.
+ ************************************************************************/
+
+void CLuaBaseEntity::facePlayer(CLuaBaseEntity* PLuaBaseEntity, sol::object const& nonGlobal)
+{
+    CCharEntity* PChar = static_cast<CCharEntity*>(PLuaBaseEntity->GetBaseEntity());
+
+    if (PChar)
+    {
+        bool onePersonOnly = nonGlobal.get_type() == sol::type::boolean ? nonGlobal.as<bool>() : true;
+
+        if (onePersonOnly)
+        {
+            auto storedRotation           = m_PBaseEntity->loc.p.rotation;
+            m_PBaseEntity->loc.p.rotation = worldAngle(m_PBaseEntity->loc.p, PChar->loc.p);
+            // Update 1 player's client only
+            PChar->updateEntityPacket(m_PBaseEntity, static_cast<ENTITYUPDATE>(ENTITY_UPDATE), UPDATE_POS);
+            // Now that the packet is sent to that 1 player, turn this back.
+            m_PBaseEntity->loc.p.rotation = storedRotation;
+        }
+        else
+        {
+            m_PBaseEntity->loc.p.rotation = worldAngle(m_PBaseEntity->loc.p, PChar->loc.p);
+            m_PBaseEntity->updatemask |= UPDATE_POS;
+        }
+    }
+    else
+    {
+        ShowError("missing or invalid entity in function call.");
+    }
+}
+
+/************************************************************************
  *  Function: clearTargID()
  *  Purpose : Clears an active target from an Entity
  *  Example : GetNPCByID(17719350):clearTargID()
@@ -2300,7 +2350,7 @@ int16 CLuaBaseEntity::getWorldAngle(sol::variadic_args va)
  *            Returned angle is 255-based rotation value - NOT a 360 angle
  *            Return value is signed to indicate this shortest turn direction.
  *            Negative: counter-clockwise (left), Positive: clockwise (right)
- *            CAREFUL! If the entities are too close, this can return unxpected results.
+ *            CAREFUL! If the entities are too close, this can return unexpected results.
  ************************************************************************/
 
 int16 CLuaBaseEntity::getFacingAngle(CLuaBaseEntity const* target)
@@ -4782,7 +4832,7 @@ std::string CLuaBaseEntity::getPacketName()
  *          : your choosing.
  ************************************************************************/
 
-void CLuaBaseEntity::renameEntity(std::string const& newName)
+void CLuaBaseEntity::renameEntity(std::string const& newName, sol::object const& arg2)
 {
     if (m_PBaseEntity->objtype == TYPE_PC)
     {
@@ -4795,7 +4845,11 @@ void CLuaBaseEntity::renameEntity(std::string const& newName)
     m_PBaseEntity->updatemask |= UPDATE_NAME | UPDATE_HP;
     m_PBaseEntity->isRenamed = true;
 
-    ShowInfo("Renaming %s: %s -> %s", m_PBaseEntity->name, oldName, newName);
+    bool silent = arg2.get_type() == sol::type::boolean ? arg2.as<bool>() : false;
+    if (!silent)
+    {
+        ShowInfo("Renaming %s: %s -> %s", m_PBaseEntity->name, oldName, newName);
+    }
 }
 
 /************************************************************************
@@ -16720,6 +16774,7 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("canUseAbilities", CLuaBaseEntity::canUseAbilities);
 
     SOL_REGISTER("lookAt", CLuaBaseEntity::lookAt);
+    SOL_REGISTER("facePlayer", CLuaBaseEntity::facePlayer);
     SOL_REGISTER("clearTargID", CLuaBaseEntity::clearTargID);
 
     SOL_REGISTER("atPoint", CLuaBaseEntity::atPoint);

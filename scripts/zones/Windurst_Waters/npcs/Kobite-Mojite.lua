@@ -3,7 +3,6 @@
 --  NPC: Kobite-Mojite
 -----------------------------------
 local ID = require("scripts/zones/Windurst_Waters/IDs")
-require("scripts/globals/settings")
 -----------------------------------
 local entity = {}
 

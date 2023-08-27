@@ -3,9 +3,6 @@
 -- Horn Quiver
 -- When used, you will obtain one stack of Horn Arrows
 -----------------------------------
-require("scripts/globals/msg")
-require("scripts/globals/items")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

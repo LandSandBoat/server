@@ -1,9 +1,6 @@
 -----------------------------------
 -- Paladin Job Utilities
 -----------------------------------
-require('scripts/globals/items')
-require("scripts/globals/msg")
------------------------------------
 xi = xi or {}
 xi.job_utils = xi.job_utils or {}
 xi.job_utils.paladin = xi.job_utils.paladin or {}

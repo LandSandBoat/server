@@ -3,8 +3,6 @@
 -- Contains items valid to each storage slip
 -- NOTE: Position is important!
 -----------------------------------
-require('scripts/globals/items')
------------------------------------
 
 -- Item IDs for the items stored on each slip. Zero-based index in the table represents the bit indicating if the slip has the item stored.
 local slipItems =

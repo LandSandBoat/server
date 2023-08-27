@@ -689,7 +689,7 @@ namespace fishingutils
         // https://ffxiclopedia.fandom.com/wiki/Lord%27s_Yukata
         // Allows the wearer to improve the type of goldfish caught.
         // By increasing the hookchance, we increase the odds of rarer fish from being caught
-        if (rod->rodID == GOLDFISH_BASKET && body != nullptr && (body->getID() == LORDS_YUKATA || body->getID() == LADYS_YUKATA))
+        if (rod != nullptr && rod->rodID == GOLDFISH_BASKET && body != nullptr && (body->getID() == LORDS_YUKATA || body->getID() == LADYS_YUKATA))
         {
             hookChance += 50;
         }
@@ -1150,13 +1150,19 @@ namespace fishingutils
 
         for (auto fish : FishingGroups[groupId])
         {
-            if (FishList[fish.first]->fishFlags == FISHFLAG_GOLDFISH && BaitID == FISHINGBAIT_SUPER_SCOOP)
+            if (FishList[fish.first]->fishFlags & FISHFLAG_GOLDFISH)
             {
-                pool.insert(std::make_pair(FishList[fish.first], fish.second));
+                if (BaitID == FISHINGBAIT_SUPER_SCOOP)
+                {
+                    pool.insert(std::make_pair(FishList[fish.first], fish.second));
+                }
             }
-            else if ((!FishList[fish.first]->item) && FishingBaitAffinities.count(BaitID) && FishingBaitAffinities[BaitID].count(fish.first) && FishList[fish.first]->fishFlags != FISHFLAG_GOLDFISH)
+            else
             {
-                pool.insert(std::make_pair(FishList[fish.first], fish.second));
+                if ((!FishList[fish.first]->item) && FishingBaitAffinities.count(BaitID) && FishingBaitAffinities[BaitID].count(fish.first))
+                {
+                    pool.insert(std::make_pair(FishList[fish.first], fish.second));
+                }
             }
         }
 
@@ -1483,7 +1489,7 @@ namespace fishingutils
         {
             case FISHINGFAILTYPE_LINESNAP:
                 PChar->animation = ANIMATION_FISHING_LINE_BREAK;
-                if (Rod->getID() == GOLDFISH_BASKET)
+                if (Rod != nullptr && Rod->getID() == GOLDFISH_BASKET)
                     PChar->pushPacket(new CMessageSpecialPacket(PChar, MessageOffset + FISHMESSAGEOFFSET_GOLDFISH_PAPER_RIPPED, 17003));
                 else
                     PChar->pushPacket(new CMessageTextPacket(PChar, MessageOffset + FISHMESSAGEOFFSET_LINEBREAK));
@@ -1797,7 +1803,7 @@ namespace fishingutils
         {
             case FISHINGCATCHTYPE_SMALLFISH:
                 // Special messaging for goldfish
-                if (bait->baitID == FISHINGBAIT_SUPER_SCOOP)
+                if (bait != nullptr && bait->baitID == FISHINGBAIT_SUPER_SCOOP)
                 {
                     if (response->catchid == TINY_GOLDFISH)
                     {
@@ -1865,12 +1871,6 @@ namespace fishingutils
         }
         CItemWeapon* Rod = dynamic_cast<CItemWeapon*>(PChar->getEquip(SLOT_RANGED));
 
-        // Players cannot level up from goldfishing
-        if (Rod->getID() == GOLDFISH_BASKET)
-        {
-            return;
-        }
-
         uint8  skillRank       = PChar->RealSkills.rank[SKILL_FISHING];
         uint16 maxSkill        = (skillRank + 1) * 100;
         int32  charSkill       = PChar->RealSkills.skill[SKILL_FISHING];
@@ -1883,8 +1883,14 @@ namespace fishingutils
             levelDifference = catchLevel - charSkillLevel;
         }
 
+        // Players cannot level up from goldfishing
+        if (Rod != nullptr && Rod->getID() == GOLDFISH_BASKET)
+        {
+            return;
+        }
+
         // No skillup if fish level not between char level and 50 levels higher
-        if (catchLevel <= charSkillLevel || (levelDifference > 50))
+        else if (catchLevel <= charSkillLevel || (levelDifference > 50))
         {
             return;
         }
@@ -2063,16 +2069,11 @@ namespace fishingutils
             Rod  = dynamic_cast<CItemWeapon*>(PChar->getEquip(SLOT_RANGED));
             Bait = dynamic_cast<CItemWeapon*>(PChar->getEquip(SLOT_AMMO));
 
+            // You cannot fish in these zones during Sunbreeze Festival
+            std::set<uint16> sunbreezeExcludedZones = { 238, 239, 241, 231, 234, 235, 247, 100, 107, 116 };
+
             // Players cannot fish using the goldfishing basket outside of the sunbreeze event or goldfishing designated zones
-            if (Rod != nullptr && Rod->getID() == GOLDFISH_BASKET && !settings::get<bool>("main.SUNBREEZE"))
-            {
-                PChar->pushPacket(new CMessageTextPacket(PChar, MessageOffset + FISHMESSAGEOFFSET_CANNOTFISH_MOMENT));
-                PChar->pushPacket(new CReleasePacket(PChar, RELEASE_TYPE::FISHING));
-                destroy(PChar->hookedFish);
-                return;
-            }
-            else if (Rod != nullptr && Rod->getID() == GOLDFISH_BASKET && zone != 238 && zone != 239 && zone != 241 && zone != 231 && zone != 234 && zone != 235 &&
-                     zone != 247 && zone != 100 && zone != 107 && zone != 116)
+            if (Rod != nullptr && Rod->getID() == GOLDFISH_BASKET && (!settings::get<bool>("main.SUNBREEZE") || sunbreezeExcludedZones.count(zone) == 0))
             {
                 PChar->pushPacket(new CMessageTextPacket(PChar, MessageOffset + FISHMESSAGEOFFSET_CANNOTFISH_MOMENT));
                 PChar->pushPacket(new CReleasePacket(PChar, RELEASE_TYPE::FISHING));
@@ -2319,7 +2320,7 @@ namespace fishingutils
         }
 
         // Build Hookable Item Pool
-        if (!ItemPool.empty() && rod->rodID != GOLDFISH_BASKET)
+        if (!ItemPool.empty() && rod != nullptr && rod->rodID != GOLDFISH_BASKET)
         {
             for (auto* item : ItemPool)
             {
@@ -2367,7 +2368,7 @@ namespace fishingutils
         }
 
         // Build Hookable Mob Pool
-        if (!MobPool.empty() && rod->rodID != GOLDFISH_BASKET)
+        if (!MobPool.empty() && rod != nullptr && rod->rodID != GOLDFISH_BASKET)
         {
             for (auto* mob : MobPool)
             {
@@ -2854,7 +2855,7 @@ namespace fishingutils
 
                     // send then response sense message (If not goldfishing)
                     // TODO: When goldfishing, send a different packet here
-                    if (Rod->getID() != GOLDFISH_BASKET)
+                    if (Rod != nullptr && Rod->getID() != GOLDFISH_BASKET)
                     {
                         SendSenseMessage(PChar, response);
                     }
@@ -2897,7 +2898,7 @@ namespace fishingutils
                         {
                             PChar->fishingToken = 0;
                             // Scoops appear to rip about ~40% of the time on successful catches.
-                            if (Rod->getID() == GOLDFISH_BASKET && xirand::GetRandomNumber(10) <= 4)
+                            if (Rod != nullptr && Rod->getID() == GOLDFISH_BASKET && xirand::GetRandomNumber(10) <= 4)
                             {
                                 LoseCatch(PChar, FISHINGFAILTYPE_LINESNAP);
                                 UnhookMob(PChar, true);
@@ -2954,7 +2955,7 @@ namespace fishingutils
                     PChar->updatemask |= UPDATE_HP;
                     BaitLoss(PChar, true, true);
 
-                    if (Rod->getID() == GOLDFISH_BASKET)
+                    if (Rod != nullptr && Rod->getID() == GOLDFISH_BASKET)
                         PChar->pushPacket(new CMessageSpecialPacket(PChar, MessageOffset + FISHMESSAGEOFFSET_GOLDFISH_PAPER_RIPPED, 17003));
                     else
                         PChar->pushPacket(new CMessageTextPacket(PChar, MessageOffset + FISHMESSAGEOFFSET_LINEBREAK));
@@ -2973,7 +2974,7 @@ namespace fishingutils
 
                     if (PChar->hookedFish && PChar->hookedFish->hooked && BaitLoss(PChar, false, true))
                     {
-                        if (Rod->getID() == GOLDFISH_BASKET)
+                        if (Rod != nullptr && Rod->getID() == GOLDFISH_BASKET)
                             PChar->pushPacket(new CMessageTextPacket(PChar, MessageOffset + FISHMESSAGEOFFSET_GOLDFISH_SLIPPED_OFF));
                         else
                             PChar->pushPacket(new CMessageTextPacket(PChar, MessageOffset + FISHMESSAGEOFFSET_GIVEUP_BAITLOSS));
@@ -2992,7 +2993,7 @@ namespace fishingutils
                     PChar->updatemask |= UPDATE_HP;
                     BaitLoss(PChar, false, true);
 
-                    if (Rod->getID() == GOLDFISH_BASKET)
+                    if (Rod != nullptr && Rod->getID() == GOLDFISH_BASKET)
                         PChar->pushPacket(new CMessageTextPacket(PChar, MessageOffset + FISHMESSAGEOFFSET_GOLDFISH_SLIPPED_OFF));
                     else
                         PChar->pushPacket(new CMessageTextPacket(PChar, MessageOffset + FISHMESSAGEOFFSET_LOST));

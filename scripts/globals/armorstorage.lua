@@ -3,8 +3,6 @@
 --  Armor Storage
 --
 -----------------------------------
-require("scripts/globals/keyitems")
------------------------------------
 
 xi = xi or {}
 xi.armorStorage = xi.armorStorage or {}

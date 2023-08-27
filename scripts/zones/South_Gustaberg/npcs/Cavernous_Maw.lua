@@ -5,7 +5,6 @@
 -- Teleports Players to Abyssea - Altepa
 -----------------------------------
 local ID = require("scripts/zones/South_Gustaberg/IDs")
-require("scripts/globals/settings")
 require("scripts/globals/abyssea")
 require("scripts/globals/quests")
 -----------------------------------

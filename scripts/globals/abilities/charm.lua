@@ -13,7 +13,6 @@
 -- Tough            |1.5 Minutes
 -- Very Tough       |1-20 seconds
 -----------------------------------
-require("scripts/globals/msg")
 require("scripts/globals/pets")
 -----------------------------------
 local abilityObject = {}

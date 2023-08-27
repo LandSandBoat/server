@@ -2,7 +2,6 @@
 -- Area: Konschtat Highlands
 --   NM: Bendigeit Vran
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/mobs")
 require("scripts/quests/tutorial")
 -----------------------------------

@@ -2,14 +2,10 @@
 -- Damage Spell Utilities
 -- Used for spells that deal direct damage. (Black, White, Dark and Ninjutsu)
 -----------------------------------
-require("scripts/globals/spell_data")
 require("scripts/globals/jobpoints")
 require("scripts/globals/magicburst")
-require("scripts/globals/status")
 require("scripts/globals/utils")
-require("scripts/globals/msg")
 require("scripts/globals/magic")
-require("scripts/globals/settings")
 require("scripts/globals/damage")
 -----------------------------------
 xi = xi or {}

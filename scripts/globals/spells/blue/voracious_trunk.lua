@@ -12,9 +12,6 @@
 -- Combos: Auto Refresh
 -----------------------------------
 require("scripts/globals/bluemagic")
-require("scripts/globals/settings")
-require("scripts/globals/status")
-require("scripts/globals/msg")
 -----------------------------------
 local spellObject = {}
 
@@ -28,7 +25,7 @@ spellObject.onSpellCast = function(caster, target, spell)
     params.skillType = xi.skill.BLUE_MAGIC
     local stolen = 0
 
-    local resist = applyResistanceEffect(caster, target, spell, params)
+    local resist = xi.magic.applyResistanceEffect(caster, target, spell, params)
     if resist >= 0.5 then
         stolen = caster:stealStatusEffect(target)
         if stolen ~= 0 then

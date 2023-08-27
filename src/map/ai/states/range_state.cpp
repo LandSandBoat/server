@@ -102,7 +102,7 @@ bool CRangeState::CanChangeState()
 
 bool CRangeState::Update(time_point tick)
 {
-    if (tick > GetEntryTime() + m_aimTime && !IsCompleted())
+    if (m_PEntity && m_PEntity->isAlive() && (tick > GetEntryTime() + m_aimTime && !IsCompleted()))
     {
         auto* PTarget = m_PEntity->IsValidTarget(m_targid, TARGET_ENEMY, m_errorMsg);
 
@@ -117,7 +117,7 @@ bool CRangeState::Update(time_point tick)
             }
         }
 
-        CanUseRangedAttack(PTarget, false);
+        CanUseRangedAttack(PTarget, true);
 
         if (HasMoved())
         {
@@ -201,18 +201,6 @@ bool CRangeState::CanUseRangedAttack(CBattleEntity* PTarget, bool isEndOfAttack)
                 break;
             }
             case SKILL_ARCHERY:
-            {
-                PRanged = dynamic_cast<CItemWeapon*>(PChar->getEquip(SLOT_AMMO));
-                if (PRanged != nullptr && PRanged->isType(ITEM_WEAPON))
-                {
-                    break;
-                }
-                else
-                {
-                    m_errorMsg = std::make_unique<CMessageBasicPacket>(PChar, PChar, 0, 0, MSGBASIC_NO_RANGED_WEAPON);
-                    return false;
-                }
-            }
             case SKILL_MARKSMANSHIP:
             {
                 PRanged = dynamic_cast<CItemWeapon*>(PChar->getEquip(SLOT_AMMO));

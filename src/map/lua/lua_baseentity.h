@@ -126,6 +126,7 @@ public:
     bool  canUseAbilities();
 
     void lookAt(sol::object const& arg0, sol::object const& arg1, sol::object const& arg2); // look at given position
+    void facePlayer(CLuaBaseEntity* PLuaBaseEntity, sol::object const& nonGlobal);          // specifically rotates target to player direction
     void clearTargID();                                                                     // clears target of entity
 
     bool  atPoint(sol::variadic_args va);                                          // is at given point
@@ -134,7 +135,7 @@ public:
     bool  isFollowingPath();                                                       // checks if the entity is following a path
     void  clearPath(sol::object const& pauseObj);                                  // removes current pathfind and stops moving
     void  continuePath();                                                          // resumes previous pathfind if it was paused
-    float checkDistance(sol::variadic_args va);                                    // Check Distacnce and returns distance number
+    float checkDistance(sol::variadic_args va);                                    // Check Distance and returns distance number
     void  wait(sol::object const& milliseconds);                                   // make the npc wait a number of ms and then back into roam
     // int32 WarpTo(lua_Stat* L);           // warp to the given point -- These don't exist, breaking them just in case someone uncomments
     // int32 RoamAround(lua_Stat* L);       // pick a random point to walk to
@@ -268,7 +269,7 @@ public:
     uint8  getGender();              // Returns the player character's gender
     auto   getName() -> std::string; // Gets Entity Name
     auto   getPacketName() -> std::string;
-    void   renameEntity(std::string const& newName);
+    void   renameEntity(std::string const& newName, sol::object const& arg2);
     void   hideName(bool isHidden);
     bool   checkNameFlags(uint32 flags); // this is check and not get because it tests for a flag, it doesn't return all flags
     uint16 getModelId();

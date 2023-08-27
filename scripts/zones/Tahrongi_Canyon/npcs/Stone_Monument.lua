@@ -5,7 +5,6 @@
 -- !pos -499.189 12.600 373.592 117
 -----------------------------------
 local ID = require("scripts/zones/Tahrongi_Canyon/IDs")
-require("scripts/globals/items")
 require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}

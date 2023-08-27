@@ -1,8 +1,6 @@
 -----------------------------------
 -- Spell: Reraise 4
 -----------------------------------
-require("scripts/globals/status")
------------------------------------
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

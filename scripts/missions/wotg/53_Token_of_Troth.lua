@@ -5,7 +5,6 @@
 -- !addmission 5 52
 -- Bulwark Gate : !pos -447.174 -1.831 342.417 98
 -----------------------------------
-require('scripts/globals/keyitems')
 require('scripts/globals/missions')
 require('scripts/globals/interaction/mission')
 require('scripts/globals/zone')

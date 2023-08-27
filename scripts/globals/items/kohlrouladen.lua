@@ -11,8 +11,6 @@
 -- Enmity -4
 -- Subtle Blow +5
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

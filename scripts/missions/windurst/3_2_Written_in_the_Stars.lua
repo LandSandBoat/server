@@ -11,8 +11,6 @@
 -- Gate of Light    : !pos -331 0 139 192
 -----------------------------------
 require('scripts/globals/interaction/mission')
-require('scripts/globals/items')
-require('scripts/globals/keyitems')
 require('scripts/globals/missions')
 require('scripts/globals/npc_util')
 require('scripts/globals/titles')

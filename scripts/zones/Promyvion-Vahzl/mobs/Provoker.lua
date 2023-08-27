@@ -3,7 +3,6 @@
 --   NM: Provoker
 -----------------------------------
 mixins = { require("scripts/mixins/families/empty_terroanima") }
-require("scripts/globals/status")
 require("scripts/globals/magic")
 -----------------------------------
 local entity = {}

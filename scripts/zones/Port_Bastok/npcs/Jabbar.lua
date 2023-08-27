@@ -5,10 +5,8 @@
 -- Involved in Quests: Tenshodo Menbership
 -- !pos -99.718 -2.299 26.027 236
 -----------------------------------
-require("scripts/globals/settings")
 require("scripts/globals/shop")
 require("scripts/globals/quests")
-require("scripts/globals/keyitems")
 local ID = require("scripts/zones/Port_Bastok/IDs")
 -----------------------------------
 local entity = {}

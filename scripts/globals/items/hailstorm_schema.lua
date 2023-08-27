@@ -3,8 +3,6 @@
 -- Hailstorm Schema
 -- Teaches the white magic Hailstorm
 -----------------------------------
-require("scripts/globals/spell_data")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

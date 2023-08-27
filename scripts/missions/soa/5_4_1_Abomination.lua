@@ -5,7 +5,6 @@
 -- !addmission 12 123
 -- Ominous Postern : !pos 118 37.5 20 277
 -----------------------------------
-require('scripts/globals/keyitems')
 require('scripts/globals/missions')
 require('scripts/globals/interaction/mission')
 require('scripts/globals/zone')

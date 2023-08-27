@@ -4,7 +4,6 @@
 -- Involved in Quest: To Cure a Cough, Over The Hills And Far Away
 -- !pos -75 -12 65 230
 -----------------------------------
-require("scripts/globals/settings")
 require("scripts/globals/quests")
 -----------------------------------
 local entity = {}

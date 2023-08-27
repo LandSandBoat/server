@@ -7,8 +7,6 @@
 -- Jijiroon          !pos 15 0 -32 53
 -- qm9               !pos 311 -3.374 170.124 54
 -----------------------------------
-require('scripts/globals/items')
-require('scripts/globals/keyitems')
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
 require('scripts/globals/zone')

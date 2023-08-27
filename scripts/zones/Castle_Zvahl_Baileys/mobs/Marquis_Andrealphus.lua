@@ -3,8 +3,6 @@
 -- NM: Marquis Andrealphus
 -- Quest: Better the Demon you Know
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local ID = require('scripts/zones/Castle_Zvahl_Baileys/IDs')
 -----------------------------------
 local entity = {}

@@ -3,8 +3,6 @@
 -- Gives Undispellable Ice Spikes and Defense Boost
 -----------------------------------
 require("scripts/globals/mobskills")
-require("scripts/globals/settings")
-require("scripts/globals/status")
 -----------------------------------
 local mobskillObject = {}
 

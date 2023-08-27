@@ -7,7 +7,6 @@
 -- Darcia : !pos -36 -1 -15 245
 -----------------------------------
 require('scripts/globals/missions')
-require('scripts/globals/settings')
 require('scripts/globals/interaction/mission')
 require('scripts/globals/utils')
 require('scripts/globals/zone')

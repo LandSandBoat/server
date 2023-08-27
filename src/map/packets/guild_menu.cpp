@@ -29,8 +29,6 @@ CGuildMenuPacket::CGuildMenuPacket(GUILDSTATUS status, uint8 open, uint8 close, 
     this->setType(0x86);
     this->setSize(0x0C);
 
-    // XI_DEBUG_BREAK_IF(open > close);
-
     ref<uint8>(0x04) = status;
 
     switch (status)

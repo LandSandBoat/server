@@ -10,7 +10,6 @@
 -- Mourices        : !pos -50.646 -0.501 -27.642 241
 -- Savae E Paleade : !pos 23.724 -17.39 -43.360 237
 -----------------------------------
-require('scripts/globals/keyitems')
 require('scripts/globals/missions')
 require('scripts/globals/npc_util')
 require('scripts/globals/interaction/mission')

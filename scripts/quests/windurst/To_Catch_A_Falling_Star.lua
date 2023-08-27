@@ -5,7 +5,6 @@
 -- Sigismund : !pos -110 -9 80 206
 -----------------------------------
 require('scripts/globals/interaction/quest')
-require("scripts/globals/items")
 require("scripts/globals/npc_util")
 require('scripts/globals/quests')
 require('scripts/globals/zone')

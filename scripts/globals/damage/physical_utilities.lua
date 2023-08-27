@@ -18,9 +18,6 @@
 -- 3  - Calculate, per hit, secondary hits, following the same structure as before, but simplified (no first-hit bonuses)
 
 -- 4  - Add them all, and final operations/considerations.
------------------------------------
-require("scripts/globals/items")
------------------------------------
 xi = xi or {}
 xi.combat = xi.combat or {}
 xi.combat.physical = xi.combat.physical or {}

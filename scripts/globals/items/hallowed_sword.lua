@@ -3,9 +3,6 @@
 -- Item: Hallowed Sword
 -- Item Effect: Enlight
 -----------------------------------
-require("scripts/globals/status")
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

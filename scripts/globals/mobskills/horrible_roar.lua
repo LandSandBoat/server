@@ -7,8 +7,6 @@
 -- Range: 25' radial
 -- Notes: Used by Bahamut in Wyrmking Descends
 ---------------------------------------------
-require("scripts/globals/settings")
-require("scripts/globals/status")
 require("scripts/globals/mobskills")
 ---------------------------------------------
 local mobskillObject = {}

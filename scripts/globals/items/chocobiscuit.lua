@@ -9,8 +9,6 @@
 -- Aquan Killer 10
 -- Silence Resist 10
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

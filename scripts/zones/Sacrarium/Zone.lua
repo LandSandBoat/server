@@ -3,9 +3,7 @@
 -----------------------------------
 local ID = require('scripts/zones/Sacrarium/IDs')
 require('scripts/globals/conquest')
-require('scripts/globals/settings')
 require('scripts/globals/treasure')
-require('scripts/globals/status')
 -----------------------------------
 local zoneObject = {}
 

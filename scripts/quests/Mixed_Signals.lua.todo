@@ -5,7 +5,6 @@
 -- Raimbroy !pos -141 -3 34.6 230
 -- Qm1 !pos 260 40 79 148
 -----------------------------------
-require('scripts/globals/items')
 -- require("scripts/globals/pets/fellow")
 require('scripts/globals/quests')
 require('scripts/globals/interaction/quest')

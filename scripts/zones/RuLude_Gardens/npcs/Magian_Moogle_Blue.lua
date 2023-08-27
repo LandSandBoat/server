@@ -4,9 +4,7 @@
 -- Type: Magian Trials NPC (Relic Armor)
 -- !pos -6.843 2.459 121.9 64
 -----------------------------------
-require("scripts/globals/settings")
 require("scripts/globals/magiantrials")
-require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 

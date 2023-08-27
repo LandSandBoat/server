@@ -4,7 +4,6 @@
 -- Ekhu Pesshyadha !pos -13.043 0.999 103.423 50
 -- Zabahf !pos -90.070 -1 10.140 50
 -----------------------------------
-require('scripts/globals/items')
 require('scripts/globals/quests')
 require('scripts/globals/interaction/quest')
 require('scripts/globals/npc_util')

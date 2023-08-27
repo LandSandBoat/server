@@ -16,8 +16,6 @@
 -- 1.00      1.00      1.00
 -- Duration is 180/240/300 - resulting in (tp / 1000 * 60) + 120
 -----------------------------------
-require("scripts/globals/status")
-require("scripts/globals/settings")
 require("scripts/globals/weaponskills")
 -----------------------------------
 local weaponskillObject = {}

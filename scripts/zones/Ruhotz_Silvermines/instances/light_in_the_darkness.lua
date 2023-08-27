@@ -18,7 +18,6 @@
 -- - Trusts are allowed.
 -----------------------------------
 require("scripts/globals/instance")
-require("scripts/globals/keyitems")
 local ID = require("scripts/zones/Ruhotz_Silvermines/IDs")
 -----------------------------------
 local instanceObject = {}

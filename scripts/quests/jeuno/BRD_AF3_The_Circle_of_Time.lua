@@ -7,8 +7,6 @@
 -- Chalvatot: !gotoid 17731598
 -- Altar: !gotoid 17391836
 -----------------------------------
-require('scripts/globals/items')
-require('scripts/globals/keyitems')
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
 require('scripts/globals/interaction/quest')

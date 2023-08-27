@@ -4,8 +4,6 @@
 -- !pos -280.942 0.597 -144.156 124
 -----------------------------------
 local ID = require("scripts/zones/Yhoator_Jungle/IDs")
-require("scripts/globals/items")
-require("scripts/globals/keyitems")
 require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}

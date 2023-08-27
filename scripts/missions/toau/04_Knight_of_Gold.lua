@@ -5,10 +5,8 @@
 -- !addmission 4 3
 -- Cacaroon : !pos -72.026 0.000 -82.337 50
 -----------------------------------
-require('scripts/globals/items')
 require('scripts/globals/missions')
 require('scripts/globals/npc_util')
-require('scripts/globals/keyitems')
 require('scripts/globals/interaction/mission')
 require('scripts/globals/zone')
 -----------------------------------

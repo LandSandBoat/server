@@ -3,8 +3,6 @@
 -- Steel Bullet Pouch
 -- When used, you will obtain one stack of Steel Bullets
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

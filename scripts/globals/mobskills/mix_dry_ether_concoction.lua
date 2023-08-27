@@ -1,7 +1,6 @@
 -----------------------------------
 -- Mix: Dry Ether Concoction - Restores 160 MP to a single party member.
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/mobskills")
 -----------------------------------
 local mobskillObject = {}

@@ -3,8 +3,6 @@
 -- Persikos Tank
 -- When used, you will obtain one Persikos au lait
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

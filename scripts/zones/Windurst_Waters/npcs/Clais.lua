@@ -5,7 +5,6 @@
 -- !pos -31 -3 11 238
 -----------------------------------
 local ID = require("scripts/zones/Windurst_Waters/IDs")
-require("scripts/globals/keyitems")
 require("scripts/globals/utils")
 require("scripts/globals/events/starlight_celebrations")
 -----------------------------------

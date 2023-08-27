@@ -5,7 +5,6 @@
 --  Involved in Quests: Wonder Wands
 -- !pos -101.209 -4.25 110.886 240
 -----------------------------------
-require("scripts/globals/settings")
 require("scripts/globals/quests")
 require("scripts/globals/utils")
 -----------------------------------

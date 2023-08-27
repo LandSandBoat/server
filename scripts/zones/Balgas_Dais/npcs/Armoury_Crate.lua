@@ -6,7 +6,6 @@
 require("scripts/globals/battlefield")
 require("scripts/globals/titles")
 require("scripts/globals/quests")
-require("scripts/globals/items")
 -----------------------------------
 local entity = {}
 

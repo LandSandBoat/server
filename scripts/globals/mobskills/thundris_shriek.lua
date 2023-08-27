@@ -7,8 +7,6 @@
 -- Range: Unknown
 -- Notes: Players will begin to be intimidated by the dvergr after this attack.
 -----------------------------------
-require("scripts/globals/settings")
-require("scripts/globals/status")
 require("scripts/globals/mobskills")
 -----------------------------------
 local mobskillObject = {}

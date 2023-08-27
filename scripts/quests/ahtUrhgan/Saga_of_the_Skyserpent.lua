@@ -6,7 +6,6 @@
 -- Biyaada:   !pos -65.802 -6.999 69.273 48
 -----------------------------------
 require('scripts/globals/common')
-require('scripts/globals/items')
 require('scripts/globals/quests')
 require('scripts/globals/interaction/quest')
 require('scripts/globals/npc_util')

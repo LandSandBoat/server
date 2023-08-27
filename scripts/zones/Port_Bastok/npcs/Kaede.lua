@@ -6,7 +6,6 @@
 -- !pos 48 -6 67 236
 -----------------------------------
 local ID = require("scripts/zones/Port_Bastok/IDs")
-require("scripts/globals/keyitems")
 require("scripts/globals/quests")
 -----------------------------------
 local entity = {}

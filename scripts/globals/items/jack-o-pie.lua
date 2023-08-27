@@ -8,8 +8,6 @@
 -- Intelligence 4
 -- hMP +1
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

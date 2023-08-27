@@ -3,7 +3,6 @@
 -- Note: Weaker version of Ouryu summoned by Bahamut during The Wyrmking Descends
 -----------------------------------
 require("scripts/globals/quests")
-require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 
@@ -133,8 +132,15 @@ entity.onMobFight = function(mob, target)
     end
 
     -- Wakeup from sleep immediately if flying
-    if hasSleepEffects(mob) and mob:getAnimationSub() == 1 then
-        removeSleepEffects(mob)
+    if
+        mob:getAnimationSub() == 1 and
+        (target:hasStatusEffect(xi.effect.SLEEP_I) or
+        target:hasStatusEffect(xi.effect.SLEEP_II) or
+        target:hasStatusEffect(xi.effect.LULLABY))
+    then
+        mob:delStatusEffect(xi.effect.SLEEP_I)
+        mob:delStatusEffect(xi.effect.SLEEP_II)
+        mob:delStatusEffect(xi.effect.LULLABY)
     end
 end
 

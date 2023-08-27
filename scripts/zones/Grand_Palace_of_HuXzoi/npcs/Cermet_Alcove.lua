@@ -4,7 +4,6 @@
 -- Note: Escort Quest
 -----------------------------------
 local ID = require("scripts/zones/Grand_Palace_of_HuXzoi/IDs")
-require("scripts/globals/status")
 require("scripts/globals/pathfind")
 -----------------------------------
 

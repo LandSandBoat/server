@@ -4,8 +4,6 @@
 -- !pos -61.942 3.949 224.900 114
 -----------------------------------
 local ID = require("scripts/zones/Eastern_Altepa_Desert/IDs")
-require("scripts/globals/items")
-require("scripts/globals/keyitems")
 require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}

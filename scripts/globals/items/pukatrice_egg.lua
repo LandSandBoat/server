@@ -11,8 +11,6 @@
 -- Ranged Attack +20% (cap 85)
 -- Subtle Blow +8
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

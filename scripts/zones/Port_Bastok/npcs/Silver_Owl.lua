@@ -4,9 +4,7 @@
 -- Type: Tenshodo Merchant
 -- !pos -99.155 4.649 23.292 236
 -----------------------------------
-require("scripts/globals/settings")
 require("scripts/globals/shop")
-require("scripts/globals/keyitems")
 local ID = require("scripts/zones/Port_Bastok/IDs")
 -----------------------------------
 local entity = {}

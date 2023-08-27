@@ -3,7 +3,6 @@
 --   NM: Jailer of Justice
 -----------------------------------
 local ID = require("scripts/zones/AlTaieu/IDs")
-require("scripts/globals/status")
 require("scripts/globals/magic")
 -----------------------------------
 local entity = {}

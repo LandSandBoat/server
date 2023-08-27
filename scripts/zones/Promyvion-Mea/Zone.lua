@@ -4,8 +4,6 @@
 local ID = require('scripts/zones/Promyvion-Mea/IDs')
 require('scripts/globals/promyvion')
 require("scripts/globals/teleports")
-require('scripts/globals/settings')
-require('scripts/globals/status')
 -----------------------------------
 local zoneObject = {}
 

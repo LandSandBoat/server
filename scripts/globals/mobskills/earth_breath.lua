@@ -7,8 +7,6 @@
 --  Range: Unknown cone
 --  Notes:
 -----------------------------------
-require("scripts/globals/settings")
-require("scripts/globals/status")
 require("scripts/globals/mobskills")
 -----------------------------------
 local mobskillObject = {}
@@ -17,6 +15,7 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
     if target:isBehind(mob, 96) then
         return 1
     end
+
     return 0
 end
 
@@ -25,6 +24,7 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
 
     local dmg = xi.mobskills.mobFinalAdjustments(dmgmod, mob, skill, target, xi.attackType.BREATH, xi.damageType.EARTH, xi.mobskills.shadowBehavior.IGNORE_SHADOWS)
     target:takeDamage(dmg, mob, xi.attackType.BREATH, xi.damageType.EARTH)
+
     return dmg
 end
 

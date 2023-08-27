@@ -3,8 +3,6 @@
 -- Wind Cluster
 -- Turn into a stack of wind crystals
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

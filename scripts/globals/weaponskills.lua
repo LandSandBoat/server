@@ -13,12 +13,8 @@
 require("scripts/globals/magicburst")
 require("scripts/globals/magiantrials")
 require("scripts/globals/ability")
-require("scripts/globals/items")
-require("scripts/globals/status")
-require("scripts/globals/spell_data")
 require("scripts/globals/magic")
 require("scripts/globals/utils")
-require("scripts/globals/msg")
 require("scripts/globals/damage")
 -----------------------------------
 

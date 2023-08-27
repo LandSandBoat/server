@@ -4,8 +4,6 @@
 -- KSNM: Early Bird Catches the Wyrm
 -- For future reference: Trusts are not allowed in this fight
 -----------------------------------
-require("scripts/globals/status")
------------------------------------
 local entity = {}
 
 entity.grounded = function(mob)
@@ -36,7 +34,9 @@ entity.onMobFight = function(mob, target)
     -- Wakeup from sleep immediately if flying
     if
         mob:getAnimationSub() == 1 and
-        hasSleepEffects(mob)
+        (target:hasStatusEffect(xi.effect.SLEEP_I) or
+        target:hasStatusEffect(xi.effect.SLEEP_II) or
+        target:hasStatusEffect(xi.effect.LULLABY))
     then
         mob:wakeUp()
     end

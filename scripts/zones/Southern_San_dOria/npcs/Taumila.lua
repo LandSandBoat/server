@@ -4,7 +4,6 @@
 -- Starts and Finishes Quest: Tiger's Teeth (R)
 -- !pos -140 -5 -8 230
 -----------------------------------
-require("scripts/globals/settings")
 require("scripts/globals/titles")
 require("scripts/globals/shop")
 require("scripts/globals/quests")

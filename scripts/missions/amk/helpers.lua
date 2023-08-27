@@ -1,7 +1,6 @@
 -----------------------------------
 -- A Moogle Kupo d'Etat Helpers
 -----------------------------------
-require('scripts/globals/keyitems')
 require('scripts/globals/missions')
 require('scripts/globals/npc_util')
 require('scripts/globals/zone')

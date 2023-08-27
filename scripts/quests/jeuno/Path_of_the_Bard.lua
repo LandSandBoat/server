@@ -7,7 +7,6 @@
 -- Bki Tbujhja       : !gotoid 17780766
 -- Song Runes (Dunes): !gotoid 17199695
 -----------------------------------
-require('scripts/globals/items')
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
 require('scripts/globals/interaction/quest')

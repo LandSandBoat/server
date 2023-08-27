@@ -3,7 +3,6 @@
 --  MOB: Namorodo
 -----------------------------------
 local ID = require("scripts/zones/The_Eldieme_Necropolis/IDs")
-require("scripts/globals/status")
 require("scripts/globals/pets/fellow")
 require("scripts/globals/fellow_utils")
 -----------------------------------

@@ -6,7 +6,6 @@
 local ID = require("scripts/zones/Ghelsba_Outpost/IDs")
 require("scripts/globals/pets/fellow")
 require("scripts/globals/fellow_utils")
-require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 

@@ -2,10 +2,7 @@
 -- Spell: Choke
 -- Deals wind damage that lowers an enemy's vitality and gradually reduces its HP.
 -----------------------------------
-require("scripts/globals/settings")
-require("scripts/globals/status")
 require("scripts/globals/magic")
-require("scripts/globals/msg")
 -----------------------------------
 local spellObject = {}
 

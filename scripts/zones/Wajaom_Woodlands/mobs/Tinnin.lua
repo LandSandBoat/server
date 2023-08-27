@@ -11,7 +11,6 @@ mixins =
     require("scripts/mixins/rage")
 }
 require("scripts/globals/magic")
-require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 

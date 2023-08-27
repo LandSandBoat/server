@@ -13,7 +13,6 @@
 -- Combos: Evasion Bonus
 -----------------------------------
 require("scripts/globals/bluemagic")
-require("scripts/globals/status")
 require("scripts/globals/magic")
 -----------------------------------
 local spellObject = {}

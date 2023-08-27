@@ -3,8 +3,6 @@
 -- 15' AoE sleep
 -----------------------------------
 require("scripts/globals/mobskills")
-require("scripts/globals/settings")
-require("scripts/globals/status")
 -----------------------------------
 local mobskillObject = {}
 
@@ -23,8 +21,16 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
             target:delStatusEffectSilent(xi.effect.SLEEP_I)
             target:delStatusEffectSilent(xi.effect.POISON)
             local dotdmg = 50
-            if not (target:hasImmunity(xi.immunity.SLEEP) or hasSleepEffects(target)) and target:addStatusEffect(effect, 1, 0, duration, 25, 25, 1) then -- subid/subpower for poison detection on wakup function
-                target:addStatusEffect(xi.effect.POISON, dotdmg, 3, duration, 3, 15, 2)
+            if
+                not (target:hasImmunity(xi.immunity.SLEEP) or
+                target:hasStatusEffect(xi.effect.SLEEP_I) or
+                target:hasStatusEffect(xi.effect.SLEEP_II) or
+                target:hasStatusEffect(xi.effect.LULLABY))
+                and target:addStatusEffect(effect, 1, 0, duration, 25, 25, 1)
+            then -- subid/subpower for poison detection on wakup function
+
+
+                    target:addStatusEffect(xi.effect.POISON, dotdmg, 3, duration, 3, 15, 2)
                 skill:setMsg(xi.msg.basic.SKILL_ENFEEB_IS)
             else
                 skill:setMsg(xi.msg.basic.SKILL_NO_EFFECT)

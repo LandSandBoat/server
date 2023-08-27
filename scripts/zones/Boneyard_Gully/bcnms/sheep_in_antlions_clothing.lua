@@ -5,7 +5,6 @@
 -----------------------------------
 local ID = require("scripts/zones/Boneyard_Gully/IDs")
 require("scripts/globals/battlefield")
-require("scripts/globals/keyitems")
 -----------------------------------
 local battlefieldObject = {}
 

@@ -3,7 +3,6 @@
 -----------------------------------
 require("scripts/globals/ability")
 require("scripts/globals/gambits")
-require("scripts/globals/status")
 require("scripts/globals/trust")
 -----------------------------------
 local spellObject = {}

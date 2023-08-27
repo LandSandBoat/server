@@ -2,7 +2,6 @@
 -- Fear of the Dark 2
 -- Suldiran !pos 42 -7 -43 48
 -----------------------------------
-require('scripts/globals/items')
 require('scripts/globals/quests')
 require('scripts/globals/npc_util')
 require('scripts/globals/interaction/quest')

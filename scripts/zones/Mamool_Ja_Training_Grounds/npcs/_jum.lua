@@ -3,7 +3,6 @@
 -- Npc: Pot Hatch
 -- !pos 267 0 -582
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/zones/Mamool_Ja_Training_Grounds/globals/zoneUtil")
 -----------------------------------
 

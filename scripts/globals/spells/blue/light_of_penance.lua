@@ -13,9 +13,7 @@
 -- Combos: Auto Refresh
 -----------------------------------
 require("scripts/globals/bluemagic")
-require("scripts/globals/status")
 require("scripts/globals/magic")
-require("scripts/globals/msg")
 -----------------------------------
 local spellObject = {}
 
@@ -35,7 +33,7 @@ spellObject.onSpellCast = function(caster, target, spell)
     local resistThreshold = 0.5
     local returnEffect = typeEffectOne
 
-    local resist = applyResistance(caster, target, spell, params)
+    local resist = xi.magic.applyResistance(caster, target, spell, params)
     if resist >= resistThreshold then
 
         spell:setMsg(xi.msg.basic.MAGIC_TP_REDUCE) -- this doesn't seem to do much

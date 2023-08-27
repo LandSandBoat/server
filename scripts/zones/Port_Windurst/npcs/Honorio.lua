@@ -3,9 +3,6 @@
 --  NPC: Honorio
 -- !pos 218 -5 114 240
 -----------------------------------
-require("scripts/globals/settings")
-require("scripts/globals/keyitems")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

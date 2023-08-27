@@ -3,8 +3,6 @@
 -- Kitty Rod
 -- Enchantment: 60Min, Costume - Mithra child (Blue)
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

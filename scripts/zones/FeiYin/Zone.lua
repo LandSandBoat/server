@@ -3,7 +3,6 @@
 -----------------------------------
 local ID = require('scripts/zones/FeiYin/IDs')
 require('scripts/globals/conquest')
-require('scripts/globals/keyitems')
 require('scripts/globals/missions')
 require('scripts/globals/treasure')
 require('scripts/globals/quests')

@@ -5,11 +5,8 @@
 -- Rouliette : !pos -24 -2 11 244
 -----------------------------------
 require('scripts/globals/interaction/quest')
-require('scripts/globals/items')
-require('scripts/globals/keyitems')
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
-require('scripts/globals/status')
 require('scripts/globals/titles')
 -----------------------------------
 

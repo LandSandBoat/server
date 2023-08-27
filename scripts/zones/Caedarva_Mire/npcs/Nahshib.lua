@@ -4,9 +4,6 @@
 -- Type: Assault
 -- !pos -274.334 -9.287 -64.255 79
 -----------------------------------
-require("scripts/globals/settings")
-require("scripts/globals/status")
-require("scripts/globals/keyitems")
 require("scripts/globals/missions")
 require("scripts/globals/quests")
 local ID = require("scripts/zones/Caedarva_Mire/IDs")

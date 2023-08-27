@@ -2,9 +2,7 @@
 -- Dragoon Job Utilities
 -----------------------------------
 require("scripts/globals/ability")
-require("scripts/globals/items")
 require("scripts/globals/jobpoints")
-require("scripts/globals/msg")
 require("scripts/globals/spells/damage_spell")
 require("scripts/globals/weaponskills")
 -----------------------------------
@@ -301,7 +299,9 @@ local function checkForRemovableEffectsOnSpiritLink(player, wyvern)
     wyvern:delStatusEffect(xi.effect.DOOM)
 
     -- If you can use Spirit Link at all, sleep is removed. Empathy merits control use at 100% HP.
-    removeSleepEffects(wyvern)
+    wyvern:delStatusEffect(xi.effect.SLEEP_I)
+    wyvern:delStatusEffect(xi.effect.SLEEP_II)
+    wyvern:delStatusEffect(xi.effect.LULLABY)
 
     if player:getMod(xi.mod.ENHANCES_SPIRIT_LINK) > 0 then
         -- https://www.ffxiah.com/forum/topic/44396/sigurds-descendants-the-art-of-dragon-slaying/108/#3646600

@@ -5,7 +5,6 @@
 -- !pos 673.882 -23.995 367.604 61
 -----------------------------------
 local ID = require("scripts/zones/Mount_Zhayolm/IDs")
-require("scripts/globals/keyitems")
 require("scripts/globals/missions")
 require("scripts/globals/quests")
 -----------------------------------

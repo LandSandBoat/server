@@ -11,10 +11,8 @@
 -- Dancing Wolf : !pos 7.619 7 81.209 247
 -- qm2 (Gustav) : !pos -130 1.256 252.696 212
 -----------------------------------
-require('scripts/globals/items')
 require('scripts/globals/missions')
 require('scripts/globals/npc_util')
-require('scripts/globals/settings')
 require('scripts/globals/interaction/mission')
 require('scripts/globals/zone')
 -----------------------------------

@@ -3,9 +3,6 @@
 -- Hi-Elixir Tank
 -- When used, you will obtain one hi-elixir
 -----------------------------------
-require("scripts/globals/msg")
-require("scripts/globals/items")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

@@ -3,9 +3,6 @@
 -- Adaman Bolt Quiver
 -- When used, you will obtain one stack of Adaman Bolts
 -----------------------------------
-require("scripts/globals/items")
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

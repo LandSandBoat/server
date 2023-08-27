@@ -3,8 +3,6 @@
 -- Mob: Bugboy
 -- ENM: Bionic Bug
 -----------------------------------
-require("scripts/globals/status")
------------------------------------
 local entity = {}
 
 entity.onMobSpawn = function(mob)

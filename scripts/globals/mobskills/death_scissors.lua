@@ -4,8 +4,6 @@
 --  Type: Physical (Slashing)
 -- TODO: NEEDS a 2.0x Attack modifier (Using 1.5 dmgmod for now)
 -----------------------------------
-require("scripts/globals/settings")
-require("scripts/globals/status")
 require("scripts/globals/mobskills")
 -----------------------------------
 local mobskillObject = {}

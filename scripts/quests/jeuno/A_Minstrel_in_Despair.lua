@@ -4,7 +4,6 @@
 -- Log ID: 3, Quest ID: 12
 -- Mertaire : !pos -17 0 -61 245
 -----------------------------------
-require('scripts/globals/items')
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
 require('scripts/globals/zone')

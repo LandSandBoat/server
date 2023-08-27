@@ -1,4 +1,3 @@
-import array
 import mariadb
 
 def migration_name():

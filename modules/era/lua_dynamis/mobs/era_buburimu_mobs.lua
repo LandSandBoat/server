@@ -3,7 +3,6 @@
 -----------------------------------
 require("scripts/globals/dynamis")
 require("scripts/globals/zone")
-require("scripts/globals/status")
 -----------------------------------
 
 xi = xi or {}
@@ -232,14 +231,14 @@ xi.dynamis.onFightApoc = function(mob, target)
     end
 end
 
-xi.dynamis.onFightDwagon = function(mob, target)
+xi.dynamis.onFightDragon = function(mob, target)
     if mob:getZone():getLocalVar("MegaBoss_Killed") == 1 then
         mob:setMobMod(xi.mobMod.NO_DROPS, 1)
         DespawnMob(mob:getID())
     end
 end
 
-xi.dynamis.onRoamDwagon = function(mob)
+xi.dynamis.onRoamDragon = function(mob)
     if mob:getZone():getLocalVar("MegaBoss_Killed") == 1 then
         mob:setMobMod(xi.mobMod.NO_DROPS, 1)
         DespawnMob(mob:getID())

@@ -9,8 +9,6 @@
 -- Ranged Acc % 7
 -- Ranged Acc Cap 20
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

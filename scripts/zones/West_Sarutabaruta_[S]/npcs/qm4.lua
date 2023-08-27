@@ -5,7 +5,6 @@
 -- !pos 150 -39 331 95
 -----------------------------------
 local ID = require("scripts/zones/West_Sarutabaruta_[S]/IDs")
-require("scripts/globals/keyitems")
 require("scripts/globals/quests")
 -----------------------------------
 local entity = {}

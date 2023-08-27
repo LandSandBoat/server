@@ -6,10 +6,7 @@
 -- Ardea      : !pos -198 -6   -69     235
 -- Varun      : !pos 7.8  -3.5 -10.064 241
 -----------------------------------
-require('scripts/globals/items')
 require('scripts/globals/quests')
-require('scripts/globals/settings')
-require('scripts/globals/status')
 require('scripts/globals/interaction/quest')
 -----------------------------------
 local bastokID     = require('scripts/zones/Bastok_Markets/IDs')

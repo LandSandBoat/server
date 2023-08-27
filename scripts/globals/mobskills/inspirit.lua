@@ -2,7 +2,6 @@
 -- Inspirit
 -- Restores HP to nearby allies.
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/mobskills")
 -----------------------------------
 local mobskillObject = {}

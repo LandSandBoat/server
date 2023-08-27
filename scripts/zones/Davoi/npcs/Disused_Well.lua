@@ -4,7 +4,6 @@
 -- Involved in Quest: A Knight's Test
 -- !pos -221 2 -293 149
 -----------------------------------
-require("scripts/globals/keyitems")
 local ID = require("scripts/zones/Davoi/IDs")
 -----------------------------------
 local entity = {}

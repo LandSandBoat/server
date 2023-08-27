@@ -3,8 +3,6 @@
 --  Mob: Opo-opo Monarch
 -- BCNM: Royal Succession
 -----------------------------------
-require("scripts/globals/status")
------------------------------------
 local entity = {}
 
 entity.onMobFight = function(mob, target)

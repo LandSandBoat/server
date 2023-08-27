@@ -5,7 +5,6 @@
 -- !addmission 13 50
 -- Marble Bridge Eatery (Door) : !pos -96.6 -0.2 92.3 244
 -----------------------------------
-require('scripts/globals/items')
 require('scripts/globals/missions')
 require('scripts/globals/rhapsodies')
 require('scripts/globals/zone')

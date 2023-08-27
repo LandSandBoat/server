@@ -3,7 +3,6 @@
 --   NM: Turul
 -----------------------------------
 mixins = { require("scripts/mixins/families/amphiptere") }
-require("scripts/globals/status")
 require("scripts/globals/titles")
 -----------------------------------
 local entity = {}

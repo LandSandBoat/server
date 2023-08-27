@@ -2,7 +2,6 @@
 -- Area: Sacrarium
 --  NPC: ??? for Tavnazian Cookbook
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/npc_util")
 local ID = require("scripts/zones/Sacrarium/IDs")
 -----------------------------------

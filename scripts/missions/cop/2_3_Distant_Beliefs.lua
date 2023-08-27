@@ -9,7 +9,6 @@
 -- Justinius   : !pos 76 -34 68 26
 -----------------------------------
 require('scripts/globals/interaction/mission')
-require('scripts/globals/keyitems')
 require('scripts/globals/missions')
 require('scripts/globals/zone')
 -----------------------------------

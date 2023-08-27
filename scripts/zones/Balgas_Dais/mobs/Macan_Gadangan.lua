@@ -4,7 +4,6 @@
 -- BCNM: Wild Wild Whiskers
 -----------------------------------
 local ID = require("scripts/zones/Balgas_Dais/IDs")
-require("scripts/globals/spell_data")
 -----------------------------------
 local entity = {}
 

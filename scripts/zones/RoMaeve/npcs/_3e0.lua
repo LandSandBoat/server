@@ -2,8 +2,6 @@
 -- Area: Ro'Maeve
 --  NPC: _3e0 (Moongate)
 -----------------------------------
-require("scripts/globals/keyitems")
------------------------------------
 local entity = {}
 
 entity.onTrigger = function(player, npc)

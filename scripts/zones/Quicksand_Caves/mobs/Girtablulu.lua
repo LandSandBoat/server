@@ -5,8 +5,6 @@
 -- Involved in Quest: Old Wounds
 -- !pos -141.6 -2 450.48 208
 -----------------------------------
-require("scripts/globals/status")
------------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)

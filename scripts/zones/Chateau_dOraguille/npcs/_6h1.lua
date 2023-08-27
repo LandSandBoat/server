@@ -4,8 +4,6 @@
 -- Starts and Finishes Quest: Prelude of Black and White (Start), Pieuje's Decision (Start)
 -- !pos -37 -3 31 233
 -----------------------------------
-require("scripts/globals/status")
-require("scripts/globals/settings")
 require("scripts/globals/quests")
 -----------------------------------
 local entity = {}

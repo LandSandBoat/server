@@ -3,10 +3,7 @@
 -- Item: Special Present
 -- Starlight Celebration Fame Reward
 -----------------------------------
-require("scripts/globals/status")
 require('scripts/globals/npc_util')
-require("scripts/globals/msg")
-require("scripts/globals/items")
 -----------------------------------
 local itemObject = {}
 

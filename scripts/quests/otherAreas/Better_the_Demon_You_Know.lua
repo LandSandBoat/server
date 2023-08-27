@@ -4,8 +4,6 @@
 -- Log ID: 4, Quest ID: 105
 -- Koblakiq !pos -64 21 -117
 -----------------------------------
-require('scripts/globals/items')
-require('scripts/globals/keyitems')
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
 require('scripts/globals/zone')

@@ -4,7 +4,6 @@
 -- animition sub 1 == glow
 -----------------------------------
 local ID = require("scripts/zones/Nyzul_Isle/IDs")
-require("scripts/globals/status")
 require("scripts/globals/nyzul")
 -----------------------------------
 local entity = {}

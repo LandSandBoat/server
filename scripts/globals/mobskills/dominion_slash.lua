@@ -9,8 +9,6 @@
 -- One source also mentions that it "can dispel important buffs."
 -----------------------------------
 require("scripts/globals/mobskills")
-require("scripts/globals/settings")
-require("scripts/globals/status")
 -----------------------------------
 local mobskillObject = {}
 

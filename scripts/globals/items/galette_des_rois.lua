@@ -8,8 +8,6 @@
 -- Intelligence +2
 -- Random Jewel
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

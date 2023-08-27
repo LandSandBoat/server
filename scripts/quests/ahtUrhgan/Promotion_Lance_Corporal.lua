@@ -4,7 +4,6 @@
 -- Naja Salaheem !pos 26 -8 -45.5 50
 -----------------------------------
 local ID = require("scripts/zones/Aht_Urhgan_Whitegate/IDs")
-require('scripts/globals/items')
 require('scripts/globals/quests')
 require('scripts/globals/npc_util')
 require('scripts/globals/interaction/quest')
@@ -22,6 +21,7 @@ local testTubes =
 quest.reward =
 {
     keyItem = xi.ki.LC_WILDCAT_BADGE,
+    title   = xi.title.LANCE_CORPORAL,
 }
 
 quest.sections =

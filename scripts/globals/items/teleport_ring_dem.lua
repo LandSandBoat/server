@@ -3,7 +3,6 @@
 -- Teleport ring: Dem
 -- Enchantment: "Teleport-Dem"
 -----------------------------------
-require("scripts/globals/keyitems")
 require("scripts/globals/teleports")
 -----------------------------------
 local itemObject = {}

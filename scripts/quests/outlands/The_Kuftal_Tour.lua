@@ -4,7 +4,6 @@
 -- Log ID: 5, Quest ID: 195
 --  Datta: !pos -6 -25 5
 -----------------------------------
-require('scripts/globals/items')
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
 require('scripts/globals/titles')

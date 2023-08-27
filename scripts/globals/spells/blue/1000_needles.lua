@@ -13,7 +13,6 @@
 -- Combos: Beast Killer
 -----------------------------------
 require("scripts/globals/bluemagic")
-require("scripts/globals/status")
 require("scripts/globals/magic")
 -----------------------------------
 local spellObject = {}
@@ -47,7 +46,7 @@ spellObject.onSpellCast = function(caster, target, spell)
     params.chr_wsc = 1.0
 
     local damage = 1000
-    local resist = applyResistance(caster, target, spell, params)
+    local resist = xi.magic.applyResistance(caster, target, spell, params)
     if resist == 1 then
         local targets = spell:getTotalTargets()
         damage = damage / targets

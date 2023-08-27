@@ -13,9 +13,7 @@
 -- Combos: None
 -----------------------------------
 require("scripts/globals/bluemagic")
-require("scripts/globals/status")
 require("scripts/globals/magic")
-require("scripts/globals/msg")
 -----------------------------------
 local spellObject = {}
 
@@ -32,7 +30,7 @@ spellObject.onSpellCast = function(caster, target, spell)
     local resistThreshold = 0.25
     local effect = xi.effect.NONE
 
-    local resist = applyResistance(caster, target, spell, params)
+    local resist = xi.magic.applyResistance(caster, target, spell, params)
     if resist >= resistThreshold then
         effect = target:dispelStatusEffect()
         spell:setMsg(xi.msg.basic.MAGIC_ERASE)

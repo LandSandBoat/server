@@ -46,7 +46,11 @@ entity.onMobFight = function(mob, target)
     end
 
     -- Sets max sleep resist if a sleep lands on Xolotl
-    if hasSleepEffects(mob) then
+    if
+        target:hasStatusEffect(xi.effect.SLEEP_I) or
+        target:hasStatusEffect(xi.effect.SLEEP_II) or
+        target:hasStatusEffect(xi.effect.LULLABY)
+    then
         target:setMod(xi.mod.SLEEPRES, 100)
     end
 end

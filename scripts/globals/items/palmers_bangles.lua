@@ -4,9 +4,6 @@
 -- Item Effect: Gilfinder
 -- Duration: 3 Minutes
 -----------------------------------
-require("scripts/globals/status")
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

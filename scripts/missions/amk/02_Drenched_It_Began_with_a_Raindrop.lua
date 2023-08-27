@@ -6,7 +6,6 @@
 -- QUADAV_BACKSCALE   : !additem 2758
 -- YAGUDO_CAULK       : !additem 2759
 -----------------------------------
-require('scripts/globals/items')
 require('scripts/globals/missions')
 require('scripts/globals/moghouse')
 require('scripts/globals/npc_util')

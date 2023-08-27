@@ -5,8 +5,6 @@
 -- Wazyih:   !pos -94 -6 -93 50
 -- Saliyahf: !pos -60 0 65 50
 -----------------------------------
-require("scripts/globals/items")
-require("scripts/globals/keyitems")
 require("scripts/globals/quests")
 require("scripts/globals/npc_util")
 require('scripts/globals/interaction/quest')

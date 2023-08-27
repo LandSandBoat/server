@@ -1,11 +1,8 @@
 -----------------------------------
 -- Song Utilities
 -----------------------------------
-require("scripts/globals/spell_data")
 require("scripts/globals/jobpoints")
-require("scripts/globals/status")
 require("scripts/globals/utils")
-require("scripts/globals/msg")
 -----------------------------------
 xi = xi or {}
 xi.spells = xi.spells or {}
@@ -124,7 +121,10 @@ xi.spells.enhancing.calculateSongPower = function(caster, target, spell, spellId
 
     -- Ensure ranged slot is an instrument
     local rangeSkill = caster:getWeaponSkillType(xi.slot.RANGED)
-    if rangeSkill ~= xi.skill.STRING_INSTRUMENT or rangeSkill ~= xi.skill.WIND_INSTRUMENT then
+    if
+        rangeSkill ~= xi.skill.STRING_INSTRUMENT or
+        rangeSkill ~= xi.skill.WIND_INSTRUMENT
+    then
         singingLvl = singingLvl + caster:getWeaponSkillLevel(xi.slot.RANGED)
     end
 

@@ -3,12 +3,12 @@
 -----------------------------------
 local ID = require('scripts/zones/Nashmau/IDs')
 require('scripts/globals/missions')
-require('scripts/globals/settings')
 require('scripts/globals/zone')
 -----------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
+    zone:registerTriggerArea(1, 19, 5, -39, 0, 0, 0) -- Promotion Sergeant Area near NPC Pupuroon.
 end
 
 zoneObject.onZoneIn = function(player, prevZone)

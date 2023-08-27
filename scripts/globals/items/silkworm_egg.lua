@@ -6,8 +6,6 @@
 -- HP 12
 -- MP 12
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

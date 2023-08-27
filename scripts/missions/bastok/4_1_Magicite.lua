@@ -13,12 +13,9 @@
 -- Magicite (Opistone)   : !pos -160 -8 8 150
 -- Magicite (Aurastone)  : !pos 11 25 -81 148
 -----------------------------------
-require('scripts/globals/items')
-require('scripts/globals/keyitems')
 require('scripts/globals/missions')
 require('scripts/globals/npc_util')
 require('scripts/globals/titles')
-require('scripts/globals/settings')
 require('scripts/globals/interaction/mission')
 require('scripts/globals/zone')
 -----------------------------------

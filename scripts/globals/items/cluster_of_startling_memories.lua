@@ -3,8 +3,6 @@
 -- Cluster of Startling Memories
 -- Turn into a stack of startling memories
 -----------------------------------------
-require("scripts/globals/msg")
------------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

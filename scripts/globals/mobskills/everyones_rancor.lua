@@ -9,8 +9,6 @@
 -- of HP (usually 25%).
 -----------------------------------
 require("scripts/globals/mobskills")
-require("scripts/globals/status")
-require("scripts/globals/items")
 -----------------------------------
 local mobskillObject = {}
 

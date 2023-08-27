@@ -3,8 +3,6 @@
 -- Mob: Generic Doll
 -- BCNM: Factory Rejects
 -----------------------------------
-require("scripts/globals/status")
------------------------------------
 local entity = {}
 
 entity.onMobSpawn = function(mob)

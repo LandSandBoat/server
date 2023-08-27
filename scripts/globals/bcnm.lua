@@ -1,11 +1,9 @@
 -----------------------------------
 -- BCNM Functions
 -----------------------------------
-require("scripts/globals/keyitems")
 require("scripts/globals/missions")
 require("scripts/globals/quests")
 require("scripts/globals/zone")
-require("scripts/globals/msg")
 require("scripts/globals/npc_util")
 -----------------------------------
 xi = xi or {}

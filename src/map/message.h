@@ -19,6 +19,9 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 ===========================================================================
 */
 
+#ifndef _MESSAGE_H_
+#define _MESSAGE_H_
+
 #include "common/cbasetypes.h"
 #include "common/lua.h"
 #include "common/mmo.h"
@@ -85,3 +88,5 @@ namespace message
     void listen();
     void send_queue();
 }; // namespace message
+
+#endif

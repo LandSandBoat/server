@@ -9,8 +9,6 @@
 --   This is handled upon loss of the battlefield. "CONQUEST_REQUIEM_OF_SIN" if reset to 0 if they lose.
 --   Quest is complete upon winning the battlefield.
 -----------------------------------
-require('scripts/globals/items')
-require('scripts/globals/keyitems')
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
 require('scripts/globals/titles')

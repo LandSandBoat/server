@@ -2,7 +2,6 @@
 -- Spell: Geo-VIT
 -- Enhances Vitality for party members within area of effect.
 -----------------------------------------
-require("scripts/globals/status")
 require("scripts/globals/job_utils/geomancer")
 -----------------------------------
 local spellObject = {}

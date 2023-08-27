@@ -29,8 +29,6 @@
 -- CHOCOBO_EGG_SOMEWHAT_WARM : !additem 2319
 -----------------------------------
 require("scripts/globals/chocobo_names")
-require("scripts/globals/items")
-require("scripts/globals/settings")
 require("scripts/globals/utils")
 require("scripts/globals/zone")
 -----------------------------------

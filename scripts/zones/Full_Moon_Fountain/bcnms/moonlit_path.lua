@@ -4,7 +4,6 @@
 -----------------------------------
 local ID = require("scripts/zones/Full_Moon_Fountain/IDs")
 require("scripts/globals/battlefield")
-require("scripts/globals/keyitems")
 require("scripts/globals/quests")
 -----------------------------------
 local battlefieldObject = {}

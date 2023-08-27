@@ -376,8 +376,8 @@ INSERT INTO `augments` VALUES (296,0,119,1,0,0); -- Singing skill+1
 INSERT INTO `augments` VALUES (297,0,120,1,0,0); -- String instrument skill+1
 INSERT INTO `augments` VALUES (298,0,121,1,0,0); -- Wind instrument skill+1
 INSERT INTO `augments` VALUES (299,0,122,1,0,0); -- Blue Magic skill+1
-INSERT INTO `augments` VALUES (300,0,1026,1,0,0); -- Geomancy Skill+1
-INSERT INTO `augments` VALUES (301,0,1027,1,0,0); -- Handbell Skill+1
+INSERT INTO `augments` VALUES (300,0,123,1,0,0); -- Geomancy Skill+1
+INSERT INTO `augments` VALUES (301,0,124,1,0,0); -- Handbell Skill+1
 
 -- 302 to 319 currently unused. Leave at zero. Edit+move or remove this note as new augments get discovered.
 INSERT INTO `augments` VALUES (302,0,0,0,0,0);

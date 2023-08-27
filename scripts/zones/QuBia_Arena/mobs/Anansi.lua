@@ -3,8 +3,6 @@
 --  Mob: Anansi
 -- BCNM: Come into my Parlor
 -----------------------------------
-require("scripts/globals/status")
------------------------------------
 local entity = {}
 
 local function spawnSpider(mob, attacker, uint)

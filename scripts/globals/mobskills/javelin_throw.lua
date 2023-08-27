@@ -7,9 +7,7 @@
 --  Range: 7.0
 --  Notes: Only used by armed DRG Mamool Ja
 -----------------------------------
-require("scripts/globals/settings")
 require("scripts/globals/mobskills")
-require("scripts/globals/status")
 -----------------------------------
 local mobskillObject = {}
 

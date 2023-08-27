@@ -2,8 +2,6 @@
 -- Area: Ilrusi Atoll
 --  Mob: Cursed Chest
 -----------------------------------
-require("scripts/globals/status")
------------------------------------
 local entity = {}
 
 local function CheckForDrawnIn(centerX, centerY, centerZ, playerX, playerY, playerZ, rayon, maxRayon)

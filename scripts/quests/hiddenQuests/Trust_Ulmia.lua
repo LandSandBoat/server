@@ -3,7 +3,6 @@
 -----------------------------------
 -- Dilapidated Gate : !pos 260.000 7.319 -440.001 25
 -----------------------------------
-require('scripts/globals/items')
 require('scripts/globals/magic')
 require('scripts/globals/trust')
 require('scripts/globals/quests')

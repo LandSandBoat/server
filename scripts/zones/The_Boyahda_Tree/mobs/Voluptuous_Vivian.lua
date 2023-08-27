@@ -3,7 +3,6 @@
 --   NM: Voluptuous Vivian
 -----------------------------------
 mixins = { require("scripts/mixins/job_special") }
-require("scripts/globals/status")
 require("scripts/globals/titles")
 -----------------------------------
 local entity = {}

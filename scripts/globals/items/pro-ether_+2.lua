@@ -3,8 +3,6 @@
 -- Item: Pro-Ether +2
 -- Item Effect: Restores 310 MP
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

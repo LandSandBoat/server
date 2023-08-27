@@ -3,8 +3,6 @@
 -- Mob: Watch Hippogryph
 -- ENM: Beloved of the Atlantes
 -----------------------------------
-require("scripts/globals/status")
------------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)
