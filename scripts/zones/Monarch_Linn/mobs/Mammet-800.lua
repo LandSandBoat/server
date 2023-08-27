@@ -2,7 +2,6 @@
 -- Area: Monarch Linn
 --  Mob: Mammet-800
 -----------------------------------
-require("scripts/globals/status")
 local ID = require("scripts/zones/Monarch_Linn/IDs")
 -----------------------------------
 local entity = {}

@@ -7,8 +7,6 @@
 -- HP % 12 (cap 180)
 -- Resist Sleep +5
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

@@ -5,9 +5,6 @@
 -- Healing value should be max HP * 104 / 1024
 -----------------------------------
 require("scripts/globals/mobskills")
-require("scripts/globals/settings")
-require("scripts/globals/status")
-require("scripts/globals/msg")
 -----------------------------------
 local mobskillObject = {}
 

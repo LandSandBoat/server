@@ -4,7 +4,6 @@
 -----------------------------------
 -- !addmission 13 66
 -----------------------------------
-require('scripts/globals/items')
 require('scripts/globals/missions')
 require('scripts/globals/rhapsodies')
 require('scripts/globals/zone')

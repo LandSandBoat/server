@@ -3,8 +3,6 @@
 -- Item: Mithra Snare
 -- Item Effect: Prevents 2hr use
 -----------------------------------------
-require("scripts/globals/status")
-require("scripts/globals/msg")
 -----------------------------------------
 local itemObject = {}
 

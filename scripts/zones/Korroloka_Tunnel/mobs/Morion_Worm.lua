@@ -4,7 +4,6 @@
 -----------------------------------
 local korrolokaGlobal = require("scripts/zones/Korroloka_Tunnel/globals")
 local ID = require("scripts/zones/Korroloka_Tunnel/IDs")
-require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 

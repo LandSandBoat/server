@@ -2,10 +2,7 @@
 --      Xarcabard Era Module     --
 -----------------------------------
 require("scripts/globals/zone")
-require("scripts/globals/spell_data")
-require("scripts/globals/status")
 require("scripts/globals/utils")
-require("scripts/globals/status")
 require("scripts/globals/dynamis")
 -----------------------------------
 
@@ -26,15 +23,15 @@ local specials =
     { xi.jsa.CHAINSPELL, 50, "DL_Chainspell" },
 }
 
-local function spawnDwagons(oMob, target)
+local function spawnDragons(oMob, target)
     local zoneID = oMob:getZoneID()
     local zone = oMob:getZone()
-    local dwagonVars =
+    local dragonVars =
     {
         ["ying_killed"] = { zone:getLocalVar("178"), 178, 179, "Ying" },
         ["yang_killed"] = { zone:getLocalVar("177"), 177, 179, "Yang" },
     }
-    for key, var in pairs(dwagonVars) do
+    for key, var in pairs(dragonVars) do
         xi.dynamis.nmDynamicSpawn(var[2], var[3], true, zoneID, target, oMob, oMob:getID())
     end
 end
@@ -60,6 +57,12 @@ xi.dynamis.onSpawnDynaLord = function(mob)
     mob:setMod(xi.mod.GRAVITYRES, 100)
     mob:setMod(xi.mod.BINDRES, 100)
     mob:setMod(xi.mod.UFASTCAST, 100)
+    mob:setMod(xi.mod.MOVE, 20)
+    mob:setMobMod(xi.mobMod.WEAPON_BONUS, 55) -- 90 + 55 = 145 base dmg
+    mob:setMod(xi.mod.ATT, 524) -- 580 total
+    mob:setMod(xi.mod.DEF, 371) -- 425 total
+    mob:setMod(xi.mod.EVA, 320) -- 359 total
+    mob:setMod(xi.mod.REFRESH, 500)
 
     mob:addListener("WEAPONSKILL_STATE_ENTER", "DL_WEAPONSKILL_STATE_ENTER", function(mobArg, skillid)
         if skillid == xi.jsa.HUNDRED_FISTS then
@@ -177,7 +180,7 @@ xi.dynamis.onEngagedDynaLord = function(mob, target)
     else
         mob:showText(mob, lordText + 8) -- Immortal Drakes, deafeated
         zone:setLocalVar("teraTime", os.time() + math.random(90, 120))
-        zone:setLocalVar("dwagonLastPop", os.time() + 30)
+        zone:setLocalVar("dragonLastPop", os.time() + 30)
     end
 end
 
@@ -218,16 +221,16 @@ xi.dynamis.onFightDynaLord = function(mob, target)
         if
             zone:getLocalVar("ying_killed") == 1 and
             zone:getLocalVar("yang_killed") == 1 and
-            zone:getLocalVar("dwagonSpawn") <= os.time()
+            zone:getLocalVar("dragonSpawn") <= os.time()
         then
-            zone:setLocalVar("dwagonSpawn", os.time() + 5)
-            if zone:getLocalVar("dwagonLastPop") <= os.time() then -- Spawn Ying and Yang
+            zone:setLocalVar("dragonSpawn", os.time() + 5)
+            if zone:getLocalVar("dragonLastPop") <= os.time() then -- Spawn Ying and Yang
                 mob:setAutoAttackEnabled(false)
                 mob:setMagicCastingEnabled(false)
                 mob:setMobAbilityEnabled(false)
                 mob:entityAnimationPacket("casm")
                 mob:timer(3000, function(mobArg, targetArg)
-                    spawnDwagons(mobArg, targetArg)
+                    spawnDragons(mobArg, targetArg)
                     mobArg:entityAnimationPacket("shsm")
                     mobArg:setAutoAttackEnabled(true)
                     mobArg:setMagicCastingEnabled(true)
@@ -240,17 +243,17 @@ xi.dynamis.onFightDynaLord = function(mob, target)
             end
         end
 
-        local dwagonVars =
+        local dragonVars =
         {
             ["ying_killed"] = { zone:getLocalVar("178"), 178, 179, "Ying" },
             ["yang_killed"] = { zone:getLocalVar("177"), 177, 179, "Yang" },
         }
 
-        for key, var in pairs(dwagonVars) do -- Update Ying and Yang to Attack Current Target
+        for key, var in pairs(dragonVars) do -- Update Ying and Yang to Attack Current Target
             if mob:getZone():getLocalVar(key) == 0 then
-                local dwagon = GetMobByID(var[1])
-                if not dwagon:isEngaged() then
-                    dwagon:updateEnmity(target)
+                local dragon = GetMobByID(var[1])
+                if dragon and not dragon:isEngaged() then
+                    dragon:updateEnmity(target)
                 end
             end
         end
@@ -259,13 +262,13 @@ end
 
 xi.dynamis.onFightYing = function(mob, target)
     local zone = mob:getZone()
-    local dwagonVars = { zone:getLocalVar("ying_killed"), zone:getLocalVar("yang_killed"), zone:getLocalVar("178"), zone:getLocalVar("177"), 178, 177, 179, "Ying", "Yang" }
+    local dragonVars = { zone:getLocalVar("ying_killed"), zone:getLocalVar("yang_killed"), zone:getLocalVar("178"), zone:getLocalVar("177"), 178, 177, 179, "Ying", "Yang" }
     local yangToD = zone:getLocalVar("yangToD")
     -- Repop Yang every 30 seconds if Ying is up and Yang is not.
     if mob:getLocalVar("Spawning") <= os.time() then
         mob:setLocalVar("Spawning", os.time() + 5)
-        if dwagonVars[2] == 1 and os.time() > yangToD + 30 then
-            spawnDwagons(mob, target)
+        if dragonVars[2] == 1 and os.time() > yangToD + 30 then
+            spawnDragons(mob, target)
         end
     end
 
@@ -281,13 +284,13 @@ end
 
 xi.dynamis.onFightYang = function(mob, target)
     local zone = mob:getZone()
-    local dwagonVars = { zone:getLocalVar("ying_killed"), zone:getLocalVar("yang_killed"), zone:getLocalVar("178"), zone:getLocalVar("177"), 178, 177, 179, "Ying", "Yang" }
+    local dragonVars = { zone:getLocalVar("ying_killed"), zone:getLocalVar("yang_killed"), zone:getLocalVar("178"), zone:getLocalVar("177"), 178, 177, 179, "Ying", "Yang" }
     local yingToD = zone:getLocalVar("YangToD")
     -- Repop Yang every 30 seconds if Yang is up and Yang is not.
     if mob:getLocalVar("Spawning") <= os.time() then
         mob:setLocalVar("Spawning", os.time() + 5)
-        if dwagonVars[2] == 1 and os.time() > yingToD + 30 then
-            spawnDwagons(mob, target)
+        if dragonVars[2] == 1 and os.time() > yingToD + 30 then
+            spawnDragons(mob, target)
         end
     end
 
@@ -342,9 +345,9 @@ xi.dynamis.onDeathDynaLord = function(mob, player, optParams)
     xi.dynamis.megaBossOnDeath(mob, player, optParams)
     if optParams.isKiller then
         mob:showText(mob, lordText + 2)
-        local dwagons = { zone:getLocalVar("177"), zone:getLocalVar("178") }
-        for _, dwagon in pairs(dwagons) do
-            DespawnMob(dwagon)
+        local dragons = { zone:getLocalVar("177"), zone:getLocalVar("178") }
+        for _, dragon in pairs(dragons) do
+            DespawnMob(dragon)
         end
     end
 end
@@ -356,7 +359,7 @@ xi.dynamis.onDeathYing = function(mob, player, optParams)
     if optParams.isKiller then
         if zone:getLocalVar("yang_killed") == 0 then
             mob:showText(mob, yingText + 2)
-            zone:setLocalVar("dwagonLastPop", os.time() + 30)
+            zone:setLocalVar("dragonLastPop", os.time() + 30)
         else
             mob:showText(mob, yingText)
         end
@@ -387,7 +390,7 @@ xi.dynamis.onDeathYang = function(mob, player, optParams)
     if optParams.isKiller then
         if zone:getLocalVar("ying_killed") == 0 then
             mob:showText(mob, yangText + 2)
-            zone:setLocalVar("dwagonLastPop", os.time() + 30)
+            zone:setLocalVar("dragonLastPop", os.time() + 30)
         else
             mob:showText(mob, yangText)
         end

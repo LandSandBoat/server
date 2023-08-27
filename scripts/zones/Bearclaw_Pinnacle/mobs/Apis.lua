@@ -3,8 +3,6 @@
 --  Mob: Apis
 --  ENM: Holy Cow
 -----------------------------------
-require("scripts/globals/status")
------------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)

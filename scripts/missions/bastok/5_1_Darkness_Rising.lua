@@ -9,12 +9,9 @@
 -- Rashid  : !pos -8.444 -2 -123.575 234
 -- Naji    : !pos 64 -14 -4 237
 -----------------------------------
-require('scripts/globals/items')
-require('scripts/globals/keyitems')
 require('scripts/globals/missions')
 require('scripts/globals/npc_util')
 require('scripts/globals/titles')
-require('scripts/globals/settings')
 require('scripts/globals/interaction/mission')
 require('scripts/globals/zone')
 -----------------------------------

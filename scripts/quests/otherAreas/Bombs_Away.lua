@@ -4,8 +4,6 @@
 -- Log ID: 4, Quest ID: 96
 -- Buffalostalker : !pos -380 -24 -180
 -----------------------------------
-require('scripts/globals/items')
-require('scripts/globals/keyitems')
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
 require('scripts/globals/zone')

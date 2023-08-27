@@ -3,7 +3,6 @@
 --  Mob: Qiqirn Miner
 -----------------------------------
 require("scripts/globals/assault")
-require("scripts/globals/status")
 -----------------------------------
 
 local entity = {}

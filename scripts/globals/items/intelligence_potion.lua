@@ -3,8 +3,6 @@
 --  Item: Intelligence Potion
 --  Intelligence 7
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

@@ -1,8 +1,6 @@
 -----------------------------------
 -- Revert EXP rings to Era values.
 -----------------------------------
-require("scripts/globals/status")
------------------------------------
 local m = Module:new("era_exp_rings")
 
 m:addOverride("xi.globals.items.chariot_band.onItemUse", function(target)

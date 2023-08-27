@@ -13,8 +13,6 @@
 -- Trap Door        : !pos 22.310 -1.087 -14.320 151
 -----------------------------------
 require('scripts/globals/interaction/mission')
-require('scripts/globals/items')
-require('scripts/globals/keyitems')
 require('scripts/globals/missions')
 require('scripts/globals/npc_util')
 require('scripts/globals/titles')

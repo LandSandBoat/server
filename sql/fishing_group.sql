@@ -46,6 +46,11 @@ INSERT INTO `fishing_group` VALUES (1,4472,1000,500,15);
 INSERT INTO `fishing_group` VALUES (1,4473,450,245,5);
 INSERT INTO `fishing_group` VALUES (1,14117,500,300,9);
 INSERT INTO `fishing_group` VALUES (1,14242,500,300,9);
+INSERT INTO `fishing_group` VALUES (1,4310,1000,9999,9999); -- Goldfish (Sunbreeze)
+INSERT INTO `fishing_group` VALUES (1,4311,450,9999,9999);  -- Goldfish (Sunbreeze)
+INSERT INTO `fishing_group` VALUES (1,4312,350,9999,9999);  -- Goldfish (Sunbreeze)
+INSERT INTO `fishing_group` VALUES (1,5714,300,9999,9999);  -- Goldfish (Sunbreeze)
+INSERT INTO `fishing_group` VALUES (1,5715,250,9999,9999);  -- Goldfish (Sunbreeze)
 INSERT INTO `fishing_group` VALUES (2,90,900,300,9);
 INSERT INTO `fishing_group` VALUES (2,624,1000,300,9);
 INSERT INTO `fishing_group` VALUES (2,4360,1000,500,15);
@@ -59,6 +64,11 @@ INSERT INTO `fishing_group` VALUES (2,14117,500,300,9);
 INSERT INTO `fishing_group` VALUES (2,14242,500,300,9);
 INSERT INTO `fishing_group` VALUES (3,4472,1000,500,15);
 INSERT INTO `fishing_group` VALUES (3,14242,500,300,9);
+INSERT INTO `fishing_group` VALUES (3,4310,1000,9999,9999); -- Goldfish (Sunbreeze)
+INSERT INTO `fishing_group` VALUES (3,4311,450,9999,9999);  -- Goldfish (Sunbreeze)
+INSERT INTO `fishing_group` VALUES (3,4312,350,9999,9999);  -- Goldfish (Sunbreeze)
+INSERT INTO `fishing_group` VALUES (3,5714,300,9999,9999);  -- Goldfish (Sunbreeze)
+INSERT INTO `fishing_group` VALUES (3,5715,250,9999,9999);  -- Goldfish (Sunbreeze)
 INSERT INTO `fishing_group` VALUES (4,591,1000,300,9);
 INSERT INTO `fishing_group` VALUES (4,624,1000,300,9);
 INSERT INTO `fishing_group` VALUES (4,4360,1000,500,15);
@@ -76,6 +86,11 @@ INSERT INTO `fishing_group` VALUES (5,4472,1000,500,15);
 INSERT INTO `fishing_group` VALUES (5,13454,800,300,9);
 INSERT INTO `fishing_group` VALUES (5,14117,500,300,9);
 INSERT INTO `fishing_group` VALUES (5,14242,500,300,9);
+INSERT INTO `fishing_group` VALUES (5,4310,1000,9999,9999); -- Goldfish (Sunbreeze)
+INSERT INTO `fishing_group` VALUES (5,4311,450,9999,9999);  -- Goldfish (Sunbreeze)
+INSERT INTO `fishing_group` VALUES (5,4312,350,9999,9999);  -- Goldfish (Sunbreeze)
+INSERT INTO `fishing_group` VALUES (5,5714,300,9999,9999);  -- Goldfish (Sunbreeze)
+INSERT INTO `fishing_group` VALUES (5,5715,250,9999,9999);  -- Goldfish (Sunbreeze)
 INSERT INTO `fishing_group` VALUES (6,90,900,300,9);
 INSERT INTO `fishing_group` VALUES (6,4401,1000,1000,36);
 INSERT INTO `fishing_group` VALUES (6,4428,1000,500,15);
@@ -98,6 +113,11 @@ INSERT INTO `fishing_group` VALUES (8,4515,1000,500,15);
 INSERT INTO `fishing_group` VALUES (8,13454,800,300,9);
 INSERT INTO `fishing_group` VALUES (8,14117,500,300,9);
 INSERT INTO `fishing_group` VALUES (8,14242,500,300,9);
+INSERT INTO `fishing_group` VALUES (8,4310,1000,9999,9999); -- Goldfish (Sunbreeze)
+INSERT INTO `fishing_group` VALUES (8,4311,450,9999,9999);  -- Goldfish (Sunbreeze)
+INSERT INTO `fishing_group` VALUES (8,4312,350,9999,9999);  -- Goldfish (Sunbreeze)
+INSERT INTO `fishing_group` VALUES (8,5714,300,9999,9999);  -- Goldfish (Sunbreeze)
+INSERT INTO `fishing_group` VALUES (8,5715,250,9999,9999);  -- Goldfish (Sunbreeze)
 INSERT INTO `fishing_group` VALUES (9,4401,1000,1000,36);
 INSERT INTO `fishing_group` VALUES (9,4426,1000,500,15);
 INSERT INTO `fishing_group` VALUES (9,4427,750,275,6);
@@ -105,6 +125,11 @@ INSERT INTO `fishing_group` VALUES (9,4472,1000,500,15);
 INSERT INTO `fishing_group` VALUES (9,13454,800,300,9);
 INSERT INTO `fishing_group` VALUES (9,14117,500,300,9);
 INSERT INTO `fishing_group` VALUES (9,14242,500,300,9);
+INSERT INTO `fishing_group` VALUES (9,4310,1000,9999,9999); -- Goldfish (Sunbreeze)
+INSERT INTO `fishing_group` VALUES (9,4311,450,9999,9999);  -- Goldfish (Sunbreeze)
+INSERT INTO `fishing_group` VALUES (9,4312,350,9999,9999);  -- Goldfish (Sunbreeze)
+INSERT INTO `fishing_group` VALUES (9,5714,300,9999,9999);  -- Goldfish (Sunbreeze)
+INSERT INTO `fishing_group` VALUES (9,5715,250,9999,9999);  -- Goldfish (Sunbreeze)
 INSERT INTO `fishing_group` VALUES (10,90,900,300,9);
 INSERT INTO `fishing_group` VALUES (10,4401,1000,1000,36);
 INSERT INTO `fishing_group` VALUES (10,4426,1000,500,15);
@@ -120,6 +145,11 @@ INSERT INTO `fishing_group` VALUES (11,4464,1000,500,15);
 INSERT INTO `fishing_group` VALUES (11,4472,1000,500,15);
 INSERT INTO `fishing_group` VALUES (11,14117,500,300,9);
 INSERT INTO `fishing_group` VALUES (11,14242,500,300,9);
+INSERT INTO `fishing_group` VALUES (11,4310,1000,9999,9999); -- Goldfish (Sunbreeze)
+INSERT INTO `fishing_group` VALUES (11,4311,450,9999,9999);  -- Goldfish (Sunbreeze)
+INSERT INTO `fishing_group` VALUES (11,4312,350,9999,9999);  -- Goldfish (Sunbreeze)
+INSERT INTO `fishing_group` VALUES (11,5714,300,9999,9999);  -- Goldfish (Sunbreeze)
+INSERT INTO `fishing_group` VALUES (11,5715,250,9999,9999);  -- Goldfish (Sunbreeze)
 INSERT INTO `fishing_group` VALUES (12,13454,800,300,9);
 INSERT INTO `fishing_group` VALUES (12,13456,300,275,6);
 INSERT INTO `fishing_group` VALUES (12,14242,500,300,9);
@@ -163,6 +193,11 @@ INSERT INTO `fishing_group` VALUES (17,4401,1000,1000,36);
 INSERT INTO `fishing_group` VALUES (17,4402,750,260,5);
 INSERT INTO `fishing_group` VALUES (17,4469,900,190,6);
 INSERT INTO `fishing_group` VALUES (17,4472,1000,500,15);
+INSERT INTO `fishing_group` VALUES (17,4310,1000,9999,9999); -- Goldfish (Sunbreeze)
+INSERT INTO `fishing_group` VALUES (17,4311,450,9999,9999);  -- Goldfish (Sunbreeze)
+INSERT INTO `fishing_group` VALUES (17,4312,350,9999,9999);  -- Goldfish (Sunbreeze)
+INSERT INTO `fishing_group` VALUES (17,5714,300,9999,9999);  -- Goldfish (Sunbreeze)
+INSERT INTO `fishing_group` VALUES (17,5715,250,9999,9999);  -- Goldfish (Sunbreeze)
 INSERT INTO `fishing_group` VALUES (17,14117,500,300,9);
 INSERT INTO `fishing_group` VALUES (18,4402,750,260,5);
 INSERT INTO `fishing_group` VALUES (18,4469,900,190,6);
@@ -386,6 +421,11 @@ INSERT INTO `fishing_group` VALUES (46,12522,200,10,1);
 INSERT INTO `fishing_group` VALUES (46,13456,300,275,6);
 INSERT INTO `fishing_group` VALUES (46,14117,500,300,9);
 INSERT INTO `fishing_group` VALUES (46,14242,500,300,9);
+INSERT INTO `fishing_group` VALUES (46,4310,1000,9999,9999); -- Goldfish (Sunbreeze)
+INSERT INTO `fishing_group` VALUES (46,4311,450,9999,9999);  -- Goldfish (Sunbreeze)
+INSERT INTO `fishing_group` VALUES (46,4312,350,9999,9999);  -- Goldfish (Sunbreeze)
+INSERT INTO `fishing_group` VALUES (46,5714,300,9999,9999);  -- Goldfish (Sunbreeze)
+INSERT INTO `fishing_group` VALUES (46,5715,250,9999,9999);  -- Goldfish (Sunbreeze)
 INSERT INTO `fishing_group` VALUES (47,4360,1000,500,15);
 INSERT INTO `fishing_group` VALUES (47,4383,800,290,7);
 INSERT INTO `fishing_group` VALUES (47,4385,1000,500,15);
@@ -708,6 +748,11 @@ INSERT INTO `fishing_group` VALUES (89,4401,1000,1000,36);
 INSERT INTO `fishing_group` VALUES (89,4472,1000,500,15);
 INSERT INTO `fishing_group` VALUES (89,12522,200,10,1);
 INSERT INTO `fishing_group` VALUES (89,14117,500,300,9);
+INSERT INTO `fishing_group` VALUES (89,4310,1000,9999,9999); -- Goldfish (Sunbreeze)
+INSERT INTO `fishing_group` VALUES (89,4311,450,9999,9999);  -- Goldfish (Sunbreeze)
+INSERT INTO `fishing_group` VALUES (89,4312,350,9999,9999);  -- Goldfish (Sunbreeze)
+INSERT INTO `fishing_group` VALUES (89,5714,300,9999,9999);  -- Goldfish (Sunbreeze)
+INSERT INTO `fishing_group` VALUES (89,5715,250,9999,9999);  -- Goldfish (Sunbreeze)
 INSERT INTO `fishing_group` VALUES (90,4291,1000,500,15);
 INSERT INTO `fishing_group` VALUES (90,4306,900,190,6);
 INSERT INTO `fishing_group` VALUES (90,4401,1000,1000,36);
@@ -1109,12 +1154,6 @@ INSERT INTO `fishing_group` VALUES (139,4469,900,190,6);
 INSERT INTO `fishing_group` VALUES (139,4472,1000,500,15);
 INSERT INTO `fishing_group` VALUES (139,5125,1000,500,15);
 INSERT INTO `fishing_group` VALUES (139,5126,1000,500,15);
--- Sunbreeze Festival (Goldfish)
-INSERT INTO `fishing_group` VALUES (140,4310,1000,9999,9999);
-INSERT INTO `fishing_group` VALUES (140,4311,450,9999,9999);
-INSERT INTO `fishing_group` VALUES (140,4312,350,9999,9999);
-INSERT INTO `fishing_group` VALUES (140,5714,300,9999,9999);
-INSERT INTO `fishing_group` VALUES (140,5715,250,9999,9999);
 /*!40000 ALTER TABLE `fishing_group` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;

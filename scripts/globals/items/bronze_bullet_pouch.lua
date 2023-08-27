@@ -3,9 +3,6 @@
 -- Item: Bronze Bullet Pouch
 -- When used, you will obtain one stack of Bronze Bullets
 -----------------------------------
-require("scripts/globals/items")
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

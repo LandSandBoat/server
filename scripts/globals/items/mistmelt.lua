@@ -3,9 +3,6 @@
 -- Item: Mistmelt
 -- Item Effect: Forces Ouryu to land
 -----------------------------------
-require("scripts/globals/status")
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, player)

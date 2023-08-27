@@ -3,8 +3,6 @@
 -- Cluster of Bitter Memories
 -- Turn into a stack of bitter memories
 -----------------------------------------
-require("scripts/globals/msg")
------------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

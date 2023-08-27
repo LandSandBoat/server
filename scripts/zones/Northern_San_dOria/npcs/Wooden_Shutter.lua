@@ -2,8 +2,6 @@
 -- Area: Northern San d'Oria
 --  NPC: Door : Wooden Shutter
 -----------------------------------
-require("scripts/globals/settings")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

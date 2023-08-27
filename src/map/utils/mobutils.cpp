@@ -1603,6 +1603,7 @@ Usage:
 
                 // must be here first to define mobmods
                 mobutils::InitializeMob(PMob, zoneutils::GetZone(targetZoneId));
+                mobutils::AddCustomMods(PMob);
             }
         }
         else

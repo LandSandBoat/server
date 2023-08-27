@@ -7,10 +7,7 @@
 -- Gravestone: !pos 180 -32 -56 104
 -- qm2: !pos -10.946 -1.000 313.810 104
 -----------------------------------
-require('scripts/globals/items')
-require("scripts/globals/keyitems")
 require('scripts/globals/quests')
-require('scripts/globals/status')
 require('scripts/globals/zone')
 require('scripts/globals/interaction/quest')
 -----------------------------------

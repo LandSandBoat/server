@@ -5,7 +5,6 @@
 --  Utsusemi/Blink absorb: Wipes shadow
 --  Range: Cone
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/mobskills")
 -----------------------------------
 local mobskillObject = {}

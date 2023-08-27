@@ -5,7 +5,6 @@
 -- !pos -106.336 2.000 26.117 237
 -----------------------------------
 local ID = require("scripts/zones/Metalworks/IDs")
-require("scripts/globals/status")
 require("scripts/globals/crafting")
 -----------------------------------
 local entity = {}

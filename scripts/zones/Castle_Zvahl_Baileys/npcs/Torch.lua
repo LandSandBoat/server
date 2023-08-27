@@ -5,7 +5,6 @@
 -- !pos 63 -24 21 161
 -----------------------------------
 local ID = require("scripts/zones/Castle_Zvahl_Baileys/IDs")
-require("scripts/globals/keyitems")
 require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}

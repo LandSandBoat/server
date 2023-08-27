@@ -5,9 +5,7 @@
 -- !pos -267 -19 74 127
 -----------------------------------
 local ID = require("scripts/zones/Behemoths_Dominion/IDs")
-require('scripts/globals/items')
 require("scripts/globals/npc_util")
-require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 

@@ -8,8 +8,6 @@
 -- Attack+21% (Max. 55)
 -- "Undead Killer"+5
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

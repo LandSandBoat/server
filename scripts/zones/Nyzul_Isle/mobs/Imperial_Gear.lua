@@ -3,7 +3,6 @@
 --  Mob: Imperial Gear
 -----------------------------------
 local ID = require('scripts/zones/Nyzul_Isle/IDs')
-require('scripts/globals/status')
 require("scripts/globals/assault")
 -----------------------------------
 local entity = {}

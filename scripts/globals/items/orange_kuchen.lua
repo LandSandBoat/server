@@ -6,8 +6,6 @@
 -- Magic % 13
 -- Magic Cap 75
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

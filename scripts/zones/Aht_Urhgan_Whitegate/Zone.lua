@@ -2,9 +2,7 @@
 -- Zone: Aht_Urhgan_Whitegate (50)
 -----------------------------------
 local ID = require('scripts/zones/Aht_Urhgan_Whitegate/IDs')
-require('scripts/globals/keyitems')
 require('scripts/globals/quests')
-require('scripts/globals/status')
 require('scripts/globals/zone')
 -----------------------------------
 local zoneObject = {}
@@ -21,6 +19,7 @@ zoneObject.onInitialize = function(zone)
     zone:registerTriggerArea(9, -103,  0.0,  -16, -100,  0.0,  -12) -- Sets Mark for "Striking a Balance" Quest cutscene.
     zone:registerTriggerArea(10,  22,   2,  -98,     0,    0,    0) -- Sets Mark for "The Prankster" Quest cutscene.
     zone:registerTriggerArea(11,  27,   7, -123,     0,    0,    0) -- Sets Mark for "The Prankster" Quest cutscene.
+    zone:registerTriggerArea(12, -77,   10,   0,     0,    0,    0) -- Promotion Sergeant (Balrahn Way).
 end
 
 zoneObject.onZoneIn = function(player, prevZone)

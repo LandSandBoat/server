@@ -5,8 +5,6 @@
 -- Reverberation/Transfixtion/Detonation skillchain properties
 -- Modifiers: STR:20%; AGI:50%
 -----------------------------------
-require("scripts/globals/settings")
-require("scripts/globals/status")
 require("scripts/globals/mobskills")
 -----------------------------------
 local mobskillObject = {}

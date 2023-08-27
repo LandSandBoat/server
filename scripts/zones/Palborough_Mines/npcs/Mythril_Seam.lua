@@ -6,7 +6,6 @@
 -- !pos -68 -7 173 143
 -- Rock Racketeer !pos 210 -32 -63 143
 -----------------------------------
-require("scripts/globals/items")
 require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}

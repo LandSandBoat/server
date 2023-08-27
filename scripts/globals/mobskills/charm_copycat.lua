@@ -2,9 +2,6 @@
 -- Charm Copycat
 -----------------------------------
 require("scripts/globals/mobskills")
-require("scripts/globals/settings")
-require("scripts/globals/status")
-require("scripts/globals/msg")
 -----------------------------------
 local mobskillObject = {}
 
@@ -40,8 +37,8 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
 
     for _, v in pairs(jobs) do
         if job == v[1] then
-            GetMobByID(id+v[2]):setSpawn(pos.x, pos.y, pos.z, pos.rot)
-            SpawnMob(id+v[2])
+            GetMobByID(id + v[2]):setSpawn(pos.x, pos.y, pos.z, pos.rot)
+            SpawnMob(id + v[2])
             break
         end
     end

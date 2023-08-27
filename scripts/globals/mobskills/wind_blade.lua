@@ -2,8 +2,6 @@
 -- Wind Blade
 -- Garuda deals wind damage.
 -----------------------------------
-require("scripts/globals/settings")
-require("scripts/globals/status")
 require("scripts/globals/mobskills")
 -----------------------------------
 local mobskillObject = {}

@@ -4,7 +4,6 @@
 -- Keyitem: SHAFT_GATE_OPERATING_DIAL
 -----------------------------------
 require("scripts/globals/battlefield")
-require("scripts/globals/keyitems")
 -----------------------------------
 local battlefieldObject = {}
 

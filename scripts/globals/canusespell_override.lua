@@ -2,8 +2,6 @@
 -- Can use spell override functionality
 -- Used to allow cast of spells granted by job points
 -----------------------------------
-require("scripts/globals/spell_data")
-
 xi = xi or {}
 xi.spells = xi.spells or {}
 

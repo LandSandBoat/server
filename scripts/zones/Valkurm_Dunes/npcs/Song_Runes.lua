@@ -5,8 +5,6 @@
 -- !pos -721 -7 102 103
 -----------------------------------
 local ID = require("scripts/zones/Valkurm_Dunes/IDs")
-require("scripts/globals/settings")
-require("scripts/globals/status")
 require("scripts/globals/titles")
 require("scripts/globals/quests")
 -----------------------------------

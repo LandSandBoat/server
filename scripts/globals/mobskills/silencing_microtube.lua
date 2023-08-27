@@ -3,8 +3,6 @@
 -- Deals Magic damage to target. Additional effect: Silence
 -- Used by Adelheid (Trust)
 -----------------------------------
-require("scripts/globals/settings")
-require("scripts/globals/status")
 require("scripts/globals/mobskills")
 -----------------------------------
 local mobskillObject = {}

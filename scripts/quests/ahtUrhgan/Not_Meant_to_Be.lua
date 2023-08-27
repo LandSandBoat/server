@@ -5,7 +5,6 @@
 -- Fhe Maksojha   : !pos 19.084 -7 71.287 53
 -- qm12 (Caedarva): !pos 456.993 -7.000 -270.815 79
 -----------------------------------
-require('scripts/globals/items')
 require('scripts/globals/quests')
 require('scripts/globals/zone')
 require('scripts/globals/interaction/quest')

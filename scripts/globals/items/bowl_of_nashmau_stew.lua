@@ -15,8 +15,6 @@
 -- Defense -100
 -- Evasion -100
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

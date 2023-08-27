@@ -2,7 +2,6 @@
 -- Abyssea Sturdy Pyxis Spawn
 -- Spawn conditions type and size.
 -----------------------------------
-require("scripts/globals/keyitems")
 require("scripts/globals/zone")
 require("scripts/globals/abyssea")
 require("scripts/globals/abyssea/sturdypyxis/chest")

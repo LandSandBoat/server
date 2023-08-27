@@ -8,7 +8,6 @@ require('scripts/globals/interaction/quest')
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
 require('scripts/globals/titles')
-require('scripts/globals/items')
 require('scripts/globals/zone')
 -----------------------------------
 local portSandOriaID = require('scripts/zones/Port_San_dOria/IDs')

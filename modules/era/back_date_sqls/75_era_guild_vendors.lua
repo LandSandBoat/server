@@ -3,7 +3,6 @@
 -----------------------------------
 require("scripts/globals/shop")
 require("modules/module_utils")
-require("scripts/globals/keyitems")
 
 local m = Module:new("75_era_guild_vendors")
 

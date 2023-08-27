@@ -6,8 +6,6 @@
 -- Fyi_Chalmwoh    : !pos -39.273 -16.000 70.126 249
 -- Red Oil KI      : 704
 -----------------------------------
-require('scripts/globals/items')
-require('scripts/globals/keyitems')
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
 require('scripts/globals/titles')

@@ -3,8 +3,6 @@
 -- Toolbag Ino
 -- When used, you will obtain one stack of inoshishinofuda
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

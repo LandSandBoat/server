@@ -11,8 +11,6 @@
 -- Ranged Attack +10% (cap 170)
 -- Resist Slow +10
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

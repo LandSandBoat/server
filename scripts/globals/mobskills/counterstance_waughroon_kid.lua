@@ -3,9 +3,6 @@
 -- Increases chance to counter but lowers defense.
 --  used by The Waughroon Kid in BCNM The Final Bout.
 -----------------------------------
-require("scripts/globals/settings")
-require("scripts/globals/status")
------------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(mob, target, skill)

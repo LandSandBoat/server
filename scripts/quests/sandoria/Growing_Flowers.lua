@@ -4,7 +4,6 @@
 -- Log ID: 0, Quest ID: 58
 -- Kuu Mohzolhi : !pos -123 0 80 231
 -----------------------------------
-require('scripts/globals/items')
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
 require('scripts/globals/zone')

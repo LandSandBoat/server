@@ -2,8 +2,6 @@
 -- Area: PsoXja
 --  NPC: TOWER_C_Lift_N !pos 270 6.250 350
 -----------------------------------
-require("scripts/globals/status")
------------------------------------
 local entity = {}
 
 entity.onSpawn = function(npc)

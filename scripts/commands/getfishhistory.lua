@@ -2,8 +2,6 @@
 -- func: getFishHistory
 -- desc: Prints the history stats of a given player
 -----------------------------------
-require("scripts/globals/status")
-require("scripts/globals/msg")
 
 cmdprops =
 {

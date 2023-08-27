@@ -3,8 +3,6 @@
 -- Item: Grape Juice
 -- Item Effect: Restores 60 MP over 90 seconds.
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

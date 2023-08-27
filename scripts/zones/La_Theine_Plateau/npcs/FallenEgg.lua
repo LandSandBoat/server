@@ -5,7 +5,6 @@
 -----------------------------------
 local laTheineGlobal = require("scripts/zones/La_Theine_Plateau/globals")
 local ID = require("scripts/zones/La_Theine_Plateau/IDs")
-require("scripts/globals/items")
 -----------------------------------
 local entity = {}
 

@@ -4,12 +4,9 @@
 -- Koru-Moru !pos -120 -6 124 239
 --
 --------------------------------------------------------------------------------------
-require('scripts/globals/items')
 require('scripts/globals/npc_util')
-require('scripts/globals/keyitems')
 require('scripts/globals/quests')
 require('scripts/globals/zone')
-require('scripts/globals/status')
 require('scripts/globals/interaction/quest')
 -----------------------------------------------
 local quest = Quest:new(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CLASS_REUNION)

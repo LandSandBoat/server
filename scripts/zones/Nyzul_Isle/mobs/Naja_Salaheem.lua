@@ -4,7 +4,6 @@
 -----------------------------------
 local ID = require("scripts/zones/Nyzul_Isle/IDs")
 require("scripts/globals/allyassist")
-require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 

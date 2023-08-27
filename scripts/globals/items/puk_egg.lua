@@ -6,8 +6,6 @@
 -- Health 6
 -- Magic 6
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

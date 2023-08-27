@@ -5,8 +5,6 @@
 -- !pos 204.052 10.25 96.414 174
 -- Involved in Quest: The Potential Within
 -----------------------------------
-require("scripts/globals/status")
------------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)

@@ -5,7 +5,6 @@
 -- Rholont : !pos -168 -2 56 80
 -- qm8     : !pos -6 0 -295 82
 -----------------------------------
-require('scripts/globals/keyitems')
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
 require('scripts/globals/zone')

@@ -2,9 +2,6 @@
 -- ID: 15454
 -- little_worm_belt
 -----------------------------------
-require("scripts/globals/msg")
-require("scripts/globals/items")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

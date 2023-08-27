@@ -2,10 +2,8 @@
 -- Spell: Maiden's Virelai
 -- Charms pet
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/pets")
-require("scripts/globals/msg")
 -----------------------------------
 local spellObject = {}
 

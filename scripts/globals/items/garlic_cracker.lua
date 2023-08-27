@@ -7,8 +7,6 @@
 -- Undead Killer 10
 -- Blind Resist 10
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

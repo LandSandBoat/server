@@ -4,9 +4,7 @@
 -- Starts and Finishes Quest: To Cure a Cough
 -- !pos -114 -6 102 230
 -----------------------------------
-require("scripts/globals/settings")
 require("scripts/globals/titles")
-require("scripts/globals/keyitems")
 require("scripts/globals/shop")
 require("scripts/globals/quests")
 local ID = require("scripts/zones/Southern_San_dOria/IDs")

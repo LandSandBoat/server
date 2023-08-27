@@ -2,8 +2,6 @@
 -- Elevator in Palborough
 -- Notes: Used to operate Elevator @3z0
 -----------------------------------
-require("scripts/globals/status")
------------------------------------
 local entity = {}
 
 entity.isBusy = false

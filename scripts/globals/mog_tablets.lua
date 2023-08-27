@@ -1,7 +1,6 @@
 -----------------------------------
 -- Mog Tablets
 -----------------------------------
-require("scripts/globals/settings")
 require("scripts/globals/zone")
 -----------------------------------
 xi = xi or {}

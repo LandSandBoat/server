@@ -2,7 +2,6 @@
 -- Area: Attohwa Chasm
 --  Mob: Tiamat
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/titles")
 -----------------------------------
 local entity = {}
@@ -84,7 +83,9 @@ end
 entity.onMobFight = function(mob, target)
     -- Wyrms automatically wake from sleep in the air
     if
-        hasSleepEffects(mob) and
+        (target:hasStatusEffect(xi.effect.SLEEP_I) or
+        target:hasStatusEffect(xi.effect.SLEEP_II) or
+        target:hasStatusEffect(xi.effect.LULLABY)) and
         mob:getAnimationSub() == 1
     then
         mob:wakeUp()

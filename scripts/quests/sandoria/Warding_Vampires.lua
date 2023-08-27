@@ -4,7 +4,6 @@
 -- Log ID: 0, Quest ID: 79
 -- Maloquedil : !pos 35 0.1 60 231
 -----------------------------------
-require('scripts/globals/items')
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
 require('scripts/globals/titles')

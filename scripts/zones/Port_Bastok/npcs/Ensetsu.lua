@@ -6,10 +6,7 @@
 -- !pos 33 -6 67 236
 -----------------------------------
 local ID = require("scripts/zones/Port_Bastok/IDs")
-require("scripts/globals/keyitems")
-require("scripts/globals/settings")
 require("scripts/globals/quests")
-require("scripts/globals/status")
 require("scripts/globals/titles")
 require('scripts/globals/npc_util')
 -----------------------------------

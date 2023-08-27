@@ -11,8 +11,6 @@
 -- Sleep Resist 1
 -- Enmity 4
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

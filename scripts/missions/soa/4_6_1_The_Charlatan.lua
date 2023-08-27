@@ -6,7 +6,6 @@
 -- Levil           : !pos -87.204 3.350 12.655 256
 -- Ploh Trishbahk  : !pos 100.580 -40.150 -63.830 257
 -----------------------------------
-require('scripts/globals/items')
 require('scripts/globals/missions')
 require('scripts/globals/interaction/mission')
 require('scripts/globals/zone')

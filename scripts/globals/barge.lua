@@ -4,7 +4,6 @@
 ------------------------------------
 -- Cut Scenes
 ------------------------------------
-require("scripts/globals/keyitems")
 require("scripts/globals/zone")
 require("scripts/globals/npc_util")
 local ID = require('scripts/zones/Carpenters_Landing/IDs')
@@ -143,7 +142,10 @@ xi.barge.onZoneIn = function(player)
             -- North landing departure CS - 16 on boat
             -- North landing CS 17 - player on dock - 13?
             player:setCharVar("[barge]arrivalEventId", 11)
-        elseif nextEvent.route == dest.CENTRAL_LANDING or nextEvent.route == dest.CENTRAL_LANDING_EMFEA then
+        elseif
+            nextEvent.route == dest.CENTRAL_LANDING or
+            nextEvent.route == dest.CENTRAL_LANDING_EMFEA
+        then
             -- CS38 dock fly in
             -- Central landing CS 39 - player on dock
             -- CS40 Central landing departure on boat
@@ -168,7 +170,6 @@ xi.barge.onZoneIn = function(player)
             player:setPos(6.509, -9.163, -819.333, 239)
             return -1
         end
-
     end
 
     if verbose then
@@ -219,11 +220,14 @@ end
 xi.barge.ticketshopOnTrigger = function(player, eventId)
     player:setCharVar("currentticket", 0) -- Set ticket to 0 in case something breaks
 
-    if (player:hasKeyItem(xi.ki.BARGE_TICKET)) and (player:hasKeyItem(xi.ki.BARGE_MULTI_TICKET)) then
+    if
+        player:hasKeyItem(xi.ki.BARGE_TICKET) and
+        player:hasKeyItem(xi.ki.BARGE_MULTI_TICKET)
+    then
         player:setCharVar("currentticket", 3)
-    elseif  (player:hasKeyItem(xi.ki.BARGE_MULTI_TICKET)) then
+    elseif  player:hasKeyItem(xi.ki.BARGE_MULTI_TICKET) then
         player:setCharVar("currentticket", 2)
-    elseif (player:hasKeyItem(xi.ki.BARGE_TICKET)) then
+    elseif player:hasKeyItem(xi.ki.BARGE_TICKET) then
         player:setCharVar("currentticket", 1)
     else
         player:setCharVar("currentticket", 0)
@@ -239,7 +243,11 @@ xi.barge.ticketshoponEventFinish = function(player, csid, option)
 
     -- Option 1: BARGE_TICKET
     -- Option 2: MULTI_TICKET
-    if (csid == 31 or csid == 32 or csid == 43) then
+    if
+        csid == 31 or
+        csid == 32 or
+        csid == 43
+    then
         if option == 1 and (currentticket == 1 or currentticket == 3) then -- If you have BARGE_TICKET
             -- Event auto plays the correct message
         elseif option == 1 and (player:getGil() >= 50) then
@@ -247,7 +255,11 @@ xi.barge.ticketshoponEventFinish = function(player, csid, option)
             player:addKeyItem(xi.ki.BARGE_TICKET)
             player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.BARGE_TICKET)
             player:setCharVar("Barge_Ticket", 1)
-        elseif option == 2 and (currentticket == 2 or currentticket == 3) and numberticket <= 9 then -- If you have multi ticket with less than 9
+        elseif
+            option == 2 and
+            (currentticket == 2 or currentticket == 3) and
+            numberticket <= 9
+        then -- If you have multi ticket with less than 9
             player:delGil(300)
             player:messageSpecial(ID.text.MTICKET_ADDED, xi.ki.BARGE_MULTI_TICKET, 10)
             player:setCharVar("Multi_Barge_Ticket", 10)

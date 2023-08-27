@@ -694,7 +694,7 @@ PMemberTargets CSpiritController::GetBestQualifiedMembers()
                 }
 
                 // Check distance.
-                if (curDist < closestPerson && PSpirit->PAI->PathFind && PSpirit->PAI->PathFind->CanSeePoint(PMember->loc.p))
+                if (curDist < closestPerson && PSpirit->PAI->PathFind && PSpirit->CanSeeTarget(PMember, false))
                 {
                     closestPerson = curDist;
                     qualifiedTargets.PNearest = PMember;

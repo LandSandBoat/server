@@ -4,7 +4,6 @@
 -- !pos 263.600 -6.512 40.000 95
 -----------------------------------
 local ID = require("scripts/zones/West_Sarutabaruta_[S]/IDs")
-require("scripts/globals/keyitems")
 require("scripts/globals/quests")
 require("scripts/globals/utils")
 -----------------------------------

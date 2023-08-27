@@ -3,7 +3,6 @@
 -----------------------------------
 local ID = require('scripts/zones/Meriphataud_Mountains_[S]/IDs')
 require('scripts/globals/chocobo')
-require('scripts/globals/status')
 -----------------------------------
 local zoneObject = {}
 

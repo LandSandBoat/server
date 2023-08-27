@@ -1,8 +1,6 @@
 -----------------------------------
 -- Seasonal Events Handler
 -----------------------------------
-require("scripts/globals/settings")
------------------------------------
 xi = xi or {}
 xi.events = xi.events or {}
 xi.events.handler = xi.events.handler or {}

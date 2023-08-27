@@ -3,7 +3,6 @@
 --  NPC: qm1 (???)
 -- !pos 238.524 2.661 -148.784 103
 -----------------------------------
-require('scripts/globals/items')
 require('scripts/globals/npc_util')
 -----------------------------------
 local ID = require('scripts/zones/Valkurm_Dunes/IDs')

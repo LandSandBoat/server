@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Abyssea-Grauberg
 -----------------------------------
-require("scripts/globals/keyitems")
 require("scripts/globals/zone")
 -----------------------------------
 

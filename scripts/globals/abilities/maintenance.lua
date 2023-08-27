@@ -5,9 +5,7 @@
 -- Recast Time: 1:30
 -- Duration: Instant
 -----------------------------------
-require("scripts/globals/settings")
 require("scripts/globals/pets")
-require("scripts/globals/msg")
 -----------------------------------
 local abilityObject = {}
 

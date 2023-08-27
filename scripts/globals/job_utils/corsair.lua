@@ -1,10 +1,8 @@
 -----------------------------------
 -- Corsair Job Utilities
 -----------------------------------
-require("scripts/globals/settings")
 require("scripts/globals/ability")
 require("scripts/globals/jobpoints")
-require("scripts/globals/msg")
 require("scripts/globals/utils")
 -----------------------------------
 xi = xi or {}
@@ -210,7 +208,10 @@ local function applyRoll(caster, target, inAbility, action, total, isDoubleup, c
         -- bust
         if caster:getID() == target:getID() then
             currentAbility:setMsg(xi.msg.basic.DOUBLEUP_BUST)     -- bust message for the COR rolling
-        elseif target:hasStatusEffect(xi.effect.ALL_MISS) and target:getStatusEffect(xi.effect.ALL_MISS):getPower() > 1 then -- Handle Super Jump
+        elseif
+            target:hasStatusEffect(xi.effect.ALL_MISS) and
+            target:getStatusEffect(xi.effect.ALL_MISS):getPower() > 1
+        then -- Handle Super Jump
             currentAbility:setMsg(xi.msg.basic.NO_EFFECT)
         else
             currentAbility:setMsg(xi.msg.basic.DOUBLEUP_BUST_SUB) -- bust message for the target getting the roll

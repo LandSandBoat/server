@@ -6,8 +6,6 @@
 -- Duration: 00:00:30
 -- target:transferEnmity(player, 99, 20.6)
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)

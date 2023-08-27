@@ -4,8 +4,6 @@
 --  Type: Magical
 --  additional effect : Petrification.
 -----------------------------------
-require("scripts/globals/settings")
-require("scripts/globals/status")
 require("scripts/globals/mobskills")
 
 -----------------------------------

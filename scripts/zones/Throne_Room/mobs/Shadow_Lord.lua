@@ -4,7 +4,6 @@
 -- Mission 5-2 BCNM Fight
 -----------------------------------
 local ID = require("scripts/zones/Throne_Room/IDs")
-require("scripts/globals/status")
 require("scripts/globals/titles")
 -----------------------------------
 local entity = {}

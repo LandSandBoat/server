@@ -3,7 +3,6 @@
 -----------------------------------
 local ID = require('scripts/zones/Metalworks/IDs')
 require('scripts/globals/conquest')
-require('scripts/globals/keyitems')
 -----------------------------------
 local zoneObject = {}
 

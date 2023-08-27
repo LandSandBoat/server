@@ -3,9 +3,6 @@
 -- Item: Hatchling Shield
 -- When used, you will obtain a random number of egg items
 -----------------------------------
-require("scripts/globals/msg")
-require("scripts/globals/items")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

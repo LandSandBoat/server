@@ -2,8 +2,6 @@
 -- Area: Monarch Linn
 --  Mob: Mammet-19 Epsilon
 -----------------------------------
-require("scripts/globals/status")
------------------------------------
 local entity = {}
 
 local forms =

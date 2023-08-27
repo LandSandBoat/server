@@ -6,8 +6,6 @@
 -- Range: 15' Conal
 -- Notes: Only used by Cirrate Christelle
 ---------------------------------------------
-require("scripts/globals/status")
-require("scripts/globals/msg")
 require("scripts/globals/mobskills")
 ---------------------------------------------
 local mobskillObject = {}

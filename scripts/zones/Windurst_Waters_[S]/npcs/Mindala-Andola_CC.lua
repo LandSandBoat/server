@@ -6,7 +6,6 @@
 -----------------------------------
 local ID = require("scripts/zones/Windurst_Waters_[S]/IDs")
 require("scripts/globals/campaign")
-require("scripts/globals/status")
 require("scripts/globals/utils")
 require("scripts/globals/extravaganza")
 -----------------------------------

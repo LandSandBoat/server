@@ -1804,6 +1804,21 @@ namespace battleutils
 
         if (chance < check)
         {
+            // Prevent interrupt if Aquaveil is active, if it were to interrupt.
+            if (PDefender->StatusEffectContainer->HasStatusEffect(EFFECT_AQUAVEIL))
+            {
+                auto aquaCount = PDefender->StatusEffectContainer->GetStatusEffect(EFFECT_AQUAVEIL)->GetPower();
+                if (aquaCount - 1 == 0) // removes the status, but still prevents the interrupt
+                {
+                    PDefender->StatusEffectContainer->DelStatusEffect(EFFECT_AQUAVEIL);
+                }
+                else
+                {
+                    PDefender->StatusEffectContainer->GetStatusEffect(EFFECT_AQUAVEIL)->SetPower(aquaCount - 1);
+                }
+                return false;
+            }
+            // Otherwise interrupt the spell cast.
             return true;
         }
 
@@ -2600,7 +2615,6 @@ namespace battleutils
         }
         else
         {
-            // ShowDebug("Accuracy mod before direction checks: %d", offsetAccuracy);
             // Check For Ambush Merit - Melee
             if (PAttacker->objtype == TYPE_PC && (charutils::hasTrait((CCharEntity*)PAttacker, TRAIT_AMBUSH)) && behind(PAttacker->loc.p, PDefender->loc.p, 64))
             {
@@ -6860,14 +6874,15 @@ namespace battleutils
             {
                 recast = static_cast<int32>(recast * 0.5f);
             }
+
             // The following modifiers are not multiplicative - as such they must be applied last.
-            // ShowDebug("Recast before reduction: %u", recast);
             if (PEntity->objtype == TYPE_PC)
             {
                 if (PSpell->getID() == SpellID::Magic_Finale) // apply Finale recast merits
                 {
                     recast -= ((CCharEntity*)PEntity)->PMeritPoints->GetMeritValue(MERIT_FINALE_RECAST, (CCharEntity*)PEntity) * 1000;
                 }
+
                 if (PSpell->getID() == SpellID::Foe_Lullaby || PSpell->getID() == SpellID::Foe_Lullaby_II || PSpell->getID() == SpellID::Horde_Lullaby ||
                     PSpell->getID() == SpellID::Horde_Lullaby_II) // apply Lullaby recast merits
                 {
@@ -6875,7 +6890,6 @@ namespace battleutils
                 }
             }
             recast -= PEntity->getMod(Mod::SONG_RECAST_DELAY) * 1000;
-            // ShowDebug("Recast after merit reduction: %u", recast);
         }
 
         if (PEntity->StatusEffectContainer->HasStatusEffect(EFFECT_COMPOSURE))

@@ -1,7 +1,6 @@
 -----------------------------------
 -- Abyssea Sturdy Pyxis Chest
 -----------------------------------
-require("scripts/globals/keyitems")
 require("scripts/globals/abyssea")
 require("scripts/globals/abyssea/sturdypyxis/augmented_item")
 require("scripts/globals/abyssea/sturdypyxis/temporary_item")

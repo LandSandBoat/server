@@ -7,9 +7,7 @@
 -- TODO: PostAIRewrite: Code the Howl effect and gradual resists.
 -----------------------------------
 mixins = { require("scripts/mixins/rage") }
-require("scripts/globals/status")
 require("scripts/globals/magic")
-require("scripts/globals/msg")
 -----------------------------------
 local entity = {}
 

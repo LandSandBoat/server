@@ -6,11 +6,8 @@
 -- Kasaroro : !pos -72 -3 34 231
 -- Halver   : !pos 2 0.1 0.1 233
 -----------------------------------
-require('scripts/globals/items')
-require('scripts/globals/keyitems')
 require('scripts/globals/missions')
 require('scripts/globals/npc_util')
-require('scripts/globals/settings')
 require('scripts/globals/titles')
 require('scripts/globals/interaction/mission')
 require('scripts/globals/zone')

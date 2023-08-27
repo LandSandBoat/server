@@ -3,7 +3,6 @@
 --  Mob: Tartaruga Gigante
 -----------------------------------
 local ID = require("scripts/zones/Waughroon_Shrine/IDs")
-require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/utils")
 -----------------------------------

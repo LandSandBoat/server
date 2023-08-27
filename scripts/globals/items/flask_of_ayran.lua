@@ -3,8 +3,6 @@
 -- Item: Ayran
 -- Item Effect: Restores 120 HP over 180 seconds
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

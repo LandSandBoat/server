@@ -3,8 +3,6 @@
 -- Stirge Belt
 -- Enchantment: 60Min, Costume - Bat
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

@@ -3,8 +3,6 @@
 -- Item: Reraiser
 -- Item Effect: This potion functions inthe same way as the spell Reraise.
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

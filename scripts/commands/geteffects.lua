@@ -2,8 +2,6 @@
 -- func: geteffects
 -- desc: prints list of all effects
 ---------------------------------------------------------------------------------------------------
-require("scripts/globals/status")
-require("scripts/globals/msg")
 
 cmdprops =
 {

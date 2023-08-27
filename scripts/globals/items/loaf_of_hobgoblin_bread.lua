@@ -8,8 +8,6 @@
 -- Charisma -7
 -- Health Regen While Healing 2
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

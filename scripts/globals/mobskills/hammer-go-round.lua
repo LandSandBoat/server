@@ -8,8 +8,6 @@
 -- Notes: Only used by "destroyers" (carrying massive warhammers).
 -----------------------------------
 require("scripts/globals/mobskills")
-require("scripts/globals/settings")
-require("scripts/globals/status")
 -----------------------------------
 local mobskillObject = {}
 

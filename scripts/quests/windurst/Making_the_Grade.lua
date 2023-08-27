@@ -6,7 +6,6 @@
 -- Koru-Moru       : !pos -120 -6 124 239
 -- Chomoro-Kyotoro : !pos 133 -5 167 238
 -----------------------------------
-require('scripts/globals/items')
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
 require('scripts/globals/zone')

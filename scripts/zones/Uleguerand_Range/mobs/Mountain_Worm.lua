@@ -4,7 +4,6 @@
 -----------------------------------
 local ID = require("scripts/zones/Uleguerand_Range/IDs")
 require("scripts/globals/hunts")
-require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 

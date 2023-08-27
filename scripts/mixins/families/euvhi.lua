@@ -7,7 +7,6 @@
 -- TODO: Initial DOT Damage will count as "Magical Damage", need to track dot ticks.
 -----------------------------------
 require("scripts/globals/mixins")
-require("scripts/globals/status")
 require("scripts/globals/magic")
 -----------------------------------
 xi = xi or {}

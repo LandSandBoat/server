@@ -3,9 +3,6 @@
 -- Old Quiver +2
 -- When used, you will obtain one partial stack of Crude Arrows +2
 -----------------------------------
-require("scripts/globals/msg")
-require("scripts/globals/items")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

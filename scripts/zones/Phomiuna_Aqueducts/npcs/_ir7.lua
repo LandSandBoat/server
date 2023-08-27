@@ -4,9 +4,7 @@
 -- !pos -70.800 -1.500 60.000 27
 -----------------------------------
 local ID = require('scripts/zones/Phomiuna_Aqueducts/IDs')
-require('scripts/globals/items')
 require('scripts/globals/npc_util')
-require('scripts/globals/status')
 -----------------------------------
 local entity = {}
 

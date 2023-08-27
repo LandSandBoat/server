@@ -5,8 +5,6 @@
 -- Bki Tbujhja       : !gotoid 17780766
 -- Waters_of_Oblivion: !gotoid 17457346
 -----------------------------------
-require('scripts/globals/items')
-require('scripts/globals/keyitems')
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
 require('scripts/globals/interaction/quest')

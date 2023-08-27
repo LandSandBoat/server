@@ -5,8 +5,6 @@
 -- Gumbah : !pos 52 0 -36 234
 -- qm2    : !pos 206 -60 -101 196
 -----------------------------------
-require('scripts/globals/items')
-require('scripts/globals/keyitems')
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
 require('scripts/globals/titles')

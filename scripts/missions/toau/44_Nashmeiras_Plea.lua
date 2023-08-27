@@ -6,10 +6,8 @@
 -- Naja Salaheem : !pos 22.700 -8.804 -45.591 50
 -- blank_lamp    : !pos 206.55 -1.5 20.05 72
 -----------------------------------
-require('scripts/globals/items')
 require('scripts/globals/missions')
 require('scripts/globals/npc_util')
-require('scripts/globals/keyitems')
 require('scripts/globals/interaction/mission')
 require('scripts/globals/zone')
 -----------------------------------

@@ -4,7 +4,6 @@
 -- !addkeyitem ZEPHYR_FAN
 -----------------------------------
 require("scripts/globals/battlefield")
-require("scripts/globals/keyitems")
 -----------------------------------
 local battlefieldObject = {}
 

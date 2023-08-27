@@ -8,8 +8,6 @@
 -- Version used by player summoners seems capped at ~2% except against Behemoths
 ---------------------------------------------------
 require("scripts/globals/mobskills")
-require("scripts/globals/settings")
-require("scripts/globals/status")
 require("scripts/globals/utils")
 ---------------------------------------------------
 local mobskillObject = {}

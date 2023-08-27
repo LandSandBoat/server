@@ -10,8 +10,6 @@
 -- Def +50
 -- Beast Killer (guesstimated 5%)
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

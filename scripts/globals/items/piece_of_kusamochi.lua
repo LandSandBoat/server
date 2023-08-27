@@ -8,8 +8,6 @@
 -- Attack + 20% Cap: 72 (Pet & Master) Pet Cap: 113
 -- Ranged Attack + 20% Cap: 72 (Pet & Master) Pet Cap: 113
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

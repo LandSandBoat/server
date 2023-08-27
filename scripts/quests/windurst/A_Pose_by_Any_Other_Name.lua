@@ -2,7 +2,6 @@
 -- A Pose By Any Other Name
 -- Angelica !pos -64 -9.25 -9 238
 -----------------------------------
-require('scripts/globals/items')
 require('scripts/globals/quests')
 require("scripts/globals/events/starlight_celebrations")
 require('scripts/globals/interaction/quest')

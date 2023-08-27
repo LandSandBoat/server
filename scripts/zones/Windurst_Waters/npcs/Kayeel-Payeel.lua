@@ -2,7 +2,6 @@
 -- Area: Windurst Waters
 --  NPC: Kayeel-Payeel
 -----------------------------------
-require("scripts/globals/settings")
 require("scripts/globals/events/starlight_celebrations")
 -----------------------------------
 local entity = {}

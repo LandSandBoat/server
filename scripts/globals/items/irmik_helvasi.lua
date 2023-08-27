@@ -7,8 +7,6 @@
 -- MP +3% (cap 13)
 -- INT +1
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

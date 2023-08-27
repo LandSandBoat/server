@@ -2,9 +2,6 @@
 -- ID: 11861
 -- hikogami_yukata
 -----------------------------------
-require("scripts/globals/msg")
-require("scripts/globals/items")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

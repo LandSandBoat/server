@@ -3,9 +3,6 @@
 -- Fire Card Case
 -- When used, you will obtain one stack of Fire Cards
 -----------------------------------
-require("scripts/globals/msg")
-require("scripts/globals/items")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

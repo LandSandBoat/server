@@ -2,7 +2,6 @@
 -- Zone: North_Gustaberg_[S] (88)
 -----------------------------------
 local ID = require('scripts/zones/North_Gustaberg_[S]/IDs')
-require('scripts/globals/keyitems')
 require('scripts/globals/quests')
 require('scripts/globals/helm')
 require('scripts/globals/zone')
