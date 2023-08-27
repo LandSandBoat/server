@@ -11,6 +11,7 @@ effectObject.onEffectGain = function(target, effect)
     end
 
     target:addMod(xi.mod.UDMGPHYS, -effect:getPower())
+    target:addMod(xi.mod.UDMGRANGE, -effect:getPower())
     target:addMod(xi.mod.ENMITY, enmityBonus)
     target:addMod(xi.mod.ENMITY_LOSS_REDUCTION, effect:getSubPower())
 end
@@ -31,6 +32,7 @@ effectObject.onEffectTick = function(target, effect)
 
         effect:setPower(power - decayby)
         target:delMod(xi.mod.UDMGPHYS, -decayby)
+        target:delMod(xi.mod.UDMGRANGE, -decayby)
     end
 end
 
@@ -42,6 +44,7 @@ effectObject.onEffectLose = function(target, effect)
     end
 
     target:delMod(xi.mod.UDMGPHYS, -effect:getPower())
+    target:delMod(xi.mod.UDMGRANGE, -effect:getPower())
     target:delMod(xi.mod.ENMITY, enmityBonus)
     target:delMod(xi.mod.ENMITY_LOSS_REDUCTION, effect:getSubPower())
 end
