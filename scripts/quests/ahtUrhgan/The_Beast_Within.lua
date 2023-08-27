@@ -7,11 +7,8 @@
 -----------------------------------
 require('scripts/globals/bcnm')
 require('scripts/globals/interaction/quest')
-require('scripts/globals/items')
 require('scripts/globals/quests')
 require('scripts/globals/npc_util')
-require("scripts/globals/status")
-require('scripts/globals/settings')
 -----------------------------------
 local sepulcherID = require("scripts/zones/Jade_Sepulcher/IDs")
 -----------------------------------
