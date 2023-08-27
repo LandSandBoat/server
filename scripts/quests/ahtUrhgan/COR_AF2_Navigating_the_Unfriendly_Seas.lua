@@ -3,7 +3,6 @@
 -- qm6 (H-10/Boat)  : !pos 468.767 -12.292 111.817 54
 -- Leypoint : !pos -200.027 -8.500 80.058 51
 -----------------------------------
-require('scripts/globals/items')
 require('scripts/globals/quests')
 require('scripts/globals/npc_util')
 require('scripts/globals/interaction/quest')
