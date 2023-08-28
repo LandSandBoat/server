@@ -118,9 +118,10 @@ quest.sections =
             onEventFinish =
             {
                 [725] = function(player, csid, option, npc)
-                    player:delKeyItem(xi.ki.RIVERNEWORT)
-                    npcUtil.giveItem(player, xi.items.MIRATETES_MEMOIRS)
-                    quest:setVar(player, 'Option', getConquestTally())
+                    if npcUtil.giveItem(player, xi.items.MIRATETES_MEMOIRS) then
+                        player:delKeyItem(xi.ki.RIVERNEWORT)
+                        quest:setVar(player, 'Option', getConquestTally())
+                    end
                 end,
             },
         },
