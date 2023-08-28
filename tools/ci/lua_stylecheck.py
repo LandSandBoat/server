@@ -355,6 +355,10 @@ class LuaStyleCheck:
                 # Remove in-line comments
                 code_line = re.sub("(?=--)(.*?)(?=\r\n|\n)", "", line)
 
+                # Before replacing strings, see if we're only using single quotes
+                if re.search(r"\"[^\"']*\"(?=(?:[^']*'[^']*')*[^']*$)", code_line):
+                    self.error("Strings should only be contained by single quotes")
+
                 # Replace quoted strings with a placeholder
                 code_line = re.sub('\"([^\"]*?)\"', "strVal", code_line)
                 code_line = re.sub("\'([^\"]*?)\'", "strVal", code_line)
