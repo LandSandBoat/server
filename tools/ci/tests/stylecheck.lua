@@ -191,3 +191,11 @@ xi.effect.SOMETHING  -- PASS
 
 if x == 1 then y = 2 -- FAIL
 elseif x == 2 then y = 3 -- FAIL
+
+"if x then y" -- PASS
+"( x-y == 0 )" -- PASS
+"if x then y end" -- PASS
+
+'if x then y' -- PASS
+'( x-y == 0 )' -- PASS
+'if x then y end' -- PASS
