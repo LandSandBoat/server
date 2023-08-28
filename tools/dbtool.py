@@ -1083,7 +1083,7 @@ def update_sql_from_db(table_name):
                         elif table_name == "npc_list" and i == 1:
                             text = True
                             for j in value:
-                                if j < 32 or j > 126: # ascii printable characters
+                                if j < 32 or j > 126:  # ascii printable characters
                                     text = False
                                     break
                             if text:
@@ -1116,7 +1116,18 @@ def update_sql_from_db(table_name):
                                     var_list.append(sql_variables[var])
                             updated_values.append(" | ".join(var_list))
                         else:
-                            updated_values.append(str(value))
+                            # Get float formatting from the cursor description.
+                            # https://github.com/mariadb-corporation/mariadb-connector-python/blob/67d3062ad597cca8d5419b2af2ad8b62528204e5/mariadb/mariadb_cursor.c#L777-L787
+                            if (
+                                cur.description[i][1]
+                                == mariadb.constants.FIELD_TYPE.FLOAT
+                                and cur.description[i][5] > 0
+                            ):
+                                updated_values.append(
+                                    f"{value:.{cur.description[i][5]}f}"
+                                )
+                            else:
+                                updated_values.append(str(value))
                 values = ",".join(updated_values)
                 # Replace the values in the current line with the values pulled from the database
                 updated_line = line[: insert_start.end()] + f"{values});"
@@ -1143,7 +1154,7 @@ def update_sql_from_db(table_name):
         print_red(f"Error: {e}")
 
 
-def dump_table(table_name=None,silent=False):
+def dump_table(table_name=None, silent=False):
     if not silent:
         table_name = input("Which table would you like to dump?\n> ")
     update_sql_from_db(table_name)
