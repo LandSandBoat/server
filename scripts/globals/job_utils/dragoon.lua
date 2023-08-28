@@ -719,7 +719,7 @@ xi.job_utils.dragoon.useDamageBreath = function(wyvern, target, skill, action, d
     damage = damage * resist * sdt * nukeAbsorbOrNullify
 
     if damage >= 0 then
-        damage = AbilityFinalAdjustments(damage, wyvern, skill, target, xi.attackType.BREATH, damageType, xi.mobskills.shadowBehavior.IGNORE_SHADOWS)
+        damage = xi.ability.adjustDamage(damage, wyvern, skill, target, xi.attackType.BREATH, damageType, xi.mobskills.shadowBehavior.IGNORE_SHADOWS)
         action:messageID(target:getID(), xi.msg.basic.USES_JA_TAKE_DAMAGE)
         if magicBurst > 1 then
             action:messageID(target:getID(), xi.msg.basic.JA_MAGIC_BURST) -- Magic Burst! Target takes X points of damage
