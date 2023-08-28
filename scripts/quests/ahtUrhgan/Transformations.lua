@@ -164,7 +164,10 @@ quest.sections =
                 end,
 
                 [5] = function(player, csid, option, npc)
-                    quest:complete(player)
+                    if quest:complete(player) then
+                        xi.quest.setVar(player, xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.TRANSFORMATIONS, 'Timer', VanadielUniqueDay() + 1)
+                        quest:setMustZone(player)
+                    end
                 end,
             },
         },
