@@ -30,6 +30,19 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
+-- [mobskillId] = { petFamily1, petFamily2, ... }
+local petAstralFlowAbility =
+{
+    [839] = { 36, 381 }, -- Fenrir (Howling Moon)
+    [913] = { 38, 383 }, -- Ifrit (Inferno)
+    [914] = { 45, 388 }, -- Titan (Earthen Fury)
+    [915] = { 40, 384 }, -- Leviathan (Tidal Wave)
+    [916] = { 37, 382 }, -- Garuda (Aerial Blast)
+    [917] = { 44, 387 }, -- Shiva (Diamond Dust)
+    [918] = { 43, 386 }, -- Ramuh (Judgment Bolt)
+    [919] = { 34, 379 }, -- Carbuncle (Searing Light)
+}
+
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local pet = mob:getPet()
 
@@ -42,18 +55,13 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
 
     -- Find proper pet skill
     local petFamily = pet:getFamily()
-    local skillId = 919
+    local skillId   = 919 -- Default to Searing Light if not found below
 
-    if     petFamily == 34 or petFamily == 379 then skillId = 919 -- carbuncle searing light
-    elseif petFamily == 36 or petFamily == 381 then skillId = 839 -- fenrir    howling moon
-    elseif petFamily == 37 or petFamily == 382 then skillId = 916 -- garuda    aerial blast
-    elseif petFamily == 38 or petFamily == 383 then skillId = 913 -- ifrit     inferno
-    elseif petFamily == 40 or petFamily == 384 then skillId = 915 -- leviathan tidal wave
-    elseif petFamily == 43 or petFamily == 386 then skillId = 918 -- ramuh     judgment bolt
-    elseif petFamily == 44 or petFamily == 387 then skillId = 917 -- shiva     diamond dust
-    elseif petFamily == 45 or petFamily == 388 then skillId = 914 -- titan     earthen fury
-    else
-        printf("[astral_flow_pet] received unexpected pet family %i. Defaulted skill to Searing Light.", petFamily)
+    for mobSkillId, petFamilyList in pairs(petAstralFlowAbility) do
+        if utils.contains(petFamily, petFamilyList) then
+            skillId = mobSkillId
+            break
+        end
     end
 
     pet:useMobAbility(skillId)

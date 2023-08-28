@@ -399,6 +399,10 @@ class LuaStyleCheck:
                 if contains_word('if')(code_line) or contains_word('elseif')(code_line) or in_condition:
                     full_condition += code_line
 
+                    match = re.search(r"\bthen\b\s*(.*)", code_line)
+                    if match and match.group(1):
+                        self.error("Code after a condition ends should be on its own line.")
+
                     if contains_word('then')(code_line):
                         condition_str = full_condition.replace('elseif','').replace('if','').replace('then','').strip()
                         paren_regex = regex.compile("\((([^\)\(]+)|(?R))*+\)", re.S)
@@ -465,7 +469,7 @@ elif target == 'scripts':
         total_errors += LuaStyleCheck(filename).errcount
 elif target == 'test':
     total_errors = LuaStyleCheck('tools/ci/tests/stylecheck.lua', show_errors = False).errcount
-    expected_errors = 49
+    expected_errors = 52
 else:
     total_errors = LuaStyleCheck(target).errcount
 

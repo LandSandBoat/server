@@ -75,10 +75,14 @@ entity.onEventFinish = function(player, csid, option, npc)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.TUNING_FORK_OF_FIRE)
     elseif csid == 273 then
         local item = 0
-        if option == 1 then item = xi.item.IFRITS_BLADE
-        elseif option == 2 then item = xi.item.FIRE_BELT
-        elseif option == 3 then item = xi.item.FIRE_RING
-        elseif option == 4 then item = xi.item.EGILS_TORCH
+        if option == 1 then
+            item = xi.item.IFRITS_BLADE
+        elseif option == 2 then
+            item = xi.item.FIRE_BELT
+        elseif option == 3 then
+            item = xi.item.FIRE_RING
+        elseif option == 4 then
+            item = xi.item.EGILS_TORCH
         end
 
         if player:getFreeSlotsCount() == 0 and (option ~= 5 or option ~= 6) then
