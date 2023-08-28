@@ -1091,6 +1091,7 @@ xi.items =
     SOULFLAYER_STAFF                = 2336,
     CHOCOCARD_M                     = 2339,
     SQUARE_OF_IMPERIAL_SILK_CLOTH   = 2340,
+    HYDROGAUGE                      = 2341,
     CHOCOCARD_F                     = 2342,
     LA_THEINE_MILLET                = 2343,
     VCS_HONEYMOON_TICKET            = 2344,
