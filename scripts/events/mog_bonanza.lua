@@ -363,7 +363,12 @@ xi.events.mogBonanza.onBonanzaMoogleEventFinish = function(player, csid, option,
                 local selectedNumber = player:getLocalVar('selectedNumber')
                 local ID             = zones[zoneId]
 
-                player:delGil(localSettings.PEARL_COST)
+                if player:isCrystalWarrior() then
+                    player:delGil(30000)
+                else
+                    player:delGil(localSettings.PEARL_COST)
+                end
+
                 giveBonanzaPearl(player, selectedNumber)
                 player:messageSpecial(ID.text.ITEM_OBTAINED, xi.item.BONANZA_PEARL)
             end
