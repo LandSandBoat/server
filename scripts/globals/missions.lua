@@ -678,28 +678,30 @@ local function rankPointMath(rank)
     return 0.372 * rank^2 - 1.62 * rank + 6.2
 end
 
+-- Number of crystal trades required for specific missions in each nation.
+-- TODO: This needs to be audited for modern retail.
+local crystalRequirements =
+{
+    [ 3] = 9,
+    [ 4] = 17,
+    [ 5] = 42,
+    [10] = 12,  -- 1 stack needed to unlock
+    [11] = 30,  -- 2.5 stacks needed to unlock (2 stacks of crystals + 3.1 rank points corresponding to half a stack)
+    [12] = 48,  -- 4 stacks to unlock (3.5 stacks + 3.1 rank points corresponding to half a stack)
+    [13] = 36,
+    [15] = 44,  -- Mission unlocks at 50% rank bar ~= 44 crystals using the present formula.
+    [16] = 36,
+    [17] = 93,  -- 3 additional stacks to unlock + 3 original stacks + 21 from mission 6.1
+    [18] = 45,  -- 45 needed, from http://wiki.ffxiclopedia.org/wiki/The_Final_Image
+    [19] = 119, -- 4 additional stacks needed, plus mission reward of 26
+    [20] = 57,
+    [21] = 148, -- 5 additional stacks needed, plus mission reward of 31
+    [22] = 96,  -- 8 stacks needed (higher value chosen so final rank bar requirement is closer to 90%)
+    [23] = 228, -- Additional 8 stacks needed, plus mission reward of 36 (87% rank bar)
+}
+
 xi.mission.getMissionRankPoints = function(player, missionID)
-    local crystals = 0
-
-    if     missionID ==  3 then crystals = 9
-    elseif missionID ==  4 then crystals = 17
-    elseif missionID ==  5 then crystals = 42
-    elseif missionID == 10 then crystals = 12                    -- 1 stack needed to unlock
-    elseif missionID == 11 then crystals = 30                    -- 2.5 stacks needed to unlock (2 stacks of crystals + 3.1 rank points corresponding to half a stack)
-    elseif missionID == 12 then crystals = 48                    -- 4 stacks to unlock (3.5 stacks + 3.1 rank points corresponding to half a stack)
-    elseif missionID == 13 then crystals = 36                    -- 3 stacks to unlock
-    -- 5.1 starts directly after Magicite, no crystals needed
-    elseif missionID == 15 then crystals = 44                    -- Mission unlocks at 50% rank bar ~= 44 crystals using the present formula.
-    elseif missionID == 16 then crystals = 36                    -- 3 stacks to unlock
-    elseif missionID == 17 then crystals = 93                    -- 3 additional stacks to unlock + 3 original stacks + 21 from mission 6.1
-    elseif missionID == 18 then crystals = 45                    -- 45 needed, from http://wiki.ffxiclopedia.org/wiki/The_Final_Image
-    elseif missionID == 19 then crystals = 119                    -- 4 additional stacks needed, plus mission reward of 26
-    elseif missionID == 20 then crystals = 57                    -- 4 3/4 stacks needed
-    elseif missionID == 21 then crystals = 148                    -- 5 additional stacks needed, plus mission reward of 31,
-    elseif missionID == 22 then crystals = 96                    -- 8 stacks needed (higher value chosen so final rank bar requirement is closer to 90%)
-    elseif missionID == 23 then crystals = 228                    -- Additional 8 stacks needed, plus mission reward of 36 (87% rank bar)
-    end
-
+    local crystals     = crystalRequirements[missionID] or 0
     local pointsNeeded = 1024 * (crystals - 0.25) / (3 * rankPointMath(player:getRank(player:getNation())))
 
     if player:getRankPoints() >= pointsNeeded then

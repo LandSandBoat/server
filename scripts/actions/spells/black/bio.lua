@@ -43,10 +43,11 @@ spellObject.onSpellCast = function(caster, target, spell)
 
     -- Calculate DoT effect
     -- http://wiki.ffo.jp/html/1954.html
-    local dotdmg = 0
-    if     skillLvl > 80 then dotdmg = 3
-    elseif skillLvl > 40 then dotdmg = 2
-    else                      dotdmg = 1
+    local dotdmg = 1
+    if skillLvl > 80 then
+        dotdmg = 3
+    elseif skillLvl > 40 then
+        dotdmg = 2
     end
 
     -- Do it!

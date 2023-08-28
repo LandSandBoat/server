@@ -100,7 +100,7 @@ end
 local function badFunction3() return 1 end -- FAIL (x2)
 
 -- check_no_single_line_conditions()
-if a == b then a = 5 end -- FAIL
+if a == b then a = 5 end -- FAIL (x2)
 
 -- check_no_function_decl_padding()
 local function test (var1)
@@ -188,3 +188,6 @@ xi.item.SOMETHING  -- PASS
 
 xi.effects.SOMETHING -- FAIL
 xi.effect.SOMETHING  -- PASS
+
+if x == 1 then y = 2 -- FAIL
+elseif x == 2 then y = 3 -- FAIL
