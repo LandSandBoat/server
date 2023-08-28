@@ -264,7 +264,7 @@ INSERT INTO `item_latents` VALUES (12742,369,-4,56,0);   -- Rune Bangles -4MP/ti
 INSERT INTO `item_latents` VALUES (12751,71,4,13,6);
 
 -- -------------------------------------------------------
--- Brisingamen / Brisingamen +1
+-- Brisingamen
 -- -------------------------------------------------------
 INSERT INTO `item_latents` VALUES (13097,2,10,26,0);     -- Daytime: HP +10
 INSERT INTO `item_latents` VALUES (13097,5,10,26,1);     -- Nighttime: MP +10
@@ -310,16 +310,18 @@ INSERT INTO `item_latents` VALUES (13143,368,25,13,193);
 -- -------------------------------------------------------
 INSERT INTO `item_latents` VALUES (13145,28,8,4,51);     -- "Magic Atk. Bonus" while MP <51%
 
--- Brisingamen+1 stats need to be found on retail so they can be corrected
-INSERT INTO `item_latents` VALUES (13162,2,10,26,0);     -- Daytime: HP +10 (needs HQ stats)
-INSERT INTO `item_latents` VALUES (13162,5,10,26,1);     -- Nighttime: MP +10 (needs HQ stats)
-INSERT INTO `item_latents` VALUES (13162,8,5,28,0);      -- Firesday: STR +5 (needs HQ stats)
-INSERT INTO `item_latents` VALUES (13162,9,5,35,0);      -- Lightningsday: DEX +5 (needs HQ stats)
-INSERT INTO `item_latents` VALUES (13162,10,5,29,0);     -- Earthsday: VIT +5 (needs HQ stats)
-INSERT INTO `item_latents` VALUES (13162,11,5,31,0);     -- Windsday: AGI +5 (needs HQ stats)
-INSERT INTO `item_latents` VALUES (13162,12,5,34,0);     -- Iceday: INT +5 (needs HQ stats)
-INSERT INTO `item_latents` VALUES (13162,13,5,30,0);     -- Watersday: MND +5 (needs HQ stats)
-INSERT INTO `item_latents` VALUES (13162,14,5,36,0);     -- Lightsday: CHR +5 (needs HQ stats)
+----------------------------------------------------------
+-- Brisingamen+1
+----------------------------------------------------------
+INSERT INTO `item_latents` VALUES (13162,2,12,26,0);     -- Daytime: HP +12
+INSERT INTO `item_latents` VALUES (13162,5,12,26,1);     -- Nighttime: MP +12
+INSERT INTO `item_latents` VALUES (13162,8,7,28,0);      -- Firesday: STR +7
+INSERT INTO `item_latents` VALUES (13162,9,7,35,0);      -- Lightningsday: DEX +7
+INSERT INTO `item_latents` VALUES (13162,10,7,29,0);     -- Earthsday: VIT +7
+INSERT INTO `item_latents` VALUES (13162,11,7,31,0);     -- Windsday: AGI +7
+INSERT INTO `item_latents` VALUES (13162,12,7,34,0);     -- Iceday: INT +7
+INSERT INTO `item_latents` VALUES (13162,13,7,30,0);     -- Watersday: MND +7
+INSERT INTO `item_latents` VALUES (13162,14,7,36,0);     -- Lightsday: CHR +7
 
 -- -------------------------------------------------------
 -- Auditory Torque
