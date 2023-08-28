@@ -154,7 +154,7 @@ bool CPathFind::PathInRange(const position_t& point, float range, uint8 pathFlag
 
     bool result = PathTo(point, pathFlags, false);
 
-        if (m_POwner->objtype == TYPE_MOB && !m_POwner->loc.zone->m_updatedNavmesh) // Target is too high.
+    if (m_POwner->objtype == TYPE_MOB && !m_POwner->loc.zone->m_updatedNavmesh) // Target is too high.
     {
         auto PMob = static_cast<CMobEntity*>(m_POwner);
 
