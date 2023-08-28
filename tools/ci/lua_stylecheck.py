@@ -142,11 +142,7 @@ class LuaStyleCheck:
         """
         # ,[^ \n] : Any comma that does not have space or newline following
 
-        # Replace quoted strings with a placeholder
-        removed_string_line = re.sub('\"([^\"]*?)\"', "strVal", line)
-        removed_string_line = re.sub("\'([^\"]*?)\'", "strVal", removed_string_line)
-
-        for _ in re.finditer(",[^ \n]", removed_string_line):
+        for _ in re.finditer(",[^ \n]", line):
             self.error("Multiple parameters used without an appropriate following space or newline")
 
     def check_semicolon(self, line):
@@ -358,6 +354,10 @@ class LuaStyleCheck:
 
                 # Remove in-line comments
                 code_line = re.sub("(?=--)(.*?)(?=\r\n|\n)", "", line)
+
+                # Replace quoted strings with a placeholder
+                code_line = re.sub('\"([^\"]*?)\"', "strVal", code_line)
+                code_line = re.sub("\'([^\"]*?)\'", "strVal", code_line)
 
                 # Checks that apply to all lines
                 self.check_table_formatting(code_line)
