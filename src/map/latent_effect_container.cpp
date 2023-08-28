@@ -1022,29 +1022,30 @@ bool CLatentEffectContainer::ProcessLatentEffect(CLatentEffect& latentEffect)
             break;
         case LATENT::NATION_CONTROL:
         {
-
-            // player is logging in/zoning, for some reason this latent does not work with
-            // destination zone, maybe client related?
-            if (m_POwner->loc.zone == nullptr)
+           // player is logging in/zoning
+            // checking the state of the user's current zone and
+            // the destination zone in tandem seems to work.
+            if (m_POwner->loc.zone == nullptr && static_cast<uint16_t>(m_POwner->loc.destination) == 0)
             {
                 return false;
             }
-
-            auto region      = zoneutils::GetCurrentRegion(playerZoneID);
+            // Grab the user's destination if they're zoning.
+            // Otherwise, grab their current zone.
+            auto region      = m_POwner->loc.zone == nullptr ? zoneutils::GetCurrentRegion(m_POwner->loc.destination) : zoneutils::GetCurrentRegion(playerZoneID);
             auto hasSignet   = m_POwner->StatusEffectContainer->HasStatusEffect(EFFECT_SIGNET);
             auto hasSanction = m_POwner->StatusEffectContainer->HasStatusEffect(EFFECT_SANCTION);
             auto hasSigil    = m_POwner->StatusEffectContainer->HasStatusEffect(EFFECT_SIGIL);
-
+            auto regionAlwaysOutOfControl = zoneutils::IsAlwaysOutOfNationControl(region);
             switch (latentEffect.GetConditionsValue())
             {
                 case 0:
                     // under own nation's control
-                    expression = region < REGION_TYPE::WEST_AHT_URHGAN && conquest::GetRegionOwner(region) == m_POwner->profile.nation &&
+                    expression = region < REGION_TYPE::WEST_AHT_URHGAN && (!regionAlwaysOutOfControl || conquest::GetRegionOwner(region) == m_POwner->profile.nation) &&
                                  (hasSignet || hasSanction || hasSigil);
                     break;
                 case 1:
                     // outside of own nation's control
-                    expression = region < REGION_TYPE::WEST_AHT_URHGAN && m_POwner->profile.nation != conquest::GetRegionOwner(region) &&
+                    expression = region < REGION_TYPE::WEST_AHT_URHGAN && (regionAlwaysOutOfControl || m_POwner->profile.nation != conquest::GetRegionOwner(region)) &&
                                  (hasSignet || hasSanction || hasSigil);
                     break;
             }
@@ -1053,25 +1054,27 @@ bool CLatentEffectContainer::ProcessLatentEffect(CLatentEffect& latentEffect)
         case LATENT::ZONE_HOME_NATION:
         {
 
-            // player is logging in/zoning, for some reason this latent does not work with
-            // destination zone, maybe client related?
-            if (m_POwner->loc.zone == nullptr)
+            // player is logging in/zoning
+            // checking the state of the user's current zone and
+            // the destination zone in tandem seems to work.
+            if (m_POwner->loc.zone == nullptr && static_cast<uint16_t>(m_POwner->loc.destination) == 0)
             {
                 return false;
             }
 
-            auto  region = static_cast<REGION_TYPE>(latentEffect.GetConditionsValue());
+            auto  nationRegion = static_cast<REGION_TYPE>(latentEffect.GetConditionsValue());
+            auto  region = m_POwner->loc.zone == nullptr ? zoneutils::GetCurrentRegion(m_POwner->loc.destination) : zoneutils::GetCurrentRegion(playerZoneID);
 
-            switch (region)
+            switch (nationRegion)
             {
                 case REGION_TYPE::SANDORIA:
-                    expression = m_POwner->profile.nation == 0 && zoneutils::GetCurrentRegion(playerZoneID) == region;
+                    expression = m_POwner->profile.nation == 0 && region == nationRegion;
                     break;
                 case REGION_TYPE::BASTOK:
-                    expression = m_POwner->profile.nation == 1 && zoneutils::GetCurrentRegion(playerZoneID) == region;
+                    expression = m_POwner->profile.nation == 1 && region == nationRegion;
                     break;
                 case REGION_TYPE::WINDURST:
-                    expression = m_POwner->profile.nation == 2 && zoneutils::GetCurrentRegion(playerZoneID) == region;
+                    expression = m_POwner->profile.nation == 2 && region == nationRegion;
                     break;
                 default:
                     break;
