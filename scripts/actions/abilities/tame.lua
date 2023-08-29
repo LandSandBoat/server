@@ -56,7 +56,7 @@ abilityObject.onUseAbility = function(player, target, ability)
             ability:setMsg(138) -- The x seems friendlier
             target:disengage()
         else
-            player:setLocalVar("Tamed_Mob", target:getID())
+            player:setLocalVar('Tamed_Mob', target:getID())
             ability:setMsg(138) -- The x seems friendlier
         end
     end

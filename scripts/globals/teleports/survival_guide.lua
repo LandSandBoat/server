@@ -1,10 +1,10 @@
 -----------------------------------
 -- Survival guides global file
 -----------------------------------
-require("scripts/globals/teleports")
-require("scripts/globals/utils")
+require('scripts/globals/teleports')
+require('scripts/globals/utils')
 -----------------------------------
-local survival = require("scripts/globals/teleports/survival_guide_map")
+local survival = require('scripts/globals/teleports/survival_guide_map')
 -----------------------------------
 xi = xi or {}
 xi.survivalGuide = xi.survivalGuide or {}
@@ -51,7 +51,7 @@ xi.survivalGuide.onTrigger = function(player)
         local foundRegisteredGuide = checkForRegisteredSurvivalGuide(player, guide)
 
         if foundRegisteredGuide then
-            local param = bit.bor(tableIndex, bit.lshift(player:getCurrency("valor_point"), 16))
+            local param = bit.bor(tableIndex, bit.lshift(player:getCurrency('valor_point'), 16))
 
             -- Get the teleport menu option.
             -- Menu options can be organized by Region or Content.

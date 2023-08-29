@@ -77,7 +77,7 @@ xi.job_utils.paladin.useCover = function(player, target, ability)
     local duration     = baseDuration + bonusTime + player:getMerit(xi.merit.COVER_EFFECT_LENGTH) + player:getMod(xi.mod.COVER_DURATION) + jpValue
 
     player:addStatusEffect(xi.effect.COVER, player:getMod(xi.mod.COVER_TO_MP), 0, duration)
-    player:setLocalVar("COVER_ABILITY_TARGET", target:getID())
+    player:setLocalVar('COVER_ABILITY_TARGET', target:getID())
     ability:setMsg(xi.msg.basic.COVER_SUCCESS)
 end
 

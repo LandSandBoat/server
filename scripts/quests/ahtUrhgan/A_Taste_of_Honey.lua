@@ -99,7 +99,7 @@ quest.sections =
                 end,
 
                 onTrigger = function(player, npc)
-                    player:setLocalVar("recipe", 57)
+                    player:setLocalVar('recipe', 57)
                     return quest:event(57)
                 end,
             },
@@ -107,17 +107,17 @@ quest.sections =
             onEventUpdate =
             {
                 [57] = function(player, csid, option, npc)
-                    if player:getLocalVar("recipe") == 57 then
-                        player:setLocalVar("recipe", 1)
+                    if player:getLocalVar('recipe') == 57 then
+                        player:setLocalVar('recipe', 1)
                         player:updateEvent(5579, 1, 255, 0, 67108863, 5976652, 4095, 0)
-                    elseif player:getLocalVar("recipe") == 1 then
-                        player:setLocalVar("recipe", 2)
+                    elseif player:getLocalVar('recipe') == 1 then
+                        player:setLocalVar('recipe', 2)
                         player:updateEvent(4096, 615, 936, 1523, 67108863, 5976652, 4, 0)
-                    elseif player:getLocalVar("recipe") == 2 then
-                        player:setLocalVar("recipe", 3)
+                    elseif player:getLocalVar('recipe') == 2 then
+                        player:setLocalVar('recipe', 3)
                         player:updateEvent(2214, 2237, 4509, 5568)
-                    elseif player:getLocalVar("recipe") == 3 then
-                        player:setLocalVar("recipe", 0)
+                    elseif player:getLocalVar('recipe') == 3 then
+                        player:setLocalVar('recipe', 0)
                         player:updateEvent(5575)
                     end
                 end,

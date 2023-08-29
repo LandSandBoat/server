@@ -12,7 +12,7 @@ zoneObject.onChocoboDig = function(player, precheck)
 end
 
 zoneObject.onInitialize = function(zone)
-    GetMobByID(ID.mob.NOBLE_MOLD):setLocalVar("pop", os.time() + math.random(43200, 57600)) -- 12 to 16 hr
+    GetMobByID(ID.mob.NOBLE_MOLD):setLocalVar('pop', os.time() + math.random(43200, 57600)) -- 12 to 16 hr
 
     xi.conq.setRegionalConquestOverseers(zone:getRegionID())
 end

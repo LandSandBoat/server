@@ -10,8 +10,8 @@ local prizes =
 {
     [1] =
     {
-        ["price"] = 10,
-        ["items"] =
+        ['price'] = 10,
+        ['items'] =
         {
             1126, -- Beastmen's Seal
             1127, -- Kindred's Seal
@@ -36,8 +36,8 @@ local prizes =
 
     [5] =
     {
-        ["price"] = 100,
-        ["items"] =
+        ['price'] = 100,
+        ['items'] =
         {
             8734,  -- Mog Kupon I-S1
             8966,  -- Eudaemon Blade
@@ -64,8 +64,8 @@ local prizes =
 
     [9] =
     {
-        ["price"] = 100,
-        ["items"] =
+        ['price'] = 100,
+        ['items'] =
         {
             -- 10136, -- Cipher: Uka
             -- 10141, -- Cipher: Kuyin
@@ -87,8 +87,8 @@ local prizes =
 
     [13] =
     {
-        ["price"] = 300,
-        ["items"] =
+        ['price'] = 300,
+        ['items'] =
         {
             -- 10187, -- Cipher: Shantotto II
             10069, -- ♪Goobbue
@@ -116,8 +116,8 @@ local prizes =
 
     [17] =
     {
-        ["price"] = 500,
-        ["items"] =
+        ['price'] = 500,
+        ['items'] =
         {
             -- TODO: Special month-to-month things
             10073, -- ♪Dhalmel
@@ -127,8 +127,8 @@ local prizes =
 
     [21] =
     {
-        ["price"] = 750,
-        ["items"] =
+        ['price'] = 750,
+        ['items'] =
         {
             3885, -- Melodious Plans
             3886, -- Timbre Case Kit
@@ -152,8 +152,8 @@ local prizes =
 
     [25] =
     {
-        ["price"] = 1000,
-        ["items"] =
+        ['price'] = 1000,
+        ['items'] =
         {
             -- 6499,  -- Patio Design Plans
             26165, -- Facility Ring
@@ -166,8 +166,8 @@ local prizes =
 
     [29] =
     {
-        ["price"] = 1500,
-        ["items"] =
+        ['price'] = 1500,
+        ['items'] =
         {
             3340, -- Sweet Tea
             3342, -- Savory Shank

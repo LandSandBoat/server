@@ -64,16 +64,16 @@ local requiredSkillForRank =
 -- Table for Test Items
 local testItemsByNPC =
 {
-    ["Abd-al-Raziq"]   = {   937,  4157,  4163,   947, 16543,  4116, 16479,  4120, 16609, 10792 },
-    ["Peshi_Yohnts"]   = { 13442, 13441, 13323, 13459, 13091, 17299, 16420, 12508, 13987, 11058 },
-    ["Ponono"]         = { 13583, 13584, 13204, 13075, 12723, 13586, 13752, 12612, 14253, 11000 },
-    ["Piketo-Puketo"]  = {  4355,  4416,  4489,  4381,  4413,  4558,  4546,  4440,  4561,  5930 },
-    ["Thubu_Parohren"] = {  4401,  4379,  4469,  4480,  4462,  4479,  4471,  4478,  4474,  5817 },
-    ["Reinberta"]      = { 12496, 12497, 12495, 13082, 13446, 13084, 12545, 13125, 16515, 11060 },
-    ["Faulpie"]        = { 13594, 16386, 13588, 13195, 12571, 12572, 12980, 12702, 12447, 10577 },
-    ["Mevreauche"]     = { 16530, 12299, 16512, 16650, 16651, 16559, 12427, 16577, 12428, 19788 },
-    ["Ghemp"]          = { 16530, 12299, 16512, 16650, 16651, 16559, 12427, 16577, 12428, 19788 },
-    ["Cheupirudaux"]   = {    22,    23, 17354, 17348, 17053, 17156, 17054,    56, 17101, 18884 },
+    ['Abd-al-Raziq']   = {   937,  4157,  4163,   947, 16543,  4116, 16479,  4120, 16609, 10792 },
+    ['Peshi_Yohnts']   = { 13442, 13441, 13323, 13459, 13091, 17299, 16420, 12508, 13987, 11058 },
+    ['Ponono']         = { 13583, 13584, 13204, 13075, 12723, 13586, 13752, 12612, 14253, 11000 },
+    ['Piketo-Puketo']  = {  4355,  4416,  4489,  4381,  4413,  4558,  4546,  4440,  4561,  5930 },
+    ['Thubu_Parohren'] = {  4401,  4379,  4469,  4480,  4462,  4479,  4471,  4478,  4474,  5817 },
+    ['Reinberta']      = { 12496, 12497, 12495, 13082, 13446, 13084, 12545, 13125, 16515, 11060 },
+    ['Faulpie']        = { 13594, 16386, 13588, 13195, 12571, 12572, 12980, 12702, 12447, 10577 },
+    ['Mevreauche']     = { 16530, 12299, 16512, 16650, 16651, 16559, 12427, 16577, 12428, 19788 },
+    ['Ghemp']          = { 16530, 12299, 16512, 16650, 16651, 16559, 12427, 16577, 12428, 19788 },
+    ['Cheupirudaux']   = {    22,    23, 17354, 17348, 17053, 17156, 17054,    56, 17101, 18884 },
 }
 
 local hqCrystals =
@@ -91,16 +91,16 @@ local hqCrystals =
 
 local guildTable =
 {
-    -- [guildId] = { skill used,   "currency used"      },
-    [0] = { xi.skill.FISHING,      "guild_fishing"      },
-    [1] = { xi.skill.WOODWORKING,  "guild_woodworking"  },
-    [2] = { xi.skill.SMITHING,     "guild_smithing"     },
-    [3] = { xi.skill.GOLDSMITHING, "guild_goldsmithing" },
-    [4] = { xi.skill.CLOTHCRAFT,   "guild_weaving"      },
-    [5] = { xi.skill.LEATHERCRAFT, "guild_leathercraft" },
-    [6] = { xi.skill.BONECRAFT,    "guild_bonecraft"    },
-    [7] = { xi.skill.ALCHEMY,      "guild_alchemy"      },
-    [8] = { xi.skill.COOKING,      "guild_cooking"      },
+    -- [guildId] = { skill used,   'currency used'      },
+    [0] = { xi.skill.FISHING,      'guild_fishing'      },
+    [1] = { xi.skill.WOODWORKING,  'guild_woodworking'  },
+    [2] = { xi.skill.SMITHING,     'guild_smithing'     },
+    [3] = { xi.skill.GOLDSMITHING, 'guild_goldsmithing' },
+    [4] = { xi.skill.CLOTHCRAFT,   'guild_weaving'      },
+    [5] = { xi.skill.LEATHERCRAFT, 'guild_leathercraft' },
+    [6] = { xi.skill.BONECRAFT,    'guild_bonecraft'    },
+    [7] = { xi.skill.ALCHEMY,      'guild_alchemy'      },
+    [8] = { xi.skill.COOKING,      'guild_cooking'      },
 }
 
 local guildKeyItemTable =
@@ -283,13 +283,13 @@ local guildItemTable =
 }
 
 xi.crafting.hasJoinedGuild = function(player, guildId)
-    local joinedGuildMask = player:getCharVar("Guild_Member")
+    local joinedGuildMask = player:getCharVar('Guild_Member')
 
     return utils.mask.getBit(joinedGuildMask, guildId)
 end
 
 xi.crafting.signupGuild = function(player, guildId)
-    player:incrementCharVar("Guild_Member", bit.lshift(1, guildId))
+    player:incrementCharVar('Guild_Member', bit.lshift(1, guildId))
 end
 
 -----------------------------------
@@ -388,7 +388,7 @@ xi.crafting.unionRepresentativeEventUpdateRenounce = function(player, craftID)
 end
 
 xi.crafting.unionRepresentativeTriggerRenounceCheck = function(player, eventId, realSkill, rankCap, param3)
-    if player:getLocalVar("skipRenounceDialog") == 0 then
+    if player:getLocalVar('skipRenounceDialog') == 0 then
         local count   = 0
         local bitmask = 0
 
@@ -404,7 +404,7 @@ xi.crafting.unionRepresentativeTriggerRenounceCheck = function(player, eventId, 
         end
 
         if count >= 2 then
-            player:setLocalVar("skipRenounceDialog", 1)
+            player:setLocalVar('skipRenounceDialog', 1)
 
             -- TODO: Param 3 is taken directly from captures, but now we know this is incorrect.
             -- TODO: bitmask needs checking.

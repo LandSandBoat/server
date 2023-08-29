@@ -6,12 +6,12 @@
 cmdprops =
 {
     permission = 4,
-    parameters = "i"
+    parameters = 'i'
 }
 
 function error(player)
-    player:PrintToPlayer("!time <offset>")
-    player:PrintToPlayer("Vana'diel: "..VanadielYear().."/"..VanadielMonth().."/"..VanadielDayOfTheMonth()..", "..VanadielHour()..":"..string.format("%02d", VanadielMinute()))
+    player:PrintToPlayer('!time <offset>')
+    player:PrintToPlayer(string.format('Vana\'diel: %d/%d/%d/%d/%02d', VanadielYear(), VanadielMonth(), VanadielDayOfTheMonth(), VanadielHour(), VanadielMinute()))
 end
 
 function onTrigger(player, offset)
@@ -27,7 +27,7 @@ function onTrigger(player, offset)
         error(player)
         return
     else
-        player:PrintToPlayer("Time changed!")
-        player:PrintToPlayer("Vana'diel: "..VanadielYear().."/"..VanadielMonth().."/"..VanadielDayOfTheMonth()..", "..VanadielHour()..":"..string.format("%02d", VanadielMinute()))
+        player:PrintToPlayer('Time changed!')
+        player:PrintToPlayer(string.format('Vana\'diel: %d/%d/%d/%d/%02d', VanadielYear(), VanadielMonth(), VanadielDayOfTheMonth(), VanadielHour(), VanadielMinute()))
     end
 end

@@ -58,7 +58,7 @@ quest.sections =
                     if quest:complete(player) then
                         player:confirmTrade()
                         player:messageSpecial(ID.text.INCREASED_STANDING)
-                        player:addCurrency("imperial_standing", 500)
+                        player:addCurrency('imperial_standing', 500)
                     end
                 end,
             },

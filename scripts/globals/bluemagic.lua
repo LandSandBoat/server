@@ -2,8 +2,8 @@
 -- Blue Magic utilities
 -- Used for Blue Magic spells.
 -----------------------------------
-require("scripts/globals/magic")
-require("scripts/globals/mobskills")
+require('scripts/globals/magic')
+require('scripts/globals/mobskills')
 -----------------------------------
 xi = xi or {}
 xi.spells = xi.spells or {}
@@ -179,7 +179,7 @@ xi.spells.blue.usePhysicalSpell = function(caster, target, spell, params)
         bonusWSC = 2
     end
 
-    -- Chain Affinity -- TODO: add "Damage/Accuracy/Critical Hit Chance varies with TP"
+    -- Chain Affinity -- TODO: add 'Damage/Accuracy/Critical Hit Chance varies with TP'
     if caster:getStatusEffect(xi.effect.CHAIN_AFFINITY) then
         local tp = caster:getTP() + caster:getMerit(xi.merit.ENCHAINMENT) -- Total TP available
         tp = utils.clamp(tp, 0, 3000)

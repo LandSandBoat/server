@@ -16,7 +16,7 @@ entity.onTrade = function(player, npc, trade)
         npcUtil.giveItem(player, xi.item.CLAY_TABLET)
     then
         player:confirmTrade()
-        player:setCharVar("anExplorer-CurrentTablet", 0x08000)
+        player:setCharVar('anExplorer-CurrentTablet', 0x08000)
     end
 end
 

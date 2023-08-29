@@ -2,7 +2,7 @@
 -- Area: Quicksand Caves
 --   NM: Antican Praefectus
 -----------------------------------
-mixins = { require("scripts/mixins/job_special") }
+mixins = { require('scripts/mixins/job_special') }
 -----------------------------------
 local entity = {}
 

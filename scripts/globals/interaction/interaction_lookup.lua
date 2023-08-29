@@ -12,7 +12,7 @@ require('scripts/globals/interaction/interaction_util')
 --    For zone-wide handlers like 'onEventFinish', the third level keys are the ID of the thing that is being finished, in the case of an event it is the event ID.
 --
 -- Finally the actual handlers will be found in a list as the values of the third level tables.
--- These handlers have an associated "check" function, that is run to check if the player is elligible to have the corresponding handler functon performed or not.
+-- These handlers have an associated 'check' function, that is run to check if the player is elligible to have the corresponding handler functon performed or not.
 --[[ Illustration of the structure of the data:
 {
     -- First level (zone ID)
@@ -179,12 +179,12 @@ end
 function InteractionLookup:addContainer(container, validZoneTable)
     if self.containers[container.id] then
         -- Container already added, need to remove it first to re-add.
-        printf("Can't add a container that is already a loaded. Need to remove it first: " .. container.id)
+        printf('Can\'t add a container that is already a loaded. Need to remove it first: ' .. container.id)
         return
     end
 
     if container.id == nil then
-        printf("The following container doesn't have an id, there is something wrong with the file: " .. container.filename)
+        printf('The following container doesn\'t have an id, there is something wrong with the file: ' .. container.filename)
         return
     end
 
@@ -194,7 +194,7 @@ function InteractionLookup:addContainer(container, validZoneTable)
     for _, section in ipairs(container.sections) do
         local checkFunc = section.check
         for zoneId, secondLevel in pairs(section) do
-            if zoneId ~= "check" and (validZoneTable == nil or validZoneTable[zoneId]) then
+            if zoneId ~= 'check' and (validZoneTable == nil or validZoneTable[zoneId]) then
                 self.data[zoneId] = self.data[zoneId] or {}
                 addHandlers(secondLevel, self.data[zoneId], checkFunc, container)
             end
@@ -206,7 +206,7 @@ end
 function InteractionLookup:removeContainer(container)
     for _, section in ipairs(container.sections) do
         for zoneid, secondLevel in pairs(section) do
-            if zoneid ~= "check" and self.data[zoneid] then
+            if zoneid ~= 'check' and self.data[zoneid] then
                 removeHandlersMatching(secondLevel, self.data[zoneid], function(entry)
                     return entry.container == container
                 end)
@@ -231,7 +231,7 @@ local function runHandler(handler, args)
     if ok then
         return res
     else
-        printf("Error running handler: %s", res)
+        printf('Error running handler: %s', res)
     end
 end
 
@@ -273,7 +273,7 @@ local function runHandlersInData(data, player, secondLevelKey, thirdLevelKey, ar
         end
 
         if not ok then
-            printf("Error running check: %s", res)
+            printf('Error running check: %s', res)
         elseif res then
             local resultAction = runHandler(entry.handler, args)
             if resultAction ~= nil then
@@ -387,7 +387,7 @@ local function onHandler(data, secondLevelKey, thirdLevelKey, args, fallbackHand
     end
 
     local actions, priority = getHighestPriorityActions(data, player, secondLevelKey, thirdLevelKey, args)
-    local fallbackVar = actionUtil.getActionVarName(secondLevelKey, thirdLevelKey, "UseFallback")
+    local fallbackVar = actionUtil.getActionVarName(secondLevelKey, thirdLevelKey, 'UseFallback')
 
     -- Most handlers should run both the handler system and fallback if available,
     -- except those that should only perform one action at a time, like onTrigger and onTrade

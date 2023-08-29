@@ -1,11 +1,11 @@
 -----------------------------------
 -- Abyssea Global
 -----------------------------------
-require("scripts/globals/npc_util")
-require("scripts/globals/quests")
-require("scripts/globals/utils")
-require("scripts/globals/weaponskillids")
-require("scripts/globals/extravaganza")
+require('scripts/globals/npc_util')
+require('scripts/globals/quests')
+require('scripts/globals/utils')
+require('scripts/globals/weaponskillids')
+require('scripts/globals/extravaganza')
 -----------------------------------
 xi = xi or {}
 xi.abyssea = xi.abyssea or {}
@@ -576,7 +576,7 @@ local popEvents =
 xi.abyssea.visionsCruorProspectorOnTrigger = function(player, npc)
     local active = xi.extravaganza.campaignActive()
     local cipher = 0
-    local cruor = player:getCurrency("cruor")
+    local cruor = player:getCurrency('cruor')
     local demilune = xi.abyssea.getDemiluneAbyssite(player)
 
     if
@@ -592,7 +592,7 @@ end
 xi.abyssea.visionsCruorProspectorOnEventFinish = function(player, csid, option, prospectorItems)
     local itemCategory = bit.band(option, 0x07)
     local itemSelected = bit.band(bit.rshift(option, 16), 0x1F)
-    local cruorTotal = player:getCurrency("cruor")
+    local cruorTotal = player:getCurrency('cruor')
 
     if itemCategory == itemType.ITEM then
         local itemData = prospectorItems[itemCategory][itemSelected]
@@ -603,7 +603,7 @@ xi.abyssea.visionsCruorProspectorOnEventFinish = function(player, csid, option, 
             itemCost <= cruorTotal and
             npcUtil.giveItem(player, { { itemData[1], itemQty } })
         then
-            player:delCurrency("cruor", itemCost)
+            player:delCurrency('cruor', itemCost)
         end
     elseif itemCategory == itemType.TEMP then
         local itemData = prospectorItems[itemCategory][itemSelected]
@@ -613,7 +613,7 @@ xi.abyssea.visionsCruorProspectorOnEventFinish = function(player, csid, option, 
             itemCost <= cruorTotal and
             npcUtil.giveTempItem(player, { { itemData[1], 1 } })
         then
-            player:delCurrency("cruor", itemCost)
+            player:delCurrency('cruor', itemCost)
         end
     elseif itemCategory == itemType.KEYITEM then
         local itemData = prospectorItems[itemCategory][itemSelected]
@@ -622,7 +622,7 @@ xi.abyssea.visionsCruorProspectorOnEventFinish = function(player, csid, option, 
             itemData[2] <= cruorTotal and
             npcUtil.giveKeyItem(player, itemData[1])
         then
-            player:delCurrency("cruor", itemData[2])
+            player:delCurrency('cruor', itemData[2])
         end
     elseif itemCategory == itemType.ENHANCEMENT then
         local enhanceData = prospectorItems[itemCategory][itemSelected]
@@ -638,7 +638,7 @@ xi.abyssea.visionsCruorProspectorOnEventFinish = function(player, csid, option, 
                 end
             end
 
-            player:delCurrency("cruor", enhanceData[2])
+            player:delCurrency('cruor', enhanceData[2])
         end
     end
 end
@@ -684,7 +684,7 @@ xi.abyssea.spendTravStones = function(player, spentstones)
     end
 end
 
--- returns total "Abyssite of <thing>"
+-- returns total 'Abyssite of <thing>'
 xi.abyssea.getAbyssiteTotal = function(player, enumVal)
     local kiCount = 0
 
@@ -698,7 +698,7 @@ xi.abyssea.getAbyssiteTotal = function(player, enumVal)
 end
 
 xi.abyssea.canGiveNMKI = function(mob, dropChance)
-    local redProcValue = mob:getLocalVar("[AbysseaRedProc]")
+    local redProcValue = mob:getLocalVar('[AbysseaRedProc]')
 
     if math.random(1, 100) <= dropChance or redProcValue == 1 then
         return true
@@ -714,7 +714,7 @@ xi.abyssea.giveNMDrops = function(mob, player, ID)
 
     local atmaDrops = xi.abyssea.mob[mob:getName()]['Atma']
     local normalDrops = xi.abyssea.mob[mob:getName()]['Normal']
-    local playerClaimed = GetPlayerByID(mob:getLocalVar("[ClaimedBy]"))
+    local playerClaimed = GetPlayerByID(mob:getLocalVar('[ClaimedBy]'))
 
     for _, keyItemId in pairs(normalDrops) do
         if xi.abyssea.canGiveNMKI(mob, 20) then
@@ -792,28 +792,28 @@ xi.abyssea.procMonster = function(mob, player, triggerType)
         end
 
         if triggerType == xi.abyssea.triggerType.RED then
-            if mob:getLocalVar("[AbysseaRedProc]") == 0 then
-                mob:setLocalVar("[AbysseaRedProc]", 1)
+            if mob:getLocalVar('[AbysseaRedProc]') == 0 then
+                mob:setLocalVar('[AbysseaRedProc]', 1)
             else
-                mob:setLocalVar("[AbysseaRedProc]", 0)
+                mob:setLocalVar('[AbysseaRedProc]', 0)
             end
 
             mob:weaknessTrigger(2)
             mob:addStatusEffect(xi.effect.TERROR, 0, 0, 30)
         elseif triggerType == xi.abyssea.triggerType.YELLOW then
-            if mob:getLocalVar("[AbysseaYellowProc]") == 0 then
-                mob:setLocalVar("[AbysseaYellowProc]", 1)
+            if mob:getLocalVar('[AbysseaYellowProc]') == 0 then
+                mob:setLocalVar('[AbysseaYellowProc]', 1)
             else
-                mob:setLocalVar("[AbysseaYellowProc]", 0)
+                mob:setLocalVar('[AbysseaYellowProc]', 0)
             end
 
             mob:weaknessTrigger(1)
             mob:addStatusEffect(xi.effect.TERROR, 0, 0, 30)
         elseif triggerType == xi.abyssea.triggerType.BLUE then
-            if mob:getLocalVar("[AbysseaBlueProc]") == 0 then
-                mob:setLocalVar("[AbysseaBlueProc]", 1)
+            if mob:getLocalVar('[AbysseaBlueProc]') == 0 then
+                mob:setLocalVar('[AbysseaBlueProc]', 1)
             else
-                mob:setLocalVar("[AbysseaBlueProc]", 0)
+                mob:setLocalVar('[AbysseaBlueProc]', 0)
             end
 
             mob:weaknessTrigger(0)
@@ -850,7 +850,7 @@ xi.abyssea.qmOnTrade = function(player, npc, trade, mobId, reqTrade)
     GetMobByID(mobId):setSpawn(dx, dy, dz)
 
     SpawnMob(mobId):updateClaim(player)
-    GetMobByID(mobId):setLocalVar("[ClaimedBy]", player:getID())
+    GetMobByID(mobId):setLocalVar('[ClaimedBy]', player:getID())
 
     return true
 end
@@ -905,12 +905,12 @@ xi.abyssea.qmOnTrigger = function(player, npc, mobId, kis, tradeReqs)
             validKis = false
         end
 
-        player:setLocalVar("KI" .. index, keyItem)
+        player:setLocalVar('KI' .. index, keyItem)
         kisExpected[index] = keyItem
     end
 
     local pop = checkMobID(zoneId, mobId)
-    player:setLocalVar("[AbysseaPopNmID]", mobId)
+    player:setLocalVar('[AbysseaPopNmID]', mobId)
     -- start event
     if validKis and pop then
         player:startEvent(events[2], kisExpected[1], kisExpected[2], kisExpected[3], kisExpected[4], kisExpected[5], kisExpected[6], kisExpected[7], kisExpected[8]) -- player has all key items
@@ -933,7 +933,7 @@ xi.abyssea.qmOnEventFinish = function(player, csid, option, npc)
     if csid == events[2] and option == 1 then
 
         for i = 1, 8 do
-            local keyItem = player:getLocalVar("KI" .. i)
+            local keyItem = player:getLocalVar('KI' .. i)
             if keyItem == 0 then
                 break
             end
@@ -945,14 +945,14 @@ xi.abyssea.qmOnEventFinish = function(player, csid, option, npc)
         end
 
         -- pop nm
-        local nm = player:getLocalVar("[AbysseaPopNmID]")
+        local nm = player:getLocalVar('[AbysseaPopNmID]')
         local dx = player:getXPos() + math.random(-1, 1)
         local dy = player:getYPos()
         local dz = player:getZPos() + math.random(-1, 1)
 
         GetMobByID(nm):setSpawn(dx, dy, dz)
         SpawnMob(nm):updateClaim(player)
-        GetMobByID(nm):setLocalVar("[ClaimedBy]", player:getID())
+        GetMobByID(nm):setLocalVar('[ClaimedBy]', player:getID())
 
         return true
     end
@@ -966,8 +966,8 @@ end
 -- Light Handling
 -----------------------------------
 xi.abyssea.getLightsTable = function(player)
-    local lightMaskFirst  = player:getCharVar("abysseaLights1")
-    local lightMaskSecond = player:getCharVar("abysseaLights2")
+    local lightMaskFirst  = player:getCharVar('abysseaLights1')
+    local lightMaskSecond = player:getCharVar('abysseaLights2')
     local lightValues = { 0, 0, 0, 0, 0, 0, 0 }
 
     for v = 1, 7 do
@@ -993,8 +993,8 @@ local function setLightsFromTable(player, lightTable)
         end
     end
 
-    player:setCharVar("abysseaLights1", lightMaskFirst)
-    player:setCharVar("abysseaLights2", lightMaskSecond)
+    player:setCharVar('abysseaLights1', lightMaskFirst)
+    player:setCharVar('abysseaLights2', lightMaskSecond)
 end
 
 xi.abyssea.displayAbysseaLights = function(player)
@@ -1016,8 +1016,8 @@ xi.abyssea.displayAbysseaLights = function(player)
 end
 
 xi.abyssea.resetPlayerLights = function(player)
-    player:setCharVar("abysseaLights1", 0)
-    player:setCharVar("abysseaLights2", 0)
+    player:setCharVar('abysseaLights1', 0)
+    player:setCharVar('abysseaLights2', 0)
 end
 
 xi.abyssea.setBonusLights = function(player)
@@ -1059,7 +1059,7 @@ xi.abyssea.addPlayerLights = function(player, light, amount)
 end
 
 xi.abyssea.getLightValue = function(player, light)
-    return bit.band(bit.rshift(player:getCharVar("abysseaLights"), (light - 1) * 2), 0xFF)
+    return bit.band(bit.rshift(player:getCharVar('abysseaLights'), (light - 1) * 2), 0xFF)
 end
 
 xi.abyssea.canEnterAbyssea = function(player)
@@ -1103,7 +1103,7 @@ xi.abyssea.afterZoneIn = function(player)
     local zoneID = player:getZoneID()
     local ID = zones[zoneID]
 
-    -- Add 5 minutes of hidden time to get "real" visitant status.  The additional 4 seconds
+    -- Add 5 minutes of hidden time to get 'real' visitant status.  The additional 4 seconds
     -- is intentional due to tick variances (up to 3s), and the status will be deleted should
     -- the countdown timer for visitant status reach 0 before actually running out of time on
     -- the effect.
@@ -1225,7 +1225,7 @@ local function getUnlockedMawTable(player)
 end
 
 xi.abyssea.warpNPCOnTrigger = function(player, npc)
-    local totalCruor = player:getCurrency("cruor")
+    local totalCruor = player:getCurrency('cruor')
     local unlockedMaws = getUnlockedMawTable(player)
     local statusParam = player:hasCompletedQuest(xi.quest.log_id.ABYSSEA, xi.quest.id.abyssea.THE_TRUTH_BECKONS) and 2 or 0
 
@@ -1241,9 +1241,9 @@ xi.abyssea.warpNPCOnEventFinish = function(player, csid, option, npc)
     -- Bit 8 is set for all teleport selections
     if
         utils.mask.getBit(option, 8) and
-        player:getCurrency("cruor") >= 200
+        player:getCurrency('cruor') >= 200
     then
-        player:delCurrency("cruor", 200)
+        player:delCurrency('cruor', 200)
         player:setPos(unpack(teleportData[teleportSelection]))
     end
 end
@@ -1270,7 +1270,7 @@ xi.abyssea.traverserNPCOnTrigger = function(player, npc)
     then
         player:messageText(npc, ID.text.NOT_ACQUAINTED)
     elseif player:getQuestStatus(xi.quest.log_id.ABYSSEA, xi.quest.id.abyssea.DAWN_OF_DEATH) >= QUEST_ACCEPTED then
-        player:startEvent(supportNPCData[zoneID][1], 0, availableStones, numTraverserHeld, messageType, 1, 1, 1, 3) -- Post "The Truth Beckons" Menu
+        player:startEvent(supportNPCData[zoneID][1], 0, availableStones, numTraverserHeld, messageType, 1, 1, 1, 3) -- Post 'The Truth Beckons' Menu
     end
 end
 

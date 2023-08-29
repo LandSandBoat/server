@@ -6,7 +6,7 @@
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    local tokakaSpokenTo = player:getCharVar("TokakaSpokenTo")
+    local tokakaSpokenTo = player:getCharVar('TokakaSpokenTo')
     local needToZone     = player:needToZone()
 
     if tokakaSpokenTo == 1 and not needToZone then
@@ -39,7 +39,7 @@ end
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 208 then
         player:addQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.SOMETHING_FISHY)
-        player:setCharVar("TokakaSpokenTo", 1)
+        player:setCharVar('TokakaSpokenTo', 1)
     elseif csid == 210 then
         local somethingFishy = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.SOMETHING_FISHY)
 
@@ -52,10 +52,10 @@ entity.onEventFinish = function(player, csid, option, npc)
 
         player:tradeComplete()
         player:addGil(xi.settings.main.GIL_RATE * 70)
-        player:setCharVar("TokakaSpokenTo", 0)
+        player:setCharVar('TokakaSpokenTo', 0)
         player:needToZone(true)
     elseif csid == 209 then
-        player:setCharVar("TokakaSpokenTo", 1)
+        player:setCharVar('TokakaSpokenTo', 1)
     end
 end
 

@@ -27,7 +27,7 @@ spellObject.onMobSpawn = function(mob)
     })
 
     -- Dynamic modifier that checks party member list on tick to apply
-    mob:addListener("COMBAT_TICK", "MUMOR_CTICK", function(mobArg)
+    mob:addListener('COMBAT_TICK', 'MUMOR_CTICK', function(mobArg)
         local sambaDurationBoost = 0
         local party = mobArg:getMaster():getPartyWithTrusts()
         for _, member in pairs(party) do

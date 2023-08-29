@@ -18,7 +18,7 @@ local removable =
 }
 
 attachmentObject.onEquip = function(pet)
-    pet:addListener("AUTOMATON_ATTACHMENT_CHECK", "ATTACHMENT_ERASER", function(automaton, target)
+    pet:addListener('AUTOMATON_ATTACHMENT_CHECK', 'ATTACHMENT_ERASER', function(automaton, target)
         local master = automaton:getMaster()
         if
             not automaton:hasRecast(xi.recast.ABILITY, xi.automaton.abilities.ERASER) and
@@ -59,7 +59,7 @@ attachmentObject.onEquip = function(pet)
 end
 
 attachmentObject.onUnequip = function(pet)
-    pet:removeListener("ATTACHMENT_ERASER")
+    pet:removeListener('ATTACHMENT_ERASER')
 end
 
 attachmentObject.onManeuverGain = function(pet, maneuvers)

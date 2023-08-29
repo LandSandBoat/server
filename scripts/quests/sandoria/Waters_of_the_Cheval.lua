@@ -75,7 +75,7 @@ quest.sections =
             ['Nouveil'] =
             {
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHas(trade, { { "gil", 10 } }) then
+                    if npcUtil.tradeHas(trade, { { 'gil', 10 } }) then
                         player:messageSpecial(northernSandoriaID.text.YOU_DONATE_GIL)
                         return quest:progressEvent(571)
                     end

@@ -6,8 +6,8 @@ local ID = zones[xi.zone.EMPYREAL_PARADOX]
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
-    local lanceTime = mob:getLocalVar("lanceTime")
-    local lanceOut = mob:getLocalVar("lanceOut")
+    local lanceTime = mob:getLocalVar('lanceTime')
+    local lanceOut = mob:getLocalVar('lanceOut')
 
     if
         not (target:hasStatusEffect(xi.effect.PHYSICAL_SHIELD) and target:hasStatusEffect(xi.effect.MAGIC_SHIELD)) and
@@ -32,9 +32,9 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
 
     local dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.RANGED, xi.damageType.PIERCING, info.hitslanded)
 
-    mob:entityAnimationPacket("ids0")
-    mob:setLocalVar("lanceTime", mob:getBattleTime())
-    mob:setLocalVar("lanceOut", 0)
+    mob:entityAnimationPacket('ids0')
+    mob:setLocalVar('lanceTime', mob:getBattleTime())
+    mob:setLocalVar('lanceOut', 0)
     target:setAnimationSub(3)
 
     -- Cannot be resisted

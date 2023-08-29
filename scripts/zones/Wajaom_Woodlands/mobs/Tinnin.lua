@@ -7,8 +7,8 @@
 -----------------------------------
 mixins =
 {
-    require("scripts/mixins/job_special"),
-    require("scripts/mixins/rage")
+    require('scripts/mixins/job_special'),
+    require('scripts/mixins/rage')
 }
 -----------------------------------
 local entity = {}
@@ -23,43 +23,43 @@ entity.onMobInitialize = function(mob)
 end
 
 entity.onMobSpawn = function(mob)
-    mob:setLocalVar("[rage]timer", 3600) -- 60 minutes
+    mob:setLocalVar('[rage]timer', 3600) -- 60 minutes
     mob:setHP(mob:getMaxHP() / 2)
     mob:setUnkillable(true)
     mob:setMod(xi.mod.REGEN, 50)
 
     -- Regen Head every 1.5-4 minutes 90-240
-    mob:setLocalVar("headTimer", os.time() + math.random(60, 190))
+    mob:setLocalVar('headTimer', os.time() + math.random(60, 190))
 
     -- Number of crits to lose a head
-    mob:setLocalVar("CritToTheFace", math.random(10, 30))
-    mob:setLocalVar("crits", 0)
+    mob:setLocalVar('CritToTheFace', math.random(10, 30))
+    mob:setLocalVar('crits', 0)
 end
 
 entity.onMobRoam = function(mob)
     -- Regen head
-    local headTimer = mob:getLocalVar("headTimer")
+    local headTimer = mob:getLocalVar('headTimer')
     if mob:getAnimationSub() == 2 and os.time() > headTimer then
         mob:setAnimationSub(1)
-        mob:setLocalVar("headTimer", os.time() + math.random(60, 190))
+        mob:setLocalVar('headTimer', os.time() + math.random(60, 190))
 
         -- First time it regens second head, 25%. Reduced afterwards.
-        if mob:getLocalVar("secondHead") == 0 then
+        if mob:getLocalVar('secondHead') == 0 then
             mob:addHP(mob:getMaxHP() * .25)
-            mob:setLocalVar("secondHead", 1)
+            mob:setLocalVar('secondHead', 1)
         else
             mob:addHP(mob:getMaxHP() * .05)
         end
 
     elseif mob:getAnimationSub() == 1 and os.time() > headTimer then
         mob:setAnimationSub(0)
-        mob:setLocalVar("headTimer", os.time() + math.random(60, 190))
+        mob:setLocalVar('headTimer', os.time() + math.random(60, 190))
 
         -- First time it regens third head, 25%. Reduced afterwards.
-        if mob:getLocalVar("thirdHead") == 0 then
+        if mob:getLocalVar('thirdHead') == 0 then
             mob:addHP(mob:getMaxHP() * .25)
             mob:setMod(xi.mod.REGEN, 10)
-            mob:setLocalVar("thirdHead", 1)
+            mob:setLocalVar('thirdHead', 1)
             mob:setUnkillable(false) -- It can be killed now that has all his heads
         else
             mob:addHP(mob:getMaxHP() * .05)
@@ -68,15 +68,15 @@ entity.onMobRoam = function(mob)
 end
 
 entity.onMobFight = function(mob, target)
-    local headTimer = mob:getLocalVar("headTimer")
+    local headTimer = mob:getLocalVar('headTimer')
     if mob:getAnimationSub() == 2 and os.time() > headTimer then
         mob:setAnimationSub(1)
-        mob:setLocalVar("headTimer", os.time() + math.random(60, 190))
+        mob:setLocalVar('headTimer', os.time() + math.random(60, 190))
 
         -- First time it regens second head, 25%. Reduced afterwards.
-        if mob:getLocalVar("secondHead") == 0 then
+        if mob:getLocalVar('secondHead') == 0 then
             mob:addHP(mob:getMaxHP() * .25)
-            mob:setLocalVar("secondHead", 1)
+            mob:setLocalVar('secondHead', 1)
         else
             mob:addHP(mob:getMaxHP() * .05)
         end
@@ -91,13 +91,13 @@ entity.onMobFight = function(mob, target)
 
     elseif mob:getAnimationSub() == 1 and os.time() > headTimer then
         mob:setAnimationSub(0)
-        mob:setLocalVar("headTimer", os.time() + math.random(60, 190))
+        mob:setLocalVar('headTimer', os.time() + math.random(60, 190))
 
         -- First time it regens third head, 25%. Reduced afterwards.
-        if mob:getLocalVar("thirdHead") == 0 then
+        if mob:getLocalVar('thirdHead') == 0 then
             mob:setMod(xi.mod.REGEN, 10)
             mob:addHP(mob:getMaxHP() * .25)
-            mob:setLocalVar("thirdHead", 1)
+            mob:setLocalVar('thirdHead', 1)
             mob:setUnkillable(false) -- It can be killed now that has all his heads
         else
             mob:addHP(mob:getMaxHP() * .05)
@@ -115,28 +115,28 @@ entity.onMobFight = function(mob, target)
 end
 
 entity.onCriticalHit = function(mob)
-    local critNum = mob:getLocalVar("crits")
+    local critNum = mob:getLocalVar('crits')
 
-    if (critNum + 1) > mob:getLocalVar("CritToTheFace") then  -- Lose a head
+    if (critNum + 1) > mob:getLocalVar('CritToTheFace') then  -- Lose a head
         if mob:getAnimationSub() == 0 then
             mob:setAnimationSub(1)
-            mob:setLocalVar("headTimer", os.time() + math.random(60, 190))
+            mob:setLocalVar('headTimer', os.time() + math.random(60, 190))
         elseif mob:getAnimationSub() == 1 then
             mob:setAnimationSub(2)
-            mob:setLocalVar("headTimer", os.time() + math.random(60, 190))
+            mob:setLocalVar('headTimer', os.time() + math.random(60, 190))
         else
             -- Meh
         end
 
         -- Number of crits to lose a head, re-randoming
-        mob:setLocalVar("CritToTheFace", math.random(10, 30))
+        mob:setLocalVar('CritToTheFace', math.random(10, 30))
 
         critNum = 0 -- reset the crits on the NM
     else
         critNum = critNum + 1
     end
 
-    mob:setLocalVar("crits", critNum)
+    mob:setLocalVar('crits', critNum)
 end
 
 entity.onMobDrawIn = function(mob, target)

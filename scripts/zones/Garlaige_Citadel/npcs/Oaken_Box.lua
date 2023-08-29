@@ -19,7 +19,7 @@ end
 
 entity.onTrigger = function(player, npc)
     if
-        player:getCharVar("peaceForTheSpiritCS") == 4 and
+        player:getCharVar('peaceForTheSpiritCS') == 4 and
         not player:hasItem(xi.item.NAIL_PULLER) and
         not GetMobByID(ID.mob.GUARDIAN_STATUE):isSpawned()
     then
@@ -36,7 +36,7 @@ end
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 14 then
         player:confirmTrade()
-        player:setCharVar("peaceForTheSpiritCS", 5)
+        player:setCharVar('peaceForTheSpiritCS', 5)
     end
 end
 

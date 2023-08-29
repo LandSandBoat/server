@@ -72,7 +72,7 @@ entity.onEventFinish = function(player, csid, option, npc)
             not player:hasItem(xi.item.VCS_HONEYMOON_TICKET)
         then
             player:delGil(3500)
-            local signatures = { "PlanA", "PlanB", "PlanC", "PlanD" }
+            local signatures = { 'PlanA', 'PlanB', 'PlanC', 'PlanD' }
             player:addItem({
                 id = xi.item.VCS_HONEYMOON_TICKET,
                 exdata = { [0] = option },

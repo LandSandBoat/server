@@ -2,7 +2,7 @@
 -- Area: Altar Room
 -- NM: Fee Jugu The Ramfist
 -----------------------------------
-mixins = { require("scripts/mixins/job_special") }
+mixins = { require('scripts/mixins/job_special') }
 -----------------------------------
 local entity = {}
 

@@ -7,23 +7,23 @@
 cmdprops =
 {
     permission = 1,
-    parameters = "ss"
+    parameters = 'ss'
 }
 
 function error(player, msg)
     player:PrintToPlayer(msg)
-    player:PrintToPlayer("!haskeyitem <key item ID> (player)")
+    player:PrintToPlayer('!haskeyitem <key item ID> (player)')
 end
 
 function onTrigger(player, keyId, target)
     -- validate itemId
     if keyId == nil then
-        error(player, "You must provide a key item ID.")
+        error(player, 'You must provide a key item ID.')
         return
     else
         keyId = tonumber(keyId) or xi.ki[string.upper(keyId)]
         if keyId == nil or keyId < 1 then
-            error(player, "Invalid key item ID.")
+            error(player, 'Invalid key item ID.')
             return
         end
     end
@@ -38,15 +38,15 @@ function onTrigger(player, keyId, target)
     else
         targ = GetPlayerByName(target)
         if targ == nil then
-            error(player, string.format("Player named '%s' not found!", target))
+            error(player, string.format('Player named "%s" not found!', target))
             return
         end
     end
 
     -- report hasKeyItem
     if targ:hasKeyItem(keyId) then
-        player:PrintToPlayer(string.format("%s has key item %i.", targ:getName(), keyId))
+        player:PrintToPlayer(string.format('%s has key item %i.', targ:getName(), keyId))
     else
-        player:PrintToPlayer(string.format("%s does not have key item %i.", targ:getName(), keyId))
+        player:PrintToPlayer(string.format('%s does not have key item %i.', targ:getName(), keyId))
     end
 end

@@ -2,7 +2,7 @@
 -- Area: Labyrinth of Onzozo
 --   NM: Mysticmaker Profblix
 -----------------------------------
-mixins = { require("scripts/mixins/job_special") }
+mixins = { require('scripts/mixins/job_special') }
 -----------------------------------
 local entity = {}
 

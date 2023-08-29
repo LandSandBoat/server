@@ -22,7 +22,7 @@ function quest.unlockingMyth.onTrade(player, npc, trade)
             if unlockingAMyth == QUEST_ACCEPTED then
                 local wsPoints = trade:getItem(0):getWeaponskillPoints()
 
-                -- player:PrintToPlayer(string.format("points Accumulated: %s", wsPoints))
+                -- player:PrintToPlayer(string.format('points Accumulated: %s', wsPoints))
 
                 if wsPoints <= 50 then
                     player:startEvent(10091)
@@ -47,11 +47,11 @@ function quest.unlockingMyth.onTrigger(player, npc)
     local nyzulWeaponRanged = xi.nyzul.isBaseWeapon(player:getEquipID(xi.slot.RANGED))
 
     if unlockingAMyth == QUEST_AVAILABLE then
-        if player:needToZone() and player:getVar("Quest[3][102]Prog") > 0 then
+        if player:needToZone() and player:getVar('Quest[3][102]Prog') > 0 then
             player:startEvent(10090)
         else
-            if player:getVar("Quest[3][102]Prog") > 0 then
-                player:setVar("Quest[3][102]Prog", 0)
+            if player:getVar('Quest[3][102]Prog') > 0 then
+                player:setVar('Quest[3][102]Prog', 0)
             end
 
             if nyzulWeaponMain or nyzulWeaponRanged then
@@ -71,7 +71,7 @@ function quest.unlockingMyth.onEventFinish(player, csid, option, npc)
     local questId = quest.unlockingMyth.getQuestId(option)
     if csid == 10086 then
         if option == 53 then
-            player:setVar("Quest[3][102]Prog", 1)
+            player:setVar('Quest[3][102]Prog', 1)
             player:needToZone(true)
         elseif option <= xi.job.SCH then
             player:addQuest(xi.quest.log_id.JEUNO, questId)

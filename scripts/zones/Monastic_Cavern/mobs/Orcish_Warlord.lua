@@ -2,7 +2,7 @@
 -- Area: Monastic Cavern
 --   NM: Orcish Warlord
 -----------------------------------
-mixins = { require("scripts/mixins/job_special") }
+mixins = { require('scripts/mixins/job_special') }
 -----------------------------------
 local entity = {}
 

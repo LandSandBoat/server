@@ -59,12 +59,12 @@ zoneObject.onZoneWeatherChange = function(weather)
             weather ~= xi.weather.SQUALL
         then
             DespawnMob(ID.mob.TOXIC_TAMLYN)
-            toxicTamlyn:setLocalVar("spawnTime", currentTime + 3600) -- 1 hour
+            toxicTamlyn:setLocalVar('spawnTime', currentTime + 3600) -- 1 hour
         end
     else
         if
             (weather == xi.weather.RAIN or weather == xi.weather.SQUALL) and
-            toxicTamlyn:getLocalVar("spawnTime") < currentTime
+            toxicTamlyn:getLocalVar('spawnTime') < currentTime
         then
             SpawnMob(ID.mob.TOXIC_TAMLYN)
         end

@@ -6,7 +6,7 @@
 local entity = {}
 
 local function reraiseGhul(mob, reraises, target)
-    mob:setLocalVar("RERAISES", reraises)
+    mob:setLocalVar('RERAISES', reraises)
     mob:setMod(xi.mod.ATT, 25 * reraises)
     mob:setHP(mob:getMaxHP() * (1 - (0.10 * reraises)))
     mob:resetAI()
@@ -17,9 +17,9 @@ local function reraiseGhul(mob, reraises, target)
 end
 
 entity.onMobInitialize = function(GhulIBeabanMob)
-    GhulIBeabanMob:addListener("DEATH", "GHUL_DEATH", function(mob)
+    GhulIBeabanMob:addListener('DEATH', 'GHUL_DEATH', function(mob)
         local mobId = mob:getID()
-        local reraises = mob:getLocalVar("RERAISES") + 1
+        local reraises = mob:getLocalVar('RERAISES') + 1
         local target = mob:getTarget()
 
         -- spawn second form (BLM)
@@ -42,8 +42,8 @@ entity.onMobInitialize = function(GhulIBeabanMob)
 end
 
 entity.onMobDeath = function(mob, player, optParams)
-    if mob:getLocalVar("RERAISES") == 4 then
-        mob:getBattlefield():setLocalVar("lootSpawned", 0)
+    if mob:getLocalVar('RERAISES') == 4 then
+        mob:getBattlefield():setLocalVar('lootSpawned', 0)
     end
 end
 

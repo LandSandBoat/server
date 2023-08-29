@@ -2,7 +2,7 @@
 -- Trust: Zeid II
 -----------------------------------
 
-local quest = HiddenQuest:new("TrustZeidII")
+local quest = HiddenQuest:new('TrustZeidII')
 
 quest.sections =
 {

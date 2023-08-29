@@ -3,7 +3,7 @@
 --  Mob: Centurio XI-I
 -- BCNM: Legion XI Comitatensis
 -----------------------------------
-mixins = { require("scripts/mixins/job_special") }
+mixins = { require('scripts/mixins/job_special') }
 -----------------------------------
 local entity = {}
 

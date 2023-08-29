@@ -2,19 +2,19 @@
 -- func: checkmission <Log ID> <Player>
 -- desc: Prints current MissionID for the given LogID and target Player to the in game chatlog
 -----------------------------------
-require("scripts/globals/missions")
+require('scripts/globals/missions')
 local logIdHelpers = require('scripts/globals/log_ids')
 -----------------------------------
 
 cmdprops =
 {
     permission = 1,
-    parameters = "ss"
+    parameters = 'ss'
 }
 
 function error(player, msg)
     player:PrintToPlayer(msg)
-    player:PrintToPlayer("!checkmission <logID> (player)")
+    player:PrintToPlayer('!checkmission <logID> (player)')
 end
 
 function onTrigger(player, logId, target)
@@ -22,7 +22,7 @@ function onTrigger(player, logId, target)
     local logName
     local logInfo = logIdHelpers.getMissionLogInfo(logId)
     if logInfo == nil then
-        error(player, "Invalid logID.")
+        error(player, 'Invalid logID.')
         return
     end
 
@@ -39,7 +39,7 @@ function onTrigger(player, logId, target)
     else
         targ = GetPlayerByName(target)
         if targ == nil then
-            error(player, string.format("Player named '%s' not found!", target))
+            error(player, string.format('Player named "%s" not found!', target))
             return
         end
     end
@@ -48,8 +48,8 @@ function onTrigger(player, logId, target)
     local currentMission = targ:getCurrentMission(logId)
 
     if logId <= 3 and currentMission == 65535 then
-        player:PrintToPlayer(string.format("No current %s mission for %s.", logName, targ:getName()))
+        player:PrintToPlayer(string.format('No current %s mission for %s.', logName, targ:getName()))
     else
-        player:PrintToPlayer(string.format("Current %s Mission ID is %s for %s.", logName, currentMission, targ:getName()))
+        player:PrintToPlayer(string.format('Current %s Mission ID is %s for %s.', logName, currentMission, targ:getName()))
     end
 end

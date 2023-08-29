@@ -14,13 +14,13 @@ local content = Battlefield:new({
     levelCap         = 75,
     timeLimit        = utils.minutes(30),
     index            = 4,
-    entryNpc         = "Wind_Pillar_5",
-    exitNpc          = "Wind_Pillar_Exit",
+    entryNpc         = 'Wind_Pillar_5',
+    exitNpc          = 'Wind_Pillar_Exit',
     requiredKeyItems = { xi.ki.ZEPHYR_FAN, message = ID.text.ZEPHYR_RIPS },
     grantXP          = 4000,
 })
 
-content:addEssentialMobs({ "Apis" })
+content:addEssentialMobs({ 'Apis' })
 
 content.loot =
 {

@@ -22,7 +22,7 @@ local content = Limbus:new({
     entryNpc         = '_12i',
     requiredKeyItems = { xi.ki.COSMO_CLEANSE, { xi.ki.RED_CARD, xi.ki.BLACK_CARD }, message = ID.text.YOU_INSERT_THE_CARD_POLISHED },
     requiredItems    = { xi.item.SMALT_CHIP, xi.item.SMOKY_CHIP, xi.item.CHARCOAL_CHIP, xi.item.MAGENTA_CHIP },
-    name             = "CENTRAL_APOLLYON",
+    name             = 'CENTRAL_APOLLYON',
 })
 
 function content:isValidEntry(player, npc)
@@ -44,7 +44,7 @@ end
 content.groups =
 {
     {
-        mobs       = { "Proto-Omega" },
+        mobs       = { 'Proto-Omega' },
         stationary = true,
         death      = function(mob, count)
             npcUtil.showCrate(GetNPCByID(ID.CENTRAL_APOLLYON.npc.LOOT_CRATE))
@@ -52,7 +52,7 @@ content.groups =
     },
 
     {
-        mobs    = { "Gunpod" },
+        mobs    = { 'Gunpod' },
         spawned = false,
     }
 }

@@ -12,7 +12,7 @@ end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     if
-        mob:getName() == "Cernunnos" or
+        mob:getName() == 'Cernunnos' or
         mob:getPool() == 671 or
         mob:getPool() == 1346
     then

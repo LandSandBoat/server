@@ -4,9 +4,9 @@
 -- What is known is that they roughly follow player Weaponskill calculations (pDIF, dMOD, ratio, etc) so this is what
 -- this set of functions emulates.
 -----------------------------------
-require("scripts/globals/magicburst")
-require("scripts/globals/magic")
-require("scripts/globals/utils")
+require('scripts/globals/magicburst')
+require('scripts/globals/magic')
+require('scripts/globals/utils')
 -----------------------------------
 xi = xi or {}
 xi.mobskills = xi.mobskills or {}
@@ -569,8 +569,8 @@ xi.mobskills.mobFinalAdjustments = function(dmg, mob, skill, target, attackType,
 
     -- Handle Automaton Analyzer which decreases damage from successive special attacks
     if target:getMod(xi.mod.AUTO_ANALYZER) > 0 then
-        local analyzerSkill = target:getLocalVar("analyzer_skill")
-        local analyzerHits = target:getLocalVar("analyzer_hits")
+        local analyzerSkill = target:getLocalVar('analyzer_skill')
+        local analyzerHits = target:getLocalVar('analyzer_hits')
         if
             analyzerSkill == skill:getID() and
             target:getMod(xi.mod.AUTO_ANALYZER) > analyzerHits
@@ -579,11 +579,11 @@ xi.mobskills.mobFinalAdjustments = function(dmg, mob, skill, target, attackType,
             dmg = dmg * 0.6
             analyzerHits = analyzerHits + 1
         else
-            target:setLocalVar("analyzer_skill", skill:getID())
+            target:setLocalVar('analyzer_skill', skill:getID())
             analyzerHits = 0
         end
 
-        target:setLocalVar("analyzer_hits", analyzerHits)
+        target:setLocalVar('analyzer_hits', analyzerHits)
     end
 
     if attackType == xi.attackType.PHYSICAL then

@@ -4,12 +4,12 @@
 -- !pos 139.96 -18.29 306.27
 -----------------------------------
 local ID = zones[xi.zone.THE_ELDIEME_NECROPOLIS]
-local func = require("scripts/zones/The_Eldieme_Necropolis/globals")
+local func = require('scripts/zones/The_Eldieme_Necropolis/globals')
 -----------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    local timer = GetNPCByID(ID.npc.CANDLE_OFFSET):getLocalVar("SkullRespawn") -- 1 hour cooldown to respawn skulls
+    local timer = GetNPCByID(ID.npc.CANDLE_OFFSET):getLocalVar('SkullRespawn') -- 1 hour cooldown to respawn skulls
 
     if
         npcUtil.tradeHasExactly(trade, xi.item.FLINT_STONE) and
@@ -22,8 +22,8 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local timer = GetNPCByID(ID.npc.CANDLE_OFFSET):getLocalVar("SkullRespawn") -- 1 hour cooldown to respawn skulls
-    local active = npc:getLocalVar("candlesActive")
+    local timer = GetNPCByID(ID.npc.CANDLE_OFFSET):getLocalVar('SkullRespawn') -- 1 hour cooldown to respawn skulls
+    local active = npc:getLocalVar('candlesActive')
 
     if os.time() < active then
         player:messageSpecial(ID.text.BRAZIER_ACTIVE)

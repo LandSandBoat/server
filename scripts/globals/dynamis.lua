@@ -1,10 +1,10 @@
 -----------------------------------
 -- Dynamis
 -----------------------------------
-require("scripts/globals/battlefield")
-require("scripts/globals/missions")
-require("scripts/globals/npc_util")
-require("scripts/globals/utils")
+require('scripts/globals/battlefield')
+require('scripts/globals/missions')
+require('scripts/globals/npc_util')
+require('scripts/globals/utils')
 -----------------------------------
 xi = xi or {}
 xi.dynamis = xi.dynamis or {}
@@ -34,7 +34,7 @@ local entryInfo =
         csFirst  = 692,
         csBeat   = 698,
         csMenu   = 961,
-        beatVar  = "DynaSandoria_Win",
+        beatVar  = 'DynaSandoria_Win',
         beatKI   = xi.ki.HYDRA_CORPS_COMMAND_SCEPTER,
         enterPos = { 161.838, -2.000, 161.673, 93, 185 },
     },
@@ -46,7 +46,7 @@ local entryInfo =
         csFirst  = 209,
         csBeat   = 215,
         csMenu   = 597,
-        beatVar  = "DynaBastok_Win",
+        beatVar  = 'DynaBastok_Win',
         beatKI   = xi.ki.HYDRA_CORPS_EYEGLASS,
         enterPos = { 116.482, 0.994, -72.121, 128, 186 },
     },
@@ -58,7 +58,7 @@ local entryInfo =
         csFirst  = 459,
         csBeat   = 465,
         csMenu   = 513,
-        beatVar  = "DynaWindurst_Win",
+        beatVar  = 'DynaWindurst_Win',
         beatKI   = xi.ki.HYDRA_CORPS_LANTERN,
         enterPos = { -221.988, 1.000, -120.184, 0, 187 },
     },
@@ -70,7 +70,7 @@ local entryInfo =
         csFirst  = 10020,
         csBeat   = 10026,
         csMenu   = 10176,
-        beatVar  = "DynaJeuno_Win",
+        beatVar  = 'DynaJeuno_Win',
         beatKI   = xi.ki.HYDRA_CORPS_TACTICAL_MAP,
         enterPos = { 48.930, 10.002, -71.032, 195, 188 },
     },
@@ -81,7 +81,7 @@ local entryInfo =
         csFirst  = 128,
         csBeat   = 134,
         csMenu   = 229,
-        beatVar  = "DynaBeaucedine_Win",
+        beatVar  = 'DynaBeaucedine_Win',
         beatKI   = xi.ki.HYDRA_CORPS_INSIGNIA,
         enterPos = { -284.751, -39.923, -422.948, 235, 134 },
         reqs     = function(player)
@@ -98,7 +98,7 @@ local entryInfo =
         csFirst  = 26,
         csBeat   = 32,
         csMenu   = 205,
-        beatVar  = "DynaXarcabard_Win",
+        beatVar  = 'DynaXarcabard_Win',
         beatKI   = xi.ki.HYDRA_CORPS_BATTLE_STANDARD,
         enterPos = { 569.312, -0.098, -270.158, 90, 135 },
         reqs     = function(player)
@@ -113,7 +113,7 @@ local entryInfo =
         csFirst  = 33,
         csBeat   = 39,
         csMenu   = 58,
-        beatVar  = "DynaValkurm_Win",
+        beatVar  = 'DynaValkurm_Win',
         beatKI   = xi.ki.DYNAMIS_VALKURM_SLIVER,
         enterPos = { 100, -8, 131, 47, 39 },
         reqs = function(player)
@@ -128,7 +128,7 @@ local entryInfo =
         csFirst  = 40,
         csBeat   = 46,
         csMenu   = 64,
-        beatVar  = "DynaBuburimu_Win",
+        beatVar  = 'DynaBuburimu_Win',
         beatKI   = xi.ki.DYNAMIS_BUBURIMU_SLIVER,
         enterPos = { 155, -1, -169, 170, 40 },
         reqs = function(player)
@@ -143,7 +143,7 @@ local entryInfo =
         csFirst  = 22,
         csBeat   = 28,
         csMenu   = 48,
-        beatVar  = "DynaQufim_Win",
+        beatVar  = 'DynaQufim_Win',
         beatKI   = xi.ki.DYNAMIS_QUFIM_SLIVER,
         enterPos = { -19, -17, 104, 253, 41 },
         reqs = function(player)
@@ -156,11 +156,11 @@ local entryInfo =
     {
         csBit    = 10,
         csFirst  = 614,
-        -- TODO: Tavnazian winning CS changes Param2 (part of dialogue) depending on CoP progress ranging from 0 ("she will pay dearly") up to 3 ("you know this girl well")
+        -- TODO: Tavnazian winning CS changes Param2 (part of dialogue) depending on CoP progress ranging from 0 ('she will pay dearly') up to 3 ('you know this girl well')
         --       The exact mission breaking points for each bit need captures or testimonies; Param1 seems to be 0 or garbage
         csBeat   = 615,
         csMenu   = 624,
-        beatVar  = "DynaTavnazia_Win",
+        beatVar  = 'DynaTavnazia_Win',
         beatKI   = xi.ki.DYNAMIS_TAVNAZIA_SLIVER,
         enterPos = { 0.1, -7, -21, 190, 42 },
         reqs     = function(player)
@@ -183,7 +183,7 @@ local dynaInfo =
 
     [xi.zone.DYNAMIS_SAN_DORIA] =
     {
-        beatVar   = "DynaSandoria_Win",
+        beatVar   = 'DynaSandoria_Win',
         beatKI    = xi.ki.HYDRA_CORPS_COMMAND_SCEPTER,
         beatTitle = xi.title.DYNAMIS_SAN_DORIA_INTERLOPER,
         entryPos  = { 161.838, -2.000, 161.673, 93 },
@@ -192,7 +192,7 @@ local dynaInfo =
 
     [xi.zone.DYNAMIS_BASTOK] =
     {
-        beatVar   = "DynaBastok_Win",
+        beatVar   = 'DynaBastok_Win',
         beatKI    = xi.ki.HYDRA_CORPS_EYEGLASS,
         beatTitle = xi.title.DYNAMIS_BASTOK_INTERLOPER,
         entryPos  = { 116.482, 0.994, -72.121, 128 },
@@ -201,7 +201,7 @@ local dynaInfo =
 
     [xi.zone.DYNAMIS_WINDURST] =
     {
-        beatVar   = "DynaWindurst_Win",
+        beatVar   = 'DynaWindurst_Win',
         beatKI    = xi.ki.HYDRA_CORPS_LANTERN,
         beatTitle = xi.title.DYNAMIS_WINDURST_INTERLOPER,
         entryPos  = { -221.988, 1.000, -120.184, 0 },
@@ -210,7 +210,7 @@ local dynaInfo =
 
     [xi.zone.DYNAMIS_JEUNO] =
     {
-        beatVar   = "DynaJeuno_Win",
+        beatVar   = 'DynaJeuno_Win',
         beatKI    = xi.ki.HYDRA_CORPS_TACTICAL_MAP,
         beatTitle = xi.title.DYNAMIS_JEUNO_INTERLOPER,
         entryPos  = { 48.930, 10.002, -71.032, 195 },
@@ -219,7 +219,7 @@ local dynaInfo =
 
     [xi.zone.DYNAMIS_BEAUCEDINE] =
     {
-        beatVar   = "DynaBeaucedine_Win",
+        beatVar   = 'DynaBeaucedine_Win',
         beatKI    = xi.ki.HYDRA_CORPS_INSIGNIA,
         beatTitle = xi.title.DYNAMIS_BEAUCEDINE_INTERLOPER,
         entryPos  = { -284.751, -39.923, -422.948, 235 },
@@ -228,7 +228,7 @@ local dynaInfo =
 
     [xi.zone.DYNAMIS_XARCABARD] =
     {
-        beatVar   = "DynaXarcabard_Win",
+        beatVar   = 'DynaXarcabard_Win',
         beatKI    = xi.ki.HYDRA_CORPS_BATTLE_STANDARD,
         beatTitle = xi.title.DYNAMIS_XARCABARD_INTERLOPER,
         entryPos  = { 569.312, -0.098, -270.158, 90 },
@@ -237,7 +237,7 @@ local dynaInfo =
 
     [xi.zone.DYNAMIS_VALKURM] =
     {
-        beatVar   = "DynaValkurm_Win",
+        beatVar   = 'DynaValkurm_Win',
         beatKI    = xi.ki.DYNAMIS_VALKURM_SLIVER,
         beatTitle = xi.title.DYNAMIS_VALKURM_INTERLOPER,
         entryPos  = { 100, -8, 131, 47 },
@@ -246,7 +246,7 @@ local dynaInfo =
 
     [xi.zone.DYNAMIS_BUBURIMU] =
     {
-        beatVar   = "DynaBuburimu_Win",
+        beatVar   = 'DynaBuburimu_Win',
         beatKI    = xi.ki.DYNAMIS_BUBURIMU_SLIVER,
         beatTitle = xi.title.DYNAMIS_BUBURIMU_INTERLOPER,
         entryPos  = { 155, -1, -169, 170 },
@@ -255,7 +255,7 @@ local dynaInfo =
 
     [xi.zone.DYNAMIS_QUFIM] =
     {
-        beatVar   = "DynaQufim_Win",
+        beatVar   = 'DynaQufim_Win',
         beatKI    = xi.ki.DYNAMIS_QUFIM_SLIVER,
         beatTitle = xi.title.DYNAMIS_QUFIM_INTERLOPER,
         entryPos  = { -19, -17, 104, 253 },
@@ -264,7 +264,7 @@ local dynaInfo =
 
     [xi.zone.DYNAMIS_TAVNAZIA] =
     {
-        beatVar   = "DynaTavnazia_Win",
+        beatVar   = 'DynaTavnazia_Win',
         beatKI    = xi.ki.DYNAMIS_TAVNAZIA_SLIVER,
         beatTitle = xi.title.DYNAMIS_TAVNAZIA_INTERLOPER,
         entryPos  = { 0.1, -7, -21, 190 },
@@ -277,7 +277,7 @@ local dynaInfo =
 -----------------------------------
 
 local function arg3(player, bit)
-    local csVar  = player:getCharVar("Dynamis_Status")
+    local csVar  = player:getCharVar('Dynamis_Status')
     local timeKI = player:hasKeyItem(xi.ki.RHAPSODY_IN_AZURE) and 65536 or 0
 
     if csVar == 0 then
@@ -296,13 +296,13 @@ local function handleEntryTime(player)
         realDay = getMidnight() - 86400
     end
 
-    local dynaWaitxDay = player:getCharVar("dynaWaitxDay")
+    local dynaWaitxDay = player:getCharVar('dynaWaitxDay')
 
     if
         (dynaWaitxDay + xi.settings.main.BETWEEN_2DYNA_WAIT_TIME * 60 * 60) < realDay and
         not player:hasKeyItem(xi.ki.RHAPSODY_IN_AZURE)
     then
-        player:setCharVar("dynaWaitxDay", realDay)
+        player:setCharVar('dynaWaitxDay', realDay)
     end
 end
 
@@ -313,7 +313,7 @@ xi.dynamis.entryNpcOnTrigger = function(player, npc)
     local zoneId        = player:getZoneID()
     local info          = entryInfo[zoneId]
     local ID            = zones[zoneId]
-    local dynaMask      = player:getCharVar("Dynamis_Status")
+    local dynaMask      = player:getCharVar('Dynamis_Status')
     local unlockingDyna = utils.mask.getBit(dynaMask, 0)
     local tavnaziaFirst = false
 
@@ -324,7 +324,7 @@ xi.dynamis.entryNpcOnTrigger = function(player, npc)
         not utils.mask.getBit(dynaMask, info.csBit)
     then
         player:startEvent(info.csFirst)
-        player:setCharVar("Dynamis_Status", utils.mask.setBit(dynaMask, info.csBit, true))
+        player:setCharVar('Dynamis_Status', utils.mask.setBit(dynaMask, info.csBit, true))
         -- set to skip menu after getting this CS
         tavnaziaFirst = not tavnaziaFirst
     -- player has access but is on a job below required level
@@ -360,7 +360,7 @@ xi.dynamis.entryNpcOnTrigger = function(player, npc)
         -- dynamis entry
         elseif not info.reqs or info.reqs(player) then
             local realDay      = os.time()
-            local dynaWaitxDay = player:getCharVar("dynaWaitxDay")
+            local dynaWaitxDay = player:getCharVar('dynaWaitxDay')
             local sjobOption   = info.csBit > 6 and 1 or 0
 
             if (dynaWaitxDay + xi.settings.main.BETWEEN_2DYNA_WAIT_TIME * 60 * 60) < realDay then
@@ -376,12 +376,12 @@ end
 
 xi.dynamis.entryNpcOnEventFinish = function(player, csid, option, npc)
     local info     = entryInfo[player:getZoneID()]
-    local dynaMask = player:getCharVar("Dynamis_Status")
+    local dynaMask = player:getCharVar('Dynamis_Status')
 
     -- shrouded sand cutscene
     if info.csVial and csid == info.csVial then
         npcUtil.giveKeyItem(player, xi.ki.VIAL_OF_SHROUDED_SAND)
-        player:setCharVar("Dynamis_Status", utils.mask.setBit(dynaMask, 0, false))
+        player:setCharVar('Dynamis_Status', utils.mask.setBit(dynaMask, 0, false))
 
     -- victory cutscene
     elseif csid == info.csBeat then
@@ -393,9 +393,9 @@ xi.dynamis.entryNpcOnEventFinish = function(player, csid, option, npc)
         (option == 0 or option == 1) or
         csid == info.csFirst
     then
-        player:setCharVar("Dynamis_subjob", option)
-        player:setCharVar("Dynamis_Entry", 1)
-        player:setCharVar("Dynamis_Status", utils.mask.setBit(dynaMask, info.csBit, true))
+        player:setCharVar('Dynamis_subjob', option)
+        player:setCharVar('Dynamis_Entry', 1)
+        player:setCharVar('Dynamis_Status', utils.mask.setBit(dynaMask, info.csBit, true))
 
         handleEntryTime(player)
 
@@ -419,9 +419,9 @@ xi.dynamis.zoneOnInitialize = function(zone)
         for _, v in pairs(timeExtensionMobs) do
             local group = {}
 
-            if type(v.mob) == "number" then
+            if type(v.mob) == 'number' then
                 group = { v.mob }
-            elseif type(v.mob) == "table" then
+            elseif type(v.mob) == 'table' then
                 group = { unpack(v.mob) }
             end
 
@@ -458,8 +458,8 @@ xi.dynamis.zoneOnZoneIn = function(player, prevZone)
 
     local cs = -1
 
-    if player:getCharVar("Dynamis_Entry") == 1 or player:getGMLevel() > 0 then
-        if player:getCharVar("Dynamis_subjob") == 1 then
+    if player:getCharVar('Dynamis_Entry') == 1 or player:getGMLevel() > 0 then
+        if player:getCharVar('Dynamis_subjob') == 1 then
             player:timer(5000, function(playerArg)
                 playerArg:messageBasic(xi.msg.basic.UNABLE_TO_ACCESS_SJ)
             end)
@@ -472,8 +472,8 @@ xi.dynamis.zoneOnZoneIn = function(player, prevZone)
             playerArg:messageSpecial(ID.text.DYNAMIS_TIME_BEGIN, 60, xi.ki.PRISMATIC_HOURGLASS)
         end)
 
-        player:setCharVar("Dynamis_Entry", 0)
-        player:setCharVar("Dynamis_subjob", 0)
+        player:setCharVar('Dynamis_Entry', 0)
+        player:setCharVar('Dynamis_subjob', 0)
     end
 
     if not player:hasStatusEffect(xi.effect.DYNAMIS) then
@@ -548,9 +548,9 @@ xi.dynamis.timeExtensionOnDeath = function(mob, player, optParams)
 
         -- find this TE's group
         for _, t in pairs(timeExtensionMobs) do
-            if type(t.mob) == "number" then
+            if type(t.mob) == 'number' then
                 group = { t.mob }
-            elseif type(t.mob) == "table" then
+            elseif type(t.mob) == 'table' then
                 group = { unpack(t.mob) }
             end
 
@@ -574,7 +574,7 @@ xi.dynamis.timeExtensionOnDeath = function(mob, player, optParams)
                 npcUtil.giveKeyItem(player, te.ki)
                 local oldDuration = effect:getDuration()
                 effect:setDuration((oldDuration + (te.minutes * 60)) * 1000)
-                player:setLocalVar("dynamis_lasttimeupdate", effect:getTimeRemaining() / 1000)
+                player:setLocalVar('dynamis_lasttimeupdate', effect:getTimeRemaining() / 1000)
                 player:messageSpecial(ID.text.DYNAMIS_TIME_EXTEND, te.minutes)
             end
 
@@ -589,10 +589,10 @@ xi.dynamis.timeExtensionOnDeath = function(mob, player, optParams)
                 GetMobByID(teId):setRespawnTime(85)
             end
         else
-            printf("[xi.dynamis.timeExtensionOnDeath] called in zone %i on mob %s that does not appear in a time extension group.", zoneId, mob:getName())
+            printf('[xi.dynamis.timeExtensionOnDeath] called in zone %i on mob %s that does not appear in a time extension group.', zoneId, mob:getName())
         end
     else
-        printf("[xi.dynamis.timeExtensionOnDeath] called on mob %s in zone %i that does not have a TIME_EXTENSION table in its IDs.", mob:getName(), zoneId)
+        printf('[xi.dynamis.timeExtensionOnDeath] called on mob %s in zone %i that does not have a TIME_EXTENSION table in its IDs.', mob:getName(), zoneId)
     end
 end
 
@@ -621,10 +621,10 @@ xi.dynamis.refillStatueOnSpawn = function(mob)
         end
 
         if not found then
-            printf("[xi.dynamis.refillStatueOnSpawn] called in zone %i on mob %i that does not appear in a refill statue group.", zoneId, mobId)
+            printf('[xi.dynamis.refillStatueOnSpawn] called in zone %i on mob %i that does not appear in a refill statue group.', zoneId, mobId)
         end
     else
-        printf("[xi.dynamis.refillStatueOnSpawn] called on mob %i in zone %i that does not have a REFILL_STATUE table in its IDs.", mobId, zoneId)
+        printf('[xi.dynamis.refillStatueOnSpawn] called on mob %i in zone %i that does not have a REFILL_STATUE table in its IDs.', mobId, zoneId)
     end
 end
 
@@ -689,10 +689,10 @@ xi.dynamis.refillStatueOnDeath = function(mob, player, optParams)
                 GetMobByID(nextId):setRespawnTime(300) -- 5 minutes
             end
         else
-            printf("[xi.dynamis.refillStatueOnDeath] called in zone %i on mob %i that does not appear in a refill statue group.", zoneId, mobId)
+            printf('[xi.dynamis.refillStatueOnDeath] called in zone %i on mob %i that does not appear in a refill statue group.', zoneId, mobId)
         end
     else
-        printf("[xi.dynamis.refillStatueOnDeath] called on mob %i in zone %i that does not have a REFILL_STATUE table in its IDs.", mobId, zoneId)
+        printf('[xi.dynamis.refillStatueOnDeath] called on mob %i in zone %i that does not have a REFILL_STATUE table in its IDs.', mobId, zoneId)
     end
 end
 
@@ -710,7 +710,7 @@ xi.dynamis.qmOnTrade = function(player, npc, trade)
                 if npcUtil.tradeHasExactly(trade, v.item) then
                     local mobId
 
-                    if type(v.mob) == "table" then
+                    if type(v.mob) == 'table' then
                         mobId = v.mob[math.random(1, #v.mob)]
                     else
                         mobId = v.mob
@@ -727,10 +727,10 @@ xi.dynamis.qmOnTrade = function(player, npc, trade)
                 end
             end
         else
-            printf("[xi.dynamis.qmOnTrade] called on in zone %i on npc %i (%s) that does not appear in QM data.", zoneId, npcId, npc:getName())
+            printf('[xi.dynamis.qmOnTrade] called on in zone %i on npc %i (%s) that does not appear in QM data.', zoneId, npcId, npc:getName())
         end
     else
-        printf("[xi.dynamis.qmOnTrade] called on npc %i (%s) in zone %i that does not have a QM group in its IDs.", npcId, npc:getName(), zoneId)
+        printf('[xi.dynamis.qmOnTrade] called on npc %i (%s) in zone %i that does not have a QM group in its IDs.', npcId, npc:getName(), zoneId)
     end
 end
 
@@ -750,16 +750,16 @@ xi.dynamis.qmOnTrigger = function(player, npc)
                 info.trade and
                 #info.trade == 1 and
                 info.trade[1].item and
-                type(info.trade[1].item) == "number" and
+                type(info.trade[1].item) == 'number' and
                 ID.text.OMINOUS_PRESENCE
             then
                 player:messageSpecial(ID.text.OMINOUS_PRESENCE, info.trade[1].item)
             end
         else
-            printf("[xi.dynamis.qmOnTrigger] called on in zone %i on npc %i (%s) that does not appear in QM data.", zoneId, npcId, npc:getName())
+            printf('[xi.dynamis.qmOnTrigger] called on in zone %i on npc %i (%s) that does not appear in QM data.', zoneId, npcId, npc:getName())
         end
     else
-        printf("[xi.dynamis.qmOnTrigger] called on npc %i (%s) in zone %i that does not have a QM group in its IDs.", npcId, npc:getName(), zoneId)
+        printf('[xi.dynamis.qmOnTrigger] called on npc %i (%s) in zone %i that does not have a QM group in its IDs.', npcId, npc:getName(), zoneId)
     end
 end
 
@@ -817,19 +817,19 @@ xi.dynamis.procMonster = function(mob, player)
         local extensions = getExtensions(player)
         if extensions > 2 then
             if player:getSubJob() == xi.job.NONE and math.random(1, 100) == 1 then
-                mob:setLocalVar("dynamis_proc", 4)
+                mob:setLocalVar('dynamis_proc', 4)
                 mob:addStatusEffect(xi.effect.TERROR, 0, 0, 30)
                 mob:weaknessTrigger(3)
             elseif extensions == 5 then
-                mob:setLocalVar("dynamis_proc", 3)
+                mob:setLocalVar('dynamis_proc', 3)
                 mob:addStatusEffect(xi.effect.TERROR, 0, 0, 30)
                 mob:weaknessTrigger(2)
             elseif extensions == 4 then
-                mob:setLocalVar("dynamis_proc", 2)
+                mob:setLocalVar('dynamis_proc', 2)
                 mob:addStatusEffect(xi.effect.TERROR, 0, 0, 30)
                 mob:weaknessTrigger(1)
             elseif extensions == 3 then
-                mob:setLocalVar("dynamis_proc", 1)
+                mob:setLocalVar('dynamis_proc', 1)
                 mob:addStatusEffect(xi.effect.TERROR, 0, 0, 30)
                 mob:weaknessTrigger(0)
             end
@@ -929,7 +929,7 @@ xi.dynamis.hourglassAndCurrencyExchangeNPCOnTrade = function(player, npc, trade)
     local shop     = xi.dynamis.hourglassAndCurrencyExchangeNPCLookup[zoneId].shop
 
     -- Zero this out, just in case
-    player:setLocalVar("currencyExchange", 0)
+    player:setLocalVar('currencyExchange', 0)
 
     if player:hasKeyItem(xi.ki.VIAL_OF_SHROUDED_SAND) then
         -- buy prismatic hourglass
@@ -960,7 +960,7 @@ xi.dynamis.hourglassAndCurrencyExchangeNPCOnTrade = function(player, npc, trade)
             trade:hasItemQty(currency[3], 1) and
             tradeItem == currency[3]
         then
-            player:setLocalVar("currencyExchange", currency[2])
+            player:setLocalVar('currencyExchange', currency[2])
             player:startEvent(baseCs + 8, tradeItem, currency[2], xi.settings.main.CURRENCY_EXCHANGE_RATE)
         elseif -- (optional) 100's to 1's
             xi.settings.main.ENABLE_EXCHANGE_100S_TO_1S and
@@ -968,7 +968,7 @@ xi.dynamis.hourglassAndCurrencyExchangeNPCOnTrade = function(player, npc, trade)
             trade:hasItemQty(currency[2], 1) and
             tradeItem == currency[2]
         then
-            player:setLocalVar("currencyExchange", currency[1])
+            player:setLocalVar('currencyExchange', currency[1])
             player:startEvent(baseCs + 8, tradeItem, currency[1], xi.settings.main.CURRENCY_EXCHANGE_RATE)
 
         -- shop
@@ -979,7 +979,7 @@ xi.dynamis.hourglassAndCurrencyExchangeNPCOnTrade = function(player, npc, trade)
                 price = shop[i]
                 item = shop[i + 1]
                 if count == price and trade:hasItemQty(currency[2], price) then
-                    player:setLocalVar("hundredItemBought", item)
+                    player:setLocalVar('hundredItemBought', item)
                     player:startEvent(baseCs + 7, currency[2], price, item)
                     break
                 end
@@ -1084,7 +1084,7 @@ xi.dynamis.hourglassAndCurrencyExchangeNPCOnEventFinish = function(player, csid,
 
     -- 10k pieces to hundreds (or hundreds to singles)
     elseif csid == baseCs + 8 then
-        local currencyExchange = player:getLocalVar("currencyExchange")
+        local currencyExchange = player:getLocalVar('currencyExchange')
         local slotsReq         = math.ceil(xi.settings.main.CURRENCY_EXCHANGE_RATE / 99)
         if player:getFreeSlotsCount() < slotsReq then
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, currencyExchange)
@@ -1102,11 +1102,11 @@ xi.dynamis.hourglassAndCurrencyExchangeNPCOnEventFinish = function(player, csid,
         end
 
         -- Zero this out, just in case
-        player:setLocalVar("currencyExchange", 0)
+        player:setLocalVar('currencyExchange', 0)
 
     -- bought item from shop
     elseif csid == baseCs + 7 then
-        local item = player:getLocalVar("hundredItemBought")
+        local item = player:getLocalVar('hundredItemBought')
         if player:getFreeSlotsCount() == 0 then
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, item)
         else
@@ -1115,6 +1115,6 @@ xi.dynamis.hourglassAndCurrencyExchangeNPCOnEventFinish = function(player, csid,
             player:messageSpecial(ID.text.ITEM_OBTAINED, item)
         end
 
-        player:setLocalVar("hundredItemBought", 0)
+        player:setLocalVar('hundredItemBought', 0)
     end
 end

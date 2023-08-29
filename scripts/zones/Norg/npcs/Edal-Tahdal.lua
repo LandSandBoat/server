@@ -17,9 +17,9 @@ entity.onTrigger = function(player, npc)
 
     if
         (trialByWater == QUEST_AVAILABLE and player:getFameLevel(xi.quest.fame_area.NORG) >= 4) or
-        (trialByWater == QUEST_COMPLETED and os.time() > player:getCharVar("TrialByWater_date"))
+        (trialByWater == QUEST_COMPLETED and os.time() > player:getCharVar('TrialByWater_date'))
     then
-        player:startEvent(109, 0, xi.ki.TUNING_FORK_OF_WATER) -- Start and restart quest "Trial by Water"
+        player:startEvent(109, 0, xi.ki.TUNING_FORK_OF_WATER) -- Start and restart quest 'Trial by Water'
     elseif
         trialByWater == QUEST_ACCEPTED and
         not player:hasKeyItem(xi.ki.TUNING_FORK_OF_WATER) and
@@ -67,7 +67,7 @@ entity.onEventFinish = function(player, csid, option, npc)
         end
 
         player:addQuest(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.TRIAL_BY_WATER)
-        player:setCharVar("TrialByWater_date", 0)
+        player:setCharVar('TrialByWater_date', 0)
         player:addKeyItem(xi.ki.TUNING_FORK_OF_WATER)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.TUNING_FORK_OF_WATER)
     elseif csid == 190 then
@@ -100,7 +100,7 @@ entity.onEventFinish = function(player, csid, option, npc)
 
             player:addTitle(xi.title.HEIR_OF_THE_GREAT_WATER)
             player:delKeyItem(xi.ki.WHISPER_OF_TIDES) --Whisper of Tides, as a trade for the above rewards
-            player:setCharVar("TrialByWater_date", getMidnight())
+            player:setCharVar('TrialByWater_date', getMidnight())
             player:addFame(xi.quest.fame_area.NORG, 30)
             player:completeQuest(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.TRIAL_BY_WATER)
         end

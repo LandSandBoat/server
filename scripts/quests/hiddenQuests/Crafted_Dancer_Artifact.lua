@@ -10,7 +10,7 @@
 -- * Timer  - VanadielUniqueDay Wait Timer
 -----------------------------------
 
-local quest = HiddenQuest:new("DncArtifact")
+local quest = HiddenQuest:new('DncArtifact')
 
 local dncArtifactOptions =
 {

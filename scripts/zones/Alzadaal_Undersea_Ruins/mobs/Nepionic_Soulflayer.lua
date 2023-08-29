@@ -2,7 +2,7 @@
 -- Area: Alzadaal Undersea Ruins (72)
 --  Mob: Nepionic Soulflayer
 -----------------------------------
-mixins = { require("scripts/mixins/job_special") }
+mixins = { require('scripts/mixins/job_special') }
 -----------------------------------
 local entity = {}
 --TODO: Immortal Shield - Magic Shield (Only prevents direct damage from spells)

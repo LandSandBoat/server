@@ -1,7 +1,7 @@
 -----------------------------------
 -- Red Mage Job Utilities
 -----------------------------------
-require("scripts/globals/utils")
+require('scripts/globals/utils')
 -----------------------------------
 xi = xi or {}
 xi.job_utils = xi.job_utils or {}

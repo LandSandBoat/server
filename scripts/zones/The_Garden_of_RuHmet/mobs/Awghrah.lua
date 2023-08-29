@@ -2,7 +2,7 @@
 -- Area: The Garden of Ru'Hmet
 --  Mob: Aw'ghrah
 -----------------------------------
-mixins = { require("scripts/mixins/families/ghrah") }
+mixins = { require('scripts/mixins/families/ghrah') }
 -----------------------------------
 local entity = {}
 

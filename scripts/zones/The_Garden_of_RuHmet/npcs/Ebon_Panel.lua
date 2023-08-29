@@ -19,12 +19,12 @@ entity.onTrigger = function(player, npc)
 
     if
         player:getCurrentMission(xi.mission.log_id.COP) == xi.mission.id.cop.WHEN_ANGELS_FALL and
-        player:getCharVar("PromathiaStatus") == 1
+        player:getCharVar('PromathiaStatus') == 1
     then
         player:startEvent(202)
     elseif
         player:getCurrentMission(xi.mission.log_id.COP) == xi.mission.id.cop.WHEN_ANGELS_FALL and
-        player:getCharVar("PromathiaStatus") == 2
+        player:getCharVar('PromathiaStatus') == 2
     then
         if xPos > 99 and xPos < 101 then -- Mithra Tower
             if playerRace == xi.race.MITHRA then
@@ -61,25 +61,25 @@ end
 
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 202 then
-        player:setCharVar("PromathiaStatus", 2)
+        player:setCharVar('PromathiaStatus', 2)
     elseif csid == 124 and option ~= 0 then -- Mithra
         player:addTitle(xi.title.WARRIOR_OF_THE_CRYSTAL)
-        player:setCharVar("PromathiaStatus", 3)
+        player:setCharVar('PromathiaStatus', 3)
         player:addKeyItem(xi.ki.LIGHT_OF_DEM)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.LIGHT_OF_DEM)
     elseif csid == 121 and option ~= 0 then -- Elvaan
         player:addTitle(xi.title.WARRIOR_OF_THE_CRYSTAL)
-        player:setCharVar("PromathiaStatus", 3)
+        player:setCharVar('PromathiaStatus', 3)
         player:addKeyItem(xi.ki.LIGHT_OF_MEA)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.LIGHT_OF_MEA)
     elseif csid == 123 and option ~= 0 then -- Tarutaru
         player:addTitle(xi.title.WARRIOR_OF_THE_CRYSTAL)
-        player:setCharVar("PromathiaStatus", 3)
+        player:setCharVar('PromathiaStatus', 3)
         player:addKeyItem(xi.ki.LIGHT_OF_HOLLA)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.LIGHT_OF_HOLLA)
     elseif csid == 122 and option ~= 0 then -- Galka
         player:addTitle(xi.title.WARRIOR_OF_THE_CRYSTAL)
-        player:setCharVar("PromathiaStatus", 3)
+        player:setCharVar('PromathiaStatus', 3)
         player:addKeyItem(xi.ki.LIGHT_OF_ALTAIEU)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.LIGHT_OF_ALTAIEU)
     end

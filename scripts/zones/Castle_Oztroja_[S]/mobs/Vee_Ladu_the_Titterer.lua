@@ -3,7 +3,7 @@
 --   NM: Vee Ladu the Titterer
 -- TODO: summons up to four low-HP copies of itself when it casts utsusemi: ni
 -----------------------------------
-mixins = { require("scripts/mixins/job_special") }
+mixins = { require('scripts/mixins/job_special') }
 -----------------------------------
 local entity = {}
 

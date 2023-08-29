@@ -2,7 +2,7 @@
 -- Area: Castle Oztroja [S]
 --   NM: Duu Masa the Onecut
 -----------------------------------
-mixins = { require("scripts/mixins/job_special") }
+mixins = { require('scripts/mixins/job_special') }
 -----------------------------------
 local entity = {}
 

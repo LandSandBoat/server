@@ -3,7 +3,7 @@
 --   NM: Chuglix Berrypaws
 -----------------------------------
 local ID = zones[xi.zone.ROLANBERRY_FIELDS]
-mixins = { require("scripts/mixins/job_special") }
+mixins = { require('scripts/mixins/job_special') }
 -----------------------------------
 local entity = {}
 

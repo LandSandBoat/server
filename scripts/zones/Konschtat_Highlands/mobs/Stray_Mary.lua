@@ -2,7 +2,7 @@
 -- Area: Konschtat Highlands
 --   NM: Stray Mary
 -----------------------------------
-require("scripts/quests/tutorial")
+require('scripts/quests/tutorial')
 -----------------------------------
 local entity = {}
 

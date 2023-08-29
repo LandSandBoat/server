@@ -5,19 +5,19 @@
 --   For multiple reraises, this can be set on spawn for more reraises.
 --   To run a function when a reraise occurs, add a listener to AERN_RERAISE
 
-require("scripts/globals/mixins")
+require('scripts/globals/mixins')
 
 g_mixins = g_mixins or {}
 g_mixins.families = g_mixins.families or {}
 
 g_mixins.families.aern = function(aernMob)
-    aernMob:addListener("DEATH", "AERN_DEATH", function(mob, killer)
+    aernMob:addListener('DEATH', 'AERN_DEATH', function(mob, killer)
         if not killer then
             return
         end
 
-        local reraises = mob:getLocalVar("AERN_RERAISE_MAX")
-        local currReraise = mob:getLocalVar("AERN_RERAISES")
+        local reraises = mob:getLocalVar('AERN_RERAISE_MAX')
+        local currReraise = mob:getLocalVar('AERN_RERAISES')
         if reraises == 0 then
             reraises = 1
         end
@@ -27,7 +27,7 @@ g_mixins.families.aern = function(aernMob)
             return
         end
 
-        if mob:getLocalVar("ALLOW_DROPS") == 0 then
+        if mob:getLocalVar('ALLOW_DROPS') == 0 then
             mob:setMobMod(xi.mobMod.NO_DROPS, 1)
         end
 
@@ -60,7 +60,7 @@ g_mixins.families.aern = function(aernMob)
 
             mobArg:setHP(mob:getMaxHP())
             mobArg:setAnimationSub(3)
-            mobArg:setLocalVar("AERN_RERAISES", currReraise + 1)
+            mobArg:setLocalVar('AERN_RERAISES', currReraise + 1)
             mobArg:resetAI()
             mobArg:stun(3000)
             if
@@ -90,7 +90,7 @@ g_mixins.families.aern = function(aernMob)
                 end
             end
 
-            mobArg:triggerListener("AERN_RERAISE", mobArg, currReraise + 1)
+            mobArg:triggerListener('AERN_RERAISE', mobArg, currReraise + 1)
         end)
 
         mob:timer(16000, function(mobArg)

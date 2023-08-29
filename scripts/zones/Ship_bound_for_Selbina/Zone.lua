@@ -22,7 +22,7 @@ zoneObject.onZoneIn = function(player, prevZone)
 
     if
         player:hasKeyItem(xi.ki.SEANCE_STAFF) and
-        player:getCharVar("Enagakure_Killed") == 0 and
+        player:getCharVar('Enagakure_Killed') == 0 and
         not GetMobByID(ID.mob.ENAGAKURE):isSpawned()
     then
         SpawnMob(ID.mob.ENAGAKURE)

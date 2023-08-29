@@ -5,7 +5,7 @@
 -- Spawned with Pectin: !additem 2591
 -- Wiki: http://ffxiclopedia.wikia.com/wiki/Claret
 -----------------------------------
-mixins = { require("scripts/mixins/rage") }
+mixins = { require('scripts/mixins/rage') }
 -----------------------------------
 local entity = {}
 
@@ -15,7 +15,7 @@ entity.onMobInitialize = function(mob)
 end
 
 entity.onMobSpawn = function(mob)
-    mob:setLocalVar("[rage]timer", 3600) -- 60 minutes
+    mob:setLocalVar('[rage]timer', 3600) -- 60 minutes
     mob:addMod(xi.mod.REGEN, math.floor(mob:getMaxHP() * 0.004))
     mob:addMod(xi.mod.BIND_MEVA, 40)
     mob:addMod(xi.mod.MOVE, 15)

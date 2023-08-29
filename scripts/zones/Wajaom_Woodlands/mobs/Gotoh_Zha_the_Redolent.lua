@@ -4,8 +4,8 @@
 -----------------------------------
 mixins =
 {
-    require("scripts/mixins/job_special"),
-    require("scripts/mixins/rage")
+    require('scripts/mixins/job_special'),
+    require('scripts/mixins/rage')
 }
 -----------------------------------
 -- Detailed Notes & Todos
@@ -42,13 +42,13 @@ entity.onMobSpawn = function(mob)
         },
     })
 
-    mob:setLocalVar("[rage]timer", 3600) -- 60 minutes
+    mob:setLocalVar('[rage]timer', 3600) -- 60 minutes
     mob:setSpellList(296) -- Set BLM spell list
 end
 
 entity.onMobFight = function(mob, target)
-    if mob:getAnimationSub() == 1 and mob:getLocalVar("jobChanged") == 0 then
-        mob:setLocalVar("jobChanged", 1)
+    if mob:getAnimationSub() == 1 and mob:getLocalVar('jobChanged') == 0 then
+        mob:setLocalVar('jobChanged', 1)
         mob:setSpellList(297) -- Set WHM spell list.
         -- set new JSA parameters
         xi.mix.jobSpecial.config(mob, {

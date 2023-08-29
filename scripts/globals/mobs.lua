@@ -1,11 +1,11 @@
 -----------------------------------
 -- Global version of onMobDeath
 -----------------------------------
-require("scripts/globals/magiantrials")
-require("scripts/globals/missions")
-require("scripts/globals/quests")
-require("scripts/globals/magic")
-require("scripts/globals/utils")
+require('scripts/globals/magiantrials')
+require('scripts/globals/missions')
+require('scripts/globals/quests')
+require('scripts/globals/magic')
+require('scripts/globals/utils')
 -----------------------------------
 xi = xi or {}
 xi.mob = xi.mob or {}
@@ -35,7 +35,7 @@ end
 
 -- potential lottery placeholder was killed
 xi.mob.phOnDespawn = function(ph, phList, chance, cooldown, immediate)
-    if type(immediate) ~= "boolean" then
+    if type(immediate) ~= 'boolean' then
         immediate = false
     end
 
@@ -53,7 +53,7 @@ xi.mob.phOnDespawn = function(ph, phList, chance, cooldown, immediate)
     if nmId ~= nil then
         local nm = GetMobByID(nmId)
         if nm ~= nil then
-            local pop = nm:getLocalVar("pop")
+            local pop = nm:getLocalVar('pop')
 
             chance = math.ceil(chance * 10) -- chance / 1000.
             if
@@ -68,13 +68,13 @@ xi.mob.phOnDespawn = function(ph, phList, chance, cooldown, immediate)
                 UpdateNMSpawnPoint(nmId)
                 nm:setRespawnTime(immediate and 1 or GetMobRespawnTime(phId)) -- if immediate is true, spawn the nm immediately (1ms) else use placeholder's timer
 
-                nm:addListener("DESPAWN", "DESPAWN_" .. nmId, function(m)
+                nm:addListener('DESPAWN', 'DESPAWN_' .. nmId, function(m)
                     -- on NM death, replace NM repop with PH repop
                     DisallowRespawn(nmId, true)
                     DisallowRespawn(phId, false)
                     GetMobByID(phId):setRespawnTime(GetMobRespawnTime(phId))
-                    m:setLocalVar("pop", os.time() + cooldown)
-                    m:removeListener("DESPAWN_" .. nmId)
+                    m:setLocalVar('pop', os.time() + cooldown)
+                    m:removeListener('DESPAWN_' .. nmId)
                 end)
 
                 return true
@@ -429,7 +429,7 @@ local additionalEffects =
     params will override effect's default settings
 --]]
 xi.mob.onAddEffect = function(mob, target, damage, effect, params)
-    if type(params) ~= "table" then
+    if type(params) ~= 'table' then
         params = {}
     end
 
@@ -444,7 +444,7 @@ xi.mob.onAddEffect = function(mob, target, damage, effect, params)
             chance = utils.clamp(chance, 5, 95)
         end
 
-        -- target:PrintToPlayer(string.format("Chance: %i", chance)) -- DEBUG
+        -- target:PrintToPlayer(string.format('Chance: %i', chance)) -- DEBUG
 
         if math.random(1, 100) <= chance then
 
@@ -489,7 +489,7 @@ xi.mob.onAddEffect = function(mob, target, damage, effect, params)
                     power = dMod + target:getMainLvl() - mob:getMainLvl() + damage / 2
                 end
 
-                -- target:PrintToPlayer(string.format("Initial Power: %f", power)) -- DEBUG
+                -- target:PrintToPlayer(string.format('Initial Power: %f', power)) -- DEBUG
 
                 power = addBonusesAbility(mob, ae.ele, target, power, ae.bonusAbilityParams)
                 power = power * applyResistanceAddEffect(mob, target, ae.ele, 0)
@@ -499,7 +499,7 @@ xi.mob.onAddEffect = function(mob, target, damage, effect, params)
                     power = finalMagicNonSpellAdjustments(mob, target, ae.ele, power)
                 end
 
-                -- target:PrintToPlayer(string.format("Adjusted Power: %f", power)) -- DEBUG
+                -- target:PrintToPlayer(string.format('Adjusted Power: %f', power)) -- DEBUG
 
                 local message = ae.msg
                 if power < 0 then
@@ -522,7 +522,7 @@ xi.mob.onAddEffect = function(mob, target, damage, effect, params)
             end
         end
     else
-        printf("invalid additional effect for mobId %i", mob:getID())
+        printf('invalid additional effect for mobId %i', mob:getID())
     end
 
     return 0, 0, 0

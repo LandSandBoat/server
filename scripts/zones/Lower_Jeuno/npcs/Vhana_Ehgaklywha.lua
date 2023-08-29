@@ -4,7 +4,7 @@
 -- Lights lamps in Lower Jeuno if nobody accepts Community Service by 1AM.
 -- !pos -122.853 0.000 -195.605 245
 -----------------------------------
-local lowerJeunoGlobal = require("scripts/zones/Lower_Jeuno/globals")
+local lowerJeunoGlobal = require('scripts/zones/Lower_Jeuno/globals')
 local ID = zones[xi.zone.LOWER_JEUNO]
 -----------------------------------
 local entity = {}

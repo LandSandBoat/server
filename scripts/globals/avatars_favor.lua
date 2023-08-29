@@ -1,7 +1,7 @@
 -----------------------------------
 -- Avatars Favor helper
 -----------------------------------
-require("scripts/globals/pets")
+require('scripts/globals/pets')
 -----------------------------------
 xi = xi or {}
 xi.avatarsFavor = xi.avatarsFavor or {}
@@ -132,7 +132,7 @@ xi.avatarsFavor.applyAvatarsFavorAuraToPet = function(target, effect)
             local avatarEffect = avatarsFavorEffect[petId].effect
 
             --Useful debug message
-            --printf("Power %d, Effect %d", effect:getPower(), power)
+            --printf('Power %d, Effect %d', effect:getPower(), power)
 
             pet:addStatusEffectEx(avatarEffect, avatarEffect, 6, 3, 15, avatarEffect, power, xi.auraTarget.ALLIES, bit.bor(xi.effectFlag.NO_LOSS_MESSAGE, xi.effectFlag.AURA))
         end

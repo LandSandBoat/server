@@ -81,7 +81,7 @@ mission.sections =
                 [116] = function(player, csid, option, npc)
                     if
                         option == 1 and
-                        player:getLocalVar("INSTANCE_ID") == 7701
+                        player:getLocalVar('INSTANCE_ID') == 7701
                     then
                         xi.instance.onEventFinish(player, csid, option, npc)
                     end

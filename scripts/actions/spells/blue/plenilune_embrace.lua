@@ -3,7 +3,7 @@
 -- Restores target party member's HP and enhances attack and magic attack..
 -- Shamelessly stolen from http://members.shaw.ca/pizza_steve/cure/Cure_Calculator.html
 -----------------------------------
-require("scripts/globals/magic")
+require('scripts/globals/magic')
 -----------------------------------
 local spellObject = {}
 

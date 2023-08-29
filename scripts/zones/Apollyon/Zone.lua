@@ -6,12 +6,12 @@ local ID = zones[xi.zone.APOLLYON]
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
-    SetServerVariable("[CENTRAL_APOLLYON]Time", 0)
-    SetServerVariable("[CS_Apollyon]Time", 0)
-    SetServerVariable("[NE_Apollyon]Time", 0)
-    SetServerVariable("[NW_Apollyon]Time", 0)
-    SetServerVariable("[SE_APOLLYON]Time", 0)
-    SetServerVariable("[SW_APOLLYON]Time", 0)
+    SetServerVariable('[CENTRAL_APOLLYON]Time', 0)
+    SetServerVariable('[CS_Apollyon]Time', 0)
+    SetServerVariable('[NE_Apollyon]Time', 0)
+    SetServerVariable('[NW_Apollyon]Time', 0)
+    SetServerVariable('[SE_APOLLYON]Time', 0)
+    SetServerVariable('[SW_APOLLYON]Time', 0)
 
     zone:registerTriggerArea(1,  637, -4, -642,  642, 4, -637) -- SE Apollyon NE exit
     zone:registerTriggerArea(2, -642, -4, -642, -637, 4, -637) -- APOLLYON_NW_SW exit

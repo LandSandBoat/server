@@ -1,7 +1,7 @@
 -----------------------------------
 -- Aftermath handling
 -----------------------------------
-require("scripts/globals/weaponskillids")
+require('scripts/globals/weaponskillids')
 
 xi = xi or {}
 
@@ -605,14 +605,14 @@ xi.aftermath.addStatusEffect = function(player, tp, weaponSlot, aftermathType)
         -- Mythic
         [2] = function(x)
             local tier = math.floor(tp / 1000)
-            local icon = xi.effect["AFTERMATH_LV"..tier]
+            local icon = xi.effect['AFTERMATH_LV'..tier]
             player:addStatusEffectEx(xi.effect.AFTERMATH, icon, id, 0, aftermath.duration[tier], 0, tp, aftermathType)
         end,
 
         -- Empyrean
         [3] = function(x)
             local tier = math.floor(tp / 1000)
-            local icon = xi.effect["AFTERMATH_LV"..tier]
+            local icon = xi.effect['AFTERMATH_LV'..tier]
             player:addStatusEffectEx(xi.effect.AFTERMATH, icon, id, 0, aftermath.duration[tier], 0, tp, aftermathType)
         end
     }

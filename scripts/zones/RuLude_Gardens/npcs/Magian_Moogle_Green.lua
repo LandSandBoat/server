@@ -36,7 +36,7 @@ entity.onTrigger = function(player, npc)
     if player:getMainLvl() < 30 then
         player:startEvent(10151)
     elseif
-        player:getCharVar("MetGreenMagianMog") == 0 and
+        player:getCharVar('MetGreenMagianMog') == 0 and
         not player:hasKeyItem(xi.ki.MAGIAN_LEARNERS_LOG)
     then
         if not player:hasKeyItem(xi.ki.MAGIAN_TRIAL_LOG) then
@@ -59,7 +59,7 @@ entity.onEventFinish = function(player, csid, option, npc)
             player:addKeyItem(xi.ki.MAGIAN_LEARNERS_LOG)
         end
 
-        player:setCharVar("MetGreenMagianMog", 1)
+        player:setCharVar('MetGreenMagianMog', 1)
     end
 end
 

@@ -29,17 +29,17 @@ spellObject.onMobSpawn = function(mob)
     mob:addMod(xi.mod.MAGIC_DAMAGE, spellDamage)
 
     -- Shantotto has 100% melee hit rate always.
-    -- TODO: Add support for "perfect accuracy" in c++ land and stop hacking her accuracy.
+    -- TODO: Add support for 'perfect accuracy' in c++ land and stop hacking her accuracy.
     mob:addMod(xi.mod.ACC, 1000)
 
-    -- Shantotto II attack type is suposed to be "typeless physical, like requiescat WS."
+    -- Shantotto II attack type is suposed to be 'typeless physical, like requiescat WS.'
     mob:setMobSkillAttack(1163)
 
     -- TODO: Her regular attacks have a big range (distance from mob, not AoE)
 
     mob:setTrustTPSkillSettings(ai.tp.CLOSER_UNTIL_TP, ai.s.HIGHEST, 2500)
 
-    mob:addListener("WEAPONSKILL_USE", "SHANTOTTO_II_WEAPONSKILL_USE", function(mobArg, target, wsid, tp, action)
+    mob:addListener('WEAPONSKILL_USE', 'SHANTOTTO_II_WEAPONSKILL_USE', function(mobArg, target, wsid, tp, action)
         if wsid == 3740 then -- Final Exam
             -- And yet again, the flames of life are snuffed out, and I'll say this--it was an out and out rout!
             xi.trust.message(mobArg, xi.trust.messageOffset.SPECIAL_MOVE_1)
@@ -47,7 +47,7 @@ spellObject.onMobSpawn = function(mob)
     end)
 
     -- Spellcast (occasionally)
-    mob:addListener("MAGIC_USE", "SHANTOTTO_II_MAGIC", function(mobArg, target, spell, action)
+    mob:addListener('MAGIC_USE', 'SHANTOTTO_II_MAGIC', function(mobArg, target, spell, action)
         if math.random(1, 100) <= 33 then
             -- Ohohohohoho!
             xi.trust.message(mobArg, xi.trust.messageOffset.SPECIAL_MOVE_2)

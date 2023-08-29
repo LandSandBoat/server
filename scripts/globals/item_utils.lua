@@ -1,7 +1,7 @@
 -----------------------------------
 -- Item Utils (Used by Skill Books)
 -----------------------------------
-require("scripts/globals/utils")
+require('scripts/globals/utils')
 -----------------------------------
 xi = xi or {}
 xi.item_utils = {}

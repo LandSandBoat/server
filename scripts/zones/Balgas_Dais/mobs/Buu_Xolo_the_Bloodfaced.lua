@@ -3,7 +3,7 @@
 --  Mob: Buu Xolo the Bloodfaced
 -- BCNM: Saintly Invitation
 -----------------------------------
-mixins = { require("scripts/mixins/job_special") }
+mixins = { require('scripts/mixins/job_special') }
 -----------------------------------
 local entity = {}
 

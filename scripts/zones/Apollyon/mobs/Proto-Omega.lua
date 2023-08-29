@@ -25,7 +25,7 @@ local bipedForm = function(mob)
 end
 
 local finalForm = function(mob)
-    mob:setLocalVar("final", 1)
+    mob:setLocalVar('final', 1)
     mob:setAnimationSub(2)
     mob:setMod(xi.mod.ATTP, 250)
     mob:setMod(xi.mod.UDMGPHYS, -5000)
@@ -49,20 +49,20 @@ entity.onMobSpawn = function(mob)
 end
 
 entity.onMobEngaged = function(mob, target)
-    mob:setLocalVar("formTime", os.time() + 120)
+    mob:setLocalVar('formTime', os.time() + 120)
 end
 
 entity.onMobFight = function(mob, target)
     local now = os.time()
 
     -- If in Final form then do Pod Ejection every 5 minutes
-    if mob:getLocalVar("final") == 1 then
+    if mob:getLocalVar('final') == 1 then
         if
-            now >= mob:getLocalVar("gunpodTime") and
+            now >= mob:getLocalVar('gunpodTime') and
             mob:getCurrentAction() == xi.act.ATTACK and
             GetMobByID(mob:getID() + 1):getStatus() == xi.status.DISAPPEAR
         then
-            mob:setLocalVar("gunpodTime", now + utils.minutes(5))
+            mob:setLocalVar('gunpodTime', now + utils.minutes(5))
             mob:useMobAbility(1532) -- Pod Ejection
         end
 
@@ -76,17 +76,17 @@ entity.onMobFight = function(mob, target)
     end
 
     -- Swap between forms every 2 minutes
-    local form = mob:getLocalVar("formTime")
+    local form = mob:getLocalVar('formTime')
     if now >= form and mob:getCurrentAction() == xi.act.ATTACK then
-        mob:setLocalVar("formTime", now + utils.minutes(2))
+        mob:setLocalVar('formTime', now + utils.minutes(2))
         if mob:getAnimationSub() == 1 then
             bipedForm(mob)
 
             -- Wait for 4.5s while changing form and then do Pod Ejection
             mob:wait(4500)
             mob:timer(4500, function(mobArg)
-                if mob:isAlive() and mob:getLocalVar("initialGunpod") == 0 then
-                    mob:setLocalVar("initialGunpod", 1)
+                if mob:isAlive() and mob:getLocalVar('initialGunpod') == 0 then
+                    mob:setLocalVar('initialGunpod', 1)
                     mob:useMobAbility(1532) -- Pod Ejection
                 end
             end)

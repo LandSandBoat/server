@@ -2,7 +2,7 @@
 -- Moghouse Exposition
 -----------------------------------
 
-local quest = HiddenQuest:new("mogExpo")
+local quest = HiddenQuest:new('mogExpo')
 
 quest.reward = {}
 

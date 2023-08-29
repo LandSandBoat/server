@@ -73,7 +73,7 @@ quest.sections =
                 onTrade = function(player, npc, trade)
                     if
                         npcUtil.tradeHasExactly(trade, xi.item.CHAOSBRINGER) and
-                        player:getCharVar("ChaosbringerKills") >= 200
+                        player:getCharVar('ChaosbringerKills') >= 200
                     then
                         return quest:progressEvent(10)
                     end

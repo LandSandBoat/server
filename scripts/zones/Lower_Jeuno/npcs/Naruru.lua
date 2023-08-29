@@ -19,7 +19,7 @@ entity.onTrigger = function(player, npc)
         player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_WONDER_MAGIC_SET) == QUEST_COMPLETED and
         cooksPride == QUEST_AVAILABLE
     then
-        if player:getCharVar("CooksPrideVar") == 0 then
+        if player:getCharVar('CooksPrideVar') == 0 then
             player:startEvent(189) -- Start quest "Cook's pride" Long CS
         else
             player:startEvent(188) -- Start quest "Cook's pride" Short CS
@@ -38,7 +38,7 @@ entity.onTrigger = function(player, npc)
         cooksPride == QUEST_COMPLETED and
         theKindCardian == QUEST_AVAILABLE
     then
-        if player:getCharVar("theLostCardianVar") == 0 then
+        if player:getCharVar('theLostCardianVar') == 0 then
             player:startEvent(31) -- During quests "The lost cardian"
         else
             player:startEvent(71) -- During quests "The lost cardian"
@@ -69,7 +69,7 @@ entity.onEventFinish = function(player, csid, option, npc)
         player:addQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.COOK_S_PRIDE)
 
     elseif csid == 189 and option == 1 then
-        player:setCharVar("CooksPrideVar", 1)
+        player:setCharVar('CooksPrideVar', 1)
 
     elseif csid == 187 then
         if player:getFreeSlotsCount() == 0 then
@@ -77,7 +77,7 @@ entity.onEventFinish = function(player, csid, option, npc)
         else
             player:addTitle(xi.title.MERCY_ERRAND_RUNNER)
             player:delKeyItem(xi.ki.SUPER_SOUP_POT)
-            player:setCharVar("CooksPrideVar", 0)
+            player:setCharVar('CooksPrideVar', 0)
             npcUtil.giveCurrency(player, 'gil', 3000)
             player:addItem(xi.item.MYTHRIL_RING)
             player:messageSpecial(ID.text.ITEM_OBTAINED, xi.item.MYTHRIL_RING)

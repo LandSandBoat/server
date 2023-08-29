@@ -168,9 +168,9 @@ quest.sections =
                         if randEvent == 1 then
                             return quest:progressEvent(320, 0, xi.item.HARD_BOILED_EGG) -- Repeats Order
                         elseif randEvent == 2 then
-                            return quest:progressEvent(321) -- "Or Whatever"
+                            return quest:progressEvent(321) -- 'Or Whatever'
                         else
-                            return quest:progressEvent(328) -- "..<Grin>.."
+                            return quest:progressEvent(328) -- '..<Grin>..'
                         end
                     end
                 end

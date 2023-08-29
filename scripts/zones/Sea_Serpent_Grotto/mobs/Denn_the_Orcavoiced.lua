@@ -2,7 +2,7 @@
 -- Area: Sea Serpent Grotto
 --   NM: Denn the Orcavoiced
 -----------------------------------
-mixins = { require("scripts/mixins/job_special") }
+mixins = { require('scripts/mixins/job_special') }
 -----------------------------------
 local entity = {}
 

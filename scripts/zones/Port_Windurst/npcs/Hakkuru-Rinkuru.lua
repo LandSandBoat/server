@@ -27,7 +27,7 @@ entity.onTrade = function(player, npc, trade)
             trade:getItemCount() == 3
         then
             -- Check that all 3 items have been traded, one each
-            player:setCharVar("SecondRewardVar", 1)
+            player:setCharVar('SecondRewardVar', 1)
             player:startEvent(265, 0, xi.item.OAK_STAFF, xi.item.MYTHRIL_ROD, xi.item.ROSE_WAND) -- Completion of quest cutscene for Wondering Wands
         else
             player:startEvent(260, 0, xi.item.OAK_STAFF, xi.item.MYTHRIL_ROD, xi.item.ROSE_WAND) -- Remind player which items are needed ifquest is accepted and items are not traded
@@ -61,7 +61,7 @@ entity.onTrigger = function(player, npc)
     elseif wonderWands == QUEST_ACCEPTED then
             player:startEvent(260) --Reminder for Wonder Wands
     elseif wonderWands == QUEST_COMPLETED then
-        if player:getCharVar("SecondRewardVar") == 1 then
+        if player:getCharVar('SecondRewardVar') == 1 then
             player:startEvent(267) --Initiates second reward ifWonder Wands has been completed.
         end
     end
@@ -96,7 +96,7 @@ entity.onEventFinish = function(player, csid, option, npc)
                 player:addItem(xi.item.MYTHRIL_ROD, 1) --Returns the Oak Staff and the Mythril Rod
                 player:messageSpecial(ID.text.ITEM_OBTAINED, xi.item.OAK_STAFF)
                 player:messageSpecial(ID.text.ITEM_OBTAINED, xi.item.MYTHRIL_ROD)
-                player:setCharVar("SecondRewardVar", 0)
+                player:setCharVar('SecondRewardVar', 0)
             end
         elseif rand == 2 then
             if player:getFreeSlotsCount() == 1 then
@@ -109,7 +109,7 @@ entity.onEventFinish = function(player, csid, option, npc)
                 player:addItem(xi.item.ROSE_WAND, 1) --Returns the Oak Staff and the Rose Wand
                 player:messageSpecial(ID.text.ITEM_OBTAINED, xi.item.OAK_STAFF)
                 player:messageSpecial(ID.text.ITEM_OBTAINED, xi.item.ROSE_WAND)
-                player:setCharVar("SecondRewardVar", 0)
+                player:setCharVar('SecondRewardVar', 0)
             end
         elseif rand == 3 then
             if player:getFreeSlotsCount() == 1 then
@@ -122,7 +122,7 @@ entity.onEventFinish = function(player, csid, option, npc)
                 player:addItem(xi.item.ROSE_WAND, 1) --Returns the Rose Wand and the Mythril Rod
                 player:messageSpecial(ID.text.ITEM_OBTAINED, xi.item.MYTHRIL_ROD)
                 player:messageSpecial(ID.text.ITEM_OBTAINED, xi.item.ROSE_WAND)
-                player:setCharVar("SecondRewardVar", 0)
+                player:setCharVar('SecondRewardVar', 0)
             end
         end
     elseif csid == 265 then

@@ -6,14 +6,14 @@
 cmdprops =
 {
     permission = 1,
-    parameters = ""
+    parameters = ''
 }
 
 function onTrigger(player)
     local pet = player:getPet()
-    if pet and pet:getLocalVar("GodMode") == 0 then
+    if pet and pet:getLocalVar('GodMode') == 0 then
         -- Toggle GodMode on..
-        pet:setLocalVar("GodMode", 1)
+        pet:setLocalVar('GodMode', 1)
 
         -- Add bonus effects to the pet..
         pet:addStatusEffect(xi.effect.MAX_HP_BOOST, 1000, 0, 0)
@@ -45,7 +45,7 @@ function onTrigger(player)
         pet:setMP(50000)
     else
         -- Toggle GodMode off..
-        pet:setLocalVar("GodMode", 0)
+        pet:setLocalVar('GodMode', 0)
 
         -- Remove bonus effects..
         pet:delStatusEffect(xi.effect.MAX_HP_BOOST)

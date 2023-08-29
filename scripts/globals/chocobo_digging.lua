@@ -3,9 +3,9 @@
 -- http://ffxiclopedia.wikia.com/wiki/Chocobo_Digging
 -- https://www.bg-wiki.com/bg/Category:Chocobo_Digging
 -----------------------------------
-require("scripts/globals/roe")
-require("scripts/globals/utils")
-require("scripts/missions/amk/helpers")
+require('scripts/globals/roe')
+require('scripts/globals/utils')
+require('scripts/missions/amk/helpers')
 -----------------------------------
 xi = xi or {}
 xi.chocoboDig = xi.chocoboDig or {}

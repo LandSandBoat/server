@@ -3,7 +3,7 @@
 --  Mob: Ace of Coins
 -- Windurst Mission 9-2
 -----------------------------------
-local global = require("scripts/zones/Full_Moon_Fountain/Globals")
+local global = require('scripts/zones/Full_Moon_Fountain/Globals')
 -----------------------------------
 local entity = {}
 

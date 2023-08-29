@@ -38,7 +38,7 @@ entity.onEventFinish = function(player, csid, option, npc)
         -- no further action needed
     elseif csid == 3 and npcUtil.giveItem(player, xi.item.TOMB_GUARDS_WATERSKIN) then
         player:confirmTrade()
-        player:setCharVar("OfferingWaterOK", 1)
+        player:setCharVar('OfferingWaterOK', 1)
     end
 end
 

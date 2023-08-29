@@ -10,7 +10,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if player:getCharVar("theSandCharmVar") == 1 then
+    if player:getCharVar('theSandCharmVar') == 1 then
         player:startEvent(123) -- During quest "The Sand Charm" - 1st dialog
     else
         player:startEvent(121) -- Standard dialog
@@ -22,7 +22,7 @@ end
 
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 123 then
-        player:setCharVar("theSandCharmVar", 2)
+        player:setCharVar('theSandCharmVar', 2)
     end
 end
 

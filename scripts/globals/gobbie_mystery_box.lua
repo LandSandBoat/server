@@ -1,5 +1,5 @@
 -----------------------------------
-require("scripts/globals/utils")
+require('scripts/globals/utils')
 -----------------------------------
 xi = xi or {}
 xi.gobbieMysteryBox = xi.gobbieMysteryBox or {}
@@ -212,7 +212,7 @@ xi.gobbieMysteryBox.onTrade = function(player, npc, trade, events)
                 return false
             end
 
-            player:setLocalVar("gobbieBoxKey", tradeID)
+            player:setLocalVar('gobbieBoxKey', tradeID)
             player:startEvent(events.KEY_TRADE, tradeID, keyToDial[tradeID])
         else -- trade for points
             -- TODO: Point system needs to be defined
@@ -226,14 +226,14 @@ end
 xi.gobbieMysteryBox.onTrigger = function(player, npc, events)
     local event = events
     local playerAgeDays = (os.time() - player:getTimeCreated()) / 86400
-    local dailyTallyPoints = player:getCurrency("daily_tally")
+    local dailyTallyPoints = player:getCurrency('daily_tally')
     local firstVisit = dailyTallyPoints == -1
-    local gobbieBoxUsed = player:getCharVar("gobbieBoxUsed")
+    local gobbieBoxUsed = player:getCharVar('gobbieBoxUsed')
     local specialDialUsed = utils.mask.getBit(gobbieBoxUsed, 0) and 1 or 0
     local adoulinDialUsed = utils.mask.getBit(gobbieBoxUsed, 1) and 1 or 0
     local pictlogicaDialUsed = utils.mask.getBit(gobbieBoxUsed, 2) and 1 or 0
     local wantedDialUsed = utils.mask.getBit(gobbieBoxUsed, 3) and 1 or 0
-    local holdingItem = player:getCharVar("gobbieBoxHoldingItem")
+    local holdingItem = player:getCharVar('gobbieBoxHoldingItem')
 
     if playerAgeDays >= xi.settings.main.GOBBIE_BOX_MIN_AGE and firstVisit then
         player:startEvent(event.INTRO)
@@ -250,9 +250,9 @@ end
 
 xi.gobbieMysteryBox.onEventUpdate = function(player, csid, option, events)
     local event = events
-    local dailyTallyPoints = player:getCurrency("daily_tally")
-    local holdingItem = player:getCharVar("gobbieBoxHoldingItem")
-    local gobbieBoxUsed = player:getCharVar("gobbieBoxUsed")
+    local dailyTallyPoints = player:getCurrency('daily_tally')
+    local holdingItem = player:getCharVar('gobbieBoxHoldingItem')
+    local gobbieBoxUsed = player:getCharVar('gobbieBoxUsed')
     local specialDialUsed = utils.mask.getBit(gobbieBoxUsed, 0) and 1 or 0
     local adoulinDialUsed = utils.mask.getBit(gobbieBoxUsed, 1) and 1 or 0
     local pictlogicaDialUsed = utils.mask.getBit(gobbieBoxUsed, 2) and 1 or 0
@@ -261,8 +261,8 @@ xi.gobbieMysteryBox.onEventUpdate = function(player, csid, option, events)
 
     if csid == event.KEY_TRADE then
         if option == 1 then
-            local keyID = player:getLocalVar("gobbieBoxKey")
-            player:setLocalVar("gobbieBoxKey", 0)
+            local keyID = player:getLocalVar('gobbieBoxKey')
+            player:setLocalVar('gobbieBoxKey', 0)
             switch (keyToDial[keyID]): caseof
             {
                 [6] = function()
@@ -291,12 +291,12 @@ xi.gobbieMysteryBox.onEventUpdate = function(player, csid, option, events)
                 end
             }
 
-            player:setCharVar("gobbieBoxHoldingItem", itemID)
+            player:setCharVar('gobbieBoxHoldingItem', itemID)
             player:tradeComplete()
             player:updateEvent(itemID, keyToDial[keyID], 3)
         elseif option == 2 then
             if holdingItem > 0 and npcUtil.giveItem(player, holdingItem) then
-                player:setCharVar("gobbieBoxHoldingItem", 0)
+                player:setCharVar('gobbieBoxHoldingItem', 0)
             end
 
             player:updateEvent(itemID, 0)
@@ -323,10 +323,10 @@ xi.gobbieMysteryBox.onEventUpdate = function(player, csid, option, events)
                         player:updateEvent(1, dial, 2) -- already used this dial
                     elseif dailyTallyPoints >= dialCost then
                         itemID = SelectDailyItem(player, dial)
-                        player:setCharVar("gobbieBoxHoldingItem", itemID)
-                        player:setCurrency("daily_tally", dailyTallyPoints - dialCost)
+                        player:setCharVar('gobbieBoxHoldingItem', itemID)
+                        player:setCurrency('daily_tally', dailyTallyPoints - dialCost)
                         if dialMask then
-                            player:setCharVar("gobbieBoxUsed", utils.mask.setBit(gobbieBoxUsed, dialMask, true))
+                            player:setCharVar('gobbieBoxUsed', utils.mask.setBit(gobbieBoxUsed, dialMask, true))
                         end
 
                         player:updateEvent(itemID, dial, 0)
@@ -338,13 +338,13 @@ xi.gobbieMysteryBox.onEventUpdate = function(player, csid, option, events)
                 [2] = function()
                     if player:getFreeSlotsCount() == 0 then
                         player:updateEvent(holdingItem, 0, 0, 1) -- inventory full, exit event
-                        player:messageSpecial(zones[player:getZoneID()].text.ITEM_CANNOT_BE_OBTAINED + 2) -- generic "Cannot obtain the item."
+                        player:messageSpecial(zones[player:getZoneID()].text.ITEM_CANNOT_BE_OBTAINED + 2) -- generic 'Cannot obtain the item.'
                     end
                 end,
 
                 [5] = function()
                     if holdingItem > 0 and npcUtil.giveItem(player, holdingItem) then
-                        player:setCharVar("gobbieBoxHoldingItem", 0)
+                        player:setCharVar('gobbieBoxHoldingItem', 0)
                     end
 
                     player:updateEvent(specialDialUsed, adoulinDialUsed, pictlogicaDialUsed, wantedDialUsed, 0, 0, hideOptionFlags, dailyTallyPoints)
@@ -357,12 +357,12 @@ end
 xi.gobbieMysteryBox.onEventFinish = function(player, csid, option, events)
     local event = events
     if csid == event.INTRO then
-        player:setCurrency("daily_tally", 50)
+        player:setCurrency('daily_tally', 50)
     elseif csid == event.HOLDING_ITEM then
         if player:getFreeSlotsCount() == 0 then
-            player:messageSpecial(zones[player:getZoneID()].text.ITEM_CANNOT_BE_OBTAINED + 2) -- generic "Cannot obtain the item."
-        elseif npcUtil.giveItem(player, player:getCharVar("gobbieBoxHoldingItem")) then
-            player:setCharVar("gobbieBoxHoldingItem", 0)
+            player:messageSpecial(zones[player:getZoneID()].text.ITEM_CANNOT_BE_OBTAINED + 2) -- generic 'Cannot obtain the item.'
+        elseif npcUtil.giveItem(player, player:getCharVar('gobbieBoxHoldingItem')) then
+            player:setCharVar('gobbieBoxHoldingItem', 0)
         end
     end
 end

@@ -20,7 +20,7 @@ entity.onTrade = function(player, npc, trade)
         if player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_ROOT_OF_THE_PROBLEM) == QUEST_ACCEPTED then
             player:startEvent(349)
             player:tradeComplete()
-            player:setCharVar("rootProblem", 2)
+            player:setCharVar('rootProblem', 2)
         end
     elseif
         trade:hasItemQty(xi.item.ASTRAGALOS, 4) and
@@ -29,7 +29,7 @@ entity.onTrade = function(player, npc, trade)
     then
         if
             player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CLASS_REUNION) == QUEST_ACCEPTED and
-            player:getCharVar("ClassReunionProgress") == 2
+            player:getCharVar('ClassReunionProgress') == 2
         then
             player:startEvent(407) -- now Koru remembers something that you need to inquire his former students.
         end
@@ -40,11 +40,11 @@ entity.onTrigger = function(player, npc)
     local rootProblem = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_ROOT_OF_THE_PROBLEM)
     local thePuppetMaster = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_PUPPET_MASTER)
     local classReunion = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CLASS_REUNION)
-    local classReunionProgress = player:getCharVar("ClassReunionProgress")
-    local talk1 = player:getCharVar("ClassReunion_TalkedToFupepe")
-    local talk2 = player:getCharVar("ClassReunion_TalkedToFurakku")
+    local classReunionProgress = player:getCharVar('ClassReunionProgress')
+    local talk1 = player:getCharVar('ClassReunion_TalkedToFupepe')
+    local talk2 = player:getCharVar('ClassReunion_TalkedToFurakku')
     local carbuncleDebacle = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CARBUNCLE_DEBACLE)
-    local carbuncleDebacleProgress = player:getCharVar("CarbuncleDebacleProgress")
+    local carbuncleDebacleProgress = player:getCharVar('CarbuncleDebacleProgress')
 
     -----------------------------------
     -- Carbuncle Debacle
@@ -88,7 +88,7 @@ entity.onTrigger = function(player, npc)
     elseif thePuppetMaster == QUEST_COMPLETED and classReunion == QUEST_COMPLETED then
         player:startEvent(411) -- new cs after completed AF2
     -----------------------------------
-    elseif rootProblem == QUEST_ACCEPTED and player:getCharVar("rootProblem") == 1 then
+    elseif rootProblem == QUEST_ACCEPTED and player:getCharVar('rootProblem') == 1 then
         player:startEvent(348, 0, xi.item.SQUARE_OF_SILK_CLOTH)
     end
 end
@@ -99,27 +99,27 @@ end
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 412 then
         player:delKeyItem(xi.ki.CARBUNCLES_TEAR)
-        player:setCharVar("ClassReunionProgress", 2)
+        player:setCharVar('ClassReunionProgress', 2)
     elseif csid == 407 then
         player:tradeComplete()
-        player:setCharVar("ClassReunionProgress", 3)
+        player:setCharVar('ClassReunionProgress', 3)
     elseif csid == 410 then
         if player:getFreeSlotsCount() ~= 0 then
             player:addItem(xi.item.EVOKERS_SPATS)
             player:messageSpecial(ID.text.ITEM_OBTAINED, xi.item.EVOKERS_SPATS)
             player:completeQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CLASS_REUNION)
-            player:setCharVar("ClassReunionProgress", 0)
-            player:setCharVar("ClassReunion_TalkedToFurakku", 0)
-            player:setCharVar("ClassReunion_TalkedToFupepe", 0)
+            player:setCharVar('ClassReunionProgress', 0)
+            player:setCharVar('ClassReunion_TalkedToFurakku', 0)
+            player:setCharVar('ClassReunion_TalkedToFupepe', 0)
             player:needToZone(true)
             player:addFame(xi.quest.fame_area.WINDURST, 40)
         else
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.item.EVOKERS_SPATS)
         end
     elseif csid == 416 then
-        player:setCharVar("CarbuncleDebacleProgress", 2)
+        player:setCharVar('CarbuncleDebacleProgress', 2)
     elseif csid == 417 then
-        player:setCharVar("CarbuncleDebacleProgress", 5)
+        player:setCharVar('CarbuncleDebacleProgress', 5)
         player:addKeyItem(xi.ki.DAZE_BREAKER_CHARM)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.DAZE_BREAKER_CHARM)
     elseif csid == 419 then
@@ -129,7 +129,7 @@ entity.onEventFinish = function(player, csid, option, npc)
             player:addTitle(xi.title.PARAGON_OF_SUMMONER_EXCELLENCE)
             player:completeQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CARBUNCLE_DEBACLE)
             player:addFame(xi.quest.fame_area.WINDURST, 60)
-            player:setCharVar("CarbuncleDebacleProgress", 0)
+            player:setCharVar('CarbuncleDebacleProgress', 0)
             player:needToZone(true)
         else
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.item.EVOKERS_HORN)

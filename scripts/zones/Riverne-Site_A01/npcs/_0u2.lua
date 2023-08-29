@@ -2,7 +2,7 @@
 -- Area: Riverne Site #A01
 --  NPC: Unstable Displacement
 -----------------------------------
-local riverneAGlobal = require("scripts/zones/Riverne-Site_A01/globals")
+local riverneAGlobal = require('scripts/zones/Riverne-Site_A01/globals')
 -----------------------------------
 local entity = {}
 

@@ -5,7 +5,7 @@ AnimationSub(1) small neck pouch
 AnimationSub(2) large neck pouch
 AnimationSub(3) sleeping z's
 --]]
-require("scripts/globals/mixins")
+require('scripts/globals/mixins')
 -----------------------------------
 
 g_mixins = g_mixins or {}
@@ -31,15 +31,15 @@ local function sleepDuringNight(mob)
 end
 
 g_mixins.families.ziz = function(zizMob)
-    zizMob:addListener("SPAWN", "ZIZ_SPAWN", function(mob)
+    zizMob:addListener('SPAWN', 'ZIZ_SPAWN', function(mob)
         sleepDuringNight(mob)
     end)
 
-    zizMob:addListener("ROAM_TICK", "ZIZ_ROAM", function(mob)
+    zizMob:addListener('ROAM_TICK', 'ZIZ_ROAM', function(mob)
         sleepDuringNight(mob)
     end)
 
-    zizMob:addListener("ENGAGE", "ZIZ_ENGAGE", function(mob, target)
+    zizMob:addListener('ENGAGE', 'ZIZ_ENGAGE', function(mob, target)
         mob:setAnimationSub(1)
         mob:setAggressive(true)
         mob:setMobMod(xi.mobMod.NO_MOVE, 0)

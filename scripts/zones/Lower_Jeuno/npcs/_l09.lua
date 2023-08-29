@@ -4,7 +4,7 @@
 -- Involved in Quests: Community Service
 -- !pos -32 0 -28 245
 -----------------------------------
-local lowerJeunoGlobal = require("scripts/zones/Lower_Jeuno/globals")
+local lowerJeunoGlobal = require('scripts/zones/Lower_Jeuno/globals')
 -----------------------------------
 local entity = {}
 

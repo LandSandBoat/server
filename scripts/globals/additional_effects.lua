@@ -11,9 +11,9 @@
 -- Weakness/resistance to element would swing damage range a lot
 -- For status effects is it possible to land on highly resistant mobs because of flooring.
 ------------------------------------------------------------------------------
-require("scripts/globals/teleports") -- For warp weapon proc.
-require("scripts/globals/magic") -- For resist functions
-require("scripts/globals/utils") -- For clamping function
+require('scripts/globals/teleports') -- For warp weapon proc.
+require('scripts/globals/magic') -- For resist functions
+require('scripts/globals/utils') -- For clamping function
 --------------------------------------
 xi = xi or {}
 xi.additionalEffect = xi.additionalEffect or {}
@@ -269,7 +269,7 @@ xi.additionalEffect.attack = function(attacker, defender, baseAttackDamage, item
             msgID    = xi.msg.basic.ADD_EFFECT_SELFBUFF
             msgParam = xi.effect.HASTE
         else
-            print("scripts/globals/additional_effects.lua : unhandled additional effect selfbuff! Effect ID: "..addStatus)
+            print('scripts/globals/additional_effects.lua : unhandled additional effect selfbuff! Effect ID: '..addStatus)
         end
 
     elseif addType == procType.DEATH then
@@ -289,11 +289,11 @@ xi.additionalEffect.attack = function(attacker, defender, baseAttackDamage, item
 
     --[[
     if msgID == nil then
-        print("Additional effect has a nil msgID !!")
+        print('Additional effect has a nil msgID !!')
     elseif msgParam == nil then
-        print("Additional effect has a nil msgParam !!")
+        print('Additional effect has a nil msgParam !!')
     end
-    print("subEffect: "..subEffect.." msgID: "..msgID.." msgParam: "..msgParam)
+    print('subEffect: '..subEffect..' msgID: '..msgID..' msgParam: '..msgParam)
     ]]
     return subEffect, msgID, msgParam
 end

@@ -2,7 +2,7 @@
 -- Area: Jugner Forest [S]
 --  Mob: Biddybug
 -----------------------------------
-mixins = { require("scripts/mixins/families/ladybug") }
+mixins = { require('scripts/mixins/families/ladybug') }
 -----------------------------------
 local entity = {}
 

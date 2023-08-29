@@ -8,7 +8,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local promotion = player:getCharVar("AssaultPromotion")
+    local promotion = player:getCharVar('AssaultPromotion')
     local rank = 0
 
     -- 3152 on Nashmiera's Plea (oncePerZone)

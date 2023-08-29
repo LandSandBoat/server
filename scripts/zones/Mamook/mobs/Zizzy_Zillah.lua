@@ -2,7 +2,7 @@
 -- Area: Mamook
 --   NM: Zizzy Zillah
 -----------------------------------
-mixins = { require("scripts/mixins/families/ziz") }
+mixins = { require('scripts/mixins/families/ziz') }
 -----------------------------------
 local entity = {}
 

@@ -14,7 +14,7 @@ entity.onMobDeath = function(mob, player, optParams)
 
         DisallowRespawn(mobId, true)
 
-        if os.time() > hq:getLocalVar("pop") then
+        if os.time() > hq:getLocalVar('pop') then
             SpawnMob(mobId + 2):updateClaim(player)
             hq:setPos(mob:getXPos(), mob:getYPos(), mob:getZPos(), 0)
         else

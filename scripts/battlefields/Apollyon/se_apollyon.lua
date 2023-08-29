@@ -18,7 +18,7 @@ local content = Limbus:new({
     entryNpc         = '_12i',
     requiredKeyItems = { xi.ki.COSMO_CLEANSE, xi.ki.BLACK_CARD, message = ID.text.YOU_INSERT_THE_CARD_POLISHED },
     lossEventParams  = { [5] = 1 },
-    name             = "SE_APOLLYON",
+    name             = 'SE_APOLLYON',
     exitLocation     = 1,
     timeExtension    = 10,
 })
@@ -143,7 +143,7 @@ content.groups =
     -- Floor 1
     {
         -- Boss
-        mobs       = { "Ghost_Clot" },
+        mobs       = { 'Ghost_Clot' },
         stationary = true,
         mods =
         {
@@ -157,7 +157,7 @@ content.groups =
         end,
     },
     {
-        mobs       = { "Metalloid_Amoeba" },
+        mobs       = { 'Metalloid_Amoeba' },
         stationary = true,
         mods =
         {
@@ -179,7 +179,7 @@ content.groups =
 
     -- Floor 2
     {
-        mobs = { "Tieholtsodi" },
+        mobs = { 'Tieholtsodi' },
         mods =
         {
             [xi.mod.SLASH_SDT ] = 0,
@@ -191,7 +191,7 @@ content.groups =
         end,
     },
     {
-        mobs = { "Adamantshell" },
+        mobs = { 'Adamantshell' },
         mods =
         {
             [xi.mod.SLASH_SDT ] = 0,
@@ -211,7 +211,7 @@ content.groups =
 
     -- Floor 3
     {
-        mobs       = { "Grave_Digger" },
+        mobs       = { 'Grave_Digger' },
         stationary = true,
         mods =
         {
@@ -225,7 +225,7 @@ content.groups =
         end,
     },
     {
-        mobs = { "Inhumer" },
+        mobs = { 'Inhumer' },
         mods =
         {
             [xi.mod.PIERCE_SDT] = 0,
@@ -236,25 +236,25 @@ content.groups =
         setup = function(battlefield, mobs)
             local timeCrateIndex, recoverCrateIndex, itemCrateIndex = unpack(utils.uniqueRandomTable(1, 6, 3))
 
-            battlefield:setLocalVar("timeCrateIndex", timeCrateIndex)
-            battlefield:setLocalVar("recoverCrateIndex", recoverCrateIndex)
-            battlefield:setLocalVar("itemCrateIndex", itemCrateIndex)
+            battlefield:setLocalVar('timeCrateIndex', timeCrateIndex)
+            battlefield:setLocalVar('recoverCrateIndex', recoverCrateIndex)
+            battlefield:setLocalVar('itemCrateIndex', itemCrateIndex)
         end,
 
         death = function(battlefield, mob, count)
             if count == 2 then
                 local crate = GetNPCByID(ID.SE_APOLLYON.npc.TIME_CRATES[3])
-                crate:setPos(floorThreeCratePositions[battlefield:getLocalVar("timeCrateIndex")])
+                crate:setPos(floorThreeCratePositions[battlefield:getLocalVar('timeCrateIndex')])
                 npcUtil.showCrate(GetNPCByID(ID.SE_APOLLYON.npc.TIME_CRATES[3]))
 
             elseif count == 4 then
                 local crate = GetMobByID(ID.SE_APOLLYON.npc.RECOVER_CRATES[3])
-                crate:setPos(floorThreeCratePositions[battlefield:getLocalVar("recoverCrateIndex")])
+                crate:setPos(floorThreeCratePositions[battlefield:getLocalVar('recoverCrateIndex')])
                 xi.limbus.showRecoverCrate(ID.SE_APOLLYON.npc.RECOVER_CRATES[3])
 
             elseif count == 8 then
                 local crate = GetNPCByID(ID.SE_APOLLYON.npc.ITEM_CRATES[3])
-                crate:setPos(floorThreeCratePositions[battlefield:getLocalVar("itemCrateIndex")])
+                crate:setPos(floorThreeCratePositions[battlefield:getLocalVar('itemCrateIndex')])
                 npcUtil.showCrate(GetNPCByID(ID.SE_APOLLYON.npc.ITEM_CRATES[3]))
             end
         end,
@@ -262,7 +262,7 @@ content.groups =
 
     -- Floor 4
     {
-        mobs       = { "Evil_Armory" },
+        mobs       = { 'Evil_Armory' },
         stationary = true,
         mods =
         {
@@ -285,14 +285,14 @@ content.groups =
         end
     },
     {
-        mobs = { "Flying_Spear" },
+        mobs = { 'Flying_Spear' },
         mods =
         {
             [xi.mod.MAGIC_NULL] = 100,
         },
 
         death = function(battlefield, mob, count)
-            local boss = mob:getZone():queryEntitiesByName("Evil_Armory")[1]
+            local boss = mob:getZone():queryEntitiesByName('Evil_Armory')[1]
             boss:setMod(xi.mod.UDMGPHYS, (8 - count) * -1000)
 
             if count == 1 then
@@ -305,7 +305,7 @@ content.groups =
         end,
 
         allDeath = function(battlefield, mob)
-            local boss = mob:getZone():queryEntitiesByName("Evil_Armory")[1]
+            local boss = mob:getZone():queryEntitiesByName('Evil_Armory')[1]
             boss:setMod(xi.mod.MAGIC_NULL, 0)
         end,
     },

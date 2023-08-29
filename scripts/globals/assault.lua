@@ -2,8 +2,8 @@
 -- Assault Utilities
 -- desc: Common functionality for Assaults
 -----------------------------------
-require("scripts/globals/besieged")
-require("scripts/globals/npc_util")
+require('scripts/globals/besieged')
+require('scripts/globals/npc_util')
 -----------------------------------
 xi = xi or {}
 xi.assault = xi.assault or {}
@@ -46,7 +46,7 @@ xi.assault.onAssaultUpdate = function(player, csid, option, npc)
         cap = 50
     end
 
-    player:setLocalVar("AssaultCap", cap)
+    player:setLocalVar('AssaultCap', cap)
 
     if
         player:getGMLevel() == 0 and
@@ -64,9 +64,9 @@ end
 
 xi.assault.onInstanceCreatedCallback = function(player, instance)
     if instance then
-        instance:setLevelCap(player:getLocalVar("AssaultCap"))
-        player:setLocalVar("AssaultCap", 0)
-        player:setCharVar("Assault_Armband", 1)
+        instance:setLevelCap(player:getLocalVar('AssaultCap'))
+        player:setLocalVar('AssaultCap', 0)
+        player:setCharVar('Assault_Armband', 1)
         player:delKeyItem(xi.ki.ASSAULT_ARMBAND)
     else
         local npc = player:getEventTarget()
@@ -81,7 +81,7 @@ xi.assault.afterInstanceRegister = function(player, fireFlies)
     local levelCap = instance:getLevelCap()
     local ID = zones[player:getZoneID()]
 
-    player:setCharVar("assaultEntered", assaultID)
+    player:setCharVar('assaultEntered', assaultID)
     player:messageSpecial(ID.text.ASSAULT_START_OFFSET + assaultID, assaultID)
     player:messageSpecial(ID.text.TIME_TO_COMPLETE, instance:getTimeLimit())
     player:addTempItem(fireFlies)
@@ -150,28 +150,28 @@ xi.assault.runeReleaseFinish = function(player, csid, option, npc)
         end
 
         for _, entity in pairs(chars) do
-            if entity:getLocalVar("AssaultPointsAwarded") == 0 then
-                entity:setLocalVar("AssaultPointsAwarded", 1)
+            if entity:getLocalVar('AssaultPointsAwarded') == 0 then
+                entity:setLocalVar('AssaultPointsAwarded', 1)
 
                 local pointModifier = xi.assault.missionInfo[assaultID].minimumPoints
                 points = pointModifier - (pointModifier * playerpoints)
-                if entity:getCharVar("Assault_Armband") == 1 then
+                if entity:getCharVar('Assault_Armband') == 1 then
                     points = points * 1.1
                 end
 
                 if entity:hasCompletedAssault(assaultID) then
                     points = math.floor(points)
-                    entity:setVar("AssaultPromotion", entity:getCharVar("AssaultPromotion") + 1)
+                    entity:setVar('AssaultPromotion', entity:getCharVar('AssaultPromotion') + 1)
                     entity:addAssaultPoint(pointsArea, points)
                     entity:messageSpecial(ID.text.ASSAULT_POINTS_OBTAINED, points)
                 else
                     points = math.floor(points * 1.5)
-                    entity:setVar("AssaultPromotion", entity:getCharVar("AssaultPromotion") + 5)
+                    entity:setVar('AssaultPromotion', entity:getCharVar('AssaultPromotion') + 5)
                     entity:addAssaultPoint(pointsArea, points)
                     entity:messageSpecial(ID.text.ASSAULT_POINTS_OBTAINED, points)
                 end
 
-                entity:setVar("AssaultComplete", 1)
+                entity:setVar('AssaultComplete', 1)
                 entity:startEvent(102)
             end
         end

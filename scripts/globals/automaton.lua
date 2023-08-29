@@ -361,7 +361,7 @@ xi.automaton.onUseManeuver = function(player, target, ability, action)
             target:removeOldestManeuver()
         end
 
-        local duration = player:getPet():getLocalVar("MANEUVER_DURATION")
+        local duration = player:getPet():getLocalVar('MANEUVER_DURATION')
         target:addStatusEffect(maneuverInfo[1], bonus, 0, utils.clamp(duration, 60, 300))
     end
 

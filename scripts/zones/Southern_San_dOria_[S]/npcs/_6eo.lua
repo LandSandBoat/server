@@ -14,7 +14,7 @@ end
 entity.onTrigger = function(player, npc)
     if
         player:getQuestStatus(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.KNOT_QUITE_THERE) == QUEST_ACCEPTED and
-        player:getCharVar("KnotQuiteThere") == 3
+        player:getCharVar('KnotQuiteThere') == 3
     then
         player:startEvent(63)
     end
@@ -31,7 +31,7 @@ entity.onEventFinish = function(player, csid, option, npc)
             player:completeQuest(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.KNOT_QUITE_THERE)
             player:addItem(xi.item.PLATINUM_BEASTCOIN)
             player:messageSpecial(ID.text.ITEM_OBTAINED, xi.item.PLATINUM_BEASTCOIN)
-            player:setCharVar("KnotQuiteThere", 0)
+            player:setCharVar('KnotQuiteThere', 0)
         end
     end
 end

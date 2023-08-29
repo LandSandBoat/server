@@ -14,9 +14,9 @@ end
 entity.onMobDeath = function(mob, player, optParams)
     if
         player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.A_NEW_DAWN) == QUEST_ACCEPTED and
-        player:getCharVar("ANewDawn_Event") == 4
+        player:getCharVar('ANewDawn_Event') == 4
     then
-        player:setCharVar("ANewDawn_Event", 5)
+        player:setCharVar('ANewDawn_Event', 5)
     end
 
     if optParams.isKiller then

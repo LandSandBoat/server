@@ -2,7 +2,7 @@
 -- Area: Labyrinth of Onzozo
 --   NM: Soulstealer Skullnix
 -----------------------------------
-mixins = { require("scripts/mixins/job_special") }
+mixins = { require('scripts/mixins/job_special') }
 -----------------------------------
 local entity = {}
 

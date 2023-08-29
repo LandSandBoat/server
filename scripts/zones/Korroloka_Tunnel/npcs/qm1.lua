@@ -4,7 +4,7 @@
 -- !pos 254.652 -6.039 20.878 173
 -----------------------------------
 local ID = zones[xi.zone.KORROLOKA_TUNNEL]
-local korrolokaGlobal = require("scripts/zones/Korroloka_Tunnel/globals")
+local korrolokaGlobal = require('scripts/zones/Korroloka_Tunnel/globals')
 -----------------------------------
 local entity = {}
 

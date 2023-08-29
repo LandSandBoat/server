@@ -3,7 +3,7 @@
 --  Mob: Yo'Bhu Hideousmask
 -- BCNM: Grimshell Shocktroopers
 -----------------------------------
-mixins = { require("scripts/mixins/job_special") }
+mixins = { require('scripts/mixins/job_special') }
 -----------------------------------
 local entity = {}
 

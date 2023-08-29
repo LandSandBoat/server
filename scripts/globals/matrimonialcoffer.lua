@@ -1,7 +1,7 @@
 -----------------------------------
 -- Matrimonial Coffer NPCs
 -----------------------------------
-require("scripts/globals/npc_util")
+require('scripts/globals/npc_util')
 -----------------------------------
 xi = xi or {}
 xi.matrimonialcoffer = xi.matrimonialcoffer or {}

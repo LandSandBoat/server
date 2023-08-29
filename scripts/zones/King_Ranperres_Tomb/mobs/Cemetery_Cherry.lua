@@ -4,7 +4,7 @@
 -- !pos 33.000 0.500 -287.000 190
 -----------------------------------
 local ID = zones[xi.zone.KING_RANPERRES_TOMB]
-mixins = { require("scripts/mixins/job_special") }
+mixins = { require('scripts/mixins/job_special') }
 -----------------------------------
 local entity = {}
 
@@ -28,17 +28,17 @@ entity.onMobInitialize = function(mob)
 end
 
 entity.onMobSpawn = function(mob)
-    mob:setLocalVar("wasKilled", 0)
+    mob:setLocalVar('wasKilled', 0)
 end
 
 entity.onMobDeath = function(mob, player, optParams)
-    mob:setLocalVar("wasKilled", 1)
+    mob:setLocalVar('wasKilled', 1)
     player:addTitle(xi.title.MON_CHERRY)
 end
 
 entity.onMobDespawn = function(mob)
     local saplingsRespawn = math.random(1800, 3600) -- 30 to 60 minutes
-    if mob:getLocalVar("wasKilled") == 1 then
+    if mob:getLocalVar('wasKilled') == 1 then
         saplingsRespawn = math.random(216000, 259200) -- 60 to 72 hours
     end
 

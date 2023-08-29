@@ -2,7 +2,7 @@
 -- Area: Yhoator Jungle
 --   NM: Bisque-heeled Sunberry
 -----------------------------------
-mixins = { require("scripts/mixins/families/tonberry") }
+mixins = { require('scripts/mixins/families/tonberry') }
 -----------------------------------
 local entity = {}
 

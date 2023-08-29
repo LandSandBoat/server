@@ -3,7 +3,7 @@
 --  Mob: Rauu the Whaleswooner
 -- BCNM: Amphibian Assault
 -----------------------------------
-mixins = { require("scripts/mixins/job_special") }
+mixins = { require('scripts/mixins/job_special') }
 -----------------------------------
 local entity = {}
 
