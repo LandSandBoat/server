@@ -6,7 +6,7 @@
 cmdprops =
 {
     permission = 1,
-    parameters = "i"
+    parameters = 'i'
 }
 
 function onTrigger(player, progress)
@@ -18,8 +18,8 @@ function onTrigger(player, progress)
 
         instance:setProgress(progress)
 
-        player:PrintToPlayer(string.format("Progress changed from %i to %i", startProgress, progress))
+        player:PrintToPlayer(string.format('Progress changed from %i to %i', startProgress, progress))
     else
-        player:PrintToPlayer("Must be in an Instanced zone")
+        player:PrintToPlayer('Must be in an Instanced zone')
     end
 end

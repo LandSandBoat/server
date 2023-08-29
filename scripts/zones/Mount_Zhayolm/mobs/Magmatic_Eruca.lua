@@ -4,7 +4,7 @@
 -- Note: Place Holder Energetic Eruca
 -----------------------------------
 local ID = zones[xi.zone.MOUNT_ZHAYOLM]
-mixins = { require("scripts/mixins/families/eruca") }
+mixins = { require('scripts/mixins/families/eruca') }
 -----------------------------------
 local entity = {}
 

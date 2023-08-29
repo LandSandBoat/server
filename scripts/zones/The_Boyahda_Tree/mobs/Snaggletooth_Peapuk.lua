@@ -2,7 +2,7 @@
 -- Area: The Boyahda Tree
 --  Mob: Snaggletooth Peapuk
 -----------------------------------
-mixins = { require("scripts/mixins/families/puk") }
+mixins = { require('scripts/mixins/families/puk') }
 -----------------------------------
 local entity = {}
 

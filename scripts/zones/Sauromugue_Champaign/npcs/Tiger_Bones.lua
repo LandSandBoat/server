@@ -13,7 +13,7 @@ end
 
 entity.onTrigger = function(player, npc)
     local fangedOne = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_FANGED_ONE)
-    local fangedOneCS = player:getCharVar("TheFangedOneCS")
+    local fangedOneCS = player:getCharVar('TheFangedOneCS')
 
     -- THE FANGED ONE
     if
@@ -30,7 +30,7 @@ entity.onTrigger = function(player, npc)
     then
         player:addKeyItem(xi.ki.OLD_TIGERS_FANG)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.OLD_TIGERS_FANG)
-        player:setCharVar("TheFangedOneCS", 0)
+        player:setCharVar('TheFangedOneCS', 0)
 
     -- DEFAULT DIALOG
     else

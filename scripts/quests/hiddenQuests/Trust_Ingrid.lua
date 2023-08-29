@@ -4,7 +4,7 @@
 local easternAdoulinID = zones[xi.zone.EASTERN_ADOULIN]
 -----------------------------------
 
-local quest = HiddenQuest:new("TrustIngrid")
+local quest = HiddenQuest:new('TrustIngrid')
 
 quest.sections =
 {

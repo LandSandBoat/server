@@ -1,6 +1,6 @@
 -----------------------------------
 -- Chocobo Raising
--- Dedicated to "Friend" the Chocobo. RIP.
+-- Dedicated to 'Friend' the Chocobo. RIP.
 --
 -- http://www.playonline.com/pcd/update/ff11us/20060822VOL2B1/detail.html
 -- https://ffxiclopedia.fandom.com/wiki/Category:Chocobo_Raising
@@ -28,8 +28,8 @@
 -- CHOCOBO_EGG_A_LITTLE_WARM : !additem 2318
 -- CHOCOBO_EGG_SOMEWHAT_WARM : !additem 2319
 -----------------------------------
-require("scripts/globals/chocobo_names")
-require("scripts/globals/utils")
+require('scripts/globals/chocobo_names')
+require('scripts/globals/utils')
 -----------------------------------
 xi = xi or {}
 xi.chocoboRaising = xi.chocoboRaising or {}
@@ -50,8 +50,8 @@ xi.chocoboRaising.dayLength = 86400
 xi.chocoboRaising.daysToChick      = 4
 xi.chocoboRaising.daysToAdolescent = 19
 xi.chocoboRaising.daysToAdult1     = 29
-xi.chocoboRaising.daysToAdult2     = 43 -- "You've done a great job raising this chocobo. Now is the best time to improve its attributes."
-xi.chocoboRaising.daysToAdult3     = 64 -- "Chocobo's growth seems to have stabilized. The animal has developed quite a distinguished air."
+xi.chocoboRaising.daysToAdult2     = 43 -- 'You've done a great job raising this chocobo. Now is the best time to improve its attributes.'
+xi.chocoboRaising.daysToAdult3     = 64 -- 'Chocobo's growth seems to have stabilized. The animal has developed quite a distinguished air.'
 xi.chocoboRaising.daysToAdult4     = 129 -- Retirement
 
 -- TODO: Add settings to disable retirement, with/without infinite stat growth.
@@ -495,8 +495,8 @@ xi.chocoboRaising.newChocobo = function(player, egg)
         Ability: None
     ]]
 
-    newChoco.first_name = "Chocobo"
-    newChoco.last_name = "Chocobo"
+    newChoco.first_name = 'Chocobo'
+    newChoco.last_name = 'Chocobo'
     newChoco.sex = math.ceil(math.random() - 0.5) -- Random 0 or 1
     newChoco.created = os.time()
     newChoco.age = 0
@@ -555,8 +555,8 @@ end
 local getWeatherInZone = function(zoneId)
     local zone = GetZone(zoneId)
     if zone == nil then
-        print("ChocoboRaising: Failed to get Zone object for weather information. \
-            Is the target zone on another executable?")
+        print('ChocoboRaising: Failed to get Zone object for weather information. \
+            Is the target zone on another executable?')
         return xi.weather.NONE
     end
 
@@ -589,11 +589,11 @@ local compareTables = function(t1, t2)
         return false
     end
 
-    if type(t1) ~= "table" then
+    if type(t1) ~= 'table' then
         return false
     end
 
-    if type(t2) ~= "table" then
+    if type(t2) ~= 'table' then
         return false
     end
 
@@ -632,9 +632,9 @@ local condenseEvents = function(player, chocoState, events)
     local currentEventCSTable = nil
 
     -- Each event is a table of cs's
-    debug("Raw Events")
+    debug('Raw Events')
     for _, entry in pairs(events) do
-        debug("Day", entry[1], ":", entry[2][1])
+        debug('Day', entry[1], ':', entry[2][1])
         -- Only condense days with the same table contents
         if compareTables(entry[2], currentEventCSTable) then
             -- Increase the span
@@ -652,12 +652,12 @@ local condenseEvents = function(player, chocoState, events)
         end
     end
 
-    -- Final "cut"
+    -- Final 'cut'
     cutEvent(condensedEvents, currentStartDay, currentEndDay, currentEventCSTable)
 
-    debug("Condensed Events & Spans")
+    debug('Condensed Events & Spans')
     for _, entry in pairs(condensedEvents) do
-        debug("Days", entry[1], "to", entry[2], ":", entry[3][1])
+        debug('Days', entry[1], 'to', entry[2], ':', entry[3][1])
     end
 
     return condensedEvents
@@ -682,12 +682,12 @@ local onRaisingEventPlayout = function(player, csOffset, chocoState)
         [cutscenes.CRYING_AT_NIGHT] = function()
             -- NOTE: The messaging is handled in the CS
             player:addKeyItem(xi.ki.WHITE_HANDKERCHIEF)
-            player:setCharVar("[choco]WH_TIME", os.time() * utils.days(1))
+            player:setCharVar('[choco]WH_TIME', os.time() * utils.days(1))
         end,
 
         [cutscenes.HAVENT_SEEN_YOU] = function()
             player:delKeyItem(xi.ki.WHITE_HANDKERCHIEF)
-            player:setCharVar("[choco]WH_TIME", 0)
+            player:setCharVar('[choco]WH_TIME', 0)
         end,
 
         [cutscenes.HANGS_HEAD_IN_SHAME] = function()
@@ -696,7 +696,7 @@ local onRaisingEventPlayout = function(player, csOffset, chocoState)
             -- TODO: Make sure these are clamped!
             chocoState.affection = chocoState.affection - 10
 
-            -- TODO: Remove "Spoiled" status effect
+            -- TODO: Remove 'Spoiled' status effect
         end,
     }
 
@@ -709,7 +709,7 @@ local handleCSUpdate = function(player, chocoState, doEventUpdate)
     local locationOffset = raisingLocation[player:getZoneID()] * 256
     local csToPlay = locationOffset + csOffset
 
-    debug("Playing CS: " .. csToPlay .. " (" .. csOffset .. ")")
+    debug('Playing CS: ' .. csToPlay .. ' (' .. csOffset .. ')')
     table.remove(chocoState.csList, 1)
 
     local currentAgeOfChocoboDuringCutscene = 0
@@ -746,7 +746,7 @@ local updateChocoState = function(player, chocoState)
     chocoState.age = math.floor((os.time() - chocoState.created) / xi.chocoboRaising.dayLength) + 1
     chocoState.last_update_age = chocoState.age
 
-    debug("Writing chocoState.age & last_update_age:", chocoState.last_update_age)
+    debug('Writing chocoState.age & last_update_age:', chocoState.last_update_age)
 
     -- Write to cache
     xi.chocoboRaising.chocoState[player:getID()] = chocoState
@@ -768,13 +768,13 @@ xi.chocoboRaising.initChocoboData = function(player)
 
     -- Work out ranks, age, and stages from raw information
 
-    -- Age is worked out alongside "the day you handed in your egg"
+    -- Age is worked out alongside 'the day you handed in your egg'
     -- So on the 0th day, the chocobo is 1 day old.
 
     chocoState.age = math.floor((os.time() - chocoState.created) / xi.chocoboRaising.dayLength) + 1
 
-    debug("chocoState.age = " .. chocoState.age)
-    debug("chocoState.last_update_age = " .. chocoState.last_update_age)
+    debug('chocoState.age = ' .. chocoState.age)
+    debug('chocoState.last_update_age = ' .. chocoState.last_update_age)
 
     chocoState.affectionRank = affectionRank.LIKES
 
@@ -796,7 +796,7 @@ xi.chocoboRaising.initChocoboData = function(player)
     chocoState.report.day_end   = chocoState.age
     local reportLength = chocoState.report.day_end - chocoState.report.day_start
 
-    debug("reportLength", reportLength)
+    debug('reportLength', reportLength)
 
     chocoState.last_update_age = chocoState.age
 
@@ -891,7 +891,7 @@ xi.chocoboRaising.startCutscene = function(player, npc, trade)
 
     local chocoState = xi.chocoboRaising.initChocoboData(player)
     if chocoState == nil then
-        print("ERROR! startCutscene 'chocoState' is nil!")
+        print('ERROR! startCutscene \'chocoState\' is nil!')
         return
     end
 
@@ -919,7 +919,7 @@ xi.chocoboRaising.startCutscene = function(player, npc, trade)
         end
 
         -- TODO: Confirm this on retail
-        -- "Your chocobo has not hatched, so you cannot feed it yet."
+        -- 'Your chocobo has not hatched, so you cannot feed it yet.'
         if chocoState.stage == stage.EGG then
             player:messageSpecial(ID.text.CHOCOBO_FEEDING_STILL_EGG)
             return
@@ -1019,11 +1019,11 @@ xi.chocoboRaising.onEventUpdateVCSTrainer = function(player, csid, option, npc)
     -- Egg check
     elseif csid == mainCsid then
         if chocoState == nil then
-            print("ERROR! onEventUpdateVCSTrainer 'chocoState' is nil!")
+            print('ERROR! onEventUpdateVCSTrainer \'chocoState\' is nil!')
             return
         end
 
-        debug(string.format("CS Update: %i", option))
+        debug(string.format('CS Update: %i', option))
 
         -- Setting the name for a chocobo: when the name is
         -- applied from the menu the name offsets (from the menu)
@@ -1042,33 +1042,33 @@ xi.chocoboRaising.onEventUpdateVCSTrainer = function(player, csid, option, npc)
             local fname = xi.chocoboNames[offset1]
             local lname = xi.chocoboNames[offset2]
 
-            local fullnamekey = string.format("%s %s", fname, lname)
+            local fullnamekey = string.format('%s %s', fname, lname)
 
             -- https://ffxiclopedia.fandom.com/wiki/Chocobo_Names
-            -- "... with the caveat that your chocobo's name may be no more than 15 letters in total."
+            -- '... with the caveat that your chocobo's name may be no more than 15 letters in total.'
             -- NOTE: This is enforced by the client, this is here to stop malicious naming attempts
             local nameTooLong = string.len(fullnamekey) > (15 + 1) -- 15 + the space character
 
-            -- If renaming fails, the name will remain as "Chocobo Chocobo" and the
+            -- If renaming fails, the name will remain as 'Chocobo Chocobo' and the
             -- rejection CS will play
             if fname == nil or lname == nil then
-                print("ERROR! onEventUpdateVCSTrainer - chocoboNames lookup failed!")
+                print('ERROR! onEventUpdateVCSTrainer - chocoboNames lookup failed!')
             elseif nameTooLong then
-                print(string.format("ERROR! %s selected name combination too long for chocobo: %s", player:getName(), fullnamekey))
+                print(string.format('ERROR! %s selected name combination too long for chocobo: %s', player:getName(), fullnamekey))
             elseif xi.bannedChocoboNames[fullnamekey] then
-                print(string.format("ERROR! %s selected banned name for chocobo: %s", player:getName(), fullnamekey))
+                print(string.format('ERROR! %s selected banned name for chocobo: %s', player:getName(), fullnamekey))
             else
                 chocoState.first_name = fname
                 chocoState.last_name = lname
 
-                debug(string.format("%s updating chocobo name: %s", player:getName(), fullnamekey))
+                debug(string.format('%s updating chocobo name: %s', player:getName(), fullnamekey))
 
                 -- Write to cache
                 xi.chocoboRaising.chocoState[player:getID()] = chocoState
 
                 -- Set synthetic CS option for later CSs
                 option = 0xFF
-                debug(string.format("CS (Synthetic) Update: %i", option))
+                debug(string.format('CS (Synthetic) Update: %i', option))
             end
         end
 
@@ -1084,7 +1084,7 @@ xi.chocoboRaising.onEventUpdateVCSTrainer = function(player, csid, option, npc)
         -- 1: Length of care plan
         -- 2: Type of care plan
         -- 3: Slot of care plan
-        -- 4: "Key" for care plan updates (0xFE)
+        -- 4: 'Key' for care plan updates (0xFE)
 
         if bit.band(0x000000FF, option) == 0xFE then
             local carePlanSlot = bit.band(0xF, bit.rshift(option, 8))
@@ -1112,7 +1112,7 @@ xi.chocoboRaising.onEventUpdateVCSTrainer = function(player, csid, option, npc)
             local finalCarePlan = bit.bor(zerodCarePlan, bit.lshift(carePlan, targetSlotOffset))
             chocoState.care_plan = finalCarePlan
 
-            print(string.format("%s updating chocobo care plan: slot: %i type: %i length: %i",
+            print(string.format('%s updating chocobo care plan: slot: %i type: %i length: %i',
                 player:getName(), carePlanSlot + 1, carePlanType, carePlanLength))
 
             -- Write to cache
@@ -1205,8 +1205,8 @@ xi.chocoboRaising.onEventUpdateVCSTrainer = function(player, csid, option, npc)
                 local nameChocobo = 0
                 if
                     chocoState.stage > stage.EGG and
-                    chocoState.first_name == "Chocobo" and
-                    chocoState.last_name == "Chocobo"
+                    chocoState.first_name == 'Chocobo' and
+                    chocoState.last_name == 'Chocobo'
                 then
                     nameChocobo = -bit.lshift(0x01, 3) -- Name your chocobo
                 end
@@ -1216,7 +1216,7 @@ xi.chocoboRaising.onEventUpdateVCSTrainer = function(player, csid, option, npc)
                 -- bit.lshift(0x01, 6): Receive your chocobo whistle
                 -- bit.lshift(0x01, 7): Purchase a chocobo whistle
 
-                -- 8 - 25 are all "-----" (blank)
+                -- 8 - 25 are all '-----' (blank)
 
                 -- Go forward 1 unit (debug) (Unused, see command: !chocoboraising)
                 local goForward1UnitDebug = -bit.lshift(0x01, 26)
@@ -1302,7 +1302,7 @@ xi.chocoboRaising.onEventUpdateVCSTrainer = function(player, csid, option, npc)
                 -- TODO: There is more information going on in here
 
                 -- TODO: These appearance changes are locked in on day 29 if
-                -- they are "Average" (128) or above. This will need to be
+                -- they are 'Average' (128) or above. This will need to be
                 -- written to the db and this part rewritten.
                 local enlargedCrest = 0
                 if chocoState.discernment >= 128 then
@@ -1687,12 +1687,12 @@ xi.chocoboRaising.onEventUpdateVCSTrainer = function(player, csid, option, npc)
             end,
 
             [1056] = function() -- Unknown
-                print("ChocoboRaising: Unknown update: 1056")
+                print('ChocoboRaising: Unknown update: 1056')
                 player:updateEvent(0, 0, 0, 0, 0, 0, 0, 0)
             end,
 
             [1241] = function() -- Unknown
-                print("ChocoboRaising: Unknown update: 1241")
+                print('ChocoboRaising: Unknown update: 1241')
                 player:updateEvent(0, 0, 0, 0, 0, 0, 0, 0)
             end,
 
@@ -1759,9 +1759,9 @@ xi.chocoboRaising.onEventUpdateVCSTrainer = function(player, csid, option, npc)
             end,
 
             [255] = function() -- Synthetic update: Change/set chocobo name
-                -- If the name is still "Chocobo Chocobo" then the renaming failed or was
+                -- If the name is still 'Chocobo Chocobo' then the renaming failed or was
                 -- rejected, play the appropriate response.
-                if chocoState.first_name == "Chocobo" and chocoState.last_name == "Chocobo" then
+                if chocoState.first_name == 'Chocobo' and chocoState.last_name == 'Chocobo' then
                     player:updateEvent(1, 1, 1, 1, 1, 1, 1, 1)
                 else
                     player:updateEvent(0, 0, 0, 0, 0, 0, 0, 0)
@@ -1797,7 +1797,7 @@ xi.chocoboRaising.onEventFinishVCSTrainer = function(player, csid, option, npc)
         end
     elseif csid == mainCsid and option == 215 then
         if chocoState == nil then
-            print("ERROR! onEventFinishVCSTrainer 'chocoState' is nil!")
+            print('ERROR! onEventFinishVCSTrainer \'chocoState\' is nil!')
             return
         end
 

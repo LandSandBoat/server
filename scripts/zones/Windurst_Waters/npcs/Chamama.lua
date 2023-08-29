@@ -47,7 +47,7 @@ entity.onTrigger = function(player, npc)
         end
     elseif
         inAPickle == QUEST_ACCEPTED or
-        player:getCharVar("QuestInAPickle_var") == 1
+        player:getCharVar('QuestInAPickle_var') == 1
     then
         player:startEvent(655, 0, xi.item.RARAB_TAIL) -- IN A PICKLE + RARAB TAIL: Quest Objective Reminder
     elseif inAPickle == QUEST_COMPLETED and needToZone then
@@ -55,7 +55,7 @@ entity.onTrigger = function(player, npc)
     elseif
         inAPickle == QUEST_COMPLETED and
         not needToZone and
-        player:getCharVar("QuestInAPickle_var") ~= 1
+        player:getCharVar('QuestInAPickle_var') ~= 1
     then
         local rand = math.random(1, 2)
         if rand == 1 then
@@ -83,13 +83,13 @@ entity.onEventFinish = function(player, csid, option, npc)
         npcUtil.giveCurrency(player, 'gil', 200)
         player:addFame(xi.quest.fame_area.WINDURST, 75)
     elseif csid == 661 and option == 1 then
-        player:setCharVar("QuestInAPickle_var", 1)
+        player:setCharVar('QuestInAPickle_var', 1)
     elseif csid == 662 then -- IN A PICKLE + 200 GIL: Repeatable Quest Turn In
         player:tradeComplete()
         player:needToZone(true)
         player:addGil(xi.settings.main.GIL_RATE * 200)
         player:addFame(xi.quest.fame_area.WINDURST, 8)
-        player:setCharVar("QuestInAPickle_var", 0)
+        player:setCharVar('QuestInAPickle_var', 0)
     end
 end
 

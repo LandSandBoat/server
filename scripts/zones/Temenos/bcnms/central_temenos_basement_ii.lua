@@ -27,7 +27,7 @@ battlefieldObject.onBattlefieldLeave = function(player, battlefield, leavecode)
     end
 
     if leavecode == xi.battlefield.leaveCode.LOST then
-        --SetServerVariable("[]UniqueID", 0)
+        --SetServerVariable('[]UniqueID', 0)
     end
 end
 

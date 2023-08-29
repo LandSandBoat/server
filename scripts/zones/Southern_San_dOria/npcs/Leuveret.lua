@@ -3,7 +3,7 @@
 --  NPC: Leuveret
 -- Type: General Info NPC
 -----------------------------------
-require("scripts/quests/flyers_for_regine")
+require('scripts/quests/flyers_for_regine')
 -----------------------------------
 local entity = {}
 

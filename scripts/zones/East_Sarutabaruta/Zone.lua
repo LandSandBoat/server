@@ -50,7 +50,7 @@ zoneObject.onEventUpdate = function(player, csid, option, npc)
     if csid == 50 then
         quests.rainbow.onEventUpdate(player)
     elseif csid == 71 then
-        player:setCharVar("ASA_Status", option)
+        player:setCharVar('ASA_Status', option)
     end
 end
 

@@ -17,7 +17,7 @@ entity.onTrigger = function(player, npc)
     local dmRepeat     = player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.DIVINE_MIGHT_REPEAT)
     local aaKeyitems   = 0
     local dmEarrings   = 0
-    local divineStatus = player:getCharVar("DivineMight")
+    local divineStatus = player:getCharVar('DivineMight')
     local hasMoonOre   = player:hasKeyItem(xi.ki.MOONLIGHT_ORE)
 
     -- Count keyitems
@@ -63,7 +63,7 @@ entity.onTrigger = function(player, npc)
         dmEarrings < xi.settings.main.NUMBER_OF_DM_EARRINGS and
         dmRepeat ~= QUEST_ACCEPTED
     then
-        player:startEvent(57, player:getCharVar("DM_Earring"))
+        player:startEvent(57, player:getCharVar('DM_Earring'))
 
     -- Moonlight Ore/Ark Pentasphere reminders
     elseif
@@ -145,8 +145,8 @@ entity.onEventFinish = function(player, csid, option, npc)
                     player:delKeyItem(xi.ki.MOONLIGHT_ORE)
                 end
 
-                player:setCharVar("DivineMight", 0)
-                player:setCharVar("DM_Earring", reward)
+                player:setCharVar('DivineMight', 0)
+                player:setCharVar('DM_Earring', reward)
                 player:addTitle(xi.title.PENTACIDE_PERPETRATOR)
             else
                 player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, reward)

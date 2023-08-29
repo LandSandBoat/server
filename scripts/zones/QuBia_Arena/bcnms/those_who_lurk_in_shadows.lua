@@ -25,7 +25,7 @@ battlefieldObject.onBattlefieldLeave = function(player, battlefield, leavecode)
         player:addExp(700)
         local _, clearTime, partySize = battlefield:getRecord()
         local arg8 = (player:getCurrentMission(xi.mission.log_id.ACP) ~= xi.mission.id.acp.THOSE_WHO_LURK_IN_SHADOWS_III) and 1 or 0
-        player:startEvent(32001, battlefield:getArea(), clearTime, partySize, battlefield:getTimeInside(), 1, battlefield:getLocalVar("[cs]bit"), arg8)
+        player:startEvent(32001, battlefield:getArea(), clearTime, partySize, battlefield:getTimeInside(), 1, battlefield:getLocalVar('[cs]bit'), arg8)
     elseif leavecode == xi.battlefield.leaveCode.LOST then
         player:startEvent(32002)
     end
@@ -45,7 +45,7 @@ battlefieldObject.onEventFinish = function(player, csid, option, npc)
             not player:hasKeyItem(xi.ki.IVORY_KEY) and
             player:getCurrentMission(xi.mission.log_id.ACP) >= xi.mission.id.acp.THOSE_WHO_LURK_IN_SHADOWS_III
         then
-            player:setCharVar("LastIvoryKey", getMidnight())
+            player:setCharVar('LastIvoryKey', getMidnight())
             player:addKeyItem(xi.ki.IVORY_KEY)
             player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.IVORY_KEY)
         end

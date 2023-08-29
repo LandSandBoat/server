@@ -3,7 +3,7 @@
 --  Mob: Gowam
 -----------------------------------
 local ID = zones[xi.zone.THE_ASHU_TALIF]
-mixins = { require("scripts/mixins/job_special") }
+mixins = { require('scripts/mixins/job_special') }
 -----------------------------------
 local entity = {}
 

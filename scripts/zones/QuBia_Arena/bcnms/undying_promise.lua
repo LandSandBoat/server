@@ -6,8 +6,8 @@
 local battlefieldObject = {}
 
 battlefieldObject.onBattlefieldInitialise = function(battlefield)
-    battlefield:setLocalVar("loot", 1)
-    battlefield:setLocalVar("lootSpawned", 1) -- this does not spawn the loot, but prevents battlefield from ending when you kill the still-to-reraise mob
+    battlefield:setLocalVar('loot', 1)
+    battlefield:setLocalVar('lootSpawned', 1) -- this does not spawn the loot, but prevents battlefield from ending when you kill the still-to-reraise mob
 end
 
 battlefieldObject.onBattlefieldTick = function(battlefield, tick)
@@ -23,7 +23,7 @@ end
 battlefieldObject.onBattlefieldLeave = function(player, battlefield, leavecode)
     if leavecode == xi.battlefield.leaveCode.WON then
         local _, clearTime, partySize = battlefield:getRecord()
-        player:startEvent(32001, battlefield:getArea(), clearTime, partySize, battlefield:getTimeInside(), 1, battlefield:getLocalVar("[cs]bit"), 0)
+        player:startEvent(32001, battlefield:getArea(), clearTime, partySize, battlefield:getTimeInside(), 1, battlefield:getLocalVar('[cs]bit'), 0)
     elseif leavecode == xi.battlefield.leaveCode.LOST then
         player:startEvent(32002)
     end

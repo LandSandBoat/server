@@ -10,7 +10,7 @@
 -- may (but not reliably so) prevent Warbles from summoning Urchins or
 -- activating the Housemaker.[3].
 -----------------------------------
-mixins = { require("scripts/mixins/job_special") }
+mixins = { require('scripts/mixins/job_special') }
 -----------------------------------
 local entity = {}
 
@@ -37,7 +37,7 @@ entity.onMobInitialize = function(mob)
     -- Clod Spikes: Become active during Hundred Fists. Deals earth damage and inflicts a potent
     -- Slow effect on any player who physically strikes the Breadwinner.
     -- The Slow effect is strong enough to overwite Haste II.
-    mob:addListener("TAKE_DAMAGE", "BREADWINNDER_TAKE_DAMAGE", function(mobArg, amount, attacker, attackType, damageType)
+    mob:addListener('TAKE_DAMAGE', 'BREADWINNDER_TAKE_DAMAGE', function(mobArg, amount, attacker, attackType, damageType)
         if mobArg:hasStatusEffect(xi.effect.HUNDRED_FISTS) then
             attacker:addStatusEffect(xi.effect.SLOW, 30 * 100, 0, 60)
         end

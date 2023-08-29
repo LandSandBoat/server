@@ -1,7 +1,7 @@
 -----------------------------------
 -- Teleport Spell Utilities
 -----------------------------------
-require("scripts/globals/teleports")
+require('scripts/globals/teleports')
 -----------------------------------
 xi = xi or {}
 xi.spells = xi.spells or {}

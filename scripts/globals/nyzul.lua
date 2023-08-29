@@ -2,8 +2,8 @@
 -- Nyzul Isle Global
 -----------------------------------
 local ID = zones[xi.zone.NYZUL_ISLE]
-require("scripts/globals/appraisal")
-require("scripts/globals/utils")
+require('scripts/globals/appraisal')
+require('scripts/globals/utils')
 -----------------------------------
 xi = xi or {}
 xi.nyzul = xi.nyzul or {}
@@ -488,7 +488,7 @@ xi.nyzul.appraisalItems =
 
 -- Local functions
 local function getTokenRate(instance)
-    local partySize = instance:getLocalVar("partySize")
+    local partySize = instance:getLocalVar('partySize')
     local rate      = 1
 
     if partySize > 3 then
@@ -501,7 +501,7 @@ end
 local function calculateTokens(instance)
     local relativeFloor   = xi.nyzul.getRelativeFloor(instance)
     local rate            = getTokenRate(instance)
-    local potentialTokens = instance:getLocalVar("potential_tokens")
+    local potentialTokens = instance:getLocalVar('potential_tokens')
     local floorBonus      = 0
 
     if relativeFloor > 1 then
@@ -515,8 +515,8 @@ end
 
 -- Global functions
 xi.nyzul.getRelativeFloor = function(instance)
-    local currentFloor  = instance:getLocalVar("Nyzul_Current_Floor")
-    local startingFloor = instance:getLocalVar("Nyzul_Isle_StartingFloor")
+    local currentFloor  = instance:getLocalVar('Nyzul_Current_Floor')
+    local startingFloor = instance:getLocalVar('Nyzul_Isle_StartingFloor')
 
     if currentFloor < startingFloor then
         return currentFloor + 100
@@ -530,9 +530,9 @@ xi.nyzul.handleAppraisalItem = function(player, npc)
     local chars    = instance:getChars()
 
     for _, cofferID in ipairs(ID.npc.TREASURE_COFFER) do
-        if npc:getID() == cofferID and npc:getLocalVar("opened") == 0 then
+        if npc:getID() == cofferID and npc:getLocalVar('opened') == 0 then
             -- Appraisal Items
-            local mobOffset = npc:getLocalVar("appraisalItem") - (ID.mob[51].OFFSET_NM - xi.appraisal.origin.NYZUL_BAT_EYE) -- Bat Eye mobId - Appraisal mob value.
+            local mobOffset = npc:getLocalVar('appraisalItem') - (ID.mob[51].OFFSET_NM - xi.appraisal.origin.NYZUL_BAT_EYE) -- Bat Eye mobId - Appraisal mob value.
 
             if mobOffset == 166 or mobOffset == 187 then
                 mobOffset = 108
@@ -542,7 +542,7 @@ xi.nyzul.handleAppraisalItem = function(player, npc)
 
             local itemID = xi.nyzul.appraisalItems[mobOffset]
 
-            if type(itemID) == "table" then
+            if type(itemID) == 'table' then
                 local pick = math.random(1, #itemID)
                 itemID     = itemID[pick]
             end
@@ -559,11 +559,11 @@ xi.nyzul.handleAppraisalItem = function(player, npc)
                 players:messageName(ID.text.PLAYER_OBTAINS_ITEM, player, itemID)
             end
 
-            npc:entityAnimationPacket("open")
-            npc:setLocalVar("opened", 1)
+            npc:entityAnimationPacket('open')
+            npc:setLocalVar('opened', 1)
             npc:setUntargetable(true)
             npc:queue(10000, function(npcvar)
-                npcvar:entityAnimationPacket("kesu")
+                npcvar:entityAnimationPacket('kesu')
             end)
 
             npc:queue(12000, function(npcvar)
@@ -578,17 +578,17 @@ xi.nyzul.handleAppraisalItem = function(player, npc)
 end
 
 xi.nyzul.tempBoxTrigger = function(player, npc)
-    if npc:getLocalVar("itemsPicked") == 0 then
-        npc:setLocalVar("itemsPicked", 1)
-        npc:entityAnimationPacket("open")
+    if npc:getLocalVar('itemsPicked') == 0 then
+        npc:setLocalVar('itemsPicked', 1)
+        npc:entityAnimationPacket('open')
         npc:setAnimationSub(13)
         xi.nyzul.tempBoxPickItems(npc)
     end
 
     player:startEvent(2, {
-        [0] = (npc:getLocalVar("itemID_1") + (npc:getLocalVar("itemAmount_1") * 65536)),
-        [1] = (npc:getLocalVar("itemID_2") + (npc:getLocalVar("itemAmount_2") * 65536)),
-        [2] = (npc:getLocalVar("itemID_3") + (npc:getLocalVar("itemAmount_3") * 65536))
+        [0] = (npc:getLocalVar('itemID_1') + (npc:getLocalVar('itemAmount_1') * 65536)),
+        [1] = (npc:getLocalVar('itemID_2') + (npc:getLocalVar('itemAmount_2') * 65536)),
+        [2] = (npc:getLocalVar('itemID_3') + (npc:getLocalVar('itemAmount_3') * 65536))
     })
 end
 
@@ -624,9 +624,9 @@ xi.nyzul.tempBoxPickItems = function(npc)
     local item2Random = math.random(1, 10)
     local item3Random = math.random(1, 10)
 
-    if npc:getLocalVar("itemID_1") == 0 then
-        npc:setLocalVar("itemID_1", item.itemID)
-        npc:setLocalVar("itemAmount_1", item.amount)
+    if npc:getLocalVar('itemID_1') == 0 then
+        npc:setLocalVar('itemID_1', item.itemID)
+        npc:setLocalVar('itemAmount_1', item.amount)
         table.remove(tempBoxItems, random)
     end
 
@@ -634,8 +634,8 @@ xi.nyzul.tempBoxPickItems = function(npc)
         random = math.random(1, #tempBoxItems)
         item   = tempBoxItems[random]
 
-        npc:setLocalVar("itemID_2", item.itemID)
-        npc:setLocalVar("itemAmount_2", item.amount)
+        npc:setLocalVar('itemID_2', item.itemID)
+        npc:setLocalVar('itemAmount_2', item.amount)
         table.remove(tempBoxItems, random)
     end
 
@@ -643,27 +643,27 @@ xi.nyzul.tempBoxPickItems = function(npc)
         random = math.random(1, #tempBoxItems)
         item   = tempBoxItems[random]
 
-        npc:setLocalVar("itemID_3", item.itemID)
-        npc:setLocalVar("itemAmount_3", item.amount)
+        npc:setLocalVar('itemID_3', item.itemID)
+        npc:setLocalVar('itemAmount_3', item.amount)
         table.remove(tempBoxItems, random)
     end
 end
 
 xi.nyzul.tempBoxFinish = function(player, csid, option, npc)
     if csid == 2 then
-        local item1 = npc:getLocalVar("itemID_1")
-        local item2 = npc:getLocalVar("itemID_2")
-        local item3 = npc:getLocalVar("itemID_3")
+        local item1 = npc:getLocalVar('itemID_1')
+        local item2 = npc:getLocalVar('itemID_2')
+        local item3 = npc:getLocalVar('itemID_3')
 
         if
             option == 1 and
             item1 > 0 and
-            npc:getLocalVar("itemAmount_1") > 0
+            npc:getLocalVar('itemAmount_1') > 0
         then
             if not player:hasItem(item1, xi.inventoryLocation.TEMPITEMS) then
                 player:addTempItem(item1)
                 player:messageName(ID.text.PLAYER_OBTAINS_TEMP_ITEM, player, item1)
-                npc:setLocalVar("itemAmount_1", npc:getLocalVar("itemAmount_1") - 1)
+                npc:setLocalVar('itemAmount_1', npc:getLocalVar('itemAmount_1') - 1)
             else
                 player:messageSpecial(ID.text.ALREADY_HAVE_TEMP_ITEM)
             end
@@ -671,12 +671,12 @@ xi.nyzul.tempBoxFinish = function(player, csid, option, npc)
         elseif
             option == 2 and
             item2 > 0 and
-            npc:getLocalVar("itemAmount_2") > 0
+            npc:getLocalVar('itemAmount_2') > 0
         then
             if not player:hasItem(item2, xi.inventoryLocation.TEMPITEMS) then
                 player:addTempItem(item2)
                 player:messageName(ID.text.PLAYER_OBTAINS_TEMP_ITEM, player, item2)
-                npc:setLocalVar("itemAmount_2", npc:getLocalVar("itemAmount_2") - 1)
+                npc:setLocalVar('itemAmount_2', npc:getLocalVar('itemAmount_2') - 1)
             else
                 player:messageSpecial(ID.text.ALREADY_HAVE_TEMP_ITEM)
             end
@@ -684,24 +684,24 @@ xi.nyzul.tempBoxFinish = function(player, csid, option, npc)
         elseif
             option == 3 and
             item3 > 0 and
-            npc:getLocalVar("itemAmount_3") > 0
+            npc:getLocalVar('itemAmount_3') > 0
         then
             if not player:hasItem(item3, xi.inventoryLocation.TEMPITEMS) then
                 player:addTempItem(item3)
                 player:messageName(ID.text.PLAYER_OBTAINS_TEMP_ITEM, player, item3)
-                npc:setLocalVar("itemAmount_3", npc:getLocalVar("itemAmount_3") - 1)
+                npc:setLocalVar('itemAmount_3', npc:getLocalVar('itemAmount_3') - 1)
             else
                 player:messageSpecial(ID.text.ALREADY_HAVE_TEMP_ITEM)
             end
         end
 
         if
-            npc:getLocalVar("itemAmount_1") == 0 and
-            npc:getLocalVar("itemAmount_2") == 0 and
-            npc:getLocalVar("itemAmount_3") == 0
+            npc:getLocalVar('itemAmount_1') == 0 and
+            npc:getLocalVar('itemAmount_2') == 0 and
+            npc:getLocalVar('itemAmount_3') == 0
         then
             npc:queue(10000, function(npcvar)
-                npcvar:entityAnimationPacket("kesu")
+                npcvar:entityAnimationPacket('kesu')
             end)
 
             npc:queue(12000, function(npcvar)
@@ -740,21 +740,21 @@ end
 xi.nyzul.handleRunicKey = function(mob)
     local instance = mob:getInstance()
 
-    if instance:getLocalVar("Nyzul_Current_Floor") == 100 then
+    if instance:getLocalVar('Nyzul_Current_Floor') == 100 then
         local chars      = instance:getChars()
-        local startFloor = instance:getLocalVar("Nyzul_Isle_StartingFloor")
+        local startFloor = instance:getLocalVar('Nyzul_Isle_StartingFloor')
 
         for _, entity in pairs(chars) do
             -- Does players Runic Disk have data saved to a floor of entering or higher
             if
-                entity:getVar("NyzulFloorProgress") + 1 >= startFloor and
+                entity:getVar('NyzulFloorProgress') + 1 >= startFloor and
                 not entity:hasKeyItem(xi.ki.RUNIC_KEY)
             then
                 -- On early version only initiator of floor got progress saves and key credit
                 if not xi.settings.main.RUNIC_DISK_SAVE then
-                    if entity:getID() == instance:getLocalVar("diskHolder") then
+                    if entity:getID() == instance:getLocalVar('diskHolder') then
                         if npcUtil.giveKeyItem(entity, xi.ki.RUNIC_KEY) then
-                            entity:setVar("NyzulFloorProgress", 0)
+                            entity:setVar('NyzulFloorProgress', 0)
                         end
                     end
 
@@ -779,14 +779,14 @@ xi.nyzul.handleProgress = function(instance, progress)
         progress == 15)
         or
         ((stage == xi.nyzul.objective.ELIMINATE_ALL_ENEMIES or stage == xi.nyzul.objective.ELIMINATE_SPECIFIED_ENEMIES) and
-        progress >= instance:getLocalVar("Eliminate"))
+        progress >= instance:getLocalVar('Eliminate'))
     then
         local chars        = instance:getChars()
-        local currentFloor = instance:getLocalVar("Nyzul_Current_Floor")
+        local currentFloor = instance:getLocalVar('Nyzul_Current_Floor')
 
         instance:setProgress(0)
-        instance:setLocalVar("Eliminate", 0)
-        instance:setLocalVar("potential_tokens", calculateTokens(instance))
+        instance:setLocalVar('Eliminate', 0)
+        instance:setLocalVar('potential_tokens', calculateTokens(instance))
 
         for _, players in ipairs(chars) do
             players:messageSpecial(ID.text.OBJECTIVE_COMPLETE, currentFloor)
@@ -815,7 +815,7 @@ xi.nyzul.specifiedEnemySet = function(mob)
     local instance = mob:getInstance()
 
     if instance:getStage() == xi.nyzul.objective.ELIMINATE_SPECIFIED_ENEMY then
-        if instance:getLocalVar("Nyzul_Specified_Enemy") == mob:getID() then
+        if instance:getLocalVar('Nyzul_Specified_Enemy') == mob:getID() then
             mob:setMobMod(xi.mobMod.CHECK_AS_NM, 1)
         end
     end
@@ -827,9 +827,9 @@ xi.nyzul.specifiedEnemyKill = function(mob)
 
     -- Eliminate specified enemy
     if stage == xi.nyzul.objective.ELIMINATE_SPECIFIED_ENEMY then
-        if instance:getLocalVar("Nyzul_Specified_Enemy") == mob:getID() then
+        if instance:getLocalVar('Nyzul_Specified_Enemy') == mob:getID() then
             instance:setProgress(15)
-            instance:setLocalVar("Nyzul_Specified_Enemy", 0)
+            instance:setLocalVar('Nyzul_Specified_Enemy', 0)
         end
 
     -- Eliminiate all enemies
@@ -861,8 +861,8 @@ xi.nyzul.vigilWeaponDrop = function(player, mob)
 
     -- Only floor 100 Bosses to drop 1 random weapon guarenteed and 1 of the disk holders job
     -- will not drop diskholder's weapon if anyone already has it.
-    if instance:getLocalVar("Nyzul_Current_Floor") == 100 then
-        local diskHolder = GetPlayerByID(instance:getLocalVar("diskHolder"), instance)
+    if instance:getLocalVar('Nyzul_Current_Floor') == 100 then
+        local diskHolder = GetPlayerByID(instance:getLocalVar('diskHolder'), instance)
         local chars      = instance:getChars()
 
         if diskHolder ~= nil then
@@ -901,7 +901,7 @@ xi.nyzul.spawnChest = function(mob, player)
                 local pos = mob:getPos()
                 coffer:setUntargetable(false)
                 coffer:setPos(pos.x, pos.y, pos.z, pos.rot)
-                coffer:setLocalVar("appraisalItem", mobID)
+                coffer:setLocalVar('appraisalItem', mobID)
                 coffer:setStatus(xi.status.NORMAL)
 
                 break
@@ -930,9 +930,9 @@ xi.nyzul.spawnChest = function(mob, player)
 end
 
 xi.nyzul.removePathos = function(instance)
-    if instance:getLocalVar("floorPathos") > 0 then
+    if instance:getLocalVar('floorPathos') > 0 then
         for i = 1, #xi.nyzul.pathos do
-            if utils.mask.getBit(instance:getLocalVar("floorPathos"), i) then
+            if utils.mask.getBit(instance:getLocalVar('floorPathos'), i) then
                 local removeMessage = xi.nyzul.pathos[i].ID
                 local chars         = instance:getChars()
 
@@ -946,17 +946,17 @@ xi.nyzul.removePathos = function(instance)
                     end
                 end
 
-                instance:setLocalVar("floorPathos", utils.mask.setBit(instance:getLocalVar("floorPathos"), i, false))
+                instance:setLocalVar('floorPathos', utils.mask.setBit(instance:getLocalVar('floorPathos'), i, false))
             end
         end
     end
 end
 
 xi.nyzul.addFloorPathos = function(instance)
-    local randomPathos = instance:getLocalVar("randomPathos")
+    local randomPathos = instance:getLocalVar('randomPathos')
 
     if randomPathos > 0 then
-        instance:setLocalVar("floorPathos", utils.mask.setBit(instance:getLocalVar("floorPathos"), randomPathos, true))
+        instance:setLocalVar('floorPathos', utils.mask.setBit(instance:getLocalVar('floorPathos'), randomPathos, true))
 
         local pathos = xi.nyzul.pathos[randomPathos]
         local chars  = instance:getChars()
@@ -978,14 +978,14 @@ xi.nyzul.addFloorPathos = function(instance)
             end
         end
 
-        instance:setLocalVar("randomPathos", 0)
+        instance:setLocalVar('randomPathos', 0)
     end
 end
 
 xi.nyzul.addPenalty = function(mob)
     local instance = mob:getInstance()
-    local pathos   = instance:getLocalVar("floorPathos")
-    local penalty  = instance:getLocalVar("gearPenalty")
+    local pathos   = instance:getLocalVar('floorPathos')
+    local penalty  = instance:getLocalVar('gearPenalty')
     local chars    = instance:getChars()
 
     if penalty == xi.nyzul.penalty.TIME then
@@ -998,10 +998,10 @@ xi.nyzul.addPenalty = function(mob)
             players:messageSpecial(ID.text.TIME_LOSS, 1)
         end
     elseif penalty == xi.nyzul.penalty.TOKENS then
-        local tokenPenalty = instance:getLocalVar("tokenPenalty")
+        local tokenPenalty = instance:getLocalVar('tokenPenalty')
 
         tokenPenalty = tokenPenalty + 1
-        instance:setLocalVar("tokenPenalty", tokenPenalty)
+        instance:setLocalVar('tokenPenalty', tokenPenalty)
 
         for _, players in pairs(chars) do
             players:messageSpecial(ID.text.MALFUNCTION)
@@ -1023,7 +1023,7 @@ xi.nyzul.addPenalty = function(mob)
         if #availablePathos > 0 then -- Failsafe in case all 17 are applied. Unlikely, but just in case.
             local randomEffect = availablePathos[math.random(1, #availablePathos)]
 
-            instance:setLocalVar("floorPathos", utils.mask.setBit(pathos, randomEffect, true))
+            instance:setLocalVar('floorPathos', utils.mask.setBit(pathos, randomEffect, true))
             pathos = xi.nyzul.pathos[randomEffect]
 
             local effect = pathos.effect
@@ -1062,7 +1062,7 @@ xi.nyzul.addPenalty = function(mob)
 end
 
 xi.nyzul.getTokenPenalty = function(instance)
-    local floorPenalities = instance:getLocalVar("tokenPenalty")
+    local floorPenalities = instance:getLocalVar('tokenPenalty')
     local rate            = getTokenRate(instance)
 
     return math.floor(117 * rate * floorPenalities)

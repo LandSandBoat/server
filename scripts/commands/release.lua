@@ -6,12 +6,12 @@
 cmdprops =
 {
     permission = 1,
-    parameters = "s"
+    parameters = 's'
 }
 
 function error(player, msg)
     player:PrintToPlayer(msg)
-    player:PrintToPlayer("!release (name)")
+    player:PrintToPlayer('!release (name)')
 end
 
 function onTrigger(player, name)
@@ -21,7 +21,7 @@ function onTrigger(player, name)
     else
         target = GetPlayerByName(name)
         if target == nil then
-            error(player, string.format("Player named '%s' not found!", name))
+            error(player, string.format('Player named "%s" not found!', name))
             return
         end
     end

@@ -4,7 +4,7 @@
 local attachmentObject = {}
 
 attachmentObject.onEquip = function(pet)
-    pet:addListener("AUTOMATON_ATTACHMENT_CHECK", "ATTACHMENT_ECONOMIZER", function(automaton, target)
+    pet:addListener('AUTOMATON_ATTACHMENT_CHECK', 'ATTACHMENT_ECONOMIZER', function(automaton, target)
         local master = automaton:getMaster()
         local maneuvers = (master and master:countEffect(xi.effect.DARK_MANEUVER) > 0) and master:countEffect(xi.effect.DARK_MANEUVER) or 7
         local mpthreshold = 60 - maneuvers * 10
@@ -19,7 +19,7 @@ attachmentObject.onEquip = function(pet)
 end
 
 attachmentObject.onUnequip = function(pet)
-    pet:removeListener("ATTACHMENT_ECONOMIZER")
+    pet:removeListener('ATTACHMENT_ECONOMIZER')
 end
 
 attachmentObject.onManeuverGain = function(pet, maneuvers)

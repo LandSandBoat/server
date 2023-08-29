@@ -27,9 +27,9 @@ zoneObject.onInstanceZoneIn = function(player, instance)
         player:setPos(entrypos.x, entrypos.y, entrypos.z, entrypos.rot)
     end
 
-    player:entityVisualPacket("1pa1")
-    player:entityVisualPacket("1pb1")
-    player:entityVisualPacket("2pb1")
+    player:entityVisualPacket('1pa1')
+    player:entityVisualPacket('1pb1')
+    player:entityVisualPacket('2pb1')
 
     return cs
 end

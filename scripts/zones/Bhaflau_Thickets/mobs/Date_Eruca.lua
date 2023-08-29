@@ -2,7 +2,7 @@
 -- Area: Bhaflau Thickets
 --  Mob: Date Eruca
 -----------------------------------
-mixins = { require("scripts/mixins/families/eruca") }
+mixins = { require('scripts/mixins/families/eruca') }
 -----------------------------------
 local entity = {}
 

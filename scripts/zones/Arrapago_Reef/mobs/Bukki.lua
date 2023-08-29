@@ -2,7 +2,7 @@
 -- Area: Arrapago Reef
 --   NM: Bukki
 -----------------------------------
-mixins = { require("scripts/mixins/families/imp") }
+mixins = { require('scripts/mixins/families/imp') }
 -----------------------------------
 local entity = {}
 

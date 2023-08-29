@@ -2,7 +2,7 @@
 -- Area: Windurst Woods
 --  NPC: Auction Counter
 -----------------------------------
-require("scripts/quests/tutorial")
+require('scripts/quests/tutorial')
 -----------------------------------
 local entity = {}
 

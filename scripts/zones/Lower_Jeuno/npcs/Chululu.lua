@@ -25,23 +25,23 @@ entity.onTrigger = function(player, npc)
     local collectTarutCards = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.COLLECT_TARUT_CARDS)
     local rubbishDay        = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.RUBBISH_DAY)
     local allInTheCards     = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.ALL_IN_THE_CARDS)
-    local cdate             = player:getCharVar("AllInTheCards_date")
+    local cdate             = player:getCharVar('AllInTheCards_date')
 
     if
         player:getFameLevel(xi.quest.fame_area.JEUNO) >= 3 and
         collectTarutCards == QUEST_AVAILABLE
     then
-        player:startEvent(28) -- Start quest "Collect Tarut Cards" with option
+        player:startEvent(28) -- Start quest 'Collect Tarut Cards' with option
 
     elseif collectTarutCards == QUEST_ACCEPTED then
-        player:startEvent(27) -- During quest "Collect Tarut Cards"
+        player:startEvent(27) -- During quest 'Collect Tarut Cards'
 
     elseif
         collectTarutCards == QUEST_COMPLETED and
         rubbishDay == QUEST_AVAILABLE and
-        player:getCharVar("RubbishDay_day") ~= VanadielDayOfTheYear()
+        player:getCharVar('RubbishDay_day') ~= VanadielDayOfTheYear()
     then
-        -- prog = player:getCharVar("RubbishDay_prog")
+        -- prog = player:getCharVar('RubbishDay_prog')
         -- if prog <= 2 then
         --     player:startEvent(199) -- Required to get compatibility 3x on 3 diff game days before quest is kicked off
         -- elseif prog == 3 then
@@ -56,37 +56,37 @@ entity.onTrigger = function(player, npc)
 
     elseif
         rubbishDay == QUEST_ACCEPTED and
-        player:getCharVar("RubbishDayVar") == 0
+        player:getCharVar('RubbishDayVar') == 0
     then
-        player:startEvent(49) -- During quest "Rubbish Day"
+        player:startEvent(49) -- During quest 'Rubbish Day'
 
     elseif
         rubbishDay == QUEST_ACCEPTED and
-        player:getCharVar("RubbishDayVar") == 1
+        player:getCharVar('RubbishDayVar') == 1
     then
-        player:startEvent(197) -- Finish quest "Rubbish Day"
+        player:startEvent(197) -- Finish quest 'Rubbish Day'
 
     elseif
         player:getFameLevel(xi.quest.fame_area.JEUNO) >= 4 and
         collectTarutCards == QUEST_COMPLETED and
         allInTheCards == QUEST_AVAILABLE
     then
-        player:startEvent(10110) -- Start quest "All in the Cards" with option
+        player:startEvent(10110) -- Start quest 'All in the Cards' with option
 
     elseif
         allInTheCards >= QUEST_ACCEPTED and
-        player:getLocalVar("Cardstemp") == 0
+        player:getLocalVar('Cardstemp') == 0
     then
         if cdate >= os.time() then
-            player:startEvent(10111) -- During quest "All in the Cards" and same AllInTheCards_date value
+            player:startEvent(10111) -- During quest 'All in the Cards' and same AllInTheCards_date value
         elseif cdate == 0 then
-            player:startEvent(10113) -- Start quest "All in the Cards" repeat with option
+            player:startEvent(10113) -- Start quest 'All in the Cards' repeat with option
         elseif cdate < os.time() then
-            player:startEvent(10112) -- During quest "All in the Cards"  THIS ONE GIVES ANOTHER BATCH
+            player:startEvent(10112) -- During quest 'All in the Cards'  THIS ONE GIVES ANOTHER BATCH
         end
 
     elseif player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.SEARCHING_FOR_THE_RIGHT_WORDS) == QUEST_COMPLETED then
-        if player:getCharVar("SearchingForRightWords_postcs") < -1 then
+        if player:getCharVar('SearchingForRightWords_postcs') < -1 then
             player:startEvent(56)
         else
             player:startEvent(57) -- final state, after all quests complete
@@ -131,15 +131,15 @@ entity.onEventFinish = function(player, csid, option, npc)
         player:completeQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.COLLECT_TARUT_CARDS)
 
     elseif csid == 199 and option == 0 then
-        player:incrementCharVar("RubbishDay_prog", 1)
-        player:setCharVar("RubbishDay_day", VanadielDayOfTheYear()) -- new vanadiel day
+        player:incrementCharVar('RubbishDay_prog', 1)
+        player:setCharVar('RubbishDay_day', VanadielDayOfTheYear()) -- new vanadiel day
 
     elseif csid == 198 and option == 0 then
         player:addQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.RUBBISH_DAY)
         player:addKeyItem(xi.ki.MAGIC_TRASH)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.MAGIC_TRASH)
-        player:setCharVar("RubbishDay_prog", 0)
-        player:setCharVar("RubbishDay_day", VanadielDayOfTheYear())
+        player:setCharVar('RubbishDay_prog', 0)
+        player:setCharVar('RubbishDay_day', VanadielDayOfTheYear())
 
     elseif
         (csid == 10110 or csid == 10112 or csid == 10113) and
@@ -158,19 +158,19 @@ entity.onEventFinish = function(player, csid, option, npc)
 
         if npcUtil.giveItem(player, { { card, 5 } }) then
             player:addQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.ALL_IN_THE_CARDS)
-            player:setCharVar("AllInTheCards_date", getMidnight())
-            player:setLocalVar("Cardstemp", 1)
+            player:setCharVar('AllInTheCards_date', getMidnight())
+            player:setLocalVar('Cardstemp', 1)
         end
 
     elseif csid == 10111 then -- same day, have to return later
-        player:setLocalVar("Cardstemp", 1)
+        player:setLocalVar('Cardstemp', 1)
 
     elseif csid == 10114 then
         if
             npcUtil.completeQuest(player, xi.quest.log_id.JEUNO, xi.quest.id.jeuno.ALL_IN_THE_CARDS, {
                 gil = 600,
                 title = xi.title.CARD_COLLECTOR,
-                var = { "AllInTheCards_date" }
+                var = { 'AllInTheCards_date' }
             })
         then
             player:confirmTrade()
@@ -180,7 +180,7 @@ entity.onEventFinish = function(player, csid, option, npc)
         npcUtil.completeQuest(player, xi.quest.log_id.JEUNO, xi.quest.id.jeuno.RUBBISH_DAY, {
             gil = 6000,
             item = xi.item.CHAIN_CHOKER,
-            var = { "RubbishDayVar" }
+            var = { 'RubbishDayVar' }
         })
     end
 end

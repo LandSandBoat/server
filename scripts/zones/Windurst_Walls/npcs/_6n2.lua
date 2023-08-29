@@ -60,12 +60,12 @@ entity.onEventFinish = function(player, csid, option, npc)
     elseif csid == 413 then
         player:addQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CLASS_REUNION)
         npcUtil.giveKeyItem(player, xi.ki.CARBUNCLES_TEAR)
-        player:setCharVar("ClassReunionProgress", 1)
+        player:setCharVar('ClassReunionProgress', 1)
 
     -- CARBUNCLE DEBACLE
     elseif csid == 415 then
         player:addQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CARBUNCLE_DEBACLE)
-        player:setCharVar("CarbuncleDebacleProgress", 1)
+        player:setCharVar('CarbuncleDebacleProgress', 1)
     end
 end
 

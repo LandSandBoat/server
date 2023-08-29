@@ -20,7 +20,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local zephyrFanCD = player:getCharVar("[ENM]ZephyrFan")
+    local zephyrFanCD = player:getCharVar('[ENM]ZephyrFan')
 
     if player:hasKeyItem(xi.ki.ZEPHYR_FAN) then
         player:startEvent(12)
@@ -48,7 +48,7 @@ entity.onEventFinish = function(player, csid, option, npc)
     if csid == 13 then
         player:addKeyItem(xi.ki.ZEPHYR_FAN)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.ZEPHYR_FAN)
-        player:setCharVar("[ENM]ZephyrFan", os.time() + (xi.settings.main.ENM_COOLDOWN * 3600)) -- Current time + (ENM_COOLDOWN*1hr in seconds)
+        player:setCharVar('[ENM]ZephyrFan', os.time() + (xi.settings.main.ENM_COOLDOWN * 3600)) -- Current time + (ENM_COOLDOWN*1hr in seconds)
     elseif csid == 14 then
         if player:getFreeSlotsCount() == 0 then
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.item.COTTON_POUCH) -- Cotton Pouch

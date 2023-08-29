@@ -8,14 +8,14 @@ spellObject.onMagicCastingCheck = function(caster, target, spell)
 end
 
 spellObject.onSpellCast = function(caster, target, spell)
-    local windurstFirstTrust = caster:getCharVar("WindurstFirstTrust")
+    local windurstFirstTrust = caster:getCharVar('WindurstFirstTrust')
     local zone = caster:getZoneID()
 
     if
         windurstFirstTrust == 1 and
         (zone == xi.zone.EAST_SARUTABARUTA or zone == xi.zone.WEST_SARUTABARUTA)
     then
-        caster:setCharVar("WindurstFirstTrust", 2)
+        caster:setCharVar('WindurstFirstTrust', 2)
     end
 
     return xi.trust.spawn(caster, spell)

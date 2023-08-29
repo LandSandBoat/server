@@ -14,8 +14,8 @@ quest.sections = {
         check = function(player, status, vars)
             return status == QUEST_AVAILABLE
                 and player:getQuestStatus(xi.quest.log_id.JEUNO, BLESSED_RADIANCE) == QUEST_COMPLETED
-                and player:getFellowValue("level") >= 56
-                and player:getFellowValue("bond") >= 80
+                and player:getFellowValue('level') >= 56
+                and player:getFellowValue('bond') >= 80
         end,
 
         [xi.zone.UPPER_JEUNO] = {
@@ -61,7 +61,7 @@ quest.sections = {
                     quest:setVar(player, 'Prog', 3)
                 end,
                 [10081] = function(player, csid, option, npc)
-                    player:setFellowValue("lvlcap", 65)
+                    player:setFellowValue('lvlcap', 65)
                     quest:complete(player)
                     npcUtil.giveItem(player, quest.foodItem(player))
                 end,
@@ -71,7 +71,7 @@ quest.sections = {
         [xi.zone.SOUTHERN_SAN_DORIA] = {
             ['Raimbroy'] = {
                 onTrigger = function(player, npc)
-                    if quest:getVar(player, "Prog") == 1 then
+                    if quest:getVar(player, 'Prog') == 1 then
                         return quest:progressEvent(780, {[7] = getFellowParam(player)})
                     end
                 end,
@@ -103,7 +103,7 @@ quest.sections = {
 }
 
 quest.foodItem = function(player)
-    local item = player:getFellowValue("personality")
+    local item = player:getFellowValue('personality')
     local foodTable =
     {
         [4]  = xi.item.CHUNK_OF_HOMEMADE_CHEESE,

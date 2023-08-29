@@ -9,7 +9,7 @@ local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     if npc:getID() == ID.npc.LELEROON_BLUE_DOOR then
-        local letterBlue = player:getCharVar("LeleroonsLetterBlue")
+        local letterBlue = player:getCharVar('LeleroonsLetterBlue')
 
         if
             letterBlue == 2 and
@@ -28,7 +28,7 @@ end
 
 entity.onTrigger = function(player, npc)
     if npc:getID() == ID.npc.LELEROON_BLUE_DOOR then
-        local letterBlue = player:getCharVar("LeleroonsletterBlue")
+        local letterBlue = player:getCharVar('LeleroonsletterBlue')
 
         if player:hasKeyItem(xi.ki.LELEROONS_LETTER_BLUE) then
             player:startEvent(519) -- accept letter, now bring me four items
@@ -40,7 +40,7 @@ entity.onTrigger = function(player, npc)
             player:startEvent(535) -- i'm waiting for 4 imperial mythril pieces
 
         elseif letterBlue == 4 then
-            if VanadielUniqueDay() > player:getCharVar("corAfSubmitDay") then
+            if VanadielUniqueDay() > player:getCharVar('corAfSubmitDay') then
                 player:startEvent(522) -- here's your cor bottes
             else
                 player:startEvent(523) -- patience. need to wait for vana'diel day
@@ -54,23 +54,23 @@ end
 
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 519 then
-        player:setCharVar("LeleroonsletterBlue", 2)
+        player:setCharVar('LeleroonsletterBlue', 2)
         player:delKeyItem(xi.ki.LELEROONS_LETTER_BLUE)
 
     elseif csid == 521 then
         player:confirmTrade()
-        player:setCharVar("LeleroonsletterBlue", 3)
+        player:setCharVar('LeleroonsletterBlue', 3)
 
     elseif csid == 524 then
         player:confirmTrade()
-        player:setCharVar("LeleroonsletterBlue", 4)
-        player:setCharVar("corAfSubmitDay", VanadielUniqueDay())
+        player:setCharVar('LeleroonsletterBlue', 4)
+        player:setCharVar('corAfSubmitDay', VanadielUniqueDay())
 
     elseif
         csid == 522 and
         npcUtil.giveItem(player, xi.item.CORSAIRS_BOTTES)
     then
-        player:setCharVar("LeleroonsletterBlue", 5)
+        player:setCharVar('LeleroonsletterBlue', 5)
     end
 end
 

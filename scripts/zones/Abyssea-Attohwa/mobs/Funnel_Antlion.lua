@@ -2,7 +2,7 @@
 -- Area: Abyssea-Attohwa
 --  Mob: Funnel Antlion
 -----------------------------------
-mixins = { require("scripts/mixins/families/antlion_ambush") }
+mixins = { require('scripts/mixins/families/antlion_ambush') }
 -----------------------------------
 local entity = {}
 

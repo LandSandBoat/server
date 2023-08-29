@@ -1,12 +1,12 @@
 cmdprops =
 {
     permission = 1,
-    parameters = "sss"
+    parameters = 'sss'
 }
 
 function error(player, msg)
     player:PrintToPlayer(msg)
-    player:PrintToPlayer("!mount <mount ID> (player)")
+    player:PrintToPlayer('!mount <mount ID> (player)')
 end
 
 function onTrigger(player, mount, target)
@@ -18,7 +18,7 @@ function onTrigger(player, mount, target)
     -- validate mount
     mount = tonumber(mount) or xi.mount[string.upper(mount)]
     if mount == nil or mount < 0 or mount >= xi.mount.MOUNT_MAX then
-        error(player, "Invalid mount ID.")
+        error(player, 'Invalid mount ID.')
         return
     end
 
@@ -29,7 +29,7 @@ function onTrigger(player, mount, target)
     else
         targ = GetPlayerByName(target)
         if targ == nil then
-            error(player, string.format("Player named '%s' not found!", target))
+            error(player, string.format('Player named "%s" not found!', target))
             return
         end
     end

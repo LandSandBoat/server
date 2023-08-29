@@ -15,7 +15,7 @@ end
 
 function Container:new(varPrefix)
     if varPrefix == nil or string.len(varPrefix) < 5 then
-        printf("Invalid container with prefix: %s", varPrefix)
+        printf('Invalid container with prefix: %s', varPrefix)
     end
 
     local obj = {}
@@ -138,11 +138,11 @@ end
 -- if zoning/logout is required.  There is no clearing support at this time, outside
 -- of legitimate methods.
 function Container:getMustZone(player)
-    return player:getLocalVar(self.varPrefix .. "mustZone") == 1 and true or false
+    return player:getLocalVar(self.varPrefix .. 'mustZone') == 1 and true or false
 end
 
 function Container:setMustZone(player)
-    player:setLocalVar(self.varPrefix .. "mustZone", 1)
+    player:setLocalVar(self.varPrefix .. 'mustZone', 1)
 end
 
 function Container:getLocalVar(player, name)

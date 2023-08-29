@@ -6,12 +6,12 @@
 cmdprops =
 {
     permission = 1,
-    parameters = "is"
+    parameters = 'is'
 }
 
 function error(player, msg)
     player:PrintToPlayer(msg)
-    player:PrintToPlayer("!addabytime <minutes> (player)")
+    player:PrintToPlayer('!addabytime <minutes> (player)')
 end
 
 function onTrigger(player, minutes, target)
@@ -22,7 +22,7 @@ function onTrigger(player, minutes, target)
     else
         targ = GetPlayerByName(target)
         if targ == nil then
-            error(player, string.format("Player named '%s' not found!", target))
+            error(player, string.format('Player named "%s" not found!', target))
             return
         end
     end
@@ -30,13 +30,13 @@ function onTrigger(player, minutes, target)
     -- target must be in dynamis
     local effect = targ:getStatusEffect(xi.effect.VISITANT)
     if not effect then
-        error(player, string.format("%s is not in Abyssea.", targ:getName()))
+        error(player, string.format('%s is not in Abyssea.', targ:getName()))
         return
     end
 
     -- validate amount
     if minutes == nil or minutes < 1 then
-        error(player, "Invalid number of minutes.")
+        error(player, 'Invalid number of minutes.')
         return
     end
 

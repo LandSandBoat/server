@@ -2,7 +2,7 @@
 -- Trust: Abquhbah
 -----------------------------------
 
-local quest = HiddenQuest:new("TrustAbquhbah")
+local quest = HiddenQuest:new('TrustAbquhbah')
 
 quest.sections =
 {

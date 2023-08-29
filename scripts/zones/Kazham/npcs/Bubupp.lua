@@ -17,8 +17,8 @@ entity.onTrade = function(player, npc, trade)
     -- 1147      Ancient Salt
     -- 4600      Lucky Egg
     local opoOpoAndIStatus = player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.THE_OPO_OPO_AND_I)
-    local progress = player:getCharVar("OPO_OPO_PROGRESS")
-    local failed = player:getCharVar("OPO_OPO_FAILED")
+    local progress = player:getCharVar('OPO_OPO_PROGRESS')
+    local failed = player:getCharVar('OPO_OPO_FAILED')
     local goodtrade = trade:hasItemQty(xi.item.SET_OF_GIANT_FISH_BONES, 1)
     local badtrade = trade:hasItemQty(xi.item.BROKEN_MITHRAN_FISHING_ROD, 1) or
         trade:hasItemQty(xi.item.WORKBENCH, 1) or
@@ -43,9 +43,9 @@ end
 
 entity.onTrigger = function(player, npc)
     local opoOpoAndIStatus = player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.THE_OPO_OPO_AND_I)
-    local progress = player:getCharVar("OPO_OPO_PROGRESS")
-    local failed = player:getCharVar("OPO_OPO_FAILED")
-    local retry = player:getCharVar("OPO_OPO_RETRY")
+    local progress = player:getCharVar('OPO_OPO_PROGRESS')
+    local failed = player:getCharVar('OPO_OPO_FAILED')
+    local retry = player:getCharVar('OPO_OPO_RETRY')
 
     if opoOpoAndIStatus == QUEST_ACCEPTED then
         if retry >= 1 then                          -- has failed on future npc so disregard previous successful trade
@@ -65,16 +65,16 @@ end
 
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 224 then    -- correct trade, onto next opo
-        if player:getCharVar("OPO_OPO_PROGRESS") == 5 then
+        if player:getCharVar('OPO_OPO_PROGRESS') == 5 then
             player:tradeComplete()
-            player:setCharVar("OPO_OPO_PROGRESS", 6)
-            player:setCharVar("OPO_OPO_FAILED", 0)
+            player:setCharVar('OPO_OPO_PROGRESS', 6)
+            player:setCharVar('OPO_OPO_FAILED', 0)
         else
-            player:setCharVar("OPO_OPO_FAILED", 7)
+            player:setCharVar('OPO_OPO_FAILED', 7)
         end
     elseif csid == 234 then              -- wrong trade, restart at first opo
-        player:setCharVar("OPO_OPO_FAILED", 1)
-        player:setCharVar("OPO_OPO_RETRY", 6)
+        player:setCharVar('OPO_OPO_FAILED', 1)
+        player:setCharVar('OPO_OPO_RETRY', 6)
     end
 end
 

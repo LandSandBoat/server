@@ -3,7 +3,7 @@
 --  NPC: Rubious Crystal (West Tower)
 -- !pos -683.709 -6.250 -222.142 33
 -----------------------------------
-local altaieuGlobal = require("scripts/zones/AlTaieu/globals")
+local altaieuGlobal = require('scripts/zones/AlTaieu/globals')
 -----------------------------------
 local entity = {}
 

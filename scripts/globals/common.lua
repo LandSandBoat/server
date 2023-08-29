@@ -15,10 +15,10 @@ function switch(c)
             end
 
             if f then
-                if type(f) == "function" then
+                if type(f) == 'function' then
                     return f(self.casevar, self)
                 else
-                    error("case "..tostring(self.casevar).." not a function")
+                    error('case '..tostring(self.casevar)..' not a function')
                 end
             end
         end

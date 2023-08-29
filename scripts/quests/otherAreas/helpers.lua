@@ -13,7 +13,7 @@ function xi.otherAreas.helpers.TestMyMettle.moveJar(npc)
     -- full equation = ((2.5 * 10) * 6) to ((3 * 60) * 60)
     local randomHourSpan = math.random(125, 10800)
 
-    SetServerVariable("Davoi_Jar_Move_Time", os.time() + randomHourSpan)
+    SetServerVariable('Davoi_Jar_Move_Time', os.time() + randomHourSpan)
 
     local positions =
     {

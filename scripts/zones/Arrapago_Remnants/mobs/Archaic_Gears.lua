@@ -2,7 +2,7 @@
 -- Area: Arrapago Remnants
 --  Mob: Archaic Gears
 -----------------------------------
-mixins = { require("scripts/mixins/families/gears") }
+mixins = { require('scripts/mixins/families/gears') }
 -----------------------------------
 local entity = {}
 

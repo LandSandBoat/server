@@ -125,11 +125,11 @@ local drops =
 }
 
 local function GetTempDropTable(npc)
-    local maxItem = npc:getLocalVar("NB_ITEM")
+    local maxItem = npc:getLocalVar('NB_ITEM')
     local tempTable = {}
 
     for i = 1, maxItem do
-        tempTable[i] = npc:getLocalVar("TEMP" .. i)
+        tempTable[i] = npc:getLocalVar('TEMP' .. i)
     end
 
     return tempTable
@@ -149,7 +149,7 @@ local function GiveTempItem(player, npc, tempNum)
         else
             player:addTempItem(tempItems[tempNum])
             xi.pyxis.messageChest(player, ID.text.OBTAINS_TEMP_ITEM, tempItems[tempNum], 0, 0, 0, npc)
-            npc:setLocalVar("TEMP" .. tempNum, 0)
+            npc:setLocalVar('TEMP' .. tempNum, 0)
             tempItems[tempNum] = 0
         end
     end
@@ -160,16 +160,16 @@ local function GiveTempItem(player, npc, tempNum)
 end
 
 xi.pyxis.tempItem.setTempItems = function(npc, tier)
-    local maxItem = npc:getLocalVar("NB_ITEM")
+    local maxItem = npc:getLocalVar('NB_ITEM')
 
     for i = 1, maxItem do
         local temp = drops[tier][math.random(1, #drops[tier])]
-        npc:setLocalVar("TEMP" .. i, temp)
+        npc:setLocalVar('TEMP' .. i, temp)
     end
 end
 
 xi.pyxis.tempItem.giveTemporaryItems = function(npc, player)
-    local tier = npc:getLocalVar("TIER")
+    local tier = npc:getLocalVar('TIER')
     local ID = zones[npc:getZoneID()]
     local alliance = player:getAlliance()
 

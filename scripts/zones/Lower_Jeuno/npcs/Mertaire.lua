@@ -34,14 +34,14 @@ entity.onTrigger = function(player, npc)
         job == xi.job.BRD and
         level >= xi.settings.main.AF1_QUEST_LEVEL
     then
-        if player:getCharVar("PainfulMemoryCS") == 0 then
-            player:startEvent(138) -- Long dialog for "Painful Memory"
+        if player:getCharVar('PainfulMemoryCS') == 0 then
+            player:startEvent(138) -- Long dialog for 'Painful Memory'
         else
-            player:startEvent(137) -- Short dialog for "Painful Memory"
+            player:startEvent(137) -- Short dialog for 'Painful Memory'
         end
 
     elseif painfulMemory == QUEST_ACCEPTED then
-        player:startEvent(136) -- During Quest "Painful Memory"
+        player:startEvent(136) -- During Quest 'Painful Memory'
 
     -- CIRCLE OF TIME (Bard AF3)
     elseif
@@ -77,25 +77,25 @@ entity.onEventFinish = function(player, csid, option, npc)
 
         -- Placing this here allows the player to get additional poetic
         -- parchments should they drop them until this quest is complete
-        player:setCharVar("TheOldMonument_Event", 0)
+        player:setCharVar('TheOldMonument_Event', 0)
 
     -- PAINFUL MEMORY (Bard AF1)
     elseif csid == 138 and option == 0 then
-        player:setCharVar("PainfulMemoryCS", 1) -- player declined quest
+        player:setCharVar('PainfulMemoryCS', 1) -- player declined quest
 
     elseif
         (csid == 137 or csid == 138) and
         option == 1
     then
         player:addQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.PAINFUL_MEMORY)
-        player:setCharVar("PainfulMemoryCS", 0)
+        player:setCharVar('PainfulMemoryCS', 0)
         player:addKeyItem(xi.ki.MERTAIRES_BRACELET)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.MERTAIRES_BRACELET)
 
     -- CIRCLE OF TIME (Bard AF3)
     elseif csid == 139 then
         player:addQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_CIRCLE_OF_TIME)
-        player:setCharVar("circleTime", 1)
+        player:setCharVar('circleTime', 1)
     end
 end
 

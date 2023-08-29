@@ -2,7 +2,7 @@
 -- Area: Misareaux_Coast
 --  Mob: Fomor Warrior
 -----------------------------------
-mixins = { require("scripts/mixins/fomor_hate") }
+mixins = { require('scripts/mixins/fomor_hate') }
 -----------------------------------
 local entity = {}
 

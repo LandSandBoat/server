@@ -160,10 +160,10 @@ end
 
 entity.onEventUpdate = function(player, csid, option, npc)
     if not player:delGil(10) then
-        player:setLocalVar("Dalba_PlayCutscene", 2)  -- Cancel the cutscene.
+        player:setLocalVar('Dalba_PlayCutscene', 2)  -- Cancel the cutscene.
         player:updateEvent(0)
     else
-        player:setLocalVar("Dalba_PlayCutscene", 1)
+        player:setLocalVar('Dalba_PlayCutscene', 1)
     end
 end
 
@@ -212,7 +212,7 @@ local eventByOption =
 }
 
 entity.onEventFinish = function(player, csid, option, npc)
-    if player:getLocalVar("Dalba_PlayCutscene") < 2 then
+    if player:getLocalVar('Dalba_PlayCutscene') < 2 then
         for k, eventData in pairs(eventByOption) do
             if option == k then
                 player:startEvent(unpack(eventData))
@@ -220,7 +220,7 @@ entity.onEventFinish = function(player, csid, option, npc)
         end
     end
 
-    player:setLocalVar("Dalba_PlayCutscene", 0)
+    player:setLocalVar('Dalba_PlayCutscene', 0)
 end
 
 return entity

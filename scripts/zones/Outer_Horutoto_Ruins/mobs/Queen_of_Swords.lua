@@ -2,7 +2,7 @@
 -- Area: Outer Horutoto Ruins
 --   NM: Queen of Swords
 -----------------------------------
-mixins = { require("scripts/mixins/job_special") }
+mixins = { require('scripts/mixins/job_special') }
 -----------------------------------
 local entity = {}
 

@@ -2,13 +2,13 @@
 -- Area: Mamook
 --  Mob: Hundredfaced Hapool Ja
 -----------------------------------
-mixins = { require("scripts/mixins/job_special") }
+mixins = { require('scripts/mixins/job_special') }
 -----------------------------------
 local entity = {}
 
 entity.onMobSpawn = function(mob)
     local hundredfacedHapoolJa = mob:getID()
-    mob:addListener("MAGIC_USE", "SPAWN_CLONES", function(mobArg, target, spell, action)
+    mob:addListener('MAGIC_USE', 'SPAWN_CLONES', function(mobArg, target, spell, action)
         local spellId = spell:getID()
         local hateTarget = GetMobByID(hundredfacedHapoolJa):getTarget()
 

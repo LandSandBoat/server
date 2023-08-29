@@ -1,16 +1,16 @@
 -----------------------------------
 -- Summoner Job Utilities
 -----------------------------------
-require("scripts/globals/ability")
-require("scripts/globals/jobpoints")
-require("scripts/globals/combat/tp")
+require('scripts/globals/ability')
+require('scripts/globals/jobpoints')
+require('scripts/globals/combat/tp')
 -----------------------------------
 xi = xi or {}
 xi.job_utils = xi.job_utils or {}
 xi.job_utils.summoner = xi.job_utils.summoner or {}
 -----------------------------------
 
--- sort of a misnomer, as if Apogee is up, the "base" mp cost rises.
+-- sort of a misnomer, as if Apogee is up, the 'base' mp cost rises.
 local function getBaseMPCost(player, ability)
     local baseMPCostMap =
     {
@@ -31,7 +31,7 @@ local function getBaseMPCost(player, ability)
     end
 
     if baseMPCost == nil then
-        printf("[warning] scripts/globals/job_utils/summoner.lua::getBaseMPCost(): MP cost for xi.jobAbility with id %d not implemented.", ability:getID())
+        printf('[warning] scripts/globals/job_utils/summoner.lua::getBaseMPCost(): MP cost for xi.jobAbility with id %d not implemented.', ability:getID())
         return 9999
     end
 

@@ -17,14 +17,14 @@ entity.onTrade = function(player, npc, trade)
         player:startEvent(269) -- Finish Quest "The Three Magi"
     elseif
         player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.RECOLLECTIONS) == QUEST_ACCEPTED and
-        player:getCharVar("recollectionsQuest") < 2 and
+        player:getCharVar('recollectionsQuest') < 2 and
         trade:hasItemQty(xi.item.BAG_OF_SEEDS, 1) and
         trade:getItemCount() == 1
     then
         player:startEvent(271, 0, 520)
     elseif
         player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_ROOT_OF_THE_PROBLEM) == QUEST_ACCEPTED and
-        player:getCharVar("rootProblem") == 1 and
+        player:getCharVar('rootProblem') == 1 and
         trade:hasItemQty(xi.item.SQUARE_OF_SILK_CLOTH, 1) and
         trade:getItemCount() == 1
     then
@@ -75,7 +75,7 @@ entity.onTrigger = function(player, npc)
     then
         player:startEvent(276, 0, xi.item.SQUARE_OF_SILK_CLOTH) -- Start Quest "The Root of The problem"
     elseif rootProblem == QUEST_ACCEPTED then
-        local rootProblemCS = player:getCharVar("rootProblem")
+        local rootProblemCS = player:getCharVar('rootProblem')
 
         if rootProblemCS == 1 then
             player:startEvent(277, 0, xi.item.SQUARE_OF_SILK_CLOTH)
@@ -96,12 +96,12 @@ entity.onEventFinish = function(player, csid, option, npc)
     if csid == 260 then
         -- option 3: Koru-Moru -- option 2: Shantotto -- option 1: Yoran-Oran
         player:addQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_THREE_MAGI)
-        player:setCharVar("theThreeMagiSupport", option)
+        player:setCharVar('theThreeMagiSupport', option)
     elseif csid == 269 then
         if player:getFreeSlotsCount() == 0 then
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.item.CASTING_WAND) -- Casting Wand
         else
-            local choosetitle = player:getCharVar("theThreeMagiSupport")
+            local choosetitle = player:getCharVar('theThreeMagiSupport')
 
             if choosetitle == 3 then
                 player:addTitle(xi.title.PROFESSOR_KORU_MORU_SUPPORTER)
@@ -115,7 +115,7 @@ entity.onEventFinish = function(player, csid, option, npc)
             player:addItem(xi.item.CASTING_WAND)
             player:messageSpecial(ID.text.ITEM_OBTAINED, xi.item.CASTING_WAND) -- Casting Wand
             player:needToZone(true)
-            player:setCharVar("theThreeMagiSupport", 0)
+            player:setCharVar('theThreeMagiSupport', 0)
             player:addFame(xi.quest.fame_area.WINDURST, 20)
             player:completeQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_THREE_MAGI)
         end
@@ -123,12 +123,12 @@ entity.onEventFinish = function(player, csid, option, npc)
         player:addQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.RECOLLECTIONS)
     elseif csid == 271 then
         player:tradeComplete()
-        player:setCharVar("recollectionsQuest", 2)
+        player:setCharVar('recollectionsQuest', 2)
     elseif csid == 275 then
         if player:getFreeSlotsCount() == 0 then
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.item.WIZARDS_SABOTS) -- wizards sabots
         else
-            player:setCharVar("recollectionsQuest", 0)
+            player:setCharVar('recollectionsQuest', 0)
             player:delKeyItem(xi.ki.FOE_FINDER_MK_I)
             player:addItem(xi.item.WIZARDS_SABOTS)
             player:messageSpecial(ID.text.ITEM_OBTAINED, xi.item.WIZARDS_SABOTS) -- wizards sabots
@@ -137,7 +137,7 @@ entity.onEventFinish = function(player, csid, option, npc)
         end
     elseif csid == 276 then
         player:addQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_ROOT_OF_THE_PROBLEM)
-        player:setCharVar("rootProblem", 1)
+        player:setCharVar('rootProblem', 1)
     elseif csid == 279 then
         player:addKeyItem(xi.ki.SLUICE_SURVEYOR_MK_I)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.SLUICE_SURVEYOR_MK_I)

@@ -20,7 +20,7 @@ entity.onTrade = function(player, npc, trade)
         player:tradeComplete()
         player:addItem(xi.item.CLAY_TABLET)
         player:messageSpecial(ID.text.ITEM_OBTAINED, xi.item.CLAY_TABLET)
-        player:setCharVar("anExplorer-CurrentTablet", 0x00010)
+        player:setCharVar('anExplorer-CurrentTablet', 0x00010)
     end
 end
 

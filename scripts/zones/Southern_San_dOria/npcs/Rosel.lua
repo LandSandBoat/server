@@ -4,7 +4,7 @@
 -- Starts and Finishes Quest: Rosel the Armorer
 -- !zone 230
 -----------------------------------
-require("scripts/quests/flyers_for_regine")
+require('scripts/quests/flyers_for_regine')
 -----------------------------------
 local entity = {}
 

@@ -6,7 +6,7 @@
 -- Naja Salaheem      : !pos 22.700 -8.804 -45.591 50
 -- Imperial Whitegate : !pos 152 -2 0 50
 -----------------------------------
-local whitegateShared = require("scripts/zones/Aht_Urhgan_Whitegate/Shared")
+local whitegateShared = require('scripts/zones/Aht_Urhgan_Whitegate/Shared')
 -----------------------------------
 
 local mission = Mission:new(xi.mission.log_id.TOAU, xi.mission.id.toau.GUESTS_OF_THE_EMPIRE)

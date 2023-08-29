@@ -22,7 +22,7 @@ abilityObject.onUseAbility = function(player, target, ability)
     dmg = utils.stoneskin(target, dmg)
 
     target:takeDamage(dmg, player, xi.attackType.SPECIAL, xi.damageType.ELEMENTAL)
-    player:setLocalVar("MijinGakure", 1)
+    player:setLocalVar('MijinGakure', 1)
     player:setHP(0)
 
     return dmg

@@ -4,7 +4,7 @@
 -- https://ffxiclopedia.fandom.com/wiki/Hunt_Registry
 -- https://www.bg-wiki.com/bg/Hunt_Registry
 -----------------------------------
-require("scripts/globals/regimes")
+require('scripts/globals/regimes')
 
 xi = xi or {}
 xi.hunts = xi.hunts or {}
@@ -1241,13 +1241,13 @@ local zone =
 (Has distinct values) ]]--
 
 function xi.hunts.onTrigger(player, npc)
-    local huntId = player:getCharVar("[hunt]id")
-    local huntStatus = player:getCharVar("[hunt]status")
-    local scyldBits = bit.lshift(player:getCurrency("scyld"), 14)
+    local huntId = player:getCharVar('[hunt]id')
+    local huntStatus = player:getCharVar('[hunt]status')
+    local scyldBits = bit.lshift(player:getCurrency('scyld'), 14)
     local lockBit = bit.lshift(1, 24)
 
     -- one vana'diel day lockout timer after completing a hunt
-    if os.time() < player:getCharVar("[hunt]nextHunt") then
+    if os.time() < player:getCharVar('[hunt]nextHunt') then
         scyldBits = scyldBits + lockBit
     -- [hunt]status 1 player has already accepted a hunt
     elseif huntStatus == 1 then
@@ -1258,7 +1258,7 @@ function xi.hunts.onTrigger(player, npc)
         local pageBits = bit.lshift(huntId, 4)
         scyldBits = scyldBits + pageBits + 0x000A -- bit displays completion menu
     -- stops player from taking a hunt if a regime is active
-    elseif player:getCharVar("[regime]id") >= 1 then
+    elseif player:getCharVar('[regime]id') >= 1 then
         scyldBits = scyldBits + 0x0001 -- bit displays regime active menu
     end
 
@@ -1292,8 +1292,8 @@ function xi.hunts.onEventUpdate(player, csid, option, npc)
 end
 
 xi.hunts.clearHuntVars = function(player)
-    player:setCharVar("[hunt]id", 0)
-    player:setCharVar("[hunt]status", 0)
+    player:setCharVar('[hunt]id', 0)
+    player:setCharVar('[hunt]status', 0)
 end
 
 function xi.hunts.onEventFinish(player, csid, option, npc)
@@ -1304,16 +1304,16 @@ function xi.hunts.onEventFinish(player, csid, option, npc)
 
     -- accepting hunt
     if huntEntry then
-        player:setCharVar("[hunt]status", 1)
-        player:setCharVar("[hunt]id", bit.rshift(option, 3))
-        player:delCurrency("scyld", huntEntry.fee)
+        player:setCharVar('[hunt]status', 1)
+        player:setCharVar('[hunt]id', bit.rshift(option, 3))
+        player:delCurrency('scyld', huntEntry.fee)
         player:messageSpecial(msg.HUNT_ACCEPTED)
-        player:messageSpecial(msg.USE_SCYLDS, huntEntry.fee, player:getCurrency("scyld"))
+        player:messageSpecial(msg.USE_SCYLDS, huntEntry.fee, player:getCurrency('scyld'))
 
     -- cancels hunt
     elseif option == 3 then
         player:messageSpecial(msg.HUNT_CANCELED)
-        player:setCharVar("[hunt]status", 0)
+        player:setCharVar('[hunt]status', 0)
 
     -- cancels training regime and clears all vars
     elseif option == 4 then
@@ -1322,21 +1322,21 @@ function xi.hunts.onEventFinish(player, csid, option, npc)
 
     -- completes hunt
     elseif option == 5 then
-        local huntId = player:getCharVar("[hunt]id")
+        local huntId = player:getCharVar('[hunt]id')
         local scyldBounty = hunts[huntId].bounty
         -- give player evoliths here
-        player:setCharVar("[hunt]nextHunt", getVanaMidnight())
+        player:setCharVar('[hunt]nextHunt', getVanaMidnight())
         xi.hunts.clearHuntVars(player)
 
         -- scylds cap at 1000
-        if player:getCurrency("scyld") + scyldBounty > 1000 then
-            player:setCurrency("scyld", 1000)
+        if player:getCurrency('scyld') + scyldBounty > 1000 then
+            player:setCurrency('scyld', 1000)
         else
-            player:addCurrency("scyld", scyldBounty)
+            player:addCurrency('scyld', scyldBounty)
         end
 
         player:messageSpecial(msg.HUNT_RECORDED)
-        player:messageSpecial(msg.OBTAIN_SCYLDS, scyldBounty, player:getCurrency("scyld"))
+        player:messageSpecial(msg.OBTAIN_SCYLDS, scyldBounty, player:getCurrency('scyld'))
     end
 end
 
@@ -1347,11 +1347,11 @@ function xi.hunts.checkHunt(mob, player, mobHuntID)
         return
     end
 
-    local playerHuntID = player:getCharVar("[hunt]id")
+    local playerHuntID = player:getCharVar('[hunt]id')
 
     -- required NM has been defeated
-    if player:getCharVar("[hunt]status") == 1 and playerHuntID == mobHuntID then
+    if player:getCharVar('[hunt]status') == 1 and playerHuntID == mobHuntID then
         player:messageBasic(xi.msg.basic.FOV_DEFEATED_TARGET + 20)
-        player:setCharVar("[hunt]status", 2)
+        player:setCharVar('[hunt]status', 2)
     end
 end

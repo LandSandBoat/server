@@ -1,7 +1,7 @@
 -----------------------------------
 -- Transport
 -----------------------------------
-require("scripts/globals/pathfind")
+require('scripts/globals/pathfind')
 -----------------------------------
 xi = xi or {}
 xi.transport = xi.transport or {}

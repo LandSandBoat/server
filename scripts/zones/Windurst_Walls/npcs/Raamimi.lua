@@ -13,7 +13,7 @@ end
 
 entity.onTrigger = function(player, npc)
     local toBee = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.TO_BEE_OR_NOT_TO_BEE)
-    local toBeeOrNotStatus = player:getCharVar("ToBeeOrNot_var")
+    local toBeeOrNotStatus = player:getCharVar('ToBeeOrNot_var')
 
     if toBeeOrNotStatus == 10 and toBee == QUEST_AVAILABLE then
         player:startEvent(67) -- Quest Started - He gives you honey
@@ -55,7 +55,7 @@ entity.onEventFinish = function(player, csid, option, npc)
         if player:getFreeSlotsCount() == 0 then
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 4156) -- Cannot give Mulsum because player Inventory is full
         else
-            player:setCharVar("ToBeeOrNot_var", 0)
+            player:setCharVar('ToBeeOrNot_var', 0)
             player:addItem(xi.item.BOTTLE_OF_MULSUM, 3) -- Mulsum x3
             player:messageSpecial(ID.text.ITEMS_OBTAINED, xi.item.BOTTLE_OF_MULSUM, 3)
             player:needToZone(true)

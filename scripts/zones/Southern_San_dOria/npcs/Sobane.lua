@@ -13,7 +13,7 @@ end
 
 entity.onTrigger = function(player, npc)
     -- SHARPENING THE SWORD
-    if player:getCharVar("sharpeningTheSwordCS") >= 2 then
+    if player:getCharVar('sharpeningTheSwordCS') >= 2 then
         player:startEvent(52)
     end
 end
@@ -24,7 +24,7 @@ end
 entity.onEventFinish = function(player, csid, option, npc)
     -- SHARPENING THE SWORD
     if csid == 52 then
-        player:setCharVar("sharpeningTheSwordCS", 3)
+        player:setCharVar('sharpeningTheSwordCS', 3)
     end
 end
 

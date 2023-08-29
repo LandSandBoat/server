@@ -2,7 +2,7 @@
 -- Area: Apollyon SE, Floor 2
 --  Mob: Tieholtsodi
 -----------------------------------
-mixins = { require("scripts/mixins/job_special") }
+mixins = { require('scripts/mixins/job_special') }
 -----------------------------------
 local entity = {}
 

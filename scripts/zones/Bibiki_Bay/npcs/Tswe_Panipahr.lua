@@ -40,7 +40,7 @@ entity.onEventFinish = function(player, csid, option, npc)
             player:delGil(500)
             player:addKeyItem(xi.ki.MANACLIPPER_MULTI_TICKET)
             player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.MANACLIPPER_MULTI_TICKET)
-            player:setCharVar("Manaclipper_Ticket", 10)
+            player:setCharVar('Manaclipper_Ticket', 10)
         end
     end
 end

@@ -10,11 +10,11 @@
 -- applications of damage mods ('Damage varies with TP.')
 -- performance of the actual WS (rand numbers, etc)
 -----------------------------------
-require("scripts/globals/magicburst")
-require("scripts/globals/magiantrials")
-require("scripts/globals/ability")
-require("scripts/globals/magic")
-require("scripts/globals/utils")
+require('scripts/globals/magicburst')
+require('scripts/globals/magiantrials')
+require('scripts/globals/ability')
+require('scripts/globals/magic')
+require('scripts/globals/utils')
 -----------------------------------
 xi = xi or {}
 xi.weaponskills = xi.weaponskills or {}
@@ -1010,7 +1010,7 @@ xi.weaponskills.takeWeaponskillDamage = function(defender, attacker, wsParams, p
     xi.magian.checkMagianTrial(attacker, { ['mob'] = defender, ['triggerWs'] = true,  ['wSkillId'] = wsResults.wsID })
 
     if finaldmg > 0 then
-        defender:setLocalVar("weaponskillHit", 1)
+        defender:setLocalVar('weaponskillHit', 1)
     end
 
     return finaldmg
@@ -1116,7 +1116,7 @@ xi.weaponskills.fTP = function(tp, ftp1, ftp2, ftp3)
         -- generate a straight line between ftp2 and ftp3 and find point @ tp
         return ftp2 + (((ftp3 - ftp2) / 1000) * (tp - 2000))
     else
-        print("fTP error: TP value is not between 1000-3000!")
+        print('fTP error: TP value is not between 1000-3000!')
     end
 
     return 1 -- no ftp mod

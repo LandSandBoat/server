@@ -13,7 +13,7 @@ end
 
 entity.onTrigger = function(player, npc)
     if
-        player:getCharVar("unbridledPassion") == 4 and
+        player:getCharVar('unbridledPassion') == 4 and
         not GetMobByID(ID.mob.KOENIGSTIGER):isSpawned()
     then
         player:startEvent(8)

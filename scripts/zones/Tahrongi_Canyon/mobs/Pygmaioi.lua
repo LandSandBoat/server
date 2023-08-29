@@ -2,7 +2,7 @@
 -- Area: Tahrongi Canyon
 --  Mob: Pygmaioi
 -----------------------------------
-require("scripts/quests/tutorial")
+require('scripts/quests/tutorial')
 -----------------------------------
 local entity = {}
 

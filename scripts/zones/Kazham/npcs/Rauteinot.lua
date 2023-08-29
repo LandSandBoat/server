@@ -10,7 +10,7 @@ local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     if
-        player:getCharVar("MissionaryManVar") == 1 and
+        player:getCharVar('MissionaryManVar') == 1 and
         trade:hasItemQty(xi.item.SLAB_OF_ELSHIMO_MARBLE, 1) and
         trade:getItemCount() == 1
     then
@@ -20,7 +20,7 @@ end
 
 entity.onTrigger = function(player, npc)
     local missionaryMan = player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.MISSIONARY_MAN)
-    local missionaryManVar = player:getCharVar("MissionaryManVar")
+    local missionaryManVar = player:getCharVar('MissionaryManVar')
 
     if
         missionaryMan == QUEST_AVAILABLE and
@@ -49,9 +49,9 @@ end
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 137 and option == 1 then
         player:addQuest(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.MISSIONARY_MAN)
-        player:setCharVar("MissionaryManVar", 1)
+        player:setCharVar('MissionaryManVar', 1)
     elseif csid == 139 then
-        player:setCharVar("MissionaryManVar", 2)
+        player:setCharVar('MissionaryManVar', 2)
         player:addKeyItem(xi.ki.RAUTEINOTS_PARCEL)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.RAUTEINOTS_PARCEL)
         player:tradeComplete()
@@ -59,7 +59,7 @@ entity.onEventFinish = function(player, csid, option, npc)
         if player:getFreeSlotsCount() == 0 then
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.item.SCROLL_OF_TELEPORT_YHOAT)
         else
-            player:setCharVar("MissionaryManVar", 0)
+            player:setCharVar('MissionaryManVar', 0)
             player:delKeyItem(xi.ki.SUBLIME_STATUE_OF_THE_GODDESS)
             player:addItem(xi.item.SCROLL_OF_TELEPORT_YHOAT)
             player:messageSpecial(ID.text.ITEM_OBTAINED, xi.item.SCROLL_OF_TELEPORT_YHOAT)

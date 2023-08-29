@@ -3,7 +3,7 @@
 --  NPC: ???
 -- Note: Spawns Hercules Beetle
 -----------------------------------
-local func = require("scripts/zones/Carpenters_Landing/globals")
+local func = require('scripts/zones/Carpenters_Landing/globals')
 -----------------------------------
 local entity = {}
 

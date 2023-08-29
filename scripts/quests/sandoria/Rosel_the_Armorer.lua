@@ -98,7 +98,7 @@ quest.sections =
                         gilReward = 200
                     end
 
-                    npcUtil.giveCurrency(player, "gil", gilReward)
+                    npcUtil.giveCurrency(player, 'gil', gilReward)
                     quest:complete(player)
                 end,
             },

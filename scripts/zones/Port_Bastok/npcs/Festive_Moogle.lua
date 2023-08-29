@@ -20,14 +20,14 @@ local stock =
 
 local festiveItemVars =
 {
-    [1] = "festiveMoogleNomadCap",
-    [2] = "festiveMoogleMoogleCap",
-    [3] = "festiveMoogleMoogleRod",
-    [4] = "festiveMoogleHarpsichord",
-    [5] = "festiveMooglestuffedChocobo",
-    [6] = "festiveMoogleTidalTalisman",
-    [7] = "festiveMoogleDestrierBeret",
-    [8] = "festiveMoogleChocoboShirt",
+    [1] = 'festiveMoogleNomadCap',
+    [2] = 'festiveMoogleMoogleCap',
+    [3] = 'festiveMoogleMoogleRod',
+    [4] = 'festiveMoogleHarpsichord',
+    [5] = 'festiveMooglestuffedChocobo',
+    [6] = 'festiveMoogleTidalTalisman',
+    [7] = 'festiveMoogleDestrierBeret',
+    [8] = 'festiveMoogleChocoboShirt',
 }
 
 local function getFestiveItems(player)

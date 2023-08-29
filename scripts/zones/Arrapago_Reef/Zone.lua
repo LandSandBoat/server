@@ -20,7 +20,7 @@ zoneObject.onZoneIn = function(player, prevZone)
 
     if
         prevZone == xi.zone.THE_ASHU_TALIF and
-        player:getCharVar("AgainstAllOdds") == 3
+        player:getCharVar('AgainstAllOdds') == 3
     then
         cs = 238
     elseif prevZone == xi.zone.ILRUSI_ATOLL then
@@ -31,14 +31,14 @@ zoneObject.onZoneIn = function(player, prevZone)
 end
 
 zoneObject.afterZoneIn = function(player)
-    player:entityVisualPacket("1pb1")
-    player:entityVisualPacket("2pb1")
+    player:entityVisualPacket('1pb1')
+    player:entityVisualPacket('2pb1')
 end
 
 zoneObject.onTriggerAreaEnter = function(player, triggerArea)
     if
         player:getQuestStatus(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.AGAINST_ALL_ODDS) == QUEST_ACCEPTED and
-        player:getCharVar("AgainstAllOdds") == 1
+        player:getCharVar('AgainstAllOdds') == 1
     then
         player:startEvent(237)
     end
@@ -55,9 +55,9 @@ zoneObject.onEventFinish = function(player, csid, option, npc)
     elseif csid == 237 then
         player:startEvent(240)
     elseif csid == 238 then
-        npcUtil.completeQuest(player, xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.AGAINST_ALL_ODDS, { item = 15266, var = "AgainstAllOdds" })
+        npcUtil.completeQuest(player, xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.AGAINST_ALL_ODDS, { item = 15266, var = 'AgainstAllOdds' })
     elseif csid == 240 then
-        player:setCharVar("AgainstAllOdds", 2)
+        player:setCharVar('AgainstAllOdds', 2)
     end
 end
 

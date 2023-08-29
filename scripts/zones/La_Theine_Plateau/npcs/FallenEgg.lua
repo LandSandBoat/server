@@ -3,7 +3,7 @@
 --  NPC: FallenEgg
 -- Spawns NM Nihniknoovi
 -----------------------------------
-local laTheineGlobal = require("scripts/zones/La_Theine_Plateau/globals")
+local laTheineGlobal = require('scripts/zones/La_Theine_Plateau/globals')
 local ID = zones[xi.zone.LA_THEINE_PLATEAU]
 -----------------------------------
 local entity = {}

@@ -10,7 +10,7 @@ entity.onMobInitialize = function(mob)
 end
 
 entity.onMobSpawn = function(mob)
-    mob:setLocalVar("SAND_BLAST", 1)
+    mob:setLocalVar('SAND_BLAST', 1)
 end
 
 entity.onMobDeath = function(mob, player, optParams)

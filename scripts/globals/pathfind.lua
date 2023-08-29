@@ -22,7 +22,7 @@ xi.path =
     -- returns the point at the given index
     get = function(points, index)
         local point = points[index]
-        return { point["x"], point["y"], point["z"] }
+        return { point['x'], point['y'], point['z'] }
     end,
 
     -- returns number of points in given path

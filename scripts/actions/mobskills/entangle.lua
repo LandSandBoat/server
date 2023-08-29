@@ -15,7 +15,7 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    if mob:getName() == "Cernunnos" then
+    if mob:getName() == 'Cernunnos' then
         local numhits = 3
         local accmod = 1
         local dmgmod = 2.0

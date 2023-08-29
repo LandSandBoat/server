@@ -41,7 +41,7 @@ Port Windurst (West to East)
 
 entity.onTrade = function(player, npc, trade)
     if
-        npcUtil.tradeHas(trade, { { "gil", 300 } }) and
+        npcUtil.tradeHas(trade, { { 'gil', 300 } }) and
         player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.LURE_OF_THE_WILDCAT) == QUEST_COMPLETED and
         player:getCurrentMission(xi.mission.log_id.TOAU) > xi.mission.id.toau.IMMORTAL_SENTRIES
     then
@@ -52,7 +52,7 @@ end
 
 entity.onTrigger = function(player, npc)
     local lureWindurst = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.LURE_OF_THE_WILDCAT)
-    local wildcatWindurst = player:getCharVar("WildcatWindurst")
+    local wildcatWindurst = player:getCharVar('WildcatWindurst')
 
     if lureWindurst ~= QUEST_COMPLETED and xi.settings.main.ENABLE_TOAU == 1 then
         if lureWindurst == QUEST_AVAILABLE then
@@ -79,11 +79,11 @@ end
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 736 then
         player:addQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.LURE_OF_THE_WILDCAT)
-        player:setCharVar("WildcatWindurst", 0)
+        player:setCharVar('WildcatWindurst', 0)
         npcUtil.giveKeyItem(player, xi.ki.GREEN_SENTINEL_BADGE)
     elseif
         csid == 739 and
-        npcUtil.completeQuest(player, xi.quest.log_id.WINDURST, xi.quest.id.windurst.LURE_OF_THE_WILDCAT, { fame = 150, ki = xi.ki.GREEN_INVITATION_CARD, var = "WildcatWindurst" })
+        npcUtil.completeQuest(player, xi.quest.log_id.WINDURST, xi.quest.id.windurst.LURE_OF_THE_WILDCAT, { fame = 150, ki = xi.ki.GREEN_INVITATION_CARD, var = 'WildcatWindurst' })
     then
         player:delKeyItem(xi.ki.GREEN_SENTINEL_BADGE)
         player:messageSpecial(ID.text.KEYITEM_LOST, xi.ki.GREEN_SENTINEL_BADGE)

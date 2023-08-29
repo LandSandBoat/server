@@ -2,7 +2,7 @@
 -- Area: Davoi
 --   NM: Tigerbane Bakdak
 -----------------------------------
-mixins = { require("scripts/mixins/job_special") }
+mixins = { require('scripts/mixins/job_special') }
 -----------------------------------
 local entity = {}
 

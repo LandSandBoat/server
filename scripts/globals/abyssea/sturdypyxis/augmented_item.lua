@@ -473,28 +473,28 @@ local augTierDeduction =
 }
 
 local function GetAugItemID(npc, slot)
-    return npc:getLocalVar("ITEM" .. slot .. "ID")
+    return npc:getLocalVar('ITEM' .. slot .. 'ID')
 end
 
 local function GetAugID(npc, slot, augmentnumber)
-    return npc:getLocalVar("ITEM" .. slot .. "AU" .. augmentnumber)
+    return npc:getLocalVar('ITEM' .. slot .. 'AU' .. augmentnumber)
 end
 
 local function GetAug(npc, slot, augmentnumber)
-    return npc:getLocalVar("ITEM" .. slot .. "AUGMENT".. augmentnumber)
+    return npc:getLocalVar('ITEM' .. slot .. 'AUGMENT'.. augmentnumber)
 end
 
 local function GetAugVal(npc, slot, augmentnumber)
-    return npc:getLocalVar("ITEM" .. slot .. "AUG" .. augmentnumber .. "VAL")
+    return npc:getLocalVar('ITEM' .. slot .. 'AUG' .. augmentnumber .. 'VAL')
 end
 
 local function SetAugItemID(npc, itemNum, augmentNum, augment)
-    npc:setLocalVar("ITEM" .. itemNum .. "AU" .. augmentNum, augment)
+    npc:setLocalVar('ITEM' .. itemNum .. 'AU' .. augmentNum, augment)
 end
 
 local function GetAugment(npc, itemid, slot)
     local secondAugment = false
-    local tier          = npc:getLocalVar("TIER")
+    local tier          = npc:getLocalVar('TIER')
     local randaugment1  = 0
     local randaugment2  = 0
     local augment1      = 0
@@ -527,8 +527,8 @@ local function GetAugment(npc, itemid, slot)
     end
 
     SetAugItemID(npc, slot, 1, augment1)
-    npc:setLocalVar("ITEM" .. slot .. "AUGMENT1", aug1.aug)
-    npc:setLocalVar("ITEM" .. slot .. "AUG1VAL", multival1 - 1)
+    npc:setLocalVar('ITEM' .. slot .. 'AUGMENT1', aug1.aug)
+    npc:setLocalVar('ITEM' .. slot .. 'AUG1VAL', multival1 - 1)
 
     if secondAugment then
         randaugment2 = math.random(1, #augs[itemid].augments - augTierDeduction[itemid][tier])
@@ -549,8 +549,8 @@ local function GetAugment(npc, itemid, slot)
             end
 
             SetAugItemID(npc, slot, 2, augment2)
-            npc:setLocalVar("ITEM" .. slot .. "AUGMENT2", aug2.aug)
-            npc:setLocalVar("ITEM" .. slot .. "AUG2VAL", multival2 - 1)
+            npc:setLocalVar('ITEM' .. slot .. 'AUGMENT2', aug2.aug)
+            npc:setLocalVar('ITEM' .. slot .. 'AUG2VAL', multival2 - 1)
         end
     end
 end
@@ -571,7 +571,7 @@ local function GiveAugItem(player, npc, slot)
     local item2aug2val = GetAugVal(npc, 2, 2)
 
     if slot == 1 then
-        if npc:getLocalVar("ITEM1ID") == 0 then
+        if npc:getLocalVar('ITEM1ID') == 0 then
             player:messageSpecial(zones[zoneId].text.ITEM_DISAPPEARED)
             return 0
         else
@@ -582,12 +582,12 @@ local function GiveAugItem(player, npc, slot)
                     if GetAugItemID(npc, 1) ~= 0 then
                     player:addItem(item1, 1, item1aug1, item1aug1val, item1aug2, item1aug2val)
                     xi.pyxis.messageChest(player, zones[zoneId].text.OBTAINS_ITEM, item1, 0, 0, 0)
-                    npc:setLocalVar("ITEM1ID", 0)
+                    npc:setLocalVar('ITEM1ID', 0)
                 end
             end
         end
     elseif slot == 2 then
-        if npc:getLocalVar("ITEM2ID") == 0 then
+        if npc:getLocalVar('ITEM2ID') == 0 then
             player:messageSpecial(zones[zoneId].text.ITEM_DISAPPEARED)
             return 0
         else
@@ -598,13 +598,13 @@ local function GiveAugItem(player, npc, slot)
                     if GetAugItemID(npc, 2) ~= 0 then
                     player:addItem(item2, 1, item2aug1, item2aug1val, item2aug2, item2aug2val)
                     xi.pyxis.messageChest(player, zones[zoneId].text.OBTAINS_ITEM, item2, 0, 0, 0)
-                    npc:setLocalVar("ITEM2ID", 0)
+                    npc:setLocalVar('ITEM2ID', 0)
                 end
             end
         end
     end
 
-    if npc:getLocalVar("ITEM1ID") == 0 and npc:getLocalVar("ITEM2ID") == 0 then
+    if npc:getLocalVar('ITEM1ID') == 0 and npc:getLocalVar('ITEM2ID') == 0 then
         xi.pyxis.removeChest(player, npc, 0, 3)
     end
 end
@@ -620,15 +620,15 @@ xi.pyxis.augItem.setAugmentItems = function(npc, tier)
         end
     end
 
-    local chestid = npc:getLocalVar("CHESTID")
+    local chestid = npc:getLocalVar('CHESTID')
     local chest   = GetNPCByID(chestid)
 
-    npc:setLocalVar("ITEM1ID", item1)
+    npc:setLocalVar('ITEM1ID', item1)
     GetAugment(chest, item1, 1)
     if item2 > 0 then
-        npc:setLocalVar("ITEM1ID", item1)
+        npc:setLocalVar('ITEM1ID', item1)
         GetAugment(chest, item1, 1)
-        npc:setLocalVar("ITEM2ID", item2)
+        npc:setLocalVar('ITEM2ID', item2)
         GetAugment(chest, item2, 2)
     end
 end

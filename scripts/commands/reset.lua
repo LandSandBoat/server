@@ -7,12 +7,12 @@
 cmdprops =
 {
     permission = 1,
-    parameters = "s"
+    parameters = 's'
 }
 
 function error(player, msg)
     player:PrintToPlayer(msg)
-    player:PrintToPlayer("!reset (player)")
+    player:PrintToPlayer('!reset (player)')
 end
 
 function onTrigger(player, target)
@@ -23,7 +23,7 @@ function onTrigger(player, target)
     else
         targ = GetPlayerByName(target)
         if targ == nil then
-            error(player, string.format("Player named '%s' not found!", target))
+            error(player, string.format('Player named "%s" not found!', target))
             return
         end
     end
@@ -31,7 +31,7 @@ function onTrigger(player, target)
     -- reset target recasts
     targ:resetRecasts()
     if targ:getID() ~= player:getID() then
-        player:PrintToPlayer(string.format("Reset %s's recast timers.", targ:getName()))
+        player:PrintToPlayer(string.format('Reset %s\'s recast timers.', targ:getName()))
     end
 
     -- Clear debilitating effects from player

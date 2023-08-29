@@ -9,8 +9,8 @@ end
 
 zoneObject.onZoneIn = function(player, prevZone)
     local cs = -1
-    local month = tonumber(os.date("%m"))
-    local day = tonumber(os.date("%d"))
+    local month = tonumber(os.date('%m'))
+    local day = tonumber(os.date('%d'))
 
     -- Retail start/end dates vary, set to Dec 5th through Jan 5th.
     if

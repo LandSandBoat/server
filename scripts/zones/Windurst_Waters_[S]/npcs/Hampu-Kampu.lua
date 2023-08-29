@@ -11,7 +11,7 @@ end
 
 entity.onTrigger = function(player, npc)
     local sayItWithAHandbag = player:getQuestStatus(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.SAY_IT_WITH_A_HANDBAG)
-    local sayItWithAHandbagCS = player:getCharVar("sayItWithAHandbagCS")
+    local sayItWithAHandbagCS = player:getCharVar('sayItWithAHandbagCS')
 
     if sayItWithAHandbag == QUEST_COMPLETED then
         player:startEvent(175)
@@ -39,11 +39,11 @@ entity.onEventFinish = function(player, csid, option, npc)
         if
             npcUtil.completeQuest(player, xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.SAY_IT_WITH_A_HANDBAG, {
                 item = 19110, -- Trainee's Needle
-                var = "sayItWithAHandbagCS"
+                var = 'sayItWithAHandbagCS'
             })
         then
             player:delKeyItem(xi.ki.REPAIRED_HANDBAG)
-            player:setCharVar("sayItWithAHandbagBonusCS", 1)
+            player:setCharVar('sayItWithAHandbagBonusCS', 1)
         end
     elseif csid == 172 then
         npcUtil.giveKeyItem(player, xi.ki.TORN_PATCHES_OF_LEATHER)

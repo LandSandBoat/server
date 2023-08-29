@@ -15,7 +15,7 @@ entity.onTrade = function(player, npc, trade)
     local sAstrum       = trade:hasItemQty(xi.item.SEEDSPALL_ASTRUM, 1)
     local acpMission    = player:getCurrentMission(xi.mission.log_id.ACP)
     local hasCrimsonKey = player:hasKeyItem(xi.ki.CRIMSON_KEY)
-    local lastCrimson   = player:getCharVar("LastCrimsonKey") -- When last Crimson key was obtained
+    local lastCrimson   = player:getCharVar('LastCrimsonKey') -- When last Crimson key was obtained
 
     if
         xi.settings.main.ENABLE_ACP == 0 and
@@ -38,7 +38,7 @@ entity.onTrade = function(player, npc, trade)
         then -- and timer stuff here) then
             player:tradeComplete()
             player:addKeyItem(xi.ki.CRIMSON_KEY)
-            player:setCharVar("LastCrimsonKey", getMidnight())
+            player:setCharVar('LastCrimsonKey', getMidnight())
             player:messageSpecial(ID.text.DRYEYES_2)
             player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.CRIMSON_KEY)
 
@@ -78,7 +78,7 @@ entity.onEventFinish = function(player, csid, option, npc)
     local juice          = player:hasKeyItem(xi.ki.JUG_OF_GREASY_GOBLIN_JUICE)
     local grub           = player:hasKeyItem(xi.ki.CHUNK_OF_SMOKED_GOBLIN_GRUB)
     local hasViridianKey = player:hasKeyItem(xi.ki.VIRIDIAN_KEY)
-    local lastViridian   = player:getCharVar("LastViridianKey") -- When last Viridian key was obtained
+    local lastViridian   = player:getCharVar('LastViridianKey') -- When last Viridian key was obtained
 
     if csid == 323 then
         if option == 1 then
@@ -96,7 +96,7 @@ entity.onEventFinish = function(player, csid, option, npc)
                 player:delKeyItem(xi.ki.BOWL_OF_BLAND_GOBLIN_SALAD)
                 player:delKeyItem(xi.ki.JUG_OF_GREASY_GOBLIN_JUICE)
                 player:delKeyItem(xi.ki.CHUNK_OF_SMOKED_GOBLIN_GRUB)
-                player:setCharVar("LastViridianKey", getMidnight())
+                player:setCharVar('LastViridianKey', getMidnight())
                 player:showText(player, ID.text.DRYEYES_2)
                 player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.VIRIDIAN_KEY)
 

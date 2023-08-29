@@ -17,7 +17,7 @@ local content = Limbus:new({
     area             = 3,
     entryNpc         = 'Matter_Diffusion_Module',
     requiredKeyItems = { xi.ki.COSMO_CLEANSE, xi.ki.WHITE_CARD, message = ID.text.YOU_INSERT_THE_CARD_POLISHED },
-    name             = "TEMENOS_WESTERN_TOWER",
+    name             = 'TEMENOS_WESTERN_TOWER',
     timeExtension    = 15,
 })
 
@@ -26,7 +26,7 @@ local setupItemCrate = function(crateID, floor)
 
     xi.limbus.hideCrate(crate)
     crate:setModelId(961)
-    crate:addListener("ON_TRIGGER", "TRIGGER_CRATE", function(player, npc)
+    crate:addListener('ON_TRIGGER', 'TRIGGER_CRATE', function(player, npc)
         npcUtil.openCrate(npc, function()
             content:handleLootRolls(player:getBattlefield(), content.loot[floor], npc)
         end)
@@ -38,7 +38,7 @@ local setupTimeCrate = function(crateID, floor)
 
     xi.limbus.hideCrate(crate)
     crate:setModelId(962)
-    crate:addListener("ON_TRIGGER", "TRIGGER_CRATE", utils.bind(content.handleOpenTimeCrate, content))
+    crate:addListener('ON_TRIGGER', 'TRIGGER_CRATE', utils.bind(content.handleOpenTimeCrate, content))
 end
 
 local setupRecoverCrate = function(crateID, floor)
@@ -46,7 +46,7 @@ local setupRecoverCrate = function(crateID, floor)
 
     xi.limbus.hideCrate(crate)
     crate:setModelId(960)
-    crate:addListener("ON_TRIGGER", "TRIGGER_CRATE", utils.bind(content.handleOpenRecoverCrate, content))
+    crate:addListener('ON_TRIGGER', 'TRIGGER_CRATE', utils.bind(content.handleOpenRecoverCrate, content))
 end
 
 function content:onBattlefieldInitialise(battlefield)
@@ -73,14 +73,14 @@ end
 content.handleMobDeath = function(floor, battlefield, mob, count)
     content:openDoor(battlefield, floor)
 
-    local crateCount = battlefield:getLocalVar("CrateCount"..floor)
+    local crateCount = battlefield:getLocalVar('CrateCount'..floor)
 
     if crateCount < 3 and math.random(4) == 1 then
         -- Crate type randomization happens in onBattlefieldRegister
         local crateID = ID.TEMENOS_WESTERN_TOWER.npc.CRATE_OFFSETS[floor] + crateCount
 
         xi.limbus.spawnFrom(mob, crateID)
-        battlefield:setLocalVar("CrateCount"..floor, crateCount + 1)
+        battlefield:setLocalVar('CrateCount'..floor, crateCount + 1)
     end
 end
 
@@ -258,7 +258,7 @@ content.paths =
 content.groups =
 {
     {
-        mobs  = { "Armoury_Crate_Western" },
+        mobs  = { 'Armoury_Crate_Western' },
         setup = function(battlefield, crates)
             for _, crate in ipairs(crates) do
                 crate:setBattleID(1) -- Different battle ID prevents the crate from being hit by AOEs
@@ -267,38 +267,38 @@ content.groups =
     },
 
     {
-        mobs  = { "Enhanced_Tiger" },
+        mobs  = { 'Enhanced_Tiger' },
         death = utils.bind(content.handleMobDeath, 1),
     },
 
     {
-        mobs    = { "Enhanced_Mandragora" },
+        mobs    = { 'Enhanced_Mandragora' },
         mobMods = { [xi.mobMod.LINK_RADIUS] = 8 },
         death   = utils.bind(content.handleMobDeath, 2),
     },
 
     {
-        mobs  = { "Enhanced_Beetle" },
+        mobs  = { 'Enhanced_Beetle' },
         death = utils.bind(content.handleMobDeath, 3),
     },
 
     {
-        mobs  = { "Enhanced_Lizard" },
+        mobs  = { 'Enhanced_Lizard' },
         death = utils.bind(content.handleMobDeath, 4),
     },
 
     {
-        mobs  = { "Enhanced_Slime" },
+        mobs  = { 'Enhanced_Slime' },
         death = utils.bind(content.handleMobDeath, 5),
     },
 
     {
-        mobs  = { "Enhanced_Pugil" },
+        mobs  = { 'Enhanced_Pugil' },
         death = utils.bind(content.handleMobDeath, 6),
     },
 
     {
-        mobs     = { "Enhanced_Vulture" },
+        mobs     = { 'Enhanced_Vulture' },
         allDeath = function(battlefield, mob)
             npcUtil.showCrate(GetEntityByID(ID.TEMENOS_WESTERN_TOWER.npc.LOOT_CRATE))
         end,

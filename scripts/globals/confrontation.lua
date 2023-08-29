@@ -20,7 +20,7 @@
 -- - Any summoned pets and trusts (excluding pet wyverns) are dismissed when placed under this status effect.
 -- - Often, but not always, accompanied by a Level Restriction.
 -----------------------------------
-require("scripts/globals/npc_util")
+require('scripts/globals/npc_util')
 -----------------------------------
 xi = xi or {}
 xi.confrontation = xi.confrontation or {}
@@ -81,9 +81,9 @@ xi.confrontation.check = function(lookupKey, setupTimer)
             member:delStatusEffect(xi.effect.CONFRONTATION)
 
             -- Fire callbacks
-            if didWin and type(lookup.onWin) == "function" then
+            if didWin and type(lookup.onWin) == 'function' then
                 lookup.onWin(member)
-            elseif didLose and type(lookup.onLose) == "function" then
+            elseif didLose and type(lookup.onLose) == 'function' then
                 lookup.onLose(member)
             end
         end
@@ -111,11 +111,11 @@ xi.confrontation.start = function(player, npc, mobIds, winFunc, loseFunc)
 
     -- Extract mobIds
     local mobs = {}
-    if type(mobIds) == "number" then
+    if type(mobIds) == 'number' then
         table.insert(mobs, mobIds)
-    elseif type(mobIds) == "table" then
+    elseif type(mobIds) == 'table' then
         for _, v in pairs(mobIds) do
-            if type(v) == "number" then
+            if type(v) == 'number' then
                 table.insert(mobs, v)
             end
         end
@@ -127,7 +127,7 @@ xi.confrontation.start = function(player, npc, mobIds, winFunc, loseFunc)
     local registeredPlayerIds = {}
     local alliance = player:getAlliance()
     for _, member in ipairs(alliance) do
-        -- Using the pop npc's ID as the "key"
+        -- Using the pop npc's ID as the 'key'
         member:addStatusEffect(xi.effect.CONFRONTATION, lookupKey, 0, 0)
         -- local effect = member:getStatusEffect(xi.effect.CONFRONTATION)
         -- TODO: confirm correct flags in sql, should need to set here and even if we did, we'd not use this method to add a flag
@@ -139,8 +139,8 @@ xi.confrontation.start = function(player, npc, mobIds, winFunc, loseFunc)
     for _, mobId in pairs(mobs) do
         local mob = GetMobByID(mobId)
         mob:addStatusEffect(xi.effect.CONFRONTATION, lookupKey, 0, 0)
-        mob:addListener("DEATH", "CONFRONTATION_DEATH", function(mobArg)
-            mobArg:removeListener("CONFRONTATION_DEATH")
+        mob:addListener('DEATH', 'CONFRONTATION_DEATH', function(mobArg)
+            mobArg:removeListener('CONFRONTATION_DEATH')
             xi.confrontation.check(npc, false)
         end)
     end

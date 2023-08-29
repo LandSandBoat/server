@@ -60,18 +60,18 @@ end
 
 entity.onPath = function(npc)
     if
-        npc:getLocalVar("delivered") ~= 1 and
+        npc:getLocalVar('delivered') ~= 1 and
         npc:atPoint(xi.path.get(pathNodes, 39))
     then
         -- give package to Lusiane, wait 4 seconds, then continue
         local lus = GetNPCByID(ID.npc.LUSIANE)
         lus:showText(npc, ID.text.RAMINEL_DELIVERY)
         npc:showText(lus, ID.text.LUSIANE_THANK)
-        npc:setLocalVar("delivered", 1)
+        npc:setLocalVar('delivered', 1)
     elseif npc:atPoint(xi.path.last(pathNodes)) then
         -- when I walk away stop looking at me
         GetNPCByID(ID.npc.LUSIANE):clearTargID()
-        npc:setLocalVar("delivered", 0)
+        npc:setLocalVar('delivered', 0)
     end
 end
 

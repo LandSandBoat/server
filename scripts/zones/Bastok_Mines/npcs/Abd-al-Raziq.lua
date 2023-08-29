@@ -14,14 +14,14 @@ entity.onTrade = function(player, npc, trade)
 
     if
         newRank > 9 and
-        player:getCharVar("AlchemyExpertQuest") == 1 and
+        player:getCharVar('AlchemyExpertQuest') == 1 and
         player:hasKeyItem(xi.keyItem.WAY_OF_THE_ALCHEMIST)
     then
         if signed ~= 0 then
             player:setSkillRank(xi.skill.ALCHEMY, newRank)
             player:startEvent(121, 0, 0, 0, 0, newRank, 1)
-            player:setCharVar("AlchemyExpertQuest", 0)
-            player:setLocalVar("AlchemyTraded", 1)
+            player:setCharVar('AlchemyExpertQuest', 0)
+            player:setLocalVar('AlchemyTraded', 1)
         else
             player:startEvent(121, 0, 0, 0, 0, newRank, 0)
         end
@@ -29,7 +29,7 @@ entity.onTrade = function(player, npc, trade)
     elseif newRank ~= 0 and newRank <= 9 then
         player:setSkillRank(xi.skill.ALCHEMY, newRank)
         player:startEvent(121, 0, 0, 0, 0, newRank)
-        player:setLocalVar("AlchemyTraded", 1)
+        player:setLocalVar('AlchemyTraded', 1)
     end
 end
 
@@ -47,7 +47,7 @@ entity.onTrigger = function(player, npc)
         return
     end
 
-    if player:getCharVar("AlchemyExpertQuest") == 1 then
+    if player:getCharVar('AlchemyExpertQuest') == 1 then
         if player:hasKeyItem(xi.keyItem.WAY_OF_THE_ALCHEMIST) then
             expertQuestStatus = 640
         else
@@ -61,13 +61,13 @@ entity.onTrigger = function(player, npc)
         canRankUp >= 3
     then
         local item      = 0
-        local asaStatus = player:getCharVar("ASA_Status")
+        local asaStatus = player:getCharVar('ASA_Status')
 
         -- TODO: Other Enfeebling Kits
         if asaStatus == 0 then
             item = 2779
         else
-            printf("Error: Unknown ASA Status Encountered <%u>", asaStatus)
+            printf('Error: Unknown ASA Status Encountered <%u>', asaStatus)
         end
 
         -- The Parameters are Item IDs for the Recipe
@@ -91,7 +91,7 @@ end
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 120 and option == 2 then
         if xi.crafting.hasJoinedGuild(player, xi.crafting.guild.ALCHEMY) then
-            player:setCharVar("AlchemyExpertQuest", 1)
+            player:setCharVar('AlchemyExpertQuest', 1)
         end
     elseif csid == 120 and option == 1 then
         local crystal = 4101 -- water crystal
@@ -104,9 +104,9 @@ entity.onEventFinish = function(player, csid, option, npc)
             xi.crafting.signupGuild(player, xi.crafting.guild.ALCHEMY)
         end
     else
-        if player:getLocalVar("AlchemyTraded") == 1 then
+        if player:getLocalVar('AlchemyTraded') == 1 then
             player:tradeComplete()
-            player:setLocalVar("AlchemyTraded", 0)
+            player:setLocalVar('AlchemyTraded', 0)
         end
     end
 

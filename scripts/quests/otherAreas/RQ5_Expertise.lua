@@ -38,7 +38,7 @@ quest.sections =
                 onTrigger = function(player, npc)
                     if
                         player:getFameLevel(xi.quest.fame_area.WINDURST) > 2 and
-                        player:getCharVar("Quest[4][3]DayCompleted") + 8 < VanadielUniqueDay()
+                        player:getCharVar('Quest[4][3]DayCompleted') + 8 < VanadielUniqueDay()
                     then
                         return quest:progressEvent(61) -- Quest starting event.
                     else
@@ -50,7 +50,7 @@ quest.sections =
             onEventFinish =
             {
                 [61] = function(player, csid, option, npc)
-                    player:setCharVar("Quest[4][3]DayCompleted", 0) -- Delete Variable
+                    player:setCharVar('Quest[4][3]DayCompleted', 0) -- Delete Variable
                     quest:begin(player)
                 end,
             },
@@ -98,8 +98,8 @@ quest.sections =
                     elseif quest:getVar(player, 'Prog') == 1 then
                         return quest:event(104) -- Reminder.
                     elseif quest:getVar(player, 'Prog') == 2 then
-                        daysPassed = VanadielDayOfTheYear() - quest:getVar(player, "DayStarted")
-                        hoursLeft  = 24 - VanadielHour() - (daysPassed * 24) + quest:getVar(player, "HourStarted")
+                        daysPassed = VanadielDayOfTheYear() - quest:getVar(player, 'DayStarted')
+                        hoursLeft  = 24 - VanadielHour() - (daysPassed * 24) + quest:getVar(player, 'HourStarted')
 
                         if hoursLeft < 0 then -- Done waiting
                             return quest:progressEvent(105) -- Get food.

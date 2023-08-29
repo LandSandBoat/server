@@ -98,7 +98,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local dominionNotes = player:getCurrency("dominion_note")
+    local dominionNotes = player:getCurrency('dominion_note')
     local trophyMask = 0 -- 5 bits per trophy, cap at 30ea (31 can be displayed, but non-retail), 5th echelon is least sig
 
     player:startEvent(120, dominionNotes, 0, 0, 0, 0, trophyMask)
@@ -117,7 +117,7 @@ end
 entity.onEventFinish = function(player, csid, option, npc)
     local itemCategory = bit.band(option, 0xF)
     local itemSelected = bit.rshift(option, 8)
-    local dominionNotes = player:getCurrency("dominion_note")
+    local dominionNotes = player:getCurrency('dominion_note')
 
     if
         itemCategory >= 1 and
@@ -128,15 +128,15 @@ entity.onEventFinish = function(player, csid, option, npc)
 
         if itemCategory == itemType.ITEM then
             if npcUtil.giveItem(player, { { itemData[1], 1 } }) then
-                player:delCurrency("dominion_note", itemData[2])
+                player:delCurrency('dominion_note', itemData[2])
             end
         elseif itemCategory == itemType.TEMP then
             if npcUtil.giveTempItem(player, { { itemData[1], 1 } }) then
-                player:delCurrency("dominion_note", itemData[2])
+                player:delCurrency('dominion_note', itemData[2])
             end
         elseif itemCategory == itemType.AUGMENTED then
             if giveAugmentedItem(player, itemData[1], itemData[3], 2) then
-                player:delCurrency("dominion_note", itemData[2])
+                player:delCurrency('dominion_note', itemData[2])
             end
         end
     end

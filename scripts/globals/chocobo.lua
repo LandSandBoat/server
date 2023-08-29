@@ -4,7 +4,7 @@
 --     http://wiki.ffxiclopedia.org/wiki/Chocobo_Renter
 --     http://ffxi.allakhazam.com/wiki/Traveling_in_Vana'diel
 -----------------------------------
-require("scripts/globals/missions")
+require('scripts/globals/missions')
 -----------------------------------
 xi = xi or {}
 xi.chocobo = xi.chocobo or {}
@@ -16,7 +16,7 @@ Description:
 [3] Amount added to base price
 [4] Amount discounted per time interval
 [5] Amount of seconds before price decay
-[6] Quest "A Chocobo Riding Game" chance
+[6] Quest 'A Chocobo Riding Game' chance
 [7] Shadowreign zone flag
 [8] Position player is sent to after event, if applicable
 --]]
@@ -52,8 +52,8 @@ local chocoboInfo =
 -----------------------------------
 
 local function getPrice(zoneId, info)
-    local lastPrice = GetServerVariable("[CHOCOBO][" .. zoneId .. "]price")
-    local lastTime  = GetServerVariable("[CHOCOBO][" .. zoneId .. "]time")
+    local lastPrice = GetServerVariable('[CHOCOBO][' .. zoneId .. ']price')
+    local lastTime  = GetServerVariable('[CHOCOBO][' .. zoneId .. ']time')
     local decay     = math.floor((os.time() - lastTime) / info.decayTime) * info.decayPrice
     local price     = math.max(lastPrice - decay, info.basePrice)
 
@@ -61,8 +61,8 @@ local function getPrice(zoneId, info)
 end
 
 local function updatePrice(zoneId, info, price)
-    SetServerVariable("[CHOCOBO][" .. zoneId .. "]price", price + info.addedPrice)
-    SetServerVariable("[CHOCOBO][" .. zoneId .. "]time", os.time())
+    SetServerVariable('[CHOCOBO][' .. zoneId .. ']price', price + info.addedPrice)
+    SetServerVariable('[CHOCOBO][' .. zoneId .. ']time', os.time())
 end
 
 -----------------------------------
@@ -74,10 +74,10 @@ xi.chocobo.initZone = function(zone)
     local info = chocoboInfo[zoneId]
 
     if info then
-        SetServerVariable("[CHOCOBO][" .. zoneId .. "]price", info.basePrice)
-        SetServerVariable("[CHOCOBO][" .. zoneId .. "]time", os.time())
+        SetServerVariable('[CHOCOBO][' .. zoneId .. ']price', info.basePrice)
+        SetServerVariable('[CHOCOBO][' .. zoneId .. ']time', os.time())
     else
-        printf("[warning] bad zoneId %i in xi.chocobo.initZone (%s)", zoneId, zone:getName())
+        printf('[warning] bad zoneId %i in xi.chocobo.initZone (%s)', zoneId, zone:getName())
     end
 end
 
@@ -93,11 +93,11 @@ xi.chocobo.renterOnTrigger = function(player, eventSucceed, eventFail)
             (player:hasCompletedMission(xi.mission.log_id.WOTG, xi.mission.id.wotg.BACK_TO_THE_BEGINNING) or not info.past)
         then
             local price = getPrice(zoneId, info)
-            player:setLocalVar("[CHOCOBO]price", price)
+            player:setLocalVar('[CHOCOBO]price', price)
 
             local currency = 0
             if info.past then
-                currency = player:getCurrency("allied_notes")
+                currency = player:getCurrency('allied_notes')
             else
                 currency = player:getGil()
             end
@@ -109,7 +109,7 @@ xi.chocobo.renterOnTrigger = function(player, eventSucceed, eventFail)
             player:startEvent(eventFail)
         end
     else
-        printf("[warning] player %s passed bad zoneId %i in xi.chocobo.renterOnTrigger", player:getName(), zoneId)
+        printf('[warning] player %s passed bad zoneId %i in xi.chocobo.renterOnTrigger', player:getName(), zoneId)
     end
 end
 
@@ -120,16 +120,16 @@ xi.chocobo.renterOnEventFinish = function(player, csid, option, eventSucceed)
         local info   = chocoboInfo[zoneId]
 
         if info then
-            local price = player:getLocalVar("[CHOCOBO]price")
-            player:setLocalVar("[CHOCOBO]price", 0)
+            local price = player:getLocalVar('[CHOCOBO]price')
+            player:setLocalVar('[CHOCOBO]price', 0)
 
             if
                 price and
-                (info.past and player:getCurrency("allied_notes") >= price) or
+                (info.past and player:getCurrency('allied_notes') >= price) or
                 (not info.past and player:delGil(price))
             then
                 if info.past then
-                    player:delCurrency("allied_notes", price)
+                    player:delCurrency('allied_notes', price)
                 end
 
                 updatePrice(zoneId, info, price)
@@ -145,10 +145,10 @@ xi.chocobo.renterOnEventFinish = function(player, csid, option, eventSucceed)
                     player:setPos(unpack(info.pos))
                 end
             else
-                printf("[warning] player %s reached succeed without enough currency in xi.chocobo.renterOnEventFinish", player:getName())
+                printf('[warning] player %s reached succeed without enough currency in xi.chocobo.renterOnEventFinish', player:getName())
             end
         else
-            printf("[warning] player %s passed bad zoneId %i in xi.chocobo.renterOnEventFinish", player:getName(), zoneId)
+            printf('[warning] player %s passed bad zoneId %i in xi.chocobo.renterOnEventFinish', player:getName(), zoneId)
         end
     end
 end

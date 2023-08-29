@@ -31,7 +31,7 @@ abilityObject.onUseAbility = function(player, target, ability)
     else
         local isTamed = false
 
-        if player:getLocalVar("Tamed_Mob") == target:getID() then
+        if player:getLocalVar('Tamed_Mob') == target:getID() then
             player:addMod(xi.mod.CHARM_CHANCE, 10)
             isTamed = true
         end
@@ -40,7 +40,7 @@ abilityObject.onUseAbility = function(player, target, ability)
 
         if isTamed then
             player:delMod(xi.mod.CHARM_CHANCE, 10)
-            player:setLocalVar("Tamed_Mob", 0)
+            player:setLocalVar('Tamed_Mob', 0)
         end
     end
 end

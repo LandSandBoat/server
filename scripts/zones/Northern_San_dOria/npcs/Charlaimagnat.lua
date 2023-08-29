@@ -20,12 +20,12 @@ entity.onTrigger = function(player, npc)
         player:startEvent(703) -- Continuing the Quest
     elseif
         theMissingPiece == QUEST_ACCEPTED and
-        os.time() < player:getCharVar("TheMissingPiece_date")
+        os.time() < player:getCharVar('TheMissingPiece_date')
     then
         player:startEvent(704) -- didn't wait a day yet
     elseif
         theMissingPiece == QUEST_ACCEPTED and
-        os.time() >= player:getCharVar("TheMissingPiece_date")
+        os.time() >= player:getCharVar('TheMissingPiece_date')
     then
         player:startEvent(705) -- Quest Completed
     end
@@ -36,7 +36,7 @@ end
 
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 703 then
-        player:setCharVar("TheMissingPiece_date", os.time() + 60)
+        player:setCharVar('TheMissingPiece_date', os.time() + 60)
         player:addTitle(xi.title.ACQUIRER_OF_ANCIENT_ARCANUM)
         player:delKeyItem(xi.ki.TABLET_OF_ANCIENT_MAGIC)
         player:delKeyItem(xi.ki.LETTER_FROM_ALFESAR)

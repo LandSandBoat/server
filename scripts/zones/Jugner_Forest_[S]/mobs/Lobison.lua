@@ -2,7 +2,7 @@
 -- Area: Jugner Forest [S]
 --  Mob: Lobison
 -----------------------------------
-mixins = { require("scripts/mixins/families/gnole") }
+mixins = { require('scripts/mixins/families/gnole') }
 -----------------------------------
 local entity = {}
 

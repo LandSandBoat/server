@@ -2,7 +2,7 @@
 -- Area: Apollyon SW
 --  NPC: Fir Bholg (THF)
 -----------------------------------
-mixins = { require("scripts/mixins/job_special") }
+mixins = { require('scripts/mixins/job_special') }
 -----------------------------------
 local entity = {}
 

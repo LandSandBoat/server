@@ -22,8 +22,8 @@ effectObject.onEffectGain = function(target, effect)
 
     -- Dances with Luopans
     if
-        target:getLocalVar("GEO_DWL_Locus_Area") == 1 and
-        target:getCharVar("GEO_DWL_Luopan") == 0
+        target:getLocalVar('GEO_DWL_Locus_Area') == 1 and
+        target:getCharVar('GEO_DWL_Luopan') == 0
     then
         local ID = zones[target:getZoneID()]
         target:messageSpecial(ID.text.ENERGIES_COURSE)
@@ -32,13 +32,13 @@ effectObject.onEffectGain = function(target, effect)
         local secondsPerTick = xi.settings.map.HEALING_TICK_DELAY
         local minWaitTime = math.min(3 * secondsPerTick, maxWaitTime)
         local waitTimeInSeconds = math.random(minWaitTime, maxWaitTime)
-        target:setLocalVar("GEO_DWL_Resting", os.time() + waitTimeInSeconds)
+        target:setLocalVar('GEO_DWL_Resting', os.time() + waitTimeInSeconds)
         target:timer(waitTimeInSeconds * 1000, function(targetArg, IdArg)
-            local finishTime = targetArg:getLocalVar("GEO_DWL_Resting")
+            local finishTime = targetArg:getLocalVar('GEO_DWL_Resting')
             if finishTime > 0 and os.time() >= finishTime then
                 targetArg:messageSpecial(IdArg.text.MYSTICAL_WARMTH)  -- You feel a mystical warmth welling up inside you!
-                targetArg:setLocalVar("GEO_DWL_Resting", 0)
-                targetArg:setCharVar("GEO_DWL_Luopan", 1)
+                targetArg:setLocalVar('GEO_DWL_Resting', 0)
+                targetArg:setCharVar('GEO_DWL_Luopan', 1)
             end
         end)
     end
@@ -91,7 +91,7 @@ effectObject.onEffectLose = function(target, effect)
     target:delStatusEffect(xi.effect.LEAVEGAME)
 
     -- Dances with Luopans
-    target:setLocalVar("GEO_DWL_Resting", 0)
+    target:setLocalVar('GEO_DWL_Resting', 0)
 end
 
 return effectObject

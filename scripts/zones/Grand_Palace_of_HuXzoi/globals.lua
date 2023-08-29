@@ -12,7 +12,7 @@ pickTemperancePH = function()
         local phTable = ID.mob.JAILER_OF_TEMPERANCE_PH
 
         if not nm:isSpawned() then
-            nm:setLocalVar("ph", phTable[math.random(1, #phTable)])
+            nm:setLocalVar('ph', phTable[math.random(1, #phTable)])
             nm:timer(900000, function(mob)
                 if not mob:isSpawned() then
                     pickTemperancePH()

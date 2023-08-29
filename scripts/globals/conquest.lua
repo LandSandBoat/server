@@ -1,11 +1,11 @@
 -----------------------------------
 -- Functions for Conquest system
 -----------------------------------
-require("scripts/globals/extravaganza")
-require("scripts/globals/garrison")
-require("scripts/globals/teleports")
-require("scripts/globals/missions")
-require("scripts/globals/npc_util")
+require('scripts/globals/extravaganza')
+require('scripts/globals/garrison')
+require('scripts/globals/teleports')
+require('scripts/globals/missions')
+require('scripts/globals/npc_util')
 -----------------------------------
 xi = xi or {}
 xi.conquest = xi.conquest or {}
@@ -150,7 +150,7 @@ end
 local function suppliesAvailableBitmask(player, nation)
     local mask = 0x7F00001F
 
-    if player:getCharVar("supplyQuest_started") == VanadielUniqueDay() then
+    if player:getCharVar('supplyQuest_started') == VanadielUniqueDay() then
         mask = 0xFFFFFFFF -- Need to wait 1 vanadiel day
     end
 
@@ -181,8 +181,8 @@ local function suppliesAvailableBitmask(player, nation)
 end
 
 local function areSuppliesRotten(player, npc, guardType)
-    local fresh  = player:getCharVar("supplyQuest_fresh")
-    local region = player:getCharVar("supplyQuest_region")
+    local fresh  = player:getCharVar('supplyQuest_fresh')
+    local region = player:getCharVar('supplyQuest_region')
     local rotten = false
     local text   = zones[player:getZoneID()].text
 
@@ -192,18 +192,18 @@ local function areSuppliesRotten(player, npc, guardType)
 
     if rotten then
         if guardType <= xi.conquest.guard.FOREIGN then
-            player:showText(npc, text.CONQUEST + 40) -- "We will dispose of those unusable supplies."
+            player:showText(npc, text.CONQUEST + 40) -- 'We will dispose of those unusable supplies.'
         else
-            player:showText(npc, text.CONQUEST - 1) -- "Hmm... These supplies you have brought us are too old to be of any use."
+            player:showText(npc, text.CONQUEST - 1) -- 'Hmm... These supplies you have brought us are too old to be of any use.'
         end
 
         local ki = outposts[region].ki
 
         player:delKeyItem(ki)
         player:messageSpecial(text.KEYITEM_LOST, ki)
-        player:setCharVar("supplyQuest_started", 0)
-        player:setCharVar("supplyQuest_region", 0)
-        player:setCharVar("supplyQuest_fresh", 0)
+        player:setCharVar('supplyQuest_started', 0)
+        player:setCharVar('supplyQuest_region', 0)
+        player:setCharVar('supplyQuest_fresh', 0)
     end
 
     return rotten
@@ -211,11 +211,11 @@ end
 
 local function canDeliverSupplies(player, guardNation, guardEvent, guardRegion)
     local delivered = false
-    local region    = player:getCharVar("supplyQuest_region")
+    local region    = player:getCharVar('supplyQuest_region')
 
     if region == guardRegion and player:hasKeyItem(outposts[region].ki) then
         delivered = true
-        player:startEvent(guardEvent, 16, 0, 0, 0, 1, 0, 0, 255) -- "you have brought us supplies!"
+        player:startEvent(guardEvent, 16, 0, 0, 0, 1, 0, 0, 255) -- 'you have brought us supplies!'
     end
 
     return delivered
@@ -592,13 +592,13 @@ xi.conquest.toggleRegionalNPCs = function(zone)
     then
         local regionalNPCNames =
         {
-            "Nokkhi_Jinjahl",
-            "Ominous_Cloud",
-            "Valeriano",
-            "Mokop-Sankop",
-            "Cheh_Raihah",
-            "Nalta",
-            "Dahjal"
+            'Nokkhi_Jinjahl',
+            'Ominous_Cloud',
+            'Valeriano',
+            'Mokop-Sankop',
+            'Cheh_Raihah',
+            'Nalta',
+            'Dahjal'
         }
 
         -- TODO: Do we need to worry about beastmen's rank?
@@ -620,9 +620,9 @@ xi.conquest.toggleRegionalNPCs = function(zone)
             firstPlaceZone == id and
             firstPlaceZone ~= secondPlaceZone
         then
-            print("Showing regional conquest NPCs in: " .. zone:getName())
+            print('Showing regional conquest NPCs in: ' .. zone:getName())
         else
-            print("Hiding regional conquest NPCs in: " .. zone:getName())
+            print('Hiding regional conquest NPCs in: ' .. zone:getName())
         end
 
         for _, name in pairs(regionalNPCNames) do
@@ -981,7 +981,7 @@ local function canBuyExpRing(player, item)
     -- one exp ring per conquest tally
     if
         xi.settings.main.BYPASS_EXP_RING_ONE_PER_WEEK ~= 1 and
-        player:getCharVar("CONQUEST_RING_RECHARGE") > os.time()
+        player:getCharVar('CONQUEST_RING_RECHARGE') > os.time()
     then
         player:messageSpecial(text.CONQUEST + 60, 0, 0, item)
         player:messageSpecial(text.CONQUEST + 50, 0, 0, item)
@@ -1094,10 +1094,10 @@ xi.conquest.overseerOnTrade = function(player, npc, trade, guardNation, guardTyp
 
                 if count > 0 then
                     if pRank == 1 then
-                        player:showText(npc, mOffset - 7) -- "I cannot accept crystals from someone whose rank is still 1."
+                        player:showText(npc, mOffset - 7) -- 'I cannot accept crystals from someone whose rank is still 1.'
                         break
                     elseif pRankPoints == 4000 then
-                        player:showText(npc, mOffset + 43) -- "You do not need to donate any more crystals at your current rank."
+                        player:showText(npc, mOffset + 43) -- 'You do not need to donate any more crystals at your current rank.'
                         break
                     else
                         trade:confirmItem(crystalId, count)
@@ -1110,10 +1110,10 @@ xi.conquest.overseerOnTrade = function(player, npc, trade, guardNation, guardTyp
                 if pRankPoints + addPoints >= 4000 then
                     player:setRankPoints(4000)
                     player:addCP(pRankPoints + addPoints - 4000)
-                    player:showText(npc, mOffset + 44) -- "Your rank points are full. We've added the excess to your conquest points."
+                    player:showText(npc, mOffset + 44) -- 'Your rank points are full. We've added the excess to your conquest points.'
                 else
                     player:addRankPoints(addPoints)
-                    player:showText(npc, mOffset + 45) -- "We've awarded you rank points for the crystals you've donated."
+                    player:showText(npc, mOffset + 45) -- 'We've awarded you rank points for the crystals you've donated.'
                 end
 
                 player:confirmTrade()
@@ -1125,7 +1125,7 @@ xi.conquest.overseerOnTrade = function(player, npc, trade, guardNation, guardTyp
         if not tradeConfirmed and expRings[item] and npcUtil.tradeHas(trade, item) then
             if
                 xi.settings.main.BYPASS_EXP_RING_ONE_PER_WEEK == 1 or
-                player:getCharVar("CONQUEST_RING_RECHARGE") < os.time()
+                player:getCharVar('CONQUEST_RING_RECHARGE') < os.time()
             then
                 local ring = expRings[item]
 
@@ -1133,15 +1133,15 @@ xi.conquest.overseerOnTrade = function(player, npc, trade, guardNation, guardTyp
                     player:delCP(ring.cp)
                     player:confirmTrade()
                     player:addItem(item)
-                    player:setCharVar("CONQUEST_RING_RECHARGE", getConquestTally())
-                    player:showText(npc, mOffset + 58, item, ring.cp, ring.charges) -- "Your ring is now fully recharged."
+                    player:setCharVar('CONQUEST_RING_RECHARGE', getConquestTally())
+                    player:showText(npc, mOffset + 58, item, ring.cp, ring.charges) -- 'Your ring is now fully recharged.'
                 else
-                    player:showText(npc, mOffset + 55, item, ring.cp) -- "You do not have the required conquest points to recharge."
+                    player:showText(npc, mOffset + 55, item, ring.cp) -- 'You do not have the required conquest points to recharge.'
                 end
             else
                 -- TODO: Verify that message is retail correct.
                 -- This gives feedback on a failure at least, and is grouped with the recharge messages.  Confident enough for a commit.
-                player:showText(npc, mOffset + 56, item) -- "Please be aware that you can only purchase or recharge <item> once during the period between each conquest results tally.
+                player:showText(npc, mOffset + 56, item) -- 'Please be aware that you can only purchase or recharge <item> once during the period between each conquest results tally.
             end
         end
     end
@@ -1251,7 +1251,7 @@ xi.conquest.overseerOnEventUpdate = function(player, csid, option, guardNation)
         end
 
         if rankCheck and u2 == 0 then
-            player:setLocalVar("boughtItemCP", stock.item) -- set localVar for later cheat prevention
+            player:setLocalVar('boughtItemCP', stock.item) -- set localVar for later cheat prevention
         end
 
         player:updateEvent(u1, u2, u3)
@@ -1267,17 +1267,17 @@ local function canPurchaseItem(player, stock, pRank, guardNation, mOffset, optio
     end
 
     -- validate localVar (cheat protection)
-    local boughtItem = player:getLocalVar("boughtItemCP")
-    player:setLocalVar("boughtItemCP", 0)
+    local boughtItem = player:getLocalVar('boughtItemCP')
+    player:setLocalVar('boughtItemCP', 0)
 
     if stock.item ~= boughtItem then
-        player:messageSpecial(mOffset + 61, stock.item) -- "Your rank is too low to purchase the <item>."
+        player:messageSpecial(mOffset + 61, stock.item) -- 'Your rank is too low to purchase the <item>.'
         return -1
     end
 
     -- validate rank
     if stock.rank and pRank < stock.rank then
-        player:messageSpecial(mOffset + 61, stock.item) -- "Your rank is too low to purchase the <item>."
+        player:messageSpecial(mOffset + 61, stock.item) -- 'Your rank is too low to purchase the <item>.'
         return -1
     end
 
@@ -1301,7 +1301,7 @@ local function canPurchaseItem(player, stock, pRank, guardNation, mOffset, optio
             option >= 32935 and
             not player:hasKeyItem(xi.ki.CONQUEST_PROMOTION_VOUCHER)
         then
-            player:messageSpecial(mOffset + 62, 0, 0, stock.item) -- "You do not have enough conquest points to purchase the <item>."
+            player:messageSpecial(mOffset + 62, 0, 0, stock.item) -- 'You do not have enough conquest points to purchase the <item>.'
             return -1
         end
     end
@@ -1312,7 +1312,7 @@ end
 xi.conquest.overseerOnEventFinish = function(player, csid, option, guardNation, guardType, guardRegion)
     local pNation  = player:getNation()
     local pRank    = player:getRank(pNation)
-    local sRegion  = player:getCharVar("supplyQuest_region")
+    local sRegion  = player:getCharVar('supplyQuest_region')
     local sOutpost = outposts[sRegion]
     local mOffset  = zones[player:getZoneID()].text.CONQUEST
 
@@ -1325,7 +1325,7 @@ xi.conquest.overseerOnEventFinish = function(player, csid, option, guardNation, 
         local duration = (pRank + GetNationRank(pNation) + 3) * 3600
         player:delStatusEffectsByFlag(xi.effectFlag.INFLUENCE, true)
         player:addStatusEffect(xi.effect.SIGNET, 0, 0, duration)
-        player:messageSpecial(mOffset + 1) -- "You've received your nation's Signet!"
+        player:messageSpecial(mOffset + 1) -- 'You've received your nation's Signet!'
 
         if player:getEminenceProgress(3367) then
             xi.roe.onRecordTrigger(player, 3367) -- Complete Weekly Signet, brb objective.  This might be able to move to a status effect trigger
@@ -1342,9 +1342,9 @@ xi.conquest.overseerOnEventFinish = function(player, csid, option, guardNation, 
 
         if outpost ~= nil then
             npcUtil.giveKeyItem(player, outpost.ki)
-            player:setCharVar("supplyQuest_started", VanadielUniqueDay())
-            player:setCharVar("supplyQuest_region", region)
-            player:setCharVar("supplyQuest_fresh", getConquestTally())
+            player:setCharVar('supplyQuest_started', VanadielUniqueDay())
+            player:setCharVar('supplyQuest_region', region)
+            player:setCharVar('supplyQuest_fresh', getConquestTally())
         end
 
     -- FINISH SUPPLY RUN
@@ -1358,10 +1358,10 @@ xi.conquest.overseerOnEventFinish = function(player, csid, option, guardNation, 
     then
         player:delKeyItem(sOutpost.ki)
         player:addCP(sOutpost.cp)
-        player:messageSpecial(mOffset) -- "You've earned conquest points!"
-        player:setCharVar("supplyQuest_started", 0)
-        player:setCharVar("supplyQuest_region", 0)
-        player:setCharVar("supplyQuest_fresh", 0)
+        player:messageSpecial(mOffset) -- 'You've earned conquest points!'
+        player:setCharVar('supplyQuest_started', 0)
+        player:setCharVar('supplyQuest_region', 0)
+        player:setCharVar('supplyQuest_fresh', 0)
 
         if not player:hasTeleport(guardNation, sRegion + 5) then
             player:addTeleport(guardNation, sRegion + 5)
@@ -1371,9 +1371,9 @@ xi.conquest.overseerOnEventFinish = function(player, csid, option, guardNation, 
     elseif option == 4 then
         if player:delGil(setHomepointFee(player, guardNation)) then
             player:setHomePoint()
-            player:messageSpecial(mOffset + 94) -- "Your home point has been set."
+            player:messageSpecial(mOffset + 94) -- 'Your home point has been set.'
         else
-            player:messageSpecial(mOffset + 95) -- "You do not have enough gil to set your home point here."
+            player:messageSpecial(mOffset + 95) -- 'You do not have enough gil to set your home point here.'
         end
 
     -- PURCHASE CP ITEM
@@ -1397,7 +1397,7 @@ xi.conquest.overseerOnEventFinish = function(player, csid, option, guardNation, 
         -- make sale
         if npcUtil.giveItem(player, stock.item) then
             if option >= 32933 and option <= 32935 then
-                player:setCharVar("CONQUEST_RING_RECHARGE", getConquestTally())
+                player:setCharVar('CONQUEST_RING_RECHARGE', getConquestTally())
 
                 if player:hasKeyItem(xi.ki.CONQUEST_PROMOTION_VOUCHER) then
                     player:delKeyItem(xi.ki.CONQUEST_PROMOTION_VOUCHER)

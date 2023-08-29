@@ -92,7 +92,7 @@ quest.sections =
                 [983] = function(player, csid, option, npc)
                     player:confirmTrade()
                     quest:setVar(player, 'Prog', 3)
-                    quest:setVar(player, "Timer", VanadielUniqueDay() + 1)
+                    quest:setVar(player, 'Timer', VanadielUniqueDay() + 1)
                 end,
             },
         },
@@ -102,7 +102,7 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == QUEST_ACCEPTED and vars.Prog == 3 and
-                quest:getVar(player, "Timer") > VanadielUniqueDay()
+                quest:getVar(player, 'Timer') > VanadielUniqueDay()
         end,
 
         [xi.zone.WINDURST_WATERS] =
@@ -115,7 +115,7 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == QUEST_ACCEPTED and vars.Prog == 3 and
-                quest:getVar(player, "Timer") <= VanadielUniqueDay()
+                quest:getVar(player, 'Timer') <= VanadielUniqueDay()
         end,
 
         [xi.zone.WINDURST_WATERS] =
@@ -127,7 +127,7 @@ quest.sections =
                 [980] = function(player, csid, option, npc)
                     npcUtil.giveKeyItem(player, xi.ki.RANPI_MONPI_SPECIALTY)
                     quest:setVar(player, 'Prog', 4)
-                    quest:setVar(player, "Timer", 0)
+                    quest:setVar(player, 'Timer', 0)
                 end,
             },
         },

@@ -17,7 +17,7 @@ local content = Limbus:new({
     area             = 2,
     entryNpc         = 'Matter_Diffusion_Module',
     requiredKeyItems = { xi.ki.COSMO_CLEANSE, xi.ki.WHITE_CARD, message = ID.text.YOU_INSERT_THE_CARD_POLISHED },
-    name             = "TEMENOS_EASTERN_TOWER",
+    name             = 'TEMENOS_EASTERN_TOWER',
     timeExtension    = 15,
 })
 
@@ -42,8 +42,8 @@ local despawnFloorCrates = function(crateOffset, count)
     for i = 1, count do
         local crate = GetEntityByID(crateOffset + i - 1)
 
-        if crate:getLocalVar("opened") == 0 then
-            crate:setLocalVar("opened", 1)
+        if crate:getLocalVar('opened') == 0 then
+            crate:setLocalVar('opened', 1)
             npcUtil.disappearCrate(crate)
         end
     end
@@ -53,9 +53,9 @@ local lockFloorCrates = function(crateOffset, count)
     for i = 1, count do
         local crate = GetEntityByID(crateOffset + i - 1)
 
-        if crate:getLocalVar("opened") == 0 then
-            crate:setLocalVar("opened", 1)
-            crate:addListener("ON_TRIGGER", "TRIGGER_LOCKED_CRATE", function(player, npc)
+        if crate:getLocalVar('opened') == 0 then
+            crate:setLocalVar('opened', 1)
+            crate:addListener('ON_TRIGGER', 'TRIGGER_LOCKED_CRATE', function(player, npc)
                 player:messageSpecial(ID.text.CANNOT_OPEN_CHEST)
             end)
         end
@@ -68,10 +68,10 @@ local unlockFloorCrates = function(floor, mobCount, battlefield, mob, count)
 
     for i = 1, mobCount do
         local crate = GetEntityByID(crateOffset + i - 1)
-        crate:removeListener("TRIGGER_LOCKED_CRATE")
+        crate:removeListener('TRIGGER_LOCKED_CRATE')
 
         if crate:getStatus() == xi.status.NORMAL then
-            crate:setLocalVar("opened", 0)
+            crate:setLocalVar('opened', 0)
             unlockedCrate = true
         end
     end
@@ -86,8 +86,8 @@ local setupItemCrate = function(crateID, floor, crateOffset, count)
 
     xi.limbus.hideCrate(crate)
     crate:setModelId(961)
-    crate:removeListener("TRIGGER_LOCKED_CRATE")
-    crate:addListener("ON_TRIGGER", "TRIGGER_CRATE", function(player, npc)
+    crate:removeListener('TRIGGER_LOCKED_CRATE')
+    crate:addListener('ON_TRIGGER', 'TRIGGER_CRATE', function(player, npc)
         npcUtil.openCrate(npc, function()
             despawnFloorMobs(crateOffset, count)
             despawnFloorCrates(crateOffset, count)
@@ -96,7 +96,7 @@ local setupItemCrate = function(crateID, floor, crateOffset, count)
             -- Opening the last floor crate leads to victory
             if floor == 7 then
                 local battlefield = player:getBattlefield()
-                battlefield:setLocalVar("cutsceneTimer", content.delayToExit)
+                battlefield:setLocalVar('cutsceneTimer', content.delayToExit)
                 battlefield:setStatus(xi.battlefield.status.WON)
             else
                 content:openDoor(player:getBattlefield(), floor)
@@ -110,8 +110,8 @@ local setupMysticCrate = function(crateID, floor, crateOffset, count)
 
     xi.limbus.hideCrate(crate)
     crate:setModelId(961)
-    crate:removeListener("TRIGGER_LOCKED_CRATE")
-    crate:addListener("ON_TRIGGER", "TRIGGER_CRATE", function(player, npc)
+    crate:removeListener('TRIGGER_LOCKED_CRATE')
+    crate:addListener('ON_TRIGGER', 'TRIGGER_CRATE', function(player, npc)
         npcUtil.openCrate(npc, function()
             despawnFloorMobs(crateOffset, count)
             lockFloorCrates(crateOffset, count)
@@ -132,8 +132,8 @@ local setupTimeCrate = function(crateID, floor, crateOffset, count)
 
     xi.limbus.hideCrate(crate)
     crate:setModelId(962)
-    crate:removeListener("TRIGGER_LOCKED_CRATE")
-    crate:addListener("ON_TRIGGER", "TRIGGER_CRATE", function(player, npc)
+    crate:removeListener('TRIGGER_LOCKED_CRATE')
+    crate:addListener('ON_TRIGGER', 'TRIGGER_CRATE', function(player, npc)
         npcUtil.openCrate(crate, function()
             despawnFloorMobs(crateOffset, count)
             despawnFloorCrates(crateOffset, count)
@@ -148,8 +148,8 @@ local setupRecoverCrate = function(crateID, floor, crateOffset, count)
 
     xi.limbus.hideCrate(crate)
     crate:setModelId(960)
-    crate:removeListener("TRIGGER_LOCKED_CRATE")
-    crate:addListener("ON_TRIGGER", "TRIGGER_CRATE", function(player, npc)
+    crate:removeListener('TRIGGER_LOCKED_CRATE')
+    crate:addListener('ON_TRIGGER', 'TRIGGER_CRATE', function(player, npc)
         npcUtil.openCrate(crate, function()
             despawnFloorMobs(crateOffset, count)
             despawnFloorCrates(crateOffset, count)
@@ -257,7 +257,7 @@ content.paths =
 content.groups =
 {
     {
-        mobs  = { "Armoury_Crate_E" },
+        mobs  = { 'Armoury_Crate_E' },
         setup = function(battlefield, crates)
             for _, crate in ipairs(crates) do
                 crate:setBattleID(1) -- Different battle ID prevents the crate from being hit by AOEs
@@ -268,13 +268,13 @@ content.groups =
     {
         mobs =
         {
-            "Fire_Elemental_E",
-            "Ice_Elemental_E",
-            "Air_Elemental_E",
-            "Earth_Elemental_E",
-            "Thunder_Elemental_E",
-            "Water_Elemental_E",
-            "Dark_Elemental_E",
+            'Fire_Elemental_E',
+            'Ice_Elemental_E',
+            'Air_Elemental_E',
+            'Earth_Elemental_E',
+            'Thunder_Elemental_E',
+            'Water_Elemental_E',
+            'Dark_Elemental_E',
         },
 
         -- NOTE: Elementals take double physical damage because their family resistance is 25% so it totals to 50% resistance
@@ -295,73 +295,73 @@ content.groups =
     },
 
     {
-        mobs  = { "Fire_Elemental_E" },
+        mobs  = { 'Fire_Elemental_E' },
         death = utils.bind(content.handleMobDeath, 1),
     },
 
     {
-        mobs    = { "Mystic_Avatar_Ifrit_E" },
+        mobs    = { 'Mystic_Avatar_Ifrit_E' },
         spawned = false,
         death   = utils.bind(unlockFloorCrates, 1, 4),
     },
 
     {
-        mobs  = { "Ice_Elemental_E" },
+        mobs  = { 'Ice_Elemental_E' },
         death = utils.bind(content.handleMobDeath, 2),
     },
 
     {
-        mobs    = { "Mystic_Avatar_Shiva_E" },
+        mobs    = { 'Mystic_Avatar_Shiva_E' },
         spawned = false,
         death   = utils.bind(unlockFloorCrates, 2, 4),
     },
 
     {
-        mobs  = { "Air_Elemental_E" },
+        mobs  = { 'Air_Elemental_E' },
         death = utils.bind(content.handleMobDeath, 3),
     },
 
     {
-        mobs    = { "Mystic_Avatar_Garuda_E" },
+        mobs    = { 'Mystic_Avatar_Garuda_E' },
         spawned = false,
         death   = utils.bind(unlockFloorCrates, 3, 4),
     },
 
     {
-        mobs  = { "Earth_Elemental_E" },
+        mobs  = { 'Earth_Elemental_E' },
         death = utils.bind(content.handleMobDeath, 4),
     },
 
     {
-        mobs    = { "Mystic_Avatar_Titan_E" },
+        mobs    = { 'Mystic_Avatar_Titan_E' },
         spawned = false,
         death   = utils.bind(unlockFloorCrates, 4, 4),
     },
 
     {
-        mobs  = { "Thunder_Elemental_E" },
+        mobs  = { 'Thunder_Elemental_E' },
         death = utils.bind(content.handleMobDeath, 5),
     },
 
     {
-        mobs    = { "Mystic_Avatar_Ramuh_E" },
+        mobs    = { 'Mystic_Avatar_Ramuh_E' },
         spawned = false,
         death   = utils.bind(unlockFloorCrates, 5, 4),
     },
 
     {
-        mobs  = { "Water_Elemental_E" },
+        mobs  = { 'Water_Elemental_E' },
         death = utils.bind(content.handleMobDeath, 6),
     },
 
     {
-        mobs    = { "Mystic_Avatar_LeviathanE" },
+        mobs    = { 'Mystic_Avatar_LeviathanE' },
         spawned = false,
         death   = utils.bind(unlockFloorCrates, 6, 4),
     },
 
     {
-        mobs     = { "Dark_Elemental_E" },
+        mobs     = { 'Dark_Elemental_E' },
         allDeath = function(battlefield, mob)
             npcUtil.showCrate(GetEntityByID(ID.TEMENOS_EASTERN_TOWER.npc.CRATE_OFFSETS[7]))
             npcUtil.showCrate(GetEntityByID(ID.TEMENOS_EASTERN_TOWER.npc.CRATE_OFFSETS[7] + 1))
@@ -369,7 +369,7 @@ content.groups =
     },
 
     {
-        mobs    = { "Mystic_Avatar_Fenrir_E" },
+        mobs    = { 'Mystic_Avatar_Fenrir_E' },
         spawned = false,
         death   = utils.bind(unlockFloorCrates, 7, 2),
     },

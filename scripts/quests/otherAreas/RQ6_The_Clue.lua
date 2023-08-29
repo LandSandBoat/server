@@ -30,7 +30,7 @@ quest.sections =
             ['Rycharde'] =
             {
                 onTrigger = function(player, npc)
-                    if player:getCharVar("Quest[4][4]DayCompleted") + 7 < VanadielUniqueDay() then
+                    if player:getCharVar('Quest[4][4]DayCompleted') + 7 < VanadielUniqueDay() then
                         if quest:getVar(player, 'Prog') == 0 then
                             return quest:progressEvent(90, xi.item.CRAWLER_EGG) -- Starting event.
                         else
@@ -51,7 +51,7 @@ quest.sections =
             {
                 [90] = function(player, csid, option, npc)
                     quest:setVar(player, 'Prog', 1)
-                    player:setCharVar("Quest[4][4]DayCompleted", 0)  -- Delete previous quest (Rycharde the Chef) variables
+                    player:setCharVar('Quest[4][4]DayCompleted', 0)  -- Delete previous quest (Rycharde the Chef) variables
                     if option == 83 then -- Accept quest option.
                         quest:begin(player)
                     end
