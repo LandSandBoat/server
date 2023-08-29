@@ -7,7 +7,7 @@ require("scripts/globals/interaction/quest")
 
 cmdprops =
 {
-    permission = 2,
+    permission = 3,
     parameters = "siisi"
 }
 

@@ -5,7 +5,7 @@
 
 cmdprops =
 {
-    permission = 2,
+    permission = 3,
     parameters = "ss"
 }
 

@@ -6,7 +6,7 @@ require("scripts/globals/teleports")
 
 cmdprops =
 {
-    permission = 3,
+    permission = 5,
     parameters = "ssssss"
 }
 
