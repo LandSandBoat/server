@@ -1,14 +1,14 @@
 ----------------------------------
 -- Chocobo Names (for Chocobo Raising Menu)
---
--- NOTE: These are just to map the index from
---       the menu to a name string.
---       This is not customisable!
 ----------------------------------
 require('scripts/globals/utils')
 ----------------------------------
 
 xi = xi or {}
+
+-- NOTE: These are just to map the index from
+--       the menu to a name string.
+--       This is not customisable!
 xi.chocoboNames =
 {
     -- 1-letter
@@ -864,6 +864,19 @@ xi.chocoboNames =
     [829] = 'Destruction',
     [830] = 'Firecracker',
 }
+
+-- Since this is returning a single-name string, this IS overridable or customisable
+xi.chocoboNames.getRandomName = function()
+    local name = nil
+
+    -- We have to do this nil-checking loop to account for the gaps in the list
+    while name == nil do
+        -- Pick a 5-8 letter name
+        name = xi.chocoboNames[math.random(168, 762)]
+    end
+
+    return name
+end
 
 -- https://ffxiclopedia.fandom.com/wiki/Chocobo_Names
 local bannedChocoboNames =
