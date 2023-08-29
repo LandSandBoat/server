@@ -55,7 +55,7 @@ end
 
 entity.onEventFinish = function(player, csid, option)
     if csid == 7 then
-        if npcUtil.giveItem(player, 1550) then
+        if npcUtil.giveItem(player, xi.items.ARK_PENTASPHERE) then
             player:confirmTrade()
         end
     elseif csid == 8 then

@@ -48,7 +48,7 @@ entity.onTrigger = function(player, npc)
             numitem = numitem + 8
         end   -- Desert Light
 
-        if player:hasSpell(299) then
+        if player:hasSpell(xi.magic.spell.TITAN) then
             numitem = numitem + 32
         end  -- Ability to summon Titan
 
@@ -92,7 +92,7 @@ entity.onEventFinish = function(player, csid, option)
             if option == 5 then
                 npcUtil.giveCurrency(player, 'gil', 10000)
             elseif option == 6 then
-                player:addSpell(299) -- Avatar Titan Spell
+                player:addSpell(xi.magic.spell.TITAN) -- Avatar Titan Spell
                 player:messageSpecial(ID.text.TITAN_UNLOCKED, 0, 0, 1)
             else
                 player:addItem(item)

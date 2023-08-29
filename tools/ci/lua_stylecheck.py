@@ -38,6 +38,38 @@ deprecated_requires = [
     "scripts/enum",
 ]
 
+# 'functionName' : [ noNumberInParamX, noNumberInParamY, ... ],
+# Parameters are 0-indexed
+disallowed_numeric_parameters = {
+    "addItem"                 : [ 0 ],
+    "addKeyItem"              : [ 0 ],
+    "addSpell"                : [ 0 ],
+    "addStatusEffect"         : [ 0 ],
+    "addStatusEffectSilent"   : [ 0 ],
+    "addUsedItem"             : [ 0 ],
+    "canLearnSpell"           : [ 0 ],
+    "delItem"                 : [ 0 ],
+    "delKeyItem"              : [ 0 ],
+    "delSpell"                : [ 0 ],
+    "delStatusEffect"         : [ 0 ],
+    "delStatusEffectEx"       : [ 0 ],
+    "getEquipID"              : [ 0 ],
+    "getEquippedItem"         : [ 0 ],
+    "getItemQty"              : [ 0 ],
+    "hasItem"                 : [ 0 ],
+    "hasItemQty"              : [ 0 ],
+    "hasSpell"                : [ 0 ],
+    "messageBasic"            : [ 0 ],
+    "messageName"             : [ 0 ],
+    "messageSpecial"          : [ 0 ],
+    "messageText"             : [ 0 ],
+    "npcUtil.giveKeyItem"     : [ 1, 2 ],
+    "npcUtil.giveItem"        : [ 1 ],
+    "npcUtil.tradeHas"        : [ 1 ],
+    "npcUtil.tradeHasExactly" : [ 1 ],
+    "showText"                : [ 0 ],
+}
+
 def contains_word(word):
     return re.compile(r'\b({0})\b'.format(word)).search
 

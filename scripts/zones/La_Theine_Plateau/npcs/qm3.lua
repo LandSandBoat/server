@@ -33,7 +33,7 @@ entity.onEventFinish = function(player, csid, option)
             title = xi.title.RAINBOW_WEAVER,
         })
         player:unlockJob(xi.job.SMN)
-        player:addSpell(296)
+        player:addSpell(xi.magic.spell.CARBUNCLE)
         player:messageSpecial(ID.text.UNLOCK_SUMMONER)
         player:messageSpecial(ID.text.UNLOCK_CARBUNCLE)
         player:setCharVar("I_CAN_HEAR_A_RAINBOW", 0)

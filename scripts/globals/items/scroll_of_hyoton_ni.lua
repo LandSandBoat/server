@@ -6,11 +6,11 @@
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)
-    return target:canLearnSpell(324)
+    return target:canLearnSpell(xi.magic.spell.HYOTON_NI)
 end
 
 itemObject.onItemUse = function(target)
-    target:addSpell(324)
+    target:addSpell(xi.magic.spell.HYOTON_NI)
 end
 
 return itemObject

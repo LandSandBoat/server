@@ -66,7 +66,7 @@ entity.onTrigger = function(player, npc)
         aLittleKnowledge == QUEST_COMPLETED and
         mJob == xi.job.SCH and
         mLvl >= 5 and
-        not (player:hasSpell(478) and player:hasSpell(502))
+        not (player:hasSpell(xi.magic.spell.EMBRAVA) and player:hasSpell(xi.magic.spell.KAUSTRA))
     then
         player:startEvent(47)
     elseif

@@ -49,7 +49,7 @@ entity.onTrigger = function(player, npc)
     if
         player:getRank(player:getNation()) >= 6 and
         player:hasKeyItem(xi.ki.SAN_DORIA_TRUST_PERMIT) and
-        not player:hasSpell(905)
+        not player:hasSpell(xi.magic.spell.TRION)
     then
         player:startEvent(574, 0, 0, 0, TrustMemory(player))
 

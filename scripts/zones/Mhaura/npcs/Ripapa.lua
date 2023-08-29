@@ -51,7 +51,7 @@ entity.onTrigger = function(player, npc)
             numitem = numitem + 8
         end   -- Elder Branch
 
-        if player:hasSpell(303) then
+        if player:hasSpell(xi.magic.spell.RAMUH) then
             numitem = numitem + 32
         end  -- Ability to summon Ramuh
 
@@ -95,7 +95,7 @@ entity.onEventFinish = function(player, csid, option)
             if option == 5 then
                 npcUtil.giveCurrency(player, 'gil', 10000)
             elseif option == 6 then
-                player:addSpell(303) -- Ramuh Spell
+                player:addSpell(xi.magic.spell.RAMUH) -- Ramuh Spell
                 player:messageSpecial(ID.text.RAMUH_UNLOCKED, 0, 0, 5)
             else
                 player:addItem(item)
