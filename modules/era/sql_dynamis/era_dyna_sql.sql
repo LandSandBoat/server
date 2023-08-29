@@ -883,7 +883,7 @@ REPLACE INTO `mob_droplist` VALUES (2559,0,0,1000,1452,@ALWAYS); -- Strategems
 --           Megaboss            --
 -- Use Skill List 361
 -- Use Spell List 86
---           Dwagons             --
+--           Dragons             --
 -- Use Skill List 87
 -- --------------------------------------------------------------------
 --                            Dynamis-Valkurm                        --

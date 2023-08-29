@@ -3,7 +3,6 @@
 --   NM: Big Bang
 -----------------------------------
 require("scripts/globals/hunts")
-require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 

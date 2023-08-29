@@ -1,9 +1,7 @@
 -----------------------------------
 -- Spell: Battlefield Elegy
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/magic")
-require("scripts/globals/msg")
 require("scripts/globals/utils")
 -----------------------------------
 local spellObject = {}
@@ -59,6 +57,8 @@ spellObject.onSpellCast = function(caster, target, spell)
         -- Try to overwrite weaker elegy
         elseif target:addStatusEffect(xi.effect.ELEGY, power, 0, duration) then
             spell:setMsg(xi.msg.basic.MAGIC_ENFEEB)
+            -- only increment the resbuild if successful (not on a no effect)
+            xi.magic.incrementBuildDuration(target, params.effect, caster)
         else
             spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT) -- no effect
         end

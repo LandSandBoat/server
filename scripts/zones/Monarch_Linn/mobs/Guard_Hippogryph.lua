@@ -3,7 +3,6 @@
 -- Mob: Guard Hippogryph
 -- ENM: Beloved of the Atlantes
 -----------------------------------
-require("scripts/globals/status")
 -----------------------------------
 
 local entity = {}

@@ -59,12 +59,13 @@ namespace conquest
             }
             case CONQUEST_WORLD2MAP_WEEKLY_UPDATE_END:
             {
-                const std::size_t             headerLength   = 2 * sizeof(uint8);
-                uint32                        size           = ref<uint32>(data, 2);
+                const std::size_t headerLength = 2 * sizeof(uint8) + sizeof(std::size_t);
+                const std::size_t size         = ref<std::size_t>(data, 2);
+
                 std::vector<region_control_t> regionControls = std::vector<region_control_t>(size);
                 for (std::size_t i = 0; i < size; i++)
                 {
-                    const std::size_t start = headerLength + sizeof(size_t) + i * sizeof(region_control_t);
+                    const std::size_t start = headerLength + i * sizeof(region_control_t);
 
                     region_control_t regionControl;
                     regionControl.current = ref<uint8>(data, start);
@@ -78,13 +79,13 @@ namespace conquest
             }
             case CONQUEST_WORLD2MAP_INFLUENCE_POINTS:
             {
-                const std::size_t        headerLength      = 2 * sizeof(uint8);
+                const std::size_t        headerLength      = 2 * sizeof(uint8) + sizeof(bool) + sizeof(std::size_t);
                 bool                     shouldUpdateZones = ref<bool>(data, 2);
-                uint32                   size              = ref<uint32>(data, 3);
+                const std::size_t        size              = ref<std::size_t>(data, 3);
                 std::vector<influence_t> influencePoints   = std::vector<influence_t>(size);
                 for (std::size_t i = 0; i < size; i++)
                 {
-                    const std::size_t start = headerLength + sizeof(bool) + sizeof(size_t) + i * sizeof(influence_t);
+                    const std::size_t start = headerLength + i * sizeof(influence_t);
 
                     influence_t influence;
                     influence.sandoria_influence = ref<uint16>(data, start);
@@ -100,12 +101,13 @@ namespace conquest
             }
             case CONQUEST_WORLD2MAP_REGION_CONTROL:
             {
-                const std::size_t             headerLength = 2 * sizeof(uint8);
-                uint32                        size         = ref<uint32>(data, 2);
+                const std::size_t headerLength = 2 * sizeof(uint8) + sizeof(std::size_t);
+                const std::size_t size         = ref<std::size_t>(data, 2);
+
                 std::vector<region_control_t> regionControls;
                 for (std::size_t i = 0; i < size; i++)
                 {
-                    const std::size_t start = headerLength + sizeof(size_t) + i * sizeof(region_control_t);
+                    const std::size_t start = headerLength + i * sizeof(region_control_t);
 
                     region_control_t regionControl;
                     regionControl.current = ref<uint8_t>(data, start);
@@ -416,10 +418,16 @@ namespace conquest
         zoneutils::ForEachZone([ranking, isConquestAlliance](CZone* PZone)
         {
             // only find chars for zones that have had conquest updated
-            if (PZone->GetRegionID() <= REGION_TYPE::DYNAMIS)
+            REGION_TYPE regionId = PZone->GetRegionID();
+            if (regionId <= REGION_TYPE::DYNAMIS)
             {
-                uint8 influence = conquest::GetInfluenceGraphics(PZone->GetRegionID());
-                uint8 owner     = conquest::GetRegionOwner(PZone->GetRegionID());
+                // Cities do not have owner or influence
+                uint8 influence = 0;
+                uint8 owner = 0;
+                if (regionId <= REGION_TYPE::TAVNAZIA) {
+                    influence = conquest::GetInfluenceGraphics(PZone->GetRegionID());
+                    owner     = conquest::GetRegionOwner(PZone->GetRegionID());
+                }
 
                 luautils::OnConquestUpdate(PZone, Conquest_Tally_Start, influence, owner, ranking, isConquestAlliance);
             }
@@ -453,17 +461,20 @@ namespace conquest
         // clang-format off
         zoneutils::ForEachZone([ranking, isConquestAlliance](CZone* PZone)
         {
-            // only find chars for zones that have had conquest updated
-            if (PZone->GetRegionID() <= REGION_TYPE::TAVNAZIA)
+            REGION_TYPE regionId = PZone->GetRegionID();
+            if (regionId <= REGION_TYPE::DYNAMIS)
             {
-                uint8 influence = conquest::GetInfluenceGraphics(PZone->GetRegionID());
-                uint8 owner     = conquest::GetRegionOwner(PZone->GetRegionID());
+                // Cities do not have owner or influence
+                uint8 influence = 0;
+                uint8 owner = 0;
+                if (regionId <= REGION_TYPE::TAVNAZIA) {
+                    influence = conquest::GetInfluenceGraphics(PZone->GetRegionID());
+                    owner     = conquest::GetRegionOwner(PZone->GetRegionID());
+                }
 
                 luautils::OnConquestUpdate(PZone, Conquest_Tally_End, influence, owner, ranking, isConquestAlliance);
                 PZone->ForEachChar([](CCharEntity* PChar)
                 {
-                    // TODO: Use region controls cache here.
-                    // Right now, CConquestPacket queries from DB
                     PChar->pushPacket(new CConquestPacket(PChar));
                     PChar->PLatentEffectContainer->CheckLatentsZone();
                 });
@@ -496,10 +507,16 @@ namespace conquest
             zoneutils::ForEachZone([ranking, isConquestAlliance](CZone* PZone)
             {
                 // only find chars for zones that have had conquest updated
-                if (PZone->GetRegionID() <= REGION_TYPE::TAVNAZIA)
+                REGION_TYPE regionId = PZone->GetRegionID();
+                if (regionId <= REGION_TYPE::DYNAMIS)
                 {
-                    uint8 influence = conquest::GetInfluenceGraphics(PZone->GetRegionID());
-                    uint8 owner     = conquest::GetRegionOwner(PZone->GetRegionID());
+                    // Cities do not have owner or influence
+                    uint8 influence = 0;
+                    uint8 owner = 0;
+                    if (regionId <= REGION_TYPE::TAVNAZIA) {
+                        influence = conquest::GetInfluenceGraphics(PZone->GetRegionID());
+                        owner     = conquest::GetRegionOwner(PZone->GetRegionID());
+                    }
 
                     luautils::OnConquestUpdate(PZone, Conquest_Update, influence, owner, ranking, isConquestAlliance);
                     PZone->ForEachChar([](CCharEntity* PChar)

@@ -3,8 +3,6 @@
 -- Damage varies with TP.
 -- 0% TP: 2.25 / 150% TP: 3.50 / 300% TP: 4.75
 -----------------------------------
-require("scripts/globals/settings")
-require("scripts/globals/status")
 require("scripts/globals/mobskills")
 -----------------------------------
 local mobskillObject = {}

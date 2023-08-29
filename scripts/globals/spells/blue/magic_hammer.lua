@@ -20,9 +20,7 @@
 -- Damage and MP drained are enhanced by both Magic Attack Bonus and Magic Attack from Convergence.
 -----------------------------------
 require("scripts/globals/bluemagic")
-require("scripts/globals/status")
 require("scripts/globals/magic")
-require("scripts/globals/msg")
 -----------------------------------
 local spellObject = {}
 

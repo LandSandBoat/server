@@ -3,10 +3,6 @@
 -- Item: aiming_gloves
 -- Item Effect: Ranged Accuracy +3
 -- Duration: 60 seconds (Needs confirmation)
------------------------------------
-require("scripts/globals/status")
-require("scripts/globals/items")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

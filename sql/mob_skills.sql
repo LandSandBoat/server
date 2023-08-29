@@ -557,7 +557,7 @@ INSERT INTO `mob_skills` VALUES (596,882,'pl_hellstorm',1,15.0,2000,1500,4,0,0,0
 INSERT INTO `mob_skills` VALUES (598,1598,'berserk',0,7.0,2000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (599,885,'arctic_impact',1,15.0,2000,2000,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (600,886,'cold_wave',1,15,2000,2000,4,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (601,887,'hiemal_storm',1,15.0,2000,2000,4,0,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (601,887,'hiemal_storm',4,15.0,2000,2000,4,0,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (602,346,'hypothermal_combustion',0,7.0,2000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (603,432,'lateral_slash_2hr',0,7.0,2000,0,1,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (604,433,'throat_stab_2hr',0,7.0,2000,0,1,0,0,0,0,0,0);

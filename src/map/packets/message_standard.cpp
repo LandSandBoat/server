@@ -108,8 +108,6 @@ CMessageStandardPacket::CMessageStandardPacket(CCharEntity* PChar, uint32 param0
     this->setType(0x09);
     this->setSize(0x34);
 
-    // XI_DEBUG_BREAK_IF(MessageID != 0x58);
-
     ref<uint16>(0x0A) = static_cast<uint16>(MessageID);
 
     snprintf((char*)data + (0x0D), 40, "string2 %s string3 %u", PChar->GetName().c_str(), param0);

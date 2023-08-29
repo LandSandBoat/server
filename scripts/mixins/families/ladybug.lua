@@ -1,5 +1,4 @@
 require("scripts/globals/mixins")
-require("scripts/globals/status")
 -----------------------------------
 
 xi = xi or {}

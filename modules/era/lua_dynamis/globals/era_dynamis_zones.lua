@@ -5,7 +5,6 @@
 --       Module Required Scripts          --
 --------------------------------------------
 require("scripts/globals/dynamis")
-require("scripts/globals/status")
 require("modules/module_utils")
 --------------------------------------------
 --       Module Affected Scripts          --

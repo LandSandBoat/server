@@ -6,7 +6,6 @@
 -- Levil      : !pos -87.204 3.350 12.655 256
 -- Aged Stump : !pos -27.233 -2 33.508 281
 -----------------------------------
-require('scripts/globals/keyitems')
 require('scripts/globals/missions')
 require('scripts/globals/interaction/mission')
 require('scripts/globals/zone')

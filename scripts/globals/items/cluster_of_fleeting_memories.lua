@@ -3,8 +3,6 @@
 -- Fleeting Cluster
 -- Turn into a stack of fleeting memories
 -----------------------------------------
-require("scripts/globals/msg")
------------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

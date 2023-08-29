@@ -10,10 +10,8 @@
 -----------------------------------
 -- Orcish Axe : ItemID 16656
 -----------------------------------
-require('scripts/globals/items')
 require('scripts/globals/missions')
 require('scripts/globals/npc_util')
-require('scripts/globals/settings')
 require('scripts/globals/interaction/mission')
 require('scripts/globals/zone')
 -----------------------------------

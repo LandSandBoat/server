@@ -3,8 +3,6 @@
 -- Cluster of Profane Memories
 -- Turn into a stack of profane memories
 -----------------------------------------
-require("scripts/globals/msg")
------------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

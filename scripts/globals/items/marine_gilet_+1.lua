@@ -3,9 +3,6 @@
 -- Marine Gilet +1
 -- Dispense: Berry Snowcone
 -----------------------------------
-require("scripts/globals/msg")
-require("scripts/globals/items")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

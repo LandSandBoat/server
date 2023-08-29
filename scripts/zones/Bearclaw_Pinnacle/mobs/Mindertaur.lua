@@ -3,8 +3,6 @@
 --  Mob: Mindertaur
 --  ENM: Brothers
 -----------------------------------
-require("scripts/globals/status")
------------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)

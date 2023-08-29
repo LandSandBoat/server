@@ -4,7 +4,6 @@
 -- BCNM Fight: Dismemberment Brigade
 -----------------------------------
 require("scripts/globals/pathfind")
-require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 

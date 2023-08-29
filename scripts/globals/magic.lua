@@ -1,9 +1,6 @@
-require("scripts/globals/spell_data")
 require("scripts/globals/jobpoints")
 require("scripts/globals/magicburst")
-require("scripts/globals/settings")
 require("scripts/globals/utils")
-require("scripts/globals/msg")
 -----------------------------------
 xi = xi or {}
 xi.magic = xi.magic or {}
@@ -1832,27 +1829,38 @@ xi.magic.calculateDuration = function(duration, magicSkill, spellGroup, caster, 
     return math.floor(duration)
 end
 
-xi.magic.calculateBuildDuration = function(target, duration, effect, caster)
+xi.magic.incrementBuildDuration = function(target, effect, caster)
     if target:isMob() and target:isNM() then
-        local buildRes = xi.magic.getEffectResistance(target, effect, true, caster)
+        local resType = xi.magic.getEffectResistance(target, effect, true, caster)
 
-        local buildResMod = target:getMod(buildRes)
+        local buildResMod = target:getMod(resType)
 
         if buildResMod ~= nil then
-            local durationDecrease = target:getLocalVar(string.format("[RESBUILD]Base_%s", buildRes))
-            local spellCount = target:getLocalVar(string.format("[RESBUILD]Base_%s_Count", buildRes))
-
-            duration = utils.clamp(duration - durationDecrease, 0, 65535) -- Used to add more fidelity to the build. Adding a mod of 30 will be -3 seconds per cast.
+            local durationDecrease = target:getLocalVar(string.format("[RESBUILD]Base_%s", resType))
+            local spellCount = target:getLocalVar(string.format("[RESBUILD]Base_%s_Count", resType))
 
             -- find next duration decrease with min of 1 second (MOD <= 10) and max of 100 seconds (MOD >= 1000)
             local nextDecrease = utils.clamp(math.floor(buildResMod / 10), 1, 100)
 
-            target:setLocalVar(string.format("[RESBUILD]Base_%s", buildRes), durationDecrease + nextDecrease)
-            target:setLocalVar(string.format("[RESBUILD]Base_%s_Count", buildRes), spellCount + 1)
+            target:setLocalVar(string.format("[RESBUILD]Base_%s", resType), durationDecrease + nextDecrease)
+            target:setLocalVar(string.format("[RESBUILD]Base_%s_Count", resType), spellCount + 1)
             -- set local var to denote that these res should be reset when mob roams at 100% HP
             if target:getLocalVar("HasStatusResBuild") == 0 then
                 target:setLocalVar("HasStatusResBuild", 1)
             end
+        end
+    end
+end
+
+xi.magic.calculateBuildDuration = function(target, duration, effect, caster)
+    if target:isMob() and target:isNM() then
+        local resType = xi.magic.getEffectResistance(target, effect, true, caster)
+
+        local buildResMod = target:getMod(resType)
+
+        if buildResMod ~= nil then
+            local durationDecrease = target:getLocalVar(string.format("[RESBUILD]Base_%s", resType))
+            duration = utils.clamp(duration - durationDecrease, 0, 65535) -- Used to add more fidelity to the build. Adding a mod of 30 will be -3 seconds per cast.
         end
     end
 

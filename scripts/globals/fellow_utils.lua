@@ -1,8 +1,6 @@
 -----------------------------------
 -- Fellow Utils (Used by fellows and scripts who trigger fellow related CSs)
 -----------------------------------
-require("scripts/globals/status")
-require("scripts/globals/msg")
 require("scripts/globals/utils")
 -----------------------------------
 xi = xi or {}

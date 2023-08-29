@@ -1150,13 +1150,19 @@ namespace fishingutils
 
         for (auto fish : FishingGroups[groupId])
         {
-            if (FishList[fish.first]->fishFlags == FISHFLAG_GOLDFISH && BaitID == FISHINGBAIT_SUPER_SCOOP)
+            if (FishList[fish.first]->fishFlags & FISHFLAG_GOLDFISH)
             {
-                pool.insert(std::make_pair(FishList[fish.first], fish.second));
+                if (BaitID == FISHINGBAIT_SUPER_SCOOP)
+                {
+                    pool.insert(std::make_pair(FishList[fish.first], fish.second));
+                }
             }
-            else if ((!FishList[fish.first]->item) && FishingBaitAffinities.count(BaitID) && FishingBaitAffinities[BaitID].count(fish.first) && FishList[fish.first]->fishFlags != FISHFLAG_GOLDFISH)
+            else
             {
-                pool.insert(std::make_pair(FishList[fish.first], fish.second));
+                if ((!FishList[fish.first]->item) && FishingBaitAffinities.count(BaitID) && FishingBaitAffinities[BaitID].count(fish.first))
+                {
+                    pool.insert(std::make_pair(FishList[fish.first], fish.second));
+                }
             }
         }
 
@@ -2063,16 +2069,11 @@ namespace fishingutils
             Rod  = dynamic_cast<CItemWeapon*>(PChar->getEquip(SLOT_RANGED));
             Bait = dynamic_cast<CItemWeapon*>(PChar->getEquip(SLOT_AMMO));
 
+            // You cannot fish in these zones during Sunbreeze Festival
+            std::set<uint16> sunbreezeExcludedZones = { 238, 239, 241, 231, 234, 235, 247, 100, 107, 116 };
+
             // Players cannot fish using the goldfishing basket outside of the sunbreeze event or goldfishing designated zones
-            if (Rod != nullptr && Rod->getID() == GOLDFISH_BASKET && !settings::get<bool>("main.SUNBREEZE"))
-            {
-                PChar->pushPacket(new CMessageTextPacket(PChar, MessageOffset + FISHMESSAGEOFFSET_CANNOTFISH_MOMENT));
-                PChar->pushPacket(new CReleasePacket(PChar, RELEASE_TYPE::FISHING));
-                destroy(PChar->hookedFish);
-                return;
-            }
-            else if (Rod != nullptr && Rod->getID() == GOLDFISH_BASKET && zone != 238 && zone != 239 && zone != 241 && zone != 231 && zone != 234 && zone != 235 &&
-                     zone != 247 && zone != 100 && zone != 107 && zone != 116)
+            if (Rod != nullptr && Rod->getID() == GOLDFISH_BASKET && (!settings::get<bool>("main.SUNBREEZE") || sunbreezeExcludedZones.count(zone) == 0))
             {
                 PChar->pushPacket(new CMessageTextPacket(PChar, MessageOffset + FISHMESSAGEOFFSET_CANNOTFISH_MOMENT));
                 PChar->pushPacket(new CReleasePacket(PChar, RELEASE_TYPE::FISHING));

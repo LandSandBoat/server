@@ -3,9 +3,6 @@
 -- Moogle Suit
 -- Dispense: Mog Missile
 -----------------------------------
-require("scripts/globals/msg")
-require("scripts/globals/items")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

@@ -7,10 +7,8 @@
 -- _5i0 (Iron Door) : !pos 247.735 18.499 -142.267 198
 -- Ratihb           : !pos 75.225 -6.000 -137.203 50
 -----------------------------------
-require('scripts/globals/items')
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
-require('scripts/globals/settings')
 require('scripts/globals/interaction/quest')
 -----------------------------------
 local mazeID = require('scripts/zones/Maze_of_Shakhrami/IDs')
@@ -67,6 +65,7 @@ quest.sections =
 
                     if questProgress == 1 then
                         npcUtil.popFromQM(player, npc, mazeID.mob.LOST_SOUL, { hide = 0 })
+                        return quest:noAction()
                     elseif questProgress == 2 then
                         return quest:progressEvent(66)
                     end

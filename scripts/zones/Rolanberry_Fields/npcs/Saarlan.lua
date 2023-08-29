@@ -5,9 +5,7 @@
 -- !pos 242 24.395 468 110
 -----------------------------------
 local ID = require("scripts/zones/Rolanberry_Fields/IDs")
-require("scripts/globals/keyitems")
 require("scripts/globals/npc_util")
-require("scripts/globals/settings")
 require("scripts/globals/titles")
 -----------------------------------
 local entity = {}

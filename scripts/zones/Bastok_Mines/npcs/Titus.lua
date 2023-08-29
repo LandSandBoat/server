@@ -5,7 +5,6 @@
 -----------------------------------
 local ID = require("scripts/zones/Bastok_Mines/IDs")
 require("scripts/globals/crafting")
-require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 

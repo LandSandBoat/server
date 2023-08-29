@@ -7,7 +7,6 @@
 local ID = require("scripts/zones/Northern_San_dOria/IDs")
 require("scripts/globals/crafting")
 require("scripts/globals/roe")
-require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 

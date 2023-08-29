@@ -4,7 +4,6 @@
 -- !pos -345 104 -260 144
 -----------------------------------
 require("scripts/globals/battlefield")
-require("scripts/globals/keyitems")
 require("scripts/globals/npc_util")
 -----------------------------------
 local battlefieldObject = {}

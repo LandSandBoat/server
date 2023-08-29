@@ -11,8 +11,6 @@
 -- MACC+4
 -- MAB+7
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

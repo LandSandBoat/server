@@ -5,7 +5,6 @@
 -----------------------------------
 require('scripts/globals/nyzul')
 require('scripts/globals/additional_effects')
-require('scripts/globals/status')
 -----------------------------------
 local entity = {}
 

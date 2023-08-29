@@ -4,7 +4,6 @@
 -- Standard merchant, though he acts like a guild merchant
 -- !pos -110.209 4.898 22.957 236
 -----------------------------------
-require("scripts/globals/settings")
 require("scripts/globals/shop")
 local ID = require("scripts/zones/Port_Bastok/IDs")
 -----------------------------------

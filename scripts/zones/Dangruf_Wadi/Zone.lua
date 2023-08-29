@@ -3,9 +3,7 @@
 -----------------------------------
 local ID = require('scripts/zones/Dangruf_Wadi/IDs')
 require('scripts/globals/conquest')
-require('scripts/globals/keyitems')
 require('scripts/globals/treasure')
-require('scripts/globals/status')
 -----------------------------------
 local zoneObject = {}
 

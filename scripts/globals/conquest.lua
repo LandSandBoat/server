@@ -3,14 +3,10 @@
 -----------------------------------
 require("scripts/globals/extravaganza")
 require("scripts/globals/garrison")
-require("scripts/globals/items")
-require("scripts/globals/keyitems")
 require("scripts/globals/teleports")
 require("scripts/globals/missions")
 require("scripts/globals/npc_util")
-require("scripts/globals/settings")
 require("scripts/globals/garrison")
-require("scripts/globals/status")
 require("scripts/globals/titles")
 require("scripts/globals/zone")
 -----------------------------------
@@ -1573,8 +1569,19 @@ xi.conquest.sendConquestTallyStartMessage = function(player, messageBase)
     player:messageText(player, messageBase, 5)
 end
 
+-- City areas, though not technically conquest areas, should show the tally end message.
+xi.conquest.sendCityConquestTallyEndMessage = function(player, messageBase, ranking, isConquestAlliance)
+    -- Tallying conquest results...
+    player:messageText(player, messageBase + 1, 5)
+
+    -- Global balance of power message
+    xi.conquest.sendBalanceOfPowerMessage(player, messageBase, ranking, isConquestAlliance)
+end
+
+-- Used for non city conquest areas. shows tally end message + owner of the region.
 xi.conquest.sendConquestTallyEndMessage = function(player, messageBase, owner, ranking, isConquestAlliance)
-    player:messageText(player, messageBase + 1, 5) -- Tallying conquest results...
+    -- Tallying conquest results...
+    player:messageText(player, messageBase + 1, 5)
 
     if owner <= 3 then
         player:messageText(player, messageBase + 2 + owner, 5) -- This region is currently under <nation> control.
@@ -1582,8 +1589,13 @@ xi.conquest.sendConquestTallyEndMessage = function(player, messageBase, owner, r
         player:messageText(player, messageBase + 6, 5) -- This region is currently under beastman control.
     end
 
-    local offset = 0
+    -- Global balance of power message
+    xi.conquest.sendBalanceOfPowerMessage(player, messageBase, ranking, isConquestAlliance)
+end
 
+-- Helper method for sendConquestTallyUpdateMessage and sendConquestTallyEndMessage
+xi.conquest.sendBalanceOfPowerMessage = function(player, messageBase, ranking, isConquestAlliance)
+    local offset = 0
     if bit.band(ranking, 0x03) == 0x01 then
         offset = offset + 7 -- 7
         if bit.band(ranking, 0x30) == 0x10 then
@@ -1670,14 +1682,16 @@ xi.conquest.sendConquestTallyUpdateMessage = function(player, messageBase, owner
 end
 
 xi.conquest.onConquestUpdate = function(zone, updatetype, influence, owner, ranking, isConquestAlliance)
+    -- onConquestUpdate is called for zones in city regions as well
+    -- in such cases, owner and influence is undetermined, so we call a city specific method.
+    local regionId = zone:getRegionID()
+    if regionId > xi.region.TAVNAZIANARCH and regionId < xi.region.DYNAMIS then
+        xi.conquest.onCityConquestUpdate(zone, updatetype, ranking, isConquestAlliance)
+        return
+    end
+
     local messageBase        = zones[zone:getID()].text.CONQUEST_BASE
     local players            = zone:getPlayers()
-    -----------------------------------
-    -- Once per zone logic
-    -----------------------------------
-    if updatetype == conquestConstants.TALLY_END then
-        xi.conquest.toggleRegionalNPCs(zone)
-    end
 
     -----------------------------------
     -- WARNING: This is iterating every player in a zone, be careful not
@@ -1692,6 +1706,33 @@ xi.conquest.onConquestUpdate = function(zone, updatetype, influence, owner, rank
 
         elseif updatetype == conquestConstants.UPDATE then
             xi.conquest.sendConquestTallyUpdateMessage(player, messageBase, owner, ranking, influence, isConquestAlliance)
+        end
+    end
+end
+
+xi.conquest.onCityConquestUpdate = function(zone, updatetype, ranking, isconquestAlliance)
+    local messageBase        = zones[zone:getID()].text.CONQUEST_BASE
+    local players            = zone:getPlayers()
+
+    -----------------------------------
+    -- Once per zone logic
+    -----------------------------------
+
+    -- Triggers regional npc updates for city zones only
+    if updatetype == conquestConstants.TALLY_END then
+        xi.conquest.toggleRegionalNPCs(zone)
+    end
+
+    -----------------------------------
+    -- WARNING: This is iterating every player in a zone, be careful not
+    --        : to put expensive operations like db reads in here!
+    -----------------------------------
+    for _, player in pairs(players) do
+        if updatetype == conquestConstants.TALLY_START then
+            xi.conquest.sendConquestTallyStartMessage(player, messageBase)
+
+        elseif updatetype == conquestConstants.TALLY_END then
+            xi.conquest.sendCityConquestTallyEndMessage(player, messageBase, ranking, isconquestAlliance)
         end
     end
 end

@@ -5,8 +5,6 @@
 -- Elki     : !pos -17.087 -0.05 52.745 234
 -- Monument : !pos 300 -62.803 498.2 106
 -----------------------------------
-require('scripts/globals/items')
-require('scripts/globals/keyitems')
 require('scripts/globals/quests')
 require('scripts/globals/titles')
 require('scripts/globals/zone')

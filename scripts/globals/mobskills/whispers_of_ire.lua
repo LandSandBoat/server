@@ -5,9 +5,6 @@
 -- Notes: Can also use the ability to target itself and remove all debuffs (whispers_of_ire_self.lua)
 -----------------------------------
 require("scripts/globals/mobskills")
-require("scripts/globals/settings")
-require("scripts/globals/status")
-require("scripts/globals/msg")
 -----------------------------------
 local mobskillObject = {}
 

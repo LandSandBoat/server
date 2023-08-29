@@ -4,7 +4,6 @@
 -----------------------------------
 require("scripts/globals/battlefield")
 require("scripts/globals/teleports")
-require("scripts/globals/keyitems")
 -----------------------------------
 local battlefieldObject = {}
 

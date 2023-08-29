@@ -2,10 +2,7 @@
 -- Zone: The Eldieme Necropolis (195)
 -- Desc: this file contains functions that are shared by multiple luas in this zone's directory
 -----------------------------------
-require("scripts/globals/keyitems")
 require("scripts/globals/npc_util")
-require("scripts/globals/settings")
-require("scripts/globals/status")
 -----------------------------------
 local ID = require("scripts/zones/The_Eldieme_Necropolis/IDs")
 -----------------------------------

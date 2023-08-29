@@ -2,8 +2,6 @@
 -- ID: 5345
 -- Item: Zhayolm Fireflies
 -----------------------------------
-require("scripts/globals/items")
-require("scripts/globals/msg")
 require("scripts/globals/teleports")
 require("scripts/globals/zone")
 -----------------------------------

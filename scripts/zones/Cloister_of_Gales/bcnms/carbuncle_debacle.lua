@@ -3,7 +3,6 @@
 -- BCNM: Carbuncle Debacle
 -----------------------------------
 require("scripts/globals/battlefield")
-require("scripts/globals/keyitems")
 -----------------------------------
 local battlefieldObject = {}
 

@@ -1,7 +1,6 @@
 -----------------------------------
 -- Spell: Threnody - xi.mod.WIND_MEVA
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/magic")
 -----------------------------------
 local spellObject = {}

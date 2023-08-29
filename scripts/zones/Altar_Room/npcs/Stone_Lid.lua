@@ -4,7 +4,6 @@
 -- !pos -316.4390, 24.7654, 12.1590
 -----------------------------------
 local ID = require("scripts/zones/Altar_Room/IDs")
-require("scripts/globals/items")
 require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}

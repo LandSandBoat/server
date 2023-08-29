@@ -7,8 +7,6 @@
 -- Alsha Spawn QM  : !pos -155.805 -15.692 644.617
 -- Mire Incense KI : 709
 -----------------------------------
-require('scripts/globals/items')
-require('scripts/globals/keyitems')
 require('scripts/globals/mannequins')
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')

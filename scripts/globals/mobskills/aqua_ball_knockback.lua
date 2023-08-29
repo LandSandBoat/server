@@ -4,8 +4,6 @@
 -- Used by pugils in BCNM: Shooting Fish
 -----------------------------------
 require("scripts/globals/mobskills")
-require("scripts/globals/settings")
-require("scripts/globals/status")
 -----------------------------------
 local mobskillObject = {}
 

@@ -3,8 +3,6 @@
 -- Nomad Moogle Shield
 -- Enchantment: 60Min, Costume - Moogle
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

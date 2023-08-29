@@ -3,7 +3,6 @@
 -- Mob: Heavy Metal Crab
 -- BCNM: Crustacean Conundrum
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/mobs")
 -----------------------------------
 local dots =

@@ -3,9 +3,6 @@
 -- Item: Juji Shr. Pouch
 -- When used, you will obtain one stack of Juji Shurikens
 -----------------------------------
-require("scripts/globals/msg")
-require("scripts/globals/items")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

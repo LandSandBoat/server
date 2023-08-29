@@ -3,8 +3,6 @@
 --  Description: Additional effect: Poison. Chance of effect varies with TP.
 --  Type: Physical (Piercing)
 -----------------------------------
-require("scripts/globals/settings")
-require("scripts/globals/status")
 require("scripts/globals/mobskills")
 -----------------------------------
 local mobskillObject = {}

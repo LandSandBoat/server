@@ -2,7 +2,6 @@
 -- func: setmoblevel
 -- desc: Sets the target monsters level.
 -----------------------------------
-require("scripts/globals/msg")
 
 cmdprops =
 {

@@ -9,8 +9,6 @@
 -- Accuracy 15
 -- Ranged Accuracy 15
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

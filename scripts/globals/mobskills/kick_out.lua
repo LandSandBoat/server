@@ -8,8 +8,6 @@
 -- Notes:  Only used when the Behemoth is attacking with its tail.
 -----------------------------------
 require("scripts/globals/mobskills")
-require("scripts/globals/settings")
-require("scripts/globals/status")
 -----------------------------------
 local mobskillObject = {}
 

@@ -3,9 +3,6 @@
 -- Lighting Cluster
 -- Turn into a stack of lighting crystals
 -----------------------------------
-require("scripts/globals/msg")
-require("scripts/globals/items")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

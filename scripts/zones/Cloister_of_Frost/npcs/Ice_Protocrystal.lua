@@ -4,7 +4,6 @@
 -- Involved in Quests: Trial by Ice, Trial Size Trial by Ice
 -- !pos 558 0 596 203
 -----------------------------------
-require("scripts/globals/keyitems")
 require("scripts/globals/missions")
 require("scripts/globals/bcnm")
 local ID = require("scripts/zones/Cloister_of_Frost/IDs")

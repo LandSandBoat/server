@@ -5,8 +5,6 @@
 -----------------------------------
 -- Health % 6 (cap 40)
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

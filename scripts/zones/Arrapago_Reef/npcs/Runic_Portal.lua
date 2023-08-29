@@ -7,7 +7,6 @@
 local ID = require("scripts/zones/Arrapago_Reef/IDs")
 -----------------------------------
 require("scripts/globals/besieged")
-require('scripts/globals/keyitems')
 require("scripts/globals/missions")
 require("scripts/globals/teleports")
 -----------------------------------

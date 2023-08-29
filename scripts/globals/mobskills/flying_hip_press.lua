@@ -7,8 +7,6 @@
 --  Range: 15' radial
 --  Notes: This is NOT a breathe skill when used by Bugbears
 -----------------------------------
-require("scripts/globals/settings")
-require("scripts/globals/status")
 require("scripts/globals/mobskills")
 -----------------------------------
 

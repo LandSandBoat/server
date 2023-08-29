@@ -4,8 +4,6 @@
 -- Involved in Quest "The Pickpocket"
 -- !pos -624.231 -51.499 278.369 100
 -----------------------------------
-require("scripts/globals/keyitems")
------------------------------------
 local entity = {}
 
 entity.onTrigger = function(player, npc)

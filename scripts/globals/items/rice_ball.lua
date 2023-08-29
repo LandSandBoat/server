@@ -10,8 +10,6 @@
 -- Effect with enhancing equipment (Note: these are latents on gear with the effect)
 -- Def +50
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

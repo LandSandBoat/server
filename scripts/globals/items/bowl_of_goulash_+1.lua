@@ -8,8 +8,6 @@
 -- Accuracy +11% (cap 58)
 -- DEF +11% (cap 35)
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

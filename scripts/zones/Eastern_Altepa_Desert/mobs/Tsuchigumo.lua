@@ -3,8 +3,6 @@
 --  Mob: Tsuchigumo
 -- Involved in Quest: 20 in Pirate Years
 -----------------------------------
-require("scripts/globals/status")
------------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)

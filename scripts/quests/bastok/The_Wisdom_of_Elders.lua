@@ -5,7 +5,6 @@
 -- Benita : !pos 49.692 -4.771 36.189 236
 -- Tete   : !pos 15.249 -2.097 43.012 236
 -----------------------------------
-require('scripts/globals/items')
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
 require('scripts/globals/zone')

@@ -4,9 +4,6 @@
 -- Item Effect: 10% haste
 -- Duration: 3 minutes
 -----------------------------------
-require("scripts/globals/status")
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

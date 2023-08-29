@@ -5,17 +5,13 @@
 -- https://ffxiclopedia.wikia.com/wiki/Logging
 -- https://ffxiclopedia.wikia.com/wiki/Mining
 -----------------------------------
-require("scripts/globals/items")
-require("scripts/globals/keyitems")
 require("scripts/globals/missions")
 require("scripts/globals/npc_util")
 require("scripts/globals/quests")
 require("scripts/globals/roe")
-require("scripts/globals/spell_data")
 require("scripts/globals/zone")
 require("scripts/missions/amk/helpers")
 require("scripts/missions/wotg/helpers")
-require("scripts/globals/msg")
 -----------------------------------
 
 xi = xi or {}

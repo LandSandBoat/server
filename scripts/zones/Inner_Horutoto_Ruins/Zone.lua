@@ -4,7 +4,6 @@
 local ID = require('scripts/zones/Inner_Horutoto_Ruins/IDs')
 require('scripts/globals/conquest')
 require('scripts/globals/treasure')
-require('scripts/globals/status')
 -----------------------------------
 local zoneObject = {}
 

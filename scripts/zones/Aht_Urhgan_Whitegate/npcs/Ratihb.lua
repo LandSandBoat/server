@@ -3,9 +3,7 @@
 --  NPC: Ratihb
 -- !pos 75.225 -6.000 -137.203 50
 -----------------------------------
-require("scripts/globals/keyitems")
 require("scripts/globals/npc_util")
-require("scripts/globals/settings")
 require("scripts/globals/quests")
 -----------------------------------
 local entity = {}

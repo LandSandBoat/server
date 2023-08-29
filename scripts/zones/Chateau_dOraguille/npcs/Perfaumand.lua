@@ -4,7 +4,6 @@
 -- Involved in Quest: Lure of the Wildcat (San d'Oria)
 -- !pos -39 -3 69 233
 -----------------------------------
-require("scripts/globals/keyitems")
 require("scripts/globals/missions")
 require("scripts/globals/quests")
 require("scripts/globals/utils")

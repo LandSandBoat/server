@@ -76,7 +76,6 @@ INSERT INTO `fishing_catch` VALUES (65,2,40);
 INSERT INTO `fishing_catch` VALUES (68,1,127);
 INSERT INTO `fishing_catch` VALUES (79,1,132);
 INSERT INTO `fishing_catch` VALUES (100,1,17);
-INSERT INTO `fishing_catch` VALUES (100,1,140); -- Goldfish (Sunbreeze Festival)
 INSERT INTO `fishing_catch` VALUES (101,1,16);
 INSERT INTO `fishing_catch` VALUES (102,1,23);
 INSERT INTO `fishing_catch` VALUES (103,1,26);
@@ -90,7 +89,6 @@ INSERT INTO `fishing_catch` VALUES (105,2,27);
 INSERT INTO `fishing_catch` VALUES (106,1,43);
 INSERT INTO `fishing_catch` VALUES (106,2,44);
 INSERT INTO `fishing_catch` VALUES (107,1,46);
-INSERT INTO `fishing_catch` VALUES (107,1,140); -- Goldfish (Sunbreeze Festival)
 INSERT INTO `fishing_catch` VALUES (107,2,47);
 INSERT INTO `fishing_catch` VALUES (109,1,50);
 INSERT INTO `fishing_catch` VALUES (110,1,51);
@@ -105,13 +103,9 @@ INSERT INTO `fishing_catch` VALUES (115,1,59);
 INSERT INTO `fishing_catch` VALUES (115,2,60);
 INSERT INTO `fishing_catch` VALUES (116,1,2);
 INSERT INTO `fishing_catch` VALUES (116,2,3);
-INSERT INTO `fishing_catch` VALUES (116,2,140); -- Goldfish (Sunbreeze Festival)
 INSERT INTO `fishing_catch` VALUES (116,3,3);
-INSERT INTO `fishing_catch` VALUES (116,3,140); -- Goldfish (Sunbreeze Festival)
 INSERT INTO `fishing_catch` VALUES (116,4,3);
-INSERT INTO `fishing_catch` VALUES (116,4,140); -- Goldfish (Sunbreeze Festival)
 INSERT INTO `fishing_catch` VALUES (116,5,1);
-INSERT INTO `fishing_catch` VALUES (116,5,140); -- Goldfish (Sunbreeze Festival)
 INSERT INTO `fishing_catch` VALUES (118,1,66);
 INSERT INTO `fishing_catch` VALUES (120,1,73);
 INSERT INTO `fishing_catch` VALUES (121,1,86);
@@ -190,26 +184,19 @@ INSERT INTO `fishing_catch` VALUES (221,1,136);
 INSERT INTO `fishing_catch` VALUES (227,1,137);
 INSERT INTO `fishing_catch` VALUES (228,1,137);
 INSERT INTO `fishing_catch` VALUES (231,1,9);
-INSERT INTO `fishing_catch` VALUES (231,1,140); -- Goldfish (Sunbreeze Festival)
 INSERT INTO `fishing_catch` VALUES (232,1,10);
 INSERT INTO `fishing_catch` VALUES (234,1,8);
-INSERT INTO `fishing_catch` VALUES (234,1,140); -- Goldfish (Sunbreeze Festival)
 INSERT INTO `fishing_catch` VALUES (235,1,5);
-INSERT INTO `fishing_catch` VALUES (235,1,140); -- Goldfish (Sunbreeze Festival)
 INSERT INTO `fishing_catch` VALUES (235,2,6);
 INSERT INTO `fishing_catch` VALUES (236,1,7);
 INSERT INTO `fishing_catch` VALUES (238,1,11);
-INSERT INTO `fishing_catch` VALUES (238,1,140); -- Goldfish (Sunbreeze Festival)
 INSERT INTO `fishing_catch` VALUES (239,1,11);
-INSERT INTO `fishing_catch` VALUES (239,1,140); -- Goldfish (Sunbreeze Festival)
 INSERT INTO `fishing_catch` VALUES (240,1,4);
 INSERT INTO `fishing_catch` VALUES (241,1,11);
-INSERT INTO `fishing_catch` VALUES (241,1,140); -- Goldfish (Sunbreeze Festival)
 INSERT INTO `fishing_catch` VALUES (242,1,12);
 INSERT INTO `fishing_catch` VALUES (245,1,13);
 INSERT INTO `fishing_catch` VALUES (246,1,14);
 INSERT INTO `fishing_catch` VALUES (247,1,89);
-INSERT INTO `fishing_catch` VALUES (247,1,140); -- Goldfish (Sunbreeze Festival)
 INSERT INTO `fishing_catch` VALUES (248,1,25);
 INSERT INTO `fishing_catch` VALUES (249,1,71);
 INSERT INTO `fishing_catch` VALUES (250,1,94);

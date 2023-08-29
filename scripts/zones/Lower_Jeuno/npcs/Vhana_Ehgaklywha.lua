@@ -7,7 +7,6 @@
 local lowerJeunoGlobal = require("scripts/zones/Lower_Jeuno/globals")
 local ID = require("scripts/zones/Lower_Jeuno/IDs")
 require("scripts/globals/pathfind")
-require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 

@@ -2,7 +2,6 @@
 -- Area: Sacrarium
 --   NM: Keremet
 -----------------------------------
-require("scripts/globals/keyitems")
 require("scripts/globals/missions")
 -----------------------------------
 local entity = {}

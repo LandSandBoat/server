@@ -12,8 +12,6 @@
 -- Store TP +6
 -- Sleep resistance +8
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

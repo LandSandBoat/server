@@ -4,10 +4,8 @@
 -- Log ID: 1, Quest ID: 84
 -- Alib-Mufalib : !pos 116.08 7.372 -31.82 236
 -----------------------------------
-require('scripts/globals/items')
 require('scripts/globals/quests')
 require('scripts/globals/npc_util')
-require('scripts/globals/settings')
 require('scripts/globals/utils')
 require('scripts/globals/zone')
 require('scripts/globals/interaction/quest')

@@ -4,7 +4,6 @@
 -- !addquest 2 29
 -- Mashuu-Ajuu 130 -5 167
 -----------------------------------
-require('scripts/globals/items')
 require('scripts/globals/quests')
 require('scripts/globals/interaction/quest')
 -----------------------------------

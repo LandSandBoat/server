@@ -5,7 +5,6 @@
 -- Involved in Quests: Beat Around the Bushin
 -- !pos -175 2 -135 235
 -----------------------------------
-require("scripts/globals/items")
 require("scripts/globals/npc_util")
 require("scripts/globals/quests")
 -----------------------------------

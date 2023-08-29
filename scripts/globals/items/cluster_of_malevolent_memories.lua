@@ -3,8 +3,6 @@
 -- Cluster of Malevolent Memories
 -- Turn into a stack of malevolent memories
 -----------------------------------------
-require("scripts/globals/msg")
------------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

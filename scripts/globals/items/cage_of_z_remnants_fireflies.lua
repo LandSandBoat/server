@@ -3,8 +3,6 @@
 -- Z. Rem. Fireflies
 -- Transports the user out of Zhayolm Remnants
 -----------------------------------
-require("scripts/globals/items")
-require("scripts/globals/msg")
 require("scripts/globals/teleports")
 require("scripts/globals/zone")
 -----------------------------------

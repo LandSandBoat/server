@@ -3,8 +3,6 @@
 -- Item: Anemohelix Schema
 -- Teaches the black magic Anemohelix
 -----------------------------------
-require("scripts/globals/spell_data")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

@@ -4,7 +4,6 @@
 -- Log ID: 3, Quest ID: 43
 -- Zona Shodhun : !pos -175 -5 -4 246
 -----------------------------------
-require('scripts/globals/items')
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
 require('scripts/globals/zone')

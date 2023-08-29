@@ -1,8 +1,6 @@
 -----------------------------------
 -- Allow custom rate of exp scrolls.
 -----------------------------------
-require("scripts/globals/status")
------------------------------------
 local m = Module:new("custom_scroll_exp_rate")
 
 -- Only apply overrides if the config is present and meaningful

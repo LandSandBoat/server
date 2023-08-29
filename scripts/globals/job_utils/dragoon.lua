@@ -2,9 +2,7 @@
 -- Dragoon Job Utilities
 -----------------------------------
 require("scripts/globals/ability")
-require("scripts/globals/items")
 require("scripts/globals/jobpoints")
-require("scripts/globals/msg")
 require("scripts/globals/spells/damage_spell")
 require("scripts/globals/weaponskills")
 -----------------------------------
@@ -301,7 +299,9 @@ local function checkForRemovableEffectsOnSpiritLink(player, wyvern)
     wyvern:delStatusEffect(xi.effect.DOOM)
 
     -- If you can use Spirit Link at all, sleep is removed. Empathy merits control use at 100% HP.
-    removeSleepEffects(wyvern)
+    wyvern:delStatusEffect(xi.effect.SLEEP_I)
+    wyvern:delStatusEffect(xi.effect.SLEEP_II)
+    wyvern:delStatusEffect(xi.effect.LULLABY)
 
     if player:getMod(xi.mod.ENHANCES_SPIRIT_LINK) > 0 then
         -- https://www.ffxiah.com/forum/topic/44396/sigurds-descendants-the-art-of-dragon-slaying/108/#3646600
@@ -763,31 +763,35 @@ xi.job_utils.dragoon.pickAndUseDamageBreath = function(player, target)
 
     local resistances =
     {
-        target:getMod(xi.mod.FIRE_MEVA),
-        target:getMod(xi.mod.ICE_MEVA),
-        target:getMod(xi.mod.WIND_MEVA),
-        target:getMod(xi.mod.EARTH_MEVA),
-        target:getMod(xi.mod.THUNDER_MEVA),
-        target:getMod(xi.mod.WATER_MEVA),
+        target:getMod(xi.mod.FIRE_EEM),
+        target:getMod(xi.mod.ICE_EEM),
+        target:getMod(xi.mod.WIND_EEM),
+        target:getMod(xi.mod.EARTH_EEM),
+        target:getMod(xi.mod.THUNDER_EEM),
+        target:getMod(xi.mod.WATER_EEM),
     }
 
-    local lowest = resistances[1]
+    local highestEEM = resistances[1]
     local breath = breathList[math.random(#breathList)]
-    local head = player:getEquippedItem(xi.slot.HEAD)
+    local headEquip = player:getEquippedItem(xi.slot.HEAD)
+    local headEquipID = 0
+    if headEquip then
+        headEquipID = headEquip:getID()
+    end
 
     -- https://ffxiclopedia.fandom.com/wiki/Drachen_Armet?oldid=965925
     -- https://ffxiclopedia.fandom.com/wiki/Elemental_Breath?oldid=738854
-    -- The wyvern picks breath based on the lowest resistance if the player has Drachen Armet equipped.
+    -- The wyvern picks breath based on the highest eem (lowest resistance) if the player has Drachen Armet equipped.
     -- If all resistances are equal, a random breath is used.
     -- However there innately exists a chance where wyvern use breath based on weakness.
     if
-        head == xi.items.DRACHEN_ARMET or
-        head == xi.items.DRACHEN_ARMET_P1 or
+        headEquipID == xi.items.DRACHEN_ARMET or
+        headEquipID == xi.items.DRACHEN_ARMET_P1 or
         math.random() < 0.5
     then
         for i, v in ipairs(breathList) do
-            if resistances[i] < lowest then
-                lowest = resistances[i]
+            if resistances[i] > highestEEM then
+                highestEEM = resistances[i]
                 breath = v
             end
         end

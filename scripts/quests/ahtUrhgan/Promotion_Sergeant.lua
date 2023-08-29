@@ -5,7 +5,6 @@
 -- Totoroon: !pos -11.8 0 -26 53
 -- qm11: !pos 196 0.8 -617 79
 -----------------------------------
-require('scripts/globals/items')
 require('scripts/globals/quests')
 require('scripts/globals/npc_util')
 require('scripts/globals/interaction/quest')

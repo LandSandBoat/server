@@ -5,8 +5,6 @@
 -- !pos 23.703 -1 -86.034 234
 -----------------------------------
 local ID = require("scripts/zones/Bastok_Mines/IDs")
-require("scripts/globals/settings")
-require("scripts/globals/status")
 require("scripts/globals/utils")
 require("scripts/globals/npc_util")
 require("scripts/globals/teleports")

@@ -4,7 +4,6 @@
 -- !pos 113.563 -16.302 38.912 25
 -----------------------------------
 local ID = require("scripts/zones/Misareaux_Coast/IDs")
-require("scripts/globals/items")
 require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}

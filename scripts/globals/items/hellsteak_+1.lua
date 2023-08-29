@@ -12,8 +12,6 @@
 -- Ranged ATT % 20 (cap 150)
 -- Dragon Killer 5
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

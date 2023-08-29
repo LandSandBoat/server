@@ -2,8 +2,6 @@
 -- ID: 19007
 -- Item: Death Penalty
 -----------------------------------
-require("scripts/globals/items")
-require("scripts/globals/msg")
 require("scripts/globals/npc_util")
 -----------------------------------
 local itemObject = {}

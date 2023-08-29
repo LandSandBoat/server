@@ -4,7 +4,6 @@
 -- Ally during Bastok Mission 9-2
 -----------------------------------
 local ID = require("scripts/zones/Throne_Room/IDs")
-require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 

@@ -111,7 +111,7 @@ void CTreasurePool::DelMember(CCharEntity* PChar)
         return;
     }
 
-    // if(m_TreasurePoolType != TREASUREPOOL_ZONE){
+    // if(m_TreasurePoolType != TREASUREPOOL_ZONE)
     // Zone drops e.g. Dynamis DO NOT remove previous lot info. Everything else does.
     // ^ TODO: verify what happens when a winner leaves zone
     for (int i = 0; i < 10; i++)
@@ -132,7 +132,6 @@ void CTreasurePool::DelMember(CCharEntity* PChar)
             }
         }
     }
-    //}
 
     auto memberToDelete = std::find(members.begin(), members.end(), PChar);
     if (memberToDelete != members.end())

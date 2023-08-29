@@ -3,7 +3,6 @@
 --  NPC: The Afflictor
 -- !zone 147
 -----------------------------------
-require("scripts/globals/settings")
 require("scripts/globals/quests")
 -----------------------------------
 local entity = {}

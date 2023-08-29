@@ -4,7 +4,6 @@
 -- Type: Guildworker's Union Representative
 -- !pos -191.738 11.001 138.656 231
 -----------------------------------
-require("scripts/globals/keyitems")
 require("scripts/globals/crafting")
 local ID = require("scripts/zones/Northern_San_dOria/IDs")
 -----------------------------------

@@ -3,9 +3,6 @@
 -- Dragon Tank
 -- Dispense: Flask of Dragon Fruit au Lait
 -----------------------------------
-require("scripts/globals/items")
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

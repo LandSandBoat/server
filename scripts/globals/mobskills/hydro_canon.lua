@@ -4,8 +4,6 @@
 --  Type: Magical
 --  additional effect : 40hp/tick Poison
 -----------------------------------
-require("scripts/globals/settings")
-require("scripts/globals/status")
 require("scripts/globals/mobskills")
 
 -----------------------------------

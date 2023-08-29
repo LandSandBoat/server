@@ -4,7 +4,6 @@
 -- Log ID: 0, Quest ID: 77
 -- Legata : !pos 82 0 116 230
 -----------------------------------
-require('scripts/globals/items')
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
 require('scripts/globals/zone')

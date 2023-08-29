@@ -3,8 +3,6 @@
 -- Air Spirit Pact
 -- Teaches the summoning magic Air Spirit
 -----------------------------------
-require("scripts/globals/spell_data")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

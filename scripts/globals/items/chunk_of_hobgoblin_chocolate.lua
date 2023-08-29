@@ -7,8 +7,6 @@
 -- Lizard Killer 12
 -- Petrify Resist 12
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

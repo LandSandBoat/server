@@ -3,8 +3,6 @@
 -- desc: Deletes the given key item from the player.
 -----------------------------------
 
-require("scripts/globals/keyitems")
-
 cmdprops =
 {
     permission = 1,

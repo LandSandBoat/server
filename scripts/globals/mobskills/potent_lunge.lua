@@ -7,8 +7,6 @@
 --  Range: Melee
 --  Notes: Requires Weapon
 -----------------------------------
-require("scripts/globals/settings")
-require("scripts/globals/status")
 require("scripts/globals/mobskills")
 -----------------------------------
 local mobskillObject = {}

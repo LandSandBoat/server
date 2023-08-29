@@ -4,8 +4,6 @@
 --       Can use either of number or the variable string from keyitems.lua
 -----------------------------------
 
-require("scripts/globals/keyitems")
-
 cmdprops =
 {
     permission = 1,

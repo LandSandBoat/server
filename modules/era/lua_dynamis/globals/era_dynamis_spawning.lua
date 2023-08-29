@@ -5,14 +5,11 @@
 --       Module Required Scripts          --
 --------------------------------------------
 require("scripts/globals/battlefield")
-require("scripts/globals/keyitems")
 require("scripts/globals/missions")
 require("scripts/globals/npc_util")
-require("scripts/globals/status")
 require("scripts/globals/titles")
 require("scripts/globals/utils")
 require("scripts/globals/zone")
-require("scripts/globals/msg")
 require("scripts/globals/pathfind")
 require("scripts/globals/dynamis")
 require("modules/module_utils")
@@ -604,7 +601,7 @@ xi.dynamis.nonStandardDynamicSpawn = function(mobIndex, oMob, forceLink, zoneID,
             ["onMobSpawn"] = { function(mob) xi.dynamis.setNightmareStats(mob) end },
             ["onMobEngaged"] = { function(mob, target) end },
             ["onMobFight"] = { function(mob) end },
-            ["onMobRoam"] = { function(mob) xi.dynamis.mobOnRoam(mob) end },
+            ["onMobRoam"] = { function(mob) end },
             ["mixins"] = {  }
         },
         ["Beastmen"] =
@@ -729,7 +726,19 @@ xi.dynamis.nmDynamicSpawn = function(mobIndex, oMobIndex, forceLink, zoneID, tar
         return
     end
     local mobName = xi.dynamis.mobList[zoneID][mobIndex].info[2]
-    if xi.dynamis.mobList[zoneID][mobIndex].pos then
+
+    -- special spawning of DL clones near victems
+    if
+        mobIndex == 179 and
+        oMobIndex == 179 and
+        zoneID == xi.zone.DYNAMIS_XARCABARD and
+        target
+    then
+        xPos = target:getXPos()+math.random()*6-3
+        yPos = target:getYPos()-0.3
+        zPos = target:getZPos()+math.random()*6-3
+        rPos = target:getRotPos()
+    elseif xi.dynamis.mobList[zoneID][mobIndex].pos then
         xPos = xi.dynamis.mobList[zoneID][mobIndex].pos[1]
         yPos = xi.dynamis.mobList[zoneID][mobIndex].pos[2]
         zPos = xi.dynamis.mobList[zoneID][mobIndex].pos[3]
@@ -740,6 +749,7 @@ xi.dynamis.nmDynamicSpawn = function(mobIndex, oMobIndex, forceLink, zoneID, tar
         zPos = oMob:getZPos()+math.random()*6-3
         rPos = oMob:getRotPos()
     end
+
     xi.dynamis.nmInfoLookup =
     {
         -- 1 - name
@@ -978,16 +988,16 @@ xi.dynamis.nmDynamicSpawn = function(mobIndex, oMobIndex, forceLink, zoneID, tar
         ["Dynamis Effigy"] = { "D. Effigy" , 200, 134, 20, 0, 94, "Enabled Auto Attack" }, -- Dynamis Effigy (DynE)
         ["Dynamis Icon"] = { "D. Icon" , 198, 134, 195, 5000, 95, "Enabled Auto Attack" }, -- Dynamis Icon (DynI)
         -- Dynamis - Buburimu Non-Beastmen (Done)
-        ["Aitvaras"] = { "Aitvaras", 105, 40, 230, 0, 5008, "Buburimu Dwagon" }, -- Aitv
-        ["Alklha"] = { "Alklha", 105, 40, 230, 0, 5006, "Buburimu Dwagon" }, -- Alkl
-        ["Barong"] = { "Barong", 105, 40, 230, 0, 5004, "Buburimu Dwagon" }, -- Baro
-        ["Basilic"] = { "Basilic", 105, 40, 230, 0, 5007, "Buburimu Dwagon" }, -- Basi
-        ["Jurik"] = { "Jurik", 105, 40, 230, 0, 5003, "Buburimu Dwagon" }, -- Juri
-        ["Koschei"] = { "Koschei", 105, 40, 230, 0, 5009, "Buburimu Dwagon" }, -- Kosc
-        ["Stihi"] = { "Stihi", 105, 40, 230, 0, 5001, "Buburimu Dwagon" }, -- Stih
-        ["Stollenwurm"] = { "Stollenwurm", 105, 40, 230, 0, 5010, "Buburimu Dwagon" }, -- Stol
-        ["Tarasca"] = { "Tarasca", 105, 40, 230, 0, 5005, "Buburimu Dwagon" }, -- Tara
-        ["Vishap"] = { "Vishap", 105, 40, 230, 0, 5002, "Buburimu Dwagon" }, -- Vish
+        ["Aitvaras"] = { "Aitvaras", 105, 40, 230, 0, 5008, "Buburimu Dragon" }, -- Aitv
+        ["Alklha"] = { "Alklha", 105, 40, 230, 0, 5006, "Buburimu Dragon" }, -- Alkl
+        ["Barong"] = { "Barong", 105, 40, 230, 0, 5004, "Buburimu Dragon" }, -- Baro
+        ["Basilic"] = { "Basilic", 105, 40, 230, 0, 5007, "Buburimu Dragon" }, -- Basi
+        ["Jurik"] = { "Jurik", 105, 40, 230, 0, 5003, "Buburimu Dragon" }, -- Juri
+        ["Koschei"] = { "Koschei", 105, 40, 230, 0, 5009, "Buburimu Dragon" }, -- Kosc
+        ["Stihi"] = { "Stihi", 105, 40, 230, 0, 5001, "Buburimu Dragon" }, -- Stih
+        ["Stollenwurm"] = { "Stollenwurm", 105, 40, 230, 0, 5010, "Buburimu Dragon" }, -- Stol
+        ["Tarasca"] = { "Tarasca", 105, 40, 230, 0, 5005, "Buburimu Dragon" }, -- Tara
+        ["Vishap"] = { "Vishap", 105, 40, 230, 0, 5002, "Buburimu Dragon" }, -- Vish
         ["Apocalyptic Beast"] = { "Apoc. Beast", 1, 40, 146, 0, 0, "Apocalyptic Beast" }, -- Apoc
         -- Dynamis - Valkurm (Done)
         ["Dragontrap_1"] = { "Dragontrap", 63, 77, 2910, 0, 114, "No Auto Attack" }, -- Drat
@@ -1261,12 +1271,12 @@ xi.dynamis.nmDynamicSpawn = function(mobIndex, oMobIndex, forceLink, zoneID, tar
             ["onMobDeath"] = { function(mob) end },
             ["mixins"] = {   },
         },
-        ["Buburimu Dwagon"] =
+        ["Buburimu Dragon"] =
         {
             ["onMobSpawn"] = { function(mob) xi.dynamis.onSpawnNoAuto(mob) end },
             ["onMobEngaged"] = { function(mob, target) end },
-            ["onMobFight"] = { function(mob, target) xi.dynamis.onFightDwagon(mob, target) end },
-            ["onMobRoam"] = { function(mob) xi.dynamis.onRoamDwagon(mob) end },
+            ["onMobFight"] = { function(mob, target) xi.dynamis.onFightDragon(mob, target) end },
+            ["onMobRoam"] = { function(mob) xi.dynamis.onRoamDragon(mob) end },
             ["onMobMagicPrepare"] = { function(mob, target, spellId) end },
             ["onMobWeaponSkillPrepare"] = { function(mob) end },
             ["onMobWeaponSkill"] = { function(mob) end },
@@ -1559,7 +1569,7 @@ xi.dynamis.spawnDynamicPet =function(target, oMob, mobJob)
                     ["Maa Zaua the Wyrmkeeper"] = { "V. Wyvern", 27, 134, 0, 0, 714 }, -- Normal Vanguard's Wyvern (Vwyv)
                 },
             },
-            [87] = -- Dwagon Family
+            [87] = -- Dragon Family
             {
                 [false] = { "V. Wyvern", 27, 134, 0, 0, 714 },
                 [true] =
@@ -1626,9 +1636,9 @@ xi.dynamis.spawnDynamicPet =function(target, oMob, mobJob)
                     ["Haa Pevi the Stentorian"] = { "V. Avatar" , 36, 134, 0, 0, 34 }, -- Vanguard's Avatar (VAva)
                 },
             },
-            [87] = -- Dwagon Family
+            [87] = -- Dragon Family
             {
-                [true] = -- Dwagon NM
+                [true] = -- Dragon NM
                 {
                     ["Apocalyptic Beast"] = { "Dragon's Avatar", 36, 134, 0, 0, 34 }, -- Dragon's Avatar (Dava)
                 },

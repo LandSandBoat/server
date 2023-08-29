@@ -6,7 +6,6 @@
 -- Starts and Finishes: Breaking Stones, An Empty Vessel
 -- only spawns if the weather is SUNNY or CLEAR
 -----------------------------------
-require('scripts/globals/items')
 require('scripts/globals/npc_util')
 -----------------------------------
 local entity = {}

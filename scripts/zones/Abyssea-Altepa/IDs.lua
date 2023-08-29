@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Abyssea-Altepa
 -----------------------------------
-require('scripts/globals/keyitems')
 require('scripts/globals/zone')
 -----------------------------------
 

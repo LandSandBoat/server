@@ -3,8 +3,6 @@
 -- Dvucca Fireflies
 -- Transports the user to Dvucca Isle Staging Point
 -----------------------------------
-require("scripts/globals/items")
-require("scripts/globals/msg")
 require("scripts/globals/teleports")
 require("scripts/globals/zone")
 -----------------------------------

@@ -3,9 +3,6 @@
 -- Lin. Purse (Alx.)
 -- Breaks up a Linen Purse
 -----------------------------------
-require("scripts/globals/msg")
-require("scripts/globals/items")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

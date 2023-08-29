@@ -3,10 +3,8 @@
 -----------------------------------
 -- Log ID: 4, Quest ID: 80
 -----------------------------------
-require('scripts/globals/items')
 require('scripts/globals/moghouse')
 require('scripts/globals/quests')
-require('scripts/globals/status')
 require('scripts/globals/zone')
 require('scripts/globals/interaction/quest')
 -----------------------------------

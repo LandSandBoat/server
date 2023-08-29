@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Abyssea-La_Theine
 -----------------------------------
-require("scripts/globals/keyitems")
 require("scripts/globals/zone")
 -----------------------------------
 

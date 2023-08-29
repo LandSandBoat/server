@@ -11,10 +11,8 @@
 -- Naji    : !pos 64 -14 -4 237
 -- Ayame   : !pos 133 -19 34 237
 -----------------------------------
-require('scripts/globals/items')
 require('scripts/globals/missions')
 require('scripts/globals/npc_util')
-require('scripts/globals/settings')
 require('scripts/globals/interaction/mission')
 require('scripts/globals/zone')
 -----------------------------------

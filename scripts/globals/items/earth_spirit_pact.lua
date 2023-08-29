@@ -3,8 +3,6 @@
 -- Earth Spirit Pact
 -- Teaches the summoning magic Earth Spirit
 -----------------------------------
-require("scripts/globals/spell_data")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

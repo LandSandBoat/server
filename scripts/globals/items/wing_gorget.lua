@@ -3,8 +3,6 @@
 -- Item: wing gorget
 -- Item Effect: gives regain
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

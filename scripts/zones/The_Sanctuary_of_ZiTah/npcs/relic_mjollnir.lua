@@ -4,7 +4,6 @@
 -- !pos -18 0 55 121
 -----------------------------------
 local ID = require("scripts/zones/The_Sanctuary_of_ZiTah/IDs")
-require("scripts/globals/items")
 require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}

@@ -9,8 +9,6 @@
 -- Ranged Attack % 20 (cap 65)
 -- Evasion +6
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

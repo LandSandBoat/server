@@ -16,11 +16,8 @@
 -- qm2 (???)      : !pos -232.924 99.107 442.990 106
 -----------------------------------
 require('scripts/globals/interaction/quest')
-require('scripts/globals/items')
-require('scripts/globals/keyitems')
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
-require('scripts/globals/status')
 require('scripts/globals/zone')
 -----------------------------------
 local dangrufID        = require("scripts/zones/Dangruf_Wadi/IDs")

@@ -11,7 +11,6 @@ require('scripts/globals/interaction/quest')
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
 require('scripts/globals/titles')
-require('scripts/globals/items')
 -----------------------------------
 local phanauetID = require('scripts/zones/Phanauet_Channel/IDs')
 local davoiID = require('scripts/zones/Davoi/IDs')

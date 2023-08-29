@@ -3,7 +3,6 @@
 -- Recall ring: Pashhow
 -- Enchantment: "Recall-Pashhow"
 -----------------------------------
-require("scripts/globals/keyitems")
 require("scripts/globals/teleports")
 -----------------------------------
 local itemObject = {}

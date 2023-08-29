@@ -1,7 +1,6 @@
 -----------------------------------
 --  Mob: Pruina
 -----------------------------------
-require("scripts/globals/keyitems")
 require("scripts/globals/voidwalker")
 -----------------------------------
 

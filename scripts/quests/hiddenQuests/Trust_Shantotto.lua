@@ -6,7 +6,6 @@
 require('scripts/globals/magic')
 require('scripts/globals/trust')
 require('scripts/globals/quests')
-require('scripts/globals/keyitems')
 require('scripts/globals/missions')
 require('scripts/globals/interaction/hidden_quest')
 -----------------------------------

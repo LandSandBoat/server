@@ -1,11 +1,9 @@
 -----------------------------------
 -- BCNM Functions
 -----------------------------------
-require("scripts/globals/keyitems")
 require("scripts/globals/missions")
 require("scripts/globals/quests")
 require("scripts/globals/zone")
-require("scripts/globals/msg")
 require("scripts/globals/npc_util")
 -----------------------------------
 xi = xi or {}
@@ -1131,7 +1129,9 @@ local function checkReqs(player, npc, bfid, registrant)
         end,
 
         [1154] = function() -- Quest: The Beast Within (BLU LB5)
-            return mainJob == xi.job.BLU and mainLevel >= 66
+            return mainJob == xi.job.BLU and mainLevel >= 66 and
+            xi.quest.getVar(player, xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.THE_BEAST_WITHIN, 'Prog') == 3 or
+            player:getQuestStatus(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.THE_BEAST_WITHIN) == QUEST_COMPLETED
         end,
 
         [1156] = function() -- TOAU29: Puppet in Peril

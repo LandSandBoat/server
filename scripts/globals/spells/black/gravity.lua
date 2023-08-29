@@ -2,8 +2,6 @@
 -- Spell: Gravity
 -----------------------------------
 require("scripts/globals/magic")
-require("scripts/globals/msg")
-require("scripts/globals/status")
 -----------------------------------
 local spellObject = {}
 
@@ -48,6 +46,8 @@ spellObject.onSpellCast = function(caster, target, spell)
         resduration = xi.magic.calculateBuildDuration(target, resduration, params.effect, caster)
         if target:addStatusEffect(params.effect, power, 0, resduration) then
             spell:setMsg(xi.msg.basic.MAGIC_ENFEEB_IS)
+            -- only increment the resbuild if successful (not on a no effect)
+            xi.magic.incrementBuildDuration(target, params.effect, caster)
             xi.magic.handleBurstMsg(caster, target, spell)
         else
             spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)

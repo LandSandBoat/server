@@ -3,8 +3,6 @@
 -- Boneyard Gully Quest Battlefield, KI: Letter from Shikaree Y / Letter from Mithran Trackers
 -- !addkeyitem LETTER_FROM_SHIKAREE_Y / LETTER_FROM_MITHRAN_TRACKERS
 -----------------------------------
-require('scripts/globals/items')
-require('scripts/globals/keyitems')
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
 require('scripts/globals/titles')

@@ -5,8 +5,6 @@
 -- !pos -208 -9 176 173
 -----------------------------------
 local ID = require("scripts/zones/Korroloka_Tunnel/IDs")
-require("scripts/globals/keyitems")
-require("scripts/globals/settings")
 require("scripts/globals/quests")
 -----------------------------------
 local entity = {}

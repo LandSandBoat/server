@@ -11,10 +11,7 @@
 --  Checks should be based off what positive effects a mob can have on themselves
 --  and work around those effects.
 -----------------------------------
-require("scripts/globals/settings")
-require("scripts/globals/status")
 require("scripts/globals/mobskills")
-require("scripts/globals/msg")
 -----------------------------------
 local badEffects =
 {
@@ -214,6 +211,7 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
                         end
                     end
                 end
+
                 for y = 1, #goodEffects do
                     if target:hasStatusEffect(goodEffects[y]) then
                         mob:addStatusEffect(goodEffects[y], power, 3, 60)
@@ -223,11 +221,13 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
                 end
             end
         end
+
         if count > 0 then
             skill:setMsg(xi.msg.basic.EFFECT_DRAINED)
         else
             skill:setMsg(xi.msg.basic.SKILL_NO_EFFECT)
         end
+
         return count
     else
         for _, v in pairs (effects) do
@@ -243,7 +243,6 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
             end
         end
     end
-
 end
 
 return mobskillObject

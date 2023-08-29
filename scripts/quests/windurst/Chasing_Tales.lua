@@ -9,7 +9,6 @@
 -- TODO: This quest could be simplified with expanded use of Prog questVar.
 -----------------------------------
 require('scripts/globals/interaction/quest')
-require('scripts/globals/keyitems')
 require('scripts/globals/missions')
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')

@@ -4,7 +4,6 @@
 -- !pos -99 -0 -514 2
 -----------------------------------
 local ID = require("scripts/zones/Carpenters_Landing/IDs")
-require("scripts/globals/items")
 require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}

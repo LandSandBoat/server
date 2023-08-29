@@ -1,8 +1,7 @@
 -----------------------------------
 -- Abyssea Global
 -----------------------------------
-require("scripts/globals/spell_data")
-require("scripts/globals/keyitems")
+require("scripts/globals/npc_util")
 require("scripts/globals/quests")
 require("scripts/globals/utils")
 require("scripts/globals/weaponskillids")
@@ -508,7 +507,7 @@ local blueWeakness =
         xi.weaponskill.BLAST_SHOT,
         xi.weaponskill.HEAVY_SHOT,
         xi.weaponskill.DETONATOR,
-        xi.weaponskill.SHADOWSTICH,
+        xi.weaponskill.SHADOWSTITCH,
         xi.weaponskill.DANCING_EDGE,
         xi.weaponskill.SHARK_BITE,
         xi.weaponskill.EVISCERATION,

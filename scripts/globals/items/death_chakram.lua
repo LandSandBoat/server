@@ -3,8 +3,6 @@
 -- Item Effect: +5% MP
 -- Duration 3 Minutes
 -----------------------------------
-require("scripts/globals/status")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

@@ -5,7 +5,6 @@
 -- Agapito : !pos -72.093 -3.097 9.309 236
 -- qm1     : !pos -9 -5 -13 223
 -----------------------------------
-require('scripts/globals/keyitems')
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
 require('scripts/globals/titles')

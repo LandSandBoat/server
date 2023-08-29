@@ -18759,7 +18759,6 @@ INSERT INTO `mob_droplist` VALUES (2393,0,0,1000,995,@UNCOMMON); -- Ten Of Sword
 -- ZoneID:  28 - Teratotaur
 INSERT INTO `mob_droplist` VALUES (2394,0,0,1000,1620,@UNCOMMON); -- Taurus Horn (Uncommon, 10%)
 INSERT INTO `mob_droplist` VALUES (2394,0,0,1000,1877,@UNCOMMON); -- Fomor Codex (Uncommon, 10%)
-INSERT INTO `mob_droplist` VALUES (2394,2,0,1000,886,0);          -- Demon Skull (Steal)
 INSERT INTO `mob_droplist` VALUES (2394,4,0,1000,902,0);          -- Demon Horn (Despoil)
 
 -- ZoneID: 215 - Terminus Eft

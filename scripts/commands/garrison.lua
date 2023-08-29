@@ -6,7 +6,6 @@
 -- !garrison win (player) win the garrison (if any) currently running in the player's zone
 ---------------------------------------------------------------------------------------------------
 
-require("scripts/globals/status")
 require("scripts/globals/common")
 
 cmdprops =
@@ -50,10 +49,12 @@ function onTrigger(player, command, target)
             xi.garrison.start(targ, targ)
             targ:PrintToPlayer(string.format("%s garrison started", zone:getName()))
         end,
+
         ["stop"] = function()
             xi.garrison.stop(targ:getZone())
             targ:PrintToPlayer(string.format("%s garrison stopped", zone:getName()))
         end,
+
         ["win"] = function()
             xi.garrison.win(targ:getZone())
         end,

@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Dynamis-Beaucedine
 -----------------------------------
-require("scripts/globals/keyitems")
 require("scripts/globals/dynamis")
 require("scripts/globals/zone")
 -----------------------------------

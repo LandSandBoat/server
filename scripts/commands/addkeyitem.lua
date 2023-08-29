@@ -3,8 +3,6 @@
 -- desc: Adds a key item to the player.
 -----------------------------------
 
-require("scripts/globals/keyitems")
-
 cmdprops =
 {
     permission = 1,

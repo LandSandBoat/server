@@ -2,8 +2,6 @@
 -- func: gettraits
 -- desc: prints list of all traits
 ---------------------------------------------------------------------------------------------------
-require("scripts/globals/status")
-require("scripts/globals/msg")
 
 cmdprops =
 {
@@ -156,5 +154,4 @@ function onTrigger(player)
     else
         player:PrintToPlayer("No active traits found!")
     end
-
 end

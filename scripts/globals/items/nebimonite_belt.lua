@@ -3,9 +3,6 @@
 -- nebimonite_belt
 -- Dispense: Nebimonite
 -----------------------------------
-require("scripts/globals/msg")
-require("scripts/globals/items")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

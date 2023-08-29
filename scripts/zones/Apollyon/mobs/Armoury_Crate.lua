@@ -2,8 +2,7 @@
 -- Area: Apollyon SW, Floor 3
 --  Mob: Armoury Crate
 -----------------------------------
--- require("scripts/globals/status")
------------------------------------
+-- -----------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)

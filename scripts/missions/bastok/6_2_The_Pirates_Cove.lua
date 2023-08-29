@@ -11,10 +11,8 @@
 -- qm4        : !pos 171 0 -25 205
 -- Gilgamesh  : !pos 122.452 -9.009 -12.052 252
 -----------------------------------
-require('scripts/globals/items')
 require('scripts/globals/missions')
 require('scripts/globals/npc_util')
-require('scripts/globals/settings')
 require('scripts/globals/interaction/mission')
 require('scripts/globals/zone')
 -----------------------------------

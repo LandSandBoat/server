@@ -5,7 +5,6 @@
 -- Notes: Spawns Vegnix Greenthumb for ACP mission "Gatherer of Light (I)"
 -----------------------------------
 local ID = require("scripts/zones/Batallia_Downs/IDs")
-require("scripts/globals/keyitems")
 -----------------------------------
 local entity = {}
 

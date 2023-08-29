@@ -4,7 +4,6 @@
 -- ENM: Pulling the Strings
 -----------------------------------
 local ID = require("scripts/zones/Mine_Shaft_2716/IDs")
-require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 
