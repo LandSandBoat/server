@@ -6,12 +6,12 @@
 cmdprops =
 {
     permission = 1,
-    parameters = "sis"
+    parameters = 'sis'
 }
 
 function error(player, msg)
     player:PrintToPlayer(msg)
-    player:PrintToPlayer("!addcurrency <currency type> <amount> (player)")
+    player:PrintToPlayer('!addcurrency <currency type> <amount> (player)')
 end
 
 function onTrigger(player, currency, amount, target)
@@ -22,7 +22,7 @@ function onTrigger(player, currency, amount, target)
     else
         targ = GetPlayerByName(target)
         if targ == nil then
-            error(player, string.format("Player named '%s' not found!", target))
+            error(player, string.format('Player named "%s" not found!', target))
             return
         end
     end
@@ -30,18 +30,18 @@ function onTrigger(player, currency, amount, target)
     -- validate currency
     -- note: getCurrency does not ever return nil at the moment.  will work on this in future update.
     if currency == nil or targ:getCurrency(currency) == nil then
-        error(player, "Invalid currency type.")
+        error(player, 'Invalid currency type.')
         return
     end
 
     -- validate amount
     if amount == nil or amount < 1 then
-        error(player, "Invalid amount.")
+        error(player, 'Invalid amount.')
         return
     end
 
     -- add currency
     targ:addCurrency(currency, amount)
     local newAmount = targ:getCurrency(currency)
-    player:PrintToPlayer(string.format("%s was given %i %s, for a total of %i.", targ:getName(), amount, currency, newAmount))
+    player:PrintToPlayer(string.format('%s was given %i %s, for a total of %i.', targ:getName(), amount, currency, newAmount))
 end

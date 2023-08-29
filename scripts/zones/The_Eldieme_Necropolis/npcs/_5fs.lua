@@ -3,7 +3,7 @@
 --  NPC: South Plate
 -- !pos 185 -32 -10 195
 -----------------------------------
-local func = require("scripts/zones/The_Eldieme_Necropolis/globals")
+local func = require('scripts/zones/The_Eldieme_Necropolis/globals')
 -----------------------------------
 local entity = {}
 

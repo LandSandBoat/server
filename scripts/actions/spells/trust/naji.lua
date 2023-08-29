@@ -8,14 +8,14 @@ spellObject.onMagicCastingCheck = function(caster, target, spell)
 end
 
 spellObject.onSpellCast = function(caster, target, spell)
-    local bastokFirstTrust = caster:getCharVar("Quest[1][92]Prog")
+    local bastokFirstTrust = caster:getCharVar('Quest[1][92]Prog')
     local zone = caster:getZoneID()
 
     if
         bastokFirstTrust == 1 and
         (zone == xi.zone.NORTH_GUSTABERG or zone == xi.zone.SOUTH_GUSTABERG)
     then
-        caster:setCharVar("Quest[1][92]Prog", 2)
+        caster:setCharVar('Quest[1][92]Prog', 2)
     end
 
     return xi.trust.spawn(caster, spell)

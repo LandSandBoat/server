@@ -29,7 +29,7 @@ local points =
 
 entity.onTrade = function(player, npc, trade)
     local coney
-    local currentPoint = npc:getLocalVar("currentPoint")
+    local currentPoint = npc:getLocalVar('currentPoint')
 
     if IsMoonNew() then
         coney = ID.mob.BLACK_CONEY
@@ -66,7 +66,7 @@ local function moveFootprint(npc)
     -- https://ffxiclopedia.fandom.com/wiki/White_Coney
     -- BG Wiki has no info. For now, triggers every 3 vana minutes
 
-    local currentPoint = npc:getLocalVar("currentPoint")
+    local currentPoint = npc:getLocalVar('currentPoint')
     local nextPoint = math.random(1, 17)
 
     if nextPoint == currentPoint then
@@ -77,25 +77,25 @@ local function moveFootprint(npc)
     end
 
     local nextPointLoc = points[nextPoint]
-    npc:setLocalVar("currentPoint", nextPoint)
+    npc:setLocalVar('currentPoint', nextPoint)
     npc:setStatus(xi.status.NORMAL)
     npcUtil.queueMove(npc, nextPointLoc, 1000)
 end
 
 entity.onTimeTrigger = function(npc, triggerID)
     local isSpawned = GetMobByID(ID.mob.WHITE_CONEY):isSpawned() or GetMobByID(ID.mob.BLACK_CONEY):isSpawned()
-    local activeTime = npc:getLocalVar("activeTime")
+    local activeTime = npc:getLocalVar('activeTime')
 
     if not isSpawned then
         if IsMoonFull() or IsMoonNew() then
             if activeTime == 0 then
-                npc:setLocalVar("activeTime", os.time() + math.random(60 * 9, 60 * 15)) -- moon phase just changed, i'm active in 9 to 15 mins from now
+                npc:setLocalVar('activeTime', os.time() + math.random(60 * 9, 60 * 15)) -- moon phase just changed, i'm active in 9 to 15 mins from now
             elseif os.time() > activeTime then
                 moveFootprint(npc)
             end
         else
-            npc:setLocalVar("activeTime", 0)
-            npc:setLocalVar("currentPoint", 0)
+            npc:setLocalVar('activeTime', 0)
+            npc:setLocalVar('currentPoint', 0)
             npc:setStatus(xi.status.DISAPPEAR)
         end
     end

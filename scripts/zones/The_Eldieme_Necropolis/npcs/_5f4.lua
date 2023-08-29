@@ -3,7 +3,7 @@
 --  NPC: Titan's Gate
 -- !pos 180 -34 -15 195
 -----------------------------------
-local func = require("scripts/zones/The_Eldieme_Necropolis/globals")
+local func = require('scripts/zones/The_Eldieme_Necropolis/globals')
 -----------------------------------
 local entity = {}
 

@@ -11,9 +11,9 @@ end
 entity.onTrigger = function(player, npc)
     if
         player:getCurrentMission(xi.mission.log_id.COP) == xi.mission.id.cop.DAWN and
-        player:getCharVar("PromathiaStatus") == 3 and
-        player:getCharVar("Promathia_kill_day") < os.time() and
-        player:getCharVar("COP_louverance_story") == 0
+        player:getCharVar('PromathiaStatus') == 3 and
+        player:getCharVar('Promathia_kill_day') < os.time() and
+        player:getCharVar('COP_louverance_story') == 0
     then
         player:startEvent(757)
     end
@@ -24,7 +24,7 @@ end
 
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 757 then
-        player:setCharVar("COP_louverance_story", 1)
+        player:setCharVar('COP_louverance_story', 1)
     end
 end
 

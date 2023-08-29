@@ -10,8 +10,8 @@ zoneObject.onInitialize = function(zone)
     local phIndex = math.random(1, 3)
     local ph = GetMobByID(ID.mob.TAISAIJIN_PH[phIndex])
 
-    ph:setLocalVar("timeToGrow", os.time() + math.random(86400, 259200)) -- 1 to 3 days
-    ph:setLocalVar("phIndex", phIndex)
+    ph:setLocalVar('timeToGrow', os.time() + math.random(86400, 259200)) -- 1 to 3 days
+    ph:setLocalVar('phIndex', phIndex)
 end
 
 zoneObject.onConquestUpdate = function(zone, updatetype, influence, owner, ranking, isConquestAlliance)

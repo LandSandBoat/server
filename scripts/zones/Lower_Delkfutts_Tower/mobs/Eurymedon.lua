@@ -2,7 +2,7 @@
 -- Area: Lower Delkfutt's Tower
 --   NM: Eurymedon
 -----------------------------------
-mixins = { require("scripts/mixins/job_special") }
+mixins = { require('scripts/mixins/job_special') }
 -----------------------------------
 local entity = {}
 

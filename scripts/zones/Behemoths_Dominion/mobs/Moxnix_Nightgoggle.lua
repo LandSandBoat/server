@@ -2,7 +2,7 @@
 -- Area: Behemoth's Dominion
 --   NM: Moxnix Nightgoggle
 -----------------------------------
-mixins = { require("scripts/mixins/job_special") }
+mixins = { require('scripts/mixins/job_special') }
 -----------------------------------
 local entity = {}
 

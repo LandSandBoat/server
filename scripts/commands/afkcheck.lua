@@ -5,13 +5,13 @@
 --     : If the target doesn't respond with a correct answer
 --     : within 30 seconds, they will be set to 0hp.
 -----------------------------------
-require("scripts/globals/utils")
+require('scripts/globals/utils')
 -----------------------------------
 
 cmdprops =
 {
     permission = 1,
-    parameters = ""
+    parameters = ''
 }
 
 function onTrigger(player)
@@ -19,12 +19,12 @@ function onTrigger(player)
     local target = player:getCursorTarget()
 
     if not target then
-        player:PrintToPlayer("No target selected target, using self")
+        player:PrintToPlayer('No target selected target, using self')
         target = player
     end
 
     if target:getObjType() ~= xi.objType.PC then
-        player:PrintToPlayer("Invalid target")
+        player:PrintToPlayer('Invalid target')
     end
 
     -- Generate options
@@ -35,10 +35,10 @@ function onTrigger(player)
 
         return
         {
-            string.format("%2i + %2i = %2i", a, b, c),
+            string.format('%2i + %2i = %2i', a, b, c),
             function(playerArg)
-                playerArg:PrintToPlayer("AFK Check passed", xi.msg.channel.NS_SAY)
-                playerArg:setLocalVar("CAPTCHA", 0)
+                playerArg:PrintToPlayer('AFK Check passed', xi.msg.channel.NS_SAY)
+                playerArg:setLocalVar('CAPTCHA', 0)
             end,
         }
     end
@@ -55,9 +55,9 @@ function onTrigger(player)
 
         return
         {
-            string.format("%2i + %2i = %2i", a, b, c),
+            string.format('%2i + %2i = %2i', a, b, c),
             function(playerArg)
-                playerArg:PrintToPlayer("AFK Check failed", xi.msg.channel.NS_SAY)
+                playerArg:PrintToPlayer('AFK Check failed', xi.msg.channel.NS_SAY)
                 playerArg:setHP(0)
             end,
         }
@@ -73,21 +73,21 @@ function onTrigger(player)
     -- Present menu
     local menu =
     {
-        title = "AFK Check: Please pick true statement (30s)",
+        title = 'AFK Check: Please pick true statement (30s)',
         onStart = function(playerArg)
-            playerArg:setLocalVar("CAPTCHA", 1)
+            playerArg:setLocalVar('CAPTCHA', 1)
         end,
 
         options = options,
         onCancelled = function(playerArg)
-            playerArg:PrintToPlayer("AFK Check failed!", xi.msg.channel.NS_SAY)
+            playerArg:PrintToPlayer('AFK Check failed!', xi.msg.channel.NS_SAY)
         end,
     }
     target:customMenu(menu)
 
     -- Add timer
     target:timer(30000, function(playerArg)
-        if playerArg:getLocalVar("CAPTCHA") == 1 then
+        if playerArg:getLocalVar('CAPTCHA') == 1 then
             playerArg:setHP(0)
         end
     end)

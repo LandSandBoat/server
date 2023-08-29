@@ -42,7 +42,7 @@ local oztrojaGlobal =
         pick a new password for the trap door on floor 4
         ..............................................................................................]]
     pickNewPassword = function()
-        GetNPCByID(ID.npc.TRAP_DOOR_FLOOR_4):setLocalVar("password", math.random(0, 8))
+        GetNPCByID(ID.npc.TRAP_DOOR_FLOOR_4):setLocalVar('password', math.random(0, 8))
     end,
 
     --[[..............................................................................................

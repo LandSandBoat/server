@@ -33,7 +33,7 @@ quest.sections =
             ['Rycharde'] =
             {
                 onTrigger = function(player, npc)
-                    if player:getCharVar("Quest[4][5]DayCompleted") + 7 < VanadielUniqueDay() then
+                    if player:getCharVar('Quest[4][5]DayCompleted') + 7 < VanadielUniqueDay() then
                         return quest:progressEvent(94) -- Quest starting event.
                     end
                 end,
@@ -50,7 +50,7 @@ quest.sections =
             {
                 [94] = function(player, csid, option, npc)
                     if option == 85 then -- Accept quest option.
-                        player:setCharVar("Quest[4][5]DayCompleted", 0)  -- Delete previous quest (The clue) variables.
+                        player:setCharVar('Quest[4][5]DayCompleted', 0)  -- Delete previous quest (The clue) variables.
                         npcUtil.giveKeyItem(player, xi.ki.MHAURAN_COUSCOUS) -- Give Key Item to player.
                         quest:begin(player)
                     end

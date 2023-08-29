@@ -17,7 +17,7 @@ local content = Limbus:new({
     area             = 2,
     entryNpc         = '_127',
     requiredKeyItems = { xi.ki.COSMO_CLEANSE, xi.ki.RED_CARD, message = ID.text.YOU_INSERT_THE_CARD_POLISHED },
-    name             = "NW_APOLLYON",
+    name             = 'NW_APOLLYON',
     timeExtension   = 5,
 })
 
@@ -233,7 +233,7 @@ content.paths =
 content.groups =
 {
     {
-        mobs = { "Pluto" },
+        mobs = { 'Pluto' },
         mods =
         {
             [xi.mod.GRAVITY_MEVA] = -25,
@@ -247,7 +247,7 @@ content.groups =
     },
 
     {
-        mobs = { "Bardha" },
+        mobs = { 'Bardha' },
         mods =
         {
             [xi.mod.GRAVITY_MEVA] = -25,
@@ -266,7 +266,7 @@ content.groups =
 
     -- Floor 2
     {
-        mobs = { "Zlatorog" },
+        mobs = { 'Zlatorog' },
         mods =
         {
             [xi.mod.GRAVITY_MEVA] = -25,
@@ -281,7 +281,7 @@ content.groups =
     },
 
     {
-        mobs = { "Mountain_Buffalo" },
+        mobs = { 'Mountain_Buffalo' },
         mods =
         {
             [xi.mod.GRAVITY_MEVA] = -25,
@@ -300,7 +300,7 @@ content.groups =
 
     -- Floor 3
     {
-        mobs       = { "Millenary_Mossback" },
+        mobs       = { 'Millenary_Mossback' },
         stationary = true,
         setup      = empowerBoss,
         death      = function(battlefield, mob, count)
@@ -309,7 +309,7 @@ content.groups =
     },
 
     {
-        mobs = { "Apollyon_Scavenger" },
+        mobs = { 'Apollyon_Scavenger' },
         mods =
         {
             [xi.mod.GRAVITY_MEVA] = -25,
@@ -329,7 +329,7 @@ content.groups =
 
     -- Floor 4
     {
-        mobs = { "Cynoprosopi" },
+        mobs = { 'Cynoprosopi' },
         mods =
         {
             [xi.mod.GRAVITY_MEVA] = -25,
@@ -343,7 +343,7 @@ content.groups =
     },
     {
         --
-        mobs = { "Gorynich" },
+        mobs = { 'Gorynich' },
         mods =
         {
             [xi.mod.GRAVITY_MEVA] = -25,
@@ -362,7 +362,7 @@ content.groups =
 
     -- Floor 5
     {
-        mobs    = { "Kaiser_Behemoth" },
+        mobs    = { 'Kaiser_Behemoth' },
         mobMods =
         {
             [xi.mobMod.ALLI_HATE          ] = 50,
@@ -377,7 +377,7 @@ content.groups =
     },
 
     {
-        mobs = { "Kronprinz_Behemoth" },
+        mobs = { 'Kronprinz_Behemoth' },
         mods =
         {
             [xi.mod.GRAVITY_MEVA] = -25,

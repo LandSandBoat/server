@@ -12,7 +12,7 @@ entity.onTrade = function(player, npc, trade)
     local questStatus = player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.ELDER_MEMORIES)
 
     if questStatus == QUEST_ACCEPTED then
-        local IsacioElderMemVar = player:getCharVar("IsacioElderMemVar")
+        local IsacioElderMemVar = player:getCharVar('IsacioElderMemVar')
 
         if
             IsacioElderMemVar == 1 and
@@ -41,7 +41,7 @@ entity.onTrigger = function(player, npc)
     elseif questStatus == QUEST_COMPLETED then
         player:startEvent(118)
     elseif questStatus == QUEST_ACCEPTED then
-        local IsacioElderMemVar = player:getCharVar("IsacioElderMemVar")
+        local IsacioElderMemVar = player:getCharVar('IsacioElderMemVar')
 
         if player:hasKeyItem(xi.ki.GILGAMESHS_INTRODUCTORY_LETTER) then
             player:startEvent(117)
@@ -67,17 +67,17 @@ end
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 111 and option == 40 then
         player:addQuest(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.ELDER_MEMORIES)
-        player:setCharVar("IsacioElderMemVar", 1)
+        player:setCharVar('IsacioElderMemVar', 1)
     elseif csid == 115 then
         player:confirmTrade()
-        player:setCharVar("IsacioElderMemVar", 2)
+        player:setCharVar('IsacioElderMemVar', 2)
     elseif csid == 116 then
         player:confirmTrade()
-        player:setCharVar("IsacioElderMemVar", 3)
+        player:setCharVar('IsacioElderMemVar', 3)
     elseif csid == 117 then
         player:confirmTrade()
         player:unlockJob(0)
-        player:setCharVar("IsacioElderMemVar", 0)
+        player:setCharVar('IsacioElderMemVar', 0)
         player:messageSpecial(ID.text.SUBJOB_UNLOCKED)
         player:completeQuest(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.ELDER_MEMORIES)
     end

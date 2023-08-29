@@ -1,7 +1,7 @@
 -----------------------------------
 -- Harvest Festivals
 -----------------------------------
-require("scripts/globals/utils")
+require('scripts/globals/utils')
 -----------------------------------
 xi = xi or {}
 xi.events = xi.events or {}
@@ -11,8 +11,8 @@ xi.events.harvestFestival = xi.events.harvestFestival or {}
 
 xi.events.harvestFestival.isHalloweenEnabled = function()
     local option = 0
-    local month = tonumber(os.date("%m"))
-    local day = tonumber(os.date("%d"))
+    local month = tonumber(os.date('%m'))
+    local day = tonumber(os.date('%d'))
 
     if
         month == 10 and day >= 20 or
@@ -147,14 +147,14 @@ xi.events.harvestFestival.onHalloweenTrade = function(player, trade, npc)
 
                 -- TODO: These varName values below need to be cleared onGameDay
 
-                local varName = "harvestFestTreats"
+                local varName = 'harvestFestTreats'
                 local harvestFestTreats
                 if itemInList < 32 then -- The size of the list is too big for int 32 used that stores the bit mask, as such there are two lists
 
                     harvestFestTreats = player:getCharVar(varName)
                 else
 
-                    varName = "harvestFestTreats2"
+                    varName = 'harvestFestTreats2'
                     harvestFestTreats = player:getCharVar(varName) --  this is the second list
                     itemInList = itemInList - 32
                 end

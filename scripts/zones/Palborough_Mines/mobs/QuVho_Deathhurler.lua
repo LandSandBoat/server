@@ -2,7 +2,7 @@
 -- Area: Palborough Mines
 --   NM: Qu'Vho Deathhurler
 -----------------------------------
-mixins = { require("scripts/mixins/job_special") }
+mixins = { require('scripts/mixins/job_special') }
 -----------------------------------
 local entity = {}
 

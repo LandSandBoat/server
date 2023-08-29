@@ -57,7 +57,7 @@ quest.sections =
             return player:hasCompletedQuest(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.IT_SETS_MY_HEART_AFLUTTER) and
                 player:hasCompletedQuest(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.A_GOOD_PAIR_OF_CROCS) and
                 player:hasCompletedQuest(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.A_SHOT_IN_THE_DARK) and
-                player:getCharVar("ADOULIN_FAME_QUEST_TRACKER") == 0
+                player:getCharVar('ADOULIN_FAME_QUEST_TRACKER') == 0
         end,
 
         [xi.zone.RALA_WATERWAYS] =
@@ -105,7 +105,7 @@ quest.sections =
                 [331] = function(player, csid, option, npc)
                     if quest:complete(player) then
                         player:confirmTrade()
-                        player:setCharVar("ADOULIN_FAME_QUEST_TRACKER", 1)
+                        player:setCharVar('ADOULIN_FAME_QUEST_TRACKER', 1)
                     end
                 end,
             },

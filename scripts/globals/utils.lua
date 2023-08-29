@@ -1,5 +1,5 @@
-require("scripts/globals/common")
-require("scripts/globals/interaction/quest")
+require('scripts/globals/common')
+require('scripts/globals/interaction/quest')
 
 utils = {}
 
@@ -85,14 +85,14 @@ function utils.getDebugPrinter(printEntityName, settingOrCondition, prefix)
             local depth  = utils.getStackDepth()
             local player = utils.getObjectFromScope(printEntityName, depth + 1)
             if player then
-                player:PrintToPlayer(str, xi.msg.channel.SYSTEM_3, "")
+                player:PrintToPlayer(str, xi.msg.channel.SYSTEM_3, '')
             end
         end
     end
 end
 
 function utils.getDebugPlayerPrinter(settingOrCondition, prefix)
-    return utils.getDebugPrinter("player", settingOrCondition, prefix)
+    return utils.getDebugPrinter('player', settingOrCondition, prefix)
 end
 
 function utils.bind(func, ...)
@@ -202,7 +202,7 @@ function utils.uniqueRandomTable(minVal, maxVal, numEntries)
     local shuffledTable = utils.permgen(maxVal, minVal)
 
     if numEntries > #shuffledTable then
-        print("utils.uniqueRandomTable(): numEntries exceeds length of shuffledTable!")
+        print('utils.uniqueRandomTable(): numEntries exceeds length of shuffledTable!')
         return nil
     end
 
@@ -562,9 +562,9 @@ utils.mask =
     setBit = function(mask, pos, val)
         local state = false
 
-        if type(val) == "boolean" then
+        if type(val) == 'boolean' then
             state = val
-        elseif type(val) == "number" then
+        elseif type(val) == 'number' then
             state = (val ~= 0)
         end
 
@@ -612,7 +612,7 @@ function utils.prequire(...)
         return result
     else
         local vars = { ... }
-        printf("Error while trying to load '%s': %s", vars[1], result)
+        printf('Error while trying to load \'%s\': %s', vars[1], result)
     end
 end
 
@@ -675,10 +675,10 @@ function utils.setQuestVar(player, logId, questId, varName, value)
     player:setCharVar(charVarName, value)
 end
 
--- utils.splitStr("a.b.c", ".") => { "a", "b", "c" }
+-- utils.splitStr('a.b.c', '.') => { 'a', 'b', 'c' }
 function utils.splitStr(s, sep)
     local fields = {}
-    local pattern = string.format("([^%s]+)", sep)
+    local pattern = string.format('([^%s]+)', sep)
     local _ = string.gsub(s, pattern, function(c)
         fields[#fields + 1] = c
     end)
@@ -688,17 +688,17 @@ end
 
 -- Remove whitespace from the beginning and end of a string
 function utils.trimStr(s)
-    local s1 = string.gsub(s, "^s%+", "")
-    return string.gsub(s1, "%s+$", "")
+    local s1 = string.gsub(s, '^s%+', '')
+    return string.gsub(s1, '%s+$', '')
 end
 
 -- Split a single string argument into multiple arguments
 function utils.splitArg(s)
-    local comma   = string.gsub(s, ",", " ")
-    local spaces  = string.gsub(comma, "%s+", " ")
+    local comma   = string.gsub(s, ',', ' ')
+    local spaces  = string.gsub(comma, '%s+', ' ')
     local trimmed = utils.trimStr(spaces)
 
-    return utils.splitStr(trimmed, " ")
+    return utils.splitStr(trimmed, ' ')
 end
 
 function utils.mobTeleport(mob, hideDuration, pos, disAnim, reapAnim)
@@ -709,11 +709,11 @@ function utils.mobTeleport(mob, hideDuration, pos, disAnim, reapAnim)
     end
 
     if disAnim == nil then
-        disAnim = "kesu"
+        disAnim = 'kesu'
     end
 
     if reapAnim == nil then
-        reapAnim = "deru"
+        reapAnim = 'deru'
     end
 
     if pos == nil then
@@ -860,5 +860,5 @@ end
 
 -- Returns 24h Clock Time (example: 04:30 = 430, 21:30 = 2130)
 function utils.vanadielClockTime()
-    return tonumber(VanadielHour() .. string.format("%02d", VanadielMinute()))
+    return tonumber(VanadielHour() .. string.format('%02d', VanadielMinute()))
 end

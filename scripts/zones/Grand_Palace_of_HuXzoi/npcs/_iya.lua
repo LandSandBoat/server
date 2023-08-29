@@ -13,7 +13,7 @@ end
 entity.onTrigger = function(player, npc)
     if
         player:getCurrentMission(xi.mission.log_id.COP) == xi.mission.id.cop.GARDEN_OF_ANTIQUITY and
-        player:getCharVar("PromathiaStatus") == 3
+        player:getCharVar('PromathiaStatus') == 3
     then
         player:startEvent(1)
     elseif
@@ -40,7 +40,7 @@ entity.onEventFinish = function(player, csid, option, npc)
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.item.TAVNAZIAN_RING)
         else
             if player:addItem(xi.item.TAVNAZIAN_RING) then
-                player:setCharVar("PromathiaStatus", 0)
+                player:setCharVar('PromathiaStatus', 0)
                 player:completeMission(xi.mission.log_id.COP, xi.mission.id.cop.GARDEN_OF_ANTIQUITY)
                 player:addMission(xi.mission.log_id.COP, xi.mission.id.cop.A_FATE_DECIDED)
                 player:messageSpecial(ID.text.ITEM_OBTAINED, xi.item.TAVNAZIAN_RING)

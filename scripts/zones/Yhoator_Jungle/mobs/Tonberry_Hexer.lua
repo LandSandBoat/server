@@ -2,7 +2,7 @@
 -- Area: Yhoator Jungle
 --  Mob: Tonberry Hexer
 -----------------------------------
-mixins = { require("scripts/mixins/families/tonberry") }
+mixins = { require('scripts/mixins/families/tonberry') }
 -----------------------------------
 local entity = {}
 

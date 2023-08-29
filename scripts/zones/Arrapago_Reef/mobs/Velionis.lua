@@ -2,7 +2,7 @@
 -- Area: Arrapago Reef
 --  ZNM: Velionis
 -----------------------------------
-mixins = { require("scripts/mixins/rage") }
+mixins = { require('scripts/mixins/rage') }
 -----------------------------------
 local entity = {}
 -- Todo: blaze spikes effect only activates while not in casting animation
@@ -15,19 +15,19 @@ entity.onMobInitialize = function(mob)
 end
 
 entity.onMobSpawn = function(mob)
-    mob:setLocalVar("[rage]timer", 3600) -- 60 minutes
+    mob:setLocalVar('[rage]timer', 3600) -- 60 minutes
     mob:setAutoAttackEnabled(false)
     mob:setMod(xi.mod.FASTCAST, 15)
-    mob:setLocalVar("HPP", 90)
+    mob:setLocalVar('HPP', 90)
     mob:setMobMod(xi.mobMod.MAGIC_COOL, 10)
 end
 
 entity.onMobFight = function(mob, target)
-    local fastCast = mob:getLocalVar("HPP")
+    local fastCast = mob:getLocalVar('HPP')
     if mob:getHPP() <= fastCast then
         if mob:getHPP() > 10 then
             mob:addMod(xi.mod.FASTCAST, 15)
-            mob:setLocalVar("HPP", mob:getHPP() - 10)
+            mob:setLocalVar('HPP', mob:getHPP() - 10)
         end
     end
 end

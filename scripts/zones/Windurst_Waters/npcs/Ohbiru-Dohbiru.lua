@@ -41,7 +41,7 @@ entity.onTrigger = function(player, npc)
     local turmoil = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.TORAIMARAI_TURMOIL)
     local needToZone = player:needToZone()
     local sayFlowers = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.SAY_IT_WITH_FLOWERS)
-    local flowerProgress = player:getCharVar("FLOWER_PROGRESS")
+    local flowerProgress = player:getCharVar('FLOWER_PROGRESS')
     local blueRibbonBlues = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.BLUE_RIBBON_BLUES)
 
     if
@@ -50,7 +50,7 @@ entity.onTrigger = function(player, npc)
     then
         if needToZone then
             player:startEvent(518)
-        elseif player:getCharVar("FLOWER_PROGRESS") == 2 then
+        elseif player:getCharVar('FLOWER_PROGRESS') == 2 then
             player:startEvent(517, 0, 0, 0, 0, 950)
         else
             player:startEvent(516, 0, 0, 0, 0, 950)
@@ -118,7 +118,7 @@ entity.onEventFinish = function(player, csid, option, npc)
                 player:messageSpecial(ID.text.NOT_HAVE_ENOUGH_GIL)
             end
         elseif option == 7 then
-            player:setCharVar("FLOWER_PROGRESS", 2)
+            player:setCharVar('FLOWER_PROGRESS', 2)
         end
     end
 end

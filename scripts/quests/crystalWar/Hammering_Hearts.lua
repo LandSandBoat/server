@@ -69,7 +69,7 @@ quest.sections =
                 [41] = function(player, csid, option, npc)
                     player:confirmTrade()
                     quest:setVar(player, 'Prog', 1)
-                    player:setLocalVar("Quest[7][14]NeedToZone", 1)
+                    player:setLocalVar('Quest[7][14]NeedToZone', 1)
                 end,
             },
         },
@@ -86,7 +86,7 @@ quest.sections =
             ['Scarred_Shark'] =
             {
                 onTrigger = function(player, npc)
-                    if player:getLocalVar("Quest[7][14]NeedToZone") == 1 then
+                    if player:getLocalVar('Quest[7][14]NeedToZone') == 1 then
                         return quest:progressEvent(44)
                     else
                         return quest:progressEvent(42)

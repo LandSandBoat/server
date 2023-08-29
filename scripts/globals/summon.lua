@@ -1,8 +1,8 @@
 -----------------------------------
 -- Avatar Global Functions
 -----------------------------------
-require("scripts/globals/combat/level_correction")
-require("scripts/globals/combat/physical_utilities")
+require('scripts/globals/combat/level_correction')
+require('scripts/globals/combat/physical_utilities')
 -----------------------------------
 xi = xi or {}
 xi.summon = xi.summon or {}

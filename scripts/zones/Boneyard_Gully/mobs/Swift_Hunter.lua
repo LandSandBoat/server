@@ -2,7 +2,7 @@
 -- Area: Boneyard Gully
 --  Mob: Swift Hunter
 -----------------------------------
-mixins = { require("scripts/mixins/families/antlion_ambush") }
+mixins = { require('scripts/mixins/families/antlion_ambush') }
 -----------------------------------
 local entity = {}
 

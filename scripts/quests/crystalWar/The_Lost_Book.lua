@@ -161,7 +161,7 @@ quest.sections =
                     player:confirmTrade()
                     player:delKeyItem(xi.ki.LYNX_PELT)
                     quest:setVar(player, 'Prog', 5)
-                    quest:setVar(player, "Timer", VanadielUniqueDay() + 1)
+                    quest:setVar(player, 'Timer', VanadielUniqueDay() + 1)
                 end,
             },
         },
@@ -171,7 +171,7 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == QUEST_ACCEPTED and vars.Prog == 5 and
-                quest:getVar(player, "Timer") <= VanadielUniqueDay()
+                quest:getVar(player, 'Timer') <= VanadielUniqueDay()
         end,
 
         [xi.zone.WINDURST_WATERS_S] =

@@ -2,7 +2,7 @@
 -- Area: Ifrit's Cauldron
 --   NM: Foreseer Oramix
 -----------------------------------
-mixins = { require("scripts/mixins/job_special") }
+mixins = { require('scripts/mixins/job_special') }
 -----------------------------------
 local entity = {}
 

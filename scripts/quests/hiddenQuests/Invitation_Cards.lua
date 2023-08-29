@@ -4,7 +4,7 @@
 -- Naja: !pos 22.700 -8.804 -45.591 50
 -----------------------------------
 
-local quest = HiddenQuest:new("Invitation_Cards")
+local quest = HiddenQuest:new('Invitation_Cards')
 
 local invitationCards =
 {

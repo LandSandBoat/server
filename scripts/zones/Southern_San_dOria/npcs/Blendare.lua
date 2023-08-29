@@ -3,7 +3,7 @@
 --  NPC: Blendare
 -- !pos 33.033 0.999 -30.119 230
 -----------------------------------
-require("scripts/quests/flyers_for_regine")
+require('scripts/quests/flyers_for_regine')
 -----------------------------------
 local entity = {}
 
@@ -20,7 +20,7 @@ end
 
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 606 then
-        player:setCharVar("BrothersCS", 1)
+        player:setCharVar('BrothersCS', 1)
     end
 end
 

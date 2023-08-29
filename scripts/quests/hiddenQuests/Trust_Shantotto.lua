@@ -6,7 +6,7 @@
 local wallsID = zones[xi.zone.WINDURST_WALLS]
 -----------------------------------
 
-local quest = HiddenQuest:new("TrustShantotto")
+local quest = HiddenQuest:new('TrustShantotto')
 
 local requiredTrusts =
 {

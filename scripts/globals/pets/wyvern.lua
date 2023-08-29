@@ -1,8 +1,8 @@
 -----------------------------------
 --  PET: Wyvern
 -----------------------------------
-require("scripts/globals/ability")
-require("scripts/globals/job_utils/dragoon")
+require('scripts/globals/ability')
+require('scripts/globals/job_utils/dragoon')
 -----------------------------------
 xi = xi or {}
 xi.pets = xi.pets or {}
@@ -120,7 +120,7 @@ xi.pets.wyvern.onMobSpawn = function(mob)
     local wyvernType = wyvernTypes[master:getSubJob()]
 
     if wyvernType == wyvernCapabilities.DEFENSIVE then
-        master:addListener("WEAPONSKILL_USE", "PET_WYVERN_WS", function(player, target, skillid)
+        master:addListener('WEAPONSKILL_USE', 'PET_WYVERN_WS', function(player, target, skillid)
             if not doStatusBreath(player, player) then
                 local party = player:getParty()
                 for _, member in pairs(party) do
@@ -131,7 +131,7 @@ xi.pets.wyvern.onMobSpawn = function(mob)
             end
         end)
 
-        master:addListener("MAGIC_USE", "PET_WYVERN_MAGIC", function(player, target, spell, action)
+        master:addListener('MAGIC_USE', 'PET_WYVERN_MAGIC', function(player, target, spell, action)
             local threshold = 33
             if player:getMod(xi.mod.WYVERN_EFFECTIVE_BREATH) > 0 then
                 threshold = 50
@@ -143,13 +143,13 @@ xi.pets.wyvern.onMobSpawn = function(mob)
         wyvernType == wyvernCapabilities.OFFENSIVE or
         wyvernType == wyvernCapabilities.MULTI
     then
-        master:addListener("WEAPONSKILL_USE", "PET_WYVERN_WS", function(player, target, skillid)
+        master:addListener('WEAPONSKILL_USE', 'PET_WYVERN_WS', function(player, target, skillid)
             xi.job_utils.dragoon.pickAndUseDamageBreath(player, target)
         end)
     end
 
     if wyvernType == wyvernCapabilities.MULTI then
-        master:addListener("MAGIC_USE", "PET_WYVERN_MAGIC", function(player, target, spell, action)
+        master:addListener('MAGIC_USE', 'PET_WYVERN_MAGIC', function(player, target, spell, action)
             local threshold = 25
             if player:getMod(xi.mod.WYVERN_EFFECTIVE_BREATH) > 0 then
                 threshold = 33
@@ -159,26 +159,26 @@ xi.pets.wyvern.onMobSpawn = function(mob)
         end)
     end
 
-    master:addListener("ATTACK", "PET_WYVERN_ENGAGE", function(player, target, action)
+    master:addListener('ATTACK', 'PET_WYVERN_ENGAGE', function(player, target, action)
         local pet = player:getPet()
         if pet:getTarget() == nil or target:getID() ~= pet:getTarget():getID() then
             player:petAttack(target)
         end
     end)
 
-    master:addListener("DISENGAGE", "PET_WYVERN_DISENGAGE", function(player)
+    master:addListener('DISENGAGE', 'PET_WYVERN_DISENGAGE', function(player)
         player:petRetreat()
     end)
 
     -- https://www.bg-wiki.com/ffxi/Wyvern_(Dragoon_Pet)#Parameter_Increase
-    master:addListener("EXPERIENCE_POINTS", "PET_WYVERN_EXP", function(player, exp)
+    master:addListener('EXPERIENCE_POINTS', 'PET_WYVERN_EXP', function(player, exp)
         xi.job_utils.dragoon.addWyvernExp(player, exp)
     end)
 end
 
 local function removeWyvernLevels(mob)
     local master  = mob:getMaster()
-    local numLvls = mob:getLocalVar("level_Ups")
+    local numLvls = mob:getLocalVar('level_Ups')
 
     if numLvls ~= 0 then
         local wyvernAttributeIncreaseEffectJP = master:getJobPointLevel(xi.jp.WYVERN_ATTR_BONUS)
@@ -198,15 +198,15 @@ xi.pets.wyvern.onMobDeath = function(mob, player)
     removeWyvernLevels(mob)
 
     local master  = mob:getMaster()
-    master:removeListener("PET_WYVERN_WS")
-    master:removeListener("PET_WYVERN_MAGIC")
-    master:removeListener("PET_WYVERN_ENGAGE")
-    master:removeListener("PET_WYVERN_DISENGAGE")
-    master:removeListener("PET_WYVERN_EXP")
+    master:removeListener('PET_WYVERN_WS')
+    master:removeListener('PET_WYVERN_MAGIC')
+    master:removeListener('PET_WYVERN_ENGAGE')
+    master:removeListener('PET_WYVERN_DISENGAGE')
+    master:removeListener('PET_WYVERN_EXP')
 end
 
 xi.pets.wyvern.onPetLevelRestriction = function(pet)
     removeWyvernLevels(pet)
-    pet:setLocalVar("wyvern_exp", 0)
-    pet:setLocalVar("level_Ups", 0)
+    pet:setLocalVar('wyvern_exp', 0)
+    pet:setLocalVar('level_Ups', 0)
 end

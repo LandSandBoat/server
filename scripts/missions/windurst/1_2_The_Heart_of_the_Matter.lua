@@ -77,36 +77,36 @@ end
 
 local placeOrb = function(player, csid, option, npc)
     local gizmoNum = npc:getID() - outerHorutotoRuinsID.npc.GATE_MAGICAL_GIZMO -- gizmoNum will be 1 through 6
-    local numberPlaced = mission:getVar(player, "OrbsPlaced")
+    local numberPlaced = mission:getVar(player, 'OrbsPlaced')
     local ki = darkOrbKI[(numberPlaced + 1)]
 
     mission:setVarBit(player, 'GizmoUsed', gizmoNum)
-    mission:setVar(player, "OrbsPlaced", (numberPlaced + 1))
+    mission:setVar(player, 'OrbsPlaced', (numberPlaced + 1))
     player:messageSpecial(msgBase + 1, 0, 0, ki) -- "The <ki> has been placed into the receptacle."
     player:delKeyItem(ki)
 
     -- final orb placed triggers additional message
-    if mission:getVar(player, "OrbsPlaced") == 6 then
+    if mission:getVar(player, 'OrbsPlaced') == 6 then
         player:messageSpecial(msgBase + 5) -- "You have set all of the dark Mana Orbs in place."
     end
 end
 
 local collectOrb = function(player, csid, option, npc)
     local gizmoNum = npc:getID() - outerHorutotoRuinsID.npc.GATE_MAGICAL_GIZMO -- gizmoNum will be 1 through 6
-    local numberCollected = mission:getVar(player, "OrbsCollected")
+    local numberCollected = mission:getVar(player, 'OrbsCollected')
     local ki = glowingOrbKI[(numberCollected + 1)]
 
     mission:setVarBit(player, 'GizmoEmpty', gizmoNum)
-    mission:setVar(player, "OrbsCollected", numberCollected + 1)
+    mission:setVar(player, 'OrbsCollected', numberCollected + 1)
     player:addKeyItem(ki)
     player:messageSpecial(outerHorutotoRuinsID.text.KEYITEM_OBTAINED, ki)
 
     -- collected all the orbs
-    if mission:getVar(player, "OrbsCollected") == 6 then
+    if mission:getVar(player, 'OrbsCollected') == 6 then
         player:messageSpecial(msgBase + 4) -- "You have retrieved all of the glowing Mana Orbs."
         player:setMissionStatus(mission.areaId, 5)
-        mission:setVar(player, "OrbsCollected", 0)
-        mission:setVar(player, "GizmoEmpty", 0)
+        mission:setVar(player, 'OrbsCollected', 0)
+        mission:setVar(player, 'GizmoEmpty', 0)
     end
 end
 
@@ -337,7 +337,7 @@ mission.sections =
     {
         check = function(player, currentMission, missionStatus)
             return currentMission == mission.missionId and missionStatus == 3 and
-                mission:getVar(player, "OrbsPlaced") == 6
+                mission:getVar(player, 'OrbsPlaced') == 6
         end,
 
         [xi.zone.OUTER_HORUTOTO_RUINS] =
@@ -351,7 +351,7 @@ mission.sections =
                     player:setMissionStatus(mission.areaId, 4)
                     player:messageSpecial(outerHorutotoRuinsID.text.ALL_G_ORBS_ENERGIZED)
                     mission:setVar(player, 'GizmoUsed', 0)
-                    mission:setVar(player, "OrbsPlaced", 0)
+                    mission:setVar(player, 'OrbsPlaced', 0)
                 end,
             },
         },

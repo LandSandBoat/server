@@ -14,7 +14,7 @@ entity.onTrade = function(player, npc, trade)
         wonderingstatus == 1 and
         trade:hasItemQty(xi.item.PIECE_OF_ROSEWOOD_LUMBER, 1) and
         trade:getItemCount() == 1 and
-        player:getCharVar("QuestWonderingMin_var") == 1
+        player:getCharVar('QuestWonderingMin_var') == 1
     then
         player:startEvent(638)                 -- WONDERING_MINSTREL: Quest Finish
     end
@@ -67,7 +67,7 @@ entity.onEventFinish = function(player, csid, option, npc)
             player:addFame(xi.quest.fame_area.WINDURST, 75)
             player:addTitle(xi.title.DOWN_PIPER_PIPE_UPPERER)
             player:needToZone(true)
-            player:setCharVar("QuestWonderingMin_var", 0)
+            player:setCharVar('QuestWonderingMin_var', 0)
         end
     end
 end

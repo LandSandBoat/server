@@ -4,9 +4,9 @@
 local attachmentObject = {}
 
 attachmentObject.onEquip = function(pet)
-    pet:addListener("AUTOMATON_ATTACHMENT_CHECK", "ATTACHMENT_REPLICATOR", function(automaton, target)
+    pet:addListener('AUTOMATON_ATTACHMENT_CHECK', 'ATTACHMENT_REPLICATOR', function(automaton, target)
         local master = automaton:getMaster()
-        local hpthreshold = (automaton:getLocalVar("damagegauge") > 0) and 75 or 50
+        local hpthreshold = (automaton:getLocalVar('damagegauge') > 0) and 75 or 50
 
         if
             master and
@@ -20,7 +20,7 @@ attachmentObject.onEquip = function(pet)
 end
 
 attachmentObject.onUnequip = function(pet)
-    pet:removeListener("ATTACHMENT_REPLICATOR")
+    pet:removeListener('ATTACHMENT_REPLICATOR')
 end
 
 attachmentObject.onManeuverGain = function(pet, maneuvers)

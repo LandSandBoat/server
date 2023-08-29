@@ -14,7 +14,7 @@ entity.onTrade = function(player, npc, trade)
         if theBrugaireConsortium == 1 then
             player:tradeComplete()
             player:startEvent(540)
-            player:setCharVar("TheBrugaireConsortium-Parcels", 21)
+            player:setCharVar('TheBrugaireConsortium-Parcels', 21)
         end
     end
 end

@@ -5,7 +5,7 @@
 -- position changes every 5 seconds
 -----------------------------------
 local ID = zones[xi.zone.KUFTAL_TUNNEL]
-local kuftalGlobal = require("scripts/zones/Kuftal_Tunnel/globals")
+local kuftalGlobal = require('scripts/zones/Kuftal_Tunnel/globals')
 -----------------------------------
 local entity = {}
 

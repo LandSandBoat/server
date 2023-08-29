@@ -14,7 +14,7 @@ end
 entity.onTrigger = function(player, npc)
     local trialByWind = player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.TRIAL_BY_WIND)
     local carbuncleDebacle = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CARBUNCLE_DEBACLE)
-    local carbuncleDebacleProgress = player:getCharVar("CarbuncleDebacleProgress")
+    local carbuncleDebacleProgress = player:getCharVar('CarbuncleDebacleProgress')
 
     -----------------------------------
     -- Carbuncle Debacle
@@ -34,9 +34,9 @@ entity.onTrigger = function(player, npc)
     -- Trial by Wind
     elseif
         (trialByWind == QUEST_AVAILABLE and player:getFameLevel(xi.quest.fame_area.SELBINA_RABAO) >= 5) or
-        (trialByWind == QUEST_COMPLETED and os.time() > player:getCharVar("TrialByWind_date"))
+        (trialByWind == QUEST_COMPLETED and os.time() > player:getCharVar('TrialByWind_date'))
     then
-        player:startEvent(66, 0, 331) -- Start and restart quest "Trial by Wind"
+        player:startEvent(66, 0, 331) -- Start and restart quest 'Trial by Wind'
     elseif
         trialByWind == QUEST_ACCEPTED and
         not player:hasKeyItem(xi.ki.TUNING_FORK_OF_WIND) and
@@ -90,7 +90,7 @@ entity.onEventFinish = function(player, csid, option, npc)
         end
 
         player:addQuest(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.TRIAL_BY_WIND)
-        player:setCharVar("TrialByWind_date", 0)
+        player:setCharVar('TrialByWind_date', 0)
         player:addKeyItem(xi.ki.TUNING_FORK_OF_WIND)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.TUNING_FORK_OF_WIND)
     elseif csid == 107 then
@@ -123,7 +123,7 @@ entity.onEventFinish = function(player, csid, option, npc)
 
             player:addTitle(xi.title.HEIR_OF_THE_GREAT_WIND)
             player:delKeyItem(xi.ki.WHISPER_OF_GALES) --Whisper of Gales, as a trade for the above rewards
-            player:setCharVar("TrialByWind_date", getMidnight())
+            player:setCharVar('TrialByWind_date', getMidnight())
             player:addFame(xi.quest.fame_area.SELBINA_RABAO, 30)
             player:completeQuest(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.TRIAL_BY_WIND)
         end
@@ -131,7 +131,7 @@ entity.onEventFinish = function(player, csid, option, npc)
         if player:getFreeSlotsCount() ~= 0 then
             player:addItem(xi.item.WIND_PENDULUM)
             player:messageSpecial(ID.text.ITEM_OBTAINED, xi.item.WIND_PENDULUM)
-            player:setCharVar("CarbuncleDebacleProgress", 6)
+            player:setCharVar('CarbuncleDebacleProgress', 6)
         else
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.item.WIND_PENDULUM)
         end

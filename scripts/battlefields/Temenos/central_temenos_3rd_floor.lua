@@ -19,7 +19,7 @@ local content = Limbus:new({
     entryNpc         = 'Matter_Diffusion_Module',
     requiredKeyItems = { xi.ki.COSMO_CLEANSE, xi.ki.WHITE_CARD, message = ID.text.YOU_INSERT_THE_CARD_POLISHED },
     requiredItems    = { xi.item.IVORY_CHIP },
-    name             = "CENTRAL_TEMENOS_3RD_FLOOR",
+    name             = 'CENTRAL_TEMENOS_3RD_FLOOR',
 })
 
 function content:handleWeakenBoss(name, battlefield, mob)
@@ -28,7 +28,7 @@ function content:handleWeakenBoss(name, battlefield, mob)
 end
 
 function content:handleStrengthenBosses(bonusMod, amount, battlefield, mob, count)
-    local bosses = { "Abyssdweller_Jhabdebb", "Orichalcum_Quadav", "Pee_Qoho_the_Python" }
+    local bosses = { 'Abyssdweller_Jhabdebb', 'Orichalcum_Quadav', 'Pee_Qoho_the_Python' }
 
     for _, name in ipairs(bosses) do
         local boss = mob:getZone():queryEntitiesByName(name)[1]
@@ -45,44 +45,44 @@ content.groups =
     {
         mobs =
         {
-            "Abyssdweller_Jhabdebb",
-            "Orichalcum_Quadav",
-            "Pee_Qoho_the_Python",
-            "Grognard_Mesmerizer",
-            "Grognard_Footsoldier",
-            "Grognard_Predator",
-            "Grognard_Neckchopper",
-            "Grognard_Grappler",
-            "Grognard_Impaler",
-            "Star_Ruby_Quadav",
-            "Fossil_Quadav",
-            "Whitegold_Quadav",
-            "Wootz_Quadav",
-            "Star_Sapphire_Quadav",
-            "Lightsteel_Quadav",
-            "Yagudo_Archpriest",
-            "Yagudo_Disciplinant",
-            "Yagudo_Kapellmeister",
-            "Yagudo_Knight_Templar",
-            "Yagudo_Prelatess",
-            "Yagudo_Eradicator",
+            'Abyssdweller_Jhabdebb',
+            'Orichalcum_Quadav',
+            'Pee_Qoho_the_Python',
+            'Grognard_Mesmerizer',
+            'Grognard_Footsoldier',
+            'Grognard_Predator',
+            'Grognard_Neckchopper',
+            'Grognard_Grappler',
+            'Grognard_Impaler',
+            'Star_Ruby_Quadav',
+            'Fossil_Quadav',
+            'Whitegold_Quadav',
+            'Wootz_Quadav',
+            'Star_Sapphire_Quadav',
+            'Lightsteel_Quadav',
+            'Yagudo_Archpriest',
+            'Yagudo_Disciplinant',
+            'Yagudo_Kapellmeister',
+            'Yagudo_Knight_Templar',
+            'Yagudo_Prelatess',
+            'Yagudo_Eradicator',
         },
 
-        mixins = { require("scripts/mixins/job_special") }
+        mixins = { require('scripts/mixins/job_special') }
     },
 
     {
-        mobs    = { "Yagudos_Avatar" },
-        mixins  = { require("scripts/mixins/families/avatar") },
+        mobs    = { 'Yagudos_Avatar' },
+        mixins  = { require('scripts/mixins/families/avatar') },
         spawned = false,
     },
 
     {
         mobs =
         {
-            "Yagudos_Elemental",
-            "Yagudos_Avatar",
-            "Orcs_Wyvern",
+            'Yagudos_Elemental',
+            'Yagudos_Avatar',
+            'Orcs_Wyvern',
         },
         spawned = false,
     },
@@ -90,66 +90,66 @@ content.groups =
     {
         mobs =
         {
-            "Grognard_Mesmerizer",
-            "Grognard_Footsoldier",
-            "Grognard_Predator",
-            "Grognard_Neckchopper",
-            "Grognard_Grappler",
-            "Grognard_Impaler",
+            'Grognard_Mesmerizer',
+            'Grognard_Footsoldier',
+            'Grognard_Predator',
+            'Grognard_Neckchopper',
+            'Grognard_Grappler',
+            'Grognard_Impaler',
         },
 
-        allDeath = utils.bind(content.handleWeakenBoss, content, "Abyssdweller_Jhabdebb"),
+        allDeath = utils.bind(content.handleWeakenBoss, content, 'Abyssdweller_Jhabdebb'),
     },
 
     {
         mobs =
         {
-            "Star_Ruby_Quadav",
-            "Fossil_Quadav",
-            "Whitegold_Quadav",
-            "Wootz_Quadav",
-            "Star_Sapphire_Quadav",
-            "Lightsteel_Quadav",
+            'Star_Ruby_Quadav',
+            'Fossil_Quadav',
+            'Whitegold_Quadav',
+            'Wootz_Quadav',
+            'Star_Sapphire_Quadav',
+            'Lightsteel_Quadav',
         },
 
-        allDeath = utils.bind(content.handleWeakenBoss, content, "Orichalcum_Quadav"),
+        allDeath = utils.bind(content.handleWeakenBoss, content, 'Orichalcum_Quadav'),
     },
 
     {
         mobs =
         {
-            "Yagudo_Archpriest",
-            "Yagudo_Disciplinant",
-            "Yagudo_Kapellmeister",
-            "Yagudo_Knight_Templar",
-            "Yagudo_Prelatess",
-            "Yagudo_Eradicator",
+            'Yagudo_Archpriest',
+            'Yagudo_Disciplinant',
+            'Yagudo_Kapellmeister',
+            'Yagudo_Knight_Templar',
+            'Yagudo_Prelatess',
+            'Yagudo_Eradicator',
         },
 
-        allDeath = utils.bind(content.handleWeakenBoss, content, "Pee_Qoho_the_Python"),
+        allDeath = utils.bind(content.handleWeakenBoss, content, 'Pee_Qoho_the_Python'),
     },
 
     {
-        mobs  = { "Abyssdweller_Jhabdebb" },
+        mobs  = { 'Abyssdweller_Jhabdebb' },
         death = utils.bind(content.handleStrengthenBosses, content, xi.mod.ATTP, 50),
     },
 
     {
-        mobs  = { "Orichalcum_Quadav" },
+        mobs  = { 'Orichalcum_Quadav' },
         death = utils.bind(content.handleStrengthenBosses, content, xi.mod.UDMGPHYS, 5000),
     },
 
     {
-        mobs  = { "Pee_Qoho_the_Python" },
+        mobs  = { 'Pee_Qoho_the_Python' },
         death = utils.bind(content.handleStrengthenBosses, content, xi.mod.UDMGMAGIC, 5000),
     },
 
     {
         mobs =
         {
-            "Abyssdweller_Jhabdebb",
-            "Orichalcum_Quadav",
-            "Pee_Qoho_the_Python",
+            'Abyssdweller_Jhabdebb',
+            'Orichalcum_Quadav',
+            'Pee_Qoho_the_Python',
         },
 
         mods =

@@ -74,7 +74,7 @@ entity.onEventFinish = function(player, csid, option, npc)
         csid == 160 and
         player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.BEAT_AROUND_THE_BUSHIN) == QUEST_AVAILABLE
     then
-        player:setCharVar("BeatAroundTheBushin", 1) -- For the next quest "Beat around the Bushin"
+        player:setCharVar('BeatAroundTheBushin', 1) -- For the next quest "Beat around the Bushin"
     end
 end
 

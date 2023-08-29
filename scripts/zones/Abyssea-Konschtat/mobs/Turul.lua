@@ -2,7 +2,7 @@
 -- Area: Abyssea - Konschtat (15)
 --   NM: Turul
 -----------------------------------
-mixins = { require("scripts/mixins/families/amphiptere") }
+mixins = { require('scripts/mixins/families/amphiptere') }
 -----------------------------------
 local entity = {}
 

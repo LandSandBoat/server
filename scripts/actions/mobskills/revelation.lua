@@ -4,7 +4,7 @@
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
-    if target:getFamily() == 478 and mob:getLocalVar("lanceOut") == 0 then
+    if target:getFamily() == 478 and mob:getLocalVar('lanceOut') == 0 then
         return 0
     else
         return 1

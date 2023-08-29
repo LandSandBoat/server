@@ -12,7 +12,7 @@ entity.onTrade = function(player, npc, trade)
     then
         player:tradeComplete()
         -- TODO: Tebhi disappears for 15min
-        player:setCharVar("scatIntoShadowCS", 2)
+        player:setCharVar('scatIntoShadowCS', 2)
     end
 end
 

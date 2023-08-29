@@ -12,8 +12,8 @@ local ID = zones[xi.zone.LUFAISE_MEADOWS]
 local entity = {}
 
 entity.onMobInitialize = function(mob)
-    mob:addListener("ITEM_DROPS", "ITEM_DROPS_PADFOOD", function(mobArg, loot)
-        if mob:getID() == ID.mob.PADFOOT[GetServerVariable("realPadfoot")] then
+    mob:addListener('ITEM_DROPS', 'ITEM_DROPS_PADFOOD', function(mobArg, loot)
+        if mob:getID() == ID.mob.PADFOOT[GetServerVariable('realPadfoot')] then
             loot:addGroup(xi.drop_rate.GUARANTEED,
             {
                 { item = xi.item.ASSAILANTS_RING, weight = 750 },
@@ -32,7 +32,7 @@ end
 entity.onMobDespawn = function(mob)
     local mobId = mob:getID()
 
-    if mobId == ID.mob.PADFOOT[GetServerVariable("realPadfoot")] then
+    if mobId == ID.mob.PADFOOT[GetServerVariable('realPadfoot')] then
         local respawn = math.random(75600, 86400) -- 21-24 hours
 
         for _, v in pairs(ID.mob.PADFOOT) do
@@ -43,7 +43,7 @@ entity.onMobDespawn = function(mob)
             GetMobByID(v):setRespawnTime(respawn)
         end
 
-        SetServerVariable("realPadfoot", math.random(1, 5))
+        SetServerVariable('realPadfoot', math.random(1, 5))
     end
 end
 

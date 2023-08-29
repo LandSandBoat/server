@@ -59,7 +59,7 @@ end
 zoneObject.onTriggerAreaEnter = function(player, triggerArea)
     if
         triggerArea:GetTriggerAreaID() == 1 and
-        player:getCharVar("UnderOathCS") == 7
+        player:getCharVar('UnderOathCS') == 7
     then
         -- Quest: Under Oath - PLD AF3
         player:startEvent(14)
@@ -74,7 +74,7 @@ end
 
 zoneObject.onEventFinish = function(player, csid, option, npc)
     if csid == 14 then
-        player:setCharVar("UnderOathCS", 8) -- Quest: Under Oath - PLD AF3
+        player:setCharVar('UnderOathCS', 8) -- Quest: Under Oath - PLD AF3
     end
 end
 

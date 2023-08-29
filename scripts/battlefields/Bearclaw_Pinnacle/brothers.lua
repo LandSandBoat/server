@@ -14,8 +14,8 @@ local content = Battlefield:new({
     levelCap         = 75,
     timeLimit        = utils.minutes(30),
     index            = 3,
-    entryNpc         = "Wind_Pillar_4",
-    exitNpc          = "Wind_Pillar_Exit",
+    entryNpc         = 'Wind_Pillar_4',
+    exitNpc          = 'Wind_Pillar_Exit',
     requiredKeyItems = { xi.ki.ZEPHYR_FAN, message = ID.text.ZEPHYR_RIPS },
     grantXP          = 3500,
 })
@@ -23,7 +23,7 @@ local content = Battlefield:new({
 content.groups =
 {
     {
-        mobs = { "Eldertaur" },
+        mobs = { 'Eldertaur' },
         mods =
         {
             [xi.mod.DMGMAGIC  ] = -1000,
@@ -36,7 +36,7 @@ content.groups =
         },
     },
     {
-        mobs = { "Mindertaur" },
+        mobs = { 'Mindertaur' },
         mods =
         {
             [xi.mod.DMGMAGIC    ] = -1000,
@@ -51,7 +51,7 @@ content.groups =
     },
 }
 
-content:addEssentialMobs({ "Eldertaur", "Mindertaur" })
+content:addEssentialMobs({ 'Eldertaur', 'Mindertaur' })
 
 content.loot =
 {

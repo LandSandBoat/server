@@ -2,7 +2,7 @@
 -- Area: Beadeaux [S]
 --   NM: Ba'Tho Mercifulheart
 -----------------------------------
-mixins = { require("scripts/mixins/job_special") }
+mixins = { require('scripts/mixins/job_special') }
 -----------------------------------
 local entity = {}
 

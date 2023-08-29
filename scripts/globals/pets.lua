@@ -3,7 +3,7 @@
 --  PETS ID
 --
 -----------------------------------
-require("scripts/globals/nyzul")
+require('scripts/globals/nyzul')
 
 xi = xi or {}
 xi.pet = xi.pet or {}
@@ -1234,7 +1234,7 @@ function xi.pet.spawnPet(player, petID)
     if player:getZoneID() == xi.zone.NYZUL_ISLE then
         local pet = player:getPet()
         local instance = player:getInstance()
-        local floorPathos = instance:getLocalVar("floorPathos")
+        local floorPathos = instance:getLocalVar('floorPathos')
 
         for i = 1, 29 do
             if utils.mask.getBit(floorPathos, i) then

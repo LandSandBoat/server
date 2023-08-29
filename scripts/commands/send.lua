@@ -8,7 +8,7 @@
 cmdprops =
 {
     permission = 1,
-    parameters = "b"
+    parameters = 'b'
 }
 
 -----------------------------------
@@ -279,7 +279,7 @@ local zoneList =
 
 function error(player, msg)
     player:PrintToPlayer(msg)
-    player:PrintToPlayer("!send <player to send> <destination player or zone>")
+    player:PrintToPlayer('!send <player to send> <destination player or zone>')
 end
 
 local function getBytePos(s, needle)
@@ -304,7 +304,7 @@ function onTrigger(player, bytes)
     local zone
 
     if bytes == nil then
-        error(player, "You must provide the name of a player to send and a destination.")
+        error(player, 'You must provide the name of a player to send and a destination.')
         return
     end
 
@@ -316,13 +316,13 @@ function onTrigger(player, bytes)
     local target
     local targ
     if sppos == nil then
-        error(player, "You must provide the name of a player to send and a destination.")
+        error(player, 'You must provide the name of a player to send and a destination.')
         return
     else
         target = string.sub(bytes, 1, sppos-1)
         targ = GetPlayerByName(target)
         if targ == nil then
-            error(player, string.format("Player named '%s' not found!", target))
+            error(player, string.format('Player named "%s" not found!', target))
             return
         end
     end
@@ -344,7 +344,7 @@ function onTrigger(player, bytes)
         end
 
         if zone == nil then
-            error(player, "Auto-translated phrase is not a zone.")
+            error(player, 'Auto-translated phrase is not a zone.')
             return
         end
     else
@@ -353,7 +353,7 @@ function onTrigger(player, bytes)
             -- destination is a zone ID.
             zone = tonumber(dest)
             if zone < 0 or zone >= xi.zone.MAX_ZONE then
-                error(player, "Invalid zone ID.")
+                error(player, 'Invalid zone ID.')
                 return
             end
 
@@ -372,7 +372,7 @@ function onTrigger(player, bytes)
             target = dest
             dest = GetPlayerByName(dest)
             if dest == nil then
-                error(player, string.format("Player named '%s' not found!", target))
+                error(player, string.format('Player named "%s" not found!', target))
                 return
             end
 
@@ -387,6 +387,6 @@ function onTrigger(player, bytes)
     -- send target to destination
     targ:setPos(x, y, z, rot, zone)
     if targ:getID() ~= player:getID() then
-        player:PrintToPlayer(string.format("Sent %s to zone %i.", targ:getName(), zone))
+        player:PrintToPlayer(string.format('Sent %s to zone %i.', targ:getName(), zone))
     end
 end

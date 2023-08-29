@@ -124,13 +124,13 @@ local defaults =
     notify = 1,                 -- Progress notifications shown every X increases
     goal = 1,                   -- Progress goal
     flags = {},                 -- Special flags. This should be a set. Possible values:
-                                --        "timed"  - 4-hour record.
-                                --        "repeat" - Repeatable record.
-                                --        "daily"  - Daily record.
-                                --        "weekly" - Weekly record.
-                                --        "unity"  - Weekly reset, but doesn't reset progress, only completion.
-                                --        "retro"  - Can be claimed retroactively. Calls check on taking record.
-                                --        "hidden" - Special internal-use record used only as a client-flag to unlock others.
+                                --        'timed'  - 4-hour record.
+                                --        'repeat' - Repeatable record.
+                                --        'daily'  - Daily record.
+                                --        'weekly' - Weekly record.
+                                --        'unity'  - Weekly reset, but doesn't reset progress, only completion.
+                                --        'retro'  - Can be claimed retroactively. Calls check on taking record.
+                                --        'hidden' - Special internal-use record used only as a client-flag to unlock others.
                                 --                   Does not count towards completed record count.
     reqs = {},                  -- Other requirements. List of function names from above, with required values.
     reward = {},                -- Reward parameters give on completion. (See completeRecord directly below.)
@@ -182,8 +182,8 @@ local function completeRecord(player, record)
     local recordFlags = recordEntry.flags
     local rewards = recordEntry.reward
 
-    if not player:getEminenceCompleted(record) and rewards["item"] then
-        if not npcUtil.giveItem(player, rewards["item"]) then
+    if not player:getEminenceCompleted(record) and rewards['item'] then
+        if not npcUtil.giveItem(player, rewards['item']) then
             player:messageBasic(xi.msg.basic.ROE_UNABLE_BONUS_ITEM)
             return false
         end
@@ -191,20 +191,20 @@ local function completeRecord(player, record)
 
     player:messageBasic(xi.msg.basic.ROE_COMPLETE, record)
 
-    if rewards["sparks"] ~= nil and type(rewards["sparks"]) == "number" then
+    if rewards['sparks'] ~= nil and type(rewards['sparks']) == 'number' then
         local bonus = 1
         if player:getEminenceCompleted(record) then
-            player:addCurrency('spark_of_eminence', rewards["sparks"] * bonus * xi.settings.main.SPARKS_RATE, xi.settings.main.CAP_CURRENCY_SPARKS)
-            player:messageBasic(xi.msg.basic.ROE_RECEIVE_SPARKS, rewards["sparks"] * xi.settings.main.SPARKS_RATE, player:getCurrency("spark_of_eminence"))
+            player:addCurrency('spark_of_eminence', rewards['sparks'] * bonus * xi.settings.main.SPARKS_RATE, xi.settings.main.CAP_CURRENCY_SPARKS)
+            player:messageBasic(xi.msg.basic.ROE_RECEIVE_SPARKS, rewards['sparks'] * xi.settings.main.SPARKS_RATE, player:getCurrency('spark_of_eminence'))
         else
             bonus = 3
-            player:addCurrency('spark_of_eminence', rewards["sparks"] * bonus * xi.settings.main.SPARKS_RATE, xi.settings.main.CAP_CURRENCY_SPARKS)
-            player:messageBasic(xi.msg.basic.ROE_FIRST_TIME_SPARKS, rewards["sparks"] * bonus * xi.settings.main.SPARKS_RATE, player:getCurrency("spark_of_eminence"))
+            player:addCurrency('spark_of_eminence', rewards['sparks'] * bonus * xi.settings.main.SPARKS_RATE, xi.settings.main.CAP_CURRENCY_SPARKS)
+            player:messageBasic(xi.msg.basic.ROE_FIRST_TIME_SPARKS, rewards['sparks'] * bonus * xi.settings.main.SPARKS_RATE, player:getCurrency('spark_of_eminence'))
         end
     end
 
-    if recordFlags["repeat"] then
-        if recordFlags["timed"] then
+    if recordFlags['repeat'] then
+        if recordFlags['timed'] then
             player:messageBasic(xi.msg.basic.ROE_TIMED_CLEAR)
         else
             player:messageBasic(xi.msg.basic.ROE_REPEAT_OR_CANCEL)
@@ -215,31 +215,31 @@ local function completeRecord(player, record)
         player:setEminenceCompleted(record)
     end
 
-    if rewards["xp"] ~= nil and type(rewards["xp"]) == "number" then
-        player:addExp(rewards["xp"] * xi.settings.main.ROE_EXP_RATE)
+    if rewards['xp'] ~= nil and type(rewards['xp']) == 'number' then
+        player:addExp(rewards['xp'] * xi.settings.main.ROE_EXP_RATE)
     end
 
-    if rewards["capacity"] ~= nil and type(rewards["capacity"]) == "number" then
-        player:addCapacityPoints(rewards["capacity"])
+    if rewards['capacity'] ~= nil and type(rewards['capacity']) == 'number' then
+        player:addCapacityPoints(rewards['capacity'])
     end
 
     if
         player:getUnityLeader() > 0 and
-        rewards["accolades"] ~= nil and
-        type(rewards["accolades"]) == "number"
+        rewards['accolades'] ~= nil and
+        type(rewards['accolades']) == 'number'
     then
         local bonusAccoladeRate = 1.0
         if record ~= 5 then -- Do not grant a bonus for All for One
             bonusAccoladeRate = bonusAccoladeRate + ((player:getUnityRank() - 1) * 0.05)
         end
 
-        local accoladePayout = math.floor(rewards["accolades"] * bonusAccoladeRate)
-        player:addCurrency("unity_accolades", accoladePayout, xi.settings.main.CAP_CURRENCY_ACCOLADES)
-        player:messageBasic(xi.msg.basic.ROE_RECEIVED_ACCOLADES, accoladePayout, player:getCurrency("unity_accolades"))
+        local accoladePayout = math.floor(rewards['accolades'] * bonusAccoladeRate)
+        player:addCurrency('unity_accolades', accoladePayout, xi.settings.main.CAP_CURRENCY_ACCOLADES)
+        player:messageBasic(xi.msg.basic.ROE_RECEIVED_ACCOLADES, accoladePayout, player:getCurrency('unity_accolades'))
     end
 
-    if rewards["keyItem"] ~= nil then
-        npcUtil.giveKeyItem(player, rewards["keyItem"])
+    if rewards['keyItem'] ~= nil then
+        npcUtil.giveKeyItem(player, rewards['keyItem'])
     end
 
     -- Workaround for Hidden Record #4085 (10 RoE Objectives Completed)

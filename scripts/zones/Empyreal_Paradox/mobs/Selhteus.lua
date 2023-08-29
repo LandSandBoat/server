@@ -20,16 +20,16 @@ entity.onMobFight = function(mob, target)
         mob:pathTo(targetPos.x + math.cos(radians) * 16, targetPos.y, targetPos.z + math.sin(radians) * 16)
     end
 
-    local lanceTime = mob:getLocalVar("lanceTime")
-    local lanceOut = mob:getLocalVar("lanceOut")
-    local rejuv = mob:getLocalVar("rejuv")
+    local lanceTime = mob:getLocalVar('lanceTime')
+    local lanceOut = mob:getLocalVar('lanceOut')
+    local rejuv = mob:getLocalVar('rejuv')
     if mob:getHPP() < 30 and rejuv == 0 and target:getFamily() == 478 then
         mob:messageText(mob, ID.text.SELHTEUS_TEXT + 2)
         mob:useMobAbility(1509)
-        mob:setLocalVar("rejuv", 1)
+        mob:setLocalVar('rejuv', 1)
     elseif lanceTime + 50 < mob:getBattleTime() and lanceOut == 0 then
-        mob:entityAnimationPacket("sp00")
-        mob:setLocalVar("lanceOut", 1)
+        mob:entityAnimationPacket('sp00')
+        mob:setLocalVar('lanceOut', 1)
     end
 end
 

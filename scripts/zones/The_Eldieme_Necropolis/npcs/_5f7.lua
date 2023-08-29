@@ -3,7 +3,7 @@
 --  NPC: Leviathan's Gate
 -- !pos 249 -34 100 195
 -----------------------------------
-local func = require("scripts/zones/The_Eldieme_Necropolis/globals")
+local func = require('scripts/zones/The_Eldieme_Necropolis/globals')
 -----------------------------------
 local entity = {}
 

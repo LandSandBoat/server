@@ -6,12 +6,12 @@
 cmdprops =
 {
     permission = 1,
-    parameters = "s"
+    parameters = 's'
 }
 
 function error(player, msg)
     player:PrintToPlayer(msg)
-    player:PrintToPlayer("!addallmaps (player)")
+    player:PrintToPlayer('!addallmaps (player)')
 end
 
 function onTrigger(player, target)
@@ -34,7 +34,7 @@ function onTrigger(player, target)
     else
         targ = GetPlayerByName(target)
         if targ == nil then
-            error(player, string.format("Player named '%s' not found!", target))
+            error(player, string.format('Player named "%s" not found!', target))
             return
         end
     end
@@ -44,5 +44,5 @@ function onTrigger(player, target)
         targ:addKeyItem(v)
     end
 
-    player:PrintToPlayer(string.format("%s now has all maps.", targ:getName()))
+    player:PrintToPlayer(string.format('%s now has all maps.', targ:getName()))
 end

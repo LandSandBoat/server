@@ -1,18 +1,18 @@
 -----------------------------------
 -- func: mobhere <mobId>
 -- desc: Spawns a MOB and then moves it to the current position, if in same zone.
---       Errors will despawn the MOB unless "noDepop" was specified (any value works).
+--       Errors will despawn the MOB unless 'noDepop' was specified (any value works).
 -----------------------------------
 
 cmdprops =
 {
     permission = 1,
-    parameters = "is"
+    parameters = 'is'
 }
 
 function error(player, msg)
     player:PrintToPlayer(msg)
-    player:PrintToPlayer("!mobhere (mobID) (noDepop)")
+    player:PrintToPlayer('!mobhere (mobID) (noDepop)')
 end
 
 function onTrigger(player, mobId, noDepop)
@@ -25,20 +25,20 @@ function onTrigger(player, mobId, noDepop)
         if mobId == nil then
             targ = player:getCursorTarget()
             if targ == nil or not targ:isMob() then
-                error(player, "You must either provide a mobID or target a mob.")
+                error(player, 'You must either provide a mobID or target a mob.')
                 return
             end
         else
             targ = GetMobByID(mobId, instance)
             if targ == nil then
-                error(player, "Invalid mobID.")
+                error(player, 'Invalid mobID.')
                 return
             end
         end
 
         if not targ:isSpawned() then
             SpawnMob(mobId, instance)
-            player:PrintToPlayer("Mob state changed to: Spawned.")
+            player:PrintToPlayer('Mob state changed to: Spawned.')
         end
 
         targ:setPos(player:getXPos(), player:getYPos(), player:getZPos(), player:getRotPos())
@@ -48,13 +48,13 @@ function onTrigger(player, mobId, noDepop)
         if mobId == nil then
             targ = player:getCursorTarget()
             if targ == nil or not targ:isMob() then
-                error(player, "You must either provide a mobID or target a mob.")
+                error(player, 'You must either provide a mobID or target a mob.')
                 return
             end
         else
             targ = GetMobByID(mobId)
             if targ == nil then
-                error(player, "Invalid mobID.")
+                error(player, 'Invalid mobID.')
                 return
             end
         end
@@ -63,7 +63,7 @@ function onTrigger(player, mobId, noDepop)
 
         if not targ:isSpawned() then
             SpawnMob(mobId)
-            player:PrintToPlayer("Mob state changed to: Spawned.")
+            player:PrintToPlayer('Mob state changed to: Spawned.')
         end
 
         if player:getZoneID() == targ:getZoneID() then
@@ -71,10 +71,10 @@ function onTrigger(player, mobId, noDepop)
         else
             if noDepop == nil or noDepop == 0 then
                 DespawnMob(mobId)
-                player:PrintToPlayer("Despawned the mob because of an error.")
+                player:PrintToPlayer('Despawned the mob because of an error.')
             end
 
-            player:PrintToPlayer("Mob could not be moved to current pos - you are probably in the wrong zone.")
+            player:PrintToPlayer('Mob could not be moved to current pos - you are probably in the wrong zone.')
         end
     end
 end

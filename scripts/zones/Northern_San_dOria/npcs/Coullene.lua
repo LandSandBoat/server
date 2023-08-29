@@ -5,7 +5,7 @@
 -- !pos 146.420 0.000 127.601 231
 -----------------------------------
 local ID = zones[xi.zone.NORTHERN_SAN_DORIA]
-require("scripts/quests/flyers_for_regine")
+require('scripts/quests/flyers_for_regine')
 -----------------------------------
 local entity = {}
 

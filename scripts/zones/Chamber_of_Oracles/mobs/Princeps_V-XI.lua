@@ -3,7 +3,7 @@
 --  Mob: Princeps V-XI
 -- Zilart 6 Fight
 -----------------------------------
-mixins = { require("scripts/mixins/job_special") }
+mixins = { require('scripts/mixins/job_special') }
 -----------------------------------
 local entity = {}
 

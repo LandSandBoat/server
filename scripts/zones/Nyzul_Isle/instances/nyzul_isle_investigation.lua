@@ -2,27 +2,27 @@
 -- Assault 51 : Nyzul Isle Investigation
 -----------------------------------
 local ID = zones[xi.zone.NYZUL_ISLE]
-require("scripts/zones/Nyzul_Isle/globals/points")
+require('scripts/zones/Nyzul_Isle/globals/points')
 -----------------------------------
 local instanceObject = {}
 
 local function pickSetPoint(instance)
     local chars        = instance:getChars()
-    local currentFloor = instance:getLocalVar("Nyzul_Current_Floor")
+    local currentFloor = instance:getLocalVar('Nyzul_Current_Floor')
 
     -- Random the floor layout
-    instance:setLocalVar("Nyzul_Isle_FloorLayout", math.random(1, (#xi.nyzul.FloorLayout - 1)))
-    instance:setLocalVar("gearObjective", 0)
+    instance:setLocalVar('Nyzul_Isle_FloorLayout', math.random(1, (#xi.nyzul.FloorLayout - 1)))
+    instance:setLocalVar('gearObjective', 0)
 
     -- Condition for floors
     -- hard set objective and floor to boss stage for every 20th floor
     if currentFloor % 20 == 0 then
         instance:setStage(xi.nyzul.objective.ELIMINATE_ENEMY_LEADER)
-        instance:setLocalVar("Nyzul_Isle_FloorLayout", 0)
+        instance:setLocalVar('Nyzul_Isle_FloorLayout', 0)
     -- 3.33% for a free floor
-    elseif math.random(1, 30) == 1 and instance:getLocalVar("freeFloor") == 0 then -- 3.33% for a free floor
+    elseif math.random(1, 30) == 1 and instance:getLocalVar('freeFloor') == 0 then -- 3.33% for a free floor
         instance:setStage(xi.nyzul.objective.FREE_FLOOR)
-        instance:setLocalVar("freeFloor", 1)
+        instance:setLocalVar('freeFloor', 1)
 
         GetNPCByID(ID.npc.RUNE_TRANSFER_START, instance):timer(9000,
         function(m)
@@ -46,12 +46,12 @@ local function pickSetPoint(instance)
         instance:setStage(utils.pickRandom(objective))
 
         if math.random(1, 30) <= 5 then
-            instance:setLocalVar("gearObjective", math.random(xi.nyzul.gearObjective.AVOID_AGRO, xi.nyzul.gearObjective.DO_NOT_DESTROY))
+            instance:setLocalVar('gearObjective', math.random(xi.nyzul.gearObjective.AVOID_AGRO, xi.nyzul.gearObjective.DO_NOT_DESTROY))
         end
     end
 
     -- Setup points to travel to
-    local layoutPoint = xi.nyzul.FloorLayout[instance:getLocalVar("Nyzul_Isle_FloorLayout")]
+    local layoutPoint = xi.nyzul.FloorLayout[instance:getLocalVar('Nyzul_Isle_FloorLayout')]
     local posX        = layoutPoint[1] local posY = layoutPoint[2] local posZ = layoutPoint[3]
 
     -- Set Rune of Transfer to Point
@@ -74,7 +74,7 @@ local function pickSetPoint(instance)
 
         if instance:getStage() ~= xi.nyzul.objective.FREE_FLOOR then
             players:messageName(ID.text.OBJECTIVE_TEXT_OFFSET + instance:getStage(), players)
-            local gearObjective = instance:getLocalVar("gearObjective")
+            local gearObjective = instance:getLocalVar('gearObjective')
 
             if gearObjective > 0 then
                 players:messageSpecial(ID.text.ELIMINATE_ALL_ENEMIES + gearObjective)
@@ -83,14 +83,14 @@ local function pickSetPoint(instance)
     end
 
     -- Set Rune of Transfer Menu
-    instance:setLocalVar("menuChoice", math.random(1, 20))
+    instance:setLocalVar('menuChoice', math.random(1, 20))
 end
 
 local function lampsActivate(instance)
-    local floorLayout    = instance:getLocalVar("Nyzul_Isle_FloorLayout")
-    local lampsObjective = instance:getLocalVar("[Lamps]Objective")
+    local floorLayout    = instance:getLocalVar('Nyzul_Isle_FloorLayout')
+    local lampsObjective = instance:getLocalVar('[Lamps]Objective')
     local runicLamp1     = GetNPCByID(ID.npc.RUNIC_LAMP_OFFSET, instance)
-    local partySize      = utils.clamp(instance:getLocalVar("partySize"), 3, 5)
+    local partySize      = utils.clamp(instance:getLocalVar('partySize'), 3, 5)
     local lampPoints     = {}
 
     for i = 1, #xi.nyzulPoint.LampPoint[floorLayout] do
@@ -101,14 +101,14 @@ local function lampsActivate(instance)
     if lampsObjective == xi.nyzul.lampsObjective.REGISTER then
         local spawnPoint = math.random(1, #lampPoints)
 
-        instance:setLocalVar("[Lamp]PartySize", instance:getLocalVar("partySize"))
+        instance:setLocalVar('[Lamp]PartySize', instance:getLocalVar('partySize'))
         runicLamp1:setPos(lampPoints[spawnPoint])
         runicLamp1:setStatus(xi.status.NORMAL)
 
     -- Lamp Objective: Activate All
     elseif lampsObjective == xi.nyzul.lampsObjective.ACTIVATE_ALL then
         local runicLamps = math.random(2, partySize - 1)
-        instance:setLocalVar("[Lamp]count", runicLamps)
+        instance:setLocalVar('[Lamp]count', runicLamps)
 
         for i = ID.npc.RUNIC_LAMP_OFFSET, ID.npc.RUNIC_LAMP_OFFSET + runicLamps do
             local spawnPoint = math.random(1, #lampPoints)
@@ -127,8 +127,8 @@ local function lampsActivate(instance)
             table.insert(lampOrder, j)
         end
 
-        instance:setLocalVar("[Lamp]count", runicLamps)
-        instance:setLocalVar("[Lamp]lampRegister", 0)
+        instance:setLocalVar('[Lamp]count', runicLamps)
+        instance:setLocalVar('[Lamp]lampRegister', 0)
 
         for i = ID.npc.RUNIC_LAMP_OFFSET, ID.npc.RUNIC_LAMP_OFFSET + runicLamps do
             local spawnPoint = math.random(1, #lampPoints)
@@ -136,7 +136,7 @@ local function lampsActivate(instance)
 
             GetNPCByID(i, instance):setPos(lampPoints[spawnPoint])
             GetNPCByID(i, instance):setStatus(xi.status.NORMAL)
-            GetNPCByID(i, instance):setLocalVar("[Lamp]order", lampOrder[lampRandom])
+            GetNPCByID(i, instance):setLocalVar('[Lamp]order', lampOrder[lampRandom])
 
             table.remove(lampOrder, lampRandom)
             table.remove(lampPoints, spawnPoint)
@@ -145,9 +145,9 @@ local function lampsActivate(instance)
 end
 
 local function pickMobs(instance)
-    local currentFloor = instance:getLocalVar("Nyzul_Current_Floor")
+    local currentFloor = instance:getLocalVar('Nyzul_Current_Floor')
     local mobFamily    = math.random(1, 16)
-    local floorLayout  = instance:getLocalVar("Nyzul_Isle_FloorLayout")
+    local floorLayout  = instance:getLocalVar('Nyzul_Isle_FloorLayout')
     local pointTable   = xi.nyzulPoint.SpawnPoint[floorLayout]
     local spawnPoint   = {}
 
@@ -172,7 +172,7 @@ local function pickMobs(instance)
             table.insert(spawnPoint, i, pointTable[i])
         end
 
-        -- Not "free floors"
+        -- Not 'free floors'
         if instance:getStage() ~= xi.nyzul.objective.FREE_FLOOR then
             switch (instance:getStage()) : caseof
             {
@@ -219,7 +219,7 @@ local function pickMobs(instance)
                         SpawnMob(enemy, instance)
                         table.remove(spawnPoint, sPoint)
                         table.remove(specificEnemies, randomEnemy)
-                        instance:setLocalVar("Eliminate", instance:getLocalVar("Eliminate") + 1)
+                        instance:setLocalVar('Eliminate', instance:getLocalVar('Eliminate') + 1)
 
                         groupAmount = groupAmount - 1
                     end
@@ -237,13 +237,13 @@ local function pickMobs(instance)
                         GetMobByID(ID.mob[51].DAHAK, instance):setSpawn(sPointX, sPointY, sPointZ, sPointRot)
                         SpawnMob(ID.mob[51].DAHAK, instance)
                         table.remove(spawnPoint, sPoint)
-                        instance:setLocalVar("Eliminate", instance:getLocalVar("Eliminate") + 1)
+                        instance:setLocalVar('Eliminate', instance:getLocalVar('Eliminate') + 1)
                     end
                 end,
 
             -- Activate Lamps Objective
                 [xi.nyzul.objective.ACTIVATE_ALL_LAMPS] = function()
-                    instance:setLocalVar("[Lamps]Objective", math.random(xi.nyzul.lampsObjective.REGISTER, xi.nyzul.lampsObjective.ORDER))
+                    instance:setLocalVar('[Lamps]Objective', math.random(xi.nyzul.lampsObjective.REGISTER, xi.nyzul.lampsObjective.ORDER))
                     lampsActivate(instance)
                 end,
             }
@@ -262,7 +262,7 @@ local function pickMobs(instance)
                 table.remove(spawnPoint, sPoint)
 
                 if instance:getStage() == xi.nyzul.objective.ELIMINATE_ALL_ENEMIES then
-                    instance:setLocalVar("Eliminate", instance:getLocalVar("Eliminate") + 1)
+                    instance:setLocalVar('Eliminate', instance:getLocalVar('Eliminate') + 1)
                 end
             end
 
@@ -279,12 +279,12 @@ local function pickMobs(instance)
                 table.remove(spawnPoint, sPoint)
 
                 if instance:getStage() == xi.nyzul.objective.ELIMINATE_ALL_ENEMIES then
-                    instance:setLocalVar("Eliminate", instance:getLocalVar("Eliminate") + 1)
+                    instance:setLocalVar('Eliminate', instance:getLocalVar('Eliminate') + 1)
                 end
             end
 
             -- Spawn Gears
-            if instance:getLocalVar("gearObjective") > 0 then
+            if instance:getLocalVar('gearObjective') > 0 then
                 for i = xi.nyzul.floorEntities[17].start, xi.nyzul.floorEntities[17].stop do
                     local sPoint    = math.random(1, #spawnPoint)
                     local sPointX   = spawnPoint[sPoint][1]
@@ -292,7 +292,7 @@ local function pickMobs(instance)
                     local sPointZ   = spawnPoint[sPoint][3]
                     local sPointRot = spawnPoint[sPoint][4]
 
-                    instance:setLocalVar("gearPenalty", math.random(xi.nyzul.penalty.TIME, xi.nyzul.penalty.PATHOS))
+                    instance:setLocalVar('gearPenalty', math.random(xi.nyzul.penalty.TIME, xi.nyzul.penalty.PATHOS))
                     GetMobByID(i, instance):setSpawn(sPointX, sPointY, sPointZ, sPointRot)
                     SpawnMob(i, instance)
                     table.remove(spawnPoint, sPoint)
@@ -332,7 +332,7 @@ local function pickMobs(instance)
                     spawnedNMs = spawnedNMs - 1
 
                     if instance:getStage() == xi.nyzul.objective.ELIMINATE_ALL_ENEMIES then
-                        instance:setLocalVar("Eliminate", instance:getLocalVar("Eliminate") + 1)
+                        instance:setLocalVar('Eliminate', instance:getLocalVar('Eliminate') + 1)
                     end
                 end
             end
@@ -356,12 +356,12 @@ local function pickMobs(instance)
                 local sPointRot   = spawnPoint[sPoint][4]
 
                 if instance:getStage() == xi.nyzul.objective.ELIMINATE_ALL_ENEMIES then
-                    instance:setLocalVar("Eliminate", instance:getLocalVar("Eliminate") + 1)
+                    instance:setLocalVar('Eliminate', instance:getLocalVar('Eliminate') + 1)
                 elseif
                     instance:getStage() == xi.nyzul.objective.ELIMINATE_SPECIFIED_ENEMY and
-                    instance:getLocalVar("Nyzul_Specified_Enemy") == 0
+                    instance:getLocalVar('Nyzul_Specified_Enemy') == 0
                 then
-                    instance:setLocalVar("Nyzul_Specified_Enemy", enemy)
+                    instance:setLocalVar('Nyzul_Specified_Enemy', enemy)
                 end
 
                 GetMobByID(enemy, instance):setSpawn(sPointX, sPointY, sPointZ, sPointRot)
@@ -411,7 +411,7 @@ instanceObject.afterInstanceRegister = function(player)
     player:addTempItem(xi.item.UNDERSEA_RUINS_FIREFLIES)
 end
 
--- Instance "tick"
+-- Instance 'tick'
 instanceObject.onInstanceTimeUpdate = function(instance, elapsed)
     xi.instance.updateInstanceTime(instance, elapsed)
 end
@@ -445,7 +445,7 @@ instanceObject.onEventUpdate = function(player, csid, option, npc)
     if csid == 95 then
         local instance = player:getInstance()
 
-        if instance:getLocalVar("runeHandler") == player:getID() then
+        if instance:getLocalVar('runeHandler') == player:getID() then
             pickSetPoint(instance)
         end
     end
@@ -460,11 +460,11 @@ instanceObject.onEventFinish = function(player, csid, option, npc)
             players:setPos(0, 0, 0, 0, xi.zone.ALZADAAL_UNDERSEA_RUINS)
         end
     elseif csid == 95 then
-        if instance:getLocalVar("runeHandler") == player:getID() then
+        if instance:getLocalVar('runeHandler') == player:getID() then
             pickMobs(instance)
             xi.nyzul.removePathos(instance)
             xi.nyzul.addFloorPathos(instance)
-            instance:setLocalVar("runeHandler", 0)
+            instance:setLocalVar('runeHandler', 0)
         end
     end
 end

@@ -17,7 +17,7 @@ itemObject.onItemEquip = function(target, item)
             optParams.isKiller and
             not optParams.isWeaponSkillKill
         then
-            player:incrementCharVar("ChaosbringerKills", 1)
+            player:incrementCharVar('ChaosbringerKills', 1)
         end
     end)
 end

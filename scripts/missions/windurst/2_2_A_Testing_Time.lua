@@ -28,17 +28,17 @@ local handleAcceptMission = function(player, csid, option, npc)
 end
 
 local killCounter = function(mob, player, optParams)
-    local testVar = mission:getVar(player, "KillCount")
-    mission:setVar(player, "KillCount", testVar + 1)
+    local testVar = mission:getVar(player, 'KillCount')
+    mission:setVar(player, 'KillCount', testVar + 1)
 end
 
 local assessment = function(player, npc)
-    local startTime     = mission:getVar(player, "StartTime")
-    local startDay      = mission:getVar(player, "StartDay")
-    local startHour     = mission:getVar(player, "StartHour")
+    local startTime     = mission:getVar(player, 'StartTime')
+    local startDay      = mission:getVar(player, 'StartDay')
+    local startHour     = mission:getVar(player, 'StartHour')
     local secondsPassed = os.time() - startTime
     local hoursPassed   = VanadielHour()
-    local killCount     = mission:getVar(player, "KillCount")
+    local killCount     = mission:getVar(player, 'KillCount')
     local completed     = player:hasCompletedMission(mission.areaId, mission.missionId)
 
     -- player took too long to speak under requirements in time, so they fail mission
@@ -96,10 +96,10 @@ local assessment = function(player, npc)
 end
 
 local failMission = function(player, csid, option, npc)
-    mission:setVar(player, "StartDay", 0)
-    mission:setVar(player, "StartHour", 0)
-    mission:setVar(player, "StartTime", 0)
-    mission:setVar(player, "KillCount", 0)
+    mission:setVar(player, 'StartDay', 0)
+    mission:setVar(player, 'StartHour', 0)
+    mission:setVar(player, 'StartTime', 0)
+    mission:setVar(player, 'KillCount', 0)
     player:delKeyItem(xi.ki.CREATURE_COUNTER_MAGIC_DOLL)
     player:delMission(mission.areaId, mission.missionId)
 end
@@ -234,9 +234,9 @@ mission.sections =
                     if option == 2 then
                         player:setMissionStatus(mission.areaId, 2)
                         npcUtil.giveKeyItem(player, xi.ki.CREATURE_COUNTER_MAGIC_DOLL)
-                        mission:setVar(player, "StartDay", VanadielDayOfTheYear())
-                        mission:setVar(player, "StartHour", VanadielHour())
-                        mission:setVar(player, "StartTime", os.time())
+                        mission:setVar(player, 'StartDay', VanadielDayOfTheYear())
+                        mission:setVar(player, 'StartHour', VanadielHour())
+                        mission:setVar(player, 'StartTime', os.time())
                     end
                 end,
 
@@ -244,9 +244,9 @@ mission.sections =
                     if option == 2 then
                         player:setMissionStatus(mission.areaId, 2)
                         npcUtil.giveKeyItem(player, xi.ki.CREATURE_COUNTER_MAGIC_DOLL)
-                        mission:setVar(player, "StartDay", VanadielDayOfTheYear())
-                        mission:setVar(player, "StartHour", VanadielHour())
-                        mission:setVar(player, "StartTime", os.time())
+                        mission:setVar(player, 'StartDay', VanadielDayOfTheYear())
+                        mission:setVar(player, 'StartHour', VanadielHour())
+                        mission:setVar(player, 'StartTime', os.time())
                     end
                 end,
             },

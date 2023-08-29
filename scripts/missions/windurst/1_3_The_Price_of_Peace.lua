@@ -32,7 +32,7 @@ local handleAcceptMission = function(player, csid, option, npc)
 end
 
 local offeringsTurnedIn = function(player, csid, option, npc)
-    local offeringsVar = mission:getVar(player, "OfferingsTurnedIn")
+    local offeringsVar = mission:getVar(player, 'OfferingsTurnedIn')
 
     if csid == 45 and player:hasKeyItem(xi.ki.FOOD_OFFERING) then
         player:delKeyItem(xi.ki.FOOD_OFFERING)
@@ -46,9 +46,9 @@ local offeringsTurnedIn = function(player, csid, option, npc)
 
     if offeringsVar == 2 then
         player:setMissionStatus(mission.areaId, 3)
-        mission:setVar(player, "OfferingsTurnedIn", 0)
+        mission:setVar(player, 'OfferingsTurnedIn', 0)
     else
-        mission:setVar(player, "OfferingsTurnedIn", offeringsVar)
+        mission:setVar(player, 'OfferingsTurnedIn', offeringsVar)
     end
 end
 

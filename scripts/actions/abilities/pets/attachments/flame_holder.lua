@@ -19,7 +19,7 @@ local validskills = set{
 }
 
 attachmentObject.onEquip = function(automaton)
-    automaton:addListener("WEAPONSKILL_STATE_ENTER", "AUTO_FLAME_HOLDER_START", function(pet, skill)
+    automaton:addListener('WEAPONSKILL_STATE_ENTER', 'AUTO_FLAME_HOLDER_START', function(pet, skill)
         if not validskills[skill] then
             return
         end
@@ -32,15 +32,15 @@ attachmentObject.onEquip = function(automaton)
         end
 
         local amount = 25 * maneuvers
-        pet:setLocalVar("flameholdermaneuvers", maneuvers)
+        pet:setLocalVar('flameholdermaneuvers', maneuvers)
 
         pet:addMod(xi.mod.WEAPONSKILL_DAMAGE_BASE, amount)
-        pet:setLocalVar("flameholder", amount)
+        pet:setLocalVar('flameholder', amount)
     end)
 
-    automaton:addListener("WEAPONSKILL_STATE_EXIT", "AUTO_FLAME_HOLDER_END", function(pet, skill)
+    automaton:addListener('WEAPONSKILL_STATE_EXIT', 'AUTO_FLAME_HOLDER_END', function(pet, skill)
         local master = pet:getMaster()
-        local toremove = pet:getLocalVar("flameholdermaneuvers")
+        local toremove = pet:getLocalVar('flameholdermaneuvers')
         if toremove == 0 then
             return
         end
@@ -49,15 +49,15 @@ attachmentObject.onEquip = function(automaton)
             master:delStatusEffectSilent(xi.effect.FIRE_MANEUVER)
         end
 
-        pet:delMod(xi.mod.WEAPONSKILL_DAMAGE_BASE, pet:getLocalVar("flameholder"))
-        pet:setLocalVar("flameholder", 0)
-        pet:setLocalVar("flameholdermaneuvers", 0)
+        pet:delMod(xi.mod.WEAPONSKILL_DAMAGE_BASE, pet:getLocalVar('flameholder'))
+        pet:setLocalVar('flameholder', 0)
+        pet:setLocalVar('flameholdermaneuvers', 0)
     end)
 end
 
 attachmentObject.onUnequip = function(pet)
-    pet:removeListener("AUTO_FLAME_HOLDER_START")
-    pet:removeListener("AUTO_FLAME_HOLDER_END")
+    pet:removeListener('AUTO_FLAME_HOLDER_START')
+    pet:removeListener('AUTO_FLAME_HOLDER_END')
 end
 
 attachmentObject.onManeuverGain = function(pet, maneuvers)

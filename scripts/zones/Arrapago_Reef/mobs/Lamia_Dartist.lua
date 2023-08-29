@@ -2,7 +2,7 @@
 -- Area: Arrapago Reef
 --  Mob: Lamia Dartist
 -----------------------------------
-mixins = { require("scripts/mixins/weapon_break") }
+mixins = { require('scripts/mixins/weapon_break') }
 -----------------------------------
 local entity = {}
 

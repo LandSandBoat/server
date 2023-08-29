@@ -19,8 +19,8 @@ entity.onTrade = function(player, npc, trade)
         if tradeCount <= 5 and trade:hasItemQty(i, tradeCount) then
             SpawnMob(ID.mob[2][3].wahzil, instance):updateClaim(player)
             player:tradeComplete()
-            mob:setLocalVar("Cell", i)
-            mob:setLocalVar("Qnt", tradeCount)
+            mob:setLocalVar('Cell', i)
+            mob:setLocalVar('Qnt', tradeCount)
         end
     end
 end

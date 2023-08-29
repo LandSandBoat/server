@@ -3,7 +3,7 @@
 --  Mob: Pevv the Riverleaper
 -- BCNM: Amphibian Assault
 -----------------------------------
-mixins = { require("scripts/mixins/job_special") }
+mixins = { require('scripts/mixins/job_special') }
 -----------------------------------
 local entity = {}
 

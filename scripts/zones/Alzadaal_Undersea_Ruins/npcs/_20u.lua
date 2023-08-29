@@ -77,7 +77,7 @@ entity.onInstanceCreated = function(player, target, instance)
                     v:setInstance(instance)
                     v:startEvent(116, 8)
                     v:delKeyItem(xi.ki.REMNANTS_PERMIT)
-                    v:setLocalVar("SalvageArrapago", 1)
+                    v:setLocalVar('SalvageArrapago', 1)
                 end
             end
         end

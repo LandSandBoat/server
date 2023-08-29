@@ -1,4 +1,4 @@
-require("scripts/globals/utils")
+require('scripts/globals/utils')
 
 xi = xi or {}
 xi.mission = xi.mission or {}
@@ -801,7 +801,7 @@ end
 
 -- Interaction Framework Helper Functions
 local function getVarPrefix(areaId, questId)
-    return string.format("Mission[%d][%d]", areaId, questId)
+    return string.format('Mission[%d][%d]', areaId, questId)
 end
 
 xi.mission.incrementVar = function(player, areaId, questId, name, value)
@@ -825,9 +825,9 @@ xi.mission.setLocalVar = function(player, areaId, questId, name, value)
 end
 
 xi.mission.getMustZone = function(player, areaId, questId)
-    return player:getLocalVar(getVarPrefix(areaId, questId) .. "mustZone") == 1 and true or false
+    return player:getLocalVar(getVarPrefix(areaId, questId) .. 'mustZone') == 1 and true or false
 end
 
 xi.mission.setMustZone = function(player, areaId, questId)
-    player:setLocalVar(getVarPrefix(areaId, questId) .. "mustZone", 1)
+    player:setLocalVar(getVarPrefix(areaId, questId) .. 'mustZone', 1)
 end

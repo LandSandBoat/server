@@ -4,7 +4,7 @@
 local attachmentObject = {}
 
 attachmentObject.onEquip = function(pet)
-    pet:addListener("AUTOMATON_ATTACHMENT_CHECK", "ATTACHMENT_FLASHBULB", function(automaton, target)
+    pet:addListener('AUTOMATON_ATTACHMENT_CHECK', 'ATTACHMENT_FLASHBULB', function(automaton, target)
         local master = automaton:getMaster()
 
         if
@@ -19,7 +19,7 @@ attachmentObject.onEquip = function(pet)
 end
 
 attachmentObject.onUnequip = function(pet)
-    pet:removeListener("ATTACHMENT_FLASHBULB")
+    pet:removeListener('ATTACHMENT_FLASHBULB')
 end
 
 attachmentObject.onManeuverGain = function(pet, maneuvers)

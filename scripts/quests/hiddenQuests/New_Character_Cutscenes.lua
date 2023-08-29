@@ -1,7 +1,7 @@
 -----------------------------------
 -- New Character Cutscenes
 -----------------------------------
-local quest = HiddenQuest:new("newCharacterCS")
+local quest = HiddenQuest:new('newCharacterCS')
 
 quest.reward = {}
 

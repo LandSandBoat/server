@@ -3,7 +3,7 @@
 --  Mob: Ea'Tho Cruelheart
 -- BCNM: Grimshell Shocktroopers
 -----------------------------------
-mixins = { require("scripts/mixins/job_special") }
+mixins = { require('scripts/mixins/job_special') }
 -----------------------------------
 local entity = {}
 

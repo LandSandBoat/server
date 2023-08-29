@@ -49,9 +49,9 @@ zoneObject.onZoneIn = function(player, prevZone)
 end
 
 zoneObject.afterZoneIn = function(player)
-    player:entityVisualPacket("1pa1")
-    player:entityVisualPacket("1pb1")
-    player:entityVisualPacket("2pb1")
+    player:entityVisualPacket('1pa1')
+    player:entityVisualPacket('1pb1')
+    player:entityVisualPacket('2pb1')
 end
 
 -- TODO: Table teleporter events keyed by triggerArea and perform a direct
@@ -156,23 +156,23 @@ zoneObject.onEventUpdate = function(player, csid, option, npc)
     if csid == 1 and option == 10 then -- start
         player:updateEvent(0, 0, 0, 0, 0, 0, 0, 0)
     elseif csid == 1 and option == 1 then -- windows
-        player:setLocalVar("UnderseaScouting", player:getLocalVar("UnderseaScouting") + 1)
-        player:updateEvent(player:getLocalVar("UnderseaScouting"), 0, 0, 0, 0, 0, 0, 0)
+        player:setLocalVar('UnderseaScouting', player:getLocalVar('UnderseaScouting') + 1)
+        player:updateEvent(player:getLocalVar('UnderseaScouting'), 0, 0, 0, 0, 0, 0, 0)
     elseif csid == 1 and option == 2 then -- pillars
-        player:setLocalVar("UnderseaScouting", player:getLocalVar("UnderseaScouting") + 2)
-        player:updateEvent(player:getLocalVar("UnderseaScouting"), 0, 0, 0, 0, 0, 0, 0)
+        player:setLocalVar('UnderseaScouting', player:getLocalVar('UnderseaScouting') + 2)
+        player:updateEvent(player:getLocalVar('UnderseaScouting'), 0, 0, 0, 0, 0, 0, 0)
     elseif csid == 1 and option == 3 then -- floor
-        player:setLocalVar("UnderseaScouting", player:getLocalVar("UnderseaScouting") + 4)
-        player:updateEvent(player:getLocalVar("UnderseaScouting"), 0, 0, 0, 0, 0, 0, 0)
+        player:setLocalVar('UnderseaScouting', player:getLocalVar('UnderseaScouting') + 4)
+        player:updateEvent(player:getLocalVar('UnderseaScouting'), 0, 0, 0, 0, 0, 0, 0)
     end
 end
 
 zoneObject.onEventFinish = function(player, csid, option, npc)
-    if csid == 116 and player:getLocalVar("SalvageArrapago") == 1 then -- enter Salvage Silver Sea zone
+    if csid == 116 and player:getLocalVar('SalvageArrapago') == 1 then -- enter Salvage Silver Sea zone
         player:setPos(0, 0, 0, 0, 74)
-    elseif csid == 116 and player:getLocalVar("SalvageSilverSea") == 1 then -- enter Salvage Arrapago zone
+    elseif csid == 116 and player:getLocalVar('SalvageSilverSea') == 1 then -- enter Salvage Arrapago zone
         player:setPos(0, 0, 0, 0, 76)
-    elseif csid == 116 and player:getLocalVar("Nyzul") == 1 then -- enter instanced nyzul isle zone
+    elseif csid == 116 and player:getLocalVar('Nyzul') == 1 then -- enter instanced nyzul isle zone
         player:setPos(0, 0, 0, 0, 77)
     end
 end

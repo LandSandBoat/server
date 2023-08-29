@@ -2,7 +2,7 @@
 -- Area: Carpenters Landing
 --  Mob: Tonberry's Avatar
 -----------------------------------
-mixins = { require("scripts/mixins/families/avatar") }
+mixins = { require('scripts/mixins/families/avatar') }
 -----------------------------------
 local entity = {}
 

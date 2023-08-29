@@ -1,4 +1,4 @@
-require("scripts/globals/utils")
+require('scripts/globals/utils')
 
 -----------------------------------
 --
@@ -76,10 +76,10 @@ local function onMobRoamAction(follower)
     local options    = followerOptions[followerId]
 
     if options.forceRepathInterval then
-        local lastPath = follower:getLocalVar("[follow]lastPath") + 1
-        follower:setLocalVar("[follow]lastPath", lastPath)
+        local lastPath = follower:getLocalVar('[follow]lastPath') + 1
+        follower:setLocalVar('[follow]lastPath', lastPath)
         follower:queue(options.forceRepathInterval * 1000, function()
-            if follower:getLocalVar("[follow]lastPath") == lastPath then
+            if follower:getLocalVar('[follow]lastPath') == lastPath then
                 follower:clearPath()
             end
         end)
@@ -170,11 +170,11 @@ xi.follow.follow = function(follower, leader, options)
     table.insert(leaderToFollowersMap[leaderId], follower)
     followerToLeaderMap[followerId] = leader
 
-    follower:addListener("ROAM_ACTION", "FOLLOW_ROAM_ACTION", onMobRoamAction)
-    follower:addListener("DESPAWN", "FOLLOW_DESPAWN", onMobDespawn)
-    follower:setLocalVar("[follow]roamFlags", follower:getRoamFlags())
-    follower:setLocalVar("[follow]DONT_ROAM_HOME", follower:getMobMod(xi.mobMod.DONT_ROAM_HOME))
-    follower:setLocalVar("[follow]ROAM_COOL", follower:getMobMod(xi.mobMod.ROAM_COOL))
+    follower:addListener('ROAM_ACTION', 'FOLLOW_ROAM_ACTION', onMobRoamAction)
+    follower:addListener('DESPAWN', 'FOLLOW_DESPAWN', onMobDespawn)
+    follower:setLocalVar('[follow]roamFlags', follower:getRoamFlags())
+    follower:setLocalVar('[follow]DONT_ROAM_HOME', follower:getMobMod(xi.mobMod.DONT_ROAM_HOME))
+    follower:setLocalVar('[follow]ROAM_COOL', follower:getMobMod(xi.mobMod.ROAM_COOL))
     follower:setRoamFlags(xi.roamFlag.SCRIPTED)
     follower:setMobMod(xi.mobMod.DONT_ROAM_HOME, 1)
     if options.roamCooldown then
@@ -221,11 +221,11 @@ xi.follow.stopFollowing = function(follower)
     end
 
     followerOptions[follower:getID()] = nil
-    follower:removeListener("FOLLOW_ROAM_ACTION")
-    follower:removeListener("FOLLOW_DESPAWN")
-    follower:setRoamFlags(follower:getLocalVar("[follow]roamFlags"))
-    follower:setMobMod(xi.mobMod.DONT_ROAM_HOME, follower:getLocalVar("[follow]DONT_ROAM_HOME"))
-    follower:setMobMod(xi.mobMod.ROAM_COOL, follower:getLocalVar("[follow]ROAM_COOL"))
+    follower:removeListener('FOLLOW_ROAM_ACTION')
+    follower:removeListener('FOLLOW_DESPAWN')
+    follower:setRoamFlags(follower:getLocalVar('[follow]roamFlags'))
+    follower:setMobMod(xi.mobMod.DONT_ROAM_HOME, follower:getLocalVar('[follow]DONT_ROAM_HOME'))
+    follower:setMobMod(xi.mobMod.ROAM_COOL, follower:getLocalVar('[follow]ROAM_COOL'))
 end
 
 xi.follow.getFollowers = function(leader)

@@ -15,7 +15,7 @@ end
 entity.onTrigger = function(player, npc)
     local trialByIce = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.TRIAL_BY_ICE)
     local classReunion = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CLASS_REUNION)
-    local classReunionProgress = player:getCharVar("ClassReunionProgress")
+    local classReunionProgress = player:getCharVar('ClassReunionProgress')
 
     -----------------------------------
     -- Class Reunion
@@ -30,9 +30,9 @@ entity.onTrigger = function(player, npc)
     -----------------------------------
     elseif
         (trialByIce == QUEST_AVAILABLE and player:getFameLevel(xi.quest.fame_area.SANDORIA) >= 6) or
-        (trialByIce == QUEST_COMPLETED and os.time() > player:getCharVar("TrialByIce_date"))
+        (trialByIce == QUEST_COMPLETED and os.time() > player:getCharVar('TrialByIce_date'))
     then
-        player:startEvent(706, 0, xi.ki.TUNING_FORK_OF_ICE) -- Start and restart quest "Trial by ice"
+        player:startEvent(706, 0, xi.ki.TUNING_FORK_OF_ICE) -- Start and restart quest 'Trial by ice'
     elseif
         trialByIce == QUEST_ACCEPTED and
         not player:hasKeyItem(xi.ki.TUNING_FORK_OF_ICE) and
@@ -86,7 +86,7 @@ entity.onEventFinish = function(player, csid, option, npc)
         end
 
         player:addQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.TRIAL_BY_ICE)
-        player:setCharVar("TrialByIce_date", 0)
+        player:setCharVar('TrialByIce_date', 0)
         player:addKeyItem(xi.ki.TUNING_FORK_OF_ICE)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.TUNING_FORK_OF_ICE)
     elseif csid == 718 then
@@ -120,7 +120,7 @@ entity.onEventFinish = function(player, csid, option, npc)
 
             player:addTitle(xi.title.HEIR_OF_THE_GREAT_ICE)
             player:delKeyItem(xi.ki.WHISPER_OF_FROST) --Whisper of Frost, as a trade for the above rewards
-            player:setCharVar("TrialByIce_date", getMidnight())
+            player:setCharVar('TrialByIce_date', getMidnight())
             player:addFame(xi.quest.fame_area.SANDORIA, 30)
             player:completeQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.TRIAL_BY_ICE)
         end
@@ -128,7 +128,7 @@ entity.onEventFinish = function(player, csid, option, npc)
         if player:getFreeSlotsCount() ~= 0 then
             player:addItem(xi.item.ICE_PENDULUM)
             player:messageSpecial(ID.text.ITEM_OBTAINED, xi.item.ICE_PENDULUM)
-            player:setCharVar("ClassReunionProgress", 5)
+            player:setCharVar('ClassReunionProgress', 5)
         else
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.item.ICE_PENDULUM)
         end

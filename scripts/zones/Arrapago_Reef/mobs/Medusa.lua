@@ -5,7 +5,7 @@
 -- TODO: resists, attack/def boosts
 -----------------------------------
 local ID = zones[xi.zone.ARRAPAGO_REMNANTS]
-mixins = { require("scripts/mixins/job_special") }
+mixins = { require('scripts/mixins/job_special') }
 -----------------------------------
 local entity = {}
 

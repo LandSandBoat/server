@@ -6,15 +6,15 @@ local ID = zones[xi.zone.AHT_URHGAN_WHITEGATE]
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
-    zone:registerTriggerArea(1,   57, -1.0,  -70,   62,  1.0,  -65) -- Sets Mark for "Got It All" Quest cutscene.
-    zone:registerTriggerArea(2,  -96, -7.0,  121,  -64, -5.0,  137) -- Sets Mark for "Vanishing Act" Quest cutscene.
+    zone:registerTriggerArea(1,   57, -1.0,  -70,   62,  1.0,  -65) -- Sets Mark for 'Got It All' Quest cutscene.
+    zone:registerTriggerArea(2,  -96, -7.0,  121,  -64, -5.0,  137) -- Sets Mark for 'Vanishing Act' Quest cutscene.
     zone:registerTriggerArea(3,   20, -7.2,  -51,   39, -7.2,  -40) -- ToAU Mission 1, X region. Salaheem's Sentinels, second platform.
     zone:registerTriggerArea(4,   68, -1.0,   30,   91,  1.0,   53) -- ToAU Mission 4 region. Walahra Temple.
     zone:registerTriggerArea(5,   64, -7.0, -137,   95, -5.0, -123) -- ToAU Mission 4 region. Shaharat Teahouse.
     zone:registerTriggerArea(6,   30, -6.6,  -60,   39, -6.6,  -50) -- ToAU Mission 11 region. Salaheem's Sentinels, first platform.
-    zone:registerTriggerArea(7,   69,  0.0,    7,   73,  0.0,   11) -- Sets Mark for "Led Astry" Quest cutscene.
-    zone:registerTriggerArea(8,   10,  2.0,  -96,   14,  2.0,  -92) -- Sets Mark for "Led Astry" Quest cutscene.
-    zone:registerTriggerArea(9, -103,  0.0,  -16, -100,  0.0,  -12) -- Sets Mark for "Striking a Balance" Quest cutscene.
+    zone:registerTriggerArea(7,   69,  0.0,    7,   73,  0.0,   11) -- Sets Mark for 'Led Astry' Quest cutscene.
+    zone:registerTriggerArea(8,   10,  2.0,  -96,   14,  2.0,  -92) -- Sets Mark for 'Led Astry' Quest cutscene.
+    zone:registerTriggerArea(9, -103,  0.0,  -16, -100,  0.0,  -12) -- Sets Mark for 'Striking a Balance' Quest cutscene.
 end
 
 zoneObject.onZoneIn = function(player, prevZone)
@@ -42,20 +42,20 @@ zoneObject.onZoneIn = function(player, prevZone)
 end
 
 zoneObject.afterZoneIn = function(player)
-    player:entityVisualPacket("1pb1")
+    player:entityVisualPacket('1pb1')
 end
 
 zoneObject.onTriggerAreaEnter = function(player, triggerArea)
     switch (triggerArea:GetTriggerAreaID()): caseof
     {
         [1] = function()  -- Cutscene for Got It All quest.
-            if player:getCharVar("gotitallCS") == 5 then
+            if player:getCharVar('gotitallCS') == 5 then
                 player:startEvent(526)
             end
         end,
 
         [2] = function() -- CS for Vanishing Act Quest
-            if player:getCharVar("vanishingactCS") == 3 then
+            if player:getCharVar('vanishingactCS') == 3 then
                 player:startEvent(44)
             end
         end,
@@ -89,7 +89,7 @@ end
 
 zoneObject.onEventFinish = function(player, csid, option, npc)
     if csid == 44 then
-        player:setCharVar("vanishingactCS", 4)
+        player:setCharVar('vanishingactCS', 4)
         player:setPos(-80, -6, 122, 5)
     elseif csid == 200 then
         player:setPos(0, -2, 0, 0, 47)
@@ -100,14 +100,14 @@ zoneObject.onEventFinish = function(player, csid, option, npc)
     elseif csid == 204 then
         player:setPos(11, 2, 142, 64)
     elseif csid == 526 then
-        player:setCharVar("gotitallCS", 6)
+        player:setCharVar('gotitallCS', 6)
         player:setPos(60, 0, -71, 38)
     elseif csid == 797 then
-        player:setCharVar("AgainstAllOdds", 1) -- Set For Corsair BCNM
+        player:setCharVar('AgainstAllOdds', 1) -- Set For Corsair BCNM
         player:addQuest(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.AGAINST_ALL_ODDS) -- Start of af 3 not completed yet
         player:addKeyItem(xi.ki.LIFE_FLOAT) -- BCNM KEY ITEM TO ENTER BCNM
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.LIFE_FLOAT)
-        player:setCharVar("AgainstAllOddsTimer", getMidnight())
+        player:setCharVar('AgainstAllOddsTimer', getMidnight())
     end
 end
 

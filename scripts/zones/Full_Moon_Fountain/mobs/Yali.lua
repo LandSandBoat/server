@@ -21,7 +21,7 @@ entity.onMobSpawn = function(mob)
         GetMobByID(instOffset + 2):isDead() and
         GetMobByID(instOffset + 3):isDead()
     then
-        battlefield:setLocalVar("phaseChange", 0)
+        battlefield:setLocalVar('phaseChange', 0)
     end
 end
 

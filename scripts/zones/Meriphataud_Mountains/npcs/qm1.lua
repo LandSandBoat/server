@@ -11,7 +11,7 @@ local entity = {}
 entity.onTrade = function(player, npc, trade)
     if
         npcUtil.tradeHas(trade, xi.item.WYVERN_EGG) and
-        player:getCharVar("TheHolyCrest_Event") == 4
+        player:getCharVar('TheHolyCrest_Event') == 4
     then
         player:startEvent(56)
     end
@@ -26,7 +26,7 @@ end
 
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 56 then
-        player:setCharVar("TheHolyCrest_Event", 5)
+        player:setCharVar('TheHolyCrest_Event', 5)
         player:confirmTrade()
         player:startEvent(33)
     end

@@ -7,7 +7,7 @@ local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
     -- randomize Old Prof. Mariselle's spawn location
-    GetNPCByID(ID.npc.QM_MARISELLE_OFFSET + math.random(0, 5)):setLocalVar("hasProfessorMariselle", 1)
+    GetNPCByID(ID.npc.QM_MARISELLE_OFFSET + math.random(0, 5)):setLocalVar('hasProfessorMariselle', 1)
 
     xi.treasure.initZone(zone)
 end

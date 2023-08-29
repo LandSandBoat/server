@@ -7,7 +7,7 @@
 local entity = {}
 
 entity.onTrigger = function(player, npc)
-    local chasingQuotasStat = player:getCharVar("ChasingQuotas_Progress")
+    local chasingQuotasStat = player:getCharVar('ChasingQuotas_Progress')
 
     -- CHASING QUOTAS
     if chasingQuotasStat == 4 then
@@ -27,7 +27,7 @@ end
 entity.onEventFinish = function(player, csid, option, npc)
     -- CHASING QUOTAS
     if csid == 137 then
-        player:setCharVar("ChasingQuotas_Progress", 5)
+        player:setCharVar('ChasingQuotas_Progress', 5)
         player:delKeyItem(xi.ki.SHINY_EARRING)
     end
 end

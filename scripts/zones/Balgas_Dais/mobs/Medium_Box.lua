@@ -15,8 +15,8 @@ entity.onMobEngaged = function(mob, target)
     local mobId = mob:getID()
     local small = GetMobByID(mobId - 1)
 
-    if small:getLocalVar("engaged") == 0 then
-        small:setLocalVar("engaged", 1)
+    if small:getLocalVar('engaged') == 0 then
+        small:setLocalVar('engaged', 1)
 
         mob:setMobMod(xi.mobMod.DRAW_IN, 1)
         DespawnMob(mobId - 1)

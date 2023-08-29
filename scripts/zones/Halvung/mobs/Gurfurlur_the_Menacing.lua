@@ -3,7 +3,7 @@
 --  Mob: Gurfurlur the Menacing
 -- !pos -59.000 -23.000 3.000 62
 -----------------------------------
-mixins = { require("scripts/mixins/job_special") }
+mixins = { require('scripts/mixins/job_special') }
 local ID = zones[xi.zone.HALVUNG]
 -----------------------------------
 local entity = {}

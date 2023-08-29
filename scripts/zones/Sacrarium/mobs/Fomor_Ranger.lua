@@ -2,7 +2,7 @@
 -- Area: Sacrarium
 --  Mob: Fomor Ranger
 -----------------------------------
-mixins = { require("scripts/mixins/fomor_hate") }
+mixins = { require('scripts/mixins/fomor_hate') }
 -----------------------------------
 local entity = {}
 

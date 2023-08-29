@@ -5,7 +5,7 @@
 --  Summoning of pets should be tied to Soul Voice usage.
 --  Gains a hidden regen from Army's Paeon V. Even if it is dispelled, it will gain several HP%.
 -----------------------------------
-mixins = { require("scripts/mixins/job_special") }
+mixins = { require('scripts/mixins/job_special') }
 -----------------------------------
 local entity = {}
 
@@ -13,8 +13,8 @@ entity.onMobRoam = function(mob, target)
     local mobId = mob:getID()
     local hpp = mob:getHPP()
 
-    if hpp > 50 and mob:getLocalVar("petsOne") == 1 then
-        mob:setLocalVar("petsOne", 0)
+    if hpp > 50 and mob:getLocalVar('petsOne') == 1 then
+        mob:setLocalVar('petsOne', 0)
 
         for i = mobId + 5, mobId + 6 do
             local pet = GetMobByID(i)
@@ -24,8 +24,8 @@ entity.onMobRoam = function(mob, target)
         end
     end
 
-    if hpp > 25 and mob:getLocalVar("petsTwo") == 1 then
-        mob:setLocalVar("petsTwo", 0)
+    if hpp > 25 and mob:getLocalVar('petsTwo') == 1 then
+        mob:setLocalVar('petsTwo', 0)
 
         for i = mobId + 7, mobId + 8 do
             local pet = GetMobByID(i)
@@ -44,8 +44,8 @@ entity.onMobFight = function(mob, target)
     local z = mob:getZPos()
     local r = mob:getRotPos()
 
-    if hpp < 50 and mob:getLocalVar("petsOne") == 0 then
-        mob:setLocalVar("petsOne", 1)
+    if hpp < 50 and mob:getLocalVar('petsOne') == 0 then
+        mob:setLocalVar('petsOne', 1)
 
         for i = mobId + 5, mobId + 6 do
             local pet = GetMobByID(i)
@@ -56,8 +56,8 @@ entity.onMobFight = function(mob, target)
         end
     end
 
-    if hpp < 25 and mob:getLocalVar("petsTwo") == 0 then
-        mob:setLocalVar("petsTwo", 1)
+    if hpp < 25 and mob:getLocalVar('petsTwo') == 0 then
+        mob:setLocalVar('petsTwo', 1)
 
         for i = mobId + 7, mobId + 8 do
             local pet = GetMobByID(i)

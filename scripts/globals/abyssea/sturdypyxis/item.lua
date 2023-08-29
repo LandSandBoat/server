@@ -273,11 +273,11 @@ local itemTierDeductions =
 }
 
 local function GetChestItemTable(npc)
-    local maxItem = npc:getLocalVar("NB_ITEM")
+    local maxItem = npc:getLocalVar('NB_ITEM')
     local itemTable = {}
 
     for i = 1, maxItem do
-        itemTable[i] = npc:getLocalVar("ITEM" .. i)
+        itemTable[i] = npc:getLocalVar('ITEM' .. i)
     end
 
     return itemTable
@@ -291,11 +291,11 @@ local function GetRandItem(zoneId, tier)
 end
 
 local function GetLootTable(player, npc)
-    local maxItem = npc:getLocalVar("NB_ITEM")
+    local maxItem = npc:getLocalVar('NB_ITEM')
     local loot = {}
 
     for i = 1, maxItem do
-        table.insert(loot, npc:getLocalVar("ITEM" ..i))
+        table.insert(loot, npc:getLocalVar('ITEM' ..i))
     end
 
     return loot
@@ -304,7 +304,7 @@ end
 local function GiveItem(player, npc, itemnum)
     local zoneId  = player:getZoneID()
     local ID      = zones[zoneId]
-    local chestid = npc:getLocalVar("CHESTID")
+    local chestid = npc:getLocalVar('CHESTID')
     local chest   = GetNPCByID(chestid)
     local itemList = GetChestItemTable(npc)
 
@@ -318,7 +318,7 @@ local function GiveItem(player, npc, itemnum)
         else
             player:addItem(itemList[itemnum], 1, 0, 0, 0, 0)
             xi.pyxis.messageChest(player, ID.text.OBTAINS_ITEM, itemList[itemnum], 0, 0, 0, npc)
-            chest:setLocalVar("ITEM" .. itemnum, 0)
+            chest:setLocalVar('ITEM' .. itemnum, 0)
             itemList[itemnum] = 0
         end
     end
@@ -329,11 +329,11 @@ local function GiveItem(player, npc, itemnum)
 end
 
 xi.pyxis.item.setItems = function(npc, tier)
-    local itemcount = npc:getLocalVar("NB_ITEM")
+    local itemcount = npc:getLocalVar('NB_ITEM')
 
     for i = 1, itemcount do
         local item = GetRandItem(npc:getZoneID(), tier)
-        npc:setLocalVar("ITEM" .. i, item)
+        npc:setLocalVar('ITEM' .. i, item)
     end
 end
 

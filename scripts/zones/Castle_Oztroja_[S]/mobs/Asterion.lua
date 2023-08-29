@@ -2,7 +2,7 @@
 -- Area: Castle Oztroja [S]
 --   NM: Asterion
 -----------------------------------
-mixins = { require("scripts/mixins/job_special") }
+mixins = { require('scripts/mixins/job_special') }
 -----------------------------------
 local entity = {}
 

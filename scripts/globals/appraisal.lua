@@ -2,8 +2,8 @@
 -- Appraisal Utilities
 -- desc: Common functionality for Appraisals
 -----------------------------------
-require("scripts/globals/assault")
-require("scripts/globals/npc_util")
+require('scripts/globals/assault')
+require('scripts/globals/npc_util')
 -----------------------------------
 xi = xi or {}
 xi.appraisal = xi.appraisal or {}
@@ -1511,7 +1511,7 @@ xi.appraisal.appraiseItem = function(player, npc, trade, gil, appraisalCsid)
 
                 if appraisedItem ~= 0 then
                     player:startEvent(appraisalCsid, 1, appraisedItem)
-                    player:setLocalVar("Appraisal", appraisedItem) -- anticheat
+                    player:setLocalVar('Appraisal', appraisedItem) -- anticheat
                     player:confirmTrade()
                 end
 
@@ -1549,10 +1549,10 @@ end
 
 xi.appraisal.appraisalOnEventFinish = function(player, csid, option, gil, appraisalCsid, npc)
     if csid == appraisalCsid then
-        local appraisedItem = player:getLocalVar("Appraisal")
+        local appraisedItem = player:getLocalVar('Appraisal')
         player:addTreasure(appraisedItem, npc)
         player:delGil(gil)
-        player:setLocalVar("Appraisal", 0)
+        player:setLocalVar('Appraisal', 0)
     end
 end
 
@@ -1569,7 +1569,7 @@ xi.appraisal.canGetUnappraisedItem = function(player, area)
 end
 
 xi.appraisal.pickUnappraisedItem = function(player, npc, qItemTable)
-    if npc:getLocalVar("UnappraisedItem") == 0 then
+    if npc:getLocalVar('UnappraisedItem') == 0 then
         for i = 1, #qItemTable, 1 do
             local lootGroup = qItemTable[i]
             if lootGroup then
@@ -1584,7 +1584,7 @@ xi.appraisal.pickUnappraisedItem = function(player, npc, qItemTable)
                     max = max - entry.droprate
                     if roll > max then
                         if entry.itemid > 0 then
-                            npc:setLocalVar("UnappraisedItem", entry.itemid)
+                            npc:setLocalVar('UnappraisedItem', entry.itemid)
                         end
 
                         break
@@ -1600,10 +1600,10 @@ xi.appraisal.assaultChestTrigger = function(player, npc, qItemTable, regItemTabl
     local chars    = instance:getChars()
     local area     = player:getCurrentAssault()
 
-    if instance:completed() and npc:getLocalVar("open") == 0 then
+    if instance:completed() and npc:getLocalVar('open') == 0 then
         if xi.appraisal.canGetUnappraisedItem(player, area) then
             xi.appraisal.pickUnappraisedItem(player, npc, qItemTable)
-            local unappraisedItem = npc:getLocalVar("UnappraisedItem")
+            local unappraisedItem = npc:getLocalVar('UnappraisedItem')
             if player:getFreeSlotsCount() == 0 then
                 player:messageSpecial(zones[player:getZoneID()].text.ITEM_CANNOT_BE_OBTAINED, unappraisedItem)
                 return
@@ -1615,11 +1615,11 @@ xi.appraisal.assaultChestTrigger = function(player, npc, qItemTable, regItemTabl
             end
         end
 
-        npc:entityAnimationPacket("open")
-        npc:setLocalVar("open", 1)
+        npc:entityAnimationPacket('open')
+        npc:setLocalVar('open', 1)
         npc:setUntargetable(true)
         npc:timer(15000, function(npcArg)
-            npcArg:entityAnimationPacket("kesu")
+            npcArg:entityAnimationPacket('kesu')
         end)
 
         npc:timer(16000, function(npcArg)

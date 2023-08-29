@@ -2,7 +2,7 @@
 -- Area: Aydeewa Subterrane
 --   NM: Fossorial Flea
 -----------------------------------
-mixins = { require("scripts/mixins/families/chigoe") }
+mixins = { require('scripts/mixins/families/chigoe') }
 -----------------------------------
 local entity = {}
 

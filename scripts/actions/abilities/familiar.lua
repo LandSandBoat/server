@@ -14,12 +14,12 @@ abilityObject.onAbilityCheck = function(player, target, ability)
         return xi.msg.basic.REQUIRES_A_PET, 0
     elseif
         (not player:isJugPet() and pet:getObjType() ~= xi.objType.MOB) or
-        pet:getLocalVar("ReceivedFamiliar") == 1
+        pet:getLocalVar('ReceivedFamiliar') == 1
     then
         return xi.msg.basic.NO_EFFECT_ON_PET, 0
     end
 
-    pet:setLocalVar("ReceivedFamiliar", 1)
+    pet:setLocalVar('ReceivedFamiliar', 1)
     ability:setRecast(ability:getRecast() - player:getMod(xi.mod.ONE_HOUR_RECAST))
 
     return 0, 0

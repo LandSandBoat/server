@@ -1,4 +1,4 @@
-require("scripts/globals/teleports")
+require('scripts/globals/teleports')
 -----------------------------------
 xi = xi or {}
 xi.homepoint = xi.homepoint or {}
@@ -154,7 +154,7 @@ local function getCost(from, to, key)
 end
 
 local function goToHP(player, choice, index)
-    local origin = player:getLocalVar("originIndex")
+    local origin = player:getLocalVar('originIndex')
     local hasKI  = player:hasKeyItem(xi.ki.RHAPSODY_IN_WHITE)
 
     if choice == selection.SAME_ZONE then
@@ -185,11 +185,11 @@ xi.homepoint.onTrigger = function(player, csid, index)
     end
 
     if player:hasKeyItem(xi.ki.RHAPSODY_IN_WHITE) then
-        -- "Rhapsody in White" key item reduces teleport fee by 80%
+        -- 'Rhapsody in White' key item reduces teleport fee by 80%
         params = bit.bor(params, 0x20000)
     end
 
-    player:setLocalVar("originIndex", index)
+    player:setLocalVar('originIndex', index)
 
     local g1, g2, g3, g4 = unpack(player:getTeleportTable(xi.teleport.type.HOMEPOINT))
     player:startEvent(csid, 1, g1, g2, g3, g4, player:getGil(), 4095, params)
@@ -253,7 +253,7 @@ xi.homepoint.onEventFinish = function(player, csid, option, event)
             if zones[player:getZoneID()].text.HOMEPOINT_SET then
                 player:messageSpecial(zones[player:getZoneID()].text.HOMEPOINT_SET)
             else
-                print(string.format("ERROR: missing ID.text.HOMEPOINT_SET in zone %s.", player:getZoneName()))
+                print(string.format('ERROR: missing ID.text.HOMEPOINT_SET in zone %s.', player:getZoneName()))
             end
         elseif
             xi.settings.main.HOMEPOINT_TELEPORT == 1 and

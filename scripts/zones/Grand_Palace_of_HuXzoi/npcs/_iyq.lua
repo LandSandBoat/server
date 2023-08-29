@@ -12,7 +12,7 @@ end
 
 entity.onTrigger = function(player, npc)
     local cop = player:getCurrentMission(xi.mission.log_id.COP)
-    local copStat = player:getCharVar("PromathiaStatus")
+    local copStat = player:getCharVar('PromathiaStatus')
 
     if
         cop == xi.mission.id.cop.A_FATE_DECIDED and
@@ -30,7 +30,7 @@ end
 
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 3 then
-        player:setCharVar("PromathiaStatus", 0)
+        player:setCharVar('PromathiaStatus', 0)
         player:completeMission(xi.mission.log_id.COP, xi.mission.id.cop.A_FATE_DECIDED)
         player:addMission(xi.mission.log_id.COP, xi.mission.id.cop.WHEN_ANGELS_FALL)
     end

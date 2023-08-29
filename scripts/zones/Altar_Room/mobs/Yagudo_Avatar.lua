@@ -2,7 +2,7 @@
 -- Area: Altar Room
 -----------------------------------
 local ID = zones[xi.zone.ALTAR_ROOM]
-mixins = { require("scripts/mixins/job_special") }
+mixins = { require('scripts/mixins/job_special') }
 -----------------------------------
 local entity = {}
 
@@ -12,9 +12,9 @@ end
 entity.onMobDeath = function(mob, player, optParams)
     if
         player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.A_MORAL_MANIFEST) == QUEST_ACCEPTED and
-        player:getCharVar("moral") == 5
+        player:getCharVar('moral') == 5
     then
-        player:setCharVar("moral", 6)
+        player:setCharVar('moral', 6)
         player:delKeyItem(xi.ki.VAULT_QUIPUS)
     end
 

@@ -497,8 +497,8 @@ local fishRewards =
 }
 
 local function tradeFish(player, fishId)
-    player:setCharVar("insideBellyFishId", fishId)
-    player:setCharVar("insideBellyItemIdx", 0)
+    player:setCharVar('insideBellyFishId', fishId)
+    player:setCharVar('insideBellyItemIdx', 0)
 
     local rewards = fishRewards[fishId].items
     local roll    = math.random(1, 1000) / 10
@@ -509,7 +509,7 @@ local function tradeFish(player, fishId)
         sum = sum + rewards[i].chance
         if roll <= sum then
             found = true
-            player:setCharVar("insideBellyItemIdx", i)
+            player:setCharVar('insideBellyItemIdx', i)
 
             -- NOTE: We confirm the trade now, and not at the end of the cutscene as normal
             --     : because the cutscene gives away whether or not the trade was successful
@@ -528,8 +528,8 @@ end
 
 local function giveReward(player, csid)
     if csid == 166 or csid == 167 then
-        local fishId  = player:getCharVar("insideBellyFishId")
-        local itemIdx = player:getCharVar("insideBellyItemIdx")
+        local fishId  = player:getCharVar('insideBellyFishId')
+        local itemIdx = player:getCharVar('insideBellyItemIdx')
         local reward  = fishRewards[fishId]
         local traded  = true
 
@@ -548,8 +548,8 @@ local function giveReward(player, csid)
 
         if traded then
             npcUtil.giveCurrency(player, 'gil', reward.gil)
-            player:setCharVar("insideBellyFishId", 0)
-            player:setCharVar("insideBellyItemIdx", 0)
+            player:setCharVar('insideBellyFishId', 0)
+            player:setCharVar('insideBellyItemIdx', 0)
             if player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.INSIDE_THE_BELLY) == QUEST_ACCEPTED then
                 player:completeQuest(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.INSIDE_THE_BELLY)
             end
@@ -579,7 +579,7 @@ entity.onTrade = function(player, npc, trade)
 
     -- A BOY'S DREAM
     elseif
-        player:getCharVar("aBoysDreamCS") == 5 and
+        player:getCharVar('aBoysDreamCS') == 5 and
         npcUtil.tradeHasExactly(trade, xi.item.ODONTOTYRANNUS)
     then
         player:startEvent(85)
@@ -603,8 +603,8 @@ entity.onTrigger = function(player, npc)
     local mLvl           = player:getMainLvl()
 
     -- UNDER THE SEA
-    if player:getCharVar("underTheSeaVar") == 3 then
-        player:startEvent(34, 4501) -- During quest "Under the sea" - 3rd dialog
+    if player:getCharVar('underTheSeaVar') == 3 then
+        player:startEvent(34, 4501) -- During quest 'Under the sea' - 3rd dialog
 
     -- INSIDE THE BELLY
     elseif
@@ -649,7 +649,7 @@ end
 entity.onEventFinish = function(player, csid, option, npc)
     -- UNDER THE SEA
     if csid == 34 then
-        player:setCharVar("underTheSeaVar", 4)
+        player:setCharVar('underTheSeaVar', 4)
     elseif csid == 35 then
         npcUtil.giveKeyItem(player, xi.ki.ETCHED_RING)
         player:confirmTrade()
@@ -659,7 +659,7 @@ entity.onEventFinish = function(player, csid, option, npc)
     -- A BOY'S DREAM
     elseif csid == 85 then
         npcUtil.giveKeyItem(player, xi.ki.KNIGHTS_BOOTS)
-        player:setCharVar("aBoysDreamCS", 6)
+        player:setCharVar('aBoysDreamCS', 6)
         player:confirmTrade()
 
     -- INSIDE THE BELLY

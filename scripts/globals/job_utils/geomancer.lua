@@ -1,10 +1,10 @@
 -----------------------------------
 -- Geomancer Job Utilities
 -----------------------------------
-require("scripts/globals/ability")
-require("scripts/globals/pets")
-require("scripts/globals/weaponskills")
-require("scripts/globals/jobpoints")
+require('scripts/globals/ability')
+require('scripts/globals/pets')
+require('scripts/globals/weaponskills')
+require('scripts/globals/jobpoints')
 -----------------------------------
 xi = xi or {}
 xi.job_utils = xi.job_utils or {}
@@ -184,7 +184,7 @@ end
 -- GEO/INDI Potency Function
 -----------------------------------
 local function getEffectPotency(player, effect)
-    -- Note: only one "Geomancy +" item takes effect so highest value on a single item wins.
+    -- Note: only one 'Geomancy +' item takes effect so highest value on a single item wins.
     -- Potency from a skill level perspective caps out once your combined hand bell skill and geomancy skill reaches 900.
     local geoSkill      = player:getSkillLevel(xi.skill.GEOMANCY)
     local handbellSkill = player:getSkillLevel(xi.skill.HANDBELL)
@@ -248,7 +248,7 @@ end
 
 xi.job_utils.geomancer.fullCircle = function(player, target, ability)
     local hppRemaining = target:getHPP()
-    local mpCost       = player:getLocalVar("MP_COST")
+    local mpCost       = player:getLocalVar('MP_COST')
     local fcMerit      = player:getMerit(xi.merit.FULL_CIRCLE_EFFECT)
     local crMerit      = player:getMerit(xi.merit.CURATIVE_RECANTATION)
     local fcMod        = player:getMod(xi.mod.FULL_CIRCLE)
@@ -367,7 +367,7 @@ xi.job_utils.geomancer.doIndiSpell = function(caster, target, spell)
     local duration = 180 + caster:getMod(xi.mod.INDI_DURATION)
 
     -- set a local var to adjust potency values after an ability has worn off
-    target:setLocalVar("INDI_POTENCY", potency)
+    target:setLocalVar('INDI_POTENCY', potency)
 
     if target:hasStatusEffect(xi.effect.BOLSTER) then
         potency = potency * 2
@@ -404,7 +404,7 @@ xi.job_utils.geomancer.spawnLuopan = function(player, target, spell)
     local bolsterValue = 0
 
     -- set a local var to adjust potency values after an ability has worn off
-    luopan:setLocalVar("GEO_POTENCY", potency)
+    luopan:setLocalVar('GEO_POTENCY', potency)
 
     if player:hasStatusEffect(xi.effect.BLAZE_OF_GLORY) then
         finalPotency = potency + 0.5 * potency
@@ -420,7 +420,7 @@ xi.job_utils.geomancer.spawnLuopan = function(player, target, spell)
     xi.job_utils.geomancer.addAura(luopan, 0, effect, finalPotency, targetType)
 
     -- Save the mp cost for use with Full Circle on the luopan
-    player:setLocalVar("MP_COST", spell:getMPCost())
+    player:setLocalVar('MP_COST', spell:getMPCost())
 
     -- Change the luopans appearance to match the effect
     luopan:setModelId(modelID)
@@ -448,7 +448,7 @@ end
 xi.job_utils.geomancer.bolsterOnEffectGain = function(target, effect)
     -- Luopans need to be recast to add this effect to them so we ignore them here
     if target:hasStatusEffect(xi.effect.COLURE_ACTIVE) then
-        local indiPotency = target:getLocalVar("INDI_POTENCY")
+        local indiPotency = target:getLocalVar('INDI_POTENCY')
         target:getStatusEffect(xi.effect.COLURE_ACTIVE):setSubPower(indiPotency * 2)
     end
 end
@@ -462,7 +462,7 @@ xi.job_utils.geomancer.bolsterOnEffectLose = function(target, effect)
 
     -- Luopan Geo effect
     if pet and pet:getPetID() == xi.pet.id.LUOPAN then
-        local geoPotency     = pet:getLocalVar("GEO_POTENCY")
+        local geoPotency     = pet:getLocalVar('GEO_POTENCY')
         local currentPotency = pet:getStatusEffect(xi.effect.COLURE_ACTIVE):getSubPower()
         if currentPotency == geoPotency * 2 then -- will always be this value with Bolster or Blaze of Glory active
             pet:getStatusEffect(xi.effect.COLURE_ACTIVE):setSubPower(geoPotency)
@@ -472,7 +472,7 @@ xi.job_utils.geomancer.bolsterOnEffectLose = function(target, effect)
 
     -- Player Indi effect
     if target:hasStatusEffect(xi.effect.COLURE_ACTIVE) then
-        local indiPotency = target:getLocalVar("INDI_POTENCY")
+        local indiPotency = target:getLocalVar('INDI_POTENCY')
         local currentPotency = target:getStatusEffect(xi.effect.COLURE_ACTIVE):getSubPower()
         if currentPotency == indiPotency * 2 then -- will always be this value with Bolster active
             target:getStatusEffect(xi.effect.COLURE_ACTIVE):setSubPower(indiPotency)

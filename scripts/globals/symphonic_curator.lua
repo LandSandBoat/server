@@ -1,7 +1,7 @@
 -----------------------------------
 -- Symphonic Curator (Moghouse)
 -----------------------------------
-require("scripts/globals/utils")
+require('scripts/globals/utils')
 -----------------------------------
 -- NOTE: You can force the Symphonic Curator to appear
 --       by using !cs 30034 and exiting the menu
@@ -14,8 +14,8 @@ xi.symphonic_curator = xi.symphonic_curator or {}
 
 xi.symphonic_curator.onTrigger = function(player, npc)
     -- The first time you click, you'll always already be listening to Mog House
-    if player:getLocalVar("Symphonic_Curator_Music") == 0 then
-        player:setLocalVar("Symphonic_Curator_Music", 126)
+    if player:getLocalVar('Symphonic_Curator_Music') == 0 then
+        player:setLocalVar('Symphonic_Curator_Music', 126)
     end
 
     -- All music type 6 (Moghouse)
@@ -132,10 +132,10 @@ end
 xi.symphonic_curator.onEventFinish = function(player, csid, option, npc)
     if option == 0 then
         -- Reset
-        player:changeMusic(6, player:getLocalVar("Symphonic_Curator_Music"))
+        player:changeMusic(6, player:getLocalVar('Symphonic_Curator_Music'))
     else
         -- Confirmed, set
-        player:setLocalVar("Symphonic_Curator_Music", optionToSongLookup[option])
+        player:setLocalVar('Symphonic_Curator_Music', optionToSongLookup[option])
         player:changeMusic(6, optionToSongLookup[option])
     end
 end

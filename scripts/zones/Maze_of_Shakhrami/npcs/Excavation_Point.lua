@@ -8,7 +8,7 @@ local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     if
-        player:getCharVar("TheHolyCrest_Event") == 3 and
+        player:getCharVar('TheHolyCrest_Event') == 3 and
         not player:hasItem(xi.item.WYVERN_EGG) and
         npcUtil.tradeHas(trade, xi.item.PICKAXE)
     then
