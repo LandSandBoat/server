@@ -85,20 +85,20 @@ local prizes =
         --    3652, -- Memorial Cake
 
         -- Cycle # 5
-            88,   -- Timepiece
-            3679, -- Beastman Gonfalon
-            3681, -- Alzadaal Table
-            3698, -- Cherry Tree
-            3705, -- Far East Hearth
-            3717, -- Birch Tree
+            -- 88,   -- Timepiece
+            -- 3679, -- Beastman Gonfalon
+            -- 3681, -- Alzadaal Table
+            -- 3698, -- Cherry Tree
+            -- 3705, -- Far East Hearth
+            -- 3717, -- Birch Tree
 
         -- Cycle # 6
-            -- 195,  -- The Big One
-            -- 3641, -- Kabuto Kazari
-            -- 3642, -- Katana Kazari
-            -- 3654, -- Tender Bouquet
-            -- 3739, -- Autumn Tree
-            -- 3740, -- Model Synergy Furn
+            195,  -- The Big One
+            3641, -- Kabuto Kazari
+            3642, -- Katana Kazari
+            3654, -- Tender Bouquet
+            3739, -- Autumn Tree
+            3740, -- Model Synergy Furn
         },
     },
 
@@ -110,43 +110,43 @@ local prizes =
         -- COSTUMES
 
         -- Cycle #1/#6
-            10250, -- Moogle Suit
-            10384, -- Cumulus Masque
-            10429, -- Moogle Masque
-            25632, -- Carbie Cap
-            25711, -- Botulus Suit
-            26705, -- Mandragora Masque
-            26798, -- Behemoth Masque
-            26889, -- Heart Apron
-            26954, -- Behemoth Suit
-            26956, -- Poroggo Coat
-            27715, -- Goblin Masque
-            27765, -- Chocobo Masque
-            27854, -- Mandragora Suit
-            27859, -- Kengyu Happi
-            27866, -- Goblin Suit
-            27911, -- Chocobo Suit
+        --  10250, -- Moogle Suit
+        --  10384, -- Cumulus Masque
+        --  10429, -- Moogle Masque
+        --  25632, -- Carbie Cap
+        --  25711, -- Botulus Suit
+        --  26705, -- Mandragora Masque
+        --  26798, -- Behemoth Masque
+        --  26889, -- Heart Apron
+        --  26954, -- Behemoth Suit
+        --  26956, -- Poroggo Coat
+        --  27715, -- Goblin Masque
+        --  27765, -- Chocobo Masque
+        --  27854, -- Mandragora Suit
+        --  27859, -- Kengyu Happi
+        --  27866, -- Goblin Suit
+        --  27911, -- Chocobo Suit
 
         -- Cycle #2
-            -- 11491, -- Snow Bunny Hat +1
-            -- 23730, -- Karakul Cap
-            -- 25585, -- Bl. Chocobo Cap
-            -- 25606, -- Agent Hood
-            -- 25607, -- Starlet Flower
-            -- 25756, -- Wyrmking Suit
-            -- 25657, -- Wyrmking Masque
-            -- 25776, -- Bl. Chocobo Suit
-            -- 25850, -- Pink Subligar
-            -- 26514, -- Poroggo Fleece
-            -- 26974, -- Agent Coat
-            -- 26975, -- Starlet Jabot
-            -- 27111, -- Agent Cuffs
-            -- 27112, -- Starlet Gloves
-            -- 27296, -- Agent Pants
-            -- 27297, -- Starlet Skirt
-            -- 27467, -- Agent Boots
-            -- 27468, -- Starlet Boots
-            -- 27717, -- Worm Masque
+          11491, -- Snow Bunny Hat +1
+          23730, -- Karakul Cap
+          25585, -- Bl. Chocobo Cap
+          25606, -- Agent Hood
+          25607, -- Starlet Flower
+          25756, -- Wyrmking Suit
+          25657, -- Wyrmking Masque
+          25776, -- Bl. Chocobo Suit
+          25850, -- Pink Subligar
+          26514, -- Poroggo Fleece
+          26974, -- Agent Coat
+          26975, -- Starlet Jabot
+          27111, -- Agent Cuffs
+          27112, -- Starlet Gloves
+          27296, -- Agent Pants
+          27297, -- Starlet Skirt
+          27467, -- Agent Boots
+          27468, -- Starlet Boots
+          27717, -- Worm Masque
 
         -- Cycle #3
             -- 11812, -- Charity Cap
@@ -318,46 +318,46 @@ local prizes =
         --    28655, -- Slime Shield
 
         -- Cycle #3
-            10808, -- Janus Guard
-            10811, -- Chocobo Shield
-            18399, -- Charm Wand
-            18464, -- Ark Tachi
-            18545, -- Ark Tabar
-            18563, -- Ark Scythe
-            18912, -- Ark Saber
-            18913, -- Ark Sword
-            20573, -- Aern Dagger
-            20674, -- Aern Sword
-            20953, -- Escritorio
-            21509, -- Premium Mogti
-            21682, -- Lament
-            21742, -- Aern Axe
-            21759, -- Autarch's Axe
-            21860, -- Aern Spear
-            22004, -- Soulflayer's Wand
-            22065, -- Aern Staff
-            26489, -- Troth
+        --  10808, -- Janus Guard
+        --  10811, -- Chocobo Shield
+        --  18399, -- Charm Wand
+        --  18464, -- Ark Tachi
+        --  18545, -- Ark Tabar
+        --  18563, -- Ark Scythe
+        --  18912, -- Ark Saber
+        --  18913, -- Ark Sword
+        --  20573, -- Aern Dagger
+        --  20674, -- Aern Sword
+        --  20953, -- Escritorio
+        --  21509, -- Premium Mogti
+        --  21682, -- Lament
+        --  21742, -- Aern Axe
+        --  21759, -- Autarch's Axe
+        --  21860, -- Aern Spear
+        --  22004, -- Soulflayer's Wand
+        --  22065, -- Aern Staff
+        --  26489, -- Troth
 
         -- Cycle #4
-            -- 10809, -- Moogle Guard
-            -- 20569, -- Esikuva
-            -- 20571, -- Infiltrator
-            -- 20576, -- Qutrub Knife
-            -- 20666, -- Blizzard Brand
-            -- 20668, -- Firetongue
-            -- 20933, -- Hotengeki
-            -- 21074, -- Kupo Rod
-            -- 21086, -- Heartstopper
-            -- 21095, -- Heartbeater
-            -- 21153, -- Malice Masher
-            -- 21608, -- Onion Sword II
-            -- 21609, -- Save The Queen II
-            -- 21636, -- Nihility
-            -- 21867, -- Sha Wujing's Lance
-            -- 21965, -- Zanmato
-            -- 22039, -- Floral Hagoita
-            -- 22089, -- Sophistry
-            -- 26410, -- Diamond Buckler
+           10809, -- Moogle Guard
+           20569, -- Esikuva
+           20571, -- Infiltrator
+           20576, -- Qutrub Knife
+           20666, -- Blizzard Brand
+           20668, -- Firetongue
+           20933, -- Hotengeki
+           21074, -- Kupo Rod
+           21086, -- Heartstopper
+           21095, -- Heartbeater
+           21153, -- Malice Masher
+           21608, -- Onion Sword II
+           21609, -- Save The Queen II
+           21636, -- Nihility
+           21867, -- Sha Wujing's Lance
+           21965, -- Zanmato
+           22039, -- Floral Hagoita
+           22089, -- Sophistry
+           26410, -- Diamond Buckler
 
         -- Cycle #5
             -- 11499, -- Trainees Specs
@@ -535,39 +535,39 @@ local prizes =
         --    27556, -- Echad Ring
 
         -- Cycle #3 -- WOTG Nations
-            14589, -- Fourth Brunne
-            14590, -- Cobra Harness
-            14591, -- Cobra Robe
-            15010, -- Fourth Hentzes
-            15011, -- Cobra Mittens
-            15012, -- Cobra Gloves
-            15756, -- Fourth Schuhs
-            15757, -- Cobra Leggings
-            15758, -- Cobra Crackows
-            16147, -- Fourth Haube
-            16148, -- Cobra Cap
-            16149, -- Cobra Cloche
-            16316, -- Fourth Schoss
-            16317, -- Cobra Subligar
-            16318, -- Cobra Trews
+        --  14589, -- Fourth Brunne
+        --  14590, -- Cobra Harness
+        --  14591, -- Cobra Robe
+        --  15010, -- Fourth Hentzes
+        --  15011, -- Cobra Mittens
+        --  15012, -- Cobra Gloves
+        --  15756, -- Fourth Schuhs
+        --  15757, -- Cobra Leggings
+        --  15758, -- Cobra Crackows
+        --  16147, -- Fourth Haube
+        --  16148, -- Cobra Cap
+        --  16149, -- Cobra Cloche
+        --  16316, -- Fourth Schoss
+        --  16317, -- Cobra Subligar
+        --  16318, -- Cobra Trews
 
         -- Cycle #4 -- Assault gear
-            -- 14525, -- Amir Korazin
-            -- 14527, -- Yigit Gomlek
-            -- 14530, -- Pln. Khazagand
-            -- 14933, -- Amir Kolluks
-            -- 14935, -- Yigit Gages
-            -- 14940, -- Pln. Dastanas
-            -- 15604, -- Amir Dirs
-            -- 15606, -- Yigit Seraweels
-            -- 15609, -- Pln. Seraweels
-            -- 15688, -- Amir Boots
-            -- 15690, -- Yigit Crackows
-            -- 15695, -- Pln. Crackows
-            -- 16062, -- Amir Puggaree
-            -- 16064, -- Yigit Turban
-            -- 16069, -- Pln. Qalansuwa
-            -- 27556, -- Echad Ring
+           14525, -- Amir Korazin
+           14527, -- Yigit Gomlek
+           14530, -- Pln. Khazagand
+           14933, -- Amir Kolluks
+           14935, -- Yigit Gages
+           14940, -- Pln. Dastanas
+           15604, -- Amir Dirs
+           15606, -- Yigit Seraweels
+           15609, -- Pln. Seraweels
+           15688, -- Amir Boots
+           15690, -- Yigit Crackows
+           15695, -- Pln. Crackows
+           16062, -- Amir Puggaree
+           16064, -- Yigit Turban
+           16069, -- Pln. Qalansuwa
+           27556, -- Echad Ring
 
         -- Cycle #5 -- TOAU NM drops/Apollyon AF+1 items part 1
             -- 1931,  -- Argyro Rivet (WAR)
@@ -628,40 +628,40 @@ local prizes =
         --    15965, -- Ethereal Earring
 
         -- Cycle #3 -- Useful NM drops/MMM
-            13303, -- Jelly Ring
-            13567, -- Bomb Queen Ring
-            13915, -- Optical Hat
-            14469, -- Reverend Mail
-            14986, -- Ochimusha Kote
-            15221, -- Patroclus's Helm
-            15224, -- Empress Hairpin
-            15351, -- Bounding Boots
-            15515, -- Peacock Amulet
-            15736, -- Trotter Boots
-            15737, -- Sarutobi Kyahan
-            17759, -- Koggelmander
-            18714, -- Vali's Bow
-            18752, -- Retaliators
-            19236, -- Hightail Bullet
+        -- 13303, -- Jelly Ring
+        -- 13567, -- Bomb Queen Ring
+        -- 13915, -- Optical Hat
+        -- 14469, -- Reverend Mail
+        -- 14986, -- Ochimusha Kote
+        -- 15221, -- Patroclus's Helm
+        -- 15224, -- Empress Hairpin
+        -- 15351, -- Bounding Boots
+        -- 15515, -- Peacock Amulet
+        -- 15736, -- Trotter Boots
+        -- 15737, -- Sarutobi Kyahan
+        -- 17759, -- Koggelmander
+        -- 18714, -- Vali's Bow
+        -- 18752, -- Retaliators
+        -- 19236, -- Hightail Bullet
 
         -- Cycle #4 -- HQ Kings pop items/Carbuncle Prime/WOTG Nations/Naji's/TH+1 hat
-            -- 3340,  -- Sweet Tea (Nidhogg pop)
-            -- 3342,  -- Savory Shank (King Behemoth pop)
-            -- 3344,  -- Red Pondweed (Aspidochelone pop)
-            -- 14588, -- Iron Ram Hauberk
-            -- 14931, -- Carbuncle's Cuffs
-            -- 15009, -- Iron Ram Dastanas
-            -- 15755, -- Iron Ram Greaves
-            -- 16146, -- Iron Ram Sallet
-            -- 16315, -- Iron Ram Hose
-            -- 17192, -- Ifrit's Bow
-            -- 17711, -- Shiva's Shotel
-            -- 18021, -- Titan's Baselarde
-            -- 18063, -- Garuda's Sickle
-            -- 18109, -- Leviathan's Couse
-            -- 18404, -- Ramuh's Mace
-            -- 25679, -- White Rarab Cap +1 (TH+1)
-            -- 26219, -- Naji's Loop
+           3340,  -- Sweet Tea (Nidhogg pop)
+           3342,  -- Savory Shank (King Behemoth pop)
+           3344,  -- Red Pondweed (Aspidochelone pop)
+           14588, -- Iron Ram Hauberk
+           14931, -- Carbuncle's Cuffs
+           15009, -- Iron Ram Dastanas
+           15755, -- Iron Ram Greaves
+           16146, -- Iron Ram Sallet
+           16315, -- Iron Ram Hose
+           17192, -- Ifrit's Bow
+           17711, -- Shiva's Shotel
+           18021, -- Titan's Baselarde
+           18063, -- Garuda's Sickle
+           18109, -- Leviathan's Couse
+           18404, -- Ramuh's Mace
+           25679, -- White Rarab Cap +1 (TH+1)
+           26219, -- Naji's Loop
 
         -- Cycle #5 -- WOTG Nations
             -- 11545, -- Fourth Mantle
