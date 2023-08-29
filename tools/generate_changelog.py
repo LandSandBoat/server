@@ -25,16 +25,6 @@ import urllib.parse
 
 # At 12:00 on day-of-month 1 and 15.
 # Cron: '0 12 1,15 * *'
-def days_since_last_run():
-    # Count back from today's date, until you encounter either the 1st or the 15th
-    today = date.today()
-    days = 1
-    last_date_day = (today - timedelta(days=days)).day
-    while last_date_day != 1 and last_date_day != 15:
-        days = days + 1
-        last_date_day = (today - timedelta(days=days)).day
-    return days
-
 def get_last_date():
     file_path = os.path.realpath(__file__)
     parent_path = os.path.dirname(os.path.dirname(file_path))
@@ -50,6 +40,19 @@ def get_last_date():
     start_date = last_date + timedelta(days=1)
 
     return start_date
+
+def days_since_last_run():
+    today = date.today()
+    last_date = get_last_date() # Get the last day from the changelog files
+
+    # If last_date is None, return 0 days
+    if last_date is None:
+        return 0
+
+    # Calculate the difference in days between last_date and today
+    days_difference = (today - last_date).days
+
+    return days_difference
 
 def get_good_description(body, fallback):
     start_str = "## Please enter a player-facing description"
@@ -96,8 +99,10 @@ def remove_real_names(authors):
 
 length_days = 14
 last_run = get_last_date()
+todys_date = date.today()
+
 if last_run is not None:
-    length_days = (date.today() - last_run).days
+    length_days = (todys_date - last_run).days
 
 if len(sys.argv) < 3:
     print("Usage:\ngenerate_changelog.py <days to generate, or 'ci'> <repo owner name/repo name> <optional changelog title>")
