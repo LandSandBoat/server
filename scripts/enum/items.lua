@@ -4942,7 +4942,6 @@ xi.items =
     GRAPNEL                         = 17474,
     BEAT_CESTI                      = 17478,
     SPARTAN_CESTI                   = 17491,
-    TOMAHAWK_P1                     = 17943,
     KNUCKLES_OF_TRIALS              = 17507,
     DESTROYERS                      = 17509,
     POLE_OF_TRIALS                  = 17527,

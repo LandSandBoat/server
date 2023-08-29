@@ -35,8 +35,8 @@ entity.onMobSpawn = function(mob, target)
     local ID = mob:getID()
 
     if
-    ID == instance:getLocalVar("troll1") or
-    ID == instance:getLocalVar("troll2")
+        ID == instance:getLocalVar("troll1") or
+        ID == instance:getLocalVar("troll2")
     then
         mob:setLocalVar("twoHR", math.random(40, 60))
     end
