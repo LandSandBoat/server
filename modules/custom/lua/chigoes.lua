@@ -39,21 +39,21 @@ for _, entry in pairs(mobs) do
     local mobName     = entry[2]
     local mobLuaFile  = string.format('xi.zones.%s.mobs.%s.onMobSpawn', zoneName, mobName)
 
-    m:addOverride(mobLuaFile, function(maridMob)
-        super(maridMob)
+    m:addOverride(mobLuaFile, function(chigoeMob)
+        super(chigoeMob)
 
         -- Make sure local var is initialized on spawn & death
-        maridMob:addListener('SPAWN', 'MARID_SPAWN', function(mobArg)
+        chigoeMob:addListener('SPAWN', 'MARID_SPAWN', function(mobArg)
             mobArg:setLocalVar('ChigoeCount', 0)
         end)
 
-        maridMob:addListener('DEATH', 'MARID_DEATH', function(mobArg)
+        chigoeMob:addListener('DEATH', 'MARID_DEATH', function(mobArg)
             mobArg:setLocalVar('ChigoeCount', 0)
             mobArg:removeListener('MARID_SPAWN_CHIGOE')
         end)
 
         -- Chigoes should spawn for the first 5 mobskills
-        maridMob:addListener('WEAPONSKILL_USE', 'MARID_SPAWN_CHIGOE', function(mobArg)
+        chigoeMob:addListener('WEAPONSKILL_USE', 'MARID_SPAWN_CHIGOE', function(mobArg)
             local chigoeCount = mobArg:getLocalVar('ChigoeCount')
             local zone        = mobArg:getZone()
 
@@ -76,7 +76,7 @@ for _, entry in pairs(mobs) do
 
                     -- Chigoes are usually 7-8 levels lower than their masters
                     -- https://www.bg-wiki.com/ffxi/Category:Chigoe
-                    mobArgTwo:setMobLevel(maridMob:getMainLvl() - math.random(7, 9))
+                    mobArgTwo:setMobLevel(chigoeMob:getMainLvl() - math.random(7, 9))
 
                     mobArgTwo:addListener('SPAWN', 'CHIGOE_SPAWN', function(mobArgThree)
                         mobArgThree:hideName(true)
