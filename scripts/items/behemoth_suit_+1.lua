@@ -45,7 +45,7 @@ itemObject.onItemUse = function(target)
         -- { ?, xi.item.SAVORY_SHANK },
     }
 
-    npcUtil.giveItem(target, { { xi.item_utils.pickItemRandom(target, meatList), 1 } })
+    npcUtil.giveItem(target, { { xi.itemUtils.pickItemRandom(target, meatList), 1 } })
 end
 
 return itemObject

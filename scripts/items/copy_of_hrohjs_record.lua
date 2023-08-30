@@ -8,11 +8,11 @@
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)
-    return xi.item_utils.skillBookCheck(target, xi.skill.GEOMANCY)
+    return xi.itemUtils.skillBookCheck(target, xi.skill.GEOMANCY)
 end
 
 itemObject.onItemUse = function(target)
-    xi.item_utils.skillBookUse(target, xi.skill.GEOMANCY)
+    xi.itemUtils.skillBookUse(target, xi.skill.GEOMANCY)
 end
 
 return itemObject

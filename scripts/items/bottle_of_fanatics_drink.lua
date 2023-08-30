@@ -15,7 +15,7 @@ itemObject.onItemUse = function(target)
     local power         = 1
     local mitigatews    = 1
 
-    xi.item_utils.addItemShield(target, power, duration, effect, mitigatews)
+    xi.itemUtils.addItemShield(target, power, duration, effect, mitigatews)
 end
 
 return itemObject
