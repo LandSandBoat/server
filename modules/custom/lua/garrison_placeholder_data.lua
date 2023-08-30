@@ -98,8 +98,7 @@ local additionalAllyLooks =
 
         [xi.nation.WINDURST] =
         {
-            "0x010003071310222064306E406450006000700000", -- Fhelm_Jobeizat (17764603)
-            "0x0100080604102320093009400C50006000700000", -- Shivivi
+            --
         },
     },
 }

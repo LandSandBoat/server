@@ -21,7 +21,7 @@ xi.garrison.allyNames =
 {
     [20] = { [xi.nation.SANDORIA] = "Patrician",       [xi.nation.BASTOK] = "Recruit",         [xi.nation.WINDURST] = "Candidate"       },
     [30] = { [xi.nation.SANDORIA] = "Trader",          [xi.nation.BASTOK] = "Mariner",         [xi.nation.WINDURST] = "Scholar"         },
-    [40] = { [xi.nation.SANDORIA] = "TempleKnight",    [xi.nation.BASTOK] = "GoldMusketeer",   [xi.nation.WINDURST] = "WizeWizard"      },
+    [40] = { [xi.nation.SANDORIA] = "TempleKnight",    [xi.nation.BASTOK] = "GoldMusketeer",   [xi.nation.WINDURST] = "WiseWizard"      },
     [50] = { [xi.nation.SANDORIA] = "RoyalGuard",      [xi.nation.BASTOK] = "Commander",       [xi.nation.WINDURST] = "Patriarch"       },
     [99] = { [xi.nation.SANDORIA] = "MilitaryAttache", [xi.nation.BASTOK] = "MilitaryAttache", [xi.nation.WINDURST] = "MilitaryAttache" },
 }
@@ -151,7 +151,8 @@ xi.garrison.allyLooks =
 
         [xi.nation.WINDURST] =
         {
-            -- (Missing capture)
+            "0x010009043E106F203E303E403E501C611B700000",
+            "0x0100020349106F204930494049501F611B700000",
         },
     },
 }
