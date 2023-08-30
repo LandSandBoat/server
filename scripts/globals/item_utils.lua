@@ -4,7 +4,7 @@
 require('scripts/globals/utils')
 -----------------------------------
 xi = xi or {}
-xi.item_utils = {}
+xi.itemUtils = {}
 
 xi.itemUtils.removableEffects =
 {
@@ -42,6 +42,27 @@ xi.itemUtils.removableEffects =
     xi.effect.MAGIC_ACC_DOWN,
     xi.effect.MAGIC_ATK_DOWN
 }
+
+xi.itemUtils.foodOnItemCheck = function(target, foodType)
+    local result     = 0
+    local targetRace = target:getRace()
+
+    if
+        foodType == xi.foodType.RAW_FISH and
+        (
+            target:getRace() ~= xi.race.MITHRA or
+            target:getMod(xi.mod.EAT_RAW_FISH) ~= 1
+        )
+    then
+        result = xi.msg.basic.CANNOT_EAT
+    end
+
+    if target:hasStatusEffect(xi.effect.FOOD) then
+        result = xi.msg.basic.IS_FULL
+    end
+
+    return result
+end
 
 xi.itemUtils.skillBookCheck = function(target, skillID)
     local skill   = skillID
