@@ -47,12 +47,12 @@ xi.itemUtils.foodOnItemCheck = function(target, foodType)
     local result     = 0
     local targetRace = target:getRace()
 
+    local canEatFish = target:getRace() == xi.race.MITHRA or target:getMod(xi.mod.EAT_RAW_FISH) == 1
+    local canEatMeat = target:getRace() == xi.race.GALKA or target:getMod(xi.mod.EAT_RAW_MEAT) == 1
+
     if
-        foodType == xi.foodType.RAW_FISH and
-        (
-            target:getRace() ~= xi.race.MITHRA or
-            target:getMod(xi.mod.EAT_RAW_FISH) ~= 1
-        )
+        (foodType == xi.foodType.RAW_FISH and not canEatFish) or
+        (foodType == xi.foodType.RAW_MEAT and not canEatMeat)
     then
         result = xi.msg.basic.CANNOT_EAT
     end
