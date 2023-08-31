@@ -8,11 +8,11 @@
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)
-    return xi.item_utils.skillBookCheck(target, xi.skill.SINGING)
+    return xi.itemUtils.skillBookCheck(target, xi.skill.SINGING)
 end
 
 itemObject.onItemUse = function(target)
-    xi.item_utils.skillBookUse(target, xi.skill.SINGING)
+    xi.itemUtils.skillBookUse(target, xi.skill.SINGING)
 end
 
 return itemObject

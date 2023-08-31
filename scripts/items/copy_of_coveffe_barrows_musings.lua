@@ -7,11 +7,11 @@
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)
-    return xi.item_utils.skillBookCheck(target, xi.skill.HEALING_MAGIC)
+    return xi.itemUtils.skillBookCheck(target, xi.skill.HEALING_MAGIC)
 end
 
 itemObject.onItemUse = function(target)
-    xi.item_utils.skillBookUse(target, xi.skill.HEALING_MAGIC)
+    xi.itemUtils.skillBookUse(target, xi.skill.HEALING_MAGIC)
 end
 
 return itemObject

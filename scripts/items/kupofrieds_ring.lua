@@ -24,7 +24,7 @@ itemObject.onItemUse = function(target)
     local duration  = 86400
     local subpower  = 30000
 
-    xi.item_utils.addItemExpEffect(target, effect, power, duration, subpower)
+    xi.itemUtils.addItemExpEffect(target, effect, power, duration, subpower)
 end
 
 return itemObject

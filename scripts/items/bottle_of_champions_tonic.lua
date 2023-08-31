@@ -16,7 +16,7 @@ itemObject.onItemUse = function(target)
     local subpower  = 3     --crit
     local duration  = 60
 
-    xi.item_utils.addItemEffect(target, effect, power, duration, subpower)
+    xi.itemUtils.addItemEffect(target, effect, power, duration, subpower)
 end
 
 return itemObject
