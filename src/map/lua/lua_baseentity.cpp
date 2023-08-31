@@ -67,6 +67,7 @@
 #include "ai/states/ability_state.h"
 #include "ai/states/attack_state.h"
 #include "ai/states/death_state.h"
+#include "ai/states/despawn_state.h"
 #include "ai/states/inactive_state.h"
 #include "ai/states/item_state.h"
 #include "ai/states/magic_state.h"
@@ -1471,7 +1472,7 @@ void CLuaBaseEntity::setStatus(uint8 status)
  *  Purpose : Returns the current state of a non-NPC entity
  *  Example : if target:getCurrentAction() ~= xi.act.MOBABILITY_USING then
  *  Notes   : Function name ambiguous, but getCurrentState() in use already
- *          : See globals/status.lua for action definitions
+ *          : See scripts/enum/action.lua for action definitions
  ************************************************************************/
 
 uint8 CLuaBaseEntity::getCurrentAction()
@@ -1486,7 +1487,7 @@ uint8 CLuaBaseEntity::getCurrentAction()
 
     if (m_PBaseEntity->PAI->IsStateStackEmpty())
     {
-        action = 16;
+        action = 16; // For mobs, this means roaming
     }
     else if (m_PBaseEntity->PAI->IsCurrentState<CRespawnState>())
     {
@@ -1523,6 +1524,10 @@ uint8 CLuaBaseEntity::getCurrentAction()
     else if (m_PBaseEntity->PAI->IsCurrentState<CDeathState>())
     {
         action = 22;
+    }
+    else if (m_PBaseEntity->PAI->IsCurrentState<CDespawnState>())
+    {
+        action = 24;
     }
     else if (m_PBaseEntity->PAI->IsCurrentState<CRaiseState>())
     {
