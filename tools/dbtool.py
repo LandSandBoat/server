@@ -8,6 +8,8 @@ import fileinput
 import shutil
 import importlib
 import pathlib
+import binascii
+
 
 # Pre-flight sanity checks
 def preflight_exit():
@@ -97,6 +99,7 @@ def populate_migrations():
 # Migrations are automatically scraped from the migrations folder
 migrations = populate_migrations()
 
+
 # NOTE: Everything is returned as a dict of dicts of strings. If you are looking for bools or values
 #     : you'll need to convert them yourself.
 def populate_settings():
@@ -135,15 +138,15 @@ def populate_settings():
                             val = val.rsplit("--")[0].strip()
 
                             # pop off leading quote
-                            if val.startswith('\"'):
+                            if val.startswith('"'):
                                 val = val[1:]
 
                             # pop off trailing comma
-                            if val.endswith(','):
+                            if val.endswith(","):
                                 val = val[:-1]
 
                             # pop off trailing quote
-                            if val.endswith('\"'):
+                            if val.endswith('"'):
                                 val = val[:-1]
 
                             current_settings[key] = val
@@ -272,11 +275,15 @@ def db_query(query):
 
 def fetch_credentials():
     global settings, database, host, port, login, password
-    database = os.getenv("XI_NETWORK_SQL_DATABASE") or settings["network"]["SQL_DATABASE"]
+    database = (
+        os.getenv("XI_NETWORK_SQL_DATABASE") or settings["network"]["SQL_DATABASE"]
+    )
     host = os.getenv("XI_NETWORK_SQL_HOST") or settings["network"]["SQL_HOST"]
     port = os.getenv("XI_NETWORK_SQL_PORT") or int(settings["network"]["SQL_PORT"])
     login = os.getenv("XI_NETWORK_SQL_LOGIN") or settings["network"]["SQL_LOGIN"]
-    password = os.getenv("XI_NETWORK_SQL_PASSWORD") or settings["network"]["SQL_PASSWORD"]
+    password = (
+        os.getenv("XI_NETWORK_SQL_PASSWORD") or settings["network"]["SQL_PASSWORD"]
+    )
 
 
 def fetch_versions():
@@ -400,17 +407,17 @@ def fetch_files(express=False):
             print_red("Error checking diffs.\nCheck that hash is valid in config.yaml.")
             print(e)
     else:
-        for (_, _, filenames) in os.walk(from_server_path("sql/")):
+        for _, _, filenames in os.walk(from_server_path("sql/")):
             for filename in sorted(filenames):
-                if filename.endswith('.sql'):
+                if filename.endswith(".sql"):
                     import_files.append(from_server_path("sql/" + filename))
             break
     check_protected()
     backups.clear()
-    for (_, _, filenames) in os.walk(from_server_path("sql/backups/")):
+    for _, _, filenames in os.walk(from_server_path("sql/backups/")):
         for file in sorted(filenames):
             if not ".gitignore" in file:
-                if file.endswith('.sql'):
+                if file.endswith(".sql"):
                     backups.append(from_server_path("sql/backups/" + file))
         break
     backups.sort()
@@ -1031,6 +1038,144 @@ def update_submodules():
     # fmt: on
 
 
+def update_sql_from_db(table_name):
+    try:
+        # Fetch all rows from the specified table
+        cur.execute(f"SELECT * FROM {table_name};")
+        rows = cur.fetchall()
+
+        # Read the SQL file
+        with open(
+            from_server_path(f"sql/{table_name}.sql"), "r", encoding="utf-8"
+        ) as file:
+            sql_lines = file.readlines()
+
+        sql_variables = {}
+        updated_lines = []
+        row_index = 0
+
+        # Iterate over the lines in the file
+        for line in sql_lines:
+            # Scan for variables
+            if line.strip().startswith("SET @"):
+                parts = line.strip().split("=")
+                var_name = parts[0].split()[1]
+                var_value = parts[1].replace(";", "").split("--")[0].strip()
+                sql_variables[var_value] = var_name
+            # Scan for INSERT
+            lowercase_line = line.strip().lower()
+            insert_start = re.match(
+                rf"insert into `{table_name}` values \(", lowercase_line
+            )
+            if insert_start:
+                # Build a string using the values pulled from the database
+                values = rows[row_index]
+                updated_values = []
+                for i, value in enumerate(values):
+                    # NULL
+                    if value is None:
+                        updated_values.append("NULL")
+                    # Binary
+                    elif isinstance(value, bytes):
+                        if len(value) == 0:
+                            updated_values.append(f"''")
+                        # npc_list name field is binary but should be decoded for the sql files
+                        elif table_name == "npc_list" and i == 1:
+                            text = True
+                            for j in value:
+                                if j < 32 or j > 126:  # ascii printable characters
+                                    text = False
+                                    break
+                            if text:
+                                updated_values.append(f"'{value.decode('latin_1')}'")
+                            # If the value contains non-printable characters, use hex instead
+                            else:
+                                hex_value = value.hex().upper()
+                                updated_values.append(f"0x{hex_value}")
+                        # Otherwise print binary in 0x hex form
+                        else:
+                            hex_value = value.hex().upper()
+                            updated_values.append(f"0x{hex_value}")
+                    # String
+                    elif isinstance(value, str):
+                        escaped_value = value.replace("'", "\\'")
+                        updated_values.append(f"'{escaped_value}'")
+                    # Number
+                    else:
+                        # mob_droplist and pet_skills use variables for certain fields
+                        if (
+                            table_name == "mob_droplist"
+                            and i == 5
+                            and str(value) in sql_variables
+                        ):
+                            updated_values.append(sql_variables[str(value)])
+                        elif table_name == "pet_skills" and i == 9:
+                            var_list = []
+                            for var in sql_variables.keys():
+                                if value & int(var):
+                                    var_list.append(sql_variables[var])
+                            updated_values.append(" | ".join(var_list))
+                        else:
+                            # Get float formatting from the cursor description.
+                            # https://github.com/mariadb-corporation/mariadb-connector-python/blob/67d3062ad597cca8d5419b2af2ad8b62528204e5/mariadb/mariadb_cursor.c#L777-L787
+                            if (
+                                cur.description[i][1]
+                                == mariadb.constants.FIELD_TYPE.FLOAT
+                                and cur.description[i][5] > 0
+                            ):
+                                updated_values.append(
+                                    f"{value:.{cur.description[i][5]}f}"
+                                )
+                            else:
+                                updated_values.append(str(value))
+                values = ",".join(updated_values)
+                # Replace the values in the current line with the values pulled from the database
+                updated_line = line[: insert_start.end()] + f"{values});"
+                # Append any comments, preserving whitespace
+                if "--" in line:
+                    insert_end = line.index(");") + 2
+                    before_comment = line[insert_end:].split("--")[0]
+                    updated_line = f"{updated_line}{before_comment}{line[insert_end + len(before_comment):]}"
+                else:
+                    updated_line = f"{updated_line}\n"
+                updated_lines.append(updated_line)
+                row_index += 1
+            # Otherwise just save the line as-is
+            else:
+                updated_lines.append(line)
+
+        # Write the updated content back to the file
+        with open(
+            from_server_path(f"sql/{table_name}.sql"), "w", encoding="utf-8"
+        ) as file:
+            file.writelines(updated_lines)
+
+    except Exception as e:
+        print_red(f"Error: {e}")
+
+
+def dump_table(table_name=None, silent=False):
+    if not silent:
+        table_name = input("Which table would you like to dump?\n> ")
+    update_sql_from_db(table_name)
+    print_green(f"Replaced values in {table_name}.sql with data from the database.")
+
+
+def dump_all_tables(silent=False):
+    if silent or input("Dump all database tables to .sql files? [y/N] ").lower() == "y":
+        dump_tables = []
+        for _, _, filenames in os.walk(from_server_path("sql/")):
+            for filename in sorted(filenames):
+                if filename.endswith(".sql"):
+                    dump_tables.append(filename)
+            break
+        dump_tables.remove("triggers.sql")
+        for table in dump_tables:
+            if table not in player_data:
+                update_sql_from_db(table[:-4])
+        print_green(f"Replaced values in all .sql files with data from the database.")
+
+
 def tasks_menu():
     present_menu(
         "Maintenance Tasks",
@@ -1047,6 +1192,8 @@ def tasks_menu():
                 "Configure and launch multi-process server (by zonetype, 7 processes)",
                 configure_and_launch_multi_process_by_zonetype,
             ],
+            "d": ["Dump Table", dump_table],
+            "a": ["Dump All Tables", dump_all_tables],
             "q": ["Quit to main menu", NOOP],
         },
     )
@@ -1112,6 +1259,12 @@ def main():
                     )
                     fetch_errors(result)
                     setup_db()
+                return
+            elif "dump" == arg1:
+                if len(sys.argv) > 2:
+                    dump_table(str(sys.argv[2]), True)
+                else:
+                    dump_all_tables(True)
                 return
         # Main loop
         print(colorama.ansi.clear_screen())

@@ -18,14 +18,14 @@ CREATE TABLE IF NOT EXISTS `guilds` (
 
 LOCK TABLES `guilds` WRITE;
 
-INSERT INTO `guilds` VALUES (0, 'guild_fishing');
-INSERT INTO `guilds` VALUES (1, 'guild_woodworking');
-INSERT INTO `guilds` VALUES (2, 'guild_smithing');
-INSERT INTO `guilds` VALUES (3, 'guild_goldsmithing');
-INSERT INTO `guilds` VALUES (4, 'guild_weaving');
-INSERT INTO `guilds` VALUES (5, 'guild_leathercraft');
-INSERT INTO `guilds` VALUES (6, 'guild_bonecraft');
-INSERT INTO `guilds` VALUES (7, 'guild_alchemy');
-INSERT INTO `guilds` VALUES (8, 'guild_cooking');
+INSERT INTO `guilds` VALUES (0,'guild_fishing');
+INSERT INTO `guilds` VALUES (1,'guild_woodworking');
+INSERT INTO `guilds` VALUES (2,'guild_smithing');
+INSERT INTO `guilds` VALUES (3,'guild_goldsmithing');
+INSERT INTO `guilds` VALUES (4,'guild_weaving');
+INSERT INTO `guilds` VALUES (5,'guild_leathercraft');
+INSERT INTO `guilds` VALUES (6,'guild_bonecraft');
+INSERT INTO `guilds` VALUES (7,'guild_alchemy');
+INSERT INTO `guilds` VALUES (8,'guild_cooking');
 
 UNLOCK TABLES;
