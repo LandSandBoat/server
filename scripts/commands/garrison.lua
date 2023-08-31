@@ -9,18 +9,18 @@
 cmdprops =
 {
     permission = 1,
-    parameters = "ss"
+    parameters = 'ss'
 }
 
 function error(player, msg)
-    local usage = "Usage: !garrison <command> (player)"
-    player:PrintToPlayer(msg .. "\n" .. usage)
+    local usage = 'Usage: !garrison <command> (player)'
+    player:PrintToPlayer(msg .. '\n' .. usage)
 end
 
 function onTrigger(player, command, target)
     -- Validate command
     if command == nil then
-        error(player, "Invalid command")
+        error(player, 'Invalid command')
         return
     end
 
@@ -30,7 +30,7 @@ function onTrigger(player, command, target)
         targ = GetPlayerByName(target)
 
         if targ == nil then
-            error(player, string.format("Player named '%s' not found", target))
+            error(player, string.format('Player named "%s" not found', target))
             return
         end
     else -- targ == nil, select player
@@ -39,24 +39,24 @@ function onTrigger(player, command, target)
 
     -- Validate target
     if targ == nil and target == nil then
-        error(player, "Either provide a valid target name (in same zone) or target the desired player")
+        error(player, 'Either provide a valid target name (in same zone) or target the desired player')
         return
     end
 
     local zone = targ:getZone()
     switch(command): caseof
     {
-        ["start"] = function()
+        ['start'] = function()
             xi.garrison.start(targ, targ)
-            targ:PrintToPlayer(string.format("%s garrison started", zone:getName()))
+            targ:PrintToPlayer(string.format('%s garrison started', zone:getName()))
         end,
 
-        ["stop"] = function()
+        ['stop'] = function()
             xi.garrison.stop(targ:getZone())
-            targ:PrintToPlayer(string.format("%s garrison stopped", zone:getName()))
+            targ:PrintToPlayer(string.format('%s garrison stopped', zone:getName()))
         end,
 
-        ["win"] = function()
+        ['win'] = function()
             xi.garrison.win(targ:getZone())
         end,
     }
