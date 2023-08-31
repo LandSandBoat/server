@@ -45,6 +45,11 @@ zones[xi.zone.CAEDARVA_MIRE] =
     },
     mob =
     {
+        CHIGOES               =
+        {
+            ['Wild_Karakul']  = GetTableOfIDs('Chigoe', 5),
+            ['Mosshorn']      = GetTableOfIDs('Chigoe', 5, 5),
+        },
         PEALLAIDH_PH          =
         {
             [17100870] = 17101143, -- 333.885 -9.646 -447.557

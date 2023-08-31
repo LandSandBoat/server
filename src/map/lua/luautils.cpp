@@ -879,7 +879,7 @@ namespace luautils
 
         std::unordered_map<std::string, sol::table> idLuaTables;
 
-        lua.set_function("GetTableOfIDs", [&](std::string const& name, std::optional<int> optRange) -> sol::table
+        lua.set_function("GetTableOfIDs", [&](std::string const& name, std::optional<int> optRange, std::optional<int> optOffset) -> sol::table
         {
             // Is it already built and cached?
             if (idLuaTables.find(name) != idLuaTables.end())
@@ -909,7 +909,8 @@ namespace luautils
                     return table;
                 }
 
-                uint32 startId = entriesVec.front();
+                uint32 offset  = optOffset.value_or(0);
+                uint32 startId = entriesVec.front() + offset;
                 uint32 endId   = startId + range;
 
                 // TODO: Set this up to be able to iterate negatively too
