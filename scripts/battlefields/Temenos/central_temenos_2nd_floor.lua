@@ -74,11 +74,14 @@ content.groups =
             'Light_Elemental',
         },
 
-        -- NOTE: Elementals take double physical damage because their family resistance is 25% so it totals to 50% resistance
+        -- NOTE: Elementals in here take 50% physical damage instead of the usual 25%
+        -- TODO: Verify if the Elementals here should detect sound
         mods =
         {
-            [xi.mod.UDMGPHYS    ] = -10000,
-            [xi.mod.UDMGMAGIC   ] = 5000,
+            [xi.mod.SLASH_SDT   ] = 500,
+            [xi.mod.PIERCE_SDT  ] = 500,
+            [xi.mod.IMPACT_SDT  ] = 500,
+            [xi.mod.HTH_SDT     ] = 500,
             [xi.mobMod.DETECTION] = xi.detects.HEARING,
         },
     },
