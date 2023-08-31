@@ -30,9 +30,9 @@ local localSettings =
     COLLECTION_SERVER_MESSAGE =
         'Announcing the winning numbers for the 21st Vana\'versary Nomad Mog Bonanza!\n' ..
         '\n' ..
-        'Rank 3 prize: "7" (last digit)-- 13,298 winners.\n' ..
-        'Rank 2 prize: "71" (last two digits)-- 1,299 winners.\n' ..
-        'Rank 1 prize: "800" (all three digits)-- 62 winners.\n' ..
+        'Rank 3 prize: \'7\' (last digit)-- 13,298 winners.\n' ..
+        'Rank 2 prize: \'71\' (last two digits)-- 1,299 winners.\n' ..
+        'Rank 1 prize: \'800\' (all three digits)-- 62 winners.\n' ..
         '*The number of winners for each prize is a combined total from all worlds.\n' ..
         '\n' ..
         'Collection period: On July 11, 2023 at 1:00 (PDT) / 8:00 (GMT) to July 31, at 7:59 (PDT) / 14:59 (GMT)\n' ..
@@ -319,7 +319,7 @@ xi.events.mogBonanza.onBonanzaMoogleEventUpdate = function(player, csid, option,
             if prizeRankOptions[prizeRank] then
                 player:updateEvent(unpack(prizeRankOptions[prizeRank]))
             else
-                print("ERROR: Bonanza event update received without valid prizeRank.")
+                print('ERROR: Bonanza event update received without valid prizeRank.')
                 return
             end
 

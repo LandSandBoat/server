@@ -29,7 +29,7 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
     local params = {}
     params.ftp100 = 2.75 params.ftp200 = 2.75 params.ftp300 = 2.75
     params.str_wsc = 0.3 params.dex_wsc = 0.0 params.vit_wsc = 0.0 params.agi_wsc = 0.0 params.int_wsc = 0.0 params.mnd_wsc = 0.5 params.chr_wsc = 0.0
-    params.ele = xi.magic.ele.DARK
+    params.ele = xi.element.DARK
     params.skill = xi.skill.SWORD
     params.includemab = true
 

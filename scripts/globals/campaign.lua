@@ -1,7 +1,7 @@
 -----------------------------------
 -- Campaign global
 -----------------------------------
-require("scripts/globals/teleports")
+require('scripts/globals/teleports')
 -----------------------------------
 xi = xi or {}
 xi.campaign = {}

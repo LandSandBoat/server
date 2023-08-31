@@ -2,7 +2,7 @@
 -- Area: La Vaule [S]
 --   NM: Coinbiter Cjaknokk
 -----------------------------------
-mixins = { require("scripts/mixins/job_special") }
+mixins = { require('scripts/mixins/job_special') }
 -----------------------------------
 local entity = {}
 

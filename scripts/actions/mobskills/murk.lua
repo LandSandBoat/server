@@ -12,12 +12,9 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    local slowed = false
-    local weight = false
-    local typeEffect
-
-    slowed = xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.SLOW, 1250, 0, 60)
-    weight = xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.WEIGHT, 40, 0, 60)
+    local typeEffect = nil
+    local slowed     = xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.SLOW, 1250, 0, 60)
+    local weight     = xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.WEIGHT, 40, 0, 60)
 
     skill:setMsg(xi.msg.basic.SKILL_ENFEEB_IS)
 

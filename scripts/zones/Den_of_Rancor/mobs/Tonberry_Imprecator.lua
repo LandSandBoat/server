@@ -3,7 +3,7 @@
 --  Mob: Tonberry Imprecator
 -- Note: PH for Carmine-tailed Janberry
 -----------------------------------
-mixins = { require("scripts/mixins/families/tonberry") }
+mixins = { require('scripts/mixins/families/tonberry') }
 local ID = zones[xi.zone.DEN_OF_RANCOR]
 -----------------------------------
 local entity = {}

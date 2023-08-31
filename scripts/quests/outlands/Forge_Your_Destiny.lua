@@ -71,10 +71,10 @@ quest.sections =
                             -- QM is visible, but cannot be used to spawn Forger again until two minutes have elapsed
                             -- since the NM despawns.
                             forgerMob:setLocalVar('QMID', npc:getID())
-                            forgerMob:addListener("DESPAWN", "DESPAWN_" .. konschtatID.mob.FORGER, function(mobArg)
+                            forgerMob:addListener('DESPAWN', 'DESPAWN_' .. konschtatID.mob.FORGER, function(mobArg)
                                 local qmID = mobArg:getLocalVar('QMID')
 
-                                mobArg:removeListener("DESPAWN_" .. konschtatID.mob.FORGER)
+                                mobArg:removeListener('DESPAWN_' .. konschtatID.mob.FORGER)
                                 GetNPCByID(qmID):setLocalVar('forgerNextPopAllowedTime', os.time() + 120)
                             end)
 
@@ -247,10 +247,10 @@ quest.sections =
                             -- QM is visible, but cannot be used to spawn Forger again until ten minutes have elapsed
                             -- since the NM despawns.
                             treantMob:setLocalVar('QMID', npc:getID())
-                            treantMob:addListener("DESPAWN", "DESPAWN_" .. zitahID.mob.GUARDIAN_TREANT, function(mobArg)
+                            treantMob:addListener('DESPAWN', 'DESPAWN_' .. zitahID.mob.GUARDIAN_TREANT, function(mobArg)
                                 local qmID = mobArg:getLocalVar('QMID')
 
-                                mobArg:removeListener("DESPAWN_" .. zitahID.mob.GUARDIAN_TREANT)
+                                mobArg:removeListener('DESPAWN_' .. zitahID.mob.GUARDIAN_TREANT)
                                 GetNPCByID(qmID):setLocalVar('treantNextPopAllowedTime', os.time() + 60 * 10)
                             end)
 

@@ -1,5 +1,5 @@
 -----------------------------------
-require("scripts/globals/missions")
+require('scripts/globals/missions')
 -----------------------------------
 xi = xi or {}
 xi.rhapsodies = xi.rhapsodies or {}

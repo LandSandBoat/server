@@ -2,7 +2,7 @@
 -- Area: Grand Palace of Hu'Xzoi
 --  Mob: Eo'zdei
 -----------------------------------
-mixins = { require("scripts/mixins/families/zdei") }
+mixins = { require('scripts/mixins/families/zdei') }
 -----------------------------------
 local entity = {}
 

@@ -138,7 +138,7 @@ quest.sections =
             {
                 [825] = function(player, csid, option, npc)
                     if quest:complete(player) then
-                        player:addCurrency("imperial_standing", 1000)
+                        player:addCurrency('imperial_standing', 1000)
                         player:messageSpecial(zones[player:getZoneID()].text.BESIEGED_OFFSET)
                     end
                 end,

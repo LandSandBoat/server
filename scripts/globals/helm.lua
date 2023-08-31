@@ -5,12 +5,12 @@
 -- https://ffxiclopedia.wikia.com/wiki/Logging
 -- https://ffxiclopedia.wikia.com/wiki/Mining
 -----------------------------------
-require("scripts/globals/missions")
-require("scripts/globals/npc_util")
-require("scripts/globals/quests")
-require("scripts/globals/roe")
-require("scripts/missions/amk/helpers")
-require("scripts/missions/wotg/helpers")
+require('scripts/globals/missions')
+require('scripts/globals/npc_util')
+require('scripts/globals/quests')
+require('scripts/globals/roe')
+require('scripts/missions/amk/helpers')
+require('scripts/missions/wotg/helpers')
 -----------------------------------
 xi = xi or {}
 xi.helm = xi.helm or {}
@@ -32,12 +32,12 @@ local helmInfo =
 {
     [xi.helm.type.HARVESTING] =
     {
-        id           = "HARVESTING",
+        id           = 'HARVESTING',
         animation    = xi.emote.HARVESTING,
         mod          = xi.mod.HARVESTING_RESULT,
         settingRate  = xi.settings.main.HARVESTING_RATE,
         settingBreak = xi.settings.main.HARVESTING_BREAK_CHANCE,
-        message      = "HARVESTING_IS_POSSIBLE_HERE",
+        message      = 'HARVESTING_IS_POSSIBLE_HERE',
         tool         = 1020,
 
         zone =
@@ -347,12 +347,12 @@ local helmInfo =
 
     [xi.helm.type.EXCAVATION] =
     {
-        id           = "EXCAVATION",
+        id           = 'EXCAVATION',
         animation    = xi.emote.EXCAVATION,
         mod          = nil,
         settingRate  = xi.settings.main.EXCAVATION_RATE,
         settingBreak = xi.settings.main.EXCAVATION_BREAK_CHANCE,
-        message      = "MINING_IS_POSSIBLE_HERE",
+        message      = 'MINING_IS_POSSIBLE_HERE',
         tool         = 605,
 
         zone =
@@ -489,12 +489,12 @@ local helmInfo =
 
     [xi.helm.type.LOGGING] =
     {
-        id = "LOGGING",
+        id = 'LOGGING',
         animation    = xi.emote.LOGGING,
         mod          = xi.mod.LOGGING_RESULT,
         settingRate  = xi.settings.main.LOGGING_RATE,
         settingBreak = xi.settings.main.LOGGING_BREAK_CHANCE,
-        message      = "LOGGING_IS_POSSIBLE_HERE",
+        message      = 'LOGGING_IS_POSSIBLE_HERE',
         tool         = 1021,
 
         zone =
@@ -949,12 +949,12 @@ local helmInfo =
 
     [xi.helm.type.MINING] =
     {
-        id           = "MINING",
+        id           = 'MINING',
         animation    = xi.emote.EXCAVATION,
         mod          = xi.mod.MINING_RESULT,
         settingRate  = xi.settings.main.MINING_RATE,
         settingBreak = xi.settings.main.MINING_BREAK_CHANCE,
-        message      = "MINING_IS_POSSIBLE_HERE",
+        message      = 'MINING_IS_POSSIBLE_HERE',
         tool         = 605,
 
         zone =
@@ -1484,14 +1484,14 @@ local helmInfo =
 
 local rocks =
 {
-    [xi.magic.element.FIRE   ] = xi.item.RED_ROCK,
-    [xi.magic.element.ICE    ] = xi.item.TRANSLUCENT_ROCK,
-    [xi.magic.element.WIND   ] = xi.item.GREEN_ROCK,
-    [xi.magic.element.EARTH  ] = xi.item.YELLOW_ROCK,
-    [xi.magic.element.THUNDER] = xi.item.PURPLE_ROCK,
-    [xi.magic.element.WATER  ] = xi.item.BLUE_ROCK,
-    [xi.magic.element.LIGHT  ] = xi.item.WHITE_ROCK,
-    [xi.magic.element.DARK   ] = xi.item.BLACK_ROCK,
+    [xi.element.FIRE   ] = xi.item.RED_ROCK,
+    [xi.element.ICE    ] = xi.item.TRANSLUCENT_ROCK,
+    [xi.element.WIND   ] = xi.item.GREEN_ROCK,
+    [xi.element.EARTH  ] = xi.item.YELLOW_ROCK,
+    [xi.element.THUNDER] = xi.item.PURPLE_ROCK,
+    [xi.element.WATER  ] = xi.item.BLUE_ROCK,
+    [xi.element.LIGHT  ] = xi.item.WHITE_ROCK,
+    [xi.element.DARK   ] = xi.item.BLACK_ROCK,
 }
 
 -----------------------------------
@@ -1612,8 +1612,8 @@ xi.helm.onTrade = function(player, npc, trade, helmType, csid, func)
         if item ~= 0 and full == 0 then
             player:addItem(item)
 
-            local uses = (npc:getLocalVar("uses") - 1) % 4
-            npc:setLocalVar("uses", uses)
+            local uses = (npc:getLocalVar('uses') - 1) % 4
+            npc:setLocalVar('uses', uses)
 
             if uses == 0 then
                 movePoint(player, npc, zoneId, info)
@@ -1624,17 +1624,17 @@ xi.helm.onTrade = function(player, npc, trade, helmType, csid, func)
                 xi.events.eggHunt and
                 xi.events.eggHunt.enabledCheck and
                 xi.events.eggHunt.enabledCheck() and
-                player:getCharVar("[EGG_HUNT]DAILY_HELM") < VanadielUniqueDay()
+                player:getCharVar('[EGG_HUNT]DAILY_HELM') < VanadielUniqueDay()
             then
                 player:timer(3000, function(playerArg)
                     if npcUtil.giveItem(playerArg, math.random(xi.item.A_EGG, xi.item.Z_EGG)) then
-                        playerArg:setCharVar("[EGG_HUNT]DAILY_HELM", VanadielUniqueDay())
+                        playerArg:setCharVar('[EGG_HUNT]DAILY_HELM', VanadielUniqueDay())
                         return
                     end
                 end)
             end
 
-            player:triggerRoeEvent(xi.roe.triggers.helmSuccess, { ["skillType"] = helmType })
+            player:triggerRoeEvent(xi.roeTrigger.HELM_SUCCESS, { ['skillType'] = helmType })
         end
 
         -- quest stuff
@@ -1653,7 +1653,7 @@ xi.helm.onTrade = function(player, npc, trade, helmType, csid, func)
             xi.amk.helpers.helmTrade(player, helmType, broke)
         end
 
-        if type(func) == "function" then
+        if type(func) == 'function' then
             func(player)
         end
     else

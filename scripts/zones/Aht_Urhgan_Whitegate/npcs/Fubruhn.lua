@@ -115,7 +115,7 @@ entity.onEventFinish = function(player, csid, option, npc)
             -- they want to expand their access to all areas.
             xi.moghouse.setMogLockerAccessType(player, xi.moghouse.lockerAccessType.ALLAREAS)
         else
-            print("Unknown mog locker access type: "..accessType)
+            print('Unknown mog locker access type: '..accessType)
         end
     end
 end

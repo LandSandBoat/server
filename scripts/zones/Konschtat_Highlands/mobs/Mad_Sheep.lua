@@ -4,7 +4,7 @@
 -- Note: Place holder Stray Mary
 -----------------------------------
 local ID = zones[xi.zone.KONSCHTAT_HIGHLANDS]
-require("scripts/quests/tutorial")
+require('scripts/quests/tutorial')
 -----------------------------------
 local entity = {}
 

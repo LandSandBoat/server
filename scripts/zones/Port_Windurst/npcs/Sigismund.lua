@@ -28,10 +28,10 @@ entity.onTrigger = function(player, npc)
         player:startEvent(197, 0, xi.item.STARFALL_TEAR) -- Quest Reminder
     elseif
         starstatus == QUEST_COMPLETED and
-        player:getCharVar("QuestCatchAFallingStar_prog") > 0
+        player:getCharVar('QuestCatchAFallingStar_prog') > 0
     then
         player:startEvent(200) -- After Quest
-        player:setCharVar("QuestCatchAFallingStar_prog", 0)
+        player:setCharVar('QuestCatchAFallingStar_prog', 0)
     else
         player:startEvent(357)
     end
@@ -49,7 +49,7 @@ entity.onEventFinish = function(player, csid, option, npc)
         player:addFame(xi.quest.fame_area.WINDURST, 75)
         player:addItem(xi.item.FISH_SCALE_SHIELD)
         player:messageSpecial(ID.text.ITEM_OBTAINED, xi.item.FISH_SCALE_SHIELD)
-        player:setCharVar("QuestCatchAFallingStar_prog", 2)
+        player:setCharVar('QuestCatchAFallingStar_prog', 2)
     end
 end
 

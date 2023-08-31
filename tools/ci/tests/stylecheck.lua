@@ -100,10 +100,10 @@ end
 local function badFunction3() return 1 end -- FAIL (x2)
 
 -- check_no_single_line_conditions()
-if a == b then a = 5 end -- FAIL
+if a == b then a = 5 end -- FAIL (x2)
 
 -- check_no_function_decl_padding()
-local function test (var1)
+local function test (var1) -- FAIL
 end
 
 -- check_multiline_condition_format()
@@ -174,9 +174,9 @@ end
 
 -- String values in parameters
 (a,"b",c) -- FAIL x2
-("a", b)  -- PASS
-(",", b)  -- PASS
-(",",b)   -- FAIL
+("a", b)  -- FAIL x2
+(",", b)  -- FAIL x2
+(",",b)   -- FAIL x2
 
 (a,'b',c) -- FAIL x2
 ('a', b)  -- PASS
@@ -188,3 +188,14 @@ xi.item.SOMETHING  -- PASS
 
 xi.effects.SOMETHING -- FAIL
 xi.effect.SOMETHING  -- PASS
+
+if x == 1 then y = 2 -- FAIL
+elseif x == 2 then y = 3 -- FAIL
+
+"if x then y" -- FAIL
+"( x-y == 0 )" -- FAIL
+"if x then y end" -- FAIL
+
+'if x then y' -- PASS
+'( x-y == 0 )' -- PASS
+'if x then y end' -- PASS

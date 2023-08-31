@@ -15,7 +15,7 @@ end
 entity.onTrigger = function(player, npc)
     if
         player:getCurrentMission(xi.mission.log_id.ASA) == xi.mission.id.asa.SUGAR_COATED_DIRECTIVE and
-        player:getCharVar("ASA4_Azure") == 1
+        player:getCharVar('ASA4_Azure') == 1
     then
         player:startEvent(2)
     elseif not xi.bcnm.onTrigger(player, npc) then
@@ -32,7 +32,7 @@ entity.onEventFinish = function(player, csid, option, npc)
         player:delKeyItem(xi.ki.DOMINAS_AZURE_SEAL)
         player:addKeyItem(xi.ki.AZURE_COUNTERSEAL)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.AZURE_COUNTERSEAL)
-        player:setCharVar("ASA4_Azure", "2")
+        player:setCharVar('ASA4_Azure', 2)
     else
         xi.bcnm.onEventFinish(player, csid, option, npc)
     end

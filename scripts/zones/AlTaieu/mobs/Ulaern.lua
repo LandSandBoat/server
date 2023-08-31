@@ -2,7 +2,7 @@
 -- Area: Al'Taieu
 --  Mob: Ul'aern
 -----------------------------------
-mixins = { require("scripts/mixins/families/aern") }
+mixins = { require('scripts/mixins/families/aern') }
 -----------------------------------
 local entity = {}
 

@@ -19,7 +19,7 @@ entity.onTrigger = function(player, npc)
     if player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.SCATTERED_INTO_SHADOW) == QUEST_ACCEPTED then
         if offset == 0 and player:hasKeyItem(xi.ki.AQUAFLORA2) then
             player:startEvent(20)
-        elseif offset == 1 and player:getCharVar("DabotzKilled") == 1 then
+        elseif offset == 1 and player:getCharVar('DabotzKilled') == 1 then
             player:startEvent(18)
         elseif
             offset == 1 and
@@ -43,7 +43,7 @@ end
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 18 then
         player:delKeyItem(xi.ki.AQUAFLORA3)
-        player:setCharVar("DabotzKilled", 0)
+        player:setCharVar('DabotzKilled', 0)
     elseif csid == 21 then
         player:delKeyItem(xi.ki.AQUAFLORA1)
     elseif csid == 20 then

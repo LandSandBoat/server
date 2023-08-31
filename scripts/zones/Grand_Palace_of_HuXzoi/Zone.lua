@@ -35,21 +35,21 @@ zoneObject.onZoneIn = function(player, prevZone)
         player:setPos(-20, -1.5, -355.482, 192)
     end
 
-    player:setCharVar("Hu-Xzoi-TP", 0)
+    player:setCharVar('Hu-Xzoi-TP', 0)
 
     return cs
 end
 
 zoneObject.afterZoneIn = function(player)
-    player:entityVisualPacket("door")
-    player:entityVisualPacket("dtuk")
-    player:entityVisualPacket("2dor")
-    player:entityVisualPacket("cryq")
+    player:entityVisualPacket('door')
+    player:entityVisualPacket('dtuk')
+    player:entityVisualPacket('2dor')
+    player:entityVisualPacket('cryq')
 end
 
 zoneObject.onTriggerAreaEnter = function(player, triggerArea)
     if
-        player:getLocalVar("Hu-Xzoi-TP") == 0 and
+        player:getLocalVar('Hu-Xzoi-TP') == 0 and
         player:getAnimation() == xi.anim.NONE
     then
         -- prevent 2cs at same time
@@ -62,13 +62,13 @@ end
 
 zoneObject.onEventUpdate = function(player, csid, option, npc)
     if csid >= 150 and csid <= 159 then
-        player:setLocalVar("Hu-Xzoi-TP", 1)
+        player:setLocalVar('Hu-Xzoi-TP', 1)
     end
 end
 
 zoneObject.onEventFinish = function(player, csid, option, npc)
     if csid >= 150 and csid <= 159 then
-        player:setLocalVar("Hu-Xzoi-TP", 0)
+        player:setLocalVar('Hu-Xzoi-TP', 0)
     end
 end
 

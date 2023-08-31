@@ -2,7 +2,7 @@
 -- Area: Grauberg [S]
 --   NM: Sarcopsylla
 -----------------------------------
-mixins = { require("scripts/mixins/families/chigoe") }
+mixins = { require('scripts/mixins/families/chigoe') }
 -----------------------------------
 local entity = {}
 

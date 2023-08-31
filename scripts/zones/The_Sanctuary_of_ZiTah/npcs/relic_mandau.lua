@@ -8,7 +8,7 @@ local ID = zones[xi.zone.THE_SANCTUARY_OF_ZITAH]
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    local currentRelic = player:getCharVar("RELIC_IN_PROGRESS")
+    local currentRelic = player:getCharVar('RELIC_IN_PROGRESS')
 
     -- Mandau
     if
@@ -33,7 +33,7 @@ entity.onEventFinish = function(player, csid, option, npc)
         npcUtil.giveItem(player, { xi.item.MANDAU, { xi.item.ONE_HUNDRED_BYNE_BILL, 30 } })
     then
         player:confirmTrade()
-        player:setCharVar("RELIC_IN_PROGRESS", 0)
+        player:setCharVar('RELIC_IN_PROGRESS', 0)
     end
 end
 

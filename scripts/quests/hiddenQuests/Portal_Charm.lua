@@ -4,7 +4,7 @@
 -- Kupipi : !pos 2 0.1 30 242
 -----------------------------------
 
-local quest = HiddenQuest:new("portalCharm")
+local quest = HiddenQuest:new('portalCharm')
 
 quest.reward =
 {

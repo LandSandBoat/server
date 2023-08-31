@@ -10,7 +10,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local theHolyCrest = player:getCharVar("TheHolyCrest_Event")
+    local theHolyCrest = player:getCharVar('TheHolyCrest_Event')
 
     if theHolyCrest == 2 then
         player:startEvent(65)
@@ -28,9 +28,9 @@ end
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 65 then
         player:addQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_HOLY_CREST)
-        player:setCharVar("TheHolyCrest_Event", 3)
+        player:setCharVar('TheHolyCrest_Event', 3)
     elseif csid == 62 and option == 0 then
-        player:setCharVar("TheHolyCrest_Event", 4)
+        player:setCharVar('TheHolyCrest_Event', 4)
     end
 end
 

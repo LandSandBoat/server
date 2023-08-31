@@ -4,8 +4,8 @@
 local attachmentObject = {}
 
 attachmentObject.onEquip = function(pet)
-    pet:setLocalVar("shockabsorber", pet:getLocalVar("shockabsorber") + 1)
-    pet:addListener("AUTOMATON_ATTACHMENT_CHECK", "ATTACHMENT_SHOCK_ABSORBER", function(automaton, target)
+    pet:setLocalVar('shockabsorber', pet:getLocalVar('shockabsorber') + 1)
+    pet:addListener('AUTOMATON_ATTACHMENT_CHECK', 'ATTACHMENT_SHOCK_ABSORBER', function(automaton, target)
         local master = automaton:getMaster()
 
         if
@@ -19,8 +19,8 @@ attachmentObject.onEquip = function(pet)
 end
 
 attachmentObject.onUnequip = function(pet)
-    pet:setLocalVar("shockabsorber", pet:getLocalVar("shockabsorber") - 1)
-    pet:removeListener("ATTACHMENT_SHOCK_ABSORBER")
+    pet:setLocalVar('shockabsorber', pet:getLocalVar('shockabsorber') - 1)
+    pet:removeListener('ATTACHMENT_SHOCK_ABSORBER')
 end
 
 attachmentObject.onManeuverGain = function(pet, maneuvers)

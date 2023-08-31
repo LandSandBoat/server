@@ -21,15 +21,15 @@ local content = Limbus:new({
     entryNpc         = 'Matter_Diffusion_Module',
     requiredKeyItems = { xi.ki.COSMO_CLEANSE, xi.ki.WHITE_CARD, message = ID.text.YOU_INSERT_THE_CARD_POLISHED },
     requiredItems    = { xi.item.SILVER_CHIP, xi.item.CERULEAN_CHIP, xi.item.ORCHID_CHIP },
-    name             = "CENTRAL_TEMENOS_4TH_FLOOR",
+    name             = 'CENTRAL_TEMENOS_4TH_FLOOR',
 })
 
 local despawnGroupCrates = function(crateGroup)
     for i = 1, crateGroup.count do
         local crate = GetEntityByID(crateGroup.offset + i - 1)
 
-        if crate:getLocalVar("opened") == 0 then
-            crate:setLocalVar("opened", 1)
+        if crate:getLocalVar('opened') == 0 then
+            crate:setLocalVar('opened', 1)
             npcUtil.disappearCrate(crate)
         end
     end
@@ -52,7 +52,7 @@ function content:onBattlefieldInitialise(battlefield)
             crate:setAnimationSub(8)
             crate:setModelId(961)
 
-            crate:addListener("ON_TRIGGER", "TRIGGER_CRATE", function(player, npc)
+            crate:addListener('ON_TRIGGER', 'TRIGGER_CRATE', function(player, npc)
                 npcUtil.openCrate(npc, function()
                     despawnGroupCrates(group)
 
@@ -77,7 +77,7 @@ end
 content.groups =
 {
     {
-        mobs  = { "Armoury_Crate_Fourth" },
+        mobs  = { 'Armoury_Crate_Fourth' },
         setup = function(battlefield, crates)
             for _, crate in ipairs(crates) do
                 crate:setBattleID(1) -- Different battle ID prevents the crate from being hit by AOEs
@@ -88,24 +88,24 @@ content.groups =
     {
         mobs =
         {
-            "Kingslayer_Doggvdegg",
-            "JiGho_Ageless",
-            "Koo_Buzu_the_Theomanic",
-            "Yagudos_Elemental",
-            "Yagudos_Avatar",
-            "Mystic_Avatar_Ifrit",
-            "Mystic_Avatar_Shiva",
-            "Mystic_Avatar_Garuda",
-            "Mystic_Avatar_Titan",
-            "Mystic_Avatar_Ramuh",
-            "Mystic_Avatar_Leviathan",
-            "Enhanced_Koenigstiger",
-            "Enhanced_Pygmaioi",
-            "Enhanced_Kettenkaefer",
-            "Enhanced_Salamander",
-            "Enhanced_Jelly",
-            "Enhanced_Makara",
-            "Enhanced_Akbaba",
+            'Kingslayer_Doggvdegg',
+            'JiGho_Ageless',
+            'Koo_Buzu_the_Theomanic',
+            'Yagudos_Elemental',
+            'Yagudos_Avatar',
+            'Mystic_Avatar_Ifrit',
+            'Mystic_Avatar_Shiva',
+            'Mystic_Avatar_Garuda',
+            'Mystic_Avatar_Titan',
+            'Mystic_Avatar_Ramuh',
+            'Mystic_Avatar_Leviathan',
+            'Enhanced_Koenigstiger',
+            'Enhanced_Pygmaioi',
+            'Enhanced_Kettenkaefer',
+            'Enhanced_Salamander',
+            'Enhanced_Jelly',
+            'Enhanced_Makara',
+            'Enhanced_Akbaba',
         },
 
         spawned = false,
@@ -114,22 +114,22 @@ content.groups =
     {
         mobs =
         {
-            "Kingslayer_Doggvdegg",
-            "JiGho_Ageless",
-            "Koo_Buzu_the_Theomanic",
+            'Kingslayer_Doggvdegg',
+            'JiGho_Ageless',
+            'Koo_Buzu_the_Theomanic',
         },
 
         spawned = false,
-        mixins  = { require("scripts/mixins/job_special") }
+        mixins  = { require('scripts/mixins/job_special') }
     },
 
     {
-        mobs  = { "Proto-Ultima" },
+        mobs  = { 'Proto-Ultima' },
         setup = function(battlefield, mobs)
             local ultima = mobs[1]
 
             -- Despawn all crates when Proto-Ultima is engaged
-            ultima:addListener("ENGAGE", "ULTIMA_ENGAGED", function(mob, target)
+            ultima:addListener('ENGAGE', 'ULTIMA_ENGAGED', function(mob, target)
                 for _, group in ipairs(ID.CENTRAL_TEMENOS_4TH_FLOOR.npc.GROUPS) do
                     despawnGroupCrates(group)
                 end

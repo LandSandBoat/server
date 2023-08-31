@@ -48,8 +48,6 @@ abilityObject.onUseAbility = function(player, target, ability, action)
         anim = 39
     elseif skill == 12 then
         anim = 45
-    else
-        anim = 36
     end
 
     action:setAnimation(target:getID(), anim)

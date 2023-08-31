@@ -33,7 +33,7 @@ entity.onTrigger = function(player, npc)
         or
         (
             wakingDreams == QUEST_COMPLETED and
-            os.time() > player:getCharVar("Darkness_Named_date")
+            os.time() > player:getCharVar('Darkness_Named_date')
         )
     then
         player:startEvent(918)
@@ -68,7 +68,7 @@ entity.onEventFinish = function(player, csid, option, npc)
 
         if npcUtil.completeQuest(player, xi.quest.log_id.WINDURST, xi.quest.id.windurst.WAKING_DREAMS, reward) then
             player:delKeyItem(xi.ki.WHISPER_OF_DREAMS)
-            player:setCharVar("Darkness_Named_date", getMidnight())
+            player:setCharVar('Darkness_Named_date', getMidnight())
         end
     end
 end

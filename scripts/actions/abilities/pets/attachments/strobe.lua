@@ -6,7 +6,7 @@ local attachmentObject = {}
 
 attachmentObject.onEquip = function(pet, attachment)
     xi.automaton.onAttachmentEquip(pet, attachment)
-    pet:addListener("AUTOMATON_ATTACHMENT_CHECK", "ATTACHMENT_STROBE", function(automaton, target)
+    pet:addListener('AUTOMATON_ATTACHMENT_CHECK', 'ATTACHMENT_STROBE', function(automaton, target)
         local master = automaton:getMaster()
 
         if
@@ -21,7 +21,7 @@ end
 
 attachmentObject.onUnequip = function(pet, attachment)
     xi.automaton.onAttachmentUnequip(pet, attachment)
-    pet:removeListener("ATTACHMENT_STROBE")
+    pet:removeListener('ATTACHMENT_STROBE')
 end
 
 attachmentObject.onManeuverGain = function(pet, attachment, maneuvers)

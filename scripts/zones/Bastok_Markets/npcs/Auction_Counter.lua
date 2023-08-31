@@ -2,7 +2,7 @@
 -- Area: Bastok Markets
 --  NPC: Auction Counter
 -----------------------------------
-require("scripts/quests/tutorial")
+require('scripts/quests/tutorial')
 -----------------------------------
 local entity = {}
 

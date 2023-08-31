@@ -1,4 +1,4 @@
-local ID = zones[xi.zone.WINDURST_WATERS]
+-- local ID = zones[xi.zone.WINDURST_WATERS]
 
 return {
     ['Akkeke']          = { event = 427 },

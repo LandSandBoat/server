@@ -2,7 +2,7 @@
 -- Area: Port San d'Oria
 --  NPC: Auvare
 -----------------------------------
-require("scripts/quests/flyers_for_regine")
+require('scripts/quests/flyers_for_regine')
 -----------------------------------
 local entity = {}
 

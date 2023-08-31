@@ -6,7 +6,7 @@
 local woodsID = zones[xi.zone.WINDURST_WOODS]
 -----------------------------------
 
-local quest = HiddenQuest:new("TrustShikareeZ")
+local quest = HiddenQuest:new('TrustShikareeZ')
 
 quest.sections =
 {

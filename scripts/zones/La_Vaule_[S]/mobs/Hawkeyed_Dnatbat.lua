@@ -2,7 +2,7 @@
 -- Area: La Vaule [S]
 --   NM: Hawkeyed Dnatbat
 -----------------------------------
-mixins = { require("scripts/mixins/job_special") }
+mixins = { require('scripts/mixins/job_special') }
 -----------------------------------
 local entity = {}
 

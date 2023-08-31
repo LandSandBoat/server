@@ -16,7 +16,7 @@ abilityObject.onUseAbility = function(player, target, ability)
 
     if helix ~= nil then
         local mvPower = helix:getSubPower()
-        local resist  = applyResistanceAbility(player, target, xi.magic.ele.NONE, xi.skill.ELEMENTAL_MAGIC, 0)
+        local resist  = applyResistanceAbility(player, target, xi.element.NONE, xi.skill.ELEMENTAL_MAGIC, 0)
         -- Doesn't work against NMs apparently
         if mvPower > 0 or resist < 0.25 or target:isNM() then -- Don't let Modus Veritas stack to prevent abuse
             ability:setMsg(xi.msg.basic.JA_MISS) --Miss

@@ -15,7 +15,7 @@
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)
-    caster:setLocalVar("selfdestructHp", caster:getHP())
+    caster:setLocalVar('selfdestructHp', caster:getHP())
     return 0
 end
 
@@ -23,7 +23,7 @@ spellObject.onSpellCast = function(caster, target, spell)
     local params = {}
     params.attackType = xi.attackType.MAGICAL
     params.damageType = xi.damageType.FIRE
-    local playerHP = caster:getLocalVar("selfdestructHp")
+    local playerHP = caster:getLocalVar('selfdestructHp')
     local damage = playerHP - 1
 
     if damage > 0 then

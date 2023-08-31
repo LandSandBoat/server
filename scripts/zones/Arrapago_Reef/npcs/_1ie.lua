@@ -61,7 +61,7 @@ entity.onTrigger = function(player, npc)
             player:messageSpecial(ID.text.DOOR_IS_LOCKED, xi.item.LAMIAN_FANG_KEY)
         end
     elseif player:getZPos() >= 120 and npc:getAnimation() == xi.anim.CLOSE_DOOR then
-        player:messageSpecial(ID.text.YOU_UNLOCK_DOOR) -- message from "inside" of door
+        player:messageSpecial(ID.text.YOU_UNLOCK_DOOR) -- message from 'inside' of door
         npc:openDoor()
     end
 end

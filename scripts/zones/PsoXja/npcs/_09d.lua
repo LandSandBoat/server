@@ -4,7 +4,7 @@
 -- Notes: Spawns Gargoyle when triggered
 -- !pos 301.600 -1.925 -10.000 9
 -----------------------------------
-local psoXjaGlobal = require("scripts/zones/PsoXja/globals")
+local psoXjaGlobal = require('scripts/zones/PsoXja/globals')
 -----------------------------------
 local entity = {}
 

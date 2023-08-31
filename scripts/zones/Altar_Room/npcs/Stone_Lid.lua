@@ -9,7 +9,7 @@ local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     local moralmanifest = player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.A_MORAL_MANIFEST)
-    if moralmanifest == QUEST_ACCEPTED and player:getCharVar("moral") == 7 then
+    if moralmanifest == QUEST_ACCEPTED and player:getCharVar('moral') == 7 then
         if trade:hasItemQty(xi.item.YAGUDO_HEADGEAR, 1) then -- Trade Yagudo Headgear
             player:tradeComplete()
             player:startEvent(50)
@@ -19,7 +19,7 @@ end
 
 entity.onTrigger = function(player, npc)
     -- local moralmanifest = player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.A_MORAL_MANIFEST)
-    local moral = player:getCharVar("moral")
+    local moral = player:getCharVar('moral')
     local head = player:getEquipID(xi.slot.HEAD)
     if moral == 5 and head == xi.item.YAGUDO_HEADGEAR then
         player:startEvent(48)
@@ -50,10 +50,10 @@ entity.onEventFinish = function(player, csid, option, npc)
             player:messageSpecial(ID.text.DRAWS_NEAR)
         end
     elseif csid == 49 then
-        player:setCharVar("moral", 7)
+        player:setCharVar('moral', 7)
     elseif csid == 50 then
         if npcUtil.giveItem(player, xi.item.TSOO_HAJAS_HEADGEAR) then
-            player:setCharVar("moral", 8)
+            player:setCharVar('moral', 8)
         end
     end
 end

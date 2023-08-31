@@ -1,10 +1,10 @@
 -----------------------------------
 -- Dragoon Job Utilities
 -----------------------------------
-require("scripts/globals/ability")
-require("scripts/globals/jobpoints")
-require("scripts/globals/spells/damage_spell")
-require("scripts/globals/weaponskills")
+require('scripts/globals/ability')
+require('scripts/globals/jobpoints')
+require('scripts/globals/spells/damage_spell')
+require('scripts/globals/weaponskills')
 -----------------------------------
 xi = xi or {}
 xi.job_utils = xi.job_utils or {}
@@ -82,7 +82,7 @@ local function performWSJump(player, target, action, params, abilityID)
     if totalHits > 0 then
 
         if target:getHP() <= 0 then
-            specEffect = bit.bor(specEffect, 0x01) -- Add in "killed target" bit
+            specEffect = bit.bor(specEffect, 0x01) -- Add in 'killed target' bit
         end
 
         if criticalHit then -- set crit bit
@@ -257,7 +257,7 @@ xi.job_utils.dragoon.useJump = function(player, target, ability, action)
     local atkMultiplier = (player:getMod(xi.mod.JUMP_ATT_BONUS) + 100) / 100
     local params = getJumpWSParams(player, atkMultiplier, 1, false)
 
-    -- Only "Jump" and not others get the fTP VIT bonus
+    -- Only 'Jump' and not others get the fTP VIT bonus
     local ftp = 1 + (player:getStat(xi.mod.VIT) / 256)
     params.ftp100 = ftp
     params.ftp200 = ftp
@@ -536,7 +536,7 @@ end
 
 xi.job_utils.dragoon.useDeepBreathing = function(player, target, ability)
     local wyvern = getWyvern(player)
-    wyvern:addStatusEffect(xi.effect.MAGIC_ATK_BOOST, 0, 0, 180) -- Message when effect is lost is "Magic Attack boost wears off."
+    wyvern:addStatusEffect(xi.effect.MAGIC_ATK_BOOST, 0, 0, 180) -- Message when effect is lost is 'Magic Attack boost wears off.'
 end
 
 xi.job_utils.dragoon.useSpiritBond = function(player, target, ability)
@@ -709,7 +709,7 @@ xi.job_utils.dragoon.useDamageBreath = function(wyvern, target, skill, action, d
     local bonusMacc = strafeMeritPower + master:getMod(xi.mod.WYVERN_BREATH_MACC)
     local element   = damageType - xi.damageType.ELEMENTAL
 
-    -- "Breath accuracy is directly affected by a wyvern's current HP", but no data exists.
+    -- 'Breath accuracy is directly affected by a wyvern's current HP', but no data exists.
     local resist              = xi.spells.damage.calculateResist(wyvern, target, 0, 0, element, 0, bonusMacc)
     local sdt                 = xi.spells.damage.calculateSDT(target, element)
     local magicBurst          = xi.spells.damage.calculateIfMagicBurst(target, element)
@@ -730,7 +730,7 @@ xi.job_utils.dragoon.useDamageBreath = function(wyvern, target, skill, action, d
         -- absorb
 
         -- Capped in 2022 --
-        -- retail uses message 121, "Wyvern uses Frost Breath.\nWyvern recovers <amount> HP." which is wrong
+        -- retail uses message 121, 'Wyvern uses Frost Breath.\nWyvern recovers <amount> HP.' which is wrong
         -- if SE ever fixes this, it will need to change
         -- skill:setMsg(???)
         -- if magicBurst > 1  then
@@ -843,7 +843,7 @@ end
 
 xi.job_utils.dragoon.addWyvernExp = function(player, exp)
     local wyvern      = player:getPet()
-    local prevExp     = wyvern:getLocalVar("wyvern_exp")
+    local prevExp     = wyvern:getLocalVar('wyvern_exp')
     local numLevelUps = 0
 
     if prevExp < 1000 then
@@ -877,8 +877,8 @@ xi.job_utils.dragoon.addWyvernExp = function(player, exp)
             player:addMod(xi.mod.ALL_WSDMG_ALL_HITS, 2 * numLevelUps)
         end
 
-        wyvern:setLocalVar("wyvern_exp", prevExp + exp)
-        wyvern:setLocalVar("level_Ups", wyvern:getLocalVar("level_Ups") + numLevelUps)
+        wyvern:setLocalVar('wyvern_exp', prevExp + exp)
+        wyvern:setLocalVar('level_Ups', wyvern:getLocalVar('level_Ups') + numLevelUps)
     end
 
     return numLevelUps

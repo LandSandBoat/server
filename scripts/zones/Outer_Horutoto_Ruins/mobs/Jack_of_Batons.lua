@@ -2,16 +2,16 @@
 -- Area: Outer Horutoto Ruins
 --   NM: Jack of Batons
 -----------------------------------
-mixins = { require("scripts/mixins/job_special") }
+mixins = { require('scripts/mixins/job_special') }
 -----------------------------------
 local entity = {}
 
 entity.onMobSpawn = function(mob)
-    mob:setLocalVar("popTime", os.time())
+    mob:setLocalVar('popTime', os.time())
 end
 
 entity.onMobRoam = function(mob)
-    if os.time() - mob:getLocalVar("popTime") > 180 then
+    if os.time() - mob:getLocalVar('popTime') > 180 then
         DespawnMob(mob:getID())
     end
 end

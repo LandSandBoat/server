@@ -32,8 +32,8 @@ entity.onTrade = function(player, npc, trade)
     -- 1147      Ancient Salt
     -- 4600      Lucky Egg
     local opoOpoAndIStatus = player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.THE_OPO_OPO_AND_I)
-    local progress = player:getCharVar("OPO_OPO_PROGRESS")
-    local failed = player:getCharVar("OPO_OPO_FAILED")
+    local progress = player:getCharVar('OPO_OPO_PROGRESS')
+    local failed = player:getCharVar('OPO_OPO_FAILED')
     local goodtrade = trade:hasItemQty(xi.item.LUCKY_EGG, 1)
     local badtrade = trade:hasItemQty(xi.item.BROKEN_MITHRAN_FISHING_ROD, 1) or
         trade:hasItemQty(xi.item.WORKBENCH, 1) or
@@ -58,9 +58,9 @@ end
 
 entity.onTrigger = function(player, npc)
     local opoOpoAndIStatus = player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.THE_OPO_OPO_AND_I)
-    local progress = player:getCharVar("OPO_OPO_PROGRESS")
-    local failed = player:getCharVar("OPO_OPO_FAILED")
-    local retry = player:getCharVar("OPO_OPO_RETRY")
+    local progress = player:getCharVar('OPO_OPO_PROGRESS')
+    local failed = player:getCharVar('OPO_OPO_FAILED')
+    local retry = player:getCharVar('OPO_OPO_RETRY')
 
     if opoOpoAndIStatus == QUEST_ACCEPTED then
         if retry >= 1 then                          -- has failed on future npc so disregard previous successful trade
@@ -88,16 +88,16 @@ entity.onEventFinish = function(player, csid, option, npc)
             player:messageSpecial(ID.text.ITEM_OBTAINED, xi.item.OPO_OPO_CROWN)
             player:addItem(xi.item.BUNCH_OF_PAMAMAS, 3)  -- 3 pamamas
             player:messageSpecial(ID.text.ITEM_OBTAINED, xi.item.BUNCH_OF_PAMAMAS, 3)
-            player:setCharVar("OPO_OPO_PROGRESS", 0)
-            player:setCharVar("OPO_OPO_FAILED", 0)
-            player:setCharVar("OPO_OPO_RETRY", 0)
+            player:setCharVar('OPO_OPO_PROGRESS', 0)
+            player:setCharVar('OPO_OPO_FAILED', 0)
+            player:setCharVar('OPO_OPO_RETRY', 0)
             player:setTitle(xi.title.KING_OF_THE_OPO_OPOS)
         else
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED)
         end
     elseif csid == 238 then              -- wrong trade, restart at first opo
-        player:setCharVar("OPO_OPO_FAILED", 1)
-        player:setCharVar("OPO_OPO_RETRY", 10)
+        player:setCharVar('OPO_OPO_FAILED', 1)
+        player:setCharVar('OPO_OPO_RETRY', 10)
     end
 end
 

@@ -2,7 +2,7 @@
 -- Area: Batallia Downs (105)
 --   NM: Lumber Jack
 -----------------------------------
-mixins = { require("scripts/mixins/job_special") }
+mixins = { require('scripts/mixins/job_special') }
 -----------------------------------
 local entity = {}
 
@@ -22,11 +22,11 @@ entity.onAdditionalEffect = function(mob, target, damage)
 end
 
 entity.onMobDeath = function(mob, player, optParams)
-    mob:setLocalVar("death", 1)
+    mob:setLocalVar('death', 1)
 end
 
 entity.onMobDespawn = function(mob)
-    local lumberDeath = mob:getLocalVar("death")
+    local lumberDeath = mob:getLocalVar('death')
 
     if lumberDeath then
         -- Lumber Jack died, Set Weeping Willow's respawn time (21-24 hours)

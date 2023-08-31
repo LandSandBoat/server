@@ -6,18 +6,18 @@
 cmdprops =
 {
     permission = 1,
-    parameters = "i"
+    parameters = 'i'
 }
 
 function error(player, msg)
     player:PrintToPlayer(msg)
-    player:PrintToPlayer("!messagestandard <message ID>")
+    player:PrintToPlayer('!messagestandard <message ID>')
 end
 
 function onTrigger(player, msgId)
     -- validate msgId
     if msgId == nil then
-        error(player, "You must provide a message ID.")
+        error(player, 'You must provide a message ID.')
         return
     end
 

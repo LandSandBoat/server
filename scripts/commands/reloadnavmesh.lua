@@ -8,11 +8,11 @@
 cmdprops =
 {
     permission = 5,
-    parameters = ""
+    parameters = ''
 }
 
 function onTrigger(player)
     local zone = player:getZone()
-    player:PrintToPlayer("Reloading Navmesh for " .. zone:getName())
+    player:PrintToPlayer('Reloading Navmesh for ' .. zone:getName())
     zone:reloadNavmesh()
 end

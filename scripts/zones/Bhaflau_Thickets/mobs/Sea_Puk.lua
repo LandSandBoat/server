@@ -4,7 +4,7 @@
 -- Note: Place holder Nis Puk
 -----------------------------------
 local ID = zones[xi.zone.BHAFLAU_THICKETS]
-mixins = { require("scripts/mixins/families/puk") }
+mixins = { require('scripts/mixins/families/puk') }
 -----------------------------------
 local entity = {}
 

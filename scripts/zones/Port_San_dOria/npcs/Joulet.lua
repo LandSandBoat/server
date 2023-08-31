@@ -16,7 +16,7 @@ entity.onTrade = function(player, npc, trade)
     local count = trade:getItemCount()
     local moatCarp = trade:getItemQty(xi.item.MOAT_CARP)
     local forestCarp = trade:getItemQty(xi.item.FOREST_CARP)
-    local fishCountVar = player:getCharVar("theCompetitionFishCountVar")
+    local fishCountVar = player:getCharVar('theCompetitionFishCountVar')
     local totalFish = moatCarp + forestCarp + fishCountVar
 
     if moatCarp + forestCarp > 0 and moatCarp + forestCarp == count then
@@ -32,7 +32,7 @@ entity.onTrade = function(player, npc, trade)
         elseif player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_COMPETITION) >= QUEST_ACCEPTED then -- regular turn-ins. Still allowed after completion of the quest.
             player:tradeComplete()
             player:addFame(xi.quest.fame_area.SANDORIA, 30)
-            player:setCharVar("theCompetitionFishCountVar", totalFish)
+            player:setCharVar('theCompetitionFishCountVar', totalFish)
             player:startEvent(305)
             npcUtil.giveCurrency(player, 'gil', moatCarp * 10 + forestCarp * 15)
         else
@@ -53,7 +53,7 @@ entity.onTrigger = function(player, npc)
     elseif player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_RIVALRY) == QUEST_ACCEPTED then
         player:showText(npc, ID.text.JOULET_HELP_OTHER_BROTHER)
     elseif player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_COMPETITION) == QUEST_ACCEPTED then
-        player:showText(npc, ID.text.JOULET_CARP_STATUS, 0, player:getCharVar("theCompetitionFishCountVar"))
+        player:showText(npc, ID.text.JOULET_CARP_STATUS, 0, player:getCharVar('theCompetitionFishCountVar'))
     end
 end
 
@@ -71,7 +71,7 @@ entity.onEventFinish = function(player, csid, option, npc)
             player:addTitle(xi.title.CARP_DIEM)
             player:addKeyItem(xi.ki.TESTIMONIAL)
             player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.TESTIMONIAL)
-            player:setCharVar("theCompetitionFishCountVar", 0)
+            player:setCharVar('theCompetitionFishCountVar', 0)
             player:completeQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_COMPETITION)
         end
     elseif csid == 304 and option == 700 then

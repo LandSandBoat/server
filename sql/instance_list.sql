@@ -63,7 +63,7 @@ INSERT INTO `instance_list` VALUES (5502,'extermination',55,54,30,298.099,-3.943
 -- INSERT INTO `instance_list` VALUES (5509,'bellerophons_bliss',55,54,30,0.000,0.000,0.000,0,-1,-1,-1,-1);
 
 -- PERIQIA (zoneID: 56, starting id: 5600)
-INSERT INTO `instance_list` VALUES (5600,'shades_of_vengeance',56,79,30,127,-15,-303,0,-1,-1,-1,-1);
+INSERT INTO `instance_list` VALUES (5600,'shades_of_vengeance',56,79,30,127.000,-15.000,-303.000,0,-1,-1,-1,-1);
 INSERT INTO `instance_list` VALUES (5601,'seagull_grounded',56,79,30,-350.000,-15.245,380.000,0,-1,-1,-1,-1);
 INSERT INTO `instance_list` VALUES (5602,'requiem',56,79,30,-470.000,-9.964,-325.000,190,-1,-1,-1,-1);
 -- INSERT INTO `instance_list` VALUES (5603,'saving_private_ryaaf',56,79,30,0.000,0.000,0.000,0,-1,-1,-1,-1);
@@ -76,7 +76,7 @@ INSERT INTO `instance_list` VALUES (5602,'requiem',56,79,30,-470.000,-9.964,-325
 -- INSERT INTO `instance_list` VALUES (5610,'the_price_is_right',56,79,30,0.000,0.000,0.000,0,-1,-1,-1,-1);
 
 -- THE_ASHU_TALIF (zoneID: 60, starting id: 6000)
-INSERT INTO `instance_list` VALUES (6000,'the_black_coffin',60,54,30,0,-22,24,64,-1,-1,-1,-1);
+INSERT INTO `instance_list` VALUES (6000,'the_black_coffin',60,54,30,0.000,-22.000,24.000,64,-1,-1,-1,-1);
 INSERT INTO `instance_list` VALUES (6001,'against_all_odds',60,54,30,-9.000,-22.000,17.000,252,-1,-1,-1,-1);
 -- INSERT INTO `instance_list` VALUES (6002,'scouting_the_ashu_talif',60,54,30,0.000,0.000,0.000,0,-1,-1,-1,-1);
 -- INSERT INTO `instance_list` VALUES (6003,'royal_painter_escort',60,54,30,0.000,0.000,0.000,0,-1,-1,-1,-1);
@@ -84,7 +84,7 @@ INSERT INTO `instance_list` VALUES (6001,'against_all_odds',60,54,30,-9.000,-22.
 
 -- LEBROS_CAVERN (zoneID: 63, starting id: 6300)
 INSERT INTO `instance_list` VALUES (6300,'excavation_duty',63,61,30,124.999,-39.309,19.999,0,-1,-1,-1,-1);
-INSERT INTO `instance_list` VALUES (6301,'lebros_supplies',63,61,30,-333.000,-9.921,-259.999,270,-1,-1,-1,-1);
+INSERT INTO `instance_list` VALUES (6301,'lebros_supplies',63,61,30,-333.000,-9.921,-259.999,255,-1,-1,-1,-1);
 INSERT INTO `instance_list` VALUES (6302,'troll_fugitives',63,61,30,-459.912,-9.860,342.319,0,-1,-1,-1,-1);
 -- INSERT INTO `instance_list` VALUES (6303,'evade_and_escape',63,61,30,0.000,0.000,0.000,0,-1,-1,-1,-1);
 -- INSERT INTO `instance_list` VALUES (6304,'siegemaster_assassination',63,61,30,0.000,0.000,0.000,0,-1,-1,-1,-1);
@@ -96,7 +96,7 @@ INSERT INTO `instance_list` VALUES (6302,'troll_fugitives',63,61,30,-459.912,-9.
 
 -- MAMOOL_JA_TRAINING_GROUNDS (zoneID: 66, starting id: 6600)
 INSERT INTO `instance_list` VALUES (6600,'imperial_agent_rescue',66,52,30,-20.000,2.276,-405.000,63,-1,-1,-1,-1);
-INSERT INTO `instance_list` VALUES (6601,'preemptive_strike',66,52,30,-60.35,-5.0,27.67,46,-1,-1,-1,-1);
+INSERT INTO `instance_list` VALUES (6601,'preemptive_strike',66,52,30,-60.350,-5.000,27.670,46,-1,-1,-1,-1);
 -- INSERT INTO `instance_list` VALUES (6602,'sagelord_elimination',66,52,30,0.000,0.000,0.000,0,-1,-1,-1,-1);
 -- INSERT INTO `instance_list` VALUES (6603,'breaking_morale',66,52,15,0.000,0.000,0.000,0,-1,-1,-1,-1);
 -- INSERT INTO `instance_list` VALUES (6604,'the_double_agent',66,52,30,0.000,0.000,0.000,0,-1,-1,-1,-1);
@@ -135,8 +135,8 @@ INSERT INTO `instance_list` VALUES (7600,'silver_sea_remnants',76,72,100,340.000
 -- INSERT INTO `instance_list` VALUES (7601,'silver_sea_remnants_ii',76,72,100,340.000,12.000,-165.500,63,-1,-1,-1,-1);
 
 -- NYZUL_ISLE (zoneID: 77, starting id: 7700)
-INSERT INTO `instance_list` VALUES (7700,'path_of_darkness',77,72,30,500,0,-572,192,143,143,143,143);
-INSERT INTO `instance_list` VALUES (7701,'nashmeiras_plea',77,72,45,-444,-4,420,127,143,143,143,143);
+INSERT INTO `instance_list` VALUES (7700,'path_of_darkness',77,72,30,500.000,0.000,-572.000,192,143,143,143,143);
+INSERT INTO `instance_list` VALUES (7701,'nashmeiras_plea',77,72,45,-444.000,-4.000,420.000,127,143,143,143,143);
 -- INSERT INTO `instance_list` VALUES (7702,'waking_the_colossus',77,72,30,0.000,0.000,0.000,0,-1,-1,-1,-1);
 -- INSERT INTO `instance_list` VALUES (7703,'forging_a_new_myth',77,72,30,0.000,0.000,0.000,0,-1,-1,-1,-1);
 INSERT INTO `instance_list` VALUES (7704,'nyzul_isle_investigation',77,72,30,-20.000,-4.000,-20.000,196,-1,-1,-1,-1);
@@ -148,17 +148,17 @@ INSERT INTO `instance_list` VALUES (7704,'nyzul_isle_investigation',77,72,30,-20
 -- INSERT INTO `instance_list` VALUES (8602,'doomvoid',86,84,0,382,0,-191,74,-1,-1,-1,-1);
 
 -- RUHOTZ_SILVERMINES (zoneID: 93, starting id: 9300)
-INSERT INTO `instance_list` VALUES (9300,'light_in_the_darkness',93,90,0,-22.5,1.6,40,192,-1,-1,-1,-1);
-INSERT INTO `instance_list` VALUES (9301,'fire_in_the_hole',93,88,0,156,0,-60,0,-1,-1,-1,-1);
+INSERT INTO `instance_list` VALUES (9300,'light_in_the_darkness',93,90,0,-22.500,1.600,40.000,192,-1,-1,-1,-1);
+INSERT INTO `instance_list` VALUES (9301,'fire_in_the_hole',93,88,0,156.000,0.000,-60.000,0,-1,-1,-1,-1);
 -- INSERT INTO `instance_list` VALUES (9301,'doomvoid',93,84,0,382,0,-191,74,-1,-1,-1,-1);
 
 -- GHOYUS_REVERIE (zoneID: 129, starting id: 12900)
-INSERT INTO `instance_list` VALUES (12900,'doomvoid',129,84,0,382,0,-191,74,-1,-1,-1,-1);
+INSERT INTO `instance_list` VALUES (12900,'doomvoid',129,84,0,382.000,0.000,-191.000,74,-1,-1,-1,-1);
 
 -- MAQUETTE_ABDHALJS_LEGION_A (zoneID: 183, starting id: 18300)
 
 -- RALA_WATERWAYS_U (zoneID: 259, starting id: 25900)
-INSERT INTO `instance_list` VALUES (25900,'behind_the_sluices',259,258,0,-153,-5.7,-380,0,-1,-1,-1,-1);
+INSERT INTO `instance_list` VALUES (25900,'behind_the_sluices',259,258,0,-153.000,-5.700,-380.000,0,-1,-1,-1,-1);
 
 -- YORCIA_WEALD_U (zoneID: 264, starting id: 26400)
 
@@ -177,7 +177,7 @@ INSERT INTO `instance_list` VALUES (25900,'behind_the_sluices',259,258,0,-153,-5
 -- DYNAMIS_JEUNO_D (zoneID: 297, starting id: 29700)
 
 -- MAQUETTE_ABDHALJS_LEGION_B (zoneID: 287, starting id: 30000)
-INSERT INTO `instance_list` VALUES (30000,'ambuscade',287,249,30,137,12.5,-137,32,-1,-1,-1,-1);
+INSERT INTO `instance_list` VALUES (30000,'ambuscade',287,249,30,137.000,12.500,-137.000,32,-1,-1,-1,-1);
 
 /*!40000 ALTER TABLE `instance_list` ENABLE KEYS */;
 UNLOCK TABLES;

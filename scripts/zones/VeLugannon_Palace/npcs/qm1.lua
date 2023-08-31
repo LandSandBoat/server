@@ -11,7 +11,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local hideTime = 0
+    local hideTime = 1
 
     if not player:hasItem(xi.item.CURTANA) and player:getFreeSlotsCount() >= 1 then
         player:addItem(xi.item.CURTANA)
@@ -21,9 +21,6 @@ entity.onTrigger = function(player, npc)
         hideTime = 7200
     else
         player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.item.CURTANA) -- Curtana
-
-        -- ??? just change position
-        hideTime = 1
     end
 
     local curtanaPos =

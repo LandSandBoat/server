@@ -3,7 +3,7 @@
 --  NPC: Shiva's Gate
 -- !pos 215 -34 20 195
 -----------------------------------
-local func = require("scripts/zones/The_Eldieme_Necropolis/globals")
+local func = require('scripts/zones/The_Eldieme_Necropolis/globals')
 -----------------------------------
 local entity = {}
 

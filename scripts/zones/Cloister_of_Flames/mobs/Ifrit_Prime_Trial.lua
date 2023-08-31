@@ -3,7 +3,7 @@
 --  Mob: Ifrit Prime
 -- Involved in Quest: Trial by Fire, Trial Size Trial by Fire
 -----------------------------------
-mixins = { require("scripts/mixins/job_special") }
+mixins = { require('scripts/mixins/job_special') }
 -----------------------------------
 local entity = {}
 

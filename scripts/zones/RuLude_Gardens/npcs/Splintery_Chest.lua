@@ -21,7 +21,6 @@ entity.onEventUpdate = function(player, csid, option, npc)
 end
 
 entity.onEventFinish = function(player, csid, option, npc)
-    local itemId = 0
     local optionTable =
     {
         [0] = 19327, -- Pugilists
@@ -73,12 +72,12 @@ entity.onEventFinish = function(player, csid, option, npc)
         [180] = 21283, -- Mollfrith -1
     }
 
-    itemId = optionTable[option]
+    local itemId = optionTable[option] and optionTable[option] or nil
 
     if option ~= 1073741824 then
         if not itemId then
             -- How did you get here??
-            player:PrintToPlayer("itemId or OptionID related script error!")
+            player:PrintToPlayer('itemId or OptionID related script error!')
         elseif player:getFreeSlotsCount() >= 1 then
             player:addItem(itemId, 1)
             player:messageSpecial(ID.text.ITEM_OBTAINED, itemId)

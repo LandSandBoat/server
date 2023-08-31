@@ -2,7 +2,7 @@
 -- Area: Apollyon CS
 --  Mob: Lightsteel Quadav
 -----------------------------------
-mixins = { require("scripts/mixins/job_special") }
+mixins = { require('scripts/mixins/job_special') }
 -----------------------------------
 local entity = {}
 

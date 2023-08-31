@@ -15,7 +15,7 @@ itemObject.onItemUse = function(target)
     local power     = 50 --Double Shot Rate
     local duration  = 60
 
-    xi.item_utils.addItemEffect(target, effect, power, duration)
+    xi.itemUtils.addItemEffect(target, effect, power, duration)
 end
 
 return itemObject

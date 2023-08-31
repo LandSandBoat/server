@@ -4,7 +4,7 @@
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)
-    target:addMod(xi.mod.ENSPELL, xi.magic.element.WIND + 8) -- Tier IIs have higher "enspell IDs"
+    target:addMod(xi.mod.ENSPELL, xi.element.WIND + 8) -- Tier IIs have higher "enspell IDs"
     target:addMod(xi.mod.ENSPELL_DMG, effect:getPower())
 end
 

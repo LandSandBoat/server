@@ -42,12 +42,10 @@ abilityObject.onUseAbility = function(player, target, ability)
     local dLvl = mLvl - pLvl
 
     -- Determining what level of resistance the target will have to the ability
-    local resist = 0
+    local resist = 1 -- default level difference to 1 if mob is equal to the Beastmaster's level or less.
     dLvl         = (10 * dLvl) - modAcc -- merits increase accuracy by 5% per level
 
-    if dLvl <= 0 then -- default level difference to 1 if mob is equal to the Beastmaster's level or less.
-        resist = 1
-    else
+    if dLvl > 0 then
         resist = math.random(1, (dLvl + 100)) -- calculate chance of missing based on number of levels mob is higher than you. Target gets 10% resist per level over BST
     end
 

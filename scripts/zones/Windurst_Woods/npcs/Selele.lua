@@ -4,7 +4,7 @@
 -- Type: Tutorial NPC
 -- !pos 106.9 -5 -31.5 241
 -----------------------------------
-require("scripts/quests/tutorial")
+require('scripts/quests/tutorial')
 -----------------------------------
 local entity = {}
 

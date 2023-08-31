@@ -19,7 +19,7 @@ local content = Limbus:new({
     entryNpc         = 'Matter_Diffusion_Module',
     requiredKeyItems = { xi.ki.COSMO_CLEANSE, xi.ki.WHITE_CARD, message = ID.text.YOU_INSERT_THE_CARD_POLISHED },
     requiredItems    = { xi.item.EMERALD_CHIP },
-    name             = "CENTRAL_TEMENOS_1ST_FLOOR",
+    name             = 'CENTRAL_TEMENOS_1ST_FLOOR',
 })
 
 function content:handleMobPartnerDeath(mobs, battlefield, mob, count)
@@ -45,29 +45,29 @@ end
 content.groups =
 {
     {
-        mobs  = { "Airi", "Temenos_Cleaner" },
-        death = utils.bind(content.handleMobPartnerDeath, content, { "Airi", "Temenos_Cleaner" }),
+        mobs  = { 'Airi', 'Temenos_Cleaner' },
+        death = utils.bind(content.handleMobPartnerDeath, content, { 'Airi', 'Temenos_Cleaner' }),
     },
 
     {
-        mobs  = { "Iruci", "Temenos_Weapon" },
-        death = utils.bind(content.handleMobPartnerDeath, content, { "Iruci", "Temenos_Weapon" }),
+        mobs  = { 'Iruci', 'Temenos_Weapon' },
+        death = utils.bind(content.handleMobPartnerDeath, content, { 'Iruci', 'Temenos_Weapon' }),
     },
 
     {
-        mobs  = { "Enhanced_Dragon", "Enhanced_Ahriman" },
-        death = utils.bind(content.handleMobPartnerDeath, content, { "Enhanced_Dragon", "Enhanced_Ahriman" }),
+        mobs  = { 'Enhanced_Dragon', 'Enhanced_Ahriman' },
+        death = utils.bind(content.handleMobPartnerDeath, content, { 'Enhanced_Dragon', 'Enhanced_Ahriman' }),
     },
 
     {
         mobs =
         {
-            "Airi",
-            "Temenos_Cleaner",
-            "Iruci",
-            "Temenos_Weapon",
-            "Enhanced_Dragon",
-            "Enhanced_Ahriman",
+            'Airi',
+            'Temenos_Cleaner',
+            'Iruci',
+            'Temenos_Weapon',
+            'Enhanced_Dragon',
+            'Enhanced_Ahriman',
         },
 
         mods     = { [xi.mod.REGEN] = 24 },

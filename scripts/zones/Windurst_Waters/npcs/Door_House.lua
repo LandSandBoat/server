@@ -10,7 +10,7 @@ local entity = {}
 entity.onTrade = function(player, npc, trade)
     local npcID = npc:getID()
     if npcID == ID.npc.LELEROON_GREEN_DOOR then
-        local letterGreen = player:getCharVar("LeleroonsLetterGreen")
+        local letterGreen = player:getCharVar('LeleroonsLetterGreen')
 
         -- gold thread, karakul leather, red grass cloth, wamoura silk
         if
@@ -37,7 +37,7 @@ end
 entity.onTrigger = function(player, npc)
     local npcID = npc:getID()
     if npcID == ID.npc.LELEROON_GREEN_DOOR then
-        local letterGreen = player:getCharVar("LeleroonsLetterGreen")
+        local letterGreen = player:getCharVar('LeleroonsLetterGreen')
         if player:hasKeyItem(xi.ki.LELEROONS_LETTER_GREEN) then
             player:startEvent(941) -- accept letter, now bring me four items
         elseif letterGreen == 2 then
@@ -45,7 +45,7 @@ entity.onTrigger = function(player, npc)
         elseif letterGreen == 3 then
             player:startEvent(954) -- i'm waiting for 4 imperial mythril pieces
         elseif letterGreen == 4 then
-            if VanadielUniqueDay() > player:getCharVar("corAfSubmitDay") then
+            if VanadielUniqueDay() > player:getCharVar('corAfSubmitDay') then
                 player:startEvent(944) -- here's your cor gants
             else
                 player:startEvent(945) -- patience. need to wait for vana'diel day
@@ -59,17 +59,17 @@ end
 
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 941 then
-        player:setCharVar("LeleroonsLetterGreen", 2)
+        player:setCharVar('LeleroonsLetterGreen', 2)
         player:delKeyItem(xi.ki.LELEROONS_LETTER_GREEN)
     elseif csid == 943 then
         player:tradeComplete()
-        player:setCharVar("LeleroonsletterGreen", 3)
+        player:setCharVar('LeleroonsletterGreen', 3)
     elseif csid == 946 then
         player:tradeComplete()
-        player:setCharVar("LeleroonsletterGreen", 4)
-        player:setCharVar("corAfSubmitDay", VanadielUniqueDay())
+        player:setCharVar('LeleroonsletterGreen', 4)
+        player:setCharVar('corAfSubmitDay', VanadielUniqueDay())
     elseif csid == 944 then
-        player:setCharVar("LeleroonsletterGreen", 5)
+        player:setCharVar('LeleroonsletterGreen', 5)
         player:addItem(xi.item.CORSAIRS_GANTS) -- corsair's gants
         player:messageSpecial(ID.text.ITEM_OBTAINED, xi.item.CORSAIRS_GANTS)
     end

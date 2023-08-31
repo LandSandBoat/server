@@ -14,7 +14,7 @@ end
 entity.onTrigger = function(player, npc)
     if
         player:hasKeyItem(xi.ki.NEW_MODEL_HAT) and
-        not utils.mask.getBit(player:getCharVar("QuestHatInHand_var"), 1)
+        not utils.mask.getBit(player:getCharVar('QuestHatInHand_var'), 1)
     then
         player:messageSpecial(ID.text.YOU_SHOW_OFF_THE, 0, xi.ki.NEW_MODEL_HAT)
         player:startEvent(59)
@@ -28,10 +28,10 @@ entity.onEventUpdate = function(player, csid, option, npc)
 end
 
 entity.onEventFinish = function(player, csid, option, npc)
-    -- "Hat in Hand"
+    -- 'Hat in Hand'
     if csid == 59 then
-        player:setCharVar("QuestHatInHand_var", utils.mask.setBit(player:getCharVar("QuestHatInHand_var"), 1, true))
-        player:incrementCharVar("QuestHatInHand_count", 1)
+        player:setCharVar('QuestHatInHand_var', utils.mask.setBit(player:getCharVar('QuestHatInHand_var'), 1, true))
+        player:incrementCharVar('QuestHatInHand_count', 1)
     end
 end
 

@@ -19,7 +19,7 @@ end
 
 entity.onTrigger = function(player, npc)
     local warding = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.WARDING_VAMPIRES)
-    local wildcatSandy = player:getCharVar("WildcatSandy")
+    local wildcatSandy = player:getCharVar('WildcatSandy')
 
     if
         player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and
@@ -58,7 +58,7 @@ entity.onEventFinish = function(player, csid, option, npc)
             player:addFame(xi.quest.fame_area.SANDORIA, 5)
         end
     elseif csid == 807 then
-        player:setCharVar("WildcatSandy", utils.mask.setBit(player:getCharVar("WildcatSandy"), 7, true))
+        player:setCharVar('WildcatSandy', utils.mask.setBit(player:getCharVar('WildcatSandy'), 7, true))
     end
 end
 

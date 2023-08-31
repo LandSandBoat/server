@@ -21,7 +21,7 @@ battlefieldObject.onBattlefieldLeave = function(player, battlefield, leavecode)
 
         player:setLocalVar('battlefieldWin', battlefield:getID())
 
-        player:startEvent(32001, battlefield:getArea(), clearTime, partySize, battlefield:getTimeInside(), 209, battlefield:getLocalVar("[cs]bit"), arg8)
+        player:startEvent(32001, battlefield:getArea(), clearTime, partySize, battlefield:getTimeInside(), 209, battlefield:getLocalVar('[cs]bit'), arg8)
     elseif leavecode == xi.battlefield.leaveCode.LOST then
         player:startEvent(32002)
     end

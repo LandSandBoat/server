@@ -42,7 +42,7 @@ entity.onEventUpdate = function(player, csid, option, npc)
         cap = 50
     end
 
-    player:setCharVar("AssaultCap", cap)
+    player:setCharVar('AssaultCap', cap)
 
     local party = player:getParty()
 
@@ -74,8 +74,8 @@ end
 
 entity.onInstanceCreated = function(player, target, instance)
     if instance then
-        instance:setLevelCap(player:getCharVar("AssaultCap"))
-        player:setCharVar("AssaultCap", 0)
+        instance:setLevelCap(player:getCharVar('AssaultCap'))
+        player:setCharVar('AssaultCap', 0)
         player:setInstance(instance)
         player:instanceEntry(target, 4)
         player:delKeyItem(xi.ki.ILRUSI_ASSAULT_ORDERS)

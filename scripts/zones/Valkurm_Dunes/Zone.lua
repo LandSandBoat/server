@@ -15,7 +15,7 @@ zoneObject.onInitialize = function(zone)
     xi.conq.setRegionalConquestOverseers(zone:getRegionID())
     xi.mogTablet.onZoneInitialize(zone)
 
-    local results = zone:queryEntitiesByName("qm2")
+    local results = zone:queryEntitiesByName('qm2')
     if results ~= nil and results[1] ~= nil then
         local qm2 = results[1]
 
@@ -71,7 +71,7 @@ zoneObject.onEventFinish = function(player, csid, option, npc)
 end
 
 zoneObject.onGameHour = function(zone)
-    local results = zone:queryEntitiesByName("qm2")
+    local results = zone:queryEntitiesByName('qm2')
     if results ~= nil and results[1] ~= nil then
         local qm2 = results[1]
         if VanadielHour() == 5 then

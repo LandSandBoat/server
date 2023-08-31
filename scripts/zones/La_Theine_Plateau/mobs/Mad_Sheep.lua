@@ -2,7 +2,7 @@
 -- Area: La Theine Plateau
 --  Mob: Mad Sheep
 -----------------------------------
-require("scripts/quests/tutorial")
+require('scripts/quests/tutorial')
 -----------------------------------
 local entity = {}
 

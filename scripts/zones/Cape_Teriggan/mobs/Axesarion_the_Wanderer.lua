@@ -12,7 +12,7 @@ end
 
 entity.onMobDeath = function(mob, player, optParams)
     if optParams.isKiller then
-        GetNPCByID(ID.npc.CERMET_HEADSTONE):setLocalVar("cooldown", os.time() + 900)
+        GetNPCByID(ID.npc.CERMET_HEADSTONE):setLocalVar('cooldown', os.time() + 900)
     end
 end
 

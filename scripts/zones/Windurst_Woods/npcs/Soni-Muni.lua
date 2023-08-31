@@ -37,7 +37,7 @@ end
 
 entity.onTrigger = function(player, npc)
     local amazinScorpio = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_AMAZIN_SCORPIO)
-    local wildcatWindurst = player:getCharVar("WildcatWindurst")
+    local wildcatWindurst = player:getCharVar('WildcatWindurst')
 
     if
         player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and
@@ -70,7 +70,7 @@ entity.onEventFinish = function(player, csid, option, npc)
     then
         player:confirmTrade()
     elseif csid == 735 then
-        player:setCharVar("WildcatWindurst", utils.mask.setBit(player:getCharVar("WildcatWindurst"), 0, true))
+        player:setCharVar('WildcatWindurst', utils.mask.setBit(player:getCharVar('WildcatWindurst'), 0, true))
     end
 end
 

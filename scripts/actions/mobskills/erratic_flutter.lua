@@ -24,7 +24,7 @@ end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local dmgmod = 1
-    local info = xi.mobskills.mobMagicalMove(mob, target, skill, mob:getWeaponDmg() * 1.5, xi.magic.ele.FIRE, dmgmod, xi.mobskills.magicalTpBonus.NO_EFFECT)
+    local info = xi.mobskills.mobMagicalMove(mob, target, skill, mob:getWeaponDmg() * 1.5, xi.element.FIRE, dmgmod, xi.mobskills.magicalTpBonus.NO_EFFECT)
     local dmg = xi.mobskills.mobFinalAdjustments(info.dmg , mob, skill, target, xi.attackType.MAGICAL, xi.damageType.FIRE, xi.mobskills.shadowBehavior.IGNORE_SHADOWS)
 
     xi.mobskills.mobBuffMove(mob, xi.effect.HASTE, 2998, 0, 300) -- There is no message for the self buff aspect, only dmg.

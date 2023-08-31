@@ -32,7 +32,7 @@ itemObject.onItemUse = function(target)
     local count = math.random(1, 2)
     local random = 1
 
-    xi.item_utils.removeMultipleEffects(pet, effects, count, random)
+    xi.itemUtils.removeMultipleEffects(pet, effects, count, random)
 end
 
 return itemObject

@@ -2,7 +2,7 @@
 -- Area: Bostaunieux Oubliette (167)
 --   NM: Drexerion the Condemned
 -----------------------------------
-mixins = { require("scripts/mixins/job_special") }
+mixins = { require('scripts/mixins/job_special') }
 -----------------------------------
 local entity = {}
 

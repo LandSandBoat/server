@@ -3,9 +3,9 @@
 -- http://ffxiclopedia.wikia.com/wiki/Chocobo_Digging
 -- https://www.bg-wiki.com/bg/Category:Chocobo_Digging
 -----------------------------------
-require("scripts/globals/roe")
-require("scripts/globals/utils")
-require("scripts/missions/amk/helpers")
+require('scripts/globals/roe')
+require('scripts/globals/utils')
+require('scripts/missions/amk/helpers')
 -----------------------------------
 xi = xi or {}
 xi.chocoboDig = xi.chocoboDig or {}
@@ -996,7 +996,7 @@ xi.chocoboDig.start = function(player, precheck)
                     player:messageSpecial(text.DIG_THROW_AWAY, itemId)
                 end
 
-                player:triggerRoeEvent(xi.roe.triggers.chocoboDigSuccess)
+                player:triggerRoeEvent(xi.roeTrigger.CHOCOBO_DIG_SUCCESS)
 
             -- got a crystal ore, but lacked weather or skill to dig it up
             else

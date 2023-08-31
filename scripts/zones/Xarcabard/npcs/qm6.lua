@@ -10,7 +10,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local unbridledPassionCS = player:getCharVar("unbridledPassion")
+    local unbridledPassionCS = player:getCharVar('unbridledPassion')
 
     if unbridledPassionCS == 5 then
         player:startEvent(6, 0, 13360)
@@ -24,9 +24,9 @@ end
 
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 6 then
-        player:setCharVar("unbridledPassion", 6)
+        player:setCharVar('unbridledPassion', 6)
     elseif csid == 7 and npcUtil.giveItem(player, xi.item.ICE_ARROW) then
-        player:setCharVar("unbridledPassion", 7)
+        player:setCharVar('unbridledPassion', 7)
     end
 end
 

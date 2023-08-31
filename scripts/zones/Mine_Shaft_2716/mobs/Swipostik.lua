@@ -3,7 +3,7 @@
 -- CoP Mission 5-3 (A Century of Hardship)
 -- NM: Bugbby
 -----------------------------------
-mixins = { require("scripts/mixins/job_special") }
+mixins = { require('scripts/mixins/job_special') }
 -----------------------------------
 local entity = {}
 

@@ -19,7 +19,7 @@ local positions =
 -- send the QM to one of the two northern starting locations
 -- if it's already at one, send it to the other one
 local function resetSirenTear(npc)
-    local currentPos = npc:getLocalVar("pos")
+    local currentPos = npc:getLocalVar('pos')
     local nextPos
 
     if currentPos == 0 then
@@ -30,19 +30,19 @@ local function resetSirenTear(npc)
         nextPos = math.random(0, 1)
     end
 
-    npc:setLocalVar("pos", nextPos)
+    npc:setLocalVar('pos', nextPos)
     npc:setPos(unpack(positions[nextPos]))
 end
 
 -- move the QM downstream (south)
 -- if it's at the southern end, reset it to one of the two starting positions
 local function moveSirenTear(npc)
-    local currentPos = npc:getLocalVar("pos")
+    local currentPos = npc:getLocalVar('pos')
     if currentPos == 4 then
         resetSirenTear(npc)
     else
         local nextPos = (currentPos == 0) and 2 or (currentPos + 1)
-        npc:setLocalVar("pos", nextPos)
+        npc:setLocalVar('pos', nextPos)
         npc:setPos(unpack(positions[nextPos]))
     end
 end

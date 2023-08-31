@@ -1,4 +1,4 @@
-local ID = zones[xi.zone.KAZHAM]
+-- local ID = zones[xi.zone.KAZHAM]
 
 return {
     ['Dodmos']           = { event = 275 },

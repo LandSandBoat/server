@@ -11,8 +11,8 @@ entity.onMobInitialize = function(mob)
 end
 
 entity.onMobDeath = function(mob, player, optParams)
-    if player:getCharVar("sharpeningTheSwordCS") == 3 then
-        player:setCharVar("PolevikKilled", 1)
+    if player:getCharVar('sharpeningTheSwordCS') == 3 then
+        player:setCharVar('PolevikKilled', 1)
     end
 end
 

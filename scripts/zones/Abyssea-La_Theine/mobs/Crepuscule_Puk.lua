@@ -2,7 +2,7 @@
 -- Area: Abyssea - La Theine
 --  Mob: Crepescule Puk
 -----------------------------------
-mixins = { require("scripts/mixins/families/puk") }
+mixins = { require('scripts/mixins/families/puk') }
 -----------------------------------
 local entity = {}
 

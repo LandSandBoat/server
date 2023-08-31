@@ -19,7 +19,7 @@ entity.onMobSpawn = function(mob)
         GetMobByID(mob:getID() - 1):isDead() and
         GetMobByID(mob:getID() - 2):isDead()
     then
-        mob:getBattlefield():setLocalVar("phaseChange", 0)
+        mob:getBattlefield():setLocalVar('phaseChange', 0)
     end
 end
 

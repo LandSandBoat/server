@@ -2,7 +2,7 @@
 -- Area: Phomiuna_Aqueducts
 --  Mob: Fomor Dark Knight
 -----------------------------------
-mixins = { require("scripts/mixins/fomor_hate") }
+mixins = { require('scripts/mixins/fomor_hate') }
 -----------------------------------
 local entity = {}
 

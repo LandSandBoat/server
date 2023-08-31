@@ -29,7 +29,7 @@ end
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 17 then
         player:tradeComplete()
-        player:setCharVar("peaceForTheSpiritCS", 2)
+        player:setCharVar('peaceForTheSpiritCS', 2)
     end
 end
 

@@ -4,7 +4,7 @@
 local ruludeID = zones[xi.zone.RULUDE_GARDENS]
 -----------------------------------
 
-local quest = HiddenQuest:new("TrustMaat")
+local quest = HiddenQuest:new('TrustMaat')
 
 quest.sections =
 {
@@ -19,7 +19,7 @@ quest.sections =
             ['Maat'] =
             {
                 onTrigger = function(player, npc)
-                    if utils.mask.countBits(player:getCharVar("maatsCap"), 16) >= 6 then
+                    if utils.mask.countBits(player:getCharVar('maatsCap'), 16) >= 6 then
                         return quest:event(10241)
                     else
                         return quest:event(10242)

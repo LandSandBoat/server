@@ -2078,7 +2078,7 @@ void CCharEntity::OnItemFinish(CItemState& state, action_t& action)
                                         PItem->getReuseTime() / 1000); // add recast timer to Recast List from any bag
         }
     }
-    else // разблокируем все предметы, кроме экипирвоки
+    else // unlock all items except equipment
     {
         PItem->setSubType(ITEM_UNLOCKED);
 

@@ -131,7 +131,7 @@ CPMAddPackage(
 CPMAddPackage(
     NAME json
     GITHUB_REPOSITORY nlohmann/json
-    GIT_TAG v3.11.2
+    GIT_TAG 254395e5f7731b5595e7c11ac4b929c923582114
 ) # defines: nlohmann_json::nlohmann_json
 
 CPMAddPackage(

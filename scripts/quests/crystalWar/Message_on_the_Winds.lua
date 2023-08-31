@@ -150,7 +150,7 @@ quest.sections =
     -- Section: Post quest cutscene with Romualdo
     {
         check = function(player, status, vars)
-            return status == QUEST_COMPLETED and quest:getVar(player, "PostCS") == 1
+            return status == QUEST_COMPLETED and quest:getVar(player, 'PostCS') == 1
         end,
 
         [xi.zone.METALWORKS] =
@@ -169,7 +169,7 @@ quest.sections =
     -- Post quest cutscene with Childerich
     {
         check = function(player, status, vars)
-            return status == QUEST_COMPLETED and quest:getVar(player, "PostCS") == 2
+            return status == QUEST_COMPLETED and quest:getVar(player, 'PostCS') == 2
         end,
 
         [xi.zone.GRAUBERG_S] =

@@ -22,7 +22,7 @@ entity.onTrade = function(player, npc, trade)
         npcUtil.popFromQM(player, npc, ID.mob.GOLDEN_TONGUED_CULBERRY)
     then
         player:confirmTrade()
-        GetMobByID(ID.mob.GOLDEN_TONGUED_CULBERRY):setLocalVar("DropRate", pendantChance)
+        GetMobByID(ID.mob.GOLDEN_TONGUED_CULBERRY):setLocalVar('DropRate', pendantChance)
     end
 end
 

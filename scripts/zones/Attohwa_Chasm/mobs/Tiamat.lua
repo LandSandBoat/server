@@ -8,8 +8,8 @@ local function setupFlightMode(mob, battleTime, mobHP)
     mob:setAnimationSub(1) -- Change to flight.
     mob:addStatusEffectEx(xi.effect.ALL_MISS, 0, 1, 0, 0)
     mob:setMobSkillAttack(730)
-    mob:setLocalVar("changeTime", battleTime)
-    mob:setLocalVar("changeHP", mobHP / 1000)
+    mob:setLocalVar('changeTime', battleTime)
+    mob:setLocalVar('changeHP', mobHP / 1000)
 end
 
 entity.onMobInitialize = function(mob)
@@ -37,16 +37,16 @@ entity.onMobFight = function(mob, target)
         not mob:hasStatusEffect(xi.effect.MIGHTY_STRIKES) and
         mob:actionQueueEmpty()
     then
-        local changeTime  = mob:getLocalVar("changeTime")
-        local twohourTime = mob:getLocalVar("twohourTime")
-        local changeHP    = mob:getLocalVar("changeHP")
+        local changeTime  = mob:getLocalVar('changeTime')
+        local twohourTime = mob:getLocalVar('twohourTime')
+        local changeHP    = mob:getLocalVar('changeHP')
         local battleTime  = mob:getBattleTime()
         local animation   = mob:getAnimationSub()
         local mobHP       = mob:getHP()
 
         if twohourTime == 0 then
             twohourTime = math.random(8, 14)
-            mob:setLocalVar("twohourTime", twohourTime)
+            mob:setLocalVar('twohourTime', twohourTime)
         end
 
         -- Initial grounded mode.
@@ -67,14 +67,14 @@ entity.onMobFight = function(mob, target)
         then
             mob:useMobAbility(1282) -- This ability also handles animation change to 2.
 
-            mob:setLocalVar("changeTime", battleTime)
-            mob:setLocalVar("changeHP", mobHP / 1000)
+            mob:setLocalVar('changeTime', battleTime)
+            mob:setLocalVar('changeHP', mobHP / 1000)
 
         -- Subsequent grounded mode.
         elseif animation == 2 then
             if battleTime / 15 > twohourTime then -- 2-Hour logic.
                 mob:useMobAbility(688)
-                mob:setLocalVar("twohourTime", battleTime / 15 + math.random(4, 8))
+                mob:setLocalVar('twohourTime', battleTime / 15 + math.random(4, 8))
 
             elseif mobHP / 1000 <= changeHP - 10 or battleTime - changeTime > 120 then -- Change mode.
                 setupFlightMode(mob, battleTime, mobHP)

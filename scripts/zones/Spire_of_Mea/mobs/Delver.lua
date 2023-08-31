@@ -2,7 +2,7 @@
 -- Area: Spire of Mea
 --  Mob: Delver
 -----------------------------------
-mixins = { require("scripts/mixins/families/empty_terroanima") }
+mixins = { require('scripts/mixins/families/empty_terroanima') }
 -----------------------------------
 local entity = {}
 

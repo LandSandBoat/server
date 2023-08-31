@@ -1,16 +1,16 @@
 -----------------------------------
 -- Nyzul Boss Drop ID Mixin
 -----------------------------------
-require("scripts/globals/mixins")
+require('scripts/globals/mixins')
 -----------------------------------
 xi = xi or {}
 xi.mix = xi.mix or {}
 g_mixins = g_mixins or {}
 
 g_mixins.nyzul_boss_drop = function(nyzulMob)
-    nyzulMob:addListener("SPAWN", "NYZUL_BOSS_SPAWN", function(mob)
+    nyzulMob:addListener('SPAWN', 'NYZUL_BOSS_SPAWN', function(mob)
         local instance = mob:getInstance()
-        local result   = instance:getLocalVar("Nyzul_Current_Floor")
+        local result   = instance:getLocalVar('Nyzul_Current_Floor')
 
         if result == 20 then
             mob:setDropID(3980)

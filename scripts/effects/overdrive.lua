@@ -9,7 +9,7 @@ effectObject.onEffectGain = function(target, effect)
     local jpBonus = target:getJobPointLevel(xi.jp.OVERDRIVE_EFFECT) * 5
 
     if pet then
-        pet:setLocalVar("overdrive", 1)
+        pet:setLocalVar('overdrive', 1)
         pet:addMod(xi.mod.HASTE_MAGIC, 2500)
         pet:addMod(xi.mod.MAIN_DMG_RATING, 30)
         pet:addMod(xi.mod.RANGED_DMG_RATING, 30)
@@ -41,8 +41,8 @@ effectObject.onEffectLose = function(target, effect)
     local pet = target:getPet()
     local jpBonus = target:getJobPointLevel(xi.jp.OVERDRIVE_EFFECT) * 5
 
-    if pet and pet:getLocalVar("overdrive") ~= 0 then
-        pet:setLocalVar("overdrive", 0)
+    if pet and pet:getLocalVar('overdrive') ~= 0 then
+        pet:setLocalVar('overdrive', 0)
         pet:delMod(xi.mod.HASTE_MAGIC, 2500)
         pet:delMod(xi.mod.MAIN_DMG_RATING, 30)
         pet:delMod(xi.mod.RANGED_DMG_RATING, 30)

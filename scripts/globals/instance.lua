@@ -34,7 +34,7 @@
 -- - DYNAMIS_WINDURST_D              = 296,
 -- - DYNAMIS_JEUNO_D                 = 297,
 -----------------------------------
-require("scripts/globals/utils")
+require('scripts/globals/utils')
 -----------------------------------
 xi = xi or {}
 xi.instance = {}
@@ -296,10 +296,10 @@ xi.instance.lookup =
 -- Party leader registering
 local checkRegistryReqs = function(player, instanceId)
     local instanceObj = GetCachedInstanceScript(instanceId)
-    if type(instanceObj.registryRequirements) == "function" then
+    if type(instanceObj.registryRequirements) == 'function' then
         return instanceObj.registryRequirements(player)
     else
-        print("xi.instance: checkReqs: registryRequirements function not set for instance: " .. instanceId)
+        print('xi.instance: checkReqs: registryRequirements function not set for instance: ' .. instanceId)
         return false
     end
 end
@@ -307,10 +307,10 @@ end
 -- Further players joining
 local checkEntryReqs = function(player, instanceId)
     local instanceObj = GetCachedInstanceScript(instanceId)
-    if type(instanceObj.entryRequirements) == "function" then
+    if type(instanceObj.entryRequirements) == 'function' then
         return instanceObj.entryRequirements(player)
     else
-        print("xi.instance: checkReqs: entryRequirements function not set for instance: " .. instanceId)
+        print('xi.instance: checkReqs: entryRequirements function not set for instance: ' .. instanceId)
         return false
     end
 end
@@ -322,7 +322,7 @@ xi.instance.onTrigger = function(player, npc, instanceZoneID)
     local zoneLookup = xi.instance.lookup[instanceZoneID]
 
     -- Clear up after possible failed loads
-    player:setLocalVar("INSTANCE_REQUESTED", 0)
+    player:setLocalVar('INSTANCE_REQUESTED', 0)
     local existingInstance = player:getInstance()
     if existingInstance then
         existingInstance:fail()
@@ -351,7 +351,7 @@ xi.instance.onTrigger = function(player, npc, instanceZoneID)
     local hasValidEntry       = checkRegistryReqs(player, instanceId)
 
     if hasValidEntry then
-        player:setLocalVar("INSTANCE_ID", instanceId)
+        player:setLocalVar('INSTANCE_ID', instanceId)
         player:startEvent(unpack(instanceTriggerArgs))
 
         return true
@@ -361,7 +361,7 @@ xi.instance.onTrigger = function(player, npc, instanceZoneID)
 end
 
 xi.instance.onEventUpdate = function(player, csid, option, npc)
-    local instanceId = player:getLocalVar("INSTANCE_ID")
+    local instanceId = player:getLocalVar('INSTANCE_ID')
     local party      = player:getParty()
     local ID         = zones[player:getZoneID()]
 
@@ -387,15 +387,15 @@ xi.instance.onEventUpdate = function(player, csid, option, npc)
         end
     end
 
-    if player:getLocalVar("INSTANCE_REQUESTED") == 0 then
+    if player:getLocalVar('INSTANCE_REQUESTED') == 0 then
         player:createInstance(instanceId)
-        player:setLocalVar("INSTANCE_REQUESTED", 1)
+        player:setLocalVar('INSTANCE_REQUESTED', 1)
     end
 
     return player:getInstance() ~= nil
 end
 
--- "Default" behaviour. It's up to each instance whether or not they want to use this logic
+-- 'Default' behaviour. It's up to each instance whether or not they want to use this logic
 xi.instance.onInstanceCreatedCallback = function(player, instance)
     local zoneLookup = xi.instance.lookup[instance:getZone():getID()]
     local instanceId = instance:getID()

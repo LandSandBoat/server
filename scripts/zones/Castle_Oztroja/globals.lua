@@ -10,7 +10,7 @@ local oztrojaGlobal =
         pick a new handle combination for the brass door on floor 2
         ..............................................................................................]]
     pickNewCombo = function()
-        local numOpen = 0
+        local numOpen
         local combo = {}
 
         -- https://ffxiclopedia.wikia.com/wiki/Talk:Castle_Oztroja
@@ -42,7 +42,7 @@ local oztrojaGlobal =
         pick a new password for the trap door on floor 4
         ..............................................................................................]]
     pickNewPassword = function()
-        GetNPCByID(ID.npc.TRAP_DOOR_FLOOR_4):setLocalVar("password", math.random(0, 8))
+        GetNPCByID(ID.npc.TRAP_DOOR_FLOOR_4):setLocalVar('password', math.random(0, 8))
     end,
 
     --[[..............................................................................................

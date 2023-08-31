@@ -84,7 +84,7 @@ entity.onEventFinish = function(player, csid, option, npc)
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.item.HEALERS_BRIAULT) -- Healer's Briault
         else
             player:addTitle(xi.title.PARAGON_OF_WHITE_MAGE_EXCELLENCE)
-            player:setCharVar("pieujesDecisionCS", 0)
+            player:setCharVar('pieujesDecisionCS', 0)
             player:addItem(xi.item.HEALERS_BRIAULT)
             player:messageSpecial(ID.text.ITEM_OBTAINED, xi.item.HEALERS_BRIAULT) -- Healer's Briault
             player:tradeComplete()

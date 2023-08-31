@@ -2,7 +2,7 @@
 -- Area: The Garden of Ru'Hmet
 --  Mob: Aw'zdei
 -----------------------------------
-mixins = { require("scripts/mixins/families/zdei") }
+mixins = { require('scripts/mixins/families/zdei') }
 -----------------------------------
 local entity = {}
 

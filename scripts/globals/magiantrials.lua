@@ -1,8 +1,8 @@
 -----------------------------------
 -- Magian trials
 -----------------------------------
-require("scripts/globals/magianobjectives")
-require("scripts/globals/utils")
+require('scripts/globals/magianobjectives')
+require('scripts/globals/utils')
 -----------------------------------
 xi = xi or {}
 xi.magian = xi.magian or {}
@@ -22,7 +22,7 @@ local function getPlayerTrials(player)
     activeTrials = {}
 
     for i = 1, 10 do
-        local trialBits      = player:getCharVar("[trial]" .. i)
+        local trialBits      = player:getCharVar('[trial]' .. i)
         local trialId        = bit.rshift(trialBits, 16)
         local progression    = bit.band(trialBits, 0xFFFF)
         local trialSQL       = GetMagianTrial(trialId)
@@ -108,7 +108,7 @@ local function setTrial(player, slot, trialId, progress)
 
     local trialBits = bit.lshift(trialId, 16) + progress
 
-    player:setCharVar("[trial]" .. slot, trialBits)
+    player:setCharVar('[trial]' .. slot, trialBits)
 end
 
 -- finds empty trial slot
@@ -322,11 +322,11 @@ xi.magian.deliveryCrateOnTrade = function(player, npc, trade)
         currentItemTrial.quantity = currentItemTrial.quantity - nbOverItems
     end
 
-    player:setLocalVar("storeTrialId", currentTrialId)
-    player:setLocalVar("storeItemId", currentItem.id)
-    player:setLocalVar("storeItemTrialId", currentItemTrial.id)
-    player:setLocalVar("storeItemTrialQty", currentItemTrial.quantity)
-    player:setLocalVar("storeNbTrialsPlayer", nbTrialsPlayer)
+    player:setLocalVar('storeTrialId', currentTrialId)
+    player:setLocalVar('storeItemId', currentItem.id)
+    player:setLocalVar('storeItemTrialId', currentItemTrial.id)
+    player:setLocalVar('storeItemTrialQty', currentItemTrial.quantity)
+    player:setLocalVar('storeNbTrialsPlayer', nbTrialsPlayer)
 
     player:tradeComplete()
     player:startEvent(10134, currentItemTrial.id, currentItemTrial.quantity, nbTrialsPlayer, currentTrialId, 0, 0, 0, 0)
@@ -337,8 +337,8 @@ end
 
 xi.magian.deliveryCrateOnEventUpdate = function(player, csid, option, npc)
     local optionMod      = bit.band(option, 0xFF)
-    local itemTrialId    = player:getLocalVar("storeItemTrialId")
-    local nbTrialsPlayer = player:getLocalVar("storeNbTrialsPlayer")
+    local itemTrialId    = player:getLocalVar('storeItemTrialId')
+    local nbTrialsPlayer = player:getLocalVar('storeNbTrialsPlayer')
     local maxNumber      = 31
 
     if csid == 10134 then
@@ -360,10 +360,10 @@ xi.magian.deliveryCrateOnEventFinish = function(player, csid, option, npc)
     local zoneid            = player:getZoneID()
     local msg               = zones[zoneid].text
     local trialId           = bit.rshift(option, 8)
-    local itemTrialId       = player:getLocalVar("storeItemTrialId")
-    local itemTrialQuantity = player:getLocalVar("storeItemTrialQty")
-    local nbTrialsPlayer    = player:getLocalVar("storeNbTrialsPlayer")
-    local itemId            = player:getLocalVar("storeItemId")
+    local itemTrialId       = player:getLocalVar('storeItemTrialId')
+    local itemTrialQuantity = player:getLocalVar('storeItemTrialQty')
+    local nbTrialsPlayer    = player:getLocalVar('storeNbTrialsPlayer')
+    local itemId            = player:getLocalVar('storeItemId')
 
     if csid == 10134 then
         if optionMod == 0 then
@@ -382,11 +382,11 @@ xi.magian.deliveryCrateOnEventFinish = function(player, csid, option, npc)
                 player:addItem(t.reqItem, 1, t.reqItemAug1, t.reqItemAugValue1, t.reqItemAug2, t.reqItemAugValue2, t.reqItemAug3, t.reqItemAugValue3, t.reqItemAug4, t.reqItemAugValue4, trialId)
             end
 
-            player:setLocalVar("storeTrialId", 0)
-            player:setLocalVar("storeItemId", 0)
-            player:setLocalVar("storeItemTrialId", 0)
-            player:setLocalVar("storeItemTrialQty", 0)
-            player:setLocalVar("storeNbTrialsPlayer", 0)
+            player:setLocalVar('storeTrialId', 0)
+            player:setLocalVar('storeItemId', 0)
+            player:setLocalVar('storeItemTrialId', 0)
+            player:setLocalVar('storeItemTrialQty', 0)
+            player:setLocalVar('storeNbTrialsPlayer', 0)
         end
     end
 end
@@ -429,11 +429,11 @@ xi.magian.magianOnTrade = function(player, npc, trade, TYPE, EVENT_IDS)
     local msg     = zones[zoneid].text
     local _, pt   = parseParams(player)
 
-    player:setLocalVar("storeItemId", itemId)
+    player:setLocalVar('storeItemId', itemId)
 
     if player:hasKeyItem(xi.ki.MAGIAN_TRIAL_LOG) and trade:getSlotCount() == 1 then
         if not next(matchId) and item:isType(TYPE) then
-            player:setLocalVar("invalidItem", 1)
+            player:setLocalVar('invalidItem', 1)
             player:startEvent(EVENT_IDS[4], 0, 0, 0, 0, 0, 0, 0, utils.MAX_UINT32) -- invalid weapon
 
             return
@@ -447,7 +447,7 @@ xi.magian.magianOnTrade = function(player, npc, trade, TYPE, EVENT_IDS)
         elseif trialId ~= 0 then
             for i, v in pairs(getPlayerTrials(player)) do
                 if v.trial == trialId then
-                    player:setLocalVar("storeTrialId", trialId)
+                    player:setLocalVar('storeTrialId', trialId)
                     player:tradeComplete()
 
                     if v.progress >= t.objectiveTotal then
@@ -461,14 +461,14 @@ xi.magian.magianOnTrade = function(player, npc, trade, TYPE, EVENT_IDS)
             end
 
             -- item has trial, player does not
-            player:setLocalVar("storeTrialId", trialId)
+            player:setLocalVar('storeTrialId', trialId)
             player:startEvent(EVENT_IDS[5], trialId, t.reqItem, 0, 0, 0, 0, 0, utils.MAX_UINT32 - 2)
             player:tradeComplete()
 
             return
 
         elseif next(matchId) then
-            player:setLocalVar("storeTrialId", matchId[1])
+            player:setLocalVar('storeTrialId', matchId[1])
             player:tradeComplete()
             player:startEvent(EVENT_IDS[4], matchId[1], matchId[2], matchId[3], matchId[4], 0, itemId) -- starts trial
 
@@ -663,37 +663,37 @@ xi.magian.magianOnEventFinish = function(player, csid, option, EVENT_IDS)
         player:addItem(t.reqItem, 1, t.reqItemAug1, t.reqItemAugValue1, t.reqItemAug2, t.reqItemAugValue2, t.reqItemAug3, t.reqItemAugValue3, t.reqItemAug4, t.reqItemAugValue4, trialId)
         player:messageSpecial(msg.RETURN_MAGIAN_ITEM, t.reqItem)
         setTrial(player, firstEmptySlot(player), trialId, 0)
-        player:setLocalVar("storeTrialId", 0)
-        player:setLocalVar("storeItemId", 0)
+        player:setLocalVar('storeTrialId', 0)
+        player:setLocalVar('storeItemId', 0)
 
     -- returns item to player
     elseif
         csid == EVENT_IDS[5] and
         (optionMod == 0 or optionMod == 4)
     then
-        local trialId = player:getLocalVar("storeTrialId")
+        local trialId = player:getLocalVar('storeTrialId')
         local t       = GetMagianTrial(trialId)
 
         player:addItem(t.reqItem, 1, t.reqItemAug1, t.reqItemAugValue1, t.reqItemAug2, t.reqItemAugValue2, t.reqItemAug3, t.reqItemAugValue3, t.reqItemAug4, t.reqItemAugValue4, trialId)
         player:messageSpecial(msg.RETURN_MAGIAN_ITEM, t.reqItem)
-        player:setLocalVar("storeTrialId", 0)
+        player:setLocalVar('storeTrialId', 0)
 
     elseif
         csid == EVENT_IDS[4] and
         (optionMod == 0 or option == utils.MAX_UINT32)
     then
-        local trialId = player:getLocalVar("storeTrialId")
-        local itemId  = player:getLocalVar("storeItemId")
+        local trialId = player:getLocalVar('storeTrialId')
+        local itemId  = player:getLocalVar('storeItemId')
         local t       = GetMagianTrial(trialId)
 
-        if player:getLocalVar("invalidItem") ~= 1 then
+        if player:getLocalVar('invalidItem') ~= 1 then
             player:addItem(t.reqItem, 1, t.reqItemAug1, t.reqItemAugValue1, t.reqItemAug2, t.reqItemAugValue2, t.reqItemAug3, t.reqItemAugValue3, t.reqItemAug4, t.reqItemAugValue4, trialId)
         end
 
         player:messageSpecial(msg.RETURN_MAGIAN_ITEM, itemId)
-        player:setLocalVar("invalidItem", 0)
-        player:setLocalVar("storeTrialId", 0)
-        player:setLocalVar("storeItemId", 0)
+        player:setLocalVar('invalidItem', 0)
+        player:setLocalVar('storeTrialId', 0)
+        player:setLocalVar('storeItemId', 0)
 
     -- gives back item after removing trial id
     elseif
@@ -719,7 +719,7 @@ xi.magian.magianOnEventFinish = function(player, csid, option, EVENT_IDS)
         csid == EVENT_IDS[6] and
         optionMod == 0
     then
-        local trialId = player:getLocalVar("storeTrialId")
+        local trialId = player:getLocalVar('storeTrialId')
         local slot    = hasTrial(player, trialId)
 
         if slot then
@@ -729,7 +729,7 @@ xi.magian.magianOnEventFinish = function(player, csid, option, EVENT_IDS)
         local t = GetMagianTrial(trialId)
         player:addItem(t.rewardItem, 1, t.rewardItemAug1, t.rewardItemAugValue1, t.rewardItemAug2, t.rewardItemAugValue2, t.rewardItemAug3, t.rewardItemAugValue3, t.rewardItemAug4, t.rewardItemAugValue4)
         player:messageSpecial(msg.ITEM_OBTAINED, t.rewardItem)
-        player:setLocalVar("storeTrialId", 0)
+        player:setLocalVar('storeTrialId', 0)
     end
 end
 

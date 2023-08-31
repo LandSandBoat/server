@@ -3,7 +3,7 @@
 -- Npc: Pot Hatch
 -- !pos 221 0 -415
 -----------------------------------
-require("scripts/zones/Mamool_Ja_Training_Grounds/globals/zoneUtil")
+require('scripts/zones/Mamool_Ja_Training_Grounds/globals/zoneUtil')
 -----------------------------------
 local entity = {}
 

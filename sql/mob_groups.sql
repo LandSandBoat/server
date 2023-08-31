@@ -638,7 +638,7 @@ INSERT INTO `mob_groups` VALUES (52,902,15,'Dapifer_Imp',300,0,564,0,0,79,80,0);
 INSERT INTO `mob_groups` VALUES (53,326,15,'Bakka',900,0,213,21500,0,85,85,0);
 INSERT INTO `mob_groups` VALUES (54,3948,15,'Tonberry_Bedeviler',300,0,2428,5000,0,81,82,0);
 INSERT INTO `mob_groups` VALUES (55,853,15,'Cryptonberry_Occultist',300,0,541,5000,0,83,84,0);
-INSERT INTO `mob_groups` VALUES (56,3962,15,'Tonberry_Lieje',0,32,2441,24000,5000,85,85,0); 
+INSERT INTO `mob_groups` VALUES (56,3962,15,'Tonberry_Lieje',0,32,2441,24000,5000,85,85,0);
 INSERT INTO `mob_groups` VALUES (57,457,15,'Bloodeye_Vileberry',0,128,298,42000,5000,90,90,0);
 INSERT INTO `mob_groups` VALUES (58,1244,15,'Ephemeral_Clionid',300,0,781,5000,1000,79,82,0);
 INSERT INTO `mob_groups` VALUES (59,2404,15,'Ley_Clionid',300,0,1516,5000,999,79,80,0);

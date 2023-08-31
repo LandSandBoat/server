@@ -15,7 +15,7 @@ entity.onAdditionalEffect = function(mob, target, damage)
 end
 
 entity.onMobDeath = function(mob, player, optParams)
-    GetNPCByID(ID.npc.QM3):setLocalVar("PillarCharged", 1)
+    GetNPCByID(ID.npc.QM3):setLocalVar('PillarCharged', 1)
 end
 
 return entity

@@ -4,7 +4,7 @@
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)
-    target:addMod(xi.mod.ENSPELL, xi.magic.element.THUNDER)
+    target:addMod(xi.mod.ENSPELL, xi.element.THUNDER)
     target:addMod(xi.mod.ENSPELL_DMG, effect:getPower())
 end
 

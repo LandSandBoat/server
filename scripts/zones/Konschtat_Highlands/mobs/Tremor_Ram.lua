@@ -3,7 +3,7 @@
 --   NM: Tremor Ram
 -----------------------------------
 local ID = zones[xi.zone.KONSCHTAT_HIGHLANDS]
-require("scripts/quests/tutorial")
+require('scripts/quests/tutorial')
 -----------------------------------
 local entity = {}
 

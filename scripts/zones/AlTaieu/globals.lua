@@ -25,7 +25,7 @@ return {
         local crystalOffset = npcId - ID.npc.RUBIOUS_CRYSTAL_BASE
         local ruaernOffset = ID.mob.RUAERN_BASE + crystalOffset * 3
         local cop = player:getCurrentMission(xi.mission.log_id.COP)
-        local copStat = player:getCharVar("PromathiaStatus")
+        local copStat = player:getCharVar('PromathiaStatus')
         local cVar = antiquityVars[crystalOffset]
         local thisFightDone = player:getCharVar(cVar[1]) == 1
         local thisCsAcquired = player:getCharVar(cVar[2]) == 1

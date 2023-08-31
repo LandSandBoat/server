@@ -13,10 +13,9 @@ abilityObject.onPetAbility = function(target, pet, skill)
     local dmgmod = 2
     local dmgmodsubsequent = 1 -- ??
 
-    local totaldamage = 0
     local damage = xi.summon.avatarPhysicalMove(pet, target, skill, numhits, accmod, dmgmod, dmgmodsubsequent, xi.mobskills.magicalTpBonus.NO_EFFECT, 1, 2, 3)
     --get resist multiplier (1x if no resist)
-    local resist = xi.mobskills.applyPlayerResistance(pet, -1, target, pet:getStat(xi.mod.INT)-target:getStat(xi.mod.INT), xi.skill.ELEMENTAL_MAGIC, xi.magic.ele.THUNDER)
+    local resist = xi.mobskills.applyPlayerResistance(pet, -1, target, pet:getStat(xi.mod.INT)-target:getStat(xi.mod.INT), xi.skill.ELEMENTAL_MAGIC, xi.element.THUNDER)
     --get the resisted damage
     damage.dmg = damage.dmg * resist
     --add on bonuses (staff/day/weather/jas/mab/etc all go in this function)
@@ -28,7 +27,7 @@ abilityObject.onPetAbility = function(target, pet, skill)
     end
 
     damage.dmg = damage.dmg * tp / 1000
-    totaldamage = xi.summon.avatarFinalAdjustments(damage.dmg, pet, skill, target, xi.attackType.MAGICAL, xi.damageType.LIGHTNING, numhits)
+    local totaldamage = xi.summon.avatarFinalAdjustments(damage.dmg, pet, skill, target, xi.attackType.MAGICAL, xi.damageType.LIGHTNING, numhits)
     target:addStatusEffect(xi.effect.PARALYSIS, 15, 0, 60)
     target:takeDamage(totaldamage, pet, xi.attackType.MAGICAL, xi.damageType.LIGHTNING)
     target:updateEnmityFromDamage(pet, totaldamage)

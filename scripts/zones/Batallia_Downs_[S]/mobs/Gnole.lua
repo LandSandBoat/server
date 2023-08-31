@@ -2,7 +2,7 @@
 -- Area: Batallia Downs [S]
 --  Mob: Gnole
 -----------------------------------
-mixins = { require("scripts/mixins/families/gnole") }
+mixins = { require('scripts/mixins/families/gnole') }
 -----------------------------------
 local entity = {}
 

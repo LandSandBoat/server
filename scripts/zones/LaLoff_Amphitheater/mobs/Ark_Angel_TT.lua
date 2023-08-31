@@ -2,7 +2,7 @@
 -- Area: LaLoff Amphitheater
 --  Mob: Ark Angel TT
 -----------------------------------
-mixins = { require("scripts/mixins/job_special") }
+mixins = { require('scripts/mixins/job_special') }
 -----------------------------------
 local entity = {}
 

@@ -2,7 +2,7 @@
 -- Area: Temple of Uggalepih
 --  Mob: Tonberry Stalker
 -----------------------------------
-mixins = { require("scripts/mixins/families/tonberry") }
+mixins = { require('scripts/mixins/families/tonberry') }
 -----------------------------------
 local entity = {}
 

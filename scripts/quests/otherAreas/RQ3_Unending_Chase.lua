@@ -31,7 +31,7 @@ quest.sections =
             {
                 onTrigger = function(player, npc)
                     if
-                        player:getCharVar("Quest[4][1]DayCompleted") + 7 < VanadielUniqueDay() and
+                        player:getCharVar('Quest[4][1]DayCompleted') + 7 < VanadielUniqueDay() and
                         player:getFameLevel(xi.quest.fame_area.WINDURST) > 2
                     then
                         if quest:getVar(player, 'Prog') == 0 then
@@ -51,7 +51,7 @@ quest.sections =
             {
                 [82] = function(player, csid, option, npc)
                     quest:setVar(player, 'Prog', 1)
-                    player:setCharVar("Quest[4][1]DayCompleted", 0)  -- Delete previous quest (Rycharde the Chef) variables
+                    player:setCharVar('Quest[4][1]DayCompleted', 0)  -- Delete previous quest (Rycharde the Chef) variables
 
                     if option == 77 then -- Accept quest option.
                         quest:begin(player)

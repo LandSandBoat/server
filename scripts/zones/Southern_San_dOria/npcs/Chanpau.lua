@@ -11,7 +11,7 @@ end
 
 entity.onTrigger = function(player, npc)
     if player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_BRUGAIRE_CONSORTIUM) == QUEST_COMPLETED then
-        local fired = player:getCharVar("Fired")
+        local fired = player:getCharVar('Fired')
 
         if fired == 1 then
             player:startEvent(567) -- i got fired in a day
@@ -28,7 +28,7 @@ end
 
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 505 then
-        player:setCharVar("Fired", 1)
+        player:setCharVar('Fired', 1)
     end
 end
 

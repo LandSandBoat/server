@@ -61,7 +61,7 @@ end
 
 entity.onTrigger = function(player, npc)
     local kindCardian = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_KIND_CARDIAN)
-    local kindCardianCS = player:getCharVar("theKindCardianVar")
+    local kindCardianCS = player:getCharVar('theKindCardianVar')
     local allNewC3000 = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_ALL_NEW_C_3000)
     local canCardiansCry = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CAN_CARDIANS_CRY)
 
@@ -104,10 +104,10 @@ end
 entity.onEventFinish = function(player, csid, option, npc)
         -- THE KIND CARDIAN
     if csid == 392 and option == 1 then
-        player:setCharVar("theKindCardianVar", 1)
+        player:setCharVar('theKindCardianVar', 1)
     elseif csid == 397 then
         player:delKeyItem(xi.ki.TWO_OF_SWORDS)
-        player:setCharVar("theKindCardianVar", 2)
+        player:setCharVar('theKindCardianVar', 2)
         player:addFame(xi.quest.fame_area.WINDURST, 30)
         player:confirmTrade()
 

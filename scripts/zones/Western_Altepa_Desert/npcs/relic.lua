@@ -9,7 +9,7 @@ local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     if
-        player:getCharVar("RELIC_IN_PROGRESS") == xi.item.OGRE_KILLER and
+        player:getCharVar('RELIC_IN_PROGRESS') == xi.item.OGRE_KILLER and
         npcUtil.tradeHas(trade, { xi.item.RIMILALA_STRIPESHELL, xi.item.RUNAEIC_FRAGMENT, xi.item.SHARD_OF_NECROPSYCHE, xi.item.OGRE_KILLER })
     then
         player:startEvent(205, xi.item.GUTTLER)
@@ -29,7 +29,7 @@ entity.onEventFinish = function(player, csid, option, npc)
         npcUtil.giveItem(player, { xi.item.GUTTLER, { xi.item.LUNGO_NANGO_JADESHELL, 30 } })
     then
         player:confirmTrade()
-        player:setCharVar("RELIC_IN_PROGRESS", 0)
+        player:setCharVar('RELIC_IN_PROGRESS', 0)
     end
 end
 

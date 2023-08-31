@@ -5,12 +5,12 @@
 local entity = {}
 
 entity.onMobSpawn = function(mob)
-    mob:setLocalVar("petCount", 1)
+    mob:setLocalVar('petCount', 1)
 end
 
 entity.onMobFight = function(mob, target)
     local auraGear = GetMobByID(mob:getID() + 1)
-    local petCount = mob:getLocalVar("petCount")
+    local petCount = mob:getLocalVar('petCount')
 
     -- Summons an Aura Gear every 15 seconds.
     -- TODO: Casting animation for before summons. When he spawns them isn't exactly retail accurate.
@@ -25,7 +25,7 @@ entity.onMobFight = function(mob, target)
         auraGear:setSpawn(mob:getXPos() + 1, mob:getYPos(), mob:getZPos() + 1)
         auraGear:spawn()
         auraGear:updateEnmity(target)
-        mob:setLocalVar("petCount", petCount + 1)
+        mob:setLocalVar('petCount', petCount + 1)
     end
 
     -- make sure pet has a target

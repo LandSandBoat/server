@@ -3,7 +3,7 @@
 -- Mob: Shiva Prime
 -- Involved in Quest: Trial by Ice, Trial Size Trial by Ice
 -----------------------------------
-mixins = { require("scripts/mixins/job_special") }
+mixins = { require('scripts/mixins/job_special') }
 -----------------------------------
 local entity = {}
 

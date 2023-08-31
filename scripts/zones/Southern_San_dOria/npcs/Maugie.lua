@@ -2,7 +2,7 @@
 -- Area: Southern San d'Oria
 --  NPC: Maugie
 -----------------------------------
-require("scripts/quests/flyers_for_regine")
+require('scripts/quests/flyers_for_regine')
 -----------------------------------
 local entity = {}
 
@@ -18,7 +18,7 @@ entity.onTrigger = function(player, npc)
     then
         player:startEvent(45)
     elseif grimySignpost == QUEST_ACCEPTED then
-        if player:getCharVar("CleanSignPost") == 15 then
+        if player:getCharVar('CleanSignPost') == 15 then
             player:startEvent(44)
         else
             player:startEvent(43)
@@ -37,7 +37,7 @@ entity.onEventFinish = function(player, csid, option, npc)
     if csid == 45 and option == 0 then
         player:addQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.GRIMY_SIGNPOSTS)
     elseif csid == 44 then
-        player:setCharVar("CleanSignPost", 0)
+        player:setCharVar('CleanSignPost', 0)
         player:addFame(xi.quest.fame_area.SANDORIA, 30)
         npcUtil.giveCurrency(player, 'gil', 1500)
         player:completeQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.GRIMY_SIGNPOSTS)

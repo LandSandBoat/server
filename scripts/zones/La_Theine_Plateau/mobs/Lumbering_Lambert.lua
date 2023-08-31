@@ -3,7 +3,7 @@
 --  Mob: Lumbering Lambert
 -----------------------------------
 local ID = zones[xi.zone.LA_THEINE_PLATEAU]
-require("scripts/quests/tutorial")
+require('scripts/quests/tutorial')
 -----------------------------------
 local entity = {}
 
