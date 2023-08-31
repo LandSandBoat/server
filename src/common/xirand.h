@@ -25,6 +25,7 @@
 
 // You can choose an RNG by commenting/uncommenting this line. The default is Mersenne Twister in 32 bit.
 #include "rng/mersennetwister.h"
+// #include "rng/mersennetwister64.h"
 // #include "rng/pcg.h"
 // #include "rng/pcg64.h"
 
