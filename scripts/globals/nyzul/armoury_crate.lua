@@ -2,7 +2,7 @@
 -- Nyzul Isle: All treasure chest/casket logic.
 -----------------------------------
 local ID = zones[xi.zone.NYZUL_ISLE]
-require("scripts/globals/appraisal")
+require('scripts/globals/appraisal')
 -----------------------------------
 
 local tempBoxItems =
@@ -155,10 +155,10 @@ xi.nyzul.handleAppraisalItem = function(player, npc)
     for _, cofferID in ipairs(ID.npc.TREASURE_COFFER) do
         if
             npc:getID() == cofferID and
-            npc:getLocalVar("opened") == 0
+            npc:getLocalVar('opened') == 0
         then
             -- Appraisal Item selection. Based on mob killed.
-            local mobOffset = npc:getLocalVar("appraisalItem") - (ID.mob[51].OFFSET_NM - xi.appraisal.origin.NYZUL_BAT_EYE) -- Bat Eye mobId - Appraisal mob value.
+            local mobOffset = npc:getLocalVar('appraisalItem') - (ID.mob[51].OFFSET_NM - xi.appraisal.origin.NYZUL_BAT_EYE) -- Bat Eye mobId - Appraisal mob value.
 
             if mobOffset == 166 or mobOffset == 187 then
                 mobOffset = 108
@@ -188,11 +188,11 @@ xi.nyzul.handleAppraisalItem = function(player, npc)
             end
 
             -- Open chest animation.
-            npc:entityAnimationPacket("open")
-            npc:setLocalVar("opened", 1)
+            npc:entityAnimationPacket('open')
+            npc:setLocalVar('opened', 1)
             npc:setUntargetable(true)
             npc:queue(10000, function(npcvar)
-                npcvar:entityAnimationPacket("kesu")
+                npcvar:entityAnimationPacket('kesu')
             end)
 
             -- Despawn chest.
@@ -213,18 +213,18 @@ xi.nyzul.tempBoxTrigger = function(player, npc)
     -- This may not be the case though. Ask KO, you fool.
 
     -- Choose 1 to 3 items and amounts.
-    if npc:getLocalVar("itemsPicked") == 0 then
-        npc:setLocalVar("itemsPicked", 1)
-        npc:entityAnimationPacket("open")
+    if npc:getLocalVar('itemsPicked') == 0 then
+        npc:setLocalVar('itemsPicked', 1)
+        npc:entityAnimationPacket('open')
         npc:setAnimationSub(13)
 
         -- First (mandatory) item selection.
         local itemIndex = math.random(1, #tempBoxItems)
         local itemData  = tempBoxItems[itemIndex]
 
-        if npc:getLocalVar("itemID_1") == 0 then
-            npc:setLocalVar("itemID_1", itemData.itemID)
-            npc:setLocalVar("itemAmount_1", itemData.amount)
+        if npc:getLocalVar('itemID_1') == 0 then
+            npc:setLocalVar('itemID_1', itemData.itemID)
+            npc:setLocalVar('itemAmount_1', itemData.amount)
             table.remove(tempBoxItems, itemIndex)
         end
 
@@ -235,8 +235,8 @@ xi.nyzul.tempBoxTrigger = function(player, npc)
             itemIndex = math.random(1, #tempBoxItems)
             itemData  = tempBoxItems[itemIndex]
 
-            npc:setLocalVar("itemID_2", itemData.itemID)
-            npc:setLocalVar("itemAmount_2", itemData.amount)
+            npc:setLocalVar('itemID_2', itemData.itemID)
+            npc:setLocalVar('itemAmount_2', itemData.amount)
             table.remove(tempBoxItems, itemIndex)
         end
 
@@ -247,37 +247,37 @@ xi.nyzul.tempBoxTrigger = function(player, npc)
             itemIndex = math.random(1, #tempBoxItems)
             itemData  = tempBoxItems[itemIndex]
 
-            npc:setLocalVar("itemID_3", itemData.itemID)
-            npc:setLocalVar("itemAmount_3", itemData.amount)
+            npc:setLocalVar('itemID_3', itemData.itemID)
+            npc:setLocalVar('itemAmount_3', itemData.amount)
             table.remove(tempBoxItems, itemIndex)
         end
     end
 
     -- Start the event (2) converting the pre-calculated values to event arguments.
     player:startEvent(2, {
-        [0] = (npc:getLocalVar("itemID_1") + (npc:getLocalVar("itemAmount_1") * 65536)),
-        [1] = (npc:getLocalVar("itemID_2") + (npc:getLocalVar("itemAmount_2") * 65536)),
-        [2] = (npc:getLocalVar("itemID_3") + (npc:getLocalVar("itemAmount_3") * 65536))
+        [0] = (npc:getLocalVar('itemID_1') + (npc:getLocalVar('itemAmount_1') * 65536)),
+        [1] = (npc:getLocalVar('itemID_2') + (npc:getLocalVar('itemAmount_2') * 65536)),
+        [2] = (npc:getLocalVar('itemID_3') + (npc:getLocalVar('itemAmount_3') * 65536))
     })
 end
 
 -- onEventFinish function. Handles item selection and npc despawn.
 xi.nyzul.tempBoxFinish = function(player, csid, option, npc)
     if csid == 2 then
-        local item1 = npc:getLocalVar("itemID_1")
-        local item2 = npc:getLocalVar("itemID_2")
-        local item3 = npc:getLocalVar("itemID_3")
+        local item1 = npc:getLocalVar('itemID_1')
+        local item2 = npc:getLocalVar('itemID_2')
+        local item3 = npc:getLocalVar('itemID_3')
 
         -- If box is not empty.
         if
             option == 1 and
             item1 > 0 and
-            npc:getLocalVar("itemAmount_1") > 0
+            npc:getLocalVar('itemAmount_1') > 0
         then
             if not player:hasItem(item1, xi.inventoryLocation.TEMPITEMS) then
                 player:addTempItem(item1)
                 player:messageName(ID.text.PLAYER_OBTAINS_TEMP_ITEM, player, item1)
-                npc:setLocalVar("itemAmount_1", npc:getLocalVar("itemAmount_1") - 1)
+                npc:setLocalVar('itemAmount_1', npc:getLocalVar('itemAmount_1') - 1)
             else
                 player:messageSpecial(ID.text.ALREADY_HAVE_TEMP_ITEM)
             end
@@ -285,12 +285,12 @@ xi.nyzul.tempBoxFinish = function(player, csid, option, npc)
         elseif
             option == 2 and
             item2 > 0 and
-            npc:getLocalVar("itemAmount_2") > 0
+            npc:getLocalVar('itemAmount_2') > 0
         then
             if not player:hasItem(item2, xi.inventoryLocation.TEMPITEMS) then
                 player:addTempItem(item2)
                 player:messageName(ID.text.PLAYER_OBTAINS_TEMP_ITEM, player, item2)
-                npc:setLocalVar("itemAmount_2", npc:getLocalVar("itemAmount_2") - 1)
+                npc:setLocalVar('itemAmount_2', npc:getLocalVar('itemAmount_2') - 1)
             else
                 player:messageSpecial(ID.text.ALREADY_HAVE_TEMP_ITEM)
             end
@@ -298,12 +298,12 @@ xi.nyzul.tempBoxFinish = function(player, csid, option, npc)
         elseif
             option == 3 and
             item3 > 0 and
-            npc:getLocalVar("itemAmount_3") > 0
+            npc:getLocalVar('itemAmount_3') > 0
         then
             if not player:hasItem(item3, xi.inventoryLocation.TEMPITEMS) then
                 player:addTempItem(item3)
                 player:messageName(ID.text.PLAYER_OBTAINS_TEMP_ITEM, player, item3)
-                npc:setLocalVar("itemAmount_3", npc:getLocalVar("itemAmount_3") - 1)
+                npc:setLocalVar('itemAmount_3', npc:getLocalVar('itemAmount_3') - 1)
             else
                 player:messageSpecial(ID.text.ALREADY_HAVE_TEMP_ITEM)
             end
@@ -311,12 +311,12 @@ xi.nyzul.tempBoxFinish = function(player, csid, option, npc)
 
         -- If box is empty, despawn it.
         if
-            npc:getLocalVar("itemAmount_1") == 0 and
-            npc:getLocalVar("itemAmount_2") == 0 and
-            npc:getLocalVar("itemAmount_3") == 0
+            npc:getLocalVar('itemAmount_1') == 0 and
+            npc:getLocalVar('itemAmount_2') == 0 and
+            npc:getLocalVar('itemAmount_3') == 0
         then
             npc:queue(10000, function(npcvar)
-                npcvar:entityAnimationPacket("kesu")
+                npcvar:entityAnimationPacket('kesu')
             end)
 
             npc:queue(12000, function(npcvar)
@@ -331,14 +331,14 @@ end
 -----------------------------------
 -- Mob and floor cleanup functions.
 -----------------------------------
--- Used in boss mob scripts (directly) and in every NM script (indirectly) via "spawnChest" function.
+-- Used in boss mob scripts (directly) and in every NM script (indirectly) via 'spawnChest' function.
 xi.nyzul.vigilWeaponDrop = function(player, mob)
     local instance = mob:getInstance()
 
     -- Only floor 100 Bosses to drop 1 random weapon guarenteed and 1 of the disk holders job
     -- will not drop diskholder's weapon if anyone already has it.
-    if instance:getLocalVar("[Nyzul]CurrentFloor") == 100 then
-        local diskHolder = GetPlayerByID(instance:getLocalVar("diskHolder"), instance)
+    if instance:getLocalVar('[Nyzul]CurrentFloor') == 100 then
+        local diskHolder = GetPlayerByID(instance:getLocalVar('diskHolder'), instance)
         local chars      = instance:getChars()
 
         if diskHolder ~= nil then
@@ -378,7 +378,7 @@ xi.nyzul.spawnChest = function(mob, player)
                 local pos = mob:getPos()
                 coffer:setUntargetable(false)
                 coffer:setPos(pos.x, pos.y, pos.z, pos.rot)
-                coffer:setLocalVar("appraisalItem", mobID)
+                coffer:setLocalVar('appraisalItem', mobID)
                 coffer:setStatus(xi.status.NORMAL)
 
                 break

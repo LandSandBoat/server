@@ -54,8 +54,8 @@ xi.nyzul.pathosList =
 -----------------------------------
 local function addPenalty(mob)
     local instance = mob:getInstance()
-    local pathos   = instance:getLocalVar("floorPathos")
-    local penalty  = instance:getLocalVar("gearPenalty")
+    local pathos   = instance:getLocalVar('floorPathos')
+    local penalty  = instance:getLocalVar('gearPenalty')
     local chars    = instance:getChars()
 
     -- Time penalty.
@@ -71,10 +71,10 @@ local function addPenalty(mob)
 
     -- Token penalty.
     elseif penalty == xi.nyzul.penalty.TOKENS then
-        local tokenPenalty = instance:getLocalVar("tokenPenalty")
+        local tokenPenalty = instance:getLocalVar('tokenPenalty')
 
         tokenPenalty = tokenPenalty + 1
-        instance:setLocalVar("tokenPenalty", tokenPenalty)
+        instance:setLocalVar('tokenPenalty', tokenPenalty)
 
         for _, players in pairs(chars) do
             players:messageSpecial(ID.text.MALFUNCTION)
@@ -96,7 +96,7 @@ local function addPenalty(mob)
         if #availablePathos > 0 then -- Failsafe in case all 17 are applied. Unlikely, but just in case.
             local randomEffect = availablePathos[math.random(1, #availablePathos)]
 
-            instance:setLocalVar("floorPathos", utils.mask.setBit(pathos, randomEffect, true))
+            instance:setLocalVar('floorPathos', utils.mask.setBit(pathos, randomEffect, true))
             pathos = xi.nyzul.pathosList[randomEffect]
 
             local effect = pathos.effect
@@ -138,9 +138,9 @@ end
 -- Pathos cleanup and addition global functions.
 -----------------------------------
 xi.nyzul.removePathos = function(instance)
-    if instance:getLocalVar("floorPathos") > 0 then
+    if instance:getLocalVar('floorPathos') > 0 then
         for i = 1, #xi.nyzul.pathosList do
-            if utils.mask.getBit(instance:getLocalVar("floorPathos"), i) then
+            if utils.mask.getBit(instance:getLocalVar('floorPathos'), i) then
                 local removeMessage = xi.nyzul.pathosList[i].ID
                 local chars         = instance:getChars()
 
@@ -154,17 +154,17 @@ xi.nyzul.removePathos = function(instance)
                     end
                 end
 
-                instance:setLocalVar("floorPathos", utils.mask.setBit(instance:getLocalVar("floorPathos"), i, false))
+                instance:setLocalVar('floorPathos', utils.mask.setBit(instance:getLocalVar('floorPathos'), i, false))
             end
         end
     end
 end
 
 xi.nyzul.addPathos = function(instance)
-    local randomPathos = instance:getLocalVar("randomPathos")
+    local randomPathos = instance:getLocalVar('randomPathos')
 
     if randomPathos > 0 then
-        instance:setLocalVar("floorPathos", utils.mask.setBit(instance:getLocalVar("floorPathos"), randomPathos, true))
+        instance:setLocalVar('floorPathos', utils.mask.setBit(instance:getLocalVar('floorPathos'), randomPathos, true))
 
         local pathos = xi.nyzul.pathosList[randomPathos]
         local chars  = instance:getChars()
@@ -186,7 +186,7 @@ xi.nyzul.addPathos = function(instance)
             end
         end
 
-        instance:setLocalVar("randomPathos", 0)
+        instance:setLocalVar('randomPathos', 0)
     end
 end
 
@@ -196,16 +196,16 @@ end
 xi.nyzul.onGearEngage = function(mob, target)
     local instance = mob:getInstance()
 
-    if instance:getLocalVar("gearObjective") == xi.nyzul.gearObjective.AVOID_AGRO then
+    if instance:getLocalVar('gearObjective') == xi.nyzul.gearObjective.AVOID_AGRO then
         local ce = mob:getCE(target)
         local ve = mob:getVE(target)
 
         if
             ce == 0 and
             ve == 0 and
-            mob:getLocalVar("initialAgro") == 0
+            mob:getLocalVar('initialAgro') == 0
         then
-            mob:setLocalVar("initialAgro", 1)
+            mob:setLocalVar('initialAgro', 1)
             addPenalty(mob)
         end
     end
@@ -214,7 +214,7 @@ end
 xi.nyzul.onGearDeath = function(mob)
     local instance = mob:getInstance()
 
-    if instance:getLocalVar("gearObjective") == xi.nyzul.gearObjective.DO_NOT_DESTROY then
+    if instance:getLocalVar('gearObjective') == xi.nyzul.gearObjective.DO_NOT_DESTROY then
         addPenalty(mob)
     end
 end

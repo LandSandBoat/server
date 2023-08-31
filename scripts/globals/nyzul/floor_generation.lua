@@ -1149,10 +1149,10 @@ local pTableFloorRandomEntities =
 -----------------------------------
 
 local function lampsActivate(instance)
-    local floorLayout      = instance:getLocalVar("[Nyzul]FloorLayout")
-    local lampsObjective   = instance:getLocalVar("[Nyzul]LampObjective")
+    local floorLayout      = instance:getLocalVar('[Nyzul]FloorLayout')
+    local lampsObjective   = instance:getLocalVar('[Nyzul]LampObjective')
     local runicLampOffset  = ID.npc.RUNIC_LAMP_OFFSET
-    local partySize        = utils.clamp(instance:getLocalVar("[Nyzul]PlayerCount"), 3, 5)
+    local partySize        = utils.clamp(instance:getLocalVar('[Nyzul]PlayerCount'), 3, 5)
     local spawnPoint       = 0
     local dTableLampPoints = {}
 
@@ -1167,7 +1167,7 @@ local function lampsActivate(instance)
         GetNPCByID(runicLampOffset, instance):setPos(dTableLampPoints[spawnPoint])
         GetNPCByID(runicLampOffset, instance):setStatus(xi.status.NORMAL)
 
-        instance:setLocalVar("[Lamp]PartySize", partySize)
+        instance:setLocalVar('[Lamp]PartySize', partySize)
 
     -- Lamp Objective: Activate All
     elseif lampsObjective == xi.nyzul.lampsObjective.ACTIVATE_ALL then
@@ -1181,7 +1181,7 @@ local function lampsActivate(instance)
             table.remove(dTableLampPoints, spawnPoint)
         end
 
-        instance:setLocalVar("[Lamp]count", runicLamps)
+        instance:setLocalVar('[Lamp]count', runicLamps)
 
     -- Lamp Objective: Activate in Order
     elseif lampsObjective == xi.nyzul.lampsObjective.ORDER then
@@ -1198,14 +1198,14 @@ local function lampsActivate(instance)
 
             GetNPCByID(i, instance):setPos(dTableLampPoints[spawnPoint])
             GetNPCByID(i, instance):setStatus(xi.status.NORMAL)
-            GetNPCByID(i, instance):setLocalVar("[Lamp]order", dTableLampOrder[lampRandom])
+            GetNPCByID(i, instance):setLocalVar('[Lamp]order', dTableLampOrder[lampRandom])
 
             table.remove(dTableLampOrder, lampRandom)
             table.remove(dTableLampPoints, spawnPoint)
         end
 
-        instance:setLocalVar("[Lamp]count", runicLamps)
-        instance:setLocalVar("[Lamp]lampRegister", 0)
+        instance:setLocalVar('[Lamp]count', runicLamps)
+        instance:setLocalVar('[Lamp]lampRegister', 0)
     end
 end
 
@@ -1214,7 +1214,7 @@ end
 -----------------------------------
 
 xi.nyzul.prepareMobs = function(instance)
-    local currentFloor = instance:getLocalVar("[Nyzul]CurrentFloor")
+    local currentFloor = instance:getLocalVar('[Nyzul]CurrentFloor')
 
     -- 20th floor bosses.
     if currentFloor % 20 == 0 then
@@ -1234,7 +1234,7 @@ xi.nyzul.prepareMobs = function(instance)
     -- All other floors except free.
     elseif instance:getStage() ~= xi.nyzul.objective.FREE_FLOOR then
         -- Build dynamic table with all the possible spawn points.
-        local floorLayout      = instance:getLocalVar("[Nyzul]FloorLayout")
+        local floorLayout      = instance:getLocalVar('[Nyzul]FloorLayout')
         local pointTable       = mobSpawnPoints[floorLayout]
         local sPoint           = 0
         local dTableSpawnPoint = {}
@@ -1279,7 +1279,7 @@ xi.nyzul.prepareMobs = function(instance)
                     SpawnMob(enemy, instance)
                     table.remove(dTableSpawnPoint, sPoint)
                     table.remove(dTableSpecificEnemies, randomEnemy)
-                    instance:setLocalVar("Eliminate", instance:getLocalVar("Eliminate") + 1)
+                    instance:setLocalVar('Eliminate', instance:getLocalVar('Eliminate') + 1)
 
                     groupAmount = groupAmount - 1
                 end
@@ -1293,13 +1293,13 @@ xi.nyzul.prepareMobs = function(instance)
                     GetMobByID(ID.mob[51].DAHAK, instance):setSpawn(sPoint.x, sPoint.y, sPoint.z, math.random(0, 255))
                     SpawnMob(ID.mob[51].DAHAK, instance)
                     table.remove(dTableSpawnPoint, sPoint)
-                    instance:setLocalVar("Eliminate", instance:getLocalVar("Eliminate") + 1)
+                    instance:setLocalVar('Eliminate', instance:getLocalVar('Eliminate') + 1)
                 end
             end,
 
             -- Activate Lamps Objective
             [xi.nyzul.objective.ACTIVATE_ALL_LAMPS] = function()
-                instance:setLocalVar("[Nyzul]LampObjective", math.random(xi.nyzul.lampsObjective.REGISTER, xi.nyzul.lampsObjective.ORDER))
+                instance:setLocalVar('[Nyzul]LampObjective', math.random(xi.nyzul.lampsObjective.REGISTER, xi.nyzul.lampsObjective.ORDER))
                 lampsActivate(instance)
             end,
         }
@@ -1314,7 +1314,7 @@ xi.nyzul.prepareMobs = function(instance)
             table.remove(dTableSpawnPoint, sPoint)
 
             if instance:getStage() == xi.nyzul.objective.ELIMINATE_ALL_ENEMIES then
-                instance:setLocalVar("Eliminate", instance:getLocalVar("Eliminate") + 1)
+                instance:setLocalVar('Eliminate', instance:getLocalVar('Eliminate') + 1)
             end
         end
 
@@ -1326,16 +1326,16 @@ xi.nyzul.prepareMobs = function(instance)
             table.remove(dTableSpawnPoint, sPoint)
 
             if instance:getStage() == xi.nyzul.objective.ELIMINATE_ALL_ENEMIES then
-                instance:setLocalVar("Eliminate", instance:getLocalVar("Eliminate") + 1)
+                instance:setLocalVar('Eliminate', instance:getLocalVar('Eliminate') + 1)
             end
         end
 
         -- Spawn Gear-Type mobs.
-        if instance:getLocalVar("gearObjective") > 0 then
+        if instance:getLocalVar('gearObjective') > 0 then
             for i = pTableFloorRandomEntities[17][1], pTableFloorRandomEntities[17][2] do
                 sPoint = math.random(1, #dTableSpawnPoint)
 
-                instance:setLocalVar("gearPenalty", math.random(xi.nyzul.penalty.TIME, xi.nyzul.penalty.PATHOS))
+                instance:setLocalVar('gearPenalty', math.random(xi.nyzul.penalty.TIME, xi.nyzul.penalty.PATHOS))
                 GetMobByID(i, instance):setSpawn(sPoint.x, sPoint.y, sPoint.z, math.random(0, 255))
                 SpawnMob(i, instance)
                 table.remove(dTableSpawnPoint, sPoint)
@@ -1373,7 +1373,7 @@ xi.nyzul.prepareMobs = function(instance)
                 spawnedNMs = spawnedNMs - 1
 
                 if instance:getStage() == xi.nyzul.objective.ELIMINATE_ALL_ENEMIES then
-                    instance:setLocalVar("Eliminate", instance:getLocalVar("Eliminate") + 1)
+                    instance:setLocalVar('Eliminate', instance:getLocalVar('Eliminate') + 1)
                 end
             end
         end
@@ -1393,12 +1393,12 @@ xi.nyzul.prepareMobs = function(instance)
             sPoint            = math.random(1, #dTableSpawnPoint)
 
             if instance:getStage() == xi.nyzul.objective.ELIMINATE_ALL_ENEMIES then
-                instance:setLocalVar("Eliminate", instance:getLocalVar("Eliminate") + 1)
+                instance:setLocalVar('Eliminate', instance:getLocalVar('Eliminate') + 1)
             elseif
                 instance:getStage() == xi.nyzul.objective.ELIMINATE_SPECIFIED_ENEMY and
-                instance:getLocalVar("Nyzul_Specified_Enemy") == 0
+                instance:getLocalVar('Nyzul_Specified_Enemy') == 0
             then
-                instance:setLocalVar("Nyzul_Specified_Enemy", mobID)
+                instance:setLocalVar('Nyzul_Specified_Enemy', mobID)
             end
 
             GetMobByID(mobID, instance):setSpawn(sPoint.x, sPoint.y, sPoint.z, math.random(0, 255))
