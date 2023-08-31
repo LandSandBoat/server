@@ -4501,19 +4501,25 @@ void CLuaBaseEntity::equipItem(uint16 itemID, sol::object const& container)
         return;
     }
 
-    auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
+    auto*           PChar             = static_cast<CCharEntity*>(m_PBaseEntity);
+    uint8           containerID       = container.is<uint8>() ? container.as<uint8>() : static_cast<uint8>(LOC_INVENTORY);
+    CItemContainer* PStorageContainer = PChar->getStorage(containerID);
 
-    uint8           containerID = (container != sol::lua_nil) ? container.as<uint8>() : (uint8)LOC_INVENTORY;
-    uint8           SLOT        = PChar->getStorage(containerID)->SearchItem(itemID);
-    CItemEquipment* PItem       = nullptr;
-
-    if (SLOT != ERROR_SLOTID)
+    if (PStorageContainer == nullptr)
     {
-        PItem = static_cast<CItemEquipment*>(PChar->getStorage(containerID)->GetItem(SLOT));
+        // getStorage logs for invalid, so just bail out here
+        return;
+    }
 
-        charutils::EquipItem(PChar, SLOT, PItem->getSlotType(), containerID);
-        charutils::SaveCharEquip(PChar);
-        charutils::SaveCharLook(PChar);
+    uint8 slotId = PChar->getStorage(containerID)->SearchItem(itemID);
+    if (slotId != ERROR_SLOTID)
+    {
+        if (auto* PItem = dynamic_cast<CItemEquipment*>(PChar->getStorage(containerID)->GetItem(slotId)))
+        {
+            charutils::EquipItem(PChar, slotId, PItem->getSlotType(), containerID);
+            charutils::SaveCharEquip(PChar);
+            charutils::SaveCharLook(PChar);
+        }
     }
 }
 
