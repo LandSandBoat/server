@@ -7,3 +7,6 @@
 [submodule "modules/catseyexi"]
 	path = modules/catseyexi
 	url = https://github.com/catsandboats/modules
+[submodule "navmeshes"]
+	path = navmeshes
+	url = https://github.com/LandSandBoat/xiNavmeshes.git
