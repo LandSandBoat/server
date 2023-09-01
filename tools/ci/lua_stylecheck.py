@@ -109,7 +109,7 @@ class LuaStyleCheck:
         Multi-line tables should use Allman braces, and all braces should be have at least one space or newline
         prior to any nested table definition.
 
-        See: https://github.com/LandSandBoat/server/wiki/Development-Guide-Lua#allman-braces
+        See: https://github.com/LandSandBoat/server/wiki/Development-Guide#lua-allman-braces
         """
         # [ ]{0,} : Any number of spaces
         # =       : = character
@@ -148,7 +148,7 @@ class LuaStyleCheck:
     def check_semicolon(self, line):
         """No semi-colons should be used in Lua scripts.
 
-        See: https://github.com/LandSandBoat/server/wiki/Development-Guide-Lua#no-semicolons
+        See: https://github.com/LandSandBoat/server/wiki/Development-Guide#lua-no-semicolons
         """
 
         # Ignore strings in line
@@ -163,7 +163,7 @@ class LuaStyleCheck:
     def check_variable_names(self, line):
         """Variables should not use underscores and be lowerCamelCased with the exception of `ID`
 
-        See: https://github.com/LandSandBoat/server/wiki/Development-Guide-Lua#naming-and-misc
+        See: https://github.com/LandSandBoat/server/wiki/Development-Guide#lua-naming-and-misc
         """
         # local     : 'local ' (with a space)
         # (?=       : Positive lookahead
@@ -205,7 +205,7 @@ class LuaStyleCheck:
         """Parentheses should have padding prior to opening and after closing, but must not contain padding after
         the open parenthesis, or prior to closing.
 
-        See: https://github.com/LandSandBoat/server/wiki/Development-Guide-Lua#no-excess-whitespace-inside-of-parentheses-or-solely-for-alignment
+        See: https://github.com/LandSandBoat/server/wiki/Development-Guide#lua-no-excess-whitespace
         """
 
         if len(re.findall("\([ ]| [\)]", line)) > 0:
@@ -275,7 +275,7 @@ class LuaStyleCheck:
         """Multi-line conditional blocks should contain if/elseif and then on their own lines,
         with conditions indented between them.
 
-        See: https://github.com/LandSandBoat/server/wiki/Development-Guide-Lua#formatting-conditional-blocks
+        See: https://github.com/LandSandBoat/server/wiki/Development-Guide#lua-formatting-conditional-blocks
         """
 
         stripped_line = re.sub("\".*?\"|'.*?'", "", line) # Ignore data in quotes
