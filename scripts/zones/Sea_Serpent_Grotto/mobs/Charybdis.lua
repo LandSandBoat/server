@@ -3,8 +3,6 @@
 --   NM: Charybdis
 -- !pos -152 48 -328 176
 -----------------------------------
-mixins = { require("scripts/mixins/claim_shield") }
------------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)

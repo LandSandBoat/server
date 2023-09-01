@@ -2,8 +2,6 @@
 -- Area: Gustav Tunnel
 --   NM: Bune
 -----------------------------------
-mixins = { require("scripts/mixins/claim_shield") }
------------------------------------
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)
