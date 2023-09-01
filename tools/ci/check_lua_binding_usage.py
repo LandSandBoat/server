@@ -7,9 +7,7 @@ import os
 import re
 
 function_names = []
-excluded_filenames = [
-    './scripts/mixins/claim_shield.lua',
-]
+
 
 def extract_function_names():
     for filename in os.listdir("src/map/lua/"):
@@ -99,47 +97,47 @@ def main():
     function_names.append("setStartFunction")
     function_names.append("setEndFunction")
     function_names.append("isCrystalWarrior")
+    function_names.append("getType")
 
     # root_dir needs a trailing slash (i.e. /root/dir/)
     for filename in glob.iglob("./scripts/" + "**/*.lua", recursive=True):
-        if filename not in excluded_filenames:
-            if os.path.isfile(filename):
-                with open(filename, mode="r", encoding="utf-8") as file:
-                    in_block_comment = False
-                    counter = 0
-                    for line in file.readlines():
-                        counter = counter + 1
+        if os.path.isfile(filename):
+            with open(filename, mode="r", encoding="utf-8") as file:
+                in_block_comment = False
+                counter = 0
+                for line in file.readlines():
+                    counter = counter + 1
 
-                        if "--[[" in line:
-                            in_block_comment = True
+                    if "--[[" in line:
+                        in_block_comment = True
 
-                        if "]]--" in line:
-                            in_block_comment = False
+                    if "]]--" in line:
+                        in_block_comment = False
 
-                        if in_block_comment:
-                            continue
+                    if in_block_comment:
+                        continue
 
-                        # Try and ignore comments
-                        line = line.split("--", 1)[0]
+                    # Try and ignore comments
+                    line = line.split("--", 1)[0]
 
                     # Don't look inside strings (replace with placeholder)
                     line = re.sub('\"([^\"]*?)\"', "strVal", line)
                     line = re.sub("\'([^\"]*?)\'", "strVal", line)
 
-                        # Try and ignore function definitions
-                        line = line.split("function", 1)[0]
+                    # Try and ignore function definitions
+                    line = line.split("function", 1)[0]
 
-                        line = line.replace("\n", "")
+                    line = line.replace("\n", "")
 
-                        for match in re.finditer('(?<=:)[^\(\/\\\: "]*', line):
-                            if (
-                                len(match.group()) > 1
-                                and match.group() not in function_names
-                            ):
-                                filename = filename.replace("\\", "/")
-                                print(
-                                    f"Could not find function match for {match.group()} ({filename}:{counter}:{match.start() + 1})"
-                                )
+                    for match in re.finditer('(?<=:)[^\(\/\\\: "]*', line):
+                        if (
+                            len(match.group()) > 1
+                            and match.group() not in function_names
+                        ):
+                            filename = filename.replace("\\", "/")
+                            print(
+                                f"Could not find function match for {match.group()} ({filename}:{counter}:{match.start() + 1})"
+                            )
 
 
 if __name__ == "__main__":
