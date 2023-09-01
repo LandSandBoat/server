@@ -100,7 +100,7 @@ namespace mobutils
                 return battleutils::GetMaxSkill(SKILL_THROWING, JOB_MNK, mlvl); // E Skill (5)
         }
 
-        ShowError("Mobutils::GetBase rank (%d) is out of bounds for mob (%u) ", rank, PMob->id);
+        ShowError("mobutils::GetBase rank (%d) is out of bounds for mob (%u) ", rank, PMob->id);
         return 0;
     }
 
@@ -595,17 +595,17 @@ namespace mobutils
         // Check for possible miss-setups
         if (PMob->getMobMod(MOBMOD_SPECIAL_SKILL) != 0 && PMob->getMobMod(MOBMOD_SPECIAL_COOL) == 0)
         {
-            ShowError("Mobutils::CalculateMobStats Mob (%s, %d) with special skill but no cool down set!", PMob->GetName(), PMob->id);
+            ShowError("mobutils::CalculateMobStats Mob (%s, %d) with special skill but no cool down set!", PMob->GetName(), PMob->id);
         }
 
         if (PMob->SpellContainer->HasSpells() && PMob->getMobMod(MOBMOD_MAGIC_COOL) == 0)
         {
-            ShowError("Mobutils::CalculateMobStats Mob (%s, %d) with magic but no cool down set!", PMob->GetName(), PMob->id);
+            ShowError("mobutils::CalculateMobStats Mob (%s, %d) with magic but no cool down set!", PMob->GetName(), PMob->id);
         }
 
         if (PMob->getMobMod(MOBMOD_DETECTION) == 0)
         {
-            ShowError("Mobutils::CalculateMobStats Mob (%s, %d, %d) has no detection methods!", PMob->GetName(), PMob->id, PMob->m_Family);
+            ShowError("mobutils::CalculateMobStats Mob (%s, %d, %d) has no detection methods!", PMob->GetName(), PMob->id, PMob->m_Family);
         }
     }
 
@@ -1527,6 +1527,7 @@ namespace mobutils
                 mobutils::AddSqlModifiers(PMob);
             }
         }
+
         return PMob;
     }
 

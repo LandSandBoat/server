@@ -173,13 +173,12 @@ xi.settings.main =
 
     -- GARRISON SETTINGS
     ENABLE_GARRISON        = true,  -- If true, enables garrison functionality
-    DEBUG_GARRISON         = false, -- If true, garrison will print out debug messages in logs as well as players as smes.
     GARRISON_LOCKOUT       = 1800,  -- Time in seconds before a new garrison can be started (default: 1800)
     GARRISON_TIME_LIMIT    = 1800,  -- Time in seconds before lose ongoing garrison (default: 1800)
-    GARRISON_ONCE_PER_WEEK = false, -- Set to false to bypass the limit of one garrison per Conquest Tally Week.
+    GARRISON_ONCE_PER_WEEK = true,  -- Set to false to bypass the limit of one garrison per Conquest Tally Week.
     GARRISON_PARTY_LIMIT   = 18,    -- Set to max party members you want to do garrison (default: 18).
-    GARRISON_NATION_BYPASS = true,  -- Set to true to bypass the nation requirement.
-    GARRISON_RANK          = 1,     -- Set to minumum Nation Rank to start Garrison (default: 2).
+    GARRISON_NATION_BYPASS = false, -- Set to true to bypass the nation requirement.
+    GARRISON_RANK          = 2,     -- Set to minumum Nation Rank to start Garrison (default: 2).
 
     -- DYNAMIS SETTINGS
     BETWEEN_2DYNA_WAIT_TIME     = 0,       -- Hours before player can re-enter Dynamis. Default is 1 Earthday (24 hours).
@@ -256,14 +255,6 @@ xi.settings.main =
     -- Login Campaign (Set to 0 if you don't want to run a Login Campaign)
     -- Please visit scripts/globals/events/login_campaign.lua for assigning the correct campaign dates.
     ENABLE_LOGIN_CAMPAIGN = 1,
-
-    -- GARRISON
-    GARRISON_LOCKOUT             = 1800,  -- Time in seconds before a new garrison can be started (default: 1800)
-    GARRISON_TIME_LIMIT          = 1800,  -- Time in seconds before lose ongoing garrison (default: 1800)
-    GARRISON_ONCE_PER_WEEK       = 0,     -- Set to 1 to bypass the limit of one garrison per Conquest Tally Week.
-    GARRISON_PARTY_LIMIT         = 18,    -- Set to max party members you want to do garrison (default: 18).
-    GARRISON_NATION_BYPASS       = 0,     -- Set to 1 to bypass the nation requirement.
-    GARRISON_RANK                = 2,     -- Set to minumum Nation Rank to start Garrison (default: 2).
 
     -- NYZUL
     RUNIC_DISK_SAVE      = true, -- Allow anyone participating in Nyzul to save progress. Set to false so only initiator can save progress.

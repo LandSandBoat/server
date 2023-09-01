@@ -8,7 +8,6 @@ import fileinput
 import shutil
 import importlib
 import pathlib
-import binascii
 
 
 # Pre-flight sanity checks
