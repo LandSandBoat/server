@@ -325,7 +325,7 @@ local function checkForRemovableEffectsOnSpiritLink(player, wyvern)
         for _, effect in pairs(effects) do
             local id = effect:getEffectType()
             if
-                bit.band(effect:getFlag(), xi.effectFlag.ERASABLE) == xi.effectFlag.ERASABLE or
+                bit.band(effect:getEffectFlags(), xi.effectFlag.ERASABLE) == xi.effectFlag.ERASABLE or
                 additionalRemovableEffects[id] ~= nil
             then
                 table.insert(validEffects, id)
@@ -367,7 +367,7 @@ xi.job_utils.dragoon.useSpiritLink = function(player, target, ability)
         local copyi = 0
 
         for _, effect in pairs(effects) do
-            if bit.band(effect:getFlag(), xi.effectFlag.EMPATHY) == xi.effectFlag.EMPATHY then
+            if bit.band(effect:getEffectFlags(), xi.effectFlag.EMPATHY) == xi.effectFlag.EMPATHY then
                 validEffects[i + 1] = effect
                 i = i + 1
             end
