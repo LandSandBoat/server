@@ -2,7 +2,7 @@
 -- Area: Xarcabard [S]
 --  Mob: Ruly Imp
 -----------------------------------
-mixins = { require("scripts/mixins/families/imp") }
+mixins = { require('scripts/mixins/families/imp') }
 -----------------------------------
 local entity = {}
 

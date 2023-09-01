@@ -8,8 +8,6 @@ zoneObject.onInitialize = function(zone)
 end
 
 zoneObject.onZoneIn = function(player, prevZone)
-    local cs = -1
-
     if
         player:getXPos() == 0 and
         player:getYPos() == 0 and
@@ -18,9 +16,7 @@ zoneObject.onZoneIn = function(player, prevZone)
         player:setPos(-2.517, 0.452, -5.068, 190)
     end
 
-    cs = xi.mog_garden.onZoneIn(player, prevZone)
-
-    return cs
+    return xi.mog_garden.onZoneIn(player, prevZone)
 end
 
 zoneObject.onTriggerAreaEnter = function(player, triggerArea)

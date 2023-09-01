@@ -1,9 +1,9 @@
 -----------------------------------
 -- Trust
 -----------------------------------
-require("scripts/globals/bcnm")
-require("scripts/globals/magic")
-require("scripts/globals/roe")
+require('scripts/globals/bcnm')
+require('scripts/globals/magic')
+require('scripts/globals/roe')
 -----------------------------------
 xi = xi or {}
 xi.trust = xi.trust or {}
@@ -251,7 +251,7 @@ xi.trust.onTradeCipher = function(player, trade, csid, rovCs, arkAngelCs)
         not player:hasSpell(spellId)
     then
 
-        player:setLocalVar("TradingTrustCipher", spellId)
+        player:setLocalVar('TradingTrustCipher', spellId)
 
         -- TODO Blocking for ROV ciphers
         local rovBlock = false
@@ -326,14 +326,14 @@ xi.trust.canCast = function(caster, spell, notAllowedTrustIds)
                 caster:messageSystem(xi.msg.system.TRUST_ALREADY_CALLED)
                 return -1
             -- Check not allowed trust combinations (Shantotto I vs Shantotto II)
-            elseif type(notAllowedTrustIds) == "number" then
+            elseif type(notAllowedTrustIds) == 'number' then
                 if member:getTrustID() == notAllowedTrustIds then
                     caster:messageSystem(xi.msg.system.TRUST_ALREADY_CALLED)
                     return -1
                 end
-            elseif type(notAllowedTrustIds) == "table" then
+            elseif type(notAllowedTrustIds) == 'table' then
                 for _, v in pairs(notAllowedTrustIds) do
-                    if type(v) == "number" then
+                    if type(v) == 'number' then
                         if member:getTrustID() == v then
                             caster:messageSystem(xi.msg.system.TRUST_ALREADY_CALLED)
                             return -1
@@ -398,12 +398,12 @@ xi.trust.message = function(mob, messageOffset)
     local pageOffset = poolIDToMessagePageOffset[poolID]
 
     if pageOffset == nil then
-        print("trust.lua: pageOffset not set for Trust poolID: " .. poolID)
+        print('trust.lua: pageOffset not set for Trust poolID: ' .. poolID)
         return
     end
 
     if pageOffset > maxMessagePage then
-        print("trust.lua: maxMessagePage exceeded!")
+        print('trust.lua: maxMessagePage exceeded!')
         return
     end
 

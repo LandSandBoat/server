@@ -532,7 +532,7 @@ local argumentKeyItems =
 }
 
 entity.onTrigger = function(player, npc)
-    local receivedNexusCape = player:getCharVar("receivedNexusCape")
+    local receivedNexusCape = player:getCharVar('receivedNexusCape')
     local kiArgs = { 0, 0, 0 }
 
     for argNum = 1, 3 do
@@ -560,14 +560,14 @@ entity.onEventFinish = function(player, csid, option, npc)
     if csid == 10099 then
         if
             option == 16777216 and
-            player:getCharVar("receivedNexusCape") == 0 and
+            player:getCharVar('receivedNexusCape') == 0 and
             npcUtil.giveItem(player, xi.item.NEXUS_CAPE)
         then
-            player:setCharVar("receivedNexusCape", 1)
+            player:setCharVar('receivedNexusCape', 1)
 
         elseif
             option == 33554432 or
-            (option == 16777216 and player:getCharVar("receivedNexusCape") == 0)
+            (option == 16777216 and player:getCharVar('receivedNexusCape') == 0)
         then
             player:addUsedItem(xi.item.NEXUS_CAPE)
 

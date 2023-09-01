@@ -2,7 +2,7 @@
 -- Area: Attohwa Chasm
 --  Mob: Executioner Antlion
 -----------------------------------
-mixins = { require("scripts/mixins/families/antlion_ambush_noaggro") }
+mixins = { require('scripts/mixins/families/antlion_ambush_noaggro') }
 -----------------------------------
 local entity = {}
 

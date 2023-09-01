@@ -25,9 +25,9 @@ end
 xi.extravaganza.getShadowEraCiphers = function(npc)
     local cipherNpcs =
     {
-        ["Shixo"]   =   { xi.item.CIPHER_OF_NOILLURIES_ALTER_EGO, xi.item.CIPHER_OF_LEONOYNES_ALTER_EGO },
-        ["Shenni"]  =   { xi.item.CIPHER_OF_ELIVIRAS_ALTER_EGO, xi.item.CIPHER_OF_MAXIMILIANS_ALTER_EGO },
-        ["Shuvo"]   =   { xi.item.CIPHER_OF_LHUS_ALTER_EGO, xi.item.CIPHER_OF_KAYEELS_ALTER_EGO },
+        ['Shixo']   =   { xi.item.CIPHER_OF_NOILLURIES_ALTER_EGO, xi.item.CIPHER_OF_LEONOYNES_ALTER_EGO },
+        ['Shenni']  =   { xi.item.CIPHER_OF_ELIVIRAS_ALTER_EGO, xi.item.CIPHER_OF_MAXIMILIANS_ALTER_EGO },
+        ['Shuvo']   =   { xi.item.CIPHER_OF_LHUS_ALTER_EGO, xi.item.CIPHER_OF_KAYEELS_ALTER_EGO },
     }
     return cipherNpcs[npc:getName()]
 end
@@ -58,8 +58,8 @@ xi.extravaganza.shadowEraTrigger = function(player, npc, notes)
         active == xi.extravaganza.campaign.BOTH
     then
         local cipherids = xi.extravaganza.getShadowEraCiphers(npc)
-        player:setLocalVar("ShadowCipher1", cipherids[1])
-        player:setLocalVar("ShadowCipher2", cipherids[2])
+        player:setLocalVar('ShadowCipher1', cipherids[1])
+        player:setLocalVar('ShadowCipher2', cipherids[2])
         player:startEvent(7300, 0, notes, 6)
     end
 end
@@ -71,8 +71,8 @@ end
 
 xi.extravaganza.shadowEraFinish = function(player, csid, option, npc)
     local ID = zones[player:getZoneID()]
-    local notes = player:getCurrency("allied_notes")
-    local cipherid = { player:getLocalVar("ShadowCipher1"), player:getLocalVar("ShadowCipher2") }
+    local notes = player:getCurrency('allied_notes')
+    local cipherid = { player:getLocalVar('ShadowCipher1'), player:getLocalVar('ShadowCipher2') }
     local choice = 0
 
     if csid == 7300 then -- All 3 Shadow Era Cipher vendors share the same CSID and options
@@ -85,7 +85,7 @@ xi.extravaganza.shadowEraFinish = function(player, csid, option, npc)
         if option == 65537 or option == 131073 then
             if notes >= 1000 then
                 if npcUtil.giveItem(player, cipherid[choice]) then
-                    player:delCurrency("allied_notes", 1000)
+                    player:delCurrency('allied_notes', 1000)
                 end
             elseif notes < 1000 then
                 player:messageSpecial(ID.text.NOT_ENOUGH_NOTES)

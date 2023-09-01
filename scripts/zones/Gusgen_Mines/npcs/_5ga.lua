@@ -16,7 +16,7 @@ entity.onTrigger = function(player, npc)
 
         if GetNPCByID(lever - 6):getAnimation() == 9 then
             -- send dustcloud animation
-            SendEntityVisualPacket(GetNPCByID(lever - 6):getID(), "kem1")
+            SendEntityVisualPacket(GetNPCByID(lever - 6):getID(), 'kem1')
 
             GetNPCByID(lever - 6):setAnimation(8) --open door C (_5g0)
             GetNPCByID(lever - 5):setAnimation(9) --close door B (_5g1)

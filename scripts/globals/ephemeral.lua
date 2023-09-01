@@ -1,7 +1,7 @@
 -----------------------------------
 -- Global functionality for Ephemeral Moogles
 -----------------------------------
-require("scripts/globals/npc_util")
+require('scripts/globals/npc_util')
 -----------------------------------
 xi = xi or {}
 
@@ -13,14 +13,14 @@ local crystalCap = 5000
 -- Information for currency storage and event params
 local crystalData =
 {
-    { crystal = 4096, cluster = 4104, tradeparam = 1, eventparam = 1, offset = 0, name = "fire_crystals" }, -- Fire Crystal
-    { crystal = 4097, cluster = 4105, tradeparam = 2, eventparam = 1, offset = 16, name = "ice_crystals" }, -- Ice Crystal
-    { crystal = 4098, cluster = 4106, tradeparam = 3, eventparam = 2, offset = 0, name = "wind_crystals" }, -- Wind Crystal
-    { crystal = 4099, cluster = 4107, tradeparam = 4, eventparam = 2, offset = 16, name = "earth_crystals" }, -- Earth Crystal
-    { crystal = 4100, cluster = 4108, tradeparam = 5, eventparam = 3, offset = 0, name = "lightning_crystals" }, -- Lightning Crystal
-    { crystal = 4101, cluster = 4109, tradeparam = 6, eventparam = 3, offset = 16, name = "water_crystals" }, -- Water Crystal
-    { crystal = 4102, cluster = 4110, tradeparam = 7, eventparam = 4, offset = 0, name = "light_crystals" }, -- Light Crystal
-    { crystal = 4103, cluster = 4111, tradeparam = 8, eventparam = 4, offset = 16, name = "dark_crystals" }, -- Dark Crystal
+    { crystal = 4096, cluster = 4104, tradeparam = 1, eventparam = 1, offset = 0, name = 'fire_crystals' }, -- Fire Crystal
+    { crystal = 4097, cluster = 4105, tradeparam = 2, eventparam = 1, offset = 16, name = 'ice_crystals' }, -- Ice Crystal
+    { crystal = 4098, cluster = 4106, tradeparam = 3, eventparam = 2, offset = 0, name = 'wind_crystals' }, -- Wind Crystal
+    { crystal = 4099, cluster = 4107, tradeparam = 4, eventparam = 2, offset = 16, name = 'earth_crystals' }, -- Earth Crystal
+    { crystal = 4100, cluster = 4108, tradeparam = 5, eventparam = 3, offset = 0, name = 'lightning_crystals' }, -- Lightning Crystal
+    { crystal = 4101, cluster = 4109, tradeparam = 6, eventparam = 3, offset = 16, name = 'water_crystals' }, -- Water Crystal
+    { crystal = 4102, cluster = 4110, tradeparam = 7, eventparam = 4, offset = 0, name = 'light_crystals' }, -- Light Crystal
+    { crystal = 4103, cluster = 4111, tradeparam = 8, eventparam = 4, offset = 16, name = 'dark_crystals' }, -- Dark Crystal
 }
 
 -- Helper function for getting crystal counts as params
@@ -105,7 +105,7 @@ xi.ephemeral.onEventFinish = function(player, option, wasTrade)
             local crystals = quantity % 12
             local clusters = math.floor(quantity / 12)
 
-            -- Player selected "as many as can fit"
+            -- Player selected 'as many as can fit'
             if option > 0x80000000 then
                 -- Recalculate the quantity according to open inventory slots
                 local freeSlots = player:getFreeSlotsCount()

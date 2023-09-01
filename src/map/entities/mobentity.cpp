@@ -1268,7 +1268,7 @@ void CMobEntity::DropItems(CCharEntity* PChar)
                     break;
             }
         });
-        // clang-forman on
+        // clang-format on
 
         for (uint8 i = 0; i < crystalRolls; i++)
         {

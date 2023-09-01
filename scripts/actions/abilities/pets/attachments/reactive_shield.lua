@@ -4,7 +4,7 @@
 local attachmentObject = {}
 
 attachmentObject.onEquip = function(pet)
-    pet:addListener("AUTOMATON_ATTACHMENT_CHECK", "ATTACHMENT_REACTIVE_SHIELD", function(automaton, target)
+    pet:addListener('AUTOMATON_ATTACHMENT_CHECK', 'ATTACHMENT_REACTIVE_SHIELD', function(automaton, target)
         local master = automaton:getMaster()
         if
             not automaton:hasRecast(xi.recast.ABILITY, xi.automaton.abilities.REACTIVE_SHIELD) and
@@ -17,7 +17,7 @@ attachmentObject.onEquip = function(pet)
 end
 
 attachmentObject.onUnequip = function(pet)
-    pet:removeListener("ATTACHMENT_REACTIVE_SHIELD")
+    pet:removeListener('ATTACHMENT_REACTIVE_SHIELD')
 end
 
 attachmentObject.onManeuverGain = function(pet, maneuvers)

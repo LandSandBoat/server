@@ -59,8 +59,8 @@ zones[xi.zone.BHAFLAU_THICKETS] =
             [16990398] = 16990403, -- -119 -15 -651
         },
         HARVESTMAN         = 16990252,
-        LIVIDROOT_AMOOSHAH = GetFirstID("Lividroot_Amooshah"),
-        DEA                = GetFirstID("Dea"),
+        LIVIDROOT_AMOOSHAH = GetFirstID('Lividroot_Amooshah'),
+        DEA                = GetFirstID('Dea'),
     },
     npc =
     {

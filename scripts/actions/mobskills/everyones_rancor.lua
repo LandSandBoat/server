@@ -13,9 +13,9 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
     if
         mob:isNM() and
         mob:getHP() / mob:getMaxHP() <= 0.25 and
-        mob:getLocalVar("everyonesRancorUsed") == 0
+        mob:getLocalVar('everyonesRancorUsed') == 0
     then
-        mob:setLocalVar("everyonesRancorUsed", 1)
+        mob:setLocalVar('everyonesRancorUsed', 1)
         return 0
     end
 
@@ -23,12 +23,10 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    local realDmg = 0
+    local realDmg = 50 * target:getCharVar('EVERYONES_GRUDGE_KILLS')
 
     if target:getID() > 100000 then
         realDmg = 50 * math.random(50, 100)
-    else
-        realDmg = 50 * target:getCharVar("EVERYONES_GRUDGE_KILLS")
     end
 
     target:takeDamage(realDmg, mob, xi.attackType.MAGICAL, xi.damageType.ELEMENTAL)

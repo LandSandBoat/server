@@ -12,7 +12,7 @@ entity.onTrigger = function(player, npc)
         local newPosition = npcUtil.pickNewPosition(npc:getID(), ID.npc.ANTICAN_TAG_POSITIONS, true)
         npc:hideNPC(7200)
         npc:setPos(newPosition.x, newPosition.y, newPosition.z)
-        SetServerVariable("[POP]Antican_Tag", os.time() + 7200) -- "pause" UpdateNPCSpawnPoint
+        SetServerVariable('[POP]Antican_Tag', os.time() + 7200) -- "pause" UpdateNPCSpawnPoint
     end
 end
 

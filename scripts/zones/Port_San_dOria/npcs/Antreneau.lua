@@ -13,11 +13,11 @@ end
 entity.onTrigger = function(player, npc)
     local aTasteForMeat = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.A_TASTE_FOR_MEAT)
     local medicineWoman = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_MEDICINE_WOMAN)
-    local diaryPage = player:getCharVar("DiaryPage")
+    local diaryPage = player:getCharVar('DiaryPage')
     local fameLevel = player:getFameLevel(xi.quest.fame_area.SANDORIA)
 
     if
-        player:getCharVar("Quest[0][100]Option") == 0 and
+        player:getCharVar('Quest[0][100]Option') == 0 and
         aTasteForMeat == QUEST_COMPLETED and
         fameLevel >= 8 and
         medicineWoman == QUEST_COMPLETED and

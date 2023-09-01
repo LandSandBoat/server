@@ -21,7 +21,7 @@ function Quest:new(areaId, questId)
 end
 
 function Quest.getVarPrefix(areaId, questId)
-    return string.format("Quest[%d][%d]", areaId, questId)
+    return string.format('Quest[%d][%d]', areaId, questId)
 end
 
 function Quest:getCheckArgs(player)

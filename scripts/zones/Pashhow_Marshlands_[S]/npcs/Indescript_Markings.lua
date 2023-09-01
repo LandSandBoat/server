@@ -12,8 +12,8 @@ end
 
 entity.onTrigger = function(player, npc)
     local offset                = npc:getID() - ID.npc.INDESCRIPT_MARKINGS_OFFSET
-    local pantsQuestProgress    = player:getCharVar("AF_SCH_PANTS")
-    local gownQuestProgress     = player:getCharVar("AF_SCH_BODY")
+    local pantsQuestProgress    = player:getCharVar('AF_SCH_PANTS')
+    local gownQuestProgress     = player:getCharVar('AF_SCH_BODY')
 
     -- SCH AF SIDEQUEST: PANTS
     if
@@ -23,7 +23,7 @@ entity.onTrigger = function(player, npc)
         not player:hasKeyItem(xi.ki.SLUG_MUCUS)
     then
         npcUtil.giveKeyItem(player, xi.ki.SLUG_MUCUS)
-        player:setCharVar("AF_SCH_PANTS", pantsQuestProgress + 1)
+        player:setCharVar('AF_SCH_PANTS', pantsQuestProgress + 1)
 
         local positions =
         {
@@ -49,7 +49,7 @@ entity.onTrigger = function(player, npc)
         not player:hasKeyItem(xi.ki.PEISTE_DUNG)
     then
         npcUtil.giveKeyItem(player, xi.ki.PEISTE_DUNG)
-        player:setCharVar("AF_SCH_BODY", gownQuestProgress + 1)
+        player:setCharVar('AF_SCH_BODY', gownQuestProgress + 1)
 
         local positions =
         {

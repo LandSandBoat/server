@@ -18,13 +18,13 @@ end
 
 entity.onMobFight = function(mob, target)
     -- Resets threat on every auto attack
-    mob:addListener("ATTACK", "COLLECTOR_ATTACK", function(goblin)
+    mob:addListener('ATTACK', 'COLLECTOR_ATTACK', function(goblin)
         goblin:resetEnmity(target)
     end)
 end
 
 entity.onMobDeath = function(mob, player, optParams)
-    mob:removeListener("COLLECTOR_ATTACK")
+    mob:removeListener('COLLECTOR_ATTACK')
 end
 
 return entity

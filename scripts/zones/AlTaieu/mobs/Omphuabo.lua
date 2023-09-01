@@ -2,7 +2,7 @@
 -- Area: Al'Taieu
 --  Mob: Om'phuabo
 -----------------------------------
-mixins = { require("scripts/mixins/families/phuabo") }
+mixins = { require('scripts/mixins/families/phuabo') }
 -----------------------------------
 local entity = {}
 

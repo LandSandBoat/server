@@ -6851,7 +6851,7 @@ INSERT INTO `item_basic` VALUES (9189,0,'mog_kupon_w-srw','kupon_w-srw',99,28736
 INSERT INTO `item_basic` VALUES (9190,0,'mog_kupon_w-scc','kupon_w-scc',99,28736,0,1,0);
 INSERT INTO `item_basic` VALUES (9191,0,'mog_kupon_w-asrw','kupon_w-asrw',99,28736,0,1,0);
 INSERT INTO `item_basic` VALUES (9192,0,'mog_kupon_w-ascc','kupon_w-ascc',99,28736,0,1,0);
-INSERT INTO `item_basic` VALUES (9193,0,'jar_of_miso','miso',12,4,59,0,264 );
+INSERT INTO `item_basic` VALUES (9193,0,'jar_of_miso','miso',12,4,59,0,264);
 INSERT INTO `item_basic` VALUES (9194,0,'bottle_of_soy_sauce','soy_sauce',12,4,59,0,297);
 INSERT INTO `item_basic` VALUES (9195,0,'handful_of_dried_bonito','dried_bonito',12,4,59,0,291);
 INSERT INTO `item_basic` VALUES (9196,0,'container_of_ramen_noodles','ramen_noodles',12,4,59,0,0);

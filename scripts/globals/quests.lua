@@ -1256,7 +1256,7 @@ xi.quest.id =
 }
 
 local function getVarPrefix(areaId, questId)
-    return string.format("Quest[%d][%d]", areaId, questId)
+    return string.format('Quest[%d][%d]', areaId, questId)
 end
 
 -- Interaction Framework Helper Functions
@@ -1281,9 +1281,9 @@ xi.quest.setLocalVar = function(player, areaId, questId, name, value)
 end
 
 xi.quest.getMustZone = function(player, areaId, questId)
-    return player:getLocalVar(getVarPrefix(areaId, questId) .. "mustZone") == 1 and true or false
+    return player:getLocalVar(getVarPrefix(areaId, questId) .. 'mustZone') == 1 and true or false
 end
 
 xi.quest.setMustZone = function(player, areaId, questId)
-    player:setLocalVar(getVarPrefix(areaId, questId) .. "mustZone", 1)
+    player:setLocalVar(getVarPrefix(areaId, questId) .. 'mustZone', 1)
 end

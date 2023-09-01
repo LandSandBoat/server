@@ -1,8 +1,8 @@
 -----------------------------------
 -- Enhancing Spell Utilities
 -----------------------------------
-require("scripts/globals/jobpoints")
-require("scripts/globals/utils")
+require('scripts/globals/jobpoints')
+require('scripts/globals/utils')
 -----------------------------------
 xi = xi or {}
 xi.spells = xi.spells or {}
@@ -155,6 +155,9 @@ local pTable =
     [xi.magic.spell.SHELLRA_IV   ] = { 4, xi.effect.SHELL,         68, 2617, 1800, false, false, 0 },
     [xi.magic.spell.SHELLRA_V    ] = { 5, xi.effect.SHELL,         75, 2930, 1800, false, false, 0 },
 
+    -- Stoneskin
+    [xi.magic.spell.STONESKIN    ] = { 1, xi.effect.STONESKIN,     28,    0,  300, true,  false, 0 },
+
     -- -Spikes
     [xi.magic.spell.BLAZE_SPIKES ] = { 1, xi.effect.BLAZE_SPIKES,   1,    0,  180, true,  false, 0 },
     [xi.magic.spell.ICE_SPIKES   ] = { 1, xi.effect.ICE_SPIKES,     1,    0,  180, true,  false, 0 },
@@ -182,8 +185,6 @@ xi.spells.enhancing.calculateEnhancingBasePower = function(caster, target, spell
     ------------------------------------------------------------
     -- Spell specific equations for potency. (Skill and stat)
     ------------------------------------------------------------
-
-    -- TODO: Find a way to replace big if/else chain and still make it look good.
 
     -- Aquaveil
     if spellEffect == xi.effect.AQUAVEIL then
@@ -250,6 +251,20 @@ xi.spells.enhancing.calculateEnhancingBasePower = function(caster, target, spell
         spellEffect == xi.effect.SHOCK_SPIKES
     then
         basePower = utils.clamp(math.floor(math.floor((caster:getStat(xi.mod.INT) + 50) / 20) * (1 + caster:getMod(xi.mod.MATT) / 100)), 1, 15)
+
+    -- Stoneskin
+    elseif spellEffect == xi.effect.STONESKIN then
+        local threshold = skillLevel / 3 + caster:getStat(xi.mod.MND)
+
+        if threshold < 80 then
+            basePower = threshold
+        elseif threshold <= 130 then
+            basePower = 2 * threshold - 60
+        elseif threshold > 130 then
+            basePower = 3 * threshold - 190
+        end
+
+        basePower = utils.clamp(math.floor(basePower), 1, xi.settings.main.STONESKIN_CAP)
 
     -- Temper
     elseif spellEffect == xi.effect.MULTI_STRIKES then
@@ -318,6 +333,12 @@ xi.spells.enhancing.calculateEnhancingFinalPower = function(caster, target, spel
     elseif spellEffect == xi.effect.SHELL then
         if target:getMod(xi.mod.ENHANCES_PROT_SHELL_RCVD) > 0 then
             finalPower = finalPower + (tier * 39)
+        end
+
+    -- Stoneskin
+    elseif spellEffect == xi.effect.STONESKIN then
+        if caster == target then
+            finalPower = utils.clamp(finalPower + caster:getMod(xi.mod.STONESKIN_BONUS_HP), 1, xi.settings.main.STONESKIN_CAP * 1.5)
         end
 
     -- -storm
@@ -433,9 +454,6 @@ xi.spells.enhancing.useEnhancingSpell = function(caster, target, spell)
     ------------------------------------------------------------
     -- Handle exceptions and weird behaviour here, before calculating anything.
     ------------------------------------------------------------
-
-    -- TODO: Find a way to replace big if/else chain and still make it look good.
-
     -- Bar-Element (They use addStatusEffect argument 6. Bar-Status current implementation doesn't.)
     if spellEffect >= xi.effect.BARFIRE and spellEffect <= xi.effect.BARWATER then
         magicDefenseBonus = caster:getMerit(xi.merit.BAR_SPELL_EFFECT) + caster:getMod(xi.mod.BARSPELL_MDEF_BONUS)

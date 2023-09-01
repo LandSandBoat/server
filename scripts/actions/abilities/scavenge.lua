@@ -13,7 +13,7 @@ end
 
 abilityObject.onUseAbility = function(player, target, ability, action)
     -- RNG AF2 quest check
-    local fireAndBrimstoneCS = player:getCharVar("fireAndBrimstone")
+    local fireAndBrimstoneCS = player:getCharVar('fireAndBrimstone')
     local oldEarring         = 1113 -- TODO: Use items file.
 
     if
@@ -34,7 +34,7 @@ abilityObject.onUseAbility = function(player, target, ability, action)
 
     else
         local bonuses        = (player:getMod(xi.mod.SCAVENGE_EFFECT)  + player:getMerit(xi.merit.SCAVENGE_EFFECT)) / 100
-        local arrowsToReturn = math.floor(math.floor(player:getLocalVar("ArrowsUsed")  % 10000) * (player:getMainLvl() / 200 + bonuses))
+        local arrowsToReturn = math.floor(math.floor(player:getLocalVar('ArrowsUsed')  % 10000) * (player:getMainLvl() / 200 + bonuses))
         local playerID       = target:getID()
 
         if arrowsToReturn == 0 then
@@ -44,7 +44,7 @@ abilityObject.onUseAbility = function(player, target, ability, action)
                 arrowsToReturn = 99
             end
 
-            local arrowID = math.floor(player:getLocalVar("ArrowsUsed") / 10000)
+            local arrowID = math.floor(player:getLocalVar('ArrowsUsed') / 10000)
             player:addItem(arrowID, arrowsToReturn)
 
             if arrowsToReturn == 1 then
@@ -55,7 +55,7 @@ abilityObject.onUseAbility = function(player, target, ability, action)
                 action:addEffectParam(playerID, arrowsToReturn)
             end
 
-            player:setLocalVar("ArrowsUsed", 0)
+            player:setLocalVar('ArrowsUsed', 0)
             return arrowID
         end
     end

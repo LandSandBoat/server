@@ -2,7 +2,7 @@
 -- Area: Quicksand Caves
 --   NM: Hastatus XI-XII
 -----------------------------------
-mixins = { require("scripts/mixins/job_special") }
+mixins = { require('scripts/mixins/job_special') }
 -----------------------------------
 local entity = {}
 

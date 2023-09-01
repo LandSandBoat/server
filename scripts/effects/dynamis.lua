@@ -4,12 +4,12 @@
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)
-    target:setLocalVar("dynamis_lasttimeupdate", effect:getTimeRemaining() / 1000)
+    target:setLocalVar('dynamis_lasttimeupdate', effect:getTimeRemaining() / 1000)
 end
 
 effectObject.onEffectTick = function(target, effect)
     if target:getCurrentRegion() == xi.region.DYNAMIS then
-        local lastTimeUpdate = target:getLocalVar("dynamis_lasttimeupdate")
+        local lastTimeUpdate = target:getLocalVar('dynamis_lasttimeupdate')
         local remainingTimeLimit = effect:getTimeRemaining() / 1000
         local message = 0
 
@@ -39,7 +39,7 @@ effectObject.onEffectTick = function(target, effect)
                 target:messageSpecial(zones[target:getZoneID()].text.DYNAMIS_TIME_UPDATE_2, time, minutes)
             end
 
-            target:setLocalVar("dynamis_lasttimeupdate", message)
+            target:setLocalVar('dynamis_lasttimeupdate', message)
         end
     else
         target:delStatusEffectSilent(xi.effect.DYNAMIS)

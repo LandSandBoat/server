@@ -9,7 +9,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local tuningOutProgress = player:getCharVar("TuningOut_Progress")
+    local tuningOutProgress = player:getCharVar('TuningOut_Progress')
 
     if tuningOutProgress == 2 then
         player:startEvent(295) -- Ildy meets Romaa. Romaa tells player to go to waterfall
@@ -29,9 +29,9 @@ end
 
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 295 then
-        player:setCharVar("TuningOut_Progress", 3)
+        player:setCharVar('TuningOut_Progress', 3)
     elseif csid == 297 then
-        player:setCharVar("TuningOut_Progress", 6)
+        player:setCharVar('TuningOut_Progress', 6)
     end
 end
 

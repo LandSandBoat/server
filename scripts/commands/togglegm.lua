@@ -6,7 +6,7 @@
 cmdprops =
 {
     permission = 1,
-    parameters = ""
+    parameters = ''
 }
 
 function onTrigger(player)
@@ -24,7 +24,7 @@ function onTrigger(player)
     -- Configurable Options
     local minLevels =
     {
-        GM          = 1, -- For "whitelisting" players to have some commands, but not GM tier commands.
+        GM          = 1, -- For 'whitelisting' players to have some commands, but not GM tier commands.
         GM_SENIOR   = 2, -- These are configurable so that commands may be restricted
         GM_LEAD     = 3, -- between different levels of GM's with the same icon.
         GM_PRODUCER = 4,

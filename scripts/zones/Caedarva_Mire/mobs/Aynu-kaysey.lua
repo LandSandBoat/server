@@ -2,7 +2,7 @@
 -- Area: Caedarva Mire
 --   NM: Aynu-kaysey
 -----------------------------------
-mixins = { require("scripts/mixins/families/qutrub") }
+mixins = { require('scripts/mixins/families/qutrub') }
 -----------------------------------
 local entity = {}
 

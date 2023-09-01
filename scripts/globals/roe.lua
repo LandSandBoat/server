@@ -1,58 +1,12 @@
 -----------------------------------
 -- Records of Eminence
 -----------------------------------
-require("scripts/globals/npc_util")
-require("scripts/globals/quests")
+require('scripts/globals/npc_util')
+require('scripts/globals/quests')
+require('scripts/globals/roe_records')
 -----------------------------------
 xi = xi or {}
 xi.roe = xi.roe or {}
-
------------------------------------
--- Leaders
------------------------------------
-xi.roe.leaders =
-{
-    NONE              = 0,
-    PIEUJE            = 1,
-    AYAME             = 2,
-    INVINCIBLE_SHIELD = 3,
-    APURURU           = 4,
-    MAAT              = 5,
-    ALDO              = 6,
-    JAKOH_WAHCONDALO  = 7,
-    NAJA_SALAHEEM     = 8,
-    FLAVIRIA          = 9,
-    YORAN_ORAN        = 10,
-    SYLVIE            = 11,
-}
-
------------------------------------
--- Triggers
------------------------------------
-
-xi.roe.triggers =
-{
-    mobKill = 1,            -- Player kills a Mob (Counts for mobs killed by partymembers)
-    wSkillUse = 2,          -- Player Weapon skill used
-    itemLooted = 3,         -- Player successfully loots an item
-    synthSuccess = 4,       -- Player synth success
-    dmgTaken = 5,           -- Player takes Damage
-    dmgDealt = 6,           -- Player deals Damage
-    expGain = 7,            -- Player gains EXP
-    healAlly = 8,           -- Player heals self/ally with spell
-    buffAlly = 9,           -- Player buffs ally
-    levelUp = 10,           -- Player levelup
-    questComplete = 11,     -- Player completes quest
-    missionComplete = 12,   -- Player completes mission
-    helmSuccess = 13,       -- Player has a successful harvesting event
-    chocoboDigSuccess = 14, -- Player successfully chocobo digs
-    unityChat = 15,         -- Player uses Unity Chat
-    magicBurst = 16,        -- Player performs a Magic Burst
-    healUnityAlly = 17,     -- Player heals someone in their party/alliance with the same Unity
-    talkToRoeNpc = 18,      -- Player talk to RoE
-}
-
-local triggers = xi.roe.triggers
 
 -----------------------------------
 -- Checks
@@ -162,13 +116,6 @@ local timedSchedule =
     {  4019,  4008,  4021,  4010,  4016,  4012 }, -- Friday
     {  4020,  4009,  4015,  4011,  4017,  4014 }, -- Saturday
 }
--- Load timetable for timed records
-if xi.settings.main.ENABLE_ROE and xi.settings.main.ENABLE_ROE_TIMED > 0 then
-    RoeParseTimed(timedSchedule)
-end
-
-dofile("scripts/globals/roe_records.lua")
-local records = getRoeRecords(triggers)
 
 local defaults =
 {
@@ -177,26 +124,40 @@ local defaults =
     notify = 1,                 -- Progress notifications shown every X increases
     goal = 1,                   -- Progress goal
     flags = {},                 -- Special flags. This should be a set. Possible values:
-                                --        "timed"  - 4-hour record.
-                                --        "repeat" - Repeatable record.
-                                --        "daily"  - Daily record.
-                                --        "weekly" - Weekly record.
-                                --        "unity"  - Weekly reset, but doesn't reset progress, only completion.
-                                --        "retro"  - Can be claimed retroactively. Calls check on taking record.
-                                --        "hidden" - Special internal-use record used only as a client-flag to unlock others.
+                                --        'timed'  - 4-hour record.
+                                --        'repeat' - Repeatable record.
+                                --        'daily'  - Daily record.
+                                --        'weekly' - Weekly record.
+                                --        'unity'  - Weekly reset, but doesn't reset progress, only completion.
+                                --        'retro'  - Can be claimed retroactively. Calls check on taking record.
+                                --        'hidden' - Special internal-use record used only as a client-flag to unlock others.
                                 --                   Does not count towards completed record count.
     reqs = {},                  -- Other requirements. List of function names from above, with required values.
     reward = {},                -- Reward parameters give on completion. (See completeRecord directly below.)
 }
 
--- Apply defaults for records
-for _, v in pairs(records) do
-    setmetatable(v, { __index = defaults })
+xi.roe.initialize = function()
+    -- Apply defaults for records.  Since this table may already exist in the global state,
+    -- check for missing entries first.
+    for recordId, _ in pairs(xi.roe.records) do
+        for defaultKey, defaultValue in pairs(defaults) do
+            if not xi.roe.records[recordId][defaultKey] then
+                xi.roe.records[recordId][defaultKey] = defaultValue
+            end
+        end
+    end
+
+    -- Build global map of implemented records.
+    -- This is used to deny taking records which aren't implemented in the above table.
+    RoeParseRecords(xi.roe.records)
+
+    -- Load timetable for timed records
+    if xi.settings.main.ENABLE_ROE and xi.settings.main.ENABLE_ROE_TIMED > 0 then
+        RoeParseTimed(timedSchedule)
+    end
 end
 
--- Build global map of implemented records.
--- This is used to deny taking records which aren't implemented in the above table.
-RoeParseRecords(records)
+xi.roe.initialize()
 
 --[[ --------------------------------------------------------------------------
     Complete a record of eminence. This is for internal roe use only.
@@ -217,12 +178,12 @@ RoeParseRecords(records)
     })
 --------------------------------------------------------------------------- --]]
 local function completeRecord(player, record)
-    local recordEntry = records[record]
+    local recordEntry = xi.roe.records[record]
     local recordFlags = recordEntry.flags
     local rewards = recordEntry.reward
 
-    if not player:getEminenceCompleted(record) and rewards["item"] then
-        if not npcUtil.giveItem(player, rewards["item"]) then
+    if not player:getEminenceCompleted(record) and rewards['item'] then
+        if not npcUtil.giveItem(player, rewards['item']) then
             player:messageBasic(xi.msg.basic.ROE_UNABLE_BONUS_ITEM)
             return false
         end
@@ -230,20 +191,20 @@ local function completeRecord(player, record)
 
     player:messageBasic(xi.msg.basic.ROE_COMPLETE, record)
 
-    if rewards["sparks"] ~= nil and type(rewards["sparks"]) == "number" then
+    if rewards['sparks'] ~= nil and type(rewards['sparks']) == 'number' then
         local bonus = 1
         if player:getEminenceCompleted(record) then
-            player:addCurrency('spark_of_eminence', rewards["sparks"] * bonus * xi.settings.main.SPARKS_RATE, xi.settings.main.CAP_CURRENCY_SPARKS)
-            player:messageBasic(xi.msg.basic.ROE_RECEIVE_SPARKS, rewards["sparks"] * xi.settings.main.SPARKS_RATE, player:getCurrency("spark_of_eminence"))
+            player:addCurrency('spark_of_eminence', rewards['sparks'] * bonus * xi.settings.main.SPARKS_RATE, xi.settings.main.CAP_CURRENCY_SPARKS)
+            player:messageBasic(xi.msg.basic.ROE_RECEIVE_SPARKS, rewards['sparks'] * xi.settings.main.SPARKS_RATE, player:getCurrency('spark_of_eminence'))
         else
             bonus = 3
-            player:addCurrency('spark_of_eminence', rewards["sparks"] * bonus * xi.settings.main.SPARKS_RATE, xi.settings.main.CAP_CURRENCY_SPARKS)
-            player:messageBasic(xi.msg.basic.ROE_FIRST_TIME_SPARKS, rewards["sparks"] * bonus * xi.settings.main.SPARKS_RATE, player:getCurrency("spark_of_eminence"))
+            player:addCurrency('spark_of_eminence', rewards['sparks'] * bonus * xi.settings.main.SPARKS_RATE, xi.settings.main.CAP_CURRENCY_SPARKS)
+            player:messageBasic(xi.msg.basic.ROE_FIRST_TIME_SPARKS, rewards['sparks'] * bonus * xi.settings.main.SPARKS_RATE, player:getCurrency('spark_of_eminence'))
         end
     end
 
-    if recordFlags["repeat"] then
-        if recordFlags["timed"] then
+    if recordFlags['repeat'] then
+        if recordFlags['timed'] then
             player:messageBasic(xi.msg.basic.ROE_TIMED_CLEAR)
         else
             player:messageBasic(xi.msg.basic.ROE_REPEAT_OR_CANCEL)
@@ -254,31 +215,31 @@ local function completeRecord(player, record)
         player:setEminenceCompleted(record)
     end
 
-    if rewards["xp"] ~= nil and type(rewards["xp"]) == "number" then
-        player:addExp(rewards["xp"] * xi.settings.main.ROE_EXP_RATE)
+    if rewards['xp'] ~= nil and type(rewards['xp']) == 'number' then
+        player:addExp(rewards['xp'] * xi.settings.main.ROE_EXP_RATE)
     end
 
-    if rewards["capacity"] ~= nil and type(rewards["capacity"]) == "number" then
-        player:addCapacityPoints(rewards["capacity"])
+    if rewards['capacity'] ~= nil and type(rewards['capacity']) == 'number' then
+        player:addCapacityPoints(rewards['capacity'])
     end
 
     if
         player:getUnityLeader() > 0 and
-        rewards["accolades"] ~= nil and
-        type(rewards["accolades"]) == "number"
+        rewards['accolades'] ~= nil and
+        type(rewards['accolades']) == 'number'
     then
         local bonusAccoladeRate = 1.0
         if record ~= 5 then -- Do not grant a bonus for All for One
             bonusAccoladeRate = bonusAccoladeRate + ((player:getUnityRank() - 1) * 0.05)
         end
 
-        local accoladePayout = math.floor(rewards["accolades"] * bonusAccoladeRate)
-        player:addCurrency("unity_accolades", accoladePayout, xi.settings.main.CAP_CURRENCY_ACCOLADES)
-        player:messageBasic(xi.msg.basic.ROE_RECEIVED_ACCOLADES, accoladePayout, player:getCurrency("unity_accolades"))
+        local accoladePayout = math.floor(rewards['accolades'] * bonusAccoladeRate)
+        player:addCurrency('unity_accolades', accoladePayout, xi.settings.main.CAP_CURRENCY_ACCOLADES)
+        player:messageBasic(xi.msg.basic.ROE_RECEIVED_ACCOLADES, accoladePayout, player:getCurrency('unity_accolades'))
     end
 
-    if rewards["keyItem"] ~= nil then
-        npcUtil.giveKeyItem(player, rewards["keyItem"])
+    if rewards['keyItem'] ~= nil then
+        npcUtil.giveKeyItem(player, rewards['keyItem'])
     end
 
     -- Workaround for Hidden Record #4085 (10 RoE Objectives Completed)
@@ -300,7 +261,7 @@ function xi.roe.onRecordTrigger(player, recordID, params)
     params = params or {}
     params.progress = params.progress or player:getEminenceProgress(recordID)
 
-    local entry = records[recordID]
+    local entry = xi.roe.records[recordID]
     local isClaiming = params.claim
 
     if entry and params.progress then

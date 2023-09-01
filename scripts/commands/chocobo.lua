@@ -12,7 +12,7 @@
 cmdprops =
 {
     permission = 1,
-    parameters = "ssss"
+    parameters = 'ssss'
 }
 
 local chocobo = {}

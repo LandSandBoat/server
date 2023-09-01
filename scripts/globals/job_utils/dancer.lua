@@ -194,7 +194,7 @@ xi.job_utils.dancer.checkWaltzAbility = function(player, target, ability)
             newRecast = newRecast + recastMod
         end
 
-        -- Apply "Fan Dance" Waltz recast reduction.  All tiers above 1 grant 5%
+        -- Apply 'Fan Dance' Waltz recast reduction.  All tiers above 1 grant 5%
         -- recast reduction each.
         local fanDanceMeritValue = player:getMerit(xi.merit.FAN_DANCE) -- Get's merit number * merit value (5 in db).
 
@@ -268,9 +268,9 @@ xi.job_utils.dancer.useStepAbility = function(player, target, ability, action, s
         -- embedding a weapon type to the trust object?
 
         local name = string.lower(player:getName())
-        if name == "uka_totlihn" or name == "mumor" or name == "mumor_ii" then
+        if name == 'uka_totlihn' or name == 'mumor' or name == 'mumor_ii' then
             action:setAnimation(target:getID(), getStepAnimation(xi.skill.CLUB))
-        elseif name == "mayakov" then
+        elseif name == 'mayakov' then
             action:setAnimation(target:getID(), getStepAnimation(xi.skill.SWORD))
         end
     end

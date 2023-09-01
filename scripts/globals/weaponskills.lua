@@ -10,11 +10,11 @@
 -- applications of damage mods ('Damage varies with TP.')
 -- performance of the actual WS (rand numbers, etc)
 -----------------------------------
-require("scripts/globals/magicburst")
-require("scripts/globals/magiantrials")
-require("scripts/globals/ability")
-require("scripts/globals/magic")
-require("scripts/globals/utils")
+require('scripts/globals/magicburst')
+require('scripts/globals/magiantrials')
+require('scripts/globals/ability')
+require('scripts/globals/magic')
+require('scripts/globals/utils')
 -----------------------------------
 xi = xi or {}
 xi.weaponskills = xi.weaponskills or {}
@@ -820,7 +820,7 @@ xi.weaponskills.doRangedWeaponskill = function(attacker, target, wsID, wsParams,
 end
 
 -- params: ftp100, ftp200, ftp300, wsc_str, wsc_dex, wsc_vit, wsc_agi, wsc_int, wsc_mnd, wsc_chr,
---         ele (xi.magic.ele.FIRE), skill (xi.skill.STAFF)
+--         ele (xi.element.FIRE), skill (xi.skill.STAFF)
 
 xi.weaponskills.doMagicWeaponskill = function(attacker, target, wsID, wsParams, tp, action, primaryMsg)
     -- Set up conditions and wsParams used for calculating weaponskill damage
@@ -990,7 +990,7 @@ xi.weaponskills.takeWeaponskillDamage = function(defender, attacker, wsParams, p
     xi.magian.checkMagianTrial(attacker, { ['mob'] = defender, ['triggerWs'] = true,  ['wSkillId'] = wsResults.wsID })
 
     if finaldmg > 0 then
-        defender:setLocalVar("weaponskillHit", 1)
+        defender:setLocalVar('weaponskillHit', 1)
     end
 
     return finaldmg
@@ -1096,7 +1096,7 @@ xi.weaponskills.fTP = function(tp, ftp1, ftp2, ftp3)
         -- generate a straight line between ftp2 and ftp3 and find point @ tp
         return ftp2 + (((ftp3 - ftp2) / 1000) * (tp - 2000))
     else
-        print("fTP error: TP value is not between 1000-3000!")
+        print('fTP error: TP value is not between 1000-3000!')
     end
 
     return 1 -- no ftp mod
@@ -1141,10 +1141,8 @@ xi.weaponskills.cMeleeRatio = function(attacker, defender, params, ignoredDef, t
         cratio = 0
     end
 
-    local pdifmin = 0
-    local pdifmax = 0
-
     -- max
+    local pdifmax = 3
     if cratio < 0.5 then
         pdifmax = cratio + 0.5
     elseif cratio < 0.7 then
@@ -1155,11 +1153,10 @@ xi.weaponskills.cMeleeRatio = function(attacker, defender, params, ignoredDef, t
         pdifmax = cratio * 0.25 + cratio
     elseif cratio < 2.625 then
         pdifmax = cratio + 0.375
-    else
-        pdifmax = 3
     end
 
     -- min
+    local pdifmin = cratio - 0.375
     if cratio < 0.38 then
         pdifmin = 0
     elseif cratio < 1.25 then
@@ -1168,8 +1165,6 @@ xi.weaponskills.cMeleeRatio = function(attacker, defender, params, ignoredDef, t
         pdifmin = 1
     elseif cratio < 2.44 then
         pdifmin = cratio * 1176 / 1024 - 775 / 1024
-    else
-        pdifmin = cratio - 0.375
     end
 
     local pdif = {}

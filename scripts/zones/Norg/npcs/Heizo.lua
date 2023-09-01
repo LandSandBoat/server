@@ -11,7 +11,7 @@ local entity = {}
 entity.onTrade = function(player, npc, trade)
     local shiningLeggings = player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.LIKE_A_SHINING_LEGGINGS)
     local legging = trade:getItemQty(xi.item.RUSTY_LEGGINGS)
-    local turnedInVar = player:getCharVar("shiningLeggings_nb")
+    local turnedInVar = player:getCharVar('shiningLeggings_nb')
     local totalLeggings = legging + turnedInVar
 
     if legging > 0 and legging == trade:getItemCount() then
@@ -19,7 +19,7 @@ entity.onTrade = function(player, npc, trade)
             player:startEvent(129)
         elseif shiningLeggings == QUEST_ACCEPTED and turnedInVar <= 9 then -- turning in less than the amount needed to finish the quest
             player:tradeComplete()
-            player:setCharVar("shiningLeggings_nb", totalLeggings)
+            player:setCharVar('shiningLeggings_nb', totalLeggings)
             player:startEvent(128, totalLeggings) -- Update player on number of leggings turned in
         end
     else
@@ -40,7 +40,7 @@ entity.onTrigger = function(player, npc)
     then
         player:startEvent(127) -- Start Like Shining Leggings
     elseif shiningLeggings == QUEST_ACCEPTED then
-        player:startEvent(128, player:getCharVar("shiningSubligar_nb")) -- Update player on number of Leggings turned in
+        player:startEvent(128, player:getCharVar('shiningSubligar_nb')) -- Update player on number of Leggings turned in
     else
         player:startEvent(126) -- Standard Conversation
     end
@@ -58,7 +58,7 @@ entity.onEventFinish = function(player, csid, option, npc)
         player:messageSpecial(ID.text.ITEM_OBTAINED, xi.item.SCROLL_OF_DOKUMORI_ICHI)
         player:addFame(xi.quest.fame_area.NORG, 100)
         player:addTitle(xi.title.LOOKS_GOOD_IN_LEGGINGS)
-        player:setCharVar("shiningLeggings_nb", 0)
+        player:setCharVar('shiningLeggings_nb', 0)
         player:completeQuest(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.LIKE_A_SHINING_LEGGINGS)
     end
 end

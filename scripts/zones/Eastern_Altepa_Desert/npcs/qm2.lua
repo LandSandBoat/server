@@ -12,8 +12,8 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local twentyInPirateYearsCS = player:getCharVar("twentyInPirateYearsCS")
-    local tsuchigumoKilled = player:getCharVar("TsuchigumoKilled")
+    local twentyInPirateYearsCS = player:getCharVar('twentyInPirateYearsCS')
+    local tsuchigumoKilled = player:getCharVar('TsuchigumoKilled')
 
     if
         twentyInPirateYearsCS == 3 and
@@ -27,10 +27,8 @@ entity.onTrigger = function(player, npc)
     elseif twentyInPirateYearsCS == 3 and tsuchigumoKilled >= 2 then
         player:addKeyItem(xi.ki.TRICK_BOX)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.TRICK_BOX)
-        player:setCharVar("twentyInPirateYearsCS", 4)
-        player:setCharVar("TsuchigumoKilled", 0)
-    else
-        player:messageSpecial(ID.text.NOTHING_OUT_OF_ORDINARY)
+        player:setCharVar('twentyInPirateYearsCS', 4)
+        player:setCharVar('TsuchigumoKilled', 0)
     end
 end
 

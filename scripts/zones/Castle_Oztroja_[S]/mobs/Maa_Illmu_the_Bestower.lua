@@ -6,7 +6,7 @@
 --  Immune to spell interruption from melee attacks. Only stuns and silence will interrupt it.
 --  Will not use TP moves unless silenced - when Silence is inflicted it will immediately use Shirahadori if it has TP.
 -----------------------------------
-mixins = { require("scripts/mixins/job_special") }
+mixins = { require('scripts/mixins/job_special') }
 -----------------------------------
 local entity = {}
 

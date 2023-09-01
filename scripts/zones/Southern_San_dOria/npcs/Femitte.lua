@@ -12,9 +12,9 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local distantLoyaltiesProgress = player:getCharVar("DistantLoyaltiesProgress")
+    local distantLoyaltiesProgress = player:getCharVar('DistantLoyaltiesProgress')
     local distantLoyalties = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.DISTANT_LOYALTIES)
-    local wildcatSandy = player:getCharVar("WildcatSandy")
+    local wildcatSandy = player:getCharVar('WildcatSandy')
 
     if
         player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and
@@ -44,12 +44,12 @@ end
 
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 807 then
-        player:setCharVar("WildcatSandy", utils.mask.setBit(player:getCharVar("WildcatSandy"), 3, true))
+        player:setCharVar('WildcatSandy', utils.mask.setBit(player:getCharVar('WildcatSandy'), 3, true))
     elseif csid == 663 and option == 0 then
         player:addKeyItem(xi.ki.GOLDSMITHING_ORDER)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.GOLDSMITHING_ORDER)
         player:addQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.DISTANT_LOYALTIES)
-        player:setCharVar("DistantLoyaltiesProgress", 1)
+        player:setCharVar('DistantLoyaltiesProgress', 1)
     elseif csid == 665 then
         if player:getFreeSlotsCount() == 0 then
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.item.WHITE_CAPE)
@@ -57,7 +57,7 @@ entity.onEventFinish = function(player, csid, option, npc)
             player:delKeyItem(xi.ki.MYTHRIL_HEARTS)
             player:addItem(xi.item.WHITE_CAPE, 1)
             player:messageSpecial(ID.text.ITEM_OBTAINED, xi.item.WHITE_CAPE)
-            player:setCharVar("DistantLoyaltiesProgress", 0)
+            player:setCharVar('DistantLoyaltiesProgress', 0)
             player:completeQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.DISTANT_LOYALTIES)
         end
     end

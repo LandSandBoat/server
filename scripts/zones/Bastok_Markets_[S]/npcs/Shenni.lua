@@ -7,7 +7,7 @@
 local entity = {}
 
 entity.onTrigger = function(player, npc)
-    local notes = player:getCurrency("allied_notes")
+    local notes = player:getCurrency('allied_notes')
 
     xi.extravaganza.shadowEraTrigger(player, npc, notes)
 end

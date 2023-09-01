@@ -4,12 +4,12 @@
 local attachmentObject = {}
 
 attachmentObject.onEquip = function(pet)
-    pet:addListener("AUTOMATON_ATTACHMENT_CHECK", "ATTACHMENT_DISRUPTOR", function(automaton, target)
+    pet:addListener('AUTOMATON_ATTACHMENT_CHECK', 'ATTACHMENT_DISRUPTOR', function(automaton, target)
         local master = automaton:getMaster()
         if
             master and
             master:countEffect(xi.effect.DARK_MANEUVER) > 0 and
-            automaton:getLocalVar("dispel") < VanadielTime() and
+            automaton:getLocalVar('dispel') < VanadielTime() and
             target:hasStatusEffectByFlag(xi.effectFlag.DISPELABLE) and
             (automaton:checkDistance(target) - target:getModelSize()) < 7
         then

@@ -46,12 +46,12 @@ spellObject.onMobSpawn = function(mob)
     mob:setAutoAttackEnabled(false)
 
     -- No TP for Monberaux
-    mob:addListener("COMBAT_TICK", "MONBERAUX_CTICK", function(mobArg)
+    mob:addListener('COMBAT_TICK', 'MONBERAUX_CTICK', function(mobArg)
         mobArg:setTP(0)
     end)
 
     -- This listener is needed for Monberaux to display the correct skill name in the combat log.
-    mob:addListener("WEAPONSKILL_USE", "MONBERAUX_WS", function(mobArg, targetArg, skillid, spentTP, action)
+    mob:addListener('WEAPONSKILL_USE', 'MONBERAUX_WS', function(mobArg, targetArg, skillid, spentTP, action)
         action:setCategory(xi.action.MOBABILITY_FINISH)
     end)
 

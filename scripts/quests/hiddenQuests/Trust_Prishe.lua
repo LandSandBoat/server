@@ -6,7 +6,7 @@
 local tavnaziaID = zones[xi.zone.TAVNAZIAN_SAFEHOLD]
 -----------------------------------
 
-local quest = HiddenQuest:new("TrustPrishe")
+local quest = HiddenQuest:new('TrustPrishe')
 
 local trustMemory = function(player)
     local memories = 0
@@ -52,7 +52,7 @@ quest.sections =
                 not player:hasSpell(xi.magic.spell.PRISHE) and
                 -- On Dawn, but past "the boss"
                 (player:getCurrentMission(xi.mission.log_id.COP) > xi.mission.id.cop.DAWN and
-                player:getCharVar("PromathiaStatus") == 3)
+                player:getCharVar('PromathiaStatus') == 3)
                 -- TODO: Additional conditions
         end,
 

@@ -2,7 +2,7 @@
 -- Area: Castle Zvahl Keep [S]
 --  Mob: Keep Imp
 -----------------------------------
-mixins = { require("scripts/mixins/families/imp") }
+mixins = { require('scripts/mixins/families/imp') }
 -----------------------------------
 local entity = {}
 

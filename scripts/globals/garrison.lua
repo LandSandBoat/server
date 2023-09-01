@@ -101,8 +101,8 @@ xi.garrison.data =
         itemReq = xi.item.RED_CRYPTEX,
         textRegion = 0,
         levelCap = 20,
-        mobBoss = "Orcish_Fighterchief",
-        allies = { "Trader", "Patrician", "Scholar" },
+        mobBoss = 'Orcish_Fighterchief',
+        allies = { 'Trader', 'Patrician', 'Scholar' },
         xPos = -436,
         yPos = -20,
         zPos = -217,
@@ -119,8 +119,8 @@ xi.garrison.data =
         itemReq = xi.item.DARKSTEEL_ENGRAVING,
         textRegion = 1,
         levelCap = 20,
-        mobBoss = "Lead_Quadav",
-        allies = { "Trader", "Patrician", "Scholar" },
+        mobBoss = 'Lead_Quadav',
+        allies = { 'Trader', 'Patrician', 'Scholar' },
         xPos = -580, -- TODO: Needs adjusting
         yPos = 40,
         zPos = 69,
@@ -137,8 +137,8 @@ xi.garrison.data =
         itemReq = xi.item.SEVEN_KNOT_QUIPU,
         textRegion = 2,
         levelCap = 20,
-        mobBoss = "Yagudo_Condottiere",
-        allies = { "Trader", "Patrician", "Scholar" },
+        mobBoss = 'Yagudo_Condottiere',
+        allies = { 'Trader', 'Patrician', 'Scholar' },
         xPos = -20, -- TODO: Needs adjusting
         yPos = -12,
         zPos = 325,
@@ -155,8 +155,8 @@ xi.garrison.data =
         itemReq = xi.item.GALKA_FANG_SACK,
         textRegion = 3,
         levelCap = 30,
-        mobBoss = "Goblin_Swindler",
-        allies = { "Trader", "Patrician", "Scholar" },
+        mobBoss = 'Goblin_Swindler',
+        allies = { 'Trader', 'Patrician', 'Scholar' },
         xPos = 141, -- TODO: Needs adjusting
         yPos = -8,
         zPos = 87,
@@ -173,8 +173,8 @@ xi.garrison.data =
         itemReq = xi.item.JADE_CRYPTEX,
         textRegion = 4,
         levelCap = 30,
-        mobBoss = "Orcish_Colonel",
-        allies = { "Trader", "Patrician", "Scholar" },
+        mobBoss = 'Orcish_Colonel',
+        allies = { 'Trader', 'Patrician', 'Scholar' },
         xPos = 54, -- TODO: Needs adjusting
         yPos = 1,
         zPos = -1,
@@ -191,8 +191,8 @@ xi.garrison.data =
         itemReq = xi.item.SILVER_ENGRAVING,
         textRegion = 5,
         levelCap = 30,
-        mobBoss = "Cobalt_Quadav",
-        allies = { "Trader", "Patrician", "Scholar" },
+        mobBoss = 'Cobalt_Quadav',
+        allies = { 'Trader', 'Patrician', 'Scholar' },
         xPos = 458, -- TODO: Needs adjusting
         yPos = 24,
         zPos = 421,
@@ -209,8 +209,8 @@ xi.garrison.data =
         itemReq = xi.item.MITHRA_FANG_SACK,
         textRegion = 6,
         levelCap = 30,
-        mobBoss = "Goblin_Guide",
-        allies = { "Trader", "Patrician", "Scholar" },
+        mobBoss = 'Goblin_Guide',
+        allies = { 'Trader', 'Patrician', 'Scholar' },
         xPos = -485, -- TODO: Needs adjusting
         yPos = -29,
         zPos = 58,
@@ -227,8 +227,8 @@ xi.garrison.data =
         itemReq = xi.item.THIRTEEN_KNOT_QUIPU,
         textRegion = 7,
         levelCap = 30,
-        mobBoss = "Yagudo_Missionary",
-        allies = { "Trader", "Patrician", "Scholar" },
+        mobBoss = 'Yagudo_Missionary',
+        allies = { 'Trader', 'Patrician', 'Scholar' },
         xPos = -299, -- TODO: Needs adjusting
         yPos = 17,
         zPos = 411,
@@ -245,8 +245,8 @@ xi.garrison.data =
         itemReq = xi.item.RAM_LEATHER_MISSIVE,
         textRegion = 10,
         levelCap = 30,
-        mobBoss = "Hunting_Chief",
-        allies = { "Trader", "Patrician", "Scholar" },
+        mobBoss = 'Hunting_Chief',
+        allies = { 'Trader', 'Patrician', 'Scholar' },
         xPos = -247, -- TODO: Needs adjusting
         yPos = -19,
         zPos = 310,
@@ -263,8 +263,8 @@ xi.garrison.data =
         itemReq = xi.item.TIGER_LEATHER_MISSIVE,
         textRegion = 8,
         levelCap = 40,
-        mobBoss = "Gigas_Overseer",
-        allies = { "Trader", "Patrician", "Scholar" },
+        mobBoss = 'Gigas_Overseer',
+        allies = { 'Trader', 'Patrician', 'Scholar' },
         xPos = -25, -- TODO: Needs adjusting
         yPos = -60,
         zPos = -110,
@@ -281,8 +281,8 @@ xi.garrison.data =
         itemReq = xi.item.HOUND_FANG_SACK,
         textRegion = 11,
         levelCap = 40,
-        mobBoss = "Goblin_Doyen",
-        allies = { "Trader", "Patrician", "Scholar" },
+        mobBoss = 'Goblin_Doyen',
+        allies = { 'Trader', 'Patrician', 'Scholar' },
         xPos = -43,
         yPos = 1,
         zPos = -140,
@@ -299,8 +299,8 @@ xi.garrison.data =
         itemReq = xi.item.SHEEP_LEATHER_MISSIVE,
         textRegion = 14,
         levelCap = 40,
-        mobBoss = "Sahagin_Patriarch",
-        allies = { "Trader", "Patrician", "Scholar" },
+        mobBoss = 'Sahagin_Patriarch',
+        allies = { 'Trader', 'Patrician', 'Scholar' },
         xPos = -248,
         yPos = 1,
         zPos = -392,
@@ -317,8 +317,8 @@ xi.garrison.data =
         itemReq = xi.item.BEHEMOTH_LEATHER_MISSIVE,
         textRegion = 9,
         levelCap = 50,
-        mobBoss = "Demon_Aristocrat",
-        allies = { "Trader", "Patrician", "Scholar" },
+        mobBoss = 'Demon_Aristocrat',
+        allies = { 'Trader', 'Patrician', 'Scholar' },
         xPos = 216, -- TODO: Needs adjusting
         yPos = -22,
         zPos = -208,
@@ -335,8 +335,8 @@ xi.garrison.data =
         itemReq = xi.item.DHALMEL_LEATHER_MISSIVE,
         textRegion = 12,
         levelCap = 50,
-        mobBoss = "Centurio_XIII-V",
-        allies = { "Trader", "Patrician", "Scholar" },
+        mobBoss = 'Centurio_XIII-V',
+        allies = { 'Trader', 'Patrician', 'Scholar' },
         xPos = -245,
         yPos = -9,
         zPos = -249,
@@ -353,8 +353,8 @@ xi.garrison.data =
         itemReq = xi.item.COEURL_LEATHER_MISSIVE,
         textRegion = 15,
         levelCap = 50,
-        mobBoss = "Tonberry_Decimator",
-        allies = { "Trader", "Patrician", "Scholar" },
+        mobBoss = 'Tonberry_Decimator',
+        allies = { 'Trader', 'Patrician', 'Scholar' },
         xPos = 214,
         yPos = 1,
         zPos = -80,
@@ -371,8 +371,8 @@ xi.garrison.data =
         itemReq = xi.item.BUNNY_FANG_SACK,
         textRegion = 13,
         levelCap = 99,
-        mobBoss = "Goblin_Boss",
-        allies = { "Trader", "Patrician", "Scholar" },
+        mobBoss = 'Goblin_Boss',
+        allies = { 'Trader', 'Patrician', 'Scholar' },
         xPos = -174,
         yPos = 8,
         zPos = -61,
@@ -388,29 +388,29 @@ xi.garrison.data =
 
 local allyLooks =
 {
-    ["Patrician"] = -- Gustaberg Sandoria
+    ['Patrician'] = -- Gustaberg Sandoria
     {
-        "0x01000C030010262000303A403A5008611B700000",
+        '0x01000C030010262000303A403A5008611B700000',
     },
-    ["Trader"] = -- Dunes Sandoria
+    ['Trader'] = -- Dunes Sandoria
     {
-        "0x010009040010762076303A400650736000700000",
-        "0x010006030010762076303A400650736000700000",
+        '0x010009040010762076303A400650736000700000',
+        '0x010006030010762076303A400650736000700000',
     },
-    ["Recruit"] = -- Gustaberg Bastok
+    ['Recruit'] = -- Gustaberg Bastok
     {
-        "0x01000701361005206630664066500C6129700000",
+        '0x01000701361005206630664066500C6129700000',
     },
-    ["Candidate"] = -- West Saru Windurst
+    ['Candidate'] = -- West Saru Windurst
     {
-        "0x010007070110322032300E401550AC6000700000",
-        "0x01000E0718101820183015401850B76024700000",
+        '0x010007070110322032300E401550AC6000700000',
+        '0x01000E0718101820183015401850B76024700000',
     },
-    ["Scholar"] = -- Dunes Windurst
+    ['Scholar'] = -- Dunes Windurst
     {
-        "0x01000B051C1073201430144014506C6000700000",
-        "0x0100010777106920693066406950B46000700000",
-        "0x010000067D107820033066406850E96000700000",
+        '0x01000B051C1073201430144014506C6000700000',
+        '0x0100010777106920693066406950B46000700000',
+        '0x010000067D107820033066406850E96000700000',
     },
 }
 
@@ -522,7 +522,7 @@ xi.garrison.tick = function(npc)
     switch (zoneData.state) : caseof
     {
         [xi.garrison.state.INACTIVE] = function()
-            -- print("State: Inactive")
+            -- print('State: Inactive')
             local time = os.time()
             if time > zoneData.stateTime + 2 then
                 zoneData.stateTime = time
@@ -531,7 +531,7 @@ xi.garrison.tick = function(npc)
         end,
 
         [xi.garrison.state.SPAWN_NPCS] = function()
-            -- print("State: Spawn NPCs")
+            -- print('State: Spawn NPCs')
             spawnNPCs(npc)
 
             zoneData.stateTime = os.time()
@@ -539,7 +539,7 @@ xi.garrison.tick = function(npc)
         end,
 
         [xi.garrison.state.WAITING] = function()
-            -- print("State: Waiting")
+            -- print('State: Waiting')
 
             local time = os.time()
             if time > zoneData.stateTime + 2 then
@@ -549,7 +549,7 @@ xi.garrison.tick = function(npc)
         end,
 
         [xi.garrison.state.SPAWN_MOBS] = function()
-            -- print("State: Spawn Mobs")
+            -- print('State: Spawn Mobs')
             -- TODO: There is a delay before the mobs spawn
             -- There are always 8 mobs + 1 boss for Garrison, so we will look up the
             -- boss's ID using their name and then subtract 8 to get the starting mob ID.
@@ -568,7 +568,7 @@ xi.garrison.tick = function(npc)
         end,
 
         [xi.garrison.state.ACTIVE] = function()
-            -- print("State: Active")
+            -- print('State: Active')
             local allNPCsDead = true
             for _, entityId in pairs(zoneData.npcs) do
                 -- TODO: Don't use GetMobByID here
@@ -622,7 +622,7 @@ xi.garrison.tick = function(npc)
         end,
 
         [xi.garrison.state.ENDED] = function()
-            -- print("State: Ended")
+            -- print('State: Ended')
             zoneData.continue = false
         end,
     }
@@ -672,7 +672,7 @@ xi.garrison.onTrade = function(player, npc, trade, guardNation)
 
         -- Start CS
         player:startEvent(32753 + player:getNation())
-        player:setLocalVar("GARRISON_NPC", npc:getID())
+        player:setLocalVar('GARRISON_NPC', npc:getID())
         return true
     end
 
@@ -694,7 +694,7 @@ xi.garrison.onEventFinish = function(player, csid, option, guardNation, guardTyp
 
     if csid == 32753 + player:getNation() and option == 0 then
         player:confirmTrade()
-        local npc = GetNPCByID(player:getLocalVar("GARRISON_NPC"))
+        local npc = GetNPCByID(player:getLocalVar('GARRISON_NPC'))
         xi.garrison.start(player, npc)
         return true
     end

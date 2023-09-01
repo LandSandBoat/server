@@ -23,7 +23,7 @@ end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local _, dmg = utils.randomEntry({ 111, 222, 333, 444, 555, 666, 777, 888, 999, 1111 })
-    mob:setLocalVar("MERCURIAL_STRIKE_DAMAGE", dmg)
+    mob:setLocalVar('MERCURIAL_STRIKE_DAMAGE', dmg)
     target:takeDamage(dmg, mob, xi.attackType.PHYSICAL, xi.damageType.BLUNT)
     return dmg
 end

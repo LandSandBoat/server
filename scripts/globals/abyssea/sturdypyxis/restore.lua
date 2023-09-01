@@ -7,7 +7,7 @@ xi.pyxis.restore = {}
 
 xi.pyxis.restore.giveRestore = function(npc, player)
     local alliance = player:getAlliance()
-    local restore = npc:getLocalVar("RESTORE")
+    local restore = npc:getLocalVar('RESTORE')
 
     switch(restore) : caseof
     {

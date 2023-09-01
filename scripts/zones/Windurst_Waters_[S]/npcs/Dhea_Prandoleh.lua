@@ -24,9 +24,9 @@ entity.onTrigger = function(player, npc)
     then
         player:startEvent(133)
     elseif player:getQuestStatus(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.THE_TIGRESS_STRIKES) == QUEST_ACCEPTED then
-        if player:getCharVar("TigressStrikesProg") < 3 then
+        if player:getCharVar('TigressStrikesProg') < 3 then
             player:startEvent(135)
-        elseif player:getCharVar("TigressStrikesProg") == 3 then
+        elseif player:getCharVar('TigressStrikesProg') == 3 then
             player:startEvent(134)
         end
     else

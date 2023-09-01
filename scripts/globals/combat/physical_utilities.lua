@@ -94,7 +94,7 @@ local elementalBelt = -- Ordered by element.
     xi.item.SHADOW_BELT
 }
 
--- "fSTR" in English Wikis. "SV function" in JP wiki and Studio Gobli.
+-- 'fSTR' in English Wikis. 'SV function' in JP wiki and Studio Gobli.
 -- BG wiki: https://www.bg-wiki.com/ffxi/FSTR
 -- Gobli Wiki: https://w-atwiki-jp.translate.goog/studiogobli/pages/14.html?_x_tr_sl=auto&_x_tr_tl=en&_x_tr_hl=en&_x_tr_pto=wapp
 xi.combat.physical.calculateMeleeStatFactor = function(actor, target)
@@ -140,7 +140,7 @@ xi.combat.physical.calculateMeleeStatFactor = function(actor, target)
     return fSTR
 end
 
--- "fSTR2" in English Wikis. "SV function" in JP wiki and Studio Gobli.
+-- 'fSTR2' in English Wikis. 'SV function' in JP wiki and Studio Gobli.
 -- BG wiki: https://www.bg-wiki.com/ffxi/FSTR
 -- Gobli Wiki: https://w-atwiki-jp.translate.goog/studiogobli/pages/14.html?_x_tr_sl=auto&_x_tr_tl=en&_x_tr_hl=en&_x_tr_pto=wapp
 xi.combat.physical.calculateRangedStatFactor = function(actor, target)
@@ -206,7 +206,7 @@ xi.combat.physical.calculateWSC = function(actor, wsSTRmod, wsDEXmod, wsVITmod, 
     return finalWSC
 end
 
--- TP factor equation. Used to determine TP modifer across all cases of "X varies with TP"
+-- TP factor equation. Used to determine TP modifer across all cases of 'X varies with TP'
 xi.combat.physical.calculateTPfactor = function(actor, TP1000, TP2000, TP3000)
     local tpFactor = 1
     local actorTP  = actor:getTP()
@@ -414,7 +414,7 @@ xi.combat.physical.calculateMeleePDIF = function(actor, target, weaponType, wsAt
     ----------------------------------------
     -- Step 4: Apply weapon type caps.
     ----------------------------------------
-    local pDifFinalCap = pDifWeaponCapTable[weaponType][1] + isCritical -- TODO: Add "Damage Limit +" Trait here.
+    local pDifFinalCap = pDifWeaponCapTable[weaponType][1] + isCritical -- TODO: Add 'Damage Limit +' Trait here.
 
     pDif = utils.clamp(pDif, 0, pDifFinalCap)
 
@@ -480,7 +480,7 @@ xi.combat.physical.calculateRangedPDIF = function(actor, target, weaponType, wsA
 
     local cRatio = utils.clamp(baseRatio - levelDifFactor, 0, 10) -- Clamp for the lower limit, mainly.
 
-    -- TODO: Presumably, pets get a Cap here if the target checks as "Too Weak". More info needed.
+    -- TODO: Presumably, pets get a Cap here if the target checks as 'Too Weak'. More info needed.
 
     ----------------------------------------
     -- Step 3: pDif Caps (Ranged)
@@ -505,7 +505,7 @@ xi.combat.physical.calculateRangedPDIF = function(actor, target, weaponType, wsA
     ----------------------------------------
     -- Step 4: Apply weapon type caps.
     ----------------------------------------
-    local pDifFinalCap = pDifWeaponCapTable[weaponType][1] + isCritical -- TODO: Add "Damage Limit +" Trait here.
+    local pDifFinalCap = pDifWeaponCapTable[weaponType][1] + isCritical -- TODO: Add 'Damage Limit +' Trait here.
 
     pDif = utils.clamp(pDif, 0, pDifFinalCap)
 

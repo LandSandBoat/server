@@ -33,7 +33,7 @@ end
 
 local examineRock = function(player, npc)
     local rockOffset = npc:getID() - mazeID.npc.FOSSIL_ROCK_OFFSET
-    local correctRock = mission:getVar(player, "Rock")
+    local correctRock = mission:getVar(player, 'Rock')
     local missionStatus = player:getMissionStatus(mission.areaId)
 
     if rockOffset == correctRock then
@@ -173,7 +173,7 @@ mission.sections =
             {
                 [165] = function(player, csid, option, npc)
                     npcUtil.giveKeyItem(player, xi.ki.LAPIS_MONOCLE)
-                    mission:setVar(player, "Rock", math.random(1, 6))
+                    mission:setVar(player, 'Rock', math.random(1, 6))
                     player:setMissionStatus(mission.areaId, 3)
                 end,
             },
@@ -231,7 +231,7 @@ mission.sections =
                 [169] = function(player, csid, option, npc)
                     player:delKeyItem(xi.ki.LAPIS_CORAL)
                     player:delKeyItem(xi.ki.LAPIS_MONOCLE)
-                    mission:setVar(player, "Rock", 0)
+                    mission:setVar(player, 'Rock', 0)
                     npcUtil.giveKeyItem(player, xi.ki.HIDEOUT_KEY)
                     player:setMissionStatus(mission.areaId, 5)
                 end,

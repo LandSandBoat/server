@@ -1,5 +1,5 @@
-require("scripts/globals/common")
-require("scripts/globals/interaction/quest")
+require('scripts/globals/common')
+require('scripts/globals/interaction/quest')
 
 utils = {}
 
@@ -34,6 +34,65 @@ local function mergen(...)
     end
 
     return res
+end
+
+-- https://stackoverflow.com/questions/49979017/how-to-get-current-function-call-stack-depth-in-lua
+-- NOTE: Supposedly this is slow. Only use this during debugging and not for live!
+function utils.getStackDepth()
+    local depth = 0
+    while true do
+        if not debug.getinfo(3 + depth) then
+            break
+        end
+
+        depth = depth + 1
+    end
+
+    return depth
+end
+
+-- https://www.lua.org/pil/23.1.1.html
+function utils.getObjectFromScope(objName, depth)
+    local idx = 1
+    while true do
+        local name, value = debug.getlocal(depth, idx)
+        if not name then
+            break
+        end
+
+        if name == objName then
+            return value
+        end
+
+        idx = idx + 1
+    end
+
+    return nil
+end
+
+function utils.getDebugPrinter(printEntityName, settingOrCondition, prefix)
+    return function(...)
+        if settingOrCondition then
+            local t = { ... }
+            if prefix then
+                t = { prefix, ... }
+            end
+
+            local str = tostring(unpack(t))
+
+            print(str)
+
+            local depth  = utils.getStackDepth()
+            local player = utils.getObjectFromScope(printEntityName, depth + 1)
+            if player then
+                player:PrintToPlayer(str, xi.msg.channel.SYSTEM_3, '')
+            end
+        end
+    end
+end
+
+function utils.getDebugPlayerPrinter(settingOrCondition, prefix)
+    return utils.getDebugPrinter('player', settingOrCondition, prefix)
 end
 
 function utils.bind(func, ...)
@@ -143,7 +202,7 @@ function utils.uniqueRandomTable(minVal, maxVal, numEntries)
     local shuffledTable = utils.permgen(maxVal, minVal)
 
     if numEntries > #shuffledTable then
-        print("utils.uniqueRandomTable(): numEntries exceeds length of shuffledTable!")
+        print('utils.uniqueRandomTable(): numEntries exceeds length of shuffledTable!')
         return nil
     end
 
@@ -274,7 +333,6 @@ function utils.takeShadows(target, dmg, shadowbehav)
 end
 
 function utils.conalDamageAdjustment(attacker, target, skill, maxDamage, minimumPercentage)
-    local finalDamage = 1
     -- #TODO: Currently all cone attacks use static 45 degree (360 scale) angles in core, when cone attacks
     -- have different angles and there's a method to fetch the angle, use a line like the below
     -- local coneAngle = skill:getConalAngle()
@@ -299,7 +357,7 @@ function utils.conalDamageAdjustment(attacker, target, skill, maxDamage, minimum
     local damagePerAngle   = (maxDamage - minimumDamage) / coneAngle
     local additionalDamage = damagePerAngle * conalAnglePower
 
-    finalDamage = math.max(1, math.ceil(minimumDamage + additionalDamage))
+    local finalDamage = math.max(1, math.ceil(minimumDamage + additionalDamage))
 
     return finalDamage
 end
@@ -366,7 +424,7 @@ local skillLevelTable =
 -- Get the corresponding table entry to use in skillLevelTable based on level range
 -- TODO: Minval for ranges 2 and 3 in the conditional is probably not necessary
 local function getSkillLevelIndex(level, rank)
-    local rangeId = 0
+    local rangeId = 100
 
     if level <= 50 then
         rangeId = 1
@@ -382,8 +440,6 @@ local function getSkillLevelIndex(level, rank)
         rangeId = 80
     elseif level <= 99 then
         rangeId = 90
-    else
-        rangeId = 100
     end
 
     return rangeId
@@ -506,9 +562,9 @@ utils.mask =
     setBit = function(mask, pos, val)
         local state = false
 
-        if type(val) == "boolean" then
+        if type(val) == 'boolean' then
             state = val
-        elseif type(val) == "number" then
+        elseif type(val) == 'number' then
             state = (val ~= 0)
         end
 
@@ -556,7 +612,7 @@ function utils.prequire(...)
         return result
     else
         local vars = { ... }
-        printf("Error while trying to load '%s': %s", vars[1], result)
+        printf('Error while trying to load \'%s\': %s', vars[1], result)
     end
 end
 
@@ -564,6 +620,10 @@ end
 -- used for tables that do not define specific indices.
 -- See: Sigil NPCs
 function utils.contains(value, collection)
+    if collection == nil then
+        return false
+    end
+
     for _, v in pairs(collection) do
         if value == v then
             return true
@@ -619,10 +679,10 @@ function utils.setQuestVar(player, logId, questId, varName, value)
     player:setCharVar(charVarName, value)
 end
 
--- utils.splitStr("a.b.c", ".") => { "a", "b", "c" }
+-- utils.splitStr('a.b.c', '.') => { 'a', 'b', 'c' }
 function utils.splitStr(s, sep)
     local fields = {}
-    local pattern = string.format("([^%s]+)", sep)
+    local pattern = string.format('([^%s]+)', sep)
     local _ = string.gsub(s, pattern, function(c)
         fields[#fields + 1] = c
     end)
@@ -632,17 +692,17 @@ end
 
 -- Remove whitespace from the beginning and end of a string
 function utils.trimStr(s)
-    local s1 = string.gsub(s, "^s%+", "")
-    return string.gsub(s1, "%s+$", "")
+    local s1 = string.gsub(s, '^s%+', '')
+    return string.gsub(s1, '%s+$', '')
 end
 
 -- Split a single string argument into multiple arguments
 function utils.splitArg(s)
-    local comma   = string.gsub(s, ",", " ")
-    local spaces  = string.gsub(comma, "%s+", " ")
+    local comma   = string.gsub(s, ',', ' ')
+    local spaces  = string.gsub(comma, '%s+', ' ')
     local trimmed = utils.trimStr(spaces)
 
-    return utils.splitStr(trimmed, " ")
+    return utils.splitStr(trimmed, ' ')
 end
 
 function utils.mobTeleport(mob, hideDuration, pos, disAnim, reapAnim)
@@ -653,11 +713,11 @@ function utils.mobTeleport(mob, hideDuration, pos, disAnim, reapAnim)
     end
 
     if disAnim == nil then
-        disAnim = "kesu"
+        disAnim = 'kesu'
     end
 
     if reapAnim == nil then
-        reapAnim = "deru"
+        reapAnim = 'deru'
     end
 
     if pos == nil then
@@ -804,5 +864,5 @@ end
 
 -- Returns 24h Clock Time (example: 04:30 = 430, 21:30 = 2130)
 function utils.vanadielClockTime()
-    return tonumber(VanadielHour() .. string.format("%02d", VanadielMinute()))
+    return tonumber(VanadielHour() .. string.format('%02d', VanadielMinute()))
 end

@@ -6,7 +6,7 @@
 local entity = {}
 
 entity.onMobFight = function(mob, target)
-    local lastDoll = mob:getLocalVar("lastDoll")
+    local lastDoll = mob:getLocalVar('lastDoll')
 
     if
         lastDoll == 0 or
@@ -14,7 +14,7 @@ entity.onMobFight = function(mob, target)
     then
         lastDoll = lastDoll + 1
         SpawnMob(mob:getID() + lastDoll):updateEnmity(target)
-        mob:setLocalVar("lastDoll", lastDoll)
+        mob:setLocalVar('lastDoll', lastDoll)
         if lastDoll == 5 then
             mob:setHP(0)
         end
@@ -23,7 +23,7 @@ end
 
 entity.onMobDeath = function(mob, player, optParams)
     if optParams.isKiller then
-        if mob:getLocalVar("lastDoll") < 5 then
+        if mob:getLocalVar('lastDoll') < 5 then
             mob:getBattlefield():lose()
         end
     end

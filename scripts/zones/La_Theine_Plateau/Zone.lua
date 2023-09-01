@@ -54,7 +54,7 @@ end
 zoneObject.onZoneWeatherChange = function(weather)
     local rainbow = GetNPCByID(ID.npc.RAINBOW)
     local timeOfTheDay = VanadielTOTD()
-    local setRainbow = rainbow:getLocalVar("setRainbow")
+    local setRainbow = rainbow:getLocalVar('setRainbow')
 
     if
         setRainbow == 1 and
@@ -76,7 +76,7 @@ end
 
 zoneObject.onTOTDChange = function(timeOfTheDay)
     local rainbow = GetNPCByID(ID.npc.RAINBOW)
-    local setRainbow = rainbow:getLocalVar("setRainbow")
+    local setRainbow = rainbow:getLocalVar('setRainbow')
 
     if
         setRainbow == 1 and

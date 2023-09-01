@@ -7,11 +7,11 @@
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)
-    return xi.item_utils.skillBookCheck(target, xi.skill.NINJUTSU)
+    return xi.itemUtils.skillBookCheck(target, xi.skill.NINJUTSU)
 end
 
 itemObject.onItemUse = function(target)
-    xi.item_utils.skillBookUse(target, xi.skill.NINJUTSU)
+    xi.itemUtils.skillBookUse(target, xi.skill.NINJUTSU)
 end
 
 return itemObject

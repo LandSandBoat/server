@@ -1,4 +1,4 @@
-local ID = zones[xi.zone.CELENNIA_MEMORIAL_LIBRARY]
+-- local ID = zones[xi.zone.CELENNIA_MEMORIAL_LIBRARY]
 
 return {
     ['Andreine']     = { event = 27 },

@@ -2,7 +2,7 @@
 -- Area: Temenos
 --  Mob: Pee Qoho the Python
 -----------------------------------
-mixins = { require("scripts/mixins/job_special") }
+mixins = { require('scripts/mixins/job_special') }
 local ID = zones[xi.zone.TEMENOS]
 -----------------------------------
 local entity = {}

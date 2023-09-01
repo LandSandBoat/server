@@ -30,7 +30,7 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
 
     local damage, criticalHit, tpHits, extraHits = xi.weaponskills.doPhysicalWeaponskill(player, target, wsID, params, tp, action, primary, taChar)
     if damage > 0 and not target:hasStatusEffect(xi.effect.PARALYSIS) then
-        local duration = (tp / 1000 * 30) * applyResistanceAddEffect(player, target, xi.magic.ele.ICE, 0)
+        local duration = (tp / 1000 * 30) * applyResistanceAddEffect(player, target, xi.element.ICE, 0)
         -- paralyze proc based on lvl difference
         local power = 30 + (player:getMainLvl() - target:getMainLvl()) * 3
         if power > 35 then

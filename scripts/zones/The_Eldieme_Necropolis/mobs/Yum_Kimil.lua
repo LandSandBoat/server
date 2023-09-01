@@ -7,8 +7,8 @@
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)
-    if player:getCharVar("TheRequiemCS") == 3 then
-        player:setCharVar("TheRequiemYumKilled", 1)
+    if player:getCharVar('TheRequiemCS') == 3 then
+        player:setCharVar('TheRequiemYumKilled', 1)
     end
 end
 

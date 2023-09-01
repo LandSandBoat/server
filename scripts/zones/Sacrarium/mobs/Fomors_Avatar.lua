@@ -2,7 +2,7 @@
 -- Area: Sacrarium
 --  Mob: Fomor's Avatar
 -----------------------------------
-mixins = { require("scripts/mixins/families/avatar") }
+mixins = { require('scripts/mixins/families/avatar') }
 -----------------------------------
 local entity = {}
 

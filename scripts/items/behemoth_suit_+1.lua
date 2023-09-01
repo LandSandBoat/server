@@ -14,12 +14,7 @@
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)
-    local result = 0
-    if target:getFreeSlotsCount() == 0 then
-        result = xi.msg.basic.ITEM_NO_USE_INVENTORY
-    end
-
-    return result
+    return xi.itemUtils.itemBoxOnItemCheck(target)
 end
 
 itemObject.onItemUse = function(target)
@@ -45,7 +40,7 @@ itemObject.onItemUse = function(target)
         -- { ?, xi.item.SAVORY_SHANK },
     }
 
-    npcUtil.giveItem(target, { { xi.item_utils.pickItemRandom(target, meatList), 1 } })
+    npcUtil.giveItem(target, { { xi.itemUtils.pickItemRandom(target, meatList), 1 } })
 end
 
 return itemObject

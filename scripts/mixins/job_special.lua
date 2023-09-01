@@ -83,8 +83,8 @@ xi.mix.jobSpecial.config(mob, {
     },
 })
 ---------------------------------------------------------------- --]]
-require("scripts/globals/mixins")
-require("scripts/globals/utils")
+require('scripts/globals/mixins')
+require('scripts/globals/utils')
 -----------------------------------
 xi = xi or {}
 xi.mix = xi.mix or {}
@@ -176,58 +176,58 @@ local effectByAbility =
 }
 
 xi.mix.jobSpecial.config = function(mob, params)
-    if params.between and type(params.between) == "number" then
-        mob:setLocalVar("[jobSpecial]between", utils.clamp(params.between, 0))
+    if params.between and type(params.between) == 'number' then
+        mob:setLocalVar('[jobSpecial]between', utils.clamp(params.between, 0))
     end
 
-    if params.chance and type(params.chance) == "number" then
-        mob:setLocalVar("[jobSpecial]chance", utils.clamp(params.chance, 0, 100))
+    if params.chance and type(params.chance) == 'number' then
+        mob:setLocalVar('[jobSpecial]chance', utils.clamp(params.chance, 0, 100))
     end
 
-    if params.delay and type(params.delay) == "number" then
-        mob:setLocalVar("[jobSpecial]delayInitial", utils.clamp(params.delay, 2))
+    if params.delay and type(params.delay) == 'number' then
+        mob:setLocalVar('[jobSpecial]delayInitial', utils.clamp(params.delay, 2))
     end
 
-    if params.specials and type(params.specials) == "table" then
+    if params.specials and type(params.specials) == 'table' then
         local specials = params.specials
         local i = 0
 
         for _, v in pairs(specials) do
-            if v.id and type(v.id) == "number" then
+            if v.id and type(v.id) == 'number' then
                 i = i + 1
-                mob:setLocalVar("[jobSpecial]ability_" .. i, v.id)
+                mob:setLocalVar('[jobSpecial]ability_' .. i, v.id)
 
-                if v.cooldown and type(v.cooldown) == "number" then
-                    mob:setLocalVar("[jobSpecial]between_" .. i, utils.clamp(v.cooldown, 0))
+                if v.cooldown and type(v.cooldown) == 'number' then
+                    mob:setLocalVar('[jobSpecial]between_' .. i, utils.clamp(v.cooldown, 0))
                 else
-                    mob:setLocalVar("[jobSpecial]between_" .. i, 7200)
+                    mob:setLocalVar('[jobSpecial]between_' .. i, 7200)
                 end
 
-                if v.duration and type(v.duration) == "number" then
-                    mob:setLocalVar("[jobSpecial]duration_" .. i, utils.clamp(v.duration, 1))
+                if v.duration and type(v.duration) == 'number' then
+                    mob:setLocalVar('[jobSpecial]duration_' .. i, utils.clamp(v.duration, 1))
                 end
 
-                if v.hpp and type(v.hpp) == "number" then
-                    mob:setLocalVar("[jobSpecial]hpp_" .. i, utils.clamp(v.hpp, 0, 100))
+                if v.hpp and type(v.hpp) == 'number' then
+                    mob:setLocalVar('[jobSpecial]hpp_' .. i, utils.clamp(v.hpp, 0, 100))
                 else
-                    mob:setLocalVar("[jobSpecial]hpp_" .. i, math.random(40, 60))
+                    mob:setLocalVar('[jobSpecial]hpp_' .. i, math.random(40, 60))
                 end
 
-                if type(v.begCode) == "function" then
-                    mob:setLocalVar("[jobSpecial]begCode_" .. i, 1)
-                    mob:removeListener("JOB_SPECIAL_BEG_" .. i)
-                    mob:addListener("JOB_SPECIAL_BEG_" .. i, "JOB_SPECIAL_BEG_" .. i, v.begCode)
+                if type(v.begCode) == 'function' then
+                    mob:setLocalVar('[jobSpecial]begCode_' .. i, 1)
+                    mob:removeListener('JOB_SPECIAL_BEG_' .. i)
+                    mob:addListener('JOB_SPECIAL_BEG_' .. i, 'JOB_SPECIAL_BEG_' .. i, v.begCode)
                 end
 
-                if type(v.endCode) == "function" then
-                    mob:setLocalVar("[jobSpecial]endCode_" .. i, 1)
-                    mob:removeListener("JOB_SPECIAL_END_" .. i)
-                    mob:addListener("JOB_SPECIAL_END_" .. i, "JOB_SPECIAL_END_" .. i, v.endCode)
+                if type(v.endCode) == 'function' then
+                    mob:setLocalVar('[jobSpecial]endCode_' .. i, 1)
+                    mob:removeListener('JOB_SPECIAL_END_' .. i)
+                    mob:addListener('JOB_SPECIAL_END_' .. i, 'JOB_SPECIAL_END_' .. i, v.endCode)
                 end
             end
         end
 
-        mob:setLocalVar("[jobSpecial]numAbilities", i)
+        mob:setLocalVar('[jobSpecial]numAbilities', i)
     end
 end
 
@@ -238,19 +238,19 @@ end
 local abilitiesReady = function(mob)
     local abilities = {}
     local now = os.time()
-    local readyTime = mob:getLocalVar("[jobSpecial]readyInitial")
+    local readyTime = mob:getLocalVar('[jobSpecial]readyInitial')
 
     if
         readyTime > 0 and
         now > readyTime and
-        now > mob:getLocalVar("[jobSpecial]cooldown")
+        now > mob:getLocalVar('[jobSpecial]cooldown')
     then
-        local numAbilities = mob:getLocalVar("[jobSpecial]numAbilities")
+        local numAbilities = mob:getLocalVar('[jobSpecial]numAbilities')
 
         for i = 1, numAbilities do
             if
-                now > mob:getLocalVar("[jobSpecial]cooldown_" .. i) and
-                mob:getHPP() <= mob:getLocalVar("[jobSpecial]hpp_" .. i)
+                now > mob:getLocalVar('[jobSpecial]cooldown_' .. i) and
+                mob:getHPP() <= mob:getLocalVar('[jobSpecial]hpp_' .. i)
             then
                 table.insert(abilities, i)
             end
@@ -268,50 +268,48 @@ g_mixins.job_special = function(jobSpecialMob)
     -- At spawn, give mob its default main job 2hr, which it'll use at 40-60% HP.
     -- these defaults can be overwritten by using xi.mix.jobSpecial.config() in onMobSpawn.
 
-    jobSpecialMob:addListener("SPAWN", "JOB_SPECIAL_SPAWN", function(mob)
-        local ability = nil
-        local mJob = mob:getMainJob()
+    jobSpecialMob:addListener('SPAWN', 'JOB_SPECIAL_SPAWN', function(mob)
+        local mJob    = mob:getMainJob()
+        local ability = job2hr[mJob]
 
         if mJob == xi.job.RNG then
             ability = familyEES[mob:getFamily()]
         elseif mJob == xi.job.SMN and mob:isInDynamis() then
             ability = xi.jsa.ASTRAL_FLOW_MAAT
-        else
-            ability = job2hr[mJob]
         end
 
         if ability then
-            mob:setLocalVar("[jobSpecial]numAbilities", 1)
-            mob:setLocalVar("[jobSpecial]ability_1", ability)
-            mob:setLocalVar("[jobSpecial]hpp_1", math.random(40, 60))
-            mob:setLocalVar("[jobSpecial]between_1", 7200)
+            mob:setLocalVar('[jobSpecial]numAbilities', 1)
+            mob:setLocalVar('[jobSpecial]ability_1', ability)
+            mob:setLocalVar('[jobSpecial]hpp_1', math.random(40, 60))
+            mob:setLocalVar('[jobSpecial]between_1', 7200)
         end
 
-        mob:setLocalVar("[jobSpecial]chance", 100)     -- chance that mob will use any special at all during engagement
-        mob:setLocalVar("[jobSpecial]delayInitial", 2) -- default wait until mob can use its first special (prevents insta-flow)
+        mob:setLocalVar('[jobSpecial]chance', 100)     -- chance that mob will use any special at all during engagement
+        mob:setLocalVar('[jobSpecial]delayInitial', 2) -- default wait until mob can use its first special (prevents insta-flow)
     end)
 
-    jobSpecialMob:addListener("ENGAGE", "JOB_SPECIAL_ENGAGE", function(mob)
-        if math.random(100) <= mob:getLocalVar("[jobSpecial]chance") then
-            mob:setLocalVar("[jobSpecial]readyInitial", os.time() + mob:getLocalVar("[jobSpecial]delayInitial"))
+    jobSpecialMob:addListener('ENGAGE', 'JOB_SPECIAL_ENGAGE', function(mob)
+        if math.random(100) <= mob:getLocalVar('[jobSpecial]chance') then
+            mob:setLocalVar('[jobSpecial]readyInitial', os.time() + mob:getLocalVar('[jobSpecial]delayInitial'))
         end
     end)
 
-    jobSpecialMob:addListener("COMBAT_TICK", "JOB_SPECIAL_CTICK", function(mob)
+    jobSpecialMob:addListener('COMBAT_TICK', 'JOB_SPECIAL_CTICK', function(mob)
         local abilities = abilitiesReady(mob)
 
         if #abilities > 0 then
             local i = abilities[math.random(#abilities)]
-            local ability = mob:getLocalVar("[jobSpecial]ability_" .. i)
+            local ability = mob:getLocalVar('[jobSpecial]ability_' .. i)
             local now = os.time()
 
-            if mob:getLocalVar("[jobSpecial]begCode_" .. i) == 1 then
-                mob:triggerListener("JOB_SPECIAL_BEG_" .. i, mob)
+            if mob:getLocalVar('[jobSpecial]begCode_' .. i) == 1 then
+                mob:triggerListener('JOB_SPECIAL_BEG_' .. i, mob)
             end
 
             mob:useMobAbility(ability)
 
-            local customDuration = mob:getLocalVar("[jobSpecial]duration_" .. i)
+            local customDuration = mob:getLocalVar('[jobSpecial]duration_' .. i)
             if customDuration > 0 then
                 local specialEffect = effectByAbility[ability]
                 if specialEffect then
@@ -322,12 +320,12 @@ g_mixins.job_special = function(jobSpecialMob)
                 end
             end
 
-            if mob:getLocalVar("[jobSpecial]endCode_" .. i) == 1 then
-                mob:triggerListener("JOB_SPECIAL_END_" .. i, mob)
+            if mob:getLocalVar('[jobSpecial]endCode_' .. i) == 1 then
+                mob:triggerListener('JOB_SPECIAL_END_' .. i, mob)
             end
 
-            mob:setLocalVar("[jobSpecial]cooldown_" .. i, now + mob:getLocalVar("[jobSpecial]between_" .. i)) -- set ability cooldown (wait to use this particular special again)
-            mob:setLocalVar("[jobSpecial]cooldown", now + mob:getLocalVar("[jobSpecial]between")) -- set global cooldown (wait between using any specials)
+            mob:setLocalVar('[jobSpecial]cooldown_' .. i, now + mob:getLocalVar('[jobSpecial]between_' .. i)) -- set ability cooldown (wait to use this particular special again)
+            mob:setLocalVar('[jobSpecial]cooldown', now + mob:getLocalVar('[jobSpecial]between')) -- set global cooldown (wait between using any specials)
         end
     end)
 end

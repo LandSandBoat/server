@@ -11,7 +11,7 @@ end
 entity.onTrigger = function(player, npc)
     local duration = math.random(600, 900)
 
-    npc:entityAnimationPacket("sils", player)
+    npc:entityAnimationPacket('sils', player)
     player:addStatusEffect(xi.effect.SILENCE, 0, 0, duration)
 end
 

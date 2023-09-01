@@ -30,7 +30,7 @@ quest.sections =
             {
                 onTrigger = function(player, npc)
                     if player:getMainJob() <= 15 then
-                        if utils.mask.isFull(player:getCharVar("maatsCap"), 15) then -- Defeated maat on 15 jobs
+                        if utils.mask.isFull(player:getCharVar('maatsCap'), 15) then -- Defeated maat on 15 jobs
                             return quest:progressEvent(74)
                         else
                             return quest:event(78, player:getMainJob()) -- Rematch dialog. Job dependant.

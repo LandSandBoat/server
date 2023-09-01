@@ -16,8 +16,8 @@ entity.onTrade = function(player, npc, trade)
     end
 
     if
-        npcUtil.tradeHasExactly(trade, { { "gil", lampCost } }) and
-        player:getCharVar("EinherjarIntro") ~= 1
+        npcUtil.tradeHasExactly(trade, { { 'gil', lampCost } }) and
+        player:getCharVar('EinherjarIntro') ~= 1
     then
         if npcUtil.giveItem(player, xi.item.SMOLDERING_LAMP) then
             player:tradeComplete()
@@ -29,7 +29,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local ichor = player:getCurrency("therion_ichor")
+    local ichor = player:getCurrency('therion_ichor')
     local allowValkyrieBuying = 29360128 -- set this to 0 if you wish to allow players to buy feather key items without KI
     local lampCost = 60000 -- base cost without RHAPSODY_IN_AZURE key item
     local reentryTime = 20 -- in hours
@@ -48,24 +48,24 @@ entity.onTrigger = function(player, npc)
         player:startEvent(22) -- worthless CS
     elseif
         (player:getMainLvl() >= 60 or toau) and
-        player:getCharVar("EinherjarIntro") == 1
+        player:getCharVar('EinherjarIntro') == 1
     then
         player:startEvent(23, lampCost, 856, 3, 616, 10, 172, 172, 0) -- Einherjar introduction
     else
         player:startEvent(24, lampCost, 856, 3, reentryTime, 10, 135, allowValkyrieBuying, ichor)
-        player:setLocalVar("reentryTime", reentryTime)
+        player:setLocalVar('reentryTime', reentryTime)
     end
 end
 
 entity.onEventUpdate = function(player, csid, option, npc)
     if csid == 24 and option == 6 then -- about Entry Conditions
-        player:updateEvent(53, 10, 3, player:getLocalVar("reentryTime"), 10, 231, xi.item.SMOLDERING_LAMP, xi.item.GLOWING_LAMP)
+        player:updateEvent(53, 10, 3, player:getLocalVar('reentryTime'), 10, 231, xi.item.SMOLDERING_LAMP, xi.item.GLOWING_LAMP)
     end
 end
 
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 23 then
-        player:setCharVar("EinherjarIntro", 0) -- deletes CharVar set at character creation
+        player:setCharVar('EinherjarIntro', 0) -- deletes CharVar set at character creation
     elseif csid == 24 and option ~= 1073741824 and option ~= 0 then
         local kilushaItems =
         {
@@ -99,10 +99,10 @@ entity.onEventFinish = function(player, csid, option, npc)
 
         if
             player:getFreeSlotsCount() ~= 0 and
-            player:getCurrency("therion_ichor") >= row.cost
+            player:getCurrency('therion_ichor') >= row.cost
         then
             npcUtil.giveItem(player, row.item)
-            player:delCurrency("therion_ichor", row.cost)
+            player:delCurrency('therion_ichor', row.cost)
         else
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, row.item)
         end

@@ -61,7 +61,7 @@ end
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 20 then
         player:delKeyItem(xi.ki.SCROLL_OF_TREASURE)
-        npcUtil.giveCurrency(player, "gil", 3000)
+        npcUtil.giveCurrency(player, 'gil', 3000)
     end
 end
 

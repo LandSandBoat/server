@@ -20,42 +20,40 @@ mission.reward =
     nextMission = { xi.mission.log_id.AMK, xi.mission.id.amk.SHOCK_ARRANT_ABUSE_OF_AUTHORITY },
 }
 
+local orbKeyItems =
+{
+    xi.ki.ORB_OF_SWORDS,
+    xi.ki.ORB_OF_CUPS,
+    xi.ki.ORB_OF_BATONS,
+    xi.ki.ORB_OF_COINS,
+}
+
 local beginCardianFight = function(player, npc)
     local numToSpawn = 15
-
-    local cardianIds = {}
-    for cardianId = horutotoID.mob.CUSTOM_CARDIAN_OFFSET, horutotoID.mob.CUSTOM_CARDIAN_OFFSET + numToSpawn - 1, 1 do
-        table.insert(cardianIds, cardianId)
-    end
 
     -- TODO: Add immunities to cardians
 
     -- Remove KIs
     local removedKIs = 0
-    if player:hasKeyItem(xi.ki.ORB_OF_SWORDS) then
-        player:delKeyItem(xi.ki.ORB_OF_SWORDS)
-        -- TODO: Remove slashing damage immunity
-    end
+    for _, keyItemId in ipairs(orbKeyItems) do
+        if player:hasKeyItem(keyItemId) then
+            -- TODO: Remove damage immunity for the relevant mob.  The orbKeyItems table
+            -- may need to be expanded to support which mob receives which reduction.
 
-    if player:hasKeyItem(xi.ki.ORB_OF_CUPS) then
-        player:delKeyItem(xi.ki.ORB_OF_CUPS)
-        -- TODO: Remove piercing damage immunity
-    end
-
-    if player:hasKeyItem(xi.ki.ORB_OF_BATONS) then
-        player:delKeyItem(xi.ki.ORB_OF_BATONS)
-        -- TODO: Remove blunt damage immunity
-    end
-
-    if player:hasKeyItem(xi.ki.ORB_OF_COINS) then
-        player:delKeyItem(xi.ki.ORB_OF_COINS)
-        -- TODO: Remove magic damage immunity
+            player:delKeyItem(keyItemId)
+            removedKIs = removedKIs + 1
+        end
     end
 
     if removedKIs == 3 then
         numToSpawn = 10
     elseif removedKIs == 4 then
         numToSpawn = 5
+    end
+
+    local cardianIds = {}
+    for cardianId = horutotoID.mob.CUSTOM_CARDIAN_OFFSET, horutotoID.mob.CUSTOM_CARDIAN_OFFSET + numToSpawn - 1, 1 do
+        table.insert(cardianIds, cardianId)
     end
 
     xi.confrontation.start(player, npc, cardianIds, function(playerArg)

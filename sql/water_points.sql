@@ -25,4 +25,4 @@ CREATE TABLE IF NOT EXISTS `water_points` (
 -- Contenu de la table `water_points`
 --
 
-INSERT INTO `water_points` VALUES (1, 100, 0, 0, 0.00, 0.00, 0.00);
+INSERT INTO `water_points` VALUES (1,100,0,0,0.00,0.00,0.00);

@@ -86,7 +86,7 @@ quest.sections =
 
                 [722] = function(player, csid, option, npc)
                     quest:begin(player)
-                    player:setCharVar("[BLUAF]Remaining", 7) -- Player can now craft BLU armor
+                    player:setCharVar('[BLUAF]Remaining', 7) -- Player can now craft BLU armor
                 end,
             },
         },

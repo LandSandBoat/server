@@ -72,10 +72,10 @@ local function giveAllTemporaryItems(player)
 
     for _, itemList in pairs(itemsTable) do
         if not player:hasItem(itemList.item, xi.inventoryLocation.TEMPITEMS) then
-            if player:getCurrency("nyzul_isle_assault_point") >= itemList.cost then
+            if player:getCurrency('nyzul_isle_assault_point') >= itemList.cost then
                 player:addTempItem(itemList.item)
                 player:messageSpecial(ID.text.TEMP_ITEM_OBTAINED, itemList.item)
-                player:delCurrency("nyzul_isle_assault_point", itemList.cost)
+                player:delCurrency('nyzul_isle_assault_point', itemList.cost)
             end
         end
     end
@@ -84,7 +84,7 @@ end
 local function giveAllTemporaryItemsPrefered(player)
     -- TODO: Check if items are given 1 by 1 or in bulk, currency wise.
 
-    local preferenceBitmask = player:getCharVar("[Nyzul]preferredItems")
+    local preferenceBitmask = player:getCharVar('[Nyzul]preferredItems')
     local selection =
     {
         -- [bit] = option
@@ -125,7 +125,7 @@ local function giveAllTemporaryItemsPrefered(player)
                 if not player:hasItem(itemId, xi.inventoryLocation.TEMPITEMS) then
                     player:addTempItem(itemId)
                     player:messageSpecial(ID.text.TEMP_ITEM_OBTAINED, itemId)
-                    player:delCurrency("nyzul_isle_assault_point", itemsTable[option].cost)
+                    player:delCurrency('nyzul_isle_assault_point', itemsTable[option].cost)
                 end
             end
         end
@@ -133,9 +133,9 @@ local function giveAllTemporaryItemsPrefered(player)
 end
 
 xi.nyzul.vendingBoxOnTrigger = function(player)
-    local playerTokens       = player:getCurrency("nyzul_isle_assault_point")
+    local playerTokens       = player:getCurrency('nyzul_isle_assault_point')
     local itemsGottenBitmask = buildTemporaryItemBitmask(player)
-    local preferenceBitmask  = player:getCharVar("[Nyzul]preferredItems")
+    local preferenceBitmask  = player:getCharVar('[Nyzul]preferredItems')
 
     player:startEvent(202, 0, playerTokens, itemsGottenBitmask, preferenceBitmask, itemCost.LOW_GRADE, itemCost.MEDIUM_GRADE, itemCost.HIGH_GRADE, 0)
 end
@@ -162,17 +162,17 @@ xi.nyzul.vendingBoxOnEventUpdate = function(player, csid, option)
 
             local vendorItems = itemsTable[option]
 
-            if player:getCurrency("nyzul_isle_assault_point") >= vendorItems.cost then
+            if player:getCurrency('nyzul_isle_assault_point') >= vendorItems.cost then
                 player:addTempItem(vendorItems.item)
                 player:messageSpecial(ID.text.TEMP_ITEM_OBTAINED, vendorItems.item)
-                player:delCurrency("nyzul_isle_assault_point", vendorItems.cost)
+                player:delCurrency('nyzul_isle_assault_point', vendorItems.cost)
             end
         end
 
         -- Update the event.
-        local playerTokens       = player:getCurrency("nyzul_isle_assault_point")
+        local playerTokens       = player:getCurrency('nyzul_isle_assault_point')
         local itemsGottenBitmask = buildTemporaryItemBitmask(player)
-        local preferenceBitmask  = player:getCharVar("[Nyzul]preferredItems")
+        local preferenceBitmask  = player:getCharVar('[Nyzul]preferredItems')
 
         player:updateEvent(0, playerTokens, itemsGottenBitmask, preferenceBitmask, itemCost.LOW_GRADE, itemCost.MEDIUM_GRADE, itemCost.HIGH_GRADE, 0)
     end

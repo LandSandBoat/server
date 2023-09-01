@@ -14,7 +14,7 @@ end
 
 abilityObject.onUseAbility = function(player, target, ability)
     local dmg    = player:getHP() * 0.8 + player:getMainLvl() / 0.5
-    local resist = xi.mobskills.applyPlayerResistance(player, nil, target, player:getStat(xi.mod.INT)-target:getStat(xi.mod.INT), 0, xi.magic.ele.NONE)
+    local resist = xi.mobskills.applyPlayerResistance(player, nil, target, player:getStat(xi.mod.INT)-target:getStat(xi.mod.INT), 0, xi.element.NONE)
 
     -- Job Point Bonus (3% per Level)
     dmg = dmg * (1 + (player:getJobPointLevel(xi.jp.MIJIN_GAKURE_EFFECT) * 0.03))
@@ -22,7 +22,7 @@ abilityObject.onUseAbility = function(player, target, ability)
     dmg = utils.stoneskin(target, dmg)
 
     target:takeDamage(dmg, player, xi.attackType.SPECIAL, xi.damageType.ELEMENTAL)
-    player:setLocalVar("MijinGakure", 1)
+    player:setLocalVar('MijinGakure', 1)
     player:setHP(0)
 
     return dmg

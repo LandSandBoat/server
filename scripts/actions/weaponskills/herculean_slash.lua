@@ -17,7 +17,7 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
     local params = {}
     params.ftp100 = 3.5 params.ftp200 = 3.5 params.ftp300 = 3.5
     params.str_wsc = 0.0 params.dex_wsc = 0.0 params.vit_wsc = 0.6 params.agi_wsc = 0.0 params.int_wsc = 0.0 params.mnd_wsc = 0.0 params.chr_wsc = 0.0
-    params.ele = xi.magic.ele.ICE
+    params.ele = xi.element.ICE
     params.skill = xi.skill.GREAT_SWORD
     params.includemab = true
 
@@ -28,7 +28,7 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
     local damage, criticalHit, tpHits, extraHits = xi.weaponskills.doMagicWeaponskill(player, target, wsID, params, tp, action, primary)
 
     if damage > 0 and not target:hasStatusEffect(xi.effect.PARALYSIS) then
-        local duration = (tp / 1000 * 60) * applyResistanceAddEffect(player, target, xi.magic.ele.ICE, 0)
+        local duration = (tp / 1000 * 60) * applyResistanceAddEffect(player, target, xi.element.ICE, 0)
         target:addStatusEffect(xi.effect.PARALYSIS, 30, 0, duration)
     end
 

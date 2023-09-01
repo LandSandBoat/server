@@ -2,18 +2,18 @@
 -- func: posemannequin
 -- desc: changes the pose of a mannequin
 -----------------------------------
-require("scripts/globals/mannequins")
+require('scripts/globals/mannequins')
 -----------------------------------
 
 cmdprops =
 {
     permission = 1,
-    parameters = "iis"
+    parameters = 'iis'
 }
 
 function error(player, msg)
     player:PrintToPlayer(msg)
-    player:PrintToPlayer("!posemannequin <race> <pose> [target])")
+    player:PrintToPlayer('!posemannequin <race> <pose> [target])')
 end
 
 function onTrigger(player, race, pose, target)
@@ -25,13 +25,13 @@ function onTrigger(player, race, pose, target)
     end
 
     if not target or target:isNPC() then
-        error(player, "No valid target found. place cursor on a non-npc object or specify a player name. ")
+        error(player, 'No valid target found. place cursor on a non-npc object or specify a player name. ')
         return
     end
 
     -- Confirm race and pose parameters
     if not race or not pose then
-        error(player, "Race and Pose not defined. ")
+        error(player, 'Race and Pose not defined. ')
         return
     end
 

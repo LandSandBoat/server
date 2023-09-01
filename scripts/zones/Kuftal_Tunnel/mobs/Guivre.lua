@@ -59,27 +59,25 @@ local pathFind =
     ['pathFind1'] = function(mob, reversePath)
         local pathNodes = {}
         if reversePath == 0 or reversePath == 1 then
-            mob:setLocalVar("mobPath", 2)
+            mob:setLocalVar('mobPath', 2)
             local reverseCheck = math.random(0, 2)
             if reverseCheck == 0 then
-                mob:setLocalVar("reversePath", 0)
+                mob:setLocalVar('reversePath', 0)
                 pathNodes = pathBranch1
             else
-                mob:setLocalVar("reversePath", 1)
+                mob:setLocalVar('reversePath', 1)
                 pathNodes = pathBranch5
             end
-
-            return pathNodes
         end
+
+        return pathNodes
     end,
 
     ['pathFind2'] = function(mob, reversePath)
-        local pathNodes = {}
-        mob:setLocalVar("mobPath", 3)
+        local pathNodes = pathBranch4
+        mob:setLocalVar('mobPath', 3)
         if reversePath == 0 then
             pathNodes = pathBranch2
-        else
-            pathNodes = pathBranch4
         end
 
         return pathNodes
@@ -87,7 +85,7 @@ local pathFind =
 
     ['pathFind3'] = function(mob, reversePath)
         local pathNodes = {}
-        mob:setLocalVar("mobPath", 4)
+        mob:setLocalVar('mobPath', 4)
         if reversePath == 0 or reversePath == 1 then
             pathNodes = pathBranch3
         end
@@ -96,19 +94,18 @@ local pathFind =
     end,
 
     ['pathFind4'] = function(mob, reversePath)
-        local pathNodes = {}
+        local pathNodes = pathBranch4
         if reversePath == 0 then
-            mob:setLocalVar("mobPath", 5)
-            pathNodes = pathBranch4
+            mob:setLocalVar('mobPath', 5)
         else
             local reverseCheck = math.random(0, 2)
             if reverseCheck == 0 then
-                mob:setLocalVar("mobPath", 4)
-                mob:setLocalVar("reversePath", 0)
+                mob:setLocalVar('mobPath', 4)
+                mob:setLocalVar('reversePath', 0)
                 pathNodes = pathBranch3
             else
-                mob:setLocalVar("mobPath", 5)
-                mob:setLocalVar("reversePath", 1)
+                mob:setLocalVar('mobPath', 5)
+                mob:setLocalVar('reversePath', 1)
                 pathNodes = pathBranch2
             end
         end
@@ -117,21 +114,20 @@ local pathFind =
     end,
 
     ['pathFind5'] = function(mob, reversePath)
-        local pathNodes = {}
+        local pathNodes = pathBranch1
+        mob:setLocalVar('mobPath', 6)
+
         if reversePath == 0 then
             local reverseCheck = math.random(0, 2)
             if reverseCheck == 0 then
-                mob:setLocalVar("mobPath", 6)
-                mob:setLocalVar("reversePath", 0)
+                mob:setLocalVar('mobPath', 6)
+                mob:setLocalVar('reversePath', 0)
                 pathNodes = pathBranch5
             else
-                mob:setLocalVar("mobPath", 3)
-                mob:setLocalVar("reversePath", 1)
+                mob:setLocalVar('mobPath', 3)
+                mob:setLocalVar('reversePath', 1)
                 pathNodes = pathBranch4
             end
-        else
-            mob:setLocalVar("mobPath", 6)
-            pathNodes = pathBranch1
         end
 
         return pathNodes
@@ -140,7 +136,7 @@ local pathFind =
     ['pathFind6'] = function(mob, reversePath)
         local pathNodes = {}
         if reversePath == 0 or reversePath == 1 then
-            mob:setLocalVar("mobPath", 1)
+            mob:setLocalVar('mobPath', 1)
             pathNodes = pathStart
         end
 
@@ -159,22 +155,24 @@ end
 
 entity.onMobSpawn = function(mob)
     --Guivre will despawn if not claimed within 3-5 hours.
-    mob:setLocalVar("despawnTime", math.random(10800, 18000) + os.time())
-    mob:setLocalVar("isPaused", 0)
-    mob:setLocalVar("mobPath", 1)
+    mob:setLocalVar('despawnTime', math.random(10800, 18000) + os.time())
+    mob:setLocalVar('isPaused', 0)
+    mob:setLocalVar('mobPath', 1)
     mob:pathThrough(pathStart, xi.path.flag.COORDS)
 end
 
 entity.onPath = function(mob)
     if not mob:isFollowingPath() then
-        if mob:getLocalVar("isPaused") ~= 0 then
-            local currentPath = "pathFind" .. mob:getLocalVar("mobPath")
-            local reversePath = mob:getLocalVar("reversePath")
-            local pathNodes = {}
-            mob:setLocalVar("isPaused", 0)
+        if mob:getLocalVar('isPaused') ~= 0 then
+            local currentPath = 'pathFind' .. mob:getLocalVar('mobPath')
+            local reversePath = mob:getLocalVar('reversePath')
+
+            mob:setLocalVar('isPaused', 0)
             mob:clearPath()
-            pathNodes = pathFind[currentPath](mob, reversePath)
-            local newReverse = mob:getLocalVar("reversePath")
+
+            local pathNodes = pathFind[currentPath](mob, reversePath)
+
+            local newReverse = mob:getLocalVar('reversePath')
             if newReverse == 0 then
                 mob:pathThrough(pathNodes, xi.path.flag.COORDS)
             else
@@ -198,13 +196,13 @@ entity.onPath = function(mob)
             end
 
             mob:pathThrough(rotations, xi.path.flag.COORDS)
-            mob:setLocalVar("isPaused", 1)
+            mob:setLocalVar('isPaused', 1)
         end
     end
 end
 
 entity.onMobRoam = function(mob)
-    local despawnCheck = mob:getLocalVar("despawnTime")
+    local despawnCheck = mob:getLocalVar('despawnTime')
     if despawnCheck <= os.time() then
         DespawnMob(mob:getID())
     end

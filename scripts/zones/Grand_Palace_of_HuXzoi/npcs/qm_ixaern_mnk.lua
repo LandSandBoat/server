@@ -30,7 +30,7 @@ entity.onTrade = function(player, npc, trade)
             nm:setSpawn(npc:getXPos(), npc:getYPos(), npc:getZPos())
             local mob = SpawnMob(ID.mob.IXAERN_MNK)
             mob:updateClaim(player)
-            mob:setLocalVar("[SEA]IxAern_DropRate", chance * 10)
+            mob:setLocalVar('[SEA]IxAern_DropRate', chance * 10)
 
             if chance >= 66 then
                 GetMobByID(ID.mob.IXAERN_MNK + 1):setSpawn(npc:getXPos(), npc:getYPos(), npc:getZPos() - 4)

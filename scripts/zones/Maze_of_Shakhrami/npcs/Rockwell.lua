@@ -13,7 +13,7 @@ entity.onTrade = function(player, npc, trade)
         player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.YOUR_CRYSTAL_BALL) == QUEST_ACCEPTED and
         npcUtil.tradeHas(trade, xi.item.AHRIMAN_LENS)
     then
-        player:setCharVar("QuestYourCrystalBall_prog", 1)
+        player:setCharVar('QuestYourCrystalBall_prog', 1)
         player:confirmTrade(trade)
     end
 end
@@ -21,7 +21,7 @@ end
 entity.onTrigger = function(player, npc)
     if
         player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.YOUR_CRYSTAL_BALL) == QUEST_ACCEPTED and
-        player:getCharVar("QuestYourCrystalBall_prog") == 1
+        player:getCharVar('QuestYourCrystalBall_prog') == 1
     then
         player:startEvent(52)
     else
@@ -34,7 +34,7 @@ end
 
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 52 and npcUtil.giveItem(player, xi.item.DIVINATION_SPHERE) then
-        player:setCharVar("QuestYourCrystalBall_prog", 0)
+        player:setCharVar('QuestYourCrystalBall_prog', 0)
     end
 end
 

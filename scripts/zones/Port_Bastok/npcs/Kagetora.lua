@@ -10,7 +10,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if player:getCharVar("twentyInPirateYearsCS") == 1 then
+    if player:getCharVar('twentyInPirateYearsCS') == 1 then
         player:startEvent(261)
     end
 end
@@ -20,7 +20,7 @@ end
 
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 261 then
-        player:setCharVar("twentyInPirateYearsCS", 2)
+        player:setCharVar('twentyInPirateYearsCS', 2)
     end
 end
 

@@ -2,7 +2,7 @@
 -- Area: Grand Palace of Hu'Xzoi
 --  Mob: Eo'ghrah
 -----------------------------------
-mixins = { require("scripts/mixins/families/ghrah") }
+mixins = { require('scripts/mixins/families/ghrah') }
 -----------------------------------
 local entity = {}
 

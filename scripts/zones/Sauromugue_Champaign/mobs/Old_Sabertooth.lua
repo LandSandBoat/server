@@ -18,7 +18,7 @@ entity.onMobDeath = function(mob, player, optParams)
                 person:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_FANGED_ONE) == QUEST_ACCEPTED and
                 person:checkDistance(mob) < 32
             then
-                person:setCharVar("TheFangedOneCS", 2)
+                person:setCharVar('TheFangedOneCS', 2)
             end
         end
     end

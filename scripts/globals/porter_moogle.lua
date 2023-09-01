@@ -175,15 +175,12 @@ end
 -----------------------------------
 local function storeItems(player, storableItemIds, slipId, eventTable)
     if #storableItemIds > 0 then
-        local param0 = 0
-        local param1 = 0
+        local param0 = #storableItemIds
+        local param1 = 1
 
         if #storableItemIds == 1 then
             param0 = storableItemIds[1]
             param1 = 0
-        else
-            param0 = #storableItemIds
-            param1 = 1
         end
 
         local extra = { }

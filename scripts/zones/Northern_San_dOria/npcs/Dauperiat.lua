@@ -10,7 +10,7 @@ local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     local black = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.BLACKMAIL)
-    local questState = player:getCharVar("BlackMailQuest")
+    local questState = player:getCharVar('BlackMailQuest')
 
     if black == QUEST_ACCEPTED and questState == 2 or black == QUEST_COMPLETED then
         if
@@ -27,7 +27,7 @@ entity.onTrigger = function(player, npc)
     local blackMail = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.BLACKMAIL)
     local sanFame = player:getFameLevel(xi.quest.fame_area.SANDORIA)
     local homeRank = player:getRank(player:getNation())
-    local questState = player:getCharVar("BlackMailQuest")
+    local questState = player:getCharVar('BlackMailQuest')
 
     if blackMail == QUEST_AVAILABLE and sanFame >= 3 and homeRank >= 3 then
         player:startEvent(643) -- 643 gives me letter
@@ -62,7 +62,7 @@ entity.onEventFinish = function(player, csid, option, npc)
         player:addKeyItem(xi.ki.SUSPICIOUS_ENVELOPE)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.SUSPICIOUS_ENVELOPE)
     elseif csid == 646 and option == 1 then
-        player:setCharVar("BlackMailQuest", 2)
+        player:setCharVar('BlackMailQuest', 2)
     elseif csid == 648 then
         player:tradeComplete()
         npcUtil.giveCurrency(player, 'gil', 900)

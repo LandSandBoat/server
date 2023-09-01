@@ -142,7 +142,7 @@ quest.sections =
             ['Fyi_Chalmwoh'] =
             {
                 onTrigger = function(player, npc)
-                    local wait = quest:getVar(player, "Wait")
+                    local wait = quest:getVar(player, 'Wait')
                     if os.time() >= wait + 60 then
                         return quest:progressEvent(311)
                     else

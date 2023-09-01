@@ -1,7 +1,7 @@
 -----------------------------------
 -- Abyssea Sturdy Pyxis - Light
 -----------------------------------
-require("scripts/globals/abyssea")
+require('scripts/globals/abyssea')
 -----------------------------------
 xi = xi or {}
 xi.pyxis = xi.pyxis or {}
@@ -10,8 +10,8 @@ xi.pyxis.light = {}
 
 xi.pyxis.light.giveLight = function(npc, player)
     local alliance = player:getAlliance()
-    local light  = npc:getLocalVar("LIGHT")
-    local lightValue = npc:getLocalVar("LIGHT_VALUE")
+    local light  = npc:getLocalVar('LIGHT')
+    local lightValue = npc:getLocalVar('LIGHT_VALUE')
 
     for p, member in ipairs(alliance) do
         if

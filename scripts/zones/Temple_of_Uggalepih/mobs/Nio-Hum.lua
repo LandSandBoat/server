@@ -2,7 +2,7 @@
 -- Area: Temple of Uggalepih
 --   NM: Nio-Hum
 -----------------------------------
-mixins = { require("scripts/mixins/job_special") }
+mixins = { require('scripts/mixins/job_special') }
 -----------------------------------
 local entity = {}
 

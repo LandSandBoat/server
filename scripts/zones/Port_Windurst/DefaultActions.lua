@@ -1,4 +1,4 @@
-local ID = zones[xi.zone.PORT_WINDURST]
+-- local ID = zones[xi.zone.PORT_WINDURST]
 
 return {
     ['Ada']             = { event = 44 },

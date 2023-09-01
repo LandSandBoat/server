@@ -41,7 +41,7 @@ local function parseActionShorthand(actionDef)
     end
 
     -- Sequence
-    if #actionDef > 0 and type(actionDef[1]) == "table" then
+    if #actionDef > 0 and type(actionDef[1]) == 'table' then
         local sequence = Sequence:new(actionDef)
         if sequence then
             return sequence
@@ -123,8 +123,8 @@ end
 
 -- Returns a string containing identification for a specific action
 function actionUtil.getActionVarName(secondLevelKey, thirdLevelKey, suffix)
-    suffix = suffix or ""
-    return string.format("[Action][%s][%s]%s", secondLevelKey, thirdLevelKey, suffix)
+    suffix = suffix or ''
+    return string.format('[Action][%s][%s]%s', secondLevelKey, thirdLevelKey, suffix)
 end
 
 return actionUtil

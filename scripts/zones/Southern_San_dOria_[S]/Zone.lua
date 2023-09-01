@@ -16,7 +16,7 @@ zoneObject.onZoneIn = function(player, prevZone)
     if prevZone == xi.zone.EAST_RONFAURE_S then
         if
             player:getQuestStatus(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.KNOT_QUITE_THERE) == QUEST_ACCEPTED and
-            player:getCharVar("KnotQuiteThere") == 2
+            player:getCharVar('KnotQuiteThere') == 2
         then
             cs = 62
         end
@@ -42,7 +42,7 @@ end
 
 zoneObject.onEventFinish = function(player, csid, option, npc)
     if csid == 62 then
-        player:setCharVar("KnotQuiteThere", 3)
+        player:setCharVar('KnotQuiteThere', 3)
     end
 end
 

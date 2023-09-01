@@ -5,13 +5,13 @@ local attachmentObject = {}
 
 attachmentObject.onEquip = function(pet)
     local skill = math.max(pet:getSkillLevel(xi.skill.AUTOMATON_MELEE), pet:getSkillLevel(xi.skill.AUTOMATON_RANGED), pet:getSkillLevel(xi.skill.AUTOMATON_MAGIC))
-    pet:addMod(xi.mod.ENSPELL, xi.magic.element.THUNDER)
+    pet:addMod(xi.mod.ENSPELL, xi.element.THUNDER)
     pet:addMod(xi.mod.ENSPELL_DMG, skill * 0.1)
     pet:addMod(xi.mod.ENSPELL_CHANCE, 20)
 end
 
 attachmentObject.onUnequip = function(pet)
-    pet:delMod(xi.mod.ENSPELL, xi.magic.element.THUNDER)
+    pet:delMod(xi.mod.ENSPELL, xi.element.THUNDER)
     pet:delMod(xi.mod.ENSPELL_DMG, pet:getMod(xi.mod.ENSPELL_DMG))
     pet:delMod(xi.mod.ENSPELL_CHANCE, 20)
 end

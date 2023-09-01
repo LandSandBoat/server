@@ -2,7 +2,7 @@
 -- Area: Temenos Northern Tower
 --  Mob: Tonberry's Avatar
 -----------------------------------
-mixins = { require("scripts/mixins/families/avatar") }
+mixins = { require('scripts/mixins/families/avatar') }
 -----------------------------------
 local entity = {}
 

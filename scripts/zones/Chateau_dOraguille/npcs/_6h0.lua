@@ -47,7 +47,7 @@ entity.onTrigger = function(player, npc)
     local underOath = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.UNDER_OATH)
 
     -- "Under Oath" (PLD AF Body)
-    if player:getCharVar("UnderOathCS") == 8 then
+    if player:getCharVar('UnderOathCS') == 8 then
         player:startEvent(89)
     elseif
         player:getMainJob() == xi.job.PLD and mLvl >= xi.settings.main.AF2_QUEST_LEVEL and
@@ -64,7 +64,7 @@ entity.onTrigger = function(player, npc)
         player:startEvent(574, 0, 0, 0, TrustMemory(player))
 
     -- "A Boy's Dream" (PLD AF Feet)
-    elseif player:getCharVar("aBoysDreamCS") == 8 then
+    elseif player:getCharVar('aBoysDreamCS') == 8 then
         player:startEvent(88)
 
     -- San d'Oria Rank 10 (different default)
@@ -91,20 +91,20 @@ entity.onEventFinish = function(player, csid, option, npc)
             player:delKeyItem(xi.ki.KNIGHTS_BOOTS)
             player:addItem(xi.item.GALLANT_LEGGINGS)
             player:messageSpecial(ID.text.ITEM_OBTAINED, xi.item.GALLANT_LEGGINGS) -- Gallant Leggings
-            player:setCharVar("aBoysDreamCS", 0)
+            player:setCharVar('aBoysDreamCS', 0)
             player:addFame(xi.quest.fame_area.SANDORIA, 40)
             player:completeQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.A_BOY_S_DREAM)
         end
     elseif csid == 90 and option == 1 then
         player:addQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.UNDER_OATH)
-        player:setCharVar("UnderOathCS", 0)
+        player:setCharVar('UnderOathCS', 0)
     elseif csid == 89 then
         if player:getFreeSlotsCount() == 0 then
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.item.GALLANT_SURCOAT)
         else
             player:addItem(xi.item.GALLANT_SURCOAT)
             player:messageSpecial(ID.text.ITEM_OBTAINED, xi.item.GALLANT_SURCOAT) -- Gallant Surcoat
-            player:setCharVar("UnderOathCS", 9)
+            player:setCharVar('UnderOathCS', 9)
             player:addFame(xi.quest.fame_area.SANDORIA, 60)
             player:setTitle(xi.title.PARAGON_OF_PALADIN_EXCELLENCE)
             player:completeQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.UNDER_OATH)

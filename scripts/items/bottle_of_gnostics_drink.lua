@@ -14,7 +14,7 @@ itemObject.onItemUse = function(target)
     local power     = -10   -- Power Level unknown, using Animus Minueo Value as baseline.
     local duration  = 60
 
-    xi.item_utils.addItemEffect(target, effect, power, duration)
+    xi.itemUtils.addItemEffect(target, effect, power, duration)
 end
 
 return itemObject

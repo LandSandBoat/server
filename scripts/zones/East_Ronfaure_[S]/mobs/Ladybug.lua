@@ -4,7 +4,7 @@
 -- Note: PH for Skogs Fru
 -----------------------------------
 local ID = zones[xi.zone.EAST_RONFAURE_S]
-mixins = { require("scripts/mixins/families/ladybug") }
+mixins = { require('scripts/mixins/families/ladybug') }
 -----------------------------------
 local entity = {}
 

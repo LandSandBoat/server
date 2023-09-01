@@ -17,7 +17,7 @@ end
 
 entity.onMobDeath = function(mob, player, optParams)
     if
-        player:getCharVar("EcoStatus") == 101 and
+        player:getCharVar('EcoStatus') == 101 and
         player:hasStatusEffect(xi.effect.LEVEL_RESTRICTION)
     then
         local bothDead = true
@@ -28,7 +28,7 @@ entity.onMobDeath = function(mob, player, optParams)
         end
 
         if bothDead then
-            player:setCharVar("EcoStatus", 102)
+            player:setCharVar('EcoStatus', 102)
         end
     end
 end

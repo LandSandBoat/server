@@ -11,7 +11,7 @@ end
 
 entity.onTrigger = function(player, npc)
     local inAStew      = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.IN_A_STEW)
-    local iasVar       = player:getCharVar("IASvar")
+    local iasVar       = player:getCharVar('IASvar')
     local chocobilious = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CHOCOBILIOUS)
 
     -- IN A STEW
@@ -38,7 +38,7 @@ end
 entity.onEventFinish = function(player, csid, option, npc)
     -- IN A STEW
     if csid == 233 then
-        player:setCharVar("IASvar", 2)
+        player:setCharVar('IASvar', 2)
     end
 end
 

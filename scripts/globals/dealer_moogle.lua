@@ -3384,9 +3384,9 @@ local debugInfo = function(player, item, list, option, altIDs, idx)
     end
 
     if debug.TO_PLAYER then
-        player:PrintToPlayer(string.format("DEBUG: list: %u, idx: %u, submenuid %u, slot: %u", list, idx, idxAlt1, idxAlt2), xi.msg.channel.SYSTEM_3)
+        player:PrintToPlayer(string.format('DEBUG: list: %u, idx: %u, submenuid %u, slot: %u', list, idx, idxAlt1, idxAlt2), xi.msg.channel.SYSTEM_3)
     else
-        print(string.format("DEBUG: list: %u, idx: %u, submenuid %u, slot: %u", list, idx, idxAlt1, idxAlt2))
+        print(string.format('DEBUG: list: %u, idx: %u, submenuid %u, slot: %u', list, idx, idxAlt1, idxAlt2))
     end
 end
 
@@ -3451,11 +3451,11 @@ xi.dealerMoogle.onTrigger = function(player, npc)
 end
 
 xi.dealerMoogle.onEventUpdate = function(player, csid, option, npc)
-    -- print("update", csid, option)
+    -- print('update', csid, option)
 end
 
 xi.dealerMoogle.onEventFinish = function(player, csid, option, npc)
-    -- print("finish", csid, option)
+    -- print('finish', csid, option)
     if option == 0 then
         return
     end

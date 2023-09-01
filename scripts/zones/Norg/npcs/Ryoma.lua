@@ -41,10 +41,10 @@ entity.onTrigger = function(player, npc)
         player:startEvent(136) -- Start Quest "True Will"
     elseif
         player:hasKeyItem(xi.ki.OLD_TRICK_BOX) and
-        player:getCharVar("trueWillCS") == 0
+        player:getCharVar('trueWillCS') == 0
     then
         player:startEvent(137)
-    elseif player:getCharVar("trueWillCS") == 1 then
+    elseif player:getCharVar('trueWillCS') == 1 then
         player:startEvent(138)
     end
 end
@@ -52,7 +52,7 @@ end
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 133 then
         player:addQuest(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.TWENTY_IN_PIRATE_YEARS)
-        player:setCharVar("twentyInPirateYearsCS", 1)
+        player:setCharVar('twentyInPirateYearsCS', 1)
     elseif csid == 134 then
         if player:getFreeSlotsCount() <= 1 then
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.item.ANJU)
@@ -63,7 +63,7 @@ entity.onEventFinish = function(player, csid, option, npc)
             player:messageSpecial(ID.text.ITEM_OBTAINED, xi.item.ANJU) -- Anju
             player:messageSpecial(ID.text.ITEM_OBTAINED, xi.item.ZUSHIO) -- Zushio
             player:needToZone()
-            player:setCharVar("twentyInPirateYearsCS", 0)
+            player:setCharVar('twentyInPirateYearsCS', 0)
             player:addFame(xi.quest.fame_area.NORG, 30)
             player:completeQuest(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.TWENTY_IN_PIRATE_YEARS)
         end
@@ -72,7 +72,7 @@ entity.onEventFinish = function(player, csid, option, npc)
     elseif csid == 136 then
         player:addQuest(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.TRUE_WILL)
     elseif csid == 137 then
-        player:setCharVar("trueWillCS", 1)
+        player:setCharVar('trueWillCS', 1)
     end
 end
 

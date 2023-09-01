@@ -14,8 +14,8 @@ end
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local dmgmod = 1
 
-    if mob:getName() == "Kreutzet" then
-        local stormwindDamage = mob:getLocalVar("stormwindDamage")
+    if mob:getName() == 'Kreutzet' then
+        local stormwindDamage = mob:getLocalVar('stormwindDamage')
         if stormwindDamage == 2 then
             dmgmod = 1.25
         elseif stormwindDamage == 3 then
@@ -23,7 +23,7 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
         end
     end
 
-    local info = xi.mobskills.mobMagicalMove(mob, target, skill, mob:getWeaponDmg() * 3, xi.magic.ele.WIND, dmgmod, xi.mobskills.magicalTpBonus.NO_EFFECT)
+    local info = xi.mobskills.mobMagicalMove(mob, target, skill, mob:getWeaponDmg() * 3, xi.element.WIND, dmgmod, xi.mobskills.magicalTpBonus.NO_EFFECT)
     local dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.WIND, xi.mobskills.shadowBehavior.WIPE_SHADOWS)
 
     target:takeDamage(dmg, mob, xi.attackType.MAGICAL, xi.damageType.WIND)

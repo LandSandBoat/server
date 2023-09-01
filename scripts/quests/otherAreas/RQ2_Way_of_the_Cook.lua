@@ -32,7 +32,7 @@ quest.sections =
             {
                 onTrigger = function(player, npc)
                     if
-                        player:getCharVar("Quest[4][0]DayCompleted") + 7 < VanadielUniqueDay() and
+                        player:getCharVar('Quest[4][0]DayCompleted') + 7 < VanadielUniqueDay() and
                         player:getFameLevel(xi.quest.fame_area.WINDURST) > 2
                     then
                         return quest:progressEvent(76, xi.item.BEEHIVE_CHIP, xi.item.DHALMEL_MEAT) -- Way of the Cook starting event.
@@ -48,7 +48,7 @@ quest.sections =
             {
                 [76] = function(player, csid, option, npc)
                     if option == 74 then -- Accept quest option.
-                        player:setCharVar("Quest[4][0]DayCompleted", 0)            -- Delete previous quest (Rycharde the Chef) variables
+                        player:setCharVar('Quest[4][0]DayCompleted', 0)            -- Delete previous quest (Rycharde the Chef) variables
                         quest:setVar(player, 'HourStarted', VanadielHour())        -- Set current quest started variables
                         quest:setVar(player, 'DayStarted', VanadielDayOfTheYear()) -- Set current quest started variables
                         quest:begin(player)
@@ -69,8 +69,8 @@ quest.sections =
             ['Rycharde'] =
             {
                 onTrigger = function(player, npc)
-                    daysPassed     = VanadielDayOfTheYear() - quest:getVar(player, "DayStarted")
-                    totalHoursLeft = 72 - (VanadielHour() + daysPassed * 24) + quest:getVar(player, "HourStarted")
+                    daysPassed     = VanadielDayOfTheYear() - quest:getVar(player, 'DayStarted')
+                    totalHoursLeft = 72 - (VanadielHour() + daysPassed * 24) + quest:getVar(player, 'HourStarted')
 
                     if totalHoursLeft > 0 then
                         return quest:event(78, totalHoursLeft) -- You have x hours left.
@@ -81,8 +81,8 @@ quest.sections =
 
                 onTrade = function(player, npc, trade)
                     if npcUtil.tradeHasExactly(trade, { xi.item.DHALMEL_MEAT, xi.item.BEEHIVE_CHIP }) then
-                        daysPassed     = VanadielDayOfTheYear() - quest:getVar(player, "DayStarted")
-                        totalHoursLeft = 72 - (VanadielHour() + daysPassed * 24) + quest:getVar(player, "HourStarted")
+                        daysPassed     = VanadielDayOfTheYear() - quest:getVar(player, 'DayStarted')
+                        totalHoursLeft = 72 - (VanadielHour() + daysPassed * 24) + quest:getVar(player, 'HourStarted')
 
                         if totalHoursLeft > 0 then
                             return quest:progressEvent(80) -- Quest completed in time.

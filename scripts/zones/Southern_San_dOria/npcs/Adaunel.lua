@@ -4,7 +4,7 @@
 -- General Info NPC
 -- !pos 80 -7 -22 230
 -----------------------------------
-require("scripts/quests/flyers_for_regine")
+require('scripts/quests/flyers_for_regine')
 -----------------------------------
 local entity = {}
 

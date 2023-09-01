@@ -39,7 +39,7 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
 
     if damage > 0 then
         if not target:hasStatusEffect(xi.effect.SLOW) then
-            local duration = 60 * applyResistanceAddEffect(player, target, xi.magic.ele.EARTH, 0)
+            local duration = 60 * applyResistanceAddEffect(player, target, xi.element.EARTH, 0)
             target:addStatusEffect(xi.effect.SLOW, 1500, 0, duration)
         end
     end

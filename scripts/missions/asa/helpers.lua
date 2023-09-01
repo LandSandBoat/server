@@ -18,10 +18,10 @@ local abilities =
 }
 
 xi.asa.helpers.astralFlow = function(mob)
-    local astralFlows = mob:getLocalVar("astralflows")
+    local astralFlows = mob:getLocalVar('astralflows')
     for k, v in pairs(hp) do
         if astralFlows == k and mob:getHPP() <= v and mob:canUseAbilities() then
-            mob:setLocalVar("astralflows", astralFlows + 1)
+            mob:setLocalVar('astralflows', astralFlows + 1)
             mob:useMobAbility(abilities[mob:getPool()])
         end
     end

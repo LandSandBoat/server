@@ -14,7 +14,7 @@ xi.events.eggHunt = xi.events.eggHunt or {}
 xi.events.eggHunt.data = xi.events.eggHunt.data or {}
 xi.events.eggHunt.entities = xi.events.eggHunt.entities or {}
 
-local event = SeasonalEvent:new("egg_hunt")
+local event = SeasonalEvent:new('egg_hunt')
 
 -- Default settings
 local settings =
@@ -25,11 +25,11 @@ local settings =
 
     VAR =
     {
-        DAILY_EGG     = "[EGG_HUNT]DAILY_EGG",
-        DAILY_REWARD  = "[EGG_HUNT]DAILY_REWARD",
-        DAILY_BONUS   = "[EGG_HUNT]DAILY_BONUS",
-        DAILY_HELM    = "[EGG_HUNT]DAILY_HELM",
-        FIRST_THREE   = "[EGG_HUNT]FIRST_THREE",
+        DAILY_EGG     = '[EGG_HUNT]DAILY_EGG',
+        DAILY_REWARD  = '[EGG_HUNT]DAILY_REWARD',
+        DAILY_BONUS   = '[EGG_HUNT]DAILY_BONUS',
+        DAILY_HELM    = '[EGG_HUNT]DAILY_HELM',
+        FIRST_THREE   = '[EGG_HUNT]FIRST_THREE',
     },
 
     -- Default era is 2005
@@ -58,13 +58,13 @@ local function loadSettings(currentTable, settingsName)
 
     if not settingTable then
         if currentTable.ANNOUNCE then
-            print("[EggHunt] No settings in main.lua, using default")
+            print('[EggHunt] No settings in main.lua, using default')
         end
 
         return
     else
         if currentTable.ANNOUNCE then
-            print("[EggHunt] Loading settings from main.lua")
+            print('[EggHunt] Loading settings from main.lua')
         end
     end
 
@@ -76,11 +76,11 @@ local function loadSettings(currentTable, settingsName)
     end
 end
 
-loadSettings(settings, "EGG_HUNT")
+loadSettings(settings, 'EGG_HUNT')
 
 xi.events.eggHunt.enabledCheck = function()
-    local month = tonumber(os.date("%m"))
-    local day = tonumber(os.date("%d"))
+    local month = tonumber(os.date('%m'))
+    local day = tonumber(os.date('%d'))
 
     if month == settings.START.MONTH then
         if day >= settings.START.DAY then
@@ -110,21 +110,21 @@ xi.events.eggHunt.data =
         moogle      = { 194, 56.195, 1.999, -25.207 }, --!pos 56.195 1.999 -25.207 230
         decorations =
         {
-            { 224,  -99.972,  1.000, -57.257, "0x00006B0500000000000000000000000000000000", },
-            { 224, -113.320,  1.000, -43.947, "0x00006B0500000000000000000000000000000000", },
-            { 160,  113.326,  1.000, -43.947, "0x00006B0500000000000000000000000000000000", },
-            { 160,   99.882,  1.000, -57.257, "0x00006B0500000000000000000000000000000000", },
-            {  96,  144.679, -2.000, 120.889, "0x00006B0500000000000000000000000000000000", },
-            {  96,  152.904, -2.000, 112.697, "0x00006B0500000000000000000000000000000000", },
+            { 224,  -99.972,  1.000, -57.257, '0x00006B0500000000000000000000000000000000', },
+            { 224, -113.320,  1.000, -43.947, '0x00006B0500000000000000000000000000000000', },
+            { 160,  113.326,  1.000, -43.947, '0x00006B0500000000000000000000000000000000', },
+            { 160,   99.882,  1.000, -57.257, '0x00006B0500000000000000000000000000000000', },
+            {  96,  144.679, -2.000, 120.889, '0x00006B0500000000000000000000000000000000', },
+            {  96,  152.904, -2.000, 112.697, '0x00006B0500000000000000000000000000000000', },
         },
         helpers =
         {
-            {  95,  143.780, -2.000, 119.940, "0x01001E0382116F20173017401750006000700000", },
-            {  95,  151.890, -2.000, 111.800, "0x01001E0482116F20173017401750006000700000", },
-            { 160,  112.000,  1.000, -42.600, "0x01001E0582116F20173017401750006000700000", },
-            { 160,   98.600,  1.000, -56.000, "0x01001E0682116F20173017401750006000700000", },
-            { 224,  -98.640,  1.000, -55.940, "0x01001E0782116F20173017401750006000700000", },
-            { 224, -112.000,  1.000, -42.600, "0x01001E0882116F20173017401750006000700000", },
+            {  95,  143.780, -2.000, 119.940, '0x01001E0382116F20173017401750006000700000', },
+            {  95,  151.890, -2.000, 111.800, '0x01001E0482116F20173017401750006000700000', },
+            { 160,  112.000,  1.000, -42.600, '0x01001E0582116F20173017401750006000700000', },
+            { 160,   98.600,  1.000, -56.000, '0x01001E0682116F20173017401750006000700000', },
+            { 224,  -98.640,  1.000, -55.940, '0x01001E0782116F20173017401750006000700000', },
+            { 224, -112.000,  1.000, -42.600, '0x01001E0882116F20173017401750006000700000', },
         },
     },
 
@@ -134,18 +134,18 @@ xi.events.eggHunt.data =
         moogle      = { 128, -224.135, 8.000, 53.476 }, -- !pos -224.135 8.000 53.476 231
         decorations =
         {
-            { 163,   87.834, 0.000,  8.015, "0x00006B0500000000000000000000000000000000", },
-            { 163,   84.074, 0.000,  4.233, "0x00006B0500000000000000000000000000000000", },
-            {   0, -245.045, 7.999, 34.350, "0x00006B0500000000000000000000000000000000", },
-            {   0, -245.045, 7.999, 53.650, "0x00006B0500000000000000000000000000000000", },
+            { 163,   87.834, 0.000,  8.015, '0x00006B0500000000000000000000000000000000', },
+            { 163,   84.074, 0.000,  4.233, '0x00006B0500000000000000000000000000000000', },
+            {   0, -245.045, 7.999, 34.350, '0x00006B0500000000000000000000000000000000', },
+            {   0, -245.045, 7.999, 53.650, '0x00006B0500000000000000000000000000000000', },
         },
         helpers =
         {
-            {   0, -243.800, 8.000, 33.500, "0x01001E0182116F20173017401750006000700000", },
-            {   0, -243.800, 8.000, 35.000, "0x01001E0282116F20173017401750006000700000", },
-            {   0, -243.800, 8.000, 52.800, "0x01001E0382116F20173017401750006000700000", },
-            {   0, -243.800, 8.000, 54.300, "0x01001E0482116F20173017401750006000700000", },
-            { 160,   83.100, 0.000,  5.200, "0x01001E0582116F20173017401750006000700000", },
+            {   0, -243.800, 8.000, 33.500, '0x01001E0182116F20173017401750006000700000', },
+            {   0, -243.800, 8.000, 35.000, '0x01001E0282116F20173017401750006000700000', },
+            {   0, -243.800, 8.000, 52.800, '0x01001E0382116F20173017401750006000700000', },
+            {   0, -243.800, 8.000, 54.300, '0x01001E0482116F20173017401750006000700000', },
+            { 160,   83.100, 0.000,  5.200, '0x01001E0582116F20173017401750006000700000', },
         },
     },
 
@@ -155,17 +155,17 @@ xi.events.eggHunt.data =
         moogle      = { 0, -33.600, -0.001, -110.000 }, -- !pos -33.600 -0.001 -110.000 234
         decorations =
         {
-            { 192, -10.200, -1.000, -127.100, "0x00006C0500000000000000000000000000000000", },
-            { 192, -21.800, -1.000, -127.100, "0x00006C0500000000000000000000000000000000", },
-            { 128,  82.000,  0.000,  -66.700, "0x00006C0500000000000000000000000000000000", },
-            { 128,  82.000,  0.000,  -77.300, "0x00006C0500000000000000000000000000000000", },
+            { 192, -10.200, -1.000, -127.100, '0x00006C0500000000000000000000000000000000', },
+            { 192, -21.800, -1.000, -127.100, '0x00006C0500000000000000000000000000000000', },
+            { 128,  82.000,  0.000,  -66.700, '0x00006C0500000000000000000000000000000000', },
+            { 128,  82.000,  0.000,  -77.300, '0x00006C0500000000000000000000000000000000', },
         },
         helpers =
         {
-            { 127,  80.500,  0.000,  -66.700, "0x01001E0182117120173017401750006000700000", },
-            { 127,  80.500,  0.000,  -77.300, "0x01001E0282117120173017401750006000700000", },
-            { 192, -10.250, -1.000, -125.900, "0x01001E0382117120173017401750006000700000", },
-            { 192, -21.800, -1.000, -125.900, "0x01001E0482117120173017401750006000700000", },
+            { 127,  80.500,  0.000,  -66.700, '0x01001E0182117120173017401750006000700000', },
+            { 127,  80.500,  0.000,  -77.300, '0x01001E0282117120173017401750006000700000', },
+            { 192, -10.250, -1.000, -125.900, '0x01001E0382117120173017401750006000700000', },
+            { 192, -21.800, -1.000, -125.900, '0x01001E0482117120173017401750006000700000', },
         },
     },
 
@@ -175,19 +175,19 @@ xi.events.eggHunt.data =
         moogle      = { 40, -260.440, -12.021, -79.538 }, -- !pos -260.440 -12.021 -79.538 235
         decorations =
         {
-            { 128, -153.700,  -4.000,   33.000, "0x00006C0500000000000000000000000000000000", },
-            { 128, -153.700,  -4.000,   27.000, "0x00006C0500000000000000000000000000000000", },
-            { 128, -153.700,  -4.000,  -27.000, "0x00006C0500000000000000000000000000000000", },
-            { 128, -153.700,  -4.000,  -33.000, "0x00006C0500000000000000000000000000000000", },
-            { 224, -362.004, -10.002, -173.953, "0x00006C0500000000000000000000000000000000", },
-            { 224, -353.928, -10.002, -182.068, "0x00006C0500000000000000000000000000000000", },
+            { 128, -153.700,  -4.000,   33.000, '0x00006C0500000000000000000000000000000000', },
+            { 128, -153.700,  -4.000,   27.000, '0x00006C0500000000000000000000000000000000', },
+            { 128, -153.700,  -4.000,  -27.000, '0x00006C0500000000000000000000000000000000', },
+            { 128, -153.700,  -4.000,  -33.000, '0x00006C0500000000000000000000000000000000', },
+            { 224, -362.004, -10.002, -173.953, '0x00006C0500000000000000000000000000000000', },
+            { 224, -353.928, -10.002, -182.068, '0x00006C0500000000000000000000000000000000', },
         },
         helpers =
         {
-            { 224, -353.000, -10.000, -181.080, "0x01001E0582117120173017401750006000700000", },
-            { 224, -360.900, -10.000, -173.000, "0x01001E0682117120173017401750006000700000", },
-            { 127, -155.000,  -4.000,   33.000, "0x01001E0782117120173017401750006000700000", },
-            { 127, -155.000,  -4.000,   27.000, "0x01001E0882117120173017401750006000700000", },
+            { 224, -353.000, -10.000, -181.080, '0x01001E0582117120173017401750006000700000', },
+            { 224, -360.900, -10.000, -173.000, '0x01001E0682117120173017401750006000700000', },
+            { 127, -155.000,  -4.000,   33.000, '0x01001E0782117120173017401750006000700000', },
+            { 127, -155.000,  -4.000,   27.000, '0x01001E0882117120173017401750006000700000', },
         },
     },
 
@@ -197,18 +197,18 @@ xi.events.eggHunt.data =
         moogle      = { 0, -55.470, -5.391, 216.362 }, -- !pos -55.470 -5.391 216.362 238
         decorations =
         {
-            { 192, 164.500, -0.250, -30.000, "0x00006D0500000000000000000000000000000000", },
-            { 192, 155.500, -0.250, -30.000, "0x00006D0500000000000000000000000000000000", },
-            {  64, -46.800, -4.916, 227.570, "0x00006D0500000000000000000000000000000000", },
-            {  64, -33.200, -4.982, 227.570, "0x00006D0500000000000000000000000000000000", },
+            { 192, 164.500, -0.250, -30.000, '0x00006D0500000000000000000000000000000000', },
+            { 192, 155.500, -0.250, -30.000, '0x00006D0500000000000000000000000000000000', },
+            {  64, -46.800, -4.916, 227.570, '0x00006D0500000000000000000000000000000000', },
+            {  64, -33.200, -4.982, 227.570, '0x00006D0500000000000000000000000000000000', },
         },
         helpers =
         {
-            { 192, 165.000, -0.250, -28.800, "0x01001E0582117020173017401750006000700000", },
-            { 192, 164.000, -0.250, -28.800, "0x01001E0682117020173017401750006000700000", },
-            { 192, 155.500, -0.250, -28.800, "0x01001E0782117020173017401750006000700000", },
-            {  63, -46.800, -4.900, 226.220, "0x01001E0882117020173017401750006000700000", },
-            {  63, -33.200, -4.900, 226.220, "0x01001E0182117020173017401750006000700000", },
+            { 192, 165.000, -0.250, -28.800, '0x01001E0582117020173017401750006000700000', },
+            { 192, 164.000, -0.250, -28.800, '0x01001E0682117020173017401750006000700000', },
+            { 192, 155.500, -0.250, -28.800, '0x01001E0782117020173017401750006000700000', },
+            {  63, -46.800, -4.900, 226.220, '0x01001E0882117020173017401750006000700000', },
+            {  63, -33.200, -4.900, 226.220, '0x01001E0182117020173017401750006000700000', },
         },
     },
 
@@ -218,19 +218,19 @@ xi.events.eggHunt.data =
         moogle      = { 161, 104.823, -5.000, -55.745 }, -- !pos 104.823 -5.000 -55.745 241
         decorations =
         {
-            { 128,  107.630, -5.000, -33.200, "0x00006D0500000000000000000000000000000000", },
-            { 128,  107.630, -5.000, -46.800, "0x00006D0500000000000000000000000000000000", },
-            {   0, -107.000, -5.250,  35.500, "0x00006D0500000000000000000000000000000000", },
-            {   0, -107.000, -5.250,  44.500, "0x00006D0500000000000000000000000000000000", },
+            { 128,  107.630, -5.000, -33.200, '0x00006D0500000000000000000000000000000000', },
+            { 128,  107.630, -5.000, -46.800, '0x00006D0500000000000000000000000000000000', },
+            {   0, -107.000, -5.250,  35.500, '0x00006D0500000000000000000000000000000000', },
+            {   0, -107.000, -5.250,  44.500, '0x00006D0500000000000000000000000000000000', },
         },
         helpers =
         {
-            {   0, -105.500, -5.250,  35.500, "0x01001E0282117020173017401750006000700000", },
-            {   0, -105.500, -5.250,  44.500, "0x01001E0782117020173017401750006000700000", },
-            { 127,  106.500, -5.000, -33.200, "0x01001E0382117020173017401750006000700000", },
-            { 127,  106.500, -5.000, -46.800, "0x01001E0482117020173017401750006000700000", },
-            { 127, -155.000, -4.000, -27.000, "0x01001E0100107120173017401750006000700000", },
-            { 127, -155.000, -4.000, -33.000, "0x01001E0282117120173017401750006000700000", },
+            {   0, -105.500, -5.250,  35.500, '0x01001E0282117020173017401750006000700000', },
+            {   0, -105.500, -5.250,  44.500, '0x01001E0782117020173017401750006000700000', },
+            { 127,  106.500, -5.000, -33.200, '0x01001E0382117020173017401750006000700000', },
+            { 127,  106.500, -5.000, -46.800, '0x01001E0482117020173017401750006000700000', },
+            { 127, -155.000, -4.000, -27.000, '0x01001E0100107120173017401750006000700000', },
+            { 127, -155.000, -4.000, -33.000, '0x01001E0282117120173017401750006000700000', },
         },
     },
 }
@@ -256,12 +256,12 @@ local messageOffset =
 ------------------------------------
 
 xi.events.eggHunt.charToEgg = function(char)
-    -- Char offset from "A", eg. B = 1, C = 2, etc.
+    -- Char offset from 'A', eg. B = 1, C = 2, etc.
     local charOffset = string.byte(string.lower(char)) - 97
     return xi.item.A_EGG + charOffset
 end
 
--- If egg is already in table, return index so it can be added to total eg. 2x "A" Egg
+-- If egg is already in table, return index so it can be added to total eg. 2x 'A' Egg
 xi.events.eggHunt.findEggIndex = function(eggList, eggLetter)
     for index, egg in pairs(eggList) do
         if egg and egg[1] == eggLetter then
@@ -496,7 +496,7 @@ local straightEight = function(player, npc, trade)
         return
     end
 
-    local initial = string.lower(string.sub(player:getName(), 1, 1)) -- eg. "a"
+    local initial = string.lower(string.sub(player:getName(), 1, 1)) -- eg. 'a'
     local letter = string.byte(initial) - 97 + xi.item.A_EGG        -- itemID
     local eggs = {}
 
@@ -522,25 +522,25 @@ end
 
 local regionNames =
 {
-    xi.events.eggHunt.stringToEggs("RONFA"),
-    xi.events.eggHunt.stringToEggs("ZULKH"),
-    xi.events.eggHunt.stringToEggs("NORVA"),
-    xi.events.eggHunt.stringToEggs("GUSTA"),
-    xi.events.eggHunt.stringToEggs("DERFL"),
-    xi.events.eggHunt.stringToEggs("SARUT"),
-    xi.events.eggHunt.stringToEggs("KOLSH"),
-    xi.events.eggHunt.stringToEggs("ARAGO"),
-    xi.events.eggHunt.stringToEggs("FAURE"),
-    xi.events.eggHunt.stringToEggs("VALDE"),
-    xi.events.eggHunt.stringToEggs("QUFIM"),
-    xi.events.eggHunt.stringToEggs("LITEL"),
-    xi.events.eggHunt.stringToEggs("KUZOT"),
-    xi.events.eggHunt.stringToEggs("VOLLB"),
-    xi.events.eggHunt.stringToEggs("ELSHI"),
-    xi.events.eggHunt.stringToEggs("ELSHI"),
-    xi.events.eggHunt.stringToEggs("TULIA"),
-    xi.events.eggHunt.stringToEggs("MOVAL"),
-    xi.events.eggHunt.stringToEggs("TAVNA"),
+    xi.events.eggHunt.stringToEggs('RONFA'),
+    xi.events.eggHunt.stringToEggs('ZULKH'),
+    xi.events.eggHunt.stringToEggs('NORVA'),
+    xi.events.eggHunt.stringToEggs('GUSTA'),
+    xi.events.eggHunt.stringToEggs('DERFL'),
+    xi.events.eggHunt.stringToEggs('SARUT'),
+    xi.events.eggHunt.stringToEggs('KOLSH'),
+    xi.events.eggHunt.stringToEggs('ARAGO'),
+    xi.events.eggHunt.stringToEggs('FAURE'),
+    xi.events.eggHunt.stringToEggs('VALDE'),
+    xi.events.eggHunt.stringToEggs('QUFIM'),
+    xi.events.eggHunt.stringToEggs('LITEL'),
+    xi.events.eggHunt.stringToEggs('KUZOT'),
+    xi.events.eggHunt.stringToEggs('VOLLB'),
+    xi.events.eggHunt.stringToEggs('ELSHI'),
+    xi.events.eggHunt.stringToEggs('ELSHI'),
+    xi.events.eggHunt.stringToEggs('TULIA'),
+    xi.events.eggHunt.stringToEggs('MOVAL'),
+    xi.events.eggHunt.stringToEggs('TAVNA'),
 }
 
 local beastCostumes =
@@ -635,14 +635,14 @@ end
 
 local elementNames =
 {
-    { xi.events.eggHunt.stringToEggs("FIRE"),    xi.item.RED_DROP    },
-    { xi.events.eggHunt.stringToEggs("ICE"),     xi.item.CLEAR_DROP  },
-    { xi.events.eggHunt.stringToEggs("AIR"),     xi.item.GREEN_DROP  },
-    { xi.events.eggHunt.stringToEggs("EARTH"),   xi.item.YELLOW_DROP },
-    { xi.events.eggHunt.stringToEggs("THUNDER"), xi.item.PURPLE_DROP },
-    { xi.events.eggHunt.stringToEggs("WATER"),   xi.item.BLUE_DROP   },
-    { xi.events.eggHunt.stringToEggs("LIGHT"),   xi.item.WHITE_DROP  },
-    { xi.events.eggHunt.stringToEggs("DARK"),    xi.item.BLACK_DROP  },
+    { xi.events.eggHunt.stringToEggs('FIRE'),    xi.item.RED_DROP    },
+    { xi.events.eggHunt.stringToEggs('ICE'),     xi.item.CLEAR_DROP  },
+    { xi.events.eggHunt.stringToEggs('AIR'),     xi.item.GREEN_DROP  },
+    { xi.events.eggHunt.stringToEggs('EARTH'),   xi.item.YELLOW_DROP },
+    { xi.events.eggHunt.stringToEggs('THUNDER'), xi.item.PURPLE_DROP },
+    { xi.events.eggHunt.stringToEggs('WATER'),   xi.item.BLUE_DROP   },
+    { xi.events.eggHunt.stringToEggs('LIGHT'),   xi.item.WHITE_DROP  },
+    { xi.events.eggHunt.stringToEggs('DARK'),    xi.item.BLACK_DROP  },
 }
 
 local weekDay = function(player, npc, trade)
@@ -664,12 +664,12 @@ end
 
 local eraCombo =
 {
-    ELEVEN   = { xi.events.eggHunt.stringToEggs("ELEVEN"),   xi.item.HATCHLING_SHIELD     },
-    LEAFKIN  = { xi.events.eggHunt.stringToEggs("LEAFKIN"),  xi.item.PIECE_OF_COPSE_CANDY },
-    VANADIEL = { xi.events.eggHunt.stringToEggs("VANADIEL"), xi.item.CRACKER              },
-    HARE     = { xi.events.eggHunt.stringToEggs("HARE"),     xi.item.RABBIT_CAP           },
-    BUNNY    = { xi.events.eggHunt.stringToEggs("BUNNY"),    xi.item.RABBIT_CAP           },
-    RABBIT   = { xi.events.eggHunt.stringToEggs("RABBIT"),   xi.item.RABBIT_CAP           },
+    ELEVEN   = { xi.events.eggHunt.stringToEggs('ELEVEN'),   xi.item.HATCHLING_SHIELD     },
+    LEAFKIN  = { xi.events.eggHunt.stringToEggs('LEAFKIN'),  xi.item.PIECE_OF_COPSE_CANDY },
+    VANADIEL = { xi.events.eggHunt.stringToEggs('VANADIEL'), xi.item.CRACKER              },
+    HARE     = { xi.events.eggHunt.stringToEggs('HARE'),     xi.item.RABBIT_CAP           },
+    BUNNY    = { xi.events.eggHunt.stringToEggs('BUNNY'),    xi.item.RABBIT_CAP           },
+    RABBIT   = { xi.events.eggHunt.stringToEggs('RABBIT'),   xi.item.RABBIT_CAP           },
 }
 
 local testEraCombo = function(player, npc, trade, combo, rewardQty)
@@ -817,7 +817,7 @@ xi.events.eggHunt.onTrigger = function(player, npc)
 end
 
 xi.events.eggHunt.onEventFinish = function(player, csid, option, npc)
-    -- "Forget it." or out of range
+    -- 'Forget it.' or out of range
     if option > 28 then
         return
 
@@ -865,10 +865,10 @@ xi.events.eggHunt.onTrade = function(player, npc, trade)
 
             -- If reward message is a message ID, attempt to use messageText, if not use custom text
             if v.message ~= nil then
-                if type(v.message) == "number" then
+                if type(v.message) == 'number' then
                     player:messageText(npc, zones[zoneID].text.EGG_HUNT_OFFSET + v.message)
                 else
-                    player:PrintToPlayer(string.format("Moogle : %s", v.message), xi.msg.channel.NS_SAY, "Moogle")
+                    player:PrintToPlayer(string.format('Moogle : %s', v.message), xi.msg.channel.NS_SAY, 'Moogle')
                 end
             end
 
@@ -879,7 +879,7 @@ xi.events.eggHunt.onTrade = function(player, npc, trade)
                 -- One reward per day
                 player:setVar(settings.VAR.DAILY_REWARD, VanadielUniqueDay())
 
-                -- Call "after" function if it exists
+                -- Call 'after' function if it exists
                 if v.after then
                     v.after(player, npc, trade)
                 end
@@ -903,7 +903,7 @@ local function insertNpc(zone, entry)
 
     local npc = zone:insertDynamicEntity({
         objtype     = xi.objType.NPC,
-        name        = "     ",
+        name        = '     ',
         look        = look,
         x           = x,
         y           = y,
@@ -921,8 +921,8 @@ end
 local function insertMoogle(zone, pos)
     local npc = zone:insertDynamicEntity({
         objtype       = xi.objType.NPC,
-        name          = "Egg_Hunt_Moogle",
-        packetName    = "Moogle",
+        name          = 'Egg_Hunt_Moogle',
+        packetName    = 'Moogle',
         look          = 82,
         x             = pos[2],
         y             = pos[3],

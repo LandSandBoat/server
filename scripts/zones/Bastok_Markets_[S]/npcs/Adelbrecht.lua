@@ -34,7 +34,7 @@ entity.onTrigger = function(player, npc)
         player:startEvent(139)
     elseif
         theFightingFourth == QUEST_AVAILABLE and
-        player:getCharVar("BLUE_R_LETTER_USED") == 1
+        player:getCharVar('BLUE_R_LETTER_USED') == 1
     then
         player:startEvent(139)
     elseif
@@ -44,17 +44,17 @@ entity.onTrigger = function(player, npc)
         player:startEvent(140)
     elseif
         theFightingFourth == QUEST_ACCEPTED and
-        player:getCharVar("THE_FIGHTING_FOURTH") == 1
+        player:getCharVar('THE_FIGHTING_FOURTH') == 1
     then
         player:startEvent(141)
     elseif
         theFightingFourth == QUEST_ACCEPTED and
-        player:getCharVar("THE_FIGHTING_FOURTH") == 2
+        player:getCharVar('THE_FIGHTING_FOURTH') == 2
     then
         player:startEvent(142)
     elseif
         theFightingFourth == QUEST_ACCEPTED and
-        player:getCharVar("THE_FIGHTING_FOURTH") == 3
+        player:getCharVar('THE_FIGHTING_FOURTH') == 3
     then
         player:startEvent(143)
     elseif
@@ -73,7 +73,7 @@ entity.onEventFinish = function(player, csid, option, npc)
         player:addKeyItem(xi.ki.BATTLE_RATIONS)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.BATTLE_RATIONS)
         player:addQuest(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.THE_FIGHTING_FOURTH)
-        player:setCharVar("BLUE_R_LETTER_USED", 1)
+        player:setCharVar('BLUE_R_LETTER_USED', 1)
         player:delKeyItem(xi.ki.BLUE_RECOMMENDATION_LETTER)
     elseif csid == 140 and option == 1 then
         player:delKeyItem(xi.ki.BATTLE_RATIONS)
@@ -82,10 +82,10 @@ entity.onEventFinish = function(player, csid, option, npc)
         player:delQuest(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.THE_FIGHTING_FOURTH)
     elseif csid == 143 then
         -- Is first join, so add Sprinter's Shoes and bronze medal
-        if player:getCharVar("Campaign_Nation") == 0 then
+        if player:getCharVar('Campaign_Nation') == 0 then
             if player:getFreeSlotsCount() >= 1 then
                 player:setCampaignAllegiance(2)
-                player:setCharVar("BLUE_R_LETTER_USED", 0)
+                player:setCharVar('BLUE_R_LETTER_USED', 0)
                 player:addTitle(xi.title.FOURTH_DIVISION_SOLDIER)
                 player:addKeyItem(xi.ki.BRONZE_RIBBON_OF_SERVICE)
                 player:addItem(xi.item.SPRINTERS_SHOES)
@@ -97,7 +97,7 @@ entity.onEventFinish = function(player, csid, option, npc)
             end
         else
             player:setCampaignAllegiance(2)
-            player:setCharVar("BLUE_R_LETTER_USED", 0)
+            player:setCharVar('BLUE_R_LETTER_USED', 0)
             player:addTitle(xi.title.FOURTH_DIVISION_SOLDIER)
             player:completeQuest(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.THE_FIGHTING_FOURTH)
         end

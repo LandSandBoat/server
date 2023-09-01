@@ -1,8 +1,8 @@
 -----------------------------------
 -- Thief Job Utilities
 -----------------------------------
-require("scripts/globals/quests")
-require("scripts/globals/utils")
+require('scripts/globals/quests')
+require('scripts/globals/utils')
 -----------------------------------
 xi = xi or {}
 xi.job_utils = xi.job_utils or {}
@@ -394,7 +394,7 @@ xi.job_utils.thief.useSteal = function(player, target, ability, action)
         player:addItem(stolen)
         target:itemStolen()
         ability:setMsg(xi.msg.basic.STEAL_SUCCESS) -- Item stolen successfully
-        target:triggerListener("ITEM_STOLEN", target, player, stolen)
+        target:triggerListener('ITEM_STOLEN', target, player, stolen)
         -- Aura Steal does not trigger on successful item steal
         return stolen
     else
@@ -405,7 +405,7 @@ xi.job_utils.thief.useSteal = function(player, target, ability, action)
     -- Attempt Aura steal
     -- local effect = xi.effect.NONE
     if stolen == 0 and player:hasTrait(75) then
-        local resist = applyResistanceAbility(player, target, xi.magic.ele.NONE, 0, 0)
+        local resist = applyResistanceAbility(player, target, xi.element.NONE, 0, 0)
         -- local effectStealSuccess = false
         if resist > 0.0625 then
             local auraStealChance = math.min(player:getMerit(xi.merit.AURA_STEAL), 95)

@@ -9,8 +9,8 @@ local entity = {}
 entity.onMobDeath = function(mob, player, optParams)
     local mg = GetMobByID(ID.mob.MOTHER_GLOBE)
 
-    if mg:getLocalVar("nextSlaveSpawnTime") == 0 then
-        mg:setLocalVar("nextSlaveSpawnTime", os.time() + 30)
+    if mg:getLocalVar('nextSlaveSpawnTime') == 0 then
+        mg:setLocalVar('nextSlaveSpawnTime', os.time() + 30)
     end
 end
 

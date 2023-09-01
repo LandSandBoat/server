@@ -11,7 +11,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if player:getCharVar("BathedInScent") == 1 then
+    if player:getCharVar('BathedInScent') == 1 then
         if player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.PERSONAL_HYGIENE) == QUEST_AVAILABLE then
             player:startEvent(191)
         elseif player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.PERSONAL_HYGIENE) == QUEST_ACCEPTED then
@@ -21,7 +21,7 @@ entity.onTrigger = function(player, npc)
         end
     elseif
         player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.PERSONAL_HYGIENE) == QUEST_ACCEPTED and
-        player:getCharVar("BathedInScent") == 0
+        player:getCharVar('BathedInScent') == 0
     then
         player:startEvent(193)
     else

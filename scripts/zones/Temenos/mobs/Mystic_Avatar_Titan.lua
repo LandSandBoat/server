@@ -2,7 +2,7 @@
 -- Area: Central Temenos 2nd Floor
 --  Mob: Mystic Avatar (Titan)
 -----------------------------------
-mixins = { require("scripts/mixins/job_special") }
+mixins = { require('scripts/mixins/job_special') }
 -----------------------------------
 local entity = {}
 

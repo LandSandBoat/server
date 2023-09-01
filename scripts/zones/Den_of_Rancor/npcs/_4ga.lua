@@ -3,7 +3,7 @@
 --  NPC: Lantern
 -- !pos 12.993 24.746 -296.651 160
 -----------------------------------
-local denOfRancorGlobal = require("scripts/zones/Den_of_Rancor/globals")
+local denOfRancorGlobal = require('scripts/zones/Den_of_Rancor/globals')
 -----------------------------------
 local entity = {}
 

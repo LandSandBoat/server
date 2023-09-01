@@ -1,7 +1,7 @@
 -----------------------------------
 -- Dominion Sergeant Global
 -----------------------------------
-require("scripts/globals/quests")
+require('scripts/globals/quests')
 -----------------------------------
 xi = xi or {}
 xi.abyssea = xi.abyssea or {}
@@ -146,10 +146,10 @@ local function completeDominionOp(player, opID)
 
     player:completeQuest(xi.quest.log_id.ABYSSEA, dominionOpQuests[opID][1])
     player:addExp(dominionOpQuests[opID][3] * xpMultiplier)
-    player:addCurrency("cruor", dominionOpQuests[opID][3] / 5)
-    player:messageSpecial(ID.text.CRUOR_TOTAL, dominionOpQuests[opID][3] / 5, player:getCurrency("cruor"))
-    player:addCurrency("dominion_note", dominionOpQuests[opID][3] / 10)
-    player:messageSpecial(ID.text.OBTAINS_DOMINION_NOTES, dominionOpQuests[opID][3] / 10, player:getCurrency("dominion_note"))
+    player:addCurrency('cruor', dominionOpQuests[opID][3] / 5)
+    player:messageSpecial(ID.text.CRUOR_TOTAL, dominionOpQuests[opID][3] / 5, player:getCurrency('cruor'))
+    player:addCurrency('dominion_note', dominionOpQuests[opID][3] / 10)
+    player:messageSpecial(ID.text.OBTAINS_DOMINION_NOTES, dominionOpQuests[opID][3] / 10, player:getCurrency('dominion_note'))
 
     clearOpVars(player, opID)
 end
@@ -168,7 +168,7 @@ end
 xi.abyssea.sergeantOnTrigger = function(player, npc)
     local sergeantInfo = sergeantData[npc:getName()]
     local activeOp = player:getCharVar('activeDominionOp')
-    local dominionNotes = player:getCurrency("dominion_note")
+    local dominionNotes = player:getCurrency('dominion_note')
 
     if activeOp == 0 then
         local packedInfluence = getPackedInfluenceList(player:getZoneID())

@@ -2,7 +2,7 @@
 -- Area: Castle Oztroja [S]
 --   NM: Fleshgnasher
 -----------------------------------
-mixins = { require("scripts/mixins/job_special") }
+mixins = { require('scripts/mixins/job_special') }
 -----------------------------------
 local entity = {}
 

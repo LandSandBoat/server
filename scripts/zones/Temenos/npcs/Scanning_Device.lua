@@ -25,14 +25,14 @@ end
 
 local timeVarNames =
 {
-    [1] = "[TEMENOS_NORTHERN_TOWER]Time",
-    [2] = "[TEMENOS_EASTERN_TOWER]Time",
-    [3] = "[TEMENOS_WESTERN_TOWER]Time",
-    [4] = "[CENTRAL_TEMENOS_4TH_FLOOR]Time",
-    [5] = "[CENTRAL_TEMENOS_3RD_FLOOR]Time",
-    [6] = "[CENTRAL_TEMENOS_2ND_FLOOR]Time",
-    [7] = "[CENTRAL_TEMENOS_1ST_FLOOR]Time",
-    [8] = "[CENTRAL_TEMENOS_BASEMENT]Time",
+    [1] = '[TEMENOS_NORTHERN_TOWER]Time',
+    [2] = '[TEMENOS_EASTERN_TOWER]Time',
+    [3] = '[TEMENOS_WESTERN_TOWER]Time',
+    [4] = '[CENTRAL_TEMENOS_4TH_FLOOR]Time',
+    [5] = '[CENTRAL_TEMENOS_3RD_FLOOR]Time',
+    [6] = '[CENTRAL_TEMENOS_2ND_FLOOR]Time',
+    [7] = '[CENTRAL_TEMENOS_1ST_FLOOR]Time',
+    [8] = '[CENTRAL_TEMENOS_BASEMENT]Time',
 }
 
 entity.onEventUpdate = function(player, csid, option, npc)

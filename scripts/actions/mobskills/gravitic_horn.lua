@@ -18,17 +18,15 @@ end
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local currentHP = target:getHP()
     -- remove all by 5%
-    local baseDamage = 0
+    local baseDamage = currentHP
 
     -- estimation based on "Throat Stab-like damage"
     if currentHP / target:getMaxHP() > 0.2 then
-        baseDamage = currentHP * .95
-    else
-        baseDamage = currentHP
+        baseDamage = currentHP * 0.95
     end
 
     -- Because shell matters, but we don't want to calculate damage normally via xi.mobskills.mobMagicalMove since this is a % attack
-    local damage = baseDamage * getElementalDamageReduction(target, xi.magic.ele.WIND)
+    local damage = baseDamage * getElementalDamageReduction(target, xi.element.WIND)
     -- we still need final adjustments to handle stoneskin etc though
     damage = xi.mobskills.mobFinalAdjustments(damage, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.WIND, xi.mobskills.shadowBehavior.WIPE_SHADOWS)
 

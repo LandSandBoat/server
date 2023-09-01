@@ -21,9 +21,9 @@ zoneObject.onZoneIn = function(player, prevZone)
 end
 
 zoneObject.afterZoneIn = function(player)
-    player:entityVisualPacket("kilk")
-    player:entityVisualPacket("izum")
-    player:entityVisualPacket("hast")
+    player:entityVisualPacket('kilk')
+    player:entityVisualPacket('izum')
+    player:entityVisualPacket('hast')
 end
 
 zoneObject.onConquestUpdate = function(zone, updatetype, influence, owner, ranking, isConquestAlliance)
