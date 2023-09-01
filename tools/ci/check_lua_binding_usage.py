@@ -97,6 +97,7 @@ def main():
     function_names.append("setStartFunction")
     function_names.append("setEndFunction")
     function_names.append("isCrystalWarrior")
+    function_names.append("getType")
 
     # root_dir needs a trailing slash (i.e. /root/dir/)
     for filename in glob.iglob("./scripts/" + "**/*.lua", recursive=True):
