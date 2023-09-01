@@ -1,9 +1,9 @@
 [submodule "documentation/wiki"]
 	path = documentation/wiki
 	url = https://github.com/LandSandBoat/server.wiki.git
-[submodule "modules/catseyexi"]
-	path = modules/catseyexi
-	url = https://github.com/catsandboats/modules
 [submodule "losmeshes"]
 	path = losmeshes
 	url = https://github.com/LandSandBoat/losmeshes.git
+[submodule "modules/catseyexi"]
+	path = modules/catseyexi
+	url = https://github.com/catsandboats/modules
