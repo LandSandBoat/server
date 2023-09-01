@@ -199,3 +199,16 @@ elseif x == 2 then y = 3 -- FAIL
 'if x then y' -- PASS
 '( x-y == 0 )' -- PASS
 'if x then y end' -- PASS
+
+require('scripts/zones/something') -- PASS
+require('scripts/globals/items') -- FAIL
+require('scripts/globals/keyitems') -- FAIL
+require('scripts/globals/loot') -- FAIL
+require('scripts/globals/msg') -- FAIL
+require('scripts/globals/settings') -- FAIL
+require('scripts/globals/spell_data') -- FAIL
+require('scripts/globals/status') -- FAIL
+require('scripts/globals/titles') -- FAIL
+require('scripts/globals/zone') -- FAIL
+require('scripts/enum/item') -- FAIL
+require('scripts/zones/Bastok_Markets/IDs') -- FAIL
