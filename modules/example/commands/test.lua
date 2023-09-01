@@ -2,11 +2,12 @@
 -- func: test
 -- desc: A test command module
 -----------------------------------
+local commandObj = {}
 
-cmdprops =
+commandObj.cmdprops =
 {
     permission = 1,
-    parameters = ""
+    parameters = "",
 }
 
 local function double_print(player, str)
@@ -14,6 +15,8 @@ local function double_print(player, str)
     player:PrintToPlayer(str, xi.msg.channel.SYSTEM_3, "")
 end
 
-function onTrigger(player)
-    double_print("Test print")
+commandObj.onTrigger = function(player)
+    double_print(player, "Test print")
 end
+
+return commandObj
