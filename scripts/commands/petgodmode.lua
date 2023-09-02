@@ -2,14 +2,15 @@
 -- func: petgodmode
 -- desc: Toggles god mode on the player's pet, granting them several special abilities.
 -----------------------------------
+local commandObj = {}
 
-cmdprops =
+commandObj.cmdprops =
 {
     permission = 1,
     parameters = ''
 }
 
-function onTrigger(player)
+commandObj.onTrigger = function(player)
     local pet = player:getPet()
     if pet and pet:getLocalVar('GodMode') == 0 then
         -- Toggle GodMode on..
@@ -73,3 +74,5 @@ function onTrigger(player)
         pet:delMod(xi.mod.MDEF, 2500)
     end
 end
+
+return commandObj

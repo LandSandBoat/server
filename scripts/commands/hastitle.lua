@@ -2,19 +2,20 @@
 -- func: hastitle
 -- desc: Check if player already has a title.
 -----------------------------------
+local commandObj = {}
 
-cmdprops =
+commandObj.cmdprops =
 {
     permission = 1,
     parameters = 'ss'
 }
 
-function error(player, msg)
+local function error(player, msg)
     player:PrintToPlayer(msg)
     player:PrintToPlayer('!hastitle <title ID> (player)')
 end
 
-function onTrigger(player, titleId, target)
+commandObj.onTrigger = function(player, titleId, target)
     -- validate titleId
     if titleId == nil then
         error(player, 'You must supply a title ID.')
@@ -45,3 +46,5 @@ function onTrigger(player, titleId, target)
         player:PrintToPlayer(string.format('%s does not have title %s.', targ:getName(), titleId))
     end
 end
+
+return commandObj

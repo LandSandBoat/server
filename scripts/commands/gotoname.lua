@@ -2,13 +2,15 @@
 -- func: gotoname
 -- desc: Go to given mob or npc by name
 -----------------------------------
-cmdprops =
+local commandObj = {}
+
+commandObj.cmdprops =
 {
     permission = 1,
     parameters = 'si'
 }
 
-function error(player, msg)
+local function error(player, msg)
     player:PrintToPlayer(msg)
     player:PrintToPlayer('!gotoname <mob or npc name> (index)')
 end
@@ -52,7 +54,7 @@ local goToEntity = function(player, entity)
     end)
 end
 
-function onTrigger(player, pattern, index)
+commandObj.onTrigger = function(player, pattern, index)
     -- validate pattern
     if pattern == nil or pattern == '' then
         error(player, 'You must enter an NPC name')
@@ -93,3 +95,5 @@ function onTrigger(player, pattern, index)
         player:PrintToPlayer(string.format('[%d] %s %s (%s)', i, entity:getName(), entity:getZoneName(), entity:getID()), xi.msg.channel.SYSTEM_3)
     end
 end
+
+return commandObj

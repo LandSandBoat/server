@@ -2,18 +2,20 @@
 -- func: capskill
 -- desc: Caps a specific skill.
 -----------------------------------
-cmdprops =
+local commandObj = {}
+
+commandObj.cmdprops =
 {
     permission = 1,
     parameters = 's'
 }
 
-function error(player, msg)
+local function error(player, msg)
     player:PrintToPlayer(msg)
     player:PrintToPlayer('!capskill <skillID>')
 end
 
-function onTrigger(player, skillId)
+commandObj.onTrigger = function(player, skillId)
     -- validate skillId
     if skillId == nil then
         error(player, 'You must provide a skillID.')
@@ -30,3 +32,5 @@ function onTrigger(player, skillId)
     player:capSkill(skillId)
     player:PrintToPlayer(string.format('Capped skillID %i.', skillId))
 end
+
+return commandObj

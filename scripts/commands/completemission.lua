@@ -2,22 +2,22 @@
 -- func: completemission <logID> <missionID> <player>
 -- desc: Completes the given mission for the target player, if that mission is currently active.
 -----------------------------------
-require('scripts/globals/missions')
 local logIdHelpers = require('scripts/globals/log_ids')
 -----------------------------------
+local commandObj = {}
 
-cmdprops =
+commandObj.cmdprops =
 {
     permission = 1,
     parameters = 'sss'
 }
 
-function error(player, msg)
+local function error(player, msg)
     player:PrintToPlayer(msg)
     player:PrintToPlayer('!completemission <logID> <missionID> (player)')
 end
 
-function onTrigger(player, logId, missionId, target)
+commandObj.onTrigger = function(player, logId, missionId, target)
     -- validate logId
     local logName
     local logInfo = logIdHelpers.getMissionLogInfo(logId)
@@ -57,3 +57,5 @@ function onTrigger(player, logId, missionId, target)
     player:PrintToPlayer(string.format('Completed %s Mission with ID %u for %s', logName, missionId, targ:getName()))
     player:PrintToPlayer('NOTE! This does NOT clear or update ANY mission variables! ')
 end
+
+return commandObj

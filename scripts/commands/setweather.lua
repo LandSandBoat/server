@@ -2,18 +2,20 @@
 -- func: setweather
 -- desc: Sets the current weather for the current zone.
 -----------------------------------
-cmdprops =
+local commandObj = {}
+
+commandObj.cmdprops =
 {
     permission = 1,
     parameters = 's'
 }
 
-function error(player, msg)
+local function error(player, msg)
     player:PrintToPlayer(msg)
     player:PrintToPlayer('!setweather <weather ID>')
 end
 
-function onTrigger(player, weather)
+commandObj.onTrigger = function(player, weather)
     -- validate weather
     if weather == nil then
         error(player, 'You must supply a weather ID.')
@@ -36,3 +38,5 @@ function onTrigger(player, weather)
     player:setWeather(weather)
     player:PrintToPlayer(string.format('Set weather to %s.', weatherByNum[weather]))
 end
+
+return commandObj

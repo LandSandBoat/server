@@ -2,19 +2,20 @@
 -- func: takegil <amount> <player>
 -- desc: Removes the amount of gil from the given player.
 -----------------------------------
+local commandObj = {}
 
-cmdprops =
+commandObj.cmdprops =
 {
     permission = 1,
     parameters = 'is'
 }
 
-function error(player, msg)
+local function error(player, msg)
     player:PrintToPlayer(msg)
     player:PrintToPlayer('!takegil <amount> (player)')
 end
 
-function onTrigger(player, amount, target)
+commandObj.onTrigger = function(player, amount, target)
     -- validate target
     local targ
     if target == nil then
@@ -42,3 +43,5 @@ function onTrigger(player, amount, target)
     targ:delGil(amount)
     player:PrintToPlayer(string.format('Removed %i gil from %s.  They now have %i gil.', amount, targ:getName(), targ:getGil()))
 end
+
+return commandObj

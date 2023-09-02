@@ -291,6 +291,15 @@ namespace luautils
             }
         }
 
+        // Load Commands
+        for (auto const& entry : sorted_directory_iterator<std::filesystem::directory_iterator>("./scripts/commands"))
+        {
+            if (entry.extension() == ".lua")
+            {
+                CacheLuaObjectFromFile(entry.relative_path().generic_string());
+            }
+        }
+
         if (gLoadAllLua) // Load all lua files (for sanity testing, no need for during regular use)
         {
             ShowInfo("*** CI ONLY: Smoke testing by running all Lua files. ***")
@@ -576,6 +585,13 @@ namespace luautils
                 return;
             }
 
+            // Commands are a special case, since they are not a "true" module
+            sol::table cmdTable = result;
+            if (cmdTable["cmdprops"].valid() && cmdTable["onTrigger"].valid())
+            {
+                lua[sol::create_if_nil]["xi"]["commands"][parts.back()] = cmdTable;
+            }
+
             ShowInfo("[FileWatcher] RE-RUNNING MODULE FILE %s", filename);
             return;
         }
@@ -628,21 +644,6 @@ namespace luautils
             }
 
             ShowInfo("[FileWatcher] GLOBAL %s -> \"%s\"", filename, requireName);
-            return;
-        }
-
-        // Handle Commands then return
-        if (parts.size() == 2 && parts[0] == "commands")
-        {
-            auto result = lua.safe_script_file(filename);
-            if (!result.valid())
-            {
-                sol::error err = result;
-                ShowError("luautils::CacheLuaObjectFromFile: Load command error: %s: %s", filename, err.what());
-                return;
-            }
-
-            ShowInfo("[FileWatcher] COMMAND %s", filename);
             return;
         }
 

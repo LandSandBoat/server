@@ -2,19 +2,20 @@
 -- func: getwspoints
 -- desc: prints current ws points, optionaly specifying the weapon slot to check (default main)
 ---------------------------------------------------------------------------------------------------
+local commandObj = {}
 
-cmdprops =
+commandObj.cmdprops =
 {
     permission = 1,
     parameters = 'ss'
 }
 
-function error(player, msg)
+local function error(player, msg)
     player:PrintToPlayer(msg)
     player:PrintToPlayer('!getwspoints (main/sub/ranged) (optional target)')
 end
 
-function onTrigger(player, equipSlot, name)
+commandObj.onTrigger = function(player, equipSlot, name)
     local target = player:getCursorTarget()
 
     if name then
@@ -50,3 +51,5 @@ function onTrigger(player, equipSlot, name)
     local points = target:getStorageItem(0, 0, equip):getWeaponskillPoints()
     player:PrintToPlayer(string.format('The weapon in %s\'s %s slot has %i ws points', name, equipSlot, points))
 end
+
+return commandObj

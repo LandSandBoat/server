@@ -2,22 +2,22 @@
 -- func: checkmission <Log ID> <Player>
 -- desc: Prints current MissionID for the given LogID and target Player to the in game chatlog
 -----------------------------------
-require('scripts/globals/missions')
 local logIdHelpers = require('scripts/globals/log_ids')
 -----------------------------------
+local commandObj = {}
 
-cmdprops =
+commandObj.cmdprops =
 {
     permission = 1,
     parameters = 'ss'
 }
 
-function error(player, msg)
+local function error(player, msg)
     player:PrintToPlayer(msg)
     player:PrintToPlayer('!checkmission <logID> (player)')
 end
 
-function onTrigger(player, logId, target)
+commandObj.onTrigger = function(player, logId, target)
     -- validate logId
     local logName
     local logInfo = logIdHelpers.getMissionLogInfo(logId)
@@ -53,3 +53,5 @@ function onTrigger(player, logId, target)
         player:PrintToPlayer(string.format('Current %s Mission ID is %s for %s.', logName, currentMission, targ:getName()))
     end
 end
+
+return commandObj

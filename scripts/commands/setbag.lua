@@ -2,7 +2,7 @@
 -- func: setbag
 -- desc: Sets the players bag size
 -----------------------------------
-require('scripts/globals/quests')
+local commandObj = {}
 
 local bagparam =
 {
@@ -19,18 +19,18 @@ local bagparam =
     { bagsize = 80, questid = nil                                       },
 }
 
-cmdprops =
+commandObj.cmdprops =
 {
     permission = 1,
     parameters = 'i'
 }
 
-function error(player, msg)
+local function error(player, msg)
     player:PrintToPlayer(msg)
     player:PrintToPlayer('!bagsize <30-80 and multiple of 5>')
 end
 
-function onTrigger(player, bagsize)
+commandObj.onTrigger = function(player, bagsize)
     -- Validate bag amount
     if bagsize < 30 or bagsize > 80 or (bagsize % 5 ~= 0) then
         error(player, 'Invalid bag size.')
@@ -54,3 +54,5 @@ function onTrigger(player, bagsize)
     player:changeContainerSize(xi.inv.INVENTORY, adjustment)
     player:changeContainerSize(xi.inv.MOGSATCHEL, adjustment)
 end
+
+return commandObj

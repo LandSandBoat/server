@@ -1,23 +1,24 @@
----------------------------------------------------------------------------------------------------
+-----------------------------------
 -- func: garrison <command> (player)
 -- commands:
 -- !garrison start (player) starts the garrison for the given player (or targetted one). This bypasses requirements like lockout
 -- !garrison stop  (player) stops the garrison (if any) currently running in the player's zone
 -- !garrison win (player) win the garrison (if any) currently running in the player's zone
----------------------------------------------------------------------------------------------------
+-----------------------------------
+local commandObj = {}
 
-cmdprops =
+commandObj.cmdprops =
 {
     permission = 1,
     parameters = 'ss'
 }
 
-function error(player, msg)
+local function error(player, msg)
     local usage = 'Usage: !garrison <command> (player)'
     player:PrintToPlayer(msg .. '\n' .. usage)
 end
 
-function onTrigger(player, command, target)
+commandObj.onTrigger = function(player, command, target)
     -- Validate command
     if command == nil then
         error(player, 'Invalid command')
@@ -61,3 +62,5 @@ function onTrigger(player, command, target)
         end,
     }
 end
+
+return commandObj

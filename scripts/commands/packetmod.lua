@@ -2,20 +2,21 @@
 -- func: packetmod
 -- desc: Adds a modifier for S->C packets
 -----------------------------------
+local commandObj = {}
 
-cmdprops =
+commandObj.cmdprops =
 {
     permission = 5,
     parameters = 'ssss'
 }
 
-function error(player, msg)
+local function error(player, msg)
     player:PrintToPlayer(msg
         .. '\n!packetmod (operation) (packet id) (offset) (value)'
         .. '\nOperations: add / del / clear / print')
 end
 
-function onTrigger(player, operation, packetId, offset, value)
+commandObj.onTrigger = function(player, operation, packetId, offset, value)
     if
         operation == nil or
         operation == '' or
@@ -35,3 +36,5 @@ function onTrigger(player, operation, packetId, offset, value)
         -- TODO: Print list of mods
     end
 end
+
+return commandObj

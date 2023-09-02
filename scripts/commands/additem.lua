@@ -2,19 +2,20 @@
 -- func: additem <itemId> <quantity> <aug1> <v1> <aug2> <v2> <aug3> <v3> <aug4> <v4> <trial>
 -- desc: Adds an item to the GMs inventory.
 -----------------------------------
+local commandObj = {}
 
-cmdprops =
+commandObj.cmdprops =
 {
     permission = 1,
     parameters = 'siiiiiiiiii'
 }
 
-function error(player, msg)
+local function error(player, msg)
     player:PrintToPlayer(msg)
     player:PrintToPlayer('!additem <itemId> (quantity) (aug1) (v1) (aug2) (v2) (aug3) (v3) (aug4) (v4) (trial)')
 end
 
-function onTrigger(player, item, quantity, aug0, aug0val, aug1, aug1val, aug2, aug2val, aug3, aug3val, trialId)
+commandObj.onTrigger = function(player, item, quantity, aug0, aug0val, aug1, aug1val, aug2, aug2val, aug3, aug3val, trialId)
     -- Load needed text ids for players current zone..
     local ID = zones[player:getZoneID()]
     local itemToGet = 0
@@ -72,3 +73,5 @@ function onTrigger(player, item, quantity, aug0, aug0val, aug1, aug1val, aug2, a
         end
     end
 end
+
+return commandObj

@@ -2,19 +2,20 @@
 -- func: raise <power> <player>
 -- desc: Sends raise menu to GM or target player.
 -----------------------------------
+local commandObj = {}
 
-cmdprops =
+commandObj.cmdprops =
 {
     permission = 1,
     parameters = 'ss'
 }
 
-function error(player, msg)
+local function error(player, msg)
     player:PrintToPlayer(msg)
     player:PrintToPlayer('!raise (power) (player)')
 end
 
-function onTrigger(player, arg1, arg2)
+commandObj.onTrigger = function(player, arg1, arg2)
     local power
     local target
     local targ
@@ -59,3 +60,5 @@ function onTrigger(player, arg1, arg2)
         player:PrintToPlayer(string.format('%s is not dead.', targ:getName()))
     end
 end
+
+return commandObj

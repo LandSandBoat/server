@@ -2,18 +2,20 @@
 -- func: speed
 -- desc: Sets the players movement speed.
 -----------------------------------
-cmdprops =
+local commandObj = {}
+
+commandObj.cmdprops =
 {
     permission = 1,
     parameters = 'i'
 }
 
-function error(player, msg)
+local function error(player, msg)
     player:PrintToPlayer(msg)
     player:PrintToPlayer('!speed <0-255>')
 end
 
-function onTrigger(player, speed)
+commandObj.onTrigger = function(player, speed)
     if not speed then
         player:PrintToPlayer(string.format('Current Speed: %u', player:getSpeed()))
         player:PrintToPlayer(string.format('Current xi.mod.MOVE: %u', player:getMod(xi.mod.MOVE)))
@@ -31,3 +33,5 @@ function onTrigger(player, speed)
     player:PrintToPlayer(string.format('New Speed: %u', speed))
     player:setSpeed(speed)
 end
+
+return commandObj

@@ -2,19 +2,20 @@
 -- func: immortal <player>
 -- desc: Sets a target to be unkillable
 -----------------------------------
+local commandObj = {}
 
-cmdprops =
+commandObj.cmdprops =
 {
     permission = 1,
     parameters = 's'
 }
 
-function error(player, msg)
+local function error(player, msg)
     player:PrintToPlayer(msg)
     player:PrintToPlayer('!immortal (player)')
 end
 
-function onTrigger(player, target)
+commandObj.onTrigger = function(player, target)
     -- validate target
     local targ
     local cursorTarget = player:getCursorTarget()
@@ -67,3 +68,5 @@ function onTrigger(player, target)
         player:PrintToPlayer(string.format('%s is an NPC. You should not be attacking them.', targ:getName()))
     end
 end
+
+return commandObj

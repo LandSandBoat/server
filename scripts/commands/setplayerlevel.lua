@@ -2,19 +2,20 @@
 -- func: setplayerlevel
 -- desc: Sets the target players level.
 -----------------------------------
+local commandObj = {}
 
-cmdprops =
+commandObj.cmdprops =
 {
     permission = 1,
     parameters = 'ss'
 }
 
-function error(player, msg)
+local function error(player, msg)
     player:PrintToPlayer(msg)
     player:PrintToPlayer('!setplayerlevel (player) <level>')
 end
 
-function onTrigger(player, arg1, arg2)
+commandObj.onTrigger = function(player, arg1, arg2)
     local targ
     local level
 
@@ -44,3 +45,5 @@ function onTrigger(player, arg1, arg2)
         player:PrintToPlayer(string.format('Set %s\'s level to %i.', targ:getName(), level))
     end
 end
+
+return commandObj

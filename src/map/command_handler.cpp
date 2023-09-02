@@ -39,11 +39,6 @@
 // NOTE: Auto-translate blocks are dealt with as a string of bytes
 using CommandArg = std::variant<bool, int, double, std::string>;
 
-namespace
-{
-    std::unordered_map<std::string, std::string> registeredCommands;
-}
-
 // The below section is a proposed rewrite of commandhandler.
 // It can automatically deduce the types of strings that are passed to it.
 //
@@ -155,19 +150,6 @@ int32 CCommandHandler::call(sol::state& lua, CCharEntity* PChar, const std::stri
 {
     TracyZoneScoped;
 
-    // On the way out of this function, clear the globals it leaves behind
-    // clang-format off
-    ScopeGuard guard([&]()
-    {
-        lua.set("onTrigger", sol::lua_nil);
-        lua.set("cmdprops", sol::lua_nil);
-    });
-    // clang-format on
-
-    // Before we begin, make sure these globals are cleared (just in case!)
-    lua.set("onTrigger", sol::lua_nil);
-    lua.set("cmdprops", sol::lua_nil);
-
     // TODO: stringstreams are slow. Replace with something else.
     std::istringstream clstream(commandline);
     std::string        cmdname;
@@ -189,46 +171,40 @@ int32 CCommandHandler::call(sol::state& lua, CCharEntity* PChar, const std::stri
     TracyZoneString(PChar->name);
     TracyZoneString(commandline);
 
-    auto filename = fmt::format("./scripts/commands/{}.lua", cmdname.c_str());
-    if (auto maybeRegisteredCommand = registeredCommands.find(cmdname);
-        maybeRegisteredCommand != registeredCommands.end())
+    auto commandObj = lua["xi"]["commands"][cmdname];
+    if (!commandObj.valid())
     {
-        filename = (*maybeRegisteredCommand).second;
-    }
-
-    auto loadResult = lua.safe_script_file(filename);
-    if (!loadResult.valid())
-    {
-        sol::error err = loadResult;
-        ShowError("cmdhandler::call: (%s): %s", cmdname.c_str(), err.what());
+        ShowError("cmdhandler::call: Function does not exist (%s)", cmdname);
         return -1;
     }
 
-    if (!lua["cmdprops"].valid())
+    sol::table commandTable = commandObj;
+
+    if (!commandTable["cmdprops"].valid())
     {
-        ShowError("cmdhandler::call: (%s): Undefined 'cmdprops' table", cmdname.c_str());
+        ShowError("cmdhandler::call: (%s): Undefined 'cmdprops' table", cmdname);
         return -1;
     }
 
-    if (!lua["cmdprops"]["permission"].valid())
+    if (!commandTable["cmdprops"]["permission"].valid())
     {
-        ShowError("cmdhandler::call: (%s): Invalid or no permission field set in cmdprops", cmdname.c_str());
+        ShowError("cmdhandler::call: (%s): Invalid or no permission field set in cmdprops", cmdname);
         return -1;
     }
 
-    if (!lua["cmdprops"]["parameters"].valid())
+    if (!commandTable["cmdprops"]["parameters"].valid())
     {
-        ShowError("cmdhandler::call: (%s): Invalid or no parameters field set in cmdprops", cmdname.c_str());
+        ShowError("cmdhandler::call: (%s): Invalid or no parameters field set in cmdprops", cmdname);
         return -1;
     }
 
-    int8        permission = lua["cmdprops"]["permission"];
-    std::string parameters = lua["cmdprops"]["parameters"];
+    int8        permission = commandTable["cmdprops"]["permission"];
+    std::string parameters = commandTable["cmdprops"]["parameters"];
 
     // Ensure this user can use this command
     if (permission > PChar->m_GMlevel)
     {
-        ShowWarning("cmdhandler::call: Character %s attempting to use higher permission command %s", PChar->name.c_str(), cmdname.c_str());
+        ShowWarning("cmdhandler::call: Character %s attempting to use higher permission command %s", PChar->name, cmdname);
         return -1;
     }
     else
@@ -256,10 +232,10 @@ int32 CCommandHandler::call(sol::state& lua, CCharEntity* PChar, const std::stri
     }
 
     // Ensure the onTrigger function exists for this command
-    auto onTrigger = lua.get<sol::function>("onTrigger");
+    sol::function onTrigger = commandTable["onTrigger"];
     if (!onTrigger.valid())
     {
-        ShowError("cmdhandler::call: (%s) missing onTrigger function", cmdname.c_str());
+        ShowError("cmdhandler::call: (%s) missing onTrigger function", cmdname);
         return -1;
     }
 
@@ -321,11 +297,4 @@ int32 CCommandHandler::call(sol::state& lua, CCharEntity* PChar, const std::stri
     }
 
     return 0;
-}
-
-void CCommandHandler::registerCommand(std::string const& commandName, std::string const& path)
-{
-    registeredCommands[commandName] = path;
-    lua["cmdprops"]                 = sol::lua_nil;
-    lua["onTrigger"]                = sol::lua_nil;
 }

@@ -2,18 +2,20 @@
 -- func: changesjob
 -- desc: Changes the players current subjob.
 -----------------------------------
-cmdprops =
+local commandObj = {}
+
+commandObj.cmdprops =
 {
     permission = 1,
     parameters = 'si'
 }
 
-function error(player, msg)
+local function error(player, msg)
     player:PrintToPlayer(msg)
     player:PrintToPlayer('!changesjob <jobID> (level)')
 end
 
-function onTrigger(player, jobId, level)
+commandObj.onTrigger = function(player, jobId, level)
     -- validate jobId
     if jobId == nil then
         error(player, 'You must enter a job short-name, e.g. WAR, or its equivalent numeric ID.')
@@ -49,3 +51,5 @@ function onTrigger(player, jobId, level)
     -- output new job to player
     player:PrintToPlayer(string.format('You are now a %s%i/%s%i.', jobNameByNum[player:getMainJob()], player:getMainLvl(), jobNameByNum[player:getSubJob()], player:getSubLvl()))
 end
+
+return commandObj

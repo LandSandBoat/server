@@ -2,19 +2,20 @@
 -- func: tp <amount> <player>
 -- desc: Sets a players tp. If they have a pet, also sets pet tp.
 -----------------------------------
+local commandObj = {}
 
-cmdprops =
+commandObj.cmdprops =
 {
     permission = 1,
     parameters = 'is'
 }
 
-function error(player, msg)
+local function error(player, msg)
     player:PrintToPlayer(msg)
     player:PrintToPlayer('!tp <amount> (player)')
 end
 
-function onTrigger(player, tp, target)
+commandObj.onTrigger = function(player, tp, target)
     -- validate target
     local targ
     local cursorTarget = player:getCursorTarget()
@@ -55,3 +56,5 @@ function onTrigger(player, tp, target)
         player:PrintToPlayer(string.format('%s is currently dead.', targ:getName()))
     end
 end
+
+return commandObj

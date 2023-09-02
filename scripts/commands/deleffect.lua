@@ -2,18 +2,20 @@
 -- func: addeffect
 -- desc: Removes the given effect from the given player.
 -----------------------------------
-cmdprops =
+local commandObj = {}
+
+commandObj.cmdprops =
 {
     permission = 1,
     parameters = 'si'
 }
 
-function error(player, msg)
+local function error(player, msg)
     player:PrintToPlayer(msg)
     player:PrintToPlayer('!deleffect (player) <effect>')
 end
 
-function onTrigger(player, arg1, arg2)
+commandObj.onTrigger = function(player, arg1, arg2)
     local targ
     local id
 
@@ -49,3 +51,5 @@ function onTrigger(player, arg1, arg2)
         player:PrintToPlayer(string.format('Removed effect %i from %s.', id, targ:getName()))
     end
 end
+
+return commandObj

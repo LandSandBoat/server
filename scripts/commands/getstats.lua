@@ -2,15 +2,16 @@
 -- func: getstats
 -- desc: prints stats of cursor target into chatlog, for debugging.
 ---------------------------------------------------------------------------------------------------
+local commandObj = {}
 
-cmdprops =
+commandObj.cmdprops =
 {
     permission = 1,
     parameters = ''
 }
 
 -- function onTrigger(player, extendedMode)
-function onTrigger(player)
+commandObj.onTrigger = function(player)
     local target = player:getCursorTarget()
     if target == nil then
         player:PrintToPlayer('Target something first.')
@@ -76,3 +77,5 @@ function onTrigger(player)
     end
     ]]
 end
+
+return commandObj

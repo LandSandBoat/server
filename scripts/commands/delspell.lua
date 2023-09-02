@@ -2,19 +2,20 @@
 -- func: delspell <spellID> <player>
 -- desc: Removes a spell from the players spell list.
 -----------------------------------
+local commandObj = {}
 
-cmdprops =
+commandObj.cmdprops =
 {
     permission = 1,
     parameters = 'is'
 }
 
-function error(player, msg)
+local function error(player, msg)
     player:PrintToPlayer(msg)
     player:PrintToPlayer('!delspell <spellID> (player)')
 end
 
-function onTrigger(player, spellId, target)
+commandObj.onTrigger = function(player, spellId, target)
     -- validate spellId
     if spellId == nil then
         error(player, 'Invalid spellID.')
@@ -37,3 +38,5 @@ function onTrigger(player, spellId, target)
     targ:delSpell(spellId)
     player:PrintToPlayer(string.format('Deleted spell %i from %s.', spellId, targ:getName()))
 end
+
+return commandObj

@@ -3,8 +3,9 @@
 -- desc: Toggles god mode on the player, granting them several special abilities.
 -- Pass variable of 1 to command to enable a 'soft' god mode.
 -----------------------------------
+local commandObj = {}
 
-cmdprops =
+commandObj.cmdprops =
 {
     permission = 1,
     parameters = 'i'
@@ -92,7 +93,7 @@ local godModeTierOneOff = function(player)
     player:delStatusEffect(xi.effect.MANAFONT)
 end
 
-function onTrigger(player, tier)
+commandObj.onTrigger = function(player, tier)
     local mode = utils.clamp(tier or 0, 0, 2)
     local state = player:getCharVar('GodMode')
 
@@ -127,3 +128,5 @@ function onTrigger(player, tier)
         player:PrintToPlayer('God Mode Tier 1 enabled.')
     end
 end
+
+return commandObj

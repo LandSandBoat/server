@@ -3,19 +3,20 @@
 -- desc: Spawns an NPC and then moves it to the current position, if in same zone.
 --       Errors will despawn the NPC unless 'noDepop' was specified (any value works).
 -----------------------------------
+local commandObj = {}
 
-cmdprops =
+commandObj.cmdprops =
 {
     permission = 1,
     parameters = 'is'
 }
 
-function error(player, msg)
+local function error(player, msg)
     player:PrintToPlayer(msg)
     player:PrintToPlayer('!npchere (npcID) (noDepop)')
 end
 
-function onTrigger(player, npcId, noDepop)
+commandObj.onTrigger = function(player, npcId, noDepop)
     -- validate npc
     local targ
     if npcId == nil then
@@ -44,3 +45,5 @@ function onTrigger(player, npcId, noDepop)
         player:PrintToPlayer('NPC could not be moved to current pos - you are probably in the wrong zone.')
     end
 end
+
+return commandObj
