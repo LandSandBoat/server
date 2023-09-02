@@ -704,6 +704,7 @@ uint16 CBattleEntity::RACC(uint8 skill, uint16 bonusSkill)
 uint16 CBattleEntity::ACC(uint8 attackNumber, uint8 offsetAccuracy)
 {
     TracyZoneScoped;
+
     if (this->objtype & TYPE_PC)
     {
         uint8  skill     = 0;
@@ -754,12 +755,19 @@ uint16 CBattleEntity::ACC(uint8 attackNumber, uint8 offsetAccuracy)
         {
             ACC += (int16)(DEX() * 0.75);
         }
-        ACC         = (ACC + m_modStat[Mod::ACC] + offsetAccuracy);
+        ACC = (ACC + m_modStat[Mod::ACC] + offsetAccuracy);
+
+        if (this->StatusEffectContainer->HasStatusEffect(EFFECT_ENLIGHT))
+        {
+            ACC += this->getMod(Mod::ENSPELL_DMG);
+        }
+
         auto* PChar = dynamic_cast<CCharEntity*>(this);
         if (PChar)
         {
             ACC += PChar->PMeritPoints->GetMeritValue(MERIT_ACCURACY, PChar);
         }
+
         ACC = ACC + std::min<int16>((ACC * m_modStat[Mod::FOOD_ACCP] / 100), m_modStat[Mod::FOOD_ACC_CAP]);
         return std::max<int16>(0, ACC);
     }
@@ -769,13 +777,25 @@ uint16 CBattleEntity::ACC(uint8 attackNumber, uint8 offsetAccuracy)
         ACC       = (ACC > 200 ? (int16)(((ACC - 200) * 0.9) + 200) : ACC);
         ACC += (int16)(DEX() * 0.5);
         ACC += m_modStat[Mod::ACC] + offsetAccuracy;
+
+        if (this->StatusEffectContainer->HasStatusEffect(EFFECT_ENLIGHT))
+        {
+            ACC += this->getMod(Mod::ENSPELL_DMG);
+        }
+
         ACC = ACC + std::min<int16>((ACC * m_modStat[Mod::FOOD_ACCP] / 100), m_modStat[Mod::FOOD_ACC_CAP]);
         return std::max<int16>(0, ACC);
     }
     else
     {
         int16 ACC = m_modStat[Mod::ACC];
-        ACC       = ACC + std::min<int16>((ACC * m_modStat[Mod::FOOD_ACCP] / 100), m_modStat[Mod::FOOD_ACC_CAP]) + DEX() / 2; // Account for food mods here for Snatch Morsel
+
+        if (this->StatusEffectContainer->HasStatusEffect(EFFECT_ENLIGHT))
+        {
+            ACC += this->getMod(Mod::ENSPELL_DMG);
+        }
+
+        ACC = ACC + std::min<int16>((ACC * m_modStat[Mod::FOOD_ACCP] / 100), m_modStat[Mod::FOOD_ACC_CAP]) + DEX() / 2; // Account for food mods here for Snatch Morsel
         return std::max<int16>(0, ACC);
     }
 }
