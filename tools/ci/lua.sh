@@ -52,7 +52,6 @@ global_objects=(
     Mission
     Quest
     HiddenQuest
-    fileExists
     InteractionGlobal
     InteractionLookup
     Action
@@ -80,10 +79,6 @@ global_objects=(
 
     RoeParseTimed
     RoeParseRecords
-
-    cmdprops
-    error
-    onTrigger
 
     addBonuses
     addBonusesAbility

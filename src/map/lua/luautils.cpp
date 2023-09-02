@@ -589,7 +589,6 @@ namespace luautils
             sol::table cmdTable = result;
             if (cmdTable["cmdprops"].valid() && cmdTable["onTrigger"].valid())
             {
-                std::string test = parts.back();
                 lua[sol::create_if_nil]["xi"]["commands"][parts.back()] = cmdTable;
             }
 
