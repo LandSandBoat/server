@@ -153,6 +153,16 @@ void message_server_parse(MSGSERVTYPE type, zmq::message_t* extra, zmq::message_
             ret            = sql->Query(query, partyid, partyid);
             break;
         }
+        case MSG_ALLIANCE_DISSOLVE:
+        {
+            const char* query = "SELECT server_addr, server_port, MIN(charid) FROM accounts_sessions JOIN accounts_parties USING (charid) "
+                                "WHERE allianceid = %d "
+                                "GROUP BY server_addr, server_port;";
+
+            uint32 allianceid = ref<uint32>((uint8*)extra->data(), 0);
+            ret               = sql->Query(query, allianceid);
+            break;
+        }
         case MSG_CHAT_LINKSHELL:
         {
             const char* query = "SELECT server_addr, server_port FROM accounts_sessions "
