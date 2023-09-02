@@ -110,14 +110,14 @@ entity.onEventFinish = function(player, csid, option, npc)
             end
         end
 
-        if option >= 2 and npc:getLocalVar('cued') == 0 then
-            npc:setLocalVar('cued', 1)
-            local currentFloor = instance:getLocalVar('Nyzul_Current_Floor')
+        if option >= 2 and npc:getLocalVar("cued") == 0 then
+            npc:setLocalVar("cued", 1)
+            local currentFloor = instance:getLocalVar("[Nyzul]CurrentFloor")
 
             if currentFloor == 100 then
-                instance:setLocalVar('Nyzul_Current_Floor', 1)
+                instance:setLocalVar("[Nyzul]CurrentFloor", 1)
             else
-                instance:setLocalVar('Nyzul_Current_Floor', currentFloor + 1)
+                instance:setLocalVar("[Nyzul]CurrentFloor", currentFloor + 1)
             end
 
             for _, enemy in ipairs(mobs) do
