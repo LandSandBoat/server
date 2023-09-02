@@ -77,9 +77,6 @@ global_objects=(
     onBattlefieldHandlerInitialise
     applyResistanceAddEffect
 
-    RoeParseTimed
-    RoeParseRecords
-
     addBonuses
     addBonusesAbility
     applyResistance
