@@ -2,18 +2,20 @@
 -- func: mobsub
 -- desc: Changes the sub-animation of the given mob. (For testing purposes.)
 -----------------------------------
-cmdprops =
+local commandObj = {}
+
+commandObj.cmdprops =
 {
     permission = 1,
     parameters = 'ss'
 }
 
-function error(player, msg)
+local function error(player, msg)
     player:PrintToPlayer(msg)
     player:PrintToPlayer('!mobsub (mob ID) <animation ID>')
 end
 
-function onTrigger(player, arg1, arg2)
+commandObj.onTrigger = function(player, arg1, arg2)
     local target
     local animationId
 
@@ -53,3 +55,5 @@ function onTrigger(player, arg1, arg2)
     -- set animation sub
     targ:setAnimationSub(animationId)
 end
+
+return commandObj

@@ -2,21 +2,20 @@
 -- Func: getquestvar
 -- Desc: Gets a quest variable on the target player.
 -----------------------------------
-require('scripts/globals/interaction/quest')
------------------------------------
+local commandObj = {}
 
-cmdprops =
+commandObj.cmdprops =
 {
     permission = 1,
     parameters = 'siis'
 }
 
-function error(player, msg)
+local function error(player, msg)
     player:PrintToPlayer(msg)
     player:PrintToPlayer('!getquestvar <player> <logId> <questId> <variable>')
 end
 
-function onTrigger(player, target, logId, questId, variable, value)
+commandObj.onTrigger = function(player, target, logId, questId, variable, value)
     local targ
     if target == nil then
         error(player, 'You must provide a player name.')
@@ -47,3 +46,5 @@ function onTrigger(player, target, logId, questId, variable, value)
     local questVarName = Quest.getVarPrefix(logId, questId) .. variable
     player:PrintToPlayer(string.format('%s\'s Quest variable \'%s\' : %u', targ:getName(), questVarName, targ:getCharVar(questVarName)))
 end
+
+return commandObj

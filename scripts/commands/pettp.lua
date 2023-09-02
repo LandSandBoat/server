@@ -2,19 +2,20 @@
 -- func: pettp
 -- desc: Sets the players pet tp.
 -----------------------------------
+local commandObj = {}
 
-cmdprops =
+commandObj.cmdprops =
 {
     permission = 1,
     parameters = 'i'
 }
 
-function error(player, msg)
+local function error(player, msg)
     player:PrintToPlayer(msg)
     player:PrintToPlayer('!pettp <amount>')
 end
 
-function onTrigger(player, tp)
+commandObj.onTrigger = function(player, tp)
     -- validate target
     local targ = player:getPet()
     if targ == nil then
@@ -31,3 +32,5 @@ function onTrigger(player, tp)
     -- set pet tp
     targ:setTP(tp)
 end
+
+return commandObj

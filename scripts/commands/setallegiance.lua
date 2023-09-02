@@ -2,18 +2,20 @@
 -- func: setallegiance
 -- desc: Sets the players allegiance.
 -----------------------------------
-cmdprops =
+local commandObj = {}
+
+commandObj.cmdprops =
 {
     permission = 1,
     parameters = 'is'
 }
 
-function error(player, msg)
+local function error(player, msg)
     player:PrintToPlayer(msg)
     player:PrintToPlayer('!setallegiance <allegiance> <player>')
 end
 
-function onTrigger(player, allegiance, target)
+commandObj.onTrigger = function(player, allegiance, target)
     -- validate target
     local targ
     local cursorTarget = player:getCursorTarget()
@@ -40,3 +42,5 @@ function onTrigger(player, allegiance, target)
     player:PrintToPlayer(string.format('You set %s\'s allegiance to %s', targ:getName(), toString[allegiance + 1]))
     targ:setAllegiance(allegiance)
 end
+
+return commandObj

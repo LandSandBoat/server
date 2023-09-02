@@ -2,19 +2,20 @@
 -- func: entityVisual
 -- desc: push entityVisual packet to player
 -----------------------------------
+local commandObj = {}
 
-cmdprops =
+commandObj.cmdprops =
 {
     permission = 1,
     parameters = 's'
 }
 
-function error(player, msg)
+local function error(player, msg)
     player:PrintToPlayer(msg)
     player:PrintToPlayer('!entityvisual <animation string>')
 end
 
-function onTrigger(player, visualstring)
+commandObj.onTrigger = function(player, visualstring)
     -- validate visualstring
     if visualstring == nil then
         error(player, 'You must enter a valid animation string.')
@@ -24,3 +25,5 @@ function onTrigger(player, visualstring)
     -- push visual packet to player
     player:entityVisualPacket(visualstring)
 end
+
+return commandObj

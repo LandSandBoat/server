@@ -3,19 +3,20 @@
 -- desc: Checks if player has specified KeyItem.
 --       Can use either of number or the variable string from keyitems.lua
 -----------------------------------
+local commandObj = {}
 
-cmdprops =
+commandObj.cmdprops =
 {
     permission = 1,
     parameters = 'ss'
 }
 
-function error(player, msg)
+local function error(player, msg)
     player:PrintToPlayer(msg)
     player:PrintToPlayer('!haskeyitem <key item ID> (player)')
 end
 
-function onTrigger(player, keyId, target)
+commandObj.onTrigger = function(player, keyId, target)
     -- validate itemId
     if keyId == nil then
         error(player, 'You must provide a key item ID.')
@@ -50,3 +51,5 @@ function onTrigger(player, keyId, target)
         player:PrintToPlayer(string.format('%s does not have key item %i.', targ:getName(), keyId))
     end
 end
+
+return commandObj

@@ -2,19 +2,20 @@
 -- func: givels
 -- desc: Makes a linkpearl for the given linkshell (pearlsack for gm)
 -----------------------------------
+local commandObj = {}
 
-cmdprops =
+commandObj.cmdprops =
 {
     permission = 1,
     parameters = 'ss'
 }
 
-function error(player, msg)
+local function error(player, msg)
     player:PrintToPlayer(msg)
     player:PrintToPlayer('!givels <linkshell name> (target)')
 end
 
-function onTrigger(player, lsname, target)
+commandObj.onTrigger = function(player, lsname, target)
     -- validate target
     if not lsname then
         error(player, 'You must enter a linkshell name.')
@@ -38,3 +39,5 @@ function onTrigger(player, lsname, target)
         error(player, string.format('Unable to create linkpearl for \'%s\'!', lsname))
     end
 end
+
+return commandObj

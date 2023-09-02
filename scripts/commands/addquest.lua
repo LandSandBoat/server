@@ -2,22 +2,22 @@
 -- func: addquest <logID> <questID> <player>
 -- desc: Adds a quest to the given targets log.
 -----------------------------------
-require('scripts/globals/quests')
 local logIdHelpers = require('scripts/globals/log_ids')
 -----------------------------------
+local commandObj = {}
 
-cmdprops =
+commandObj.cmdprops =
 {
     permission = 1,
     parameters = 'sss'
 }
 
-function error(player, msg)
+local function error(player, msg)
     player:PrintToPlayer(msg)
     player:PrintToPlayer('!addquest <logID> <questID> (player)')
 end
 
-function onTrigger(player, logId, questId, target)
+commandObj.onTrigger = function(player, logId, questId, target)
     -- validate logId
     local questLog = logIdHelpers.getQuestLogInfo(logId)
     if questLog == nil then
@@ -55,3 +55,5 @@ function onTrigger(player, logId, questId, target)
     targ:addQuest(logId, questId)
     player:PrintToPlayer(string.format('Added %s quest %i to %s.', logName, questId, targ:getName()))
 end
+
+return commandObj

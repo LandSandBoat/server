@@ -2,19 +2,20 @@
 -- func: setrank
 -- desc: Sets the players rank.
 -----------------------------------
+local commandObj = {}
 
-cmdprops =
+commandObj.cmdprops =
 {
     permission = 1,
     parameters = 'si'
 }
 
-function error(player, msg)
+local function error(player, msg)
     player:PrintToPlayer(msg)
     player:PrintToPlayer('!setrank <player> <new rank>')
 end
 
-function onTrigger(player, target, rank)
+commandObj.onTrigger = function(player, target, rank)
     if target == nil then
         error(player, 'Set who\'s rank?')
         return
@@ -35,3 +36,5 @@ function onTrigger(player, target, rank)
     player:PrintToPlayer(string.format('You set %s\'s rank to %d', target, rank))
     targ:setRank(rank)
 end
+
+return commandObj

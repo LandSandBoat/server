@@ -3,19 +3,20 @@
 -- desc: Used to get a mob's entity flags for testing.
 --       MUST either target a mob first or else specify a Mob ID.
 -----------------------------------
+local commandObj = {}
 
-cmdprops =
+commandObj.cmdprops =
 {
     permission = 1,
     parameters = 'i'
 }
 
-function error(player, msg)
+local function error(player, msg)
     player:PrintToPlayer(msg)
     player:PrintToPlayer('!getmobflags (mob ID)')
 end
 
-function onTrigger(player, target)
+commandObj.onTrigger = function(player, target)
     -- validate target
     local targ
     if not target then
@@ -37,3 +38,5 @@ function onTrigger(player, target)
     local hex = '0x' .. string.format('%08x', flags)
     player:PrintToPlayer(string.format('%s\'s flags: %s (%u)', targ:getName(), hex, flags))
 end
+
+return commandObj

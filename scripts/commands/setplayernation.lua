@@ -2,20 +2,21 @@
 -- func: setplayernation
 -- desc: Sets the target players nation.
 -----------------------------------
+local commandObj = {}
 
-cmdprops =
+commandObj.cmdprops =
 {
     permission = 1,
     parameters = 'ss'
 }
 
-function error(player, msg)
+local function error(player, msg)
     player:PrintToPlayer(msg)
     player:PrintToPlayer('!setplayernation (player) <nation>')
     player:PrintToPlayer('Nations: 0 = San d\'Oria 1 = Bastok 2 = Windurst')
 end
 
-function onTrigger(player, arg1, arg2)
+commandObj.onTrigger = function(player, arg1, arg2)
     local targ
     local nation
 
@@ -52,3 +53,5 @@ function onTrigger(player, arg1, arg2)
     player:PrintToPlayer(string.format('Set %s\'s home nation to %s.', targ:getName(), nationByNum[nation]))
     player:PrintToPlayer('NOTE! This does NOT clear or update ANY mission or related variables! ')
 end
+
+return commandObj

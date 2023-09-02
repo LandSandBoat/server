@@ -1,27 +1,26 @@
----------------------------------------------------------------------------------------------------
+-----------------------------------
 -- func: reloadbattlefield
 -- desc: Attempt to reload specified battlefield lua without a restart.
----------------------------------------------------------------------------------------------------
-require('scripts/globals/utils')
-require('scripts/globals/interaction/interaction_global')
+-----------------------------------
+local commandObj = {}
 
-cmdprops =
+commandObj.cmdprops =
 {
     permission = 5,
     parameters = 's'
 }
 
-function error(player, msg)
+local function error(player, msg)
     player:PrintToPlayer(msg)
     player:PrintToPlayer('!reloadbattlefield <lua-file-name>')
 end
 
-function fileExists(path)
+local function fileExists(path)
     local f = io.open(path, 'r')
     return f ~= nil and io.close(f)
 end
 
-function onTrigger(player, battlefieldName)
+commandObj.onTrigger = function(player, battlefieldName)
     if battlefieldName == nil then
         error(player, 'Unable to reload battlefield.')
         return
@@ -55,3 +54,5 @@ function onTrigger(player, battlefieldName)
 
     error(player, string.format('Unable to find battlefield \'%s\' to reload.', battlefieldName))
 end
+
+return commandObj

@@ -2,19 +2,20 @@
 -- func: pos <x> <y> <z> <optional zone> <optional target>
 -- desc: Sets the players position. If none is given, prints out the position instead.
 -----------------------------------
+local commandObj = {}
 
-cmdprops =
+commandObj.cmdprops =
 {
     permission = 1,
     parameters = 's'
 }
 
-function error(player, msg)
+local function error(player, msg)
     player:PrintToPlayer(msg)
     player:PrintToPlayer('!pos (x) (y) (z) (zone ID) (player)')
 end
 
-function onTrigger(player, arg)
+commandObj.onTrigger = function(player, arg)
     local target
     local zoneId
     local x
@@ -89,3 +90,5 @@ function onTrigger(player, arg)
         end
     end
 end
+
+return commandObj

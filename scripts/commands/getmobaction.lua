@@ -2,19 +2,20 @@
 -- func: getmobaction
 -- desc: Prints mob's current action to the command user.
 -----------------------------------
+local commandObj = {}
 
-cmdprops =
+commandObj.cmdprops =
 {
     permission = 1,
     parameters = 'i'
 }
 
-function error(player, msg)
+local function error(player, msg)
     player:PrintToPlayer(msg)
     player:PrintToPlayer('!getmobaction (mobID)')
 end
 
-function onTrigger(player, mobId)
+commandObj.onTrigger = function(player, mobId)
     -- validate mobid
     local targ
     if mobId == nil then
@@ -34,3 +35,5 @@ function onTrigger(player, mobId)
     -- report mob action
     player:PrintToPlayer(string.format('%s %i current action ID is %i.', targ:getName(), targ:getID(), targ:getCurrentAction()))
 end
+
+return commandObj

@@ -2,19 +2,20 @@
 -- func: up <optional number> <optional target>
 -- desc: Alters vertical coordinate
 -----------------------------------
+local commandObj = {}
 
-cmdprops =
+commandObj.cmdprops =
 {
     permission = 1,
     parameters = 'is'
 }
 
-function error(player, msg)
+local function error(player, msg)
     player:PrintToPlayer(msg)
     player:PrintToPlayer('!up <yalms> (target)')
 end
 
-function onTrigger(player, number, target)
+commandObj.onTrigger = function(player, number, target)
     local entity = player
     local cursor = player:getCursorTarget()
 
@@ -42,3 +43,5 @@ function onTrigger(player, number, target)
 
     entity:setPos(pos.x, adjustYposBy, pos.z, pos.rot)
 end
+
+return commandObj

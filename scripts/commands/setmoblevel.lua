@@ -2,19 +2,20 @@
 -- func: setmoblevel
 -- desc: Sets the target monsters level.
 -----------------------------------
+local commandObj = {}
 
-cmdprops =
+commandObj.cmdprops =
 {
     permission = 1,
     parameters = 'i'
 }
 
-function error(player, msg)
+local function error(player, msg)
     player:PrintToPlayer(msg)
     player:PrintToPlayer('!setmoblevel <level>')
 end
 
-function onTrigger(player, lv)
+commandObj.onTrigger = function(player, lv)
     local target = player:getCursorTarget()
 
     -- set level
@@ -32,3 +33,5 @@ function onTrigger(player, lv)
         error('must target a monster first!')
     end
 end
+
+return commandObj

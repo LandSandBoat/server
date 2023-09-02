@@ -2,18 +2,20 @@
 -- func: setmobmod
 -- desc: Sets the specified mob modifier to the specified value on the cursor target mob
 ---------------------------------------------------------------------------------------------------
-cmdprops =
+local commandObj = {}
+
+commandObj.cmdprops =
 {
     permission = 3,
     parameters = 'sis'
 }
 
-function error(player, msg)
+local function error(player, msg)
     player:PrintToPlayer(msg)
     player:PrintToPlayer('!setmod <modifier> <amount>')
 end
 
-function onTrigger(player, modifier, amount)
+commandObj.onTrigger = function(player, modifier, amount)
     if not modifier or not amount then
         error(player, 'Must specify modifier and amount. ')
         return
@@ -41,3 +43,5 @@ function onTrigger(player, modifier, amount)
     target:setMobMod(modID, amount)
     player:PrintToPlayer(string.format('Target name: %s (Target ID: %i) | Old %s modifier value: %i | New %s modifier value: %i', target:getName(), target:getID(), modifier, oldmod, modifier, amount))
 end
+
+return commandObj

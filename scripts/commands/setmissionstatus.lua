@@ -2,22 +2,22 @@
 -- func: setmissionstatus (player) (value) (log ID) (index)
 -- desc: Sets missionStatus for the given LogID and target Player
 -----------------------------------
-require('scripts/globals/missions')
 local logIdHelpers = require('scripts/globals/log_ids')
 -----------------------------------
+local commandObj = {}
 
-cmdprops =
+commandObj.cmdprops =
 {
     permission = 1,
     parameters = 'sisi'
 }
 
-function error(player, msg)
+local function error(player, msg)
     player:PrintToPlayer(msg)
     player:PrintToPlayer('!setmissionstatus (player) (value) (log ID) (index)')
 end
 
-function onTrigger(player, target, value, logId, statusIndex)
+commandObj.onTrigger = function(player, target, value, logId, statusIndex)
     if statusIndex ~= nil then
         if statusIndex > 7 or statusIndex < 0 then
             error(player, 'Invalid index!')
@@ -58,3 +58,5 @@ function onTrigger(player, target, value, logId, statusIndex)
         player:PrintToPlayer(string.format('missionStatus for %s (%s) set to %s', targ:getName(), logName, value))
     end
 end
+
+return commandObj

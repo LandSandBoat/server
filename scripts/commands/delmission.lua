@@ -2,22 +2,22 @@
 -- func: delmission <logID> <missionID> <player>
 -- desc: Deletes the given mission from the GM or target player.
 -----------------------------------
-require('scripts/globals/missions')
 local logIdHelpers = require('scripts/globals/log_ids')
 -----------------------------------
+local commandObj = {}
 
-cmdprops =
+commandObj.cmdprops =
 {
     permission = 1,
     parameters = 'sss'
 }
 
-function error(player, msg)
+local function error(player, msg)
     player:PrintToPlayer(msg)
     player:PrintToPlayer('!delmission <logID> <missionID> (player)')
 end
 
-function onTrigger(player, logId, missionId, target)
+commandObj.onTrigger = function(player, logId, missionId, target)
     -- validate logId
     local logName
     local logInfo = logIdHelpers.getMissionLogInfo(logId)
@@ -57,3 +57,5 @@ function onTrigger(player, logId, missionId, target)
     player:PrintToPlayer(string.format('Deleted %s mission %i from %s.', logName, missionId, targ:getName()))
     player:PrintToPlayer('NOTE! This does NOT clear or update ANY mission variables! ')
 end
+
+return commandObj

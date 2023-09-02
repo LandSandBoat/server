@@ -3,14 +3,15 @@
 -- desc: Summon a fightable Fafnir (no loot)
 -- note:
 -----------------------------------
+local commandObj = {}
 
-cmdprops =
+commandObj.cmdprops =
 {
     permission = 5,
     parameters = ''
 }
 
-function onTrigger(player)
+commandObj.onTrigger = function(player)
     local zone = player:getZone()
 
     local mob = zone:insertDynamicEntity({
@@ -72,3 +73,5 @@ function onTrigger(player)
 
     player:PrintToPlayer(string.format('Spawning Fafnir (Lv: %i, HP: %i)\n%s', mob:getMainLvl(), mob:getMaxHP(), mob))
 end
+
+return commandObj

@@ -2,18 +2,20 @@
 -- func: getcraftRank <craft skill or ID> (player)
 -- desc: returns target's RANK of specified craft skill
 -----------------------------------
-cmdprops =
+local commandObj = {}
+
+commandObj.cmdprops =
 {
     permission = 1,
     parameters = 'ss'
 }
 
-function error(player, msg)
+local function error(player, msg)
     player:PrintToPlayer(msg)
     player:PrintToPlayer('!getcraftRank <craft skill or ID> (player)')
 end
 
-function onTrigger(player, craftName, target)
+commandObj.onTrigger = function(player, craftName, target)
     if craftName == nil then
         error(player, 'You must specify a craft skill to check!')
         return
@@ -48,3 +50,5 @@ function onTrigger(player, craftName, target)
 
     player:PrintToPlayer(string.format('%s\'s current skillID \'%s\' rank: %u', targ:getName(), craftName, targ:getSkillRank(skillID)))
 end
+
+return commandObj
