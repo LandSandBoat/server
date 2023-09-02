@@ -150,9 +150,8 @@ void CParty::DisbandParty(bool playerInitiated)
         // make sure chat server isn't notified of a disband if this came from the chat server already
         if (playerInitiated)
         {
-            uint8 data[8]{};
+            uint8 data[4]{};
             ref<uint32>(data, 0) = m_PartyID;
-            ref<uint32>(data, 4) = m_PartyID;
             message::send(MSG_PT_DISBAND, data, sizeof data, nullptr);
         }
     }
@@ -621,9 +620,8 @@ void CParty::AddMember(uint32 id)
         }
         sql->Query("INSERT INTO accounts_parties (charid, partyid, allianceid, partyflag) VALUES (%u, %u, %u, %u);", id, m_PartyID, allianceid,
                    Flags);
-        uint8 data[8]{};
+        uint8 data[4]{};
         ref<uint32>(data, 0) = m_PartyID;
-        ref<uint32>(data, 4) = id;
         message::send(MSG_PT_RELOAD, data, sizeof data, nullptr);
 
         /*if (PChar->nameflags.flags & FLAG_INVITE)

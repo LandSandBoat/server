@@ -68,10 +68,9 @@ void CAlliance::dissolveAlliance(bool playerInitiated)
     {
         // sql->Query("UPDATE accounts_parties SET allianceid = 0, partyflag = partyflag & ~%d WHERE allianceid = %u;", ALLIANCE_LEADER | PARTY_SECOND
         // | PARTY_THIRD, m_AllianceID);
-        uint8 data[8]{};
+        uint8 data[4]{};
         ref<uint32>(data, 0) = m_AllianceID;
-        ref<uint32>(data, 4) = m_AllianceID;
-        message::send(MSG_PT_DISBAND, data, sizeof data, nullptr);
+        message::send(MSG_ALLIANCE_DISSOLVE, data, sizeof data, nullptr);
     }
     else
     {
@@ -157,17 +156,21 @@ void CAlliance::removeParty(CParty* party)
         }
     }
 
+    uint32 mainPartyID = getMainParty()->GetPartyID();
+
     delParty(party);
 
     sql->Query("UPDATE accounts_parties SET allianceid = 0, partyflag = partyflag & ~%d WHERE partyid = %u;",
                ALLIANCE_LEADER | PARTY_SECOND | PARTY_THIRD, party->GetPartyID());
+
+    // notify alliance
     uint8 data[4]{};
-    ref<uint32>(data, 0) = m_AllianceID;
+    ref<uint32>(data, 0) = mainPartyID;
     message::send(MSG_PT_RELOAD, data, sizeof data, nullptr);
 
-    uint8 data2[4]{};
-    ref<uint32>(data2, 0) = party->GetPartyID();
-    message::send(MSG_PT_RELOAD, data2, sizeof data2, nullptr);
+    // notify leaving party
+    ref<uint32>(data, 0) = party->GetPartyID();
+    message::send(MSG_PT_RELOAD, data, sizeof data, nullptr);
 }
 
 void CAlliance::delParty(CParty* party)
@@ -282,8 +285,9 @@ void CAlliance::addParty(CParty* party)
                party->GetPartyID());
     party->SetPartyNumber(newparty);
 
+    // MSG_PT_RELOAD also reloads all the alliances parties if available
     uint8 data[4]{};
-    ref<uint32>(data, 0) = m_AllianceID;
+    ref<uint32>(data, 0) = party->GetPartyID();
     message::send(MSG_PT_RELOAD, data, sizeof data, nullptr);
 }
 
@@ -307,9 +311,8 @@ void CAlliance::addParty(uint32 partyid) const
         }
     }
     sql->Query("UPDATE accounts_parties SET allianceid = %u, partyflag = partyflag | %d WHERE partyid = %u;", m_AllianceID, newparty, partyid);
-    uint8 data[8]{};
-    ref<uint32>(data, 0) = m_AllianceID;
-    ref<uint32>(data, 4) = partyid;
+    uint8 data[4]{};
+    ref<uint32>(data, 0) = partyid;
     message::send(MSG_PT_RELOAD, data, sizeof data, nullptr);
 }
 
