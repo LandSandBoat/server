@@ -395,34 +395,35 @@ xi.job_utils.dragoon.useSpiritLink = function(player, target, ability)
     player:addTP(petTP / 2) -- add half wyvern tp to you
     wyvern:delTP(petTP / 2) -- remove half tp from wyvern
 
-    local drainamount = (math.random(25, 35) / 100) * playerHP
-    local jpValue     = player:getJobPointLevel(xi.jp.SPIRIT_LINK_EFFECT)
+    -- Calculate drain amount.
+    -- TODO: Shouldnt this be floored at some point, so we don't remove 1.5 hp from player health pool and/or stoneskin power?
+    local drainamount = 0
 
-    drainamount = drainamount * (1 - (0.01 * jpValue))
-
-    if wyvern:getHP() == wyvern:getMaxHP() then
-        drainamount = 0 -- Prevents player HP loss if wyvern is at full HP
+    if wyvern:getHP() ~= wyvern:getMaxHP() then
+        drainamount = (math.random(25, 35) / 100) * playerHP
+        drainamount = drainamount * (1 - (0.01 * player:getJobPointLevel(xi.jp.SPIRIT_LINK_EFFECT)))
     end
+
+    -- Handle Stoneskin.
+    local stoneskinPower = 0
 
     if player:hasStatusEffect(xi.effect.STONESKIN) then
-        local skin = player:getMod(xi.mod.STONESKIN)
+        stoneskinPower = player:getMod(xi.mod.STONESKIN)
 
-        if skin >= drainamount then
-            if skin == drainamount then
-                player:delStatusEffect(xi.effect.STONESKIN)
-            else
-                local effect = player:getStatusEffect(xi.effect.STONESKIN)
-                effect:setPower(effect:getPower() - drainamount) -- fixes the status effect so when it ends it uses the new power instead of old
-                player:delMod(xi.mod.STONESKIN, drainamount) -- removes the amount from the mod
-            end
+        -- If stoneskin is more powerfull than the amount to be drained.
+        if stoneskinPower > drainamount then
+            local effect = player:getStatusEffect(xi.effect.STONESKIN)
+            effect:setPower(effect:getPower() - drainamount) -- Fixes the status effect so when it ends it uses the new power instead of old.
+            player:delMod(xi.mod.STONESKIN, drainamount)     -- Removes the amount from the mod.
+
+        -- If stoneskin is as powerful or less than the amount to be drained.
         else
             player:delStatusEffect(xi.effect.STONESKIN)
-            player:takeDamage(drainamount - skin)
         end
-
-    else
-        player:takeDamage(drainamount)
     end
+
+    -- Handle master damage and pet healing.
+    player:takeDamage(drainamount - stoneskinPower)
 
     local healPet = drainamount * 2
 
