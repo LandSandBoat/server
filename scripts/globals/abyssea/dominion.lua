@@ -9,9 +9,9 @@ xi.abyssea = xi.abyssea or {}
 local sergeantData =
 {
 --  NPC Name                Zone                        CSID OpMask
-    ['DSgt_Excenmille'] = { xi.zone.ABYSSEA_ALTEPA,     500, 30846 },
-    ['DSgt_Nanaa']      = { xi.zone.ABYSSEA_ALTEPA,     501,  8176 },
-    ['DSgt_Volker']     = { xi.zone.ABYSSEA_ALTEPA,     502, 26510 },
+    ['DSgt_Excenmille'] = { xi.zone.ABYSSEA_ALTEPA,     500, 30846 }, -- !pos -330.655 -2.120 -612.885 218
+    ['DSgt_Nanaa']      = { xi.zone.ABYSSEA_ALTEPA,     501,  8176 }, -- !pos -848.093 -9.813 -605.970 218
+    ['DSgt_Volker']     = { xi.zone.ABYSSEA_ALTEPA,     502, 26510 }, -- !pos -319.894 -0.736 -167.842 218
     ['DSgt_Maat']       = { xi.zone.ABYSSEA_ULEGUERAND, 500, 32270 },
     ['DSgt_Romaa']      = { xi.zone.ABYSSEA_ULEGUERAND, 501,  6654 },
     ['DSgt_Zazarg']     = { xi.zone.ABYSSEA_ULEGUERAND, 502, 26608 },
