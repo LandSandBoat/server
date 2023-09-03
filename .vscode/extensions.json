@@ -5,6 +5,7 @@
         "sumneko.lua",
         "wwm.better-align",
         "tomblind.local-lua-debugger-vscode",
-        "ms-python.python"
+        "ms-python.python",
+        "ms-python.black-formatter"
     ]
 }
