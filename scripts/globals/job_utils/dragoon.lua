@@ -308,16 +308,16 @@ local function checkForRemovableEffectsOnSpiritLink(player, wyvern)
         -- https://www.ffxiah.com/forum/topic/44396/sigurds-descendants-the-art-of-dragon-slaying/108/#3646600
         -- Remove 2 erasable effects or effects that can be removed by -na
         local additionalRemovableEffects =
-        {
-            [xi.effect.BLINDNESS    ] = true,
-            [xi.effect.PARALYSIS    ] = true,
-            [xi.effect.SILENCE      ] = true,
-            [xi.effect.CURSE_I      ] = true,
-            [xi.effect.CURSE_II     ] = true,
-            [xi.effect.PLAGUE       ] = true,
-            [xi.effect.DISEASE      ] = true,
-            [xi.effect.PETRIFICATION] = true,
-            [xi.effect.AMNESIA      ] = true,
+        set{
+            xi.effect.BLINDNESS,
+            xi.effect.PARALYSIS,
+            xi.effect.SILENCE,
+            xi.effect.CURSE_I,
+            xi.effect.CURSE_II,
+            xi.effect.PLAGUE,
+            xi.effect.DISEASE,
+            xi.effect.PETRIFICATION,
+            xi.effect.AMNESIA
         }
 
         local effects      = wyvern:getStatusEffects()
@@ -327,7 +327,7 @@ local function checkForRemovableEffectsOnSpiritLink(player, wyvern)
             local id = effect:getEffectType()
             if
                 bit.band(effect:getEffectFlags(), xi.effectFlag.ERASABLE) == xi.effectFlag.ERASABLE or
-                additionalRemovableEffects[id] ~= nil
+                additionalRemovableEffects[id]
             then
                 table.insert(validEffects, id)
             end
