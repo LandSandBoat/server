@@ -49,6 +49,7 @@ entity.onMobSpawn = function(mob)
 end
 
 entity.onMobEngaged = function(mob, target)
+    mob:setStatus(xi.status.NORMAL)
     mob:setStatus(xi.status.UPDATE)
 end
 
