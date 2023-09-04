@@ -154,10 +154,12 @@ local function corsairSetup(caster, ability, action, effect, job)
     caster:setLocalVar('corsairRollTotal', roll)
     action:speceffect(caster:getID(), roll)
 
-    if checkForElevenRoll(caster) then
-        action:setRecast(ability:getRecast() / 2) -- halves phantom roll recast timer for all rolls while under the effects of an 11 (upon first hitting 11, phantom roll cooldown is reset in double-up.lua)
+    local numBustEffects = caster:numBustEffects()
+    local recastReduction = caster:getMerit(xi.merit.PHANTOM_ROLL_RECAST) + caster:getMod(xi.mod.PHANTOM_RECAST)
+    if checkForElevenRoll(caster) and numBustEffects == 0 then
+        action:setRecast((ability:getRecast() / 2) - recastReduction) -- halves phantom roll recast timer for all rolls while under the effects of an 11 without bust (upon first hitting 11, phantom roll cooldown is reset in double-up.lua)
     else
-        action:setRecast(ability:getRecast() - caster:getMerit(xi.merit.PHANTOM_ROLL_RECAST)) -- Recast merits have value of 2 from DB
+        action:setRecast(ability:getRecast() - recastReduction) -- Corsair Recast merits + Phantom Roll Recast Reduction
     end
 
     checkForJobBonus(caster, job)
