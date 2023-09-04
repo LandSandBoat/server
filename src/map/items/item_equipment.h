@@ -32,8 +32,6 @@
 #include "modifier.h"
 #include "status_effect.h"
 
-// типы событий, в которых участвует логика предмета
-
 enum SCRIPTTYPE : uint16
 {
     SCRIPT_NONE         = 0x0000,
@@ -116,9 +114,9 @@ public:
     bool delModifier(Mod mod, int16 modValue);
     bool delPetModifier(Mod mod, PetModType petType, int16 modValue);
 
-    std::vector<CModifier>    modList;    // список модификаторов
-    std::vector<CPetModifier> petModList; // mod list for pets
-    std::vector<itemLatent>   latentList; // contains latents
+    std::vector<CModifier>    modList;
+    std::vector<CPetModifier> petModList;
+    std::vector<itemLatent>   latentList;
 
 private:
     uint8  m_reqLvl;
