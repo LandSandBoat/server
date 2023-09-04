@@ -187,10 +187,10 @@ namespace luautils
     void  SetServerVariable(std::string const& name, int32 value);
     int32 GetVolatileServerVariable(std::string const& varName);
     void  SetVolatileServerVariable(std::string const& varName, int32 value);
-    int32 GetCharVar(uint32 charId, std::string const& varName);              // Get player var directly from SQL DB
-    void  SetCharVar(uint32 charId, std::string const& varName, int32 value); // Set player var in SQL DB using charId
-    void  ClearCharVarFromAll(std::string const& varName);                    // Deletes a specific player variable from all players
-    void  Terminate();                                                        // Logs off all characters and terminates the server
+    int32 GetCharVar(uint32 charId, std::string const& varName);                                         // Get player var directly from SQL DB
+    void  SetCharVar(uint32 charId, std::string const& varName, int32 value, sol::object const& expiry); // Set player var in SQL DB using charId
+    void  ClearCharVarFromAll(std::string const& varName);                                               // Deletes a specific player variable from all players
+    void  Terminate();                                                                                   // Logs off all characters and terminates the server
 
     int32 GetTextIDVariable(uint16 ZoneID, const char* variable); // загружаем значение переменной TextID указанной зоны
     bool  IsContentEnabled(const char* content);                  // Check if the content is enabled in settings.lua

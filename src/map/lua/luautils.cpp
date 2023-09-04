@@ -4718,13 +4718,21 @@ namespace luautils
 
     int32 GetCharVar(uint32 charId, std::string const& varName)
     {
-        return charutils::FetchCharVar(charId, varName);
+        return charutils::FetchCharVar(charId, varName).first;
     }
 
     // Using the charID set a char variable on the SQL DB
-    void SetCharVar(uint32 charId, std::string const& varName, int32 value)
+    void SetCharVar(uint32 charId, std::string const& varName, int32 value, sol::object const& expiry)
     {
-        charutils::SetCharVar(charId, varName, value);
+        uint32 varTimestamp = expiry.is<uint32>() ? expiry.as<uint32>() : 0;
+
+        if (varTimestamp > 0 && varTimestamp <= CVanaTime::getInstance()->getVanaTime())
+        {
+            ShowWarning(fmt::format("Attempting to set variable '{}' with an expired time: {}", varName, varTimestamp));
+            return;
+        }
+
+        charutils::SetCharVar(charId, varName, value, varTimestamp);
     }
 
     void ClearCharVarFromAll(std::string const& varName)

@@ -286,6 +286,9 @@ int32 do_init(int32 argc, char** argv)
     CTaskMgr::getInstance()->AddTask("garbage_collect", server_clock::now(), nullptr, CTaskMgr::TASK_INTERVAL, map_garbage_collect, 15min);
     CTaskMgr::getInstance()->AddTask("persist_server_vars", server_clock::now(), nullptr, CTaskMgr::TASK_INTERVAL, serverutils::PersistVolatileServerVars, 1min);
 
+    ShowInfo("do_init: Removing expired database variables");
+    sql->Query("DELETE FROM char_vars WHERE expiry > 0 AND expiry <= %d", CVanaTime::getInstance()->getVanaTime());
+
     g_PBuff   = new int8[MAX_BUFFER_SIZE + 20];
     PTempBuff = new int8[MAX_BUFFER_SIZE + 20];
 
