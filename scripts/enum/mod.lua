@@ -706,6 +706,7 @@ xi.mod =
     ROLL_RANGE                      = 528, -- Additional range for COR roll abilities.
     PHANTOM_ROLL                    = 881, -- Phantom Roll+ Effect from SOA Rings.
     PHANTOM_DURATION                = 882, -- Phantom Roll Duration +.
+    PHANTOM_RECAST                  = 1076, -- Phantom Roll Recast -.
 
     ENHANCES_REFRESH                = 529, -- "Enhances Refresh" adds +1 per modifier to spell's tick result.
     NO_SPELL_MP_DEPLETION           = 530, -- % to not deplete MP on spellcast.

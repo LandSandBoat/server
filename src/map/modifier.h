@@ -591,6 +591,7 @@ enum class Mod
     QUICK_DRAW_MACC        = 191, // Quick draw magic accuracy
     PHANTOM_ROLL           = 881, // Phantom Roll+ Effect from SOA Rings.
     PHANTOM_DURATION       = 882, // Phantom Roll Duration +.
+    PHANTOM_RECAST         = 1076, // Phantom Roll Recast -.
 
     // Puppetmaster
     MANEUVER_BONUS              = 504,  // Maneuver Stat Bonus
@@ -983,7 +984,7 @@ enum class Mod
     // 217 to 223
     // 271 to 280
     //
-    // SPARE = 1076 and onward
+    // SPARE = 1077 and onward
 };
 
 // temporary workaround for using enum class as unordered_map key until compilers support it

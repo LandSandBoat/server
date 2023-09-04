@@ -420,7 +420,7 @@ INSERT INTO `augments` VALUES (336,0,0,0,0,0); -- Sic and Ready ability delay -1
 INSERT INTO `augments` VALUES (337,0,833,1,0,0); -- Song recast delay -1
 INSERT INTO `augments` VALUES (338,0,0,0,0,0); -- Barrage+1 (additional shots,NOT acc)
 INSERT INTO `augments` VALUES (339,5,540,1,0,0); -- Elemental Siphon+5 (value*5) Use Multiplier field.
-INSERT INTO `augments` VALUES (340,0,0,0,0,0); -- Phantom Roll ability delay -1
+INSERT INTO `augments` VALUES (340,0,1076,1,0,0); -- Phantom Roll ability recast -1
 INSERT INTO `augments` VALUES (341,0,854,1,0,0); -- Repair potency+1%
 INSERT INTO `augments` VALUES (342,0,0,0,0,0); -- Waltz TP cost -1
 INSERT INTO `augments` VALUES (343,0,315,1,0,0); -- "Drain" and "Aspir" Potency +1
