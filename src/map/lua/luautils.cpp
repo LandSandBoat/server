@@ -1483,13 +1483,14 @@ namespace luautils
      * See: VTIME_x defintions, or xi.vanaType for the values to pass
      *                                                                       *
      ************************************************************************/
-    uint32 NextGameTime(uint16 intervalSeconds)
+    uint32 NextGameTime(uint32 intervalSeconds)
     {
         TracyZoneScoped;
-        uint32 vanaTime         = CVanaTime::getInstance()->getVanaTime();
-        uint32 secondsRemaining = vanaTime % intervalSeconds;
+        uint32 timeElapsed      = CVanaTime::getInstance()->getVanaTime();
+        uint32 numPassed        = timeElapsed / intervalSeconds;
+        uint32 secondsRemaining = intervalSeconds - (timeElapsed - (numPassed * intervalSeconds));
 
-        return CVanaTime::getInstance()->getEpoch() + vanaTime + secondsRemaining;
+        return CVanaTime::getInstance()->getSysTime() + secondsRemaining;
     }
 
     // NOTE: NextJstDay is also defined, and maps to JstMidnight
@@ -1497,11 +1498,11 @@ namespace luautils
     uint32 NextJstWeek()
     {
         TracyZoneScoped;
-        uint32 jstWeekday      = CVanaTime::getInstance()->getJstWeekDay(); // 0..6 Days since Sunday
+        uint32 jstWeekday      = CVanaTime::getInstance()->getJstWeekDay();
         uint32 nextJstMidnight = CVanaTime::getInstance()->getJstMidnight();
 
         // Start with the "Next" Midnight, and apply N days worth of time to it
-        return nextJstMidnight + (6 - jstWeekday) * 60 * 60 * 24;
+        return nextJstMidnight + (7 - jstWeekday) * 60 * 60 * 24;
     }
 
     /************************************************************************
