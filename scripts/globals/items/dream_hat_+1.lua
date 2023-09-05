@@ -3,8 +3,6 @@
 -- Dream Hat +1
 -- Dispenses Ginger Cookies
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)
@@ -17,7 +15,7 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    target:addItem(4394, math.random(1, 10))
+    target:addItem(xi.items.GINGER_COOKIE, math.random(1, 10))
 end
 
 itemObject.onItemDrop = function(target)

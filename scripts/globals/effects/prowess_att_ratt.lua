@@ -2,8 +2,6 @@
 -- xi.effect.PROWESS
 -- Increased treasure casket discovery.
 -----------------------------------
-require("scripts/globals/status")
------------------------------------
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

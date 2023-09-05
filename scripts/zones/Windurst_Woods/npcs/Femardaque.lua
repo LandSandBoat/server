@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Windurst Woods
 --  NPC: Femardaque
--- Working 100%
 -----------------------------------
 local entity = {}
 

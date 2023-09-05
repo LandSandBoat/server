@@ -2,8 +2,6 @@
 -- Area: LaLoff Amphitheater
 --  Mob: Ark Angel's Mandragora
 -----------------------------------
-require("scripts/globals/status")
------------------------------------
 local entity = {}
 
 -- TODO: Determine spell list and behavior.  Potentially includes Breakga and Bindga, unless they're TP moves.

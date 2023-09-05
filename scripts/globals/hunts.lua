@@ -5,7 +5,6 @@
 -- https://www.bg-wiki.com/bg/Hunt_Registry
 -----------------------------------
 require("scripts/globals/zone")
-require("scripts/globals/msg")
 require("scripts/globals/regimes")
 
 xi = xi or {}

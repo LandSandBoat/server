@@ -4,9 +4,7 @@
 -- Starts and Finishes Quest: Acting in Good Faith (finish), Healing the Land,
 -- !pos 129 -6 96 231
 -----------------------------------
-require("scripts/globals/settings")
 require("scripts/globals/titles")
-require("scripts/globals/keyitems")
 require("scripts/globals/quests")
 local ID = require("scripts/zones/Northern_San_dOria/IDs")
 -----------------------------------

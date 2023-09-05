@@ -25,7 +25,7 @@ CREATE TABLE `accounts_parties` (
   PRIMARY KEY (`charid`),
   FOREIGN KEY (`charid`) REFERENCES accounts_sessions(`charid`)
     ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --

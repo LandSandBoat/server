@@ -8,9 +8,6 @@
 -- Ranged Attack +24% Cap 185
 -- Vermin Killer +6
 -----------------------------------
-require("scripts/globals/status")
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

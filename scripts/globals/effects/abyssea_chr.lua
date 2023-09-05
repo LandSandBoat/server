@@ -1,8 +1,6 @@
 -----------------------------------
 -- xi.effect.ABYSSEA_CHR
 -----------------------------------
-require("scripts/globals/status")
------------------------------------
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

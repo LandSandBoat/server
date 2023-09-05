@@ -3,7 +3,6 @@
 -- Note: Weaker version of Vrtra summoned by Bahamut during The Wyrmking Descends
 -----------------------------------
 require("scripts/globals/quests")
-require("scripts/globals/status")
 require("scripts/globals/follow")
 -----------------------------------
 local entity = {}

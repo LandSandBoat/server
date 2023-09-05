@@ -2,8 +2,6 @@
 -- ID: 11862
 -- himegami_yukata
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)
@@ -16,7 +14,7 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    target:addItem(17003, 1) -- super_scoop
+    target:addItem(xi.items.SUPER_SCOOP, 1)
 end
 
 return itemObject

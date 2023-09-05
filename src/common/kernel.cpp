@@ -249,8 +249,18 @@ int main(int argc, char** argv)
         // clang-format off
         auto watchdog = Watchdog(2000ms, [&]()
         {
-            ShowCritical("Process main tick has taken 2000ms or more. Are you debugging or stuck in a loop?");
-            ShowCritical("Detaching watchdog thread, it will not fire again until restart.");
+            ShowCritical("Process main tick has taken 2000ms or more.");
+            if (debug::isRunningUnderDebugger())
+            {
+                ShowCritical("Detaching watchdog thread, it will not fire again until restart.");
+            }
+            else
+            {
+#ifndef SIGKILL
+#define SIGKILL 9
+#endif // SIGKILL
+                std::raise(SIGKILL);
+            }
         });
         // clang-format on
 

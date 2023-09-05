@@ -2,8 +2,6 @@
 -- Zone: Phomiuna_Aqueducts (27)
 -----------------------------------
 local ID = require('scripts/zones/Phomiuna_Aqueducts/IDs')
-require('scripts/globals/settings')
-require('scripts/globals/status')
 -----------------------------------
 local zoneObject = {}
 
@@ -21,8 +19,8 @@ zoneObject.onInitialize = function(zone)
     GetNPCByID(ID.npc.QM_TAVNAZIAN_COOKBOOK):addPeriodicTrigger(0, 250, 0)
 end
 
-zoneObject.onConquestUpdate = function(zone, updatetype)
-    xi.conq.onConquestUpdate(zone, updatetype)
+zoneObject.onConquestUpdate = function(zone, updatetype, influence, owner, ranking, isConquestAlliance)
+    xi.conq.onConquestUpdate(zone, updatetype, influence, owner, ranking, isConquestAlliance)
 end
 
 zoneObject.onZoneIn = function(player, prevZone)

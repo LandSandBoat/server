@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Windurst Woods
 --  NPC: Tico Karimakiba
--- Working 100%
 -----------------------------------
 local entity = {}
 

@@ -5,8 +5,6 @@
 -- !pos -151.65 -8.5 191.37 113
 -- Involved in Quest: From Saplings Grow
 -----------------------------------
-require("scripts/globals/status")
------------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)

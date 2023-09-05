@@ -7,7 +7,6 @@
 --  Range: Unknown cone
 --  Notes: Used only by Snoll Tzar
 ---------------------------------------------
-require("scripts/globals/status")
 require("scripts/globals/utils")
 require("scripts/globals/mobskills")
 ---------------------------------------------

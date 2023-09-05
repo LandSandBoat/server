@@ -2,21 +2,17 @@
 -- Faded Promises
 -----------------------------------
 -- Log ID: 1, Quest ID: 73
--- Romualdo : !gotoid 17748022
--- Ayame : !gotoid 17748015
--- Palborough_Mines chest: !gotoid 17363374
--- Kagetora : !gotoid 17743879
--- Alois : !gotoid 17747997
-
+-- Romualdo : !pos 133 -19 -36 237
+-- Ayame    : !pos 133 -19 34 237
+-- Kagetora : !pos -96 -2 29 236
+-- Alois    : !pos 96 -20 14 237
 -----------------------------------
-require('scripts/globals/items')
-require('scripts/globals/keyitems')
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
-require('scripts/globals/titles')
 require('scripts/globals/zone')
 require('scripts/globals/interaction/quest')
 -----------------------------------
+
 local quest = Quest:new(xi.quest.log_id.BASTOK, xi.quest.id.bastok.FADED_PROMISES)
 
 quest.reward =
@@ -25,7 +21,6 @@ quest.reward =
     fameArea = xi.quest.fame_area.BASTOK,
     item     = xi.items.FUKURO,
     title    = xi.title.ASSASSIN_REJECT,
-
 }
 
 quest.sections =
@@ -33,9 +28,9 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == QUEST_AVAILABLE and
-            player:getMainJob() == xi.job.NIN and
-            player:getMainLvl() >= 20 and
-            player:getFameLevel(xi.quest.fame_area.NORG) >= 4
+                player:getMainJob() == xi.job.NIN and
+                player:getMainLvl() >= 20 and
+                player:getFameLevel(xi.quest.fame_area.BASTOK) >= 4
         end,
 
         [xi.zone.METALWORKS] =
@@ -46,7 +41,6 @@ quest.sections =
             {
                 [802] = function(player, csid, option, npc)
                     quest:begin(player)
-                    quest:setVar(player, 'Prog', 1)
                 end,
             },
         },
@@ -59,22 +53,24 @@ quest.sections =
 
         [xi.zone.METALWORKS] =
         {
-            ['Ayame'] =
+            ['Alois'] =
             {
                 onTrigger = function(player, npc)
-                    if quest:getVar(player, 'Prog') == 1 then
-                        return quest:progressEvent(803)
-                    elseif quest:getVar(player, 'Prog') == 3 then
-                        return quest:progressEvent(804)
+                    if quest:getVar(player, 'Prog') == 3 then
+                        return quest:progressEvent(805)
                     end
                 end,
             },
 
-            ['Alois'] =
+            ['Ayame'] =
             {
                 onTrigger = function(player, npc)
-                    if quest:getVar(player, 'Prog') == 4 then
-                        return quest:progressEvent(805)
+                    local questProgress = quest:getVar(player, 'Prog')
+
+                    if questProgress == 0 then
+                        return quest:progressEvent(803)
+                    elseif questProgress == 2 then
+                        return quest:progressEvent(804)
                     end
                 end,
             },
@@ -82,13 +78,13 @@ quest.sections =
             onEventFinish =
             {
                 [803] = function(player, csid, option, npc)
-                    if option == 0 then
-                        quest:setVar(player, 'Prog', 2)
+                    if option == 1 then
+                        quest:setVar(player, 'Prog', 1)
                     end
                 end,
 
                 [804] = function(player, csid, option, npc)
-                    quest:setVar(player, 'Prog', 4)
+                    quest:setVar(player, 'Prog', 3)
                 end,
 
                 [805] = function(player, csid, option, npc)
@@ -104,10 +100,8 @@ quest.sections =
             ['Kagetora'] =
             {
                 onTrigger = function(player, npc)
-                    if quest:getVar(player, 'Prog') == 2 and player:hasKeyItem(xi.ki.DIARY_OF_MUKUNDA) then
+                    if player:hasKeyItem(xi.ki.DIARY_OF_MUKUNDA) then
                         return quest:progressEvent(296)
-                    else
-                        return quest:event(23)
                     end
                 end,
             },
@@ -115,7 +109,7 @@ quest.sections =
             onEventFinish =
             {
                 [296] = function(player, csid, option, npc)
-                    quest:setVar(player, 'Prog', 3)
+                    quest:setVar(player, 'Prog', 2)
                 end,
             },
         },

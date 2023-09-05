@@ -7,6 +7,7 @@ require('scripts/globals/chocobo_digging')
 require('scripts/globals/conquest')
 require('scripts/globals/events/harvest_festivals')
 require('scripts/globals/events/starlight_celebrations')
+require('scripts/globals/events/sunbreeze_festival')
 -----------------------------------
 local zoneObject = {}
 
@@ -15,9 +16,8 @@ zoneObject.onChocoboDig = function(player, precheck)
 end
 
 zoneObject.onInitialize = function(zone)
-    if xi.events.starlightCelebration.isStarlightEnabled ~= 0 then
-        xi.events.starlightCelebration.applyStarlightDecorations(zone:getID())
-    end
+    xi.events.starlightCelebration.applyStarlightDecorations(zone:getID())
+    xi.events.sunbreeze_festival.showNPCs(zone:getID())
 
     -- NM Persistence
     if xi.settings.main.ENABLE_WOTG == 1 then
@@ -33,7 +33,7 @@ zoneObject.onZoneIn = function(player, prevZone)
         player:getYPos() == 0 and
         player:getZPos() == 0
     then
-        player:setPos(-601.433, 35.204, -520.031, 1)
+        player:setPos(579, 0, -305, 62)
     end
 
     if quests.rainbow.onZoneIn(player) then
@@ -43,8 +43,16 @@ zoneObject.onZoneIn = function(player, prevZone)
     return cs
 end
 
-zoneObject.onConquestUpdate = function(zone, updatetype)
-    xi.conq.onConquestUpdate(zone, updatetype)
+zoneObject.onConquestUpdate = function(zone, updatetype, influence, owner, ranking, isConquestAlliance)
+    xi.conq.onConquestUpdate(zone, updatetype, influence, owner, ranking, isConquestAlliance)
+end
+
+zoneObject.onZoneTick = function(zone)
+    xi.events.sunbreeze_festival.onZoneTick(zone)
+end
+
+zoneObject.onGameHour = function(zone)
+    xi.events.sunbreeze_festival.spawnFireworks(zone)
 end
 
 zoneObject.onGameDay = function()

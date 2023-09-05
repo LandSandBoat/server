@@ -3,8 +3,6 @@
 -- Item: Echo Drops
 -- Item Effect: This potion remedies silence.
 -----------------------------------
-require("scripts/globals/status")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

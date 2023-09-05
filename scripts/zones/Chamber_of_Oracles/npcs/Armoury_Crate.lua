@@ -153,11 +153,12 @@ local loot =
         },
 
         {
-            { itemid =     0, droprate = 300 }, -- Nothing
-            { itemid = 18092, droprate = 150 }, -- Bourdonasse
-            { itemid = xi.items.POLE_GRIP,     droprate = 150 },
-            { itemid = xi.items.SWORD_STRAP,   droprate = 350 },
-            { itemid = xi.items.CLAYMORE_GRIP, droprate =  50 },
+            { itemid = xi.items.BOURDONASSE,    droprate = 150 },
+            { itemid = xi.items.VILE_ELIXIR,    droprate = 150 },
+            { itemid = xi.items.VILE_ELIXIR_P1, droprate = 150 },
+            { itemid = xi.items.POLE_GRIP,      droprate = 150 },
+            { itemid = xi.items.SWORD_STRAP,    droprate = 350 },
+            { itemid = xi.items.CLAYMORE_GRIP,  droprate =  50 },
         },
 
         {
@@ -197,13 +198,14 @@ local loot =
             { itemid = 4173, droprate =  25 }, -- Hi-reraiser
         },
         {
-            { itemid =    0, droprate = 575 }, -- Nothing
-            { itemid =  658, droprate =  85 }, -- Damascus Ingot
-            { itemid =  836, droprate =  65 }, -- Square Of Damascene Cloth
-            { itemid =  837, droprate =  45 }, -- Spool Of Malboro Fiber
-            { itemid =  844, droprate = 100 }, -- Phoenix Feather
-            { itemid =  942, droprate =  65 }, -- Philosophers Stone
-            { itemid = 1132, droprate =  65 }, -- Square Of Raxa
+            { itemid =    0,                  droprate = 575 }, -- Nothing
+            { itemid = xi.items.BEETLE_BLOOD, droprate =  85 },
+            { itemid =  658,                  droprate =  85 }, -- Damascus Ingot
+            { itemid =  836,                  droprate =  65 }, -- Square Of Damascene Cloth
+            { itemid =  837,                  droprate =  45 }, -- Spool Of Malboro Fiber
+            { itemid =  844,                  droprate = 100 }, -- Phoenix Feather
+            { itemid =  942,                  droprate =  65 }, -- Philosophers Stone
+            { itemid = 1132,                  droprate =  65 }, -- Square Of Raxa
         }
     },
     -- The Scarlet King

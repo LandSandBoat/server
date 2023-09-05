@@ -26,6 +26,7 @@ zones[xi.zone.ARRAPAGO_REEF] =
         STAGING_GATE_ILRUSI           = 7323, -- Ilrusi Atoll Staging Point.
         CANNOT_LEAVE                  = 7328, -- You cannot leave this area while in the possession of <keyitem>.
         RESPONSE                      = 7337, -- There is no response...
+        ASSAULT_START_OFFSET          = 7454, -- Max MP Down removed for <name>.
         DOOR_IS_LOCKED                = 7466, -- The door is locked.  You might be able to open it with <item>.
         DOOR_IS_LOCKED2               = 7467, -- The door is locked.  You might be able to open it with <item> or <item>.
         KEY_BREAKS                    = 7468, -- The <item> breaks!
@@ -36,6 +37,7 @@ zones[xi.zone.ARRAPAGO_REEF] =
         THE_PARTY_WILL_BE_REMOVED     = 7899, -- If all party members' HP are still zero after # minute[/s], the party will be removed from the battlefield.
         YOU_NO_REQS                   = 7903, -- You do not meet the requirements to enter the battlefield with your party members. Access is denied.
         YOUR_IMPERIAL_STANDING        = 7917, -- Your Imperial Standing has increased!
+        FEEL_A_CHILL                  = 8377, -- You feel a chill run down your spine!
         HAND_OVER_TO_IMMORTAL         = 8435, -- You hand over the % to the Immortal.
         CANNOT_ENTER                  = 8454, -- You cannot enter at this time. Please wait a while before trying again.
         AREA_FULL                     = 8455, -- This area is fully occupied. You were unable to enter.
@@ -56,11 +58,12 @@ zones[xi.zone.ARRAPAGO_REEF] =
         {
             [16998653] = 16998655, -- 136.234 -6.831 468.779
         },
-        MEDUSA                = DYNAMIC_LOOKUP,
-        LIL_APKALLU           = DYNAMIC_LOOKUP,
-        VELIONIS              = DYNAMIC_LOOKUP,
-        ZAREEHKL_THE_JUBILANT = DYNAMIC_LOOKUP,
-        NUHN                  = DYNAMIC_LOOKUP,
+        MEDUSA                = GetFirstID("Medusa"),
+        LIL_APKALLU           = GetFirstID("Lil_Apkallu"),
+        VELIONIS              = GetFirstID("Velionis"),
+        ZAREEHKL_THE_JUBILANT = GetFirstID("Zareehkl_the_Jubilant"),
+        NUHN                  = GetFirstID("Nuhn"),
+        BUKKI                 = GetFirstID("Bukki"),
     },
     npc =
     {

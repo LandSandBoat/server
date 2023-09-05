@@ -2,9 +2,6 @@
 -- func: delitem
 -- desc: Deletes a single item held by a player, if they have it.
 -----------------------------------
-
-require("scripts/globals/status")
-
 cmdprops =
 {
     permission = 1,

@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Windurst Walls
 --  NPC: Anini
--- Working 100%
 -----------------------------------
 local entity = {}
 

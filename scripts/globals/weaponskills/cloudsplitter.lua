@@ -12,8 +12,6 @@
 -----------------------------------
 require("scripts/globals/aftermath")
 require("scripts/globals/magic")
-require("scripts/globals/settings")
-require("scripts/globals/status")
 require("scripts/globals/weaponskills")
 -----------------------------------
 local weaponskillObject = {}

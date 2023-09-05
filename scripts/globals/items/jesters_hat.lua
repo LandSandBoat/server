@@ -3,8 +3,6 @@
 -- Item: Jester's Hat
 -- Item Effect: Casts Cure II
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

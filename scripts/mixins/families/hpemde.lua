@@ -3,7 +3,6 @@ https://ffxiclopedia.fandom.com/wiki/Category:Hpemde
 https://www.bg-wiki.com/ffxi/Category:Hpemde
 --]]
 require("scripts/globals/mixins")
-require("scripts/globals/status")
 -----------------------------------
 
 g_mixins = g_mixins or {}
@@ -33,7 +32,7 @@ end
 
 local function openMouth(mob)
     -- Double the mob weapon damage
-    mob:setMobMod(xi.mobMod.WEAPON_BONUS, 200)
+    mob:setMobMod(xi.mobMod.WEAPON_BONUS, mob:getMainLvl())
     -- Boost all damage taken by 100%
     mob:setMod(xi.mod.UDMGPHYS, 10000)
     mob:setMod(xi.mod.UDMGRANGE, 10000)
@@ -54,7 +53,7 @@ local function openMouth(mob)
 end
 
 local function closeMouth(mob)
-    mob:setMobMod(xi.mobMod.WEAPON_BONUS, 100)
+    mob:setMobMod(xi.mobMod.WEAPON_BONUS, 0)
     mob:setMod(xi.mod.UDMGPHYS, 0)
     mob:setMod(xi.mod.UDMGRANGE, 0)
     mob:setMod(xi.mod.UDMGMAGIC, 0)

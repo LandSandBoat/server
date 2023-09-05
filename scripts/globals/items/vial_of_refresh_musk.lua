@@ -4,8 +4,6 @@
 -- Item Effect: 60 seconds
 -- Duration: 30 Seconds
 -----------------------------------
-require("scripts/globals/status")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

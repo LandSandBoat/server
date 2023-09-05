@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Port Windurst
 --  NPC: Blank Card
--- Working 100%
 -----------------------------------
 local entity = {}
 

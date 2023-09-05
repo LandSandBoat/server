@@ -3,7 +3,6 @@
 -- Deals Water damage in a splash area of effect. Additional effect: STR Down
 -----------------------------------
 require("scripts/globals/mobskills")
-require("scripts/globals/status")
 -----------------------------------
 local mobskillObject = {}
 

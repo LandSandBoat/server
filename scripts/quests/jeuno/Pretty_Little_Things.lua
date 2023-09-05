@@ -4,7 +4,6 @@
 -- Log ID: 3, Quest ID: 43
 -- Zona Shodhun : !pos -175 -5 -4 246
 -----------------------------------
-require('scripts/globals/items')
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
 require('scripts/globals/zone')
@@ -106,7 +105,9 @@ quest.sections =
 
                     if option == 4002 then
                         if quest:complete(player) then
-                            player:setMoghouseFlag(8)
+                            player:confirmTrade()
+                            local mhflag = player:getMoghouseFlag()
+                            player:setMoghouseFlag(mhflag + 0x0008)
                             player:messageSpecial(portJeunoID.text.MOGHOUSE_EXIT)
                         end
                     elseif player:getQuestStatus(quest.areaId, quest.questId) == QUEST_AVAILABLE then

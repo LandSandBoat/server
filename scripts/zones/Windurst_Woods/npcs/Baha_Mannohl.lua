@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Windurst Woods
 --  NPC: Baha Mannohl
--- Working 100%
 -----------------------------------
 local entity = {}
 

@@ -7,7 +7,6 @@
 -- Jakoh Wahcondalo : !pos 101 -16 -115 250
 -----------------------------------
 require('scripts/globals/interaction/mission')
-require('scripts/globals/keyitems')
 require('scripts/globals/missions')
 require('scripts/globals/zone')
 -----------------------------------

@@ -5,7 +5,6 @@
 -- !zone 236
 -----------------------------------
 require("scripts/globals/quests")
-require("scripts/globals/settings")
 -----------------------------------
 local entity = {}
 

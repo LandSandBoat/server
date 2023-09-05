@@ -5,19 +5,13 @@
 -- https://ffxiclopedia.wikia.com/wiki/Logging
 -- https://ffxiclopedia.wikia.com/wiki/Mining
 -----------------------------------
-require("scripts/globals/items")
-require("scripts/globals/keyitems")
 require("scripts/globals/missions")
 require("scripts/globals/npc_util")
 require("scripts/globals/quests")
 require("scripts/globals/roe")
-require("scripts/globals/settings")
-require("scripts/globals/spell_data")
-require("scripts/globals/status")
 require("scripts/globals/zone")
 require("scripts/missions/amk/helpers")
 require("scripts/missions/wotg/helpers")
-require("scripts/globals/msg")
 -----------------------------------
 
 xi = xi or {}
@@ -576,6 +570,8 @@ xi.helm.helmInfo =
                     {   29.643, -24.514,  361.756 },
                     {  -29.950, -24.155,  495.225 },
                     {  306.851,  23.677, -330.013 },
+                    {  285.760,  23.677, -328.804 },
+                    {  288.659,  23.677, -394.522 },
                     {  -66.369, -24.960,  535.166 },
                     {  -94.736, -24.929,  653.229 },
                     { -170.298, -32.188,   94.226 },
@@ -1489,7 +1485,7 @@ local function doMove(npc, x, y, z)
     end
 end
 
-local function movePoint(npc, zoneId, info)
+local function movePoint(player, npc, zoneId, info)
     local points = info.zone[zoneId].points
     local point  = points[math.random(1, #points)]
 
@@ -1510,7 +1506,7 @@ xi.helm.initZone = function(zone, helmType)
         local npc = GetNPCByID(npcId)
         if npc then
             npc:setStatus(xi.status.NORMAL)
-            movePoint(npc, zoneId, info)
+            movePoint(nil, npc, zoneId, info)
         end
     end
 end
@@ -1548,7 +1544,7 @@ xi.helm.onTrade = function(player, npc, trade, helmType, csid, func)
                 local uses = (npc:getLocalVar("uses") - 1) % 4
                 npc:setLocalVar("uses", uses)
                 if uses == 0 then
-                    movePoint(npc, zoneId, info)
+                    movePoint(player, npc, zoneId, info)
                 end
 
                 if

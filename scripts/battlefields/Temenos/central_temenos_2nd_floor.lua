@@ -9,8 +9,6 @@
 local ID = require("scripts/zones/Temenos/IDs")
 require("scripts/globals/battlefield")
 require("scripts/globals/limbus")
-require("scripts/globals/items")
-require("scripts/globals/keyitems")
 -----------------------------------
 
 local content = Limbus:new({
@@ -26,7 +24,7 @@ local content = Limbus:new({
     name             = "CENTRAL_TEMENOS_2ND_FLOOR",
 })
 
-local function weakenCarbuncle(elementalMod, bonusMod, bonusAmount, battlefield, mob, count)
+local function weakenCarbuncle(elementalMod, bonusMods, bonusAmounts, battlefield, mob, count)
     -- Remove the elemental bonus effects
     local zone = mob:getZone()
     local carbuncle = zone:queryEntitiesByName("Mystic_Avatar_Carbuncle")[1]
@@ -34,10 +32,12 @@ local function weakenCarbuncle(elementalMod, bonusMod, bonusAmount, battlefield,
         carbuncle:setMod(elementalMod, 0)
     end
 
-    carbuncle:delMod(bonusMod, bonusAmount)
+    for modIndex, bonusMod in ipairs(bonusMods) do
+        carbuncle:delMod(bonusMod, bonusAmounts[modIndex])
+    end
 end
 
-function content:handleElementalDeath(elementalMod, bonusMod, bonusAmount, weakElemental, battlefield, mob, count)
+function content:handleElementalDeath(elementalMod, bonusMods, bonusAmounts, weakElemental, battlefield, mob, count)
     -- Spawn the Mystic Avatar if this elemental died from morphing
     if mob:getLocalVar("morphed") == 1 then
         local mysticID = mob:getID() + 6
@@ -50,7 +50,7 @@ function content:handleElementalDeath(elementalMod, bonusMod, bonusAmount, weakE
         return
     end
 
-    weakenCarbuncle(elementalMod, bonusMod, bonusAmount, battlefield, mob, count)
+    weakenCarbuncle(elementalMod, bonusMods, bonusAmounts, battlefield, mob, count)
 
     -- Morph the weak elemental into a Mystic Avatar
     local zone = mob:getZone()
@@ -75,11 +75,15 @@ content.groups =
             "Light_Elemental",
         },
 
-        -- NOTE: Elementals take double physical damage because their family resistance is 25% so it totals to 50% resistance
         mods =
         {
-            [xi.mod.UDMGPHYS] = -10000,
-            [xi.mod.UDMGMAGIC] = 5000,
+            -- 50% resist on all damage
+            [xi.mod.DMG] = -5000,
+            -- remove the normal phys down of elementals
+            [xi.mod.PIERCE_SDT] = 1000,
+            [xi.mod.SLASH_SDT] = 1000,
+            [xi.mod.IMPACT_SDT] = 1000,
+            [xi.mod.HTH_SDT] = 1000,
             [xi.mobMod.DETECTION] = xi.detects.HEARING,
         },
     },
@@ -90,9 +94,13 @@ content.groups =
         mobs = { "Mystic_Avatar_Ifrit" },
         mods =
         {
-            [xi.mod.UDMGPHYS] = 2500,
+            [xi.mod.UDMGPHYS] = -2500,
+            [xi.mod.UDMGRANGE] = -2500,
+            [xi.mod.UDMGBREATH] = -2500,
             [xi.mod.FIRE_ABSORB] = 100,
+            -- double fire damage so absorb painful
             [xi.mod.FIRE_SDT] = -10000,
+            -- for elemental sdts 9000 means 90% less dmg
             [xi.mod.ICE_SDT] = 9000,
             [xi.mod.THUNDER_SDT] = 9000,
             [xi.mod.EARTH_SDT] = 9000,
@@ -106,7 +114,9 @@ content.groups =
         mobs = { "Mystic_Avatar_Shiva" },
         mods =
         {
-            [xi.mod.UDMGPHYS] = 2500,
+            [xi.mod.UDMGPHYS] = -2500,
+            [xi.mod.UDMGRANGE] = -2500,
+            [xi.mod.UDMGBREATH] = -2500,
             [xi.mod.ICE_ABSORB] = 100,
             [xi.mod.ICE_SDT] = -10000,
             [xi.mod.WATER_SDT] = 9000,
@@ -122,7 +132,9 @@ content.groups =
         mobs = { "Mystic_Avatar_Garuda" },
         mods =
         {
-            [xi.mod.UDMGPHYS] = 2500,
+            [xi.mod.UDMGPHYS] = -2500,
+            [xi.mod.UDMGRANGE] = -2500,
+            [xi.mod.UDMGBREATH] = -2500,
             [xi.mod.WIND_ABSORB] = 100,
             [xi.mod.WIND_SDT] = -10000,
             [xi.mod.FIRE_SDT] = 9000,
@@ -138,7 +150,9 @@ content.groups =
         mobs = { "Mystic_Avatar_Titan" },
         mods =
         {
-            [xi.mod.UDMGPHYS] = 2500,
+            [xi.mod.UDMGPHYS] = -2500,
+            [xi.mod.UDMGRANGE] = -2500,
+            [xi.mod.UDMGBREATH] = -2500,
             [xi.mod.EARTH_ABSORB] = 100,
             [xi.mod.EARTH_SDT] = -10000,
             [xi.mod.ICE_SDT] = 9000,
@@ -154,7 +168,9 @@ content.groups =
         mobs = { "Mystic_Avatar_Ramuh" },
         mods =
         {
-            [xi.mod.UDMGPHYS] = 2500,
+            [xi.mod.UDMGPHYS] = -2500,
+            [xi.mod.UDMGRANGE] = -2500,
+            [xi.mod.UDMGBREATH] = -2500,
             [xi.mod.LTNG_ABSORB] = 100,
             [xi.mod.THUNDER_SDT] = -10000,
             [xi.mod.ICE_SDT] = 9000,
@@ -170,7 +186,9 @@ content.groups =
         mobs = { "Mystic_Avatar_Leviathan" },
         mods =
         {
-            [xi.mod.UDMGPHYS] = 2500,
+            [xi.mod.UDMGPHYS] = -2500,
+            [xi.mod.UDMGRANGE] = -2500,
+            [xi.mod.UDMGBREATH] = -2500,
             [xi.mod.WATER_ABSORB] = 100,
             [xi.mod.WATER_SDT] = -10000,
             [xi.mod.FIRE_SDT] = 9000,
@@ -191,7 +209,7 @@ content.groups =
             "Mystic_Avatar_Ifrit",
         },
 
-        death = utils.bind(content.handleElementalDeath, content, xi.mod.FIRE_SDT, xi.mod.ATTP, 50, "Ice_Elemental"),
+        death = utils.bind(content.handleElementalDeath, content, xi.mod.FIRE_SDT, { xi.mod.ATTP }, { 50 }, "Ice_Elemental"),
     },
 
     {
@@ -203,7 +221,7 @@ content.groups =
         },
 
         -- TODO: Figure out the bonus modifier
-        death = utils.bind(content.handleElementalDeath, content, xi.mod.ICE_SDT, xi.mod.MATT, 50, "Air_Elemental"),
+        death = utils.bind(content.handleElementalDeath, content, xi.mod.ICE_SDT, { xi.mod.MATT }, { 50 }, "Air_Elemental"),
     },
 
     {
@@ -214,7 +232,7 @@ content.groups =
             "Mystic_Avatar_Garuda",
         },
 
-        death = utils.bind(content.handleElementalDeath, content, xi.mod.WIND_SDT, xi.mod.EVA, 100, "Earth_Elemental"),
+        death = utils.bind(content.handleElementalDeath, content, xi.mod.WIND_SDT, { xi.mod.EVA }, { 100 }, "Earth_Elemental"),
     },
 
     {
@@ -225,7 +243,7 @@ content.groups =
             "Mystic_Avatar_Titan",
         },
 
-        death = utils.bind(content.handleElementalDeath, content, xi.mod.EARTH_SDT, xi.mod.UDMGPHYS, 5000, "Thunder_Elemental"),
+        death = utils.bind(content.handleElementalDeath, content, xi.mod.EARTH_SDT, { xi.mod.UDMGPHYS, xi.mod.UDMGRANGE, xi.mod.UDMGBREATH }, { -5000, -5000, -5000 }, "Thunder_Elemental"),
     },
 
     {
@@ -236,7 +254,7 @@ content.groups =
             "Mystic_Avatar_Ramuh",
         },
 
-        death = utils.bind(content.handleElementalDeath, content, xi.mod.THUNDER_SDT, xi.mod.DOUBLE_ATTACK, 100, "Water_Elemental"),
+        death = utils.bind(content.handleElementalDeath, content, xi.mod.THUNDER_SDT, { xi.mod.DOUBLE_ATTACK }, { 100 }, "Water_Elemental"),
     },
 
     {
@@ -247,12 +265,14 @@ content.groups =
             "Mystic_Avatar_Leviathan",
         },
 
-        death = utils.bind(content.handleElementalDeath, content, xi.mod.WATER_SDT, xi.mod.UDMGMAGIC, 5000, "Fire_Elemental"),
+        death = utils.bind(content.handleElementalDeath, content, xi.mod.WATER_SDT, { xi.mod.UDMGMAGIC }, { -5000 }, "Fire_Elemental"),
     },
 
     {
         mobs = { "Light_Elemental" },
-        death = utils.bind(weakenCarbuncle, content, xi.mod.NONE, xi.mod.DARK_SDT, 2500),
+        death = function(battlefield, mob)
+            weakenCarbuncle(xi.mod.NONE, { xi.mod.DARK_SDT }, { 2500 }, battlefield, mob)
+        end
     },
 
     {
@@ -262,7 +282,8 @@ content.groups =
             "Mystic_Avatar_Carbuncle",
         },
         mobMods = { [xi.mobMod.DETECTION] = xi.detects.HEARING },
-        inParty = true,
+        isParty = true,
+        superlink = true,
     },
 
     {
@@ -283,9 +304,11 @@ content.groups =
             mob:addMod(xi.mod.ATTP, 50)
             mob:addMod(xi.mod.MATT, 50)
             mob:addMod(xi.mod.EVA, 100)
-            mob:addMod(xi.mod.UDMGPHYS, 5000)
+            mob:addMod(xi.mod.UDMGPHYS, -5000)
+            mob:addMod(xi.mod.UDMGRANGE, -5000)
+            mob:addMod(xi.mod.UDMGBREATH, -5000)
             mob:addMod(xi.mod.DOUBLE_ATTACK, 100)
-            mob:addMod(xi.mod.UDMGMAGIC, 5000)
+            mob:addMod(xi.mod.UDMGMAGIC, -5000)
         end,
 
         death = function(battlefield, mob)
@@ -299,22 +322,39 @@ content.loot =
     [ID.CENTRAL_TEMENOS_2ND_FLOOR.npc.LOOT_CRATE] =
     {
         {
-            quantity = 7,
-            { itemid = 1875, droprate = 1000 },
+            quantity = 6,
+            { item = xi.items.ANCIENT_BEASTCOIN, weight = xi.loot.weight.NORMAL },
         },
 
         {
-            { itemid = 1944, droprate = 250 },
-            { itemid = 1936, droprate =  94 },
-            { itemid = 1950, droprate =  63 },
-            { itemid = 1942, droprate = 125 },
-            { itemid = 1946, droprate =  63 },
-            { itemid = 2660, droprate = 281 },
-            { itemid = 2714, droprate = 125 },
+            { item = xi.items.SQUARE_OF_ECARLATE_CLOTH, weight = xi.loot.weight.NORMAL },
+            { item = xi.items.DARK_ORICHALCUM_INGOT, weight = xi.loot.weight.NORMAL },
+            { item = xi.items.SQUARE_OF_SMALT_LEATHER, weight = xi.loot.weight.NORMAL },
+            { item = xi.items.SQUARE_OF_FILET_LACE, weight = xi.loot.weight.NORMAL },
         },
 
         {
-            { itemid = 1908, droprate = 1000 },
+            { item = xi.items.SPOOL_OF_COILED_YARN, weight = xi.loot.weight.NORMAL },
+            { item = xi.items.PLAITED_CORD, weight = xi.loot.weight.NORMAL },
+            { item = xi.items.SHEET_OF_COBALT_MYTHRIL, weight = xi.loot.weight.NORMAL },
+            { item = xi.items.SPOOL_OF_LUMINIAN_THREAD, weight = xi.loot.weight.NORMAL },
+        },
+
+        {
+            { item = xi.items.NONE, weight = xi.loot.weight.VERY_HIGH },
+            { item = xi.items.UTOPIAN_GOLD_THREAD, weight = xi.loot.weight.LOW },
+            { item = xi.items.SQUARE_OF_SUPPLE_SKIN, weight = xi.loot.weight.LOW },
+            { item = xi.items.SPOOL_OF_SCARLET_ODOSHI, weight = xi.loot.weight.LOW },
+            { item = xi.items.SPOOL_OF_SILKWORM_THREAD, weight = xi.loot.weight.LOW },
+        },
+
+        {
+            { item = xi.items.CERULEAN_CHIP, weight = xi.loot.weight.NORMAL },
+        },
+
+        {
+            { item = xi.items.NONE, weight = xi.loot.weight.VERY_HIGH },
+            { item = xi.items.METAL_CHIP, weight = xi.loot.weight.VERY_LOW },
         },
     }
 }

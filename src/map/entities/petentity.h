@@ -78,7 +78,8 @@ public:
 
     std::vector<uint16> m_buffSpells;
     std::vector<uint16> m_offensiveSpells;
-    std::vector<uint16> m_healSpells;
+    std::vector<uint16> m_healSingleSpells;
+    std::vector<uint16> m_healAOESpells;
 
     duration   m_magicCooldown;
     time_point m_LastMagicTime;

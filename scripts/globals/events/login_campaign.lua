@@ -2,7 +2,6 @@
 -- Login Campaign
 -- https://www.bg-wiki.com/ffxi/Repeat_Login_Campaign
 ------------------------------------
-require("scripts/globals/settings")
 require("scripts/globals/npc_util")
 local prizes = require("scripts/globals/events/login_campaign_data")
 ------------------------------------

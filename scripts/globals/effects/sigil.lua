@@ -1,8 +1,6 @@
 -----------------------------------
 -- xi.effect.SIGIL
 -----------------------------------
-require("scripts/globals/status")
------------------------------------
 local effectObject = {}
 
 -- TODO: Find a way to simplify this.  Is this a bitfield?

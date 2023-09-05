@@ -3,7 +3,6 @@
 -- ID 5366
 -- Unlocks head and neck equipment
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/salvage")
 -----------------------------------
 local itemObject = {}

@@ -3,9 +3,9 @@
 -----------------------------------
 local ID = require('scripts/zones/Port_Bastok/IDs')
 require('scripts/globals/events/starlight_celebrations')
+require('scripts/globals/events/sunbreeze_festival')
 require('scripts/globals/conquest')
 require('scripts/globals/cutscenes')
-require('scripts/globals/settings')
 require('scripts/globals/zone')
 -----------------------------------
 local zoneObject = {}
@@ -15,10 +15,11 @@ zoneObject.onInitialize = function(zone)
     zone:registerTriggerArea(2, 53.5, 5, -165.3, 66.5, 6, -72) -- drawbridge area
     xi.conquest.toggleRegionalNPCs(zone)
     xi.events.starlightCelebration.applyStarlightDecorations(zone:getID())
+    xi.events.sunbreeze_festival.showDecorations(zone:getID())
 end
 
-zoneObject.onConquestUpdate = function(zone, updatetype)
-    xi.conq.onConquestUpdate(zone, updatetype)
+zoneObject.onConquestUpdate = function(zone, updatetype, influence, owner, ranking, isConquestAlliance)
+    xi.conq.onConquestUpdate(zone, updatetype, influence, owner, ranking, isConquestAlliance)
 end
 
 zoneObject.onZoneIn = function(player, prevZone)
@@ -116,6 +117,8 @@ zoneObject.onGameHour = function(zone)
             end
         end
     end
+
+    xi.events.sunbreeze_festival.spawnFireworks(zone)
 end
 
 return zoneObject

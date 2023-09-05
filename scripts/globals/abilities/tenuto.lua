@@ -5,8 +5,6 @@
 -- Recast Time: 0:15
 -- Duration: 1:00, or until next song is cast.
 -----------------------------------
-require("scripts/globals/status")
------------------------------------
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)

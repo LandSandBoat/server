@@ -5,9 +5,6 @@
 -- Duration: 3 Mins 20 Secs
 -- TODO: Enhances duration of Invisible Effect
 -----------------------------------
-require("scripts/globals/settings")
-require("scripts/globals/status")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Windurst Woods
 --  NPC: Ki Volep
--- Working 100%
 -----------------------------------
 local entity = {}
 

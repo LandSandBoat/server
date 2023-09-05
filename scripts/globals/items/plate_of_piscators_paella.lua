@@ -8,9 +8,6 @@
 -- Accuracy % 16 (cap 85)
 -- Undead Killer 6
 -----------------------------------
-require("scripts/globals/status")
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

@@ -6,7 +6,6 @@
 -----------------------------------
 local ID = require("scripts/zones/Dragons_Aery/IDs")
 require("scripts/globals/npc_util")
-require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 

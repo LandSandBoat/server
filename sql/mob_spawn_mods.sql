@@ -22,7 +22,7 @@ CREATE TABLE `mob_spawn_mods` (
   `value` smallint(5) NOT NULL DEFAULT '0',
   `is_mob_mod` boolean NOT NULL DEFAULT '0',
   PRIMARY KEY (`mobid`,`modid`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AVG_ROW_LENGTH=13 PACK_KEYS=1;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 AVG_ROW_LENGTH=13 PACK_KEYS=1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -75,13 +75,13 @@ INSERT INTO `mob_spawn_mods` VALUES (16806031,55,180,1); -- IDLE_DESPAWN: 180
 INSERT INTO `mob_spawn_mods` VALUES (16806117,288,40,0); -- DOUBLE_ATTACK: 40
 
 -- Xolotl
-INSERT INTO `mob_spawn_mods` VALUES (16806215,26,32,1); -- SUPERLINK: 32
+INSERT INTO `mob_spawn_mods` VALUES (16806215,10,32,1); -- SUBLINK: 32
 
 -- Xolotl'S Hound Warrior
-INSERT INTO `mob_spawn_mods` VALUES (16806216,26,32,1); -- SUPERLINK: 32
+INSERT INTO `mob_spawn_mods` VALUES (16806216,10,32,1); -- SUBLINK: 32
 
 -- Xolotl'S Sacrifice
-INSERT INTO `mob_spawn_mods` VALUES (16806217,26,32,1); -- SUPERLINK: 32
+INSERT INTO `mob_spawn_mods` VALUES (16806217,10,32,1); -- SUBLINK: 32
 
 -- Feeler Antlion
 INSERT INTO `mob_spawn_mods` VALUES (16806242,55,120,1); -- IDLE_DESPAWN: 120
@@ -159,7 +159,7 @@ INSERT INTO `mob_spawn_mods` VALUES (16814432,9,80,1);    -- HP_HEAL_CHANCE: 80
 INSERT INTO `mob_spawn_mods` VALUES (16814432,29,33,0);   -- MDEF: 33
 INSERT INTO `mob_spawn_mods` VALUES (16814432,55,900,1);  -- IDLE_DESPAWN: 900
 INSERT INTO `mob_spawn_mods` VALUES (16814432,168,2,0);   -- SPELLINTERRUPT: 2
-INSERT INTO `mob_spawn_mods` VALUES (16814432,170,50,0);  -- FASTCAST: 50
+INSERT INTO `mob_spawn_mods` VALUES (16814432,170,10,0);  -- FASTCAST: 10
 
 -- Goblin Wolfman
 INSERT INTO `mob_spawn_mods` VALUES (16822459,55,300,1); -- IDLE_DESPAWN: 300
@@ -1831,6 +1831,11 @@ INSERT INTO `mob_spawn_mods` VALUES (16896158,26,1,1); -- SUPERLINK 1
 INSERT INTO `mob_spawn_mods` VALUES (16896159,26,1,1); -- SUPERLINK 1
 INSERT INTO `mob_spawn_mods` VALUES (16896160,26,1,1); -- SUPERLINK 1
 INSERT INTO `mob_spawn_mods` VALUES (16896161,26,1,1); -- SUPERLINK 1
+INSERT INTO `mob_spawn_mods` VALUES (16896157,108,1,1); -- NO_CRYSTAL_SEAL_DROPS 1
+INSERT INTO `mob_spawn_mods` VALUES (16896158,38,1,1); -- NO_DROPS 1
+INSERT INTO `mob_spawn_mods` VALUES (16896159,38,1,1); -- NO_DROPS 1
+INSERT INTO `mob_spawn_mods` VALUES (16896160,38,1,1); -- NO_DROPS 1
+INSERT INTO `mob_spawn_mods` VALUES (16896161,38,1,1); -- NO_DROPS 1
 
 /*!40000 ALTER TABLE `mob_spawn_mods` ENABLE KEYS */;
 UNLOCK TABLES;

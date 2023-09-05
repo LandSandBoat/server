@@ -2,7 +2,6 @@
 -- Area: King Ranperre's Tomb
 --   NM: Vrtra
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/titles")
 -----------------------------------
 local entity = {}
@@ -22,15 +21,16 @@ entity.onMobSpawn = function(mob)
     mob:setMod(xi.mod.REGEN, 50) -- Says high very regen
     mob:setMod(xi.mod.UFASTCAST, 50)
     mob:setMod(xi.mod.REFRESH, 100)
-    mob:setMod(xi.mod.SLEEPRESBUILD, 1)
-    mob:setMod(xi.mod.LULLABYRESBUILD, 1)
+    mob:setMod(xi.mod.SLEEPRESBUILD, 30)
+    mob:setMod(xi.mod.LULLABYRESBUILD, 30)
     mob:setMobMod(xi.mobMod.NO_STANDBACK, 1)
     mob:setMobMod(xi.mobMod.SIGHT_RANGE, 30)
     mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
 end
 
 entity.onMobEngaged = function(mob, target)
-    mob:setLocalVar("spawnTime", os.time() + 45)
+    mob:setLocalVar("twohourTime", 0)
+    mob:setLocalVar("spawnTime", 0)
 end
 
 entity.onMobFight = function(mob, target)
@@ -63,7 +63,7 @@ entity.onMobFight = function(mob, target)
         mob:setLocalVar("twohourTime", fifteenBlock + math.random(4, 6))
     end
 
-    if os.time() > spawnTime and mob:canUseAbilities() then
+    if fifteenBlock > spawnTime and mob:canUseAbilities() then
         local mobId = mob:getID()
 
         for _, offset in ipairs(offsets) do
@@ -94,8 +94,8 @@ entity.onMobFight = function(mob, target)
             end
         end
 
-        local random = math.random(40, 45)
-        mob:setLocalVar("spawnTime", os.time() + random)
+        spawnTime = math.random(3, 5)
+        mob:setLocalVar("spawnTime", fifteenBlock + spawnTime)
     end
 
     -- Vrtra draws in if you attempt to leave the room

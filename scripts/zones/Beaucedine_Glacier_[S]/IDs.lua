@@ -42,7 +42,7 @@ zones[xi.zone.BEAUCEDINE_GLACIER_S] =
 
     mob =
     {
-        ORCISH_BLOODLETTER = DYNAMIC_LOOKUP,
+        ORCISH_BLOODLETTER = GetFirstID("Orcish_Bloodletter"),
 
         GRANDGOULE_PH =
         {

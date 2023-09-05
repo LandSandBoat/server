@@ -7,7 +7,6 @@
 local ID = require("scripts/zones/Northern_San_dOria/IDs")
 require("scripts/globals/crafting")
 require("scripts/globals/roe")
-require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 
@@ -38,15 +37,11 @@ end
 entity.onTrigger = function(player, npc)
     local craftSkill        = player:getSkillLevel(xi.skill.SMITHING)
     local testItem          = xi.crafting.getTestItem(player, npc, xi.skill.SMITHING)
-    local guildMember       = xi.crafting.isGuildMember(player, 8)
+    local guildMember       = xi.crafting.hasJoinedGuild(player, xi.crafting.guild.SMITHING) and 150995375 or 0
     local rankCap           = xi.crafting.getCraftSkillCap(player, xi.skill.SMITHING)
     local expertQuestStatus = 0
     local rank              = player:getSkillRank(xi.skill.SMITHING)
     local realSkill         = (craftSkill - rank) / 32
-
-    if guildMember == 1 then
-        guildMember = 150995375
-    end
 
     if xi.crafting.unionRepresentativeTriggerRenounceCheck(player, 626, realSkill, rankCap, 184549887) then
         return
@@ -75,10 +70,8 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    local guildMember = xi.crafting.isGuildMember(player, 8)
-
     if csid == 626 and option == 2 then
-        if guildMember == 1 then
+        if xi.crafting.hasJoinedGuild(player, xi.crafting.guild.SMITHING) then
             player:setCharVar("SmithingExpertQuest", 1)
         end
     elseif csid == 626 and option == 1 then
@@ -87,9 +80,9 @@ entity.onEventFinish = function(player, csid, option)
         else
             player:addItem(4096)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 4096) -- Fire Crystal
-            xi.crafting.signupGuild(player, xi.crafting.guild.smithing)
+            xi.crafting.signupGuild(player, xi.crafting.guild.SMITHING)
         end
-    elseif (csid == 626 and option > 900) then
+    elseif csid == 626 and option > 900 then
         player:resetLocalVars()
     else
         if player:getLocalVar("SmithingTraded") == 1 then

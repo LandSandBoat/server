@@ -1,7 +1,6 @@
 -----------------------------------
 -- Spell: Threnody II - xi.mod.DARK_MEVA
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/magic")
 -----------------------------------
 local spellObject = {}

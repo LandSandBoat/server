@@ -3,8 +3,6 @@
 --  Mob: Kam'lanaut
 -- Apocalypse Nigh Final Fight
 -----------------------------------
-require("scripts/globals/status")
------------------------------------
 local entity = {}
 
 local skillToAbsorb =
@@ -19,7 +17,7 @@ local skillToAbsorb =
 
 entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.SIGHT_RANGE, 15)
-    mob:setMobMod(xi.mobMod.WEAPON_BONUS, 125)
+    mob:setMobMod(xi.mobMod.WEAPON_BONUS, 20) -- Level (78) + 2 + 20 = 100
     mob:setMod(xi.mod.MDEF, 380)
     mob:addMod(xi.mod.ATT, 100)
     mob:addMod(xi.mod.DEF, 170)

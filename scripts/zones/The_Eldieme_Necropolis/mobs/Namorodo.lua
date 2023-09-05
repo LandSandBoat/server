@@ -3,7 +3,6 @@
 --  MOB: Namorodo
 -----------------------------------
 local ID = require("scripts/zones/The_Eldieme_Necropolis/IDs")
-require("scripts/globals/status")
 require("scripts/globals/pets/fellow")
 require("scripts/globals/fellow_utils")
 -----------------------------------
@@ -23,7 +22,7 @@ end
 entity.onMobFight = function(mob, target)
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
     local personality = player:getFellowValue("personality")
     local fellow = player:getFellow()
     if fellow ~= nil then

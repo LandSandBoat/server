@@ -2,7 +2,6 @@
 -- xi.effect.HUNDRED_FISTS
 -----------------------------------
 require("scripts/globals/jobpoints")
-require("scripts/globals/status")
 -----------------------------------
 local effectObject = {}
 

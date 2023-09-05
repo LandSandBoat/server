@@ -4,7 +4,6 @@
 -- TODO: adjust drops rates per zone
 -- TODO: add Rune Kris, Rune Algol, Rune Scythe
 -----------------------------------
-require('scripts/globals/items')
 require('scripts/globals/npc_util')
 require('scripts/globals/zone')
 -----------------------------------

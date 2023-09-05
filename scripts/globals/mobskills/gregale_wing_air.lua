@@ -7,8 +7,6 @@
 --  Range: 30' radial.
 --  Notes: Used only Jormungand and Isgebind
 -----------------------------------
-require("scripts/globals/settings")
-require("scripts/globals/status")
 require("scripts/globals/mobskills")
 -----------------------------------
 local mobskillObject = {}
@@ -27,7 +25,7 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     xi.mobskills.mobStatusEffectMove(mob, target, typeEffect, 40, 0, 120)
 
     local dmgmod = 1
-    local info = xi.mobskills.mobMagicalMove(mob, target, skill, mob:getMainLvl() + 2, xi.magic.ele.ICE, dmgmod, xi.mobskills.magicalTpBonus.NO_EFFECT, 0, 0, 7, 7, 7)
+    local info = xi.mobskills.mobMagicalMove(mob, target, skill, mob:getMainLvl() + 2, xi.magic.ele.ICE, dmgmod, xi.mobskills.magicalTpBonus.NO_EFFECT, 0, 0, 5, 5, 5)
     local dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.ICE, xi.mobskills.shadowBehavior.WIPE_SHADOWS)
     target:takeDamage(dmg, mob, xi.attackType.MAGICAL, xi.damageType.ICE)
     return dmg

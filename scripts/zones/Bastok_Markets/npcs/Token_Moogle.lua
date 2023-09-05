@@ -4,8 +4,6 @@
 -- Type: Special Events Redemption Moogle
 -----------------------------------
 local ID = require("scripts/zones/Bastok_Markets/IDs")
-require("scripts/globals/settings")
-require("scripts/globals/status")
 require("scripts/globals/events/starlight_celebrations")
 require("scripts/globals/utils")
 require("scripts/globals/npc_util")

@@ -5,7 +5,6 @@
 -- Involed in: Distant Loyalties
 -- !pos -298 -16 -157 235
 -----------------------------------
-require("scripts/globals/keyitems")
 require("scripts/globals/npc_util")
 require("scripts/globals/quests")
 -----------------------------------

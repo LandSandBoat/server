@@ -1,10 +1,8 @@
 -----------------------------------
 -- Power Attack
--- Deals damage based off TP.
+-- Single target critical damage
 -- 100% TP: ??? / 250% TP: ??? / 300% TP: ???
 -----------------------------------
-require("scripts/globals/settings")
-require("scripts/globals/status")
 require("scripts/globals/mobskills")
 -----------------------------------
 local mobskillObject = {}
@@ -17,11 +15,13 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local numhits = 1
     local accmod = 1
     local dmgmod = 1
-    local info = xi.mobskills.mobPhysicalMove(mob, target, skill, numhits, accmod, dmgmod, xi.mobskills.physicalTpBonus.DMG_VARIES, 1, 1.5, 2)
-    local dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.HTH, info.hitslanded)
+    -- In testing lvl 60 blu vs lvl 25-28 beetles (Diving Beetles) - 50 out of 50 power attacks hit for similar damage as a critical hit
+    local crit = 1 -- mobPhysicalMove does not actually caclulate CRIT_VARIES, crit param required
+    local info = xi.mobskills.mobPhysicalMove(mob, target, skill, numhits, accmod, dmgmod, xi.mobskills.physicalTpBonus.CRIT_VARIES, 1, 1.5, 2, crit)
+    local dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.BLUNT, info.hitslanded)
 
     if not skill:hasMissMsg() then
-        target:takeDamage(dmg, mob, xi.attackType.PHYSICAL, xi.damageType.HTH)
+        target:takeDamage(dmg, mob, xi.attackType.PHYSICAL, xi.damageType.BLUNT)
     end
 
     return dmg

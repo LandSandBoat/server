@@ -12,10 +12,7 @@
 -----------------------------------
 -- Combos: Resist Sleep
 -----------------------------------
-require("scripts/globals/settings")
-require("scripts/globals/status")
 require("scripts/globals/magic")
-require("scripts/globals/msg")
 require("scripts/globals/spells/healing_spell")
 -----------------------------------
 local spellObject = {}
@@ -25,7 +22,18 @@ spellObject.onMagicCastingCheck = function(caster, target, spell)
 end
 
 spellObject.onSpellCast = function(caster, target, spell)
-    return xi.spells.healing.doHealingSpell(caster, target, spell, true)
+    local params = {}
+    params.minCure = 250
+    params.divisor0 = 0.6666
+    params.constant0 = 130
+    params.powerThreshold1 = 319
+    params.divisor1 = 1
+    params.constant1 = 210
+    params.powerThreshold2 = 559
+    params.divisor2 = 2.8333
+    params.constant2 = 391
+
+    return xi.spells.blue.useCuringSpell(caster, target, spell, params)
 end
 
 return spellObject

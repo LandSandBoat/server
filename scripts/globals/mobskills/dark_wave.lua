@@ -7,8 +7,6 @@
 --  Range: 10' radial
 --  Notes: Severity of Bio effect varies by time of day, from 8/tic at midday to 20/tic at midnight.
 -----------------------------------
-require("scripts/globals/settings")
-require("scripts/globals/status")
 require("scripts/globals/mobskills")
 -----------------------------------
 local mobskillObject = {}

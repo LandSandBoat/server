@@ -3,7 +3,6 @@
 --  Mob: Air Elemental
 -----------------------------------
 require("scripts/globals/mobs")
-require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 

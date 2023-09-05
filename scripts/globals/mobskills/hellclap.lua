@@ -3,8 +3,6 @@
 -- Deals magical damage to enemies within a fan-shaped area. Additional effect: Weight
 -----------------------------------
 require("scripts/globals/mobskills")
-require("scripts/globals/settings")
-require("scripts/globals/status")
 -----------------------------------
 local mobskillObject = {}
 

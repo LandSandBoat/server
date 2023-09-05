@@ -25,8 +25,8 @@ The PathFind class provides an interface for getting an entity to a destination.
 #ifndef _PATHFIND_H
 #define _PATHFIND_H
 
-#include "../../../common/logging.h"
-#include "../../../common/mmo.h"
+#include "common/logging.h"
+#include "common/mmo.h"
 
 #include <vector>
 
@@ -114,10 +114,6 @@ public:
 
     // returns true if i'm in water
     bool InWater();
-
-    // checks if raycast was broken between current point and given
-    // returns true if raycast didn't hit any walls
-    bool CanSeePoint(const position_t& point, bool lookOffMesh = true);
 
     // returns the final destination of the current path
     const position_t& GetDestination() const;

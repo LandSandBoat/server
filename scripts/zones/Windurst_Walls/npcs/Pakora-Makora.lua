@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Windurst Walls
 --  NPC: Pakora-Makora
--- Working 100%
 -----------------------------------
 local entity = {}
 

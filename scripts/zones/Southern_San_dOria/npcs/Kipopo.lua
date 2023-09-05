@@ -8,7 +8,6 @@ local ID = require("scripts/zones/Southern_San_dOria/IDs")
 require("scripts/globals/npc_util")
 require("scripts/globals/crafting")
 require("scripts/globals/quests")
-require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 
@@ -47,7 +46,7 @@ entity.onTrigger = function(player, npc)
         sayItWithAHandbagCS == 1
     then
         player:startEvent(908)
-    elseif xi.crafting.isGuildMember(player, 7) == 1 then
+    elseif xi.crafting.hasJoinedGuild(player, xi.crafting.guild.LEATHERCRAFT) then
         if not player:hasStatusEffect(xi.effect.LEATHERCRAFT_IMAGERY) then
             player:startEvent(651, skillCap, skillLevel, 1, 239, player:getGil(), 0, 0, 0)
         else

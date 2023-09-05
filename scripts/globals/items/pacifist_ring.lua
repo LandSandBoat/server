@@ -4,8 +4,6 @@
 -- Item Effect: Enmity -12
 -- Duration: 3 Minutes
 -----------------------------------
-require("scripts/globals/status")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

@@ -5,9 +5,7 @@
 -- Odasel  !pos -58 -6 -111
 -- Matoaka !pos -37 -6 -122
 -----------------------------------
-require('scripts/globals/items')
 require('scripts/globals/quests')
-require('scripts/globals/status')
 require("scripts/globals/missions")
 require('scripts/globals/zone')
 require('scripts/globals/interaction/quest')

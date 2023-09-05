@@ -5,8 +5,6 @@
 -- Hilda   : !pos -163 -8 13 236
 -- Raibaht : !pos -27 -10 -1 237
 -----------------------------------
-require('scripts/globals/items')
-require('scripts/globals/keyitems')
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
 require('scripts/globals/titles')

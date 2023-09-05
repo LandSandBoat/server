@@ -2,9 +2,6 @@
 -- func: animatenpc
 -- desc: Changes the animation of the given npc. (For testing purposes.)
 -----------------------------------
-
-require("scripts/globals/status")
-
 cmdprops =
 {
     permission = 1,

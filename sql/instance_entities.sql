@@ -20,7 +20,7 @@ CREATE TABLE `instance_entities` (
   `instanceid` smallint(3) unsigned NOT NULL DEFAULT '0',
   `id` int(10) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`instanceid`, `id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --

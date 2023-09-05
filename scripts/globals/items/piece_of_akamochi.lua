@@ -10,9 +10,6 @@
 -- Attack + 16% Cap: 50 (Pet & Master) Pet Cap: 75
 -- R. Attack + 16% Cap: 50 (Pet & Master) Pet Cap: 75
 -----------------------------------
-require("scripts/globals/status")
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

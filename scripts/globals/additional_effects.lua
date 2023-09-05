@@ -12,10 +12,8 @@
 -- For status effects is it possible to land on highly resistant mobs because of flooring.
 ------------------------------------------------------------------------------
 require("scripts/globals/teleports") -- For warp weapon proc.
-require("scripts/globals/status")
 require("scripts/globals/magic") -- For resist functions
 require("scripts/globals/utils") -- For clamping function
-require("scripts/globals/msg")
 require("scripts/globals/events/harvest_festivals")
 --------------------------------------
 xi = xi or {}
@@ -105,6 +103,7 @@ xi.additionalEffect.calcDamage = function(attacker, element, defender, damage, a
     local params = {}
     params.bonusmab   = 0
     params.includemab = false
+    params.damageSpell = true
 
     if
         addType == xi.additionalEffect.procType.DAMAGE and
@@ -116,6 +115,18 @@ xi.additionalEffect.calcDamage = function(attacker, element, defender, damage, a
         params.skillType = item:getSkillType()
         params.damageSpell = true
         params.includemab = true
+    -- need to also specify skill and params for bloody bolts
+    elseif
+        addType == xi.additionalEffect.procType.HP_DRAIN and
+        element == xi.magic.ele.DARK and
+        item:getSkillType() == xi.skill.MARKSMANSHIP
+    then
+        params.element = xi.magic.ele.DARK
+        params.attribute = xi.mod.INT
+        params.skillType = item:getSkillType()
+    -- need to also specify the skill for any other bolts
+    elseif item:getSkillType() == xi.skill.MARKSMANSHIP then
+        params.skillType = item:getSkillType()
     end
 
     damage = xi.magic.addBonusesAbility(attacker, element, defender, damage, params)
@@ -130,8 +141,9 @@ end
 -- Disable cyclomatic complexity check for this function:
 -- luacheck: ignore 561
 -- TODO: Reduce complexity in this function:
--- - replace giant if/else chain with switch statement
--- - replace each handler (elseif addType == xi.additionalEffect.procType.DEBUFF then) with a function
+-- - replace giant if/else chain with table+key functions
+--   e.g. [procType.DAMAGE] = { code }
+-- - replace each handler (elseif addType == procType.DEBUFF then) with a function
 xi.additionalEffect.attack = function(attacker, defender, baseAttackDamage, item)
     local addType   = item:getMod(xi.mod.ITEM_ADDEFFECT_TYPE)
     local subEffect = item:getMod(xi.mod.ITEM_SUBEFFECT)
@@ -177,6 +189,11 @@ xi.additionalEffect.attack = function(attacker, defender, baseAttackDamage, item
         if defender:isNM() then
             chance = chance / 1.5
         end
+    end
+
+    -- If player is level synced below the level of the item, do no proc
+    if item:getReqLvl() > attacker:getMainLvl() then
+        return 0, 0, 0
     end
 
     -- If we're not going to proc, lets not execute all those checks!
@@ -343,10 +360,7 @@ xi.additionalEffect.attack = function(attacker, defender, baseAttackDamage, item
             return 0, 0, 0
         end
 
-    --------------------------------------
-    -- Absorbs status effects from target
-    --------------------------------------
-    elseif addType == xi.additionalEffect.procType.ABSORB then
+    elseif addType == xi.additionalEffect.procType.ABSORB_STATUS then
         -- Ripping off Aura Steal here
         local resist = xi.magic.applyResistanceAddEffect(attacker, defender, element, nil, 0)
         if resist > 0.0625 then
@@ -552,7 +566,7 @@ xi.additionalEffect.attack = function(attacker, defender, baseAttackDamage, item
     --   Ex: Plantoid, Beast, Aquatic
     --------------------------------------
     elseif addType == xi.additionalEffect.procType.VS_ECOSYSTEM then
-        if defender:getSystem() == option then
+        if defender:getEcosystem() == option then
             -- If Drain effect:
             if subEffect == xi.subEffect.HP_DRAIN then
                 damage = xi.additionalEffect.calcDamage(attacker, element, defender, damage, addType, item)

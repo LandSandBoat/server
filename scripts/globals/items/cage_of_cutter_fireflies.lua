@@ -3,9 +3,6 @@
 -- Cutter Fireflies
 -- Transports the user to Arrapago Reef
 -----------------------------------
-require("scripts/globals/items")
-require("scripts/globals/msg")
-require("scripts/globals/status")
 require("scripts/globals/teleports")
 require("scripts/globals/zone")
 -----------------------------------

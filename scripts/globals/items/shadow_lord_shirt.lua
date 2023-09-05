@@ -4,7 +4,6 @@
 -- Teleports user to Castle Zvahl Keep
 -----------------------------------
 require("scripts/globals/teleports")
-require("scripts/globals/status")
 -----------------------------------
 local itemObject = {}
 

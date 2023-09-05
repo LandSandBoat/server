@@ -84,7 +84,9 @@ function(set_project_warnings project_name)
       -Wduplicated-cond        # warn if if / else chain has duplicated conditions
       -Wduplicated-branches    # warn if if / else branches have duplicated code
       -Wlogical-op             # warn about logical operations being used where bitwise were probably wanted
-      -Wuseless-cast           # warn if you perform a cast to the same type
+
+      # TODO: Remove this exception
+      -Wno-useless-cast           # warn if you perform a cast to the same type
 
       # Silence GCC note/warning:
       # note: variable tracking size limit exceeded with ‘-fvar-tracking-assignments’

@@ -4,8 +4,6 @@
 -- SubPower: Tracks Subtle Blow Bonus
 -- Tier: Used for Enspell Calculation
 -----------------------------------
-require("scripts/globals/status")
------------------------------------
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

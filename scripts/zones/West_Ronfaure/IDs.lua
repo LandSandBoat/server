@@ -45,6 +45,7 @@ zones[xi.zone.WEST_RONFAURE] =
         CONQUEST                      = 7541,  -- You've earned conquest points!
         SOMETHING_IS_AMISS            = 7904,  -- Something is amiss.
         GARRISON_BASE                 = 7934,  -- Hm? What is this? %? How do I know this is not some [San d'Orian/Bastokan/Windurstian] trick?
+        GOLDFISH_POINT_UPDATE         = 8010,  -- <player> now has <int> years (?) of fortune.
         PLAYER_OBTAINS_ITEM           = 8070,  -- <name> obtains <item>!
         UNABLE_TO_OBTAIN_ITEM         = 8071,  -- You were unable to obtain the item.
         PLAYER_OBTAINS_TEMP_ITEM      = 8072,  -- <name> obtains the temporary item: <item>!
@@ -58,6 +59,7 @@ zones[xi.zone.WEST_RONFAURE] =
         RAMAUFONT_DEFAULT             = 7399,  -- Nothing to report.
         LAETTE_DEFAULT                = 7401,  -- This watchtower was built to strengthen Ranperre Gate. You can look around, but stay out of our way.
         CHATARRE_DEFAULT              = 7402,  -- Ghelsba and its Orcish camps lie at the foot of mountains yonder. We must be vigilant! They could attack at any time.
+        GOLDFISH_NPC_DIALOGUE         = 7965,  -- Come my childeren... Enter the world of golfdish...
     },
     mob =
     {
@@ -76,6 +78,7 @@ zones[xi.zone.WEST_RONFAURE] =
     {
         SIGNPOST_OFFSET = 17187505,
         OVERSEER_BASE   = 17187525, -- Doladepaiton_RK in npc_list
+        GOLDFISH_NPC    = 17187570, -- Sunbreeze Festival Goldfish NPC
     },
 }
 

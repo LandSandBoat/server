@@ -25,7 +25,7 @@ CREATE TABLE `abilities` (
   `addType` smallint(2) NOT NULL DEFAULT '0',
   `content_tag` varchar(7) DEFAULT NULL,
   PRIMARY KEY (`abilityId`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AVG_ROW_LENGTH=56;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 AVG_ROW_LENGTH=56;
 
 --
 -- Dumping data for table `abilities`
@@ -66,8 +66,8 @@ INSERT INTO `abilities` VALUES (46,'shield_bash',7,15,4,60,73,0,0,185,2000,0,3,4
 INSERT INTO `abilities` VALUES (47,'holy_circle',7,5,1,300,74,0,0,29,2000,0,6,20.0,1,1,20,770,0,NULL);
 INSERT INTO `abilities` VALUES (48,'sentinel',7,30,1,300,75,0,0,11,2000,0,6,20.0,0,1,900,772,0,NULL);
 INSERT INTO `abilities` VALUES (49,'souleater',8,30,1,360,85,0,0,20,2000,0,6,20.0,0,1,1300,832,0,NULL);
-INSERT INTO `abilities` VALUES (50,'arcane_circle',8,5,1,300,86,0,0,30,2000,0,6,20.0,1,1,20,834,0,NULL);
-INSERT INTO `abilities` VALUES (51,'last_resort',8,15,1,300,87,0,0,12,2000,0,6,20.0,0,1,1300,836,0,NULL);
+INSERT INTO `abilities` VALUES (50,'arcane_circle',8,5,1,300,86,134,0,30,2000,0,6,20.0,1,1,20,834,0,NULL);
+INSERT INTO `abilities` VALUES (51,'last_resort',8,15,1,300,87,115,0,12,2000,0,6,20.0,0,1,1300,836,0,NULL);
 INSERT INTO `abilities` VALUES (52,'charm',9,1,4,15,97,0,0,13,2000,0,6,18.0,0,320,0,0,0,NULL);
 INSERT INTO `abilities` VALUES (53,'gauge',9,10,4,30,98,0,0,14,2000,0,6,23.0,0,0,0,0,0,NULL);
 INSERT INTO `abilities` VALUES (54,'tame',9,30,4,600,99,0,0,15,2000,0,6,18.0,0,0,0,904,0,NULL);
@@ -276,7 +276,7 @@ INSERT INTO `abilities` VALUES (258,'sengikori',12,77,1,180,141,100,0,226,2000,0
 INSERT INTO `abilities` VALUES (259,'futae',13,77,1,180,148,0,0,227,2000,0,6,20.0,0,1,0,0,0,'ABYSSEA');
 INSERT INTO `abilities` VALUES (260,'spirit_jump',14,77,4,60,166,100,0,204,2000,0,3,20.0,0,1,80,1218,0,NULL);
 INSERT INTO `abilities` VALUES (261,'presto',19,77,1,15,236,100,0,229,2000,0,6,20.0,0,1,80,0,0,NULL);
-INSERT INTO `abilities` VALUES (262,'divine_waltz_ii',19,78,27,20,190,102,0,34,2000,0,14,20.0,0,1,80,0,0,NULL);
+INSERT INTO `abilities` VALUES (262,'divine_waltz_ii',19,78,27,20,190,102,0,34,2000,0,14,20.0,1,1,80,0,0,NULL);
 INSERT INTO `abilities` VALUES (263,'flourishes_iii',19,80,1,0,226,0,0,0,2000,0,14,20.0,0,0,0,0,0,NULL);
 INSERT INTO `abilities` VALUES (264,'climactic_flourish',19,80,1,90,226,529,0,222,2000,0,6,20.0,0,1,80,0,0,NULL);
 INSERT INTO `abilities` VALUES (265,'libra',20,76,4,60,237,100,0,231,2000,0,6,11.2,0,0,0,0,0,NULL);
@@ -306,7 +306,7 @@ INSERT INTO `abilities` VALUES (291,'issekigan',13,95,1,300,57,0,0,246,2000,0,6,
 INSERT INTO `abilities` VALUES (292,'dragon_breaker',14,87,4,300,58,320,0,236,2000,0,6,8.0,0,0,0,0,0,NULL);
 INSERT INTO `abilities` VALUES (293,'soul_jump',14,85,4,120,167,100,0,209,2000,0,3,7.0,0,1,0,1220,0,NULL);
 INSERT INTO `abilities` VALUES (295,'steady_wing',14,95,257,300,70,100,0,262,2000,0,6,25.0,0,0,0,0,0,NULL);
-INSERT INTO `abilities` VALUES (296,'mana_cede',15,87,1,300,71,100,0,241,2000,0,6,8.0,0,0,0,0,0,NULL);
+INSERT INTO `abilities` VALUES (296,'mana_cede',15,87,257,300,71,100,0,241,2000,0,6,8.0,0,0,0,0,0,NULL);
 INSERT INTO `abilities` VALUES (297,'efflux',16,83,1,180,185,100,0,256,2000,0,6,0.0,0,0,0,0,0,NULL);
 INSERT INTO `abilities` VALUES (298,'unbridled_learning',16,95,1,300,81,100,0,263,2000,0,6,0.0,0,0,0,0,0,NULL);
 INSERT INTO `abilities` VALUES (301,'triple_shot',17,87,1,300,467,100,0,242,2000,0,6,0.0,0,0,0,0,0,NULL);
@@ -559,7 +559,7 @@ INSERT INTO `abilities` VALUES (703,'numbshroom',9,25,257,2,102,0,0,0,2000,0,6,1
 INSERT INTO `abilities` VALUES (704,'shakeshroom',9,25,257,2,102,0,0,0,2000,0,6,18.0,0,1,60,0,0,NULL);
 INSERT INTO `abilities` VALUES (705,'silence_gas',9,25,257,3,102,0,0,0,2000,0,6,18.0,0,1,60,0,0,NULL);
 INSERT INTO `abilities` VALUES (706,'dark_spore',9,25,257,3,102,0,0,0,2000,0,6,18.0,0,1,60,0,0,NULL);
-INSERT INTO `abilities` VALUES (707,'power_attack',9,25,257,1,102,0,0,0,2000,0,6,18.0,0,1,60,0,0,NULL);
+INSERT INTO `abilities` VALUES (707,'power_attack_beetle',9,25,257,1,102,0,0,0,2000,0,6,18.0,0,1,60,0,0,NULL);
 INSERT INTO `abilities` VALUES (708,'hi-freq_field',9,25,257,2,102,0,0,0,2000,0,6,18.0,0,1,60,0,0,NULL);
 INSERT INTO `abilities` VALUES (709,'rhino_attack',9,25,257,1,102,0,0,0,2000,0,6,18.0,0,1,60,0,0,NULL);
 INSERT INTO `abilities` VALUES (710,'rhino_guard',9,25,257,1,102,0,0,0,2000,0,6,18.0,0,1,60,0,0,NULL);

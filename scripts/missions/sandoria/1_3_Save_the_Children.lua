@@ -10,10 +10,8 @@
 -- Arnau      : !pos 148 0 139 231
 -- Hut_Door   : !pos -165.357 -11.672 77.771 140
 -----------------------------------
-require('scripts/globals/items')
 require('scripts/globals/missions')
 require('scripts/globals/npc_util')
-require('scripts/globals/settings')
 require('scripts/globals/interaction/mission')
 require('scripts/globals/zone')
 -----------------------------------

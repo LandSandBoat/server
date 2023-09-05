@@ -2,9 +2,6 @@
 -- func: getenmity
 -- desc: prints the target mob's current CE and VE towards you
 ---------------------------------------------------------------------------------------------------
-require("scripts/globals/status")
----------------------------------------------------------------------------------------------------
-
 cmdprops =
 {
     permission = 2,

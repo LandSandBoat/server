@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Windurst Walls
 --  NPC: Nozaza
--- Working 100%
 -----------------------------------
 local entity = {}
 

@@ -1,11 +1,8 @@
 -----------------------------------
 -- Earthen Fury
 -----------------------------------
-require("scripts/globals/settings")
-require("scripts/globals/status")
 require("scripts/globals/mobskills")
 require("scripts/globals/magic")
-
 -----------------------------------
 local abilityObject = {}
 
@@ -26,7 +23,7 @@ abilityObject.onPetAbility = function(target, pet, skill, summoner)
     params.element = xi.magic.ele.EARTH
     params.includemab = true
     params.maccBonus = xi.summon.getSummoningSkillOverCap(pet)
-    params.ignoreStateLock = true
+    params.damageSpell = true
 
     local damage = xi.summon.avatarMagicSkill(pet, target, skill, params)
 

@@ -4,7 +4,6 @@
 -- !pos 450 -40 -31 139
 -----------------------------------
 local ID = require("scripts/zones/Horlais_Peak/IDs")
-require("scripts/globals/items")
 require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}

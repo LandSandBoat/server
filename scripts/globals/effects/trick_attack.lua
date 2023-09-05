@@ -2,7 +2,6 @@
 -- xi.effect.TRICK_ATTACK
 -----------------------------------
 require("scripts/globals/jobpoints")
-require("scripts/globals/status")
 -----------------------------------
 local effectObject = {}
 

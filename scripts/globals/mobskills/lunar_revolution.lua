@@ -2,7 +2,6 @@
 -- Lunar Revolution
 -- Deals damage in a fan-shaped area extending from the user.
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/mobskills")
 -----------------------------------
 local mobskillObject = {}

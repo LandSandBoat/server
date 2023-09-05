@@ -4,7 +4,6 @@
 -- Teleports to Chocobo Stables (San d'Oria)
 -----------------------------------
 require("scripts/globals/teleports")
-require("scripts/globals/status")
 -----------------------------------
 local itemObject = {}
 

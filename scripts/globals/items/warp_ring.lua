@@ -4,7 +4,6 @@
 --  Transports the user to their Home Point
 -----------------------------------
 require("scripts/globals/teleports")
-require("scripts/globals/status")
 -----------------------------------
 local itemObject = {}
 

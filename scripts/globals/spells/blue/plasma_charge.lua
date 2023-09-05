@@ -13,10 +13,7 @@
 -----------------------------------
 -- Combos: Auto Refresh
 -----------------------------------
-require("scripts/globals/settings")
-require("scripts/globals/status")
 require("scripts/globals/bluemagic")
-require("scripts/globals/msg")
 -----------------------------------
 local spellObject = {}
 
@@ -26,18 +23,8 @@ end
 
 spellObject.onSpellCast = function(caster, target, spell)
     local typeEffect = xi.effect.SHOCK_SPIKES
-    local power = 5
-    local duration = 60
-
-    if caster:hasStatusEffect(xi.effect.DIFFUSION) then
-        local diffMerit = caster:getMerit(xi.merit.DIFFUSION)
-
-        if diffMerit > 0 then
-            duration = duration + (duration / 100) * diffMerit
-        end
-
-        caster:delStatusEffect(xi.effect.DIFFUSION)
-    end
+    local power = 5 -- 5 dmg
+    local duration = xi.spells.blue.calculateDurationWithDiffusion(caster, 60)
 
     if not target:addStatusEffect(typeEffect, power, 0, duration) then
         spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)

@@ -4,7 +4,6 @@
 -- !addquest 2 29
 -- Mashuu-Ajuu 130 -5 167
 -----------------------------------
-require('scripts/globals/items')
 require('scripts/globals/quests')
 require('scripts/globals/interaction/quest')
 -----------------------------------
@@ -88,7 +87,9 @@ quest.sections =
             {
                 [475] = function(player, csid, option, npc)
                     player:confirmTrade()
-                    npcUtil.giveCurrency(player, 'gil', 500)
+                    -- player:addGil over npcUtil:giveCurrency to avoid duplicate
+                    -- 'Obtained X gil' messages.
+                    player:addGil(500)
                 end,
 
                 [477] = function(player, csid, option, npc)

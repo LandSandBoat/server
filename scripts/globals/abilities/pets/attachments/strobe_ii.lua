@@ -3,7 +3,6 @@
 -- http://forum.square-enix.com/ffxi/threads/49065?p=565264#post565264
 -----------------------------------
 require("scripts/globals/automaton")
-require("scripts/globals/status")
 -----------------------------------
 local attachmentObject = {}
 

@@ -1,8 +1,6 @@
 -----------------------------------
 -- xi.effect.STR_DOWN
 -----------------------------------
-require("scripts/globals/status")
------------------------------------
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

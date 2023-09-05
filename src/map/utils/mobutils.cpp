@@ -80,7 +80,7 @@ namespace mobutils
 
         if (PMob->getMobMod(MOBMOD_WEAPON_BONUS) != 0)
         {
-            damage = (uint16)(damage * PMob->getMobMod(MOBMOD_WEAPON_BONUS) / 100.0f);
+            damage = (uint16)(damage + PMob->getMobMod(MOBMOD_WEAPON_BONUS)); // Add this mod to increase a mobs damage by a base amount
         }
 
         return damage;
@@ -105,6 +105,7 @@ namespace mobutils
                 return battleutils::GetMaxSkill(SKILL_THROWING, JOB_MNK, mlvl); // E Skill (5)
         }
 
+        ShowError("Mobutils::GetBase rank (%d) is out of bounds for mob (%u) ", rank, PMob->id);
         return 0;
     }
 
@@ -210,8 +211,8 @@ namespace mobutils
         uint8     sLvl     = PMob->GetSLevel();
         ZONE_TYPE zoneType = PMob->loc.zone->GetType();
 
-        uint8 grade;
-        uint8 gradesj;
+        uint8 mJobGrade; // main jobs grade
+        uint8 sJobGrade; // subjobs grade
 
         if (recover == true)
         {
@@ -222,23 +223,23 @@ namespace mobutils
                 uint32 baseMobHP = 0; // Define base mobs hp
                 uint32 sjHP      = 0; // Define base subjob hp
 
-                grade   = grade::GetJobGrade(mJob, 0); // main jobs grade
-                gradesj = grade::GetJobGrade(sJob, 0); // subjobs grade
+                mJobGrade = grade::GetJobGrade(mJob, 0); // main jobs grade
+                sJobGrade = grade::GetJobGrade(sJob, 0); // subjobs grade
 
                 uint8 base     = 0; // Column for base hp
                 uint8 jobScale = 1; // Column for job scaling
                 uint8 scaleX   = 2; // Column for modifier scale
 
-                uint8 BaseHP     = grade::GetMobHPScale(grade, base);       // Main job base HP
-                uint8 JobScale   = grade::GetMobHPScale(grade, jobScale);   // Main job scaling
-                uint8 ScaleXHP   = grade::GetMobHPScale(grade, scaleX);     // Main job modifier scale
-                uint8 sjJobScale = grade::GetMobHPScale(gradesj, jobScale); // Sub job scaling
-                uint8 sjScaleXHP = grade::GetMobHPScale(gradesj, scaleX);   // Sub job modifier scale
+                uint8 BaseHP     = grade::GetMobHPScale(mJobGrade, base);     // Main job base HP
+                uint8 JobScale   = grade::GetMobHPScale(mJobGrade, jobScale); // Main job scaling
+                uint8 ScaleXHP   = grade::GetMobHPScale(mJobGrade, scaleX);   // Main job modifier scale
+                uint8 sjJobScale = grade::GetMobHPScale(sJobGrade, jobScale); // Sub job scaling
+                uint8 sjScaleXHP = grade::GetMobHPScale(sJobGrade, scaleX);   // Sub job modifier scale
 
-                uint8 RBIgrade = std::min(mLvl, (uint8)5); // RBI Grade
-                uint8 RBIbase  = 1;                        // Column for RBI base
+                uint8 RIgrade = std::min(mLvl, (uint8)5); // RI Grade
+                uint8 RIbase  = 1;                        // Column for RI base
 
-                uint8 RBI = grade::GetMobRBI(RBIgrade, RBIbase); // RBI
+                uint8 RI = grade::GetMobRBI(RIgrade, RIbase); // Random Increment addition per grade vs. base
 
                 uint8 mLvlIf    = (PMob->GetMLevel() > 5 ? 1 : 0);
                 uint8 mLvlIf30  = (PMob->GetMLevel() > 30 ? 1 : 0);
@@ -247,7 +248,7 @@ namespace mobutils
 
                 if (mLvl > 0)
                 {
-                    baseMobHP = BaseHP + (std::min(mLvl, (uint8)5) - 1) * (JobScale + raceScale - 1) + RBI + mLvlIf * (std::min(mLvl, (uint8)30) - 5) * (2 * (JobScale + raceScale) + std::min(mLvl, (uint8)30) - 6) / 2 + mLvlIf30 * ((mLvl - 30) * (63 + ScaleXHP) + (mLvl - 31) * (JobScale + raceScale));
+                    baseMobHP = BaseHP + (std::min(mLvl, (uint8)5) - 1) * (JobScale + raceScale - 1) + RI + mLvlIf * (std::min(mLvl, (uint8)30) - 5) * (2 * (JobScale + raceScale) + std::min(mLvl, (uint8)30) - 6) / 2 + mLvlIf30 * ((mLvl - 30) * (63 + ScaleXHP) + (mLvl - 31) * (JobScale + raceScale));
                 }
 
                 // 50+ = 1 hp sjstats
@@ -460,7 +461,7 @@ namespace mobutils
             sVIT /= 4;
         }
 
-        // [stat] = [family Stat] + [main job Stat] + [sub job Stat]
+        // [stat] = floor[family Stat] + floor[main job Stat] + floor[sub job Stat]
         PMob->stats.STR = fSTR + mSTR + sSTR;
         PMob->stats.DEX = fDEX + mDEX + sDEX;
         PMob->stats.VIT = fVIT + mVIT + sVIT;
@@ -528,7 +529,18 @@ namespace mobutils
         PMob->addModifier(Mod::RATT, GetBase(PMob, PMob->attRank)); // Base Ranged Attack for all mobs is Rank A+ but pull from DB for specific cases
         PMob->addModifier(Mod::RACC, GetBase(PMob, PMob->accRank)); // Base Ranged Accuracy for all mobs is Rank A+ but pull from DB for specific cases
 
-        // Only mobs in dynamis can parry
+        // Note: Known Base Parry for all mobs is Rank C
+        // MOBMOD_CAN_PARRY uses the mod value as the rank. It is unknown if mobs in current retail or somewhere else have a different parry rank
+        // Known mobs to have parry rating
+        // 1) Dynamis Mobs
+        // 2) ???
+        // 3) ???
+        if (PMob->getMobMod(MOBMOD_CAN_PARRY) > 0)
+        {
+            PMob->addModifier(Mod::PARRY, GetBase(PMob, PMob->getMobMod(MOBMOD_CAN_PARRY)));
+        }
+
+        // Mobs in Dyna Can Parry
         if (PMob->isInDynamis())
         {
             PMob->addModifier(Mod::PARRY, GetBase(PMob, 3)); // Base Parry for all mobs is Rank C
@@ -539,7 +551,8 @@ namespace mobutils
 
         // add traits for sub and main
         battleutils::AddTraits(PMob, traits::GetTraits(mJob), mLvl);
-        battleutils::AddTraits(PMob, traits::GetTraits(PMob->GetSJob()), PMob->GetSLevel());
+        // pass in bool param to stop from adding certain traits to mobs that should not be added
+        battleutils::AddTraits(PMob, traits::GetTraits(PMob->GetSJob()), PMob->GetSLevel(), true);
 
         // Max [HP/MP] Boost traits
         PMob->UpdateHealth();
@@ -832,7 +845,7 @@ namespace mobutils
         PMob->setMobMod(MOBMOD_MUG_GIL, -1);
 
         // boost dynamis mobs weapon damage
-        PMob->setMobMod(MOBMOD_WEAPON_BONUS, 135);
+        PMob->setMobMod(MOBMOD_WEAPON_BONUS, 30); // Add approximately 30 flat damage until proven otherwise (In-line with the 35% added previously)
         ((CItemWeapon*)PMob->m_Weapons[SLOT_MAIN])->setDamage(GetWeaponDamage(PMob, SLOT_MAIN));
         ((CItemWeapon*)PMob->m_Weapons[SLOT_RANGED])->setDamage(GetWeaponDamage(PMob, SLOT_RANGED));
 
@@ -981,9 +994,6 @@ namespace mobutils
     {
         // add special mob mods
 
-        // this only has to be added once
-        AddCustomMods(PMob);
-
         PMob->m_Immunity |= PMob->getMobMod(MOBMOD_IMMUNITY);
 
         PMob->defaultMobMod(MOBMOD_SKILL_LIST, PMob->m_MobSkillList);
@@ -1022,9 +1032,9 @@ namespace mobutils
                 PMob->addModifier(Mod::VERMIN_KILLER, 5);
                 break;
             case ECOSYSTEM::LUMINION:
-                PMob->addModifier(Mod::LUMORIAN_KILLER, 5);
+                PMob->addModifier(Mod::LUMINIAN_KILLER, 5);
                 break;
-            case ECOSYSTEM::LUMORIAN:
+            case ECOSYSTEM::LUMINIAN:
                 PMob->addModifier(Mod::LUMINION_KILLER, 5);
                 break;
             case ECOSYSTEM::PLANTOID:
@@ -1272,7 +1282,7 @@ Usage:
         fire_meva, ice_meva, wind_meva, earth_meva, lightning_meva, water_meva, light_meva, dark_meva, \
         Element, mob_pools.familyid, name_prefix, entityFlags, animationsub, \
         (mob_family_system.HP / 100), (mob_family_system.MP / 100), hasSpellScript, spellList, mob_groups.poolid, \
-        allegiance, namevis, aggro, mob_pools.skill_list_id, mob_pools.true_detection, mob_family_system.detects, \
+        allegiance, namevis, aggro, mob_pools.skill_list_id, mob_pools.true_detection, mob_family_system.detects \
         FROM mob_groups INNER JOIN mob_pools ON mob_groups.poolid = mob_pools.poolid \
         INNER JOIN mob_resistances ON mob_pools.resist_id = mob_resistances.resist_id \
         INNER JOIN mob_family_system ON mob_pools.familyid = mob_family_system.familyID \
@@ -1320,7 +1330,7 @@ Usage:
                 PMob->m_Type        = (uint8)sql->GetIntData(18);
                 PMob->m_Immunity    = (IMMUNITY)sql->GetIntData(19);
                 PMob->m_EcoSystem   = (ECOSYSTEM)sql->GetIntData(20);
-                PMob->m_ModelRadius = (uint8)sql->GetIntData(21);
+                PMob->m_ModelRadius = (float)sql->GetIntData(21);
 
                 PMob->speed    = (uint8)sql->GetIntData(22); // Overwrites baseentity.cpp's defined speed
                 PMob->speedsub = (uint8)sql->GetIntData(22); // Overwrites baseentity.cpp's defined speedsub
@@ -1449,7 +1459,8 @@ Usage:
         mob_groups.allegiance, namevis, aggro, mob_pools.skill_list_id, mob_pools.true_detection, mob_family_system.detects, \
         mob_family_system.charmable, \
         mob_ele_evasion.fire_eem, mob_ele_evasion.ice_eem, mob_ele_evasion.wind_eem, mob_ele_evasion.earth_eem, \
-        mob_ele_evasion.lightning_eem, mob_ele_evasion.water_eem, mob_ele_evasion.light_eem, mob_ele_evasion.dark_eem \
+        mob_ele_evasion.lightning_eem, mob_ele_evasion.water_eem, mob_ele_evasion.light_eem, mob_ele_evasion.dark_eem, \
+        mob_pools.roamflag, mob_family_system.superFamilyID \
         FROM mob_groups \
         INNER JOIN mob_pools ON mob_groups.poolid = mob_pools.poolid \
         INNER JOIN mob_resistances ON mob_pools.resist_id = mob_resistances.resist_id \
@@ -1494,7 +1505,7 @@ Usage:
                 PMob->m_Type        = (uint8)sql->GetIntData(18);
                 PMob->m_Immunity    = (IMMUNITY)sql->GetIntData(19);
                 PMob->m_EcoSystem   = (ECOSYSTEM)sql->GetIntData(20);
-                PMob->m_ModelRadius = (uint8)sql->GetIntData(21);
+                PMob->m_ModelRadius = (float)sql->GetIntData(21);
 
                 PMob->speed    = (uint8)sql->GetIntData(22); // Overwrites baseentity.cpp's defined speed
                 PMob->speedsub = (uint8)sql->GetIntData(22); // Overwrites baseentity.cpp's defined speedsub
@@ -1580,6 +1591,8 @@ Usage:
                 PMob->setMobMod(MOBMOD_DETECTION, sql->GetUIntData(69));
 
                 PMob->setMobMod(MOBMOD_CHARMABLE, sql->GetUIntData(70));
+                PMob->m_roamFlags   = sql->GetUIntData(79);
+                PMob->m_SuperFamily = sql->GetUIntData(80);
                 // Overwrite base family charmables depending on mob type. Disallowed mobs which should be charmable
                 // can be set in mob_spawn_mods or in their onInitialize
                 if (PMob->m_Type & MOBTYPE_EVENT || PMob->m_Type & MOBTYPE_FISHED || PMob->m_Type & MOBTYPE_BATTLEFIELD ||
@@ -1590,6 +1603,7 @@ Usage:
 
                 // must be here first to define mobmods
                 mobutils::InitializeMob(PMob, zoneutils::GetZone(targetZoneId));
+                mobutils::AddCustomMods(PMob);
             }
         }
         else

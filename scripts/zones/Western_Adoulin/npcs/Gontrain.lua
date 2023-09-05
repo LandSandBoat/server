@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Western Adoulin
 --  NPC: Gontrain
--- Type: Standard NPC and Quest NPC
 -- Involved with Quest: 'Raptor Rapture'
 -- !pos 13 0 -143 256
 -----------------------------------
@@ -21,9 +20,6 @@ entity.onTrigger = function(player, npc)
     then
         -- Progresses Quest: 'Raptor Rapture', speaking to Ilney.
         player:startEvent(5034)
-    else
-        -- Standard dialogue
-        player:startEvent(5042)
     end
 end
 

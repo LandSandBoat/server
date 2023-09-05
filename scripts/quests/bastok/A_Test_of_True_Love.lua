@@ -2,10 +2,8 @@
 -- A Test of True Love
 -----------------------------------
 -- Log ID: 1, Quest ID: 62
--- Carmelo : !gotoid 17743884
+-- Carmelo : !pos -146.476 -7.48 -10.889 236
 -----------------------------------
-require('scripts/globals/items')
-require('scripts/globals/keyitems')
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
 require('scripts/globals/zone')
@@ -21,14 +19,33 @@ quest.reward =
     gil      = 10000,
 }
 
+local pageKeyItems =
+{
+    xi.ki.UN_MOMENT,
+    xi.ki.LEPHEMERE,
+    xi.ki.LANCIENNE,
+}
+
+local function getNumPages(player)
+    local numPages = 0
+
+    for _, keyItemId in ipairs(pageKeyItems) do
+        if player:hasKeyItem(keyItemId) then
+            numPages = numPages + 1
+        end
+    end
+
+    return numPages
+end
+
 quest.sections =
 {
     {
         check = function(player, status, vars)
             return status == QUEST_AVAILABLE and
                 player:hasCompletedQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.LOVE_AND_ICE) and
-                player:getFameLevel(xi.quest.fame_area.BASTOK) >= 7 and
-                not player:needToZone() -- need to zone from previous quest Love and Ice
+                player:getFameLevel(xi.quest.fame_area.BASTOK) >= 6 and
+                not quest:getMustZone(player)
         end,
 
         [xi.zone.PORT_BASTOK] =
@@ -54,16 +71,20 @@ quest.sections =
             ['Carmelo'] =
             {
                 onTrigger = function(player, npc)
-                    local progress = quest:getVar(player, 'Prog')
+                    local questProgress = quest:getVar(player, 'Prog')
 
-                    if progress < 3 then
-                        return quest:event(271)
-                    elseif progress == 3 then
-                        return quest:progressEvent(272)
-                    elseif progress == 4 and player:needToZone() then
-                        return quest:event(273)
-                    elseif progress == 4 and not player:needToZone() then
-                        return quest:progressEvent(274)
+                    if questProgress == 0 then
+                        if getNumPages(player) == 3 then
+                            return quest:progressEvent(272)
+                        else
+                            return quest:event(271)
+                        end
+                    elseif questProgress == 1 then
+                        if not quest:getMustZone(player) then
+                            return quest:progressEvent(274)
+                        else
+                            return quest:event(273)
+                        end
                     end
                 end,
             },
@@ -71,16 +92,21 @@ quest.sections =
             onEventFinish =
             {
                 [272] = function(player, csid, option, npc)
-                    quest:setVar(player, 'Prog', 4)
-                    player:needToZone(true)
+                    quest:setVar(player, 'Prog', 1)
+                    quest:setMustZone(player)
                 end,
 
                 [274] = function(player, csid, option, npc)
-                    player:delKeyItem(xi.ki.UN_MOMENT)
-                    player:delKeyItem(xi.ki.LEPHEMERE)
-                    player:delKeyItem(xi.ki.LANCIENNE)
-                    quest:complete(player)
-                    player:needToZone(true) -- Need to zone to trigger Lovers in the Dusk
+                    if quest:complete(player) then
+                        xi.quest.setMustZone(player, xi.quest.log_id.BASTOK, xi.quest.id.bastok.LOVERS_IN_THE_DUSK)
+
+                        -- TODO: Removing KIs at this step needs to be verified, but given the KI for Lovers in the Dusk
+                        -- references they are all arranged, this is most likely correct.
+
+                        for _, keyItemId in ipairs(pageKeyItems) do
+                            player:delKeyItem(keyItemId)
+                        end
+                    end
                 end,
             },
         },

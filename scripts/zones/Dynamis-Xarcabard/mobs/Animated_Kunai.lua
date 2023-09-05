@@ -2,18 +2,12 @@
 -- Area: Dynamis - Xarcabard
 --  Mob: Animated Kunai
 -----------------------------------
-require("scripts/globals/status")
 local ID = require("scripts/zones/Dynamis-Xarcabard/IDs")
+mixins = { require("scripts/mixins/families/animated_weapons") }
 -----------------------------------
 local entity = {}
 
 entity.onMobEngaged = function(mob, target)
-    if mob:getAnimationSub() == 3 then
-        SetDropRate(109, 1579, 1000)
-    else
-        SetDropRate(109, 1579, 0)
-    end
-
     target:showText(mob, ID.text.ANIMATED_KUNAI_DIALOG)
 end
 

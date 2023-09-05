@@ -2,9 +2,9 @@
 -- Zone: Apollyon
 -----------------------------------
 local ID = require('scripts/zones/Apollyon/IDs')
+require("scripts/globals/teleports")
 require('scripts/globals/conquest')
 require('scripts/globals/zone')
-require('scripts/globals/status')
 -----------------------------------
 local zoneObject = {}
 
@@ -38,8 +38,8 @@ zoneObject.onInitialize = function(zone)
     zone:registerTriggerArea(36, -523, -4, 636, -516, 4, 643) -- Apollyon NW telporter floor 4 to floor 5
 end
 
-zoneObject.onConquestUpdate = function(zone, updatetype)
-    xi.conq.onConquestUpdate(zone, updatetype)
+zoneObject.onConquestUpdate = function(zone, updatetype, influence, owner, ranking, isConquestAlliance)
+    xi.conq.onConquestUpdate(zone, updatetype, influence, owner, ranking, isConquestAlliance)
 end
 
 zoneObject.onZoneIn = function(player, prevZone)
@@ -167,9 +167,7 @@ end
 
 zoneObject.onEventUpdate = function(player, csid, option)
     if csid >= 200 and csid <= 219 then
-        for _, entry in pairs(player:getNotorietyList()) do
-            entry:clearEnmity(player) -- reset hate on player after teleporting
-        end
+        xi.teleport.clearEnmityList(player)
     end
 end
 

@@ -20,23 +20,24 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 */
 
 #include "mob_controller.h"
-#include "../../../common/utils.h"
-#include "../../enmity_container.h"
-#include "../../entities/mobentity.h"
-#include "../../mob_modifier.h"
-#include "../../mob_spell_container.h"
-#include "../../mobskill.h"
-#include "../../party.h"
-#include "../../status_effect_container.h"
-#include "../../utils/battleutils.h"
-#include "../../utils/petutils.h"
-#include "../../utils/zoneutils.h"
-#include "../ai_container.h"
-#include "../helpers/targetfind.h"
-#include "../states/ability_state.h"
-#include "../states/inactive_state.h"
-#include "../states/magic_state.h"
-#include "../states/weaponskill_state.h"
+
+#include "ai/ai_container.h"
+#include "ai/helpers/targetfind.h"
+#include "ai/states/ability_state.h"
+#include "ai/states/inactive_state.h"
+#include "ai/states/magic_state.h"
+#include "ai/states/weaponskill_state.h"
+#include "common/utils.h"
+#include "enmity_container.h"
+#include "entities/mobentity.h"
+#include "mob_modifier.h"
+#include "mob_spell_container.h"
+#include "mobskill.h"
+#include "party.h"
+#include "status_effect_container.h"
+#include "utils/battleutils.h"
+#include "utils/petutils.h"
+#include "utils/zoneutils.h"
 
 CMobController::CMobController(CMobEntity* PEntity)
 : CController(PEntity)
@@ -157,7 +158,7 @@ bool CMobController::CheckLock(CBattleEntity* PTarget)
 bool CMobController::CheckDetection(CBattleEntity* PTarget)
 {
     TracyZoneScoped;
-    if (CanDetectTarget(PTarget) || CanPursueTarget(PTarget) ||
+    if (CanPursueTarget(PTarget) || CanDetectTarget(PTarget) ||
         PMob->StatusEffectContainer->HasStatusEffect({ EFFECT_BIND, EFFECT_SLEEP, EFFECT_SLEEP_II, EFFECT_LULLABY, EFFECT_PETRIFICATION }))
     {
         TapDeaggroTime();
@@ -201,7 +202,7 @@ void CMobController::TryLink()
     if (!PMob->PMaster)
     {
         // Handle monster linking if they are close enough
-        if (PMob->PParty != nullptr)
+        if (PMob->PParty != nullptr && !PMob->getMobMod(MOBMOD_ONE_WAY_LINKING))
         {
             for (auto& member : PMob->PParty->members)
             {
@@ -286,13 +287,15 @@ bool CMobController::CanDetectTarget(CBattleEntity* PTarget, bool forceSight)
         hasSneak     = PTarget->StatusEffectContainer->HasStatusEffect(EFFECT_SNEAK);
     }
 
+    bool isTargetAndInRange = PMob->GetBattleTargetID() == PTarget->targid && currentDistance <= PMob->GetMeleeRange();
+
     if (detectSight && !hasInvisible && currentDistance < PMob->getMobMod(MOBMOD_SIGHT_RANGE) && facing(PMob->loc.p, PTarget->loc.p, 64))
     {
         if (PMob->getMobMod(MOBMOD_LEDGE_AGGRO) != 0)
         {
             return true;
         }
-        return CanSeePoint(PTarget->loc.p);
+        return isTargetAndInRange || PMob->CanSeeTarget(PTarget);
     }
 
     if ((PMob->m_Behaviour & BEHAVIOUR_AGGRO_AMBUSH) && currentDistance < 3 && !hasSneak)
@@ -302,13 +305,13 @@ bool CMobController::CanDetectTarget(CBattleEntity* PTarget, bool forceSight)
 
     if ((detects & DETECT_HEARING) && currentDistance < PMob->getMobMod(MOBMOD_SOUND_RANGE) && !hasSneak)
     {
-        return CanSeePoint(PTarget->loc.p);
+        return isTargetAndInRange || PMob->CanSeeTarget(PTarget);
     }
 
     if ((detects & DETECT_MAGIC) && currentDistance < PMob->getMobMod(MOBMOD_MAGIC_RANGE) &&
         PTarget->PAI->IsCurrentState<CMagicState>() && static_cast<CMagicState*>(PTarget->PAI->GetCurrentState())->GetSpell()->hasMPCost())
     {
-        return CanSeePoint(PTarget->loc.p);
+        return isTargetAndInRange || PMob->CanSeeTarget(PTarget);
     }
 
     // everything below require distance to be below 20
@@ -319,31 +322,20 @@ bool CMobController::CanDetectTarget(CBattleEntity* PTarget, bool forceSight)
 
     if ((detects & DETECT_LOWHP) && PTarget->GetHPP() < 75)
     {
-        return CanSeePoint(PTarget->loc.p);
+        return isTargetAndInRange || PMob->CanSeeTarget(PTarget);
     }
 
     if ((detects & DETECT_WEAPONSKILL) && PTarget->PAI->IsCurrentState<CWeaponSkillState>())
     {
-        return CanSeePoint(PTarget->loc.p);
+        return isTargetAndInRange || PMob->CanSeeTarget(PTarget);
     }
 
     if ((detects & DETECT_JOBABILITY) && PTarget->PAI->IsCurrentState<CAbilityState>())
     {
-        return CanSeePoint(PTarget->loc.p);
+        return isTargetAndInRange || PMob->CanSeeTarget(PTarget);
     }
 
     return false;
-}
-
-bool CMobController::CanSeePoint(position_t pos)
-{
-    TracyZoneScoped;
-    if (PMob->PAI->PathFind)
-    {
-        return PMob->PAI->PathFind->CanSeePoint(pos);
-    }
-
-    return true;
 }
 
 bool CMobController::MobSkill(int wsList)
@@ -400,8 +392,8 @@ bool CMobController::MobSkill(int wsList)
         }
 
         PActionTarget = luautils::OnMobSkillTarget(PActionTarget, PMob, PMobSkill);
-
-        if (PActionTarget && !PMobSkill->isAstralFlow() && luautils::OnMobSkillCheck(PActionTarget, PMob, PMobSkill) == 0) // A script says that the move in question is valid
+        // A script says that the move in question is valid
+        if (PActionTarget && !PMobSkill->isAstralFlow() && luautils::OnMobSkillCheck(PActionTarget, PMob, PMobSkill) == 0)
         {
             float currentDistance = distance(PMob->loc.p, PActionTarget->loc.p);
 
@@ -484,6 +476,12 @@ bool CMobController::TryCastSpell()
     }
 
     if (!CanCastSpells())
+    {
+        return false;
+    }
+
+    // Having a distance check here (before the check in magic_state) prevents the mob from standing still during chainspell
+    if (distance(PMob->loc.p, PMob->GetBattleTarget()->loc.p) > 28.5f)
     {
         return false;
     }
@@ -693,7 +691,7 @@ void CMobController::DoCombatTick(time_point tick)
     {
         return;
     }
-    else if (m_Tick >= m_LastMobSkillTime && xirand::GetRandomNumber(1, 10000) <= PMob->TPUseChance() && MobSkill())
+    else if (PMob->PAI->CanChangeState() && xirand::GetRandomNumber(1, 10000) <= PMob->TPUseChance() && MobSkill())
     {
         return;
     }
@@ -768,8 +766,17 @@ void CMobController::Move()
         }
     }
 
-    bool  move         = PMob->PAI->PathFind->IsFollowingPath();
-    float attack_range = PMob->GetMeleeRange();
+    bool  move          = PMob->PAI->PathFind->IsFollowingPath();
+    float attack_range  = PMob->GetMeleeRange();
+    int16 offsetMod     = PMob->getMobMod(MOBMOD_TARGET_DISTANCE_OFFSET);
+    float offset        = static_cast<float>(offsetMod) / 10.0f;
+    float closeDistance = attack_range - (offsetMod == 0 ? 0.2f : offset);
+
+    // No going negative on the final value.
+    if (closeDistance < 0.0f)
+    {
+        closeDistance = 0.0f;
+    }
 
     if (PMob->getMobMod(MOBMOD_ATTACK_SKILL_LIST) > 0)
     {
@@ -791,9 +798,9 @@ void CMobController::Move()
         CMobEntity* posShare = (CMobEntity*)PMob->GetEntity(PMob->getMobMod(MOBMOD_SHARE_POS) + PMob->targid, TYPE_MOB);
         PMob->loc            = posShare->loc;
     }
-    else if (((currentDistance > attack_range - 0.2f) || move) && PMob->PAI->CanFollowPath())
+    else if (((currentDistance > closeDistance) || move) && PMob->PAI->CanFollowPath())
     {
-        //#TODO: can this be moved to scripts entirely?
+        // #TODO: can this be moved to scripts entirely?
         if (PMob->getMobMod(MOBMOD_DRAW_IN))
         {
             uint8  drawInRange  = PMob->getMobMod(MOBMOD_DRAW_IN_CUSTOM_RANGE) > 0 ? PMob->getMobMod(MOBMOD_DRAW_IN_CUSTOM_RANGE) : PMob->GetMeleeRange() * 2;
@@ -815,6 +822,7 @@ void CMobController::Move()
                 }
             }
         }
+
         if (PMob->speed != 0 && PMob->getMobMod(MOBMOD_NO_MOVE) == 0 && m_Tick >= m_LastSpecialTime)
         {
             // attempt to teleport to target (if in range)
@@ -834,16 +842,16 @@ void CMobController::Move()
                 if (!PMob->PAI->PathFind->IsFollowingPath())
                 {
                     // out of melee range, try to path towards
-                    if (currentDistance > PMob->GetMeleeRange())
+                    if (currentDistance > (offsetMod == 0 ? PMob->GetMeleeRange() : closeDistance))
                     {
                         // try to find path towards target
-                        PMob->PAI->PathFind->PathInRange(PTarget->loc.p, attack_range - 0.2f, PATHFLAG_RUN);
+                        PMob->PAI->PathFind->PathInRange(PTarget->loc.p, closeDistance, PATHFLAG_RUN);
                     }
                 }
                 else if (distanceSquared(PMob->PAI->PathFind->GetDestination(), PTarget->loc.p) > 10)
                 {
                     // try to find path towards target
-                    PMob->PAI->PathFind->PathInRange(PTarget->loc.p, attack_range - 0.2f, PATHFLAG_RUN);
+                    PMob->PAI->PathFind->PathInRange(PTarget->loc.p, closeDistance, PATHFLAG_RUN);
                 }
 
                 PMob->PAI->PathFind->FollowPath(m_Tick);
@@ -960,12 +968,15 @@ void CMobController::DoRoamTick(time_point tick)
         // i'm claimed by someone and need hate towards this person
         PTarget = (CBattleEntity*)PMob->GetEntity(PMob->m_OwnerID.targid, TYPE_PC | TYPE_MOB | TYPE_PET | TYPE_TRUST);
 
-        PMob->PEnmityContainer->AddBaseEnmity(PTarget);
+        if (PTarget != NULL)
+        {
+            PMob->PEnmityContainer->AddBaseEnmity(PTarget);
+            Engage(PTarget->targid);
+        }
 
-        Engage(PTarget->targid);
         return;
     }
-    //#TODO
+    // #TODO
     else if (PMob->GetDespawnTime() > time_point::min() && PMob->GetDespawnTime() < m_Tick)
     {
         Despawn();
@@ -1001,6 +1012,44 @@ void CMobController::DoRoamTick(time_point tick)
                 PMob->m_giveExp     = true;
                 PMob->m_ExpPenalty  = 0;
                 PMob->m_UsedSkillIds.clear();
+
+                // check local var to see if mob has built up resistance to any status
+                if (PMob->GetLocalVar("HasStatusResBuild") == 1)
+                {
+                    const std::list<Mod> statusesWithResBuilding = {
+                        Mod::SLEEPRESBUILD,
+                        Mod::LULLABYRESBUILD,
+                        Mod::POISONRESBUILD,
+                        Mod::PARALYZERESBUILD,
+                        Mod::BLINDRESBUILD,
+                        Mod::SILENCERESBUILD,
+                        Mod::VIRUSRESBUILD,
+                        Mod::PETRIFYRESBUILD,
+                        Mod::BINDRESBUILD,
+                        Mod::CURSERESBUILD,
+                        Mod::GRAVITYRESBUILD,
+                        Mod::SLOWRESBUILD,
+                        Mod::STUNRESBUILD,
+                        Mod::CHARMRESBUILD,
+                        Mod::AMNESIARESBUILD
+                    };
+
+                    // go through each status for which a mob can build resistance
+                    for (const Mod& statusWithRes : statusesWithResBuilding)
+                    {
+                        // build the name of the local variables that store the resistance info
+                        const std::string resBuildTotal = "[RESBUILD]Base_" + std::to_string(static_cast<int>(statusWithRes));
+                        const std::string resBuildCount = resBuildTotal + "_Count";
+                        // if the mob has any built up resistance to a status then clear that resistance
+                        if (PMob->GetLocalVar(resBuildCount.c_str()) > 0)
+                        {
+                            PMob->SetLocalVar(resBuildTotal.c_str(), 0);
+                            PMob->SetLocalVar(resBuildCount.c_str(), 0);
+                        }
+                    }
+                    // denote that all resistances have been been cleared
+                    PMob->SetLocalVar("HasStatusResBuild", 0);
+                }
             }
         }
         m_ResetTick = m_Tick;
@@ -1082,7 +1131,7 @@ void CMobController::DoRoamTick(time_point tick)
                 else if (PMob->CanRoam() && PMob->PAI->PathFind->RoamAround(PMob->m_SpawnPoint, PMob->GetRoamDistance(),
                                                                             (uint8)PMob->getMobMod(MOBMOD_ROAM_TURNS), PMob->m_roamFlags))
                 {
-                    //#TODO: #AIToScript (event probably)
+                    // #TODO: #AIToScript (event probably)
                     if (PMob->m_roamFlags & ROAMFLAG_WORM && !PMob->PAI->IsCurrentState<CMagicState>())
                     {
                         // Animation to go underground
@@ -1350,16 +1399,28 @@ bool CMobController::Cast(uint16 targid, SpellID spellid)
 bool CMobController::CanMoveForward(float currentDistance)
 {
     TracyZoneScoped;
-    if (PMob->m_Behaviour & BEHAVIOUR_STANDBACK && currentDistance < 20)
+
+    uint16 standbackRange = 20;
+
+    if (PMob->m_Behaviour & BEHAVIOUR_STANDBACK && currentDistance < standbackRange && PMob->CanSeeTarget(PTarget))
     {
         return false;
     }
 
-    if (PMob->getMobMod(MOBMOD_NO_STANDBACK) == 0 && PMob->getMobMod(MOBMOD_HP_STANDBACK) > 0 && currentDistance < 20 &&
-        PMob->GetHPP() >= PMob->getMobMod(MOBMOD_HP_STANDBACK))
+    auto standbackThreshold = PMob->getMobMod(MOBMOD_HP_STANDBACK);
+    if (currentDistance < standbackRange &&
+        standbackThreshold > 0 &&
+        PMob->getMobMod(MOBMOD_NO_STANDBACK) == 0 &&
+        PMob->GetHPP() >= standbackThreshold &&
+        (PMob->GetMaxMP() == 0 || PMob->GetMPP() >= standbackThreshold))
     {
         // Excluding Nins, mobs should not standback if can't cast magic
         return PMob->GetMJob() != JOB_NIN && PMob->SpellContainer->HasSpells() && !CanCastSpells();
+    }
+
+    if (!PMob->CanSeeTarget(PTarget))
+    {
+        return true;
     }
 
     if (PMob->getMobMod(MOBMOD_SPAWN_LEASH) > 0 && distance(PMob->loc.p, PMob->m_SpawnPoint) > PMob->getMobMod(MOBMOD_SPAWN_LEASH))

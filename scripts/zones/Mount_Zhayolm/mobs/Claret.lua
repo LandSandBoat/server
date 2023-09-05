@@ -6,13 +6,13 @@
 -- Wiki: http://ffxiclopedia.wikia.com/wiki/Claret
 -----------------------------------
 mixins = { require("scripts/mixins/rage") }
-require("scripts/globals/status")
 require("scripts/globals/magic")
 -----------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.IDLE_DESPAWN, 300)
+    mob:setMobMod(xi.mobMod.TARGET_DISTANCE_OFFSET, 50)
 end
 
 entity.onMobSpawn = function(mob)

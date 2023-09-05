@@ -3,8 +3,6 @@
 --  Scroll of Instant Shell
 --  Grants the effect of Shell
 -----------------------------------
-require("scripts/globals/status")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

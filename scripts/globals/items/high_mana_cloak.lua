@@ -3,8 +3,6 @@
 -- Item: High Mana Cloak
 -- Item Effect: Restores 50-75 MP
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

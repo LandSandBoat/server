@@ -5,7 +5,6 @@
 -- !addmission 13 42
 -- Oaken Door : !pos 97 -7 -12 252
 -----------------------------------
-require('scripts/globals/items')
 require('scripts/globals/missions')
 require('scripts/globals/interaction/mission')
 require("scripts/globals/rhapsodies")

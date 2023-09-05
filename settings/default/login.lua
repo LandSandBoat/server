@@ -34,8 +34,34 @@ xi.settings.login =
     -- Allow character deletion through the lobby (true/false)
     CHARACTER_DELETION = true,
 
+    -- Allow character creation through the lobby (true/false)
+    CHARACTER_CREATION = true,
+    
     -- Number of simultaneous game sessions per IP (0 for no limit)
     LOGIN_LIMIT = 0,
+
+    -- Expansion display on the client's login screen. This does NOT effect in game content whatsoever!
+    RISE_OF_ZILART          = true,
+    CHAINS_OF_PROMATHIA     = true,
+    TREASURES_OF_AHT_URGHAN = true,
+    WINGS_OF_THE_GODDESS    = true,
+    A_CRYSTALLINE_PROPHECY  = true,
+    A_MOOGLE_KUPOD_ETAT     = true,
+    A_SHANTOTTO_ASCENSION   = true,
+    VISIONS_OF_ABYSSEA      = true,
+    SCARS_OF_ABYSSEA        = true,
+    HEROES_OF_ABYSSEA       = true,
+    SEEKERS_OF_ADOULIN      = true,
+
+    -- Feature display on client's login screen. This does NOT effect in game content whatsoever!
+    -- Mog wardrobes are per character, so anything custom will not be able to reflect per-account login screen.
+    SECURE_TOKEN   = false, -- 2FA not supported yet
+    MOG_WARDROBE_3 = true,
+    MOG_WARDROBE_4 = true,
+    MOG_WARDROBE_5 = true,
+    MOG_WARDROBE_6 = true,
+    MOG_WARDROBE_7 = true,
+    MOG_WARDROBE_8 = true,
 
     -- If true, blocks character creation with names of NPCs and Mobs in the database (Fafnir, Shantotto, etc.)
     DISABLE_MOB_NPC_CHAR_NAMES = false,

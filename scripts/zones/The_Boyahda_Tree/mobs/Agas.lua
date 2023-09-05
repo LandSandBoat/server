@@ -2,7 +2,6 @@
 -- Area: The Boyahda Tree
 --   NM: Agas
 -----------------------------------
-require("scripts/globals/keyitems")
 require("scripts/globals/quests")
 -----------------------------------
 local entity = {}

@@ -3,8 +3,6 @@
 -- Toolbag Ryuno
 -- When used, you will obtain one stack of ryuno
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

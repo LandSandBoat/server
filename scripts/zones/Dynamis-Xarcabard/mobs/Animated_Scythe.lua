@@ -2,18 +2,12 @@
 -- Area: Dynamis - Xarcabard
 --  Mob: Animated Scythe
 -----------------------------------
-require("scripts/globals/status")
 local ID = require("scripts/zones/Dynamis-Xarcabard/IDs")
+mixins = { require("scripts/mixins/families/animated_weapons") }
 -----------------------------------
 local entity = {}
 
 entity.onMobEngaged = function(mob, target)
-    if mob:getAnimationSub() == 3 then
-        SetDropRate(112, 1577, 1000)
-    else
-        SetDropRate(112, 1577, 0)
-    end
-
     target:showText(mob, ID.text.ANIMATED_SCYTHE_DIALOG)
 end
 

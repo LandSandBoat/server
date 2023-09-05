@@ -3,10 +3,6 @@
 -- Item: Shadow Throne
 -- Item Effect: Grant Leaf bench key item
 -----------------------------------
-require("scripts/globals/settings")
-require("scripts/globals/keyitems")
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 local keyItemId = xi.ki.SHADOW_THRONE

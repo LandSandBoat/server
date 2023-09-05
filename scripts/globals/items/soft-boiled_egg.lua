@@ -6,9 +6,6 @@
 -- Health 20
 -- Magic 20
 -----------------------------------
-require("scripts/globals/status")
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

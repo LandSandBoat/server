@@ -2,7 +2,7 @@
 -- Spell: Occultation
 -- Creates shadow images that each absorb a single attack directed at you
 -- Spell cost: 138 MP
--- Monster Type: Seethers
+-- Monster Type: Empty
 -- Spell Type: Magical (Wind)
 -- Blue Magic Points: 3
 -- Stat Bonus: VIT+3 CHR-2
@@ -11,9 +11,6 @@
 -- Recast Time: 1 minute, 30 seconds
 -----------------------------------
 -- Combos: Evasion Bonus
------------------------------------
-require("scripts/globals/status")
-require("scripts/globals/msg")
 -----------------------------------
 local spellObject = {}
 

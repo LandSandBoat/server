@@ -5,9 +5,6 @@
 -- Recast Time: 5:00
 -- Duration: Dependent on jug pet used.
 -----------------------------------
-require("scripts/globals/msg")
-require("scripts/globals/status")
------------------------------------
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)
@@ -49,7 +46,9 @@ abilityObject.onAbilityCheck = function(player, target, ability)
         petLevels[46] = 63 -- CHOPSUEY CHUCKY
         petLevels[47] = 75 -- AMIGO SABOTENDER
 
-        if playerLevel < petLevels[petId] then return xi.msg.basic.NO_JUG_PET_ITEM, 0 end
+        if playerLevel < petLevels[petId] then
+            return xi.msg.basic.NO_JUG_PET_ITEM, 0
+        end
     end
 
     return 0, 0

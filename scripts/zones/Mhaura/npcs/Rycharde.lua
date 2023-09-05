@@ -10,10 +10,7 @@
 -- Used in: scripts/quests/otherAreas/The_Basics.lua
 -----------------------------------
 local ID = require("scripts/zones/Mhaura/IDs")
-require('scripts/globals/items')
 require("scripts/globals/quests")
-require("scripts/globals/settings")
-require("scripts/globals/keyitems")
 -----------------------------------
 local entity = {}
 

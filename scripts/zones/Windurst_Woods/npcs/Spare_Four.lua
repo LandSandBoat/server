@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Windurst Woods
 --  NPC: Spare Four
--- Working 100%
 --  Involved in quest: A Greeting Cardian
 -----------------------------------
 require("scripts/globals/quests")

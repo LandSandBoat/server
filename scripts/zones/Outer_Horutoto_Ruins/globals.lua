@@ -2,7 +2,6 @@
 -- Desc: this file contains functions that are shared by multiple luas in this zone's directory
 -----------------------------------
 local ID = require("scripts/zones/Outer_Horutoto_Ruins/IDs")
-require("scripts/globals/keyitems")
 require("scripts/globals/missions")
 -----------------------------------
 

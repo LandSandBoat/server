@@ -6,9 +6,6 @@
 -- STR -4
 -- MND +2
 -----------------------------------
-require("scripts/globals/status")
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

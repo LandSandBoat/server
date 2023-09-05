@@ -3,8 +3,6 @@
 -- Item: Perpetual Hourglass
 -- Use: Creates a replica of the Perpetual Hourglass
 -----------------------------------
-require("scripts/globals/status")
-require("scripts/globals/msg")
 require("scripts/globals/dynamis")
 -----------------------------------
 
@@ -20,12 +18,15 @@ itemObject.onItemCheck = function(target)
     if target:getFreeSlotsCount() == 0 then
         result = xi.msg.basic.ITEM_NO_USE_INVENTORY
     end
+
     if target:getZone():getType() == xi.zoneType.DYNAMIS then -- Can't replicate in Dynamis
         result = xi.msg.basic.ITEM_UNABLE_TO_USE
     end
-    if  validateresult == false then
+
+    if not validateresult then
         result = xi.msg.basic.ITEM_UNABLE_TO_USE
     end
+
     return result
 end
 

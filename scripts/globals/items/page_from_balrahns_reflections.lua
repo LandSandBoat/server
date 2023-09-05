@@ -3,9 +3,6 @@
 -- Item:  Hero's Reflections
 -- Grants 200 - 500 EXP
 -- Does not grant Limit Points.
---
------------------------------------
-require("scripts/globals/status")
 -----------------------------------
 local itemObject = {}
 

@@ -3,7 +3,6 @@
 -- ID 5369
 -- Unlocks leg and feet equipment
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/salvage")
 -----------------------------------
 local itemObject = {}

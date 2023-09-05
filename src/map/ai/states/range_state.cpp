@@ -20,15 +20,15 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 */
 
 #include "range_state.h"
-#include "../../entities/battleentity.h"
-#include "../../entities/charentity.h"
-#include "../../entities/trustentity.h"
-#include "../../items/item_weapon.h"
-#include "../../packets/action.h"
-#include "../../status_effect_container.h"
-#include "../../utils/battleutils.h"
-#include "../../utils/charutils.h"
-#include "../ai_container.h"
+#include "ai/ai_container.h"
+#include "entities/battleentity.h"
+#include "entities/charentity.h"
+#include "entities/trustentity.h"
+#include "items/item_weapon.h"
+#include "packets/action.h"
+#include "status_effect_container.h"
+#include "utils/battleutils.h"
+#include "utils/charutils.h"
 
 CRangeState::CRangeState(CBattleEntity* PEntity, uint16 targid)
 : CState(PEntity, targid)
@@ -41,8 +41,14 @@ CRangeState::CRangeState(CBattleEntity* PEntity, uint16 targid)
         throw CStateInitException(std::move(m_errorMsg));
     }
 
-    if (!CanUseRangedAttack(PTarget))
+    if (!CanUseRangedAttack(PTarget, false))
     {
+        throw CStateInitException(std::move(m_errorMsg));
+    }
+
+    if (distance(m_PEntity->loc.p, PTarget->loc.p) > 25)
+    {
+        m_errorMsg = std::make_unique<CMessageBasicPacket>(m_PEntity, PTarget, 0, 0, MSGBASIC_TOO_FAR_AWAY);
         throw CStateInitException(std::move(m_errorMsg));
     }
 
@@ -96,7 +102,7 @@ bool CRangeState::CanChangeState()
 
 bool CRangeState::Update(time_point tick)
 {
-    if (tick > GetEntryTime() + m_aimTime && !IsCompleted())
+    if (m_PEntity && m_PEntity->isAlive() && (tick > GetEntryTime() + m_aimTime && !IsCompleted()))
     {
         auto* PTarget = m_PEntity->IsValidTarget(m_targid, TARGET_ENEMY, m_errorMsg);
 
@@ -111,7 +117,7 @@ bool CRangeState::Update(time_point tick)
             }
         }
 
-        CanUseRangedAttack(PTarget);
+        CanUseRangedAttack(PTarget, true);
 
         if (HasMoved())
         {
@@ -165,7 +171,7 @@ void CRangeState::Cleanup(time_point tick)
 {
 }
 
-bool CRangeState::CanUseRangedAttack(CBattleEntity* PTarget)
+bool CRangeState::CanUseRangedAttack(CBattleEntity* PTarget, bool isEndOfAttack)
 {
     if (!PTarget)
     {
@@ -195,18 +201,6 @@ bool CRangeState::CanUseRangedAttack(CBattleEntity* PTarget)
                 break;
             }
             case SKILL_ARCHERY:
-            {
-                PRanged = dynamic_cast<CItemWeapon*>(PChar->getEquip(SLOT_AMMO));
-                if (PRanged != nullptr && PRanged->isType(ITEM_WEAPON))
-                {
-                    break;
-                }
-                else
-                {
-                    m_errorMsg = std::make_unique<CMessageBasicPacket>(PChar, PChar, 0, 0, MSGBASIC_NO_RANGED_WEAPON);
-                    return false;
-                }
-            }
             case SKILL_MARKSMANSHIP:
             {
                 PRanged = dynamic_cast<CItemWeapon*>(PChar->getEquip(SLOT_AMMO));
@@ -233,7 +227,8 @@ bool CRangeState::CanUseRangedAttack(CBattleEntity* PTarget)
         m_errorMsg = std::make_unique<CMessageBasicPacket>(m_PEntity, PTarget, 0, 0, MSGBASIC_CANNOT_SEE);
         return false;
     }
-    if (!m_PEntity->PAI->TargetFind->canSee(&PTarget->loc.p))
+
+    if (!isEndOfAttack && !m_PEntity->CanSeeTarget(PTarget, false))
     {
         m_errorMsg = std::make_unique<CMessageBasicPacket>(m_PEntity, PTarget, 0, 0, MSGBASIC_CANNOT_PERFORM_ACTION);
         return false;
@@ -243,9 +238,11 @@ bool CRangeState::CanUseRangedAttack(CBattleEntity* PTarget)
         m_errorMsg = std::make_unique<CMessageBasicPacket>(m_PEntity, PTarget, 0, 0, MSGBASIC_WAIT_LONGER);
         return false;
     }
-    if (distance(m_PEntity->loc.p, PTarget->loc.p) > 25)
+
+    uint8 anim = m_PEntity->animation;
+    if (anim != ANIMATION_NONE && anim != ANIMATION_ATTACK)
     {
-        m_errorMsg = std::make_unique<CMessageBasicPacket>(m_PEntity, PTarget, 0, 0, MSGBASIC_TOO_FAR_AWAY);
+        m_errorMsg = std::make_unique<CMessageBasicPacket>(m_PEntity, PTarget, 0, 0, MSGBASIC_CANNOT_PERFORM_ACTION);
         return false;
     }
 

@@ -30,7 +30,6 @@ local dialogChoice =
 }
 
 g_mixins.families.animated_weapons = function(animatedMob)
-
     animatedMob:addListener("SPAWN", "AWEAPON_SPAWN", function(mob)
         mob:setMagicCastingEnabled(true)
         mob:setAutoAttackEnabled(true)
@@ -62,7 +61,6 @@ g_mixins.families.animated_weapons = function(animatedMob)
             mob:setLocalVar("dialogTwo", mob:getLocalVar("Text_Index_2") + 2)
             mob:setLocalVar("dialogQueue", mob:getLocalVar("dialogQueue") - 1)
         end
-
     end)
 
     animatedMob:addListener("MAGIC_START", "AWEAPON_MAGIC_START", function(mob, spell, action)

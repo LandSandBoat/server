@@ -13,7 +13,6 @@
 -- Combos: Magic Attack Bonus
 -----------------------------------
 require("scripts/globals/bluemagic")
-require("scripts/globals/status")
 require("scripts/globals/magic")
 -----------------------------------
 local spellObject = {}
@@ -24,15 +23,12 @@ end
 
 spellObject.onSpellCast = function(caster, target, spell)
     local params = {}
-    -- This data should match information on https://www.bg-wiki.com/bg/Calculating_Blue_Magic_Damage
-    local multi = 2.625
-    if caster:hasStatusEffect(xi.effect.AZURE_LORE) then
-        multi = multi + 2.0
-    end
-
+    params.ecosystem = xi.ecosystem.DEMON
     params.attackType = xi.attackType.MAGICAL
     params.damageType = xi.damageType.DARK
-    params.multiplier = multi
+    params.attribute = xi.mod.CHR
+    params.multiplier = 2.625
+    params.azureBonus = 2
     params.tMultiplier = 1.5
     params.duppercap = 69
     params.str_wsc = 0.0
@@ -42,10 +38,8 @@ spellObject.onSpellCast = function(caster, target, spell)
     params.int_wsc = 0.0
     params.mnd_wsc = 0.0
     params.chr_wsc = 0.4
-    local damage = BlueMagicalSpell(caster, target, spell, params, CHR_BASED)
-    damage = BlueFinalAdjustments(caster, target, spell, damage, params)
 
-    return damage
+    return xi.spells.blue.useMagicalSpell(caster, target, spell, params)
 end
 
 return spellObject

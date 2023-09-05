@@ -2,7 +2,6 @@
 -- Attachment: Disruptor
 -----------------------------------
 require("scripts/globals/automaton")
-require("scripts/globals/status")
 -----------------------------------
 local attachmentObject = {}
 

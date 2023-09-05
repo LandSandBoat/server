@@ -26,15 +26,27 @@ local ID = require("scripts/zones/Horlais_Peak/IDs")
 -----------------------------------
 local entity = {}
 
-local sendMessage = function(players)
+local sendFillingMessage = function(players)
     for _, member in pairs(players) do
         member:messageSpecial(ID.text.EVIL_OSCAR_BEGINS_FILLING)
     end
 end
 
-local evilOscarFillsHisLungs
-evilOscarFillsHisLungs = function(mob)
+local sendOutOfRangeMessage = function(players, target)
+    for _, member in pairs(players) do
+        member:messageBasic(4, 0, 0, target)
+    end
+end
+
+--local evilOscarFillsHisLungs
+--evilOscarFillsHisLungs = function(mob)
+local function evilOscarFillsHisLungs(mob)
     if not mob:isAlive() then
+        return
+    end
+
+    if not mob:isEngaged() then
+        mob:setLocalVar("EBB_BREATH_COUNTER", 0)
         return
     end
 
@@ -51,16 +63,31 @@ evilOscarFillsHisLungs = function(mob)
     if someoneIsAlive then
         local ebbBreathCounter = mob:getLocalVar("EBB_BREATH_COUNTER")
         if ebbBreathCounter < 2 then -- Charge two breaths
-            sendMessage(players)
+            sendFillingMessage(players)
             mob:setLocalVar("EBB_BREATH_COUNTER", ebbBreathCounter + 1)
-        else -- On the third breath, fire straight away!
-            sendMessage(players)
+            mob:timer(math.random(10000, 20000), function(mobArg)
+                evilOscarFillsHisLungs(mobArg)
+            end)
+        else -- On the third breath use EBB
+            sendFillingMessage(players)
             mob:setLocalVar("EBB_BREATH_COUNTER", 0)
-            mob:useMobAbility(1332)
-        end
+            -- 2 second delay between final message and EBB
+            mob:timer(1500, function(mobForBreath)
+                if mobForBreath:isAlive() then
+                    if mobForBreath:checkDistance(mobForBreath:getTarget()) <= 10.0 then
+                        mobForBreath:useMobAbility(1332)
+                    else
+                        -- use a normal out of range message for now
+                        sendOutOfRangeMessage(mobForBreath:getBattlefield():getPlayers(), mobForBreath:getTarget())
+                    end
+                end
+            end)
 
-        -- Every 10-20 seconds
-        mob:timer(math.random(10000, 20000), evilOscarFillsHisLungs)
+            -- 20 second pause between EBB and next message
+            mob:timer(20000, function(mobArg)
+                evilOscarFillsHisLungs(mobArg)
+            end)
+        end
     end
 end
 

@@ -4,9 +4,7 @@
 -- Type: Quest NPC
 -- !pos 40 -68 -259
 -----------------------------------
-require("scripts/globals/keyitems")
 require("scripts/globals/quests")
-require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 

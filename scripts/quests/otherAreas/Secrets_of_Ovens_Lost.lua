@@ -6,11 +6,8 @@
 -- Sacrarium qm_tavnazian_cookbook: !pos varies   ID: 16892184
 -----------------------------------
 require('scripts/globals/interaction/quest')
-require('scripts/globals/keyitems')
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
-require('scripts/globals/status')
-require('scripts/globals/items')
 -----------------------------------
 local ID = require('scripts/zones/Sacrarium/IDs')
 -----------------------------------

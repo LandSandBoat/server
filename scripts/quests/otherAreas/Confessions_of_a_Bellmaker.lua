@@ -5,7 +5,6 @@
 -- Mevreauche !pos -193 11 148 231
 -----------------------------------
 require('scripts/globals/interaction/quest')
-require('scripts/globals/items')
 require('scripts/globals/quests')
 require('scripts/globals/missions')
 require('scripts/globals/npc_util')

@@ -5,12 +5,9 @@ local ID = require('scripts/zones/Lower_Jeuno/IDs')
 local lowerJeunoGlobal = require('scripts/zones/Lower_Jeuno/globals')
 require('scripts/globals/events/starlight_celebrations')
 require('scripts/globals/conquest')
-require('scripts/globals/keyitems')
 require('scripts/globals/missions')
 require('scripts/globals/pathfind')
-require('scripts/globals/settings')
 require('scripts/globals/chocobo')
-require('scripts/globals/status')
 -----------------------------------
 local zoneObject = {}
 
@@ -54,8 +51,8 @@ zoneObject.afterZoneIn = function(player)
     xi.chocobo.confirmRentalAfterZoneIn(player)
 end
 
-zoneObject.onConquestUpdate = function(zone, updatetype)
-    xi.conq.onConquestUpdate(zone, updatetype)
+zoneObject.onConquestUpdate = function(zone, updatetype, influence, owner, ranking, isConquestAlliance)
+    xi.conq.onConquestUpdate(zone, updatetype, influence, owner, ranking, isConquestAlliance)
 end
 
 zoneObject.onTriggerAreaEnter = function(player, triggerArea)

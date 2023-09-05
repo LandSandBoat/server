@@ -11,10 +11,8 @@
 -- qm5        : !pos -29.195 -22.159 -183.716 174
 -- qm6        : !pos -27.964 -10.358 -185.768 174
 -----------------------------------
-require('scripts/globals/items')
 require('scripts/globals/missions')
 require('scripts/globals/npc_util')
-require('scripts/globals/settings')
 require('scripts/globals/interaction/mission')
 require('scripts/globals/zone')
 -----------------------------------

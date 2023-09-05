@@ -3,6 +3,7 @@
 --  NPC: Spacial Displacement
 -----------------------------------
 local ID = require("scripts/zones/Riverne-Site_B01/IDs")
+require("scripts/globals/teleports")
 -----------------------------------
 local entity = {}
 
@@ -36,9 +37,7 @@ entity.onEventFinish = function(player, csid, option)
             player:addStatusEffect(xi.effect.LEVEL_RESTRICTION, 50, 0, 0)
         end
     elseif csid >= 2 and csid <= 41 then
-        for _, entry in pairs(player:getNotorietyList()) do
-            entry:clearEnmity(player) -- reset hate on player after teleporting
-        end
+        xi.teleport.clearEnmityList(player)
     end
 end
 

@@ -5,10 +5,8 @@
 -- !addmission 4 30
 -- Nashib : !pos -274.334 -9.287 -64.255 79
 -----------------------------------
-require('scripts/globals/items')
 require('scripts/globals/missions')
 require('scripts/globals/npc_util')
-require('scripts/globals/keyitems')
 require('scripts/globals/interaction/mission')
 require('scripts/globals/zone')
 -----------------------------------

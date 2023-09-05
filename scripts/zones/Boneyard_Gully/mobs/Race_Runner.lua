@@ -4,7 +4,6 @@
 --  ENM: Like the Wind
 -----------------------------------
 require("scripts/globals/pathfind")
-require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 
@@ -49,6 +48,8 @@ entity.onMobSpawn = function(mob)
     mob:setMod(xi.mod.UDMGMAGIC, -4000)
     mob:setMod(xi.mod.REGAIN, 1000)
     mob:setSpeed(70)
+    mob:setMagicCastingEnabled(true)
+    mob:setMobAbilityEnabled(true)
 
     mob:addListener("TAKE_DAMAGE", "RUNNER_TAKE_DAMAGE", function(mobArg, amount, attacker, attackType, damageType)
         if amount > 0 and not attacker:isPet() then

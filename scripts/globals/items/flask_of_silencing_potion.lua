@@ -3,9 +3,6 @@
 -- Item: Silencing Potion
 -- Item Effect: This potion induces silence.
 -----------------------------------
-require("scripts/globals/status")
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

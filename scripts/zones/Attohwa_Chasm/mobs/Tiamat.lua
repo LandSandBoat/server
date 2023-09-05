@@ -2,7 +2,6 @@
 -- Area: Attohwa Chasm
 --  Mob: Tiamat
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/titles")
 -----------------------------------
 local entity = {}
@@ -84,15 +83,32 @@ end
 entity.onMobFight = function(mob, target)
     -- Wyrms automatically wake from sleep in the air
     if
-        hasSleepEffects(mob) and
+        (target:hasStatusEffect(xi.effect.SLEEP_I) or
+        target:hasStatusEffect(xi.effect.SLEEP_II) or
+        target:hasStatusEffect(xi.effect.LULLABY)) and
         mob:getAnimationSub() == 1
     then
         mob:wakeUp()
     end
 
+    local hpp = mob:getHPP()
+
     -- Gains a large attack boost when health is under 25% which cannot be Dispelled.
-    if mob:getHPP() <= 25 and mob:getMod(xi.mod.ATT) <= 800 then
+    if hpp <= 25 and mob:getLocalVar("appliedAttackBoost") == 0 then
         mob:setMod(xi.mod.ATT, 1200)
+        mob:setLocalVar("appliedAttackBoost", 1)
+    elseif hpp > 25 and mob:getLocalVar("appliedAttackBoost") == 1 then
+        mob:setMod(xi.mod.ATT, 436)
+        mob:setLocalVar("appliedAttackBoost", 0)
+    end
+
+    -- Gains a delay reduction (from 210 to 160) when health is under 10%
+    if hpp <= 10 and mob:getLocalVar("appliedDelayReduction") == 0 then
+        mob:addMod(xi.mod.DELAY, 833)
+        mob:setLocalVar("appliedDelayReduction", 1)
+    elseif hpp > 10 and mob:getLocalVar("appliedDelayReduction") == 1 then
+        mob:delMod(xi.mod.DELAY, 833)
+        mob:setLocalVar("appliedDelayReduction", 0)
     end
 
     if

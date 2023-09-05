@@ -5,7 +5,6 @@
 -- !pos -106.336 2.000 26.117 237
 -----------------------------------
 local ID = require("scripts/zones/Metalworks/IDs")
-require("scripts/globals/status")
 require("scripts/globals/crafting")
 -----------------------------------
 local entity = {}
@@ -14,11 +13,10 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local guildMember = xi.crafting.isGuildMember(player, 8)
     local skillLevel = player:getSkillLevel(xi.skill.SMITHING)
     local cost = xi.crafting.getAdvImageSupportCost(player, xi.skill.SMITHING)
 
-    if guildMember == 1 then
+    if xi.crafting.hasJoinedGuild(player, xi.crafting.guild.SMITHING) then
         if not player:hasStatusEffect(xi.effect.SMITHING_IMAGERY) then
             player:startEvent(103, cost, skillLevel, 0, 207, player:getGil(), 0, 4095, 0)
         else

@@ -33,7 +33,7 @@ CREATE TABLE IF NOT EXISTS `exp_table` (
   `r19` smallint(4) unsigned NOT NULL DEFAULT '0', -- 91 to 95
   `r20` smallint(4) unsigned NOT NULL DEFAULT '0', -- 96 to 99
   PRIMARY KEY (`level`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AVG_ROW_LENGTH=65;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 AVG_ROW_LENGTH=65;
 
 --
 -- Contenu de la table `exp_table`

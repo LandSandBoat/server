@@ -40,8 +40,6 @@ entity.onTrigger = function(player, npc)
         not utils.mask.getBit(fellowQuest, 1)
     then
         player:startEvent(320, 0, 0, 0, 0, 0, 0, 0, player:getFellowValue("fellowid"))
-    else
-        player:startEvent(34)
     end
 end
 

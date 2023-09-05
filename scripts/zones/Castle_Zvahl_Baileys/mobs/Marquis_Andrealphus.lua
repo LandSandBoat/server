@@ -3,8 +3,6 @@
 -- NM: Marquis Andrealphus
 -- Quest: Better the Demon you Know
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local ID = require('scripts/zones/Castle_Zvahl_Baileys/IDs')
 -----------------------------------
 local entity = {}
@@ -33,7 +31,7 @@ entity.onMobFight = function(mob, target)
     end
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
 end
 
 return entity

@@ -2,8 +2,6 @@
 -- func: gotoname
 -- desc: Go to given mob or npc by name
 -----------------------------------
-require("scripts/globals/status")
-
 cmdprops =
 {
     permission = 1,

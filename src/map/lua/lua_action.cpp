@@ -31,7 +31,7 @@ CLuaAction::CLuaAction(action_t* Action)
     }
 }
 
-void CLuaAction::ID(uint32 actionTargetID, uint16 newActionTargetID)
+void CLuaAction::ID(uint32 actionTargetID, uint32 newActionTargetID)
 {
     for (auto&& actionList : m_PLuaAction->actionLists)
     {

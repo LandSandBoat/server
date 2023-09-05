@@ -20,8 +20,6 @@
 -- 1.00      1.25      1.50
 -----------------------------------
 require("scripts/globals/aftermath")
-require("scripts/globals/settings")
-require("scripts/globals/status")
 require("scripts/globals/utils")
 require("scripts/globals/weaponskills")
 -----------------------------------

@@ -27,7 +27,6 @@
 -- predefined values.  These must not be changed!
 -----------------------------------
 require('scripts/globals/interaction/mission')
-require('scripts/globals/keyitems')
 require('scripts/globals/missions')
 require('scripts/globals/npc_util')
 require('scripts/globals/zone')

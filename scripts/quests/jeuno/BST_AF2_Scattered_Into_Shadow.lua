@@ -7,9 +7,7 @@
 -- Castle_Oztroja Chest !gotoid 17396210
 -- Tebhi: !pos -136 24 -21 151
 -----------------------------------
-require('scripts/globals/items')
 require('scripts/globals/quests')
-require('scripts/globals/status')
 require('scripts/globals/zone')
 require('scripts/globals/interaction/quest')
 -----------------------------------

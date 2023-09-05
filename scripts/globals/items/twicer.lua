@@ -4,8 +4,6 @@
 -- Item Effect: DOUBLE_ATTACK 100%
 -- Duration: 30 seconds
 -----------------------------------
-require("scripts/globals/status")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

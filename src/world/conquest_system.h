@@ -18,11 +18,60 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 
 ===========================================================================
 */
+
 #pragma once
 
-class ConquestSystem
+#include "common/sql.h"
+#include "map/conquest_system.h"
+#include "map/zone.h"
+#include "message_handler.h"
+
+/**
+ * Conquest System on the world server.
+ * This class handles all the DB updates as a response to map server updates.
+ */
+class ConquestSystem : public IMessageHandler
 {
 public:
-    ConquestSystem()  = default;
-    ~ConquestSystem() = default;
+    ConquestSystem();
+    ~ConquestSystem() override = default;
+
+    /**
+     * IMessageHandler implementation. Used to handle messages from message_server.
+     * NOTE: The copy of payload here is intentional, since these systems will eventually
+     *     : be moved to their own threads.
+     */
+    bool handleMessage(std::vector<uint8> payload,
+                       in_addr            from_addr,
+                       uint16             from_port) override;
+
+    /**
+     * Called weekly, updates conquest data and sends regional control information
+     * to maps servers when done.
+     */
+    void updateWeekConquest();
+
+    /**
+     * Called hourly, updates influence data and sends an immediate influence update
+     * message to map servers.
+     */
+    void updateHourlyConquest();
+
+    /**
+     * Called every vana hour (every 2.4 min). Used to send updated influence data
+     * to all map servers. Does not request a zone update.
+     */
+    void updateVanaHourlyConquest();
+
+private:
+    std::unique_ptr<SqlConnection> sql;
+
+    bool updateInfluencePoints(int points, unsigned int nation, REGION_TYPE region);
+
+    auto getRegionalInfluences() -> std::vector<influence_t> const;
+    auto getRegionControls() -> std::vector<region_control_t> const;
+
+    void sendTallyStartMsg();
+    void sendInfluencesMsg(bool shouldUpdateZones, uint64 ipp = 0xFFFF);
+    void sendRegionControlsMsg(CONQUESTMSGTYPE msgType, uint64 ipp = 0xFFFF);
 };

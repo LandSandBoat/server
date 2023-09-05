@@ -10,9 +10,6 @@
 -- HP Recovered While Healing 1
 -- Accuracy % 6 (cap 20)
 -----------------------------------
-require("scripts/globals/status")
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

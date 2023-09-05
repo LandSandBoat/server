@@ -3,8 +3,6 @@
 -- Hi-Potion Tank
 -- When used, you will obtain one Hi-Potion
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)
@@ -17,7 +15,7 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    target:addItem(4116, 1)
+    target:addItem(xi.items.HI_POTION, 1)
 end
 
 return itemObject

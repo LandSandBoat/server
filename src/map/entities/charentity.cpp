@@ -156,6 +156,8 @@ CCharEntity::CCharEntity()
     memset(&m_missionLog, 0, sizeof(m_missionLog));
     m_eminenceCache.activemap.reset();
 
+    memset(&m_claimedDeeds, 0, sizeof(m_claimedDeeds));
+
     for (uint8 i = 0; i <= 3; ++i)
     {
         m_missionLog[i].current = 0xFFFF;
@@ -218,6 +220,8 @@ CCharEntity::CCharEntity()
     PClaimedMob            = nullptr;
     PRecastContainer       = std::make_unique<CCharRecastContainer>(this);
     PLatentEffectContainer = new CLatentEffectContainer(this);
+
+    retriggerLatentsAfterPacketParsing = false;
 
     resetPetZoningInfo();
     petZoningInfo.petID = 0;
@@ -602,12 +606,9 @@ void CCharEntity::SetName(const std::string& name)
 
 int16 CCharEntity::addTP(int16 tp)
 {
-    // int16 oldtp = health.tp;
     tp = CBattleEntity::addTP(tp);
-    //  if ((oldtp < 1000 && health.tp >= 1000 ) || (oldtp >= 1000 && health.tp < 1000))
-    //  {
     PLatentEffectContainer->CheckLatentsTP();
-    //  }
+
     return abs(tp);
 }
 
@@ -1074,7 +1075,8 @@ void CCharEntity::OnCastFinished(CMagicState& state, action_t& action)
         for (auto&& actionTarget : actionList.actionTargets)
         {
             if (actionTarget.param > 0 && PSpell->dealsDamage() && PSpell->getSpellGroup() == SPELLGROUP_BLUE &&
-                StatusEffectContainer->HasStatusEffect(EFFECT_CHAIN_AFFINITY) && static_cast<CBlueSpell*>(PSpell)->getPrimarySkillchain() != 0)
+                (StatusEffectContainer->HasStatusEffect(EFFECT_CHAIN_AFFINITY) || StatusEffectContainer->HasStatusEffect(EFFECT_AZURE_LORE)) &&
+                static_cast<CBlueSpell*>(PSpell)->getPrimarySkillchain() != 0)
             {
                 auto*     PBlueSpell = static_cast<CBlueSpell*>(PSpell);
                 SUBEFFECT effect     = battleutils::GetSkillChainEffect(PTarget, PBlueSpell->getPrimarySkillchain(), PBlueSpell->getSecondarySkillchain(), 0);
@@ -1524,27 +1526,6 @@ void CCharEntity::OnAbility(CAbilityState& state, action_t& action)
                 auto PPetTarget = PTarget->targid;
                 if (PAbility->getID() >= ABILITY_HEALING_RUBY && PAbility->getID() <= ABILITY_PERFECT_DEFENSE)
                 {
-                    // Blood Pact mp cost stored in animation ID
-                    float mpCost = PAbility->getAnimationID();
-
-                    if (StatusEffectContainer->HasStatusEffect(EFFECT_APOGEE))
-                    {
-                        mpCost *= 1.5f;
-                        StatusEffectContainer->DelStatusEffectsByFlag(EFFECTFLAG_BLOODPACT);
-                    }
-
-                    // Blood Boon (does not affect Astral Flow BPs)
-                    if ((PAbility->getAddType() & ADDTYPE_ASTRAL_FLOW) == 0)
-                    {
-                        int16 bloodBoonRate = getMod(Mod::BLOOD_BOON);
-                        if (xirand::GetRandomNumber(100) < bloodBoonRate)
-                        {
-                            mpCost *= xirand::GetRandomNumber(8.f, 16.f) / 16.f;
-                        }
-                    }
-
-                    addMP((int32)-mpCost);
-
                     if (PAbility->getValidTarget() == TARGET_SELF)
                     {
                         PPetTarget = PPet->targid;
@@ -2149,6 +2130,12 @@ void CCharEntity::OnRaise()
 
             uint16 xpNeededToLevel = charutils::GetExpNEXTLevel(jobs.job[GetMJob()]) - jobs.exp[GetMJob()];
 
+            // Player died within a battlefield, reward the battlefield level equivalent EXP
+            if (StatusEffectContainer->HasStatusEffect(EFFECT_BATTLEFIELD))
+            {
+                expLost = m_LevelRestriction >= 1 && m_LevelRestriction <= 67 ? (charutils::GetExpNEXTLevel(m_LevelRestriction) * 8) / 100 : 2400;
+            }
+
             // Exp is enough to level you and (you're not under a level restriction, or the level restriction is higher than your current main level).
             if (xpNeededToLevel < expLost && (m_LevelRestriction == 0 || GetMLevel() < m_LevelRestriction))
             {
@@ -2486,6 +2473,7 @@ bool CCharEntity::hasMoghancement(uint16 moghancementID) const
 void CCharEntity::UpdateMoghancement()
 {
     TracyZoneScoped;
+
     // Add up all of the installed furniture auras
     std::array<uint16, 8> elements = { 0 };
     for (auto containerID : { LOC_MOGSAFE, LOC_MOGSAFE2 })
@@ -2497,7 +2485,7 @@ void CCharEntity::UpdateMoghancement()
             if (PItem != nullptr && PItem->isType(ITEM_FURNISHING))
             {
                 CItemFurnishing* PFurniture = static_cast<CItemFurnishing*>(PItem);
-                if (PFurniture->isInstalled())
+                if (PFurniture->isInstalled() && !PFurniture->getOn2ndFloor())
                 {
                     elements[PFurniture->getElement() - 1] += PFurniture->getAura();
                 }
@@ -2540,7 +2528,7 @@ void CCharEntity::UpdateMoghancement()
                 {
                     CItemFurnishing* PFurniture = static_cast<CItemFurnishing*>(PItem);
                     // If aura is tied then use whichever furniture was placed most recently
-                    if (PFurniture->isInstalled() && PFurniture->getElement() == dominantElement &&
+                    if (PFurniture->isInstalled() && !PFurniture->getOn2ndFloor() && PFurniture->getElement() == dominantElement &&
                         (PFurniture->getAura() > bestAura || (PFurniture->getAura() == bestAura && PFurniture->getOrder() < bestOrder)))
                     {
                         bestAura          = PFurniture->getAura();
@@ -2797,23 +2785,29 @@ void CCharEntity::changeMoghancement(uint16 moghancementID, bool isAdding)
             break;
 
         // NOTE: Exact values for resistances is unknown
+        case MOGLIFICATION_RESIST_DEATH:
+            addModifier(Mod::DEATHRES, 10 * multiplier);
+            break;
+        case MOGLIFICATION_RESIST_SLEEP:
+            addModifier(Mod::SLEEPRES, 10 * multiplier);
+            break;
         case MOGLIFICATION_RESIST_POISON:
-            addModifier(Mod::POISONRES, 20 * multiplier);
+            addModifier(Mod::POISONRES, 10 * multiplier);
             break;
         case MOGLIFICATION_RESIST_PARALYSIS:
-            addModifier(Mod::SILENCERES, 20 * multiplier);
+            addModifier(Mod::PARALYZERES, 10 * multiplier);
             break;
         case MOGLIFICATION_RESIST_SILENCE:
-            addModifier(Mod::SILENCERES, 20 * multiplier);
+            addModifier(Mod::SILENCERES, 10 * multiplier);
             break;
         case MOGLIFICATION_RESIST_PETRIFICATION:
-            addModifier(Mod::PETRIFYRES, 20 * multiplier);
+            addModifier(Mod::PETRIFYRES, 10 * multiplier);
             break;
         case MOGLIFICATION_RESIST_VIRUS:
-            addModifier(Mod::VIRUSRES, 20 * multiplier);
+            addModifier(Mod::VIRUSRES, 10 * multiplier);
             break;
         case MOGLIFICATION_RESIST_CURSE:
-            addModifier(Mod::CURSERES, 20 * multiplier);
+            addModifier(Mod::CURSERES, 10 * multiplier);
             break;
         default:
             break;

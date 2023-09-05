@@ -4,7 +4,6 @@
 -----------------------------------
 local ID = require("scripts/zones/Monarch_Linn/IDs")
 require("scripts/globals/battlefield")
-require("scripts/globals/keyitems")
 -----------------------------------
 local battlefieldObject = {}
 

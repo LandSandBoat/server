@@ -4,17 +4,16 @@
 -- BCNM: Up In Arms
 -----------------------------------
 local ID = require("scripts/zones/Waughroon_Shrine/IDs")
-require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.MULTI_HIT, 6)
-    mob:setMod(xi.mod.BINDRESBUILD, 20)
-    mob:setMod(xi.mod.BLINDRESBUILD, 20)
-    mob:setMod(xi.mod.SLEEPRESBUILD, 20)
-    mob:setMod(xi.mod.LULLABYRESBUILD, 20)
-    mob:setMod(xi.mod.GRAVITYRESBUILD, 20)
+    mob:setMod(xi.mod.BINDRESBUILD, 30)
+    mob:setMod(xi.mod.BLINDRESBUILD, 30)
+    mob:setMod(xi.mod.SLEEPRESBUILD, 30)
+    mob:setMod(xi.mod.LULLABYRESBUILD, 30)
+    mob:setMod(xi.mod.GRAVITYRESBUILD, 30)
 end
 
 entity.onMobSpawn = function(mob)

@@ -1,9 +1,6 @@
 ------------------------------
 -- SOA Geomantic Reservoirs
 ------------------------------
-require("scripts/globals/items")
-require("scripts/globals/spell_data")
-require("scripts/globals/status")
 require("scripts/globals/zone")
 ------------------------------
 

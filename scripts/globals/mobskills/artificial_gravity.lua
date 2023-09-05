@@ -4,7 +4,6 @@
 -- Damage plaus Weight effect
 -----------------------------------
 require("scripts/globals/mobskills")
-require("scripts/globals/status")
 -----------------------------------
 local mobskillObject = {}
 

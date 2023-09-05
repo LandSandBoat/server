@@ -7,8 +7,6 @@
 -- Range: 15' yalm around Nant'ina
 -- Notes: Only used by Nant'ina
 ---------------------------------------------
-require("scripts/globals/status")
-require("scripts/globals/msg")
 require("scripts/globals/mobskills")
 ---------------------------------------------
 local mobskillObject = {}
@@ -21,20 +19,20 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local typeEffect = xi.effect.CHARM_I
     local power = 0
 
-    if (not target:isPC()) then
+    if not target:isPC() then
         skill:setMsg(xi.msg.basic.SKILL_MISS)
         return typeEffect
     end
 
-    local msg = xi.mobskills.mobStatusEffectMove(mob, target, typeEffect, power, 3, 60)
-    if (msg == xi.msg.basic.SKILL_ENFEEB_IS) then
+    local msg = xi.mobskills.mobStatusEffectMove(mob, target, typeEffect, power, 3, 30)
+    if msg == xi.msg.basic.SKILL_ENFEEB_IS then
         mob:charm(target)
         mob:resetEnmity(target)
     end
 
     skill:setMsg(msg)
-    return typeEffect
 
+    return typeEffect
 end
 
 return mobskillObject

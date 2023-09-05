@@ -3,10 +3,6 @@
 --  NPC: Malene
 -- !pos -173 -5 64 235
 -----------------------------------
-require("scripts/globals/npc_util")
-require("scripts/globals/quests")
-require("scripts/globals/titles")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

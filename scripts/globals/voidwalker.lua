@@ -1,10 +1,7 @@
 -----------------------------------
 -- The Voidwalker NM System
 -----------------------------------
-require("scripts/globals/keyitems")
 require("scripts/globals/mobs")
-require("scripts/globals/settings")
-require("scripts/globals/status")
 require("scripts/globals/voidwalkerpos")
 require("scripts/globals/zone")
 
@@ -90,9 +87,10 @@ local function removeMobIdFromPos(zoneId, mobId)
 end
 
 local function searchEmptyPos(zoneId)
-    local maxPos = table.getn(xi.voidwalker.pos[zoneId])
-    local pos = math.random(1, maxPos)
+    local maxPos     = #xi.voidwalker.pos[zoneId]
+    local pos        = math.random(1, maxPos)
     local currentPos = xi.voidwalker.pos[zoneId][pos]
+
     if currentPos.mobId == nil then
         return pos
     else
@@ -116,9 +114,11 @@ end
 
 local getNearestMob = function(player, mobs)
     local results = {}
+
     for _, v in ipairs(mobs) do
-        local mob = GetMobByID(v.mobId)
+        local mob      = GetMobByID(v.mobId)
         local distance = player:checkDistance(mob)
+
         table.insert(results, { mobId = v.mobId, keyItem = v.keyItem, distance = distance })
     end
 
@@ -126,7 +126,7 @@ local getNearestMob = function(player, mobs)
         return a.distance < b.distance
     end)
 
-    if table.getn(results) > 0 then
+    if #results > 0 then
         return results[1]
     else
         return nil
@@ -480,19 +480,19 @@ xi.voidwalker.onHealing = function(player)
         return
     end
 
-    local zoneId = player:getZoneID()
+    local zoneId        = player:getZoneID()
     local zoneTextTable = zones[zoneId].text
-    local abyssites = getCurrentKIsFromPlayer(player)
+    local abyssites     = getCurrentKIsFromPlayer(player)
 
     if
-        table.getn(abyssites) == 0 or
+        #abyssites == 0 or
         not zones[zoneId].mob or
         not zones[zoneId].mob.VOIDWALKER
     then
         return
     end
 
-    local mobs = getMobsFromAbyssites(zoneId, abyssites)
+    local mobs       = getMobsFromAbyssites(zoneId, abyssites)
     local mobNearest = getNearestMob(player, mobs)
 
     if not mobNearest then
@@ -502,6 +502,7 @@ xi.voidwalker.onHealing = function(player)
         mob:setLocalVar("[VoidWalker]PopedBy", player:getID())
         mob:setLocalVar("[VoidWalker]PopedWith", mobNearest.keyItem)
         mob:setLocalVar("[VoidWalker]PopedAt", os.time())
+
         if
             mobNearest.keyItem ~= xi.keyItem.CLEAR_ABYSSITE and
             mobNearest.keyItem ~= xi.keyItem.COLORFUL_ABYSSITE
@@ -515,12 +516,14 @@ xi.voidwalker.onHealing = function(player)
 
         mob:hideName(false)
         mob:setUntargetable(false)
-        mob:setStatus(xi.status.MOB)
+        mob:setStatus(xi.status.UPDATE)
         mob:updateClaim(player)
+
     elseif mobNearest.distance >= 300 then
         player:messageSpecial(zoneTextTable.VOIDWALKER_MOB_TOO_FAR, mobNearest.keyItem)
+
     else
-        local mob = GetMobByID(mobNearest.mobId)
+        local mob       = GetMobByID(mobNearest.mobId)
         local direction = getDirection(player, mob, mobNearest.distance)
         player:messageSpecial(zoneTextTable.VOIDWALKER_MOB_HINT, abyssiteMessage[mobNearest.keyItem], direction, mobNearest.distance, mobNearest.keyItem)
     end

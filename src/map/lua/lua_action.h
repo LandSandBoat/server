@@ -41,7 +41,7 @@ public:
 
     friend std::ostream& operator<<(std::ostream& out, const CLuaAction& action);
 
-    void   ID(uint32 actionTargetID, uint16 newActionTargetID);
+    void   ID(uint32 actionTargetID, uint32 newActionTargetID);
     void   setRecast(uint16 recast);
     uint16 getRecast();
     void   actionID(uint16 actionid);

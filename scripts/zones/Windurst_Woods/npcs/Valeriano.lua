@@ -1,8 +1,6 @@
 -----------------------------------
 -- Area: Windurst_Woods
 --  NPC: Valeriano
--- Standard Merchant NPC
--- Working 100%
 -- Confirmed shop stock, August 2013
 -----------------------------------
 local ID = require("scripts/zones/Windurst_Woods/IDs")

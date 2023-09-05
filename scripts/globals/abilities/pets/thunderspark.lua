@@ -1,8 +1,6 @@
 -----------------------------------
 -- Thunderspark M=whatever
 -----------------------------------
-require("scripts/globals/settings")
-require("scripts/globals/status")
 require("scripts/globals/summon")
 require("scripts/globals/magic")
 require("scripts/globals/mobskills")
@@ -20,7 +18,7 @@ abilityObject.onPetAbility = function(target, pet, skill)
     params.element = xi.magic.ele.LIGHTNING
     params.includemab = true
     params.maccBonus = xi.summon.getSummoningSkillOverCap(pet)
-    params.ignoreStateLock = true
+    params.damageSpell = true
 
     local damage = xi.summon.avatarMagicSkill(pet, target, skill, params)
 

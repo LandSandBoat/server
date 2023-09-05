@@ -7,7 +7,6 @@
 -- Range: Unknown cone
 -----------------------------------
 require("scripts/globals/mobskills")
-require("scripts/globals/status")
 -----------------------------------
 local mobskillObject = {}
 

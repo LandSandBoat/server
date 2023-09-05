@@ -7,11 +7,8 @@
 -- !pos -37.624 -16.050 75.681 249
 -----------------------------------
 local ID = require("scripts/zones/Mhaura/IDs")
-require("scripts/globals/settings")
 require("scripts/globals/shop")
-require("scripts/globals/keyitems")
 require("scripts/globals/quests")
-require("scripts/globals/status")
 require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}

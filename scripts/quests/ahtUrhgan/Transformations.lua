@@ -7,12 +7,8 @@
 -- Alzadaal (Blank)   : !pos -529.704 0 649.682 72
 -----------------------------------
 require('scripts/globals/interaction/quest')
-require('scripts/globals/items')
-require('scripts/globals/keyitems')
 require('scripts/globals/quests')
 require('scripts/globals/npc_util')
-require("scripts/globals/status")
-require('scripts/globals/settings')
 -----------------------------------
 local alzadaalID  = require("scripts/zones/Alzadaal_Undersea_Ruins/IDs")
 local whitegateID = require("scripts/zones/Aht_Urhgan_Whitegate/IDs")
@@ -168,7 +164,10 @@ quest.sections =
                 end,
 
                 [5] = function(player, csid, option, npc)
-                    quest:complete(player)
+                    if quest:complete(player) then
+                        xi.quest.setVar(player, xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.TRANSFORMATIONS, 'Timer', VanadielUniqueDay() + 1)
+                        quest:setMustZone(player)
+                    end
                 end,
             },
         },

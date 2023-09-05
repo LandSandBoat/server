@@ -2,10 +2,7 @@
 -- Spell: Absorb-STR
 -- Steals an enemy's strength.
 -----------------------------------
-require("scripts/globals/settings")
-require("scripts/globals/status")
 require("scripts/globals/magic")
-require("scripts/globals/msg")
 -----------------------------------
 local spellObject = {}
 

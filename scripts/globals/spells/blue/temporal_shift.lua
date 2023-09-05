@@ -13,9 +13,7 @@
 -- Combos: Attack Bonus
 -----------------------------------
 require("scripts/globals/bluemagic")
-require("scripts/globals/status")
 require("scripts/globals/magic")
-require("scripts/globals/msg")
 -----------------------------------
 local spellObject = {}
 
@@ -24,28 +22,17 @@ spellObject.onMagicCastingCheck = function(caster, target, spell)
 end
 
 spellObject.onSpellCast = function(caster, target, spell)
-    local typeEffect = xi.effect.STUN
-    -- local dINT = caster:getStat(xi.mod.INT) - target:getStat(xi.mod.INT)
     local params = {}
-    params.diff = nil
-    params.attribute = xi.mod.INT
-    params.skillType = xi.skill.BLUE_MAGIC
-    params.bonus = 0
+    params.ecosystem = xi.ecosystem.LUMINIAN
     params.effect = xi.effect.STUN
-    local resist = xi.magic.applyResistanceEffect(caster, target, spell, params)
-    local duration = 5 * resist
+    local power = 2
+    local tick = 0
+    local duration = 5
+    local resistThreshold = 0.25
+    local isGaze = false
+    local isConal = false
 
-    if resist > 0.0625 then -- Do it!
-        if target:addStatusEffect(typeEffect, 2, 0, duration) then
-            spell:setMsg(xi.msg.basic.MAGIC_ENFEEB_IS)
-        else
-            spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
-        end
-    else
-        spell:setMsg(xi.msg.basic.MAGIC_RESIST)
-    end
-
-    return typeEffect
+    return xi.spells.blue.useEnfeeblingSpell(caster, target, spell, params, power, tick, duration, resistThreshold, isGaze, isConal)
 end
 
 return spellObject

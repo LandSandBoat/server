@@ -1,8 +1,6 @@
 -----------------------------------
 -- xi.effect.SUBTLE_BLOW_PLUS
 -----------------------------------
-require("scripts/globals/status")
------------------------------------
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

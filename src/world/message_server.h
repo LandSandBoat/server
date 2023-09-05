@@ -18,17 +18,21 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 
 ===========================================================================
 */
+
 #pragma once
 
 #include "common/mmo.h"
 #include "common/socket.h"
 #include "common/sql.h"
+#include "conquest_system.h"
+#include "message_handler.h"
 
 #include <nonstd/jthread.hpp>
 #include <zmq.hpp>
 #include <zmq_addon.hpp>
 
-void queue_message(uint64 ipp, MSGSERVTYPE type, zmq::message_t* extra, zmq::message_t* packet);
+void queue_message(uint64 ipp, MSGSERVTYPE type, zmq::message_t* extra, zmq::message_t* packet = nullptr);
+void queue_message_broadcast(MSGSERVTYPE type, zmq::message_t* extra, zmq::message_t* packet = nullptr);
 
 void message_server_init(const bool& requestExit);
 void message_server_close();

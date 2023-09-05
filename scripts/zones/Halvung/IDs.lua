@@ -35,7 +35,7 @@ zones[xi.zone.HALVUNG] =
     },
     mob =
     {
-        BIG_BOMB               = 17031401,
+        BIG_BOMB               = GetFirstID("Big_Bomb"),
         GURFURLUR_THE_MENACING = 17031592,
         DEXTROSE               = 17031598,
         REACTON                = 17031599,

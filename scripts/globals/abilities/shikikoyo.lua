@@ -6,8 +6,6 @@
 -- Duration: Instant
 -- Target: Party member, cannot target self.
 -----------------------------------
-require("scripts/globals/msg")
-require("scripts/globals/status")
 require("scripts/globals/utils")
 -----------------------------------
 local abilityObject = {}

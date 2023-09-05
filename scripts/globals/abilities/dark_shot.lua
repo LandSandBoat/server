@@ -4,7 +4,6 @@
 -- Bio Effect: Attack Down Effect +5% and DoT + 3
 -----------------------------------
 require("scripts/globals/magic")
-require("scripts/globals/status")
 -----------------------------------
 local abilityObject = {}
 

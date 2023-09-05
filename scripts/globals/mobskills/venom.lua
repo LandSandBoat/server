@@ -7,8 +7,6 @@
 --  Range: 10' cone
 --  Notes: Additional effect can be removed with Poisona.
 -----------------------------------
-require("scripts/globals/settings")
-require("scripts/globals/status")
 require("scripts/globals/mobskills")
 -----------------------------------
 local mobskillObject = {}
@@ -19,7 +17,7 @@ end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local typeEffect = xi.effect.POISON
-    local power = math.min(1, (mob:getMainLvl() - 3) / 2)
+    local power = math.max(1, (mob:getMainLvl() - 3) / 2)
 
     xi.mobskills.mobStatusEffectMove(mob, target, typeEffect, power, 3, 60)
 

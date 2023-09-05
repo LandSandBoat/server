@@ -58,11 +58,10 @@ public:
     void messageName(uint16 messageID, sol::object const& entity, sol::object const& p0, sol::object const& p1,
                      sol::object const& p2, sol::object const& p3, sol::object const& chat);                               // Sends a Message with a Name
     void messagePublic(uint16 messageID, CLuaBaseEntity const* PEntity, sol::object const& arg2, sol::object const& arg3); // Sends a public Basic Message
-
-    void messageSpecial(uint16 messageID, sol::variadic_args va); // Sends Special Message
-
-    void messageSystem(uint16 messageID, sol::object const& p0, sol::object const& p1); // Sends System Message
-    void messageCombat(sol::object const& speaker, int32 p0, int32 p1, int16 message);  // Sends Combat Message
+    void messageSpecial(uint16 messageID, sol::variadic_args va);                                                          // Sends Special Message
+    void messageSystem(uint16 messageID, sol::object const& p0, sol::object const& p1);                                    // Sends System Message
+    void messageCombat(sol::object const& speaker, int32 p0, int32 p1, int16 message);                                     // Sends Combat Message
+    void messageStandard(uint16 messageID);                                                                                // Send Standard Message
 
     void customMenu(sol::object const& obj);
 
@@ -101,10 +100,10 @@ public:
     bool didGetMessage();                // Used by interaction framework to determine if player triggered something else
     void resetGotMessage();              // Used by interaction framework to reset if player triggered something else
 
-    void  setFlag(uint32 flags);
-    uint8 getMoghouseFlag();
-    void  setMoghouseFlag(uint8 flag);
-    bool  needToZone(sol::object const& arg0); // Check if player has zoned since the flag has been raised
+    void   setFlag(uint32 flags);
+    uint16 getMoghouseFlag();
+    void   setMoghouseFlag(uint16 flag);
+    bool   needToZone(sol::object const& arg0); // Check if player has zoned since the flag has been raised
 
     // Object Identification
     uint32 getID();
@@ -127,6 +126,7 @@ public:
     bool  canUseAbilities();
 
     void lookAt(sol::object const& arg0, sol::object const& arg1, sol::object const& arg2); // look at given position
+    void facePlayer(CLuaBaseEntity* PLuaBaseEntity, sol::object const& nonGlobal);          // specifically rotates target to player direction
     void clearTargID();                                                                     // clears target of entity
 
     bool  atPoint(sol::variadic_args va);                                          // is at given point
@@ -135,7 +135,7 @@ public:
     bool  isFollowingPath();                                                       // checks if the entity is following a path
     void  clearPath(sol::object const& pauseObj);                                  // removes current pathfind and stops moving
     void  continuePath();                                                          // resumes previous pathfind if it was paused
-    float checkDistance(sol::variadic_args va);                                    // Check Distacnce and returns distance number
+    float checkDistance(sol::variadic_args va);                                    // Check Distance and returns distance number
     void  wait(sol::object const& milliseconds);                                   // make the npc wait a number of ms and then back into roam
     // int32 WarpTo(lua_Stat* L);           // warp to the given point -- These don't exist, breaking them just in case someone uncomments
     // int32 RoamAround(lua_Stat* L);       // pick a random point to walk to
@@ -181,6 +181,8 @@ public:
 
     uint32 getPlayerTriggerAreaInZone();                                                      // Returns the player's current trigger area in the zone.
     void   updateToEntireZone(uint8 statusID, uint8 animation, sol::object const& matchTime); // Forces an update packet to update the NPC entity zone-wide
+
+    void sendEntityUpdateToPlayer(CLuaBaseEntity* entityToUpdate, uint8 entityUpdate, uint8 updateMask); // sends a specific entity's update packet to a specific player only
 
     auto  getPos() -> sol::table;      // Get Entity position (x,y,z)
     void  showPosition();              // Display current position of character
@@ -267,7 +269,7 @@ public:
     uint8  getGender();              // Returns the player character's gender
     auto   getName() -> std::string; // Gets Entity Name
     auto   getPacketName() -> std::string;
-    void   renameEntity(std::string const& newName);
+    void   renameEntity(std::string const& newName, sol::object const& arg2);
     void   hideName(bool isHidden);
     bool   checkNameFlags(uint32 flags); // this is check and not get because it tests for a flag, it doesn't return all flags
     uint16 getModelId();
@@ -382,6 +384,10 @@ public:
     void   setUnityLeader(uint8 leaderID);                                    // Sets a player's unity leader
     uint8  getUnityLeader();                                                  // Returns player's unity leader
     auto   getUnityRank(sol::object const& unityObj) -> std::optional<uint8>; // Returns current rank of player's unity
+    auto   getClaimedDeedMask() -> sol::table;                                // Returns a table corresponding to claimed items from AMAN Validator
+    void   toggleReceivedDeedRewards();
+    void   setClaimedDeed(uint16 deedBitNum);
+    void   resetClaimedDeeds();
 
     void  addAssault(uint8 missionID);          // Add Mission
     void  delAssault(uint8 missionID);          // Delete Mission from Mission Log
@@ -407,6 +413,7 @@ public:
     uint8  getJobPointLevel(uint16 jpType); // Returns Value of Job Point Type
     void   setJobPoints(uint16 amount);     // Set Job Points for current job
     void   setCapacityPoints(uint16 amount);
+    void   masterJob();
 
     uint32 getGil();
     void   addGil(int32 gil);
@@ -656,6 +663,7 @@ public:
     void charm(CLuaBaseEntity const* target);                          // applies charm on target
     void charmDuration(CLuaBaseEntity const* target, uint32 duration); // applies charm on target for duration
     void uncharm();                                                    // removes charm on target
+    bool isTandemValid();                                              // verifies that the entity satifies all tandem conditions for tandem blow and tandem strike
 
     uint8 addBurden(uint8 element, uint8 burden);
     uint8 getOverloadChance(uint8 element);
@@ -674,7 +682,7 @@ public:
     int32 physicalDmgTaken(double damage, sol::variadic_args va);
     int32 magicDmgTaken(double damage, sol::variadic_args va);
     int32 rangedDmgTaken(double damage, sol::variadic_args va);
-    int32 breathDmgTaken(double damage);
+    int32 breathDmgTaken(double damage, sol::variadic_args va);
     void  handleAfflatusMiseryDamage(double damage);
 
     bool   isWeaponTwoHanded();
@@ -783,7 +791,7 @@ public:
 
     // Mob Entity-Specific
     void   setMobLevel(uint8 level);
-    uint8  getSystem(); // TODO: rename this to getEcosystem()
+    uint8  getEcosystem();
     uint16 getSuperFamily();
     uint16 getFamily();
     bool   isMobType(uint8 mobType); // True if mob is of type passed to function
@@ -818,6 +826,7 @@ public:
     bool getUntargetable();
     void setIsAggroable(bool isAggroable);
     bool isAggroable();
+    void setAlwaysRender(bool alwaysRender);
 
     void  setDelay(uint16 delay);             // sets a mobs weapon delay
     int16 getDelay();                         // return the delay value
@@ -850,10 +859,10 @@ public:
 
     bool actionQueueEmpty(); // returns whether the action queue is empty or not
 
-    void  castSpell(sol::object const& spell, sol::object entity);                                                                                                       // forces a mob to cast a spell (parameter = spell ID, otherwise picks a spell from its list)
-    void  useJobAbility(uint16 skillID, sol::object const& pet);                                                                                                         // forces a job ability use (players/pets only)
-    void  useMobAbility(sol::variadic_args va);                                                                                                                          // forces a mob to use a mobability (parameter = skill ID)
-    int32 triggerDrawIn(CLuaBaseEntity* PMobEntity, sol::object const& includePt, sol::object const& drawRange, sol::object const& maxReach, sol::object const& target); // forces a mob to draw in target
+    void  castSpell(sol::object const& spell, sol::object entity);                                                                                                                                           // forces a mob to cast a spell (parameter = spell ID, otherwise picks a spell from its list)
+    void  useJobAbility(uint16 skillID, sol::object const& pet);                                                                                                                                             // forces a job ability use (players/pets only)
+    void  useMobAbility(sol::variadic_args va);                                                                                                                                                              // forces a mob to use a mobability (parameter = skill ID)
+    int32 triggerDrawIn(CLuaBaseEntity* PMobEntity, sol::object const& includePt, sol::object const& drawRange, sol::object const& maxReach, sol::object const& target, sol::object const& incDeadAndMount); // forces a mob to draw in target
     bool  hasTPMoves();
 
     void weaknessTrigger(uint8 level);
@@ -871,7 +880,6 @@ public:
     uint16 getDespoilDebuff(uint16 itemID);                                              // gets the status effect id to apply to the mob on successful despoil
     bool   itemStolen();                                                                 // sets mob's ItemStolen var = true
     int16  getTHlevel();                                                                 // Returns the Monster's current Treasure Hunter Tier
-    void   addDropListModification(uint16 id, uint16 newRate, sol::variadic_args va);    // Adds a modification to the drop list of this mob, erased on death
 
     uint32 getAvailableTraverserStones();
     time_t getTraverserEpoch();
@@ -902,6 +910,7 @@ public:
     uint32 getWorldPassRedeemTime();
     uint32 getWorldpassId(uint32 targid);
     void   sendNpcEmote(CLuaBaseEntity* PBaseEntity, sol::object const& p0, sol::object const& p1, sol::object const& p2);
+    void   sendMobEmote(CLuaBaseEntity* PBaseEntity, sol::object const& p0, sol::object const& p1, sol::object const& p2);
     void   clearActionQueue();
     void   clearTimerQueue();
     void   setDigTable();               // Sets PChar Last Dig Table
@@ -920,6 +929,9 @@ public:
     void   giveContestReward(uint16 contestId);
     auto   getAwardHistory() -> sol::table;
     void   faceTarget(CLuaBaseEntity* npc);
+
+    void addPacketMod(uint16 packetId, uint16 offset, uint8 value);
+    void clearPacketMods();
 
     static void Register();
 };

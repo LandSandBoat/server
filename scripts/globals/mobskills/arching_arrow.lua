@@ -6,7 +6,6 @@
 -- Darkness/Gravitation skillchain properties, AoE damage
 -----------------------------------
 require("scripts/globals/mobskills")
-require("scripts/globals/status")
 -----------------------------------
 local mobskillObject = {}
 

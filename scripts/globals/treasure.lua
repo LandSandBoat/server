@@ -3,12 +3,8 @@
 -- http://ffxiclopedia.wikia.com/wiki/Picking_your_Coffers_and_Chests
 -- http://ffxiclopedia.wikia.com/wiki/Treasure_Chest_and_Coffer_Guide
 -----------------------------------
-require("scripts/globals/items")
-require("scripts/globals/keyitems")
 require("scripts/globals/npc_util")
-require("scripts/globals/settings")
 require("scripts/globals/quests")
-require("scripts/globals/status")
 require("scripts/globals/zone")
 -----------------------------------
 
@@ -184,7 +180,8 @@ xi.treasure.treasureInfo =
                     {
                         test = function(player)
                             return player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.FADED_PROMISES) == QUEST_ACCEPTED and
-                                player:getCharVar("Quest[1][73]Prog") == 2 and not player:hasKeyItem(xi.ki.DIARY_OF_MUKUNDA)
+                                xi.quest.getVar(player, xi.quest.log_id.BASTOK, xi.quest.id.bastok.FADED_PROMISES, 'Prog') == 1 and
+                                not player:hasKeyItem(xi.ki.DIARY_OF_MUKUNDA)
                         end,
 
                         code = function(player)
@@ -1213,7 +1210,7 @@ xi.treasure.treasureInfo =
                     {
                         test = function(player)
                             return player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.TRUE_WILL) == QUEST_ACCEPTED and
-                                player:getCharVar("trueWillCS") == 2 and
+                                player:getCharVar("Quest[5][145]Prog") == 2 and
                                 not player:hasKeyItem(xi.ki.LARGE_TRICK_BOX)
                         end,
 
@@ -1711,8 +1708,7 @@ xi.treasure.onTrade = function(player, npc, trade, chestType)
         local gilAmount = math.random(info.gil[2], info.gil[3])
         local gil = gilAmount / #membersInZone
         for i = 1, #membersInZone do
-            membersInZone[i]:addGil(gil)
-            membersInZone[i]:messageSpecial(ID.text.GIL_OBTAINED, gil)
+            npcUtil.giveCurrency(membersInZone[i], 'gil', gil)
         end
 
     -- gem

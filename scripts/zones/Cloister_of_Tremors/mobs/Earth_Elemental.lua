@@ -3,8 +3,6 @@
 -- Mob: Earth Elemental
 -- Quest: Waking the Beast
 -----------------------------------
-require("scripts/globals/status")
------------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)

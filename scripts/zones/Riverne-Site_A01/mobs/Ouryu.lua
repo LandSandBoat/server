@@ -1,9 +1,9 @@
 -----------------------------------
--- Area: Riverne Site A01
--- Note: Ouryu Cometh
+-- Ouryu Cometh
+-- Riverne Site A, Cloud Evokers
+-- !pos 184 0 344 30
 -----------------------------------
 require("scripts/globals/titles")
-require("scripts/globals/status")
 require("scripts/globals/magic")
 -----------------------------------
 local entity = {}
@@ -22,7 +22,7 @@ entity.onMobSpawn = function(mob)
     mob:setMobMod(xi.mobMod.NO_MOVE, 1)
     mob:setMobMod(xi.mobMod.NO_STANDBACK, 1)
     mob:setMobMod(xi.mobMod.MAGIC_COOL, 50)
-    mob:setMobMod(xi.mobMod.WEAPON_BONUS, 158)
+    mob:setMobMod(xi.mobMod.WEAPON_BONUS, 53) -- Level 90 + 2 + 60 = 145 Base Weapon Damage
     mob:setMod(xi.mod.UDMGRANGE, -5000)
     mob:setMod(xi.mod.UDMGMAGIC, -5000)
     mob:setMod(xi.mod.UFASTCAST, 90)
@@ -77,8 +77,15 @@ entity.onMobFight = function(mob, target)
     end
 
     -- Wakeup from sleep immediately if flying
-    if hasSleepEffects(mob) and mob:getAnimationSub() == 1 then
-        removeSleepEffects(mob)
+    if
+        mob:getAnimationSub() == 1 and
+        (target:hasStatusEffect(xi.effect.SLEEP_I) or
+        target:hasStatusEffect(xi.effect.SLEEP_II) or
+        target:hasStatusEffect(xi.effect.LULLABY))
+    then
+        mob:delStatusEffect(xi.effect.SLEEP_I)
+        mob:delStatusEffect(xi.effect.SLEEP_II)
+        mob:delStatusEffect(xi.effect.LULLABY)
     end
 end
 

@@ -3,9 +3,6 @@
 -- A. Rem. Fireflies
 -- Transports the user out of Arrapago Remnants
 -----------------------------------
-require("scripts/globals/items")
-require("scripts/globals/msg")
-require("scripts/globals/status")
 require("scripts/globals/teleports")
 require("scripts/globals/zone")
 -----------------------------------

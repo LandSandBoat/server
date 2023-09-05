@@ -1,9 +1,6 @@
 -----------------------------------
 -- Area: Port Windurst
 --  NPC: Seburoa-Mabilua
--- Working 100%
------------------------------------
-require("scripts/globals/settings")
 -----------------------------------
 local entity = {}
 

@@ -2,9 +2,7 @@
 -- Records of Eminence
 -----------------------------------
 require("scripts/globals/npc_util")
-require("scripts/globals/msg")
 require("scripts/globals/quests")
-require("scripts/globals/status")
 -----------------------------------
 
 xi = xi or {}
@@ -80,7 +78,7 @@ local checks =
     end,
 
     mobSystem = function(self, player, params)   -- Mob system in set
-        return (params.mob and self.reqs.mobSystem[params.mob:getSystem()]) and true or false
+        return (params.mob and self.reqs.mobSystem[params.mob:getEcosystem()]) and true or false
     end,
 
     dmgMin = function(self, player, params)  -- Minimum Dmg Dealt/Taken

@@ -3,6 +3,7 @@
 --  NPC: Spacial Displacement
 -----------------------------------
 local ID = require("scripts/zones/Riverne-Site_A01/IDs")
+require("scripts/globals/teleports")
 -----------------------------------
 local entity = {}
 
@@ -35,6 +36,10 @@ entity.onEventFinish = function(player, csid, option)
         player:setPos(-538.526, -29.5, 359.219, 255, 25) -- back to Misareaux Coast (Retail confirmed)
     elseif csid == 32003 then
         xi.bcnm.onEventFinish(player, csid, option)
+    end
+
+    if csid >= 0 then
+        xi.teleport.clearEnmityList(player)
     end
 end
 

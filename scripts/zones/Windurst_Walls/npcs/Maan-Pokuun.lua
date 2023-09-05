@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Windurst Walls
 --  NPC: Maan-Pokuun
--- Working 100%
 -----------------------------------
 local entity = {}
 

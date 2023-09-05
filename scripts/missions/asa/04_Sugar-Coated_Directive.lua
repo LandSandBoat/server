@@ -15,7 +15,6 @@ local galesID   = require("scripts/zones/Cloister_of_Gales/IDs")
 local stormsID  = require("scripts/zones/Cloister_of_Storms/IDs")
 local tidesID   = require("scripts/zones/Cloister_of_Tides/IDs")
 local tremorsID = require("scripts/zones/Cloister_of_Tremors/IDs")
-local qufimID   = require("scripts/zones/Qufim_Island/IDs")
 -----------------------------------
 
 local mission = Mission:new(xi.mission.log_id.ASA, xi.mission.id.asa.SUGAR_COATED_DIRECTIVE)
@@ -268,8 +267,7 @@ mission.sections =
 
                     for _, v in pairs(gilRewards) do
                         if completedSeals == v[1] then
-                            player:addGil(xi.settings.GIL_RATE * v[2])
-                            player:messageSpecial(qufimID.text.GIL_OBTAINED, xi.settings.GIL_RATE * v[2])
+                            npcUtil.giveCurrency(player, 'gil', v[2])
                         end
                     end
 

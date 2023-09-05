@@ -7,9 +7,6 @@
 -- Beast Killer +10
 -- Resist Sleep +10
 -----------------------------------
-require("scripts/globals/status")
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

@@ -3,7 +3,6 @@
 -- Physical damage + Max HP Down + Max TP Down.
 -----------------------------------
 require("scripts/globals/mobskills")
-require("scripts/globals/status")
 -----------------------------------
 local mobskillObject = {}
 

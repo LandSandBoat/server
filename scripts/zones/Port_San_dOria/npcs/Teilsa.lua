@@ -6,15 +6,12 @@
 -- This NPC participates in Quests and Missions
 -----------------------------------
 local ID = require("scripts/zones/Port_San_dOria/IDs")
-require("scripts/globals/settings")
 -----------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     if trade:getItemCount() == 1 and trade:hasItemQty(536, 1) then
         player:startEvent(612)
-        player:addGil(xi.settings.main.GIL_RATE * 50)
-        player:tradeComplete()
     end
 end
 
@@ -27,7 +24,9 @@ end
 
 entity.onEventFinish = function(player, csid, option)
     if csid == 612 then
-        player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.main.GIL_RATE * 50)
+        player:tradeComplete()
+
+        npcUtil.giveCurrency(player, 'gil', 50)
     end
 end
 

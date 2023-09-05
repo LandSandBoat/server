@@ -5,7 +5,6 @@
 -- Baldric : !pos -50.858 1.777 -31.141 237
 -- qm1     : !pos 238.524 2.661 -148.784 103
 -----------------------------------
-require('scripts/globals/items')
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
 require('scripts/globals/zone')

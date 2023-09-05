@@ -2,8 +2,6 @@
 -- Area: LaLoff Amphitheater
 --  Mob: Ark Angel's Wyvern
 -----------------------------------
-require("scripts/globals/status")
------------------------------------
 local entity = {}
 
 entity.onMobEngaged = function(mob, target)

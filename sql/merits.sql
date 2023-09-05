@@ -12,7 +12,7 @@ CREATE TABLE `merits` (
   `upgradeid` tinyint(2) unsigned NOT NULL DEFAULT '0',
   `catagoryid` tinyint(2) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`meritid`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `merits`
@@ -21,7 +21,7 @@ CREATE TABLE `merits` (
 
 INSERT INTO `merits` VALUES (64,'max_hp',15,10,1048575,0,0);
 INSERT INTO `merits` VALUES (66,'max_mp',15,10,1048575,0,0);
-INSERT INTO `merits` VALUES (68,'max_merits',15,1,1048575,9,0);
+INSERT INTO `merits` VALUES (68,'max_merits',45,1,1048575,9,0);
 INSERT INTO `merits` VALUES (128,'str',15,1,1048575,1,1);
 INSERT INTO `merits` VALUES (130,'dex',15,1,1048575,1,1);
 INSERT INTO `merits` VALUES (132,'vit',15,1,1048575,1,1);
@@ -166,7 +166,7 @@ INSERT INTO `merits` VALUES (1480,'repair_recast',5,6,131072,6,22);
 INSERT INTO `merits` VALUES (1536,'step_accuracy',5,3,262144,6,23);
 INSERT INTO `merits` VALUES (1538,'haste_samba_effect',5,100,262144,6,23);
 INSERT INTO `merits` VALUES (1540,'reverse_flourish_effect',5,3,262144,6,23);
-INSERT INTO `merits` VALUES (1542,'building_flourish_effect',5,2,262144,6,23);
+INSERT INTO `merits` VALUES (1542,'building_flourish_effect',5,1,262144,6,23);
 INSERT INTO `merits` VALUES (1600,'grimoire_recast',5,2,524288,6,24);
 INSERT INTO `merits` VALUES (1602,'modus_veritas_duration',5,1,524288,6,24);
 INSERT INTO `merits` VALUES (1604,'helix_magic_acc_att',5,1,524288,6,24);

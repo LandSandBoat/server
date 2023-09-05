@@ -4,7 +4,6 @@
 local ID = require('scripts/zones/Kuftal_Tunnel/IDs')
 require('scripts/globals/conquest')
 require('scripts/globals/treasure')
-require('scripts/globals/status')
 -----------------------------------
 local zoneObject = {}
 
@@ -15,8 +14,8 @@ zoneObject.onInitialize = function(zone)
     xi.treasure.initZone(zone)
 end
 
-zoneObject.onConquestUpdate = function(zone, updatetype)
-    xi.conq.onConquestUpdate(zone, updatetype)
+zoneObject.onConquestUpdate = function(zone, updatetype, influence, owner, ranking, isConquestAlliance)
+    xi.conq.onConquestUpdate(zone, updatetype, influence, owner, ranking, isConquestAlliance)
 end
 
 zoneObject.onZoneTick = function(zone)
@@ -30,7 +29,7 @@ zoneObject.onZoneIn = function(player, prevZone)
         player:getYPos() == 0 and
         player:getZPos() == 0
     then
-        player:setPos(20.37, -21.104, 275.782, 46)
+        player:setPos(-20, -20, -241, 177)
     end
 
     return cs

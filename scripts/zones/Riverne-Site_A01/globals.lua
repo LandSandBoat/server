@@ -3,8 +3,6 @@
 -----------------------------------
 local ID = require("scripts/zones/Riverne-Site_A01/IDs")
 require("scripts/globals/npc_util")
-require("scripts/globals/settings")
-require("scripts/globals/status")
 -----------------------------------
 
 local riverneA01Global =

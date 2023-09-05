@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Windurst Woods
 --  NPC: Kuu Lohro
--- Working 100%
 -----------------------------------
 local entity = {}
 

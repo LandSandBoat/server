@@ -2,7 +2,6 @@
 -- Area: Konschtat Highlands
 --   NM: Forger
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/quests/tutorial")
 -----------------------------------
 local entity = {}

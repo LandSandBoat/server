@@ -1,11 +1,9 @@
----------------------------------------------
+-----------------------------------------
 -- Recover All (Armoury Crate)
 -- Family: Armoury Crate
 -- Description: Recovers all players in an area of effect.
 -- Utsusemi/Blink absorb: N/A
----------------------------------------------
-require("scripts/globals/msg")
----------------------------------------------
+-----------------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

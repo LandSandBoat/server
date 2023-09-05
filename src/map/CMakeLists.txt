@@ -1,6 +1,7 @@
 add_subdirectory(ai)
 add_subdirectory(entities)
 add_subdirectory(items)
+add_subdirectory(los)
 add_subdirectory(lua)
 add_subdirectory(packets)
 add_subdirectory(utils)
@@ -10,6 +11,7 @@ set(SOURCES
     ${AI_SOURCES}
     ${ENTITY_SOURCES}
     ${ITEM_SOURCES}
+    ${LOS_SOURCES}
     ${LUA_SOURCES}
     ${PACKET_SOURCES}
     ${UTIL_SOURCES}
@@ -29,6 +31,8 @@ set(SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/battlefield_handler.h
     ${CMAKE_CURRENT_SOURCE_DIR}/battlefield.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/battlefield.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/besieged_system.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/besieged_system.h
     ${CMAKE_CURRENT_SOURCE_DIR}/blue_spell.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/blue_spell.h
     ${CMAKE_CURRENT_SOURCE_DIR}/blue_trait.cpp
@@ -41,6 +45,8 @@ set(SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/char_recast_container.h
     ${CMAKE_CURRENT_SOURCE_DIR}/command_handler.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/command_handler.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/conquest_data.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/conquest_data.h
     ${CMAKE_CURRENT_SOURCE_DIR}/conquest_system.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/conquest_system.h
     ${CMAKE_CURRENT_SOURCE_DIR}/daily_system.cpp
@@ -122,8 +128,6 @@ set(SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/unitychat.h
     ${CMAKE_CURRENT_SOURCE_DIR}/universal_container.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/universal_container.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/vana_time.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/vana_time.h
     ${CMAKE_CURRENT_SOURCE_DIR}/weapon_skill.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/weapon_skill.h
     ${CMAKE_CURRENT_SOURCE_DIR}/zone_entities.cpp
@@ -139,6 +143,9 @@ if(UNIX)
 else()
     set(resource "${CMAKE_SOURCE_DIR}/res/mapserver.rc")
 endif()
+
+# Track the init file to make sure a re-configure will happen on build if needed
+set_property(DIRECTORY APPEND PROPERTY CMAKE_CONFIGURE_DEPENDS "${CMAKE_SOURCE_DIR}/modules/init.txt")
 
 # Search for module directories
 set(module_include_dirs "")

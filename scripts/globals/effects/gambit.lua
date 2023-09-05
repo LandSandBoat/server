@@ -1,8 +1,6 @@
 -----------------------------------
 -- xi.effect.GAMBIT
 -----------------------------------
-require("scripts/globals/status")
------------------------------------
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

@@ -3,8 +3,6 @@
 -- Straight +10% haste +10 Acc and scaling (lv) STR
 -- also -50% FC
 -----------------------------------
-require("scripts/globals/status")
------------------------------------
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

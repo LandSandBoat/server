@@ -3,7 +3,6 @@
 -----------------------------------
 local ID = require('scripts/zones/Port_Jeuno/IDs')
 require('scripts/globals/conquest')
-require('scripts/globals/settings')
 require('scripts/globals/chocobo')
 require('scripts/globals/quests')
 require('scripts/globals/zone')
@@ -61,8 +60,8 @@ zoneObject.afterZoneIn = function(player)
     xi.chocobo.confirmRentalAfterZoneIn(player)
 end
 
-zoneObject.onConquestUpdate = function(zone, updatetype)
-    xi.conq.onConquestUpdate(zone, updatetype)
+zoneObject.onConquestUpdate = function(zone, updatetype, influence, owner, ranking, isConquestAlliance)
+    xi.conq.onConquestUpdate(zone, updatetype, influence, owner, ranking, isConquestAlliance)
 end
 
 zoneObject.onTransportEvent = function(player, transport)

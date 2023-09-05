@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Windurst Walls
 --  NPC: Gerun-Garun
--- Working 100%
 -----------------------------------
 local entity = {}
 

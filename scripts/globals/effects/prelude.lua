@@ -2,8 +2,6 @@
 -- xi.effect.PRELUDE
 -- getPower returns the TIER (e.g. 1, 2, 3, 4)
 -----------------------------------
-require("scripts/globals/status")
------------------------------------
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

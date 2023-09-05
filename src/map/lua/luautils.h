@@ -126,7 +126,7 @@ namespace luautils
 
     // Cache helpers
     auto getEntityCachedFunction(CBaseEntity* PEntity, std::string funcName) -> sol::function;
-    void CacheLuaObjectFromFile(std::string filename, bool printOutput = false);
+    void CacheLuaObjectFromFile(std::string filename, bool overwriteCurrentEntry = false);
     auto GetCacheEntryFromFilename(std::string filename) -> sol::table;
     void OnEntityLoad(CBaseEntity* PEntity);
 
@@ -215,7 +215,7 @@ namespace luautils
     int32 OnTriggerAreaLeave(CCharEntity* PChar, CTriggerArea* PTriggerArea); // when player leaves a trigger area in a zone
     int32 OnTransportEvent(CCharEntity* PChar, uint32 TransportID);
     void  OnTimeTrigger(CNpcEntity* PNpc, uint8 triggerID);
-    int32 OnConquestUpdate(CZone* PZone, ConquestUpdate type); // hourly conquest update
+    int32 OnConquestUpdate(CZone* PZone, ConquestUpdate type, uint8 influence, uint8 owner, uint8 ranking, bool isConquestAlliance); // conquest update (hourly or tally)
 
     void OnServerStart();
     void OnJSTMidnight();

@@ -4,7 +4,6 @@
 -- !addkeyitem LETTER_FROM_SHIKAREE_X
 -----------------------------------
 require("scripts/globals/battlefield")
-require("scripts/globals/keyitems")
 require('scripts/globals/quests')
 -----------------------------------
 local battlefieldObject = {}

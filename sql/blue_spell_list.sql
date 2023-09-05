@@ -13,10 +13,10 @@ CREATE TABLE `blue_spell_list` (
   `secondary_sc` smallint(2) NOT NULL,
   `tertiary_sc` smallint(2) NOT NULL,
   PRIMARY KEY (`spellid`,`mob_skill_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
 
 -- ----------------------------
--- Records 
+-- Records
 -- ----------------------------
 
 INSERT INTO `blue_spell_list` VALUES (513,1572,3,4,1,0,0,0); -- Venom Shell

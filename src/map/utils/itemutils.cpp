@@ -38,12 +38,59 @@ DropItem_t::DropItem_t(uint8 DropType, uint16 ItemID, uint16 DropRate)
 : DropType(DropType)
 , ItemID(ItemID)
 , DropRate(DropRate)
+, hasFixedRate(false)
+{
+}
+
+DropItem_t::DropItem_t(uint8 DropType, uint16 ItemID, uint16 DropRate, bool hasFixedRate)
+: DropType(DropType)
+, ItemID(ItemID)
+, DropRate(DropRate)
+, hasFixedRate(hasFixedRate)
 {
 }
 
 DropGroup_t::DropGroup_t(uint16 GroupRate)
 : GroupRate(GroupRate)
+, hasFixedRate(false)
 {
+}
+
+DropGroup_t::DropGroup_t(uint16 GroupRate, bool hasFixedRate)
+: GroupRate(GroupRate)
+, hasFixedRate(hasFixedRate)
+{
+}
+
+LootContainer::LootContainer(DropList_t* dropList)
+: dropList(dropList)
+{
+}
+
+void LootContainer::ForEachGroup(const std::function<void(const DropGroup_t&)>& func)
+{
+    for (const auto& group : dropList->Groups)
+    {
+        func(group);
+    }
+
+    for (const auto& group : drops.Groups)
+    {
+        func(group);
+    }
+}
+
+void LootContainer::ForEachItem(const std::function<void(const DropItem_t&)>& func)
+{
+    for (const auto& item : dropList->Items)
+    {
+        func(item);
+    }
+
+    for (const auto& item : drops.Items)
+    {
+        func(item);
+    }
 }
 
 /************************************************************************
@@ -579,6 +626,18 @@ namespace itemutils
                 {
                     dropList->Items.emplace_back(DropType, ItemID, DropRate);
                 }
+            }
+        }
+
+        // Populate nullptrs in g_pDropList with an empty drop list
+        // this support mobs that only drop loot through script logic
+        // even if they do not have the default dropID of 0
+        auto emptyDropList = new DropList_t;
+        for (int32 dropID = 0; dropID < MAX_DROPID; ++dropID)
+        {
+            if (g_pDropList[dropID] == nullptr)
+            {
+                g_pDropList[dropID] = emptyDropList;
             }
         }
     }

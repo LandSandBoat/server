@@ -36,7 +36,7 @@ CREATE TABLE IF NOT EXISTS `skill_ranks` (
   `geo` tinyint(2) unsigned NOT NULL DEFAULT '0',
   `run` tinyint(2) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`skillid`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AVG_ROW_LENGTH=44 PACK_KEYS=1;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 AVG_ROW_LENGTH=44 PACK_KEYS=1;
 
 --
 -- Contenu de la table `skill_ranks`

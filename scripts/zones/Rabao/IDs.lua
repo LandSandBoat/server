@@ -15,6 +15,7 @@ zones[xi.zone.RABAO] =
         ITEM_OBTAINED                 = 6412,  -- Obtained: <item>.
         GIL_OBTAINED                  = 6413,  -- Obtained <number> gil.
         KEYITEM_OBTAINED              = 6415,  -- Obtained key item: <keyitem>.
+        KEYITEM_LOST                  = 6416,  -- Lost Key Item: <keyitem>.
         NOT_HAVE_ENOUGH_GIL           = 6417,  -- You do not have enough gil.
         CARRIED_OVER_POINTS           = 6451,  -- You have carried over <number> login point[/s].
         LOGIN_CAMPAIGN_UNDERWAY       = 6452,  -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!
@@ -42,13 +43,15 @@ zones[xi.zone.RABAO] =
         LUCKY_ROLL_GAMEOVER           = 10324, -- I'm sorry, but that's it for today's game of Lucky Roll. Come by tomorrow, and maybe Lady Luck will be waiting for you!
         LUCKY_ROLL_EXACT              = 10322, -- And because your roll put the running total at exactly 400, you receive a bonus prize!
         LUCKY_ROLL_CLOSE              = 10323, -- And for bringing the total so close to 400, here is your extra prize!
+        GOLDFISH_NPC_DIALOGUE         = 10403, -- Goldfish... Goldfish...something...
     },
     mob =
     {
     },
     npc =
     {
-        MILEON                        = 17788987, -- Lucky Roll Npc
+        MILEON       = 17788987, -- Lucky Roll Npc
+        GOLDFISH_NPC = 17789025,
     },
 }
 

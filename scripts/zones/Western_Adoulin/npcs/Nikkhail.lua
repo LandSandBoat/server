@@ -1,13 +1,11 @@
 -----------------------------------
 -- Area: Western Adoulin
 --  NPC: Nikkhail
--- Type: Standard NPC and Quest NPC
 --  Involved With Quest: 'A Thirst for the Ages'
 -- !pos -101 3 9 256
 -----------------------------------
 require("scripts/globals/missions")
 require("scripts/globals/quests")
-require("scripts/globals/keyitems")
 local ID = require("scripts/zones/Western_Adoulin/IDs")
 -----------------------------------
 local entity = {}
@@ -24,13 +22,7 @@ entity.onTrigger = function(player, npc)
         if atfta == QUEST_ACCEPTED and atftaNeedKI then
             -- Progresses Quest: 'A Thirst for the Ages'
             player:startEvent(5053)
-        else
-            -- Standard dialogue, after joining colonization effort
-            player:startEvent(584)
         end
-    else
-        -- Dialogue prior to joining colonization effort
-        player:startEvent(510)
     end
 end
 

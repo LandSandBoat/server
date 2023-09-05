@@ -5,11 +5,11 @@ local ID = require('scripts/zones/East_Sarutabaruta/IDs')
 require('scripts/quests/i_can_hear_a_rainbow')
 require('scripts/globals/chocobo_digging')
 require('scripts/globals/conquest')
-require('scripts/globals/keyitems')
 require('scripts/globals/missions')
 require('scripts/globals/zone')
 require('scripts/globals/events/harvest_festivals')
 require('scripts/globals/events/starlight_celebrations')
+require('scripts/globals/events/sunbreeze_festival')
 -----------------------------------
 local zoneObject = {}
 
@@ -22,9 +22,8 @@ zoneObject.onInitialize = function(zone)
         xi.mob.nmTODPersistCache(zone, ID.mob.DUKE_DECAPOD)
     end
 
-    if xi.events.starlightCelebration.isStarlightEnabled ~= 0 then
-        xi.events.starlightCelebration.applyStarlightDecorations(zone:getID())
-    end
+    xi.events.starlightCelebration.applyStarlightDecorations(zone:getID())
+    xi.events.sunbreeze_festival.showNPCs(zone:getID())
 end
 
 zoneObject.onZoneIn = function(player, prevZone)
@@ -35,7 +34,7 @@ zoneObject.onZoneIn = function(player, prevZone)
         player:getYPos() == 0 and
         player:getZPos() == 0
     then
-        player:setPos(305.377, -36.092, 660.435, 71)
+        player:setPos(-125, -3, -519, 4)
     end
 
     if quests.rainbow.onZoneIn(player) then
@@ -51,8 +50,16 @@ zoneObject.onZoneIn = function(player, prevZone)
     return cs
 end
 
-zoneObject.onConquestUpdate = function(zone, updatetype)
-    xi.conq.onConquestUpdate(zone, updatetype)
+zoneObject.onConquestUpdate = function(zone, updatetype, influence, owner, ranking, isConquestAlliance)
+    xi.conq.onConquestUpdate(zone, updatetype, influence, owner, ranking, isConquestAlliance)
+end
+
+zoneObject.onZoneTick = function(zone)
+    xi.events.sunbreeze_festival.onZoneTick(zone)
+end
+
+zoneObject.onGameHour = function(zone)
+    xi.events.sunbreeze_festival.spawnFireworks(zone)
 end
 
 zoneObject.onGameDay = function()

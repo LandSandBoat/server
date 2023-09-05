@@ -7,9 +7,6 @@
 -- Vitality +3
 -- Defense +15% Cap 50
 -----------------------------------
-require("scripts/globals/status")
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

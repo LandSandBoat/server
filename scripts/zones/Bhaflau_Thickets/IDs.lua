@@ -15,6 +15,8 @@ zones[xi.zone.BHAFLAU_THICKETS] =
         ITEM_OBTAINED                 = 6390, -- Obtained: <item>.
         GIL_OBTAINED                  = 6391, -- Obtained <number> gil.
         KEYITEM_OBTAINED              = 6393, -- Obtained key item: <keyitem>.
+        GIGANTIC_WARHORSE             = 6400, -- You find the hoofprint of a gigantic warhorse...≺Prompt≻
+        PLACE_QUARTZ                  = 6401, -- You set the ≺Possible Special Code: 01≻≺Possible Special Code: 05≻3≺BAD CHAR: 8280≻≺BAD CHAR: 80≻≺BAD CHAR: 80≻ in the warhorse hoofprint.≺Prompt≻
         FELLOW_MESSAGE_OFFSET         = 6419, -- I'm ready. I suppose.
         CARRIED_OVER_POINTS           = 7001, -- You have carried over <number> login point[/s].
         LOGIN_CAMPAIGN_UNDERWAY       = 7002, -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!
@@ -30,6 +32,7 @@ zones[xi.zone.BHAFLAU_THICKETS] =
         RESPONSE                      = 7337, -- There is no response...
         HAND_OVER_TO_IMMORTAL         = 7550, -- You hand over the % to the Immortal.
         YOUR_IMPERIAL_STANDING        = 7551, -- Your Imperial Standing has increased!
+        NOTHING_OUT_OF_THE_ORDINARY   = 7362, -- There is nothing out of the ordinary here.
         HARVESTING_IS_POSSIBLE_HERE   = 7569, -- Harvesting is possible here if you have <item>.
         CANNOT_ENTER                  = 7592, -- You cannot enter at this time. Please wait a while before trying again.
         AREA_FULL                     = 7593, -- This area is fully occupied. You were unable to enter.
@@ -62,8 +65,9 @@ zones[xi.zone.BHAFLAU_THICKETS] =
             [16990398] = 16990403, -- -119 -15 -651
         },
         HARVESTMAN         = 16990252,
-        LIVIDROOT_AMOOSHAH = DYNAMIC_LOOKUP,
-        DEA                = DYNAMIC_LOOKUP,
+        LIVIDROOT_AMOOSHAH = GetFirstID("Lividroot_Amooshah"),
+        DEA                = GetFirstID("Dea"),
+        PLAGUE_CHIGOE      = 16990417,
     },
     npc =
     {

@@ -8,7 +8,7 @@ CREATE TABLE `bcnm_battlefield` (
   `battlefieldNumber` tinyint(3) DEFAULT NULL,
   `monsterId` int(10) NOT NULL,
   `conditions` tinyint(2) NOT NULL DEFAULT '0'
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AVG_ROW_LENGTH=56;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 AVG_ROW_LENGTH=56;
 
 --
 -- Dumping data for table `bcnm_battlefield`
@@ -1801,6 +1801,9 @@ INSERT INTO `bcnm_battlefield` VALUES (1122,3,17039391,2);
 INSERT INTO `bcnm_battlefield` VALUES (1122,3,17039392,2);
 INSERT INTO `bcnm_battlefield` VALUES (1122,3,17039393,2);
 INSERT INTO `bcnm_battlefield` VALUES (1124,1,17039400,3); -- shield_of_diplomacy
+INSERT INTO `bcnm_battlefield` VALUES (1154,1,17051673,3); -- the_beast_within
+INSERT INTO `bcnm_battlefield` VALUES (1154,2,17051674,3); -- the_beast_within
+INSERT INTO `bcnm_battlefield` VALUES (1154,3,17051675,3); -- the_beast_within
 INSERT INTO `bcnm_battlefield` VALUES (1156,1,17051694,3); -- puppet_in_peril
 
 -- //////////////////////////////////////////////////////////////

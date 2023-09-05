@@ -3,7 +3,6 @@
 -- Deals a ranged attack to a single target. Additional effect: stun
 -----------------------------------
 require("scripts/globals/mobskills")
-require("scripts/globals/status")
 -----------------------------------
 local mobskillObject = {}
 

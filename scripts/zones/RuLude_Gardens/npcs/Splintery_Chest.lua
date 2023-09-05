@@ -3,7 +3,6 @@
 --  NPC: Splintery Chest
 -----------------------------------
 local ID = require("scripts/zones/RuLude_Gardens/IDs")
-require("scripts/globals/settings")
 -----------------------------------
 local entity = {}
 

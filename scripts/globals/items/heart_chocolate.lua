@@ -2,11 +2,7 @@
 -- ID: 4497
 -- Item: heart_chocolate
 -- Food Effect: 60Min, All Races
------------------------------------
 -- Magic Regen While Healing 4
------------------------------------
-require("scripts/globals/status")
-require("scripts/globals/msg")
 -----------------------------------
 local itemObject = {}
 

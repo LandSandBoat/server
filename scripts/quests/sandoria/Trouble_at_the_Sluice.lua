@@ -5,11 +5,8 @@
 -- Belgidiveau: !pos -98 0 69 231
 -- Novalmauge : !pos 70 -24 21 167
 -----------------------------------
-require('scripts/globals/items')
-require("scripts/globals/keyitems")
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
-require("scripts/globals/status")
 require('scripts/globals/interaction/quest')
 -----------------------------------
 

@@ -5,8 +5,6 @@
 -- !pos 56 -1 16 212
 -- Involved in Quest: Cloak and Dagger
 -----------------------------------
-require("scripts/globals/status")
------------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)

@@ -3,7 +3,6 @@
 --  Mob: Carmine Dobsonfly
 -----------------------------------
 local ID = require("scripts/zones/Riverne-Site_A01/IDs")
-require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 

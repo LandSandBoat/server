@@ -3,8 +3,6 @@
 -- Earth Cluster
 -- Turn into a stack of earth crystals
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)
@@ -17,7 +15,7 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    target:addItem(4099, 12)
+    target:addItem(xi.items.EARTH_CRYSTAL, 12)
 end
 
 return itemObject

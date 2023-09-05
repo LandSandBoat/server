@@ -16,8 +16,6 @@
 -- 100%TP    200%TP    300%TP
 -- 1.375      1.375      1.375
 -----------------------------------
-require("scripts/globals/status")
-require("scripts/globals/settings")
 require("scripts/globals/weaponskills")
 -----------------------------------
 local weaponskillObject = {}

@@ -1,10 +1,6 @@
 -----------------------------------
 -- Monk Job Utilities
 -----------------------------------
-require('scripts/globals/items')
-require("scripts/globals/settings")
-require("scripts/globals/status")
------------------------------------
 xi = xi or {}
 xi.job_utils = xi.job_utils or {}
 xi.job_utils.monk = xi.job_utils.monk or {}

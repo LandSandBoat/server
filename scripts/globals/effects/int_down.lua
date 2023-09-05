@@ -1,8 +1,6 @@
 -----------------------------------
 -- xi.effect.INT_DOWN
 -----------------------------------
-require("scripts/globals/status")
------------------------------------
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

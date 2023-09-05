@@ -46,7 +46,7 @@ CREATE TABLE `fishing_rod` (
   `legendary` tinyint(2) unsigned NOT NULL,
   `rating` tinyint(3) unsigned NOT NULL,
   PRIMARY KEY (`rodid`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -57,7 +57,7 @@ LOCK TABLES `fishing_rod` WRITE;
 /*!40000 ALTER TABLE `fishing_rod` DISABLE KEYS */;
 INSERT INTO `fishing_rod` VALUES (17011,'Ebisu Fishing Rod',1,0,4,1,30,100,50,50,30,10,2,1,1,0,3,0,0,0,1,15);
 INSERT INTO `fishing_rod` VALUES (17012,'Judges Rod',1,0,0,1,40,200,100,100,60,30,2,1,1,0,5,0,0,0,1,16);
-INSERT INTO `fishing_rod` VALUES (17013,'Goldfish Basket',0,0,8,1,5,100,0,50,20,0,0,0,0,0,0,0,0,0,0,0);
+INSERT INTO `fishing_rod` VALUES (17013,'Goldfish Basket',0,0,8,1,5,100,0,50,30,0,1,1,0,0,3,0,0,0,0,0);
 INSERT INTO `fishing_rod` VALUES (17014,'Hume Fishing Rod',0,0,2,1,10,125,0,65,30,0,2,1,0,2,3,1,1832,0,0,6);
 INSERT INTO `fishing_rod` VALUES (17015,'Halcyon Rod',1,0,2,1,18,100,0,70,41,0,2,1,0,2,3,1,1833,0,0,9);
 INSERT INTO `fishing_rod` VALUES (17380,'Mithran Fishing Rod',0,1,1,8,18,130,0,65,30,0,0,0,1,0,3,1,483,0,0,12);

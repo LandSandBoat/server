@@ -6,7 +6,6 @@
 -- Levil            : !pos -87.204 3.350 12.655 256
 -- Darkened Crevice : !pos 185.752 27.311 240.72 273
 -----------------------------------
-require('scripts/globals/keyitems')
 require('scripts/globals/missions')
 require('scripts/globals/interaction/mission')
 require('scripts/globals/zone')

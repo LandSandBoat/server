@@ -1,8 +1,6 @@
 -----------------------------------
 -- Effect: GEO Magic Defense Boost
 -----------------------------------
-require("scripts/globals/status")
------------------------------------
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

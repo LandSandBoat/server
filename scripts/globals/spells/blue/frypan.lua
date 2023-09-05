@@ -9,11 +9,10 @@
 -- Level: 63
 -- Casting Time: 1 seconds
 -- Recast Time: 26 seconds
--- Skillchain Element(s): Lightning (can open Liquefaction or Detonation can close Impaction or Fusion)
+-- Skillchain Element(s): Impcation
 -- Combos: Max HP Boost
 -----------------------------------
 require("scripts/globals/bluemagic")
-require("scripts/globals/status")
 require("scripts/globals/magic")
 -----------------------------------
 local spellObject = {}
@@ -23,15 +22,8 @@ spellObject.onMagicCastingCheck = function(caster, target, spell)
 end
 
 spellObject.onSpellCast = function(caster, target, spell)
-    -- local dINT = caster:getStat(xi.mod.INT) - target:getStat(xi.mod.INT)
     local params = {}
-    params.diff = nil
-    params.attribute = xi.mod.INT
-    params.skillType = xi.skill.BLUE_MAGIC
-    params.bonus = 0
-    params.effect = xi.effect.STUN
-    local resist = xi.magic.applyResistanceEffect(caster, target, spell, params)
-    -- This data should match information on http://wiki.ffxiclopedia.org/wiki/Calculating_Blue_Magic_Damage
+    params.ecosystem = xi.ecosystem.BEASTMEN
     params.tpmod = TPMOD_ACC
     params.attackType = xi.attackType.PHYSICAL
     params.damageType = xi.damageType.BLUNT
@@ -49,12 +41,14 @@ spellObject.onSpellCast = function(caster, target, spell)
     params.int_wsc = 0.0
     params.mnd_wsc = 0.2
     params.chr_wsc = 0.0
-    local damage = BluePhysicalSpell(caster, target, spell, params)
-    damage = BlueFinalAdjustments(caster, target, spell, damage, params)
 
-    if resist > 0.5 then -- This line may need adjusting for retail accuracy.
-        target:addStatusEffect(xi.effect.STUN, 1, 0, 5 * resist) -- pre-resist duration needs confirmed/adjusted
-    end
+    params.effect = xi.effect.STUN
+    local power = 1
+    local tick = 0
+    local duration = 5
+
+    local damage = xi.spells.blue.usePhysicalSpell(caster, target, spell, params)
+    xi.spells.blue.usePhysicalSpellAddedEffect(caster, target, spell, params, damage, power, tick, duration)
 
     return damage
 end

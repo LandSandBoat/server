@@ -1,7 +1,6 @@
 -----------------------------------
 --  Mob: Globster
 -----------------------------------
-require("scripts/globals/keyitems")
 require("scripts/globals/regimes")
 require("scripts/globals/voidwalker")
 -----------------------------------

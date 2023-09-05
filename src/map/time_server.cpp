@@ -19,15 +19,17 @@
 ===========================================================================
 */
 
-#include "../common/logging.h"
+#include "time_server.h"
 
-#include "conquest_system.h"
+#include "common/logging.h"
+#include "common/vana_time.h"
+
+#include "common/vana_time.h"
 #include "daily_system.h"
 #include "entities/charentity.h"
 #include "latent_effect_container.h"
 #include "lua/luautils.h"
 #include "roe.h"
-#include "time_server.h"
 #include "timetriggers.h"
 #include "transport.h"
 #include "utils/fishingutils.h"
@@ -35,7 +37,6 @@
 #include "utils/instanceutils.h"
 #include "utils/moduleutils.h"
 #include "utils/zoneutils.h"
-#include "vana_time.h"
 
 int32 time_server(time_point tick, CTaskMgr::CTask* PTask)
 {
@@ -50,7 +51,6 @@ int32 time_server(time_point tick, CTaskMgr::CTask* PTask)
     {
         if (tick > (lastConquestTally + 1h))
         {
-            conquest::UpdateWeekConquest();
             roeutils::CycleWeeklyRecords();
             roeutils::CycleUnityRankings();
             lastConquestTally = tick;
@@ -61,7 +61,6 @@ int32 time_server(time_point tick, CTaskMgr::CTask* PTask)
     {
         if (tick > (lastConquestUpdate + 1h))
         {
-            conquest::UpdateConquestSystem();
             roeutils::UpdateUnityRankings();
             lastConquestUpdate = tick;
         }
@@ -95,8 +94,11 @@ int32 time_server(time_point tick, CTaskMgr::CTask* PTask)
     {
         if (tick > (lastTickedJstMidnight + 1h))
         {
-            daily::UpdateDailyTallyPoints();
-            roeutils::CycleDailyRecords();
+            if (settings::get<bool>("main.ENABLE_ROE"))
+            {
+                roeutils::CycleDailyRecords();
+            }
+
             guildutils::UpdateGuildPointsPattern();
             luautils::OnJSTMidnight();
             lastTickedJstMidnight = tick;

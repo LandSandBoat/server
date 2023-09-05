@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Windurst Waters
 --  NPC: Shataru-Potaru
--- Working 100%
 -----------------------------------
 require("scripts/globals/pathfind")
 -----------------------------------

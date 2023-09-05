@@ -8,9 +8,6 @@
 -- Magic Accuracy +21% (cap 40)
 -- Magic Defense +2
 -----------------------------------
-require("scripts/globals/status")
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

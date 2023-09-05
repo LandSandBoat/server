@@ -15,11 +15,9 @@
 -- Gilgamesh                         - !pos 122.452 -9.009 -12.052 252
 -----------------------------------
 require('scripts/globals/interaction/mission')
-require('scripts/globals/keyitems')
 require('scripts/globals/missions')
 require('scripts/globals/titles')
 require('scripts/globals/zone')
-require("scripts/globals/status")
 -----------------------------------
 local behemothsDominionID = require('scripts/zones/Behemoths_Dominion/IDs')
 local capeTerigganID      = require('scripts/zones/Cape_Teriggan/IDs')

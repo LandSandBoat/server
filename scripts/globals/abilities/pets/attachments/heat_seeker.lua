@@ -1,8 +1,6 @@
 -----------------------------------
 -- Attachment: Heat Seeker
 -----------------------------------
-require("scripts/globals/status")
------------------------------------
 local attachmentObject = {}
 
 attachmentObject.onEquip = function(automaton)

@@ -1,9 +1,6 @@
 -----------------------------------
 -- xi.effect.DIABOLOSS_FAVOR
 -----------------------------------
-require("scripts/globals/status")
------------------------------------
-
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

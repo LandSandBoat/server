@@ -2,7 +2,6 @@
 -- xi.effect.MIGHTY_STRIKES
 -----------------------------------
 require("scripts/globals/jobpoints")
-require("scripts/globals/status")
 -----------------------------------
 local effectObject = {}
 

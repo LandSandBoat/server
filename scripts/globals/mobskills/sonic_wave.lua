@@ -4,8 +4,6 @@
 -- Defense down should be 40% with a random duration between 2.5 minutes to 3 minutes.
 -----------------------------------
 require("scripts/globals/mobskills")
-require("scripts/globals/settings")
-require("scripts/globals/status")
 -----------------------------------
 local mobskillObject = {}
 

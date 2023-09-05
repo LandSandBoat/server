@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Windurst Walls
 --  NPC: Mehruru
--- Working 100%
 -----------------------------------
 local entity = {}
 

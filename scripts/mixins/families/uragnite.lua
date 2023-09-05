@@ -22,7 +22,6 @@ xi.mix.uragnite.config(mob, {
 
 --]]
 require("scripts/globals/mixins")
-require("scripts/globals/status")
 -----------------------------------
 
 xi = xi or {}

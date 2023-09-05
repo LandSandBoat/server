@@ -4,13 +4,12 @@
 -- Enchantment: "Teleport" (Party Leader)
 -----------------------------------
 require("scripts/globals/teleports")
-require("scripts/globals/status")
 require('scripts/globals/zone')
 -----------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)
-    local result = xi.msg.basic.ITEM_UNABLE_TO_USE -- Default is fail.
+    local result = xi.msg.basic.ITEM_UNABLE_TO_USE
     local leader = target:getPartyLeader()
     -- In a party and we were able to find the leader
     -- (currently fails in cross map server situations)
@@ -121,10 +120,14 @@ itemObject.onItemCheck = function(target)
                 -- xi.zone.KAMIHR_DRIFTS,
                 -- xi.zone.LEAFALLIA,
             }
+
             -- Make sure we can actually tele to that zone..
+            result = xi.msg.basic.ITEM_UNABLE_TO_USE_PARTY_LEADER
+
             for _, validZone in ipairs(validZoneList) do
                 if validZone == leaderZone and target:hasVisitedZone(validZone) then
                     result = 0
+                    break
                 end
             end
         end

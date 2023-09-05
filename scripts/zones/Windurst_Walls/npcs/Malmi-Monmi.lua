@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Windurst Walls
 --  NPC: Malmi-Monmi
--- Working 100%
 -----------------------------------
 require("scripts/globals/pathfind")
 -----------------------------------

@@ -10,12 +10,8 @@
 -- Waudeen : !pos 673.882 -23.995 367.604 61
 -----------------------------------
 require('scripts/globals/interaction/quest')
-require('scripts/globals/items')
-require('scripts/globals/keyitems')
 require('scripts/globals/quests')
 require('scripts/globals/npc_util')
-require("scripts/globals/status")
-require('scripts/globals/settings')
 -----------------------------------
 local whitegateID = require("scripts/zones/Aht_Urhgan_Whitegate/IDs")
 -----------------------------------

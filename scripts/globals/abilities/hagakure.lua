@@ -5,8 +5,6 @@
 -- Recast Time: 3:00
 -- Duration: 1:00 or Next Weaponskill
 -----------------------------------
-require("scripts/globals/status")
------------------------------------
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)

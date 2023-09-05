@@ -4,8 +4,6 @@
 -- Involved In Quest: Dark Puppet
 -- !pos -51 0.1 3 193
 -----------------------------------
-require("scripts/globals/status")
------------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)

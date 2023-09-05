@@ -2,9 +2,6 @@
 -- Area: Windurst Walls
 --  NPC: Jack of Diamonds
 -- Adventurer's Assistant
--- Working 100%
------------------------------------
-require("scripts/globals/settings")
 -----------------------------------
 local entity = {}
 

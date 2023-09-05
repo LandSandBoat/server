@@ -5,11 +5,8 @@
 -- !pos 376.936 -39.999 17.914 175
 -----------------------------------
 local ID = require("scripts/zones/The_Eldieme_Necropolis_[S]/IDs")
-require("scripts/globals/keyitems")
 require("scripts/globals/quests")
 require("scripts/globals/titles")
-require("scripts/globals/settings")
-require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 
@@ -69,7 +66,7 @@ entity.onTrigger = function(player, npc)
         aLittleKnowledge == QUEST_COMPLETED and
         mJob == xi.job.SCH and
         mLvl >= 5 and
-        not (player:hasSpell(478) and player:hasSpell(502))
+        not (player:hasSpell(xi.magic.spell.EMBRAVA) and player:hasSpell(xi.magic.spell.KAUSTRA))
     then
         player:startEvent(47)
     elseif

@@ -8,9 +8,6 @@
 -- Defense % 15 Cap 70
 -- HP Healing 6
 -----------------------------------
-require("scripts/globals/status")
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

@@ -4,7 +4,6 @@
 -- Area of Effect is centered around caster.
 ---------------------------------------------------
 require("scripts/globals/mobskills")
-require("scripts/globals/status")
 ---------------------------------------------------
 local mobskillObject = {}
 

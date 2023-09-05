@@ -1,9 +1,6 @@
 -----------------------------------
 -- Area: Windurst Waters
 --  NPC: Khoto Rokkorah
--- Working 100%
------------------------------------
-require("scripts/globals/settings")
 -----------------------------------
 local entity = {}
 

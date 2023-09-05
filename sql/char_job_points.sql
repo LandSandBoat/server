@@ -22,4 +22,4 @@ CREATE TABLE `char_job_points` (
   INDEX `char_job_points_charid_index` (`charid`),
   INDEX `char_job_points_charid_jobid_index` (`charid`, `jobid`),
   UNIQUE KEY `idx_char_job_points_charid_jobid` (`charid`,`jobid`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;

@@ -1,8 +1,6 @@
 -----------------------------------
 -- xi.effect.GEO_POISON
 -----------------------------------
-require("scripts/globals/status")
------------------------------------
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

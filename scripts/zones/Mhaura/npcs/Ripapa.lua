@@ -5,8 +5,6 @@
 -- !pos 29 -15 55 249
 -----------------------------------
 require("scripts/globals/titles")
-require("scripts/globals/settings")
-require("scripts/globals/keyitems")
 require("scripts/globals/shop")
 require("scripts/globals/quests")
 local ID = require("scripts/zones/Mhaura/IDs")
@@ -19,22 +17,9 @@ end
 entity.onTrigger = function(player, npc)
     local trialByLightning = player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.TRIAL_BY_LIGHTNING)
     local hasWhisperOfStorms = player:hasKeyItem(xi.ki.WHISPER_OF_STORMS)
-    local carbuncleDebacle = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CARBUNCLE_DEBACLE)
-    local carbuncleDebacleProgress = player:getCharVar("CarbuncleDebacleProgress")
 
-    -----------------------------------
-    -- Carbunlce Debacle
-    if carbuncleDebacle == QUEST_ACCEPTED and carbuncleDebacleProgress == 2 then
-        player:startEvent(10022) -- get the lighning pendulum lets go to Cloister of Storms
-    elseif
-        carbuncleDebacle == QUEST_ACCEPTED and
-        carbuncleDebacleProgress == 3 and
-        not player:hasItem(1172)
-    then
-        player:startEvent(10023, 0, 1172, 0, 0, 0, 0, 0, 0) -- "lost the pendulum?"
-    -----------------------------------
     -- Trial by Lightning
-    elseif
+    if
         (trialByLightning == QUEST_AVAILABLE and player:getFameLevel(xi.quest.fame_area.WINDURST) >= 6) or
         (trialByLightning == QUEST_COMPLETED and os.time() > player:getCharVar("TrialByLightning_date"))
     then
@@ -66,7 +51,7 @@ entity.onTrigger = function(player, npc)
             numitem = numitem + 8
         end   -- Elder Branch
 
-        if player:hasSpell(303) then
+        if player:hasSpell(xi.magic.spell.RAMUH) then
             numitem = numitem + 32
         end  -- Ability to summon Ramuh
 
@@ -108,10 +93,9 @@ entity.onEventFinish = function(player, csid, option)
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, item)
         else
             if option == 5 then
-                player:addGil(xi.settings.main.GIL_RATE * 10000)
-                player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.main.GIL_RATE * 10000) -- Gil
+                npcUtil.giveCurrency(player, 'gil', 10000)
             elseif option == 6 then
-                player:addSpell(303) -- Ramuh Spell
+                player:addSpell(xi.magic.spell.RAMUH) -- Ramuh Spell
                 player:messageSpecial(ID.text.RAMUH_UNLOCKED, 0, 0, 5)
             else
                 player:addItem(item)
@@ -123,14 +107,6 @@ entity.onEventFinish = function(player, csid, option)
             player:setCharVar("TrialByLightning_date", getMidnight())
             player:addFame(xi.quest.fame_area.WINDURST, 30)
             player:completeQuest(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.TRIAL_BY_LIGHTNING)
-        end
-    elseif csid == 10022 or csid == 10023 then
-        if player:getFreeSlotsCount() ~= 0 then
-            player:addItem(1172)
-            player:messageSpecial(ID.text.ITEM_OBTAINED, 1172)
-            player:setCharVar("CarbuncleDebacleProgress", 3)
-        else
-            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 1172)
         end
     end
 end

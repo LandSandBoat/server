@@ -2,8 +2,6 @@
 -- ID: 5443
 -- magnus_stone_pouch
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)
@@ -16,7 +14,7 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    target:addItem(19262, 99) -- 99x magnus_stone
+    target:addItem(xi.items.MAGNUS_STONE, 99)
 end
 
 return itemObject

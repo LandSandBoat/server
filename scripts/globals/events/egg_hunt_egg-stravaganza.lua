@@ -1,7 +1,6 @@
 -- ----------------------------------
 -- Egg Hunt Egg-Stravaganza
 -- ----------------------------------
-require("scripts/globals/settings")
 require("scripts/globals/utils")
 require("scripts/globals/npc_util")
 -- ----------------------------------
@@ -16,17 +15,8 @@ local event = SeasonalEvent:new("egg_hunt")
 -- Default settings
 local settings =
 {
-    START =
-    {
-        DAY   = 6,
-        MONTH = 4,
-    },
-
-    FINISH =
-    {
-        DAY   = 17,
-        MONTH =  4,
-    },
+    START  = { DAY   =  6, MONTH = 4 },
+    FINISH = { DAY   = 17, MONTH = 4 },
 
     VAR =
     {
@@ -42,28 +32,27 @@ local settings =
     ERA_2008 = false, -- Tier 2 nation eggs
     ERA_2009 = false, -- Egg Buffet set
 
-    -- Gives consolation prize for repeating a combination where
+    -- Consolation prizes for repeating combinations where
     -- the player has already received the relevant reward
     MINOR_REWARDS = true,
+
+    -- Don't add words here
+    -- settings/main.lua will overwrite these
+    -----------------------------------------------
+    -- Set custom combinations, eg. WORD = 1234
+    -- Where WORD is an arrangement of lettered eggs
+    -- Where 1234 is the itemID for the reward
+    BONUS_WORDS = {},
 }
 
--- Load associated module settings into a provided table
 local function loadSettings(tbl, name)
-    if not xi.settings[name] then
+    if not xi.settings.main[name] then
         return
     end
 
     for k, v in pairs(tbl) do
-        if type(v) == "table" then
-            for k2, v2 in pairs(v) do
-                if xi.settings[name][k] and xi.settings[name][k][k2] then
-                    tbl[k][k2] = xi.settings[name][k][k2]
-                end
-            end
-        else
-            if xi.settings[name][k] then
-                tbl[k] = xi.settings[name][k]
-            end
+        if xi.settings.main[name][k] then
+            tbl[k] = xi.settings.main[name][k]
         end
     end
 end
@@ -224,7 +213,6 @@ xi.events.egg_hunt.data =
             { 128, -153.700,  -4.000,  -33.000, "0x00006C0500000000000000000000000000000000", },
             { 224, -362.004, -10.002, -173.953, "0x00006C0500000000000000000000000000000000", },
             { 224, -353.928, -10.002, -182.068, "0x00006C0500000000000000000000000000000000", },
-            {  64, -153.699,  -4.000,  -27.000, "0x00006F0500000000000000000000000000000000", },
             { 224, -353.000, -10.000, -181.080, "0x01001E0582117120173017401750006000700000", },
             { 224, -360.900, -10.000, -173.000, "0x01001E0682117120173017401750006000700000", },
             { 127, -155.000,  -4.000,   33.000, "0x01001E0782117120173017401750006000700000", },
@@ -605,6 +593,33 @@ local weekDay = function(player, npc, trade)
     end
 end
 
+local getSecondInitial = function(player, option)
+    local party = player:getParty()
+
+    for i = 1, #party do
+        if
+            party[i]           ~= nil and                -- Player exists
+            player:getName()   ~= party[i]:getName() and -- Different player
+            player:getZoneID() == party[i]:getZoneID()   -- Same zone
+        then
+            local playerName   = party[i]:getName()
+            local initial      = string.sub(playerName, 1, 1)
+            local firstLetter  = string.byte(string.lower(initial)) - 97
+            local second       = string.sub(playerName, 2, 2)
+            local secondLetter = string.byte(string.lower(second)) - 97
+
+            if
+                firstLetter == (option - 3) and
+                party[i]:getEquipID(xi.slot.HEAD) == xi.items.EGG_HELM
+            then
+                return xi.items.A_EGG + secondLetter
+            end
+        end
+    end
+
+    return 0
+end
+
 xi.events.egg_hunt.combos =
 {
     { check = firstThree,    message = "REWARD1", daily = true },
@@ -613,6 +628,22 @@ xi.events.egg_hunt.combos =
     { check = regionControl, message = "REWARD2", daily = true },
     { check = weekDay,       message = "REWARD2", daily = true },
 }
+
+for k, v in pairs(settings.BONUS_WORDS) do
+    local customEggs = xi.events.egg_hunt.stringToEggs(k)
+
+    table.insert(xi.events.egg_hunt.combos,
+    {
+        check = function(player, npc, trade)
+            if npcUtil.tradeHasExactly(trade, customEggs) then
+                return v
+            end
+        end,
+
+        message = "REWARD2",
+        daily = true,
+    })
+end
 
 -- ----------------------------------
 -- Moogle event handlers
@@ -658,11 +689,17 @@ xi.events.egg_hunt.onEventFinish = function(player, csid, option)
 
     -- Selected party member initial
     elseif option >= 3 then
-        if npcUtil.giveItem(player, xi.items.A_EGG + option - 3) then
-            player:setVar(settings.VAR.DAILY_EGG, vanaDay())
+        local eggsGiven = { xi.items.A_EGG + option - 3 }
+        local second = getSecondInitial(player, option)
+
+        -- Give second letter if selected player has Egg Helm equipped
+        if second > 0 then
+            table.insert(eggsGiven, second)
         end
 
-        -- TODO: Egg Helm worn by the corresponding party member should give the second letter
+        if npcUtil.giveItem(player, eggsGiven) then
+            player:setVar(settings.VAR.DAILY_EGG, vanaDay())
+        end
 
     -- Random daily letter
     else

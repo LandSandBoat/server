@@ -4,10 +4,10 @@
 local ID = require('scripts/zones/Southern_San_dOria/IDs')
 require('scripts/globals/events/harvest_festivals')
 require('scripts/globals/events/starlight_celebrations')
+require('scripts/globals/events/sunbreeze_festival')
 require('scripts/quests/flyers_for_regine')
 require('scripts/globals/conquest')
 require('scripts/globals/cutscenes')
-require('scripts/globals/settings')
 require('scripts/globals/chocobo')
 require('scripts/globals/zone')
 -----------------------------------
@@ -16,8 +16,11 @@ local zoneObject = {}
 zoneObject.onInitialize = function(zone)
     zone:registerTriggerArea(1, -292, -10, 90 , -258, 10, 105)
     quests.ffr.initZone(zone) -- register trigger areas 2 through 6
+
     applyHalloweenNpcCostumes(zone:getID())
     xi.events.starlightCelebration.applyStarlightDecorations(zone:getID())
+    xi.events.sunbreeze_festival.showDecorations(zone:getID())
+
     xi.chocobo.initZone(zone)
     xi.conquest.toggleRegionalNPCs(zone)
 end
@@ -40,8 +43,8 @@ zoneObject.afterZoneIn = function(player)
     xi.chocobo.confirmRentalAfterZoneIn(player)
 end
 
-zoneObject.onConquestUpdate = function(zone, updatetype)
-    xi.conq.onConquestUpdate(zone, updatetype)
+zoneObject.onConquestUpdate = function(zone, updatetype, influence, owner, ranking, isConquestAlliance)
+    xi.conq.onConquestUpdate(zone, updatetype, influence, owner, ranking, isConquestAlliance)
 end
 
 zoneObject.onTriggerAreaEnter = function(player, triggerArea)
@@ -105,6 +108,8 @@ zoneObject.onGameHour = function(zone)
             end
         end
     end
+
+    xi.events.sunbreeze_festival.spawnFireworks(zone)
 end
 
 return zoneObject

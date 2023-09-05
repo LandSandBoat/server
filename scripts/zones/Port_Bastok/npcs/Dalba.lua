@@ -5,7 +5,6 @@
 -- !pos -174.101 -7 -19.611 236
 -----------------------------------
 require("scripts/globals/quests")
-require("scripts/globals/keyitems")
 -----------------------------------
 local entity = {}
 

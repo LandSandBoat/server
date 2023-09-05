@@ -2,7 +2,6 @@
 -- custom_util
 -----------------------------------
 require("modules/module_utils")
-require("scripts/globals/items")
 require("scripts/globals/npc_util")
 -----------------------------------
 local m = Module:new("custom_util")

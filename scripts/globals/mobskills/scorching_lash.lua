@@ -7,8 +7,6 @@
 --  Range: Back
 --  Notes: Used only if a target with hate is behind them. Conal behind Cerberus.
 -----------------------------------
-require("scripts/globals/settings")
-require("scripts/globals/status")
 require("scripts/globals/mobskills")
 -----------------------------------
 local mobskillObject = {}

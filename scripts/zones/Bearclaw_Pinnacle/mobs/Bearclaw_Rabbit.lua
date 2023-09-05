@@ -3,8 +3,6 @@
 -- Mob: Bearclaw Rabbit
 -- ENM: Follow the White Rabbit
 -----------------------------------
-require("scripts/globals/status")
------------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)

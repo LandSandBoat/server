@@ -29,15 +29,16 @@ xi.weaponskill =
     TORNADO_KICK        = 13,
     VICTORY_SMITE       = 14,
     SHIJIN_SPIRAL       = 15,
-    FINAL_PARADISE      = 228,
+    DRAGON_BLOW         = 230,
+    MARU_KALA           = 231,
 
     -----------------------------------
     -- DAGGER
     -----------------------------------
     WASP_STING          = 16,
     VIPER_BITE          = 17,
+    SHADOWSTITCH        = 18,
     GUST_SLASH          = 19,
-    SHADOWSTICH         = 18,
     CYCLONE             = 20,
     ENERGY_STEAL        = 21,
     ENERGY_DRAIN        = 22,
@@ -51,6 +52,7 @@ xi.weaponskill =
     AEOLIAN_EDGE        = 30,
     RUDRAS_STORM        = 31,
     EXENTERATOR         = 224,
+    MERCILESS_STRIKE    = 232,
 
     -----------------------------------
     -- SWORD
@@ -62,7 +64,7 @@ xi.weaponskill =
     SHINING_BLADE       = 36,
     SERAPH_BLADE        = 37,
     CIRCLE_BLADE        = 38,
-    SPIRIT_WITHIN       = 39,
+    SPIRITS_WITHIN      = 39,
     VORPAL_BLADE        = 40,
     SWIFT_BLADE         = 41,
     SAVAGE_BLADE        = 42,
@@ -73,6 +75,10 @@ xi.weaponskill =
     SANGUINE_BLADE      = 47,
     CHANT_DU_CYGNE      = 225,
     REQUIESCAT          = 226,
+    KNIGHTS_OF_ROTUND   = 227,
+    FINAL_PARADISE      = 228,
+    FAST_BLADE_II       = 229,
+    IMPERATOR           = 233,
     URIEL_BLADE         = 238,
     GLORY_SLASH         = 239,
 
@@ -88,11 +94,12 @@ xi.weaponskill =
     SICKLE_MOON         = 54,
     SPINNING_SLASH      = 55,
     GROUND_STRIKE       = 56,
-    HERCULEAN_STRIKE    = 58,
     SCOURGE             = 57,
+    HERCULEAN_SLASH     = 58,
     TORCLEAVER          = 59,
     RESOLUTION          = 60,
     DIMIDIATION         = 61,
+    FIMBULVETR          = 62,
 
     -----------------------------------
     -- AXE
@@ -111,6 +118,7 @@ xi.weaponskill =
     BORA_AXE            = 75,
     CLOUDSPLITTER       = 76,
     RUINATOR            = 77,
+    BLITZ               = 78,
 
     -----------------------------------
     -- GREAT AXE
@@ -129,6 +137,7 @@ xi.weaponskill =
     FELL_CLEAVE         = 91,
     UKKOS_FURY          = 92,
     UPHEAVAL            = 93,
+    DISASTER            = 94,
 
     -----------------------------------
     -- SCYTHE
@@ -147,6 +156,7 @@ xi.weaponskill =
     INFERNAL_SCYTHE     = 107,
     QUIETUS             = 108,
     ENTROPY             = 109,
+    ORIGIN              = 110,
 
     -----------------------------------
     -- POLEARM
@@ -165,6 +175,7 @@ xi.weaponskill =
     SONIC_THRUST        = 123,
     CAMLANNS_TORMENT    = 124,
     STARDIVER           = 125,
+    DIARMUID            = 126,
 
     -----------------------------------
     -- KATANA
@@ -183,6 +194,7 @@ xi.weaponskill =
     BLADE_YU            = 139,
     BLADE_HI            = 140,
     BLADE_SHUN          = 141,
+    JIJIN_KAIMETSU      = 142,
 
     -----------------------------------
     -- GREAT KATANA
@@ -202,6 +214,7 @@ xi.weaponskill =
     TACHI_FUDO          = 156,
     TACHI_SHOHA         = 157,
     TACHI_SUIKAWARI     = 158,
+    TACHI_MUMEI         = 159,
 
     -----------------------------------
     -- CLUB
@@ -221,6 +234,8 @@ xi.weaponskill =
     FLASH_NOVA          = 172,
     DAGAN               = 173,
     REALMRAZER          = 174,
+    EXUDATION           = 175,
+    DAGDA               = 234,
 
     -----------------------------------
     -- STAFF
@@ -241,6 +256,7 @@ xi.weaponskill =
     CATACLYSM           = 189,
     MYRKR               = 190,
     SHATTERSOUL         = 191,
+    OSHALA              = 235,
     TARTARUS_TORPOR     = 240,
 
     -----------------------------------
@@ -257,6 +273,7 @@ xi.weaponskill =
     REFULGENT_ARROW     = 201,
     JISHNUS_RADIANCE    = 202,
     APEX_ARROW          = 203,
+    SARV                = 204,
 
     -----------------------------------
     -- MARKSMANSHIP
@@ -274,6 +291,44 @@ xi.weaponskill =
     NUMBING_SHOT        = 219,
     WILDFIRE            = 220,
     LAST_STAND          = 221,
+    TERMINUS            = 222,
+
+    -----------------------------------
+    -- Not yet used
+    -----------------------------------
+    -- placeholder         = 63,
+    -- placeholder         = 79,
+    -- placeholder         = 95,
+    -- placeholder         = 111,
+    -- placeholder         = 127,
+    -- placeholder         = 143,
+    -- placeholder         = 195,
+    -- placeholder         = 205,
+    -- placeholder         = 206,
+    -- placeholder         = 207,
+    -- placeholder         = 211,
+    -- placeholder         = 223,
+    -- placeholder         = 236,
+    -- placeholder         = 237,
+
+    -----------------------------------
+    -- Fomor/Shadow
+    -----------------------------------
+    NETHERSPIKES        = 241,
+    CARNAL_NIGHTMARE    = 242,
+    AEGIS_SCHISM        = 243,
+    DANCING_CHAINS      = 244,
+    BARBED_CRESCENT     = 245,
+    SHACKLED_FISTS      = 246,
+    FOXFIRE             = 247,
+    GRIM_HALO           = 248,
+    NETHERSPIKES_2      = 249,
+    CARNAL_NIGHTMARE_2  = 250,
+    AEGIS_SCHISM_2      = 251,
+    DANCING_CHAINS_2    = 252,
+    BARBED_CRESCENT_2   = 253,
+    VULCAN_SHOT         = 254,
+    DIMENSIONAL_DEATH   = 255,
 }
 xi.ws = xi.weaponskill
 

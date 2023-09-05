@@ -6,9 +6,7 @@
 -- Duration: Instant
 -----------------------------------
 require("scripts/globals/magic")
-require("scripts/globals/msg")
 require("scripts/globals/pets")
-require("scripts/globals/status")
 require("scripts/globals/utils")
 -----------------------------------
 local abilityObject = {}
@@ -50,7 +48,7 @@ abilityObject.onUseAbility = function(player, target, ability)
     local weather         = player:getWeather()
 
     -- Day bonus/penalty
-    if dayElement == xi.magic.dayStrong[spiritEle] then
+    if dayElement == spiritEle then
         weatherDayBonus = weatherDayBonus + 0.1
     elseif dayElement == xi.magic.dayWeak[spiritEle] then
         weatherDayBonus = weatherDayBonus - 0.1

@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Windurst Walls
 --  NPC: Dabaide-Obaide
--- Working 100%
 -----------------------------------
 local entity = {}
 

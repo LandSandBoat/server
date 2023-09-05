@@ -11,9 +11,6 @@
 -- Mind -1
 -- Charisma -1
 -----------------------------------
-require("scripts/globals/status")
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

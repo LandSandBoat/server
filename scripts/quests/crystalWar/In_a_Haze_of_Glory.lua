@@ -6,7 +6,6 @@
 -- Diordinne     : !pos -107.785 0 193.665 164
 -- Wooden Crates : !pos -0.717 3.347 -99.535 164
 -----------------------------------
-require('scripts/globals/keyitems')
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
 require('scripts/globals/zone')

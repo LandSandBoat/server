@@ -2,8 +2,6 @@
 -- func: gotoid
 -- desc: Go to given mob or npc ID
 -----------------------------------
-require("scripts/globals/status")
-
 cmdprops =
 {
     permission = 1,

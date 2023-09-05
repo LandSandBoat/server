@@ -16,11 +16,8 @@
 -- NOTE: Garlaige QM order is based on quest progression
 -----------------------------------
 require('scripts/globals/interaction/quest')
-require('scripts/globals/items')
-require('scripts/globals/keyitems')
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
-require('scripts/globals/status')
 require('scripts/globals/zone')
 -----------------------------------
 local garlaigeID = require("scripts/zones/Garlaige_Citadel/IDs")
@@ -180,7 +177,7 @@ quest.sections =
                         npcUtil.tradeHasExactly(trade, xi.items.PICKAXE) and
                         quest:getVar(player, 'nanaaProg') == 1
                     then
-                        return quest:progressEvent(119, 0, xi.items.ROGUES_POULAINES, 0, xi.items.PICKAXE)
+                        return quest:progressEvent(119, 0, xi.items.ROGUES_POULAINES, player:getNation(), xi.items.PICKAXE)
                     end
                 end,
             },

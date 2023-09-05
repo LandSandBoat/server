@@ -2,6 +2,7 @@
 -- Zone: West_Ronfaure (100)
 -----------------------------------
 local ID = require('scripts/zones/West_Ronfaure/IDs')
+require('scripts/globals/events/sunbreeze_festival')
 require('scripts/quests/i_can_hear_a_rainbow')
 require('scripts/globals/chocobo_digging')
 require('scripts/globals/conquest')
@@ -15,6 +16,7 @@ end
 
 zoneObject.onInitialize = function(zone)
     xi.conq.setRegionalConquestOverseers(zone:getRegionID())
+    xi.events.sunbreeze_festival.showNPCs(zone:getID())
 
     --NM Persistence
     if xi.settings.main.ENABLE_WOTG == 1 then
@@ -30,7 +32,7 @@ zoneObject.onZoneIn = function(player, prevZone)
         player:getYPos() == 0 and
         player:getZPos() == 0
     then
-        player:setPos(-24.427, -53.107, 140, 127)
+        player:setPos(-126, -62, 273, 99)
     end
 
     if quests.rainbow.onZoneIn(player) then
@@ -46,8 +48,16 @@ zoneObject.onZoneOut = function(player)
     end
 end
 
-zoneObject.onConquestUpdate = function(zone, updatetype)
-    xi.conq.onConquestUpdate(zone, updatetype)
+zoneObject.onConquestUpdate = function(zone, updatetype, influence, owner, ranking, isConquestAlliance)
+    xi.conq.onConquestUpdate(zone, updatetype, influence, owner, ranking, isConquestAlliance)
+end
+
+zoneObject.onZoneTick = function(zone)
+    xi.events.sunbreeze_festival.onZoneTick(zone)
+end
+
+zoneObject.onGameHour = function(zone)
+    xi.events.sunbreeze_festival.spawnFireworks(zone)
 end
 
 zoneObject.onGameDay = function()

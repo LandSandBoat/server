@@ -3,9 +3,7 @@
 --  Mob: Goblin Leecher
 -----------------------------------
 local ID = require("scripts/zones/Sauromugue_Champaign/IDs")
-require("scripts/globals/keyitems")
 require("scripts/globals/missions")
-require("scripts/globals/settings")
 require("scripts/globals/regimes")
 -----------------------------------
 local entity = {}

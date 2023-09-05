@@ -5,8 +5,6 @@
 -----------------------------------------
 -- Duration: 20:00 min
 -----------------------------------------
-require("scripts/globals/status")
------------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

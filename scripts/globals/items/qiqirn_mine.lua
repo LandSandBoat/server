@@ -4,7 +4,6 @@
 -- When used, Summons a bomb to blowup a wall
 -----------------------------------
 require("scripts/globals/zone")
-require("scripts/globals/status")
 -----------------------------------
 local itemObject = {}
 

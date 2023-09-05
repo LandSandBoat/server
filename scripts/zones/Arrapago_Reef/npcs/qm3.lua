@@ -4,7 +4,6 @@
 -- !pos 176 -4 182 54
 -----------------------------------
 local ID = require("scripts/zones/Arrapago_Reef/IDs")
-require("scripts/globals/items")
 require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}

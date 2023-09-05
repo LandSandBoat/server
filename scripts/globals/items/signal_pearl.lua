@@ -3,8 +3,6 @@
 -- Item: Signal Pearl
 -- Calls forth an adventuring fellow
 -----------------------------------------
-require("scripts/globals/status")
-require("scripts/globals/msg")
 -----------------------------------------
 local itemObject = {}
 

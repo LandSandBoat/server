@@ -4,7 +4,6 @@
 -----------------------------------
 local ID = require("scripts/zones/Apollyon/IDs")
 require("scripts/globals/mobs")
-require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 
@@ -31,6 +30,7 @@ end
 local finalForm = function(mob)
     mob:setLocalVar("final", 1)
     mob:setAnimationSub(2)
+    mob:setMod(xi.mod.MOVE, 100)
     mob:setMod(xi.mod.ATTP, 250)
     mob:setMod(xi.mod.UDMGPHYS, -5000)
     mob:setMod(xi.mod.UDMGRANGE, -5000)

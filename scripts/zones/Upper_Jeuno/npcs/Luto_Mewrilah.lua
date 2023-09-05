@@ -9,7 +9,6 @@ require("scripts/globals/fellow_utils")
 require("scripts/globals/npc_util")
 require("scripts/globals/quests")
 require("scripts/globals/pets")
-require("scripts/globals/settings")
 require("scripts/globals/utils")
 -----------------------------------
 local entity = {}

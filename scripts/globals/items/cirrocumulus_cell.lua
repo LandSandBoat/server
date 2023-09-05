@@ -3,8 +3,6 @@
 -- ID 5370
 -- Unlocks back and waist equipment
 -----------------------------------
-require("scripts/globals/status")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

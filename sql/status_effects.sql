@@ -29,7 +29,7 @@ CREATE TABLE `status_effects` (
   `min_duration` smallint(5) unsigned NOT NULL DEFAULT 0,
   `sort_key` smallint(5) unsigned NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -184,9 +184,9 @@ INSERT INTO `status_effects` VALUES (146,'accuracy_down',8405026,0,0,0,0,90,4,0,
 INSERT INTO `status_effects` VALUES (147,'attack_down',8405026,0,0,0,0,91,6,0,0);
 INSERT INTO `status_effects` VALUES (148,'evasion_down',8405026,0,0,0,0,92,2,0,0);
 INSERT INTO `status_effects` VALUES (149,'defense_down',8405026,0,0,0,0,93,3,0,0);
-INSERT INTO `status_effects` VALUES (150,'physical_shield',41,0,0,0,0,0,0,0,0);
+INSERT INTO `status_effects` VALUES (150,'physical_shield',40,0,0,0,0,0,0,0,0);
 INSERT INTO `status_effects` VALUES (151,'arrow_shield',33,0,0,0,0,0,0,0,0);
-INSERT INTO `status_effects` VALUES (152,'magic_shield',41,0,0,0,0,0,0,0,0);
+INSERT INTO `status_effects` VALUES (152,'magic_shield',40,0,0,0,0,0,0,0,0);
 INSERT INTO `status_effects` VALUES (153,'damage_spikes',41,34,0,0,0,0,0,0,800);
 INSERT INTO `status_effects` VALUES (154,'shining_ruby',41,0,0,0,0,0,0,0,0);
 INSERT INTO `status_effects` VALUES (155,'medicine',0,0,0,0,0,0,0,0,0);

@@ -11,10 +11,8 @@
 -- Pore-Ohre        : !pos 261 -17 -458 116
 -- Outer Horu. Ruin : !pos 466 0 -660 194
 -- _5e9 - Gate      : !pos 584 0 -660 194
-require('scripts/globals/items')
 require('scripts/globals/missions')
 require('scripts/globals/npc_util')
-require('scripts/globals/keyitems')
 require('scripts/globals/interaction/mission')
 require('scripts/globals/zone')
 -----------------------------------

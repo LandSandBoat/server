@@ -14,7 +14,7 @@ entity.onMobSpawn = function(mob)
 
         if mobArg:getLocalVar("control") == 0 then
             for i = 0, 3 do
-                local golem = GetMobByID(ID.mob.IDOL_THOUGHTS[bfNum][i+1])
+                local golem = GetMobByID(ID.mob.IDOL_THOUGHTS[bfNum][i + 1])
                 golem:setLocalVar("control", 1)
 
                 if golem:getID() ~= mobArg:getID() then
@@ -34,6 +34,7 @@ entity.onMobSpawn = function(mob)
                         golem:useMobAbility(skillID)
                     end
                 end
+
                 golem:timer(5000, function(golemArg)
                     golemArg:setLocalVar("control", 0)
                 end)
@@ -42,7 +43,7 @@ entity.onMobSpawn = function(mob)
     end)
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
 end
 
 return entity

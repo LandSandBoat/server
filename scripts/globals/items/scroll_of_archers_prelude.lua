@@ -6,11 +6,11 @@
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)
-    return target:canLearnSpell(402)
+    return target:canLearnSpell(xi.magic.spell.ARCHERS_PRELUDE)
 end
 
 itemObject.onItemUse = function(target)
-    target:addSpell(402)
+    target:addSpell(xi.magic.spell.ARCHERS_PRELUDE)
 end
 
 return itemObject

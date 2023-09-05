@@ -6,7 +6,6 @@
 local ID = require("scripts/zones/Ghelsba_Outpost/IDs")
 require("scripts/globals/pets/fellow")
 require("scripts/globals/fellow_utils")
-require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 
@@ -36,7 +35,7 @@ entity.onMobFight = function(mob, target)
     end
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
 end
 
 return entity

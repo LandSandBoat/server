@@ -1,7 +1,6 @@
 -----------------------------------
 -- Vaccine - Removes Plague.
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/mobskills")
 -----------------------------------
 local mobskillObject = {}

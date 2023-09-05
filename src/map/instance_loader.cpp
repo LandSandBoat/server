@@ -82,6 +82,7 @@ CInstance* CInstanceLoader::LoadInstance()
             INNER JOIN mob_groups ON mob_groups.groupid = mob_spawn_points.groupid and mob_groups.zoneid=((mob_spawn_points.mobid>>12)&0xFFF) \
             INNER JOIN mob_pools ON mob_groups.poolid = mob_pools.poolid \
             INNER JOIN mob_resistances ON mob_resistances.resist_id = mob_pools.resist_id \
+            INNER JOIN mob_ele_evasion ON mob_ele_evasion.ele_eva_id = mob_pools.ele_eva_id \
             INNER JOIN mob_family_system ON mob_pools.familyid = mob_family_system.familyID \
             WHERE instanceid = %u AND NOT (pos_x = 0 AND pos_y = 0 AND pos_z = 0);";
 
@@ -130,7 +131,7 @@ CInstance* CInstanceLoader::LoadInstance()
             PMob->m_Type        = (uint8)sql->GetIntData(21);
             PMob->m_Immunity    = (IMMUNITY)sql->GetIntData(22);
             PMob->m_EcoSystem   = (ECOSYSTEM)sql->GetIntData(23);
-            PMob->m_ModelRadius = (uint8)sql->GetIntData(24);
+            PMob->m_ModelRadius = (float)sql->GetIntData(24);
 
             PMob->speed    = (uint8)sql->GetIntData(25);
             PMob->speedsub = (uint8)sql->GetIntData(25);

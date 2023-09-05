@@ -1,5 +1,4 @@
 -----------------------------------
---
 -- Confrontation
 --
 -- Confrontation is a status effect that isolates a player or group of players
@@ -22,8 +21,6 @@
 -- - Often, but not always, accompanied by a Level Restriction.
 -----------------------------------
 require("scripts/globals/npc_util")
-require("scripts/globals/settings")
-require("scripts/globals/status")
 require("scripts/globals/zone")
 -----------------------------------
 

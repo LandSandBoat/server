@@ -3,8 +3,6 @@
 -- Item: Terror Screen
 -- Effect: 2 Mins of immunity to "Terror" effects.
 -----------------------------------
-require("scripts/globals/status")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

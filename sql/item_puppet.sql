@@ -16,7 +16,7 @@ CREATE TABLE IF NOT EXISTS `item_puppet` (
   `slot` tinyint(2) unsigned NOT NULL DEFAULT '0',
   `element` int(10) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`itemid`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
 
 --
 -- Contenu de la table `item_puppet`

@@ -1,8 +1,7 @@
 -----------------------------------
 -- ID: 14534
 -- otokogimi_yukata
------------------------------------
-require("scripts/globals/msg")
+-- Dispense: Datechochin x99
 -----------------------------------
 local itemObject = {}
 
@@ -16,7 +15,7 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    target:addItem(5361, 99) -- datechochin
+    target:addItem(xi.items.DATECHOCHIN, 99)
 end
 
 return itemObject

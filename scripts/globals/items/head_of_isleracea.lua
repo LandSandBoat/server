@@ -6,9 +6,6 @@
 -- Agility 2
 -- Vitality -4
 -----------------------------------
-require("scripts/globals/status")
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

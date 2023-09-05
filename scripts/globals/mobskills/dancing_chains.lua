@@ -4,8 +4,6 @@
 --  Notes: Ignores shadows, 10' AoE radius
 -----------------------------------
 require("scripts/globals/mobskills")
-require("scripts/globals/settings")
-require("scripts/globals/status")
 -----------------------------------
 local mobskillObject = {}
 

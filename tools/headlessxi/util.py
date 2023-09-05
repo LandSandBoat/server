@@ -36,6 +36,18 @@ class util:
         return struct.unpack_from("<I", data, offset)[0]
 
     @staticmethod
+    def unpack_string(data, offset, length):
+        string = ""
+        for idx in range(length):
+            string = string + chr(data[offset + idx])
+        return string
+
+    @staticmethod
+    def pack_string(data, offset, input, length):
+        for idx in range(length):
+            data[idx + offset] = ord(input[idx])
+
+    @staticmethod
     def pack_16(data):
         return struct.pack("<H", data)
 

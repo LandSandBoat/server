@@ -3,9 +3,7 @@
 --  NPC: Imperial Whitegate
 -- pos: 152, -2, 0, 50
 -----------------------------------
-require("scripts/globals/items")
 require("scripts/globals/missions")
-require("scripts/globals/status")
 require("scripts/globals/titles")
 require("scripts/globals/besieged")
 require("scripts/globals/npc_util")

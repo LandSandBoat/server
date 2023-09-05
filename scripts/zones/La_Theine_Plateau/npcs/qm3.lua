@@ -4,11 +4,8 @@
 -- Involved in Quest: I Can Hear A Rainbow, Waking the Beast
 -----------------------------------
 local ID = require("scripts/zones/La_Theine_Plateau/IDs")
-require("scripts/globals/spell_data")
-require("scripts/globals/keyitems")
 require("scripts/globals/npc_util")
 require("scripts/globals/quests")
-require("scripts/globals/status")
 require("scripts/globals/titles")
 require("scripts/globals/utils")
 -----------------------------------
@@ -36,7 +33,7 @@ entity.onEventFinish = function(player, csid, option)
             title = xi.title.RAINBOW_WEAVER,
         })
         player:unlockJob(xi.job.SMN)
-        player:addSpell(296)
+        player:addSpell(xi.magic.spell.CARBUNCLE)
         player:messageSpecial(ID.text.UNLOCK_SUMMONER)
         player:messageSpecial(ID.text.UNLOCK_CARBUNCLE)
         player:setCharVar("I_CAN_HEAR_A_RAINBOW", 0)

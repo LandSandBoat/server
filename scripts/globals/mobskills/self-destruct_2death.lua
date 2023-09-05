@@ -2,8 +2,6 @@
 -- Self-Destruct
 -- Bomb Cluster Self Destruct - 2 Bombs up
 -----------------------------------
-require("scripts/globals/settings")
-require("scripts/globals/status")
 require("scripts/globals/mobskills")
 -----------------------------------
 local mobskillObject = {}

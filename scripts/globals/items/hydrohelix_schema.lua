@@ -6,11 +6,11 @@
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)
-    return target:canLearnSpell(279)
+    return target:canLearnSpell(xi.magic.spell.HYDROHELIX)
 end
 
 itemObject.onItemUse = function(target)
-    target:addSpell(279)
+    target:addSpell(xi.magic.spell.HYDROHELIX)
 end
 
 return itemObject

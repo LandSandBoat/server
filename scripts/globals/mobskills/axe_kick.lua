@@ -3,7 +3,6 @@
 -- Shiva delivers a single-hit blunt attack on target
 -----------------------------------
 require("scripts/globals/mobskills")
-require("scripts/globals/status")
 -----------------------------------
 local mobskillObject = {}
 

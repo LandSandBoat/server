@@ -20,4 +20,4 @@ CREATE TABLE `char_history` (
   `gm_calls` int(10) unsigned NOT NULL DEFAULT '0',
   `distance_travelled` int(10) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`charid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;

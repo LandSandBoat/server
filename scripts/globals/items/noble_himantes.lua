@@ -1,7 +1,7 @@
 -----------------------------------
 -- ID: 18755
 -- Item: Noble Himantes
--- Item Effect: TP +10
+-- Item Effect: TP +100
 -- Durration: Instant
 -----------------------------------
 local itemObject = {}

@@ -3,8 +3,6 @@
 -- Commands pet to use one of their abilities
 -----------------------------------
 require("scripts/globals/mobskills")
-require("scripts/globals/status")
-require("scripts/globals/msg")
 -----------------------------------
 local ID = require("scripts/zones/Mine_Shaft_2716/IDs")
 -----------------------------------

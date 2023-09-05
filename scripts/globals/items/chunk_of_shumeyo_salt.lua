@@ -3,9 +3,6 @@
 -- Item: Chunk Of Shu'Meyo Salt
 -- Effect: Adds 20 seconds to the Snoll Tzar fight
 -----------------------------------------
-require("scripts/globals/msg")
-require("scripts/globals/status")
-require("scripts/globals/player")
 local ID = require("scripts/zones/Bearclaw_Pinnacle/IDs")
 -----------------------------------------
 local itemObject = {}

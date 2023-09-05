@@ -6,9 +6,6 @@
 -- defense % 30
 -- defense % 25
 -----------------------------------
-require("scripts/globals/status")
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

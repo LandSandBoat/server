@@ -9,7 +9,7 @@ CREATE TABLE IF NOT EXISTS `gardening_results` (
   `max_quantity` tinyint(2) unsigned NOT NULL DEFAULT '0',
   `weight` smallint(4) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`resultId`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AVG_ROW_LENGTH=23;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 AVG_ROW_LENGTH=23;
 
 INSERT INTO `gardening_results` VALUES (1, 1, 0, 0, 936, 12, 24, 30); -- Rock Salt
 INSERT INTO `gardening_results` VALUES (2, 1, 0, 0, 4449, 1, 2, 30); -- Reishi Mushroom

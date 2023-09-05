@@ -3,9 +3,7 @@
 -- Deals multiple hits to a single target.
 -- Only used by Eldritch Edge, Malefic Fencer, and Nightmare Weapon.
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/mobskills")
-require("scripts/globals/settings")
 -----------------------------------
 local mobskillObject = {}
 

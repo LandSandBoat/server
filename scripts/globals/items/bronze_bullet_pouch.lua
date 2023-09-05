@@ -3,8 +3,6 @@
 -- Item: Bronze Bullet Pouch
 -- When used, you will obtain one stack of Bronze Bullets
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)
@@ -17,7 +15,7 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    target:addItem(17343, 99)
+    target:addItem(xi.items.BRONZE_BULLET, 99)
 end
 
 return itemObject

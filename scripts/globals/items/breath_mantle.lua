@@ -3,9 +3,6 @@
 -- Item: Breath Mantle
 -- Item Effect: HP+18 / Enmity+3
 -----------------------------------
-require("scripts/globals/settings")
-require("scripts/globals/status")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

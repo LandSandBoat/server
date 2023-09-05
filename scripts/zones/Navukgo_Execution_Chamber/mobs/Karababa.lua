@@ -2,7 +2,6 @@
 -- Area: Navukgo Execution Chamber
 --  Mob: Karababa
 -----------------------------------
-require("scripts/globals/status")
 local ID = require("scripts/zones/Navukgo_Execution_Chamber/IDs")
 -----------------------------------
 local entity = {}

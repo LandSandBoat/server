@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Windurst Waters
 --  NPC: Caliburn
--- Working 100%
 -----------------------------------
 require("scripts/globals/pathfind")
 -----------------------------------

@@ -3,8 +3,6 @@
 -- Item: Sleeping Potion
 -- Item Effect: This potion induces sleep.
 -----------------------------------
-require("scripts/globals/status")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

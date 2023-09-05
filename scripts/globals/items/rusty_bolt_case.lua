@@ -2,8 +2,6 @@
 -- ID: 4197
 -- rusty_bolt_case
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

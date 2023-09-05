@@ -1,9 +1,7 @@
 -----------------------------------
 -- Spell: Bind
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/magic")
-require("scripts/globals/msg")
 -----------------------------------
 local spellObject = {}
 
@@ -34,6 +32,8 @@ spellObject.onSpellCast = function(caster, target, spell)
 
         if target:addStatusEffect(xi.effect.BIND, target:getSpeed(), 0, resduration) then
             spell:setMsg(xi.msg.basic.MAGIC_ENFEEB_IS)
+            -- only increment the resbuild if successful (not on a no effect)
+            xi.magic.incrementBuildDuration(target, params.effect, caster)
             xi.magic.handleBurstMsg(caster, target, spell)
         else
             spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)

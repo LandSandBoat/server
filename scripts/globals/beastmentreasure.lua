@@ -2,9 +2,7 @@
 -- Beastmen Treasure side quests
 -- https://ffxiclopedia.fandom.com/wiki/Beastmen_Treasure
 -----------------------------------
-require('scripts/globals/keyitems')
 require('scripts/globals/quests')
-require('scripts/globals/status')
 require('scripts/globals/zone')
 -----------------------------------
 xi = xi or {}
@@ -281,7 +279,7 @@ xi.beastmentreasure.handleQmOnTrade = function(player, npc, trade, digsiteids)
     local digsite = getAssignedDigSite(player)
 
     if
-        npcUtil.tradeHasExactly(trade, 605) and
+        npcUtil.tradeHasExactly(trade, xi.items.PICKAXE) and
         player:getCharVar(zoneData[zoneid].statusvar) == QUEST_COMPLETED and
         npc:getID() == digsiteids[digsite]
     then

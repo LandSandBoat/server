@@ -2,7 +2,6 @@
 -- Zone: Fort_Karugo-Narugo_[S] (96)
 -----------------------------------
 local ID = require('scripts/zones/Fort_Karugo-Narugo_[S]/IDs')
-require('scripts/globals/status')
 require('scripts/globals/helm')
 -----------------------------------
 local zoneObject = {}
@@ -19,7 +18,7 @@ zoneObject.onZoneIn = function(player, prevZone)
         player:getYPos() == 0 and
         player:getZPos() == 0
     then
-        player:setPos(820, 25.782, 117.991, 66)
+        player:setPos(135, -21, 578, 171)
     end
 
     return cs

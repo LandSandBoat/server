@@ -3,9 +3,6 @@
 -- Mandragora Belt
 -- Enchantment: 60Min, Costume - Mandragora
 -----------------------------------
-require("scripts/globals/status")
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

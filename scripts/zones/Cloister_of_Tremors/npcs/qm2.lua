@@ -5,7 +5,6 @@
 -- Notes: Used to obtain a Tremor Stone
 -- !pos -545.184, 1.855, -495.693 209
 -----------------------------------
-require('scripts/globals/items')
 require('scripts/globals/npc_util')
 -----------------------------------
 local entity = {}

@@ -24,4 +24,4 @@ CREATE TABLE IF NOT EXISTS `char_effects` (
   `flags` int(8) unsigned NOT NULL DEFAULT '0',
   `timestamp` int(10) unsigned NOT NULL DEFAULT '0',
   KEY `charid` (`charid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;

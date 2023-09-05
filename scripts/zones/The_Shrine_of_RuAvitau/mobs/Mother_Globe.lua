@@ -5,7 +5,6 @@
 -- TODO: "Links with Slave Globes, and Slave Globes link with Defenders. Defenders do not link with Slave Globes or Mother Globe."
 -----------------------------------
 local ID = require("scripts/zones/The_Shrine_of_RuAvitau/IDs")
-require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 
@@ -110,6 +109,8 @@ local spawnSlaveGlobe = function(mg, slaveGlobe, spawnPos)
     else
         mg:entityAnimationPacket("casm")
         local pPet = slaveGlobe:getID() - 1
+        local pet = GetMobByID(pPet)
+
         mg:timer(3000, function(mob)
             if mob:isAlive() then
                 mob:entityAnimationPacket("shsm")
@@ -117,7 +118,7 @@ local spawnSlaveGlobe = function(mg, slaveGlobe, spawnPos)
                 if pPet == nil then
                     slaveGlobe:pathTo(mob:getXPos() + 0.15, mob:getYPos(), mob:getZPos() + 0.15)
                 else
-                    slaveGlobe:pathTo(pPet:getXPos() + 0.5, pPet:getYPos(), pPet:getZPos() + 0.5)
+                    slaveGlobe:pathTo(pet:getXPos() + 0.5, pet:getYPos(), pet:getZPos() + 0.5)
                 end
             end
         end)

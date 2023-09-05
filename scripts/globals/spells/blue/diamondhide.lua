@@ -14,9 +14,6 @@
 -- Combos: None
 -----------------------------------
 require("scripts/globals/bluemagic")
-require("scripts/globals/settings")
-require("scripts/globals/status")
-require("scripts/globals/msg")
 -----------------------------------
 local spellObject = {}
 
@@ -26,9 +23,9 @@ end
 
 spellObject.onSpellCast = function(caster, target, spell)
     local typeEffect = xi.effect.STONESKIN
-    local blueskill = caster:getSkillLevel(xi.skill.BLUE_MAGIC)
-    local power = (blueskill / 3) * 2
-    local duration = 300
+    local blueSkill = utils.clamp(caster:getSkillLevel(xi.skill.BLUE_MAGIC), 0, 500)
+    local power = (blueSkill / 3) * 2
+    local duration = xi.spells.blue.calculateDurationWithDiffusion(caster, 300)
 
     if not target:addStatusEffect(typeEffect, power, 0, duration, 0, 0, 2) then
         spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)

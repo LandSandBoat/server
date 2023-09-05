@@ -5,8 +5,6 @@
 -- Teleports Players to Abyssea - Tahrongi
 -----------------------------------
 local ID = require("scripts/zones/Tahrongi_Canyon/IDs")
-require("scripts/globals/keyitems")
-require("scripts/globals/settings")
 require("scripts/globals/abyssea")
 require("scripts/globals/quests")
 -----------------------------------

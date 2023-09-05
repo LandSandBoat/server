@@ -6,8 +6,6 @@
 -----------------------------------
 local ID = require("scripts/zones/Selbina/IDs")
 require("scripts/globals/shop")
-require("scripts/globals/settings")
-require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 

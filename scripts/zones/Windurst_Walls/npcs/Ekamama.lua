@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Windurst Walls
 --  NPC: Ekamama
--- Working 100%
 -----------------------------------
 local entity = {}
 

@@ -5,7 +5,6 @@
 -- !pos -10.470 -6.25 -141.700 241
 -----------------------------------
 local ID = require("scripts/zones/Aht_Urhgan_Whitegate/IDs")
-require("scripts/globals/status")
 require("scripts/globals/crafting")
 -----------------------------------
 local entity = {}
@@ -14,10 +13,9 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local guildMember = xi.crafting.isGuildMember(player, 1)
     local skillLevel = player:getSkillLevel(xi.skill.ALCHEMY)
 
-    if guildMember == 1 then
+    if xi.crafting.hasJoinedGuild(player, xi.crafting.guild.ALCHEMY) then
         if not player:hasStatusEffect(xi.effect.ALCHEMY_IMAGERY) then
             player:startEvent(638, 4, skillLevel, 1, 511, 187, 0, 7, 2184)
         else

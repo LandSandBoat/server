@@ -3,8 +3,6 @@
 -- Item: Tarutaru Snare
 -- Item Effect: Mob hits for only 1 or 2(crit) damage for 60 seconds
 -----------------------------------------
-require("scripts/globals/status")
-require("scripts/globals/msg")
 -----------------------------------------
 local itemObject = {}
 

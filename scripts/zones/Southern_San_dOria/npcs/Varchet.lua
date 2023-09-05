@@ -53,18 +53,14 @@ entity.onEventFinish = function(player, csid, option)
     if csid == 519 then
         local result = player:getLocalVar('VarchetGame')
         if result == gameWon then
-            local gilPayout = 10
-            player:addGil(gilPayout)
-            player:messageSpecial(ID.text.GIL_OBTAINED, gilPayout)
+            npcUtil.giveCurrency(player, 'gil', 10)
 
             if player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.EXIT_THE_GAMBLER) == QUEST_ACCEPTED then
                 player:setCharVar("exitTheGamblerStat", 1)
                 player:showText(player:getEventTarget(), ID.text.VARCHET_KEEP_PROMISE)
             end
         elseif result == gameTie then
-            local gilPayout = 5
-            player:addGil(gilPayout)
-            player:messageSpecial(ID.text.GIL_OBTAINED, gilPayout)
+            npcUtil.giveCurrency(player, 'gil', 5)
         else
             player:messageSpecial(ID.text.VARCHET_BET_LOST)
         end

@@ -2,9 +2,6 @@
 -- func: setweather
 -- desc: Sets the current weather for the current zone.
 -----------------------------------
-
-require("scripts/globals/world")
-
 cmdprops =
 {
     permission = 1,

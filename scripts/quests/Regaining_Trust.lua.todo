@@ -4,7 +4,6 @@
 -- Monberaux !pos -42 0 -2 244
 -- Giant Footprint !pos -501 -11 354 126
 -----------------------------------
-require('scripts/globals/items')
 -- require("scripts/globals/pets/fellow")
 require('scripts/globals/quests')
 require('scripts/globals/interaction/quest')

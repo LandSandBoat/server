@@ -1,9 +1,6 @@
 require('scripts/globals/abyssea')
 require("scripts/globals/gear_sets")
-require("scripts/globals/keyitems")
 require("scripts/globals/quests")
-require("scripts/globals/settings")
-require("scripts/globals/status")
 require("scripts/globals/teleports")
 require("scripts/globals/titles")
 require("scripts/globals/zone")
@@ -139,8 +136,9 @@ xi.player.charCreate = function(player)
         player:setGil(xi.settings.main.START_GIL)
     end
 
-    if xi.settings.main.NEW_CHARACTER_CUTSCENE == 0 then -- Add coupon that would normally be added in cutscene.
+    if xi.settings.main.NEW_CHARACTER_CUTSCENE == 0 then -- Do things that would normally be done in opening cutscene.
         player:addItem(xi.items.ADVENTURERS_COUPON)
+        player:setHomePoint()
     end
 
     player:addTitle(xi.title.NEW_ADVENTURER)

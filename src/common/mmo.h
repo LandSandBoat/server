@@ -140,11 +140,16 @@ enum MSGSERVTYPE : uint8
     MSG_PT_INV_RES,
     MSG_PT_RELOAD,
     MSG_PT_DISBAND,
+    MSG_ALLIANCE_DISSOLVE,
     MSG_DIRECT,
     MSG_LINKSHELL_RANK_CHANGE,
     MSG_LINKSHELL_REMOVE,
     MSG_LUA_FUNCTION,
     MSG_CHARVAR_UPDATE,
+
+    // conquest, besieged, campaign..
+    MSG_WORLD2MAP_REGIONAL_EVENT,
+    MSG_MAP2WORLD_REGIONAL_EVENT,
 
     // gm commands
     MSG_SEND_TO_ZONE,
@@ -153,6 +158,42 @@ enum MSGSERVTYPE : uint8
     // rpc
     MSG_RPC_SEND, // sent by sender -> reciever
     MSG_RPC_RECV, // sent by reciever -> sender
+};
+
+enum REGIONALMSGTYPE : uint8
+{
+    REGIONAL_EVT_MSG_CONQUEST,
+    REGIONAL_EVT_MSG_BESIEGED,
+    REGIONAL_EVT_MSG_CAMPAIGN,
+    REGIONAL_EVT_MSG_COLONIZATION,
+};
+
+enum CONQUESTMSGTYPE : uint8
+{
+    // WORLD --------> MAP
+
+    // World map broadcasts weekly update started to all zones
+    CONQUEST_WORLD2MAP_WEEKLY_UPDATE_START,
+    // World map broadcasts that update is done, with the respective tally
+    CONQUEST_WORLD2MAP_WEEKLY_UPDATE_END,
+    // World map broadcasts influence point updates to all zones.
+    // Used for periodic updates or initialization.
+    CONQUEST_WORLD2MAP_INFLUENCE_POINTS,
+    // World map broadcasts region control data to all zones.
+    // Used for initialization.
+    CONQUEST_WORLD2MAP_REGION_CONTROL,
+
+    // MAP ----------> WORLD
+
+    // A GM Triggers a weekly update. From one zone to world.
+    // World should send CONQUEST_WORLD2MAP_WEEKLY_UPDATE_START and
+    // CONQUEST_WORLD2MAP_WEEKLY_UPDATE_END when done
+    CONQUEST_MAP2WORLD_GM_WEEKLY_UPDATE,
+    // A GM requests houry conquest data (just influence points).
+    // World server should respond with CONQUEST_WORLD2MAP_INFLUENCE_POINTS triggering a zone update
+    CONQUEST_MAP2WORLD_GM_CONQUEST_UPDATE,
+    // Influence point update from any zone to world.
+    CONQUEST_MAP2WORLD_ADD_INFLUENCE_POINTS,
 };
 
 constexpr auto msgTypeToStr = [](uint8 msgtype)
@@ -181,6 +222,8 @@ constexpr auto msgTypeToStr = [](uint8 msgtype)
             return "MSG_PT_RELOAD";
         case MSG_PT_DISBAND:
             return "MSG_PT_DISBAND";
+        case MSG_ALLIANCE_DISSOLVE:
+            return "MSG_ALLIANCE_DISSOLVE";
         case MSG_DIRECT:
             return "MSG_DIRECT";
         case MSG_LINKSHELL_RANK_CHANGE:
@@ -199,6 +242,8 @@ constexpr auto msgTypeToStr = [](uint8 msgtype)
             return "MSG_RPC_SEND";
         case MSG_RPC_RECV:
             return "MSG_RPC_RECV";
+        case MSG_WORLD2MAP_REGIONAL_EVENT:
+            return "MSG_WORLD2MAP_REGIONAL_EVENT";
         default:
             return "Unknown";
     };

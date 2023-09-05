@@ -4,7 +4,6 @@
 -- Certain NMs may have a higher power version of the xi.effect.
 -----------------------------------
 require("scripts/globals/mobskills")
-require("scripts/globals/status")
 require("scripts/globals/zone")
 -----------------------------------
 local mobskillObject = {}

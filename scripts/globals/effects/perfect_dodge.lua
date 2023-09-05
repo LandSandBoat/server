@@ -2,7 +2,6 @@
 -- xi.effect.PERFECT_DODGE
 -----------------------------------
 require("scripts/globals/jobpoints")
-require("scripts/globals/status")
 -----------------------------------
 local effectObject = {}
 

@@ -6,7 +6,6 @@
 -----------------------------------
 local ID = require("scripts/zones/Arrapago_Reef/IDs")
 require("scripts/globals/instance")
-require("scripts/globals/keyitems")
 require("scripts/globals/missions")
 -----------------------------------
 local entity = {}

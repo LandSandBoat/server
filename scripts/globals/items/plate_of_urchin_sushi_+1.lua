@@ -9,9 +9,6 @@
 -- Accuracy % 16 (cap 76)
 -- Ranged ACC % 16 (cap 76)
 -----------------------------------
-require("scripts/globals/status")
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

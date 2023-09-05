@@ -1,8 +1,6 @@
 -----------------------------------
 -- xi.effect.EMBOLDEN
 -----------------------------------
-require("scripts/globals/status")
------------------------------------
 local effectObject = {}
 
 -- these functions are intentionally blank. See scripts/globals/spells/spell_enhancing.lua

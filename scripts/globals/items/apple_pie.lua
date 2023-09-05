@@ -7,9 +7,6 @@
 -- Agility -1
 -- Intelligence 3
 -----------------------------------
-require("scripts/globals/status")
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

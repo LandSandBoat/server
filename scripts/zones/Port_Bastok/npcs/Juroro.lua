@@ -4,8 +4,6 @@
 -- Starts and Finishes Quest: Trial by Earth
 -- !pos 32 7 -41 236
 -----------------------------------
-require("scripts/globals/settings")
-require("scripts/globals/keyitems")
 require("scripts/globals/quests")
 local ID = require("scripts/zones/Port_Bastok/IDs")
 -----------------------------------
@@ -50,7 +48,7 @@ entity.onTrigger = function(player, npc)
             numitem = numitem + 8
         end   -- Desert Light
 
-        if player:hasSpell(299) then
+        if player:hasSpell(xi.magic.spell.TITAN) then
             numitem = numitem + 32
         end  -- Ability to summon Titan
 
@@ -92,10 +90,9 @@ entity.onEventFinish = function(player, csid, option)
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, item)
         else
             if option == 5 then
-                player:addGil(xi.settings.main.GIL_RATE * 10000)
-                player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.main.GIL_RATE * 10000) -- Gils
+                npcUtil.giveCurrency(player, 'gil', 10000)
             elseif option == 6 then
-                player:addSpell(299) -- Avatar Titan Spell
+                player:addSpell(xi.magic.spell.TITAN) -- Avatar Titan Spell
                 player:messageSpecial(ID.text.TITAN_UNLOCKED, 0, 0, 1)
             else
                 player:addItem(item)

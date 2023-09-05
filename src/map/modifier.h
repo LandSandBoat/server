@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
   Copyright (c) 2010-2015 Darkstar Dev Teams
   This program is free software: you can redistribute it and/or modify
@@ -21,7 +21,7 @@
 
 enum class Mod
 {
-    // IF YOU ADD ANY NEW MODIFIER HERE, ADD IT IN scripts/globals/status.lua ASWELL!
+    // IF YOU ADD ANY NEW MODIFIER HERE, ADD IT IN scripts/enum/mod.lua ASWELL!
 
     NONE = 0,       // Essential, but does nothing :)
                     //  NAME                  = ID, // Comment
@@ -43,14 +43,24 @@ enum class Mod
 
     // Magic Evasion versus elements (resistance)
     // This has been repeatedly mixed up with SDT - be careful!
-    FIRE_MEVA    = 15, // Fire Resistance
-    ICE_MEVA     = 16, // Ice Resistance
-    WIND_MEVA    = 17, // Wind Resistance
-    EARTH_MEVA   = 18, // Earth Resistance
-    THUNDER_MEVA = 19, // Thunder Resistance
-    WATER_MEVA   = 20, // Water Resistance
-    LIGHT_MEVA   = 21, // Light Resistance
-    DARK_MEVA    = 22, // Dark Resistance
+    FIRE_MEVA    = 15, // Fire Magic Evasion
+    ICE_MEVA     = 16, // Ice Magic Evasion
+    WIND_MEVA    = 17, // Wind Magic Evasion
+    EARTH_MEVA   = 18, // Earth Magic Evasion
+    THUNDER_MEVA = 19, // Thunder Magic Evasion
+    WATER_MEVA   = 20, // Water Magic Evasion
+    LIGHT_MEVA   = 21, // Light Magic Evasion
+    DARK_MEVA    = 22, // Dark Magic Evasion
+
+    // Magic Evasion RANK versus elements (resistance ranks)
+    FIRE_RES_RANK    = 192, // Fire Resistance Rank
+    ICE_RES_RANK     = 193, // Ice Resistance Rank
+    WIND_RES_RANK    = 194, // Wind Resistance Rank
+    EARTH_RES_RANK   = 195, // Earth Resistance Rank
+    THUNDER_RES_RANK = 196, // Thunder Resistance Rank
+    WATER_RES_RANK   = 197, // Water Resistance Rank
+    LIGHT_RES_RANK   = 198, // Light Resistance Rank
+    DARK_RES_RANK    = 199, // Dark Resistance Rank
 
     ATT  = 23, // Attack
     RATT = 24, // Ranged Attack
@@ -277,11 +287,11 @@ enum class Mod
     DEMON_KILLER             = 234,  // Enhances "Demon Killer" effect
     EMPTY_KILLER             = 235,  // Enhances "Empty Killer" effect
     HUMANOID_KILLER          = 236,  // Enhances "Humanoid Killer" effect
-    LUMORIAN_KILLER          = 237,  // Enhances "Lumorian Killer" effect
+    LUMINIAN_KILLER          = 237,  // Enhances "Luminian Killer" effect
     LUMINION_KILLER          = 238,  // Enhances "Luminion Killer" effect
     WYRMAL_ABJ_KILLER_EFFECT = 1178, // Wyrmal Abjuration(Crimson / Blood) which makes players susceptible to Dragon Killer effects
 
-    // Resistances to enfeebles - Traits/Job Ability
+    // Resistances to enfeebles - Job Traits/Job Abilities/Atmas/Items/Gear
     SLEEPRES    = 240, // Enhances "Resist Sleep" effect
     POISONRES   = 241, // Enhances "Resist Poison" effect
     PARALYZERES = 242, // Enhances "Resist Paralyze" effect
@@ -299,6 +309,37 @@ enum class Mod
     LULLABYRES  = 254, // Enhances "Resist Lullaby" effect
     DEATHRES    = 255, // Used by gear and ATMA that give resistance to instance KO
     STATUSRES   = 958, // "Resistance to All Status Ailments"
+
+    // MEVA bonus to enfeebles (Bar-Effect, for example. And modifiers in mobs)
+    SLEEP_MEVA    = 200,
+    POISON_MEVA   = 201,
+    PARALYZE_MEVA = 202,
+    BLIND_MEVA    = 203,
+    SILENCE_MEVA  = 204,
+    VIRUS_MEVA    = 205,
+    PETRIFY_MEVA  = 206,
+    BIND_MEVA     = 207,
+    CURSE_MEVA    = 208,
+    GRAVITY_MEVA  = 209,
+    SLOW_MEVA     = 210,
+    STUN_MEVA     = 211,
+    CHARM_MEVA    = 212,
+    AMNESIA_MEVA  = 213,
+    LULLABY_MEVA  = 214,
+    DEATH_MEVA    = 215,
+    STATUS_MEVA   = 216,
+
+    // Status effect Immunobreak modifiers.
+    SLEEP_IMMUNOBREAK    = 261,
+    POISON_IMMUNOBREAK   = 262,
+    PARALYZE_IMMUNOBREAK = 263,
+    BLIND_IMMUNOBREAK    = 264,
+    SILENCE_IMMUNOBREAK  = 265,
+    PETRIFY_IMMUNOBREAK  = 266,
+    BIND_IMMUNOBREAK     = 267,
+    GRAVITY_IMMUNOBREAK  = 268,
+    SLOW_IMMUNOBREAK     = 269,
+    ADDLE_IMMUNOBREAK    = 270,
 
     PARALYZE      = 257, // Paralyze -- percent chance to proc
     MIJIN_RERAISE = 258, // Augments Mijin Gakure
@@ -503,6 +544,7 @@ enum class Mod
     AVATAR_LVL_BONUS          = 1040, // Avatar: Lv.+ (Increases all avatar's base level above 99)
     CARBUNCLE_LVL_BONUS       = 1041, // Carbuncle: Lv.+ (Increases Carbuncle's base level above 99)
     CAIT_SITH_LVL_BONUS       = 1042, // Cait Sith: Lv.+ (Increases Cait Sith's base level above 99)
+    ENHANCES_MANA_CEDE        = 74,   // Bonus % to Mana Cede effect, +1 = 1%
     SPIRIT_SPELLCAST_DELAY    = 1179, // Reduces the time between spellcasts of a summoned spirit by seconds provided
 
     // Blue Mage
@@ -929,6 +971,9 @@ enum class Mod
     AUGMENT_BLU_MAGIC      = 1036, // Percent chance for BLU magic to receive 3x WSC value for spell (BLU AF3 Sets)
     GEOMANCY_MP_NO_DEPLETE = 1037, // Percent chance for Geomancy to cost 0 MP (GEO AF3 Sets)
 
+    DIG_BYPASS_FATIGUE = 1074, // Chocobo digging modifier found in "Blue Race Silks". Modifier works as a direct percent.
+    BREATH_DMG_DEALT   = 1075, // Breath damage dealt
+
     // Permenant Resistance Build Modifiers
     SLEEPRESBUILD          = 1138, // Used to create a resbuild for the appropriate effect. Will decrease overall duration of effect. (Out of 1000)
     POISONRESBUILD         = 1139, // Used to create a resbuild for the appropriate effect. Will decrease overall duration of effect. (Out of 1000)
@@ -949,7 +994,7 @@ enum class Mod
     PET_DMG_TAKEN_PHYSICAL = 1154, // Percent increase/decrease in pet physical damage taken for the target.
     PET_DMG_TAKEN_MAGICAL  = 1155, // Percent increase/decrease in pet physical damage taken for the target.
     PET_DMG_TAKEN_BREATH   = 1156, // Percent increase/decrease in pet physical damage taken for the target.
-    DIG_BYPASS_FATIGUE     = 1157, // Chocobo digging modifier found in "Blue Race Silks". Modifier works as a direct percent. Used in Chocobo_Digging.lua
+    // 1157 FREE
     FIRE_EEM               = 1158, // Elemental Evasion Multiplier (Known as SDT in common magic accuracy formulas) (out of 100)
     ICE_EEM                = 1159, // Elemental Evasion Multiplier (Known as SDT in common magic accuracy formulas) (out of 100)
     WIND_EEM               = 1160, // Elemental Evasion Multiplier (Known as SDT in common magic accuracy formulas) (out of 100)
@@ -963,27 +1008,26 @@ enum class Mod
     CRITHITRATE_SLOT       = 1168, // CRITHITRATE for slot
     ATT_SLOT               = 1169, // ATT for slot
     UDMG                   = 1170, // Uncapped dmg taken (all types)
-    SLEEP_MEVA             = 1171, // Sleep MEVA from Barspells
-    POISON_MEVA            = 1172, // Poison MEVA from Barspells
-    PARALYZE_MEVA          = 1173, // Paralyze MEVA from Barspells
-    BLIND_MEVA             = 1174, // Blind MEVA from Barspells
-    SILENCE_MEVA           = 1175, // Silence MEVA from Barspells
-    VIRUS_MEVA             = 1176, // Virus MEVA from Barspells
-    PETRIFY_MEVA           = 1177, // Petrify MEVA from Barspells
 
-    // IF YOU ADD ANY NEW MODIFIER HERE, ADD IT IN scripts/globals/status.lua ASWELL!
+    // Per PR comment - New ASB section starting at 2000
+    TANDEM_STRIKE = 2000, // Beastmaster trait - provides acc/macc to master and pet when both engage the same target
+    TANDEM_BLOW   = 2001, // Beastmaster trait - provides subtle blow to master and pet when both engage the same target
+
+    // IF YOU ADD ANY NEW MODIFIER HERE, ADD IT IN scripts/enum/mod.lua ASWELL!
 
     // The spares take care of finding the next ID to use so long as we don't forget to list IDs that have been freed up by refactoring.
     // 570 through 825 used by WS DMG mods these are not spares.
     //
     // SPARE IDs:
-    // 74 to 79
+    // 75 to 79
     // 138 to 143
     // 156 to 159
-    // 192 to 223
-    // 261 to 280
+    // 217 to 223
+    // 271 to 280
     //
-    // SPARE = 1181, and onward
+    // 1076 and onward are RESERVED for LSB/core values
+    //
+    // ANY ASB ADDITIONS SHOULD BE 2002++
 };
 
 // temporary workaround for using enum class as unordered_map key until compilers support it

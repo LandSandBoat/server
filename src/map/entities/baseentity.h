@@ -22,9 +22,10 @@
 #ifndef _BASEENTITY_H
 #define _BASEENTITY_H
 
-#include "../packets/message_basic.h"
 #include "common/cbasetypes.h"
 #include "common/mmo.h"
+#include "packets/message_basic.h"
+
 #include <map>
 #include <memory>
 #include <vector>
@@ -44,7 +45,7 @@ enum ENTITYTYPE : uint8
 enum class STATUS_TYPE : uint8
 {
     NORMAL        = 0,
-    MOB           = 1,
+    UPDATE        = 1,
     DISAPPEAR     = 2,
     INVISIBLE     = 3,
     STATUS_4      = 4,
@@ -142,8 +143,9 @@ enum MOUNTTYPE : uint8
     MOUNT_BYAKKO         = 33,
     MOUNT_NOBLE_CHOCOBO  = 34, // NOTE: This is currently blank, probably needs additional packets sent
     MOUNT_IXION          = 35,
+    MOUNT_PHUABO         = 36,
     //
-    MOUNT_MAX = 36,
+    MOUNT_MAX = 37,
 };
 
 enum class ALLEGIANCE_TYPE : uint8
@@ -216,6 +218,9 @@ struct EntityID_t
     uint16 targid;
 };
 
+class CAIContainer;
+class CBattlefield;
+class CInstance;
 class CZone;
 
 struct location_t
@@ -236,10 +241,6 @@ struct location_t
     {
     }
 };
-
-class CAIContainer;
-class CInstance;
-class CBattlefield;
 
 /************************************************************************
  *                                                                       *
@@ -270,6 +271,9 @@ public:
     bool         IsNameHidden() const;    // checks if name is hidden
     virtual bool GetUntargetable() const; // checks if entity is untargetable
     virtual bool isWideScannable();       // checks if the entity should show up on wide scan
+
+    bool CanSeeTarget(CBaseEntity* target, bool fallbackNavMesh = true);
+    bool CanSeeTarget(const position_t& targetPoint, bool fallbackNavMesh = true);
 
     CBaseEntity* GetEntity(uint16 targid, uint8 filter = -1) const;
     void         SendZoneUpdate();

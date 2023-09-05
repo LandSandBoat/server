@@ -175,5 +175,9 @@ INSERT INTO `fishing_index` VALUES (161 ,5953 );  -- Dragonfly Trout
 INSERT INTO `fishing_index` VALUES (162 ,5957 );  -- Shockfish
 INSERT INTO `fishing_index` VALUES (163 ,6489 );  -- Far East Puffer
 INSERT INTO `fishing_index` VALUES (164 ,9216 );  -- Voidsnapper
+INSERT INTO `fishing_index` VALUES (165 ,4311 );  -- Black Bubble-Eye
+INSERT INTO `fishing_index` VALUES (166 ,4312 );  -- Lionhead
+INSERT INTO `fishing_index` VALUES (167 ,5714 );  -- Pearlscale
+INSERT INTO `fishing_index` VALUES (168 ,5715 );  -- Calico Comet
 
 UNLOCK TABLES;

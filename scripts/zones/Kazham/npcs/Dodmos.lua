@@ -4,8 +4,6 @@
 --  Starts Quest: Trial Size Trial By Fire
 -- !pos 102.647 -14.999 -97.664 250
 -----------------------------------
-require("scripts/globals/settings")
-require("scripts/globals/status")
 require("scripts/globals/quests")
 require("scripts/globals/teleports")
 local ID = require("scripts/zones/Kazham/IDs")
@@ -42,8 +40,6 @@ entity.onTrigger = function(player, npc)
         end
     elseif trialSizeFire == QUEST_COMPLETED then
         player:startEvent(289) --Defeated Avatar
-    else
-        player:startEvent(275) --Standard dialogue
     end
 end
 

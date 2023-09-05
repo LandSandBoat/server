@@ -92,6 +92,7 @@ namespace charutils
     float ApplyTH(int16 m_THLvl, uint16 rate);
     void  AddExperiencePoints(bool expFromRaise, CCharEntity* PChar, CBaseEntity* PMob, uint32 exp, EMobDifficulty mobCheck = EMobDifficulty::TooWeak,
                               bool isexpchain = false);
+    void  ValidateAndSetMeritMode(CCharEntity* Pchar);
 
     uint16 AddCapacityBonus(CCharEntity* PChar, uint16 capacityPoints);
     void   AddCapacityPoints(CCharEntity* PChar, CBaseEntity* PMob, uint32 capacityPoints, int16 levelDiff = 0, bool isCapacityChain = false);
@@ -128,6 +129,7 @@ namespace charutils
     void   SetStyleLock(CCharEntity* PChar, bool isStyleLocked);
     void   UpdateWeaponStyle(CCharEntity* PChar, uint8 equipSlotID, CItemEquipment* PItem);
     void   UpdateArmorStyle(CCharEntity* PChar, uint8 equipSlotID);
+    void   UpdateRemovedSlots(CCharEntity* PChar);
     void   AddItemToRecycleBin(CCharEntity* PChar, uint32 container, uint8 slotID, uint8 quantity);
     void   EmptyRecycleBin(CCharEntity* PChar);
 
@@ -211,7 +213,11 @@ namespace charutils
 
     uint16 AvatarPerpetuationReduction(CCharEntity* PChar);
 
-    void OpenSendBox(CCharEntity* PChar);
+    void OpenSendBox(CCharEntity* PChar, uint8 action, uint8 boxtype);
+    void OpenRecvBox(CCharEntity* PChar, uint8 action, uint8 boxtype);
+    bool isSendBoxOpen(CCharEntity* PChar);
+    bool isRecvBoxOpen(CCharEntity* PChar);
+    bool isAnyDeliveryBoxOpen(CCharEntity* PChar);
 
     bool CheckAbilityAddtype(CCharEntity* PChar, CAbility* PAbility);
 
@@ -275,7 +281,7 @@ namespace charutils
     uint32 getCharIdFromName(std::string const& name);
     void   releaseEvent(CCharEntity* PChar, bool skipMessage = false);
 
-    uint8  GetHighestLevel(CCharEntity* PChar);
+    uint8 GetHighestLevel(CCharEntity* PChar);
 }; // namespace charutils
 
 #endif // _CHARUTILS_H

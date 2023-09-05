@@ -4,7 +4,6 @@
 -- Log ID: 1, Quest ID: 14
 -- Aquillina : !pos -97 -5 -81 235
 -----------------------------------
-require('scripts/globals/items')
 require('scripts/globals/quests')
 require('scripts/globals/zone')
 require('scripts/globals/interaction/quest')
@@ -55,7 +54,7 @@ quest.sections =
                         if npc:getLocalVar('tradeCooldown') <= os.time() then
                             return quest:progressEvent(219)
                         else
-                            return quest:progressEvent(218)
+                            return quest:event(218)
                         end
                     end
                 end,
@@ -64,6 +63,10 @@ quest.sections =
             onEventFinish =
             {
                 [219] = function(player, csid, option, npc)
+                    if player:hasCompletedQuest(quest.areaId, quest.questId) then
+                        quest.reward.fame = 15
+                    end
+
                     if quest:complete(player) then
                         player:confirmTrade()
                         GetNPCByID(bastokMarketsID.npc.AQUILLINA):setLocalVar('tradeCooldown', os.time() + 900)
@@ -71,9 +74,7 @@ quest.sections =
                 end,
 
                 [218] = function(player, csid, option, npc)
-                    if quest:complete(player) then
-                        player:confirmTrade(false)
-                    end
+                    player:tradeComplete(false)
                 end,
             },
         },

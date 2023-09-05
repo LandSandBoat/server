@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Western Adoulin
 --  NPC: Grevan
--- Type: Standard NPC and Quest NPC
 -- Involved With Quest: 'Order Up'
 -- !pos 50 0 6 256
 -----------------------------------
@@ -29,9 +28,6 @@ entity.onTrigger = function(player, npc)
                 -- Standard dialogue before stamping out plague in Svenja quest line
                 player:startEvent(171)
             end
-        else
-            -- Standard dialogue prior to Svenja quest line
-            player:startEvent(541)
         end
     end
 end

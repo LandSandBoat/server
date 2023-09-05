@@ -2,18 +2,12 @@
 -- Area: Dynamis - Xarcabard
 --  Mob: Animated Knuckles
 -----------------------------------
-require("scripts/globals/status")
 local ID = require("scripts/zones/Dynamis-Xarcabard/IDs")
+mixins = { require("scripts/mixins/families/animated_weapons") }
 -----------------------------------
 local entity = {}
 
 entity.onMobEngaged = function(mob, target)
-    if mob:getAnimationSub() == 3 then
-        SetDropRate(108, 1571, 1000)
-    else
-        SetDropRate(108, 1571, 0)
-    end
-
     target:showText(mob, ID.text.ANIMATED_KNUCKLES_DIALOG)
 end
 

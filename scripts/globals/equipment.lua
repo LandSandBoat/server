@@ -1,5 +1,3 @@
-require("scripts/globals/status")
-
 xi.equipment = xi.equipment or {}
 
 xi.equipment.baseNyzulWeapons =

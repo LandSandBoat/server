@@ -7,7 +7,6 @@
 -----------------------------------
 require("scripts/globals/jobpoints")
 require("scripts/globals/mobskills")
-require("scripts/globals/status")
 -----------------------------------
 local abilityObject = {}
 

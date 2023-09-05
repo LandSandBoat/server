@@ -3,8 +3,6 @@
 --  NPC: Lacia
 -- Starts Quest: Trial Size Trial By Lightning
 -----------------------------------
-require("scripts/globals/settings")
-require("scripts/globals/status")
 require("scripts/globals/quests")
 require("scripts/globals/teleports")
 local ID = require("scripts/zones/Mhaura/IDs")
@@ -42,8 +40,6 @@ entity.onTrigger = function(player, npc)
         end
     elseif trialSizeLightning == QUEST_COMPLETED then
         player:startEvent(10028) --Defeated Ramuh
-    else
-        player:startEvent(10021) --Standard dialogue
     end
 end
 

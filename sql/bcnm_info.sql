@@ -30,7 +30,7 @@ CREATE TABLE `bcnm_info` (
   `rules` smallint(5) unsigned NOT NULL DEFAULT '0',
   `isMission` tinyint(1) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`bcnmId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AVG_ROW_LENGTH=56;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 AVG_ROW_LENGTH=56;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -264,7 +264,7 @@ INSERT INTO `bcnm_info` VALUES (1123,64,'achieving_true_power','nobody',0,600,60
 INSERT INTO `bcnm_info` VALUES (1124,64,'shield_of_diplomacy','nobody',0,1800,1800,99,6,0,5,0);
 INSERT INTO `bcnm_info` VALUES (1152,67,'making_a_mockery','nobody',0,1800,1800,60,6,1152,15,0);
 INSERT INTO `bcnm_info` VALUES (1153,67,'shadows_of_the_mind','nobody',0,1800,1800,90,6,1153,15,0);
-INSERT INTO `bcnm_info` VALUES (1154,67,'beast_within','nobody',0,600,600,99,1,0,6,0);
+INSERT INTO `bcnm_info` VALUES (1154,67,'beast_within','nobody',0,600,600,75,1,0,22,0);
 INSERT INTO `bcnm_info` VALUES (1155,67,'moment_of_truth','nobody',0,1800,1800,0,6,0,7,0);
 INSERT INTO `bcnm_info` VALUES (1156,67,'puppet_in_peril','nobody',0,1800,1800,99,6,0,5,0);
 INSERT INTO `bcnm_info` VALUES (1184,78,'rider_cometh','nobody',0,900,900,0,6,0,5,0);

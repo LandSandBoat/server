@@ -3,8 +3,8 @@
 -----------------------------------
 require('scripts/globals/events/harvest_festivals')
 require('scripts/globals/events/starlight_celebrations')
+require('scripts/globals/events/sunbreeze_festival')
 require('scripts/globals/cutscenes')
-require('scripts/globals/settings')
 require('scripts/globals/zone')
 local ID = require('scripts/zones/Bastok_Markets/IDs')
 -----------------------------------
@@ -13,6 +13,8 @@ local zoneObject = {}
 zoneObject.onInitialize = function(zone)
     applyHalloweenNpcCostumes(zone:getID())
     xi.events.starlightCelebration.applyStarlightDecorations(zone:getID())
+    xi.events.sunbreeze_festival.showDecorations(zone:getID())
+    xi.events.sunbreeze_festival.showNPCs(zone:getID())
 end
 
 zoneObject.onZoneIn = function(player, prevZone)
@@ -33,11 +35,15 @@ zoneObject.afterZoneIn = function(player)
     xi.moghouse.afterZoneIn(player)
 end
 
-zoneObject.onConquestUpdate = function(zone,  updatetype)
-    xi.conq.onConquestUpdate(zone,  updatetype)
+zoneObject.onConquestUpdate = function(zone, updatetype, influence, owner, ranking, isConquestAlliance)
+    xi.conq.onConquestUpdate(zone, updatetype, influence, owner, ranking, isConquestAlliance)
 end
 
 zoneObject.onTriggerAreaEnter = function(player, triggerArea)
+end
+
+zoneObject.onGameHour = function(zone)
+    xi.events.sunbreeze_festival.spawnFireworks(zone)
 end
 
 zoneObject.onGameDay = function()

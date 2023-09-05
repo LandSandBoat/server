@@ -4,8 +4,6 @@
 -- Item Effect: HP +10
 -- Duration: 30 Minutes
 -----------------------------------
-require("scripts/globals/status")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

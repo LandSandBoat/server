@@ -29,6 +29,7 @@
 #include <cstdio>
 #include <cstdlib>
 #include <cstring>
+#include <regex>
 #include <string>
 
 #ifdef _MSC_VER
@@ -582,7 +583,6 @@ void DecodeStringLinkshell(const std::string& signature, char* target)
 std::string EncodeStringSignature(const std::string& signature, char* target)
 {
     uint8 encodedSignature[SignatureStringLength] = {};
-    uint8 chars                                   = 0;
     auto  length                                  = std::min<size_t>(15u, signature.size());
 
     for (std::size_t currChar = 0; currChar < length; ++currChar)
@@ -601,7 +601,6 @@ std::string EncodeStringSignature(const std::string& signature, char* target)
             tempChar = signature[currChar] - 'a' + 37;
         }
         packBitsLE(encodedSignature, tempChar, static_cast<uint32>(6 * currChar), 6);
-        chars++;
     }
 
     return strncpy(target, reinterpret_cast<const char*>(encodedSignature), SignatureStringLength);
@@ -871,6 +870,16 @@ bool matches(std::string const& target, std::string const& pattern, std::string 
     };
 
     return matchesRecur(target.c_str(), pattern.c_str(), wildcard.c_str(), matchesRecur);
+}
+
+bool starts_with(std::string const& target, std::string const& pattern)
+{
+    return target.rfind(pattern, 0) != std::string::npos;
+}
+
+std::string replace(std::string const& target, std::string const& search, std::string const& replace)
+{
+    return std::regex_replace(target, std::regex(search), replace);
 }
 
 look_t stringToLook(std::string str)

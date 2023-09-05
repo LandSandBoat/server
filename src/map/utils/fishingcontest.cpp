@@ -27,9 +27,9 @@
 #include <time.h>
 
 #include "charutils.h"
+#include "common/vana_time.h"
 #include "itemutils.h"
 #include "lua/luautils.h"
-#include "vana_time.h"
 #include "zoneutils.h"
 
 namespace fishingcontest

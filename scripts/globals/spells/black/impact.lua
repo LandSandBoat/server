@@ -3,7 +3,6 @@
 -- Deals dark damage to an enemy and
 -- decreases all 7 base stats by 20%
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/magic")
 -----------------------------------
 local spellObject = {}
@@ -63,9 +62,6 @@ spellObject.onSpellCast = function(caster, target, spell)
     if not target:hasStatusEffect(xi.effect.CHR_DOWN) then
         target:addStatusEffect(xi.effect.CHR_DOWN, chrLoss, 0, duration)
     end
-
-    -- Diverting use of xi.magic.doElementalNuke till spellParams is implemented for this spell
-    -- local dmg = xi.magic.doElementalNuke(caster, target, spell, params)
 
     -- Calculate raw damage
     local dmg = xi.magic.calculateMagicDamage(caster, target, spell, params)

@@ -2,9 +2,6 @@
 -- func: capskill
 -- desc: Caps a specific skill.
 -----------------------------------
-
-require("scripts/globals/status")
-
 cmdprops =
 {
     permission = 1,

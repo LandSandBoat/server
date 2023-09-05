@@ -2,7 +2,6 @@
 -- A_Taste_of_Honey
 -- Qutiba !pos 92 -7.5 -130 50
 -----------------------------------
-require('scripts/globals/items')
 require('scripts/globals/quests')
 require('scripts/globals/npc_util')
 require('scripts/globals/interaction/quest')

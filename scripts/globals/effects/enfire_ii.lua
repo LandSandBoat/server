@@ -1,8 +1,6 @@
 -----------------------------------
 -- xi.effect.ENFIRE_II
 -----------------------------------
-require("scripts/globals/status")
------------------------------------
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

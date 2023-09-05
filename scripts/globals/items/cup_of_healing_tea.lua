@@ -9,9 +9,6 @@
 -- Magic Regen While Healing 2
 -- Sleep resistance -40
 -----------------------------------
-require("scripts/globals/status")
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

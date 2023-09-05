@@ -23,7 +23,7 @@ CREATE TABLE `nm_spawn_points` (
   `pos_y` float(7,3) NOT NULL DEFAULT '0.000',
   `pos_z` float(7,3) NOT NULL DEFAULT '0.000',
   PRIMARY KEY (`mobid`,`pos`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -257,11 +257,11 @@ INSERT INTO `nm_spawn_points` VALUES (16806249,0,-490.195,-4.503,145.451); -- Am
 INSERT INTO `nm_spawn_points` VALUES (16822423,0,4.609,11.472,-101.235); -- Bugbear Strongman (west)
 INSERT INTO `nm_spawn_points` VALUES (16822427,0,60.728,15.487,-118.886); -- Bugbear Strongman (east)
 INSERT INTO `nm_spawn_points` VALUES (16851267,0,-44.317,0,-242.987); -- Satiator
-INSERT INTO `nm_spawn_points` VALUES (16851267,1,-205.880,-0.500,268.850); -- Satiator on inaccessable island. 
+INSERT INTO `nm_spawn_points` VALUES (16851267,1,-205.880,-0.500,268.850); -- Satiator on inaccessable island.
 INSERT INTO `nm_spawn_points` VALUES (16843043,0,117.68,-0.307,302.450); -- Cerebrator
-INSERT INTO `nm_spawn_points` VALUES (16843043,1,-236.055,-0.500,124.179); -- Cerebrator on inaccessable island. 
+INSERT INTO `nm_spawn_points` VALUES (16843043,1,-236.055,-0.500,124.179); -- Cerebrator on inaccessable island.
 INSERT INTO `nm_spawn_points` VALUES (16859472,0,-169.471,0.000,84.318); -- Coveter
-INSERT INTO `nm_spawn_points` VALUES (16859472,1,-293.877,-0.500,-122.258); -- Coveter on inaccessable island. 
+INSERT INTO `nm_spawn_points` VALUES (16859472,1,-293.877,-0.500,-122.258); -- Coveter on inaccessable island.
 INSERT INTO `nm_spawn_points` VALUES (16875552,0,-88.575,-8.221,-272.966);
 INSERT INTO `nm_spawn_points` VALUES (16875552,1,-85.977,-8.096,-277.417);
 INSERT INTO `nm_spawn_points` VALUES (16875552,2,-80.868,-8.000,-281.892);
@@ -4102,7 +4102,7 @@ INSERT INTO `nm_spawn_points` VALUES (17387644,7,-50.378,0.009,59.088);
 INSERT INTO `nm_spawn_points` VALUES (17387644,8,-60.572,-0.097,45.966);
 INSERT INTO `nm_spawn_points` VALUES (17387644,9,-70.363,-0.148,17.687);
 INSERT INTO `nm_spawn_points` VALUES (17387644,10,-60.045,-0.517,41.996);
-INSERT INTO `nm_spawn_points` VALUES (17387920,0,-25.947,-0.075,23.783); -- Blubbery Bulge
+INSERT INTO `nm_spawn_points` VALUES (17387920,0,-225.237,2.295,-294.764); -- Blubbery Bulge
 INSERT INTO `nm_spawn_points` VALUES (17391802,0,219,-2,-99); -- Orcish Overlord
 INSERT INTO `nm_spawn_points` VALUES (17395800,0,-207.840,-0.498,109.939); -- Mee Deggi the Punisher
 INSERT INTO `nm_spawn_points` VALUES (17395800,1,-178.119,-0.644,153.039);

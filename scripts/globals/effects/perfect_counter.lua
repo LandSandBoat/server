@@ -1,8 +1,6 @@
 -----------------------------------
 -- xi.effect.PERFECT_COUNTER
 -----------------------------------
-require("scripts/globals/status")
------------------------------------
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

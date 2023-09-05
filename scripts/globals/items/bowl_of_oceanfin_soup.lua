@@ -9,9 +9,6 @@
 -- Ranged Attack % 19 Cap 85
 -- Amorph Killer 6
 -----------------------------------
-require("scripts/globals/status")
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

@@ -3,7 +3,6 @@
 --  Mob: Ouryu
 -----------------------------------
 require("scripts/globals/titles")
-require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 
@@ -20,7 +19,7 @@ entity.onMobSpawn = function(mob)
 
     mob:setMobMod(xi.mobMod.DRAW_IN, 1)
     mob:setMobMod(xi.mobMod.DRAW_IN_CUSTOM_RANGE, 15)
-    mob:setMobMod(xi.mobMod.WEAPON_BONUS, 125)
+    mob:setMobMod(xi.mobMod.WEAPON_BONUS, 14) -- 54 + 2 + 14 = 70
     mob:setLocalVar("setTwoHourThreshold", math.random(50, 80))
 end
 
@@ -64,8 +63,15 @@ entity.onMobFight = function(mob, target)
     end
 
     -- Wakeup from sleep immediately if flying
-    if hasSleepEffects(mob) and mob:getAnimationSub() == 1 then
-        removeSleepEffects(mob)
+    if
+        mob:getAnimationSub() == 1 and
+        (target:hasStatusEffect(xi.effect.SLEEP_I) or
+        target:hasStatusEffect(xi.effect.SLEEP_II) or
+        target:hasStatusEffect(xi.effect.LULLABY))
+    then
+        mob:delStatusEffect(xi.effect.SLEEP_I)
+        mob:delStatusEffect(xi.effect.SLEEP_II)
+        mob:delStatusEffect(xi.effect.LULLABY)
     end
 end
 
