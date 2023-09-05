@@ -582,7 +582,7 @@ void CLuaBaseEntity::setCharVar(std::string const& varName, int32 value, sol::ob
     {
         uint32 varTimestamp = expiry.is<uint32>() ? expiry.as<uint32>() : 0;
 
-        if (varTimestamp > 0 && varTimestamp <= CVanaTime::getInstance()->getVanaTime())
+        if (varTimestamp > 0 && varTimestamp <= CVanaTime::getInstance()->getSysTime())
         {
             ShowWarning(fmt::format("Attempting to set variable '{}' with an expired time: {}", varName, varTimestamp));
             return;
@@ -603,7 +603,7 @@ void CLuaBaseEntity::setCharVarExpiration(std::string const& varName, uint32 exp
 {
     if (auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity))
     {
-        if (expiry > 0 && expiry <= CVanaTime::getInstance()->getVanaTime())
+        if (expiry > 0 && expiry <= CVanaTime::getInstance()->getSysTime())
         {
             ShowWarning(fmt::format("Attempting to set variable '{}' with an expired time: {}", varName, expiry));
             return;
@@ -643,7 +643,7 @@ void CLuaBaseEntity::setVolatileCharVar(std::string const& varName, int32 value,
     {
         uint32 varTimestamp = expiry.is<uint32>() ? expiry.as<uint32>() : 0;
 
-        if (varTimestamp > 0 && varTimestamp <= CVanaTime::getInstance()->getVanaTime())
+        if (varTimestamp > 0 && varTimestamp <= CVanaTime::getInstance()->getSysTime())
         {
             ShowWarning(fmt::format("Attempting to set variable '{}' with an expired time: {}", varName, varTimestamp));
             return;

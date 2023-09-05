@@ -81,6 +81,7 @@ public:
     uint8  getMoonDirection() const;
     uint8  getRSERace() const;
     uint8  getRSELocation() const;
+    uint32 getSysTime();
     uint32 getSysHour();
     uint32 getSysMinute();
     uint32 getSysSecond();

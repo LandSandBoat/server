@@ -84,6 +84,11 @@ uint32 CVanaTime::getWeekday() const
     return m_vDay;
 }
 
+uint32 CVanaTime::getSysTime()
+{
+    return static_cast<uint32>(time(nullptr));
+}
+
 uint32 CVanaTime::getSysHour()
 {
     time_t now = time(nullptr);

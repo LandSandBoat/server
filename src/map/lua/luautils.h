@@ -160,6 +160,7 @@ namespace luautils
     auto GetMagianTrial(sol::variadic_args va) -> sol::table;
     auto GetMagianTrialsWithParent(int32 parentTrial) -> sol::table;
 
+    uint32 GetSystemTime();
     uint32 JstMidnight();
     uint32 JstWeekday();
     uint32 VanadielTime();          // Gets the current Vanadiel Time in timestamp format (SE epoch in earth seconds)

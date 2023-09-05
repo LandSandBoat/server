@@ -2750,7 +2750,7 @@ int32 CCharEntity::getCharVar(std::string const& charVarName)
     if (auto charVar = charVarCache.find(charVarName); charVar != charVarCache.end())
     {
         std::pair cachedVarData    = charVar->second;
-        uint32    currentTimestamp = CVanaTime::getInstance()->getVanaTime();
+        uint32    currentTimestamp = CVanaTime::getInstance()->getSysTime();
 
         // If the cached variable is not expired, return it.  Else, fall through so that the
         // database can be cleaned up.

@@ -171,6 +171,7 @@ namespace luautils
         lua.set_function("GetPlayerByID", &luautils::GetPlayerByID);
         lua.set_function("GetMagianTrial", &luautils::GetMagianTrial);
         lua.set_function("GetMagianTrialsWithParent", &luautils::GetMagianTrialsWithParent);
+        lua.set_function("GetSystemTime", &luautils::GetSystemTime);
         lua.set_function("JstMidnight", &luautils::JstMidnight);
         lua.set_function("JstWeekday", &luautils::JstWeekday);
         lua.set_function("VanadielTime", &luautils::VanadielTime);
@@ -1436,6 +1437,16 @@ namespace luautils
     {
         TracyZoneScoped;
         return static_cast<uint8>(battleutils::GetDayElement());
+    }
+
+    /************************************************************************
+     *                                                                       *
+     * Returns current UTC timestamp
+     *                                                                       *
+     ************************************************************************/
+    uint32 GetSystemTime()
+    {
+        return CVanaTime::getInstance()->getSysTime();
     }
 
     /************************************************************************
@@ -4705,7 +4716,7 @@ namespace luautils
     {
         uint32 varTimestamp = expiry.is<uint32>() ? expiry.as<uint32>() : 0;
 
-        if (varTimestamp > 0 && varTimestamp <= CVanaTime::getInstance()->getVanaTime())
+        if (varTimestamp > 0 && varTimestamp <= CVanaTime::getInstance()->getSysTime())
         {
             ShowWarning(fmt::format("Attempting to set variable '{}' with an expired time: {}", name, varTimestamp));
             return;
@@ -4723,7 +4734,7 @@ namespace luautils
     {
         uint32 varTimestamp = expiry.is<uint32>() ? expiry.as<uint32>() : 0;
 
-        if (varTimestamp > 0 && varTimestamp <= CVanaTime::getInstance()->getVanaTime())
+        if (varTimestamp > 0 && varTimestamp <= CVanaTime::getInstance()->getSysTime())
         {
             ShowWarning(fmt::format("Attempting to set variable '{}' with an expired time: {}", varName, varTimestamp));
             return;
@@ -4742,7 +4753,7 @@ namespace luautils
     {
         uint32 varTimestamp = expiry.is<uint32>() ? expiry.as<uint32>() : 0;
 
-        if (varTimestamp > 0 && varTimestamp <= CVanaTime::getInstance()->getVanaTime())
+        if (varTimestamp > 0 && varTimestamp <= CVanaTime::getInstance()->getSysTime())
         {
             ShowWarning(fmt::format("Attempting to set variable '{}' with an expired time: {}", varName, varTimestamp));
             return;

@@ -6496,7 +6496,7 @@ namespace charutils
             value  = sql->GetIntData(0);
             expiry = sql->GetUIntData(1);
 
-            uint32 currentTimestamp = CVanaTime::getInstance()->getVanaTime();
+            uint32 currentTimestamp = CVanaTime::getInstance()->getSysTime();
 
             if (expiry > 0 && expiry <= currentTimestamp)
             {

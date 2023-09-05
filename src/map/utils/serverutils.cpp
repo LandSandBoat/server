@@ -47,7 +47,7 @@ namespace serverutils
             value  = sql->GetIntData(0);
             expiry = sql->GetUIntData(1);
 
-            uint32 currentTimestamp = CVanaTime::getInstance()->getVanaTime();
+            uint32 currentTimestamp = CVanaTime::getInstance()->getSysTime();
 
             if (expiry > 0 && expiry <= currentTimestamp)
             {
@@ -76,7 +76,7 @@ namespace serverutils
         if (auto var = serverVarCache.find(name); var != serverVarCache.end())
         {
             std::pair cachedVarData    = var->second;
-            uint32    currentTimestamp = CVanaTime::getInstance()->getVanaTime();
+            uint32    currentTimestamp = CVanaTime::getInstance()->getSysTime();
 
             // If the cached variable is not expired, return it.  Else, fall through so that the
             // database can be cleaned up.
