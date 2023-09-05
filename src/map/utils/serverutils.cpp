@@ -33,32 +33,41 @@
 
 namespace serverutils
 {
-    std::unordered_map<std::string, int32> serverVarCache;
-    std::unordered_set<std::string>        serverVarChanges;
+    std::unordered_map<std::string, std::pair<int32, uint32>> serverVarCache;
+    std::unordered_set<std::string>                           serverVarChanges;
 
-    int32 GetServerVar(std::string const& name)
+    uint32 GetServerVar(std::string const& name)
     {
-        int32 value = 0;
+        int32 ret = sql->Query("SELECT value, expiry FROM server_variables WHERE name = '%s' LIMIT 1;", name);
 
-        int32 ret = sql->Query("SELECT value FROM server_variables WHERE name = '%s' LIMIT 1;", name);
-
+        int32  value  = 0;
+        uint32 expiry = 0;
         if (ret != SQL_ERROR && sql->NumRows() != 0 && sql->NextRow() == SQL_SUCCESS)
         {
-            value = sql->GetIntData(0);
+            value  = sql->GetIntData(0);
+            expiry = sql->GetUIntData(1);
+
+            uint32 currentTimestamp = CVanaTime::getInstance()->getVanaTime();
+
+            if (expiry > 0 && expiry <= currentTimestamp)
+            {
+                value = 0;
+                sql->Query("DELETE FROM server_variables WHERE name = '%s';", name);
+            }
         }
 
-        serverVarCache[name] = value;
+        serverVarCache[name] = { value, expiry };
         return value;
     }
 
-    void SetServerVar(std::string const& name, int32 value)
+    void SetServerVar(std::string const& name, int32 value, uint32 expiry /* = 0 */)
     {
-        PersistServerVar(name, value);
+        PersistServerVar(name, value, expiry);
     }
 
-    void SetVolatileServerVar(std::string const& name, int32 value)
+    void SetVolatileServerVar(std::string const& name, int32 value, uint32 expiry /* = 0 */)
     {
-        serverVarCache[name] = value;
+        serverVarCache[name] = { value, expiry };
         serverVarChanges.insert(name);
     }
 
@@ -66,7 +75,15 @@ namespace serverutils
     {
         if (auto var = serverVarCache.find(name); var != serverVarCache.end())
         {
-            return var->second;
+            std::pair cachedVarData    = var->second;
+            uint32    currentTimestamp = CVanaTime::getInstance()->getVanaTime();
+
+            // If the cached variable is not expired, return it.  Else, fall through so that the
+            // database can be cleaned up.
+            if (cachedVarData.second == 0 || cachedVarData.second > currentTimestamp)
+            {
+                return cachedVarData.first;
+            }
         }
 
         return GetServerVar(name);
@@ -81,7 +98,10 @@ namespace serverutils
 
         for (auto&& name : serverVarChanges)
         {
-            auto value = serverVarCache[name];
+            auto   cachedServerVar = serverVarCache[name];
+            int32  value           = cachedServerVar.first;
+            uint32 varTimestamp    = cachedServerVar.second;
+
             if (value == 0)
             {
                 // TODO: Re-enable async
@@ -92,7 +112,7 @@ namespace serverutils
             {
                 // TODO: Re-enable async
                 // async_work::doQuery("INSERT INTO server_variables VALUES ('%s', %i) ON DUPLICATE KEY UPDATE value = %i;", varName, value, value);
-                sql->Query("INSERT INTO server_variables VALUES ('%s', %i) ON DUPLICATE KEY UPDATE value = %i;", name, value, value);
+                sql->Query("INSERT INTO server_variables VALUES ('%s', %i, %d) ON DUPLICATE KEY UPDATE value = %i, expiry = %d;", name, value, varTimestamp, value, varTimestamp);
             }
         }
 
@@ -101,7 +121,7 @@ namespace serverutils
         return 0;
     }
 
-    void PersistServerVar(std::string const& name, int32 value)
+    void PersistServerVar(std::string const& name, int32 value, uint32 expiry /* = 0 */)
     {
         int32 tries  = 0;
         int32 verify = INT_MIN;
@@ -119,7 +139,7 @@ namespace serverutils
             }
             else
             {
-                sql->Query("INSERT INTO server_variables VALUES ('%s', %i) ON DUPLICATE KEY UPDATE value = %i;", name, value, value);
+                sql->Query("INSERT INTO server_variables VALUES ('%s', %i, %d) ON DUPLICATE KEY UPDATE value = %i, expiry = %d;", name, value, expiry, value, expiry);
             }
 
             if (setVarMaxRetry > 0)

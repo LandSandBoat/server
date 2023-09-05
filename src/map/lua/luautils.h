@@ -184,9 +184,9 @@ namespace luautils
     int16  GetElevatorState(uint8 id); // Returns -1 if elevator is not found. Otherwise, returns the uint8 state.
 
     int32 GetServerVariable(std::string const& name);
-    void  SetServerVariable(std::string const& name, int32 value);
+    void  SetServerVariable(std::string const& name, int32 value, sol::object const& expiry);
     int32 GetVolatileServerVariable(std::string const& varName);
-    void  SetVolatileServerVariable(std::string const& varName, int32 value);
+    void  SetVolatileServerVariable(std::string const& varName, int32 value, sol::object const& expiry);
     int32 GetCharVar(uint32 charId, std::string const& varName);                                         // Get player var directly from SQL DB
     void  SetCharVar(uint32 charId, std::string const& varName, int32 value, sol::object const& expiry); // Set player var in SQL DB using charId
     void  ClearCharVarFromAll(std::string const& varName);                                               // Deletes a specific player variable from all players

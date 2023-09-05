@@ -4701,9 +4701,17 @@ namespace luautils
         return serverutils::GetServerVar(name);
     }
 
-    void SetServerVariable(std::string const& name, int32 value)
+    void SetServerVariable(std::string const& name, int32 value, sol::object const& expiry)
     {
-        serverutils::SetServerVar(name, value);
+        uint32 varTimestamp = expiry.is<uint32>() ? expiry.as<uint32>() : 0;
+
+        if (varTimestamp > 0 && varTimestamp <= CVanaTime::getInstance()->getVanaTime())
+        {
+            ShowWarning(fmt::format("Attempting to set variable '{}' with an expired time: {}", name, varTimestamp));
+            return;
+        }
+
+        serverutils::SetServerVar(name, value, varTimestamp);
     }
 
     int32 GetVolatileServerVariable(std::string const& varName)
@@ -4711,9 +4719,17 @@ namespace luautils
         return serverutils::GetVolatileServerVar(varName);
     }
 
-    void SetVolatileServerVariable(std::string const& varName, int32 value)
+    void SetVolatileServerVariable(std::string const& varName, int32 value, sol::object const& expiry)
     {
-        serverutils::SetVolatileServerVar(varName, value);
+        uint32 varTimestamp = expiry.is<uint32>() ? expiry.as<uint32>() : 0;
+
+        if (varTimestamp > 0 && varTimestamp <= CVanaTime::getInstance()->getVanaTime())
+        {
+            ShowWarning(fmt::format("Attempting to set variable '{}' with an expired time: {}", varName, varTimestamp));
+            return;
+        }
+
+        serverutils::SetVolatileServerVar(varName, value, varTimestamp);
     }
 
     int32 GetCharVar(uint32 charId, std::string const& varName)
