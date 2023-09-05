@@ -5,7 +5,6 @@
 local ID = require("scripts/zones/Ilrusi_Atoll/IDs")
 require("scripts/globals/assault")
 require("scripts/globals/instance")
-require("scripts/globals/items")
 -----------------------------------
 local instanceObject = {}
 
@@ -45,7 +44,6 @@ instanceObject.onInstanceCreatedCallback = function(player, instance)
             instance:setLocalVar("chosenMob2", math.random(mobTable[1], mobTable[#mobTable]))
         end
     end
-
 end
 
 instanceObject.afterInstanceRegister = function(player)

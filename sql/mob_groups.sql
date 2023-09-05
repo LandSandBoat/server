@@ -2807,10 +2807,10 @@ INSERT INTO `mob_groups` VALUES (7,649,55,'Carrion_Crab',0,128,0,4100,0,75,77,0)
 INSERT INTO `mob_groups` VALUES (8,652,55,'Carrion_Leech',0,128,0,4300,0,75,77,0);
 INSERT INTO `mob_groups` VALUES (9,654,55,'Carrion_Slime',0,128,0,4400,0,75,77,0);
 INSERT INTO `mob_groups` VALUES (10,655,55,'Carrion_Toad',0,128,0,4300,0,75,77,0);
-INSERT INTO `mob_groups` VALUES (11,4093,55,'Undead_Crab',0,128,0,0,0,78,80,0);
-INSERT INTO `mob_groups` VALUES (12,4094,55,'Undead_Leech',0,128,0,0,0,78,80,0);
-INSERT INTO `mob_groups` VALUES (13,4095,55,'Undead_Slime',0,128,0,0,0,78,80,0);
-INSERT INTO `mob_groups` VALUES (14,4096,55,'Undead_Toad',0,128,0,0,0,78,80,0);
+INSERT INTO `mob_groups` VALUES (11,4093,55,'Undead_Crab',0,128,0,6500,0,78,80,0);
+INSERT INTO `mob_groups` VALUES (12,4094,55,'Undead_Leech',0,128,0,6500,0,78,80,0);
+INSERT INTO `mob_groups` VALUES (13,4095,55,'Undead_Slime',0,128,0,6500,0,78,80,0);
+INSERT INTO `mob_groups` VALUES (14,4096,55,'Undead_Toad',0,128,0,6500,0,78,80,0);
 INSERT INTO `mob_groups` VALUES (15,649,55,'Carrion_Crab',0,128,0,0,0,78,78,0);
 INSERT INTO `mob_groups` VALUES (16,2065,55,'Imp',0,128,0,0,0,76,78,0);
 INSERT INTO `mob_groups` VALUES (17,2208,55,'Kelp_Pugil',0,128,0,0,0,55,55,0);
