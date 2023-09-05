@@ -46,7 +46,7 @@ mission.sections =
         },
     },
 
-    -- Digging minigame, handled in
+    -- Digging minigame, handled in xi.amk.helpers and chocobo_digging.lua
     {
         check = function(player, currentMission, missionStatus, vars)
             return currentMission == mission.missionId and missionStatus == 1 and
