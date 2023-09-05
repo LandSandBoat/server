@@ -15,7 +15,7 @@ require('scripts/globals/missions')
 require('scripts/globals/npc_util')
 require('scripts/globals/interaction/mission')
 -----------------------------------
-local horutotoID = require('scripts/zones/Outer_Horutoto_Ruins/IDs')
+local horutotoID = zones[xi.zone.OUTER_HORUTOTO_RUINS]
 -----------------------------------
 
 local mission = Mission:new(xi.mission.log_id.AMK, xi.mission.id.amk.AN_ERRAND_THE_PROFESSORS_PRICE)
@@ -25,28 +25,36 @@ mission.reward =
     nextMission = { xi.mission.log_id.AMK, xi.mission.id.amk.SHOCK_ARRANT_ABUSE_OF_AUTHORITY },
 }
 
+-- TODO: Test and make sure this works
 local orbKeyItems =
 {
-    xi.ki.ORB_OF_SWORDS,
-    xi.ki.ORB_OF_CUPS,
-    xi.ki.ORB_OF_BATONS,
-    xi.ki.ORB_OF_COINS,
+    -- keyItem, mod, immune value, vulnerable value
+    { xi.ki.ORB_OF_SWORDS, xi.mod.SLASH_SDT,       0, 1000 },
+    { xi.ki.ORB_OF_CUPS,   xi.mod.BLUNT_SDT,       0, 1000 },
+    { xi.ki.ORB_OF_BATONS, xi.mod.PIERCE_SDT,      0, 1000 },
+    { xi.ki.ORB_OF_COINS,  xi.mod.UDMGMAGIC,  -10000,    0 },
 }
 
 local beginCardianFight = function(player, npc)
     local numToSpawn = 15
 
-    -- TODO: Add immunities to cardians
+    local modsToAdd = {}
 
-    -- Remove KIs
+    -- Count KI's so we know how many Cardians to spawn
     local removedKIs = 0
-    for _, keyItemId in ipairs(orbKeyItems) do
+    for _, entry in ipairs(orbKeyItems) do
+        local keyItemId   = entry[1]
+        local immunity    = entry[2]
+        local immuneValue = entry[3]
+        local vulnValue   = entry[4]
+
         if player:hasKeyItem(keyItemId) then
-            -- TODO: Remove damage immunity for the relevant mob.  The orbKeyItems table
-            -- may need to be expanded to support which mob receives which reduction.
+            table.insert(modsToAdd, { immunity, vulnValue })
 
             player:delKeyItem(keyItemId)
             removedKIs = removedKIs + 1
+        else
+            table.insert(modsToAdd, { immunity, immuneValue })
         end
     end
 
@@ -61,10 +69,23 @@ local beginCardianFight = function(player, npc)
         table.insert(cardianIds, cardianId)
     end
 
+    -- Spawn mobs and start battle
     xi.confrontation.start(player, npc, cardianIds, function(playerArg)
         npcUtil.giveKeyItem(playerArg, xi.keyItem.RIPE_STARFRUIT)
         npcUtil.giveKeyItem(playerArg, xi.keyItem.PEACH_CORAL_KEY)
     end)
+
+    -- Apply mods
+    for _, mobId in pairs(cardianIds) do
+        local mob = GetMobByID(mobId)
+        if mob then
+            for _, entry in pairs(modsToAdd) do
+                local mod = entry[1]
+                local val = entry[2]
+                mob:setMod(mod, val)
+            end
+        end
+    end
 end
 
 mission.sections =
