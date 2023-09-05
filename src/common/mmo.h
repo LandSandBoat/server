@@ -26,9 +26,9 @@
 
 #include <array>
 #include <bitset>
-#include <stdlib.h>
+#include <cstdlib>
+#include <ctime>
 #include <string>
-#include <time.h>
 
 #define FIFOSIZE_SERVERLINK 256 * 1024
 

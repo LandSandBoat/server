@@ -95,15 +95,18 @@ namespace gardenutils
                 CItem* PItem = PContainer->GetItem(slotID);
                 if (PItem != nullptr && PItem->isType(ITEM_FURNISHING))
                 {
-                    CItemFlowerpot* PPotItem = static_cast<CItemFlowerpot*>(PItem);
+                    CItemFlowerpot* PPotItem = dynamic_cast<CItemFlowerpot*>(PItem);
                     if (PPotItem != nullptr && PPotItem->canGrow() && vanatime >= PPotItem->getStageTimestamp())
                     {
                         uint8  stageDuration        = GetStageDuration(PPotItem);
                         uint32 daysSinceStageChange = (vanatime - PPotItem->getStageTimestamp()) / VANADAY_SECONDS;
                         uint8  wiltTime             = VANADAYS_TO_WILT + PChar->getMod(Mod::GARDENING_WILT_BONUS);
                         bool   wasExamined          = PPotItem->wasExamined();
-                        if ((!wasExamined && (stageDuration > wiltTime || (stageDuration + daysSinceStageChange > wiltTime))) ||
-                            daysSinceStageChange > VANADAYS_TO_GUARANTEE_WILT + wiltTime)
+                        bool   ignoredDuringStage   = !wasExamined && stageDuration > wiltTime;
+                        bool   ignoredSinceChange   = !wasExamined && stageDuration + daysSinceStageChange > wiltTime;
+                        bool   shouldForceWilt      = daysSinceStageChange > VANADAYS_TO_GUARANTEE_WILT + wiltTime;
+
+                        if (ignoredDuringStage || ignoredSinceChange || shouldForceWilt)
                         {
                             PPotItem->setStage(FLOWERPOT_STAGE_WILTED);
                             PPotItem->setStageTimestamp(vanatime + VANATIME_FOR_WILT_STAGE);

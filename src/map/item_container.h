@@ -65,22 +65,22 @@ public:
     ~CItemContainer();
 
     uint16 GetID() const;
-    uint16 GetBuff() const; // планируемый размер хранилища (размер без ограничений)
+    uint16 GetBuff() const; // Planned amount of storage (size without restrictions)
     uint8  GetSize() const;
-    uint8  GetFreeSlotsCount() const; // количество свободных ячеек в хранилище
-    uint8  AddBuff(int8 buff);        // планируемый размер хранилища (размер без ограничений)
-    uint8  AddSize(int8 size);        // увеличиваем/уменьшаем размер контейнера
+    uint8  GetFreeSlotsCount() const; // The number of free cells in the storage
+    uint8  AddBuff(int8 buff);        // Planned amount of storage (size without restrictions)
+    uint8  AddSize(int8 size);        // Increase/decrease the size of the container
     uint8  SetSize(uint8 size);
-    uint8  SearchItem(uint16 ItemID);                           // поиск предмета в хранилище
+    uint8  SearchItem(uint16 ItemID);                           // Search for the subject in the storage
     uint8  SearchItemWithSpace(uint16 ItemID, uint32 quantity); // search for item that has space to accomodate x items added
 
-    uint8 InsertItem(CItem* PItem);               // добавляем заранее созданный предмет в свободную ячейку
-    uint8 InsertItem(CItem* PItem, uint8 slotID); // добавляем заранее созданный предмет в выбранную ячейку
+    uint8 InsertItem(CItem* PItem);               // Add a pre -created object to a free cell
+    uint8 InsertItem(CItem* PItem, uint8 slotID); // Add a pre -created item to the selected cell
 
-    uint32 SortingPacket;   // количество запросов на сортировку за такт
-    uint32 LastSortingTime; // время последней сортировки контейнера
+    uint32 SortingPacket;   // The number of requests for the tact
+    uint32 LastSortingTime; // The time of the last sorting of the container
 
-    CItem* GetItem(uint8 slotID); // получаем указатель на предмет, находящийся в указанной ячейка.
+    CItem* GetItem(uint8 slotID); // We get a pointer for the subject in the specified cell.
     void   Clear();               // Remove all items from container
 
     template <typename F, typename... Args>
