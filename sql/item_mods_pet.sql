@@ -723,6 +723,9 @@ INSERT INTO `item_mods_pet` VALUES (23057,369,1,3);   -- Automaton - REFRESH: 1
 INSERT INTO `item_mods_pet` VALUES (23057,370,3,3);   -- Automaton - REGEN: 3
 INSERT INTO `item_mods_pet` VALUES (23057,384,600,3); -- Automaton - HASTE_GEAR: 600
 
+-- Ankusa Helm +2
+INSERT INTO `item_mods_pet` VALUES (23071,384,500,0); -- All Pets - HASTE_GEAR: 5%
+
 -- Bagua Galero +2
 INSERT INTO `item_mods_pet` VALUES (23083,2,500,8); -- Luopan - HP: 500
 
