@@ -3101,10 +3101,10 @@ INSERT INTO `mob_groups` VALUES (2,3248,63,'Qiqirn_Ceramist',0,128,0,0,0,77,78,0
 INSERT INTO `mob_groups` VALUES (3,3268,63,'Qiqirn_Volcanist',0,128,0,0,0,77,78,0);
 INSERT INTO `mob_groups` VALUES (4,534,63,'Brittle_Rock',0,128,0,2400,0,75,75,0);
 INSERT INTO `mob_groups` VALUES (5,837,63,'Crimson_Eruca',0,128,0,0,0,77,78,0);
-INSERT INTO `mob_groups` VALUES (6,5470,63,'Broken_Troll_Soldier_pld',0,128,0,0,9999,77,80,0);
-INSERT INTO `mob_groups` VALUES (7,5471,63,'Broken_Troll_Soldier_war',0,128,0,0,0,77,80,0);
-INSERT INTO `mob_groups` VALUES (8,5472,63,'Broken_Troll_Soldier_rdm',0,128,0,0,9999,77,80,0);
-INSERT INTO `mob_groups` VALUES (9,535,63,'Broken_Troll_Soldier_mnk',0,128,0,0,0,78,80,0);
+INSERT INTO `mob_groups` VALUES (6,5470,63,'Broken_Troll_Soldier_pld',0,128,0,10000,0,76,78,0);
+INSERT INTO `mob_groups` VALUES (7,5471,63,'Broken_Troll_Soldier_war',0,128,0,10000,0,76,78,0);
+INSERT INTO `mob_groups` VALUES (8,5472,63,'Broken_Troll_Soldier_rdm',0,128,0,10000,0,76,78,0);
+INSERT INTO `mob_groups` VALUES (9,535,63,'Broken_Troll_Soldier_mnk',0,128,0,10000,0,76,78,0);
 INSERT INTO `mob_groups` VALUES (10,894,63,'Dahak',0,128,0,0,0,75,75,0); -- TODO: capture level from retail
 INSERT INTO `mob_groups` VALUES (11,2967,63,'Old_Troll',0,128,0,4500,0,75,75,0); -- TODO: capture level from retail
 INSERT INTO `mob_groups` VALUES (12,4263,63,'Vulcanian_Bomb',0,128,0,0,0,72,74,0);
