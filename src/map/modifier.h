@@ -558,39 +558,40 @@ enum class Mod
     TRIPLE_SHOT_RATE  = 999,  // Percent increase to Triple Shot Rate
     QUICK_DRAW_RECAST = 1060, // TODO: Quick Draw Charge Reduction (seconds)
 
-    DMG_REFLECT            = 316, // Tracks totals
-    ROLL_ROGUES            = 317, // Tracks totals
-    ROLL_GALLANTS          = 318, // Tracks totals
-    ROLL_CHAOS             = 319, // Tracks totals
-    ROLL_BEAST             = 320, // Tracks totals
-    ROLL_CHORAL            = 321, // Tracks totals
-    ROLL_HUNTERS           = 322, // Tracks totals
-    ROLL_SAMURAI           = 323, // Tracks totals
-    ROLL_NINJA             = 324, // Tracks totals
-    ROLL_DRACHEN           = 325, // Tracks totals
-    ROLL_EVOKERS           = 326, // Tracks totals
-    ROLL_MAGUS             = 327, // Tracks totals
-    ROLL_CORSAIRS          = 328, // Tracks totals
-    ROLL_PUPPET            = 329, // Tracks totals
-    ROLL_DANCERS           = 330, // Tracks totals
-    ROLL_SCHOLARS          = 331, // Tracks totals
-    ROLL_BOLTERS           = 869, // Tracks totals
-    ROLL_CASTERS           = 870, // Tracks totals
-    ROLL_COURSERS          = 871, // Tracks totals
-    ROLL_BLITZERS          = 872, // Tracks totals
-    ROLL_TACTICIANS        = 873, // Tracks totals
-    ROLL_ALLIES            = 874, // Tracks totals
-    ROLL_MISERS            = 875, // Tracks totals
-    ROLL_COMPANIONS        = 876, // Tracks totals
-    ROLL_AVENGERS          = 877, // Tracks totals
-    ROLL_NATURALISTS       = 878, // Tracks totals
-    ROLL_RUNEISTS          = 879, // Tracks totals
-    BUST                   = 332, // # of busts
-    QUICK_DRAW_DMG         = 411, // Flat damage increase to base QD damage
-    QUICK_DRAW_DMG_PERCENT = 834, // Percentage increase to QD damage
-    QUICK_DRAW_MACC        = 191, // Quick draw magic accuracy
-    PHANTOM_ROLL           = 881, // Phantom Roll+ Effect from SOA Rings.
-    PHANTOM_DURATION       = 882, // Phantom Roll Duration +.
+    DMG_REFLECT            = 316,  // Tracks totals
+    ROLL_ROGUES            = 317,  // Tracks totals
+    ROLL_GALLANTS          = 318,  // Tracks totals
+    ROLL_CHAOS             = 319,  // Tracks totals
+    ROLL_BEAST             = 320,  // Tracks totals
+    ROLL_CHORAL            = 321,  // Tracks totals
+    ROLL_HUNTERS           = 322,  // Tracks totals
+    ROLL_SAMURAI           = 323,  // Tracks totals
+    ROLL_NINJA             = 324,  // Tracks totals
+    ROLL_DRACHEN           = 325,  // Tracks totals
+    ROLL_EVOKERS           = 326,  // Tracks totals
+    ROLL_MAGUS             = 327,  // Tracks totals
+    ROLL_CORSAIRS          = 328,  // Tracks totals
+    ROLL_PUPPET            = 329,  // Tracks totals
+    ROLL_DANCERS           = 330,  // Tracks totals
+    ROLL_SCHOLARS          = 331,  // Tracks totals
+    ROLL_BOLTERS           = 869,  // Tracks totals
+    ROLL_CASTERS           = 870,  // Tracks totals
+    ROLL_COURSERS          = 871,  // Tracks totals
+    ROLL_BLITZERS          = 872,  // Tracks totals
+    ROLL_TACTICIANS        = 873,  // Tracks totals
+    ROLL_ALLIES            = 874,  // Tracks totals
+    ROLL_MISERS            = 875,  // Tracks totals
+    ROLL_COMPANIONS        = 876,  // Tracks totals
+    ROLL_AVENGERS          = 877,  // Tracks totals
+    ROLL_NATURALISTS       = 878,  // Tracks totals
+    ROLL_RUNEISTS          = 879,  // Tracks totals
+    BUST                   = 332,  // # of busts
+    QUICK_DRAW_DMG         = 411,  // Flat damage increase to base QD damage
+    QUICK_DRAW_DMG_PERCENT = 834,  // Percentage increase to QD damage
+    QUICK_DRAW_MACC        = 191,  // Quick draw magic accuracy
+    PHANTOM_ROLL           = 881,  // Phantom Roll+ Effect from SOA Rings.
+    PHANTOM_DURATION       = 882,  // Phantom Roll Duration +.
+    PHANTOM_RECAST         = 1076, // Phantom Roll Recast -.
 
     // Puppetmaster
     MANEUVER_BONUS              = 504,  // Maneuver Stat Bonus
@@ -983,7 +984,7 @@ enum class Mod
     // 217 to 223
     // 271 to 280
     //
-    // SPARE = 1076 and onward
+    // SPARE = 1077 and onward
 };
 
 // temporary workaround for using enum class as unordered_map key until compilers support it

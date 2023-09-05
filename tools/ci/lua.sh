@@ -52,7 +52,6 @@ global_objects=(
     Mission
     Quest
     HiddenQuest
-    fileExists
     InteractionGlobal
     InteractionLookup
     Action
@@ -77,13 +76,6 @@ global_objects=(
 
     onBattlefieldHandlerInitialise
     applyResistanceAddEffect
-
-    RoeParseTimed
-    RoeParseRecords
-
-    cmdprops
-    error
-    onTrigger
 
     addBonuses
     addBonusesAbility

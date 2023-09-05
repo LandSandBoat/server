@@ -62,58 +62,19 @@ xi.nyzul.penalty =
     PATHOS = 3,
 }
 
-xi.nyzul.pathos =
-{
-    -- Found info: if gaining pathos from failed gear objectives will pick 3 different ways,
-    -- 1. token reward reduction, 2. time reduction, 3. random any other effect. Once picked which of
-    -- the 3 chioces for the floor, it will always be that for each occurance.
-
-    -- Neg Effects
-    [1]  = { effect = xi.effect.IMPAIRMENT,    power = 0x01,  textId = ID.text.RESTRICTION_JOB_ABILITIES     }, -- Job Abilities
-    [2]  = { effect = xi.effect.IMPAIRMENT,    power = 0x02,  textId = ID.text.RESTRICTION_WEAPON_SKILLS     }, -- Weapon Skills
-    [3]  = { effect = xi.effect.OMERTA,        power = 0x01,  textId = ID.text.RESTRICTION_SONGS             }, -- Songs
-    [4]  = { effect = xi.effect.OMERTA,        power = 0x02,  textId = ID.text.RESTRICTION_BLACK_MAGIC       }, -- Black Magic
-    [5]  = { effect = xi.effect.OMERTA,        power = 0x04,  textId = ID.text.RESTRICTION_BLUE_MAGIC        }, -- Blue Magic
-    [6]  = { effect = xi.effect.OMERTA,        power = 0x08,  textId = ID.text.RESTRICTION_NINJITSU          }, -- Ninjutsu
-    [7]  = { effect = xi.effect.OMERTA,        power = 0x10,  textId = ID.text.RESTRICTION_SUMMON_MAGIC      }, -- Summoning Magic
-    [8]  = { effect = xi.effect.OMERTA,        power = 0x20,  textId = ID.text.RESTRICTION_WHITE_MAGIC       }, -- White Magic
-    [9]  = { effect = xi.effect.SLOW,          power = 2000,  textId = ID.text.AFFLICTION_ATTACK_SPEED_DOWN  }, -- Attack speed reduced, needs retail data
-    [10] = { effect = xi.effect.FAST_CAST,     power = -30,   textId = ID.text.AFFLICTION_CASTING_SPEED_DOWN }, -- Casting speed reduced
-    [11] = { effect = xi.effect.DEBILITATION,  power = 0x001, textId = ID.text.AFFLICTION_STR_DOWN           }, -- STR
-    [12] = { effect = xi.effect.DEBILITATION,  power = 0x002, textId = ID.text.AFFLICTION_DEX_DOWN           }, -- DEX
-    [13] = { effect = xi.effect.DEBILITATION,  power = 0x004, textId = ID.text.AFFLICTION_VIT_DOWN           }, -- VIT
-    [14] = { effect = xi.effect.DEBILITATION,  power = 0x008, textId = ID.text.AFFLICTION_AGI_DOWN           }, -- AGI
-    [15] = { effect = xi.effect.DEBILITATION,  power = 0x010, textId = ID.text.AFFLICTION_INT_DOWN           }, -- INT
-    [16] = { effect = xi.effect.DEBILITATION,  power = 0x020, textId = ID.text.AFFLICTION_MND_DOWN           }, -- MND
-    [17] = { effect = xi.effect.DEBILITATION,  power = 0x040, textId = ID.text.AFFLICTION_CHR_DOWN           }, -- CHR
-    -- Positive Effects
-    [18] = { effect = xi.effect.REGAIN,        power = 5,     textId = ID.text.RECEIVED_REGAIN_EFFECT        }, -- confirmed 50
-    [19] = { effect = xi.effect.REGEN,         power = 15,    textId = ID.text.RECEIVED_REGEN_EFFECT         }, -- confirmed 15
-    [20] = { effect = xi.effect.REFRESH,       power = 10,    textId = ID.text.RECEIVED_REFRESH_EFFECT       }, -- confirmed 10
-    [21] = { effect = xi.effect.FLURRY,        power = 15,    textId = ID.text.RECEIVED_FLURRY_EFFECT        },
-    [22] = { effect = xi.effect.CONCENTRATION, power = 30,    textId = ID.text.RECEIVED_CONCENTRATION_EFFECT },
-    [23] = { effect = xi.effect.STR_BOOST_II,  power = 30,    textId = ID.text.RECEIVED_STR_BOOST            }, -- confirmed 30
-    [24] = { effect = xi.effect.DEX_BOOST_II,  power = 30,    textId = ID.text.RECEIVED_DEX_BOOST            },
-    [25] = { effect = xi.effect.VIT_BOOST_II,  power = 30,    textId = ID.text.RECEIVED_VIT_BOOST            },
-    [26] = { effect = xi.effect.AGI_BOOST_II,  power = 30,    textId = ID.text.RECEIVED_AGI_BOOST            },
-    [27] = { effect = xi.effect.INT_BOOST_II,  power = 30,    textId = ID.text.RECEIVED_INT_BOOST            },
-    [28] = { effect = xi.effect.MND_BOOST_II,  power = 30,    textId = ID.text.RECEIVED_MND_BOOST            },
-    [29] = { effect = xi.effect.CHR_BOOST_II,  power = 30,    textId = ID.text.RECEIVED_CHR_BOOST            },
-}
-
 xi.nyzul.FloorLayout =
 {
-    [0]  = {   -20, -0.5, -380 }, -- boss floors 20, 40, 60, 80
---  [?]  = {  -491, -4.0, -500 }, -- boss floor 20 confirmed
-    [1]  = {   380, -0.5, -500 },
-    [2]  = {   500, -0.5,  -20 },
-    [3]  = {   500, -0.5,   60 },
-    [4]  = {   500, -0.5, -100 },
-    [5]  = {   540, -0.5, -140 },
-    [6]  = {   460, -0.5, -219 },
-    [7]  = {   420, -0.5,  500 },
-    [8]  = {    60, -0.5, -335 },
-    [9]  = {    20, -0.5, -500 },
+    [ 0] = {   -20, -0.5, -380 }, -- boss floors 20, 40, 60, 80
+--  [ ?] = {  -491, -4.0, -500 }, -- boss floor 20 confirmed
+    [ 1] = {   380, -0.5, -500 },
+    [ 2] = {   500, -0.5,  -20 },
+    [ 3] = {   500, -0.5,   60 },
+    [ 4] = {   500, -0.5, -100 },
+    [ 5] = {   540, -0.5, -140 },
+    [ 6] = {   460, -0.5, -219 },
+    [ 7] = {   420, -0.5,  500 },
+    [ 8] = {    60, -0.5, -335 },
+    [ 9] = {    20, -0.5, -500 },
     [10] = {   -95, -0.5,   60 },
     [11] = {   100, -0.5,  100 },
     [12] = {  -460, -4.0, -180 },
@@ -133,15 +94,15 @@ xi.nyzul.FloorLayout =
 
 xi.nyzul.floorCost =
 {
-    [1]  = { level =  1, cost =    0 },
-    [2]  = { level =  6, cost =  500 },
-    [3]  = { level = 11, cost =  550 },
-    [4]  = { level = 16, cost =  600 },
-    [5]  = { level = 21, cost =  650 },
-    [6]  = { level = 26, cost =  700 },
-    [7]  = { level = 31, cost =  750 },
-    [8]  = { level = 36, cost =  800 },
-    [9]  = { level = 41, cost =  850 },
+    [ 1] = { level =  1, cost =    0 },
+    [ 2] = { level =  6, cost =  500 },
+    [ 3] = { level = 11, cost =  550 },
+    [ 4] = { level = 16, cost =  600 },
+    [ 5] = { level = 21, cost =  650 },
+    [ 6] = { level = 26, cost =  700 },
+    [ 7] = { level = 31, cost =  750 },
+    [ 8] = { level = 36, cost =  800 },
+    [ 9] = { level = 41, cost =  850 },
     [10] = { level = 46, cost =  900 },
     [11] = { level = 51, cost = 1000 },
     [12] = { level = 56, cost = 1100 },
@@ -155,246 +116,66 @@ xi.nyzul.floorCost =
     [20] = { level = 96, cost = 1900 },
 }
 
-xi.nyzul.pickMobs =
+xi.nyzul.enemyLeaders =
 {
-    [0] = -- 20th Floor bosses
-    {
-        [40] = -- 20 and 40 floor Bosses
-        {
-            ADAMANTOISE = ID.mob[51].ADAMANTOISE,
-            FAFNIR      = ID.mob[51].ADAMANTOISE + 2,
-        },
-        [100] = -- floors 60, 80 and 100 floor bosses
-        {
-            KHIMAIRA = ID.mob[51].ADAMANTOISE + 3,
-            CERBERUS = ID.mob[51].ADAMANTOISE + 5,
-        },
-    },
-
-    [1] = -- Enemy Leaders, can appear on all floors but %20 that are on objective
-    {
-        MOKKE               = ID.mob[51].MOKKE,
-        LONG_HORNED_CHARIOT = ID.mob[51].LONG_HORNED_CHARIOT,
-    },
-
-    [2] = -- Specified Enemies
-    {
-        [0] = -- Heraldic Imp x5
-        {
-            ID.mob[51].OFFSET_SPECIFIED,     ID.mob[51].OFFSET_SPECIFIED + 1, ID.mob[51].OFFSET_SPECIFIED + 2,
-            ID.mob[51].OFFSET_SPECIFIED + 3, ID.mob[51].OFFSET_SPECIFIED + 4
-        },
-        [1] = -- Psycheflayer x5
-        {
-            ID.mob[51].OFFSET_SPECIFIED + 5, ID.mob[51].OFFSET_SPECIFIED + 6, ID.mob[51].OFFSET_SPECIFIED + 7,
-            ID.mob[51].OFFSET_SPECIFIED + 8, ID.mob[51].OFFSET_SPECIFIED + 9
-        },
-        [2] = -- Poroggo Gent x5
-        {
-            ID.mob[51].OFFSET_SPECIFIED + 10, ID.mob[51].OFFSET_SPECIFIED + 11, ID.mob[51].OFFSET_SPECIFIED + 12,
-            ID.mob[51].OFFSET_SPECIFIED + 13, ID.mob[51].OFFSET_SPECIFIED + 14
-        },
-        [3] = -- Ebony Pudding x5
-        {
-            ID.mob[51].OFFSET_SPECIFIED + 15, ID.mob[51].OFFSET_SPECIFIED + 16, ID.mob[51].OFFSET_SPECIFIED + 17,
-            ID.mob[51].OFFSET_SPECIFIED + 18, ID.mob[51].OFFSET_SPECIFIED + 19
-        },
-        [4] = -- Qiqirn_Treasure_Hunter x2
-        {
-            ID.mob[51].OFFSET_SPECIFIED + 20, ID.mob[51].OFFSET_SPECIFIED + 21
-        },
-        [5] = -- Qiqirn_Archaeologist x3
-        {
-            ID.mob[51].OFFSET_SPECIFIED + 22, ID.mob[51].OFFSET_SPECIFIED + 23, ID.mob[51].OFFSET_SPECIFIED + 24
-        },
-        [6] = -- Racing_Chariot x5
-        {
-            ID.mob[51].OFFSET_SPECIFIED + 25, ID.mob[51].OFFSET_SPECIFIED + 26, ID.mob[51].OFFSET_SPECIFIED + 27,
-            ID.mob[51].OFFSET_SPECIFIED + 28, ID.mob[51].OFFSET_SPECIFIED + 29
-        },
-    },
+    -- [Floor_Section] = { first_mob_id, last_mob_id },
+    [  1] = { ID.mob[51].MOKKE,           ID.mob[51].LONG_HORNED_CHARIOT }, -- Regular enemy leaders. Can appear on all floors, except floor-20 multiples.
+    [ 40] = { ID.mob[51].ADAMANTOISE,     ID.mob[51].ADAMANTOISE + 2     }, -- Floors 1 to 40 bosses. Original Land Kings.
+    [100] = { ID.mob[51].ADAMANTOISE + 3, ID.mob[51].ADAMANTOISE + 5     }, -- Floors 60 to 100 bosses. ToAU Land Kings.
 }
 
-xi.nyzul.randomNMs =
+xi.nyzul.specifiedMobs =
 {
-    evenFloor =
-    {
-        [1] = -- floor 1 to 19 NM's
-        {
-            ID.mob[51].OFFSET_NM,     ID.mob[51].OFFSET_NM + 1, ID.mob[51].OFFSET_NM + 2, ID.mob[51].OFFSET_NM + 3, ID.mob[51].OFFSET_NM + 4,
-            ID.mob[51].OFFSET_NM + 5, ID.mob[51].OFFSET_NM + 6, ID.mob[51].OFFSET_NM + 7, ID.mob[51].OFFSET_NM + 8,
-        },
-        [2] = -- floor 21 to 39 NM's
-        {
-            ID.mob[51].OFFSET_NM + 18, ID.mob[51].OFFSET_NM + 19, ID.mob[51].OFFSET_NM + 20, ID.mob[51].OFFSET_NM + 21, ID.mob[51].OFFSET_NM + 22,
-            ID.mob[51].OFFSET_NM + 23, ID.mob[51].OFFSET_NM + 24, ID.mob[51].OFFSET_NM + 25, ID.mob[51].OFFSET_NM + 26,
-        },
-        [3] = -- floor 41 to 59 NM's
-        {
-            ID.mob[51].OFFSET_NM + 36, ID.mob[51].OFFSET_NM + 37, ID.mob[51].OFFSET_NM + 38, ID.mob[51].OFFSET_NM + 39, ID.mob[51].OFFSET_NM + 40,
-            ID.mob[51].OFFSET_NM + 41, ID.mob[51].OFFSET_NM + 42, ID.mob[51].OFFSET_NM + 43, ID.mob[51].OFFSET_NM + 44,
-        },
-        [4] = -- floor 61 to 79 NM's
-        {
-            ID.mob[51].OFFSET_NM + 54, ID.mob[51].OFFSET_NM + 55, ID.mob[51].OFFSET_NM + 56, ID.mob[51].OFFSET_NM + 57, ID.mob[51].OFFSET_NM + 58,
-            ID.mob[51].OFFSET_NM + 59, ID.mob[51].OFFSET_NM + 60, ID.mob[51].OFFSET_NM + 61, ID.mob[51].OFFSET_NM + 62,
-        },
-        [5] = -- floor 81 to 99 NM's
-        {
-            ID.mob[51].OFFSET_NM + 72, ID.mob[51].OFFSET_NM + 73, ID.mob[51].OFFSET_NM + 74, ID.mob[51].OFFSET_NM + 75, ID.mob[51].OFFSET_NM + 76,
-            ID.mob[51].OFFSET_NM + 77, ID.mob[51].OFFSET_NM + 78, ID.mob[51].OFFSET_NM + 79, ID.mob[51].OFFSET_NM + 80,
-        },
-    },
-
-    oddFloor =
-    {
-        [1] = -- floor 1 to 19 NM's
-        {
-            ID.mob[51].OFFSET_NM + 9,  ID.mob[51].OFFSET_NM + 10, ID.mob[51].OFFSET_NM + 11, ID.mob[51].OFFSET_NM + 12, ID.mob[51].OFFSET_NM + 13,
-            ID.mob[51].OFFSET_NM + 14, ID.mob[51].OFFSET_NM + 15, ID.mob[51].OFFSET_NM + 16, ID.mob[51].OFFSET_NM + 17,
-        },
-        [2] = -- floor 21 to 39 NM's
-        {
-            ID.mob[51].OFFSET_NM + 27, ID.mob[51].OFFSET_NM + 28, ID.mob[51].OFFSET_NM + 29, ID.mob[51].OFFSET_NM + 30, ID.mob[51].OFFSET_NM + 31,
-            ID.mob[51].OFFSET_NM + 32, ID.mob[51].OFFSET_NM + 33, ID.mob[51].OFFSET_NM + 34, ID.mob[51].OFFSET_NM + 35,
-        },
-        [3] = -- floor 41 to 59 NM's
-        {
-            ID.mob[51].OFFSET_NM + 45, ID.mob[51].OFFSET_NM + 46, ID.mob[51].OFFSET_NM + 47, ID.mob[51].OFFSET_NM + 48, ID.mob[51].OFFSET_NM + 49,
-            ID.mob[51].OFFSET_NM + 50, ID.mob[51].OFFSET_NM + 51, ID.mob[51].OFFSET_NM + 52, ID.mob[51].OFFSET_NM + 53,
-        },
-        [4] = -- floor 61 to 79 NM's
-        {
-            ID.mob[51].OFFSET_NM + 63, ID.mob[51].OFFSET_NM + 64, ID.mob[51].OFFSET_NM + 65, ID.mob[51].OFFSET_NM + 66, ID.mob[51].OFFSET_NM + 67,
-            ID.mob[51].OFFSET_NM + 68, ID.mob[51].OFFSET_NM + 69, ID.mob[51].OFFSET_NM + 70, ID.mob[51].OFFSET_NM + 71,
-        },
-        [5] = -- floor 81 to 99 NM's
-        {
-            ID.mob[51].OFFSET_NM + 81, ID.mob[51].OFFSET_NM + 82, ID.mob[51].OFFSET_NM + 83, ID.mob[51].OFFSET_NM + 84, ID.mob[51].OFFSET_NM + 85,
-            ID.mob[51].OFFSET_NM + 86, ID.mob[51].OFFSET_NM + 87, ID.mob[51].OFFSET_NM + 88, ID.mob[51].OFFSET_NM + 89,
-        },
-    },
+    -- [Mob family] = { first_mob_id, last_mob_id },
+    [1] = { ID.mob[51].OFFSET_SPECIFIED,      ID.mob[51].OFFSET_SPECIFIED +  4 }, -- Heraldic Imp x5
+    [2] = { ID.mob[51].OFFSET_SPECIFIED +  5, ID.mob[51].OFFSET_SPECIFIED +  9 }, -- Psycheflayer x5
+    [3] = { ID.mob[51].OFFSET_SPECIFIED + 10, ID.mob[51].OFFSET_SPECIFIED + 14 }, -- Poroggo Gent x5
+    [4] = { ID.mob[51].OFFSET_SPECIFIED + 15, ID.mob[51].OFFSET_SPECIFIED + 19 }, -- Ebony Pudding x5
+    [5] = { ID.mob[51].OFFSET_SPECIFIED + 20, ID.mob[51].OFFSET_SPECIFIED + 21 }, -- Qiqirn_Treasure_Hunter x2
+    [6] = { ID.mob[51].OFFSET_SPECIFIED + 22, ID.mob[51].OFFSET_SPECIFIED + 24 }, -- Qiqirn_Archaeologist x3
+    [7] = { ID.mob[51].OFFSET_SPECIFIED + 25, ID.mob[51].OFFSET_SPECIFIED + 29 }, -- Racing_Chariot x5
 }
 
-xi.nyzul.floorEntities = -- regular mobs by layout
+xi.nyzul.evenFloorRandomNMs =
 {
-    [1] = -- Aquans
-    {
-        ID.mob[51].OFFSET_REGULAR,     ID.mob[51].OFFSET_REGULAR + 1, ID.mob[51].OFFSET_REGULAR + 2,  ID.mob[51].OFFSET_REGULAR + 3,
-        ID.mob[51].OFFSET_REGULAR + 4, ID.mob[51].OFFSET_REGULAR + 5, ID.mob[51].OFFSET_REGULAR + 6,  ID.mob[51].OFFSET_REGULAR + 7,
-        ID.mob[51].OFFSET_REGULAR + 8, ID.mob[51].OFFSET_REGULAR + 9, ID.mob[51].OFFSET_REGULAR + 10, ID.mob[51].OFFSET_REGULAR + 11
-    },
+    -- [Floor_Section] = { first_mob_id, last_mob_id },
+    [1] = { ID.mob[51].OFFSET_NM,      ID.mob[51].OFFSET_NM +  8 }, -- Floors 1 to 20.
+    [2] = { ID.mob[51].OFFSET_NM + 18, ID.mob[51].OFFSET_NM + 26 }, -- Floors 21 to 40.
+    [3] = { ID.mob[51].OFFSET_NM + 36, ID.mob[51].OFFSET_NM + 44 }, -- Floors 41 to 60.
+    [4] = { ID.mob[51].OFFSET_NM + 54, ID.mob[51].OFFSET_NM + 62 }, -- Floors 61 to 80.
+    [5] = { ID.mob[51].OFFSET_NM + 72, ID.mob[51].OFFSET_NM + 80 }, -- Floors 81 to 100.
+}
 
-    [2] = -- Amorphs
-    {
-        ID.mob[51].OFFSET_REGULAR + 12, ID.mob[51].OFFSET_REGULAR + 13, ID.mob[51].OFFSET_REGULAR + 14, ID.mob[51].OFFSET_REGULAR + 15,
-        ID.mob[51].OFFSET_REGULAR + 16, ID.mob[51].OFFSET_REGULAR + 17, ID.mob[51].OFFSET_REGULAR + 18, ID.mob[51].OFFSET_REGULAR + 19,
-        ID.mob[51].OFFSET_REGULAR + 20, ID.mob[51].OFFSET_REGULAR + 21, ID.mob[51].OFFSET_REGULAR + 22, ID.mob[51].OFFSET_REGULAR + 23
-    },
+xi.nyzul.oddFloorRandomNMs =
+{
+    -- [Floor_Section] = { first_mob_id, last_mob_id },
+    [1] = { ID.mob[51].OFFSET_NM +  9, ID.mob[51].OFFSET_NM + 17 }, -- Floors 1 to 20.
+    [2] = { ID.mob[51].OFFSET_NM + 27, ID.mob[51].OFFSET_NM + 35 }, -- Floors 21 to 40.
+    [3] = { ID.mob[51].OFFSET_NM + 45, ID.mob[51].OFFSET_NM + 53 }, -- Floors 41 to 60.
+    [4] = { ID.mob[51].OFFSET_NM + 63, ID.mob[51].OFFSET_NM + 71 }, -- Floors 61 to 80.
+    [5] = { ID.mob[51].OFFSET_NM + 81, ID.mob[51].OFFSET_NM + 89 }, -- Floors 81 to 100.
+}
 
-    [3] = -- Arcana
-    {
-        ID.mob[51].OFFSET_REGULAR + 24, ID.mob[51].OFFSET_REGULAR + 25, ID.mob[51].OFFSET_REGULAR + 26, ID.mob[51].OFFSET_REGULAR + 27,
-        ID.mob[51].OFFSET_REGULAR + 28, ID.mob[51].OFFSET_REGULAR + 29, ID.mob[51].OFFSET_REGULAR + 30, ID.mob[51].OFFSET_REGULAR + 31,
-        ID.mob[51].OFFSET_REGULAR + 32, ID.mob[51].OFFSET_REGULAR + 33, ID.mob[51].OFFSET_REGULAR + 34, ID.mob[51].OFFSET_REGULAR + 35
-    },
-
-    [4] = -- Undead
-    {
-        ID.mob[51].OFFSET_REGULAR + 36, ID.mob[51].OFFSET_REGULAR + 37, ID.mob[51].OFFSET_REGULAR + 38, ID.mob[51].OFFSET_REGULAR + 39,
-        ID.mob[51].OFFSET_REGULAR + 40, ID.mob[51].OFFSET_REGULAR + 41, ID.mob[51].OFFSET_REGULAR + 42, ID.mob[51].OFFSET_REGULAR + 43,
-        ID.mob[51].OFFSET_REGULAR + 44, ID.mob[51].OFFSET_REGULAR + 45, ID.mob[51].OFFSET_REGULAR + 46, ID.mob[51].OFFSET_REGULAR + 47
-    },
-
-    [5] = -- Vermin
-    {
-        ID.mob[51].OFFSET_REGULAR + 48, ID.mob[51].OFFSET_REGULAR + 49, ID.mob[51].OFFSET_REGULAR + 50, ID.mob[51].OFFSET_REGULAR + 51,
-        ID.mob[51].OFFSET_REGULAR + 52, ID.mob[51].OFFSET_REGULAR + 53, ID.mob[51].OFFSET_REGULAR + 54, ID.mob[51].OFFSET_REGULAR + 55,
-        ID.mob[51].OFFSET_REGULAR + 56, ID.mob[51].OFFSET_REGULAR + 57, ID.mob[51].OFFSET_REGULAR + 58, ID.mob[51].OFFSET_REGULAR + 59
-    },
-
-    [6] = -- Demons
-    {
-        ID.mob[51].OFFSET_REGULAR + 60, ID.mob[51].OFFSET_REGULAR + 61, ID.mob[51].OFFSET_REGULAR + 62, ID.mob[51].OFFSET_REGULAR + 63,
-        ID.mob[51].OFFSET_REGULAR + 64, ID.mob[51].OFFSET_REGULAR + 65, ID.mob[51].OFFSET_REGULAR + 66, ID.mob[51].OFFSET_REGULAR + 67,
-        ID.mob[51].OFFSET_REGULAR + 68, ID.mob[51].OFFSET_REGULAR + 69, ID.mob[51].OFFSET_REGULAR + 70, ID.mob[51].OFFSET_REGULAR + 71
-    },
-
-    [7] = -- Dragons
-    {
-        ID.mob[51].OFFSET_REGULAR + 72, ID.mob[51].OFFSET_REGULAR + 73, ID.mob[51].OFFSET_REGULAR + 74, ID.mob[51].OFFSET_REGULAR + 75,
-        ID.mob[51].OFFSET_REGULAR + 76, ID.mob[51].OFFSET_REGULAR + 77, ID.mob[51].OFFSET_REGULAR + 78, ID.mob[51].OFFSET_REGULAR + 79,
-        ID.mob[51].OFFSET_REGULAR + 80, ID.mob[51].OFFSET_REGULAR + 81, ID.mob[51].OFFSET_REGULAR + 82, ID.mob[51].OFFSET_REGULAR + 83
-    },
-
-    [8] = -- Birds
-    {
-        ID.mob[51].OFFSET_REGULAR + 84, ID.mob[51].OFFSET_REGULAR + 85, ID.mob[51].OFFSET_REGULAR + 86, ID.mob[51].OFFSET_REGULAR + 87,
-        ID.mob[51].OFFSET_REGULAR + 88, ID.mob[51].OFFSET_REGULAR + 89, ID.mob[51].OFFSET_REGULAR + 90, ID.mob[51].OFFSET_REGULAR + 91,
-        ID.mob[51].OFFSET_REGULAR + 92, ID.mob[51].OFFSET_REGULAR + 93, ID.mob[51].OFFSET_REGULAR + 94, ID.mob[51].OFFSET_REGULAR + 95
-    },
-
-    [9] = -- Beasts
-    {
-        ID.mob[51].OFFSET_REGULAR + 96,  ID.mob[51].OFFSET_REGULAR + 97,  ID.mob[51].OFFSET_REGULAR + 98,  ID.mob[51].OFFSET_REGULAR + 99,
-        ID.mob[51].OFFSET_REGULAR + 100, ID.mob[51].OFFSET_REGULAR + 101, ID.mob[51].OFFSET_REGULAR + 102, ID.mob[51].OFFSET_REGULAR + 103,
-        ID.mob[51].OFFSET_REGULAR + 104, ID.mob[51].OFFSET_REGULAR + 105, ID.mob[51].OFFSET_REGULAR + 106, ID.mob[51].OFFSET_REGULAR + 107
-    },
-
-    [10] = -- Plantoids
-    {
-        ID.mob[51].OFFSET_REGULAR + 108, ID.mob[51].OFFSET_REGULAR + 109, ID.mob[51].OFFSET_REGULAR + 110, ID.mob[51].OFFSET_REGULAR + 111,
-        ID.mob[51].OFFSET_REGULAR + 112, ID.mob[51].OFFSET_REGULAR + 113, ID.mob[51].OFFSET_REGULAR + 114, ID.mob[51].OFFSET_REGULAR + 115,
-        ID.mob[51].OFFSET_REGULAR + 116, ID.mob[51].OFFSET_REGULAR + 117, ID.mob[51].OFFSET_REGULAR + 118, ID.mob[51].OFFSET_REGULAR + 119
-    },
-
-    [11] =  -- Lizards
-    {
-        ID.mob[51].OFFSET_REGULAR + 120, ID.mob[51].OFFSET_REGULAR + 121, ID.mob[51].OFFSET_REGULAR + 122, ID.mob[51].OFFSET_REGULAR + 123,
-        ID.mob[51].OFFSET_REGULAR + 124, ID.mob[51].OFFSET_REGULAR + 125, ID.mob[51].OFFSET_REGULAR + 126, ID.mob[51].OFFSET_REGULAR + 127,
-        ID.mob[51].OFFSET_REGULAR + 128, ID.mob[51].OFFSET_REGULAR + 129, ID.mob[51].OFFSET_REGULAR + 130, ID.mob[51].OFFSET_REGULAR + 131
-    },
-
-    [12] = -- Amorphs
-    {
-        ID.mob[51].OFFSET_REGULAR + 132, ID.mob[51].OFFSET_REGULAR + 133, ID.mob[51].OFFSET_REGULAR + 134, ID.mob[51].OFFSET_REGULAR + 135,
-        ID.mob[51].OFFSET_REGULAR + 136, ID.mob[51].OFFSET_REGULAR + 137, ID.mob[51].OFFSET_REGULAR + 138, ID.mob[51].OFFSET_REGULAR + 139,
-        ID.mob[51].OFFSET_REGULAR + 140, ID.mob[51].OFFSET_REGULAR + 141, ID.mob[51].OFFSET_REGULAR + 142, ID.mob[51].OFFSET_REGULAR + 143
-    },
-
-    [13] = -- Mixed
-    {
-        ID.mob[51].OFFSET_REGULAR + 144, ID.mob[51].OFFSET_REGULAR + 145, ID.mob[51].OFFSET_REGULAR + 146, ID.mob[51].OFFSET_REGULAR + 147,
-        ID.mob[51].OFFSET_REGULAR + 148, ID.mob[51].OFFSET_REGULAR + 149, ID.mob[51].OFFSET_REGULAR + 150, ID.mob[51].OFFSET_REGULAR + 151,
-        ID.mob[51].OFFSET_REGULAR + 152, ID.mob[51].OFFSET_REGULAR + 153, ID.mob[51].OFFSET_REGULAR + 154, ID.mob[51].OFFSET_REGULAR + 155
-    },
-
-    [14] = -- Mixed
-    {
-        ID.mob[51].OFFSET_REGULAR + 156, ID.mob[51].OFFSET_REGULAR + 157, ID.mob[51].OFFSET_REGULAR + 158, ID.mob[51].OFFSET_REGULAR + 159,
-        ID.mob[51].OFFSET_REGULAR + 160, ID.mob[51].OFFSET_REGULAR + 161, ID.mob[51].OFFSET_REGULAR + 162, ID.mob[51].OFFSET_REGULAR + 163,
-        ID.mob[51].OFFSET_REGULAR + 164, ID.mob[51].OFFSET_REGULAR + 165, ID.mob[51].OFFSET_REGULAR + 166, ID.mob[51].OFFSET_REGULAR + 167
-    },
-
-    [15] = -- Amorphs
-    {
-        ID.mob[51].OFFSET_REGULAR + 168, ID.mob[51].OFFSET_REGULAR + 169, ID.mob[51].OFFSET_REGULAR + 170, ID.mob[51].OFFSET_REGULAR + 171,
-        ID.mob[51].OFFSET_REGULAR + 172, ID.mob[51].OFFSET_REGULAR + 173, ID.mob[51].OFFSET_REGULAR + 174, ID.mob[51].OFFSET_REGULAR + 175,
-        ID.mob[51].OFFSET_REGULAR + 176, ID.mob[51].OFFSET_REGULAR + 177, ID.mob[51].OFFSET_REGULAR + 178, ID.mob[51].OFFSET_REGULAR + 179
-    },
-
-    [16] = -- Arcana
-    {
-        ID.mob[51].OFFSET_REGULAR + 180, ID.mob[51].OFFSET_REGULAR + 181, ID.mob[51].OFFSET_REGULAR + 182, ID.mob[51].OFFSET_REGULAR + 183,
-        ID.mob[51].OFFSET_REGULAR + 184, ID.mob[51].OFFSET_REGULAR + 185, ID.mob[51].OFFSET_REGULAR + 186, ID.mob[51].OFFSET_REGULAR + 187,
-        ID.mob[51].OFFSET_REGULAR + 188, ID.mob[51].OFFSET_REGULAR + 189, ID.mob[51].OFFSET_REGULAR + 190, ID.mob[51].OFFSET_REGULAR + 191
-    },
-
-    [17] = -- Gears
-    {
-        start = ID.mob[51].OFFSET_GEARS,
-        stop  = ID.mob[51].OFFSET_GEARS + 5
-    },
+xi.nyzul.floorEntities =
+{
+    -- [Mob family] = { first_mob_id, last_mob_id },
+    [ 1] = { ID.mob[51].OFFSET_REGULAR,       ID.mob[51].OFFSET_REGULAR +  11 }, -- Aquans
+    [ 2] = { ID.mob[51].OFFSET_REGULAR +  12, ID.mob[51].OFFSET_REGULAR +  23 }, -- Amorphs
+    [ 3] = { ID.mob[51].OFFSET_REGULAR +  24, ID.mob[51].OFFSET_REGULAR +  35 }, -- Arcana
+    [ 4] = { ID.mob[51].OFFSET_REGULAR +  36, ID.mob[51].OFFSET_REGULAR +  47 }, -- Undead
+    [ 5] = { ID.mob[51].OFFSET_REGULAR +  48, ID.mob[51].OFFSET_REGULAR +  59 }, -- Vermin
+    [ 6] = { ID.mob[51].OFFSET_REGULAR +  60, ID.mob[51].OFFSET_REGULAR +  71 }, -- Demons
+    [ 7] = { ID.mob[51].OFFSET_REGULAR +  72, ID.mob[51].OFFSET_REGULAR +  83 }, -- Dragons
+    [ 8] = { ID.mob[51].OFFSET_REGULAR +  84, ID.mob[51].OFFSET_REGULAR +  95 }, -- Birds
+    [ 9] = { ID.mob[51].OFFSET_REGULAR +  96, ID.mob[51].OFFSET_REGULAR + 107 }, -- Beasts
+    [10] = { ID.mob[51].OFFSET_REGULAR + 108, ID.mob[51].OFFSET_REGULAR + 119 }, -- Plantoids
+    [11] = { ID.mob[51].OFFSET_REGULAR + 120, ID.mob[51].OFFSET_REGULAR + 131 }, -- Lizards
+    [12] = { ID.mob[51].OFFSET_REGULAR + 132, ID.mob[51].OFFSET_REGULAR + 143 }, -- Amorphs 2
+    [13] = { ID.mob[51].OFFSET_REGULAR + 144, ID.mob[51].OFFSET_REGULAR + 155 }, -- Mixed
+    [14] = { ID.mob[51].OFFSET_REGULAR + 156, ID.mob[51].OFFSET_REGULAR + 167 }, -- Mixed 2
+    [15] = { ID.mob[51].OFFSET_REGULAR + 168, ID.mob[51].OFFSET_REGULAR + 179 }, -- Amorphs 3
+    [16] = { ID.mob[51].OFFSET_REGULAR + 180, ID.mob[51].OFFSET_REGULAR + 191 }, -- Arcana 2
+    [17] = { ID.mob[51].OFFSET_GEARS,         ID.mob[51].OFFSET_GEARS   +   5 }, -- Gears
 }
 
 xi.nyzul.appraisalItems =
@@ -923,138 +704,6 @@ xi.nyzul.spawnChest = function(mob, player)
                     casket:setStatus(xi.status.NORMAL)
 
                     break
-                end
-            end
-        end
-    end
-end
-
-xi.nyzul.removePathos = function(instance)
-    if instance:getLocalVar('floorPathos') > 0 then
-        for i = 1, #xi.nyzul.pathos do
-            if utils.mask.getBit(instance:getLocalVar('floorPathos'), i) then
-                local removeMessage = xi.nyzul.pathos[i].ID
-                local chars         = instance:getChars()
-
-                for _, players in pairs(chars) do
-                    players:delStatusEffectSilent(xi.nyzul.pathos[i].effect)
-                    players:messageSpecial(removeMessage - 1)
-
-                    if players:hasPet() then
-                        local pet = players:getPet()
-                        pet:delStatusEffectSilent(xi.nyzul.pathos[i].effect)
-                    end
-                end
-
-                instance:setLocalVar('floorPathos', utils.mask.setBit(instance:getLocalVar('floorPathos'), i, false))
-            end
-        end
-    end
-end
-
-xi.nyzul.addFloorPathos = function(instance)
-    local randomPathos = instance:getLocalVar('randomPathos')
-
-    if randomPathos > 0 then
-        instance:setLocalVar('floorPathos', utils.mask.setBit(instance:getLocalVar('floorPathos'), randomPathos, true))
-
-        local pathos = xi.nyzul.pathos[randomPathos]
-        local chars  = instance:getChars()
-
-        for _, player in pairs(chars) do
-            player:addStatusEffect(pathos.effect, pathos.power, 0, 0)
-            player:getStatusEffect(pathos.effect):delEffectFlag(xi.effectFlag.DISPELABLE)
-            player:getStatusEffect(pathos.effect):delEffectFlag(xi.effectFlag.ERASABLE)
-            player:getStatusEffect(pathos.effect):addEffectFlag(xi.effectFlag.ON_ZONE_PATHOS)
-
-            player:messageSpecial(pathos.textId)
-
-            if player:hasPet() then
-                local pet = player:getPet()
-                pet:addStatusEffectEx(pathos.effect, pathos.effect, pathos.power, 0, 0)
-                pet:getStatusEffect(pathos.effect):delEffectFlag(xi.effectFlag.DISPELABLE)
-                pet:getStatusEffect(pathos.effect):delEffectFlag(xi.effectFlag.ERASABLE)
-                pet:getStatusEffect(pathos.effect):addEffectFlag(xi.effectFlag.ON_ZONE_PATHOS)
-            end
-        end
-
-        instance:setLocalVar('randomPathos', 0)
-    end
-end
-
-xi.nyzul.addPenalty = function(mob)
-    local instance = mob:getInstance()
-    local pathos   = instance:getLocalVar('floorPathos')
-    local penalty  = instance:getLocalVar('gearPenalty')
-    local chars    = instance:getChars()
-
-    if penalty == xi.nyzul.penalty.TIME then
-        local timeLimit = instance:getTimeLimit() * 60
-
-        instance:setTimeLimit(timeLimit - 60)
-
-        for _, players in pairs(chars) do
-            players:messageSpecial(ID.text.MALFUNCTION)
-            players:messageSpecial(ID.text.TIME_LOSS, 1)
-        end
-    elseif penalty == xi.nyzul.penalty.TOKENS then
-        local tokenPenalty = instance:getLocalVar('tokenPenalty')
-
-        tokenPenalty = tokenPenalty + 1
-        instance:setLocalVar('tokenPenalty', tokenPenalty)
-
-        for _, players in pairs(chars) do
-            players:messageSpecial(ID.text.MALFUNCTION)
-            players:messageSpecial(ID.text.TOKEN_LOSS)
-        end
-
-    -- Status effect penalty
-    else
-        -- Create table with negative pathos that are not currently set.
-        local availablePathos = {}
-
-        for i = 1, 17 do
-            if not utils.mask.getBit(pathos, i) then
-                table.insert(availablePathos, i)
-            end
-        end
-
-        -- Pick a random pathos to apply from the available pathos table.
-        if #availablePathos > 0 then -- Failsafe in case all 17 are applied. Unlikely, but just in case.
-            local randomEffect = availablePathos[math.random(1, #availablePathos)]
-
-            instance:setLocalVar('floorPathos', utils.mask.setBit(pathos, randomEffect, true))
-            pathos = xi.nyzul.pathos[randomEffect]
-
-            local effect = pathos.effect
-            local power  = pathos.power
-
-            for _, player in pairs(chars) do
-                if
-                    effect == xi.effect.IMPAIRMENT or
-                    effect == xi.effect.OMERTA or
-                    effect == xi.effect.DEBILITATION
-                then
-                    if player:hasStatusEffect(effect) then
-                        local statusEffect = player:getStatusEffect(effect)
-                        local effectPower  = statusEffect:getPower()
-                        power              = bit.bor(effectPower, power)
-                    end
-                end
-
-                player:addStatusEffect(effect, power, 0, 0)
-                player:getStatusEffect(effect):delEffectFlag(xi.effectFlag.DISPELABLE)
-                player:getStatusEffect(effect):delEffectFlag(xi.effectFlag.ERASABLE)
-                player:getStatusEffect(effect):addEffectFlag(xi.effectFlag.ON_ZONE_PATHOS)
-                player:messageSpecial(ID.text.MALFUNCTION)
-                player:messageSpecial(pathos.textId)
-
-                if player:hasPet() then
-                    local pet = player:getPet()
-                    pet:addStatusEffectEx(effect, effect, power, 0, 0)
-                    pet:getStatusEffect(effect):delEffectFlag(xi.effectFlag.DISPELABLE)
-                    pet:getStatusEffect(effect):delEffectFlag(xi.effectFlag.ERASABLE)
-                    pet:getStatusEffect(effect):addEffectFlag(xi.effectFlag.ON_ZONE_PATHOS)
                 end
             end
         end

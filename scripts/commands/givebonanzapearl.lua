@@ -2,14 +2,15 @@
 -- func: givebonanzapearl <player> <number> <eventnum>
 -- desc: Gives a bonanza pearl with <number> for <eventnum>
 -----------------------------------
+local commandObj = {}
 
-cmdprops =
+commandObj.cmdprops =
 {
     permission = 5,
     parameters = 'sii'
 }
 
-function onTrigger(player, target, selectedNum, eventNum)
+commandObj.onTrigger = function(player, target, selectedNum, eventNum)
     if
         target == nil or
         selectedNum == nil or
@@ -42,3 +43,5 @@ function onTrigger(player, target, selectedNum, eventNum)
         player:PrintToPlayer(string.format('Gave player \'%s\' Item with ID of \'%u\'', target, xi.item.BONANZA_PEARL))
     end
 end
+
+return commandObj

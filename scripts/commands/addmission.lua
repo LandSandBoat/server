@@ -2,22 +2,22 @@
 -- func: addmission <logID> <missionID> <player>
 -- desc: Adds a mission to the GM or target players log.
 -----------------------------------
-require("scripts/globals/missions")
 local logIdHelpers = require('scripts/globals/log_ids')
 -----------------------------------
+local commandObj = {}
 
-cmdprops =
+commandObj.cmdprops =
 {
     permission = 5,
     parameters = "sss"
 }
 
-function error(player, msg)
+local function error(player, msg)
     player:PrintToPlayer(msg)
     player:PrintToPlayer("!addmission <logID> <missionID> (player)")
 end
 
-function onTrigger(player, logId, missionId, target)
+commandObj.onTrigger = function(player, logId, missionId, target)
     -- validate logId
     local logName
     local logInfo = logIdHelpers.getMissionLogInfo(logId)
@@ -57,3 +57,5 @@ function onTrigger(player, logId, missionId, target)
     player:PrintToPlayer(string.format("Added %s mission %i to %s.", logName, missionId, targ:getName()))
     player:PrintToPlayer("NOTE! This does NOT clear or update ANY mission variables! ")
 end
+
+return commandObj

@@ -212,7 +212,7 @@ xi.settings.map =
     BATTLE_CAP_TWEAK = 0,
 
     -- Enable/disable level cap of mission battlefields stored in database.
-    LV_CAP_MISSION_BCNM = 0,
+    LV_CAP_MISSION_BCNM = false,
 
     -- Max allowed merits points players can hold
     -- 10 classic

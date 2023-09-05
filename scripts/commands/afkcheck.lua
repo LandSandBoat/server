@@ -5,16 +5,15 @@
 --     : If the target doesn't respond with a correct answer
 --     : within 30 seconds, they will be set to 0hp.
 -----------------------------------
-require("scripts/globals/utils")
------------------------------------
+local commandObj = {}
 
-cmdprops =
+commandObj.cmdprops =
 {
     permission = 2,
     parameters = ""
 }
 
-function onTrigger(player)
+commandObj.onTrigger = function(player)
     -- Validate target
     local target = player:getCursorTarget()
 
@@ -92,3 +91,5 @@ function onTrigger(player)
         end
     end)
 end
+
+return commandObj

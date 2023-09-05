@@ -2,19 +2,20 @@
 -- func: addcurrency <currency type> <amount> <target player>
 -- desc: Adds the specified currency to the player
 -----------------------------------
+local commandObj = {}
 
-cmdprops =
+commandObj.cmdprops =
 {
     permission = 5,
     parameters = "sis"
 }
 
-function error(player, msg)
+local function error(player, msg)
     player:PrintToPlayer(msg)
     player:PrintToPlayer("!addcurrency <currency type> <amount> (player)")
 end
 
-function onTrigger(player, currency, amount, target)
+commandObj.onTrigger = function(player, currency, amount, target)
     -- validate target
     local targ
     if target == nil then
@@ -45,3 +46,5 @@ function onTrigger(player, currency, amount, target)
     local newAmount = targ:getCurrency(currency)
     player:PrintToPlayer(string.format("%s was given %i %s, for a total of %i.", targ:getName(), amount, currency, newAmount))
 end
+
+return commandObj

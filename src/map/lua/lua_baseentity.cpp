@@ -4900,8 +4900,15 @@ void CLuaBaseEntity::retrieveItemFromSlip(uint16 slipId, uint16 itemId, uint16 e
     sql->Query(Query, extra, PChar->id, slip->getLocationID(), slip->getSlotID());
 
     auto* item = itemutils::GetItem(itemId);
-    item->setQuantity(1);
-    charutils::AddItem(PChar, LOC_INVENTORY, item);
+    if (item)
+    {
+        item->setQuantity(1);
+        charutils::AddItem(PChar, LOC_INVENTORY, item);
+    }
+    else
+    {
+        ShowError("Failed to get item from item ID");
+    }
 }
 
 /************************************************************************

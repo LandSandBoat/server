@@ -2,14 +2,15 @@
 -- func: pardon
 -- desc: Pardons a player from jail. (Mordion Gaol)
 -----------------------------------
+local commandObj = {}
 
-cmdprops =
+commandObj.cmdprops =
 {
     permission = 2,
     parameters = "s"
 }
 
-function onTrigger(player, target)
+commandObj.onTrigger = function(player, target)
     if target == nil then
         player:PrintToPlayer("You must enter a valid player name.")
         return
@@ -30,3 +31,5 @@ function onTrigger(player, target)
         targ:warp()
     end
 end
+
+return commandObj

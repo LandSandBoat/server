@@ -2,8 +2,9 @@
 -- func: cnation <target> <campaign allegiance>
 -- desc: check or alter target characters campaign allegiance
 -----------------------------------
+local commandObj = {}
 
-cmdprops =
+commandObj.cmdprops =
 {
     permission = 3,
     parameters = "ss"
@@ -17,12 +18,12 @@ local nationNameToNum =
     ["WINDURST"] =  3
 }
 
-function error(player, msg)
+local function error(player, msg)
     player:PrintToPlayer(msg)
     player:PrintToPlayer("!cnation <player> <campaign allegiance>")
 end
 
-function onTrigger(player, target, nation)
+commandObj.onTrigger = function(player, target, nation)
     local nationNumToName = {}
 
     for k, v in pairs(nationNameToNum) do
@@ -57,3 +58,5 @@ function onTrigger(player, target, nation)
         player:PrintToPlayer(string.format("%s's new campaign allegiance: %s", targ:getName(), nationNumToName[targ:getCampaignAllegiance()]))
     end
 end
+
+return commandObj

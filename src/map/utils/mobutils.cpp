@@ -1373,15 +1373,21 @@ namespace mobutils
                 PMob->setMobMod(MOBMOD_DETECTION, sql->GetUIntData(70));
 
                 CZone* newZone = zoneutils::GetZone(zoneID);
+                if (newZone)
+                {
+                    // Get dynamic targid
+                    newZone->GetZoneEntities()->AssignDynamicTargIDandLongID(PMob);
 
-                // Get dynamic targid
-                newZone->GetZoneEntities()->AssignDynamicTargIDandLongID(PMob);
+                    // Insert ally into zone's mob list. TODO: Do we need to assign party for allies?
+                    newZone->GetZoneEntities()->m_mobList[PMob->targid] = PMob;
+                }
+                else
+                {
+                    ShowError("Mobutils::InstantiateAlly failed to get zone from zoneutils::GetZone(zoneID)");
+                }
 
                 // Ensure dynamic targid is released on death
                 PMob->m_bReleaseTargIDOnDisappear = true;
-
-                // Insert ally into zone's mob list. TODO: Do we need to assign party for allies?
-                newZone->GetZoneEntities()->m_mobList[PMob->targid] = PMob;
 
                 // must be here first to define mobmods
                 mobutils::InitializeMob(PMob);

@@ -2,18 +2,20 @@
 -- func: setcraftRank <craft skill or ID> <craft rank> <target>
 -- desc: sets target's RANK of specified craft skill
 -----------------------------------
-cmdprops =
+local commandObj = {}
+
+commandObj.cmdprops =
 {
     permission = 3,
     parameters = "sss"
 }
 
-function error(player, msg)
+local function error(player, msg)
     player:PrintToPlayer(msg)
     player:PrintToPlayer("!setcraftRank <craft skill or ID> <craft rank> (player)")
 end
 
-function onTrigger(player, craftName, tier, target)
+commandObj.onTrigger = function(player, craftName, tier, target)
     if craftName == nil then
         error(player, "You must specify a craft skill to set!")
         return
@@ -63,3 +65,5 @@ function onTrigger(player, craftName, tier, target)
         player:PrintToPlayer(string.format("%s's new skillID '%s' rank: %u", targ:getName(), craftName, targ:getSkillRank(skillID)))
     end
 end
+
+return commandObj

@@ -9,9 +9,9 @@ xi.abyssea = xi.abyssea or {}
 local sergeantData =
 {
 --  NPC Name                Zone                        CSID OpMask
-    ['DSgt_Excenmille'] = { xi.zone.ABYSSEA_ALTEPA,     500, 30846 },
-    ['DSgt_Nanaa']      = { xi.zone.ABYSSEA_ALTEPA,     501,  8176 },
-    ['DSgt_Volker']     = { xi.zone.ABYSSEA_ALTEPA,     502, 26510 },
+    ['DSgt_Excenmille'] = { xi.zone.ABYSSEA_ALTEPA,     500, 30846 }, -- !pos -330.655 -2.120 -612.885 218
+    ['DSgt_Nanaa']      = { xi.zone.ABYSSEA_ALTEPA,     501,  8176 }, -- !pos -848.093 -9.813 -605.970 218
+    ['DSgt_Volker']     = { xi.zone.ABYSSEA_ALTEPA,     502, 26510 }, -- !pos -319.894 -0.736 -167.842 218
     ['DSgt_Maat']       = { xi.zone.ABYSSEA_ULEGUERAND, 500, 32270 },
     ['DSgt_Romaa']      = { xi.zone.ABYSSEA_ULEGUERAND, 501,  6654 },
     ['DSgt_Zazarg']     = { xi.zone.ABYSSEA_ULEGUERAND, 502, 26608 },
@@ -166,8 +166,8 @@ xi.abyssea.dominionOnMobDeath = function(mob, player, dominionOpID)
 end
 
 xi.abyssea.sergeantOnTrigger = function(player, npc)
-    local sergeantInfo = sergeantData[npc:getName()]
-    local activeOp = player:getCharVar('activeDominionOp')
+    local sergeantInfo  = sergeantData[npc:getName()]
+    local activeOp      = player:getCharVar('activeDominionOp')
     local dominionNotes = player:getCurrency('dominion_note')
 
     if activeOp == 0 then
@@ -176,7 +176,7 @@ xi.abyssea.sergeantOnTrigger = function(player, npc)
         player:startEvent(sergeantInfo[2], packedInfluence[1], packedInfluence[2], packedInfluence[3], packedInfluence[4], sergeantInfo[3], 0, dominionNotes, 0)
     else
         local opProgress = player:getCharVar(getProgressVar(activeOp))
-        local opStatus = 1
+        local opStatus   = 1
 
         if player:getZoneID() ~= sergeantInfo[1] then
             opStatus = 3
@@ -208,24 +208,29 @@ xi.abyssea.sergeantOnEventUpdate = function(player, csid, option, npc)
 end
 
 xi.abyssea.sergeantOnEventFinish = function(player, csid, option, npc)
-    local finishType = bit.band(option, 0xF)
-    local zoneID = player:getZoneID()
-    local ID = zones[zoneID]
+    local finishType    = bit.band(option, 0xF)
+    local zoneID        = player:getZoneID()
+    local ID            = zones[zoneID]
     local influenceList = getOpInfluenceList(zoneID)
 
+    -- Activate OP
     if finishType == 2 then
         local selectedOp = bit.rshift(option, 4)
-        local opID = 559 + opZone[player:getZoneID()] * 14 + selectedOp
+        local opID       = 559 + opZone[player:getZoneID()] * 14 + selectedOp
 
         player:addQuest(xi.quest.log_id.ABYSSEA, dominionOpQuests[opID][1])
         player:setCharVar('activeDominionOp', opID)
         player:messageSpecial(ID.text.DOMINION_SIGNED_ON)
+
+    -- Cancel OP
     elseif finishType == 3 then
         local activeOp = player:getCharVar('activeDominionOp')
 
         player:delQuest(xi.quest.log_id.ABYSSEA, dominionOpQuests[activeOp][1])
         clearOpVars(player, activeOp)
         player:messageSpecial(ID.text.CANCELED_OBJECTIVE)
+
+    -- Complete OP
     elseif finishType == 8 then
         local activeOp = player:getCharVar('activeDominionOp')
 

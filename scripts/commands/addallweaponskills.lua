@@ -2,19 +2,20 @@
 -- func: addallweaponskills
 -- desc: Adds all learned weaponskills to the given target. If no target then to the current player.
 -----------------------------------
+local commandObj = {}
 
-cmdprops =
+commandObj.cmdprops =
 {
     permission = 2,
     parameters = "s"
 }
 
-function error(player, msg)
+local function error(player, msg)
     player:PrintToPlayer(msg)
     player:PrintToPlayer("!addallweaponskills (player)")
 end
 
-function onTrigger(player, target)
+commandObj.onTrigger = function(player, target)
     -- validate target
     local targ
     if target then
@@ -34,3 +35,5 @@ function onTrigger(player, target)
 
     player:PrintToPlayer(string.format("%s now has all learned weaponskills.", targ:getName()))
 end
+
+return commandObj

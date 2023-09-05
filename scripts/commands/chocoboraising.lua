@@ -2,8 +2,9 @@
 -- func: chocoboraising
 -- desc: Shows a custom debug menu for interacting with and debugging chocobo raising
 -----------------------------------
+local commandObj = {}
 
-cmdprops =
+commandObj.cmdprops =
 {
     permission = 1,
     parameters = ''
@@ -11,7 +12,7 @@ cmdprops =
 
 local epochDay = 86400
 
-function onTrigger(player)
+commandObj.onTrigger = function(player)
     local sex =
     {
         [0] = 'M',
@@ -159,3 +160,5 @@ function onTrigger(player)
 
     player:customMenu(menu)
 end
+
+return commandObj

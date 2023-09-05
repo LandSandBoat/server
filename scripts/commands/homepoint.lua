@@ -2,19 +2,20 @@
 -- func: homepoint
 -- desc: Sends the target to their homepoint.
 -----------------------------------
+local commandObj = {}
 
-cmdprops =
+commandObj.cmdprops =
 {
     permission = 2,
     parameters = "s"
 }
 
-function error(player, msg)
+local function error(player, msg)
     player:PrintToPlayer(msg)
     player:PrintToPlayer("!homepoint (player)")
 end
 
-function onTrigger(player, target)
+commandObj.onTrigger = function(player, target)
     -- validate target
     local targ
     if target == nil then
@@ -33,3 +34,5 @@ function onTrigger(player, target)
         player:PrintToPlayer(string.format("Sent %s to their homepoint.", targ:getName()))
     end
 end
+
+return commandObj

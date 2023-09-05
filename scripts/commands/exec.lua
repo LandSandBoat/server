@@ -2,19 +2,20 @@
 -- func: exec
 -- desc: Allows you to execute a Lua string directly from chat.
 -----------------------------------
+local commandObj = {}
 
-cmdprops =
+commandObj.cmdprops =
 {
     permission = 5,
     parameters = "s"
 }
 
-function error(player, msg)
+local function error(player, msg)
     player:PrintToPlayer(msg)
     player:PrintToPlayer("!exec <Lua string>")
 end
 
-function onTrigger(player, str)
+commandObj.onTrigger = function(player, str)
     -- Ensure a command was given..
     if str == nil or string.len(str) == 0 then
         error(player, "You must enter a string to execute.")
@@ -47,3 +48,5 @@ function onTrigger(player, str)
     -- Restore the os table..
     os = oldOs
 end
+
+return commandObj

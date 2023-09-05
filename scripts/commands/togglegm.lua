@@ -2,14 +2,15 @@
 -- func: togglegm
 -- desc: Toggles a GMs nameflags/icon.
 -----------------------------------
+local commandObj = {}
 
-cmdprops =
+commandObj.cmdprops =
 {
     permission = 1,
     parameters = ''
 }
 
-function onTrigger(player)
+commandObj.onTrigger = function(player)
     -- GM Flag Definitions
     local gmFlags =
     {
@@ -56,3 +57,5 @@ function onTrigger(player)
         end
     end
 end
+
+return commandObj

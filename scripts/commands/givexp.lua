@@ -2,19 +2,20 @@
 -- func: givexp <amount> <player>
 -- desc: Gives the GM or target player experience points.
 -----------------------------------
+local commandObj = {}
 
-cmdprops =
+commandObj.cmdprops =
 {
     permission = 5,
     parameters = "is"
 }
 
-function error(player, msg)
+local function error(player, msg)
     player:PrintToPlayer(msg)
     player:PrintToPlayer("!givexp <amount> (player)")
 end
 
-function onTrigger(player, amount, target)
+commandObj.onTrigger = function(player, amount, target)
     -- validate target
     local targ
     if target == nil then
@@ -37,3 +38,5 @@ function onTrigger(player, amount, target)
     targ:addExp(amount)
     player:PrintToPlayer(string.format("Gave %i exp to %s. They are now level %i.", amount, targ:getName(), targ:getMainLvl()))
 end
+
+return commandObj

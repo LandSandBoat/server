@@ -2,21 +2,20 @@
 -- Func: setquestvar
 -- Desc: Sets a quest variable on the target player.
 -----------------------------------
-require("scripts/globals/interaction/quest")
------------------------------------
+local commandObj = {}
 
-cmdprops =
+commandObj.cmdprops =
 {
     permission = 3,
     parameters = "siisi"
 }
 
-function error(player, msg)
+local function error(player, msg)
     player:PrintToPlayer(msg)
     player:PrintToPlayer("!setquestvar <player> <logId> <questId> <variable> <value>")
 end
 
-function onTrigger(player, target, logId, questId, variable, value)
+commandObj.onTrigger = function(player, target, logId, questId, variable, value)
     local targ
     if target == nil then
         error(player, "You must provide a player name.")
@@ -53,3 +52,5 @@ function onTrigger(player, target, logId, questId, variable, value)
     targ:setCharVar(questVarName, value)
     player:PrintToPlayer(string.format("Set %s's Quest variable '%s' to %i.", targ:getName(), questVarName, value))
 end
+
+return commandObj

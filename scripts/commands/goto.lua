@@ -2,19 +2,20 @@
 -- func: goto
 -- desc: Goes to the target player.
 -----------------------------------
+local commandObj = {}
 
-cmdprops =
+commandObj.cmdprops =
 {
     permission = 1,
     parameters = 'si'
 }
 
-function error(player, msg)
+local function error(player, msg)
     player:PrintToPlayer(msg)
     player:PrintToPlayer('!goto <player> (forceZone)')
 end
 
-function onTrigger(player, target, forceZone)
+commandObj.onTrigger = function(player, target, forceZone)
     -- validate target
     if not target then
         error(player, 'You must enter a player name.')
@@ -40,3 +41,5 @@ function onTrigger(player, target, forceZone)
         error(player, string.format('Player named: %s not found!', target))
     end
 end
+
+return commandObj

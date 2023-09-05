@@ -2,19 +2,20 @@
 -- func: delcurrency <currency type> <amount> <target player>
 -- desc: Removes the specified currency from the player
 -----------------------------------
+local commandObj = {}
 
-cmdprops =
+commandObj.cmdprops =
 {
     permission = 3,
     parameters = "sis"
 }
 
-function error(player, msg)
+local function error(player, msg)
     player:PrintToPlayer(msg)
     player:PrintToPlayer("!delcurrency <currency type> <amount> (player)")
 end
 
-function onTrigger(player, currency, amount, target)
+commandObj.onTrigger = function(player, currency, amount, target)
     -- validate target
     local targ
     if target == nil then
@@ -50,3 +51,5 @@ function onTrigger(player, currency, amount, target)
     local newAmount = targ:getCurrency(currency)
     player:PrintToPlayer(string.format("%i %s was taken from %s, for a total of %i.", amount, currency, targ:getName(), newAmount))
 end
+
+return commandObj

@@ -2,19 +2,20 @@
 -- func: addspell <spellID> <player>
 -- desc: adds the ability to use a spell to the player
 -----------------------------------
+local commandObj = {}
 
-cmdprops =
+commandObj.cmdprops =
 {
     permission = 5,
     parameters = "is"
 }
 
-function error(player, msg)
+local function error(player, msg)
     player:PrintToPlayer(msg)
     player:PrintToPlayer("!addspell <spellID> (player)")
 end
 
-function onTrigger(player, spellId, target)
+commandObj.onTrigger = function(player, spellId, target)
     -- validate spellId
     if spellId == nil then
         error(player, "Invalid spellID.")
@@ -39,3 +40,5 @@ function onTrigger(player, spellId, target)
     targ:addSpell(spellId, silent, save)
     player:PrintToPlayer(string.format("Added spell %i to %s.", spellId, targ:getName()))
 end
+
+return commandObj

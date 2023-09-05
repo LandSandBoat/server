@@ -2,14 +2,15 @@
 -- func: minigame
 -- desc: Opens a menu to allow you to quickly test minigames.
 -----------------------------------
+local commandObj = {}
 
-cmdprops =
+commandObj.cmdprops =
 {
     permission = 5,
     parameters = ""
 }
 
-function onTrigger(player)
+commandObj.onTrigger = function(player)
     local menu =
     {
         title = "Minigame Test Menu",
@@ -33,3 +34,5 @@ function onTrigger(player)
     }
     player:customMenu(menu)
 end
+
+return commandObj

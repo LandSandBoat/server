@@ -2,19 +2,20 @@
 -- func: cp
 -- desc: Adds the given amount cp to the player.
 -----------------------------------
+local commandObj = {}
 
-cmdprops =
+commandObj.cmdprops =
 {
     permission = 5,
     parameters = "i"
 }
 
-function error(player, msg)
+local function error(player, msg)
     player:PrintToPlayer(msg)
     player:PrintToPlayer("!cp <amount>")
 end
 
-function onTrigger(player, cp)
+commandObj.onTrigger = function(player, cp)
     -- validate amount
     if cp == nil or cp == 0 then
         error(player, "Invalid amount.")
@@ -25,3 +26,5 @@ function onTrigger(player, cp)
     player:addCP(cp)
     player:PrintToPlayer(string.format("Added %i cp to %s.", cp, player:getName()))
 end
+
+return commandObj

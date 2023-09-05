@@ -2,14 +2,15 @@
 -- func: giveitem <player> <itemId> <amount> <aug1> <v1> <aug2> <v2> <aug3> <v3> <aug4> <v4>
 -- desc: Gives an item to the target player.
 -----------------------------------
+local commandObj = {}
 
-cmdprops =
+commandObj.cmdprops =
 {
     permission = 5,
     parameters = "siiiiiiiiii"
 }
 
-function onTrigger(player, target, itemId, amount, aug0, aug0val, aug1, aug1val, aug2, aug2val, aug3, aug3val)
+commandObj.onTrigger = function(player, target, itemId, amount, aug0, aug0val, aug1, aug1val, aug2, aug2val, aug3, aug3val)
     if target == nil or itemId == nil then
         player:PrintToPlayer("You must enter a valid player name and item ID.")
         return
@@ -39,3 +40,5 @@ function onTrigger(player, target, itemId, amount, aug0, aug0val, aug1, aug1val,
         player:PrintToPlayer(string.format("Gave player '%s' Item with ID of '%u' ", target, itemId))
     end
 end
+
+return commandObj

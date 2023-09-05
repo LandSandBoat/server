@@ -2,19 +2,20 @@
 -- func: setskill <skill name or ID> <skill level> <target>
 -- desc: sets target's level of specified skill
 -----------------------------------
+local commandObj = {}
 
-cmdprops =
+commandObj.cmdprops =
 {
     permission = 4,
     parameters = "sis"
 }
 
-function error(player, msg)
+local function error(player, msg)
     player:PrintToPlayer(msg)
     player:PrintToPlayer("!setskill <skill name or ID> <skill level> (player)")
 end
 
-function onTrigger(player, skillName, skillLV, target)
+commandObj.onTrigger = function(player, skillName, skillLV, target)
     if skillName == nil then
         error(player, "You must specify a skill to set!")
         return
@@ -66,3 +67,5 @@ function onTrigger(player, skillName, skillLV, target)
         player:PrintToPlayer(string.format("%s's new skillID '%s' Skill: %s", targ:getName(), skillName, (targ:getCharSkillLevel(skillID) / 10)..".0"))
     end
 end
+
+return commandObj

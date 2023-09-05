@@ -1,21 +1,21 @@
----------------------------------------------------------------------------------------------------
+-----------------------------------
 -- func: resetlights
 -- desc: resets all lights to 0
----------------------------------------------------------------------------------------------------
-require("scripts/globals/abyssea")
+-----------------------------------
+local commandObj = {}
 
-cmdprops =
+commandObj.cmdprops =
 {
     permission = 5,
     parameters = "s"
 }
 
-function error(player, msg)
+local function error(player, msg)
     player:PrintToPlayer(msg)
     player:PrintToPlayer("!resetlights (player)")
 end
 
-function onTrigger(player, target)
+commandObj.onTrigger = function(player, target)
     -- validate target
     local targ
     if target == nil then
@@ -31,3 +31,5 @@ function onTrigger(player, target)
     xi.abyssea.resetPlayerLights(targ)
     player:PrintToPlayer(string.format("%s's lights have been reset!. ", targ:getName()))
 end
+
+return commandObj

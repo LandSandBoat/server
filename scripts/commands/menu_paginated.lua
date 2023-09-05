@@ -9,8 +9,9 @@
 --     : but will produce scary looking warnings in
 --     : the log.
 -----------------------------------
+local commandObj = {}
 
-cmdprops =
+commandObj.cmdprops =
 {
     permission = 5,
     parameters = ""
@@ -71,7 +72,9 @@ page2 =
     },
 }
 
-function onTrigger(player)
+commandObj.onTrigger = function(player)
     menu.options = page1
     delaySendMenu(player)
 end
+
+return commandObj

@@ -9,14 +9,15 @@
 --     : but will produce scary looking warnings in
 --     : the log.
 -----------------------------------
+local commandObj = {}
 
-cmdprops =
+commandObj.cmdprops =
 {
     permission = 5,
     parameters = ""
 }
 
-function onTrigger(player)
+commandObj.onTrigger = function(player)
     local menu =
     {
         title   = "Test Menu (Play Effect)",
@@ -61,3 +62,5 @@ function onTrigger(player)
     }
     player:customMenu(menu)
 end
+
+return commandObj

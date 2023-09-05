@@ -2,19 +2,20 @@
 -- func: addkeyitem <ID> <player>
 -- desc: Adds a key item to the player.
 -----------------------------------
+local commandObj = {}
 
-cmdprops =
+commandObj.cmdprops =
 {
     permission = 3,
     parameters = "ss"
 }
 
-function error(player, msg)
+local function error(player, msg)
     player:PrintToPlayer(msg)
     player:PrintToPlayer("!addkeyitem <key item ID> (player)")
 end
 
-function onTrigger(player, keyId, target)
+commandObj.onTrigger = function(player, keyId, target)
     -- validate key item id
     if keyId == nil then
         error(player, "You must supply a Key Item ID.")
@@ -49,3 +50,5 @@ function onTrigger(player, keyId, target)
         player:PrintToPlayer(string.format("Key item %i was given to %s.", keyId, targ:getName()))
     end
 end
+
+return commandObj

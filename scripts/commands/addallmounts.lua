@@ -2,19 +2,20 @@
 -- func: addallmounts
 -- desc: Adds all mount key items to player, granting access to their associated mounts
 -----------------------------------
+local commandObj = {}
 
-cmdprops =
+commandObj.cmdprops =
 {
     permission = 2,
     parameters = "s"
 }
 
-function error(player, msg)
+local function error(player, msg)
     player:PrintToPlayer(msg)
     player:PrintToPlayer("!addallmounts (player)")
 end
 
-function onTrigger(player, target)
+commandObj.onTrigger = function(player, target)
     -- validate target
     local targ
     if target == nil then
@@ -34,3 +35,5 @@ function onTrigger(player, target)
 
     player:PrintToPlayer(string.format("%s now has all mounts.", targ:getName()))
 end
+
+return commandObj

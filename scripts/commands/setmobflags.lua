@@ -3,19 +3,20 @@
 -- desc: Used to manipulate a mob's nameflags for testing.
 --       MUST either target a mob first or else specify a Mob ID.
 -----------------------------------
+local commandObj = {}
 
-cmdprops =
+commandObj.cmdprops =
 {
     permission = 5,
     parameters = "si"
 }
 
-function error(player, msg)
+local function error(player, msg)
     player:PrintToPlayer(msg)
     player:PrintToPlayer("!setmobflags <flags> (mob ID)")
 end
 
-function onTrigger(player, flags, target)
+commandObj.onTrigger = function(player, flags, target)
     -- validate flags
     if flags ~= nil and tonumber(flags) ~= nil then
         flags = tonumber(flags)
@@ -45,3 +46,5 @@ function onTrigger(player, flags, target)
     local hex = "0x" .. string.format("%08x", flags)
     player:PrintToPlayer(string.format("Set %s %i flags to %s (%i).", targ:getName(), targ:getID(), hex, flags))
 end
+
+return commandObj

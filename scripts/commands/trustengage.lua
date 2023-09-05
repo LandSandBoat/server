@@ -2,7 +2,9 @@
 -- func: trustengage
 -- desc: Sets the engagement type of a players trusts
 -----------------------------------
-cmdprops =
+local commandObj = {}
+
+commandObj.cmdprops =
 {
     permission = 5,
     parameters = "i"
@@ -14,7 +16,7 @@ local types =
     [1] = { 1, "Attack: Master engage" },
 }
 
-function error(player)
+local function error(player)
     player:PrintToPlayer(string.format("!trustengage <type number>\n" ..
     "0: %s\n" ..
     "1: %s", types[0][2], types[1][2]))
@@ -22,7 +24,7 @@ function error(player)
     player:PrintToPlayer(string.format("Currently set to:\n %i: %s", type, types[type][2]))
 end
 
-function onTrigger(player, type)
+commandObj.onTrigger = function(player, type)
     if xi.settings.main.ENABLE_TRUST_CUSTOM_ENGAGEMENT ~= 1 then
         player:PrintToPlayer("Trust custom engage conditions are disabled.")
         return
@@ -35,3 +37,5 @@ function onTrigger(player, type)
     player:setCharVar("TrustEngageType", type)
     player:PrintToPlayer(string.format("Set Trust engage type to: %i: %s", type, types[type][2]))
 end
+
+return commandObj

@@ -4,18 +4,18 @@
 -----------------------------------
 require("scripts/globals/teleports")
 
-cmdprops =
+commandObj.cmdprops =
 {
     permission = 5,
     parameters = "ssssss"
 }
 
-function error(player, msg)
+local function error(player, msg)
     player:PrintToPlayer(msg)
     player:PrintToPlayer("!addeffect (player) <effect> (power) (duration) (subid) (subPower)")
 end
 
-function onTrigger(player, arg1, arg2, arg3, arg4, arg5, arg6)
+commandObj.onTrigger = function(player, arg1, arg2, arg3, arg4, arg5, arg6)
     local targ
     local id
     local power
@@ -89,3 +89,5 @@ function onTrigger(player, arg1, arg2, arg3, arg4, arg5, arg6)
         targ:messagePublic(283, targ, id)
     end
 end
+
+return commandObj

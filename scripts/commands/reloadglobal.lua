@@ -10,14 +10,15 @@
 --
 -- specify "I_am_sure" without quotes to attempt to reload things that are not in \scripts\globals\
 -----------------------------------
+local commandObj = {}
 
-cmdprops =
+commandObj.cmdprops =
 {
     permission = 5,
     parameters = "ss"
 }
 
-function onTrigger(player, globalLua, other)
+commandObj.onTrigger = function(player, globalLua, other)
     if globalLua ~= nil and other == nil then
         local pathString = table.concat({ "scripts/globals/", globalLua })
         package.loaded[pathString] = nil
@@ -31,3 +32,5 @@ function onTrigger(player, globalLua, other)
         player:PrintToPlayer("Must Specify a global lua file.")
     end
 end
+
+return commandObj

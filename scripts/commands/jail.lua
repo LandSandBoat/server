@@ -2,14 +2,15 @@
 -- func: jail
 -- desc: Sends the target player to jail. (Mordion Gaol)
 -----------------------------------
+local commandObj = {}
 
-cmdprops =
+commandObj.cmdprops =
 {
     permission = 2,
     parameters = "sis"
 }
 
-function onTrigger(player, target, cellId, reason)
+commandObj.onTrigger = function(player, target, cellId, reason)
     local jailCells =
     {
         -- Floor 1 (Bottom)
@@ -51,3 +52,5 @@ function onTrigger(player, target, cellId, reason)
     targ:setCharVar("inJail", cellId)
     targ:setPos(dest[1], dest[2], dest[3], dest[4], 131)
 end
+
+return commandObj

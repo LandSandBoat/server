@@ -2,18 +2,20 @@
 -- func: delitem
 -- desc: Deletes a single item held by a player, if they have it.
 -----------------------------------
-cmdprops =
+local commandObj = {}
+
+commandObj.cmdprops =
 {
     permission = 3,
     parameters = "is"
 }
 
-function error(player, msg)
+local function error(player, msg)
     player:PrintToPlayer(msg)
     player:PrintToPlayer("!delitem <itemID> (player)")
 end
 
-function onTrigger(player, itemId, target)
+commandObj.onTrigger = function(player, itemId, target)
     -- validate itemId
     if itemId == nil or itemId < 1 then
         error(player, "Invalid itemID.")
@@ -45,3 +47,5 @@ function onTrigger(player, itemId, target)
         end
     end
 end
+
+return commandObj

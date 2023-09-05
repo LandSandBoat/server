@@ -4,8 +4,9 @@
 -- A) The given zone
 -- B) another player
 -----------------------------------
+local commandObj = {}
 
-cmdprops =
+commandObj.cmdprops =
 {
     permission = 3,
     parameters = "b"
@@ -277,7 +278,7 @@ local zoneList =
     { 0x14, 0x09, 288 }, -- Escha - Zi'Tah
 }
 
-function error(player, msg)
+local function error(player, msg)
     player:PrintToPlayer(msg)
     player:PrintToPlayer("!send <player to send> <destination player or zone>")
 end
@@ -296,7 +297,7 @@ end
 -- func: onTrigger
 -- desc: Called when this command is invoked.
 -----------------------------------
-function onTrigger(player, bytes)
+commandObj.onTrigger = function(player, bytes)
     local x = 0
     local y = 0
     local z = 0
@@ -390,3 +391,5 @@ function onTrigger(player, bytes)
         player:PrintToPlayer(string.format("Sent %s to zone %i.", targ:getName(), zone))
     end
 end
+
+return commandObj

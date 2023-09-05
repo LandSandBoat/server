@@ -761,6 +761,11 @@ xi.garrison.onTrade = function(player, npc, trade, guardNation)
     local nationID = GetRegionOwner(zone:getRegionID())
     local zoneData = xi.garrison.zoneData[zoneID]
 
+    -- If called outside of Garrison areas
+    if zoneData == nil then
+        return
+    end
+
     -- If info is missing, a debug message will be logged and Garrison will not begin
     if xi.garrison.getAllyInfo(zoneID, zoneData, nationID) == nil then
         player:PrintToPlayer('Garrison is currently unavailable for this region.', xi.msg.channel.SYSTEM_3)

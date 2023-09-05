@@ -2,18 +2,20 @@
 -- func: addWeaponSkillPoints <slot> <points> (player)
 -- desc: Adds weapon skill points to an equipped item.
 -----------------------------------
-cmdprops =
+local commandObj = {}
+
+commandObj.cmdprops =
 {
     permission = 3,
     parameters = "iis"
 }
 
-function error(player, msg)
+local function error(player, msg)
     player:PrintToPlayer(msg)
     player:PrintToPlayer("!addweaponskillpoints <slot main=0, sub=1, ranged=2> <points> (player)")
 end
 
-function onTrigger(player, slot, points, target)
+commandObj.onTrigger = function(player, slot, points, target)
     -- validate slot
     if slot < xi.slot.MAIN or slot > xi.slot.RANGED then
         error(player, "Slot out of range.")
@@ -51,3 +53,5 @@ function onTrigger(player, slot, points, target)
         player:PrintToPlayer(string.format("Could not add weapon skill points to %s.", item:getName()))
     end
 end
+
+return commandObj

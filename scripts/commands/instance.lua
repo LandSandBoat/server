@@ -2,18 +2,19 @@
 -- func: !instance <instance_id>
 -- desc: Load an instance and take you there
 -----------------------------------
+local commandObj = {}
 
-cmdprops =
+commandObj.cmdprops =
 {
     permission = 5,
     parameters = "i"
 }
 
-function error(player, msg)
+local function error(player, msg)
     player:PrintToPlayer(msg .. "\n!instance <instance_id>")
 end
 
-function onTrigger(player, instance_id)
+commandObj.onTrigger = function(player, instance_id)
     if instance_id == nil then
         error(player, "You must provide an instance id")
         return
@@ -28,3 +29,5 @@ function onTrigger(player, instance_id)
         player:createInstance(instance_id)
     end
 end
+
+return commandObj

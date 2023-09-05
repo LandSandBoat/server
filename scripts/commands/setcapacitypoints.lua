@@ -2,19 +2,20 @@
 -- func: setcapacitypoints <amount> <player>
 -- desc: Sets the target players job points count.
 ---------------------------------------------------------------------------------------------------
+local commandObj = {}
 
-cmdprops =
+commandObj.cmdprops =
 {
     permission = 5,
     parameters = "is"
 }
 
-function error(player, msg)
+local function error(player, msg)
     player:PrintToPlayer(msg)
     player:PrintToPlayer("!setcapacitypoints <amount> (player)")
 end
 
-function onTrigger(player, amount, target)
+commandObj.onTrigger = function(player, amount, target)
     -- validate amount
     if amount == nil or amount < 0 then
         error(player, "Invalid amount.")
@@ -46,3 +47,5 @@ function onTrigger(player, amount, target)
     targ:setCapacityPoints(amount)
     player:PrintToPlayer(string.format("%s now has %i capacity points on %s.", targ:getName(), amount, jobNameByNum[targ:getMainJob()]))
 end
+
+return commandObj

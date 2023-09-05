@@ -2,19 +2,20 @@
 -- func: setplayervar
 -- desc: Sets a variable on the target player.
 -----------------------------------
+local commandObj = {}
 
-cmdprops =
+commandObj.cmdprops =
 {
     permission = 3,
     parameters = "ssi"
 }
 
-function error(player, msg)
+local function error(player, msg)
     player:PrintToPlayer(msg)
     player:PrintToPlayer("!setplayervar <player> <variable> <value>")
 end
 
-function onTrigger(player, target, variable, value)
+commandObj.onTrigger = function(player, target, variable, value)
     -- validate target
     local targ
     if target == nil then
@@ -43,3 +44,5 @@ function onTrigger(player, target, variable, value)
     targ:setCharVar(variable, value)
     player:PrintToPlayer(string.format("Set %s's variable '%s' to %i.", targ:getName(), variable, value))
 end
+
+return commandObj

@@ -2,18 +2,20 @@
 -- func: getmod <modID>
 -- desc: gets a mod by ID on the player or cursor target
 -----------------------------------
-cmdprops =
+local commandObj = {}
+
+commandObj.cmdprops =
 {
     permission = 1,
     parameters = "s"
 }
 
-function error(player, msg)
+local function error(player, msg)
     player:PrintToPlayer(msg)
     player:PrintToPlayer("!getmod <modID>")
 end
 
-function onTrigger(player, id)
+commandObj.onTrigger = function(player, id)
     -- invert xi.mod table
     local modNameByNum = {}
     for k, v in pairs(xi.mod) do
@@ -50,3 +52,5 @@ function onTrigger(player, id)
 
     player:PrintToPlayer(string.format("%s's Mod %i (%s) is %i", effectTarget:getName(), modId, modName, effectTarget:getMod(modId)))
 end
+
+return commandObj
