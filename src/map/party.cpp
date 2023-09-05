@@ -1264,6 +1264,11 @@ bool CParty::HasTrusts()
 
 void CParty::RefreshFlags(std::vector<partyInfo_t>& info)
 {
+    // Clear pointers in case they no longer exist on this instance
+    m_PLeader        = nullptr;
+    m_PQuarterMaster = nullptr;
+    m_PSyncTarget    = nullptr;
+
     for (auto&& memberinfo : info)
     {
         if (memberinfo.partyid == m_PartyID)
