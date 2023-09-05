@@ -96,7 +96,8 @@ public:
     uint32 getJstMidnight(); // Upcoming JST midnight in unix timestamp
 
     uint32 getVanaTime() const;
-    int32  getCustomEpoch() const;
+    uint32 getEpoch() const;
+    uint32 getCustomEpoch() const;
 
     void setCustomEpoch(int32 epoch);
 

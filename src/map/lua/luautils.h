@@ -163,6 +163,8 @@ namespace luautils
     uint32 GetSystemTime();
     uint32 JstMidnight();
     uint32 JstWeekday();
+    uint32 NextGameTime(uint16 intervalSeconds);
+    uint32 NextJstWeek();
     uint32 VanadielTime();          // Gets the current Vanadiel Time in timestamp format (SE epoch in earth seconds)
     uint8  VanadielTOTD();          // текущее игровое время суток
     uint32 VanadielHour();          // текущие Vanadiel часы

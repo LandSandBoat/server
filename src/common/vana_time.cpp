@@ -219,7 +219,12 @@ uint32 CVanaTime::getVanaTime() const
     return (uint32)time(nullptr) - (m_customEpoch ? m_customEpoch : VTIME_BASEDATE);
 }
 
-int32 CVanaTime::getCustomEpoch() const
+uint32 CVanaTime::getEpoch() const
+{
+    return m_customEpoch ? m_customEpoch : VTIME_BASEDATE;
+}
+
+uint32 CVanaTime::getCustomEpoch() const
 {
     return m_customEpoch;
 }

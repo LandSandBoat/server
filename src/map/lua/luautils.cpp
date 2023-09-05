@@ -174,6 +174,9 @@ namespace luautils
         lua.set_function("GetSystemTime", &luautils::GetSystemTime);
         lua.set_function("JstMidnight", &luautils::JstMidnight);
         lua.set_function("JstWeekday", &luautils::JstWeekday);
+        lua.set_function("NextGameTime", &luautils::NextGameTime);
+        lua.set_function("NextJstDay", &luautils::JstMidnight);
+        lua.set_function("NextJstWeek", &luautils::NextJstWeek);
         lua.set_function("VanadielTime", &luautils::VanadielTime);
         lua.set_function("VanadielTOTD", &luautils::VanadielTOTD);
         lua.set_function("VanadielHour", &luautils::VanadielHour);
@@ -1446,6 +1449,7 @@ namespace luautils
      ************************************************************************/
     uint32 GetSystemTime()
     {
+        TracyZoneScoped;
         return CVanaTime::getInstance()->getSysTime();
     }
 
@@ -1475,6 +1479,33 @@ namespace luautils
 
     /************************************************************************
      *                                                                       *
+     * NextGameTime - Returns System Time for the next Vana'diel interval
+     * See: VTIME_x defintions, or xi.vanaType for the values to pass
+     *                                                                       *
+     ************************************************************************/
+    uint32 NextGameTime(uint16 intervalSeconds)
+    {
+        TracyZoneScoped;
+        uint32 vanaTime         = CVanaTime::getInstance()->getVanaTime();
+        uint32 secondsRemaining = vanaTime % intervalSeconds;
+
+        return CVanaTime::getInstance()->getEpoch() + vanaTime + secondsRemaining;
+    }
+
+    // NOTE: NextJstDay is also defined, and maps to JstMidnight
+
+    uint32 NextJstWeek()
+    {
+        TracyZoneScoped;
+        uint32 jstWeekday      = CVanaTime::getInstance()->getJstWeekDay(); // 0..6 Days since Sunday
+        uint32 nextJstMidnight = CVanaTime::getInstance()->getJstMidnight();
+
+        // Start with the "Next" Midnight, and apply N days worth of time to it
+        return nextJstMidnight + (6 - jstWeekday) * 60 * 60 * 24;
+    }
+
+    /************************************************************************
+     *                                                                       *
      *   Return Moon Phase                                                   *
      *                                                                       *
      ************************************************************************/
@@ -1488,7 +1519,7 @@ namespace luautils
     bool SetVanadielTimeOffset(int32 offset)
     {
         TracyZoneScoped;
-        int32 custom = CVanaTime::getInstance()->getCustomEpoch();
+        uint32 custom = CVanaTime::getInstance()->getCustomEpoch();
         CVanaTime::getInstance()->setCustomEpoch((custom ? custom : VTIME_BASEDATE) - offset);
         return true;
     }
