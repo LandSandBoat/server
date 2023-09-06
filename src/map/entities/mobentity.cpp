@@ -718,7 +718,7 @@ void CMobEntity::OnMobSkillFinished(CMobSkillState& state, action_t& action)
     }
     // Non-damaging mob abilities to use proper humanoid animation IDs
     else if (PSkill->getID() == 1428 || PSkill->getID() == 1429 || (PSkill->getID() >= 1433 && PSkill->getID() <= 1436) || PSkill->getID() == 1438 ||
-             (PSkill->getID() >= 1992 && PSkill->getID() >= 1997))
+             (PSkill->getID() >= 1992 && PSkill->getID() <= 1997))
     {
         action.actiontype = ACTION_JOBABILITY_FINISH;
     }
