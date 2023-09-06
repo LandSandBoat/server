@@ -2521,7 +2521,7 @@ namespace battleutils
             PAttacker->addTP(tp);
 
             // Targets of damaging spells gain 50 tp
-            PDefender->addTP((uint16)   50);
+            PDefender->addTP((uint16)50);
         }
 
         return damage;
