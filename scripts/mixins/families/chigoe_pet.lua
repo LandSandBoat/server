@@ -5,7 +5,7 @@ require('scripts/globals/mixins')
 g_mixins = g_mixins or {}
 g_mixins.families = g_mixins.families or {}
 
-local jobAbilities = set({
+local jobAbilities = set{
     xi.jobAbility.SHIELD_BASH,
     xi.jobAbility.JUMP,
     xi.jobAbility.HIGH_JUMP,
@@ -17,7 +17,7 @@ local jobAbilities = set({
     xi.jobAbility.BOXSTEP,
     xi.jobAbility.STUTTER_STEP,
     xi.jobAbility.FEATHER_STEP,
-})
+}
 
 g_mixins.families.chigoe_pet = function(hostMob)
     local ID = zones[hostMob:getZoneID()]
