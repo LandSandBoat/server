@@ -878,3 +878,333 @@ xi.nyzul.layoutSpawnPoints = -- Spawnpoints by layout.
         [92] = { x =   582, y = 0, z =   -182 },
     }
 }
+
+xi.nyzul.enemyLeaders =
+{
+    -- [Floor_Section] = { first_mob_id, last_mob_id },
+    [  1] = { ID.mob[51].MOKKE,           ID.mob[51].LONG_HORNED_CHARIOT }, -- Regular enemy leaders. Can appear on all floors, except floor-20 multiples.
+    [ 40] = { ID.mob[51].ADAMANTOISE,     ID.mob[51].ADAMANTOISE + 2     }, -- Floors 1 to 40 bosses. Original Land Kings.
+    [100] = { ID.mob[51].ADAMANTOISE + 3, ID.mob[51].ADAMANTOISE + 5     }, -- Floors 60 to 100 bosses. ToAU Land Kings.
+}
+
+xi.nyzul.specifiedMobs =
+{
+    -- [Mob family] = { first_mob_id, last_mob_id },
+    [1] = { ID.mob[51].OFFSET_SPECIFIED,      ID.mob[51].OFFSET_SPECIFIED +  4 }, -- Heraldic Imp x5
+    [2] = { ID.mob[51].OFFSET_SPECIFIED +  5, ID.mob[51].OFFSET_SPECIFIED +  9 }, -- Psycheflayer x5
+    [3] = { ID.mob[51].OFFSET_SPECIFIED + 10, ID.mob[51].OFFSET_SPECIFIED + 14 }, -- Poroggo Gent x5
+    [4] = { ID.mob[51].OFFSET_SPECIFIED + 15, ID.mob[51].OFFSET_SPECIFIED + 19 }, -- Ebony Pudding x5
+    [5] = { ID.mob[51].OFFSET_SPECIFIED + 20, ID.mob[51].OFFSET_SPECIFIED + 21 }, -- Qiqirn_Treasure_Hunter x2
+    [6] = { ID.mob[51].OFFSET_SPECIFIED + 22, ID.mob[51].OFFSET_SPECIFIED + 24 }, -- Qiqirn_Archaeologist x3
+    [7] = { ID.mob[51].OFFSET_SPECIFIED + 25, ID.mob[51].OFFSET_SPECIFIED + 29 }, -- Racing_Chariot x5
+}
+
+xi.nyzul.evenFloorRandomNMs =
+{
+    -- [Floor_Section] = { first_mob_id, last_mob_id },
+    [1] = { ID.mob[51].OFFSET_NM,      ID.mob[51].OFFSET_NM +  8 }, -- Floors 1 to 20.
+    [2] = { ID.mob[51].OFFSET_NM + 18, ID.mob[51].OFFSET_NM + 26 }, -- Floors 21 to 40.
+    [3] = { ID.mob[51].OFFSET_NM + 36, ID.mob[51].OFFSET_NM + 44 }, -- Floors 41 to 60.
+    [4] = { ID.mob[51].OFFSET_NM + 54, ID.mob[51].OFFSET_NM + 62 }, -- Floors 61 to 80.
+    [5] = { ID.mob[51].OFFSET_NM + 72, ID.mob[51].OFFSET_NM + 80 }, -- Floors 81 to 100.
+}
+
+xi.nyzul.oddFloorRandomNMs =
+{
+    -- [Floor_Section] = { first_mob_id, last_mob_id },
+    [1] = { ID.mob[51].OFFSET_NM +  9, ID.mob[51].OFFSET_NM + 17 }, -- Floors 1 to 20.
+    [2] = { ID.mob[51].OFFSET_NM + 27, ID.mob[51].OFFSET_NM + 35 }, -- Floors 21 to 40.
+    [3] = { ID.mob[51].OFFSET_NM + 45, ID.mob[51].OFFSET_NM + 53 }, -- Floors 41 to 60.
+    [4] = { ID.mob[51].OFFSET_NM + 63, ID.mob[51].OFFSET_NM + 71 }, -- Floors 61 to 80.
+    [5] = { ID.mob[51].OFFSET_NM + 81, ID.mob[51].OFFSET_NM + 89 }, -- Floors 81 to 100.
+}
+
+xi.nyzul.floorEntities =
+{
+    -- [Mob family] = { first_mob_id, last_mob_id },
+    [ 1] = { ID.mob[51].OFFSET_REGULAR,       ID.mob[51].OFFSET_REGULAR +  11 }, -- Aquans
+    [ 2] = { ID.mob[51].OFFSET_REGULAR +  12, ID.mob[51].OFFSET_REGULAR +  23 }, -- Amorphs
+    [ 3] = { ID.mob[51].OFFSET_REGULAR +  24, ID.mob[51].OFFSET_REGULAR +  35 }, -- Arcana
+    [ 4] = { ID.mob[51].OFFSET_REGULAR +  36, ID.mob[51].OFFSET_REGULAR +  47 }, -- Undead
+    [ 5] = { ID.mob[51].OFFSET_REGULAR +  48, ID.mob[51].OFFSET_REGULAR +  59 }, -- Vermin
+    [ 6] = { ID.mob[51].OFFSET_REGULAR +  60, ID.mob[51].OFFSET_REGULAR +  71 }, -- Demons
+    [ 7] = { ID.mob[51].OFFSET_REGULAR +  72, ID.mob[51].OFFSET_REGULAR +  83 }, -- Dragons
+    [ 8] = { ID.mob[51].OFFSET_REGULAR +  84, ID.mob[51].OFFSET_REGULAR +  95 }, -- Birds
+    [ 9] = { ID.mob[51].OFFSET_REGULAR +  96, ID.mob[51].OFFSET_REGULAR + 107 }, -- Beasts
+    [10] = { ID.mob[51].OFFSET_REGULAR + 108, ID.mob[51].OFFSET_REGULAR + 119 }, -- Plantoids
+    [11] = { ID.mob[51].OFFSET_REGULAR + 120, ID.mob[51].OFFSET_REGULAR + 131 }, -- Lizards
+    [12] = { ID.mob[51].OFFSET_REGULAR + 132, ID.mob[51].OFFSET_REGULAR + 143 }, -- Amorphs 2
+    [13] = { ID.mob[51].OFFSET_REGULAR + 144, ID.mob[51].OFFSET_REGULAR + 155 }, -- Mixed
+    [14] = { ID.mob[51].OFFSET_REGULAR + 156, ID.mob[51].OFFSET_REGULAR + 167 }, -- Mixed 2
+    [15] = { ID.mob[51].OFFSET_REGULAR + 168, ID.mob[51].OFFSET_REGULAR + 179 }, -- Amorphs 3
+    [16] = { ID.mob[51].OFFSET_REGULAR + 180, ID.mob[51].OFFSET_REGULAR + 191 }, -- Arcana 2
+    [17] = { ID.mob[51].OFFSET_GEARS,         ID.mob[51].OFFSET_GEARS   +   5 }, -- Gears
+}
+
+-----------------------------------
+-- Local functions
+-----------------------------------
+
+local function lampsActivate(instance)
+    local floorLayout    = instance:getLocalVar('Nyzul_Isle_FloorLayout')
+    local lampsObjective = instance:getLocalVar('[Lamps]Objective')
+    local runicLamp1     = GetNPCByID(ID.npc.RUNIC_LAMP_OFFSET, instance)
+    local partySize      = utils.clamp(instance:getLocalVar('partySize'), 3, 5)
+    local lampPoints     = {}
+
+    for i = 1, #xi.nyzulPoint.LampPoint[floorLayout] do
+        table.insert(lampPoints, i, xi.nyzulPoint.LampPoint[floorLayout][i])
+    end
+
+    -- Lamp Objective: Register
+    if lampsObjective == xi.nyzul.lampsObjective.REGISTER then
+        local spawnPoint = math.random(1, #lampPoints)
+
+        instance:setLocalVar('[Lamp]PartySize', instance:getLocalVar('partySize'))
+        runicLamp1:setPos(lampPoints[spawnPoint])
+        runicLamp1:setStatus(xi.status.NORMAL)
+
+    -- Lamp Objective: Activate All
+    elseif lampsObjective == xi.nyzul.lampsObjective.ACTIVATE_ALL then
+        local runicLamps = math.random(2, partySize - 1)
+        instance:setLocalVar('[Lamp]count', runicLamps)
+
+        for i = ID.npc.RUNIC_LAMP_OFFSET, ID.npc.RUNIC_LAMP_OFFSET + runicLamps do
+            local spawnPoint = math.random(1, #lampPoints)
+
+            GetNPCByID(i, instance):setPos(lampPoints[spawnPoint])
+            GetNPCByID(i, instance):setStatus(xi.status.NORMAL)
+            table.remove(lampPoints, spawnPoint)
+        end
+
+    -- Lamp Objective: Activate in Order
+    elseif lampsObjective == xi.nyzul.lampsObjective.ORDER then
+        local runicLamps = math.random(2, 4)
+        local lampOrder  = {}
+
+        for j = 1, runicLamps + 1 do
+            table.insert(lampOrder, j)
+        end
+
+        instance:setLocalVar('[Lamp]count', runicLamps)
+        instance:setLocalVar('[Lamp]lampRegister', 0)
+
+        for i = ID.npc.RUNIC_LAMP_OFFSET, ID.npc.RUNIC_LAMP_OFFSET + runicLamps do
+            local spawnPoint = math.random(1, #lampPoints)
+            local lampRandom = math.random(1, #lampOrder)
+
+            GetNPCByID(i, instance):setPos(lampPoints[spawnPoint])
+            GetNPCByID(i, instance):setStatus(xi.status.NORMAL)
+            GetNPCByID(i, instance):setLocalVar('[Lamp]order', lampOrder[lampRandom])
+
+            table.remove(lampOrder, lampRandom)
+            table.remove(lampPoints, spawnPoint)
+        end
+    end
+end
+
+-----------------------------------
+-- Global functions
+-----------------------------------
+
+xi.nyzul.prepareMobs(instance)
+    local currentFloor = instance:getLocalVar('Nyzul_Current_Floor')
+
+    -- 20th floor bosses.
+    if currentFloor % 20 == 0 then
+        local floorBoss = 0
+
+        if currentFloor <= 40 then
+            floorBoss = math.random(xi.nyzul.enemyLeaders[40][1], xi.nyzul.enemyLeaders[40][2])
+        elseif currentFloor <= 100 then
+            floorBoss = math.random(xi.nyzul.enemyLeaders[100][1], xi.nyzul.enemyLeaders[100][2])
+        end
+
+        GetMobByID(ID.mob[51].ARCHAIC_RAMPART1, instance):setSpawn(-36, 0, -362, 0)
+        GetMobByID(floorBoss, instance):setSpawn(-55.000, 1, -380.000, 250)
+        SpawnMob(ID.mob[51].ARCHAIC_RAMPART1, instance)
+        SpawnMob(floorBoss, instance)
+
+    -- All other floors except free.
+    elseif instance:getStage() ~= xi.nyzul.objective.FREE_FLOOR then
+        -- Build dynamic table with all the possible spawn points.
+        local floorLayout      = instance:getLocalVar('Nyzul_Isle_FloorLayout')
+        local pointTable       = xi.nyzul.layoutSpawnPoints[floorLayout]
+        local sPoint           = 0
+        local dTableSpawnPoint = {}
+
+        for i = 1, #pointTable do
+            table.insert(dTableSpawnPoint, i, pointTable[i])
+        end
+
+        -- Spawn objective-specific mobs.
+        switch (instance:getStage()) : caseof
+        {
+            -- Enemy Leader Objective
+            [xi.nyzul.objective.ELIMINATE_ENEMY_LEADER] = function()
+                local floorBoss = math.random(xi.nyzul.enemyLeaders[1][1], xi.nyzul.enemyLeaders[1][2])
+                sPoint          = math.random(1, #dTableSpawnPoint)
+
+                if floorBoss == ID.mob[51].MOKKE + 18 then
+                    floorBoss = ID.mob[51].MOKKE + 17 + (math.random(0, 1) * 2)
+                end
+
+                GetMobByID(floorBoss, instance):setSpawn(sPoint.x, sPoint.y, sPoint.z, math.random(0, 255))
+                SpawnMob(floorBoss, instance)
+                table.remove(dTableSpawnPoint, sPoint)
+            end,
+
+            -- Specified Enemy Group Objective
+            [xi.nyzul.objective.ELIMINATE_SPECIFIED_ENEMIES] = function()
+                local specificGroup         = math.random(1, 7)
+                local specificEnemyGroup    = xi.nyzul.specifiedMobs[specificGroup]
+                local numberOfMobs          = specificEnemyGroup[2] - specificEnemyGroup[1] + 1
+                local groupAmount           = math.random(2, numberOfMobs)
+                local dTableSpecificEnemies = {}
+
+                for i = specificEnemyGroup[1], specificEnemyGroup[2] do
+                    table.insert(dTableSpecificEnemies, i)
+                end
+
+                while groupAmount > 0 do
+                    local randomEnemy = math.random(1, #dTableSpecificEnemies)
+                    local enemy       = dTableSpecificEnemies[randomEnemy]
+                    sPoint            = math.random(1, #dTableSpawnPoint)
+
+                    GetMobByID(enemy, instance):setSpawn(sPoint.x, sPoint.y, sPoint.z, math.random(0, 255))
+                    SpawnMob(enemy, instance)
+                    table.remove(dTableSpawnPoint, sPoint)
+                    table.remove(dTableSpecificEnemies, randomEnemy)
+                    instance:setLocalVar('Eliminate', instance:getLocalVar('Eliminate') + 1)
+
+                    groupAmount = groupAmount - 1
+                end
+            end,
+
+            -- Eliminate All Objective
+            [xi.nyzul.objective.ELIMINATE_ALL_ENEMIES] = function()
+                if math.random(1, 100) <= 20 then -- 20% chance that Dahank will spawn.
+                    sPoint    = math.random(1, #dTableSpawnPoint)
+
+                    GetMobByID(ID.mob[51].DAHAK, instance):setSpawn(sPoint.x, sPoint.y, sPoint.z, math.random(0, 255))
+                    SpawnMob(ID.mob[51].DAHAK, instance)
+                    table.remove(dTableSpawnPoint, sPoint)
+                    instance:setLocalVar('Eliminate', instance:getLocalVar('Eliminate') + 1)
+                end
+            end,
+
+            -- Activate Lamps Objective
+            [xi.nyzul.objective.ACTIVATE_ALL_LAMPS] = function()
+                instance:setLocalVar('[Lamps]Objective', math.random(xi.nyzul.lampsObjective.REGISTER, xi.nyzul.lampsObjective.ORDER))
+                lampsActivate(instance)
+            end,
+        }
+
+        -- Spawn Rampart-Type mobs.
+        if math.random(1, 100) <= 90 then
+            sPoint    = math.random(1, #dTableSpawnPoint)
+
+            GetMobByID(ID.mob[51].ARCHAIC_RAMPART1, instance):setSpawn(sPoint.x, sPoint.y, sPoint.z, math.random(0, 255))
+
+            SpawnMob(ID.mob[51].ARCHAIC_RAMPART1, instance)
+            table.remove(dTableSpawnPoint, sPoint)
+
+            if instance:getStage() == xi.nyzul.objective.ELIMINATE_ALL_ENEMIES then
+                instance:setLocalVar('Eliminate', instance:getLocalVar('Eliminate') + 1)
+            end
+        end
+
+        if math.random(1, 100) <= 20 then
+            sPoint    = math.random(1, #dTableSpawnPoint)
+
+            GetMobByID(ID.mob[51].ARCHAIC_RAMPART2, instance):setSpawn(sPoint.x, sPoint.y, sPoint.z, math.random(0, 255))
+            SpawnMob(ID.mob[51].ARCHAIC_RAMPART2, instance)
+            table.remove(dTableSpawnPoint, sPoint)
+
+            if instance:getStage() == xi.nyzul.objective.ELIMINATE_ALL_ENEMIES then
+                instance:setLocalVar('Eliminate', instance:getLocalVar('Eliminate') + 1)
+            end
+        end
+
+        -- Spawn Gear-Type mobs.
+        if instance:getLocalVar('gearObjective') > 0 then
+            for i = xi.nyzul.floorEntities[17][1], xi.nyzul.floorEntities[17][2] do
+                sPoint    = math.random(1, #dTableSpawnPoint)
+
+                instance:setLocalVar('gearPenalty', math.random(xi.nyzul.penalty.TIME, xi.nyzul.penalty.PATHOS))
+                GetMobByID(i, instance):setSpawn(sPoint.x, sPoint.y, sPoint.z, math.random(0, 255))
+                SpawnMob(i, instance)
+                table.remove(dTableSpawnPoint, sPoint)
+            end
+        end
+
+        -- Spawn fodder NM's.
+        local spawnedNMs = math.random(0, 4)
+
+        if spawnedNMs > 0 then
+            local floorSection   = math.floor(currentFloor / 20) + 1
+            local mobGroup       = xi.nyzul.oddFloorRandomNMs[floorSection]
+            local dTableFloorNMs = {}
+
+            -- Even floors.
+            if currentFloor % 2 == 0 then
+                mobGroup = xi.nyzul.evenFloorRandomNMs[floorSection]
+            end
+
+            for i = mobGroup[1], mobGroup[2] do
+                table.insert(dTableFloorNMs, i)
+            end
+
+            while spawnedNMs > 2 do
+                local index = math.random(1, #dTableFloorNMs)
+                sPoint      = math.random(1, #dTableSpawnPoint)
+
+                GetMobByID(dTableFloorNMs[index], instance):setSpawn(sPoint.x, sPoint.y, sPoint.z, math.random(0, 255))
+                SpawnMob(dTableFloorNMs[index], instance)
+
+                table.remove(dTableFloorNMs, index)
+                table.remove(dTableSpawnPoint, sPoint)
+
+                spawnedNMs = spawnedNMs - 1
+
+                if instance:getStage() == xi.nyzul.objective.ELIMINATE_ALL_ENEMIES then
+                    instance:setLocalVar('Eliminate', instance:getLocalVar('Eliminate') + 1)
+                end
+            end
+        end
+
+        -- Spawn fodder regular mobs.
+        local mobFamily     = math.random(1, 16)
+        local enemyAmount   = math.random(6, 12)
+        local dTableEnemies = {}
+
+        for i = xi.nyzul.floorEntities[mobFamily][1], xi.nyzul.floorEntities[mobFamily][2] do
+            table.insert(dTableEnemies, i)
+        end
+
+        while enemyAmount > 0 do
+            local randomEnemy = math.random(1, #dTableEnemies)
+            local mobID       = dTableEnemies[randomEnemy]
+            sPoint            = math.random(1, #dTableSpawnPoint)
+
+            if instance:getStage() == xi.nyzul.objective.ELIMINATE_ALL_ENEMIES then
+                instance:setLocalVar('Eliminate', instance:getLocalVar('Eliminate') + 1)
+            elseif
+                instance:getStage() == xi.nyzul.objective.ELIMINATE_SPECIFIED_ENEMY and
+                instance:getLocalVar('Nyzul_Specified_Enemy') == 0
+            then
+                instance:setLocalVar('Nyzul_Specified_Enemy', mobID)
+            end
+
+            GetMobByID(mobID, instance):setSpawn(sPoint.x, sPoint.y, sPoint.z, math.random(0, 255))
+            SpawnMob(mobID, instance)
+
+            -- Remove used up entries from dynamic tables.
+            table.remove(dTableEnemies, randomEnemy)
+            table.remove(dTableSpawnPoint, sPoint)
+
+            -- Decrease loop.
+            enemyAmount = enemyAmount - 1
+        end
+    end
+end
