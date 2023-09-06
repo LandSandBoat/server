@@ -41,7 +41,7 @@ public:
     uint8  getPostRights();
 
     void setColor(uint16 color);
-    void setPostRights(uint8 postrights); // Updates lsmes privilege and writes to db
+    void setPostRights(uint8 postrights);
 
     const std::string& getName();
     void               setName(const std::string& name);
@@ -57,7 +57,7 @@ public:
     void PushPacket(uint32 senderID, CBasicPacket* packet);
     void PushLinkshellMessage(CCharEntity* PChar, bool ls1);
 
-    std::vector<CCharEntity*> members; // список участников linkshell
+    std::vector<CCharEntity*> members;
     uint8                     m_postRights;
 
 private:
