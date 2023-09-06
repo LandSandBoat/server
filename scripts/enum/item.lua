@@ -469,6 +469,7 @@ xi.item =
     SACRED_BRANCH                   = 1153,
     THREE_LEAF_MANDRAGORA_BUD       = 1154,
     HANDFUL_OF_IRON_SAND            = 1155,
+    CRAWLER_CALCULUS                = 1156,
     HANDFUL_OF_THE_SANDS_OF_SILENCE = 1157,
     WANDERING_BULB                  = 1158,
     WYVERN_EGG                      = 1159,
