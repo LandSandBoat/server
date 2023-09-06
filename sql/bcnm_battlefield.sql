@@ -1665,10 +1665,10 @@ INSERT INTO `bcnm_battlefield` VALUES (897,1,16896173,0);
 INSERT INTO `bcnm_battlefield` VALUES (928,1,16900312,1); -- ouryu_cometh
 INSERT INTO `bcnm_battlefield` VALUES (928,1,16900313,1);
 INSERT INTO `bcnm_battlefield` VALUES (928,1,16900314,3);
-INSERT INTO `bcnm_battlefield` VALUES (928,1,16900315,1);
-INSERT INTO `bcnm_battlefield` VALUES (928,1,16900316,1);
-INSERT INTO `bcnm_battlefield` VALUES (928,1,16900317,1);
-INSERT INTO `bcnm_battlefield` VALUES (928,1,16900318,1);
+INSERT INTO `bcnm_battlefield` VALUES (928,1,16900315,0);
+INSERT INTO `bcnm_battlefield` VALUES (928,1,16900316,0);
+INSERT INTO `bcnm_battlefield` VALUES (928,1,16900317,0);
+INSERT INTO `bcnm_battlefield` VALUES (928,1,16900318,0);
 INSERT INTO `bcnm_battlefield` VALUES (960,1,16904193,3); -- ancient_vows
 INSERT INTO `bcnm_battlefield` VALUES (960,1,16904194,3);
 INSERT INTO `bcnm_battlefield` VALUES (960,1,16904195,3);
