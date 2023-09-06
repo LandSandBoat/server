@@ -9829,7 +9829,7 @@ INSERT INTO `mob_groups` VALUES (17,6295,138,'Orcish_Warlord',960,0,1062,0,0,76,
 INSERT INTO `mob_groups` VALUES (18,5553,138,'Adaman_Quadav',960,0,23,0,0,77,79,0);
 INSERT INTO `mob_groups` VALUES (19,6251,138,'Gold_Quadav',960,0,1194,0,0,77,79,0);
 INSERT INTO `mob_groups` VALUES (20,6255,138,'Magnes_Quadav',960,0,1575,0,0,77,79,0);
-INSERT INTO `mob_groups` VALUES (21,6256,138,'Star_Ruby_Quadav',960,0,1349,0,0,77,79,0);
+INSERT INTO `mob_groups` VALUES (21,6256,138,'Star_Ruby_Quadav',960,0,0,0,0,77,79,0);
 INSERT INTO `mob_groups` VALUES (22,4430,138,'Yagudo_Knight_Templar',960,0,2725,0,0,77,79,0);
 INSERT INTO `mob_groups` VALUES (23,4417,138,'Yagudo_Eradicator',960,0,2725,0,0,77,79,0);
 INSERT INTO `mob_groups` VALUES (24,5493,138,'Yagudo_Chanter',960,0,2698,0,0,77,79,0);
