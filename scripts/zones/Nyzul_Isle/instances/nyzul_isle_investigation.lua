@@ -166,12 +166,8 @@ local function pickMobs(instance)
     elseif instance:getStage() ~= xi.nyzul.objective.FREE_FLOOR then
         -- Build dynamic table with all the possible spawn points.
         local floorLayout      = instance:getLocalVar('Nyzul_Isle_FloorLayout')
-        local pointTable       = xi.nyzulPoint.SpawnPoint[floorLayout]
+        local pointTable       = xi.nyzul.layoutSpawnPoints[floorLayout]
         local sPoint           = 0
-        local sPointX          = 0
-        local sPointY          = 0
-        local sPointZ          = 0
-        local sPointRot        = 0
         local dTableSpawnPoint = {}
 
         for i = 1, #pointTable do
@@ -185,16 +181,12 @@ local function pickMobs(instance)
             [xi.nyzul.objective.ELIMINATE_ENEMY_LEADER] = function()
                 local floorBoss = math.random(xi.nyzul.enemyLeaders[1][1], xi.nyzul.enemyLeaders[1][2])
                 sPoint          = math.random(1, #dTableSpawnPoint)
-                sPointX         = dTableSpawnPoint[sPoint][1]
-                sPointY         = dTableSpawnPoint[sPoint][2]
-                sPointZ         = dTableSpawnPoint[sPoint][3]
-                sPointRot       = dTableSpawnPoint[sPoint][4]
 
                 if floorBoss == ID.mob[51].MOKKE + 18 then
                     floorBoss = ID.mob[51].MOKKE + 17 + (math.random(0, 1) * 2)
                 end
 
-                GetMobByID(floorBoss, instance):setSpawn(sPointX, sPointY, sPointZ, sPointRot)
+                GetMobByID(floorBoss, instance):setSpawn(sPoint.x, sPoint.y, sPoint.z, math.random(0, 255))
                 SpawnMob(floorBoss, instance)
                 table.remove(dTableSpawnPoint, sPoint)
             end,
@@ -215,12 +207,8 @@ local function pickMobs(instance)
                     local randomEnemy = math.random(1, #dTableSpecificEnemies)
                     local enemy       = dTableSpecificEnemies[randomEnemy]
                     sPoint            = math.random(1, #dTableSpawnPoint)
-                    sPointX           = dTableSpawnPoint[sPoint][1]
-                    sPointY           = dTableSpawnPoint[sPoint][2]
-                    sPointZ           = dTableSpawnPoint[sPoint][3]
-                    sPointRot         = dTableSpawnPoint[sPoint][4]
 
-                    GetMobByID(enemy, instance):setSpawn(sPointX, sPointY, sPointZ, sPointRot)
+                    GetMobByID(enemy, instance):setSpawn(sPoint.x, sPoint.y, sPoint.z, math.random(0, 255))
                     SpawnMob(enemy, instance)
                     table.remove(dTableSpawnPoint, sPoint)
                     table.remove(dTableSpecificEnemies, randomEnemy)
@@ -234,12 +222,8 @@ local function pickMobs(instance)
             [xi.nyzul.objective.ELIMINATE_ALL_ENEMIES] = function()
                 if math.random(1, 100) <= 20 then -- 20% chance that Dahank will spawn.
                     sPoint    = math.random(1, #dTableSpawnPoint)
-                    sPointX   = dTableSpawnPoint[sPoint][1]
-                    sPointY   = dTableSpawnPoint[sPoint][2]
-                    sPointZ   = dTableSpawnPoint[sPoint][3]
-                    sPointRot = dTableSpawnPoint[sPoint][4]
 
-                    GetMobByID(ID.mob[51].DAHAK, instance):setSpawn(sPointX, sPointY, sPointZ, sPointRot)
+                    GetMobByID(ID.mob[51].DAHAK, instance):setSpawn(sPoint.x, sPoint.y, sPoint.z, math.random(0, 255))
                     SpawnMob(ID.mob[51].DAHAK, instance)
                     table.remove(dTableSpawnPoint, sPoint)
                     instance:setLocalVar('Eliminate', instance:getLocalVar('Eliminate') + 1)
@@ -256,12 +240,8 @@ local function pickMobs(instance)
         -- Spawn Rampart-Type mobs.
         if math.random(1, 100) <= 90 then
             sPoint    = math.random(1, #dTableSpawnPoint)
-            sPointX   = dTableSpawnPoint[sPoint][1]
-            sPointY   = dTableSpawnPoint[sPoint][2]
-            sPointZ   = dTableSpawnPoint[sPoint][3]
-            sPointRot = dTableSpawnPoint[sPoint][4]
 
-            GetMobByID(ID.mob[51].ARCHAIC_RAMPART1, instance):setSpawn(sPointX, sPointY, sPointZ, sPointRot)
+            GetMobByID(ID.mob[51].ARCHAIC_RAMPART1, instance):setSpawn(sPoint.x, sPoint.y, sPoint.z, math.random(0, 255))
 
             SpawnMob(ID.mob[51].ARCHAIC_RAMPART1, instance)
             table.remove(dTableSpawnPoint, sPoint)
@@ -273,12 +253,8 @@ local function pickMobs(instance)
 
         if math.random(1, 100) <= 20 then
             sPoint    = math.random(1, #dTableSpawnPoint)
-            sPointX   = dTableSpawnPoint[sPoint][1]
-            sPointY   = dTableSpawnPoint[sPoint][2]
-            sPointZ   = dTableSpawnPoint[sPoint][3]
-            sPointRot = dTableSpawnPoint[sPoint][4]
 
-            GetMobByID(ID.mob[51].ARCHAIC_RAMPART2, instance):setSpawn(sPointX, sPointY, sPointZ, sPointRot)
+            GetMobByID(ID.mob[51].ARCHAIC_RAMPART2, instance):setSpawn(sPoint.x, sPoint.y, sPoint.z, math.random(0, 255))
             SpawnMob(ID.mob[51].ARCHAIC_RAMPART2, instance)
             table.remove(dTableSpawnPoint, sPoint)
 
@@ -291,13 +267,9 @@ local function pickMobs(instance)
         if instance:getLocalVar('gearObjective') > 0 then
             for i = xi.nyzul.floorEntities[17][1], xi.nyzul.floorEntities[17][2] do
                 sPoint    = math.random(1, #dTableSpawnPoint)
-                sPointX   = dTableSpawnPoint[sPoint][1]
-                sPointY   = dTableSpawnPoint[sPoint][2]
-                sPointZ   = dTableSpawnPoint[sPoint][3]
-                sPointRot = dTableSpawnPoint[sPoint][4]
 
                 instance:setLocalVar('gearPenalty', math.random(xi.nyzul.penalty.TIME, xi.nyzul.penalty.PATHOS))
-                GetMobByID(i, instance):setSpawn(sPointX, sPointY, sPointZ, sPointRot)
+                GetMobByID(i, instance):setSpawn(sPoint.x, sPoint.y, sPoint.z, math.random(0, 255))
                 SpawnMob(i, instance)
                 table.remove(dTableSpawnPoint, sPoint)
             end
@@ -323,12 +295,8 @@ local function pickMobs(instance)
             while spawnedNMs > 2 do
                 local index = math.random(1, #dTableFloorNMs)
                 sPoint      = math.random(1, #dTableSpawnPoint)
-                sPointX     = dTableSpawnPoint[sPoint][1]
-                sPointY     = dTableSpawnPoint[sPoint][2]
-                sPointZ     = dTableSpawnPoint[sPoint][3]
-                sPointRot   = dTableSpawnPoint[sPoint][4]
 
-                GetMobByID(dTableFloorNMs[index], instance):setSpawn(sPointX, sPointY, sPointZ, sPointRot)
+                GetMobByID(dTableFloorNMs[index], instance):setSpawn(sPoint.x, sPoint.y, sPoint.z, math.random(0, 255))
                 SpawnMob(dTableFloorNMs[index], instance)
 
                 table.remove(dTableFloorNMs, index)
@@ -355,10 +323,6 @@ local function pickMobs(instance)
             local randomEnemy = math.random(1, #dTableEnemies)
             local mobID       = dTableEnemies[randomEnemy]
             sPoint            = math.random(1, #dTableSpawnPoint)
-            sPointX           = dTableSpawnPoint[sPoint][1]
-            sPointY           = dTableSpawnPoint[sPoint][2]
-            sPointZ           = dTableSpawnPoint[sPoint][3]
-            sPointRot         = dTableSpawnPoint[sPoint][4]
 
             if instance:getStage() == xi.nyzul.objective.ELIMINATE_ALL_ENEMIES then
                 instance:setLocalVar('Eliminate', instance:getLocalVar('Eliminate') + 1)
@@ -369,7 +333,7 @@ local function pickMobs(instance)
                 instance:setLocalVar('Nyzul_Specified_Enemy', mobID)
             end
 
-            GetMobByID(mobID, instance):setSpawn(sPointX, sPointY, sPointZ, sPointRot)
+            GetMobByID(mobID, instance):setSpawn(sPoint.x, sPoint.y, sPoint.z, math.random(0, 255))
             SpawnMob(mobID, instance)
 
             -- Remove used up entries from dynamic tables.
