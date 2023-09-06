@@ -46,6 +46,8 @@ def main():
     function_names.append("keyItem")
     function_names.append("setMustZone")
     function_names.append("getMustZone")
+    function_names.append("setTimedVar")
+    function_names.append("setVarExpiration")
     function_names.append("oncePerZone")
     function_names.append("incrementVar")
     function_names.append("replaceDefault")
