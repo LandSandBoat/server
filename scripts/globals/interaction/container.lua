@@ -105,8 +105,19 @@ function Container:getVar(player, name)
     return player:getVar(self.varPrefix .. name)
 end
 
-function Container:setVar(player, name, value)
-    return player:setVar(self.varPrefix .. name, value)
+function Container:setVar(player, name, value, expiry)
+    return player:setVar(self.varPrefix .. name, value, expiry)
+end
+
+function Container:setVarExpiration(player, name, expiry)
+    return player:setCharVarExpiration(self.varPrefix .. name, expiry)
+end
+
+-- Wrapper for setVar where the expiration matters more than any other
+-- stored value.  There is no need to get specifically, since it will
+-- be removed.  (Returned value is either 1 or 0)
+function Container:setTimedVar(player, name, expiry)
+    return player:setVar(self.varPrefix .. name, 1, expiry)
 end
 
 function Container:isVarBitsSet(player, name, ...)

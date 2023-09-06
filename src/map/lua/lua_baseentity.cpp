@@ -573,14 +573,43 @@ int32 CLuaBaseEntity::getCharVar(std::string const& varName)
  *  Function: setCharVar()
  *  Purpose : Updates PC's variable to an explicit value
  *  Example : player:setCharVar("[ZM]Status", 4)
- *  Notes   : Passing a '0' value will delete the variable
+ *  Notes   : Passing a '0' value will delete the variable.
  ************************************************************************/
 
-void CLuaBaseEntity::setCharVar(std::string const& varName, int32 value)
+void CLuaBaseEntity::setCharVar(std::string const& varName, int32 value, sol::object const& expiry)
 {
     if (auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity))
     {
-        PChar->setCharVar(varName, value);
+        uint32 varTimestamp = expiry.is<uint32>() ? expiry.as<uint32>() : 0;
+
+        if (varTimestamp > 0 && varTimestamp <= CVanaTime::getInstance()->getSysTime())
+        {
+            ShowWarning(fmt::format("Attempting to set variable '{}' with an expired time: {}", varName, varTimestamp));
+            return;
+        }
+
+        PChar->setCharVar(varName, value, varTimestamp);
+    }
+}
+
+/************************************************************************
+ *  Function: setCharVarExpiration()
+ *  Purpose : Updates PC's variable expiration to a specific timestamp
+ *  Example : player:setCharVarExpiration("Timer", VanadielTime() + 3600)
+ *  Notes   : Passing a '0' value will set the variable to not expire.
+ ************************************************************************/
+
+void CLuaBaseEntity::setCharVarExpiration(std::string const& varName, uint32 expiry)
+{
+    if (auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity))
+    {
+        if (expiry > 0 && expiry <= CVanaTime::getInstance()->getSysTime())
+        {
+            ShowWarning(fmt::format("Attempting to set variable '{}' with an expired time: {}", varName, expiry));
+            return;
+        }
+
+        PChar->setCharVar(varName, PChar->getCharVar(varName), expiry);
     }
 }
 
@@ -588,7 +617,8 @@ void CLuaBaseEntity::setCharVar(std::string const& varName, int32 value)
  *  Function: incrementCharVar()
  *  Purpose : Increments PC's variable by an explicit amount
  *  Example : player:incrementCharVar("[ZM]Status", 1) -- if 4, becomes 5
- *  Notes   : Can use values greater than 1 to increment more
+ *  Notes   : Can use values greater than 1 to increment more.  This does
+ *            not handle expiration times.
  ************************************************************************/
 
 void CLuaBaseEntity::incrementCharVar(std::string const& varName, int32 value)
@@ -607,11 +637,19 @@ void CLuaBaseEntity::incrementCharVar(std::string const& varName, int32 value)
  *  Notes   : Passing a '0' value will delete the variable
  ************************************************************************/
 
-void CLuaBaseEntity::setVolatileCharVar(std::string const& varName, int32 value)
+void CLuaBaseEntity::setVolatileCharVar(std::string const& varName, int32 value, sol::object const& expiry)
 {
     if (auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity))
     {
-        PChar->setVolatileCharVar(varName, value);
+        uint32 varTimestamp = expiry.is<uint32>() ? expiry.as<uint32>() : 0;
+
+        if (varTimestamp > 0 && varTimestamp <= CVanaTime::getInstance()->getSysTime())
+        {
+            ShowWarning(fmt::format("Attempting to set variable '{}' with an expired time: {}", varName, varTimestamp));
+            return;
+        }
+
+        PChar->setVolatileCharVar(varName, value, varTimestamp);
     }
 }
 
@@ -16825,6 +16863,7 @@ void CLuaBaseEntity::Register()
     // Variables
     SOL_REGISTER("getCharVar", CLuaBaseEntity::getCharVar);
     SOL_REGISTER("setCharVar", CLuaBaseEntity::setCharVar);
+    SOL_REGISTER("setCharVarExpiration", CLuaBaseEntity::setCharVarExpiration);
     SOL_REGISTER("getVar", CLuaBaseEntity::getCharVar); // Compatibility binding
     SOL_REGISTER("setVar", CLuaBaseEntity::setCharVar); // Compatibility binding
     SOL_REGISTER("incrementCharVar", CLuaBaseEntity::incrementCharVar);

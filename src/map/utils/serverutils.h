@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -30,12 +30,12 @@
 
 namespace serverutils
 {
-    int32 GetServerVar(std::string const& var);
-    void  SetServerVar(std::string const& var, int32 value);
-    void  PersistServerVar(std::string const& var, int32 value);
+    uint32 GetServerVar(std::string const& var);
+    void   SetServerVar(std::string const& var, int32 value, uint32 expiry = 0);
+    void   PersistServerVar(std::string const& var, int32 value, uint32 expiry = 0);
 
     int32 GetVolatileServerVar(std::string const& var);
-    void  SetVolatileServerVar(std::string const& var, int32 value);
+    void  SetVolatileServerVar(std::string const& var, int32 value, uint32 expiry = 0);
 
     int32 PersistVolatileServerVars(time_point tick, CTaskMgr::CTask* PTask);
 } // namespace serverutils

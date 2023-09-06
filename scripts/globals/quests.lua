@@ -1268,8 +1268,12 @@ xi.quest.getVar = function(player, areaId, questId, name)
     return player:getVar(getVarPrefix(areaId, questId) .. name)
 end
 
-xi.quest.setVar = function(player, areaId, questId, name, value)
-    return player:setVar(getVarPrefix(areaId, questId) .. name, value)
+xi.quest.setVar = function(player, areaId, questId, name, value, expiry)
+    return player:setVar(getVarPrefix(areaId, questId) .. name, value, expiry)
+end
+
+xi.quest.setVarExpiration = function(player, areaId, questId, name, expiry)
+    return player:setCharVarExpiration(getVarPrefix(areaId, questId) .. name, expiry)
 end
 
 xi.quest.getLocalVar = function(player, areaId, questId, name)

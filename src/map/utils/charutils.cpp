@@ -6407,26 +6407,26 @@ namespace charutils
         return PChar->getCharVar(var);
     }
 
-    void SetCharVar(uint32 charId, std::string const& var, int32 value)
+    void SetCharVar(uint32 charId, std::string const& var, int32 value, uint32 expiry /* = 0 */)
     {
         if (auto player = zoneutils::GetChar(charId))
         {
-            player->setCharVar(var, value);
+            player->setCharVar(var, value, expiry);
             return;
         }
 
-        PersistCharVar(charId, var, value);
-        message::send_charvar_update(charId, var, value);
+        PersistCharVar(charId, var, value, expiry);
+        message::send_charvar_update(charId, var, value, expiry);
     }
 
-    void SetCharVar(CCharEntity* PChar, std::string const& var, int32 value)
+    void SetCharVar(CCharEntity* PChar, std::string const& var, int32 value, uint32 expiry /* = 0 */)
     {
         if (PChar == nullptr)
         {
             return;
         }
 
-        return PChar->setCharVar(var, value);
+        return PChar->setCharVar(var, value, expiry);
     }
 
     int32 ClearCharVarsWithPrefix(CCharEntity* PChar, std::string const& prefix)
@@ -6483,22 +6483,32 @@ namespace charutils
         PChar->removeFromCharVarCache(var);
     }
 
-    int32 FetchCharVar(uint32 charId, std::string const& varName)
+    auto FetchCharVar(uint32 charId, std::string const& varName) -> std::pair<int32, uint32>
     {
-        const char* fmtQuery = "SELECT value FROM char_vars WHERE charid = %u AND varname = '%s' LIMIT 1;";
+        const char* fmtQuery = "SELECT value, expiry FROM char_vars WHERE charid = %u AND varname = '%s' LIMIT 1;";
 
         int32 ret = sql->Query(fmtQuery, charId, varName);
 
-        int32 value = 0;
+        int32  value  = 0;
+        uint32 expiry = 0;
         if (ret != SQL_ERROR && sql->NumRows() != 0 && sql->NextRow() == SQL_SUCCESS)
         {
-            value = sql->GetIntData(0);
+            value  = sql->GetIntData(0);
+            expiry = sql->GetUIntData(1);
+
+            uint32 currentTimestamp = CVanaTime::getInstance()->getSysTime();
+
+            if (expiry > 0 && expiry <= currentTimestamp)
+            {
+                value = 0;
+                sql->Query("DELETE FROM char_vars WHERE charid = %u AND varname = '%s';", charId, varName);
+            }
         }
 
-        return value;
+        return { value, expiry };
     }
 
-    void PersistCharVar(uint32 charId, std::string const& var, int32 value)
+    void PersistCharVar(uint32 charId, std::string const& var, int32 value, uint32 expiry /* = 0 */)
     {
         if (value == 0)
         {
@@ -6506,7 +6516,7 @@ namespace charutils
         }
         else
         {
-            sql->Query("INSERT INTO char_vars SET charid = %u, varname = '%s', value = %i ON DUPLICATE KEY UPDATE value = %i;", charId, var, value, value);
+            sql->Query("INSERT INTO char_vars SET charid = %u, varname = '%s', value = %i, expiry = %d ON DUPLICATE KEY UPDATE value = %i, expiry = %i;", charId, var, value, expiry, value, expiry);
         }
     }
 
