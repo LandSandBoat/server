@@ -46522,6 +46522,91 @@ INSERT INTO `item_mods` VALUES (23071,304,12);  -- TAME: 12
 INSERT INTO `item_mods` VALUES (23071,384,800); -- HASTE_GEAR: 8%
 INSERT INTO `item_mods` VALUES (23071,841,5);   -- ALL_WSDMG_FIRST_HIT: 5
 
+-- Bihu Roundlet +2
+INSERT INTO `item_mods` VALUES (23072,1,105);    -- DEF: 105
+INSERT INTO `item_mods` VALUES (23072,2,46);     -- HP: 46
+INSERT INTO `item_mods` VALUES (23072,5,42);     -- MP: 42
+INSERT INTO `item_mods` VALUES (23072,8,16);     -- STR: 16
+INSERT INTO `item_mods` VALUES (23072,9,19);     -- DEX: 19
+INSERT INTO `item_mods` VALUES (23072,10,23);    -- VIT: 23
+INSERT INTO `item_mods` VALUES (23072,11,19);    -- AGI: 19
+INSERT INTO `item_mods` VALUES (23072,12,24);    -- INT: 24
+INSERT INTO `item_mods` VALUES (23072,13,22);    -- MND: 22
+INSERT INTO `item_mods` VALUES (23072,14,35);    -- CHR: 35
+INSERT INTO `item_mods` VALUES (23072,23,47);    -- ATT: 47
+INSERT INTO `item_mods` VALUES (23072,25,27);    -- ACC: 27
+INSERT INTO `item_mods` VALUES (23072,27,-8);    -- ENMITY: -8
+INSERT INTO `item_mods` VALUES (23072,29,6);     -- MDEF: 6
+INSERT INTO `item_mods` VALUES (23072,30,41);    -- MACC: 41
+INSERT INTO `item_mods` VALUES (23072,31,85);    -- MEVA: 85
+INSERT INTO `item_mods` VALUES (23072,68,48);    -- EVA: 48
+INSERT INTO `item_mods` VALUES (23072,119,16);   -- SINGING: 16
+INSERT INTO `item_mods` VALUES (23072,161,-500); -- DMGPHYS: -5
+INSERT INTO `item_mods` VALUES (23072,384,600);  -- HASTE_GEAR: 6%
+
+-- Arcadian Beret +2
+INSERT INTO `item_mods` VALUES (23073,1,110);   -- DEF: 110
+INSERT INTO `item_mods` VALUES (23073,2,46);    -- HP: 46
+INSERT INTO `item_mods` VALUES (23073,8,26);    -- STR: 26
+INSERT INTO `item_mods` VALUES (23073,9,24);    -- DEX: 24
+INSERT INTO `item_mods` VALUES (23073,10,17);   -- VIT: 17
+INSERT INTO `item_mods` VALUES (23073,11,32);   -- AGI: 32
+INSERT INTO `item_mods` VALUES (23073,12,20);   -- INT: 20
+INSERT INTO `item_mods` VALUES (23073,13,26);   -- MND: 26
+INSERT INTO `item_mods` VALUES (23073,14,21);   -- CHR: 21
+INSERT INTO `item_mods` VALUES (23073,24,47);   -- RATT: 47
+INSERT INTO `item_mods` VALUES (23073,26,27);   -- RACC: 27
+INSERT INTO `item_mods` VALUES (23073,27,-7);   -- ENMITY: -7
+INSERT INTO `item_mods` VALUES (23073,29,3);    -- MDEF: 3
+INSERT INTO `item_mods` VALUES (23073,30,27);   -- MACC: 27
+INSERT INTO `item_mods` VALUES (23073,31,63);   -- MEVA: 63
+INSERT INTO `item_mods` VALUES (23073,68,54);   -- EVA: 54
+INSERT INTO `item_mods` VALUES (23073,305,36);  -- RECYCLE: 36
+INSERT INTO `item_mods` VALUES (23073,359,12);  -- RAPID_SHOT: 12
+INSERT INTO `item_mods` VALUES (23073,384,800); -- HASTE_GEAR: 8%
+
+-- Sakonji Kabuto +2
+INSERT INTO `item_mods` VALUES (23074,1,125);   -- DEF: 125
+INSERT INTO `item_mods` VALUES (23074,2,68);    -- HP: 68
+INSERT INTO `item_mods` VALUES (23074,5,33);    -- MP: 33
+INSERT INTO `item_mods` VALUES (23074,8,29);    -- STR: 29
+INSERT INTO `item_mods` VALUES (23074,9,25);    -- DEX: 25
+INSERT INTO `item_mods` VALUES (23074,10,27);   -- VIT: 27
+INSERT INTO `item_mods` VALUES (23074,11,25);   -- AGI: 25
+INSERT INTO `item_mods` VALUES (23074,12,24);   -- INT: 24
+INSERT INTO `item_mods` VALUES (23074,13,24);   -- MND: 24
+INSERT INTO `item_mods` VALUES (23074,14,24);   -- CHR: 24
+INSERT INTO `item_mods` VALUES (23074,23,64);   -- ATT: 64
+INSERT INTO `item_mods` VALUES (23074,25,35);   -- ACC: 35
+INSERT INTO `item_mods` VALUES (23074,29,3);    -- MDEF: 3
+INSERT INTO `item_mods` VALUES (23074,30,27);   -- MACC: 27
+INSERT INTO `item_mods` VALUES (23074,31,53);   -- MEVA: 53
+INSERT INTO `item_mods` VALUES (23074,68,43);   -- EVA: 43
+INSERT INTO `item_mods` VALUES (23074,73,7);    -- STORETP: 7
+INSERT INTO `item_mods` VALUES (23074,365,3);   -- SNAP_SHOT: 3
+INSERT INTO `item_mods` VALUES (23074,384,700); -- HASTE_GEAR: 7%
+
+-- Mochizuki hatsuburi +2
+INSERT INTO `item_mods` VALUES (23075,1,110);   -- DEF: 110
+INSERT INTO `item_mods` VALUES (23075,2,46);    -- HP: 46
+INSERT INTO `item_mods` VALUES (23075,8,26);    -- STR: 26
+INSERT INTO `item_mods` VALUES (23075,9,26);    -- DEX: 26
+INSERT INTO `item_mods` VALUES (23075,10,28);   -- VIT: 28
+INSERT INTO `item_mods` VALUES (23075,11,28);   -- AGI: 28
+INSERT INTO `item_mods` VALUES (23075,12,27);   -- INT: 27
+INSERT INTO `item_mods` VALUES (23075,13,27);   -- MND: 27
+INSERT INTO `item_mods` VALUES (23075,14,27);   -- CHR: 27
+INSERT INTO `item_mods` VALUES (23075,23,47);   -- ATT: 47
+INSERT INTO `item_mods` VALUES (23075,25,34);   -- ACC: 34
+INSERT INTO `item_mods` VALUES (23075,28,54);   -- MATT: 54
+INSERT INTO `item_mods` VALUES (23075,29,5);    -- MDEF: 5
+INSERT INTO `item_mods` VALUES (23075,30,27);   -- MACC: 27
+INSERT INTO `item_mods` VALUES (23075,31,53);   -- MEVA: 53
+INSERT INTO `item_mods` VALUES (23075,68,63);   -- EVA: 63
+INSERT INTO `item_mods` VALUES (23075,110,18);  -- PARRY: 18
+INSERT INTO `item_mods` VALUES (23075,384,800); -- HASTE_GEAR: 8%
+INSERT INTO `item_mods` VALUES (23075,522,18);  -- NIN_NUKE_BONUS: 18
+
 -- Pteroslaver Armet +2
 INSERT INTO `item_mods` VALUES (23076,1,121);   -- DEF: 121
 INSERT INTO `item_mods` VALUES (23076,2,70);    -- HP: 70
@@ -46536,10 +46621,12 @@ INSERT INTO `item_mods` VALUES (23076,14,19);   -- CHR: 19
 INSERT INTO `item_mods` VALUES (23076,23,62);   -- ATT: 62
 INSERT INTO `item_mods` VALUES (23076,25,34);   -- ACC: 34
 INSERT INTO `item_mods` VALUES (23076,29,3);    -- MDEF: 3
+INSERT INTO `item_mods` VALUES (23076,30,27);   -- MACC: 27
 INSERT INTO `item_mods` VALUES (23076,31,53);   -- MEVA: 53
 INSERT INTO `item_mods` VALUES (23076,68,43);   -- EVA: 43
+INSERT INTO `item_mods` VALUES (23076,302,3);   -- TRIPLE_ATTACK: 3
 INSERT INTO `item_mods` VALUES (23076,384,700); -- HASTE_GEAR: 700
-INSERT INTO `item_mods` VALUES (23076,402,64);  -- WYVERN_BREATH: 64
+INSERT INTO `item_mods` VALUES (23076,402,25);  -- WYVERN_BREATH: 25
 
 -- Lanun Tricorne +2
 INSERT INTO `item_mods` VALUES (23079,542,50); -- JOB_BONUS_CHANCE: 50
