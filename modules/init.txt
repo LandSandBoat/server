@@ -25,13 +25,17 @@
 #
 # Database overrides here:
 catseyexi/sql
+#contrib/sql
 #
 # Core overrides here:
 catseyexi/cpp
+#contrib/cpp
 custom/cpp
 #
 # Lua FULL overrides here:
 catseyexi/lua/complete_overrides
+#contrib/lua/complete_overrides
 #
 # Lua ADDITIVE overrides here:
 catseyexi/lua/additive_overrides
+#contrib/lua/additive_overrides
