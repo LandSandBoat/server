@@ -23,7 +23,7 @@ effectObject.onEffectLose = function(target, effect)
         pet:leaveBattlefield(1)
     end
 
-    target:setLocalVar("[battlefield]area", 0)
+    target:setLocalVar('[battlefield]area', 0)
 end
 
 return effectObject

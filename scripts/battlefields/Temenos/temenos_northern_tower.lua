@@ -17,7 +17,7 @@ local content = Limbus:new({
     area             = 1,
     entryNpc         = 'Matter_Diffusion_Module',
     requiredKeyItems = { xi.ki.COSMO_CLEANSE, xi.ki.WHITE_CARD, message = ID.text.YOU_INSERT_THE_CARD_POLISHED },
-    name             = "TEMENOS_NORTHERN_TOWER",
+    name             = 'TEMENOS_NORTHERN_TOWER',
     timeExtension    = 15,
 })
 
@@ -151,20 +151,20 @@ content.groups =
 {
     -- Floor 1
     {
-        mobs    = { "Moblin_Dustman" },
+        mobs    = { 'Moblin_Dustman' },
         mobMods = { [xi.mobMod.DETECTION] = xi.detects.HEARING },
         death   = utils.bind(content.handleMobDeathVortex, 1),
     },
 
     {
-        mobs     = { "Goblin_Slaughterman" },
+        mobs     = { 'Goblin_Slaughterman' },
         mobMods  = { [xi.mobMod.DETECTION] = xi.detects.HEARING },
         allDeath = utils.bind(content.handleAllMobDeathCrate, 1),
     },
 
     -- Floor 2
     {
-        mobs    = { "Kari" },
+        mobs    = { 'Kari' },
         mobMods = { [xi.mobMod.DETECTION] = xi.detects.HEARING },
         death   = utils.bind(content.handleMobDeathVortex, 2),
     },
@@ -172,9 +172,9 @@ content.groups =
     {
         mobs =
         {
-            "Skadi",
-            "Thrym",
-            "Beli",
+            'Skadi',
+            'Thrym',
+            'Beli',
         },
 
         mobMods  = { [xi.mobMod.DETECTION] = xi.detects.HEARING },
@@ -185,20 +185,20 @@ content.groups =
     {
         mobs =
         {
-            "Telchines_Monk",
-            "Telchines_Dragoon",
+            'Telchines_Monk',
+            'Telchines_Dragoon',
         },
 
         death = utils.bind(content.handleMobDeathVortex, 3),
     },
 
-    { mobs = { "Telchiness_Wyvern" } },
+    { mobs = { 'Telchiness_Wyvern' } },
 
     {
         mobs =
         {
-            "Telchines_Bard",
-            "Telchines_White_Mage",
+            'Telchines_Bard',
+            'Telchines_White_Mage',
         },
 
         allDeath = utils.bind(content.handleAllMobDeathCrate, 3),
@@ -206,7 +206,7 @@ content.groups =
 
     -- Floor 4
     {
-        mobs    = { "Kindred_Black_Mage" },
+        mobs    = { 'Kindred_Black_Mage' },
         mobMods = { [xi.mobMod.DETECTION] = xi.detects.HEARING },
         death   = utils.bind(content.handleMobDeathVortex, 4),
     },
@@ -214,9 +214,9 @@ content.groups =
     {
         mobs =
         {
-            "Kindred_Warrior",
-            "Kindred_Dark_Knight",
-            "Kindred_Summoner",
+            'Kindred_Warrior',
+            'Kindred_Dark_Knight',
+            'Kindred_Summoner',
         },
 
         mobMods  = { [xi.mobMod.DETECTION] = xi.detects.HEARING },
@@ -226,8 +226,8 @@ content.groups =
     {
         mobs =
         {
-            "Kindreds_Elemental",
-            "Kindreds_Avatar",
+            'Kindreds_Elemental',
+            'Kindreds_Avatar',
         }
     },
 
@@ -235,10 +235,10 @@ content.groups =
     {
         mobs =
         {
-            "Praetorian_Guard_CCXX",
-            "Praetorian_Guard_LXXIII",
-            "Praetorian_Guard_CXLVIII",
-            "Praetorian_Guard_CCCXI",
+            'Praetorian_Guard_CCXX',
+            'Praetorian_Guard_LXXIII',
+            'Praetorian_Guard_CXLVIII',
+            'Praetorian_Guard_CCCXI',
         },
 
         death    = utils.bind(content.handleMobDeathVortex, 5),
@@ -249,8 +249,8 @@ content.groups =
     {
         mobs =
         {
-            "Cryptonberry_Abductor",
-            "Cryptonberry_Designator",
+            'Cryptonberry_Abductor',
+            'Cryptonberry_Designator',
         },
 
         mobMods = { [xi.mobMod.DETECTION] = xi.detects.HEARING },
@@ -260,16 +260,16 @@ content.groups =
     {
         mobs =
         {
-            "Tonberrys_Elemental",
-            "Tonberrys_Avatar",
+            'Tonberrys_Elemental',
+            'Tonberrys_Avatar',
         },
     },
 
     {
         mobs =
         {
-            "Cryptonberry_Charmer",
-            "Cryptonberry_Skulker",
+            'Cryptonberry_Charmer',
+            'Cryptonberry_Skulker',
         },
 
         mobMods  = { [xi.mobMod.DETECTION] = xi.detects.HEARING },
@@ -280,9 +280,9 @@ content.groups =
     {
         mobs =
         {
-            "Goblin_Warlord",
-            "Goblin_Fencer",
-            "Goblin_Theurgist",
+            'Goblin_Warlord',
+            'Goblin_Fencer',
+            'Goblin_Theurgist',
         },
 
         mobMods  = { [xi.mobMod.DETECTION] = xi.detects.HEARING },

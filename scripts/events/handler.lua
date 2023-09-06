@@ -44,7 +44,7 @@ end
 function SeasonalEvent:checkStarting()
     local isEnabled = self.enableCheck()
     if isEnabled then
-        print("Starting Seasonal Event: " .. self.id)
+        print('Starting Seasonal Event: ' .. self.id)
         self:startFunc()
     end
 
@@ -54,7 +54,7 @@ end
 function SeasonalEvent:checkEnding()
     local isEnabled = self:enableCheck()
     if not isEnabled then
-        print("Ending Seasonal Event: " .. self.id)
+        print('Ending Seasonal Event: ' .. self.id)
         self:endFunc()
     end
 
@@ -65,13 +65,13 @@ end
 --     : work with Lua hot-reloading (yet)!
 xi.events.registeredEvents =
 {
-    require("scripts/events/starlight_celebration"),
-    require("scripts/events/egg_hunt_egg-stravaganza"),
-    require("scripts/events/mog_bonanza"),
+    require('scripts/events/starlight_celebration'),
+    require('scripts/events/egg_hunt_egg-stravaganza'),
+    require('scripts/events/mog_bonanza'),
 }
 
 xi.events.handler.checkSeasonalEvents = function()
-    print("Checking Seasonal Events")
+    print('Checking Seasonal Events')
 
     for _, event in pairs(xi.events.registeredEvents) do
         event:checkEnding()

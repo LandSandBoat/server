@@ -2,7 +2,7 @@
 -- xi.effect.FULL_SPEED_AHEAD
 -- Helper for quest: Full Speed Ahead!
 -----------------------------------
-require("scripts/quests/full_speed_ahead")
+require('scripts/quests/full_speed_ahead')
 -----------------------------------
 local effectObject = {}
 

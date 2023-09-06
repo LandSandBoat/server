@@ -103,7 +103,7 @@ local function badFunction3() return 1 end -- FAIL (x2)
 if a == b then a = 5 end -- FAIL (x2)
 
 -- check_no_function_decl_padding()
-local function test (var1)
+local function test (var1) -- FAIL
 end
 
 -- check_multiline_condition_format()
@@ -174,9 +174,9 @@ end
 
 -- String values in parameters
 (a,"b",c) -- FAIL x2
-("a", b)  -- PASS
-(",", b)  -- PASS
-(",",b)   -- FAIL
+("a", b)  -- FAIL x2
+(",", b)  -- FAIL x2
+(",",b)   -- FAIL x2
 
 (a,'b',c) -- FAIL x2
 ('a', b)  -- PASS
@@ -192,10 +192,23 @@ xi.effect.SOMETHING  -- PASS
 if x == 1 then y = 2 -- FAIL
 elseif x == 2 then y = 3 -- FAIL
 
-"if x then y" -- PASS
-"( x-y == 0 )" -- PASS
-"if x then y end" -- PASS
+"if x then y" -- FAIL
+"( x-y == 0 )" -- FAIL
+"if x then y end" -- FAIL
 
 'if x then y' -- PASS
 '( x-y == 0 )' -- PASS
 'if x then y end' -- PASS
+
+require('scripts/zones/something') -- PASS
+require('scripts/globals/items') -- FAIL
+require('scripts/globals/keyitems') -- FAIL
+require('scripts/globals/loot') -- FAIL
+require('scripts/globals/msg') -- FAIL
+require('scripts/globals/settings') -- FAIL
+require('scripts/globals/spell_data') -- FAIL
+require('scripts/globals/status') -- FAIL
+require('scripts/globals/titles') -- FAIL
+require('scripts/globals/zone') -- FAIL
+require('scripts/enum/item') -- FAIL
+require('scripts/zones/Bastok_Markets/IDs') -- FAIL

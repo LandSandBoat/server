@@ -82,10 +82,10 @@ spellObject.onSpellCast = function(caster, target, spell)
         local delEff = 0
         if statusNum >= 0 then -- make sure this happens once instead of for every target
             delEff = math.random(0, statusNum) -- pick a random status to delete
-            caster:setLocalVar("esunaDelEff", has[delEff]) -- this can't be a local because it would only delete from the caster if it were.
+            caster:setLocalVar('esunaDelEff', has[delEff]) -- this can't be a local because it would only delete from the caster if it were.
         else -- clear it if the caster has no eligible statuses, otherwise it will remove the status from others if it was previously removed.
-            caster:setLocalVar("esunaDelEff", 0)
-            caster:setLocalVar("esunaDelEffMis", 0)  -- again, this can't be a local because it would only delete from the caster if it were. For extra status deletion under Misery
+            caster:setLocalVar('esunaDelEff', 0)
+            caster:setLocalVar('esunaDelEffMis', 0)  -- again, this can't be a local because it would only delete from the caster if it were. For extra status deletion under Misery
         end
 
         if statusNum >= 1 and caster:hasStatusEffect(xi.effect.AFFLATUS_MISERY) then -- Misery second status removal.
@@ -102,14 +102,14 @@ spellObject.onSpellCast = function(caster, target, spell)
             end
 
             local delEffMis = math.random(0, statusNumMis) -- pick another random status to delete
-            caster:setLocalVar("esunaDelEffMis", has[delEffMis])
+            caster:setLocalVar('esunaDelEffMis', has[delEffMis])
         else
-            caster:setLocalVar("esunaDelEffMis", 0)
+            caster:setLocalVar('esunaDelEffMis', 0)
         end
     end
 
-    local statusDel = caster:getLocalVar("esunaDelEff")
-    local statusDelMis = caster:getLocalVar("esunaDelEffMis")
+    local statusDel = caster:getLocalVar('esunaDelEff')
+    local statusDelMis = caster:getLocalVar('esunaDelEffMis')
 
     if statusDel == 0 then -- this gets set to 0 if there's no status to delete.
         spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT) -- no effect

@@ -2,27 +2,27 @@
 -- func: delmission <logID> <missionID> <player>
 -- desc: Deletes the given mission from the GM or target player.
 -----------------------------------
-require("scripts/globals/missions")
 local logIdHelpers = require('scripts/globals/log_ids')
 -----------------------------------
+local commandObj = {}
 
-cmdprops =
+commandObj.cmdprops =
 {
     permission = 1,
-    parameters = "sss"
+    parameters = 'sss'
 }
 
-function error(player, msg)
+local function error(player, msg)
     player:PrintToPlayer(msg)
-    player:PrintToPlayer("!delmission <logID> <missionID> (player)")
+    player:PrintToPlayer('!delmission <logID> <missionID> (player)')
 end
 
-function onTrigger(player, logId, missionId, target)
+commandObj.onTrigger = function(player, logId, missionId, target)
     -- validate logId
     local logName
     local logInfo = logIdHelpers.getMissionLogInfo(logId)
     if logInfo == nil then
-        error(player, "Invalid logID.")
+        error(player, 'Invalid logID.')
         return
     end
 
@@ -36,7 +36,7 @@ function onTrigger(player, logId, missionId, target)
     end
 
     if missionId == nil or missionId < 0 then
-        error(player, "Invalid missionID.")
+        error(player, 'Invalid missionID.')
         return
     end
 
@@ -47,13 +47,15 @@ function onTrigger(player, logId, missionId, target)
     else
         targ = GetPlayerByName(target)
         if targ == nil then
-            error(player, string.format("Player named '%s' not found!", target))
+            error(player, string.format('Player named "%s" not found!', target))
             return
         end
     end
 
     -- delete mission
     targ:delMission(logId, missionId)
-    player:PrintToPlayer(string.format("Deleted %s mission %i from %s.", logName, missionId, targ:getName()))
-    player:PrintToPlayer("NOTE! This does NOT clear or update ANY mission variables! ")
+    player:PrintToPlayer(string.format('Deleted %s mission %i from %s.', logName, missionId, targ:getName()))
+    player:PrintToPlayer('NOTE! This does NOT clear or update ANY mission variables! ')
 end
+
+return commandObj

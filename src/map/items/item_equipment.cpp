@@ -43,7 +43,6 @@ CItemEquipment::CItemEquipment(uint16 id)
 
 CItemEquipment::~CItemEquipment()
 {
-    // ни в коем случае не освобождать здесь указатели на модификатоты и спецеффекты. они глобальны.
 }
 
 uint16 CItemEquipment::getModelId() const

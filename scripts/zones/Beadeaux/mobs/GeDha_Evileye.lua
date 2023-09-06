@@ -3,7 +3,7 @@
 --   NM: Ge'Dha Evileye
 -- !pos -238 1 -202 254
 -----------------------------------
-mixins = { require("scripts/mixins/job_special") }
+mixins = { require('scripts/mixins/job_special') }
 -----------------------------------
 local entity = {}
 

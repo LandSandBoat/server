@@ -123,7 +123,7 @@ instanceObject.onInstanceTimeUpdate = function(instance, elapsed)
                 end,
             }
         else -- Arciela
-            if instance:getLocalVar("FIGHT_STARTED") == 1 then
+            if instance:getLocalVar('FIGHT_STARTED') == 1 then
                 xi.ally.startAssist(mob, xi.ally.ASSIST_RANDOM)
             end
         end

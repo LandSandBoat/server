@@ -40,7 +40,7 @@ entity.onTrigger = function(player, npc)
     else
         local hasPermit = player:hasKeyItem(xi.ki.RUNIC_PORTAL_USE_PERMIT)
         local mercRank  = xi.besieged.getMercenaryRank(player)
-        local points    = player:getCurrency("imperial_standing")
+        local points    = player:getCurrency('imperial_standing')
         local hasAstral = xi.besieged.getAstralCandescence()
 
         player:startEvent(101, hasPermit and xi.ki.RUNIC_PORTAL_USE_PERMIT or 0, runicPortals, mercRank, points, 0, hasAstral, hasPermit and 1 or 0)
@@ -78,8 +78,8 @@ entity.onEventFinish = function(player, csid, option, npc)
             player:delKeyItem(xi.ki.RUNIC_PORTAL_USE_PERMIT)
             xi.teleport.to(player, portalPick[option])
         elseif option >= 1001 and option <= 1006 then
-            if player:getCurrency("imperial_standing") >= 200 then
-                player:delCurrency("imperial_standing", 200)
+            if player:getCurrency('imperial_standing') >= 200 then
+                player:delCurrency('imperial_standing', 200)
                 xi.teleport.to(player, portalPick[option])
             else
                 player:messageSpecial(ID.text.SUFFICIENT_IMPERIAL_STANDING)

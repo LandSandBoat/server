@@ -13,10 +13,10 @@ entity.onMobInitialize = function(mob)
 end
 
 entity.onMobFight = function(mob, target)
-    if mob:getLocalVar("Regain") == 0 then
+    if mob:getLocalVar('Regain') == 0 then
         if mob:getHPP() <= 50 then
             mob:setMod(xi.mod.REGAIN, 100)
-            mob:setLocalVar("Regain", 1)
+            mob:setLocalVar('Regain', 1)
         end
     end
 end

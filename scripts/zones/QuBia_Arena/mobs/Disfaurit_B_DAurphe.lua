@@ -3,7 +3,7 @@
 --  Mob: Disfaurit B D'Aurphe
 -- BCNM: Brothers D'Aurphe
 -----------------------------------
-mixins = { require("scripts/mixins/job_special") }
+mixins = { require('scripts/mixins/job_special') }
 -----------------------------------
 local entity = {}
 

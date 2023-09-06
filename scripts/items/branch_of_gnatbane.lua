@@ -7,11 +7,7 @@
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)
-    if target:hasStatusEffect(xi.effect.FOOD) then
-        return xi.msg.basic.IS_FULL
-    end
-
-    return 0
+    return xi.itemUtils.foodOnItemCheck(target, xi.foodType.BASIC)
 end
 
 itemObject.onItemUse = function(target)

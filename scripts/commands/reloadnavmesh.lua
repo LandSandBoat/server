@@ -4,15 +4,18 @@
 -- note: This is for reloading the underlying navmesh object, is not intended
 --       to do anything to runtime pathing
 -----------------------------------
+local commandObj = {}
 
-cmdprops =
+commandObj.cmdprops =
 {
     permission = 5,
-    parameters = ""
+    parameters = ''
 }
 
-function onTrigger(player)
+commandObj.onTrigger = function(player)
     local zone = player:getZone()
-    player:PrintToPlayer("Reloading Navmesh for " .. zone:getName())
+    player:PrintToPlayer('Reloading Navmesh for ' .. zone:getName())
     zone:reloadNavmesh()
 end
+
+return commandObj

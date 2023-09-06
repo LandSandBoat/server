@@ -215,23 +215,23 @@ local strAppData =
 
 local function addDoctorStatus(player)
     local data = strAppData[player:getZoneID()]
-    player:setCharVar("StrangeApparatusDoctorStatus" .. data.suffix, os.time() + 172800) -- 2 days
+    player:setCharVar('StrangeApparatusDoctorStatus' .. data.suffix, os.time() + 172800) -- 2 days
 end
 
 local function delDoctorStatus(player)
     local data = strAppData[player:getZoneID()]
-    player:setCharVar("StrangeApparatusDoctorStatus" .. data.suffix, 0)
+    player:setCharVar('StrangeApparatusDoctorStatus' .. data.suffix, 0)
 end
 
 local function hasDoctorStatus(player)
     local data = strAppData[player:getZoneID()]
-    local docStatusExpires = player:getCharVar("StrangeApparatusDoctorStatus" .. data.suffix)
+    local docStatusExpires = player:getCharVar('StrangeApparatusDoctorStatus' .. data.suffix)
 
     if docStatusExpires ~= 0 then
         if os.time() <= docStatusExpires then
             return true
         else
-            player:setCharVar("StrangeApparatusDoctorStatus" .. data.suffix, 0)
+            player:setCharVar('StrangeApparatusDoctorStatus' .. data.suffix, 0)
         end
     end
 
@@ -244,7 +244,7 @@ end
 
 local function ltrVal(letter)
     for x = 1, 26 do
-        if letter == string.sub("abcdefghijklmnopqrstuvwxyz", x, x) then
+        if letter == string.sub('abcdefghijklmnopqrstuvwxyz', x, x) then
             return x - 1
         end
     end
@@ -254,7 +254,7 @@ local function generatePassword(player)
     local data = strAppData[player:getZoneID()]
     local name = string.lower(player:getName())
     return string.format(
-        "%02d%02d%02d%02d",
+        '%02d%02d%02d%02d',
         ltrVal(string.sub(name, 1, 1)) + data.uid,
         ltrVal(string.sub(name, 2, 2)) + data.uid,
         ltrVal(string.sub(name, 3, 3)) + data.uid,
@@ -301,8 +301,8 @@ xi.strangeApparatus =
                         qty  = 2
                     end
 
-                    player:setLocalVar("strAppDrop", item)
-                    player:setLocalVar("strAppDropQty", qty)
+                    player:setLocalVar('strAppDrop', item)
+                    player:setLocalVar('strAppDropQty', qty)
 
                     -- start event
                     local doctorStatus = hasDoctorStatus(player) and 1 or 0
@@ -335,7 +335,7 @@ xi.strangeApparatus =
         if hasDoctorStatus(player) then
             doctorStatus = 1
         else
-            player:setLocalVar("strAppPass", 1)
+            player:setLocalVar('strAppPass', 1)
         end
 
         player:startEvent(eventId, doctorStatus, 0, xi.item.INFINITY_CORE, 0, 0, 0, 0, player:getZoneID())
@@ -358,8 +358,8 @@ xi.strangeApparatus =
     -----------------------------------
 
     onEventFinish = function(player)
-        local item = player:getLocalVar("strAppDrop")
-        local qty = player:getLocalVar("strAppDropQty")
+        local item = player:getLocalVar('strAppDrop')
+        local qty = player:getLocalVar('strAppDropQty')
 
         if item ~= 0 then
             if qty == 0 then
@@ -367,8 +367,8 @@ xi.strangeApparatus =
             end
 
             if npcUtil.giveItem(player, { { item, qty } }) then
-                player:setLocalVar("strAppDrop", 0)
-                player:setLocalVar("strAppDropQty", 0)
+                player:setLocalVar('strAppDrop', 0)
+                player:setLocalVar('strAppDropQty', 0)
             end
         end
     end,

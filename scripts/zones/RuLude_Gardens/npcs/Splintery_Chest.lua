@@ -77,7 +77,7 @@ entity.onEventFinish = function(player, csid, option, npc)
     if option ~= 1073741824 then
         if not itemId then
             -- How did you get here??
-            player:PrintToPlayer("itemId or OptionID related script error!")
+            player:PrintToPlayer('itemId or OptionID related script error!')
         elseif player:getFreeSlotsCount() >= 1 then
             player:addItem(itemId, 1)
             player:messageSpecial(ID.text.ITEM_OBTAINED, itemId)

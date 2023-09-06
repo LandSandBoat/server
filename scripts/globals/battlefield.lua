@@ -1,4 +1,4 @@
-require("scripts/globals/pathfind")
+require('scripts/globals/pathfind')
 
 xi = xi or {}
 
@@ -420,7 +420,7 @@ function Battlefield:new(data)
 end
 
 function Battlefield.getVarPrefix(battlefieldID)
-    return string.format("Battlefield[%d]", battlefieldID)
+    return string.format('Battlefield[%d]', battlefieldID)
 end
 
 function Battlefield:register()
@@ -469,16 +469,16 @@ function Battlefield:register()
             onEventUpdate =
             {
                 [32000] = Battlefield.redirectEventUpdate,
-                [32003] = utils.bind(Battlefield.redirectEventCall, "onExitEventUpdate"),
+                [32003] = utils.bind(Battlefield.redirectEventCall, 'onExitEventUpdate'),
             },
 
             onEventFinish =
             {
-                [32000] = utils.bind(Battlefield.redirectEventCall, "onEventFinishEnter"),
-                [32001] = utils.bind(Battlefield.redirectEventCall, "onEventFinishWin"),
-                [32002] = utils.bind(Battlefield.redirectEventCall, "onEventFinishLeave"),
-                [32003] = utils.bind(Battlefield.redirectEventCall, "onEventFinishExit"),
-                [32004] = utils.bind(Battlefield.redirectEventCall, "onEventFinishBattlefield"),
+                [32000] = utils.bind(Battlefield.redirectEventCall, 'onEventFinishEnter'),
+                [32001] = utils.bind(Battlefield.redirectEventCall, 'onEventFinishWin'),
+                [32002] = utils.bind(Battlefield.redirectEventCall, 'onEventFinishLeave'),
+                [32003] = utils.bind(Battlefield.redirectEventCall, 'onEventFinishExit'),
+                [32004] = utils.bind(Battlefield.redirectEventCall, 'onEventFinishBattlefield'),
             }
         })
         self.hasListeners = true
@@ -724,9 +724,9 @@ end
 
 function Battlefield:onEntryEventUpdate(player, csid, option, npc)
     local clearTime = 1
-    local name      = "Meme"
+    local name      = 'Meme'
     local partySize = 1
-    local area      = self.area or (player:getLocalVar("[battlefield]area") + 1)
+    local area      = self.area or (player:getLocalVar('[battlefield]area') + 1)
 
     if self.area then
         area = self.area
@@ -738,7 +738,7 @@ function Battlefield:onEntryEventUpdate(player, csid, option, npc)
     if result ~= xi.battlefield.returnCode.CUTSCENE then
         if result == xi.battlefield.returnCode.INCREMENT_REQUEST then
             if area < 3 then
-                player:setLocalVar("[battlefield]area", area)
+                player:setLocalVar('[battlefield]area', area)
             else
                 result = xi.battlefield.returnCode.WAIT
                 player:updateEvent(result)
@@ -790,7 +790,7 @@ function Battlefield:onEntryEventUpdate(player, csid, option, npc)
         end
     end
 
-    local autoSkipCS = self:getLocalVar(player, "CS") == 1 and 100 or 0
+    local autoSkipCS = self:getLocalVar(player, 'CS') == 1 and 100 or 0
     player:updateEvent(result, self.index, autoSkipCS, clearTime, partySize, self:checkSkipCutscene(player))
     player:updateEventString(name)
 
@@ -804,7 +804,7 @@ function Battlefield.redirectEventCall(eventName, player, csid, option)
     if battlefield then
         battlefieldID = battlefield:getID()
     else
-        battlefieldID = player:getLocalVar("battlefieldID")
+        battlefieldID = player:getLocalVar('battlefieldID')
     end
 
     if battlefieldID == 0 then
@@ -817,8 +817,8 @@ end
 
 function Battlefield:onEventFinishEnter(player, csid, option, npc)
     player:setEnteredBattlefield(true)
-    player:setLocalVar("[battlefield]area", 0)
-    self:setLocalVar(player, "CS", 1)
+    player:setLocalVar('[battlefield]area', 0)
+    self:setLocalVar(player, 'CS', 1)
 end
 
 function Battlefield:onEventFinishWin(player, csid, option, npc)
@@ -860,7 +860,7 @@ end
 
 function Battlefield:onBattlefieldInitialise(battlefield)
     if #self.loot > 0 then
-        battlefield:setLocalVar("loot", 1)
+        battlefield:setLocalVar('loot', 1)
     end
 
     local hasMultipleAreas = not self.area
@@ -873,11 +873,11 @@ end
 
 function Battlefield:onBattlefieldTick(battlefield, tick)
     local status        = battlefield:getStatus()
-    local cutsceneTimer = battlefield:getLocalVar("cutsceneTimer")
+    local cutsceneTimer = battlefield:getLocalVar('cutsceneTimer')
     local isExiting     = status == xi.battlefield.status.LOST or status == xi.battlefield.status.WON
 
     if isExiting then
-        battlefield:setLocalVar("cutsceneTimer", cutsceneTimer - 1)
+        battlefield:setLocalVar('cutsceneTimer', cutsceneTimer - 1)
     end
 
     -- Check that players haven't all died or that their dead time is over.
@@ -918,9 +918,9 @@ function Battlefield:onBattlefieldStatusChange(battlefield, status)
     -- Remove battlefield effect for players in alliance not inside battlefield once the battlefield gets locked. Do this only once.
     if
         status == xi.battlefield.status.LOCKED and
-        battlefield:getLocalVar("statusRemoval") == 0
+        battlefield:getLocalVar('statusRemoval') == 0
     then
-        battlefield:setLocalVar("statusRemoval", 1)
+        battlefield:setLocalVar('statusRemoval', 1)
         local players = battlefield:getPlayers()
 
         for _, player in pairs(players) do
@@ -939,7 +939,7 @@ function Battlefield:onBattlefieldStatusChange(battlefield, status)
 end
 
 function Battlefield:onBattlefieldEnter(player, battlefield)
-    player:setLocalVar("battlefieldID", battlefield:getID())
+    player:setLocalVar('battlefieldID', battlefield:getID())
 
     local initiatorId, _ = battlefield:getInitiator()
 
@@ -1091,9 +1091,9 @@ function Battlefield:handleAllMonstersDefeated(battlefield, mob)
     if crateId ~= 0 then
         local crate = GetNPCByID(crateId)
         npcUtil.showCrate(crate)
-        crate:addListener("ON_TRIGGER", "TRIGGER_CRATE", utils.bind(self.handleOpenArmouryCrate, self))
+        crate:addListener('ON_TRIGGER', 'TRIGGER_CRATE', utils.bind(self.handleOpenArmouryCrate, self))
     else
-        battlefield:setLocalVar("cutsceneTimer", self.delayToExit)
+        battlefield:setLocalVar('cutsceneTimer', self.delayToExit)
         battlefield:setStatus(xi.battlefield.status.WON)
     end
 end
@@ -1103,7 +1103,7 @@ function Battlefield:handleOpenArmouryCrate(player, npc)
         local battlefield = player:getBattlefield()
         self:handleLootRolls(battlefield, self.loot, npc)
         battlefield:setStatus(xi.battlefield.status.WON)
-        battlefield:setLocalVar("cutsceneTimer", self.delayToExit)
+        battlefield:setLocalVar('cutsceneTimer', self.delayToExit)
 
         return true
     end)
@@ -1264,7 +1264,7 @@ function BattlefieldMission:onBattlefieldWin(player, battlefield)
     local current     = player:getCurrentMission(missionArea)
 
     if current == self.mission then
-        player:setLocalVar("battlefieldWin", battlefield:getID())
+        player:setLocalVar('battlefieldWin', battlefield:getID())
     end
 
     local _, clearTime, partySize = battlefield:getRecord()
@@ -1279,8 +1279,8 @@ function BattlefieldMission:onEventFinishWin(player, csid, option, npc)
     end
 
     -- Only grant mission XP once per JP midnight
-    if self.grantXP and self:getVar(player, "XP") <= os.time() then
-        self:setVar(player, "XP", getMidnight())
+    if self.grantXP and self:getVar(player, 'XP') <= os.time() then
+        self:setVar(player, 'XP', getMidnight())
         player:addExp(self.grantXP)
     end
 end
@@ -1325,7 +1325,7 @@ function BattlefieldQuest:onBattlefieldWin(player, battlefield)
     local status = player:getQuestStatus(self.questArea, self.quest)
 
     if status == QUEST_ACCEPTED then
-        player:setLocalVar("battlefieldWin", battlefield:getID())
+        player:setLocalVar('battlefieldWin', battlefield:getID())
     end
 
     local _, clearTime, partySize = battlefield:getRecord()
@@ -1341,8 +1341,8 @@ function xi.battlefield.onBattlefieldTick(battlefield, timeinside)
     local mobs          = battlefield:getMobs(true, false)
     local status        = battlefield:getStatus()
     local players       = battlefield:getPlayers()
-    local cutsceneTimer = battlefield:getLocalVar("cutsceneTimer")
-    local phaseChange   = battlefield:getLocalVar("phaseChange")
+    local cutsceneTimer = battlefield:getLocalVar('cutsceneTimer')
+    local phaseChange   = battlefield:getLocalVar('phaseChange')
 
     if status == xi.battlefield.status.LOST then
         leavecode = 4
@@ -1352,14 +1352,14 @@ function xi.battlefield.onBattlefieldTick(battlefield, timeinside)
 
     if leavecode ~= -1 then
         -- Artificially inflate the time we remain inside the battlefield.
-        battlefield:setLocalVar("cutsceneTimer", cutsceneTimer + 1)
+        battlefield:setLocalVar('cutsceneTimer', cutsceneTimer + 1)
 
-        canLeave = battlefield:getLocalVar("loot") == 0
+        canLeave = battlefield:getLocalVar('loot') == 0
 
         if status == xi.battlefield.status.WON and not canLeave then
-            if battlefield:getLocalVar("lootSpawned") == 0 and battlefield:spawnLoot() then
+            if battlefield:getLocalVar('lootSpawned') == 0 and battlefield:spawnLoot() then
                 canLeave = false
-            elseif battlefield:getLocalVar("lootSeen") == 1 then
+            elseif battlefield:getLocalVar('lootSeen') == 1 then
                 canLeave = true
             end
         end
@@ -1368,9 +1368,9 @@ function xi.battlefield.onBattlefieldTick(battlefield, timeinside)
     -- Remove battlefield effect for players in alliance not inside battlefield once the battlefield gets locked. Do this only once.
     if
         status == xi.battlefield.status.LOCKED and
-        battlefield:getLocalVar("statusRemoval") == 0
+        battlefield:getLocalVar('statusRemoval') == 0
     then
-        battlefield:setLocalVar("statusRemoval", 1)
+        battlefield:setLocalVar('statusRemoval', 1)
 
         for _, player in pairs(players) do
             local alliance = player:getAlliance()
@@ -1468,7 +1468,7 @@ function xi.battlefield.HandleWipe(battlefield, players)
         -- Party has wiped. Save and send time remaining before being booted.
         -- TODO: Add LUA Binding to check for BCNM flag - RULES_REMOVE_3MIN = 0x04,
         if rekt then
-            if battlefield:getLocalVar("instantKick") == 0 then
+            if battlefield:getLocalVar('instantKick') == 0 then
                 for _, player in pairs(players) do
                     player:messageSpecial(zones[player:getZoneID()].text.THE_PARTY_WILL_BE_REMOVED, 0, 0, 0, 3)
                 end
@@ -1503,7 +1503,7 @@ function xi.battlefield.HandleLootRolls(battlefield, lootTable, players, npc)
 
     if
         battlefield:getStatus() == xi.battlefield.status.WON and
-        battlefield:getLocalVar("lootSeen") == 0
+        battlefield:getLocalVar('lootSeen') == 0
     then
         if npc then
             npc:setAnimation(90)
@@ -1545,7 +1545,7 @@ function xi.battlefield.HandleLootRolls(battlefield, lootTable, players, npc)
             end
         end
 
-        battlefield:setLocalVar("cutsceneTimer", 10)
-        battlefield:setLocalVar("lootSeen", 1)
+        battlefield:setLocalVar('cutsceneTimer', 10)
+        battlefield:setLocalVar('lootSeen', 1)
     end
 end

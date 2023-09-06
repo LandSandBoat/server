@@ -3,7 +3,7 @@
 --  Mob: Worgbut of Clan Death
 -- Mission 9-2 SANDO
 -----------------------------------
-local global = require("scripts/zones/QuBia_Arena/Globals")
+local global = require('scripts/zones/QuBia_Arena/Globals')
 -----------------------------------
 local entity = {}
 

@@ -2,7 +2,7 @@
 -- Area: Bhaflau Thickets
 --  Mob: Chigoe
 -----------------------------------
-mixins = { require("scripts/mixins/families/chigoe") }
+mixins = { require('scripts/mixins/families/chigoe') }
 -----------------------------------
 local entity = {}
 

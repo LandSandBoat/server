@@ -171,7 +171,7 @@ mission.sections =
             ['Humus-rich_Earth'] =
             {
                 onTrigger = function(player, npc)
-                    if player:getLocalVar("cernunnosDefeated") == 1 then
+                    if player:getLocalVar('cernunnosDefeated') == 1 then
                         return mission:progressEvent(34, 104, 300, 200, 100, 0, 1648, 0, 0) -- TODO: What is this?
                     else
                         local mob = GetMobByID(presentJugnerID.mob.CERNUNNOS)
@@ -192,7 +192,7 @@ mission.sections =
                 [34] = function(player, csid, option, npc)
                     npcUtil.giveKeyItem(player, xi.ki.CERNUNNOS_RESIN)
 
-                    player:setLocalVar("cernunnosDefeated", 0)
+                    player:setLocalVar('cernunnosDefeated', 0)
                     player:setMissionStatus(mission.areaId, 5)
                 end,
             },

@@ -2,13 +2,16 @@
 -- func: build
 -- desc: Print the server's current build information
 -----------------------------------
+local commandObj = {}
 
-cmdprops =
+commandObj.cmdprops =
 {
     permission = 0,
-    parameters = ""
+    parameters = ''
 }
 
-function onTrigger(player, target)
+commandObj.onTrigger = function(player, target)
     player:PrintToPlayer(BuildString())
 end
+
+return commandObj

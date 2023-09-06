@@ -167,6 +167,15 @@ xi.settings.main =
     -- Multiplier to NM lottery cooldown time (Default 1.0) eg. 2.0 = twice as long. 0 = no cooldowns.
     NM_LOTTERY_COOLDOWN = 1.0,
 
+    -- GARRISON SETTINGS
+    ENABLE_GARRISON        = true,  -- If true, enables garrison functionality
+    GARRISON_LOCKOUT       = 1800,  -- Time in seconds before a new garrison can be started (default: 1800)
+    GARRISON_TIME_LIMIT    = 1800,  -- Time in seconds before lose ongoing garrison (default: 1800)
+    GARRISON_ONCE_PER_WEEK = true,  -- Set to false to bypass the limit of one garrison per Conquest Tally Week.
+    GARRISON_PARTY_LIMIT   = 18,    -- Set to max party members you want to do garrison (default: 18).
+    GARRISON_NATION_BYPASS = false, -- Set to true to bypass the nation requirement.
+    GARRISON_RANK          = 2,     -- Set to minumum Nation Rank to start Garrison (default: 2).
+
     -- DYNAMIS SETTINGS
     BETWEEN_2DYNA_WAIT_TIME     = 24,       -- Hours before player can re-enter Dynamis. Default is 1 Earthday (24 hours).
     DYNA_MIDNIGHT_RESET         = true,     -- If true, makes the wait time count by number of server midnights instead of full 24 hour intervals
@@ -243,14 +252,6 @@ xi.settings.main =
     -- Please visit scripts/globals/events/login_campaign.lua for assigning the correct campaign dates.
     ENABLE_LOGIN_CAMPAIGN = 0,
 
-    -- GARRISON
-    GARRISON_LOCKOUT             = 1800,  -- Time in seconds before a new garrison can be started (default: 1800)
-    GARRISON_TIME_LIMIT          = 1800,  -- Time in seconds before lose ongoing garrison (default: 1800)
-    GARRISON_ONCE_PER_WEEK       = 0,     -- Set to 1 to bypass the limit of one garrison per Conquest Tally Week.
-    GARRISON_PARTY_LIMIT         = 18,    -- Set to max party members you want to do garrison (default: 18).
-    GARRISON_NATION_BYPASS       = 0,     -- Set to 1 to bypass the nation requirement.
-    GARRISON_RANK                = 2,     -- Set to minumum Nation Rank to start Garrison (default: 2).
-
     -- NYZUL
     RUNIC_DISK_SAVE      = true, -- Allow anyone participating in Nyzul to save progress. Set to false so only initiator can save progress.
     ENABLE_NYZUL_CASKETS = true, -- Enable Treasure casket pops from NMs.
@@ -259,8 +260,13 @@ xi.settings.main =
 
     -- CHOCOBO RAISING (HEAVILY-IN-DEVELOPMENT, USE AT YOUR OWN RISK)
     -- GM command: `!chocoboraising`
-    ENABLE_CHOCOBO_RAISING = false, -- true/false. Enable Chocobo Raising features.
-    DEBUG_CHOCOBO_RAISING  = false, -- true/false. Enable verbose debug logging for Chocobo Raising (visible by players).
+    ENABLE_CHOCOBO_RAISING              = false, -- true/false. Enable Chocobo Raising features.
+    DEBUG_CHOCOBO_RAISING               = false, -- true/false. Enable verbose debug logging for Chocobo Raising (visible by players).
+    CHOCOBO_RAISING_STAT_POS_MULTIPLIER = 1.0,   -- float. Multiplier for positive stat changes. Default 1.0.
+    CHOCOBO_RAISING_STAT_NEG_MULTIPLIER = 1.0,   -- float. Multiplier for negative stat changes. Default 1.0.
+    CHOCOBO_RAISING_GIL_MULTIPLIER      = 1.0,   -- float. Multiplier for gil recieved through chocobo actions (care plans, etc.). Default 1.0.
+    CHOCOBO_RAISING_DISABLE_RETIREMENT  = false, -- true/false.
+    CHOCOBO_RAISING_STAT_GROWTH_CAP     = 512,   -- int.
 
     -- MISC
     RIVERNE_PORTERS              = 120,   -- Time in seconds that Unstable Displacements in Cape Riverne stay open after trading a scale.

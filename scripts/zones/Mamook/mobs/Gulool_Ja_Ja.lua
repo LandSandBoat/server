@@ -3,7 +3,7 @@
 --  Mob: Gulool Ja Ja
 -----------------------------------
 local ID = zones[xi.zone.MAMOOK]
-mixins = { require("scripts/mixins/job_special") }
+mixins = { require('scripts/mixins/job_special') }
 -----------------------------------
 local entity = {}
 

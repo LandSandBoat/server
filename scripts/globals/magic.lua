@@ -1,6 +1,6 @@
-require("scripts/globals/jobpoints")
-require("scripts/globals/magicburst")
-require("scripts/globals/utils")
+require('scripts/globals/jobpoints')
+require('scripts/globals/magicburst')
+require('scripts/globals/utils')
 -----------------------------------
 xi = xi or {}
 xi.magic = xi.magic or {}
@@ -865,7 +865,7 @@ function addBonuses(caster, spell, target, dmg, params)
     if burst > 1.0 then
         spell:setMsg(spell:getMagicBurstMessage()) -- "Magic Burst!"
 
-        caster:triggerRoeEvent(xi.roe.triggers.magicBurst)
+        caster:triggerRoeEvent(xi.roeTrigger.MAGIC_BURST)
     end
 
     dmg = math.floor(dmg * burst)

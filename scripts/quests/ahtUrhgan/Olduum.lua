@@ -101,7 +101,7 @@ quest.sections =
 
                             return quest:progressEvent(0, { [0] = keyItems[quest:getVar(player, 'Prog')] })
                         else
-                            player:setLocalVar("mineFail", 1)
+                            player:setLocalVar('mineFail', 1)
                             return quest:progressEvent(0, { [1] = 1 })
                         end
                     end
@@ -111,8 +111,8 @@ quest.sections =
             onEventFinish =
             {
                 [0] = function(player, npc, trade)
-                    if player:getLocalVar("mineFail") == 1 then
-                        player:setLocalVar("mineFail", 0)
+                    if player:getLocalVar('mineFail') == 1 then
+                        player:setLocalVar('mineFail', 0)
                         player:confirmTrade()
                     else
                         player:addKeyItem(keyItems[quest:getVar(player, 'Prog')])
@@ -142,8 +142,8 @@ quest.sections =
                     then
                         return quest:event(7)
                     else
-                        local newRingCS = player:getLocalVar("RingCS")
-                        player:setLocalVar("RingCS", newRingCS + 1)
+                        local newRingCS = player:getLocalVar('RingCS')
+                        player:setLocalVar('RingCS', newRingCS + 1)
                         if newRingCS > 1 then
                             newRingCS = 1
                         end
@@ -209,7 +209,7 @@ quest.sections =
 
                             return quest:progressEvent(0, { [0] = keyItems[quest:getVar(player, 'Prog')] })
                         else
-                            player:setLocalVar("mineFail", 1)
+                            player:setLocalVar('mineFail', 1)
                             return quest:progressEvent(0, { [1] = 1 })
                         end
                     end
@@ -219,8 +219,8 @@ quest.sections =
             onEventFinish =
             {
                 [0] = function(player, npc, trade)
-                    if player:getLocalVar("mineFail") == 1 then
-                        player:setLocalVar("mineFail", 0)
+                    if player:getLocalVar('mineFail') == 1 then
+                        player:setLocalVar('mineFail', 0)
                         player:confirmTrade()
                     else
                         player:addKeyItem(keyItems[quest:getVar(player, 'Prog')])

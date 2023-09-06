@@ -1,7 +1,7 @@
 -----------------------------------
 -- Abyssea Atma Fabricant
 -----------------------------------
-require("scripts/globals/abyssea")
+require('scripts/globals/abyssea')
 -----------------------------------
 xi = xi or {}
 xi.atmaFabricant = xi.atmaFabricant or {}

@@ -2,7 +2,7 @@
 -- Area: Upper Delkfutt's Tower
 --   NM: Mimas
 -----------------------------------
-mixins = { require("scripts/mixins/job_special") }
+mixins = { require('scripts/mixins/job_special') }
 -----------------------------------
 local entity = {}
 

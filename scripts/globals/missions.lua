@@ -1,4 +1,4 @@
-require("scripts/globals/utils")
+require('scripts/globals/utils')
 
 xi = xi or {}
 xi.mission = xi.mission or {}
@@ -800,34 +800,38 @@ xi.mission.getMissionMask = function(player)
 end
 
 -- Interaction Framework Helper Functions
-local function getVarPrefix(areaId, questId)
-    return string.format("Mission[%d][%d]", areaId, questId)
+local function getVarPrefix(areaId, missionId)
+    return string.format('Mission[%d][%d]', areaId, missionId)
 end
 
-xi.mission.incrementVar = function(player, areaId, questId, name, value)
-    return player:incrementCharVar(getVarPrefix(areaId, questId) .. name, value)
+xi.mission.incrementVar = function(player, areaId, missionId, name, value)
+    return player:incrementCharVar(getVarPrefix(areaId, missionId) .. name, value)
 end
 
-xi.mission.getVar = function(player, areaId, questId, name)
-    return player:getVar(getVarPrefix(areaId, questId) .. name)
+xi.mission.getVar = function(player, areaId, missionId, name)
+    return player:getVar(getVarPrefix(areaId, missionId) .. name)
 end
 
-xi.mission.setVar = function(player, areaId, questId, name, value)
-    return player:setVar(getVarPrefix(areaId, questId) .. name, value)
+xi.mission.setVar = function(player, areaId, missionId, name, value, expiry)
+    return player:setVar(getVarPrefix(areaId, missionId) .. name, value, expiry)
 end
 
-xi.mission.getLocalVar = function(player, areaId, questId, name)
-    return player:getLocalVar(getVarPrefix(areaId, questId) .. name)
+xi.mission.setVarExpiration = function(player, areaId, missionId, name, expiry)
+    return player:setCharVarExpiration(getVarPrefix(areaId, missionId) .. name, expiry)
 end
 
-xi.mission.setLocalVar = function(player, areaId, questId, name, value)
-    return player:setLocalVar(getVarPrefix(areaId, questId) .. name, value)
+xi.mission.getLocalVar = function(player, areaId, missionId, name)
+    return player:getLocalVar(getVarPrefix(areaId, missionId) .. name)
 end
 
-xi.mission.getMustZone = function(player, areaId, questId)
-    return player:getLocalVar(getVarPrefix(areaId, questId) .. "mustZone") == 1 and true or false
+xi.mission.setLocalVar = function(player, areaId, missionId, name, value)
+    return player:setLocalVar(getVarPrefix(areaId, missionId) .. name, value)
 end
 
-xi.mission.setMustZone = function(player, areaId, questId)
-    player:setLocalVar(getVarPrefix(areaId, questId) .. "mustZone", 1)
+xi.mission.getMustZone = function(player, areaId, missionId)
+    return player:getLocalVar(getVarPrefix(areaId, missionId) .. 'mustZone') == 1 and true or false
+end
+
+xi.mission.setMustZone = function(player, areaId, missionId)
+    player:setLocalVar(getVarPrefix(areaId, missionId) .. 'mustZone', 1)
 end

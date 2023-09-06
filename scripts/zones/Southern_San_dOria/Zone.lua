@@ -34,7 +34,7 @@ zoneObject.onTriggerAreaEnter = function(player, triggerArea)
     if
         triggerAreaID == 1 and
         player:getCurrentMission(xi.mission.log_id.COP) == xi.mission.id.cop.DAWN and
-        player:getCharVar("COP_louverance_story") == 2
+        player:getCharVar('COP_louverance_story') == 2
     then
         player:startEvent(758)
     end
@@ -50,7 +50,7 @@ end
 
 zoneObject.onEventFinish = function(player, csid, option, npc)
     if csid == 758 then
-        player:setCharVar("COP_louverance_story", 3)
+        player:setCharVar('COP_louverance_story', 3)
     end
 end
 

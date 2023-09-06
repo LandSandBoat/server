@@ -2,7 +2,7 @@
 -- Area: Abyssea - Vunkurl
 --  Mob: Peapuk
 -----------------------------------
-mixins = { require("scripts/mixins/families/puk") }
+mixins = { require('scripts/mixins/families/puk') }
 -----------------------------------
 local entity = {}
 

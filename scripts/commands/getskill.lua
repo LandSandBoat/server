@@ -2,20 +2,22 @@
 -- func: getskill <skill name or ID> <target>
 -- desc: returns target's level of specified skill
 -----------------------------------
-cmdprops =
+local commandObj = {}
+
+commandObj.cmdprops =
 {
     permission = 1,
-    parameters = "ss"
+    parameters = 'ss'
 }
 
-function error(player, msg)
+local function error(player, msg)
     player:PrintToPlayer(msg)
-    player:PrintToPlayer("!getskill <skill name or ID> (player)")
+    player:PrintToPlayer('!getskill <skill name or ID> (player)')
 end
 
-function onTrigger(player, skillName, target)
+commandObj.onTrigger = function(player, skillName, target)
     if skillName == nil then
-        error(player, "You must specify a skill to check!")
+        error(player, 'You must specify a skill to check!')
         return
     end
 
@@ -30,7 +32,7 @@ function onTrigger(player, skillName, target)
         skillID == 47 or
         skillID > 57
     then
-        error(player, "You must specify a valid skill.")
+        error(player, 'You must specify a valid skill.')
         return
     end
 
@@ -41,19 +43,21 @@ function onTrigger(player, skillName, target)
             if player:getCursorTarget():isPC() then
                 targ = player:getCursorTarget()
             else
-                error(player, "You must target a player or specify a name.")
+                error(player, 'You must target a player or specify a name.')
                 return
             end
         end
     else
         targ = GetPlayerByName(target)
         if targ == nil then
-            player:PrintToPlayer(string.format("Player named '%s' not found!", target))
+            player:PrintToPlayer(string.format('Player named "%s" not found!', target))
             return
         end
     end
 
     -- Trying to break this wide line in any other more reasonable way results in lua throwing errors.. Parsing bug.
-    player:PrintToPlayer(string.format("%s's current skillID '%s' Skill: %s (real value: %s)",
-    targ:getName(), skillName, (targ:getCharSkillLevel(skillID) / 10) .. ".x", targ:getCharSkillLevel(skillID)))
+    player:PrintToPlayer(string.format('%s\'s current skillID \'%s\' Skill: %s (real value: %s)',
+    targ:getName(), skillName, (targ:getCharSkillLevel(skillID) / 10) .. '.x', targ:getCharSkillLevel(skillID)))
 end
+
+return commandObj

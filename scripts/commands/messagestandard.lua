@@ -2,25 +2,28 @@
 -- func: messagestandard
 -- desc: Injects a standard message packet.
 -----------------------------------
+local commandObj = {}
 
-cmdprops =
+commandObj.cmdprops =
 {
     permission = 1,
-    parameters = "i"
+    parameters = 'i'
 }
 
-function error(player, msg)
+local function error(player, msg)
     player:PrintToPlayer(msg)
-    player:PrintToPlayer("!messagestandard <message ID>")
+    player:PrintToPlayer('!messagestandard <message ID>')
 end
 
-function onTrigger(player, msgId)
+commandObj.onTrigger = function(player, msgId)
     -- validate msgId
     if msgId == nil then
-        error(player, "You must provide a message ID.")
+        error(player, 'You must provide a message ID.')
         return
     end
 
     -- inject message packet
     player:messageBasic(msgId)
 end
+
+return commandObj

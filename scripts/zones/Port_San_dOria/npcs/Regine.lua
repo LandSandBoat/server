@@ -13,7 +13,7 @@ entity.onTrade = function(player, npc, trade)
     -- FLYERS FOR REGINE
     if
         flyersForRegine == QUEST_ACCEPTED and
-        npcUtil.tradeHas(trade, { { "gil", 10 } })
+        npcUtil.tradeHas(trade, { { 'gil', 10 } })
     then
         if npcUtil.giveItem(player, xi.item.MAGICMART_FLYER) then
             player:confirmTrade()
@@ -71,7 +71,7 @@ entity.onEventFinish = function(player, csid, option, npc)
     -- THE BRUGAIRE CONSORTIUM
     elseif csid == 535 then
         player:confirmTrade()
-        player:setCharVar("TheBrugaireConsortium-Parcels", 11)
+        player:setCharVar('TheBrugaireConsortium-Parcels', 11)
 
     -- WHITE MAGIC SHOP
     elseif csid == 510 and option == 0 then

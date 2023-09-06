@@ -1,10 +1,10 @@
 -----------------------------------
 -- Abyssea Sturdy Pyxis Npc
 -----------------------------------
-require("scripts/globals/abyssea/sturdypyxis/chest")
-require("scripts/globals/abyssea/sturdypyxis/red_chest")
-require("scripts/globals/abyssea/sturdypyxis/blue_chest")
-require("scripts/globals/abyssea/sturdypyxis/gold_chest")
+require('scripts/globals/abyssea/sturdypyxis/chest')
+require('scripts/globals/abyssea/sturdypyxis/red_chest')
+require('scripts/globals/abyssea/sturdypyxis/blue_chest')
+require('scripts/globals/abyssea/sturdypyxis/gold_chest')
 -----------------------------------
 xi = xi or {}
 xi.pyxis = xi.pyxis or {}
@@ -73,8 +73,8 @@ end
 
 xi.pyxis.npc.onPyxisTrade = function(player, npc, trade)
     local ID = zones[player:getZoneID()]
-    local chestTier = npc:getLocalVar("TIER")
-    local dropType = npc:getLocalVar("DROPTYPE")
+    local chestTier = npc:getLocalVar('TIER')
+    local dropType = npc:getLocalVar('DROPTYPE')
 
     if not xi.pyxis.canOpenChest(player, npc) then
         return
@@ -94,11 +94,11 @@ xi.pyxis.npc.onPyxisTrade = function(player, npc, trade)
 end
 
 xi.pyxis.npc.onPyxisTrigger = function(player, npc)
-    local tier            = npc:getLocalVar("TIER")
-    local dropType        = npc:getLocalVar("DROPTYPE")
-    local chestType       = npc:getLocalVar("CHESTTYPE")         -- 1:Blue "twist dial" || 2:Red "pressure" || 3:Gold "enter two-digit combination (10~99)".
-    local messagetype     = npc:getLocalVar("MESSAGE")
-    local timeleft        = os.time() - npc:getLocalVar("[pyxis]SPAWNTIME")
+    local tier            = npc:getLocalVar('TIER')
+    local dropType        = npc:getLocalVar('DROPTYPE')
+    local chestType       = npc:getLocalVar('CHESTTYPE')         -- 1:Blue 'twist dial' || 2:Red 'pressure' || 3:Gold 'enter two-digit combination (10~99)'.
+    local messagetype     = npc:getLocalVar('MESSAGE')
+    local timeleft        = os.time() - npc:getLocalVar('[pyxis]SPAWNTIME')
     local contentMessage  = xi.pyxis.npc.contentMessage[messagetype] + chestType
     local lockedEvent, unlockedEvent = GetEvents(tier)
 
@@ -163,8 +163,8 @@ end
 
 xi.pyxis.npc.onPyxisEventUpdate = function(player, csid, option, input)
     local npc            = player:getEventTarget()
-    local dropType       = npc:getLocalVar("DROPTYPE")
-    local tier           = npc:getLocalVar("TIER")
+    local dropType       = npc:getLocalVar('DROPTYPE')
+    local tier           = npc:getLocalVar('TIER')
     local lockedEvent, unlockedEvent = GetEvents(tier)
 
     if csid == lockedEvent or csid == unlockedEvent then
@@ -195,10 +195,10 @@ end
 
 xi.pyxis.npc.onPyxisEventFinish = function(player, csid, option, npc)
     local ID               = zones[player:getZoneID()]
-    local spawnstatus      = npc:getLocalVar("SPAWNSTATUS")
-    local chestTier        = npc:getLocalVar("TIER")
-    local chestType        = npc:getLocalVar("CHESTTYPE")
-    local dropType         = npc:getLocalVar("DROPTYPE")
+    local spawnstatus      = npc:getLocalVar('SPAWNSTATUS')
+    local chestTier        = npc:getLocalVar('TIER')
+    local chestType        = npc:getLocalVar('CHESTTYPE')
+    local dropType         = npc:getLocalVar('DROPTYPE')
 
     local lockedEvent, unlockedEvent = GetEvents(chestTier)
     local openchoice       = bit.lshift(1, option - 65)

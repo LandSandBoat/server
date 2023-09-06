@@ -2,19 +2,20 @@
 -- func: addtempitem
 -- desc: Adds a temp item to the players inventory.
 -----------------------------------
+local commandObj = {}
 
-cmdprops =
+commandObj.cmdprops =
 {
     permission = 1,
-    parameters = "ii"
+    parameters = 'ii'
 }
 
-function error(player, msg)
+local function error(player, msg)
     player:PrintToPlayer(msg)
-    player:PrintToPlayer("!addtempitem <itemID> <quantity>")
+    player:PrintToPlayer('!addtempitem <itemID> <quantity>')
 end
 
-function onTrigger(player, itemId, quantity)
+commandObj.onTrigger = function(player, itemId, quantity)
     -- Load needed text ids for players current zone..
     local ID = zones[player:getZoneID()]
     -- validate itemId
@@ -23,14 +24,14 @@ function onTrigger(player, itemId, quantity)
     end
 
     if itemId == nil or itemId == 0 then
-        error(player, "Invalid itemID.")
+        error(player, 'Invalid itemID.')
         return
     end
 
     -- validate quantity
     quantity = tonumber(quantity) or 1
     if quantity == nil or quantity < 1 then
-        error(player, "Invalid quantity.")
+        error(player, 'Invalid quantity.')
         return
     end
 
@@ -42,3 +43,5 @@ function onTrigger(player, itemId, quantity)
         player:messageSpecial(ID.text.ITEM_OBTAINED, itemId)
     end
 end
+
+return commandObj

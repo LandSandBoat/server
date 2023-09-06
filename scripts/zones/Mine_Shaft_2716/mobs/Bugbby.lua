@@ -4,7 +4,7 @@
 -- NM: Bugbby
 -----------------------------------
 local ID = zones[xi.zone.MINE_SHAFT_2716]
-mixins = { require("scripts/mixins/job_special") }
+mixins = { require('scripts/mixins/job_special') }
 -----------------------------------
 local entity = {}
 
@@ -22,17 +22,17 @@ end
 
 entity.onMobFight = function(mob, target)
     local activeMoblins = {} -- clear list prior to checking
-    local hateReset = mob:getLocalVar("hateResetTimer")
+    local hateReset = mob:getLocalVar('hateResetTimer')
     local timeBlock = mob:getBattleTime() / 60 -- every 60 seconds, a random moblin calls for bugbby to attack their target
 
     if hateReset == 0 then
         hateReset = 1
-        mob:setLocalVar("hateResetTimer", hateReset)
+        mob:setLocalVar('hateResetTimer', hateReset)
     end
 
     if timeBlock >= hateReset then
         local bfID = mob:getBattlefield():getArea()
-        mob:setLocalVar("hateResetTimer", hateReset + 1)
+        mob:setLocalVar('hateResetTimer', hateReset + 1)
         for i, v in ipairs(ID.MOBLIN_IDS[bfID].MOBLIN_IDS) do
             local moblinAlive = GetMobByID(v)
             if moblinAlive:isAlive() then -- make sure we're not adding dead moblins into the table

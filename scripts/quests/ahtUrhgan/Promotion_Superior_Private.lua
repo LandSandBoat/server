@@ -15,7 +15,7 @@ quest.sections =
 {
     {
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE and player:getCharVar("AssaultPromotion") >= 25
+            return status == QUEST_AVAILABLE and player:getCharVar('AssaultPromotion') >= 25
             and player:getQuestStatus(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.PROMOTION_PRIVATE_FIRST_CLASS) == QUEST_COMPLETED
         end,
 
@@ -72,7 +72,7 @@ quest.sections =
             {
                 [5022] = function(player, csid, option, npc)
                     if quest:complete(player) then
-                        player:setCharVar("AssaultPromotion", 0)
+                        player:setCharVar('AssaultPromotion', 0)
                         player:delKeyItem(xi.ki.PFC_WILDCAT_BADGE)
                         player:delKeyItem(xi.ki.DARK_RIDER_HOOFPRINT)
                     end

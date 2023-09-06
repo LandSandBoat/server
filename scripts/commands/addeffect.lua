@@ -2,20 +2,20 @@
 -- func: addeffect
 -- desc: Adds the given effect to the given player.
 -----------------------------------
-require("scripts/globals/teleports")
+local commandObj = {}
 
-cmdprops =
+commandObj.cmdprops =
 {
     permission = 1,
-    parameters = "ssssss"
+    parameters = 'ssssss'
 }
 
-function error(player, msg)
+local function error(player, msg)
     player:PrintToPlayer(msg)
-    player:PrintToPlayer("!addeffect (player) <effect> (power) (duration) (subid) (subPower)")
+    player:PrintToPlayer('!addeffect (player) <effect> (power) (duration) (subid) (subPower)')
 end
 
-function onTrigger(player, arg1, arg2, arg3, arg4, arg5, arg6)
+commandObj.onTrigger = function(player, arg1, arg2, arg3, arg4, arg5, arg6)
     local targ
     local id
     local power
@@ -24,7 +24,7 @@ function onTrigger(player, arg1, arg2, arg3, arg4, arg5, arg6)
     local subPower
 
     if arg1 == nil then
-        error(player, "Invalid effect.")
+        error(player, 'Invalid effect.')
         return
     else
         targ = GetPlayerByName(arg1)
@@ -48,37 +48,37 @@ function onTrigger(player, arg1, arg2, arg3, arg4, arg5, arg6)
 
     -- validate effect
     if id == nil then
-        error(player, "Invalid effect.")
+        error(player, 'Invalid effect.')
         return
     else
         id = tonumber(id) or xi.effect[string.upper(id)]
         if id == nil then
-            error(player, "Invalid player or effect.")
+            error(player, 'Invalid player or effect.')
             return
         end
     end
 
     -- validate power
     if power < 0 then
-        error(player, "Invalid power.")
+        error(player, 'Invalid power.')
         return
     end
 
     -- validate duration
     if duration < 0 then
-        error(player, "Invalid duration.")
+        error(player, 'Invalid duration.')
         return
     end
 
     -- validate subId
     if subId < 0 then
-        error(player, "Invalid subId.")
+        error(player, 'Invalid subId.')
         return
     end
 
     -- validate subPower
     if subPower < 0 then
-        error(player, "Invalid subPower.")
+        error(player, 'Invalid subPower.')
         return
     end
 
@@ -89,3 +89,5 @@ function onTrigger(player, arg1, arg2, arg3, arg4, arg5, arg6)
         targ:messagePublic(283, targ, id)
     end
 end
+
+return commandObj

@@ -74,10 +74,10 @@ spellObject.onSpellCast = function(caster, target, spell)
     --Apply Afflatus Misery Bonus to Final Result
     if caster:hasStatusEffect(xi.effect.AFFLATUS_MISERY) then
         if caster:getID() == target:getID() then -- Let's use a local var to hold the power of Misery so the boost is applied to all targets,
-            caster:setLocalVar("Misery_Power", caster:getMod(xi.mod.AFFLATUS_MISERY))
+            caster:setLocalVar('Misery_Power', caster:getMod(xi.mod.AFFLATUS_MISERY))
         end
 
-        local misery = caster:getLocalVar("Misery_Power")
+        local misery = caster:getLocalVar('Misery_Power')
 
         --THIS IS LARELY SEMI-EDUCATED GUESSWORK. THERE IS NOT A
         --LOT OF CONCRETE INFO OUT THERE ON CURA THAT I COULD FIND

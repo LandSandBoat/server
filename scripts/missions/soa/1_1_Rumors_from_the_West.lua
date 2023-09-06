@@ -23,7 +23,7 @@ mission.sections =
 
             if
                 xi.settings.main.NEW_CHARACTER_CUTSCENE == 1 and
-                player:getCharVar("HQuest[newCharacterCS]notSeen") == 1
+                player:getCharVar('HQuest[newCharacterCS]notSeen') == 1
             then
                 return false
             end

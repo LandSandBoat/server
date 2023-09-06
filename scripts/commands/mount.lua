@@ -1,15 +1,17 @@
-cmdprops =
+local commandObj = {}
+
+commandObj.cmdprops =
 {
     permission = 1,
-    parameters = "sss"
+    parameters = 'sss'
 }
 
-function error(player, msg)
+local function error(player, msg)
     player:PrintToPlayer(msg)
-    player:PrintToPlayer("!mount <mount ID> (player)")
+    player:PrintToPlayer('!mount <mount ID> (player)')
 end
 
-function onTrigger(player, mount, target)
+commandObj.onTrigger = function(player, mount, target)
     -- Default to Chocobo (0)
     if mount == nil then
         mount = 0
@@ -18,7 +20,7 @@ function onTrigger(player, mount, target)
     -- validate mount
     mount = tonumber(mount) or xi.mount[string.upper(mount)]
     if mount == nil or mount < 0 or mount >= xi.mount.MOUNT_MAX then
-        error(player, "Invalid mount ID.")
+        error(player, 'Invalid mount ID.')
         return
     end
 
@@ -29,10 +31,12 @@ function onTrigger(player, mount, target)
     else
         targ = GetPlayerByName(target)
         if targ == nil then
-            error(player, string.format("Player named '%s' not found!", target))
+            error(player, string.format('Player named "%s" not found!', target))
             return
         end
     end
 
     targ:addStatusEffectEx(xi.effect.MOUNTED, xi.effect.MOUNTED, mount, 0, 0, true)
 end
+
+return commandObj

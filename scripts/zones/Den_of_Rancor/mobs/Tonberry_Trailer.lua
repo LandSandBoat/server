@@ -3,7 +3,7 @@
 --  Mob: Tonberry Trailer
 -- Note: PH for Celeste-eyed Tozberry
 -----------------------------------
-mixins = { require("scripts/mixins/families/tonberry") }
+mixins = { require('scripts/mixins/families/tonberry') }
 local ID = zones[xi.zone.DEN_OF_RANCOR]
 -----------------------------------
 local entity = {}

@@ -2,21 +2,23 @@
 -- func: delitem
 -- desc: Deletes a single item held by a player, if they have it.
 -----------------------------------
-cmdprops =
+local commandObj = {}
+
+commandObj.cmdprops =
 {
     permission = 1,
-    parameters = "is"
+    parameters = 'is'
 }
 
-function error(player, msg)
+local function error(player, msg)
     player:PrintToPlayer(msg)
-    player:PrintToPlayer("!delitem <itemID> (player)")
+    player:PrintToPlayer('!delitem <itemID> (player)')
 end
 
-function onTrigger(player, itemId, target)
+commandObj.onTrigger = function(player, itemId, target)
     -- validate itemId
     if itemId == nil or itemId < 1 then
-        error(player, "Invalid itemID.")
+        error(player, 'Invalid itemID.')
         return
     end
 
@@ -27,7 +29,7 @@ function onTrigger(player, itemId, target)
     else
         targ = GetPlayerByName(target)
         if targ == nil then
-            error(player, string.format("Player named '%s' not found!", target))
+            error(player, string.format('Player named "%s" not found!', target))
             return
         end
     end
@@ -36,12 +38,14 @@ function onTrigger(player, itemId, target)
     for i = xi.inv.INVENTORY, xi.inv.WARDROBE8 do -- inventory locations enums
         if targ:hasItem(itemId, i) then
             targ:delItem(itemId, 1, i)
-            player:PrintToPlayer(string.format("Item %i was deleted from %s.", itemId, targ:getName()))
+            player:PrintToPlayer(string.format('Item %i was deleted from %s.', itemId, targ:getName()))
             break
         end
 
         if i == xi.inv.WARDROBE8 then -- Wardrobe 8 is the last inventory location, if it reaches this point then the player does not have the item anywhere.
-            player:PrintToPlayer(string.format("%s does not have item %i.", targ:getName(), itemId))
+            player:PrintToPlayer(string.format('%s does not have item %i.', targ:getName(), itemId))
         end
     end
 end
+
+return commandObj

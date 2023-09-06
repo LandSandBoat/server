@@ -1,4 +1,4 @@
-﻿/*
+/*
 ===========================================================================
 
 Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -357,44 +357,120 @@ namespace message
             }
             case MSG_PT_RELOAD:
             {
-                if (extra.size() == 8)
+                uint32  partyid = ref<uint32>((uint8*)extra.data(), 0);
+                CParty* PParty  = nullptr;
+
+                // TODO: when Party/Alliance gets a rewrite, make a zoneutils::ForEachParty or some other accessor to reduce the amount of iterations significantly.
+                // clang-format off
+                zoneutils::ForEachZone([partyid, &PParty](CZone* PZone)
                 {
-                    CCharEntity* PChar = zoneutils::GetCharToUpdate(ref<uint32>((uint8*)extra.data(), 4), ref<uint32>((uint8*)extra.data(), 0));
-                    if (PChar)
+                    PZone->ForEachChar([partyid, &PParty](CCharEntity* PChar)
                     {
-                        PChar->ReloadPartyInc();
-                        break;
+                        if (PChar->PParty && PChar->PParty->GetPartyID() == partyid)
+                        {
+                            PParty = PChar->PParty;
+                            return;
+                        }
+                    });
+
+                    if (PParty)
+                    {
+                        return;
+                    }
+                });
+                // clang-format on
+
+                if (PParty)
+                {
+                    if (PParty->m_PAlliance)
+                    {
+                        for (auto* entry : PParty->m_PAlliance->partyList)
+                        {
+                            for (auto* member : entry->members)
+                            {
+                                if (member->objtype == TYPE_PC)
+                                {
+                                    static_cast<CCharEntity*>(member)->ReloadPartyInc();
+                                }
+                            }
+                        }
+                    }
+                    else
+                    {
+                        for (auto* member : PParty->members)
+                        {
+                            if (member->objtype == TYPE_PC)
+                            {
+                                static_cast<CCharEntity*>(member)->ReloadPartyInc();
+                            }
+                        }
                     }
                 }
-                else
-                {
-                    CCharEntity* PChar = zoneutils::GetChar(ref<uint32>((uint8*)extra.data(), 0));
-                    if (PChar)
-                    {
-                        PChar->ForAlliance([](CBattleEntity* PMember)
-                                           { ((CCharEntity*)PMember)->ReloadPartyInc(); });
-                    }
-                }
+
                 break;
             }
             case MSG_PT_DISBAND:
             {
-                CCharEntity* PChar = zoneutils::GetChar(ref<uint32>((uint8*)extra.data(), 0));
-                uint32       id    = ref<uint32>((uint8*)extra.data(), 4);
-                if (PChar)
+                uint32  partyid = ref<uint32>((uint8*)extra.data(), 0);
+                CParty* PParty  = nullptr;
+
+                // TODO: when Party/Alliance gets a rewrite, make a zoneutils::ForEachParty or some other accessor to reduce the amount of iterations significantly.
+                // clang-format off
+                zoneutils::ForEachZone([partyid, &PParty](CZone* PZone)
                 {
-                    if (PChar->PParty)
+                    PZone->ForEachChar([partyid, &PParty](CCharEntity* PChar)
                     {
-                        if (PChar->PParty->m_PAlliance && PChar->PParty->m_PAlliance->m_AllianceID == id)
+                        if (PChar->PParty && PChar->PParty->GetPartyID() == partyid)
                         {
-                            PChar->PParty->m_PAlliance->dissolveAlliance(false);
+                            PParty = PChar->PParty;
+                            return;
                         }
-                        else
-                        {
-                            PChar->PParty->DisbandParty(false);
-                        }
+                    });
+
+                    if (PParty)
+                    {
+                        return;
                     }
+                });
+                // clang-format on
+
+                if (PParty)
+                {
+                    PParty->DisbandParty(false);
                 }
+
+                break;
+            }
+            case MSG_ALLIANCE_DISSOLVE:
+            {
+                uint32     allianceid = ref<uint32>((uint8*)extra.data(), 0);
+                CAlliance* PAlliance  = nullptr;
+
+                // TODO: when Party/Alliance gets a rewrite, make a zoneutils::ForEachAlliance or some other accessor to reduce the amount of iterations significantly.
+                // clang-format off
+                zoneutils::ForEachZone([allianceid, &PAlliance](CZone* PZone)
+                {
+                    PZone->ForEachChar([allianceid, &PAlliance](CCharEntity* PChar)
+                    {
+                        if (PChar->PParty && PChar->PParty->m_PAlliance && PChar->PParty->m_PAlliance->m_AllianceID == allianceid)
+                        {
+                            PAlliance = PChar->PParty->m_PAlliance;
+                            return;
+                        }
+                    });
+
+                    if (PAlliance)
+                    {
+                        return;
+                    }
+                });
+                // clang-format on
+
+                if (PAlliance)
+                {
+                    PAlliance->dissolveAlliance(false);
+                }
+
                 break;
             }
             case MSG_DIRECT:
@@ -606,16 +682,17 @@ namespace message
                 uint8* data   = (uint8*)extra.data();
                 uint32 charId = ref<uint32>(data, 0);
                 int32  value  = ref<int32>(data, 4);
+                uint32 expiry = ref<uint32>(data, 8);
 
                 ShowDebug(fmt::format("Received message to update var for {}", charId));
 
-                uint8 varNameSize = ref<uint8>(data, 8);
-                auto  varName     = std::string(data + 9, data + 9 + varNameSize);
+                uint8 varNameSize = ref<uint8>(data, 12);
+                auto  varName     = std::string(data + 13, data + 13 + varNameSize);
 
                 if (auto player = zoneutils::GetChar(charId))
                 {
                     ShowDebug(fmt::format("Updating charvar for {} ({}): {} = {}", player->GetName(), charId, varName, value));
-                    player->updateCharVarCache(varName, value);
+                    player->updateCharVarCache(varName, value, expiry);
                 }
                 break;
             }
@@ -723,16 +800,17 @@ namespace message
         }
     }
 
-    void send_charvar_update(uint32 charId, std::string const& varName, uint32 value)
+    void send_charvar_update(uint32 charId, std::string const& varName, uint32 value, uint32 expiry)
     {
-        uint32 size = sizeof(uint32) + sizeof(int32) + sizeof(uint8) + static_cast<uint32>(varName.size());
+        uint32 size = sizeof(uint32) + sizeof(uint32) + sizeof(uint32) + sizeof(uint8) + static_cast<uint32>(varName.size());
         char*  buf  = new char[size];
         memset(&buf[0], 0, size);
 
         ref<uint32>(buf, 0) = charId;
         ref<int32>(buf, 4)  = value;
-        ref<uint8>(buf, 8)  = (uint8)varName.size();
-        memcpy(buf + 9, varName.c_str(), varName.size());
+        ref<uint32>(buf, 8) = expiry;
+        ref<uint8>(buf, 12) = (uint8)varName.size();
+        memcpy(buf + 13, varName.c_str(), varName.size());
 
         message::send(MSG_CHARVAR_UPDATE, buf, size, nullptr);
     }

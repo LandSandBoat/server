@@ -21,7 +21,7 @@ entity.onMobEngaged = function(mob, target)
 end
 
 entity.onMobDeath = function(mob, player, optParams)
-    GetNPCByID(ID.npc.CHANDELIER_QM):setLocalVar("chandelierCooldown", os.time() + 600) -- 10 minute timeout
+    GetNPCByID(ID.npc.CHANDELIER_QM):setLocalVar('chandelierCooldown', os.time() + 600) -- 10 minute timeout
 end
 
 return entity

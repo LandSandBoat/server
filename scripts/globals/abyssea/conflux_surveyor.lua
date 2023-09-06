@@ -1,7 +1,7 @@
 -----------------------------------
 -- Conflux Surveyor Global
 -----------------------------------
-require("scripts/globals/abyssea")
+require('scripts/globals/abyssea')
 -----------------------------------
 xi = xi or {}
 xi.abyssea = xi.abyssea or {}
@@ -19,7 +19,7 @@ xi.abyssea.surveyorOnTrigger = function(player, npc)
         timeRemaining = player:getStatusEffect(xi.effect.VISITANT):getTimeRemaining() / 1000 - 4
         hasVisitantStatusEffect = 3
     else
-        prevTime = player:getCharVar("abysseaTimeStored") -- Seconds remaining
+        prevTime = player:getCharVar('abysseaTimeStored') -- Seconds remaining
     end
 
     player:startEvent(2001, hasVisitantStatusEffect, timeRemaining, prevTime, numStones, numSojourn, hasRhapsody, 0, 0)
@@ -43,8 +43,8 @@ xi.abyssea.surveyorOnEventFinish = function(player, csid, option, npc)
         if visitantEffect:getIcon() == xi.effect.VISITANT then
             visitantTime = visitantEffect:getTimeRemaining() / 1000 - 4
         else
-            visitantTime = player:getCharVar("abysseaTimeStored")
-            player:setCharVar("abysseaTimeStored", 0)
+            visitantTime = player:getCharVar('abysseaTimeStored')
+            player:setCharVar('abysseaTimeStored', 0)
         end
 
         local numSojourn = xi.abyssea.getAbyssiteTotal(player, xi.abyssea.abyssiteType.SOJOURN)

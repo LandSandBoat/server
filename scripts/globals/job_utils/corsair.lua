@@ -1,9 +1,9 @@
 -----------------------------------
 -- Corsair Job Utilities
 -----------------------------------
-require("scripts/globals/ability")
-require("scripts/globals/jobpoints")
-require("scripts/globals/utils")
+require('scripts/globals/ability')
+require('scripts/globals/jobpoints')
+require('scripts/globals/utils')
 -----------------------------------
 xi = xi or {}
 xi.job_utils = xi.job_utils or {}
@@ -12,7 +12,7 @@ xi.job_utils.corsair = xi.job_utils.corsair or {}
 
 -- rollModifiers format: Effect Powers table, phantomBase, roll bonus increase, Effect, Mod, Optimal Job
 -- NOTE: nil items below are nil values on purpose.  This might break if parameters are added to various bindings
--- TODO: replace "nil" pet values with tables, handle multiple effects in case of pet roll. Will need core changes.
+-- TODO: replace 'nil' pet values with tables, handle multiple effects in case of pet roll. Will need core changes.
 -- TODO: quantify Courser's Roll, no wiki seems to know what it is.
 -- TODO: verify Corsair's Roll for subjob: see http://wiki.ffo.jp/html/6052.html
 local corsairRollMods =
@@ -88,7 +88,7 @@ local function checkForJobBonus(caster, job)
         jobBonus = 1
     end
 
-    caster:setLocalVar("corsairRollBonus", jobBonus)
+    caster:setLocalVar('corsairRollBonus', jobBonus)
 end
 
 -- The following functions determine enhancement based on random vs effects
@@ -151,13 +151,15 @@ local function corsairSetup(caster, ability, action, effect, job)
         job,
         true
     )
-    caster:setLocalVar("corsairRollTotal", roll)
+    caster:setLocalVar('corsairRollTotal', roll)
     action:speceffect(caster:getID(), roll)
 
-    if checkForElevenRoll(caster) then
-        action:setRecast(ability:getRecast() / 2) -- halves phantom roll recast timer for all rolls while under the effects of an 11 (upon first hitting 11, phantom roll cooldown is reset in double-up.lua)
+    local numBustEffects = caster:numBustEffects()
+    local recastReduction = caster:getMerit(xi.merit.PHANTOM_ROLL_RECAST) + caster:getMod(xi.mod.PHANTOM_RECAST)
+    if checkForElevenRoll(caster) and numBustEffects == 0 then
+        action:setRecast((ability:getRecast() / 2) - recastReduction) -- halves phantom roll recast timer for all rolls while under the effects of an 11 without bust (upon first hitting 11, phantom roll cooldown is reset in double-up.lua)
     else
-        action:setRecast(ability:getRecast() - caster:getMerit(xi.merit.PHANTOM_ROLL_RECAST)) -- Recast merits have value of 2 from DB
+        action:setRecast(ability:getRecast() - recastReduction) -- Corsair Recast merits + Phantom Roll Recast Reduction
     end
 
     checkForJobBonus(caster, job)
@@ -176,7 +178,7 @@ local function applyRoll(caster, target, inAbility, action, total, isDoubleup, c
         effectpower = effectpower + corsairRollMods[abilityId][3]
     end
 
-    if caster:getLocalVar("corsairRollBonus") == 1 and total < 12 then
+    if caster:getLocalVar('corsairRollBonus') == 1 and total < 12 then
         effectpower = effectpower + corsairRollMods[abilityId][3]
     end
 
@@ -226,15 +228,15 @@ end
 xi.job_utils.corsair.useCuttingCards = function(caster, target, ability, action)
     if caster:getID() == target:getID() then
         local roll = math.random(1, 6)
-        caster:setLocalVar("corsairRollTotal", roll)
+        caster:setLocalVar('corsairRollTotal', roll)
         action:speceffect(caster:getID(), roll)
     end
 
-    local total = caster:getLocalVar("corsairRollTotal")
+    local total = caster:getLocalVar('corsairRollTotal')
 
     -- TODO: Implement
     -- caster:doCuttingCards(target, total)
-    print("WARNING: doCuttingCards is not implemented")
+    print('WARNING: doCuttingCards is not implemented')
 
     ability:setMsg(435 + math.floor((total - 1) / 2) * 2)
     action:setAnimation(target:getID(), 132 + (total) - 1)
@@ -249,7 +251,7 @@ xi.job_utils.corsair.useDoubleUp = function(caster, target, ability, action)
         local roll     = prevRoll:getSubPower()
         local job      = duEffect:getTier()
 
-        caster:setLocalVar("corsairActiveRoll", duEffect:getSubType())
+        caster:setLocalVar('corsairActiveRoll', duEffect:getSubType())
         local snakeEye = caster:getStatusEffect(xi.effect.SNAKE_EYE)
         if snakeEye then
             if prevRoll:getPower() >= 5 and math.random(100) < snakeEye:getPower() then
@@ -272,13 +274,13 @@ xi.job_utils.corsair.useDoubleUp = function(caster, target, ability, action)
             caster:resetRecast(xi.recast.ABILITY, 193)
         end
 
-        caster:setLocalVar("corsairRollTotal", roll)
+        caster:setLocalVar('corsairRollTotal', roll)
         action:speceffect(caster:getID(), roll - prevRoll:getSubPower())
         checkForJobBonus(caster, job)
     end
 
-    local total       = caster:getLocalVar("corsairRollTotal")
-    local activeRoll  = caster:getLocalVar("corsairActiveRoll")
+    local total       = caster:getLocalVar('corsairRollTotal')
+    local activeRoll  = caster:getLocalVar('corsairActiveRoll')
     local prevAbility = GetAbility(activeRoll)
 
     if prevAbility then -- Apply rolls to target(s), including the COR
@@ -299,11 +301,11 @@ end
 xi.job_utils.corsair.useWildCard = function(caster, target, ability, action)
     if caster:getID() == target:getID() then
         local roll = math.random(1, 6)
-        caster:setLocalVar("corsairRollTotal", roll)
+        caster:setLocalVar('corsairRollTotal', roll)
         action:speceffect(caster:getID(), roll)
     end
 
-    local total = caster:getLocalVar("corsairRollTotal")
+    local total = caster:getLocalVar('corsairRollTotal')
     caster:doWildCard(target, total)
     ability:setMsg(435 + math.floor((total - 1) / 2) * 2)
     action:setAnimation(target:getID(), 132 + (total) - 1)
@@ -335,7 +337,7 @@ xi.job_utils.corsair.onRollUseAbility = function(caster, target, ability, action
         corsairSetup(caster, ability, action, effectId, bonusJob)
     end
 
-    local total = caster:getLocalVar("corsairRollTotal")
+    local total = caster:getLocalVar('corsairRollTotal')
     return applyRoll(caster, target, ability, action, total, false, ability)
 end
 

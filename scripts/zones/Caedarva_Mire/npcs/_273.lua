@@ -12,7 +12,7 @@ end
 
 entity.onTrigger = function(player, npc)
 --[[    if player:hasKeyItem(xi.ki.PERIQIA_ASSAULT_AREA_ENTRY_PERMIT) then
-        player:setCharVar("ShadesOfVengeance", 1)
+        player:setCharVar('ShadesOfVengeance', 1)
         player:startEvent(143, 79, -6, 0, 99, 3, 0)
     else]]if not xi.instance.onTrigger(player, npc, xi.zone.PERIQIA) then
         player:messageSpecial(ID.text.NOTHING_HAPPENS)

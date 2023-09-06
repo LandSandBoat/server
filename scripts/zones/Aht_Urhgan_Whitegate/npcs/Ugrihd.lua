@@ -36,7 +36,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local points = player:getCurrency("imperial_standing")
+    local points = player:getCurrency('imperial_standing')
     local rank   = xi.besieged.getMercenaryRank(player)
     local badge  = 0
     if rank > 0 then
@@ -58,7 +58,7 @@ entity.onEventFinish = function(player, csid, option, npc)
         local item      = ImperialPieces[coinType].item
         local price     = ImperialPieces[coinType].price
 
-        if player:getCurrency("imperial_standing") < quantity * price then
+        if player:getCurrency('imperial_standing') < quantity * price then
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, item)
             return
         end
@@ -81,7 +81,7 @@ entity.onEventFinish = function(player, csid, option, npc)
             player:addItem(item, remainder)
         end
 
-        player:delCurrency("imperial_standing", quantity * price)
+        player:delCurrency('imperial_standing', quantity * price)
         npc:showText(npc, ID.text.UGRIHD_PURCHASE_DIALOGUE)
         player:messageSpecial(ID.text.ITEM_OBTAINED, item)
     end

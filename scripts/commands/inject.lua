@@ -2,25 +2,28 @@
 -- func: inject
 -- desc: Injects the given packet data.
 -----------------------------------
+local commandObj = {}
 
-cmdprops =
+commandObj.cmdprops =
 {
     permission = 1,
-    parameters = "s"
+    parameters = 's'
 }
 
-function error(player, msg)
+local function error(player, msg)
     player:PrintToPlayer(msg)
-    player:PrintToPlayer("!inject <packet>")
+    player:PrintToPlayer('!inject <packet>')
 end
 
-function onTrigger(player, packet)
+commandObj.onTrigger = function(player, packet)
     -- validate packet
     if packet == nil then
-        error(player, "You must enter a packet file name.")
+        error(player, 'You must enter a packet file name.')
         return
     end
 
     -- inject packet
     player:injectPacket(packet)
 end
+
+return commandObj

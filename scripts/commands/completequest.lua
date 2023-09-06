@@ -2,26 +2,26 @@
 -- func: completequest <logID> <questID> <player>
 -- desc: Completes the given quest for the GM or target player.
 -----------------------------------
-require("scripts/globals/quests")
 local logIdHelpers = require('scripts/globals/log_ids')
 -----------------------------------
+local commandObj = {}
 
-cmdprops =
+commandObj.cmdprops =
 {
     permission = 1,
-    parameters = "sss"
+    parameters = 'sss'
 }
 
-function error(player, msg)
+local function error(player, msg)
     player:PrintToPlayer(msg)
-    player:PrintToPlayer("!completequest <logID> <questID> (player)")
+    player:PrintToPlayer('!completequest <logID> <questID> (player)')
 end
 
-function onTrigger(player, logId, questId, target)
+commandObj.onTrigger = function(player, logId, questId, target)
     -- validate logId
     local questLog = logIdHelpers.getQuestLogInfo(logId)
     if questLog == nil then
-        error(player, "Invalid logID.")
+        error(player, 'Invalid logID.')
         return
     end
 
@@ -35,7 +35,7 @@ function onTrigger(player, logId, questId, target)
     end
 
     if questId == nil or questId < 0 then
-        error(player, "Invalid questID.")
+        error(player, 'Invalid questID.')
         return
     end
 
@@ -46,12 +46,14 @@ function onTrigger(player, logId, questId, target)
     else
         targ = GetPlayerByName(target)
         if targ == nil then
-            error(player, string.format("Player named '%s' not found!", target))
+            error(player, string.format('Player named "%s" not found!', target))
             return
         end
     end
 
     -- complete quest
     targ:completeQuest(logId, questId)
-    player:PrintToPlayer(string.format("Completed %s Quest with ID %u for %s", logName, questId, targ:getName()))
+    player:PrintToPlayer(string.format('Completed %s Quest with ID %u for %s', logName, questId, targ:getName()))
 end
+
+return commandObj

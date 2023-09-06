@@ -27,7 +27,7 @@ spellObject.onMobSpawn = function(mob)
 
     mob:setTrustTPSkillSettings(ai.tp.ASAP, ai.s.RANDOM)
 
-    mob:addListener("WEAPONSKILL_USE", "LEHKO_WEAPONSKILL_USE", function(mobArg, target, wsid, tp, action)
+    mob:addListener('WEAPONSKILL_USE', 'LEHKO_WEAPONSKILL_USE', function(mobArg, target, wsid, tp, action)
         if wsid == 3231 then -- Debonair Rush
             --  Here's betting your bark is worrrse than your bite!
             xi.trust.message(mobArg, xi.trust.messageOffset.SPECIAL_MOVE_1)

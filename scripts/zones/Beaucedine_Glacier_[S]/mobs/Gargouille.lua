@@ -4,7 +4,7 @@
 -- Note: PH for Grand'Goule
 -----------------------------------
 local ID = zones[xi.zone.BEAUCEDINE_GLACIER_S]
-mixins = { require("scripts/mixins/families/gargouille") }
+mixins = { require('scripts/mixins/families/gargouille') }
 -----------------------------------
 local entity = {}
 

@@ -109,7 +109,7 @@ quest.sections =
                     if npcUtil.tradeHasExactly(trade, xi.item.SUPPLIES_ORDER) then
                         return quest:progressEvent(124)
                     elseif
-                        npcUtil.tradeHas(trade, { { "gil", 50 } }) and
+                        npcUtil.tradeHas(trade, { { 'gil', 50 } }) and
                         npcUtil.giveItem(player, xi.item.CLUMP_OF_BATAGREENS)
                     then
                         player:confirmTrade()

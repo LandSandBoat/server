@@ -26,7 +26,7 @@ end
 
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 10057 then
-        player:setCharVar("ApocalypseNigh", 6)
+        player:setCharVar('ApocalypseNigh', 6)
     end
 end
 

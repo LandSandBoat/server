@@ -8,7 +8,7 @@ local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     if player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.CARGO) ~= QUEST_AVAILABLE then
-        if os.time() > player:getCharVar("VuntarCanBuyItem_date") then
+        if os.time() > player:getCharVar('VuntarCanBuyItem_date') then
             if npcUtil.tradeHas(trade, xi.item.ROLANBERRY_881_CE) then
                 player:startEvent(52, 1) -- Can Buy rolanberry (881 ce)
             elseif npcUtil.tradeHas(trade, xi.item.ROLANBERRY_874_CE) then
@@ -42,7 +42,7 @@ entity.onEventFinish = function(player, csid, option, npc)
     if csid == 50 then
         player:addQuest(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.CARGO)
     elseif csid == 52 then
-        player:setCharVar("VuntarCanBuyItem_date", getMidnight())
+        player:setCharVar('VuntarCanBuyItem_date', getMidnight())
 
         if player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.CARGO) == QUEST_ACCEPTED then
             player:completeQuest(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.CARGO)

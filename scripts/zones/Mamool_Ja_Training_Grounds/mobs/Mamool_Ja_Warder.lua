@@ -2,7 +2,7 @@
 -- Area: Mamool Ja Training Grounds (Imperial Agent Rescue)
 --  MOB: Mamool Ja Warder (NIN, WHM, BST)
 -----------------------------------
-mixins = { require("scripts/mixins/weapon_break") }
+mixins = { require('scripts/mixins/weapon_break') }
 local ID = zones[xi.zone.MAMOOL_JA_TRAINING_GROUNDS]
 -----------------------------------
 local entity = {}
@@ -11,7 +11,7 @@ entity.onMobSpawn = function(mob)
     xi.assault.adjustMobLevel(mob)
 
     if mob:getMainJob() == xi.job.NIN then
-        mob:setLocalVar("BreakChance", 0) -- Nin mobs dont have a weapon to break
+        mob:setLocalVar('BreakChance', 0) -- Nin mobs dont have a weapon to break
     elseif mob:getMainJob() == xi.job.BST then
         local instance = mob:getInstance()
         local pet = mob:getID() + 1

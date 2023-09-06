@@ -11,7 +11,7 @@ end
 
 entity.onTrigger = function(player, npc)
     local aNewDawn      = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.A_NEW_DAWN)
-    local aNewDawnEvent = player:getCharVar("ANewDawn_Event")
+    local aNewDawnEvent = player:getCharVar('ANewDawn_Event')
     local mLvl          = player:getMainLvl()
 
     -- A New Dawn (BST AF3)
@@ -52,16 +52,16 @@ end
 
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 5 then
-        player:setCharVar("ANewDawn_Event", 1)
+        player:setCharVar('ANewDawn_Event', 1)
         if option == 1 then
             player:addQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.A_NEW_DAWN)
-            player:setCharVar("ANewDawn_Event", 2)
+            player:setCharVar('ANewDawn_Event', 2)
         end
     elseif csid == 4 and option == 1 then
         player:addQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.A_NEW_DAWN)
-        player:setCharVar("ANewDawn_Event", 2)
+        player:setCharVar('ANewDawn_Event', 2)
     elseif csid == 0 then
-        player:setCharVar("ANewDawn_Event", 0)
+        player:setCharVar('ANewDawn_Event', 0)
     end
 end
 

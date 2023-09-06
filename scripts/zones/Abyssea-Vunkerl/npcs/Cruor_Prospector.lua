@@ -139,7 +139,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local cruor = player:getCurrency("cruor")
+    local cruor = player:getCurrency('cruor')
     local demilune = xi.abyssea.getDemiluneAbyssite(player)
 
     player:startEvent(2002, cruor, demilune)
@@ -151,7 +151,7 @@ end
 entity.onEventFinish = function(player, csid, option, npc)
     local itemCategory = bit.band(option, 0x07)
     local itemSelected = bit.band(bit.rshift(option, 16), 0x1F)
-    local cruorTotal = player:getCurrency("cruor")
+    local cruorTotal = player:getCurrency('cruor')
 
     if itemCategory == itemType.ITEM then
         local itemData = prospectorItems[itemCategory][itemSelected]
@@ -162,7 +162,7 @@ entity.onEventFinish = function(player, csid, option, npc)
             itemCost <= cruorTotal and
             npcUtil.giveItem(player, { { itemData[1], itemQty } })
         then
-            player:delCurrency("cruor", itemCost)
+            player:delCurrency('cruor', itemCost)
         end
     elseif itemCategory == itemType.TEMP then
         local itemData = prospectorItems[itemCategory][itemSelected]
@@ -172,7 +172,7 @@ entity.onEventFinish = function(player, csid, option, npc)
             itemCost <= cruorTotal and
             npcUtil.giveTempItem(player, { { itemData[1], 1 } })
         then
-            player:delCurrency("cruor", itemCost)
+            player:delCurrency('cruor', itemCost)
         end
     elseif itemCategory == itemType.KEYITEM then
         local itemData = prospectorItems[itemCategory][itemSelected]
@@ -181,7 +181,7 @@ entity.onEventFinish = function(player, csid, option, npc)
             itemData[2] <= cruorTotal and
             npcUtil.giveKeyItem(player, itemData[1])
         then
-            player:delCurrency("cruor", itemData[2])
+            player:delCurrency('cruor', itemData[2])
         end
     elseif itemCategory == itemType.ENHANCEMENT then
         local enhanceData = prospectorItems[itemCategory][itemSelected]
@@ -197,7 +197,7 @@ entity.onEventFinish = function(player, csid, option, npc)
                 end
             end
 
-            player:delCurrency("cruor", enhanceData[2])
+            player:delCurrency('cruor', enhanceData[2])
         end
     end
 end

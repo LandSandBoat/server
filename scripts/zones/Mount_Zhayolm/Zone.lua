@@ -28,8 +28,8 @@ zoneObject.onZoneIn = function(player, prevZone)
 end
 
 zoneObject.afterZoneIn = function(player)
-    player:entityVisualPacket("1pb1")
-    player:entityVisualPacket("2pb1")
+    player:entityVisualPacket('1pb1')
+    player:entityVisualPacket('2pb1')
 end
 
 zoneObject.onTriggerAreaEnter = function(player, triggerArea)

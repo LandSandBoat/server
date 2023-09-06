@@ -19,17 +19,17 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    local chargeCount = mob:getLocalVar("chargeCount")
+    local chargeCount = mob:getLocalVar('chargeCount')
     if chargeCount == 0 then
         mob:setAutoAttackEnabled(false)
-        mob:setLocalVar("chargeCount", 1)
-        mob:setLocalVar("chargeTotal", math.random(3, 5))
+        mob:setLocalVar('chargeCount', 1)
+        mob:setLocalVar('chargeTotal', math.random(3, 5))
         mob:timer(4000, function(mobArg)
             mob:useMobAbility(1464)
         end)
     else
         chargeCount = chargeCount + 1
-        local chargeTotal = mob:getLocalVar("chargeTotal")
+        local chargeTotal = mob:getLocalVar('chargeTotal')
         if chargeCount == chargeTotal then
             mob:timer(4000, function(mobArg)
                 mob:useMobAbility(1465, mob:getTarget())
@@ -37,11 +37,11 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
 
             mob:timer(4500, function(mobArg)
                 mob:setAutoAttackEnabled(true)
-                mob:setLocalVar("chargeCount", 0)
-                mob:setLocalVar("chargeTotal", 0)
+                mob:setLocalVar('chargeCount', 0)
+                mob:setLocalVar('chargeTotal', 0)
             end)
         else
-            mob:setLocalVar("chargeCount", chargeCount)
+            mob:setLocalVar('chargeCount', chargeCount)
             mob:timer(4000, function(mobArg)
                 mob:useMobAbility(1464)
             end)

@@ -15,7 +15,7 @@ local entity = {}
 entity.onTrade = function(player, npc, trade)
     if
         player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.A_POTTER_S_PREFERENCE) == QUEST_ACCEPTED or
-        player:getCharVar("QuestAPotterPrefeRepeat_var") == 1
+        player:getCharVar('QuestAPotterPrefeRepeat_var') == 1
     then
         if npcUtil.tradeHas(trade, xi.item.DISH_OF_GUSGEN_CLAY) then
             player:startEvent(113) -- quest done!
@@ -33,8 +33,8 @@ entity.onTrigger = function(player, npc)
         player:startEvent(114, xi.item.DISH_OF_GUSGEN_CLAY) -- get me dish_of_gusgen_clay  as soon as you can
     elseif player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.A_POTTER_S_PREFERENCE) == QUEST_COMPLETED then
         if
-            player:getCharVar("QuestAPotterPrefeCompDay_var") + 7 < VanadielDayOfTheYear() or
-            player:getCharVar("QuestAPotterPrefeCompYear_var") < VanadielYear()
+            player:getCharVar('QuestAPotterPrefeCompDay_var') + 7 < VanadielDayOfTheYear() or
+            player:getCharVar('QuestAPotterPrefeCompYear_var') < VanadielYear()
         then
             -- seven days after copletition, allow to do the quest again
             player:startEvent(112) -- repeat quest
@@ -56,12 +56,12 @@ entity.onEventFinish = function(player, csid, option, npc)
         player:confirmTrade()
         player:addFame(xi.quest.fame_area.WINDURST, 120)
         npcUtil.giveCurrency(player, 'gil', 2160)
-        player:setCharVar("QuestAPotterPrefeRepeat_var", 0)
-        player:setCharVar("QuestAPotterPrefeCompDay_var", VanadielDayOfTheYear())
-        player:setCharVar("QuestAPotterPrefeCompYear_var", VanadielYear())
+        player:setCharVar('QuestAPotterPrefeRepeat_var', 0)
+        player:setCharVar('QuestAPotterPrefeCompDay_var', VanadielDayOfTheYear())
+        player:setCharVar('QuestAPotterPrefeCompYear_var', VanadielYear())
         player:completeQuest(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.A_POTTER_S_PREFERENCE)
     elseif csid == 112 then --repeat quest
-        player:setCharVar("QuestAPotterPrefeRepeat_var", 1)
+        player:setCharVar('QuestAPotterPrefeRepeat_var', 1)
     end
 end
 

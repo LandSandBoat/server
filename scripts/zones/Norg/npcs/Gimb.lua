@@ -11,7 +11,7 @@ end
 
 entity.onTrigger = function(player, npc)
     player:startEvent(69)
-    player:setCharVar("SahaginKeyProgress", 1)
+    player:setCharVar('SahaginKeyProgress', 1)
 end
 
 entity.onEventUpdate = function(player, csid, option, npc)

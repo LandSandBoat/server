@@ -3,8 +3,8 @@
 --  Mob: Yukvok of Clan Death
 -- Mission 9-2 SANDO
 -----------------------------------
-local global = require("scripts/zones/QuBia_Arena/Globals")
-mixins = { require("scripts/mixins/job_special") }
+local global = require('scripts/zones/QuBia_Arena/Globals')
+mixins = { require('scripts/mixins/job_special') }
 -----------------------------------
 local entity = {}
 

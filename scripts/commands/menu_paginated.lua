@@ -9,11 +9,12 @@
 --     : but will produce scary looking warnings in
 --     : the log.
 -----------------------------------
+local commandObj = {}
 
-cmdprops =
+commandObj.cmdprops =
 {
     permission = 1,
-    parameters = ""
+    parameters = ''
 }
 
 -- Forward declarations (required)
@@ -22,7 +23,7 @@ local page1 = {}
 local page2 = {}
 
 -- We need just a tiny delay to let the previous menu context be cleared out
--- "New pages" are actually just whole new menus!
+-- 'New pages' are actually just whole new menus!
 local delaySendMenu = function(player)
     player:timer(50, function(playerArg)
         playerArg:customMenu(menu)
@@ -31,21 +32,21 @@ end
 
 menu =
 {
-    title = "Test Menu (Paginated)",
+    title = 'Test Menu (Paginated)',
     options = {},
 }
 
 page1 =
 {
     {
-        "Option 1",
+        'Option 1',
         function(playerArg)
-            playerArg:PrintToPlayer("Option 1 Selected", xi.msg.channel.NS_SAY)
+            playerArg:PrintToPlayer('Option 1 Selected', xi.msg.channel.NS_SAY)
             playerArg:independentAnimation(playerArg, 251, 4) -- Hearts
         end,
     },
     {
-        "Next Page",
+        'Next Page',
         function(playerArg)
             menu.options = page2
             delaySendMenu(playerArg)
@@ -56,14 +57,14 @@ page1 =
 page2 =
 {
     {
-        "Option 2",
+        'Option 2',
         function(playerArg)
-            playerArg:PrintToPlayer("Option 2 Selected", xi.msg.channel.NS_SAY)
+            playerArg:PrintToPlayer('Option 2 Selected', xi.msg.channel.NS_SAY)
             playerArg:independentAnimation(playerArg, 252, 4) -- Music Notes
         end,
     },
     {
-        "Previous Page",
+        'Previous Page',
         function(playerArg)
             menu.options = page1
             delaySendMenu(playerArg)
@@ -71,7 +72,9 @@ page2 =
     },
 }
 
-function onTrigger(player)
+commandObj.onTrigger = function(player)
     menu.options = page1
     delaySendMenu(player)
 end
+
+return commandObj

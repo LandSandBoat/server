@@ -142,15 +142,15 @@ end
 
 entity.onEventUpdate = function(player, csid, option, npc)
     if not player:delGil(10) then
-        player:setLocalVar("Lamepaue_PlayCutscene", 2)  -- Cancel the cutscene.
+        player:setLocalVar('Lamepaue_PlayCutscene', 2)  -- Cancel the cutscene.
         player:updateEvent(0)
     else
-        player:setLocalVar("Lamepaue_PlayCutscene", 1)
+        player:setLocalVar('Lamepaue_PlayCutscene', 1)
     end
 end
 
 entity.onEventFinish = function(player, csid, option, npc)
-    if player:getLocalVar("Lamepaue_PlayCutscene") < 2 then
+    if player:getLocalVar('Lamepaue_PlayCutscene') < 2 then
         if option == 1 then        -- Fetichism.
             player:startEvent(1008)
         elseif option == 2 then        -- To the Forsaken Mines.
@@ -228,7 +228,7 @@ entity.onEventFinish = function(player, csid, option, npc)
         end
     end
 
-    player:setLocalVar("Lamepaue_PlayCutscene", 0)
+    player:setLocalVar('Lamepaue_PlayCutscene', 0)
 end
 
 return entity

@@ -83,11 +83,11 @@ struct profile_t
     // 0x0100: ^ As above
     uint16 mhflag;
 
-    uint16     title;      // rank
-    uint16     fame[15];   // Fame
-    uint8      rank[3];    // RAGN in three states
-    uint16     rankpoints; // rank glasses in three states
-    location_t home_point; // Renaissance point character
+    uint16     title;
+    uint16     fame[15];
+    uint8      rank[3]; // RANK in three kingdoms
+    uint16     rankpoints;
+    location_t home_point;
     uint8      campaign_allegiance;
     uint8      unity_leader;
 
@@ -184,15 +184,15 @@ struct teleport_t
 
 struct PetInfo_t
 {
-    bool     respawnPet;   // used for spawning pet on zone
+    bool     respawnPet;   // Used for spawning pet on zone
     int32    jugSpawnTime; // Keeps track of original spawn time in seconds since epoch
     int32    jugDuration;  // Number of seconds a jug pet should last after its original spawn time
-    uint8    petID;        // id as in wyvern(48) , carbuncle(8) ect..
-    PET_TYPE petType;      // type of pet being transfered
-    uint8    petLevel;     // level the pet was spawned with
-    int16    petHP;        // pets hp
-    int16    petMP;        // pets mp
-    float    petTP;        // pets tp
+    uint8    petID;        // ID as in wyvern(48) , carbuncle(8) ect..
+    PET_TYPE petType;      // Type of pet being transferred
+    uint8    petLevel;     // Level the pet was spawned with
+    int16    petHP;
+    int16    petMP;
+    float    petTP;
 };
 
 struct AuctionHistory_t
@@ -294,7 +294,7 @@ class CCharEntity : public CBattleEntity
 public:
     uint32 accid; // Account ID associated with the character.
 
-    jobs_t     jobs; // Available Character professions
+    jobs_t     jobs; // Available Character jobs
     keyitems_t keys; // Table key objects
 
     EventPrep*            eventPreparation; // Information about a potential upcoming event
@@ -303,47 +303,47 @@ public:
     bool                  inSequence;       // True if the player is locked in a NPC sequence
     bool                  gotMessage;       // Used to let the interaction framework know that a message outside of it was triggered.
 
-    skills_t RealSkills; // структура всех реальных умений персонажа, с точностью до 0.1 и не ограниченных уровнем
+    skills_t RealSkills; // The structure of all the real skills of the character, with an accuracy of 0.1 and not limited by the level
 
-    nameflags_t nameflags;           // Flags in front of the character's name
+    nameflags_t nameflags;
     nameflags_t menuConfigFlags;     // These flags are used for MenuConfig packets. Some nameflags values are duplicated.
     uint64      chatFilterFlags;     // Chat filter flags, raw object bytes from incoming packet
     uint32      lastOnline{ 0 };     // UTC Unix Timestamp of the last time char zoned or logged out
     bool        isNewPlayer() const; // Checks if new player bit is unset.
 
-    profile_t       profile;             // профиль персонажа (все, что связывает города и персонажа)
-    capacityChain_t capacityChain;       // Capacity Point Chains
-    expChain_t      expChain;            // Exp Chains
-    search_t        search;              // данные и комментарий, отображаемые в окне поиска
-    bazaar_t        bazaar;              // все данные, необходимые для таботы bazaar
-    uint16          m_EquipFlag;         // текущие события, обрабатываемые экипировкой (потом упакую в структуру, вместе с equip[])
-    uint16          m_EquipBlock;        // заблокированные ячейки экипировки
+    profile_t       profile;
+    capacityChain_t capacityChain;
+    expChain_t      expChain;
+    search_t        search;              // Data and comment displayed in the search box
+    bazaar_t        bazaar;              // All the data you need to run bazaar
+    uint16          m_EquipFlag;         // Current events handled by the equipment (later it will be packed into a structure, along with equip[])
+    uint16          m_EquipBlock;        // Locked equipment slots
     uint16          m_StatsDebilitation; // Debilitation arrows
-    uint8           equip[18]{};         //      SlotID where equipment is
+    uint8           equip[18]{};         // SlotID where equipment is
     uint8           equipLoc[18]{};      // ContainerID where equipment is
     uint16          styleItems[16]{};    // Item IDs for items that are style locked.
 
-    uint8             m_ZonesList[38]{};        // List of visited zone character
-    std::bitset<1024> m_SpellList;              // List of studied spells
+    uint8             m_ZonesList[38]{};        // List of zones visited by the character
+    std::bitset<1024> m_SpellList;              // List of learned spells
     uint8             m_TitleList[143]{};       // List of obtained titles
     uint8             m_Abilities[64]{};        // List of current abilities
-    uint8             m_LearnedAbilities[49]{}; // LearnableAbilities (corsairRolls)
-    std::bitset<64>   m_LearnedWeaponskills;    // LearnableWeaponskills
+    uint8             m_LearnedAbilities[49]{}; // Learnable abilities (corsair rolls)
+    std::bitset<64>   m_LearnedWeaponskills;    // Learnable Weaponskills
     uint8             m_TraitList[18]{};        // List of active job traits in the form of a bit mask
-    uint8             m_PetCommands[64]{};      // List of available pet commands
+    uint8             m_PetCommands[64]{};
     uint8             m_WeaponSkills[32]{};
-    questlog_t        m_questLog[MAX_QUESTAREA];     // список всех квестов
-    missionlog_t      m_missionLog[MAX_MISSIONAREA]; // список миссий
+    questlog_t        m_questLog[MAX_QUESTAREA];     // Quest List
+    missionlog_t      m_missionLog[MAX_MISSIONAREA]; // Mission list
     eminencelog_t     m_eminenceLog;                 // Record of Eminence log
     eminencecache_t   m_eminenceCache;               // Caching data for Eminence lookups
-    assaultlog_t      m_assaultLog;                  // список assault миссий
-    campaignlog_t     m_campaignLog;                 // список campaign миссий
-    uint32            m_lastBcnmTimePrompt;          // the last message prompt in seconds
-    PetInfo_t         petZoningInfo{};               // used to repawn dragoons pets ect on zone
+    assaultlog_t      m_assaultLog;                  // Assault mission list
+    campaignlog_t     m_campaignLog;                 // Campaign mission list
+    uint32            m_lastBcnmTimePrompt;          // The last message prompt in seconds
+    PetInfo_t         petZoningInfo{};               // Used to repawn dragoons pets ect on zone
 
-    void setPetZoningInfo();              // set pet zoning info (when zoning and logging out)
-    void resetPetZoningInfo();            // reset pet zoning info (when changing job ect)
-    bool shouldPetPersistThroughZoning(); // if true, zoning should not cause a currently active pet to despawn
+    void setPetZoningInfo();              // Set pet zoning info (when zoning and logging out)
+    void resetPetZoningInfo();            // Reset pet zoning info (when changing job ect)
+    bool shouldPetPersistThroughZoning(); // If true, zoning should not cause a currently active pet to despawn
 
     uint8  m_SetBlueSpells[20]{}; // The 0x200 offsetted blue magic spell IDs which the user has set. (1 byte per spell)
     uint32 m_FieldChocobo{};
@@ -396,70 +396,70 @@ public:
     uint16 m_asaCurrent; // current mission of A Shantotto Ascension
 
     // currency_t        m_currency;                 // conquest points, imperial standing points etc
-    teleport_t teleport; // Outposts, Runic Portals, Homepoints, Survival Guides, Maws, etc
+    teleport_t teleport; // Outposts, Runic Portals, Homepoints, Survival Guides, Maws, etc.
 
-    uint8 GetGender(); // узнаем пол персонажа
+    uint8 GetGender();
 
-    void          clearPacketList();                                                             // отчистка PacketList
-    void          pushPacket(CBasicPacket*);                                                     // добавление копии пакета в PacketList
-    void          pushPacket(std::unique_ptr<CBasicPacket>);                                     // push packet to packet list
+    void          clearPacketList();
+    void          pushPacket(CBasicPacket*);                                                     // Adding a copy of a package to the PacketList
+    void          pushPacket(std::unique_ptr<CBasicPacket>);                                     // Push packet to packet list
     void          updateCharPacket(CCharEntity* PChar, ENTITYUPDATE type, uint8 updatemask);     // Push or update a char packet
     void          updateEntityPacket(CBaseEntity* PEntity, ENTITYUPDATE type, uint8 updatemask); // Push or update an entity update packet
-    bool          isPacketListEmpty();                                                           // проверка размера PacketList
-    CBasicPacket* popPacket();                                                                   // получение первого пакета из PacketList
-    PacketList_t  getPacketList();                                                               // returns a COPY of packet list
-    size_t        getPacketCount();                                                              //
-    void          erasePackets(uint8 num);                                                       // erase num elements from front of packet list
-    virtual void  HandleErrorMessage(std::unique_ptr<CBasicPacket>&) override;                   //
+    bool          isPacketListEmpty();
+    CBasicPacket* popPacket();     // Get first packet from PacketList
+    PacketList_t  getPacketList(); // Return a COPY of packet list
+    size_t        getPacketCount();
+    void          erasePackets(uint8 num); // Erase num elements from front of packet list
+    virtual void  HandleErrorMessage(std::unique_ptr<CBasicPacket>&) override;
 
-    CLinkshell*    PLinkshell1; // linkshell, в которой общается персонаж
-    CLinkshell*    PLinkshell2; // linkshell 2
+    CLinkshell*    PLinkshell1;
+    CLinkshell*    PLinkshell2;
     CUnityChat*    PUnityChat;
-    CTreasurePool* PTreasurePool; // сокровища, добытые с монстров
-    CMeritPoints*  PMeritPoints;  //
+    CTreasurePool* PTreasurePool;
+    CMeritPoints*  PMeritPoints;
     CJobPoints*    PJobPoints;
-    bool           MeritMode; // If true then player is meriting
+    bool           MeritMode;
 
     CLatentEffectContainer* PLatentEffectContainer;
     bool                    retriggerLatentsAfterPacketParsing; // used to retrigger all latent effects after packet parsing is done in map.cpp
 
-    CItemContainer* PGuildShop;                   // текущий магазин гильдии, в котором персонаж производит закупки
-    CItemContainer* getStorage(uint8 LocationID); // получение указателя на соответствующее хранилище
+    CItemContainer* PGuildShop;
+    CItemContainer* getStorage(uint8 LocationID);
 
     CTradeContainer* TradeContainer; // Container used specifically for trading.
-    CTradeContainer* Container;      // универсальный контейнер для обмена, синтеза, магазина и т.д.
-    CUContainer*     UContainer;     // container used for universal actions -- used for trading at least despite the dedicated trading container above
+    CTradeContainer* Container;      // Universal container for exchange, synthesis, store, etc.
+    CUContainer*     UContainer;     // Container used for universal actions -- used for trading at least despite the dedicated trading container above
     CTradeContainer* CraftContainer; // Container used for crafting actions.
 
-    CBaseEntity* PWideScanTarget; // wide scane цель
+    CBaseEntity* PWideScanTarget;
 
     SpawnIDList_t SpawnPCList;    // list of visible characters
     SpawnIDList_t SpawnMOBList;   // list of visible monsters
     SpawnIDList_t SpawnPETList;   // list of visible pets
     SpawnIDList_t SpawnTRUSTList; // list of visible trust
-    SpawnIDList_t SpawnNPCList;   // list of visible npc's
+    SpawnIDList_t SpawnNPCList;   // list of visible npcs
 
     void SetName(const std::string& name); // set the name of character, limited to 15 characters
 
     time_point   lastTradeInvite;
-    EntityID_t   TradePending{};  // character ID offering trade
-    EntityID_t   InvitePending{}; // character ID sending party invite
+    EntityID_t   TradePending{};  // Character ID offering trade
+    EntityID_t   InvitePending{}; // Character ID sending party invite
     EntityID_t   BazaarID{};      // Pointer to the bazaar we are browsing.
     BazaarList_t BazaarCustomers; // Array holding the IDs of the current customers
 
     uint32     m_InsideTriggerAreaID; // The ID of the trigger area the character is inside
-    uint8      m_LevelRestriction;    // ограничение уровня персонажа
-    uint16     m_Costume;             // карнавальный костюм персонажа (модель)
-    uint16     m_Monstrosity;         // Monstrosity model ID
-    uint32     m_AHHistoryTimestamp;  // Timestamp when last asked to view history
-    uint32     m_DeathTimestamp;      // Timestamp when death counter has been saved to database
-    time_point m_deathSyncTime;       // Timer used for sending an update packet at a regular interval while the character is dead
+    uint8      m_LevelRestriction;    // Character level limit
+    uint16     m_Costume;
+    uint16     m_Monstrosity; // Monstrosity model ID
+    uint32     m_AHHistoryTimestamp;
+    uint32     m_DeathTimestamp;
+    time_point m_deathSyncTime; // Timer used for sending an update packet at a regular interval while the character is dead
 
     uint8      m_hasTractor;      // checks if player has tractor already
     uint8      m_hasRaise;        // checks if player has raise already
     uint8      m_weaknessLvl;     // tracks if the player was previously weakend
     bool       m_hasArise;        // checks if the white magic spell arise was cast on the player and a re-raise effect should be applied
-    uint8      m_hasAutoTarget;   // возможность использования AutoTarget функции
+    uint8      m_hasAutoTarget;   // ability to use AutoTarget function
     position_t m_StartActionPos;  // action start position (item use, shooting start, tractor position)
     position_t m_ActionOffsetPos; // action offset position from the action packet(currently only used for repositioning of luopans)
 
@@ -547,7 +547,7 @@ public:
 
     void  SetDeathTimestamp(uint32 timestamp);
     int32 GetSecondsElapsedSinceDeath() const;
-    int32 GetTimeRemainingUntilDeathHomepoint() const; // Amount of time remaining before the player should be forced back to homepoint while dead
+    int32 GetTimeRemainingUntilDeathHomepoint() const;
 
     int32 GetTimeCreated();
 
@@ -582,9 +582,9 @@ public:
     virtual void OnItemFinish(CItemState&, action_t&);
 
     int32 getCharVar(std::string const& varName);
-    void  setCharVar(std::string const& varName, int32 value);
-    void  setVolatileCharVar(std::string const& varName, int32 value);
-    void  updateCharVarCache(std::string const& varName, int32 value);
+    void  setCharVar(std::string const& varName, int32 value, uint32 expiry = 0);
+    void  setVolatileCharVar(std::string const& varName, int32 value, uint32 expiry = 0);
+    void  updateCharVarCache(std::string const& varName, int32 value, uint32 expiry = 0);
     void  removeFromCharVarCache(std::string const& varName);
 
     void clearCharVarsWithPrefix(std::string const& prefix);
@@ -623,13 +623,13 @@ private:
     bool m_isBlockingAid;
     bool m_reloadParty;
 
-    std::unordered_map<std::string, int32> charVarCache;
-    std::unordered_set<std::string>        charVarChanges;
+    std::unordered_map<std::string, std::pair<int32, uint32>> charVarCache;
+    std::unordered_set<std::string>                           charVarChanges;
 
     uint8      dataToPersist = 0;
     time_point nextDataPersistTime;
 
-    PacketList_t                                     PacketList;           // the list of packets to be sent to the character during the next network cycle
+    PacketList_t                                     PacketList;           // The list of packets to be sent to the character during the next network cycle
     std::unordered_map<uint32, CCharPacket*>         PendingCharPackets;   // Keep track of which char packets are queued up for this char, such that they can be updated
     std::unordered_map<uint32, CEntityUpdatePacket*> PendingEntityPackets; // Keep track of which entity update packets are queued up for this char, such that they can be updated
 };

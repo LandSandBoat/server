@@ -8,7 +8,7 @@ local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     local sayFlowers = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.SAY_IT_WITH_FLOWERS)
-    local flowerProgress = player:getCharVar("FLOWER_PROGRESS")
+    local flowerProgress = player:getCharVar('FLOWER_PROGRESS')
     local offer = trade:getItemId()
 
     if flowerProgress == 3 then
@@ -36,7 +36,7 @@ end
 
 entity.onTrigger = function(player, npc)
     local sayFlowers = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.SAY_IT_WITH_FLOWERS)
-    local flowerProgress = player:getCharVar("FLOWER_PROGRESS")
+    local flowerProgress = player:getCharVar('FLOWER_PROGRESS')
     local needToZone = player:needToZone()
 
     if
@@ -60,7 +60,7 @@ end
 
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 514 and option == 1 then
-        player:setCharVar("FLOWER_PROGRESS", 1)
+        player:setCharVar('FLOWER_PROGRESS', 1)
         player:addQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.SAY_IT_WITH_FLOWERS)
     elseif csid == 520 then -- First completion, Iron Sword awarded.
         if player:getFreeSlotsCount() > 0 then
@@ -69,7 +69,7 @@ entity.onEventFinish = function(player, csid, option, npc)
             player:completeQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.SAY_IT_WITH_FLOWERS)
             player:addFame(xi.quest.fame_area.WINDURST, 30)
             player:messageSpecial(ID.text.ITEM_OBTAINED, xi.item.IRON_SWORD)
-            player:setCharVar("FLOWER_PROGRESS", 0)
+            player:setCharVar('FLOWER_PROGRESS', 0)
             player:needToZone(true)
             player:setTitle(xi.title.CUPIDS_FLORIST)
         else
@@ -81,14 +81,14 @@ entity.onEventFinish = function(player, csid, option, npc)
         npcUtil.giveCurrency(player, 'gil', 100)
         player:addFame(xi.quest.fame_area.WINDURST, 10)
         player:needToZone(true)
-        player:setCharVar("FLOWER_PROGRESS", 0)
+        player:setCharVar('FLOWER_PROGRESS', 0)
     elseif csid == 523 then
-        player:setCharVar("FLOWER_PROGRESS", 1)
+        player:setCharVar('FLOWER_PROGRESS', 1)
     elseif csid == 525 then -- Repeatable quest rewards.
         player:tradeComplete()
         player:addFame(xi.quest.fame_area.WINDURST, 30)
         player:addGil(xi.settings.main.GIL_RATE * 400)
-        player:setCharVar("FLOWER_PROGRESS", 0)
+        player:setCharVar('FLOWER_PROGRESS', 0)
         player:needToZone(true)
         player:setTitle(xi.title.CUPIDS_FLORIST)
     end

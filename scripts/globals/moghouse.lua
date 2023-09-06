@@ -1,8 +1,8 @@
 -----------------------------------
 -- Mog House related functions
 -----------------------------------
-require("scripts/globals/npc_util")
-require("scripts/globals/quests")
+require('scripts/globals/npc_util')
+require('scripts/globals/quests')
 -----------------------------------
 xi = xi or {}
 xi.moghouse = xi.moghouse or {}
@@ -11,11 +11,11 @@ xi.moghouse = xi.moghouse or {}
 -- Mog Locker constants
 -----------------------------------
 local mogLockerStartTimestamp   = 1009810800 -- unix timestamp for 2001/12/31 15:00
-local mogLockerTimestampVarName = "mog-locker-expiry-timestamp"
+local mogLockerTimestampVarName = 'mog-locker-expiry-timestamp'
 
 xi.moghouse.MOGLOCKER_ALZAHBI_VALID_DAYS    = 7
 xi.moghouse.MOGLOCKER_ALLAREAS_VALID_DAYS   = 5
-xi.moghouse.MOGLOCKER_PLAYERVAR_ACCESS_TYPE = "mog-locker-access-type"
+xi.moghouse.MOGLOCKER_PLAYERVAR_ACCESS_TYPE = 'mog-locker-access-type'
 
 xi.moghouse.lockerAccessType =
 {

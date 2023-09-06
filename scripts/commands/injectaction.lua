@@ -2,40 +2,41 @@
 -- func: injectaction
 -- desc: Injects an action packet with the specified action and animation id.
 -----------------------------------
+local commandObj = {}
 
-cmdprops =
+commandObj.cmdprops =
 {
     permission = 1,
-    parameters = "iiiii"
+    parameters = 'iiiii'
 }
 
-function error(player, msg)
+local function error(player, msg)
     player:PrintToPlayer(msg)
-    player:PrintToPlayer("!injectaction <action ID> <animation ID> (speceffect) (reaction) (message)")
+    player:PrintToPlayer('!injectaction <action ID> <animation ID> (speceffect) (reaction) (message)')
 end
 
-function onTrigger(player, actionId, animationId, speceffect, reaction, message)
+commandObj.onTrigger = function(player, actionId, animationId, speceffect, reaction, message)
     -- validate actionId
     if actionId == nil then
-        error(player, "You must provide an action ID.")
+        error(player, 'You must provide an action ID.')
         return
     end
 
     if actionId == 0 or actionId > 15 then
-        error(player, "<action ID> is out of range. Current valid and tested action IDs are 1-15.")
+        error(player, '<action ID> is out of range. Current valid and tested action IDs are 1-15.')
         return
     end
 
     local target = player:getCursorTarget()
 
     if not target then
-        error(player, "No valid target found")
+        error(player, 'No valid target found')
         return
     end
 
     -- validate animationId
     if animationId == nil then
-        error(player, "You must provide an animation ID.")
+        error(player, 'You must provide an animation ID.')
         return
     end
 
@@ -55,3 +56,5 @@ function onTrigger(player, actionId, animationId, speceffect, reaction, message)
     -- inject action packet
     player:injectActionPacket(target:getID(), actionId, animationId, speceffect, reaction, message, 10, 1)
 end
+
+return commandObj

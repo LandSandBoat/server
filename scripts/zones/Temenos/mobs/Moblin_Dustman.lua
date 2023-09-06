@@ -2,7 +2,7 @@
 -- Area: Temenos Northern Tower
 --  Mob: Moblin Dustman
 -----------------------------------
-mixins = { require("scripts/mixins/job_special") }
+mixins = { require('scripts/mixins/job_special') }
 -----------------------------------
 local entity = {}
 

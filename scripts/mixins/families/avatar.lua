@@ -1,4 +1,4 @@
-require("scripts/globals/mixins")
+require('scripts/globals/mixins')
 
 -- If you subtract 790 from the modelId, you're left with a key into to this table :)
 local abilityIds =
@@ -17,7 +17,7 @@ g_mixins = g_mixins or {}
 g_mixins.families = g_mixins.families or {}
 
 g_mixins.families.avatar = function(avatarMob)
-    avatarMob:addListener("SPAWN", "AVATAR_SPAWN", function(mob)
+    avatarMob:addListener('SPAWN', 'AVATAR_SPAWN', function(mob)
         mob:setModelId(math.random(791, 798))
         mob:hideName(false)
         mob:setUntargetable(true)
@@ -34,7 +34,7 @@ g_mixins.families.avatar = function(avatarMob)
         end)
     end)
 
-    avatarMob:addListener("ENGAGE", "AVATAR_ENGAGE", function(mob, target)
+    avatarMob:addListener('ENGAGE', 'AVATAR_ENGAGE', function(mob, target)
         local modelId = mob:getModelId()
         local abilityId = abilityIds[modelId - 790]
         if abilityId ~= nil then
@@ -42,7 +42,7 @@ g_mixins.families.avatar = function(avatarMob)
         end
     end)
 
-    avatarMob:addListener("WEAPONSKILL_STATE_EXIT", "AVATAR_MOBSKILL_FINISHED", function(mob)
+    avatarMob:addListener('WEAPONSKILL_STATE_EXIT', 'AVATAR_MOBSKILL_FINISHED', function(mob)
         mob:setUnkillable(false)
         mob:setHP(0)
     end)

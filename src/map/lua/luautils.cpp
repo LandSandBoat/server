@@ -171,8 +171,12 @@ namespace luautils
         lua.set_function("GetPlayerByID", &luautils::GetPlayerByID);
         lua.set_function("GetMagianTrial", &luautils::GetMagianTrial);
         lua.set_function("GetMagianTrialsWithParent", &luautils::GetMagianTrialsWithParent);
+        lua.set_function("GetSystemTime", &luautils::GetSystemTime);
         lua.set_function("JstMidnight", &luautils::JstMidnight);
         lua.set_function("JstWeekday", &luautils::JstWeekday);
+        lua.set_function("NextGameTime", &luautils::NextGameTime);
+        lua.set_function("NextJstDay", &luautils::JstMidnight);
+        lua.set_function("NextJstWeek", &luautils::NextJstWeek);
         lua.set_function("VanadielTime", &luautils::VanadielTime);
         lua.set_function("VanadielTOTD", &luautils::VanadielTOTD);
         lua.set_function("VanadielHour", &luautils::VanadielHour);
@@ -288,6 +292,15 @@ namespace luautils
                     sol::error err = result;
                     ShowError(err.what());
                 }
+            }
+        }
+
+        // Load Commands
+        for (auto const& entry : sorted_directory_iterator<std::filesystem::directory_iterator>("./scripts/commands"))
+        {
+            if (entry.extension() == ".lua")
+            {
+                CacheLuaObjectFromFile(entry.relative_path().generic_string());
             }
         }
 
@@ -576,6 +589,13 @@ namespace luautils
                 return;
             }
 
+            // Commands are a special case, since they are not a "true" module
+            sol::table cmdTable = result;
+            if (cmdTable["cmdprops"].valid() && cmdTable["onTrigger"].valid())
+            {
+                lua[sol::create_if_nil]["xi"]["commands"][parts.back()] = cmdTable;
+            }
+
             ShowInfo("[FileWatcher] RE-RUNNING MODULE FILE %s", filename);
             return;
         }
@@ -628,21 +648,6 @@ namespace luautils
             }
 
             ShowInfo("[FileWatcher] GLOBAL %s -> \"%s\"", filename, requireName);
-            return;
-        }
-
-        // Handle Commands then return
-        if (parts.size() == 2 && parts[0] == "commands")
-        {
-            auto result = lua.safe_script_file(filename);
-            if (!result.valid())
-            {
-                sol::error err = result;
-                ShowError("luautils::CacheLuaObjectFromFile: Load command error: %s: %s", filename, err.what());
-                return;
-            }
-
-            ShowInfo("[FileWatcher] COMMAND %s", filename);
             return;
         }
 
@@ -1439,6 +1444,17 @@ namespace luautils
 
     /************************************************************************
      *                                                                       *
+     * Returns current UTC timestamp
+     *                                                                       *
+     ************************************************************************/
+    uint32 GetSystemTime()
+    {
+        TracyZoneScoped;
+        return CVanaTime::getInstance()->getSysTime();
+    }
+
+    /************************************************************************
+     *                                                                       *
      * JstMidnight - Returns UTC timestamp of upcoming JST midnight
      *                                                                       *
      ************************************************************************/
@@ -1463,6 +1479,34 @@ namespace luautils
 
     /************************************************************************
      *                                                                       *
+     * NextGameTime - Returns System Time for the next Vana'diel interval
+     * See: VTIME_x defintions, or xi.vanaType for the values to pass
+     *                                                                       *
+     ************************************************************************/
+    uint32 NextGameTime(uint32 intervalSeconds)
+    {
+        TracyZoneScoped;
+        uint32 timeElapsed      = CVanaTime::getInstance()->getVanaTime();
+        uint32 numPassed        = timeElapsed / intervalSeconds;
+        uint32 secondsRemaining = intervalSeconds - (timeElapsed - (numPassed * intervalSeconds));
+
+        return CVanaTime::getInstance()->getSysTime() + secondsRemaining;
+    }
+
+    // NOTE: NextJstDay is also defined, and maps to JstMidnight
+
+    uint32 NextJstWeek()
+    {
+        TracyZoneScoped;
+        uint32 jstWeekday      = CVanaTime::getInstance()->getJstWeekDay();
+        uint32 nextJstMidnight = CVanaTime::getInstance()->getJstMidnight();
+
+        // Start with the "Next" Midnight, and apply N days worth of time to it
+        return nextJstMidnight + (7 - jstWeekday) * 60 * 60 * 24;
+    }
+
+    /************************************************************************
+     *                                                                       *
      *   Return Moon Phase                                                   *
      *                                                                       *
      ************************************************************************/
@@ -1476,7 +1520,7 @@ namespace luautils
     bool SetVanadielTimeOffset(int32 offset)
     {
         TracyZoneScoped;
-        int32 custom = CVanaTime::getInstance()->getCustomEpoch();
+        uint32 custom = CVanaTime::getInstance()->getCustomEpoch();
         CVanaTime::getInstance()->setCustomEpoch((custom ? custom : VTIME_BASEDATE) - offset);
         return true;
     }
@@ -4700,9 +4744,17 @@ namespace luautils
         return serverutils::GetServerVar(name);
     }
 
-    void SetServerVariable(std::string const& name, int32 value)
+    void SetServerVariable(std::string const& name, int32 value, sol::object const& expiry)
     {
-        serverutils::SetServerVar(name, value);
+        uint32 varTimestamp = expiry.is<uint32>() ? expiry.as<uint32>() : 0;
+
+        if (varTimestamp > 0 && varTimestamp <= CVanaTime::getInstance()->getSysTime())
+        {
+            ShowWarning(fmt::format("Attempting to set variable '{}' with an expired time: {}", name, varTimestamp));
+            return;
+        }
+
+        serverutils::SetServerVar(name, value, varTimestamp);
     }
 
     int32 GetVolatileServerVariable(std::string const& varName)
@@ -4710,20 +4762,36 @@ namespace luautils
         return serverutils::GetVolatileServerVar(varName);
     }
 
-    void SetVolatileServerVariable(std::string const& varName, int32 value)
+    void SetVolatileServerVariable(std::string const& varName, int32 value, sol::object const& expiry)
     {
-        serverutils::SetVolatileServerVar(varName, value);
+        uint32 varTimestamp = expiry.is<uint32>() ? expiry.as<uint32>() : 0;
+
+        if (varTimestamp > 0 && varTimestamp <= CVanaTime::getInstance()->getSysTime())
+        {
+            ShowWarning(fmt::format("Attempting to set variable '{}' with an expired time: {}", varName, varTimestamp));
+            return;
+        }
+
+        serverutils::SetVolatileServerVar(varName, value, varTimestamp);
     }
 
     int32 GetCharVar(uint32 charId, std::string const& varName)
     {
-        return charutils::FetchCharVar(charId, varName);
+        return charutils::FetchCharVar(charId, varName).first;
     }
 
     // Using the charID set a char variable on the SQL DB
-    void SetCharVar(uint32 charId, std::string const& varName, int32 value)
+    void SetCharVar(uint32 charId, std::string const& varName, int32 value, sol::object const& expiry)
     {
-        charutils::SetCharVar(charId, varName, value);
+        uint32 varTimestamp = expiry.is<uint32>() ? expiry.as<uint32>() : 0;
+
+        if (varTimestamp > 0 && varTimestamp <= CVanaTime::getInstance()->getSysTime())
+        {
+            ShowWarning(fmt::format("Attempting to set variable '{}' with an expired time: {}", varName, varTimestamp));
+            return;
+        }
+
+        charutils::SetCharVar(charId, varName, value, varTimestamp);
     }
 
     void ClearCharVarFromAll(std::string const& varName)

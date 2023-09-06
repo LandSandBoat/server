@@ -140,6 +140,7 @@ enum MSGSERVTYPE : uint8
     MSG_PT_INV_RES,
     MSG_PT_RELOAD,
     MSG_PT_DISBAND,
+    MSG_ALLIANCE_DISSOLVE,
     MSG_DIRECT,
     MSG_LINKSHELL_RANK_CHANGE,
     MSG_LINKSHELL_REMOVE,
@@ -221,6 +222,8 @@ constexpr auto msgTypeToStr = [](uint8 msgtype)
             return "MSG_PT_RELOAD";
         case MSG_PT_DISBAND:
             return "MSG_PT_DISBAND";
+        case MSG_ALLIANCE_DISSOLVE:
+            return "MSG_ALLIANCE_DISSOLVE";
         case MSG_DIRECT:
             return "MSG_DIRECT";
         case MSG_LINKSHELL_RANK_CHANGE:

@@ -2,7 +2,7 @@
 -- Area: Bhaflau Remnants
 --  Mob: Colibri
 -----------------------------------
-mixins = { require("scripts/mixins/families/colibri_mimic") }
+mixins = { require('scripts/mixins/families/colibri_mimic') }
 -----------------------------------
 local entity = {}
 

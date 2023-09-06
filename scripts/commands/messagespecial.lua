@@ -2,22 +2,23 @@
 -- func: messagespecial
 -- desc: Injects a message special packet.
 -----------------------------------
+local commandObj = {}
 
-cmdprops =
+commandObj.cmdprops =
 {
     permission = 1,
-    parameters = "iiiii"
+    parameters = 'iiiii'
 }
 
-function error(player, msg)
+local function error(player, msg)
     player:PrintToPlayer(msg)
-    player:PrintToPlayer("!messagespecial <message ID> (param1) (param2) (param3) (param4) (param5)")
+    player:PrintToPlayer('!messagespecial <message ID> (param1) (param2) (param3) (param4) (param5)')
 end
 
-function onTrigger(player, msgId, param1, param2, param3, param4, param5)
+commandObj.onTrigger = function(player, msgId, param1, param2, param3, param4, param5)
     -- validate msgId
     if msgId == nil then
-        error(player, "You must provide a message ID.")
+        error(player, 'You must provide a message ID.')
         return
     end
 
@@ -36,3 +37,5 @@ function onTrigger(player, msgId, param1, param2, param3, param4, param5)
         player:messageSpecial(msgId)
     end
 end
+
+return commandObj

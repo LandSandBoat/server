@@ -40,7 +40,7 @@ entity.onTrigger = function(player, npc)
     elseif
         reapstatus == QUEST_COMPLETED and
         not player:needToZone() and
-        player:getCharVar("QuestReapSow_var") == 0
+        player:getCharVar('QuestReapSow_var') == 0
     then
         local rand = math.random(1, 2)
         if rand == 1 then
@@ -48,7 +48,7 @@ entity.onTrigger = function(player, npc)
         end
     elseif
         reapstatus == QUEST_COMPLETED and
-        player:getCharVar("QuestReapSow_var") == 1
+        player:getCharVar('QuestReapSow_var') == 1
     then
         local rand = math.random(1, 2)
         if rand == 1 then
@@ -91,7 +91,7 @@ entity.onEventFinish = function(player, csid, option, npc)
             player:messageSpecial(ID.text.ITEM_OBTAINED, xi.item.STATIONERY_SET)
         elseif player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.REAP_WHAT_YOU_SOW) == QUEST_COMPLETED then
             player:addFame(xi.quest.fame_area.WINDURST, 8)
-            player:setCharVar("QuestReapSow_var", 0)
+            player:setCharVar('QuestReapSow_var', 0)
         end
     elseif csid == 477 then                                -- REAP WHAT YOU SOW + GIL + Stationary Set: Quest Turn In: Deathball turned in
         player:addGil(xi.settings.main.GIL_RATE * 700)
@@ -104,10 +104,10 @@ entity.onEventFinish = function(player, csid, option, npc)
             player:messageSpecial(ID.text.ITEM_OBTAINED, xi.item.STATIONERY_SET)
         elseif player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.REAP_WHAT_YOU_SOW) == QUEST_COMPLETED then
             player:addFame(xi.quest.fame_area.WINDURST, 8)
-            player:setCharVar("QuestReapSow_var", 0)
+            player:setCharVar('QuestReapSow_var', 0)
         end
     elseif csid == 479 and option == 3 then                 -- REAP WHAT YOU SOW + HERB SEEDS: REPEATABLE QUEST START - ACCEPTED
-        player:setCharVar("QuestReapSow_var", 1)
+        player:setCharVar('QuestReapSow_var', 1)
         player:addItem(xi.item.BAG_OF_HERB_SEEDS)
         player:messageSpecial(ID.text.ITEM_OBTAINED, xi.item.BAG_OF_HERB_SEEDS)
     end

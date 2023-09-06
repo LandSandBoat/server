@@ -2,22 +2,23 @@
 -- func: completerecord <recordID> <player>
 -- desc: Completes the given quest for the GM or target player.
 -----------------------------------
+local commandObj = {}
 
-cmdprops =
+commandObj.cmdprops =
 {
     permission = 1,
-    parameters = "is"
+    parameters = 'is'
 }
 
-function error(player, msg)
+local function error(player, msg)
     player:PrintToPlayer(msg)
-    player:PrintToPlayer("!completerecord <recordID> (player)")
+    player:PrintToPlayer('!completerecord <recordID> (player)')
 end
 
-function onTrigger(player, recordID, target)
+commandObj.onTrigger = function(player, recordID, target)
     -- validate logId
     if recordID == nil then
-        error(player, "Invalid recordID.")
+        error(player, 'Invalid recordID.')
         return
     end
 
@@ -28,12 +29,14 @@ function onTrigger(player, recordID, target)
     else
         targ = GetPlayerByName(target)
         if targ == nil then
-            error(player, string.format("Player named '%s' not found!", target))
+            error(player, string.format('Player named "%s" not found!', target))
             return
         end
     end
 
     -- complete quest
     targ:setEminenceCompleted(recordID)
-    player:PrintToPlayer(string.format("Completed RoE Record with ID %u for %s", recordID, targ:getName()))
+    player:PrintToPlayer(string.format('Completed RoE Record with ID %u for %s', recordID, targ:getName()))
 end
+
+return commandObj

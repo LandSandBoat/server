@@ -109,7 +109,7 @@ class LuaStyleCheck:
         Multi-line tables should use Allman braces, and all braces should be have at least one space or newline
         prior to any nested table definition.
 
-        See: https://github.com/LandSandBoat/server/wiki/Development-Guide-Lua#allman-braces
+        See: https://github.com/LandSandBoat/server/wiki/Development-Guide#lua-allman-braces
         """
         # [ ]{0,} : Any number of spaces
         # =       : = character
@@ -148,7 +148,7 @@ class LuaStyleCheck:
     def check_semicolon(self, line):
         """No semi-colons should be used in Lua scripts.
 
-        See: https://github.com/LandSandBoat/server/wiki/Development-Guide-Lua#no-semicolons
+        See: https://github.com/LandSandBoat/server/wiki/Development-Guide#lua-no-semicolons
         """
 
         # Ignore strings in line
@@ -163,7 +163,7 @@ class LuaStyleCheck:
     def check_variable_names(self, line):
         """Variables should not use underscores and be lowerCamelCased with the exception of `ID`
 
-        See: https://github.com/LandSandBoat/server/wiki/Development-Guide-Lua#naming-and-misc
+        See: https://github.com/LandSandBoat/server/wiki/Development-Guide#lua-naming-and-misc
         """
         # local     : 'local ' (with a space)
         # (?=       : Positive lookahead
@@ -198,15 +198,14 @@ class LuaStyleCheck:
         """
         # [^ =~\<\>][\=\+\*\~\/\>\<]|[\=\+\*\/\>\<][^ =\n] : Require space before and after >, <, >=, <=, ==, +, *, ~=, / operators or comparators
 
-        stripped_line = re.sub("\".*?\"|'.*?'", "", line) # Ignore data in quotes
-        for _ in re.finditer("[^ =~\<\>][\=\+\*\~\/\>\<]|[\=\+\*\/\>\<][^ =\n]", stripped_line):
+        for _ in re.finditer("[^ =~\<\>][\=\+\*\~\/\>\<]|[\=\+\*\/\>\<][^ =\n]", line):
             self.error("Operator or comparator without padding detected at end of line")
 
     def check_parentheses_padding(self, line):
         """Parentheses should have padding prior to opening and after closing, but must not contain padding after
         the open parenthesis, or prior to closing.
 
-        See: https://github.com/LandSandBoat/server/wiki/Development-Guide-Lua#no-excess-whitespace-inside-of-parentheses-or-solely-for-alignment
+        See: https://github.com/LandSandBoat/server/wiki/Development-Guide#lua-no-excess-whitespace
         """
 
         if len(re.findall("\([ ]| [\)]", line)) > 0:
@@ -276,7 +275,7 @@ class LuaStyleCheck:
         """Multi-line conditional blocks should contain if/elseif and then on their own lines,
         with conditions indented between them.
 
-        See: https://github.com/LandSandBoat/server/wiki/Development-Guide-Lua#formatting-conditional-blocks
+        See: https://github.com/LandSandBoat/server/wiki/Development-Guide#lua-formatting-conditional-blocks
         """
 
         stripped_line = re.sub("\".*?\"|'.*?'", "", line) # Ignore data in quotes
@@ -355,7 +354,15 @@ class LuaStyleCheck:
                 # Remove in-line comments
                 code_line = re.sub("(?=--)(.*?)(?=\r\n|\n)", "", line)
 
-                # Replace quoted strings with a placeholder
+                # Before replacing strings, see if we're only using single quotes and check requires
+                if re.search(r"\"[^\"']*\"(?=(?:[^']*'[^']*')*[^']*$)", code_line):
+                    self.error("Strings should only be contained by single quotes")
+                self.check_deprecated_require(code_line)
+
+                # Replace quoted strings with a placeholder, and ignore escaped quotes
+                code_line = code_line.replace("\\'", '')
+                code_line = code_line.replace('\\"', '')
+
                 code_line = re.sub('\"([^\"]*?)\"', "strVal", code_line)
                 code_line = re.sub("\'([^\"]*?)\'", "strVal", code_line)
 
@@ -373,7 +380,6 @@ class LuaStyleCheck:
                 self.check_no_newline_after_function_decl(code_line)
                 self.check_no_newline_before_end(code_line)
                 self.check_no_function_decl_padding(code_line)
-                self.check_deprecated_require(code_line)
                 self.check_invalid_enum(code_line)
 
                 # Keep track of ID variable assignments and if they are referenced.
@@ -469,7 +475,7 @@ elif target == 'scripts':
         total_errors += LuaStyleCheck(filename).errcount
 elif target == 'test':
     total_errors = LuaStyleCheck('tools/ci/tests/stylecheck.lua', show_errors = False).errcount
-    expected_errors = 52
+    expected_errors = 70
 else:
     total_errors = LuaStyleCheck(target).errcount
 

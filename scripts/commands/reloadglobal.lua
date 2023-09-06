@@ -8,26 +8,29 @@
 -- but has a default permission lv of 4 so that helpers or
 -- less experienced GMs do not mistakenly misuse it.
 --
--- specify "I_am_sure" without quotes to attempt to reload things that are not in \scripts\globals\
+-- specify 'I_am_sure' without quotes to attempt to reload things that are not in \scripts\globals\
 -----------------------------------
+local commandObj = {}
 
-cmdprops =
+commandObj.cmdprops =
 {
     permission = 4,
-    parameters = "ss"
+    parameters = 'ss'
 }
 
-function onTrigger(player, globalLua, other)
+commandObj.onTrigger = function(player, globalLua, other)
     if globalLua ~= nil and other == nil then
-        local pathString = table.concat({ "scripts/globals/", globalLua })
+        local pathString = table.concat({ 'scripts/globals/', globalLua })
         package.loaded[pathString] = nil
         require(pathString)
-        player:PrintToPlayer(string.format("Lua file '%s' has been reloaded.", pathString))
-    elseif other == "I_am_sure" then
+        player:PrintToPlayer(string.format('Lua file \'%s\' has been reloaded.', pathString))
+    elseif other == 'I_am_sure' then
         package.loaded[globalLua] = nil
         require(globalLua)
-        player:PrintToPlayer(string.format("Lua file '%s' has been reloaded.", globalLua))
+        player:PrintToPlayer(string.format('Lua file \'%s\' has been reloaded.', globalLua))
     else
-        player:PrintToPlayer("Must Specify a global lua file.")
+        player:PrintToPlayer('Must Specify a global lua file.')
     end
 end
+
+return commandObj

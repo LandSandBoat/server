@@ -191,12 +191,12 @@ INSERT INTO `item_latents` VALUES (11727,68,1,16,6);
 -- -------------------------------------------------------
 -- Destrier Beret
 -- -------------------------------------------------------
-INSERT INTO `item_latents` VALUES (11811, 64, 1,50,31);   -- Combat Skill Gain +1
-INSERT INTO `item_latents` VALUES (11811, 65, 1,50,31);   -- Magic Skill Gain +1
-INSERT INTO `item_latents` VALUES (11811,369, 1,50,31);   -- Adds "Refresh"
-INSERT INTO `item_latents` VALUES (11811,370, 1,50,31);   -- Adds "Regen"
-INSERT INTO `item_latents` VALUES (11811,456, 1,50,31);   -- Adds "Reraise"
+INSERT INTO `item_latents` VALUES (11811,64,1,50,31);   -- Combat Skill Gain +1
+INSERT INTO `item_latents` VALUES (11811,65,1,50,31);   -- Magic Skill Gain +1
 INSERT INTO `item_latents` VALUES (11811,169,12,50,31);   -- movement speed +12%
+INSERT INTO `item_latents` VALUES (11811,369,1,50,31);   -- Adds "Refresh"
+INSERT INTO `item_latents` VALUES (11811,370,1,50,31);   -- Adds "Regen"
+INSERT INTO `item_latents` VALUES (11811,456,1,50,31);   -- Adds "Reraise"
 
 -- -------------------------------------------------------
 -- Royal Squire's Shield +1/+2
@@ -582,8 +582,8 @@ INSERT INTO `item_latents` VALUES (13557,13,3,53,0);     -- MND +3 in areas insi
 -- Gold Musketeer's Ring
 -- -------------------------------------------------------
 INSERT INTO `item_latents` VALUES (13558,1,4,53,0);      -- DEF +4 in areas inside own nation's control
-INSERT INTO `item_latents` VALUES (13558,11,2,53,0);     -- AGI +2 in areas inside own nation's control
 INSERT INTO `item_latents` VALUES (13558,10,2,53,0);     -- VIT +3 in areas inside own nation's control
+INSERT INTO `item_latents` VALUES (13558,11,2,53,0);     -- AGI +2 in areas inside own nation's control
 
 -- -------------------------------------------------------
 -- Patriarch Protector's Ring
@@ -1461,8 +1461,8 @@ INSERT INTO `item_latents` VALUES (15168,68,2,29,0);
 INSERT INTO `item_latents` VALUES (15168,68,2,31,0);
 
 INSERT INTO `item_latents` VALUES (15174,25,12,10,0);
-INSERT INTO `item_latents` VALUES (15174,404,100,10,0);
 INSERT INTO `item_latents` VALUES (15174,384,400,10,0);
+INSERT INTO `item_latents` VALUES (15174,404,100,10,0);
 
 -- -------------------------------------------------------
 -- Trump Crown
@@ -2216,7 +2216,7 @@ INSERT INTO `item_latents` VALUES (17471,25,10,0,25);    -- Accuracy+10 when HP 
 -- -------------------------------------------------------
 -- Shiva's Claws
 -- -------------------------------------------------------
-INSERT INTO `item_latents` VALUES (17492, 501, 6, 34, 0);    -- Increased Add Effect rate on Iceday (base of 10 plus 6)
+INSERT INTO `item_latents` VALUES (17492,501,6,34,0);    -- Increased Add Effect rate on Iceday (base of 10 plus 6)
 
 -- -------------------------------------------------------
 -- Tactician Magician's Hooks +1/+2
@@ -2413,7 +2413,7 @@ INSERT INTO `item_latents` VALUES (17810,8,8,6,1);       -- Latent effect: STR+8
 INSERT INTO `item_latents` VALUES (17814,23,10,52,5);    -- Attack +10 in Thunder weather
 
 INSERT INTO `item_latents` VALUES (17815,2,-20,47,0);
-INSERT INTO `item_latents` VALUES (17815,16 ,-10,47,0);
+INSERT INTO `item_latents` VALUES (17815,16,-10,47,0);
 INSERT INTO `item_latents` VALUES (17815,22,-10,47,0);
 INSERT INTO `item_latents` VALUES (17824,15,15,28,0);    -- Nukemaru [Element: Fire]+15 on Firesday
 INSERT INTO `item_latents` VALUES (17824,287,10,28,0);   -- Nukemaru DMG+10 on Firesday
@@ -2827,8 +2827,8 @@ INSERT INTO `item_latents` VALUES (18358,23,14,6,1000);  -- Attack+14 while TP <
 INSERT INTO `item_latents` VALUES (18358,25,5,6,1000);   -- Accuracy+5 while TP <100%
 INSERT INTO `item_latents` VALUES (18358,287,5,6,1000);  -- DMG+5 while TP <100%
 
-INSERT INTO `item_latents` VALUES (18364,291,1,58,0);    -- counter +1
 INSERT INTO `item_latents` VALUES (18364,287,2,58,0);    -- Pahluwan Katars dmg +2
+INSERT INTO `item_latents` VALUES (18364,291,1,58,0);    -- counter +1
 INSERT INTO `item_latents` VALUES (18374,15,15,28,0);    -- Mighty Sword [Element: Fire]+15
 INSERT INTO `item_latents` VALUES (18374,287,9,28,0);    -- Mighty Sword DMG+9 on Firesday
 INSERT INTO `item_latents` VALUES (18378,165,6,47,0);    -- Subduer Crit Rate +6% when broken (500 WS points)
@@ -2845,8 +2845,8 @@ INSERT INTO `item_latents` VALUES (18390,28,3,8,4);
 INSERT INTO `item_latents` VALUES (18407,5,20,58,0);     -- Imperial Wand MP +20 in Assault
 INSERT INTO `item_latents` VALUES (18407,27,-3,58,0);    -- Imperial Wand Enmity -3 in Assault
 INSERT INTO `item_latents` VALUES (18407,287,2,58,0);    -- Imperial Wand DMG+2 in Assault
-INSERT INTO `item_latents` VALUES (18416,289,1,58,0);    -- Karasuageha Subtle Blow +1 in Assault
 INSERT INTO `item_latents` VALUES (18416,287,4,58,0);    -- Karasuageha DMG+4 in Assault
+INSERT INTO `item_latents` VALUES (18416,289,1,58,0);    -- Karasuageha Subtle Blow +1 in Assault
 INSERT INTO `item_latents` VALUES (18422,62,1,13,66);
 INSERT INTO `item_latents` VALUES (18422,62,1,13,444);
 INSERT INTO `item_latents` VALUES (18422,62,1,13,445);
@@ -2868,8 +2868,8 @@ INSERT INTO `item_latents` VALUES (18438,165,8,59,20);   -- Kumokirimaru - Vs. v
 -- -------------------------------------------------------
 INSERT INTO `item_latents` VALUES (18445,73,10,0,50);    -- "Store TP"+10 when HP <50%
 
-INSERT INTO `item_latents` VALUES (18484,288,1,58,0);    -- Wamoura Axe Double Attack +1% in Assault
 INSERT INTO `item_latents` VALUES (18484,287,5,58,0);    -- Wamoura Axe DMG+5 in Assault
+INSERT INTO `item_latents` VALUES (18484,288,1,58,0);    -- Wamoura Axe Double Attack +1% in Assault
 INSERT INTO `item_latents` VALUES (18486,171,-30,25,0);  -- Wardancer,Delay: 474 (504 - 30) song/roll active
 
 -- -------------------------------------------------------
@@ -2951,11 +2951,6 @@ INSERT INTO `item_latents` VALUES (18758,9,3,37,4);      -- Full moon DEX+3
 -- -------------------------------------------------------
 INSERT INTO `item_latents` VALUES (18763,131,1,24,40);   -- Clothcraft +1 under skill 40
 
--- -------------------------------------------------------
--- Heofon Knuckles 
--- -------------------------------------------------------
--- INSERT INTO `item_latents` VALUES (18776,355,10,?,13);     -- Final Heaven available after 13 weapon skills
-
 INSERT INTO `item_latents` VALUES (18767,25,3,59,8);     -- Birdbanes - Vs. birds: Accuracy+3
 
 -- -------------------------------------------------------
@@ -2970,6 +2965,11 @@ INSERT INTO `item_latents` VALUES (18771,23,1,16,3);     -- ATT +1~4,party size 
 INSERT INTO `item_latents` VALUES (18771,23,1,16,4);     -- ATT +1~4,party size 3+. Effect strengthens with more members
 INSERT INTO `item_latents` VALUES (18771,23,1,16,5);     -- ATT +1~4,party size 3+. Effect strengthens with more members
 INSERT INTO `item_latents` VALUES (18771,23,1,16,6);     -- ATT +1~4,party size 3+. Effect strengthens with more members
+
+-- -------------------------------------------------------
+-- Heofon Knuckles
+-- -------------------------------------------------------
+-- INSERT INTO `item_latents` VALUES (18776,355,10,?,13);     -- Final Heaven available after 13 weapon skills
 
 -- -------------------------------------------------------
 -- Oneiros Grip
@@ -2994,6 +2994,9 @@ INSERT INTO `item_latents` VALUES (18852,978,6,38,8);    -- Occasionally attacks
 -- -------------------------------------------------------
 INSERT INTO `item_latents` VALUES (18859,370,3,0,50);    -- Regen+3 when HP <51%
 
+INSERT INTO `item_latents` VALUES (18865,165,7,59,20);   -- Zonure - Vs. vermin: Critical hit rate +7%
+INSERT INTO `item_latents` VALUES (18870,287,3,40,0);    -- Dweomer Maul DMG+3 in Main hand
+
 -- -------------------------------------------------------
 -- Hannibal's Sword
 -- -------------------------------------------------------
@@ -3015,10 +3018,6 @@ INSERT INTO `item_latents` VALUES (18895,288,4,13,279);      -- Double attack +4
 INSERT INTO `item_latents` VALUES (18895,288,4,13,280);      -- Double attack +4 ENSTONE_II
 INSERT INTO `item_latents` VALUES (18895,288,4,13,281);      -- Double attack +4 ENTHUNDER_II
 INSERT INTO `item_latents` VALUES (18895,288,4,13,282);      -- Double attack +4 ENWATER_II
-
-INSERT INTO `item_latents` VALUES (18865,165,7,59,20);   -- Zonure - Vs. vermin: Critical hit rate +7%
-
-INSERT INTO `item_latents` VALUES (18870,287,3,40,0);    -- Dweomer Maul DMG+3 in Main hand
 
 -- -------------------------------------------------------
 -- Perdu Sickle
@@ -3049,10 +3048,10 @@ INSERT INTO `item_latents` VALUES (18991,288,3,13,56);   -- Double Attack +3% if
 -- -------------------------------------------------------
 -- Glanzfaust 75
 -- -------------------------------------------------------
-INSERT INTO `item_latents` VALUES (18992,62,5,13,59);    -- Attack +5% if Focus is Active
-INSERT INTO `item_latents` VALUES (18992,165,3,13,59);   -- Crit rate +3% if Focus Active
 INSERT INTO `item_latents` VALUES (18992,25,5,13,59);    -- ACC +5 if Focus Active
+INSERT INTO `item_latents` VALUES (18992,62,5,13,59);    -- Attack +5% if Focus is Active
 INSERT INTO `item_latents` VALUES (18992,68,5,13,60);    -- EVA +5 if Dodge Active
+INSERT INTO `item_latents` VALUES (18992,165,3,13,59);   -- Crit rate +3% if Focus Active
 INSERT INTO `item_latents` VALUES (18992,976,5,13,60);   -- Guard +5% if Dodge Active
 
 -- -------------------------------------------------------
@@ -3064,10 +3063,10 @@ INSERT INTO `item_latents` VALUES (19060,288,3,13,56);   -- Double Attack +3% if
 -- -------------------------------------------------------
 -- Glanzfaust 80
 -- -------------------------------------------------------
-INSERT INTO `item_latents` VALUES (19061,62,5,13,59);    -- Attack +5% if Focus is Active
-INSERT INTO `item_latents` VALUES (19061,165,3,13,59);   -- Crit rate +3% if Focus Active
 INSERT INTO `item_latents` VALUES (19061,25,10,13,59);   -- ACC +10 if Focus Active
+INSERT INTO `item_latents` VALUES (19061,62,5,13,59);    -- Attack +5% if Focus is Active
 INSERT INTO `item_latents` VALUES (19061,68,10,13,60);   -- EVA +10 if Dodge Active
+INSERT INTO `item_latents` VALUES (19061,165,3,13,59);   -- Crit rate +3% if Focus Active
 INSERT INTO `item_latents` VALUES (19061,976,5,13,60);   -- Guard +5% if Dodge Active
 
 -- -------------------------------------------------------
@@ -3079,10 +3078,10 @@ INSERT INTO `item_latents` VALUES (19080,288,3,13,56);   -- Double Attack +3% if
 -- -------------------------------------------------------
 -- Glanzfaust 85
 -- -------------------------------------------------------
-INSERT INTO `item_latents` VALUES (19081,62,5,13,59);    -- Attack +5% if Focus is Active
-INSERT INTO `item_latents` VALUES (19081,165,3,13,59);   -- Crit rate +3% if Focus Active
 INSERT INTO `item_latents` VALUES (19081,25,20,13,59);   -- ACC +20 if Focus Active
+INSERT INTO `item_latents` VALUES (19081,62,5,13,59);    -- Attack +5% if Focus is Active
 INSERT INTO `item_latents` VALUES (19081,68,20,13,60);   -- EVA +20 if Dodge Active
+INSERT INTO `item_latents` VALUES (19081,165,3,13,59);   -- Crit rate +3% if Focus Active
 INSERT INTO `item_latents` VALUES (19081,976,5,13,60);   -- Guard +5% if Dodge Active
 
 -- -------------------------------------------------------
@@ -3182,10 +3181,10 @@ INSERT INTO `item_latents` VALUES (19612,288,3,13,56);   -- Double Attack +3% if
 -- -------------------------------------------------------
 -- Glanzfaust 90
 -- -------------------------------------------------------
-INSERT INTO `item_latents` VALUES (19613,62,5,13,59);    -- Attack +5% if Focus is Active
-INSERT INTO `item_latents` VALUES (19613,165,3,13,59);   -- Crit rate +3% if Focus Active
 INSERT INTO `item_latents` VALUES (19613,25,25,13,59);   -- ACC +25 if Focus Active
+INSERT INTO `item_latents` VALUES (19613,62,5,13,59);    -- Attack +5% if Focus is Active
 INSERT INTO `item_latents` VALUES (19613,68,25,13,60);   -- EVA +25 if Dodge Active
+INSERT INTO `item_latents` VALUES (19613,165,3,13,59);   -- Crit rate +3% if Focus Active
 INSERT INTO `item_latents` VALUES (19613,976,5,13,60);   -- Guard +5% if Dodge Active
 
 -- -------------------------------------------------------
@@ -3197,10 +3196,10 @@ INSERT INTO `item_latents` VALUES (19710,288,3,13,56);   -- Double Attack +3% if
 -- -------------------------------------------------------
 -- Glanzfaust 95
 -- -------------------------------------------------------
-INSERT INTO `item_latents` VALUES (19711,62,5,13,59);    -- Attack +5% if Focus is Active
-INSERT INTO `item_latents` VALUES (19711,165,3,13,59);   -- Crit rate +3% if Focus Active
 INSERT INTO `item_latents` VALUES (19711,25,25,13,59);   -- ACC +25 if Focus Active
+INSERT INTO `item_latents` VALUES (19711,62,5,13,59);    -- Attack +5% if Focus is Active
 INSERT INTO `item_latents` VALUES (19711,68,25,13,60);   -- EVA +25 if Dodge Active
+INSERT INTO `item_latents` VALUES (19711,165,3,13,59);   -- Crit rate +3% if Focus Active
 INSERT INTO `item_latents` VALUES (19711,976,5,13,60);   -- Guard +5% if Dodge Active
 
 -- -------------------------------------------------------
@@ -3212,10 +3211,10 @@ INSERT INTO `item_latents` VALUES (19819,288,3,13,56);   -- Double Attack +3% if
 -- -------------------------------------------------------
 -- Glanzfaust 99
 -- -------------------------------------------------------
-INSERT INTO `item_latents` VALUES (19820,62,5,13,59);    -- Attack +5% if Focus is Active
-INSERT INTO `item_latents` VALUES (19820,165,3,13,59);   -- Crit rate +3% if Focus Active
 INSERT INTO `item_latents` VALUES (19820,25,30,13,59);   -- ACC +30 if Focus Active
+INSERT INTO `item_latents` VALUES (19820,62,5,13,59);    -- Attack +5% if Focus is Active
 INSERT INTO `item_latents` VALUES (19820,68,30,13,60);   -- EVA +30 if Dodge Active
+INSERT INTO `item_latents` VALUES (19820,165,3,13,59);   -- Crit rate +3% if Focus Active
 INSERT INTO `item_latents` VALUES (19820,976,5,13,60);   -- Guard +5% if Dodge Active
 
 -- -------------------------------------------------------
@@ -3227,11 +3226,38 @@ INSERT INTO `item_latents` VALUES (19948,288,3,13,56);   -- Double Attack +3% if
 -- -------------------------------------------------------
 -- Glanzfaust 99 AG
 -- -------------------------------------------------------
-INSERT INTO `item_latents` VALUES (19949,62,5,13,59);    -- Attack +5% if Focus is Active
-INSERT INTO `item_latents` VALUES (19949,165,3,13,59);   -- Crit rate +3% if Focus Active
 INSERT INTO `item_latents` VALUES (19949,25,30,13,59);   -- ACC +30 if Focus Active
+INSERT INTO `item_latents` VALUES (19949,62,5,13,59);    -- Attack +5% if Focus is Active
 INSERT INTO `item_latents` VALUES (19949,68,30,13,60);   -- EVA +30 if Dodge Active
+INSERT INTO `item_latents` VALUES (19949,165,3,13,59);   -- Crit rate +3% if Focus Active
 INSERT INTO `item_latents` VALUES (19949,976,5,13,60);   -- Guard +5% if Dodge Active
+
+-- -------------------------------------------------------
+-- Glanzfaust 119
+-- -------------------------------------------------------
+INSERT INTO `item_latents` VALUES (20482,25,30,13,59);   -- ACC +30 if Focus Active
+INSERT INTO `item_latents` VALUES (20482,62,5,13,59);    -- Attack +5% if Focus is Active
+INSERT INTO `item_latents` VALUES (20482,68,30,13,60);   -- EVA +30 if Dodge Active
+INSERT INTO `item_latents` VALUES (20482,165,3,13,59);   -- Crit rate +3% if Focus Active
+INSERT INTO `item_latents` VALUES (20482,976,5,13,60);   -- Guard +5% if Dodge Active
+
+-- -------------------------------------------------------
+-- Glanzfaust 119 AG
+-- -------------------------------------------------------
+INSERT INTO `item_latents` VALUES (20483,25,30,13,59);   -- ACC +30 if Focus Active
+INSERT INTO `item_latents` VALUES (20483,62,5,13,59);    -- Attack +5% if Focus is Active
+INSERT INTO `item_latents` VALUES (20483,68,30,13,60);   -- EVA +30 if Dodge Active
+INSERT INTO `item_latents` VALUES (20483,165,3,13,59);   -- Crit rate +3% if Focus Active
+INSERT INTO `item_latents` VALUES (20483,976,5,13,60);   -- Guard +5% if Dodge Active
+
+-- -------------------------------------------------------
+-- Glanzfaust 119 AG v3
+-- -------------------------------------------------------
+INSERT INTO `item_latents` VALUES (20510,25,30,13,59);   -- ACC +30 if Focus Active
+INSERT INTO `item_latents` VALUES (20510,62,5,13,59);    -- Attack +5% if Focus is Active
+INSERT INTO `item_latents` VALUES (20510,68,30,13,60);   -- EVA +30 if Dodge Active
+INSERT INTO `item_latents` VALUES (20510,165,3,13,59);   -- Crit rate +3% if Focus Active
+INSERT INTO `item_latents` VALUES (20510,976,5,13,60);   -- Guard +5% if Dodge Active
 
 -- -------------------------------------------------------
 -- Eminent Baghnakhs
@@ -3254,28 +3280,10 @@ INSERT INTO `item_latents` VALUES (20837,165,14,13,56);  -- Crit Rate +14% if Be
 INSERT INTO `item_latents` VALUES (20837,288,3,13,56);   -- Double Attack +3% if Berserk Active
 
 -- -------------------------------------------------------
--- Glanzfaust 119
--- -------------------------------------------------------
-INSERT INTO `item_latents` VALUES (20482,62,5,13,59);    -- Attack +5% if Focus is Active
-INSERT INTO `item_latents` VALUES (20482,165,3,13,59);   -- Crit rate +3% if Focus Active
-INSERT INTO `item_latents` VALUES (20482,25,30,13,59);   -- ACC +30 if Focus Active
-INSERT INTO `item_latents` VALUES (20482,68,30,13,60);   -- EVA +30 if Dodge Active
-INSERT INTO `item_latents` VALUES (20482,976,5,13,60);   -- Guard +5% if Dodge Active
-
--- -------------------------------------------------------
 -- Conqueror 119 AG
 -- -------------------------------------------------------
 INSERT INTO `item_latents` VALUES (20838,165,14,13,56);  -- Crit Rate +14% if Berserk Active
 INSERT INTO `item_latents` VALUES (20838,288,3,13,56);   -- Double Attack +3% if Berserk Active
-
--- -------------------------------------------------------
--- Glanzfaust 119 AG
--- -------------------------------------------------------
-INSERT INTO `item_latents` VALUES (20483,62,5,13,59);    -- Attack +5% if Focus is Active
-INSERT INTO `item_latents` VALUES (20483,165,3,13,59);   -- Crit rate +3% if Focus Active
-INSERT INTO `item_latents` VALUES (20483,25,30,13,59);   -- ACC +30 if Focus Active
-INSERT INTO `item_latents` VALUES (20483,68,30,13,60);   -- EVA +30 if Dodge Active
-INSERT INTO `item_latents` VALUES (20483,976,5,13,60);   -- Guard +5% if Dodge Active
 
 -- INSERT INTO `item_latents` VALUES (21521,25,10,??,0); -- Melee fists: Dynamis (D): Accuracy+10
 -- INSERT INTO `item_latents` VALUES (21521,30,10,??,0); -- Melee fists: Dynamis (D): Magic Accuracy+10
@@ -3291,9 +3299,11 @@ INSERT INTO `item_latents` VALUES (20483,976,5,13,60);   -- Guard +5% if Dodge A
 -- INSERT INTO `item_latents` VALUES (21525,26,40,??,0); -- Pitre Fists: Dynamis (D): Automaton: Ranged Accuracy+40
 -- INSERT INTO `item_latents` VALUES (21525,30,10,??,0); -- Pitre Fists: Dynamis (D): Magic Accuracy+10
 -- INSERT INTO `item_latents` VALUES (21525,30,40,??,0); -- Pitre Fists: Dynamis (D): Automaton: Magic Accuracy+40
+
 INSERT INTO `item_latents` VALUES (21558,11,5,56,0);         -- Rune Kris: Agi+5     MP>0
 INSERT INTO `item_latents` VALUES (21558,73,5,56,0);         -- Rune Kris: StoreTP+5 MP>0
 INSERT INTO `item_latents` VALUES (21558,369,-3,56,0);       -- Rune Kris: Refresh-3 MP>0
+
 -- INSERT INTO `item_latents` VALUES (21573,25,10,??,0); -- Assassin's Knife: Dynamis (D): Accuracy+10
 -- INSERT INTO `item_latents` VALUES (21573,30,10,??,0); -- Assassin's Knife: Dynamis (D): Magic Accuracy+10
 -- INSERT INTO `item_latents` VALUES (21574,25,10,??,0); -- Plunderer's Knife: Dynamis (D): Accuracy+10
@@ -3328,9 +3338,11 @@ INSERT INTO `item_latents` VALUES (21558,369,-3,56,0);       -- Rune Kris: Refre
 -- INSERT INTO `item_latents` VALUES (21631,30,10,??,0); -- Mirage Sword: (D): Magic Accuracy+10
 -- INSERT INTO `item_latents` VALUES (21632,25,10,??,0); -- Luhlaza Sword: (D): Accuracy+10
 -- INSERT INTO `item_latents` VALUES (21632,30,10,??,0); -- Luhlaza Sword: (D): Magic Accuracy+10
+
 INSERT INTO `item_latents` VALUES (21661,10,5,56,0);     -- Rune Algol: Latent effect (MP>0): VIT+5
 INSERT INTO `item_latents` VALUES (21661,369,-3,56,0);   -- Rune Algol: Drains 3 MP/tic from player (while weapon is drawn).
 INSERT INTO `item_latents` VALUES (21661,840,1,56,0);    -- Rune Algol: Latent effect (MP>0): Weapon skill damage +1%
+
 -- INSERT INTO `item_latents` VALUES (21667,25,10,??,0); -- Futhark Claymore: (D): Accuracy+10
 -- INSERT INTO `item_latents` VALUES (21667,30,10,??,0); -- Futhark Claymore: (D): Magic Accuracy+10
 -- INSERT INTO `item_latents` VALUES (21668,25,10,??,0); -- Peord Claymore: (D): Accuracy+10
@@ -3341,15 +3353,6 @@ INSERT INTO `item_latents` VALUES (21661,840,1,56,0);    -- Rune Algol: Latent e
 -- -------------------------------------------------------
 INSERT INTO `item_latents` VALUES (21757,165,14,13,56);  -- Crit Rate +14% if Berserk Active
 INSERT INTO `item_latents` VALUES (21757,288,3,13,56);   -- Double Attack +3% if Berserk Active
-
--- -------------------------------------------------------
--- Glanzfaust 119 AG v3
--- -------------------------------------------------------
-INSERT INTO `item_latents` VALUES (20510,62,5,13,59);    -- Attack +5% if Focus is Active
-INSERT INTO `item_latents` VALUES (20510,165,3,13,59);   -- Crit rate +3% if Focus Active
-INSERT INTO `item_latents` VALUES (20510,25,30,13,59);   -- ACC +30 if Focus Active
-INSERT INTO `item_latents` VALUES (20510,68,30,13,60);   -- EVA +30 if Dodge Active
-INSERT INTO `item_latents` VALUES (20510,976,5,13,60);   -- Guard +5% if Dodge Active
 
 -- INSERT INTO `item_latents` VALUES (21772,25,10,??,0); -- Warrior's Chopper: (D): Accuracy+10
 -- INSERT INTO `item_latents` VALUES (21772,30,10,??,0); -- Warrior's Chopper: (D): Magic Accuracy+10

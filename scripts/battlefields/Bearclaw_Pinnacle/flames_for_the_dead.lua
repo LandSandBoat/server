@@ -11,8 +11,8 @@ local content = BattlefieldMission:new({
     levelCap      = 99,
     timeLimit     = utils.minutes(30),
     index         = 0,
-    entryNpc      = "Wind_Pillar_1",
-    exitNpc       = "Wind_Pillar_Exit",
+    entryNpc      = 'Wind_Pillar_1',
+    exitNpc       = 'Wind_Pillar_Exit',
 
     missionArea           = xi.mission.log_id.COP,
     mission               = xi.mission.id.cop.THREE_PATHS,
@@ -23,6 +23,6 @@ local content = BattlefieldMission:new({
     grantXP               = 1000,
 })
 
-content:addEssentialMobs({ "Snoll_Tzar" })
+content:addEssentialMobs({ 'Snoll_Tzar' })
 
 return content:register()

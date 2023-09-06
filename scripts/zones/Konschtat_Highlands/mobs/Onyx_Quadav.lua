@@ -2,7 +2,7 @@
 -- Area: Konschtat Highlands
 --  Mob: Onyx Quadav
 -----------------------------------
-require("scripts/quests/tutorial")
+require('scripts/quests/tutorial')
 -----------------------------------
 local entity = {}
 

@@ -18,7 +18,7 @@ local content = Limbus:new({
     entryNpc         = '_12i',
     requiredKeyItems = { xi.ki.COSMO_CLEANSE, xi.ki.BLACK_CARD, message = ID.text.YOU_INSERT_THE_CARD_POLISHED },
     lossEventParams  = { [5] = 1 },
-    name             = "NE_APOLLYON",
+    name             = 'NE_APOLLYON',
     exitLocation     = 1,
     timeExtension    = 5,
 })
@@ -129,32 +129,32 @@ content.groups =
 {
     -- Floor 1
     {
-        mobs       = { "Barometz_Boss", "Borametz_Boss", "Goobbue_Harvester" },
+        mobs       = { 'Barometz_Boss', 'Borametz_Boss', 'Goobbue_Harvester' },
         stationary = false,
         setup      = function(battlefield, mobs)
             local bosses = utils.shuffle(mobs)
-            bosses[1]:setLocalVar("item", 1)
-            bosses[2]:setLocalVar("vortex", 1)
+            bosses[1]:setLocalVar('item', 1)
+            bosses[2]:setLocalVar('vortex', 1)
         end,
 
         death = function(battlefield, mob, count)
-            if mob:getLocalVar("item") == 1 then
+            if mob:getLocalVar('item') == 1 then
                 xi.limbus.spawnFrom(mob, ID.NE_APOLLYON.npc.ITEM_CRATES[1])
-            elseif mob:getLocalVar("vortex") == 1 then
+            elseif mob:getLocalVar('vortex') == 1 then
                 content:openDoor(battlefield, 1)
             end
         end,
     },
 
     {
-        mobs       = { "Barometz", "Borametz", "Barometz_Boss", "Borametz_Boss" },
+        mobs       = { 'Barometz', 'Borametz', 'Barometz_Boss', 'Borametz_Boss' },
         mobMods    = { [xi.mobMod.ALLI_HATE] = 50 },
         stationary = false,
     },
 
     -- Floor 2
     {
-        mobs    = { "Bialozar_Boss" },
+        mobs    = { 'Bialozar_Boss' },
         mobMods = { [xi.mobMod.DETECTION] = xi.detects.HEARING },
         death   = function(battlefield, mob, count)
             xi.limbus.spawnFrom(mob, ID.NE_APOLLYON.npc.ITEM_CRATES[2])
@@ -162,12 +162,12 @@ content.groups =
     },
 
     {
-        mobs = { "Sirin", "Cornu" },
+        mobs = { 'Sirin', 'Cornu' },
     },
 
     {
         -- Bialozar and Thiazi x2
-        mobs        = { "Bialozar", "Thiazi" },
+        mobs        = { 'Bialozar', 'Thiazi' },
         mobMods     = { [xi.mobMod.DETECTION] = xi.detects.HEARING },
         randomDeath = function(battlefield, mob)
             content:openDoor(battlefield, 2)
@@ -232,7 +232,7 @@ content.groups =
 
     -- Floor 4
     {
-        mobs        = { "Hyperion", "Okeanos", "Cronos" },
+        mobs        = { 'Hyperion', 'Okeanos', 'Cronos' },
         stationary  = false,
         randomDeath = function(battlefield, mob)
             content:openDoor(mob:getBattlefield(), 4)
@@ -240,22 +240,22 @@ content.groups =
     },
 
     {
-        mobs = { "Hyperion" },
+        mobs = { 'Hyperion' },
         mods = { [xi.mod.MAGIC_NULL] = 100 },
     },
 
     {
-        mobs = { "Okeanos" },
+        mobs = { 'Okeanos' },
         mods = { [xi.mod.NULL_RANGED_DAMAGE] = 100 },
     },
 
     {
-        mobs = { "Cronos" },
+        mobs = { 'Cronos' },
         mods = { [xi.mod.NULL_PHYSICAL_DAMAGE] = 100 },
     },
 
     {
-        mobs       = { "Kerkopes_Boss" },
+        mobs       = { 'Kerkopes_Boss' },
         stationary = false,
         death      = function(battlefield, mob, count)
             xi.limbus.spawnFrom(mob, ID.NE_APOLLYON.npc.ITEM_CRATES[4])
@@ -263,20 +263,20 @@ content.groups =
     },
 
     {
-        mobs       = { "Kerkopes" },
+        mobs       = { 'Kerkopes' },
         stationary = false,
     },
 
     -- Floor 5
     {
-        mobs     = { "Troglodyte_Dhalmel" },
+        mobs     = { 'Troglodyte_Dhalmel' },
         allDeath = function(battlefield, mob)
             npcUtil.showCrate(GetNPCByID(ID.NE_APOLLYON.npc.LOOT_CRATE))
         end,
     },
 
     {
-        mobs = { "Criosphinx", "Hieracosphinx" },
+        mobs = { 'Criosphinx', 'Hieracosphinx' },
         mods =
         {
             [xi.mod.GRAVITY_MEVA] = 75,

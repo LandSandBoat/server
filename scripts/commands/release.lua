@@ -2,29 +2,32 @@
 -- func: release
 -- desc: Releases the player from current events.
 -----------------------------------
+local commandObj = {}
 
-cmdprops =
+commandObj.cmdprops =
 {
     permission = 1,
-    parameters = "s"
+    parameters = 's'
 }
 
-function error(player, msg)
+local function error(player, msg)
     player:PrintToPlayer(msg)
-    player:PrintToPlayer("!release (name)")
+    player:PrintToPlayer('!release (name)')
 end
 
-function onTrigger(player, name)
+commandObj.onTrigger = function(player, name)
     local target
     if name == nil then
         target = player
     else
         target = GetPlayerByName(name)
         if target == nil then
-            error(player, string.format("Player named '%s' not found!", name))
+            error(player, string.format('Player named "%s" not found!', name))
             return
         end
     end
 
     target:release()
 end
+
+return commandObj

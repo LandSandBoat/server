@@ -2,15 +2,17 @@
 -- func: gotoname
 -- desc: Go to given mob or npc by name
 -----------------------------------
-cmdprops =
+local commandObj = {}
+
+commandObj.cmdprops =
 {
     permission = 1,
-    parameters = "si"
+    parameters = 'si'
 }
 
-function error(player, msg)
+local function error(player, msg)
     player:PrintToPlayer(msg)
-    player:PrintToPlayer("!gotoname <mob or npc name> (index)")
+    player:PrintToPlayer('!gotoname <mob or npc name> (index)')
 end
 
 -----------------------------------
@@ -44,7 +46,7 @@ local goToEntity = function(player, entity)
     end
 
     -- display message
-    player:PrintToPlayer(string.format("Going to %s %s (%i).", entity:getName(), entity:getZoneName(), entity:getID()))
+    player:PrintToPlayer(string.format('Going to %s %s (%i).', entity:getName(), entity:getZoneName(), entity:getID()))
 
     -- half a second later, go.  this delay gives time for previous message to appear
     player:timer(500, function(playerArg)
@@ -52,10 +54,10 @@ local goToEntity = function(player, entity)
     end)
 end
 
-function onTrigger(player, pattern, index)
+commandObj.onTrigger = function(player, pattern, index)
     -- validate pattern
-    if pattern == nil or pattern == "" then
-        error(player, "You must enter an NPC name")
+    if pattern == nil or pattern == '' then
+        error(player, 'You must enter an NPC name')
         return
     end
 
@@ -69,15 +71,15 @@ function onTrigger(player, pattern, index)
     end
 
     if #entities > 20 then
-        player:PrintToPlayer("Too many results. Narrow your query or specify an index to go to.")
+        player:PrintToPlayer('Too many results. Narrow your query or specify an index to go to.')
         return
     end
 
     if #entities == 0 then
         if #unfilteredEntities > 0 then
-            player:PrintToPlayer(string.format("%s not spawned in current zone", pattern))
+            player:PrintToPlayer(string.format('%s not spawned in current zone', pattern))
         else
-            player:PrintToPlayer(string.format("%s not found in current zone", pattern))
+            player:PrintToPlayer(string.format('%s not found in current zone', pattern))
         end
 
         return
@@ -88,8 +90,10 @@ function onTrigger(player, pattern, index)
         return
     end
 
-    player:PrintToPlayer("Multiple entities found. Use !gotoname <mob or npc name> <index> to choose:", xi.msg.channel.SYSTEM_3)
+    player:PrintToPlayer('Multiple entities found. Use !gotoname <mob or npc name> <index> to choose:', xi.msg.channel.SYSTEM_3)
     for i, entity in pairs(entities) do
-        player:PrintToPlayer(string.format("[%d] %s %s (%s)", i, entity:getName(), entity:getZoneName(), entity:getID()), xi.msg.channel.SYSTEM_3)
+        player:PrintToPlayer(string.format('[%d] %s %s (%s)', i, entity:getName(), entity:getZoneName(), entity:getID()), xi.msg.channel.SYSTEM_3)
     end
 end
+
+return commandObj

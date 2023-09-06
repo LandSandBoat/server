@@ -2,27 +2,27 @@
 -- Assault 51 : Nyzul Isle Investigation
 -----------------------------------
 local ID = zones[xi.zone.NYZUL_ISLE]
-require("scripts/zones/Nyzul_Isle/globals/points")
+require('scripts/zones/Nyzul_Isle/globals/points')
 -----------------------------------
 local instanceObject = {}
 
 local function pickSetPoint(instance)
     local chars        = instance:getChars()
-    local currentFloor = instance:getLocalVar("Nyzul_Current_Floor")
+    local currentFloor = instance:getLocalVar('Nyzul_Current_Floor')
 
     -- Random the floor layout
-    instance:setLocalVar("Nyzul_Isle_FloorLayout", math.random(1, (#xi.nyzul.FloorLayout - 1)))
-    instance:setLocalVar("gearObjective", 0)
+    instance:setLocalVar('Nyzul_Isle_FloorLayout', math.random(1, (#xi.nyzul.FloorLayout - 1)))
+    instance:setLocalVar('gearObjective', 0)
 
     -- Condition for floors
     -- hard set objective and floor to boss stage for every 20th floor
     if currentFloor % 20 == 0 then
         instance:setStage(xi.nyzul.objective.ELIMINATE_ENEMY_LEADER)
-        instance:setLocalVar("Nyzul_Isle_FloorLayout", 0)
+        instance:setLocalVar('Nyzul_Isle_FloorLayout', 0)
     -- 3.33% for a free floor
-    elseif math.random(1, 30) == 1 and instance:getLocalVar("freeFloor") == 0 then -- 3.33% for a free floor
+    elseif math.random(1, 30) == 1 and instance:getLocalVar('freeFloor') == 0 then -- 3.33% for a free floor
         instance:setStage(xi.nyzul.objective.FREE_FLOOR)
-        instance:setLocalVar("freeFloor", 1)
+        instance:setLocalVar('freeFloor', 1)
 
         GetNPCByID(ID.npc.RUNE_TRANSFER_START, instance):timer(9000,
         function(m)
@@ -46,12 +46,12 @@ local function pickSetPoint(instance)
         instance:setStage(utils.pickRandom(objective))
 
         if math.random(1, 30) <= 5 then
-            instance:setLocalVar("gearObjective", math.random(xi.nyzul.gearObjective.AVOID_AGRO, xi.nyzul.gearObjective.DO_NOT_DESTROY))
+            instance:setLocalVar('gearObjective', math.random(xi.nyzul.gearObjective.AVOID_AGRO, xi.nyzul.gearObjective.DO_NOT_DESTROY))
         end
     end
 
     -- Setup points to travel to
-    local layoutPoint = xi.nyzul.FloorLayout[instance:getLocalVar("Nyzul_Isle_FloorLayout")]
+    local layoutPoint = xi.nyzul.FloorLayout[instance:getLocalVar('Nyzul_Isle_FloorLayout')]
     local posX        = layoutPoint[1] local posY = layoutPoint[2] local posZ = layoutPoint[3]
 
     -- Set Rune of Transfer to Point
@@ -74,7 +74,7 @@ local function pickSetPoint(instance)
 
         if instance:getStage() ~= xi.nyzul.objective.FREE_FLOOR then
             players:messageName(ID.text.OBJECTIVE_TEXT_OFFSET + instance:getStage(), players)
-            local gearObjective = instance:getLocalVar("gearObjective")
+            local gearObjective = instance:getLocalVar('gearObjective')
 
             if gearObjective > 0 then
                 players:messageSpecial(ID.text.ELIMINATE_ALL_ENEMIES + gearObjective)
@@ -83,14 +83,14 @@ local function pickSetPoint(instance)
     end
 
     -- Set Rune of Transfer Menu
-    instance:setLocalVar("menuChoice", math.random(1, 20))
+    instance:setLocalVar('menuChoice', math.random(1, 20))
 end
 
 local function lampsActivate(instance)
-    local floorLayout    = instance:getLocalVar("Nyzul_Isle_FloorLayout")
-    local lampsObjective = instance:getLocalVar("[Lamps]Objective")
+    local floorLayout    = instance:getLocalVar('Nyzul_Isle_FloorLayout')
+    local lampsObjective = instance:getLocalVar('[Lamps]Objective')
     local runicLamp1     = GetNPCByID(ID.npc.RUNIC_LAMP_OFFSET, instance)
-    local partySize      = utils.clamp(instance:getLocalVar("partySize"), 3, 5)
+    local partySize      = utils.clamp(instance:getLocalVar('partySize'), 3, 5)
     local lampPoints     = {}
 
     for i = 1, #xi.nyzulPoint.LampPoint[floorLayout] do
@@ -101,14 +101,14 @@ local function lampsActivate(instance)
     if lampsObjective == xi.nyzul.lampsObjective.REGISTER then
         local spawnPoint = math.random(1, #lampPoints)
 
-        instance:setLocalVar("[Lamp]PartySize", instance:getLocalVar("partySize"))
+        instance:setLocalVar('[Lamp]PartySize', instance:getLocalVar('partySize'))
         runicLamp1:setPos(lampPoints[spawnPoint])
         runicLamp1:setStatus(xi.status.NORMAL)
 
     -- Lamp Objective: Activate All
     elseif lampsObjective == xi.nyzul.lampsObjective.ACTIVATE_ALL then
         local runicLamps = math.random(2, partySize - 1)
-        instance:setLocalVar("[Lamp]count", runicLamps)
+        instance:setLocalVar('[Lamp]count', runicLamps)
 
         for i = ID.npc.RUNIC_LAMP_OFFSET, ID.npc.RUNIC_LAMP_OFFSET + runicLamps do
             local spawnPoint = math.random(1, #lampPoints)
@@ -127,8 +127,8 @@ local function lampsActivate(instance)
             table.insert(lampOrder, j)
         end
 
-        instance:setLocalVar("[Lamp]count", runicLamps)
-        instance:setLocalVar("[Lamp]lampRegister", 0)
+        instance:setLocalVar('[Lamp]count', runicLamps)
+        instance:setLocalVar('[Lamp]lampRegister', 0)
 
         for i = ID.npc.RUNIC_LAMP_OFFSET, ID.npc.RUNIC_LAMP_OFFSET + runicLamps do
             local spawnPoint = math.random(1, #lampPoints)
@@ -136,7 +136,7 @@ local function lampsActivate(instance)
 
             GetNPCByID(i, instance):setPos(lampPoints[spawnPoint])
             GetNPCByID(i, instance):setStatus(xi.status.NORMAL)
-            GetNPCByID(i, instance):setLocalVar("[Lamp]order", lampOrder[lampRandom])
+            GetNPCByID(i, instance):setLocalVar('[Lamp]order', lampOrder[lampRandom])
 
             table.remove(lampOrder, lampRandom)
             table.remove(lampPoints, spawnPoint)
@@ -145,20 +145,16 @@ local function lampsActivate(instance)
 end
 
 local function pickMobs(instance)
-    local currentFloor = instance:getLocalVar("Nyzul_Current_Floor")
-    local mobFamily    = math.random(1, 16)
-    local floorLayout  = instance:getLocalVar("Nyzul_Isle_FloorLayout")
-    local pointTable   = xi.nyzulPoint.SpawnPoint[floorLayout]
-    local spawnPoint   = {}
+    local currentFloor = instance:getLocalVar('Nyzul_Current_Floor')
 
-    -- 20th floor bosses
+    -- 20th floor bosses.
     if currentFloor % 20 == 0 then
         local floorBoss = 0
 
-        if currentFloor == 20 or currentFloor == 40 then
-            floorBoss = math.random(xi.nyzul.pickMobs[0][40].ADAMANTOISE, xi.nyzul.pickMobs[0][40].FAFNIR)
-        elseif currentFloor == 60 or currentFloor == 80 or currentFloor == 100 then
-            floorBoss = math.random(xi.nyzul.pickMobs[0][100].KHIMAIRA, xi.nyzul.pickMobs[0][100].CERBERUS)
+        if currentFloor <= 40 then
+            floorBoss = math.random(xi.nyzul.enemyLeaders[40][1], xi.nyzul.enemyLeaders[40][2])
+        elseif currentFloor <= 100 then
+            floorBoss = math.random(xi.nyzul.enemyLeaders[100][1], xi.nyzul.enemyLeaders[100][2])
         end
 
         GetMobByID(ID.mob[51].ARCHAIC_RAMPART1, instance):setSpawn(-36, 0, -362, 0)
@@ -166,211 +162,222 @@ local function pickMobs(instance)
         SpawnMob(ID.mob[51].ARCHAIC_RAMPART1, instance)
         SpawnMob(floorBoss, instance)
 
-    -- All other floors
-    else
+    -- All other floors except free.
+    elseif instance:getStage() ~= xi.nyzul.objective.FREE_FLOOR then
+        -- Build dynamic table with all the possible spawn points.
+        local floorLayout      = instance:getLocalVar('Nyzul_Isle_FloorLayout')
+        local pointTable       = xi.nyzulPoint.SpawnPoint[floorLayout]
+        local sPoint           = 0
+        local sPointX          = 0
+        local sPointY          = 0
+        local sPointZ          = 0
+        local sPointRot        = 0
+        local dTableSpawnPoint = {}
+
         for i = 1, #pointTable do
-            table.insert(spawnPoint, i, pointTable[i])
+            table.insert(dTableSpawnPoint, i, pointTable[i])
         end
 
-        -- Not "free floors"
-        if instance:getStage() ~= xi.nyzul.objective.FREE_FLOOR then
-            switch (instance:getStage()) : caseof
-            {
-                -- Enemy Leader Objective
-                [xi.nyzul.objective.ELIMINATE_ENEMY_LEADER] = function()
-                    local floorBoss = math.random(xi.nyzul.pickMobs[1].MOKKE, xi.nyzul.pickMobs[1].LONG_HORNED_CHARIOT)
+        -- Spawn objective-specific mobs.
+        switch (instance:getStage()) : caseof
+        {
+            -- Enemy Leader Objective
+            [xi.nyzul.objective.ELIMINATE_ENEMY_LEADER] = function()
+                local floorBoss = math.random(xi.nyzul.enemyLeaders[1][1], xi.nyzul.enemyLeaders[1][2])
+                sPoint          = math.random(1, #dTableSpawnPoint)
+                sPointX         = dTableSpawnPoint[sPoint][1]
+                sPointY         = dTableSpawnPoint[sPoint][2]
+                sPointZ         = dTableSpawnPoint[sPoint][3]
+                sPointRot       = dTableSpawnPoint[sPoint][4]
 
-                    if floorBoss == 17092962 then
-                        floorBoss = 17092961 + (math.random(0, 1) * 2)
-                    end
+                if floorBoss == ID.mob[51].MOKKE + 18 then
+                    floorBoss = ID.mob[51].MOKKE + 17 + (math.random(0, 1) * 2)
+                end
 
-                    local sPoint    = math.random(1, #spawnPoint)
-                    local sPointX   = spawnPoint[sPoint][1]
-                    local sPointY   = spawnPoint[sPoint][2]
-                    local sPointZ   = spawnPoint[sPoint][3]
-                    local sPointRot = spawnPoint[sPoint][4]
+                GetMobByID(floorBoss, instance):setSpawn(sPointX, sPointY, sPointZ, sPointRot)
+                SpawnMob(floorBoss, instance)
+                table.remove(dTableSpawnPoint, sPoint)
+            end,
 
-                    GetMobByID(floorBoss, instance):setSpawn(sPointX, sPointY, sPointZ, sPointRot)
-                    SpawnMob(floorBoss, instance)
-                    table.remove(spawnPoint, sPoint)
-                end,
+            -- Specified Enemy Group Objective
+            [xi.nyzul.objective.ELIMINATE_SPECIFIED_ENEMIES] = function()
+                local specificGroup         = math.random(1, 7)
+                local specificEnemyGroup    = xi.nyzul.specifiedMobs[specificGroup]
+                local numberOfMobs          = specificEnemyGroup[2] - specificEnemyGroup[1] + 1
+                local groupAmount           = math.random(2, numberOfMobs)
+                local dTableSpecificEnemies = {}
 
-                -- Specified Enemy Group Objective
-                [xi.nyzul.objective.ELIMINATE_SPECIFIED_ENEMIES] = function()
-                    local specificEnemies    = {}
-                    local specificGroup      = math.random(0, 6)
-                    local groupAmount        = math.random(2, #xi.nyzul.pickMobs[2][specificGroup])
-                    local specificEnemyGroup = xi.nyzul.pickMobs[2][specificGroup]
+                for i = specificEnemyGroup[1], specificEnemyGroup[2] do
+                    table.insert(dTableSpecificEnemies, i)
+                end
 
-                    for i = 1, #specificEnemyGroup do
-                        table.insert(specificEnemies, specificEnemyGroup[i])
-                    end
+                while groupAmount > 0 do
+                    local randomEnemy = math.random(1, #dTableSpecificEnemies)
+                    local enemy       = dTableSpecificEnemies[randomEnemy]
+                    sPoint            = math.random(1, #dTableSpawnPoint)
+                    sPointX           = dTableSpawnPoint[sPoint][1]
+                    sPointY           = dTableSpawnPoint[sPoint][2]
+                    sPointZ           = dTableSpawnPoint[sPoint][3]
+                    sPointRot         = dTableSpawnPoint[sPoint][4]
 
-                    while groupAmount > 0 do
-                        local randomEnemy = math.random(1, #specificEnemies)
-                        local enemy       = specificEnemies[randomEnemy]
-                        local sPoint      = math.random(1, #spawnPoint)
-                        local sPointX     = spawnPoint[sPoint][1]
-                        local sPointY     = spawnPoint[sPoint][2]
-                        local sPointZ     = spawnPoint[sPoint][3]
-                        local sPointRot   = spawnPoint[sPoint][4]
+                    GetMobByID(enemy, instance):setSpawn(sPointX, sPointY, sPointZ, sPointRot)
+                    SpawnMob(enemy, instance)
+                    table.remove(dTableSpawnPoint, sPoint)
+                    table.remove(dTableSpecificEnemies, randomEnemy)
+                    instance:setLocalVar('Eliminate', instance:getLocalVar('Eliminate') + 1)
 
-                        GetMobByID(enemy, instance):setSpawn(sPointX, sPointY, sPointZ, sPointRot)
-                        SpawnMob(enemy, instance)
-                        table.remove(spawnPoint, sPoint)
-                        table.remove(specificEnemies, randomEnemy)
-                        instance:setLocalVar("Eliminate", instance:getLocalVar("Eliminate") + 1)
+                    groupAmount = groupAmount - 1
+                end
+            end,
 
-                        groupAmount = groupAmount - 1
-                    end
-                end,
+            -- Eliminate All Objective
+            [xi.nyzul.objective.ELIMINATE_ALL_ENEMIES] = function()
+                if math.random(1, 100) <= 20 then -- 20% chance that Dahank will spawn.
+                    sPoint    = math.random(1, #dTableSpawnPoint)
+                    sPointX   = dTableSpawnPoint[sPoint][1]
+                    sPointY   = dTableSpawnPoint[sPoint][2]
+                    sPointZ   = dTableSpawnPoint[sPoint][3]
+                    sPointRot = dTableSpawnPoint[sPoint][4]
 
-                -- Eliminate All Objective
-                [xi.nyzul.objective.ELIMINATE_ALL_ENEMIES] = function()
-                    if math.random(0, 100) >= 80 then -- 20% chance that Dahank will spawn
-                        local sPoint    = math.random(1, #spawnPoint)
-                        local sPointX   = spawnPoint[sPoint][1]
-                        local sPointY   = spawnPoint[sPoint][2]
-                        local sPointZ   = spawnPoint[sPoint][3]
-                        local sPointRot = spawnPoint[sPoint][4]
-
-                        GetMobByID(ID.mob[51].DAHAK, instance):setSpawn(sPointX, sPointY, sPointZ, sPointRot)
-                        SpawnMob(ID.mob[51].DAHAK, instance)
-                        table.remove(spawnPoint, sPoint)
-                        instance:setLocalVar("Eliminate", instance:getLocalVar("Eliminate") + 1)
-                    end
-                end,
+                    GetMobByID(ID.mob[51].DAHAK, instance):setSpawn(sPointX, sPointY, sPointZ, sPointRot)
+                    SpawnMob(ID.mob[51].DAHAK, instance)
+                    table.remove(dTableSpawnPoint, sPoint)
+                    instance:setLocalVar('Eliminate', instance:getLocalVar('Eliminate') + 1)
+                end
+            end,
 
             -- Activate Lamps Objective
-                [xi.nyzul.objective.ACTIVATE_ALL_LAMPS] = function()
-                    instance:setLocalVar("[Lamps]Objective", math.random(xi.nyzul.lampsObjective.REGISTER, xi.nyzul.lampsObjective.ORDER))
-                    lampsActivate(instance)
-                end,
-            }
+            [xi.nyzul.objective.ACTIVATE_ALL_LAMPS] = function()
+                instance:setLocalVar('[Lamps]Objective', math.random(xi.nyzul.lampsObjective.REGISTER, xi.nyzul.lampsObjective.ORDER))
+                lampsActivate(instance)
+            end,
+        }
 
-            -- 1st Rampart: 90% spawn rate
-            if math.random(0, 100) >= 90 then
-                local sPoint    = math.random(1, #spawnPoint)
-                local sPointX   = spawnPoint[sPoint][1]
-                local sPointY   = spawnPoint[sPoint][2]
-                local sPointZ   = spawnPoint[sPoint][3]
-                local sPointRot = spawnPoint[sPoint][4]
+        -- Spawn Rampart-Type mobs.
+        if math.random(1, 100) <= 90 then
+            sPoint    = math.random(1, #dTableSpawnPoint)
+            sPointX   = dTableSpawnPoint[sPoint][1]
+            sPointY   = dTableSpawnPoint[sPoint][2]
+            sPointZ   = dTableSpawnPoint[sPoint][3]
+            sPointRot = dTableSpawnPoint[sPoint][4]
 
-                GetMobByID(ID.mob[51].ARCHAIC_RAMPART1, instance):setSpawn(sPointX, sPointY, sPointZ, sPointRot)
+            GetMobByID(ID.mob[51].ARCHAIC_RAMPART1, instance):setSpawn(sPointX, sPointY, sPointZ, sPointRot)
 
-                SpawnMob(ID.mob[51].ARCHAIC_RAMPART1, instance)
-                table.remove(spawnPoint, sPoint)
+            SpawnMob(ID.mob[51].ARCHAIC_RAMPART1, instance)
+            table.remove(dTableSpawnPoint, sPoint)
+
+            if instance:getStage() == xi.nyzul.objective.ELIMINATE_ALL_ENEMIES then
+                instance:setLocalVar('Eliminate', instance:getLocalVar('Eliminate') + 1)
+            end
+        end
+
+        if math.random(1, 100) <= 20 then
+            sPoint    = math.random(1, #dTableSpawnPoint)
+            sPointX   = dTableSpawnPoint[sPoint][1]
+            sPointY   = dTableSpawnPoint[sPoint][2]
+            sPointZ   = dTableSpawnPoint[sPoint][3]
+            sPointRot = dTableSpawnPoint[sPoint][4]
+
+            GetMobByID(ID.mob[51].ARCHAIC_RAMPART2, instance):setSpawn(sPointX, sPointY, sPointZ, sPointRot)
+            SpawnMob(ID.mob[51].ARCHAIC_RAMPART2, instance)
+            table.remove(dTableSpawnPoint, sPoint)
+
+            if instance:getStage() == xi.nyzul.objective.ELIMINATE_ALL_ENEMIES then
+                instance:setLocalVar('Eliminate', instance:getLocalVar('Eliminate') + 1)
+            end
+        end
+
+        -- Spawn Gear-Type mobs.
+        if instance:getLocalVar('gearObjective') > 0 then
+            for i = xi.nyzul.floorEntities[17][1], xi.nyzul.floorEntities[17][2] do
+                sPoint    = math.random(1, #dTableSpawnPoint)
+                sPointX   = dTableSpawnPoint[sPoint][1]
+                sPointY   = dTableSpawnPoint[sPoint][2]
+                sPointZ   = dTableSpawnPoint[sPoint][3]
+                sPointRot = dTableSpawnPoint[sPoint][4]
+
+                instance:setLocalVar('gearPenalty', math.random(xi.nyzul.penalty.TIME, xi.nyzul.penalty.PATHOS))
+                GetMobByID(i, instance):setSpawn(sPointX, sPointY, sPointZ, sPointRot)
+                SpawnMob(i, instance)
+                table.remove(dTableSpawnPoint, sPoint)
+            end
+        end
+
+        -- Spawn fodder NM's.
+        local spawnedNMs = math.random(0, 4)
+
+        if spawnedNMs > 0 then
+            local floorSection   = math.floor(currentFloor / 20) + 1
+            local mobGroup       = xi.nyzul.oddFloorRandomNMs[floorSection]
+            local dTableFloorNMs = {}
+
+            -- Even floors.
+            if currentFloor % 2 == 0 then
+                mobGroup = xi.nyzul.evenFloorRandomNMs[floorSection]
+            end
+
+            for i = mobGroup[1], mobGroup[2] do
+                table.insert(dTableFloorNMs, i)
+            end
+
+            while spawnedNMs > 2 do
+                local index = math.random(1, #dTableFloorNMs)
+                sPoint      = math.random(1, #dTableSpawnPoint)
+                sPointX     = dTableSpawnPoint[sPoint][1]
+                sPointY     = dTableSpawnPoint[sPoint][2]
+                sPointZ     = dTableSpawnPoint[sPoint][3]
+                sPointRot   = dTableSpawnPoint[sPoint][4]
+
+                GetMobByID(dTableFloorNMs[index], instance):setSpawn(sPointX, sPointY, sPointZ, sPointRot)
+                SpawnMob(dTableFloorNMs[index], instance)
+
+                table.remove(dTableFloorNMs, index)
+                table.remove(dTableSpawnPoint, sPoint)
+
+                spawnedNMs = spawnedNMs - 1
 
                 if instance:getStage() == xi.nyzul.objective.ELIMINATE_ALL_ENEMIES then
-                    instance:setLocalVar("Eliminate", instance:getLocalVar("Eliminate") + 1)
+                    instance:setLocalVar('Eliminate', instance:getLocalVar('Eliminate') + 1)
                 end
             end
+        end
 
-            -- 2nd Rampart: 20% spawn rate
-            if math.random(0, 100) >= 20 then
-                local sPoint    = math.random(1, #spawnPoint)
-                local sPointX   = spawnPoint[sPoint][1]
-                local sPointY   = spawnPoint[sPoint][2]
-                local sPointZ   = spawnPoint[sPoint][3]
-                local sPointRot = spawnPoint[sPoint][4]
+        -- Spawn fodder regular mobs.
+        local mobFamily     = math.random(1, 16)
+        local enemyAmount   = math.random(6, 12)
+        local dTableEnemies = {}
 
-                GetMobByID(ID.mob[51].ARCHAIC_RAMPART2, instance):setSpawn(sPointX, sPointY, sPointZ, sPointRot)
-                SpawnMob(ID.mob[51].ARCHAIC_RAMPART2, instance)
-                table.remove(spawnPoint, sPoint)
+        for i = xi.nyzul.floorEntities[mobFamily][1], xi.nyzul.floorEntities[mobFamily][2] do
+            table.insert(dTableEnemies, i)
+        end
 
-                if instance:getStage() == xi.nyzul.objective.ELIMINATE_ALL_ENEMIES then
-                    instance:setLocalVar("Eliminate", instance:getLocalVar("Eliminate") + 1)
-                end
+        while enemyAmount > 0 do
+            local randomEnemy = math.random(1, #dTableEnemies)
+            local mobID       = dTableEnemies[randomEnemy]
+            sPoint            = math.random(1, #dTableSpawnPoint)
+            sPointX           = dTableSpawnPoint[sPoint][1]
+            sPointY           = dTableSpawnPoint[sPoint][2]
+            sPointZ           = dTableSpawnPoint[sPoint][3]
+            sPointRot         = dTableSpawnPoint[sPoint][4]
+
+            if instance:getStage() == xi.nyzul.objective.ELIMINATE_ALL_ENEMIES then
+                instance:setLocalVar('Eliminate', instance:getLocalVar('Eliminate') + 1)
+            elseif
+                instance:getStage() == xi.nyzul.objective.ELIMINATE_SPECIFIED_ENEMY and
+                instance:getLocalVar('Nyzul_Specified_Enemy') == 0
+            then
+                instance:setLocalVar('Nyzul_Specified_Enemy', mobID)
             end
 
-            -- Spawn Gears
-            if instance:getLocalVar("gearObjective") > 0 then
-                for i = xi.nyzul.floorEntities[17].start, xi.nyzul.floorEntities[17].stop do
-                    local sPoint    = math.random(1, #spawnPoint)
-                    local sPointX   = spawnPoint[sPoint][1]
-                    local sPointY   = spawnPoint[sPoint][2]
-                    local sPointZ   = spawnPoint[sPoint][3]
-                    local sPointRot = spawnPoint[sPoint][4]
+            GetMobByID(mobID, instance):setSpawn(sPointX, sPointY, sPointZ, sPointRot)
+            SpawnMob(mobID, instance)
 
-                    instance:setLocalVar("gearPenalty", math.random(xi.nyzul.penalty.TIME, xi.nyzul.penalty.PATHOS))
-                    GetMobByID(i, instance):setSpawn(sPointX, sPointY, sPointZ, sPointRot)
-                    SpawnMob(i, instance)
-                    table.remove(spawnPoint, sPoint)
-                end
-            end
+            -- Remove used up entries from dynamic tables.
+            table.remove(dTableEnemies, randomEnemy)
+            table.remove(dTableSpawnPoint, sPoint)
 
-            -- Trash NM's of floor
-            local spawnedNMs = math.random(0, 4)
-
-            if spawnedNMs > 0 then
-                local floorSection = math.floor(currentFloor / 20) + 1
-                local floorNMs = {}
-
-                local mobGroup = xi.nyzul.randomNMs.oddFloor[floorSection]
-                if currentFloor % 2 == 0 then
-                    mobGroup = xi.nyzul.randomNMs.evenFloor[floorSection]
-                end
-
-                for i = 1, #mobGroup do
-                    table.insert(floorNMs, mobGroup[i])
-                end
-
-                while spawnedNMs > 2 do
-                    local sPoint    = math.random(1, #spawnPoint)
-                    local sPointX   = spawnPoint[sPoint][1]
-                    local sPointY   = spawnPoint[sPoint][2]
-                    local sPointZ   = spawnPoint[sPoint][3]
-                    local sPointRot = spawnPoint[sPoint][4]
-                    local index = math.random(1, #floorNMs)
-
-                    GetMobByID(floorNMs[index], instance):setSpawn(sPointX, sPointY, sPointZ, sPointRot)
-                    SpawnMob(floorNMs[index], instance)
-
-                    table.remove(floorNMs, index)
-                    table.remove(spawnPoint, sPoint)
-
-                    spawnedNMs = spawnedNMs - 1
-
-                    if instance:getStage() == xi.nyzul.objective.ELIMINATE_ALL_ENEMIES then
-                        instance:setLocalVar("Eliminate", instance:getLocalVar("Eliminate") + 1)
-                    end
-                end
-            end
-
-            -- Add rest of mobs for all Objectives
-            local groupAmount = math.random(6, #xi.nyzul.floorEntities[mobFamily])
-            local enemyGroup  = xi.nyzul.floorEntities[mobFamily]
-            local enemies     = {}
-
-            for i = 1, #enemyGroup do
-                table.insert(enemies, enemyGroup[i])
-            end
-
-            while groupAmount > 0 do
-                local randomEnemy = math.random(1, #enemies)
-                local enemy       = enemies[randomEnemy]
-                local sPoint      = math.random(1, #spawnPoint)
-                local sPointX     = spawnPoint[sPoint][1]
-                local sPointY     = spawnPoint[sPoint][2]
-                local sPointZ     = spawnPoint[sPoint][3]
-                local sPointRot   = spawnPoint[sPoint][4]
-
-                if instance:getStage() == xi.nyzul.objective.ELIMINATE_ALL_ENEMIES then
-                    instance:setLocalVar("Eliminate", instance:getLocalVar("Eliminate") + 1)
-                elseif
-                    instance:getStage() == xi.nyzul.objective.ELIMINATE_SPECIFIED_ENEMY and
-                    instance:getLocalVar("Nyzul_Specified_Enemy") == 0
-                then
-                    instance:setLocalVar("Nyzul_Specified_Enemy", enemy)
-                end
-
-                GetMobByID(enemy, instance):setSpawn(sPointX, sPointY, sPointZ, sPointRot)
-                SpawnMob(enemy, instance)
-                table.remove(enemies, randomEnemy)
-                table.remove(spawnPoint, sPoint)
-
-                groupAmount = groupAmount - 1
-            end
+            -- Decrease loop.
+            enemyAmount = enemyAmount - 1
         end
     end
 end
@@ -411,7 +418,7 @@ instanceObject.afterInstanceRegister = function(player)
     player:addTempItem(xi.item.UNDERSEA_RUINS_FIREFLIES)
 end
 
--- Instance "tick"
+-- Instance 'tick'
 instanceObject.onInstanceTimeUpdate = function(instance, elapsed)
     xi.instance.updateInstanceTime(instance, elapsed)
 end
@@ -445,7 +452,7 @@ instanceObject.onEventUpdate = function(player, csid, option, npc)
     if csid == 95 then
         local instance = player:getInstance()
 
-        if instance:getLocalVar("runeHandler") == player:getID() then
+        if instance:getLocalVar('runeHandler') == player:getID() then
             pickSetPoint(instance)
         end
     end
@@ -460,11 +467,11 @@ instanceObject.onEventFinish = function(player, csid, option, npc)
             players:setPos(0, 0, 0, 0, xi.zone.ALZADAAL_UNDERSEA_RUINS)
         end
     elseif csid == 95 then
-        if instance:getLocalVar("runeHandler") == player:getID() then
+        if instance:getLocalVar('runeHandler') == player:getID() then
             pickMobs(instance)
             xi.nyzul.removePathos(instance)
             xi.nyzul.addFloorPathos(instance)
-            instance:setLocalVar("runeHandler", 0)
+            instance:setLocalVar('runeHandler', 0)
         end
     end
 end

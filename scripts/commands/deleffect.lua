@@ -2,23 +2,25 @@
 -- func: addeffect
 -- desc: Removes the given effect from the given player.
 -----------------------------------
-cmdprops =
+local commandObj = {}
+
+commandObj.cmdprops =
 {
     permission = 1,
-    parameters = "si"
+    parameters = 'si'
 }
 
-function error(player, msg)
+local function error(player, msg)
     player:PrintToPlayer(msg)
-    player:PrintToPlayer("!deleffect (player) <effect>")
+    player:PrintToPlayer('!deleffect (player) <effect>')
 end
 
-function onTrigger(player, arg1, arg2)
+commandObj.onTrigger = function(player, arg1, arg2)
     local targ
     local id
 
     if arg1 == nil then
-        error(player, "You must provide an effect ID.")
+        error(player, 'You must provide an effect ID.')
         return
     elseif arg2 == nil then
         targ = player
@@ -30,14 +32,14 @@ function onTrigger(player, arg1, arg2)
 
     -- validate target
     if targ == nil then
-        error(player, string.format("Player named '%s' not found!", arg1))
+        error(player, string.format('Player named "%s" not found!', arg1))
         return
     end
 
     -- validate effect
     id = tonumber(id) or xi.effect[string.upper(id)]
     if id == nil then
-        error(player, "Invalid effect.")
+        error(player, 'Invalid effect.')
         return
     elseif id == 0 then
         id = 1
@@ -46,6 +48,8 @@ function onTrigger(player, arg1, arg2)
     -- delete status effect
     targ:delStatusEffect(id)
     if targ:getID() ~= player:getID() then
-        player:PrintToPlayer(string.format("Removed effect %i from %s.", id, targ:getName()))
+        player:PrintToPlayer(string.format('Removed effect %i from %s.', id, targ:getName()))
     end
 end
+
+return commandObj

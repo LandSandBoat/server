@@ -41,7 +41,7 @@ end
 entity.onTrigger = function(player, npc)
     local allNewC2000 = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_ALL_NEW_C_2000)
     local aGreetingCardian = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.A_GREETING_CARDIAN)
-    local aGreetingCardianCS = player:getCharVar("AGreetingCardian_Event")
+    local aGreetingCardianCS = player:getCharVar('AGreetingCardian_Event')
     local legendaryPlanB = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.LEGENDARY_PLAN_B)
     local allNewC3000 = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_ALL_NEW_C_3000)
 

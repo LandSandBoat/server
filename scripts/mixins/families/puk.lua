@@ -1,16 +1,16 @@
 -- Puk family mixin
-require("scripts/globals/mixins")
+require('scripts/globals/mixins')
 -----------------------------------
 
 g_mixins = g_mixins or {}
 g_mixins.families = g_mixins.families or {}
 
 g_mixins.families.puk = function(mob)
-    mob:addListener("SPAWN", "PUK_SPAWN", function(puk)
+    mob:addListener('SPAWN', 'PUK_SPAWN', function(puk)
         puk:setMod(xi.mod.WIND_ABSORB, 100)
     end)
 
-    mob:addListener("TAKE_DAMAGE", "PUK_TAKE_DAMAGE", function(puk, amount, attacker, attackType, damageType)
+    mob:addListener('TAKE_DAMAGE', 'PUK_TAKE_DAMAGE', function(puk, amount, attacker, attackType, damageType)
         local elements =
         {
             { xi.damageType.FIRE,      xi.day.FIRESDAY },
@@ -31,7 +31,7 @@ g_mixins.families.puk = function(mob)
         end
     end)
 
-    mob:addListener("ROAM_TICK", "PUK_ROAM_TICK", function(puk)
+    mob:addListener('ROAM_TICK', 'PUK_ROAM_TICK', function(puk)
         if
             (VanadielDayOfTheWeek() == xi.day.WINDSDAY or
             puk:getWeather() == xi.weather.WIND or
@@ -49,7 +49,7 @@ g_mixins.families.puk = function(mob)
         end
     end)
 
-    mob:addListener("COMBAT_TICK", "PUK_COMBAT_TICK", function(puk)
+    mob:addListener('COMBAT_TICK', 'PUK_COMBAT_TICK', function(puk)
         if
             (VanadielDayOfTheWeek() == xi.day.WINDSDAY or
             puk:getWeather() == xi.weather.WIND or

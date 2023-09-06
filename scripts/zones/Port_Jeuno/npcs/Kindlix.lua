@@ -32,7 +32,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if  player:getCharVar("spokeKindlix") == 1 then
+    if  player:getCharVar('spokeKindlix') == 1 then
         player:startEvent(348)
     else
         player:showText(npc, ID.text.KINDLIX_SHOP_DIALOG)
@@ -46,7 +46,7 @@ end
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 348 and option == 0 then
         xi.shop.general(player, stock)
-        player:setCharVar("spokeKindlix", 0)
+        player:setCharVar('spokeKindlix', 0)
     end
 end
 

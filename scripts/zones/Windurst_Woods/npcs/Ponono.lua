@@ -18,26 +18,26 @@ entity.onTrade = function(player, npc, trade)
 
     if
         newRank > 9 and
-        player:getCharVar("ClothcraftExpertQuest") == 1 and
+        player:getCharVar('ClothcraftExpertQuest') == 1 and
         player:hasKeyItem(xi.keyItem.WAY_OF_THE_WEAVER)
     then
         if signed ~= 0 then
             player:setSkillRank(xi.skill.CLOTHCRAFT, newRank)
             player:startEvent(10012, 0, 0, 0, 0, newRank, 1)
-            player:setCharVar("ClothcraftExpertQuest", 0)
-            player:setLocalVar("ClothcraftTraded", 1)
+            player:setCharVar('ClothcraftExpertQuest', 0)
+            player:setLocalVar('ClothcraftTraded', 1)
         else
             player:startEvent(10012, 0, 0, 0, 0, newRank, 0)
         end
     elseif newRank ~= 0 and newRank <= 9 then
         player:setSkillRank(xi.skill.CLOTHCRAFT, newRank)
         player:startEvent(10012, 0, 0, 0, 0, newRank)
-        player:setLocalVar("ClothcraftTraded", 1)
-    elseif moralManifest == QUEST_ACCEPTED and player:getCharVar("moral") == 2 then
-        if npcUtil.tradeHas(trade, { 828, 830, { "gil", 10000 } }) then -- Trade Velvet Cloth, Rainbow Cloth and 10k
-            player:setCharVar("moral", 3)
+        player:setLocalVar('ClothcraftTraded', 1)
+    elseif moralManifest == QUEST_ACCEPTED and player:getCharVar('moral') == 2 then
+        if npcUtil.tradeHas(trade, { 828, 830, { 'gil', 10000 } }) then -- Trade Velvet Cloth, Rainbow Cloth and 10k
+            player:setCharVar('moral', 3)
             player:setLocalVar('moralZone', 1)
-            player:setCharVar("moralWait", getVanaMidnight())
+            player:setCharVar('moralWait', getVanaMidnight())
             player:startEvent(703)
         end
     end
@@ -58,7 +58,7 @@ entity.onTrigger = function(player, npc)
         return
     end
 
-    if player:getCharVar("ClothcraftExpertQuest") == 1 then
+    if player:getCharVar('ClothcraftExpertQuest') == 1 then
         if player:hasKeyItem(xi.keyItem.WAY_OF_THE_WEAVER) then
             expertQuestStatus = 600
         else
@@ -66,18 +66,18 @@ entity.onTrigger = function(player, npc)
         end
     end
 
-    if moralManifest == QUEST_ACCEPTED and player:getCharVar("moral") == 1 then
+    if moralManifest == QUEST_ACCEPTED and player:getCharVar('moral') == 1 then
         player:startEvent(700)
     elseif
         moralManifest == QUEST_COMPLETED or
         moralManifest == QUEST_ACCEPTED and
-        player:getCharVar("moral") >= 4
+        player:getCharVar('moral') >= 4
     then
         player:startEvent(704)
     elseif
-        player:getCharVar("moral") == 3 and
-        player:getLocalVar("moralZone") == 0 and
-        player:getCharVar("moralWait") <= os.time()
+        player:getCharVar('moral') == 3 and
+        player:getLocalVar('moralZone') == 0 and
+        player:getCharVar('moralWait') <= os.time()
     then
         player:startEvent(705)
     else
@@ -98,14 +98,14 @@ end
 
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 700 then
-        player:setCharVar("moral", 2)
+        player:setCharVar('moral', 2)
     elseif csid == 705 then
         if npcUtil.giveItem(player, xi.item.YAGUDO_HEADDRESS_CUTTING) then
-            player:setCharVar("moral", 4)
+            player:setCharVar('moral', 4)
         end
     elseif csid == 10011 and option == 2 then
         if xi.crafting.hasJoinedGuild(player, xi.crafting.guild.CLOTHCRAFT) then
-            player:setCharVar("ClothcraftExpertQuest", 1)
+            player:setCharVar('ClothcraftExpertQuest', 1)
         end
     elseif csid == 10011 and option == 1 then
         if player:getFreeSlotsCount() == 0 then
@@ -116,9 +116,9 @@ entity.onEventFinish = function(player, csid, option, npc)
             xi.crafting.signupGuild(player, xi.crafting.guild.CLOTHCRAFT)
         end
     else
-        if player:getLocalVar("ClothcraftTraded") == 1 then
+        if player:getLocalVar('ClothcraftTraded') == 1 then
             player:tradeComplete()
-            player:setLocalVar("ClothcraftTraded", 0)
+            player:setLocalVar('ClothcraftTraded', 0)
         end
     end
 

@@ -2,11 +2,12 @@
 -- func: zone
 -- desc: Teleports a player to the given zone.
 -----------------------------------
+local commandObj = {}
 
-cmdprops =
+commandObj.cmdprops =
 {
     permission = 1,
-    parameters = "b"
+    parameters = 'b'
 }
 
 -----------------------------------
@@ -275,9 +276,9 @@ local zoneList =
     { 0x14, 0x09, 288 }, -- Escha - Zi'Tah
 }
 
-function error(player, msg)
+local function error(player, msg)
     player:PrintToPlayer(msg)
-    player:PrintToPlayer("!zone <zone ID or autotranslate phrase>")
+    player:PrintToPlayer('!zone <zone ID or autotranslate phrase>')
 end
 
 local function getBytePos(s, needle)
@@ -294,7 +295,7 @@ end
 -- func: onTrigger
 -- desc: Called when this command is invoked.
 -----------------------------------
-function onTrigger(player, bytes)
+commandObj.onTrigger = function(player, bytes)
     local x = 0
     local y = 0
     local z = 0
@@ -302,7 +303,7 @@ function onTrigger(player, bytes)
     local zone
 
     if bytes == nil then
-        error(player, "You must provide a zone ID or autotranslate phrase.")
+        error(player, 'You must provide a zone ID or autotranslate phrase.')
         return
     end
 
@@ -326,14 +327,14 @@ function onTrigger(player, bytes)
         end
 
         if zone == nil then
-            error(player, "Auto-translated phrase is not a zone.")
+            error(player, 'Auto-translated phrase is not a zone.')
             return
         end
     else
         -- destination is a zone ID.
         zone = tonumber(bytes)
         if zone == nil or zone < 0 or zone >= xi.zone.MAX_ZONE then
-            error(player, "Invalid zone ID.")
+            error(player, 'Invalid zone ID.')
             return
         end
 
@@ -352,3 +353,5 @@ function onTrigger(player, bytes)
     -- send player to destination
     player:setPos(x, y, z, rot, zone)
 end
+
+return commandObj

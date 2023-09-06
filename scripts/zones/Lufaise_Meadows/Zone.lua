@@ -8,7 +8,7 @@ local zoneObject = {}
 zoneObject.onInitialize = function(zone)
     zone:registerTriggerArea(1, 179, -26, 327, 219, -18, 347)
 
-    SetServerVariable("realPadfoot", math.random(1, 5))
+    SetServerVariable('realPadfoot', math.random(1, 5))
     for _, v in pairs(ID.mob.PADFOOT) do
         SpawnMob(v)
     end
@@ -42,7 +42,7 @@ zoneObject.onTriggerAreaEnter = function(player, triggerArea)
     if
         triggerAreaID == 1 and
         player:getCurrentMission(xi.mission.log_id.COP) == xi.mission.id.cop.DAWN and
-        player:getCharVar("PromathiaStatus") == 6
+        player:getCharVar('PromathiaStatus') == 6
     then
         player:startEvent(116)
     end
@@ -56,7 +56,7 @@ end
 
 zoneObject.onEventFinish = function(player, csid, option, npc)
     if csid == 116 then
-        player:setCharVar("PromathiaStatus", 7)
+        player:setCharVar('PromathiaStatus', 7)
         player:addTitle(xi.title.BANISHER_OF_EMPTINESS)
     end
 end

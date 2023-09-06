@@ -2,19 +2,20 @@
 -- func: checkvar <varType> <varName>
 -- desc: checks player or server variable and returns result value.
 -----------------------------------
+local commandObj = {}
 
-cmdprops =
+commandObj.cmdprops =
 {
     permission = 1,
-    parameters = "ss"
+    parameters = 'ss'
 }
 
-function error(player, msg)
+local function error(player, msg)
     player:PrintToPlayer(msg)
-    player:PrintToPlayer("!checkvar { 'server', or player } <variable name>")
+    player:PrintToPlayer('!checkvar { \'server\', or player } <variable name>')
 end
 
-function onTrigger(player, arg1, arg2)
+commandObj.onTrigger = function(player, arg1, arg2)
     local targ
     local varName
 
@@ -40,7 +41,7 @@ function onTrigger(player, arg1, arg2)
             local target = targ
             targ = GetPlayerByName(targ)
             if targ == nil then
-                error(player, string.format("Player named '%s' not found!", target))
+                error(player, string.format('Player named "%s" not found!', target))
                 return
             end
         end
@@ -48,14 +49,16 @@ function onTrigger(player, arg1, arg2)
 
     -- validate varName
     if varName == nil then
-        error(player, "You must provide a variable name.")
+        error(player, 'You must provide a variable name.')
         return
     end
 
     -- show variable
-    if targ == "server" then
-        player:PrintToPlayer(string.format("Server variable '%s' : %u ", varName, GetServerVariable(varName)))
+    if targ == 'server' then
+        player:PrintToPlayer(string.format('Server variable \'%s\' : %u ', varName, GetServerVariable(varName)))
     else
-        player:PrintToPlayer(string.format("%s's variable '%s' : %u", targ:getName(), varName, targ:getCharVar(varName)))
+        player:PrintToPlayer(string.format('%s\'s variable \'%s\' : %u', targ:getName(), varName, targ:getCharVar(varName)))
     end
 end
+
+return commandObj

@@ -2,7 +2,7 @@
 -- Area: Meriphataud Mountains (119)
 --   NM: Coo Keja the Unseen
 -----------------------------------
-mixins = { require("scripts/mixins/job_special") }
+mixins = { require('scripts/mixins/job_special') }
 -----------------------------------
 local entity = {}
 

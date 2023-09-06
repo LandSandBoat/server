@@ -27,7 +27,7 @@ instanceObject.afterInstanceRegister = function(player)
     player:countdown(instance:getTimeLimit() * 60)
 end
 
--- Instance "tick"
+-- Instance 'tick'
 instanceObject.onInstanceTimeUpdate = function(instance, elapsed)
     --xi.instance.updateInstanceTime(instance, elapsed, ID.text)
 

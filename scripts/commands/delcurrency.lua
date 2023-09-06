@@ -2,19 +2,20 @@
 -- func: delcurrency <currency type> <amount> <target player>
 -- desc: Removes the specified currency from the player
 -----------------------------------
+local commandObj = {}
 
-cmdprops =
+commandObj.cmdprops =
 {
     permission = 1,
-    parameters = "sis"
+    parameters = 'sis'
 }
 
-function error(player, msg)
+local function error(player, msg)
     player:PrintToPlayer(msg)
-    player:PrintToPlayer("!delcurrency <currency type> <amount> (player)")
+    player:PrintToPlayer('!delcurrency <currency type> <amount> (player)')
 end
 
-function onTrigger(player, currency, amount, target)
+commandObj.onTrigger = function(player, currency, amount, target)
     -- validate target
     local targ
     if target == nil then
@@ -22,7 +23,7 @@ function onTrigger(player, currency, amount, target)
     else
         targ = GetPlayerByName(target)
         if targ == nil then
-            error(player, string.format("Player named '%s' not found!", target))
+            error(player, string.format('Player named "%s" not found!', target))
             return
         end
     end
@@ -30,14 +31,14 @@ function onTrigger(player, currency, amount, target)
     -- validate currency
     -- note: getCurrency does not ever return nil at the moment.  will work on this in future update.
     if currency == nil or targ:getCurrency(currency) == nil then
-        error(player, "Invalid currency type.")
+        error(player, 'Invalid currency type.')
         return
     end
 
     -- validate amount
     local currentAmount = targ:getCurrency(currency)
     if amount == nil or amount < 1 then
-        error(player, "Invalid amount.")
+        error(player, 'Invalid amount.')
         return
     end
 
@@ -48,5 +49,7 @@ function onTrigger(player, currency, amount, target)
     -- delete currency
     targ:delCurrency(currency, amount)
     local newAmount = targ:getCurrency(currency)
-    player:PrintToPlayer(string.format("%i %s was taken from %s, for a total of %i.", amount, currency, targ:getName(), newAmount))
+    player:PrintToPlayer(string.format('%i %s was taken from %s, for a total of %i.', amount, currency, targ:getName(), newAmount))
 end
+
+return commandObj

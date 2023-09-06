@@ -2,34 +2,36 @@
 -- func: changesjob
 -- desc: Changes the players current subjob.
 -----------------------------------
-cmdprops =
+local commandObj = {}
+
+commandObj.cmdprops =
 {
     permission = 1,
-    parameters = "si"
+    parameters = 'si'
 }
 
-function error(player, msg)
+local function error(player, msg)
     player:PrintToPlayer(msg)
-    player:PrintToPlayer("!changesjob <jobID> (level)")
+    player:PrintToPlayer('!changesjob <jobID> (level)')
 end
 
-function onTrigger(player, jobId, level)
+commandObj.onTrigger = function(player, jobId, level)
     -- validate jobId
     if jobId == nil then
-        error(player, "You must enter a job short-name, e.g. WAR, or its equivalent numeric ID.")
+        error(player, 'You must enter a job short-name, e.g. WAR, or its equivalent numeric ID.')
         return
     end
 
     jobId = tonumber(jobId) or xi.job[string.upper(jobId)]
     if jobId == nil or jobId <= 0 or jobId >= xi.MAX_JOB_TYPE then
-        error(player, "Invalid jobID.  Use job short name, e.g. WAR, or its equivalent numeric ID.")
+        error(player, 'Invalid jobID.  Use job short name, e.g. WAR, or its equivalent numeric ID.')
         return
     end
 
     -- validate level
     if level ~= nil then
         if level < 1 or level > 99 then
-            error(player, "Invalid level. Level must be between 1 and 99!")
+            error(player, 'Invalid level. Level must be between 1 and 99!')
             return
         end
     end
@@ -47,5 +49,7 @@ function onTrigger(player, jobId, level)
     end
 
     -- output new job to player
-    player:PrintToPlayer(string.format("You are now a %s%i/%s%i.", jobNameByNum[player:getMainJob()], player:getMainLvl(), jobNameByNum[player:getSubJob()], player:getSubLvl()))
+    player:PrintToPlayer(string.format('You are now a %s%i/%s%i.', jobNameByNum[player:getMainJob()], player:getMainLvl(), jobNameByNum[player:getSubJob()], player:getSubLvl()))
 end
+
+return commandObj

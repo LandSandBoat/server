@@ -2,7 +2,7 @@
 -- Area: Yhoator Jungle
 --   NM: Hoar-knuckled Rimberry
 -----------------------------------
-mixins = { require("scripts/mixins/families/tonberry") }
+mixins = { require('scripts/mixins/families/tonberry') }
 -----------------------------------
 local entity = {}
 

@@ -2,25 +2,25 @@
 -- func: setmissionstatus (player) (value) (log ID) (index)
 -- desc: Sets missionStatus for the given LogID and target Player
 -----------------------------------
-require("scripts/globals/missions")
 local logIdHelpers = require('scripts/globals/log_ids')
 -----------------------------------
+local commandObj = {}
 
-cmdprops =
+commandObj.cmdprops =
 {
     permission = 1,
-    parameters = "sisi"
+    parameters = 'sisi'
 }
 
-function error(player, msg)
+local function error(player, msg)
     player:PrintToPlayer(msg)
-    player:PrintToPlayer("!setmissionstatus (player) (value) (log ID) (index)")
+    player:PrintToPlayer('!setmissionstatus (player) (value) (log ID) (index)')
 end
 
-function onTrigger(player, target, value, logId, statusIndex)
+commandObj.onTrigger = function(player, target, value, logId, statusIndex)
     if statusIndex ~= nil then
         if statusIndex > 7 or statusIndex < 0 then
-            error(player, "Invalid index!")
+            error(player, 'Invalid index!')
             return
         end
     end
@@ -45,7 +45,7 @@ function onTrigger(player, target, value, logId, statusIndex)
     else
         targ = GetPlayerByName(target)
         if targ == nil then
-            error(player, string.format("Player named '%s' not found!", target))
+            error(player, string.format('Player named "%s" not found!', target))
             return
         end
     end
@@ -53,8 +53,10 @@ function onTrigger(player, target, value, logId, statusIndex)
     -- set mission
     targ:setMissionStatus(logId, value, statusIndex)
     if statusIndex then
-        player:PrintToPlayer(string.format("missionStatus for %s (%s index %s) set to %s", targ:getName(), logName, statusIndex, value))
+        player:PrintToPlayer(string.format('missionStatus for %s (%s index %s) set to %s', targ:getName(), logName, statusIndex, value))
     else
-        player:PrintToPlayer(string.format("missionStatus for %s (%s) set to %s", targ:getName(), logName, value))
+        player:PrintToPlayer(string.format('missionStatus for %s (%s) set to %s', targ:getName(), logName, value))
     end
 end
+
+return commandObj

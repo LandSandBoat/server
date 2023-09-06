@@ -148,7 +148,7 @@ quests.i_can_hear_a_rainbow.onEventUpdate = function(player)
         weather = xi.weather.NONE
     end
 
-    if utils.mask.isFull(player:getCharVar("I_CAN_HEAR_A_RAINBOW"), 7) then -- has collected all 7 colors?
+    if utils.mask.isFull(player:getCharVar('I_CAN_HEAR_A_RAINBOW'), 7) then -- has collected all 7 colors?
         player:updateEvent(0, 0, weather, 6)
     else
         player:updateEvent(0, 0, weather)

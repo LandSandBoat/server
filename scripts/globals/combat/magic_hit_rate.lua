@@ -1,8 +1,8 @@
 -----------------------------------
 -- Global file for magic based skills magic hit rate.
 -----------------------------------
-require("scripts/globals/combat/element_tables")
-require("scripts/globals/combat/level_correction")
+require('scripts/globals/combat/element_tables')
+require('scripts/globals/combat/level_correction')
 -----------------------------------
 xi = xi or {}
 xi.combat = xi.combat or {}
@@ -328,8 +328,8 @@ local resistRankMultiplier =
     [ 7] = 1.70065,
     [ 8] = 2.141,
     [ 9] = 2.2,
-    [10] = 2.275, -- Impossible to test since "Magic Hit Rate" is floored to 5% at this point.
-    [11] = 2.35,  -- Impossible to test since "Magic Hit Rate" is floored to 5% at this point.
+    [10] = 2.275, -- Impossible to test since 'Magic Hit Rate' is floored to 5% at this point.
+    [11] = 2.35,  -- Impossible to test since 'Magic Hit Rate' is floored to 5% at this point.
 }
 
 xi.combat.magicHitRate.calculateTargetMagicEvasion = function(actor, target, spellElement, isEnfeeble, mEvaMod, rankModifier)
@@ -393,7 +393,7 @@ xi.combat.magicHitRate.calculateResistRate = function(actor, target, skillType, 
     local targetResistRank = target:getMod(xi.combat.element.resistRankMod[spellElement])
 
     ----------------------------------------
-    -- Handle "Magic Shield" status effect.
+    -- Handle 'Magic Shield' status effect.
     ----------------------------------------
     if target:hasStatusEffect(xi.effect.MAGIC_SHIELD, 0) then
         return targetResistRate
@@ -431,7 +431,7 @@ xi.combat.magicHitRate.calculateResistRate = function(actor, target, skillType, 
     local resistTier = 0
     local randomVar  = math.random()
 
-    -- NOTE: Elemental magic evasion "Boons".
+    -- NOTE: Elemental magic evasion 'Boons'.
     -- According to wiki, 1 positive point in the spell element MEVA allows for an additional tier. This would be tier 3, not the resistance rank tier.
     -- However, it also states that a negative value will also prevent full resists, which is redundant. We already wouldnt be eligible for it.
 

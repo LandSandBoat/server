@@ -2,22 +2,23 @@
 -- func: messagebasic
 -- desc: Injects a message basic packet.
 -----------------------------------
+local commandObj = {}
 
-cmdprops =
+commandObj.cmdprops =
 {
     permission = 1,
-    parameters = "iii"
+    parameters = 'iii'
 }
 
-function error(player, msg)
+local function error(player, msg)
     player:PrintToPlayer(msg)
-    player:PrintToPlayer("!messagebasic <message ID> (param1) (param2)")
+    player:PrintToPlayer('!messagebasic <message ID> (param1) (param2)')
 end
 
-function onTrigger(player, msgId, param1, param2)
+commandObj.onTrigger = function(player, msgId, param1, param2)
     -- validate msgId
     if msgId == nil then
-        error(player, "You must provide a message ID.")
+        error(player, 'You must provide a message ID.')
         return
     end
 
@@ -29,3 +30,5 @@ function onTrigger(player, msgId, param1, param2)
     -- inject message packet
     player:messageBasic(msgId, param1, param2, target)
 end
+
+return commandObj

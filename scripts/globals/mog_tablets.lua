@@ -121,10 +121,10 @@ end
 
 xi.mogTablet.onZoneTick = function(zone)
     -- local now = os.clock()
-    -- local lastCalled = zone:getLocalVar("MogTabletTick")
+    -- local lastCalled = zone:getLocalVar('MogTabletTick')
     -- Every 10s, rather than every tick
     -- if now > lastCalled + 10 then
-    --     local tablets = zone:queryEntitiesByName("Mog-Tablet")
+    --     local tablets = zone:queryEntitiesByName('Mog-Tablet')
     --     for _, tablet in pairs(tablets) do
     --         for _, player in pairs(zone:getPlayers()) do
     --             -- Check their distance from the tablet(s) in the zone to see if we should reveal it (87')
@@ -133,7 +133,7 @@ xi.mogTablet.onZoneTick = function(zone)
     --             end
     --         end
     --     end
-    --     zone:setLocalVar("MogTabletTick", now)
+    --     zone:setLocalVar('MogTabletTick', now)
     -- end
 end
 
@@ -142,7 +142,7 @@ xi.mogTablet.hideAllTablets = function()
         SendLuaFuncStringToZone(zoneId, string.format([[
             local zoneId = %i
             local zone = GetZone(zoneId)
-            local results = zone:queryEntitiesByName("Mog-Tablet")
+            local results = zone:queryEntitiesByName('Mog-Tablet')
             for _, entity in pairs(results) do
                 entity:setStatus(xi.status.DISAPPEAR)
             end
@@ -178,19 +178,19 @@ xi.mogTablet.tabletFoundAnnouncement = function(player)
 end
 
 xi.mogTablet.tabletOnTrigger = function(player, npc)
-    local interactedWith = npc:getLocalVar("interactedWith")
+    local interactedWith = npc:getLocalVar('interactedWith')
     if interactedWith == 1 then
         local ID = zones[player:getZoneID()]
         player:messageSpecial(ID.text.YOU_RECOVERED_MOG_TABLET)
-        player:setCharVar("[MOGTABLET]Found", 1)
+        player:setCharVar('[MOGTABLET]Found', 1)
 
         xi.mogTablet.tabletFoundAnnouncement(player)
 
         -- TODO: Update server var for this tablet so it can be
         -- tracked by the Moogle
 
-        npc:setLocalVar("interactedWith", 1)
-        npc:setAnimationSub(5) -- Play "flying away" animation
+        npc:setLocalVar('interactedWith', 1)
+        npc:setAnimationSub(5) -- Play 'flying away' animation
         npc:timer(5000, function(npcArg)
             npcArg:setStatus(xi.status.DISAPPEAR)
             npcArg:setAnimationSub(6) -- Reset animation
@@ -218,7 +218,7 @@ xi.mogTablet.moogleOnTrigger = function(player, npc)
 end
 
 xi.mogTablet.moogleOnEventUpdate = function(player, csid, option, npc)
-    -- print("update", csid, option)
+    -- print('update', csid, option)
     -- TODO: Check server vars
 
     local numCollected = 11
@@ -266,13 +266,13 @@ xi.mogTablet.moogleOnEventUpdate = function(player, csid, option, npc)
         -- Use zoneId to lookup
 
         -- Deliver results to player
-        -- player:updateEventString("Test")
+        -- player:updateEventString('Test')
         -- player:messageSpecial(14331, xi.mogTablet.tablets.CHARITY)
     end
 end
 
 xi.mogTablet.moogleOnEventFinish = function(player, csid, option, npc)
-    -- print("finish", csid, option)
+    -- print('finish', csid, option)
 
     -- Hand out prizes
     if csid == 10111 then

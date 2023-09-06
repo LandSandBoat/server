@@ -24,7 +24,7 @@ entity.onTimeTrigger = function(npc, triggerID)
     local bridge = GetNPCByID(npc:getID() - 2)
 
     if npc == nil or upperDoor == nil or bridge == nil then
-        error("Drawbridge NPC failure")
+        error('Drawbridge NPC failure')
         return
     end
 

@@ -4,14 +4,14 @@
 -----------------------------------
 mixins =
 {
-    require("scripts/mixins/dynamis_dreamland"),
-    require("scripts/mixins/families/uragnite"),
+    require('scripts/mixins/dynamis_dreamland'),
+    require('scripts/mixins/families/uragnite'),
 }
 -----------------------------------
 local entity = {}
 
 entity.onMobSpawn = function(mob)
-    mob:setLocalVar("dynamis_currency", 1455)
+    mob:setLocalVar('dynamis_currency', 1455)
 end
 
 entity.onMobDeath = function(mob, player, optParams)

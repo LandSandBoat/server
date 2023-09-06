@@ -16,7 +16,7 @@ end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local power   = 5
-    local realDmg = power * target:getCharVar("EVERYONES_GRUDGE_KILLS") -- Damage is 5 times the amount you have killed
+    local realDmg = power * target:getCharVar('EVERYONES_GRUDGE_KILLS') -- Damage is 5 times the amount you have killed
 
     if target:getID() > 100000 then
         realDmg = power * math.random(30, 100)

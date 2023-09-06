@@ -18,10 +18,10 @@ spellObject.onSpellCast = function(caster, target, spell)
     if target:isPC() then
         target:sendRaise(4)
     else
-        if target:getName() == "Prishe" then
+        if target:getName() == 'Prishe' then
             -- CoP 8-4 Prishe
-            target:setLocalVar("Raise", 1)
-            target:entityAnimationPacket("sp00")
+            target:setLocalVar('Raise', 1)
+            target:entityAnimationPacket('sp00')
             target:addHP(target:getMaxHP())
             target:addMP(target:getMaxMP())
         end

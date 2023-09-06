@@ -2,7 +2,7 @@
 -- Area: Temenos Northern Tower
 --  Mob: Kindred Summoner
 -----------------------------------
-mixins = { require("scripts/mixins/job_special") }
+mixins = { require('scripts/mixins/job_special') }
 -----------------------------------
 local entity = {}
 

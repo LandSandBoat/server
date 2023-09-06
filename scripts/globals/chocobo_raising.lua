@@ -1,6 +1,6 @@
 -----------------------------------
 -- Chocobo Raising
--- Dedicated to "Friend" the Chocobo. RIP.
+-- Dedicated to 'Friend' the Chocobo. RIP.
 --
 -- http://www.playonline.com/pcd/update/ff11us/20060822VOL2B1/detail.html
 -- https://ffxiclopedia.fandom.com/wiki/Category:Chocobo_Raising
@@ -28,8 +28,8 @@
 -- CHOCOBO_EGG_A_LITTLE_WARM : !additem 2318
 -- CHOCOBO_EGG_SOMEWHAT_WARM : !additem 2319
 -----------------------------------
-require("scripts/globals/chocobo_names")
-require("scripts/globals/utils")
+require('scripts/globals/chocobo_names')
+require('scripts/globals/utils')
 -----------------------------------
 xi = xi or {}
 xi.chocoboRaising = xi.chocoboRaising or {}
@@ -43,18 +43,22 @@ local debug = utils.getDebugPlayerPrinter(xi.settings.main.DEBUG_CHOCOBO_RAISING
 
 -- Length of a day, in seconds (default is 1x day Earth time, in seconds)
 -- Other reasonable settings:
--- One Vana'diel day: 3456 seconds - 57 minutes, 36 seconds Earth time (1/25 of one Earth day)
+-- One Earth day: 86400 seconds (default)
 -- One Vana'diel week: 27648 seconds - 7 hours, 40 minutes, 48 seconds Earth time
+-- One Vana'diel day: 3456 seconds - 57 minutes, 36 seconds Earth time (1/25 of one Earth day)
 xi.chocoboRaising.dayLength = 86400
 
 xi.chocoboRaising.daysToChick      = 4
 xi.chocoboRaising.daysToAdolescent = 19
 xi.chocoboRaising.daysToAdult1     = 29
-xi.chocoboRaising.daysToAdult2     = 43 -- "You've done a great job raising this chocobo. Now is the best time to improve its attributes."
-xi.chocoboRaising.daysToAdult3     = 64 -- "Chocobo's growth seems to have stabilized. The animal has developed quite a distinguished air."
+xi.chocoboRaising.daysToAdult2     = 43 -- 'You've done a great job raising this chocobo. Now is the best time to improve its attributes.'
+xi.chocoboRaising.daysToAdult3     = 64 -- 'Chocobo's growth seems to have stabilized. The animal has developed quite a distinguished air.'
 xi.chocoboRaising.daysToAdult4     = 129 -- Retirement
 
+-- TODO: Make sure all settings are plainly described.
 -- TODO: Add settings to disable retirement, with/without infinite stat growth.
+-- xi.settings.main.CHOCOBO_RAISING_DISABLE_RETIREMENT  = false, -- true/false.
+-- xi.settings.main.CHOCOBO_RAISING_STAT_GROWTH_CAP     = 512,   -- int.
 
 -- Maximum randomness applied to walkEnergyAmount for a given walk
 local walkEnergyRandomness = 5
@@ -68,6 +72,91 @@ local walkEventChance = 33
 -- The amount of energy taken by: watch over chocobo
 local watchOverEnergy = 5
 
+-- https://www.bg-wiki.com/ffxi/Category:Chocobo_Raising
+-- Rental chocobos are bred for speed and endurance, so they are automatically at the capped mount speed (+100% of base movement speed) and riding time.
+-- Personal chocobos will need the highest Speed rating and the ability Gallop in order to move at the same speed.
+-- F is the base grade (0 ranks), up through A to S to SS (+7 ranks)
+-- Max ranks is +9: with skills and relevant silks.
+
+-- Chocobo Speed Ratings
+xi.chocoboRaising.ridingSpeedBase    =  80
+xi.chocoboRaising.ridingSpeedPerRank = 2.5
+xi.chocoboRaising.ridingSpeedCap     = 100
+-- Ability: Gallop adds 1 rank
+-- Purple Race Silks add 1 rank
+-- Leads to absolute max of: 80 + (2.5 * 9): 102.5 -> clamped to 100
+
+-- Chocobo Endurance Ratings (minutes)
+xi.chocoboRaising.ridingTimeBase    = 17
+xi.chocoboRaising.ridingTimePerRank =  4
+xi.chocoboRaising.ridingTimeCap     = 45
+-- Ability: Canter adds 1 rank
+-- Red Race Silks add 1 rank
+-- Leads to absolute max of: 17 + (4 * 9): 53 -> clamped to 45
+
+-- These act as multipliers for adding per-rank bonuses to things.
+-- F gives base + (0 * bonus)
+-- SS gives base + (7 * bonus)
+local skillRanks =
+{
+    F_POOR                = 0,
+    E_SUBSTANDARD         = 1,
+    D_A_BIT_DEFICIENT     = 2,
+    C_AVERAGE             = 3,
+    B_BETTER_THAN_AVERAGE = 4,
+    A_IMPRESSIVE          = 5,
+    S_OUTSTANDING         = 6,
+    SS_FIRST_CLASS        = 7,
+}
+
+local skillRankBoundaries =
+{
+    F_POOR                = 31,
+    E_SUBSTANDARD         = 63,
+    D_A_BIT_DEFICIENT     = 95,
+    C_AVERAGE             = 127,
+    B_BETTER_THAN_AVERAGE = 159,
+    A_IMPRESSIVE          = 191,
+    S_OUTSTANDING         = 223,
+    SS_FIRST_CLASS        = 255,
+}
+
+local numberToRank = function(skill)
+    local rank = skillRanks.F_POOR
+
+    -- Since pairs isn't guaranteed to iterate in order, we have
+    -- do check against ranks and see if things are greater than
+    -- our best-found rank
+    for idx, boundary in pairs(skillRankBoundaries) do
+        if skill >= boundary and skillRanks[idx] > rank then
+            rank = skillRanks[idx]
+        end
+    end
+
+    return rank
+end
+
+xi.chocoboRaising.getPlayerRidingSpeedAndTime = function(player)
+    local baseSpeed = xi.chocoboRaising.ridingSpeedBase
+    local baseTime  = xi.chocoboRaising.ridingTimeBase
+
+    -- TODO: This should be looking up your registered chocobo, not your
+    --     : current raising chocobo.
+    local chocoState = player:getChocoboRaisingInfo()
+    if chocoState == nil then
+        -- TODO: Log
+        return baseSpeed, baseTime
+    end
+
+    local strRank = numberToRank(chocoState.strength)
+    local endRank = numberToRank(chocoState.endurance)
+
+    local outSpeed = utils.clamp(baseSpeed + (strRank * xi.chocoboRaising.ridingSpeedPerRank), 0, xi.chocoboRaising.ridingSpeedCap)
+    local outTime  = utils.clamp(baseTime  + (endRank * xi.chocoboRaising.ridingTimePerRank), 0, xi.chocoboRaising.ridingTimeCap)
+
+    return outSpeed, outTime
+end
+
 -- NOTE: These are animation effects, so you can use warp etc.
 local glow =
 {
@@ -80,37 +169,178 @@ local glow =
     LIGHT_BLUE = 100,
 }
 
--- TODO: Condition enum
+local conditions =
+{
+    -- Negative
+    ILL      = 0,
+    VERY_ILL = 1,
+    SICK     = 2,
+    INJURED  = 3,
+    SPOILED  = 4,
+    BORED    = 5,
+    LOVESICK = 6,
+    RUN_AWAY = 7,
+
+    -- Positive
+    HIGH_SPIRITS       = 8,
+    PERKY              = 9,
+    EXTREMELY_HAPPY    = 10,
+    FULL_OF_ENERGY_1   = 11,
+    FULL_OF_ENERGY_2   = 12,
+    BRIGHT_AND_FOCUSED = 13,
+}
+
+local hasCondition = function(chocoState)
+    return chocoState.conditions > 0
+end
+
+local getCondition = function(chocoState, condition)
+    return utils.mask.getBit(chocoState.conditions, condition)
+end
+
+local setCondition = function(chocoState, condition, value)
+    chocoState.conditions = utils.mask.setBit(chocoState.conditions, condition, value)
+end
+
+local conditionsHealedByItems =
+{
+    [conditions.ILL] =
+    {
+        xi.item.CLUMP_OF_TOKOPEKKO_WILDGRASS,
+        xi.item.CELERITY_SALAD,
+    },
+    [conditions.VERY_ILL] =
+    {
+        xi.item.CLUMP_OF_TOKOPEKKO_WILDGRASS,
+        xi.item.CELERITY_SALAD,
+    },
+    [conditions.SICK] =
+    {
+        xi.item.CLUMP_OF_GARIDAV_WILDGRASS,
+        xi.item.CELERITY_SALAD,
+    },
+    [conditions.INJURED] =
+    {
+        xi.item.CLUMP_OF_GAUSEBIT_WILDGRASS,
+        xi.item.CELERITY_SALAD,
+    },
+    [conditions.SPOILED] =
+    {
+        xi.item.CELERITY_SALAD,
+    },
+    [conditions.BORED] =
+    {
+        xi.item.CELERITY_SALAD,
+    },
+    [conditions.LOVESICK] =
+    {
+        xi.item.CELERITY_SALAD,
+    },
+}
+utils.unused(conditionsHealedByItems)
+
+local carePlans =
+{
+    BASIC_CARE               = 0,
+    RESTING                  = 1,
+    TAKING_A_WALK            = 2,
+    LISTENING_TO_MUSIC       = 3,
+    EXERCISING_ALONE         = 4,
+    EXCERCISING_IN_A_GROUP   = 5,
+    PLAYING_WITH_CHILDREN    = 6,
+    PLAYING_WITH_CHOCOBOS    = 7,
+    CARRYING_PACKAGES        = 8,
+    EXHIBITING_TO_THE_PUBLIC = 9,
+    DELIVERING_MESSAGES      = 10,
+    DIGGING_FOR_TREASURE     = 11,
+    ACTING_IN_A_PLAY         = 12,
+}
+
+-- http://www.playonline.com/pcd/update/ff11us/20060822VOL2B1/table03en.jpg
+-- minor: 1, moderate: 5, major: 10
+-- strength, endurance, discernment, receptivity, affection, energy, payment
+local carePlanData =
+{
+    [carePlans.BASIC_CARE              ] = {  1,  1,  1,  1,  -1,  -1, nil },
+    [carePlans.RESTING                 ] = {  0,  0,  0,  0,   0,   1, nil },
+    [carePlans.TAKING_A_WALK           ] = {  1,  1, -1, -1,  -1,  -1, nil },
+    [carePlans.LISTENING_TO_MUSIC      ] = { -1, -1,  1,  1,  -1,  -1, nil },
+    [carePlans.EXERCISING_ALONE        ] = {  1,  0, -1, -1,  -1,  -1, nil },
+    [carePlans.EXCERCISING_IN_A_GROUP  ] = {  0,  1, -1, -1,  -1,  -1, nil },
+    [carePlans.PLAYING_WITH_CHILDREN   ] = { -1, -1,  1,  0,  -1,  -1, nil },
+    [carePlans.PLAYING_WITH_CHOCOBOS   ] = { -1, -1,  0,  1,  -1,  -1, nil },
+    [carePlans.CARRYING_PACKAGES       ] = {  5,  5, -5, -5, -10,  -5, 100 },
+    [carePlans.EXHIBITING_TO_THE_PUBLIC] = { -5, -5,  5,  5, -10,  -5, 100 },
+    [carePlans.DELIVERING_MESSAGES     ] = { 10,  0,  0, -5, -10, -10, 100 },
+    [carePlans.DIGGING_FOR_TREASURE    ] = {  0, -5, 10,  0, -10, -10, 100 },
+    [carePlans.ACTING_IN_A_PLAY        ] = { -5,  0,  0, 10, -10, -10, 100 },
+}
+
+local handleStatChange = function(stat, change, max)
+    if change > 0 then
+        change = change * xi.settings.main.CHOCOBO_RAISING_STAT_POS_MULTIPLIER
+    elseif change < 0 then
+        change = change * xi.settings.main.CHOCOBO_RAISING_STAT_NEG_MULTIPLIER
+    end
+
+    -- TODO: Enum for which stat is changing?
+    -- TODO: Handle Green Racing Silks here for energy?
+    -- https://ffxiclopedia.fandom.com/wiki/Green_Race_Silks
+
+    stat = utils.clamp(stat + change, 0, max)
+
+    return stat
+end
+
+local handleCarePlan = function(player, chocoState, carePlan)
+    -- TODO: Take in a multiplier to account for merged time ranges
+
+    chocoState.strength    = handleStatChange(chocoState.strength   , carePlanData[carePlan][1], 255)
+    chocoState.endurance   = handleStatChange(chocoState.endurance  , carePlanData[carePlan][2], 255)
+    chocoState.discernment = handleStatChange(chocoState.discernment, carePlanData[carePlan][3], 255)
+    chocoState.receptivity = handleStatChange(chocoState.receptivity, carePlanData[carePlan][4], 255)
+    chocoState.affection   = handleStatChange(chocoState.affection  , carePlanData[carePlan][5], 255)
+    chocoState.energy      = handleStatChange(chocoState.energy     , carePlanData[carePlan][6], 100)
+
+    local payment = carePlanData[carePlan][7]
+    if payment then
+        payment = payment * xi.settings.main.CHOCOBO_RAISING_GIL_MULTIPLIER
+        debug(string.format('Care Plan Payment: %d', payment))
+
+        -- TODO: Handle payment
+    end
+end
+
 -- TODO: Make sure stat changes are clamped 0-255!
 
 local validFoods =
 {
---  [itemId]                                = { hunger, affection, energy, strength, endurance, discernment, receptivity, randomAttribute, healsCondition, glow }
-    [xi.item.BUNCH_OF_GYSAHL_GREENS]       = { 25, 10,   0, 0, 0, 0, 0, 0, 0, glow.RED    },
-    [xi.item.BUNCH_OF_SHARUG_GREENS]       = { 25, 10,   0, 0, 0, 0, 0, 0, 0, glow.RED    },
-    [xi.item.BUNCH_OF_AZOUPH_GREENS]       = { 25, 10,   0, 0, 0, 0, 0, 0, 0, glow.RED    },
-    [xi.item.CARROT_PASTE]                 = { 25, 10,   0, 0, 0, 0, 0, 0, 0, glow.RED    },
-    [xi.item.HERB_PASTE]                   = { 25, 10,   0, 0, 0, 0, 0, 0, 0, glow.RED    },
-    [xi.item.VEGETABLE_PASTE]              = { 25, 10,   0, 0, 0, 0, 0, 0, 0, glow.RED    },
-    [xi.item.WORM_PASTE]                   = { 25, 10,   0, 0, 0, 0, 0, 0, 0, glow.RED    },
-    [xi.item.VOMP_CARROT]                  = { 25, 10,   0, 0, 0, 0, 0, 0, 0, glow.RED    },
-    [xi.item.SAN_DORIAN_CARROT]            = { 25, 10,   0, 0, 0, 0, 0, 0, 0, glow.RED    },
-    [xi.item.ZEGHAM_CARROT]                = { 25, 10,   0, 0, 0, 0, 0, 0, 0, glow.BLUE   },
-    [xi.item.CLUMP_OF_GAUSEBIT_WILDGRASS]  = { 25, 10,   0, 0, 0, 0, 0, 0, 0, glow.YELLOW },
-    [xi.item.CLUMP_OF_GARIDAV_WILDGRASS]   = { 25, 10,   0, 0, 0, 0, 0, 0, 0, glow.YELLOW },
-    [xi.item.CLUMP_OF_TOKOPEKKO_WILDGRASS] = { 25, 10,   0, 0, 0, 0, 0, 0, 0, glow.YELLOW },
-    [xi.item.CHOCOLIXIR]                   = { 50,  0, 100, 0, 0, 0, 0, 0, 0, glow.YELLOW },
-    [xi.item.HI_CHOCOLIXIR]                = { 25,  0, 100, 0, 0, 0, 0, 0, 0, glow.YELLOW },
-    [xi.item.CHOCOTONIC]                   = { 25, 10,   0, 0, 0, 0, 0, 0, 0, glow.YELLOW },
-    [xi.item.CUPID_WORM]                   = { 25, 10,   0, 0, 0, 0, 0, 0, 0, glow.BLUE   },
-    [xi.item.GREGARIOUS_WORM]              = { 25, 10,   0, 0, 0, 0, 0, 0, 0, glow.YELLOW },
-    [xi.item.PARASITE_WORM]                = { 25, 10,   0, 0, 0, 0, 0, 0, 0, glow.BLUE   },
-    [xi.item.TORNADO_SALAD]                = { 25, 10,   0, 0, 0, 0, 0, 0, 0, glow.GREEN  },
-    [xi.item.CELERITY_SALAD]               = { 25, 10,   0, 0, 0, 0, 0, 0, 0, glow.GREEN  },
-    [xi.item.LETHE_POTAGE]                 = { 25, 10,   0, 0, 0, 0, 0, 0, 0, glow.GREEN  },
-    [xi.item.LETHE_CONSOMME]               = { 25, 10,   0, 0, 0, 0, 0, 0, 0, glow.GREEN  },
-    [xi.item.LA_THEINE_MILLET]             = { 25, 10,   0, 0, 0, 0, 0, 0, 0, glow.GREEN  },
---  [xi.item.SCROLL_OF_INSTANT_WARP]       = { 0, 0, 0, 0, 0, 0, 0, 0, 0, glow.WARP },
+--  [itemId]                                = { hunger, affection, energy, strength, endurance, discernment, receptivity, randomAttribute, glow }
+    [xi.item.BUNCH_OF_GYSAHL_GREENS]       = { 25, 10,   0, 0, 0, 0, 0, 0, glow.RED    },
+    [xi.item.BUNCH_OF_SHARUG_GREENS]       = { 25, 10,   0, 0, 0, 0, 0, 0, glow.RED    },
+    [xi.item.BUNCH_OF_AZOUPH_GREENS]       = { 25, 10,   0, 0, 0, 0, 0, 0, glow.RED    },
+    [xi.item.CARROT_PASTE]                 = { 25, 10,   0, 0, 0, 0, 0, 0, glow.RED    },
+    [xi.item.HERB_PASTE]                   = { 25, 10,   0, 0, 0, 0, 0, 0, glow.RED    },
+    [xi.item.VEGETABLE_PASTE]              = { 25, 10,   0, 0, 0, 0, 0, 0, glow.RED    },
+    [xi.item.WORM_PASTE]                   = { 25, 10,   0, 0, 0, 0, 0, 0, glow.RED    },
+    [xi.item.VOMP_CARROT]                  = { 25, 10,   0, 0, 0, 0, 0, 0, glow.RED    },
+    [xi.item.SAN_DORIAN_CARROT]            = { 25, 10,   0, 0, 0, 0, 0, 0, glow.RED    },
+    [xi.item.ZEGHAM_CARROT]                = { 25, 10,   0, 0, 0, 0, 0, 0, glow.BLUE   },
+    [xi.item.CLUMP_OF_GAUSEBIT_WILDGRASS]  = { 25, 10,   0, 0, 0, 0, 0, 0, glow.YELLOW },
+    [xi.item.CLUMP_OF_GARIDAV_WILDGRASS]   = { 25, 10,   0, 0, 0, 0, 0, 0, glow.YELLOW },
+    [xi.item.CLUMP_OF_TOKOPEKKO_WILDGRASS] = { 25, 10,   0, 0, 0, 0, 0, 0, glow.YELLOW },
+    [xi.item.CHOCOLIXIR]                   = { 50,  0, 100, 0, 0, 0, 0, 0, glow.YELLOW },
+    [xi.item.HI_CHOCOLIXIR]                = { 25,  0, 100, 0, 0, 0, 0, 0, glow.YELLOW },
+    [xi.item.CHOCOTONIC]                   = { 25, 10,   0, 0, 0, 0, 0, 0, glow.YELLOW },
+    [xi.item.CUPID_WORM]                   = { 25, 10,   0, 0, 0, 0, 0, 0, glow.BLUE   },
+    [xi.item.GREGARIOUS_WORM]              = { 25, 10,   0, 0, 0, 0, 0, 0, glow.YELLOW },
+    [xi.item.PARASITE_WORM]                = { 25, 10,   0, 0, 0, 0, 0, 0, glow.BLUE   },
+    [xi.item.TORNADO_SALAD]                = { 25, 10,   0, 0, 0, 0, 0, 0, glow.GREEN  },
+    [xi.item.CELERITY_SALAD]               = { 25, 10,   0, 0, 0, 0, 0, 0, glow.GREEN  },
+    [xi.item.LETHE_POTAGE]                 = { 25, 10,   0, 0, 0, 0, 0, 0, glow.GREEN  },
+    [xi.item.LETHE_CONSOMME]               = { 25, 10,   0, 0, 0, 0, 0, 0, glow.GREEN  },
+    [xi.item.LA_THEINE_MILLET]             = { 25, 10,   0, 0, 0, 0, 0, 0, glow.GREEN  },
+--  [xi.item.SCROLL_OF_INSTANT_WARP]       = { 0, 0, 0, 0, 0, 0, 0, 0, glow.WARP },
 }
 
 -- Items that can be found on a walk in a certain area
@@ -392,6 +622,8 @@ local hunger =
 }
 utils.unused(hunger)
 
+-- TODO: Combine carePlanData with this cutscenes table, so cutscenes have associated
+--     : stat changes that can be looked up and applied.
 local cutscenes =
 {
     -- Each cutscene needs this offset added to them before they can be used,
@@ -434,6 +666,7 @@ local cutscenes =
     -- 48: Happy to see you
     INTERESTED_IN_YOUR_STORY = 50,
     HANGS_HEAD_IN_SHAME      = 51, -- Hangs its head in shame
+    COMPETE_WITH_OTHERS      = 52,
     HAVENT_SEEN_YOU          = 53, -- Haven't seen you around, chocobo is sleeping (dispose of white handkerchief)
     -- 54: Accept white handkerchief
     CRYING_AT_NIGHT = 69, -- White handkerchief
@@ -495,8 +728,8 @@ xi.chocoboRaising.newChocobo = function(player, egg)
         Ability: None
     ]]
 
-    newChoco.first_name = "Chocobo"
-    newChoco.last_name = "Chocobo"
+    newChoco.first_name = 'Chocobo'
+    newChoco.last_name = 'Chocobo'
     newChoco.sex = math.ceil(math.random() - 0.5) -- Random 0 or 1
     newChoco.created = os.time()
     newChoco.age = 0
@@ -555,8 +788,8 @@ end
 local getWeatherInZone = function(zoneId)
     local zone = GetZone(zoneId)
     if zone == nil then
-        print("ChocoboRaising: Failed to get Zone object for weather information. \
-            Is the target zone on another executable?")
+        print('ChocoboRaising: Failed to get Zone object for weather information. \
+            Is the target zone on another executable?')
         return xi.weather.NONE
     end
 
@@ -589,11 +822,11 @@ local compareTables = function(t1, t2)
         return false
     end
 
-    if type(t1) ~= "table" then
+    if type(t1) ~= 'table' then
         return false
     end
 
-    if type(t2) ~= "table" then
+    if type(t2) ~= 'table' then
         return false
     end
 
@@ -632,9 +865,9 @@ local condenseEvents = function(player, chocoState, events)
     local currentEventCSTable = nil
 
     -- Each event is a table of cs's
-    debug("Raw Events")
+    debug('Raw Events')
     for _, entry in pairs(events) do
-        debug("Day", entry[1], ":", entry[2][1])
+        debug('Day', entry[1], ':', entry[2][1])
         -- Only condense days with the same table contents
         if compareTables(entry[2], currentEventCSTable) then
             -- Increase the span
@@ -652,53 +885,133 @@ local condenseEvents = function(player, chocoState, events)
         end
     end
 
-    -- Final "cut"
+    -- Final 'cut'
     cutEvent(condensedEvents, currentStartDay, currentEndDay, currentEventCSTable)
 
-    debug("Condensed Events & Spans")
+    debug('Condensed Events & Spans')
     for _, entry in pairs(condensedEvents) do
-        debug("Days", entry[1], "to", entry[2], ":", entry[3][1])
+        debug('Days', entry[1], 'to', entry[2], ':', entry[3][1])
     end
 
     return condensedEvents
 end
 
+local updateChocoState = function(player, chocoState)
+    -- Update age and last_update_age
+    chocoState.age = math.floor((os.time() - chocoState.created) / xi.chocoboRaising.dayLength) + 1
+    chocoState.last_update_age = chocoState.age
+
+    debug(string.format('Writing chocoState to cache and db. age: %d, last_update_age: %d', chocoState.age, chocoState.last_update_age))
+
+    -- Write to cache
+    xi.chocoboRaising.chocoState[player:getID()] = chocoState
+
+    -- Write to db
+    player:setChocoboRaisingInfo(chocoState)
+
+    return chocoState
+end
+
 local onRaisingEventPlayout = function(player, csOffset, chocoState)
     switch (csOffset): caseof
     {
+        -- EGG ONWARDS:
         [cutscenes.REPORT_BASIC_CARE] = function()
-            -- TODO: Take in a multiplier to account for merged time ranges
-            -- TODO: Add settings multipliers
-            -- TODO: Make sure these are clamped!
-            chocoState.strength    = chocoState.strength + 1
-            chocoState.endurance   = chocoState.endurance + 1
-            chocoState.discernment = chocoState.discernment + 1
-            chocoState.receptivity = chocoState.receptivity + 1
+            handleCarePlan(player, chocoState, carePlans.BASIC_CARE)
+        end,
 
-            chocoState.affection = chocoState.affection - 1
-            chocoState.energy    = chocoState.energy - 1
+        -- CHICK ONWARDS:
+        [cutscenes.REPORT_REST] = function()
+            handleCarePlan(player, chocoState, carePlans.RESTING)
+        end,
+
+        [cutscenes.REPORT_TAKE_A_WALK] = function()
+            handleCarePlan(player, chocoState, carePlans.TAKING_A_WALK)
+        end,
+
+        [cutscenes.REPORT_LISTEN_TO_MUSIC] = function()
+            handleCarePlan(player, chocoState, carePlans.LISTENING_TO_MUSIC)
+        end,
+
+        -- ADOLESCENT ONWARDS:
+        [cutscenes.REPORT_EXERCISE_ALONE] = function()
+            handleCarePlan(player, chocoState, carePlans.EXERCISING_ALONE)
+        end,
+
+        [cutscenes.REPORT_EXERCISE_IN_A_GROUP] = function()
+            handleCarePlan(player, chocoState, carePlans.EXCERCISING_IN_A_GROUP)
+        end,
+
+        [cutscenes.REPORT_INTERACT_WITH_CHILDREN] = function()
+            handleCarePlan(player, chocoState, carePlans.PLAYING_WITH_CHILDREN)
+        end,
+
+        [cutscenes.REPORT_INTERACT_WITH_CHOCOBOS] = function()
+            handleCarePlan(player, chocoState, carePlans.PLAYING_WITH_CHOCOBOS)
+        end,
+
+        [cutscenes.REPORT_CARRY_PACKAGES] = function()
+            handleCarePlan(player, chocoState, carePlans.CARRYING_PACKAGES)
+        end,
+
+        [cutscenes.REPORT_EXHIBIT_TO_THE_PUBLIC] = function()
+            handleCarePlan(player, chocoState, carePlans.EXHIBITING_TO_THE_PUBLIC)
+        end,
+
+        -- ADULT ONWARDS:
+        [cutscenes.REPORT_DELIVER_MESSAGES] = function()
+            handleCarePlan(player, chocoState, carePlans.DELIVERING_MESSAGES)
+        end,
+
+        [cutscenes.REPORT_DIG_FOR_TREASURE] = function()
+            handleCarePlan(player, chocoState, carePlans.DIGGING_FOR_TREASURE)
+        end,
+
+        [cutscenes.REPORT_ACT_IN_A_PLAY] = function()
+            handleCarePlan(player, chocoState, carePlans.ACTING_IN_A_PLAY)
+        end,
+
+        -- Growth CSs
+        [cutscenes.ADULT_2_TO_ADULT_3] = function()
+            -- You waited too long to name your chocobo, trainer is going to do it for you!
+            if
+                chocoState.first_name == 'Chocobo' and
+                chocoState.last_name == 'Chocobo'
+            then
+                -- Pick a name at random: First name only
+                chocoState.first_name = xi.chocoboNames.getRandomName()
+                chocoState.last_name = ''
+            end
         end,
 
         [cutscenes.CRYING_AT_NIGHT] = function()
             -- NOTE: The messaging is handled in the CS
             player:addKeyItem(xi.ki.WHITE_HANDKERCHIEF)
-            player:setCharVar("[choco]WH_TIME", os.time() * utils.days(1))
+            player:setCharVar('[choco]WH_TIME', os.time() * utils.days(1))
         end,
 
         [cutscenes.HAVENT_SEEN_YOU] = function()
             player:delKeyItem(xi.ki.WHITE_HANDKERCHIEF)
-            player:setCharVar("[choco]WH_TIME", 0)
+            player:setCharVar('[choco]WH_TIME', 0)
         end,
 
         [cutscenes.HANGS_HEAD_IN_SHAME] = function()
             -- TODO: Take in a multiplier to account for merged time ranges
-            -- TODO: Add settings multipliers
-            -- TODO: Make sure these are clamped!
-            chocoState.affection = chocoState.affection - 10
+            chocoState.affection = handleStatChange(chocoState.affection, -10, 255)
+            chocoState.energy    = handleStatChange(chocoState.energy, -5, 100)
+            setCondition(chocoState, conditions.SPOILED, false)
+        end,
 
-            -- TODO: Remove "Spoiled" status effect
+        [cutscenes.COMPETE_WITH_OTHERS] = function()
+            -- TODO: Take in a multiplier to account for merged time ranges
+            -- 'Increases affection slightly - confirmed.'
+            chocoState.affection = handleStatChange(chocoState.affection, 1, 255)
+            chocoState.energy    = handleStatChange(chocoState.energy, -5, 100)
+            setCondition(chocoState, conditions.BORED, false)
         end,
     }
+
+    updateChocoState(player, chocoState)
 
     return chocoState
 end
@@ -709,7 +1022,7 @@ local handleCSUpdate = function(player, chocoState, doEventUpdate)
     local locationOffset = raisingLocation[player:getZoneID()] * 256
     local csToPlay = locationOffset + csOffset
 
-    debug("Playing CS: " .. csToPlay .. " (" .. csOffset .. ")")
+    debug('Playing CS: ' .. csToPlay .. ' (' .. csOffset .. ')')
     table.remove(chocoState.csList, 1)
 
     local currentAgeOfChocoboDuringCutscene = 0
@@ -731,28 +1044,13 @@ local handleCSUpdate = function(player, chocoState, doEventUpdate)
 
     chocoState = onRaisingEventPlayout(player, csOffset, chocoState)
 
+    -- Skip the event updates during 'Skip Report'
     if doEventUpdate then
         player:updateEventString(chocoState.first_name, chocoState.last_name, chocoState.first_name, chocoState.first_name,
             0, 0, 0, 0, 0, 0, 0, 0)
         player:updateEvent(#chocoState.csList, csToPlay, 0, chocoState.colour,
             chocoState.stage, 0, currentAgeOfChocoboDuringCutscene, 1)
     end
-
-    return chocoState
-end
-
-local updateChocoState = function(player, chocoState)
-    -- Update age and last_update_age
-    chocoState.age = math.floor((os.time() - chocoState.created) / xi.chocoboRaising.dayLength) + 1
-    chocoState.last_update_age = chocoState.age
-
-    debug("Writing chocoState.age & last_update_age:", chocoState.last_update_age)
-
-    -- Write to cache
-    xi.chocoboRaising.chocoState[player:getID()] = chocoState
-
-    -- Write to db
-    player:setChocoboRaisingInfo(chocoState)
 
     return chocoState
 end
@@ -768,13 +1066,13 @@ xi.chocoboRaising.initChocoboData = function(player)
 
     -- Work out ranks, age, and stages from raw information
 
-    -- Age is worked out alongside "the day you handed in your egg"
+    -- Age is worked out alongside 'the day you handed in your egg'
     -- So on the 0th day, the chocobo is 1 day old.
 
     chocoState.age = math.floor((os.time() - chocoState.created) / xi.chocoboRaising.dayLength) + 1
 
-    debug("chocoState.age = " .. chocoState.age)
-    debug("chocoState.last_update_age = " .. chocoState.last_update_age)
+    debug('chocoState.age = ' .. chocoState.age)
+    debug('chocoState.last_update_age = ' .. chocoState.last_update_age)
 
     chocoState.affectionRank = affectionRank.LIKES
 
@@ -796,7 +1094,7 @@ xi.chocoboRaising.initChocoboData = function(player)
     chocoState.report.day_end   = chocoState.age
     local reportLength = chocoState.report.day_end - chocoState.report.day_start
 
-    debug("reportLength", reportLength)
+    debug('reportLength', reportLength)
 
     chocoState.last_update_age = chocoState.age
 
@@ -832,6 +1130,9 @@ xi.chocoboRaising.initChocoboData = function(player)
         table.insert(possibleCarePlanFuture, plan4Type)
     end
 
+    -- TODO: Remove careplan energy from this
+    chocoState.energy = 100
+
     for idx = 1, reportLength do
         local possibleCarePlanEvent = possibleCarePlanFuture[idx]
         if possibleCarePlanEvent == nil then -- We went past the end of the care plan
@@ -844,6 +1145,30 @@ xi.chocoboRaising.initChocoboData = function(player)
         local event = { age, { possibleCarePlanEvent } }
 
         table.insert(events, event)
+
+        -- If the chocobo doesn't have any conditions, roll to see if they get one
+        if not hasCondition(chocoState) then
+            for _, condition in pairs(conditions) do
+                -- TODO: Use stats and history instead of pure chance to see what
+                --     : conditions might happen
+                if utils.chance(5) then
+                    setCondition(chocoState, condition, true)
+                    break
+                end
+            end
+        end
+
+        -- For each condition, if chocobo has that condition, play
+        -- out relevant CS.
+        for _, condition in pairs(conditions) do
+            if getCondition(chocoState, condition) then
+                -- TODO: Mark that we've played this CS today so we don't immediately resolve it
+                utils.unused()
+            end
+        end
+
+        -- TODO: For each condition that the chocobo has, if they haven't JUST
+        --     : had the CS play for it, roll 50% to see if it resolved on its own.
 
         -- Handle age-up cs's
         for _, entry in pairs(ageBoundaries) do
@@ -891,7 +1216,7 @@ xi.chocoboRaising.startCutscene = function(player, npc, trade)
 
     local chocoState = xi.chocoboRaising.initChocoboData(player)
     if chocoState == nil then
-        print("ERROR! startCutscene 'chocoState' is nil!")
+        print('ERROR! startCutscene \'chocoState\' is nil!')
         return
     end
 
@@ -919,7 +1244,7 @@ xi.chocoboRaising.startCutscene = function(player, npc, trade)
         end
 
         -- TODO: Confirm this on retail
-        -- "Your chocobo has not hatched, so you cannot feed it yet."
+        -- 'Your chocobo has not hatched, so you cannot feed it yet.'
         if chocoState.stage == stage.EGG then
             player:messageSpecial(ID.text.CHOCOBO_FEEDING_STILL_EGG)
             return
@@ -979,6 +1304,10 @@ xi.chocoboRaising.startCutscene = function(player, npc, trade)
         isTradeEvent, infoFlag, chocoState.sex, 0, 0, 0, 0, 0)
 end
 
+-----------------------------------
+-- VCS Trainer Interactions
+-----------------------------------
+
 xi.chocoboRaising.onTradeVCSTrainer = function(player, npc, trade)
     if not xi.settings.main.ENABLE_CHOCOBO_RAISING then
         player:startEvent(csidTable[player:getZoneID()][1])
@@ -1019,11 +1348,11 @@ xi.chocoboRaising.onEventUpdateVCSTrainer = function(player, csid, option, npc)
     -- Egg check
     elseif csid == mainCsid then
         if chocoState == nil then
-            print("ERROR! onEventUpdateVCSTrainer 'chocoState' is nil!")
+            print('ERROR! onEventUpdateVCSTrainer \'chocoState\' is nil!')
             return
         end
 
-        debug(string.format("CS Update: %i", option))
+        debug(string.format('CS Update: %i', option))
 
         -- Setting the name for a chocobo: when the name is
         -- applied from the menu the name offsets (from the menu)
@@ -1042,33 +1371,33 @@ xi.chocoboRaising.onEventUpdateVCSTrainer = function(player, csid, option, npc)
             local fname = xi.chocoboNames[offset1]
             local lname = xi.chocoboNames[offset2]
 
-            local fullnamekey = string.format("%s %s", fname, lname)
+            local fullnamekey = string.format('%s %s', fname, lname)
 
             -- https://ffxiclopedia.fandom.com/wiki/Chocobo_Names
-            -- "... with the caveat that your chocobo's name may be no more than 15 letters in total."
+            -- '... with the caveat that your chocobo's name may be no more than 15 letters in total.'
             -- NOTE: This is enforced by the client, this is here to stop malicious naming attempts
             local nameTooLong = string.len(fullnamekey) > (15 + 1) -- 15 + the space character
 
-            -- If renaming fails, the name will remain as "Chocobo Chocobo" and the
+            -- If renaming fails, the name will remain as 'Chocobo Chocobo' and the
             -- rejection CS will play
             if fname == nil or lname == nil then
-                print("ERROR! onEventUpdateVCSTrainer - chocoboNames lookup failed!")
+                print('ERROR! onEventUpdateVCSTrainer - chocoboNames lookup failed!')
             elseif nameTooLong then
-                print(string.format("ERROR! %s selected name combination too long for chocobo: %s", player:getName(), fullnamekey))
+                print(string.format('ERROR! %s selected name combination too long for chocobo: %s', player:getName(), fullnamekey))
             elseif xi.bannedChocoboNames[fullnamekey] then
-                print(string.format("ERROR! %s selected banned name for chocobo: %s", player:getName(), fullnamekey))
+                print(string.format('ERROR! %s selected banned name for chocobo: %s', player:getName(), fullnamekey))
             else
                 chocoState.first_name = fname
                 chocoState.last_name = lname
 
-                debug(string.format("%s updating chocobo name: %s", player:getName(), fullnamekey))
+                debug(string.format('%s updating chocobo name: %s', player:getName(), fullnamekey))
 
                 -- Write to cache
                 xi.chocoboRaising.chocoState[player:getID()] = chocoState
 
                 -- Set synthetic CS option for later CSs
                 option = 0xFF
-                debug(string.format("CS (Synthetic) Update: %i", option))
+                debug(string.format('CS (Synthetic) Update: %i', option))
             end
         end
 
@@ -1084,7 +1413,7 @@ xi.chocoboRaising.onEventUpdateVCSTrainer = function(player, csid, option, npc)
         -- 1: Length of care plan
         -- 2: Type of care plan
         -- 3: Slot of care plan
-        -- 4: "Key" for care plan updates (0xFE)
+        -- 4: 'Key' for care plan updates (0xFE)
 
         if bit.band(0x000000FF, option) == 0xFE then
             local carePlanSlot = bit.band(0xF, bit.rshift(option, 8))
@@ -1112,7 +1441,7 @@ xi.chocoboRaising.onEventUpdateVCSTrainer = function(player, csid, option, npc)
             local finalCarePlan = bit.bor(zerodCarePlan, bit.lshift(carePlan, targetSlotOffset))
             chocoState.care_plan = finalCarePlan
 
-            print(string.format("%s updating chocobo care plan: slot: %i type: %i length: %i",
+            print(string.format('%s updating chocobo care plan: slot: %i type: %i length: %i',
                 player:getName(), carePlanSlot + 1, carePlanType, carePlanLength))
 
             -- Write to cache
@@ -1205,8 +1534,8 @@ xi.chocoboRaising.onEventUpdateVCSTrainer = function(player, csid, option, npc)
                 local nameChocobo = 0
                 if
                     chocoState.stage > stage.EGG and
-                    chocoState.first_name == "Chocobo" and
-                    chocoState.last_name == "Chocobo"
+                    chocoState.first_name == 'Chocobo' and
+                    chocoState.last_name == 'Chocobo'
                 then
                     nameChocobo = -bit.lshift(0x01, 3) -- Name your chocobo
                 end
@@ -1216,7 +1545,7 @@ xi.chocoboRaising.onEventUpdateVCSTrainer = function(player, csid, option, npc)
                 -- bit.lshift(0x01, 6): Receive your chocobo whistle
                 -- bit.lshift(0x01, 7): Purchase a chocobo whistle
 
-                -- 8 - 25 are all "-----" (blank)
+                -- 8 - 25 are all '-----' (blank)
 
                 -- Go forward 1 unit (debug) (Unused, see command: !chocoboraising)
                 local goForward1UnitDebug = -bit.lshift(0x01, 26)
@@ -1249,14 +1578,17 @@ xi.chocoboRaising.onEventUpdateVCSTrainer = function(player, csid, option, npc)
                     retireOrGiveUp
 
                 if chocoState.stage >= stage.CHICK then
+                    utils.unused()
                     --menuFlags = menuFlags
                 end
 
                 if chocoState.stage >= stage.ADOLESCENT then
+                    utils.unused()
                     -- menuFlags = menuFlags
                 end
 
                 if chocoState.stage >= stage.ADULT_1 then
+                    utils.unused()
                     -- menuFlags = menuFlags
                 end
 
@@ -1271,18 +1603,32 @@ xi.chocoboRaising.onEventUpdateVCSTrainer = function(player, csid, option, npc)
                 player:confirmTrade()
 
                 for idx, itemId in ipairs(chocoState.foodGiven) do
-                    local itemData = validFoods[itemId]
+                    local itemData     = validFoods[itemId]
+                    local hungerAmount = itemData[1]
                     local energyAmount = itemData[3]
-                    local glowColour = itemData[10]
+                    local glowColour   = itemData[10]
 
                     player:messageSpecial(ID.text.CHOCOBO_FEEDING_ITEM, itemId, idx)
 
                     -- TODO: Handle item effects
 
+                    if hasCondition(chocoState) then
+                        for _, condition in pairs(chocoState.conditions) do
+                            if getCondition(chocoState, condition) then
+                                local foodCureTable = conditionsHealedByItems[condition]
+                                if foodCureTable then
+                                    if utils.contains(itemId, foodCureTable) then
+                                        -- TODO: Play CS for healing condition, or messaging?
+                                        setCondition(chocoState, condition, false)
+                                    end
+                                end
+                            end
+                        end
+                    end
+
                     local reaction = 1
 
-                    local hungerLevel = hunger.COMPLETELY_FULL
-
+                    chocoState.hunger = utils.clamp(chocoState.hunger + hungerAmount, 0, 255)
                     chocoState.energy = utils.clamp(chocoState.energy + energyAmount, 0, 100)
 
                     -- If multiple items, glow is always green
@@ -1290,7 +1636,7 @@ xi.chocoboRaising.onEventUpdateVCSTrainer = function(player, csid, option, npc)
                         glowColour = glow.GREEN
                     end
 
-                    player:updateEvent(10, glowColour, 0, 0, reaction, hungerLevel, 0, 0)
+                    player:updateEvent(10, glowColour, 0, 0, reaction, numberToRank(chocoState.hunger), 0, 0)
                 end
 
                 chocoState.foodGiven = nil
@@ -1302,7 +1648,7 @@ xi.chocoboRaising.onEventUpdateVCSTrainer = function(player, csid, option, npc)
                 -- TODO: There is more information going on in here
 
                 -- TODO: These appearance changes are locked in on day 29 if
-                -- they are "Average" (128) or above. This will need to be
+                -- they are 'Average' (128) or above. This will need to be
                 -- written to the db and this part rewritten.
                 local enlargedCrest = 0
                 if chocoState.discernment >= 128 then
@@ -1375,7 +1721,7 @@ xi.chocoboRaising.onEventUpdateVCSTrainer = function(player, csid, option, npc)
                 local watchOverChocobo = 0x01
                 local tellAStory = 0x02
                 local scoldTheChocobo = 0x04
-                -- local competeWithOthers = 0x08
+                local competeWithOthers = 0x08
                 local goOnAWalkShort = 0x10
                 local goOnAWalkRegular = 0x20
                 local goOnAWalkLong = 0x40
@@ -1390,6 +1736,9 @@ xi.chocoboRaising.onEventUpdateVCSTrainer = function(player, csid, option, npc)
                     mask = mask - tellAStory - goOnAWalkRegular
                     -- TODO: Is this unlocked per-chocobo, or per-player?
                     -- TODO: competeWithOthers: Available at adolescent stage; You must go on a regular walk to unlock this.
+                    if true then
+                        mask = mask - competeWithOthers
+                    end
                 end
 
                 if chocoState.stage >= stage.ADULT_1 then
@@ -1447,7 +1796,7 @@ xi.chocoboRaising.onEventUpdateVCSTrainer = function(player, csid, option, npc)
 
                     -- If not holding an item, it's possible to find an item
                     if chocoState.held_item == 0 then
-                        --table.insert(possibleEvents, 1)
+                        table.insert(possibleEvents, 1)
                     end
 
                     -- If you haven't completed the White Handkerchief quest yet
@@ -1627,6 +1976,7 @@ xi.chocoboRaising.onEventUpdateVCSTrainer = function(player, csid, option, npc)
                 -- A chocobo must have a DSC of D (A bit deficient, 64-95) or
                 -- higher to have a chance at learning a skill from a story
                 if chocoState.discernment >= 64 then
+                    utils.unused()
                     -- TODO: Chance to learn skill
                 end
 
@@ -1635,18 +1985,49 @@ xi.chocoboRaising.onEventUpdateVCSTrainer = function(player, csid, option, npc)
                 chocoState = onRaisingEventPlayout(player, cutscenes.INTERESTED_IN_YOUR_STORY, chocoState)
                 player:updateEventString(chocoState.first_name, chocoState.last_name, chocoState.first_name, chocoState.last_name, 0, 0, 0, 0, 0, 0, 0)
                 player:updateEvent(getCutsceneWithOffset(player, cutscenes.INTERESTED_IN_YOUR_STORY), 0, storyMask, 0, chocoState.stage, 0, 0, 3)
+                updateChocoState(player, chocoState)
             end,
 
             [13298] = function() -- Scold the chocobo
                 chocoState = onRaisingEventPlayout(player, cutscenes.HANGS_HEAD_IN_SHAME, chocoState)
                 player:updateEventString(chocoState.first_name, chocoState.last_name, chocoState.first_name, chocoState.last_name, 0, 0, 0, 0, 0, 0, 0)
                 player:updateEvent(getCutsceneWithOffset(player, cutscenes.HANGS_HEAD_IN_SHAME), 0, 0, 0, chocoState.stage, 0, 0, 0)
+                updateChocoState(player, chocoState)
             end,
 
             [13554] = function() -- Compete with others
-                player:updateEventString(chocoState.first_name, chocoState.last_name, chocoState.first_name, chocoState.last_name,
-                    (4163), 67, 0, 0, 0, 0, 0)
-                player:updateEvent(820, 18017, 0, 72, 3, 254, 46, 1)
+                -- player:updateEventString(chocoState.first_name, chocoState.last_name, chocoState.first_name, chocoState.last_name,
+                --     4163, 67, 0, 0, 0, 0, 0)
+                -- player:updateEvent(820, 18017, 0, 72, 3, 254, 46, 1)
+
+                -- 0: player chocobo, 1: tie, 2: rival chocobo
+                -- NOTE: The guides claim that the winner is random, so
+                --     : let's make it 50/50 to start with, and then a small
+                --     : chance on top for a tie.
+                local winner = utils.randomEntry({ 0, 2 })
+                if utils.chance(5) then
+                    winner = 1
+                end
+
+                local winnerStr =
+                {
+                    [0] = 'Player',
+                    [1] = 'Tie',
+                    [2] = 'Rival',
+                }
+
+                debug('Competition Winner: ' .. winnerStr[winner])
+
+                -- TODO: Use relevant name for area
+                local rivalsName = 'Hero'
+
+                -- TODO: Hook up rival's look
+
+                -- TODO: Track wins in chocoState+db, only need to track up to 3
+
+                chocoState = onRaisingEventPlayout(player, cutscenes.COMPETE_WITH_OTHERS, chocoState)
+                player:updateEventString(chocoState.first_name, rivalsName, '', '', 0, 0, 0, 0, 0, 0, 0)
+                player:updateEvent(getCutsceneWithOffset(player, cutscenes.COMPETE_WITH_OTHERS), 0, winner, 0, chocoState.stage, 0, 0, 0)
             end,
 
             [250] = function() -- Set Basic Care (menu)
@@ -1665,6 +2046,7 @@ xi.chocoboRaising.onEventUpdateVCSTrainer = function(player, csid, option, npc)
                     bit.lshift(plan3Length,  16) + bit.lshift(plan3Type,  19) +
                     bit.lshift(plan4Length,  24) + bit.lshift(plan4Type,  27)
 
+                -- TODO: Set up mask for relevant stage
                 local menuMask = 0 -- 0x7FFFFFFE
 
                 player:updateEvent(250, planInfo, 0, 0, 0, 0, 0, menuMask)
@@ -1687,12 +2069,12 @@ xi.chocoboRaising.onEventUpdateVCSTrainer = function(player, csid, option, npc)
             end,
 
             [1056] = function() -- Unknown
-                print("ChocoboRaising: Unknown update: 1056")
+                print('ChocoboRaising: Unknown update: 1056')
                 player:updateEvent(0, 0, 0, 0, 0, 0, 0, 0)
             end,
 
-            [1241] = function() -- Unknown
-                print("ChocoboRaising: Unknown update: 1241")
+            [1241] = function() -- Called during 'Compete with Others'
+                -- Appears to always be blank
                 player:updateEvent(0, 0, 0, 0, 0, 0, 0, 0)
             end,
 
@@ -1759,9 +2141,9 @@ xi.chocoboRaising.onEventUpdateVCSTrainer = function(player, csid, option, npc)
             end,
 
             [255] = function() -- Synthetic update: Change/set chocobo name
-                -- If the name is still "Chocobo Chocobo" then the renaming failed or was
+                -- If the name is still 'Chocobo Chocobo' then the renaming failed or was
                 -- rejected, play the appropriate response.
-                if chocoState.first_name == "Chocobo" and chocoState.last_name == "Chocobo" then
+                if chocoState.first_name == 'Chocobo' and chocoState.last_name == 'Chocobo' then
                     player:updateEvent(1, 1, 1, 1, 1, 1, 1, 1)
                 else
                     player:updateEvent(0, 0, 0, 0, 0, 0, 0, 0)
@@ -1797,7 +2179,7 @@ xi.chocoboRaising.onEventFinishVCSTrainer = function(player, csid, option, npc)
         end
     elseif csid == mainCsid and option == 215 then
         if chocoState == nil then
-            print("ERROR! onEventFinishVCSTrainer 'chocoState' is nil!")
+            print('ERROR! onEventFinishVCSTrainer \'chocoState\' is nil!')
             return
         end
 

@@ -4,7 +4,7 @@
 -- Note: Opens door _471
 -- !pos -182 -15 -19 151
 -----------------------------------
-local oztrojaGlobal = require("scripts/zones/Castle_Oztroja/globals")
+local oztrojaGlobal = require('scripts/zones/Castle_Oztroja/globals')
 -----------------------------------
 local entity = {}
 

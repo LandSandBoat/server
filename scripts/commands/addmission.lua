@@ -2,27 +2,27 @@
 -- func: addmission <logID> <missionID> <player>
 -- desc: Adds a mission to the GM or target players log.
 -----------------------------------
-require("scripts/globals/missions")
 local logIdHelpers = require('scripts/globals/log_ids')
 -----------------------------------
+local commandObj = {}
 
-cmdprops =
+commandObj.cmdprops =
 {
     permission = 1,
-    parameters = "sss"
+    parameters = 'sss'
 }
 
-function error(player, msg)
+local function error(player, msg)
     player:PrintToPlayer(msg)
-    player:PrintToPlayer("!addmission <logID> <missionID> (player)")
+    player:PrintToPlayer('!addmission <logID> <missionID> (player)')
 end
 
-function onTrigger(player, logId, missionId, target)
+commandObj.onTrigger = function(player, logId, missionId, target)
     -- validate logId
     local logName
     local logInfo = logIdHelpers.getMissionLogInfo(logId)
     if logInfo == nil then
-        error(player, "Invalid logID.")
+        error(player, 'Invalid logID.')
         return
     end
 
@@ -36,7 +36,7 @@ function onTrigger(player, logId, missionId, target)
     end
 
     if missionId == nil or missionId < 0 then
-        error(player, "Invalid missionID.")
+        error(player, 'Invalid missionID.')
         return
     end
 
@@ -47,13 +47,15 @@ function onTrigger(player, logId, missionId, target)
     else
         targ = GetPlayerByName(target)
         if targ == nil then
-            error(player, string.format("Player named '%s' not found!", target))
+            error(player, string.format('Player named "%s" not found!', target))
             return
         end
     end
 
     -- add mission
     targ:addMission(logId, missionId)
-    player:PrintToPlayer(string.format("Added %s mission %i to %s.", logName, missionId, targ:getName()))
-    player:PrintToPlayer("NOTE! This does NOT clear or update ANY mission variables! ")
+    player:PrintToPlayer(string.format('Added %s mission %i to %s.', logName, missionId, targ:getName()))
+    player:PrintToPlayer('NOTE! This does NOT clear or update ANY mission variables! ')
 end
+
+return commandObj

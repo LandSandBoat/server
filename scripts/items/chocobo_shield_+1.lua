@@ -6,11 +6,7 @@
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)
-    if target:getFreeSlotsCount() == 0 then
-        return xi.msg.basic.ITEM_NO_USE_INVENTORY
-    end
-
-    return 0
+    return xi.itemUtils.itemBoxOnItemCheck(target)
 end
 
 itemObject.onItemUse = function(target)

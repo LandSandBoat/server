@@ -3,7 +3,7 @@
 --  Mob: Leviathan Prime
 -- Involved in Quest: Trial by Water, Trial Size Trial by Water
 -----------------------------------
-mixins = { require("scripts/mixins/job_special") }
+mixins = { require('scripts/mixins/job_special') }
 -----------------------------------
 local entity = {}
 

@@ -43,7 +43,7 @@ entity.onMobRoam = function(mob)
         local nearestMobToAbsorb = mobToAbsorb[nearestMob.mobId]
         if nearestMobToAbsorb then
             mob:useMobAbility(xi.mob.skills.DISSOLVE, nearestMobToAbsorb)
-            mob:setLocalVar("[ClaimedBy]", nearestMobToAbsorb:getLocalVar("[ClaimedBy]"))
+            mob:setLocalVar('[ClaimedBy]', nearestMobToAbsorb:getLocalVar('[ClaimedBy]'))
             mob:setUntargetable(false)
             nearestMobToAbsorb:timer(10000, function(nMob)
                 nMob:setHP(0)

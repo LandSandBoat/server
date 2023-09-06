@@ -14,7 +14,7 @@ entity.onTrigger = function(player, npc)
 
     if
         raptorRapture == QUEST_ACCEPTED and
-        player:getCharVar("Raptor_Rapture_Status") == 4
+        player:getCharVar('Raptor_Rapture_Status') == 4
     then
         -- Progresses Quest: 'Raptor Rapture', speaking to Ilney.
         player:startEvent(5034)
@@ -27,7 +27,7 @@ end
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 5034 then
         -- Progresses Quest: 'Raptor Rapture', spoke to Ilney.
-        player:setCharVar("Raptor_Rapture_Status", 5)
+        player:setCharVar('Raptor_Rapture_Status', 5)
     end
 end
 

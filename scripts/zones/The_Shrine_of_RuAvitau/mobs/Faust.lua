@@ -10,20 +10,20 @@ local north = 192
 local home = { 740, -0.463, -99 }
 
 local setFaustNextTurnTime = function(faust)
-    faust:setLocalVar("NextTurnTime", os.time() + math.random(45, 75))
+    faust:setLocalVar('NextTurnTime', os.time() + math.random(45, 75))
 end
 
 local faustNextTurnTime = function(faust)
-    return faust:getLocalVar("NextTurnTime")
+    return faust:getLocalVar('NextTurnTime')
 end
 
 local setFaustFacingDirection = function(faust, direction)
-    faust:setLocalVar("FacingDirection", direction)
+    faust:setLocalVar('FacingDirection', direction)
     faust:setRotation(direction)
 end
 
 local faustFacingDirection = function(faust)
-    return faust:getLocalVar("FacingDirection")
+    return faust:getLocalVar('FacingDirection')
 end
 
 local handleFaustFacingDirectionMechanics = function(faust)

@@ -15,7 +15,7 @@ quest.sections =
 {
     {
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE and player:getCharVar("AssaultPromotion") >= 25
+            return status == QUEST_AVAILABLE and player:getCharVar('AssaultPromotion') >= 25
         end,
 
         [xi.zone.AHT_URHGAN_WHITEGATE] =
@@ -54,7 +54,7 @@ quest.sections =
             {
                 [5002] = function(player, csid, option, npc)
                     if quest:complete(player) then
-                        player:setCharVar("AssaultPromotion", 0)
+                        player:setCharVar('AssaultPromotion', 0)
                         player:confirmTrade()
                         player:delKeyItem(xi.ki.PSC_WILDCAT_BADGE)
                     end

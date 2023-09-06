@@ -9,7 +9,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if player:getCharVar("EcoStatus") == 101 then
+    if player:getCharVar('EcoStatus') == 101 then
         if not player:hasStatusEffect(xi.effect.LEVEL_RESTRICTION) then
             player:startEvent(13) -- Apply ointment option
         else
@@ -30,7 +30,7 @@ entity.onEventFinish = function(player, csid, option, npc)
         player:addStatusEffect(xi.effect.LEVEL_RESTRICTION, 25, 0, 0)
     elseif csid == 16 then
         player:delStatusEffect(xi.effect.LEVEL_RESTRICTION)
-        player:setCharVar("EcoStatus", 103)
+        player:setCharVar('EcoStatus', 103)
     elseif csid == 15 and option == 0 then
         player:delStatusEffect(xi.effect.LEVEL_RESTRICTION)
     end

@@ -621,8 +621,8 @@ xi.quest.id =
         STOP_YOUR_WHINING               = 132, -- + Converted
         TRIAL_BY_WATER                  = 133, -- +
         EVERYONES_GRUDGE                = 134,
-        SECRET_OF_THE_DAMP_SCROLL       = 135, -- ±
-        THE_SAHAGINS_STASH              = 136, -- +
+        SECRET_OF_THE_DAMP_SCROLL       = 135, -- ± Converted
+        THE_SAHAGINS_STASH              = 136, -- + Converted
         ITS_NOT_YOUR_VAULT              = 137, -- +
         LIKE_A_SHINING_SUBLIGAR         = 138, -- +
         LIKE_A_SHINING_LEGGINGS         = 139, -- +
@@ -937,43 +937,43 @@ xi.quest.id =
         THE_UNMARKED_TOMB               = 84,
         PROOF_OF_THE_LION               = 85,
         BRYGID_THE_STYLIST_STRIKES_BACK = 86,
-        DOMINION_OP_01_ALTEPA           = 87,
-        DOMINION_OP_02_ALTEPA           = 88,
-        DOMINION_OP_03_ALTEPA           = 89,
-        DOMINION_OP_04_ALTEPA           = 90,
-        DOMINION_OP_05_ALTEPA           = 91,
-        DOMINION_OP_06_ALTEPA           = 92,
-        DOMINION_OP_07_ALTEPA           = 93,
-        DOMINION_OP_08_ALTEPA           = 94,
-        DOMINION_OP_09_ALTEPA           = 95,
-        DOMINION_OP_10_ALTEPA           = 96,
-        DOMINION_OP_11_ALTEPA           = 97,
-        DOMINION_OP_12_ALTEPA           = 98,
-        DOMINION_OP_13_ALTEPA           = 99,
-        DOMINION_OP_14_ALTEPA           = 100,
-        DOMINION_OP_01_ULEGUERAND       = 101,
-        DOMINION_OP_02_ULEGUERAND       = 102,
-        DOMINION_OP_03_ULEGUERAND       = 103,
-        DOMINION_OP_04_ULEGUERAND       = 104,
-        DOMINION_OP_05_ULEGUERAND       = 105,
-        DOMINION_OP_06_ULEGUERAND       = 106,
-        DOMINION_OP_07_ULEGUERAND       = 107,
-        DOMINION_OP_08_ULEGUERAND       = 108,
-        DOMINION_OP_09_ULEGUERAND       = 109,
-        DOMINION_OP_10_ULEGUERAND       = 110,
-        DOMINION_OP_11_ULEGUERAND       = 111,
-        DOMINION_OP_12_ULEGUERAND       = 112,
-        DOMINION_OP_13_ULEGUERAND       = 113,
-        DOMINION_OP_14_ULEGUERAND       = 114,
-        DOMINION_OP_01_GRAUBERG         = 115,
-        DOMINION_OP_02_GRAUBERG         = 116,
-        DOMINION_OP_03_GRAUBERG         = 117,
-        DOMINION_OP_04_GRAUBERG         = 118,
-        DOMINION_OP_05_GRAUBERG         = 119,
-        DOMINION_OP_06_GRAUBERG         = 120,
-        DOMINION_OP_07_GRAUBERG         = 121,
-        DOMINION_OP_08_GRAUBERG         = 122,
-        DOMINION_OP_09_GRAUBERG         = 123,
+        DOMINION_OP_01_ALTEPA           = 87,  -- + Converted
+        DOMINION_OP_02_ALTEPA           = 88,  -- + Converted
+        DOMINION_OP_03_ALTEPA           = 89,  -- + Converted
+        DOMINION_OP_04_ALTEPA           = 90,  -- + Converted
+        DOMINION_OP_05_ALTEPA           = 91,  -- + Converted
+        DOMINION_OP_06_ALTEPA           = 92,  -- + Converted
+        DOMINION_OP_07_ALTEPA           = 93,  -- + Converted
+        DOMINION_OP_08_ALTEPA           = 94,  -- + Converted
+        DOMINION_OP_09_ALTEPA           = 95,  -- + Converted
+        DOMINION_OP_10_ALTEPA           = 96,  -- + Converted
+        DOMINION_OP_11_ALTEPA           = 97,  -- + Converted
+        DOMINION_OP_12_ALTEPA           = 98,  -- + Converted
+        DOMINION_OP_13_ALTEPA           = 99,  -- + Converted
+        DOMINION_OP_14_ALTEPA           = 100, -- + Converted
+        DOMINION_OP_01_ULEGUERAND       = 101, -- + Converted
+        DOMINION_OP_02_ULEGUERAND       = 102, -- + Converted
+        DOMINION_OP_03_ULEGUERAND       = 103, -- + Converted
+        DOMINION_OP_04_ULEGUERAND       = 104, -- + Converted
+        DOMINION_OP_05_ULEGUERAND       = 105, -- + Converted
+        DOMINION_OP_06_ULEGUERAND       = 106, -- + Converted
+        DOMINION_OP_07_ULEGUERAND       = 107, -- + Converted
+        DOMINION_OP_08_ULEGUERAND       = 108, -- + Converted
+        DOMINION_OP_09_ULEGUERAND       = 109, -- + Converted
+        DOMINION_OP_10_ULEGUERAND       = 110, -- + Converted
+        DOMINION_OP_11_ULEGUERAND       = 111, -- + Converted
+        DOMINION_OP_12_ULEGUERAND       = 112, -- + Converted
+        DOMINION_OP_13_ULEGUERAND       = 113, -- + Converted
+        DOMINION_OP_14_ULEGUERAND       = 114, -- + Converted
+        DOMINION_OP_01_GRAUBERG         = 115, -- + Converted
+        DOMINION_OP_02_GRAUBERG         = 116, -- + Converted
+        DOMINION_OP_03_GRAUBERG         = 117, -- + Converted
+        DOMINION_OP_04_GRAUBERG         = 118, -- + Converted
+        DOMINION_OP_05_GRAUBERG         = 119, -- + Converted
+        DOMINION_OP_06_GRAUBERG         = 120, -- + Converted
+        DOMINION_OP_07_GRAUBERG         = 121, -- + Converted
+        DOMINION_OP_08_GRAUBERG         = 122, -- + Converted
+        DOMINION_OP_09_GRAUBERG         = 123, -- + Converted
         WARD_WARDEN_I_ATTOHWA           = 124,
         WARD_WARDEN_I_MISAREAUX         = 125,
         WARD_WARDEN_I_VUNKERL           = 126,
@@ -1037,11 +1037,11 @@ xi.quest.id =
         THE_WYRM_GOD                    = 184,
         MEANWHILE_BACK_ON_ABYSSEA       = 185,
         A_MOONLIGHT_REQUITE             = 186,
-        DOMINION_OP_10_GRAUBERG         = 187,
-        DOMINION_OP_11_GRAUBERG         = 188,
-        DOMINION_OP_12_GRAUBERG         = 189,
-        DOMINION_OP_13_GRAUBERG         = 190,
-        DOMINION_OP_14_GRAUBERG         = 191,
+        DOMINION_OP_10_GRAUBERG         = 187, -- + Converted
+        DOMINION_OP_11_GRAUBERG         = 188, -- + Converted
+        DOMINION_OP_12_GRAUBERG         = 189, -- + Converted
+        DOMINION_OP_13_GRAUBERG         = 190, -- + Converted
+        DOMINION_OP_14_GRAUBERG         = 191, -- + Converted
     },
 
     -----------------------------------
@@ -1256,7 +1256,7 @@ xi.quest.id =
 }
 
 local function getVarPrefix(areaId, questId)
-    return string.format("Quest[%d][%d]", areaId, questId)
+    return string.format('Quest[%d][%d]', areaId, questId)
 end
 
 -- Interaction Framework Helper Functions
@@ -1268,8 +1268,12 @@ xi.quest.getVar = function(player, areaId, questId, name)
     return player:getVar(getVarPrefix(areaId, questId) .. name)
 end
 
-xi.quest.setVar = function(player, areaId, questId, name, value)
-    return player:setVar(getVarPrefix(areaId, questId) .. name, value)
+xi.quest.setVar = function(player, areaId, questId, name, value, expiry)
+    return player:setVar(getVarPrefix(areaId, questId) .. name, value, expiry)
+end
+
+xi.quest.setVarExpiration = function(player, areaId, questId, name, expiry)
+    return player:setCharVarExpiration(getVarPrefix(areaId, questId) .. name, expiry)
 end
 
 xi.quest.getLocalVar = function(player, areaId, questId, name)
@@ -1281,9 +1285,9 @@ xi.quest.setLocalVar = function(player, areaId, questId, name, value)
 end
 
 xi.quest.getMustZone = function(player, areaId, questId)
-    return player:getLocalVar(getVarPrefix(areaId, questId) .. "mustZone") == 1 and true or false
+    return player:getLocalVar(getVarPrefix(areaId, questId) .. 'mustZone') == 1 and true or false
 end
 
 xi.quest.setMustZone = function(player, areaId, questId)
-    player:setLocalVar(getVarPrefix(areaId, questId) .. "mustZone", 1)
+    player:setLocalVar(getVarPrefix(areaId, questId) .. 'mustZone', 1)
 end

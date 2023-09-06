@@ -2,13 +2,16 @@
 -- func: ah
 -- desc: opens the Auction House menu anywhere in the world
 -----------------------------------
+local commandObj = {}
 
-cmdprops =
+commandObj.cmdprops =
 {
     permission = 1,
-    parameters = ""
+    parameters = ''
 }
 
-function onTrigger(player)
+commandObj.onTrigger = function(player)
     player:sendMenu(3)
 end
+
+return commandObj

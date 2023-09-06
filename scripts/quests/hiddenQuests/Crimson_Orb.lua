@@ -11,7 +11,7 @@
 local davoiID = zones[xi.zone.DAVOI]
 -----------------------------------
 
-local quest = HiddenQuest:new("CrimsonOrb")
+local quest = HiddenQuest:new('CrimsonOrb')
 
 quest.reward =
 {

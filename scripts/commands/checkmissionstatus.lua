@@ -2,25 +2,25 @@
 -- func: checkmissionstatus <Log ID> <Player>
 -- desc: Prints current missionStatus for the given LogID and target Player to the in game chatlog
 -----------------------------------
-require("scripts/globals/missions")
 local logIdHelpers = require('scripts/globals/log_ids')
 -----------------------------------
+local commandObj = {}
 
-cmdprops =
+commandObj.cmdprops =
 {
     permission = 1,
-    parameters = "ssi"
+    parameters = 'ssi'
 }
 
-function error(player, msg)
+local function error(player, msg)
     player:PrintToPlayer(msg)
-    player:PrintToPlayer("!checkmissionstatus (player) (log ID) (index)")
+    player:PrintToPlayer('!checkmissionstatus (player) (log ID) (index)')
 end
 
-function onTrigger(player, target, logId, statusIndex)
+commandObj.onTrigger = function(player, target, logId, statusIndex)
     if statusIndex ~= nil then
         if statusIndex > 7 or statusIndex < 0 then
-            error(player, "Invalid index!")
+            error(player, 'Invalid index!')
             return
         end
     end
@@ -45,7 +45,7 @@ function onTrigger(player, target, logId, statusIndex)
     else
         targ = GetPlayerByName(target)
         if targ == nil then
-            error(player, string.format("Player named '%s' not found!", target))
+            error(player, string.format('Player named "%s" not found!', target))
             return
         end
     end
@@ -53,8 +53,10 @@ function onTrigger(player, target, logId, statusIndex)
     -- report mission
     local currentMissionStatus = targ:getMissionStatus(logId, statusIndex)
     if statusIndex then
-        player:PrintToPlayer(string.format("missionStatus for %s (%s index %s): %s", targ:getName(), logName, statusIndex, currentMissionStatus))
+        player:PrintToPlayer(string.format('missionStatus for %s (%s index %s): %s', targ:getName(), logName, statusIndex, currentMissionStatus))
     else
-        player:PrintToPlayer(string.format("missionStatus for %s (%s): %s", targ:getName(), logName, currentMissionStatus))
+        player:PrintToPlayer(string.format('missionStatus for %s (%s): %s', targ:getName(), logName, currentMissionStatus))
     end
 end
+
+return commandObj

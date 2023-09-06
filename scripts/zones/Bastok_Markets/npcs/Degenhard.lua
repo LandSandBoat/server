@@ -19,7 +19,7 @@ end
 entity.onTrigger = function(player, npc)
     if player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.BEYOND_INFINITY) == QUEST_ACCEPTED then
         player:startEvent(14)
-    elseif player:getCharVar("BeatAroundTheBushin") == 3 then
+    elseif player:getCharVar('BeatAroundTheBushin') == 3 then
         player:startEvent(342)
     end
 end
@@ -32,7 +32,7 @@ entity.onEventFinish = function(player, csid, option, npc)
         npcUtil.giveItem(player, xi.item.OLDE_RARAB_TAIL)
         player:confirmTrade()
     elseif csid == 342 then
-        player:setCharVar("BeatAroundTheBushin", 4)
+        player:setCharVar('BeatAroundTheBushin', 4)
     end
 end
 

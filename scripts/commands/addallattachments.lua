@@ -2,11 +2,12 @@
 -- func: addallattachments
 -- desc: Unlocks all attachments
 -----------------------------------
+local commandObj = {}
 
-cmdprops =
+commandObj.cmdprops =
 {
     permission = 1,
-    parameters = "s"
+    parameters = 's'
 }
 
 local validAttachments =
@@ -31,18 +32,20 @@ local function AddAllAttachments(player)
         player:unlockAttachment(validAttachments[i])
     end
 
-    player:PrintToPlayer(string.format("%s now has all attachments.", player:getName()))
+    player:PrintToPlayer(string.format('%s now has all attachments.', player:getName()))
 end
 
-function onTrigger(player, target)
+commandObj.onTrigger = function(player, target)
     if target == nil then
         AddAllAttachments(player)
     else
         local targ = GetPlayerByName(target)
         if targ == nil then
-            player:PrintToPlayer(string.format("Player named '%s' not found!", target))
+            player:PrintToPlayer(string.format('Player named "%s" not found!', target))
         else
             AddAllAttachments(targ)
         end
     end
 end
+
+return commandObj

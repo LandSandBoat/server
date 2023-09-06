@@ -2,19 +2,20 @@
 -- func: logoff
 -- desc: Logs the target player off by force.
 -----------------------------------
+local commandObj = {}
 
-cmdprops =
+commandObj.cmdprops =
 {
     permission = 1,
-    parameters = "s"
+    parameters = 's'
 }
 
-function error(player, msg)
+local function error(player, msg)
     player:PrintToPlayer(msg)
-    player:PrintToPlayer("!logoff (player)")
+    player:PrintToPlayer('!logoff (player)')
 end
 
-function onTrigger(player, target)
+commandObj.onTrigger = function(player, target)
     -- validate target
     local targ
     if target == nil then
@@ -22,7 +23,7 @@ function onTrigger(player, target)
     else
         targ = GetPlayerByName(target)
         if targ == nil then
-            error(player, string.format("Invalid player '%s' given.", target))
+            error(player, string.format('Invalid player \'%s\' given.', target))
             return
         end
     end
@@ -30,6 +31,8 @@ function onTrigger(player, target)
     -- logoff target
     targ:leaveGame()
     if targ:getID() ~= player:getID() then
-        player:PrintToPlayer(string.format("%s has been logged off.", targ:getName()))
+        player:PrintToPlayer(string.format('%s has been logged off.', targ:getName()))
     end
 end
+
+return commandObj
