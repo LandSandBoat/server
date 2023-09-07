@@ -1,16 +1,16 @@
 -----------------------------------
--- ID: 4631
--- Scroll of Dia
--- Teaches the white magic Dia
+-- ID: 4607
+-- Scroll of Stone (Exclusive)
+-- Teaches the black magic Stone
 -----------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)
-    return target:canLearnSpell(xi.magic.spell.DIA)
+    return target:canLearnSpell(xi.magic.spell.STONE)
 end
 
 itemObject.onItemUse = function(target)
-    target:addSpell(xi.magic.spell.DIA)
+    target:addSpell(xi.magic.spell.STONE)
 end
 
 return itemObject
