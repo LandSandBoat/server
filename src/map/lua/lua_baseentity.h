@@ -523,7 +523,7 @@ public:
 
     uint8 checkSoloPartyAlliance(); // Check if Player is in Party or Alliance 0=Solo 1=Party 2=Alliance
 
-    bool checkKillCredit(CLuaBaseEntity* PLuaBaseEntity, sol::object const& arg1, sol::object const& arg2);
+    bool checkKillCredit(CLuaBaseEntity* PLuaBaseEntity, sol::object const& minRange);
 
     uint8 checkDifficulty(CLuaBaseEntity* PLuaBaseEntity); // Checks difficulty of the mob
 
