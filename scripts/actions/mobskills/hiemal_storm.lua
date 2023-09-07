@@ -1,4 +1,4 @@
----------------------------------------------
+-----------------------------------
 --  Hiemal Storm
 --
 --  Description: Extreme directional AoE ice damage for 200-1400 points
@@ -6,7 +6,7 @@
 --  Utsusemi/Blink absorb: Ignores shadows
 --  Range: Unknown cone
 --  Notes: Used only by Snoll Tzar
----------------------------------------------
+-----------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

@@ -1,11 +1,11 @@
----------------------------------------------------
+-----------------------------------
 --  Cosmic Elucidation
 --  Description: Cosmic Elucidation inflicts heavy AOE damage to everyone in the battle.
 --  Type:
 --  Utsusemi/Blink absorb: Ignores shadows
 --  Range:
 --  Notes: Ejects all combatants from the battlefield, resulting in a failure.
--------------------------------------------------------------------
+-----------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

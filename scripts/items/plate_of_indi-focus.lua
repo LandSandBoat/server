@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 6089
 -- plate_of_indi-focus
 -- Teaches INDI-FOCUS
------------------------------------------
+-----------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

@@ -351,6 +351,11 @@ class LuaStyleCheck:
                 if in_block_comment:
                     continue
 
+                comment_header = line.rstrip("\n")
+                if re.search("^-+$", comment_header) and len(comment_header) > 2 and len(comment_header) != 35:
+                    # For now, ignore empty comments with only `--`
+                    self.error("Standard comment block lines of '-' should be 35 characters.")
+
                 # Remove in-line comments
                 code_line = re.sub("(?=--)(.*?)(?=\r\n|\n)", "", line)
 
@@ -475,7 +480,7 @@ elif target == 'scripts':
         total_errors += LuaStyleCheck(filename).errcount
 elif target == 'test':
     total_errors = LuaStyleCheck('tools/ci/tests/stylecheck.lua', show_errors = False).errcount
-    expected_errors = 70
+    expected_errors = 72
 else:
     total_errors = LuaStyleCheck(target).errcount
 

@@ -1,10 +1,10 @@
------------------------------------------
+-----------------------------------
 -- ID: 5262
 -- Item: Bottle Of Hysteroanima
 -- Item Effect: HYSTERIA
 -- TODO: The mobskill actually finishes but with no animation,
 --       and the category changes to 7 instead of 11 (mobskill finish)
------------------------------------------
+-----------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, player)

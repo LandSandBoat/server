@@ -1,9 +1,9 @@
----------------------------------------------
+-----------------------------------
 -- Spiral Hell
 -- Delivers a single-hit attack
 -- Type: Physical
 -- Range: Melee
--------------------------------------------------------
+-----------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

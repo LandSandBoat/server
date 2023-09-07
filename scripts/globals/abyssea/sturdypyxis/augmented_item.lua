@@ -5,10 +5,10 @@ xi = xi or {}
 xi.pyxis = xi.pyxis or {}
 
 xi.pyxis.augItem = {}
----------------------------------
+-----------------------------------
 -- drop id's for augmented items
 -- uses zone id as the key
----------------------------------
+-----------------------------------
 local augdrops =
 {
     [xi.zone.ABYSSEA_KONSCHTAT] =
@@ -75,10 +75,10 @@ local augdrops =
     },
 }
 
----------------------------------------------------------------------------------------------
+-----------------------------------
 -- augs table holds potential augments with min/max values to be randomised for each item id
 -- example: Tarutaru sash [13212] would have 6 potential augments, each with its own values
----------------------------------------------------------------------------------------------
+-----------------------------------
 local augs =
 {
     [xi.item.DARK_RING] =
@@ -434,13 +434,13 @@ local augs =
     },
 }
 
--------------------------------------------------------------------------------
+-----------------------------------
 -- This table reduces the total number of augments available by chest tier.
 -- removes total from right to left
 -- so { 5, 4, 3, 2, 0 },
 -- will decrease the total augments available for tier 1 chest by 5,
 -- tier 2 by 4, tier 3 by 3 and tier 4 by 2, leaving the full total for tier 5
--------------------------------------------------------------------------------
+-----------------------------------
 local augTierDeduction =
 {
     [xi.item.DARK_RING       ] = { 3, 3, 3, 2, 0 },

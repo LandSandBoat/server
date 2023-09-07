@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 6094
 -- plate_of_indi-malaise
 -- Teaches INDI-MALAISE
------------------------------------------
+-----------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

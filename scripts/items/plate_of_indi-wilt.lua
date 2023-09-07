@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 6091
 -- plate_of_indi-wilt
 -- Teaches INDI-WILT
------------------------------------------
+-----------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

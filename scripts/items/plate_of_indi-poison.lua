@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 6074
 -- plate_of_indi-poison
 -- Teaches INDI-POISON
------------------------------------------
+-----------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

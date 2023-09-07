@@ -1,9 +1,9 @@
----------------------------------------------
+-----------------------------------
 -- Shadowstitch
 -- Binds target.
 -- Type: Physical
 -- Range: Melee
--------------------------------------------------------
+-----------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
