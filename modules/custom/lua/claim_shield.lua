@@ -1,10 +1,10 @@
 -----------------------------------
 -- Claim Shield
 -----------------------------------
-require("modules/module_utils")
-require("scripts/globals/utils")
+require('modules/module_utils')
+require('scripts/globals/utils')
 -----------------------------------
-local m = Module:new("claim_shield")
+local m = Module:new('claim_shield')
 
 local claimshieldTime = 7500
 
@@ -15,39 +15,39 @@ local claimshieldTime = 7500
 -- Format:
 local nmsToShield =
 {
-    { "Attohwa_Chasm", "Citipati" },
-    { "Attohwa_Chasm", "Tiamat" },
-    { "Attohwa_Chasm", "Xolotl" },
-    { "Caedarva_Mire", "Khimaira" },
-    { "Castle_Oztroja", "Mee_Deggi_the_Punisher" },
-    { "Castle_Oztroja", "Quu_Domi_the_Gallant" },
-    { "FeiYin", "Capricious_Cassie" },
-    { "FeiYin", "Eastern_Shadow" },
-    { "FeiYin", "Northern_Shadow" },
-    { "FeiYin", "Southern_Shadow" },
-    { "FeiYin", "Western_Shadow" },
-    { "Garlaige_Citadel", "Serket" },
-    { "Giddeus", "Hoo_Mjuu_the_Torrent" },
-    { "Gustav_Tunnel", "Bune" },
-    { "Jugner_Forest", "King_Arthro" },
-    { "King_Ranperres_Tomb", "Vrtra" },
-    { "Labyrinth_of_Onzozo", "Lord_of_Onzozo" },
-    { "Lufaise_Meadows", "Padfoot" },
-    { "Maze_of_Shakhrami", "Argus" },
-    { "Maze_of_Shakhrami", "Leech_King" },
-    { "Mount_Zhayolm", "Cerberus" },
-    { "Rolanberry_Fields", "Eldritch_Edge" },
-    { "Rolanberry_Fields", "Simurgh" },
-    { "Rolanberry_Fields_[S]", "Lamina" },
-    { "Sauromugue_Champaign", "Blighting_Brand" },
-    { "Sauromugue_Champaign", "Roc" },
-    { "Sauromugue_Champaign_[S]", "Hyakinthos" },
-    { "Sea_Serpent_Grotto", "Charybdis" },
-    { "South_Gustaberg", "Leaping_Lizzy" },
-    { "Uleguerand_Range", "Jormungand" },
-    { "Valkurm_Dunes", "Valkurm_Emperor" },
-    { "Wajaom_Woodlands", "Hydra" },
-    { "Western_Altepa_Desert", "King_Vinegarroon" },
+    { 'Attohwa_Chasm', 'Citipati' },
+    { 'Attohwa_Chasm', 'Tiamat' },
+    { 'Attohwa_Chasm', 'Xolotl' },
+    { 'Caedarva_Mire', 'Khimaira' },
+    { 'Castle_Oztroja', 'Mee_Deggi_the_Punisher' },
+    { 'Castle_Oztroja', 'Quu_Domi_the_Gallant' },
+    { 'FeiYin', 'Capricious_Cassie' },
+    { 'FeiYin', 'Eastern_Shadow' },
+    { 'FeiYin', 'Northern_Shadow' },
+    { 'FeiYin', 'Southern_Shadow' },
+    { 'FeiYin', 'Western_Shadow' },
+    { 'Garlaige_Citadel', 'Serket' },
+    { 'Giddeus', 'Hoo_Mjuu_the_Torrent' },
+    { 'Gustav_Tunnel', 'Bune' },
+    { 'Jugner_Forest', 'King_Arthro' },
+    { 'King_Ranperres_Tomb', 'Vrtra' },
+    { 'Labyrinth_of_Onzozo', 'Lord_of_Onzozo' },
+    { 'Lufaise_Meadows', 'Padfoot' },
+    { 'Maze_of_Shakhrami', 'Argus' },
+    { 'Maze_of_Shakhrami', 'Leech_King' },
+    { 'Mount_Zhayolm', 'Cerberus' },
+    { 'Rolanberry_Fields', 'Eldritch_Edge' },
+    { 'Rolanberry_Fields', 'Simurgh' },
+    { 'Rolanberry_Fields_[S]', 'Lamina' },
+    { 'Sauromugue_Champaign', 'Blighting_Brand' },
+    { 'Sauromugue_Champaign', 'Roc' },
+    { 'Sauromugue_Champaign_[S]', 'Hyakinthos' },
+    { 'Sea_Serpent_Grotto', 'Charybdis' },
+    { 'South_Gustaberg', 'Leaping_Lizzy' },
+    { 'Uleguerand_Range', 'Jormungand' },
+    { 'Valkurm_Dunes', 'Valkurm_Emperor' },
+    { 'Wajaom_Woodlands', 'Hydra' },
+    { 'Western_Altepa_Desert', 'King_Vinegarroon' },
 }
 
 -- Find the position of a target entity in a table,
@@ -82,7 +82,7 @@ local timerFunc = function(mob)
     -- with their masters
     local entries = {}
     for _, v in pairs(enmityList) do
-        local entity = v["entity"]
+        local entity = v['entity']
         local master = entity:getMaster()
         if
             not entity:isPC() and
@@ -116,12 +116,12 @@ local timerFunc = function(mob)
         -- Message winner and their party/alliance that they've won
         local alliance = claimWinner:getAlliance()
         for _, member in pairs(alliance) do
-            local str = string.format("Your group has won the lottery for %s! (out of %i players)", mob:getPacketName(), numEntries)
+            local str = string.format('Your group has won the lottery for %s! (out of %i players)', mob:getPacketName(), numEntries)
             if #alliance == 1 then
-                str = string.format("You have won the lottery for %s! (out of %i players)", mob:getPacketName(), numEntries)
+                str = string.format('You have won the lottery for %s! (out of %i players)', mob:getPacketName(), numEntries)
             end
 
-            member:PrintToPlayer(str, xi.msg.channel.SYSTEM_3, "")
+            member:PrintToPlayer(str, xi.msg.channel.SYSTEM_3, '')
 
             -- Remove from entries table
             local pos = tableFindPosByID(entries, member)
@@ -133,12 +133,12 @@ local timerFunc = function(mob)
         -- Everyone left in the entries table isn't part of the winning group, message them and
         -- clear them from the enmity list
         for _, member in pairs(entries) do
-            local str = string.format("Your group was not successful in the lottery for %s. (out of %i players)", mob:getPacketName(), numEntries)
+            local str = string.format('Your group was not successful in the lottery for %s. (out of %i players)', mob:getPacketName(), numEntries)
             if #alliance == 1 then
-                str = string.format("Your were not successful in the lottery for %s. (out of %i players)", mob:getPacketName(), numEntries)
+                str = string.format('Your were not successful in the lottery for %s. (out of %i players)', mob:getPacketName(), numEntries)
             end
 
-            member:PrintToPlayer(str, xi.msg.channel.SYSTEM_3, "")
+            member:PrintToPlayer(str, xi.msg.channel.SYSTEM_3, '')
             mob:clearEnmityForEntity(member)
         end
     end
@@ -146,7 +146,7 @@ end
 
 -- Called on entity onMobSpawn, sets up timerFunc
 local listenerFunc = function(mob)
-    print(string.format("Applying Claimshield to %s for %ims", mob:getPacketName(), claimshieldTime))
+    print(string.format('Applying Claimshield to %s for %ims', mob:getPacketName(), claimshieldTime))
 
     mob:setClaimable(false)
     mob:setUnkillable(true)
@@ -158,7 +158,7 @@ end
 
 -- Main entrypoint of each override
 local overrideFunc = function(mob)
-    mob:addListener("SPAWN", mob:getPacketName() .. "_CS_SPAWN", listenerFunc)
+    mob:addListener('SPAWN', mob:getPacketName() .. '_CS_SPAWN', listenerFunc)
 
     -- Call original onMobInitialize
     super(mob)
@@ -167,7 +167,7 @@ end
 -- NOTE: At the time we iterate over these entries, the Lua zone and mob objects won't be ready,
 --     : so we deal with everything as strings for now.
 for _, entry in pairs(nmsToShield) do
-    m:addOverride(string.format("xi.zones.%s.mobs.%s.onMobInitialize", entry[1], entry[2]), overrideFunc)
+    m:addOverride(string.format('xi.zones.%s.mobs.%s.onMobInitialize', entry[1], entry[2]), overrideFunc)
 end
 
 return m

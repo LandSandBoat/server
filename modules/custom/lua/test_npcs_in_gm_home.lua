@@ -1,12 +1,12 @@
 -----------------------------------
 -- Add some test NPCs to GM_HOME (zone 210)
 -----------------------------------
-require("modules/module_utils")
-require("scripts/zones/GM_Home/Zone")
+require('modules/module_utils')
+require('scripts/zones/GM_Home/Zone')
 -----------------------------------
-local m = Module:new("test_npcs_in_gm_home")
+local m = Module:new('test_npcs_in_gm_home')
 
-m:addOverride("xi.zones.GM_Home.Zone.onInitialize", function(zone)
+m:addOverride('xi.zones.GM_Home.Zone.onInitialize', function(zone)
     -- Call the zone's original function for onInitialize
     super(zone)
 
@@ -21,17 +21,17 @@ m:addOverride("xi.zones.GM_Home.Zone.onInitialize", function(zone)
         --     : So populate it with something unique-ish even if you aren't going to use it.
         --     : You can then hide the name with entity:hideName(true)
         -- NOTE: This name CAN include spaces and underscores.
-        name = "Horro",
+        name = 'Horro',
 
         -- Optional: Define a different name that is visible to players.
-        -- "Horro" (DE_Horro) will still be used internally for lookups.
-        -- packetName = "New Horro",
+        -- 'Horro' (DE_Horro) will still be used internally for lookups.
+        -- packetName = 'New Horro',
 
         -- You can use regular model ids (See documentation/model_ids.txt, or play around with !costume)
         look = 2430,
 
         -- You can also use the raw packet look information (as a string), as seen in npc_list and mob_pools
-        -- look = "0x0100020500101120003000400050006000700000",
+        -- look = '0x0100020500101120003000400050006000700000',
 
         -- Set the position using in-game x, y and z
         x = 5.000,
@@ -49,14 +49,14 @@ m:addOverride("xi.zones.GM_Home.Zone.onInitialize", function(zone)
         onTrade = function(player, npc, trade)
             -- NOTE: We have to use getPacketName, because the regular name is modified and being used
             --     : for internal lookups
-            player:PrintToPlayer("No, thanks!", 0, npc:getPacketName())
+            player:PrintToPlayer('No, thanks!', 0, npc:getPacketName())
         end,
 
-        -- The entity will not be "triggerable" unless you populate onTrigger
+        -- The entity will not be 'triggerable' unless you populate onTrigger
         onTrigger = function(player, npc)
             -- NOTE: We have to use getPacketName, because the regular name is modified and being used
             --     : for internal lookups
-            player:PrintToPlayer("Welcome to GM Home!", 0, npc:getPacketName())
+            player:PrintToPlayer('Welcome to GM Home!', 0, npc:getPacketName())
         end,
     })
 
