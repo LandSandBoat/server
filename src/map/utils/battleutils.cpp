@@ -2565,6 +2565,9 @@ namespace battleutils
             // Do we get TP for damaging spells?
             int16 tp = battleutils::CalculateSpellTP(PAttacker, PSpell);
             PAttacker->addTP(tp);
+
+            // Targets of damaging spells gain 50 tp
+            PDefender->addTP((uint16)50);
         }
 
         return damage;
