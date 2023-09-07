@@ -10420,7 +10420,7 @@ uint8 CLuaBaseEntity::checkSoloPartyAlliance()
  *  Notes   : and the mob is able to give exp to the members
  ************************************************************************/
 
-bool CLuaBaseEntity::checkKillCredit(CLuaBaseEntity* PLuaBaseEntity, sol::object const& arg1, sol::object const& arg2)
+bool CLuaBaseEntity::checkKillCredit(CLuaBaseEntity* PLuaBaseEntity, sol::object const& minRange)
 {
     if (m_PBaseEntity->objtype != TYPE_PC || PLuaBaseEntity->GetBaseEntity()->objtype != TYPE_MOB)
     {
@@ -10428,15 +10428,12 @@ bool CLuaBaseEntity::checkKillCredit(CLuaBaseEntity* PLuaBaseEntity, sol::object
         return false;
     }
 
-    CCharEntity* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
-    CMobEntity*  PMob  = static_cast<CMobEntity*>(PLuaBaseEntity->GetBaseEntity());
+    CCharEntity* PChar  = static_cast<CCharEntity*>(m_PBaseEntity);
+    CMobEntity*  PMob   = static_cast<CMobEntity*>(PLuaBaseEntity->GetBaseEntity());
+    float        range  = minRange.is<float>() ? minRange.as<float>() : 100;
+    bool         credit = false;
 
-    bool  credit  = false;
-    int   lvlDiff = (int)(PMob->GetMLevel()) - (int)(PChar->GetMLevel());
-    int   maxDiff = (arg1 != sol::lua_nil) ? arg1.as<int>() : 15;
-    float range   = (arg2 != sol::lua_nil) ? arg2.as<float>() : 100;
-
-    if (charutils::CheckMob(PMob->m_HiPCLvl, PMob->GetMLevel()) > EMobDifficulty::TooWeak && distance(PMob->loc.p, PChar->loc.p) < range && lvlDiff < maxDiff)
+    if (charutils::CheckMob(PMob->m_HiPCLvl, PMob->GetMLevel()) > EMobDifficulty::TooWeak && distance(PMob->loc.p, PChar->loc.p) < range)
     {
         if (PChar->PParty && PChar->PParty->GetSyncTarget())
         {
