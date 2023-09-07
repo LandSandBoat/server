@@ -1,6 +1,6 @@
 -----------------------------------
--- ID: 4631
--- Scroll of Dia
+-- ID: 4606
+-- Scroll of Dia (Exclusive)
 -- Teaches the white magic Dia
 -----------------------------------
 local itemObject = {}
