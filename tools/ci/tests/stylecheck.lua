@@ -1,6 +1,7 @@
 -----------------------------------
 -- lua_stylecheck Unit Tests
 -----------------------------------
+-- Note: The above two header lines are also compared, PASS x2
 
 -- check_table_formatting()
 local badTable = { -- FAIL
@@ -212,3 +213,10 @@ require('scripts/globals/titles') -- FAIL
 require('scripts/globals/zone') -- FAIL
 require('scripts/enum/item') -- FAIL
 require('scripts/zones/Bastok_Markets/IDs') -- FAIL
+
+-- Good:
+-----------------------------------
+
+-- Bad:
+-------------------------------------
+---------------------------------
