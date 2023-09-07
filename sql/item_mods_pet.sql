@@ -726,6 +726,18 @@ INSERT INTO `item_mods_pet` VALUES (23057,384,600,3); -- Automaton - HASTE_GEAR:
 -- Ankusa Helm +2
 INSERT INTO `item_mods_pet` VALUES (23071,384,500,0); -- All Pets - HASTE_GEAR: 5%
 
+-- Glyphic Horn +2
+INSERT INTO `item_mods_pet` VALUES (23077,23,47,1); -- Avatar: ATT: 47
+INSERT INTO `item_mods_pet` VALUES (23077,28,53,1); -- Avatar: MATT: 53
+
+-- Pitre Taj +2
+INSERT INTO `item_mods_pet` VALUES (23080,23,47,3); -- Automaton: ATT: 47
+INSERT INTO `item_mods_pet` VALUES (23080,24,47,3); -- Automaton: RATT: 47
+INSERT INTO `item_mods_pet` VALUES (23080,25,27,3); -- Automaton: ACC: 27
+INSERT INTO `item_mods_pet` VALUES (23080,26,27,3); -- Automaton: RACC: 27
+INSERT INTO `item_mods_pet` VALUES (23080,369,4,3); -- Automaton: REFRESH: 4
+INSERT INTO `item_mods_pet` VALUES (23080,370,4,3); -- Automaton: REGEN: 4
+
 -- Bagua Galero +2
 INSERT INTO `item_mods_pet` VALUES (23083,2,500,8); -- Luopan - HP: 500
 
