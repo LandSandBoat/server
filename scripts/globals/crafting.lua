@@ -417,9 +417,9 @@ xi.crafting.unionRepresentativeTriggerRenounceCheck = function(player, eventId, 
     return false
 end
 
---------------------------------------------------
+-----------------------------------
 -- Guild Point NPCs (Union Representatives)
---------------------------------------------------
+-----------------------------------
 xi.crafting.guildPointOnTrade = function(player, npc, trade, csid, guildId)
     local ID                 = zones[player:getZoneID()]
     local _, remainingPoints = player:getCurrentGPItem(guildId)

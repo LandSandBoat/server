@@ -1,6 +1,6 @@
-----------------------------
+-----------------------------------
 ----- Sequence class
-----------------------------
+-----------------------------------
 require('scripts/globals/interaction/actions/action')
 require('scripts/globals/interaction/actions/message')
 

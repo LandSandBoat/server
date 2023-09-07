@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 6075
 -- plate_of_indi-refresh
 -- Teaches INDI-REFRESH
------------------------------------------
+-----------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

@@ -1,7 +1,7 @@
------------------------------------------
+-----------------------------------
 -- Spell: Geo-Slow
 -- Reduces attack speed for enemies within area of effect.
------------------------------------------
+-----------------------------------
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

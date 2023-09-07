@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 6073
 -- plate_of_indi-regen
 -- Teaches INDI-REGEN
------------------------------------------
+-----------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

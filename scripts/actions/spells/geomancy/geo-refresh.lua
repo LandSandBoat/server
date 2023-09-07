@@ -1,7 +1,7 @@
------------------------------------------
+-----------------------------------
 -- Spell: Geo-Refresh
 -- Gradually restores MP for party members within area of effect.
------------------------------------------
+-----------------------------------
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

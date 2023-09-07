@@ -1,6 +1,6 @@
-----------------------------
+-----------------------------------
 ----- KeyItemAction class
-----------------------------
+-----------------------------------
 require('scripts/globals/interaction/actions/action')
 
 KeyItemAction = Action:new(Action.Type.KeyItem)

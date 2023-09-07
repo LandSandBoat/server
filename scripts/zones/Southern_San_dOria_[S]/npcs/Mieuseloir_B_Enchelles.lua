@@ -3,7 +3,7 @@
 --  NPC: Mieuseloir B Enchelles
 -- !pos 120 0 104 80
 -- Dispatched with the Crimson Wolf Esquires in Campaign Battle
-------------------------------------
+-----------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 6088
 -- plate_of_indi-voidance
 -- Teaches INDI-VOIDANCE
------------------------------------------
+-----------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

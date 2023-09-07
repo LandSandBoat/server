@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 6085
 -- plate_of_indi-acumen
 -- Teaches INDI-ACUMEN
------------------------------------------
+-----------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

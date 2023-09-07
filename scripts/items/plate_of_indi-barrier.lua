@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 6084
 -- plate_of_indi-barrier
 -- Teaches INDI-BARRIER
------------------------------------------
+-----------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

@@ -1,7 +1,7 @@
------------------------------------------
+-----------------------------------
 -- Spell: Geo-Fend
 -- Enhances magic defense for party members within area of effect.
------------------------------------------
+-----------------------------------
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)
