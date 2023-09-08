@@ -36,7 +36,7 @@ quest.sections =
                     then
                         return quest:progressEvent(531)
                     else
-                        return quest:progressEvent(532)
+                        return quest:event(532)
                     end
                 end,
 
@@ -44,7 +44,7 @@ quest.sections =
                     if quest:getVar(player, 'Prog') == 0 then
                         return quest:progressEvent(527)
                     else
-                        return quest:progressEvent(525)
+                        return quest:event(525)
                     end
                 end,
             },
@@ -58,7 +58,7 @@ quest.sections =
                     then
                         return quest:progressEvent(528)
                     else
-                        return quest:progressEvent(529)
+                        return quest:event(529)
                     end
                 end,
 
@@ -113,7 +113,7 @@ quest.sections =
                     if npcUtil.giveItem(player, xi.item.SLICE_OF_GRILLED_HARE) then
                         quest:setVar(player, 'Option', 0)
                     else
-                        return quest:progressEvent(538)
+                        player:startEvent(538)
                     end
                 end,
             },
