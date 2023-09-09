@@ -40,8 +40,6 @@ xi.magian.trialsold =
 {
     -- Relic Weapon
     -- Spharai
-    [1003] = { check = checks.checkTrials, reqs = { killWithWs = false, wSkill = set{ xi.weaponskill.FINAL_HEAVEN }, mobSystem = set{ xi.eco.VERMIN } } },  -- 75 -> 75 DMG+2
-    [1004] = { check = checks.checkTrials, reqs = { killWithWs = true, wSkill = set{ xi.weaponskill.FINAL_HEAVEN }, mobSystem = set{ xi.eco.PLANTOID } } }, -- 75 DMG+2 -> 75 DMG+6
     [1826] = { check = checks.checkTrials, reqs = { killWithWs = true, wSkill = set{ xi.weaponskill.FINAL_HEAVEN }, mobSystem = set{ xi.eco.BEAST } } },    -- 75 DMG+6 -> 75 DMG+8
     [1827] = { check = checks.checkTrials, reqs = { killWithWs = true, wSkill = set{ xi.weaponskill.FINAL_HEAVEN }, mobSystem = set{ xi.eco.AMORPH } } },   -- 75 DMG+8 -> 80
     [2253] = { check = checks.checkTrials, reqs = { killWithWs = true, wSkill = set{ xi.weaponskill.FINAL_HEAVEN }, mobSystem = set{ xi.eco.ARCANA } } },   -- 80 -> 85
@@ -49,8 +47,6 @@ xi.magian.trialsold =
     [3097] = { check = checks.checkTrials, reqs = { mobid = set{ 17330199 } } }, -- 90 -> 95 (Animated Knuckles)
 
     -- Mandau
-    [991]  = { check = checks.checkTrials, reqs = { killWithWs = false, wSkill = set{ xi.weaponskill.MERCY_STROKE }, mobSystem = set{ xi.eco.BEAST } } },    -- 75 -> 75 DMG+1
-    [992]  = { check = checks.checkTrials, reqs = { killWithWs = true, wSkill = set{ xi.weaponskill.MERCY_STROKE }, mobSystem = set{ xi.eco.VERMIN } } },    -- 75 DMG+1 -> 75 DMG+2
     [1818] = { check = checks.checkTrials, reqs = { killWithWs = true, wSkill = set{ xi.weaponskill.MERCY_STROKE }, mobSystem = set{ xi.eco.PLANTOID } } },  -- 75 DMG+2 -> 75 DMG+3
     [1819] = { check = checks.checkTrials, reqs = { killWithWs = true, wSkill = set{ xi.weaponskill.MERCY_STROKE }, mobSystem = set{ xi.eco.BIRD } } },      -- 75 DMG+3 -> 80
     [2249] = { check = checks.checkTrials, reqs = { killWithWs = true, wSkill = set{ xi.weaponskill.MERCY_STROKE }, mobSystem = set{ xi.eco.DRAGON } } },    -- 80 -> 85
@@ -58,8 +54,6 @@ xi.magian.trialsold =
     [3093] = { check = checks.checkTrials, reqs = { mobid = set{ 17330200 } } }, -- 90 -> 95 (Animated Dagger)
 
     -- Excalibur
-    [1012] = { check = checks.checkTrials, reqs = { killWithWs = false, wSkill = set{ xi.weaponskill.KNIGHTS_OF_ROUND }, mobSystem = set{ xi.eco.AQUAN } } },    -- 75 -> 75 DMG+1
-    [1013] = { check = checks.checkTrials, reqs = { killWithWs = true, wSkill = set{ xi.weaponskill.KNIGHTS_OF_ROUND }, mobSystem = set{ xi.eco.UNDEAD } } },    -- 75 DMG+1 -> 75 DMG+2
     [1832] = { check = checks.checkTrials, reqs = { killWithWs = true, wSkill = set{ xi.weaponskill.KNIGHTS_OF_ROUND }, mobSystem = set{ xi.eco.LIZARD } } },    -- 75 DMG+2 -> 75 DMG+3
     [1833] = { check = checks.checkTrials, reqs = { killWithWs = true, wSkill = set{ xi.weaponskill.KNIGHTS_OF_ROUND }, mobSystem = set{ xi.eco.DRAGON } } },    -- 75 DMG+3 -> 80
     [2256] = { check = checks.checkTrials, reqs = { killWithWs = true, wSkill = set{ xi.weaponskill.KNIGHTS_OF_ROUND }, mobSystem = set{ xi.eco.BIRD } } },      -- 80 -> 85
@@ -67,8 +61,6 @@ xi.magian.trialsold =
     [3100] = { check = checks.checkTrials, reqs = { mobid = set{ 17330201 } } }, -- 90 -> 95 (Animated Longsword)
 
     -- Ragnarok
-    [1024] = { check = checks.checkTrials, reqs = { killWithWs = false, wSkill = set{ xi.weaponskill.SCOURGE }, mobSystem = set{ xi.eco.BIRD } } },     -- 75 -> 75 DMG+3
-    [1025] = { check = checks.checkTrials, reqs = { killWithWs = true, wSkill = set{ xi.weaponskill.SCOURGE }, mobSystem = set{ xi.eco.BEAST } } },     -- 75 DMG+3 -> 75 DMG+9
     [1840] = { check = checks.checkTrials, reqs = { killWithWs = true, wSkill = set{ xi.weaponskill.SCOURGE }, mobSystem = set{ xi.eco.AQUAN } } },     -- 75 DMG+9 -> 75 DMG+10
     [1841] = { check = checks.checkTrials, reqs = { killWithWs = true, wSkill = set{ xi.weaponskill.SCOURGE }, mobSystem = set{ xi.eco.UNDEAD } } },    -- 75 DMG+10 -> 80
     [2260] = { check = checks.checkTrials, reqs = { killWithWs = true, wSkill = set{ xi.weaponskill.SCOURGE }, mobSystem = set{ xi.eco.ARCANA } } },    -- 80 -> 85
@@ -76,8 +68,6 @@ xi.magian.trialsold =
     [3104] = { check = checks.checkTrials, reqs = { mobid = set{ 17330202 } } }, -- 90 -> 95 (Animated Claymore)
 
     -- Guttler
-    [1027] = { check = checks.checkTrials, reqs = { killWithWs = false, wSkill = set{ xi.weaponskill.ONSLAUGHT }, mobSystem = set{ xi.eco.UNDEAD } } },   -- 75 -> 75 DMG+2
-    [1028] = { check = checks.checkTrials, reqs = { killWithWs = true, wSkill = set{ xi.weaponskill.ONSLAUGHT }, mobSystem = set{ xi.eco.ARCANA } } },    -- 75 DMG+2 -> 75 DMG+6
     [1842] = { check = checks.checkTrials, reqs = { killWithWs = true, wSkill = set{ xi.weaponskill.ONSLAUGHT }, mobSystem = set{ xi.eco.BEAST } } },     -- 75 DMG+6 -> 75 DMG+7
     [1843] = { check = checks.checkTrials, reqs = { killWithWs = true, wSkill = set{ xi.weaponskill.ONSLAUGHT }, mobSystem = set{ xi.eco.AMORPH } } },    -- 75 DMG+7 -> 80
     [2261] = { check = checks.checkTrials, reqs = { killWithWs = true, wSkill = set{ xi.weaponskill.ONSLAUGHT }, mobSystem = set{ xi.eco.BIRD } } },      -- 80 -> 85
@@ -85,8 +75,6 @@ xi.magian.trialsold =
     [3105] = { check = checks.checkTrials, reqs = { mobid = set{ 17330203 } } }, -- 90 -> 95 (Animated Tabar)
 
     -- Bravura
-    [1033] = { check = checks.checkTrials, reqs = { killWithWs = false, wSkill = set{ xi.weaponskill.METATRON_TORMENT }, mobSystem = set{ xi.eco.LIZARD } } },   -- 75 -> 75 DMG+3
-    [1034] = { check = checks.checkTrials, reqs = { killWithWs = true, wSkill = set{ xi.weaponskill.METATRON_TORMENT }, mobSystem = set{ xi.eco.PLANTOID } } },  -- 75 DMG+3 -> 75 DMG+7
     [1846] = { check = checks.checkTrials, reqs = { killWithWs = true, wSkill = set{ xi.weaponskill.METATRON_TORMENT }, mobSystem = set{ xi.eco.UNDEAD } } },    -- 75 DMG+7 -> 75 DMG+9
     [1847] = { check = checks.checkTrials, reqs = { killWithWs = true, wSkill = set{ xi.weaponskill.METATRON_TORMENT }, mobSystem = set{ xi.eco.PLANTOID } } },  -- 75 DMG+9 -> 80
     [2263] = { check = checks.checkTrials, reqs = { killWithWs = true, wSkill = set{ xi.weaponskill.METATRON_TORMENT }, mobSystem = set{ xi.eco.DRAGON } } },    -- 80 -> 85
@@ -94,8 +82,6 @@ xi.magian.trialsold =
     [3107] = { check = checks.checkTrials, reqs = { mobid = set{ 17330204 } } }, -- 90 -> 95 (Animated Great Axe)
 
     -- Gungnir
-    [1039] = { check = checks.checkTrials, reqs = { killWithWs = false, wSkill = set{ xi.weaponskill.GEIRSKOGUL }, mobSystem = set{ xi.eco.AMORPH } } },  -- 75 -> 75 DMG+3
-    [1040] = { check = checks.checkTrials, reqs = { killWithWs = true, wSkill = set{ xi.weaponskill.GEIRSKOGUL }, mobSystem = set{ xi.eco.LIZARD } } },   -- 75 DMG+3 -> 75 DMG+7
     [1850] = { check = checks.checkTrials, reqs = { killWithWs = true, wSkill = set{ xi.weaponskill.GEIRSKOGUL }, mobSystem = set{ xi.eco.ARCANA } } },   -- 75 DMG+7 -> 75 DMG+9
     [1851] = { check = checks.checkTrials, reqs = { killWithWs = true, wSkill = set{ xi.weaponskill.GEIRSKOGUL }, mobSystem = set{ xi.eco.VERMIN } } },   -- 75 DMG+9 -> 80
     [2267] = { check = checks.checkTrials, reqs = { killWithWs = true, wSkill = set{ xi.weaponskill.GEIRSKOGUL }, mobSystem = set{ xi.eco.AQUAN } } },    -- 80 -> 85
@@ -103,8 +89,6 @@ xi.magian.trialsold =
     [3111] = { check = checks.checkTrials, reqs = { mobid = set{ 17330205 } } }, -- 90 -> 95 (Animated Spear)
 
     -- Apocalypse
-    [1045] = { check = checks.checkTrials, reqs = { killWithWs = false, wSkill = set{ xi.weaponskill.CATASTROPHE }, mobSystem = set{ xi.eco.UNDEAD } } },  -- 75 -> 75 DMG+3
-    [1046] = { check = checks.checkTrials, reqs = { killWithWs = true, wSkill = set{ xi.weaponskill.CATASTROPHE }, mobSystem = set{ xi.eco.AQUAN } } },    -- 75 DMG+3 -> 75 DMG+7
     [1854] = { check = checks.checkTrials, reqs = { killWithWs = true, wSkill = set{ xi.weaponskill.CATASTROPHE }, mobSystem = set{ xi.eco.LIZARD } } },   -- 75 DMG+7 -> 75 DMG+9
     [1855] = { check = checks.checkTrials, reqs = { killWithWs = true, wSkill = set{ xi.weaponskill.CATASTROPHE }, mobSystem = set{ xi.eco.BIRD } } },     -- 75 DMG+9 -> 80
     [2265] = { check = checks.checkTrials, reqs = { killWithWs = true, wSkill = set{ xi.weaponskill.CATASTROPHE }, mobSystem = set{ xi.eco.BEAST } } },    -- 80 -> 85
@@ -112,8 +96,6 @@ xi.magian.trialsold =
     [3109] = { check = checks.checkTrials, reqs = { mobid = set{ 17330206 } } }, -- 90 -> 95 (Animated Scythe)
 
     -- Kikoku
-    [1051] = { check = checks.checkTrials, reqs = { killWithWs = false, wSkill = set{ xi.weaponskill.BLADE_METSU }, mobSystem = set{ xi.eco.BIRD } } },    -- 75 -> 75 DMG+1
-    [1052] = { check = checks.checkTrials, reqs = { killWithWs = true, wSkill = set{ xi.weaponskill.BLADE_METSU }, mobSystem = set{ xi.eco.ARCANA } } },   -- 75 DMG+1 -> 75 DMG+3
     [1858] = { check = checks.checkTrials, reqs = { killWithWs = true, wSkill = set{ xi.weaponskill.BLADE_METSU }, mobSystem = set{ xi.eco.AMORPH } } },   -- 75 DMG+3 -> 75 DMG+4
     [1859] = { check = checks.checkTrials, reqs = { killWithWs = true, wSkill = set{ xi.weaponskill.BLADE_METSU }, mobSystem = set{ xi.eco.AQUAN } } },    -- 75 DMG+4 -> 80
     [2269] = { check = checks.checkTrials, reqs = { killWithWs = true, wSkill = set{ xi.weaponskill.BLADE_METSU }, mobSystem = set{ xi.eco.UNDEAD } } },   -- 80 -> 85
@@ -121,8 +103,6 @@ xi.magian.trialsold =
     [3113] = { check = checks.checkTrials, reqs = { mobid = set{ 17330207 } } }, -- 90 -> 95 (Animated Kunai)
 
     -- Amanomurakumo
-    [1057] = { check = checks.checkTrials, reqs = { killWithWs = false, wSkill = set{ xi.weaponskill.TACHI_KAITEN }, mobSystem = set{ xi.eco.BEAST } } },    -- 75 -> 75 DMG+2
-    [1058] = { check = checks.checkTrials, reqs = { killWithWs = true, wSkill = set{ xi.weaponskill.TACHI_KAITEN }, mobSystem = set{ xi.eco.VERMIN } } },    -- 75 DMG+2 -> 75 DMG+5
     [1862] = { check = checks.checkTrials, reqs = { killWithWs = true, wSkill = set{ xi.weaponskill.TACHI_KAITEN }, mobSystem = set{ xi.eco.ARCANA } } },    -- 75 DMG+5 -> 75 DMG+6
     [1863] = { check = checks.checkTrials, reqs = { killWithWs = true, wSkill = set{ xi.weaponskill.TACHI_KAITEN }, mobSystem = set{ xi.eco.BIRD } } },      -- 75 DMG+6 -> 80
     [2271] = { check = checks.checkTrials, reqs = { killWithWs = true, wSkill = set{ xi.weaponskill.TACHI_KAITEN }, mobSystem = set{ xi.eco.AQUAN } } },     -- 80 -> 85
@@ -130,8 +110,6 @@ xi.magian.trialsold =
     [3115] = { check = checks.checkTrials, reqs = { mobid = set{ 17330208 } } }, -- 90 -> 95 (Animated Tachi)
 
     -- Mjollnir
-    [1063] = { check = checks.checkTrials, reqs = { killWithWs = false, wSkill = set{ xi.weaponskill.RANDGRITH }, mobSystem = set{ xi.eco.LIZARD } } },   -- 75 -> 75 DMG+2
-    [1064] = { check = checks.checkTrials, reqs = { killWithWs = true, wSkill = set{ xi.weaponskill.RANDGRITH }, mobSystem = set{ xi.eco.BEAST } } },     -- 75 DMG+2 -> 75 DMG+8
     [1866] = { check = checks.checkTrials, reqs = { killWithWs = true, wSkill = set{ xi.weaponskill.RANDGRITH }, mobSystem = set{ xi.eco.AMORPH } } },    -- 75 DMG+8 -> 75 DMG+9
     [1867] = { check = checks.checkTrials, reqs = { killWithWs = true, wSkill = set{ xi.weaponskill.RANDGRITH }, mobSystem = set{ xi.eco.VERMIN } } },    -- 75 DMG+9 -> 80
     [2273] = { check = checks.checkTrials, reqs = { killWithWs = true, wSkill = set{ xi.weaponskill.RANDGRITH }, mobSystem = set{ xi.eco.BIRD } } },      -- 80 -> 85
@@ -139,8 +117,6 @@ xi.magian.trialsold =
     [3117] = { check = checks.checkTrials, reqs = { mobid = set{ 17330209 } } }, -- 90 -> 95 (Animated Tachi)
 
     -- Claustrum
-    [1069] = { check = checks.checkTrials, reqs = { killWithWs = false, wSkill = set{ xi.weaponskill.GATE_OF_TARTARUS }, mobSystem = set{ xi.eco.AQUAN } } },   -- 75 -> 75 DMG+4
-    [1070] = { check = checks.checkTrials, reqs = { killWithWs = true, wSkill = set{ xi.weaponskill.GATE_OF_TARTARUS }, mobSystem = set{ xi.eco.LIZARD } } },   -- 75 DMG+4 -> 75 DMG+10
     [1870] = { check = checks.checkTrials, reqs = { killWithWs = true, wSkill = set{ xi.weaponskill.GATE_OF_TARTARUS }, mobSystem = set{ xi.eco.UNDEAD } } },   -- 75 DMG+10 -> 75 DMG+12
     [1871] = { check = checks.checkTrials, reqs = { killWithWs = true, wSkill = set{ xi.weaponskill.GATE_OF_TARTARUS }, mobSystem = set{ xi.eco.BEAST } } },    -- 75 DMG+12 -> 80
     [2275] = { check = checks.checkTrials, reqs = { killWithWs = true, wSkill = set{ xi.weaponskill.GATE_OF_TARTARUS }, mobSystem = set{ xi.eco.PLANTOID } } }, -- 80 -> 85
