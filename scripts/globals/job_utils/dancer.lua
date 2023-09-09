@@ -43,6 +43,20 @@ local animationTable =
     [12] = { 23, 33 },
 }
 
+local terpsichoreTable =
+set{
+    xi.item.TERPSICHORE_75,
+    xi.item.TERPSICHORE_80,
+    xi.item.TERPSICHORE_85,
+    xi.item.TERPSICHORE_90,
+    xi.item.TERPSICHORE_95,
+    xi.item.TERPSICHORE_99,
+    xi.item.TERPSICHORE_99_II,
+    xi.item.TERPSICHORE_119,
+    xi.item.TERPSICHORE_119_II,
+    xi.item.TERPSICHORE_119_III
+}
+
 -----------------------------------
 -- Local functions.
 -----------------------------------
@@ -60,6 +74,13 @@ local function getStepFinishingMovesBase(player)
         numAwardedMoves = 5
     elseif player:getMainJob() == xi.job.DNC then
         numAwardedMoves = 2
+    end
+
+    -- Terpsichore FM bonus. (Confirmed main-hand only)
+    local mainHandWeapon = player:getEquipID(xi.slot.MAIN)
+
+    if terpsichoreTable[mainHandWeapon] then
+        numAwardedMoves = numAwardedMoves + player:getMod(xi.mod.STEP_FINISH)
     end
 
     return numAwardedMoves
