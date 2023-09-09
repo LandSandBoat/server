@@ -2527,7 +2527,5 @@ REPLACE INTO mob_groups (`groupid`, `poolid`, `zoneid`, `name`, `respawntime`, `
 -- --------------------------------------------------------------------
 --                     Zone Misc Modifications                      --
 -- --------------------------------------------------------------------
-UPDATE zone_settings SET misc = 408 WHERE name LIKE "Dynamis%" AND name NOT LIKE "Dyanamis_%_[D]";
-UPDATE zone_settings SET misc = misc & ~8 WHERE name = "Dynamis-San_dOria" OR name = "Dynamis-Windurst" OR name = "Dynamis-Bastok" OR name = "Dynamis-Jeuno" OR name = "Dynamis-Tavnazia";
-
+-- THESE HAVE BEEN MOVED TO era/sql/zone_settings.sql
 UNLOCK TABLES;
