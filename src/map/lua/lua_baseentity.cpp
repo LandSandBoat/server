@@ -573,14 +573,43 @@ int32 CLuaBaseEntity::getCharVar(std::string const& varName)
  *  Function: setCharVar()
  *  Purpose : Updates PC's variable to an explicit value
  *  Example : player:setCharVar("[ZM]Status", 4)
- *  Notes   : Passing a '0' value will delete the variable
+ *  Notes   : Passing a '0' value will delete the variable.
  ************************************************************************/
 
-void CLuaBaseEntity::setCharVar(std::string const& varName, int32 value)
+void CLuaBaseEntity::setCharVar(std::string const& varName, int32 value, sol::object const& expiry)
 {
     if (auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity))
     {
-        PChar->setCharVar(varName, value);
+        uint32 varTimestamp = expiry.is<uint32>() ? expiry.as<uint32>() : 0;
+
+        if (varTimestamp > 0 && varTimestamp <= CVanaTime::getInstance()->getSysTime())
+        {
+            ShowWarning(fmt::format("Attempting to set variable '{}' with an expired time: {}", varName, varTimestamp));
+            return;
+        }
+
+        PChar->setCharVar(varName, value, varTimestamp);
+    }
+}
+
+/************************************************************************
+ *  Function: setCharVarExpiration()
+ *  Purpose : Updates PC's variable expiration to a specific timestamp
+ *  Example : player:setCharVarExpiration("Timer", VanadielTime() + 3600)
+ *  Notes   : Passing a '0' value will set the variable to not expire.
+ ************************************************************************/
+
+void CLuaBaseEntity::setCharVarExpiration(std::string const& varName, uint32 expiry)
+{
+    if (auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity))
+    {
+        if (expiry > 0 && expiry <= CVanaTime::getInstance()->getSysTime())
+        {
+            ShowWarning(fmt::format("Attempting to set variable '{}' with an expired time: {}", varName, expiry));
+            return;
+        }
+
+        PChar->setCharVar(varName, PChar->getCharVar(varName), expiry);
     }
 }
 
@@ -588,7 +617,8 @@ void CLuaBaseEntity::setCharVar(std::string const& varName, int32 value)
  *  Function: incrementCharVar()
  *  Purpose : Increments PC's variable by an explicit amount
  *  Example : player:incrementCharVar("[ZM]Status", 1) -- if 4, becomes 5
- *  Notes   : Can use values greater than 1 to increment more
+ *  Notes   : Can use values greater than 1 to increment more.  This does
+ *            not handle expiration times.
  ************************************************************************/
 
 void CLuaBaseEntity::incrementCharVar(std::string const& varName, int32 value)
@@ -607,11 +637,19 @@ void CLuaBaseEntity::incrementCharVar(std::string const& varName, int32 value)
  *  Notes   : Passing a '0' value will delete the variable
  ************************************************************************/
 
-void CLuaBaseEntity::setVolatileCharVar(std::string const& varName, int32 value)
+void CLuaBaseEntity::setVolatileCharVar(std::string const& varName, int32 value, sol::object const& expiry)
 {
     if (auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity))
     {
-        PChar->setVolatileCharVar(varName, value);
+        uint32 varTimestamp = expiry.is<uint32>() ? expiry.as<uint32>() : 0;
+
+        if (varTimestamp > 0 && varTimestamp <= CVanaTime::getInstance()->getSysTime())
+        {
+            ShowWarning(fmt::format("Attempting to set variable '{}' with an expired time: {}", varName, varTimestamp));
+            return;
+        }
+
+        PChar->setVolatileCharVar(varName, value, varTimestamp);
     }
 }
 
@@ -10382,7 +10420,7 @@ uint8 CLuaBaseEntity::checkSoloPartyAlliance()
  *  Notes   : and the mob is able to give exp to the members
  ************************************************************************/
 
-bool CLuaBaseEntity::checkKillCredit(CLuaBaseEntity* PLuaBaseEntity, sol::object const& arg1, sol::object const& arg2)
+bool CLuaBaseEntity::checkKillCredit(CLuaBaseEntity* PLuaBaseEntity, sol::object const& minRange)
 {
     if (m_PBaseEntity->objtype != TYPE_PC || PLuaBaseEntity->GetBaseEntity()->objtype != TYPE_MOB)
     {
@@ -10390,15 +10428,12 @@ bool CLuaBaseEntity::checkKillCredit(CLuaBaseEntity* PLuaBaseEntity, sol::object
         return false;
     }
 
-    CCharEntity* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
-    CMobEntity*  PMob  = static_cast<CMobEntity*>(PLuaBaseEntity->GetBaseEntity());
+    CCharEntity* PChar  = static_cast<CCharEntity*>(m_PBaseEntity);
+    CMobEntity*  PMob   = static_cast<CMobEntity*>(PLuaBaseEntity->GetBaseEntity());
+    float        range  = minRange.is<float>() ? minRange.as<float>() : 100;
+    bool         credit = false;
 
-    bool  credit  = false;
-    int   lvlDiff = (int)(PMob->GetMLevel()) - (int)(PChar->GetMLevel());
-    int   maxDiff = (arg1 != sol::lua_nil) ? arg1.as<int>() : 15;
-    float range   = (arg2 != sol::lua_nil) ? arg2.as<float>() : 100;
-
-    if (charutils::CheckMob(PMob->m_HiPCLvl, PMob->GetMLevel()) > EMobDifficulty::TooWeak && distance(PMob->loc.p, PChar->loc.p) < range && lvlDiff < maxDiff)
+    if (charutils::CheckMob(PMob->m_HiPCLvl, PMob->GetMLevel()) > EMobDifficulty::TooWeak && distance(PMob->loc.p, PChar->loc.p) < range)
     {
         if (PChar->PParty && PChar->PParty->GetSyncTarget())
         {
@@ -16825,6 +16860,7 @@ void CLuaBaseEntity::Register()
     // Variables
     SOL_REGISTER("getCharVar", CLuaBaseEntity::getCharVar);
     SOL_REGISTER("setCharVar", CLuaBaseEntity::setCharVar);
+    SOL_REGISTER("setCharVarExpiration", CLuaBaseEntity::setCharVarExpiration);
     SOL_REGISTER("getVar", CLuaBaseEntity::getCharVar); // Compatibility binding
     SOL_REGISTER("setVar", CLuaBaseEntity::setCharVar); // Compatibility binding
     SOL_REGISTER("incrementCharVar", CLuaBaseEntity::incrementCharVar);

@@ -1,6 +1,6 @@
-----------------------------
+-----------------------------------
 ----- CustomAction class
-----------------------------
+-----------------------------------
 require('scripts/globals/interaction/actions/action')
 
 LambdaAction = Action:new(Action.Type.LambdaAction)

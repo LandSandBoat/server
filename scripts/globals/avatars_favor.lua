@@ -87,12 +87,12 @@ local avatarsFavorEffect =
         effect = xi.effect.SIRENS_FAVOR
     },
 }
--------------------------------------------
+-----------------------------------
 -- Given a :getPetID petID (Not a getMobID)
 -- Returns if Avatars Favor should be applied
 -- This equates to is the pet not nil and should have avatars favor effect
 -- Does not account for Siren
--------------------------------------------
+-----------------------------------
 local shouldAvatarsFavorBeApplied = function(petId)
     local shouldApply = false
 

@@ -1,7 +1,7 @@
------------------------------------------
+-----------------------------------
 -- Spell: Indi-Gravity
 -- Weighs down enemies near the caster.
------------------------------------------
+-----------------------------------
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

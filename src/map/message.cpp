@@ -1,4 +1,4 @@
-﻿/*
+/*
 ===========================================================================
 
 Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -682,16 +682,17 @@ namespace message
                 uint8* data   = (uint8*)extra.data();
                 uint32 charId = ref<uint32>(data, 0);
                 int32  value  = ref<int32>(data, 4);
+                uint32 expiry = ref<uint32>(data, 8);
 
                 ShowDebug(fmt::format("Received message to update var for {}", charId));
 
-                uint8 varNameSize = ref<uint8>(data, 8);
-                auto  varName     = std::string(data + 9, data + 9 + varNameSize);
+                uint8 varNameSize = ref<uint8>(data, 12);
+                auto  varName     = std::string(data + 13, data + 13 + varNameSize);
 
                 if (auto player = zoneutils::GetChar(charId))
                 {
                     ShowDebug(fmt::format("Updating charvar for {} ({}): {} = {}", player->GetName(), charId, varName, value));
-                    player->updateCharVarCache(varName, value);
+                    player->updateCharVarCache(varName, value, expiry);
                 }
                 break;
             }
@@ -799,16 +800,17 @@ namespace message
         }
     }
 
-    void send_charvar_update(uint32 charId, std::string const& varName, uint32 value)
+    void send_charvar_update(uint32 charId, std::string const& varName, uint32 value, uint32 expiry)
     {
-        uint32 size = sizeof(uint32) + sizeof(int32) + sizeof(uint8) + static_cast<uint32>(varName.size());
+        uint32 size = sizeof(uint32) + sizeof(uint32) + sizeof(uint32) + sizeof(uint8) + static_cast<uint32>(varName.size());
         char*  buf  = new char[size];
         memset(&buf[0], 0, size);
 
         ref<uint32>(buf, 0) = charId;
         ref<int32>(buf, 4)  = value;
-        ref<uint8>(buf, 8)  = (uint8)varName.size();
-        memcpy(buf + 9, varName.c_str(), varName.size());
+        ref<uint32>(buf, 8) = expiry;
+        ref<uint8>(buf, 12) = (uint8)varName.size();
+        memcpy(buf + 13, varName.c_str(), varName.size());
 
         message::send(MSG_CHARVAR_UPDATE, buf, size, nullptr);
     }

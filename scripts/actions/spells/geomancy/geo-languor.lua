@@ -1,7 +1,7 @@
------------------------------------------
+-----------------------------------
 -- Spell: Geo-Languor
 -- Reduces magic evasion for enemies within area of effect.
------------------------------------------
+-----------------------------------
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

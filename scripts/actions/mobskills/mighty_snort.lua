@@ -1,11 +1,11 @@
----------------------------------------------
+-----------------------------------
 --  Mighty Snort
 --
 --  Deals Wind damage to targets in a fan-shaped area of effect. Additional effect: Hate reset
 --  Type: Magical (Wind)
 --  Only used by certain Buffalo NMs
 --
--------------------------------------------------------
+-----------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

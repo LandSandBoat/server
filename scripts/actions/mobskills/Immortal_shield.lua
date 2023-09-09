@@ -1,4 +1,4 @@
-----------------------------------
+-----------------------------------
 -- Immortal Shield
 -- Description: Grants a Magic Shield effect for a time.
 -- Type: Enhancing

@@ -43,6 +43,20 @@ local animationTable =
     [12] = { 23, 33 },
 }
 
+local terpsichoreTable =
+set{
+    xi.item.TERPSICHORE_75,
+    xi.item.TERPSICHORE_80,
+    xi.item.TERPSICHORE_85,
+    xi.item.TERPSICHORE_90,
+    xi.item.TERPSICHORE_95,
+    xi.item.TERPSICHORE_99,
+    xi.item.TERPSICHORE_99_II,
+    xi.item.TERPSICHORE_119,
+    xi.item.TERPSICHORE_119_II,
+    xi.item.TERPSICHORE_119_III
+}
+
 -----------------------------------
 -- Local functions.
 -----------------------------------
@@ -55,19 +69,20 @@ end
 -- TODO: Determine if step is stacked at 10, and reduce to 1 if necessary.
 local function getStepFinishingMovesBase(player)
     local numAwardedMoves = 1
+
     if player:hasStatusEffect(xi.effect.PRESTO) then
         numAwardedMoves = 5
     elseif player:getMainJob() == xi.job.DNC then
         numAwardedMoves = 2
     end
--- If Terpsichore is equipped, adds 1 additional finishing move to player (custom)
-    if
-        player:getEquipID(xi.slot.MAIN) == xi.items.TERPSICHORE or
-        player:getEquipID(xi.slot.SUB) == xi.items.TERPSICHORE
-    then
-        numAwardedMoves = numAwardedMoves + 1
+
+    -- Terpsichore FM bonus. (Confirmed main-hand only)
+    local mainHandWeapon = player:getEquipID(xi.slot.MAIN)
+
+    if terpsichoreTable[mainHandWeapon] then
+        numAwardedMoves = numAwardedMoves + player:getMod(xi.mod.STEP_FINISH)
     end
--- End of custom code
+
     return numAwardedMoves
 end
 

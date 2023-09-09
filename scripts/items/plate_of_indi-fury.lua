@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 6083
 -- plate_of_indi-fury
 -- Teaches INDI-FURY
------------------------------------------
+-----------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

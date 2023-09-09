@@ -18,9 +18,9 @@ xi.extravaganza.campaignActive = function()
     return xi.settings.main.ENABLE_TRUST_ALTER_EGO_EXTRAVAGANZA
 end
 
------------------------------------------------
+-----------------------------------
 -- Determine Which Ciphers to Grant by NPC Name
------------------------------------------------
+-----------------------------------
 
 xi.extravaganza.getShadowEraCiphers = function(npc)
     local cipherNpcs =
@@ -32,9 +32,9 @@ xi.extravaganza.getShadowEraCiphers = function(npc)
     return cipherNpcs[npc:getName()]
 end
 
-----------------------------------------------------------------
+-----------------------------------
 -- Check if Extravaganza is active, hide [S] vendors if inactive
-----------------------------------------------------------------
+-----------------------------------
 
 xi.extravaganza.shadowEraHide = function(npc)
     local active = xi.extravaganza.campaignActive()
@@ -47,9 +47,9 @@ xi.extravaganza.shadowEraHide = function(npc)
     end
 end
 
-----------------------------------------------------------
+-----------------------------------
 -- Check if Extravaganza is Active, set Ciphers, Launch CS
-----------------------------------------------------------
+-----------------------------------
 
 xi.extravaganza.shadowEraTrigger = function(player, npc, notes)
     local active = xi.extravaganza.campaignActive()
@@ -64,10 +64,10 @@ xi.extravaganza.shadowEraTrigger = function(player, npc, notes)
     end
 end
 
-------------------------------------------------------
+-----------------------------------
 -- Pull Cipher IDs out of local vars between functions
 -- Choose the right cipher depending on Menu Option
-------------------------------------------------------
+-----------------------------------
 
 xi.extravaganza.shadowEraFinish = function(player, csid, option, npc)
     local ID = zones[player:getZoneID()]

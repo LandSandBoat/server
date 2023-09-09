@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 5844
 -- Item: bottle_of_fanatics_drink
 -- Item Effect: When applied, grants UDMGPHYS -10000 for 60s
------------------------------------------------
+-----------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

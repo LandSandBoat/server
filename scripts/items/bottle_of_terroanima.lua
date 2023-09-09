@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 5263
 -- Item: Bottle Of Terroanima
 -- Item Effect: Terror
------------------------------------------
+-----------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, player)

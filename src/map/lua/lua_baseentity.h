@@ -66,10 +66,11 @@ public:
     void customMenu(sol::object const& obj);
 
     // Variables
-    int32  getCharVar(std::string const& varName);                    // Returns a character variable
-    void   setCharVar(std::string const& varname, int32 value);       // Sets a character variable
-    void   incrementCharVar(std::string const& varname, int32 value); // Increments/decriments/sets a character variable
-    void   setVolatileCharVar(std::string const& varName, int32 value);
+    int32  getCharVar(std::string const& varName);                                         // Returns a character variable
+    void   setCharVar(std::string const& varname, int32 value, sol::object const& expiry); // Sets a character variable
+    void   setCharVarExpiration(std::string const& varName, uint32 expiry);                // Sets character variable expiration timestamp
+    void   incrementCharVar(std::string const& varname, int32 value);                      // Increments/decriments/sets a character variable
+    void   setVolatileCharVar(std::string const& varName, int32 value, sol::object const& expiry);
     uint32 getLocalVar(std::string const& var);
     void   setLocalVar(std::string const& var, uint32 val);
     void   resetLocalVars();
@@ -522,7 +523,7 @@ public:
 
     uint8 checkSoloPartyAlliance(); // Check if Player is in Party or Alliance 0=Solo 1=Party 2=Alliance
 
-    bool checkKillCredit(CLuaBaseEntity* PLuaBaseEntity, sol::object const& arg1, sol::object const& arg2);
+    bool checkKillCredit(CLuaBaseEntity* PLuaBaseEntity, sol::object const& minRange);
 
     uint8 checkDifficulty(CLuaBaseEntity* PLuaBaseEntity); // Checks difficulty of the mob
 

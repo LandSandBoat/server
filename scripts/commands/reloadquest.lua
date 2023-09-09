@@ -1,7 +1,7 @@
-----------------------------------
+-----------------------------------
 -- func: reloadquest
 -- desc: Attempt to reload specified quest lua without a restart.
-----------------------------------
+-----------------------------------
 local commandObj = {}
 
 commandObj.cmdprops =

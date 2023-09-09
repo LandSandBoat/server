@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 5243
 -- Item: container_of_carnal_incense
 -- Item Effect: When applied, grants UDMGPHYS -10000 for 20s
------------------------------------------------
+-----------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

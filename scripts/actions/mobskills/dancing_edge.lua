@@ -1,9 +1,9 @@
----------------------------------------------
+-----------------------------------
 -- Dancing Edge
 -- Delivers a fivefold attack
 -- Type: Physical
 -- Range: Melee
--------------------------------------------------------
+-----------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

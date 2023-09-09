@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 5394
 -- Item: bottle_of_gnostics_drink
 -- Item Effect: Enmity -
------------------------------------------------
+-----------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

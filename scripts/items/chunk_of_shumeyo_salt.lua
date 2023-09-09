@@ -1,10 +1,10 @@
------------------------------------------
+-----------------------------------
 -- ID: 5267
 -- Item: Chunk Of Shu'Meyo Salt
 -- Effect: Adds 20 seconds to the Snoll Tzar fight
------------------------------------------
+-----------------------------------
 local ID = zones[xi.zone.BEARCLAW_PINNACLE]
------------------------------------------
+-----------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, player)

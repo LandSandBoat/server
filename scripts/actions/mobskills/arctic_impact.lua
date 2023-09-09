@@ -1,8 +1,8 @@
----------------------------------------------------
+-----------------------------------
 -- Arctic Impact
 -- Deals Ice damage to enemies within range.
 -- Area of Effect is centered around caster.
--------------------------------------------------------------------
+-----------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

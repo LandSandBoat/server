@@ -1,6 +1,6 @@
----------------------------------------------
+-----------------------------------
 -- Avatars Favor - Ability
----------------------------------------------
+-----------------------------------
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)

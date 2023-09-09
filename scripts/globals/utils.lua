@@ -881,9 +881,9 @@ function utils.mobTeleport(mob, hideDuration, pos, disAnim, reapAnim)
     end)
 end
 
-------------------------------
+-----------------------------------
 -- Spatial position utilities
-------------------------------
+-----------------------------------
 local ffxiRotConversionFactor = 360.0 / 255.0
 
 function utils.ffxiRotToDegrees(ffxiRot)

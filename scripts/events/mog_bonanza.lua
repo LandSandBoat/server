@@ -1,8 +1,8 @@
-------------------------------------
+-----------------------------------
 -- Mog Bonanza
 -- http://www.playonline.com/ff11us/guide/nomadmogbon/index.html
 -- https://www.bg-wiki.com/ffxi/Category:Mog_Bonanza
-------------------------------------
+-----------------------------------
 xi = xi or {}
 xi.events = xi.events or {}
 xi.events.mogBonanza = xi.events.mogBonanza or {}

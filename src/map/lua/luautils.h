@@ -160,8 +160,11 @@ namespace luautils
     auto GetMagianTrial(sol::variadic_args va) -> sol::table;
     auto GetMagianTrialsWithParent(int32 parentTrial) -> sol::table;
 
+    uint32 GetSystemTime();
     uint32 JstMidnight();
     uint32 JstWeekday();
+    uint32 NextGameTime(uint32 intervalSeconds);
+    uint32 NextJstWeek();
     uint32 VanadielTime();          // Gets the current Vanadiel Time in timestamp format (SE epoch in earth seconds)
     uint8  VanadielTOTD();          // текущее игровое время суток
     uint32 VanadielHour();          // текущие Vanadiel часы
@@ -184,13 +187,13 @@ namespace luautils
     int16  GetElevatorState(uint8 id); // Returns -1 if elevator is not found. Otherwise, returns the uint8 state.
 
     int32 GetServerVariable(std::string const& name);
-    void  SetServerVariable(std::string const& name, int32 value);
+    void  SetServerVariable(std::string const& name, int32 value, sol::object const& expiry);
     int32 GetVolatileServerVariable(std::string const& varName);
-    void  SetVolatileServerVariable(std::string const& varName, int32 value);
-    int32 GetCharVar(uint32 charId, std::string const& varName);              // Get player var directly from SQL DB
-    void  SetCharVar(uint32 charId, std::string const& varName, int32 value); // Set player var in SQL DB using charId
-    void  ClearCharVarFromAll(std::string const& varName);                    // Deletes a specific player variable from all players
-    void  Terminate();                                                        // Logs off all characters and terminates the server
+    void  SetVolatileServerVariable(std::string const& varName, int32 value, sol::object const& expiry);
+    int32 GetCharVar(uint32 charId, std::string const& varName);                                         // Get player var directly from SQL DB
+    void  SetCharVar(uint32 charId, std::string const& varName, int32 value, sol::object const& expiry); // Set player var in SQL DB using charId
+    void  ClearCharVarFromAll(std::string const& varName);                                               // Deletes a specific player variable from all players
+    void  Terminate();                                                                                   // Logs off all characters and terminates the server
 
     int32 GetTextIDVariable(uint16 ZoneID, const char* variable); // загружаем значение переменной TextID указанной зоны
     bool  IsContentEnabled(const char* content);                  // Check if the content is enabled in settings.lua

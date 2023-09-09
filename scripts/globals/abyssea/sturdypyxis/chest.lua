@@ -38,9 +38,9 @@ xi.pyxis.chestDropType =
     NUMEROUS_TEMPITEMS  = 11
 }
 
-----------------------------------------------------------------------
+-----------------------------------
 -- Desc: Messages sent to all players in a party in the zone
-----------------------------------------------------------------------
+-----------------------------------
 xi.pyxis.canOpenChest = function(player, npc)
     local playerOwner = GetPlayerByID(npc:getLocalVar('PLAYERID'))
 
@@ -66,9 +66,9 @@ xi.pyxis.canOpenChest = function(player, npc)
     return canOpen
 end
 
-----------------------------------------------------------------------
+-----------------------------------
 -- Desc: Messages sent to all players in a party in the zone
-----------------------------------------------------------------------
+-----------------------------------
 xi.pyxis.messageChest = function(player, messageid, param1, param2, param3, param4)
     local alliance = player:getAlliance()
 

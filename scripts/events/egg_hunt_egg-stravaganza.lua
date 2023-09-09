@@ -1,13 +1,13 @@
-------------------------------------
+-----------------------------------
 -- Egg Hunt Egg-Stravaganza
-------------------------------------
+-----------------------------------
 -- Southern San d'Oria !pos 56.195 1.999 -25.207 230
 -- Northern San d'Oria !pos -224.135 8.000 53.476 231
 -- Bastok Mines        !pos -33.600 -0.001 -110.000 234
 -- Bastok Markets      !pos -260.440 -12.021 -79.538 235
 -- Windurst Waters     !pos -55.470 -5.391 216.362 238
 -- Windurst Woods      !pos 104.823 -5.000 -55.745 241
-------------------------------------
+-----------------------------------
 xi = xi or {}
 xi.events = xi.events or {}
 xi.events.eggHunt = xi.events.eggHunt or {}
@@ -98,9 +98,9 @@ end
 
 event:setEnableCheck(xi.events.eggHunt.enabledCheck)
 
-------------------------------------
+-----------------------------------
 -- Data
-------------------------------------
+-----------------------------------
 
 xi.events.eggHunt.data =
 {
@@ -251,9 +251,9 @@ local messageOffset =
     REWARD4 = 11, -- Heh heh heh... I have something egg-specially egg-citing in store for you, kupo!
 }
 
-------------------------------------
+-----------------------------------
 -- Helpers
-------------------------------------
+-----------------------------------
 
 xi.events.eggHunt.charToEgg = function(char)
     -- Char offset from 'A', eg. B = 1, C = 2, etc.
@@ -300,9 +300,9 @@ local hasFirstThree = function(player)
     )
 end
 
-------------------------------------
+-----------------------------------
 -- Combos
-------------------------------------
+-----------------------------------
 
 local minorRewards =
 {
@@ -780,9 +780,9 @@ for bonusWord, rewardItem in pairs(settings.BONUS_WORDS) do
     })
 end
 
-------------------------------------
+-----------------------------------
 -- Moogle event handlers
-------------------------------------
+-----------------------------------
 
 xi.events.eggHunt.onTrigger = function(player, npc)
     local zoneID = player:getZoneID()
@@ -890,9 +890,9 @@ xi.events.eggHunt.onTrade = function(player, npc, trade)
     end
 end
 
-------------------------------------
+-----------------------------------
 -- Show/hide Moogles and decorations
-------------------------------------
+-----------------------------------
 
 local function insertNpc(zone, entry)
     local rot  = entry[1]

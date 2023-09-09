@@ -289,6 +289,7 @@ xi.settings.main =
     FORCE_SPAWN_QM_RESET_TIME    = 180,   -- Number of seconds the ??? remains hidden for after the despawning of the mob it force spawns.
     GOBBIE_BOX_MIN_AGE           = 14,    -- Minimum character age in days before a character can sign up for Gobbie Mystery Box
     EQUIP_FROM_OTHER_CONTAINERS  = false, -- true/false. Allows equipping items from Mog Satchel, Sack, and Case. Only possible with the use of client addons.
+    REGIME_REWARD_THRESHOLD      = 15,    -- If the player is more than N levels below the minimum suggested range, do not award experience.
 
     -- SYSTEM
     DISABLE_INACTIVITY_WATCHDOG = false, -- true/false. If this is enabled, the watchdog which detects if the main loop isn't being ticked will no longer be able to kill the process.

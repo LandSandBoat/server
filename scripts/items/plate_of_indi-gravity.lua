@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 6101
 -- plate_of_indi-gravity
 -- Teaches INDI-GRAVITY
------------------------------------------
+-----------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

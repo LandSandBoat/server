@@ -6,10 +6,10 @@ xi.pyxis = xi.pyxis or {}
 
 xi.pyxis.item = {}
 
----------------------------------
+-----------------------------------
 -- drop id's for items
 -- use zone id as the key
----------------------------------
+-----------------------------------
 -- Containing Ore actually
 local commonDrops =
 {

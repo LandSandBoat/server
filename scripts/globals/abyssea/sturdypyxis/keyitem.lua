@@ -6,10 +6,10 @@ xi.pyxis = xi.pyxis or {}
 
 xi.pyxis.ki = {}
 
----------------------------------
+-----------------------------------
 -- drop id's for keyitems
 -- use zone id as the key
----------------------------------
+-----------------------------------
 local drops =
 {
     [xi.zone.ABYSSEA_KONSCHTAT]  =
