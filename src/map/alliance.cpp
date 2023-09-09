@@ -154,8 +154,6 @@ void CAlliance::removeParty(CParty* party)
         }
     }
 
-    uint32 mainPartyID = getMainParty()->GetPartyID();
-
     delParty(party);
 
     sql->Query("UPDATE accounts_parties SET allianceid = 0, partyflag = partyflag & ~%d WHERE partyid = %u;",
@@ -163,8 +161,8 @@ void CAlliance::removeParty(CParty* party)
 
     // notify alliance
     uint8 data[4]{};
-    ref<uint32>(data, 0) = mainPartyID;
-    message::send(MSG_PT_RELOAD, data, sizeof data, nullptr);
+    ref<uint32>(data, 0) = m_AllianceID;
+    message::send(MSG_ALLIANCE_RELOAD, data, sizeof data, nullptr);
 
     // notify leaving party
     ref<uint32>(data, 0) = party->GetPartyID();
@@ -261,10 +259,9 @@ void CAlliance::addParty(CParty* party)
                party->GetPartyID());
     party->SetPartyNumber(newparty);
 
-    // MSG_PT_RELOAD also reloads all the alliances parties if available
     uint8 data[4]{};
-    ref<uint32>(data, 0) = party->GetPartyID();
-    message::send(MSG_PT_RELOAD, data, sizeof data, nullptr);
+    ref<uint32>(data, 0) = m_AllianceID;
+    message::send(MSG_ALLIANCE_RELOAD, data, sizeof data, nullptr);
 }
 
 void CAlliance::addParty(uint32 partyid) const
@@ -288,8 +285,8 @@ void CAlliance::addParty(uint32 partyid) const
     }
     sql->Query("UPDATE accounts_parties SET allianceid = %u, partyflag = partyflag | %d WHERE partyid = %u;", m_AllianceID, newparty, partyid);
     uint8 data[4]{};
-    ref<uint32>(data, 0) = partyid;
-    message::send(MSG_PT_RELOAD, data, sizeof data, nullptr);
+    ref<uint32>(data, 0) = m_AllianceID;
+    message::send(MSG_ALLIANCE_RELOAD, data, sizeof data, nullptr);
 }
 
 void CAlliance::pushParty(CParty* PParty, uint8 number)
