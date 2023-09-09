@@ -261,6 +261,29 @@ local function buildMagianLookupTables()
     return relationTable, requiredItemTable
 end
 
+-- Set onEquip and onUnequip functions for trial items that require
+-- a listener.  This avoids having to create an item file for every magian item,
+-- since onItemEquip/unEquip functions only exist for two items.
+local function registerTrialListeners()
+    xi.items = xi.items or {}
+
+    for trialId, magianData in pairs(xi.magian.trials) do
+        if magianData.defeatMob or magianData.useWeaponskill then
+            -- TODO: Create a binding to get name by ID.  This is horribly inefficient
+            for itemKey, itemId in pairs(xi.item) do
+                if magianData.requiredItem.itemId == itemId then
+                    local itemName = string.lower(itemKey)
+
+                    xi.items[itemName]                  = xi.items[itemName] or {}
+                    xi.items[itemName]['onItemEquip']   = xi.magian.onItemEquip
+                    xi.items[itemName]['onItemUnequip'] = xi.magian.onItemUnequip
+                    break
+                end
+            end
+        end
+    end
+end
+
 xi.magian.trialChildren, xi.magian.requiredItemsToTrial = buildMagianLookupTables()
 
 -- Given Item ID, if exists in xi.magian.requiredItemsToTrial, return its table
@@ -733,28 +756,100 @@ xi.magian.deliveryCrateOnEventFinish = function(player, csid, option)
     end
 end
 
+local trialConditions =
+{
+    ['mobEcosystem'] = function(trialData, player, mob, paramTable)
+        return not trialData.mobEcosystem or mob:getEcosystem() == trialData.mobEcosystem
+    end,
+
+    ['mobFamily'] = function(trialData, player, mob, paramTable)
+        return not trialData.mobFamily or trialData.mobFamily[mob:getFamily()]
+    end,
+
+    ['useWeaponskill'] = function(trialData, player, mob, paramTable)
+        return not trialData.useWeaponskill or paramTable.weaponskillUsed == trialData.useWeaponskill
+    end,
+}
+
+local function checkConditions(trialData, player, mob, paramTable)
+    for conditionName, conditionFunc in pairs(trialConditions) do
+        if not conditionFunc(trialData, player, mob, paramTable) then
+            print(conditionName)
+            return false
+        end
+    end
+
+    return true
+end
+
 -----------------------------------
 -- Item Globals/Callbacks
 -----------------------------------
-xi.magian.onItemEquip = function(player, item)
-    -- If not Trial on Item, return
-    -- Find major listener required for item
-    -- Apply generic listener, also checking sub-requirements based on table contents
-    -- Add listener, unique ID: TRIALxxxx
+xi.magian.onItemEquip = function(player, itemObj)
+    local itemTrialId = itemObj:getTrialNumber()
 
-    -- Initial version: Do we just cache trial IDs and check everywhere?
+    -- If the item has no active trial, or the player has
+    -- abandoned the trial, bail out.
+    if
+        itemTrialId == 0 or
+        not getTrialProgress(player, itemTrialId)
+    then
+        return
+    end
+
+    local trialData = xi.magian.trials[itemTrialId]
+
+    if not trialData then
+        return
+    end
+
+    -- A valid trial exists, so apply the appropriate listener for it.  Defeating a mob is always the highest
+    -- priority listener, and if it doesn't apply, only then fall back.  All magian trials with a listener
+    -- require the player to both be alive, and the mob be experience-granting (NMs are handled separately)
+
+    -- TODO:
+    -- Weather Type / Day (Weather = 5, Day = 1, Additive) Special exception for Light/Dark
+    -- Elemental Damage (Anyone counts!)
+    -- Pet kill
+    -- Avatar Kill (Summon must be out, but another of the same type can cause credit)
+    -- While under specific enfeeble
+    -- Proc additional effect
+    -- Gain XP
+
+    if trialData.defeatMob then
+        player:addListener('DEFEATED_MOB', 'TRIAL_' .. itemTrialId, function(mobObj, playerObj, optParams)
+            if not playerObj:isDead() and playerObj:checkKillCredit(mobObj) then
+                if checkConditions(trialData, playerObj, mobObj, optParams) then
+                    progressPlayerTrial(playerObj, itemTrialId, 1)
+                end
+            end
+        end)
+
+    elseif trialData.useWeaponskill then
+        player:addListener('WEAPONSKILL_USE', 'TRIAL_' .. itemTrialId, function(playerObj, mobObj, weaponskillId, tpSpent, action)
+            if not playerObj:isDead() and playerObj:checkKillCredit(mobObj) then
+                if checkConditions(trialData, playerObj, mobObj, { weaponskillUsed = weaponskillId }) then
+                    progressPlayerTrial(playerObj, itemTrialId, 1)
+                end
+            end
+        end)
+    end
 end
 
-xi.magian.onItemUnequip = function(player, item)
-    -- Check if item equipped in cache?
-    -- remove listener
+xi.magian.onItemUnequip = function(player, itemObj)
+    local itemTrialId = itemObj:getTrialNumber()
+
+    if
+        itemTrialId ~= 0 and
+        getTrialProgress(player, itemTrialId)
+    then
+        player:removeListener('TRIAL_' .. itemTrialId)
+    end
 end
 
 xi.magian.onMobDeath = function(mob, player, optParams, trialTable)
     local relevantTrials = {}
 
-    -- TODO: Can this move elsewhere onEquip/onUnequip?
-    -- TODO: Since this is just NM kills, are there armor pieces that follow this, or can we just do main/sub/ranged?
     for equipSlot = xi.slot.MAIN, xi.slot.FEET do
         local itemObj = player:getEquippedItem(equipSlot)
 
@@ -774,3 +869,6 @@ xi.magian.onMobDeath = function(mob, player, optParams, trialTable)
         progressPlayerTrial(player, trialId, 1)
     end
 end
+
+-- Once everything else is setup, register listeners with the appropriate items
+registerTrialListeners()

@@ -11,31 +11,6 @@ xi = xi or {}
 xi.magian = xi.magian or {}
 local checks = {}
 
-checks.checkMobKill = function(reqs, params)
-    return reqs.mobid and params.mob and reqs.mobid[params.mob:getID()] and 1 or 0
-end
-
-checks.checkWsOnMobsystem = function(reqs, params)
-    return reqs.mobSystem and params.mob and reqs.wSkill and reqs.mobSystem[params.mob:getEcosystem()] and reqs.wSkill[params.wSkillId] and 1 or 0
-end
-
-checks.checkWsKill = function(reqs, params)
-    return reqs.mobSystem and params.mob and reqs.wSkill and reqs.mobSystem[params.mob:getEcosystem()] and reqs.wSkill[params.wSkillId] and params.mob:isDead() and 1 or 0
-end
-
-checks.checkTrials = function(self, player, params)
-    local ismobkill = checks.checkMobKill(self.reqs, params)
-    if params.triggerWs then
-        if self.reqs.killWithWs then
-            return checks.checkWsKill(self.reqs, params)
-        else
-            return checks.checkWsOnMobsystem(self.reqs, params)
-        end
-    end
-
-    return ismobkill
-end
-
 xi.magian.trialsold =
 {
     -- Relic Weapon

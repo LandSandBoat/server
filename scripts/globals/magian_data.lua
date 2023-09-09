@@ -1,8 +1,6 @@
 -----------------------------------
 -- Magian Trial Data
 -----------------------------------
-require('scripts/globals/common')
------------------------------------
 xi = xi or {}
 xi.magian = xi.magian or {}
 
@@ -208,6 +206,7 @@ xi.magian.trials =
         },
 
         textOffset   = 68,
+        defeatMob    = true,
         mobEcosystem = xi.ecosystem.ARCANA,
         numRequired  = 400,
 
@@ -280,6 +279,7 @@ xi.magian.trials =
         },
 
         textOffset   = 71,
+        defeatMob    = true,
         mobEcosystem = xi.ecosystem.AMORPH,
         numRequired  = 500,
 
@@ -306,6 +306,7 @@ xi.magian.trials =
         },
 
         textOffset   = 72,
+        defeatMob    = true,
         mobEcosystem = xi.ecosystem.PLANTOID,
         numRequired  = 600,
 

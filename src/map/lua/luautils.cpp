@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -3572,6 +3572,8 @@ namespace luautils
                 {
                     CLuaBaseEntity                LuaMobEntity(PMob);
                     std::optional<CLuaBaseEntity> optLuaAllyEntity = std::nullopt;
+                    uint16                        weaponskillUsed = PMob->GetLocalVar("weaponskillHit");
+
                     if (PMember)
                     {
                         optLuaAllyEntity = CLuaBaseEntity(PMember);
@@ -3579,7 +3581,8 @@ namespace luautils
 
                     optParams["isKiller"]          = PMember == PChar;
                     optParams["noKiller"]          = false;
-                    optParams["isWeaponSkillKill"] = PMob->GetLocalVar("weaponskillHit") > 0;
+                    optParams["isWeaponSkillKill"] = weaponskillUsed > 0;
+                    optParams["weaponskillUsed"]   = weaponskillUsed;
 
                     PChar->eventPreparation->targetEntity = PMob;
                     PChar->eventPreparation->scriptFile   = filename;
