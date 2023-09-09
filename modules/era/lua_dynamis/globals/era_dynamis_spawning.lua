@@ -519,12 +519,12 @@ xi.dynamis.nonStandardDynamicSpawn = function(mobIndex, oMob, forceLink, zoneID,
             ["Nightmare Raven"] = { "N. Raven" , 100, 40, 1788, 0, 55 }, -- NRav
             ["Nightmare Scorpion"] = { "N. Scorpion" , 96, 40, 1787, 0, 217 }, -- NSco
             ["Nightmare Urganite"] = { "N. Urganite" , 95, 40, 1785, 0, 251 }, -- NUrg
-            ["Nightmare Cluster"] = { "N. Cluster" , 40, 42, 1786, 0, 68 }, -- NClu
-            ["Nightmare Hornet"] = { "N. Hornet" , 10, 42, 1795, 0, 48 }, -- NHor
-            ["Nightmare Leech"] = { "N. Leech" , 41, 42, 1796, 0, 172 }, -- NLee
-            ["Nightmare Makara"] = { "N. Makara" , 34, 42, 1797, 0, 197 }, -- NMak
-            ["Nightmare Taurus"] = { "N. Taurus" , 33, 42, 2854, 0, 240 }, -- NTau
-            ["Nightmare Bugard"] = { "N. Bugard" , 6, 42, 1795, 0, 58 }, -- NBug
+            ["Nightmare Cluster"] = { "N. Cluster" , 40, 42, 1786, 0, 4076, nil, 135}, -- NClu
+            ["Nightmare Hornet"] = { "N. Hornet" , 10, 42, 1795, 0, 4075, nil, 135 }, -- NHor
+            ["Nightmare Leech"] = { "N. Leech" , 41, 42, 1796, 0, 4079, nil, 135 }, -- NLee
+            ["Nightmare Makara"] = { "N. Makara" , 34, 42, 1797, 0, 4078, nil, 135 }, -- NMak
+            ["Nightmare Taurus"] = { "N. Taurus" , 33, 42, 2854, 0, 4080 }, -- NTau
+            ["Nightmare Bugard"] = { "N. Bugard" , 6, 42, 1795, 0, 4077 }, -- NBug
             ["Nightmare Hippogryph"] = { "N. Hippogryph" , 2, 39, 1792, 0, 141 }, -- NHip
             ["Nightmare Manticore"] = { "N. Manticore" , 3, 39, 1799, 0, 179 }, -- NMat
             ["Nightmare Sabotender"] = { "N. Sabotender" , 11, 39, 1792, 0, 212 }, -- NSab
@@ -653,6 +653,15 @@ xi.dynamis.nonStandardDynamicSpawn = function(mobIndex, oMob, forceLink, zoneID,
     }
 
     local dropList = nonStandardLookup[mobMobType][mobName][4]
+    local flags = 0
+    if
+        zoneID == xi.zone.DYNAMIS_TAVNAZIA and
+        oMob == nil
+    then
+        if nonStandardLookup[mobMobType][mobName][8] ~= nil then
+            flags = nonStandardLookup[mobMobType][mobName][8]
+        end
+    end
 
     local mob = zone:insertDynamicEntity({
         objtype = xi.objType.MOB,
@@ -679,6 +688,7 @@ xi.dynamis.nonStandardDynamicSpawn = function(mobIndex, oMob, forceLink, zoneID,
         releaseIdOnDisappear = true,
         spawnSet = 3,
         specialSpawnAnimation = oMob ~= nil,
+        entityFlags = flags,
         mixins = mobFunctions[mobMobType]["mixins"],
     })
     mob:setSpawn(xPos, yPos, zPos, rPos)
@@ -712,6 +722,11 @@ xi.dynamis.nonStandardDynamicSpawn = function(mobIndex, oMob, forceLink, zoneID,
     if oMob ~= nil and oMob ~= 0 then
         mob:setLocalVar("Parent", oMob:getID())
         if forceLink == true then mob:updateEnmity(target) end
+    end
+    
+    if mob:getFamily() == 68 then
+        -- temp fix to ensure clusters have the right animation sub
+        mob:setAnimationSub(4)
     end
 end
 
@@ -1014,13 +1029,14 @@ xi.dynamis.nmDynamicSpawn = function(mobIndex, oMobIndex, forceLink, zoneID, tar
         ["Stringes"] = { "Stringes", 79, 41, 3131, 0, 46, "Enabled Auto Attack" }, -- Stri
         ["Antaeus"] = { "Antaeus", 1, 41, 112, 0, 126, "Antaeus" }, -- Anta
         -- Dynamis - Tavnazia Non-Beastmen
-        ["Nightmare Antlion"] = { "N. Antlion" , 64, 42, 0, 0, 26, "Nightmare Antlion" }, -- NAnt
-        ["Nightmare Worm"] = { "N. Worm" , 7, 42, 1807, 5075, 4048, "Nightmare Worm" }, -- NWor
-        ["Umbral Diabolos"] = { "U. Diabolos", 4, 42, 0, nil, nil, "Enabled Auto Attack" }, -- UmbD
+        ["Nightmare Antlion"] = { "N. Antlion" , 64, 42, 0, 0, 4074, "Nightmare Antlion" }, -- NAnt
+        ["Nightmare Worm"] = { "N. Worm" , 7, 42, 1807, 5075, 4081, "Nightmare Worm" }, -- NWor
+        ["Umbral Diabolos"] = { "U. Diabolos", 4, 42, 0, nil, nil, "Umbral Diabolos" }, -- Umb
         ["Diabolos Club"] = { "D. Club", 4, 42, 0, nil, nil, "Diabolos Club" }, -- DiaC
         ["Diabolos Diamond"] = { "D. Diamond", 3, 42, 0, nil, nil, "Diabolos Diamond" }, -- DiaD
         ["Diabolos Heart"] = { "D. Heart", 2, 42, 0, nil, nil, "Diabolos Heart" }, -- DiaH
         ["Diabolos Spade"] = { "D. Spade", 1, 42, 0, nil, nil, "Diabolos Spade" }, -- DiaS
+        ["Diabolos Shard"] = { "D. Shard", 5, 42, 0, nil, nil, "Enabled Auto Attack" }, -- DiaSh
     }
     xi.dynamis.nmFunctions =
     {
@@ -1319,7 +1335,7 @@ xi.dynamis.nmDynamicSpawn = function(mobIndex, oMobIndex, forceLink, zoneID, tar
         ["Nightmare Worm"] =
         {
             ["onMobSpawn"] = { function(mob) xi.dynamis.onSpawnNightmareWorm(mob) end },
-            ["onMobEngaged"] = { function(mob, target) end },
+            ["onMobEngaged"] = { function(mob, target) xi.dynamis.onMobEngagedNightmareWorm(mob, target) end },
             ["onMobFight"] = { function(mob, target) end },
             ["onMobRoam"] = { function(mob) end },
             ["onMobMagicPrepare"] = { function(mob, target, spellId) end },
@@ -1339,6 +1355,66 @@ xi.dynamis.nmDynamicSpawn = function(mobIndex, oMobIndex, forceLink, zoneID, tar
             ["onMobWeaponSkill"] = { function(mob) end },
             ["onMobDeath"] = { function(mob) xi.dynamis.antlionDeath(mob) end },
             ["mixins"] = { require("scripts/mixins/families/antlion_ambush") },
+        },
+        ["Umbral Diabolos"] =
+        {
+            ["onMobSpawn"] = { function(mob) xi.dynamis.onSpawnUmbralDiabolos(mob) end },
+            ["onMobEngaged"] = { function(mob, target) xi.dynamis.onMobEngagedUmbralDiabolos(mob, target) end },
+            ["onMobFight"] = { function(mob, target) end },
+            ["onMobRoam"] = { function(mob) end },
+            ["onMobMagicPrepare"] = { function(mob, target, spellId) end },
+            ["onMobWeaponSkillPrepare"] = { function(mob) end },
+            ["onMobWeaponSkill"] = { function(mob) end },
+            ["onMobDeath"] = { function(mob, player, optParams) xi.dynamis.mobOnDeath(mob, player, optParams) end },
+            ["mixins"] = {   },
+        },
+        ["Diabolos Club"] =
+        {
+            ["onMobSpawn"] = { function(mob) xi.dynamis.onSpawnDiabolosClub(mob) end },
+            ["onMobEngaged"] = { function(mob, target) xi.dynamis.onMobEngagedDiabolosClub(mob, target) end },
+            ["onMobFight"] = { function(mob, target) end },
+            ["onMobRoam"] = { function(mob) end },
+            ["onMobMagicPrepare"] = { function(mob, target, spellId) end },
+            ["onMobWeaponSkillPrepare"] = { function(mob) end },
+            ["onMobWeaponSkill"] = { function(mob) end },
+            ["onMobDeath"] = { function(mob, player, optParams) xi.dynamis.mobOnDeathDiabolosClub(mob, player, optParams) end },
+            ["mixins"] = {   },
+        },
+        ["Diabolos Heart"] =
+        {
+            ["onMobSpawn"] = { function(mob) xi.dynamis.onSpawnDiabolosHeart(mob) end },
+            ["onMobEngaged"] = { function(mob, target) end },
+            ["onMobFight"] = { function(mob, target) end },
+            ["onMobRoam"] = { function(mob) end },
+            ["onMobMagicPrepare"] = { function(mob, target, spellId) end },
+            ["onMobWeaponSkillPrepare"] = { function(mob) end },
+            ["onMobWeaponSkill"] = { function(mob) end },
+            ["onMobDeath"] = { function(mob, player, optParams) xi.dynamis.mobOnDeathDiabolosHeart(mob, player, optParams) end },
+            ["mixins"] = {   },
+        },
+        ["Diabolos Spade"] =
+        {
+            ["onMobSpawn"] = { function(mob) xi.dynamis.onSpawnDiabolosSpade(mob) end },
+            ["onMobEngaged"] = { function(mob, target) end },
+            ["onMobFight"] = { function(mob, target) end },
+            ["onMobRoam"] = { function(mob) end },
+            ["onMobMagicPrepare"] = { function(mob, target, spellId) end },
+            ["onMobWeaponSkillPrepare"] = { function(mob) end },
+            ["onMobWeaponSkill"] = { function(mob) end },
+            ["onMobDeath"] = { function(mob, player, optParams) xi.dynamis.mobOnDeathDiabolosSpade(mob, player, optParams) end },
+            ["mixins"] = {   },
+        },
+        ["Diabolos Diamond"] =
+        {
+            ["onMobSpawn"] = { function(mob) xi.dynamis.onSpawnDiabolosDiamond(mob) end },
+            ["onMobEngaged"] = { function(mob, target) end },
+            ["onMobFight"] = { function(mob, target) end },
+            ["onMobRoam"] = { function(mob) end },
+            ["onMobMagicPrepare"] = { function(mob, target, spellId) end },
+            ["onMobWeaponSkillPrepare"] = { function(mob) end },
+            ["onMobWeaponSkill"] = { function(mob) end },
+            ["onMobDeath"] = { function(mob, player, optParams) xi.dynamis.mobOnDeathDiabolosDiamond(mob, player, optParams) end },
+            ["mixins"] = {   },
         },
     }
 

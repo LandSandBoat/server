@@ -75,7 +75,7 @@ xi.dynamis.mobList[zoneID].nmchildren = { }
 xi.dynamis.mobList[zoneID].mobchildren = { }
 xi.dynamis.mobList[zoneID].maxWaves = 3 -- Put in number of max waves
 
-while i <= 251 do -- This needs to be the max numer of mobs in the zone
+while i <= 252 do -- This needs to be the max numer of mobs in the zone
     table.insert(xi.dynamis.mobList[zoneID], i, { id = i})
     i = i + 1
 end
@@ -375,6 +375,7 @@ xi.dynamis.mobList[zoneID][110].info = {"NM", "Diabolos Club", nil, nil, nil} --
 xi.dynamis.mobList[zoneID][111].info = {"NM", "Diabolos Heart", nil, nil, nil} -- ( 111 ) Diabolos Heart
 xi.dynamis.mobList[zoneID][112].info = {"NM", "Diabolos Spade", nil, nil, nil} -- ( 112 ) Diabolos Spade
 xi.dynamis.mobList[zoneID][113].info = {"NM", "Diabolos Diamond", nil, nil, nil} -- ( 113 ) Diabolos Diamond
+xi.dynamis.mobList[zoneID][252].info = {"NM", "Diabolos Shard", nil, nil, nil} -- ( 110 ) Diabolos Club
 
 -- Nightmare Taurus
 xi.dynamis.mobList[zoneID][222].info = {"Nightmare", "Nightmare Taurus", nil, nil, nil} -- From Eye - (062-D)
@@ -801,10 +802,11 @@ xi.dynamis.mobList[zoneID][106].pos = { 0.17, -24.77, 67, 70 } -- ( 106 )-Umbral
 xi.dynamis.mobList[zoneID][107].pos = { -12.29, -27.71, 89.71, 54 } -- ( 107 )-Umbral Diabolos
 xi.dynamis.mobList[zoneID][108].pos = { -2.58, -27.95, 105.45, 127 } -- ( 108 )-Umbral Diabolos
 xi.dynamis.mobList[zoneID][109].pos = { -15.71, -27.92, 110.71, 57 } -- ( 109 )-Umbral Diabolos
-xi.dynamis.mobList[zoneID][110].pos = { -15.71, -27.92, 110.71, 57 } -- ( 110 )-Diabolos Club
+xi.dynamis.mobList[zoneID][110].pos = { -35.94, -27.23, 119.30, 230 } -- ( 110 )-Diabolos Club
 xi.dynamis.mobList[zoneID][111].pos = { -43.83, -29.67, 155.47, 33 } -- ( 111 )-Diabolos Heart
 xi.dynamis.mobList[zoneID][112].pos = { 3.67, -29.69, 152.06, 103 } -- ( 112 )-Diabolos Spade
 xi.dynamis.mobList[zoneID][113].pos = { 8.28, -26.28, 123.05, 143 } -- ( 113 )-Diabolos Diamond
+xi.dynamis.mobList[zoneID][252].pos = { -35.94, -27.23, 119.30, 230 } -- ( 110 )-Diabolos Club
 
 ----------------------------------------------------------------------------------------------------
 --                                    Setup of Mob Functions                                      --

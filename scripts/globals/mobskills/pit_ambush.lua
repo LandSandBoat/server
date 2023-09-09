@@ -13,7 +13,11 @@ require("scripts/globals/mobskills")
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
-    if mob:getPool() == 1318 and mob:getLocalVar("AMBUSH") == 1 then
+    if
+        (skill:getID() == 1844 or
+        mob:getPool() == 1318) and
+        mob:getLocalVar("AMBUSH") == 1
+    then
         return 1
     else
         return 0
@@ -22,11 +26,14 @@ end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local numhits = 1
-    local accmod = 1
-    local dmgmod = 1
+    local accmod = 100
+    local dmgmod = 3
+    if skill:getID() == 1844 then -- Nightmare Antlion - Reported to almost one shot paladins
+        dmgmod = 15
+    end
+
     local info = xi.mobskills.mobPhysicalMove(mob, target, skill, numhits, accmod, dmgmod, xi.mobskills.magicalTpBonus.NO_EFFECT)
     local dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.PIERCING, xi.mobskills.shadowBehavior.WIPE_SHADOWS)
-
     -- These are here as it doesn't look right otherwise
     mob:hideName(false)
     mob:setUntargetable(false)
