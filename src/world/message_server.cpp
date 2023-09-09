@@ -145,6 +145,7 @@ void message_server_parse(MSGSERVTYPE type, zmq::message_t* extra, zmq::message_
         case MSG_PT_RELOAD:
         case MSG_PT_DISBAND:
         {
+            // TODO: simplify query now that there's alliance versions?
             const char* query = "SELECT server_addr, server_port, MIN(charid) FROM accounts_sessions JOIN accounts_parties USING (charid) "
                                 "WHERE IF (allianceid <> 0, allianceid = (SELECT MAX(allianceid) FROM accounts_parties WHERE partyid = %d), "
                                 "partyid = %d) GROUP BY server_addr, server_port;";
@@ -153,6 +154,8 @@ void message_server_parse(MSGSERVTYPE type, zmq::message_t* extra, zmq::message_
             ret            = sql->Query(query, partyid, partyid);
             break;
         }
+        case MSG_CHAT_ALLIANCE:
+        case MSG_ALLIANCE_RELOAD:
         case MSG_ALLIANCE_DISSOLVE:
         {
             const char* query = "SELECT server_addr, server_port, MIN(charid) FROM accounts_sessions JOIN accounts_parties USING (charid) "
@@ -197,6 +200,7 @@ void message_server_parse(MSGSERVTYPE type, zmq::message_t* extra, zmq::message_
         }
         case MSG_PT_INVITE:
         case MSG_PT_INV_RES:
+        case MSG_PLAYER_KICK:
         case MSG_DIRECT:
         case MSG_SEND_TO_ZONE:
         {
