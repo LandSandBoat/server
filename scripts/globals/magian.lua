@@ -313,8 +313,8 @@ local function giveMagianItem(player, itemData, inscribeTrialId)
 
     if itemData.itemAugments then
         for augIndex, augData in pairs(itemData.itemAugments) do
-            itemParameters[augIndex + 2] = augData[1]
-            itemParameters[augIndex + 3] = augData[2]
+            itemParameters[augIndex * 2 + 1] = augData[1]
+            itemParameters[augIndex * 2 + 2] = augData[2]
         end
     end
 
