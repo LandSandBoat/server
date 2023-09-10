@@ -43,7 +43,7 @@ local function pickSetPoint(instance)
         end
 
         -- Randomly pick the objective from the generated list
-        instance:setStage(utils.pickRandom(objective))
+        instance:setStage(utils.randomEntry(objective))
 
         if math.random(1, 30) <= 5 then
             instance:setLocalVar('gearObjective', math.random(xi.nyzul.gearObjective.AVOID_AGRO, xi.nyzul.gearObjective.DO_NOT_DESTROY))
@@ -416,6 +416,9 @@ instanceObject.afterInstanceRegister = function(player)
     player:messageName(ID.text.TIME_TO_COMPLETE, player, instance:getTimeLimit())
 
     player:addTempItem(xi.item.UNDERSEA_RUINS_FIREFLIES)
+    player:setCharVar('assaultEntered', 1)
+    player:delKeyItem(xi.ki.NYZUL_ISLE_ASSAULT_ORDERS)
+    player:messageSpecial(ID.text.KEYITEM_LOST, xi.ki.NYZUL_ISLE_ASSAULT_ORDERS)
 end
 
 -- Instance 'tick'
