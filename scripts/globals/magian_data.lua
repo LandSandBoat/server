@@ -3438,6 +3438,50 @@ xi.magian.trials =
         },
     },
 
+    [1139] =
+    {
+        previousTrial = 1138,
+        requiredItem  =
+        {
+            itemId = xi.item.MANTIS,
+            itemAugments =
+            {
+                [1] = { 45, 7 }, -- DMG:+8
+            },
+        },
+
+        textOffset  = 70,
+        tradeItem   = xi.item.TWO_LEAF_CHLORIS_BUD,
+        numRequired = 50,
+
+        rewardItem =
+        {
+            itemId = xi.item.VERETHRAGNA,
+        },
+    },
+
+    [1140] =
+    {
+        previousTrial = 1138,
+        requiredItem  =
+        {
+            itemId = xi.item.MANTIS,
+            itemAugments =
+            {
+                [1] = { 45, 7 }, -- DMG:+8
+            },
+        },
+
+        textOffset  = 70,
+        tradeItem   = xi.item.COIN_OF_ADVANCEMENT,
+        numRequired = 15,
+
+        rewardItem =
+        {
+            itemId = xi.item.REVENANT_FISTS,
+        },
+    },
+
     [1200] = -- Tammuz x8
     {
         previousTrial = 156,
@@ -4466,6 +4510,24 @@ xi.magian.trials =
         },
     },
 
+    [1909] =
+    {
+        previousTrial = 1139,
+        requiredItem  =
+        {
+            itemId = xi.item.VERETHRAGNA,
+        },
+
+        textOffset  = 70,
+        tradeItem   = xi.item.ULHUADSHIS_FANG,
+        numRequired = 50,
+
+        rewardItem =
+        {
+            itemId = xi.item.VERETHRAGNA_85,
+        },
+    },
+
     [2249] =
     {
         previousTrial = 1819,
@@ -4743,6 +4805,24 @@ xi.magian.trials =
         rewardItem =
         {
             itemId = xi.item.ANNIHILATOR_85,
+        },
+    },
+
+    [2307] =
+    {
+        previousTrial = 1909,
+        requiredItem  =
+        {
+            itemId = xi.item.VERETHRAGNA_85,
+        },
+
+        textOffset  = 70,
+        tradeItem   = xi.item.DRAGUAS_SCALE,
+        numRequired = 75,
+
+        rewardItem =
+        {
+            itemId = xi.item.VERETHRAGNA_90,
         },
     },
 
@@ -5035,6 +5115,24 @@ xi.magian.trials =
         },
     },
 
+    [2740] =
+    {
+        previousTrial = 2307,
+        requiredItem  =
+        {
+            itemId = xi.item.VERETHRAGNA_90,
+        },
+
+        textOffset  = 70,
+        tradeItem   = xi.item.PLATE_OF_HEAVY_METAL,
+        numRequired = 1500,
+
+        rewardItem =
+        {
+            itemId = xi.item.VERETHRAGNA_95,
+        },
+    },
+
     [3093] =
     {
         previousTrial = 2660,
@@ -5287,6 +5385,24 @@ xi.magian.trials =
         rewardItem =
         {
             itemId = xi.item.GJALLARHORN_95,
+        },
+    },
+
+    [3203] =
+    {
+        previousTrial = 2740,
+        requiredItem  =
+        {
+            itemId = xi.item.VERETHRAGNA_95,
+        },
+
+        textOffset  = 70,
+        tradeItem   = xi.item.PINCH_OF_RIFTCINDER,
+        numRequired = 60,
+
+        rewardItem =
+        {
+            itemId = xi.item.VERETHRAGNA_99,
         },
     },
 
@@ -5557,6 +5673,24 @@ xi.magian.trials =
         rewardItem =
         {
             itemId = xi.item.GJALLARHORN_99,
+        },
+    },
+
+    [3593] =
+    {
+        previousTrial = 3203,
+        requiredItem  =
+        {
+            itemId = xi.item.VERETHRAGNA_99,
+        },
+
+        textOffset  = 70,
+        tradeItem   = xi.item.PINCH_OF_RIFTCINDER,
+        numRequired = 3000,
+
+        rewardItem =
+        {
+            itemId = xi.item.VERETHRAGNA_99_II,
         },
     },
 
