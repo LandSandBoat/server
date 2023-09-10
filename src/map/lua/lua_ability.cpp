@@ -22,12 +22,6 @@
 #include "lua_ability.h"
 #include "ability.h"
 
-/************************************************************************
- *                                                                        *
- *  Конструктор                                                            *
- *                                                                        *
- ************************************************************************/
-
 CLuaAbility::CLuaAbility(CAbility* PAbility)
 : m_PLuaAbility(PAbility)
 {
