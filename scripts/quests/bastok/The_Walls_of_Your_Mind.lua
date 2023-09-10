@@ -104,7 +104,7 @@ quest.sections =
                         player:delKeyItem(xi.ki.MAP_TO_THE_ANNALS_OF_TRUTH)
                         player:delKeyItem(xi.ki.ANNALS_OF_TRUTH)
                         player:delKeyItem(xi.ki.WEAPON_TRAINING_GUIDE)
-                        player:addLearnedWeaponskill(xi.ws_unlock.ASURAN_FISTS)
+                        player:addLearnedWeaponskill(xi.wsUnlock.ASURAN_FISTS)
                         player:messageSpecial(portBastokID.text.ASURAN_FISTS_LEARNED)
                     end
                 end,

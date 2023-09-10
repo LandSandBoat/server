@@ -107,7 +107,7 @@ quest.sections =
                         player:delKeyItem(xi.ki.MAP_TO_THE_ANNALS_OF_TRUTH)
                         player:delKeyItem(xi.ki.ANNALS_OF_TRUTH)
                         player:delKeyItem(xi.ki.WEAPON_TRAINING_GUIDE)
-                        player:addLearnedWeaponskill(xi.ws_unlock.DETONATOR)
+                        player:addLearnedWeaponskill(xi.wsUnlock.DETONATOR)
                         player:messageSpecial(metalworksID.text.DETONATOR_LEARNED)
                     end
                 end,

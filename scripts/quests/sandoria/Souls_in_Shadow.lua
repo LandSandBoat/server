@@ -106,7 +106,7 @@ quest.sections =
                         player:delKeyItem(xi.ki.MAP_TO_THE_ANNALS_OF_TRUTH)
                         player:delKeyItem(xi.ki.ANNALS_OF_TRUTH)
                         player:delKeyItem(xi.ki.WEAPON_TRAINING_GUIDE)
-                        player:addLearnedWeaponskill(xi.ws_unlock.SPIRAL_HELL)
+                        player:addLearnedWeaponskill(xi.wsUnlock.SPIRAL_HELL)
                         player:messageSpecial(bostaunieuxID.text.SPIRAL_HELL_LEARNED)
                     end
                 end,

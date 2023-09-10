@@ -4,7 +4,6 @@
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
 require('scripts/globals/utils')
-require('scripts/globals/weaponskillids')
 require('scripts/globals/extravaganza')
 -----------------------------------
 xi = xi or {}

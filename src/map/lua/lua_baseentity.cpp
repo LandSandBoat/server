@@ -9524,7 +9524,7 @@ uint16 CLuaBaseEntity::getCharSkillLevel(uint8 skillID)
 /************************************************************************
  *  Function: addLearnedWeaponskill()
  *  Purpose : Manually add a new weaponskill for the player using WSID
- *  Example : player:addLearnedWeaponskill(xi.ws_unlock.DECIMATION)
+ *  Example : player:addLearnedWeaponskill(xi.wsUnlock.DECIMATION)
  *  Notes   : Do not see implemented in any script
  ************************************************************************/
 
@@ -9547,7 +9547,7 @@ void CLuaBaseEntity::addLearnedWeaponskill(uint8 wsUnlockId)
 /************************************************************************
  *  Function: hasLearnedWeaponskill()
  *  Purpose : Returns true if a player has learned a particular weaponskill
- *  Example : if player:hasLearnedWeaponskill(xi.ws_unlock.DECIMATION) then
+ *  Example : if player:hasLearnedWeaponskill(xi.wsUnlock.DECIMATION) then
  *  Notes   :
  ************************************************************************/
 
@@ -9565,7 +9565,7 @@ bool CLuaBaseEntity::hasLearnedWeaponskill(uint8 wsUnlockId)
 /************************************************************************
  *  Function: delLearnedWeaponskill()
  *  Purpose : Removes a learned weaponskill from the player
- *  Example : player:delLearnedWeaponskill(xi.ws_unlock.ASURAN_FISTS)
+ *  Example : player:delLearnedWeaponskill(xi.wsUnlock.ASURAN_FISTS)
  *  Notes   :
  ************************************************************************/
 

@@ -103,7 +103,7 @@ quest.sections =
                         player:delKeyItem(xi.ki.MAP_TO_THE_ANNALS_OF_TRUTH)
                         player:delKeyItem(xi.ki.ANNALS_OF_TRUTH)
                         player:delKeyItem(xi.ki.WEAPON_TRAINING_GUIDE)
-                        player:addLearnedWeaponskill(xi.ws_unlock.BLADE_KU)
+                        player:addLearnedWeaponskill(xi.wsUnlock.BLADE_KU)
                         player:messageSpecial(norgID.text.BLADE_KU_LEARNED)
                     end
                 end,
