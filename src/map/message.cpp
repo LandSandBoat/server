@@ -25,6 +25,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "message.h"
 
 #include "alliance.h"
+#include "besieged_system.h"
 #include "conquest_system.h"
 #include "linkshell.h"
 #include "party.h"
@@ -778,12 +779,12 @@ namespace message
                         conquest::HandleZMQMessage(data);
                         break;
                     }
-                    /*
                     case REGIONAL_EVT_MSG_BESIEGED:
                     {
-                        // TODO: Handle besieged message
+                        besieged::HandleZMQMessage(data);
                         break;
                     }
+                    /*
                     case REGIONAL_EVT_MSG_CAMPAIGN:
                     {
                         // TODO: Handle besieged message

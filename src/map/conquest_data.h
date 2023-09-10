@@ -97,7 +97,7 @@ private:
 
     /**
      * Loads the latest conquest data from DB.
-     * Should only ever be done on map initialization.
+     * Should only ever be done on construction.
      * World server should be updating conquest data periodically.
      */
     void load(std::unique_ptr<SqlConnection>& sql);

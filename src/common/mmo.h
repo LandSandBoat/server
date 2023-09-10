@@ -196,6 +196,18 @@ enum CONQUESTMSGTYPE : uint8
     CONQUEST_MAP2WORLD_ADD_INFLUENCE_POINTS,
 };
 
+enum BESIEGEDMSGTYPE : uint8
+{
+    // WORLD --------> MAP
+
+    // World map broadcasts stronghold info to all zones.
+    BESIEGED_WORLD2MAP_STRONGHOLD_INFO,
+
+    // MAP ----------> WORLD
+
+    // TODO: Fill up Map 2 World Messages
+};
+
 constexpr auto msgTypeToStr = [](uint8 msgtype)
 {
     switch (msgtype)

@@ -177,13 +177,36 @@ public:
     /// @return SQL_SUCCESS or SQL_ERROR
     int32 GetData(size_t col, char** out_buf, size_t* out_len);
 
-    int8*  GetData(size_t col);
-    int32  GetIntData(size_t col);
-    uint32 GetUIntData(size_t col);
-    uint64 GetUInt64Data(size_t col);
-    float  GetFloatData(size_t col);
-
+    int8*       GetData(size_t col);
+    int32       GetIntData(size_t col);
+    uint32      GetUIntData(size_t col);
+    uint64      GetUInt64Data(size_t col);
+    float       GetFloatData(size_t col);
     std::string GetStringData(size_t col);
+
+    template <typename T>
+    T GetIntData(size_t col)
+    {
+        return static_cast<T>(GetIntData(col));
+    }
+
+    template <typename T>
+    T GetUIntData(size_t col)
+    {
+        return static_cast<T>(GetUIntData(col));
+    }
+
+    template <typename T>
+    T GetUInt64Data(size_t col)
+    {
+        return static_cast<T>(GetUInt64Data(col));
+    }
+
+    template <typename T>
+    T GetFloatData(size_t col)
+    {
+        return static_cast<T>(GetFloatData(col));
+    }
 
     /// Frees the result of the query.
     void FreeResult();
