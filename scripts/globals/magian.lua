@@ -270,7 +270,11 @@ local function registerTrialListeners()
     xi.items = xi.items or {}
 
     for trialId, magianData in pairs(xi.magian.trials) do
-        if magianData.defeatMob or magianData.useWeaponskill then
+        if
+            magianData.defeatMob or
+            magianData.gainExp or
+            magianData.useWeaponskill
+        then
             for itemKey, itemId in pairs(xi.item) do
                 if magianData.requiredItem.itemId == itemId then
                     local itemName = string.lower(itemKey)
@@ -771,12 +775,15 @@ local trialConditions =
     ['useWeaponskill'] = function(trialData, player, mob, paramTable)
         return not trialData.useWeaponskill or paramTable.weaponskillUsed == trialData.useWeaponskill
     end,
+
+    ['zoneId'] = function(trialData, player, mob, paramTable)
+        return not trialData.zoneId or trialData.zoneId[player:getZoneID()]
+    end,
 }
 
 local function checkConditions(trialData, player, mob, paramTable)
     for conditionName, conditionFunc in pairs(trialConditions) do
         if not conditionFunc(trialData, player, mob, paramTable) then
-            print(conditionName)
             return false
         end
     end
@@ -816,7 +823,6 @@ xi.magian.onItemEquip = function(player, itemObj)
     -- Avatar Kill (Summon must be out, but another of the same type can cause credit)
     -- While under specific enfeeble
     -- Proc additional effect
-    -- Gain XP
 
     if trialData.defeatMob then
         player:addListener('DEFEATED_MOB', 'TRIAL_' .. itemTrialId, function(mobObj, playerObj, optParams)
@@ -832,6 +838,15 @@ xi.magian.onItemEquip = function(player, itemObj)
             if not playerObj:isDead() and playerObj:checkKillCredit(mobObj) then
                 if checkConditions(trialData, playerObj, mobObj, { weaponskillUsed = weaponskillId }) then
                     progressPlayerTrial(playerObj, itemTrialId, 1)
+                end
+            end
+        end)
+
+    elseif trialData.gainExp then
+        player:addListener('EXPERIENCE_POINTS', 'TRIAL_' .. itemTrialId, function(playerObj, mobObj, expGained)
+            if not playerObj:isDead() and playerObj:checkKillCredit(mobObj) then
+                if checkConditions(trialData, playerObj, mobObj) then
+                    progressPlayerTrial(playerObj, itemTrialId, expGained)
                 end
             end
         end)

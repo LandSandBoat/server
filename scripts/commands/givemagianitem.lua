@@ -4,7 +4,7 @@
 -----------------------------------
 local commandObj = {}
 
-commandObj.mdprops =
+commandObj.cmdprops =
 {
     permission = 1,
     parameters = 'sib'

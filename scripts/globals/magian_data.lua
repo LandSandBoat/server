@@ -13250,6 +13250,29 @@ xi.magian.trials =
         },
     },
 
+    [4959] =
+    {
+        previousTrial = 4665,
+        requiredItem  =
+        {
+            itemId = xi.item.MELEE_CROWN_P2,
+        },
+
+        textOffset  = 1325,
+        gainExp     = true,
+        zoneId      = set{ xi.zone.DYNAMIS_XARCABARD, xi.zone.DYNAMIS_TAVNAZIA },
+        numRequired = 20000,
+
+        rewardItem =
+        {
+            itemId = xi.item.MELEE_CROWN_P2,
+            itemAugments =
+            {
+                [1] = { 1334, 0 }, -- Enhances 'Penance' Effect
+            },
+        },
+    },
+
     [5056] =
     {
         previousTrial = 4453,
