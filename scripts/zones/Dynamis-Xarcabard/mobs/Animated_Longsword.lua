@@ -20,6 +20,7 @@ end
 
 entity.onMobDeath = function(mob, player, optParams)
     player:showText(mob, ID.text.ANIMATED_LONGSWORD_DIALOG + 1)
+    xi.magian.onMobDeath(mob, player, optParams, set{ 3100 })
 end
 
 return entity

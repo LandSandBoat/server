@@ -17,6 +17,7 @@ end
 
 entity.onMobDeath = function(mob, player, optParams)
     xi.hunts.checkHunt(mob, player, 281)
+    xi.magian.onMobDeath(mob, player, optParams, set{ 364 })
 end
 
 return entity

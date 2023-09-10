@@ -20,6 +20,7 @@ end
 
 entity.onMobDeath = function(mob, player, optParams)
     player:showText(mob, ID.text.ANIMATED_TABAR_DIALOG + 1)
+    xi.magian.onMobDeath(mob, player, optParams, set{ 3105 })
 end
 
 return entity

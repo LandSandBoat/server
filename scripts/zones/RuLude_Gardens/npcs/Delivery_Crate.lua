@@ -11,7 +11,6 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    xi.magian.deliveryCrateOnTrigger(player, npc)
 end
 
 entity.onEventUpdate = function(player, csid, option, npc)
