@@ -3284,6 +3284,110 @@ xi.magian.trials =
         },
     },
 
+    [1081] =
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.item.ANNIHILATOR,
+        },
+
+        textOffset     = 409,
+        defeatMob      = false,
+        mobEcosystem   = xi.ecosystem.BEAST,
+        useWeaponskill = xi.weaponskill.CORONACH,
+        numRequired    = 200,
+
+        rewardItem =
+        {
+            itemId       = xi.item.ANNIHILATOR,
+            itemAugments =
+            {
+                [1] = { 746, 1 }, -- DMG:+2 (Ranged)
+            },
+        },
+    },
+
+    [1082] =
+    {
+        previousTrial = 1081,
+        requiredItem  =
+        {
+            itemId       = xi.item.ANNIHILATOR,
+            itemAugments =
+            {
+                [1] = { 746, 1 }, -- DMG:+2 (Ranged)
+            },
+        },
+
+        textOffset     = 410,
+        defeatMob      = true,
+        mobEcosystem   = xi.ecosystem.AQUAN,
+        useWeaponskill = xi.weaponskill.CORONACH,
+        numRequired    = 200,
+
+        rewardItem =
+        {
+            itemId       = xi.item.ANNIHILATOR,
+            itemAugments =
+            {
+                [1] = { 746, 5 }, -- DMG:+6 (Ranged)
+            },
+        },
+    },
+
+    [1090] =
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.item.YOICHINOYUMI,
+        },
+
+        textOffset     = 415,
+        defeatMob      = false,
+        mobEcosystem   = xi.ecosystem.AMORPH,
+        useWeaponskill = xi.weaponskill.NAMAS_ARROW,
+        numRequired    = 200,
+
+        rewardItem =
+        {
+            itemId       = xi.item.YOICHINOYUMI,
+            itemAugments =
+            {
+                [1] = { 746, 1 }, -- DMG:+2 (Ranged)
+            },
+        },
+    },
+
+    [1091] =
+    {
+        previousTrial = 1090,
+        requiredItem  =
+        {
+            itemId       = xi.item.YOICHINOYUMI,
+            itemAugments =
+            {
+                [1] = { 746, 1 }, -- DMG:+2 (Ranged)
+            },
+        },
+
+        textOffset     = 416,
+        defeatMob      = true,
+        mobEcosystem   = xi.ecosystem.BEAST,
+        useWeaponskill = xi.weaponskill.NAMAS_ARROW,
+        numRequired    = 200,
+
+        rewardItem =
+        {
+            itemId       = xi.item.YOICHINOYUMI,
+            itemAugments =
+            {
+                [1] = { 746, 4 }, -- DMG:+5 (Ranged)
+            },
+        },
+    },
+
     [1092] = -- Tammuz x8
     {
         previousTrial = 9,
@@ -3631,6 +3735,1558 @@ xi.magian.trials =
             {
                 [1] = { 45, 10 }, -- DMG:+11
             },
+        },
+    },
+
+    [1818] =
+    {
+        previousTrial = 992,
+        requiredItem  =
+        {
+            itemId       = xi.item.MANDAU,
+            itemAugments =
+            {
+                [1] = { 740, 1 }, -- DMG:+2
+            },
+        },
+
+        textOffset     = 652,
+        defeatMob      = true,
+        mobEcosystem   = xi.ecosystem.PLANTOID,
+        useWeaponskill = xi.weaponskill.MERCY_STROKE,
+        numRequired    = 300,
+
+        rewardItem =
+        {
+            itemId       = xi.item.MANDAU,
+            itemAugments =
+            {
+                [1] = { 740, 2 }, -- DMG:+3
+            },
+        },
+    },
+
+    [1819] =
+    {
+        previousTrial = 1818,
+        requiredItem  =
+        {
+            itemId       = xi.item.MANDAU,
+            itemAugments =
+            {
+                [1] = { 740, 2 }, -- DMG:+3
+            },
+        },
+
+        textOffset     = 653,
+        defeatMob      = true,
+        mobEcosystem   = xi.ecosystem.BIRD,
+        useWeaponskill = xi.weaponskill.MERCY_STROKE,
+        numRequired    = 300,
+
+        rewardItem =
+        {
+            itemId = xi.item.MANDAU_80,
+        },
+    },
+
+    [1826] =
+    {
+        previousTrial = 1004,
+        requiredItem  =
+        {
+            itemId       = xi.item.SPHARAI,
+            itemAugments =
+            {
+                [1] = { 740, 5 }, -- DMG:+6
+            },
+        },
+
+        textOffset     = 358,
+        defeatMob      = true,
+        mobEcosystem   = xi.ecosystem.BEAST,
+        useWeaponskill = xi.weaponskill.FINAL_HEAVEN,
+        numRequired    = 300,
+
+        rewardItem =
+        {
+            itemId       = xi.item.SPHARAI,
+            itemAugments =
+            {
+                [1] = { 740, 5 }, -- DMG:+8
+            },
+        },
+    },
+
+    [1827] =
+    {
+        previousTrial = 1826,
+        requiredItem  =
+        {
+            itemId       = xi.item.SPHARAI,
+            itemAugments =
+            {
+                [1] = { 740, 7 },
+            },
+        },
+
+        textOffset     = 661,
+        defeatMob      = true,
+        mobEcosystem   = xi.ecosystem.AMORPH,
+        useWeaponskill = xi.weaponskill.FINAL_HEAVEN,
+        numRequired    = 300,
+
+        rewardItem =
+        {
+            itemId = xi.item.SPHARAI_80,
+        },
+    },
+
+    [1832] =
+    {
+        previousTrial = 1013,
+        requiredItem  =
+        {
+            itemId       = xi.item.EXCALIBUR,
+            itemAugments =
+            {
+                [1] = { 740, 1 }, -- DMG:+2
+            },
+        },
+
+        textOffset     = 666,
+        defeatMob      = true,
+        mobEcosystem   = xi.ecosystem.LIZARD,
+        useWeaponskill = xi.weaponskill.KNIGHTS_OF_ROUND,
+        numRequired    = 300,
+
+        rewardItem =
+        {
+            itemId       = xi.item.EXCALIBUR,
+            itemAugments =
+            {
+                [1] = { 740, 2 }, -- DMG:+3
+            },
+        },
+    },
+
+    [1833] =
+    {
+        previousTrial = 1832,
+        requiredItem  =
+        {
+            itemId       = xi.item.EXCALIBUR,
+            itemAugments =
+            {
+                [1] = { 740, 2 }, -- DMG:+3
+            },
+        },
+
+        textOffset     = 667,
+        defeatMob      = true,
+        mobEcosystem   = xi.ecosystem.DRAGON,
+        useWeaponskill = xi.weaponskill.KNIGHTS_OF_ROUND,
+        numRequired    = 300,
+
+        rewardItem =
+        {
+            itemId = xi.item.EXCALIBUR_80,
+        },
+    },
+
+    [1840] =
+    {
+        previousTrial = 1025,
+        requiredItem  =
+        {
+            itemId       = xi.item.RAGNAROK,
+            itemAugments =
+            {
+                [1] = { 740, 8 }, -- DMG:+9
+            },
+        },
+
+        textOffset     = 674,
+        defeatMob      = true,
+        mobEcosystem   = xi.ecosystem.AQUAN,
+        useWeaponskill = xi.weaponskill.SCOURGE,
+        numRequired    = 300,
+
+        rewardItem =
+        {
+            itemId       = xi.item.RAGNAROK,
+            itemAugments =
+            {
+                [1] = { 740, 9 }, -- DMG:+10
+            },
+        },
+    },
+
+    [1841] =
+    {
+        previousTrial = 1840,
+        requiredItem  =
+        {
+            itemId       = xi.item.RAGNAROK,
+            itemAugments =
+            {
+                [1] = { 740, 9 }, -- DMG:+10
+            },
+        },
+
+        textOffset     = 675,
+        defeatMob      = true,
+        mobEcosystem   = xi.ecosystem.UNDEAD,
+        useWeaponskill = xi.weaponskill.SCOURGE,
+        numRequired    = 300,
+
+        rewardItem =
+        {
+            itemId = xi.item.RAGNAROK_80,
+        },
+    },
+
+    [1842] =
+    {
+        previousTrial = 1028,
+        requiredItem  =
+        {
+            itemId       = xi.item.GUTTLER,
+            itemAugments =
+            {
+                [1] = { 740, 5 }, -- DMG:+6
+            },
+        },
+
+        textOffset     = 676,
+        defeatMob      = true,
+        mobEcosystem   = xi.ecosystem.BEAST,
+        useWeaponskill = xi.weaponskill.ONSLAUGHT,
+        numRequired    = 300,
+
+        rewardItem =
+        {
+            itemId       = xi.item.GUTTLER,
+            itemAugments =
+            {
+                [1] = { 740, 6 }, -- DMG:+7
+            },
+        },
+    },
+
+    [1843] =
+    {
+        previousTrial = 1842,
+        requiredItem  =
+        {
+            itemId       = xi.item.GUTTLER,
+            itemAugments =
+            {
+                [1] = { 740, 6 }, -- DMG:+7
+            },
+        },
+
+        textOffset     = 677,
+        defeatMob      = true,
+        mobEcosystem   = xi.ecosystem.AMORPH,
+        useWeaponskill = xi.weaponskill.ONSLAUGHT,
+        numRequired    = 300,
+
+        rewardItem =
+        {
+            itemId = xi.item.GUTTLER_80,
+        },
+    },
+
+    [1846] =
+    {
+        previousTrial = 1034,
+        requiredItem  =
+        {
+            itemId       = xi.item.BRAVURA,
+            itemAugments =
+            {
+                [1] = { 740, 6 }, -- DMG:+7
+            },
+        },
+
+        textOffset     = 680,
+        defeatMob      = true,
+        mobEcosystem   = xi.ecosystem.UNDEAD,
+        useWeaponskill = xi.weaponskill.METATRON_TORMENT,
+        numRequired    = 300,
+
+        rewardItem =
+        {
+            itemId       = xi.item.BRAVURA,
+            itemAugments =
+            {
+                [1] = { 740, 8 }, -- DMG:+9
+            },
+        },
+    },
+
+    [1847] =
+    {
+        previousTrial = 1846,
+        requiredItem  =
+        {
+            itemId       = xi.item.BRAVURA,
+            itemAugments =
+            {
+                [1] = { 740, 8 }, -- DMG:+9
+            },
+        },
+
+        textOffset     = 681,
+        defeatMob      = true,
+        mobEcosystem   = xi.ecosystem.PLANTOID,
+        useWeaponskill = xi.weaponskill.METATRON_TORMENT,
+        numRequired    = 300,
+
+        rewardItem =
+        {
+            itemId = xi.item.BRAVURA_80,
+        },
+    },
+
+    [1850] =
+    {
+        previousTrial = 1040,
+        requiredItem  =
+        {
+            itemId       = xi.item.GUNGNIR,
+            itemAugments =
+            {
+                [1] = { 740, 6 }, -- DMG:+7
+            },
+        },
+
+        textOffset     = 684,
+        defeatMob      = true,
+        mobEcosystem   = xi.ecosystem.ARCANA,
+        useWeaponskill = xi.weaponskill.GEIRSKOGUL,
+        numRequired    = 300,
+
+        rewardItem =
+        {
+            itemId       = xi.item.GUNGNIR,
+            itemAugments =
+            {
+                [1] = { 740, 8 }, -- DMG:+9
+            },
+        },
+    },
+
+    [1851] =
+    {
+        previousTrial = 1850,
+        requiredItem  =
+        {
+            itemId       = xi.item.GUNGNIR,
+            itemAugments =
+            {
+                [1] = { 740, 8 }, -- DMG:+9
+            },
+        },
+
+        textOffset     = 685,
+        defeatMob      = true,
+        mobEcosystem   = xi.ecosystem.VERMIN,
+        useWeaponskill = xi.weaponskill.GEIRSKOGUL,
+        numRequired    = 300,
+
+        rewardItem =
+        {
+            itemId = xi.item.GUNGNIR_80,
+        },
+    },
+
+    [1854] =
+    {
+        previousTrial = 1046,
+        requiredItem  =
+        {
+            itemId       = xi.item.APOCALYPSE,
+            itemAugments =
+            {
+                [1] = { 740, 6 }, -- DMG:+7
+            },
+        },
+
+        textOffset     = 688,
+        defeatMob      = true,
+        mobEcosystem   = xi.ecosystem.LIZARD,
+        useWeaponskill = xi.weaponskill.CATASTROPHE,
+        numRequired    = 300,
+
+        rewardItem =
+        {
+            itemId       = xi.item.APOCALYPSE,
+            itemAugments =
+            {
+                [1] = { 740, 8 }, -- DMG:+9
+            },
+        },
+    },
+
+    [1855] =
+    {
+        previousTrial = 1854,
+        requiredItem  =
+        {
+            itemId       = xi.item.APOCALYPSE,
+            itemAugments =
+            {
+                [1] = { 740, 8 }, -- DMG:+9
+            },
+        },
+
+        textOffset     = 689,
+        defeatMob      = true,
+        mobEcosystem   = xi.ecosystem.BIRD,
+        useWeaponskill = xi.weaponskill.CATASTROPHE,
+        numRequired    = 300,
+
+        rewardItem =
+        {
+            itemId = xi.item.APOCALYPSE_80,
+        },
+    },
+
+    [1858] =
+    {
+        previousTrial = 1052,
+        requiredItem  =
+        {
+            itemId       = xi.item.KIKOKU,
+            itemAugments =
+            {
+                [1] = { 740, 2 }, -- DMG:+3
+            },
+        },
+
+        textOffset     = 692,
+        defeatMob      = true,
+        mobEcosystem   = xi.ecosystem.AMORPH,
+        useWeaponskill = xi.weaponskill.BLADE_METSU,
+        numRequired    = 300,
+
+        rewardItem =
+        {
+            itemId       = xi.item.KIKOKU,
+            itemAugments =
+            {
+                [1] = { 740, 3 }, -- DMG:+4
+            },
+        },
+    },
+
+    [1859] =
+    {
+        previousTrial = 1858,
+        requiredItem  =
+        {
+            itemId       = xi.item.KIKOKU,
+            itemAugments =
+            {
+                [1] = { 740, 3 }, -- DMG:+4
+            },
+        },
+
+        textOffset     = 693,
+        defeatMob      = true,
+        mobEcosystem   = xi.ecosystem.AQUAN,
+        useWeaponskill = xi.weaponskill.BLADE_METSU,
+        numRequired    = 300,
+
+        rewardItem =
+        {
+            itemId = xi.item.KIKOKU_80,
+        },
+    },
+
+    [1862] =
+    {
+        previousTrial = 1058,
+        requiredItem  =
+        {
+            itemId       = xi.item.AMANOMURAKUMO,
+            itemAugments =
+            {
+                [1] = { 740, 4 }, -- DMG:+5
+            },
+        },
+
+        textOffset     = 696,
+        defeatMob      = true,
+        mobEcosystem   = xi.ecosystem.ARCANA,
+        useWeaponskill = xi.weaponskill.TACHI_KAITEN,
+        numRequired    = 300,
+
+        rewardItem =
+        {
+            itemId       = xi.item.AMANOMURAKUMO,
+            itemAugments =
+            {
+                [1] = { 740, 5 }, -- DMG:+6
+            },
+        },
+    },
+
+    [1863] =
+    {
+        previousTrial = 1862,
+        requiredItem  =
+        {
+            itemId       = xi.item.AMANOMURAKUMO,
+            itemAugments =
+            {
+                [1] = { 740, 5 }, -- DMG:+6
+            },
+        },
+
+        textOffset     = 697,
+        defeatMob      = true,
+        mobEcosystem   = xi.ecosystem.BIRD,
+        useWeaponskill = xi.weaponskill.TACHI_KAITEN,
+        numRequired    = 300,
+
+        rewardItem =
+        {
+            itemId = xi.item.AMANOMURAKUMO_80,
+        },
+    },
+
+    [1866] =
+    {
+        previousTrial = 1064,
+        requiredItem  =
+        {
+            itemId       = xi.item.MJOLLNIR,
+            itemAugments =
+            {
+                [1] = { 740, 7 }, -- DMG:+8
+            },
+        },
+
+        textOffset     = 700,
+        defeatMob      = true,
+        mobEcosystem   = xi.ecosystem.AMORPH,
+        useWeaponskill = xi.weaponskill.RANDGRITH,
+        numRequired    = 300,
+
+        rewardItem =
+        {
+            itemId       = xi.item.MJOLLNIR,
+            itemAugments =
+            {
+                [1] = { 740, 8 }, -- DMG:+9
+            },
+        },
+    },
+
+    [1867] =
+    {
+        previousTrial = 1866,
+        requiredItem  =
+        {
+            itemId       = xi.item.MJOLLNIR,
+            itemAugments =
+            {
+                [1] = { 740, 8 }, -- DMG:+9
+            },
+        },
+
+        textOffset     = 701,
+        defeatMob      = true,
+        mobEcosystem   = xi.ecosystem.VERMIN,
+        useWeaponskill = xi.weaponskill.RANDGRITH,
+        numRequired    = 300,
+
+        rewardItem =
+        {
+            itemId = xi.item.MJOLLNIR_80,
+        },
+    },
+
+    [1870] =
+    {
+        previousTrial = 1070,
+        requiredItem  =
+        {
+            itemId       = xi.item.CLAUSTRUM,
+            itemAugments =
+            {
+                [1] = { 740, 9 }, -- DMG:+10
+            },
+        },
+
+        textOffset     = 704,
+        defeatMob      = true,
+        mobEcosystem   = xi.ecosystem.UNDEAD,
+        useWeaponskill = xi.weaponskill.GATE_OF_TARTARUS,
+        numRequired    = 300,
+
+        rewardItem =
+        {
+            itemId       = xi.item.CLAUSTRUM,
+            itemAugments =
+            {
+                [1] = { 740, 11 }, -- DMG:+12
+            },
+        },
+    },
+
+    [1871] =
+    {
+        previousTrial = 1870,
+        requiredItem  =
+        {
+            itemId       = xi.item.CLAUSTRUM,
+            itemAugments =
+            {
+                [1] = { 740, 11 }, -- DMG:+12
+            },
+        },
+
+        textOffset     = 705,
+        defeatMob      = true,
+        mobEcosystem   = xi.ecosystem.BEAST,
+        useWeaponskill = xi.weaponskill.GATE_OF_TARTARUS,
+        numRequired    = 300,
+
+        rewardItem =
+        {
+            itemId = xi.item.CLAUSTRUM_80,
+        },
+    },
+
+    [1878] =
+    {
+        previousTrial = 1082,
+        requiredItem  =
+        {
+            itemId       = xi.item.ANNIHILATOR,
+            itemAugments =
+            {
+                [1] = { 746, 5 }, -- DMG:+6 (Ranged)
+            },
+        },
+
+        textOffset     = 712,
+        defeatMob      = true,
+        mobEcosystem   = xi.ecosystem.ARCANA,
+        useWeaponskill = xi.weaponskill.CORONACH,
+        numRequired    = 300,
+
+        rewardItem =
+        {
+            itemId       = xi.item.ANNIHILATOR,
+            itemAugments =
+            {
+                [1] = { 746, 7 }, -- DMG:+8 (Ranged)
+            },
+        },
+    },
+
+    [1879] =
+    {
+        previousTrial = 1878,
+        requiredItem  =
+        {
+            itemId       = xi.item.ANNIHILATOR,
+            itemAugments =
+            {
+                [1] = { 746, 7 }, -- DMG:+8 (Ranged)
+            },
+        },
+
+        textOffset     = 713,
+        defeatMob      = true,
+        mobEcosystem   = xi.ecosystem.PLANTOID,
+        useWeaponskill = xi.weaponskill.CORONACH,
+        numRequired    = 300,
+
+        rewardItem =
+        {
+            itemId = xi.item.ANNIHILATOR_80,
+        },
+    },
+
+    [1884] =
+    {
+        previousTrial = 1091,
+        requiredItem  =
+        {
+            itemId       = xi.item.YOICHINOYUMI,
+            itemAugments =
+            {
+                [1] = { 746, 4 }, -- DMG:+5 (Ranged)
+            },
+        },
+
+        textOffset     = 718,
+        defeatMob      = true,
+        mobEcosystem   = xi.ecosystem.LIZARD,
+        useWeaponskill = xi.weaponskill.NAMAS_ARROW,
+        numRequired    = 300,
+
+        rewardItem =
+        {
+            itemId       = xi.item.YOICHINOYUMI,
+            itemAugments =
+            {
+                [1] = { 746, 7 }, -- DMG:+8 (Ranged)
+            },
+        },
+    },
+
+    [1885] =
+    {
+        previousTrial = 1884,
+        requiredItem  =
+        {
+            itemId       = xi.item.YOICHINOYUMI,
+            itemAugments =
+            {
+                [1] = { 746, 7 }, -- DMG:+8 (Ranged)
+            },
+        },
+
+        textOffset     = 719,
+        defeatMob      = true,
+        mobEcosystem   = xi.ecosystem.AQUAN,
+        useWeaponskill = xi.weaponskill.NAMAS_ARROW,
+        numRequired    = 300,
+
+        rewardItem =
+        {
+            itemId = xi.item.YOICHINOYUMI_80,
+        },
+    },
+
+    [2249] =
+    {
+        previousTrial = 1819,
+        requiredItem  =
+        {
+            itemId = xi.item.MANDAU_80,
+        },
+
+        textOffset     = 949,
+        defeatMob      = true,
+        mobEcosystem   = xi.ecosystem.DRAGON,
+        useWeaponskill = xi.weaponskill.MERCY_STROKE,
+        numRequired    = 400,
+
+        rewardItem =
+        {
+            itemId = xi.item.MANDAU_85,
+        },
+    },
+
+    [2253] =
+    {
+        previousTrial = 1827,
+        requiredItem  =
+        {
+            itemId = xi.item.SPHARAI_80,
+        },
+
+        textOffset     = 953,
+        defeatMob      = true,
+        mobEcosystem   = xi.ecosystem.ARCANA,
+        useWeaponskill = xi.weaponskill.FINAL_HEAVEN,
+        numRequired    = 400,
+
+        rewardItem =
+        {
+            itemId = xi.item.SPHARAI_85,
+        },
+    },
+
+    [2256] =
+    {
+        previousTrial = 1833,
+        requiredItem  =
+        {
+            itemId = xi.item.EXCALIBUR_80,
+        },
+
+        textOffset     = 956,
+        defeatMob      = true,
+        mobEcosystem   = xi.ecosystem.BIRD,
+        useWeaponskill = xi.weaponskill.KNIGHTS_OF_ROUND,
+        numRequired    = 400,
+
+        rewardItem =
+        {
+            itemId = xi.item.EXCALIBUR_85,
+        },
+    },
+
+    [2260] =
+    {
+        previousTrial = 1841,
+        requiredItem  =
+        {
+            itemId = xi.item.RAGNAROK_80,
+        },
+
+        textOffset     = 960,
+        defeatMob      = true,
+        mobEcosystem   = xi.ecosystem.ARCANA,
+        useWeaponskill = xi.weaponskill.SCOURGE,
+        numRequired    = 400,
+
+        rewardItem =
+        {
+            itemId = xi.item.RAGNAROK_85,
+        },
+    },
+
+    [2261] =
+    {
+        previousTrial = 1843,
+        requiredItem  =
+        {
+            itemId = xi.item.GUTTLER_80,
+        },
+
+        textOffset     = 961,
+        defeatMob      = true,
+        mobEcosystem   = xi.ecosystem.BIRD,
+        useWeaponskill = xi.weaponskill.ONSLAUGHT,
+        numRequired    = 400,
+
+        rewardItem =
+        {
+            itemId = xi.item.GUTTLER_85,
+        },
+    },
+
+    [2263] =
+    {
+        previousTrial = 1847,
+        requiredItem  =
+        {
+            itemId = xi.item.BRAVURA_80,
+        },
+
+        textOffset     = 963,
+        defeatMob      = true,
+        mobEcosystem   = xi.ecosystem.DRAGON,
+        useWeaponskill = xi.weaponskill.METATRON_TORMENT,
+        numRequired    = 400,
+
+        rewardItem =
+        {
+            itemId = xi.item.BRAVURA_85,
+        },
+    },
+
+    [2265] =
+    {
+        previousTrial = 1855,
+        requiredItem  =
+        {
+            itemId = xi.item.APOCALYPSE_80,
+        },
+
+        textOffset     = 967,
+        defeatMob      = true,
+        mobEcosystem   = xi.ecosystem.BEAST,
+        useWeaponskill = xi.weaponskill.CATASTROPHE,
+        numRequired    = 400,
+
+        rewardItem =
+        {
+            itemId = xi.item.APOCALYPSE_85,
+        },
+    },
+
+    [2267] =
+    {
+        previousTrial = 1851,
+        requiredItem  =
+        {
+            itemId = xi.item.GUNGNIR_80,
+        },
+
+        textOffset     = 965,
+        defeatMob      = true,
+        mobEcosystem   = xi.ecosystem.AQUAN,
+        useWeaponskill = xi.weaponskill.GEIRSKOGUL,
+        numRequired    = 400,
+
+        rewardItem =
+        {
+            itemId = xi.item.GUNGNIR_85,
+        },
+    },
+
+    [2269] =
+    {
+        previousTrial = 1859,
+        requiredItem  =
+        {
+            itemId = xi.item.KIKOKU_80,
+        },
+
+        textOffset     = 969,
+        defeatMob      = true,
+        mobEcosystem   = xi.ecosystem.UNDEAD,
+        useWeaponskill = xi.weaponskill.BLADE_METSU,
+        numRequired    = 400,
+
+        rewardItem =
+        {
+            itemId = xi.item.KIKOKU_85,
+        },
+    },
+
+    [2271] =
+    {
+        previousTrial = 1863,
+        requiredItem  =
+        {
+            itemId = xi.item.AMANOMURAKUMO_80,
+        },
+
+        textOffset     = 971,
+        defeatMob      = true,
+        mobEcosystem   = xi.ecosystem.AQUAN,
+        useWeaponskill = xi.weaponskill.TACHI_KAITEN,
+        numRequired    = 400,
+
+        rewardItem =
+        {
+            itemId = xi.item.AMANOMURAKUMO_85,
+        },
+    },
+
+    [2273] =
+    {
+        previousTrial = 1867,
+        requiredItem  =
+        {
+            itemId = xi.item.MJOLLNIR_80,
+        },
+
+        textOffset     = 973,
+        defeatMob      = true,
+        mobEcosystem   = xi.ecosystem.BIRD,
+        useWeaponskill = xi.weaponskill.RANDGRITH,
+        numRequired    = 400,
+
+        rewardItem =
+        {
+            itemId = xi.item.MJOLLNIR_85,
+        },
+    },
+
+    [2275] =
+    {
+        previousTrial = 1871,
+        requiredItem  =
+        {
+            itemId = xi.item.CLAUSTRUM_80,
+        },
+
+        textOffset     = 975,
+        defeatMob      = true,
+        mobEcosystem   = xi.ecosystem.PLANTOID,
+        useWeaponskill = xi.weaponskill.GATE_OF_TARTARUS,
+        numRequired    = 400,
+
+        rewardItem =
+        {
+            itemId = xi.item.CLAUSTRUM_85,
+        },
+    },
+
+    [2279] =
+    {
+        previousTrial = 1885,
+        requiredItem  =
+        {
+            itemId = xi.item.YOICHINOYUMI_80,
+        },
+
+        textOffset     = 982,
+        defeatMob      = true,
+        mobEcosystem   = xi.ecosystem.VERMIN,
+        useWeaponskill = xi.weaponskill.NAMAS_ARROW,
+        numRequired    = 400,
+
+        rewardItem =
+        {
+            itemId = xi.item.YOICHINOYUMI_85,
+        },
+    },
+
+    [2280] =
+    {
+        previousTrial = 1879,
+        requiredItem  =
+        {
+            itemId = xi.item.ANNIHILATOR_80,
+        },
+
+        textOffset     = 979,
+        defeatMob      = true,
+        mobEcosystem   = xi.ecosystem.UNDEAD,
+        useWeaponskill = xi.weaponskill.CORONACH,
+        numRequired    = 400,
+
+        rewardItem =
+        {
+            itemId = xi.item.ANNIHILATOR_85,
+        },
+    },
+
+    [2660] =
+    {
+        previousTrial = 2249,
+        requiredItem  =
+        {
+            itemId = xi.item.MANDAU_85,
+        },
+
+        textOffset  = 1085,
+        numRequired = 5,
+
+        rewardItem =
+        {
+            itemId = xi.item.MANDAU_90,
+        },
+    },
+
+    [2664] =
+    {
+        previousTrial = 2253,
+        requiredItem  =
+        {
+            itemId = xi.item.SPHARAI_85,
+        },
+
+        textOffset  = 1083,
+        numRequired = 5,
+
+        rewardItem =
+        {
+            itemId = xi.item.SPHARAI_90,
+        },
+    },
+
+    [2667] =
+    {
+        previousTrial = 2256,
+        requiredItem  =
+        {
+            itemId = xi.item.EXCALIBUR_85,
+        },
+
+        textOffset  = 1084,
+        numRequired = 5,
+
+        rewardItem =
+        {
+            itemId = xi.item.EXCALIBUR_90,
+        },
+    },
+
+    [2671] =
+    {
+        previousTrial = 2260,
+        requiredItem  =
+        {
+            itemId = xi.item.RAGNAROK_85,
+        },
+
+        textOffset  = 1084,
+        numRequired = 5,
+
+        rewardItem =
+        {
+            itemId = xi.item.RAGNAROK_90,
+        },
+    },
+
+    [2672] =
+    {
+        previousTrial = 2261,
+        requiredItem  =
+        {
+            itemId = xi.item.GUTTLER_85,
+        },
+
+        textOffset  = 1082,
+        numRequired = 5,
+
+        rewardItem =
+        {
+            itemId = xi.item.GUTTLER_90,
+        },
+    },
+
+    [2674] =
+    {
+        previousTrial = 2263,
+        requiredItem  =
+        {
+            itemId = xi.item.BRAVURA_85,
+        },
+
+        textOffset  = 1084,
+        numRequired = 5,
+
+        rewardItem =
+        {
+            itemId = xi.item.BRAVURA_90,
+        },
+    },
+
+    [2676] =
+    {
+        previousTrial = 2265,
+        requiredItem  =
+        {
+            itemId = xi.item.APOCALYPSE_85,
+        },
+
+        textOffset  = 1081,
+        numRequired = 5,
+
+        rewardItem =
+        {
+            itemId = xi.item.APOCALYPSE_90,
+        },
+    },
+
+    [2678] =
+    {
+        previousTrial = 2267,
+        requiredItem  =
+        {
+            itemId = xi.item.GUNGNIR_85,
+        },
+
+        textOffset  = 1082,
+        numRequired = 5,
+
+        rewardItem =
+        {
+            itemId = xi.item.GUNGNIR_90,
+        },
+    },
+
+    [2680] =
+    {
+        previousTrial = 2269,
+        requiredItem  =
+        {
+            itemId = xi.item.KIKOKU_85,
+        },
+
+        textOffset  = 1083,
+        numRequired = 5,
+
+        rewardItem =
+        {
+            itemId = xi.item.KIKOKU_90,
+        },
+    },
+
+    [2682] =
+    {
+        previousTrial = 2271,
+        requiredItem  =
+        {
+            itemId = xi.item.AMANOMURAKUMO_85,
+        },
+
+        textOffset  = 1081,
+        numRequired = 5,
+
+        rewardItem =
+        {
+            itemId = xi.item.AMANOMURAKUMO_90,
+        },
+    },
+
+    [2684] =
+    {
+        previousTrial = 2273,
+        requiredItem  =
+        {
+            itemId = xi.item.MJOLLNIR_85,
+        },
+
+        textOffset  = 1085,
+        numRequired = 5,
+
+        rewardItem =
+        {
+            itemId = xi.item.MJOLLNIR_90,
+        },
+    },
+
+    [2686] =
+    {
+        previousTrial = 2275,
+        requiredItem  =
+        {
+            itemId = xi.item.CLAUSTRUM_85,
+        },
+
+        textOffset  = 1082,
+        numRequired = 5,
+
+        rewardItem =
+        {
+            itemId = xi.item.CLAUSTRUM_90,
+        },
+    },
+
+    [2690] =
+    {
+        previousTrial = 2279,
+        requiredItem  =
+        {
+            itemId = xi.item.YOICHINOYUMI_85,
+        },
+
+        textOffset  = 1081,
+        numRequired = 5,
+
+        rewardItem =
+        {
+            itemId = xi.item.YOICHINOYUMI_90,
+        },
+    },
+
+    [2691] =
+    {
+        previousTrial = 2280,
+        requiredItem  =
+        {
+            itemId = xi.item.ANNIHILATOR_85,
+        },
+
+        textOffset  = 1083,
+        numRequired = 5,
+
+        rewardItem =
+        {
+            itemId = xi.item.ANNIHILATOR_90,
+        },
+    },
+
+    [2713] =
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.item.GJALLARHORN,
+        },
+
+        textOffset  = 1131,
+        numRequired = 3,
+
+        rewardItem =
+        {
+            itemId = xi.item.GJALLARHORN_80,
+        },
+    },
+
+    [2714] =
+    {
+        previousTrial = 2713,
+        requiredItem  =
+        {
+            itemId = xi.item.GJALLARHORN_80,
+        },
+
+        textOffset  = 1133,
+        numRequired = 3,
+
+        rewardItem =
+        {
+            itemId = xi.item.GJALLARHORN_85,
+        },
+    },
+
+    [2715] =
+    {
+        previousTrial = 2714,
+        requiredItem  =
+        {
+            itemId = xi.item.GJALLARHORN_85,
+        },
+
+        textOffset  = 1085,
+        numRequired = 5,
+
+        rewardItem =
+        {
+            itemId = xi.item.GJALLARHORN_90,
+        },
+    },
+
+    [3093] =
+    {
+        previousTrial = 2660,
+        requiredItem  =
+        {
+            itemId = xi.item.MANDAU_90,
+        },
+
+        textOffset  = 1178,
+        numRequired = 10,
+
+        rewardItem =
+        {
+            itemId = xi.item.MANDAU_95,
+        },
+    },
+
+    [3097] =
+    {
+        previousTrial = 2664,
+        requiredItem  =
+        {
+            itemId = xi.item.SPHARAI_90,
+        },
+
+        textOffset  = 1177,
+        numRequired = 10,
+
+        rewardItem =
+        {
+            itemId = xi.item.SPHARAI_95,
+        },
+    },
+
+    [3100] =
+    {
+        previousTrial = 2667,
+        requiredItem  =
+        {
+            itemId = xi.item.EXCALIBUR_90,
+        },
+
+        textOffset  = 1179,
+        numRequired = 10,
+
+        rewardItem =
+        {
+            itemId = xi.item.EXCALIBUR_95,
+        },
+    },
+
+    [3104] =
+    {
+        previousTrial = 2671,
+        requiredItem  =
+        {
+            itemId = xi.item.RAGNAROK_90,
+        },
+
+        textOffset  = 1180,
+        numRequired = 10,
+
+        rewardItem =
+        {
+            itemId = xi.item.RAGNAROK_95,
+        },
+    },
+
+    [3105] =
+    {
+        previousTrial = 2672,
+        requiredItem  =
+        {
+            itemId = xi.item.GUTTLER_90,
+        },
+
+        textOffset  = 1181,
+        numRequired = 10,
+
+        rewardItem =
+        {
+            itemId = xi.item.GUTTLER_95,
+        },
+    },
+
+    [3107] =
+    {
+        previousTrial = 2674,
+        requiredItem  =
+        {
+            itemId = xi.item.BRAVURA_90,
+        },
+
+        textOffset  = 1182,
+        numRequired = 10,
+
+        rewardItem =
+        {
+            itemId = xi.item.BRAVURA_95,
+        },
+    },
+
+    [3109] =
+    {
+        previousTrial = 2676,
+        requiredItem  =
+        {
+            itemId = xi.item.APOCALYPSE_90,
+        },
+
+        textOffset  = 1184,
+        numRequired = 10,
+
+        rewardItem =
+        {
+            itemId = xi.item.APOCALYPSE_95,
+        },
+    },
+
+    [3111] =
+    {
+        previousTrial = 2678,
+        requiredItem  =
+        {
+            itemId = xi.item.GUNGNIR_90,
+        },
+
+        textOffset  = 1183,
+        numRequired = 10,
+
+        rewardItem =
+        {
+            itemId = xi.item.GUNGNIR_95,
+        },
+    },
+
+    [3113] =
+    {
+        previousTrial = 2680,
+        requiredItem  =
+        {
+            itemId = xi.item.KIKOKU_90,
+        },
+
+        textOffset  = 1185,
+        numRequired = 10,
+
+        rewardItem =
+        {
+            itemId = xi.item.KIKOKU_95,
+        },
+    },
+
+    [3115] =
+    {
+        previousTrial = 2682,
+        requiredItem  =
+        {
+            itemId = xi.item.AMANOMURAKUMO_90,
+        },
+
+        textOffset  = 1186,
+        numRequired = 10,
+
+        rewardItem =
+        {
+            itemId = xi.item.AMANOMURAKUMO_95,
+        },
+    },
+
+    [3117] =
+    {
+        previousTrial = 2684,
+        requiredItem  =
+        {
+            itemId = xi.item.MJOLLNIR_90,
+        },
+
+        textOffset  = 1187,
+        numRequired = 10,
+
+        rewardItem =
+        {
+            itemId = xi.item.MJOLLNIR_95,
+        },
+    },
+
+    [3119] =
+    {
+        previousTrial = 2686,
+        requiredItem  =
+        {
+            itemId = xi.item.CLAUSTRUM_90,
+        },
+
+        textOffset  = 1188,
+        numRequired = 10,
+
+        rewardItem =
+        {
+            itemId = xi.item.CLAUSTRUM_95,
+        },
+    },
+
+    [3123] =
+    {
+        previousTrial = 2690,
+        requiredItem  =
+        {
+            itemId = xi.item.YOICHINOYUMI_90,
+        },
+
+        textOffset  = 1189,
+        numRequired = 10,
+
+        rewardItem =
+        {
+            itemId = xi.item.YOICHINOYUMI_95,
+        },
+    },
+
+    [3124] =
+    {
+        previousTrial = 2691,
+        requiredItem  =
+        {
+            itemId = xi.item.ANNIHILATOR_90,
+        },
+
+        textOffset  = 1190,
+        numRequired = 10,
+
+        rewardItem =
+        {
+            itemId = xi.item.ANNIHILATOR_95,
+        },
+    },
+
+    [3128] =
+    {
+        previousTrial = 2715,
+        requiredItem  =
+        {
+            itemId = xi.item.GJALLARHORN_90,
+        },
+
+        textOffset  = 1191,
+        numRequired = 10,
+
+        rewardItem =
+        {
+            itemId = xi.item.GJALLARHORN_95,
         },
     },
 
@@ -7774,6 +9430,74 @@ xi.magian.trials =
         },
     },
 
+    [4401] =
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.item.AEGIS,
+        },
+
+        textOffset  = 1132,
+        numRequired = 3,
+
+        rewardItem =
+        {
+            itemId = xi.item.AEGIS_80,
+        },
+    },
+
+    [4402] =
+    {
+        previousTrial = 4401,
+        requiredItem  =
+        {
+            itemId = xi.item.AEGIS_80,
+        },
+
+        textOffset  = 1134,
+        numRequired = 3,
+
+        rewardItem =
+        {
+            itemId = xi.item.AEGIS_85,
+        },
+    },
+
+    [4403] =
+    {
+        previousTrial = 4402,
+        requiredItem  =
+        {
+            itemId = xi.item.AEGIS_85,
+        },
+
+        textOffset  = 1084,
+        numRequired = 5,
+
+        rewardItem =
+        {
+            itemId = xi.item.AEGIS_90,
+        },
+    },
+
+    [4448] =
+    {
+        previousTrial = 4403,
+        requiredItem  =
+        {
+            itemId = xi.item.AEGIS_90,
+        },
+
+        textOffset  = 1192,
+        numRequired = 10,
+
+        rewardItem =
+        {
+            itemId = xi.item.AEGIS_95,
+        },
+    },
+
     [4453] =
     {
         previousTrial = 4448,
@@ -11211,7 +12935,7 @@ xi.magian.trials =
             itemId = xi.item.ETOILE_TOE_SHOES_P2,
         },
     },
-    ---
+
     [4844] = -- Argute Mortarboard -> Argute Mortarboard +2 - 50 Forgotten Thought
     {
         previousTrial = 0,

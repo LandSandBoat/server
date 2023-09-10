@@ -264,12 +264,13 @@ end
 -- Set onEquip and onUnequip functions for trial items that require
 -- a listener.  This avoids having to create an item file for every magian item,
 -- since onItemEquip/unEquip functions only exist for two items.
+-- NOTE: This function isn't the most efficient, but is only executed on server
+-- start, or magian reload.
 local function registerTrialListeners()
     xi.items = xi.items or {}
 
     for trialId, magianData in pairs(xi.magian.trials) do
         if magianData.defeatMob or magianData.useWeaponskill then
-            -- TODO: Create a binding to get name by ID.  This is horribly inefficient
             for itemKey, itemId in pairs(xi.item) do
                 if magianData.requiredItem.itemId == itemId then
                     local itemName = string.lower(itemKey)
@@ -369,8 +370,9 @@ xi.magian.magianOnTrade = function(player, npc, trade)
                         player:startEvent(moogleData[6], 0, 0, 0, trialData.rewardItem, 0, 0, 0, itemId)
                     else
                         -- Display status of selected trial
-                        -- TODO: v was always a table, determine what value is expected here
-                        local v = 1 -- Test
+                        -- TODO: v was always a table which would be 0 from bindings, determine what value is expected here.
+                        -- Defaulting to 0 and leaving the variable to mark position for future research.
+                        local v = 0 -- Test
                         player:startEvent(moogleData[5], trialId, itemId, 0, 0, v, 0, 0, utils.MAX_UINT32 - 1)
                     end
 
@@ -704,7 +706,7 @@ xi.magian.deliveryCrateOnEventUpdate = function(player, csid, option, npc)
     local optionMod         = bit.band(option, 0xFF)
     local tradedItemId      = player:getLocalVar('tradedItemId')
     local numRelevantTrials = #getPlayerTrialsByTradeItemId(player, tradedItemId)
-    local maxNumber         = 31 -- TODO: What does this do?  I bet this is a bitmask of active trials, and the shift is cheesing it out of scope
+    local maxNumber         = 31
 
     if csid == 10134 then
         if optionMod == 101 then
@@ -805,7 +807,7 @@ xi.magian.onItemEquip = function(player, itemObj)
 
     -- A valid trial exists, so apply the appropriate listener for it.  Defeating a mob is always the highest
     -- priority listener, and if it doesn't apply, only then fall back.  All magian trials with a listener
-    -- require the player to both be alive, and the mob be experience-granting (NMs are handled separately)
+    -- require the player to both be alive and the mob be experience-granting (NMs are handled separately)
 
     -- TODO:
     -- Weather Type / Day (Weather = 5, Day = 1, Additive) Special exception for Light/Dark
