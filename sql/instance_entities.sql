@@ -79,30 +79,30 @@ INSERT INTO `instance_entities` VALUES (5501,17002744);
 
 -- Extermination
 -- mobs
-INSERT INTO `instance_entities` VALUES (5502,17002521);
-INSERT INTO `instance_entities` VALUES (5502,17002522);
-INSERT INTO `instance_entities` VALUES (5502,17002523);
-INSERT INTO `instance_entities` VALUES (5502,17002524);
-INSERT INTO `instance_entities` VALUES (5502,17002525);
-INSERT INTO `instance_entities` VALUES (5502,17002526);
-INSERT INTO `instance_entities` VALUES (5502,17002527);
-INSERT INTO `instance_entities` VALUES (5502,17002528);
-INSERT INTO `instance_entities` VALUES (5502,17002529);
-INSERT INTO `instance_entities` VALUES (5502,17002530);
-INSERT INTO `instance_entities` VALUES (5502,17002531);
-INSERT INTO `instance_entities` VALUES (5502,17002532);
-INSERT INTO `instance_entities` VALUES (5502,17002533);
-INSERT INTO `instance_entities` VALUES (5502,17002534);
-INSERT INTO `instance_entities` VALUES (5502,17002535);
-INSERT INTO `instance_entities` VALUES (5502,17002536);
-INSERT INTO `instance_entities` VALUES (5502,17002537);
-INSERT INTO `instance_entities` VALUES (5502,17002538);
-INSERT INTO `instance_entities` VALUES (5502,17002539);
-INSERT INTO `instance_entities` VALUES (5502,17002540);
-INSERT INTO `instance_entities` VALUES (5502,17002541);
-INSERT INTO `instance_entities` VALUES (5502,17002542);
-INSERT INTO `instance_entities` VALUES (5502,17002543);
-INSERT INTO `instance_entities` VALUES (5502,17002544);
+INSERT INTO `instance_entities` VALUES (5502,17002521); -- Carrion Crab
+INSERT INTO `instance_entities` VALUES (5502,17002522); -- Carrion Leech
+INSERT INTO `instance_entities` VALUES (5502,17002523); -- Carrion Crab
+INSERT INTO `instance_entities` VALUES (5502,17002524); -- Carrion Crab
+INSERT INTO `instance_entities` VALUES (5502,17002525); -- Carrion Leech
+INSERT INTO `instance_entities` VALUES (5502,17002526); -- Carrion Crab
+INSERT INTO `instance_entities` VALUES (5502,17002527); -- Carrion Crab
+INSERT INTO `instance_entities` VALUES (5502,17002528); -- Carrion Crab
+INSERT INTO `instance_entities` VALUES (5502,17002529); -- Carrion Slime
+INSERT INTO `instance_entities` VALUES (5502,17002530); -- Carrion Slime
+INSERT INTO `instance_entities` VALUES (5502,17002531); -- Carrion Slime
+INSERT INTO `instance_entities` VALUES (5502,17002532); -- Carrion Crab
+INSERT INTO `instance_entities` VALUES (5502,17002533); -- Carrion Leech
+INSERT INTO `instance_entities` VALUES (5502,17002534); -- Carrion Leech
+INSERT INTO `instance_entities` VALUES (5502,17002535); -- Carrion Leech
+INSERT INTO `instance_entities` VALUES (5502,17002536); -- Carrion Leech
+INSERT INTO `instance_entities` VALUES (5502,17002537); -- Carrion Leech
+INSERT INTO `instance_entities` VALUES (5502,17002538); -- Carrion Leech
+INSERT INTO `instance_entities` VALUES (5502,17002539); -- Carrion Toad
+INSERT INTO `instance_entities` VALUES (5502,17002540); -- Carrion Toad
+INSERT INTO `instance_entities` VALUES (5502,17002541); -- Undead Crab
+INSERT INTO `instance_entities` VALUES (5502,17002542); -- Undead Leech
+INSERT INTO `instance_entities` VALUES (5502,17002543); -- Undead Slime
+INSERT INTO `instance_entities` VALUES (5502,17002544); -- Undead Toad
 -- npcs
 INSERT INTO `instance_entities` VALUES (5502,17002654);
 INSERT INTO `instance_entities` VALUES (5502,17002655);
