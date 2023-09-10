@@ -116,68 +116,6 @@ xi.nyzul.floorCost =
     [20] = { level = 96, cost = 1900 },
 }
 
-xi.nyzul.enemyLeaders =
-{
-    -- [Floor_Section] = { first_mob_id, last_mob_id },
-    [  1] = { ID.mob[51].MOKKE,           ID.mob[51].LONG_HORNED_CHARIOT }, -- Regular enemy leaders. Can appear on all floors, except floor-20 multiples.
-    [ 40] = { ID.mob[51].ADAMANTOISE,     ID.mob[51].ADAMANTOISE + 2     }, -- Floors 1 to 40 bosses. Original Land Kings.
-    [100] = { ID.mob[51].ADAMANTOISE + 3, ID.mob[51].ADAMANTOISE + 5     }, -- Floors 60 to 100 bosses. ToAU Land Kings.
-}
-
-xi.nyzul.specifiedMobs =
-{
-    -- [Mob family] = { first_mob_id, last_mob_id },
-    [1] = { ID.mob[51].OFFSET_SPECIFIED,      ID.mob[51].OFFSET_SPECIFIED +  4 }, -- Heraldic Imp x5
-    [2] = { ID.mob[51].OFFSET_SPECIFIED +  5, ID.mob[51].OFFSET_SPECIFIED +  9 }, -- Psycheflayer x5
-    [3] = { ID.mob[51].OFFSET_SPECIFIED + 10, ID.mob[51].OFFSET_SPECIFIED + 14 }, -- Poroggo Gent x5
-    [4] = { ID.mob[51].OFFSET_SPECIFIED + 15, ID.mob[51].OFFSET_SPECIFIED + 19 }, -- Ebony Pudding x5
-    [5] = { ID.mob[51].OFFSET_SPECIFIED + 20, ID.mob[51].OFFSET_SPECIFIED + 21 }, -- Qiqirn_Treasure_Hunter x2
-    [6] = { ID.mob[51].OFFSET_SPECIFIED + 22, ID.mob[51].OFFSET_SPECIFIED + 24 }, -- Qiqirn_Archaeologist x3
-    [7] = { ID.mob[51].OFFSET_SPECIFIED + 25, ID.mob[51].OFFSET_SPECIFIED + 29 }, -- Racing_Chariot x5
-}
-
-xi.nyzul.evenFloorRandomNMs =
-{
-    -- [Floor_Section] = { first_mob_id, last_mob_id },
-    [1] = { ID.mob[51].OFFSET_NM,      ID.mob[51].OFFSET_NM +  8 }, -- Floors 1 to 20.
-    [2] = { ID.mob[51].OFFSET_NM + 18, ID.mob[51].OFFSET_NM + 26 }, -- Floors 21 to 40.
-    [3] = { ID.mob[51].OFFSET_NM + 36, ID.mob[51].OFFSET_NM + 44 }, -- Floors 41 to 60.
-    [4] = { ID.mob[51].OFFSET_NM + 54, ID.mob[51].OFFSET_NM + 62 }, -- Floors 61 to 80.
-    [5] = { ID.mob[51].OFFSET_NM + 72, ID.mob[51].OFFSET_NM + 80 }, -- Floors 81 to 100.
-}
-
-xi.nyzul.oddFloorRandomNMs =
-{
-    -- [Floor_Section] = { first_mob_id, last_mob_id },
-    [1] = { ID.mob[51].OFFSET_NM +  9, ID.mob[51].OFFSET_NM + 17 }, -- Floors 1 to 20.
-    [2] = { ID.mob[51].OFFSET_NM + 27, ID.mob[51].OFFSET_NM + 35 }, -- Floors 21 to 40.
-    [3] = { ID.mob[51].OFFSET_NM + 45, ID.mob[51].OFFSET_NM + 53 }, -- Floors 41 to 60.
-    [4] = { ID.mob[51].OFFSET_NM + 63, ID.mob[51].OFFSET_NM + 71 }, -- Floors 61 to 80.
-    [5] = { ID.mob[51].OFFSET_NM + 81, ID.mob[51].OFFSET_NM + 89 }, -- Floors 81 to 100.
-}
-
-xi.nyzul.floorEntities =
-{
-    -- [Mob family] = { first_mob_id, last_mob_id },
-    [ 1] = { ID.mob[51].OFFSET_REGULAR,       ID.mob[51].OFFSET_REGULAR +  11 }, -- Aquans
-    [ 2] = { ID.mob[51].OFFSET_REGULAR +  12, ID.mob[51].OFFSET_REGULAR +  23 }, -- Amorphs
-    [ 3] = { ID.mob[51].OFFSET_REGULAR +  24, ID.mob[51].OFFSET_REGULAR +  35 }, -- Arcana
-    [ 4] = { ID.mob[51].OFFSET_REGULAR +  36, ID.mob[51].OFFSET_REGULAR +  47 }, -- Undead
-    [ 5] = { ID.mob[51].OFFSET_REGULAR +  48, ID.mob[51].OFFSET_REGULAR +  59 }, -- Vermin
-    [ 6] = { ID.mob[51].OFFSET_REGULAR +  60, ID.mob[51].OFFSET_REGULAR +  71 }, -- Demons
-    [ 7] = { ID.mob[51].OFFSET_REGULAR +  72, ID.mob[51].OFFSET_REGULAR +  83 }, -- Dragons
-    [ 8] = { ID.mob[51].OFFSET_REGULAR +  84, ID.mob[51].OFFSET_REGULAR +  95 }, -- Birds
-    [ 9] = { ID.mob[51].OFFSET_REGULAR +  96, ID.mob[51].OFFSET_REGULAR + 107 }, -- Beasts
-    [10] = { ID.mob[51].OFFSET_REGULAR + 108, ID.mob[51].OFFSET_REGULAR + 119 }, -- Plantoids
-    [11] = { ID.mob[51].OFFSET_REGULAR + 120, ID.mob[51].OFFSET_REGULAR + 131 }, -- Lizards
-    [12] = { ID.mob[51].OFFSET_REGULAR + 132, ID.mob[51].OFFSET_REGULAR + 143 }, -- Amorphs 2
-    [13] = { ID.mob[51].OFFSET_REGULAR + 144, ID.mob[51].OFFSET_REGULAR + 155 }, -- Mixed
-    [14] = { ID.mob[51].OFFSET_REGULAR + 156, ID.mob[51].OFFSET_REGULAR + 167 }, -- Mixed 2
-    [15] = { ID.mob[51].OFFSET_REGULAR + 168, ID.mob[51].OFFSET_REGULAR + 179 }, -- Amorphs 3
-    [16] = { ID.mob[51].OFFSET_REGULAR + 180, ID.mob[51].OFFSET_REGULAR + 191 }, -- Arcana 2
-    [17] = { ID.mob[51].OFFSET_GEARS,         ID.mob[51].OFFSET_GEARS   +   5 }, -- Gears
-}
-
 xi.nyzul.appraisalItems =
 {
     [xi.appraisal.origin.NYZUL_BAT_EYE              ] = xi.item.APPRAISAL_AXE,
