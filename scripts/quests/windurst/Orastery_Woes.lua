@@ -105,7 +105,7 @@ quest.sections =
                         player:delKeyItem(xi.ki.MAP_TO_THE_ANNALS_OF_TRUTH)
                         player:delKeyItem(xi.ki.ANNALS_OF_TRUTH)
                         player:delKeyItem(xi.ki.WEAPON_TRAINING_GUIDE)
-                        player:addLearnedWeaponskill(xi.ws_unlock.BLACK_HALO)
+                        player:addLearnedWeaponskill(xi.wsUnlock.BLACK_HALO)
                         player:messageSpecial(portWindurstID.text.BLACK_HALO_LEARNED)
                     end
                 end,

@@ -106,7 +106,7 @@ quest.sections =
                         player:delKeyItem(xi.ki.MAP_TO_THE_ANNALS_OF_TRUTH)
                         player:delKeyItem(xi.ki.ANNALS_OF_TRUTH)
                         player:delKeyItem(xi.ki.WEAPON_TRAINING_GUIDE)
-                        player:addLearnedWeaponskill(xi.ws_unlock.EVISCERATION)
+                        player:addLearnedWeaponskill(xi.wsUnlock.EVISCERATION)
                         player:messageSpecial(kazhamID.text.EVISCERATION_LEARNED)
                     end
                 end,

@@ -1,8 +1,6 @@
 -----------------------------------
 -- Aftermath handling
 -----------------------------------
-require('scripts/globals/weaponskillids')
-
 xi = xi or {}
 
 xi.aftermath = {}

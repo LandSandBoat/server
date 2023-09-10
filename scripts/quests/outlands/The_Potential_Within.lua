@@ -103,7 +103,7 @@ quest.sections =
                         player:delKeyItem(xi.ki.MAP_TO_THE_ANNALS_OF_TRUTH)
                         player:delKeyItem(xi.ki.ANNALS_OF_TRUTH)
                         player:delKeyItem(xi.ki.WEAPON_TRAINING_GUIDE)
-                        player:addLearnedWeaponskill(xi.ws_unlock.TACHI_KASHA)
+                        player:addLearnedWeaponskill(xi.wsUnlock.TACHI_KASHA)
                         player:messageSpecial(norgID.text.TACHI_KASHA_LEARNED)
                     end
                 end,

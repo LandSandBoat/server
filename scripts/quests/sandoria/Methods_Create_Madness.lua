@@ -110,7 +110,7 @@ quest.sections =
                         player:delKeyItem(xi.ki.MAP_TO_THE_ANNALS_OF_TRUTH)
                         player:delKeyItem(xi.ki.ANNALS_OF_TRUTH)
                         player:delKeyItem(xi.ki.WEAPON_TRAINING_GUIDE)
-                        player:addLearnedWeaponskill(xi.ws_unlock.IMPULSE_DRIVE)
+                        player:addLearnedWeaponskill(xi.wsUnlock.IMPULSE_DRIVE)
                         player:messageSpecial(southernSandOriaID.text.IMPULSE_DRIVE_LEARNED)
                     end
                 end,

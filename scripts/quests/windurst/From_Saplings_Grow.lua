@@ -105,7 +105,7 @@ quest.sections =
                         player:delKeyItem(xi.ki.MAP_TO_THE_ANNALS_OF_TRUTH)
                         player:delKeyItem(xi.ki.ANNALS_OF_TRUTH)
                         player:delKeyItem(xi.ki.WEAPON_TRAINING_GUIDE)
-                        player:addLearnedWeaponskill(xi.ws_unlock.EMPYREAL_ARROW)
+                        player:addLearnedWeaponskill(xi.wsUnlock.EMPYREAL_ARROW)
                         player:messageSpecial(windurstWoodsID.text.EMPYREAL_ARROW_LEARNED)
                     end
                 end,

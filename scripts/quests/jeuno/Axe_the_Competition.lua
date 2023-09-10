@@ -103,7 +103,7 @@ quest.sections =
                         player:delKeyItem(xi.ki.MAP_TO_THE_ANNALS_OF_TRUTH)
                         player:delKeyItem(xi.ki.ANNALS_OF_TRUTH)
                         player:delKeyItem(xi.ki.WEAPON_TRAINING_GUIDE)
-                        player:addLearnedWeaponskill(xi.ws_unlock.DECIMATION)
+                        player:addLearnedWeaponskill(xi.wsUnlock.DECIMATION)
                         player:messageSpecial(upperJeunoID.text.DECIMATION_LEARNED)
                     end
                 end,
