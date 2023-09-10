@@ -3547,7 +3547,7 @@ namespace luautils
                     CLuaBaseEntity LuaMobEntity(PMob);
                     CLuaBaseEntity LuaAllyEntity(PMember);
                     bool           isKiller          = PMember == PChar;
-                    bool           isWeaponSkillKill = PMob->GetLocalVar("weaponskillHit") > 0;
+                    bool           isWeaponSkillKill = PMob->GetLocalVar("weaponskillHit") & 0xFFFFFF > 0;
 
                     auto result = onMobDeathEx(LuaMobEntity, LuaAllyEntity, isKiller, isWeaponSkillKill);
                     if (!result.valid())
@@ -3571,8 +3571,10 @@ namespace luautils
                 if (PMember && PMember->getZone() == PChar->getZone())
                 {
                     CLuaBaseEntity                LuaMobEntity(PMob);
-                    std::optional<CLuaBaseEntity> optLuaAllyEntity = std::nullopt;
-                    uint16                        weaponskillUsed = PMob->GetLocalVar("weaponskillHit");
+                    std::optional<CLuaBaseEntity> optLuaAllyEntity  = std::nullopt;
+                    uint32                        weaponskillVar    = PMob->GetLocalVar("weaponskillHit");
+                    uint16                        weaponskillUsed   = weaponskillVar >> 24;
+                    uint32                        weaponskillDamage = weaponskillVar & 0xFFFFFF;
 
                     if (PMember)
                     {
@@ -3583,6 +3585,7 @@ namespace luautils
                     optParams["noKiller"]          = false;
                     optParams["isWeaponSkillKill"] = weaponskillUsed > 0;
                     optParams["weaponskillUsed"]   = weaponskillUsed;
+                    optParams["weaponskillDamage"] = weaponskillDamage;
 
                     PChar->eventPreparation->targetEntity = PMob;
                     PChar->eventPreparation->scriptFile   = filename;

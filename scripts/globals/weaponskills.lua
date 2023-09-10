@@ -1007,7 +1007,7 @@ xi.weaponskills.takeWeaponskillDamage = function(defender, attacker, wsParams, p
     end
 
     if finaldmg > 0 then
-        defender:setLocalVar('weaponskillHit', wsResults.wsID)
+        defender:setLocalVar('weaponskillHit', bit.lshift(wsResults.wsID, 24) + finaldmg)
     end
 
     return finaldmg
