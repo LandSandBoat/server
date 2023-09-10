@@ -8010,7 +8010,7 @@ INSERT INTO `item_basic` VALUES (10646,0,'opima_pigaches','opima_pigaches',1,208
 INSERT INTO `item_basic` VALUES (10647,0,'areion_boots','areion_boots',1,2084,21,0,0);
 INSERT INTO `item_basic` VALUES (10648,0,'areion_boots_+1','areion_boots_+1',1,2080,21,0,0);
 INSERT INTO `item_basic` VALUES (10650,0,'warriors_mask_+2','war._mask_+2',1,63552,0,1,0);
-INSERT INTO `item_basic` VALUES (10651,0,'melee_crown_+2','mel._crown_+2',1,63552,0,1,0);
+INSERT INTO `item_basic` VALUES (10651,0,'melee_crown_p2','mel._crown_+2',1,63552,0,1,0);
 INSERT INTO `item_basic` VALUES (10652,0,'clerics_cap_+2','clr._cap_+2',1,63552,0,1,0);
 INSERT INTO `item_basic` VALUES (10653,0,'sorcerers_petasos_+2','src._petasos_+2',1,63552,0,1,0);
 INSERT INTO `item_basic` VALUES (10654,0,'duelists_chapeau_+2','dls._chapeau_+2',1,63552,0,1,0);
