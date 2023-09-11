@@ -17,8 +17,8 @@ zones[xi.zone.BONEYARD_GULLY] =
         MEMBERS_LEVELS_ARE_RESTRICTED = 7023, -- Your party is unable to participate because certain members' levels are restricted.
         PARTY_MEMBERS_HAVE_FALLEN     = 7410, -- All party members have fallen in battle. Now leaving the battlefield.
         THE_PARTY_WILL_BE_REMOVED     = 7417, -- If all party members' HP are still zero after # minute[/s], the party will be removed from the battlefield.
-        CONQUEST_BASE                 = 7432, -- Tallying conquest results...
-        TUCHULCHA_SANDPIT             = 7751, -- Tuchulcha retreats beneath the soil!
+        CONQUEST_BASE                 = 7433, -- Tallying conquest results...
+        TUCHULCHA_SANDPIT             = 7752, -- Tuchulcha retreats beneath the soil!
     },
     mob =
     {
