@@ -21,7 +21,7 @@ zones[xi.zone.TALACCA_COVE] =
         FISHING_MESSAGE_OFFSET        = 7060, -- You can't fish here.
         PARTY_MEMBERS_HAVE_FALLEN     = 7669, -- All party members have fallen in battle. Now leaving the battlefield.
         THE_PARTY_WILL_BE_REMOVED     = 7676, -- If all party members' HP are still zero after # minute[/s], the party will be removed from the battlefield.
-        YOU_CAN_NOW_BECOME_A_CORSAIR  = 7793, -- You can now become a corsair!
+        YOU_CAN_NOW_BECOME_A_CORSAIR  = 7794, -- You can now become a corsair!
     },
     mob =
     {

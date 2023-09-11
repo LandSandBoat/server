@@ -21,8 +21,8 @@ zones[xi.zone.THRONE_ROOM_S] =
         MEMBERS_LEVELS_ARE_RESTRICTED = 7023, -- Your party is unable to participate because certain members' levels are restricted.
         PARTY_MEMBERS_HAVE_FALLEN     = 7932, -- All party members have fallen in battle. Now leaving the battlefield.
         THE_PARTY_WILL_BE_REMOVED     = 7939, -- If all party members' HP are still zero after # minute[/s], the party will be removed from the battlefield.
-        GATHERED_DAWNDROPS_LIGHT      = 8227, -- The gathered dawndrops unleash a brilliant light, melding together to form <keyitem>!
-        RETRACED_ALL_JUNCTIONS        = 8228, -- You have retraced all junctions of eventualities. Hasten back to where Cait Sith and Lilisette await.
+        GATHERED_DAWNDROPS_LIGHT      = 8228, -- The gathered dawndrops unleash a brilliant light, melding together to form <keyitem>!
+        RETRACED_ALL_JUNCTIONS        = 8229, -- You have retraced all junctions of eventualities. Hasten back to where Cait Sith and Lilisette await.
     },
     mob =
     {

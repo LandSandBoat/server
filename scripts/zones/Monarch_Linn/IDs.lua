@@ -22,7 +22,7 @@ zones[xi.zone.MONARCH_LINN] =
         PARTY_MEMBERS_HAVE_FALLEN     = 7451, -- All party members have fallen in battle. Now leaving the battlefield.
         THE_PARTY_WILL_BE_REMOVED     = 7458, -- If all party members' HP are still zero after # minute[/s], the party will be removed from the battlefield.
         KI_TORN                       = 7466, -- The <keyItem> is torn from your hands and sucked into the spatial displacement!
-        CONQUEST_BASE                 = 7473, -- Tallying conquest results...
+        CONQUEST_BASE                 = 7474, -- Tallying conquest results...
     },
     mob =
     {
