@@ -1067,6 +1067,7 @@ xi.title =
     TRIBOULEX_TERRORIZER                      = 1071,
     AITA_ABNEGATER                            = 1072,
     AMINON_APPREHENDER                        = 1073,
+    PARADISE_REGAINED                         = 1074,
     RAPTOR_WRANGLER                           = 1116,
     GARDENER_FOR_THE_AGES                     = 1117,
     LAGOON_EXPLORER                           = 1118,
