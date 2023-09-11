@@ -6905,7 +6905,7 @@ namespace battleutils
             recast = static_cast<int32>(recast * 1.5f);
         }
 
-        recast = std::max<int32>(recast, static_cast<int32>(base * 0.2f));
+        recast = std::max<int32>(recast, static_cast<int32>(base * 0.5f)); // Haste Cap in Era - Was changes to 80% (0.2f) in 2011
 
         // Light/Dark arts recast bonus/penalties applies after other bonuses
         if (PSpell->getSpellGroup() == SPELLGROUP_BLACK)
@@ -6931,13 +6931,13 @@ namespace battleutils
                 recast = static_cast<int32>(recast * ((100.0f + PEntity->getMod(Mod::BLACK_MAGIC_RECAST)) / 100.0f));
             }
 
-            recast = std::max<int32>(recast, static_cast<int32>(base * 0.2f)); // recap to 80%
+            recast = std::max<int32>(recast, static_cast<int32>(base * 0.5f)); // Haste Cap in Era - Was changes to 80% (0.2f) in 2011
 
             // https://www.bg-wiki.com/ffxi/Alacrity
             if (PEntity->StatusEffectContainer->HasStatusEffect(EFFECT_ALACRITY))
             {
                 recast = static_cast<int32>(recast * 0.60);                        // 40% reduction from Alacrity alone
-                recast = std::max<int32>(recast, static_cast<int32>(base * 0.2f)); // recap to 80%
+                recast = std::max<int32>(recast, static_cast<int32>(base * 0.5f)); // Haste Cap in Era - Was changes to 80% (0.2f) in 2011
 
                 // Only apply bonus mod if the spell element matches the weather, this is allowed to go over the 80% cap to a 90% cap.
                 if (battleutils::WeatherMatchesElement(battleutils::GetWeather(PEntity, false), static_cast<uint8>(PSpell->getElement())))
@@ -6945,7 +6945,7 @@ namespace battleutils
                     uint16 bonus = PEntity->getMod(Mod::ALACRITY_CELERITY_EFFECT);
 
                     recast = static_cast<int32>(recast * ((100 - bonus) / 100.0f));
-                    recast = std::max<int32>(recast, static_cast<int32>(base * 0.1f)); // cap to 90% reduction
+                    recast = std::max<int32>(recast, static_cast<int32>(base * 0.4f)); // cap to 60% reduction - Haste Cap in Era - Was changes to 80% (0.2f) in 2011
                 }
             }
         }
@@ -6973,13 +6973,13 @@ namespace battleutils
                 recast = static_cast<int32>(recast * ((100.0f + PEntity->getMod(Mod::WHITE_MAGIC_RECAST)) / 100.0f));
             }
 
-            recast = std::max<int32>(recast, static_cast<int32>(base * 0.2f)); // recap to 80%
+            recast = std::max<int32>(recast, static_cast<int32>(base * 0.5f)); // Haste Cap in Era - Was changes to 80% (0.2f) in 2011
 
             // https://www.bg-wiki.com/ffxi/Celerity
             if (PEntity->StatusEffectContainer->HasStatusEffect(EFFECT_CELERITY))
             {
                 recast = static_cast<int32>(recast * 0.60);                        // 40% reduction from Celerity alone
-                recast = std::max<int32>(recast, static_cast<int32>(base * 0.2f)); // recap to 80%
+                recast = std::max<int32>(recast, static_cast<int32>(base * 0.5f)); // Haste Cap in Era - Was changes to 80% (0.2f) in 2011
 
                 // Only apply bonus mod if the spell element matches the weather, this is allowed to go over the 80% cap to a 90% cap.
                 if (battleutils::WeatherMatchesElement(battleutils::GetWeather(PEntity, false), static_cast<uint8>(PSpell->getElement())))
@@ -6987,7 +6987,7 @@ namespace battleutils
                     uint16 bonus = PEntity->getMod(Mod::ALACRITY_CELERITY_EFFECT);
 
                     recast = static_cast<int32>(recast * ((100 - bonus) / 100.0f));
-                    recast = std::max<int32>(recast, static_cast<int32>(base * 0.1f)); // cap to 90% reduction
+                    recast = std::max<int32>(recast, static_cast<int32>(base * 0.4f)); // Haste Cap in Era - Was changes to 80% (0.2f) in 2011
                 }
             }
         }
