@@ -32,6 +32,7 @@ zones[xi.zone.MONASTIC_CAVERN] =
     mob =
     {
         ORCISH_OVERLORD               = 17391802,
+        OVERLORD_BAKGODEK             = 17391803,
         BUGABOO                       = 17391804,
         MIMIC                         = 17391805,
         UNDERSTANDING_OVERLORD_OFFSET = 17391806,
