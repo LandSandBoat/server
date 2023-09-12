@@ -1420,6 +1420,7 @@ xi.dynamis.zoneOnZoneInEra = function(player, prevZone)
     local info = xi.dynamis.dynaInfoEra[zoneID]
     local ID = zones[zoneID]
 
+
     -- usually happens when zoning in with !zone command
     if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then player:setPos(info.entryPos[1], info.entryPos[2], info.entryPos[3], info.entryPos[4]) end -- If player is in void, move player to entry.
 
