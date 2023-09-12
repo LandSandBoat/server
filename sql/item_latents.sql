@@ -314,6 +314,9 @@ INSERT INTO `item_latents` VALUES (13142,1,7,53,1);      -- DEF +7 in areas outs
 INSERT INTO `item_latents` VALUES (13142,2,15,53,1);     -- HP +15 in areas outside own nation's control
 INSERT INTO `item_latents` VALUES (13142,68,7,53,1);     -- EVA +7 in areas outside own nation's control
 
+-- -------------------------------------------------------
+-- Opo-Opo Necklace
+-- -------------------------------------------------------
 INSERT INTO `item_latents` VALUES (13143,368,25,13,2);
 INSERT INTO `item_latents` VALUES (13143,368,25,13,19);
 INSERT INTO `item_latents` VALUES (13143,368,25,13,193);
@@ -1005,13 +1008,16 @@ INSERT INTO `item_latents` VALUES (14050,25,6,53,0);     -- ACC +6 in areas insi
 -- -------------------------------------------------------
 -- Unicorn Mittens
 -- -------------------------------------------------------
-INSERT INTO `item_latents` VALUES (14055,23,7,1,75);     -- Attack+7 when HP >75%
+INSERT INTO `item_latents` VALUES (14055,23,7,1,75);     -- ATK +7 when HP >75%
 
 -- -------------------------------------------------------
 -- Unicorn Mittens +1
 -- -------------------------------------------------------
-INSERT INTO `item_latents` VALUES (14056,23,8,1,75);     -- Attack+8 when HP >75%
+INSERT INTO `item_latents` VALUES (14056,23,8,1,75);     -- ATK +8 when HP >75%
 
+-- -------------------------------------------------------
+-- Carbuncle Mitts
+-- -------------------------------------------------------
 INSERT INTO `item_latents` VALUES (14062,346,0,9,8);
 
 -- -------------------------------------------------------
@@ -1390,6 +1396,14 @@ INSERT INTO `item_latents` VALUES (14901,302,2,49,5929); -- triple attack 2% Ojo
 INSERT INTO `item_latents` VALUES (14921,8,13,26,2);     -- Dusk - Dawn: STR +13
 INSERT INTO `item_latents` VALUES (14921,384,400,26,2);  -- Dusk - Dawn: Haste +4%
 
+-- -------------------------------------------------------
+-- Carbuncles Cuffs
+-- -------------------------------------------------------
+INSERT INTO `item_latents` VALUES (14931,370,5,13,154);  -- Shining Ruby: Regen +5HP/tick
+
+-- -------------------------------------------------------
+-- Storm Gages
+-- -------------------------------------------------------
 INSERT INTO `item_latents` VALUES (14937,71,3,58,0);     -- storm gages hmp +3
 
 -- -------------------------------------------------------
@@ -1414,8 +1428,8 @@ INSERT INTO `item_latents` VALUES (14954,168,-5,14,0);
 -- -------------------------------------------------------
 -- Serpentes Cuffs
 -- -------------------------------------------------------
-INSERT INTO `item_latents` VALUES (15019,369,1,26,1);    -- Nighttime: Adds "Regen" effect
-INSERT INTO `item_latents` VALUES (15019,370,1,26,0);    -- Daytime: Adds "Refresh" effect
+INSERT INTO `item_latents` VALUES (15019,369,1,26,1);    -- Nighttime: Adds "Refresh" effect
+INSERT INTO `item_latents` VALUES (15019,370,1,26,0);    -- Daytime: Adds "Regen" effect
 
 -- -------------------------------------------------------
 -- Bulwark Shield
