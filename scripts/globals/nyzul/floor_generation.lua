@@ -1126,60 +1126,69 @@ local pTableFloorRandomEntities =
 -----------------------------------
 
 local function lampsActivate(instance)
-    local floorLayout    = instance:getLocalVar('Nyzul_Isle_FloorLayout')
-    local lampsObjective = instance:getLocalVar('[Lamps]Objective')
-    local runicLamp1     = GetNPCByID(ID.npc.RUNIC_LAMP_OFFSET, instance)
-    local partySize      = utils.clamp(instance:getLocalVar('partySize'), 3, 5)
-    local lampPoints     = {}
+    local floorLayout      = instance:getLocalVar('Nyzul_Isle_FloorLayout')
+    local lampsObjective   = instance:getLocalVar('[Lamps]Objective')
+    local partySize        = utils.clamp(instance:getLocalVar('partySize'), 3, 5)
+    local dTableLampPoints = {}
 
     for i = 1, #lampSpawnPoints[floorLayout] do
-        table.insert(lampPoints, i, lampSpawnPoints[floorLayout][i])
+        table.insert(dTableLampPoints, i, lampSpawnPoints[floorLayout][i])
     end
 
     -- Lamp Objective: Register
     if lampsObjective == xi.nyzul.lampsObjective.REGISTER then
-        local spawnPoint = math.random(1, #lampPoints)
+        local spawnPoint = math.random(1, #dTableLampPoints)
+        local runicLamp1 = GetNPCByID(ID.npc.RUNIC_LAMP_OFFSET, instance)
 
-        instance:setLocalVar('[Lamp]PartySize', instance:getLocalVar('partySize'))
-        runicLamp1:setPos(lampPoints[spawnPoint])
+        -- Spawn lamps.
+        runicLamp1:setPos(dTableLampPoints[spawnPoint])
         runicLamp1:setStatus(xi.status.NORMAL)
+
+        -- Save data.
+        instance:setLocalVar('[Lamp]PartySize', instance:getLocalVar('partySize'))
 
     -- Lamp Objective: Activate All
     elseif lampsObjective == xi.nyzul.lampsObjective.ACTIVATE_ALL then
         local runicLamps = math.random(2, partySize - 1)
-        instance:setLocalVar('[Lamp]count', runicLamps)
 
+        -- Spawn lamps.
         for i = ID.npc.RUNIC_LAMP_OFFSET, ID.npc.RUNIC_LAMP_OFFSET + runicLamps do
-            local spawnPoint = math.random(1, #lampPoints)
+            local spawnPoint = math.random(1, #dTableLampPoints)
 
-            GetNPCByID(i, instance):setPos(lampPoints[spawnPoint])
+            GetNPCByID(i, instance):setPos(dTableLampPoints[spawnPoint])
             GetNPCByID(i, instance):setStatus(xi.status.NORMAL)
-            table.remove(lampPoints, spawnPoint)
+            table.remove(dTableLampPoints, spawnPoint)
         end
+
+        -- Save data.
+        instance:setLocalVar('[Lamp]count', runicLamps)
 
     -- Lamp Objective: Activate in Order
     elseif lampsObjective == xi.nyzul.lampsObjective.ORDER then
-        local runicLamps = math.random(2, 4)
-        local lampOrder  = {}
+        local runicLamps      = math.random(2, 4)
+        local dTableLampOrder = {}
 
+        -- Select lamps.
         for j = 1, runicLamps + 1 do
-            table.insert(lampOrder, j)
+            table.insert(dTableLampOrder, j)
         end
 
+        -- Spawn lamps.
+        for i = ID.npc.RUNIC_LAMP_OFFSET, ID.npc.RUNIC_LAMP_OFFSET + runicLamps do
+            local spawnPoint = math.random(1, #dTableLampPoints)
+            local lampRandom = math.random(1, #dTableLampOrder)
+
+            GetNPCByID(i, instance):setPos(dTableLampPoints[spawnPoint])
+            GetNPCByID(i, instance):setStatus(xi.status.NORMAL)
+            GetNPCByID(i, instance):setLocalVar('[Lamp]order', dTableLampOrder[lampRandom])
+
+            table.remove(dTableLampOrder, lampRandom)
+            table.remove(dTableLampPoints, spawnPoint)
+        end
+
+        -- Save data.
         instance:setLocalVar('[Lamp]count', runicLamps)
         instance:setLocalVar('[Lamp]lampRegister', 0)
-
-        for i = ID.npc.RUNIC_LAMP_OFFSET, ID.npc.RUNIC_LAMP_OFFSET + runicLamps do
-            local spawnPoint = math.random(1, #lampPoints)
-            local lampRandom = math.random(1, #lampOrder)
-
-            GetNPCByID(i, instance):setPos(lampPoints[spawnPoint])
-            GetNPCByID(i, instance):setStatus(xi.status.NORMAL)
-            GetNPCByID(i, instance):setLocalVar('[Lamp]order', lampOrder[lampRandom])
-
-            table.remove(lampOrder, lampRandom)
-            table.remove(lampPoints, spawnPoint)
-        end
     end
 end
 
