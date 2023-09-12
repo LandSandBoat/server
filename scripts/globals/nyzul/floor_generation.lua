@@ -9,7 +9,7 @@ xi.nyzul = xi.nyzul or {}
 -----------------------------------
 -- Data Tables
 -----------------------------------
-xi.nyzulPoint.LampPoint = -- Set lamp spawn points, by layout.
+local lampSpawnPoints = -- Set lamp spawn points, by layout.
 {
     [1] = -- 380, -0.5, -500
     {
@@ -1132,8 +1132,8 @@ local function lampsActivate(instance)
     local partySize      = utils.clamp(instance:getLocalVar('partySize'), 3, 5)
     local lampPoints     = {}
 
-    for i = 1, #xi.nyzulPoint.LampPoint[floorLayout] do
-        table.insert(lampPoints, i, xi.nyzulPoint.LampPoint[floorLayout][i])
+    for i = 1, #lampSpawnPoints[floorLayout] do
+        table.insert(lampPoints, i, lampSpawnPoints[floorLayout][i])
     end
 
     -- Lamp Objective: Register
