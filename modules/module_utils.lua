@@ -14,7 +14,7 @@ xi.module = xi.module or {}
 -- https://github.com/LandSandBoat/server/issues/3542#issuecomment-1407190523
 xi.module.ensureTable = function(str)
     local parts = utils.splitStr(str, '.')
-    local table = _G;
+    local table = _G
     for _, part in ipairs(parts) do
         table[part] = table[part] or {}
         table = table[part]

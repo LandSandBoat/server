@@ -4,7 +4,6 @@
 --
 -----------------------------------
 require("scripts/globals/teleports")
-require("scripts/globals/keyitems")
 require("scripts/globals/missions")
 require("scripts/globals/npc_util")
 require("scripts/globals/zone")
@@ -40,18 +39,18 @@ local expRings =
 {
     [15761] =
     {
-        cp=350,
-        charges=7
+        cp = 350,
+        charges = 7
     },
     [15762] =
     {
-        cp=700,
-        charges=7
+        cp = 700,
+        charges = 7
     },
     [15763] =
     {
-        cp=600,
-        harges=3
+        cp = 600,
+        harges = 3
     },
 }
 
@@ -113,7 +112,10 @@ m:addOverride("xi.conquest.overseerOnTrade", function(player, npc, trade, guardN
             expRings[item] and
             npcUtil.tradeHas(trade, item)
         then
-            if xi.settings.BYPASS_EXP_RING_ONE_PER_WEEK == 1 or player:getCharVar("CONQUEST_RING_RECHARGE") < os.time() then
+            if
+                xi.settings.BYPASS_EXP_RING_ONE_PER_WEEK == 1 or
+                player:getCharVar("CONQUEST_RING_RECHARGE") < os.time()
+            then
                 local ring = expRings[item]
 
                 if player:getCP() >= ring.cp then
