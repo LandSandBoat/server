@@ -1,4 +1,12 @@
 {
+    "windows": {
+        "options": {
+            "shell": {
+            "executable": "cmd.exe",
+            "args": ["/d", "/c"]
+            }
+        }
+    },
     "tasks": [
         {
             "label": "Kill xi_connect",
