@@ -5,12 +5,12 @@
 cmdprops =
 {
     permission = 3,
-    parameters = ""
+    parameters = ''
 }
 
 function error(player, msg)
     player:PrintToPlayer(msg)
-    player:PrintToPlayer("!getta with a target")
+    player:PrintToPlayer('!getta with a target')
 end
 
 function onTrigger(player)
@@ -18,11 +18,11 @@ function onTrigger(player)
     if targ ~= nil then
         local tatarget = player:getTrickAttackChar(targ)
         if tatarget ~= nil then
-            player:PrintToPlayer(string.format("Trick attack would select: %s", tatarget:getName()))
+            player:PrintToPlayer(string.format('Trick attack would select: %s', tatarget:getName()))
         else
-            player:PrintToPlayer("No valid TA target found.")
+            player:PrintToPlayer('No valid TA target found.')
         end
     else
-        player:PrintToPlayer("Must select a target using in game cursor first.")
+        player:PrintToPlayer('Must select a target using in game cursor first.')
     end
 end
