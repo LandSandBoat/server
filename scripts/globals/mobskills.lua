@@ -660,6 +660,13 @@ xi.mobskills.mobFinalAdjustments = function(dmg, mob, skill, target, attackType,
     end
 
     if attackType == xi.attackType.MAGICAL then
+        if
+            target:getMod(xi.mod.MAGIC_NULL) > 0 and
+            math.random(1, 100) <= target:getMod(xi.mod.MAGIC_NULL)
+        then
+            return 0
+        end
+
         dmg = utils.oneforall(target, dmg)
         dmg = utils.rampart(target, dmg)
 
