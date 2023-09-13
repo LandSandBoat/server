@@ -3542,6 +3542,29 @@ namespace luautils
         }
     }
 
+    void OnPlayerAbilityUse(CBaseEntity* PMob, CBaseEntity* PPlayer, CAbility* PAbility)
+    {
+        TracyZoneScoped;
+
+        if (PMob == nullptr || PPlayer == nullptr || PAbility == nullptr)
+        {
+            return;
+        }
+
+        auto onPlayerAbilityUse = getEntityCachedFunction(PMob, "onPlayerAbilityUse");
+        if (!onPlayerAbilityUse.valid())
+        {
+            return;
+        }
+
+        auto result = onPlayerAbilityUse(CLuaBaseEntity(PMob), CLuaBaseEntity(PPlayer), CLuaAbility(PAbility));
+        if (!result.valid())
+        {
+            sol::error err = result;
+            ShowError("luautils::onPlayerAbilityUse: %s", err.what());
+        }
+    }
+
     void OnPetLevelRestriction(CBaseEntity* PMob)
     {
         TracyZoneScoped;

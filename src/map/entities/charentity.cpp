@@ -73,8 +73,10 @@
 #include "latent_effect_container.h"
 #include "linkshell.h"
 #include "message.h"
+#include "mob_modifier.h"
 #include "mobskill.h"
 #include "modifier.h"
+#include "notoriety_container.h"
 #include "packets/char_job_extra.h"
 #include "packets/status_effects.h"
 #include "petskill.h"
@@ -1888,6 +1890,18 @@ void CCharEntity::OnAbility(CAbilityState& state, action_t& action)
             }
 
             state.ApplyEnmity();
+
+            // Some mobs respond to abilities (ex. Absolute Virtue / Ob)
+            for (CBattleEntity* PBattleEntity : *PNotorietyContainer)
+            {
+                if (CMobEntity* PMob = dynamic_cast<CMobEntity*>(PBattleEntity))
+                {
+                    if (PMob->getMobMod(MOBMOD_ABILITY_RESPONSE) && PMob->getZone() == this->getZone())
+                    {
+                        luautils::OnPlayerAbilityUse(PMob, this, PAbility);
+                    }
+                }
+            }
         }
 
         if (charge)
