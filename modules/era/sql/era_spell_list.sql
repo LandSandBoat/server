@@ -1,11 +1,10 @@
 -- All spells in this list are as of March 2010 patch
+LOCK TABLES `spell_list` WRITE;
 
 ALTER TABLE `spell_list`
     ADD COLUMN IF NOT EXISTS `spell_radius` smallint(3) unsigned NOT NULL DEFAULT 0 AFTER `spell_range`,
     ADD COLUMN IF NOT EXISTS `spell_radius_type` tinyint(1) unsigned NOT NULL DEFAULT 0 AFTER `spell_radius`,
     ADD COLUMN IF NOT EXISTS `spell_cone` smallint(3) unsigned NOT NULL DEFAULT 0 AFTER `spell_radius_type`;
-
-LOCK TABLES `spell_list` WRITE;
 
 REPLACE INTO `spell_list` (`spellid`,`name`,`jobs`,`group`,`family`,`element`,`zonemisc`,`validTargets`,`skill`,`mpCost`,`castTime`,`recastTime`,`message`,`magicBurstMessage`,`animation`,`animationTime`,`AOE`,`base`,`multiplier`,`CE`,`VE`,`requirements`,`spell_range`,`spell_radius`,`spell_radius_type`,`spell_cone`,`content_tag`) VALUES
     (1, 'cure', 0x00000100030005000000000000000000000000050000, 6, 1, 7, 0, 95, 33, 8, 2000, 5000, 7, 252, 1, 2000, 4, 0, 1.00, 0, 0, 0, 204, 100, 2, 0, NULL),

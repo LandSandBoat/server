@@ -1745,6 +1745,7 @@ xi.items =
     DARKSTEEL_BOLT_QUIVER           = 4229,
     BOTTLE_OF_CURSED_BEVERAGE       = 4234,
     BOWL_OF_CURSED_SOUP             = 4235,
+    TIMELESS_HOURGLASS              = 4236,
     INFERNO_CRYSTAL                 = 4238,
     GLACIER_CRYSTAL                 = 4239,
     CYCLONE_CRYSTAL                 = 4240,
