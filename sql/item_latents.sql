@@ -35,7 +35,11 @@ INSERT INTO `item_latents` VALUES (10679,11,10,10,0);
 INSERT INTO `item_latents` VALUES (10719,12,10,11,0);
 INSERT INTO `item_latents` VALUES (10719,13,10,11,0);
 INSERT INTO `item_latents` VALUES (10719,14,10,11,0);
-INSERT INTO `item_latents` VALUES (10730,63,10,13,56);  -- WAR AF2 +2 Feet Reduces defense penalty by 10% if Berserk Active
+
+-- -------------------------------------------------------
+-- Warrior's Calligae +2
+-- -------------------------------------------------------
+INSERT INTO `item_latents` VALUES (10730,63,15,13,56);  -- WAR AF2 +2 Feet Reduces defense penalty by 15% if Berserk Active
 
 -- -------------------------------------------------------
 -- Abyss Sollerets +2
