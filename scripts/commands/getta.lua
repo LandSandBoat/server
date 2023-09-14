@@ -2,18 +2,16 @@
 -- func: getta
 -- desc: returns the name of the entity that would be chosen for trick attack given the current (mob) target
 -----------------------------------
-cmdprops =
+local commandObj = {}
+
+commandObj.cmdprops =
 {
-    permission = 3,
+    permission = 1,
     parameters = ''
 }
 
-function error(player, msg)
-    player:PrintToPlayer(msg)
-    player:PrintToPlayer('!getta with a target')
-end
-
-function onTrigger(player)
+-- function onTrigger(player, extendedMode)
+commandObj.onTrigger = function(player)
     local targ = player:getCursorTarget()
     if targ ~= nil then
         local tatarget = player:getTrickAttackChar(targ)
@@ -26,3 +24,5 @@ function onTrigger(player)
         player:PrintToPlayer('Must select a target using in game cursor first.')
     end
 end
+
+return commandObj
