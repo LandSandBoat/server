@@ -12,8 +12,8 @@ local entity = {}
 entity.onTrigger = function(player, npc)
     local instance      = player:getInstance()
     local tokens        = player:getCurrency('nyzul_isle_assault_point')
-    local prefered      = player:getVar('[Nyzul]preferredItems')
-    local floorGroup    = math.floor(player:getVar('NyzulFloorProgress') / 5)
+    local prefered      = player:getCharVar('[Nyzul]preferredItems')
+    local floorGroup    = math.floor(player:getCharVar('NyzulFloorProgress') / 5)
     local floorProgress = 0xFFFFFFFC - bit.bxor(bit.lshift(2, floorGroup + 1) - 1, 3)
 
     if not player:hasKeyItem(xi.ki.RUNIC_DISC) then

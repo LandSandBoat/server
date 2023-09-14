@@ -51,7 +51,7 @@ uint16 GetMogHouseModelID(CCharEntity* PChar)
         case REGION_TYPE::WEST_AHT_URHGAN:
             return 214;
         case REGION_TYPE::RONFAURE_FRONT:
-            return 189;
+            return 745;
         case REGION_TYPE::GUSTABERG_FRONT:
             return 199;
         case REGION_TYPE::SARUTA_FRONT:
