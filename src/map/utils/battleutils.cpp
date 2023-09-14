@@ -4255,8 +4255,9 @@ namespace battleutils
     }
 
     /*
-        pass worldAngle(anchorMob, firstPlayer) instead of calculating everytime to allow TA to be more efficient
-        Calculates world angle between otherPlayer and anchor mob,
+        pass result of worldAngle(anchorEntity, firstEntity) instead of calculating everytime to allow TA to be more efficient
+        Note the order of worldAngle calls, the anchor must be first in all comparisons
+        Calculates world angle between other entity and anchor entity,
         then determines if the difference of those angles is within acceptable range for moves that require the three to be "in a straight line"
         Used for Trick Attack and Cover: separate checks for distance/party membership must be done to confirm eligability
     */
@@ -4305,6 +4306,7 @@ namespace battleutils
                 taPartyList.emplace_back(taUser->PParty);
             }
 
+            // Collect all potential TA targets who are closer to the mob than the TA user
             for (auto&& party : taPartyList)
             {
                 for (auto&& member : party->members)
@@ -6960,6 +6962,7 @@ namespace battleutils
                 uint8 angleTAmob = worldAngle(PMob->loc.p, PCoverAbilityUser->loc.p);
                 float distTAmob  = distanceSquared(PCoverAbilityUser->loc.p, PMob->loc.p);
 
+                // check if cover user is within melee range and that cover target is in-line behind
                 if (distTAmob <= static_cast<float>(PMob->GetMeleeRange() * PMob->GetMeleeRange()) && // make sure cover user is within melee range
                     distTAmob >= worldAngleMinDistanceSquared &&                                      // require closer target not be closer than .5 yalms (.5*.5=.25 distsquared) to mob
                     distTAmob < distanceSquared(PCoverAbilityTarget->loc.p, PMob->loc.p) &&           // make sure cover user is closer to the mob than cover target
