@@ -4,9 +4,6 @@
 [submodule "modules/catseyexi"]
 	path = modules/catseyexi
 	url = https://github.com/catsandboats/modules
-[submodule "navmeshes"]
-	path = navmeshes
-	url = https://github.com/CatsandBoats/xiNavmeshes
 [submodule "modules/contrib"]
 	path = modules/contrib
 	url = https://github.com/CatsAndBoats/contrib
