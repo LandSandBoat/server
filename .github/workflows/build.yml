@@ -673,7 +673,7 @@ jobs:
       with:
         name: windows_executables
         path: .
-    - uses: zach2good/setup-mariadb@v1
+    - uses: claywar/setup-mariadb@v1
       with:
           database: xidb
     - name: Copy settings
