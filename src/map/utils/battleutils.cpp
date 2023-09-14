@@ -4371,7 +4371,7 @@ namespace battleutils
         {
             // sorts by distance then by pointer id (only if floats are equal)
             sort(taTargetList.begin(), taTargetList.end());
-            for (const auto potentialTAtarget : taTargetList)
+            for (std::pair<float, CBattleEntity*> const& potentialTAtarget : taTargetList)
             {
                 if (taUser->id == potentialTAtarget.second->id || // can't TA self
                     potentialTAtarget.second->isDead())           // Dead entity should not be TA-able
