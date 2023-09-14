@@ -52,7 +52,7 @@ end
 
 xi.dynamis.onMobEngagedNightmareWorm = function(mob, target)
     mob:setAnimationSub(0)
-    mob:setUntargetable(false)
+    mob:hideName(false)
     mob:setUntargetable(false)
 end
 
