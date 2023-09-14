@@ -16,12 +16,13 @@ CREATE TABLE IF NOT EXISTS `item_latents` (
   PRIMARY KEY (`itemId`,`modId`,`value`,`latentId`,`latentParam`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 AVG_ROW_LENGTH=13 PACK_KEYS=1;
 
--- INSERT INTO `item_latents` VALUES (itemID,modId,modValue,latentId,latentParam);
+-- Item name
+-- INSERT INTO `item_latents` VALUES (itemID,modId,modValue,latentId,latentParam); -- Human readable latent & mod
 
 -- Chocobo Shirt
-INSERT INTO `item_latents` VALUES (10293,25,50,50,31);   -- Acc.+50
-INSERT INTO `item_latents` VALUES (10293,26,50,50,31);   -- Rng. Acc.+50
-INSERT INTO `item_latents` VALUES (10293,30,50,50,31);   -- Mag. Acc.+50
+INSERT INTO `item_latents` VALUES (10293,25,50,50,31);   -- Under Lv.31 : Acc.+50
+INSERT INTO `item_latents` VALUES (10293,26,50,50,31);   -- Under Lv.31 : Rng. Acc.+50
+INSERT INTO `item_latents` VALUES (10293,30,50,50,31);   -- Under Lv.31 : Mag. Acc.+50
 -- INSERT INTO `item_latents` VALUES (10293,??,-1,50,31); -- Initiate and below: Likelihood of synthesis material loss -1%
 
 INSERT INTO `item_latents` VALUES (10670,68,10,13,58);  -- WAR AF2 +2 Body Reduces evasion penalty by 10 if Aggressor Active
