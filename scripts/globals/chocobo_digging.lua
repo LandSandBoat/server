@@ -844,7 +844,7 @@ local function canDig(player)
     -- neither player nor zone have reached their dig limit
 
     if
-        (digCount < 100 and zoneItemsDug < 20) or
+        (digCount < 350 and zoneItemsDug < 100) or
         xi.settings.main.DIG_FATIGUE == 0
     then
         -- pesky delays

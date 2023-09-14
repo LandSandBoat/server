@@ -52,6 +52,13 @@ zones[xi.zone.WAUGHROON_SHRINE] =
     {
     },
 
+    royalJellyQueens =
+    {
+        17367173,
+        17367183,
+        17367193,
+    },
+
     operationDesertSwarm =
     {
         [1] =

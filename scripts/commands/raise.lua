@@ -6,13 +6,13 @@ local commandObj = {}
 
 commandObj.cmdprops =
 {
-    permission = 1,
-    parameters = 'ss'
+    permission = 2,
+    parameters = "ss"
 }
 
 local function error(player, msg)
     player:PrintToPlayer(msg)
-    player:PrintToPlayer('!raise (power) (player)')
+    player:PrintToPlayer("!raise (power) (player)")
 end
 
 commandObj.onTrigger = function(player, arg1, arg2)
@@ -45,7 +45,7 @@ commandObj.onTrigger = function(player, arg1, arg2)
     else
         targ = GetPlayerByName(target)
         if targ == nil then
-            error(player, string.format('Player named "%s" not found!', target))
+            error(player, string.format("Player named '%s' not found!", target))
             return
         end
     end
@@ -54,10 +54,10 @@ commandObj.onTrigger = function(player, arg1, arg2)
     if targ:isDead() then
         targ:sendRaise(power)
         if targ:getID() ~= player:getID() then
-            player:PrintToPlayer(string.format('Raise %i sent to %s.', power, targ:getName()))
+            player:PrintToPlayer(string.format("Raise %i sent to %s.", power, targ:getName()))
         end
     else
-        player:PrintToPlayer(string.format('%s is not dead.', targ:getName()))
+        player:PrintToPlayer(string.format("%s is not dead.", targ:getName()))
     end
 end
 

@@ -895,7 +895,8 @@ void CMobEntity::DropItems(CCharEntity* PChar)
     auto AddItemToPool = [this, PChar](uint16 ItemID, uint8 dropCount)
     {
         PChar->PTreasurePool->AddItem(ItemID, this);
-        return dropCount >= TREASUREPOOL_SIZE;
+        // return dropCount >= TREASUREPOOL_SIZE;
+        return false; // This is unlimited loot items.
     };
 
     // Limit number of items that can drop to the treasure pool size
@@ -907,7 +908,7 @@ void CMobEntity::DropItems(CCharEntity* PChar)
     {
         // THLvl is the number of 'extra chances' at an item. If the item is obtained, then break out.
         int16 maxRolls = 1 + (m_THLvl > 2 ? 2 : m_THLvl);
-        int16 bonus    = (m_THLvl > 2 ? (m_THLvl - 2) * 10 : 0);
+        int16 bonus    = (m_THLvl > 1 ? (m_THLvl - 1) * 5 : 0);
 
         LootContainer loot(dropList);
 

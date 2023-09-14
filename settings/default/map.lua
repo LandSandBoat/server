@@ -37,7 +37,7 @@ xi.settings.map =
     LIGHTLUGGAGE_BLOCK = 4,
 
     -- Enable or disable Recycle Bin (Set to false for items to be dropped immediately)
-    ENABLE_ITEM_RECYCLE_BIN = true,
+    ENABLE_ITEM_RECYCLE_BIN = false,
 
     -- AH fee structure, defaults are retail.
     AH_BASE_FEE_SINGLE = 1,
@@ -49,10 +49,10 @@ xi.settings.map =
     -- Max open listings per player, 0 = no limit. (Default 7)
     -- Note = Settings over 7 may need client-side plugin to work under all circumstances.
     -- If this is the case, consider using the ah_pagination module
-    AH_LIST_LIMIT = 7,
+    AH_LIST_LIMIT = 0,
 
     -- Misc EXP related settings
-    EXP_RATE                = 1.0,
+    EXP_RATE                = 1.5,
     EXP_LOSS_RATE           = 1.0,
     EXP_PARTY_GAP_PENALTIES = true,
 
@@ -105,12 +105,12 @@ xi.settings.map =
     MOB_SPEED_MOD = 0,
 
     -- Allows you to manipulate the constant multiplier in the skill-up rate formulas, having a potent effect on skill-up rates.
-    SKILLUP_CHANCE_MULTIPLIER = 1.0,
-    CRAFT_CHANCE_MULTIPLIER   = 1.0,
+    SKILLUP_CHANCE_MULTIPLIER = 2.0,
+    CRAFT_CHANCE_MULTIPLIER   = 1.5,
 
     -- Multiplier for skillup amounts. Using anything above 1 will break the 0.5 cap, the cap will become 0.9 (For maximum, set to 5)
-    SKILLUP_AMOUNT_MULTIPLIER = 1,
-    CRAFT_AMOUNT_MULTIPLIER   = 1,
+    SKILLUP_AMOUNT_MULTIPLIER = 2,
+    CRAFT_AMOUNT_MULTIPLIER   = 2,
 
     -- Gardening Factors. DO NOT change defaults without verifiable proof that your change IS how retail does it. Myths need to be optional.
     GARDEN_DAY_MATTERS       = false,
@@ -128,10 +128,10 @@ xi.settings.map =
     CRAFT_SPECIALIZATION_POINTS = 400,
 
     -- Enables fishing. 0 = Disabled. 1 = Enable. ENABLE AT YOUR OWN RISK.
-    FISHING_ENABLE = false,
+    FISHING_ENABLE = 1,
 
     -- Multiplier for fishing skill-up chance. Default = 1.0, very hard.
-    FISHING_SKILL_MULTIPLIER = 1.0,
+    FISHING_SKILL_MULTIPLIER = 3.0,
 
     -- Enable/disable skill-ups from bloodpacts
     SKILLUP_BLOODPACT = true,
@@ -197,7 +197,7 @@ xi.settings.map =
     MAX_GIL_BONUS = 9999,
 
     -- Allow mobs to walk back home instead of despawning
-    MOB_NO_DESPAWN = false,
+    MOB_NO_DESPAWN = 0,
 
     -- Adds extra time to mob despawn in seconds. Base time is 25s, so a setting of 5 here would be a total of 30 seconds.
     MOB_ADDITIONAL_TIME_TO_DEAGGRO = 0,
@@ -217,32 +217,32 @@ xi.settings.map =
     -- Max allowed merits points players can hold
     -- 10 classic
     -- 30 abyssea
-    MAX_MERIT_POINTS = 30,
+    MAX_MERIT_POINTS = 50,
 
     -- Minimum time between uses of yell command (in seconds).
     YELL_COOLDOWN = 30,
 
     -- Prevent players from sending tells to hidden GMs. You will still receive them from other GMs.
-    BLOCK_TELL_TO_HIDDEN_GM = false,
+    BLOCK_TELL_TO_HIDDEN_GM = true,
 
     -- Prevent players from performing WS while unengaged using packet injection.
-    PREVENT_UNENGAGED_WS = false,
+    PREVENT_UNENGAGED_WS = true,
 
     -- Command Audit [logging] commands with lower permission than this will not be logged.
     -- Zero for no logging at all. Commands given to non GMs are not logged.
-    AUDIT_GM_CMD = false,
+    AUDIT_GM_CMD = 1,
 
     -- Todo = other logging including anti-cheat messages
 
     -- Chat Audit[logging] settings
-    AUDIT_CHAT      = false,
-    AUDIT_SAY       = false,
-    AUDIT_SHOUT     = false,
-    AUDIT_TELL      = false,
-    AUDIT_YELL      = false,
-    AUDIT_LINKSHELL = false,
-    AUDIT_UNITY     = false,
-    AUDIT_PARTY     = false,
+    AUDIT_CHAT      = 1,
+    AUDIT_SAY       = 1,
+    AUDIT_SHOUT     = 1,
+    AUDIT_TELL      = 1,
+    AUDIT_YELL      = 1,
+    AUDIT_LINKSHELL = 1,
+    AUDIT_UNITY     = 1,
+    AUDIT_PARTY     = 1,
 
     -- Seconds between healing ticks. Default is 10
     HEALING_TICK_DELAY = 10,

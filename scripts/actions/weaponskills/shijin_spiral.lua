@@ -37,8 +37,8 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
             target:addStatusEffect(xi.effect.PLAGUE, 5, 0, duration)
         end
     end
-
     return tpHits, extraHits, criticalHit, damage
+
 end
 
 return weaponskillObject

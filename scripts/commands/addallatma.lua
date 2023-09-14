@@ -6,8 +6,8 @@ local commandObj = {}
 
 commandObj.cmdprops =
 {
-    permission = 1,
-    parameters = 's'
+    permission = 5,
+    parameters = "s"
 }
 
 local keyIds =
@@ -34,7 +34,7 @@ local keyIds =
 
 local function error(player, msg)
     player:PrintToPlayer(msg)
-    player:PrintToPlayer('!addallatma (player)')
+    player:PrintToPlayer("!addallatma (player)")
 end
 
 commandObj.onTrigger = function(player, target)
@@ -45,7 +45,7 @@ commandObj.onTrigger = function(player, target)
     else
         targ = GetPlayerByName(target)
         if targ == nil then
-            error(player, string.format('Player named "%s" not found!', target))
+            error(player, string.format("Player named '%s' not found!", target))
             return
         end
     end
@@ -55,7 +55,7 @@ commandObj.onTrigger = function(player, target)
         targ:addKeyItem(v)
     end
 
-    player:PrintToPlayer(string.format('%s now has all Abyssea Atma.', targ:getName()))
+    player:PrintToPlayer(string.format("%s now has all Abyssea Atma.", targ:getName()))
 end
 
 return commandObj

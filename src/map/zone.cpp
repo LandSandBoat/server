@@ -34,7 +34,6 @@
 #include <cstring>
 
 #include "battlefield.h"
-#include "common/vana_time.h"
 #include "enmity_container.h"
 #include "latent_effect_container.h"
 #include "linkshell.h"

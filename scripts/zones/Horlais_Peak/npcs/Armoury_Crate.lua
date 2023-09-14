@@ -402,6 +402,7 @@ local loot =
     [11] =
     {
         {
+            { itemid = 13566, droprate =  50 }, -- Defending Ring (custom drop)
             { itemid =  1441, droprate = 169 }, -- Libation Abjuration
             { itemid = 17939, droprate = 268 }, -- Kriegsbeil
             { itemid = 17823, droprate =  99 }, -- Shinsoku
@@ -466,7 +467,7 @@ local loot =
         },
 
         {
-            { itemid = 3341, droprate = 1000 }, -- Beastly Shank
+            { itemid = 3342, droprate = 1000 }, -- Savory Shank
         },
 
         {
@@ -766,6 +767,70 @@ local loot =
             { itemid =  837, droprate =  96 }, -- Spool Of Malboro Fiber
             { itemid = 1132, droprate = 288 }, -- Square Of Raxa
             { itemid = 1110, droprate =  41 }, -- Vial Of Black Beetle Blood
+        },
+    },
+
+    -- KSNM Today's Horoscope
+    [16] =
+    {
+        {
+            { itemid = 65535, droprate = 1000, amount = 24000 }, -- Gil
+        },
+        {
+            { itemid =  1474, droprate = 1000 }, -- Infinity Core (custom drop)
+        },
+        {
+            { itemid = 18053, droprate =  222 }, -- Gravedigger
+            { itemid = 18097, droprate =  302 }, -- Gondo-Shizunori
+            { itemid = 18217, droprate =  245 }, -- Rampager
+            { itemid = 17944, droprate =  231 }, -- Retributor
+        },
+        {
+            { itemid = 15295, droprate = 250 }, -- Hierarch Belt
+            { itemid = 15294, droprate = 338 }, -- Warwolf Belt
+            { itemid = 12407, droprate = 206 }, -- Palmerin's Shield
+            { itemid = 14871, droprate = 206 }, -- Trainer's Gloves
+        },
+        {
+            { itemid =     0, droprate = 342 },   -- Nothing
+            { itemid = 13693, droprate = 250 },   -- Aries Mantle
+            { itemid =   655, droprate = 230 },   -- Adaman Ingot
+            { itemid =   747, droprate = 178 },   -- Orichalcum Ingot
+        },
+        {
+            { itemid =   911, droprate = 292 },   -- Rampaging Horn
+            { itemid =   910, droprate = 265 },   -- Lumbering Horn
+            { itemid = 19024, droprate = 354 }, -- Sword Strap
+            { itemid = 19027, droprate =  89 },  -- Claymore Grip
+        },
+        {
+            { itemid =  737, droprate = 109 },   -- Chunk Of Gold Ore
+            { itemid = 4172, droprate =  34 },   -- Reraiser
+            { itemid =  644, droprate =  41 },    -- Chunk Of Mythril Ore
+            { itemid =  902, droprate =  61 },    -- Demon Horn
+            { itemid =  702, droprate = 121 },   -- Ebony Log
+            { itemid =  866, droprate =  44 },    -- Handful Of Wyvern Scales
+            { itemid = 4175, droprate =  27 },   -- Vile Elixir +1
+            { itemid =  700, droprate =  41 },    -- Mahogany Log
+            { itemid =  887, droprate =  80 },    -- Coral Fragment
+            { itemid =  703, droprate =  72 },    -- Petrified Log
+            { itemid =  844, droprate = 111 },   -- Phoenix Feather
+            { itemid =  738, droprate =  44 },    -- Chunk Of Platinum Ore
+            { itemid =  895, droprate =  14 },    -- Ram Horn
+            { itemid =  830, droprate =  14 },    -- Square Of Rainbow Cloth
+            { itemid =  645, droprate =  68 },    -- Chunk Of Darksteel Ore
+            { itemid = 4173, droprate =  14 },   -- Hi-reraiser
+            { itemid = 1132, droprate = 105 },  -- Square Of Raxa
+        },
+        {
+            { itemid =   0, droprate =  150 },     -- Nothing
+            { itemid =  836, droprate =  90 },    -- Square Of Damascene Cloth
+            { itemid =  658, droprate =  29 },    -- Damascus Ingot
+            { itemid =  942, droprate = 148 },   -- Philosophers Stone
+            { itemid =  844, droprate = 234 },   -- Phoenix Feather
+            { itemid =  837, droprate =  76 },    -- Spool Of Malboro Fiber
+            { itemid = 1132, droprate = 232 },  -- Square Of Raxa
+            { itemid = 1110, droprate =  41 },   -- Vial Of Black Beetle Blood
         },
     },
 

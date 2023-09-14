@@ -12,10 +12,10 @@ xi.settings = xi.settings or {}
 xi.settings.network =
 {
     SQL_HOST     = "127.0.0.1",
-    SQL_PORT     = 3306,
-    SQL_LOGIN    = "root",
-    SQL_PASSWORD = "root",
-    SQL_DATABASE = "xidb",
+    SQL_PORT     = 33066,
+    SQL_LOGIN    = "topazadmin",
+    SQL_PASSWORD = "topazisawesome",
+    SQL_DATABASE = "tpzdb",
 
     LOGIN_DATA_IP   = "0.0.0.0",
     LOGIN_DATA_PORT = 54230,

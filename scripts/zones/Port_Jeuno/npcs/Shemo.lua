@@ -12,7 +12,7 @@ local sacredKindredCrest = 4
 
 -- 0:Convert at 3: 1
 -- 1:Convert at 2: 1 (campaignAdditional Seal Battlefield Spoils Campaign)
-local isTradeNum2 = 0
+local isTradeNum2 = 1
 
 entity.onTrigger = function(player, npc)
     local csid = 352

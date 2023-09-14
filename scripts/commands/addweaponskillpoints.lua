@@ -6,25 +6,25 @@ local commandObj = {}
 
 commandObj.cmdprops =
 {
-    permission = 1,
-    parameters = 'iis'
+    permission = 3,
+    parameters = "iis"
 }
 
 local function error(player, msg)
     player:PrintToPlayer(msg)
-    player:PrintToPlayer('!addweaponskillpoints <slot main=0, sub=1, ranged=2> <points> (player)')
+    player:PrintToPlayer("!addweaponskillpoints <slot main=0, sub=1, ranged=2> <points> (player)")
 end
 
 commandObj.onTrigger = function(player, slot, points, target)
     -- validate slot
     if slot < xi.slot.MAIN or slot > xi.slot.RANGED then
-        error(player, 'Slot out of range.')
+        error(player, "Slot out of range.")
         return
     end
 
     -- validate points
     if points < 0 then
-        error(player, 'Cannot add negative points.')
+        error(player, "Cannot add negative points.")
         return
     end
 
@@ -34,7 +34,7 @@ commandObj.onTrigger = function(player, slot, points, target)
     else
         target = GetPlayerByName(target)
         if target == nil then
-            error(player, string.format('Player named "%s" not found!', target))
+            error(player, string.format("Player named '%s' not found!", target))
             return
         end
     end
@@ -50,7 +50,7 @@ commandObj.onTrigger = function(player, slot, points, target)
     if target:addWeaponSkillPoints(slot, points) then
         player:PrintToPlayer(string.format('Added %s weapon skill points to %s.', points, item:getName()))
     else
-        player:PrintToPlayer(string.format('Could not add weapon skill points to %s.', item:getName()))
+        player:PrintToPlayer(string.format("Could not add weapon skill points to %s.", item:getName()))
     end
 end
 

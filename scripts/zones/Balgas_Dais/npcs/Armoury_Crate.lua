@@ -404,10 +404,11 @@ local loot =
     [107] =
     {
         {
-            { itemid = 3339, droprate = 1000 }, -- Jug Of Honey Wine
+            { itemid = 3340, droprate = 1000 }, -- Cup of Sweet Tea
         },
 
         {
+            { itemid = 16555, droprate =  50 }, -- Ridill (custom drop)
             { itemid =  1441, droprate = 312 }, -- Libation Abjuration
             { itemid = 17694, droprate = 182 }, -- Guespiere
             { itemid = 18047, droprate =  65 }, -- Havoc Scythe

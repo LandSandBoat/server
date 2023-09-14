@@ -37,7 +37,6 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
         local duration = (45 + (tp / 1000 * 45)) * applyResistanceAddEffect(player, target, xi.element.EARTH, 0)
         target:addStatusEffect(xi.effect.ACCURACY_DOWN, 20, 0, duration)
     end
-
     return tpHits, extraHits, criticalHit, damage
 end
 

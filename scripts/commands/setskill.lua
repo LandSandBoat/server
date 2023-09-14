@@ -6,23 +6,23 @@ local commandObj = {}
 
 commandObj.cmdprops =
 {
-    permission = 1,
-    parameters = 'sis'
+    permission = 4,
+    parameters = "sis"
 }
 
 local function error(player, msg)
     player:PrintToPlayer(msg)
-    player:PrintToPlayer('!setskill <skill name or ID> <skill level> (player)')
+    player:PrintToPlayer("!setskill <skill name or ID> <skill level> (player)")
 end
 
 commandObj.onTrigger = function(player, skillName, skillLV, target)
     if skillName == nil then
-        error(player, 'You must specify a skill to set!')
+        error(player, "You must specify a skill to set!")
         return
     end
 
     if skillLV == nil then
-        error(player, 'You must specify the new skill level to set.')
+        error(player, "You must specify the new skill level to set.")
         return
     end
 
@@ -37,7 +37,7 @@ commandObj.onTrigger = function(player, skillName, skillLV, target)
         skillID == 47 or
         skillID > 57
     then
-        error(player, 'You must specify a valid skill.')
+        error(player, "You must specify a valid skill.")
         return
     end
 
@@ -48,14 +48,14 @@ commandObj.onTrigger = function(player, skillName, skillLV, target)
             if player:getCursorTarget():isPC() then
                 targ = player:getCursorTarget()
             else
-                error(player, 'You must target a player or specify a name.')
+                error(player, "You must target a player or specify a name.")
                 return
             end
         end
     else
         targ = GetPlayerByName(target)
         if targ == nil then
-            player:PrintToPlayer(string.format('Player named "%s" not found!', target))
+            player:PrintToPlayer(string.format("Player named '%s' not found!", target))
             return
         end
     end
@@ -64,7 +64,7 @@ commandObj.onTrigger = function(player, skillName, skillLV, target)
     targ:messageBasic(xi.msg.basic.SKILL_REACHES_LEVEL, skillID, skillLV)
 
     if targ ~= player then
-        player:PrintToPlayer(string.format('%s\'s new skillID \'%s\' Skill: %s', targ:getName(), skillName, (targ:getCharSkillLevel(skillID) / 10)..'.0'))
+        player:PrintToPlayer(string.format("%s's new skillID '%s' Skill: %s", targ:getName(), skillName, (targ:getCharSkillLevel(skillID) / 10)..".0"))
     end
 end
 

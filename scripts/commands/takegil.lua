@@ -6,13 +6,13 @@ local commandObj = {}
 
 commandObj.cmdprops =
 {
-    permission = 1,
-    parameters = 'is'
+    permission = 4,
+    parameters = "is"
 }
 
 local function error(player, msg)
     player:PrintToPlayer(msg)
-    player:PrintToPlayer('!takegil <amount> (player)')
+    player:PrintToPlayer("!takegil <amount> (player)")
 end
 
 commandObj.onTrigger = function(player, amount, target)
@@ -23,7 +23,7 @@ commandObj.onTrigger = function(player, amount, target)
     else
         targ = GetPlayerByName(target)
         if targ == nil then
-            error(player, string.format('Player named "%s" not found!', target))
+            error(player, string.format("Player named '%s' not found!", target))
             return
         end
     end
@@ -31,7 +31,7 @@ commandObj.onTrigger = function(player, amount, target)
     -- validate amount
     local oldAmount = targ:getGil()
     if amount == nil or amount < 1 then
-        error(player, 'Invalid amount of gil.')
+        error(player, "Invalid amount of gil.")
         return
     end
 
@@ -41,7 +41,7 @@ commandObj.onTrigger = function(player, amount, target)
 
     -- remove gil
     targ:delGil(amount)
-    player:PrintToPlayer(string.format('Removed %i gil from %s.  They now have %i gil.', amount, targ:getName(), targ:getGil()))
+    player:PrintToPlayer(string.format("Removed %i gil from %s.  They now have %i gil.", amount, targ:getName(), targ:getGil()))
 end
 
 return commandObj

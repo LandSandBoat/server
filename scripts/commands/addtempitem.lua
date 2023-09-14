@@ -6,13 +6,13 @@ local commandObj = {}
 
 commandObj.cmdprops =
 {
-    permission = 1,
-    parameters = 'ii'
+    permission = 2,
+    parameters = "ii"
 }
 
 local function error(player, msg)
     player:PrintToPlayer(msg)
-    player:PrintToPlayer('!addtempitem <itemID> <quantity>')
+    player:PrintToPlayer("!addtempitem <itemID> <quantity>")
 end
 
 commandObj.onTrigger = function(player, itemId, quantity)
@@ -24,14 +24,14 @@ commandObj.onTrigger = function(player, itemId, quantity)
     end
 
     if itemId == nil or itemId == 0 then
-        error(player, 'Invalid itemID.')
+        error(player, "Invalid itemID.")
         return
     end
 
     -- validate quantity
     quantity = tonumber(quantity) or 1
     if quantity == nil or quantity < 1 then
-        error(player, 'Invalid quantity.')
+        error(player, "Invalid quantity.")
         return
     end
 

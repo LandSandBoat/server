@@ -6,13 +6,13 @@ local commandObj = {}
 
 commandObj.cmdprops =
 {
-    permission = 1,
-    parameters = 's'
+    permission = 3,
+    parameters = "s"
 }
 
 local function error(player, msg)
     player:PrintToPlayer(msg)
-    player:PrintToPlayer('!return (player)')
+    player:PrintToPlayer("!return (player)")
 end
 
 commandObj.onTrigger = function(player, target)
@@ -23,7 +23,7 @@ commandObj.onTrigger = function(player, target)
     else
         targ = GetPlayerByName(target)
         if targ == nil then
-            error(player, string.format('Player named "%s" not found!', target))
+            error(player, string.format("Player named '%s' not found!", target))
             return
         end
     end
@@ -35,14 +35,14 @@ commandObj.onTrigger = function(player, target)
         zoneId == xi.zone.UNKNOWN or
         zoneId == xi.zone.RESIDENTIAL_AREA
     then
-        error(player, 'Previous zone was a Mog House or there was a problem fetching the ID.')
+        error(player, "Previous zone was a Mog House or there was a problem fetching the ID.")
         return
     end
 
     -- zone target
     targ:setPos(0, 0, 0, 0, zoneId)
     if targ:getID() ~= player:getID() then
-        player:PrintToPlayer(string.format('%s was returned to zone %i.', targ:getName(), zoneId))
+        player:PrintToPlayer(string.format("%s was returned to zone %i.", targ:getName(), zoneId))
     end
 end
 

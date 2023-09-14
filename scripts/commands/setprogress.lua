@@ -6,8 +6,8 @@ local commandObj = {}
 
 commandObj.cmdprops =
 {
-    permission = 1,
-    parameters = 'i'
+    permission = 5,
+    parameters = "i"
 }
 
 commandObj.onTrigger = function(player, progress)
@@ -19,9 +19,9 @@ commandObj.onTrigger = function(player, progress)
 
         instance:setProgress(progress)
 
-        player:PrintToPlayer(string.format('Progress changed from %i to %i', startProgress, progress))
+        player:PrintToPlayer(string.format("Progress changed from %i to %i", startProgress, progress))
     else
-        player:PrintToPlayer('Must be in an Instanced zone')
+        player:PrintToPlayer("Must be in an Instanced zone")
     end
 end
 

@@ -8,13 +8,13 @@ local commandObj = {}
 
 commandObj.cmdprops =
 {
-    permission = 1,
-    parameters = 'sss'
+    permission = 4,
+    parameters = "sss"
 }
 
 local function error(player, msg)
     player:PrintToPlayer(msg)
-    player:PrintToPlayer('!completemission <logID> <missionID> (player)')
+    player:PrintToPlayer("!completemission <logID> <missionID> (player)")
 end
 
 commandObj.onTrigger = function(player, logId, missionId, target)
@@ -22,7 +22,7 @@ commandObj.onTrigger = function(player, logId, missionId, target)
     local logName
     local logInfo = logIdHelpers.getMissionLogInfo(logId)
     if logInfo == nil then
-        error(player, 'Invalid logID.')
+        error(player, "Invalid logID.")
         return
     end
 
@@ -36,7 +36,7 @@ commandObj.onTrigger = function(player, logId, missionId, target)
     end
 
     if missionId == nil or missionId < 0 then
-        error(player, 'Invalid missionID.')
+        error(player, "Invalid missionID.")
         return
     end
 
@@ -47,15 +47,15 @@ commandObj.onTrigger = function(player, logId, missionId, target)
     else
         targ = GetPlayerByName(target)
         if targ == nil then
-            error(player, string.format('Player named "%s" not found!', target))
+            error(player, string.format("Player named '%s' not found!", target))
             return
         end
     end
 
     -- complete mission
     targ:completeMission(logId, missionId)
-    player:PrintToPlayer(string.format('Completed %s Mission with ID %u for %s', logName, missionId, targ:getName()))
-    player:PrintToPlayer('NOTE! This does NOT clear or update ANY mission variables! ')
+    player:PrintToPlayer(string.format("Completed %s Mission with ID %u for %s", logName, missionId, targ:getName()))
+    player:PrintToPlayer("NOTE! This does NOT clear or update ANY mission variables! ")
 end
 
 return commandObj

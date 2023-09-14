@@ -766,6 +766,12 @@ def reset_db():
         setup_db()
 
 
+def apply_patches():
+    print(colorama.ansi.clear_screen())
+    subprocess.run(['py', 'apply_patches.py'], check=True)
+    time.sleep(1)
+
+
 def bad_selection():
     print_red("Invalid selection.")
     time.sleep(0.5)
@@ -1282,6 +1288,7 @@ def main():
                 "3": ["Backup", backup_db],
                 "4": ["Restore/Import", restore_backup],
                 "r": ["Reset DB", reset_db],
+                "a": ["Apply Patches", apply_patches],
                 "t": ["Maintenance Tasks", tasks_menu],
                 "s": ["Settings", settings_menu],
                 "q": ["Quit", close],

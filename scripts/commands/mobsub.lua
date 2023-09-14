@@ -6,13 +6,13 @@ local commandObj = {}
 
 commandObj.cmdprops =
 {
-    permission = 1,
-    parameters = 'ss'
+    permission = 5,
+    parameters = "ss"
 }
 
 local function error(player, msg)
     player:PrintToPlayer(msg)
-    player:PrintToPlayer('!mobsub (mob ID) <animation ID>')
+    player:PrintToPlayer("!mobsub (mob ID) <animation ID>")
 end
 
 commandObj.onTrigger = function(player, arg1, arg2)
@@ -25,7 +25,7 @@ commandObj.onTrigger = function(player, arg1, arg2)
     elseif arg1 ~= nil then
         animationId = arg1
     else
-        error(player, 'You must provide an animation ID.')
+        error(player, "You must provide an animation ID.")
         return
     end
 
@@ -34,13 +34,13 @@ commandObj.onTrigger = function(player, arg1, arg2)
     if target == nil then
         targ = player:getCursorTarget()
         if targ == nil or not targ:isMob() then
-            error(player, 'You must either provide a mob ID or target a mob.')
+            error(player, "You must either provide a mob ID or target a mob.")
             return
         end
     else
         targ = GetMobByID(target)
         if targ == nil then
-            error(player, 'Invalid mob ID.')
+            error(player, "Invalid mob ID.")
             return
         end
     end
@@ -48,7 +48,7 @@ commandObj.onTrigger = function(player, arg1, arg2)
     -- validate animationId
     animationId = tonumber(animationId) or xi.anim[string.upper(animationId)]
     if animationId == nil or animationId < 0 then
-        error(player, 'Invalid animation ID.')
+        error(player, "Invalid animation ID.")
         return
     end
 

@@ -6,8 +6,8 @@ local commandObj = {}
 
 commandObj.cmdprops =
 {
-    permission = 1,
-    parameters = 's'
+    permission = 5,
+    parameters = "s"
 }
 
 local validAttachments =
@@ -32,7 +32,7 @@ local function AddAllAttachments(player)
         player:unlockAttachment(validAttachments[i])
     end
 
-    player:PrintToPlayer(string.format('%s now has all attachments.', player:getName()))
+    player:PrintToPlayer(string.format("%s now has all attachments.", player:getName()))
 end
 
 commandObj.onTrigger = function(player, target)
@@ -41,7 +41,7 @@ commandObj.onTrigger = function(player, target)
     else
         local targ = GetPlayerByName(target)
         if targ == nil then
-            player:PrintToPlayer(string.format('Player named "%s" not found!', target))
+            player:PrintToPlayer(string.format("Player named '%s' not found!", target))
         else
             AddAllAttachments(targ)
         end

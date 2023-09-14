@@ -175,6 +175,14 @@ xi.survivalGuide.onEventFinish = function(player, eventId, option)
                 end
 
                 if canTeleport then
+				-- Disable book warps in Behemoths Dominion, Valley of Sorrows, and Dragon's Aery.
+				    if guide.zoneId == 127 or guide.zoneId == 128 or guide.zoneId == 154 then
+					    player:PrintToPlayer("Travel to this destination is restricted.")
+						player:timer(3000, function(playerArg)
+						    player:setPos(-5.553, 0.000, 3.621, 89, 245)
+						end)
+						return
+					end
                     player:setPos(guide.posX, guide.posY, guide.posZ, guide.posRot, guide.zoneId)
                 end
             end

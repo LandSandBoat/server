@@ -6,13 +6,13 @@ local commandObj = {}
 
 commandObj.cmdprops =
 {
-    permission = 1,
-    parameters = 's'
+    permission = 2,
+    parameters = "s"
 }
 
 local function error(player, msg)
     player:PrintToPlayer(msg)
-    player:PrintToPlayer('!addallspells (player)')
+    player:PrintToPlayer("!addallspells (player)")
 end
 
 commandObj.onTrigger = function(player, target)
@@ -61,7 +61,7 @@ commandObj.onTrigger = function(player, target)
     else
         targ = GetPlayerByName(target)
         if targ == nil then
-            error(player, string.format('Player named "%s" not found!', target))
+            error(player, string.format("Player named '%s' not found!", target))
             return
         end
     end
@@ -80,7 +80,7 @@ commandObj.onTrigger = function(player, target)
         targ:addSpell(validSpells[i], silent, save, sendUpdate)
     end
 
-    player:PrintToPlayer(string.format('%s now has all spells.', targ:getName()))
+    player:PrintToPlayer(string.format("%s now has all spells.", targ:getName()))
 end
 
 return commandObj

@@ -6,13 +6,13 @@ local commandObj = {}
 
 commandObj.cmdprops =
 {
-    permission = 1,
-    parameters = 'is'
+    permission = 4,
+    parameters = "is"
 }
 
 local function error(player, msg)
     player:PrintToPlayer(msg)
-    player:PrintToPlayer('!setallegiance <allegiance> <player>')
+    player:PrintToPlayer("!setallegiance <allegiance> <player>")
 end
 
 commandObj.onTrigger = function(player, allegiance, target)
@@ -23,7 +23,7 @@ commandObj.onTrigger = function(player, allegiance, target)
     if target then
         targ = GetPlayerByName(target)
         if not targ then
-            error(player, string.format('Player named "%s" not found!', target))
+            error(player, string.format("Player named '%s' not found!", target))
             return
         end
     elseif cursorTarget and not cursorTarget:isNPC() then
@@ -33,13 +33,13 @@ commandObj.onTrigger = function(player, allegiance, target)
     end
 
     if allegiance == nil or (allegiance < 0 or allegiance > 6) then
-        error(player, 'Improper allegiance passed. Valid Values: 0 to 6')
+        error(player, "Improper allegiance passed. Valid Values: 0 to 6")
         return
     end
 
-    local toString = { 'Mob', 'Player', 'San d\'Oria', 'Bastok', 'Windurst', 'Wyverns', 'Griffons' }
+    local toString = { "Mob", "Player", "San d'Oria", "Bastok", "Windurst", "Wyverns", "Griffons" }
 
-    player:PrintToPlayer(string.format('You set %s\'s allegiance to %s', targ:getName(), toString[allegiance + 1]))
+    player:PrintToPlayer(string.format("You set %s's allegiance to %s", targ:getName(), toString[allegiance + 1]))
     targ:setAllegiance(allegiance)
 end
 

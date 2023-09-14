@@ -6,13 +6,13 @@ local commandObj = {}
 
 commandObj.cmdprops =
 {
-    permission = 1,
-    parameters = 'ss'
+    permission = 5,
+    parameters = "ss"
 }
 
 local function error(player, msg)
     player:PrintToPlayer(msg)
-    player:PrintToPlayer('!animatenpc (npcID) <animationID>')
+    player:PrintToPlayer("!animatenpc (npcID) <animationID>")
 end
 
 commandObj.onTrigger = function(player, arg1, arg2)
@@ -31,12 +31,12 @@ commandObj.onTrigger = function(player, arg1, arg2)
 
     -- validate target
     if targ == nil then
-        error(player, 'You must either enter a valid npcID or target an NPC.')
+        error(player, "You must either enter a valid npcID or target an NPC.")
         return
     end
 
     if not targ:isNPC() then
-        error(player, 'Targeted entity is not an NPC.')
+        error(player, "Targeted entity is not an NPC.")
         return
     end
 
@@ -46,13 +46,13 @@ commandObj.onTrigger = function(player, arg1, arg2)
     end
 
     if animationId == nil then
-        error(player, 'Invalid animationID.')
+        error(player, "Invalid animationID.")
         return
     end
 
     local oldAnimation = targ:getAnimation()
     targ:setAnimation(animationId)
-    player:PrintToPlayer(string.format('NPC ID: %i - %s | Old animation: %i | New animation: %i\n', targ:getID(), targ:getName(), oldAnimation, animationId))
+    player:PrintToPlayer(string.format("NPC ID: %i - %s | Old animation: %i | New animation: %i\n", targ:getID(), targ:getName(), oldAnimation, animationId))
 end
 
 return commandObj

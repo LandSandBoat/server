@@ -6,13 +6,13 @@ local commandObj = {}
 
 commandObj.cmdprops =
 {
-    permission = 1,
-    parameters = 'siiiiiiiiii'
+    permission = 5,
+    parameters = "siiiiiiiiii"
 }
 
 local function error(player, msg)
     player:PrintToPlayer(msg)
-    player:PrintToPlayer('!additem <itemId> (quantity) (aug1) (v1) (aug2) (v2) (aug3) (v3) (aug4) (v4) (trial)')
+    player:PrintToPlayer("!additem <itemId> (quantity) (aug1) (v1) (aug2) (v2) (aug3) (v3) (aug4) (v4) (trial)")
 end
 
 commandObj.onTrigger = function(player, item, quantity, aug0, aug0val, aug1, aug1val, aug2, aug2val, aug3, aug3val, trialId)
@@ -23,7 +23,7 @@ commandObj.onTrigger = function(player, item, quantity, aug0, aug0val, aug1, aug
     -- validate item
     if item == nil then
         -- No Item Provided
-        error(player, 'No Item ID given.')
+        error(player, "No Item ID given.")
         return
     elseif tonumber(item) == nil and item ~= nil then
         -- Item was provided, but was not a number.  Try text lookup.
@@ -31,10 +31,10 @@ commandObj.onTrigger = function(player, item, quantity, aug0, aug0val, aug1, aug
         if retItem > 0 and retItem < 65000 then
             itemToGet = retItem
         elseif retItem >= 65000 then
-            player:PrintToPlayer(string.format('Found %s instances matching "%s".  Use ID or exact name.', 65536 - retItem,  tostring(item)))
+            player:PrintToPlayer(string.format("Found %s instances matching '%s'.  Use ID or exact name.", 65536 - retItem,  tostring(item)))
             return
         else
-            player:PrintToPlayer(string.format('Item %s not found in database.', item))
+            player:PrintToPlayer(string.format("Item %s not found in database.", item))
             return
         end
     else
@@ -47,7 +47,7 @@ commandObj.onTrigger = function(player, item, quantity, aug0, aug0val, aug1, aug
 
     -- At this point, if there's no item found, exit out of the function
     if itemToGet == 0 then
-        error(player, 'Item not found.')
+        error(player, "Item not found.")
         return
     end
 

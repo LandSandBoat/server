@@ -6,13 +6,13 @@ local commandObj = {}
 
 commandObj.cmdprops =
 {
-    permission = 1,
-    parameters = 's'
+    permission = 2,
+    parameters = "s"
 }
 
 local function error(player, msg)
     player:PrintToPlayer(msg)
-    player:PrintToPlayer('!logoff (player)')
+    player:PrintToPlayer("!logoff (player)")
 end
 
 commandObj.onTrigger = function(player, target)
@@ -23,7 +23,7 @@ commandObj.onTrigger = function(player, target)
     else
         targ = GetPlayerByName(target)
         if targ == nil then
-            error(player, string.format('Invalid player \'%s\' given.', target))
+            error(player, string.format("Invalid player '%s' given.", target))
             return
         end
     end
@@ -31,7 +31,7 @@ commandObj.onTrigger = function(player, target)
     -- logoff target
     targ:leaveGame()
     if targ:getID() ~= player:getID() then
-        player:PrintToPlayer(string.format('%s has been logged off.', targ:getName()))
+        player:PrintToPlayer(string.format("%s has been logged off.", targ:getName()))
     end
 end
 

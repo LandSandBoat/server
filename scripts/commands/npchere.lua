@@ -1,19 +1,19 @@
 -----------------------------------
 -- func: npchere <npcId>
 -- desc: Spawns an NPC and then moves it to the current position, if in same zone.
---       Errors will despawn the NPC unless 'noDepop' was specified (any value works).
+--       Errors will despawn the NPC unless "noDepop" was specified (any value works).
 -----------------------------------
 local commandObj = {}
 
 commandObj.cmdprops =
 {
-    permission = 1,
-    parameters = 'is'
+    permission = 4,
+    parameters = "is"
 }
 
 local function error(player, msg)
     player:PrintToPlayer(msg)
-    player:PrintToPlayer('!npchere (npcID) (noDepop)')
+    player:PrintToPlayer("!npchere (npcID) (noDepop)")
 end
 
 commandObj.onTrigger = function(player, npcId, noDepop)
@@ -22,13 +22,13 @@ commandObj.onTrigger = function(player, npcId, noDepop)
     if npcId == nil then
         targ = player:getCursorTarget()
         if targ == nil or not targ:isNPC() then
-            error(player, 'You must either provide an npcID or target an NPC.')
+            error(player, "You must either provide an npcID or target an NPC.")
             return
         end
     else
         targ = GetNPCByID(npcId)
         if targ == nil then
-            error(player, 'Invalid npcID.')
+            error(player, "Invalid npcID.")
             return
         end
     end
@@ -39,10 +39,10 @@ commandObj.onTrigger = function(player, npcId, noDepop)
     else
         if noDepop == nil or noDepop == 0 then
             targ:setStatus(xi.status.DISAPPEAR)
-            player:PrintToPlayer('Despawned the NPC because of an error.')
+            player:PrintToPlayer("Despawned the NPC because of an error.")
         end
 
-        player:PrintToPlayer('NPC could not be moved to current pos - you are probably in the wrong zone.')
+        player:PrintToPlayer("NPC could not be moved to current pos - you are probably in the wrong zone.")
     end
 end
 

@@ -6,13 +6,13 @@ local commandObj = {}
 
 commandObj.cmdprops =
 {
-    permission = 1,
-    parameters = 'is'
+    permission = 3,
+    parameters = "is"
 }
 
 local function error(player, msg)
     player:PrintToPlayer(msg)
-    player:PrintToPlayer('!mp <amount> (player)')
+    player:PrintToPlayer("!mp <amount> (player)")
 end
 
 commandObj.onTrigger = function(player, mp, target)
@@ -23,7 +23,7 @@ commandObj.onTrigger = function(player, mp, target)
     if target then
         targ = GetPlayerByName(target)
         if not targ then
-            error(player, string.format('Player named "%s" not found!', target))
+            error(player, string.format("Player named '%s' not found!", target))
             return
         end
     elseif cursorTarget and not cursorTarget:isNPC() then
@@ -34,10 +34,10 @@ commandObj.onTrigger = function(player, mp, target)
 
     -- validate amount
     if mp == nil or tonumber(mp) == nil then
-        error(player, 'You must provide an amount.')
+        error(player, "You must provide an amount.")
         return
     elseif mp < 0 then
-        error(player, 'Invalid amount.')
+        error(player, "Invalid amount.")
         return
     end
 
@@ -45,10 +45,10 @@ commandObj.onTrigger = function(player, mp, target)
     if targ:isAlive() then
         targ:setMP(mp)
         if targ:getID() ~= player:getID() then
-            player:PrintToPlayer(string.format('Set %s\'s MP to %i.', targ:getName(), targ:getMP()))
+            player:PrintToPlayer(string.format("Set %s's MP to %i.", targ:getName(), targ:getMP()))
         end
     else
-        player:PrintToPlayer(string.format('%s is currently dead.', targ:getName()))
+        player:PrintToPlayer(string.format("%s is currently dead.", targ:getName()))
     end
 end
 

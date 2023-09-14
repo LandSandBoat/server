@@ -6,19 +6,19 @@ local commandObj = {}
 
 commandObj.cmdprops =
 {
-    permission = 1,
-    parameters = 'is'
+    permission = 5,
+    parameters = "is"
 }
 
 local function error(player, msg)
     player:PrintToPlayer(msg)
-    player:PrintToPlayer('!addspell <spellID> (player)')
+    player:PrintToPlayer("!addspell <spellID> (player)")
 end
 
 commandObj.onTrigger = function(player, spellId, target)
     -- validate spellId
     if spellId == nil then
-        error(player, 'Invalid spellID.')
+        error(player, "Invalid spellID.")
         return
     end
 
@@ -29,7 +29,7 @@ commandObj.onTrigger = function(player, spellId, target)
     else
         targ = GetPlayerByName(target)
         if targ == nil then
-            error(player, string.format('Player named "%s" not found!', target))
+            error(player, string.format("Player named '%s' not found!", target))
             return
         end
     end
@@ -38,7 +38,7 @@ commandObj.onTrigger = function(player, spellId, target)
     local save = true
     local silent = false
     targ:addSpell(spellId, silent, save)
-    player:PrintToPlayer(string.format('Added spell %i to %s.', spellId, targ:getName()))
+    player:PrintToPlayer(string.format("Added spell %i to %s.", spellId, targ:getName()))
 end
 
 return commandObj

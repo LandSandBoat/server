@@ -4148,22 +4148,22 @@ namespace charutils
                                     exp *= 1.0f;
                                     break;
                                 case 1:
-                                    exp *= 1.2f;
+                                    exp *= 1.05f;
                                     break;
                                 case 2:
-                                    exp *= 1.25f;
+                                    exp *= 1.10f;
                                     break;
                                 case 3:
-                                    exp *= 1.3f;
+                                    exp *= 1.15f;
                                     break;
                                 case 4:
-                                    exp *= 1.4f;
+                                    exp *= 1.20f;
                                     break;
                                 case 5:
-                                    exp *= 1.5f;
+                                    exp *= 1.25f;
                                     break;
                                 default:
-                                    exp *= 1.55f;
+                                    exp *= 1.30f;
                                     break;
                             }
                         }

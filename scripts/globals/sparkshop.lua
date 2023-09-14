@@ -577,25 +577,25 @@ local optionToItem =
 
     [20] = -- Currency Exchange
     {
-        [ 0] = { amount = 1000, name = 'spark_of_eminence'      },
-        [ 1] = { amount = 1000, name = 'conquest_points'        },
-        [ 2] = { amount = 1000, name = 'imperial_standing'      },
-        [ 3] = { amount = 1000, name = 'allied_notes'           },
-        [ 4] = { amount = 1000, name = 'bayld'                  },
-        [ 5] = { amount = 1000, name = 'valor_point'            },
-        [ 6] = { amount = 1000, name = 'leujaoam_assault_point' },
-        [ 7] = { amount = 1000, name = 'mamool_assault_point'   },
-        [ 8] = { amount = 1000, name = 'lebros_assault_point'   },
-        [ 9] = { amount = 1000, name = 'periqia_assault_point'  },
-        [10] = { amount = 1000, name = 'ilrusi_assault_point'   },
-        [11] = { amount = 1000, name = 'cruor'                  },
-        [12] = { amount = 1000, name = 'kinetic_unit'           },
-        [13] = { amount = 1000, name = 'obsidian_fragment'      },
-        [14] = { amount = 1000, name = 'mweya_plasm'            },
-        [15] = { amount = 1000, name = 'ballista_point'         },
-        [16] = { amount = 1000, name = 'unity_accolades'        },
-        [17] = { amount = 1000, name = 'escha_silt'             }, -- Not Implemented
-        [18] = { amount = 1000, name = 'resistance_credit'      },
+        [ 0] = { amount = 1000, name = "spark_of_eminence"      },
+        [ 1] = { amount = 1000, name = "conquest_points"        },
+        [ 2] = { amount = 1000, name = "imperial_standing"      },
+        [ 3] = { amount = 1000, name = "allied_notes"           },
+        [ 4] = { amount = 1000, name = "bayld"                  },
+        [ 5] = { amount = 1000, name = "valor_point"            },
+        [ 6] = { amount = 1000, name = "leujaoam_assault_point" },
+        [ 7] = { amount = 1000, name = "mamool_assault_point"   },
+        [ 8] = { amount = 1000, name = "lebros_assault_point"   },
+        [ 9] = { amount = 1000, name = "periqia_assault_point"  },
+        [10] = { amount = 1000, name = "ilrusi_assault_point"   },
+        [11] = { amount = 1000, name = "cruor"                  },
+        [12] = { amount = 1000, name = "kinetic_unit"           },
+        [13] = { amount = 1000, name = "obsidian_fragment"      },
+        [14] = { amount = 1000, name = "mweya_plasm"            },
+        [15] = { amount = 1000, name = "ballista_point"         },
+        [16] = { amount = 1000, name = "unity_accolades"        },
+        [17] = { amount = 1000, name = "escha_silt"             }, -- Not Implemented
+        [18] = { amount = 1000, name = "resistance_credit"      },
     },
 }
 
@@ -603,13 +603,13 @@ local optionToItem =
 local function getCurrencyCap(currencyName)
     local cap = nil
 
-    if currencyName == 'spark_of_eminence' then
+    if currencyName == "spark_of_eminence" then
         cap = xi.settings.main.CAP_CURRENCY_SPARKS
-    elseif currencyName == 'unity_accolades' then
+    elseif currencyName == "unity_accolades" then
         cap = xi.settings.main.CAP_CURRENCY_ACCOLADES
-    elseif currencyName == 'ballista_point' then
+    elseif currencyName == "ballista_point" then
         cap = xi.settings.main.CAP_CURRENCY_BALLISTA
-    elseif currencyName == 'valor_point' then
+    elseif currencyName == "valor_point" then
         cap = xi.settings.main.CAP_CURRENCY_VALOR
     end
 
@@ -617,21 +617,21 @@ local function getCurrencyCap(currencyName)
 end
 
 function xi.sparkshop.onTrade(player, npc, trade, eventid)
-    local copperVouchersStored = player:getCurrency('aman_vouchers')
+    local copperVouchersStored = player:getCurrency("aman_vouchers")
     local count = trade:getItemQty(xi.item.COPPER_AMAN_VOUCHER)
 
     if count > 0 then
         trade:confirmItem(xi.item.COPPER_AMAN_VOUCHER, count)
-        player:addCurrency('aman_vouchers', count)
+        player:addCurrency("aman_vouchers", count)
         player:confirmTrade()
         player:startEvent(eventid, xi.item.COPPER_AMAN_VOUCHER, count + copperVouchersStored, 230)
     end
 end
 
 function xi.sparkshop.onTrigger(player, npc, event)
-    local sparks = player:getCurrency('spark_of_eminence')
-    local vouchers = player:getCurrency('aman_vouchers')
-    local remainingLimit = xi.settings.main.WEEKLY_EXCHANGE_LIMIT - player:getCharVar('weekly_sparks_spent')
+    local sparks = player:getCurrency("spark_of_eminence")
+    local vouchers = player:getCurrency("aman_vouchers")
+    local remainingLimit = xi.settings.main.WEEKLY_EXCHANGE_LIMIT - player:getCharVar("weekly_sparks_spent")
     local cipher = xi.extravaganza.campaignActive() * 16 * 65536 -- Trust Alter Ego Extravaganza
     local naakual = 0 -- TODO: Naakual Seven Treasures Item Logic
 
@@ -640,8 +640,8 @@ function xi.sparkshop.onTrigger(player, npc, event)
 end
 
 function xi.sparkshop.onEventUpdate(player, csid, option, npc)
-    local sparks = player:getCurrency('spark_of_eminence')
-    local weeklySparksSpent = player:getCharVar('weekly_sparks_spent')
+    local sparks = player:getCurrency("spark_of_eminence")
+    local weeklySparksSpent = player:getCharVar("weekly_sparks_spent")
     local remainingLimit = xi.settings.main.WEEKLY_EXCHANGE_LIMIT - weeklySparksSpent
     local category = bit.band(option, 0xFF)
     local selection = bit.rshift(option, 16)
@@ -685,10 +685,10 @@ function xi.sparkshop.onEventUpdate(player, csid, option, npc)
         elseif sparks >= cost then
             if npcUtil.giveItem(player, { { item.id, qty } }) then
                 sparks = sparks - cost
-                player:delCurrency('spark_of_eminence', cost)
+                player:delCurrency("spark_of_eminence", cost)
                 if xi.settings.main.ENABLE_EXCHANGE_LIMIT == 1 then
                     remainingLimit = remainingLimit - cost
-                    player:setCharVar('weekly_sparks_spent', weeklySparksSpent + cost)
+                    player:setCharVar("weekly_sparks_spent", weeklySparksSpent + cost)
                 end
             end
         else
@@ -697,37 +697,43 @@ function xi.sparkshop.onEventUpdate(player, csid, option, npc)
 
         player:updateEvent(sparks, 0, 0, 0, 0, remainingLimit)
     elseif category == 20 then
-        local copperVouchersStored = player:getCurrency('aman_vouchers')
+        local copperVouchersStored = player:getCurrency("aman_vouchers")
         local currency = optionToItem[category][selection]
 
         if copperVouchersStored >= qty then
-            player:delCurrency('aman_vouchers', qty)
+            if currency.name ~= "obsidian_fragment" then
+                player:delCurrency("aman_vouchers", qty)
+            end
 
-            if currency.name == 'conquest_points' then
+            if currency.name == "conquest_points" then
                 local nation = player:getNation()
 
                 if nation == 0 then
-                    currency.name = 'sandoria_cp'
+                    currency.name = "sandoria_cp"
                 elseif nation == 1 then
-                    currency.name = 'bastok_cp'
+                    currency.name = "bastok_cp"
                 elseif nation == 2 then
-                    currency.name = 'windurst_cp'
+                    currency.name = "windurst_cp"
                 end
             end
 
-            player:addCurrency(currency.name, currency.amount * qty, getCurrencyCap(currency.name))
+            if currency.name == "obsidian_fragment" then
+                player:PrintToPlayer("You are not allowed to receive Obsidian Fragments in this way.", 17)
+            else
+                player:addCurrency(currency.name, currency.amount * qty, getCurrencyCap(currency.name))
+            end
             player:messageSpecial(zones[player:getZoneID()].text.YOU_NOW_HAVE_AMT_CURRENCY, selection, player:getCurrency(currency.name))
         else
             player:messageSpecial(zones[player:getZoneID()].text.DO_NOT_POSSESS_ENOUGH, xi.item.COPPER_AMAN_VOUCHER)
         end
 
-        player:updateEvent(sparks, player:getCurrency('aman_vouchers'))
+        player:updateEvent(sparks, player:getCurrency("aman_vouchers"))
     elseif category == 30 then
-        local copperVouchersStored = player:getCurrency('aman_vouchers')
+        local copperVouchersStored = player:getCurrency("aman_vouchers")
 
         if copperVouchersStored >= qty then
             if player:addItem({ id = selection, quantity = 2 * qty, silent = true }) then
-                player:delCurrency('aman_vouchers', qty)
+                player:delCurrency("aman_vouchers", qty)
                 player:messageSpecial(zones[player:getZoneID()].text.YOU_OBTAIN_ITEM, selection, 1) -- Retail: Provisions are always singular
             else
                 player:messageSpecial(zones[player:getZoneID()].text.ITEM_CANNOT_BE_OBTAINED, selection)
@@ -736,7 +742,7 @@ function xi.sparkshop.onEventUpdate(player, csid, option, npc)
             player:messageSpecial(zones[player:getZoneID()].text.DO_NOT_POSSESS_ENOUGH, xi.item.COPPER_AMAN_VOUCHER)
         end
 
-        player:updateEvent(sparks, player:getCurrency('aman_vouchers'))
+        player:updateEvent(sparks, player:getCurrency("aman_vouchers"))
     end
 end
 

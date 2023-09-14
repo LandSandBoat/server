@@ -443,3 +443,4 @@ end
 xi.job_utils.thief.useTrickAttack = function(player, target, ability)
     player:addStatusEffect(xi.effect.TRICK_ATTACK, 1, 0, 60)
 end
+

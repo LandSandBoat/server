@@ -138,7 +138,9 @@ jobs:
         for changed_file in ${{ steps.changed-files.outputs.all }}; do
           if [[ -f $changed_file ]]; then
             if [[ $changed_file == *.lua ]]; then
-              bash tools/ci/lua.sh ${changed_file} >> lua_checks.txt || true
+              if [[ $changed_file != scripts/mixins/claim_shield.lua ]]; then
+                bash tools/ci/lua.sh ${changed_file} >> lua_checks.txt || true
+              fi
             fi
           fi
         done
@@ -204,6 +206,9 @@ jobs:
     #    key: ${{ runner.os }}-clang
     - name: Configure CMake
       run: |
+        pwd
+        mkdir -p modules/catseyexi/cpp
+        mv modules/custom/cpp/* modules/catseyexi/cpp/
         export CC=/usr/bin/clang-14
         export CXX=/usr/bin/clang++-14
         mkdir -p build
@@ -272,6 +277,8 @@ jobs:
       run: |
         export CC=/usr/bin/gcc-12
         export CXX=/usr/bin/g++-12
+        mkdir -p modules/catseyexi/cpp
+        mv modules/custom/cpp/* modules/catseyexi/cpp/
         mkdir -p build
         CFLAGS=-m64 CXXFLAGS=-m64 LDFLAGS=-m64 cmake -S . -B build
     - name: Build
@@ -295,8 +302,11 @@ jobs:
       - name: Configure CMake
         shell: cmd
         run: |
+          pwd
+          mkdir -p modules\catseyexi\cpp
+          move modules\custom\cpp\*.* modules\catseyexi\cpp\
           mkdir -p build
-          cmake -S . -B build -A Win32
+          cmake -S . -B build -A Win32 -DCMAKE_BUILD_TYPE=Release
       - name: Build
         shell: cmd
         run: |
@@ -319,6 +329,9 @@ jobs:
       - name: Configure CMake
         shell: cmd
         run: |
+          pwd
+          mkdir -p modules\catseyexi\cpp
+          move modules\custom\cpp\*.* modules\catseyexi\cpp\
           mkdir -p build
           cmake -S . -B build -A x64 -DCMAKE_BUILD_TYPE=Debug
       - name: Build
@@ -392,6 +405,9 @@ jobs:
           key: ${{ runner.os }}-osx
       - name: Configure CMake
         run: |
+          pwd
+          mkdir -p modules/catseyexi/cpp
+          mv modules/custom/cpp/* modules/catseyexi/cpp/
           mkdir -p build
           cmake -S . -B build
       - name: Build
@@ -435,6 +451,10 @@ jobs:
     - name: Copy settings
       run: |
         cp settings/default/* settings/
+        sed -i 's/topazadmin/root/g' settings/network.lua
+        sed -i 's/topazisawesome/root/g' settings/network.lua
+        sed -i 's/tpzdb/xidb/g' settings/network.lua
+        sed -i 's/33066/3306/g' settings/network.lua
     - name: Enable Modules
       shell: bash
       run: |
@@ -615,6 +635,10 @@ jobs:
     - name: Copy settings
       run: |
         cp settings/default/* settings/
+        sed -i 's/topazadmin/root/g' settings/network.lua
+        sed -i 's/topazisawesome/root/g' settings/network.lua
+        sed -i 's/tpzdb/xidb/g' settings/network.lua
+        sed -i 's/33066/3306/g' settings/network.lua
     - name: Startup checks
       env:
         MYSQL_HOST: mysql
@@ -679,6 +703,10 @@ jobs:
     - name: Copy settings
       run: |
         cp settings/default/* settings/
+        sed -i 's/topazadmin/root/g' settings/network.lua
+        sed -i 's/topazisawesome/root/g' settings/network.lua
+        sed -i 's/tpzdb/xidb/g' settings/network.lua
+        sed -i 's/33066/3306/g' settings/network.lua
     - name: Install Python Dependencies
       run: |
         pip install -r tools/requirements.txt

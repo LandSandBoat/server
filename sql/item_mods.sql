@@ -54117,6 +54117,9 @@ INSERT INTO `item_mods` VALUES (25634,163,-500); -- DMGMAGIC: -500
 INSERT INTO `item_mods` VALUES (25634,311,15);   -- MAGIC_DAMAGE: 15
 INSERT INTO `item_mods` VALUES (25634,384,700);  -- HASTE_GEAR: 700
 
+-- Midras's Helm +1
+INSERT INTO `item_mods` VALUES (25637,852,5); -- SYNTH_SKILL_GAIN: 5
+
 -- Herculean Helm
 INSERT INTO `item_mods` VALUES (25642,1,108);   -- DEF: 108
 INSERT INTO `item_mods` VALUES (25642,2,38);    -- HP: 38

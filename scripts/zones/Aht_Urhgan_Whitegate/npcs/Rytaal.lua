@@ -23,7 +23,7 @@ entity.onTrigger = function(player, npc)
             player:messageText(player, ID.text.ASSAULT_COMPLETE)
             player:completeAssault(currentAssault)
         elseif currentAssault == 51 then
-            player:messageText(player, ID.text.NYZUL_FAIL)
+            player:messageText(player, ID.text.ASSAULT_FAILED)
             player:delAssault(currentAssault)
         else
             player:addAssaultPoint(xi.assault.getAssaultArea(player), 100)

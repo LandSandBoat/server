@@ -1,6 +1,12 @@
-[submodule "navmeshes"]
-	path = navmeshes
-	url = https://github.com/LandSandBoat/xiNavmeshes.git
 [submodule "losmeshes"]
 	path = losmeshes
 	url = https://github.com/LandSandBoat/losmeshes.git
+[submodule "modules/catseyexi"]
+	path = modules/catseyexi
+	url = https://github.com/catsandboats/modules
+[submodule "modules/contrib"]
+	path = modules/contrib
+	url = https://github.com/CatsAndBoats/contrib
+[submodule "navmeshes"]
+	path = navmeshes
+	url = https://github.com/CatsAndBoats/xiNavmeshes

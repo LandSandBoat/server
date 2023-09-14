@@ -6,13 +6,13 @@ local commandObj = {}
 
 commandObj.cmdprops =
 {
-    permission = 1,
-    parameters = 'i'
+    permission = 3,
+    parameters = "i"
 }
 
 local function error(player, msg)
     player:PrintToPlayer(msg)
-    player:PrintToPlayer('!despawnmob (mobID)')
+    player:PrintToPlayer("!despawnmob (mobID)")
 end
 
 commandObj.onTrigger = function(player, mobId)
@@ -21,20 +21,20 @@ commandObj.onTrigger = function(player, mobId)
     if mobId == nil then
         targ = player:getCursorTarget()
         if targ == nil or not targ:isMob() then
-            error(player, 'You must either provide a mobID or target a mob.')
+            error(player, "You must either provide a mobID or target a mob.")
             return
         end
     else
         targ = GetMobByID(mobId)
         if targ == nil then
-            error(player, 'Invalid mobID.')
+            error(player, "Invalid mobID.")
             return
         end
     end
 
     -- despawn mob
     DespawnMob(targ:getID())
-    player:PrintToPlayer(string.format('Despawned %s %i.', targ:getName(), targ:getID()))
+    player:PrintToPlayer(string.format("Despawned %s %i.", targ:getName(), targ:getID()))
 end
 
 return commandObj

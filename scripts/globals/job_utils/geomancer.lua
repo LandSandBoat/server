@@ -260,6 +260,7 @@ xi.job_utils.geomancer.fullCircle = function(player, target, ability)
 
     -- calculate final mp value
     mpReturned = math.floor(mpMultiplier * mpCost * (hppRemaining / 100))
+	printf("MP Multiplier: %s, mpCost: %s, hppRemaining: %s", mpMultiplier, mpCost, hppRemaining)
 
     if crMerit > 0 then
         -- calculate final hp value

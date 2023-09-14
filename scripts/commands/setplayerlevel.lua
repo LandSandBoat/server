@@ -6,13 +6,13 @@ local commandObj = {}
 
 commandObj.cmdprops =
 {
-    permission = 1,
-    parameters = 'ss'
+    permission = 5,
+    parameters = "ss"
 }
 
 local function error(player, msg)
     player:PrintToPlayer(msg)
-    player:PrintToPlayer('!setplayerlevel (player) <level>')
+    player:PrintToPlayer("!setplayerlevel (player) <level>")
 end
 
 commandObj.onTrigger = function(player, arg1, arg2)
@@ -23,7 +23,7 @@ commandObj.onTrigger = function(player, arg1, arg2)
     if arg2 ~= nil then
         targ = GetPlayerByName(arg1)
         if targ == nil then
-            error(player, string.format('Player named "%s" not found!', arg1))
+            error(player, string.format("Player named '%s' not found!", arg1))
             return
         end
 
@@ -35,14 +35,14 @@ commandObj.onTrigger = function(player, arg1, arg2)
 
     -- validate level
     if level == nil or level < 1 or level > 99 then
-        error(player, 'Invalid level.  Must be between 1 and 99.')
+        error(player, "Invalid level.  Must be between 1 and 99.")
         return
     end
 
     -- set level
     targ:setLevel(level)
     if targ:getID() ~= player:getID() then
-        player:PrintToPlayer(string.format('Set %s\'s level to %i.', targ:getName(), level))
+        player:PrintToPlayer(string.format("Set %s's level to %i.", targ:getName(), level))
     end
 end
 

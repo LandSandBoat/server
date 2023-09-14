@@ -6,8 +6,8 @@ local commandObj = {}
 
 commandObj.cmdprops =
 {
-    permission = 1,
-    parameters = 'i'
+    permission = 5,
+    parameters = "i"
 }
 
 commandObj.onTrigger = function(player, stage)
@@ -19,9 +19,9 @@ commandObj.onTrigger = function(player, stage)
 
         instance:setStage(stage)
 
-        player:PrintToPlayer(string.format('Stage changed from %i to %i', startStage, stage))
+        player:PrintToPlayer(string.format("Stage changed from %i to %i", startStage, stage))
     else
-        player:PrintToPlayer('Must be in an Instanced zone')
+        player:PrintToPlayer("Must be in an Instanced zone")
     end
 end
 

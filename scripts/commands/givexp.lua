@@ -6,13 +6,13 @@ local commandObj = {}
 
 commandObj.cmdprops =
 {
-    permission = 1,
-    parameters = 'is'
+    permission = 5,
+    parameters = "is"
 }
 
 local function error(player, msg)
     player:PrintToPlayer(msg)
-    player:PrintToPlayer('!givexp <amount> (player)')
+    player:PrintToPlayer("!givexp <amount> (player)")
 end
 
 commandObj.onTrigger = function(player, amount, target)
@@ -23,20 +23,20 @@ commandObj.onTrigger = function(player, amount, target)
     else
         targ = GetPlayerByName(target)
         if targ == nil then
-            error(player, string.format('Player named "%s" not found!', target))
+            error(player, string.format("Player named '%s' not found!", target))
             return
         end
     end
 
     -- validate amount
     if amount == nil or amount < 1 then
-        error(player, 'Invalid amount.')
+        error(player, "Invalid amount.")
         return
     end
 
     -- give XP to target
     targ:addExp(amount)
-    player:PrintToPlayer(string.format('Gave %i exp to %s. They are now level %i.', amount, targ:getName(), targ:getMainLvl()))
+    player:PrintToPlayer(string.format("Gave %i exp to %s. They are now level %i.", amount, targ:getName(), targ:getMainLvl()))
 end
 
 return commandObj

@@ -103,18 +103,6 @@ local function souleaterBonus(attacker, wsParams)
     return 0
 end
 
-local scarletDeliriumBonus = function(attacker)
-    local bonus = 1
-
-    if attacker:hasStatusEffect(xi.effect.SCARLET_DELIRIUM_1) then
-        local power = attacker:getStatusEffect(xi.effect.SCARLET_DELIRIUM_1):getPower()
-
-        bonus = 1 + power / 100
-    end
-
-    return bonus
-end
-
 local function fencerBonus(attacker)
     local bonus = 0
 
@@ -448,18 +436,14 @@ local function modifyMeleeHitDamage(attacker, target, attackTbl, wsParams, rawDa
         end
     end
 
-    -- Scarlet Delirium
-    adjustedDamage = adjustedDamage * scarletDeliriumBonus(attacker)
-
-    -- Souleater
-    adjustedDamage = adjustedDamage + souleaterBonus(attacker, wsParams)
-
     if adjustedDamage > 0 then
         adjustedDamage = adjustedDamage - target:getMod(xi.mod.PHALANX)
         adjustedDamage = utils.clamp(adjustedDamage, 0, 99999)
     end
 
     adjustedDamage = utils.stoneskin(target, adjustedDamage)
+
+    adjustedDamage = adjustedDamage + souleaterBonus(attacker, wsParams)
 
     return adjustedDamage
 end
@@ -884,10 +868,6 @@ xi.weaponskills.doMagicWeaponskill = function(attacker, target, wsID, wsParams, 
         local ftp = xi.weaponskills.fTP(tp, wsParams.ftp100, wsParams.ftp200, wsParams.ftp300) + bonusfTP
 
         dmg = dmg * ftp
-
-        -- Apply Consume Mana and Scarlet Delirium
-        -- TODO: dmg = (dmg + consumeManaBonus(attacker)) * scarletDeliriumBonus(attacker)
-        dmg = dmg * scarletDeliriumBonus(attacker)
 
         -- Factor in "all hits" bonus damage mods
         local bonusdmg = attacker:getMod(xi.mod.ALL_WSDMG_ALL_HITS) -- For any WS

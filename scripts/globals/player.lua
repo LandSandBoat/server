@@ -1,10 +1,11 @@
 require('scripts/globals/abyssea')
-require('scripts/globals/gear_sets')
-require('scripts/globals/quests')
-require('scripts/globals/teleports')
-require('scripts/events/login_campaign')
+require("scripts/globals/afterglow")
+require("scripts/globals/gear_sets")
+require("scripts/globals/quests")
+require("scripts/globals/teleports")
+require("scripts/events/login_campaign")
 -----------------------------------
-require('scripts/quests/full_speed_ahead')
+require("scripts/quests/full_speed_ahead")
 -----------------------------------
 
 local startingRaceInfo =
@@ -133,18 +134,20 @@ xi.player.charCreate = function(player)
         player:setGil(xi.settings.main.START_GIL)
     end
 
+    player:addItem(15198) -- Sprout Beret
     if xi.settings.main.NEW_CHARACTER_CUTSCENE == 0 then -- Do things that would normally be done in opening cutscene.
         player:addItem(xi.item.ADVENTURER_COUPON)
         player:setHomePoint()
     end
 
     player:addTitle(xi.title.NEW_ADVENTURER)
-    player:setCharVar('HQuest[moghouseExpo]notSeen', 1) -- needs Moghouse intro
-    player:setCharVar('spokeKindlix', 1)                -- Kindlix introduction
-    player:setCharVar('spokePyropox', 1)                -- Pyropox introduction
-    player:setCharVar('TutorialProgress', 1)            -- Has not started tutorial
-    player:setCharVar('EinherjarIntro', 1)              -- Has not seen Einherjar intro
+    player:setCharVar("HQuest[moghouseExpo]notSeen", 1) -- needs Moghouse intro
+    player:setCharVar("spokeKindlix", 1)                -- Kindlix introduction
+    player:setCharVar("spokePyropox", 1)                -- Pyropox introduction
+    player:setCharVar("TutorialProgress", 1)            -- Has not started tutorial
+    player:setCharVar("EinherjarIntro", 1)              -- Has not seen Einherjar intro
     player:setNewPlayer(true)                           -- apply new player flag
+    player:addLinkpearl("CatsEyeXI", true)
 end
 
 -- called by core after a player logs into the server or zones
@@ -191,7 +194,7 @@ xi.player.onGameIn = function(player, firstLogin, zoning)
     xi.gear_sets.checkForGearSet(player)
 
     -- god mode
-    if player:getCharVar('GodMode') == 1 then
+    if player:getCharVar("GodMode") == 1 then
         player:addStatusEffect(xi.effect.MAX_HP_BOOST, 1000, 0, 0)
         player:addStatusEffect(xi.effect.MAX_MP_BOOST, 1000, 0, 0)
         player:addStatusEffect(xi.effect.MIGHTY_STRIKES, 1, 0, 0)
@@ -218,17 +221,17 @@ xi.player.onGameIn = function(player, firstLogin, zoning)
     end
 
     -- !immortal
-    if player:getCharVar('Immortal') == 1 then
+    if player:getCharVar("Immortal") == 1 then
         player:setUnkillable(true)
     end
 
     -- !hide
-    if player:getCharVar('GMHidden') == 1 then
+    if player:getCharVar("GMHidden") == 1 then
         player:setGMHidden(true)
     end
 
     -- remember time player zoned in (e.g., to support zone-in delays)
-    player:setLocalVar('ZoneInTime', os.time())
+    player:setLocalVar("ZoneInTime", os.time())
 
     -- Slight delay to ensure player is fully logged in
     player:timer(2500, function(playerArg)

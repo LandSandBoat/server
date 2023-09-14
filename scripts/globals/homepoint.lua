@@ -3,6 +3,16 @@ require('scripts/globals/teleports')
 xi = xi or {}
 xi.homepoint = xi.homepoint or {}
 
+local noHealZones =
+{
+    xi.zone.ALTAIEU,
+    xi.zone.GRAND_PALACE_OF_HUXZOI,
+    xi.zone.THE_GARDEN_OF_RUHMET,
+    xi.zone.EMPYREAL_PARADOX,
+    xi.zone.TEMENOS,
+    xi.zone.APOLLYON
+}
+
 local homepointData =
 {
     -- [Index]= [1]group(if to/from both same group, then no cost) [2]fee multiplier [3]dest { x, y, z, rot, zone }
@@ -42,7 +52,7 @@ local homepointData =
     [ 33] = { group = 4, fee = 1, dest = {       32,      -1,     -44,   0, xi.zone.UPPER_JEUNO            } }, -- Upper Jeuno #2
     [ 34] = { group = 4, fee = 1, dest = {      -52,       1,      16,   0, xi.zone.UPPER_JEUNO            } }, -- Upper Jeuno #3
     [ 35] = { group = 4, fee = 1, dest = {      -99,       0,    -183,   0, xi.zone.LOWER_JEUNO            } }, -- Lower Jeuno #1
-    [ 36] = { group = 4, fee = 1, dest = {       18,      -1,      54,   0, xi.zone.LOWER_JEUNO            } }, -- Lower Jeuno #2
+    [ 36] = { group = 4, fee = 1, dest = {      8.4,      -8,    9.39,   0, xi.zone.LOWER_JEUNO            } }, -- Lower Jeuno #2
     [ 37] = { group = 4, fee = 1, dest = {       37,       0,       9,   0, xi.zone.PORT_JEUNO             } }, -- Port Jeuno #1
     [ 38] = { group = 4, fee = 1, dest = {     -155,      -1,      -4,   0, xi.zone.PORT_JEUNO             } }, -- Port Jeuno #2
     [ 39] = { group = 0, fee = 1, dest = {       78,     -13,     -94,   0, xi.zone.KAZHAM                 } }, -- Kazham #1
@@ -169,6 +179,20 @@ end
 
 -- Functions called by homepoint scripts.
 xi.homepoint.onTrigger = function(player, csid, index)
+    -- apparently people ar exploiting the healing homepoints so we implement a check to see
+    -- if they are in a "no heal zone" as defined in the table at the top of the file.
+    local currentZone = player:getZoneID()
+
+    for _, restrictedZone in ipairs(noHealZones) do
+        if currentZone == restrictedZone then
+            player:PrintToPlayer("NOTE: HP/MP refills are disabled in this area.")
+        else
+            player:addHP(player:getMaxHP())
+            player:addMP(player:getMaxMP())
+        end
+    end
+    -- end custom code
+
     if xi.settings.main.HOMEPOINT_TELEPORT ~= 1 then -- Settings.lua Homepoints disabled
         player:startEvent(csid, 0, 0, 0, 0, 0, player:getGil(), 4095, index)
         return

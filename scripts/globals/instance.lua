@@ -475,9 +475,9 @@ local function setInstanceLastTimeUpdateMessage(instance, players, remainingTime
     if message ~= 0 then
         for i, player in pairs(players) do
             if remainingTimeLimit >= 60 then
-                player:messageSpecial(text.TIME_REMAINING_MINUTES, message / 60)
+                player:messageSpecial(zones[player:getZoneID()].text.TIME_REMAINING_MINUTES, message / 60)
             else
-                player:messageSpecial(text.TIME_REMAINING_SECONDS, message)
+                player:messageSpecial(zones[player:getZoneID()].text.TIME_REMAINING_SECONDS, message)
             end
         end
 

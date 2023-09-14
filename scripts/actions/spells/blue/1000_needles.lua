@@ -47,7 +47,7 @@ spellObject.onSpellCast = function(caster, target, spell)
     if resist == 1 then
         local targets = spell:getTotalTargets()
         damage = damage / targets
-        damage = xi.spells.blue.applySpellDamage(caster, target, spell, damage, params)
+        damage = xi.spells.blue.applySpellDamage(caster, target, spell, damage, params, nil)
     else
         spell:setMsg(xi.msg.basic.MAGIC_RESIST)
     end

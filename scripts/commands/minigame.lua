@@ -6,27 +6,27 @@ local commandObj = {}
 
 commandObj.cmdprops =
 {
-    permission = 1,
-    parameters = ''
+    permission = 5,
+    parameters = ""
 }
 
 commandObj.onTrigger = function(player)
     local menu =
     {
-        title = 'Minigame Test Menu',
+        title = "Minigame Test Menu",
         options =
         {
             {
-                'Full Speed Ahead! (Normal)',
+                "Full Speed Ahead! (Normal)",
                 function(playerArg)
-                    playerArg:setCharVar('[QUEST]FullSpeedAhead', 1)
+                    playerArg:setCharVar("[QUEST]FullSpeedAhead", 1)
                     player:setPos(475, 8.8, -159, 128, xi.zone.BATALLIA_DOWNS)
                 end,
             },
             {
-                'Full Speed Ahead! (Easy)',
+                "Full Speed Ahead! (Easy)",
                 function(playerArg)
-                    playerArg:setCharVar('[QUEST]FullSpeedAhead', 2)
+                    playerArg:setCharVar("[QUEST]FullSpeedAhead", 2)
                     player:setPos(475, 8.8, -159, 128, xi.zone.BATALLIA_DOWNS)
                 end,
             },
