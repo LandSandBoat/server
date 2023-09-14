@@ -88,6 +88,11 @@ public:
     auto getExData() -> sol::table;            // NOTE: This is 0-indexed, to be in line with the underlying C++ data
     void setExData(sol::table const& newData); // NOTE: This is 0-indexed, to be in line with the underlying C++ data
 
+    bool operator==(const CLuaItem& other) const
+    {
+        return this->m_PLuaItem == other.m_PLuaItem;
+    }
+
     static void Register();
 };
 

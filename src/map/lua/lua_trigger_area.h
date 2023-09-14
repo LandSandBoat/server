@@ -46,6 +46,11 @@ public:
     int16  AddCount(int16 count);
     int16  DelCount(int16 count);
 
+    bool operator==(const CLuaTriggerArea& other) const
+    {
+        return this->m_PLuaTriggerArea == other.m_PLuaTriggerArea;
+    }
+
     static void Register();
 };
 
