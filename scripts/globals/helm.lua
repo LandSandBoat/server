@@ -982,7 +982,7 @@ local helmInfo =
                     {   30, 1256 }, -- Ice Ore
                     {   30, 1257 }, -- Wind Ore
                     {   30, 1258 }, -- Earth Ore
-                    {   30, 1258 }, -- Lightning Ore
+                    {   30, 1259 }, -- Lightning Ore
                     {   30, 1260 }, -- Water Ore
                     {   30, 1261 }, -- Light Ore
                     {   30, 1262 }, -- Dark Ore
@@ -1026,7 +1026,7 @@ local helmInfo =
                     {   30, 1256 }, -- Ice Ore
                     {   30, 1257 }, -- Wind Ore
                     {   30, 1258 }, -- Earth Ore
-                    {   30, 1258 }, -- Lightning Ore
+                    {   30, 1259 }, -- Lightning Ore
                     {   30, 1260 }, -- Water Ore
                     {   30, 1261 }, -- Light Ore
                     {   30, 1262 }, -- Dark Ore
@@ -1069,7 +1069,7 @@ local helmInfo =
                     {   30, 1256 }, -- Ice Ore
                     {   30, 1257 }, -- Wind Ore
                     {   30, 1258 }, -- Earth Ore
-                    {   30, 1258 }, -- Lightning Ore
+                    {   30, 1259 }, -- Lightning Ore
                     {   30, 1260 }, -- Water Ore
                     {   30, 1261 }, -- Light Ore
                     {   30, 1262 }, -- Dark Ore
@@ -1125,7 +1125,7 @@ local helmInfo =
                     {   30, 1256 }, -- Ice Ore
                     {   30, 1257 }, -- Wind Ore
                     {   30, 1258 }, -- Earth Ore
-                    {   30, 1258 }, -- Lightning Ore
+                    {   30, 1259 }, -- Lightning Ore
                     {   30, 1260 }, -- Water Ore
                     {   30, 1261 }, -- Light Ore
                     {   30, 1262 }, -- Dark Ore
@@ -1176,7 +1176,7 @@ local helmInfo =
                     {   30, 1256 }, -- Ice Ore
                     {   30, 1257 }, -- Wind Ore
                     {   30, 1258 }, -- Earth Ore
-                    {   30, 1258 }, -- Lightning Ore
+                    {   30, 1259 }, -- Lightning Ore
                     {   30, 1260 }, -- Water Ore
                     {   30, 1261 }, -- Light Ore
                     {   30, 1262 }, -- Dark Ore
@@ -1234,7 +1234,7 @@ local helmInfo =
                     {   30, 1256 }, -- Ice Ore
                     {   30, 1257 }, -- Wind Ore
                     {   30, 1258 }, -- Earth Ore
-                    {   30, 1258 }, -- Lightning Ore
+                    {   30, 1259 }, -- Lightning Ore
                     {   30, 1260 }, -- Water Ore
                     {   30, 1261 }, -- Light Ore
                     {   30, 1262 }, -- Dark Ore
@@ -1295,7 +1295,7 @@ local helmInfo =
                     {   30, 1256 }, -- Ice Ore
                     {   30, 1257 }, -- Wind Ore
                     {   30, 1258 }, -- Earth Ore
-                    {   30, 1258 }, -- Lightning Ore
+                    {   30, 1259 }, -- Lightning Ore
                     {   30, 1260 }, -- Water Ore
                     {   30, 1261 }, -- Light Ore
                     {   30, 1262 }, -- Dark Ore
@@ -1343,7 +1343,7 @@ local helmInfo =
                     {   30, 1256 }, -- Ice Ore
                     {   30, 1257 }, -- Wind Ore
                     {   30, 1258 }, -- Earth Ore
-                    {   30, 1258 }, -- Lightning Ore
+                    {   30, 1259 }, -- Lightning Ore
                     {   30, 1260 }, -- Water Ore
                     {   30, 1261 }, -- Light Ore
                     {   30, 1262 }, -- Dark Ore
@@ -1395,7 +1395,7 @@ local helmInfo =
                     {   30, 1256 }, -- Ice Ore
                     {   30, 1257 }, -- Wind Ore
                     {   30, 1258 }, -- Earth Ore
-                    {   30, 1258 }, -- Lightning Ore
+                    {   30, 1259 }, -- Lightning Ore
                     {   30, 1260 }, -- Water Ore
                     {   30, 1261 }, -- Light Ore
                     {   30, 1262 }, -- Dark Ore
@@ -1444,7 +1444,7 @@ local helmInfo =
                     {   30, 1256 }, -- Ice Ore
                     {   30, 1257 }, -- Wind Ore
                     {   30, 1258 }, -- Earth Ore
-                    {   30, 1258 }, -- Lightning Ore
+                    {   30, 1259 }, -- Lightning Ore
                     {   30, 1260 }, -- Water Ore
                     {   30, 1261 }, -- Light Ore
                     {   30, 1262 }, -- Dark Ore
