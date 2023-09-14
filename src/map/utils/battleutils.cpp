@@ -4051,7 +4051,7 @@ namespace battleutils
 
         uint16 elementOffset = static_cast<uint16>(DAMAGE_TYPE::ELEMENTAL) + static_cast<uint16>(appliedEle);
         PDefender->takeDamage(damage, PAttacker, ATTACK_TYPE::SPECIAL,
-                              appliedEle == ELEMENT_NONE ? DAMAGE_TYPE::NONE : static_cast<DAMAGE_TYPE>(elementOffset));
+                              appliedEle == ELEMENT_NONE ? DAMAGE_TYPE::NONE : static_cast<DAMAGE_TYPE>(elementOffset), true);
 
         battleutils::ClaimMob(PDefender, PAttacker);
         PDefender->updatemask |= UPDATE_STATUS;

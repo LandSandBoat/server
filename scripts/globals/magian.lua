@@ -441,10 +441,16 @@ xi.magian.magianEventUpdate = function(player, csid, option, npc)
             local trialData = xi.magian.trials[trialId]
 
             local progress        = getTrialProgress(player, trialId)
-            local tradeItem       = getRequiredTradeItem(trialId)
             local requiredElement = trialData.requiredElement and trialData.requiredElement or 0
+            local optParam        = 0
 
-            player:updateEvent(trialData.numRequired, 0, progress, 0, 0, tradeItem, requiredElement)
+            if trialData.tradeItem then
+                optParam = getRequiredTradeItem(trialId)
+            elseif trialData.minDamage then
+                optParam = trialData.minDamage
+            end
+
+            player:updateEvent(trialData.numRequired, 0, progress, 0, 0, optParam, requiredElement)
         end,
 
         -- Send information regarding the Reward Item
@@ -764,6 +770,10 @@ end
 
 local trialConditions =
 {
+    ['minDamage'] = function(trialData, player, mob, paramTable)
+        return not trialData.minDamage or paramTable.weaponskillDamage >= trialData.minDamage
+    end,
+
     ['mobEcosystem'] = function(trialData, player, mob, paramTable)
         return not trialData.mobEcosystem or mob:getEcosystem() == trialData.mobEcosystem
     end,
@@ -773,7 +783,9 @@ local trialConditions =
     end,
 
     ['useWeaponskill'] = function(trialData, player, mob, paramTable)
-        return not trialData.useWeaponskill or paramTable.weaponskillUsed == trialData.useWeaponskill
+        local weaponskillTable = type(trialData.useWeaponskill) == 'table' and trialData.useWeaponskill or set{ trialData.useWeaponskill }
+
+        return not trialData.useWeaponskill or weaponskillTable[paramTable.weaponskillUsed]
     end,
 
     ['zoneId'] = function(trialData, player, mob, paramTable)
@@ -834,9 +846,9 @@ xi.magian.onItemEquip = function(player, itemObj)
         end)
 
     elseif trialData.useWeaponskill then
-        player:addListener('WEAPONSKILL_USE', 'TRIAL_' .. itemTrialId, function(playerObj, mobObj, weaponskillId, tpSpent, action)
+        player:addListener('WEAPONSKILL_USE', 'TRIAL_' .. itemTrialId, function(playerObj, mobObj, weaponskillId, tpSpent, action, damage)
             if not playerObj:isDead() and playerObj:checkKillCredit(mobObj) then
-                if checkConditions(trialData, playerObj, mobObj, { weaponskillUsed = weaponskillId }) then
+                if checkConditions(trialData, playerObj, mobObj, { weaponskillUsed = weaponskillId, weaponskillDamage = damage }) then
                     progressPlayerTrial(playerObj, itemTrialId, 1)
                 end
             end
