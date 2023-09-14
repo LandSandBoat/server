@@ -4291,7 +4291,7 @@ namespace battleutils
 
         // angle and distance between mob and TA user
         uint8                                         angleTAmob = worldAngle(PMob->loc.p, taUser->loc.p);
-        auto                                          distTAmob  = distanceSquared(taUser->loc.p, PMob->loc.p);
+        auto                                          distTAmob  = distance(taUser->loc.p, PMob->loc.p);
         std::vector<std::pair<float, CBattleEntity*>> taTargetList;
 
         if (taUser->PParty != nullptr)
@@ -4311,9 +4311,9 @@ namespace battleutils
             {
                 for (auto&& member : party->members)
                 {
-                    float distTAtarget = distanceSquared(member->loc.p, PMob->loc.p);
+                    float distTAtarget = distance(member->loc.p, PMob->loc.p);
                     // require closer target not be closer than .5 yalms (.5*.5=.25 distsquared) to mob
-                    if (distTAtarget >= worldAngleMinDistanceSquared && distTAtarget < distTAmob)
+                    if (distTAtarget >= worldAngleMinDistance && distTAtarget < distTAmob)
                     {
                         taTargetList.emplace_back(distTAtarget, member);
                     }
@@ -4322,9 +4322,9 @@ namespace battleutils
                     {
                         for (auto* PTrust : PChar->PTrusts)
                         {
-                            float distTAtarget = distanceSquared(PTrust->loc.p, PMob->loc.p);
+                            float distTAtarget = distance(PTrust->loc.p, PMob->loc.p);
                             // require closer target not be closer than .5 yalms (.5*.5=.25 distsquared) to mob
-                            if (distTAtarget >= worldAngleMinDistanceSquared && distTAtarget < distTAmob)
+                            if (distTAtarget >= worldAngleMinDistance && distTAtarget < distTAmob)
                             {
                                 taTargetList.emplace_back(distTAtarget, PTrust);
                             }
@@ -4342,9 +4342,9 @@ namespace battleutils
             {
                 if (auto* fellow = dynamic_cast<CBattleEntity*>(PChar->PFellow))
                 {
-                    float distTAtarget = distanceSquared(fellow->loc.p, PMob->loc.p);
+                    float distTAtarget = distance(fellow->loc.p, PMob->loc.p);
                     // require closer target not be closer than .5 yalms (.5*.5=.25 distsquared) to mob
-                    if (distTAtarget >= worldAngleMinDistanceSquared && distTAtarget < distTAmob)
+                    if (distTAtarget >= worldAngleMinDistance && distTAtarget < distTAmob)
                     {
                         taTargetList.emplace_back(distTAtarget, fellow);
                     }
@@ -6960,12 +6960,12 @@ namespace battleutils
             {
                 // using same variable names as trick attack function, for consistent understanding
                 uint8 angleTAmob = worldAngle(PMob->loc.p, PCoverAbilityUser->loc.p);
-                float distTAmob  = distanceSquared(PCoverAbilityUser->loc.p, PMob->loc.p);
+                float distTAmob  = distance(PCoverAbilityUser->loc.p, PMob->loc.p);
 
                 // check if cover user is within melee range and that cover target is in-line behind
-                if (distTAmob <= static_cast<float>(PMob->GetMeleeRange() * PMob->GetMeleeRange()) && // make sure cover user is within melee range
-                    distTAmob >= worldAngleMinDistanceSquared &&                                      // require closer target not be closer than .5 yalms (.5*.5=.25 distsquared) to mob
-                    distTAmob < distanceSquared(PCoverAbilityTarget->loc.p, PMob->loc.p) &&           // make sure cover user is closer to the mob than cover target
+                if (distTAmob <= static_cast<float>(PMob->GetMeleeRange()) &&        // make sure cover user is within melee range
+                    distTAmob >= worldAngleMinDistance &&                            // require closer target not be closer than .5 yalms (.5*.5=.25 distsquared) to mob
+                    distTAmob < distance(PCoverAbilityTarget->loc.p, PMob->loc.p) && // make sure cover user is closer to the mob than cover target
                     areInLine(angleTAmob, PMob, PCoverAbilityTarget))
                 {
                     return PCoverAbilityUser;
