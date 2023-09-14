@@ -4263,7 +4263,7 @@ namespace battleutils
         int16 angleDiff = angleDifference(firstEntityWorldAngle, worldAngle(anchorMob->loc.p, otherEntity->loc.p));
 
         // Useful for debugging if trick attack/cover aren't reliably calculating eligability, but chatty otherwise
-        //ShowDebug("InLine check angleDiff: %d\n", angleDiff);
+        // ShowDebug("InLine check angleDiff: %d\n", angleDiff);
 
         return std::abs(angleDiff) <= 4;
     }
@@ -4304,7 +4304,7 @@ namespace battleutils
             {
                 for (auto&& member : party->members)
                 {
-                    float          distTAtarget = distanceSquared(member->loc.p, PMob->loc.p);
+                    float distTAtarget = distanceSquared(member->loc.p, PMob->loc.p);
                     // require closer target not be closer than .5 yalms (.5*.5=.25 distsquared) to mob
                     if (distTAtarget > 0.25f && distTAtarget < distTAmob)
                     {
