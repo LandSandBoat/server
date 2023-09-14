@@ -7,3 +7,6 @@
 [submodule "modules/contrib"]
 	path = modules/contrib
 	url = https://github.com/CatsAndBoats/contrib
+[submodule "navmeshes"]
+	path = navmeshes
+	url = https://github.com/CatsAndBoats/xiNavmeshes
