@@ -63,6 +63,11 @@ public:
     uint32 getCastTime();
     uint32 getPrimaryTargetID();
 
+    bool operator==(const CLuaSpell& other) const
+    {
+        return this->m_PLuaSpell == other.m_PLuaSpell;
+    }
+
     static void Register();
 };
 

@@ -53,6 +53,11 @@ public:
     uint16 getMsg();
     uint16 getTotalTargets();
 
+    bool operator==(const CLuaPetSkill& other) const
+    {
+        return this->m_PLuaPetSkill == other.m_PLuaPetSkill;
+    }
+
     static void Register();
 };
 

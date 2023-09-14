@@ -60,6 +60,11 @@ public:
     void   addEffectMessage(uint32 actionTargetID, uint16 addEffectMessage);
     bool   addAdditionalTarget(uint32 actionTargetID);
 
+    bool operator==(const CLuaAction& other) const
+    {
+        return this->m_PLuaAction == other.m_PLuaAction;
+    }
+
     static void Register();
 };
 
