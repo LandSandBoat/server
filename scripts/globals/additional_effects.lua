@@ -510,9 +510,10 @@ xi.additionalEffect.attack = function(attacker, defender, baseAttackDamage, item
         for _, member in pairs(attacker:getParty()) do
             if
                 member:getPet() ~= nil and
-                member:getPetID() == option
+                member:getPet():getPetID() == option
             then
                 flag = true
+                break
             end
         end
 
