@@ -187,6 +187,7 @@ namespace battleutils
     CItemEquipment* GetEntityArmor(CBattleEntity* PEntity, SLOTTYPE Slot);
 
     void           MakeEntityStandUp(CBattleEntity* PEntity);
+    inline bool    areInLine(uint8 firstPlayerWA, CBattleEntity* insidePlayer, CBattleEntity* outidePlayer);
     CBattleEntity* getAvailableTrickAttackChar(CBattleEntity* taUser, CBattleEntity* PMob);
 
     bool HasNinjaTool(CBattleEntity* PEntity, CSpell* PSpell, bool ConsumeTool);
