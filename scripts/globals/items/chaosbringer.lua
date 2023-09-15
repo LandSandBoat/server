@@ -9,17 +9,16 @@ itemObject.onItemDrop = function(player, item)
 end
 
 itemObject.onItemEquip = function(player, item)
-    player:addListener("ENGAGE", "CHAOSBRINGER_KILLS", function(playerArg, mob)
-        if mob:getLocalVar("listenerApplied") == 0 then
-            mob:addListener("TAKE_DAMAGE", "VALID_KILL", function(mobArg, amount, attacker, attackType, damageType)
-                mobArg:setLocalVar("listenerApplied", 1)
+    player:addListener("ATTACK", "CHAOSBRINGER_KILLS", function(playerAttkListener, mobAttkListener)
+        if mobAttkListener:getLocalVar("CBListenerApplied") == 0 then
+            mobAttkListener:addListener("ATTACKED", "VALID_KILL", function(mobAttkedListener, playerAttkedListener, action)
+                mobAttkedListener:setLocalVar("CBListenerApplied", 1)
                 if
-                    attacker:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.BLADE_OF_DARKNESS) >= QUEST_ACCEPTED and
-                    attacker:getEquipID(xi.slot.MAIN) == xi.items.CHAOSBRINGER and
-                    attackType == xi.attackType.PHYSICAL and
-                    amount > mobArg:getHP()
+                    playerAttkedListener:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.BLADE_OF_DARKNESS) >= QUEST_ACCEPTED and
+                    playerAttkedListener:getEquipID(xi.slot.MAIN) == xi.items.CHAOSBRINGER and
+                    mobAttkedListener:getHP() == 0
                 then
-                    attacker:incrementCharVar("ChaosbringerKills", 1)
+                    playerAttkedListener:incrementCharVar("ChaosbringerKills", 1)
                 end
             end)
         end

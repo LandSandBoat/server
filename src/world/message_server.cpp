@@ -24,6 +24,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include <queue>
 #include <set>
 
+#include "besieged_system.h"
 #include "common/logging.h"
 #include "conquest_system.h"
 #include "message_server.h"
@@ -56,6 +57,20 @@ namespace
     std::vector<uint64>                                                   mapEndpoints;
     std::vector<uint64>                                                   yellMapEndpoints;
 } // namespace
+
+void queue_data(uint64 ipp, MSGSERVTYPE type, const uint8* data, std::size_t size)
+{
+    zmq::message_t dataMsg = zmq::message_t(size);
+    memcpy(dataMsg.data(), data, size);
+    queue_message(ipp, MSG_WORLD2MAP_REGIONAL_EVENT, &dataMsg);
+}
+
+void queue_data_broadcast(MSGSERVTYPE type, const uint8* data, std::size_t size)
+{
+    zmq::message_t dataMsg = zmq::message_t(size);
+    memcpy(dataMsg.data(), data, size);
+    queue_message_broadcast(MSG_WORLD2MAP_REGIONAL_EVENT, &dataMsg);
+}
 
 void queue_message(uint64 ipp, MSGSERVTYPE type, zmq::message_t* extra, zmq::message_t* packet)
 {
@@ -153,6 +168,16 @@ void message_server_parse(MSGSERVTYPE type, zmq::message_t* extra, zmq::message_
             ret            = sql->Query(query, partyid, partyid);
             break;
         }
+        case MSG_ALLIANCE_DISSOLVE:
+        {
+            const char* query = "SELECT server_addr, server_port, MIN(charid) FROM accounts_sessions JOIN accounts_parties USING (charid) "
+                                "WHERE allianceid = %d "
+                                "GROUP BY server_addr, server_port;";
+
+            uint32 allianceid = ref<uint32>((uint8*)extra->data(), 0);
+            ret               = sql->Query(query, allianceid);
+            break;
+        }
         case MSG_CHAT_LINKSHELL:
         {
             const char* query = "SELECT server_addr, server_port FROM accounts_sessions "
@@ -227,7 +252,7 @@ void message_server_parse(MSGSERVTYPE type, zmq::message_t* extra, zmq::message_
             try
             {
                 auto& handler = regionalMsgHandlers.at((REGIONALMSGTYPE)subType);
-                handler->handleMessage(bytes, from_ip, from_port);
+                handler->handleMessage(std::move(bytes), from_ip, from_port);
             }
             catch (const std::out_of_range& e)
             {
@@ -354,6 +379,7 @@ void message_server_init(const bool& requestExit)
 
     // Handler map registrations
     regionalMsgHandlers[REGIONALMSGTYPE::REGIONAL_EVT_MSG_CONQUEST] = std::make_shared<ConquestSystem>();
+    regionalMsgHandlers[REGIONALMSGTYPE::REGIONAL_EVT_MSG_BESIEGED] = std::make_shared<BesiegedSystem>();
 
     // Populate zoneSettingsCache with sql data
     cache_zone_settings();

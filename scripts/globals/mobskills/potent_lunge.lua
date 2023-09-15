@@ -12,7 +12,11 @@ require("scripts/globals/mobskills")
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
-    if mob:getAnimationSub() == 0 and mob:getMainJob() ~= xi.job.MNK and mob:getMainJob() ~= xi.job.PUP then
+    if
+        mob:getAnimationSub() == 0 and
+        mob:getMainJob() ~= xi.job.MNK and
+        mob:getMainJob() ~= xi.job.PUP
+    then
         return 0
     else
         return 1

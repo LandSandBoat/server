@@ -31,6 +31,8 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include <zmq.hpp>
 #include <zmq_addon.hpp>
 
+void queue_data(uint64 ipp, MSGSERVTYPE type, const uint8* data, std::size_t size);
+void queue_data_broadcast(MSGSERVTYPE type, const uint8* data, std::size_t size);
 void queue_message(uint64 ipp, MSGSERVTYPE type, zmq::message_t* extra, zmq::message_t* packet = nullptr);
 void queue_message_broadcast(MSGSERVTYPE type, zmq::message_t* extra, zmq::message_t* packet = nullptr);
 

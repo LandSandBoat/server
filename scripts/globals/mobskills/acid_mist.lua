@@ -11,11 +11,9 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    local power = 0
-    if mob:getName() == "Nightmare Leech" then
+    local power = 50
+    if skill:getID() == 1872 then -- Nightmare Leech - Reduces to 1 attack
         power = 999
-    else
-        power = 50
     end
 
     xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.ATTACK_DOWN, power, 0, math.random(60, 120))

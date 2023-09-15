@@ -15,14 +15,22 @@ end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local duration = 180
+    local power = 50
+
+    if skill:getID() == 1886 then -- Nightmare Worm - 90%
+        power = 90
+    end
 
     if mob:getMainLvl() < 10 then
         duration = duration / 2
     end
 
-    skill:setMsg(xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.ATTACK_DOWN, 50, 0, duration))
+    local info = xi.mobskills.mobMagicalMove(mob, target, skill, mob:getMobWeaponDmg(xi.slot.MAIN), xi.magic.ele.WATER, 1, xi.mobskills.magicalTpBonus.NO_EFFECT, 0, 0, 2, 2.5, 3)
+    local dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.WATER, xi.mobskills.shadowBehavior.IGNORE_SHADOWS)
+    target:takeDamage(dmg, mob, xi.attackType.MAGICAL, xi.damageType.WATER)
+    xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.ATTACK_DOWN, power, 0, duration)
 
-    return xi.effect.ATTACK_DOWN
+    return dmg
 end
 
 return mobskillObject

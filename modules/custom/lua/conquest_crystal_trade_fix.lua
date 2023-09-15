@@ -37,16 +37,28 @@ local crystals =
 
 local expRings =
 {
-    [15761] = {cp=350, charges=7},
-    [15762] = {cp=700, charges=7},
-    [15763] = {cp=600, charges=3},
+    [15761] =
+    {
+        cp = 350,
+        charges = 7
+    },
+    [15762] =
+    {
+        cp = 700,
+        charges = 7
+    },
+    [15763] =
+    {
+        cp = 600,
+        harges = 3
+    },
 }
 
 m:addOverride("xi.conquest.overseerOnTrade", function(player, npc, trade, guardNation, guardType)
     -- Garrison Trade
-    if 
-        guardType == xi.conq.guard.OUTPOST and 
-        (trade:getItemId() >= 1528 and trade:getItemId() <= 1543) 
+    if
+        guardType == xi.conq.guard.OUTPOST and
+        (trade:getItemId() >= 1528 and trade:getItemId() <= 1543)
     then
         xi.garrison.onTrade(player, npc, trade, guardNation)
     end
@@ -82,20 +94,28 @@ m:addOverride("xi.conquest.overseerOnTrade", function(player, npc, trade, guardN
             if addPoints > 0 and pRank ~= 1 and pRankPoints < 4000 then
                 if pRankPoints + addPoints >= 4000 then
                     player:setRankPoints(4000)
-                    player:addCP((pRankPoints + (addPoints) - 4000)/14)
+                    player:addCP((pRankPoints + (addPoints) - 4000) / 14)
                     player:showText(npc, mOffset + 44) -- "Your rank points are full. We've added the excess to your conquest points."
                 else
                     player:addRankPoints(addPoints)
                     player:showText(npc, mOffset + 45) -- "We've awarded you rank points for the crystals you've donated."
                 end
+
                 player:confirmTrade()
                 tradeConfirmed = true
             end
         end
 
         -- RECHARGE EXP RING
-        if not tradeConfirmed and expRings[item] and npcUtil.tradeHas(trade, item) then
-            if xi.settings.BYPASS_EXP_RING_ONE_PER_WEEK == 1 or player:getCharVar("CONQUEST_RING_RECHARGE") < os.time() then
+        if
+            not tradeConfirmed and
+            expRings[item] and
+            npcUtil.tradeHas(trade, item)
+        then
+            if
+                xi.settings.BYPASS_EXP_RING_ONE_PER_WEEK == 1 or
+                player:getCharVar("CONQUEST_RING_RECHARGE") < os.time()
+            then
                 local ring = expRings[item]
 
                 if player:getCP() >= ring.cp then

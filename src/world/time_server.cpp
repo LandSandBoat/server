@@ -62,6 +62,7 @@ int32 time_server(time_point tick, CTaskMgr::CTask* PTask)
         if (tick > (lastVHourlyUpdate + 4800ms))
         {
             worldServer->conquestSystem->updateVanaHourlyConquest();
+            worldServer->besiegedSystem->updateVanaHourlyBesieged();
             lastVHourlyUpdate = tick;
         }
     }

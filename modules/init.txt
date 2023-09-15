@@ -17,16 +17,16 @@
 #
 # init.txt:
 # ---------------------
-# | 
+# |
 # | renamer
-# | 
+# |
 # ---------------------
 #
 # Will load everything under the renamer folder.
 #
 # init.txt:
 # ---------------------
-# | 
+# |
 # | custom/cpp/custom_module.cpp
 # | custom/lua/claim_shield.lua
 # |
@@ -67,6 +67,6 @@ era/sql_dynamis/
 #-----------------------
 renamer
 #-----------------------
-#		Custom
+#       Custom
 #-----------------------
 #custom/sql/starlight_celebrations.sql
