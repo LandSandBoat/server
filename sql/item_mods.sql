@@ -284,7 +284,8 @@ INSERT INTO `item_mods` VALUES (10292,30,10);  -- MACC: 10
 INSERT INTO `item_mods` VALUES (10292,114,18); -- ENFEEBLE: 18
 
 -- Chocobo Shirt
-INSERT INTO `item_mods` VALUES (10293,1,2); -- DEF: 2
+INSERT INTO `item_mods` VALUES (10293,1,2);   -- DEF: 2
+INSERT INTO `item_mods` VALUES (10293,156,1); -- APPRECIATE_GYSAHL_GREENS: 1
 
 -- Kokous Earring
 INSERT INTO `item_mods` VALUES (10295,8,4);  -- STR: 4

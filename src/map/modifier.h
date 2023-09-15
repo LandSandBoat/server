@@ -836,8 +836,10 @@ enum class Mod
     MYTHIC_OCC_ATT_TWICE  = 865, // Proc rate for "Occasionally attacks twice"
     MYTHIC_OCC_ATT_THRICE = 866, // Proc rate for "Occasionally attacks thrice"
 
-    EAT_RAW_FISH = 412, //
-    EAT_RAW_MEAT = 413, //
+    APPRECIATE_GYSAHL_GREENS = 156, // Enhances food effect of Gysahl Greens
+
+    EAT_RAW_FISH = 412, // Without this, only Mithra can eat raw fish.
+    EAT_RAW_MEAT = 413, // Without this, only Galka can eat raw meat.
 
     ENHANCES_CURSNA_RCVD     = 67,   // Potency of "Cursna" effects received
     ENHANCES_CURSNA          = 310,  // Used by gear with the "Enhances Cursna" or "Cursna+" attribute
@@ -980,7 +982,7 @@ enum class Mod
     // SPARE IDs:
     // 75 to 79
     // 138 to 143
-    // 156 to 159
+    // 157 to 159
     // 217 to 223
     // 271 to 280
     //
