@@ -42,6 +42,7 @@ jobs:
       uses: Ana06/get-changed-files@v2.2.0
       with:
         filter: |
+          modules/**
           src/**
           scripts/**
           sql/**
@@ -220,7 +221,38 @@ jobs:
           xi_search
           xi_world
 
-  Linux_GCC11_64bit:
+  Linux_ClangTidy14_64bit:
+    needs: Sanity_Checks
+    runs-on: ubuntu-22.04
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        fetch-depth: 1
+    - name: Install Dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y software-properties-common cmake libmariadb-dev-compat libluajit-5.1-dev libzmq3-dev zlib1g-dev libssl-dev binutils-dev
+    #- name: Cache 'build' folder
+    #  uses: actions/cache@v3
+    #  with:
+    #    path: build
+    #    key: ${{ runner.os }}-clang
+    - name: Configure CMake
+      run: |
+        export CC=/usr/bin/clang-14
+        export CXX=/usr/bin/clang++-14
+        mkdir -p build
+        cmake -S . -B build -DENABLE_CLANG_TIDY=ON
+    - name: Build
+      run: |
+        touch clang-tidy.txt
+        cmake --build build -j4 >> clang-tidy.txt || true
+        cat clang-tidy.txt
+        if grep -q warning\|error clang-tidy.txt; then
+            exit 1
+        fi
+
+  Linux_GCC12_64bit:
     needs: Sanity_Checks
     runs-on: ubuntu-22.04
     steps:
@@ -238,8 +270,8 @@ jobs:
     #    key: ${{ runner.os }}-gcc
     - name: Configure CMake
       run: |
-        export CC=/usr/bin/gcc-11
-        export CXX=/usr/bin/g++-11
+        export CC=/usr/bin/gcc-12
+        export CXX=/usr/bin/g++-12
         mkdir -p build
         CFLAGS=-m64 CXXFLAGS=-m64 LDFLAGS=-m64 cmake -S . -B build
     - name: Build
@@ -412,13 +444,8 @@ jobs:
       run: |
         python3 << EOF
         with open("modules/init.txt", "w") as f:
-            f.write("era/lua\n")
-            f.write("era/cpp\n")
-            f.write("era/lua_dynamis/globals/era_dynamis.lua\n")
-            f.write("era/lua_dynamis/globals/era_dynamis_spawning.lua\n")
-            f.write("era/lua_dynamis/mobskills/era_pet_skills.lua\n")
-            f.write("era/lua_dynamis/mobskills/era_regain_skills.lua\n")
-            f.write("era/lua_dynamis/globals/era_dynamis_zones.lua\n")
+            f.write("custom\n")
+            f.write("era\n")
             f.write("renamer\n")
         EOF
     - name: Startup and character login checks

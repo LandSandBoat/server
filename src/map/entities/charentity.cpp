@@ -1846,6 +1846,7 @@ void CCharEntity::OnRangedAttack(CRangeState& state, action_t& action)
         }
         else // miss
         {
+            damage                  = 0;
             actionTarget.reaction   = REACTION::EVADE;
             actionTarget.speceffect = SPECEFFECT::NONE;
             actionTarget.messageID  = 354;

@@ -1060,12 +1060,12 @@ INSERT INTO `mob_skill_lists` VALUES ('Treant',245,328); -- drill_branch
 INSERT INTO `mob_skill_lists` VALUES ('Treant',245,329); -- pinecone_bomb
 INSERT INTO `mob_skill_lists` VALUES ('Treant',245,331); -- leafstorm
 INSERT INTO `mob_skill_lists` VALUES ('Treant',245,332); -- entangle
--- INSERT INTO `mob_skill_lists` VALUES ('Troll',246,1741);
--- INSERT INTO `mob_skill_lists` VALUES ('Troll',246,1742);
-INSERT INTO `mob_skill_lists` VALUES ('Troll',246,1743);
-INSERT INTO `mob_skill_lists` VALUES ('Troll',246,1744);
-INSERT INTO `mob_skill_lists` VALUES ('Troll',246,1745);
-INSERT INTO `mob_skill_lists` VALUES ('Troll',246,1746);
+INSERT INTO `mob_skill_lists` VALUES ('Troll',246,1741); -- Potent Lunge
+INSERT INTO `mob_skill_lists` VALUES ('Troll',246,1742); -- Overthrow
+INSERT INTO `mob_skill_lists` VALUES ('Troll',246,1743); -- Rock Smash
+INSERT INTO `mob_skill_lists` VALUES ('Troll',246,1744); -- Diamondhide
+INSERT INTO `mob_skill_lists` VALUES ('Troll',246,1745); -- Enervation
+INSERT INTO `mob_skill_lists` VALUES ('Troll',246,1746); -- Quake Stomp
 -- INSERT INTO `mob_skill_lists` VALUES ('Troll',246,1748);
 -- INSERT INTO `mob_skill_lists` VALUES ('Troll',246,1749);
 -- 247: Tube
@@ -3997,9 +3997,7 @@ INSERT INTO `mob_skill_lists` VALUES ('JailerOfTemperance',4047,1467);
 INSERT INTO `mob_skill_lists` VALUES ('JailerOfTemperance',4047,1468);
 INSERT INTO `mob_skill_lists` VALUES ('JailerOfTemperance',4047,1469);
 
--- Dynamis - Tavnazia
-INSERT INTO `mob_skill_lists` VALUES ('Nightmare_worm',4048,427);
-INSERT INTO `mob_skill_lists` VALUES ('Nightmare_worm',4048,429);
+-- 4048 Available
 
 INSERT INTO `mob_skill_lists` VALUES ('Shooting_Fish',4049,313); -- knockback splashbreath
 INSERT INTO `mob_skill_lists` VALUES ('Cogitator',4050,1242); -- empty cutter
@@ -4080,6 +4078,63 @@ INSERT INTO `mob_skill_lists` VALUES ('Furies',4073,395); -- jetstream
 INSERT INTO `mob_skill_lists` VALUES ('Furies',4073,393); -- sonic_boom
 INSERT INTO `mob_skill_lists` VALUES ('Furies',4073,1157); -- slipstream
 INSERT INTO `mob_skill_lists` VALUES ('Furies',4073,1158); -- turbulence
+
+-- Dynamis - Tavnazia
+INSERT INTO `mob_skill_lists` VALUES ('Nightmare_Antlion',4074,1841); -- Sand Blast (Blind and Silence)
+INSERT INTO `mob_skill_lists` VALUES ('Nightmare_Antlion',4074,1842); -- Sand Pit
+INSERT INTO `mob_skill_lists` VALUES ('Nightmare_Antlion',4074,1843); -- Venom Spray (50/tick)
+INSERT INTO `mob_skill_lists` VALUES ('Nightmare_Antlion',4074,1844); -- Pit Ambush (large dmg)
+INSERT INTO `mob_skill_lists` VALUES ('Nightmare_Antlion',4074,1845); -- Mandibular Bite (Conal)
+
+INSERT INTO `mob_skill_lists` VALUES ('Nightmare_Hornet',4075,1846); -- Sharp Sting
+INSERT INTO `mob_skill_lists` VALUES ('Nightmare_Hornet',4075,1847); -- Frenzy Pollen
+INSERT INTO `mob_skill_lists` VALUES ('Nightmare_Hornet',4075,1848); -- Final Sting
+
+INSERT INTO `mob_skill_lists` VALUES ('Nightmare_Cluster',4076,1849); -- Sling Bomb
+INSERT INTO `mob_skill_lists` VALUES ('Nightmare_Cluster',4076,1850); -- Formation Attack
+INSERT INTO `mob_skill_lists` VALUES ('Nightmare_Cluster',4076,1851); -- Refueling
+INSERT INTO `mob_skill_lists` VALUES ('Nightmare_Cluster',4076,1852); -- Circle of Flame
+INSERT INTO `mob_skill_lists` VALUES ('Nightmare_Cluster',4076,1853); -- Self Destruct 3
+INSERT INTO `mob_skill_lists` VALUES ('Nightmare_Cluster',4076,1855); -- Self Destruct 2
+INSERT INTO `mob_skill_lists` VALUES ('Nightmare_Cluster',4076,1857); -- Self Destruct 1
+
+INSERT INTO `mob_skill_lists` VALUES ('Nightmare_Bugard',4077,1858); -- Tail Roll
+INSERT INTO `mob_skill_lists` VALUES ('Nightmare_Bugard',4077,1859); -- Tusk (large knockback)
+INSERT INTO `mob_skill_lists` VALUES ('Nightmare_Bugard',4077,1860); -- Scutum (2x defense boost)
+INSERT INTO `mob_skill_lists` VALUES ('Nightmare_Bugard',4077,1861); -- Bone Crunch 
+INSERT INTO `mob_skill_lists` VALUES ('Nightmare_Bugard',4077,1862); -- Awful Eye (Petrify)
+INSERT INTO `mob_skill_lists` VALUES ('Nightmare_Bugard',4077,1863); -- Heavy Bellow (AOE)
+
+INSERT INTO `mob_skill_lists` VALUES ('Nightmare_Makara',4078,1864); -- Intimidate (stronger slow)
+INSERT INTO `mob_skill_lists` VALUES ('Nightmare_Makara',4078,1865); -- Aquaball
+INSERT INTO `mob_skill_lists` VALUES ('Nightmare_Makara',4078,1866); -- Splash Breath
+INSERT INTO `mob_skill_lists` VALUES ('Nightmare_Makara',4078,1867); -- Screwdriver
+INSERT INTO `mob_skill_lists` VALUES ('Nightmare_Makara',4078,1868); -- Water Wall (3x defense)
+INSERT INTO `mob_skill_lists` VALUES ('Nightmare_Makara',4078,1869); -- Water Shield (+50 eva)
+INSERT INTO `mob_skill_lists` VALUES ('Nightmare_Makara',4078,1870); -- Recoil Dive
+
+INSERT INTO `mob_skill_lists` VALUES ('Nightmare_Leech',4079,1871); -- Suction
+INSERT INTO `mob_skill_lists` VALUES ('Nightmare_Leech',4079,1872); -- Acid Mist (Severe Atk Down)
+INSERT INTO `mob_skill_lists` VALUES ('Nightmare_Leech',4079,1873); -- Sand Breath (-80 acc)
+INSERT INTO `mob_skill_lists` VALUES ('Nightmare_Leech',4079,1874); -- Drainkiss
+INSERT INTO `mob_skill_lists` VALUES ('Nightmare_Leech',4079,1875); -- Regeneration (20/tick)
+INSERT INTO `mob_skill_lists` VALUES ('Nightmare_Leech',4079,1876); -- TP Drainkiss
+INSERT INTO `mob_skill_lists` VALUES ('Nightmare_Leech',4079,1877); -- MP Drainkiss
+INSERT INTO `mob_skill_lists` VALUES ('Nightmare_Leech',4079,1878); -- Brain Drain (Conal)
+
+INSERT INTO `mob_skill_lists` VALUES ('Nightmare_Tarus',4080,1879); -- Triclip
+INSERT INTO `mob_skill_lists` VALUES ('Nightmare_Tarus',4080,1880); -- Back Swish (Larger knock back)
+INSERT INTO `mob_skill_lists` VALUES ('Nightmare_Tarus',4080,1881); -- Mow
+INSERT INTO `mob_skill_lists` VALUES ('Nightmare_Tarus',4080,1882); -- Fightful Roar
+INSERT INTO `mob_skill_lists` VALUES ('Nightmare_Tarus',4080,1883); -- Mortal Ray
+INSERT INTO `mob_skill_lists` VALUES ('Nightmare_Tarus',4080,1884); -- Unblessed Armor
+
+INSERT INTO `mob_skill_lists` VALUES ('Nightmare_Worm',4081,1885); -- Full-Force Blow (Larger knock back)
+INSERT INTO `mob_skill_lists` VALUES ('Nightmare_Worm',4081,1886); -- Gastric Bomb (Very large attack down)
+INSERT INTO `mob_skill_lists` VALUES ('Nightmare_Worm',4081,1887); -- Sandspin (-200 acc)
+INSERT INTO `mob_skill_lists` VALUES ('Nightmare_Worm',4081,1888); -- Tremors (Larger dmg)
+INSERT INTO `mob_skill_lists` VALUES ('Nightmare_Worm',4081,1889); -- Spirit Vacuum
+INSERT INTO `mob_skill_lists` VALUES ('Nightmare_Worm',4081,1890); -- Sound Vacuum
 -- End of AirSkyBoat section
 
 -- ------------------------------------------------------------

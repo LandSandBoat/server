@@ -59,6 +59,9 @@ UPDATE mob_groups set minLevel = 24, maxLevel = 38 WHERE name = "Water_Elemental
 -- Bibiki_Bay (Zone 4)
 -- ------------------------------------------------------------
 
+UPDATE mob_groups SET content_tag='ABYSSEA' WHERE name='Camelopard' AND groupid='41' AND zoneid='4';
+UPDATE mob_groups SET content_tag='ABYSSEA' WHERE name='Bight_Rarab' AND groupid='40' AND zoneid='4';
+UPDATE mob_groups SET content_tag='ABYSSEA' WHERE name='Hypnos_Eft' AND groupid='44' AND zoneid='4';
 UPDATE mob_groups SET content_tag='WOTG' WHERE name='Shankha' AND groupid='17' AND zoneid='4';
 UPDATE mob_groups SET content_tag='WOTG' WHERE name='Splacknuck' AND groupid='37' AND zoneid='4';
 UPDATE mob_groups set maxLevel = 35 WHERE name = "Eft" and zoneid = 4;
@@ -91,6 +94,8 @@ UPDATE mob_groups SET content_tag='ROV' WHERE name='Locus_Fiddler_Crab' AND grou
 UPDATE mob_groups SET content_tag='WOTG' WHERE name='Magnotaur' AND groupid='39' AND zoneid='5';
 UPDATE mob_groups SET content_tag='SYNERGY' WHERE name='Skvader' AND groupid='11' AND zoneid='5';
 UPDATE mob_groups SET content_tag='SYNERGY' WHERE name='Frost_Flambeau' AND groupid='49' AND zoneid='5';
+UPDATE mob_groups SET content_tag='ABYSSEA' WHERE name='Scowlenkos' AND groupid='38' AND zoneid='5';
+
 UPDATE mob_groups set minLevel = 61 WHERE name = "Uleguerand_Tiger" and zoneid = 5;
 UPDATE mob_groups set maxLevel = 68 WHERE name = "Demons_Elemental" and zoneid = 5;
 UPDATE mob_groups set minLevel = 75, maxLevel = 77 WHERE name = "Dead_Demon" and zoneid = 5;
@@ -330,6 +335,7 @@ INSERT INTO `mob_groups` (`groupid`, `poolid`, `zoneid`, `name`, `respawntime`, 
 
 UPDATE mob_groups SET content_tag='WOTG' WHERE name='Goaftrap' AND groupid='9' AND zoneid='25';
 UPDATE mob_groups SET content_tag='WOTG' WHERE name='Okyupete' AND groupid='47' AND zoneid='25';
+UPDATE mob_groups SET content_tag='ABYSSEA' WHERE name='Seaboard_Vulture' AND groupid='26' AND zoneid='25';
 
 UPDATE mob_groups SET minLevel = 36, maxLevel = 38 WHERE name = "Fomor_Monk"        and zoneid = 25 and groupid = 10;
 UPDATE mob_groups SET minLevel = 36, maxLevel = 38 WHERE name = "Fomor_Samurai"     and zoneid = 25 and groupid = 11;
@@ -389,8 +395,17 @@ UPDATE mob_groups SET content_tag='ABYSSEA' WHERE name='Aqueduct_Spider' AND gro
 -- ------------------------------------------------------------
 -- Riverne-Site_B01 (Zone 29)
 -- ------------------------------------------------------------
+
+UPDATE mob_groups SET content_tag='ABYSSEA' WHERE name='Blazedrake' AND groupid='9' AND zoneid='29';
+
 UPDATE mob_groups SET minLevel = 50, maxLevel = 53 WHERE name = "Pyrodrake" and zoneid = 29;
 UPDATE mob_groups SET minLevel = 55, maxLevel = 57 WHERE name = "Strato_Hippogryph" and zoneid = 29;
+
+-- ------------------------------------------------------------
+-- Riverne-Site_A01 (Zone 30)
+-- ------------------------------------------------------------
+
+UPDATE mob_groups SET content_tag='ABYSSEA' WHERE name='Darner' AND groupid='13' AND zoneid='30';
 
 -- ------------------------------------------------------------
 -- AlTaieu (Zone 33)
@@ -419,9 +434,115 @@ UPDATE mob_groups SET minLevel = 75, maxLevel = 78 WHERE name = "Aerns_Euvhi" an
 -- Dynamis-Tavnazia (Zone 42)
 -- ------------------------------------------------------------
 UPDATE mob_groups SET HP = 6000 WHERE name = "Nightmare_Hornet" and zoneid = 42;
-UPDATE mob_groups SET HP = 7200 WHERE name = "Nightmare_Bugard" and zoneid = 42;
-UPDATE mob_groups SET HP = 6000 WHERE name = "Nightmare_Taurus" and zoneid = 42;
+UPDATE mob_groups SET HP = 14000 WHERE name = "Nightmare_Bugard" and zoneid = 42;
+UPDATE mob_groups SET HP = 7000 WHERE name = "Nightmare_Taurus" and zoneid = 42;
 UPDATE mob_groups SET HP = 6000 WHERE name = "Nightmare_Makara" and zoneid = 42;
+UPDATE mob_groups SET HP = 12000 WHERE name = "Nightmare_Worm" and zoneid = 42;
+UPDATE mob_groups SET HP = 14000 WHERE name = "Nightmare_Antlion" and zoneid = 42;
+UPDATE mob_groups SET HP = 6000 WHERE name = "Nightmare_Leech" and zoneid = 42;
+UPDATE mob_groups SET HP = 6000 WHERE name = "Nightmare_Cluster" and zoneid = 42;
+
+-- ------------------------------------------------------------
+-- Bhaflau_Thickets (Zone 52)
+-- ------------------------------------------------------------
+
+-- Locus Mobs
+UPDATE mob_groups SET content_tag='ROV' WHERE name='Locus_Colibri' AND groupid='52' AND zoneid='52';
+UPDATE mob_groups SET content_tag='ROV' WHERE name='Locus_Wivre' AND groupid='53' AND zoneid='52';
+
+-- ------------------------------------------------------------
+-- Arrapago_Reef (Zone 54)
+-- ------------------------------------------------------------
+
+UPDATE mob_groups SET content_tag='ROV' WHERE name='Nirgali' AND groupid='40' AND zoneid='54';
+UPDATE mob_groups SET content_tag='ROV' WHERE name='Nostokulshedra' AND groupid='52' AND zoneid='54';
+UPDATE mob_groups SET content_tag='ROV' WHERE name='Dweomershell' AND groupid='65' AND zoneid='54';
+
+-- ------------------------------------------------------------
+-- Mount_Zhayolm (Zone 61)
+-- ------------------------------------------------------------
+
+UPDATE mob_groups SET content_tag='ABYSSEA' WHERE name='Sulphuric_Jagil' AND groupid='9' AND zoneid='61';
+UPDATE mob_groups SET content_tag='ABYSSEA' WHERE name='Orichalcumshell' AND groupid='33' AND zoneid='61';
+UPDATE mob_groups SET content_tag='ABYSSEA' WHERE name='Scoriaceous_Eruca' AND groupid='35' AND zoneid='61';
+
+-- ------------------------------------------------------------
+-- Aydeewa_Subterrane (Zone 68)
+-- ------------------------------------------------------------
+
+UPDATE mob_groups SET content_tag='ABYSSEA' WHERE name='Mycohopper' AND groupid='16' AND zoneid='68';
+UPDATE mob_groups SET content_tag='ABYSSEA' WHERE name='Slime_Eater' AND groupid='24' AND zoneid='68';
+UPDATE mob_groups SET content_tag='ABYSSEA' WHERE name='Deforester' AND groupid='18' AND zoneid='68';
+
+-- ------------------------------------------------------------
+-- Alzadaal_Undersea_Ruins (Zone 72)
+-- ------------------------------------------------------------
+
+-- Apex mobs for this zone are not captured yet, treat this as a placeholder
+-- UPDATE mob_groups SET content_tag='ROV' WHERE name='Apex_Archaic_Cog' AND groupid='??' AND zoneid='72';
+-- UPDATE mob_groups SET content_tag='ROV' WHERE name='Apex_Archaic_Cogs' AND groupid='??' AND zoneid='72';
+
+-- ------------------------------------------------------------
+-- Caedarva_Mire (Zone 79)
+-- ------------------------------------------------------------
+
+UPDATE mob_groups SET content_tag='ABYSSEA' WHERE name='Slough_Skua' AND groupid='28' AND zoneid='79';
+UPDATE mob_groups SET content_tag='ABYSSEA' WHERE name='Vauxia_Fly' AND groupid='45' AND zoneid='79';
+
+-- ------------------------------------------------------------
+-- Jugner_Forest_[S] (Zone 82)
+-- ------------------------------------------------------------
+
+UPDATE mob_groups SET content_tag='ABYSSEA' WHERE name='Gnoletrap' AND groupid='31' AND zoneid='82';
+
+-- ------------------------------------------------------------
+-- Vunkerl_Inlet_[S] (Zone 83)
+-- ------------------------------------------------------------
+
+UPDATE mob_groups SET content_tag='ABYSSEA' WHERE name='Duriumshell' AND groupid='5' AND zoneid='83';
+
+-- ------------------------------------------------------------
+-- Batallia_Downs_[S] (Zone 84)
+-- ------------------------------------------------------------
+
+UPDATE mob_groups SET content_tag='ABYSSEA' WHERE name='Tsetse_Fly' AND groupid='24' AND zoneid='84';
+
+-- ------------------------------------------------------------
+-- North_Gustaberg_[S] (Zone 88)
+-- ------------------------------------------------------------
+
+UPDATE mob_groups SET content_tag='ABYSSEA' WHERE name='Drachenlizard' AND groupid='44' AND zoneid='88';
+
+-- ------------------------------------------------------------
+-- Grauberg_[S] (Zone 89)
+-- ------------------------------------------------------------
+
+UPDATE mob_groups SET content_tag='ABYSSEA' WHERE name='Feyweald_Sapling' AND groupid='16' AND zoneid='89';
+
+
+-- ------------------------------------------------------------
+-- Rolanberry_Fields_[S] (Zone 91)
+-- ------------------------------------------------------------
+
+UPDATE mob_groups SET content_tag='ABYSSEA' WHERE name='Champion_Crawler' AND groupid='29' AND zoneid='91';
+
+-- ------------------------------------------------------------
+-- West_Sarutabaruta_[S] (Zone 95)
+-- ------------------------------------------------------------
+
+UPDATE mob_groups SET content_tag='ABYSSEA' WHERE name='Hispid_Rarab' AND groupid='21' AND zoneid='95';
+
+-- ------------------------------------------------------------
+-- Meriphataud_Mountains_[S] (Zone 97)
+-- ------------------------------------------------------------
+
+UPDATE mob_groups SET content_tag='ABYSSEA' WHERE name='Condor' AND groupid='34' AND zoneid='97';
+
+-- ------------------------------------------------------------
+-- Sauromugue_Champaign_[S] (Zone 98)
+-- ------------------------------------------------------------
+
+UPDATE mob_groups SET content_tag='ABYSSEA' WHERE name='Gouger_Beetle' AND groupid='8' AND zoneid='98';
 
 -- ------------------------------------------------------------
 -- West_Ronfaure (Zone 100)
@@ -823,6 +944,14 @@ UPDATE mob_groups SET minLevel = 28, maxLevel = 30 WHERE name = "Giant_Trapper" 
 UPDATE mob_groups SET minLevel = 28, maxLevel = 30 WHERE name = "Giant_Hunter"  and zoneid = 126;
 
 -- ------------------------------------------------------------
+-- Castle_Zvahl_Baileys_[S] (Zone 138)
+-- ------------------------------------------------------------
+
+UPDATE mob_groups SET content_tag='ABYSSEA' WHERE name='Soulsearer_Demon' AND groupid='37' AND zoneid='138';
+UPDATE mob_groups SET content_tag='ABYSSEA' WHERE name='Woebringer_Demon' AND groupid='39' AND zoneid='138';
+UPDATE mob_groups SET content_tag='ABYSSEA' WHERE name='Foredoomer_Demon' AND groupid='40' AND zoneid='138';
+
+-- ------------------------------------------------------------
 -- Fort_Ghelsba (Zone 141)
 -- ------------------------------------------------------------
 
@@ -982,6 +1111,38 @@ UPDATE mob_groups SET minLevel = 59, maxLevel = 61 WHERE name = "Bloodsucker_fis
 UPDATE mob_groups SET minLevel = 65, maxLevel = 67 WHERE name = "Mousse_fished"  and zoneid = 169;
 
 -- ------------------------------------------------------------
+-- Crawlers_Nest_[S] (Zone 171)
+-- ------------------------------------------------------------
+
+-- The below should be treated as placeholders until the zones are captured
+-- Apex Mobs
+-- UPDATE mob_groups SET content_tag='ROV' WHERE name='Apex_Nest_Elytra' AND groupid='??' AND zoneid='171';
+-- UPDATE mob_groups SET content_tag='ROV' WHERE name='Apex_Blazer_Elytra' AND groupid='??' AND zoneid='171';
+-- UPDATE mob_groups SET content_tag='ROV' WHERE name='Apex_Helm_Elytra' AND groupid='??' AND zoneid='171';
+-- UPDATE mob_groups SET content_tag='ROV' WHERE name='Apex_Doom_Scorpion' AND groupid='??' AND zoneid='171';
+-- UPDATE mob_groups SET content_tag='ROV' WHERE name='Apex_Lugcrawler_Hunter' AND groupid='??' AND zoneid='171';
+-- UPDATE mob_groups SET content_tag='ROV' WHERE name='Apex_Hornfly' AND groupid='??' AND zoneid='171';
+-- UPDATE mob_groups SET content_tag='ROV' WHERE name='Apex_Dragonfly' AND groupid='??' AND zoneid='171';
+-- UPDATE mob_groups SET content_tag='ROV' WHERE name='Apex_Lugcrawler' AND groupid='??' AND zoneid='171';
+-- UPDATE mob_groups SET content_tag='ROV' WHERE name='Apex_Worker_Lugcrawler' AND groupid='??' AND zoneid='171';
+-- UPDATE mob_groups SET content_tag='ROV' WHERE name='Apex_Soldier_Lugcrawler' AND groupid='??' AND zoneid='171';
+-- UPDATE mob_groups SET content_tag='ROV' WHERE name='Apex_Rumble_Lugcrawler' AND groupid='??' AND zoneid='171';
+-- UPDATE mob_groups SET content_tag='ROV' WHERE name='Apex_Knight_Lugcrawler' AND groupid='??' AND zoneid='171';
+-- UPDATE mob_groups SET content_tag='ROV' WHERE name='Apex_Mycelar' AND groupid='??' AND zoneid='171';
+-- UPDATE mob_groups SET content_tag='ROV' WHERE name='Apex_Fire_Elemental' AND groupid='??' AND zoneid='171';
+-- UPDATE mob_groups SET content_tag='ROV' WHERE name='Apex_Water_Elemental' AND groupid='??' AND zoneid='171';
+
+-- Locus Mobs
+-- UPDATE mob_groups SET content_tag='ROV' WHERE name='Locus_Nest_Elytra' AND groupid='??' AND zoneid='171';
+-- UPDATE mob_groups SET content_tag='ROV' WHERE name='Locus_Blazer_Elytra' AND groupid='??' AND zoneid='171';
+-- UPDATE mob_groups SET content_tag='ROV' WHERE name='Locus_Hornfly' AND groupid='??' AND zoneid='171';
+-- UPDATE mob_groups SET content_tag='ROV' WHERE name='Locus_Dragonfly' AND groupid='??' AND zoneid='171';
+-- UPDATE mob_groups SET content_tag='ROV' WHERE name='Locus_Lugcrawler' AND groupid='??' AND zoneid='171';
+-- UPDATE mob_groups SET content_tag='ROV' WHERE name='Locus_Worker_Lugcrawler' AND groupid='??' AND zoneid='171';
+-- UPDATE mob_groups SET content_tag='ROV' WHERE name='Locus_Soldier_Lugcrawler' AND groupid='??' AND zoneid='171';
+
+
+-- ------------------------------------------------------------
 -- Zeruhn_Mines (Zone 172)
 -- ------------------------------------------------------------
 
@@ -1019,6 +1180,10 @@ UPDATE mob_groups SET minLevel = 68, maxLevel = 70 WHERE name = "Fire_Elemental"
 -- ------------------------------------------------------------
 -- The_Shrine_of_RuAvitau (Zone 178)
 -- ------------------------------------------------------------
+UPDATE mob_groups SET content_tag='ABYSSEA' WHERE name='Baelfyr' AND groupid='19' AND zoneid='178';
+UPDATE mob_groups SET content_tag='ABYSSEA' WHERE name='Gefyrst' AND groupid='20' AND zoneid='178';
+UPDATE mob_groups SET content_tag='ABYSSEA' WHERE name='Ungeweder' AND groupid='21' AND zoneid='178';
+UPDATE mob_groups SET content_tag='ABYSSEA' WHERE name='Byrgen' AND groupid='22' AND zoneid='178';
 
 UPDATE mob_groups SET minLevel = 72, maxLevel = 73 WHERE name = "Water_Elemental"  and zoneid = 178;
 
@@ -1163,9 +1328,9 @@ UPDATE mob_groups SET minLevel = 23, maxLevel = 27 WHERE name = "Ghoul_blm"  and
 -- Crawlers_Nest (Zone 197)
 -- ------------------------------------------------------------
 
-UPDATE mob_groups SET minLevel='47',maxLevel='49' WHERE name='King_Crawler' AND groupid='16' AND zoneid='197';
+UPDATE mob_groups SET minLevel='47',maxLevel='49' WHERE name='King_Crawler' AND groupid='16' AND zoneid='197'; -- Renamer: Soldier Crawler
 UPDATE mob_groups SET minLevel='55',maxLevel='57',content_tag='ABYSSEA' WHERE name='Vespo' AND groupid='17' AND zoneid='197';
-UPDATE mob_groups SET minLevel='50',maxLevel='53' WHERE name='Dancing_Jewel' AND groupid='18' AND zoneid='197';
+UPDATE mob_groups SET minLevel='50',maxLevel='53' WHERE name='Dancing_Jewel' AND groupid='18' AND zoneid='197';-- Renamer: Hornfly
 UPDATE mob_groups SET minLevel='51',maxLevel='54',content_tag='ABYSSEA' WHERE name='Olid_Funguar' AND groupid='19' AND zoneid='197';
 UPDATE mob_groups SET content_tag='WOTG' WHERE name='Dynast_Beetle' AND groupid='23' AND zoneid='197';
 UPDATE mob_groups SET content_tag='SYNERGY' WHERE name='Aqrabuamelu' AND groupid='36' AND zoneid='197';
@@ -1200,9 +1365,9 @@ UPDATE mob_groups SET content_tag='WOTG' WHERE name='Frogamander' AND groupid='3
 -- FeiYin (Zone 204)
 -- ------------------------------------------------------------
 
-UPDATE mob_groups SET minLevel='55',maxLevel='57' WHERE name='Wekufe' AND groupid='16' AND zoneid='204';
-UPDATE mob_groups SET minLevel='56',maxLevel='58' WHERE name='Sentient_Carafe' AND groupid='17' AND zoneid='204';
-UPDATE mob_groups SET minLevel='51',maxLevel='54' WHERE name='Balayang' AND groupid='18' AND zoneid='204';
+UPDATE mob_groups SET content_tag='ABYSSEA' WHERE name='Wekufe' AND groupid='16' AND zoneid='204';
+UPDATE mob_groups SET content_tag='ABYSSEA' WHERE name='Sentient_Carafe' AND groupid='17' AND zoneid='204';
+UPDATE mob_groups SET content_tag='ABYSSEA' WHERE name='Balayang' AND groupid='18' AND zoneid='204';
 UPDATE mob_groups SET content_tag='WOTG' WHERE name='Mind_Hoarder' AND groupid='11' AND zoneid='204';
 UPDATE mob_groups SET content_tag='WOTG' WHERE name='Sluagh' AND groupid='5' AND zoneid='204';
 UPDATE mob_groups SET content_tag='SYNERGY' WHERE name='Jenglot' AND groupid='7' AND zoneid='204';

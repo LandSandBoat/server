@@ -212,7 +212,7 @@ void CMobController::TryLink()
                     continue;
                 }
 
-                if (PPartyMember->PAI->IsRoaming() && PPartyMember->CanLink(&PMob->loc.p, PMob->getMobMod(MOBMOD_SUPERLINK)))
+                if (PPartyMember->isAlive() && PPartyMember->PAI->IsRoaming() && PPartyMember->CanLink(&PMob->loc.p, PMob->getMobMod(MOBMOD_SUPERLINK)))
                 {
                     PPartyMember->PEnmityContainer->AddBaseEnmity(PTarget);
 
@@ -467,9 +467,9 @@ bool CMobController::TryCastSpell()
 {
     TracyZoneScoped;
 
-    if (PMob->GetBattleTarget() != nullptr)
+    if (PTarget != nullptr)
     {
-        if (PMob->GetBattleTarget()->StatusEffectContainer->HasStatusEffect(EFFECT_ALL_MISS) && PMob->GetBattleTarget()->StatusEffectContainer->GetStatusEffect(EFFECT_ALL_MISS)->GetPower() == 2) // Handles Super Jump
+        if (PTarget->StatusEffectContainer->HasStatusEffect(EFFECT_ALL_MISS) && PTarget->StatusEffectContainer->GetStatusEffect(EFFECT_ALL_MISS)->GetPower() == 2) // Handles Super Jump
         {
             return false;
         }
@@ -481,13 +481,13 @@ bool CMobController::TryCastSpell()
     }
 
     // Having a distance check here (before the check in magic_state) prevents the mob from standing still during chainspell
-    if (distance(PMob->loc.p, PMob->GetBattleTarget()->loc.p) > 28.5f)
+    if (PTarget != nullptr && distance(PMob->loc.p, PTarget->loc.p) > 28.5f)
     {
         return false;
     }
 
     // Control for worms to only cast when target is out of melee range
-    if (PMob->m_roamFlags & ROAMFLAG_WORM && distance(PMob->loc.p, PMob->GetBattleTarget()->loc.p) <= 3)
+    if (PTarget != nullptr && PMob->m_roamFlags & ROAMFLAG_WORM && distance(PMob->loc.p, PTarget->loc.p) <= 3)
     {
         return false;
     }

@@ -8,6 +8,8 @@ require("scripts/globals/magic")
 -----------------------------------
 local entity = {}
 
+local offsets = { 1, 2, 3, 4 }
+
 entity.onMobSpawn = function(mob)
     mob:setMobSkillAttack(0)
     mob:setAnimationSub(0)
@@ -46,6 +48,15 @@ end
 
 entity.onMobEngaged = function(mob)
     mob:setMobMod(xi.mobMod.NO_MOVE, 0)
+
+    -- spawn ziryu only on mob engage (not at start of BCNM)
+    local mobId = mob:getID()
+    for i, offset in ipairs(offsets) do
+        local pet = GetMobByID(mobId + offset)
+        if not pet:isSpawned() then
+            pet:spawn()
+        end
+    end
 end
 
 entity.onMobFight = function(mob, target)
@@ -94,6 +105,17 @@ entity.onMobWeaponSkill = function(target, mob, skill)
     -- thus keep trying until we do so
     if skill:getID() == 1302 then
         mob:setLocalVar("changeTime", mob:getBattleTime())
+    end
+end
+
+entity.onMobDespawn = function(mob)
+    -- if ouryu despawns then also then despawn all ziryu
+    local mobId = mob:getID()
+    for i, offset in ipairs(offsets) do
+        local pet = GetMobByID(mobId + offset)
+        if pet:isAlive() then
+            DespawnMob(mobId + offset)
+        end
     end
 end
 

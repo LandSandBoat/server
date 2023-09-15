@@ -11,11 +11,17 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    if target:hasStatusEffect(xi.effect.HASTE) then
+    local power = 2500
+    if skill:getID() == 1864 then -- Nightmare Makara - 12s Haste recast w/o slow.  20s w/.  Overwrites Haste
+        power = 6600
+    end
+
+    if target:hasStatusEffect(xi.effect.HASTE) and skill:getID() ~= 1864 then
+        -- Does this really belong here?  Shouldnt the effect power handle this?
         skill:setMsg(xi.msg.basic.SKILL_NO_EFFECT)
         return
     else
-        skill:setMsg(xi.mobskills.mobGazeMove(mob, target, xi.effect.SLOW, 2500, 0, 120))
+        skill:setMsg(xi.mobskills.mobGazeMove(mob, target, xi.effect.SLOW, power, 0, 120))
     end
 
     return xi.effect.SLOW

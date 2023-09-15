@@ -21,9 +21,33 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 
 #pragma once
 
-class BesiegedSystem
+#include "common/cbasetypes.h"
+#include "common/sql.h"
+#include "map/besieged_data.h"
+#include "message_handler.h"
+
+class BesiegedSystem : public IMessageHandler
 {
 public:
-    BesiegedSystem()  = default;
-    ~BesiegedSystem() = default;
+    BesiegedSystem();
+    ~BesiegedSystem() override = default;
+
+    /**
+     * IMessageHandler implementation. Used to handle messages from message_server.
+     * NOTE: The copy of payload here is intentional, since these systems will eventually
+     *     : be moved to their own threads.
+     */
+    bool handleMessage(std::vector<uint8>&& payload,
+                       in_addr              from_addr,
+                       uint16               from_port) override;
+
+    /**
+     * Called every vana hour (every 2.4 min). Used to send updated stronghold data
+     * to all map servers.
+     */
+    void updateVanaHourlyBesieged();
+
+private:
+    std::unique_ptr<SqlConnection> sql;
+    auto                           getStrongholdInfos() -> std::vector<stronghold_info_t> const;
 };

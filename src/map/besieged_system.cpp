@@ -21,105 +21,79 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 
 #include "besieged_system.h"
 
+#include "common/settings.h"
+#include "map.h"
+
 namespace besieged
 {
-    uint8 GetAstralCandescence()
+    static std::shared_ptr<BesiegedData> besiegedData;
+
+    std::shared_ptr<BesiegedData> GetBesiegedData()
     {
-        return STRONGHOLD::ALZAHBI;
+        if (besiegedData == nullptr)
+        {
+            besiegedData = std::make_shared<BesiegedData>(sql);
+        }
+
+        return besiegedData;
     }
 
-    uint8 GetAlZahbiOrders()
+    /**
+     * Called when stronghold updates are received from the world server
+     */
+    void HandleStrongholdUpdate(std::vector<stronghold_info_t> const& strongHoldInfos)
     {
-        return ORDERS_ALZAHBI_DEFENSE;
+        TracyZoneScoped;
+
+        if (settings::get<bool>("logging.DEBUG_BESIEGED"))
+        {
+            ShowInfo("Received besieged Stronghold Data:");
+            for (uint8 strongholdId = 0; strongholdId < strongHoldInfos.size(); strongholdId++)
+            {
+                stronghold_info_t strongholdInfo = strongHoldInfos[strongholdId];
+                ShowInfo("Stronghold %d: Orders %d, Level %d, Forces %d, Mirrors %d, Prisoners %d, Owns Astral Candescence %d",
+                         strongholdId, strongholdInfo.orders, strongholdInfo.stronghold_level, strongholdInfo.forces, strongholdInfo.mirrors, strongholdInfo.prisoners, strongholdInfo.ownsAstralCandescence);
+            }
+        }
+
+        GetBesiegedData()->updateStrongholdInfos(strongHoldInfos);
     }
 
-    uint8 GetMamookOrders()
+    /**
+     * HandleZMQMessage is called by message_server when a besieged ZMQ message is receieved
+     */
+    void HandleZMQMessage(uint8* data)
     {
-        return ORDERS_DEFEND;
-    }
+        uint8 subtype = ref<uint8>(data, 1);
+        switch (subtype)
+        {
+            case BESIEGED_WORLD2MAP_STRONGHOLD_INFO:
+            {
+                const std::size_t headerLength    = 2 * sizeof(uint8);
+                std::size_t       size            = ref<std::size_t>(data, 2);
+                auto              strongholdInfos = std::vector<stronghold_info_t>(size);
+                for (std::size_t i = 0; i < size; i++)
+                {
+                    const std::size_t start = headerLength + sizeof(size_t) + i * sizeof(stronghold_info_t);
 
-    uint8 GetMamookLevel()
-    {
-        return STRONGHOLD_LEVEL::LEVEL1;
-    }
+                    stronghold_info_t strongholdInfo;
+                    strongholdInfo.orders                = (BEASTMEN_BESIEGED_ORDERS)ref<uint8>(data, start);
+                    strongholdInfo.stronghold_level      = (STRONGHOLD_LEVEL)ref<uint8>(data, start + 1);
+                    strongholdInfo.forces                = ref<uint8>(data, start + 2);
+                    strongholdInfo.mirrors               = ref<uint8>(data, start + 3);
+                    strongholdInfo.prisoners             = ref<uint8>(data, start + 4);
+                    strongholdInfo.ownsAstralCandescence = ref<uint8>(data, start + 6);
 
-    uint8 GetMamookForces()
-    {
-        return 95;
-    }
+                    strongholdInfos[i] = strongholdInfo;
+                }
 
-    uint8 GetMamookMirrors()
-    {
-        return 0;
+                HandleStrongholdUpdate(strongholdInfos);
+                break;
+            }
+            default:
+            {
+                ShowError("Unknown besieged message subtype %d", subtype);
+            }
+        }
     }
-
-    uint8 GetMamookPrisoners()
-    {
-        return 0;
-    }
-
-    bool GetMamookMirrorDestroyed()
-    {
-        return 0;
-    }
-
-    uint8 GetHalvungOrders()
-    {
-        return ORDERS_DEFEND;
-    }
-
-    uint8 GetHalvungLevel()
-    {
-        return STRONGHOLD_LEVEL::LEVEL1;
-    }
-
-    uint8 GetHalvungForces()
-    {
-        return 95;
-    }
-
-    uint8 GetHalvungMirrors()
-    {
-        return 0;
-    }
-
-    uint8 GetHalvungPrisoners()
-    {
-        return 0;
-    }
-
-    bool GetHalvungMirrorDestroyed()
-    {
-        return 0;
-    }
-
-    uint8 GetArrapagoOrders()
-    {
-        return ORDERS_DEFEND;
-    }
-
-    uint8 GetArrapagoLevel()
-    {
-        return STRONGHOLD_LEVEL::LEVEL1;
-    }
-
-    uint8 GetArrapagoForces()
-    {
-        return 95;
-    }
-
-    uint8 GetArrapagoMirrors()
-    {
-        return 0;
-    }
-
-    uint8 GetArrapagoPrisoners()
-    {
-        return 0;
-    }
-
-    bool GetArrapagoMirrorDestroyed()
-    {
-        return 0;
-    }
-}; // namespace besieged
+} // namespace besieged

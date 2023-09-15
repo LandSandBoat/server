@@ -310,6 +310,12 @@ int16 CBattleEntity::GetWeaponDelay(bool tp)
     TracyZoneScoped;
     if (StatusEffectContainer->HasStatusEffect(EFFECT_HUNDRED_FISTS) && !tp)
     {
+        if (this->objtype == ENTITYTYPE::TYPE_MOB)
+        {
+            // Captures show mobs swing around 700 delay under hundered fists
+            return 700;
+        }
+
         return 1700;
     }
     uint16 WeaponDelay = 9999;

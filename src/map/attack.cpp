@@ -467,7 +467,7 @@ void CAttack::ProcessDamage(bool isCritical, bool isGuarded, bool isKick)
         m_naturalH2hDamage = (int32)(m_attacker->GetSkill(SKILL_HAND_TO_HAND) * 0.11f) + 3;
         m_baseDamage       = isKick ? m_attacker->getMod(Mod::KICK_DMG) : m_attacker->GetMainWeaponDmg();
 
-        if (m_attacker->objtype == TYPE_MOB)
+        if (m_attacker->objtype == TYPE_MOB && ((CMobEntity*)m_attacker)->m_Family != 240)
         {
             // mobdamage = (floor((level + 2 + fstr) * .9) / 2) * pdif
             int8 mobH2HDamage = m_attacker->GetMLevel() + 2;

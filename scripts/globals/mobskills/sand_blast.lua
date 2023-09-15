@@ -24,6 +24,11 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
         end
     end
 
+    if skill:getID() == 1841 then -- Nightmare Antlion - Adds SILENCE
+        skill:setMsg(xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.SILENCE, 1, 0, 180))
+        return xi.effect.SILENCE
+    end
+
     return xi.effect.BLINDNESS
 end
 

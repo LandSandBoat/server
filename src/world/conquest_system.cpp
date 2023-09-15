@@ -28,9 +28,9 @@ ConquestSystem::ConquestSystem()
 {
 }
 
-bool ConquestSystem::handleMessage(std::vector<uint8> payload,
-                                   in_addr            from_addr,
-                                   uint16             from_port)
+bool ConquestSystem::handleMessage(std::vector<uint8>&& payload,
+                                   in_addr              from_addr,
+                                   uint16               from_port)
 {
     const uint8 conquestMsgType = payload[1];
     if (conquestMsgType == CONQUESTMSGTYPE::CONQUEST_MAP2WORLD_GM_WEEKLY_UPDATE)
@@ -80,14 +80,12 @@ void ConquestSystem::sendTallyStartMsg()
     const std::size_t dataLen = 2 * sizeof(uint8);
     uint8             data[2 * sizeof(uint8) + sizeof(uint32)]{};
 
-    // Create ZMQ message with header and no other payload
+    // Create payload with header and no other data
     ref<uint8>((uint8*)data, 0) = REGIONAL_EVT_MSG_CONQUEST;
     ref<uint8>((uint8*)data, 1) = CONQUEST_WORLD2MAP_WEEKLY_UPDATE_START;
 
     // Send to map
-    zmq::message_t dataMsg = zmq::message_t(dataLen);
-    memcpy(dataMsg.data(), data, dataLen);
-    queue_message_broadcast(MSG_WORLD2MAP_REGIONAL_EVENT, &dataMsg);
+    queue_data_broadcast(MSG_WORLD2MAP_REGIONAL_EVENT, data, dataLen);
 }
 
 void ConquestSystem::sendInfluencesMsg(bool shouldUpdateZones, uint64 ipp)
@@ -116,16 +114,14 @@ void ConquestSystem::sendInfluencesMsg(bool shouldUpdateZones, uint64 ipp)
         ref<uint16>((uint8*)data, start + 6) = influences[i].beastmen_influence;
     }
 
-    // 3- Create ZMQ Message and queue it
-    zmq::message_t dataMsg = zmq::message_t(dataLen);
-    memcpy(dataMsg.data(), data, dataLen);
+    // 3- Queue payload to be sent to map servers
     if (ipp == 0xFFFF)
     {
-        queue_message_broadcast(MSG_WORLD2MAP_REGIONAL_EVENT, &dataMsg);
+        queue_data_broadcast(MSG_WORLD2MAP_REGIONAL_EVENT, data, dataLen);
     }
     else
     {
-        queue_message(ipp, MSG_WORLD2MAP_REGIONAL_EVENT, &dataMsg);
+        queue_data(ipp, MSG_WORLD2MAP_REGIONAL_EVENT, data, dataLen);
     }
 }
 
@@ -159,17 +155,14 @@ void ConquestSystem::sendRegionControlsMsg(CONQUESTMSGTYPE msgType, uint64 ipp)
         ref<uint8>((uint8*)data, offset + 1) = regionControls[i].prev;
     }
 
-    // 3- Create ZMQ Message and queue it
-    zmq::message_t dataMsg = zmq::message_t(dataLen);
-    memcpy(dataMsg.data(), data, dataLen);
-
+    // 3- Queue payload to be sent to map servers
     if (ipp == 0xFFFF)
     {
-        queue_message_broadcast(MSG_WORLD2MAP_REGIONAL_EVENT, &dataMsg);
+        queue_data_broadcast(MSG_WORLD2MAP_REGIONAL_EVENT, data, dataLen);
     }
     else
     {
-        queue_message(ipp, MSG_WORLD2MAP_REGIONAL_EVENT, &dataMsg);
+        queue_data(ipp, MSG_WORLD2MAP_REGIONAL_EVENT, data, dataLen);
     }
 }
 

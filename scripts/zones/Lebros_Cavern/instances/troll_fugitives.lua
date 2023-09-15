@@ -1,33 +1,47 @@
 -----------------------------------
 -- Assault: Troll Fugitives
 -----------------------------------
-require("scripts/globals/instance")
 local ID = require("scripts/zones/Lebros_Cavern/IDs")
+require("scripts/globals/assault")
+require("scripts/globals/instance")
 -----------------------------------
 local instanceObject = {}
 
-instanceObject.afterInstanceRegister = function(player)
-    local instance = player:getInstance()
-    player:messageSpecial(ID.text.ASSAULT_23_START, 23)
-    player:messageSpecial(ID.text.TIME_TO_COMPLETE, instance:getTimeLimit())
+instanceObject.registryRequirements = function(player)
+    return player:hasKeyItem(xi.ki.LEBROS_ASSAULT_ORDERS) and
+        player:getCurrentAssault() == xi.assault.mission.TROLL_FUGITIVES and
+        player:getCharVar("assaultEntered") == 0 and
+        player:hasKeyItem(xi.ki.ASSAULT_ARMBAND) and
+        player:getMainLvl() > 70
+end
+
+instanceObject.entryRequirements = function(player)
+    return player:hasKeyItem(xi.ki.LEBROS_ASSAULT_ORDERS) and
+        player:getCurrentAssault() == xi.assault.mission.TROLL_FUGITIVES and
+        player:getCharVar("assaultEntered") == 0 and
+        player:getMainLvl() > 70
 end
 
 instanceObject.onInstanceCreated = function(instance)
-    for i, v in pairs(ID.mob[23]) do
-        SpawnMob(v, instance)
-    end
+    instance:setLocalVar("troll1", ID.mob[xi.assault.mission.TROLL_FUGITIVES].MOBS_START[math.random(1, 15)])
+    instance:setLocalVar("troll2", ID.mob[xi.assault.mission.TROLL_FUGITIVES].MOBS_START[math.random(1, 15)])
 
-    local rune = GetNPCByID(ID.npc.RUNE_OF_RELEASE, instance)
-    local box = GetNPCByID(ID.npc.ANCIENT_LOCKBOX, instance)
-    rune:setPos(-376.272, -9.893, 89.189, 0)
-    box:setPos(-384.097, -10, 84.954, 49)
+    while instance:getLocalVar("troll1") == instance:getLocalVar("troll2") do
+        instance:setLocalVar("troll2", ID.mob[xi.assault.mission.TROLL_FUGITIVES].MOBS_START[math.random(1, 15)])
+    end
 end
 
 instanceObject.onInstanceCreatedCallback = function(player, instance)
-    if instance then
-        player:setInstance(instance)
-        player:setPos(0, 0, 0, 0, instance:getZone():getID())
-    end
+    xi.assault.onInstanceCreatedCallback(player, instance)
+    xi.instance.onInstanceCreatedCallback(player, instance)
+end
+
+instanceObject.afterInstanceRegister = function(player)
+    local instance = player:getInstance()
+
+    xi.assault.afterInstanceRegister(player, xi.items.CAGE_OF_ZHAYOLM_FIREFLIES)
+    GetNPCByID(ID.npc.RUNE_OF_RELEASE, instance):setPos(-379.000, -10.000, 86.000, 192)
+    GetNPCByID(ID.npc.ANCIENT_LOCKBOX, instance):setPos(-381.000, -10.000, 86.000, 192)
 end
 
 instanceObject.onInstanceTimeUpdate = function(instance, elapsed)
@@ -35,34 +49,17 @@ instanceObject.onInstanceTimeUpdate = function(instance, elapsed)
 end
 
 instanceObject.onInstanceFailure = function(instance)
-    local chars = instance:getChars()
-
-    for i, v in pairs(chars) do
-        v:messageSpecial(ID.text.MISSION_FAILED, 10, 10)
-        v:startEvent(102)
-    end
+    xi.assault.onInstanceFailure(instance)
 end
 
 instanceObject.onInstanceProgressUpdate = function(instance, progress)
-    if progress >= 15 then
+    if progress >= 14 then
         instance:complete()
     end
 end
 
 instanceObject.onInstanceComplete = function(instance)
-    local chars = instance:getChars()
-
-    for i, v in pairs(chars) do
-        v:messageSpecial(ID.text.RUNE_UNLOCKED, 8, 8)
-    end
-
-    local rune = GetNPCByID(ID.npc.RUNE_OF_RELEASE, instance)
-    local box = GetNPCByID(ID.npc.ANCIENT_LOCKBOX, instance)
-    rune:setStatus(xi.status.NORMAL)
-    box:setStatus(xi.status.NORMAL)
-end
-
-instanceObject.onEventUpdate = function(player, csid, option)
+    xi.assault.onInstanceComplete(instance, 5, 10)
 end
 
 instanceObject.onEventFinish = function(player, csid, option)
