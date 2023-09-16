@@ -43,8 +43,8 @@ local keyitems =
         repeatable = true,
         prizes =
         {
-            { cutoff =   70, itemId = 13206, augments =
-                { -- Gold Obi
+            { cutoff =   70, itemId = xi.item.GOLD_OBI, augments =
+                {
                     { 516, 0, 1 }, -- INT+1-2
                     { 517, 0, 1 }, -- MND+1-2
                     { 518, 0, 1 }, -- CHR+1-2
@@ -53,8 +53,8 @@ local keyitems =
                     {  96, 0, 1 }, -- Pet: Accuracy and Ranged Accuracy+1-2
                 }
             },
-            { cutoff =   80, itemId = 13445, augments =
-                { -- Gold Ring
+            { cutoff =   80, itemId = xi.item.GOLD_RING, augments =
+                {
                     {   9, 0, 8 }, -- MP+0-9
                     { 516, 0, 1 }, -- INT+0-2
                     { 517, 0, 1 }, -- MND+0-2
@@ -63,8 +63,8 @@ local keyitems =
                     {  35, 0, 2 }, -- Magic Accuracy+0-3
                 }
             },
-            { cutoff =  186, itemId = 13446, augments =
-                { -- Mythril Ring
+            { cutoff =  186, itemId = xi.item.MYTHRIL_RING, augments =
+                {
                     {   1, 0, 15 }, -- HP+0-16
                     {  13, 0,  2 }, -- MP-0-3
                     {  25, 0,  5 }, -- Attack+0-6
@@ -73,8 +73,8 @@ local keyitems =
                     {  35, 0,  1 }, -- Magic Accuracy+0-2
                 }
             },
-            { cutoff =  276, itemId = 13643, augments =
-                { -- Sarcenet Cape
+            { cutoff =  276, itemId = xi.item.SARCENET_CAPE, augments =
+                {
                     {   9, 0, 5 }, -- MP+0-6
                     { 516, 0, 1 }, -- INT+0-2
                     { 517, 0, 1 }, -- MND+0-2
@@ -83,8 +83,8 @@ local keyitems =
                     {  39, 0, 1 }, -- Enmity+0-2
                 }
             },
-            { cutoff =  351, itemId = 13196, augments =
-                { -- Silver Belt
+            { cutoff =  351, itemId = xi.item.SILVER_BELT, augments =
+                {
                     {   1, 0, 5 }, -- HP+0-6
                     {  23, 0, 1 }, -- Accuracy+0-2
                     {  27, 0, 1 }, -- Ranged Accuracy+0-2
@@ -93,8 +93,8 @@ local keyitems =
                     { 520, 0, 1 }, -- DEX-0-2
                 }
             },
-            { cutoff =  460, itemId = 13571, augments =
-                { -- Wolf Mantle
+            { cutoff =  460, itemId = xi.item.WOLF_MANTLE, augments =
+                {
                     {   1, 0, 5 }, -- HP+0-6
                     {  25, 0, 3 }, -- Attack+0-4
                     {  29, 0, 3 }, -- Ranged Attack+0-4
@@ -103,28 +103,28 @@ local keyitems =
                     {  32, 0, 2 }, -- Evasion-0-3
                 }
             },
-            { cutoff =  468, itemId =   694 }, -- Chestnut Log
-            { cutoff =  471, itemId =   887 }, -- Coral Fragment
-            { cutoff =  476, itemId =  4903 }, -- Dark Spirit Pact
-            { cutoff =  479, itemId =   654 }, -- Darksteel Ingot
-            { cutoff =  500, itemId =   645 }, -- Darksteel Ore
-            { cutoff =  523, itemId =  4868 }, -- Scroll of Dispel
-            { cutoff =  619, itemId =  4145 }, -- Elixir
-            { cutoff =  668, itemId =   690 }, -- Elm Log
-            { cutoff =  699, itemId =  4751 }, -- Scroll of Erase
-            { cutoff =  702, itemId =  4116 }, -- Hi-Potion
-            { cutoff =  723, itemId =   651 }, -- Iron Ingot
-            { cutoff =  775, itemId =   643 }, -- Iron Ore
-            { cutoff =  785, itemId =  4902 }, -- Light Spirit Pact
-            { cutoff =  821, itemId =  5070 }, -- Scroll of Magic Finale
-            { cutoff =  824, itemId =   691 }, -- Maple Log
-            { cutoff =  858, itemId =   653 }, -- Mythril Ingot
-            { cutoff =  879, itemId =   644 }, -- Mythril Ore
-            { cutoff =  884, itemId =  4113 }, -- Potion +1
-            { cutoff =  923, itemId =   744 }, -- Silver Ingot
-            { cutoff =  949, itemId =   736 }, -- Silver Ore
-            { cutoff =  993, itemId =   652 }, -- Steel Ingot
-            { cutoff = 1003, itemId =  4947 }, -- Scroll of Utsusemi: Ni
+            { cutoff =  468, itemId = xi.item.CHESTNUT_LOG },
+            { cutoff =  471, itemId = xi.item.CORAL_FRAGMENT },
+            { cutoff =  476, itemId = xi.item.DARK_SPIRIT_PACT },
+            { cutoff =  479, itemId = xi.item.DARKSTEEL_INGOT },
+            { cutoff =  500, itemId = xi.item.CHUNK_OF_DARKSTEEL_ORE },
+            { cutoff =  523, itemId = xi.item.SCROLL_OF_DISPEL },
+            { cutoff =  619, itemId = xi.item.ELIXIR },
+            { cutoff =  668, itemId = xi.item.ELM_LOG },
+            { cutoff =  699, itemId = xi.item.SCROLL_OF_ERASE },
+            { cutoff =  702, itemId = xi.item.HI_POTION },
+            { cutoff =  723, itemId = xi.item.IRON_INGOT },
+            { cutoff =  775, itemId = xi.item.CHUNK_OF_IRON_ORE },
+            { cutoff =  785, itemId = xi.item.LIGHT_SPIRIT_PACT },
+            { cutoff =  821, itemId = xi.item.SCROLL_OF_MAGIC_FINALE },
+            { cutoff =  824, itemId = xi.item.MAPLE_LOG },
+            { cutoff =  858, itemId = xi.item.MYTHRIL_INGOT },
+            { cutoff =  879, itemId = xi.item.CHUNK_OF_MYTHRIL_ORE },
+            { cutoff =  884, itemId = xi.item.POTION_P1 },
+            { cutoff =  923, itemId = xi.item.SILVER_INGOT },
+            { cutoff =  949, itemId = xi.item.CHUNK_OF_SILVER_ORE },
+            { cutoff =  993, itemId = xi.item.STEEL_INGOT },
+            { cutoff = 1003, itemId = xi.item.SCROLL_OF_UTSUSEMI_NI },
         },
     },
     [xi.ki.VIRIDIAN_KEY] =
@@ -134,8 +134,8 @@ local keyitems =
         repeatable = true,
         prizes =
         {
-            { cutoff =   65, itemId = 13639, augments =
-                { -- Aurora Mantle
+            { cutoff =   65, itemId = xi.item.AURORA_MANTLE, augments =
+                {
                     {   9, 0, 19 }, -- MP+0-20
                     {   1, 0, 19 }, -- HP+0-20
                     {  40, 0,  1 }, -- Enmity-0-2
@@ -144,8 +144,8 @@ local keyitems =
                     {  34, 2,  3 }, -- DEF-3-4
                 }
             },
-            { cutoff =  142, itemId = 13271, augments =
-                { -- Corsette
+            { cutoff =  142, itemId = xi.item.CORSETTE, augments =
+                {
                     { 23, 0,  2 }, -- Accuracy+0-3
                     { 31, 0,  1 }, -- Evasion+0-2
                     {  9, 0, 13 }, -- MP+0-14
@@ -154,8 +154,8 @@ local keyitems =
                     { 49, 0,  2 }, -- Haste+0-3
                 }
             },
-            { cutoff =  237, itemId = 12364, augments =
-                { -- Nymph Shield
+            { cutoff =  237, itemId = xi.item.NYMPH_SHIELD, augments =
+                {
                     {   9, 0, 9 }, -- MP+0-10
                     { 517, 0, 0 }, -- MND+0-1
                     { 516, 0, 0 }, -- INT+0-1
@@ -164,8 +164,8 @@ local keyitems =
                     {  35, 0, 1 }, -- Magic Accuracy+0-2
                 }
             },
-            { cutoff =  356, itemId = 13570, augments =
-                { -- Ram Mantle
+            { cutoff =  356, itemId = xi.item.RAM_MANTLE, augments =
+                {
                     {   5, 0,  5 }, -- HP-0-6
                     {  13, 0, 10 }, -- MP-0-11
                     { 515, 0,  0 }, -- AGI+0-1
@@ -174,8 +174,8 @@ local keyitems =
                     {  27, 0,  3 }, -- Ranged Accuracy+0-4
                 }
             },
-            { cutoff =  457, itemId = 13198, augments =
-                { -- Swordbelt
+            { cutoff =  457, itemId = xi.item.SWORDBELT, augments =
+                {
                     {   1, 0, 4 }, -- HP+0-5
                     { 512, 0, 1 }, -- STR+0-2
                     { 513, 0, 1 }, -- DEX+0-2
@@ -185,27 +185,27 @@ local keyitems =
                     {  52, 1, 1 },-- MP Recovered While Healing
                 }
             },
-            { cutoff =  469, itemId =   793 }, -- Black Pearl
-            { cutoff =  497, itemId =   775 }, -- Black Rock
-            { cutoff =  515, itemId =   770 }, -- Blue Rock
-            { cutoff =  616, itemId =  4145 }, -- Elixir
-            { cutoff =  670, itemId =  4129 }, -- Ether +1
-            { cutoff =  676, itemId =   790 }, -- Garnet
-            { cutoff =  672, itemId =   808 }, -- Goshenite
-            { cutoff =  684, itemId =   772 }, -- Green Rock
-            { cutoff =  775, itemId =   699 }, -- Oak Log
-            { cutoff =  811, itemId =   792 }, -- Pearl
-            { cutoff =  829, itemId =   788 }, -- Peridot
-            { cutoff =  835, itemId =   738 }, -- Platinum Ore
-            { cutoff =  871, itemId =  4113 }, -- Potion +1
-            { cutoff =  877, itemId =   774 }, -- Purple Rock
-            { cutoff =  901, itemId =   769 }, -- Red Rock
-            { cutoff =  984, itemId =   701 }, -- Rosewood Log
-            { cutoff = 1008, itemId =   815 }, -- Sphene
-            { cutoff = 1020, itemId =   773 }, -- Translucent Rock
-            { cutoff = 1032, itemId =   776 }, -- White Rock
-            { cutoff = 1044, itemId =   771 }, -- Yellow Rock
-            { cutoff = 1056, itemId =   798 }, -- Turquoise
+            { cutoff =  469, itemId = xi.item.BLACK_PEARL },
+            { cutoff =  497, itemId = xi.item.BLACK_ROCK },
+            { cutoff =  515, itemId = xi.item.BLUE_ROCK },
+            { cutoff =  616, itemId = xi.item.ELIXIR },
+            { cutoff =  670, itemId = xi.item.ETHER_P1 },
+            { cutoff =  676, itemId = xi.item.GARNET },
+            { cutoff =  672, itemId = xi.item.GOSHENITE },
+            { cutoff =  684, itemId = xi.item.GREEN_ROCK },
+            { cutoff =  775, itemId = xi.item.OAK_LOG },
+            { cutoff =  811, itemId = xi.item.PEARL },
+            { cutoff =  829, itemId = xi.item.PERIDOT },
+            { cutoff =  835, itemId = xi.item.CHUNK_OF_PLATINUM_ORE },
+            { cutoff =  871, itemId = xi.item.POTION_P1 },
+            { cutoff =  877, itemId = xi.item.PURPLE_ROCK },
+            { cutoff =  901, itemId = xi.item.RED_ROCK },
+            { cutoff =  984, itemId = xi.item.ROSEWOOD_LOG },
+            { cutoff = 1008, itemId = xi.item.SPHENE },
+            { cutoff = 1020, itemId = xi.item.TRANSLUCENT_ROCK },
+            { cutoff = 1032, itemId = xi.item.WHITE_ROCK },
+            { cutoff = 1044, itemId = xi.item.YELLOW_ROCK },
+            { cutoff = 1056, itemId = xi.item.TURQUOISE },
         },
     },
     [xi.ki.AMBER_KEY] =
@@ -215,8 +215,8 @@ local keyitems =
         repeatable = true,
         prizes =
         {
-            { cutoff = 111, itemId = 16263, augments =
-                { -- Beak Necklace
+            { cutoff = 111, itemId = xi.item.BEAK_NECKLACE, augments =
+                {
                     {   9, 0, 12 }, -- MP+0-13
                     {  35, 0,  1 }, -- Magic Accuracy+0-2
                     { 516, 0,  1 }, -- INT+0-2
@@ -226,8 +226,8 @@ local keyitems =
                     {  39, 0,  1 }, -- Enmity+0-2
                 }
             },
-            { cutoff = 219, itemId = 13207, augments =
-                { -- Brocade Obi
+            { cutoff = 219, itemId = xi.item.BROCADE_OBI, augments =
+                {
                     {   1, 0, 11 }, -- HP+0-12
                     {   9, 0, 11 }, -- MP+0-12
                     {  35, 0,  2 }, -- Magic Accuracy+0-3
@@ -236,8 +236,8 @@ local keyitems =
                     { 100, 0,  2 }, -- Pet: Magic Accuracy+0-3
                 }
             },
-            { cutoff = 334, itemId = 13091, augments =
-                { -- Carapace Gorget
+            { cutoff = 334, itemId = xi.item.CARAPACE_GORGET, augments =
+                {
                     { 513, 0,  0 }, -- DEX+0-1
                     { 512, 0,  2 }, -- STR+0-3
                     {  25, 0,  6 }, -- Attack+0-7
@@ -247,8 +247,8 @@ local keyitems =
                     { 773, 0,  5 }, -- Water+0-6
                 }
             },
-            { cutoff = 436, itemId = 13445, augments =
-                { -- Gold Ring
+            { cutoff = 436, itemId = xi.item.GOLD_RING, augments =
+                {
                     {   9, 0, 13 }, -- MP+0-14
                     { 516, 0,  1 }, -- INT+0-2
                     { 517, 0,  1 }, -- MND+0-2
@@ -257,8 +257,8 @@ local keyitems =
                     {  35, 0,  2 }, -- Magic Accuracy+0-3
                 }
             },
-            { cutoff = 561, itemId = 13593, augments =
-                { -- Raptor Mantle
+            { cutoff = 561, itemId = xi.item.RAPTOR_MANTLE, augments =
+                {
                     {   1, 0, 29 }, -- HP+0-30
                     { { 520, 0,  1 }, { 513, 0, 1 }, }, -- DEX-2-+2 (split into two augments)
                     { 515, 0,  2 }, -- AGI+0-3
@@ -267,25 +267,25 @@ local keyitems =
                     { 774, 0,  5 }, -- Light resist +0-6
                 }
             },
-            { cutoff = 564, itemId =   887 }, -- Coral Fragment
-            { cutoff = 576, itemId =   645 }, -- Darksteel Ore
-            { cutoff = 599, itemId =   902 }, -- Demon Horn
-            { cutoff = 616, itemId =   702 }, -- Ebony Log
-            { cutoff = 625, itemId =   737 }, -- Gold Ore
-            { cutoff = 683, itemId =  4144 }, -- Hi-Elixer
-            { cutoff = 730, itemId =  4132 }, -- Hi-Ether
-            { cutoff = 771, itemId =  4116 }, -- Hi-Potion
-            { cutoff = 788, itemId =   700 }, -- Mahogany Log
-            { cutoff = 805, itemId =  1116 }, -- Manticore Hide
-            { cutoff = 807, itemId =   703 }, -- Petrified Log
-            { cutoff = 809, itemId =   738 }, -- Platinum Ore
-            { cutoff = 818, itemId =   644 }, -- Mythril Ore
-            { cutoff = 835, itemId =   895 }, -- Ram Horn
-            { cutoff = 876, itemId =   859 }, -- Ram Skin
-            { cutoff = 885, itemId =  4621 }, -- Scroll of Raise II
-            { cutoff = 920, itemId =  4719 }, -- Scroll of Regen III
-            { cutoff = 946, itemId =   866 }, -- Wyvern Scales
-            { cutoff = 961, itemId =  1122 }, -- Wyvern Skin
+            { cutoff = 564, itemId = xi.item.CORAL_FRAGMENT },
+            { cutoff = 576, itemId = xi.item.CHUNK_OF_DARKSTEEL_ORE },
+            { cutoff = 599, itemId = xi.item.DEMON_HORN },
+            { cutoff = 616, itemId = xi.item.EBONY_LOG },
+            { cutoff = 625, itemId = xi.item.CHUNK_OF_GOLD_ORE },
+            { cutoff = 683, itemId = xi.item.HI_ELIXIR },
+            { cutoff = 730, itemId = xi.item.HI_ETHER },
+            { cutoff = 771, itemId = xi.item.HI_POTION },
+            { cutoff = 788, itemId = xi.item.MAHOGANY_LOG },
+            { cutoff = 805, itemId = xi.item.MANTICORE_HIDE },
+            { cutoff = 807, itemId = xi.item.PETRIFIED_LOG },
+            { cutoff = 809, itemId = xi.item.CHUNK_OF_PLATINUM_ORE },
+            { cutoff = 818, itemId = xi.item.CHUNK_OF_MYTHRIL_ORE },
+            { cutoff = 835, itemId = xi.item.RAM_HORN },
+            { cutoff = 876, itemId = xi.item.RAM_SKIN },
+            { cutoff = 885, itemId = xi.item.SCROLL_OF_RAISE_II },
+            { cutoff = 920, itemId = xi.item.SCROLL_OF_REGEN_III },
+            { cutoff = 946, itemId = xi.item.HANDFUL_OF_WYVERN_SCALES },
+            { cutoff = 961, itemId = xi.item.WYVERN_SKIN },
         },
     },
     [xi.ki.AZURE_KEY] =
@@ -295,8 +295,8 @@ local keyitems =
         repeatable = true,
         prizes =
         {
-            { cutoff = 106, itemId = 13597, augments =
-                { -- Beak Mantle
+            { cutoff = 106, itemId = xi.item.BEAK_MANTLE, augments =
+                {
                     { 512, 0,  1 }, -- STR+0-2
                     { 513, 0,  1 }, -- DEX+0-2
                     {  26, 0,  5 }, -- Attack-0-6
@@ -305,8 +305,8 @@ local keyitems =
                     { 195, 0,  1 }, -- Subtle Blow+0-2
                 }
             },
-            { cutoff = 203, itemId = 13092, augments =
-                { -- Coeurl Gorget
+            { cutoff = 203, itemId = xi.item.COEURL_GORGET, augments =
+                {
                     { 515, 0,  3 }, -- AGI+0-4
                     {  23, 0,  7 }, -- Accuracy+0-8
                     {  27, 0,  7 }, -- Ranged Accuracy+0-8
@@ -315,8 +315,8 @@ local keyitems =
                     { 771, 0,  3 }, -- Earth+0-4
                 }
             },
-            { cutoff = 305, itemId = 13447, augments =
-                { -- Platinum Ring
+            { cutoff = 305, itemId = xi.item.PLATINUM_RING, augments =
+                {
                     {   1, 0,  9 }, -- HP+0-10
                     { 512, 0,  1 }, -- STR+0-2
                     { 513, 0,  1 }, -- DEX+0-2
@@ -325,8 +325,8 @@ local keyitems =
                     {  23, 0,  2 }, -- Accuracy+0-3
                 }
             },
-            { cutoff = 386, itemId = 13208, augments =
-                { -- Rainbow Obi
+            { cutoff = 386, itemId = xi.item.RAINBOW_OBI, augments =
+                {
                     {   9, 0, 19 }, -- MP+0-20
                     { 516, 0,  4 }, -- INT+0-5
                     { 517, 0,  4 }, -- MND+0-5
@@ -335,8 +335,8 @@ local keyitems =
                     {  52, 0,  2 }, -- MP Recovered While Healing+1-3
                 }
             },
-            { cutoff = 490, itemId = 13125, augments =
-                { -- Torque
+            { cutoff = 490, itemId = xi.item.TORQUE, augments =
+                {
                     {   5, 0, 13 }, -- HP-0-14
                     {   9, 0, 12 }, -- MP+0-13
                     { 515, 0,  2 }, -- AGI+0-3
@@ -345,23 +345,23 @@ local keyitems =
                     { 518, 0,  1 }, -- CHR+0-2
                 }
             },
-            { cutoff = 498, itemId =   791 }, -- Aquamarine
-            { cutoff = 502, itemId =   801 }, -- Chrysoberyl
-            { cutoff = 536, itemId =   654 }, -- Darksteel Ingot
-            { cutoff = 612, itemId =   645 }, -- Darksteel Ore
-            { cutoff = 659, itemId =   702 }, -- Ebony Log
-            { cutoff = 693, itemId =   745 }, -- Gold Ingot
-            { cutoff = 786, itemId =  4144 }, -- Hi-Elixir
-            { cutoff = 789, itemId =  4133 }, -- Hi-Ether +1
-            { cutoff = 831, itemId =  4117 }, -- Hi-Potion +1
-            { cutoff = 835, itemId =   784 }, -- Jadeite
-            { cutoff = 856, itemId =   700 }, -- Mahogany Log
-            { cutoff = 907, itemId =   653 }, -- Mythril Ingot
-            { cutoff = 911, itemId =   895 }, -- Ram Horn
-            { cutoff = 915, itemId =  4719 }, -- Scroll of Regen III
-            { cutoff = 948, itemId =   652 }, -- Steel Ingot
-            { cutoff = 956, itemId =   803 }, -- Sunstone
-            { cutoff = 960, itemId =   866 }, -- Wyvern Scales
+            { cutoff = 498, itemId = xi.item.AQUAMARINE },
+            { cutoff = 502, itemId = xi.item.CHRYSOBERYL },
+            { cutoff = 536, itemId = xi.item.DARKSTEEL_INGOT },
+            { cutoff = 612, itemId = xi.item.CHUNK_OF_DARKSTEEL_ORE },
+            { cutoff = 659, itemId = xi.item.EBONY_LOG },
+            { cutoff = 693, itemId = xi.item.GOLD_INGOT },
+            { cutoff = 786, itemId = xi.item.HI_ELIXIR },
+            { cutoff = 789, itemId = xi.item.HI_ETHER_P1 },
+            { cutoff = 831, itemId = xi.item.HI_POTION_I },
+            { cutoff = 835, itemId = xi.item.JADEITE },
+            { cutoff = 856, itemId = xi.item.MAHOGANY_LOG },
+            { cutoff = 907, itemId = xi.item.MYTHRIL_INGOT },
+            { cutoff = 911, itemId = xi.item.RAM_HORN },
+            { cutoff = 915, itemId = xi.item.SCROLL_OF_REGEN_III },
+            { cutoff = 948, itemId = xi.item.STEEL_INGOT },
+            { cutoff = 956, itemId = xi.item.SUNSTONE },
+            { cutoff = 960, itemId = xi.item.HANDFUL_OF_WYVERN_SCALES },
         },
     },
     [xi.ki.IVORY_KEY] =
@@ -371,8 +371,8 @@ local keyitems =
         repeatable = true,
         prizes =
         {
-            { cutoff =   62, itemId = 13357, augments =
-                { -- Angels Earring
+            { cutoff =   62, itemId = xi.item.ANGELS_EARRING, augments =
+                {
                     { 518, 0, 1 }, -- CHR+1-2
                     {  40, 0, 1 }, -- Enmity-2--1
                     {   1, 0, 9 }, -- HP+1-10
@@ -382,8 +382,8 @@ local keyitems =
                     {  34, 0, 3 }, -- Def-4--1
                 }
             },
-            { cutoff =   70, itemId = 13356, augments =
-                { -- Death Earring
+            { cutoff =   70, itemId = xi.item.DEATH_EARRING, augments =
+                {
                     {  33, 0, 3 }, -- Defense+1-4
                     {  39, 0, 1 }, -- Enmity+1-2
                     {   1, 0, 9 }, -- HP+1-10
@@ -392,8 +392,8 @@ local keyitems =
                     { 521, 0, 1 }, -- VIT-2--1
                 }
             },
-            { cutoff =  113, itemId = 13353, augments =
-                { -- Diamond Earring
+            { cutoff =  113, itemId = xi.item.DIAMOND_EARRING, augments =
+                {
                     { 516, 0, 1 }, -- INT+1-2
                     { 515, 0, 0 }, -- AGI+1
                     { 133, 0, 1 }, -- Magic Attack Bonus+1-2
@@ -402,8 +402,8 @@ local keyitems =
                     { 101, 0, 1 }, -- Pet: Magic Attack Bonus+1-2
                 }
             },
-            { cutoff =  196, itemId = 13351, augments =
-                { -- Emerald Earring
+            { cutoff =  196, itemId = xi.item.EMERALD_EARRING, augments =
+                {
                     { 515, 0, 1 }, -- AGI+1-2
                     {  31, 0, 4 }, -- Evasion+1-5
                     {  98, 0, 4 }, -- Pet: Evasion+1-5
@@ -412,8 +412,8 @@ local keyitems =
                     {  30, 0, 1 }, -- Ranged Attack-2--1
                 }
             },
-            { cutoff =  301, itemId = 13352, augments =
-                { -- Ruby Earring
+            { cutoff =  301, itemId = xi.item.RUBY_EARRING, augments =
+                {
                     {  25, 0, 4 }, -- Attack+1-5
                     { 516, 0, 1 }, -- INT+1-2
                     {  97, 0, 4 }, -- Pet: Attack and Ranged Attack+1-5
@@ -422,8 +422,8 @@ local keyitems =
                     {  24, 0, 2 }, -- Accuracy-3--1
                 }
             },
-            { cutoff =  392, itemId = 13355, augments =
-                { -- Sapphire Earring
+            { cutoff =  392, itemId = xi.item.SAPPHIRE_EARRING, augments =
+                {
                     {  35, 0, 1 }, -- Magic Accuracy+1-2
                     { 517, 0, 1 }, -- MND+1-2
                     {   9, 0, 5 }, -- MP+1-6
@@ -432,8 +432,8 @@ local keyitems =
                     {   5, 0, 6 }, -- HP-7--1
                 }
             },
-            { cutoff =  478, itemId = 13354, augments =
-                { -- Spinel Earring
+            { cutoff =  478, itemId = xi.item.SPINEL_EARRING, augments =
+                {
                     {  23, 0, 2 }, -- Accuracy+1-3
                     { 513, 0, 1 }, -- DEX+1-2
                     { 517, 0, 0 }, -- MND+1
@@ -443,8 +443,8 @@ local keyitems =
                     {  26, 0, 4 }, -- Attack-5--1
                 }
             },
-            { cutoff =  497, itemId = 13318, augments =
-                { -- Topaz Earring
+            { cutoff =  497, itemId = xi.item.TOPAZ_EARRING, augments =
+                {
                     {  33, 0,  4 }, -- DEF+1-5
                     { 513, 0,  1 }, -- DEX+1-2
                     {   1, 0, 19 }, -- HP+1-20
@@ -453,17 +453,17 @@ local keyitems =
                     {  32, 0,  2 }, -- Evasion-3--1
                 }
             },
-            { cutoff =  546, itemId =  1110 }, -- Beetle Blood
-            { cutoff =  602, itemId =   823 }, -- Gold Thread
-            { cutoff =  627, itemId =  1465 }, -- Granite
-            { cutoff =  658, itemId =  4134 }, -- Hi-Ether +2
-            { cutoff =  901, itemId =  4118 }, -- Hi-Potion +2
-            { cutoff =  963, itemId =   837 }, -- Malboro Fiber
-            { cutoff =  982, itemId =   924 }, -- Philosophers Stone
-            { cutoff = 1019, itemId =   844 }, -- Phoenix Feather
-            { cutoff = 1062, itemId =   830 }, -- Rainbow Cloth
-            { cutoff = 1124, itemId =  1132 }, -- Raxa
-            { cutoff = 1172, itemId =  4174 }, -- Vile Elixir
+            { cutoff =  546, itemId = xi.item.VIAL_OF_BLACK_BEETLE_BLOOD },
+            { cutoff =  602, itemId = xi.item.SPOOL_OF_GOLD_THREAD },
+            { cutoff =  627, itemId = xi.item.SLAB_OF_GRANITE },
+            { cutoff =  658, itemId = xi.item.HI_ETHER_P2 },
+            { cutoff =  901, itemId = xi.item.HI_POTION_II },
+            { cutoff =  963, itemId = xi.item.SPOOL_OF_MALBORO_FIBER },
+            { cutoff =  982, itemId = xi.item.PHILOSOPHERS_STONE },
+            { cutoff = 1019, itemId = xi.item.PHOENIX_FEATHER },
+            { cutoff = 1062, itemId = xi.item.SQUARE_OF_RAINBOW_CLOTH },
+            { cutoff = 1124, itemId = xi.item.SQUARE_OF_RAXA },
+            { cutoff = 1172, itemId = xi.item.VILE_ELIXIR },
         },
     },
     [xi.ki.EBON_KEY] =
@@ -473,8 +473,8 @@ local keyitems =
         repeatable = true,
         prizes =
         {
-            { cutoff =  31, itemId = 13463, augments =
-                { -- Angels Ring:
+            { cutoff =  31, itemId = xi.item.ANGELS_RING, augments =
+                {
                     -- https://ffxiclopedia.fandom.com/wiki/Ebon_Key?oldid=934097 doesn't list -acc and -def, but this had -dark resist before the restructure
                     -- and that seems to fit the theme of the other rewards
                     {  40, 0,  1 }, -- Enmity-0-2
@@ -485,8 +485,8 @@ local keyitems =
                     { 783, 0, 29 },-- dark resist -0-30
                 }
             },
-            { cutoff =  82, itemId = 13462, augments =
-                { -- Death Ring
+            { cutoff =  82, itemId = xi.item.DEATH_RING, augments =
+                {
                     { 782, 0, 29 }, -- Light-0-30
                     { 525, 0,  2 }, -- CHR-0-3
                     {   9, 0, 19 }, -- MP+0-20
@@ -495,8 +495,8 @@ local keyitems =
                     {  39, 0,  0 }, -- Enmity+1
                 }
             },
-            { cutoff = 174, itemId = 13450, augments =
-                { -- Diamond Ring
+            { cutoff = 174, itemId = xi.item.DIAMOND_RING, augments =
+                {
                     { 776, 0, 29 }, -- Fire-0-30
                     { 519, 0,  4 }, -- STR-0-5
                     {   9, 0,  9 }, -- MP+0-10
@@ -505,8 +505,8 @@ local keyitems =
                     { 517, 0,  1 }, -- MND+0-2
                 }
             },
-            { cutoff = 225, itemId = 13448, augments =
-                { -- Emerald Ring
+            { cutoff = 225, itemId = xi.item.EMERALD_RING, augments =
+                {
                     { 777, 0, 29 }, -- ice -0-30 (wiki is conflicting, might be water?)
                     { 523, 0,  4 }, -- INT-0-5
                     {   1, 0,  8 }, -- HP+0-9
@@ -515,8 +515,8 @@ local keyitems =
                     { 515, 0,  0 }, -- AGI+1
                 }
             },
-            { cutoff = 296, itemId = 13449, augments =
-                { -- Ruby Ring
+            { cutoff = 296, itemId = xi.item.RUBY_RING, augments =
+                {
                     { 781, 0, 29 }, -- Water-0-30
                     { 524, 0,  1 }, -- MND-0-2
                     {   1, 0,  9 }, -- HP+0-10
@@ -525,8 +525,8 @@ local keyitems =
                     { 516, 0,  2 }, -- INT+0-3
                 }
             },
-            { cutoff = 357, itemId = 13452, augments =
-                { -- Sapphire Ring
+            { cutoff = 357, itemId = xi.item.SAPPHIRE_RING, augments =
+                {
                     { 780, 0, 29 }, -- Lightning-0-30
                     {   9, 0,  9 }, -- MP+0-10
                     { { 519, 0,  0 }, { 512, 0, 2 }, }, -- STR-1-+3 (split into two augments)
@@ -535,8 +535,8 @@ local keyitems =
                     { 518, 0,  2 }, -- CHR+0-3
                 }
             },
-            { cutoff = 459, itemId = 13451, augments =
-                { -- Spinel Ring
+            { cutoff = 459, itemId = xi.item.SPINEL_RING, augments =
+                {
                     { 779, 0, 29 }, -- Earth-0-30
                     {   1, 0,  9 }, -- HP+0-10
                     { 513, 0,  0 }, -- DEX+1
@@ -548,8 +548,8 @@ local keyitems =
                     {  96, 0,  1 }, -- Pet: Accuracy and Ranged Accuracy+0-2
                 }
             },
-            { cutoff = 500, itemId = 13453, augments =
-                { -- Topaz Ring
+            { cutoff = 500, itemId = xi.item.TOPAZ_RING, augments =
+                {
                     { 778, 0, 29 }, -- Wind-0-30
                     { 522, 0,  5 }, -- AGI-0-6
                     { 771, 0,  8 }, -- Earth+0-9
@@ -559,23 +559,23 @@ local keyitems =
                     { 516, 0,  2 }, -- INT+0-3
                 }
             },
-            { cutoff = 510, itemId =   655 }, -- Adaman Ingot
-            { cutoff = 541, itemId =   813 }, -- Angelstone
-            { cutoff = 561, itemId =   645 }, -- Darksteel Ore
-            { cutoff = 592, itemId =   812 }, -- Deathstone
-            { cutoff = 633, itemId =   787 }, -- Diamond
-            { cutoff = 643, itemId =   785 }, -- Emerald
-            { cutoff = 714, itemId =  4135 }, -- Hi-Ether +3
-            { cutoff = 785, itemId =  4119 }, -- Hi-Potion +3
-            { cutoff = 805, itemId =   739 }, -- Orichalcum Ore
-            { cutoff = 815, itemId =   738 }, -- Platinum Ore
-            { cutoff = 835, itemId =   786 }, -- Ruby
-            { cutoff = 855, itemId =   794 }, -- Sapphire
-            { cutoff = 896, itemId =  4613 }, -- Scroll of Cure V
-            { cutoff = 916, itemId =  4659 }, -- Scroll of Shell IV
-            { cutoff = 936, itemId =  4774 }, -- Scroll of Thunder III
-            { cutoff = 987, itemId =  4174 }, -- Vile Elixir
-            { cutoff = 997, itemId =  4748 }, -- Scroll of Raise III
+            { cutoff = 510, itemId = xi.item.ADAMAN_INGOT },
+            { cutoff = 541, itemId = xi.item.ANGELSTONE },
+            { cutoff = 561, itemId = xi.item.CHUNK_OF_DARKSTEEL_ORE },
+            { cutoff = 592, itemId = xi.item.DEATHSTONE },
+            { cutoff = 633, itemId = xi.item.DIAMOND },
+            { cutoff = 643, itemId = xi.item.EMERALD },
+            { cutoff = 714, itemId = xi.item.HI_ETHER_P3 },
+            { cutoff = 785, itemId = xi.item.HI_POTION_III },
+            { cutoff = 805, itemId = xi.item.CHUNK_OF_ORICHALCUM_ORE },
+            { cutoff = 815, itemId = xi.item.CHUNK_OF_PLATINUM_ORE },
+            { cutoff = 835, itemId = xi.item.RUBY },
+            { cutoff = 855, itemId = xi.item.SAPPHIRE },
+            { cutoff = 896, itemId = xi.item.SCROLL_OF_CURE_V },
+            { cutoff = 916, itemId = xi.item.SCROLL_OF_SHELL_IV },
+            { cutoff = 936, itemId = xi.item.SCROLL_OF_THUNDER_III },
+            { cutoff = 987, itemId = xi.item.VILE_ELIXIR },
+            { cutoff = 997, itemId = xi.item.SCROLL_OF_RAISE_III },
         },
     },
     [xi.ki.PRISMATIC_KEY] =
@@ -591,8 +591,8 @@ local keyitems =
         repeatable = true,
         prizes =
         {
-            { cutoff =   31, itemId = 12433, augments =
-                { -- Brass Mask
+            { cutoff =   31, itemId = xi.item.BRASS_MASK, augments =
+                {
                     {   1, 0, 1 }, -- HP +1-2
                     {   9, 0, 2 }, -- MP +1-3
                     { 514, 0, 0 }, -- VIT +1
@@ -601,8 +601,8 @@ local keyitems =
                     { 177, 0, 0 }, -- Resist Poison +1
                 },
             },
-            { cutoff =  109, itemId = 12986, augments =
-                { -- Chestnut Sabots
+            { cutoff =  109, itemId = xi.item.CHESTNUT_SABOTS, augments =
+                {
                     {  13, 5, 5 }, -- MP -6
                     { 517, 0, 1 }, -- MND +1-2
                     { 100, 1, 1 }, -- Pet: Magic Accuracy +2
@@ -611,8 +611,8 @@ local keyitems =
                     {  53, 2, 2 }, -- Spell Interruption Rate down 3%
                 },
             },
-            { cutoff =  218, itemId = 12721, augments =
-                { -- Cotton Gloves
+            { cutoff =  218, itemId = xi.item.COTTON_GLOVES, augments =
+                {
                     {  23, 0, 1 }, -- Accuracy +1-2
                     { 768, 0, 1 }, -- Fire resist +1-2
                     { 769, 0, 0 }, -- Ice resist +1
@@ -620,8 +620,8 @@ local keyitems =
                     { 515, 0, 0 }, -- AGI +1
                 },
             },
-            { cutoff =  296, itemId = 12826, augments =
-                { -- Studded Trousers
+            { cutoff =  296, itemId = xi.item.STUDDED_TROUSERS, augments =
+                {
                     {  29, 0, 1 }, -- Ranged Attack +1-2
                     {  25, 0, 2 }, -- Attack +1-3
                     { 195, 1, 1 }, -- Subtle Blow +2
@@ -629,8 +629,8 @@ local keyitems =
                     { 179, 0, 3 }, -- Resist Blind +1-4
                 },
             },
-            { cutoff =  437, itemId = 12602, augments =
-                { -- Wool Robe
+            { cutoff =  437, itemId = xi.item.WOOL_ROBE, augments =
+                {
                     { 771, 0, 4 }, -- Earth resist +1-5
                     { 515, 0, 1 }, -- AGI +1-2
                     {  29, 0, 0 }, -- Ranged Attack +1
@@ -639,21 +639,21 @@ local keyitems =
                     { 519, 0, 1 }, -- STR -1-2
                 },
             },
-            { cutoff =  468, itemId =   694 }, -- Chestnut Log
-            { cutoff =  499, itemId =   645 }, -- Darksteel Ore
-            { cutoff =  624, itemId =  4145 }, -- Elixir
-            { cutoff =  655, itemId =   690 }, -- Elm Log
-            { cutoff =  686, itemId =   643 }, -- Iron Ore
-            { cutoff =  717, itemId =   651 }, -- Iron Ingot
-            { cutoff =  764, itemId =   653 }, -- Mythril Ingot
-            { cutoff =  780, itemId =   644 }, -- Mythril Ore
-            { cutoff =  843, itemId =   744 }, -- Silver Ingot
-            { cutoff =  874, itemId =   736 }, -- Silver Ore
-            { cutoff =  937, itemId =   652 }, -- Steel Ingot
-            { cutoff =  968, itemId =  4868 }, -- Scroll of Dispel
-            { cutoff =  999, itemId =  5070 }, -- Scroll of Magic Finale
-            { cutoff = 1015, itemId =  4947 }, -- Scroll of Utsusemi: Ni
-            { cutoff = 1031, itemId =  4751 }, -- Scroll of Erase
+            { cutoff =  468, itemId = xi.item.CHESTNUT_LOG },
+            { cutoff =  499, itemId = xi.item.CHUNK_OF_DARKSTEEL_ORE },
+            { cutoff =  624, itemId = xi.item.ELIXIR },
+            { cutoff =  655, itemId = xi.item.ELM_LOG },
+            { cutoff =  686, itemId = xi.item.CHUNK_OF_IRON_ORE },
+            { cutoff =  717, itemId = xi.item.IRON_INGOT },
+            { cutoff =  764, itemId = xi.item.MYTHRIL_INGOT },
+            { cutoff =  780, itemId = xi.item.CHUNK_OF_MYTHRIL_ORE },
+            { cutoff =  843, itemId = xi.item.SILVER_INGOT },
+            { cutoff =  874, itemId = xi.item.CHUNK_OF_SILVER_ORE },
+            { cutoff =  937, itemId = xi.item.STEEL_INGOT },
+            { cutoff =  968, itemId = xi.item.SCROLL_OF_DISPEL },
+            { cutoff =  999, itemId = xi.item.SCROLL_OF_MAGIC_FINALE },
+            { cutoff = 1015, itemId = xi.item.SCROLL_OF_UTSUSEMI_NI },
+            { cutoff = 1031, itemId = xi.item.SCROLL_OF_ERASE },
         },
     },
     [xi.ki.BLUE_CORAL_KEY] =
@@ -663,8 +663,8 @@ local keyitems =
         repeatable = true,
         prizes =
         {
-            { cutoff =   42, itemId = 12571, augments =
-                { -- Cuir Bouilli
+            { cutoff =   42, itemId = xi.item.CUIR_BOUILLI, augments =
+                {
                     {   1, 3, 3 }, -- HP+4
                     { 291, 1, 1 }, -- Enfeebling Magic+2
                     {  52, 1, 1 }, -- MP Recovered While Healing+2
@@ -673,8 +673,8 @@ local keyitems =
                     {  39, 0, 0 }, -- Enmity+1
                 },
             },
-            { cutoff =  250, itemId = 14118, augments =
-                { -- Iron Greaves
+            { cutoff =  250, itemId = xi.item.IRON_GREAVES, augments =
+                {
                     {   1, 1, 1 }, -- HP +2
                     { 512, 0, 0 }, -- STR +1
                     { 518, 0, 1 }, -- CHR +1-2
@@ -682,8 +682,8 @@ local keyitems =
                     { 774, 0, 5 }, -- Light resist +1-6
                 },
             },
-            { cutoff =  292, itemId = 12866, augments =
-                { -- Linen Slacks
+            { cutoff =  292, itemId = xi.item.LINEN_SLACKS, augments =
+                {
                     {   9, 6, 6 }, -- MP +7
                     { 524, 1, 1 }, -- MND -2
                     { 141, 1, 1 }, -- Conserve MP +2
@@ -691,32 +691,32 @@ local keyitems =
                     {  35, 0, 1 }, -- Magic Accuracy +1-2
                 },
             },
-            { cutoff =  375, itemId = 12450, augments =
-                { -- Padded Cap
+            { cutoff =  375, itemId = xi.item.PADDED_CAP, augments =
+                {
                     { 513, 1, 1 }, -- DEX +2
                     { 515, 0, 0 }, -- AGI +1
                     {  25, 0, 1 }, -- Attack +1-2
                     { 772, 0, 0 }, -- Lightning resist +1
                 },
             },
-            { cutoff =  458, itemId = 12731, augments =
-                { -- Velvet Cuffs
+            { cutoff =  458, itemId = xi.item.VELVET_CUFFS, augments =
+                {
                     {   5, 0, 0 }, -- HP -1
                     {  96, 0, 0 }, -- Pet: Accuracy +1 Ranged Accuracy +1
                     { 176, 0, 1 }, -- Resist Sleep +1-2
                     {  31, 2, 2 }, -- Evasion +3
                 },
             },
-            { cutoff =  500, itemId =   793 }, -- Black Pearl
-            { cutoff =  583, itemId =  4145 }, -- Elixir
-            { cutoff =  625, itemId =  4129 }, -- Ether +1
-            { cutoff =  667, itemId =   790 }, -- Garnet
-            { cutoff =  709, itemId =   788 }, -- Peridot
-            { cutoff =  751, itemId =  4113 }, -- Potion +1
-            { cutoff =  876, itemId =   699 }, -- Oak Log
-            { cutoff =  918, itemId =   830 }, -- Rainbow Cloth
-            { cutoff =  960, itemId =   769 }, -- Red Rock
-            { cutoff = 1002, itemId =   798 }, -- Turquoise
+            { cutoff =  500, itemId = xi.item.BLACK_PEARL },
+            { cutoff =  583, itemId = xi.item.ELIXIR },
+            { cutoff =  625, itemId = xi.item.ETHER_P1 },
+            { cutoff =  667, itemId = xi.item.GARNET },
+            { cutoff =  709, itemId = xi.item.PERIDOT },
+            { cutoff =  751, itemId = xi.item.POTION_P1 },
+            { cutoff =  876, itemId = xi.item.OAK_LOG },
+            { cutoff =  918, itemId = xi.item.SQUARE_OF_RAINBOW_CLOTH },
+            { cutoff =  960, itemId = xi.item.RED_ROCK },
+            { cutoff = 1002, itemId = xi.item.TURQUOISE },
         },
     },
     [xi.ki.PEACH_CORAL_KEY] =
@@ -726,8 +726,8 @@ local keyitems =
         repeatable = true,
         prizes =
         {
-            { cutoff =   66, itemId = 13712, augments =
-                { -- Carapace Harness
+            { cutoff =   66, itemId = xi.item.CARAPACE_HARNESS, augments =
+                {
                     {  23, 0, 5 }, -- Accuracy +1-6
                     {  25, 0, 3 }, -- Attack +1-4
                     {  31, 0, 5 }, -- Evasion +1-6
@@ -736,8 +736,8 @@ local keyitems =
                     {  50, 0, 1 }, -- Slow +1-2
                 },
             },
-            { cutoff =  198, itemId = 12956, augments =
-                { -- Raptor Ledelsens
+            { cutoff =  198, itemId = xi.item.RAPTOR_LEDELSENS, augments =
+                {
                     {   1, 0,  5 }, -- HP +1-6
                     {   9, 3, 11 }, -- MP +4-12
                     { 514, 0,  2 }, -- VIT +1-3
@@ -745,8 +745,8 @@ local keyitems =
                     {  36, 0,  1 }, -- Magic Accuracy -1-2
                 },
             },
-            { cutoff =  303, itemId = 12476, augments =
-                { -- Silk Hat
+            { cutoff =  303, itemId = xi.item.SILK_HAT, augments =
+                {
                     {  13, 1, 1 }, -- MP-2
                     { 289, 0, 2 }, -- Healing Magic Skill +1-3
                     { 291, 0, 2 }, -- Enfeebling Magic Skill +1-3
@@ -754,16 +754,16 @@ local keyitems =
                     { 293, 0, 2 }, -- Dark Magic Skill +1-3
                 },
             },
-            { cutoff =  395, itemId = 14003, augments =
-                { -- Steel Finger Gauntlets
+            { cutoff =  395, itemId = xi.item.STEEL_FINGER_GAUNTLETS, augments =
+                {
                     {  68, 0, 2 }, -- Accuracy +1-3 Attack +1-3
                     {  49, 0, 0 }, -- Haste +1
                     { 186, 0, 2 }, -- Resist Slow +1-3
                     { 770, 0, 2 }, -- Wind resist +1-3
                 },
             },
-            { cutoff =  487, itemId = 12867, augments =
-                { -- White Slacks
+            { cutoff =  487, itemId = xi.item.WHITE_SLACKS, augments =
+                {
                     { 516, 0, 3 }, -- INT+1-4
                     { 517, 0, 3 },-- MND+1-4
                     { 518, 0, 3 },-- CHR+1-4
@@ -772,24 +772,24 @@ local keyitems =
                     {  39, 0, 2 }, -- Enmity +1-3
                 },
             },
-            { cutoff =  500, itemId =   645 }, -- Darksteel Ore
-            { cutoff =  526, itemId =   902 }, -- Demon Horn
-            { cutoff =  565, itemId =   702 }, -- Ebony Log
-            { cutoff =  591, itemId =   737 }, -- Gold Ore
-            { cutoff =  696, itemId =  4144 }, -- Hi-Elixer
-            { cutoff =  747, itemId =  4132 }, -- Hi-Ether
-            { cutoff =  773, itemId =  4116 }, -- Hi-Potion
-            { cutoff =  786, itemId =   700 }, -- Mahogany Log
-            { cutoff =  839, itemId =  1116 }, -- Manticore Hide
-            { cutoff =  852, itemId =   644 }, -- Mythril Ore
-            { cutoff =  891, itemId =   703 }, -- Petrified Log
-            { cutoff =  930, itemId =  4621 }, -- Scroll of Raise II
-            { cutoff =  969, itemId =   738 }, -- Platinum Ore
-            { cutoff = 1008, itemId =   895 }, -- Ram Horn
-            { cutoff = 1021, itemId =   859 }, -- Ram Skin
-            { cutoff = 1074, itemId =  4719 }, -- Scroll of Regen III
-            { cutoff = 1087, itemId =   866 }, -- Wyvern Scales
-            { cutoff = 1103, itemId =  1122 }, -- Wyvern Skin
+            { cutoff =  500, itemId = xi.item.CHUNK_OF_DARKSTEEL_ORE },
+            { cutoff =  526, itemId = xi.item.DEMON_HORN },
+            { cutoff =  565, itemId = xi.item.EBONY_LOG },
+            { cutoff =  591, itemId = xi.item.CHUNK_OF_GOLD_ORE },
+            { cutoff =  696, itemId = xi.item.HI_ELIXIR },
+            { cutoff =  747, itemId = xi.item.HI_ETHER },
+            { cutoff =  773, itemId = xi.item.HI_POTION },
+            { cutoff =  786, itemId = xi.item.MAHOGANY_LOG },
+            { cutoff =  839, itemId = xi.item.MANTICORE_HIDE },
+            { cutoff =  852, itemId = xi.item.CHUNK_OF_MYTHRIL_ORE },
+            { cutoff =  891, itemId = xi.item.PETRIFIED_LOG },
+            { cutoff =  930, itemId = xi.item.SCROLL_OF_RAISE_II },
+            { cutoff =  969, itemId = xi.item.CHUNK_OF_PLATINUM_ORE },
+            { cutoff = 1008, itemId = xi.item.RAM_HORN },
+            { cutoff = 1021, itemId = xi.item.RAM_SKIN },
+            { cutoff = 1074, itemId = xi.item.SCROLL_OF_REGEN_III },
+            { cutoff = 1087, itemId = xi.item.HANDFUL_OF_WYVERN_SCALES },
+            { cutoff = 1103, itemId = xi.item.WYVERN_SKIN },
         },
     },
     [xi.ki.BLACK_CORAL_KEY] =
@@ -799,8 +799,8 @@ local keyitems =
         repeatable = true,
         prizes =
         {
-            { cutoff =   90, itemId = 13698, augments =
-                { -- Beak Helm
+            { cutoff =   90, itemId = xi.item.BEAK_HELM, augments =
+                {
                     {  9, 0, 5 }, -- MP +1-6
                     { 25, 0, 3 }, -- Attack +1-4
                     { 23, 0, 5 }, -- Accuracy +1-6
@@ -808,8 +808,8 @@ local keyitems =
                     { 27, 0, 5 }, -- Ranged Accuracy +1-6
                 },
             },
-            { cutoff =  194, itemId = 12988, augments =
-                { -- Pigaches
+            { cutoff =  194, itemId = xi.item.PIGACHES, augments =
+                {
                     {   1, 1, 11 }, -- HP +2-12
                     {  29, 0,  2 }, -- Ranged Attack +1-3
                     {  27, 0,  1 }, -- Ranged Accuracy +1-2
@@ -818,16 +818,16 @@ local keyitems =
                     { 522, 0,  1 }, -- AGI -1-2
                 },
             },
-            { cutoff =  224, itemId = 12811, augments =
-                { -- Darksteel Breeches
+            { cutoff =  224, itemId = xi.item.DARKSTEEL_BREECHES, augments =
+                {
                     { 770, 1, 4 }, -- Wind resist +2-5
                     { 515, 1, 2 }, -- Agility +2-3
                     {  31, 2, 2 }, -- Evasion +3
                     { 180, 0, 2 }, -- Resist Silence +1-3
                 },
             },
-            { cutoff =  433, itemId = 12707, augments =
-                { -- Scorpion Mitts
+            { cutoff =  433, itemId = xi.item.SCORPION_MITTENS, augments =
+                {
                     { 512, 0,  3 }, -- STR +1-4
                     { 514, 0,  1 }, -- VIT +1-2
                     { 518, 0,  2 }, -- CHR +1-3
@@ -836,8 +836,8 @@ local keyitems =
                     {  26, 0,  3 }, -- Attack -1--4
                 },
             },
-            { cutoff =  552, itemId = 12604, augments =
-                { -- Silk Coat
+            { cutoff =  552, itemId = xi.item.SILK_COAT, augments =
+                {
                     { 516, 0,  3 }, -- INT +1-4
                     { 517, 0,  2 }, -- CHR +1-3
                     { 518, 0,  3 }, -- MND +1-4
@@ -847,17 +847,17 @@ local keyitems =
                     { 293, 0,  4 }, -- Dark +1-5
                 },
             },
-            { cutoff =  597, itemId =   645 }, -- Darksteel Ore
-            { cutoff =  612, itemId =   654 }, -- Darksteel Ingot
-            { cutoff =  642, itemId =   745 }, -- Gold Ingot
-            { cutoff =  776, itemId =  4144 }, -- Hi-Elixer
-            { cutoff =  821, itemId =  4133 }, -- Hi-Ether +1
-            { cutoff =  851, itemId =  4117 }, -- Hi-Potion +1
-            { cutoff =  866, itemId =   700 }, -- Mahogany Log
-            { cutoff =  881, itemId =   653 }, -- Mythril Ingot
-            { cutoff =  896, itemId =   797 }, -- Painite
-            { cutoff = 1000, itemId =   652 }, -- Steel Ingot
-            { cutoff = 1015, itemId =   805 }, -- Zircon
+            { cutoff =  597, itemId = xi.item.CHUNK_OF_DARKSTEEL_ORE },
+            { cutoff =  612, itemId = xi.item.DARKSTEEL_INGOT },
+            { cutoff =  642, itemId = xi.item.GOLD_INGOT },
+            { cutoff =  776, itemId = xi.item.HI_ELIXIR },
+            { cutoff =  821, itemId = xi.item.HI_ETHER_P1 },
+            { cutoff =  851, itemId = xi.item.HI_POTION_I },
+            { cutoff =  866, itemId = xi.item.MAHOGANY_LOG },
+            { cutoff =  881, itemId = xi.item.MYTHRIL_INGOT },
+            { cutoff =  896, itemId = xi.item.PAINITE },
+            { cutoff = 1000, itemId = xi.item.STEEL_INGOT },
+            { cutoff = 1015, itemId = xi.item.ZIRCON },
         },
     },
     [xi.ki.RED_CORAL_KEY] =
@@ -867,8 +867,8 @@ local keyitems =
         repeatable = true,
         prizes =
         {
-            { cutoff =  109, itemId = 16289, augments =
-                { -- Alloy Torque
+            { cutoff =  109, itemId = xi.item.ALLOY_TORQUE, augments =
+                {
                     {  51, 0, 1 }, -- HP Recovered while Healing +1-2
                     {  35, 0, 2 }, -- Magic Accuracy +1-3
                     { 298, 0, 4 }, -- Wind Instrument Skill +1-5
@@ -876,8 +876,8 @@ local keyitems =
                     { 292, 0, 4 }, -- Elemental Magic Skill +1-5
                 },
             },
-            { cutoff =  200, itemId = 16288, augments =
-                { -- Aureate Necklace
+            { cutoff =  200, itemId = xi.item.AUREATE_NECKLACE, augments =
+                {
                     { 768, 2, 3 }, -- Fire resist +3-4
                     { 512, 0, 1 }, -- STR +1-2
                     { 513, 0, 4 }, -- DEX +1-5
@@ -886,8 +886,8 @@ local keyitems =
                     {  24, 0, 3 }, -- Accuracy -1--4
                 },
             },
-            { cutoff =  273, itemId = 16290, augments =
-                { -- Burly Gorget
+            { cutoff =  273, itemId = xi.item.BURLY_GORGET, augments =
+                {
                     { 516, 0, 2 }, -- INT +1-3
                     { 517, 0, 2 }, -- CHR +1-3
                     { 518, 0, 2 }, -- MND +1-3
@@ -896,8 +896,8 @@ local keyitems =
                     {  36, 1, 1 }, -- Magic Accuracy -2
                 },
             },
-            { cutoff =  382, itemId = 16286, augments =
-                { -- Nitid Choker
+            { cutoff =  382, itemId = xi.item.NITID_CHOKER, augments =
+                {
                     {   5, 0, 8 }, -- HP -1-9
                     { 513, 0, 1 }, -- DEX +1-2
                     {  23, 0, 7 }, -- Accuracy +1-8
@@ -906,8 +906,8 @@ local keyitems =
                     { 772, 0, 2 }, -- Lightning resist +1-3
                 },
             },
-            { cutoff =  473, itemId = 16287, augments =
-                { -- Pneuma Collar
+            { cutoff =  473, itemId = xi.item.PNEUMA_COLLAR, augments =
+                {
                     {  34, 2, 2 }, -- Defense -3
                     { 512, 0, 1 }, -- STR +1-2
                     {  27, 0, 1 }, -- Ranged Accuracy +1-2
@@ -916,17 +916,17 @@ local keyitems =
                     {  98, 0, 2 }, -- Pet: Evasion +1-3
                 },
             },
-            { cutoff =  528, itemId =  1110 }, -- Beetle Blood
-            { cutoff =  619, itemId =   823 }, -- Gold Thread
-            { cutoff =  692, itemId =  1465 }, -- Granite
-            { cutoff =  728, itemId =  4134 }, -- Hi-Ether +2
-            { cutoff =  764, itemId =   837 }, -- Malboro Fiber
-            { cutoff =  782, itemId =   924 }, -- Philosophers Stone
-            { cutoff =  800, itemId =   844 }, -- Phoenix Feather
-            { cutoff =  836, itemId =   830 }, -- Rainbow Cloth
-            { cutoff =  872, itemId =  1132 }, -- Raxa
-            { cutoff =  999, itemId =  4174 }, -- Vile Elixir
-            { cutoff = 1017, itemId =  4517 }, -- Yellow Curry
+            { cutoff =  528, itemId = xi.item.VIAL_OF_BLACK_BEETLE_BLOOD },
+            { cutoff =  619, itemId = xi.item.SPOOL_OF_GOLD_THREAD },
+            { cutoff =  692, itemId = xi.item.SLAB_OF_GRANITE },
+            { cutoff =  728, itemId = xi.item.HI_ETHER_P2 },
+            { cutoff =  764, itemId = xi.item.SPOOL_OF_MALBORO_FIBER },
+            { cutoff =  782, itemId = xi.item.PHILOSOPHERS_STONE },
+            { cutoff =  800, itemId = xi.item.PHOENIX_FEATHER },
+            { cutoff =  836, itemId = xi.item.SQUARE_OF_RAINBOW_CLOTH },
+            { cutoff =  872, itemId = xi.item.SQUARE_OF_RAXA },
+            { cutoff =  999, itemId = xi.item.VILE_ELIXIR },
+            { cutoff = 1017, itemId = xi.item.SERVING_OF_YELLOW_CURRY },
         },
     },
     [xi.ki.ANGEL_SKIN_KEY] =
@@ -936,8 +936,8 @@ local keyitems =
         repeatable = true,
         prizes =
         {
-            { cutoff =   65, itemId = 16254, augments =
-                { -- Altius Mantle
+            { cutoff =   65, itemId = xi.item.ALTIUS_MANTLE, augments =
+                {
                     { 782, 0, 19 }, -- Light resist -1--20
                     { 180, 0,  1 }, -- Resist Silence +1-2
                     { 101, 0,  1 }, -- Pet: Magic Attack Bonus +1-2
@@ -946,8 +946,8 @@ local keyitems =
                     {   5, 0,  4 }, -- HP -1-5
                 },
             },
-            { cutoff =  162, itemId = 16253, augments =
-                { -- Chiffon Cape
+            { cutoff =  162, itemId = xi.item.CHIFFON_CAPE, augments =
+                {
                     {   1, 17, 29 }, -- HP +18-30
                     {   9, 16, 28 }, -- MP +17-29
                     {  54,  1,  2 }, -- Physical Damage Taken -2--3%
@@ -956,8 +956,8 @@ local keyitems =
                     { 777, 14, 22 }, -- Ice resist -15--23
                 },
             },
-            { cutoff =  243, itemId = 16255, augments =
-                { -- Cortege Cape
+            { cutoff =  243, itemId = xi.item.CORTEGE_CAPE, augments =
+                {
                     {  52, 0, 1 }, -- MP Recovered While Healing +1-2
                     { 178, 0, 2 }, -- Resist Paralyze +1-3
                     { 517, 0, 3 }, -- MND +1-4
@@ -966,8 +966,8 @@ local keyitems =
                     { 292, 0, 3 }, -- Elemental Magic Skill +1-4
                 },
             },
-            { cutoff =  356, itemId = 16252, augments =
-                { -- Resilient Mantle
+            { cutoff =  356, itemId = xi.item.RESILIENT_MANTLE, augments =
+                {
                     {  23, 0,  2 }, -- Accuracy +1-3 (from item page, assumed typo in key item page since not colored red)
                     {  25, 0, 17 }, -- Attack +1-18
                     { 512, 0,  2 }, -- STR +1-3
@@ -975,8 +975,8 @@ local keyitems =
                     {  32, 0,  2 }, -- Evasion -1-3
                 },
             },
-            { cutoff =  437, itemId = 16256, augments =
-                { -- Rugged Mantle
+            { cutoff =  437, itemId = xi.item.RUGGED_MANTLE, augments =
+                {
                     {  13, 1, 3 }, -- MP -2-4
                     { 141, 0, 2 }, -- Conserve MP +1-3
                     {  40, 0, 1 }, -- Enmity -1-2
@@ -985,22 +985,22 @@ local keyitems =
                     { 323, 0, 3 }, -- Cure casting time -1--4%
                 },
             },
-            { cutoff =  469, itemId =   646 }, -- Adaman Ore
-            { cutoff =  501, itemId =   813 }, -- Angelstone
-            { cutoff =  517, itemId =   645 }, -- Darksteel Ore
-            { cutoff =  582, itemId =   812 }, -- Deathstone
-            { cutoff =  614, itemId =   787 }, -- Diamond
-            { cutoff =  646, itemId =   785 }, -- Emerald
-            { cutoff =  662, itemId =  4135 }, -- Hi-Ether +3
-            { cutoff =  694, itemId =  4119 }, -- Hi-Potion +3
-            { cutoff =  742, itemId =   739 }, -- Orichalcum Ore
-            { cutoff =  790, itemId =   786 }, -- Ruby
-            { cutoff =  822, itemId =  4613 }, -- Scroll of Cure V
-            { cutoff =  855, itemId =  4659 }, -- Scroll of Shell IV
-            { cutoff =  888, itemId =   804 }, -- Spinel
-            { cutoff = 1021, itemId =  4174 }, -- Vile Elixir
-            { cutoff = 1037, itemId =  4774 }, -- Scroll of Thunder III
-            { cutoff = 1047, itemId =  4748 }, -- Scroll of Raise III
+            { cutoff =  469, itemId = xi.item.CHUNK_OF_ADAMAN_ORE },
+            { cutoff =  501, itemId = xi.item.ANGELSTONE },
+            { cutoff =  517, itemId = xi.item.CHUNK_OF_DARKSTEEL_ORE },
+            { cutoff =  582, itemId = xi.item.DEATHSTONE },
+            { cutoff =  614, itemId = xi.item.DIAMOND },
+            { cutoff =  646, itemId = xi.item.EMERALD },
+            { cutoff =  662, itemId = xi.item.HI_ETHER_P3 },
+            { cutoff =  694, itemId = xi.item.HI_POTION_III },
+            { cutoff =  742, itemId = xi.item.CHUNK_OF_ORICHALCUM_ORE },
+            { cutoff =  790, itemId = xi.item.RUBY },
+            { cutoff =  822, itemId = xi.item.SCROLL_OF_CURE_V },
+            { cutoff =  855, itemId = xi.item.SCROLL_OF_SHELL_IV },
+            { cutoff =  888, itemId = xi.item.SPINEL },
+            { cutoff = 1021, itemId = xi.item.VILE_ELIXIR },
+            { cutoff = 1037, itemId = xi.item.SCROLL_OF_THUNDER_III },
+            { cutoff = 1047, itemId = xi.item.SCROLL_OF_RAISE_III },
         },
     },
     [xi.ki.OXBLOOD_KEY] =
@@ -1016,30 +1016,30 @@ local keyitems =
         repeatable = true,
         prizes =
         {
-            { cutoff =  167, itemId = 12442, augments =
-                { -- Studded Bandana
+            { cutoff =  167, itemId = xi.item.STUDDED_BANDANA, augments =
+                {
                     {  23, 0, 0 }, -- Accuracy+1
                     { 769, 0, 1 }, -- Ice+2
                 }
             },
-            { cutoff =  374, itemId = 13209, augments =
-                { -- Chain Belt
+            { cutoff =  374, itemId = xi.item.CHAIN_BELT, augments =
+                {
                     { 770, 0, 0 }, -- Wind+1
                     { 514, 0, 0 }, -- VIT+1
                     {   9, 0, 3 }, -- MP+4
                 }
             },
-            { cutoff =  707, itemId = 13083, augments =
-                { -- Chain Choker
+            { cutoff =  707, itemId = xi.item.CHAIN_CHOKER, augments =
+                {
                     {   9, 0, 11 }, -- MP+12
                     { 775, 0,  2 }, -- Dark+3
                     {  40, 0,  0 }, -- Enmity-1
                     {  53, 0,  0 }, -- Spell Interruption Rate-1%
                 }
             },
-            { cutoff =  874, itemId =  4751 }, -- Scroll of Erase
-            { cutoff = 1041, itemId =   653 }, -- Mythril Ingot
-            { cutoff = 1100, itemId =   744 }, -- Silver Ingot
+            { cutoff =  874, itemId = xi.item.SCROLL_OF_ERASE },
+            { cutoff = 1041, itemId = xi.item.MYTHRIL_INGOT },
+            { cutoff = 1100, itemId = xi.item.SILVER_INGOT },
         }
     },
     [xi.ki.BIRD_KEY] =
@@ -1049,8 +1049,8 @@ local keyitems =
         repeatable = true,
         prizes =
         {
-            { cutoff = 143, itemId = 12987, augments =
-                { -- Ebony Sabots
+            { cutoff = 143, itemId = xi.item.EBONY_SABOTS, augments =
+                {
                     { 774, 0, 2 }, -- Light+0-3
                     {  39, 0, 3 }, -- Enmity+0-3
                     {  53, 0, 2 }, -- Spell Interruption Rate-0-3%
@@ -1059,8 +1059,8 @@ local keyitems =
                     { 518, 0, 0 }, -- CHR+0-1
                 }
             },
-            { cutoff = 393, itemId = 13783, augments =
-                { -- Iron Scale Mail
+            { cutoff = 393, itemId = xi.item.IRON_SCALE_MAIL, augments =
+                {
                     {   1, 0, 9 }, -- HP+0-10
                     {  51, 0, 2 }, -- HP Recovered While Healing+0-3
                     { 512, 0, 1 }, -- STR+0-2
@@ -1069,8 +1069,8 @@ local keyitems =
                     {  97, 0, 2 }, -- Pet: Attack and Ranged Attack+0-3
                 }
             },
-            { cutoff = 536, itemId = 12293, augments =
-                { -- Oak Shield
+            { cutoff = 536, itemId = xi.item.OAK_SHIELD, augments =
+                {
                     { 768, 0, 3 }, -- Fire+0-4
                     {  35, 0, 0 }, -- Magic Accuracy+0-1
                     { 329, 0, 0 }, -- Cure potency+0-1%
@@ -1079,8 +1079,8 @@ local keyitems =
                     { 521, 0, 0 }, -- VIT-0-1
                 }
             },
-            { cutoff = 653, itemId = 13200, augments =
-                { -- Waistbelt
+            { cutoff = 653, itemId = xi.item.WAISTBELT, augments =
+                {
                     { 188, 0, 1 }, -- Resist Charm+0-2
                     { 185, 0, 0 }, -- Resist Gravity+0-1
                     { 512, 0, 0 }, -- STR+0-1
@@ -1088,21 +1088,21 @@ local keyitems =
                     {  32, 0, 5 }, -- Evasion-0-6
                 }
             },
-            { cutoff = 663, itemId =   793 }, -- Black Pearl
-            { cutoff = 678, itemId =   770 }, -- Blue Rock
-            { cutoff = 770, itemId =  4145 }, -- Elixir
-            { cutoff = 801, itemId =  4129 }, -- Ether +1
-            { cutoff = 816, itemId =   808 }, -- Goshenite
-            { cutoff = 847, itemId =   699 }, -- Oak Log
-            { cutoff = 852, itemId =   792 }, -- Pearl
-            { cutoff = 862, itemId =   788 }, -- Peridot
-            { cutoff = 871, itemId =  4113 }, -- Potion +1
-            { cutoff = 922, itemId =   701 }, -- Rosewood Log
-            { cutoff = 927, itemId =   815 }, -- Sphene
-            { cutoff = 947, itemId =   773 }, -- Translucent Rock
-            { cutoff = 957, itemId =   776 }, -- White Rock
-            { cutoff = 967, itemId =   771 }, -- Yellow Rock
-            { cutoff = 972, itemId =   774 }, -- Purple Rock
+            { cutoff = 663, itemId = xi.item.BLACK_PEARL },
+            { cutoff = 678, itemId = xi.item.BLUE_ROCK },
+            { cutoff = 770, itemId = xi.item.ELIXIR },
+            { cutoff = 801, itemId = xi.item.ETHER_P1 },
+            { cutoff = 816, itemId = xi.item.GOSHENITE },
+            { cutoff = 847, itemId = xi.item.OAK_LOG },
+            { cutoff = 852, itemId = xi.item.PEARL },
+            { cutoff = 862, itemId = xi.item.PERIDOT },
+            { cutoff = 871, itemId = xi.item.POTION_P1 },
+            { cutoff = 922, itemId = xi.item.ROSEWOOD_LOG },
+            { cutoff = 927, itemId = xi.item.SPHENE },
+            { cutoff = 947, itemId = xi.item.TRANSLUCENT_ROCK },
+            { cutoff = 957, itemId = xi.item.WHITE_ROCK },
+            { cutoff = 967, itemId = xi.item.YELLOW_ROCK },
+            { cutoff = 972, itemId = xi.item.PURPLE_ROCK },
         }
     },
     [xi.ki.CACTUAR_KEY] =
@@ -1112,8 +1112,8 @@ local keyitems =
         repeatable = true,
         prizes =
         {
-            { cutoff = 109, itemId = 13111, augments =
-                { -- Nodowa
+            { cutoff = 109, itemId = xi.item.NODOWA, augments =
+                {
                     { 512, 0, 1 }, -- STR+1-2
                     { 513, 0, 1 }, -- DEX+1-2
                     {  50, 0, 3 }, -- Slow+4
@@ -1122,8 +1122,8 @@ local keyitems =
                     { 773, 1, 1 }, -- Water+2
                 }
             },
-            { cutoff = 196, itemId = 12604, augments =
-                { -- Silk Coat
+            { cutoff = 196, itemId = xi.item.SILK_COAT, augments =
+                {
                     { 516, 0, 3 }, -- INT+1-4
                     { 517, 0, 3 }, -- MND+1-4
                     { 518, 0, 3 }, -- CHR+1-4
@@ -1132,8 +1132,8 @@ local keyitems =
                     {  36, 0, 2 }, -- Magic Accuracy-1--3
                 }
             },
-            { cutoff = 305, itemId = 13981, augments =
-                { -- Turtle Bangles
+            { cutoff = 305, itemId = xi.item.TURTLE_BANGLES, augments =
+                {
                     { 518, 0, 1 }, -- CHR+1-2
                     { 520, 0, 2 }, -- DEX-3
                     {  25, 0, 2 }, -- Attack+1-3
@@ -1142,8 +1142,8 @@ local keyitems =
                     { 187, 0, 0 }, -- Resist Stun+1
                 }
             },
-            { cutoff = 370, itemId = 13711, augments =
-                { -- Carapace Mask
+            { cutoff = 370, itemId = xi.item.CARAPACE_MASK, augments =
+                {
                     { 517, 0, 1 }, -- MND+1-2
                     {   1, 4, 5 }, -- HP+5-6
                     { { 28, 0, 0 }, { 27, 0, 4 }, }, -- Ranged Accuracy-1-+5
@@ -1151,20 +1151,20 @@ local keyitems =
                     { 770, 0, 4 }, -- Wind+1-5
                 }
             },
-            { cutoff = 435, itemId =  4132 }, -- Hi-Ether
-            { cutoff = 544, itemId =  4144 }, -- Hi-Elixer
-            { cutoff = 609, itemId =   645 }, -- Darksteel Ore
-            { cutoff = 631, itemId =   737 }, -- Gold Ore
-            { cutoff = 674, itemId =  4719 }, -- Scroll of Regen III
-            { cutoff = 696, itemId =  4621 }, -- Scroll of Raise II
-            { cutoff = 718, itemId =   738 }, -- Platinum Ore
-            { cutoff = 761, itemId =   866 }, -- Wyvern Scales
-            { cutoff = 804, itemId =   702 }, -- Ebony Log
-            { cutoff = 847, itemId =   902 }, -- Demon Horn
-            { cutoff = 869, itemId =   703 }, -- Petrified Log
-            { cutoff = 891, itemId =  1116 }, -- Manticore Hide
-            { cutoff = 913, itemId =   895 }, -- Ram Horn
-            { cutoff = 935, itemId =   859 }, -- Ram Skin
+            { cutoff = 435, itemId = xi.item.HI_ETHER },
+            { cutoff = 544, itemId = xi.item.HI_ELIXIR },
+            { cutoff = 609, itemId = xi.item.CHUNK_OF_DARKSTEEL_ORE },
+            { cutoff = 631, itemId = xi.item.CHUNK_OF_GOLD_ORE },
+            { cutoff = 674, itemId = xi.item.SCROLL_OF_REGEN_III },
+            { cutoff = 696, itemId = xi.item.SCROLL_OF_RAISE_II },
+            { cutoff = 718, itemId = xi.item.CHUNK_OF_PLATINUM_ORE },
+            { cutoff = 761, itemId = xi.item.HANDFUL_OF_WYVERN_SCALES },
+            { cutoff = 804, itemId = xi.item.EBONY_LOG },
+            { cutoff = 847, itemId = xi.item.DEMON_HORN },
+            { cutoff = 869, itemId = xi.item.PETRIFIED_LOG },
+            { cutoff = 891, itemId = xi.item.MANTICORE_HIDE },
+            { cutoff = 913, itemId = xi.item.RAM_HORN },
+            { cutoff = 935, itemId = xi.item.RAM_SKIN },
         }
     },
     [xi.ki.BOMB_KEY] =
@@ -1174,8 +1174,8 @@ local keyitems =
         repeatable = true,
         prizes =
         {
-            { cutoff = 308, itemId = 12980, augments =
-                { -- Battle Boots
+            { cutoff = 308, itemId = xi.item.BATTLE_BOOTS, augments =
+                {
                     {  34, 1,  5 }, -- DEF-6--2
                     {   9, 5, 10 }, -- MP+6-11
                     { 141, 0,  2 }, -- Conserve MP+1-3
@@ -1183,8 +1183,8 @@ local keyitems =
                     { 104, 0,  1 }, -- Pet: Enmity+1-2
                 }
             },
-            { cutoff = 462, itemId = 12860, augments =
-                { -- Silk Slops
+            { cutoff = 462, itemId = xi.item.SILK_SLOPS, augments =
+                {
                     {   9, 2, 2 }, -- MP+3
                     { 515, 0, 0 }, -- AGI+1
                     { 517, 0, 1 }, -- MND+1-2
@@ -1192,8 +1192,8 @@ local keyitems =
                     {  98, 0, 0 }, -- Pet: Evasion+1
                 }
             },
-            { cutoff = 616, itemId = 13589, augments =
-                { -- Tiger Mantle
+            { cutoff = 616, itemId = xi.item.TIGER_MANTLE, augments =
+                {
                     {   1, 1, 4 }, -- HP+2-5
                     { 515, 0, 0 }, -- AGI+1
                     {  31, 0, 0 }, -- Evasion+1
@@ -1201,17 +1201,17 @@ local keyitems =
                     {  55, 0, 0 }, -- Magic Damage Taken-1%
                 }
             },
-            { cutoff = 693, itemId = 12427, augments =
-                { -- Bascinet
+            { cutoff = 693, itemId = xi.item.BASCINET, augments =
+                {
                     {  49, 1, 2 }, -- Haste+3
                     {  24, 0, 0 }, -- Accuracy-1
                     { 180, 0, 0 }, -- Resist Silence+1
                     { 100, 0, 0 }, -- Pet: Magic Accuracy+1
                 }
             },
-            { cutoff = 747, itemId =  4144 }, -- Hi-Elixer
-            { cutoff = 824, itemId =   654 }, -- Darksteel Ingot
-            { cutoff = 901, itemId =   645 }, -- Darksteel Ore
+            { cutoff = 747, itemId = xi.item.HI_ELIXIR },
+            { cutoff = 824, itemId = xi.item.DARKSTEEL_INGOT },
+            { cutoff = 901, itemId = xi.item.CHUNK_OF_DARKSTEEL_ORE },
         },
         [xi.ki.CHOCOBO_KEY] =
         {
@@ -1220,8 +1220,8 @@ local keyitems =
             repeatable = true,
             prizes =
             {
-                { cutoff =  190, itemId = 16008, augments =
-                    { -- Aptus Earring
+                { cutoff =  190, itemId = xi.item.APTUS_EARRING, augments =
+                    {
                         -- assumed magic skill caps are all the same
                         { 133, 0,  5 }, -- Magic Attack Bonus+1-2
                         {  35, 0,  1 }, -- Magic Accuracy+1-2
@@ -1239,8 +1239,8 @@ local keyitems =
                         { 292, 0,  2 }, -- Elemental Magic Skill+1
                     }
                 },
-                { cutoff =  285, itemId = 16372, augments =
-                    { -- Stearc Subligar
+                { cutoff =  285, itemId = xi.item.STEARC_SUBLIGAR, augments =
+                    {
                         {  44, 0, 2 }, -- Subtle Blow+1-3
                         { 188, 0, 3 }, -- Resist Charm+1-4
                         {  51, 0, 0 }, -- HP Recovered While Healing+1
@@ -1249,8 +1249,8 @@ local keyitems =
                         { 783, 5, 5 }, -- Dark-6
                     }
                 },
-                { cutoff =  571, itemId = 16295, augments =
-                    { -- Varius Torque
+                { cutoff =  571, itemId = xi.item.VARIUS_TORQUE, augments =
+                    {
                         -- assumed combat skill caps are all the same
                         {  23,  0,  4 }, -- Accuracy+1-5
                         {  25,  0,  4 }, -- Attack+1-5
@@ -1268,17 +1268,17 @@ local keyitems =
                         {   5, 15, 24 }, -- HP-16-25
                     }
                 },
-                { cutoff =  595, itemId =   823 }, -- Gold Thread
-                { cutoff =  643, itemId =  4134 }, -- Hi-Ether +2
-                { cutoff =  714, itemId =  4118 }, -- Hi-Potion +2
-                { cutoff =  785, itemId =   837 }, -- Malboro Fiber
-                { cutoff =  856, itemId =  1110 }, -- Beetle Blood
-                { cutoff =  927, itemId =   924 }, -- Philosophers Stone
-                { cutoff =  995, itemId =   830 }, -- Rainbow Cloth
-                { cutoff = 1043, itemId =  1132 }, -- Raxa
-                { cutoff = 1067, itemId =  1465 }, -- Granite
-                { cutoff = 1115, itemId =  4174 }, -- Vile Elixir
-                { cutoff = 1186, itemId =   844 }, -- Phoenix Feather
+                { cutoff =  595, itemId = xi.item.SPOOL_OF_GOLD_THREAD },
+                { cutoff =  643, itemId = xi.item.HI_ETHER_P2 },
+                { cutoff =  714, itemId = xi.item.HI_POTION_II },
+                { cutoff =  785, itemId = xi.item.SPOOL_OF_MALBORO_FIBER },
+                { cutoff =  856, itemId = xi.item.VIAL_OF_BLACK_BEETLE_BLOOD },
+                { cutoff =  927, itemId = xi.item.PHILOSOPHERS_STONE },
+                { cutoff =  995, itemId = xi.item.SQUARE_OF_RAINBOW_CLOTH },
+                { cutoff = 1043, itemId = xi.item.SQUARE_OF_RAXA },
+                { cutoff = 1067, itemId = xi.item.SLAB_OF_GRANITE },
+                { cutoff = 1115, itemId = xi.item.VILE_ELIXIR },
+                { cutoff = 1186, itemId = xi.item.PHOENIX_FEATHER },
             },
         },
     },
@@ -1289,8 +1289,8 @@ local keyitems =
         repeatable = true,
         prizes =
         {
-            { cutoff =  291, itemId = 15938, augments =
-                { -- Esprit Belt
+            { cutoff =  291, itemId = xi.item.ESPRIT_BELT, augments =
+                {
                     { 516, 0, 5 }, -- INT+1-6
                     { 517, 0, 4 }, -- MND+1-5
                     { 518, 0, 4 }, -- CHR+1-5
@@ -1299,8 +1299,8 @@ local keyitems =
                     {  53, 0, 2 }, -- Spell Interruption Rate-1-3%
                 }
             },
-            { cutoff =  600, itemId = 15937, augments =
-                { -- Fettle Belt
+            { cutoff =  600, itemId = xi.item.FETTLE_BELT, augments =
+                {
                     {  49, 0, 4 }, -- Haste+1-5
                     { 512, 0, 2 }, -- STR+1-3
                     { 513, 0, 2 }, -- DEX+1-3
@@ -1309,23 +1309,23 @@ local keyitems =
                     {  24, 0, 9 }, -- Accuracy-10--1
                 }
             },
-            { cutoff =  636, itemId =   813 }, -- Angelstone
-            { cutoff =  654, itemId =   812 }, -- Deathstone
-            { cutoff =  690, itemId =   645 }, -- Darksteel Ore
-            { cutoff =  708, itemId =   787 }, -- Diamond
-            { cutoff =  744, itemId =   785 }, -- Emerald
-            { cutoff =  780, itemId =   823 }, -- Gold Thread
-            { cutoff =  798, itemId =  4119 }, -- Hi-Potion +3
-            { cutoff =  816, itemId =   738 }, -- Platinum Ore
-            { cutoff =  834, itemId =   739 }, -- Orichalcum Ore
-            { cutoff =  870, itemId =   786 }, -- Ruby
-            { cutoff =  883, itemId =   794 }, -- Sapphire
-            { cutoff =  901, itemId =  4613 }, -- Scroll of Cure V
-            { cutoff =  919, itemId =  4748 }, -- Scroll of Raise III
-            { cutoff =  937, itemId =  4774 }, -- Scroll of Thunder III
-            { cutoff =  955, itemId =   804 }, -- Spinel
-            { cutoff =  973, itemId =   789 }, -- Topaz
-            { cutoff = 1082, itemId =  4174 }, -- Vile Elixir
+            { cutoff =  636, itemId = xi.item.ANGELSTONE },
+            { cutoff =  654, itemId = xi.item.DEATHSTONE },
+            { cutoff =  690, itemId = xi.item.CHUNK_OF_DARKSTEEL_ORE },
+            { cutoff =  708, itemId = xi.item.DIAMOND },
+            { cutoff =  744, itemId = xi.item.EMERALD },
+            { cutoff =  780, itemId = xi.item.SPOOL_OF_GOLD_THREAD },
+            { cutoff =  798, itemId = xi.item.HI_POTION_III },
+            { cutoff =  816, itemId = xi.item.CHUNK_OF_PLATINUM_ORE },
+            { cutoff =  834, itemId = xi.item.CHUNK_OF_ORICHALCUM_ORE },
+            { cutoff =  870, itemId = xi.item.RUBY },
+            { cutoff =  883, itemId = xi.item.SAPPHIRE },
+            { cutoff =  901, itemId = xi.item.SCROLL_OF_CURE_V },
+            { cutoff =  919, itemId = xi.item.SCROLL_OF_RAISE_III },
+            { cutoff =  937, itemId = xi.item.SCROLL_OF_THUNDER_III },
+            { cutoff =  955, itemId = xi.item.SPINEL },
+            { cutoff =  973, itemId = xi.item.TOPAZ },
+            { cutoff = 1082, itemId = xi.item.VILE_ELIXIR },
         },
     },
     [xi.ki.BEHEMOTH_KEY] =
@@ -1338,15 +1338,15 @@ local keyitems =
 
 local optionToGear =
 {
-    [1] = { addon = 1, itemid = 11313 }, -- nuevo_coselete
-    [2] = { addon = 1, itemid = 11314 }, -- mirke_wardecors
-    [3] = { addon = 1, itemid = 11315 }, -- royal_redingote
-    [4] = { addon = 2, itemid = 11487 }, -- champions_galea
-    [5] = { addon = 2, itemid = 11488 }, -- anwig_salade
-    [6] = { addon = 2, itemid = 11489 }, -- selenian_cap
-    [7] = { addon = 3, itemid = 16369 }, -- blitzer_poleyn
-    [8] = { addon = 3, itemid = 16370 }, -- desultor_tassets
-    [9] = { addon = 3, itemid = 16371 }, -- tatsumaki_sitagoromo
+    [1] = { addon = 1, itemid = xi.item.NUEVO_COSELETE },
+    [2] = { addon = 1, itemid = xi.item.MIRKE_WARDECORS },
+    [3] = { addon = 1, itemid = xi.item.ROYAL_REDINGOTE },
+    [4] = { addon = 2, itemid = xi.item.CHAMPIONS_GALEA },
+    [5] = { addon = 2, itemid = xi.item.ANWIG_SALADE },
+    [6] = { addon = 2, itemid = xi.item.SELENIAN_CAP },
+    [7] = { addon = 3, itemid = xi.item.BLITZER_POLEYN },
+    [8] = { addon = 3, itemid = xi.item.DESULTOR_TASSETS },
+    [9] = { addon = 3, itemid = xi.item.TATSUMAKI_SITAGOROMO },
 }
 
 local optionToAugment =
@@ -1554,10 +1554,10 @@ local function scenarioArmor(player, option, giveToPlayer)
         end
 
         if player:getFreeSlotsCount() == 0 then
-            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, optionToGear[gear].itemid)
+            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, optionToGear[gear].itemId)
         else
-            player:addItem(optionToGear[gear].itemid, 1, unpack(addAug))
-            player:messageSpecial(ID.text.ITEM_OBTAINED, optionToGear[gear].itemid)
+            player:addItem(optionToGear[gear].itemId, 1, unpack(addAug))
+            player:messageSpecial(ID.text.ITEM_OBTAINED, optionToGear[gear].itemId)
             player:delKeyItem(({ xi.ki.PRISMATIC_KEY, xi.ki.OXBLOOD_KEY, xi.ki.BEHEMOTH_KEY })[addon])
         end
     else
