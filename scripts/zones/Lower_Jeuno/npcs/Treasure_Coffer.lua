@@ -8,6 +8,28 @@ local ID = zones[xi.zone.LOWER_JEUNO]
 -----------------------------------
 local entity = {}
 
+local optionToKI =
+{
+    [ 1] = xi.ki.CRIMSON_KEY,
+    [ 2] = xi.ki.VIRIDIAN_KEY,
+    [ 3] = xi.ki.AMBER_KEY,
+    [ 4] = xi.ki.AZURE_KEY,
+    [ 5] = xi.ki.IVORY_KEY,
+    [ 6] = xi.ki.EBON_KEY,
+    [ 8] = xi.ki.WHITE_CORAL_KEY,
+    [ 9] = xi.ki.BLUE_CORAL_KEY,
+    [10] = xi.ki.PEACH_CORAL_KEY,
+    [11] = xi.ki.BLACK_CORAL_KEY,
+    [12] = xi.ki.RED_CORAL_KEY,
+    [13] = xi.ki.ANGEL_SKIN_KEY,
+    [15] = xi.ki.MOOGLE_KEY,
+    [16] = xi.ki.BIRD_KEY,
+    [17] = xi.ki.CACTUAR_KEY,
+    [18] = xi.ki.BOMB_KEY,
+    [19] = xi.ki.CHOCOBO_KEY,
+    [20] = xi.ki.TONBERRY_KEY,
+}
+
 -- No good data on augments.  Just pulled from each key on: https://ffxiclopedia.fandom.com/wiki/Treasure_Coffer_(Tenshodo)
 -- and cross referenced the individual item's page to find discrepancies
 -- Order of augments is kept the same as the wiki, for ease of checking
@@ -1144,29 +1166,6 @@ local keyitems =
     [xi.ki.BEHEMOTH_KEY] = {
         expansion = xi.mission.log_id.ASA, mission = xi.mission.id.asa.AN_UNEASY_PEACE, repeatable = false,
     },
-}
-
-
-local optionToKI =
-{
-    [ 1] = xi.ki.CRIMSON_KEY,
-    [ 2] = xi.ki.VIRIDIAN_KEY,
-    [ 3] = xi.ki.AMBER_KEY,
-    [ 4] = xi.ki.AZURE_KEY,
-    [ 5] = xi.ki.IVORY_KEY,
-    [ 6] = xi.ki.EBON_KEY,
-    [ 8] = xi.ki.WHITE_CORAL_KEY,
-    [ 9] = xi.ki.BLUE_CORAL_KEY,
-    [10] = xi.ki.PEACH_CORAL_KEY,
-    [11] = xi.ki.BLACK_CORAL_KEY,
-    [12] = xi.ki.RED_CORAL_KEY,
-    [13] = xi.ki.ANGEL_SKIN_KEY,
-    [15] = xi.ki.MOOGLE_KEY,
-    [16] = xi.ki.BIRD_KEY,
-    [17] = xi.ki.CACTUAR_KEY,
-    [18] = xi.ki.BOMB_KEY,
-    [19] = xi.ki.CHOCOBO_KEY,
-    [20] = xi.ki.TONBERRY_KEY,
 }
 
 local optionToGear =
