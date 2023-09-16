@@ -17,7 +17,7 @@ spellObject.onMagicCastingCheck = function(caster, target, spell)
 end
 
 spellObject.onSpellCast = function(caster, target, spell)
-    xi.pet.spawnPet(caster, xi.pet.id.RAMUH)
+    xi.pet.spawnPet(caster, xi.petId.RAMUH)
 
     if caster:hasStatusEffect(xi.effect.AVATARS_FAVOR) then
         local effect = caster:getStatusEffect(xi.effect.AVATARS_FAVOR)
