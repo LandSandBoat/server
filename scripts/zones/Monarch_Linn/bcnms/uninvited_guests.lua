@@ -14,6 +14,7 @@ end
 battlefieldObject.onBattlefieldEnter = function(player, battlefield)
     player:messageSpecial(ID.text.KI_TORN, xi.ki.MONARCH_LINN_PATROL_PERMIT)
     player:delKeyItem(xi.ki.MONARCH_LINN_PATROL_PERMIT)
+    player:setCharVar("UninvitedGuestsStatus", 3) -- assume failure until proven that player won
 end
 
 battlefieldObject.onBattlefieldLeave = function(player, battlefield, leavecode)
@@ -22,12 +23,6 @@ battlefieldObject.onBattlefieldLeave = function(player, battlefield, leavecode)
         player:startEvent(32001, battlefield:getArea(), clearTime, partySize, battlefield:getTimeInside(), 1, battlefield:getLocalVar("[cs]bit"), 0)
     elseif leavecode == xi.battlefield.leaveCode.LOST then
         player:startEvent(32002)
-    elseif
-        leavecode == xi.battlefield.leaveCode.EXIT or
-        leavecode == xi.battlefield.leaveCode.WARPDC
-    then
-        -- However the player got out of the BCNM - they didnt win
-        player:setCharVar("UninvitedGuestsStatus", 3) -- update to failure state
     end
 end
 
@@ -35,9 +30,6 @@ battlefieldObject.onEventFinish = function(player, csid, option)
     if csid == 32001 then
         -- Victory
         player:setCharVar("UninvitedGuestsStatus", 2) -- update to victory state
-    elseif csid == 32002 then
-        -- Failure
-        player:setCharVar("UninvitedGuestsStatus", 3) -- update to failure state
     end
 end
 

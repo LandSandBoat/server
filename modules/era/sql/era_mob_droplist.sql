@@ -16250,9 +16250,9 @@ INSERT INTO `mob_droplist` VALUES (2027,0,0,1000,637,@UNCOMMON); -- Vial Of Slim
 INSERT INTO `mob_droplist` VALUES (2027,0,0,1000,1032,@RARE);    -- Shakhrami Chest Key (Rare, 5%)
 
 -- ZoneID:  22 - Provoker
-INSERT INTO `mob_droplist` VALUES (2028,0,0,1000,1723,500);       -- White Memosphere (50.0%)
-INSERT INTO `mob_droplist` VALUES (2028,0,0,1000,1761,300);       -- Recollection Of Anxiety (30.0%)
-INSERT INTO `mob_droplist` VALUES (2028,0,0,1000,1723,250);       -- White Memosphere (25.0%)
+INSERT INTO `mob_droplist` VALUES (2028,0,0,1000,1761,@VCOMMON);  -- Recollection Of Anxiety (Very Common, 24%)
+INSERT INTO `mob_droplist` VALUES (2028,0,0,1000,1723,@ALWAYS);   -- White Memosphere (Always, 100%)
+INSERT INTO `mob_droplist` VALUES (2028,0,0,1000,1723,@COMMON);   -- White Memosphere (Common, 15%)
 INSERT INTO `mob_droplist` VALUES (2028,0,0,1000,1723,@UNCOMMON); -- White Memosphere (Uncommon, 10%)
 
 -- ZoneID:  74 - Psycheflayer
@@ -27013,4 +27013,3 @@ UNLOCK TABLES;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
-
