@@ -6,6 +6,8 @@
 -- Note: KI aquisition is handled in chocobo_digging.lua
 -- MOLDY_WORM_EATEN_CHEST : !addkeyitem 1144
 -----------------------------------
+require('scripts/globals/missions')
+require('scripts/globals/interaction/mission')
 require('scripts/missions/amk/helpers')
 -----------------------------------
 
@@ -44,7 +46,7 @@ mission.sections =
         },
     },
 
-    -- Digging minigame, handled in
+    -- Digging minigame, handled in xi.amk.helpers and chocobo_digging.lua
     {
         check = function(player, currentMission, missionStatus, vars)
             return currentMission == mission.missionId and missionStatus == 1 and
