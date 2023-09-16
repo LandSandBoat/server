@@ -8,136 +8,6 @@ local ID = zones[xi.zone.LOWER_JEUNO]
 -----------------------------------
 local entity = {}
 
-local optionToKI =
-{
-    [ 1] = xi.ki.CRIMSON_KEY,
-    [ 2] = xi.ki.VIRIDIAN_KEY,
-    [ 3] = xi.ki.AMBER_KEY,
-    [ 4] = xi.ki.AZURE_KEY,
-    [ 5] = xi.ki.IVORY_KEY,
-    [ 6] = xi.ki.EBON_KEY,
-    [ 8] = xi.ki.WHITE_CORAL_KEY,
-    [ 9] = xi.ki.BLUE_CORAL_KEY,
-    [10] = xi.ki.PEACH_CORAL_KEY,
-    [11] = xi.ki.BLACK_CORAL_KEY,
-    [12] = xi.ki.RED_CORAL_KEY,
-    [13] = xi.ki.ANGEL_SKIN_KEY,
-    [15] = xi.ki.MOOGLE_KEY,
-    [16] = xi.ki.BIRD_KEY,
-    [17] = xi.ki.CACTUAR_KEY,
-    [18] = xi.ki.BOMB_KEY,
-    [19] = xi.ki.CHOCOBO_KEY,
-    [20] = xi.ki.TONBERRY_KEY,
-}
-
-local optionToGear =
-{
-    [1] = {addon = 1, itemid = 11313}, -- nuevo_coselete
-    [2] = {addon = 1, itemid = 11314}, -- mirke_wardecors
-    [3] = {addon = 1, itemid = 11315}, -- royal_redingote
-    [4] = {addon = 2, itemid = 11487}, -- champions_galea
-    [5] = {addon = 2, itemid = 11488}, -- anwig_salade
-    [6] = {addon = 2, itemid = 11489}, -- selenian_cap
-    [7] = {addon = 3, itemid = 16369}, -- blitzer_poleyn
-    [8] = {addon = 3, itemid = 16370}, -- desultor_tassets
-    [9] = {addon = 3, itemid = 16371}, -- tatsumaki_sitagoromo
-}
-
-local optionToAugment =
-{
-    [1] = -- ACP
-    {
-        {{augment =  23, power =  9}}, -- Accuracy+10
-        {{augment =  25, power =  9}}, -- Attack+10
-        {{augment =  27, power =  9}}, -- Ranged Accuracy+10
-        {{augment =  29, power =  9}}, -- Ranged Attack+10
-        {{augment =  31, power =  9}}, -- Evasion+10
-        {{augment =  35, power =  3}}, -- Magic Accuracy+4
-        {{augment = 133, power =  3}}, -- "Magic Atk, Bonus"+4
-        {{augment = 143, power =  1}}, -- "Double Attack"+2
-        {{augment =  41, power =  2}}, -- Critical hit rate +3
-        {{augment =  44, power =  3}}, -- Store TP"+4 "Subtle Blow"+4
-        {{augment =  39, power =  4}}, -- Enmity+5
-        {{augment =  40, power =  4}}, -- Enmity-5
-        {{augment = 140, power =  4}}, -- Enhances "Fast Cast" effect +5
-        {{augment = 324, power = 14}}, -- "Call Beast" ability delay -15
-        {{augment = 211, power =  4}}, -- "Snapshot"+5
-        {{augment = 146, power =  2}}, -- Enhances "Dual Wield" effect +3
-        {{augment = 320, power =  3}}, -- "Blood Pact" ability delay -4
-        {{augment = 321, power =  1}}, -- Avatar perpetuation cost -2
-        {{augment = 325, power =  4}}, -- Quick Draw" ability delay -5
-        {{augment =  96, power = 14}}, -- Pet: Accuracy+15 Ranged Accuracy+15
-        {{augment =  97, power = 14}}, -- Pet: Attack+15 Ranged Attack+15
-        {{augment = 108, power =  6}}, -- Pet: Magic Acc.+7 "Magic Atk. Bonus"+7
-        {{augment = 109, power =  1}}, -- Pet: "Double Attack"+2 Crit. hit rate +2
-    },
-    [2] = -- AMK
-    {
-        {{augment =  49, power = 2}, {augment = 211, power =  2}}, -- Haste+3% Enhances "Snapshot" effect (+3%)
-        {{augment = 512, power = 3}, {augment = 326, power = 14}}, -- STR+4 Weapon Skill Accuracy +15
-        {{augment = 513, power = 3}, {augment = 328, power =  1}}, -- DEX+4 Increases Critical Hit Damage (+2%)
-        {{augment = 514, power = 3}, {augment = 286, power =  4}}, -- VIT+4 Shield Skill +5
-        {{augment = 515, power = 3}, {augment = 327, power =  1}}, -- AGI+4 Increases weapon skill damage (+2%)
-        {{augment = 516, power = 3}, {augment =  35, power =  1}}, -- INT+4 Magic Accuracy+2
-        {{augment = 517, power = 3}, {augment = 329, power =  2}}, -- MND+4 "Cure" potency +3%
-        {{augment = 518, power = 3}, {augment = 331, power =  1}}, -- CHR+4 "Waltz" ability delay -2
-        {{augment =  23, power = 9}, {augment =  25, power =  4}}, -- Accuracy+10 Attack+5
-        {{augment =  27, power = 9}, {augment =  29, power =  4}}, -- Ranged Accuracy+10 Ranged Attack+5
-        {{augment =  31, power = 9}, {augment = 142, power =  3}}, -- Evasion+10 Store TP +4
-        {{augment =  35, power = 2}, {augment =  52, power =  2}}, -- Magic Accuracy+3 MP recovered while healing +3
-        {{augment = 133, power = 1}, {augment =  51, power =  2}}, -- "Magic Attack Bonus"+2 HP recovered while healing +3
-        {{augment =  55, power = 1}, {augment =  39, power =  3}}, -- Magic damage taken -2% Enmity+4
-        {{augment =  57, power = 9}, {augment =  40, power =  3}}, -- Magic critical hit rate +10% Enmity-4
-        {{augment = 140, power = 2}, {augment = 320, power =  2}}, -- Enhances "Fast Cast" effect (+3%) "Blood Pact" ability delay -3
-        {{augment = 512, power = 1}, {augment =  49, power =  1}}, -- STR+2 Haste +2%
-        {{augment = 513, power = 1}, {augment =  49, power =  1}}, -- DEX+2 Haste +2%
-        {{augment = 514, power = 1}, {augment =  49, power =  1}}, -- VIT+2 Haste +2%
-        {{augment = 515, power = 1}, {augment =  49, power =  1}}, -- AGI+2 Haste +2%
-        {{augment = 516, power = 1}, {augment = 140, power =  1}}, -- INT+2 Enhances "Fast Cast" effect (+2%)
-        {{augment = 517, power = 1}, {augment = 140, power =  1}}, -- MND+2 Enhances "Fast Cast" effect (+2%)
-        {{augment = 518, power = 1}, {augment = 140, power =  1}}, -- CHR+2 Enhances "Fast Cast" effect (+2%)
-        {{augment =  23, power = 2}, {augment = 111, power =  4}}, -- Accuracy+3 Pet: Haste +5%
-        {{augment =  23, power = 2}, {augment = 102, power =  2}}, -- Accuracy+3 Pet: Critical Hit Rate +3%
-        {{augment =  25, power = 2}, {augment = 110, power =  0}}, -- Attack+3 Pet: Adds "Regen" effect
-        {{augment =  25, power = 2}, {augment = 112, power =  9}}, -- Attack+3 Pet: Damage taken -10%
-    },
-    [3] = -- ASA
-    {
-        {{augment =    1, power = 24}, {augment = 39, power =  3}}, -- HP+25 Enmity+4
-        {{augment =    9, power = 24}, {augment = 40, power =  3}}, -- MP+25 Enmity-4
-        {{augment =   23, power =  6}}, -- Attack+7
-        {{augment =   25, power =  6}}, -- Accuracy+7
-        {{augment =   27, power =  6}}, -- Ranged Accuracy+7
-        {{augment =   29, power =  6}}, -- Ranged Attack+7
-        {{augment =   31, power =  6}}, -- Evasion+7
-        {{augment =   35, power =  3}}, -- Magic Accuracy+4
-        {{augment =  133, power =  3}}, -- "Magic Atk. Bonus" +4
-        {{augment =   49, power =  2}}, -- Haste +3%
-        {{augment =  143, power =  1}}, -- "Double Attack" +2%
-        {{augment =  328, power =  2}}, -- Increases Critical Hit Damage +3%
-        {{augment =  332, power =  4}}, -- Skillchain damage +5%
-        {{augment =  333, power =  4}}, -- "Conserve TP"+5
-        {{augment =   54, power =  3}}, -- Physical damage taken -4%
-        {{augment =  335, power =  9}}, -- Magic Critical Hit damage +10%
-        {{augment =  334, power =  9}}, -- Magic Burst damage +10%
-        {{augment =  194, power =  4}}, -- "Kick Attacks" +5
-        {{augment =  329, power =  4}}, -- "Cure" potency +5%
-        {{augment =  336, power =  4}}, -- "Sic" & "Ready" ability delay -5
-        {{augment =  337, power =  2}}, -- Song Recast Delay -3
-        {{augment =  338, power =  0}}, -- "Barrage" +1
-        {{augment =  339, power = 19}}, -- "Elemental Siphon" +20
-        {{augment =  340, power =  4}}, -- "Phantom Roll" ability delay -5
-        {{augment =  341, power =  9}}, -- "Repair" potency +10%
-        {{augment =  342, power =  4}}, -- "Waltz" TP cost -50
-        {{augment =   96, power =  6}}, -- Pet: Accuracy +7 Ranged Accuracy +7
-        {{augment =   97, power =  6}}, -- Pet: Attack +7 Ranged Attack +7
-        {{augment =  115, power =  7}, {augment = 116, power =  7}}, -- Pet: "Store TP" +8 "Subtle Blow" +8
-        {{augment =  100, power =  6}}, -- Pet: Magic Accuracy +7
-        {{augment =  913, power =  2}}, -- Movement Speed +8%
-        {{augment =  195, power =  4}}, -- "Subtle Blow"+5
-    },
-}
-
 -- No good data on augments.  Just pulled from each key on: https://ffxiclopedia.fandom.com/wiki/Treasure_Coffer_(Tenshodo)
 -- and cross referenced the individual item's page to find discrepancies
 -- Order of augments is kept the same as the wiki, for ease of checking
@@ -1276,6 +1146,137 @@ local keyitems =
     },
 }
 
+
+local optionToKI =
+{
+    [ 1] = xi.ki.CRIMSON_KEY,
+    [ 2] = xi.ki.VIRIDIAN_KEY,
+    [ 3] = xi.ki.AMBER_KEY,
+    [ 4] = xi.ki.AZURE_KEY,
+    [ 5] = xi.ki.IVORY_KEY,
+    [ 6] = xi.ki.EBON_KEY,
+    [ 8] = xi.ki.WHITE_CORAL_KEY,
+    [ 9] = xi.ki.BLUE_CORAL_KEY,
+    [10] = xi.ki.PEACH_CORAL_KEY,
+    [11] = xi.ki.BLACK_CORAL_KEY,
+    [12] = xi.ki.RED_CORAL_KEY,
+    [13] = xi.ki.ANGEL_SKIN_KEY,
+    [15] = xi.ki.MOOGLE_KEY,
+    [16] = xi.ki.BIRD_KEY,
+    [17] = xi.ki.CACTUAR_KEY,
+    [18] = xi.ki.BOMB_KEY,
+    [19] = xi.ki.CHOCOBO_KEY,
+    [20] = xi.ki.TONBERRY_KEY,
+}
+
+local optionToGear =
+{
+    [1] = {addon = 1, itemid = 11313}, -- nuevo_coselete
+    [2] = {addon = 1, itemid = 11314}, -- mirke_wardecors
+    [3] = {addon = 1, itemid = 11315}, -- royal_redingote
+    [4] = {addon = 2, itemid = 11487}, -- champions_galea
+    [5] = {addon = 2, itemid = 11488}, -- anwig_salade
+    [6] = {addon = 2, itemid = 11489}, -- selenian_cap
+    [7] = {addon = 3, itemid = 16369}, -- blitzer_poleyn
+    [8] = {addon = 3, itemid = 16370}, -- desultor_tassets
+    [9] = {addon = 3, itemid = 16371}, -- tatsumaki_sitagoromo
+}
+
+local optionToAugment =
+{
+    [1] = -- ACP
+    {
+        {{augment =  23, power =  9}}, -- Accuracy+10
+        {{augment =  25, power =  9}}, -- Attack+10
+        {{augment =  27, power =  9}}, -- Ranged Accuracy+10
+        {{augment =  29, power =  9}}, -- Ranged Attack+10
+        {{augment =  31, power =  9}}, -- Evasion+10
+        {{augment =  35, power =  3}}, -- Magic Accuracy+4
+        {{augment = 133, power =  3}}, -- "Magic Atk, Bonus"+4
+        {{augment = 143, power =  1}}, -- "Double Attack"+2
+        {{augment =  41, power =  2}}, -- Critical hit rate +3
+        {{augment =  44, power =  3}}, -- Store TP"+4 "Subtle Blow"+4
+        {{augment =  39, power =  4}}, -- Enmity+5
+        {{augment =  40, power =  4}}, -- Enmity-5
+        {{augment = 140, power =  4}}, -- Enhances "Fast Cast" effect +5
+        {{augment = 324, power = 14}}, -- "Call Beast" ability delay -15
+        {{augment = 211, power =  4}}, -- "Snapshot"+5
+        {{augment = 146, power =  2}}, -- Enhances "Dual Wield" effect +3
+        {{augment = 320, power =  3}}, -- "Blood Pact" ability delay -4
+        {{augment = 321, power =  1}}, -- Avatar perpetuation cost -2
+        {{augment = 325, power =  4}}, -- Quick Draw" ability delay -5
+        {{augment =  96, power = 14}}, -- Pet: Accuracy+15 Ranged Accuracy+15
+        {{augment =  97, power = 14}}, -- Pet: Attack+15 Ranged Attack+15
+        {{augment = 108, power =  6}}, -- Pet: Magic Acc.+7 "Magic Atk. Bonus"+7
+        {{augment = 109, power =  1}}, -- Pet: "Double Attack"+2 Crit. hit rate +2
+    },
+    [2] = -- AMK
+    {
+        {{augment =  49, power = 2}, {augment = 211, power =  2}}, -- Haste+3% Enhances "Snapshot" effect (+3%)
+        {{augment = 512, power = 3}, {augment = 326, power = 14}}, -- STR+4 Weapon Skill Accuracy +15
+        {{augment = 513, power = 3}, {augment = 328, power =  1}}, -- DEX+4 Increases Critical Hit Damage (+2%)
+        {{augment = 514, power = 3}, {augment = 286, power =  4}}, -- VIT+4 Shield Skill +5
+        {{augment = 515, power = 3}, {augment = 327, power =  1}}, -- AGI+4 Increases weapon skill damage (+2%)
+        {{augment = 516, power = 3}, {augment =  35, power =  1}}, -- INT+4 Magic Accuracy+2
+        {{augment = 517, power = 3}, {augment = 329, power =  2}}, -- MND+4 "Cure" potency +3%
+        {{augment = 518, power = 3}, {augment = 331, power =  1}}, -- CHR+4 "Waltz" ability delay -2
+        {{augment =  23, power = 9}, {augment =  25, power =  4}}, -- Accuracy+10 Attack+5
+        {{augment =  27, power = 9}, {augment =  29, power =  4}}, -- Ranged Accuracy+10 Ranged Attack+5
+        {{augment =  31, power = 9}, {augment = 142, power =  3}}, -- Evasion+10 Store TP +4
+        {{augment =  35, power = 2}, {augment =  52, power =  2}}, -- Magic Accuracy+3 MP recovered while healing +3
+        {{augment = 133, power = 1}, {augment =  51, power =  2}}, -- "Magic Attack Bonus"+2 HP recovered while healing +3
+        {{augment =  55, power = 1}, {augment =  39, power =  3}}, -- Magic damage taken -2% Enmity+4
+        {{augment =  57, power = 9}, {augment =  40, power =  3}}, -- Magic critical hit rate +10% Enmity-4
+        {{augment = 140, power = 2}, {augment = 320, power =  2}}, -- Enhances "Fast Cast" effect (+3%) "Blood Pact" ability delay -3
+        {{augment = 512, power = 1}, {augment =  49, power =  1}}, -- STR+2 Haste +2%
+        {{augment = 513, power = 1}, {augment =  49, power =  1}}, -- DEX+2 Haste +2%
+        {{augment = 514, power = 1}, {augment =  49, power =  1}}, -- VIT+2 Haste +2%
+        {{augment = 515, power = 1}, {augment =  49, power =  1}}, -- AGI+2 Haste +2%
+        {{augment = 516, power = 1}, {augment = 140, power =  1}}, -- INT+2 Enhances "Fast Cast" effect (+2%)
+        {{augment = 517, power = 1}, {augment = 140, power =  1}}, -- MND+2 Enhances "Fast Cast" effect (+2%)
+        {{augment = 518, power = 1}, {augment = 140, power =  1}}, -- CHR+2 Enhances "Fast Cast" effect (+2%)
+        {{augment =  23, power = 2}, {augment = 111, power =  4}}, -- Accuracy+3 Pet: Haste +5%
+        {{augment =  23, power = 2}, {augment = 102, power =  2}}, -- Accuracy+3 Pet: Critical Hit Rate +3%
+        {{augment =  25, power = 2}, {augment = 110, power =  0}}, -- Attack+3 Pet: Adds "Regen" effect
+        {{augment =  25, power = 2}, {augment = 112, power =  9}}, -- Attack+3 Pet: Damage taken -10%
+    },
+    [3] = -- ASA
+    {
+        {{augment =    1, power = 24}, {augment = 39, power =  3}}, -- HP+25 Enmity+4
+        {{augment =    9, power = 24}, {augment = 40, power =  3}}, -- MP+25 Enmity-4
+        {{augment =   23, power =  6}}, -- Attack+7
+        {{augment =   25, power =  6}}, -- Accuracy+7
+        {{augment =   27, power =  6}}, -- Ranged Accuracy+7
+        {{augment =   29, power =  6}}, -- Ranged Attack+7
+        {{augment =   31, power =  6}}, -- Evasion+7
+        {{augment =   35, power =  3}}, -- Magic Accuracy+4
+        {{augment =  133, power =  3}}, -- "Magic Atk. Bonus" +4
+        {{augment =   49, power =  2}}, -- Haste +3%
+        {{augment =  143, power =  1}}, -- "Double Attack" +2%
+        {{augment =  328, power =  2}}, -- Increases Critical Hit Damage +3%
+        {{augment =  332, power =  4}}, -- Skillchain damage +5%
+        {{augment =  333, power =  4}}, -- "Conserve TP"+5
+        {{augment =   54, power =  3}}, -- Physical damage taken -4%
+        {{augment =  335, power =  9}}, -- Magic Critical Hit damage +10%
+        {{augment =  334, power =  9}}, -- Magic Burst damage +10%
+        {{augment =  194, power =  4}}, -- "Kick Attacks" +5
+        {{augment =  329, power =  4}}, -- "Cure" potency +5%
+        {{augment =  336, power =  4}}, -- "Sic" & "Ready" ability delay -5
+        {{augment =  337, power =  2}}, -- Song Recast Delay -3
+        {{augment =  338, power =  0}}, -- "Barrage" +1
+        {{augment =  339, power = 19}}, -- "Elemental Siphon" +20
+        {{augment =  340, power =  4}}, -- "Phantom Roll" ability delay -5
+        {{augment =  341, power =  9}}, -- "Repair" potency +10%
+        {{augment =  342, power =  4}}, -- "Waltz" TP cost -50
+        {{augment =   96, power =  6}}, -- Pet: Accuracy +7 Ranged Accuracy +7
+        {{augment =   97, power =  6}}, -- Pet: Attack +7 Ranged Attack +7
+        {{augment =  115, power =  7}, {augment = 116, power =  7}}, -- Pet: "Store TP" +8 "Subtle Blow" +8
+        {{augment =  100, power =  6}}, -- Pet: Magic Accuracy +7
+        {{augment =  913, power =  2}}, -- Movement Speed +8%
+        {{augment =  195, power =  4}}, -- "Subtle Blow"+5
+    },
+}
+
 local function givePrize(player, ki)
     if not player:hasKeyItem(ki) then
         player:showText(player, ID.text.NO_KEY)
@@ -1342,6 +1343,19 @@ local function givePrize(player, ki)
     end
 end
 
+local function intToBinary(x)
+    local bin = ""
+
+    while x > 1 do
+        bin = tostring(x % 2) .. bin
+        x = math.floor(x / 2)
+    end
+
+    bin = tostring(x) .. bin
+
+    return bin
+end
+
 local function scenarioArmor(player, option, giveToPlayer)
     local aug1 = 0
     local aug2 = 0
@@ -1394,19 +1408,6 @@ local function scenarioArmor(player, option, giveToPlayer)
         player:updateEvent(tonumber(addAug[1] .. "0000001100000010", 2), tonumber(addAug[2] .. addAug[3], 2), tonumber(addAug[4] .. addAug[5], 2))
     end
 
-end
-
-local function intToBinary(x)
-    local bin = ""
-
-    while x > 1 do
-        bin = tostring(x % 2) .. bin
-        x = math.floor(x / 2)
-    end
-
-    bin = tostring(x) .. bin
-
-    return bin
 end
 
 entity.onTrade = function(player, npc, trade)
