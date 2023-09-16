@@ -379,7 +379,7 @@ local keyitems =
                     {   9, 0, 9 }, -- MP+1-10
                     { 105, 0, 1 }, -- Pet: Enmity-2--1
                     { 106, 0, 0 }, -- Pet: Accuracy and Ranged Accuracy+0-1
-                    { 34,  0, 3 }, -- Def-4--1
+                    {  34, 0, 3 }, -- Def-4--1
                 }
             },
             { cutoff =   70, itemId = 13356, augments =
@@ -475,8 +475,8 @@ local keyitems =
         {
             { cutoff =  31, itemId = 13463, augments =
                 { -- Angels Ring:
-                  -- https://ffxiclopedia.fandom.com/wiki/Ebon_Key?oldid=934097 doesn't list -acc and -def, but this had -dark resist before the restructure
-                  -- and that seems to fit the theme of the other rewards
+                    -- https://ffxiclopedia.fandom.com/wiki/Ebon_Key?oldid=934097 doesn't list -acc and -def, but this had -dark resist before the restructure
+                    -- and that seems to fit the theme of the other rewards
                     {  40, 0,  1 }, -- Enmity-0-2
                     {   1, 0, 19 }, -- HP+0-20
                     { 518, 0,  0 }, -- CHR+1
@@ -828,12 +828,12 @@ local keyitems =
             },
             { cutoff =  433, itemId = 12707, augments =
                 { -- Scorpion Mitts
-                    { 512, 0,  3}, -- STR +1-4
-                    { 514, 0,  1}, -- VIT +1-2
-                    { 518, 0,  2}, -- CHR +1-3
-                    {  97, 0,  2}, -- Pet: Attack and Ranged Attack +1-3
-                    {   1, 4, 11}, -- MP +5-12
-                    {  26, 0,  3}, -- Attack -1--4
+                    { 512, 0,  3 }, -- STR +1-4
+                    { 514, 0,  1 }, -- VIT +1-2
+                    { 518, 0,  2 }, -- CHR +1-3
+                    {  97, 0,  2 }, -- Pet: Attack and Ranged Attack +1-3
+                    {   1, 4, 11 }, -- MP +5-12
+                    {  26, 0,  3 }, -- Attack -1--4
                 },
             },
             { cutoff =  552, itemId = 12604, augments =
@@ -1146,7 +1146,7 @@ local keyitems =
                 { -- Carapace Mask
                     { 517, 0, 1 }, -- MND+1-2
                     {   1, 4, 5 }, -- HP+5-6
-                    { { 28, 0, 0 },{ 27, 0, 4 }, }, -- Ranged Accuracy-1-+5
+                    { { 28, 0, 0 }, { 27, 0, 4 }, }, -- Ranged Accuracy-1-+5
                     {  30, 0, 3 }, -- Ranged Attack-4
                     { 770, 0, 4 }, -- Wind+1-5
                 }
@@ -1251,7 +1251,7 @@ local keyitems =
                 },
                 { cutoff =  571, itemId = 16295, augments =
                     { -- Varius Torque
-                      -- assumed combat skill caps are all the same
+                        -- assumed combat skill caps are all the same
                         {  23,  0,  4 }, -- Accuracy+1-5
                         {  25,  0,  4 }, -- Attack+1-5
                         {  27,  0,  3 }, -- Ranged Accuracy+1-4
@@ -1466,12 +1466,13 @@ local function givePrize(player, ki)
             if prize.augments ~= nil then
                 local pAug = {}
                 -- deep copy augments for prize
-                for k,v in pairs(prize.augments) do
+                for k, v in pairs(prize.augments) do
                     table.insert(pAug, v)
                 end
+
                 for i = 1, 4 do
                     -- static 50% chance to get any augment at all each loop
-                    if #addAug == 0 or math.random(1,2) == 1 then
+                    if #addAug == 0 or math.random(1, 2) == 1 then
                         -- since lua arrays start at index 1, set start at 1 to guarantee at least one augment
                         roll = math.random(1, #pAug)
                     else
@@ -1483,8 +1484,9 @@ local function givePrize(player, ki)
                             -- augment is itself a list
                             -- used for stat ranges that go between negative and positive
                             -- but, could also be used for groups of stats like int/mnd/chr to avoid having them all show up?
-                            aug = aug[math.random(1,#aug)]
+                            aug = aug[math.random(1, #aug)]
                         end
+
                         -- if augment chosen, remove from cloned list to preserve chance of remaining augments
                         table.remove(pAug, roll)
 
@@ -1555,7 +1557,7 @@ local function scenarioArmor(player, option, giveToPlayer)
         else
             player:addItem(optionToGear[gear].itemid, 1, unpack(addAug))
             player:messageSpecial(ID.text.ITEM_OBTAINED, optionToGear[gear].itemid)
-            player:delKeyItem(({xi.ki.PRISMATIC_KEY,xi.ki.OXBLOOD_KEY,xi.ki.BEHEMOTH_KEY})[addon])
+            player:delKeyItem(({ xi.ki.PRISMATIC_KEY, xi.ki.OXBLOOD_KEY, xi.ki.BEHEMOTH_KEY })[addon])
         end
     else
         -- Convert each augment's power and ID to binary (5 bits for power followed by 11 bits for ID)
@@ -1574,7 +1576,6 @@ local function scenarioArmor(player, option, giveToPlayer)
         -- Each argument concats 2 different augments. For some reason, argument 1 contacts the string below.
         player:updateEvent(tonumber(addAug[1] .. '0000001100000010', 2), tonumber(addAug[2] .. addAug[3], 2), tonumber(addAug[4] .. addAug[5], 2))
     end
-
 end
 
 entity.onTrade = function(player, npc, trade)
