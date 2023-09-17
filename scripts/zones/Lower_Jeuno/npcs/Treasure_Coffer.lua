@@ -1630,7 +1630,7 @@ entity.onTrigger = function(player, npc)
             end
         end
     end
-print(eligableNexusCape)
+
     local arg4 =
         ((xi.settings.main.ENABLE_ACP == 0 or kiArgs[1] == 254) and 2 or 0) +
         ((xi.settings.main.ENABLE_AMK == 0 or kiArgs[2] == 254) and 4 or 0) +
