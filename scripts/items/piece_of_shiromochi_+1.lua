@@ -1,12 +1,10 @@
 -----------------------------------
--- ID: 6343
--- Item: grape_daifuku
--- Food Effect: 30 Min, All Races
+-- ID: 6259
+-- Item: piece_of_shiromochi_+1
+-- Food Effect: 60 Min, All Races
 -----------------------------------
--- HP + 20 STR + 2 VIT + 3 (Pet & Master)
--- Accuracy/Ranged Accuracy +10% (cap 80 on master, cap 105 on pet)
--- Attack/Ranged Attack +11% (cap 50 on master, cap 75 on pet)
--- Master MAB + 3 , Pet MAB + 14
+-- HP + 30 VIT + 4 (Pet & Master)
+-- Accuracy/Ranged Accuracy +15% (cap 74 on master, cap 114 on pet)
 -----------------------------------
 local itemObject = {}
 
@@ -15,7 +13,7 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    target:addStatusEffect(xi.effect.FOOD, 0, 0, 1800, 6343)
+    target:addStatusEffect(xi.effect.FOOD, 0, 0, 3600, 6259)
 end
 
 itemObject.onEffectGain = function(target, effect)
