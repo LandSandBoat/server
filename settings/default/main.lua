@@ -31,7 +31,6 @@ xi.settings.main =
     ENABLE_ACP       = 1,
     ENABLE_AMK       = 1,
     ENABLE_ASA       = 1,
-    NEXUS_CAPE_FIN   = 1,   -- Requires completion of all 3 mini expansions instead of simply enabling them
     ENABLE_ABYSSEA   = 1,
     ENABLE_SOA       = 1,
     ENABLE_ROV       = 1,

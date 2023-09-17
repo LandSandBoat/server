@@ -1619,16 +1619,10 @@ local argumentKeyItems =
 }
 
 entity.onTrigger = function(player, npc)
-    local acpFin  = player:getCurrentMission(xi.mission.log_id.ACP) >= xi.mission.id.acp.A_CRYSTALLINE_PROPHECY_FIN
-    local amkFin  = player:getCurrentMission(xi.mission.log_id.AMK) >= xi.mission.id.amk.A_MOOGLE_KUPO_DETAT_FIN
-    local asaFin  = player:getCurrentMission(xi.mission.log_id.ASA) >= xi.mission.id.asa.A_SHANTOTTO_ASCENSION_FIN
-    local eligableNexusCape = asaFin and amkFin and acpFin
+    local eligableNexusCape = (xi.settings.main.ENABLE_ACP * xi.settings.main.ENABLE_AMK * xi.settings.main.ENABLE_ASA) ~= 0
     local receivedNexusCape = player:getCharVar('receivedNexusCape')
     local kiArgs = { 0, 0, 0 }
 
-    if (xi.settings.main.NEXUS_CAPE_FIN or 0) ~= 1 then
-        eligableNexusCape = (xi.settings.main.ENABLE_ACP * xi.settings.main.ENABLE_AMK * xi.settings.main.ENABLE_ASA) ~= 0
-    end
 
     for argNum = 1, 3 do
         for bitPos, keyItem in ipairs(argumentKeyItems[argNum]) do
@@ -1637,7 +1631,7 @@ entity.onTrigger = function(player, npc)
             end
         end
     end
-
+print(eligableNexusCape)
     local arg4 =
         ((xi.settings.main.ENABLE_ACP == 0 or kiArgs[1] == 254) and 2 or 0) +
         ((xi.settings.main.ENABLE_AMK == 0 or kiArgs[2] == 254) and 4 or 0) +
