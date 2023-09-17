@@ -1623,7 +1623,6 @@ entity.onTrigger = function(player, npc)
     local receivedNexusCape = player:getCharVar('receivedNexusCape')
     local kiArgs = { 0, 0, 0 }
 
-
     for argNum = 1, 3 do
         for bitPos, keyItem in ipairs(argumentKeyItems[argNum]) do
             if not player:hasKeyItem(keyItem) then
