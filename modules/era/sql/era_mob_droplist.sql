@@ -5480,9 +5480,9 @@ INSERT INTO `mob_droplist` VALUES (641,0,0,1000,5378,@UNCOMMON); -- Congestus Ce
 INSERT INTO `mob_droplist` VALUES (641,0,0,1000,5735,@UNCOMMON); -- Cotton Coin Purse (Uncommon, 10%)
 
 -- ZoneID:  22 - Deviator
-INSERT INTO `mob_droplist` VALUES (642,0,0,1000,1723,500);       -- White Memosphere (50.0%)
-INSERT INTO `mob_droplist` VALUES (642,0,0,1000,1759,300);       -- Recollection Of Suffering (30.0%)
-INSERT INTO `mob_droplist` VALUES (642,0,0,1000,1723,250);       -- White Memosphere (25.0%)
+INSERT INTO `mob_droplist` VALUES (642,0,0,1000,1759,@VCOMMON);  -- Recollection Of Suffering (Very Common, 24%)
+INSERT INTO `mob_droplist` VALUES (642,0,0,1000,1723,@ALWAYS);   -- White Memosphere (Always, 100%)
+INSERT INTO `mob_droplist` VALUES (642,0,0,1000,1723,@COMMON);   -- White Memosphere (Common, 15%)
 INSERT INTO `mob_droplist` VALUES (642,0,0,1000,1723,@UNCOMMON); -- White Memosphere (Uncommon, 10%)
 
 -- ZoneID:  74 - Devil Manta
@@ -21291,9 +21291,9 @@ INSERT INTO `mob_droplist` VALUES (2599,0,0,1000,924,@RARE);   -- Vial Of Fiend 
 INSERT INTO `mob_droplist` VALUES (2599,0,0,1000,1125,@VRARE); -- Carbuncles Ruby (Very Rare, 1%)
 
 -- ZoneID:  22 - Wailer
-INSERT INTO `mob_droplist` VALUES (2600,0,0,1000,1723,500);       -- White Memosphere (50.0%)
-INSERT INTO `mob_droplist` VALUES (2600,0,0,1000,1760,300);       -- Recollection Of Animosity (30.0%)
-INSERT INTO `mob_droplist` VALUES (2600,0,0,1000,1723,250);       -- White Memosphere (25.0%)
+INSERT INTO `mob_droplist` VALUES (2600,0,0,1000,1760,@VCOMMON);  -- Recollection Of Animosity (Very Common, 24%)
+INSERT INTO `mob_droplist` VALUES (2600,0,0,1000,1723,@ALWAYS);   -- White Memosphere (Always, 100%)
+INSERT INTO `mob_droplist` VALUES (2600,0,0,1000,1723,@COMMON);   -- White Memosphere (Common, 15%)
 INSERT INTO `mob_droplist` VALUES (2600,0,0,1000,1723,@UNCOMMON); -- White Memosphere (Uncommon, 10%)
 
 -- ZoneID:  51 - Wajaom Tiger
