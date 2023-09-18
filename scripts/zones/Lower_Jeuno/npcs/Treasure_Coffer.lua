@@ -1867,8 +1867,8 @@ local argumentKeyItems =
 }
 
 entity.onTrigger = function(player, npc)
-    -- determines if server/player is eligable to receive a nexus cape
-    local eligableNexusCape = xi.settings.main.ENABLE_ACP   == 1     and
+    -- determines if server/player is eligible to receive a nexus cape
+    local eligibleNexusCape = xi.settings.main.ENABLE_ACP   == 1     and
                                 xi.settings.main.ENABLE_AMK == 1     and
                                 xi.settings.main.ENABLE_ASA == 1     and
                                 not player:hasItem(xi.item.NEXUS_CAPE)
@@ -1888,12 +1888,12 @@ entity.onTrigger = function(player, npc)
     if xi.settings.main.ENABLE_AMK == 0 or kiArgs[2] == 254 then kiArgs[4] = utils.mask.setBit(kiArgs[4], 2, true) end
     if xi.settings.main.ENABLE_ASA == 0 or kiArgs[3] == 254 then kiArgs[4] = utils.mask.setBit(kiArgs[4], 3, true) end
     -- can recieve nexus cape and has never received
-    if not (eligableNexusCape and not receivedNexusCape) then
+    if not (eligibleNexusCape and not receivedNexusCape) then
         kiArgs[4] = utils.mask.setBit(kiArgs[4], 4, true)
     end
 
     -- can recieve nexus cape and has received previously
-    if not (eligableNexusCape and receivedNexusCape) then
+    if not (eligibleNexusCape and receivedNexusCape) then
         kiArgs[4] = utils.mask.setBit(kiArgs[4], 5, true)
     end
 
