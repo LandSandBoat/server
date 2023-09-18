@@ -988,3 +988,17 @@ end
 function utils.vanadielClockTime()
     return tonumber(VanadielHour() .. string.format('%02d', VanadielMinute()))
 end
+
+-- Converts a number to a binary string
+function utils.intToBinary(x)
+    local bin = ''
+
+    while x > 1 do
+        bin = tostring(x % 2) .. bin
+        x = math.floor(x / 2)
+    end
+
+    bin = tostring(x) .. bin
+
+    return bin
+end
