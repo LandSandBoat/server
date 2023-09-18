@@ -127,7 +127,7 @@ quest.sections =
                     if quest:complete(player) then
                         player:unlockJob(xi.job.PUP)
                         player:messageSpecial(ahtUrhganID.text.YOU_CAN_BECOME_PUP)
-                        player:setPetName(xi.pet.type.AUTOMATON, option + 118)
+                        player:setPetName(xi.petType.AUTOMATON, option + 118)
                         player:unlockAttachment(xi.item.HARLEQUIN_FRAME)
                         player:unlockAttachment(xi.item.HARLEQUIN_HEAD)
                     end

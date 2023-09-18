@@ -13664,7 +13664,7 @@ int32 CLuaBaseEntity::takeSwipeLungeDamage(CLuaBaseEntity* caster, int32 damage,
 /************************************************************************
  *  Function: spawnPet()
  *  Purpose : Spawns a pet if a few correct conditions are met
- *  Example : caster:spawnPet(xi.pet.id.CARBUNCLE)
+ *  Example : caster:spawnPet(xi.petId.CARBUNCLE)
  *  Notes   :
  ************************************************************************/
 
@@ -14216,7 +14216,7 @@ auto CLuaBaseEntity::getPetName() -> const std::string
 /************************************************************************
  *  Function: setPetName()
  *  Purpose : Passes a string to name a new pet
- *  Example : player:setPetName(xi.pet.type.WYVERN, xi.pet.name.ROVER)
+ *  Example : player:setPetName(xi.petType.WYVERN, xi.petName.ROVER)
  *  Notes   : Updates char_pet.sql
  ************************************************************************/
 

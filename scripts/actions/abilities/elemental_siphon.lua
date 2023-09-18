@@ -15,7 +15,7 @@ abilityObject.onAbilityCheck = function(player, target, ability)
         petID = pet:getPetID()
     end
 
-    if petID >= xi.pet.id.FIRE_SPIRIT and petID <= xi.pet.id.DARK_SPIRIT then -- spirits
+    if petID >= xi.petId.FIRE_SPIRIT and petID <= xi.petId.DARK_SPIRIT then -- spirits
         return 0, 0
     end
 
