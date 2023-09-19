@@ -296,8 +296,17 @@ namespace gardenutils
             item = resultList.back();
         }
 
+        // The percentage of strength between the item's minimum weight to maximum weight
         float percentage = (strength - (cumulativeWeight - item.Weight)) / float(item.Weight);
-        uint8 quantity   = item.MinQuantity + int((item.MaxQuantity - item.MinQuantity) * percentage + 0.1);
+        // Split the quantity range n into n+1 evenly-distributed buckets across 0-100%. Yields of 20-35 is a range of 15 with 16 possible outcomes.
+        // Ex. For a yield of 4-8 which has a range of 4 and a percentage p, it's split into 5 equal buckets:
+        // 4 = p < 0.2
+        // 5 = 0.2 <= p < 0.4
+        // 6 = 0.4 <= p < 0.6
+        // 7 = 0.6 <= p < 0.8
+        // 8 = p >= 0.8
+        // The final result is truncated instead of rounded, so only p>=1.0 will return a higher than maximum yield. It's special-cased to avoid this.
+        const uint8 quantity = percentage >= 1.0f ? item.MaxQuantity : (item.MinQuantity + percentage * (1 + item.MaxQuantity - item.MinQuantity));
 
         return std::make_tuple(item.ItemID, quantity);
     }
