@@ -123,13 +123,13 @@ zones[xi.zone.BASTOK_MINES] =
         },
         STARLIGHT_DECORATIONS =
         {
+            [17735995] = 17735995,  -- Christina
             [17735996] = 17735996,  -- Starlight Celebration Planter
             [17735997] = 17735997,  -- Starlight Celebration Planter
             [17735998] = 17735998,  -- Starlight Celebration Planter
             [17735999] = 17735999,  -- Starlight Celebration Planter
             [17736000] = 17736000,  -- Starlight Celebration Planter
             [17736001] = 17736001,  -- Starlight Celebration Planter
-            [17735995] = 17735995,  -- Christina
             [17736002] = 17736002,  -- Token Moogle
             [17736003] = 17736003,  -- Event Moogle
             [17736004] = 17736004,  -- Vendor Moogle

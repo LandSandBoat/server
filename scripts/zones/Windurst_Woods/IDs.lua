@@ -116,7 +116,7 @@ zones[xi.zone.WINDURST_WOODS] =
             [17764759] = 17764759,  -- Starlight Celebration Tree
             [17764760] = 17764760,  -- Starlight Celebration Tree
             [17764761] = 17764761,  -- Token Moogle
-            -- [17764763] = 17764763,  -- Rokor-Makor
+            -- [17764721] = 17764721,  -- Rokor-Makor
         },
     },
 }
