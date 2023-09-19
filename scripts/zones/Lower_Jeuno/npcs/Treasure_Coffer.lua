@@ -1869,9 +1869,10 @@ local argumentKeyItems =
 entity.onTrigger = function(player, npc)
     -- determines if server/player is eligible to receive a nexus cape
     local eligibleNexusCape = xi.settings.main.ENABLE_ACP == 1 and
-                              xi.settings.main.ENABLE_AMK == 1 and
-                              xi.settings.main.ENABLE_ASA == 1 and
-                              not player:hasItem(xi.item.NEXUS_CAPE)
+                            xi.settings.main.ENABLE_AMK == 1 and
+                            xi.settings.main.ENABLE_ASA == 1 and
+                            not player:hasItem(xi.item.NEXUS_CAPE)
+
     local receivedNexusCape = player:getCharVar('receivedNexusCape') == 1
     local kiArgs = { 0, 0, 0, 0 }
 
