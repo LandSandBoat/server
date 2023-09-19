@@ -150,7 +150,7 @@ public:
     void hideNPC(sol::object const& seconds);                           // hide an NPC
     void updateNPCHideTime(sol::object const& seconds);                 // Updates the length of time a NPC remains hidden, if shorter than the original hide time.
 
-    uint8 getWeather();
+    uint8 getWeather(sol::object const& ignoreScholar);
     void  setWeather(uint8 weatherType); // Set Weather condition (GM COMMAND)
 
     // PC Instructions

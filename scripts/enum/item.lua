@@ -5785,6 +5785,7 @@ xi.item =
     PUGILISTS                       = 19327,
     SIMIAN_FISTS                    = 19328,
     MANTIS                          = 19329,
+    CATS_CLAWS                      = 19331,
     PEELER                          = 19332,
     RENEGADE                        = 19333,
     KARTIKA                         = 19334,

@@ -2204,13 +2204,14 @@ void CLuaBaseEntity::updateNPCHideTime(sol::object const& seconds)
  *  Example : if player:getWeather() == xi.weather.WIND then
  ************************************************************************/
 
-uint8 CLuaBaseEntity::getWeather()
+uint8 CLuaBaseEntity::getWeather(sol::object const& ignoreScholar)
 {
     WEATHER weather = WEATHER_NONE;
 
     if (m_PBaseEntity->objtype & TYPE_PC || m_PBaseEntity->objtype & TYPE_MOB)
     {
-        weather = battleutils::GetWeather(static_cast<CBattleEntity*>(m_PBaseEntity), false);
+        bool ignoreScholarWeather = ignoreScholar.is<bool>() ? ignoreScholar.as<bool>() : false;
+        weather                   = battleutils::GetWeather(static_cast<CBattleEntity*>(m_PBaseEntity), ignoreScholarWeather);
     }
     else
     {
