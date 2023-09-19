@@ -500,6 +500,26 @@ xi.magian.trials =
         },
     },
 
+    [82] =
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.item.PUGILISTS,
+        },
+
+        textOffset     = 99,
+        dayWeather     = xi.magianElement.ANY,
+        defeatMob      = true,
+        mobSuperFamily = set{ 56 },
+        numRequired    = 50,
+
+        rewardItem =
+        {
+            itemId = xi.item.CATS_CLAWS,
+        },
+    },
+
     [150] = -- Serpopard Ishtar x3
     {
         previousTrial = 0,

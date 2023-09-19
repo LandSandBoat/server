@@ -444,10 +444,15 @@ xi.magian.magianEventUpdate = function(player, csid, option, npc)
             local requiredElement = trialData.requiredElement and trialData.requiredElement or 0
             local optParam        = 0
 
+            -- NOTE: optParam value is required for certain messages, and even though
+            -- this system can support more complex combinations, it may not display correctly
+            -- if customizing.
             if trialData.tradeItem then
                 optParam = getRequiredTradeItem(trialId)
             elseif trialData.minDamage then
                 optParam = trialData.minDamage
+            elseif trialData.dayWeather then
+                optParam = trialData.dayWeather
             end
 
             player:updateEvent(trialData.numRequired, 0, progress, 0, 0, optParam, requiredElement)
@@ -768,8 +773,88 @@ xi.magian.deliveryCrateOnEventFinish = function(player, csid, option)
     end
 end
 
+-- [elementId] = { validDay, { weatherEffect1, weatherEffect2 } },
+local dayWeatherElement =
+{
+    [xi.element.FIRE   ] = { xi.day.FIRESDAY,     { xi.weather.HOT_SPELL,  xi.weather.HEAT_WAVE     } },
+    [xi.element.ICE    ] = { xi.day.ICEDAY,       { xi.weather.SNOW,       xi.weather.BLIZZARDS     } },
+    [xi.element.WIND   ] = { xi.day.WINDSDAY,     { xi.weather.WIND,       xi.weather.GALES         } },
+    [xi.element.EARTH  ] = { xi.day.EARTHSDAY,    { xi.weather.DUST_STORM, xi.weather.SAND_STORM    } },
+    [xi.element.THUNDER] = { xi.day.LIGHTNINGDAY, { xi.weather.THUNDER,    xi.weather.THUNDERSTORMS } },
+    [xi.element.WATER  ] = { xi.day.WATERSDAY,    { xi.weather.RAIN,       xi.weather.SQUALL        } },
+    [xi.element.LIGHT  ] = { xi.day.LIGHTSDAY,    { xi.weather.AURORAS,    xi.weather.STELLAR_GLARE } },
+    [xi.element.DARK   ] = { xi.day.DARKSDAY,     { xi.weather.GLOOM,      xi.weather.DARKNESS      } },
+}
+
+local elementData =
+{
+    [xi.magianElement.FIRE     ] = { xi.element.FIRE    },
+    [xi.magianElement.ICE      ] = { xi.element.ICE     },
+    [xi.magianElement.WIND     ] = { xi.element.WIND    },
+    [xi.magianElement.EARTH    ] = { xi.element.EARTH   },
+    [xi.magianElement.THUNDER  ] = { xi.element.THUNDER },
+    [xi.magianElement.WATER    ] = { xi.element.WATER   },
+    [xi.magianElement.LIGHT    ] = { xi.element.LIGHT   },
+    [xi.magianElement.DARK     ] = { xi.element.DARK    },
+    [xi.magianElement.ANY_LIGHT] =
+    {
+        xi.element.FIRE,
+        xi.element.WIND,
+        xi.element.THUNDER,
+        xi.element.LIGHT,
+    },
+
+    [xi.magianElement.ANY_DARK] =
+    {
+        xi.element.ICE,
+        xi.element.EARTH,
+        xi.element.WATER,
+        xi.element.DARK,
+    },
+
+    [xi.magianElement.ANY] =
+    {
+        xi.element.FIRE,
+        xi.element.ICE,
+        xi.element.WIND,
+        xi.element.EARTH,
+        xi.element.THUNDER,
+        xi.element.WATER,
+        xi.element.LIGHT,
+        xi.element.DARK,
+    },
+}
+
 local trialConditions =
 {
+    -- NOTE: This condition is a bit of an outlier, as it is both a condition and
+    -- can have a higher reward value as opposed to a credit of 1.  Light and Dark are special exceptions
+    -- that should be handled in magian trial data, if it is the case where multiple elements are allowed.
+    ['dayWeather'] = function(trialData, player, mob, paramTable)
+        if trialData.dayWeather then
+            local dayWeatherResult = 0
+            local dayWeatherTable  = elementData[trialData.dayWeather]
+
+            local currentWeather = player:getWeather(true)
+            for _, elementId in ipairs(dayWeatherTable) do
+                if dayWeatherElement[elementId][1] == VanadielDayOfTheWeek() then
+                    dayWeatherResult = dayWeatherResult + 1
+                end
+
+                for _, weatherType in ipairs(dayWeatherElement[elementId][2]) do
+                    if weatherType == currentWeather then
+                        dayWeatherResult = dayWeatherResult and dayWeatherResult + 5
+                        break
+                    end
+                end
+            end
+
+            return dayWeatherResult > 0 and dayWeatherResult or false
+        end
+
+        return true
+    end,
+
     ['minDamage'] = function(trialData, player, mob, paramTable)
         return not trialData.minDamage or paramTable.weaponskillDamage >= trialData.minDamage
     end,
@@ -780,6 +865,10 @@ local trialConditions =
 
     ['mobFamily'] = function(trialData, player, mob, paramTable)
         return not trialData.mobFamily or trialData.mobFamily[mob:getFamily()]
+    end,
+
+    ['mobSuperFamily'] = function(trialData, player, mob, paramTable)
+        return not trialData.mobSuperFamily or trialData.mobSuperFamily[mob:getSuperFamily()]
     end,
 
     ['useWeaponskill'] = function(trialData, player, mob, paramTable)
@@ -794,13 +883,19 @@ local trialConditions =
 }
 
 local function checkConditions(trialData, player, mob, paramTable)
+    local creditReward = 1
+
     for conditionName, conditionFunc in pairs(trialConditions) do
-        if not conditionFunc(trialData, player, mob, paramTable) then
+        local conditionResult = conditionFunc(trialData, player, mob, paramTable)
+
+        if not conditionResult then
             return false
+        elseif type(conditionResult) == 'number' then
+            creditReward = conditionResult
         end
     end
 
-    return true
+    return creditReward
 end
 
 -----------------------------------
@@ -829,7 +924,6 @@ xi.magian.onItemEquip = function(player, itemObj)
     -- require the player to both be alive and the mob be experience-granting (NMs are handled separately)
 
     -- TODO:
-    -- Weather Type / Day (Weather = 5, Day = 1, Additive) Special exception for Light/Dark
     -- Elemental Damage (Anyone counts!)
     -- Pet kill
     -- Avatar Kill (Summon must be out, but another of the same type can cause credit)
@@ -839,8 +933,10 @@ xi.magian.onItemEquip = function(player, itemObj)
     if trialData.defeatMob then
         player:addListener('DEFEATED_MOB', 'TRIAL_' .. itemTrialId, function(mobObj, playerObj, optParams)
             if not playerObj:isDead() and playerObj:checkKillCredit(mobObj) then
-                if checkConditions(trialData, playerObj, mobObj, optParams) then
-                    progressPlayerTrial(playerObj, itemTrialId, 1)
+                local conditionResult = checkConditions(trialData, playerObj, mobObj, optParams)
+
+                if conditionResult then
+                    progressPlayerTrial(playerObj, itemTrialId, conditionResult)
                 end
             end
         end)
@@ -848,8 +944,10 @@ xi.magian.onItemEquip = function(player, itemObj)
     elseif trialData.useWeaponskill then
         player:addListener('WEAPONSKILL_USE', 'TRIAL_' .. itemTrialId, function(playerObj, mobObj, weaponskillId, tpSpent, action, damage)
             if not playerObj:isDead() and playerObj:checkKillCredit(mobObj) then
-                if checkConditions(trialData, playerObj, mobObj, { weaponskillUsed = weaponskillId, weaponskillDamage = damage }) then
-                    progressPlayerTrial(playerObj, itemTrialId, 1)
+                local conditionResult = checkConditions(trialData, playerObj, mobObj, { weaponskillUsed = weaponskillId, weaponskillDamage = damage })
+
+                if conditionResult then
+                    progressPlayerTrial(playerObj, itemTrialId, conditionResult)
                 end
             end
         end)
