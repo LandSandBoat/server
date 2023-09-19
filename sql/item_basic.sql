@@ -15383,7 +15383,7 @@ INSERT INTO `item_basic` VALUES (18080,0,'spark_fork','spark_fork',1,2084,8,0,75
 INSERT INTO `item_basic` VALUES (18081,0,'spark_fork_+1','spark_fork_+1',1,2080,8,0,9402);
 INSERT INTO `item_basic` VALUES (18082,0,'barchha','barchha',1,2084,8,0,6505);
 INSERT INTO `item_basic` VALUES (18083,0,'barchha_+1','barchha_+1',1,2080,8,0,8131);
-INSERT INTO `item_basic` VALUES (18084,0,'rune_halberd','rune_halberd',1,2052,8,0,1200);
+INSERT INTO `item_basic` VALUES (18084,0,'rune_halberd','rune_halberd',1,2052,8,0,12000);
 INSERT INTO `item_basic` VALUES (18085,0,'platoon_lance','platoon_lance',1,2052,8,0,1100);
 INSERT INTO `item_basic` VALUES (18086,0,'behourd_lance','behourd_lance',1,34820,8,0,2000);
 INSERT INTO `item_basic` VALUES (18087,0,'schwarz_lance','schwarz_lance',1,34820,8,0,5657);
