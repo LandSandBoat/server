@@ -1884,9 +1884,18 @@ entity.onTrigger = function(player, npc)
         end
     end
 
-    if xi.settings.main.ENABLE_ACP == 0 or kiArgs[1] == 254 then kiArgs[4] = utils.mask.setBit(kiArgs[4], 1, true) end
-    if xi.settings.main.ENABLE_AMK == 0 or kiArgs[2] == 254 then kiArgs[4] = utils.mask.setBit(kiArgs[4], 2, true) end
-    if xi.settings.main.ENABLE_ASA == 0 or kiArgs[3] == 254 then kiArgs[4] = utils.mask.setBit(kiArgs[4], 3, true) end
+    if xi.settings.main.ENABLE_ACP == 0 or kiArgs[1] == 254 then
+        kiArgs[4] = utils.mask.setBit(kiArgs[4], 1, true)
+    end
+
+    if xi.settings.main.ENABLE_AMK == 0 or kiArgs[2] == 254 then
+        kiArgs[4] = utils.mask.setBit(kiArgs[4], 2, true)
+    end
+
+    if xi.settings.main.ENABLE_ASA == 0 or kiArgs[3] == 254 then
+        kiArgs[4] = utils.mask.setBit(kiArgs[4], 3, true)
+    end
+
     -- can recieve nexus cape and has never received
     if not (eligibleNexusCape and not receivedNexusCape) then
         kiArgs[4] = utils.mask.setBit(kiArgs[4], 4, true)
