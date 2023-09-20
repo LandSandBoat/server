@@ -11,81 +11,348 @@ require('scripts/missions/amk/helpers')
 -----------------------------------
 local entity = {}
 
-entity.onTrade = function(player, npc, trade)
-    local now                   = os.time()
-    local nextMidnight          = getMidnight()
-    local count                 = trade:getItemCount()
-    local finishedACP           = player:getCurrentMission(xi.mission.log_id.ACP) == xi.mission.id.acp.A_CRYSTALLINE_PROPHECY_FIN
-    local finishedAMK           = player:getCurrentMission(xi.mission.log_id.AMK) == xi.mission.id.amk.A_MOOGLE_KUPO_DETAT_FIN
-    local finishedASA           = player:getCurrentMission(xi.mission.log_id.ASA) == xi.mission.id.asa.A_SHANTOTTO_ASCENSION_FIN
-    local hasMoogleKey          = player:hasKeyItem(xi.ki.MOOGLE_KEY)
-    local kit                   = player:getCharVar('ASA_kit')
-    local hasMoogleItems        = kit ~= 0 and
-                                    trade:hasItemQty(kit, 1) and
-                                    count == 1
-    local hasCrimsonItems       = trade:hasItemQty(xi.item.SEEDSPALL_LUX, 1)        and
-                                    trade:hasItemQty(xi.item.SEEDSPALL_LUNA, 1)     and
-                                    trade:hasItemQty(xi.item.SEEDSPALL_ASTRUM, 1)   and
-                                    count == 3
-    local hasWhiteCoralItems    = trade:hasItemQty(xi.item.ORCISH_PLATE_ARMOR, 1)   and
-                                    trade:hasItemQty(xi.item.QUADAV_BACKSCALE, 1)   and
-                                    trade:hasItemQty(xi.item.YAGUDO_CAULK, 1)       and
-                                    count == 3
+-- maps the menu options to the key items/missions that block access
+-- second page is auto indexed as a list and matches the order of the 2nd page menu
+-- first page is keyed by the key item, since the menu options don't have a clean pattern
+-- first page mostly listed here to have one place to reference all the metadata about a menu option's flow, but also to clean up some of the complex event args
+local menuMetadata =
+{
+    [1] =
+    {
+        ['initialList'] =
+        {
+            xi.ki.CRIMSON_KEY,
+            xi.ki.VIRIDIAN_KEY,
+            xi.ki.WHITE_CORAL_KEY,
+            xi.ki.BLUE_CORAL_KEY,
+            xi.ki.BLACK_CORAL_KEY,
+            xi.ki.MOOGLE_KEY,
+            xi.ki.BIRD_KEY,
+            xi.ki.BOMB_KEY,
+        },
+        [xi.ki.CRIMSON_KEY] =
+        {
+            expansion    = 1,
+            charVar      = 'LastCrimsonKey',
+            reqItems     =
+            {
+                xi.item.SEEDSPALL_LUX,
+                xi.item.SEEDSPALL_LUNA,
+                xi.item.SEEDSPALL_ASTRUM,
+            },
+        },
+        [xi.ki.VIRIDIAN_KEY] =
+        {
+            expansion   = 1,
+            charVar     = 'LastViridianKey',
+            reqKeyItems =
+            {
+                xi.ki.BOWL_OF_BLAND_GOBLIN_SALAD,
+                xi.ki.JUG_OF_GREASY_GOBLIN_JUICE,
+                xi.ki.CHUNK_OF_SMOKED_GOBLIN_GRUB,
+            }
+        },
+        [xi.ki.WHITE_CORAL_KEY] =
+        {
+            expansion = 2,
+            charVar   = 'LastWhiteCoralKey',
+            reqItems  =
+            {
+                xi.item.ORCISH_PLATE_ARMOR,
+                xi.item.QUADAV_BACKSCALE,
+                xi.item.YAGUDO_CAULK,
+            },
+        },
+        [xi.ki.BLUE_CORAL_KEY] =
+        {
+            expansion   = 2,
+            charVar     = 'LastBlueCoralKey',
+            reqKeyItems =
+            {
+                xi.ki.STURDY_METAL_STRIP,
+                xi.ki.PIECE_OF_RUGGED_TREE_BARK,
+                xi.ki.SAVORY_LAMB_ROAST,
+            },
+        },
+        [xi.ki.BLACK_CORAL_KEY] =
+        {
+            expansion   = 2,
+            charVar     = 'LastBlackCoralKey',
+            reqKeyItems =
+            {
+                xi.ki.MOLDY_WORM_EATEN_CHEST,
+            },
+        },
+        [xi.ki.MOOGLE_KEY] =
+        {
+            expansion      = 3,
+            charVar        = 'LastMoogleKey',
+            reqItemCharVar = 'ASA_kit',
+            reqItems       =
+            {
+                xi.item.ENFEEBLEMENT_KIT_OF_POISON,
+                xi.item.ENFEEBLEMENT_KIT_OF_BLINDNESS,
+                xi.item.ENFEEBLEMENT_KIT_OF_SLEEP,
+                xi.item.ENFEEBLEMENT_KIT_OF_SILENCE,
+            }
+        },
+        [xi.ki.BIRD_KEY] =
+        {
+            expansion    = 3,
+            charVar      = 'LastBirdKey',
+            reqItemCount = 3,
+            reqKeyItems  =
+            {
+                xi.ki.AMBER_COUNTERSEAL,
+                xi.ki.AZURE_COUNTERSEAL,
+                xi.ki.CERULEAN_COUNTERSEAL,
+                xi.ki.EMERALD_COUNTERSEAL,
+                xi.ki.SCARLET_COUNTERSEAL,
+                xi.ki.VIOLET_COUNTERSEAL,
+            },
+            prereqKeyItems =
+            {
+                xi.ki.DOMINAS_SCARLET_SEAL,
+                xi.ki.DOMINAS_CERULEAN_SEAL,
+                xi.ki.DOMINAS_EMERALD_SEAL,
+                xi.ki.DOMINAS_AMBER_SEAL,
+                xi.ki.DOMINAS_VIOLET_SEAL,
+                xi.ki.DOMINAS_AZURE_SEAL,
+            },
+        },
+        [xi.ki.BOMB_KEY] =
+        {
+            expansion   = 3,
+            charVar     = 'LastBombKey',
+            reqKeyItems =
+            {
+                xi.ki.LUMINOUS_PURPLE_FRAGMENT,
+                xi.ki.LUMINOUS_YELLOW_FRAGMENT,
+                xi.ki.LUMINOUS_BLUE_FRAGMENT,
+                xi.ki.LUMINOUS_BEIGE_FRAGMENT,
+                xi.ki.LUMINOUS_RED_FRAGMENT,
+                xi.ki.LUMINOUS_GREEN_FRAGMENT,
+            },
+        },
+    },
+    [2] =
+    {
+        {
+            expansion        = 1,
+            costGil          = 500,
+            costSeals        = 5,
+            relevantKeyItems =
+            {
+                xi.ki.SEEDSPALL_ASTRUM,
+                xi.ki.SEEDSPALL_CAERULUM,
+                xi.ki.SEEDSPALL_VIRIDIS,
+            },
+        },
+        {
+            expansion        = 2,
+            costGil          = 1500,
+            costSeals        = 15,
+            relevantKeyItems =
+            {
+                xi.ki.MARK_OF_SEED,
+            },
+        },
+        {
+            expansion        = 3,
+            costGil          = 2000,
+            costSeals        = 20,
+            relevantKeyItems =
+            {
+                xi.ki.OMNIS_STONE,
+            },
+        },
+        {
+            expansion        = 1,
+            costGil          = 500,
+            costSeals        = 5,
+            relevantKeyItems =
+            {
+                xi.ki.ORB_OF_CUPS,
+                xi.ki.ORB_OF_COINS,
+                xi.ki.ORB_OF_BATONS,
+                xi.ki.ORB_OF_SWORDS,
+            },
+        },
+        {
+            expansion        = 2,
+            costGil          = 1500,
+            costSeals        = 15,
+            relevantKeyItems =
+            {
+                xi.ki.NAVARATNA_TALISMAN,
+            },
+        },
+        {
+            expansion        = 3,
+            costGil          = 2000,
+            costSeals        = 20,
+            relevantKeyItems =
+            {
+                xi.ki.MEGA_BONANZA_KUPON,
+            },
+        },
+        {
+            expansion        = 1,
+            costGil          = 500,
+            costSeals        = 5,
+            relevantKeyItems =
+            {
+                xi.ki.BLACK_BOOK,
+            },
+        },
+        {
+            expansion        = 2,
+            costGil          = 1500,
+            costSeals        = 15,
+            relevantKeyItems =
+            {
+                xi.ki.WATER_SAP_CRYSTAL,
+                xi.ki.EARTH_SAP_CRYSTAL,
+                xi.ki.ICE_SAP_CRYSTAL,
+                xi.ki.WIND_SAP_CRYSTAL,
+                xi.ki.LIGHTNING_SAP_CRYSTAL,
+                xi.ki.FIRE_SAP_CRYSTAL,
+                xi.ki.LIGHT_SAP_CRYSTAL,
+                xi.ki.DARK_SAP_CRYSTAL,
+            },
+        },
+        {
+            expansion        = 3,
+            costGil          = 2000,
+            costSeals        = 20,
+            relevantKeyItems =
+            {
+                xi.ki.TABLET_OF_HEXES_GREED,
+                xi.ki.TABLET_OF_HEXES_ENVY,
+                xi.ki.TABLET_OF_HEXES_MALICE,
+                xi.ki.TABLET_OF_HEXES_DECEIT,
+                xi.ki.TABLET_OF_HEXES_PRIDE,
+                xi.ki.TABLET_OF_HEXES_BALE,
+                xi.ki.TABLET_OF_HEXES_DESPAIR,
+                xi.ki.TABLET_OF_HEXES_REGRET,
+                xi.ki.TABLET_OF_HEXES_RAGE,
+                xi.ki.TABLET_OF_HEXES_AGONY,
+                xi.ki.TABLET_OF_HEXES_DOLOR,
+                xi.ki.TABLET_OF_HEXES_RANCOR,
+                xi.ki.TABLET_OF_HEXES_STRIFE,
+                xi.ki.TABLET_OF_HEXES_PENURY,
+                xi.ki.TABLET_OF_HEXES_BLIGHT,
+                xi.ki.TABLET_OF_HEXES_DEATH,
+            },
+        },
+    },
+}
 
-    -- Crimson Key: Trade Seedspall's Lux, Luna, Astrum
+-- Takes traded items if they are all there, squintrox responds either way, and bool return is true if the trade is successful
+local function tradeForKeyItem(player, trade, ki)
+    local charVar = menuMetadata[1][ki].charVar
     if
-        hasCrimsonItems and
-        finishedACP
+        not player:hasKeyItem(ki) and
+        os.time() >= player:getCharVar(charVar)
     then
-        local ki = xi.ki.CRIMSON_KEY
-        if
-            not player:hasKeyItem(ki) and
-            now >= player:getCharVar('LastCrimsonKey')
-        then
-            player:tradeComplete()
-            player:addKeyItem(ki)
-            player:setCharVar('LastCrimsonKey', nextMidnight)
-            player:messageSpecial(ID.text.DRYEYES_2)
-            player:messageSpecial(ID.text.KEYITEM_OBTAINED, ki)
-        else
-            player:messageSpecial(ID.text.DRYEYES_3, ki)
+        player:tradeComplete()
+        player:addKeyItem(ki)
+        player:setCharVar(charVar, getMidnight())
+        player:messageSpecial(ID.text.DRYEYES_2)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, ki)
+        return true
+    else
+        player:messageSpecial(ID.text.DRYEYES_3, ki)
+        return false
+    end
+end
+
+local function verifyReqKeyItems(player, ki)
+    local entry = menuMetadata[1][ki]
+    local reqItemCount = 0
+    if entry.reqItemCount ~= nil then
+        reqItemCount = entry.reqItemCount
+    end
+
+    local count = 0
+    for _, reqKeyItem in pairs(entry.reqKeyItems) do
+        if reqItemCount > 0 then
+            print(reqKeyItem)
+            if player:hasKeyItem(reqKeyItem) then
+                count = count + 1
+            end
+        elseif not player:hasKeyItem(reqKeyItem) then
+            return false
         end
-    -- White Coral Key: trade 3 drops - orcish plate armor, quadav backscale, yagudo caulk
-    elseif
-        hasWhiteCoralItems and
-        finishedAMK
-    then
-        local ki = xi.ki.WHITE_CORAL_KEY
-        if
-            not player:hasKeyItem(ki) and
-            now >= player:getCharVar('LastWhiteCoralKey')
-        then
-            player:tradeComplete()
-            player:addKeyItem(ki)
-            player:setCharVar('LastWhiteCoralKey', nextMidnight)
-            player:messageSpecial(ID.text.DRYEYES_2)
-            player:messageSpecial(ID.text.KEYITEM_OBTAINED, ki)
+    end
+
+    if reqItemCount > 0 then
+        if count >= reqItemCount then
+            return count
         else
-            player:messageSpecial(ID.text.DRYEYES_3, ki)
+            return 0
         end
-    -- Moogle Key: trade proper enfeebling kit
-    elseif
-        hasEnfeebKit and
-        finishedASA
+    else
+        return true
+    end
+end
+
+local function takeReqKeyItems(player, ki)
+    local entry = menuMetadata[1][ki]
+    for _, reqKeyItem in pairs(entry.reqKeyItems) do
+        if player:hasKeyItem(reqKeyItem) then
+            player:messageSpecial(ID.text.KEYITEM_LOST, reqKeyItem)
+            player:delKeyItem(reqKeyItem)
+        end
+    end
+
+    if entry.prereqKeyItems then
+        for _, reqKeyItem in pairs(entry.prereqKeyItems) do
+            if player:hasKeyItem(reqKeyItem) then
+                player:messageSpecial(ID.text.KEYITEM_LOST, reqKeyItem)
+                player:delKeyItem(reqKeyItem)
+            end
+        end
+    end
+
+    player:addKeyItem(ki)
+    player:setCharVar(entry.charVar, getMidnight())
+    player:showText(player, ID.text.DRYEYES_2)
+    player:messageSpecial(ID.text.KEYITEM_OBTAINED, ki)
+end
+
+entity.onTrade = function(player, npc, trade)
+    local count  = trade:getItemCount()
+    local ki     = xi.ki.MOOGLE_KEY
+    local asaKit = player:getCharVar(menuMetadata[1][ki].reqItemCharVar)
+
+    if -- Crimson Key: Trade Seedspall's Lux, Luna, Astrum
+        trade:hasItemQty(menuMetadata[1][xi.ki.CRIMSON_KEY].reqItems[1], 1) and
+        trade:hasItemQty(menuMetadata[1][xi.ki.CRIMSON_KEY].reqItems[2], 1) and
+        trade:hasItemQty(menuMetadata[1][xi.ki.CRIMSON_KEY].reqItems[3], 1) and
+        count == 3 and
+        player:getCurrentMission(xi.mission.log_id.ACP) == xi.mission.id.acp.A_CRYSTALLINE_PROPHECY_FIN
     then
-        local ki = xi.ki.MOOGLE_KEY
-        if
-            not player:hasKeyItem(ki) and
-            now >= player:getCharVar('LastMoogleKey')
-        then
-            player:tradeComplete()
-            player:addKeyItem(ki)
-            player:setCharVar('LastMoogleKey', nextMidnight)
-            player:setCharVar('ASA_kit', 0)
-            player:messageSpecial(ID.text.DRYEYES_2)
-            player:messageSpecial(ID.text.KEYITEM_OBTAINED, ki)
-        else
-            player:messageSpecial(ID.text.DRYEYES_3, ki)
+        ki = xi.ki.CRIMSON_KEY
+        tradeForKeyItem(player, trade, ki)
+    elseif -- White Coral Key: orcish plate armor, quadav backscale, yagudo caulk
+        trade:hasItemQty(menuMetadata[1][xi.ki.WHITE_CORAL_KEY].reqItems[1], 1) and
+        trade:hasItemQty(menuMetadata[1][xi.ki.WHITE_CORAL_KEY].reqItems[2], 1) and
+        trade:hasItemQty(menuMetadata[1][xi.ki.WHITE_CORAL_KEY].reqItems[3], 1) and
+        count == 3 and
+        player:getCurrentMission(xi.mission.log_id.AMK) == xi.mission.id.amk.A_MOOGLE_KUPO_DETAT_FIN
+    then
+        ki = xi.ki.WHITE_CORAL_KEY
+        tradeForKeyItem(player, trade, ki)
+    elseif -- Moogle Key: trade proper enfeebling kit
+        asaKit ~= 0 and
+        trade:hasItemQty(asaKit, 1) and
+        count == 1 and
+        player:getCurrentMission(xi.mission.log_id.ASA) == xi.mission.id.asa.A_SHANTOTTO_ASCENSION_FIN
+    then
+        ki = xi.ki.MOOGLE_KEY
+        if tradeForKeyItem(player, trade, ki) then
+            player:setCharVar(menuMetadata[1][ki].reqItemCharVar, 0)
         end
     else
         player:showText(npc, ID.text.GET_LOST)
@@ -93,46 +360,42 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local now          = os.time()
-    local nextMidnight = getMidnight()
-    local finishedACP  = player:getCurrentMission(xi.mission.log_id.ACP) == xi.mission.id.acp.A_CRYSTALLINE_PROPHECY_FIN
-    local finishedAMK  = player:getCurrentMission(xi.mission.log_id.AMK) == xi.mission.id.amk.A_MOOGLE_KUPO_DETAT_FIN
-    local finishedASA  = player:getCurrentMission(xi.mission.log_id.ASA) == xi.mission.id.asa.A_SHANTOTTO_ASCENSION_FIN
-
-    -- Reminder that "True" means the option should be excluded from the player's menu
-    local arg1 =
-        ((finishedACP                                              or
-            player:hasKeyItem(xi.ki.CRIMSON_KEY))                  and
-                2 or 0) +
-        ((finishedACP                                              or
-            player:hasKeyItem(xi.ki.VIRIDIAN_KEY))                 and
-                4 or 0) +
-        ((finishedAMK                                              or
-            player:hasKeyItem(xi.ki.WHITE_CORAL_KEY))              and
-                8 or 0) +
-        ((finishedAMK                                              or
-            player:hasKeyItem(xi.ki.BLUE_CORAL_KEY))               and
-                16 or 0) +
-        ((finishedAMK                                              or
-            player:hasKeyItem(xi.ki.BLACK_CORAL_KEY))              and
-                32 or 0) +
-        ((finishedASA                                              or
-            player:hasKeyItem(xi.ki.MOOGLE_KEY)                    and
-            now >= player:getCharVar('LastMoogleKey'))             and
-                64 or 0) +
-        ((finishedASA                                              or
-            player:hasKeyItem(xi.ki.BIRD_KEY)                      and
-            now >= player:getCharVar('LastBirdKey'))               and
-                128 or 0) +
-        ((finishedASA                                              or
-            player:hasKeyItem(xi.ki.BOMB_KEY)                      and
-            now >= player:getCharVar('LastBombKey'))               and
-                256 or 0)
-
-    -- matches none of the above
-    if arg1 == 510 then
+    if
+        xi.settings.main.ENABLE_ACP == 0 and
+        xi.settings.main.ENABLE_AMK == 0 and
+        xi.settings.main.ENABLE_ASA == 0
+    then
         player:showText(npc, ID.text.GET_LOST)
     else
+        local now          = os.time()
+        local finishedACP  = player:getCurrentMission(xi.mission.log_id.ACP) == xi.mission.id.acp.A_CRYSTALLINE_PROPHECY_FIN
+        local finishedAMK  = player:getCurrentMission(xi.mission.log_id.AMK) == xi.mission.id.amk.A_MOOGLE_KUPO_DETAT_FIN
+        local finishedASA  = player:getCurrentMission(xi.mission.log_id.ASA) == xi.mission.id.asa.A_SHANTOTTO_ASCENSION_FIN
+
+        -- Show only the key items available to retrive based on time gate and if you don't already have it
+        local arg1 = 0
+        for bitPos, ki in pairs(menuMetadata[1]['initialList']) do
+            local entry = menuMetadata[1][ki]
+            local hasKeyItem = player:hasKeyItem(ki)
+            local hasCompletedExpansion = false
+            if entry.expansion == 1 then
+                hasCompletedExpansion = finishedACP
+            elseif entry.expansion == 2 then
+                hasCompletedExpansion = finishedAMK
+            elseif entry.expansion == 3 then
+                hasCompletedExpansion = finishedASA
+            end
+
+            -- Reminder that "True" here means the option should be excluded from the player's menu
+            if
+                not hasCompletedExpansion               or
+                hasKeyItem                              or
+                now < player:getCharVar(entry.charVar)
+            then
+                arg1 = utils.mask.setBit(arg1, bitPos, true)
+            end
+        end
+
         player:startEvent(323, arg1)
     end
 end
@@ -141,396 +404,127 @@ end
 entity.onEventUpdate = function(player, csid, option, npc)
     if csid == 323 then
         if option == 100 then -- Viridian Key
-            if
-                player:hasKeyItem(xi.ki.BOWL_OF_BLAND_GOBLIN_SALAD) and
-                player:hasKeyItem(xi.ki.JUG_OF_GREASY_GOBLIN_JUICE) and
-                player:hasKeyItem(xi.ki.CHUNK_OF_SMOKED_GOBLIN_GRUB)
-            then
+            if verifyReqKeyItems(player, xi.ki.VIRIDIAN_KEY) then
                 player:updateEvent(1)
             else
                 player:updateEvent(0)
             end
         elseif option == 101 then -- blue coral Key
-            if
-                player:hasKeyItem(xi.ki.STURDY_METAL_STRIP) and
-                player:hasKeyItem(xi.ki.PIECE_OF_RUGGED_TREE_BARK) and
-                player:hasKeyItem(xi.ki.SAVORY_LAMB_ROAST)
-            then
+            if verifyReqKeyItems(player, xi.ki.BLUE_CORAL_KEY) then
                 player:updateEvent(3)
             else
                 player:updateEvent(0)
             end
         elseif option == 102 then -- black coral Key
-            if
-                not player:hasKeyItem(xi.ki.MOLDY_WORMEATEN_CHEST)
-            then
-                local diggingZone = 0
-                if diggingZone ~= 0 then
-                    player:updateEvent(0, 1, amkHelpers.digSites[diggingZone].eventID)
+            local ki = xi.ki.BLACK_CORAL_KEY
+            if not player:hasKeyItem(menuMetadata[1][ki].reqKeyItems[1]) then
+                -- extracts the eventID for the digging zone
+                local diggingZoneEventID = xi.amk.helpers.getDiggingZone(player)
+                if diggingZoneEventID ~= 0 then
+                    player:updateEvent(0, 1, diggingZoneEventID)
                 else
                     player:messageSpecial(ID.text.GET_LOST)
                 end
-            else
-                player:updateEvent(0)
             end
         elseif option == 103 then -- Moogle Key
-            local kit = player:getCharVar('ASA_kit')
-            if kit == 0 then
-                kit = xi.item.ENFEEBLEMENT_KIT_OF_POISON + math.random(0,3)
-                player:setCharVar('ASA_kit', kit)
+            local entry = menuMetadata[1][xi.ki.MOOGLE_KEY]
+            local asaKit = player:getCharVar(entry.reqItemCharVar)
+            if asaKit == 0 then
+                asaKit = entry.reqItems[math.random(#entry.reqItems)]
+                player:setCharVar(entry.reqItemCharVar, asaKit)
             end
-            player:updateEvent(kit)
-        elseif option == 104 then -- Bird Key
-            local completedSeals =
-            (player:hasKeyItem(xi.ki.AMBER_COUNTERSEAL)    and 1 or 0) +
-            (player:hasKeyItem(xi.ki.AZURE_COUNTERSEAL)    and 1 or 0) +
-            (player:hasKeyItem(xi.ki.CERULEAN_COUNTERSEAL) and 1 or 0) +
-            (player:hasKeyItem(xi.ki.EMERALD_COUNTERSEAL)  and 1 or 0) +
-            (player:hasKeyItem(xi.ki.SCARLET_COUNTERSEAL)  and 1 or 0) +
-            (player:hasKeyItem(xi.ki.VIOLET_COUNTERSEAL)   and 1 or 0)
 
-            if completedSeals >= 3 then
-                player:setLocalVar('ASA_Status', completedSeals)
-                player:updateEvent(0, completedSeals, 2)
-            else
+            player:updateEvent(asaKit)
+        elseif option == 104 then -- Bird Key
+            local completedSeals = verifyReqKeyItems(player, xi.ki.BIRD_KEY)
+
+            -- if verifyReqKeyItems returns a positive number, it meens it was at least the minimum
+            if not completedSeals or completedSeals <= 0 then
+                -- distribute prereq seals
                 player:updateEvent(0, 0, 1)
+            else
+                player:updateEvent(0, completedSeals, 2)
             end
         elseif option == 105 then -- Bomb Key
-            local completedFragments =
-                (player:hasKeyItem(xi.ki.LUMINOUS_PURPLE_FRAGMENT) and 1 or 0) +
-                (player:hasKeyItem(xi.ki.LUMINOUS_YELLOW_FRAGMENT) and 1 or 0) +
-                (player:hasKeyItem(xi.ki.LUMINOUS_BLUE_FRAGMENT)   and 1 or 0) +
-                (player:hasKeyItem(xi.ki.LUMINOUS_BEIGE_FRAGMENT)  and 1 or 0) +
-                (player:hasKeyItem(xi.ki.LUMINOUS_RED_FRAGMENT)    and 1 or 0) +
-                (player:hasKeyItem(xi.ki.LUMINOUS_GREEN_FRAGMENT)  and 1 or 0)
-
-            if completedFragments ~= 6 then
+            if not verifyReqKeyItems(player, xi.ki.BOMB_KEY) then
                 player:updateEvent(0, 0, 0, 0, 0, 0, 3)
             end
-        elseif option == 203 then -- 2nd page
+        elseif option == 203 then -- 2nd page menu to choose helper key items to allow player to go off and repeat the mission for the key item
             local finishedACP = player:getCurrentMission(xi.mission.log_id.ACP) == xi.mission.id.acp.A_CRYSTALLINE_PROPHECY_FIN
             local finishedAMK = player:getCurrentMission(xi.mission.log_id.AMK) == xi.mission.id.amk.A_MOOGLE_KUPO_DETAT_FIN
             local finishedASA = player:getCurrentMission(xi.mission.log_id.ASA) == xi.mission.id.asa.A_SHANTOTTO_ASCENSION_FIN
 
-            -- Reminder that "True" means the option should be excluded from the player's menu
-            local arg1 = (not finishedACP                                                or
-                             (player:hasKeyItem(xi.ki.SEEDSPALL_ROSEUM)                 and
-                             player:hasKeyItem(xi.ki.SEEDSPALL_CAERULUM)                and
-                             player:hasKeyItem(xi.ki.SEEDSPALL_VIRIDIS))                and
-                                 2 or 0) +
-                         (not finishedACP                                                or
-                             (player:hasKeyItem(xi.ki.MARK_OF_SEED))                    and
-                                 4 or 0) +
-                         (not finishedACP                                                or
-                             (player:hasKeyItem(xi.ki.OMNIS_STONE))                     and
-                                 8 or 0) +
-                         (not finishedAMK                                                or
-                             (player:hasKeyItem(xi.ki.ORB_OF_CUPS)                      and
-                             player:hasKeyItem(xi.ki.ORB_OF_COINS)                      and
-                             player:hasKeyItem(xi.ki.ORB_OF_BATONS)                     and
-                             player:hasKeyItem(xi.ki.ORB_OF_SWORDS))                    and
-                                 16 or 0) +
-                         (not finishedAMK                                                or
-                             (player:hasKeyItem(xi.ki.NAVARATNA_TALISMAN))              and
-                                 32 or 0) +
-                         (not finishedAMK                                                or
-                             (player:hasKeyItem(xi.ki.MEGA_BONANZA_KUPON))              and
-                                 64 or 0) +
-                         (not finishedASA                                                or
-                             (player:hasKeyItem(xi.ki.BLACK_BOOK))                      and
-                                 128 or 0) +
-                         (not finishedASA                                                or
-                             (player:hasKeyItem(xi.ki.WATER_SAP_CRYSTAL)                and
-                             player:hasKeyItem(xi.ki.EARTH_SAP_CRYSTAL)                 and
-                             player:hasKeyItem(xi.ki.ICE_SAP_CRYSTAL)                   and
-                             player:hasKeyItem(xi.ki.WIND_SAP_CRYSTAL)                  and
-                             player:hasKeyItem(xi.ki.LIGHTNING_SAP_CRYSTAL)             and
-                             player:hasKeyItem(xi.ki.FIRE_SAP_CRYSTAL)                  and
-                             player:hasKeyItem(xi.ki.LIGHT_SAP_CRYSTAL)                 and
-                             player:hasKeyItem(xi.ki.DARK_SAP_CRYSTAL))                 and
-                                 256 or 0) +
-                         (not finishedASA                                                or
-                             (player:hasKeyItem(xi.ki.TABLET_OF_HEXES_GREED)            and
-                             player:hasKeyItem(xi.ki.TABLET_OF_HEXES_ENVY)              and
-                             player:hasKeyItem(xi.ki.TABLET_OF_HEXES_MALICE)            and
-                             player:hasKeyItem(xi.ki.TABLET_OF_HEXES_DECEIT)            and
-                             player:hasKeyItem(xi.ki.TABLET_OF_HEXES_PRIDE)             and
-                             player:hasKeyItem(xi.ki.TABLET_OF_HEXES_BALE)              and
-                             player:hasKeyItem(xi.ki.TABLET_OF_HEXES_DESPAIR)           and
-                             player:hasKeyItem(xi.ki.TABLET_OF_HEXES_REGRET)            and
-                             player:hasKeyItem(xi.ki.TABLET_OF_HEXES_RAGE)              and
-                             player:hasKeyItem(xi.ki.TABLET_OF_HEXES_AGONY)             and
-                             player:hasKeyItem(xi.ki.TABLET_OF_HEXES_DOLOR)             and
-                             player:hasKeyItem(xi.ki.TABLET_OF_HEXES_RANCOR)            and
-                             player:hasKeyItem(xi.ki.TABLET_OF_HEXES_STRIFE)            and
-                             player:hasKeyItem(xi.ki.TABLET_OF_HEXES_PENURY)            and
-                             player:hasKeyItem(xi.ki.TABLET_OF_HEXES_BLIGHT)            and
-                             player:hasKeyItem(xi.ki.TABLET_OF_HEXES_DEATH))            and
-                                 512 or 0)
+            local arg1 = 0
+            for bitPos, entry in pairs(menuMetadata[2]) do
+                local hasCompletedExpansion = false
+                if entry.expansion == 1 then
+                    hasCompletedExpansion = finishedACP
+                elseif entry.expansion == 2 then
+                    hasCompletedExpansion = finishedAMK
+                elseif entry.expansion == 3 then
+                    hasCompletedExpansion = finishedASA
+                end
+
+                local hasAllRelevantKeyItem = true
+                for _, keyItem in pairs(entry.relevantKeyItems) do
+                    if not player:hasKeyItem(keyItem) then
+                        hasAllRelevantKeyItem = false
+                    end
+                end
+
+                -- Reminder that "True" here means the option should be excluded from the player's menu
+                if not hasCompletedExpansion or hasAllRelevantKeyItem then
+                    arg1 = utils.mask.setBit(arg1, bitPos, true)
+                end
+            end
 
             player:updateEvent(arg1)
-        elseif option == 200 then -- Seedspalls, 4 Orbs, Black Book
-            if player:getSeals(0) < 5 then
-                player:updateEvent(1)
-                player:messageSpecial(ID.text.DRYEYES_4)
-            elseif player:getGil() < 500 then
-                player:updateEvent(1)
-                player:messageSpecial(ID.text.DRYEYES_5)
-            else
-                player:updateEvent(0)
-            end
-        elseif option == 201 then -- Mark of Seed, Navaratna Talisman, 8 Sap Crystals
-            if player:getSeals(0) < 15 then
-                player:updateEvent(1)
-                player:messageSpecial(ID.text.DRYEYES_4)
-            elseif player:getGil() < 1500 then
-                player:updateEvent(1)
-                player:messageSpecial(ID.text.DRYEYES_5)
-            else
-                player:updateEvent(0)
-            end
-        elseif option == 202 then -- Omnis Stone, Mega Bonanza Kupon, 16 Tablet of Hexes
-            if player:getSeals(0) < 20 then
-                player:updateEvent(1)
-                player:messageSpecial(ID.text.DRYEYES_4)
-            elseif player:getGil() < 2000 then
-                player:updateEvent(1)
-                player:messageSpecial(ID.text.DRYEYES_5)
-            else
-                player:updateEvent(0)
-            end
+        elseif option >= 200 and option <= 202 then -- Really want? 2nd page items confirmation requires an updateEvent to be called
+            player:updateEvent(0)
         end
     end
 end
 
 entity.onEventFinish = function(player, csid, option, npc)
-    local now          = os.time()
-    local nextMidnight = getMidnight()
     if csid == 323 then
         if option == 1 then
+            -- catchall "stop wasting my time" response, triggered via updateEvent(1)
             player:showText(player, ID.text.DRYEYES_1)
         elseif option == 100 then -- Viridian Key
-            if
-                not player:hasKeyItem(xi.ki.VIRIDIAN_KEY) and
-                now >= player:getCharVar('LastViridianKey') then
-                player:addKeyItem(xi.ki.VIRIDIAN_KEY)
-                player:delKeyItem(xi.ki.BOWL_OF_BLAND_GOBLIN_SALAD)
-                player:delKeyItem(xi.ki.JUG_OF_GREASY_GOBLIN_JUICE)
-                player:delKeyItem(xi.ki.CHUNK_OF_SMOKED_GOBLIN_GRUB)
-                player:setCharVar('LastViridianKey', nextMidnight)
-                player:showText(player, ID.text.DRYEYES_2)
-                player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.VIRIDIAN_KEY)
-            else
-                player:messageSpecial(ID.text.DRYEYES_3, xi.ki.VIRIDIAN_KEY)
-            end
+            takeReqKeyItems(player, xi.ki.VIRIDIAN_KEY)
         elseif option == 101 then -- blue coral Key
-            local keyItem = xi.ki.BLUE_CORAL_KEY
-            if
-                not player:hasKeyItem(keyItem) and
-                now >= player:getCharVar('LastBlueCoralKey')
-            then
-                player:addKeyItem(keyItem)
-                player:delKeyItem(xi.ki.STURDY_METAL_STRIP)
-                player:delKeyItem(xi.ki.PIECE_OF_RUGGED_TREE_BARK)
-                player:delKeyItem(xi.ki.SAVORY_LAMB_ROAST)
-                player:setCharVar('LastBlueCoralKey', nextMidnight)
-                player:showText(player, ID.text.DRYEYES_2)
-                player:messageSpecial(ID.text.KEYITEM_OBTAINED, keyItem)
-            else
-                player:messageSpecial(ID.text.DRYEYES_3, keyItem)
-            end
+            takeReqKeyItems(player, xi.ki.BLUE_CORAL_KEY)
         elseif option == 102 then -- black coral Key
-            -- shouldn't trigger without the key, but just in case
-            if player:hasKeyItem(xi.ki.MOLDY_WORMEATEN_CHEST) then
-                local keyItem = xi.ki.BLACK_CORAL_KEY
-                if
-                    not player:hasKeyItem(keyItem) and
-                    now >= player:getCharVar('LastBlackCoralKey')
-                then
-                    player:addKeyItem(keyItem)
-                    player:delKeyItem(xi.ki.MOLDY_WORMEATEN_CHEST)
-                    player:setCharVar('LastBlackCoralKey', nextMidnight)
-                    player:showText(player, ID.text.DRYEYES_2)
-                    player:messageSpecial(ID.text.KEYITEM_OBTAINED, keyItem)
-                else
-                    player:messageSpecial(ID.text.DRYEYES_3, keyItem)
-                end
+            -- shouldn't trigger without the moldy chest, but just in case since the logic above is complex
+            local ki = xi.ki.BLACK_CORAL_KEY
+            if player:hasKeyItem(menuMetadata[1][ki].reqKeyItems[1]) then
+                takeReqKeyItems(player, ki)
             end
-        elseif option == 103 then -- Bird Key
-            npcUtil.giveKeyItem(player, {
-                xi.ki.DOMINAS_SCARLET_SEAL,
-                xi.ki.DOMINAS_CERULEAN_SEAL,
-                xi.ki.DOMINAS_EMERALD_SEAL,
-                xi.ki.DOMINAS_AMBER_SEAL,
-                xi.ki.DOMINAS_VIOLET_SEAL,
-                xi.ki.DOMINAS_AZURE_SEAL
-            })
+        elseif option == 103 then -- Bird Key prereqs to run the bcnms
+            npcUtil.giveKeyItem(player, menuMetadata[1][xi.ki.BIRD_KEY].prereqKeyItems)
         elseif option == 104 then -- Bomb Key
-            if
-                not player:hasKeyItem(xi.ki.BOMB_KEY) and
-                now >= player:getCharVar('LastBombKey')
-            then
-                player:addKeyItem(xi.ki.BOMB_KEY)
-                player:setCharVar('LastBombKey', nextMidnight)
-                player:messageSpecial(ID.text.DRYEYES_2)
-                player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.BOMB_KEY)
-            end
-
-            player:delKeyItem(xi.ki.LUMINOUS_PURPLE_FRAGMENT)
-            player:delKeyItem(xi.ki.LUMINOUS_YELLOW_FRAGMENT)
-            player:delKeyItem(xi.ki.LUMINOUS_BLUE_FRAGMENT)
-            player:delKeyItem(xi.ki.LUMINOUS_BEIGE_FRAGMENT)
-            player:delKeyItem(xi.ki.LUMINOUS_RED_FRAGMENT)
-            player:delKeyItem(xi.ki.LUMINOUS_GREEN_FRAGMENT)
+            takeReqKeyItems(player, xi.ki.BOMB_KEY)
         elseif option == 105 then -- Bird Key
-            if
-                not player:hasKeyItem(xi.ki.BIRD_KEY) and
-                now >= player:getCharVar('LastBirdKey')
-            then
-                player:addKeyItem(xi.ki.BIRD_KEY)
-                player:setCharVar('LastBirdKey', nextMidnight)
-                player:messageSpecial(ID.text.DRYEYES_2)
-                player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.BIRD_KEY)
-
-                player:delKeyItem(xi.ki.DOMINAS_SCARLET_SEAL)
-                player:delKeyItem(xi.ki.DOMINAS_CERULEAN_SEAL)
-                player:delKeyItem(xi.ki.DOMINAS_EMERALD_SEAL)
-                player:delKeyItem(xi.ki.DOMINAS_AMBER_SEAL)
-                player:delKeyItem(xi.ki.DOMINAS_VIOLET_SEAL)
-                player:delKeyItem(xi.ki.DOMINAS_AZURE_SEAL)
-
-                player:delKeyItem(xi.ki.SCARLET_COUNTERSEAL)
-                player:delKeyItem(xi.ki.CERULEAN_COUNTERSEAL)
-                player:delKeyItem(xi.ki.EMERALD_COUNTERSEAL)
-                player:delKeyItem(xi.ki.AMBER_COUNTERSEAL)
-                player:delKeyItem(xi.ki.VIOLET_COUNTERSEAL)
-                player:delKeyItem(xi.ki.AZURE_COUNTERSEAL)
+            takeReqKeyItems(player, xi.ki.BIRD_KEY)
+        elseif option >= 300 and option <= 308 then
+            local entry = menuMetadata[2][option - 299]
+            if player:getSeals(0) < entry.costSeals then
+                player:messageSpecial(ID.text.DRYEYES_4)
+            elseif player:getGil() < entry.costGil then
+                player:messageSpecial(ID.text.DRYEYES_5)
             else
-                player:messageSpecial(ID.text.DRYEYES_1)
-            end
-        elseif option == 300 then -- 3 Seedspalls
-            player:delSeals(5, 0)
-            player:delGil(500)
+                player:delSeals(entry.costSeals, 0)
+                player:delGil(entry.costGil)
 
-            if not player:hasKeyItem(xi.ki.SEEDSPALL_ROSEUM) then
-                player:addKeyItem(xi.ki.SEEDSPALL_ROSEUM)
-                player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.SEEDSPALL_ROSEUM)
-            end
-            if not player:hasKeyItem(xi.ki.SEEDSPALL_CAERULUM) then
-                player:addKeyItem(xi.ki.SEEDSPALL_CAERULUM)
-                player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.SEEDSPALL_CAERULUM)
-            end
-            if not player:hasKeyItem(xi.ki.SEEDSPALL_VIRIDIS) then
-                player:addKeyItem(xi.ki.SEEDSPALL_VIRIDIS)
-                player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.SEEDSPALL_VIRIDIS)
-            end
-        elseif option == 301 then -- Mark of Seed
-            player:delSeals(15, 0)
-            player:delGil(1500)
-
-            if not player:hasKeyItem(xi.ki.MARK_OF_SEED) then
-                player:addKeyItem(xi.ki.MARK_OF_SEED)
-                player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.MARK_OF_SEED)
-            end
-        elseif option == 302 then -- Omnis Stone
-            player:delSeals(20, 0)
-            player:delGil(2000)
-
-            if not player:hasKeyItem(xi.ki.OMNIS_STONE) then
-                player:addKeyItem(xi.ki.OMNIS_STONE)
-                player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.OMNIS_STONE)
-            end
-        elseif option == 303 then -- Cardians mana orbs
-            player:delSeals(5, 0)
-            player:delGil(500)
-
-            for i, ki in pairs({
-                    xi.ki.ORB_OF_CUPS,
-                    xi.ki.ORB_OF_COINS,
-                    xi.ki.ORB_OF_BATONS,
-                    xi.ki.ORB_OF_SWORDS,
-                }) do
-                if not player:hasKeyItem(ki) then
-                    player:addKeyItem(ki)
-                    player:messageSpecial(ID.text.KEYITEM_OBTAINED, ki)
-                end
-            end
-        elseif option == 304 then -- Navaratna Talisman
-            player:delSeals(15, 0)
-            player:delGil(1500)
-
-            local ki = xi.ki.NAVARATNA_TALISMAN
-            if not player:hasKeyItem(ki) then
-                player:addKeyItem(ki)
-                player:messageSpecial(ID.text.KEYITEM_OBTAINED, ki)
-            end
-        elseif option == 305 then -- Mega Bonanza Kupon
-            player:delSeals(20, 0)
-            player:delGil(2000)
-
-            local ki = xi.ki.MEGA_BONANZA_KUPON
-            if not player:hasKeyItem(ki) then
-                player:addKeyItem(ki)
-                player:messageSpecial(ID.text.KEYITEM_OBTAINED, ki)
-            end
-        elseif option == 306 then -- Black Book
-            player:delSeals(5, 0)
-            player:delGil(500)
-
-            local ki = xi.ki.BLACK_BOOK
-            if not player:hasKeyItem(ki) then
-                player:addKeyItem(ki)
-                player:messageSpecial(ID.text.KEYITEM_OBTAINED, ki)
-            end
-        elseif option == 307 then -- Elemental Saps
-            player:delSeals(15, 0)
-            player:delGil(1500)
-
-            for i, ki in pairs({
-                    xi.ki.FIRE_SAP_CRYSTAL,
-                    xi.ki.WATER_SAP_CRYSTAL,
-                    xi.ki.WIND_SAP_CRYSTAL,
-                    xi.ki.EARTH_SAP_CRYSTAL,
-                    xi.ki.LIGHTNING_SAP_CRYSTAL,
-                    xi.ki.ICE_SAP_CRYSTAL,
-                    xi.ki.LIGHT_SAP_CRYSTAL,
-                    xi.ki.DARK_SAP_CRYSTAL,
-                }) do
-                if not player:hasKeyItem(ki) then
-                    player:addKeyItem(ki)
-                    player:messageSpecial(ID.text.KEYITEM_OBTAINED, ki)
-                end
-            end
-        elseif option == 308 then -- Tablet of Hexes KIs
-            player:delSeals(20, 0)
-            player:delGil(2000)
-
-            for i, ki in pairs({
-                    xi.ki.TABLET_OF_HEXES_GREED,
-                    xi.ki.TABLET_OF_HEXES_ENVY,
-                    xi.ki.TABLET_OF_HEXES_MALICE,
-                    xi.ki.TABLET_OF_HEXES_DECEIT,
-                    xi.ki.TABLET_OF_HEXES_PRIDE,
-                    xi.ki.TABLET_OF_HEXES_BALE,
-                    xi.ki.TABLET_OF_HEXES_DESPAIR,
-                    xi.ki.TABLET_OF_HEXES_REGRET,
-                    xi.ki.TABLET_OF_HEXES_RAGE,
-                    xi.ki.TABLET_OF_HEXES_AGONY,
-                    xi.ki.TABLET_OF_HEXES_DOLOR,
-                    xi.ki.TABLET_OF_HEXES_RANCOR,
-                    xi.ki.TABLET_OF_HEXES_STRIFE,
-                    xi.ki.TABLET_OF_HEXES_PENURY,
-                    xi.ki.TABLET_OF_HEXES_BLIGHT,
-                    xi.ki.TABLET_OF_HEXES_DEATH,
-                }) do
-                if not player:hasKeyItem(ki) then
-                    player:addKeyItem(ki)
-                    player:messageSpecial(ID.text.KEYITEM_OBTAINED, ki)
+                for _, ki in pairs(entry.relevantKeyItems) do
+                    if not player:hasKeyItem(ki) then
+                        player:addKeyItem(ki)
+                        player:messageSpecial(ID.text.KEYITEM_OBTAINED, ki)
+                    end
                 end
             end
         end
     end
 end
-
 
 return entity
