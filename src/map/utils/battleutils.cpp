@@ -2513,10 +2513,11 @@ namespace battleutils
         if (PSpell->canTargetEnemy() && damage > 0 && PSpell->dealsDamage())
         {
             PDefender->StatusEffectContainer->DelStatusEffectsByFlag(EFFECTFLAG_DAMAGE);
+
             // Check for bind breaking
             BindBreakCheck(PAttacker, PDefender);
 
-            // Do we get TP for damaging spells?
+            // Add TP for damaging spells (Only player chars who have the Occult Accumen trait)
             int16 tp = battleutils::CalculateSpellTP(PAttacker, PSpell);
             PAttacker->addTP(tp);
 
