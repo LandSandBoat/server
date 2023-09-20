@@ -2522,7 +2522,7 @@ namespace battleutils
 
             // Targets of damaging spells gain 50 tp + store tp bonus
             float storeTPMultiplier = 1.0f + 0.01f * static_cast<float>(PDefender->getMod(Mod::STORETP) + getStoreTPbonusFromMerit(PDefender));
-            PDefender->addTP(static_cast<int16>(50 * storeTPMultiplier);
+            PDefender->addTP(static_cast<int16>(50 * storeTPMultiplier));
         }
 
         return damage;
