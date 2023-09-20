@@ -13,7 +13,7 @@ xi.aftermath.type =
 } -- TODO: Add Aeonic
 
 -----------------------------------
--- HELPERS : For aftermath eyes onry
+-- HELPERS : For aftermath eyes only
 -----------------------------------
 local getTier1RelicDuration = function(tp)
     return math.floor(tp * 0.02)
