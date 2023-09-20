@@ -277,7 +277,6 @@ local function verifyReqKeyItems(player, ki)
     local count = 0
     for _, reqKeyItem in pairs(entry.reqKeyItems) do
         if reqItemCount > 0 then
-            print(reqKeyItem)
             if player:hasKeyItem(reqKeyItem) then
                 count = count + 1
             end
@@ -516,12 +515,7 @@ entity.onEventFinish = function(player, csid, option, npc)
                 player:delSeals(entry.costSeals, 0)
                 player:delGil(entry.costGil)
 
-                for _, ki in pairs(entry.relevantKeyItems) do
-                    if not player:hasKeyItem(ki) then
-                        player:addKeyItem(ki)
-                        player:messageSpecial(ID.text.KEYITEM_OBTAINED, ki)
-                    end
-                end
+                npcUtil.giveKeyItem(player, entry.relevantKeyItems)
             end
         end
     end
