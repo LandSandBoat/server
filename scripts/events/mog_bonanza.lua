@@ -1,8 +1,9 @@
------------------------------------
+
+------------------------------------
 -- Mog Bonanza
 -- http://www.playonline.com/ff11us/guide/nomadmogbon/index.html
 -- https://www.bg-wiki.com/ffxi/Category:Mog_Bonanza
------------------------------------
+------------------------------------
 xi = xi or {}
 xi.events = xi.events or {}
 xi.events.mogBonanza = xi.events.mogBonanza or {}
@@ -42,9 +43,9 @@ local localSettings =
     -- Winning Numbers are three independent values for each rank prize:
     WINNING_NUMBERS =
     {
-        [1] = 800,
-        [2] = 71,
-        [3] = 7,
+        [1] = 819,
+        [2] = 12, -- 212
+        [3] = 3, -- 563
     },
 }
 
@@ -77,7 +78,7 @@ event:setEnableCheck(xi.events.mogBonanza.enabledCheck)
 
 local csidLookup =
 {
-    [xi.zone.PORT_SAN_DORIA ] = 824,
+    [xi.zone.PORT_SAN_DORIA ] = 823,
     [xi.zone.PORT_BASTOK    ] = 467,
     [xi.zone.PORT_WINDURST  ] = 912,
     [xi.zone.CHOCOBO_CIRCUIT] = 503,
@@ -117,7 +118,7 @@ local rewardList =
     -- Rank 2 Prizes
     [2] =
     {
-        gilReward = 0,
+        gilReward = 8246250,
 
         rewardItems =
         {
@@ -139,7 +140,7 @@ local rewardList =
     -- Rank 3 Prizes
     [3] =
     {
-        gilReward = 0,
+        gilReward = 756536,
 
         rewardItems =
         {

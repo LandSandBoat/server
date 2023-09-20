@@ -11,7 +11,6 @@ mixins =
 require("scripts/globals/magic")
 require("scripts/globals/hunts")
 require("scripts/globals/utils")
-require("scripts/globals/weaponskillids")
 ------------------------------
 local entity = {}
 
