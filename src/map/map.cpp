@@ -99,6 +99,8 @@ bool gLoadAllLua = false;
 
 std::unordered_map<uint32, std::unordered_map<uint16, std::vector<std::pair<uint16, uint8>>>> PacketMods;
 
+extern std::atomic<bool> gProcessLoaded;
+
 namespace
 {
     uint32 MAX_BUFFER_SIZE             = 2500U;
@@ -368,6 +370,8 @@ int32 do_init(int32 argc, char** argv)
         gRunFlag = false;
     });
     // clang-format on
+
+    gProcessLoaded = true;
 
     return 0;
 }
