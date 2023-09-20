@@ -741,6 +741,12 @@ INSERT INTO `item_mods_pet` VALUES (23080,370,4,3); -- Automaton: REGEN: 4
 -- Bagua Galero +2
 INSERT INTO `item_mods_pet` VALUES (23083,2,500,8); -- Luopan - HP: 500
 
+-- Nukumi Cabasset +2
+INSERT INTO `item_mods_pet` VALUES (23093,25,51,0); -- Pet: ACC: 51
+INSERT INTO `item_mods_pet` VALUES (23093,26,51,0); -- Pet: RACC: 51
+INSERT INTO `item_mods_pet` VALUES (23093,30,51,0); -- Pet: MACC: 51
+-- TODO: Monster correlation effects +26
+
 -- Vishap Mail +2
 INSERT INTO `item_mods_pet` VALUES (23120,370,10,2); -- Wyvern - REGEN: 10
 

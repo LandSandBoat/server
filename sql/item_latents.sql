@@ -2634,6 +2634,8 @@ INSERT INTO `item_latents` VALUES (22118,944,5,13,198);  -- Venery Bow: Minuet: 
 -- INSERT INTO `item_latents` VALUES (22266,288,??,??,0); -- Antitail: Unity Ranking: "Double Attack"+1~3%
 -- INSERT INTO `item_latents` VALUES (22267,288,??,??,0); -- Antitail +1: Unity Ranking: "Double Attack"+1~3%
 
+INSERT INTO `item_latents` VALUES (23096,291,16,13,354); -- Kasuga Kabuto +2: EFFECT_SEIGAN: COUNTER: 16
+
 INSERT INTO `item_latents` VALUES (23197,518,10,13,57);  -- WAR AF2 119 +2 Hands Defender Shield Rate +10
 
 -- Hachiya Kyahan +2
