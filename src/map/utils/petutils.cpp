@@ -449,44 +449,65 @@ namespace petutils
         return 0;
     }
 
+    uint16 GetJugHP(CPetEntity* PMob)
+    {
+        int level        = PMob->GetMLevel();
+        int calculatedHp = 500;
+
+        // All forumlas derived using linear or cubic line fits and known era appropriate values
+        // Guardrails put into place for any scenarios where mobs sync down to level 20.
+        switch (PMob->m_PetID)
+        {
+            case 23: // CRAB FAMILIAR
+            case 24: // COURIER CARRIE
+            case 33: // BEETLE FAMILIAR
+            case 45: // PANZER GALAHAD
+                return 48.133 * level - 460;
+            case 25: // HOMUNCULUS
+            case 28: // FLOWERPOT BILL
+            case 38: // FLOWERPOT BEN
+                calculatedHp = 61.7471 * level - 1260.99;
+                return std::max(calculatedHp, 500);
+            case 34: // ANTLION FAMILIAR
+            case 46: // CHOPSUEY CHUCKY
+            case 47: // AMIGO SABOTENDER
+                calculatedHp = 60.24 * level - 1246;
+                return std::max(calculatedHp, 500);
+            case 35: // MITE FAMILIAR
+            case 44: // LIFEDRINKER LARS
+                calculatedHp = 57.7 * level - 1203.5;
+                return std::max(calculatedHp, 500);
+            case 21: // SHEEP FAMILIAR
+            case 22: // HARE FAMILIAR
+            case 26: // FLYTRAP FAMILIAR
+            case 27: // TIGER FAMILIAR
+            case 29: // EFT FAMILIAR
+            case 30: // LIZARD FAMILIAR
+            case 31: // MAYFLY FAMILIAR
+            case 32: // FUNGUAR FAMILIAR
+            case 36: // LULLABY MELODIA
+            case 37: // KEENEARED STEFFI
+            case 39: // SABER SIRAVARDE
+            case 40: // COLDBLOOD COMO
+            case 41: // SHELLBUSTER OROB
+            case 42: // VORACIOUS AUDREY
+            case 43: // AMBUSHER ALLIE
+            default:
+                calculatedHp = -0.0207189 * pow(level, 3) + 3.05448 * pow(level, 2) - 86.9204 * level + 1061.84;
+                return std::max(calculatedHp, 500);
+        }
+    }
+
     void LoadJugStats(CPetEntity* PMob, Pet_t* petStats)
     {
         // follows monster formulas but jugs have no subjob
-        JOBTYPE mJob   = PMob->GetMJob();
-        uint8   lvl    = PMob->GetMLevel();
-        uint8   lvlmax = petStats->maxLevel;
-        uint8   lvlmin = petStats->minLevel;
+        uint8 lvl    = PMob->GetMLevel();
+        uint8 lvlmax = petStats->maxLevel;
+        uint8 lvlmin = petStats->minLevel;
 
         lvl = std::clamp(lvl, lvlmin, lvlmax);
 
-        uint8  grade;
-        uint32 mobHP = 1; // Set mob HP
-
-        grade = grade::GetJobGrade(mJob, 0); // main jobs grade
-
-        uint8 base     = 0; // Column for base hp
-        uint8 jobScale = 1; // Column for job scaling
-        uint8 scaleX   = 2; // Column for modifier scale
-
-        uint8 BaseHP   = grade::GetMobHPScale(grade, base);     // Main job base HP
-        uint8 JobScale = grade::GetMobHPScale(grade, jobScale); // Main job scaling
-        uint8 ScaleXHP = grade::GetMobHPScale(grade, scaleX);   // Main job modifier scale
-
-        uint8 RBIgrade = std::min(lvl, (uint8)5); // RBI Grade
-        uint8 RBIbase  = 1;                       // Column for RBI base
-
-        uint8 RBI = grade::GetMobRBI(RBIgrade, RBIbase); // RBI
-
-        uint8 mLvlIf    = (PMob->GetMLevel() > 5 ? 1 : 0);
-        uint8 mLvlIf30  = (PMob->GetMLevel() > 30 ? 1 : 0);
-        uint8 raceScale = 6;
-
-        if (lvl > 0)
-        {
-            mobHP = BaseHP + (std::min(lvl, (uint8)5) - 1) * (JobScale + raceScale - 1) + RBI + mLvlIf * (std::min(lvl, (uint8)30) - 5) * (2 * (JobScale + raceScale) + std::min(lvl, (uint8)30) - 6) / 2 + mLvlIf30 * ((lvl - 30) * (63 + ScaleXHP) + (lvl - 31) * (JobScale + raceScale));
-        }
-
-        PMob->health.maxhp = (int16)(mobHP * petStats->HPscale);
+        PMob->health.maxhp = GetJugHP(PMob);
 
         switch (PMob->GetMJob())
         {
