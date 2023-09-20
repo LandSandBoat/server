@@ -19,7 +19,7 @@ g_mixins.families = g_mixins.families or {}
 g_mixins.families.colibri_mimic = function(colibriMob)
     colibriMob:addListener('MAGIC_TAKE', 'COLIBRI_MIMIC_MAGIC_TAKE', function(target, caster, spell)
         if
-            target:getAnimationSub() == 0 and
+            target:getAnimationSub() == 4 and
             spell:tookEffect() and
             (caster:isPC() or caster:isPet()) and
             (spell:getSpellGroup() ~= xi.magic.spellGroup.BLUE or target:getLocalVar('[colibri]reflect_blue_magic') == 1)
@@ -48,12 +48,12 @@ g_mixins.families.colibri_mimic = function(colibriMob)
                 mob:setLocalVar('[colibri]spellToMimic', 0)
                 mob:setLocalVar('[colibri]castWindow', 0)
                 mob:setLocalVar('[colibri]castTime', 0)
-                mob:setAnimationSub(0)
+                mob:setAnimationSub(4)
             elseif spellToMimic == 0 or osTime > castWindow then
                 mob:setLocalVar('[colibri]spellToMimic', 0)
                 mob:setLocalVar('[colibri]castWindow', 0)
                 mob:setLocalVar('[colibri]castTime', 0)
-                mob:setAnimationSub(0)
+                mob:setAnimationSub(4)
             end
         end
     end)
@@ -63,7 +63,7 @@ g_mixins.families.colibri_mimic = function(colibriMob)
         mob:setLocalVar('[colibri]castWindow', 0)
         mob:setLocalVar('[colibri]castTime', 0)
         if mob:getAnimationSub() == 1 then
-            mob:setAnimationSub(0)
+            mob:setAnimationSub(4)
         end
     end)
 end
