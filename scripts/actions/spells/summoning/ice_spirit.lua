@@ -18,7 +18,7 @@ spellObject.onMagicCastingCheck = function(caster, target, spell)
 end
 
 spellObject.onSpellCast = function(caster, target, spell)
-    xi.pet.spawnPet(caster, xi.pet.id.ICE_SPIRIT)
+    xi.pet.spawnPet(caster, xi.petId.ICE_SPIRIT)
     return 0
 end
 

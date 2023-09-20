@@ -552,7 +552,7 @@ int32 CBattleEntity::addMP(int32 mp)
 }
 
 int32 CBattleEntity::takeDamage(int32 amount, CBattleEntity* attacker /* = nullptr*/, ATTACK_TYPE attackType /* = ATTACK_NONE*/,
-                                DAMAGE_TYPE damageType /* = DAMAGE_NONE*/)
+                                DAMAGE_TYPE damageType /* = DAMAGE_NONE*/, bool isSkillchainDamage /* = false */)
 {
     TracyZoneScoped;
     PLastAttacker                             = attacker;
@@ -575,8 +575,12 @@ int32 CBattleEntity::takeDamage(int32 amount, CBattleEntity* attacker /* = nullp
             roeutils::event(ROE_EVENT::ROE_DMGDEALT, static_cast<CCharEntity*>(attacker), RoeDatagram("dmg", amount));
         }
 
-        // Took dmg from non ws source, so remove ws kill var
-        this->SetLocalVar("weaponskillHit", 0);
+        // Took dmg from non ws source, so remove ws data var.  Skillchain damage
+        // occurs prior to listeners being fired, so retain this data for this case.
+        if (!isSkillchainDamage)
+        {
+            this->SetLocalVar("weaponskillHit", 0);
+        }
     }
 
     if (getMod(Mod::ABSORB_DMG_TO_MP) > 0)

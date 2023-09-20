@@ -987,7 +987,9 @@ xi.weaponskills.takeWeaponskillDamage = function(defender, attacker, wsParams, p
     end
 
     if finaldmg > 0 then
-        defender:setLocalVar('weaponskillHit', wsResults.wsID)
+        -- Pack the weaponskill ID in the top 8 bits of this variable which is utilized
+        -- in OnMobDeath in luautils.  Max WSID is 255.
+        defender:setLocalVar('weaponskillHit', bit.lshift(wsResults.wsID, 24) + finaldmg)
     end
 
     return finaldmg

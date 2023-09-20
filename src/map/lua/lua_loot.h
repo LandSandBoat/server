@@ -42,6 +42,11 @@ public:
     void addItemFixed(uint16 item, uint16 rate, sol::variadic_args va);
     void addGroupFixed(uint16 groupRate, sol::table const& items);
 
+    bool operator==(const CLuaLootContainer& other) const
+    {
+        return this->m_PLootContainer == other.m_PLootContainer;
+    }
+
     static void Register();
 
 private:

@@ -114,10 +114,6 @@ global_objects=(
     TPMOD_ATTACK
     TPMOD_DURATION
 
-    INT_BASED
-    CHR_BASED
-    MND_BASED
-
     ForceCrash
     BuildString
 

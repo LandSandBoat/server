@@ -22,7 +22,7 @@ abilityObject.onAbilityCheck = function(player, target, ability)
 end
 
 abilityObject.onUseAbility = function(player, target, ability)
-    xi.pet.spawnPet(player, xi.pet.id.AUTOMATON)
+    xi.pet.spawnPet(player, xi.petId.AUTOMATON)
     local pet = player:getPet()
 
     if pet then

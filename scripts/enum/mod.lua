@@ -671,8 +671,10 @@ xi.mod =
     MYTHIC_OCC_ATT_TWICE            = 865, -- Proc rate for "Occasionally attacks twice"
     MYTHIC_OCC_ATT_THRICE           = 866, -- Proc rate for "Occasionally attacks thrice"
 
-    EAT_RAW_FISH                    = 412, --
-    EAT_RAW_MEAT                    = 413, --
+    APPRECIATE_GYSAHL_GREENS        = 156, -- Enhances food effect of Gysahl Greens
+
+    EAT_RAW_FISH                    = 412, -- Without this, only Mithra can eat raw fish.
+    EAT_RAW_MEAT                    = 413, -- Without this, only Galka can eat raw meat.
 
     ENHANCES_CURSNA_RCVD            = 67,   -- Potency of "Cursna" effects received
     ENHANCES_CURSNA                 = 310,  -- Raises success rate of Cursna when removing effect (like Doom) that are not 100% chance to remove

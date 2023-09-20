@@ -16802,7 +16802,7 @@ INSERT INTO `item_basic` VALUES (19529,0,'sparrowhawk_+1','sparrowhawk_+1',1,635
 INSERT INTO `item_basic` VALUES (19530,0,'bedlam_+1','bedlam_+1',1,63552,0,1,0);
 INSERT INTO `item_basic` VALUES (19531,0,'spitfire_+1','spitfire_+1',1,63552,0,1,0);
 INSERT INTO `item_basic` VALUES (19532,0,'mayhem_+1','mayhem_+1',1,30784,0,1,0);
-INSERT INTO `item_basic` VALUES (19533,0,'anarchy_+1','anarchy_+1',1,63552,0,1,0);
+INSERT INTO `item_basic` VALUES (19533,0,'anarchy_p1','anarchy_+1',1,63552,0,1,0);
 INSERT INTO `item_basic` VALUES (19534,0,'verethragna_90','verethragna',1,63552,0,1,0);
 INSERT INTO `item_basic` VALUES (19535,0,'twashtar_90','twashtar',1,63552,0,1,0);
 INSERT INTO `item_basic` VALUES (19536,0,'almace_90','almace',1,63552,0,1,0);
@@ -16880,7 +16880,7 @@ INSERT INTO `item_basic` VALUES (19607,0,'sparrowhawk_+2','sparrowhawk_+2',1,635
 INSERT INTO `item_basic` VALUES (19608,0,'bedlam_+2','bedlam_+2',1,63552,0,1,0);
 INSERT INTO `item_basic` VALUES (19609,0,'spitfire_+2','spitfire_+2',1,63552,0,1,0);
 INSERT INTO `item_basic` VALUES (19610,0,'mayhem_+2','mayhem_+2',1,30784,0,1,0);
-INSERT INTO `item_basic` VALUES (19611,0,'anarchy_+2','anarchy_+2',1,63552,0,1,0);
+INSERT INTO `item_basic` VALUES (19611,0,'anarchy_p2','anarchy_+2',1,63552,0,1,0);
 INSERT INTO `item_basic` VALUES (19612,0,'conqueror','conqueror',1,63552,0,1,0);
 INSERT INTO `item_basic` VALUES (19613,0,'glanzfaust','glanzfaust',1,63552,0,1,0);
 INSERT INTO `item_basic` VALUES (19614,0,'yagrush','yagrush',1,63552,0,1,0);
@@ -16978,7 +16978,7 @@ INSERT INTO `item_basic` VALUES (19705,0,'sparrowhawk_+3','sparrowhawk_+3',1,635
 INSERT INTO `item_basic` VALUES (19706,0,'bedlam_+3','bedlam_+3',1,63552,0,1,0);
 INSERT INTO `item_basic` VALUES (19707,0,'spitfire_+3','spitfire_+3',1,63552,0,1,0);
 INSERT INTO `item_basic` VALUES (19708,0,'mayhem_+3','mayhem_+3',1,30784,0,1,0);
-INSERT INTO `item_basic` VALUES (19709,0,'anarchy_+3','anarchy_+3',1,63552,0,1,0);
+INSERT INTO `item_basic` VALUES (19709,0,'anarchy_p3','anarchy_+3',1,63552,0,1,0);
 INSERT INTO `item_basic` VALUES (19710,0,'conqueror','conqueror',1,63552,0,1,0);
 INSERT INTO `item_basic` VALUES (19711,0,'glanzfaust','glanzfaust',1,63552,0,1,0);
 INSERT INTO `item_basic` VALUES (19712,0,'yagrush','yagrush',1,63552,0,1,0);

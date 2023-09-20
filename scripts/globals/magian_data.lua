@@ -500,6 +500,26 @@ xi.magian.trials =
         },
     },
 
+    [82] =
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.item.PUGILISTS,
+        },
+
+        textOffset     = 99,
+        dayWeather     = xi.magianElement.ANY,
+        defeatMob      = true,
+        mobSuperFamily = set{ 56 },
+        numRequired    = 50,
+
+        rewardItem =
+        {
+            itemId = xi.item.CATS_CLAWS,
+        },
+    },
+
     [150] = -- Serpopard Ishtar x3
     {
         previousTrial = 0,
@@ -3757,6 +3777,165 @@ xi.magian.trials =
         },
     },
 
+    [1783] =
+    {
+        previousTrial = 0,
+        requiredItem  =
+        {
+            itemId = xi.item.ANARCHY,
+        },
+
+        textOffset     = 768,
+        defeatMob      = false,
+        useWeaponskill = xi.weaponskill.HOT_SHOT,
+        numRequired    = 100,
+
+        rewardItem =
+        {
+            itemId       = xi.item.ANARCHY,
+            itemAugments =
+            {
+                [1] = { 746,  0 }, -- DMG:+1 (Ranged)
+                [2] = { 1076, 1 }, -- Hot Shot: DMG:+10%
+            },
+        },
+    },
+
+    [1784] =
+    {
+        previousTrial = 1783,
+        requiredItem  =
+        {
+            itemId       = xi.item.ANARCHY,
+            itemAugments =
+            {
+                [1] = { 746,  0 }, -- DMG:+1 (Ranged)
+                [2] = { 1076, 1 }, -- Hot Shot: DMG:+10%
+            },
+        },
+
+        textOffset     = 769,
+        defeatMob      = false,
+        useWeaponskill = xi.weaponskill.SPLIT_SHOT,
+        numRequired    = 200,
+
+        rewardItem =
+        {
+            itemId       = xi.item.ANARCHY,
+            itemAugments =
+            {
+                [1] = { 746,  2 }, -- DMG:+3 (Ranged)
+                [2] = { 1077, 1 }, -- Split Shot: DMG:+10%
+            },
+        },
+    },
+
+    [1785] =
+    {
+        previousTrial = 1784,
+        requiredItem  =
+        {
+            itemId       = xi.item.ANARCHY,
+            itemAugments =
+            {
+                [1] = { 746,  2 }, -- DMG:+3 (Ranged)
+                [2] = { 1077, 1 }, -- Split Shot: DMG:+10%
+            },
+        },
+
+        textOffset     = 770,
+        defeatMob      = false,
+        mobEcosystem   = xi.ecosystem.LIZARD,
+        useWeaponskill = xi.weaponskill.SNIPER_SHOT,
+        numRequired    = 300,
+
+        rewardItem =
+        {
+            itemId       = xi.item.ANARCHY,
+            itemAugments =
+            {
+                [1] = { 746,  4 }, -- DMG:+5 (Ranged)
+                [2] = { 1078, 1 }, -- Sniper Shot: DMG:+10%
+            },
+        },
+    },
+
+    [1786] =
+    {
+        previousTrial = 1785,
+        requiredItem  =
+        {
+            itemId       = xi.item.ANARCHY,
+            itemAugments =
+            {
+                [1] = { 746,  4 }, -- DMG:+5 (Ranged)
+                [2] = { 1078, 1 }, -- Sniper Shot: DMG:+10%
+            },
+        },
+
+        textOffset     = 771,
+        defeatMob      = false,
+        mobEcosystem   = xi.ecosystem.VERMIN,
+        useWeaponskill = xi.weaponskill.DETONATOR,
+        numRequired    = 500,
+
+        rewardItem =
+        {
+            itemId       = xi.item.ANARCHY,
+            itemAugments =
+            {
+                [1] = { 746,  9 }, -- DMG:+10 (Ranged)
+                [2] = { 1079, 1 }, -- Detonator: DMG:+10%
+            },
+        },
+    },
+
+    [1787] =
+    {
+        previousTrial = 1785,
+        requiredItem  =
+        {
+            itemId       = xi.item.ANARCHY,
+            itemAugments =
+            {
+                [1] = { 746,  4 }, -- DMG:+5 (Ranged)
+                [2] = { 1078, 1 }, -- Sniper Shot: DMG:+10%
+            },
+        },
+
+        textOffset     = 788,
+        defeatMob      = false,
+        mobEcosystem   = xi.ecosystem.LIZARD,
+        useWeaponskill = set{
+            xi.weaponskill.HOT_SHOT,
+            xi.weaponskill.SPLIT_SHOT,
+            xi.weaponskill.SNIPER_SHOT,
+            xi.weaponskill.SLUG_SHOT,
+            xi.weaponskill.BLAST_SHOT,
+            xi.weaponskill.HEAVY_SHOT,
+            xi.weaponskill.DETONATOR,
+            xi.weaponskill.CORONACH,
+            xi.weaponskill.TRUEFLIGHT,
+            xi.weaponskill.LEADEN_SALUTE,
+            xi.weaponskill.NUMBING_SHOT,
+            xi.weaponskill.WILDFIRE,
+            xi.weaponskill.LAST_STAND,
+            xi.weaponskill.TERMINUS,
+        },
+
+        numRequired = 800,
+
+        rewardItem =
+        {
+            itemId       = xi.item.ANARCHY,
+            itemAugments =
+            {
+                [1] = { 746, 6 }, -- DMG:+7 (Ranged)
+                [2] = { 142, 7 }, -- "Store TP"+8
+            },
+        },
+    },
+
     [1788] = -- Chesma x8
     {
         previousTrial = 948,
@@ -4528,6 +4707,80 @@ xi.magian.trials =
         },
     },
 
+    [2247] =
+    {
+        previousTrial = 1786,
+        requiredItem  =
+        {
+            itemId       = xi.item.ANARCHY,
+            itemAugments =
+            {
+                [1] = { 746,  9 }, -- DMG:+10 (Ranged)
+                [2] = { 1079, 1 }, -- Detonator: DMG:+10%
+            },
+        },
+
+        textOffset     = 995,
+        defeatMob      = true,
+        mobEcosystem   = xi.ecosystem.BEAST,
+        useWeaponskill = xi.weaponskill.DETONATOR,
+        numRequired    = 300,
+
+        rewardItem =
+        {
+            itemId       = xi.item.ANARCHY_P1,
+            itemAugments =
+            {
+                [1] = { 327,  9 }, -- Weapon Skill:DMG:+10%
+            },
+        },
+    },
+
+    [2248] =
+    {
+        previousTrial = 1787,
+        requiredItem  =
+        {
+            itemId       = xi.item.ANARCHY,
+            itemAugments =
+            {
+                [1] = { 746, 6 }, -- DMG:+7 (Ranged)
+                [2] = { 142, 7 }, -- "Store TP"+8
+            },
+        },
+
+        textOffset     = 788,
+        defeatMob      = false,
+        mobEcosystem   = xi.ecosystem.LIZARD,
+        useWeaponskill = set{
+            xi.weaponskill.HOT_SHOT,
+            xi.weaponskill.SPLIT_SHOT,
+            xi.weaponskill.SNIPER_SHOT,
+            xi.weaponskill.SLUG_SHOT,
+            xi.weaponskill.BLAST_SHOT,
+            xi.weaponskill.HEAVY_SHOT,
+            xi.weaponskill.DETONATOR,
+            xi.weaponskill.CORONACH,
+            xi.weaponskill.TRUEFLIGHT,
+            xi.weaponskill.LEADEN_SALUTE,
+            xi.weaponskill.NUMBING_SHOT,
+            xi.weaponskill.WILDFIRE,
+            xi.weaponskill.LAST_STAND,
+            xi.weaponskill.TERMINUS,
+        },
+
+        numRequired = 800,
+
+        rewardItem =
+        {
+            itemId       = xi.item.ANARCHY_P1,
+            itemAugments =
+            {
+                [1] = { 142, 12 }, -- "Store TP"+13
+            },
+        },
+    },
+
     [2249] =
     {
         previousTrial = 1819,
@@ -4840,6 +5093,97 @@ xi.magian.trials =
         rewardItem =
         {
             itemId = xi.item.MANDAU_90,
+        },
+    },
+
+    [2657] =
+    {
+        previousTrial = 2247,
+        requiredItem  =
+        {
+            itemId       = xi.item.ANARCHY_P1,
+            itemAugments =
+            {
+                [1] = { 327, 9 }, -- Weapon Skill:DMG:+10%
+            },
+        },
+
+        textOffset     = 1101,
+        defeatMob      = true,
+        mobEcosystem   = xi.ecosystem.PLANTOID,
+        useWeaponskill = set{
+            xi.weaponskill.HOT_SHOT,
+            xi.weaponskill.SPLIT_SHOT,
+            xi.weaponskill.SNIPER_SHOT,
+            xi.weaponskill.SLUG_SHOT,
+            xi.weaponskill.BLAST_SHOT,
+            xi.weaponskill.HEAVY_SHOT,
+            xi.weaponskill.DETONATOR,
+            xi.weaponskill.CORONACH,
+            xi.weaponskill.TRUEFLIGHT,
+            xi.weaponskill.LEADEN_SALUTE,
+            xi.weaponskill.NUMBING_SHOT,
+            xi.weaponskill.WILDFIRE,
+            xi.weaponskill.LAST_STAND,
+            xi.weaponskill.TERMINUS,
+        },
+
+        numRequired = 300,
+
+        rewardItem =
+        {
+            itemId       = xi.item.ANARCHY_P2,
+            itemAugments =
+            {
+                [1] = { 746, 1 }, -- DMG:+2 (Ranged)
+                [2] = { 327, 9 }, -- Weapon Skill:DMG:+10%
+            },
+        },
+    },
+
+    [2658] =
+    {
+        previousTrial = 2247,
+        requiredItem  =
+        {
+            itemId       = xi.item.ANARCHY_P1,
+            itemAugments =
+            {
+                [1] = { 327, 9 }, -- Weapon Skill:DMG:+10%
+            },
+        },
+
+        textOffset     = 1115,
+        defeatMob      = false,
+        minDamage      = 400,
+        mobEcosystem   = xi.ecosystem.UNDEAD,
+        useWeaponskill = set{
+            xi.weaponskill.HOT_SHOT,
+            xi.weaponskill.SPLIT_SHOT,
+            xi.weaponskill.SNIPER_SHOT,
+            xi.weaponskill.SLUG_SHOT,
+            xi.weaponskill.BLAST_SHOT,
+            xi.weaponskill.HEAVY_SHOT,
+            xi.weaponskill.DETONATOR,
+            xi.weaponskill.CORONACH,
+            xi.weaponskill.TRUEFLIGHT,
+            xi.weaponskill.LEADEN_SALUTE,
+            xi.weaponskill.NUMBING_SHOT,
+            xi.weaponskill.WILDFIRE,
+            xi.weaponskill.LAST_STAND,
+            xi.weaponskill.TERMINUS,
+        },
+
+        numRequired = 500,
+
+        rewardItem =
+        {
+            itemId       = xi.item.ANARCHY_P2,
+            itemAugments =
+            {
+                [1] = { 761, 27 }, -- Delay:+60 (Ranged)
+                [2] = { 353, 19 }, -- TP Bonus +1000
+            },
         },
     },
 
