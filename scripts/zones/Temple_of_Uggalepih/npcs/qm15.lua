@@ -17,11 +17,11 @@ entity.onTrigger = function(player, npc)
         player:getCharVar('KnightStalker_Progress') == 4 and
         player:getCharVar('KnightStalker_Kill') == 0 and
         player:getMainJob() == xi.job.DRG and
-        pet and
-        pet:getPetID() == xi.petId.WYVERN and
-        npcUtil.popFromQM(player, npc, { ID.mob.CLEUVARION_M_RESOAIX, ID.mob.ROMPAULION_S_CITALLE }, { hide = 0, claim = false })
+        pet ~= nil and
+        pet:getPetID() == xi.petId.WYVERN
     then
         player:messageSpecial(ID.text.SOME_SORT_OF_CEREMONY + 1) -- Your wyvern reacts violently to this spot!
+        npcUtil.popFromQM(player, npc, { ID.mob.CLEUVARION_M_RESOAIX, ID.mob.ROMPAULION_S_CITALLE }, { hide = 0, claim = false })
     elseif player:getCharVar('KnightStalker_Kill') == 1 then
         player:startEvent(67)
     else
