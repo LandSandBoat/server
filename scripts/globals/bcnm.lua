@@ -547,9 +547,21 @@ local function checkReqs(player, npc, bfid, registrant)
         return zones[player:getZoneID()].npc.ENTRANCE_OFFSET + offset
     end
 
+    local function getRace(entity)
+        local race = entity:getRace()
+        if race < 7 then
+            if race % 2 == 0 then
+                race = race - 1
+            end
+        end
+
+        return race
+    end
+
     local function getPartyRace()
+        local playerRace = getRace(player)
         for _, v in pairs(player:getParty()) do
-            if v:getRace() ~= player:getRace() then
+            if getRace(v) ~= playerRace then
                 return false
             end
         end
