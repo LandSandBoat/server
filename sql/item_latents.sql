@@ -2636,6 +2636,10 @@ INSERT INTO `item_latents` VALUES (22118,944,5,13,198);  -- Venery Bow: Minuet: 
 
 INSERT INTO `item_latents` VALUES (23096,291,16,13,354); -- Kasuga Kabuto +2: EFFECT_SEIGAN: COUNTER: 16
 
+INSERT INTO `item_latents` VALUES (23097,288,11,13,421); -- Hattori Zukin +2: EFFECT_INNIN: DOUBLE_ATTACK: 11
+
+INSERT INTO `item_latents` VALUES (23100,311,26,13,164); -- Hashishin Kavuk +2: EFFECT_CHAIN_AFFINITY: MAGIC_DAMAGE: 26
+
 INSERT INTO `item_latents` VALUES (23197,518,10,13,57);  -- WAR AF2 119 +2 Hands Defender Shield Rate +10
 
 -- Hachiya Kyahan +2
