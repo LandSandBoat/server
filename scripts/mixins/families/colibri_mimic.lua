@@ -17,9 +17,13 @@ g_mixins = g_mixins or {}
 g_mixins.families = g_mixins.families or {}
 
 g_mixins.families.colibri_mimic = function(colibriMob)
+    -- initial state 0
+    local closedBeak = 4
+    local openBeak   = 5
+
     colibriMob:addListener('MAGIC_TAKE', 'COLIBRI_MIMIC_MAGIC_TAKE', function(target, caster, spell)
         if
-            target:getAnimationSub() == 4 and
+            target:getAnimationSub() ~= openBeak and
             spell:tookEffect() and
             (caster:isPC() or caster:isPet()) and
             (spell:getSpellGroup() ~= xi.magic.spellGroup.BLUE or target:getLocalVar('[colibri]reflect_blue_magic') == 1)
@@ -27,7 +31,7 @@ g_mixins.families.colibri_mimic = function(colibriMob)
             target:setLocalVar('[colibri]spellToMimic', spell:getID()) -- which spell to mimic
             target:setLocalVar('[colibri]castWindow', os.time() + 30) -- after thirty seconds, will stop attempting to mimic
             target:setLocalVar('[colibri]castTime', os.time() + 6) -- enforce a delay between original spell, and mimic spell.
-            target:setAnimationSub(1)
+            target:setAnimationSub(openBeak)
         end
     end)
 
@@ -37,7 +41,7 @@ g_mixins.families.colibri_mimic = function(colibriMob)
         local castTime = mob:getLocalVar('[colibri]castTime')
         local osTime = os.time()
 
-        if mob:getAnimationSub() == 1 then
+        if mob:getAnimationSub() == openBeak then
             if
                 spellToMimic > 0 and
                 osTime > castTime and
@@ -48,12 +52,12 @@ g_mixins.families.colibri_mimic = function(colibriMob)
                 mob:setLocalVar('[colibri]spellToMimic', 0)
                 mob:setLocalVar('[colibri]castWindow', 0)
                 mob:setLocalVar('[colibri]castTime', 0)
-                mob:setAnimationSub(4)
+                mob:setAnimationSub(closedBeak)
             elseif spellToMimic == 0 or osTime > castWindow then
                 mob:setLocalVar('[colibri]spellToMimic', 0)
                 mob:setLocalVar('[colibri]castWindow', 0)
                 mob:setLocalVar('[colibri]castTime', 0)
-                mob:setAnimationSub(4)
+                mob:setAnimationSub(closedBeak)
             end
         end
     end)
@@ -62,8 +66,8 @@ g_mixins.families.colibri_mimic = function(colibriMob)
         mob:setLocalVar('[colibri]spellToMimic', 0)
         mob:setLocalVar('[colibri]castWindow', 0)
         mob:setLocalVar('[colibri]castTime', 0)
-        if mob:getAnimationSub() == 1 then
-            mob:setAnimationSub(4)
+        if mob:getAnimationSub() ~= closedBeak then
+            mob:setAnimationSub(closedBeak)
         end
     end)
 end
