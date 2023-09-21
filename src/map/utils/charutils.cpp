@@ -1052,38 +1052,45 @@ namespace charutils
 
         if (ret != SQL_ERROR)
         {
+            // equipSlotData[equipSlotId] = { slotId, containerId }
+            std::unordered_map<uint8, std::pair<uint8, uint8>> equipSlotData;
+
+            // NOTE: This data is stored in the above map since if the item has an augment, another db
+            // query will occur, which will destroy the current query results.
+            while (sql->NextRow() == SQL_SUCCESS)
+            {
+                equipSlotData[sql->GetUIntData(1)] = { static_cast<uint8>(sql->GetUIntData(0)), static_cast<uint8>(sql->GetUIntData(2)) };
+            }
+
             CItemLinkshell* PLinkshell1   = nullptr;
             CItemLinkshell* PLinkshell2   = nullptr;
             bool            hasMainWeapon = false;
 
-            while (sql->NextRow() == SQL_SUCCESS)
+            for (auto const& [equipSlotId, inventoryLoc] : equipSlotData)
             {
-                if (sql->GetUIntData(1) < 16)
+                if (equipSlotId < 16)
                 {
-                    if (sql->GetUIntData(1) == SLOT_MAIN)
+                    if (equipSlotId == SLOT_MAIN)
                     {
                         hasMainWeapon = true;
                     }
 
-                    EquipItem(PChar, sql->GetUIntData(0), sql->GetUIntData(1), sql->GetUIntData(2));
+                    EquipItem(PChar, inventoryLoc.first, equipSlotId, inventoryLoc.second);
                 }
                 else
                 {
-                    uint8  SlotID     = sql->GetUIntData(0);
-                    uint8  equipSlot  = sql->GetUIntData(1);
-                    uint8  LocationID = sql->GetUIntData(2);
-                    CItem* PItem      = PChar->getStorage(LocationID)->GetItem(SlotID);
+                    CItem* PItem = PChar->getStorage(inventoryLoc.second)->GetItem(inventoryLoc.first);
 
                     if ((PItem != nullptr) && PItem->isType(ITEM_LINKSHELL))
                     {
                         PItem->setSubType(ITEM_LOCKED);
-                        PChar->equip[equipSlot]    = SlotID;
-                        PChar->equipLoc[equipSlot] = LocationID;
-                        if (equipSlot == SLOT_LINK1)
+                        PChar->equip[equipSlotId]    = inventoryLoc.first;
+                        PChar->equipLoc[equipSlotId] = inventoryLoc.second;
+                        if (equipSlotId == SLOT_LINK1)
                         {
                             PLinkshell1 = (CItemLinkshell*)PItem;
                         }
-                        else if (equipSlot == SLOT_LINK2)
+                        else if (equipSlotId == SLOT_LINK2)
                         {
                             PLinkshell2 = (CItemLinkshell*)PItem;
                         }
