@@ -21,11 +21,11 @@ zones[xi.zone.SEALIONS_DEN] =
         IRON_GATE_LOCKED              = 7097, -- A solid iron gate. It is tightly locked...
         PARTY_MEMBERS_HAVE_FALLEN     = 7410, -- All party members have fallen in battle. Now leaving the battlefield.
         THE_PARTY_WILL_BE_REMOVED     = 7417, -- If all party members' HP are still zero after # minute[/s], the party will be removed from the battlefield.
-        CONQUEST_BASE                 = 7431, -- Tallying conquest results...
-        TENZEN_MSG_OFFSET             = 7922, -- You will fall to my blade!
-        MAKKI_CHEBUKKI_OFFSET         = 7926, -- Samurai Sky Pirate Power!
-        KUKKI_CHEBUKKI_OFFSET         = 7931, -- What? Nooo!
-        CHERUKIKI_OFFSET              = 7937, -- We're doomed!
+        CONQUEST_BASE                 = 7432, -- Tallying conquest results...
+        TENZEN_MSG_OFFSET             = 7923, -- You will fall to my blade!
+        MAKKI_CHEBUKKI_OFFSET         = 7927, -- Samurai Sky Pirate Power!
+        KUKKI_CHEBUKKI_OFFSET         = 7932, -- What? Nooo!
+        CHERUKIKI_OFFSET              = 7938, -- We're doomed!
     },
     mob =
     {

@@ -20,15 +20,15 @@ zones[xi.zone.NAVUKGO_EXECUTION_CHAMBER] =
         MEMBERS_LEVELS_ARE_RESTRICTED = 7023, -- Your party is unable to participate because certain members' levels are restricted.
         PARTY_MEMBERS_HAVE_FALLEN     = 7569, -- All party members have fallen in battle. Now leaving the battlefield.
         THE_PARTY_WILL_BE_REMOVED     = 7576, -- If all party members' HP are still zero after # minute[/s], the party will be removed from the battlefield.
-        KARABABA_ENOUGH               = 7640, -- That's quite enough...
-        KARABABA_ROUGH                = 7641, -- Time for me to start playing rough!
-        KARABARA_FIRE                 = 7642, -- Fuel for the fire! It doesn't pay to invoke my ire!
-        KARABARA_ICE                  = 7643, -- Well, if you won't play nice, I'll put your sorry hide on ice!
-        KARABARA_WIND                 = 7644, -- This battle is growing stale. How about we have a refreshing gale!
-        KARABARA_EARTH                = 7645, -- Sometimes it comes as quite a shock, how much damage you can deal with simple rock!
-        KARABARA_LIGHTNING            = 7646, -- How I love to rip things asunder! Witness the power of lightning and thunder!
-        KARABARA_WATER                = 7647, -- Water is more dangerous than most expect. Never fear, I'll teach you respect!
-        KARABABA_QUIT                 = 7655, -- What a completely useless shield. It's time for me to quit the field.
+        KARABABA_ENOUGH               = 7641, -- That's quite enough...
+        KARABABA_ROUGH                = 7642, -- Time for me to start playing rough!
+        KARABARA_FIRE                 = 7643, -- Fuel for the fire! It doesn't pay to invoke my ire!
+        KARABARA_ICE                  = 7644, -- Well, if you won't play nice, I'll put your sorry hide on ice!
+        KARABARA_WIND                 = 7645, -- This battle is growing stale. How about we have a refreshing gale!
+        KARABARA_EARTH                = 7646, -- Sometimes it comes as quite a shock, how much damage you can deal with simple rock!
+        KARABARA_LIGHTNING            = 7647, -- How I love to rip things asunder! Witness the power of lightning and thunder!
+        KARABARA_WATER                = 7648, -- Water is more dangerous than most expect. Never fear, I'll teach you respect!
+        KARABABA_QUIT                 = 7656, -- What a completely useless shield. It's time for me to quit the field.
     },
     mob =
     {

@@ -24,8 +24,8 @@ zones[xi.zone.CLOISTER_OF_GALES] =
         PARTY_MEMBERS_HAVE_FALLEN        = 7569, -- All party members have fallen in battle. Now leaving the battlefield.
         THE_PARTY_WILL_BE_REMOVED        = 7576, -- If all party members' HP are still zero after # minute[/s], the party will be removed from the battlefield.
         GARUDA_UNLOCKED                  = 7579, -- You are now able to summon [Ifrit/Titan/Leviathan/Garuda/Shiva/Ramuh].
-        ATTACH_SEAL                      = 7761, -- <player> attaches <item> to the protocrystal.
-        POWER_STYMIES                    = 7762, -- An unseen power stymies your efforts to attach <item> to the protocrystal.
+        ATTACH_SEAL                      = 7762, -- <player> attaches <item> to the protocrystal.
+        POWER_STYMIES                    = 7763, -- An unseen power stymies your efforts to attach <item> to the protocrystal.
     },
     mob =
     {
