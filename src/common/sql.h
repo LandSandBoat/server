@@ -185,6 +185,8 @@ public:
 
     std::string GetStringData(size_t col);
 
+    void ForEachRow(std::function<void(void)> const& func);
+
     /// Frees the result of the query.
     void FreeResult();
 
@@ -211,6 +213,9 @@ private:
     uint32 m_PingInterval;
     uint32 m_LastPing;
     bool   m_LatencyWarning;
+
+    uint32 m_LastQueryFieldCount          = 0;
+    uint32 m_LastQueryExtractedFieldCount = 0;
 
     void InitPreparedStatements();
 

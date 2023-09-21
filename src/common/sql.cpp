@@ -130,6 +130,8 @@ int32 SqlConnection::GetTimeout(uint32* out_timeout)
         {
             *out_timeout = (uint32)strtoul(data, nullptr, 10);
             FreeResult();
+            m_LastQueryFieldCount          = 0;
+            m_LastQueryExtractedFieldCount = 0;
             return SQL_SUCCESS;
         }
         FreeResult();
@@ -313,6 +315,8 @@ int32 SqlConnection::QueryStr(const char* query)
         return SQL_ERROR;
     }
 
+    auto previousQuery = self->buf;
+
     FreeResult();
     self->buf.clear();
 
@@ -353,6 +357,37 @@ int32 SqlConnection::QueryStr(const char* query)
         }
     }
 
+    // By now, the query has succeeded, so we can ask questions about it.
+    // We're going to ask for how many fields were in this query, so we can
+    // keep track of how many fields we've extracted through ->GetData(idx) etc.
+    // If we get to this point again and m_LastQueryFieldCount != m_LastQueryExtractedFieldCount
+    // then we've either specified more fields than we need, or we've clobbered
+    // the current query with a new one and we need the warning!
+    // For lots of queries, the field count will be zero, so we don't have to track much apart
+    // from in the ->GetData(idx) family that normally follows SELECTs.
+    if (m_LastQueryFieldCount != m_LastQueryExtractedFieldCount)
+    {
+// clang-format off
+// FORMATTING NOTE: Raw string literals are very literal.
+ShowWarning(fmt::format(R"""(
+Received field count and extracted field count of previous SQL query do not match.
+Specified: {}, Extracted: {}.
+
+You have either not used some received fields, or you've clobbered an in-flight query before all the requested information was extracted.
+
+Previous Query:
+{}
+
+Current Query:
+{}
+)""",
+m_LastQueryFieldCount, m_LastQueryExtractedFieldCount, previousQuery, self->buf).c_str());
+// clang-format on
+    }
+
+    // Populate
+    m_LastQueryFieldCount = mysql_field_count(&self->handle);
+
     return SQL_SUCCESS;
 }
 
@@ -385,6 +420,7 @@ uint32 SqlConnection::NumColumns()
 
 uint64 SqlConnection::NumRows()
 {
+    m_LastQueryExtractedFieldCount = 0;
     if (self && self->result)
     {
         return mysql_num_rows(self->result);
@@ -400,6 +436,7 @@ int32 SqlConnection::NextRow()
         if (self->row)
         {
             self->lengths = mysql_fetch_lengths(self->result);
+            m_LastQueryExtractedFieldCount = 0;
             return SQL_SUCCESS;
         }
         self->lengths = nullptr;
@@ -415,6 +452,7 @@ int32 SqlConnection::NextRow()
 
 int32 SqlConnection::GetData(size_t col, char** out_buf, size_t* out_len)
 {
+    ++m_LastQueryExtractedFieldCount;
     if (self && self->row)
     {
         if (col < NumColumns())
@@ -448,6 +486,7 @@ int32 SqlConnection::GetData(size_t col, char** out_buf, size_t* out_len)
 
 int8* SqlConnection::GetData(size_t col)
 {
+    ++m_LastQueryExtractedFieldCount;
     if (self && self->row)
     {
         if (col < NumColumns())
@@ -462,6 +501,7 @@ int8* SqlConnection::GetData(size_t col)
 
 int32 SqlConnection::GetIntData(size_t col)
 {
+    ++m_LastQueryExtractedFieldCount;
     if (self && self->row)
     {
         if (col < NumColumns())
@@ -476,6 +516,7 @@ int32 SqlConnection::GetIntData(size_t col)
 
 uint32 SqlConnection::GetUIntData(size_t col)
 {
+    ++m_LastQueryExtractedFieldCount;
     if (self && self->row)
     {
         if (col < NumColumns())
@@ -490,6 +531,7 @@ uint32 SqlConnection::GetUIntData(size_t col)
 
 uint64 SqlConnection::GetUInt64Data(size_t col)
 {
+    ++m_LastQueryExtractedFieldCount;
     if (self && self->row)
     {
         if (col < NumColumns())
@@ -504,6 +546,7 @@ uint64 SqlConnection::GetUInt64Data(size_t col)
 
 float SqlConnection::GetFloatData(size_t col)
 {
+    ++m_LastQueryExtractedFieldCount;
     if (self && self->row)
     {
         if (col < NumColumns())
@@ -518,6 +561,7 @@ float SqlConnection::GetFloatData(size_t col)
 
 std::string SqlConnection::GetStringData(size_t col)
 {
+    ++m_LastQueryExtractedFieldCount;
     if (self && self->row)
     {
         if (col < NumColumns())
@@ -528,6 +572,17 @@ std::string SqlConnection::GetStringData(size_t col)
     ShowCritical("Query: %s", self->buf);
     ShowCritical("GetStringData: SQL_ERROR: %s (%u)", mysql_error(&self->handle), mysql_errno(&self->handle));
     return "";
+}
+
+void SqlConnection::ForEachRow(std::function<void(void)> const& func)
+{
+    if (NumRows())
+    {
+        while (NextRow() == SQL_SUCCESS)
+        {
+            func();
+        }
+    }
 }
 
 void SqlConnection::FreeResult()
