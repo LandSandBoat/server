@@ -220,3 +220,23 @@ require('scripts/zones/Bastok_Markets/IDs') -- FAIL
 -- Bad:
 -------------------------------------
 ---------------------------------
+
+this and this -- PASS
+this or this -- PASS
+this  and -- FAIL
+this and  this -- FAIL
+this  or -- FAIL
+this or  this -- FAIL
+
+local testVar = this
+    and this -- FAIL
+    or this and -- FAIL
+    this not -- FAIL
+    that
+
+x  + y -- FAIL
+x +  y -- FAIL
+x ==   y -- FAIL
+x  ~= y -- FAIL
+
+x = { x  + y } -- PASS

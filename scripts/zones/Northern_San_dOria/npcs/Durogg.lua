@@ -30,8 +30,8 @@ entity.onTrigger = function(player, npc)
     -- Determine if any cutscenes are available for the player.
     local gil = player:getGil()
     if
-        addonScenarios    == 0xFFFFFFFE and
-        seekersOfAdoulin  == 0xFFFFFFFE
+        addonScenarios == 0xFFFFFFFE and
+        seekersOfAdoulin == 0xFFFFFFFE
     then -- Player has no cutscenes available to be viewed.
         gil = 0 -- Setting gil to a value less than 10(cost) will trigger the appropriate response from this npc.
     end

@@ -2,8 +2,8 @@
 -- Downward Helix
 -----------------------------------
 -- !addquest 7 33
--- Erlene                : !pos 376.936 -39.999 17.914 175
--- Indescript Markings   : !pos 322 24 113 98
+-- Erlene              : !pos 376.936 -39.999 17.914 175
+-- Indescript Markings : !pos 322 24 113 98
 -----------------------------------
 
 local quest = Quest:new(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.DOWNWARD_HELIX)
@@ -18,7 +18,7 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == QUEST_AVAILABLE and
-                xi.quest.getVar(player, xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.ON_SABBATICAL, 'Timer') <= VanadielUniqueDay()  and
+                xi.quest.getVar(player, xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.ON_SABBATICAL, 'Timer') <= VanadielUniqueDay() and
                 player:getMainJob() == xi.job.SCH and
                 player:getMainLvl() >= xi.settings.main.AF2_QUEST_LEVEL
         end,

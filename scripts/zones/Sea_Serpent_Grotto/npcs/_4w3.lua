@@ -20,7 +20,7 @@ entity.onTrigger = function(player, npc)
     local zPos = player:getZPos()
     local mythrilDoorCheck = player:getCharVar('SSG_MythrilDoor')
 
-    if xPos >= 40  and zPos >= 15 then
+    if xPos >= 40 and zPos >= 15 then
         if mythrilDoorCheck == 0 then -- Door has never been checked
             player:messageSpecial(ID.text.FIRST_CHECK)
             player:setCharVar('SSG_MythrilDoor', 1)
