@@ -43,7 +43,7 @@ commandObj.onTrigger = function(player, light, amount, target)
 
     local selectedLight = tostring(light)
 
-    if lightType[selectedLight] == nil  or selectedLight == nil then
+    if lightType[selectedLight] == nil or selectedLight == nil then
         error(player, 'Invalid light type.\nValid light types: pearl, azure, ruby, amber, gold, silver, ebon')
         return
     end

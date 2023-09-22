@@ -146,11 +146,11 @@ entity.onTrigger = function(player, npc)
     -- Determine if any cutscenes are available for the player.
     local gil = player:getGil()
     if
-        bastokMissions    == 0xFFFFFFFE and
-        bastokQuests      == 0xFFFFFFFE and
-        otherQuests       == 0xFFFFFFFE and
+        bastokMissions == 0xFFFFFFFE and
+        bastokQuests == 0xFFFFFFFE and
+        otherQuests == 0xFFFFFFFE and
         promathiaMissions == 0xFFFFFFFE and
-        addonScenarios    == 0xFFFFFFFE
+        addonScenarios == 0xFFFFFFFE
     then -- Player has no cutscenes available to be viewed.
         gil = 0 -- Setting gil to a value less than 10(cost) will trigger the appropriate response from this npc.
     end

@@ -722,8 +722,8 @@ local getSecondInitial = function(player, option)
 
     for _, member in pairs(party) do
         if
-            member             ~= nil and              -- Player exists
-            player:getName()   ~= member:getName() and -- Different player
+            member ~= nil and                          -- Player exists
+            player:getName() ~= member:getName() and   -- Different player
             player:getZoneID() == member:getZoneID()   -- Same zone
         then
             local playerName   = member:getName()
@@ -797,9 +797,9 @@ xi.events.eggHunt.onTrigger = function(player, npc)
 
         for _, member in pairs(party) do
             if
-                member             ~= nil and                -- Player exists
-                player:getName()   ~= member:getName() and -- Different player
-                player:getZoneID() == member:getZoneID()   -- Same zone
+                member ~= nil and                        -- Player exists
+                player:getName() ~= member:getName() and -- Different player
+                player:getZoneID() == member:getZoneID() -- Same zone
             then
                 local initial = string.sub(member:getName(), 1, 1)
                 local letter = string.byte(string.lower(initial)) - 97

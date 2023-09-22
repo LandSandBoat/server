@@ -152,7 +152,7 @@ xi.chocoboRaising.getPlayerRidingSpeedAndTime = function(player)
     local endRank = numberToRank(chocoState.endurance)
 
     local outSpeed = utils.clamp(baseSpeed + (strRank * xi.chocoboRaising.ridingSpeedPerRank), 0, xi.chocoboRaising.ridingSpeedCap)
-    local outTime  = utils.clamp(baseTime  + (endRank * xi.chocoboRaising.ridingTimePerRank), 0, xi.chocoboRaising.ridingTimeCap)
+    local outTime  = utils.clamp(baseTime + (endRank * xi.chocoboRaising.ridingTimePerRank), 0, xi.chocoboRaising.ridingTimeCap)
 
     return outSpeed, outTime
 end
