@@ -4789,9 +4789,22 @@ void SmallPacket0x071(map_session_data_t* const PSession, CCharEntity* const PCh
                             sql->AffectedRows())
                         {
                             ShowDebug("%s has removed %s from party", PChar->GetName(), data[0x0C]);
-                            uint8 removeData[4]{};
-                            ref<uint32>(removeData, 0) = PChar->PParty->GetPartyID();
-                            message::send(MSG_PT_RELOAD, removeData, sizeof removeData, nullptr);
+
+                            uint8 reloadData[4]{};
+                            if (PChar->PParty && PChar->PParty->m_PAlliance)
+                            {
+                                ref<uint32>(reloadData, 0) = PChar->PParty->m_PAlliance->m_AllianceID;
+                                message::send(MSG_ALLIANCE_RELOAD, reloadData, sizeof reloadData, nullptr);
+                            }
+                            else // No alliance, notify party.
+                            {
+                                ref<uint32>(reloadData, 0) = PChar->PParty->GetPartyID();
+                                message::send(MSG_PT_RELOAD, reloadData, sizeof reloadData, nullptr);
+                            }
+
+                            // Notify the player they were just kicked -- they are no longer in the DB and party/alliance reloads won't notify them.
+                            ref<uint32>(reloadData, 0) = id;
+                            message::send(MSG_PLAYER_KICK, reloadData, sizeof reloadData, nullptr);
                         }
                     }
                 }
@@ -4861,25 +4874,33 @@ void SmallPacket0x071(map_session_data_t* const PSession, CCharEntity* const PCh
                 }
                 if (!PVictim && PChar->PParty->m_PAlliance->getMainParty() == PChar->PParty)
                 {
-                    char victimName[31]{};
+                    char   victimName[31]{};
+                    uint32 allianceID = PChar->PParty->m_PAlliance->m_AllianceID;
+
                     sql->EscapeStringLen(victimName, (const char*)data[0x0C], std::min<size_t>(strlen((const char*)data[0x0C]), 15));
                     int32 ret = sql->Query("SELECT charid FROM chars WHERE charname = '%s';", victimName);
                     if (ret != SQL_ERROR && sql->NumRows() == 1 && sql->NextRow() == SQL_SUCCESS)
                     {
-                        uint32 id = sql->GetUIntData(0);
-                        ret       = sql->Query(
-                                  "SELECT partyid FROM accounts_parties WHERE charid = %u AND allianceid = %u AND partyflag & %d AND partyflag & %d", id,
-                                  PChar->PParty->m_PAlliance->m_AllianceID, PARTY_LEADER, PARTY_SECOND | PARTY_THIRD);
+                        uint32 charid = sql->GetUIntData(0);
+                        ret           = sql->Query(
+                                      "SELECT partyid FROM accounts_parties WHERE charid = %u AND allianceid = %u AND partyflag & %d",
+                                      charid, PChar->PParty->m_PAlliance->m_AllianceID, PARTY_LEADER | PARTY_SECOND | PARTY_THIRD);
                         if (ret != SQL_ERROR && sql->NumRows() == 1 && sql->NextRow() == SQL_SUCCESS)
                         {
+                            uint32 partyid = sql->GetUIntData(0);
                             if (sql->Query("UPDATE accounts_parties SET allianceid = 0, partyflag = partyflag & ~%d WHERE partyid = %u;",
-                                           PARTY_SECOND | PARTY_THIRD, id) == SQL_SUCCESS &&
+                                           PARTY_SECOND | PARTY_THIRD, partyid) == SQL_SUCCESS &&
                                 sql->AffectedRows())
                             {
                                 ShowDebug("%s has removed %s party from alliance", PChar->GetName(), data[0x0C]);
+                                // notify party they were removed
                                 uint8 removeData[4]{};
-                                ref<uint32>(removeData, 0) = PChar->PParty->GetPartyID();
+                                ref<uint32>(removeData, 0) = partyid;
                                 message::send(MSG_PT_RELOAD, removeData, sizeof removeData, nullptr);
+
+                                // notify alliance a party was removed
+                                ref<uint32>(removeData, 0) = allianceID;
+                                message::send(MSG_ALLIANCE_RELOAD, removeData, sizeof removeData, nullptr);
                             }
                         }
                     }
@@ -5086,10 +5107,9 @@ void SmallPacket0x077(map_session_data_t* const PSession, CCharEntity* const PCh
                 ShowDebug("(Alliance)Changing leader to %s", data[0x04]);
                 PChar->PParty->m_PAlliance->assignAllianceLeader((const char*)data[0x04]);
 
-                // MSG_PT_RELOAD also reloads all the alliances parties if available
-                uint8 leaderData[4]{};
-                ref<uint32>(leaderData, 0) = PChar->PParty->GetPartyID();
-                message::send(MSG_PT_RELOAD, leaderData, sizeof leaderData, nullptr);
+                uint8 allianceData[4]{};
+                ref<uint32>(allianceData, 0) = PChar->PParty->m_PAlliance->m_AllianceID;
+                message::send(MSG_ALLIANCE_RELOAD, allianceData, sizeof allianceData, nullptr);
             }
         }
         break;
@@ -5745,9 +5765,18 @@ void SmallPacket0x0B5(map_session_data_t* const PSession, CCharEntity* const PCh
                     if (PChar->PParty != nullptr)
                     {
                         int8 packetData[8]{};
-                        ref<uint32>(packetData, 0) = PChar->PParty->GetPartyID();
-                        ref<uint32>(packetData, 4) = PChar->id;
-                        message::send(MSG_CHAT_PARTY, packetData, sizeof packetData, new CChatMessagePacket(PChar, MESSAGE_PARTY, (const char*)data[6]));
+                        if(PChar->PParty->m_PAlliance)
+                        {
+                            ref<uint32>(packetData, 0) = PChar->PParty->m_PAlliance->m_AllianceID;
+                            ref<uint32>(packetData, 4) = PChar->id;
+                            message::send(MSG_CHAT_ALLIANCE, packetData, sizeof packetData, new CChatMessagePacket(PChar, MESSAGE_PARTY, (const char*)data[6]));
+                        }
+                        else
+                        {
+                            ref<uint32>(packetData, 0) = PChar->PParty->GetPartyID();
+                            ref<uint32>(packetData, 4) = PChar->id;
+                            message::send(MSG_CHAT_PARTY, packetData, sizeof packetData, new CChatMessagePacket(PChar, MESSAGE_PARTY, (const char*)data[6]));
+                        }
 
                         if (settings::get<bool>("map.AUDIT_CHAT") && settings::get<uint8>("map.AUDIT_PARTY"))
                         {

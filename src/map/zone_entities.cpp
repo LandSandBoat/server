@@ -1464,7 +1464,7 @@ void CZoneEntities::ZoneServer(time_point tick)
 
             for (auto PMobIt : m_mobList)
             {
-                CMobEntity* PCurrentMob = (CMobEntity*)PMobIt.second;
+                CMobEntity* PCurrentMob = static_cast<CMobEntity*>(PMobIt.second);
                 PCurrentMob->PEnmityContainer->Clear(PMob->id);
             }
 
@@ -1475,13 +1475,16 @@ void CZoneEntities::ZoneServer(time_point tick)
 
             for (EntityList_t::const_iterator it = m_charList.begin(); it != m_charList.end(); ++it)
             {
-                CCharEntity* PChar = (CCharEntity*)it->second;
+                CCharEntity* PChar = static_cast<CCharEntity*>(it->second);
 
-                // If a mob is to be deleted from, then we need to ensure there's no reference
-                // to it on any players.
-                if (PChar->PClaimedMob != nullptr && PChar->PClaimedMob->id == PMob->id)
+                if (PChar->PClaimedMob == PMob)
                 {
                     PChar->PClaimedMob = nullptr;
+                }
+
+                if (PChar->currentEvent && PChar->currentEvent->targetEntity == PMob)
+                {
+                    PChar->currentEvent->targetEntity = nullptr;
                 }
 
                 if (distance(PChar->loc.p, PMob->loc.p) < 50)
