@@ -6,7 +6,7 @@ require("modules/module_utils")
 require("scripts/globals/magic")
 require("scripts/globals/mobskills")
 -----------------------------------
-local m = Module:new("asb_onMobWeaponSkill")
+local m = Module:new("mobskills_onMobWeaponSkill")
 
 m:addOverride("xi.globals.mobskills.10000_needles.onMobWeaponSkill", function(target, mob, skill)
     local needles = 10000 / skill:getTotalTargets()
@@ -137,11 +137,9 @@ m:addOverride("xi.globals.mobskills.acid_breath.onMobWeaponSkill", function(targ
 end)
 
 m:addOverride("xi.globals.mobskills.acid_mist.onMobWeaponSkill", function(target, mob, skill)
-    local power = 0
-    if mob:getName() == "Nightmare Leech" then
+    local power = 50
+    if skill:getID() == 1872 then -- Nightmare Leech - Reduces to 1 attack
         power = 999
-    else
-        power = 50
     end
 
     xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.ATTACK_DOWN, power, 0, math.random(60, 120))
@@ -793,6 +791,16 @@ m:addOverride("xi.globals.mobskills.astral_flow.onMobWeaponSkill", function(targ
     return xi.effect.ASTRAL_FLOW
 end)
 
+local function petInactive(pet)
+    return
+        pet:hasStatusEffect(xi.effect.LULLABY) or
+        pet:hasStatusEffect(xi.effect.STUN) or
+        pet:hasStatusEffect(xi.effect.PETRIFICATION) or
+        pet:hasStatusEffect(xi.effect.SLEEP_II) or
+        pet:hasStatusEffect(xi.effect.SLEEP_I) or
+        pet:hasStatusEffect(xi.effect.TERROR)
+end
+
 m:addOverride("xi.globals.mobskills.astral_flow_pet.onMobWeaponSkill", function(target, mob, skill)
     local pet = mob:getPet()
 
@@ -991,6 +999,12 @@ end)
 
 m:addOverride("xi.globals.mobskills.awful_eye.onMobWeaponSkill", function(target, mob, skill)
     skill:setMsg(xi.mobskills.mobGazeMove(mob, target, xi.effect.STR_DOWN, 10, 10, 180))
+
+    if skill:getID() == 1862 then -- Nightmare Bugard - Adds PETRIFICATION
+        skill:setMsg(xi.mobskills.mobGazeMove(mob, target, xi.effect.PETRIFICATION, 1, 0, 60))
+
+        return xi.effect.PETRIFICATION
+    end
 
     return xi.effect.STR_DOWN
 end)
@@ -1277,7 +1291,7 @@ m:addOverride("xi.globals.mobskills.benediction.onMobWeaponSkill", function(targ
                         xi.effect.MAGIC_DEF_DOWN, xi.effect.MAX_TP_DOWN, xi.effect.SILENCE }
 
     for _, effect in ipairs(removables) do
-        if (target:hasStatusEffect(effect)) then
+        if target:hasStatusEffect(effect) then
             target:delStatusEffect(effect)
         end
     end
@@ -1286,6 +1300,7 @@ m:addOverride("xi.globals.mobskills.benediction.onMobWeaponSkill", function(targ
     if mob:hasStatusEffect(xi.effect.HYSTERIA) then
         maxHeal = 0
     end
+
     target:addHP(maxHeal)
     target:wakeUp()
     skill:setMsg(xi.msg.basic.SELF_HEAL)
@@ -2172,10 +2187,10 @@ m:addOverride("xi.globals.mobskills.call_beast.onMobWeaponSkill", function(targe
     skill:setMsg(xi.msg.basic.NONE)
 
     mob:entityAnimationPacket("casm")
-    mob:timer(3000, function(m)
-        if m:isAlive() then
-            m:entityAnimationPacket("shsm")
-            m:spawnPet()
+    mob:timer(3000, function(mobArg)
+        if mobArg:isAlive() then
+            mobArg:entityAnimationPacket("shsm")
+            mobArg:spawnPet()
         end
     end)
 end)
@@ -2629,6 +2644,7 @@ m:addOverride("xi.globals.mobskills.circle_blade.onMobWeaponSkill", function(tar
 end)
 
 m:addOverride("xi.globals.mobskills.circle_of_flames.onMobWeaponSkill", function(target, mob, skill)
+    local numberOfBombs = 7 - mob:getAnimationSub()
     local bombNum = 0.5 -- Base damage
 
     if mob:getAnimationSub() == 4 then -- 3 bombs
@@ -2638,10 +2654,12 @@ m:addOverride("xi.globals.mobskills.circle_of_flames.onMobWeaponSkill", function
     end
 
     local info = xi.mobskills.mobMagicalMove(mob, target, skill, bombNum, xi.magic.ele.FIRE, 1, xi.mobskills.magicalTpBonus.NO_EFFECT, 0, 0, 1, 1.1, 1.2)
-    local dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.FIRE, xi.mobskills.shadowBehavior.WIPE_SHADOWS)
-    target:takeDamage(dmg, mob, xi.attackType.MAGICAL, xi.damageType.FIRE)
+    local dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.FIRE, numberOfBombs)
 
-    xi.mobskills.mobPhysicalStatusEffectMove(mob, target, skill, xi.effect.WEIGHT, 20, 0, 120)
+    if not skill:hasMissMsg() then
+        target:takeDamage(dmg, mob, xi.attackType.MAGICAL, xi.damageType.FIRE)
+        xi.mobskills.mobPhysicalStatusEffectMove(mob, target, skill, xi.effect.WEIGHT, 20, 0, 120)
+    end
 
     return dmg
 end)
@@ -2841,6 +2859,175 @@ m:addOverride("xi.globals.mobskills.condemnation.onMobWeaponSkill", function(tar
 end)
 
 m:addOverride("xi.globals.mobskills.contagion_transfer.onMobWeaponSkill", function(target, mob, skill)
+    local badEffects =
+    {
+        xi.effect.SLEEP_I,
+        xi.effect.POISON,
+        xi.effect.PARALYSIS,
+        xi.effect.BLINDNESS,
+        xi.effect.SILENCE,
+        xi.effect.PETRIFICATION,
+        xi.effect.DISEASE,
+        xi.effect.CURSE_I,
+        xi.effect.STUN,
+        xi.effect.BIND,
+        xi.effect.WEIGHT,
+        xi.effect.SLOW,
+        xi.effect.SLEEP_II,
+        xi.effect.CURSE_II,
+        xi.effect.PLAGUE,
+        xi.effect.BURN,
+        xi.effect.FROST,
+        xi.effect.CHOKE,
+        xi.effect.RASP,
+        xi.effect.SHOCK,
+        xi.effect.DROWN,
+        xi.effect.DIA,
+        xi.effect.BIO,
+        xi.effect.STR_DOWN,
+        xi.effect.DEX_DOWN,
+        xi.effect.VIT_DOWN,
+        xi.effect.AGI_DOWN,
+        xi.effect.INT_DOWN,
+        xi.effect.MND_DOWN,
+        xi.effect.CHR_DOWN,
+        xi.effect.MAX_HP_DOWN,
+        xi.effect.MAX_MP_DOWN,
+        xi.effect.ACCURACY_DOWN,
+        xi.effect.ATTACK_DOWN,
+        xi.effect.EVASION_DOWN,
+        xi.effect.DEFENSE_DOWN,
+        xi.effect.FLASH,
+        xi.effect.DREAD_SPIKES,
+        xi.effect.MAGIC_ACC_DOWN,
+        xi.effect.MAGIC_ATK_DOWN,
+        xi.effect.REQUIEM,
+        xi.effect.LULLABY,
+        xi.effect.ELEGY,
+        xi.effect.THRENODY,
+    }
+    local goodEffects =
+    {
+        xi.effect.HASTE,
+        xi.effect.BLAZE_SPIKES,
+        xi.effect.ICE_SPIKES,
+        xi.effect.BLINK,
+        xi.effect.STONESKIN,
+        xi.effect.SHOCK_SPIKES,
+        xi.effect.AQUAVEIL,
+        xi.effect.PROTECT,
+        xi.effect.SHELL,
+        xi.effect.REGEN,
+        xi.effect.REFRESH,
+        xi.effect.BOOST,
+        xi.effect.BERSERK,
+        xi.effect.DEFENDER,
+        xi.effect.AGGRESSOR,
+        xi.effect.FOCUS,
+        xi.effect.DODGE,
+        xi.effect.COUNTERSTANCE,
+        xi.effect.SENTINEL,
+        xi.effect.SOULEATER,
+        xi.effect.LAST_RESORT,
+        xi.effect.COPY_IMAGE,
+        xi.effect.THIRD_EYE,
+        xi.effect.WARCRY,
+        xi.effect.SHARPSHOT,
+        xi.effect.BARRAGE,
+        xi.effect.HOLY_CIRCLE,
+        xi.effect.ARCANE_CIRCLE,
+        xi.effect.DIVINE_SEAL,
+        xi.effect.ELEMENTAL_SEAL,
+        xi.effect.STR_BOOST,
+        xi.effect.DEX_BOOST,
+        xi.effect.VIT_BOOST,
+        xi.effect.AGI_BOOST,
+        xi.effect.INT_BOOST,
+        xi.effect.MND_BOOST,
+        xi.effect.CHR_BOOST,
+        xi.effect.MAX_HP_BOOST,
+        xi.effect.MAX_MP_BOOST,
+        xi.effect.ACCURACY_BOOST,
+        xi.effect.ENFIRE,
+        xi.effect.ENBLIZZARD,
+        xi.effect.ENAERO,
+        xi.effect.ENSTONE,
+        xi.effect.ENTHUNDER,
+        xi.effect.ENWATER,
+        xi.effect.ENFIRE,
+        xi.effect.ENBLIZZARD_II,
+        xi.effect.ENAERO_II,
+        xi.effect.ENSTONE_II,
+        xi.effect.ENTHUNDER_II,
+        xi.effect.ENWATER_II,
+        xi.effect.BARFIRE,
+        xi.effect.BARBLIZZARD,
+        xi.effect.BARAERO,
+        xi.effect.BARSTONE,
+        xi.effect.BARTHUNDER,
+        xi.effect.BARWATER,
+        xi.effect.BARSLEEP,
+        xi.effect.BARPOISON,
+        xi.effect.BARPARALYZE,
+        xi.effect.BARBLIND,
+        xi.effect.BARSILENCE,
+        xi.effect.BARPETRIFY,
+        xi.effect.BARVIRUS,
+        xi.effect.UNLIMITED_SHOT,
+        xi.effect.PHALANX,
+        xi.effect.WARDING_CIRCLE,
+        xi.effect.ANCIENT_CIRCLE,
+        xi.effect.STR_BOOST_II,
+        xi.effect.DEX_BOOST_II,
+        xi.effect.VIT_BOOST_II,
+        xi.effect.AGI_BOOST_II,
+        xi.effect.INT_BOOST_II,
+        xi.effect.MND_BOOST_II,
+        xi.effect.CHR_BOOST_II,
+        xi.effect.SHINING_RUBY,
+        xi.effect.CHAIN_AFFINITY,
+        xi.effect.BURST_AFFINITY,
+        xi.effect.MAGIC_ATK_BOOST,
+        xi.effect.MAGIC_DEF_BOOST,
+        xi.effect.PAEON,
+        xi.effect.BALLAD,
+        xi.effect.MINNE,
+        xi.effect.MINUET,
+        xi.effect.MADRIGAL,
+        xi.effect.PRELUDE,
+        xi.effect.MAMBO,
+        xi.effect.AUBADE,
+        xi.effect.PASTORAL,
+        xi.effect.HUM,
+        xi.effect.FANTASIA,
+        xi.effect.OPERETTA,
+        xi.effect.CAPRICCIO,
+        xi.effect.SERENADE,
+        xi.effect.ROUND,
+        xi.effect.GAVOTTE,
+        xi.effect.FUGUE,
+        xi.effect.RHAPSODY,
+        xi.effect.ARIA,
+        xi.effect.MARCH,
+        xi.effect.ETUDE,
+        xi.effect.CAROL,
+        xi.effect.HYMNUS,
+        xi.effect.MAZURKA,
+        xi.effect.HASSO,
+        xi.effect.SEIGAN,
+        xi.effect.DRAIN_SAMBA,
+        xi.effect.ASPIR_SAMBA,
+        xi.effect.HASTE_SAMBA,
+        xi.effect.VELOCITY_SHOT,
+        xi.effect.RETALIATION,
+        xi.effect.FOOTWORK,
+        xi.effect.SEKKANOKI,
+        xi.effect.PIANISSIMO,
+        xi.effect.COMPOSURE,
+        xi.effect.YONIN,
+        xi.effect.INNIN,
+    }
+
     local effects = target:getStatusEffects()
     local count = 0
     local power = math.ceil(mob:getMainLvl() / 5)
@@ -2899,6 +3086,51 @@ m:addOverride("xi.globals.mobskills.contagion_transfer.onMobWeaponSkill", functi
 end)
 
 m:addOverride("xi.globals.mobskills.contamination.onMobWeaponSkill", function(target, mob, skill)
+    local badEffects =
+    {
+        xi.effect.SLEEP_I,
+        xi.effect.POISON,
+        xi.effect.PARALYSIS,
+        xi.effect.BLINDNESS,
+        xi.effect.SILENCE,
+        xi.effect.PETRIFICATION,
+        xi.effect.CURSE_I,
+        xi.effect.STUN,
+        xi.effect.BIND,
+        xi.effect.WEIGHT,
+        xi.effect.SLOW,
+        xi.effect.SLEEP_II,
+        xi.effect.PLAGUE,
+        xi.effect.BURN,
+        xi.effect.FROST,
+        xi.effect.CHOKE,
+        xi.effect.RASP,
+        xi.effect.SHOCK,
+        xi.effect.DROWN,
+        xi.effect.DIA,
+        xi.effect.BIO,
+        xi.effect.STR_DOWN,
+        xi.effect.DEX_DOWN,
+        xi.effect.VIT_DOWN,
+        xi.effect.AGI_DOWN,
+        xi.effect.INT_DOWN,
+        xi.effect.MND_DOWN,
+        xi.effect.CHR_DOWN,
+        xi.effect.MAX_HP_DOWN,
+        xi.effect.MAX_MP_DOWN,
+        xi.effect.ACCURACY_DOWN,
+        xi.effect.ATTACK_DOWN,
+        xi.effect.EVASION_DOWN,
+        xi.effect.DEFENSE_DOWN,
+        xi.effect.FLASH,
+        xi.effect.DREAD_SPIKES,
+        xi.effect.MAGIC_ACC_DOWN,
+        xi.effect.MAGIC_ATK_DOWN,
+        xi.effect.REQUIEM,
+        xi.effect.LULLABY,
+        xi.effect.ELEGY,
+        xi.effect.THRENODY,
+    }
     local effects = mob:getStatusEffects()
     local count = 0
     local power = math.ceil(mob:getMainLvl() / 5)
@@ -5332,11 +5564,12 @@ m:addOverride("xi.globals.mobskills.fire_maneuver.onMobWeaponSkill", function(ta
 
     -- Fantoccini (ENM: Pulling the Strings)
     if mob:getPool() == 1296 then
-        local pet = GetMobByID(mob:getID()+1)
+        local pet = GetMobByID(mob:getID() + 1)
         pet:addStatusEffect(typeEffect, power, 0, duration)
     else
         mob:getPet():addStatusEffect(typeEffect, power, 0, duration)
     end
+
     return 1
 end)
 
@@ -5761,8 +5994,9 @@ m:addOverride("xi.globals.mobskills.frenzy_pollen.onMobWeaponSkill", function(ta
 end)
 
 m:addOverride("xi.globals.mobskills.frightful_roar.onMobWeaponSkill", function(target, mob, skill)
+    -- Player version is 10%.  Mob version is 30% https://www.bg-wiki.com/ffxi/Category:Taurus
     local typeEffect = xi.effect.DEFENSE_DOWN
-    skill:setMsg(xi.mobskills.mobStatusEffectMove(mob, target, typeEffect, 10, 0, 180))
+    skill:setMsg(xi.mobskills.mobStatusEffectMove(mob, target, typeEffect, 30, 0, 180))
     return typeEffect
 end)
 
@@ -5983,14 +6217,22 @@ end)
 
 m:addOverride("xi.globals.mobskills.gastric_bomb.onMobWeaponSkill", function(target, mob, skill)
     local duration = 180
+    local power = 50
+
+    if skill:getID() == 1886 then -- Nightmare Worm - 90%
+        power = 90
+    end
 
     if mob:getMainLvl() < 10 then
         duration = duration / 2
     end
 
-    skill:setMsg(xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.ATTACK_DOWN, 50, 0, duration))
+    local info = xi.mobskills.mobMagicalMove(mob, target, skill, mob:getMobWeaponDmg(xi.slot.MAIN), xi.magic.ele.WATER, 1, xi.mobskills.magicalTpBonus.NO_EFFECT, 0, 0, 2, 2.5, 3)
+    local dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.WATER, xi.mobskills.shadowBehavior.IGNORE_SHADOWS)
+    target:takeDamage(dmg, mob, xi.attackType.MAGICAL, xi.damageType.WATER)
+    xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.ATTACK_DOWN, power, 0, duration)
 
-    return xi.effect.ATTACK_DOWN
+    return dmg
 end)
 
 m:addOverride("xi.globals.mobskills.gas_shell.onMobWeaponSkill", function(target, mob, skill)
@@ -7352,11 +7594,12 @@ m:addOverride("xi.globals.mobskills.ice_maneuver.onMobWeaponSkill", function(tar
 
     -- Fantoccini (ENM: Pulling the Strings)
     if mob:getPool() == 1296 then
-        local pet = GetMobByID(mob:getID()+1)
+        local pet = GetMobByID(mob:getID() + 1)
         pet:addStatusEffect(typeEffect, power, 0, duration)
     else
         mob:getPet():addStatusEffect(typeEffect, power, 0, duration)
     end
+
     return 1
 end)
 
@@ -7647,11 +7890,17 @@ m:addOverride("xi.globals.mobskills.inspirit.onMobWeaponSkill", function(target,
 end)
 
 m:addOverride("xi.globals.mobskills.intimidate.onMobWeaponSkill", function(target, mob, skill)
-    if target:hasStatusEffect(xi.effect.HASTE) then
+    local power = 2500
+    if skill:getID() == 1864 then -- Nightmare Makara - 12s Haste recast w/o slow.  20s w/.  Overwrites Haste
+        power = 6600
+    end
+
+    if target:hasStatusEffect(xi.effect.HASTE) and skill:getID() ~= 1864 then
+        -- Does this really belong here?  Shouldnt the effect power handle this?
         skill:setMsg(xi.msg.basic.SKILL_NO_EFFECT)
         return
     else
-        skill:setMsg(xi.mobskills.mobGazeMove(mob, target, xi.effect.SLOW, 2500, 0, 120))
+        skill:setMsg(xi.mobskills.mobGazeMove(mob, target, xi.effect.SLOW, power, 0, 120))
     end
 
     return xi.effect.SLOW
@@ -8015,7 +8264,6 @@ m:addOverride("xi.globals.mobskills.leafstorm.onMobWeaponSkill", function(target
         else
             skill:setMsg(xi.msg.basic.DISAPPEAR_NUM)
         end
-
     end
 
     local ftp100 = 1
@@ -8027,6 +8275,7 @@ m:addOverride("xi.globals.mobskills.leafstorm.onMobWeaponSkill", function(target
         ftp200 = 5
         ftp300 = 5
     end
+
     local info = xi.mobskills.mobMagicalMove(mob, target, skill, mob:getMobWeaponDmg(xi.slot.MAIN), xi.magic.ele.WIND, 1, xi.mobskills.magicalTpBonus.MAB_BONUS, 0, 0, ftp100, ftp200, ftp300)
     local dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.WIND, xi.mobskills.shadowBehavior.WIPE_SHADOWS)
     target:takeDamage(dmg, mob, xi.attackType.MAGICAL, xi.damageType.WIND)
@@ -8532,6 +8781,7 @@ m:addOverride("xi.globals.mobskills.marionette_dice_2hr.onMobWeaponSkill", funct
             mobArg:messageText(mobArg, ID.text.NOT_YOUR_LUCKY_DAY)
         end)
     end
+
     skill:setMsg(xi.msg.basic.NONE)
     return 0
 end)
@@ -8978,10 +9228,23 @@ m:addOverride("xi.globals.mobskills.mind_purge.onMobWeaponSkill", function(targe
 end)
 
 m:addOverride("xi.globals.mobskills.mind_wall.onMobWeaponSkill", function(target, mob, skill)
+    local magicType =
+    {
+        xi.mod.FIRE_ABSORB,
+        xi.mod.ICE_ABSORB,
+        xi.mod.WIND_ABSORB,
+        xi.mod.EARTH_ABSORB,
+        xi.mod.LTNG_ABSORB,
+        xi.mod.WATER_ABSORB,
+        xi.mod.LIGHT_ABSORB,
+        xi.mod.DARK_ABSORB,
+    }
+
     -- Temporary fix until MAGIC_ABSORB mod works
     for i = 1, 8 do
         mob:setMod(magicType[i], 1000)
     end
+
     mob:timer(1000 * math.random(28, 32), function(mobArg)
         for i = 1, 8 do
             mobArg:delMod(magicType[i], 1000)
@@ -9376,6 +9639,7 @@ m:addOverride("xi.globals.mobskills.negative_whirl.onMobWeaponSkill", function(t
     if mob:isMobType(xi.mobskills.mobType.NOTORIOUS) then
         damage = mob:getMainLvl() * 3
     end
+
     local info = xi.mobskills.mobMagicalMove(mob, target, skill, damage, xi.magic.ele.WIND, 1, xi.mobskills.magicalTpBonus.NO_EFFECT)
     local dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.WIND, xi.mobskills.shadowBehavior.WIPE_SHADOWS)
     target:takeDamage(dmg, mob, xi.attackType.MAGICAL, xi.damageType.WIND)
@@ -9442,6 +9706,7 @@ m:addOverride("xi.globals.mobskills.nightmare.onMobWeaponSkill", function(target
         duration = 30
         subPower = 14       -- Unresisted, 10 ticks at 14 hp/tick = 140hp per target
     end
+
     skill:setMsg(xi.mobskills.mobStatusEffectMove(mob, target, typeEffect, power, tick, duration, subEffect, subPower))
 
     return typeEffect
@@ -10226,7 +10491,7 @@ m:addOverride("xi.globals.mobskills.pile_pitch.onMobWeaponSkill", function(targe
     local currentHP = target:getHP()
     local damage = currentHP * .90
     local typeEffect = xi.effect.BIND
-    local dmg = xi.mobskills.mobFinalAdjustments(damage,mob,skill,target, xi.attackType.MAGICAL, xi.damageType.NONE,xi.mobskills.shadowBehavior.IGNORE_SHADOWS)
+    local dmg = xi.mobskills.mobFinalAdjustments(damage, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.NONE, xi.mobskills.shadowBehavior.IGNORE_SHADOWS)
     target:takeDamage(dmg, mob, xi.attackType.MAGICAL, xi.damageType.NONE)
     xi.mobskills.mobStatusEffectMove(mob, target, typeEffect, 1, 0, 30)
     mob:resetEnmity(target)
@@ -10259,7 +10524,6 @@ m:addOverride("xi.globals.mobskills.pinecone_bomb.onMobWeaponSkill", function(ta
         if not skill:hasMissMsg() then
             target:takeDamage(dmg, mob, xi.attackType.PHYSICAL, xi.damageType.PIERCING)
         end
-
     end
 
     if mob:getPool() ~= 671 and mob:getPool() ~= 1346 then
@@ -10271,11 +10535,14 @@ end)
 
 m:addOverride("xi.globals.mobskills.pit_ambush.onMobWeaponSkill", function(target, mob, skill)
     local numhits = 1
-    local accmod = 1
-    local dmgmod = 1
+    local accmod = 100
+    local dmgmod = 3
+    if skill:getID() == 1844 then -- Nightmare Antlion - Reported to almost one shot paladins
+        dmgmod = 15
+    end
+
     local info = xi.mobskills.mobPhysicalMove(mob, target, skill, numhits, accmod, dmgmod, xi.mobskills.magicalTpBonus.NO_EFFECT)
     local dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.PIERCING, xi.mobskills.shadowBehavior.WIPE_SHADOWS)
-
     -- These are here as it doesn't look right otherwise
     mob:hideName(false)
     mob:setUntargetable(false)
@@ -11020,7 +11287,7 @@ end)
 
 m:addOverride("xi.globals.mobskills.raiden_thrust.onMobWeaponSkill", function(target, mob, skill)
     local dmgmod = 1.8
-    local info = xi.mobskills.mobMagicalMove(mob, target, skill, mob:getWeaponDmg()*3, xi.magic.ele.THUNDER, dmgmod, xi.mobskills.magicalTpBonus.DMG_BONUS, 1)
+    local info = xi.mobskills.mobMagicalMove(mob, target, skill, mob:getWeaponDmg() * 3, xi.magic.ele.THUNDER, dmgmod, xi.mobskills.magicalTpBonus.DMG_BONUS, 1)
     local dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.THUNDER, info.hitslanded)
 
     if not skill:hasMissMsg() then
@@ -11504,7 +11771,7 @@ end)
 
 m:addOverride("xi.globals.mobskills.rock_crusher.onMobWeaponSkill", function(target, mob, skill)
     local dmgmod = 1.5
-    local info = xi.mobskills.mobMagicalMove(mob, target, skill, mob:getWeaponDmg()*3, xi.magic.ele.EARTH, dmgmod, xi.mobskills.magicalTpBonus.DMG_BONUS, 2)
+    local info = xi.mobskills.mobMagicalMove(mob, target, skill, mob:getWeaponDmg() * 3, xi.magic.ele.EARTH, dmgmod, xi.mobskills.magicalTpBonus.DMG_BONUS, 2)
     local dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.EARTH, info.hitslanded)
 
     if not skill:hasMissMsg() then
@@ -11593,7 +11860,10 @@ m:addOverride("xi.globals.mobskills.ruinous_omen.onMobWeaponSkill", function(tar
     local hppMax = 75
     local dmgmod = 0.7   -- Estimated from keeping with a max of ~72% reduction
     local ratio = 4
-    if dINT >= 0 then ratio = 6 end  -- Tilt the curve so that a small dINT doesn't tip too far in Diabolos' favour.
+    if dINT >= 0 then
+        ratio = 6
+    end  -- Tilt the curve so that a small dINT doesn't tip too far in Diabolos' favour.
+
     hppTarget = hppTarget + (dINT / ratio)    -- A wild estimate.  Diabolos INT is 131 in Waking Dreams.
 
     -- hpp and damage do not correlate, but we can use the system to scale damage numbers
@@ -11692,7 +11962,12 @@ m:addOverride("xi.globals.mobskills.saline_coat.onMobWeaponSkill", function(targ
 end)
 
 m:addOverride("xi.globals.mobskills.sandspin.onMobWeaponSkill", function(target, mob, skill)
-    xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.ACCURACY_DOWN, 25, 0, 180)
+    local power = 25
+    if skill:getID() == 1887 then -- Nightmare Worm - increased ACCURACY_DOWN
+        power = 200
+    end
+
+    xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.ACCURACY_DOWN, power, 0, 180)
 
     local info = xi.mobskills.mobMagicalMove(mob, target, skill, mob:getMobWeaponDmg(xi.slot.MAIN), xi.magic.ele.EARTH, 1, xi.mobskills.magicalTpBonus.NO_EFFECT, 0, 0, 2, 2.5, 3)
     local dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.EARTH, xi.mobskills.shadowBehavior.IGNORE_SHADOWS)
@@ -11730,11 +12005,21 @@ m:addOverride("xi.globals.mobskills.sand_blast.onMobWeaponSkill", function(targe
         end
     end
 
+    if skill:getID() == 1841 then -- Nightmare Antlion - Adds SILENCE
+        skill:setMsg(xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.SILENCE, 1, 0, 180))
+        return xi.effect.SILENCE
+    end
+
     return xi.effect.BLINDNESS
 end)
 
 m:addOverride("xi.globals.mobskills.sand_breath.onMobWeaponSkill", function(target, mob, skill)
-    xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.BLINDNESS, 20, 0, 180)
+    local power = 20
+    if skill:getID() == 1873 then -- Nightmare Leech - -80 acc BLINDNESS
+        power = 80
+    end
+
+    xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.BLINDNESS, power, 0, 180)
 
     local dmgmod = xi.mobskills.mobBreathMove(mob, target, 0.085, 1, xi.magic.ele.EARTH, 333)
 
@@ -11867,6 +12152,7 @@ m:addOverride("xi.globals.mobskills.scission_thrust.onMobWeaponSkill", function(
     if not skill:hasMissMsg() then
         target:takeDamage(dmg, mob, xi.attackType.PHYSICAL, xi.damageType.SLASHING)
     end
+
     return dmg
 end)
 
@@ -11953,7 +12239,12 @@ m:addOverride("xi.globals.mobskills.screwdriver.onMobWeaponSkill", function(targ
 end)
 
 m:addOverride("xi.globals.mobskills.scutum.onMobWeaponSkill", function(target, mob, skill)
-    skill:setMsg(xi.mobskills.mobBuffMove(mob, xi.effect.DEFENSE_BOOST, 70, 0, 180))
+    local power = 70
+    if skill:getID() == 1860 then -- Nightmare Bugard - 2x DEFENSE_BOOST
+        power = 100
+    end
+
+    skill:setMsg(xi.mobskills.mobBuffMove(mob, xi.effect.DEFENSE_BOOST, power, 0, 180))
 
     return xi.effect.DEFENSE_BOOST
 end)
@@ -12050,6 +12341,11 @@ end)
 
 m:addOverride("xi.globals.mobskills.self-destruct_1.onMobWeaponSkill", function(target, mob, skill)
     local damage = skill:getMobHP() / 3
+
+    if skill:getID() == 1855 then -- Nightmare Cluster - increased damage
+        damage = skill:getMobHP()
+    end
+
     local info = xi.mobskills.mobMagicalMove(mob, target, skill, damage, xi.magic.ele.FIRE, 1, xi.mobskills.magicalTpBonus.NO_EFFECT, 0, 0, 1, 1.1, 1.2)
     local dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.FIRE, xi.mobskills.shadowBehavior.IGNORE_SHADOWS)
 
@@ -12060,6 +12356,10 @@ end)
 
 m:addOverride("xi.globals.mobskills.self-destruct_2.onMobWeaponSkill", function(target, mob, skill)
     local damage = skill:getMobHP() / 6
+
+    if skill:getID() == 1855 then -- Nightmare Cluster - increased damage
+        damage = skill:getMobHP() / 2
+    end
 
     -- Razon - ENM: Fire in the Sky
     if mob:getHPP() <= 33 and mob:getPool() == 3333 then
@@ -12087,6 +12387,10 @@ end)
 
 m:addOverride("xi.globals.mobskills.self-destruct_3.onMobWeaponSkill", function(target, mob, skill)
     local damage = skill:getMobHP() / 9
+
+    if skill:getID() == 1853 then -- Nightmare Cluster - increased damage
+        damage = skill:getMobHP() / 3
+    end
 
     -- Razon - ENM: Fire in the Sky
     if mob:getHPP() <= 66 and mob:getPool() == 3333 then
@@ -12142,7 +12446,7 @@ end)
 
 m:addOverride("xi.globals.mobskills.seraph_strike.onMobWeaponSkill", function(target, mob, skill)
     local dmgmod = 1.6
-    local info = xi.mobskills.mobMagicalMove(mob, target, skill, mob:getWeaponDmg()*3, xi.magic.ele.LIGHT, dmgmod, xi.mobskills.magicalTpBonus.DMG_BONUS, 2)
+    local info = xi.mobskills.mobMagicalMove(mob, target, skill, mob:getWeaponDmg() * 3, xi.magic.ele.LIGHT, dmgmod, xi.mobskills.magicalTpBonus.DMG_BONUS, 2)
     local dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.LIGHT, info.hitslanded)
 
     if not skill:hasMissMsg() then
@@ -12231,7 +12535,7 @@ end)
 
 m:addOverride("xi.globals.mobskills.shadow_of_death.onMobWeaponSkill", function(target, mob, skill)
     local dmgmod = 1.8
-    local info = xi.mobskills.mobMagicalMove(mob, target, skill, mob:getWeaponDmg()*3, xi.magic.ele.DARK, dmgmod, xi.mobskills.magicalTpBonus.DMG_BONUS, 2)
+    local info = xi.mobskills.mobMagicalMove(mob, target, skill, mob:getWeaponDmg() * 3, xi.magic.ele.DARK, dmgmod, xi.mobskills.magicalTpBonus.DMG_BONUS, 2)
     local dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.DARK, info.hitslanded)
 
     if not skill:hasMissMsg() then
@@ -12495,7 +12799,7 @@ end)
 
 m:addOverride("xi.globals.mobskills.shining_strike.onMobWeaponSkill", function(target, mob, skill)
     local dmgmod = 1.7
-    local info = xi.mobskills.mobMagicalMove(mob, target, skill, mob:getWeaponDmg()*3, xi.magic.ele.LIGHT, dmgmod, xi.mobskills.magicalTpBonus.DMG_BONUS, 2)
+    local info = xi.mobskills.mobMagicalMove(mob, target, skill, mob:getWeaponDmg() * 3, xi.magic.ele.LIGHT, dmgmod, xi.mobskills.magicalTpBonus.DMG_BONUS, 2)
     local dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.LIGHT, info.hitslanded)
 
     if not skill:hasMissMsg() then
@@ -12593,7 +12897,7 @@ end)
 m:addOverride("xi.globals.mobskills.sic.onMobWeaponSkill", function(target, mob, skill)
     -- Fantoccini (ENM: Pulling the Strings)
     if mob:getPool() == 1296 then
-        local pet = GetMobByID(mob:getID()+1) -- Fantoccini's monster
+        local pet = GetMobByID(mob:getID() + 1) -- Fantoccini's monster
         pet:setTP(3000)
         pet:setMobMod(xi.mobMod.SKILL_LIST, ID.jobTable[mob:getMainJob()].petSkillList)
         mob:timer(5000, function(mobArg)
@@ -12602,6 +12906,7 @@ m:addOverride("xi.globals.mobskills.sic.onMobWeaponSkill", function(target, mob,
     else
         mob:getPet():setTP(3000)
     end
+
     skill:setMsg(xi.msg.basic.NONE)
     return 0
 end)
@@ -12977,7 +13282,7 @@ m:addOverride("xi.globals.mobskills.sniper_shot.onMobWeaponSkill", function(targ
     local dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.RANGED, xi.damageType.PIERCING, info.hitslanded)
 
     if not skill:hasMissMsg() then
-        if (math.random(1, 100) < skill:getTP()/3) then
+        if math.random(1, 100) < skill:getTP() / 3 then
             target:addStatusEffect(xi.effect.INT_DOWN, 10, 0, 120)
         end
 
@@ -13137,6 +13442,7 @@ m:addOverride("xi.globals.mobskills.soul_accretion.onMobWeaponSkill", function(t
         if effect2 ~= 0 then
             count = count + 1
         end
+
         if effect3 ~= 0 then
             count = count + 1
         end
@@ -13447,6 +13753,13 @@ m:addOverride("xi.globals.mobskills.spirit_tap.onMobWeaponSkill", function(targe
     return dmg
 end)
 
+m:addOverride("xi.globals.mobskills.spirit_vacuum.onMobWeaponSkill", function(target, mob, skill)
+    local tpStolen = target:getTP() * 26 / 30 -- stole 2600/3000 TP per capture - 87%
+    skill:setMsg(xi.mobskills.mobPhysicalDrainMove(mob, target, skill, xi.mobskills.drainType.TP, tpStolen))
+
+    return tpStolen
+end)
+
 m:addOverride("xi.globals.mobskills.splash_breath.onMobWeaponSkill", function(target, mob, skill)
     local dmgmod = xi.mobskills.mobBreathMove(mob, target, 0.1, 1, xi.magic.ele.WATER, 400)
     local dmg = xi.mobskills.mobFinalAdjustments(dmgmod, mob, skill, target, xi.attackType.BREATH, xi.damageType.WATER, xi.mobskills.shadowBehavior.IGNORE_SHADOWS)
@@ -13476,8 +13789,8 @@ end)
 m:addOverride("xi.globals.mobskills.spring_water.onMobWeaponSkill", function(target, mob, skill)
     -- Formula needs redone with retail MOB VERSION not players avatar
     local base = mob:getMainLvl() + 2 * mob:getMainLvl() * (skill:getTP() / 1000) --base is around 5~150 level depending
-    local m = 5
-    local multiplier = 1 + (1 - (mob:getHP() / mob:getMaxHP())) * m    --higher multiplier the lower your HP. at 15% HP, multiplier is 1+0.85*M
+    -- local m = 5
+    local multiplier = 1 + (1 - (mob:getHP() / mob:getMaxHP())) * 5    --higher multiplier the lower your HP. at 15% HP, multiplier is 1+0.85*M
     base = base * multiplier
 
     skill:setMsg(xi.msg.basic.SELF_HEAL)
@@ -13540,7 +13853,7 @@ m:addOverride("xi.globals.mobskills.starburst.onMobWeaponSkill", function(target
         element = xi.magic.ele.DARK
     end
 
-    local info = xi.mobskills.mobMagicalMove(mob, target, skill, mob:getWeaponDmg()*3, element, dmgmod, xi.mobskills.magicalTpBonus.DMG_BONUS, 1)
+    local info = xi.mobskills.mobMagicalMove(mob, target, skill, mob:getWeaponDmg() * 3, element, dmgmod, xi.mobskills.magicalTpBonus.DMG_BONUS, 1)
     local dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.MAGICAL, attkType, info.hitslanded)
 
     target:takeDamage(dmg, mob, xi.attackType.MAGICAL, attkType)
@@ -13768,7 +14081,6 @@ m:addOverride("xi.globals.mobskills.stygian_flatus.onMobWeaponSkill", function(t
     skill:setMsg(xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.PARALYSIS, 30, 0, 120))
 
     return xi.effect.PARALYSIS
-
 end)
 
 m:addOverride("xi.globals.mobskills.stygian_vapor.onMobWeaponSkill", function(target, mob, skill)
@@ -13800,6 +14112,14 @@ m:addOverride("xi.globals.mobskills.subsonics.onMobWeaponSkill", function(target
 end)
 
 m:addOverride("xi.globals.mobskills.substitute.onMobWeaponSkill", function(target, mob, skill)
+    local resistances =
+    {
+        xi.mod.SLASH_SDT,
+        xi.mod.PIERCE_SDT,
+        xi.mod.IMPACT_SDT,
+        xi.mod.HTH_SDT,
+    }
+
     -- Marquis Andrealphus
     if mob:getPool() == 2571 then
         local party = target:getParty()
@@ -13834,7 +14154,7 @@ m:addOverride("xi.globals.mobskills.substitute.onMobWeaponSkill", function(targe
         local newAnim = oldAnim
 
         while newAnim == oldAnim do
-            newAnim = math.random(1,3)
+            newAnim = math.random(1, 3)
         end
 
         mob:setAnimationSub(newAnim)
@@ -13852,7 +14172,6 @@ m:addOverride("xi.globals.mobskills.substitute.onMobWeaponSkill", function(targe
         else
             mob:setMod(resistances[4], -2500)
         end
-
     end
 
     skill:setMsg(xi.msg.basic.NONE)
@@ -13964,7 +14283,7 @@ m:addOverride("xi.globals.mobskills.sunburst.onMobWeaponSkill", function(target,
         element = xi.magic.ele.DARK
     end
 
-    local info = xi.mobskills.mobMagicalMove(mob, target, skill, mob:getWeaponDmg()*3, element, dmgmod, xi.mobskills.magicalTpBonus.DMG_BONUS, 1)
+    local info = xi.mobskills.mobMagicalMove(mob, target, skill, mob:getWeaponDmg() * 3, element, dmgmod, xi.mobskills.magicalTpBonus.DMG_BONUS, 1)
     local dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.MAGICAL, attkType, info.hitslanded)
 
     if not skill:hasMissMsg() then
@@ -14069,7 +14388,7 @@ end)
 
 m:addOverride("xi.globals.mobskills.tachi_goten.onMobWeaponSkill", function(target, mob, skill)
     local dmgmod = 1.8
-    local info = xi.mobskills.mobMagicalMove(mob, target, skill, mob:getWeaponDmg()*3, xi.magic.ele.LIGHT, dmgmod, xi.mobskills.magicalTpBonus.DMG_BONUS, 1)
+    local info = xi.mobskills.mobMagicalMove(mob, target, skill, mob:getWeaponDmg() * 3, xi.magic.ele.LIGHT, dmgmod, xi.mobskills.magicalTpBonus.DMG_BONUS, 1)
     local dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.LIGHTNING, info.hitslanded)
 
     if not skill:hasMissMsg() then
@@ -14109,7 +14428,7 @@ end)
 
 m:addOverride("xi.globals.mobskills.tachi_kagero.onMobWeaponSkill", function(target, mob, skill)
     local dmgmod = 1.8
-    local info = xi.mobskills.mobMagicalMove(mob, target, skill, mob:getWeaponDmg()*3, xi.magic.ele.FIRE, dmgmod, xi.mobskills.magicalTpBonus.DMG_BONUS, 1)
+    local info = xi.mobskills.mobMagicalMove(mob, target, skill, mob:getWeaponDmg() * 3, xi.magic.ele.FIRE, dmgmod, xi.mobskills.magicalTpBonus.DMG_BONUS, 1)
     local dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.FIRE, info.hitslanded)
 
     if not skill:hasMissMsg() then
@@ -14152,7 +14471,7 @@ end)
 
 m:addOverride("xi.globals.mobskills.tachi_koki.onMobWeaponSkill", function(target, mob, skill)
     local dmgmod = 1.8
-    local info = xi.mobskills.mobMagicalMove(mob, target, skill, mob:getWeaponDmg()*3, xi.magic.ele.LIGHT, dmgmod, xi.mobskills.magicalTpBonus.DMG_BONUS, 1)
+    local info = xi.mobskills.mobMagicalMove(mob, target, skill, mob:getWeaponDmg() * 3, xi.magic.ele.LIGHT, dmgmod, xi.mobskills.magicalTpBonus.DMG_BONUS, 1)
     local dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.LIGHT, info.hitslanded)
 
     if not skill:hasMissMsg() then
@@ -14320,6 +14639,17 @@ m:addOverride("xi.globals.mobskills.tail_whip.onMobWeaponSkill", function(target
 end)
 
 m:addOverride("xi.globals.mobskills.target_analysis.onMobWeaponSkill", function(target, mob, skill)
+    local attributesDown =
+    {
+        xi.effect.STR_DOWN,
+        xi.effect.DEX_DOWN,
+        xi.effect.VIT_DOWN,
+        xi.effect.AGI_DOWN,
+        xi.effect.MND_DOWN,
+        xi.effect.INT_DOWN,
+        xi.effect.CHR_DOWN,
+    }
+
     local drained = 0
 
     for i = 1, 7 do
@@ -14660,11 +14990,12 @@ m:addOverride("xi.globals.mobskills.thunder_maneuver.onMobWeaponSkill", function
 
     -- Fantoccini (ENM: Pulling the Strings)
     if mob:getPool() == 1296 then
-        local pet = GetMobByID(mob:getID()+1)
+        local pet = GetMobByID(mob:getID() + 1)
         pet:addStatusEffect(typeEffect, power, 0, duration)
     else
         mob:getPet():addStatusEffect(typeEffect, power, 0, duration)
     end
+
     return 1
 end)
 
@@ -14680,7 +15011,7 @@ end)
 
 m:addOverride("xi.globals.mobskills.thunder_thrust.onMobWeaponSkill", function(target, mob, skill)
     local dmgmod = 1.7
-    local info = xi.mobskills.mobMagicalMove(mob, target, skill, mob:getWeaponDmg()*3, xi.magic.ele.THUNDER, dmgmod, xi.mobskills.magicalTpBonus.DMG_BONUS, 1)
+    local info = xi.mobskills.mobMagicalMove(mob, target, skill, mob:getWeaponDmg() * 3, xi.magic.ele.THUNDER, dmgmod, xi.mobskills.magicalTpBonus.DMG_BONUS, 1)
     local dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.THUNDER, info.hitslanded)
 
     if not skill:hasMissMsg() then
@@ -14993,8 +15324,12 @@ end)
 
 m:addOverride("xi.globals.mobskills.tremors.onMobWeaponSkill", function(target, mob, skill)
     xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.DEX_DOWN, 10, 10, 180)
+    local damageMod = 1
+    if skill:getID() == 1888 then -- Nightmare Worm - increased damage
+        damageMod = 2
+    end
 
-    local info = xi.mobskills.mobMagicalMove(mob, target, skill, mob:getMobWeaponDmg(xi.slot.MAIN), xi.magic.ele.EARTH, 1, xi.mobskills.magicalTpBonus.NO_EFFECT, 0, 0, 1.5, 1.75, 2)
+    local info = xi.mobskills.mobMagicalMove(mob, target, skill, mob:getMobWeaponDmg(xi.slot.MAIN) * damageMod, xi.magic.ele.EARTH, 1, xi.mobskills.magicalTpBonus.NO_EFFECT, 0, 0, 1.5, 1.75, 2)
     local dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.EARTH, xi.mobskills.shadowBehavior.WIPE_SHADOWS)
     target:takeDamage(dmg, mob, xi.attackType.MAGICAL, xi.damageType.EARTH)
     return dmg
@@ -15144,7 +15479,13 @@ end)
 m:addOverride("xi.globals.mobskills.tusk.onMobWeaponSkill", function(target, mob, skill)
     local numhits = 1
     local accmod = 1
-    local info = xi.mobskills.mobPhysicalMove(mob, target, skill, numhits, accmod, 1, xi.mobskills.magicalTpBonus.NO_EFFECT, 3, 3.25, 3.5)
+    local damageMod = 1
+
+    if skill:getID() == 1859 then -- Nightmare Bugard - Additional damage
+        damageMod = 2
+    end
+
+    local info = xi.mobskills.mobPhysicalMove(mob, target, skill, numhits, accmod, damageMod, xi.mobskills.magicalTpBonus.NO_EFFECT, 3, 3.25, 3.5)
     local dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.SLASHING, info.hitslanded)
 
     if not skill:hasMissMsg() then
@@ -15179,7 +15520,11 @@ m:addOverride("xi.globals.mobskills.typhoon.onMobWeaponSkill", function(target, 
     end
 
     if mob:getName() == "Faust" then
-        if mob:getLocalVar("Typhoon") == 0 and mob:getTarget() ~= nil and mob:checkDistance(mob:getTarget()) <= 10 then
+        if
+            mob:getLocalVar("Typhoon") == 0 and
+            mob:getTarget() ~= nil and
+            mob:checkDistance(mob:getTarget()) <= 10
+        then
             mob:useMobAbility(539)
             mob:setLocalVar("Typhoon", 1)
         else
@@ -15212,9 +15557,8 @@ m:addOverride("xi.globals.mobskills.tyrannic_blare.onMobWeaponSkill", function(t
 end)
 
 m:addOverride("xi.globals.mobskills.ultimate_terror.onMobWeaponSkill", function(target, mob, skill)
-
     local drained = 0
-    local threshold = 3/7
+    local threshold = 3 / 7
 
     local effects =
     {
@@ -15235,7 +15579,6 @@ m:addOverride("xi.globals.mobskills.ultimate_terror.onMobWeaponSkill", function(
     end
 
     return drained
-
 end)
 
 m:addOverride("xi.globals.mobskills.ultrasonics.onMobWeaponSkill", function(target, mob, skill)
@@ -15373,6 +15716,7 @@ m:addOverride("xi.globals.mobskills.vampiric_lash.onMobWeaponSkill", function(ta
     if mob:getLocalVar("vampiriclashpower") ~= 0 then
         dmgmod = mob:getLocalVar("vampiriclashpower")
     end
+
     local info = xi.mobskills.mobPhysicalMove(mob, target, skill, numhits, accmod, dmgmod, xi.mobskills.physicalTpBonus.CRIT_VARIES, 1, 1.5, 2)
     local dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.DARK, xi.mobskills.shadowBehavior.NUMSHADOWS_1)
     skill:setMsg(xi.mobskills.mobPhysicalDrainMove(mob, target, skill, xi.mobskills.drainType.HP, dmg))
@@ -15479,6 +15823,9 @@ end)
 
 m:addOverride("xi.globals.mobskills.venom_spray.onMobWeaponSkill", function(target, mob, skill)
     local power = 10
+    if skill:getID() == 1843 then -- Nightmare Antlion - increased Poison
+        power = 50
+    end
 
     xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.POISON, power, 3, 120)
 
@@ -15850,7 +16197,7 @@ m:addOverride("xi.globals.mobskills.wanion.onMobWeaponSkill", function(target, m
 end)
 
 m:addOverride("xi.globals.mobskills.warcry.onMobWeaponSkill", function(target, mob, skill)
-    local power = math.floor((mob:getMainLvl()/4)+4.75)/256
+    local power = math.floor((mob:getMainLvl() / 4) + 4.75) / 256
     local typeEffect = xi.effect.WARCRY
     local duration = 30
 
@@ -15942,11 +16289,12 @@ m:addOverride("xi.globals.mobskills.water_maneuver.onMobWeaponSkill", function(t
 
     -- Fantoccini (ENM: Pulling the Strings)
     if mob:getPool() == 1296 then
-        local pet = GetMobByID(mob:getID()+1)
+        local pet = GetMobByID(mob:getID() + 1)
         pet:addStatusEffect(typeEffect, power, 0, duration)
     else
         mob:getPet():addStatusEffect(typeEffect, power, 0, duration)
     end
+
     return 1
 end)
 
@@ -15961,13 +16309,23 @@ m:addOverride("xi.globals.mobskills.water_meeble_warble.onMobWeaponSkill", funct
 end)
 
 m:addOverride("xi.globals.mobskills.water_shield.onMobWeaponSkill", function(target, mob, skill)
-    skill:setMsg(xi.mobskills.mobBuffMove(mob, xi.effect.EVASION_BOOST, 25, 0, math.random(120, 600)))
+    local power = 25
+    if skill:getID() == 1869 then -- Nightmare Makara - +50 EVASION_BOOST
+        power = 50
+    end
+
+    skill:setMsg(xi.mobskills.mobBuffMove(mob, xi.effect.EVASION_BOOST, power, 0, math.random(120, 600)))
 
     return xi.effect.EVASION_BOOST
 end)
 
 m:addOverride("xi.globals.mobskills.water_wall.onMobWeaponSkill", function(target, mob, skill)
-    skill:setMsg(xi.mobskills.mobBuffMove(mob, xi.effect.DEFENSE_BOOST, 100, 0, math.random(60, 180)))
+    local power = 100
+    if skill:getID() == 1868 then -- Nightmare Makara - Triples DEFENSE_BOOST
+        power = 300
+    end
+
+    skill:setMsg(xi.mobskills.mobBuffMove(mob, xi.effect.DEFENSE_BOOST, power, 0, math.random(60, 180)))
 
     return xi.effect.DEFENSE_BOOST
 end)
@@ -15985,7 +16343,6 @@ m:addOverride("xi.globals.mobskills.weapon_bash.onMobWeaponSkill", function(targ
     end
 
     return dmg
-
 end)
 
 m:addOverride("xi.globals.mobskills.wheeling_thrust.onMobWeaponSkill", function(target, mob, skill)
@@ -16069,8 +16426,8 @@ end)
 m:addOverride("xi.globals.mobskills.whispering_wind.onMobWeaponSkill", function(target, mob, skill)
     -- Formula needs redone with retail MOB VERSION not players avatar
     local base = mob:getMobWeaponDmg(xi.slot.MAIN) * mob:getMainLvl() * (skill:getTP() / 1000) --base is around 5~150 level depending
-    local m = 5
-    local multiplier = 1 + (1 - (mob:getHP() / mob:getMaxHP())) * m    --higher multiplier the lower your HP. at 15% HP, multiplier is 1+0.85*M
+    -- local m = 5
+    local multiplier = 1 + (1 - (mob:getHP() / mob:getMaxHP())) * 5    --higher multiplier the lower your HP. at 15% HP, multiplier is 1+0.85*M
     base = base * multiplier
 
     skill:setMsg(xi.msg.basic.SELF_HEAL)
@@ -16079,7 +16436,18 @@ m:addOverride("xi.globals.mobskills.whispering_wind.onMobWeaponSkill", function(
 end)
 
 m:addOverride("xi.globals.mobskills.whispers_of_ire.onMobWeaponSkill", function(target, mob, skill)
-    local amount = math.random(1,6)
+    local attributesDown =
+    {
+        xi.effect.STR_DOWN,
+        xi.effect.DEX_DOWN,
+        xi.effect.VIT_DOWN,
+        xi.effect.AGI_DOWN,
+        xi.effect.MND_DOWN,
+        xi.effect.INT_DOWN,
+        xi.effect.CHR_DOWN,
+    }
+
+    local amount = math.random(1, 6)
     local count = 0
     local statsDrained = {}
     local size = amount
@@ -16258,11 +16626,12 @@ m:addOverride("xi.globals.mobskills.wind_maneuver.onMobWeaponSkill", function(ta
 
     -- Fantoccini (ENM: Pulling the Strings)
     if mob:getPool() == 1296 then
-        local pet = GetMobByID(mob:getID()+1)
+        local pet = GetMobByID(mob:getID() + 1)
         pet:addStatusEffect(typeEffect, power, 0, duration)
     else
         mob:getPet():addStatusEffect(typeEffect, power, 0, duration)
     end
+
     return 1
 end)
 

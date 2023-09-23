@@ -24,8 +24,8 @@ zones[xi.zone.CLOISTER_OF_TIDES] =
         PARTY_MEMBERS_HAVE_FALLEN        = 7569, -- All party members have fallen in battle. Now leaving the battlefield.
         THE_PARTY_WILL_BE_REMOVED        = 7576, -- If all party members' HP are still zero after # minute[/s], the party will be removed from the battlefield.
         LEVIATHAN_UNLOCKED               = 7579, -- You are now able to summon [Ifrit/Titan/Leviathan/Garuda/Shiva/Ramuh].
-        ATTACH_SEAL                      = 7724, -- <player> attaches <item> to the protocrystal.
-        POWER_STYMIES                    = 7725, -- An unseen power stymies your efforts to attach <item> to the protocrystal.
+        ATTACH_SEAL                      = 7725, -- <player> attaches <item> to the protocrystal.
+        POWER_STYMIES                    = 7726, -- An unseen power stymies your efforts to attach <item> to the protocrystal.
     },
     mob =
     {

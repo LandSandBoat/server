@@ -35,12 +35,12 @@ zones[xi.zone.KAZHAM] =
         KHIFORYUHKOWA_SHOP_DIALOG     = 10058, -- Sometimes a strrrange Hume comes from the south to buy stuff. I wonder what he's doing down there...
         TAHNPOSBEI_SHOP_DIALOG        = 10059, -- You don't want to get whipped by those Tonberries, do you? Well, have I got the equipment forrr you!
         OPOOPO_DIALOG                 = 10387, -- Opo-opo!
-        IFRIT_UNLOCKED                = 10528, -- You are now able to summon [Ifrit/Titan/Leviathan/Garuda/Shiva/Ramuh].
-        NOMAD_MOOGLE_DIALOG           = 10596, -- I'm a traveling moogle, kupo. I help adventurers in the Outlands access items they have stored in a Mog House elsewhere, kupo.
-        MAMERIE_SHOP_DIALOG           = 10620, -- Is there something you require?
-        EVISCERATION_LEARNED          = 10657, -- You have learned the weapon skill Evisceration!
-        RETRIEVE_DIALOG_ID            = 11007, -- You retrieve <item> from the porter moogle's care.
-        COMMON_SENSE_SURVIVAL         = 11865, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
+        IFRIT_UNLOCKED                = 10531, -- You are now able to summon [Ifrit/Titan/Leviathan/Garuda/Shiva/Ramuh].
+        NOMAD_MOOGLE_DIALOG           = 10602, -- I'm a traveling moogle, kupo. I help adventurers in the Outlands access items they have stored in a Mog House elsewhere, kupo.
+        MAMERIE_SHOP_DIALOG           = 10626, -- Is there something you require?
+        EVISCERATION_LEARNED          = 10663, -- You have learned the weapon skill Evisceration!
+        RETRIEVE_DIALOG_ID            = 11013, -- You retrieve <item> from the porter moogle's care.
+        COMMON_SENSE_SURVIVAL         = 11871, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
     mob =
     {

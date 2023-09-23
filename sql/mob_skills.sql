@@ -1304,11 +1304,11 @@ INSERT INTO `mob_skills` VALUES (1344,995,'moblin_1344',0,50.0,2000,0,4,4,0,0,0,
 INSERT INTO `mob_skills` VALUES (1345,996,'moblin_1345',0,50.0,2000,0,4,4,0,0,0,0,0); -- Moblin animation
 -- INSERT INTO `mob_skills` VALUES (1346,1090,'.',0,7.0,2000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (1347,998,'dual_strike',0,7.0,2000,1000,4,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (1348,999,'siphon_discharge',1,15.0,2000,1000,4,0,0,1,0,0,0);
+INSERT INTO `mob_skills` VALUES (1348,999,'siphon_discharge',4,15.0,2000,1000,4,0,0,1,0,0,0);
 INSERT INTO `mob_skills` VALUES (1349,1000,'mantle_pierce',0,7.0,2000,1000,4,0,0,3,0,0,0);
 INSERT INTO `mob_skills` VALUES (1350,1001,'ink_cloud',1,15.0,2000,1000,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (1351,1002,'molluscous_mutation',0,7.0,2000,1000,1,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (1352,1003,'saline_coat',6,10.0,2000,1000,4,0,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (1352,1003,'saline_coat',0,10.0,2000,1000,1,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (1353,1004,'aerial_collision',4,10.0,2000,1000,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (1354,1005,'vapor_spray',4,12.0,2000,1000,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (1355,1006,'spine_lash',6,12.0,2000,1000,4,0,0,0,0,0,0);

@@ -4,6 +4,7 @@ return {
     ['Balakaf']            = { event = 515 },
     ['Cacaroon']           = { event = 248 },
     ['Hadahda']            = { event = 518 },
+    ['Fari-Wari']          = { event = 833 },
     ['Imperial_Whitegate'] = { messageSpecial = ID.text.GATE_IS_FIRMLY_CLOSED },
     ['Lathuya']            = { event = 770 },
     ['Mathlouq']           = { event = 543 },

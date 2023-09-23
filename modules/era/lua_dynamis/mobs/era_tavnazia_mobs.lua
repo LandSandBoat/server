@@ -38,7 +38,7 @@ xi.dynamis.onSpawnNightmareWorm = function(mob)
     mob:hideName(true)
     mob:setUntargetable(true)
     local newPosition = math.random(1, #wormPositions)
-    mob:setPos(wormPositions[newPosition][1],wormPositions[newPosition][2],wormPositions[newPosition][3],wormPositions[newPosition][4])
+    mob:setPos(wormPositions[newPosition][1], wormPositions[newPosition][2], wormPositions[newPosition][3], wormPositions[newPosition][4])
 end
 
 xi.dynamis.onSpawnNightmareAntlion = function(mob)
@@ -47,12 +47,12 @@ xi.dynamis.onSpawnNightmareAntlion = function(mob)
     mob:setMobMod(xi.mobMod.ROAM_RATE, 0)
     mob:setMobMod(xi.mobMod.ROAM_DISTANCE, 0)
     local newPosition = math.random(1, #antlionPositions)
-    mob:setPos(antlionPositions[newPosition][1],antlionPositions[newPosition][2],antlionPositions[newPosition][3],antlionPositions[newPosition][4])
+    mob:setPos(antlionPositions[newPosition][1], antlionPositions[newPosition][2], antlionPositions[newPosition][3], antlionPositions[newPosition][4])
 end
 
 xi.dynamis.onMobEngagedNightmareWorm = function(mob, target)
     mob:setAnimationSub(0)
-    mob:setUntargetable(false)
+    mob:hideName(false)
     mob:setUntargetable(false)
 end
 
@@ -106,6 +106,7 @@ xi.dynamis.antlionDeath = function(mob)
                 playerEntity:delStatusEffect(xi.effect.SJ_RESTRICTION) -- Remove SJ restriction
             end
         end
+
         zone:setLocalVar("SJUnlock", 1)
     end
 
@@ -124,6 +125,7 @@ xi.dynamis.wormDeath = function(mob)
                 playerEntity:delStatusEffect(xi.effect.SJ_RESTRICTION) -- Remove SJ restriction
             end
         end
+
         zone:setLocalVar("SJUnlock", 1)
     end
 end
@@ -208,17 +210,13 @@ end
 -- When does music change? when diabolos spawns?
 
 xi.dynamis.mobOnDeathDiabolosClub = function(mob, player, optParams)
-
 end
 
 xi.dynamis.mobOnDeathDiabolosHeart = function(mob, player, optParams)
-
 end
 
 xi.dynamis.mobOnDeathDiabolosSpade = function(mob, player, optParams)
-
 end
 
 xi.dynamis.mobOnDeathDiabolosDiamond = function(mob, player, optParams)
-
 end

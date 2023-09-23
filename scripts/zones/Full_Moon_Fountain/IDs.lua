@@ -22,9 +22,9 @@ zones[xi.zone.FULL_MOON_FOUNTAIN] =
         UNABLE_TO_PROTECT             = 7377, -- You were unable to protect Ajido-Marujido. Now leaving the battlefield.
         PARTY_MEMBERS_HAVE_FALLEN     = 7665, -- All party members have fallen in battle. Now leaving the battlefield.
         THE_PARTY_WILL_BE_REMOVED     = 7672, -- If all party members' HP are still zero after # minute[/s], the party will be removed from the battlefield.
-        PLAY_TIME_IS_OVER             = 7763, -- Play time is over! Powers of dark mana, answer my call!
-        YOU_SHOULD_BE_THANKFUL        = 7764, -- You should be thankful. I'll give you a shortaru trip back to the hell you came from!
-        DONT_GIVE_UP                  = 7765, -- Don't give up, adventurer! You are Windurst's guiding star, our beacon of hope!
+        PLAY_TIME_IS_OVER             = 7764, -- Play time is over! Powers of dark mana, answer my call!
+        YOU_SHOULD_BE_THANKFUL        = 7765, -- You should be thankful. I'll give you a shortaru trip back to the hell you came from!
+        DONT_GIVE_UP                  = 7766, -- Don't give up, adventurer! You are Windurst's guiding star, our beacon of hope!
     },
     mob =
     {

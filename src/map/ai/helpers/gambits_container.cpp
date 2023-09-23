@@ -240,6 +240,30 @@ namespace gambits
                 // clang-format on
                 return count > 1;
             }
+            else if (predicate.target == G_TARGET::ALLIANCE)
+            {
+                auto result = false;
+                // clang-format off
+                static_cast<CCharEntity*>(POwner->PMaster)->ForAlliance([&](CBattleEntity* PMember){
+                    if (isValidMember(PMember) && CheckTrigger(PMember, predicate)){
+                        result = true;
+                    }
+                });
+                // clang-format on
+                return result;
+            }
+            else if (predicate.target == G_TARGET::ALLIANCE_MULTI)
+            {
+                uint8 count = 0;
+                // clang-format off
+                static_cast<CCharEntity*>(POwner->PMaster)->ForAlliance([&](CBattleEntity* PMember){
+                    if (isValidMember(PMember) && CheckTrigger(PMember, predicate)){
+                        count++;
+                    }
+                });
+                // clang-format on
+                return count;
+            }
 
             // Fallthrough
             return false;
@@ -398,6 +422,18 @@ namespace gambits
                             {
                                 target = PMember;
                             }
+                        }
+                    });
+                    // clang-format on
+                }
+                else if (gambit.predicates[0].target == G_TARGET::ALLIANCE)
+                {
+                    // clang-format off
+                    static_cast<CCharEntity*>(POwner->PMaster)->ForAlliance([&](CBattleEntity* PMember)
+                    {
+                        if (isValidMember(target, PMember) && CheckTrigger(PMember, gambit.predicates[0]))
+                        {
+                            target = PMember;
                         }
                     });
                     // clang-format on

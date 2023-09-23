@@ -14,7 +14,14 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    target:messageBasic(xi.msg.basic.RECOVERS_HP, 0, target:addHP(math.random(160, 170)))
+    local hpHeal = math.random(160, 170)
+    local dif = target:getMaxHP() - target:getHP()
+    if hpHeal > dif then
+        hpHeal = dif
+    end
+
+    target:addHP(hpHeal)
+    target:messageBasic(xi.msg.basic.RECOVERS_HP, 0, hpHeal)
 end
 
 return itemObject

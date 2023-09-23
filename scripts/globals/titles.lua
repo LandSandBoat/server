@@ -1067,6 +1067,7 @@ xi.title =
     TRIBOULEX_TERRORIZER                      = 1071,
     AITA_ABNEGATER                            = 1072,
     AMINON_APPREHENDER                        = 1073,
+    PARADISE_REGAINED                         = 1074,
     RAPTOR_WRANGLER                           = 1116,
     GARDENER_FOR_THE_AGES                     = 1117,
     LAGOON_EXPLORER                           = 1118,
@@ -1097,6 +1098,9 @@ xi.title =
     PARTER_OF_THE_VEIL                        = 1143,
     DEMONIC_DREAMER                           = 1144,
     SEARCHER_OF_THE_VORACIOUS                 = 1145,
+    ANOTHER_PSYCHE                            = 1146,
+    SENDER_OF_SHADOW                          = 1147,
+    ASTRAL_ALIGNER                            = 1148,
 }
 
 -----------------------------------

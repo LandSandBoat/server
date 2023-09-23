@@ -24,13 +24,13 @@ zones[xi.zone.CLOISTER_OF_FROST] =
         PARTY_MEMBERS_HAVE_FALLEN        = 7569, -- All party members have fallen in battle. Now leaving the battlefield.
         THE_PARTY_WILL_BE_REMOVED        = 7576, -- If all party members' HP are still zero after # minute[/s], the party will be removed from the battlefield.
         SHIVA_UNLOCKED                   = 7579, -- You are now able to summon [Ifrit/Titan/Leviathan/Garuda/Shiva/Ramuh].
-        CANNOT_REMOVE_FRAG               = 7673, -- It is an oddly shaped stone monument. A shining stone is embedded in it, but cannot be removed...
-        ALREADY_OBTAINED_FRAG            = 7674, -- You have already obtained this monument's <keyitem>. Try searching for another.
-        ALREADY_HAVE_ALL_FRAGS           = 7675, -- You have obtained all of the fragments. You must hurry to the ruins of the ancient shrine!
-        FOUND_ALL_FRAGS                  = 7676, -- You have obtained <keyitem>! You now have all 8 fragments of light!
-        ZILART_MONUMENT                  = 7677, -- It is an ancient Zilart monument.
-        ATTACH_SEAL                      = 7776, -- <player> attaches <item> to the protocrystal.
-        POWER_STYMIES                    = 7777, -- An unseen power stymies your efforts to attach <item> to the protocrystal.
+        CANNOT_REMOVE_FRAG               = 7674, -- It is an oddly shaped stone monument. A shining stone is embedded in it, but cannot be removed...
+        ALREADY_OBTAINED_FRAG            = 7675, -- You have already obtained this monument's <keyitem>. Try searching for another.
+        ALREADY_HAVE_ALL_FRAGS           = 7676, -- You have obtained all of the fragments. You must hurry to the ruins of the ancient shrine!
+        FOUND_ALL_FRAGS                  = 7677, -- You have obtained <keyitem>! You now have all 8 fragments of light!
+        ZILART_MONUMENT                  = 7678, -- It is an ancient Zilart monument.
+        ATTACH_SEAL                      = 7777, -- <player> attaches <item> to the protocrystal.
+        POWER_STYMIES                    = 7778, -- An unseen power stymies your efforts to attach <item> to the protocrystal.
     },
     mob =
     {

@@ -6,7 +6,7 @@ require("modules/module_utils")
 require("scripts/globals/magic")
 require("scripts/globals/mobskills")
 -----------------------------------
-local m = Module:new("asb_onMobSkillCheck")
+local m = Module:new("mobskills_onMobSkillCheck")
 
 m:addOverride("xi.globals.mobskills.10000_needles.onMobSkillCheck", function(target, mob, skill)
     return 0
@@ -4270,7 +4270,11 @@ m:addOverride("xi.globals.mobskills.pinecone_bomb.onMobSkillCheck", function(tar
 end)
 
 m:addOverride("xi.globals.mobskills.pit_ambush.onMobSkillCheck", function(target, mob, skill)
-    if mob:getPool() == 1318 and mob:getLocalVar("AMBUSH") == 1 then
+    if
+        (skill:getID() == 1844 or
+        mob:getPool() == 1318) and
+        mob:getLocalVar("AMBUSH") == 1
+    then
         return 1
     else
         return 0
@@ -5599,6 +5603,10 @@ m:addOverride("xi.globals.mobskills.spirit_tap.onMobSkillCheck", function(target
         return 1
     end
 
+    return 0
+end)
+
+m:addOverride("xi.globals.mobskills.spirit_vacuum.onMobSkillCheck", function(target, mob, skill)
     return 0
 end)
 

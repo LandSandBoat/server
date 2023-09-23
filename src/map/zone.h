@@ -235,7 +235,7 @@ enum ZONEID : uint16
     ZONE_DYNAMIS_BASTOK                 = 186,
     ZONE_DYNAMIS_WINDURST               = 187,
     ZONE_DYNAMIS_JEUNO                  = 188,
-    ZONE_189                            = 189,
+    ZONE_OUTER_RAKAZNAR_U3              = 189,
     ZONE_KING_RANPERRES_TOMB            = 190,
     ZONE_DANGRUF_WADI                   = 191,
     ZONE_INNER_HORUTOTO_RUINS           = 192,
@@ -324,7 +324,7 @@ enum ZONEID : uint16
     ZONE_OUTER_RAKAZNAR_U1              = 275,
     ZONE_RAKAZNAR_INNER_COURT           = 276,
     ZONE_RAKAZNAR_TURRIS                = 277,
-    ZONE_278                            = 278,
+    ZONE_GWORA_CORRIDOR                 = 278,
     ZONE_WALK_OF_ECHOES_P2              = 279,
     ZONE_MOG_GARDEN                     = 280,
     ZONE_LEAFALLIA                      = 281,
@@ -345,7 +345,8 @@ enum ZONEID : uint16
     ZONE_DYNAMIS_WINDURST_D             = 296,
     ZONE_DYNAMIS_JEUNO_D                = 297,
     ZONE_WALK_OF_ECHOES_P1              = 298,
-    MAX_ZONEID                          = 299,
+    ZONE_GWORA_THRONE_ROOM              = 299,
+    MAX_ZONEID                          = 300,
 };
 
 enum NATION_TYPE : uint8

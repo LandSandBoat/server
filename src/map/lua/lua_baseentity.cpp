@@ -363,8 +363,19 @@ void CLuaBaseEntity::PrintToArea(std::string const& message, sol::object const& 
     }
     else if (messageRange == MESSAGE_AREA_PARTY)
     {
-        message::send(MSG_CHAT_PARTY, nullptr, 0, new CChatMessagePacket(PChar, messageLook, message, name));
-        PChar->loc.zone->PushPacket(PChar, CHAR_INRANGE_SELF, new CChatMessagePacket(PChar, messageLook, message, name));
+        int8 packetData[8]{};
+        if (PChar->PParty->m_PAlliance)
+        {
+            ref<uint32>(packetData, 0) = PChar->PParty->m_PAlliance->m_AllianceID;
+            ref<uint32>(packetData, 4) = 0; // No ID so that the PChar sees the message too
+            message::send(MSG_CHAT_ALLIANCE, packetData, sizeof packetData, new CChatMessagePacket(PChar, messageLook, message, name));
+        }
+        else if (PChar->PParty)
+        {
+            ref<uint32>(packetData, 0) = PChar->PParty->GetPartyID();
+            ref<uint32>(packetData, 4) = 0; // No ID so that the PChar sees the message too
+            message::send(MSG_CHAT_PARTY, packetData, sizeof packetData, new CChatMessagePacket(PChar, messageLook, message, name));
+        }
     }
     else if (messageRange == MESSAGE_AREA_YELL)
     {
@@ -4954,14 +4965,6 @@ void CLuaBaseEntity::setModelId(uint16 modelId, sol::object const& slotObj)
         m_PBaseEntity->SetModelId(modelId);
     }
     m_PBaseEntity->updatemask |= UPDATE_LOOK;
-}
-
-void CLuaBaseEntity::updateLook()
-{
-    if (m_PBaseEntity->objtype != TYPE_PC)
-    {
-        m_PBaseEntity->updatemask |= UPDATE_LOOK;
-    }
 }
 
 /************************************************************************
@@ -16911,7 +16914,6 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("checkNameFlags", CLuaBaseEntity::checkNameFlags);
     SOL_REGISTER("getModelId", CLuaBaseEntity::getModelId);
     SOL_REGISTER("setModelId", CLuaBaseEntity::setModelId);
-    SOL_REGISTER("updateLook", CLuaBaseEntity::updateLook);
     SOL_REGISTER("setCostume", CLuaBaseEntity::setCostume);
     SOL_REGISTER("getCostume", CLuaBaseEntity::getCostume);
     SOL_REGISTER("getCostume2", CLuaBaseEntity::getCostume2);

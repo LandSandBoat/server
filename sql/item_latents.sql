@@ -314,6 +314,9 @@ INSERT INTO `item_latents` VALUES (13142,1,7,53,1);      -- DEF +7 in areas outs
 INSERT INTO `item_latents` VALUES (13142,2,15,53,1);     -- HP +15 in areas outside own nation's control
 INSERT INTO `item_latents` VALUES (13142,68,7,53,1);     -- EVA +7 in areas outside own nation's control
 
+-- -------------------------------------------------------
+-- Opo-Opo Necklace
+-- -------------------------------------------------------
 INSERT INTO `item_latents` VALUES (13143,368,25,13,2);
 INSERT INTO `item_latents` VALUES (13143,368,25,13,19);
 INSERT INTO `item_latents` VALUES (13143,368,25,13,193);
@@ -1005,13 +1008,16 @@ INSERT INTO `item_latents` VALUES (14050,25,6,53,0);     -- ACC +6 in areas insi
 -- -------------------------------------------------------
 -- Unicorn Mittens
 -- -------------------------------------------------------
-INSERT INTO `item_latents` VALUES (14055,23,7,1,75);     -- Attack+7 when HP >75%
+INSERT INTO `item_latents` VALUES (14055,23,7,1,75);     -- ATK +7 when HP >75%
 
 -- -------------------------------------------------------
 -- Unicorn Mittens +1
 -- -------------------------------------------------------
-INSERT INTO `item_latents` VALUES (14056,23,8,1,75);     -- Attack+8 when HP >75%
+INSERT INTO `item_latents` VALUES (14056,23,8,1,75);     -- ATK +8 when HP >75%
 
+-- -------------------------------------------------------
+-- Carbuncle Mitts
+-- -------------------------------------------------------
 INSERT INTO `item_latents` VALUES (14062,346,0,9,8);
 
 -- -------------------------------------------------------
@@ -1390,6 +1396,14 @@ INSERT INTO `item_latents` VALUES (14901,302,2,49,5929); -- triple attack 2% Ojo
 INSERT INTO `item_latents` VALUES (14921,8,13,26,2);     -- Dusk - Dawn: STR +13
 INSERT INTO `item_latents` VALUES (14921,384,400,26,2);  -- Dusk - Dawn: Haste +4%
 
+-- -------------------------------------------------------
+-- Carbuncles Cuffs
+-- -------------------------------------------------------
+INSERT INTO `item_latents` VALUES (14931,370,5,13,154);  -- Shining Ruby: Regen +5HP/tick
+
+-- -------------------------------------------------------
+-- Storm Gages
+-- -------------------------------------------------------
 INSERT INTO `item_latents` VALUES (14937,71,3,58,0);     -- storm gages hmp +3
 
 -- -------------------------------------------------------
@@ -1414,8 +1428,8 @@ INSERT INTO `item_latents` VALUES (14954,168,-5,14,0);
 -- -------------------------------------------------------
 -- Serpentes Cuffs
 -- -------------------------------------------------------
-INSERT INTO `item_latents` VALUES (15019,369,1,26,1);    -- Nighttime: Adds "Regen" effect
-INSERT INTO `item_latents` VALUES (15019,370,1,26,0);    -- Daytime: Adds "Refresh" effect
+INSERT INTO `item_latents` VALUES (15019,369,1,26,1);    -- Nighttime: Adds "Refresh" effect
+INSERT INTO `item_latents` VALUES (15019,370,1,26,0);    -- Daytime: Adds "Regen" effect
 
 -- -------------------------------------------------------
 -- Bulwark Shield
@@ -2438,11 +2452,6 @@ INSERT INTO `item_latents` VALUES (17699,165,6,47,0);    -- Dissector Crit Rate 
 INSERT INTO `item_latents` VALUES (17699,287,13,47,0);   -- Dissector DMG+13 when broken (500 WS points)
 
 -- -------------------------------------------------------
--- Shiva's Shotel
--- -------------------------------------------------------
-INSERT INTO `item_latents` VALUES (17711,431,1,21,14);   -- Additional effect: Ice damage
-
--- -------------------------------------------------------
 -- Mensur Epee
 -- -------------------------------------------------------
 INSERT INTO `item_latents` VALUES (17719,287,-2,15,2);   -- DMG: 47~39, decreases by 2 for every person in party (excl. wearer)
@@ -2687,11 +2696,6 @@ INSERT INTO `item_latents` VALUES (18097,287,13,47,0);   -- Gondo-Shizunori DMG+
 INSERT INTO `item_latents` VALUES (18099,23,24,6,1000);  -- Attack+24 while TP <100%
 INSERT INTO `item_latents` VALUES (18099,25,5,6,1000);   -- Accuracy+5 while TP <100%
 INSERT INTO `item_latents` VALUES (18099,287,5,6,1000);  -- DMG+5 while TP <100%
-
--- -------------------------------------------------------
--- Leviathan's Couse
--- -------------------------------------------------------
--- TODO: INSERT INTO `item_latents` VALUES (18109,431,1,21,12); -- Additional effect: Water damage while you or a party member has Leviathan summoned
 
 INSERT INTO `item_latents` VALUES (18112,287,9,58,0);    -- Puk Lance DMG+9 in Assault
 -- TODO: -- Puk Lance Wyvern: HP +50 in Assault
@@ -2951,11 +2955,6 @@ INSERT INTO `item_latents` VALUES (18387,25,5,58,0);     -- Djinnbringer Accurac
 INSERT INTO `item_latents` VALUES (18387,287,3,58,0);    -- Djinnbringer DMG+3 in Assault
 INSERT INTO `item_latents` VALUES (18390,28,3,8,4);
 
--- -------------------------------------------------------
--- Ramuh's Mace
--- -------------------------------------------------------
--- TODO: INSERT INTO `item_latents` VALUES (18404,431,1,21,15); -- Additional effect: Lightning damage
-
 INSERT INTO `item_latents` VALUES (18407,5,20,58,0);     -- Imperial Wand MP +20 in Assault
 INSERT INTO `item_latents` VALUES (18407,27,-3,58,0);    -- Imperial Wand Enmity -3 in Assault
 INSERT INTO `item_latents` VALUES (18407,287,2,58,0);    -- Imperial Wand DMG+2 in Assault
@@ -3008,10 +3007,8 @@ INSERT INTO `item_latents` VALUES (18508,25,2,16,5);     -- ACC +2~8,party size 
 INSERT INTO `item_latents` VALUES (18508,25,2,16,6);     -- ACC +2~8,party size 3+. Effect strengthens with more members
 
 -- -------------------------------------------------------
--- Carbuncle's Pole
+-- Yigit Staff
 -- --------------------------------------------------------
-INSERT INTO `item_latents` VALUES (18581,431,2,21,8);    -- Additional effect: Light damage
-
 INSERT INTO `item_latents` VALUES (18582,6,2,58,0);      -- Yigit Staff MP% +2 in Assault
 INSERT INTO `item_latents` VALUES (18582,287,1,58,0);    -- Yigit Staff DMG+1 in Assault
 
