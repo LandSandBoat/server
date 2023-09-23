@@ -23,7 +23,7 @@ commandObj.onTrigger = function(player, packet)
     end
 
     -- inject packet
-    player:injectPacket(packet)
+    player:injectPacket('./injection/' .. packet)
 end
 
 return commandObj
