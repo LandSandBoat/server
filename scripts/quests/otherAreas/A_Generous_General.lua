@@ -33,10 +33,10 @@ quest.sections =
 {
     {
         check = function(player, status, vars)
-            return player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.AN_AFFABLE_ADAMANTKING) ~= QUEST_ACCEPTED
-            and player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.AN_UNDERSTANDING_OVERLORD) ~= QUEST_ACCEPTED
-            and player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.A_MORAL_MANIFEST) ~= QUEST_ACCEPTED and
-            player:getVar("BstHeadGearQuest_Conquest") < os.time() and
+            return player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.AN_AFFABLE_ADAMANTKING) ~= QUEST_ACCEPTED and
+            player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.AN_UNDERSTANDING_OVERLORD) ~= QUEST_ACCEPTED and
+            player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.A_MORAL_MANIFEST) ~= QUEST_ACCEPTED and
+            player:getVar("BstHeadGearQuest_Conquest") < getConquestTally() and
             not player:hasItem(xi.items.CHOPLIXS_COIF) and
             player:getMainLvl() >= 60
 
@@ -48,13 +48,14 @@ quest.sections =
             onZoneIn =
             {
                 function(player, prevZone)
-                    local xPos = player:getXPos()
-                    local yPos = player:getYPos()
-                    local zPos = player:getZPos()
-
+                    local pos = player:getPos()
                     if
-                        xPos >= -323.0 and yPos >= 6.0 and zPos >= -261.0 and
-                        xPos <= -321.0 and yPos <= 9.0 and zPos <= -258.0 and
+                        pos.x >= -323.0 and
+                        pos.y >= 6.0 and
+                        pos.z >= -261.0 and
+                        pos.x <= -321.0 and
+                        pos.y <= 9.0 and
+                        pos.z <= -258.0 and
                         quest:getVar(player, 'Prog') == 0
                     then
                         return 60
@@ -80,7 +81,8 @@ quest.sections =
             return status == QUEST_ACCEPTED
         end,
 
-        [xi.zone.SOUTHERN_SAN_DORIA] = {
+        [xi.zone.SOUTHERN_SAN_DORIA] =
+        {
             ['Faulpie'] =
             {
                 onTrigger = function(player, npc)
@@ -105,7 +107,7 @@ quest.sections =
 
                 onTrade = function(player, npc, trade)
                     if
-                        npcUtil.tradeHasExactly(trade, {xi.items.BUFFALO_HIDE, xi.items.SQUARE_OF_SHEEP_LEATHER, {"gil", 10000}}) and
+                        npcUtil.tradeHasExactly(trade, { xi.items.BUFFALO_HIDE, xi.items.SQUARE_OF_SHEEP_LEATHER, { "gil", 10000 } }) and
                         quest:getVar(player, 'Prog') == 1
                     then
                         return quest:progressEvent(772)
@@ -118,10 +120,11 @@ quest.sections =
                 [770] = function(player, csid, option, npc)
                     quest:setVar(player, 'Prog', 1)
                 end,
+
                 [771] = function(player, csid, option, npc)
                     if option == 100 then
                         -- note: you are able to reobtain the quest after cancelling, without a conquest wait
-                        --player:messageSpecial(zones[player:getZoneID()].text.QUEST_CANCELLED)
+                        player:messageSpecial(zones[player:getZoneID()].text.QUEST_CANCELLED)
                         quest:setVar(player, 'Prog', 0)
                         quest:setVar(player, 'Option', 0)
                         player:setVar("BstHeadGearQuest_Conquest", 0)
@@ -129,18 +132,20 @@ quest.sections =
                         player:delQuest(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.A_GENEROUS_GENERAL)
                     end
                 end,
+
                 [772] = function(player, csid, option, npc)
                     player:tradeComplete()
                     quest:setVar(player, 'Prog', 2)
                     quest:setVar(player, 'Option', getVanaMidnight())
                 end,
+
                 [774] = function(player, csid, option, npc)
                     if option == 0 and player:getGil() >= 100000 then
                         player:delGil(100000)
                         quest:setVar(player, 'Prog', 2)
                         quest:setVar(player, 'Option', getVanaMidnight())
                     elseif option == 100 then
-                        --player:messageSpecial(zones[player:getZoneID()].text.QUEST_CANCELLED)
+                        player:messageSpecial(zones[player:getZoneID()].text.QUEST_CANCELLED)
                         quest:setVar(player, 'Prog', 0)
                         quest:setVar(player, 'Option', 0)
                         player:setVar("BstHeadGearQuest_Conquest", 0)
@@ -148,6 +153,7 @@ quest.sections =
                         player:delQuest(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.A_GENEROUS_GENERAL)
                     end
                 end,
+
                 [775] = function(player, csid, option, npc)
                     quest:setVar(player, 'Prog', 3)
                     npcUtil.giveItem(player, xi.items.GOBLIN_COIF_CUTTING)
@@ -156,17 +162,20 @@ quest.sections =
             },
         },
 
-        [xi.zone.OLDTON_MOVALPOLOS] = {
+        [xi.zone.OLDTON_MOVALPOLOS] =
+        {
             onZoneIn =
             {
                 function(player, prevZone)
-                    local xPos = player:getXPos()
-                    local yPos = player:getYPos()
-                    local zPos = player:getZPos()
+                    local pos = player:getPos()
                     local headEquip = player:getEquipID(xi.slot.HEAD)
-
-                    if xPos >= -323.0 and yPos >= 6.0 and zPos >= -261.0 and
-                        xPos <= -321.0 and yPos <= 9.0 and zPos <= -258.0 and
+                    if
+                        pos.x >= -323.0 and
+                        pos.y >= 6.0 and
+                        pos.z >= -261.0 and
+                        pos.x <= -321.0 and
+                        pos.y <= 9.0 and
+                        pos.z <= -258.0 and
                         quest:getVar(player, 'Prog') == 3 and
                         headEquip == xi.items.GOBLIN_COIF
                     then
@@ -187,15 +196,18 @@ quest.sections =
                     then
                         return quest:progressEvent(62)
                     elseif
-                        quest:getVar(player,'Prog') == 5 and
-                        headEquip == xi.items.GOBLIN_COIF
+                        headEquip == (xi.items.GOBLIN_COIF) and
+                        quest:getVar(player, 'Prog') == 5
                     then
                         return quest:progressEvent(63)
                     end
                 end,
 
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, {xi.items.GOBLIN_COIF}) and quest:getVar(player, 'Prog') == 6 then
+                    if
+                        npcUtil.tradeHasExactly(trade, { xi.items.GOBLIN_COIF }) and
+                        quest:getVar(player, 'Prog') == 6
+                    then
                         return quest:progressEvent(64)
                     end
                 end,
@@ -207,20 +219,24 @@ quest.sections =
                     npcUtil.giveKeyItem(player, xi.ki.GOBLIN_RECOMMENDATION_LETTER)
                     quest:setVar(player, 'Prog', 4)
                 end,
+
                 [62] = function(player, csid, option, npc)
                     if npcUtil.popFromQM(player, npc, spawnedMobs, { hide = 0 }) then
                         player:messageSpecial(oldton.text.RECOMMENDATION_LETTER)
                     end
                 end,
+
                 [63] = function(player, csid, option, npc)
                     quest:setVar(player, 'Prog', 6)
                 end,
+
                 [64] = function(player, csid, option, npc)
                         player:confirmTrade()
                         player:setVar("BstHeadGearQuest_Conquest", getConquestTally())
                         quest:setVar(player, 'Prog', 7)
                         npcUtil.giveItem(player, xi.items.CHOPLIXS_COIF)
                 end,
+
                 [65] = function(player, csid, option, npc) --Zone out and back into Oldton Movalpolos for a cutscene that ends the quest and a Gold Beastcoin reward.
                     if quest:complete(player) then
                         player:setVar("BstHeadgearQuest", 0)
