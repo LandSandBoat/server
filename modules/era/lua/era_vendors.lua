@@ -154,7 +154,6 @@ xi.eraShops.Nogga =
     17313, 1083, 3, -- Grenade
 }
 
-
 -- Sandoria --
 -- Northern Sandy
 xi.eraShops.Arlenne =
@@ -605,7 +604,6 @@ xi.eraShops.SolbyMaholby =
     4899,    450, -- Earth Spirit Pact
 }
 
-
 -- Port Jeuno
 xi.eraShops.Gekko =
 {
@@ -651,22 +649,22 @@ xi.eraShops.Antonia =
 -- Windurst Waters
 xi.eraShops.OrezEbrez =
 {
-    12466, 20000,1, --Red Cap
-    12458,  8972,1, --Soil Hachimaki
-    12455,  7026,1, --Beetle Mask
-    12472,   144,2, --Circlet
-    12465,  8024,2, --Cotton Headgear
-    12440,   396,2, --Leather Bandana
-    12473,  1863,2, --Poet's Circlet
-    12499, 14400,2, --Flax Headband
-    12457,  3272,2, --Cotton Hachimaki
-    12454,  3520,2, --Bone Mask
-    12474, 10924,2, --Wool Hat
-    12464,  1742,3, --Headgear
-    12456,   552,3, --Hachimaki
-    12498,  1800,3, --Cotton Headband
-    12448,   151,3, --Bronze Cap
-    12449,  1471,3, --Brass Cap
+    12466, 20000, 1, --Red Cap
+    12458,  8972, 1, --Soil Hachimaki
+    12455,  7026, 1, --Beetle Mask
+    12472,   144, 2, --Circlet
+    12465,  8024, 2, --Cotton Headgear
+    12440,   396, 2, --Leather Bandana
+    12473,  1863, 2, --Poet's Circlet
+    12499, 14400, 2, --Flax Headband
+    12457,  3272, 2, --Cotton Hachimaki
+    12454,  3520, 2, --Bone Mask
+    12474, 10924, 2, --Wool Hat
+    12464,  1742, 3, --Headgear
+    12456,   552, 3, --Hachimaki
+    12498,  1800, 3, --Cotton Headband
+    12448,   151, 3, --Bronze Cap
+    12449,  1471, 3, --Brass Cap
 }
 
 -- Windurst Woods
@@ -680,7 +678,6 @@ xi.eraShops.Mono_Nchaa =
     5009,  2649, 3, -- Scroll of Hunter's Prelude
 }
 
-
 local lookupTable =
 --[[
     Nation: {"nation",Zone,NPCName,customShopTable,nation,DIALOG_NAME}
@@ -692,63 +689,63 @@ local lookupTable =
 
 {
     -- Bastok
-    {"nation", "Bastok_Markets", "Mjoll", xi.eraShops.Mjoll, xi.nation.BASTOK, "MJOLL_SHOP_DIALOG", 1},
-    {"nation", "Bastok_Markets", "Charging_Chocobo", xi.eraShops.Charging_Chocobo, xi.nation.BASTOK, "CHARGINGCHOCOBO_SHOP_DIALOG", 1},
-    {"nation", "Bastok_Markets", "Zhikkom", xi.eraShops.Zhikkom, xi.nation.BASTOK, "ZHIKKOM_SHOP_DIALOG", 1},
-    {"nation", "Bastok_Markets", "Peritrage", xi.eraShops.Peritrage, xi.nation.BASTOK, "PERITRAGE_SHOP_DIALOG", 1},
-    {"nation", "Bastok_Markets", "Ciqala", xi.eraShops.Ciqala, xi.nation.BASTOK, "CIQALA_SHOP_DIALOG", 1},
-    {"nation", "Bastok_Markets", "Hortense", xi.eraShops.Hortense, xi.nation.BASTOK, "HORTENSE_SHOP_DIALOG", 1},
-    {"nation", "Bastok_Markets", "Sororo", xi.eraShops.Sororo, xi.nation.BASTOK, "SORORO_SHOP_DIALOG", 1},
-    {"standard", "Port_Bastok", "Valeriano", xi.eraShops.Valeriano, xi.quest.fame_area.BASTOK, "VALERIANO_SHOP_DIALOG", 1},
-    {"nation", "Port_Bastok", "Numa", xi.eraShops.Numa, xi.nation.BASTOK, "NUMA_SHOP_DIALOG", 1},
-    {"nation", "Metalworks", "Nogga", xi.eraShops.Nogga, xi.nation.BASTOK, "NOGGA_SHOP_DIALOG", 1},
+    { "nation", "Bastok_Markets", "Mjoll", xi.eraShops.Mjoll, xi.nation.BASTOK, "MJOLL_SHOP_DIALOG", 1 },
+    { "nation", "Bastok_Markets", "Charging_Chocobo", xi.eraShops.Charging_Chocobo, xi.nation.BASTOK, "CHARGINGCHOCOBO_SHOP_DIALOG", 1 },
+    { "nation", "Bastok_Markets", "Zhikkom", xi.eraShops.Zhikkom, xi.nation.BASTOK, "ZHIKKOM_SHOP_DIALOG", 1 },
+    { "nation", "Bastok_Markets", "Peritrage", xi.eraShops.Peritrage, xi.nation.BASTOK, "PERITRAGE_SHOP_DIALOG", 1 },
+    { "nation", "Bastok_Markets", "Ciqala", xi.eraShops.Ciqala, xi.nation.BASTOK, "CIQALA_SHOP_DIALOG", 1 },
+    { "nation", "Bastok_Markets", "Hortense", xi.eraShops.Hortense, xi.nation.BASTOK, "HORTENSE_SHOP_DIALOG", 1 },
+    { "nation", "Bastok_Markets", "Sororo", xi.eraShops.Sororo, xi.nation.BASTOK, "SORORO_SHOP_DIALOG", 1 },
+    { "standard", "Port_Bastok", "Valeriano", xi.eraShops.Valeriano, xi.quest.fame_area.BASTOK, "VALERIANO_SHOP_DIALOG", 1 },
+    { "nation", "Port_Bastok", "Numa", xi.eraShops.Numa, xi.nation.BASTOK, "NUMA_SHOP_DIALOG", 1 },
+    { "nation", "Metalworks", "Nogga", xi.eraShops.Nogga, xi.nation.BASTOK, "NOGGA_SHOP_DIALOG", 1 },
 
     -- Sandoria
-    {"nation", "Northern_San_dOria", "Arlenne", xi.eraShops.Arlenne, xi.nation.SANDORIA, "ARLENNE_SHOP_DIALOG", 1},
-    {"nation", "Northern_San_dOria", "Tavourine", xi.eraShops.Tavourine, xi.nation.SANDORIA, "TAVOURINE_SHOP_DIALOG", 1},
-    {"nation", "Northern_San_dOria", "Pirvidiauce", xi.eraShops.Pirvidiauce, xi.nation.SANDORIA, "PIRVIDIAUCE_SHOP_DIALOG", 1},
-    {"nation", "Port_San_dOria", "Coullave", xi.eraShops.Coullave, xi.nation.SANDORIA, "COULLAVE_SHOP_DIALOG", 1},
-    {"nation", "Southern_San_dOria", "Ashene", xi.eraShops.Ashene, xi.nation.SANDORIA, "ASH_THADI_ENE_SHOP_DIALOG", 1},
-    {"nation", "Southern_San_dOria", "Carautia", xi.eraShops.Carautia, xi.nation.SANDORIA, "CARAUTIA_SHOP_DIALOG", 1},
-    {"nation", "Southern_San_dOria", "Ferdoulemiont", xi.eraShops.Ferdoulemiont, xi.nation.SANDORIA, "FERDOULEMIONT_SHOP_DIALOG", 1},
-    {"nation", "Southern_San_dOria", "Benaige", xi.eraShops.Benaige, xi.nation.SANDORIA, "BENAIGE_SHOP_DIALOG", 1},
-    {"nation", "Southern_San_dOria", "Ostalie", xi.eraShops.Ostalie, xi.nation.SANDORIA, "OSTALIE_SHOP_DIALOG", 1},
-    {"standard", "Southern_San_dOria", "Valeriano", xi.eraShops.Valeriano, xi.quest.fame_area.SANDORIA, "VALERIANO_SHOP_DIALOG", 1},
+    { "nation", "Northern_San_dOria", "Arlenne", xi.eraShops.Arlenne, xi.nation.SANDORIA, "ARLENNE_SHOP_DIALOG", 1 },
+    { "nation", "Northern_San_dOria", "Tavourine", xi.eraShops.Tavourine, xi.nation.SANDORIA, "TAVOURINE_SHOP_DIALOG", 1 },
+    { "nation", "Northern_San_dOria", "Pirvidiauce", xi.eraShops.Pirvidiauce, xi.nation.SANDORIA, "PIRVIDIAUCE_SHOP_DIALOG", 1 },
+    { "nation", "Port_San_dOria", "Coullave", xi.eraShops.Coullave, xi.nation.SANDORIA, "COULLAVE_SHOP_DIALOG", 1 },
+    { "nation", "Southern_San_dOria", "Ashene", xi.eraShops.Ashene, xi.nation.SANDORIA, "ASH_THADI_ENE_SHOP_DIALOG", 1 },
+    { "nation", "Southern_San_dOria", "Carautia", xi.eraShops.Carautia, xi.nation.SANDORIA, "CARAUTIA_SHOP_DIALOG", 1 },
+    { "nation", "Southern_San_dOria", "Ferdoulemiont", xi.eraShops.Ferdoulemiont, xi.nation.SANDORIA, "FERDOULEMIONT_SHOP_DIALOG", 1 },
+    { "nation", "Southern_San_dOria", "Benaige", xi.eraShops.Benaige, xi.nation.SANDORIA, "BENAIGE_SHOP_DIALOG", 1 },
+    { "nation", "Southern_San_dOria", "Ostalie", xi.eraShops.Ostalie, xi.nation.SANDORIA, "OSTALIE_SHOP_DIALOG", 1 },
+    { "standard", "Southern_San_dOria", "Valeriano", xi.eraShops.Valeriano, xi.quest.fame_area.SANDORIA, "VALERIANO_SHOP_DIALOG", 1 },
 
     -- Windurst
-    {"nation", "Port_Windurst", "Hohbiba-Mubiba", xi.eraShops.HohbibaMubiba, xi.nation.WINDURST, "HOHBIBAMUBIBA_SHOP_DIALOG", 1},
-    {"nation", "Port_Windurst", "Taniko-Maniko", xi.eraShops.TanikoManiko, xi.nation.WINDURST, "TANIKOMANIKO_SHOP_DIALOG", 1},
-    {"nation", "Port_Windurst", "Guruna-Maguruna", xi.eraShops.GurunaMaguruna, xi.nation.WINDURST, "GURUNAMAGURUNA_SHOP_DIALOG", 1},
-    {"nation", "Port_Windurst", "Kumama", xi.eraShops.Kumama, xi.nation.WINDURST, "KUMAMA_SHOP_DIALOG", 1},
-    {"nation", "Windurst_Waters", "Orez-Ebrez", xi.eraShops.OrezEbrez, xi.nation.WINDURST, "OREZEBREZ_SHOP_DIALOG", 1},
-    {"nation", "Windurst_Woods", "Mono_Nchaa", xi.eraShops.Mono_Nchaa, xi.nation.WINDURST, "MONONCHAA_SHOP_DIALOG", 1},
-    {"standard", "Windurst_Woods", "Wije_Tiren", xi.eraShops.WijeTiren, xi.quest.fame_area.WINDURST, "WIJETIREN_SHOP_DIALOG", 1},
-    {"standard", "Windurst_Woods", "Valeriano", xi.eraShops.Valeriano, xi.quest.fame_area.WINDURST, "VALERIANO_SHOP_DIALOG", 1},
+    { "nation", "Port_Windurst", "Hohbiba-Mubiba", xi.eraShops.HohbibaMubiba, xi.nation.WINDURST, "HOHBIBAMUBIBA_SHOP_DIALOG", 1 },
+    { "nation", "Port_Windurst", "Taniko-Maniko", xi.eraShops.TanikoManiko, xi.nation.WINDURST, "TANIKOMANIKO_SHOP_DIALOG", 1 },
+    { "nation", "Port_Windurst", "Guruna-Maguruna", xi.eraShops.GurunaMaguruna, xi.nation.WINDURST, "GURUNAMAGURUNA_SHOP_DIALOG", 1 },
+    { "nation", "Port_Windurst", "Kumama", xi.eraShops.Kumama, xi.nation.WINDURST, "KUMAMA_SHOP_DIALOG", 1 },
+    { "nation", "Windurst_Waters", "Orez-Ebrez", xi.eraShops.OrezEbrez, xi.nation.WINDURST, "OREZEBREZ_SHOP_DIALOG", 1 },
+    { "nation", "Windurst_Woods", "Mono_Nchaa", xi.eraShops.Mono_Nchaa, xi.nation.WINDURST, "MONONCHAA_SHOP_DIALOG", 1 },
+    { "standard", "Windurst_Woods", "Wije_Tiren", xi.eraShops.WijeTiren, xi.quest.fame_area.WINDURST, "WIJETIREN_SHOP_DIALOG", 1 },
+    { "standard", "Windurst_Woods", "Valeriano", xi.eraShops.Valeriano, xi.quest.fame_area.WINDURST, "VALERIANO_SHOP_DIALOG", 1 },
 
     -- Jeuno
-    {"standard", "Lower_Jeuno", "Creepstix", xi.eraShops.Creepstix, nil, "JUNK_SHOP_DIALOG", 1},
-    {"standard", "Lower_Jeuno", "Hasim", xi.eraShops.Hasim, nil, "WAAG_DEEG_SHOP_DIALOG", 1},
-    {"standard", "Lower_Jeuno", "Susu", xi.eraShops.Susu, nil, "WAAG_DEEG_SHOP_DIALOG", 1},
-    {"standard", "Lower_Jeuno", "Stinknix", xi.eraShops.Stinknix, nil, "JUNK_SHOP_DIALOG", 1},
-    {"standard", "Lower_Jeuno", "Taza", xi.eraShops.Taza, nil, "WAAG_DEEG_SHOP_DIALOG", 1},
-    {"standard", "Upper_Jeuno", "Antonia", xi.eraShops.Antonia, nil, "VIETTES_SHOP_DIALOG", 1},
-    {"standard", "Upper_Jeuno", "Coumuna", xi.eraShops.Coumuna, nil, "VIETTES_SHOP_DIALOG", 1},
-    {"standard", "Upper_Jeuno", "Areebah", xi.eraShops.Areebah, xi.quest.fame_area.JEUNO, "MP_SHOP_DIALOG", 1},
-    {"standard", "RuLude_Gardens", "Dabih_Jajalioh", xi.eraShops.DabihJajalioh, xi.quest.fame_area.JEUNO, "DABIHJAJALIOH_SHOP_DIALOG", 1},
-    {"standard", "Port_Jeuno", "Gekko", xi.eraShops.Gekko, xi.quest.fame_area.JEUNO, "DUTY_FREE_SHOP_DIALOG", 1},
+    { "standard", "Lower_Jeuno", "Creepstix", xi.eraShops.Creepstix, nil, "JUNK_SHOP_DIALOG", 1 },
+    { "standard", "Lower_Jeuno", "Hasim", xi.eraShops.Hasim, nil, "WAAG_DEEG_SHOP_DIALOG", 1 },
+    { "standard", "Lower_Jeuno", "Susu", xi.eraShops.Susu, nil, "WAAG_DEEG_SHOP_DIALOG", 1 },
+    { "standard", "Lower_Jeuno", "Stinknix", xi.eraShops.Stinknix, nil, "JUNK_SHOP_DIALOG", 1 },
+    { "standard", "Lower_Jeuno", "Taza", xi.eraShops.Taza, nil, "WAAG_DEEG_SHOP_DIALOG", 1 },
+    { "standard", "Upper_Jeuno", "Antonia", xi.eraShops.Antonia, nil, "VIETTES_SHOP_DIALOG", 1 },
+    { "standard", "Upper_Jeuno", "Coumuna", xi.eraShops.Coumuna, nil, "VIETTES_SHOP_DIALOG", 1 },
+    { "standard", "Upper_Jeuno", "Areebah", xi.eraShops.Areebah, xi.quest.fame_area.JEUNO, "MP_SHOP_DIALOG", 1 },
+    { "standard", "RuLude_Gardens", "Dabih_Jajalioh", xi.eraShops.DabihJajalioh, xi.quest.fame_area.JEUNO, "DABIHJAJALIOH_SHOP_DIALOG", 1 },
+    { "standard", "Port_Jeuno", "Gekko", xi.eraShops.Gekko, xi.quest.fame_area.JEUNO, "DUTY_FREE_SHOP_DIALOG", 1 },
     -- Mhaura
-    {"standard", "Mhaura", "Pikini-Mikini", xi.eraShops.PikiniMikini, xi.quest.fame_area.WINDURST, "PIKINIMIKINI_SHOP_DIALOG", 1},
+    { "standard", "Mhaura", "Pikini-Mikini", xi.eraShops.PikiniMikini, xi.quest.fame_area.WINDURST, "PIKINIMIKINI_SHOP_DIALOG", 1 },
     -- Selbina
-    {"standard", "Selbina", "Dohdjuma", xi.eraShops.Dohdjuma, xi.quest.fame_area.SELBINA_RABAO, "DOHDJUMA_SHOP_DIALOG", 1},
+    { "standard", "Selbina", "Dohdjuma", xi.eraShops.Dohdjuma, xi.quest.fame_area.SELBINA_RABAO, "DOHDJUMA_SHOP_DIALOG", 1 },
     -- Kazham
-    {"standard", "Kazham", "Toji_Mumosulah", xi.eraShops.TojiMumosulah, xi.quest.fame_area.WINDURST, "TOJIMUMOSULAH_SHOP_DIALOG", 1},
+    { "standard", "Kazham", "Toji_Mumosulah", xi.eraShops.TojiMumosulah, xi.quest.fame_area.WINDURST, "TOJIMUMOSULAH_SHOP_DIALOG", 1 },
     -- Norg
-    {"standard", "Norg", "Solby-Maholby", xi.eraShops.SolbyMaholby, xi.quest.fame_area.NORG, "SOLBYMAHOLBY_SHOP_DIALOG", 1},
+    { "standard", "Norg", "Solby-Maholby", xi.eraShops.SolbyMaholby, xi.quest.fame_area.NORG, "SOLBYMAHOLBY_SHOP_DIALOG", 1 },
     -- Rabao
-    {"standard", "Rabao", "Brave_Ox", xi.eraShops.Brave_Ox, nil, "BRAVEOX_SHOP_DIALOG", 1},
+    { "standard", "Rabao", "Brave_Ox", xi.eraShops.Brave_Ox, nil, "BRAVEOX_SHOP_DIALOG", 1 },
     -- Nashmau
-    {"nofame", "Nashmau", "Mamaroon", xi.eraShops.Mamaroon, "MAMAROON_SHOP_DIALOG", xi.settings.main.ENABLE_TOAU},
-    {"nofame", "Nashmau", "Yoyoroon", xi.eraShops.Yoyoroon, "YOYOROON_SHOP_DIALOG", xi.settings.main.ENABLE_TOAU},
+    { "nofame", "Nashmau", "Mamaroon", xi.eraShops.Mamaroon, "MAMAROON_SHOP_DIALOG", xi.settings.main.ENABLE_TOAU },
+    { "nofame", "Nashmau", "Yoyoroon", xi.eraShops.Yoyoroon, "YOYOROON_SHOP_DIALOG", xi.settings.main.ENABLE_TOAU },
 }
 
 for _, shop in pairs(lookupTable) do

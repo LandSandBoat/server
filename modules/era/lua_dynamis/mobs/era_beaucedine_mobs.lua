@@ -4,7 +4,6 @@
 require("scripts/globals/dynamis")
 require("scripts/globals/zone")
 -----------------------------------
-
 xi = xi or {}
 xi.dynamis = xi.dynamis or {}
 
@@ -17,7 +16,7 @@ xi.dynamis.onSpawnAngra = function(mob)
         between = 300,
         specials =
         {
-            { id = xi.jsa.CHAINSPELL, hpp = 25},
+            { id = xi.jsa.CHAINSPELL, hpp = 25 },
         },
     })
 end
@@ -29,22 +28,22 @@ end
 xi.dynamis.onFightAngra = function(mob, target)
     local mobIndex = mob:getLocalVar(string.format("MobIndex_%s", mob:getID()))
     local nmchildren = xi.dynamis.mobList[mob:getZoneID()][mobIndex].nmchildren
-    local children = {nmchildren[2], nmchildren[3], nmchildren[4], nmchildren[5]}
+    local children = { nmchildren[2], nmchildren[3], nmchildren[4], nmchildren[5] }
     local teles =
     {
-    {279.4038, 20, 535.4518},
-    {312.6868, 20.5267, 511.9843},
-    {322.2653, 20, 481.8030},
-    {295.9948, 20.7949, 483.1078},
-    {269.6127, 19.5547, 505.3206},
-    {240.9685, 20, 521.5283},
-    {239.8057, 20.1687, 487.3961},
-    {258.6785, 20.1525, 460.4170},
+    { 279.4038, 20, 535.4518 },
+    { 312.6868, 20.5267, 511.9843 },
+    { 322.2653, 20, 481.8030 },
+    { 295.9948, 20.7949, 483.1078 },
+    { 269.6127, 19.5547, 505.3206 },
+    { 240.9685, 20, 521.5283 },
+    { 239.8057, 20.1687, 487.3961 },
+    { 258.6785, 20.1525, 460.4170 },
     }
 
     local teleTime = mob:getLocalVar("teleTime")
     if os.time() - teleTime > 30 then
-        randPos = teles[math.random((1), (8))]
+        local randPos = teles[math.random((1), (8))]
         xi.dynamis.teleport(mob, 1000)
         mob:setPos(randPos, 0)
         for _, childIndex in pairs(children) do
@@ -58,6 +57,7 @@ xi.dynamis.onFightAngra = function(mob, target)
                 end
             end
         end
+
         mob:setLocalVar("teleTime", os.time())
     end
 
@@ -99,7 +99,7 @@ xi.dynamis.onRoamAngra = function(mob)
     local spawnPos = mob:getSpawnPos()
     local mobIndex = mob:getLocalVar(string.format("MobIndex_%s", mob:getID()))
     local nmchildren = xi.dynamis.mobList[mob:getZoneID()][mobIndex].nmchildren
-    local children = {nmchildren[2], nmchildren[3], nmchildren[4], nmchildren[5]}
+    local children = { nmchildren[2], nmchildren[3], nmchildren[4], nmchildren[5] }
 
     if currentPos.x ~= spawnPos.x and currentPos.z ~= spawnPos.z then
         mob:pathTo(spawnPos.x, spawnPos.y, spawnPos.z)
@@ -112,7 +112,10 @@ xi.dynamis.onRoamAngra = function(mob)
             local childCurrentPos = child:getPos()
             local childSpawnPos = child:getSpawnPos()
             if child:isAlive() and child:getCurrentAction() == xi.act.ROAMING then
-                if childCurrentPos.x ~= childSpawnPos.x and childCurrentPos.z ~= childSpawnPos.z then
+                if
+                    childCurrentPos.x ~= childSpawnPos.x and
+                    childCurrentPos.z ~= childSpawnPos.z
+                then
                     child:pathTo(childSpawnPos.x, childSpawnPos.y, childSpawnPos.z)
                 end
             end
@@ -127,7 +130,7 @@ xi.dynamis.onSpawnDagour = function(mob)
         between = 60,
         specials =
         {
-            { id = xi.jsa.ASTRAL_FLOW, hpp = 95},
+            { id = xi.jsa.ASTRAL_FLOW, hpp = 95 },
         },
     })
 end
@@ -153,9 +156,9 @@ xi.dynamis.onSpawnGouble = function(mob)
         between = 60,
         specials =
         {
-            { id = xi.jsa.MIGHTY_STRIKES, hpp = 95},
-            { id = xi.jsa.INVINCIBLE, hpp = 95},
-            { id = xi.jsa.CHAINSPELL, hpp = 95},
+            { id = xi.jsa.MIGHTY_STRIKES, hpp = 95 },
+            { id = xi.jsa.INVINCIBLE, hpp = 95 },
+            { id = xi.jsa.CHAINSPELL, hpp = 95 },
         },
     })
 end
@@ -167,9 +170,9 @@ xi.dynamis.onSpawnMildaun = function(mob)
         between = 60,
         specials =
         {
-            { id = xi.jsa.HUNDRED_FISTS, hpp = 95},
-            { id = xi.jsa.PERFECT_DODGE, hpp = 95},
-            { id = xi.jsa.MIJIN_GAKURE, hpp = 95},
+            { id = xi.jsa.HUNDRED_FISTS, hpp = 95 },
+            { id = xi.jsa.PERFECT_DODGE, hpp = 95 },
+            { id = xi.jsa.MIJIN_GAKURE, hpp = 95 },
         },
     })
 end
@@ -181,9 +184,9 @@ xi.dynamis.onSpawnQuieb = function(mob)
         between = 60,
         specials =
         {
-            { id = xi.jsa.BENEDICTION, hpp = 95},
-            { id = xi.jsa.MANAFONT, hpp = 95},
-            { id = xi.jsa.SOUL_VOICE, hpp = 95},
+            { id = xi.jsa.BENEDICTION, hpp = 95 },
+            { id = xi.jsa.MANAFONT, hpp = 95 },
+            { id = xi.jsa.SOUL_VOICE, hpp = 95 },
         },
     })
 end
@@ -195,9 +198,9 @@ xi.dynamis.onSpawnVelosar = function(mob)
         between = 60,
         specials =
         {
-            { id = xi.jsa.BLOOD_WEAPON, hpp = 95},
-            { id = xi.jsa.MEIKYO_SHISUI, hpp = 95},
-            { id = xi.jsa.EES_SHADE, hpp = 95},
+            { id = xi.jsa.BLOOD_WEAPON, hpp = 95 },
+            { id = xi.jsa.MEIKYO_SHISUI, hpp = 95 },
+            { id = xi.jsa.EES_SHADE, hpp = 95 },
         },
     })
 end

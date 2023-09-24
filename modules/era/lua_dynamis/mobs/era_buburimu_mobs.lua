@@ -4,7 +4,6 @@
 require("scripts/globals/dynamis")
 require("scripts/globals/zone")
 -----------------------------------
-
 xi = xi or {}
 xi.dynamis = xi.dynamis or {}
 
