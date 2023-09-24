@@ -4,13 +4,12 @@
 require("scripts/globals/dynamis")
 require("scripts/globals/zone")
 -----------------------------------
-
 xi = xi or {}
 xi.dynamis = xi.dynamis or {}
 
-local dragontraps = {"dragontrap1_killed", "dragontrap2_killed", "dragontrap3_killed"}
-local morbols = {"morbol1_killed", "morbol2_killed"}
-local flies = {"fly1_killed", "fly2_killed", "fly3_killed"}
+local dragontraps = { "dragontrap1_killed", "dragontrap2_killed", "dragontrap3_killed" }
+local morbols = { "morbol1_killed", "morbol2_killed" }
+local flies = { "fly1_killed", "fly2_killed", "fly3_killed" }
 
 local function checkFlytrapKills(mob)
     local zone = mob:getZone()
@@ -53,10 +52,10 @@ end
 xi.dynamis.onSpawnCirrate = function(mob)
     xi.dynamis.cirrateBuffs =
     {
-        {{"dragontrap1_killed", "dragontrap2_killed", "dragontrap3_killed"}, "putridbreathcap", 3, "dragon_killed", nil, 1609},
-        {{"fairy_ring_killed"}, "miasmicbreathpower", 30, "fairy_killed", 40, 1605},
-        {{"nanatina_killed"}, "fragrantbreathduration", 30, "nana_killed", nil, 1607},
-        {{"stcemqestcint_killed"}, "vampiriclashpower", 1, "stcem_killed", nil, 1611},
+        { { "dragontrap1_killed", "dragontrap2_killed", "dragontrap3_killed" }, "putridbreathcap", 3, "dragon_killed", nil, 1609 },
+        { { "fairy_ring_killed" }, "miasmicbreathpower", 30, "fairy_killed", 40, 1605 },
+        { { "nanatina_killed" }, "fragrantbreathduration", 30, "nana_killed", nil, 1607 },
+        { { "stcemqestcint_killed" }, "vampiriclashpower", 1, "stcem_killed", nil, 1611 },
     }
     xi.dynamis.cirrateSkills = -- All chance values are the max value they will go until.
     {
@@ -68,10 +67,11 @@ xi.dynamis.onSpawnCirrate = function(mob)
         [1610] = 20, -- Extremely Bad Breath
     }
 
-    mob:addListener("WEAPONSKILL_STATE_EXIT", "CIRRATE_WEAPONSKILL_STATE_EXIT", function(mob)
-        mob:getZone():setLocalVar("cirrate_tp", 0)
-        mob:setTP(0)
+    mob:addListener("WEAPONSKILL_STATE_EXIT", "CIRRATE_WEAPONSKILL_STATE_EXIT", function(mobA)
+        mobA:getZone():setLocalVar("cirrate_tp", 0)
+        mobA:setTP(0)
     end)
+
     mob:setRoamFlags(xi.roamFlag.SCRIPTED)
     xi.dynamis.setMegaBossStats(mob)
     -- Set Mods
@@ -94,7 +94,11 @@ xi.dynamis.onEngagedCirrate = function(mob, target)
     local zoneID = mob:getZoneID()
     local flytrapKills = checkFlytrapKills(mob)
     local morbolKills = checkMorbolKills(mob)
-    if flytrapKills < 3 and morbolKills == 0 and mob:getLocalVar("spawnedPets") == 0 then
+    if
+        flytrapKills < 3 and
+        morbolKills == 0 and
+        mob:getLocalVar("spawnedPets") == 0
+    then
         mob:setLocalVar("spawnedPets", 1)
         xi.dynamis.nmDynamicSpawn(289, 24, true, zoneID, target, mob)
         xi.dynamis.nmDynamicSpawn(290, 24, true, zoneID, target, mob)
@@ -117,12 +121,14 @@ xi.dynamis.onFightCirrate = function(mob, target)
                 count = count + 1
             end
         end
+
         if count > 0 then
             mob:setLocalVar(buffs[selection][2], buffs[selection][3])
             zone:setLocalVar(buffs[selection][4], 1)
             if buffs[selection][5] ~= nil then
                 mob:setSpeed(buffs[selection][5])
             end
+
             xi.dynamis.cirrateSkills[buffs[selection][6]] = 12  -- Updates first entry to 12 if the mob is dead.
             table.remove(buffs, selection)
         end

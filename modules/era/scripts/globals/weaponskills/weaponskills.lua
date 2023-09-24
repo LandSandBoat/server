@@ -7,7 +7,6 @@ require("scripts/globals/aftermath")
 require("scripts/globals/magic")
 require("scripts/globals/weaponskills")
 -----------------------------------
-
 local m = Module:new("era_weaponskills")
 
 m:addOverride("xi.globals.weaponskills.arching_arrow.onUseWeaponSkill", function(player, target, wsID, tp, primary, action, taChar)
@@ -620,7 +619,7 @@ m:addOverride("xi.globals.weaponskills.catastrophe.onUseWeaponSkill", function(p
     local damage, criticalHit, tpHits, extraHits = xi.weaponskills.doPhysicalWeaponskill(player, target, wsID, params, tp, action, primary, taChar)
 
     if not target:isUndead() then
-        local drain = math.floor(damage * (math.random(30,70)/100))
+        local drain = math.floor(damage * (math.random(30, 70) / 100))
         player:addHP(drain)
     end
 
@@ -1451,7 +1450,7 @@ m:addOverride("xi.globals.weaponskills.glory_slash.onUseWeaponSkill", function(p
     params.crit100 = 0.0 params.crit200 = 0.0 params.crit300 = 0.0
     params.canCrit = false
     params.acc100 = 1.0 params.acc200 = 1.0 params.acc300 = 1.0
-    params.atk100 = 1; params.atk200 = 1; params.atk300 = 1
+    params.atk100 = 1 params.atk200 = 1 params.atk300 = 1
 
     local effectParams = {}
     effectParams.element = xi.magic.ele.LIGHTNING
