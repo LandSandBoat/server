@@ -92,7 +92,7 @@ xi.dynamis.spawnWave = function(zone, zoneID, waveNumber)
         end
     end
 
-    if waveNumber == 5 and zoneID == xi.zone.DYNAMIS_XARCABARD then
+    if waveNumber == 4 and zoneID == xi.zone.DYNAMIS_XARCABARD then
         local playersInZone = zone:getPlayers()
         for _, player in pairs(playersInZone) do
             player:messageSpecial(zones[xi.zone.DYNAMIS_XARCABARD].text.PRISON_OF_SOULS_HAS_SET_FREE)
@@ -116,10 +116,7 @@ xi.dynamis.parentOnEngaged = function(mob, target)
 
         if xi.dynamis.mobList[zoneID][oMobIndex].nmchildren ~= nil then
             for index, MobIndex in pairs(xi.dynamis.mobList[zoneID][oMobIndex].nmchildren) do
-                if
-                    MobIndex or
-                    not MobIndex
-                then
+                if type(MobIndex) == "boolean" then
                     index = index + 1
                 else
                     local forceLink = xi.dynamis.mobList[zoneID][oMobIndex].nmchildren[1]
