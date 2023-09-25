@@ -3997,7 +3997,11 @@ INSERT INTO `mob_skill_lists` VALUES ('JailerOfTemperance',4047,1467);
 INSERT INTO `mob_skill_lists` VALUES ('JailerOfTemperance',4047,1468);
 INSERT INTO `mob_skill_lists` VALUES ('JailerOfTemperance',4047,1469);
 
--- 4048 Available
+INSERT INTO `mob_skill_lists` VALUES ('Jaded_Jody',4048,316);  -- Impale
+INSERT INTO `mob_skill_lists` VALUES ('Jaded_Jody',4048,317);  -- Vampiric Lash
+INSERT INTO `mob_skill_lists` VALUES ('Jaded_Jody',4048,1793); -- Vampiric Root
+INSERT INTO `mob_skill_lists` VALUES ('Jaded_Jody',4048,319);  -- Bad Breath
+INSERT INTO `mob_skill_lists` VALUES ('Jaded_Jody',4048,320);  -- Sweet Breath
 
 INSERT INTO `mob_skill_lists` VALUES ('Shooting_Fish',4049,313); -- knockback splashbreath
 INSERT INTO `mob_skill_lists` VALUES ('Cogitator',4050,1242); -- empty cutter

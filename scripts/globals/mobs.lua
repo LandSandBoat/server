@@ -207,6 +207,7 @@ xi.mob.additionalEffect =
     WEIGHT     = 22,
     DISPEL     = 23,
     SLEEP      = 24,
+    BIND       = 25,
 }
 xi.mob.ae = xi.mob.additionalEffect
 
@@ -520,6 +521,20 @@ local additionalEffects =
         applyEffect = true,
         eff = xi.effect.SLEEP_I,
         power = 20,
+        duration = 30,
+        minDuration = 1,
+        maxDuration = 45,
+    },
+
+    [xi.mob.ae.BIND] =
+    {
+        chance = 25,
+        ele = xi.magic.ele.ICE,
+        sub = xi.subEffect.BIND,
+        msg = xi.msg.basic.ADD_EFFECT_STATUS,
+        applyEffect = true,
+        eff = xi.effect.BIND,
+        power = 1,
         duration = 30,
         minDuration = 1,
         maxDuration = 45,

@@ -70,8 +70,9 @@ g_mixins.families.eruca = function(erucaMob)
             not mob:isEngaged()
         then
             local resleepTime = mob:getLocalVar("ResleepTime")
+            local spawn       = mob:getSpawnPos()
 
-            if resleepTime ~= 0 and mob:checkDistance(mob:getSpawnPos()) > 25 then
+            if resleepTime ~= 0 and mob:checkDistance(spawn.x, spawn.y, spawn.z) > 25 then
                 mob:setLocalVar("ResleepTime", os.time() + 120) -- Reset sleep timer until crawler returns home
             elseif resleepTime <= os.time() then -- No timer was set (normal behavior) OR crawler has been back home for 2 minutes since disengaged
                 bedTime(mob)
