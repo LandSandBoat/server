@@ -15,7 +15,7 @@ CREATE TABLE IF NOT EXISTS `char_stats` (
   `hp` smallint(4) unsigned NOT NULL DEFAULT '50',
   `mp` smallint(4) unsigned NOT NULL DEFAULT '50',
   `nameflags` int(10) unsigned NOT NULL DEFAULT '0',
-  `mhflag` tinyint(3) unsigned NOT NULL DEFAULT '0',
+  `mhflag` smallint(4) unsigned NOT NULL DEFAULT '0',
   `mjob` tinyint(2) unsigned NOT NULL DEFAULT '0',
   `sjob` tinyint(2) unsigned NOT NULL DEFAULT '0',
   `death` int(10) unsigned NOT NULL DEFAULT '0',
@@ -31,4 +31,4 @@ CREATE TABLE IF NOT EXISTS `char_stats` (
   `pet_hp` smallint(4) unsigned NOT NULL DEFAULT '0',
   `pet_mp` smallint(4) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`charid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;

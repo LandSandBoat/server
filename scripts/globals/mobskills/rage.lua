@@ -8,8 +8,6 @@
 -- Notes: 25% Attack UP, -25% defense DOWN
 -----------------------------------
 require("scripts/globals/mobskills")
-require("scripts/globals/settings")
-require("scripts/globals/status")
 -----------------------------------
 local mobskillObject = {}
 

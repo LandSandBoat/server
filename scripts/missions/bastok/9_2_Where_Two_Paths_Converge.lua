@@ -9,10 +9,8 @@
 -- Rashid     : !pos -8.444 -2 -123.575 234
 -- Iron Eater : !pos 92.936 -19.532 1.814 237
 -----------------------------------
-require('scripts/globals/items')
 require('scripts/globals/missions')
 require('scripts/globals/npc_util')
-require('scripts/globals/settings')
 require('scripts/globals/interaction/mission')
 require('scripts/globals/zone')
 -----------------------------------

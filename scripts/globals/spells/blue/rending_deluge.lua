@@ -1,7 +1,7 @@
 -----------------------------------
 -- Spell: Rending Deluge
 -- Spell cost: 118 MP
--- Monster Type: Craklaw
+-- Monster Type: Aquans
 -- Spell Type: Magical (Water)
 -- Blue Magic Points: 6
 -- Stat Bonus: VIT+6
@@ -13,7 +13,6 @@
 -----------------------------------
 require("scripts/globals/bluemagic")
 require("scripts/globals/magic")
-require("scripts/globals/status")
 -----------------------------------
 local spellObject = {}
 
@@ -28,6 +27,7 @@ spellObject.onSpellCast = function(caster, target, spell)
     end
 
     local params = {}
+    params.ecosystem = xi.ecosystem.AQUAN
     params.attackType = xi.attackType.MAGICAL
     params.damageType = xi.damageType.WATER
     params.attribute = xi.mod.INT
@@ -49,10 +49,7 @@ spellObject.onSpellCast = function(caster, target, spell)
         target:dispelStatusEffect()
     end
 
-    local damage = BlueMagicalSpell(caster, target, spell, params, INT_BASED)
-    damage = BlueFinalAdjustments(caster, target, spell, damage, params)
-
-    return damage
+    return xi.spells.blue.useMagicalSpell(caster, target, spell, params)
 end
 
 return spellObject

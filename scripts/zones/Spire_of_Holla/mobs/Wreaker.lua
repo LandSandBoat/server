@@ -17,7 +17,7 @@ entity.onMobFight = function(mob, target)
     if mob:getHPP() <= 35 then
         mob:setMod(xi.mod.STORETP, 250)
         -- Only uses Trinary Absorption and Shadow Spread at low HP
-        mob:setMobMod(xi.mobMod.SKILL_LIST, 698)
+        mob:setMobMod(xi.mobMod.SKILL_LIST, 4071)
     end
 end
 

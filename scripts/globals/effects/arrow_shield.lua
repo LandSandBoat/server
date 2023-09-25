@@ -2,8 +2,6 @@
 -- xi.effect.ARROW_SHIELD
 -- Blocks all ranged attacks
 -----------------------------------
-require("scripts/globals/status")
------------------------------------
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

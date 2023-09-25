@@ -8,8 +8,6 @@
 -- Duration: 2Min
 -- Alchemy Skill +3
 -----------------------------------
-require("scripts/globals/status")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

@@ -3,7 +3,6 @@
 --   NM: Burlibix Brawnback
 -----------------------------------
 require("scripts/globals/hunts")
-require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 

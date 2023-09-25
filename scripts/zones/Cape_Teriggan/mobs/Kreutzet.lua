@@ -2,8 +2,6 @@
 -- Area: Cape Teriggan
 --   NM: Kreutzet
 -----------------------------------
-require("scripts/globals/world")
------------------------------------
 local entity = {}
 
 entity.onMobRoam = function(mob)

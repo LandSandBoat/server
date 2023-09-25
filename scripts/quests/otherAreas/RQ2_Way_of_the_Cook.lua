@@ -5,13 +5,10 @@
 -- ZONE,   NPC,      POS
 -- Mhaura, Rycharde, !pos 17.451 -16.000 88.815 249
 -----------------------------------
-require('scripts/globals/items')
 require('scripts/globals/quests')
 require('scripts/globals/titles')
 require('scripts/globals/npc_util')
 require('scripts/globals/interaction/quest')
------------------------------------
-local mhauraID = require('scripts/zones/Mhaura/IDs')
 -----------------------------------
 
 local quest          = Quest:new(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.WAY_OF_THE_COOK)
@@ -113,8 +110,7 @@ quest.sections =
                 [80] = function(player, csid, option, npc)
                     if quest:complete(player) then
                         player:tradeComplete()
-                        player:addGil(xi.settings.main.GIL_RATE * 1500)
-                        player:messageSpecial(mhauraID.text.GIL_OBTAINED, xi.settings.main.GIL_RATE * 1500)
+                        npcUtil.giveCurrency(player, 'gil', 1500)
                         quest:setVar(player, 'DayCompleted', VanadielUniqueDay()) -- Set completition day of WAY_OF_THE_COOK quest.
                     end
                 end,
@@ -122,8 +118,7 @@ quest.sections =
                 [81] = function(player, csid, option, npc)
                     if quest:complete(player) then
                         player:tradeComplete()
-                        player:addGil(xi.settings.main.GIL_RATE * 1000)
-                        player:messageSpecial(mhauraID.text.GIL_OBTAINED, xi.settings.main.GIL_RATE * 1000)
+                        npcUtil.giveCurrency(player, 'gil', 1000)
                         quest:setVar(player, 'DayCompleted', VanadielUniqueDay()) -- Set completition day of WAY_OF_THE_COOK quest.
                     end
                 end,

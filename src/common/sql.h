@@ -7,8 +7,10 @@
 #include "cbasetypes.h"
 #include "sql_prepared_stmt.h"
 
-#include <mysql.h>
+#include <thread>
 #include <unordered_map>
+
+#include <mysql.h>
 
 #ifdef WIN32
 #include <winsock2.h>
@@ -103,6 +105,8 @@ public:
 
     void SetupKeepalive();
 
+    void CheckCharset();
+
     /// Pings the connection.
     ///
     /// @return SQL_SUCCESS or SQL_ERROR
@@ -114,6 +118,11 @@ public:
     /// @return The size of the escaped string
     size_t EscapeString(char* out_to, const char* from);
     size_t EscapeStringLen(char* out_to, const char* from, size_t from_len);
+
+    /// Escapes a string.
+    ///
+    /// @return The escaped string
+    std::string EscapeString(std::string const& input);
 
     /// Executes a query.
     /// Any previous result is freed.
@@ -168,13 +177,36 @@ public:
     /// @return SQL_SUCCESS or SQL_ERROR
     int32 GetData(size_t col, char** out_buf, size_t* out_len);
 
-    int8*  GetData(size_t col);
-    int32  GetIntData(size_t col);
-    uint32 GetUIntData(size_t col);
-    uint64 GetUInt64Data(size_t col);
-    float  GetFloatData(size_t col);
-
+    int8*       GetData(size_t col);
+    int32       GetIntData(size_t col);
+    uint32      GetUIntData(size_t col);
+    uint64      GetUInt64Data(size_t col);
+    float       GetFloatData(size_t col);
     std::string GetStringData(size_t col);
+
+    template <typename T>
+    T GetIntData(size_t col)
+    {
+        return static_cast<T>(GetIntData(col));
+    }
+
+    template <typename T>
+    T GetUIntData(size_t col)
+    {
+        return static_cast<T>(GetUIntData(col));
+    }
+
+    template <typename T>
+    T GetUInt64Data(size_t col)
+    {
+        return static_cast<T>(GetUInt64Data(col));
+    }
+
+    template <typename T>
+    T GetFloatData(size_t col)
+    {
+        return static_cast<T>(GetFloatData(col));
+    }
 
     /// Frees the result of the query.
     void FreeResult();
@@ -203,5 +235,7 @@ private:
     void InitPreparedStatements();
 
     std::unordered_map<std::string, std::shared_ptr<SqlPreparedStatement>> m_PreparedStatements;
+
+    std::thread::id m_ThreadId;
 };
 #endif // _COMMON_SQL_H

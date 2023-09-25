@@ -1,8 +1,6 @@
 -----------------------------------
 -- Alter Ego Extravaganza
 -----------------------------------
-require('scripts/globals/settings')
-require('scripts/globals/items')
 require('scripts/globals/npc_util')
 -----------------------------------
 

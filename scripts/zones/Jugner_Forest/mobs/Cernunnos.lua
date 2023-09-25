@@ -8,7 +8,7 @@ mixins = { require("scripts/mixins/job_special") } -- TODO: Is this right?
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)
-    player:setLocalVar("CERNUNNOS_DEFEATED", 1)
+    player:setLocalVar("cernunnosDefeated", 1)
 end
 
 return entity

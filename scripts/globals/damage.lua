@@ -1,7 +1,6 @@
 -----------------------------------------------
 -- Global Damage Taken Calculation
 -----------------------------------------------
-require("scripts/globals/status")
 
 xi = xi or {}
 xi.damage = {} or xi.damage
@@ -67,9 +66,9 @@ xi.damage.returnDamageTakenMod = function(target, attackType, damageType)
 
     for _, mod in pairs(attMods[attackType]) do
         if mod.min ~= nil then
-            dmgTakenMod = dmgTakenMod + utils.clamp(target:getMod(mod.mod) / 10000, mod.min, mod.max)
+            dmgTakenMod = dmgTakenMod * (1 + utils.clamp(target:getMod(mod.mod) / 10000, mod.min, mod.max))
         else
-            dmgTakenMod = dmgTakenMod + (target:getMod(mod.mod) / 10000)
+            dmgTakenMod = dmgTakenMod * (1 + (target:getMod(mod.mod) / 10000))
         end
     end
 
@@ -80,9 +79,12 @@ xi.damage.returnDamageTakenMod = function(target, attackType, damageType)
         dmgMods[damageType] <= xi.mod.HTH_SDT and
         dmgMods[damageType] >= xi.mod.SLASH_SDT
     then
-        dmgTakenMod = dmgTakenMod + ((target:getMod(dmgMods[damageType]) - 1000) / 10000)
+        dmgTakenMod = dmgTakenMod * ((target:getMod(dmgMods[damageType])) / 1000)
     elseif damageType and dmgMods[damageType] then -- This is for elemental SDTs only
-        dmgTakenMod = dmgTakenMod + (target:getMod(dmgMods[damageType]) / 10000)
+        -- Magic SDT range from -10000 to 10000
+        -- Positive numbers mean less damage taken. Negative mean more damage taken.
+        -- Example: a value of 5000 -> 50% LESS damage taken.
+        dmgTakenMod = dmgTakenMod * (1 - target:getMod(dmgMods[damageType]) / 10000)
     end
 
     return dmgTakenMod

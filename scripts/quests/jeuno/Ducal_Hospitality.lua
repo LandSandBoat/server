@@ -3,11 +3,8 @@
 -- Taillegeas - !pos 31 1.996 57.971
 -- Log ID [3] - Quest ID [68]
 -----------------------------------
-require('scripts/globals/items')
-require('scripts/globals/keyitems')
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
-require('scripts/globals/status')
 require('scripts/globals/utils')
 require('scripts/globals/zone')
 require('scripts/globals/interaction/quest')

@@ -4,9 +4,6 @@
 -- Enchantment: Subtle Blow
 -- Duration: 60 Mins
 -----------------------------------
-require("scripts/globals/status")
-require("scripts/globals/settings")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

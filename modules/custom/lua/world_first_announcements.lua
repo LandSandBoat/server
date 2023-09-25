@@ -20,7 +20,6 @@
 require("modules/module_utils")
 require("scripts/globals/mobs")
 require("scripts/globals/player")
-require("scripts/globals/status")
 -----------------------------------
 local m = Module:new("world_first_announcements")
 

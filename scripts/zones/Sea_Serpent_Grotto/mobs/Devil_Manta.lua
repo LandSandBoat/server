@@ -14,21 +14,26 @@ entity.onMobDeath = function(mob, player, optParams)
 end
 
 entity.onMobDespawn = function(mob)
-    -- Only one Charbydis PH is up at one time
-    local chooseManta = math.random(1, 2)
-    local mantaOne = ID.mob.CHARYBDIS - 2
-    local mantaTwo = ID.mob.CHARYBDIS - 4
-    if mob:getID() == mantaOne and chooseManta == 2 then
-        DisallowRespawn(mantaOne, true)
-        DisallowRespawn(mantaTwo, false)
-        GetMobByID(mantaTwo):setRespawnTime(960)
-    elseif mob:getID() == mantaTwo and chooseManta == 1 then
-        DisallowRespawn(mantaOne, false)
-        DisallowRespawn(mantaTwo, true)
-        GetMobByID(mantaOne):setRespawnTime(960)
-    end
+    -- 8 hour minimum, this is also set in the Charbydis script due to the multi-placeholders.
+    -- See the Charbydis script for more.
 
-    xi.mob.phOnDespawn(mob, ID.mob.CHARYBDIS_PH, 10, 28800) -- 8 hour minimum
+    if not xi.mob.phOnDespawn(mob, ID.mob.CHARYBDIS_PH, 10, 28800) then
+        -- Charbydis is not queued to spawn.
+        -- Choose a Charbydis PH randomly to spawn next.
+        local chooseManta = math.random(1, 2)
+        local mantaOne = ID.mob.CHARYBDIS - 2
+        local mantaTwo = ID.mob.CHARYBDIS - 4
+
+        if chooseManta == 2 then
+            GetMobByID(mantaTwo):setRespawnTime(GetMobRespawnTime(mantaTwo))
+            DisallowRespawn(mantaOne, true)
+            DisallowRespawn(mantaTwo, false)
+        elseif chooseManta == 1 then
+            GetMobByID(mantaOne):setRespawnTime(GetMobRespawnTime(mantaOne))
+            DisallowRespawn(mantaOne, false)
+            DisallowRespawn(mantaTwo, true)
+        end
+    end
 end
 
 return entity

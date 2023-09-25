@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Port Windurst
 --  NPC: Reiso-Haroiso
--- Working 100%
 -----------------------------------
 require("scripts/globals/pathfind")
 -----------------------------------

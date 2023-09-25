@@ -729,7 +729,7 @@ namespace trustutils
         for (uint16 skill_id : skillList)
         {
             TrustSkill_t skill;
-            if (skill_id <= 240) // Player WSs
+            if (skill_id <= 255) // Player WSs
             {
                 CWeaponSkill* PWeaponSkill = battleutils::GetWeaponSkill(skill_id);
                 if (!PWeaponSkill)

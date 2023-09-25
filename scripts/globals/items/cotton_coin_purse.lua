@@ -3,8 +3,6 @@
 -- Ctn. Purse (Alx.)
 -- Breaks up a Cotton Purse
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)
@@ -17,7 +15,7 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    target:addItem(2488, math.random(5, 20))
+    target:addItem(xi.items.ALEXANDRITE, math.random(5, 20))
 end
 
 return itemObject

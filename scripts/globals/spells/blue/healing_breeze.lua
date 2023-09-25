@@ -12,10 +12,7 @@
 -----------------------------------
 -- Combos: Auto Regen
 -----------------------------------
-require("scripts/globals/settings")
-require("scripts/globals/status")
 require("scripts/globals/magic")
-require("scripts/globals/msg")
 require("scripts/globals/spells/healing_spell")
 -----------------------------------
 local spellObject = {}
@@ -25,7 +22,18 @@ spellObject.onMagicCastingCheck = function(caster, target, spell)
 end
 
 spellObject.onSpellCast = function(caster, target, spell)
-    return xi.spells.healing.doHealingSpell(caster, target, spell, false)
+    local params = {}
+    params.minCure = 60
+    params.divisor0 = 0.6666
+    params.constant0 = -45
+    params.powerThreshold1 = 219
+    params.divisor1 = 2
+    params.constant1 = 65
+    params.powerThreshold2 = 459
+    params.divisor2 = 6.5
+    params.constant2 = 144.6666
+
+    return xi.spells.blue.useCuringSpell(caster, target, spell, params)
 end
 
 return spellObject

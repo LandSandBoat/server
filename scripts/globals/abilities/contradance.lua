@@ -5,7 +5,7 @@
 -- Recast Time: 00:05:00
 -- Duration: 00:01:00
 -----------------------------------
-require("scripts/globals/status")
+require("scripts/globals/job_utils/dancer")
 -----------------------------------
 local abilityObject = {}
 
@@ -14,7 +14,7 @@ abilityObject.onAbilityCheck = function(player, target, ability)
 end
 
 abilityObject.onUseAbility = function(player, target, ability)
-    -- player:addStatusEffect(xi.effect.CONTRADANCE, 19, 1, 60) -- TODO: implement xi.effect.CONTRADANCE
+    return xi.job_utils.dancer.useContradanceAbility(player, target, ability)
 end
 
 return abilityObject

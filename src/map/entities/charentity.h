@@ -70,8 +70,20 @@ struct jobs_t
 
 struct profile_t
 {
-    uint8      nation;     // Your Nation Allegiance.
-    uint8      mhflag;     // Flag of exit from MOGHOUSE
+    uint8 nation; // Your Nation Allegiance.
+
+    // Moghouse data (bit-packed)
+    // 0x0001: SANDORIA exit quest flag
+    // 0x0002: BASTOK exit quest flag
+    // 0x0004: WINDURST exit quest flag
+    // 0x0008: JEUNO exit quest flag
+    // 0x0010: WEST_AHT_URHGAN exit quest flag
+    // 0x0020: Unlocked Moghouse2F flag
+    // 0x0040: Moghouse 2F tracker flag (0: default, 1: using 2F)
+    // 0x0080: This bit and the next track which 2F decoration style is being used (0: SANDORIA, 1: BASTOK, 2: WINDURST, 3: PATIO)
+    // 0x0100: ^ As above
+    uint16 mhflag;
+
     uint16     title;      // rank
     uint16     fame[16];   // Fame
     uint8      rank[3];    // RAGN in three states
@@ -157,6 +169,7 @@ struct teleport_t
     telepoint_t survival;
     uint8       abysseaConflux[MAX_ABYSSEAZONES];
     waypoint_t  waypoints;
+    uint32      eschanPortal;
 
     teleport_t()
     {

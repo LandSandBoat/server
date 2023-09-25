@@ -1,5 +1,3 @@
-require("scripts/globals/status")
-
 cmdprops =
 {
     permission = 1,

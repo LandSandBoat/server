@@ -3,8 +3,6 @@
 -- Item: Amnesia Screen
 -- Effect: 2 Mins of immunity to "Amnesia" effects.
 -----------------------------------
-require("scripts/globals/status")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

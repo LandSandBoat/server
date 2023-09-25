@@ -1,8 +1,6 @@
 -----------------------------------
 -- Seasonal Events Handler
 -----------------------------------
-require("scripts/globals/settings")
------------------------------------
 xi = xi or {}
 xi.events = xi.events or {}
 xi.events.handler = xi.events.handler or {}
@@ -71,7 +69,8 @@ end
 xi.events.registeredEvents =
 {
     require("scripts/globals/events/starlight_celebration"),
-    require("scripts/globals/events/egg_hunt_egg-stravaganza")
+    require("scripts/globals/events/egg_hunt_egg-stravaganza"),
+    require("scripts/globals/events/sunbreeze_festival"),
 }
 
 xi.events.handler.checkSeasonalEvents = function()

@@ -9,6 +9,25 @@
 
 #include "logging.h"
 
+// https://stackoverflow.com/questions/1505582/determining-32-vs-64-bit-in-c
+// Check Windows
+#if _WIN32 || _WIN64
+#if _WIN64
+#define ENV64BIT
+#else
+#define ENV32BIT
+#endif
+#endif
+
+// Check GCC
+#if __GNUC__
+#if __x86_64__ || __ppc64__
+#define ENV64BIT
+#else
+#define ENV32BIT
+#endif
+#endif
+
 // debug mode
 #if defined(_DEBUG) && !defined(DEBUG)
 #define DEBUG

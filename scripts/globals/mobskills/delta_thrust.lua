@@ -4,8 +4,6 @@
 --  Description: Delivers a threefold attack on a single target. Additional effect: Plague
 --  Type: Physical (Slashing)
 -----------------------------------
-require("scripts/globals/settings")
-require("scripts/globals/status")
 require("scripts/globals/mobskills")
 -----------------------------------
 local mobskillObject = {}

@@ -28,13 +28,13 @@ zones[xi.zone.THRONE_ROOM] =
         A_CRACK_HAS_FORMED            = 7535, -- A crack has formed on the <01052382838080>, and the beast inside has been unleashed!
         PARTY_MEMBERS_HAVE_FALLEN     = 7569, -- All party members have fallen in battle. Now leaving the battlefield.
         THE_PARTY_WILL_BE_REMOVED     = 7576, -- If all party members' HP are still zero after # minute[/s], the party will be removed from the battlefield.
-        ENTERING_THE_BATTLEFIELD_FOR  = 7594, -- Entering the battlefield for [The Shadow Lord Battle/Where Two Paths Converge/Kindred Spirits/Survival of the Wisest/Smash! A Malevolent Menace/Kindred Spirits/The Shadow Lord Battle/True Love/A Fond Farewell]!
-        NO_HIDE_AWAY                  = 7709, -- I have not been hiding away from my troubles!
-        FEEL_MY_PAIN                  = 7710, -- Feel my twenty years of pain!
-        YOUR_ANSWER                   = 7711, -- Is that your answer!?
-        RETURN_TO_THE_DARKNESS        = 7712, -- Return with your soul to the darkness you came from!
-        CANT_UNDERSTAND               = 7713, -- You--a man who has never lived bound by the chains of his country--how can you understand my pain!?
-        BLADE_ANSWER                  = 7714, -- Let my blade be the answer!
+        ENTERING_THE_BATTLEFIELD_FOR  = 7595, -- Entering the battlefield for [The Shadow Lord Battle/Where Two Paths Converge/Kindred Spirits/Survival of the Wisest/Smash! A Malevolent Menace/Kindred Spirits/The Shadow Lord Battle/True Love/A Fond Farewell/Kipdrix the Faithful]!
+        NO_HIDE_AWAY                  = 7710, -- I have not been hiding away from my troubles!
+        FEEL_MY_PAIN                  = 7711, -- Feel my twenty years of pain!
+        YOUR_ANSWER                   = 7712, -- Is that your answer!?
+        RETURN_TO_THE_DARKNESS        = 7713, -- Return with your soul to the darkness you came from!
+        CANT_UNDERSTAND               = 7714, -- You--a man who has never lived bound by the chains of his country--how can you understand my pain!?
+        BLADE_ANSWER                  = 7715, -- Let my blade be the answer!
     },
     mob =
     {

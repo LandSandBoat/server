@@ -4,7 +4,6 @@
 -- Marids will only use Barrier Tusk if at least one of their tusks remain unbroken
 -----------------------------------
 require("scripts/globals/mobskills")
-require("scripts/globals/status")
 -----------------------------------
 local mobskillObject = {}
 

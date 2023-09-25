@@ -2,10 +2,8 @@
 -- Spell: Maiden's Virelai
 -- Charms pet
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/pets")
-require("scripts/globals/msg")
 -----------------------------------
 local spellObject = {}
 
@@ -46,6 +44,8 @@ spellObject.onSpellCast = function(caster, target, spell)
             spell:setMsg(xi.msg.basic.NONE)
         elseif caster:isMob() then
             target:addStatusEffect(xi.effect.CHARM_I, 0, 0, duration)
+            -- only increment the resbuild if successful (not on a no effect)
+            xi.magic.incrementBuildDuration(target, params.effect, caster)
             caster:charm(target)
         else
             caster:charmDuration(target, duration)

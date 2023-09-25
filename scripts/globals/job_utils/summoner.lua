@@ -2,8 +2,6 @@
 -- Summoner Job Utilities
 -----------------------------------
 require("scripts/globals/ability")
-require("scripts/globals/status")
-require("scripts/globals/msg")
 require("scripts/globals/jobpoints")
 require("scripts/globals/damage/tp")
 -----------------------------------
@@ -123,5 +121,20 @@ xi.job_utils.summoner.calculateTPReturn = function(avatar, target, damage, numHi
         avatar:setTP(tpReturn)
     else
         avatar:setTP(0)
+    end
+end
+
+xi.job_utils.summoner.useManaCede = function(player, ability, action)
+    local avatar = player:getPet()
+
+    if avatar ~= nil then
+        local avatarTP = avatar:getTP()
+        local bonusTP = 1000 + player:getJobPointLevel(xi.jp.MANA_CEDE_EFFECT) * 50
+        local manaCedeBonus = (100 + player:getMod(xi.mod.ENHANCES_MANA_CEDE)) / 100
+        local avatarNewTP = utils.clamp(avatarTP + bonusTP * manaCedeBonus, 1000, 3000)
+
+        action:ID(player:getID(), avatar:getID())
+        avatar:setTP(avatarNewTP)
+        player:delMP(100)
     end
 end

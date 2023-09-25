@@ -3,8 +3,6 @@
 -- Item: Absorbing Shield
 -- Item Effect: Absorb all effects from target
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local badEffects =
 {
     xi.effect.SLEEP_I,
@@ -181,6 +179,7 @@ itemObject.onItemCheck = function(target, user)
     if user:checkDistance(target) > 12.5 then
         return xi.msg.basic.TARG_OUT_OF_RANGE
     end
+
     return 0
 end
 
@@ -199,6 +198,7 @@ itemObject.onItemUse = function(target, user)
                     count = count + 1
                 end
             end
+
             for y = 1, #goodEffects do
                 if target:hasStatusEffect(goodEffects[y]) then
                     user:addStatusEffect(goodEffects[y], power, 0, 180)
@@ -208,11 +208,13 @@ itemObject.onItemUse = function(target, user)
             end
         end
     end
+
     if count > 0 then
         user:messageBasic(xi.msg.basic.EFFECT_DRAINED)
     else
         user:messageBasic(xi.msg.basic.NO_EFFECT)
     end
+
     return count
 end
 

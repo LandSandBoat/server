@@ -11,7 +11,7 @@ entity.onMobInitialize = function(mob)
 end
 
 entity.onMobSpawn = function(mob)
-    mob:setMod(xi.mod.SLEEPRESBUILD, 10)
+    mob:setMod(xi.mod.SLEEPRESBUILD, 30)
 end
 
 entity.onMobDespawn = function(mob)

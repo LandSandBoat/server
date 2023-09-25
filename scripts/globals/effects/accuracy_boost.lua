@@ -4,8 +4,6 @@
 -- getPower     = ACC
 -- getSubPower  = RACC
 -----------------------------------
-require("scripts/globals/status")
------------------------------------
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

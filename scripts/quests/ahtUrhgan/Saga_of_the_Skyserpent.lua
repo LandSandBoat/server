@@ -6,7 +6,6 @@
 -- Biyaada:   !pos -65.802 -6.999 69.273 48
 -----------------------------------
 require('scripts/globals/common')
-require('scripts/globals/items')
 require('scripts/globals/quests')
 require('scripts/globals/interaction/quest')
 require('scripts/globals/npc_util')
@@ -45,7 +44,7 @@ quest.sections =
 
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED and vars.Prog == 0
+            return status == QUEST_ACCEPTED
         end,
 
         [xi.zone.AL_ZAHBI] =
@@ -97,9 +96,7 @@ quest.sections =
             onZoneIn =
             {
                 function(player, prevZone)
-                    if quest:getVar(player, 'Prog') == 1 then
-                        return 12
-                    end
+                    return 12
                 end
             },
 
@@ -111,7 +108,7 @@ quest.sections =
 
                 [13] = function(player, csid, option, npc)
                     quest:setVar(player, 'Prog', 2)
-                    quest:setVar(player, 'Stage', VanadielUniqueDay())
+                    quest:setVar(player, 'Timer', VanadielUniqueDay() + 1)
                     player:delKeyItem(xi.keyItem.LILAC_RIBBON)
                     player:setPos(80, -6, -123, 65, xi.zone.AHT_URHGAN_WHITEGATE)
                 end,
@@ -128,19 +125,19 @@ quest.sections =
         {
             ['Biyaada'] = quest:event(279),
         },
+    },
+
+    {
+        check = function(player, status, vars)
+            return
+                status == QUEST_ACCEPTED and
+                vars.Prog == 2 and
+                vars.Timer <= VanadielUniqueDay()
+        end,
 
         [xi.zone.AHT_URHGAN_WHITEGATE] =
         {
             ['Fari-Wari'] = quest:progressEvent(825, { text_table = 0 }),
-            {
-                onTrigger = function(player, npc)
-                    if quest:getVar(player, 'Stage') < VanadielUniqueDay() then
-                        return quest:progressEvent(825, { text_table = 0 })
-                    else
-                        return quest:event(833)
-                    end
-                end,
-            },
 
             onEventFinish =
             {

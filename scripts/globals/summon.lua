@@ -1,10 +1,9 @@
 -----------------------------------
 -- Avatar Global Functions
 -----------------------------------
-require("scripts/globals/status")
-require("scripts/globals/msg")
 require("scripts/globals/weaponskills")
 require("scripts/globals/damage")
+require("scripts/globals/combat/level_correction")
 -----------------------------------
 xi = xi or {}
 xi.summon = xi.summon or {}
@@ -124,7 +123,7 @@ xi.summon.avatarPhysicalMove = function(avatar, target, skill, wsParams, tp)
     calcParams.skill = skill
     calcParams.fSTR = xi.summon.getAvatarfSTR(avatar:getStat(xi.mod.STR), target:getStat(xi.mod.VIT), avatar)
     calcParams.melee = true
-    calcParams.tp = avatar:getTP()
+    calcParams.tp = skill:getTP()
     calcParams.alpha = xi.weaponskills.getAlpha(avatar:getMainLvl())
 
     -- https://forum.square-enix.com/ffxi/threads/45365?p=534537#post534537
@@ -367,7 +366,11 @@ xi.summon.avatarFinalAdjustments = function(dmg, mob, skill, target, skilltype, 
     -- Calculate Blood Pact Damage before stoneskin
     dmg = dmg + dmg * mob:getMod(xi.mod.BP_DAMAGE) / 100
 
-    dmg = xi.damage.applyDamageTaken(target, dmg, skilltype, damagetype)
+    -- if magic then apply magic mods here
+    -- (physical mods are applied in physicalSDT)
+    if skilltype == xi.attackType.MAGICAL then
+        dmg = xi.damage.applyDamageTaken(target, dmg, skilltype, damagetype)
+    end
 
     -- handle One For All, Liement
 
@@ -386,7 +389,6 @@ xi.summon.avatarFinalAdjustments = function(dmg, mob, skill, target, skilltype, 
 
     if dmg > 0 then
         target:updateEnmityFromDamage(mob, dmg)
-        target:addEnmity(mob:getMaster(), 1, 0)
         target:handleAfflatusMiseryDamage(dmg)
     end
 
@@ -434,7 +436,7 @@ xi.summon.calculateMagicBloodPactParams = function(avatar, target, skill, wsPara
     params.melee = false
     params.skill = skill
     params.dStat = utils.ternary(wsParams.breath, 0, xi.summon.dStat(avatar, target, xi.mod.INT))
-    params.tp = avatar:getTP() + wsParams.tpBonus
+    params.tp = skill:getTP() + wsParams.tpBonus
     params.alpha = xi.weaponskills.getAlpha(avatar:getMainLvl())
     return params
 end
@@ -601,7 +603,8 @@ xi.summon.avatarMagicSkill = function(avatar, target, skill, wsParams)
     local mab           = 100 + avatar:getMod(xi.mod.MATT)
     local mdb           = 100 + target:getMod(xi.mod.MDEF)
     local mdef          = mab / mdb
-    local mdt           = utils.ternary((sdtMod ~= nil), target:getMod(sdtMod), 1)
+    -- magic SDT range from -10000 to 10000 with positive values meaning less damage
+    local mdt           = utils.ternary((sdtMod ~= nil), 1 - (target:getMod(sdtMod) / 10000), 1)
     local bonus         = xi.settings.main.WEAPON_SKILL_POWER
 
     -- Account for potentially 0 MDT

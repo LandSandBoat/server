@@ -1,5 +1,4 @@
 require("scripts/globals/common")
-require("scripts/globals/status")
 require("scripts/globals/interaction/quest")
 
 utils = {}
@@ -503,7 +502,7 @@ local function getSkillLevelIndex(level, rank)
         rangeId = 50
     elseif level > 60 and level <= 70 then
         rangeId = 60
-    elseif level > 70 and level <= 75 and (rank > 2) then -- If this is Rank A+ or A- then skip
+    elseif level > 70 and level <= 75 and rank > 2 then -- If this is Rank A+ or A- then skip
         rangeId = 75
     elseif level > 70 and level <= 80 then -- If B+ or below do this
         rangeId = 70
@@ -584,7 +583,7 @@ function utils.getMobSkillLvl(rank, level)
 end
 
 -- System Strength Bonus table.  This is used by xi.mobskills.mobBreathMove, but determines weakness of
--- a definding system, vs the attacking system.  This table is indexed by the attacker.
+-- a defending system, vs the attacking system.  This table is indexed by the attacker.
 -- This table can scale beyond two values, but at this time, no data has been recorded.
 -- Values: 1 == Bonus, -1 == Weakness, 0 == Default (No Weakness or Bonus)
 local systemStrengthTable =
@@ -600,14 +599,11 @@ local systemStrengthTable =
     [xi.eco.ARCANA  ] = { [xi.eco.UNDEAD  ] = 1, },
     [xi.eco.DRAGON  ] = { [xi.eco.DEMON   ] = 1, },
     [xi.eco.DEMON   ] = { [xi.eco.DRAGON  ] = 1, },
-    [xi.eco.LUMORIAN] = { [xi.eco.LUMINION] = 1, },
-    [xi.eco.LUMINION] = { [xi.eco.LUMORIAN] = 1, },
+    [xi.eco.LUMINIAN] = { [xi.eco.LUMINION] = 1, },
+    [xi.eco.LUMINION] = { [xi.eco.LUMINIAN] = 1, },
 }
 
-function utils.getSystemStrengthBonus(attacker, defender)
-    local attackerSystem = attacker:getSystem()
-    local defenderSystem = defender:getSystem()
-
+function utils.getEcosystemStrengthBonus(attackerSystem, defenderSystem)
     for k, v in pairs(systemStrengthTable) do
         if k == attackerSystem then
             for defId, weakValue in pairs(systemStrengthTable[k]) do

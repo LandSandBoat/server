@@ -4,10 +4,8 @@
 -- Prince Regent's Rm: !gotoid 17731625
 -- Narcheral: !gotoid 17723585
 -----------------------------------
-require('scripts/globals/items')
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
-require("scripts/globals/status")
 require('scripts/globals/interaction/quest')
 -----------------------------------
 
@@ -55,7 +53,7 @@ quest.sections =
             ['Narcheral'] =
             {
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, { xi.items.MOCCASINS, xi.items.YAGUDO_HOLY_WATER }) then
+                    if npcUtil.tradeHasExactly(trade, { xi.items.MOCCASINS, xi.items.CANTEEN_OF_YAGUDO_HOLY_WATER }) then
                         return quest:progressEvent(691)
                     end
                 end,

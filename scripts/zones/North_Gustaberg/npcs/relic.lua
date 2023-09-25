@@ -4,7 +4,6 @@
 -- !pos -217 97 461 106
 -----------------------------------
 local ID = require("scripts/zones/North_Gustaberg/IDs")
-require("scripts/globals/items")
 require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}

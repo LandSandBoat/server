@@ -2,14 +2,10 @@
 -- Damage Spell Utilities
 -- Used for spells that deal direct damage. (Black, White, Dark and Ninjutsu)
 -----------------------------------
-require("scripts/globals/spell_data")
 require("scripts/globals/jobpoints")
 require("scripts/globals/magicburst")
-require("scripts/globals/status")
 require("scripts/globals/utils")
-require("scripts/globals/msg")
 require("scripts/globals/magic")
-require("scripts/globals/settings")
 require("scripts/globals/damage")
 -----------------------------------
 xi = xi or {}
@@ -560,6 +556,13 @@ xi.spells.damage.calculateResist = function(caster, target, spell, skillType, sp
         xi.msg.debugValue(caster, "Skillchain Bonus Magic Accuracy", magicAcc)
     end
 
+    -- Apply bonus macc from TandemStrike
+    local tandemBonus = xi.magic.handleTandemStrikeBonus(caster)
+    if tandemBonus > 0 then
+        magicAcc = magicAcc + tandemBonus
+        xi.msg.debugValue(caster, "Tandem Strike Magic Accuracy Bonus", magicAcc)
+    end
+
     -----------------------------------
     -- magicAcc from Job Points.
     -----------------------------------
@@ -701,6 +704,7 @@ xi.spells.damage.calculateIfMagicBurstBonus = function(caster, target, spell, sp
     local magicBurstBonus        = 1.0
     local modBurst               = 1.0
     local ancientMagicBurstBonus = 0
+    local _, skillchainCount = xi.magic.FormMagicBurst(spellElement, target) -- External function. Not present in magic.lua.
 
     -- TODO: merge spellFamily and spell ID tables into one table in spell_data.lua, then maybe ad a family for all AM and use spellFamily here instead of spellID
     if spellId >= xi.magic.spell.FLARE and spellId <= xi.magic.spell.FLOOD_II then
@@ -713,7 +717,7 @@ xi.spells.damage.calculateIfMagicBurstBonus = function(caster, target, spell, sp
     if
         spell and
         spell:getSpellGroup() == 3 and
-        not caster:hasStatusEffect(xi.effect.BURST_AFFINITY)
+        not (caster:hasStatusEffect(xi.effect.BURST_AFFINITY) or caster:hasStatusEffect(xi.effect.AZURE_LORE))
     then
         return magicBurstBonus
     end
@@ -738,7 +742,11 @@ xi.spells.damage.calculateIfMagicBurstBonus = function(caster, target, spell, sp
     -- Magic Burst Damage I is found in gear. caps at 40% with innin, AM2 and such
     -- Magic Burst Damage II is found in other gear and BLM job traits pertain to this one OR to a third, separate one. neither has known cap
 
-    return modBurst
+    if skillchainCount > 0 then
+        magicBurstBonus = modBurst -- + modBurstTrait once investigated. Probably needs to be divided by 100
+    end
+
+    return magicBurstBonus
 end
 
 xi.spells.damage.calculateDayAndWeather = function(caster, target, spell, spellId, spellElement)
@@ -822,6 +830,8 @@ xi.spells.damage.calculateMagicBonusDiff = function(caster, target, spell, spell
     if skillType == xi.skill.NINJUTSU then
         -- Ninja Category 2 merits.
         mab = mab + caster:getMerit(xi.merit.NIN_MAGIC_BONUS)
+        -- Ninja nuke bonus (for example from Koga Hatsuburi)
+        mab = mab + caster:getMod(xi.mod.NIN_NUKE_BONUS)
         -- Ninja Category 1 merits
         -- TODO: merge spellFamily and spell ID tables into one table in spell_data.lua, then use spellFamily here instead of spellID
         if
@@ -1011,19 +1021,32 @@ xi.spells.damage.calculateUndeadDivinePenalty = function(caster, target, spell, 
     return undeadDivinePenalty
 end
 
+xi.spells.damage.calculateScarletDeliriumMultiplier = function(caster)
+    local scarletDeliriumMultiplier = 1
+
+    -- Scarlet delirium are 2 different status effects. SCARLET_DELIRIUM_1 is the one that boosts power.
+    if caster:hasStatusEffect(xi.effect.SCARLET_DELIRIUM_1) then
+        local power = caster:getStatusEffect(xi.effect.SCARLET_DELIRIUM_1):getPower()
+
+        scarletDeliriumMultiplier = 1 + power / 100
+    end
+
+    return scarletDeliriumMultiplier
+end
+
 xi.spells.damage.calculateNukeAbsorbOrNullify = function(caster, target, spell, spellElement)
     local nukeAbsorbOrNullify = 1
 
     -- Calculate chance for spell absorption.
-    if math.random(1, 100) < (target:getMod(xi.magic.absorbMod[spellElement]) + 1) then
+    if math.random(1, 100) <= target:getMod(xi.magic.absorbMod[spellElement]) then
         nukeAbsorbOrNullify = -1
     end
 
     -- Calculate chance for spell nullification.
     local nullifyChance = math.random(1, 100)
     if
-        nullifyChance < (target:getMod(nullMod[spellElement]) + 1) or
-        nullifyChance < target:getMod(xi.mod.MAGIC_NULL)
+        nullifyChance <= target:getMod(nullMod[spellElement]) or
+        nullifyChance <= target:getMod(xi.mod.MAGIC_NULL)
     then
         nukeAbsorbOrNullify = 0
     end
@@ -1046,8 +1069,6 @@ xi.spells.damage.useDamageSpell = function(caster, target, spell)
 
     -- Magic Bursts of the correct element do not get resisted. SDT isn't involved here.
     local _, skillchainCount = xi.magic.FormMagicBurst(spellElement, target)
-    local eemTier         = xi.magic.calculateEEMTier(target, spellElement, skillchainCount)
-    local eemValue        = xi.magic.calculateEEMVal(eemTier)
     local failedDiceRoll  = utils.ternary(math.random() >= 0.95, false, true)
 
     -- Variables/steps to calculate finalDamage.
@@ -1067,6 +1088,7 @@ xi.spells.damage.useDamageSpell = function(caster, target, spell)
     local ninSkillBonus               = xi.spells.damage.calculateNinSkillBonus(caster, target, spell, spellId, skillType)
     local ninFutaeBonus               = xi.spells.damage.calculateNinFutaeBonus(caster, target, spell, skillType)
     local undeadDivinePenalty         = xi.spells.damage.calculateUndeadDivinePenalty(caster, target, spell, skillType)
+    local scarletDeliriumMultiplier   = xi.spells.damage.calculateScarletDeliriumMultiplier(caster)
     local nukeAbsorbOrNullify         = xi.spells.damage.calculateNukeAbsorbOrNullify(caster, target, spell, spellElement)
 
     -- Debug
@@ -1104,12 +1126,10 @@ xi.spells.damage.useDamageSpell = function(caster, target, spell)
     xi.msg.debugValue(caster, "Resist Damage", finalDamage)
 
     -- Apply magic burst damage
-    if target:hasStatusEffect(xi.effect.SKILLCHAIN) and (magicBurst > 1) then -- Gated since this is recalculated for each target.
-        finalDamage = math.floor(finalDamage * magicBurst)
-        xi.msg.debugValue(caster, "Magic Burst Damage", finalDamage)
-        finalDamage = math.floor(finalDamage * magicBurstBonus)
-        xi.msg.debugValue(caster, "Magic Burst Bonus Damage", finalDamage)
-    end
+    finalDamage = math.floor(finalDamage * magicBurst)
+    xi.msg.debugValue(caster, "Magic Burst Damage", finalDamage)
+    finalDamage = math.floor(finalDamage * magicBurstBonus)
+    xi.msg.debugValue(caster, "Magic Burst Bonus Damage", finalDamage)
 
     finalDamage = math.floor(finalDamage * dayAndWeather)
     xi.msg.debugValue(caster, "Day/Weather Damage", finalDamage)
@@ -1129,15 +1149,10 @@ xi.spells.damage.useDamageSpell = function(caster, target, spell)
     xi.msg.debugValue(caster, "Ninjutsu Futae BOnus Damage", finalDamage)
     finalDamage = math.floor(finalDamage * undeadDivinePenalty)
     xi.msg.debugValue(caster, "Undead Penalty Damage", finalDamage)
+    finalDamage = math.floor(finalDamage * scarletDeliriumMultiplier)
+    xi.msg.debugValue(caster, "Scarlet Delirium Damage", finalDamage)
     finalDamage = math.floor(finalDamage * nukeAbsorbOrNullify)
     xi.msg.debugValue(caster, "Nuke Absorb / Nullify Damage", finalDamage)
-
-    -- If the EEM Value is 0.5 or greater,
-    -- the final damage of the nuke should be subject to a 50% reduction
-    if eemValue <= 0.5 then
-        finalDamage = math.floor(finalDamage * 0.5)
-        xi.msg.debugValue(caster, "Resist Tier Damage", finalDamage)
-    end
 
     if finalDamage > 0 then
         finalDamage = utils.clamp(finalDamage - target:getMod(xi.mod.PHALANX), 0, 99999)

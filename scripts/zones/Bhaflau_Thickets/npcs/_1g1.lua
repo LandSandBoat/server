@@ -4,7 +4,6 @@
 -- !pos -180 -10 -758 52
 -----------------------------------
 local ID = require("scripts/zones/Bhaflau_Thickets/IDs")
-require("scripts/globals/keyitems")
 -----------------------------------
 local entity = {}
 

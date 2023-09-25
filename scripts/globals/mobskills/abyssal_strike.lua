@@ -6,7 +6,6 @@
 --  Notes: zeid and shadows of rage move
 -----------------------------------
 require("scripts/globals/mobskills")
-require("scripts/globals/status")
 ---------------------------------------------1
 local mobskillObject = {}
 

@@ -3,8 +3,6 @@
 --  Mob: Opo-opo Heir
 -- BCNM: Royal Succession
 -----------------------------------
-require("scripts/globals/status")
------------------------------------
 local entity = {}
 
 entity.onMobSpawn = function(mob)

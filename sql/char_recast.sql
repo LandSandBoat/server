@@ -9,8 +9,8 @@ CREATE TABLE `char_recast` (
   `time` int(10) NOT NULL DEFAULT '0',
   `recast` smallint(5) NOT NULL DEFAULT '0',
   PRIMARY KEY (`charid`,`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- ----------------------------
--- Records 
+-- Records
 -- ----------------------------

@@ -3,8 +3,6 @@
 -----------------------------------
 local ID = require('scripts/zones/Lufaise_Meadows/IDs')
 require('scripts/globals/conquest')
-require('scripts/globals/items')
-require('scripts/globals/keyitems')
 require('scripts/globals/missions')
 require('scripts/globals/npc_util')
 require('scripts/globals/titles')
@@ -34,8 +32,8 @@ zoneObject.onInitialize = function(zone)
     xi.helm.initZone(zone, xi.helm.type.LOGGING)
 end
 
-zoneObject.onConquestUpdate = function(zone, updatetype)
-    xi.conq.onConquestUpdate(zone, updatetype)
+zoneObject.onConquestUpdate = function(zone, updatetype, influence, owner, ranking, isConquestAlliance)
+    xi.conq.onConquestUpdate(zone, updatetype, influence, owner, ranking, isConquestAlliance)
 end
 
 zoneObject.onZoneIn = function(player, prevZone)
@@ -46,7 +44,7 @@ zoneObject.onZoneIn = function(player, prevZone)
         player:getYPos() == 0 and
         player:getZPos() == 0
     then
-        player:setPos(-475.825, -20.461, 281.149, 11)
+        player:setPos(458, 6, -4, 82)
     end
 
     return cs
@@ -78,7 +76,10 @@ end
 
 zoneObject.onZoneWeatherChange = function(weather)
     if xi.settings.main.ENABLE_WOTG == 1 then
-        if os.time() > GetMobByID(ID.mob.YALUN_EKE):getLocalVar("yalunRespawn") and weather == xi.weather.FOG then
+        if
+            os.time() > GetMobByID(ID.mob.YALUN_EKE):getLocalVar("yalunRespawn") and
+            weather == xi.weather.FOG
+        then
             local chooseYalun = GetMobByID(ID.mob.YALUN_EKE):getLocalVar("chooseYalun")
             local count = 1
 

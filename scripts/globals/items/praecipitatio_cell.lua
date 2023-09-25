@@ -3,8 +3,6 @@
 -- ID 5378
 -- Unlocks magic
 -----------------------------------
-require("scripts/globals/status")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

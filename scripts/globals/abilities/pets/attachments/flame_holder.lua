@@ -1,8 +1,6 @@
 -----------------------------------
 -- Attachment: Flame Holder
 -----------------------------------
-require("scripts/globals/status")
------------------------------------
 local attachmentObject = {}
 
 local validskills = set{

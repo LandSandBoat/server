@@ -3,8 +3,6 @@
 --  MOB: Qiqirn Mine
 -- Note: Explosive mine from Qiqrin
 -----------------------------------
-require('scripts/globals/status')
------------------------------------
 local entity = {}
 
 entity.onMobSpawn = function(mob)

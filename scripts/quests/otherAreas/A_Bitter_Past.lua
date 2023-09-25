@@ -7,8 +7,6 @@
 -- Equette    : !pos 3 -22 -17
 -- ???        : !pos 58 -7 27
 -----------------------------------
-require('scripts/globals/items')
-require('scripts/globals/keyitems')
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
 require('scripts/globals/titles')

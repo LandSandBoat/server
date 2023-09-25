@@ -1,8 +1,6 @@
 -----------------------------------
 -- xi.effect.BEWILDERED_DAZE_3
 -----------------------------------
-require("scripts/globals/status")
------------------------------------
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

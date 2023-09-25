@@ -2,7 +2,6 @@
 -- xi.effect.SOUL_VOICE
 -----------------------------------
 require("scripts/globals/jobpoints")
-require("scripts/globals/status")
 -----------------------------------
 local effectObject = {}
 

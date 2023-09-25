@@ -39,7 +39,14 @@ public:
     void addItem(uint16 item, uint16 rate, sol::variadic_args va);
     void addGroup(uint16 groupRate, sol::table items);
 
+    void addItemFixed(uint16 item, uint16 rate, sol::variadic_args va);
+    void addGroupFixed(uint16 groupRate, sol::table items);
+
     static void Register();
+
+private:
+    void addItemToContainer(uint16 item, uint16 rate, sol::variadic_args va, bool hasFixedRate);
+    void addGroupToContainer(uint16 groupRate, sol::table items, bool hasFixedRate);
 };
 
 #endif

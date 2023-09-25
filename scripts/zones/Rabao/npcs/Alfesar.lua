@@ -5,8 +5,6 @@
 -- !addquest 5 193
 -- !pos 22 8 40 247
 -----------------------------------
-require("scripts/globals/settings")
-require("scripts/globals/keyitems")
 require("scripts/globals/shop")
 require("scripts/globals/quests")
 local ID = require("scripts/zones/Rabao/IDs")
@@ -42,8 +40,6 @@ entity.onTrigger = function(player, npc)
     then
         -- They got their Key items. tell them to goto sandy
         player:startEvent(9, 0, xi.ki.ANCIENT_TABLET_FRAGMENT)
-    else
-        player:startEvent(52) -- standard dialogue
     end
 end
 

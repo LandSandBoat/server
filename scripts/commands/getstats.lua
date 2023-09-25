@@ -2,8 +2,6 @@
 -- func: getstats
 -- desc: prints stats of cursor target into chatlog, for debugging.
 ---------------------------------------------------------------------------------------------------
-require("scripts/globals/status")
-require("scripts/globals/msg")
 
 cmdprops =
 {
@@ -46,6 +44,7 @@ function onTrigger(player)
     player:PrintToPlayer(string.format("Total RAccuracy: %i ", target:getStat(xi.mod.RACC)), xi.msg.channel.SYSTEM_3)
     player:PrintToPlayer(string.format("EVA Base: %i ", target:getMod(xi.mod.EVA)), xi.msg.channel.SYSTEM_3)
     player:PrintToPlayer(string.format("EVA Total: %i ", target:getStat(xi.mod.EVA)), xi.msg.channel.SYSTEM_3)
+    player:PrintToPlayer(string.format("Magic EVA Base: %i ", target:getMod(xi.mod.MEVA)), xi.msg.channel.SYSTEM_3)
     player:PrintToPlayer(string.format("Attack Base: %i ", target:getMod(xi.mod.ATT)), xi.msg.channel.SYSTEM_3)
     player:PrintToPlayer(string.format("Total Attack: %i ", target:getStat(xi.mod.ATT)), xi.msg.channel.SYSTEM_3)
     player:PrintToPlayer(string.format("Defense Base: %i ", target:getMod(xi.mod.DEF)), xi.msg.channel.SYSTEM_3)

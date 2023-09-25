@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Windurst Woods
 --  NPC: Phub Bayzarahn
--- Working 100%
 -----------------------------------
 local entity = {}
 

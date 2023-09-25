@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Windurst Woods
 --  NPC: Hohl Nhaesin
--- Working 100%
 -----------------------------------
 local entity = {}
 

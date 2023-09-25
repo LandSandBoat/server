@@ -9,9 +9,6 @@
 -- Ranged Attack 10
 -- Store TP +25
 -----------------------------------
-require("scripts/globals/status")
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

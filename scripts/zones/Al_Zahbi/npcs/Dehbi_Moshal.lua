@@ -4,7 +4,6 @@
 --  Guild Merchant NPC: Woodworking Guild
 -- !pos -71.563 -5.999 -57.544 48
 -----------------------------------
-require("scripts/globals/settings")
 require("scripts/globals/shop")
 local ID = require("scripts/zones/Al_Zahbi/IDs")
 -----------------------------------

@@ -1,11 +1,8 @@
 -----------------------------------
 -- Chemical_Bomb
---
 -- Description: slow + elegy
 -----------------------------------
 require("scripts/globals/mobskills")
-require("scripts/globals/settings")
-require("scripts/globals/status")
 -----------------------------------
 local mobskillObject = {}
 

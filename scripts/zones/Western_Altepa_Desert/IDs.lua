@@ -37,16 +37,16 @@ zones[xi.zone.WESTERN_ALTEPA_DESERT] =
         FEEL_SOMETHING_PRICKLY        = 7378,  -- You feel something prickly...
         MANY_STONES_LITTER_AREA       = 7379,  -- Many stones litter the area.
         EVIL_LOOMING_ABOVE_YOU        = 7380,  -- You sense something evil looming above you.
-        SENSE_OMINOUS_PRESENCE        = 7412,  -- You sense an ominous presence...
-        SOMETHING_IS_BURIED_HERE      = 7430,  -- It looks like something is buried here. If you had <item> you could dig it up.
-        PLAYER_OBTAINS_ITEM           = 7650,  -- <name> obtains <item>!
-        UNABLE_TO_OBTAIN_ITEM         = 7651,  -- You were unable to obtain the item.
-        PLAYER_OBTAINS_TEMP_ITEM      = 7652,  -- <name> obtains the temporary item: <item>!
-        ALREADY_POSSESS_TEMP          = 7653,  -- You already possess that temporary item.
-        NO_COMBINATION                = 7658,  -- You were unable to enter a combination.
-        UNITY_WANTED_BATTLE_INTERACT  = 7720,  -- Those who have accepted % must pay # Unity accolades to participate. The content for this Wanted battle is #. [Ready to begin?/You do not have the appropriate object set, so your rewards will be limited.]
-        REGIME_REGISTERED             = 9836,  -- New training regime registered!
-        COMMON_SENSE_SURVIVAL         = 11825, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
+        SENSE_OMINOUS_PRESENCE        = 7400,  -- You sense an ominous presence...
+        SOMETHING_IS_BURIED_HERE      = 7418,  -- It looks like something is buried here. If you had <item> you could dig it up.
+        PLAYER_OBTAINS_ITEM           = 7638,  -- <name> obtains <item>!
+        UNABLE_TO_OBTAIN_ITEM         = 7639,  -- You were unable to obtain the item.
+        PLAYER_OBTAINS_TEMP_ITEM      = 7640,  -- <name> obtains the temporary item: <item>!
+        ALREADY_POSSESS_TEMP          = 7641,  -- You already possess that temporary item.
+        NO_COMBINATION                = 7646,  -- You were unable to enter a combination.
+        UNITY_WANTED_BATTLE_INTERACT  = 7708,  -- Those who have accepted % must pay # Unity accolades to participate. The content for this Wanted battle is #. [Ready to begin?/You do not have the appropriate object set, so your rewards will be limited.]
+        REGIME_REGISTERED             = 9824,  -- New training regime registered!
+        COMMON_SENSE_SURVIVAL         = 11813, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
     mob =
     {

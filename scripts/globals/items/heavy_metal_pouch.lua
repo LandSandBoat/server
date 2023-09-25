@@ -3,8 +3,6 @@
 -- Heavy Metal Pouch
 -- Breaks up a Heavy Metal Pouch
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)
@@ -17,7 +15,7 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    target:addItem(3509, math.random(3, 19))
+    target:addItem(xi.items.PLATE_OF_HEAVY_METAL, math.random(3, 19))
 end
 
 return itemObject

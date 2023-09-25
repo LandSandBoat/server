@@ -11,7 +11,7 @@ require('scripts/globals/job_utils/dancer')
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)
-    return xi.job_utils.dancer.stepAbilityCheck(player, target, ability)
+    return xi.job_utils.dancer.checkStepAbility(player, target, ability)
 end
 
 abilityObject.onUseAbility = function(player, target, ability, action)

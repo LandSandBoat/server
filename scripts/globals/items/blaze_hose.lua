@@ -3,9 +3,6 @@
 -- Item: Blaze Hose
 -- Item Effect: Blaze Spikes
 -----------------------------------
-require("scripts/globals/settings")
-require("scripts/globals/status")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

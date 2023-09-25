@@ -14,9 +14,6 @@
 -- Combos: Clear Mind
 -----------------------------------
 require("scripts/globals/bluemagic")
-require("scripts/globals/status")
-require("scripts/globals/magic")
-require("scripts/globals/msg")
 -----------------------------------
 local spellObject = {}
 
@@ -28,33 +25,18 @@ spellObject.onSpellCast = function(caster, target, spell)
     local typeEffectOne = xi.effect.ACCURACY_BOOST
     local typeEffectTwo = xi.effect.EVASION_BOOST
     local power = 10
-    local duration = 180
+    local duration = xi.spells.blue.calculateDurationWithDiffusion(caster, 180)
     local returnEffect = typeEffectOne
 
-    if caster:hasStatusEffect(xi.effect.DIFFUSION) then
-        local diffMerit = caster:getMerit(xi.merit.DIFFUSION)
+    local actionOne = target:addStatusEffect(typeEffectOne, power, 0, duration)
+    local actionTwo = target:addStatusEffect(typeEffectTwo, power, 0, duration)
 
-        if diffMerit > 0 then
-            duration = duration + (duration / 100) * diffMerit
-        end
-
-        caster:delStatusEffect(xi.effect.DIFFUSION)
-    end
-
-    if
-        not target:addStatusEffect(typeEffectOne, power, 0, duration) and
-        not target:addStatusEffect(typeEffectTwo, power, 0, duration)
-    then
-        -- both statuses fail to apply
+    if not actionOne and not actionTwo then -- both statuses fail to apply
         spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
-    elseif not target:addStatusEffect(typeEffectOne, power, 0, duration) then -- the first status fails to apply
-        target:addStatusEffect(typeEffectTwo, power, 0, duration)
-        spell:setMsg(xi.msg.basic.MAGIC_GAIN_EFFECT)
+    elseif not actionOne and actionTwo then -- the first status fails to apply
         returnEffect = typeEffectTwo
-    else
-        target:addStatusEffect(typeEffectOne, power, 0, duration)
-        target:addStatusEffect(typeEffectTwo, power, 0, duration)
-        spell:setMsg(xi.msg.basic.MAGIC_GAIN_EFFECT)
+    elseif actionOne and not actionTwo then -- the second status fails to apply
+        returnEffect = typeEffectOne
     end
 
     return returnEffect

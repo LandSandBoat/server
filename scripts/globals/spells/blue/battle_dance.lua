@@ -9,13 +9,11 @@
 -- Level: 12
 -- Casting Time: 1 second
 -- Recast Time: 10 seconds
--- Skillchain Element(s): Lightning (can open Liquefaction or Detonation can close Impaction or Fusion)
+-- Skillchain Element(s): Impaction
 -- Combos: Attack Bonus
 -----------------------------------
 require("scripts/globals/bluemagic")
-require("scripts/globals/status")
 require("scripts/globals/magic")
-require("scripts/globals/msg")
 -----------------------------------
 local spellObject = {}
 
@@ -25,7 +23,7 @@ end
 
 spellObject.onSpellCast = function(caster, target, spell)
     local params = {}
-    -- This data should match information on http://wiki.ffxiclopedia.org/wiki/Calculating_Blue_Magic_Damage
+    params.ecosystem = xi.ecosystem.BEASTMEN
     params.tpmod = TPMOD_DURATION
     params.attackType = xi.attackType.PHYSICAL
     params.damageType = xi.damageType.SLASHING
@@ -43,14 +41,14 @@ spellObject.onSpellCast = function(caster, target, spell)
     params.int_wsc = 0.0
     params.mnd_wsc = 0.0
     params.chr_wsc = 0.0
-    local damage = BluePhysicalSpell(caster, target, spell, params)
-    damage = BlueFinalAdjustments(caster, target, spell, damage, params)
 
-    if target:hasStatusEffect(xi.effect.DEX_DOWN) then
-        spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT) -- no effect
-    else
-        target:addStatusEffect(xi.effect.DEX_DOWN, 15, 0, 20)
-    end
+    params.effect = xi.effect.DEX_DOWN
+    local power = 9
+    local tick = 6
+    local duration = 60
+
+    local damage = xi.spells.blue.usePhysicalSpell(caster, target, spell, params)
+    xi.spells.blue.usePhysicalSpellAddedEffect(caster, target, spell, params, damage, power, tick, duration)
 
     return damage
 end

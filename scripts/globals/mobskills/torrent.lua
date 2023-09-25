@@ -4,7 +4,6 @@
 --  Type: Magical Enfeebling
 --  Ignore Shadows, Single target
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/mobskills")
 -----------------------------------
 local mobskillObject = {}

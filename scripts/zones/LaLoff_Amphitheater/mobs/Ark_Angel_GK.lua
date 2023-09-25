@@ -3,7 +3,6 @@
 --  Mob: Ark Angel GK
 -----------------------------------
 mixins = { require("scripts/mixins/job_special") }
-require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 

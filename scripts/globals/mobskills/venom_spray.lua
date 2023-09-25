@@ -7,8 +7,6 @@
 --  Range: 10' cone
 --  Notes: Additional effect can be removed with Poisona.
 -----------------------------------
-require("scripts/globals/settings")
-require("scripts/globals/status")
 require("scripts/globals/mobskills")
 -----------------------------------
 local mobskillObject = {}
@@ -19,6 +17,9 @@ end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local power = 10
+    if skill:getID() == 1843 then -- Nightmare Antlion - increased Poison
+        power = 50
+    end
 
     xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.POISON, power, 3, 120)
 

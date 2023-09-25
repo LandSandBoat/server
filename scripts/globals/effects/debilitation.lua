@@ -1,8 +1,6 @@
 -----------------------------------
 -- xi.effect.DEBILITATION
 -----------------------------------
-require("scripts/globals/status")
------------------------------------
 local effectObject = {}
 
 local statsBits =

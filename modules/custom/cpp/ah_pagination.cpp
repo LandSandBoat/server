@@ -35,6 +35,12 @@ class AHPaginationModule : public CPPModule
         {
             TracyZoneScoped;
 
+            if (PChar->m_GMlevel == 0 && !PChar->loc.zone->CanUseMisc(MISC_AH))
+            {
+                ShowWarning("%s is trying to use the auction house in a disallowed zone [%s]", PChar->GetName(), PChar->loc.zone->GetName());
+                return;
+            }
+
             // Only intercept for action 0x05: Open List Of Sales / Wait
             auto action   = data.ref<uint8>(0x04);
             auto quantity = data.ref<uint8>(0x10);
@@ -45,7 +51,7 @@ class AHPaginationModule : public CPPModule
                 {
                     // This will get wiped on zoning
                     auto currentAHPage = PChar->GetLocalVar("AH_PAGE");
-                    PChar->SetLocalVar("AH_PAGE", (currentAHPage + 1) % ITEMS_PER_PAGE);
+                    PChar->SetLocalVar("AH_PAGE", (currentAHPage + 1) % TOTAL_PAGES);
 
                     PChar->m_ah_history.clear();
                     PChar->m_AHHistoryTimestamp = curTick;

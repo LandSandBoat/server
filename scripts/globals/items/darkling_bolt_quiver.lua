@@ -3,8 +3,6 @@
 -- Darkling Bolt Quiver
 -- When used, you will obtain one stack of Darkling Bolts
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)
@@ -17,7 +15,7 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    target:addItem(19196, 99)
+    target:addItem(xi.items.DARKLING_BOLT, 99)
 end
 
 return itemObject

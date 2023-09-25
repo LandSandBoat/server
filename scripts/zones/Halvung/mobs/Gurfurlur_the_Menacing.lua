@@ -5,7 +5,6 @@
 -----------------------------------
 mixins = { require("scripts/mixins/job_special") }
 local ID = require("scripts/zones/Halvung/IDs")
-require("scripts/globals/status")
 require("scripts/globals/titles")
 -----------------------------------
 local entity = {}

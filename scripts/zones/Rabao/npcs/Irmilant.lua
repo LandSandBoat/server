@@ -5,10 +5,8 @@
 -- !pos 3.78 9.54 56.21 247
 -----------------------------------
 require("scripts/globals/titles")
-require("scripts/globals/settings")
 require("scripts/globals/quests")
 require("scripts/globals/npc_util")
-require("scripts/globals/keyitems")
 -----------------------------------
 local entity = {}
 
@@ -50,8 +48,6 @@ entity.onTrigger = function(player, npc)
         player:startEvent(134) --Ends the Quest
     elseif Indomitable == QUEST_COMPLETED then
         player:startEvent(135) --Dialogue for those who have completed Indomitable Spirit
-    else
-        player:startEvent(76) --Standard Dialogue
     end
 end
 

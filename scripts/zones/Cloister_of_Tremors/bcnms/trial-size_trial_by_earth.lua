@@ -33,8 +33,8 @@ end
 
 battlefieldObject.onEventFinish = function(player, csid, option)
     if csid == 32001 then
-        if not player:hasSpell(299) then
-            player:addSpell(299)
+        if not player:hasSpell(xi.magic.spell.TITAN) then
+            player:addSpell(xi.magic.spell.TITAN)
             player:messageSpecial(ID.text.TITAN_UNLOCKED, 0, 0, 1)
         end
 

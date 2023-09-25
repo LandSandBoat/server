@@ -4,7 +4,6 @@
 -- !pos -14 -3 56 128
 -----------------------------------
 local ID = require("scripts/zones/Valley_of_Sorrows/IDs")
-require("scripts/globals/items")
 require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}

@@ -3,8 +3,6 @@
 --  NPC: Door: Departures Exit (for Kahzam)
 -- !pos -12 8 54 246
 -----------------------------------
-require("scripts/globals/keyitems")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

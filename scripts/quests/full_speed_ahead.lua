@@ -1,7 +1,6 @@
 -----------------------------------
 -- Full Speed Ahead! Helper
 -----------------------------------
-require('scripts/globals/status')
 require('scripts/globals/utils')
 require('scripts/globals/zone')
 -----------------------------------

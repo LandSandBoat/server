@@ -5,7 +5,6 @@
 -----------------------------------
 local ID = require("scripts/zones/Mhaura/IDs")
 require("scripts/globals/npc_util")
-require("scripts/globals/settings")
 require("scripts/globals/quests")
 -----------------------------------
 local entity = {}
@@ -60,8 +59,7 @@ entity.onEventFinish = function(player, csid, option)
     elseif csid == 113 then --quest completed
         player:confirmTrade()
         player:addFame(xi.quest.fame_area.WINDURST, 120)
-        player:addGil(xi.settings.main.GIL_RATE * 2160)
-        player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.main.GIL_RATE * 2160)
+        npcUtil.giveCurrency(player, 'gil', 2160)
         player:setCharVar("QuestAPotterPrefeRepeat_var", 0)
         player:setCharVar("QuestAPotterPrefeCompDay_var", VanadielDayOfTheYear())
         player:setCharVar("QuestAPotterPrefeCompYear_var", VanadielYear())

@@ -13,10 +13,7 @@
 -----------------------------------
 -- Combos: Magic Attack Bonus
 -----------------------------------
-require("scripts/globals/settings")
-require("scripts/globals/status")
 require("scripts/globals/bluemagic")
-require("scripts/globals/msg")
 -----------------------------------
 local spellObject = {}
 
@@ -27,20 +24,10 @@ end
 spellObject.onSpellCast = function(caster, target, spell)
     local typeEffectOne = xi.effect.DEFENSE_BOOST
     local typeEffectTwo = xi.effect.ICE_SPIKES
-    local powerOne = 12
-    local powerTwo = 5
-    local duration = 120
+    local powerOne = 12 -- 12%
+    local powerTwo = 5 -- 5 dmg
+    local duration = xi.spells.blue.calculateDurationWithDiffusion(caster, 120)
     local returnEffect = typeEffectOne
-
-    if caster:hasStatusEffect(xi.effect.DIFFUSION) then
-        local diffMerit = caster:getMerit(xi.merit.DIFFUSION)
-
-        if diffMerit > 0 then
-            duration = duration + (duration / 100) * diffMerit
-        end
-
-        caster:delStatusEffect(xi.effect.DIFFUSION)
-    end
 
     -- Reactor Cool Will Overwrite Ice Spikes and Def Boost regardless of Power
     if

@@ -9,7 +9,6 @@
 -- Mathlouq !pos -93 -7 129 50
 -- Mhasbaf !pos 54 -7 11 50
 -----------------------------------
-require('scripts/globals/items')
 require('scripts/globals/quests')
 require('scripts/globals/interaction/quest')
 require('scripts/globals/npc_util')

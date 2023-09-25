@@ -4,8 +4,6 @@
 -- Starts and Ends Quest: It's Not Your Vault
 -----------------------------------
 local ID = require("scripts/zones/Norg/IDs")
-require("scripts/globals/settings")
-require("scripts/globals/keyitems")
 require("scripts/globals/quests")
 -----------------------------------
 local entity = {}
@@ -91,8 +89,6 @@ entity.onTrigger = function(player, npc)
         end
     elseif vault == QUEST_COMPLETED then
         player:startEvent(39) -- New Standard Dialogue for everyone who has completed the quest
-    else
-        player:startEvent(89) -- Standard Conversation
     end
 end
 

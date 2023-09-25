@@ -3,7 +3,6 @@
 --  Mob: Fire Pot
 -- KSNM: E-vase-ive Action
 -----------------------------------
-require("scripts/globals/status")
 mixins = { require("scripts/mixins/job_special") }
 -----------------------------------
 local entity = {}

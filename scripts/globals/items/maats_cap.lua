@@ -4,7 +4,6 @@
 -- Teleports to Ru'Lude gardens
 -----------------------------------
 require("scripts/globals/teleports")
-require("scripts/globals/status")
 -----------------------------------
 local itemObject = {}
 

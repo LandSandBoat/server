@@ -2,9 +2,6 @@
 -- Astral Flow
 -- make existing pet use astral flow skill
 -----------------------------------
-require("scripts/globals/status")
-require("scripts/globals/msg")
------------------------------------
 local mobskillObject = {}
 
 local function petInactive(pet)
@@ -30,7 +27,7 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
     end
 
     -- pet must be an avatar, and active
-    if pet:getSystem() ~= 5 or petInactive(pet) then
+    if pet:getEcosystem() ~= 5 or petInactive(pet) then
         return 1
     end
 

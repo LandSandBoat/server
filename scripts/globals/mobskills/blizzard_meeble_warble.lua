@@ -3,7 +3,6 @@
 -- AOE Ice Elemental damage, inflicts a potent Paralysis effect and Frost (50 HP/tick).
 -----------------------------------
 require("scripts/globals/mobskills")
-require("scripts/globals/status")
 -----------------------------------
 local mobskillObject = {}
 

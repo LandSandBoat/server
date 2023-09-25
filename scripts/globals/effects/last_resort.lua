@@ -2,7 +2,6 @@
 -- xi.effect.LAST_RESORT
 -----------------------------------
 require("scripts/globals/jobpoints")
-require("scripts/globals/status")
 -----------------------------------
 local effectObject = {}
 

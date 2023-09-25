@@ -6,9 +6,6 @@
 -- HP +9% (cap 160)
 -- Increases rate of combat skill gains by 80%
 -----------------------------------
-require("scripts/globals/status")
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

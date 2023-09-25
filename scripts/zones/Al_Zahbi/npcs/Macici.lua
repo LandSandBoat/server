@@ -4,16 +4,13 @@
 -- Type: Smithing Normal/Adv. Image Support
 -- !pos -35.163 -1 -31.351 48
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/crafting")
 local ID = require("scripts/zones/Al_Zahbi/IDs")
 -----------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    local guildMember = xi.crafting.isGuildMember(player, 8)
-
-    if guildMember == 1 then
+    if xi.crafting.hasJoinedGuild(player, xi.crafting.guild.SMITHING) then
         if trade:hasItemQty(2184, 1) and trade:getItemCount() == 1 then
             if not player:hasStatusEffect(xi.effect.SMITHING_IMAGERY) then
                 player:tradeComplete()
@@ -26,10 +23,9 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local guildMember = xi.crafting.isGuildMember(player, 8)
     local skillLevel = player:getSkillLevel(xi.skill.SMITHING)
 
-    if guildMember == 1 then
+    if xi.crafting.hasJoinedGuild(player, xi.crafting.guild.SMITHING) then
         if not player:hasStatusEffect(xi.effect.SMITHING_IMAGERY) then
             player:startEvent(232, 8, skillLevel, 0, 511, 188, 0, 2, 2184)
         else

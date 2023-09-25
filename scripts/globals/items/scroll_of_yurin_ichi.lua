@@ -6,11 +6,11 @@
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)
-    return target:canLearnSpell(508)
+    return target:canLearnSpell(xi.magic.spell.YURIN_ICHI)
 end
 
 itemObject.onItemUse = function(target)
-    target:addSpell(508)
+    target:addSpell(xi.magic.spell.YURIN_ICHI)
 end
 
 return itemObject

@@ -53,6 +53,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "../ai/states/ability_state.h"
 
 #include "../mob_modifier.h"
+#include "../notoriety_container.h"
 #include "../packets/char_abilities.h"
 #include "../packets/char_sync.h"
 #include "../packets/char_update.h"
@@ -448,44 +449,65 @@ namespace petutils
         return 0;
     }
 
+    uint16 GetJugHP(CPetEntity* PMob)
+    {
+        int level        = PMob->GetMLevel();
+        int calculatedHp = 500;
+
+        // All forumlas derived using linear or cubic line fits and known era appropriate values
+        // Guardrails put into place for any scenarios where mobs sync down to level 20.
+        switch (PMob->m_PetID)
+        {
+            case 23: // CRAB FAMILIAR
+            case 24: // COURIER CARRIE
+            case 33: // BEETLE FAMILIAR
+            case 45: // PANZER GALAHAD
+                return 48.133 * level - 460;
+            case 25: // HOMUNCULUS
+            case 28: // FLOWERPOT BILL
+            case 38: // FLOWERPOT BEN
+                calculatedHp = 61.7471 * level - 1260.99;
+                return std::max(calculatedHp, 500);
+            case 34: // ANTLION FAMILIAR
+            case 46: // CHOPSUEY CHUCKY
+            case 47: // AMIGO SABOTENDER
+                calculatedHp = 60.24 * level - 1246;
+                return std::max(calculatedHp, 500);
+            case 35: // MITE FAMILIAR
+            case 44: // LIFEDRINKER LARS
+                calculatedHp = 57.7 * level - 1203.5;
+                return std::max(calculatedHp, 500);
+            case 21: // SHEEP FAMILIAR
+            case 22: // HARE FAMILIAR
+            case 26: // FLYTRAP FAMILIAR
+            case 27: // TIGER FAMILIAR
+            case 29: // EFT FAMILIAR
+            case 30: // LIZARD FAMILIAR
+            case 31: // MAYFLY FAMILIAR
+            case 32: // FUNGUAR FAMILIAR
+            case 36: // LULLABY MELODIA
+            case 37: // KEENEARED STEFFI
+            case 39: // SABER SIRAVARDE
+            case 40: // COLDBLOOD COMO
+            case 41: // SHELLBUSTER OROB
+            case 42: // VORACIOUS AUDREY
+            case 43: // AMBUSHER ALLIE
+            default:
+                calculatedHp = -0.0207189 * pow(level, 3) + 3.05448 * pow(level, 2) - 86.9204 * level + 1061.84;
+                return std::max(calculatedHp, 500);
+        }
+    }
+
     void LoadJugStats(CPetEntity* PMob, Pet_t* petStats)
     {
         // follows monster formulas but jugs have no subjob
-        JOBTYPE mJob   = PMob->GetMJob();
-        uint8   lvl    = PMob->GetMLevel();
-        uint8   lvlmax = petStats->maxLevel;
-        uint8   lvlmin = petStats->minLevel;
+        uint8 lvl    = PMob->GetMLevel();
+        uint8 lvlmax = petStats->maxLevel;
+        uint8 lvlmin = petStats->minLevel;
 
         lvl = std::clamp(lvl, lvlmin, lvlmax);
 
-        uint8  grade;
-        uint32 mobHP = 1; // Set mob HP
-
-        grade = grade::GetJobGrade(mJob, 0); // main jobs grade
-
-        uint8 base     = 0; // Column for base hp
-        uint8 jobScale = 1; // Column for job scaling
-        uint8 scaleX   = 2; // Column for modifier scale
-
-        uint8 BaseHP   = grade::GetMobHPScale(grade, base);     // Main job base HP
-        uint8 JobScale = grade::GetMobHPScale(grade, jobScale); // Main job scaling
-        uint8 ScaleXHP = grade::GetMobHPScale(grade, scaleX);   // Main job modifier scale
-
-        uint8 RBIgrade = std::min(lvl, (uint8)5); // RBI Grade
-        uint8 RBIbase  = 1;                       // Column for RBI base
-
-        uint8 RBI = grade::GetMobRBI(RBIgrade, RBIbase); // RBI
-
-        uint8 mLvlIf    = (PMob->GetMLevel() > 5 ? 1 : 0);
-        uint8 mLvlIf30  = (PMob->GetMLevel() > 30 ? 1 : 0);
-        uint8 raceScale = 6;
-
-        if (lvl > 0)
-        {
-            mobHP = BaseHP + (std::min(lvl, (uint8)5) - 1) * (JobScale + raceScale - 1) + RBI + mLvlIf * (std::min(lvl, (uint8)30) - 5) * (2 * (JobScale + raceScale) + std::min(lvl, (uint8)30) - 6) / 2 + mLvlIf30 * ((lvl - 30) * (63 + ScaleXHP) + (lvl - 31) * (JobScale + raceScale));
-        }
-
-        PMob->health.maxhp = (int16)(mobHP * petStats->HPscale);
+        PMob->health.maxhp = GetJugHP(PMob);
 
         switch (PMob->GetMJob())
         {
@@ -1021,9 +1043,10 @@ namespace petutils
 
     void CalculateAvatarStats(CBattleEntity* PMaster, CPetEntity* PPet)
     {
-        uint32 petID    = PPet->m_PetID;
-        Pet_t* PPetData = *std::find_if(g_PPetList.begin(), g_PPetList.end(), [petID](Pet_t* t)
-                                        { return t->PetID == petID; });
+        uint32       petID    = PPet->m_PetID;
+        Pet_t*       PPetData = *std::find_if(g_PPetList.begin(), g_PPetList.end(), [petID](Pet_t* t)
+                                              { return t->PetID == petID; });
+        CCharEntity* PChar    = static_cast<CCharEntity*>(PMaster);
 
         uint8 mLvl = PMaster->GetMLevel();
 
@@ -1046,6 +1069,11 @@ namespace petutils
         {
             PPet->SetMLevel(PMaster->GetSLevel());
             PPet->SetSLevel(PMaster->GetSLevel());
+        }
+        else if ((charutils::HasItem(PChar, 14656) == true) && (petID == PETID_WATERSPIRIT)) // Check if Player has Poseidon Ring & PetID == Water Spirit
+        {
+            PPet->SetMLevel(mLvl);
+            PPet->SetSLevel(mLvl);
         }
         else
         { // should never happen
@@ -1155,11 +1183,12 @@ namespace petutils
         static_cast<CItemWeapon*>(PPet->m_Weapons[SLOT_MAIN])->setDelay((uint16)(floor(1000.0f * (320.0f / 60.0f)))); // 320 delay
         static_cast<CItemWeapon*>(PPet->m_Weapons[SLOT_MAIN])->setBaseDelay((uint16)(floor(1000.0f * (320.0f / 60.0f))));
         static_cast<CItemWeapon*>(PPet->m_Weapons[SLOT_MAIN])->setDamage((uint16)(floor(mLvl / 2) + 3));
-        // Set stat modifiers
-        PPet->setModifier(Mod::DEF, mobutils::GetDefense(PPet, PPet->defRank));
-        PPet->setModifier(Mod::EVA, mobutils::GetBase(PPet, PPet->evaRank));
-        PPet->setModifier(Mod::ATT, mobutils::GetBase(PPet, PPet->attRank));
-        PPet->setModifier(Mod::ACC, mobutils::GetBase(PPet, PPet->accRank));
+        // Set A+ weapon skill
+        PPet->setModifier(Mod::ATT, battleutils::GetMaxSkill(SKILL_GREAT_AXE, JOB_WAR, mLvl > 99 ? 99 : mLvl));
+        PPet->setModifier(Mod::ACC, battleutils::GetMaxSkill(SKILL_GREAT_AXE, JOB_WAR, mLvl > 99 ? 99 : mLvl));
+        // Set D evasion and def
+        PPet->setModifier(Mod::EVA, battleutils::GetMaxSkill(SKILL_HAND_TO_HAND, JOB_WAR, mLvl > 99 ? 99 : mLvl));
+        PPet->setModifier(Mod::DEF, battleutils::GetMaxSkill(SKILL_HAND_TO_HAND, JOB_WAR, mLvl > 99 ? 99 : mLvl));
 
         // Set wyvern damageType to slashing damage. "Wyverns do slashing damage..." https://www.bg-wiki.com/ffxi/Wyvern_(Dragoon_Pet)
         PPet->m_dmgType = DAMAGE_TYPE::SLASHING;
@@ -1278,7 +1307,7 @@ namespace petutils
         FinalizePetStatistics(PMaster, PPet);
     }
 
-    void CalculateLoupanStats(CBattleEntity* PMaster, CPetEntity* PPet)
+    void CalculateLuopanStats(CBattleEntity* PMaster, CPetEntity* PPet)
     {
         PPet->SetMLevel(PMaster->GetMLevel());
         PPet->health.maxhp = (uint32)floor((250 * PPet->GetMLevel()) / 15);
@@ -1555,6 +1584,25 @@ namespace petutils
             PMob->PMaster    = nullptr;
 
             PMob->PAI->SetController(std::make_unique<CMobController>(PMob));
+
+            // clear all enmity towards a charmed mob when it is released
+            // use two loops to avoid modifying the container while iterating over it
+            auto&                  notorietyContainer = PMob->PNotorietyContainer;
+            std::list<CMobEntity*> mobsToPacify;
+
+            // first collect the mobs with hate towards the formerly charmed mob
+            for (auto* entityWithEnmity : *notorietyContainer)
+            {
+                if (entityWithEnmity->objtype == TYPE_MOB)
+                {
+                    mobsToPacify.push_back(static_cast<CMobEntity*>(entityWithEnmity));
+                }
+            }
+            // then remove the formerly charmed mob from those mobs enmity containers
+            for (auto* mobToPacify : mobsToPacify)
+            {
+                mobToPacify->PEnmityContainer->Clear(PMob->id);
+            }
         }
         else if (PPet->objtype == TYPE_PET)
         {
@@ -2058,7 +2106,7 @@ namespace petutils
         }
         else if (PPet->getPetType() == PET_TYPE::LUOPAN && PMaster->objtype == TYPE_PC)
         {
-            CalculateLoupanStats(PMaster, PPet);
+            CalculateLuopanStats(PMaster, PPet);
         }
 
         PPet->setSpawnLevel(PPet->GetMLevel());

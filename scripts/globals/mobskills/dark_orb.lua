@@ -7,14 +7,12 @@
 --  Range: Radial
 --  Notes: Only used when flying
 -----------------------------------
-require("scripts/globals/settings")
-require("scripts/globals/status")
 require("scripts/globals/mobskills")
 -----------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
-    if mob:getAnimationSub() ~= 1 then
+    if mob:getAnimationSub() ~= 5 then
         return 1
     else
         return 0

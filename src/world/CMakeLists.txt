@@ -8,13 +8,19 @@ set(SOURCES
     colonization_system.h
     conquest_system.cpp
     conquest_system.h
+    daily_tally.h
+    daily_tally.cpp
     http_server.cpp
     http_server.h
     main.cpp
+    message_handler.h
     message_server.cpp
     message_server.h
+    time_server.h
+    time_server.cpp
     world_server.cpp
-    world_server.h)
+    world_server.h
+        )
 
 # Temporarily remove clashing old code
 # TODO: Remove this block
@@ -47,5 +53,9 @@ target_include_directories(xi_world
         ${CMAKE_SOURCE_DIR}/src
         ${CMAKE_CURRENT_SOURCE_DIR}
 )
+
+if (APPLE)
+    disable_lto(xi_world)
+endif()
 
 set_target_output_directory(xi_world)

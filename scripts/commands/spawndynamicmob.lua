@@ -58,7 +58,7 @@ function onTrigger(player, mobGroupID, mobZoneID, numberOfMob, mobLook, mobName,
                 groupId = mobGroupID,
                 groupZoneId = mobZoneID,
                 look = mobLookActive,
-                onMobDeath = function(mob, playerArg, isKiller)
+                onMobDeath = function(mob, playerArg, optParams)
                 end,
             })
 
@@ -88,7 +88,7 @@ function onTrigger(player, mobGroupID, mobZoneID, numberOfMob, mobLook, mobName,
                 rotation = player:getRotPos(),
                 groupId = mobGroupID,
                 groupZoneId = mobZoneID,
-                onMobDeath = function(mob, playerArg, isKiller)
+                onMobDeath = function(mob, playerArg, optParams)
                 end,
             })
 

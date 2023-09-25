@@ -3,8 +3,6 @@
 -- Item: Bullet Pouch
 -- When used, you will obtain one stack of Bullets
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)
@@ -17,7 +15,7 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    target:addItem(17340, 99)
+    target:addItem(xi.items.BULLET, 99)
 end
 
 return itemObject

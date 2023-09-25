@@ -4,7 +4,6 @@
 -- Type: Adventurer's Assistant
 -- !pos -39.162 -1 -92.147 234
 -----------------------------------
-require("scripts/globals/settings")
 local ID = require("scripts/zones/Bastok_Mines/IDs")
 require("scripts/globals/events/starlight_celebrations")
 -----------------------------------

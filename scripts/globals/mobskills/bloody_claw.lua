@@ -8,13 +8,15 @@
 -- Notes: Despite the attack ignoring Utsusemi, it is physical, and therefore capable of missing entirely.
 -----------------------------------
 require("scripts/globals/mobskills")
-require("scripts/globals/settings")
-require("scripts/globals/status")
 -----------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
-    return 0
+    if mob:getAnimationSub() ~= 4 then
+        return 1
+    else
+        return 0
+    end
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)

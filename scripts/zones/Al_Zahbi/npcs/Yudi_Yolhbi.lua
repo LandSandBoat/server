@@ -4,16 +4,13 @@
 -- Type: Woodworking Normal/Adv. Image Support
 -- !pos -71.584 -7 -56.018 48
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/crafting")
 local ID = require("scripts/zones/Al_Zahbi/IDs")
 -----------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    local guildMember = xi.crafting.isGuildMember(player, 9)
-
-    if guildMember == 1 then
+    if xi.crafting.hasJoinedGuild(player, xi.crafting.guild.WOODWORKING) then
         if trade:hasItemQty(2184, 1) and trade:getItemCount() == 1 then
             if not player:hasStatusEffect(xi.effect.WOODWORKING_IMAGERY) then
                 player:tradeComplete()
@@ -26,10 +23,9 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local guildMember = xi.crafting.isGuildMember(player, 9)
     local skillLevel = player:getSkillLevel(xi.skill.WOODWORKING)
 
-    if guildMember == 1 then
+    if xi.crafting.hasJoinedGuild(player, xi.crafting.guild.WOODWORKING) then
         if not player:hasStatusEffect(xi.effect.WOODWORKING_IMAGERY) then
             player:startEvent(234, 8, skillLevel, 0, 511, 188, 0, 1, 2184)
         else

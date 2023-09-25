@@ -8,8 +8,6 @@
 --  Notes:Nightmare Crabs use an enhanced version that applies a Magic Defense Boost that cannot be dispelled.
 -----------------------------------
 require("scripts/globals/mobskills")
-require("scripts/globals/settings")
-require("scripts/globals/status")
 -----------------------------------
 local mobskillObject = {}
 
@@ -19,7 +17,7 @@ end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local typeEffect = xi.effect.SHELL
-    local power = 50
+    local power      = 5000
 
     skill:setMsg(xi.mobskills.mobBuffMove(mob, typeEffect, power, 0, 180))
 

@@ -19,7 +19,7 @@ CREATE TABLE IF NOT EXISTS `water_points` (
   `pos_y` float(7,2) NOT NULL DEFAULT '0.00',
   `pos_z` float(7,2) NOT NULL DEFAULT '0.00',
   PRIMARY KEY (`waterid`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8mb4;
 
 --
 -- Contenu de la table `water_points`

@@ -2,9 +2,6 @@
 -- Attachment: Tension Spring IV
 -----------------------------------
 require("scripts/globals/automaton")
-require("scripts/globals/status")
------------------------------------
-require("scripts/globals/automaton")
 -----------------------------------
 local attachmentObject = {}
 

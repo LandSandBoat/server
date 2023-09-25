@@ -2,11 +2,11 @@
 -- Zone: Port_San_dOria (232)
 -----------------------------------
 local ID = require('scripts/zones/Port_San_dOria/IDs')
+require('scripts/globals/events/sunbreeze_festival')
 require('scripts/quests/flyers_for_regine')
 require('scripts/globals/conquest')
 require('scripts/globals/cutscenes')
 require('scripts/globals/missions')
-require('scripts/globals/settings')
 require('scripts/globals/zone')
 -----------------------------------
 local zoneObject = {}
@@ -40,8 +40,8 @@ zoneObject.afterZoneIn = function(player)
     xi.moghouse.afterZoneIn(player)
 end
 
-zoneObject.onConquestUpdate = function(zone, updatetype)
-    xi.conq.onConquestUpdate(zone, updatetype)
+zoneObject.onConquestUpdate = function(zone, updatetype, influence, owner, ranking, isConquestAlliance)
+    xi.conq.onConquestUpdate(zone, updatetype, influence, owner, ranking, isConquestAlliance)
 end
 
 zoneObject.onTriggerAreaEnter = function(player, triggerArea)
@@ -69,6 +69,10 @@ zoneObject.onEventFinish = function(player, csid, option)
     end
 
     xi.moghouse.exitJobChangeFinish(player, csid, option)
+end
+
+zoneObject.onGameHour = function(zone)
+    xi.events.sunbreeze_festival.spawnFireworks(zone)
 end
 
 return zoneObject

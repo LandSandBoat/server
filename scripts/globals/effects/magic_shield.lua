@@ -11,7 +11,6 @@
 --  0 Standard Magic Shield (adds magic immunity)
 --  1 Fake Magic Shield (does not resist non-damage spells)
 -----------------------------------
-require("scripts/globals/status")
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

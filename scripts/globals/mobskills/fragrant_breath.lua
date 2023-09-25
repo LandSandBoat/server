@@ -7,8 +7,6 @@
 -- Range: Conal up to 15'
 -- Notes: Some Morbol NMs
 ---------------------------------------------
-require("scripts/globals/status")
-require("scripts/globals/msg")
 require("scripts/globals/mobskills")
 ---------------------------------------------
 local mobskillObject = {}

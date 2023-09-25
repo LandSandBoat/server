@@ -11,9 +11,6 @@
 -- Ranged ATT % 22
 -- Ranged ATT Cap 75
 -----------------------------------
-require("scripts/globals/status")
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

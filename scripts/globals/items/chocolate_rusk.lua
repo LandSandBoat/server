@@ -6,9 +6,6 @@
 -- High-quality success rate +2
 -- Synthesis failure rate -4%
 -----------------------------------
-require("scripts/globals/status")
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

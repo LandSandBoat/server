@@ -3,9 +3,6 @@
 --  Item: Black Drop
 --  Transports the user to their Home Point
 -----------------------------------
-require("scripts/globals/status")
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

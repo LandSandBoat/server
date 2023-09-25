@@ -21,9 +21,9 @@
 
 #include "navmesh.h"
 
-#include <detour/DetourCommon.h>
-#include <detour/DetourNavMesh.h>
-#include <detour/DetourNavMeshQuery.h>
+#include <DetourCommon.h>
+#include <DetourNavMesh.h>
+#include <DetourNavMeshQuery.h>
 
 #include "common/utils.h"
 #include "common/xirand.h"
@@ -488,11 +488,11 @@ bool CNavMesh::findFurthestValidPoint(const position_t& startPosition, const pos
     return true;
 }
 
-void CNavMesh::snapToValidPosition(position_t& position, float targetY, bool force)
+void CNavMesh::snapToValidPosition(position_t& position)
 {
     TracyZoneScoped;
 
-    if (!m_navMesh || !targetY || (!force && abs(position.y - targetY) < 0.1f))
+    if (!m_navMesh)
     {
         return;
     }
@@ -506,7 +506,7 @@ void CNavMesh::snapToValidPosition(position_t& position, float targetY, bool for
     filter.setIncludeFlags(0xffff);
     filter.setExcludeFlags(0);
 
-    dtPolyRef startRef;
+    dtPolyRef startRef = 0;
 
     dtStatus status = m_navMeshQuery.findNearestPoly(spos, polyPickExt, &filter, &startRef, snearest);
 
@@ -593,7 +593,7 @@ bool CNavMesh::onSameFloor(const position_t& start, float* spos, const position_
     return true;
 }
 
-bool CNavMesh::raycast(const position_t& start, const position_t& end, bool lookOffMesh)
+bool CNavMesh::raycast(const position_t& start, const position_t& end)
 {
     TracyZoneScoped;
 
@@ -684,7 +684,7 @@ bool CNavMesh::raycast(const position_t& start, const position_t& end, bool look
     // raycasted to - it needs to be on the navmesh. This will check to
     // see if the player is "off-mesh" and raycast to the nearest "on-mesh"
     // point instead. distanceToWall will be 0.0f if the player is "off-mesh".
-    if (distanceToWall < 0.01f && lookOffMesh)
+    if (distanceToWall < 0.01f)
     {
         // Overwrite epos with closest valid point
         status = m_navMeshQuery.closestPointOnPolyBoundary(endRef, epos, epos);

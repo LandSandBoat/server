@@ -8,9 +8,6 @@
 -- Accuracy +9% (Cap 15)
 -- Attack +10% (Cap 20)
 -----------------------------------
-require("scripts/globals/status")
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

@@ -3,7 +3,6 @@
 -----------------------------------
 -- Taillegeas : !pos 31.000 1.995 57.971 243
 -----------------------------------
-require('scripts/globals/items')
 require('scripts/globals/magic')
 require('scripts/globals/trust')
 require('scripts/globals/quests')

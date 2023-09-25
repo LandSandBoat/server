@@ -2,7 +2,6 @@
 -- Area: Uleguerand Range
 --  Mob: Jormungand
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/titles")
 -----------------------------------
 local entity = {}
@@ -30,7 +29,7 @@ entity.onMobSpawn = function(mob)
     mob:setMod(xi.mod.ATT, 398)
     mob:setMod(xi.mod.DEF, 475)
     mob:setMod(xi.mod.EVA, 434)
-    mob:setMod(xi.mod.MATT, 0) -- Despite being /BLM it has 0 MATT
+    mob:setMod(xi.mod.MATT, 30) -- Jorm has 30 MAB
     mob:setMod(xi.mod.REGEN, 22)
     mob:setMod(xi.mod.REFRESH, 200)
     mob:setMod(xi.mod.DARK_MEVA, 70)
@@ -81,8 +80,10 @@ end
 entity.onMobFight = function(mob, target)
     -- Wyrms automatically wake from sleep in the air
     if
-        hasSleepEffects(mob) and
-        mob:getAnimationSub() == 1
+        mob:getAnimationSub() == 1 and
+        (target:hasStatusEffect(xi.effect.SLEEP_I) or
+        target:hasStatusEffect(xi.effect.SLEEP_II) or
+        target:hasStatusEffect(xi.effect.LULLABY))
     then
         mob:wakeUp()
     end

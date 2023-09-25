@@ -20,4 +20,4 @@ CREATE TABLE IF NOT EXISTS `linkshells` (
   `postrights` tinyint(3) unsigned NOT NULL DEFAULT '0',
   `broken` tinyint(1) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`linkshellid`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=1 ;

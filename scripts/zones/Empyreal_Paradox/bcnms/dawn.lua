@@ -7,7 +7,6 @@
 -----------------------------------
 local ID = require("scripts/zones/Empyreal_Paradox/IDs")
 require("scripts/globals/battlefield")
-require("scripts/globals/keyitems")
 require("scripts/globals/missions")
 require("scripts/globals/titles")
 -----------------------------------
@@ -16,7 +15,8 @@ local battlefieldObject = {}
 battlefieldObject.onBattlefieldInitialise = function(battlefield)
     battlefield:setLocalVar("phaseChange", 1)
     battlefield:setLocalVar("instantKick", 1)
-    local baseID = ID.mob.PROMATHIA_OFFSET + battlefield:getArea()
+    -- Need to multiply getArea by 2 due to the two Promathia versions
+    local baseID = ID.mob.PROMATHIA_OFFSET + (battlefield:getArea() * 2)
     local pos = GetMobByID(baseID):getSpawnPos()
 
     local prishe = battlefield:insertEntity(11, true, true)

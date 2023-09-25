@@ -89,11 +89,11 @@ public:
     bool                      IsFirstSwing() const;                           // Returns the isFirstSwing flag.
     void                      SetAsFirstSwing(bool isFirst = true);           // Sets this attack as the first swing.
     float                     GetDamageRatio() const;                         // Gets the damage ratio.
-    bool                      IsGuarded();                                    // Sets the isGuarded flag. Also alters the damage ratio accordingly.
+    bool                      IsGuarded(bool calculate = true);               // Sets the isGuarded flag. Also alters the damage ratio accordingly.
     bool                      IsEvaded() const;                               // Gets the evaded flag.
     void                      SetEvaded(bool value);                          // Sets the evaded flag.
     bool                      IsBlocked() const;                              // Returns the blocked flag.
-    bool                      IsParried();
+    bool                      IsParried(bool calculate = true);
     bool                      IsAnticipated() const;
     bool                      CheckAnticipated();
     bool                      IsCountered() const;

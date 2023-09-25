@@ -2,8 +2,6 @@
 -- ID: 15453
 -- lugworm_belt
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)
@@ -16,7 +14,7 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    target:addItem(17395, 12) -- lugworm
+    target:addItem(xi.items.LUGWORM, 12)
 end
 
 return itemObject

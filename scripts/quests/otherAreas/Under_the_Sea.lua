@@ -7,9 +7,7 @@
 -- Jimaida : !pos -17.342 -2.597 -18.766 248
 -- Zaldon  : !pos -11.810 -7.287 -6.742
 -----------------------------------
-require('scripts/globals/items')
 require('scripts/globals/quests')
-require('scripts/globals/status')
 require('scripts/globals/zone')
 require('scripts/globals/interaction/quest')
 -----------------------------------

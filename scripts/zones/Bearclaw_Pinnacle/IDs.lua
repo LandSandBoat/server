@@ -28,12 +28,12 @@ zones[xi.zone.BEARCLAW_PINNACLE] =
         PARTY_MEMBERS_HAVE_FALLEN     = 7410, -- All party members have fallen in battle. Now leaving the battlefield.
         THE_PARTY_WILL_BE_REMOVED     = 7417, -- If all party members' HP are still zero after # minute[/s], the party will be removed from the battlefield.
         ZEPHYR_RIPS                   = 7425, -- The <item> rips!
-        CONQUEST_BASE                 = 7432, -- Tallying conquest results...
-        ENTERING_THE_BATTLEFIELD_FOR  = 7595, -- Entering the battlefield for [Flames for the Dead/Follow the White Rabbit/When Hell Freezes Over/Brothers/Holy Cow/Taurassic Park]!
-        BLOWN_AWAY                    = 7618, -- The explosion has blown you out of the area!
-        BEGINS_TO_MELT                = 7675, -- The Snoll Tzar has begun to melt!
-        LARGE_STEAM                   = 7676, -- The Snoll Tzar is emitting a large amount of steam.
-        SHOOK_SALT                    = 7677, -- The Snoll Tzar shakes off the salt!
+        CONQUEST_BASE                 = 7433, -- Tallying conquest results...
+        ENTERING_THE_BATTLEFIELD_FOR  = 7596, -- Entering the battlefield for [Flames for the Dead/Follow the White Rabbit/When Hell Freezes Over/Brothers/Holy Cow/Taurassic Park]!
+        BLOWN_AWAY                    = 7619, -- The explosion has blown you out of the area!
+        BEGINS_TO_MELT                = 7676, -- The Snoll Tzar has begun to melt!
+        LARGE_STEAM                   = 7677, -- The Snoll Tzar is emitting a large amount of steam.
+        SHOOK_SALT                    = 7678, -- The Snoll Tzar shakes off the salt!
     },
     mob =
     {

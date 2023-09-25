@@ -4,8 +4,6 @@
 -- !pos 150.258 -21.047 -37.256 112
 -----------------------------------
 local ID = require("scripts/zones/Xarcabard/IDs")
-require("scripts/globals/items")
-require("scripts/globals/keyitems")
 require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}

@@ -1,9 +1,5 @@
 -----------------------------------
---
 -- xi.effect.ONE_FOR_ALL
---
------------------------------------
-require("scripts/globals/status")
 -----------------------------------
 local effectObject = {}
 

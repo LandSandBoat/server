@@ -1,7 +1,4 @@
-require("scripts/globals/items")
-require("scripts/globals/msg")
 require("scripts/globals/pathfind")
-require("scripts/globals/status")
 
 xi = xi or {}
 
@@ -1117,8 +1114,7 @@ function Battlefield:handleLootRolls(battlefield, lootTable, npc)
                                 local gil = entry.amount / #players
 
                                 for k = 1, #players, 1 do
-                                    players[k]:addGil(gil)
-                                    players[k]:messageSpecial(zones[players[1]:getZoneID()].text.GIL_OBTAINED, gil)
+                                    npcUtil.giveCurrency(players[k], 'gil', gil)
                                 end
 
                                 break
@@ -1490,8 +1486,7 @@ function xi.battlefield.HandleLootRolls(battlefield, lootTable, players, npc)
                                 local gil = entry.amount / #players
 
                                 for j = 1, #players, 1 do
-                                    players[j]:addGil(gil)
-                                    players[j]:messageSpecial(zones[players[1]:getZoneID()].text.GIL_OBTAINED, gil)
+                                    npcUtil.giveCurrency(players[j], 'gil', gil)
                                 end
 
                                 break

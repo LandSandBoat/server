@@ -1,8 +1,6 @@
 -----------------------------------
 -- Geocrush
 -----------------------------------
-require("scripts/globals/settings")
-require("scripts/globals/status")
 require("scripts/globals/mobskills")
 require("scripts/globals/magic")
 -----------------------------------
@@ -19,7 +17,7 @@ abilityObject.onPetAbility = function(target, pet, skill, summoner)
     params.element = xi.magic.ele.WATER
     params.includemab = true
     params.maccBonus = xi.summon.getSummoningSkillOverCap(pet)
-    params.ignoreStateLock = true
+    params.damageSpell = true
 
     if summoner ~= nil and summoner:isPC() then
         params.tpBonus = summoner:getMerit(xi.merit.GRANDFALL) -- This was changed to 400 tp/point in 2007. Original value was 320 tp/point

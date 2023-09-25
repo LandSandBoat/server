@@ -1,11 +1,7 @@
 -----------------------------------
 -- Geomancer Job Utilities
 -----------------------------------
-require("scripts/globals/settings")
 require("scripts/globals/ability")
-require("scripts/globals/status")
-require("scripts/globals/spell_data")
-require("scripts/globals/msg")
 require("scripts/globals/pets")
 require("scripts/globals/weaponskills")
 require("scripts/globals/jobpoints")
@@ -15,7 +11,7 @@ xi.job_utils = xi.job_utils or {}
 xi.job_utils.geomancer = xi.job_utils.geomancer or {}
 -----------------------------------
 
-local loupanModels =
+local luopanModels =
 {
     FIRE    = 2850,
     ICE     = 2851,
@@ -41,36 +37,36 @@ local indiVisualEffect =
 
 local geoData =
 {
-    [xi.magic.spell.GEO_REGEN]      = { luopanModel = loupanModels.LIGHT,   effect = xi.effect.GEO_REGEN,               targetType = xi.auraTarget.ALLIES  },
-    [xi.magic.spell.GEO_POISON]     = { luopanModel = loupanModels.WATER,   effect = xi.effect.GEO_POISON,              targetType = xi.auraTarget.ENEMIES },
-    [xi.magic.spell.GEO_REFRESH]    = { luopanModel = loupanModels.LIGHT,   effect = xi.effect.GEO_REFRESH,             targetType = xi.auraTarget.ALLIES  },
-    [xi.magic.spell.GEO_HASTE]      = { luopanModel = loupanModels.WIND,    effect = xi.effect.GEO_HASTE,               targetType = xi.auraTarget.ALLIES  },
-    [xi.magic.spell.GEO_STR]        = { luopanModel = loupanModels.FIRE,    effect = xi.effect.GEO_STR_BOOST,           targetType = xi.auraTarget.ALLIES  },
-    [xi.magic.spell.GEO_DEX]        = { luopanModel = loupanModels.THUNDER, effect = xi.effect.GEO_DEX_BOOST,           targetType = xi.auraTarget.ALLIES  },
-    [xi.magic.spell.GEO_VIT]        = { luopanModel = loupanModels.EARTH,   effect = xi.effect.GEO_VIT_BOOST,           targetType = xi.auraTarget.ALLIES  },
-    [xi.magic.spell.GEO_AGI]        = { luopanModel = loupanModels.WIND,    effect = xi.effect.GEO_AGI_BOOST,           targetType = xi.auraTarget.ALLIES  },
-    [xi.magic.spell.GEO_INT]        = { luopanModel = loupanModels.ICE,     effect = xi.effect.GEO_INT_BOOST,           targetType = xi.auraTarget.ALLIES  },
-    [xi.magic.spell.GEO_MND]        = { luopanModel = loupanModels.WATER,   effect = xi.effect.GEO_MND_BOOST,           targetType = xi.auraTarget.ALLIES  },
-    [xi.magic.spell.GEO_CHR]        = { luopanModel = loupanModels.LIGHT,   effect = xi.effect.GEO_CHR_BOOST,           targetType = xi.auraTarget.ALLIES  },
-    [xi.magic.spell.GEO_FURY]       = { luopanModel = loupanModels.FIRE,    effect = xi.effect.GEO_ATTACK_BOOST,        targetType = xi.auraTarget.ALLIES  },
-    [xi.magic.spell.GEO_BARRIER]    = { luopanModel = loupanModels.EARTH,   effect = xi.effect.GEO_DEFENSE_BOOST,       targetType = xi.auraTarget.ALLIES  },
-    [xi.magic.spell.GEO_ACUMEN]     = { luopanModel = loupanModels.ICE,     effect = xi.effect.GEO_MAGIC_ATK_BOOST,     targetType = xi.auraTarget.ALLIES  },
-    [xi.magic.spell.GEO_FEND]       = { luopanModel = loupanModels.WATER,   effect = xi.effect.GEO_MAGIC_DEF_BOOST,     targetType = xi.auraTarget.ALLIES  },
-    [xi.magic.spell.GEO_PRECISION]  = { luopanModel = loupanModels.THUNDER, effect = xi.effect.GEO_ACCURACY_BOOST,      targetType = xi.auraTarget.ALLIES  },
-    [xi.magic.spell.GEO_VOIDANCE]   = { luopanModel = loupanModels.WIND,    effect = xi.effect.GEO_EVASION_BOOST,       targetType = xi.auraTarget.ALLIES  },
-    [xi.magic.spell.GEO_FOCUS]      = { luopanModel = loupanModels.DARK,    effect = xi.effect.GEO_MAGIC_ACC_BOOST,     targetType = xi.auraTarget.ALLIES  },
-    [xi.magic.spell.GEO_ATTUNEMENT] = { luopanModel = loupanModels.LIGHT,   effect = xi.effect.GEO_MAGIC_EVASION_BOOST, targetType = xi.auraTarget.ALLIES  },
-    [xi.magic.spell.GEO_WILT]       = { luopanModel = loupanModels.WATER,   effect = xi.effect.GEO_ATTACK_DOWN,         targetType = xi.auraTarget.ENEMIES },
-    [xi.magic.spell.GEO_FRAILTY]    = { luopanModel = loupanModels.WIND,    effect = xi.effect.GEO_DEFENSE_DOWN,        targetType = xi.auraTarget.ENEMIES },
-    [xi.magic.spell.GEO_FADE]       = { luopanModel = loupanModels.FIRE,    effect = xi.effect.GEO_MAGIC_ATK_DOWN,      targetType = xi.auraTarget.ENEMIES },
-    [xi.magic.spell.GEO_MALAISE]    = { luopanModel = loupanModels.THUNDER, effect = xi.effect.GEO_MAGIC_DEF_DOWN,      targetType = xi.auraTarget.ENEMIES },
-    [xi.magic.spell.GEO_SLIP]       = { luopanModel = loupanModels.EARTH,   effect = xi.effect.GEO_ACCURACY_DOWN,       targetType = xi.auraTarget.ENEMIES },
-    [xi.magic.spell.GEO_TORPOR]     = { luopanModel = loupanModels.ICE,     effect = xi.effect.GEO_EVASION_DOWN,        targetType = xi.auraTarget.ENEMIES },
-    [xi.magic.spell.GEO_VEX]        = { luopanModel = loupanModels.LIGHT,   effect = xi.effect.GEO_MAGIC_ACC_DOWN,      targetType = xi.auraTarget.ENEMIES },
-    [xi.magic.spell.GEO_LANGUOR]    = { luopanModel = loupanModels.DARK,    effect = xi.effect.GEO_MAGIC_EVASION_DOWN,  targetType = xi.auraTarget.ENEMIES },
-    [xi.magic.spell.GEO_SLOW]       = { luopanModel = loupanModels.EARTH,   effect = xi.effect.GEO_SLOW,                targetType = xi.auraTarget.ENEMIES },
-    [xi.magic.spell.GEO_PARALYSIS]  = { luopanModel = loupanModels.ICE,     effect = xi.effect.GEO_PARALYSIS,           targetType = xi.auraTarget.ENEMIES },
-    [xi.magic.spell.GEO_GRAVITY]    = { luopanModel = loupanModels.WIND,    effect = xi.effect.GEO_WEIGHT,              targetType = xi.auraTarget.ENEMIES },
+    [xi.magic.spell.GEO_REGEN]      = { luopanModel = luopanModels.LIGHT,   effect = xi.effect.GEO_REGEN,               targetType = xi.auraTarget.ALLIES  },
+    [xi.magic.spell.GEO_POISON]     = { luopanModel = luopanModels.WATER,   effect = xi.effect.GEO_POISON,              targetType = xi.auraTarget.ENEMIES },
+    [xi.magic.spell.GEO_REFRESH]    = { luopanModel = luopanModels.LIGHT,   effect = xi.effect.GEO_REFRESH,             targetType = xi.auraTarget.ALLIES  },
+    [xi.magic.spell.GEO_HASTE]      = { luopanModel = luopanModels.WIND,    effect = xi.effect.GEO_HASTE,               targetType = xi.auraTarget.ALLIES  },
+    [xi.magic.spell.GEO_STR]        = { luopanModel = luopanModels.FIRE,    effect = xi.effect.GEO_STR_BOOST,           targetType = xi.auraTarget.ALLIES  },
+    [xi.magic.spell.GEO_DEX]        = { luopanModel = luopanModels.THUNDER, effect = xi.effect.GEO_DEX_BOOST,           targetType = xi.auraTarget.ALLIES  },
+    [xi.magic.spell.GEO_VIT]        = { luopanModel = luopanModels.EARTH,   effect = xi.effect.GEO_VIT_BOOST,           targetType = xi.auraTarget.ALLIES  },
+    [xi.magic.spell.GEO_AGI]        = { luopanModel = luopanModels.WIND,    effect = xi.effect.GEO_AGI_BOOST,           targetType = xi.auraTarget.ALLIES  },
+    [xi.magic.spell.GEO_INT]        = { luopanModel = luopanModels.ICE,     effect = xi.effect.GEO_INT_BOOST,           targetType = xi.auraTarget.ALLIES  },
+    [xi.magic.spell.GEO_MND]        = { luopanModel = luopanModels.WATER,   effect = xi.effect.GEO_MND_BOOST,           targetType = xi.auraTarget.ALLIES  },
+    [xi.magic.spell.GEO_CHR]        = { luopanModel = luopanModels.LIGHT,   effect = xi.effect.GEO_CHR_BOOST,           targetType = xi.auraTarget.ALLIES  },
+    [xi.magic.spell.GEO_FURY]       = { luopanModel = luopanModels.FIRE,    effect = xi.effect.GEO_ATTACK_BOOST,        targetType = xi.auraTarget.ALLIES  },
+    [xi.magic.spell.GEO_BARRIER]    = { luopanModel = luopanModels.EARTH,   effect = xi.effect.GEO_DEFENSE_BOOST,       targetType = xi.auraTarget.ALLIES  },
+    [xi.magic.spell.GEO_ACUMEN]     = { luopanModel = luopanModels.ICE,     effect = xi.effect.GEO_MAGIC_ATK_BOOST,     targetType = xi.auraTarget.ALLIES  },
+    [xi.magic.spell.GEO_FEND]       = { luopanModel = luopanModels.WATER,   effect = xi.effect.GEO_MAGIC_DEF_BOOST,     targetType = xi.auraTarget.ALLIES  },
+    [xi.magic.spell.GEO_PRECISION]  = { luopanModel = luopanModels.THUNDER, effect = xi.effect.GEO_ACCURACY_BOOST,      targetType = xi.auraTarget.ALLIES  },
+    [xi.magic.spell.GEO_VOIDANCE]   = { luopanModel = luopanModels.WIND,    effect = xi.effect.GEO_EVASION_BOOST,       targetType = xi.auraTarget.ALLIES  },
+    [xi.magic.spell.GEO_FOCUS]      = { luopanModel = luopanModels.DARK,    effect = xi.effect.GEO_MAGIC_ACC_BOOST,     targetType = xi.auraTarget.ALLIES  },
+    [xi.magic.spell.GEO_ATTUNEMENT] = { luopanModel = luopanModels.LIGHT,   effect = xi.effect.GEO_MAGIC_EVASION_BOOST, targetType = xi.auraTarget.ALLIES  },
+    [xi.magic.spell.GEO_WILT]       = { luopanModel = luopanModels.WATER,   effect = xi.effect.GEO_ATTACK_DOWN,         targetType = xi.auraTarget.ENEMIES },
+    [xi.magic.spell.GEO_FRAILTY]    = { luopanModel = luopanModels.WIND,    effect = xi.effect.GEO_DEFENSE_DOWN,        targetType = xi.auraTarget.ENEMIES },
+    [xi.magic.spell.GEO_FADE]       = { luopanModel = luopanModels.FIRE,    effect = xi.effect.GEO_MAGIC_ATK_DOWN,      targetType = xi.auraTarget.ENEMIES },
+    [xi.magic.spell.GEO_MALAISE]    = { luopanModel = luopanModels.THUNDER, effect = xi.effect.GEO_MAGIC_DEF_DOWN,      targetType = xi.auraTarget.ENEMIES },
+    [xi.magic.spell.GEO_SLIP]       = { luopanModel = luopanModels.EARTH,   effect = xi.effect.GEO_ACCURACY_DOWN,       targetType = xi.auraTarget.ENEMIES },
+    [xi.magic.spell.GEO_TORPOR]     = { luopanModel = luopanModels.ICE,     effect = xi.effect.GEO_EVASION_DOWN,        targetType = xi.auraTarget.ENEMIES },
+    [xi.magic.spell.GEO_VEX]        = { luopanModel = luopanModels.LIGHT,   effect = xi.effect.GEO_MAGIC_ACC_DOWN,      targetType = xi.auraTarget.ENEMIES },
+    [xi.magic.spell.GEO_LANGUOR]    = { luopanModel = luopanModels.DARK,    effect = xi.effect.GEO_MAGIC_EVASION_DOWN,  targetType = xi.auraTarget.ENEMIES },
+    [xi.magic.spell.GEO_SLOW]       = { luopanModel = luopanModels.EARTH,   effect = xi.effect.GEO_SLOW,                targetType = xi.auraTarget.ENEMIES },
+    [xi.magic.spell.GEO_PARALYSIS]  = { luopanModel = luopanModels.ICE,     effect = xi.effect.GEO_PARALYSIS,           targetType = xi.auraTarget.ENEMIES },
+    [xi.magic.spell.GEO_GRAVITY]    = { luopanModel = luopanModels.WIND,    effect = xi.effect.GEO_WEIGHT,              targetType = xi.auraTarget.ENEMIES },
 }
 
 local indiData =
@@ -219,6 +215,11 @@ local function getEffectPotency(player, effect)
         potency = potency + (geomancyMod * potencyData[effect].geoModMultiplier)
     end
 
+    -- Boost potency calculations for Haste/Slow into the no-longer-human-readable-format
+    if effect == xi.effect.GEO_HASTE or effect == xi.effect.GEO_SLOW then
+        potency = math.floor(potency * 100)
+    end
+
     return potency
 end
 
@@ -325,13 +326,7 @@ end
 -- Magic Casting Checks
 -----------------------------------
 xi.job_utils.geomancer.indiOnMagicCastingCheck = function(caster, target, spell)
-    if target:hasStatusEffect(xi.effect.COLURE_ACTIVE) then
-        local effect = target:getStatusEffect(xi.effect.COLURE_ACTIVE)
-        if effect:getSubType() == indiData[spell:getID()].effect then
-            return xi.msg.basic.EFFECT_ALREADY_ACTIVE
-        end
-    end
-
+    -- No checks known as of yet
     return 0
 end
 
@@ -425,7 +420,7 @@ xi.job_utils.geomancer.spawnLuopan = function(player, target, spell)
     xi.job_utils.geomancer.addAura(luopan, 0, effect, finalPotency, targetType)
 
     -- Save the mp cost for use with Full Circle on the luopan
-    luopan:setLocalVar("MP_COST", spell:getMPCost())
+    player:setLocalVar("MP_COST", spell:getMPCost())
 
     -- Change the luopans appearance to match the effect
     luopan:setModelId(modelID)

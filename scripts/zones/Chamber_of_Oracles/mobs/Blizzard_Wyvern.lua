@@ -3,8 +3,6 @@
 --  Mob: Blizzard Wyvern
 -- KSNM: Eye of the Storm
 -----------------------------------
-require("scripts/globals/status")
------------------------------------
 local entity = {}
 
 entity.onMobSpawn = function(mob)

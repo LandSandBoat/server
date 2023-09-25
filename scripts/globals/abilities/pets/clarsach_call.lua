@@ -2,7 +2,6 @@
 -- Clarsach Call
 -----------------------------------
 require("scripts/globals/job_utils/summoner")
-require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/mobskills")
 -----------------------------------

@@ -3,7 +3,6 @@
 -- !instance 5600
 -----------------------------------
 require("scripts/globals/instance")
-require("scripts/globals/keyitems")
 require("scripts/globals/missions")
 local ID = require("scripts/zones/Periqia/IDs")
 -----------------------------------
@@ -74,6 +73,10 @@ instanceObject.onInstanceComplete = function(instance)
 
         v:startEvent(102)
     end
+end
+
+instanceObject.onEventFinish = function(player, csid, option)
+    xi.assault.instanceOnEventFinish(player, csid, xi.zone.CAEDARVA_MIRE)
 end
 
 return instanceObject

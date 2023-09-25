@@ -5,10 +5,8 @@
 -- this set of functions emulates.
 -----------------------------------
 require("scripts/globals/magicburst")
-require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/utils")
-require("scripts/globals/msg")
 require("scripts/globals/weaponskills")
 require("scripts/globals/damage")
 -----------------------------------
@@ -151,7 +149,7 @@ end
 xi.mobskills.mobPhysicalMove = function(mob, target, skill, numberofhits, accmod, dmgmod, tpeffect, ftp100, ftp200, ftp300, critperc, attmod)
     local returninfo = { }
     local fStr = 0
-    local tp = mob:getTP()
+    local tp = skill:getTP()
     -- Leaving this in here in case Jimmayus info says otherwise
     -- if wSCdex == nil then
     --     wSCdex = 0
@@ -229,9 +227,9 @@ xi.mobskills.mobPhysicalMove = function(mob, target, skill, numberofhits, accmod
 
     local paramsRanged = { atk100 = 1, atk200 = 1, atk300 = 1 }
     -- Getting PDIF
-    local pdifTable = xi.weaponskills.cMeleeRatio(mob, target, params, 0, mob:getTP(), xi.slot.MAIN)
+    local pdifTable = xi.weaponskills.cMeleeRatio(mob, target, params, 0, tp, xi.slot.MAIN)
     if tpeffect == xi.mobskills.physicalTpBonus.RANGED then
-        pdifTable = xi.weaponskills.cRangedRatio(mob, target, paramsRanged, 0, mob:getTP())
+        pdifTable = xi.weaponskills.cRangedRatio(mob, target, paramsRanged, 0, tp)
     end
 
     local pdif = pdifTable[1]
@@ -252,6 +250,7 @@ xi.mobskills.mobPhysicalMove = function(mob, target, skill, numberofhits, accmod
 
     if tpeffect ~= xi.mobskills.physicalTpBonus.RANGED then
         chance = xi.weaponskills.handleParry(mob, target, chance)
+        chance = xi.weaponskills.handleGuard(mob, target, chance)
     end
 
     -- first hit has a higher chance to land
@@ -277,7 +276,7 @@ xi.mobskills.mobPhysicalMove = function(mob, target, skill, numberofhits, accmod
 
     while hitsdone < numberofhits do
         chance = math.random()
-        pdifTable = xi.weaponskills.cMeleeRatio(mob, target, params, 0, mob:getTP(), xi.slot.main)
+        pdifTable = xi.weaponskills.cMeleeRatio(mob, target, params, 0, tp, xi.slot.main)
         pdif = pdifTable[1]
         pdifcrit = pdifTable[2]
 
@@ -352,7 +351,7 @@ xi.mobskills.mobMagicalMove = function(mob, target, skill, damage, element, dmgm
 
     --get all the stuff we need
     local resist = 1
-    local tp = mob:getTP()
+    local tp = skill:getTP()
 
     -- This needs to be taken out - to not cause Nil errors leave and set to damage
     if tpeffect == xi.mobskills.magicalTpBonus.DMG_BONUS then
@@ -443,6 +442,7 @@ end
 xi.mobskills.mobAddBonuses = function(caster, target, dmg, ele, ignoreres) -- used for SMN magical bloodpacts and all mob magical skills
     local ignore = ignoreres or false
     local magicDefense = xi.magic.getElementalDamageReduction(target, ele)
+    local dayElement    = VanadielDayElement()
 
     if not ignore then
         dmg = math.floor(dmg * magicDefense)
@@ -468,11 +468,11 @@ xi.mobskills.mobAddBonuses = function(caster, target, dmg, ele, ignoreres) -- us
         end
     end
 
-    if VanadielDayElement() == xi.magic.dayStrong[ele] then
+    if dayElement == ele then
         if math.random() < 0.33 then
             dayWeatherBonus = dayWeatherBonus + 0.10
         end
-    elseif VanadielDayElement() == xi.magic.dayWeak[ele] then
+    elseif dayElement == xi.magic.dayWeak[ele] then
         if math.random() < 0.33 then
             dayWeatherBonus = dayWeatherBonus - 0.10
         end
@@ -518,7 +518,7 @@ xi.mobskills.mobBreathMove = function(mob, target, percent, base, element, cap)
     end
 
     -- Deal bonus damage vs mob ecosystem
-    local systemBonus = utils.getSystemStrengthBonus(mob, target)
+    local systemBonus = utils.getEcosystemStrengthBonus(mob:getEcosystem(), target:getEcosystem())
     damage = damage + damage * (systemBonus * 0.25)
 
     -- elemental resistence
@@ -544,13 +544,6 @@ xi.mobskills.mobBreathMove = function(mob, target, percent, base, element, cap)
     if liement < 0 then -- skip BDT/DT etc for Liement if we absorb.
         return math.floor(damage * liement)
     end
-
-    -- The values set for this modifiers are base 10000.
-    -- -2500 in item_mods.sql means -25% damage recived.
-    -- 2500 would mean 25% ADDITIONAL damage taken.
-    -- The effects of the "Shell" spells are also included in this step. The effect also aplies a negative value.
-
-    damage = xi.damage.applyDamageTaken(target, damage, xi.attackType.BREATH)
 
     if
         target:hasStatusEffect(xi.effect.ALL_MISS) and
@@ -667,6 +660,13 @@ xi.mobskills.mobFinalAdjustments = function(dmg, mob, skill, target, attackType,
     end
 
     if attackType == xi.attackType.MAGICAL then
+        if
+            target:getMod(xi.mod.MAGIC_NULL) > 0 and
+            math.random(1, 100) <= target:getMod(xi.mod.MAGIC_NULL)
+        then
+            return 0
+        end
+
         dmg = utils.oneforall(target, dmg)
         dmg = utils.rampart(target, dmg)
 

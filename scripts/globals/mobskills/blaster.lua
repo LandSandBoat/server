@@ -9,8 +9,6 @@
 -- TODO: Blaster is a 70% paralyze chance with a 15-60 second duration.
 -----------------------------------
 require("scripts/globals/mobskills")
-require("scripts/globals/settings")
-require("scripts/globals/status")
 -----------------------------------
 local mobskillObject = {}
 

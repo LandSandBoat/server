@@ -2,9 +2,6 @@
 -- Area: Windurst Waters
 --  NPC: Anja-Enja
 -- Adventurer's Assistant
--- Working 100%
------------------------------------
-require("scripts/globals/settings")
 -----------------------------------
 local entity = {}
 

@@ -7,8 +7,6 @@
 --  TODO: Verify damage type, number of hits requires retail verification
 --  https://www.bg-wiki.com/ffxi/Locus_Wivre
 -----------------------------------
-require("scripts/globals/settings")
-require("scripts/globals/status")
 require("scripts/globals/mobskills")
 -----------------------------------
 local mobskillObject = {}

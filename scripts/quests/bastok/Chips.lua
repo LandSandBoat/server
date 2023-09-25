@@ -3,7 +3,6 @@
 -----------------------------------
 -- Log ID: 1, Quest ID: 82
 -----------------------------------
-require('scripts/globals/items')
 require('scripts/globals/quests')
 require('scripts/globals/zone')
 require('scripts/globals/interaction/quest')

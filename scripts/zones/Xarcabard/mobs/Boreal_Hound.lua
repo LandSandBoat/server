@@ -6,8 +6,6 @@
 -----------------------------------
 local ID = require("scripts/zones/Xarcabard/IDs")
 mixins = { require("scripts/mixins/job_special") }
-require("scripts/globals/keyitems")
-require("scripts/globals/settings")
 require("scripts/globals/quests")
 -----------------------------------
 local entity = {}

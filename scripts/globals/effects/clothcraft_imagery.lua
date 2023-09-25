@@ -1,8 +1,6 @@
 -----------------------------------
 -- xi.effect.CLOTHCRAFT_IMAGERY
 -----------------------------------
-require("scripts/globals/status")
------------------------------------
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

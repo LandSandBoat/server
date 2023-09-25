@@ -1,11 +1,9 @@
 -----------------------------------
 -- Area: Windurst Waters
 --  NPC: Temoe-Amoe
--- Working 100%
 -----------------------------------
 local ID = require("scripts/zones/Windurst_Waters/IDs")
 require("scripts/globals/events/starlight_celebrations")
-require("scripts/globals/settings")
 -----------------------------------
 local entity = {}
 

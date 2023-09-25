@@ -118,6 +118,7 @@ local pathNodes =
 }
 
 entity.onMobSpawn = function(mob)
+    mob:setMobMod(xi.mobMod.ONE_WAY_LINKING, 1)
     mob:setSpeed(70)
     mob:pathThrough(pathNodes, bit.bor(xi.path.flag.PATROL, xi.path.flag.RUN))
 end

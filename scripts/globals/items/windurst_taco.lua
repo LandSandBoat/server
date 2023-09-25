@@ -10,9 +10,6 @@
 -- Ranged Accuracy % 8 (cap 10)
 -- Ranged Attack +1
 -----------------------------------
-require("scripts/globals/status")
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

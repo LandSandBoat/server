@@ -10,9 +10,6 @@
 -- Attack +21% (cap 125)
 -- Ranged Attack +21% (cap 125)
 -----------------------------------
-require("scripts/globals/status")
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

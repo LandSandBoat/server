@@ -9,7 +9,6 @@
 --        the initial implementation is relatively basic.
 -----------------------------------
 require("scripts/globals/mobskills")
-require("scripts/globals/status")
 -----------------------------------
 local mobskillObject = {}
 

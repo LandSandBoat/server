@@ -2,8 +2,6 @@
 -- Astral Flow
 -----------------------------------
 require("scripts/globals/mobskills")
-require("scripts/globals/status")
-require("scripts/globals/msg")
 require("modules/era/lua_dynamis/globals/era_dynamis_spawning")
 -----------------------------------
 local mobskillObject = {}
@@ -19,6 +17,9 @@ xi.astralflow.avatarOffsets =
     [17453085] = 3, -- Duke Dantalian
     [17453092] = 3, -- Duke Dantalian
     [17506670] = 5, -- Kirin
+    [16830509] = 3, -- Fantoccini
+    [16830516] = 3, -- Fantoccini
+    [16830523] = 3, -- Fantoccini
 }
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

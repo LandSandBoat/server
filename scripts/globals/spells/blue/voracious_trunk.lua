@@ -11,9 +11,7 @@
 -- Recast Time: 56 seconds
 -- Combos: Auto Refresh
 -----------------------------------
-require("scripts/globals/magic")
-require("scripts/globals/status")
-require("scripts/globals/msg")
+require("scripts/globals/bluemagic")
 -----------------------------------
 local spellObject = {}
 
@@ -23,15 +21,12 @@ end
 
 spellObject.onSpellCast = function(caster, target, spell)
     local params = {}
-    params.element = xi.magic.ele.WIND
+    params.attribute = xi.mod.INT
     params.skillType = xi.skill.BLUE_MAGIC
-    params.maccBonus = 0
-
-    local resist = xi.magic.applyAbilityResistance(caster, target, params)
-    local stealChance = math.random(1, 100)
     local stolen = 0
 
-    if resist > 0.0625 and stealChance < 90 then
+    local resist = xi.magic.applyResistanceEffect(caster, target, spell, params)
+    if resist >= 0.5 then
         stolen = caster:stealStatusEffect(target)
         if stolen ~= 0 then
             spell:setMsg(xi.msg.basic.MAGIC_STEAL)

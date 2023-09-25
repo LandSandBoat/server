@@ -2,8 +2,6 @@
 -- ID: 15454
 -- little_worm_belt
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)
@@ -16,7 +14,7 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    target:addItem(17396, 12) -- little_worm
+    target:addItem(xi.items.LITTLE_WORM, 12)
 end
 
 return itemObject

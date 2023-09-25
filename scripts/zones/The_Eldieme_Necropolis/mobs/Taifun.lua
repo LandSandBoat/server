@@ -3,8 +3,6 @@
 --  MOB: Taifun
 -- Involved in Quest: A New Dawn (BST AF3)
 -----------------------------------
-require("scripts/globals/status")
------------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)

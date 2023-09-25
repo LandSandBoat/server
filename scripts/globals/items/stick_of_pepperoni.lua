@@ -8,9 +8,6 @@
 -- Intelligence -1
 -- Attack % 60 (assuming 60%, cap 30)
 -----------------------------------
-require("scripts/globals/status")
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

@@ -101,13 +101,12 @@ entity.onEventFinish = function(player, csid, option)
         player:tradeComplete()
         local gilObtained = 0
         if option == 1 then
-            gilObtained = 39432 * xi.settings.main.GIL_RATE
+            gilObtained = 39432
         else
-            gilObtained = 19716 * xi.settings.main.GIL_RATE
+            gilObtained = 19716
         end
 
-        player:addGil(gilObtained)
-        player:messageSpecial(ID.text.GIL_OBTAINED, gilObtained)
+        npcUtil.giveCurrency(player, 'gil', gilObtained)
         player:setCharVar("ATWTTB_Can_Trade_Gruel", 0)
     end
 end

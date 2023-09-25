@@ -1,11 +1,8 @@
 -----------------------------------
 -- Song Utilities
 -----------------------------------
-require("scripts/globals/spell_data")
 require("scripts/globals/jobpoints")
-require("scripts/globals/status")
 require("scripts/globals/utils")
-require("scripts/globals/msg")
 -----------------------------------
 xi = xi or {}
 xi.spells = xi.spells or {}
@@ -97,10 +94,10 @@ local pTable =
     [xi.magic.spell.SHINING_FANTASIA  ] = { 1, xi.effect.FANTASIA,  xi.mod.AUGMENT_SONG_STAT, 0,                      0,                        0,                   20, 200,  40,   2, 10, true  },
     [xi.magic.spell.WARDING_ROUND     ] = { 1, xi.effect.ROUND,     xi.mod.AUGMENT_SONG_STAT, 0,                      0,                        0,                   20, 200,  40,   2, 10, true  },
     -- Misc.
-    [xi.magic.spell.GODDESSS_HYMNUS   ] = { 1, xi.effect.HYMNUS,    xi.mod.AUGMENT_SONG_STAT, 0,                      0,                        0,                    1,   0,   1,   0,  0, false },
+    [xi.magic.spell.GODDESSS_HYMNUS   ] = { 1, xi.effect.HYMNUS,    xi.mod.AUGMENT_SONG_STAT, xi.mod.HYMNUS_EFFECT,   0,                        0,                    1,   0,   1,   0,  0, false },
     [xi.magic.spell.SENTINELS_SCHERZO ] = { 1, xi.effect.SCHERZO,   xi.mod.AUGMENT_SONG_STAT, 0,                      0,                        0,                    1, 350,  45,   1, 10, false },
-    [xi.magic.spell.RAPTOR_MAZURKA    ] = { 1, xi.effect.MAZURKA,   xi.mod.AUGMENT_SONG_STAT, 0,                      0,                        0,                   12,   0,  12,   0,  0, false },
-    [xi.magic.spell.CHOCOBO_MAZURKA   ] = { 1, xi.effect.MAZURKA,   xi.mod.AUGMENT_SONG_STAT, 0,                      0,                        0,                   24,   0,  24,   0,  0, false },
+    [xi.magic.spell.RAPTOR_MAZURKA    ] = { 1, xi.effect.MAZURKA,   xi.mod.AUGMENT_SONG_STAT, xi.mod.MAZURKA_EFFECT,  0,                        0,                   12,   0,  12,   0,  0, false },
+    [xi.magic.spell.CHOCOBO_MAZURKA   ] = { 1, xi.effect.MAZURKA,   xi.mod.AUGMENT_SONG_STAT, xi.mod.MAZURKA_EFFECT,  0,                        0,                   24,   0,  24,   0,  0, false },
 
     -- Emnity Songs
     [xi.magic.spell.FOE_SIRVENTE      ] = { 1, xi.effect.SIRVENTE,  xi.mod.AUGMENT_SONG_STAT, 0,                      0,                        0,                   35,   0,  35,   1,  0, true  },
@@ -124,7 +121,10 @@ xi.spells.enhancing.calculateSongPower = function(caster, target, spell, spellId
 
     -- Ensure ranged slot is an instrument
     local rangeSkill = caster:getWeaponSkillType(xi.slot.RANGED)
-    if rangeSkill ~= xi.skill.STRING_INSTRUMENT or rangeSkill ~= xi.skill.WIND_INSTRUMENT then
+    if
+        rangeSkill ~= xi.skill.STRING_INSTRUMENT or
+        rangeSkill ~= xi.skill.WIND_INSTRUMENT
+    then
         singingLvl = singingLvl + caster:getWeaponSkillLevel(xi.slot.RANGED)
     end
 

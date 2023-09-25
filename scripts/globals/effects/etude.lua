@@ -1,7 +1,6 @@
 -----------------------------------
 -- xi.effect.ETUDE
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/magic")
 -----------------------------------
 local effectObject = {}

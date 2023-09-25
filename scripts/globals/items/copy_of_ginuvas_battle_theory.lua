@@ -4,8 +4,6 @@
 -- Grants 50 - 200 EXP
 -- Does not grant Limit Points.
 -----------------------------------
-require("scripts/globals/status")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

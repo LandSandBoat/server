@@ -2,8 +2,6 @@
 -- func: speed
 -- desc: Sets the players movement speed.
 -----------------------------------
-require("scripts/globals/status")
-
 cmdprops =
 {
     permission = 1,

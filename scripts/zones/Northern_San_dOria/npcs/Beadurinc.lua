@@ -4,7 +4,6 @@
 -- Type: Smithing Synthesis Image Support
 -- !pos -182.300 10.999 146.650 231
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/crafting")
 local ID = require("scripts/zones/Northern_San_dOria/IDs")
 -----------------------------------
@@ -14,11 +13,10 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local guildMember = xi.crafting.isGuildMember(player, 8)
     local skillCap = xi.crafting.getCraftSkillCap(player, xi.skill.SMITHING)
     local skillLevel = player:getSkillLevel(xi.skill.SMITHING)
 
-    if guildMember == 1 then
+    if xi.crafting.hasJoinedGuild(player, xi.crafting.guild.SMITHING) then
         if not player:hasStatusEffect(xi.effect.SMITHING_IMAGERY) then
             player:startEvent(630, skillCap, skillLevel, 2, 205, player:getGil(), 0, 90, 0)
         else

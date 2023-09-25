@@ -2,8 +2,6 @@
 -- func: getcraftRank <craft skill or ID> (player)
 -- desc: returns target's RANK of specified craft skill
 -----------------------------------
-require("scripts/globals/status")
-
 cmdprops =
 {
     permission = 1,

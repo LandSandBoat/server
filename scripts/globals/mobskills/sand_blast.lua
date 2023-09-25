@@ -4,8 +4,6 @@
 -- Range: 8' cone
 -----------------------------------
 require("scripts/globals/mobskills")
-require("scripts/globals/settings")
-require("scripts/globals/status")
 -----------------------------------
 local mobskillObject = {}
 
@@ -24,6 +22,11 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
             alastor:setSpawn(mob:getXPos() + 1, mob:getYPos() + 1, mob:getZPos() + 1) -- Set its spawn location.
             SpawnMob(alastorId, 120):updateClaim(target)
         end
+    end
+
+    if skill:getID() == 1841 then -- Nightmare Antlion - Adds SILENCE
+        skill:setMsg(xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.SILENCE, 1, 0, 180))
+        return xi.effect.SILENCE
     end
 
     return xi.effect.BLINDNESS

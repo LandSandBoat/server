@@ -2,8 +2,6 @@
 -- Claw
 -- Garuda delivers a single-hit piercing attack on target
 -----------------------------------
-require("scripts/globals/settings")
-require("scripts/globals/status")
 require("scripts/globals/mobskills")
 -----------------------------------
 local mobskillObject = {}

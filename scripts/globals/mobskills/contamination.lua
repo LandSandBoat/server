@@ -2,10 +2,7 @@
 -- Toxic Pick
 -- Deals damage to a single target. Additional effect: Poison, Plague, Gravity effect on target
 -----------------------------------
-require("scripts/globals/settings")
-require("scripts/globals/status")
 require("scripts/globals/mobskills")
-require("scripts/globals/msg")
 -----------------------------------
 local badEffects =
 {
@@ -74,11 +71,13 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
                     else
                         target:addStatusEffect(badEffects[y], power, 0, 60)
                     end
+
                     mob:delStatusEffect(badEffects[y])
                 end
             end
         end
     end
+
     skill:setMsg(xi.msg.basic.NONE)
 end
 

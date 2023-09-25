@@ -2,7 +2,6 @@
 -- xi.effect.MEIKYO_SHISUI
 -----------------------------------
 require("scripts/globals/jobpoints")
-require("scripts/globals/status")
 -----------------------------------
 local effectObject = {}
 

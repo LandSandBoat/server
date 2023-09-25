@@ -1,7 +1,6 @@
 -----------------------------------
 -- Mix: Samson's Strength - Gives all primary stats +10 for 60 seconds.
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/mobskills")
 -----------------------------------
 local mobskillObject = {}

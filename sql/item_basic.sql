@@ -27,7 +27,7 @@ CREATE TABLE `item_basic` (
   `NoSale` tinyint(1) unsigned NOT NULL DEFAULT 0,
   `BaseSell` int(10) unsigned NOT NULL DEFAULT 0,
   PRIMARY KEY (`itemid`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AVG_ROW_LENGTH=34 PACK_KEYS=1 CHECKSUM=1;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 AVG_ROW_LENGTH=34 PACK_KEYS=1 CHECKSUM=1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -7532,6 +7532,7 @@ INSERT INTO `item_basic` VALUES (10079,0,'♪iron_giant','♪iron_giant',1,61504
 INSERT INTO `item_basic` VALUES (10080,0,'♪byakko','♪byakko',1,61504,0,1,0);
 INSERT INTO `item_basic` VALUES (10081,0,'♪noble_chocobo','♪noble_chocobo',1,61504,0,1,0);
 INSERT INTO `item_basic` VALUES (10082,0,'♪ixion','♪ixion',1,61504,0,1,0);
+INSERT INTO `item_basic` VALUES (10083,0,'♪phuabo','♪phuabo',1,61504,0,1,0);
 INSERT INTO `item_basic` VALUES (10112,906,'cipher_of_zeids_alter_ego','cipher_zeid',1,61504,0,0,0);
 INSERT INTO `item_basic` VALUES (10113,907,'cipher_of_lions_alter_ego','cipher_lion',1,61504,0,0,0);
 INSERT INTO `item_basic` VALUES (10114,908,'cipher_of_tenzens_alter_ego','cipher_tenzen',1,61504,0,0,0);
@@ -11944,7 +11945,7 @@ INSERT INTO `item_basic` VALUES (14612,0,'serenity_ring_+1','serenity_ring_+1',1
 INSERT INTO `item_basic` VALUES (14613,0,'vigor_ring_+1','vigor_ring_+1',1,2080,25,0,4150);
 INSERT INTO `item_basic` VALUES (14614,0,'mystic_ring_+1','mystic_ring_+1',1,2080,25,0,4150);
 INSERT INTO `item_basic` VALUES (14615,0,'allure_ring_+1','allure_ring_+1',1,2080,25,0,4238);
-INSERT INTO `item_basic` VALUES (14616,0,'triton_ring','triton_ring',1,2080,25,0,3997);
+INSERT INTO `item_basic` VALUES (14616,0,'triton_ring','triton_ring',1,2080,25,0,31450);
 INSERT INTO `item_basic` VALUES (14617,0,'nimble_ring_+1','nimble_ring_+1',1,2080,25,0,5533);
 INSERT INTO `item_basic` VALUES (14618,0,'triumph_ring_+1','triumph_ring_+1',1,2080,25,0,11592);
 INSERT INTO `item_basic` VALUES (14619,0,'omniscient_ring_+1','omn._ring_+1',1,2080,25,0,5533);
@@ -11984,7 +11985,7 @@ INSERT INTO `item_basic` VALUES (14652,0,'protean_ring','protean_ring',1,2052,0,
 INSERT INTO `item_basic` VALUES (14653,0,'variable_ring','variable_ring',1,2052,0,0,1229);
 INSERT INTO `item_basic` VALUES (14654,0,'poisona_ring','poisona_ring',1,3108,25,0,3965);
 INSERT INTO `item_basic` VALUES (14655,0,'venerer_ring','venerer_ring',1,34852,25,0,380);
-INSERT INTO `item_basic` VALUES (14656,0,'poseidons_ring','poseidons_ring',1,3108,25,0,3997);
+INSERT INTO `item_basic` VALUES (14656,0,'poseidons_ring','poseidons_ring',1,3108,25,0,45795);
 INSERT INTO `item_basic` VALUES (14657,0,'ducal_guards_ring','dcl.grd._ring',1,60480,0,0,1918);
 INSERT INTO `item_basic` VALUES (14658,0,'atlauas_ring','atlauas_ring',1,34820,25,0,11250);
 INSERT INTO `item_basic` VALUES (14659,0,'hercules_ring','hercules_ring',1,34820,25,0,11000);
@@ -15382,7 +15383,7 @@ INSERT INTO `item_basic` VALUES (18080,0,'spark_fork','spark_fork',1,2084,8,0,75
 INSERT INTO `item_basic` VALUES (18081,0,'spark_fork_+1','spark_fork_+1',1,2080,8,0,9402);
 INSERT INTO `item_basic` VALUES (18082,0,'barchha','barchha',1,2084,8,0,6505);
 INSERT INTO `item_basic` VALUES (18083,0,'barchha_+1','barchha_+1',1,2080,8,0,8131);
-INSERT INTO `item_basic` VALUES (18084,0,'rune_halberd','rune_halberd',1,2052,8,0,1200);
+INSERT INTO `item_basic` VALUES (18084,0,'rune_halberd','rune_halberd',1,2052,8,0,12000);
 INSERT INTO `item_basic` VALUES (18085,0,'platoon_lance','platoon_lance',1,2052,8,0,1100);
 INSERT INTO `item_basic` VALUES (18086,0,'behourd_lance','behourd_lance',1,34820,8,0,2000);
 INSERT INTO `item_basic` VALUES (18087,0,'schwarz_lance','schwarz_lance',1,34820,8,0,5657);

@@ -29,7 +29,6 @@ global_objects=(
     Module
     Override
     super
-    applyOverride
 
     common
     zones
@@ -40,6 +39,7 @@ global_objects=(
     mixins
     g_mixins
     applyMixins
+    mixinOptions
 
     set
     printf
@@ -73,8 +73,6 @@ global_objects=(
     BattlefieldQuest
     Limbus
     SeasonalEvent
-
-    removeSleepEffects
 
     QUEST_AVAILABLE
     QUEST_ACCEPTED
@@ -146,13 +144,25 @@ global_objects=(
     getElementalDamageReduction
     getElementalDebuffDOT
     getFlourishAnimation
+    getHelixDuration
+    getHitRate
+    getMagicHitRate
+    getMagicResist
     getStepAnimation
     hasSleepEffects
     skillchainCount
+    getElementalDebuffStatDownFromDOT
+    handleAfflatusMisery
+    handleNinjutsuDebuff
+    handleThrenody
+    isValidHealTarget
     takeAbilityDamage
 
     doAutoRangedWeaponskill
     doAutoPhysicalWeaponskill
+
+    FormMagicBurst
+    MobFormMagicBurst
 
     AbilityFinalAdjustments
 
@@ -212,4 +222,3 @@ ignore_rules=(
 --ignore ${ignores[@]} ${ignore_rules[@]} | grep -v "Total:"
 
 python3 ./tools/ci/lua_stylecheck.py ${target}
-

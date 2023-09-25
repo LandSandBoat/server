@@ -1,11 +1,10 @@
 -- All spells in this list are as of March 2010 patch
+LOCK TABLES `spell_list` WRITE;
 
 ALTER TABLE `spell_list`
     ADD COLUMN IF NOT EXISTS `spell_radius` smallint(3) unsigned NOT NULL DEFAULT 0 AFTER `spell_range`,
     ADD COLUMN IF NOT EXISTS `spell_radius_type` tinyint(1) unsigned NOT NULL DEFAULT 0 AFTER `spell_radius`,
     ADD COLUMN IF NOT EXISTS `spell_cone` smallint(3) unsigned NOT NULL DEFAULT 0 AFTER `spell_radius_type`;
-
-LOCK TABLES `spell_list` WRITE;
 
 REPLACE INTO `spell_list` (`spellid`,`name`,`jobs`,`group`,`family`,`element`,`zonemisc`,`validTargets`,`skill`,`mpCost`,`castTime`,`recastTime`,`message`,`magicBurstMessage`,`animation`,`animationTime`,`AOE`,`base`,`multiplier`,`CE`,`VE`,`requirements`,`spell_range`,`spell_radius`,`spell_radius_type`,`spell_cone`,`content_tag`) VALUES
     (1, 'cure', 0x00000100030005000000000000000000000000050000, 6, 1, 7, 0, 95, 33, 8, 2000, 5000, 7, 252, 1, 2000, 4, 0, 1.00, 0, 0, 0, 204, 100, 2, 0, NULL),
@@ -316,8 +315,8 @@ REPLACE INTO `spell_list` (`spellid`,`name`,`jobs`,`group`,`family`,`element`,`z
     (307, 'cait_sith', 0x00000000000000000000000000000100000000000000, 5, 86, 7, 128, 1, 38, 0, 1000, 60000, 0, 0, 288, 2000, 0, 0, 1.00, 50, 165, 0, 0, 0, 0, 0, 'SOA'),
     (308, 'animus_augeo', 0x00000000000000000000000000000000000000550000, 6, 87, 0, 0, 0, 0, 21, 5000, 10000, 0, 0, 0, 2000, 4, 0, 1.00, 1, 165, 0, 204, 100, 2, 0, NULL),
     (309, 'animus_minuo', 0x00000000000000000000000000000000000000550000, 6, 87, 0, 0, 0, 0, 21, 5000, 10000, 0, 0, 0, 2000, 4, 0, 1.00, 165, 1, 0, 204, 100, 2, 0, NULL),
-    (310, 'enlight', 0x00000000000055000000000000000000000000000000, 6, 88, 0, 0, 1, 0, 24, 3000, 30000, 0, 0, 0, 2000, 0, 0, 1.00, 44, 132, 0, 0, 0, 0, 0, 'ABYSSEA'),
-    (311, 'endark', 0x00000000000000550000000000000000000000000000, 2, 89, 0, 0, 1, 0, 24, 3000, 30000, 0, 0, 0, 2000, 0, 0, 1.00, 44, 132, 0, 0, 0, 0, 0, 'ABYSSEA'),
+    (310, 'enlight', 0x00000000000055000000000000000000000000000000, 6, 88, 7, 0, 1, 32, 24, 3000, 30000, 0, 0, 0, 2000, 0, 0, 1.00, 44, 132, 0, 0, 0, 0, 0, 'ABYSSEA'),
+    (311, 'endark', 0x00000000000000550000000000000000000000000000, 2, 89, 8, 0, 1, 37, 24, 3000, 30000, 0, 0, 117, 2000, 0, 0, 1.00, 44, 132, 0, 0, 0, 0, 0, 'ABYSSEA'),
     (312, 'enfire_ii', 0x000000003a0000000000000000000000000000000000, 6, 21, 1, 0, 1, 34, 24, 3000, 30000, 0, 0, 305, 2000, 0, 0, 1.00, 44, 132, 0, 0, 0, 0, 0, 'WOTG'),
     (313, 'enblizzard_ii', 0x00000000380000000000000000000000000000000000, 6, 22, 2, 0, 1, 34, 24, 3000, 30000, 0, 0, 306, 2000, 0, 0, 1.00, 44, 132, 0, 0, 0, 0, 0, 'WOTG'),
     (314, 'enaero_ii', 0x00000000360000000000000000000000000000000000, 6, 23, 3, 0, 1, 34, 24, 3000, 30000, 0, 0, 304, 2000, 0, 0, 1.00, 44, 132, 0, 0, 0, 0, 0, 'WOTG'),

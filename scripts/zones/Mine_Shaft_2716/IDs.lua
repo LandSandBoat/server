@@ -20,22 +20,21 @@ zones[xi.zone.MINE_SHAFT_2716] =
         MEMBERS_LEVELS_ARE_RESTRICTED = 7023, -- Your party is unable to participate because certain members' levels are restricted.
         PARTY_MEMBERS_HAVE_FALLEN     = 7410, -- All party members have fallen in battle. Now leaving the battlefield.
         THE_PARTY_WILL_BE_REMOVED     = 7417, -- If all party members' HP are still zero after # minute[/s], the party will be removed from the battlefield.
-        CONQUEST_BASE                 = 7432, -- Tallying conquest results...
-        -- Moblin Fantocciniman Combat Dialogue
-        TIME_FOR_GOODEBYONGO          = 7855, -- Ho-ho, ho-ho! Time for goodebyongo!
-        HERE_TO_STAY                  = 7856, -- Hey-hey, hey-hey! Are you here to stay?
-        ROLY_POLY                     = 7857, -- Roly-poly, roly-poly♪
-        DICE_LIKE_YOU                 = 7858, -- Hoo-hoo, hoo-hoo. Maybe dice like you!
-        DICE_LIKE_ME                  = 7859, -- Hee-hee, hee-hee! Today, dice like me!
-        GO_GO                         = 7860, -- Go-go, go-go!
-        HA_HA                         = 7861, -- Ha-ha, ha-ha!
-        NOT_YOUR_LUCKY_DAY            = 7862, -- Yay-yay, yay-yay! Not your lucky day!
-        NOT_HOW                       = 7864, -- No-no, no-no! Not how it's 'sposed to go!
-        YOU_PLAY_TOO_ROUGH            = 7865, -- Huff-huff, huff-huff... You play too rough...
-        YOU_MAKE_ME_MAD               = 7866, -- Ow-ow, ow-ow! You make me mad now!
-        GOODEBYONGO                   = 7867, -- Ho-ho, ho-ho! Goodebyongo!
-        BEGINS_TO_PANIC               = 7868, -- The Moblin Fantocciniman begins to panic.
-        END_OF_YOU                    = 7869, -- We not go down without fight. That be promise. Just you watch. This be end of you.
+        CONQUEST_BASE                 = 7433, -- Tallying conquest results...
+        TIME_FOR_GOODEBYONGO          = 7856, -- Ho-ho, ho-ho! Time for goodebyongo!
+        HERE_TO_STAY                  = 7857, -- Hey-hey, hey-hey! Are you here to stay?
+        ROLY_POLY                     = 7858, -- Roly-poly, roly-poly♪
+        DICE_LIKE_YOU                 = 7859, -- Hoo-hoo, hoo-hoo. Maybe dice like you!
+        DICE_LIKE_ME                  = 7860, -- Hee-hee, hee-hee! Today, dice like me!
+        GO_GO                         = 7861, -- Go-go, go-go!
+        HA_HA                         = 7862, -- Ha-ha, ha-ha!
+        NOT_YOUR_LUCKY_DAY            = 7863, -- Yay-yay, yay-yay! Not your lucky day!
+        NOT_HOW                       = 7865, -- No-no, no-no! Not how it's 'sposed to go!
+        YOU_PLAY_TOO_ROUGH            = 7866, -- Huff-huff, huff-huff... You play too rough...
+        YOU_MAKE_ME_MAD               = 7867, -- Ow-ow, ow-ow! You make me mad now!
+        GOODEBYONGO                   = 7868, -- Ho-ho, ho-ho! Goodebyongo!
+        BEGINS_TO_PANIC               = 7869, -- The Moblin Fantocciniman begins to panic.
+        END_OF_YOU                    = 7870, -- We not go down without fight. That be promise. Just you watch. This be end of you.
     },
 
     mob =
@@ -75,6 +74,7 @@ zones[xi.zone.MINE_SHAFT_2716] =
             twoHour = 688, -- Mighty Strikes
             spellListID = 0,
             petID = 0,
+            mods = {},
         },
         [xi.job.MNK] =
         {
@@ -84,6 +84,7 @@ zones[xi.zone.MINE_SHAFT_2716] =
             twoHour = 690, -- Hundred Fists
             spellListID = 0,
             petID = 0,
+            mods = {},
         },
         [xi.job.WHM] =
         {
@@ -93,6 +94,10 @@ zones[xi.zone.MINE_SHAFT_2716] =
             twoHour = 689, -- Benediction
             spellListID = 1,
             petID = 0,
+            mods =
+            {
+                { xi.mod.ATTP, -100, },
+            },
         },
         [xi.job.BLM] =
         {
@@ -102,6 +107,10 @@ zones[xi.zone.MINE_SHAFT_2716] =
             twoHour = 691, -- Manafont
             spellListID = 2,
             petID = 0,
+            mods =
+            {
+                { xi.mod.ATTP, -100 },
+            },
         },
         [xi.job.RDM] =
         {
@@ -111,6 +120,10 @@ zones[xi.zone.MINE_SHAFT_2716] =
             twoHour = 692, -- Chainspell
             spellListID = 3,
             petID = 0,
+            mods =
+            {
+                { xi.mod.ATTP, -50, },
+            },
         },
         [xi.job.THF] =
         {
@@ -120,6 +133,10 @@ zones[xi.zone.MINE_SHAFT_2716] =
             twoHour = 693, -- Perfect Dodge
             spellListID = 0,
             petID = 0,
+            mods =
+            {
+                { xi.mod.ATTP, -50, },
+            },
         },
         [xi.job.PLD] =
         {
@@ -129,6 +146,7 @@ zones[xi.zone.MINE_SHAFT_2716] =
             twoHour = 694, -- Incincible
             spellListID = 4,
             petID = 0,
+            mods = {},
         },
         [xi.job.DRK] =
         {
@@ -138,6 +156,7 @@ zones[xi.zone.MINE_SHAFT_2716] =
             twoHour = 695, -- Blood Weapon
             spellListID = 5,
             petID = 0,
+            mods = {},
         },
         [xi.job.BST] =
         {
@@ -161,6 +180,7 @@ zones[xi.zone.MINE_SHAFT_2716] =
             twoHour = 740, -- Familiar
             spellListID = 0,
             petID = 1,
+            mods = {},
         },
         [xi.job.BRD] =
         {
@@ -170,6 +190,10 @@ zones[xi.zone.MINE_SHAFT_2716] =
             twoHour = 696, -- Soul Voice
             spellListID = 6,
             petID = 0,
+            mods =
+            {
+                { xi.mod.ATTP, -25, },
+            },
         },
         [xi.job.RNG] =
         {
@@ -179,6 +203,7 @@ zones[xi.zone.MINE_SHAFT_2716] =
             twoHr = 413, -- Eagle Eye Shot
             spellListID = 0,
             petID = 0,
+            mods = {},
         },
         [xi.job.SAM] =
         {
@@ -188,6 +213,7 @@ zones[xi.zone.MINE_SHAFT_2716] =
             twoHour = 730, -- Meikyo Shisui
             spellListID = 0,
             petID = 0,
+            mods = {},
         },
         [xi.job.NIN] =
         {
@@ -197,6 +223,7 @@ zones[xi.zone.MINE_SHAFT_2716] =
             twoHour = 731, -- Mjin Gakure
             spellListID = 7,
             petID = 0,
+            mods = {},
         },
         [xi.job.DRG] =
         {
@@ -206,6 +233,7 @@ zones[xi.zone.MINE_SHAFT_2716] =
             twoHour = 732, -- Call Wyvern
             spellListID = 0,
             petID = 2,
+            mods = {},
         },
         [xi.job.SMN] =
         {
@@ -236,6 +264,10 @@ zones[xi.zone.MINE_SHAFT_2716] =
             twoHour = 734, -- Astral Flow
             spellListID = 0,
             petID = 3,
+            mods =
+            {
+                { xi.mod.ATTP, -100, },
+            },
         },
         [xi.job.BLU] =
         {
@@ -244,6 +276,7 @@ zones[xi.zone.MINE_SHAFT_2716] =
             ability = 0, -- None
             spellListID = 8, -- TODO: Mimic player's set spells
             petID = 0,
+            mods = {},
         },
         [xi.job.COR] =
         {
@@ -252,6 +285,7 @@ zones[xi.zone.MINE_SHAFT_2716] =
             ability = 0, -- TODO: Add rolls here
             spellListID = 0, -- ???
             petID = 0,
+            mods = {},
         },
         [xi.job.PUP] =
         {
@@ -278,6 +312,7 @@ zones[xi.zone.MINE_SHAFT_2716] =
             ability = 1995, -- Maneuvers
             spellListID = 0,
             petID = 4,
+            mods = {},
         },
     }
 }

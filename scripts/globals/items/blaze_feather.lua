@@ -1,10 +1,7 @@
 -----------------------------------
 -- ID: 5257
--- Item: Fire Feather
+-- Item: Blaze Feather
 -- Status Effect: Blaze Spikes
------------------------------------
-require("scripts/globals/status")
-require("scripts/globals/msg")
 -----------------------------------
 local itemObject = {}
 
@@ -13,7 +10,7 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    target:addStatusEffect(xi.effect.BLAZE_SPIKES, 10, 0, 180) -- This is a guess, no potency or duration info is known
+    target:addStatusEffect(xi.effect.BLAZE_SPIKES, 10, 0, 90)
 end
 
 return itemObject

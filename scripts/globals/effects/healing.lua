@@ -3,10 +3,7 @@
 -- Activated through the /heal command
 -----------------------------------
 require("scripts/globals/abyssea")
-require("scripts/globals/keyitems")
-require("scripts/globals/settings")
 require("scripts/globals/quests")
-require("scripts/globals/status")
 require("scripts/globals/zone")
 require("scripts/globals/roe")
 require("scripts/globals/voidwalker")
@@ -112,7 +109,11 @@ effectObject.onEffectTick = function(target, effect)
             end
 
             target:addHP(healHP)
-            if target:getHPP() < 100 then
+
+            if
+                target:getHPP() < 100  and
+                target:getMaster() == nil
+            then
                 target:updateEnmityFromCure(target, healHP)
             end
 

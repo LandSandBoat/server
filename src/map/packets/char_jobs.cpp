@@ -41,8 +41,8 @@ CCharJobsPacket::CCharJobsPacket(CCharEntity* PChar)
     memcpy(data + (0x20), &PChar->stats, 14);
     memcpy(data + (0x44), &PChar->jobs, 27);
 
-    ref<uint32>(0x3C) = PChar->health.hp;
-    ref<uint32>(0x40) = PChar->health.mp;
+    ref<uint32>(0x3C) = PChar->health.maxhp;
+    ref<uint32>(0x40) = PChar->health.maxmp;
 
     ref<uint32>(0x44) = PChar->jobs.unlocked & 1; // первый бит в unlocked отвечает за дополнительную профессию
 

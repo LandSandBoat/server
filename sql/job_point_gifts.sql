@@ -11,7 +11,7 @@ CREATE TABLE IF NOT EXISTS `job_point_gifts` (
   `modid` smallint(6) NOT NULL DEFAULT 0,
   `value` tinyint(4) NOT NULL DEFAULT 0,
   `desc` tinytext NOT NULL DEFAULT ''
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
 
 /*!40000 ALTER TABLE `job_point_gifts` DISABLE KEYS */;
 INSERT INTO `job_point_gifts` VALUES (1, 5, 1, 10, 'WAR_Physical Defense Bonus');

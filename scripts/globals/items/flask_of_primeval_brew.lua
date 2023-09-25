@@ -22,8 +22,6 @@
 -- Regain +50
 -- Ranged Accuracy +1000
 -- Ranged Attack +9000
-
-require("scripts/globals/status")
 -----------------------------------
 local itemObject = {}
 

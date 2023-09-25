@@ -378,11 +378,12 @@ end
 local function onHandler(data, secondLevelKey, thirdLevelKey, args, fallbackHandler, defaultReturn, targetId)
     local playerArg = args.playerArg or 1
     local player = args[playerArg]
+    if not player then -- if no player object is present, we can't do anything in the handler system
+        if fallbackHandler then
+            return fallbackHandler(unpack(args))
+        end
 
-    if fallbackHandler and not player then -- if no player object is present, we can't do anything in the handler system
-        return fallbackHandler(unpack(args))
-    elseif not (fallbackHandler or player) then -- Neither object present
-        return
+        return defaultReturn -- likely nil in most cases
     end
 
     local actions, priority = getHighestPriorityActions(data, player, secondLevelKey, thirdLevelKey, args)

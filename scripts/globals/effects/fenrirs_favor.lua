@@ -1,9 +1,6 @@
 -----------------------------------
 -- xi.effect.FENRIRS_FAVOR
 -----------------------------------
-require("scripts/globals/status")
----------------------------------------------
-
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

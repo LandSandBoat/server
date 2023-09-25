@@ -240,6 +240,30 @@ namespace gambits
                 // clang-format on
                 return count > 1;
             }
+            else if (predicate.target == G_TARGET::ALLIANCE)
+            {
+                auto result = false;
+                // clang-format off
+                static_cast<CCharEntity*>(POwner->PMaster)->ForAlliance([&](CBattleEntity* PMember){
+                    if (isValidMember(PMember) && CheckTrigger(PMember, predicate)){
+                        result = true;
+                    }
+                });
+                // clang-format on
+                return result;
+            }
+            else if (predicate.target == G_TARGET::ALLIANCE_MULTI)
+            {
+                uint8 count = 0;
+                // clang-format off
+                static_cast<CCharEntity*>(POwner->PMaster)->ForAlliance([&](CBattleEntity* PMember){
+                    if (isValidMember(PMember) && CheckTrigger(PMember, predicate)){
+                        count++;
+                    }
+                });
+                // clang-format on
+                return count;
+            }
 
             // Fallthrough
             return false;
@@ -398,6 +422,18 @@ namespace gambits
                             {
                                 target = PMember;
                             }
+                        }
+                    });
+                    // clang-format on
+                }
+                else if (gambit.predicates[0].target == G_TARGET::ALLIANCE)
+                {
+                    // clang-format off
+                    static_cast<CCharEntity*>(POwner->PMaster)->ForAlliance([&](CBattleEntity* PMember)
+                    {
+                        if (isValidMember(target, PMember) && CheckTrigger(PMember, gambit.predicates[0]))
+                        {
+                            target = PMember;
                         }
                     });
                     // clang-format on
@@ -971,14 +1007,14 @@ namespace gambits
                         for (auto& skill : tp_skills)
                         {
                             std::list<SKILLCHAIN_ELEMENT> resonanceProperties;
-                            resonanceProperties.push_back((SKILLCHAIN_ELEMENT)PMasterLastWeaponSkill->getPrimarySkillchain());
-                            resonanceProperties.push_back((SKILLCHAIN_ELEMENT)PMasterLastWeaponSkill->getSecondarySkillchain());
-                            resonanceProperties.push_back((SKILLCHAIN_ELEMENT)PMasterLastWeaponSkill->getTertiarySkillchain());
+                            resonanceProperties.push_back((SKILLCHAIN_ELEMENT)skill.primary);
+                            resonanceProperties.push_back((SKILLCHAIN_ELEMENT)skill.secondary);
+                            resonanceProperties.push_back((SKILLCHAIN_ELEMENT)skill.tertiary);
 
                             std::list<SKILLCHAIN_ELEMENT> skillProperties;
-                            skillProperties.push_back((SKILLCHAIN_ELEMENT)skill.primary);
-                            skillProperties.push_back((SKILLCHAIN_ELEMENT)skill.secondary);
-                            skillProperties.push_back((SKILLCHAIN_ELEMENT)skill.tertiary);
+                            skillProperties.push_back((SKILLCHAIN_ELEMENT)PMasterLastWeaponSkill->getPrimarySkillchain());
+                            skillProperties.push_back((SKILLCHAIN_ELEMENT)PMasterLastWeaponSkill->getSecondarySkillchain());
+                            skillProperties.push_back((SKILLCHAIN_ELEMENT)PMasterLastWeaponSkill->getTertiarySkillchain());
                             if (SKILLCHAIN_ELEMENT possible_skillchain = battleutils::FormSkillchain(resonanceProperties, skillProperties);
                                 possible_skillchain != SC_NONE)
                             {

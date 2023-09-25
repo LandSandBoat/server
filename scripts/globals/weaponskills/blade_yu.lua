@@ -11,8 +11,6 @@
 -- 2.25      2.25      2.25
 -----------------------------------
 require("scripts/globals/magic")
-require("scripts/globals/status")
-require("scripts/globals/settings")
 require("scripts/globals/weaponskills")
 -----------------------------------
 local weaponskillObject = {}

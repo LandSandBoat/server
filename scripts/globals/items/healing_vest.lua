@@ -3,8 +3,6 @@
 -- Item: Healing Vest
 -- Item Effect: Restores 90-105 HP
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

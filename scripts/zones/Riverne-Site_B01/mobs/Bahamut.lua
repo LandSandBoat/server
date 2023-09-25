@@ -4,7 +4,6 @@
 -----------------------------------
 local ID = require("scripts/zones/Riverne-Site_B01/IDs")
 require("scripts/globals/quests")
-require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 
@@ -23,10 +22,10 @@ entity.onMobSpawn = function(mob)
     mob:setMobMod(xi.mobMod.NO_MOVE, 1)
     mob:setMobMod(xi.mobMod.MAGIC_COOL, 50)
     mob:setMobMod(xi.mobMod.STANDBACK_COOL, 10)
-    -- base damage of 136, so (lvl 83 + 2) * 1.60
-    mob:setMobMod(xi.mobMod.WEAPON_BONUS, 160)
+    mob:setMobMod(xi.mobMod.WEAPON_BONUS, 51) -- (lvl 83 + 2) + 51 = 136
     -- gives firaga iv a cast time of ~2 seconds as per retail
-    mob:setMod(xi.mod.UFASTCAST, 75)
+    -- note baha has a job trait with fast cast of 15% so 75% total
+    mob:setMod(xi.mod.UFASTCAST, 60)
     mob:setMod(xi.mod.ATT, 425)
     mob:setMod(xi.mod.INT, 30)
     mob:addMod(xi.mod.MATT, -28)

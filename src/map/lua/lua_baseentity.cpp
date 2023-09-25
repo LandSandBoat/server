@@ -78,6 +78,7 @@
 #include "ai/states/weaponskill_state.h"
 
 #include "ai/controllers/mob_controller.h"
+#include "ai/controllers/spirit_controller.h"
 #include "ai/controllers/trust_controller.h"
 
 #include "ai/helpers/gambits_container.h"
@@ -167,6 +168,8 @@
 #include "utils/puppetutils.h"
 #include "utils/trustutils.h"
 #include "utils/zoneutils.h"
+
+extern std::unordered_map<uint32, std::unordered_map<uint16, std::vector<std::pair<uint16, uint8>>>> PacketMods;
 
 //======================================================//
 
@@ -301,7 +304,7 @@ void CLuaBaseEntity::messageText(CLuaBaseEntity* PLuaBaseEntity, uint16 messageI
  *  Purpose : Displays either standad messages to a PC or custom text
  *  Example : player:PrintToPlayer("Hello!", xi.msg.channel.NS_SAY)
  *          : player:PrintToPlayer(string.format("Hello, %s!", player:getName()), xi.msg.channel.SYSTEM_1)
- *  Notes   : see scripts/globals/msg.lua for message channels
+ *  Notes   : see scripts/enum/msg.lua for message channels
  *          : Can modify the name shown through explicit declaration
  ************************************************************************/
 
@@ -341,31 +344,55 @@ void CLuaBaseEntity::PrintToArea(std::string const& message, sol::object const& 
 
     // see scripts\globals\msg.lua or src\map\packets\chat_message.h for values
     CHAT_MESSAGE_TYPE messageLook  = (arg1 == sol::lua_nil) ? MESSAGE_SYSTEM_1 : arg1.as<CHAT_MESSAGE_TYPE>();
-    uint8             messageRange = (arg2 == sol::lua_nil) ? 0 : arg2.as<uint8>();
+    uint8             messageRange = (arg2 == sol::lua_nil) ? MESSAGE_AREA_SYSTEM : arg2.as<CHAT_MESSAGE_AREA>();
     std::string       name         = (arg3 == sol::lua_nil) ? std::string() : arg3.as<std::string>();
 
-    if (messageRange == 0) // All zones world wide
+    if (messageRange == MESSAGE_AREA_SYSTEM)
     {
         message::send(MSG_CHAT_SERVMES, nullptr, 0, new CChatMessagePacket(PChar, messageLook, message, name));
     }
-    else if (messageRange == 1) // Say range
+    else if (messageRange == MESSAGE_AREA_SAY)
     {
         PChar->loc.zone->PushPacket(PChar, CHAR_INRANGE, new CChatMessagePacket(PChar, messageLook, message, name));
+        PChar->loc.zone->PushPacket(PChar, CHAR_INRANGE_SELF, new CChatMessagePacket(PChar, messageLook, message, name));
     }
-    else if (messageRange == 2) // Shout
+    else if (messageRange == MESSAGE_AREA_SHOUT)
     {
         PChar->loc.zone->PushPacket(PChar, CHAR_INSHOUT, new CChatMessagePacket(PChar, messageLook, message, name));
+        PChar->loc.zone->PushPacket(PChar, CHAR_INRANGE_SELF, new CChatMessagePacket(PChar, messageLook, message, name));
     }
-    else if (messageRange == 3) // Party and Alliance
+    else if (messageRange == MESSAGE_AREA_PARTY)
     {
-        message::send(MSG_CHAT_PARTY, nullptr, 0, new CChatMessagePacket(PChar, messageLook, message, name));
+        int8 packetData[8]{};
+        if (PChar->PParty->m_PAlliance)
+        {
+            ref<uint32>(packetData, 0) = PChar->PParty->m_PAlliance->m_AllianceID;
+            ref<uint32>(packetData, 4) = 0; // No ID so that the PChar sees the message too
+            message::send(MSG_CHAT_ALLIANCE, packetData, sizeof packetData, new CChatMessagePacket(PChar, messageLook, message, name));
+        }
+        else if (PChar->PParty)
+        {
+            ref<uint32>(packetData, 0) = PChar->PParty->GetPartyID();
+            ref<uint32>(packetData, 4) = 0; // No ID so that the PChar sees the message too
+            message::send(MSG_CHAT_PARTY, packetData, sizeof packetData, new CChatMessagePacket(PChar, messageLook, message, name));
+        }
     }
-    else if (messageRange == 4) // Yell zones only
+    else if (messageRange == MESSAGE_AREA_YELL)
     {
         message::send(MSG_CHAT_YELL, nullptr, 0, new CChatMessagePacket(PChar, messageLook, message, name));
+        PChar->loc.zone->PushPacket(PChar, CHAR_INRANGE_SELF, new CChatMessagePacket(PChar, messageLook, message, name));
+    }
+    else if (messageRange == MESSAGE_AREA_UNITY)
+    {
+        message::send(MSG_CHAT_UNITY, nullptr, 0, new CChatMessagePacket(PChar, messageLook, message, name));
+        PChar->loc.zone->PushPacket(PChar, CHAR_INRANGE_SELF, new CChatMessagePacket(PChar, messageLook, message, name));
+    }
+    else
+    {
+        ShowError("CLuaBaseEntity::PrintToArea : invalid message area/messageRange value %u given by script.", messageRange);
     }
     /*
-    Todo: Unity, LS 1 and LS 2 for the lols?
+    Todo: Assist channels
     */
 }
 
@@ -517,6 +544,21 @@ void CLuaBaseEntity::messageCombat(sol::object const& speaker, int32 p0, int32 p
     }
 
     PChar->pushPacket(new CMessageCombatPacket(PSpeaker, PChar, p0, p1, message));
+}
+
+/************************************************************************
+ *  Function: messageStandard(id)
+ *  Purpose : Sends a standard message
+ *  Example : player:messageStandard(287)
+ *  Notes   :
+ ************************************************************************/
+
+void CLuaBaseEntity::messageStandard(uint16 messageID)
+{
+    if (auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity))
+    {
+        PChar->pushPacket(new CMessageStandardPacket(messageID));
+    }
 }
 
 void CLuaBaseEntity::customMenu(sol::object const& obj)
@@ -1210,35 +1252,40 @@ void CLuaBaseEntity::setFlag(uint32 flags)
 }
 
 /************************************************************************
- *  Function: setMoghouseFlag()
- *  Purpose : Creates or returns exit flag for Mog House
- *  Example : player:moghouseFlag(2)
- *  Notes   :  Used in Mog House exit quests (ex. A Lady's Heart)
- ************************************************************************/
-
-void CLuaBaseEntity::setMoghouseFlag(uint8 flag)
-{
-    XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
-
-    auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
-
-    PChar->profile.mhflag |= flag;
-    charutils::SaveCharStats(PChar);
-}
-
-/************************************************************************
  *  Function: getMoghouseFlag()
  *  Purpose : Returns exit flag for Mog House
  *  Example :
  *  Notes   :  Used in Mog House exit quests (ex. A Lady's Heart)
  ************************************************************************/
 
-uint8 CLuaBaseEntity::getMoghouseFlag()
+uint16 CLuaBaseEntity::getMoghouseFlag()
 {
     XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
-    auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
-    return PChar->profile.mhflag;
+    if (auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity))
+    {
+        return PChar->profile.mhflag;
+    }
+
+    return 0;
+}
+
+/************************************************************************
+ *  Function: setMoghouseFlag()
+ *  Purpose : Creates or returns exit flag for Mog House
+ *  Example : player:moghouseFlag(bit.band(mhflag, 0x02))
+ *  Notes   : Used in Mog House exit quests (ex. A Lady's Heart)
+ ************************************************************************/
+
+void CLuaBaseEntity::setMoghouseFlag(uint16 flag)
+{
+    XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
+
+    if (auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity))
+    {
+        PChar->profile.mhflag = flag;
+        charutils::SaveCharStats(PChar);
+    }
 }
 
 /************************************************************************
@@ -1562,6 +1609,43 @@ void CLuaBaseEntity::lookAt(sol::object const& arg0, sol::object const& arg1, so
     {
         m_PBaseEntity->loc.p.rotation = worldAngle(m_PBaseEntity->loc.p, point);
         m_PBaseEntity->updatemask |= UPDATE_POS;
+    }
+}
+
+/************************************************************************
+ *  Function: facePlayer()
+ *  Purpose : change entities rotation to the direction of a player
+ *  Example : npc:facePlayer(player, true/false)
+ *  Notes   : Arbitrary points are not supported!
+ *            Bool set "false" changes the facing for everyone.
+ ************************************************************************/
+
+void CLuaBaseEntity::facePlayer(CLuaBaseEntity* PLuaBaseEntity, sol::object const& nonGlobal)
+{
+    CCharEntity* PChar = static_cast<CCharEntity*>(PLuaBaseEntity->GetBaseEntity());
+
+    if (PChar)
+    {
+        bool onePersonOnly = nonGlobal.get_type() == sol::type::boolean ? nonGlobal.as<bool>() : true;
+
+        if (onePersonOnly)
+        {
+            auto storedRotation           = m_PBaseEntity->loc.p.rotation;
+            m_PBaseEntity->loc.p.rotation = worldAngle(m_PBaseEntity->loc.p, PChar->loc.p);
+            // Update 1 player's client only
+            PChar->updateEntityPacket(m_PBaseEntity, static_cast<ENTITYUPDATE>(ENTITY_UPDATE), UPDATE_POS);
+            // Now that the packet is sent to that 1 player, turn this back.
+            m_PBaseEntity->loc.p.rotation = storedRotation;
+        }
+        else
+        {
+            m_PBaseEntity->loc.p.rotation = worldAngle(m_PBaseEntity->loc.p, PChar->loc.p);
+            m_PBaseEntity->updatemask |= UPDATE_POS;
+        }
+    }
+    else
+    {
+        ShowError("missing or invalid entity in function call.");
     }
 }
 
@@ -2167,9 +2251,10 @@ bool CLuaBaseEntity::sendGuild(uint16 guildID, uint8 open, uint8 close, uint8 ho
 
 void CLuaBaseEntity::openSendBox()
 {
-    XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
-
-    charutils::OpenSendBox(static_cast<CCharEntity*>(m_PBaseEntity));
+    if (auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity))
+    {
+        charutils::OpenSendBox(PChar, 0x0D, 2);
+    }
 }
 
 /************************************************************************
@@ -2196,7 +2281,7 @@ void CLuaBaseEntity::leaveGame()
  *  Notes   : Currently only used for HELM animations.
  ************************************************************************/
 
-void CLuaBaseEntity::sendEmote(CLuaBaseEntity* target, uint8 emID, uint8 emMode, bool self = false)
+void CLuaBaseEntity::sendEmote(CLuaBaseEntity* target, uint8 emID, uint8 emMode, bool self)
 {
     XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC)
 
@@ -2276,7 +2361,7 @@ int16 CLuaBaseEntity::getWorldAngle(sol::variadic_args va)
  *            Returned angle is 255-based rotation value - NOT a 360 angle
  *            Return value is signed to indicate this shortest turn direction.
  *            Negative: counter-clockwise (left), Positive: clockwise (right)
- *            CAREFUL! If the entities are too close, this can return unxpected results.
+ *            CAREFUL! If the entities are too close, this can return unexpected results.
  ************************************************************************/
 
 int16 CLuaBaseEntity::getFacingAngle(CLuaBaseEntity const* target)
@@ -2495,6 +2580,17 @@ void CLuaBaseEntity::updateToEntireZone(uint8 statusID, uint8 animation, sol::ob
     }
 
     PNpc->loc.zone->UpdateEntityPacket(PNpc, ENTITY_UPDATE, UPDATE_COMBAT, true);
+}
+
+// Sends an arbitrary entity update to a specific player only
+void CLuaBaseEntity::sendEntityUpdateToPlayer(CLuaBaseEntity* entityToUpdate, uint8 entityUpdate, uint8 updateMask)
+{
+    if (m_PBaseEntity->objtype == TYPE_PC && entityToUpdate->GetBaseEntity())
+    {
+        CCharEntity* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
+
+        PChar->updateEntityPacket(entityToUpdate->GetBaseEntity(), static_cast<ENTITYUPDATE>(entityUpdate), updateMask);
+    }
 }
 
 /************************************************************************
@@ -2838,6 +2934,9 @@ void CLuaBaseEntity::addTeleport(uint8 teleType, uint32 bitval, sol::object cons
             PChar->teleport.waypoints.access[index] |= (1 << setBit);
         }
         break;
+        case TELEPORT_TYPE::ESCHAN_PORTAL:
+            PChar->teleport.eschanPortal |= bit;
+            break;
         default:
             ShowError("LuaBaseEntity::addTeleport : Parameter 1 out of bounds.");
             return;
@@ -2900,6 +2999,9 @@ uint32 CLuaBaseEntity::getTeleport(uint8 type, sol::object const& abysseaRegionO
 
             return PChar->teleport.abysseaConflux[abysseaRegion];
         }
+        case TELEPORT_TYPE::ESCHAN_PORTAL:
+            return PChar->teleport.eschanPortal;
+            break;
         default:
             ShowError("LuaBaseEntity::getteleport : Parameter 1 out of bounds.");
     }
@@ -4741,7 +4843,7 @@ std::string CLuaBaseEntity::getPacketName()
  *          : your choosing.
  ************************************************************************/
 
-void CLuaBaseEntity::renameEntity(std::string const& newName)
+void CLuaBaseEntity::renameEntity(std::string const& newName, sol::object const& arg2)
 {
     if (m_PBaseEntity->objtype == TYPE_PC)
     {
@@ -4754,7 +4856,11 @@ void CLuaBaseEntity::renameEntity(std::string const& newName)
     m_PBaseEntity->updatemask |= UPDATE_NAME | UPDATE_HP;
     m_PBaseEntity->isRenamed = true;
 
-    ShowInfo("Renaming %s: %s -> %s", m_PBaseEntity->name, oldName, newName);
+    bool silent = arg2.get_type() == sol::type::boolean ? arg2.as<bool>() : false;
+    if (!silent)
+    {
+        ShowInfo("Renaming %s: %s -> %s", m_PBaseEntity->name, oldName, newName);
+    }
 }
 
 /************************************************************************
@@ -4859,14 +4965,6 @@ void CLuaBaseEntity::setModelId(uint16 modelId, sol::object const& slotObj)
         m_PBaseEntity->SetModelId(modelId);
     }
     m_PBaseEntity->updatemask |= UPDATE_LOOK;
-}
-
-void CLuaBaseEntity::updateLook()
-{
-    if (m_PBaseEntity->objtype != TYPE_PC)
-    {
-        m_PBaseEntity->updatemask |= UPDATE_LOOK;
-    }
 }
 
 /************************************************************************
@@ -6103,7 +6201,7 @@ uint8 CLuaBaseEntity::levelRestriction(sol::object const& level)
                         petutils::CalculateAutomatonStats(PChar, PPet);
                         break;
                     case PET_TYPE::LUOPAN:
-                        petutils::CalculateLoupanStats(PChar, PPet);
+                        petutils::CalculateLuopanStats(PChar, PPet);
                         break;
                     default:
                         petutils::DespawnPet(PChar);
@@ -7788,6 +7886,41 @@ void CLuaBaseEntity::setJobPoints(uint16 amount)
     CCharEntity* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
 
     PChar->PJobPoints->SetJobPoints(amount);
+    PChar->pushPacket(new CMenuJobPointsPacket(PChar));
+}
+
+/************************************************************************
+ *  Function: masterJob()
+ *  Purpose : Fully masters / unlocks player's current job
+ *  Example : player:masterJob()
+ *  Notes   : Used in GM command
+ ************************************************************************/
+
+void CLuaBaseEntity::masterJob()
+{
+    if (m_PBaseEntity->objtype != TYPE_PC)
+    {
+        ShowDebug("Warning: Attempt to master job for non-PC type!");
+        return;
+    }
+
+    CCharEntity* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
+
+    auto jpCategory = 0x020 * PChar->GetMJob();
+    for (auto i = jpCategory; i < jpCategory + 0xA; i++)
+    {
+        auto points       = PChar->PJobPoints->GetJobPointType((JOBPOINT_TYPE)i);
+        auto pointsNeeded = 20 - points->value;
+        auto currentJP    = PChar->PJobPoints->GetJobPoints();
+
+        for (auto x = 0; x < pointsNeeded; x++)
+        {
+            auto cost = JobPointCost(points->value);
+            PChar->PJobPoints->SetJobPoints(currentJP + cost);
+            PChar->PJobPoints->RaiseJobPoint((JOBPOINT_TYPE)i);
+        }
+    }
+
     PChar->pushPacket(new CMenuJobPointsPacket(PChar));
 }
 
@@ -11183,7 +11316,7 @@ bool CLuaBaseEntity::getClaimable()
  *  Function: clearEnmityForEntity(...)
  *  Purpose :
  *  Example : mob:clearEnmityForEntity(player)
- *  Notes   : Taken from LSB. When merging from upstream, please accept theirs.
+ *  Notes   :
  ************************************************************************/
 
 void CLuaBaseEntity::clearEnmityForEntity(CLuaBaseEntity* PEntity)
@@ -12023,6 +12156,18 @@ void CLuaBaseEntity::uncharm()
 }
 
 /************************************************************************
+ *  Function: isTandemValid()
+ *  Purpose : checks if the entity satifies all conditions of tandem
+ *  Example : player:isTandemValid()
+ *  Notes   : for tandem strike and tandem blow
+ ************************************************************************/
+
+bool CLuaBaseEntity::isTandemValid()
+{
+    return battleutils::IsTandemValid(static_cast<CBattleEntity*>(m_PBaseEntity));
+}
+
+/************************************************************************
  *  Function: addBurden()
  *  Purpose : Adds a Burden to a Target
  *  Example : local overload = target:addBurden(xi.magic.ele.EARTH - 1, burden)
@@ -12287,9 +12432,10 @@ int32 CLuaBaseEntity::physicalDmgTaken(double damage, sol::variadic_args va)
 {
     XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype == TYPE_NPC);
 
-    DAMAGE_TYPE damageType = va[0].is<uint32>() ? va[0].as<DAMAGE_TYPE>() : DAMAGE_TYPE::NONE;
+    DAMAGE_TYPE damageType    = va[0].is<uint32>() ? va[0].as<DAMAGE_TYPE>() : DAMAGE_TYPE::NONE;
+    bool        ignoreDmgMods = va[1].is<bool>() ? va[1].as<bool>() : false;
 
-    return battleutils::PhysicalDmgTaken(static_cast<CBattleEntity*>(m_PBaseEntity), static_cast<int32>(damage), damageType);
+    return battleutils::PhysicalDmgTaken(static_cast<CBattleEntity*>(m_PBaseEntity), static_cast<int32>(damage), damageType, false, ignoreDmgMods);
 }
 
 /************************************************************************
@@ -12303,9 +12449,10 @@ int32 CLuaBaseEntity::magicDmgTaken(double damage, sol::variadic_args va)
 {
     XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype == TYPE_NPC);
 
-    ELEMENT elementType = va[0].is<uint32>() ? va[0].as<ELEMENT>() : ELEMENT_NONE;
+    ELEMENT elementType   = va[0].is<uint32>() ? va[0].as<ELEMENT>() : ELEMENT_NONE;
+    bool    ignoreDmgMods = va[1].is<bool>() ? va[1].as<bool>() : false;
 
-    return battleutils::MagicDmgTaken(static_cast<CBattleEntity*>(m_PBaseEntity), static_cast<int32>(damage), elementType);
+    return battleutils::MagicDmgTaken(static_cast<CBattleEntity*>(m_PBaseEntity), static_cast<int32>(damage), elementType, ignoreDmgMods);
 }
 
 /************************************************************************
@@ -12319,9 +12466,10 @@ int32 CLuaBaseEntity::rangedDmgTaken(double damage, sol::variadic_args va)
 {
     XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype == TYPE_NPC);
 
-    DAMAGE_TYPE damageType = va[0].is<uint32>() ? va[0].as<DAMAGE_TYPE>() : DAMAGE_TYPE::NONE;
+    DAMAGE_TYPE damageType    = va[0].is<uint32>() ? va[0].as<DAMAGE_TYPE>() : DAMAGE_TYPE::NONE;
+    bool        ignoreDmgMods = va[1].is<bool>() ? va[1].as<bool>() : false;
 
-    return battleutils::RangedDmgTaken(static_cast<CBattleEntity*>(m_PBaseEntity), static_cast<int32>(damage), damageType);
+    return battleutils::RangedDmgTaken(static_cast<CBattleEntity*>(m_PBaseEntity), static_cast<int32>(damage), damageType, false, ignoreDmgMods);
 }
 
 /************************************************************************
@@ -12331,11 +12479,13 @@ int32 CLuaBaseEntity::rangedDmgTaken(double damage, sol::variadic_args va)
  *  Notes   : Passes argument to BreathDmgTaken member of battleutils
  ************************************************************************/
 
-int32 CLuaBaseEntity::breathDmgTaken(double damage)
+int32 CLuaBaseEntity::breathDmgTaken(double damage, sol::variadic_args va)
 {
     XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype == TYPE_NPC);
 
-    return battleutils::BreathDmgTaken(static_cast<CBattleEntity*>(m_PBaseEntity), static_cast<int32>(damage));
+    bool ignoreDmgMods = va[0].is<bool>() ? va[0].as<bool>() : false;
+
+    return battleutils::BreathDmgTaken(static_cast<CBattleEntity*>(m_PBaseEntity), static_cast<int32>(damage), ignoreDmgMods);
 }
 
 /************************************************************************
@@ -13593,8 +13743,19 @@ void CLuaBaseEntity::petAttack(CLuaBaseEntity* PEntity)
 {
     XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype == TYPE_NPC);
 
-    if (static_cast<CBattleEntity*>(m_PBaseEntity)->PPet != nullptr)
+    CBattleEntity* PBattle = static_cast<CBattleEntity*>(m_PBaseEntity)->PPet;
+    if (PBattle != nullptr)
     {
+        if (PBattle->objtype == TYPE_PET)
+        {
+            CPetEntity* Pet = static_cast<CPetEntity*>(PBattle);
+            // A temporary fix until we move the spirit controller to lua.
+            if (Pet->getPetType() == PET_TYPE::AVATAR && Pet->m_PetID <= PETID::PETID_DARKSPIRIT)
+            {
+                static_cast<CSpiritController*>(Pet->PAI->GetController())->setMagicCooldowns();
+            }
+        }
+
         petutils::AttackTarget(static_cast<CBattleEntity*>(m_PBaseEntity), static_cast<CBattleEntity*>(PEntity->GetBaseEntity()));
     }
 }
@@ -13622,11 +13783,22 @@ void CLuaBaseEntity::petRetreat()
 {
     XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype == TYPE_NPC);
 
-    auto* PBattle = static_cast<CBattleEntity*>(m_PBaseEntity);
+    CBattleEntity* PBattleMaster = static_cast<CBattleEntity*>(m_PBaseEntity);
+    CBattleEntity* PBattlePet    = PBattleMaster->PPet;
 
-    if (PBattle->PPet != nullptr)
+    if (PBattlePet != nullptr)
     {
-        petutils::RetreatToMaster(PBattle);
+        if (PBattlePet->objtype == TYPE_PET)
+        {
+            CPetEntity* Pet = static_cast<CPetEntity*>(PBattlePet);
+            // A temporary fix until we move the spirit controller to lua.
+            if (Pet->getPetType() == PET_TYPE::AVATAR && Pet->m_PetID <= PETID::PETID_DARKSPIRIT)
+            {
+                static_cast<CSpiritController*>(Pet->PAI->GetController())->setMagicCooldowns();
+            }
+        }
+
+        petutils::RetreatToMaster(PBattleMaster);
     }
 }
 
@@ -14018,13 +14190,13 @@ void CLuaBaseEntity::setMobLevel(uint8 level)
 }
 
 /************************************************************************
- *  Function: getSystem()
+ *  Function: getEcosystem()
  *  Purpose : Returns integer value of system associated with an Entity
- *  Example : if pet:getSystem() ~= xi.ecosystem.AVATAR then -- Not an avatar
+ *  Example : if pet:getEcosystem() ~= xi.ecosystem.AVATAR then -- Not an avatar
  *  Notes   :
  ************************************************************************/
 
-uint8 CLuaBaseEntity::getSystem()
+uint8 CLuaBaseEntity::getEcosystem()
 {
     XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype == TYPE_NPC);
 
@@ -14582,6 +14754,20 @@ bool CLuaBaseEntity::isAggroable()
 {
     XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_MOB);
     return static_cast<CMobEntity*>(m_PBaseEntity)->m_isAggroable;
+}
+
+/************************************************************************
+ *  Function: setAlwaysRender()
+ *  Purpose : Determines wheter or not an NPC will always render for the player
+ *  Example : npc:setAlwaysRender(true)
+ *  Notes   : This is only used in specific cases: fireworks / festival deco
+ *          : or other instances where an NPC should always render in a zone.
+ ************************************************************************/
+
+void CLuaBaseEntity::setAlwaysRender(bool alwaysRender)
+{
+    XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_NPC);
+    static_cast<CNpcEntity*>(m_PBaseEntity)->m_alwaysRender = alwaysRender;
 }
 
 /************************************************************************
@@ -15189,7 +15375,7 @@ void CLuaBaseEntity::useMobAbility(sol::variadic_args va)
  *  Note    : Params can assume a default value by passing nil
  *          : e.g. triggerDrawIn(true) to pull in a party/alliance
  ************************************************************************/
-inline int32 CLuaBaseEntity::triggerDrawIn(CLuaBaseEntity* PMobEntity, sol::object const& includePt, sol::object const& drawRange, sol::object const& maxReach, sol::object const& target)
+inline int32 CLuaBaseEntity::triggerDrawIn(CLuaBaseEntity* PMobEntity, sol::object const& includePt, sol::object const& drawRange, sol::object const& maxReach, sol::object const& target, sol::object const& incDeadAndMount)
 {
     XI_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_MOB);
@@ -15198,10 +15384,11 @@ inline int32 CLuaBaseEntity::triggerDrawIn(CLuaBaseEntity* PMobEntity, sol::obje
     CBattleEntity* PTarget = PMob->GetBattleTarget();
 
     // Default values
-    uint8  drawInRange  = PMob->GetMeleeRange() * 2;
-    uint16 maximumReach = 0xFFFF;
-    bool   includeParty = false;
-    float  offset       = PMob->GetMeleeRange() - 0.2f;
+    uint8  drawInRange         = PMob->GetMeleeRange() * 2;
+    uint16 maximumReach        = 0xFFFF;
+    bool   includeParty        = false;
+    float  offset              = PMob->GetMeleeRange() - 0.2f;
+    bool   includeDeadAndMount = false;
 
     if ((drawRange != sol::lua_nil) && drawRange.is<uint8>())
     {
@@ -15224,10 +15411,15 @@ inline int32 CLuaBaseEntity::triggerDrawIn(CLuaBaseEntity* PMobEntity, sol::obje
         includeParty = includePt.as<bool>();
     }
 
+    if (incDeadAndMount != sol::lua_nil)
+    {
+        includeDeadAndMount = incDeadAndMount.as<bool>();
+    }
+
     if (PTarget)
     {
         // Draw in requires a target
-        battleutils::DrawIn(PTarget, PMob, offset, drawInRange, maximumReach, includeParty);
+        battleutils::DrawIn(PTarget, PMob, offset, drawInRange, maximumReach, includeParty, includeDeadAndMount);
     }
 
     return 0;
@@ -15398,6 +15590,7 @@ uint32 CLuaBaseEntity::getDropID()
 }
 
 /************************************************************************
+ *  DEPRECATED: Use target:addListener("ITEM_DROPS", ...) instead.
  *  Function: setDropID()
  *  Purpose : Permanently changes the Drop ID assigned to a Mob
  *  Example : target:setDropID(2408)
@@ -16143,6 +16336,48 @@ void CLuaBaseEntity::sendNpcEmote(CLuaBaseEntity* PBaseEntity, sol::object const
     }
 }
 
+/************************************************************************
+*  Function: sendMobEmote()
+*  Purpose : Makes a mob entity emit an emote.
+*  Example : mob:sendMobEmote(target, xi.emote.PANIC, xi.emoteMode.MOTION)
+*  Notes   : Intended only for humanoid mobs that have the
+             same skeletal meshes for animations as players; such as fomor
+************************************************************************/
+
+void CLuaBaseEntity::sendMobEmote(CLuaBaseEntity* PBaseEntity, sol::object const& p0, sol::object const& p1, sol::object const& p2)
+{
+    XI_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
+    XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_MOB);
+
+    // 1st parameter is optional
+    XI_DEBUG_BREAK_IF(p0 == sol::lua_nil);
+    XI_DEBUG_BREAK_IF(p1 == sol::lua_nil);
+    // 4th parameter is optional
+
+    CMobEntity* PMob        = dynamic_cast<CMobEntity*>(m_PBaseEntity);
+    uint32      EntityId    = 0;
+    uint16      EntityIndex = 0;
+
+    if (PBaseEntity != nullptr)
+    {
+        EntityId    = PBaseEntity->getID();
+        EntityIndex = PBaseEntity->getTargID();
+    }
+
+    uint16 emoteId     = (p0 != sol::lua_nil) ? p0.as<uint16>() : 0;
+    uint16 emoteModeId = (p1 != sol::lua_nil) ? p1.as<uint16>() : 0;
+    uint16 extra       = (p2 != sol::lua_nil) ? p2.as<uint32>() : 0;
+
+    if (PMob)
+    {
+        const Emote     emoteID   = static_cast<Emote>(emoteId);
+        const EmoteMode emoteMode = static_cast<EmoteMode>(emoteModeId);
+
+        PMob->loc.zone->PushPacket(PMob, CHAR_INRANGE,
+                                   new CCharEmotionPacket(PMob, EntityId, EntityIndex, emoteID, emoteMode, extra));
+    }
+}
+
 void CLuaBaseEntity::setDigTable()
 {
     if (m_PBaseEntity != nullptr && m_PBaseEntity->objtype == TYPE_PC)
@@ -16439,6 +16674,28 @@ void CLuaBaseEntity::setWallhackAllowed(bool allowed)
     m_PBaseEntity->m_ignoreWallhack = !allowed;
 }
 
+void CLuaBaseEntity::addPacketMod(uint16 packetId, uint16 offset, uint8 value)
+{
+    TracyZoneScoped;
+
+    if (auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity))
+    {
+        ShowInfo(fmt::format("Adding Packet Mod ({}): 0x{:04X}: 0x{:04X}: 0x{:02X}",
+                             PChar->name, packetId, offset, value));
+        PacketMods[PChar->id][packetId].emplace_back(std::make_pair(offset, value));
+    }
+}
+
+void CLuaBaseEntity::clearPacketMods()
+{
+    TracyZoneScoped;
+
+    if (auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity))
+    {
+        PacketMods[PChar->id].clear();
+    }
+}
+
 //==========================================================//
 
 void CLuaBaseEntity::Register()
@@ -16457,6 +16714,7 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("messageSpecial", CLuaBaseEntity::messageSpecial);
     SOL_REGISTER("messageSystem", CLuaBaseEntity::messageSystem);
     SOL_REGISTER("messageCombat", CLuaBaseEntity::messageCombat);
+    SOL_REGISTER("messageStandard", CLuaBaseEntity::messageStandard);
     SOL_REGISTER("customMenu", CLuaBaseEntity::customMenu);
 
     // Variables
@@ -16519,6 +16777,7 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("canUseAbilities", CLuaBaseEntity::canUseAbilities);
 
     SOL_REGISTER("lookAt", CLuaBaseEntity::lookAt);
+    SOL_REGISTER("facePlayer", CLuaBaseEntity::facePlayer);
     SOL_REGISTER("clearTargID", CLuaBaseEntity::clearTargID);
 
     SOL_REGISTER("atPoint", CLuaBaseEntity::atPoint);
@@ -16655,7 +16914,6 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("checkNameFlags", CLuaBaseEntity::checkNameFlags);
     SOL_REGISTER("getModelId", CLuaBaseEntity::getModelId);
     SOL_REGISTER("setModelId", CLuaBaseEntity::setModelId);
-    SOL_REGISTER("updateLook", CLuaBaseEntity::updateLook);
     SOL_REGISTER("setCostume", CLuaBaseEntity::setCostume);
     SOL_REGISTER("getCostume", CLuaBaseEntity::getCostume);
     SOL_REGISTER("getCostume2", CLuaBaseEntity::getCostume2);
@@ -16789,6 +17047,7 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("addCapacityPoints", CLuaBaseEntity::addCapacityPoints);
     SOL_REGISTER("setCapacityPoints", CLuaBaseEntity::setCapacityPoints);
     SOL_REGISTER("setJobPoints", CLuaBaseEntity::setJobPoints);
+    SOL_REGISTER("masterJob", CLuaBaseEntity::masterJob);
 
     SOL_REGISTER("getGil", CLuaBaseEntity::getGil);
     SOL_REGISTER("addGil", CLuaBaseEntity::addGil);
@@ -16988,6 +17247,7 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("clearEnmity", CLuaBaseEntity::clearEnmity);
     SOL_REGISTER("setClaimable", CLuaBaseEntity::setClaimable);
     SOL_REGISTER("getClaimable", CLuaBaseEntity::getClaimable);
+    SOL_REGISTER("clearEnmityForEntity", CLuaBaseEntity::clearEnmityForEntity);
 
     // Status Effects
     SOL_REGISTER("addStatusEffect", CLuaBaseEntity::addStatusEffect);
@@ -17031,6 +17291,7 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("charm", CLuaBaseEntity::charm);
     SOL_REGISTER("charmDuration", CLuaBaseEntity::charmDuration);
     SOL_REGISTER("uncharm", CLuaBaseEntity::uncharm);
+    SOL_REGISTER("isTandemValid", CLuaBaseEntity::isTandemValid);
 
     // PUP
     SOL_REGISTER("addBurden", CLuaBaseEntity::addBurden);
@@ -17160,7 +17421,7 @@ void CLuaBaseEntity::Register()
 
     // Mob Entity-Specific
     SOL_REGISTER("setMobLevel", CLuaBaseEntity::setMobLevel);
-    SOL_REGISTER("getSystem", CLuaBaseEntity::getSystem); // TODO: rename to getEcoSystem()
+    SOL_REGISTER("getEcosystem", CLuaBaseEntity::getEcosystem);
     SOL_REGISTER("getSuperFamily", CLuaBaseEntity::getSuperFamily);
     SOL_REGISTER("getFamily", CLuaBaseEntity::getFamily);
     SOL_REGISTER("isMobType", CLuaBaseEntity::isMobType);
@@ -17194,6 +17455,7 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("getUntargetable", CLuaBaseEntity::getUntargetable);
     SOL_REGISTER("setIsAggroable", CLuaBaseEntity::setIsAggroable);
     SOL_REGISTER("isAggroable", CLuaBaseEntity::isAggroable);
+    SOL_REGISTER("setAlwaysRender", CLuaBaseEntity::setAlwaysRender);
 
     SOL_REGISTER("setDelay", CLuaBaseEntity::setDelay);
     SOL_REGISTER("getDelay", CLuaBaseEntity::getDelay);
@@ -17250,6 +17512,7 @@ void CLuaBaseEntity::Register()
 
     SOL_REGISTER("getPlayerTriggerAreaInZone", CLuaBaseEntity::getPlayerTriggerAreaInZone);
     SOL_REGISTER("updateToEntireZone", CLuaBaseEntity::updateToEntireZone);
+    SOL_REGISTER("sendEntityUpdateToPlayer", CLuaBaseEntity::sendEntityUpdateToPlayer);
 
     SOL_REGISTER("setAnimPath", CLuaBaseEntity::setAnimPath);
     SOL_REGISTER("setAnimStart", CLuaBaseEntity::setAnimStart);
@@ -17269,6 +17532,7 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("clearSession", CLuaBaseEntity::clearSession);
     SOL_REGISTER("setSpawnType", CLuaBaseEntity::setSpawnType);
     SOL_REGISTER("sendNpcEmote", CLuaBaseEntity::sendNpcEmote);
+    SOL_REGISTER("sendMobEmote", CLuaBaseEntity::sendMobEmote);
     SOL_REGISTER("restoreNpcLook", CLuaBaseEntity::restoreNpcLook);
     SOL_REGISTER("getTraits", CLuaBaseEntity::getTraits);
     SOL_REGISTER("clearActionQueue", CLuaBaseEntity::clearActionQueue);
@@ -17306,6 +17570,9 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("setMannequinPose", CLuaBaseEntity::setMannequinPose);
     SOL_REGISTER("getMannequinPose", CLuaBaseEntity::getMannequinPose);
     SOL_REGISTER("setWallhackAllowed", CLuaBaseEntity::setWallhackAllowed);
+
+    SOL_REGISTER("addPacketMod", CLuaBaseEntity::addPacketMod);
+    SOL_REGISTER("clearPacketMods", CLuaBaseEntity::clearPacketMods);
 }
 
 std::ostream& operator<<(std::ostream& os, const CLuaBaseEntity& entity)

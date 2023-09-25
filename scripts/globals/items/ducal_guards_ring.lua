@@ -4,13 +4,13 @@
 -- Enchantment: "Teleport-RuLude Gardens"
 -----------------------------------
 require("scripts/globals/teleports")
-require("scripts/globals/status")
+require("scripts/globals/zone")
 -----------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)
     local result = 0
-    if not target:hasVisitedZone(243) then
+    if not target:hasVisitedZone(xi.zone.RULUDE_GARDENS) then
         result = 56
     end
 

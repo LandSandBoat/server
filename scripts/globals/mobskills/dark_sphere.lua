@@ -3,8 +3,6 @@
 -- Deals Dark damage to targets in a fan-shaped area of effect. Additional effect: Blind
 -- Range: 15' cone
 -----------------------------------
-require("scripts/globals/settings")
-require("scripts/globals/status")
 require("scripts/globals/mobskills")
 -----------------------------------
 local mobskillObject = {}

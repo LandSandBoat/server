@@ -4,8 +4,6 @@
 -- Starts and Finishes Quest: Trial by Wind
 -- !pos -17 7 -10 247
 -----------------------------------
-require("scripts/globals/settings")
-require("scripts/globals/keyitems")
 require("scripts/globals/shop")
 require("scripts/globals/quests")
 local ID = require("scripts/zones/Rabao/IDs")
@@ -17,26 +15,10 @@ end
 
 entity.onTrigger = function(player, npc)
     local trialByWind = player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.TRIAL_BY_WIND)
-    local carbuncleDebacle = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CARBUNCLE_DEBACLE)
-    local carbuncleDebacleProgress = player:getCharVar("CarbuncleDebacleProgress")
 
     -----------------------------------
-    -- Carbuncle Debacle
-    if
-        carbuncleDebacle == QUEST_ACCEPTED and
-        carbuncleDebacleProgress == 5 and
-        player:hasKeyItem(xi.ki.DAZE_BREAKER_CHARM)
-    then
-        player:startEvent(86) -- get the wind pendulum, lets go to Cloister of Gales
-    elseif carbuncleDebacle == QUEST_ACCEPTED and carbuncleDebacleProgress == 6 then
-        if not player:hasItem(1174) then
-            player:startEvent(87, 0, 1174, 0, 0, 0, 0, 0, 0) -- "lost the pendulum?" This one too~???
-        else
-            player:startEvent(88) -- reminder to go to Cloister of Gales
-        end
-    -----------------------------------
     -- Trial by Wind
-    elseif
+    if
         (trialByWind == QUEST_AVAILABLE and player:getFameLevel(xi.quest.fame_area.SELBINA_RABAO) >= 5) or
         (trialByWind == QUEST_COMPLETED and os.time() > player:getCharVar("TrialByWind_date"))
     then
@@ -74,7 +56,7 @@ entity.onTrigger = function(player, npc)
             numitem = numitem + 8
         end   -- Bubbly Water
 
-        if player:hasSpell(301) then
+        if player:hasSpell(xi.magic.spell.GARUDA) then
             numitem = numitem + 32
         end  -- Ability to summon Garuda
 
@@ -112,10 +94,9 @@ entity.onEventFinish = function(player, csid, option)
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, item)
         else
             if option == 5 then
-                player:addGil(xi.settings.main.GIL_RATE * 10000)
-                player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.main.GIL_RATE * 10000) -- Gil
+                npcUtil.giveCurrency(player, 'gil', 10000)
             elseif option == 6 then
-                player:addSpell(301) -- Garuda Spell
+                player:addSpell(xi.magic.spell.GARUDA) -- Garuda Spell
                 player:messageSpecial(ID.text.GARUDA_UNLOCKED, 0, 0, 3)
             else
                 player:addItem(item)
@@ -127,14 +108,6 @@ entity.onEventFinish = function(player, csid, option)
             player:setCharVar("TrialByWind_date", getMidnight())
             player:addFame(xi.quest.fame_area.SELBINA_RABAO, 30)
             player:completeQuest(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.TRIAL_BY_WIND)
-        end
-    elseif csid == 86 or csid == 87 then
-        if player:getFreeSlotsCount() ~= 0 then
-            player:addItem(1174)
-            player:messageSpecial(ID.text.ITEM_OBTAINED, 1174)
-            player:setCharVar("CarbuncleDebacleProgress", 6)
-        else
-            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 1174)
         end
     end
 end

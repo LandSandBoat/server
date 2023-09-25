@@ -5,7 +5,6 @@
 -- !pos -106.336 2.000 26.117 237
 -----------------------------------
 local ID = require("scripts/zones/Metalworks/IDs")
-require("scripts/globals/status")
 require("scripts/globals/crafting")
 -----------------------------------
 local entity = {}
@@ -14,11 +13,10 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local guildMember = xi.crafting.isGuildMember(player, 8)
     local skillCap = xi.crafting.getCraftSkillCap(player, xi.skill.SMITHING)
     local skillLevel = player:getSkillLevel(xi.skill.SMITHING)
 
-    if guildMember == 1 then
+    if xi.crafting.hasJoinedGuild(player, xi.crafting.guild.SMITHING) then
         if not player:hasStatusEffect(xi.effect.SMITHING_IMAGERY) then
             player:startEvent(105, skillCap, skillLevel, 2, 207, player:getGil(), 0, 0, 0)
         else

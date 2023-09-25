@@ -7,9 +7,6 @@
 -- Aquan Killer 12
 -- Sleep Resist 10
 -----------------------------------
-require("scripts/globals/status")
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

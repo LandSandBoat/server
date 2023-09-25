@@ -4,8 +4,6 @@
 -- Stoneskin portion cannot be removed with dispel.
 -----------------------------------
 require("scripts/globals/mobskills")
-require("scripts/globals/settings")
-require("scripts/globals/status")
 -----------------------------------
 local mobskillObject = {}
 
@@ -20,9 +18,8 @@ end
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local typeEffectOne = xi.effect.STONESKIN
     local typeEffectTwo = xi.effect.BLAZE_SPIKES
-    local randy = math.random(20, 30)
-    skill:setMsg(xi.mobskills.mobBuffMove(mob, typeEffectOne, 1000, 0, 300))
-    xi.mobskills.mobBuffMove(mob, typeEffectTwo, randy, 0, 180)
+    skill:setMsg(xi.mobskills.mobBuffMove(mob, typeEffectOne, 750, 0, 300))
+    xi.mobskills.mobBuffMove(mob, typeEffectTwo, 20, 0, 900)
     local effect1 = mob:getStatusEffect(typeEffectOne)
     effect1:unsetFlag(xi.effectFlag.DISPELABLE)
 

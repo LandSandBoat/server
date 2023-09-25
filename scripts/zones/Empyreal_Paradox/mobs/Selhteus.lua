@@ -3,7 +3,6 @@
 --  Mob: Selh'teus
 -- Chains of Promathia 8-4 BCNM Fight
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/magic")
 local ID = require("scripts/zones/Empyreal_Paradox/IDs")
 -----------------------------------
@@ -17,7 +16,6 @@ entity.onMobInitialize = function(mob)
 end
 
 entity.onMobSpawn = function(mob)
-    mob:setAllegiance(xi.allegiance.PLAYER)
 end
 
 entity.onMobFight = function(mob, target)

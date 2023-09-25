@@ -1,7 +1,6 @@
 -----------------------------------
 --  Mob: Puretos
 -----------------------------------
-require("scripts/globals/keyitems")
 require("scripts/globals/voidwalker")
 -----------------------------------
 

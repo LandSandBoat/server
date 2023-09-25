@@ -6,9 +6,6 @@
 -- Duration (Charging): Until MP stored is 25% of Max HP or until HP = 50%
 -- Duration (Charged): 2 hours
 -----------------------------------
-require("scripts/globals/msg")
-require("scripts/globals/status")
------------------------------------
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)

@@ -15,4 +15,4 @@ CREATE TABLE IF NOT EXISTS `char_vars` (
   `varname` varchar(30) NOT NULL,
   `value` int(11) NOT NULL,
   PRIMARY KEY (`charid`,`varname`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;

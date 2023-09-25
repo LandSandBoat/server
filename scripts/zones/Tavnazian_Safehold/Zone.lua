@@ -13,8 +13,8 @@ zoneObject.onInitialize = function(zone)
     zone:registerTriggerArea(2, 104, -42, -88, 113, -38, -77)
 end
 
-zoneObject.onConquestUpdate = function(zone, updatetype)
-    xi.conq.onConquestUpdate(zone, updatetype)
+zoneObject.onConquestUpdate = function(zone, updatetype, influence, owner, ranking, isConquestAlliance)
+    xi.conq.onConquestUpdate(zone, updatetype, influence, owner, ranking, isConquestAlliance)
 end
 
 zoneObject.onZoneIn = function(player, prevZone)
@@ -25,7 +25,7 @@ zoneObject.onZoneIn = function(player, prevZone)
         player:getYPos() == 0 and
         player:getZPos() == 0
     then
-        player:setPos(27.971, -14.068, 43.735, 66)
+        player:setPos(-4, -26, 134, 87)
     end
 
     return cs

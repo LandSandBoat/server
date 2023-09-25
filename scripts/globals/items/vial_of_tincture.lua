@@ -3,8 +3,6 @@
 -- Item: Tincture
 -- Item Effect: This potion remedies disease and plague
 -----------------------------------
-require("scripts/globals/status")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

@@ -7,7 +7,6 @@
 -- !pos -259 -1 -20 192
 -----------------------------------
 local ID = require("scripts/zones/Inner_Horutoto_Ruins/IDs")
-require("scripts/globals/keyitems")
 -----------------------------------
 local entity = {}
 

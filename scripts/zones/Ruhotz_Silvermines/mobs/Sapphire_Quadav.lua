@@ -2,7 +2,6 @@
 -- Area: Ruhotz Silvermines
 --  Mob: Sapphire Quadav
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/pathfind")
 mixins = { require("scripts/mixins/job_special") }
 -----------------------------------

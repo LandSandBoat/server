@@ -6,7 +6,7 @@ require("scripts/globals/zone")
 -----------------------------------
 local effectObject = {}
 
-local remainingTimeLimits = { 300, 120, 60, 30, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1 }
+local remainingTimeLimits = { 300, 240, 180, 120, 60, 30, 10, 5, 4, 3, 2, 1 }
 
 -- NOTE: Update the last
 local reportTimeRemaining
@@ -109,7 +109,7 @@ effectObject.onEffectLose = function(target, effect)
     then
         target:setLocalVar('finalCountdown', 0)
         target:messageSpecial(ID.text.ABYSSEA_TIME_OFFSET + 8)
-        target:setPos(unpack(xi.abyssea.exitPositions[zoneID]))
+        target:startEvent(2180)
     elseif effect:getIcon() == xi.effect.VISITANT then
         -- Player exited willingly, set their time stored as seconds remaining.  Cap at 120 minutes,
         -- and remove the 4 seconds that was granted as a buffer time.

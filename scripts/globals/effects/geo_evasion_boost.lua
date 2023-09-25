@@ -1,8 +1,6 @@
 -----------------------------------
 -- Effect: GEO Evasion Boost
 -----------------------------------
-require("scripts/globals/status")
------------------------------------
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

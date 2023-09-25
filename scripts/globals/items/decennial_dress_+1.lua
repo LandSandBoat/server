@@ -1,9 +1,7 @@
 -----------------------------------
 -- ID: 10254
 -- Decennial Dress +1
--- Dispense: Moogurt
------------------------------------
-require("scripts/globals/msg")
+-- Dispense: Bowl of Moogurt
 -----------------------------------
 local itemObject = {}
 
@@ -17,7 +15,7 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    target:addItem(5935, 1)
+    target:addItem(xi.items.BOWL_OF_MOOGURT, 1)
 end
 
 return itemObject

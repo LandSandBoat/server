@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Windurst Walls
 --  NPC: Kohpo-Akuupo
--- Working 100%
 -----------------------------------
 local entity = {}
 

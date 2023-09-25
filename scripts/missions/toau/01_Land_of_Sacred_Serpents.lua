@@ -5,9 +5,7 @@
 -- NOTE: xi.mission.id.toau.LAND_OF_SACRED_SERPENTS is set on character creation
 -- !addmission 4 0
 -----------------------------------
-require('scripts/globals/keyitems')
 require('scripts/globals/missions')
-require('scripts/globals/settings')
 require('scripts/globals/interaction/mission')
 require('scripts/globals/zone')
 -----------------------------------

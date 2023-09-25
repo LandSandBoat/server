@@ -27,6 +27,49 @@ deprecated_functions = [
     ["table.getn", "#t"],
 ]
 
+deprecated_requires = [
+    "scripts/globals/items",
+    "scripts/globals/keyitems",
+    "scripts/globals/loot",
+    "scripts/globals/msg",
+    "scripts/globals/settings",
+    "scripts/globals/spell_data",
+    "scripts/globals/status",
+    "scripts/enum",
+]
+
+# 'functionName' : [ noNumberInParamX, noNumberInParamY, ... ],
+# Parameters are 0-indexed
+disallowed_numeric_parameters = {
+    "addItem"                 : [ 0 ],
+    "addKeyItem"              : [ 0 ],
+    "addSpell"                : [ 0 ],
+    "addStatusEffect"         : [ 0 ],
+    "addStatusEffectSilent"   : [ 0 ],
+    "addUsedItem"             : [ 0 ],
+    "canLearnSpell"           : [ 0 ],
+    "delItem"                 : [ 0 ],
+    "delKeyItem"              : [ 0 ],
+    "delSpell"                : [ 0 ],
+    "delStatusEffect"         : [ 0 ],
+    "delStatusEffectEx"       : [ 0 ],
+    "getEquipID"              : [ 0 ],
+    "getEquippedItem"         : [ 0 ],
+    "getItemQty"              : [ 0 ],
+    "hasItem"                 : [ 0 ],
+    "hasItemQty"              : [ 0 ],
+    "hasSpell"                : [ 0 ],
+    "messageBasic"            : [ 0 ],
+    "messageName"             : [ 0 ],
+    "messageSpecial"          : [ 0 ],
+    "messageText"             : [ 0 ],
+    "npcUtil.giveKeyItem"     : [ 1, 2 ],
+    "npcUtil.giveItem"        : [ 1 ],
+    "npcUtil.tradeHas"        : [ 1 ],
+    "npcUtil.tradeHasExactly" : [ 1 ],
+    "showText"                : [ 0 ],
+}
+
 def contains_word(word):
     return re.compile(r'\b({0})\b'.format(word)).search
 
@@ -240,6 +283,12 @@ class LuaStyleCheck:
             if contains_word(deprecated_func)(line):
                 self.error(f"Use of deprecated function: {deprecated_func}. Suggested replacement: {replacement}")
 
+    def check_deprecated_require(self, line):
+        if ("require(") in line:
+            for deprecated_str in deprecated_requires:
+                if deprecated_str in line:
+                    self.error(f"Use of deprecated/unnecessary require: {deprecated_str}. This should be removed")
+
     def run_style_check(self):
         if self.filename is None:
             print("ERROR: No filename provided to LuaStyleCheck class.")
@@ -281,6 +330,7 @@ class LuaStyleCheck:
                 self.check_no_newline_after_function_decl(code_line)
                 self.check_no_newline_before_end(code_line)
                 self.check_no_function_decl_padding(code_line)
+                self.check_deprecated_require(code_line)
 
                 # Multiline conditionals should not have data in if, elseif, or then
                 self.check_multiline_condition_format(code_line)

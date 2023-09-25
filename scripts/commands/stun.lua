@@ -2,9 +2,6 @@
 -- func: stun
 -- desc: stuns a non-NPC target for an hour. good for testing damage/mechanics on a punching bag.
 ---------------------------------------------------------------------------------------------------
-
-require("scripts/globals/status")
-
 cmdprops =
 {
     permission = 3,

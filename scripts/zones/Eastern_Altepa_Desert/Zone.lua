@@ -3,6 +3,7 @@
 -----------------------------------
 local ID = require('scripts/zones/Eastern_Altepa_Desert/IDs')
 require('scripts/quests/i_can_hear_a_rainbow')
+require('scripts/globals/events/sunbreeze_festival')
 require('scripts/globals/chocobo_digging')
 require('scripts/globals/conquest')
 require('scripts/globals/chocobo')
@@ -27,8 +28,8 @@ zoneObject.onInitialize = function(zone)
     xi.chocobo.initZone(zone)
 end
 
-zoneObject.onConquestUpdate = function(zone, updatetype)
-    xi.conq.onConquestUpdate(zone, updatetype)
+zoneObject.onConquestUpdate = function(zone, updatetype, influence, owner, ranking, isConquestAlliance)
+    xi.conq.onConquestUpdate(zone, updatetype, influence, owner, ranking, isConquestAlliance)
 end
 
 zoneObject.onZoneIn = function(player, prevZone)
@@ -58,6 +59,10 @@ zoneObject.onZoneOut = function(player)
     if player:hasStatusEffect(xi.effect.BATTLEFIELD) then
         player:delStatusEffect(xi.effect.BATTLEFIELD)
     end
+end
+
+zoneObject.onGameHour = function(zone)
+    xi.events.sunbreeze_festival.spawnFireworks(zone)
 end
 
 zoneObject.onGameDay = function()

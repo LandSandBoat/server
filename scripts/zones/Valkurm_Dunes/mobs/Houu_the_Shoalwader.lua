@@ -4,7 +4,6 @@
 -- Spawned During Pirates Chart Quest
 -----------------------------------
 local ID = require("scripts/zones/Valkurm_Dunes/IDs")
-require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 

@@ -4,7 +4,6 @@
 -- Chains of Promathia 8-4 BCNM Fight
 -----------------------------------
 local ID = require("scripts/zones/Empyreal_Paradox/IDs")
-require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 
@@ -22,11 +21,11 @@ entity.onMobInitialize = function(mob)
 end
 
 entity.onMobSpawn = function(mob)
-    mob:setAllegiance(xi.allegiance.PLAYER)
 end
 
 entity.onMobRoam = function(mob)
-    local promathia = ID.mob.PROMATHIA_OFFSET + mob:getBattlefield():getArea()
+    -- Need to multiply getArea by 2 due to the two Promathia versions
+    local promathia = ID.mob.PROMATHIA_OFFSET + (mob:getBattlefield():getArea() * 2)
     if not GetMobByID(promathia):isAlive() then
         promathia = promathia + 1
     end

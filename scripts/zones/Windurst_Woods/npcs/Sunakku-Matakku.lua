@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Windurst Woods
 --  NPC: Sunakku-Matakku
--- Working 100%
 -----------------------------------
 local entity = {}
 

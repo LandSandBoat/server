@@ -15,7 +15,7 @@ entity.onTrade = function(player, npc, trade)
     then
         -- Adamantoise Soup
         player:confirmTrade()
-        player:messageSpecial(ID.text.KURREA_SPAWN, xi.items.ADAMANTOISE_SOUP)
+        player:messageSpecial(ID.text.KURREA_SPAWN, xi.items.BOWL_OF_ADAMANTOISE_SOUP)
     else
         player:messageSpecial(ID.text.KURREA_WRONG_TRADE)
     end

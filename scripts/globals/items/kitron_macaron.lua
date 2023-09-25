@@ -6,9 +6,6 @@
 -- Increases rate of synthesis success +7%
 -- Increases synthesis skill gain rate +7%
 -----------------------------------
-require("scripts/globals/status")
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

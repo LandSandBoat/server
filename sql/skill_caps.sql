@@ -25,7 +25,7 @@ CREATE TABLE `skill_caps` (
   `r12` smallint(3) unsigned NOT NULL DEFAULT '0',
   `r13` smallint(3) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`level`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AVG_ROW_LENGTH=32 PACK_KEYS=1;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 AVG_ROW_LENGTH=32 PACK_KEYS=1;
 
 --
 -- Dumping data for table `skill_caps`

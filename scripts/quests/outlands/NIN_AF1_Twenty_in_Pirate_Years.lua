@@ -7,12 +7,9 @@
 -- Ryoma: !gotoid 17809466
 -- Enetsu: !gotoid 17743909
 -----------------------------------
-require('scripts/globals/items')
-require('scripts/globals/keyitems')
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
 require('scripts/globals/titles')
-require("scripts/globals/status")
 require('scripts/globals/zone')
 require('scripts/globals/interaction/quest')
 -----------------------------------

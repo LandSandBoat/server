@@ -4,7 +4,6 @@
 -- Type: Fishing Synthesis Image Support
 -- !pos -178.400 -3.835 60.480 240
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/crafting")
 local ID = require("scripts/zones/Port_Windurst/IDs")
 -----------------------------------
@@ -14,11 +13,10 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local guildMember = xi.crafting.isGuildMember(player, 5)
     local skillCap = xi.crafting.getCraftSkillCap(player, xi.skill.FISHING)
     local skillLevel = player:getSkillLevel(xi.skill.FISHING)
 
-    if guildMember == 1 then
+    if xi.crafting.hasJoinedGuild(player, xi.crafting.guild.FISHING) then
         if not player:hasStatusEffect(xi.effect.FISHING_IMAGERY) then
             player:startEvent(10013, skillCap, skillLevel, 2, 239, player:getGil(), 0, 30, 0) -- p1 = skill level
         else

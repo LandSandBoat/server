@@ -4,12 +4,12 @@
 local ID = require('scripts/zones/Northern_San_dOria/IDs')
 require('scripts/globals/events/harvest_festivals')
 require('scripts/globals/events/starlight_celebrations')
+require('scripts/globals/events/sunbreeze_festival')
 require('scripts/quests/flyers_for_regine')
 require('scripts/globals/conquest')
 require('scripts/globals/cutscenes')
 require('scripts/globals/missions')
 require('scripts/globals/npc_util')
-require('scripts/globals/settings')
 require('scripts/globals/quests')
 require('scripts/globals/titles')
 require('scripts/globals/zone')
@@ -24,6 +24,8 @@ zoneObject.onInitialize = function(zone)
 
     applyHalloweenNpcCostumes(zone:getID())
     xi.events.starlightCelebration.applyStarlightDecorations(zone:getID())
+    xi.events.sunbreeze_festival.showDecorations(zone:getID())
+    xi.events.sunbreeze_festival.showNPCs(zone:getID())
 end
 
 zoneObject.onZoneIn = function(player, prevZone)
@@ -52,8 +54,8 @@ zoneObject.afterZoneIn = function(player)
     xi.moghouse.afterZoneIn(player)
 end
 
-zoneObject.onConquestUpdate = function(zone, updatetype)
-    xi.conq.onConquestUpdate(zone, updatetype)
+zoneObject.onConquestUpdate = function(zone, updatetype, influence, owner, ranking, isConquestAlliance)
+    xi.conq.onConquestUpdate(zone, updatetype, influence, owner, ranking, isConquestAlliance)
 end
 
 zoneObject.onTriggerAreaEnter = function(player, triggerArea)
@@ -95,6 +97,10 @@ zoneObject.onEventFinish = function(player, csid, option)
     end
 
     xi.moghouse.exitJobChangeFinish(player, csid, option)
+end
+
+zoneObject.onGameHour = function(zone)
+    xi.events.sunbreeze_festival.spawnFireworks(zone)
 end
 
 return zoneObject

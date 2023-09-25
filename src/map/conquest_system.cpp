@@ -20,96 +20,127 @@
 */
 
 #include "conquest_system.h"
+
+#include "common/mmo.h"
+#include "common/vana_time.h"
 #include "entities/charentity.h"
+#include "message.h"
 #include "utils/charutils.h"
 #include "utils/zoneutils.h"
-#include "vana_time.h"
 
 #include "packets/conquest_map.h"
 
 #include "latent_effect_container.h"
 #include "lua/luautils.h"
 
-/************************************************************************
- *                                                                       *
- *  Реализация namespace conquest                                       *
- *                                                                       *
- ************************************************************************/
-
 namespace conquest
 {
-    /************************************************************************
-     *                                                                       *
-     *  UpdateConquestSystem                                                *
-     *                                                                       *
-     ************************************************************************/
+    static std::shared_ptr<ConquestData> conquestData;
 
-    void UpdateConquestSystem()
+    std::shared_ptr<ConquestData> GetConquestData()
     {
-        TracyZoneScoped;
-        // clang-format off
-        zoneutils::ForEachZone([](CZone* PZone)
+        if (conquestData == nullptr)
         {
-            // only find chars for zones that have had conquest updated
-            if (PZone->GetRegionID() <= REGION_TYPE::DYNAMIS)
-            {
-                luautils::OnConquestUpdate(PZone, Conquest_Update);
-                PZone->ForEachChar([](CCharEntity* PChar)
-                {
-                    PChar->PLatentEffectContainer->CheckLatentsZone();
-                });
-            }
-        });
-        // clang-format on
+            conquestData = std::make_shared<ConquestData>(sql);
+        }
+
+        return conquestData;
     }
 
-    void UpdateInfluencePoints(int points, unsigned int nation, REGION_TYPE region)
+    void HandleZMQMessage(uint8* data)
     {
-        if (region == REGION_TYPE::UNKNOWN)
+        uint8 subtype = ref<uint8>(data, 1);
+        switch (subtype)
         {
-            return;
-        }
-
-        std::string Query = "SELECT sandoria_influence, bastok_influence, windurst_influence, beastmen_influence FROM conquest_system WHERE region_id = %d;";
-
-        int ret = sql->Query(Query.c_str(), static_cast<uint8>(region));
-
-        if (ret == SQL_ERROR || sql->NextRow() != SQL_SUCCESS)
-        {
-            return;
-        }
-
-        int influences[4] = {
-            sql->GetIntData(0),
-            sql->GetIntData(1),
-            sql->GetIntData(2),
-            sql->GetIntData(3),
-        };
-
-        if (influences[nation] == 5000)
-        {
-            return;
-        }
-
-        auto lost = 0;
-        for (auto i = 0u; i < 4; ++i)
-        {
-            if (i == nation)
+            case CONQUEST_WORLD2MAP_WEEKLY_UPDATE_START:
             {
-                continue;
+                HandleWeeklyTallyStart();
+                break;
             }
+            case CONQUEST_WORLD2MAP_WEEKLY_UPDATE_END:
+            {
+                const std::size_t headerLength = 2 * sizeof(uint8) + sizeof(std::size_t);
+                const std::size_t size         = ref<std::size_t>(data, 2);
 
-            auto loss = std::min<int>(points * influences[i] / (5000 - influences[nation]), influences[i]);
-            influences[i] -= loss;
-            lost += loss;
+                std::vector<region_control_t> regionControls = std::vector<region_control_t>(size);
+                for (std::size_t i = 0; i < size; i++)
+                {
+                    const std::size_t start = headerLength + i * sizeof(region_control_t);
+
+                    region_control_t regionControl;
+                    regionControl.current = ref<uint8>(data, start);
+                    regionControl.prev    = ref<uint8>(data, start + 1);
+
+                    regionControls[i] = regionControl;
+                }
+
+                HandleWeeklyTallyEnd(regionControls);
+                break;
+            }
+            case CONQUEST_WORLD2MAP_INFLUENCE_POINTS:
+            {
+                const std::size_t        headerLength      = 2 * sizeof(uint8) + sizeof(bool) + sizeof(std::size_t);
+                bool                     shouldUpdateZones = ref<bool>(data, 2);
+                const std::size_t        size              = ref<std::size_t>(data, 3);
+                std::vector<influence_t> influencePoints   = std::vector<influence_t>(size);
+                for (std::size_t i = 0; i < size; i++)
+                {
+                    const std::size_t start = headerLength + i * sizeof(influence_t);
+
+                    influence_t influence;
+                    influence.sandoria_influence = ref<uint16>(data, start);
+                    influence.bastok_influence   = ref<uint16>(data, start + 2);
+                    influence.windurst_influence = ref<uint16>(data, start + 4);
+                    influence.beastmen_influence = ref<uint16>(data, start + 6);
+
+                    influencePoints[i] = influence;
+                }
+
+                HandleInfluenceUpdate(influencePoints, shouldUpdateZones);
+                break;
+            }
+            case CONQUEST_WORLD2MAP_REGION_CONTROL:
+            {
+                const std::size_t headerLength = 2 * sizeof(uint8) + sizeof(std::size_t);
+                const std::size_t size         = ref<std::size_t>(data, 2);
+
+                std::vector<region_control_t> regionControls;
+                for (std::size_t i = 0; i < size; i++)
+                {
+                    const std::size_t start = headerLength + i * sizeof(region_control_t);
+
+                    region_control_t regionControl;
+                    regionControl.current = ref<uint8_t>(data, start);
+                    regionControl.prev    = ref<uint8_t>(data, start + 1);
+                    regionControls.push_back(regionControl);
+                }
+
+                GetConquestData()->updateRegionControls(regionControls);
+                break;
+            }
         }
+    }
 
-        influences[nation] += lost;
+    void AddInfluencePoints(int points, unsigned int nation, REGION_TYPE region)
+    {
+        // Send update message to world server
+        // Note that we do not update local cache, as it would potentially become out of sync from
+        // world server due to other map updates anyway. We wait for eventual consistency.
+        const std::size_t headerLength = 2 * sizeof(uint8);
+        const std::size_t dataLength   = headerLength + sizeof(int32) + sizeof(uint32) + sizeof(uint8);
+        uint8             data[dataLength]{};
 
-        sql->Query(
-            "UPDATE conquest_system SET sandoria_influence = %d, bastok_influence = %d, "
-            "windurst_influence = %d, beastmen_influence = %d WHERE region_id = %u;",
-            influences[0], influences[1], influences[2], influences[3], static_cast<uint8>(region));
+        // Regional event type + conquest msg type
+        ref<uint8>((uint8*)data, 0) = REGIONAL_EVT_MSG_CONQUEST;
+        ref<uint8>((uint8*)data, 1) = CONQUEST_MAP2WORLD_ADD_INFLUENCE_POINTS;
+
+        // Payload
+        ref<int32>(data, 2)  = points;
+        ref<uint32>(data, 6) = nation;
+        ref<uint8>(data, 10) = (uint8)region;
+
+        // Do send the message
+        message::send(MSG_MAP2WORLD_REGIONAL_EVENT, data, dataLength);
     }
 
     /************************************************************************
@@ -121,7 +152,7 @@ namespace conquest
     void GainInfluencePoints(CCharEntity* PChar, uint32 points)
     {
         points += (uint32)(PChar->getMod(Mod::CONQUEST_REGION_BONUS) / 100.0);
-        conquest::UpdateInfluencePoints(points, PChar->profile.nation, PChar->loc.zone->GetRegionID());
+        conquest::AddInfluencePoints(points, PChar->profile.nation, PChar->loc.zone->GetRegionID());
     }
 
     /************************************************************************
@@ -188,7 +219,7 @@ namespace conquest
             }
         }
 
-        conquest::UpdateInfluencePoints(points, NATION_BEASTMEN, region);
+        conquest::AddInfluencePoints(points, NATION_BEASTMEN, region);
     }
 
     /************************************************************************
@@ -277,24 +308,13 @@ namespace conquest
         }
     }
 
-    uint8 GetInfluenceGraphics(REGION_TYPE regionid)
+    uint8 GetInfluenceGraphics(REGION_TYPE region)
     {
-        int32       sandoria = 0;
-        int32       bastok   = 0;
-        int32       windurst = 0;
-        int32       beastmen = 0;
-        const char* Query    = "SELECT sandoria_influence, bastok_influence, windurst_influence, beastmen_influence \
-                             FROM conquest_system WHERE region_id = %d;";
+        int32 sandoria = GetConquestData()->getInfluence(region, NATION_SANDORIA);
+        int32 bastok   = GetConquestData()->getInfluence(region, NATION_BASTOK);
+        int32 windurst = GetConquestData()->getInfluence(region, NATION_WINDURST);
+        int32 beastmen = GetConquestData()->getInfluence(region, NATION_BEASTMEN);
 
-        int32 ret = sql->Query(Query, static_cast<uint8>(regionid));
-
-        if (ret != SQL_ERROR && sql->NumRows() != 0 && sql->NextRow() == SQL_SUCCESS)
-        {
-            sandoria = sql->GetIntData(0);
-            bastok   = sql->GetIntData(1);
-            windurst = sql->GetIntData(2);
-            beastmen = sql->GetIntData(3);
-        }
         return GetInfluenceGraphics(sandoria, bastok, windurst, beastmen);
     }
 
@@ -348,62 +368,111 @@ namespace conquest
 
     void UpdateConquestGM(ConquestUpdate type)
     {
-        if (type == Conquest_Tally_Start || type == Conquest_Tally_End)
+        if (type == Conquest_Tally_Start)
         {
-            UpdateWeekConquest();
+            // Notify world server that we want to force a weekly update
+            const std::size_t dataLen = 2 * sizeof(uint8);
+            uint8             data[dataLen]{};
+
+            // Create ZMQ message with header and no other payload
+            ref<uint8>((uint8*)data, 0) = REGIONAL_EVT_MSG_CONQUEST;
+            ref<uint8>((uint8*)data, 1) = CONQUEST_MAP2WORLD_GM_WEEKLY_UPDATE;
+
+            // Send to world
+            message::send(MSG_MAP2WORLD_REGIONAL_EVENT, data, dataLen);
         }
-        else
+        else if (type == Conquest_Update)
         {
-            UpdateConquestSystem();
+            // Fetch most recent data from world server
+            const std::size_t dataLen = 2 * sizeof(uint8);
+            uint8             data[dataLen]{};
+
+            // Create ZMQ message with header and no payload
+            ref<uint8>((uint8*)data, 0) = REGIONAL_EVT_MSG_CONQUEST;
+            ref<uint8>((uint8*)data, 1) = CONQUEST_MAP2WORLD_GM_CONQUEST_UPDATE;
+
+            // Send to world
+            message::send(MSG_MAP2WORLD_REGIONAL_EVENT, data, dataLen);
+        }
+        else if (type == Conquest_Tally_End)
+        {
+            // Call conquest callbacks with cached data
+            conquest::HandleWeeklyTallyEnd(GetConquestData()->getRegionControls());
         }
     }
 
     /************************************************************************
-     *   UpdateWeekConquest                                                  *
-     *  Update region control                                               *
-     *   update 1 time per week                                             *
+     *   HandleWeekConquestUpdateStart                                      *
+     *   Calls map handlers for when conquest update starts                 *
+     *   called 1 time per week                                             *
+     *   This does NOT update the DB. World server is responsible for that. *
      ************************************************************************/
 
-    void UpdateWeekConquest()
+    void HandleWeeklyTallyStart()
     {
         TracyZoneScoped;
-        // TODO: move to lobby server
-        // launch conquest message in all zone (monday server midnight)
 
+        uint8 ranking            = conquest::GetBalance();
+        bool  isConquestAlliance = conquest::IsAlliance();
         // clang-format off
-        zoneutils::ForEachZone([](CZone* PZone)
+        zoneutils::ForEachZone([ranking, isConquestAlliance](CZone* PZone)
         {
             // only find chars for zones that have had conquest updated
-            if (PZone->GetRegionID() <= REGION_TYPE::DYNAMIS)
+            REGION_TYPE regionId = PZone->GetRegionID();
+            if (regionId <= REGION_TYPE::DYNAMIS)
             {
-                luautils::OnConquestUpdate(PZone, Conquest_Tally_Start);
+                // Cities do not have owner or influence
+                uint8 influence = 0;
+                uint8 owner = 0;
+                if (regionId <= REGION_TYPE::TAVNAZIA) {
+                    influence = conquest::GetInfluenceGraphics(PZone->GetRegionID());
+                    owner     = conquest::GetRegionOwner(PZone->GetRegionID());
+                }
+
+                luautils::OnConquestUpdate(PZone, Conquest_Tally_Start, influence, owner, ranking, isConquestAlliance);
             }
         });
         // clang-format on
+    }
 
-        const char* Query = "UPDATE conquest_system SET region_control = \
-                            IF(sandoria_influence > bastok_influence AND sandoria_influence > windurst_influence AND \
-                            sandoria_influence > beastmen_influence, 0, \
-                            IF(bastok_influence > sandoria_influence AND bastok_influence > windurst_influence AND \
-                            bastok_influence > beastmen_influence, 1, \
-                            IF(windurst_influence > bastok_influence AND windurst_influence > sandoria_influence AND \
-                            windurst_influence > beastmen_influence, 2, 3)));";
+    /************************************************************************
+     *   HandleWeekConquestUpdateEnd                                        *
+     *   Calls map handlers for when conquest update ends                   *
+     *   Called in response to world msg after actual db is updated         *
+     *   This does NOT update the DB. World server is responsible for that. *
+     ************************************************************************/
+    void HandleWeeklyTallyEnd(std::vector<region_control_t> const& regionControls)
+    {
+        TracyZoneScoped;
 
-        sql->Query(Query);
+        // 1-  Update local cache
+        GetConquestData()->updateRegionControls(regionControls);
 
+        // 2- Update zones based on the new data
         // update conquest overseers
         for (uint8 i = 0; i <= 18; i++)
         {
             luautils::SetRegionalConquestOverseers(i);
         }
 
+        uint8 ranking            = conquest::GetBalance();
+        bool  isConquestAlliance = conquest::IsAlliance();
+
         // clang-format off
-        zoneutils::ForEachZone([](CZone* PZone)
+        zoneutils::ForEachZone([ranking, isConquestAlliance](CZone* PZone)
         {
-            // only find chars for zones that have had conquest updated
-            if (PZone->GetRegionID() <= REGION_TYPE::DYNAMIS)
+            REGION_TYPE regionId = PZone->GetRegionID();
+            if (regionId <= REGION_TYPE::DYNAMIS)
             {
-                luautils::OnConquestUpdate(PZone, Conquest_Tally_End);
+                // Cities do not have owner or influence
+                uint8 influence = 0;
+                uint8 owner = 0;
+                if (regionId <= REGION_TYPE::TAVNAZIA) {
+                    influence = conquest::GetInfluenceGraphics(PZone->GetRegionID());
+                    owner     = conquest::GetRegionOwner(PZone->GetRegionID());
+                }
+
+                luautils::OnConquestUpdate(PZone, Conquest_Tally_End, influence, owner, ranking, isConquestAlliance);
                 PZone->ForEachChar([](CCharEntity* PChar)
                 {
                     PChar->pushPacket(new CConquestPacket(PChar));
@@ -414,6 +483,50 @@ namespace conquest
         // clang-format on
 
         ShowDebug("Conquest Weekly Update is finished");
+    }
+
+    /************************************************************************
+     *                                                                       *
+     *  HandleInfluenceUpdate                                                *
+     *  Called when influence updates are received from the world server.    *
+     *                                                                       *
+     ************************************************************************/
+
+    void HandleInfluenceUpdate(std::vector<influence_t> const& influences, bool shouldUpdateZones)
+    {
+        TracyZoneScoped;
+
+        GetConquestData()->updateInfluencePoints(influences);
+
+        if (shouldUpdateZones)
+        {
+            uint8 ranking            = conquest::GetBalance();
+            bool  isConquestAlliance = conquest::IsAlliance();
+
+            // clang-format off
+            zoneutils::ForEachZone([ranking, isConquestAlliance](CZone* PZone)
+            {
+                // only find chars for zones that have had conquest updated
+                REGION_TYPE regionId = PZone->GetRegionID();
+                if (regionId <= REGION_TYPE::DYNAMIS)
+                {
+                    // Cities do not have owner or influence
+                    uint8 influence = 0;
+                    uint8 owner = 0;
+                    if (regionId <= REGION_TYPE::TAVNAZIA) {
+                        influence = conquest::GetInfluenceGraphics(PZone->GetRegionID());
+                        owner     = conquest::GetRegionOwner(PZone->GetRegionID());
+                    }
+
+                    luautils::OnConquestUpdate(PZone, Conquest_Update, influence, owner, ranking, isConquestAlliance);
+                    PZone->ForEachChar([](CCharEntity* PChar)
+                    {
+                        PChar->PLatentEffectContainer->CheckLatentsZone();
+                    });
+                }
+            });
+            // clang-format on
+        }
     }
 
     /************************************************************************
@@ -483,58 +596,14 @@ namespace conquest
 
     uint8 GetBalance()
     {
-        uint8       sandoria = 0;
-        uint8       bastok   = 0;
-        uint8       windurst = 0;
-        const char* Query    = "SELECT region_control, COUNT(*) FROM conquest_system WHERE region_control < 3 GROUP BY region_control;";
+        uint8 sandoria = GetConquestData()->getRegionControlCount(NATION_SANDORIA);
+        uint8 bastok   = GetConquestData()->getRegionControlCount(NATION_BASTOK);
+        uint8 windurst = GetConquestData()->getRegionControlCount(NATION_WINDURST);
 
-        int32 ret = sql->Query(Query);
+        uint8 sandoria_prev = GetConquestData()->getPrevRegionControlCount(NATION_SANDORIA);
+        uint8 bastok_prev   = GetConquestData()->getPrevRegionControlCount(NATION_BASTOK);
+        uint8 windurst_prev = GetConquestData()->getPrevRegionControlCount(NATION_WINDURST);
 
-        if (ret != SQL_ERROR && sql->NumRows() != 0)
-        {
-            while (sql->NextRow() == SQL_SUCCESS)
-            {
-                if (sql->GetIntData(0) == 0)
-                {
-                    sandoria = sql->GetIntData(1);
-                }
-                else if (sql->GetIntData(0) == 1)
-                {
-                    bastok = sql->GetIntData(1);
-                }
-                else if (sql->GetIntData(0) == 2)
-                {
-                    windurst = sql->GetIntData(1);
-                }
-            }
-        }
-
-        uint8 sandoria_prev = 0;
-        uint8 bastok_prev   = 0;
-        uint8 windurst_prev = 0;
-
-        Query = "SELECT region_control_prev, COUNT(*) FROM conquest_system WHERE region_control_prev < 3 GROUP BY region_control_prev;";
-
-        ret = sql->Query(Query);
-
-        if (ret != SQL_ERROR && sql->NumRows() != 0)
-        {
-            while (sql->NextRow() == SQL_SUCCESS)
-            {
-                if (sql->GetIntData(0) == 0)
-                {
-                    sandoria_prev = sql->GetIntData(1);
-                }
-                else if (sql->GetIntData(0) == 1)
-                {
-                    bastok_prev = sql->GetIntData(1);
-                }
-                else if (sql->GetIntData(0) == 2)
-                {
-                    windurst_prev = sql->GetIntData(1);
-                }
-            }
-        }
         return GetBalance(sandoria, bastok, windurst, sandoria_prev, bastok_prev, windurst_prev);
     }
 
@@ -580,65 +649,20 @@ namespace conquest
 
     bool IsAlliance()
     {
-        uint8       sandoria = 0;
-        uint8       bastok   = 0;
-        uint8       windurst = 0;
-        const char* Query    = "SELECT region_control, COUNT(*) FROM conquest_system WHERE region_control < 3 GROUP BY region_control;";
+        uint8 sandoria = GetConquestData()->getRegionControlCount(NATION_SANDORIA);
+        uint8 bastok   = GetConquestData()->getRegionControlCount(NATION_BASTOK);
+        uint8 windurst = GetConquestData()->getRegionControlCount(NATION_WINDURST);
 
-        int32 ret = sql->Query(Query);
-
-        if (ret != SQL_ERROR && sql->NumRows() != 0)
-        {
-            while (sql->NextRow() == SQL_SUCCESS)
-            {
-                if (sql->GetIntData(0) == 0)
-                {
-                    sandoria = sql->GetIntData(1);
-                }
-                else if (sql->GetIntData(0) == 1)
-                {
-                    bastok = sql->GetIntData(1);
-                }
-                else if (sql->GetIntData(0) == 2)
-                {
-                    windurst = sql->GetIntData(1);
-                }
-            }
-        }
-
-        uint8 sandoria_prev = 0;
-        uint8 bastok_prev   = 0;
-        uint8 windurst_prev = 0;
-
-        Query = "SELECT region_control_prev, COUNT(*) FROM conquest_system WHERE region_control_prev < 3 GROUP BY region_control_prev;";
-
-        ret = sql->Query(Query);
-
-        if (ret != SQL_ERROR && sql->NumRows() != 0)
-        {
-            while (sql->NextRow() == SQL_SUCCESS)
-            {
-                if (sql->GetIntData(0) == 0)
-                {
-                    sandoria_prev = sql->GetIntData(1);
-                }
-                else if (sql->GetIntData(0) == 1)
-                {
-                    bastok_prev = sql->GetIntData(1);
-                }
-                else if (sql->GetIntData(0) == 2)
-                {
-                    windurst_prev = sql->GetIntData(1);
-                }
-            }
-        }
+        uint8 sandoria_prev = GetConquestData()->getPrevRegionControlCount(NATION_SANDORIA);
+        uint8 bastok_prev   = GetConquestData()->getPrevRegionControlCount(NATION_BASTOK);
+        uint8 windurst_prev = GetConquestData()->getPrevRegionControlCount(NATION_WINDURST);
 
         return GetAlliance(sandoria, bastok, windurst, sandoria_prev, bastok_prev, windurst_prev) == 1;
     }
 
     /************************************************************************
      *                                                                       *
-     *  Оставшееся количество дней до подсчета conquest                      *
+     *  Gets the number of Vanadiel days left for tally                      *
      *                                                                       *
      ************************************************************************/
 
@@ -652,35 +676,28 @@ namespace conquest
 
     /************************************************************************
      *                                                                       *
-     *  Узнаем страну, владеющую данной зоной                                *
+     *  Get the nation that owns the given ration                            *
      *                                                                       *
      ************************************************************************/
 
-    uint8 GetRegionOwner(REGION_TYPE RegionID)
+    uint8 GetRegionOwner(REGION_TYPE region)
     {
-        const char* Query = "SELECT region_control FROM conquest_system WHERE region_id = %d";
-
-        int32 ret = sql->Query(Query, static_cast<uint8>(RegionID));
-
-        if (ret != SQL_ERROR && sql->NumRows() != 0 && sql->NextRow() == SQL_SUCCESS)
-        {
-            return sql->GetIntData(0);
-        }
-        return NATION_NEUTRAL;
+        return GetConquestData()->getRegionOwner(region);
     }
 
     /************************************************************************
      *                                                                       *
-     *  Добавляем персонажу conquest points, основываясь на полученном опыте *
+     *  Adds conquest points to the character based on the exp gained.       *
+     *  Sends an update to world server with the influence change.           *
      *                                                                       *
      ************************************************************************/
 
-    // TODO: необходимо учитывать добавленные очки для еженедельного подсчета conquest
-
+    // TODO: Take into account the added points for the weekly tally
+    // NOTE: This todo was an old comment. Unsure if it's still valid
     uint32 AddConquestPoints(CCharEntity* PChar, uint32 exp)
     {
-        // ВНИМЕНИЕ: не нужно отправлять персонажу CConquestPacket,
-        // т.к. клиент сам запрашивает этот пакет через фиксированный промежуток времени
+        // NOTE: No need to send CConquestPacket,
+        // The client itself requests this packet after a fixed period of time
 
         REGION_TYPE region = PChar->loc.zone->GetRegionID();
 

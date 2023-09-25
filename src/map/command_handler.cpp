@@ -22,6 +22,7 @@
 #include "command_handler.h"
 
 #include "autotranslate.h"
+#include "common/async.h"
 #include "common/utils.h"
 #include "entities/charentity.h"
 #include "lua/lua_baseentity.h"
@@ -237,22 +238,20 @@ int32 CCommandHandler::call(sol::state& lua, CCharEntity* PChar, const std::stri
             std::string name       = PChar->name;
             std::string cmdlinestr = autotranslate::replaceBytes(commandline);
 
-            char escaped_name[16 * 2 + 1];
-            sql->EscapeString(escaped_name, name.c_str());
-
-            std::string escaped_gm_cmd;
-            escaped_gm_cmd.reserve(cmdname.length() * 2 + 1);
-            sql->EscapeString(escaped_gm_cmd.data(), (char*)cmdname.c_str());
-
-            std::string escaped_full_string;
-            escaped_full_string.reserve(commandline.size() * 2 + 1);
-            sql->EscapeString(escaped_full_string.data(), (char*)cmdlinestr.c_str());
-
-            const char* fmtQuery = "INSERT into audit_gm (date_time,gm_name,command,full_string) VALUES(current_timestamp(),'%s','%s','%s')";
-            if (sql->Query(fmtQuery, escaped_name, escaped_gm_cmd.data(), escaped_full_string.data()) == SQL_ERROR)
+            // clang-format off
+            Async::getInstance()->query([name, cmdname, cmdlinestr](SqlConnection* _sql)
             {
-                ShowError("cmdhandler::call: Failed to log GM command.");
-            }
+                auto escaped_name        = _sql->EscapeString(name);
+                auto escaped_cmdname     = _sql->EscapeString(cmdname);
+                auto escaped_commandline = _sql->EscapeString(cmdlinestr);
+
+                const char* fmtQuery = "INSERT into audit_gm (date_time,gm_name,command,full_string) VALUES(current_timestamp(),'%s','%s','%s')";
+                if (_sql->Query(fmtQuery, escaped_name.data(), escaped_cmdname.data(), escaped_commandline.data()) == SQL_ERROR)
+                {
+                    ShowError("cmdhandler::call: Failed to log GM command.");
+                }
+            });
+            // clang-format on
         }
     }
 

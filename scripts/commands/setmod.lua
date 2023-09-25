@@ -2,9 +2,6 @@
 -- func: setmod
 -- desc: Sets the specified modifier to the specified value on the cursor target or player
 -----------------------------------
-
-require("scripts/globals/status")
-
 cmdprops =
 {
     permission = 1,

@@ -1,11 +1,8 @@
 -----------------------------------
 -- Enhancing Spell Utilities
 -----------------------------------
-require("scripts/globals/spell_data")
 require("scripts/globals/jobpoints")
-require("scripts/globals/status")
 require("scripts/globals/utils")
-require("scripts/globals/msg")
 -----------------------------------
 xi = xi or {}
 xi.spells = xi.spells or {}
@@ -399,15 +396,24 @@ xi.spells.enhancing.calculateEnhancingDuration = function(caster, target, spell,
         duration = duration + target:getMod(xi.mod.SNEAK_DURATION)
 
     -- Bar-Element
-    elseif (spellEffect >= xi.effect.BARFIRE and spellEffect <= xi.effect.BARWATER) or spellEffect == xi.effect.BARAMNESIA or (spellEffect >= xi.effect.BARSLEEP and spellEffect <= xi.effect.BARVIRUS) then
+    elseif
+        (spellEffect >= xi.effect.BARFIRE and spellEffect <= xi.effect.BARWATER) or
+        spellEffect == xi.effect.BARAMNESIA or
+        (spellEffect >= xi.effect.BARSLEEP and spellEffect <= xi.effect.BARVIRUS)
+    then
         duration = utils.clamp(duration + 0.8 * (skillLevel - 180), 150, 240) -- Min duration is 2.5 minutes, Max duration is 4 minutes
 
     -- En-Spells
-    elseif (spellEffect >= xi.effect.ENFIRE and spellEffect <= xi.effect.ENWATER) or (spellEffect >= xi.effect.ENFIRE_II and spellEffect <= xi.effect.ENWATER_II) then
-        if caster:getEquipID(xi.slot.MAIN) == xi.items.BUZZARD_TUCK or caster:getEquipID(xi.slot.SUB) == xi.items.BUZZARD_TUCK then
+    elseif
+        (spellEffect >= xi.effect.ENFIRE and spellEffect <= xi.effect.ENWATER) or
+        (spellEffect >= xi.effect.ENFIRE_II and spellEffect <= xi.effect.ENWATER_II)
+    then
+        if
+            caster:getEquipID(xi.slot.MAIN) == xi.items.BUZZARD_TUCK or
+            caster:getEquipID(xi.slot.SUB) == xi.items.BUZZARD_TUCK
+        then
             duration = duration + 30 -- Sword enhancement spell duration +5
         end
-
     end
 
     --------------------
@@ -455,7 +461,10 @@ xi.spells.enhancing.useEnhancingSpell = function(caster, target, spell)
     -- Handle exceptions and weird behaviour here, before calculating anything.
     ------------------------------------------------------------
 
-    if target:hasStatusEffect(xi.effect.ALL_MISS) and target:getStatusEffect(xi.effect.ALL_MISS):getPower() > 1 then
+    if
+        target:hasStatusEffect(xi.effect.ALL_MISS) and
+        target:getStatusEffect(xi.effect.ALL_MISS):getPower() > 1
+    then
         spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
         return 0
     end

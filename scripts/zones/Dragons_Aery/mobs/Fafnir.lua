@@ -4,7 +4,6 @@
 -----------------------------------
 local ID = require("scripts/zones/Dragons_Aery/IDs")
 mixins = { require("scripts/mixins/rage") }
-require("scripts/globals/status")
 require("scripts/globals/titles")
 -----------------------------------
 local entity = {}
@@ -14,12 +13,12 @@ entity.onMobSpawn = function(mob)
     mob:setMobMod(xi.mobMod.DRAW_IN, 1)
     mob:setMobMod(xi.mobMod.DRAW_IN_CUSTOM_RANGE, 20)
     mob:setMobMod(xi.mobMod.DRAW_IN_FRONT, 1)
-    mob:setMobMod(xi.mobMod.WEAPON_BONUS, 152)
+    mob:setMobMod(xi.mobMod.WEAPON_BONUS, 48) -- Level 90 + 2 + 48 = 140 Base Weapon Damage
     mob:setMod(xi.mod.ATT, 489)
     mob:setMod(xi.mod.STUNRES, 100)
     mob:setMod(xi.mod.DARK_EEM, 40)
     mob:setMod(xi.mod.LIGHT_EEM, 40)
-    mob:setMod(xi.mod.SLEEPRESBUILD, 1)
+    mob:setMod(xi.mod.SLEEPRESBUILD, 30)
     mob:setMod(xi.mod.POISONRES, 10)
     mob:setMod(xi.mod.SLOWRES, 10)
     mob:setMod(xi.mod.GRAVITYRES, 10)

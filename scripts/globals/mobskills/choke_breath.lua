@@ -6,8 +6,6 @@
 -- 100 physical damage slashing * pdif
 ---------------------------------------------
 require("scripts/globals/mobskills")
-require("scripts/globals/settings")
-require("scripts/globals/status")
 ---------------------------------------------
 local mobskillObject = {}
 

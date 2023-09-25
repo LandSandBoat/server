@@ -4,7 +4,6 @@
 -----------------------------------
 local ID = require("scripts/zones/Maquette_Abdhaljs-Legion_B/IDs")
 require("scripts/globals/instance")
-require("scripts/globals/keyitems")
 -----------------------------------
 local instanceObject = {}
 

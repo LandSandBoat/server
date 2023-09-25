@@ -2,9 +2,6 @@
 -- func: addeffect
 -- desc: Removes the given effect from the given player.
 -----------------------------------
-
-require("scripts/globals/status")
-
 cmdprops =
 {
     permission = 1,

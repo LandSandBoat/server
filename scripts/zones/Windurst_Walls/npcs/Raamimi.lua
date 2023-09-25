@@ -2,11 +2,9 @@
 -- Area: Windurst Walls
 --  Location: X:-81  Y:-9  Z:103
 --  NPC: Raamimi
--- Working 100%
 --  Involved in Quest: To Bee or Not to Bee?
 -----------------------------------
 local ID = require("scripts/zones/Windurst_Walls/IDs")
-require("scripts/globals/settings")
 require("scripts/globals/quests")
 -----------------------------------
 local entity = {}

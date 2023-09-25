@@ -1,10 +1,8 @@
 -----------------------------------
 -- Area: Windurst Waters
 --  NPC: Pulykiki
--- Working 100%
 -----------------------------------
 local ID = require("scripts/zones/Windurst_Waters/IDs")
-require("scripts/globals/settings")
 -----------------------------------
 local entity = {}
 
@@ -22,6 +20,7 @@ entity.onTrigger = function(player, npc)
             return
         end
     end
+
     player:startEvent(511)
 end
 

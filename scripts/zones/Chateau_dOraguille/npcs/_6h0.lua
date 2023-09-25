@@ -5,9 +5,6 @@
 -- Involved in Missions: 3-1, 5-2, 8-2
 -- !pos -38 -3 73 233
 -----------------------------------
-require("scripts/globals/status")
-require("scripts/globals/settings")
-require("scripts/globals/keyitems")
 require("scripts/globals/missions")
 require("scripts/globals/quests")
 require("scripts/globals/titles")
@@ -52,7 +49,7 @@ entity.onTrigger = function(player, npc)
     if
         player:getRank(player:getNation()) >= 6 and
         player:hasKeyItem(xi.ki.SAN_DORIA_TRUST_PERMIT) and
-        not player:hasSpell(905)
+        not player:hasSpell(xi.magic.spell.TRION)
     then
         player:startEvent(574, 0, 0, 0, TrustMemory(player))
 

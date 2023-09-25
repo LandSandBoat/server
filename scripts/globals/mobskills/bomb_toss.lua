@@ -3,23 +3,10 @@
 -- Throws a bomb at an enemy.
 -----------------------------------
 require("scripts/globals/mobskills")
-require("scripts/globals/settings")
-require("scripts/globals/status")
 -----------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
-    local suicideCheck = math.random(0, 100)
-
-    if
-        not mob:isNM() and
-        not mob:isInDynamis() and
-        suicideCheck <= 15 -- 15% chance to use bomb_toss_suicide if bomb_toss is picked (50%)
-    then
-        mob:useMobAbility(592)
-        return 1
-    end
-
     return 0
 end
 

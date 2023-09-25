@@ -2,7 +2,6 @@
 -- Keeping Notes
 -- Ahkk Jharcham, Whitegate , !pos 0.1 -1 -76 50
 -----------------------------------
-require('scripts/globals/items')
 require('scripts/globals/quests')
 require('scripts/globals/npc_util')
 require('scripts/globals/interaction/quest')
@@ -64,7 +63,8 @@ quest.sections =
                 [11] = function(player, csid, option, npc)
                     if quest:complete(player) then
                         player:confirmTrade()
-                        player:setMoghouseFlag(16)
+                        local mhflag = player:getMoghouseFlag()
+                        player:setMoghouseFlag(mhflag + 0x0010)
                     end
                 end,
             },

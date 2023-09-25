@@ -3,9 +3,6 @@
 -- Item: Spartan Hoplon
 -- Item Effect: Phalanx
 -----------------------------------
-require("scripts/globals/status")
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

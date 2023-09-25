@@ -2,9 +2,6 @@
 -- Global Casket utility script
 -----------------------------------
 require("scripts/globals/casket_loot")
-require("scripts/globals/settings")
-require("scripts/globals/status")
-require("scripts/globals/msg")
 require("scripts/globals/roe")
 -----------------------------------
 
@@ -192,7 +189,10 @@ local function dropChance(player)
     end
 
     local rand = math.random()
-    if rand < utils.clamp(xi.settings.main.CASKET_DROP_RATE + kupowersMMBPower + prowessCasketsPower, 0, 1) and not player:hasStatusEffect(xi.effect.CONFRONTATION) then
+    if
+        rand < utils.clamp(xi.settings.main.CASKET_DROP_RATE + kupowersMMBPower + prowessCasketsPower, 0, 1) and
+        not player:hasStatusEffect(xi.effect.CONFRONTATION)
+    then
         return true
     end
 
@@ -750,7 +750,7 @@ xi.caskets.onTrade = function(player, npc, trade)
     if locked == 1 then
         if
             player:getMainJob() == xi.job.THF and
-            npcUtil.tradeHasExactly(trade, 1022)
+            npcUtil.tradeHasExactly(trade, xi.items.SET_OF_THIEFS_TOOLS)
         then
             local splitNumbers = {}
             local tradeAttempt = math.random()

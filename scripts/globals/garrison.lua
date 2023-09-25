@@ -3,11 +3,9 @@
 -----------------------------------
 require('scripts/globals/common')
 require('scripts/globals/garrison_data')
-require('scripts/globals/items')
 require('scripts/globals/mobs')
 require('scripts/globals/npc_util')
 require('scripts/globals/pathfind')
-require('scripts/globals/status')
 require('scripts/globals/utils')
 require('scripts/globals/zone')
 -----------------------------------
@@ -126,7 +124,7 @@ xi.garrison.spawnNPC = function(zone, zoneData, x, y, z, rot, name, groupId, loo
 
     -- Use the mob object as you normally would
     mob:setSpawn(x, y, z, rot)
-    mob:setDropID(0)
+    mob:setMobMod(xi.mobMod.NO_DROPS, 1)
     mob:setRoamFlags(xi.roamFlag.SCRIPTED)
 
     mob:spawn()

@@ -4,7 +4,6 @@
 -- Assault: Orichalcum Survey
 -----------------------------------
 local ID = require("scripts/zones/Leujaoam_Sanctum/IDs")
-require('scripts/globals/settings')
 require("scripts/globals/assault")
 -----------------------------------
 local entity = {}
@@ -31,7 +30,7 @@ entity.onTrigger = function(player, npc)
     end
 
     if strikes < 8 then
-        player:sendEmote(GetNPCByID(npc:getID(), instance), xi.emote.EXCAVATION, xi.emoteMode.MOTION)
+        player:sendEmote(GetNPCByID(npc:getID(), instance), xi.emote.EXCAVATION, xi.emoteMode.MOTION, true)
         npc:setLocalVar("strikeCounter", strikes + 1)
         local rand = math.random(1, 100)
 

@@ -9,9 +9,6 @@
 -- Store TP +6
 -- Resist virus +5
 -----------------------------------
-require("scripts/globals/status")
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

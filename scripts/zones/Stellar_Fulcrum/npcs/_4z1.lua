@@ -2,7 +2,6 @@
 -- Area: Stellar Fulcrum
 --  NPC: Qe'Lov Gate
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/bcnm")
 require("scripts/globals/missions")
 -----------------------------------

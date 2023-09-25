@@ -2,7 +2,6 @@
 -- Trust: Apururu UC
 -----------------------------------
 require("scripts/globals/trust")
-require("scripts/globals/items")
 -----------------------------------
 local spellObject = {}
 

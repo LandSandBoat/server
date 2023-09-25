@@ -4,9 +4,6 @@
 -- Item Effect: AGI +3
 -- Duration: 60 seconds
 -----------------------------------
-require("scripts/globals/status")
-require("scripts/globals/items")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

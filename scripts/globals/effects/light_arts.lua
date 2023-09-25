@@ -1,8 +1,6 @@
 -----------------------------------
 -- xi.effect.LIGHT_ARTS
 -----------------------------------
-require("scripts/globals/status")
------------------------------------
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

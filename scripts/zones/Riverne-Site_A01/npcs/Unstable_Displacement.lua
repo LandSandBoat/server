@@ -24,6 +24,7 @@ entity.onEventUpdate = function(player, csid, option, extras)
 end
 
 entity.onEventFinish = function(player, csid, option)
+    xi.bcnm.onEventFinish(player, csid, option)
 end
 
 return entity

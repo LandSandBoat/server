@@ -9,8 +9,6 @@
 -- TODO: This move can miss, so it's on the physical hit calc, but it's only effect is to apply curse. This means it either applies or misses, no resist state.
 -----------------------------------
 require("scripts/globals/mobskills")
-require("scripts/globals/settings")
-require("scripts/globals/status")
 -----------------------------------
 local mobskillObject = {}
 

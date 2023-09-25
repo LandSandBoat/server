@@ -15,4 +15,4 @@ CREATE TABLE IF NOT EXISTS `char_style` (
   `sub` smallint(5) unsigned NOT NULL DEFAULT '0',
   `ranged` smallint(5) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`charid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AVG_ROW_LENGTH=20;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 AVG_ROW_LENGTH=20;

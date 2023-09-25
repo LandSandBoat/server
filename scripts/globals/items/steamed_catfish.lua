@@ -11,9 +11,6 @@
 -- Earth Res 10
 -- Ranged Accuracy +6% (cap 15)
 -----------------------------------
-require("scripts/globals/status")
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

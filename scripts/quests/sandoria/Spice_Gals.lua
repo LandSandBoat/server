@@ -4,11 +4,8 @@
 -----------------------------------
 require('scripts/globals/interaction/quest')
 require('scripts/globals/weaponskillids')
-require('scripts/globals/keyitems')
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
-require('scripts/globals/status')
-require('scripts/globals/items')
 -----------------------------------
 local ID = require('scripts/zones/Riverne-Site_A01/IDs')
 -----------------------------------
@@ -121,9 +118,10 @@ quest.sections =
             onEventFinish =
             {
                 [725] = function(player, csid, option, npc)
-                    player:delKeyItem(xi.ki.RIVERNEWORT)
-                    npcUtil.giveItem(player, xi.items.MIRATETES_MEMOIRS)
-                    quest:setVar(player, 'Option', getConquestTally())
+                    if npcUtil.giveItem(player, xi.items.MIRATETES_MEMOIRS) then
+                        player:delKeyItem(xi.ki.RIVERNEWORT)
+                        quest:setVar(player, 'Option', getConquestTally())
+                    end
                 end,
             },
         },

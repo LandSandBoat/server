@@ -27,7 +27,7 @@ CREATE TABLE `fishing_bait_affinity` (
   `fishid` smallint(5) unsigned NOT NULL DEFAULT '0',
   `power` smallint(5) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`baitid`,`fishid`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AVG_ROW_LENGTH=28;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 AVG_ROW_LENGTH=28;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -105,8 +105,13 @@ INSERT INTO `fishing_bait_affinity` VALUES (16999,4307,3);
 INSERT INTO `fishing_bait_affinity` VALUES (16999,5462,3);
 INSERT INTO `fishing_bait_affinity` VALUES (16999,4354,2);
 INSERT INTO `fishing_bait_affinity` VALUES (16999,5458,2);
-INSERT INTO `fishing_bait_affinity` VALUES (16999,5330,10);
-INSERT INTO `fishing_bait_affinity` VALUES (16999,5329,10);
+INSERT INTO `fishing_bait_affinity` VALUES (16999,5330,10); -- Goldfish Scooping (Sunbreeze Festival)
+INSERT INTO `fishing_bait_affinity` VALUES (16999,5329,10); -- Goldfish Scooping (Sunbreeze Festival)
+INSERT INTO `fishing_bait_affinity` VALUES (17003,4310,10); -- Goldfish Scooping (Sunbreeze Festival)
+INSERT INTO `fishing_bait_affinity` VALUES (17003,4311,10); -- Goldfish Scooping (Sunbreeze Festival)
+INSERT INTO `fishing_bait_affinity` VALUES (17003,4312,10); -- Goldfish Scooping (Sunbreeze Festival)
+INSERT INTO `fishing_bait_affinity` VALUES (17003,5714,10); -- Goldfish Scooping (Sunbreeze Festival)
+INSERT INTO `fishing_bait_affinity` VALUES (17003,5715,10); -- Goldfish Scooping (Sunbreeze Festival)
 INSERT INTO `fishing_bait_affinity` VALUES (17006,5127,2);
 INSERT INTO `fishing_bait_affinity` VALUES (17006,5468,2);
 INSERT INTO `fishing_bait_affinity` VALUES (17006,4475,2);
@@ -173,7 +178,6 @@ INSERT INTO `fishing_bait_affinity` VALUES (17396,4443,3);
 INSERT INTO `fishing_bait_affinity` VALUES (17396,4472,2);
 INSERT INTO `fishing_bait_affinity` VALUES (17396,4528,2);
 INSERT INTO `fishing_bait_affinity` VALUES (17396,5447,3);
-INSERT INTO `fishing_bait_affinity` VALUES (17396,4829,2);
 INSERT INTO `fishing_bait_affinity` VALUES (17396,4469,2);
 INSERT INTO `fishing_bait_affinity` VALUES (17396,4306,2);
 INSERT INTO `fishing_bait_affinity` VALUES (17396,4427,2);
@@ -329,13 +333,16 @@ INSERT INTO `fishing_bait_affinity` VALUES (16993,5458,2);
 INSERT INTO `fishing_bait_affinity` VALUES (16993,5329,10);
 INSERT INTO `fishing_bait_affinity` VALUES (16993,5330,10);
 INSERT INTO `fishing_bait_affinity` VALUES (16994,5476,4);
+INSERT INTO `fishing_bait_affinity` VALUES (16994,4306,2);
 INSERT INTO `fishing_bait_affinity` VALUES (16994,4443,4);
 INSERT INTO `fishing_bait_affinity` VALUES (16994,4472,4);
 INSERT INTO `fishing_bait_affinity` VALUES (16994,4464,4);
 INSERT INTO `fishing_bait_affinity` VALUES (16994,4428,4);
 INSERT INTO `fishing_bait_affinity` VALUES (16994,4454,4);
+INSERT INTO `fishing_bait_affinity` VALUES (16994,4528,2);
 INSERT INTO `fishing_bait_affinity` VALUES (16994,5330,10);
 INSERT INTO `fishing_bait_affinity` VALUES (16994,5329,10);
+INSERT INTO `fishing_bait_affinity` VALUES (16994,5447,2);
 INSERT INTO `fishing_bait_affinity` VALUES (17394,5455,2);
 INSERT INTO `fishing_bait_affinity` VALUES (17394,4461,2);
 INSERT INTO `fishing_bait_affinity` VALUES (17394,4479,2);
@@ -639,17 +646,6 @@ INSERT INTO `fishing_bait_affinity` VALUES (17393,5120,2);
 INSERT INTO `fishing_bait_affinity` VALUES (17393,5141,2);
 INSERT INTO `fishing_bait_affinity` VALUES (17393,5330,10);
 INSERT INTO `fishing_bait_affinity` VALUES (17393,5329,10);
-INSERT INTO `fishing_bait_affinity` VALUES (16944,5476,2);
-INSERT INTO `fishing_bait_affinity` VALUES (16944,5474,3);
-INSERT INTO `fishing_bait_affinity` VALUES (16944,4443,2);
-INSERT INTO `fishing_bait_affinity` VALUES (16944,4472,3);
-INSERT INTO `fishing_bait_affinity` VALUES (16944,4528,2);
-INSERT INTO `fishing_bait_affinity` VALUES (16944,4428,2);
-INSERT INTO `fishing_bait_affinity` VALUES (16944,5447,2);
-INSERT INTO `fishing_bait_affinity` VALUES (16944,4454,2);
-INSERT INTO `fishing_bait_affinity` VALUES (16944,4477,2);
-INSERT INTO `fishing_bait_affinity` VALUES (16944,4306,2);
-INSERT INTO `fishing_bait_affinity` VALUES (16944,4464,2);
 INSERT INTO `fishing_bait_affinity` VALUES (17392,4461,2);
 INSERT INTO `fishing_bait_affinity` VALUES (17392,4471,2);
 INSERT INTO `fishing_bait_affinity` VALUES (17392,4399,2);

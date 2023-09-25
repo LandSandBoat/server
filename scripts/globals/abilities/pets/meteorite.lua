@@ -1,10 +1,7 @@
 -----------------------------------
 -- Meteorite
 -----------------------------------
-require("scripts/globals/settings")
-require("scripts/globals/status")
 require("scripts/globals/mobskills")
-
 -----------------------------------
 local abilityObject = {}
 
@@ -19,7 +16,7 @@ abilityObject.onPetAbility = function(target, pet, skill, summoner)
     params.element = xi.magic.ele.LIGHT
     params.includemab = true
     params.maccBonus = xi.summon.getSummoningSkillOverCap(pet)
-    params.ignoreStateLock = true
+    params.damageSpell = true
 
     -- TODO: Need to increase ftp a little (roughly 5%)
     local damage = xi.summon.avatarMagicSkill(pet, target, skill, params)

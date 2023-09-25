@@ -2,7 +2,6 @@
 -- Zone: AlTaieu (33)
 -----------------------------------
 local ID = require('scripts/zones/AlTaieu/IDs')
-require('scripts/globals/keyitems')
 require('scripts/globals/missions')
 -----------------------------------
 local zoneObject = {}
@@ -10,8 +9,8 @@ local zoneObject = {}
 zoneObject.onInitialize = function(zone)
 end
 
-zoneObject.onConquestUpdate = function(zone, updatetype)
-    xi.conq.onConquestUpdate(zone, updatetype)
+zoneObject.onConquestUpdate = function(zone, updatetype, influence, owner, ranking, isConquestAlliance)
+    xi.conq.onConquestUpdate(zone, updatetype, influence, owner, ranking, isConquestAlliance)
 end
 
 zoneObject.onZoneIn = function(player, prevZone)

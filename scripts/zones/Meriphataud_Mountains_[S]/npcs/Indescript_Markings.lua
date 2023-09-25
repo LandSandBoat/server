@@ -5,7 +5,6 @@
 -- !pos -389 -9 92 97
 -----------------------------------
 local ID = require("scripts/zones/Meriphataud_Mountains_[S]/IDs")
-require("scripts/globals/keyitems")
 -----------------------------------
 local entity = {}
 

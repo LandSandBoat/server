@@ -5,8 +5,6 @@
 -- !pos -207.835 -0.751 -25.498 151
 -----------------------------------
 local ID = require("scripts/zones/Castle_Oztroja/IDs")
-require("scripts/globals/keyitems")
-require("scripts/globals/settings")
 require("scripts/globals/dynamis")
 -----------------------------------
 local entity = {}
@@ -150,8 +148,7 @@ entity.onEventFinish = function(player, csid, option)
     -- refund timeless hourglass
     elseif csid == 97 then
         player:tradeComplete()
-        player:addGil(xi.settings.main.TIMELESS_HOURGLASS_COST)
-        player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.main.TIMELESS_HOURGLASS_COST)
+        npcUtil.giveCurrency(player, 'gil', xi.settings.main.TIMELESS_HOURGLASS_COST)
 
     -- singles to hundos
     elseif csid == 55 then
@@ -182,7 +179,7 @@ entity.onEventFinish = function(player, csid, option)
             player:tradeComplete()
             for i = 1, slotsReq do
                 if i < slotsReq or xi.settings.main.CURRENCY_EXCHANGE_RATE % 99 == 0 then
-                    player:addItem(currency[2], xi.settings.main.CURRENCY_EXCHANGE_RATE)
+                    player:addItem(currency[2], 99)
                 else
                     player:addItem(currency[2], xi.settings.main.CURRENCY_EXCHANGE_RATE % 99)
                 end

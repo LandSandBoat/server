@@ -2,8 +2,6 @@
 -- Area: Ifrit's Cauldron
 --   NM: Bomb Prince
 -----------------------------------
-require("scripts/globals/status")
------------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)

@@ -1,8 +1,6 @@
 -----------------------------------
 -- xi.effect.BARBLIZZARD
 -----------------------------------
-require("scripts/globals/status")
------------------------------------
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

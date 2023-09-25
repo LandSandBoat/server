@@ -1,8 +1,6 @@
 -----------------------------------
 -- Megalith Throw
 -----------------------------------
-require("scripts/globals/settings")
-require("scripts/globals/status")
 require("scripts/globals/summon")
 -----------------------------------
 local abilityObject = {}
@@ -37,6 +35,7 @@ abilityObject.onPetAbility = function(target, pet, skill, summoner)
     if totaldamage > 0 then
         xi.magic.applyAbilityResistance(pet, target, effectParams)
     end
+
     return totaldamage
 end
 

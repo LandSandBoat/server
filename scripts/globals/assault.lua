@@ -2,11 +2,8 @@
 -- Assault Utilities
 -- desc: Common functionality for Assaults
 -----------------------------------
-require("scripts/globals/settings")
 require("scripts/globals/besieged")
-require("scripts/globals/keyitems")
 require("scripts/globals/npc_util")
-require("scripts/globals/status")
 require("scripts/globals/zone")
 -----------------------------------
 xi = xi or {}
@@ -108,28 +105,23 @@ xi.assault.afterInstanceRegister = function(player, fireFlies)
 end
 
 xi.assault.onInstanceFailure = function(instance)
-    local chars = instance:getChars()
-    local mobs = instance:getMobs()
-
-    for _, entity in pairs(mobs) do
-        local mobID = entity:getID()
-        DespawnMob(mobID, instance)
+    for _, entity in pairs(instance:getMobs()) do
+        DespawnMob(entity:getID(), instance)
     end
 
-    for _, entity in pairs(chars) do
+    for _, entity in pairs(instance:getChars()) do
         entity:messageSpecial(zones[instance:getZone():getID()].text.MISSION_FAILED, 10, 10)
         entity:startEvent(102)
     end
 end
 
 xi.assault.onInstanceComplete = function(instance, posX, posZ)
-    local chars = instance:getChars()
     local ID = zones[instance:getZone():getID()]
 
     GetNPCByID(ID.npc.RUNE_OF_RELEASE, instance):setStatus(xi.status.NORMAL)
     GetNPCByID(ID.npc.ANCIENT_LOCKBOX, instance):setStatus(xi.status.NORMAL)
 
-    for _, entity in pairs(chars) do
+    for _, entity in pairs(instance:getChars()) do
         entity:messageSpecial(ID.text.RUNE_UNLOCKED_POS, posX, posZ)
     end
 end
@@ -137,8 +129,8 @@ end
 xi.assault.instanceOnEventFinish = function(player, csid, zone)
     if csid == 102 then
         local instance = player:getInstance()
-        local chars = instance:getChars()
-        for _, entity in pairs(chars) do
+
+        for _, entity in pairs(instance:getChars()) do
             entity:setPos(0, 0, 0, 0, zone)
         end
     end
@@ -146,27 +138,23 @@ end
 
 xi.assault.runeReleaseFinish = function(player, csid, option)
     if csid == 100 and option == 1 then
-        local instance = player:getInstance()
-        local chars = instance:getChars()
-        local zone = player:getZoneID()
-        local ID = zones[zone]
-        local playerpoints = math.max((#chars - 3) * 0.1, 0)
-        local points = 0
-        local assaultID = player:getCurrentAssault()
-        local mobs = instance:getMobs()
-        local pointsArea = xi.assault.getAssaultArea(player)
+        local instance      = player:getInstance()
+        local chars         = instance:getChars()
+        local ID            = zones[player:getZoneID()]
+        local assaultID     = player:getCurrentAssault()
+        local playerPenalty = math.max((#chars - 3) * 0.1, 0)
+        local bonusPoints   = instance:getLocalVar("BonusPoints")
+        local pointModifier = xi.assault.missionInfo[assaultID].minimumPoints
+        local points        = pointModifier - (pointModifier * playerPenalty)
 
-        for _, entity in pairs(mobs) do
-            local mobID = entity:getID()
-            DespawnMob(mobID, instance)
+        for _, entity in pairs(instance:getMobs()) do
+            DespawnMob(entity:getID(), instance)
         end
 
         for _, entity in pairs(chars) do
             if entity:getLocalVar("AssaultPointsAwarded") == 0 then
                 entity:setLocalVar("AssaultPointsAwarded", 1)
 
-                local pointModifier = xi.assault.missionInfo[assaultID].minimumPoints
-                points = pointModifier - (pointModifier * playerpoints)
                 if entity:getCharVar("Assault_Armband") == 1 then
                     points = points * 1.1
                 end
@@ -174,15 +162,13 @@ xi.assault.runeReleaseFinish = function(player, csid, option)
                 if entity:hasCompletedAssault(assaultID) then
                     points = math.floor(points)
                     entity:setVar("AssaultPromotion", entity:getCharVar("AssaultPromotion") + 1)
-                    entity:addAssaultPoint(pointsArea, points)
-                    entity:messageSpecial(ID.text.ASSAULT_POINTS_OBTAINED, points)
                 else
                     points = math.floor(points * 1.5)
                     entity:setVar("AssaultPromotion", entity:getCharVar("AssaultPromotion") + 5)
-                    entity:addAssaultPoint(pointsArea, points)
-                    entity:messageSpecial(ID.text.ASSAULT_POINTS_OBTAINED, points)
                 end
 
+                entity:addAssaultPoint(xi.assault.getAssaultArea(player), points + bonusPoints)
+                entity:messageSpecial(ID.text.ASSAULT_POINTS_OBTAINED, points + bonusPoints)
                 entity:setVar("AssaultComplete", 1)
                 entity:startEvent(102)
             end
@@ -209,9 +195,14 @@ xi.assault.adjustMobLevel = function(mob)
     end
 end
 
-xi.assault.addTempItem = function(mob, player, item, chance)
+xi.assault.addMobDropTempItem = function(mob, player, item, chance)
+    if chance == nil then
+        chance = 100
+    end
+
     if mob:getLocalVar("tempItem") == 0 then
         mob:setLocalVar("tempItem", 1)
+
         if math.random(0, 100) <= chance then
             npcUtil.giveTempItem(player, item)
         end
@@ -232,6 +223,7 @@ xi.assault.hasTempItem = function(player, item)
     return player:hasItem(item, xi.inventoryLocation.TEMPITEMS)
 end
 
+-- Todo: Replace mob -> instance after pt. 1 Assaults complete
 xi.assault.progressInstance = function(mob, amount)
     local instance = mob:getInstance()
 
@@ -244,15 +236,12 @@ xi.assault.progressInstance = function(mob, amount)
     end
 end
 
-xi.assault.setProgress = function(mob, amount)
-    local instance = mob:getInstance()
-
-    if instance then
-        if amount == nil then
-            amount = 1
-        end
-
-        instance:setProgress(amount)
+xi.assault.addBonusPoints = function(instance, amount)
+    if
+        instance and
+        amount > 0
+    then
+        instance:setLocalVar("BonusPoints", instance:getLocalVar("BonusPoints") + amount)
     end
 end
 

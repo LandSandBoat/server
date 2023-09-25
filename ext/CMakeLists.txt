@@ -1,12 +1,9 @@
 # add_subdirectory(lua) # Handled globally
 # add_subdirectory(mysql) # Handled globally
 # add_subdirectory(zmq) # Handled globally
-
+# add_subdirectory(openssl) # Handled globally
 add_subdirectory(concurrentqueue)
-add_subdirectory(detour)
-add_subdirectory(recast)
 add_subdirectory(sol)
-add_subdirectory(spdlog)
 
 option(TRACY_ENABLE "Enable Tracy profiling." OFF)
 
@@ -62,11 +59,49 @@ if(TRACY_ENABLE)
     endif()
 endif(TRACY_ENABLE)
 
+# NOTE: We are not using the latest versions of spdlog, since the
+#     : version of fmt it is bundled with deprecated some arg mapping
+#     : that we use in a lot of places (formatting enums as ints and
+#     : formatting non-void pointers).
+CPMAddPackage(
+    NAME spdlog
+    GITHUB_REPOSITORY gabime/spdlog
+    GIT_TAG v1.9.2
+) # defines: spdlog
+
+# NOTE: Using the 'release-2.0' branch
+CPMAddPackage(
+    NAME recastnavigation
+    GITHUB_REPOSITORY recastnavigation/recastnavigation
+    GIT_TAG 67c36bda750f36b2b4152db57a23170ed7a0683c
+    OPTIONS
+        "RECASTNAVIGATION_DEMO OFF"
+        "RECASTNAVIGATION_TESTS OFF"
+        "RECASTNAVIGATION_EXAMPLES OFF"
+) # defines: RecastNavigation::Recast, RecastNavigation::Detour
+
+CPMAddPackage(
+    NAME fast_obj
+    GITHUB_REPOSITORY thisistherk/fast_obj
+    GIT_TAG 85778da5fc320b7e52885f8e869edc079695cc79
+) # defines: fast_obj
+
 CPMAddPackage(
     NAME argparse
     GITHUB_REPOSITORY p-ranav/argparse
     GIT_TAG f901d9edb47d45a287ca44d5bab48540c1fcdcce
 ) # defines: argparse
+
+CPMAddPackage(
+    NAME task_system
+    GITHUB_REPOSITORY p-ranav/task_system
+    GIT_TAG 241acb039152b646589fcbbcfb4d8d8e5bddc815
+) # defines: task_system
+
+if(task_system_ADDED)
+    add_library(task_system INTERFACE)
+    target_include_directories(task_system SYSTEM INTERFACE ${task_system_SOURCE_DIR}/include/task_system/)
+endif()
 
 CPMAddPackage(
     NAME efsw
@@ -111,30 +146,88 @@ if(pcg-cpp_ADDED)
     target_include_directories(pcg-cpp SYSTEM INTERFACE ${pcg-cpp_SOURCE_DIR}/include/)
 endif()
 
+CPMAddPackage(
+    NAME asio
+    VERSION 1.28.0
+    GITHUB_REPOSITORY chriskohlhoff/asio
+    GIT_TAG asio-1-28-0 # asio uses non-standard version tag, we must specify GIT_TAG
+) #defines asio
+
+# ASIO doesn't use CMake, we have to configure it manually. Extra notes for using on Windows:
+#
+# If _WIN32_WINNT is not set, ASIO assumes _WIN32_WINNT=0x0501, i.e. Windows XP target, which is
+# definitely not the platform which most users target.
+if(asio_ADDED)
+    add_library(asio INTERFACE)
+
+    target_include_directories(asio SYSTEM INTERFACE ${asio_SOURCE_DIR}/asio/include)
+
+    target_compile_definitions(asio INTERFACE ASIO_STANDALONE ASIO_NO_DEPRECATED)
+
+    target_link_libraries(asio INTERFACE Threads::Threads)
+
+    if(WIN32)
+        # macro see @ https://stackoverflow.com/a/40217291/1746503
+        macro(get_win32_winnt version)
+            if(CMAKE_SYSTEM_VERSION)
+                set(ver ${CMAKE_SYSTEM_VERSION})
+                string(REGEX MATCH "^([0-9]+).([0-9])" ver ${ver})
+                string(REGEX MATCH "^([0-9]+)" verMajor ${ver})
+
+                # Check for Windows 10, b/c we'll need to convert to hex 'A'.
+                if("${verMajor}" MATCHES "10")
+                    set(verMajor "A")
+                    string(REGEX REPLACE "^([0-9]+)" ${verMajor} ver ${ver})
+                endif("${verMajor}" MATCHES "10")
+
+                # Remove all remaining '.' characters.
+                string(REPLACE "." "" ver ${ver})
+
+                # Prepend each digit with a zero.
+                string(REGEX REPLACE "([0-9A-Z])" "0\\1" ver ${ver})
+                set(${version} "0x${ver}")
+            endif()
+        endmacro()
+
+        if(NOT DEFINED _WIN32_WINNT)
+            get_win32_winnt(ver)
+            set(_WIN32_WINNT ${ver})
+        endif()
+
+        message(STATUS "Set _WIN32_WINNET=${_WIN32_WINNT}")
+
+        target_compile_definitions(asio INTERFACE _WIN32_WINNT=${_WIN32_WINNT})
+    endif()
+endif()
+
 set(EXTERNAL_LIBS
+    spdlog
     concurrentqueue
     mariadbclient
-    spdlog
-    recast
-    detour
+    RecastNavigation::Recast
+    RecastNavigation::Detour
+    fast_obj
     sol2_single
     argparse
+    task_system
     efsw
     jthread-lite
     httplib::httplib
     nlohmann_json::nlohmann_json
     pcg-cpp
+    asio
 )
 
-if (WIN32)
-    #add wepoll for epoll support on windows
+if(WIN32)
+    # add wepoll for epoll support on windows
     add_subdirectory(wepoll)
 
     list(APPEND EXTERNAL_LIBS
         wepoll
     )
+
 # backwards needs these to add to linker
-elseif (APPLE)
+elseif(APPLE)
     # MacOS has bfd built in clang
     list(APPEND EXTERNAL_LIBS
         dl

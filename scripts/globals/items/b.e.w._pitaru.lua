@@ -6,9 +6,6 @@
 -- MP +9% (cap 130)
 -- Increases rate of magic skill gains by 80%
 -----------------------------------
-require("scripts/globals/status")
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

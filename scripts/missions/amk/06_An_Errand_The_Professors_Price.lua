@@ -11,7 +11,6 @@
 -- Shantotto      : !pos 122 -2 112 239
 -----------------------------------
 require('scripts/globals/confrontation')
-require('scripts/globals/keyitems')
 require('scripts/globals/missions')
 require('scripts/globals/npc_util')
 require('scripts/globals/interaction/mission')

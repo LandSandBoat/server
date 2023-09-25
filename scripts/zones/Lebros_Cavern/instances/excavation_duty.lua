@@ -4,7 +4,6 @@
 local ID = require("scripts/zones/Lebros_Cavern/IDs")
 require("scripts/globals/assault")
 require("scripts/globals/instance")
-require("scripts/globals/items")
 -----------------------------------
 local instanceObject = {}
 
@@ -58,6 +57,7 @@ instanceObject.onInstanceComplete = function(instance)
 end
 
 instanceObject.onEventFinish = function(player, csid, option)
+    xi.assault.instanceOnEventFinish(player, csid, xi.zone.MOUNT_ZHAYOLM)
 end
 
 return instanceObject

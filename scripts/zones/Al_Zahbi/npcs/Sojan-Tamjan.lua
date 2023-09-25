@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Al Zahbi
 --  NPC: Sojan-Tamjan
--- Working 100%
 -----------------------------------
 local entity = {}
 

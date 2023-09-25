@@ -1,7 +1,6 @@
 -----------------------------------
 -- A collection of frequently needed teleport shortcuts.
 -----------------------------------
-require("scripts/globals/settings")
 require("scripts/globals/utils")
 require("scripts/globals/zone")
 
@@ -90,7 +89,7 @@ xi.teleport.id = ids
 -- TELEPORT TO SINGLE DESTINATION
 -----------------------------------
 
-local destinations =
+xi.teleport.destination =
 {
     [ids.DEM]                   = {  220.000,   19.104,  300.000,   0, 108 }, -- (R)
     [ids.HOLLA]                 = {  420.000,   19.104,   20.000,   0, 102 }, -- (R)
@@ -172,6 +171,7 @@ xi.teleport.type =
     HOMEPOINT          = 9,
     SURVIVAL           = 10,
     WAYPOINT           = 11,
+    ESCHAN_PORTAL      = 12,
 }
 
 xi.teleport.runic_portal =
@@ -185,7 +185,7 @@ xi.teleport.runic_portal =
 }
 
 xi.teleport.to = function(player, destination)
-    local dest = destinations[destination]
+    local dest = xi.teleport.destination[destination]
     if dest then
         player:setPos(unpack(dest))
     end
@@ -300,9 +300,9 @@ end
 
 xi.teleport.toAlliedNation = function(player)
     local allegiance = player:getCampaignAllegiance()
-    local sandoriaPos = destinations[ids.SOUTHERN_SAN_DORIA_S]
-    local bastokPos = destinations[ids.BASTOK_MARKETS_S]
-    local windurstPos = destinations[ids.WINDURST_WATERS_S]
+    local sandoriaPos = xi.teleport.destination[ids.SOUTHERN_SAN_DORIA_S]
+    local bastokPos = xi.teleport.destination[ids.BASTOK_MARKETS_S]
+    local windurstPos = xi.teleport.destination[ids.WINDURST_WATERS_S]
 
     if allegiance == xi.alliedNation.SANDORIA then
         player:setPos(unpack(sandoriaPos))
@@ -504,6 +504,20 @@ xi.teleport.explorerMoogleOnEventFinish = function(player, csid, option, event)
             xi.teleport.toExplorerMoogle(player, 248)
         elseif option == 5 and player:delGil(price) then
             xi.teleport.toExplorerMoogle(player, 249)
+        end
+    end
+end
+
+xi.teleport.clearEnmityList = function(player)
+    local pet = player:getPet()
+
+    for _, entry in pairs(player:getNotorietyList()) do
+        entry:clearEnmity(player) -- reset hate on player after teleporting
+    end
+
+    if pet ~= nil then
+        for _, entry in pairs(pet:getNotorietyList()) do
+            entry:clearEnmity(pet) -- reset hate on player after teleporting
         end
     end
 end

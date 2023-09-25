@@ -4,8 +4,6 @@
 -- Item Effect: Attack +5, Ranged Attack +5
 -- Duration: 30 Minutes
 -----------------------------------
-require("scripts/globals/status")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

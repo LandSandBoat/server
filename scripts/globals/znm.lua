@@ -7,12 +7,7 @@
 -- Soul Plate          : !additem 2477
 -- Sanraku & Ryo       : !pos -127.0 0.9 22.6 50
 -----------------------------------
-require("scripts/globals/items")
-require("scripts/globals/keyitems")
-require("scripts/globals/settings")
-require("scripts/globals/status")
 require("scripts/globals/magic")
-require("scripts/globals/msg")
 require("scripts/globals/npc_util")
 require("scripts/globals/pankration")
 require("scripts/globals/utils")
@@ -27,10 +22,16 @@ xi.znm = xi.znm or {}
 xi.znm.soultrapper = xi.znm.soultrapper or {}
 
 xi.znm.soultrapper.onItemCheck = function(target, user)
-    if not user:isFacing(target) then
+    -- Target checks.
+    if
+        target == nil or -- Players can use a macro to bypass the client side targeting restriction.
+        not target:isMob() or
+        not user:isFacing(target)
+    then
         return xi.msg.basic.ITEM_UNABLE_TO_USE
     end
 
+    -- Equipment checks.
     local id = user:getEquipID(xi.slot.AMMO)
     if
         id ~= xi.items.BLANK_SOUL_PLATE and
@@ -39,6 +40,7 @@ xi.znm.soultrapper.onItemCheck = function(target, user)
         return xi.msg.basic.ITEM_UNABLE_TO_USE
     end
 
+    -- Inventory checks.
     if user:getFreeSlotsCount() == 0 then
         return xi.msg.basic.FULL_INVENTORY
     end
@@ -48,7 +50,7 @@ end
 
 xi.znm.soultrapper.getZeniValue = function(target, user, item)
     local hpp = target:getHPP()
-    local system = target:getSystem()
+    local system = target:getEcosystem()
     local isNM = target:isNM()
     local distance = user:checkDistance(target)
     local isFacing = target:isFacing(user)

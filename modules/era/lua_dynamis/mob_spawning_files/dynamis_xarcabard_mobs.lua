@@ -231,8 +231,8 @@ xi.dynamis.mobList[zoneID][138].info = {"Statue", "Vanguard Eye", nil, nil, nil}
 xi.dynamis.mobList[zoneID][139].info = {"Statue", "Vanguard Eye", nil, nil, nil} -- (139-D)  Pops King Zagan DRG
 xi.dynamis.mobList[zoneID][140].info = {"Statue", "Vanguard Eye", nil, nil, nil} -- (140-D)  Pops Count Vine SAM
 xi.dynamis.mobList[zoneID][141].info = {"Statue", "Vanguard Eye", nil, nil, nil} -- (141-D)  Pops Marquis Cimeries RNG
-xi.dynamis.mobList[zoneID][142].info = {"Statue", "Effigy Prototype", nil, nil, "142_killed"} -- (142-Q)(HP)     Effigy Prototype
-xi.dynamis.mobList[zoneID][143].info = {"Statue", "Statue Prototype", nil, nil, "143_killed"} -- (143-G)(30)     Statue Prototype
+xi.dynamis.mobList[zoneID][142].info = {"Statue", "Effigy Prototype", nil, nil} -- (142-Q)(HP)     Effigy Prototype
+xi.dynamis.mobList[zoneID][143].info = {"Statue", "Statue Prototype", nil, nil} -- (143-G)(30)     Statue Prototype
 xi.dynamis.mobList[zoneID][144].info = {"Statue", "Vanguard Eye", nil, nil, "144_killed"} -- (144-D)
 xi.dynamis.mobList[zoneID][145].info = {"Statue", "Vanguard Eye", nil, nil, "145_killed"} -- (145-D)
 xi.dynamis.mobList[zoneID][146].info = {"Statue", "Vanguard Eye", nil, nil, "146_killed"} -- (146-D)
@@ -381,8 +381,8 @@ xi.dynamis.mobList[zoneID].waveDefeatRequirements =
     {}, -- Do not touch this is wave 1
     {"35_killed","39_killed"}, -- Spawns 43
     {"58_killed"}, -- Spawns 60
-    {"142_killed", "143_killed", "144_killed", "145_killed", "146_killed", "147_killed", "148_killed", "149_killed"},    -- Spawns 150
     {"Decarabia_killed", "Zaebos_killed", "Berith_killed", "Seere_killed", "Gomory_killed", "Andras_killed", "Gamygyn_killed", "Scox_killed", "Orias_killed", "Raum_killed", "Sabnak_killed", "Nebiros_killed", "Zagan_killed", "Vine_killed", "Cimeries_killed"},  -- Demon NMs spawn Animated Weapons, Vanguard Dragons, Ying, Yang
+    {"144_killed", "145_killed", "146_killed", "147_killed", "148_killed", "149_killed"}, -- Spawns 150
     {"ying_killed", "yang_killed"} -- Spawns Dynalord
 }
 
@@ -526,15 +526,7 @@ xi.dynamis.mobList[zoneID][1].wave =
     138, -- (138-D)  Manifest Icon
     139, -- (139-D)  Manifest Icon
     140, -- (140-D)  Avatar Icon
-    141, -- (141-D)  Avatar Icon
-    142, -- (142-Q)  Avatar Icon
-    143, -- (143-G)  Avatar Icon
-    144, -- (144-D)  Avatar Icon
-    145, -- (145-D)  Avatar Icon
-    146, -- (146-D)  Avatar Icon
-    147, -- (147-D)  Avatar Icon
-    148, -- (148-D)  Avatar Icon
-    149  -- (149-D)  Avatar Icon
+    141  -- (141-D)  Avatar Icon
 }
 
 xi.dynamis.mobList[zoneID][2].wave =
@@ -549,11 +541,14 @@ xi.dynamis.mobList[zoneID][3].wave =
 
 xi.dynamis.mobList[zoneID][4].wave =
 {
-    150  -- Statue Prototype
-}
-
-xi.dynamis.mobList[zoneID][5].wave =
-{
+    142, -- (142-Q)  Avatar Icon
+    143, -- (143-G)  Avatar Icon
+    144, -- (144-D)  Avatar Icon
+    145, -- (145-D)  Avatar Icon
+    146, -- (146-D)  Avatar Icon
+    147, -- (147-D)  Avatar Icon
+    148, -- (148-D)  Avatar Icon
+    149, -- (149-D)  Avatar Icon
     151, -- Animated Hammer
     152, -- Animated Dagger
     153, -- Animated Shield
@@ -582,6 +577,11 @@ xi.dynamis.mobList[zoneID][5].wave =
     176, -- Vanguard Dragon
     177, -- Shadow Dragon NM (Yang)
     178  -- Shadow Dragon NM (Ying)
+}
+
+xi.dynamis.mobList[zoneID][5].wave =
+{
+    150  -- Statue Prototype
 }
 
 xi.dynamis.mobList[zoneID][6].wave =

@@ -10,9 +10,6 @@
 -- Ranged Attack %20 Cap 160
 -- Dragon Killer +5
 -----------------------------------
-require("scripts/globals/status")
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

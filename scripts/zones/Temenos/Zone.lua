@@ -2,9 +2,8 @@
 -- Zone: Temenos (37)
 -----------------------------------
 local ID = require('scripts/zones/Temenos/IDs')
+require("scripts/globals/teleports")
 require('scripts/globals/conquest')
-require('scripts/globals/settings')
-require('scripts/globals/status')
 -----------------------------------
 local zoneObject = {}
 
@@ -53,8 +52,8 @@ zoneObject.onInitialize = function(zone)
     zone:registerTriggerArea(26, -580.000, 5, -584.000, 0, 0, 0) -- F4 -> Entrance
 end
 
-zoneObject.onConquestUpdate = function(zone, updatetype)
-    xi.conq.onConquestUpdate(zone, updatetype)
+zoneObject.onConquestUpdate = function(zone, updatetype, influence, owner, ranking, isConquestAlliance)
+    xi.conq.onConquestUpdate(zone, updatetype, influence, owner, ranking, isConquestAlliance)
 end
 
 zoneObject.onZoneIn = function(player, prevZone)
@@ -97,9 +96,7 @@ end
 
 zoneObject.onEventFinish = function(player, csid, option)
     if csid >= 100 and csid <= 120 then
-        for _, entry in pairs(player:getNotorietyList()) do
-            entry:clearEnmity(player) -- reset hate on player after teleporting
-        end
+        xi.teleport.clearEnmityList(player)
     end
 end
 

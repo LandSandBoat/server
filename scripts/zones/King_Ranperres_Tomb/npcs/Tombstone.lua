@@ -5,10 +5,8 @@
 -- !pos 1 0.1 -101 190
 -----------------------------------
 local ID = require("scripts/zones/King_Ranperres_Tomb/IDs")
-require("scripts/globals/items")
 require("scripts/globals/missions")
 require("scripts/globals/npc_util")
-require("scripts/globals/settings")
 require("scripts/globals/quests")
 -----------------------------------
 local entity = {}

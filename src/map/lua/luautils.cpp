@@ -61,6 +61,7 @@
 #include "alliance.h"
 #include "battlefield.h"
 #include "campaign_system.h"
+#include "common/vana_time.h"
 #include "conquest_system.h"
 #include "daily_system.h"
 #include "entities/automatonentity.h"
@@ -75,6 +76,7 @@
 #include "packets/action.h"
 #include "packets/char_emotion.h"
 #include "packets/char_update.h"
+#include "packets/chat_message.h"
 #include "packets/entity_update.h"
 #include "packets/entity_visual.h"
 #include "packets/menu_raisetractor.h"
@@ -94,14 +96,40 @@
 #include "utils/moduleutils.h"
 #include "utils/serverutils.h"
 #include "utils/zoneutils.h"
-#include "vana_time.h"
 #include "weapon_skill.h"
+
+void ReportErrorToPlayer(CBaseEntity* PEntity, std::string const& message = "") noexcept
+{
+    try
+    {
+        if (auto* PChar = dynamic_cast<CCharEntity*>(PEntity))
+        {
+            if (settings::get<uint8>("map.REPORT_LUA_ERRORS_TO_PLAYER_LEVEL") <= PChar->m_GMlevel)
+            {
+                if (!message.empty())
+                {
+                    auto        channel = MESSAGE_NS_SHOUT;
+                    std::string breaker = "================";
+                    PChar->pushPacket(new CChatMessagePacket(PChar, channel, breaker.c_str()));
+                    PChar->pushPacket(new CChatMessagePacket(PChar, channel, "!!! Lua error !!!"));
+                    for (auto const& part : split(message, "\n"))
+                    {
+                        auto str = replace(part, "\t", "    ");
+                        PChar->pushPacket(new CChatMessagePacket(PChar, channel, str.c_str()));
+                    }
+                    PChar->pushPacket(new CChatMessagePacket(PChar, channel, breaker.c_str()));
+                }
+            }
+        }
+    }
+    catch (std::exception const& e)
+    {
+        ShowError(e.what());
+    }
+}
 
 namespace luautils
 {
-    bool                                  contentRestrictionEnabled;
-    std::unordered_map<std::string, bool> contentEnabledMap;
-
     std::unique_ptr<Filewatcher> filewatcher;
 
     std::unordered_map<uint32, sol::table> customMenuContext;
@@ -248,6 +276,24 @@ namespace luautils
         lua.safe_script_file("./scripts/globals/common.lua");
         roeutils::init(); // TODO: Get rid of the need to do this
 
+        // Load global enums
+        for (auto const& entry : sorted_directory_iterator<std::filesystem::directory_iterator>("./scripts/enum"))
+        {
+            if (entry.extension() == ".lua")
+            {
+                auto relative_path_string = entry.relative_path().generic_string();
+
+                ShowTrace("Loading enum script %s", relative_path_string);
+
+                auto result = lua.safe_script_file(relative_path_string);
+                if (!result.valid())
+                {
+                    sol::error err = result;
+                    ShowError(err.what());
+                }
+            }
+        }
+
         // Then the rest...
         for (auto const& entry : sorted_directory_iterator<std::filesystem::directory_iterator>("./scripts/globals"))
         {
@@ -289,8 +335,6 @@ namespace luautils
         }
 
         // Handle settings
-        contentRestrictionEnabled = settings::get<bool>("main.RESTRICT_CONTENT");
-
         moduleutils::LoadLuaModules();
 
         filewatcher = std::make_unique<Filewatcher>(std::vector<std::string>{ "scripts", "modules" });
@@ -364,6 +408,7 @@ namespace luautils
 
         for (auto const& filename : filenames)
         {
+            ShowInfo("[FileWatcher] %s", filename);
             CacheLuaObjectFromFile(filename, true);
         }
     }
@@ -532,7 +577,7 @@ namespace luautils
     // Assumes filename in the form "./scripts/folder0/folder1/folder2/mob_name.lua
     // Object returned form that script will be cached to:
     // xi.folder0.folder1.folder2.mob_name
-    void CacheLuaObjectFromFile(std::string filename, bool printOutput /*= false*/)
+    void CacheLuaObjectFromFile(std::string filename, bool overwriteCurrentEntry /* = false*/)
     {
         TracyZoneScoped;
         TracyZoneString(filename);
@@ -708,18 +753,20 @@ namespace luautils
         {
             if (part == parts.back())
             {
-                table[sol::override_value][part] = file_result;
+                if (overwriteCurrentEntry)
+                {
+                    table[sol::override_value][part] = file_result;
+                }
+                else
+                {
+                    table[sol::update_if_empty][part] = file_result;
+                }
             }
             else
             {
                 table = table[part].get_or_create<sol::table>(lua.create_table());
             }
             out_str += "." + part;
-        }
-
-        if (printOutput)
-        {
-            ShowInfo("[FileWatcher] %s -> %s", filename, out_str);
         }
 
         moduleutils::TryApplyLuaModules();
@@ -1798,20 +1845,8 @@ namespace luautils
             std::string contentVariable("ENABLE_");
             contentVariable.append(contentTag);
 
-            bool contentEnabled;
-
-            if (auto contentEnabledIter = contentEnabledMap.find(contentVariable); contentEnabledIter != contentEnabledMap.end())
-            {
-                contentEnabled = contentEnabledIter->second;
-            }
-            else
-            {
-                // Cache contentTag lookups in a map so that we don't re-hit the Lua file every time
-                contentEnabled = settings::get<bool>(fmt::format("main.{}", contentVariable));
-
-                contentEnabledMap[contentVariable] = contentEnabled;
-            }
-
+            bool contentEnabled            = settings::get<bool>(fmt::format("main.{}", contentVariable));
+            bool contentRestrictionEnabled = settings::get<bool>("main.RESTRICT_CONTENT");
             if (!contentEnabled && contentRestrictionEnabled)
             {
                 return false;
@@ -1903,6 +1938,7 @@ namespace luautils
         {
             sol::error err = result;
             ShowError("luautils::onGameIn: %s", err.what());
+            ReportErrorToPlayer(PChar, err.what());
             return -1;
         }
 
@@ -1944,6 +1980,7 @@ namespace luautils
         {
             sol::error err = result;
             ShowError("luautils::onZoneIn: %s", err.what());
+            ReportErrorToPlayer(PChar, err.what());
             return;
         }
 
@@ -1976,6 +2013,7 @@ namespace luautils
         {
             sol::error err = result;
             ShowError("luautils::afterZoneIn: %s", err.what());
+            ReportErrorToPlayer(PChar, err.what());
         }
     }
 
@@ -1995,6 +2033,7 @@ namespace luautils
         {
             sol::error err = result;
             ShowError("luautils::onZoneOut: %s", err.what());
+            ReportErrorToPlayer(PChar, err.what());
             return;
         }
     }
@@ -2046,6 +2085,7 @@ namespace luautils
         {
             sol::error err = result;
             ShowError("luautils::onTriggerAreaEnter: %s", err.what());
+            ReportErrorToPlayer(PChar, err.what());
             return -1;
         }
 
@@ -2099,6 +2139,7 @@ namespace luautils
         {
             sol::error err = result;
             ShowError("luautils::onTriggerAreaLeave: %s", err.what());
+            ReportErrorToPlayer(PChar, err.what());
             return -1;
         }
 
@@ -2152,6 +2193,7 @@ namespace luautils
         {
             sol::error err = result;
             ShowError("luautils::onTrigger: %s", err.what());
+            ReportErrorToPlayer(PChar, err.what());
             return -1;
         }
 
@@ -2191,6 +2233,7 @@ namespace luautils
         {
             sol::error err = func_result;
             ShowError("luautils::onEventUpdate: %s", err.what());
+            ReportErrorToPlayer(PChar, err.what());
             return -1;
         }
 
@@ -2226,6 +2269,7 @@ namespace luautils
         {
             sol::error err = func_result;
             ShowError("luautils::onEventUpdate: %s", err.what());
+            ReportErrorToPlayer(PChar, err.what());
             return -1;
         }
 
@@ -2256,6 +2300,7 @@ namespace luautils
         {
             sol::error err = result;
             ShowError("luautils::onEventUpdate: %s", err.what());
+            ReportErrorToPlayer(PChar, err.what());
             return -1;
         }
 
@@ -2298,6 +2343,7 @@ namespace luautils
         {
             sol::error err = func_result;
             ShowError("luautils::onEventFinish %s", err.what());
+            ReportErrorToPlayer(PChar, err.what());
             return -1;
         }
 
@@ -2347,6 +2393,7 @@ namespace luautils
         {
             sol::error err = result;
             ShowError("luautils::onTrade: %s", err.what());
+            ReportErrorToPlayer(PChar, err.what());
             return -1;
         }
 
@@ -2435,9 +2482,9 @@ namespace luautils
             return -1;
         }
 
-        Action->additionalEffect = (SUBEFFECT)(result.get_type(0) == sol::type::number ? result.get<int32>(0) : 0);
-        Action->addEffectMessage = result.get_type(1) == sol::type::number ? result.get<int32>(1) : 0;
-        Action->addEffectParam   = result.get_type(2) == sol::type::number ? result.get<int32>(2) : 0;
+        Action->spikesEffect  = (SUBEFFECT)(result.get_type(0) == sol::type::number ? result.get<int32>(0) : 0);
+        Action->spikesMessage = result.get_type(1) == sol::type::number ? result.get<int32>(1) : 0;
+        Action->spikesParam   = result.get_type(2) == sol::type::number ? result.get<int32>(2) : 0;
 
         return 0;
     }
@@ -2516,6 +2563,7 @@ namespace luautils
         {
             sol::error err = result;
             ShowError("luautils::onEffectGain: %s", err.what());
+            ReportErrorToPlayer(PEntity, err.what());
             return -1;
         }
 
@@ -2539,6 +2587,7 @@ namespace luautils
         {
             sol::error err = result;
             ShowError("luautils::onEffectTick: %s", err.what());
+            ReportErrorToPlayer(PEntity, err.what());
             return -1;
         }
 
@@ -2562,6 +2611,7 @@ namespace luautils
         {
             sol::error err = result;
             ShowError("luautils::onEffectLose: %s", err.what());
+            ReportErrorToPlayer(PEntity, err.what());
             return -1;
         }
 
@@ -2708,6 +2758,7 @@ namespace luautils
         {
             sol::error err = result;
             ShowError("luautils::onItemCheck: %s", err.what());
+            ReportErrorToPlayer(PTarget, err.what());
             return { 56, 0, 0 };
         }
 
@@ -2747,6 +2798,7 @@ namespace luautils
         {
             sol::error err = result;
             ShowError("luautils::onItemUse: %s", err.what());
+            ReportErrorToPlayer(PUser, err.what());
             return -1;
         }
 
@@ -2771,6 +2823,7 @@ namespace luautils
         {
             sol::error err = result;
             ShowError("luautils::onItemDrop: %s", err.what());
+            ReportErrorToPlayer(PUser, err.what());
             return -1;
         }
 
@@ -2794,6 +2847,7 @@ namespace luautils
         {
             sol::error err = result;
             ShowError("luautils::onItemEquip: %s", err.what());
+            ReportErrorToPlayer(PUser, err.what());
             return -1;
         }
 
@@ -2817,6 +2871,7 @@ namespace luautils
         {
             sol::error err = result;
             ShowError("luautils::onItemUnequip: %s", err.what());
+            ReportErrorToPlayer(PUser, err.what());
             return -1;
         }
 
@@ -2839,6 +2894,7 @@ namespace luautils
         {
             sol::error err = result;
             ShowError("luautils::CheckForGearSet: %s", err.what());
+            ReportErrorToPlayer(PTarget, err.what());
             return -1;
         }
 
@@ -2866,6 +2922,7 @@ namespace luautils
         {
             sol::error err = result;
             ShowError("luautils::onSpellCast: %s", err.what());
+            ReportErrorToPlayer(PCaster, err.what());
             return -1;
         }
 
@@ -2893,6 +2950,7 @@ namespace luautils
         {
             sol::error err = result;
             ShowError("luautils::onSpellPrecast: %s", err.what());
+            ReportErrorToPlayer(PCaster, err.what());
             return 0;
         }
 
@@ -2925,6 +2983,7 @@ namespace luautils
         {
             sol::error err = result;
             ShowError("luautils::OnMobMagicPrepare: %s", err.what());
+            ReportErrorToPlayer(PCaster, err.what());
             return {};
         }
 
@@ -3600,6 +3659,8 @@ namespace luautils
 
                     // onMobDeath(mob, player, optParams)
                     auto result = onMobDeathFramework(LuaMobEntity, optLuaAllyEntity, optParams, onMobDeath);
+
+                    // NOTE: result is only NOT valid if the function call fails. If it returns nil its still valid (this is expected)
                     if (!result.valid())
                     {
                         sol::error err = result;
@@ -3618,6 +3679,8 @@ namespace luautils
 
             // onMobDeath(mob, player, optParams)
             auto result = onMobDeathFramework(CLuaBaseEntity(PMob), sol::lua_nil, optParams, onMobDeath);
+
+            // NOTE: result is only NOT valid if the function call fails. If it returns nil its still valid (this is expected)
             if (!result.valid())
             {
                 sol::error err = result;
@@ -4699,7 +4762,7 @@ namespace luautils
         }
     }
 
-    int32 OnConquestUpdate(CZone* PZone, ConquestUpdate type)
+    int32 OnConquestUpdate(CZone* PZone, ConquestUpdate type, uint8 influence, uint8 owner, uint8 ranking, bool isConquestAlliance)
     {
         TracyZoneScoped;
 
@@ -4713,7 +4776,8 @@ namespace luautils
 
         CLuaZone LuaZone(PZone);
 
-        auto result = onConquestUpdate(LuaZone, type);
+        // xi.conquest.onConquestUpdate = function(zone, updatetype, influence, owner, ranking, isConquestAlliance)
+        auto result = onConquestUpdate(LuaZone, type, influence, owner, ranking, isConquestAlliance);
         if (!result.valid())
         {
             sol::error err = result;
@@ -5055,6 +5119,7 @@ namespace luautils
     }
 
     /************************************************************************
+     *   DEPRECATED: Use mob:addListener("ITEM_DROPS", ...) instead.         *
      *   Change drop rate of a mob                                           *
      *   1st number: dropid in mob_droplist.sql                              *
      *   2nd number: itemid in mob_droplist.sql                              *
@@ -5212,6 +5277,7 @@ namespace luautils
         {
             sol::error err = result;
             ShowError("luautils::onPlayerDeath: %s", err.what());
+            ReportErrorToPlayer(PChar, err.what());
             return;
         }
     }
@@ -5232,6 +5298,7 @@ namespace luautils
         {
             sol::error err = result;
             ShowError("luautils::onPlayerLevelUp: %s", err.what());
+            ReportErrorToPlayer(PChar, err.what());
             return;
         }
     }
@@ -5252,6 +5319,7 @@ namespace luautils
         {
             sol::error err = result;
             ShowError("luautils::onPlayerLevelDown: %s", err.what());
+            ReportErrorToPlayer(PChar, err.what());
             return;
         }
     }
@@ -5292,6 +5360,7 @@ namespace luautils
         {
             sol::error err = result;
             ShowError("luautils::onPlayerMount: %s", err.what());
+            ReportErrorToPlayer(PChar, err.what());
             return;
         }
     }
@@ -5312,6 +5381,7 @@ namespace luautils
         {
             sol::error err = result;
             ShowError("luautils::onPlayerEmote: %s", err.what());
+            ReportErrorToPlayer(PChar, err.what());
             return;
         }
     }
@@ -5332,6 +5402,7 @@ namespace luautils
         {
             sol::error err = result;
             ShowError("luautils::onPlayerVolunteer: %s", err.what());
+            ReportErrorToPlayer(PChar, err.what());
             return;
         }
     }
@@ -5354,6 +5425,7 @@ namespace luautils
         {
             sol::error err = result;
             ShowError("luautils::onChocoboDig: %s", err.what());
+            ReportErrorToPlayer(PChar, err.what());
             return false;
         }
 
@@ -5442,6 +5514,7 @@ namespace luautils
         {
             sol::error err = result;
             ShowError("luautils::onFurniturePlaced: %s", err.what());
+            ReportErrorToPlayer(PChar, err.what());
             return;
         }
     }
@@ -5463,6 +5536,7 @@ namespace luautils
         {
             sol::error err = result;
             ShowError("luautils::onFurnitureRemoved: %s", err.what());
+            ReportErrorToPlayer(PChar, err.what());
             return;
         }
     }
@@ -5551,6 +5625,7 @@ namespace luautils
                         {
                             sol::error err = result;
                             ShowError("Menu error: %s", err.what());
+                            ReportErrorToPlayer(PChar, err.what());
                         }
                         break;
                     }

@@ -1,9 +1,7 @@
 -----------------------------------
 --  ID: 13682
---  Ether Tank
---  When used, you will obtain one Ether
------------------------------------
-require("scripts/globals/msg")
+--  Casaba Melon Tank
+--  When used, you will obtain a Melon Juice
 -----------------------------------
 local itemObject = {}
 
@@ -17,7 +15,7 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    target:addItem(4424, 1)
+    target:addItem(xi.items.BOTTLE_OF_MELON_JUICE, 1)
 end
 
 return itemObject

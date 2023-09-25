@@ -4,6 +4,7 @@
 -- Entrance to Riverne Site #A01 and #B01
 -- !pos -540 -30 360 25
 -----------------------------------
+require("scripts/globals/teleports")
 require("scripts/globals/missions")
 -----------------------------------
 local entity = {}
@@ -30,9 +31,7 @@ entity.onEventFinish = function(player, csid, option)
     end
 
     if csid > 0 then
-        for _, entry in pairs(player:getNotorietyList()) do
-            entry:clearEnmity(player) -- reset hate on player after teleporting
-        end
+        xi.teleport.clearEnmityList(player)
     end
 end
 

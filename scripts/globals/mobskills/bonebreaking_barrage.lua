@@ -3,8 +3,6 @@
 -- Deals damage to a single target. Additional effect: Gravity, Max HP Down (-50%)
 -----------------------------------
 require("scripts/globals/mobskills")
-require("scripts/globals/settings")
-require("scripts/globals/status")
 -----------------------------------
 local mobskillObject = {}
 

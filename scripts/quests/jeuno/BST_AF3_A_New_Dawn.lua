@@ -6,9 +6,7 @@
 -- Oskar: !gotoid 17776653
 -- Sarcophagus !gotoid 17576394
 -----------------------------------
-require('scripts/globals/items')
 require('scripts/globals/quests')
-require('scripts/globals/status')
 require('scripts/globals/zone')
 require('scripts/globals/interaction/quest')
 -----------------------------------

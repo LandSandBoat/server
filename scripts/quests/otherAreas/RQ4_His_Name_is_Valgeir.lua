@@ -6,8 +6,6 @@
 -- Mhaura,  Rycharde, !pos 17.451 -16.000 88.815 249
 -- Selbina, Valgeir,  !pos 57.496 -15.273 20.229 248
 -----------------------------------
-require('scripts/globals/items')
-require('scripts/globals/keyitems')
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
 require('scripts/globals/titles')

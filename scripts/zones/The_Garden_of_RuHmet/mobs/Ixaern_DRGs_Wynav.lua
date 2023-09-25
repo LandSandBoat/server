@@ -3,7 +3,6 @@
 --  Mob: Ix'aern DRG's Wynav
 -----------------------------------
 local ID = require("scripts/zones/The_Garden_of_RuHmet/IDs")
-require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 

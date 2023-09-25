@@ -3,7 +3,6 @@
 --  Mob: Qiqirn Treasure Hunter
 -----------------------------------
 require("scripts/globals/mobskills")
-require("scripts/globals/status")
 require("scripts/globals/pathfind")
 local ID = require("scripts/zones/Arrapago_Remnants/IDs")
 -----------------------------------
@@ -49,7 +48,7 @@ entity.onMobFight = function(mob, target)
             mobPet:updateEnmity(target)
             mobPet:setPos(mobPos.x, mobPos.y, mobPos.z, mobPos.rot)
             mob:setLocalVar("popTime", os.time())
-            mobPet:setStatus(xi.status.MOB)
+            mobPet:setStatus(xi.status.UPDATE)
             mobPet:timer(1000, function(mobArg)
                 mobArg:useMobAbility(1838)
             end)

@@ -20,8 +20,10 @@
 */
 
 #include "timetriggers.h"
+
+#include "common/vana_time.h"
+
 #include "lua/luautils.h"
-#include "vana_time.h"
 
 std::unique_ptr<CTriggerHandler> CTriggerHandler::_instance;
 

@@ -1,8 +1,6 @@
 -----------------------------------
 -- xi.effect.WEAKENED_DAZE_4
 -----------------------------------
-require("scripts/globals/status")
------------------------------------
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

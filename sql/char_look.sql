@@ -24,4 +24,4 @@ CREATE TABLE IF NOT EXISTS `char_look` (
   `sub` smallint(4) unsigned NOT NULL DEFAULT '0',
   `ranged` smallint(4) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`charid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AVG_ROW_LENGTH=24;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 AVG_ROW_LENGTH=24;

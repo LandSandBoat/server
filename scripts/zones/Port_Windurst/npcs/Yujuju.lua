@@ -4,7 +4,6 @@
 --  Involved In Quest: Making Headlines
 -- !pos 201.523 -4.785 138.978 240
 -----------------------------------
-require("scripts/globals/keyitems")
 require("scripts/globals/npc_util")
 require("scripts/globals/quests")
 require("scripts/globals/utils")

@@ -3,8 +3,6 @@
 -----------------------------------
 -- Log ID: 3, Quest ID: 17
 -----------------------------------
-require('scripts/globals/items')
-require('scripts/globals/keyitems')
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
 require('scripts/globals/zone')
@@ -109,8 +107,9 @@ quest.sections =
             onEventFinish =
             {
                 [107] = function(player, csid, option, npc)
-                    player:delKeyItem(xi.keyItem.TENSHODO_APPLICATION_FORM)
-                    quest:complete(player)
+                    if quest:complete(player) then
+                        player:delKeyItem(xi.keyItem.TENSHODO_APPLICATION_FORM)
+                    end
                 end,
 
                 [108] = function(player, csid, option, npc)

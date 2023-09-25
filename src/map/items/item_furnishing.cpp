@@ -160,3 +160,35 @@ uint8 CItemFurnishing::getMannequinPose()
 {
     return ref<uint8>(m_extra, 0x13);
 }
+
+void CItemFurnishing::setOn2ndFloor(bool on2ndFloor)
+{
+    if (on2ndFloor)
+    {
+        ref<uint8>(m_extra, 0x01) |= 0x01;
+    }
+    else
+    {
+        ref<uint8>(m_extra, 0x01) &= ~0x01;
+    }
+}
+
+bool CItemFurnishing::getOn2ndFloor()
+{
+    return ref<uint8>(m_extra, 0x01) & 01;
+}
+
+bool CItemFurnishing::isGardeningPot()
+{
+    auto id = CItem::getID();
+    return id == 216 ||  // porcelain_flowerpot
+           id == 217 ||  // brass_flowerpot
+           id == 218 ||  // earthen_flowerpot
+           id == 219 ||  // ceramic_flowerpot
+           id == 220 ||  // wooden_flowerpot
+           id == 221 ||  // arcane_flowerpot
+           id == 3744 || // mandragora_pot
+           id == 3745 || // korrigan_pot
+           id == 3746 || // adenium_pot
+           id == 3747;   // citrullus_pot
+}

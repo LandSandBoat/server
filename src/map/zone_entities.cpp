@@ -63,6 +63,7 @@ namespace
 {
     const float CHARACTER_SYNC_DISTANCE                = 45.0f;
     const float CHARACTER_DESPAWN_DISTANCE             = 50.0f;
+    const float NPC_DESPAWN_DISTANCE                   = 50.0f;
     const int   CHARACTER_SWAP_MAX                     = 5;
     const int   CHARACTER_SYNC_LIMIT_MAX               = 32;
     const int   CHARACTER_SYNC_DISTANCE_SWAP_THRESHOLD = 30;
@@ -600,7 +601,7 @@ void CZoneEntities::SpawnPETs(CCharEntity* PChar)
         SpawnIDList_t::iterator PET         = PChar->SpawnPETList.find(PCurrentPet->id);
 
         // Is this pet "visible" to the player?
-        if ((PCurrentPet->status == STATUS_TYPE::NORMAL || PCurrentPet->status == STATUS_TYPE::MOB) && distance(PChar->loc.p, PCurrentPet->loc.p) <= 50)
+        if ((PCurrentPet->status == STATUS_TYPE::NORMAL || PCurrentPet->status == STATUS_TYPE::UPDATE) && distance(PChar->loc.p, PCurrentPet->loc.p) <= 50)
         {
             // pet not in update list for player, add it in
             if (PET == PChar->SpawnPETList.end())
@@ -628,10 +629,10 @@ void CZoneEntities::SpawnNPCs(CCharEntity* PChar)
             CNpcEntity*             PCurrentNpc = (CNpcEntity*)it->second;
             SpawnIDList_t::iterator NPC         = PChar->SpawnNPCList.find(PCurrentNpc->id);
 
-            if (PCurrentNpc->status == STATUS_TYPE::NORMAL || PCurrentNpc->status == STATUS_TYPE::MOB)
+            if (PCurrentNpc->status == STATUS_TYPE::NORMAL || PCurrentNpc->status == STATUS_TYPE::UPDATE)
             {
                 // Is this npc "visible" to the player?
-                if (distance(PChar->loc.p, PCurrentNpc->loc.p) <= 50)
+                if (distance(PChar->loc.p, PCurrentNpc->loc.p) <= NPC_DESPAWN_DISTANCE || PCurrentNpc->m_alwaysRender)
                 {
                     // npc not in update list for player, add it in
                     if (NPC == PChar->SpawnNPCList.end())
@@ -890,6 +891,13 @@ void CZoneEntities::SpawnPCs(CCharEntity* PChar)
 void CZoneEntities::SpawnMoogle(CCharEntity* PChar)
 {
     TracyZoneScoped;
+
+    // If on Moghouse2F; don't spawn the Moogle
+    if (PChar->profile.mhflag & 0x40)
+    {
+        return;
+    }
+
     for (EntityList_t::const_iterator it = m_npcList.begin(); it != m_npcList.end(); ++it)
     {
         CNpcEntity* PCurrentNpc = (CNpcEntity*)it->second;
@@ -1406,7 +1414,7 @@ void CZoneEntities::WideScan(CCharEntity* PChar, uint16 radius)
     PChar->pushPacket(new CWideScanPacket(WIDESCAN_END));
 }
 
-void CZoneEntities::ZoneServer(time_point tick, bool check_trigger_areas)
+void CZoneEntities::ZoneServer(time_point tick)
 {
     TracyZoneScoped;
     TracyZoneString(m_zone->GetName());
@@ -1456,7 +1464,7 @@ void CZoneEntities::ZoneServer(time_point tick, bool check_trigger_areas)
 
             for (auto PMobIt : m_mobList)
             {
-                CMobEntity* PCurrentMob = (CMobEntity*)PMobIt.second;
+                CMobEntity* PCurrentMob = static_cast<CMobEntity*>(PMobIt.second);
                 PCurrentMob->PEnmityContainer->Clear(PMob->id);
             }
 
@@ -1467,13 +1475,16 @@ void CZoneEntities::ZoneServer(time_point tick, bool check_trigger_areas)
 
             for (EntityList_t::const_iterator it = m_charList.begin(); it != m_charList.end(); ++it)
             {
-                CCharEntity* PChar = (CCharEntity*)it->second;
+                CCharEntity* PChar = static_cast<CCharEntity*>(it->second);
 
-                // If a mob is to be deleted from, then we need to ensure there's no reference
-                // to it on any players.
-                if (PChar->PClaimedMob != nullptr && PChar->PClaimedMob->id == PMob->id)
+                if (PChar->PClaimedMob == PMob)
                 {
                     PChar->PClaimedMob = nullptr;
+                }
+
+                if (PChar->currentEvent && PChar->currentEvent->targetEntity == PMob)
+                {
+                    PChar->currentEvent->targetEntity = nullptr;
                 }
 
                 if (distance(PChar->loc.p, PMob->loc.p) < 50)
@@ -1640,10 +1651,6 @@ void CZoneEntities::ZoneServer(time_point tick, bool check_trigger_areas)
             }
             PChar->PAI->Tick(tick);
             PChar->PTreasurePool->CheckItems(tick);
-            if (check_trigger_areas)
-            {
-                m_zone->CheckTriggerAreas(PChar);
-            }
         }
     }
 

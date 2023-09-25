@@ -4,8 +4,6 @@
 -- Item Effect: Temporarily removes Shikaree TP moves
 -----------------------------------
 local ID = require('scripts/zones/Boneyard_Gully/IDs')
-require("scripts/globals/status")
-require("scripts/globals/msg")
 -----------------------------------
 local itemObject = {}
 

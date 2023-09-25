@@ -4,7 +4,6 @@
 -- Starts and Ends Quest: Don't Forget the Antidote
 -----------------------------------
 require("scripts/globals/titles")
-require("scripts/globals/settings")
 require("scripts/globals/quests")
 local ID = require("scripts/zones/Rabao/IDs")
 -----------------------------------
@@ -56,8 +55,7 @@ entity.onEventFinish = function(player, csid, option)
         player:addFame(xi.quest.fame_area.SELBINA_RABAO, 60)
     elseif csid == 4 then --Subsequent completions
         player:tradeComplete()
-        player:addGil(xi.settings.main.GIL_RATE * 1800)
-        player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.main.GIL_RATE * 1800)
+        npcUtil.giveCurrency(player, 'gil', 1800)
         player:addFame(xi.quest.fame_area.SELBINA_RABAO, 30)
     end
 end

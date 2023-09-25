@@ -2,7 +2,6 @@
 -- Custom Treasure Chest System
 -----------------------------------
 require("modules/module_utils")
-require("scripts/globals/items")
 require("scripts/globals/npc_util")
 local customUtil = require("modules/custom/content/custom_util")
 -----------------------------------
@@ -68,8 +67,7 @@ local addGil = function(player)
     local gilAmount = math.random(m.zone[zoneId].gil.min, m.zone[zoneId].gil.max)
     local gilTotal  = gilAmount / #membersInZone
     for i = 1, #membersInZone do
-        membersInZone[i]:addGil(gilTotal)
-        membersInZone[i]:messageSpecial(ID.text.GIL_OBTAINED, gilTotal)
+        npcUtil.giveCurrency(membersInZone[i], 'gil', gilTotal)
     end
 end
 

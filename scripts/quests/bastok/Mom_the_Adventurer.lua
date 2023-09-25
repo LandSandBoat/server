@@ -5,7 +5,6 @@
 -- Nbu Latteh : !pos -114.777 -4 -113.301 235
 -- Roh Latteh : !pos -11.823 6.999 -9.249 234
 -----------------------------------
-require('scripts/globals/keyitems')
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
 require('scripts/globals/titles')
@@ -37,7 +36,6 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status ~= QUEST_ACCEPTED and
-                player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.MOM_THE_ADVENTURER) ~= QUEST_ACCEPTED and
                 vars.Prog == 0
         end,
 

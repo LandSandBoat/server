@@ -2,8 +2,6 @@
 ---------------------------------------------
 -- Cait Sith's Favor - Effect
 ---------------------------------------------
-require("scripts/globals/status")
----------------------------------------------
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

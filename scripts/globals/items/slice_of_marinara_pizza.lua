@@ -8,9 +8,6 @@
 -- Attack +20% (cap 50 @ 250 base attack)
 -- Undead Killer
 -----------------------------------
-require("scripts/globals/status")
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

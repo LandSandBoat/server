@@ -35,6 +35,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include <thread>
 
 #include "ability.h"
+#include "common/vana_time.h"
 #include "job_points.h"
 #include "linkshell.h"
 #include "map.h"
@@ -51,7 +52,6 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "status_effect_container.h"
 #include "time_server.h"
 #include "transport.h"
-#include "vana_time.h"
 #include "zone.h"
 #include "zone_entities.h"
 
@@ -120,6 +120,8 @@ std::unique_ptr<SqlConnection> sql;
 extern std::map<uint16, CZone*> g_PZoneList; // Global array of pointers for zones
 
 bool gLoadAllLua = false;
+
+std::unordered_map<uint32, std::unordered_map<uint16, std::vector<std::pair<uint16, uint8>>>> PacketMods;
 
 namespace
 {
@@ -233,6 +235,7 @@ int32 do_init(int32 argc, char** argv)
 
     ShowInfo(sql->GetClientVersion().c_str());
     ShowInfo(sql->GetServerVersion().c_str());
+    sql->CheckCharset();
 
     luautils::init(); // Also calls moduleutils::LoadLuaModules();
 
@@ -282,6 +285,16 @@ int32 do_init(int32 argc, char** argv)
     jobpointutils::LoadGifts();
     daily::LoadDailyItems();
     roeutils::UpdateUnityRankings();
+
+    if (!std::filesystem::exists("./navmeshes/") || std::filesystem::is_empty("./navmeshes/"))
+    {
+        ShowInfo("./navmeshes/ directory isn't present or is empty");
+    }
+
+    if (!std::filesystem::exists("./losmeshes/") || std::filesystem::is_empty("./losmeshes/"))
+    {
+        ShowInfo("./losmeshes/ directory isn't present or is empty");
+    }
 
     ShowInfo("do_init: loading zones");
     zoneutils::LoadZoneList();
@@ -350,12 +363,27 @@ int32 do_init(int32 argc, char** argv)
         auto level = std::clamp<uint8>(static_cast<uint8>(stoi(inputs[2])), 0, 5);
 
         PChar->m_GMlevel = level;
-        charutils::SaveCharGMLevel(PChar);
+
+        // NOTE: This is the same logic as charutils::SaveCharGMLevel(PChar);
+        // But we're not executing on the main thread, so we're doing it with
+        // our own SQL connection.
+        {
+            auto _sql  = std::make_unique<SqlConnection>();
+            auto query = "UPDATE %s SET %s %u WHERE charid = %u;";
+            _sql->Query(query, "chars", "gmlevel =", PChar->m_GMlevel, PChar->id);
+            _sql->Query(query, "char_stats", "nameflags =", PChar->nameflags.flags, PChar->id);
+        }
 
         fmt::print("Promoting {} to GM level {}\n", PChar->name, level);
         PChar->pushPacket(new CChatMessagePacket(PChar, MESSAGE_SYSTEM_3,
             fmt::format("You have been set to GM level {}.", level), ""));
+    });
 
+    gConsoleService->RegisterCommand("reload_settings", "Reload settings files.",
+    [&](std::vector<std::string> inputs)
+    {
+        fmt::print("Reloading settings files\n");
+        settings::init();
     });
 
     gConsoleService->RegisterCommand("exit", "Terminate the program.",
@@ -885,6 +913,24 @@ int32 send_parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_da
                 packetList.pop_front();
 
                 PSmallPacket->setSequence(map_session_data->server_packet_id);
+
+                // Apply packet mods if available
+                if (!PacketMods[PChar->id].empty())
+                {
+                    auto type = PSmallPacket->getType();
+                    if (PacketMods[PChar->id].find(type) != PacketMods[PChar->id].end())
+                    {
+                        for (auto& entry : PacketMods[PChar->id][type])
+                        {
+                            auto offset = entry.first;
+                            auto value  = entry.second;
+                            ShowInfo(fmt::format("Packet Mod ({}): {:04X}: {:04X}: {:02X}",
+                                                 PChar->name, type, offset, value));
+                            PSmallPacket->ref<uint8>(offset) = value;
+                        }
+                    }
+                }
+
                 memcpy(buff + *buffsize, *PSmallPacket, PSmallPacket->getSize());
 
                 *buffsize += PSmallPacket->getSize();

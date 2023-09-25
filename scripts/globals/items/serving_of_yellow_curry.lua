@@ -12,8 +12,7 @@
 -- Attack 21% (caps @ 75)
 -- Ranged Attack 21% (caps @ 75)
 -- Resist Sleep +3
--- Resist Stun +4require("scripts/globals/status")
-require("scripts/globals/msg")
+-- Resist Stun +4
 -----------------------------------
 local itemObject = {}
 

@@ -140,6 +140,7 @@ namespace battleutils
     bool IsParalyzed(CBattleEntity* PAttacker);
     bool IsAbsorbByShadow(CBattleEntity* PDefender, CBattleEntity* PAttacker);
     bool IsIntimidated(CBattleEntity* PAttacker, CBattleEntity* PDefender);
+    bool IsTandemValid(CBattleEntity* PAttacker);
 
     int32 GetFSTR(CBattleEntity* PAttacker, CBattleEntity* PDefender, uint8 SlotID);
     uint8 GetHitRateEx(CBattleEntity* PAttacker, CBattleEntity* PDefender, uint8 attackNumber, int8 offsetAccuracy);
@@ -211,10 +212,10 @@ namespace battleutils
     void DirtyExp(CBattleEntity* PDefender, CBattleEntity* PAttacker);
     void RelinquishClaim(CCharEntity* PDefender);
 
-    int32 BreathDmgTaken(CBattleEntity* PDefender, int32 damage);
-    int32 MagicDmgTaken(CBattleEntity* PDefender, int32 damage, ELEMENT element);
-    int32 PhysicalDmgTaken(CBattleEntity* PDefender, int32 damage, DAMAGE_TYPE damageType, bool IsCovered = false);
-    int32 RangedDmgTaken(CBattleEntity* PDefender, int32 damage, DAMAGE_TYPE damageType, bool IsCovered = false);
+    int32 BreathDmgTaken(CBattleEntity* PDefender, int32 damage, bool ignoreDmgMods = false);
+    int32 MagicDmgTaken(CBattleEntity* PDefender, int32 damage, ELEMENT element, bool ignoreDmgMods = false);
+    int32 PhysicalDmgTaken(CBattleEntity* PDefender, int32 damage, DAMAGE_TYPE damageType, bool IsCovered = false, bool ignoreDmgMods = false);
+    int32 RangedDmgTaken(CBattleEntity* PDefender, int32 damage, DAMAGE_TYPE damageType, bool IsCovered = false, bool ignoreDmgMods = false);
     int32 HandleSteamJacket(CBattleEntity* PDefender, int32 damage, DAMAGE_TYPE damageType);
 
     void  HandleIssekiganEnmityBonus(CBattleEntity* PDefender, CBattleEntity* PAttacker);
@@ -230,6 +231,7 @@ namespace battleutils
     int32 HandleStoneskin(CBattleEntity* PDefender, int32 damage);
     int32 HandleOneForAll(CBattleEntity* PDefender, int32 damage);
     int32 HandleFanDance(CBattleEntity* PDefender, int32 damage);
+    void  HandleScarletDelirium(CBattleEntity* PDefender, int32 damage);
 
     // stores damage for afflatus misery if active
     void HandleAfflatusMiseryDamage(CBattleEntity* PDefender, int32 damage);
@@ -246,9 +248,9 @@ namespace battleutils
     WEATHER GetWeather(CBattleEntity* PEntity, bool ignoreScholar);
     WEATHER GetWeather(CBattleEntity* PEntity, bool ignoreScholar, uint16 zoneWeather);
     bool    WeatherMatchesElement(WEATHER weather, uint8 element);
-    bool    DrawIn(CBattleEntity* PTarget, CMobEntity* PMob, float offset, uint8 drawInRange, uint16 maximumReach, bool includeParty);
+    bool    DrawIn(CBattleEntity* PTarget, CMobEntity* PMob, float offset, uint8 drawInRange, uint16 maximumReach, bool includeParty, bool includeDeadAndMount = false);
     void    DoWildCardToEntity(CCharEntity* PCaster, CCharEntity* PTarget, uint8 roll);
-    void    AddTraits(CBattleEntity* PEntity, TraitList_t* TraitList, uint8 level);
+    void    AddTraits(CBattleEntity* PEntity, TraitList_t* TraitList, uint8 level, bool mobSubJobCheck = false);
     bool    HasClaim(CBattleEntity* PEntity, CBattleEntity* PTarget);
 
     uint32 CalculateSpellCastTime(CBattleEntity*, CMagicState*, uint16 spellid);

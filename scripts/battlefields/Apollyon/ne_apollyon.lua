@@ -8,8 +8,6 @@
 local ID = require("scripts/zones/Apollyon/IDs")
 require("scripts/globals/battlefield")
 require("scripts/globals/limbus")
-require("scripts/globals/items")
-require("scripts/globals/keyitems")
 -----------------------------------
 
 local content = Limbus:new({
@@ -393,7 +391,7 @@ content.loot =
             { item = xi.items.PIECE_OF_OXBLOOD, weight = xi.loot.weight.VERY_LOW },
             { item = xi.items.LIGHT_STEEL_INGOT, weight = xi.loot.weight.VERY_LOW },
             { item = xi.items.SPOOL_OF_RAINBOW_THREAD, weight = xi.loot.weight.VERY_LOW },
-            { item = xi.items.SHELL_POWDER, weight = xi.loot.weight.VERY_LOW },
+            { item = xi.items.PONZE_OF_SHELL_POWDER, weight = xi.loot.weight.VERY_LOW },
         },
     },
 

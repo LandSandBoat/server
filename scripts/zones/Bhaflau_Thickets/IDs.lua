@@ -15,6 +15,9 @@ zones[xi.zone.BHAFLAU_THICKETS] =
         ITEM_OBTAINED                 = 6390, -- Obtained: <item>.
         GIL_OBTAINED                  = 6391, -- Obtained <number> gil.
         KEYITEM_OBTAINED              = 6393, -- Obtained key item: <keyitem>.
+        GIGANTIC_WARHORSE             = 6400, -- You find the hoofprint of a gigantic warhorse...≺Prompt≻
+        PLACE_QUARTZ                  = 6401, -- You set the ≺Possible Special Code: 01≻≺Possible Special Code: 05≻3≺BAD CHAR: 8280≻≺BAD CHAR: 80≻≺BAD CHAR: 80≻ in the warhorse hoofprint.≺Prompt≻
+        NOTHING_OUT_OF_THE_ORDINARY   = 6404, -- There is nothing out of the ordinary here.
         FELLOW_MESSAGE_OFFSET         = 6419, -- I'm ready. I suppose.
         CARRIED_OVER_POINTS           = 7001, -- You have carried over <number> login point[/s].
         LOGIN_CAMPAIGN_UNDERWAY       = 7002, -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!
@@ -64,6 +67,7 @@ zones[xi.zone.BHAFLAU_THICKETS] =
         HARVESTMAN         = 16990252,
         LIVIDROOT_AMOOSHAH = GetFirstID("Lividroot_Amooshah"),
         DEA                = GetFirstID("Dea"),
+        PLAGUE_CHIGOE      = 16990417,
     },
     npc =
     {

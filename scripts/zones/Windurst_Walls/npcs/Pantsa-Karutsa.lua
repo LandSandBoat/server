@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Windurst Walls
 --  NPC: Pantsa-Karutsa
--- Working 100%
 -----------------------------------
 local entity = {}
 

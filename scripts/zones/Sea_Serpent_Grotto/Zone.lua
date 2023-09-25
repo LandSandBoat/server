@@ -9,9 +9,10 @@ local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
     -- Only one Charbydis PH is up at one time
-    local chooseManta = math.random(1,2)
+    local chooseManta = math.random(1, 2)
     local mantaOne = ID.mob.CHARYBDIS - 2
     local mantaTwo = ID.mob.CHARYBDIS - 4
+
     if chooseManta == 2 then
         DisallowRespawn(mantaOne, true)
         DespawnMob(mantaOne)
@@ -25,8 +26,8 @@ zoneObject.onInitialize = function(zone)
     xi.treasure.initZone(zone)
 end
 
-zoneObject.onConquestUpdate = function(zone, updatetype)
-    xi.conq.onConquestUpdate(zone, updatetype)
+zoneObject.onConquestUpdate = function(zone, updatetype, influence, owner, ranking, isConquestAlliance)
+    xi.conq.onConquestUpdate(zone, updatetype, influence, owner, ranking, isConquestAlliance)
 end
 
 zoneObject.onZoneIn = function(player, prevZone)

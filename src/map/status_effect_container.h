@@ -55,6 +55,7 @@ public:
     void DelStatusEffectsByType(uint16 Type);
     bool DelStatusEffectByTier(EFFECT StatusID, uint16 power);
     void KillAllStatusEffect();
+    void ApplyStateAlteringEffects(CStatusEffect* StatusEffect);
 
     bool HasStatusEffect(EFFECT StatusID);               // проверяем наличие эффекта
     bool HasStatusEffect(EFFECT StatusID, uint16 SubID); // проверяем наличие эффекта с уникальным subid

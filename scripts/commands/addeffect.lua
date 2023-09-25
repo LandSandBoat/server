@@ -2,8 +2,6 @@
 -- func: addeffect
 -- desc: Adds the given effect to the given player.
 -----------------------------------
-
-require("scripts/globals/status")
 require("scripts/globals/teleports")
 
 cmdprops =

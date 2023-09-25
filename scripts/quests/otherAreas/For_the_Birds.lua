@@ -6,8 +6,6 @@
 -- Daa Bola the Seer !pos -157 -17 193
 -- GeFhu Yagudoeye   !pos -91 -3 -127
 -----------------------------------
-require('scripts/globals/items')
-require('scripts/globals/keyitems')
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
 require('scripts/globals/zone')

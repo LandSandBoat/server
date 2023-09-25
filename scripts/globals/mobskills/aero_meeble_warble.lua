@@ -3,7 +3,6 @@
 -- AOE Wind Elemental damage, inflicts Silence and Choke (50 HP/tick).
 -----------------------------------
 require("scripts/globals/mobskills")
-require("scripts/globals/status")
 -----------------------------------
 local mobskillObject = {}
 

@@ -3,6 +3,7 @@
 --  NPC: Spacial Displacement
 -----------------------------------
 local ID = require("scripts/zones/Riverne-Site_A01/IDs")
+require("scripts/globals/teleports")
 -----------------------------------
 local entity = {}
 
@@ -37,10 +38,8 @@ entity.onEventFinish = function(player, csid, option)
         xi.bcnm.onEventFinish(player, csid, option)
     end
 
-    if csid > 0 then
-        for _, entry in pairs(player:getNotorietyList()) do
-            entry:clearEnmity(player) -- reset hate on player after teleporting
-        end
+    if csid >= 0 then
+        xi.teleport.clearEnmityList(player)
     end
 end
 

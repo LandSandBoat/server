@@ -19,15 +19,15 @@
 ===========================================================================
 */
 
+#include "inventory_item.h"
+
 #include "common/socket.h"
 #include "common/utils.h"
+#include "common/vana_time.h"
 
 #include <cstring>
 
-#include "inventory_item.h"
-
-#include "../utils/itemutils.h"
-#include "../vana_time.h"
+#include "utils/itemutils.h"
 
 CInventoryItemPacket::CInventoryItemPacket(CItem* PItem, uint8 LocationID, uint8 SlotID)
 {

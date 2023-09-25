@@ -3,7 +3,6 @@
 --  NPC: Vounebariont
 -- Starts and Finishes Quest: Thick Shells
 -----------------------------------
-require("scripts/globals/settings")
 require("scripts/globals/titles")
 require("scripts/globals/quests")
 local ID = require("scripts/zones/Port_San_dOria/IDs")
@@ -44,8 +43,7 @@ entity.onEventFinish = function(player, csid, option)
 
         player:tradeComplete()
         player:addTitle(xi.title.BUG_CATCHER)
-        player:addGil(xi.settings.main.GIL_RATE * 750)
-        player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.main.GIL_RATE * 750)
+        npcUtil.giveCurrency(player, 'gil', 750)
     end
 end
 

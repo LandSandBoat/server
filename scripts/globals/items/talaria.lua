@@ -4,9 +4,6 @@
 -- Enchantment: Increases movement speed.
 -- Durration: 60 Mins
 -----------------------------------
-require("scripts/globals/settings")
-require("scripts/globals/status")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

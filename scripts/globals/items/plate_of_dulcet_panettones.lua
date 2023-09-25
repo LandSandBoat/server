@@ -7,9 +7,6 @@
 -- Intelligence +8
 -- MP Healing +4
 -----------------------------------
-require("scripts/globals/status")
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

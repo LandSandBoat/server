@@ -4,7 +4,6 @@
 -- Type: Guildworker's Union Representative
 -- !pos -112.561 -2 55.205 238
 -----------------------------------
-require("scripts/globals/keyitems")
 require("scripts/globals/crafting")
 local ID = require("scripts/zones/Windurst_Waters/IDs")
 -----------------------------------
@@ -18,15 +17,15 @@ entity.onTrigger = function(player, npc)
     xi.crafting.unionRepresentativeTrigger(player, 8, 10024, "guild_cooking")
 end
 
-entity.onEventUpdate = function(player, csid, option, target)
+entity.onEventUpdate = function(player, csid, option, npc)
     if csid == 10024 then
-        xi.crafting.unionRepresentativeTriggerFinish(player, option, target, 8, "guild_cooking")
+        xi.crafting.unionRepresentativeTriggerFinish(player, option, npc, 8, "guild_cooking")
     end
 end
 
-entity.onEventFinish = function(player, csid, option, target)
+entity.onEventFinish = function(player, csid, option, npc)
     if csid == 10024 then
-        xi.crafting.unionRepresentativeTriggerFinish(player, option, target, 8, "guild_cooking")
+        xi.crafting.unionRepresentativeTriggerFinish(player, option, npc, 8, "guild_cooking")
     elseif csid == 10025 then
         player:messageSpecial(ID.text.GP_OBTAINED, option)
     end

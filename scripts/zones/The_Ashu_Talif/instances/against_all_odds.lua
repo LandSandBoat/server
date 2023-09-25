@@ -3,14 +3,13 @@
 -- !instance 6001
 -----------------------------------
 require("scripts/globals/instance")
-require("scripts/globals/keyitems")
 local ID = require("scripts/zones/The_Ashu_Talif/IDs")
 -----------------------------------
 local instanceObject = {}
 
 instanceObject.registryRequirements = function(player)
     return player:hasKeyItem(xi.ki.LIFE_FLOAT) and
-        player:getCharVar("AgainstAllOdds") == 2
+        player:getCharVar("Quest[6][26]Prog") == 2
 end
 
 instanceObject.entryRequirements = function(player)
@@ -55,9 +54,9 @@ end
 instanceObject.onInstanceComplete = function(instance)
     local chars = instance:getChars()
     for i, v in pairs(chars) do
-        if v:getCharVar("AgainstAllOdds") == 2 then
-            v:setCharVar("AgainstAllOdds", 3)
-            v:setCharVar("AgainstAllOddsTimer", 0)
+        if v:getCharVar("Quest[6][26]Prog") == 2 then
+            v:setCharVar("Quest[6][26]Prog", 3)
+            v:setCharVar("Quest[6][26]Timer", 0)
         end
 
         v:startEvent(102)

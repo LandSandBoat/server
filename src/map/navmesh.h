@@ -25,8 +25,8 @@ The NavMesh class will load and find paths given a start point and end point.
 #ifndef _NAVMESH_H
 #define _NAVMESH_H
 
-#include <detour/DetourNavMesh.h>
-#include <detour/DetourNavMeshQuery.h>
+#include <DetourNavMesh.h>
+#include <DetourNavMeshQuery.h>
 
 #include "common/logging.h"
 #include "common/mmo.h"
@@ -85,14 +85,14 @@ public:
     // Recast Detour Docs:
     // Casts a 'walkability' ray along the surface of the navigation mesh from the start position toward the end position.
     // Note: This is not a point-to-point in 3D space calculation, it is 2D across the navmesh!
-    bool raycast(const position_t& start, const position_t& end, bool lookOffMesh);
+    bool raycast(const position_t& start, const position_t& end);
 
     bool validPosition(const position_t& position);
     bool findClosestValidPoint(const position_t& position, float* validPoint);
     bool findFurthestValidPoint(const position_t& startPosition, const position_t& endPosition, float* validPoint);
 
     // Like validPosition(), but will also set the given position to the valid position that it finds.
-    void snapToValidPosition(position_t& position, float targetY, bool force = false);
+    void snapToValidPosition(position_t& position);
 
     static inline void outputError(uint32 status)
     {

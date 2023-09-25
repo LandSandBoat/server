@@ -2,8 +2,6 @@
 -- Rear Lasers
 -- Fires aft lasers at players behind user. Additional effects: Petrification
 -----------------------------------
-require("scripts/globals/settings")
-require("scripts/globals/status")
 require("scripts/globals/mobskills")
 -----------------------------------
 local mobskillObject = {}

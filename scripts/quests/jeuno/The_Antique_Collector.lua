@@ -1,26 +1,26 @@
 -----------------------------------
 -- The Antique Collector
 -----------------------------------
--- !addquest 3 25
--- Imasuke : !gotoid 17784840
+-- Log ID: 3, Quest ID: 25
+-- Imasuke : !pos -165 11 94 246
 -----------------------------------
-require('scripts/globals/interaction/quest')
-require('scripts/globals/items')
-require("scripts/globals/keyitems")
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
-require('scripts/globals/status')
 require('scripts/globals/titles')
+require('scripts/globals/zone')
+require('scripts/globals/interaction/quest')
 -----------------------------------
-local ID = require("scripts/zones/Port_Jeuno/IDs")
------------------------------------
+
 local quest = Quest:new(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_ANTIQUE_COLLECTOR)
+
+-- TODO: Quest reward has conflicting information from various resources.  Need to confirm
+-- that XP and Gil rewards are also given when the player does not have the KI reward.
 
 quest.reward =
 {
     fame     = 30,
     fameArea = xi.quest.fame_area.JEUNO,
-    keyitem  = xi.ki.MAP_OF_DELKFUTTS_TOWER,
+    keyItem  = xi.ki.MAP_OF_DELKFUTTS_TOWER,
     title    = xi.title.TRADER_OF_ANTIQUITIES,
 }
 
@@ -29,7 +29,7 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == QUEST_AVAILABLE and
-                player:getFameLevel(xi.quest.fame_area.JEUNO) >= 3
+                player:getFameLevel(xi.quest.fame_area.JEUNO) >= 2
         end,
 
         [xi.zone.PORT_JEUNO] =
@@ -41,8 +41,6 @@ quest.sections =
                 [13] = function(player, csid, option, npc)
                     if option == 1 then
                         quest:begin(player)
-                    else
-                        quest:setVar(player, 'Option', 1)
                     end
                 end,
             },
@@ -58,15 +56,13 @@ quest.sections =
         {
             ['Imasuke'] =
             {
-                onTrigger = function(player, npc)
-                    return quest:event(14)
-                end,
-
                 onTrade = function(player, npc, trade)
                     if npcUtil.tradeHasExactly(trade, xi.items.KAISER_SWORD) then
                         return quest:progressEvent(15)
                     end
                 end,
+
+                onTrigger = quest:event(14),
             },
 
             onEventFinish =
@@ -74,7 +70,6 @@ quest.sections =
                 [15] = function(player, csid, option, npc)
                     if quest:complete(player) then
                         player:confirmTrade()
-                        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.MAP_OF_DELKFUTTS_TOWER)
                     end
                 end,
             },

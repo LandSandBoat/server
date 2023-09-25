@@ -1,7 +1,6 @@
 -----------------------------------
 -- xi.effect.AVATARS_FAVOR
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/pets")
 require("scripts/globals/avatars_favor")
 -----------------------------------

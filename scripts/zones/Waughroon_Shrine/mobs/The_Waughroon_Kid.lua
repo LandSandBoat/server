@@ -3,8 +3,6 @@
 --  Mob: The Waughroon Kid
 -- BCNM: The Final Bout
 -----------------------------------
-require("scripts/globals/status")
------------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)

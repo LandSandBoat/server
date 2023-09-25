@@ -3,18 +3,17 @@
 -- Equip: Twilight Cloak
 -- Able to cast "Impact"
 -----------------------------------
-require("scripts/globals/status")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)
-    local body = target:getEquipID(xi.slot.BODY)
+end
 
-    if body == 11363 then
-        target:addSpell(503)
-    else
-        target:delSpell(503)
-    end
+itemObject.onItemEquip = function(target, item)
+    target:addSpell(xi.magic.spell.IMPACT)
+end
+
+itemObject.onItemUnequip = function(target, item)
+    target:delSpell(xi.magic.spell.IMPACT)
 end
 
 return itemObject

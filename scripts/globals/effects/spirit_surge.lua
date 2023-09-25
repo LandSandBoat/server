@@ -2,7 +2,6 @@
 -- xi.effect.SPIRIT_SURGE
 -----------------------------------
 require("scripts/globals/jobpoints")
-require("scripts/globals/status")
 -----------------------------------
 local effectObject = {}
 

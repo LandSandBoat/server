@@ -3,8 +3,6 @@
 -----------------------------------
 -- Log ID: 4, Quest ID: 69
 -----------------------------------
-require('scripts/globals/items')
-require('scripts/globals/keyitems')
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
 require('scripts/globals/titles')
@@ -16,7 +14,7 @@ local ID = require('scripts/zones/Riverne-Site_B01/IDs')
 
 local quest = Quest:new(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.GO_GO_GOBMUFFIN)
 
-quest.rewards =
+quest.reward =
 {
     keyItem = xi.ki.MAP_OF_CAPE_RIVERNE,
 }

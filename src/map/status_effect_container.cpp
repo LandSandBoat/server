@@ -421,7 +421,9 @@ bool CStatusEffectContainer::CanGainStatusEffect(CStatusEffect* PStatusEffect)
         }
         else if (overwrite == EFFECTOVERWRITE::EQUAL_HIGHER)
         {
-            if (PStatusEffect->GetTier() != 0 && existingEffect->GetTier() != 0)
+            if (PStatusEffect->GetTier() != 0 &&
+                existingEffect->GetTier() != 0 &&
+                PStatusEffect->GetTier() != existingEffect->GetTier())
             {
                 return PStatusEffect->GetTier() >= existingEffect->GetTier();
             }
@@ -518,6 +520,8 @@ bool CStatusEffectContainer::AddStatusEffect(CStatusEffect* PStatusEffect, bool 
         PStatusEffect->SetStartTime(server_clock::now());
 
         m_StatusEffectSet.insert(PStatusEffect);
+
+        ApplyStateAlteringEffects(PStatusEffect);
 
         luautils::OnEffectGain(m_POwner, PStatusEffect);
         m_POwner->PAI->EventHandler.triggerListener("EFFECT_GAIN", CLuaBaseEntity(m_POwner), CLuaStatusEffect(PStatusEffect));
@@ -750,6 +754,40 @@ void CStatusEffectContainer::KillAllStatusEffect()
     m_POwner->UpdateHealth();
 }
 
+// Apply any state alterations for the effect if applicable.
+void CStatusEffectContainer::ApplyStateAlteringEffects(CStatusEffect* StatusEffect)
+{
+    EFFECT effect = StatusEffect->GetStatusID();
+
+    if (m_POwner->isAlive())
+    {
+        // this should actually go into a char charm AI
+        if (m_POwner->objtype == TYPE_PC)
+        {
+            if (effect == EFFECT_CHARM || effect == EFFECT_CHARM_II)
+            {
+                if (m_POwner->PPet != nullptr)
+                {
+                    petutils::DespawnPet(m_POwner);
+                }
+            }
+        }
+
+        if (effect == EFFECT_SLEEP || effect == EFFECT_SLEEP_II || effect == EFFECT_STUN || effect == EFFECT_PETRIFICATION || effect == EFFECT_TERROR ||
+            effect == EFFECT_LULLABY || effect == EFFECT_PENALTY)
+        {
+            // change icon of sleep II and lullaby. Apparently they don't stop player movement.
+            if (effect == EFFECT_SLEEP_II || effect == EFFECT_LULLABY)
+            {
+                StatusEffect->SetIcon(EFFECT_SLEEP);
+            }
+            if (!m_POwner->PAI->IsCurrentState<CInactiveState>())
+            {
+                m_POwner->PAI->Inactive(0ms, false);
+            }
+        }
+    }
+}
 /************************************************************************
  *                                                                       *
  *  Удаляем все эффекты с указанными иконками                            *
@@ -1112,7 +1150,6 @@ bool CStatusEffectContainer::ApplyCorsairEffect(CStatusEffect* PStatusEffect, ui
         AddStatusEffect(PStatusEffect);
         return true;
     }
-    // return false;
 }
 
 bool CStatusEffectContainer::HasCorsairEffect(uint32 charid)
@@ -1556,6 +1593,7 @@ void CStatusEffectContainer::SetEffectParams(CStatusEffect* StatusEffect)
          effect == EFFECT_DRAIN_DAZE ||
          effect == EFFECT_ASPIR_DAZE ||
          effect == EFFECT_HASTE_DAZE ||
+         effect == EFFECT_ATMA ||
          effect == EFFECT_BATTLEFIELD) &&
         !effectFromItemEnchant)
     {
@@ -1582,37 +1620,6 @@ void CStatusEffectContainer::SetEffectParams(CStatusEffect* StatusEffect)
     StatusEffect->SetName(name);
     StatusEffect->SetFlag(effects::EffectsParams[effect].Flag);
     StatusEffect->SetType(effects::EffectsParams[effect].Type);
-
-    // todo: find a better place to put this?
-    if (m_POwner->isAlive())
-    {
-        // this should actually go into a char charm AI
-        if (m_POwner->objtype == TYPE_PC)
-        {
-            if (effect == EFFECT_CHARM || effect == EFFECT_CHARM_II)
-            {
-                if (m_POwner->PPet != nullptr)
-                {
-                    petutils::DespawnPet(m_POwner);
-                }
-            }
-        }
-
-        if (effect == EFFECT_SLEEP || effect == EFFECT_SLEEP_II || effect == EFFECT_STUN || effect == EFFECT_PETRIFICATION || effect == EFFECT_TERROR ||
-            effect == EFFECT_LULLABY || effect == EFFECT_PENALTY)
-        {
-            // change icon of sleep II and lullaby. Apparently they don't stop player movement.
-            if (effect == EFFECT_SLEEP_II || effect == EFFECT_LULLABY)
-            {
-                StatusEffect->SetIcon(EFFECT_SLEEP);
-            }
-
-            if (!m_POwner->PAI->IsCurrentState<CInactiveState>())
-            {
-                m_POwner->PAI->Inactive(0ms, false);
-            }
-        }
-    }
 }
 
 /************************************************************************
@@ -1707,7 +1714,13 @@ void CStatusEffectContainer::LoadStatusEffects()
 
 void CStatusEffectContainer::SaveStatusEffects(bool logout, bool skipRemove)
 {
-    XI_DEBUG_BREAK_IF(m_POwner->objtype != TYPE_PC);
+    // Print entity name and bail out if entity isn't a player.
+    if (m_POwner->objtype != TYPE_PC)
+    {
+        ShowDebug("Non-player entity %s (ID: %d) attempt to save Status Effect.", m_POwner->GetName(), m_POwner->id);
+
+        return;
+    }
 
     sql->Query("DELETE FROM char_effects WHERE charid = %u", m_POwner->id);
 

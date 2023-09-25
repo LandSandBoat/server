@@ -3,7 +3,6 @@
 -- ID 5367
 -- Unlocks body equipment
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/salvage")
 -----------------------------------
 local itemObject = {}

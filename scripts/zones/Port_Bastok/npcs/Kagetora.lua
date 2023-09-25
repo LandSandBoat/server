@@ -4,7 +4,6 @@
 -- Involved in Quest: Ayame and Kaede, 20 in Pirate Years
 -- !pos -96 -2 29 236
 -----------------------------------
-require("scripts/globals/settings")
 require("scripts/globals/quests")
 -----------------------------------
 local entity = {}

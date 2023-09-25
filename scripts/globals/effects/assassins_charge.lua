@@ -1,8 +1,6 @@
 -----------------------------------
 -- xi.effect.ASSASSINS_CHARGE
 -----------------------------------
-require("scripts/globals/status")
------------------------------------
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

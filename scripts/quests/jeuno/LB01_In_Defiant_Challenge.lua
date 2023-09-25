@@ -15,8 +15,6 @@
 -- qm7 : !pos 252.824 -32.000 -64.803 195
 -- qm8 : !pos 105.275 -32 92.551 195
 -- qm9 : !pos 92.272 -32 -64.676 195
-require('scripts/globals/items')
-require('scripts/globals/keyitems')
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
 require('scripts/globals/titles')

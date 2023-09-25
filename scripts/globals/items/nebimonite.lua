@@ -7,9 +7,6 @@
 -- Vitality 2
 -- Defense % 13 (cap 50)
 -----------------------------------
-require("scripts/globals/status")
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

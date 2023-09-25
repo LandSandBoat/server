@@ -2,7 +2,6 @@
 -- Helper file for "One to be Feared" Battlefield
 -----------------------------------
 local ID = require("scripts/zones/Sealions_Den/IDs")
-require("scripts/globals/status")
 require("scripts/globals/titles")
 -----------------------------------
 local oneToBeFeared = {}
@@ -12,14 +11,17 @@ local oneToBeFeared = {}
 -- Not to be confused with an actual instance.
 
 local function healCharacter(player)
-    player:setHP(player:getMaxHP())
-    player:setMP(player:getMaxMP())
-    player:setTP(0)
-    if player:getPet() ~= nil then
-        local pet = player:getPet()
-        pet:setHP(pet:getMaxHP())
-        pet:setMP(pet:getMaxMP())
-        pet:setTP(0)
+    -- only heal players if alive otherwise bugs out player
+    if player:isAlive() then
+        player:setHP(player:getMaxHP())
+        player:setMP(player:getMaxMP())
+        player:setTP(0)
+        if player:getPet() ~= nil then
+            local pet = player:getPet()
+            pet:setHP(pet:getMaxHP())
+            pet:setMP(pet:getMaxMP())
+            pet:setTP(0)
+        end
     end
 end
 

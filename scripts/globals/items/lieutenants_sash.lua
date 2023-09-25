@@ -3,8 +3,6 @@
 -- Item: Lieutenant's Sash
 -- On Use: Removes food effect.
 -----------------------------------
-require("scripts/globals/status")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

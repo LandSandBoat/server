@@ -2,7 +2,7 @@
 -- Area: West Sarutabaruta
 --  NPC: Survival Guide
 -----------------------------------
-require("scripts/globals/survival_guide")
+require("scripts/globals/teleports/survival_guide")
 -----------------------------------
 local entity = {}
 

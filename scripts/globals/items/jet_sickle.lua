@@ -1,7 +1,7 @@
 -----------------------------------
 -- ID: 18945
 -- Item: Jet Sickle
--- Item Effect: TP +10
+-- Item Effect: TP +100
 -- Duration: Instant
 -----------------------------------
 local itemObject = {}

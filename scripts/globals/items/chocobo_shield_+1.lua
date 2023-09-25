@@ -3,8 +3,6 @@
 -- Item: Chocobo Shield +1
 -- Dispense: Sakura Biscuit
 -----------------------------------
-require("scripts/globals/msg")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)
@@ -16,7 +14,7 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    target:addItem(6010, 1)
+    target:addItem(xi.items.SAKURA_BISCUIT, 1)
 end
 
 return itemObject

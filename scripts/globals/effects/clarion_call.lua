@@ -1,8 +1,6 @@
 -----------------------------------
 -- xi.effect.CLARION_CALL
 -----------------------------------
-require("scripts/globals/status")
------------------------------------
 local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)

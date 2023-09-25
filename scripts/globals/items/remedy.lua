@@ -4,8 +4,6 @@
 -- Item Effect: This potion remedies status ailments.
 -- Works on paralysis, silence, blindness, poison, and disease.
 -----------------------------------
-require("scripts/globals/status")
------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)
