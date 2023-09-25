@@ -29,11 +29,8 @@ entity.onTrigger = function(player, npc)
         end
     end
 
-
     if flag then
         player:startEvent(103)
-    else
-
     end
 end
 

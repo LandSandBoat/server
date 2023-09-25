@@ -29,7 +29,6 @@ local respawnTable =
     [xi.items.WILD_RABBIT_TAIL]         = 17047820,
 }
 
-
 entity.onMobSpawn = function(mob)
     xi.assault.adjustMobLevel(mob)
     mob:setMod(xi.mod.FASTCAST, 100)
