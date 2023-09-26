@@ -3,6 +3,7 @@
 --   NM: Jailer of Faith
 -----------------------------------
 local ID = zones[xi.zone.THE_GARDEN_OF_RUHMET]
+local ruhmetGlobal = require('scripts/zones/The_Garden_of_RuHmet/globals')
 mixins = { require('scripts/mixins/job_special') }
 -----------------------------------
 local entity = {}
@@ -33,8 +34,7 @@ entity.onMobDeath = function(mob)
 end
 
 entity.onMobDespawn = function(mob)
-    -- Move QM to random location
-    GetNPCByID(ID.npc.QM_JAILER_OF_FAITH):setPos(unpack(ID.npc.QM_JAILER_OF_FAITH_POS[math.random(1, 5)]))
+    ruhmetGlobal.moveJailerOfFaithQM(GetNPCByID(ID.npc.QM_JAILER_OF_FAITH), xi.settings.main.FORCE_SPAWN_QM_RESET_TIME)
 end
 
 return entity

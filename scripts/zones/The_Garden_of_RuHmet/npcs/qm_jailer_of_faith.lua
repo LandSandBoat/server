@@ -9,8 +9,15 @@
 -- NW / Mithra tower   !pos -683 0 -340 35
 -----------------------------------
 local ID = zones[xi.zone.THE_GARDEN_OF_RUHMET]
+local ruhmetGlobal = require('scripts/zones/The_Garden_of_RuHmet/globals')
 -----------------------------------
 local entity = {}
+
+entity.onSpawn = function(npc)
+    -- Move QM with a respawnDelay of 0 to mimic as if this was
+    -- triggered from the QM reapparing after JoF despawns
+    ruhmetGlobal.moveJailerOfFaithQM(npc, 0)
+end
 
 entity.onTrade = function(player, npc, trade)
     if

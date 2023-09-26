@@ -56,10 +56,6 @@ zoneObject.onInitialize = function(zone)
     qmDrk:setPos(unpack(ID.npc.QM_IXAERN_DRK_POS[qmDrkPos]))
     qmDrk:setLocalVar('hatedPlayer', 0)
 
-    -- Give the Faith ??? a random spawn
-    local qmFaith = GetNPCByID(ID.npc.QM_JAILER_OF_FAITH)
-    qmFaith:setPos(unpack(ID.npc.QM_JAILER_OF_FAITH_POS[math.random(1, 5)]))
-
     -- Give Ix'DRG a random placeholder by picking one of the four groups at random, then adding a random number of 0-2 for the specific mob.
     local groups = ID.mob.AWAERN_DRG_GROUPS
     SetServerVariable('[SEA]IxAernDRG_PH', groups[math.random(1, #groups)] + math.random(0, 2))
@@ -83,14 +79,6 @@ end
 zoneObject.onGameHour = function(zone)
     local vanadielHour = VanadielHour()
     local qmDrk = GetNPCByID(ID.npc.QM_IXAERN_DRK) -- Ix'aern drk
-    local s = math.random(6, 12) -- wait time till change to next spawn pos, random 15~30 mins.
-
-    -- Jailer of Faith spawn randomiser
-    if vanadielHour % s == 0 then
-        local qmFaith = GetNPCByID(ID.npc.QM_JAILER_OF_FAITH) -- Jailer of Faith
-        qmFaith:hideNPC(60) -- Hide it for 60 seconds
-        qmFaith:setPos(unpack(ID.npc.QM_JAILER_OF_FAITH_POS[math.random(1, 5)])) -- Set the new position
-    end
 
     -- Ix'DRK spawn randomiser
     if vanadielHour % 12 == 0 and qmDrk:getStatus() ~= xi.status.DISAPPEAR then -- Change ??? position every 12 hours Vana'diel time (30 mins)
