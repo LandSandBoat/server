@@ -118,7 +118,7 @@ CZoneInPacket::CZoneInPacket(CCharEntity* PChar, const EventInfo* currentEvent)
     this->setType(0x0A);
     this->setSize(0x104);
 
-    // It is necessary to work Manaklipper
+    // It is necessary to work Manaclipper
     // The last 8 bytes are similar for a while
     // unsigned char packet [] = {
     // 0x0D, 0x3A, 0x0C, 0x00, 0x11, 0x00, 0x19, 0x00, 0x02, 0xE4, 0x93, 0x10, 0x91, 0xE5, 0x93, 0x10}; // 0x2a = 0x10
@@ -130,17 +130,23 @@ CZoneInPacket::CZoneInPacket(CCharEntity* PChar, const EventInfo* currentEvent)
     ref<uint32>(0x04) = PChar->id;
     ref<uint16>(0x08) = PChar->targid;
 
-    memcpy(data + (0x84), PChar->GetName().c_str(), PChar->GetName().size());
+    // 0x0A = Padding
 
     ref<uint8>(0x0B) = PChar->loc.p.rotation;
     ref<float>(0x0C) = PChar->loc.p.x;
     ref<float>(0x10) = PChar->loc.p.y;
     ref<float>(0x14) = PChar->loc.p.z;
 
+    // 0x18 = Run Count
+
+    // 0x1A = Target Index
+
     ref<uint8>(0x1C) = PChar->GetSpeed();
     ref<uint8>(0x1D) = PChar->speedsub;
     ref<uint8>(0x1E) = PChar->GetHPP();
     ref<uint8>(0x1F) = PChar->animation;
+
+    // 0x20 = Character Gender and Size
 
     if (PChar->StatusEffectContainer->HasStatusEffect(EFFECT_MOUNTED))
     {
@@ -148,6 +154,10 @@ CZoneInPacket::CZoneInPacket(CCharEntity* PChar, const EventInfo* currentEvent)
     }
 
     ref<uint8>(0x21) = PChar->GetGender() * 128 + (1 << PChar->look.size);
+
+    ref<uint16>(0x28) = 0x0100; // "Always 0x100"
+
+    // 0x2A = Zone Animation
 
     look_t* look      = (PChar->getStyleLocked() ? &PChar->mainlook : &PChar->look);
     ref<uint8>(0x44)  = look->face;
@@ -160,12 +170,6 @@ CZoneInPacket::CZoneInPacket(CCharEntity* PChar, const EventInfo* currentEvent)
     ref<uint16>(0x50) = look->main + 0x6000;
     ref<uint16>(0x52) = look->sub + 0x7000;
     ref<uint16>(0x54) = look->ranged + 0x8000;
-
-    if (PChar->m_Monstrosity != 0)
-    {
-        ref<uint16>(0x44) = PChar->m_Monstrosity;
-        ref<uint16>(0x54) = 0xFFFF;
-    }
 
     ref<uint8>(0x56) = PChar->PInstance ? PChar->PInstance->GetBackgroundMusicDay() : PChar->loc.zone->GetBackgroundMusicDay();
     ref<uint8>(0x58) = PChar->PInstance ? PChar->PInstance->GetBackgroundMusicNight() : PChar->loc.zone->GetBackgroundMusicNight();
@@ -220,6 +224,9 @@ CZoneInPacket::CZoneInPacket(CCharEntity* PChar, const EventInfo* currentEvent)
         ref<uint8>(0xAF) = PChar->loc.zone->CanUseMisc(MISC_MOGMENU); // flag allows you to use Mog Menu outside Mog House
     }
 
+    auto const& nameStr = PChar->GetName();
+    std::memcpy(data + 0x84, nameStr.data(), nameStr.size());
+
     ref<uint32>(0xA0) = PChar->GetPlayTime(); // time spent by the character in the game from the moment of creation
 
     ref<uint8>(0xAE) = GetMogHouseLeavingFlag(PChar);
@@ -249,4 +256,15 @@ CZoneInPacket::CZoneInPacket(CCharEntity* PChar, const EventInfo* currentEvent)
     ref<uint64>(0xF8) = PChar->chatFilterFlags;
 
     ref<uint8>(0x100) = 0x01; // observed: RoZ = 3, CoP = 5, ToAU = 9, WoTG = 11, SoA/original areas = 1
+
+    if (PChar->m_PMonstrosity != nullptr)
+    {
+        // TODO: These make the spawn in cleaner, but then the name doesn't work correctly
+        // ref<uint8>(0x04)  = PChar->m_PMonstrosity->Face;
+        // ref<uint8>(0x05)  = PChar->m_PMonstrosity->Race;
+        // ref<uint16>(0x14) = 0xFFFF;
+
+        // Enable Monstrosity menu options
+        ref<uint8>(0x7E) = 0x1F;
+    }
 }

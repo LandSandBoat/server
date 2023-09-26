@@ -1,7 +1,7 @@
-﻿/*
+/*
 ===========================================================================
 
-  Copyright (c) 2022 LandSandBoat Dev Teams
+  Copyright (c) 2023 LandSandBoat Dev Teams
 
   This program is free software: you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -19,21 +19,28 @@
 ===========================================================================
 */
 
-#include "common/socket.h"
+#pragma once
 
-#include "monipulator2.h"
+#include "common/cbasetypes.h"
 
-CMonipulatorPacket2::CMonipulatorPacket2(CCharEntity* PChar)
+class CCharEntity;
+
+namespace monstrosity
 {
-    this->setType(0x63);
-    this->setSize(0xB4);
+    struct MonstrosityData_t
+    {
+    public:
+        uint8 Face;
+        uint8 Race;
 
-    memset(data + 4, 0, PACKET_SIZE - 4);
+        MonstrosityData_t(uint8 face, uint8 race)
+        : Face(face)
+        , Race(race)
+        {
+            //
+        }
+    };
 
-    std::array<uint8, 3> packet2 = { 0x04, 0x00, 0xB0 };
-    memcpy(data + (0x04), &packet2, sizeof(packet2));
-
-    ref<uint8>(0x86) = 0x0A;
-
-    ref<uint8>(0x88) = 0x3F;
-}
+    void   HandleZoneIn(CCharEntity* PChar);
+    uint32 GetPackedMonstrosityName(CCharEntity* PChar);
+} // namespace monstrosity

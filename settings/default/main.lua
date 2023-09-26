@@ -69,6 +69,9 @@ xi.settings.main =
     -- VoidWalker
     ENABLE_VOIDWALKER = 1,
 
+    -- VoidWalker
+    ENABLE_MONSTROSITY = 1,
+
     -- TREASURE CASKETS
     -- Retail droprate = 0.1 (10%) with no other effects active
     -- Set to 0 to disable caskets.

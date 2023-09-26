@@ -22,6 +22,7 @@
 #include "common/socket.h"
 
 #include "monipulator1.h"
+#include "utils/charutils.h"
 
 CMonipulatorPacket1::CMonipulatorPacket1(CCharEntity* PChar)
 {
@@ -31,12 +32,19 @@ CMonipulatorPacket1::CMonipulatorPacket1(CCharEntity* PChar)
     ref<uint8>(0x04) = 0x03; // Update Type
     ref<uint8>(0x06) = 0xD8; // Variable Data Size
 
-    ref<uint8>(0x08)  = 0; // Species
-    ref<uint16>(0x0A) = 0; // Flags?
-    ref<uint8>(0x0C)  = 0; // Monstrosity Rank (0 = Mon, 1 = NM, 2 = HNM)
+    ref<uint16>(0x08) = (0xFCFE); // Species
+    ref<uint16>(0x0A) = (0x0B45); // Flags?
+    ref<uint8>(0x0C)  = 0;        // Monstrosity Rank (0 = Mon, 1 = NM, 2 = HNM)
 
-    ref<uint16>(0x12) = 0; // Infamy
+    ref<uint16>(0x10) = (0x0074);
+    ref<uint16>(0x12) = charutils::GetPoints(PChar, "infamy");
 
-    std::memset(data + 0x1C, 0, 64);  // Instinct Battlefield 1
-    std::memset(data + 0x5C, 0, 128); // Monster Level Char Field
+    std::array<uint8, 64> instinct{ 0 };
+
+    std::array<uint8, 128> levels{ 0 };
+    levels[1]  = 0x01;
+    levels[18] = 0x01;
+
+    std::memcpy(data + 0x1C, instinct.data(), 64); // Instinct Battlefield 1
+    std::memcpy(data + 0x5C, levels.data(), 128);  // Monster Level Char Field
 }
