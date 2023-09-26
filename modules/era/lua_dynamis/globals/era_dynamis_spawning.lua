@@ -1277,6 +1277,10 @@ xi.dynamis.nmDynamicSpawn = function(mobIndex, oMobIndex, forceLink, zoneID, tar
         },
         ["Goublefaupe"] =
         {
+            ["onMobInitialize"] = { function(mob)
+                mob:setMobMod(xi.mobMod.MP_BASE, 100)
+            end },
+
             ["onMobSpawn"] = { function(mob)
                 xi.dynamis.onSpawnGouble(mob)
             end },
@@ -1337,6 +1341,10 @@ xi.dynamis.nmDynamicSpawn = function(mobIndex, oMobIndex, forceLink, zoneID, tar
         },
         ["Quiebitiel"] =
         {
+            ["onMobInitialize"] = { function(mob)
+                mob:setMobMod(xi.mobMod.MP_BASE, 100)
+            end },
+
             ["onMobSpawn"] = { function(mob)
                 xi.dynamis.onSpawnQuieb(mob)
             end },
@@ -1367,6 +1375,10 @@ xi.dynamis.nmDynamicSpawn = function(mobIndex, oMobIndex, forceLink, zoneID, tar
         },
         ["Velosareon"] =
         {
+            ["onMobInitialize"] = { function(mob)
+                mob:setMobMod(xi.mobMod.MP_BASE, 100)
+            end },
+
             ["onMobSpawn"] = { function(mob)
                 xi.dynamis.onSpawnVelosar(mob)
             end },
@@ -2082,6 +2094,15 @@ xi.dynamis.nmDynamicSpawn = function(mobIndex, oMobIndex, forceLink, zoneID, tar
         rotation = rPos,
         groupId = xi.dynamis.nmInfoLookup[mobName][2],
         groupZoneId = xi.dynamis.nmInfoLookup[mobName][3],
+        -- certain NMs need onMobInitialize functions to set mob mods (as dynamic mobs do not get pool mob mods)
+        onMobInitialize = function(mob)
+            local specFuncTable = xi.dynamis.nmFunctions[xi.dynamis.nmInfoLookup[mobName][7]]["onMobInitialize"]
+            if specFuncTable ~= nil then
+                local specFunc = specFuncTable[1]
+                specFunc(mob)
+            end
+        end,
+
         onMobSpawn = function(mob)
             local specFunc = xi.dynamis.nmFunctions[xi.dynamis.nmInfoLookup[mobName][7]]["onMobSpawn"][1]
             specFunc(mob)

@@ -4410,7 +4410,7 @@ INSERT INTO `nm_spawn_points` VALUES (17403939,2,190.750,8.500,-152.000);
 INSERT INTO `nm_spawn_points` VALUES (17403939,3,200.000,9.000,-167.000);
 INSERT INTO `nm_spawn_points` VALUES (17404000,0,165.93,9.344,-56.348); -- Aquarius
 INSERT INTO `nm_spawn_points` VALUES (17404029,0,104.340,8.423,81.217); -- Unut
-INSERT INTO `nm_spawn_points` VALUES (17404290,0,237,9.767,-281.7); -- Ancient Goobbue
+INSERT INTO `nm_spawn_points` VALUES (17404290,0,-237,9.767,-281.7); -- Ancient Goobbue
 INSERT INTO `nm_spawn_points` VALUES (17404300,0,-220.5,13.621,73.357); -- Leshonki
 INSERT INTO `nm_spawn_points` VALUES (17404331,0,-215.158,5.671,184.629); -- Voluptuous Vivian
 INSERT INTO `nm_spawn_points` VALUES (17404331,1,-215.792,5.718,187.152);
