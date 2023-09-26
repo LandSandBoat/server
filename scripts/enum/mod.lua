@@ -944,6 +944,8 @@ xi.mod =
     -- New ASB section created per PR comment, starting at 2000
     TANDEM_STRIKE = 2000, -- Beastmaster trait - provides acc/macc to master and pet when both engage the same target
     TANDEM_BLOW   = 2001, -- Beastmaster trait - provides subtle blow to master and pet when both engage the same target
+    INVISIBLE_EQUIP_BOOST = 2002, -- boost for invisible duration (base of 0 means no change, 50 means 50% boost in duration, -50 means 50% reduction in duration)
+    SNEAK_EQUIP_BOOST = 2003, -- boost for invisible duration (base of 0 means no change, 50 means 50% boost in duration, -50 means 50% reduction in duration)
 
     -- IF YOU ADD ANY NEW MODIFIER HERE, ADD IT IN src/map/modifier.h ASWELL!
 

@@ -389,10 +389,12 @@ xi.spells.enhancing.calculateEnhancingDuration = function(caster, target, spell,
 
     -- Invisible
     elseif spellEffect == xi.effect.INVISIBLE then
+        duration = duration + math.floor(duration * (target:getMod(xi.mod.INVISIBLE_EQUIP_BOOST) / 100))
         duration = duration + target:getMod(xi.mod.INVISIBLE_DURATION)
 
     -- Sneak
     elseif spellEffect == xi.effect.SNEAK then
+        duration = duration + math.floor(duration * (target:getMod(xi.mod.SNEAK_EQUIP_BOOST) / 100))
         duration = duration + target:getMod(xi.mod.SNEAK_DURATION)
 
     -- Bar-Element
