@@ -18,7 +18,7 @@ local quest = Quest:new(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.ARTS_A
 
 quest.reward =
 {
-    item = xi.items.IMPERIAL_SILVER_PIECE,
+    item = xi.items.IMPERIAL_BRONZE_PIECE,
 }
 
 quest.sections =
@@ -57,7 +57,7 @@ quest.sections =
                 onTrigger = function(player, npc)
                     if quest:isVarBitsSet(player, 'Prog', 1, 2, 3, 4, 5, 6, 7) then
                         return quest:progressEvent(517)
-                    else
+                    elseif quest:getVar(player, 'Stage') == 0 then
                         return quest:event(509)
                     end
                 end,
