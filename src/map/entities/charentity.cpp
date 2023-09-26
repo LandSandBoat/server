@@ -173,8 +173,9 @@ CCharEntity::CCharEntity()
     m_mkeCurrent = 0;
     m_asaCurrent = 0;
 
+    m_PMonstrosity = nullptr;
+
     m_Costume             = 0;
-    m_Monstrosity         = 0;
     m_hasTractor          = 0;
     m_hasRaise            = 0;
     m_weaknessLvl         = 0;

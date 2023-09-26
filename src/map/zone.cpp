@@ -40,6 +40,7 @@
 #include "linkshell.h"
 #include "map.h"
 #include "message.h"
+#include "monstrosity.h"
 #include "notoriety_container.h"
 #include "party.h"
 #include "spell.h"
@@ -1094,6 +1095,8 @@ void CZone::CharZoneIn(CCharEntity* PChar)
     }
 
     PChar->PLatentEffectContainer->CheckLatentsZone();
+
+    monstrosity::HandleZoneIn(PChar);
 
     charutils::ReadHistory(PChar);
 

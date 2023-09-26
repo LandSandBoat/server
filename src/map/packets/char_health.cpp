@@ -26,6 +26,8 @@
 #include "entities/charentity.h"
 #include "entities/trustentity.h"
 
+#include "monstrosity.h"
+
 CCharHealthPacket::CCharHealthPacket(CCharEntity* PChar)
 {
     this->setType(0xDF);
@@ -41,6 +43,11 @@ CCharHealthPacket::CCharHealthPacket(CCharEntity* PChar)
 
     ref<uint8>(0x16) = PChar->GetHPP();
     ref<uint8>(0x17) = PChar->GetMPP();
+
+    if (PChar->m_PMonstrosity != nullptr)
+    {
+        ref<uint32>(0x1C) = monstrosity::GetPackedMonstrosityName(PChar);
+    }
 
     if (!(PChar->nameflags.flags & FLAG_ANON))
     {

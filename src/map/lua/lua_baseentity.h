@@ -271,16 +271,15 @@ public:
     void   setModelId(uint16 modelId, sol::object const& slotObj);
     void   setCostume(uint16 costume);
     uint16 getCostume();
-    uint16 getCostume2(); // monstrosity costume
-    void   setCostume2(uint16 costume);
-    uint8  getAnimation();
-    void   setAnimation(uint8 animation);
-    uint8  getAnimationSub();
-    void   setAnimationSub(uint8 animationsub);
-    bool   getCallForHelpFlag() const;
-    void   setCallForHelpFlag(bool cfh);
-    bool   getCallForHelpBlocked() const;
-    void   setCallForHelpBlocked(bool blocked);
+
+    uint8 getAnimation();
+    void  setAnimation(uint8 animation);
+    uint8 getAnimationSub();
+    void  setAnimationSub(uint8 animationsub);
+    bool  getCallForHelpFlag() const;
+    void  setCallForHelpFlag(bool cfh);
+    bool  getCallForHelpBlocked() const;
+    void  setCallForHelpBlocked(bool blocked);
 
     // Player Status
     uint8 getNation();

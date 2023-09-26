@@ -1,0 +1,61 @@
+/*
+===========================================================================
+
+  Copyright (c) 2023 LandSandBoat Dev Teams
+
+  This program is free software: you can redistribute it and/or modify
+  it under the terms of the GNU General Public License as published by
+  the Free Software Foundation, either version 3 of the License, or
+  (at your option) any later version.
+
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU General Public License for more details.
+
+  You should have received a copy of the GNU General Public License
+  along with this program.  If not, see http://www.gnu.org/licenses/
+
+===========================================================================
+*/
+
+#include "monstrosity.h"
+
+#include "entities/charentity.h"
+#include "utils/charutils.h"
+
+void monstrosity::HandleZoneIn(CCharEntity* PChar)
+{
+    // TODO: Check we're about to enter monstrosity, charvar, flag, etc.
+    if (charutils::GetCharVar(PChar, "MONSTROSITY_START") == 1)
+    {
+        PChar->m_PMonstrosity = std::make_unique<monstrosity::MonstrosityData_t>(72, 11);
+        PChar->updatemask |= UPDATE_LOOK;
+    }
+}
+
+uint32 monstrosity::GetPackedMonstrosityName(CCharEntity* PChar)
+{
+    // Monstrosity Name Ids?
+    // If populated, the monstrosity icon will appear
+    uint8 a = 0x1F;
+
+    // Mob Type
+    // 0x80: Scorpion
+    // 0x81: Mandragora
+    uint8 b = 0x81;
+
+    // Adjective 1 (optional)
+    // 01: Abashed
+    // CD: Tempest
+    // F5: Zenith
+    // F6: Zero
+    uint8 c = 0xF6;
+
+    // Adjective 2
+    // Same values as above
+    uint8 d = 0xCD;
+
+    // Packed as LE
+    return (d << 24) + (c << 16) + (b << 8) + (a << 0);
+}
