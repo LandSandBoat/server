@@ -44,11 +44,14 @@ CMonipulatorPacket1::CMonipulatorPacket1(CCharEntity* PChar)
 
     ref<uint8>(0x0C) = 0; // Monstrosity Rank (0 = Mon, 1 = NM, 2 = HNM)
 
-    // Falculties?
-    // ref<uint8>(0x10) = 0xEC;
-    // ref<uint8>(0x11) = 0xFF;
+    // Unknown
+    ref<uint8>(0x10) = 0xEC;
+    ref<uint8>(0x11) = 0x00;
 
     ref<uint16>(0x12) = charutils::GetPoints(PChar, "infamy");
+
+    // Unknown
+    ref<uint8>(0x14) = 0x2C;
 
     // Bitpacked 2-bit values. 0 = no instincts from that species, 1 == first instinct, 2 == first and second instinct, 3 == first, second, and third instinct.
     std::memcpy(data + 0x1C, PChar->m_PMonstrosity->instincts.data(), 64); // Instinct Bitfield 1
