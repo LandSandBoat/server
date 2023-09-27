@@ -91,10 +91,11 @@ local monstrositySpecies =
 
     -- Others are not part of the regular structure, but it's useful to map them here anyway.
     -- Using arbitrary offsets!
-    DQ_SLIME       = 77,
+    DQ_SLIME       = 80,
     FFXIV_SPRIGGAN = 81,
 }
 
+-- NOTE: This was mapped by hand, the gaps might be mistakes!
 local monstrosityVariants =
 {
     -- Rabbit
@@ -104,6 +105,192 @@ local monstrosityVariants =
 
     -- Behemoth
     ELSAMOTH = 3,
+
+    -- Tiger
+    LEGENDARY_TIGER = 5,
+    SMILODON        = 6,
+
+    -- Sheep
+    KARAKUL = 7,
+
+    -- Coeurl
+    LYNX = 10,
+    COLLARED_LYNX = 11,
+
+    -- Manticore
+    LEGENDARY_MANTICORE = 12,
+
+    -- Cerberus
+    ORTHRUS = 13,
+
+    -- Gnole
+    BIPEDAL_GNOLE = 14,
+
+    -- Funguar
+    COPPERCAP = 15,
+
+    -- Treant Sapling
+    TREANT = 16,
+    FLOWERING_TREANT = 17,
+    SCARLET_TINGED_TREANT = 18,
+    BARREN_TREANT = 19,
+    NECKLACED_TREANT = 20,
+
+    -- Morbol
+    PYGMY_MORBOL = 21,
+    SCARE_MORBOL = 22,
+    AMERETAT = 23,
+    PURBOL = 24,
+
+    -- Mandragora
+    KORRIGAN = 25,
+    LYCOPODIUM = 26,
+    PYGMY_MANDRAGORA = 27,
+    ADENIUM = 28,
+    PACHYPODIUM = 29,
+    ENLIGHTENED_MANDRAGORA = 30,
+    NEW_YEAR_MANDRAGORA = 31,
+
+    -- Sabotender
+    SABOTENDER_FLORIDO = 32,
+
+    -- Rafflesia
+    MITRASTEMA = 33,
+
+    -- Bee
+    VERMILLION_AND_ONYX_BEE = 34,
+    ZAFFRE_BEE = 35,
+
+    -- Beetle
+    ONYX_BEETLE = 36,
+    GAMBOGE_BEETLE = 37,
+
+    -- Crawler
+    ERUCA = 38,
+    EMERALD_CRAWLER = 39,
+    PYGMY_EMERALD_CRAWLER = 40,
+
+    -- Fly
+    VERMILLION_FLY = 41,
+
+    -- Scorpion
+    SCOLOPENDRID = 42,
+    UNUSUAL_SCOLOPENDRID = 43,
+
+    -- Spider
+    RETICULATED_SPIDER = 44,
+    VERMILLION_AND_ONYX_SPIDER = 45,
+
+    -- Antlion
+    ONYX_ANTLION = 46,
+    FORMICEROS = 47,
+
+    -- Diremite
+    ARUNDIMITE = 48,
+
+    -- Chigoe
+    AZURE_CHIGOE = 49,
+
+    -- Wamouracampa
+    COILED_WAMOURACAMPA = 50,
+
+    -- Wamoura
+    WAMOURA = 51,
+    CORAL_WAMOURA = 52,
+
+    -- Ladybug
+    GOLD_LADYBUG = 53,
+
+    -- Gnat
+    MIDGE = 54,
+
+    -- Lizard
+    ASHEN_LIZARD = 59,
+
+    -- Raptor
+    EMERALD_RAPTOR = 60,
+    VERMILLION_RAPTOR = 61,
+
+    -- Adamantoise
+    PYGMY_ADAMANTOISE = 62,
+    LEGENDARY_ADAMANTOISE = 63,
+    FERROMANTOISE = 64,
+
+    -- Bugard
+    ABYSSOBUGARD = 65,
+
+    -- Eft
+    TARICHUK = 66,
+
+    -- Wivre
+    UNUSUAL_WIVRE = 67,
+
+    -- Peiste
+    SIBILUS = 68,
+
+    -- Slime
+    CLOT = 73,
+    GOLD_SLIME = 74,
+    BOIL = 75,
+
+    -- Flan
+    GOLD_FLAN = 76,
+    BLANCMANGE = 77,
+
+    -- Sandworm
+    PYGMY_SANDWORM = 78,
+    GIGAWORM = 79,
+
+    -- Leech
+    AZURE_LEECH = 80,
+    OBDELLA = 81,
+
+    -- Crab
+    VERMILLION_CRAB = 84,
+    BASKET_BURDENED_CRAB = 85,
+    VERMILLION_BASKET_BURDENED_CRAB = 86,
+    PORTER_CRAB = 87,
+
+    -- Pugil
+    JAGIL = 88,
+
+    -- Sea Monk
+    AZURE_SEA_MONK = 89,
+
+    -- Uragnite
+    LIMASCABRA = 90,
+
+    -- Orobon
+    PYGMY_OROBON = 91,
+    OGREBON = 92,
+
+    -- Toad
+    AZURE_TOAD = 93,
+    VERMILLION_TOAD = 94,
+
+    -- Bird
+    ONYX_BIRD = 95,
+
+    -- Cockatrice
+    ZIZ = 96,
+
+    -- Roc
+    LEGENDARY_ROC = 97,
+    GAGANA = 98,
+
+    -- Bat
+    BATS = 99,
+    VERMILLION_BAT = 100,
+    VERMILLION_BATS = 101,
+
+    -- Apkallu
+    INGUZA = 102,
+
+    -- Colibri
+    TOUCALIBRI = 103,
+
+    -- Amphiptere
+    SANGUIPTERE = 104,
 }
 
 commandObj.onTrigger = function(player)
@@ -143,7 +330,7 @@ commandObj.onTrigger = function(player)
 
     -- Instincts
     -- NOTE: Since this is a bitfield, it's zero-indexed!
-    for key, val in pairs(monstrositySpecies) do
+    for _, val in pairs(monstrositySpecies) do
         local speciesKey   = val
         local speciesLevel = data.levels[val]
         local byteOffset   = math.floor(speciesKey / 4)
@@ -158,7 +345,18 @@ commandObj.onTrigger = function(player)
     end
 
     -- Variants
-    data.variants[0x00] = bit.bor(data.variants[0x00] or 0, bit.lshift(0xFF, 0))
+    -- Force unlock all
+    for _, val in pairs(monstrosityVariants) do
+        local speciesKey   = val
+        local byteOffset   = math.floor(speciesKey / 8)
+        local shiftAmount  = speciesKey % 8
+        print(speciesKey, byteOffset, shiftAmount)
+        if byteOffset < 32 then
+            data.variants[byteOffset] = bit.bor(data.variants[byteOffset] or 0, bit.lshift(0x01, shiftAmount))
+        else
+            print("byteOffset out of range")
+        end
+    end
 
     player:setMonstrosity(data);
 end
