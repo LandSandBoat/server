@@ -47,7 +47,6 @@ local dynamisMinLvl = 65
 local dynamisReservationCancel = 180
 local dynamisReentryDays = 3
 local dynamisReentryHours = 71
-local dynamisStagingTime = 15 -- Extra time added at registration of dynamis in minutes.
 
 local gmFlags =
 {
@@ -1141,7 +1140,7 @@ xi.dynamis.registerDynamis = function(player)
     -- luacheck: ignore 113
     local instanceID = RegisterDynamisInstance(zoneID, player:getID())
 
-    local expirationTime = os.time() + (60 * (60 + dynamisStagingTime)) -- Amount of time to extend timepoint by. 60 minutes by default for fresh zones.
+    local expirationTime = os.time() + 3600 -- Amount of time to extend timepoint by. 60 minutes by default for fresh zones.
 
     if zoneID == xi.zone.TAVNAZIAN_SAFEHOLD then
         expirationTime = os.time() + 60 * 15 -- Initial time for Dyna Tav should only be 15 minutes
