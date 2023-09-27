@@ -214,7 +214,7 @@ entity.onMobDespawn = function(mob)
 	    SpawnMob(despawnMob)
     end
     
-    GetNPCByID(ID.npc.QM_SEIRYU):setStatus(xi.status.NORMAL)
+    GetNPCByID(17961736):setStatus(xi.status.NORMAL) -- qm_seiryu
 end
 
 entity.onMobDeath = function(mob, player, isKiller)
