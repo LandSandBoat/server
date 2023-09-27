@@ -33,18 +33,6 @@ monstrosity::MonstrosityData_t::MonstrosityData_t(uint8 face, uint8 race)
 , Race(race)
 {
     // TODO: Populate instinct and levels from db
-    // Starting levels
-    levels[0] = 0x01;
-    levels[1] = 0x00;
-    levels[2] = 0x00;
-
-    instincts[0] = 0x00;
-    instincts[1] = 0x00;
-    instincts[2] = 0x00;
-
-    variants[0] = 0x00;
-    variants[1] = 0x00;
-    variants[2] = 0x00;
 }
 
 void monstrosity::HandleZoneIn(CCharEntity* PChar)
@@ -93,4 +81,14 @@ void monstrosity::SendFullMonstrosityUpdate(CCharEntity* PChar)
     PChar->pushPacket(new CMonipulatorPacket1(PChar));
     PChar->pushPacket(new CMonipulatorPacket2(PChar));
     PChar->updatemask |= UPDATE_LOOK;
+}
+
+void monstrosity::HandleEquipChangePacket(CCharEntity* PChar, CBasicPacket& data)
+{
+    if (PChar->loc.zone->GetID() != ZONE_FERETORY || PChar->m_PMonstrosity == nullptr)
+    {
+        return;
+    }
+
+    // TODO
 }

@@ -23,6 +23,8 @@
 
 #include "common/cbasetypes.h"
 
+#include "packets/basic.h"
+
 #include <array>
 
 class CCharEntity;
@@ -48,4 +50,5 @@ namespace monstrosity
     void   HandleZoneIn(CCharEntity* PChar);
     uint32 GetPackedMonstrosityName(CCharEntity* PChar);
     void   SendFullMonstrosityUpdate(CCharEntity* PChar);
+    void   HandleEquipChangePacket(CCharEntity* PChar, CBasicPacket& data);
 } // namespace monstrosity
