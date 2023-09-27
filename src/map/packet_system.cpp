@@ -49,6 +49,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "map.h"
 #include "message.h"
 #include "mob_modifier.h"
+#include "monstrosity.h"
 #include "notoriety_container.h"
 #include "packet_system.h"
 #include "party.h"
@@ -80,6 +81,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "lua/luautils.h"
 
 #include "packets/auction_house.h"
+#include "packets/basic.h"
 #include "packets/bazaar_check.h"
 #include "packets/bazaar_close.h"
 #include "packets/bazaar_confirmation.h"
@@ -7246,7 +7248,7 @@ void SmallPacket0x100(map_session_data_t* const PSession, CCharEntity* const PCh
 
 /************************************************************************
  *                                                                       *
- *  Set Blue Magic Spells                                                *
+ *  Set Blue Magic Spells / PUP Attachments / MON equip                  *
  *                                                                       *
  ************************************************************************/
 
@@ -7388,6 +7390,10 @@ void SmallPacket0x102(map_session_data_t* const PSession, CCharEntity* const PCh
         PChar->pushPacket(new CCharJobExtraPacket(PChar, true));
         PChar->pushPacket(new CCharJobExtraPacket(PChar, false));
         puppetutils::SaveAutomaton(PChar);
+    }
+    else if (PChar->loc.zone->GetID() == ZONE_FERETORY && PChar->m_PMonstrosity != nullptr)
+    {
+        monstrosity::HandleEquipChangePacket(PChar, data);
     }
 }
 
