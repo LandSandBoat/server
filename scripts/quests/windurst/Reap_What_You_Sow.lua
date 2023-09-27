@@ -26,9 +26,7 @@ quest.sections =
         -- Players can only start the quest if they are below rank 4 fame
         -- else they must complete let sleeping dogs lie
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE and
-            (player:getFameLevel(xi.quest.fame_area.WINDURST) < 4 or
-            player:hasCompletedQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.LET_SLEEPING_DOGS_LIE))
+            return status == QUEST_AVAILABLE
         end,
 
         [xi.zone.WINDURST_WATERS] =
@@ -36,8 +34,11 @@ quest.sections =
             ['Mashuu-Ajuu'] =
             {
                 onTrigger = function(player, npc)
-                    if player:getFameLevel(xi.quest.fame_area.WINDURST) >= 4 then
-                        return quest:progressEvent(483)
+                    if
+                        player:getFameLevel(xi.quest.fame_area.WINDURST) >= 4 and
+                        not player:hasCompletedQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.LET_SLEEPING_DOGS_LIE)
+                    then
+                        return quest:event(483)
                     else
                         return quest:progressEvent(463, 0, xi.items.SOBBING_FUNGUS, xi.items.BAG_OF_HERB_SEEDS)
                     end
@@ -47,7 +48,7 @@ quest.sections =
             onEventFinish =
             {
                 [463] = function(player, csid, option, npc)
-                    if npcUtil.giveItem(player, xi.items.BAG_OF_HERB_SEEDS) and option == 3 then
+                    if option == 3 and npcUtil.giveItem(player, xi.items.BAG_OF_HERB_SEEDS) then
                         quest:begin(player)
                     end
                 end,
