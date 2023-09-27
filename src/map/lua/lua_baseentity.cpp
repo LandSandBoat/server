@@ -12666,28 +12666,14 @@ bool CLuaBaseEntity::delLatent(uint16 condID, uint16 conditionValue, uint16 mID,
 
 int16 CLuaBaseEntity::getMaxGearMod(Mod modId)
 {
-    CCharEntity* PChar       = dynamic_cast<CCharEntity*>(m_PBaseEntity);
-    uint16       maxModValue = 0;
-
-    if (!PChar)
+    if (m_PBaseEntity->objtype != TYPE_PC)
     {
-        ShowWarning("CLuaBaseEntity::getMaxGearMod() - m_PBaseEntity is not a player.");
+        ShowWarning("Invalid Entity (Non-PC: %s) calling function.", m_PBaseEntity->GetName());
+
         return 0;
     }
 
-    for (uint8 i = 0; i < SLOT_BACK; ++i)
-    {
-        auto* PItem = PChar->getEquip((SLOTTYPE)i);
-        if (PItem && (PItem->isType(ITEM_EQUIPMENT) || PItem->isType(ITEM_WEAPON)))
-        {
-            uint16 modValue = PItem->getModifier(modId);
-            if (modValue > maxModValue)
-            {
-                maxModValue = modValue;
-            }
-        }
-    }
-    return maxModValue;
+    return static_cast<CCharEntity*>(m_PBaseEntity)->getMaxGearMod(static_cast<Mod>(modId));
 }
 
 /************************************************************************

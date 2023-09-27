@@ -84,7 +84,7 @@ end
 -- https://www.bg-wiki.com/ffxi/Agwu%27s_Scythe Souleater Effect that goes beyond established cap, Stalwart Soul bonus being additive to trait
 local function souleaterBonus(attacker, wsParams)
     if attacker:hasStatusEffect(xi.effect.SOULEATER) then
-        local souleaterEffect   = attacker:getMaxGearMod(xi.mod.SOULEATER_EFFECT) * 0.01)
+        local souleaterEffect   = attacker:getMaxGearMod(xi.mod.SOULEATER_EFFECT) * 0.01
         local souleaterEffectII = attacker:getMod(xi.mod.SOULEATER_EFFECT_II) * 0.01
         local stalwartSoulBonus = 1 - attacker:getMod(xi.mod.STALWART_SOUL) / 100
         local bonusDamage       = math.floor(attacker:getHP() * (0.1 + souleaterEffect + souleaterEffectII))

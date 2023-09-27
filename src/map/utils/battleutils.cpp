@@ -4471,7 +4471,7 @@ namespace battleutils
         if (m_PChar->StatusEffectContainer->HasStatusEffect(EFFECT_SOULEATER))
         {
             // Souleater's HP consumed is 10% (base) + x% from gear (ONLY HIGHEST) + x% from gear augments.
-            float souleaterBonus    = m_PChar->getMaxGearMod(Mod::SOULEATER_EFFECT) * 0.01);
+            float souleaterBonus    = m_PChar->getMaxGearMod(Mod::SOULEATER_EFFECT) * 0.01;
             float souleaterBonusII  = m_PChar->getMod(Mod::SOULEATER_EFFECT_II) * 0.01;
             float stalwartSoulBonus = 1 - static_cast<float>(m_PChar->getMod(Mod::STALWART_SOUL)) / 100;
             float bonusDamage       = m_PChar->health.hp * (0.1f + souleaterBonus + souleaterBonusII);
