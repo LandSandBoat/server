@@ -50,8 +50,8 @@ CMonipulatorPacket2::CMonipulatorPacket2(CCharEntity* PChar)
 
     // Bitpacked 2-bit values. 0 = no instincts from that species, 1 == first instinct, 2 == first and second instinct, 3 == first, second, and third instinct.
     // Contains job/race instincts from the 0x03 set. Has 8 unused bytes. This is a 1:1 mapping.
-    // TODO: Hook up to use latter parts of instincts array
-    // std::memcpy(data + 0x88, PChar->m_PMonstrosity->instincts.data(), 12); // Instinct Bitfield 3
+    // Since this has 8 unused bytes, we're only going to use 4 from instincts[20:23]
+    std::memcpy(data + 0x88, PChar->m_PMonstrosity->instincts.data() + 20, 4); // Instinct Bitfield 3
 
     // Does not show normal monsters, only variants. Bit is 1 if the variant is owned. Length is an estimation including the possible padding.
     std::memcpy(data + 0x94, PChar->m_PMonstrosity->variants.data(), 32); // Variants Bitfield
