@@ -89,10 +89,8 @@ local monstrositySpecies =
     COLIBRI    = 75,
     AMPHIPTERE = 76,
 
-    -- Others are not part of the regular structure, but it's useful to map them here anyway.
-    -- Using arbitrary offsets!
-    DQ_SLIME       = 80,
-    FFXIV_SPRIGGAN = 81,
+    DQ_SLIME       = 126,
+    FFXIV_SPRIGGAN = 127,
 }
 
 -- NOTE: This was mapped by hand, the gaps might be mistakes!
@@ -130,26 +128,26 @@ local monstrosityVariants =
     COPPERCAP = 15,
 
     -- Treant Sapling
-    TREANT = 16,
-    FLOWERING_TREANT = 17,
+    TREANT                = 16,
+    FLOWERING_TREANT      = 17,
     SCARLET_TINGED_TREANT = 18,
-    BARREN_TREANT = 19,
-    NECKLACED_TREANT = 20,
+    BARREN_TREANT         = 19,
+    NECKLACED_TREANT      = 20,
 
     -- Morbol
     PYGMY_MORBOL = 21,
     SCARE_MORBOL = 22,
-    AMERETAT = 23,
-    PURBOL = 24,
+    AMERETAT     = 23,
+    PURBOL       = 24,
 
     -- Mandragora
-    KORRIGAN = 25,
-    LYCOPODIUM = 26,
-    PYGMY_MANDRAGORA = 27,
-    ADENIUM = 28,
-    PACHYPODIUM = 29,
+    KORRIGAN               = 25,
+    LYCOPODIUM             = 26,
+    PYGMY_MANDRAGORA       = 27,
+    ADENIUM                = 28,
+    PACHYPODIUM            = 29,
     ENLIGHTENED_MANDRAGORA = 30,
-    NEW_YEAR_MANDRAGORA = 31,
+    NEW_YEAR_MANDRAGORA    = 31,
 
     -- Sabotender
     SABOTENDER_FLORIDO = 32,
@@ -159,31 +157,31 @@ local monstrosityVariants =
 
     -- Bee
     VERMILLION_AND_ONYX_BEE = 34,
-    ZAFFRE_BEE = 35,
+    ZAFFRE_BEE              = 35,
 
     -- Beetle
-    ONYX_BEETLE = 36,
+    ONYX_BEETLE    = 36,
     GAMBOGE_BEETLE = 37,
 
     -- Crawler
-    ERUCA = 38,
-    EMERALD_CRAWLER = 39,
+    ERUCA                 = 38,
+    EMERALD_CRAWLER       = 39,
     PYGMY_EMERALD_CRAWLER = 40,
 
     -- Fly
     VERMILLION_FLY = 41,
 
     -- Scorpion
-    SCOLOPENDRID = 42,
+    SCOLOPENDRID         = 42,
     UNUSUAL_SCOLOPENDRID = 43,
 
     -- Spider
-    RETICULATED_SPIDER = 44,
+    RETICULATED_SPIDER         = 44,
     VERMILLION_AND_ONYX_SPIDER = 45,
 
     -- Antlion
     ONYX_ANTLION = 46,
-    FORMICEROS = 47,
+    FORMICEROS   = 47,
 
     -- Diremite
     ARUNDIMITE = 48,
@@ -195,7 +193,7 @@ local monstrosityVariants =
     COILED_WAMOURACAMPA = 50,
 
     -- Wamoura
-    WAMOURA = 51,
+    WAMOURA       = 51,
     CORAL_WAMOURA = 52,
 
     -- Ladybug
@@ -208,13 +206,13 @@ local monstrosityVariants =
     ASHEN_LIZARD = 59,
 
     -- Raptor
-    EMERALD_RAPTOR = 60,
+    EMERALD_RAPTOR    = 60,
     VERMILLION_RAPTOR = 61,
 
     -- Adamantoise
-    PYGMY_ADAMANTOISE = 62,
+    PYGMY_ADAMANTOISE     = 62,
     LEGENDARY_ADAMANTOISE = 63,
-    FERROMANTOISE = 64,
+    FERROMANTOISE         = 64,
 
     -- Bugard
     ABYSSOBUGARD = 65,
@@ -229,27 +227,27 @@ local monstrosityVariants =
     SIBILUS = 68,
 
     -- Slime
-    CLOT = 73,
+    CLOT       = 73,
     GOLD_SLIME = 74,
-    BOIL = 75,
+    BOIL       = 75,
 
     -- Flan
-    GOLD_FLAN = 76,
+    GOLD_FLAN  = 76,
     BLANCMANGE = 77,
 
     -- Sandworm
     PYGMY_SANDWORM = 78,
-    GIGAWORM = 79,
+    GIGAWORM       = 79,
 
     -- Leech
     AZURE_LEECH = 80,
-    OBDELLA = 81,
+    OBDELLA     = 81,
 
     -- Crab
-    VERMILLION_CRAB = 84,
-    BASKET_BURDENED_CRAB = 85,
+    VERMILLION_CRAB                 = 84,
+    BASKET_BURDENED_CRAB            = 85,
     VERMILLION_BASKET_BURDENED_CRAB = 86,
-    PORTER_CRAB = 87,
+    PORTER_CRAB                     = 87,
 
     -- Pugil
     JAGIL = 88,
@@ -262,10 +260,10 @@ local monstrosityVariants =
 
     -- Orobon
     PYGMY_OROBON = 91,
-    OGREBON = 92,
+    OGREBON      = 92,
 
     -- Toad
-    AZURE_TOAD = 93,
+    AZURE_TOAD      = 93,
     VERMILLION_TOAD = 94,
 
     -- Bird
@@ -276,11 +274,11 @@ local monstrosityVariants =
 
     -- Roc
     LEGENDARY_ROC = 97,
-    GAGANA = 98,
+    GAGANA        = 98,
 
     -- Bat
-    BATS = 99,
-    VERMILLION_BAT = 100,
+    BATS            = 99,
+    VERMILLION_BAT  = 100,
     VERMILLION_BATS = 101,
 
     -- Apkallu
@@ -291,6 +289,14 @@ local monstrosityVariants =
 
     -- Amphiptere
     SANGUIPTERE = 104,
+
+    -- Slime
+    SHE_SLIME   = 252,
+    METAL_SLIME = 253,
+
+    -- Spriggan
+    SPRIGGAN_C = 254,
+    SPRIGGAN_G = 255,
 }
 
 commandObj.onTrigger = function(player)
@@ -309,15 +315,17 @@ commandObj.onTrigger = function(player)
         race = 11,
 
         -- 1 byte per entry, mapped out to monstrositySpecies table
+        -- (0 - 127)
         levels =
         {
         },
 
-        -- Bitfield
+        -- Bitfield (0 - 63)
         instincts =
         {
         },
 
+        -- Bitfield (0 - 31)
         variants =
         {
         },
@@ -325,7 +333,7 @@ commandObj.onTrigger = function(player)
 
     -- Set all levels to 99
     for _, val in pairs(monstrositySpecies) do
-        data.levels[val] = 99
+        data.levels[val] = 30
     end
 
     -- Instincts
@@ -336,7 +344,14 @@ commandObj.onTrigger = function(player)
         local byteOffset   = math.floor(speciesKey / 4)
         local unlockAmount = math.floor(speciesLevel / 30)
         local shiftAmount  = (speciesKey * 2) % 8
-        -- print(key, speciesKey, speciesLevel, unlockAmount, byteOffset .. ':' .. shiftAmount)
+
+        -- Special case for writing Slime & Spriggan data at the end of the 64-byte array
+        if byteOffset == 31 then
+            byteOffset = 63
+        end
+
+        -- print(speciesKey, speciesLevel, unlockAmount, byteOffset .. ':' .. shiftAmount)
+
         if byteOffset < 64 then
             data.instincts[byteOffset] = bit.bor(data.instincts[byteOffset] or 0, bit.lshift(unlockAmount, shiftAmount))
         else
@@ -350,7 +365,9 @@ commandObj.onTrigger = function(player)
         local speciesKey   = val
         local byteOffset   = math.floor(speciesKey / 8)
         local shiftAmount  = speciesKey % 8
-        print(speciesKey, byteOffset, shiftAmount)
+
+        -- print(speciesKey, byteOffset, shiftAmount)
+
         if byteOffset < 32 then
             data.variants[byteOffset] = bit.bor(data.variants[byteOffset] or 0, bit.lshift(0x01, shiftAmount))
         else

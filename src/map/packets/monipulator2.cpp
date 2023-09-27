@@ -41,13 +41,12 @@ CMonipulatorPacket2::CMonipulatorPacket2(CCharEntity* PChar)
     std::array<uint8, 3> packet2 = { 0x04, 0x00, 0xB0 };
     std::memcpy(data + (0x04), &packet2, sizeof(packet2));
 
-    // NOTE: SE added these after-the-fact, so they're not sent in Monipulator1, but
-    //     : we store their data there anyway.
+    // NOTE: SE added these after-the-fact, so they're not sent in Monipulator1 and they're at the end of the array!
     // Slime Level
-    ref<uint8>(0x86) = PChar->m_PMonstrosity->levels[80];
+    ref<uint8>(0x86) = PChar->m_PMonstrosity->levels[126];
 
     // Spriggan Level
-    ref<uint8>(0x87) = PChar->m_PMonstrosity->levels[81];
+    ref<uint8>(0x87) = PChar->m_PMonstrosity->levels[127];
 
     // Bitpacked 2-bit values. 0 = no instincts from that species, 1 == first instinct, 2 == first and second instinct, 3 == first, second, and third instinct.
     // Contains job/race instincts from the 0x03 set. Has 8 unused bytes. This is a 1:1 mapping.
