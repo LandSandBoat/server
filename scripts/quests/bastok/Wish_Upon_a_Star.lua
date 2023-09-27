@@ -88,8 +88,11 @@ quest.sections =
                     if npcUtil.tradeHasExactly(trade, xi.items.FALLEN_STAR) then
                         local isNight = VanadielTOTD() == xi.time.NIGHT or VanadielTOTD() == xi.time.MIDNIGHT
 
+                        -- Accept also SUNSHINE weather for now as currently bastok markets does not have any NONE weather patterns
+                        -- However retail captures indicate it should have NONE roughly half of the time so can revisit
                         if
-                            player:getWeather() == xi.weather.NONE and
+                            (player:getWeather() == xi.weather.NONE or
+                            player:getWeather() == xi.weather.SUNSHINE) and
                             isNight
                         then
                             return quest:progressEvent(334)
