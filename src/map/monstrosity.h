@@ -23,6 +23,8 @@
 
 #include "common/cbasetypes.h"
 
+#include <array>
+
 class CCharEntity;
 
 namespace monstrosity
@@ -30,17 +32,20 @@ namespace monstrosity
     struct MonstrosityData_t
     {
     public:
+        MonstrosityData_t(uint8 face, uint8 race);
+
+        // TODO: Should these be a single uint16?
         uint8 Face;
         uint8 Race;
 
-        MonstrosityData_t(uint8 face, uint8 race)
-        : Face(face)
-        , Race(race)
-        {
-            //
-        }
+        // TODO: Extend this to be large enough to hold Slime and Spriggan levels
+        //     : but don't use sizeof() with this structure.
+        std::array<uint8, 128> levels{ 0 };
+        std::array<uint8, 64>  instincts{ 0 };
+        std::array<uint8, 32>  variants{ 0 };
     };
 
     void   HandleZoneIn(CCharEntity* PChar);
     uint32 GetPackedMonstrosityName(CCharEntity* PChar);
+    void   SendFullMonstrosityUpdate(CCharEntity* PChar);
 } // namespace monstrosity
