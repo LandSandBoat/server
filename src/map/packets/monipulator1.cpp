@@ -19,9 +19,11 @@
 ===========================================================================
 */
 
-#include "common/socket.h"
-
 #include "monipulator1.h"
+
+#include "common/socket.h"
+#include "entities/charentity.h"
+#include "monstrosity.h"
 #include "utils/charutils.h"
 
 CMonipulatorPacket1::CMonipulatorPacket1(CCharEntity* PChar)
@@ -29,22 +31,28 @@ CMonipulatorPacket1::CMonipulatorPacket1(CCharEntity* PChar)
     this->setType(0x63);
     this->setSize(0xDC);
 
+    if (PChar->m_PMonstrosity == nullptr)
+    {
+        return;
+    }
+
     ref<uint8>(0x04) = 0x03; // Update Type
     ref<uint8>(0x06) = 0xD8; // Variable Data Size
 
-    ref<uint16>(0x08) = (0xFCFE); // Species
-    ref<uint16>(0x0A) = (0x0B45); // Flags?
-    ref<uint8>(0x0C)  = 0;        // Monstrosity Rank (0 = Mon, 1 = NM, 2 = HNM)
+    ref<uint16>(0x08) = 0xFCFE; // Species? Also seen 0x3F1F
+    // ref<uint16>(0x0A) = 0x0B45; // Flags? Also seen 0x0B46
 
-    ref<uint16>(0x10) = (0x0074);
+    ref<uint8>(0x0C) = 0; // Monstrosity Rank (0 = Mon, 1 = NM, 2 = HNM)
+
+    // Falculties?
+    // ref<uint8>(0x10) = 0xFF;
+    // ref<uint8>(0x11) = 0xFF;
+
     ref<uint16>(0x12) = charutils::GetPoints(PChar, "infamy");
 
-    std::array<uint8, 64> instinct{ 0 };
+    // Bitpacked 2-bit values. 0 = no instincts from that species, 1 == first instinct, 2 == first and second instinct, 3 == first, second, and third instinct.
+    std::memcpy(data + 0x1C, PChar->m_PMonstrosity->instincts.data(), 64); // Instinct Bitfield 1
 
-    std::array<uint8, 128> levels{ 0 };
-    levels[1]  = 0x01;
-    levels[18] = 0x01;
-
-    std::memcpy(data + 0x1C, instinct.data(), 64); // Instinct Battlefield 1
-    std::memcpy(data + 0x5C, levels.data(), 128);  // Monster Level Char Field
+    // Mapped onto the item ID for these creatures. (00 doesn't exist, 01 is rabbit, 02 is behemoth, etc.)
+    std::memcpy(data + 0x5C, PChar->m_PMonstrosity->levels.data(), 128);  // Monster Level Bitfield
 }

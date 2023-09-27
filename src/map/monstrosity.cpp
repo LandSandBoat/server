@@ -22,7 +22,30 @@
 #include "monstrosity.h"
 
 #include "entities/charentity.h"
+
+#include "packets/monipulator1.h"
+#include "packets/monipulator2.h"
+
 #include "utils/charutils.h"
+
+monstrosity::MonstrosityData_t::MonstrosityData_t(uint8 face, uint8 race)
+: Face(face)
+, Race(race)
+{
+    // TODO: Populate instinct and levels from db
+    // Starting levels
+    levels[0] = 0x01;
+    levels[1] = 0x00;
+    levels[2] = 0x00;
+
+    instincts[0] = 0x00;
+    instincts[1] = 0x00;
+    instincts[2] = 0x00;
+
+    variants[0] = 0x00;
+    variants[1] = 0x00;
+    variants[2] = 0x00;
+}
 
 void monstrosity::HandleZoneIn(CCharEntity* PChar)
 {
@@ -58,4 +81,16 @@ uint32 monstrosity::GetPackedMonstrosityName(CCharEntity* PChar)
 
     // Packed as LE
     return (d << 24) + (c << 16) + (b << 8) + (a << 0);
+}
+
+void monstrosity::SendFullMonstrosityUpdate(CCharEntity* PChar)
+{
+    if (PChar->m_PMonstrosity == nullptr)
+    {
+        return;
+    }
+
+    PChar->pushPacket(new CMonipulatorPacket1(PChar));
+    PChar->pushPacket(new CMonipulatorPacket2(PChar));
+    PChar->updatemask |= UPDATE_LOOK;
 }

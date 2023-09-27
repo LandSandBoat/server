@@ -6306,6 +6306,41 @@ void CLuaBaseEntity::addJobTraits(uint8 jobID, uint8 level)
     }
 }
 
+void CLuaBaseEntity::setMonstrosity(sol::table table)
+{
+    auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
+    if (PChar->m_PMonstrosity == nullptr)
+    {
+        return;
+    }
+
+    PChar->m_PMonstrosity->Face = table.get<uint8>("face");
+    PChar->m_PMonstrosity->Race = table.get<uint8>("race");
+
+    for (auto const& [keyObj, valObj] : table.get<sol::table>("levels"))
+    {
+        uint8 key = keyObj.as<uint8>();
+        uint8 val = valObj.as<uint8>();
+        PChar->m_PMonstrosity->levels[key] = val;
+    }
+
+    for (auto const& [keyObj, valObj] : table.get<sol::table>("instincts"))
+    {
+        uint8 key = keyObj.as<uint8>();
+        uint8 val = valObj.as<uint8>();
+        PChar->m_PMonstrosity->instincts[key] = val;
+    }
+
+    for (auto const& [keyObj, valObj] : table.get<sol::table>("variants"))
+    {
+        uint8 key = keyObj.as<uint8>();
+        uint8 val = valObj.as<uint8>();
+        PChar->m_PMonstrosity->variants[key] = val;
+    }
+
+    monstrosity::SendFullMonstrosityUpdate(PChar);
+}
+
 /************************************************************************
  *  Function: getTitle()
  *  Purpose : Returns the integer value of the player's current title
@@ -17075,6 +17110,8 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("setLevelCap", CLuaBaseEntity::setLevelCap);
     SOL_REGISTER("levelRestriction", CLuaBaseEntity::levelRestriction);
     SOL_REGISTER("addJobTraits", CLuaBaseEntity::addJobTraits);
+
+    SOL_REGISTER("setMonstrosity", CLuaBaseEntity::setMonstrosity);
 
     // Player Titles and Fame
     SOL_REGISTER("getTitle", CLuaBaseEntity::getTitle);
