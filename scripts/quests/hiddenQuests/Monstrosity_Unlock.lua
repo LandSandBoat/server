@@ -2,10 +2,11 @@
 -- Unlocking Monstrosity
 -----------------------------------
 
+-- TODO: There is a Monstrosity Quest in "Other Areas", we should be using that!
+
 local quest = HiddenQuest:new('MonstrosityUnlock')
 
 -- TODO: Handle xi.settings.main.ENABLE_MONSTROSITY
--- TODO: Hide completion behind a UniqueEvent flag
 
 quest.sections =
 {
