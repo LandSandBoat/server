@@ -180,11 +180,11 @@ end
 entity.onMobDespawn = function(mob)
     mob:resetLocalVars()
 
-	for _, despawnMob in ipairs(despawnMobTable) do
-	    SpawnMob(despawnMob)
+    for _, despawnMob in ipairs(despawnMobTable) do
+        SpawnMob(despawnMob)
     end
 
-    GetNPCByID(ID.npc.QM_SUZAKU):setStatus(xi.status.NORMAL)
+    GetNPCByID(17961731):setStatus(xi.status.NORMAL) -- qm_suzaku
 end
 
 return entity

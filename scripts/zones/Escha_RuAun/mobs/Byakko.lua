@@ -144,8 +144,8 @@ entity.onMobDespawn = function(mob)
     for _, despawnMob in ipairs(despawnMobTable) do
         SpawnMob(despawnMob)
     end
-    
-    GetNPCByID(ID.npc.QM_BYAKKO):setStatus(xi.status.NORMAL)
+
+    GetNPCByID(17961730):setStatus(xi.status.NORMAL) -- qm_byakko
 end
 
 return entity

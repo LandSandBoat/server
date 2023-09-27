@@ -9,7 +9,7 @@ local entity = {}
 entity.onTrigger = function(player, npc)
     player:addKeyItem(xi.keyItem.BYAKKOS_PRIDE)
     player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.keyItem.BYAKKOS_PRIDE)
-    GetNPCByID(ID.npc.QM_BYAKKO):setStatus(xi.status.DISAPPEAR)
+    GetNPCByID(17961730):setStatus(xi.status.DISAPPEAR)
 end
 
 return entity
