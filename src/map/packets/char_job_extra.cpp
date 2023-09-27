@@ -29,13 +29,19 @@
 #include "entities/automatonentity.h"
 #include "entities/charentity.h"
 #include "merit.h"
+#include "monstrosity.h"
+
+namespace
+{
+    uint8 JOB_MON = 23;
+} // namespace
 
 CCharJobExtraPacket::CCharJobExtraPacket(CCharEntity* PChar, bool mjob)
 {
     this->setType(0x44);
     this->setSize(0xA0);
 
-    JOBTYPE job = JOB_NON;
+    uint8 job = JOB_NON;
 
     if (mjob)
     {
@@ -44,6 +50,11 @@ CCharJobExtraPacket::CCharJobExtraPacket(CCharEntity* PChar, bool mjob)
     else
     {
         job = PChar->GetSJob();
+    }
+
+    if (PChar->loc.zone->GetID() == ZONE_FERETORY && PChar->m_PMonstrosity != nullptr)
+    {
+        job = JOB_MON;
     }
 
     ref<uint8>(0x04) = job;
@@ -126,5 +137,130 @@ CCharJobExtraPacket::CCharJobExtraPacket(CCharEntity* PChar, bool mjob)
         ref<uint16>(0x9A) = PChar->PAutomaton->getMod(Mod::CHR);
 
         ref<uint8>(0x9C) = PChar->getMod(Mod::AUTO_ELEM_CAPACITY);
+    }
+    else if (job == JOB_MON && PChar->loc.zone->GetID() == ZONE_FERETORY && PChar->m_PMonstrosity != nullptr)
+    {
+        /*
+             |  0  1  2  3   4  5  6  7   8  9  A  B   C  D  E  F    | 0123456789ABCDEF
+        -----+----------------------------------------------------  -+------------------
+           0 | 44 50 55 01  17 00 00 00  FD 01 00 FF  FA 02 05 03    | DPU.............
+          10 | 07 03 09 03  00 00 00 00  00 00 00 00  00 00 00 00    | ................
+          20 | 00 00 00 00  09 7D 08 00  28 04 64 02  33 00 64 20    | .....}..(.d.3.d
+          30 | 00 6C FB 38  00 00 20 00  00 00 00 00  20 A0 03 00    | .l.8.. ..... ...
+          40 | 4C DC E3 28  00 00 00 00  00 00 00 00  00 00 00 00    | L..(............
+          50 | 00 00 00 00  FD 81 09 7D  00 06 00 00  7B 00 00 00    | .......}....{...
+          60 | 00 00 00 00  00 00 00 00  00 00 00 00  00 00 00 00    | ................
+          70 | 00 00 00 00  00 00 00 00  00 00 00 00  00 00 00 00    | ................
+          80 | 00 00 00 00  00 00 00 00  00 00 00 00  00 00 00 00    | ................
+          90 | 00 00 00 00  00 00 00 00  00 00 00 00  00 00 00 00    | ................
+        */
+
+        ref<uint16>(0x08) = PChar->m_PMonstrosity->Species;
+
+        for (std::size_t idx = 0; idx < 12; idx += 2)
+        {
+            ref<uint8>(0x0C + idx) = PChar->m_PMonstrosity->EquippedInstincts[idx];
+        }
+
+        /*
+        ref<uint8>(0x0C) = 0x00;
+        ref<uint8>(0x0D) = 0x03;
+        ref<uint8>(0x0E) = 0x00;
+        ref<uint8>(0x0F) = 0x03;
+
+
+        ref<uint8>(0x10) = 0x07;
+        ref<uint8>(0x11) = 0x03;
+        ref<uint8>(0x12) = 0x09;
+        ref<uint8>(0x13) = 0x03;
+        ref<uint8>(0x14) = 0x00;
+        ref<uint8>(0x15) = 0x00;
+        ref<uint8>(0x16) = 0x00;
+        ref<uint8>(0x17) = 0x00;
+        ref<uint8>(0x18) = 0x00;
+        ref<uint8>(0x19) = 0x00;
+        ref<uint8>(0x1A) = 0x00;
+        ref<uint8>(0x1B) = 0x00;
+        ref<uint8>(0x1C) = 0x00;
+        ref<uint8>(0x1D) = 0x00;
+        ref<uint8>(0x1E) = 0x00;
+        ref<uint8>(0x1F) = 0x00;
+
+        ref<uint8>(0x20) = 0x00;
+        ref<uint8>(0x21) = 0x00;
+        ref<uint8>(0x22) = 0x00;
+        ref<uint8>(0x23) = 0x00;
+        ref<uint8>(0x24) = 0x09;
+        ref<uint8>(0x25) = 0x7D;
+        ref<uint8>(0x26) = 0x08;
+        ref<uint8>(0x27) = 0x00;
+        ref<uint8>(0x28) = 0x28;
+        ref<uint8>(0x29) = 0x04;
+        ref<uint8>(0x2A) = 0x64;
+        ref<uint8>(0x2B) = 0x02;
+        ref<uint8>(0x2C) = 0x33;
+        ref<uint8>(0x2D) = 0x00;
+        ref<uint8>(0x2E) = 0x64;
+        ref<uint8>(0x2F) = 0x20;
+
+        ref<uint8>(0x30) = 0x00;
+        ref<uint8>(0x31) = 0x6C;
+        ref<uint8>(0x32) = 0xFB;
+        ref<uint8>(0x33) = 0x38;
+        ref<uint8>(0x34) = 0x00;
+        ref<uint8>(0x35) = 0x00;
+        ref<uint8>(0x36) = 0x20;
+        ref<uint8>(0x37) = 0x00;
+        ref<uint8>(0x38) = 0x00;
+        ref<uint8>(0x39) = 0x00;
+        ref<uint8>(0x3A) = 0x00;
+        ref<uint8>(0x3B) = 0x00;
+        ref<uint8>(0x3C) = 0x20;
+        ref<uint8>(0x3D) = 0xA0;
+        ref<uint8>(0x3E) = 0x03;
+        ref<uint8>(0x3F) = 0x00;
+
+        ref<uint8>(0x40) = 0x4C;
+        ref<uint8>(0x41) = 0xDC;
+        ref<uint8>(0x42) = 0xE3;
+        ref<uint8>(0x43) = 0x28;
+        ref<uint8>(0x44) = 0x00;
+        ref<uint8>(0x45) = 0x00;
+        ref<uint8>(0x46) = 0x00;
+        ref<uint8>(0x47) = 0x00;
+        ref<uint8>(0x48) = 0x00;
+        ref<uint8>(0x49) = 0x00;
+        ref<uint8>(0x4A) = 0x00;
+        ref<uint8>(0x4B) = 0x00;
+        ref<uint8>(0x4C) = 0x00;
+        ref<uint8>(0x4D) = 0x00;
+        ref<uint8>(0x4E) = 0x00;
+        ref<uint8>(0x4F) = 0x00;
+
+        ref<uint8>(0x50) = 0x00;
+        ref<uint8>(0x51) = 0x00;
+        ref<uint8>(0x52) = 0x00;
+        ref<uint8>(0x53) = 0x00;
+        ref<uint8>(0x54) = 0xFD;
+        ref<uint8>(0x55) = 0x81;
+        ref<uint8>(0x56) = 0x09;
+        ref<uint8>(0x57) = 0x7D;
+        ref<uint8>(0x58) = 0x00;
+        ref<uint8>(0x59) = 0x06;
+        ref<uint8>(0x5A) = 0x00;
+        ref<uint8>(0x5B) = 0x00;
+        ref<uint8>(0x5C) = 0x7B;
+        ref<uint8>(0x5D) = 0x00;
+        ref<uint8>(0x5E) = 0x00;
+        ref<uint8>(0x5F) = 0x00;
+
+        // Random things from other packet caps
+        ref<uint8>(0x6C) = 0x01;
+        ref<uint8>(0x6E) = 0x01;
+        ref<uint8>(0x77) = 0x01;
+        ref<uint8>(0x87) = 0x24;
+        ref<uint8>(0x8A) = 0x28;
+        ref<uint8>(0x96) = 0x19;
+        */
     }
 }

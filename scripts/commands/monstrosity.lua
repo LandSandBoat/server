@@ -350,9 +350,6 @@ commandObj.onTrigger = function(player)
     ]]
     local data =
     {
-        face = 74,
-        race = 11,
-
         -- 1 byte per entry, mapped out to monstrositySpecies table
         -- (0 - 127)
         levels =
@@ -372,7 +369,7 @@ commandObj.onTrigger = function(player)
 
     -- Set all levels to 99
     for _, val in pairs(monstrositySpecies) do
-        data.levels[val] = 30
+        data.levels[val] = 99
     end
 
     -- Instincts by MON level
