@@ -25,6 +25,7 @@
 
 #include "char_jobs.h"
 #include "entities/charentity.h"
+#include "monstrosity.h"
 
 CCharJobsPacket::CCharJobsPacket(CCharEntity* PChar)
 {
@@ -56,4 +57,28 @@ CCharJobsPacket::CCharJobsPacket(CCharEntity* PChar)
 
     ref<uint8>(0x68) = 0; // Is job mastered, and has Master Breaker KI
     ref<uint8>(0x6D) = 0; // Master Level
+
+    if (PChar->m_PMonstrosity)
+    {
+        ref<uint8>(0x08) = 0x17; // JOB_MON
+        ref<uint8>(0x0B) = 0x17; // JOB_MON
+
+        ref<uint8>(0x10) = 0x01;
+        /*
+        ref<uint8>(0x2E) = 0x07;
+        ref<uint8>(0x30) = 0x07;
+        ref<uint8>(0x32) = 0x0A;
+        ref<uint8>(0x34) = 0x07;
+        ref<uint8>(0x36) = 0x04;
+        ref<uint8>(0x38) = 0x07;
+        ref<uint8>(0x3A) = 0x04;
+
+        ref<uint8>(0x48) = 0x01;
+
+        ref<uint8>(0x5F) = 0x10; // MON level
+        ref<uint8>(0x64) = 0x03;
+        ref<uint8>(0x66) = 0x02;
+        ref<uint8>(0x69) = 0x20;
+        */
+    }
 }

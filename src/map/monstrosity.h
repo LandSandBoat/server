@@ -40,6 +40,14 @@ namespace monstrosity
         uint8 Face;
         uint8 Race;
 
+        // TODO: Whats the link between look (Face+Race), Species, and Flags?
+        uint16 Species;
+
+        uint8 Name1;
+        uint8 Name2;
+
+        std::array<uint16, 12> EquippedInstincts{ 0 };
+
         // TODO: Extend this to be large enough to hold Slime and Spriggan levels
         //     : but don't use sizeof() with this structure.
         std::array<uint8, 128> levels{ 0 };

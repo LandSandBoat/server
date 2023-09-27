@@ -6314,9 +6314,6 @@ void CLuaBaseEntity::setMonstrosity(sol::table table)
         return;
     }
 
-    PChar->m_PMonstrosity->Face = table.get<uint8>("face");
-    PChar->m_PMonstrosity->Race = table.get<uint8>("race");
-
     for (auto const& [keyObj, valObj] : table.get<sol::table>("levels"))
     {
         uint8 key = keyObj.as<uint8>();
