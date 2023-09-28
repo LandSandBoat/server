@@ -17,14 +17,14 @@ end
 function onTrigger(player, playerName)
     local targ
     if not playerName or playerName == "" then
-      targ = player:getCursorTarget()
+        targ = player:getCursorTarget()
     else
-      targ = GetPlayerByName(playerName)
+        targ = GetPlayerByName(playerName)
     end
 
     if not targ or not targ:isPC() then
-      error(player, string.format("Failed to find player by name '%s'", playerName))
-      return
+        error(player, string.format("Failed to find player by name '%s'", playerName))
+        return
     end
 
     targ:setCharVar("DynaReservationStart", 73)
