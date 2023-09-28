@@ -334,8 +334,7 @@ local function getSingleHitDamage(attacker, target, dmg, wsParams, calcParams, f
 
     if
         (missChance <= calcParams.hitRate or
-        calcParams.guaranteedHit or
-        calcParams.melee) and
+        calcParams.guaranteedHit) and
         not calcParams.mustMiss
     then
         if not shadowAbsorb(target) then
