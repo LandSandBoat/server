@@ -40,6 +40,7 @@ mission.sections =
             {
                 [564] = function(player, csid, option, npc)
                     if option == 1 then
+                        player:setCharVar('Mission[4][5]Stage', getMidnight())
                         player:delKeyItem(xi.ki.RAILLEFALS_LETTER)
                         mission:complete(player)
                     end
