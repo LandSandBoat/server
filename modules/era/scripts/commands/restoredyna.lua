@@ -1,6 +1,6 @@
 -----------------------------------
 -- func: restoredyna
--- desc: Stores the last dyna instance for a zone 
+-- desc: Stores the last dyna instance for a zone
 -----------------------------------
 
 cmdprops =
@@ -48,10 +48,11 @@ function onTrigger(player, zoneName)
     end
 
     -- Get Instance ID for zone
-    local instanceID = GetServerVariable(string.format("[SNAPSHOT][DYNA]InstanceID_%s", zone:getID()));
+    local instanceID = GetServerVariable(string.format("[SNAPSHOT][DYNA]InstanceID_%s", zone:getID()))
 
     -- Restore Zone
     xi.dynamis.restoreDynamis(zone)
+    -- luacheck: ignore 113
     ResetDynamisInstance(instanceID)
     player:PrintToPlayer("RestoreDyna: Successfully restored Dynamis!")
 end

@@ -23,17 +23,18 @@ local zoneMap =
     ["TAVNAZIA"] = xi.zone.DYNAMIS_TAVNAZIA
 }
 
-local bosses = {
-  ["BASTOK"] = 110,
-  ["WINDURST"] = 121,
-  ["SAN_DORIA"] = 109,
-  ["JEUNO"] = 113,
-  ["BEAUCEDINE"] = 163,
-  ["XARCABARD"] = 179,
-  ["VALKURM"] = 24,
-  ["QUFIM"] = 64,
-  ["BUBURIMU"] = 61,
-  ["TAVNAZIA"] = 0
+local bosses =
+{
+    ["BASTOK"] = 110,
+    ["WINDURST"] = 121,
+    ["SAN_DORIA"] = 109,
+    ["JEUNO"] = 113,
+    ["BEAUCEDINE"] = 163,
+    ["XARCABARD"] = 179,
+    ["VALKURM"] = 24,
+    ["QUFIM"] = 64,
+    ["BUBURIMU"] = 61,
+    ["TAVNAZIA"] = 0
 }
 
 function error(player, msg)
@@ -60,7 +61,7 @@ function onTrigger(player, zoneName)
         return
     end
 
-    mobIndex = bosses[zoneName]
+    local mobIndex = bosses[zoneName]
     if not mobIndex then
         error(player, string.format("[DynaSpawnMegaBoss] Invalid monster index provided."))
         return

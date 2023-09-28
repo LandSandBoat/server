@@ -519,7 +519,6 @@ UPDATE mob_groups SET content_tag='ABYSSEA' WHERE name='Drachenlizard' AND group
 
 UPDATE mob_groups SET content_tag='ABYSSEA' WHERE name='Feyweald_Sapling' AND groupid='16' AND zoneid='89';
 
-
 -- ------------------------------------------------------------
 -- Rolanberry_Fields_[S] (Zone 91)
 -- ------------------------------------------------------------
@@ -1045,7 +1044,6 @@ UPDATE mob_groups SET content_tag='WOTG' WHERE name='Marquis_Sabnock' AND groupi
 UPDATE mob_groups SET minLevel = 48, maxLevel = 50 WHERE name = "Demons_Elemental"  and zoneid = 161 and groupid = 18;
 UPDATE mob_groups SET minLevel = 59, maxLevel = 61 WHERE name = "Demons_Elemental"  and zoneid = 161 and groupid = 54;
 
-
 -- ------------------------------------------------------------
 -- Castle_Zvahl_Keep (Zone 162)
 -- ------------------------------------------------------------
@@ -1140,7 +1138,6 @@ UPDATE mob_groups SET minLevel = 65, maxLevel = 67 WHERE name = "Mousse_fished" 
 -- UPDATE mob_groups SET content_tag='ROV' WHERE name='Locus_Lugcrawler' AND groupid='??' AND zoneid='171';
 -- UPDATE mob_groups SET content_tag='ROV' WHERE name='Locus_Worker_Lugcrawler' AND groupid='??' AND zoneid='171';
 -- UPDATE mob_groups SET content_tag='ROV' WHERE name='Locus_Soldier_Lugcrawler' AND groupid='??' AND zoneid='171';
-
 
 -- ------------------------------------------------------------
 -- Zeruhn_Mines (Zone 172)

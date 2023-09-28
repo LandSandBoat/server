@@ -5,7 +5,7 @@
 
 LOCK TABLES `npc_list` WRITE;
 
---Fei'yin WHM AF3 Fight. https://ffxiclopedia.fandom.com/wiki/Pieuje%27s_Decision?direction=next&oldid=23449
+-- Fei'yin WHM AF3 Fight. https://ffxiclopedia.fandom.com/wiki/Pieuje%27s_Decision?direction=next&oldid=23449
 UPDATE npc_list SET pos_x = 173.143, pos_y = -24.016, pos_z = -81.385 WHERE npcid = "17613245";
 
 -- ----------------------------------------------------
@@ -209,7 +209,7 @@ UPDATE npc_list SET status = 2 WHERE npcid = "17772845" AND polutils_name = "Hom
 UPDATE npc_list SET status = 2 WHERE npcid = "17772846" AND polutils_name = "Home Point #2";
 UPDATE npc_list SET status = 2 WHERE npcid = "17772847" AND polutils_name = "Home Point #3";
 
---Selbina
+-- Selbina
 UPDATE npc_list SET status = 0 WHERE npcid = "17793069" AND polutils_name = "Home Point #1";
 
 -- Southern San d'Oria
