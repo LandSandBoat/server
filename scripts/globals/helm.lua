@@ -363,7 +363,7 @@ local helmInfo =
                     { 1220, 17396 }, -- Little Worm
                     {  720,   897 }, -- Scorpion Claw
                     {  720,   896 }, -- Scorpion Shell
-                    {  420,  2503 }, -- Antlion Jaw
+                    {  420,  1616 }, -- Antlion Jaw
                     {  420,  1236 }, -- Cactus Stems
                     {  420,  1473 }, -- High Quality Scorpion Shell
                     {  420,   769 }, -- Colored Rock
