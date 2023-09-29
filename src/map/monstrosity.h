@@ -50,8 +50,14 @@ namespace monstrosity
         std::array<uint8, 32>  variants{ 0 };
     };
 
+    void   LoadStaticData();
     void   HandleZoneIn(CCharEntity* PChar);
     uint32 GetPackedMonstrosityName(CCharEntity* PChar);
     void   SendFullMonstrosityUpdate(CCharEntity* PChar);
     void   HandleEquipChangePacket(CCharEntity* PChar, CBasicPacket& data);
+
+    // Debug
+    void MaxAllLevels(CCharEntity* PChar);
+    void UnlockAllInstincts(CCharEntity* PChar);
+    void UnlockAllVariants(CCharEntity* PChar);
 } // namespace monstrosity
