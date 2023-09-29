@@ -16,6 +16,7 @@ require("scripts/globals/ability")
 require("scripts/globals/magic")
 require("scripts/globals/utils")
 require("scripts/globals/damage")
+require("scripts/globals/weaponskillids")
 -----------------------------------
 
 xi = xi or { }
@@ -136,7 +137,12 @@ local function fencerBonus(attacker)
     return bonus
 end
 
-local function shadowAbsorb(target)
+local function shadowAbsorb(target, wsIgnoreShadows)
+    -- allow bypassing all shadows for certain WSs like Catastrophe
+    if wsIgnoreShadows then
+        return false
+    end
+
     local targShadows = target:getMod(xi.mod.UTSUSEMI)
     local shadowType  = xi.mod.UTSUSEMI
 
@@ -330,14 +336,20 @@ local function getSingleHitDamage(attacker, target, dmg, wsParams, calcParams, f
 
     local missChance = math.random()
 
-    missChance = xi.weaponskills.handleParry(attacker, target, missChance, calcParams.guaranteedHit)
+    -- ranged WS cannot be parried according to current understanding
+    if not isRanged then
+        missChance = xi.weaponskills.handleParry(attacker, target, missChance, calcParams.guaranteedHit)
+    end
+
+    -- Catastrophe ignores shadows (thus need special case here)
+    local wsIgnoreShadows = calcParams.wsID == xi.weaponskill.CATASTROPHE
 
     if
         (missChance <= calcParams.hitRate or
         calcParams.guaranteedHit) and
         not calcParams.mustMiss
     then
-        if not shadowAbsorb(target) then
+        if not shadowAbsorb(target, wsIgnoreShadows) then
             local critChance = math.random() -- See if we land a critical hit
             criticalHit = (wsParams.canCrit and critChance <= calcParams.critRate) or
                 calcParams.forcedFirstCrit or
@@ -579,8 +591,14 @@ xi.weaponskills.calculateRawWSDmg = function(attacker, target, wsID, tp, action,
     calcParams.hitsLanded = 0
     calcParams.shadowsAbsorbed = 0
 
-    -- Calculate the damage from the first hit
-    if isRanged then
+    -- Calculate the damage from the first hit (only certain ranged WS have this bonus)
+    if
+        isRanged and
+        wsID ~= xi.weaponskill.CORONACH and
+        wsID ~= xi.weaponskill.DETONATOR and
+        wsID ~= xi.weaponskill.NAMAS_ARROW and
+        wsID ~= xi.weaponskill.EMPYREAL_ARROW
+    then
         hitdmg, calcParams = getSingleHitDamage(attacker, target, dmg, wsParams, calcParams, false, isRanged, false)
     else
         hitdmg, calcParams = getSingleHitDamage(attacker, target, dmg, wsParams, calcParams, true, isRanged, false)

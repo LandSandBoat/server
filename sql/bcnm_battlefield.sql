@@ -842,12 +842,18 @@ INSERT INTO `bcnm_battlefield` VALUES (293,3,17514544,3);
 INSERT INTO `bcnm_battlefield` VALUES (320,1,17518595,3); -- celestial_nexus
 INSERT INTO `bcnm_battlefield` VALUES (320,1,17518596,3);
 INSERT INTO `bcnm_battlefield` VALUES (320,1,17518597,2);
+INSERT INTO `bcnm_battlefield` VALUES (320,1,17518598,2);
+INSERT INTO `bcnm_battlefield` VALUES (320,1,17518599,2);
 INSERT INTO `bcnm_battlefield` VALUES (320,2,17518600,3);
 INSERT INTO `bcnm_battlefield` VALUES (320,2,17518601,3);
 INSERT INTO `bcnm_battlefield` VALUES (320,2,17518602,2);
+INSERT INTO `bcnm_battlefield` VALUES (320,2,17518603,2);
+INSERT INTO `bcnm_battlefield` VALUES (320,2,17518604,2);
 INSERT INTO `bcnm_battlefield` VALUES (320,3,17518605,3);
 INSERT INTO `bcnm_battlefield` VALUES (320,3,17518606,3);
 INSERT INTO `bcnm_battlefield` VALUES (320,3,17518607,2);
+INSERT INTO `bcnm_battlefield` VALUES (320,3,17518608,2);
+INSERT INTO `bcnm_battlefield` VALUES (320,3,17518609,2);
 INSERT INTO `bcnm_battlefield` VALUES (416,1,17600513,3); -- trial_by_wind
 INSERT INTO `bcnm_battlefield` VALUES (416,2,17600514,3);
 INSERT INTO `bcnm_battlefield` VALUES (416,3,17600515,3);
