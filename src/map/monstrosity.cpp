@@ -22,6 +22,7 @@
 #include "monstrosity.h"
 
 #include "common/logging.h"
+#include "common/sql.h"
 
 #include "entities/charentity.h"
 
@@ -33,6 +34,19 @@
 
 #include "utils/charutils.h"
 
+extern std::unique_ptr<SqlConnection> sql;
+
+struct MonstrositySpeciesRow
+{
+    uint8       speciesId;
+    std::string name;
+};
+
+namespace
+{
+    std::unordered_map<uint8, MonstrositySpeciesRow> gMonstrositySpeciesMap;
+} // namespace
+
 monstrosity::MonstrosityData_t::MonstrosityData_t()
 : Species(0x0001)
 , Flags(0x0B46)
@@ -42,6 +56,23 @@ monstrosity::MonstrosityData_t::MonstrosityData_t()
 , NamePrefix2(0x00)
 {
     // TODO: Populate instinct and levels from db
+}
+
+void monstrosity::LoadStaticData()
+{
+    int32 ret = sql->Query("SELECT monstrosity_id, name FROM monstrosity_species;");
+    if (ret != SQL_ERROR && sql->NumRows() != 0)
+    {
+        while (sql->NextRow() == SQL_SUCCESS)
+        {
+            MonstrositySpeciesRow row;
+
+            row.speciesId = static_cast<uint8>(sql->GetUIntData(0));
+            row.name      = sql->GetStringData(1);
+
+            gMonstrositySpeciesMap[row.speciesId] = row;
+        }
+    }
 }
 
 void monstrosity::HandleZoneIn(CCharEntity* PChar)
@@ -77,7 +108,7 @@ uint32 monstrosity::GetPackedMonstrosityName(CCharEntity* PChar)
     uint8 d = PChar->m_PMonstrosity->NamePrefix2;
 
     // Packed as LE
-    return (d << 24) + (c << 16) + (b << 8) + (a << 0);
+    return (d << 24) + (c << 16) + (a << 0);
 }
 
 void monstrosity::SendFullMonstrosityUpdate(CCharEntity* PChar)
@@ -165,4 +196,21 @@ void monstrosity::HandleEquipChangePacket(CCharEntity* PChar, CBasicPacket& data
 
     // TODO: Is this too much traffic?
     SendFullMonstrosityUpdate(PChar);
+}
+
+void monstrosity::MaxAllLevels(CCharEntity* PChar)
+{
+
+}
+
+
+void monstrosity::UnlockAllInstincts(CCharEntity* PChar)
+{
+
+}
+
+
+void UnlockAllVariants(CCharEntity* PChar)
+{
+
 }
