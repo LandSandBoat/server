@@ -45,9 +45,6 @@ namespace monstrosity
         uint8  NamePrefix2;
 
         std::array<uint16, 12> EquippedInstincts{ 0 };
-
-        // TODO: Extend this to be large enough to hold Slime and Spriggan levels
-        //     : but don't use sizeof() with this structure.
         std::array<uint8, 128> levels{ 0 };
         std::array<uint8, 64>  instincts{ 0 };
         std::array<uint8, 32>  variants{ 0 };
