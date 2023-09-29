@@ -34,17 +34,15 @@ namespace monstrosity
     struct MonstrosityData_t
     {
     public:
-        MonstrosityData_t(uint8 face, uint8 race);
+        MonstrosityData_t();
 
-        // TODO: Should these be a single uint16?
-        uint8 Face;
-        uint8 Race;
-
-        // TODO: Whats the link between look (Face+Race), Species, and Flags?
         uint16 Species;
+        uint16 Flags;
+        uint16 Look;
 
-        uint8 Name1;
-        uint8 Name2;
+        uint16 NameBase;
+        uint8  NamePrefix1;
+        uint8  NamePrefix2;
 
         std::array<uint16, 12> EquippedInstincts{ 0 };
 

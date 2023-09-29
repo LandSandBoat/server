@@ -21,8 +21,11 @@
 
 #include "monstrosity.h"
 
+#include "common/logging.h"
+
 #include "entities/charentity.h"
 
+#include "packets/char_appearance.h"
 #include "packets/char_jobs.h"
 #include "packets/char_job_extra.h"
 #include "packets/monipulator1.h"
@@ -30,12 +33,13 @@
 
 #include "utils/charutils.h"
 
-monstrosity::MonstrosityData_t::MonstrosityData_t(uint8 face, uint8 race)
-: Face(face)
-, Race(race)
-, Species(0x0001)
-, Name1(0x00)
-, Name2(0x00)
+monstrosity::MonstrosityData_t::MonstrosityData_t()
+: Species(0x0001)
+, Flags(0x0B46)
+, Look(0xFD81)
+, NameBase(0x00)
+, NamePrefix1(0x00)
+, NamePrefix2(0x00)
 {
     // TODO: Populate instinct and levels from db
 }
@@ -45,7 +49,7 @@ void monstrosity::HandleZoneIn(CCharEntity* PChar)
     // TODO: Check we're about to enter monstrosity, charvar, flag, etc.
     if (charutils::GetCharVar(PChar, "MONSTROSITY_START") == 1)
     {
-        PChar->m_PMonstrosity = std::make_unique<monstrosity::MonstrosityData_t>(72, 11);
+        PChar->m_PMonstrosity = std::make_unique<monstrosity::MonstrosityData_t>();
         PChar->updatemask |= UPDATE_LOOK;
     }
 }
@@ -54,23 +58,23 @@ uint32 monstrosity::GetPackedMonstrosityName(CCharEntity* PChar)
 {
     // Monstrosity Name Ids?
     // If populated, the monstrosity icon will appear
-    uint8 a = 0x1F;
+    // uint8 a = 0x1F;
 
     // Mob Type
     // 0x80: Scorpion
     // 0x81: Mandragora
-    uint8 b = 0x81;
+    uint16 a = PChar->m_PMonstrosity->NameBase;
 
     // Adjective 1 (optional)
     // 01: Abashed
     // CD: Tempest
     // F5: Zenith
     // F6: Zero
-    uint8 c = PChar->m_PMonstrosity->Name1;
+    uint8 c = PChar->m_PMonstrosity->NamePrefix1;
 
     // Adjective 2
     // Same values as above
-    uint8 d = PChar->m_PMonstrosity->Name2;
+    uint8 d = PChar->m_PMonstrosity->NamePrefix2;
 
     // Packed as LE
     return (d << 24) + (c << 16) + (b << 8) + (a << 0);
@@ -92,6 +96,7 @@ void monstrosity::SendFullMonstrosityUpdate(CCharEntity* PChar)
     PChar->pushPacket(new CCharJobsPacket(PChar));
     PChar->pushPacket(new CCharJobExtraPacket(PChar, true));
     PChar->pushPacket(new CCharJobExtraPacket(PChar, false));
+    PChar->pushPacket(new CCharAppearancePacket(PChar));
     PChar->updatemask |= UPDATE_LOOK;
 }
 
@@ -106,7 +111,28 @@ void monstrosity::HandleEquipChangePacket(CCharEntity* PChar, CBasicPacket& data
 
     // TODO: Validate that we'll have enough points to hold our instincts when we equip
 
-    PChar->m_PMonstrosity->Species = data.ref<uint8>(0x0C);
+    PChar->m_PMonstrosity->Species = data.ref<uint16>(0x0C);
+    // 0x0D holds the variant index
+
+    // -- 0x010C: Rabbit
+    // -- 0x010D: Onyx Rabbit
+    // -- 0x010E: Alabaster Rabbit
+    // -- 0x0791: Lapinion
+    std::unordered_map<uint16, uint16> lookMap =
+    {
+        { 0x0001, 0x010C },
+        { 0x0100, 0x010D },
+    };
+
+    // TODO: Move this information to a db table that's loaded at startup:
+    // { mon_id, species_code, look, family, { starting_stats } }
+
+    PChar->m_PMonstrosity->Look = lookMap[PChar->m_PMonstrosity->Species];
+
+    ShowInfo(fmt::format("Species: {}, Flags: {}, Looks: {}",
+        PChar->m_PMonstrosity->Species,
+        PChar->m_PMonstrosity->Flags,
+        PChar->m_PMonstrosity->Look).c_str());
 
     // Remove All
     if (data.ref<uint16>(0x16) == 0xFFFF)
@@ -127,10 +153,15 @@ void monstrosity::HandleEquipChangePacket(CCharEntity* PChar, CBasicPacket& data
         }
     }
 
-    // TODO: Unset individual instincts
+    std::string EquipStr = "";
+    for (std::size_t idx = 0; idx < 12; ++idx)
+    {
+        EquipStr += fmt::format("{}: {}, ", idx, PChar->m_PMonstrosity->EquippedInstincts[idx]);
+    }
+    ShowInfo(EquipStr.c_str());
 
-    PChar->m_PMonstrosity->Name1 = data.ref<uint8>(0x28);
-    PChar->m_PMonstrosity->Name2 = data.ref<uint8>(0x29);
+    PChar->m_PMonstrosity->NamePrefix1 = data.ref<uint8>(0x28);
+    PChar->m_PMonstrosity->NamePrefix2 = data.ref<uint8>(0x29);
 
     // TODO: Is this too much traffic?
     SendFullMonstrosityUpdate(PChar);
