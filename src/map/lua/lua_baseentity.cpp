@@ -3150,7 +3150,7 @@ sol::table CLuaBaseEntity::getTeleportTable(uint8 type)
             return teleTable;
             break;
         case TELEPORT_TYPE::WAYPOINT:
-            for (uint8 x = 0; x < 5; x++)
+            for (uint8 x = 0; x < 2; x++)
             {
                 teleTable.add(PChar->teleport.waypoints.access[x]);
             }

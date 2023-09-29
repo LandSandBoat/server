@@ -51,5 +51,9 @@ CMapMarkerPacket::CMapMarkerPacket(CCharEntity* PChar)
     ref<uint16>(0x24) = PChar->teleport.survival.access[3] & 0xFFFF;
     ref<uint16>(0x26) = (PChar->teleport.survival.access[3] & 0xFFFF0000) >> 16;
 
-    // TODO: Abyssea Maws, Waypoints
+    // TODO: Abyssea Maws
+    ref<uint16>(0x28) = PChar->teleport.waypoints.access[0] & 0xFFFF;
+    ref<uint16>(0x2A) = (PChar->teleport.waypoints.access[0] & 0xFFFF0000) >> 16;
+    ref<uint16>(0x2C) = PChar->teleport.waypoints.access[1] & 0xFFFF;
+    ref<uint16>(0x2E) = (PChar->teleport.waypoints.access[1] & 0x00070000) >> 16;
 }
