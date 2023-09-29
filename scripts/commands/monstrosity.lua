@@ -3,7 +3,7 @@ local commandObj = {}
 commandObj.cmdprops =
 {
     permission = 1,
-    parameters = ''
+    parameters = 'i'
 }
 
 local monstrositySpecies =
@@ -338,7 +338,8 @@ local purchasableInstincts =
     RUN = 31,
 }
 
-commandObj.onTrigger = function(player)
+commandObj.onTrigger = function(player, n)
+    print(n)
     --[[
     if player:getCharVar('MONSTROSITY_START') == 1 then
         player:setCharVar('MONSTROSITY_START', 0)
@@ -348,8 +349,19 @@ commandObj.onTrigger = function(player)
 
     player:setPos(player:getXPos(), player:getYPos(), player:getZPos(), player:getRotPos(), player:getZoneID())
     ]]
+
+    -- 0x010C: Rabbit
+    -- 0x010D: Onyx Rabbit
+    -- 0x010E: Alabaster Rabbit
+    -- 0x0791: Lapinion
+
+    -- 0x0B48: New Years Mandragora
+
     local data =
     {
+        look = 0x0791,
+        name = n,
+
         -- 1 byte per entry, mapped out to monstrositySpecies table
         -- (0 - 127)
         levels =

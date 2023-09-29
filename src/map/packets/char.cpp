@@ -181,8 +181,7 @@ void CCharPacket::updateWith(CCharEntity* PChar, ENTITYUPDATE type, uint8 update
 
                 if (PChar->m_PMonstrosity != nullptr)
                 {
-                    ref<uint8>(0x48)  = PChar->m_PMonstrosity->Face;
-                    ref<uint8>(0x49)  = PChar->m_PMonstrosity->Race;
+                    ref<uint16>(0x48) = PChar->m_PMonstrosity->Look;
                     ref<uint16>(0x58) = 0xFFFF;
                 }
             }

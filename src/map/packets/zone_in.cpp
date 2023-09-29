@@ -260,8 +260,7 @@ CZoneInPacket::CZoneInPacket(CCharEntity* PChar, const EventInfo* currentEvent)
     if (PChar->m_PMonstrosity != nullptr)
     {
         // TODO: These make the spawn in cleaner, but then the name doesn't work correctly
-        // ref<uint8>(0x04)  = PChar->m_PMonstrosity->Face;
-        // ref<uint8>(0x05)  = PChar->m_PMonstrosity->Race;
+        // ref<uint16>(0x04)  = PChar->m_PMonstrosity->Look;
         // ref<uint16>(0x14) = 0xFFFF;
 
         // Enable Monstrosity menu options
