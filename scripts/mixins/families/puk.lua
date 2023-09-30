@@ -13,14 +13,14 @@ g_mixins.families.puk = function(mob)
     mob:addListener('TAKE_DAMAGE', 'PUK_TAKE_DAMAGE', function(puk, amount, attacker, attackType, damageType)
         local elements =
         {
-            { xi.damageType.FIRE,      xi.day.FIRESDAY },
-            { xi.damageType.EARTH,     xi.day.EARTHSDAY },
-            { xi.damageType.WATER,     xi.day.WATERSDAY },
-            { xi.damageType.WIND,      xi.day.WINDSDAY },
-            { xi.damageType.ICE,       xi.day.ICEDAY },
-            { xi.damageType.LIGHTNING, xi.day.LIGHTNINGSDAY },
-            { xi.damageType.LIGHT,     xi.day.LIGHTSDAY },
-            { xi.damageType.DARK,      xi.day.DARKSDAY }
+            { xi.damageType.FIRE,    xi.day.FIRESDAY      },
+            { xi.damageType.EARTH,   xi.day.EARTHSDAY     },
+            { xi.damageType.WATER,   xi.day.WATERSDAY     },
+            { xi.damageType.WIND,    xi.day.WINDSDAY      },
+            { xi.damageType.ICE,     xi.day.ICEDAY        },
+            { xi.damageType.THUNDER, xi.day.LIGHTNINGSDAY },
+            { xi.damageType.LIGHT,   xi.day.LIGHTSDAY     },
+            { xi.damageType.DARK,    xi.day.DARKSDAY      }
         }
 
         -- If the element corresponding to the elemental day of the in-game Vana'diel week is used on a Puk, it will get 100% TP instantly.
