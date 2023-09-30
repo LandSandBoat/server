@@ -96,26 +96,12 @@ void monstrosity::HandleZoneIn(CCharEntity* PChar)
 
 uint32 monstrosity::GetPackedMonstrosityName(CCharEntity* PChar)
 {
-    // Monstrosity Name Ids
-    // Rabbit: 0x8001
-    // Mandragora: 0x8012
-    // Rabbit: 0x802B
-    // Slime: 0x80FE
     uint16 a = 0x8000 | PChar->m_PMonstrosity->Species;
-
-    // Adjective 1 (optional)
-    // 01: Abashed
-    // CD: Tempest
-    // F5: Zenith
-    // F6: Zero
-    uint8 c = PChar->m_PMonstrosity->NamePrefix1;
-
-    // Adjective 2
-    // Same values as above
-    uint8 d = PChar->m_PMonstrosity->NamePrefix2;
+    uint8  b = PChar->m_PMonstrosity->NamePrefix1;
+    uint8  c = PChar->m_PMonstrosity->NamePrefix2;
 
     // Packed as LE
-    return (d << 24) + (c << 16) + (a << 0);
+    return (c << 24) + (b << 16) + (a << 0);
 }
 
 void monstrosity::SendFullMonstrosityUpdate(CCharEntity* PChar)
@@ -149,44 +135,46 @@ void monstrosity::HandleEquipChangePacket(CCharEntity* PChar, CBasicPacket& data
 
     // TODO: Validate that we'll have enough points to hold our instincts when we equip
 
-    PChar->m_PMonstrosity->Species = data.ref<uint16>(0x0C);
-
-    PChar->m_PMonstrosity->Look = gMonstrositySpeciesMap[PChar->m_PMonstrosity->Species].look;
-
-    ShowInfo(fmt::format("Species: {}, Flags: {}, Looks: {}",
-                         PChar->m_PMonstrosity->Species,
-                         PChar->m_PMonstrosity->Flags,
-                         PChar->m_PMonstrosity->Look)
-                 .c_str());
-
-    // Remove All
-    if (data.ref<uint16>(0x16) == 0xFFFF)
+    uint8 flag = data.ref<uint16>(0x0A);
+    if (flag == 0x01) // Species Change
     {
-        for (std::size_t idx = 0; idx < 12; idx += 2)
-        {
-            PChar->m_PMonstrosity->EquippedInstincts[idx] = 0x0000;
-        }
+        PChar->m_PMonstrosity->Species = data.ref<uint16>(0x0C);
+        PChar->m_PMonstrosity->Look = gMonstrositySpeciesMap[PChar->m_PMonstrosity->Species].look;
     }
-    else // Set
+    else if (flag == 0x04) // Instinct Change
     {
-        for (std::size_t idx = 0; idx < 12; idx += 2)
+        // Remove All
+        if (data.ref<uint16>(0x16) == 0xFFFF)
         {
-            if (data.ref<uint16>(0x10 + idx) != 0)
+            for (std::size_t idx = 0; idx < 12; ++idx)
             {
-                PChar->m_PMonstrosity->EquippedInstincts[idx] = data.ref<uint16>(0x10 + idx);
+                PChar->m_PMonstrosity->EquippedInstincts[idx] = 0x0000;
+            }
+        }
+        else // Set
+        {
+            for (std::size_t idx = 0; idx < 12; ++idx)
+            {
+                uint16 value = data.ref<uint16>(0x10 + (idx * 2));
+                if (value != 0)
+                {
+                    PChar->m_PMonstrosity->EquippedInstincts[idx] = value;
+                }
             }
         }
     }
-
-    std::string EquipStr = "";
-    for (std::size_t idx = 0; idx < 12; ++idx)
+    else if (flag == 0x08) // Name Change
     {
-        EquipStr += fmt::format("{}: {}, ", idx, PChar->m_PMonstrosity->EquippedInstincts[idx]);
+        PChar->m_PMonstrosity->NamePrefix1 = data.ref<uint8>(0x28);
+        PChar->m_PMonstrosity->NamePrefix2 = data.ref<uint8>(0x29);
     }
-    ShowInfo(EquipStr.c_str());
 
-    PChar->m_PMonstrosity->NamePrefix1 = data.ref<uint8>(0x28);
-    PChar->m_PMonstrosity->NamePrefix2 = data.ref<uint8>(0x29);
+    // std::string EquipStr = "";
+    // for (std::size_t idx = 0; idx < 12; ++idx)
+    // {
+    //     EquipStr += fmt::format("{}: {}, ", idx, PChar->m_PMonstrosity->EquippedInstincts[idx]);
+    // }
+    // ShowInfo(EquipStr.c_str());
 
     // TODO: Is this too much traffic?
     SendFullMonstrosityUpdate(PChar);
@@ -247,10 +235,10 @@ void monstrosity::UnlockAllInstincts(CCharEntity* PChar)
 
 void monstrosity::UnlockAllVariants(CCharEntity* PChar)
 {
-    for (uint8 idx = 0; idx < 256; ++idx)
+    for (std::size_t idx = 0; idx < 256; ++idx)
     {
-        uint8 byteOffset  = idx / 8;
-        uint8 shiftAmount = idx % 8;
+        uint8 byteOffset  = static_cast<uint8>(idx) / 8;
+        uint8 shiftAmount = static_cast<uint8>(idx) % 8;
 
         if (byteOffset < 32)
         {
