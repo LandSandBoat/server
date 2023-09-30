@@ -47,7 +47,6 @@ global_objects=(
     switch
     getVanaMidnight
     getMidnight
-    getConquestTally
 
     Mission
     Quest

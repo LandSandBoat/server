@@ -375,7 +375,6 @@ entity.onTrigger = function(player, npc)
         local arg1 = 0
         for bitPos, ki in pairs(menuMetadata[1]['initialList']) do
             local entry = menuMetadata[1][ki]
-            local hasKeyItem = player:hasKeyItem(ki)
             local hasCompletedExpansion = false
             if entry.expansion == 1 then
                 hasCompletedExpansion = finishedACP
@@ -387,8 +386,8 @@ entity.onTrigger = function(player, npc)
 
             -- Reminder that "True" here means the option should be excluded from the player's menu
             if
-                not hasCompletedExpansion               or
-                hasKeyItem                              or
+                not hasCompletedExpansion or
+                player:hasKeyItem(ki) or
                 now < player:getCharVar(entry.charVar)
             then
                 arg1 = utils.mask.setBit(arg1, bitPos, true)

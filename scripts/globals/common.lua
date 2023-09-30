@@ -68,14 +68,3 @@ function getVanaMidnight(day)
     local finaltime = curtime + (23 - VanadielHour()) * 144 + (60 - VanadielMinute()) * 2.4
     return finaltime
 end
-
------------------------------------
---  getConquestTally()
---  Returns the end of the current conquest tally
------------------------------------
-
-function getConquestTally()
-    local lastTally = (JstWeekday() + 6) % 7
-    local daysToTally = 6 - lastTally
-    return getMidnight() + (daysToTally * (60 * 60 * 24))
-end
