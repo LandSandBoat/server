@@ -50,8 +50,8 @@ namespace
 monstrosity::MonstrosityData_t::MonstrosityData_t()
 : Species(0x0001)
 , Flags(0x0B46)
-, Look(0xFD81)
-, NameBase(0x00)
+, Look(0x010C)
+, NameBase(0x8001)
 , NamePrefix1(0x00)
 , NamePrefix2(0x00)
 {
@@ -94,14 +94,12 @@ void monstrosity::HandleZoneIn(CCharEntity* PChar)
 
 uint32 monstrosity::GetPackedMonstrosityName(CCharEntity* PChar)
 {
-    // Monstrosity Name Ids?
-    // If populated, the monstrosity icon will appear
-    // uint8 a = 0x1F;
-
-    // Mob Type
-    // 0x80: Scorpion
-    // 0x81: Mandragora
-    uint16 a = PChar->m_PMonstrosity->NameBase;
+    // Monstrosity Name Ids
+    // Rabbit: 0x8001
+    // Mandragora: 0x8012
+    // Rabbit: 0x802B
+    // Slime: 0x80FE
+    uint16 a = 0x8000 | PChar->m_PMonstrosity->Species;
 
     // Adjective 1 (optional)
     // 01: Abashed
@@ -222,7 +220,7 @@ void monstrosity::UnlockAllInstincts(CCharEntity* PChar)
     // Level based
     for (auto const& [speciesId, entry] : gMonstrositySpeciesMap)
     {
-        uint8 level = PChar->m_PMonstrosity->levels[speciesId];
+        uint8 level = 99;
         uint8 byteOffset = speciesId / 4;
         uint8 unlockAmount = level / 30;
         uint8 shiftAmount = (speciesId * 2) % 8;
