@@ -11,6 +11,8 @@ local entity = {}
 
 entity.onMobSpawn = function(mob)
     mob:setLocalVar("xolotlDead", 0)
+    mob:setMod(xi.mod.SLEEPRES, 20)
+    mob:setMod(xi.mod.LULLABYRES, 20)
 end
 
 entity.onMobFight = function(mob, target)
@@ -46,12 +48,16 @@ entity.onMobFight = function(mob, target)
     end
 
     -- Sets max sleep resist if a sleep lands on Xolotl
+    -- this is special res building just for Xolotl
     if
-        target:hasStatusEffect(xi.effect.SLEEP_I) or
-        target:hasStatusEffect(xi.effect.SLEEP_II) or
-        target:hasStatusEffect(xi.effect.LULLABY)
+        (mob:hasStatusEffect(xi.effect.SLEEP_I) or
+        mob:hasStatusEffect(xi.effect.SLEEP_II) or
+        mob:hasStatusEffect(xi.effect.LULLABY)) and
+        (mob:getMod(xi.mod.SLEEPRES) ~= 100 or
+        mob:getMod(xi.mod.LULLABYRES) ~= 100)
     then
-        target:setMod(xi.mod.SLEEPRES, 100)
+        mob:setMod(xi.mod.SLEEPRES, 100)
+        mob:setMod(xi.mod.LULLABYRES, 100)
     end
 end
 
@@ -64,22 +70,10 @@ end
 
 entity.onMobWeaponSkill = function(target, mob, skill)
     -- Can be slept with Lullaby once after each Charm, after which he builds resistance.
+    -- this is special res building just for Xolotl
     if skill:getID() == 533 or skill:getID() == 1329 then
         mob:setMod(xi.mod.SLEEPRES, 20)
-    end
-end
-
-entity.onMagicHit = function(caster, target, spell)
-    -- Sets max sleep resist if a light based sleep lands on Xolotl
-    if
-        spell:tookEffect() and
-        caster:isPC() and
-        (spell:getID() == 376 or
-        spell:getID() == 463 or
-        spell:getID() == 576 or
-        spell:getID() == 584)
-    then
-        target:setMod(xi.mod.SLEEPRES, 100)
+        mob:setMod(xi.mod.LULLABYRES, 20)
     end
 end
 

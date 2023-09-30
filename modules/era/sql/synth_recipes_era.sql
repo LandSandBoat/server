@@ -1392,6 +1392,7 @@ UPDATE `synth_recipes` SET ContentTag = 'COP' WHERE ResultName = 'Griffon Leathe
 UPDATE `synth_recipes` SET ContentTag = 'COP' WHERE ResultName = 'Griffon Leather' AND ID = 44541;
 UPDATE `synth_recipes` SET ContentTag = 'COP' WHERE ResultName = 'Griffon Leather' AND ID = 44545;
 UPDATE `synth_recipes` SET ContentTag = 'COP' WHERE ID = 53007;
+UPDATE `synth_recipes` SET ContentTag = 'COP' WHERE ResultName = 'Poisona Ring' AND ID = 21518;
 
 -- ------------------------------------------------------------
 -- ToAU Synths
@@ -1463,7 +1464,6 @@ UPDATE `synth_recipes` SET ContentTag = 'TOAU' WHERE ResultName = 'Piercing Dagg
 UPDATE `synth_recipes` SET ContentTag = 'TOAU' WHERE ResultName = 'Brass Grip' AND ID = 20517;
 UPDATE `synth_recipes` SET ContentTag = 'TOAU' WHERE ResultName = 'Keen Zaghnal' AND ID = 20523;
 UPDATE `synth_recipes` SET ContentTag = 'TOAU' WHERE ResultName = 'Tigereye Ring' AND ID = 21517;
-UPDATE `synth_recipes` SET ContentTag = 'TOAU' WHERE ResultName = 'Poisona Ring' AND ID = 21518;
 UPDATE `synth_recipes` SET ContentTag = 'TOAU' WHERE ResultName = 'Mythril Grip' AND ID = 21531;
 UPDATE `synth_recipes` SET ContentTag = 'TOAU' WHERE ResultName = 'Mythril Mesh Sheet' AND ID = 22004;
 UPDATE `synth_recipes` SET ContentTag = 'TOAU' WHERE ResultName = 'Electrum Ingot' AND ID = 22008;

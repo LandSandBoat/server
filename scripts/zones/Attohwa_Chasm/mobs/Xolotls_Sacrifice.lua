@@ -5,6 +5,10 @@
 -----------------------------------
 local entity = {}
 
+entity.onMobSpawn = function(mob)
+    mob:setMod(xi.mod.LULLABYRESBUILD, 50)
+end
+
 entity.onMobRoam = function(mob)
     local hour = VanadielHour()
 

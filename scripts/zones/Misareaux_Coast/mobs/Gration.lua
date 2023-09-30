@@ -29,13 +29,9 @@ end
 entity.onMobFight = function(mob, target)
     local enmityList = mob:getEnmityList()
     for _, v in ipairs(enmityList) do
-        local shouldintimidate = math.random(1, 20)
-        if shouldintimidate >= 19 then
-            if v.entity:hasStatusEffect(xi.effect.INTIMIDATE) then
-                v.entity:delStatusEffectSilent(xi.effect.INTIMIDATE)
-            end
-
-            v.entity:addStatusEffectEx(xi.effect.INTIMIDATE, 0, 1, 0, 1)
+        -- repeatedly apply short duration intimidate (5 sec) with 50% power to all entities on enmity list
+        if not v["entity"]:hasStatusEffect(xi.effect.INTIMIDATE) then
+            v["entity"]:addStatusEffectEx(xi.effect.INTIMIDATE, 0, 50, 3, 5)
         end
     end
 end
