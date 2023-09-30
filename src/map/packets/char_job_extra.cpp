@@ -157,9 +157,9 @@ CCharJobExtraPacket::CCharJobExtraPacket(CCharEntity* PChar, bool mjob)
 
         ref<uint16>(0x08) = PChar->m_PMonstrosity->Species;
 
-        for (std::size_t idx = 0; idx < 12; idx += 2)
+        for (std::size_t idx = 0; idx < 12; ++idx)
         {
-            ref<uint8>(0x0C + idx) = PChar->m_PMonstrosity->EquippedInstincts[idx];
+            ref<uint8>(0x0C + (idx * 2)) = PChar->m_PMonstrosity->EquippedInstincts[idx];
         }
 
         /*
