@@ -547,6 +547,8 @@ public:
     bool  isInDynamis();
     void  setEnteredBattlefield(bool entered);
     bool  hasEnteredBattlefield();
+    void  sendTimerPacket(uint32 seconds);
+    void  sendClearTimerPacket();
 
     // Battle Utilities
     bool isAlive();
