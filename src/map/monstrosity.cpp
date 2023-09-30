@@ -77,11 +77,18 @@ void monstrosity::LoadStaticData()
 
 void monstrosity::HandleZoneIn(CCharEntity* PChar)
 {
+    // TODO: Move to map.cpp
+    LoadStaticData();
+
     // TODO: Check we're about to enter monstrosity, charvar, flag, etc.
     if (charutils::GetCharVar(PChar, "MONSTROSITY_START") == 1)
     {
         PChar->m_PMonstrosity = std::make_unique<monstrosity::MonstrosityData_t>();
         PChar->updatemask |= UPDATE_LOOK;
+
+        MaxAllLevels(PChar);
+        UnlockAllInstincts(PChar);
+        UnlockAllVariants(PChar);
     }
 }
 
@@ -200,17 +207,63 @@ void monstrosity::HandleEquipChangePacket(CCharEntity* PChar, CBasicPacket& data
 
 void monstrosity::MaxAllLevels(CCharEntity* PChar)
 {
-
+    ShowInfo("MaxAllLevels");
+    for (auto const& [speciesId, entry] : gMonstrositySpeciesMap)
+    {
+        PChar->m_PMonstrosity->levels[speciesId] = 99;
+    }
 }
 
 
 void monstrosity::UnlockAllInstincts(CCharEntity* PChar)
 {
+    ShowInfo("UnlockAllInstincts");
 
+    // Level based
+    for (auto const& [speciesId, entry] : gMonstrositySpeciesMap)
+    {
+        uint8 level = PChar->m_PMonstrosity->levels[speciesId];
+        uint8 byteOffset = speciesId / 4;
+        uint8 unlockAmount = level / 30;
+        uint8 shiftAmount = (speciesId * 2) % 8;
+
+        // Special case for writing Slime & Spriggan data at the end of the 64-byte array
+        if (byteOffset == 31)
+        {
+            byteOffset = 63;
+        }
+
+        if (byteOffset < 64)
+        {
+            PChar->m_PMonstrosity->instincts[byteOffset] |= (unlockAmount << shiftAmount);
+        }
+        else
+        {
+            ShowError("byteOffset out of range");
+        }
+    }
+
+    // Instincts (Purchasable)
+    for (uint8 idx = 0; idx < 32; ++idx)
+    {
+        uint8 byteOffset = 20 + (idx / 8);
+        uint8 shiftAmount = idx % 8;
+
+        // There is a gap in the instincts bitpack, so we put the purchase information
+        // for these instincts in there. Sneaky sneaky.
+        if (byteOffset >= 20 && byteOffset < 24)
+        {
+            PChar->m_PMonstrosity->instincts[byteOffset] |= (0x01 << shiftAmount);
+        }
+        else
+        {
+            ShowError("byteOffset out of range");
+        }
+    }
 }
 
 
-void UnlockAllVariants(CCharEntity* PChar)
+void monstrosity::UnlockAllVariants(CCharEntity* PChar)
 {
-
+    ShowInfo("UnlockAllVariants");
 }
