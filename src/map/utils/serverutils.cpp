@@ -110,9 +110,22 @@ namespace serverutils
             }
             else
             {
-                // TODO: Re-enable async
-                // async_work::doQuery("INSERT INTO server_variables VALUES ('%s', %i) ON DUPLICATE KEY UPDATE value = %i;", varName, value, value);
-                sql->Query("INSERT INTO server_variables VALUES ('%s', %i, %d) ON DUPLICATE KEY UPDATE value = %i, expiry = %d;", name, value, varTimestamp, value, varTimestamp);
+                if (sql->Query("SELECT value FROM server_variables WHERE name = '%s' LIMIT 1;", name) != SQL_ERROR)
+                {
+                    // We're immediately clobbering previous query. It's ok we're done with it.
+                    if (sql->NumRows() > 0)
+                    {
+                        // TODO: Re-enable async
+                        // async_work::doQuery("UPDATE server_variables SET `value` = %i, `expiry` = %i, WHERE name = '%s' LIMIT 1;", value, varTimestamp, name);
+                        sql->Query("UPDATE server_variables SET `value` = %i, `expiry` = %i WHERE name = '%s' LIMIT 1;", value, varTimestamp, name);
+                    }
+                    else
+                    {
+                        // TODO: Re-enable async
+                        // async_work::doQuery("INSERT INTO server_variables VALUES ('%s', %i, %i);", name, value, varTimestamp);
+                        sql->Query("INSERT INTO server_variables VALUES ('%s', %i, %i);", name, value, varTimestamp);
+                    }
+                }
             }
         }
 
@@ -139,7 +152,18 @@ namespace serverutils
             }
             else
             {
-                sql->Query("INSERT INTO server_variables VALUES ('%s', %i, %d) ON DUPLICATE KEY UPDATE value = %i, expiry = %d;", name, value, expiry, value, expiry);
+                if (sql->Query("SELECT value FROM server_variables WHERE name = '%s' LIMIT 1;", name) != SQL_ERROR)
+                {
+                    // We're immediately clobbering previous query. It's ok we're done with it.
+                    if (sql->NumRows() > 0)
+                    {
+                        sql->Query("UPDATE server_variables SET `value` = %i, `expiry` = %i WHERE name = '%s' LIMIT 1;", value, expiry, name);
+                    }
+                    else
+                    {
+                        sql->Query("INSERT INTO server_variables VALUES ('%s', %i, %i);", name, value, expiry);
+                    }
+                }
             }
 
             if (setVarMaxRetry > 0)
