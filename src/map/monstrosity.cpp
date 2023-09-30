@@ -27,8 +27,8 @@
 #include "entities/charentity.h"
 
 #include "packets/char_appearance.h"
-#include "packets/char_jobs.h"
 #include "packets/char_job_extra.h"
+#include "packets/char_jobs.h"
 #include "packets/monipulator1.h"
 #include "packets/monipulator2.h"
 
@@ -38,8 +38,9 @@ extern std::unique_ptr<SqlConnection> sql;
 
 struct MonstrositySpeciesRow
 {
-    uint8       speciesId;
+    uint8       monstrosityId;
     std::string name;
+    uint16      look;
 };
 
 namespace
@@ -49,7 +50,7 @@ namespace
 
 monstrosity::MonstrosityData_t::MonstrosityData_t()
 : Species(0x0001)
-, Flags(0x0B46)
+, Flags(0x0B44)
 , Look(0x010C)
 , NameBase(0x8001)
 , NamePrefix1(0x00)
@@ -60,17 +61,18 @@ monstrosity::MonstrosityData_t::MonstrosityData_t()
 
 void monstrosity::LoadStaticData()
 {
-    int32 ret = sql->Query("SELECT monstrosity_id, name FROM monstrosity_species;");
+    int32 ret = sql->Query("SELECT monstrosity_id, name, look FROM monstrosity_species;");
     if (ret != SQL_ERROR && sql->NumRows() != 0)
     {
         while (sql->NextRow() == SQL_SUCCESS)
         {
             MonstrositySpeciesRow row;
 
-            row.speciesId = static_cast<uint8>(sql->GetUIntData(0));
-            row.name      = sql->GetStringData(1);
+            row.monstrosityId = static_cast<uint8>(sql->GetUIntData(0));
+            row.name          = sql->GetStringData(1);
+            row.look          = static_cast<uint16>(sql->GetUIntData(2));
 
-            gMonstrositySpeciesMap[row.speciesId] = row;
+            gMonstrositySpeciesMap[row.monstrosityId] = row;
         }
     }
 }
@@ -148,39 +150,26 @@ void monstrosity::HandleEquipChangePacket(CCharEntity* PChar, CBasicPacket& data
     // TODO: Validate that we'll have enough points to hold our instincts when we equip
 
     PChar->m_PMonstrosity->Species = data.ref<uint16>(0x0C);
-    // 0x0D holds the variant index
 
-    // -- 0x010C: Rabbit
-    // -- 0x010D: Onyx Rabbit
-    // -- 0x010E: Alabaster Rabbit
-    // -- 0x0791: Lapinion
-    std::unordered_map<uint16, uint16> lookMap =
-    {
-        { 0x0001, 0x010C },
-        { 0x0100, 0x010D },
-    };
-
-    // TODO: Move this information to a db table that's loaded at startup:
-    // { mon_id, species_code, look, family, { starting_stats } }
-
-    PChar->m_PMonstrosity->Look = lookMap[PChar->m_PMonstrosity->Species];
+    PChar->m_PMonstrosity->Look = gMonstrositySpeciesMap[PChar->m_PMonstrosity->Species].look;
 
     ShowInfo(fmt::format("Species: {}, Flags: {}, Looks: {}",
-        PChar->m_PMonstrosity->Species,
-        PChar->m_PMonstrosity->Flags,
-        PChar->m_PMonstrosity->Look).c_str());
+                         PChar->m_PMonstrosity->Species,
+                         PChar->m_PMonstrosity->Flags,
+                         PChar->m_PMonstrosity->Look)
+                 .c_str());
 
     // Remove All
     if (data.ref<uint16>(0x16) == 0xFFFF)
     {
-        for (std::size_t idx = 0; idx < 12; idx +=2)
+        for (std::size_t idx = 0; idx < 12; idx += 2)
         {
             PChar->m_PMonstrosity->EquippedInstincts[idx] = 0x0000;
         }
     }
     else // Set
     {
-        for (std::size_t idx = 0; idx < 12; idx +=2)
+        for (std::size_t idx = 0; idx < 12; idx += 2)
         {
             if (data.ref<uint16>(0x10 + idx) != 0)
             {
@@ -205,25 +194,21 @@ void monstrosity::HandleEquipChangePacket(CCharEntity* PChar, CBasicPacket& data
 
 void monstrosity::MaxAllLevels(CCharEntity* PChar)
 {
-    ShowInfo("MaxAllLevels");
-    for (auto const& [speciesId, entry] : gMonstrositySpeciesMap)
+    for (auto const& [monstrosityId, entry] : gMonstrositySpeciesMap)
     {
-        PChar->m_PMonstrosity->levels[speciesId] = 99;
+        PChar->m_PMonstrosity->levels[monstrosityId] = 99;
     }
 }
 
-
 void monstrosity::UnlockAllInstincts(CCharEntity* PChar)
 {
-    ShowInfo("UnlockAllInstincts");
-
     // Level based
-    for (auto const& [speciesId, entry] : gMonstrositySpeciesMap)
+    for (auto const& [monstrosityId, entry] : gMonstrositySpeciesMap)
     {
-        uint8 level = 99;
-        uint8 byteOffset = speciesId / 4;
+        uint8 level        = 99;
+        uint8 byteOffset   = monstrosityId / 4;
         uint8 unlockAmount = level / 30;
-        uint8 shiftAmount = (speciesId * 2) % 8;
+        uint8 shiftAmount  = (monstrosityId * 2) % 8;
 
         // Special case for writing Slime & Spriggan data at the end of the 64-byte array
         if (byteOffset == 31)
@@ -244,7 +229,7 @@ void monstrosity::UnlockAllInstincts(CCharEntity* PChar)
     // Instincts (Purchasable)
     for (uint8 idx = 0; idx < 32; ++idx)
     {
-        uint8 byteOffset = 20 + (idx / 8);
+        uint8 byteOffset  = 20 + (idx / 8);
         uint8 shiftAmount = idx % 8;
 
         // There is a gap in the instincts bitpack, so we put the purchase information
@@ -260,8 +245,20 @@ void monstrosity::UnlockAllInstincts(CCharEntity* PChar)
     }
 }
 
-
 void monstrosity::UnlockAllVariants(CCharEntity* PChar)
 {
-    ShowInfo("UnlockAllVariants");
+    for (uint8 idx = 0; idx < 256; ++idx)
+    {
+        uint8 byteOffset  = idx / 8;
+        uint8 shiftAmount = idx % 8;
+
+        if (byteOffset < 32)
+        {
+            PChar->m_PMonstrosity->variants[byteOffset] |= (0x01 << shiftAmount);
+        }
+        else
+        {
+            ShowError("byteOffset out of range");
+        }
+    }
 }

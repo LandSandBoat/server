@@ -3,7 +3,7 @@ local commandObj = {}
 commandObj.cmdprops =
 {
     permission = 1,
-    parameters = 'i'
+    parameters = ''
 }
 
 local monstrositySpecies =
@@ -338,8 +338,7 @@ local purchasableInstincts =
     RUN = 31,
 }
 
-commandObj.onTrigger = function(player, n)
-    print(n)
+commandObj.onTrigger = function(player)
     --[[
     if player:getCharVar('MONSTROSITY_START') == 1 then
         player:setCharVar('MONSTROSITY_START', 0)
@@ -359,9 +358,6 @@ commandObj.onTrigger = function(player, n)
 
     local data =
     {
-        look = 0x0791,
-        name = n,
-
         -- 1 byte per entry, mapped out to monstrositySpecies table
         -- (0 - 127)
         levels =

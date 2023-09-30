@@ -6314,28 +6314,24 @@ void CLuaBaseEntity::setMonstrosity(sol::table table)
         return;
     }
 
-    PChar->m_PMonstrosity->Look = table.get<uint16>("look");
-
-    PChar->m_PMonstrosity->NameBase = table.get<uint8>("name");
-
     for (auto const& [keyObj, valObj] : table.get<sol::table>("levels"))
     {
-        uint8 key = keyObj.as<uint8>();
-        uint8 val = valObj.as<uint8>();
+        uint8 key                          = keyObj.as<uint8>();
+        uint8 val                          = valObj.as<uint8>();
         PChar->m_PMonstrosity->levels[key] = val;
     }
 
     for (auto const& [keyObj, valObj] : table.get<sol::table>("instincts"))
     {
-        uint8 key = keyObj.as<uint8>();
-        uint8 val = valObj.as<uint8>();
+        uint8 key                             = keyObj.as<uint8>();
+        uint8 val                             = valObj.as<uint8>();
         PChar->m_PMonstrosity->instincts[key] = val;
     }
 
     for (auto const& [keyObj, valObj] : table.get<sol::table>("variants"))
     {
-        uint8 key = keyObj.as<uint8>();
-        uint8 val = valObj.as<uint8>();
+        uint8 key                            = keyObj.as<uint8>();
+        uint8 val                            = valObj.as<uint8>();
         PChar->m_PMonstrosity->variants[key] = val;
     }
 
