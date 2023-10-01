@@ -10,7 +10,7 @@ zoneObject.onInitialize = function(zone)
 end
 
 zoneObject.onGameHour = function(zone)
-    SetServerVariable('Selbina_Deastination', math.random(1, 100))
+    SetServerVariable('Selbina_Destination', math.random(1, 100))
 end
 
 zoneObject.onZoneIn = function(player, prevZone)
@@ -55,7 +55,7 @@ end
 
 zoneObject.onEventFinish = function(player, csid, option, npc)
     if csid == 200 then
-        if GetServerVariable('Selbina_Deastination') > 89 then
+        if GetServerVariable('Selbina_Destination') > 89 then
             player:setPos(0, 0, 0, 0, xi.zone.SHIP_BOUND_FOR_MHAURA_PIRATES)
         else
             player:setPos(0, 0, 0, 0, xi.zone.SHIP_BOUND_FOR_MHAURA)

@@ -8,11 +8,11 @@ local ID = zones[xi.zone.YUHTUNGA_JUNGLE]
 local entity = {}
 
 local function isFightInProgress()
-    return GetMobByID(ID.mob.NASUS_OFFSET):isAlive()
-        or GetMobByID(ID.mob.NASUS_OFFSET + 1):isAlive()
-        or GetMobByID(ID.mob.NASUS_OFFSET + 2):isAlive()
-        or GetMobByID(ID.mob.NASUS_OFFSET + 3):isAlive()
-        or GetMobByID(ID.mob.NASUS_OFFSET + 4):isAlive()
+    return GetMobByID(ID.mob.NASUS_OFFSET):isAlive() or
+        GetMobByID(ID.mob.NASUS_OFFSET + 1):isAlive() or
+        GetMobByID(ID.mob.NASUS_OFFSET + 2):isAlive() or
+        GetMobByID(ID.mob.NASUS_OFFSET + 3):isAlive() or
+        GetMobByID(ID.mob.NASUS_OFFSET + 4):isAlive()
 end
 
 local function spawnNMs(player)

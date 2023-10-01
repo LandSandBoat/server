@@ -15,8 +15,8 @@ quest.sections =
 {
     {
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE and player:getCharVar('AssaultPromotion') >= 25
-            and player:getQuestStatus(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.PROMOTION_PRIVATE_FIRST_CLASS) == QUEST_COMPLETED
+            return status == QUEST_AVAILABLE and player:getCharVar('AssaultPromotion') >= 25 and
+            player:getQuestStatus(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.PROMOTION_PRIVATE_FIRST_CLASS) == QUEST_COMPLETED
         end,
 
         [xi.zone.AHT_URHGAN_WHITEGATE] =

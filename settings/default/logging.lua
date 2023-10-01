@@ -54,4 +54,8 @@ xi.settings.logging =
     DEBUG_MODULES        = false, -- Calls in C++: DebugModules(...)
     DEBUG_PACKET_BACKLOG = false, -- Special logic in map.cpp::send_parse
     DEBUG_DELIVERY_BOX   = false, -- Special logic in packet_system.cpp::SmallPacket0x04D
+
+    SQL_SLOW_QUERY_LOG_ENABLE   = true, -- true/false. If true, slow SQL queries will generate warning or error logs if they exceed the durations listed below.
+    SQL_SLOW_QUERY_WARNING_TIME = 100,  -- uint (milliseconds).
+    SQL_SLOW_QUERY_ERROR_TIME   = 250,  -- uint (milliseconds).
 }

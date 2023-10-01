@@ -353,7 +353,7 @@ entity.onEventFinish = function(player, csid, option, npc)
             player:setCharVar('RELIC_IN_PROGRESS', 0)
             player:setCharVar('RELIC_DUE_AT', 0)
             player:setCharVar('RELIC_MAKE_ANOTHER', 0)
-            player:setCharVar('RELIC_CONQUEST_WAIT', getConquestTally())
+            player:setCharVar('RELIC_CONQUEST_WAIT', NextConquestTally())
         end
 
         -- Picking up a finished relic stage 3>4.

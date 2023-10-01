@@ -237,7 +237,7 @@ entity.onMobRoam = function(mob)
 
     for _, doorID in ipairs(escort.doors) do
         local npc = GetNPCByID(doorID)
-        if doorID ~= openedDoor and  mob:checkDistance(npc) <= 8 then
+        if doorID ~= openedDoor and mob:checkDistance(npc) <= 8 then
             npc:setAnimation(xi.animation.OPEN_DOOR)
             mob:setLocalVar('opened_door', doorID)
         end

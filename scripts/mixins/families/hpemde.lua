@@ -94,7 +94,7 @@ g_mixins.families.hpemde = function(hpemdeMob)
                 openMouth(mob)
             elseif
                 mob:getAnimationSub() == 3 and
-                mob:getHP() <  mob:getLocalVar('[hpemde]closeMouthHP')
+                mob:getHP() < mob:getLocalVar('[hpemde]closeMouthHP')
             then
                 closeMouth(mob)
             end

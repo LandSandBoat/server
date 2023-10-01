@@ -142,7 +142,7 @@ struct telepoint_t
 
 struct waypoint_t
 {
-    uint32 access[5];
+    uint32 access[2];
     bool   confirmation;
 
     waypoint_t()

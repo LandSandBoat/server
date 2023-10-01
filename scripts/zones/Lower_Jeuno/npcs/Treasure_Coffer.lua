@@ -1873,7 +1873,7 @@ entity.onTrigger = function(player, npc)
                             xi.settings.main.ENABLE_ASA == 1 and
                             not player:hasItem(xi.item.NEXUS_CAPE)
 
-    local receivedNexusCape = player:getCharVar('receivedNexusCape') == 1
+    local receivedNexusCape = player:hasCompletedUniqueEvent(xi.uniqueEvent.RECEIVED_NEXUS_CAPE)
     local kiArgs = { 0, 0, 0, 0 }
 
     -- Reminder that a "true" here removes the option from the player's menu
@@ -1922,13 +1922,13 @@ entity.onEventFinish = function(player, csid, option, npc)
     if csid == 10099 then
         if
             option == 16777216 and
-            player:getCharVar('receivedNexusCape') == 0 and
+            not player:hasCompletedUniqueEvent(xi.uniqueEvent.RECEIVED_NEXUS_CAPE) and
             npcUtil.giveItem(player, xi.item.NEXUS_CAPE)
         then
-            player:setCharVar('receivedNexusCape', 1)
+            player:setUniqueEvent(xi.uniqueEvent.RECEIVED_NEXUS_CAPE)
         elseif
             option == 33554432 or
-            (option == 16777216 and player:getCharVar('receivedNexusCape') == 1)
+            (option == 16777216 and player:hasCompletedUniqueEvent(xi.uniqueEvent.RECEIVED_NEXUS_CAPE))
         then
             player:addUsedItem(xi.item.NEXUS_CAPE)
         elseif option >= 1 and option <= 20 then

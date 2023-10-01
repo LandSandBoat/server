@@ -621,17 +621,18 @@ enum class Mod
     AUTOMATON_LVL_BONUS         = 1044, // Automaton: Lv. (Increases automaton's base level above 99)
 
     // Dancer
-    FINISHING_MOVES          = 333, // Tracks # of finishing moves
-    SAMBA_DURATION           = 490, // Samba duration bonus
-    WALTZ_POTENCY            = 491, // Waltz Potency Bonus
-    JIG_DURATION             = 492, // Jig duration bonus in percents
-    VFLOURISH_MACC           = 493, // Violent Flourish accuracy bonus
-    STEP_FINISH              = 494, // Bonus finishing moves from steps
-    STEP_ACCURACY            = 403, // Bonus accuracy for Dancer's steps
-    WALTZ_DELAY              = 497, // Waltz Ability Delay modifier (-1 mod is -1 second)
-    SAMBA_PDURATION          = 498, // Samba percent duration bonus
-    REVERSE_FLOURISH_EFFECT  = 836, // Reverse Flourish effect in tenths of squared term multiplier
-    MAX_FINISHING_MOVE_BONUS = 988, // Increases the maximum number of finishing moves that may be stored
+    FINISHING_MOVES          = 333,  // Tracks # of finishing moves
+    SAMBA_DURATION           = 490,  // Samba duration bonus
+    WALTZ_POTENCY            = 491,  // Waltz Potency Bonus
+    JIG_DURATION             = 492,  // Jig duration bonus in percents
+    VFLOURISH_MACC           = 493,  // Violent Flourish accuracy bonus
+    STEP_FINISH              = 494,  // Bonus finishing moves from steps
+    STEP_ACCURACY            = 403,  // Bonus accuracy for Dancer's steps
+    WALTZ_DELAY              = 497,  // Waltz Ability Delay modifier (-1 mod is -1 second)
+    SAMBA_PDURATION          = 498,  // Samba percent duration bonus
+    REVERSE_FLOURISH_EFFECT  = 836,  // Reverse Flourish effect in tenths of squared term multiplier
+    MAX_FINISHING_MOVE_BONUS = 988,  // Increases the maximum number of finishing moves that may be stored
+    STEP_TP_CONSUMED         = 1077, // Modifies the amount of TP consumed when using steps
 
     // Scholar
     BLACK_MAGIC_COST         = 393, // MP cost for black magic (light/dark arts)
@@ -986,7 +987,7 @@ enum class Mod
     // 217 to 223
     // 271 to 280
     //
-    // SPARE = 1077 and onward
+    // SPARE = 1078 and onward
 };
 
 // temporary workaround for using enum class as unordered_map key until compilers support it

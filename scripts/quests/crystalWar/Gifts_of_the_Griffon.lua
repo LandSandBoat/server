@@ -163,7 +163,7 @@ quest.sections =
                 [31] = plumeOnEventFinish,
 
                 [34] = function(player, csid, option, npc)
-                    quest:setVar(player, 'Timer', getConquestTally())
+                    quest:setVar(player, 'Timer', NextConquestTally())
                 end,
 
                 [35] = function(player, csid, option, npc)

@@ -147,6 +147,7 @@ xi.job_utils.dancer.checkStepAbility = function(player, target, ability)
         if player:hasStatusEffect(xi.effect.TRANCE) then
             return 0, 0
         elseif player:getTP() < 100 then
+            -- TODO: Does Step TP Consumed modifier adjust this check?
             return xi.msg.basic.NOT_ENOUGH_TP, 0
         else
             return 0, 0
@@ -237,7 +238,7 @@ xi.job_utils.dancer.useStepAbility = function(player, target, ability, action, s
 
     -- Only remove TP if the player doesn't have Trance.
     if not player:hasStatusEffect(xi.effect.TRANCE) then
-        player:delTP(100)
+        player:delTP(100 + player:getMod(xi.mod.STEP_TP_CONSUMED))
     end
 
     if math.random() <= xi.weaponskills.getHitRate(player, target, true, player:getMod(xi.mod.STEP_ACCURACY)) then

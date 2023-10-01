@@ -693,7 +693,7 @@ xi.spells.damage.calculateNinFutaeBonus = function(caster, skillType)
         skillType == xi.skill.NINJUTSU and
         caster:hasStatusEffect(xi.effect.FUTAE)
     then
-        ninFutaeBonus = (150  + caster:getJobPointLevel(xi.jp.FUTAE_EFFECT) * 5) / 100
+        ninFutaeBonus = (150 + caster:getJobPointLevel(xi.jp.FUTAE_EFFECT) * 5) / 100
         caster:delStatusEffect(xi.effect.FUTAE)
     end
 

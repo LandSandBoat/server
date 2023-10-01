@@ -110,11 +110,11 @@ xi.garrison.getAllyInfo = function(zoneID, zoneData, nationID)
     local pos         = xi.garrison.zoneData[zoneID].pos
 
     if
-        allyName    == nil or
+        allyName == nil or
         allyGroupId == nil or
-        allyLooks   == nil or
-        #allyLooks  == 0   or
-        pos         == nil
+        allyLooks == nil or
+        #allyLooks == 0 or
+        pos == nil
     then
         local zone = GetZone(zoneID)
         debugLogf('Garrison NPC data missing for %s level %u (%s).', nationName[nationID], zoneData.levelCap, zone:getName())
@@ -628,7 +628,7 @@ end
 local function isPlayerOnTallyLockout(player)
     if
         xi.settings.main.GARRISON_ONCE_PER_WEEK and
-        os.time() < player:getCharVar('[Garrison]NextEntryTime')
+        player:getCharVar('[Garrison]NextEntryTime') ~= 0
     then
         return true
     end
@@ -652,7 +652,7 @@ end
 -- Stores the next valid entry time on trading player based on next conquest tally.
 local function saveTallyLockout(player)
     if xi.settings.main.GARRISON_ONCE_PER_WEEK then
-        player:setCharVar('[Garrison]NextEntryTime', getConquestTally())
+        player:setCharVar('[Garrison]NextEntryTime', 1, NextConquestTally())
     end
 end
 
