@@ -404,28 +404,28 @@ local function getFestiveItems(player)
 end
 
 xi.festiveMoogle.onTrade = function(player, npc, trade)
-    for itemId, pellType in pairs(tradeItems) do
-        if npcUtil.tradeHasExactly(trade, itemId) then
+    for pellItemId, pellType in pairs(tradeItems) do
+        if npcUtil.tradeHasExactly(trade, pellItemId) then
             local craftingGuild = player:getCharVar('[GUILD]currentGuild') - 1
             local equipmentMask = 0
 
             -- Build a mask for denying the player Rare/Ex equipment that they already own.  This
             -- appears to only be valid for the equipment category, and not for items.
             if rewardItems[pellType][1] then
-                for bitPos, itemId in pairs(rewardItems[pellType][1]) do
-                    local itemObj = GetItemByID(itemId)
+                for bitPos, rewardItemId in pairs(rewardItems[pellType][1]) do
+                    local itemObj = GetItemByID(rewardItemId)
 
                     if
                         itemObj and
                         bit.band(itemObj:getFlag(), xi.itemFlag.RARE) ~= 0 and
-                        player:hasItem(itemId)
+                        player:hasItem(rewardItemId)
                     then
                         equipmentMask = utils.mask.setBit(equipmentMask, bitPos, true)
                     end
                 end
             end
 
-            player:setLocalVar('tradedPell', itemId)
+            player:setLocalVar('tradedPell', pellItemId)
 
             player:startEvent(festiveMoogleEvents[player:getZoneID()][3], 0, pellType, equipmentMask, 0, craftingGuild)
         end
