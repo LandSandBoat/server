@@ -434,7 +434,7 @@ local itemList =
         xi.item.FAITHFULS_TORSO_V,
         xi.item.PAIR_OF_FAITHFULS_LEGS_V,
         xi.item.YORCIA_VISAGE_V,
-        xi.item.RAKAZNAR_VISGE_V,
+        xi.item.RAKAZNAR_VISAGE_V,
     },
 
     -- Kupon I-S2: Skirmish Rank II Simulacrum Segments (MOG_KUPON_I_S2 = 3972)
@@ -445,7 +445,7 @@ local itemList =
         xi.item.FAITHFULS_TORSO_II,
         xi.item.PAIR_OF_FAITHFULS_LEGS_II,
         xi.item.YORCIA_VISAGE_II,
-        xi.item.RAKAZNAR_VISGE_II,
+        xi.item.RAKAZNAR_VISAGE_II,
     },
 
     -- Kupon I-Orche: Orchestrion music (MOG_KUPON_I_ORCHE = 3973)
@@ -579,7 +579,7 @@ local itemList =
         xi.item.FAITHFULS_TORSO_III,
         xi.item.PAIR_OF_FAITHFULS_LEGS_III,
         xi.item.YORCIA_VISAGE_III,
-        xi.item.RAKAZNAR_VISGE_III,
+        xi.item.RAKAZNAR_VISAGE_III,
     },
 
     -- Kupon A-PK109: iLevel 109 Peacekeeper Coalition Armor (MOG_KUPON_A_PK109 = 8733)
@@ -610,7 +610,7 @@ local itemList =
         xi.item.FAITHFULS_TORSO_I,
         xi.item.PAIR_OF_FAITHFULS_LEGS_I,
         xi.item.YORCIA_VISAGE_I,
-        xi.item.RAKAZNAR_VISGE_I,
+        xi.item.RAKAZNAR_VISAGE_I,
     },
 
     -- Kupon I-Skill: Skill books (MOG_KUPON_I_SKILL = 8735)

@@ -3,6 +3,10 @@ require('scripts/globals/interaction/quest')
 
 utils = {}
 
+-- Event cancelled constant, replaces the hardcoded value of 1073741824 in many
+-- scripts.
+utils.EVENT_CANCELLED_OPTION = bit.lshift(1, 30)
+
 -- Max uint32 constant, replaces negative values in event parameters
 -- Note: If correcting a negative value, this is *already* -1, adjust accordingly!
 utils.MAX_UINT32 = 4294967295
