@@ -981,7 +981,7 @@ local function canBuyExpRing(player, item)
     -- one exp ring per conquest tally
     if
         xi.settings.main.BYPASS_EXP_RING_ONE_PER_WEEK ~= 1 and
-        player:getCharVar('CONQUEST_RING_RECHARGE') > os.time()
+        player:getCharVar('CONQUEST_RING_RECHARGE') ~= 0
     then
         player:messageSpecial(text.CONQUEST + 60, 0, 0, item)
         player:messageSpecial(text.CONQUEST + 50, 0, 0, item)
@@ -1125,7 +1125,7 @@ xi.conquest.overseerOnTrade = function(player, npc, trade, guardNation, guardTyp
         if not tradeConfirmed and expRings[item] and npcUtil.tradeHas(trade, item) then
             if
                 xi.settings.main.BYPASS_EXP_RING_ONE_PER_WEEK == 1 or
-                player:getCharVar('CONQUEST_RING_RECHARGE') < os.time()
+                player:getCharVar('CONQUEST_RING_RECHARGE') == 0
             then
                 local ring = expRings[item]
 
@@ -1133,7 +1133,7 @@ xi.conquest.overseerOnTrade = function(player, npc, trade, guardNation, guardTyp
                     player:delCP(ring.cp)
                     player:confirmTrade()
                     player:addItem(item)
-                    player:setCharVar('CONQUEST_RING_RECHARGE', getConquestTally())
+                    player:setCharVar('CONQUEST_RING_RECHARGE', 1, NextConquestTally())
                     player:showText(npc, mOffset + 58, item, ring.cp, ring.charges) -- 'Your ring is now fully recharged.'
                 else
                     player:showText(npc, mOffset + 55, item, ring.cp) -- 'You do not have the required conquest points to recharge.'
@@ -1344,7 +1344,7 @@ xi.conquest.overseerOnEventFinish = function(player, csid, option, guardNation, 
             npcUtil.giveKeyItem(player, outpost.ki)
             player:setCharVar('supplyQuest_started', VanadielUniqueDay())
             player:setCharVar('supplyQuest_region', region)
-            player:setCharVar('supplyQuest_fresh', getConquestTally())
+            player:setCharVar('supplyQuest_fresh', NextConquestTally())
         end
 
     -- FINISH SUPPLY RUN
@@ -1397,7 +1397,7 @@ xi.conquest.overseerOnEventFinish = function(player, csid, option, guardNation, 
         -- make sale
         if npcUtil.giveItem(player, stock.item) then
             if option >= 32933 and option <= 32935 then
-                player:setCharVar('CONQUEST_RING_RECHARGE', getConquestTally())
+                player:setCharVar('CONQUEST_RING_RECHARGE', 1, NextConquestTally())
 
                 if player:hasKeyItem(xi.ki.CONQUEST_PROMOTION_VOUCHER) then
                     player:delKeyItem(xi.ki.CONQUEST_PROMOTION_VOUCHER)

@@ -18,7 +18,7 @@ zoneObject.onZoneIn = function(player, prevZone)
     elseif
         player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.A_MORAL_MANIFEST) == QUEST_AVAILABLE and
         player:getMainLvl() >= 60 and
-        player:getCharVar('moraldecline') <= os.time()
+        player:getCharVar('moraldecline') == 0
     then
         cs = 46
     elseif player:getCharVar('moral') == 4 and head == 15202 then -- Yagudo Headgear
@@ -55,7 +55,7 @@ zoneObject.onEventFinish = function(player, csid, option, npc)
         player:setCharVar('moral', 1)
         player:addQuest(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.A_MORAL_MANIFEST)
     elseif csid == 46 and option == 1 then
-        player:setCharVar('moraldecline', getConquestTally())
+        player:setCharVar('moraldecline', 1, NextConquestTally())
     elseif csid == 47 then
         npcUtil.giveKeyItem(player, xi.ki.VAULT_QUIPUS)
         player:setCharVar('moral', 5)

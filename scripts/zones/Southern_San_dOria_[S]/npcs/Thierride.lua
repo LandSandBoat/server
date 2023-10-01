@@ -36,7 +36,7 @@ entity.onTrigger = function(player, npc)
         player:startEvent(335) -- Quest Active, NPC Repeats what he says but as normal 'text' instead of cutscene.
     elseif
         beansAhoy == QUEST_COMPLETED and
-        os.time() > player:getCharVar('BeansAhoy_ConquestWeek')
+        player:getCharVar('BeansAhoy_ConquestWeek') == 0
     then
         player:startEvent(342)
     elseif beansAhoy == QUEST_COMPLETED then
@@ -63,7 +63,7 @@ entity.onEventFinish = function(player, csid, option, npc)
         else
             player:addItem(xi.item.ANGLERS_CASSOULET, 1)
             player:messageSpecial(ID.text.ITEM_OBTAINED, xi.item.ANGLERS_CASSOULET)
-            player:setCharVar('BeansAhoy_ConquestWeek', getConquestTally())
+            player:setCharVar('BeansAhoy_ConquestWeek', 1, NextConquestTally())
             if csid == 340 then
                 player:completeQuest(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.BEANS_AHOY)
                 player:setCharVar('BeansAhoy', 0)

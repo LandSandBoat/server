@@ -172,6 +172,7 @@ namespace luautils
         lua.set_function("GetSystemTime", &luautils::GetSystemTime);
         lua.set_function("JstMidnight", &luautils::JstMidnight);
         lua.set_function("JstWeekday", &luautils::JstWeekday);
+        lua.set_function("NextConquestTally", &luautils::NextJstWeek);
         lua.set_function("NextGameTime", &luautils::NextGameTime);
         lua.set_function("NextJstDay", &luautils::JstMidnight);
         lua.set_function("NextJstWeek", &luautils::NextJstWeek);
@@ -1430,6 +1431,8 @@ namespace luautils
         // Start with the "Next" Midnight, and apply N days worth of time to it
         return nextJstMidnight + (7 - jstWeekday) * 60 * 60 * 24;
     }
+
+    // NOTE: NextConquestTally exists for clarity, and is bound to the above function
 
     uint32 VanadielMoonPhase()
     {
