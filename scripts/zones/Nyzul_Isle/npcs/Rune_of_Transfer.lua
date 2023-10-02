@@ -30,7 +30,7 @@ entity.onEventUpdate = function(player, csid, option, npc)
 
     if
         csid == 201 and
-        option ~= 1073741824 and
+        option ~= utils.EVENT_CANCELLED_OPTION and
         instance:getLocalVar('runeHandler') == 0
     then
         local chars = instance:getChars()
@@ -57,7 +57,7 @@ entity.onEventFinish = function(player, csid, option, npc)
         end
     elseif
         csid == 201 and
-        option ~= 1073741824 and
+        option ~= utils.EVENT_CANCELLED_OPTION and
         instance:getLocalVar('runeHandler') == player:getID()
     then
         -- Leave Assault

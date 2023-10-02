@@ -98,7 +98,7 @@ mission.sections =
             onEventFinish =
             {
                 [39] = function(player, csid, option, npc)
-                    if option ~= 1073741824 then
+                    if option ~= utils.EVENT_CANCELLED_OPTION then
                         local ID           = zones[player:getZoneID()]
                         local firstAugSel  = bit.band(bit.rshift(option, 1), 0xF)
                         local secondAugSel = bit.band(bit.rshift(option, 17), 0xF)

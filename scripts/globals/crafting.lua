@@ -526,7 +526,10 @@ xi.crafting.guildPointOnEventFinish = function(player, option, target, guildId)
         end
 
     -- HQ crystal Option.
-    elseif category == 0 and option ~= 1073741824 then
+    elseif
+        category == 0 and
+        option ~= utils.EVENT_CANCELLED_OPTION
+    then
         local crystal  = hqCrystals[bit.band(bit.rshift(option, 5), 15)]
         local quantity = bit.rshift(option, 9)
         local cost     = quantity * crystal.cost
