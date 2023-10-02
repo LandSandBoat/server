@@ -60,6 +60,7 @@ mission.sections =
 
                 [3028] = function(player, csid, option, npc)
                     if mission:complete(player) then
+                        player:setCharVar('Mission[4][7]Stage', getMidnight())
                         player:delKeyItem(xi.ki.RAILLEFALS_NOTE)
                         player:setLocalVar('Mission[4][7]mustZone', 1)
                     end
