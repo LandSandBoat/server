@@ -12,7 +12,7 @@ xi.events.loginCampaign = xi.events.loginCampaign or {}
 -- Change vars below to modify settings for current login campaign
 -- NOTE: the year and month values are used in the Moogle's Event!
 local loginCampaignYear = 2023
-local loginCampaignMonth = 9
+local loginCampaignMonth = 10
 local loginCampaignDay = 1
 local loginCampaignDuration = 29 -- Duration is set in Earth days (Average is 23 days)
 
@@ -39,6 +39,10 @@ end
 
 -- Gives Login Points once a day.
 xi.events.loginCampaign.onGameIn = function(player)
+    if player:isCrystalWarrior() then
+        return
+    end
+
     if not xi.events.loginCampaign.isCampaignActive()  then
         return
     end
@@ -94,6 +98,11 @@ end
 -- Beginning of CS with Greeter Moogle.
 -- Handles showing the correct list of prices and hiding the options that are not available
 xi.events.loginCampaign.onTrigger = function(player, csid)
+    if player:isCrystalWarrior() then
+        player:PrintToPlayer("You cannot claim login rewards as a Crystal Warrior.", xi.msg.channel.SYSTEM_3)
+        return
+    end
+
     if not xi.events.loginCampaign.isCampaignActive() then
         -- TODO: What do the moogles do when the campaign isn't active?
         return

@@ -49,22 +49,22 @@ local prizes =
             3286, -- Hadean Tatter
 
         -- Cycle #1
-            -- 154,  -- Miniature Airship
-            -- 192,  -- Hoary Spire
-            -- 264,  -- Stuffed Chocobo
-            -- 265,  -- Adamant Statue
-            -- 266,  -- Behemoth Statue
-            -- 282,  -- Yovra Replica
-            -- 3706, -- Vanaclock
+          -- 154,  -- Miniature Airship
+          -- 192,  -- Hoary Spire
+          -- 264,  -- Stuffed Chocobo
+          -- 265,  -- Adamant Statue
+          -- 266,  -- Behemoth Statue
+          -- 282,  -- Yovra Replica
+          -- 3706, -- Vanaclock
 
         -- Cycle #2
-            -- 267, -- Fafnir Statue
-            -- 268, -- N moogle Statue
-            -- 269, -- S lord Statue
-            -- 270, -- Odin Statue
-            -- 271, -- Alexander Statue
-            -- 277, -- Prishe Statue
-            -- 278, -- Cardian Statue
+            267, -- Fafnir Statue
+            268, -- N moogle Statue
+            269, -- S lord Statue
+            270, -- Odin Statue
+            271, -- Alexander Statue
+            277, -- Prishe Statue
+            278, -- Cardian Statue
 
         -- Cycle #3
            --  279, -- S Lord Statue II
@@ -93,12 +93,12 @@ local prizes =
             -- 3717, -- Birch Tree
 
         -- Cycle # 6
-            195,  -- The Big One
-            3641, -- Kabuto Kazari
-            3642, -- Katana Kazari
-            3654, -- Tender Bouquet
-            3739, -- Autumn Tree
-            3740, -- Model Synergy Furn
+            -- 195,  -- The Big One
+            -- 3641, -- Kabuto Kazari
+            -- 3642, -- Katana Kazari
+            -- 3654, -- Tender Bouquet
+            -- 3739, -- Autumn Tree
+            -- 3740, -- Model Synergy Furn
         },
     },
 
@@ -128,66 +128,66 @@ local prizes =
         --  27911, -- Chocobo Suit
 
         -- Cycle #2
-          11491, -- Snow Bunny Hat +1
-          23730, -- Karakul Cap
-          25585, -- Bl. Chocobo Cap
-          25606, -- Agent Hood
-          25607, -- Starlet Flower
-          25756, -- Wyrmking Suit
-          25657, -- Wyrmking Masque
-          25776, -- Bl. Chocobo Suit
-          25850, -- Pink Subligar
-          26514, -- Poroggo Fleece
-          26974, -- Agent Coat
-          26975, -- Starlet Jabot
-          27111, -- Agent Cuffs
-          27112, -- Starlet Gloves
-          27296, -- Agent Pants
-          27297, -- Starlet Skirt
-          27467, -- Agent Boots
-          27468, -- Starlet Boots
-          27717, -- Worm Masque
+        --  11491, -- Snow Bunny Hat +1
+        --  23730, -- Karakul Cap
+        --  25585, -- Bl. Chocobo Cap
+        --  25606, -- Agent Hood
+        --  25607, -- Starlet Flower
+        --  25756, -- Wyrmking Suit
+        --  25657, -- Wyrmking Masque
+        --  25776, -- Bl. Chocobo Suit
+        --  25850, -- Pink Subligar
+        --  26514, -- Poroggo Fleece
+        --  26974, -- Agent Coat
+        --  26975, -- Starlet Jabot
+        --  27111, -- Agent Cuffs
+        --  27112, -- Starlet Gloves
+        --  27296, -- Agent Pants
+        --  27297, -- Starlet Skirt
+        --  27467, -- Agent Boots
+        --  27468, -- Starlet Boots
+        --  27717, -- Worm Masque
 
         -- Cycle #3
-            -- 11812, -- Charity Cap
-            -- 25639, -- Korrigan Masque
-            -- 25645, -- Kupo Masque
-            -- 25715, -- Korrigan Suit
-            -- 25726, -- Kupo Suit
-            -- 25774, -- Fancy Gilet
-            -- 25775, -- Fancy Top
-            -- 25838, -- Fancy Trunks
-            -- 25839, -- Fancy Shorts
-            -- 26707, -- Flan Masque
-            -- 26717, -- Cait Sith Cap
-            -- 26719, -- Sheep Cap
-            -- 26738, -- Leafkin Cap
-            -- 26789, -- Shobuhouou Kabuto
-            -- 26946, -- Pupil's Shirt
-            -- 26964, -- Pupil's Camisa
-            -- 27281, -- Pupil's Trousers
-            -- 27455, -- Pupil's Shoes
+        -- 11812, -- Charity Cap
+        -- 25639, -- Korrigan Masque
+        -- 25645, -- Kupo Masque
+        -- 25715, -- Korrigan Suit
+        -- 25726, -- Kupo Suit
+        -- 25774, -- Fancy Gilet
+        -- 25775, -- Fancy Top
+        -- 25838, -- Fancy Trunks
+        -- 25839, -- Fancy Shorts
+        -- 26707, -- Flan Masque
+        -- 26717, -- Cait Sith Cap
+        -- 26719, -- Sheep Cap
+        -- 26738, -- Leafkin Cap
+        -- 26789, -- Shobuhouou Kabuto
+        -- 26946, -- Pupil's Shirt
+        -- 26964, -- Pupil's Camisa
+        -- 27281, -- Pupil's Trousers
+        -- 27455, -- Pupil's Shoes
 
         -- Cycle #4
-            -- 25649, -- Gazer's Helmet
-            -- 25713, -- Track Shirt
-            -- 25722, -- Jubilee Shirt
-            -- 25755, -- Crustacean Shirt
-            -- 25758, -- Rhapsody Shirt
-            -- 26516, -- Citrullus Shirt
-            -- 26517, -- Shadow Lord Shirt
-            -- 26518, -- Jody Shirt
-            -- 26519, -- Mandragora Shirt
-            -- 26524, -- Gil Nabber Shirt
-            -- 26545, -- Mithkabob Shirt
-            -- 26965, -- Ta Moko
-            -- 26967, -- Cossie Top
-            -- 27291, -- Swimming Togs
-            -- 27293, -- Cossie Bottom
-            -- 27325, -- Track Pants
-            -- 27899, -- Alliance Shirt
-            -- 28185, -- Alliance Pants
-            -- 28324, -- Alliance Boots
+        25649, -- Gazer's Helmet
+        25713, -- Track Shirt
+        25722, -- Jubilee Shirt
+        25755, -- Crustacean Shirt
+        25758, -- Rhapsody Shirt
+        26516, -- Citrullus Shirt
+        26517, -- Shadow Lord Shirt
+        26518, -- Jody Shirt
+        26519, -- Mandragora Shirt
+        26524, -- Gil Nabber Shirt
+        26545, -- Mithkabob Shirt
+        26965, -- Ta Moko
+        26967, -- Cossie Top
+        27291, -- Swimming Togs
+        27293, -- Cossie Bottom
+        27325, -- Track Pants
+        27899, -- Alliance Shirt
+        28185, -- Alliance Pants
+        28324, -- Alliance Boots
 
         -- Cycle #5
             -- 10446, -- Ahriman Cap
@@ -339,45 +339,45 @@ local prizes =
         --  26489, -- Troth
 
         -- Cycle #4
-           10809, -- Moogle Guard
-           20569, -- Esikuva
-           20571, -- Infiltrator
-           20576, -- Qutrub Knife
-           20666, -- Blizzard Brand
-           20668, -- Firetongue
-           20933, -- Hotengeki
-           21074, -- Kupo Rod
-           21086, -- Heartstopper
-           21095, -- Heartbeater
-           21153, -- Malice Masher
-           21608, -- Onion Sword II
-           21609, -- Save The Queen II
-           21636, -- Nihility
-           21867, -- Sha Wujing's Lance
-           21965, -- Zanmato
-           22039, -- Floral Hagoita
-           22089, -- Sophistry
-           26410, -- Diamond Buckler
+        --  10809, -- Moogle Guard
+        --  20569, -- Esikuva
+        --  20571, -- Infiltrator
+        --  20576, -- Qutrub Knife
+        --  20666, -- Blizzard Brand
+        --  20668, -- Firetongue
+        --  20933, -- Hotengeki
+        --  21074, -- Kupo Rod
+        --  21086, -- Heartstopper
+        --  21095, -- Heartbeater
+        --  21153, -- Malice Masher
+        --  21608, -- Onion Sword II
+        --  21609, -- Save The Queen II
+        --  21636, -- Nihility
+        --  21867, -- Sha Wujing's Lance
+        --  21965, -- Zanmato
+        --  22039, -- Floral Hagoita
+        --  22089, -- Sophistry
+        --  26410, -- Diamond Buckler
 
         -- Cycle #5
-            -- 11499, -- Trainees Specs
-            -- 15008, -- Trainee Gloves
-            -- 17764, -- Trainee Sword
-            -- 18502, -- Trainee Axe
-            -- 18763, -- Trainee Scissors
-            -- 18855, -- Trainee Hammer
-            -- 19101, -- Trainee Knife
-            -- 19110, -- Trainees Needle
-            -- 19274, -- Trainee Burin
+        --  11499, -- Trainees Specs
+        --  15008, -- Trainee Gloves
+        --  17764, -- Trainee Sword
+        --  18502, -- Trainee Axe
+        --  18763, -- Trainee Scissors
+        --  18855, -- Trainee Hammer
+        --  19101, -- Trainee Knife
+        --  19110, -- Trainees Needle
+        --  19274, -- Trainee Burin
 
         -- Cycle #6 (Costumes)
-            -- 10849, -- Yagudo Belt
-            -- 10851, -- Slime Belt
-            -- 15919, -- Drover's Belt
-            -- 15921, -- Detonator Belt
-            -- 16273, -- Pullus Torque
-            -- 17031, -- Shell Scepter
-            -- 27718, -- Worm Masque +1
+            10849, -- Yagudo Belt
+            10851, -- Slime Belt
+            15919, -- Drover's Belt
+            15921, -- Detonator Belt
+            16273, -- Pullus Torque
+            17031, -- Shell Scepter
+            27718, -- Worm Masque +1
         },
     },
 
@@ -430,7 +430,6 @@ local prizes =
         -- Crafting items, leave these here until we can modify our skillup rates again
 
         -- static item
-            11009, -- Shapers Shawl
             25637, -- Midrass Helm +1
             28585, -- Craftkeepers Ring
             28586, -- Craftmasters Ring
@@ -552,51 +551,51 @@ local prizes =
         --  16318, -- Cobra Trews
 
         -- Cycle #4 -- Assault gear
-           14525, -- Amir Korazin
-           14527, -- Yigit Gomlek
-           14530, -- Pln. Khazagand
-           14933, -- Amir Kolluks
-           14935, -- Yigit Gages
-           14940, -- Pln. Dastanas
-           15604, -- Amir Dirs
-           15606, -- Yigit Seraweels
-           15609, -- Pln. Seraweels
-           15688, -- Amir Boots
-           15690, -- Yigit Crackows
-           15695, -- Pln. Crackows
-           16062, -- Amir Puggaree
-           16064, -- Yigit Turban
-           16069, -- Pln. Qalansuwa
-           27556, -- Echad Ring
+        --  14525, -- Amir Korazin
+        --  14527, -- Yigit Gomlek
+        --  14530, -- Pln. Khazagand
+        --  14933, -- Amir Kolluks
+        --  14935, -- Yigit Gages
+        --  14940, -- Pln. Dastanas
+        --  15604, -- Amir Dirs
+        --  15606, -- Yigit Seraweels
+        --  15609, -- Pln. Seraweels
+        --  15688, -- Amir Boots
+        --  15690, -- Yigit Crackows
+        --  15695, -- Pln. Crackows
+        --  16062, -- Amir Puggaree
+        --  16064, -- Yigit Turban
+        --  16069, -- Pln. Qalansuwa
+        --  27556, -- Echad Ring
 
         -- Cycle #5 -- TOAU NM drops/Apollyon AF+1 items part 1
-            -- 1931,  -- Argyro Rivet (WAR)
-            -- 1933,  -- Ancient Brass (MNK)
-            -- 1935,  -- Benedict Yarn (WHM)
-            -- 1937,  -- Diabolic Yarn (BLM)
-            -- 1939,  -- Cardinal Cloth (RDM)
-            -- 1941,  -- Light Filament (THF)
-            -- 1943,  -- White Rivet (PLD)
-            -- 1945,  -- Black Rivet (DRK)
-            -- 1947,  -- Fetid Lanolin (BST)
-            -- 1949,  -- Brown Doeskin (BRD)
-            -- 11496, -- Fenrir's Crown
-            -- 16375, -- Surge Subligar
-            -- 17971, -- Tartaglia
-            -- 19235, -- Veuglaire
+        --   1931,  -- Argyro Rivet (WAR)
+        --   1933,  -- Ancient Brass (MNK)
+        --   1935,  -- Benedict Yarn (WHM)
+        --   1937,  -- Diabolic Yarn (BLM)
+        --   1939,  -- Cardinal Cloth (RDM)
+        --   1941,  -- Light Filament (THF)
+        --   1943,  -- White Rivet (PLD)
+        --   1945,  -- Black Rivet (DRK)
+        --   1947,  -- Fetid Lanolin (BST)
+        --   1949,  -- Brown Doeskin (BRD)
+        --   11496, -- Fenrir's Crown
+        --   16375, -- Surge Subligar
+        --   17971, -- Tartaglia
+        --   19235, -- Veuglaire
 
         -- Cycle #6 --Apollyon AF+1 items part 2
-            -- 1951,  -- Charcoal Cotton (RNG)
-            -- 1953,  -- Kurogane (SAM)
-            -- 1955,  -- Ebony Lacquer (NIN)
-            -- 1957,  -- Blue Rivet (DRG)
-            -- 1959,  -- Astral Leather (SMN)
-            -- 2657,  -- Flameshun Cloth (BLU)
-            -- 2659,  -- Canvas Toile (COR)
-            -- 2661,  -- Corduroy Cloth (PUP)
-            -- 2715,  -- Gold Stud (DNC)
-            -- 2717,  -- Electrum Stud (SCH)
-            -- 27556, -- Echad Ring
+             1951,  -- Charcoal Cotton (RNG)
+             1953,  -- Kurogane (SAM)
+             1955,  -- Ebony Lacquer (NIN)
+             1957,  -- Blue Rivet (DRG)
+             1959,  -- Astral Leather (SMN)
+             2657,  -- Flameshun Cloth (BLU)
+             2659,  -- Canvas Toile (COR)
+             2661,  -- Corduroy Cloth (PUP)
+             2715,  -- Gold Stud (DNC)
+             2717,  -- Electrum Stud (SCH)
+             27556, -- Echad Ring
         },
     },
 
@@ -608,7 +607,6 @@ local prizes =
         -- GAMECHANGERS
 
         -- Cycle #1 -- TH/Crafting/EXP/CoP rings
-            -- 11009, -- Shaper's Shawl
             -- 15220, -- Rain hat
             -- 15543, -- Raja's Ring
             -- 15544, -- Sattva Ring
@@ -645,65 +643,65 @@ local prizes =
         -- 19236, -- Hightail Bullet
 
         -- Cycle #4 -- HQ Kings pop items/Carbuncle Prime/WOTG Nations/Naji's/TH+1 hat
-           3340,  -- Sweet Tea (Nidhogg pop)
-           3342,  -- Savory Shank (King Behemoth pop)
-           3344,  -- Red Pondweed (Aspidochelone pop)
-           14588, -- Iron Ram Hauberk
-           14931, -- Carbuncle's Cuffs
-           15009, -- Iron Ram Dastanas
-           15755, -- Iron Ram Greaves
-           16146, -- Iron Ram Sallet
-           16315, -- Iron Ram Hose
-           17192, -- Ifrit's Bow
-           17711, -- Shiva's Shotel
-           18021, -- Titan's Baselarde
-           18063, -- Garuda's Sickle
-           18109, -- Leviathan's Couse
-           18404, -- Ramuh's Mace
-           25679, -- White Rarab Cap +1 (TH+1)
-           26219, -- Naji's Loop
+        -- 3340,  -- Sweet Tea (Nidhogg pop)
+        -- 3342,  -- Savory Shank (King Behemoth pop)
+        -- 3344,  -- Red Pondweed (Aspidochelone pop)
+        -- 14588, -- Iron Ram Hauberk
+        -- 14931, -- Carbuncle's Cuffs
+        -- 15009, -- Iron Ram Dastanas
+        -- 15755, -- Iron Ram Greaves
+        -- 16146, -- Iron Ram Sallet
+        -- 16315, -- Iron Ram Hose
+        -- 17192, -- Ifrit's Bow
+        -- 17711, -- Shiva's Shotel
+        -- 18021, -- Titan's Baselarde
+        -- 18063, -- Garuda's Sickle
+        -- 18109, -- Leviathan's Couse
+        -- 18404, -- Ramuh's Mace
+        -- 25679, -- White Rarab Cap +1 (TH+1)
+        -- 26219, -- Naji's Loop
 
         -- Cycle #5 -- WOTG Nations
-            -- 11545, -- Fourth Mantle
-            -- 11588, -- Mrc.Mjr. Charm
-            -- 11636, -- R.K. Sigil Ring
-            -- 15844, -- Patronus Ring
-            -- 15934, -- Crimson Belt
-            -- 15935, -- Capricornian Rope
-            -- 15936, -- Earthy Belt
-            -- 15966, -- Silver Fox Earring
-            -- 15967, -- Temple Earring
-            -- 16258, -- Arrestor Mantle
-            -- 16291, -- Shield Collar
-            -- 16292, -- Bull Necklace
-            -- 16293, -- Cougar Pendant
-            -- 16294, -- Crocodile Collar
-            -- 18734, -- Sturm's Report
-            -- 18735, -- Sonia's Plectrum
-            -- 19041, -- Rose Strap
-            -- 19042, -- Ariesian Grip
+           11545, -- Fourth Mantle
+           11588, -- Mrc.Mjr. Charm
+           11636, -- R.K. Sigil Ring
+           15844, -- Patronus Ring
+           15934, -- Crimson Belt
+           15935, -- Capricornian Rope
+           15936, -- Earthy Belt
+           15966, -- Silver Fox Earring
+           15967, -- Temple Earring
+           16258, -- Arrestor Mantle
+           16291, -- Shield Collar
+           16292, -- Bull Necklace
+           16293, -- Cougar Pendant
+           16294, -- Crocodile Collar
+           18734, -- Sturm's Report
+           18735, -- Sonia's Plectrum
+           19041, -- Rose Strap
+           19042, -- Ariesian Grip
 
         -- Cycle #6 -- Temenos AF+1 items (Change point cost to 1500 for this cycle only!)
-            -- 1930, -- Ecarlate Cloth (WAR)
-            -- 1932, -- Utopian Gold Thread (MNK)
-            -- 1934, -- Benedict Silk (WHM)
-            -- 1936, -- Diabolic Silk (BLM)
-            -- 1938, -- Ruby Silk Thread (RDM)
-            -- 1940, -- Supple Skin (THF)
-            -- 1942, -- Snowy Cermet (PLD)
-            -- 1944, -- Dark Orichalcum (DRK)
-            -- 1946, -- Smalt Leather (BST)
-            -- 1948, -- Coiled Yarn (BRD)
-            -- 1950, -- Chameleon Yarn (RNG)
-            -- 1952, -- Scarlet Odoshi (SAM)
-            -- 1954, -- Plaited Cord (NIN)
-            -- 1956, -- Cobalt Mythril Sheet (DRG)
-            -- 1958, -- Glittering Yarn (SMN)
-            -- 2656, -- Luminian Thread (BLU)
-            -- 2658, -- Silkworm Thread (COR)
-            -- 2660, -- Pantin Wire (PUP)
-            -- 2714, -- Filet Lace (DNC)
-            -- 2716, -- Brilliantine (SCH)
+        --  1930, -- Ecarlate Cloth (WAR)
+        --  1932, -- Utopian Gold Thread (MNK)
+        --  1934, -- Benedict Silk (WHM)
+        --  1936, -- Diabolic Silk (BLM)
+        --  1938, -- Ruby Silk Thread (RDM)
+        --  1940, -- Supple Skin (THF)
+        --  1942, -- Snowy Cermet (PLD)
+        --  1944, -- Dark Orichalcum (DRK)
+        --  1946, -- Smalt Leather (BST)
+        --  1948, -- Coiled Yarn (BRD)
+        --  1950, -- Chameleon Yarn (RNG)
+        --  1952, -- Scarlet Odoshi (SAM)
+        --  1954, -- Plaited Cord (NIN)
+        --  1956, -- Cobalt Mythril Sheet (DRG)
+        --  1958, -- Glittering Yarn (SMN)
+        --  2656, -- Luminian Thread (BLU)
+        --  2658, -- Silkworm Thread (COR)
+        --  2660, -- Pantin Wire (PUP)
+        --  2714, -- Filet Lace (DNC)
+        --  2716, -- Brilliantine (SCH)
         },
     },
 }
