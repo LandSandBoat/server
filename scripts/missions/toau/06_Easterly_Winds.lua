@@ -15,7 +15,7 @@ local mission = Mission:new(xi.mission.log_id.TOAU, xi.mission.id.toau.EASTERLY_
 
 mission.reward =
 {
-    nextMission = { xi.mission.log_id.TOAU, xi.mission.id.toau.WESTERLY_WINDS },
+    nextMission = { xi.mission.log_id.TOAU, xi.mission.id.toau.WESTERLY_WINDS }
 }
 
 mission.sections =
@@ -34,6 +34,13 @@ mission.sections =
                 end,
             },
         },
+    },
+
+    {
+        check = function(player, currentMission, missionStatus, vars)
+            return currentMission == mission.missionId and
+                os.time() >= vars.Stage
+        end,
 
         [xi.zone.RULUDE_GARDENS] =
         {
