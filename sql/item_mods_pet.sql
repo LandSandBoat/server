@@ -757,6 +757,15 @@ INSERT INTO `item_mods_pet` VALUES (23099,25,51,1); -- Avatar - ACC: 51
 INSERT INTO `item_mods_pet` VALUES (23099,26,51,1); -- Avatar - RACC: 51
 INSERT INTO `item_mods_pet` VALUES (23099,30,51,1); -- Avatar - MACC: 51
 
+-- Karagoz cappello +2
+INSERT INTO `item_mods_pet` VALUES (23102,25,51,3);   -- Automaton: ACC: 51
+INSERT INTO `item_mods_pet` VALUES (23102,26,51,3);   -- Automaton: RACC: 51
+INSERT INTO `item_mods_pet` VALUES (23102,30,51,3);   -- Automaton: MACC: 51
+INSERT INTO `item_mods_pet` VALUES (23102,995,575,3); -- Automaton: PET_TP_BONUS: 575
+
+-- Azimuth Hood +2
+INSERT INTO `item_mods_pet` VALUES (23105,370,4,8); -- Luopan: REGEN: 4
+
 -- Vishap Mail +2
 INSERT INTO `item_mods_pet` VALUES (23120,370,10,2); -- Wyvern - REGEN: 10
 
