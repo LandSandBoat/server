@@ -119,7 +119,7 @@ xi.escha.portals.eschanPortalEventFinish = function(player, csid, option, npc)
     elseif
         option ~= 0 and
         option ~= 4 and -- Scintillating Rhapsody usage.
-        option ~= 1073741824
+        option ~= utils.EVENT_CANCELLED_OPTION
     then
         player:delCurrency('escha_silt', portalCost)
     end
