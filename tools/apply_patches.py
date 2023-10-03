@@ -21,7 +21,7 @@ def apply_patches():
             try:
                 # Use subprocess to run the 'git apply' command
                 # subprocess.run(["git", "apply", "-R", patch_path], cwd="../")
-                subprocess.run(["git", "apply", "-v", patch_path], cwd="../", check=True)
+                subprocess.run(["git", "apply", "--ignore-whitespace", "-v", patch_path], cwd="../", check=True)
                 print(f"Applied patch: {filename}")
             except subprocess.CalledProcessError as e:
                 print(f"Error applying patch {filename}: {e}")
