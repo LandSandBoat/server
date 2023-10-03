@@ -83,57 +83,6 @@ uint16 CLuaItem::getTrialNumber()
     return static_cast<CItemEquipment*>(m_PLuaItem)->getTrialNumber();
 }
 
-auto CLuaItem::getMatchingTrials() -> sol::table
-{
-    if (m_PLuaItem == nullptr)
-    {
-        ShowWarning("CLuaItem::getMatchingTrials() - m_PLuaItem is null.");
-        return lua.create_table();
-    }
-
-    auto PItem = static_cast<CItemEquipment*>(m_PLuaItem);
-
-    const char* Query =
-        "SELECT trialId FROM `magian` "
-        "WHERE `reqItem` = %u AND "
-        "`reqItemAug1` = %u AND "
-        "`reqItemAug2` = %u AND "
-        "`reqItemAug3` = %u AND "
-        "`reqItemAug4` = %u AND "
-        "`reqItemAugValue1` = %u AND "
-        "`reqItemAugValue2` = %u AND "
-        "`reqItemAugValue3` = %u AND "
-        "`reqItemAugValue4` = %u AND "
-        "`trialTarget` <> 0;";
-
-    int32 augs[4][2]{};
-    for (int i = 0; i < 4; i++)
-    {
-        auto   augbits    = PItem->getAugment(i);
-        uint16 augmentid  = (uint16)unpackBitsBE((uint8*)(&augbits), 0, 11);
-        uint8  augmentVal = (uint8)unpackBitsBE((uint8*)(&augbits), 11, 5);
-        augs[i][0]        = augmentid;
-        augs[i][1]        = augmentVal;
-    }
-
-    int32 ret = sql->Query(Query, PItem->getID(),
-                           augs[0][0], augs[1][0], augs[2][0], augs[3][0],
-                           augs[0][1], augs[1][1], augs[2][1], augs[3][1]);
-
-    sol::table table = lua.create_table();
-    if (ret != SQL_ERROR && sql->NumRows() != 0)
-    {
-        int32 trialCount = 0;
-        while (sql->NextRow() == SQL_SUCCESS)
-        {
-            auto id             = sql->GetIntData(0);
-            table[++trialCount] = id;
-        }
-    }
-
-    return table;
-}
-
 uint8 CLuaItem::getWornUses()
 {
     return m_PLuaItem->m_extra[0];
@@ -197,15 +146,19 @@ void CLuaItem::delMod(uint16 modID, int16 power)
     PItem->addModifier(CModifier(mod, -power));
 }
 
-auto CLuaItem::getAugment(uint8 slot) -> std::tuple<uint16, uint8>
+auto CLuaItem::getAugment(uint8 slot) -> sol::table
 {
     auto* PItem = static_cast<CItemEquipment*>(m_PLuaItem);
 
     uint16 augment    = PItem->getAugment(slot);
-    uint16 augmentid  = (uint16)unpackBitsBE((uint8*)(&augment), 0, 11);
+    uint16 augmentId  = (uint16)unpackBitsBE((uint8*)(&augment), 0, 11);
     uint8  augmentVal = (uint8)unpackBitsBE((uint8*)(&augment), 11, 5);
 
-    return { augmentid, augmentVal };
+    sol::table table = lua.create_table();
+    table[1]         = augmentId;
+    table[2]         = augmentVal;
+
+    return table;
 }
 
 uint8 CLuaItem::getSkillType()
@@ -364,7 +317,6 @@ void CLuaItem::Register()
     SOL_REGISTER("getBasePrice", CLuaItem::getBasePrice);
     SOL_REGISTER("getSlotID", CLuaItem::getSlotID);
     SOL_REGISTER("getTrialNumber", CLuaItem::getTrialNumber);
-    SOL_REGISTER("getMatchingTrials", CLuaItem::getMatchingTrials);
     SOL_REGISTER("getWornUses", CLuaItem::getWornUses);
     SOL_REGISTER("isType", CLuaItem::isType);
     SOL_REGISTER("isSubType", CLuaItem::isSubType);

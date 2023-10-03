@@ -104,7 +104,7 @@ quest.sections =
                         player:delKeyItem(xi.ki.MAP_TO_THE_ANNALS_OF_TRUTH)
                         player:delKeyItem(xi.ki.ANNALS_OF_TRUTH)
                         player:delKeyItem(xi.ki.WEAPON_TRAINING_GUIDE)
-                        player:addLearnedWeaponskill(xi.ws_unlock.STEEL_CYCLONE)
+                        player:addLearnedWeaponskill(xi.wsUnlock.STEEL_CYCLONE)
                         player:messageSpecial(metalworksID.text.STEEL_CYCLONE_LEARNED)
                     end
                 end,

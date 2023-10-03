@@ -1,7 +1,7 @@
------------------------------------------
+-----------------------------------
 -- Spell: Indi-Focus
 -- Enhances magic accuracy for party members near the caster.
------------------------------------------
+-----------------------------------
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

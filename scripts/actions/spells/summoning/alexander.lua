@@ -19,7 +19,7 @@ spellObject.onMagicCastingCheck = function(caster, target, spell)
 end
 
 spellObject.onSpellCast = function(caster, target, spell)
-    caster:spawnPet(xi.pet.id.ALEXANDER)
+    caster:spawnPet(xi.petId.ALEXANDER)
     return 0
 end
 

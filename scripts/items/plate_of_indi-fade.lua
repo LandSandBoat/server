@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 6093
 -- plate_of_indi-fade
 -- Teaches INDI-FADE
------------------------------------------
+-----------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

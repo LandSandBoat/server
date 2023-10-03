@@ -66,7 +66,11 @@ end
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 23 then
         player:setCharVar('EinherjarIntro', 0) -- deletes CharVar set at character creation
-    elseif csid == 24 and option ~= 1073741824 and option ~= 0 then
+    elseif
+        csid == 24 and
+        option ~= utils.EVENT_CANCELLED_OPTION and
+        option ~= 0
+    then
         local kilushaItems =
         {
             [1] =  { item = xi.item.ANIMATOR_P1,          cost =  15000 },

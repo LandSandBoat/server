@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 6098
 -- plate_of_indi-languor
 -- Teaches INDI-LANGUOR
------------------------------------------
+-----------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

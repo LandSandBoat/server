@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 6086
 -- plate_of_indi-fend
 -- Teaches INDI-FEND
------------------------------------------
+-----------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

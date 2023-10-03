@@ -52,6 +52,11 @@ public:
     bool   confirmItem(uint16 itemID, sol::object const& amountObj);
     bool   confirmSlot(uint8 slotID, sol::object const& amountObj);
 
+    bool operator==(const CLuaTradeContainer& other) const
+    {
+        return this->m_pMyTradeContainer == other.m_pMyTradeContainer;
+    }
+
     static void Register();
 };
 

@@ -1,7 +1,7 @@
----------------------------------------------
+-----------------------------------
 -- Riceball
 -- Dummy ability used for Tenzen using riceball.
--------------------------------------------------------
+-----------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

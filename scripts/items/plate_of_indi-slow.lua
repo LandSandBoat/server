@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 6099
 -- plate_of_indi-slow
 -- Teaches INDI-SLOW
------------------------------------------
+-----------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

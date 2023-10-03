@@ -35,7 +35,7 @@ entity.onMobEngaged = function(mob, target)
 end
 
 entity.onMobFight = function(mob, target)
-    if mob:getLocalVar('Charm') == 0 and mob:getHPP() <  50 then
+    if mob:getLocalVar('Charm') == 0 and mob:getHPP() < 50 then
         mob:useMobAbility(710)
         mob:setLocalVar('Charm', 1)
     end

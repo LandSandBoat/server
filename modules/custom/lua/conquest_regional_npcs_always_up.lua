@@ -1,12 +1,12 @@
 -----------------------------------
 -- Conquest: Regional npcs always up, regardless of conquest results
 -----------------------------------
-require("modules/module_utils")
-require("scripts/globals/conquest")
+require('modules/module_utils')
+require('scripts/globals/conquest')
 -----------------------------------
-local m = Module:new("conquest_regional_npcs_always_up")
+local m = Module:new('conquest_regional_npcs_always_up')
 
-m:addOverride("xi.conquest.toggleRegionalNPCs", function(zone)
+m:addOverride('xi.conquest.toggleRegionalNPCs', function(zone)
     local id = zone:getID()
     if
         id == xi.zone.PORT_BASTOK or
@@ -15,13 +15,13 @@ m:addOverride("xi.conquest.toggleRegionalNPCs", function(zone)
     then
         local regionalNPCNames =
         {
-            "Nokkhi_Jinjahl",
-            "Ominous_Cloud",
-            "Valeriano",
-            "Mokop-Sankop",
-            "Cheh_Raihah",
-            "Nalta",
-            "Dahjal"
+            'Nokkhi_Jinjahl',
+            'Ominous_Cloud',
+            'Valeriano',
+            'Mokop-Sankop',
+            'Cheh_Raihah',
+            'Nalta',
+            'Dahjal'
         }
 
         for _, name in pairs(regionalNPCNames) do

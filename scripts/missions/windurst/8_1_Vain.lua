@@ -117,7 +117,7 @@ mission.sections =
             onEventUpdate =
             {
                 [903] = function(player, csid, option, npc)
-                    if player:getZPos() >  -331 then
+                    if player:getZPos() > -331 then
                         player:updateEvent(0, 0, 0, 0, 0, 3)
                     else
                         player:updateEvent(0, 0, 0, 0, 0, 2)
@@ -397,7 +397,7 @@ mission.sections =
             onEventUpdate =
             {
                 [4] = function(player, csid, option, npc)
-                    if player:getZPos() <  75 then
+                    if player:getZPos() < 75 then
                         player:updateEvent(0, 0, 0, 0, 0, 1)
                     else
                         player:updateEvent(0, 0, 0, 0, 0, 2)

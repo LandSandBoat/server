@@ -38,7 +38,7 @@ abilityObject.onUseAbility = function(player, target, ability, action)
     dmg            = adjustForTarget(target, dmg, xi.element.THUNDER)
 
     params.targetTPMult = 0 -- Quick Draw does not feed TP
-    dmg                 = xi.ability.takeDamage(target, player, params, true, dmg, xi.attackType.MAGICAL, xi.damageType.LIGHTNING, xi.slot.RANGED, 1, 0, 0, 0, action, nil)
+    dmg                 = xi.ability.takeDamage(target, player, params, true, dmg, xi.attackType.MAGICAL, xi.damageType.THUNDER, xi.slot.RANGED, 1, 0, 0, 0, action, nil)
 
     if dmg > 0 then
         local effects = {}

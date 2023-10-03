@@ -1,9 +1,9 @@
----------------------------------------------------------------------------------------------------
+-----------------------------------
 -- func: addlights <light type> <amount> <target player>
 -- desc: Adds the amount of specified light to the player
----------------------------------------------------------------------------------------------------
+-----------------------------------
 -- lights: 1: pearl, 2: azure, 3: ruby, 4: amber, 5: gold, 6: silver, 7: ebon
----------------------------------------------------------------------------------------------------
+-----------------------------------
 local commandObj = {}
 
 commandObj.cmdprops =
@@ -43,7 +43,7 @@ commandObj.onTrigger = function(player, light, amount, target)
 
     local selectedLight = tostring(light)
 
-    if lightType[selectedLight] == nil  or selectedLight == nil then
+    if lightType[selectedLight] == nil or selectedLight == nil then
         error(player, 'Invalid light type.\nValid light types: pearl, azure, ruby, amber, gold, silver, ebon')
         return
     end

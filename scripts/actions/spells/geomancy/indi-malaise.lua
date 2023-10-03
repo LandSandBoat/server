@@ -1,7 +1,7 @@
------------------------------------------
+-----------------------------------
 -- Spell: Indi-Malaise
 -- Reduces magic defense of enemies near the caster.
------------------------------------------
+-----------------------------------
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

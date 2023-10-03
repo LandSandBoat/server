@@ -34,6 +34,12 @@
 #include <string>
 #include <thread>
 
+// TODO: Since kernel.cpp isn't used by the processes which now use Application, we can't
+//     : store this global flag there. So we're storing it here until all processes are
+//     : refactored to use Application. Once that's done this should be moved out of static
+//     : storage in this unit to a member of Application.
+std::atomic<bool> gProcessLoaded = false;
+
 SqlConnection::SqlConnection()
 : SqlConnection(settings::get<std::string>("network.SQL_LOGIN").c_str(),
                 settings::get<std::string>("network.SQL_PASSWORD").c_str(),
@@ -41,12 +47,11 @@ SqlConnection::SqlConnection()
                 settings::get<uint16>("network.SQL_PORT"),
                 settings::get<std::string>("network.SQL_DATABASE").c_str())
 {
-    // Just forwarding the default credentials to the next contrictor
+    // Just forwarding the default credentials to the next constructor
 }
 
 SqlConnection::SqlConnection(const char* user, const char* passwd, const char* host, uint16 port, const char* db)
-: m_LatencyWarning(false)
-, m_ThreadId(std::this_thread::get_id())
+: m_ThreadId(std::this_thread::get_id())
 {
     TracyZoneScoped;
 
@@ -335,15 +340,16 @@ int32 SqlConnection::QueryStr(const char* query)
 
     auto endTime = hires_clock::now();
     auto dTime   = std::chrono::duration_cast<std::chrono::milliseconds>(endTime - startTime);
-    if (m_LatencyWarning)
+
+    if (gProcessLoaded && settings::get<bool>("logging.SQL_SLOW_QUERY_LOG_ENABLE"))
     {
-        if (dTime > 250ms)
+        if (dTime > std::chrono::milliseconds(settings::get<uint32>("logging.SQL_SLOW_QUERY_ERROR_TIME")))
         {
-            ShowError(fmt::format("Query took {}ms: {}", dTime.count(), self->buf));
+            ShowError(fmt::format("SQL query took {}ms: {}", dTime.count(), self->buf));
         }
-        else if (dTime > 100ms)
+        else if (dTime > std::chrono::milliseconds(settings::get<uint32>("logging.SQL_SLOW_QUERY_WARNING_TIME")))
         {
-            ShowWarning(fmt::format("Query took {}ms: {}", dTime.count(), self->buf));
+            ShowWarning(fmt::format("SQL query took {}ms: {}", dTime.count(), self->buf));
         }
     }
 

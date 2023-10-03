@@ -671,8 +671,10 @@ xi.mod =
     MYTHIC_OCC_ATT_TWICE            = 865, -- Proc rate for "Occasionally attacks twice"
     MYTHIC_OCC_ATT_THRICE           = 866, -- Proc rate for "Occasionally attacks thrice"
 
-    EAT_RAW_FISH                    = 412, --
-    EAT_RAW_MEAT                    = 413, --
+    APPRECIATE_GYSAHL_GREENS        = 156, -- Enhances food effect of Gysahl Greens
+
+    EAT_RAW_FISH                    = 412, -- Without this, only Mithra can eat raw fish.
+    EAT_RAW_MEAT                    = 413, -- Without this, only Galka can eat raw meat.
 
     ENHANCES_CURSNA_RCVD            = 67,   -- Potency of "Cursna" effects received
     ENHANCES_CURSNA                 = 310,  -- Raises success rate of Cursna when removing effect (like Doom) that are not 100% chance to remove
@@ -902,6 +904,8 @@ xi.mod =
 
     DIG_BYPASS_FATIGUE      = 1074, -- Chocobo digging modifier found in "Blue Race Silks". Modifier works as a direct percent.
     BREATH_DMG_DEALT        = 1075, -- Breath damage dealt
+
+    STEP_TP_CONSUMED        = 1077, -- Modifies the amount of TP consumed by dancer steps
 
     -- IF YOU ADD ANY NEW MODIFIER HERE, ADD IT IN src/map/modifier.h ASWELL!
 

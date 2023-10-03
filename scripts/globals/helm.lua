@@ -357,16 +357,16 @@ local helmInfo =
             {
                 drops =
                 {
-                    { 2220,   880 }, -- Bone Chip
-                    { 2220,   898 }, -- Chicken Bone
-                    { 1220,   891 }, -- Bat Fang
-                    { 1220, 17396 }, -- Little Worm
-                    {  720,   897 }, -- Scorpion Claw
-                    {  720,   896 }, -- Scorpion Shell
-                    {  420,  2503 }, -- Antlion Jaw
-                    {  420,  1236 }, -- Cactus Stems
-                    {  420,  1473 }, -- High Quality Scorpion Shell
-                    {  420,   769 }, -- Colored Rock
+                    { 2220, xi.item.BONE_CHIP                   },
+                    { 2220, xi.item.CHICKEN_BONE                },
+                    { 1220, xi.item.BAT_FANG                    },
+                    { 1220, xi.item.LITTLE_WORM                 },
+                    {  720, xi.item.SCORPION_CLAW               },
+                    {  720, xi.item.SCORPION_SHELL              },
+                    {  420, xi.item.ANTLION_JAW                 },
+                    {  420, xi.item.BAG_OF_CACTUS_STEMS         },
+                    {  420, xi.item.HIGH_QUALITY_SCORPION_SHELL },
+                    {  420, xi.item.RED_ROCK                    },
                 },
 
                 points =
@@ -383,15 +383,15 @@ local helmInfo =
             {
                 drops =
                 {
-                    { 2690,   880 }, -- Bone Chip
-                    { 1830,   898 }, -- Chicken Bone
-                    { 1300,   891 }, -- Bat Fang
-                    { 1440,   893 }, -- Giant Femur
-                    { 1250, 17396 }, -- Little Worm
-                    {   50,   897 }, -- Scorpion Claw
-                    {  290,   896 }, -- Scorpion Shell
-                    {  240,   885 }, -- Turtle Shell
-                    {  190,  1888 }, -- Silica
+                    { 2690, xi.item.BONE_CHIP      },
+                    { 1830, xi.item.CHICKEN_BONE   },
+                    { 1300, xi.item.BAT_FANG       },
+                    { 1440, xi.item.GIANT_FEMUR    },
+                    { 1250, xi.item.LITTLE_WORM    },
+                    {   50, xi.item.SCORPION_CLAW  },
+                    {  290, xi.item.SCORPION_SHELL },
+                    {  240, xi.item.TURTLE_SHELL   },
+                    {  190, xi.item.SACK_OF_SILICA },
                 },
 
                 points =
@@ -419,17 +419,17 @@ local helmInfo =
             {
                 drops =
                 {
-                    { 2130,   936 }, -- Rock Salt
-                    { 1700,   888 }, -- Seashell
-                    {  430,   881 }, -- Crab Shell
-                    { 1490,   864 }, -- Fish Scales
-                    { 2130, 17395 }, -- Lugworm
-                    { 1060, 17397 }, -- Shell Bug
-                    {  100,   887 }, -- Coral Fragment
-                    {  100,   573 }, -- Vegetable Seeds
-                    {  430,   885 }, -- Turtle Shell
-                    {  100,   575 }, -- Grain Seeds
-                    {  640,  1985 }, -- Helmet Mole
+                    { 2130, xi.item.CHUNK_OF_ROCK_SALT     },
+                    { 1700, xi.item.SEASHELL               },
+                    {  430, xi.item.CRAB_SHELL             },
+                    { 1490, xi.item.FISH_SCALES            },
+                    { 2130, xi.item.LUGWORM                },
+                    { 1060, xi.item.SHELL_BUG              },
+                    {  100, xi.item.CORAL_FRAGMENT         },
+                    {  100, xi.item.BAG_OF_VEGETABLE_SEEDS },
+                    {  430, xi.item.TURTLE_SHELL           },
+                    {  100, xi.item.BAG_OF_GRAIN_SEEDS     },
+                    {  640, xi.item.HELMET_MOLE            },
                 },
 
                 points =
@@ -450,15 +450,15 @@ local helmInfo =
             {
                 drops =
                 {
-                    { 2560,   880 }, -- Bone Chip
-                    { 2560,   891 }, -- Bat Fang
-                    { 2330, 17396 }, -- Little Worm
-                    {  930,   893 }, -- Giant Femur
-                    {  700,   897 }, -- Scorpion Claw
-                    {  230,   896 }, -- Scorpion Shell
-                    {  230,   703 }, -- Petrified Log
-                    {  100,   769 }, -- Colored Rock
-                    {  470,  1888 }, -- Silica
+                    { 2560, xi.item.BONE_CHIP      },
+                    { 2560, xi.item.BAT_FANG       },
+                    { 2330, xi.item.LITTLE_WORM    },
+                    {  930, xi.item.GIANT_FEMUR    },
+                    {  700, xi.item.SCORPION_CLAW  },
+                    {  230, xi.item.SCORPION_SHELL },
+                    {  230, xi.item.PETRIFIED_LOG  },
+                    {  100, xi.item.RED_ROCK       },
+                    {  470, xi.item.SACK_OF_SILICA },
                 },
 
                 points =

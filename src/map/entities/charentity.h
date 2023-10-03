@@ -142,7 +142,7 @@ struct telepoint_t
 
 struct waypoint_t
 {
-    uint32 access[5];
+    uint32 access[2];
     bool   confirmation;
 
     waypoint_t()
@@ -582,9 +582,9 @@ public:
     virtual void OnItemFinish(CItemState&, action_t&);
 
     int32 getCharVar(std::string const& varName);
-    void  setCharVar(std::string const& varName, int32 value);
-    void  setVolatileCharVar(std::string const& varName, int32 value);
-    void  updateCharVarCache(std::string const& varName, int32 value);
+    void  setCharVar(std::string const& varName, int32 value, uint32 expiry = 0);
+    void  setVolatileCharVar(std::string const& varName, int32 value, uint32 expiry = 0);
+    void  updateCharVarCache(std::string const& varName, int32 value, uint32 expiry = 0);
     void  removeFromCharVarCache(std::string const& varName);
 
     void clearCharVarsWithPrefix(std::string const& prefix);
@@ -623,8 +623,8 @@ private:
     bool m_isBlockingAid;
     bool m_reloadParty;
 
-    std::unordered_map<std::string, int32> charVarCache;
-    std::unordered_set<std::string>        charVarChanges;
+    std::unordered_map<std::string, std::pair<int32, uint32>> charVarCache;
+    std::unordered_set<std::string>                           charVarChanges;
 
     uint8      dataToPersist = 0;
     time_point nextDataPersistTime;

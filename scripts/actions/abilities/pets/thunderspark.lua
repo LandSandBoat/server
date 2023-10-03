@@ -27,9 +27,9 @@ abilityObject.onPetAbility = function(target, pet, skill)
     end
 
     damage.dmg = damage.dmg * tp / 1000
-    local totaldamage = xi.summon.avatarFinalAdjustments(damage.dmg, pet, skill, target, xi.attackType.MAGICAL, xi.damageType.LIGHTNING, numhits)
+    local totaldamage = xi.summon.avatarFinalAdjustments(damage.dmg, pet, skill, target, xi.attackType.MAGICAL, xi.damageType.THUNDER, numhits)
     target:addStatusEffect(xi.effect.PARALYSIS, 15, 0, 60)
-    target:takeDamage(totaldamage, pet, xi.attackType.MAGICAL, xi.damageType.LIGHTNING)
+    target:takeDamage(totaldamage, pet, xi.attackType.MAGICAL, xi.damageType.THUNDER)
     target:updateEnmityFromDamage(pet, totaldamage)
 
     return totaldamage

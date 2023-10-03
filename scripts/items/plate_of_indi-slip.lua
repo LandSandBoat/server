@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 6095
 -- plate_of_indi-slip
 -- Teaches INDI-SLIP
------------------------------------------
+-----------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

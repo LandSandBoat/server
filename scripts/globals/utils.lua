@@ -3,6 +3,10 @@ require('scripts/globals/interaction/quest')
 
 utils = {}
 
+-- Event cancelled constant, replaces the hardcoded value of 1073741824 in many
+-- scripts.
+utils.EVENT_CANCELLED_OPTION = bit.lshift(1, 30)
+
 -- Max uint32 constant, replaces negative values in event parameters
 -- Note: If correcting a negative value, this is *already* -1, adjust accordingly!
 utils.MAX_UINT32 = 4294967295
@@ -881,9 +885,9 @@ function utils.mobTeleport(mob, hideDuration, pos, disAnim, reapAnim)
     end)
 end
 
-------------------------------
+-----------------------------------
 -- Spatial position utilities
-------------------------------
+-----------------------------------
 local ffxiRotConversionFactor = 360.0 / 255.0
 
 function utils.ffxiRotToDegrees(ffxiRot)
@@ -987,4 +991,18 @@ end
 -- Returns 24h Clock Time (example: 04:30 = 430, 21:30 = 2130)
 function utils.vanadielClockTime()
     return tonumber(VanadielHour() .. string.format('%02d', VanadielMinute()))
+end
+
+-- Converts a number to a binary string
+function utils.intToBinary(x)
+    local bin = ''
+
+    while x > 1 do
+        bin = tostring(x % 2) .. bin
+        x = math.floor(x / 2)
+    end
+
+    bin = tostring(x) .. bin
+
+    return bin
 end

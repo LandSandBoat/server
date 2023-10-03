@@ -33,7 +33,7 @@ entity.onEventFinish = function(player, csid, option, npc)
     --       here as a special case
     if
         csid == 405 and
-        option == 1073741824 and
+        option == utils.EVENT_CANCELLED_OPTION and
         player:getLocalVar('NYZUL_INSTANCE') == 1
     then
         player:startEvent(116, 2) -- This means the event was force terminated. Loop into the entrance animation.

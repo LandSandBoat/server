@@ -70,6 +70,11 @@ public:
     void   delEffectFlag(uint32 flag);
     bool   hasEffectFlag(uint32 flag);
 
+    bool operator==(const CLuaStatusEffect& other) const
+    {
+        return this->m_PLuaStatusEffect == other.m_PLuaStatusEffect;
+    }
+
     static void Register();
 };
 

@@ -128,8 +128,11 @@ entity.onEventFinish = function(player, csid, option, npc)
     if csid == 22 then
         player:confirmTrade()
 
-    -- Retrieving Seals (Option 1073741824 is escaping out of cutscene, and we do not process on this)
-    elseif option >= 508 and option ~= 1073741824 then
+    -- Retrieving Seals
+    elseif
+        option >= 508 and
+        option ~= utils.EVENT_CANCELLED_OPTION
+    then
         local itemID, sealID, retrievedSealCount = convertSealRetrieveOption(option)
 
         if npcUtil.giveItem(player, { { itemID, retrievedSealCount } }) then

@@ -26,7 +26,7 @@ local function applyRuneEnhancement(effectType, player)
     local jobPointBonus = player:getJobPointLevel(xi.jp.RUNE_ENCHANTMENT_EFFECT) -- 1 more elemental resistance per level for a maximum total of 20
 
     -- see https://www.bg-wiki.com/ffxi/Category:Rune
-    local power = math.floor((49 * runLevel / 99) + 5.5) + meritBonus  + jobPointBonus
+    local power = math.floor((49 * runLevel / 99) + 5.5) + meritBonus + jobPointBonus
     player:addStatusEffect(effectType, power, 0, 300)
 end
 
@@ -457,7 +457,7 @@ end
 -- see https://www.bg-wiki.com/ffxi/Battuta
 xi.job_utils.rune_fencer.useBattuta = function(player, target, ability, action)
     local meritPower      = player:getMerit(xi.merit.MERIT_BATTUTA) -- power is 4
-    local modBonus        = (100 + (player:getMod(xi.mod.ENHANCES_BATTUTA) *  meritPower / 4)) / 100
+    local modBonus        = (100 + (player:getMod(xi.mod.ENHANCES_BATTUTA) * meritPower / 4)) / 100
     local inquartataPower = 36 + meritPower -- base 36% + merit power of 4% each = max of 56%
     local spikesPower     = 6 + meritPower  -- damage is static 26 per rune barring SDT/MDT at 5/5 Battuta merits. 6 + 4*5 = 26.
     local runeCount       = target:getActiveRuneCount()
@@ -505,7 +505,7 @@ local function getSwipeLungeDamageMultipliers(player, target, element, bonusMacc
 end
 
 local function calculateSwipeLungeDamage(player, target, skillModifier, gearBonus, numHits, multipliers)
-    local damage = math.floor(skillModifier *  (0.50 + 0.25 * numHits  + (gearBonus / 100)))
+    local damage = math.floor(skillModifier * (0.50 + 0.25 * numHits + (gearBonus / 100)))
 
     damage = damage + player:getMod(xi.mod.MAGIC_DAMAGE) -- add mdamage to base damage
 

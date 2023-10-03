@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 6100
 -- plate_of_indi-paralysis
 -- Teaches INDI-PARALYSIS
------------------------------------------
+-----------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

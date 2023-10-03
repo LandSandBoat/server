@@ -1,11 +1,11 @@
----------------------------------------------------
+-----------------------------------
 --  Oisoya
 --  Description:
 --  Type: Weaponskill
 --  Utsusemi/Blink absorb:
 --  Range: Ranged Attack
 --  Notes: Unique ranged weaponskill used by Tenzen during The Warrior's Path. Also used by Trust: Tenzen II.
--------------------------------------------------------------------
+-----------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

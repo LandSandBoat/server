@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 6131
 -- plate_of_indi-haste
 -- Teaches INDI-HASTE
------------------------------------------
+-----------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

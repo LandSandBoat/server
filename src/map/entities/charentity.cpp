@@ -721,7 +721,7 @@ bool CCharEntity::PersistData()
     {
         for (auto&& charVarName : charVarChanges)
         {
-            charutils::PersistCharVar(this->id, charVarName.c_str(), charVarCache[charVarName]);
+            charutils::PersistCharVar(this->id, charVarName.c_str(), charVarCache[charVarName].first, charVarCache[charVarName].second);
         }
 
         charVarChanges.clear();
@@ -2749,30 +2749,38 @@ int32 CCharEntity::getCharVar(std::string const& charVarName)
 {
     if (auto charVar = charVarCache.find(charVarName); charVar != charVarCache.end())
     {
-        return charVar->second;
+        std::pair cachedVarData    = charVar->second;
+        uint32    currentTimestamp = CVanaTime::getInstance()->getSysTime();
+
+        // If the cached variable is not expired, return it.  Else, fall through so that the
+        // database can be cleaned up.
+        if (cachedVarData.second == 0 || cachedVarData.second > currentTimestamp)
+        {
+            return cachedVarData.first;
+        }
     }
 
     auto value = charutils::FetchCharVar(this->id, charVarName);
 
     charVarCache[charVarName] = value;
-    return value;
+    return value.first;
 }
 
-void CCharEntity::setCharVar(std::string const& charVarName, int32 value)
+void CCharEntity::setCharVar(std::string const& charVarName, int32 value, uint32 expiry /* = 0 */)
 {
-    charVarCache[charVarName] = value;
-    charutils::PersistCharVar(this->id, charVarName, value);
+    charVarCache[charVarName] = { value, expiry };
+    charutils::PersistCharVar(this->id, charVarName, value, expiry);
 }
 
-void CCharEntity::setVolatileCharVar(std::string const& charVarName, int32 value)
+void CCharEntity::setVolatileCharVar(std::string const& charVarName, int32 value, uint32 expiry /* = 0 */)
 {
-    charVarCache[charVarName] = value;
+    charVarCache[charVarName] = { value, expiry };
     charVarChanges.insert(charVarName);
 }
 
-void CCharEntity::updateCharVarCache(std::string const& charVarName, int32 value)
+void CCharEntity::updateCharVarCache(std::string const& charVarName, int32 value, uint32 expiry /* = 0 */)
 {
-    charVarCache[charVarName] = value;
+    charVarCache[charVarName] = { value, expiry };
 }
 
 void CCharEntity::removeFromCharVarCache(std::string const& varName)
@@ -2793,7 +2801,7 @@ void CCharEntity::clearCharVarsWithPrefix(std::string const& prefix)
     {
         if (iter->first.rfind(prefix, 0) == 0)
         {
-            iter->second = 0;
+            iter->second = { 0, 0 };
         }
         ++iter;
     }

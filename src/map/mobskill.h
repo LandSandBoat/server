@@ -102,18 +102,18 @@ private:
     uint16 m_ID;
     uint16 m_TotalTargets;
     int16  m_Param;
-    uint16 m_AnimID;            // animation id
-    uint8  m_Aoe;               // не используется
-    float  m_Distance;          // не используется
-    uint8  m_Flag;              // не используется
-    uint16 m_ValidTarget;       // same as
-    uint16 m_AnimationTime;     // how long the tp animation lasts for in ms
-    uint16 m_ActivationTime;    // how long the mob prepares the tp move for
-    uint16 m_Message;           // message param, scripters can edit this depending on self/resist/etc.
-    int16  m_TP;                // the tp at the time of finish readying (for scripts)
-    uint8  m_HPP;               // HPP at the time of using mob skill (for scripts)
-    uint8  m_knockback;         // knockback value (0-7)
-    uint8  m_primarySkillchain; // weaponskill ID of skillchain properties
+    uint16 m_AnimID;
+    uint8  m_Aoe;
+    float  m_Distance;
+    uint8  m_Flag;
+    uint16 m_ValidTarget;
+    uint16 m_AnimationTime;  // how long the tp animation lasts for in ms
+    uint16 m_ActivationTime; // how long the mob prepares the tp move for
+    uint16 m_Message;        // message param, scripters can edit this depending on self/resist/etc.
+    int16  m_TP;             // the tp at the time of finish readying (for scripts)
+    uint8  m_HPP;            // HPP at the time of using mob skill (for scripts)
+    uint8  m_knockback;      // knockback value (0-7)
+    uint8  m_primarySkillchain;
     uint8  m_secondarySkillchain;
     uint8  m_tertiarySkillchain;
 

@@ -1,7 +1,7 @@
------------------------------------------
+-----------------------------------
 -- Spell: Indi-DEX
 -- Enhances Dexterity for party members near the caster.
------------------------------------------
+-----------------------------------
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

@@ -1,6 +1,6 @@
-----------------------------
+-----------------------------------
 ----- Event class
-----------------------------
+-----------------------------------
 require('scripts/globals/interaction/actions/action')
 
 Event = Action:new(Action.Type.Event)

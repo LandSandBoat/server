@@ -597,7 +597,7 @@ public:
 
     // Deals damage and updates the last attacker which is used when sending a player death message
     virtual int32 takeDamage(int32 amount, CBattleEntity* attacker = nullptr, ATTACK_TYPE attackType = ATTACK_TYPE::NONE,
-                             DAMAGE_TYPE damageType = DAMAGE_TYPE::NONE);
+                             DAMAGE_TYPE damageType = DAMAGE_TYPE::NONE, bool isSkillchainDamage = false);
 
     int16 getMod(Mod modID);
 

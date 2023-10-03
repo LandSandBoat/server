@@ -20,6 +20,7 @@ end
 
 entity.onMobDeath = function(mob, player, optParams)
     player:showText(mob, ID.text.ANIMATED_SCYTHE_DIALOG + 1)
+    xi.magian.onMobDeath(mob, player, optParams, set{ 3109 })
 end
 
 return entity

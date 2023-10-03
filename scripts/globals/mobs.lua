@@ -1,7 +1,6 @@
 -----------------------------------
 -- Global version of onMobDeath
 -----------------------------------
-require('scripts/globals/magiantrials')
 require('scripts/globals/missions')
 require('scripts/globals/quests')
 require('scripts/globals/magic')
@@ -12,7 +11,6 @@ xi.mob = xi.mob or {}
 
 -- onMobDeathEx is called from the core
 xi.mob.onMobDeathEx = function(mob, player, isKiller, isWeaponSkillKill)
-    xi.magian.checkMagianTrial(player, { ['mob'] = mob, ['triggerWs'] = false })
 end
 
 -----------------------------------

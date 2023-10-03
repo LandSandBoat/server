@@ -30,7 +30,7 @@ entity.onEventUpdate = function(player, csid, option, npc)
 
     if
         csid == 201 and
-        option ~= 1073741824 and
+        option ~= utils.EVENT_CANCELLED_OPTION and
         instance:getLocalVar('runeHandler') == 0
     then
         local chars = instance:getChars()
@@ -57,7 +57,7 @@ entity.onEventFinish = function(player, csid, option, npc)
         end
     elseif
         csid == 201 and
-        option ~= 1073741824 and
+        option ~= utils.EVENT_CANCELLED_OPTION and
         instance:getLocalVar('runeHandler') == player:getID()
     then
         -- Leave Assault
@@ -68,13 +68,13 @@ entity.onEventFinish = function(player, csid, option, npc)
             local diskHolder   = instance:getLocalVar('diskHolder')
 
             for _, players in pairs(chars) do
-                local floorProgress = players:getVar('NyzulFloorProgress')
+                local floorProgress = players:getCharVar('NyzulFloorProgress')
 
                 if not xi.settings.main.RUNIC_DISK_SAVE then
                     -- Only the person who chose floor gets disk recoreded
                     if players:getID() == diskHolder then
                         if (floorProgress + 1) >= startFloor and floorProgress < currentFloor then
-                            players:setVar('NyzulFloorProgress', currentFloor)
+                            players:setCharVar('NyzulFloorProgress', currentFloor)
                             players:messageSpecial(ID.text.FLOOR_RECORD, xi.ki.RUNIC_DISC, currentFloor)
                         end
                     end
@@ -82,7 +82,7 @@ entity.onEventFinish = function(player, csid, option, npc)
                     -- Everyone gets to save disk info
                     if players:hasKeyItem(xi.ki.RUNIC_DISC) then
                         if (floorProgress + 1) >= startFloor and floorProgress < currentFloor then
-                            players:setVar('NyzulFloorProgress', currentFloor)
+                            players:setCharVar('NyzulFloorProgress', currentFloor)
                             players:messageSpecial(ID.text.FLOOR_RECORD, xi.ki.RUNIC_DISC, currentFloor)
                         end
                     end
@@ -98,12 +98,12 @@ entity.onEventFinish = function(player, csid, option, npc)
                 -- Adds hidden Assault Points for ranking up in Mercenary Rank
                 -- +5 for 1st time +1 for each additional
                 if players:hasCompletedAssault(players:getCurrentAssault()) then
-                    players:setVar('AssaultPromotion', players:getVar('AssaultPromotion') + 1)
+                    players:setCharVar('AssaultPromotion', players:getCharVar('AssaultPromotion') + 1)
                 else
-                    players:setVar('AssaultPromotion', players:getVar('AssaultPromotion') + 5)
+                    players:setCharVar('AssaultPromotion', players:getCharVar('AssaultPromotion') + 5)
                 end
 
-                players:setVar('AssaultComplete', 1)
+                players:setCharVar('AssaultComplete', 1)
                 players:addCurrency('nyzul_isle_assault_point', tokens)
                 players:messageSpecial(ID.text.OBTAIN_TOKENS, tokens)
                 players:startCutscene(1)

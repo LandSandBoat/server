@@ -1,10 +1,10 @@
------------------------------------------
+-----------------------------------
 -- ID: 6172
 -- Item: Breezy Libretto
 -- A musical score composed by Lewenhart.
 -- Its notes symbolize a fragrant, early morning summer breeze.
 -- Adventurers note that reading it increases one's singing skill.
------------------------------------------------
+-----------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

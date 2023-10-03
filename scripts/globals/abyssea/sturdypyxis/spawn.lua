@@ -141,10 +141,10 @@ xi.pyxis.spawn.lightsMessage =
     [xi.abyssea.lightType.AMBER  ] = { 21, 21, 25, 29, 35 },
 }
 
----------------------------------------------------------------------------------------------
+-----------------------------------
 -- Desc: Check for time elapsed since last spawned
 -- NOTE: will NOT allow a spawn if time since last spanwed is under 5 mins.
----------------------------------------------------------------------------------------------
+-----------------------------------
 local function timeElapsedCheck(npc, player)
     local spawnTime = os.time() + 180000 -- default time in case no var set.
 
@@ -155,9 +155,9 @@ local function timeElapsedCheck(npc, player)
     return os.time() - spawnTime <= 0
 end
 
----------------------------------------------------------------------------------------------
+-----------------------------------
 -- Desc: This method allow you to get next chest available
----------------------------------------------------------------------------------------------
+-----------------------------------
 local function GetPyxisID(player)
     local zone        = player:getZone()
     local pyxii       = zone:queryEntitiesByName('Sturdy_Pyxis') -- Get the ID of the first entry and use that as our base ID to offset against
@@ -194,18 +194,18 @@ local function GetPyxisID(player)
     return chestId
 end
 
----------------------------------------------------------------------------------------------
+-----------------------------------
 -- Desc: This method allow you to check if you can spawn pyxies with lights
----------------------------------------------------------------------------------------------
+-----------------------------------
 local function CanSpawnPyxis(player)
     local lightValues = xi.abyssea.getLightsTable(player)
     local dropchance = math.random(1 + lightValues[xi.abyssea.lightType.PEARL], 500)
     return dropchance >= 250
 end
 
----------------------------------------------------------------------------------------------
+-----------------------------------
 -- Desc: This method allow you to determine chest type
----------------------------------------------------------------------------------------------
+-----------------------------------
 local function determineChestType(lightValues)
     local redLight = lightValues[xi.abyssea.lightType.RUBY]
     local blueLight = lightValues[xi.abyssea.lightType.AZURE]
@@ -443,9 +443,9 @@ local function GetGoldChestInfos(player, lightValues)
     return chestSize, maxUnlockNumber, chestTier, chestModel, droptype, nbItem, message
 end
 
----------------------------------------------------------------------------------------------
+-----------------------------------
 -- Desc: This method allow you to set local var for blue red and gold chest
----------------------------------------------------------------------------------------------
+-----------------------------------
 local function SetPyxisData(npc, mob, player)
     local ID                = zones[player:getZoneID()]
     local lightValues       = xi.abyssea.getLightsTable(player)

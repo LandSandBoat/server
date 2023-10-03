@@ -6,10 +6,10 @@ xi.pyxis = xi.pyxis or {}
 
 xi.pyxis.tempItem = {}
 
----------------------------------
+-----------------------------------
 -- drop id's for temp items
 -- use zone id as the key
----------------------------------
+-----------------------------------
 -- TODO: Add Temp Items to items.lua
 local drops =
 {

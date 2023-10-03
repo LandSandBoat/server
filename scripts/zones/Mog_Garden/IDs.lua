@@ -3,31 +3,6 @@
 -----------------------------------
 zones = zones or {}
 
--- TODO:
--- Server need NPC <17924154>
--- Server need NPC <17924155>
--- Server need NPC <17924156>
--- Server need NPC <17924157>
--- Server need NPC <17924162>
--- Server need NPC <17924163>
--- Server need NPC <17924164>
--- Server need NPC <17924165>
--- Server need NPC <17924170>
--- Server need NPC <17924171>
--- Server need NPC <17924172>
--- Server need NPC <17924119>
--- Server need NPC <17924120>
--- Server need NPC <17924121>
--- Server need NPC <17924122>
--- Server need NPC <17924123>
--- Server need NPC <17924223>
--- Server need NPC <17924224>
--- Server need NPC <17924225>
--- Server need NPC <17924227>
--- Server need NPC <17924229>
--- Server need NPC <17924234>
--- Server need NPC <17924235>
-
 zones[xi.zone.MOG_GARDEN] =
 {
     text =

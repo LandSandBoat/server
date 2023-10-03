@@ -106,7 +106,7 @@ quest.sections =
                         player:delKeyItem(xi.ki.MAP_TO_THE_ANNALS_OF_TRUTH)
                         player:delKeyItem(xi.ki.ANNALS_OF_TRUTH)
                         player:delKeyItem(xi.ki.WEAPON_TRAINING_GUIDE)
-                        player:addLearnedWeaponskill(xi.ws_unlock.SAVAGE_BLADE)
+                        player:addLearnedWeaponskill(xi.wsUnlock.SAVAGE_BLADE)
                         player:messageSpecial(chateauID.text.SAVAGE_BLADE_LEARNED)
                     end
                 end,

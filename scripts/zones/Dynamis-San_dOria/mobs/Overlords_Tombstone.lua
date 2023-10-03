@@ -25,6 +25,8 @@ entity.onMobDeath = function(mob, player, optParams)
             end
         end
     end
+
+    xi.magian.onMobDeath(mob, player, optParams, set{ 4402 })
 end
 
 return entity

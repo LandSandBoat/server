@@ -1,7 +1,7 @@
------------------------------------------
+-----------------------------------
 -- Spell: Geo-Vex
 -- Reduces magic accuracy for enemies within area of effect.
------------------------------------------
+-----------------------------------
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)

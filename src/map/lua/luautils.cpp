@@ -156,6 +156,7 @@ namespace luautils
         lua.set_function("GarbageCollectStep", &luautils::garbageCollectStep);
         lua.set_function("GarbageCollectFull", &luautils::garbageCollectFull);
         lua.set_function("GetZone", &luautils::GetZone);
+        lua.set_function("GetItemByID", &luautils::GetItemByID);
         lua.set_function("GetNPCByID", &luautils::GetNPCByID);
         lua.set_function("GetMobByID", &luautils::GetMobByID);
         lua.set_function("GetEntityByID", &luautils::GetEntityByID);
@@ -169,10 +170,13 @@ namespace luautils
         lua.set_function("DespawnMob", &luautils::DespawnMob);
         lua.set_function("GetPlayerByName", &luautils::GetPlayerByName);
         lua.set_function("GetPlayerByID", &luautils::GetPlayerByID);
-        lua.set_function("GetMagianTrial", &luautils::GetMagianTrial);
-        lua.set_function("GetMagianTrialsWithParent", &luautils::GetMagianTrialsWithParent);
+        lua.set_function("GetSystemTime", &luautils::GetSystemTime);
         lua.set_function("JstMidnight", &luautils::JstMidnight);
         lua.set_function("JstWeekday", &luautils::JstWeekday);
+        lua.set_function("NextConquestTally", &luautils::NextJstWeek);
+        lua.set_function("NextGameTime", &luautils::NextGameTime);
+        lua.set_function("NextJstDay", &luautils::JstMidnight);
+        lua.set_function("NextJstWeek", &luautils::NextJstWeek);
         lua.set_function("VanadielTime", &luautils::VanadielTime);
         lua.set_function("VanadielTOTD", &luautils::VanadielTOTD);
         lua.set_function("VanadielHour", &luautils::VanadielHour);
@@ -333,12 +337,6 @@ namespace luautils
     {
         moduleutils::CleanupLuaModules();
     }
-
-    /************************************************************************
-     *                                                                       *
-     *  Освобождение lua                                                     *
-     *                                                                       *
-     ************************************************************************/
 
     int32 garbageCollectStep()
     {
@@ -1053,6 +1051,16 @@ namespace luautils
         }
     }
 
+    std::optional<CLuaItem> GetItemByID(uint32 itemId)
+    {
+        if (auto* PItem = itemutils::GetItemPointer(itemId))
+        {
+            return CLuaItem(PItem);
+        }
+
+        return std::nullopt;
+    }
+
     std::optional<CLuaBaseEntity> GetNPCByID(uint32 npcid, sol::object const& instanceObj)
     {
         TracyZoneScoped;
@@ -1181,12 +1189,6 @@ namespace luautils
         return std::optional<CLuaBaseEntity>(PEntity);
     }
 
-    /************************************************************************
-     *                                                                       *
-     * WeekUpdateConquest                                                    *
-     *                                                                       *
-     ************************************************************************/
-
     void WeekUpdateConquest(sol::variadic_args va)
     {
         TracyZoneScoped;
@@ -1199,12 +1201,6 @@ namespace luautils
         conquest::UpdateConquestGM(type);
     }
 
-    /************************************************************************
-     *                                                                       *
-     *  Find out the country that owns the current region                    *
-     *                                                                       *
-     ************************************************************************/
-
     uint8 GetRegionOwner(uint8 type)
     {
         TracyZoneScoped;
@@ -1216,12 +1212,6 @@ namespace luautils
         TracyZoneScoped;
         return conquest::GetInfluenceGraphics(static_cast<REGION_TYPE>(type));
     }
-
-    /************************************************************************
-     *                                                                       *
-     * Get Rank of Nations in Conquest                                       *
-     *                                                                       *
-     ************************************************************************/
 
     uint8 GetNationRank(uint8 nation)
     {
@@ -1291,23 +1281,11 @@ namespace luautils
         message::send(zoneId, str);
     }
 
-    /************************************************************************
-     *                                                                       *
-     *    Return Vanadiel Time                                               *
-     *                                                                       *
-     ************************************************************************/
-
     uint32 VanadielTime()
     {
         TracyZoneScoped;
         return CVanaTime::getInstance()->getVanaTime();
     }
-
-    /************************************************************************
-     *                                                                       *
-     *  Получаем текущее время суток Vana'diel                               *
-     *                                                                       *
-     ************************************************************************/
 
     uint8 VanadielTOTD()
     {
@@ -1315,23 +1293,11 @@ namespace luautils
         return static_cast<uint8>(CVanaTime::getInstance()->GetCurrentTOTD());
     }
 
-    /************************************************************************
-     *                                                                       *
-     *   Return Vanadiel Year                                                *
-     *                                                                       *
-     ************************************************************************/
-
     uint32 VanadielYear()
     {
         TracyZoneScoped;
         return CVanaTime::getInstance()->getYear();
     }
-
-    /************************************************************************
-     *                                                                       *
-     *   Return Vanadiel Month                                               *
-     *                                                                       *
-     ************************************************************************/
 
     uint32 VanadielMonth()
     {
@@ -1356,12 +1322,6 @@ namespace luautils
         return (year * 360) + (month * 30 - 30) + day;
     }
 
-    /************************************************************************
-     *                                                                       *
-     *   Return Vanadiel Day of Year                                         *
-     *                                                                       *
-     ************************************************************************/
-
     uint32 VanadielDayOfTheYear()
     {
         TracyZoneScoped;
@@ -1371,12 +1331,6 @@ namespace luautils
 
         return (month * 30 - 30) + day;
     }
-
-    /************************************************************************
-     *                                                                       *
-     *   Return Vanadiel Day of the Month                                    *
-     *                                                                       *
-     ************************************************************************/
 
     uint32 VanadielDayOfTheMonth()
     {
@@ -1399,23 +1353,11 @@ namespace luautils
         return CVanaTime::getInstance()->getWeekday();
     }
 
-    /************************************************************************
-     *                                                                       *
-     *   Return Vanadiel Hour                                                *
-     *                                                                       *
-     ************************************************************************/
-
     uint32 VanadielHour()
     {
         TracyZoneScoped;
         return CVanaTime::getInstance()->getHour();
     }
-
-    /************************************************************************
-     *                                                                       *
-     *   Return Vanadiel Minute                                              *
-     *                                                                       *
-     ************************************************************************/
 
     uint32 VanadielMinute()
     {
@@ -1440,7 +1382,18 @@ namespace luautils
 
     /************************************************************************
      *                                                                       *
-     * JstMidnight - Returns UTC timestamp of upcoming JST midnight
+     * Returns current UTC timestamp                                         *
+     *                                                                       *
+     ************************************************************************/
+    uint32 GetSystemTime()
+    {
+        TracyZoneScoped;
+        return CVanaTime::getInstance()->getSysTime();
+    }
+
+    /************************************************************************
+     *                                                                       *
+     * Returns UTC timestamp of upcoming JST midnight                        *
      *                                                                       *
      ************************************************************************/
 
@@ -1452,7 +1405,7 @@ namespace luautils
 
     /************************************************************************
      *                                                                       *
-     * JstWeekday - Returns days since Sunday JST
+     * Returns days since Sunday JST                                         *
      *                                                                       *
      ************************************************************************/
 
@@ -1464,9 +1417,33 @@ namespace luautils
 
     /************************************************************************
      *                                                                       *
-     *   Return Moon Phase                                                   *
+     * NextGameTime - Returns System Time for the next Vana'diel interval    *
+     * See: VTIME_x defintions, or xi.vanaType for the values to pass        *
      *                                                                       *
      ************************************************************************/
+    uint32 NextGameTime(uint32 intervalSeconds)
+    {
+        TracyZoneScoped;
+        uint32 timeElapsed      = CVanaTime::getInstance()->getVanaTime();
+        uint32 numPassed        = timeElapsed / intervalSeconds;
+        uint32 secondsRemaining = intervalSeconds - (timeElapsed - (numPassed * intervalSeconds));
+
+        return CVanaTime::getInstance()->getSysTime() + secondsRemaining;
+    }
+
+    // NOTE: NextJstDay is also defined, and maps to JstMidnight
+
+    uint32 NextJstWeek()
+    {
+        TracyZoneScoped;
+        uint32 jstWeekday      = CVanaTime::getInstance()->getJstWeekDay();
+        uint32 nextJstMidnight = CVanaTime::getInstance()->getJstMidnight();
+
+        // Start with the "Next" Midnight, and apply N days worth of time to it
+        return nextJstMidnight + (7 - jstWeekday) * 60 * 60 * 24;
+    }
+
+    // NOTE: NextConquestTally exists for clarity, and is bound to the above function
 
     uint32 VanadielMoonPhase()
     {
@@ -1477,16 +1454,10 @@ namespace luautils
     bool SetVanadielTimeOffset(int32 offset)
     {
         TracyZoneScoped;
-        int32 custom = CVanaTime::getInstance()->getCustomEpoch();
+        uint32 custom = CVanaTime::getInstance()->getCustomEpoch();
         CVanaTime::getInstance()->setCustomEpoch((custom ? custom : VTIME_BASEDATE) - offset);
         return true;
     }
-
-    /************************************************************************
-     *                                                                       *
-     *   Return Moon Phasing Direction                                       *
-     *                                                                       *
-     ************************************************************************/
 
     uint8 VanadielMoonDirection()
     {
@@ -1494,35 +1465,17 @@ namespace luautils
         return CVanaTime::getInstance()->getMoonDirection();
     }
 
-    /************************************************************************
-     *                                                                       *
-     *   Return RSE Race                                                     *
-     *                                                                       *
-     ************************************************************************/
-
     uint8 VanadielRSERace()
     {
         TracyZoneScoped;
         return CVanaTime::getInstance()->getRSERace();
     }
 
-    /************************************************************************
-     *                                                                       *
-     *   Return RSE Location                                                 *
-     *                                                                       *
-     ************************************************************************/
-
     uint8 VanadielRSELocation()
     {
         TracyZoneScoped;
         return CVanaTime::getInstance()->getRSELocation();
     }
-
-    /************************************************************************
-     *                                                                       *
-     *   is new moon?                                                        *
-     *                                                                       *
-     ************************************************************************/
 
     bool IsMoonNew()
     {
@@ -1557,12 +1510,6 @@ namespace luautils
 
         return false;
     }
-
-    /************************************************************************
-     *                                                                       *
-     *   is full moon?                                                       *
-     *                                                                       *
-     ************************************************************************/
 
     bool IsMoonFull()
     {
@@ -1600,7 +1547,7 @@ namespace luautils
 
     /************************************************************************
      *                                                                       *
-     *  Spawn a mob using mob ID. Returns that mob.                          *
+     *  Spawn a mob using mob ID                                             *
      *                                                                       *
      ************************************************************************/
     std::optional<CLuaBaseEntity> SpawnMob(uint32 mobid, sol::object const& arg2, sol::object const& arg3)
@@ -1690,7 +1637,7 @@ namespace luautils
 
     /************************************************************************
      *                                                                       *
-     *  Gets a player object via the player's name. Used for GM commands.    *
+     *  Gets a player object via the player's name (used for GM commands)    *
      *                                                                       *
      ************************************************************************/
 
@@ -1727,114 +1674,6 @@ namespace luautils
 
         return std::nullopt;
     }
-
-    /*******************************************************************************
-     *                                                                              *
-     *  Returns data of Magian trials                                               *
-     *  Will return a single table with keys matching the SQL table column          *
-     *  names if given one trial #, or will return a table of likewise trial        *
-     *  columns if given a table of trial #s.                                       *
-     *  examples: GetMagianTrial(2)          returns {column = value, ...}          *
-     *            GetMagianTrial({2, 16})    returns { 2 = { column = value, ...},  *
-     *                                                16 = { column = value, ...}}  *
-     *******************************************************************************/
-
-    sol::table GetMagianTrial(sol::variadic_args va)
-    {
-        TracyZoneScoped;
-
-        sol::table table = lua.create_table();
-
-        if (va.size())
-        {
-            // Get all magian table columns to build lua keys
-            const char*              ColumnQuery = "SHOW COLUMNS FROM `magian`;";
-            std::vector<std::string> magianColumns;
-            if (sql->Query(ColumnQuery) == SQL_SUCCESS && sql->NumRows() != 0)
-            {
-                while (sql->NextRow() == SQL_SUCCESS)
-                {
-                    magianColumns.emplace_back(sql->GetStringData(0));
-                }
-            }
-            else
-            {
-                ShowError("Error: No columns in `magian` table?");
-                return sol::lua_nil;
-            }
-
-            const char* Query = "SELECT * FROM `magian` WHERE trialId = %u;";
-
-            if (va[0].is<lua_Number>())
-            {
-                int32 trial = va[0].as<int32>();
-                int32 field{ 0 };
-                if (sql->Query(Query, trial) != SQL_ERROR && sql->NumRows() != 0 && sql->NextRow() == SQL_SUCCESS)
-                {
-                    for (auto const& column : magianColumns)
-                    {
-                        table[column] = sql->GetIntData(field++);
-                    }
-                }
-            }
-            else if (va[0].is<sol::table>())
-            {
-                auto trials = va[0].as<std::vector<int32>>();
-
-                // one inner table each trial { trial# = { column = value, ... } }
-                for (auto trial : trials)
-                {
-                    int32 ret = sql->Query(Query, trial);
-                    if (ret != SQL_ERROR && sql->NumRows() != 0 && sql->NextRow() == SQL_SUCCESS)
-                    {
-                        auto  inner_table = table.create_named(trial);
-                        int32 field{ 0 };
-                        for (auto const& column : magianColumns)
-                        {
-                            inner_table[column] = sql->GetIntData(field++);
-                        }
-                    }
-                }
-            }
-            else
-            {
-                return sol::lua_nil;
-            }
-
-            return table;
-        }
-
-        return sol::lua_nil;
-    }
-
-    /*******************************************************************************
-     *                                                                              *
-     *  Returns a list of trial numbers who have the given parent trial             *
-     *                                                                              *
-     *******************************************************************************/
-
-    sol::table GetMagianTrialsWithParent(int32 parentTrial)
-    {
-        TracyZoneScoped;
-
-        const char* Query = "SELECT `trialId` from `magian` WHERE `previousTrial` = %u;";
-        int32       ret   = sql->Query(Query, parentTrial);
-        if (ret != SQL_ERROR && sql->NumRows() > 0)
-        {
-            auto  table = lua.create_table();
-            int32 field{ 0 };
-            while (sql->NextRow() == 0)
-            {
-                int32 childTrial = sql->GetIntData(0);
-                table[++field]   = childTrial;
-            }
-
-            return table;
-        }
-
-        return sol::lua_nil;
-    }
-
     /************************************************************************
      *                                                                       *
      *  Load the value of the TextID variable of the specified zone          *
@@ -1875,10 +1714,6 @@ namespace luautils
         return true;
     }
 
-    /************************************************************************
-     *                                                                       *
-     ************************************************************************/
-
     int32 OnZoneInitialise(uint16 ZoneID)
     {
         TracyZoneScoped;
@@ -1913,12 +1748,6 @@ namespace luautils
         return 0;
     }
 
-    /************************************************************************
-     *                                                                       *
-     *  Called on ZoneServer Zone Tick (every 400ms)                         *
-     *                                                                       *
-     ************************************************************************/
-
     void OnZoneTick(CZone* PZone)
     {
         TracyZoneScoped;
@@ -1939,12 +1768,6 @@ namespace luautils
             ShowError("luautils::onZoneTick: %s", err.what());
         }
     }
-
-    /************************************************************************
-     *                                                                       *
-     *  We perform the script at the entrance of the character to the server *
-     *                                                                       *
-     ************************************************************************/
 
     int32 OnGameIn(CCharEntity* PChar, bool zoning)
     {
@@ -1968,12 +1791,6 @@ namespace luautils
 
         return 0;
     }
-
-    /************************************************************************
-     *                                                                       *
-     *  We perform the script at the entrance of the character to the zone   *
-     *                                                                       *
-     ************************************************************************/
 
     void OnZoneIn(CCharEntity* PChar)
     {
@@ -2054,12 +1871,6 @@ namespace luautils
         }
     }
 
-    /************************************************************************
-     *                                                                       *
-     *  The character has entered the active trigger area                    *
-     *                                                                       *
-     ************************************************************************/
-
     int32 OnTriggerAreaEnter(CCharEntity* PChar, CTriggerArea* PTriggerArea)
     {
         TracyZoneScoped;
@@ -2107,12 +1918,6 @@ namespace luautils
 
         return 0;
     }
-
-    /************************************************************************
-     *                                                                       *
-     *  The character has left the active trigger area                       *
-     *                                                                       *
-     ************************************************************************/
 
     int32 OnTriggerAreaLeave(CCharEntity* PChar, CTriggerArea* PTriggerArea)
     {
@@ -2162,12 +1967,6 @@ namespace luautils
         return 0;
     }
 
-    /************************************************************************
-     *                                                                       *
-     * The character refers to some npc. Trying to respond to its action.    *
-     *                                                                       *
-     ************************************************************************/
-
     int32 OnTrigger(CCharEntity* PChar, CBaseEntity* PNpc)
     {
         TracyZoneScoped;
@@ -2214,11 +2013,6 @@ namespace luautils
         return result.get_type() == sol::type::number ? result.get<int32>() : 0;
     }
 
-    /************************************************************************
-     *  Запущенное событие нуждается в дополнительных параметрах             *
-     *  A triggered event needs additional parameters  (battlefield extras)  *
-     ************************************************************************/
-
     int32 OnEventUpdate(CCharEntity* PChar, uint16 eventID, uint32 result, uint16 extras)
     {
         TracyZoneScoped;
@@ -2253,11 +2047,6 @@ namespace luautils
 
         return func_result.get_type() == sol::type::number ? func_result.get<int32>() : 1;
     }
-
-    /************************************************************************
-     *  Запущенное событие нуждается в дополнительных параметрах             *
-     *  A triggered event needs additional parameters                        *
-     ************************************************************************/
 
     int32 OnEventUpdate(CCharEntity* PChar, uint16 eventID, uint32 result)
     {
@@ -2321,12 +2110,6 @@ namespace luautils
         return 0;
     }
 
-    /************************************************************************
-     *                                                                       *
-     *  Событие завершилось, результат события хранится в result             *
-     *                                                                       *
-     ************************************************************************/
-
     int32 OnEventFinish(CCharEntity* PChar, uint16 eventID, uint32 result)
     {
         TracyZoneScoped;
@@ -2370,12 +2153,6 @@ namespace luautils
 
         return 0;
     }
-
-    /************************************************************************
-     *                                                                       *
-     *  Персонаж пытается передать предмет npc                               *
-     *                                                                       *
-     ************************************************************************/
 
     int32 OnTrade(CCharEntity* PChar, CBaseEntity* PNpc)
     {
@@ -3392,12 +3169,6 @@ namespace luautils
         return 0;
     }
 
-    /************************************************************************
-     *                                                                       *
-     *  Сalled when a monster engages a target for the first time            *
-     *                                                                       *
-     ************************************************************************/
-
     int32 OnMobEngaged(CBaseEntity* PMob, CBaseEntity* PTarget)
     {
         TracyZoneScoped;
@@ -3439,12 +3210,6 @@ namespace luautils
 
         return 0;
     }
-
-    /************************************************************************
-     *                                                                       *
-     *  Calls a lua script when a mob has disengaged from a target           *
-     *                                                                       *
-     ************************************************************************/
 
     int32 OnMobDisengage(CBaseEntity* PMob)
     {
@@ -3508,12 +3273,6 @@ namespace luautils
         return 0;
     }
 
-    /************************************************************************
-     *                                                                       *
-     *  Сalled every 3 sec when a player fight monster                       *
-     *                                                                       *
-     ************************************************************************/
-
     int32 OnMobFight(CBaseEntity* PMob, CBaseEntity* PTarget)
     {
         TracyZoneScoped;
@@ -3572,12 +3331,6 @@ namespace luautils
         return 0;
     }
 
-    /************************************************************************
-     *                                                                       *
-     *  The script is executed after the death of any monster in the game    *
-     *                                                                       *
-     ************************************************************************/
-
     int32 OnMobDeath(CBaseEntity* PMob, CBaseEntity* PKiller)
     {
         TracyZoneScoped;
@@ -3614,7 +3367,7 @@ namespace luautils
                     CLuaBaseEntity LuaMobEntity(PMob);
                     CLuaBaseEntity LuaAllyEntity(PMember);
                     bool           isKiller          = PMember == PChar;
-                    bool           isWeaponSkillKill = PMob->GetLocalVar("weaponskillHit") > 0;
+                    bool           isWeaponSkillKill = (PMob->GetLocalVar("weaponskillHit") & 0xFFFFFF) > 0;
 
                     auto result = onMobDeathEx(LuaMobEntity, LuaAllyEntity, isKiller, isWeaponSkillKill);
                     if (!result.valid())
@@ -3638,7 +3391,11 @@ namespace luautils
                 if (PMember && PMember->getZone() == PChar->getZone())
                 {
                     CLuaBaseEntity                LuaMobEntity(PMob);
-                    std::optional<CLuaBaseEntity> optLuaAllyEntity = std::nullopt;
+                    std::optional<CLuaBaseEntity> optLuaAllyEntity  = std::nullopt;
+                    uint32                        weaponskillVar    = PMob->GetLocalVar("weaponskillHit");
+                    uint16                        weaponskillUsed   = weaponskillVar >> 24;
+                    uint32                        weaponskillDamage = weaponskillVar & 0xFFFFFF;
+
                     if (PMember)
                     {
                         optLuaAllyEntity = CLuaBaseEntity(PMember);
@@ -3646,7 +3403,9 @@ namespace luautils
 
                     optParams["isKiller"]          = PMember == PChar;
                     optParams["noKiller"]          = false;
-                    optParams["isWeaponSkillKill"] = PMob->GetLocalVar("weaponskillHit") > 0;
+                    optParams["isWeaponSkillKill"] = weaponskillUsed > 0;
+                    optParams["weaponskillUsed"]   = weaponskillUsed;
+                    optParams["weaponskillDamage"] = weaponskillDamage;
 
                     PChar->eventPreparation->targetEntity = PMob;
                     PChar->eventPreparation->scriptFile   = filename;
@@ -3785,12 +3544,6 @@ namespace luautils
         return 0;
     }
 
-    /************************************************************************
-     *                                                                       *
-     *  Сalled when a pet's level restriction status changes                 *
-     *                                                                       *
-     ************************************************************************/
-
     int32 OnPetLevelRestriction(CBaseEntity* PMob)
     {
         TracyZoneScoped;
@@ -3817,12 +3570,6 @@ namespace luautils
         return 0;
     }
 
-    /************************************************************************
-     *   OnGameDay()                                           *
-     *   used for creating action of npc every game day                      *
-     *                                                                       *
-     ************************************************************************/
-
     int32 OnGameDay(CZone* PZone)
     {
         TracyZoneScoped;
@@ -3845,12 +3592,6 @@ namespace luautils
 
         return 0;
     }
-
-    /************************************************************************
-     *   OnGameHour()                                          *
-     *   used for creating action of npc every game hour                     *
-     *                                                                       *
-     ************************************************************************/
 
     int32 OnGameHour(CZone* PZone)
     {
@@ -4147,12 +3888,6 @@ namespace luautils
         return result.get_type(0) == sol::type::number ? result.get<int32>(0) : 0;
     }
 
-    /***********************************************************************
-     *                                                                       *
-     *                                                                       *
-     *                                                                       *
-     ************************************************************************/
-
     int32 OnMagicCastingCheck(CBaseEntity* PChar, CBaseEntity* PTarget, CSpell* PSpell)
     {
         TracyZoneScoped;
@@ -4174,12 +3909,6 @@ namespace luautils
 
         return result.get_type(0) == sol::type::number ? result.get<int32>(0) : -5;
     }
-
-    /***********************************************************************
-     *                                                                       *
-     *                                                                       *
-     *                                                                       *
-     ************************************************************************/
 
     int32 OnAbilityCheck(CBaseEntity* PChar, CBaseEntity* PTarget, CAbility* PAbility, CBaseEntity** PMsgTarget)
     {
@@ -4226,12 +3955,6 @@ namespace luautils
 
         return result0 ? result0 : 0; // Default to no Message
     }
-
-    /***********************************************************************
-     *                                                                       *
-     *                                                                       *
-     *                                                                       *
-     ************************************************************************/
 
     int32 OnPetAbility(CBaseEntity* PTarget, CBaseEntity* PMob, CMobSkill* PMobSkill, CBaseEntity* PMobMaster, action_t* action)
     {
@@ -4574,12 +4297,6 @@ namespace luautils
         return 0;
     }
 
-    /************************************************************************
-     *                                                                       *
-     *  When instance is created, run setup script for instance              *
-     *                                                                       *
-     ************************************************************************/
-
     int32 OnInstanceCreated(CInstance* PInstance)
     {
         TracyZoneScoped;
@@ -4701,9 +4418,17 @@ namespace luautils
         return serverutils::GetServerVar(name);
     }
 
-    void SetServerVariable(std::string const& name, int32 value)
+    void SetServerVariable(std::string const& name, int32 value, sol::object const& expiry)
     {
-        serverutils::SetServerVar(name, value);
+        uint32 varTimestamp = expiry.is<uint32>() ? expiry.as<uint32>() : 0;
+
+        if (varTimestamp > 0 && varTimestamp <= CVanaTime::getInstance()->getSysTime())
+        {
+            ShowWarning(fmt::format("Attempting to set variable '{}' with an expired time: {}", name, varTimestamp));
+            return;
+        }
+
+        serverutils::SetServerVar(name, value, varTimestamp);
     }
 
     int32 GetVolatileServerVariable(std::string const& varName)
@@ -4711,20 +4436,36 @@ namespace luautils
         return serverutils::GetVolatileServerVar(varName);
     }
 
-    void SetVolatileServerVariable(std::string const& varName, int32 value)
+    void SetVolatileServerVariable(std::string const& varName, int32 value, sol::object const& expiry)
     {
-        serverutils::SetVolatileServerVar(varName, value);
+        uint32 varTimestamp = expiry.is<uint32>() ? expiry.as<uint32>() : 0;
+
+        if (varTimestamp > 0 && varTimestamp <= CVanaTime::getInstance()->getSysTime())
+        {
+            ShowWarning(fmt::format("Attempting to set variable '{}' with an expired time: {}", varName, varTimestamp));
+            return;
+        }
+
+        serverutils::SetVolatileServerVar(varName, value, varTimestamp);
     }
 
     int32 GetCharVar(uint32 charId, std::string const& varName)
     {
-        return charutils::FetchCharVar(charId, varName);
+        return charutils::FetchCharVar(charId, varName).first;
     }
 
     // Using the charID set a char variable on the SQL DB
-    void SetCharVar(uint32 charId, std::string const& varName, int32 value)
+    void SetCharVar(uint32 charId, std::string const& varName, int32 value, sol::object const& expiry)
     {
-        charutils::SetCharVar(charId, varName, value);
+        uint32 varTimestamp = expiry.is<uint32>() ? expiry.as<uint32>() : 0;
+
+        if (varTimestamp > 0 && varTimestamp <= CVanaTime::getInstance()->getSysTime())
+        {
+            ShowWarning(fmt::format("Attempting to set variable '{}' with an expired time: {}", varName, varTimestamp));
+            return;
+        }
+
+        charutils::SetCharVar(charId, varName, value, varTimestamp);
     }
 
     void ClearCharVarFromAll(std::string const& varName)
@@ -4800,12 +4541,6 @@ namespace luautils
         return 0;
     }
 
-    /************************************************************************
-     *                                                                       *
-     *  Called on Server Start                                               *
-     *                                                                       *
-     ************************************************************************/
-
     void OnServerStart()
     {
         TracyZoneScoped;
@@ -4825,12 +4560,6 @@ namespace luautils
             return;
         }
     }
-
-    /************************************************************************
-     *                                                                       *
-     *  Called on JST Midnight                                               *
-     *                                                                       *
-     ************************************************************************/
 
     void OnJSTMidnight()
     {
@@ -4878,9 +4607,11 @@ namespace luautils
         }
     }
 
-    /********************************************************************
-        onBattlefieldEnter - callback when you enter a BCNM via a lua call to bcnmEnter(bcnmid)
-    *********************************************************************/
+    /************************************************************************
+     *                                                                       *
+     *  Callback when you enter a BCNM via a lua call to bcnmEnter(bcnmid)   *
+     *                                                                       *
+     ************************************************************************/
     void OnBattlefieldEnter(CCharEntity* PChar, CBattlefield* PBattlefield)
     {
         TracyZoneScoped;
@@ -4914,16 +4645,18 @@ namespace luautils
         }
     }
 
-    /********************************************************************
-        onBattlefieldLeave - callback when you leave a BCNM via multiple means.
-        The method of leaving is given by the LeaveCode as follows:
-        1 - Leaving via burning circle e.g. "run away"
-        2 - Leaving via win
-        3 - Leaving via warp or d/c
-        4 - Leaving via lose
-        This callback is executed for everyone in the BCNM when they leave
-        so if they leave via win, this will be called for each char.
-    *********************************************************************/
+    /************************************************************************
+     *                                                                       *
+     *  Callback when you leave a BCNM via multiple means                    *
+     *  The method of leaving is given by the LeaveCode as follows:          *
+     *  1 - Leaving via burning circle e.g. "run away"                       *
+     *  2 - Leaving via win                                                  *
+     *  3 - Leaving via warp or d/c                                          *
+     *  4 - Leaving via lose                                                 *
+     *  This callback is executed for everyone in the BCNM when they leave   *
+     *  so if they leave via win, this will be called for each char.         *
+     *                                                                       *
+     ************************************************************************/
     void OnBattlefieldLeave(CCharEntity* PChar, CBattlefield* PBattlefield, uint8 LeaveCode)
     {
         TracyZoneScoped;
@@ -4976,13 +4709,14 @@ namespace luautils
         }
     }
 
-    /********************************************************************
-        onBattlefieldRegister - callback when you successfully register a BCNM.
-        For example, trading an orb, selecting the battle.
-        Called AFTER assigning BCNM status to all valid characters.
-        This callback is called only for the character initiating the
-        registration, and after CBattlefield:init() procedure.
-    *********************************************************************/
+    /************************************************************************
+     *                                                                       *
+     *  Callback when you successfully register a BCNM                       *
+     *  Called AFTER assigning BCNM status to all valid characters           *
+     *  This callback is called only for the character initiating the        *
+     *  registration, and after CBattlefield:init() procedure                *
+     *                                                                       *
+     ************************************************************************/
     void OnBattlefieldRegister(CCharEntity* PChar, CBattlefield* PBattlefield)
     {
         TracyZoneScoped;
@@ -5016,9 +4750,11 @@ namespace luautils
         }
     }
 
-    /********************************************************************
-    onBattlefieldDestroy - called when BCNM is destroyed (cleanup)
-    *********************************************************************/
+    /************************************************************************
+     *                                                                       *
+     *  Called when BCNM is destroyed (cleanup)                              *
+     *                                                                       *
+     ************************************************************************/
     void OnBattlefieldDestroy(CBattlefield* PBattlefield)
     {
         TracyZoneScoped;
@@ -5040,11 +4776,7 @@ namespace luautils
             ShowError("luautils::onBattlefieldDestroy: %s", err.what());
         }
     }
-    /************************************************************************
-     *                                                                       *
-     * Set SpawnType of mob to scripted (128) or normal (0) usind mob id     *
-     *                                                                       *
-     ************************************************************************/
+
     void DisallowRespawn(uint32 mobid, bool allowRespawn)
     {
         TracyZoneScoped;
@@ -5059,12 +4791,6 @@ namespace luautils
             ShowDebug("DisallowRespawn: mob <%u> not found", mobid);
         }
     }
-
-    /************************************************************************
-     *                                                                       *
-     * Update the NM spawn point to a new point, retrieved from the database *
-     *                                                                       *
-     ************************************************************************/
 
     void UpdateNMSpawnPoint(uint32 mobid)
     {
@@ -5150,22 +4876,22 @@ namespace luautils
         return result.get_type() == sol::type::string ? result.get<std::string>() : "";
     }
 
-    /***************************************************************************
-     *                                                                          *
-     *  Creates an item object of the type specified by the itemID.             *
-     *  This item is ephemeral, and doesn't exist in-game but can and should    *
-     *  be used to lookup item information or access item functions when only   *
-     *  the ItemID is known.                                                    *
-     *                                                                          *
-     *  ## These items should be used to READ ONLY!                             *
-     *  ## Should lua functions be written which modify items, care must be     *
-     *     taken to ensure these are NEVER modified.                            *
-     *                                                                          *
-     *  example: local item = GetReadOnlyItem(16448)                            *
-     *           item:GetName()                 --Bronze Dagger                 *
-     *           item:isTwoHanded()             --False                         *
-     *                                                                          *
-     ***************************************************************************/
+    /************************************************************************
+     *                                                                       *
+     *  Creates an item object of the type specified by the itemID.          *
+     *  This item is ephemeral, and doesn't exist in-game but can and should *
+     *  be used to lookup item information or access item functions when     *
+     *  only the ItemID is known.                                            *
+     *                                                                       *
+     *  ## These items should be used to READ ONLY!                          *
+     *  ## Should lua functions be written which modify items, care must be  *
+     *     taken to ensure these are NEVER modified.                         *
+     *                                                                       *
+     *  example: local item = GetReadOnlyItem(16448)                         *
+     *           item:GetName()                 --Bronze Dagger              *
+     *           item:isTwoHanded()             --False                      *
+     *                                                                       *
+     ************************************************************************/
 
     std::optional<CLuaItem> GetReadOnlyItem(uint32 id)
     {

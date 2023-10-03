@@ -1373,9 +1373,19 @@ void CZoneEntities::ZoneServer(time_point tick)
 
         if (PMob->status == STATUS_TYPE::DISAPPEAR && PMob->m_bReleaseTargIDOnDisappear)
         {
+            if (PMob->PPet != nullptr)
+            {
+                PMob->PPet->PMaster = nullptr;
+            }
+
+            if (PMob->PMaster != nullptr)
+            {
+                PMob->PMaster->PPet = nullptr;
+            }
+
             for (auto PMobIt : m_mobList)
             {
-                CMobEntity* PCurrentMob = (CMobEntity*)PMobIt.second;
+                CMobEntity* PCurrentMob = static_cast<CMobEntity*>(PMobIt.second);
                 PCurrentMob->PEnmityContainer->Clear(PMob->id);
             }
 
@@ -1386,7 +1396,18 @@ void CZoneEntities::ZoneServer(time_point tick)
 
             for (EntityList_t::const_iterator it = m_charList.begin(); it != m_charList.end(); ++it)
             {
-                CCharEntity* PChar = (CCharEntity*)it->second;
+                CCharEntity* PChar = static_cast<CCharEntity*>(it->second);
+
+                if (PChar->PClaimedMob == PMob)
+                {
+                    PChar->PClaimedMob = nullptr;
+                }
+
+                if (PChar->currentEvent && PChar->currentEvent->targetEntity == PMob)
+                {
+                    PChar->currentEvent->targetEntity = nullptr;
+                }
+
                 if (distance(PChar->loc.p, PMob->loc.p) < 50)
                 {
                     PChar->SpawnMOBList.erase(PMob->id);

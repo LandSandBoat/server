@@ -60,7 +60,7 @@ end
 local function getWyvern(player)
     local wyvern = player:getPet()
 
-    if wyvern and wyvern:getPetID() == xi.pet.id.WYVERN then
+    if wyvern and wyvern:getPetID() == xi.petId.WYVERN then
         return wyvern
     end
 
@@ -239,7 +239,7 @@ xi.job_utils.dragoon.useSpiritSurge = function(player, target, ability)
 end
 
 xi.job_utils.dragoon.useCallWyvern = function(player, target, ability)
-    xi.pet.spawnPet(player, xi.pet.id.WYVERN)
+    xi.pet.spawnPet(player, xi.petId.WYVERN)
 end
 
 xi.job_utils.dragoon.useAncientCircle = function(player, target, ability)
