@@ -306,7 +306,7 @@ xi.amk.helpers.digSites =
             { x = -197.142, z = 285.642 },  -- (F-6) SE corner
             { x = 20.214, z = 73.494 },     -- (H-8) NW corner
             { x = -189.196, z = 32.195 },   -- (F-8) NE corner
-            { x = 85.507, z = 313.316},     -- (H-6) Center
+            { x = 85.507, z = 313.316 },    -- (H-6) Center
             { x = 469.810, z = 222.405 },   -- (J/K-7) Upper third of square
             { x = -215.823, z = -181.996 }, -- (F-9) Center
         },
