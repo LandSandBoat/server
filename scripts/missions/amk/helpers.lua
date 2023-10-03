@@ -32,38 +32,30 @@ local validRegions = set{
 xi.amk.helpers.helmTrade = function(player, helmType, broke)
     local amkChance = 5
     local regionId = player:getCurrentRegion()
+    local helmMapping =
+    {
+        [xi.helm.type.MINING] = xi.ki.STURDY_METAL_STRIP,
+        [xi.helm.type.LOGGING] = xi.ki.PIECE_OF_RUGGED_TREE_BARK,
+        [xi.helm.type.HARVESTING] = xi.ki.SAVORY_LAMB_ROAST,
+    }
 
     if
-        player:getCurrentMission(xi.mission.log_id.AMK) == xi.mission.id.amk.WELCOME_TO_MY_DECREPIT_DOMICILE and
-        broke ~= 1
+        player:getCurrentMission(xi.mission.log_id.AMK) >= xi.mission.id.amk.WELCOME_TO_MY_DECREPIT_DOMICILE
     then
         if
-            helmType == xi.helm.type.MINING and
-            not player:hasKeyItem(xi.ki.STURDY_METAL_STRIP) and
+            helmMapping[helmType] and
             validRegions[regionId] and
             math.random(1, 100) <= amkChance
         then
-            npcUtil.giveKeyItem(player, xi.ki.STURDY_METAL_STRIP)
-        elseif
-            helmType == xi.helm.type.LOGGING and
-            not player:hasKeyItem(xi.ki.PIECE_OF_RUGGED_TREE_BARK) and
-            validRegions[regionId] and
-            math.random(1, 100) <= amkChance
-        then
-            npcUtil.giveKeyItem(player, xi.ki.PIECE_OF_RUGGED_TREE_BARK)
-        elseif
-            helmType == xi.helm.type.HARVESTING and
-            not player:hasKeyItem(xi.ki.SAVORY_LAMB_ROAST) and
-            validRegions[regionId] and
-            math.random(1, 100) <= amkChance
-        then
-            npcUtil.giveKeyItem(player, xi.ki.SAVORY_LAMB_ROAST)
+            npcUtil.giveKeyItem(player, helmMapping[helmType])
         end
     end
 end
 
+-- AMK 7 (index 6) - Select/lookup the digging zone
 local digZoneIds =
 {
+    xi.zone.LA_THEINE_PLATEAU,
     xi.zone.VALKURM_DUNES,
     xi.zone.JUGNER_FOREST,
     xi.zone.KONSCHTAT_HIGHLANDS,
@@ -78,24 +70,32 @@ local digZoneIds =
     xi.zone.EASTERN_ALTEPA_DESERT,
 }
 
--- AMK07 - Select/lookup the digging zone
+xi.amk.helpers.test = function()
+    printf('test: %s', #digZoneIds)
+end
+
 xi.amk.helpers.getDiggingZone = function(player)
-    local diggingZone = player:getCharVar('AMK6_DIGGING_ZONE')
+    -- Returns the 1-indexed offset value for zone lookup (refer to digZoneIds)
+
+    local diggingZone = player:getCharVar('Mission[10][6]diggingZone')
+
     if diggingZone == 0 then
-        -- 1 = Valkurm Dunes
-        -- 2 = Jugner Forest
-        -- 3 = Konschtat Highlands
-        -- 4 = Pashhow Marshlands
-        -- 5 = Tahrongi Canyon
-        -- 6 = Buburimu Peninsula
-        -- 7 = Meriphataud Mountains
-        -- 8 = The Sanctuary of Zi'tah
-        -- 9 = Yuhtunga Jungle
-        -- 10 = Yhoator Jungle
-        -- 11 = Western Altepa Desert
-        -- 12 = Eastern Altepa Desert
-        diggingZone = math.random(1, 12)
-        player:setCharVar('AMK6_DIGGING_ZONE', diggingZone)
+        -- EventId: varId = Zone
+        -- 0: 1 = La Theine Plateau
+        -- 1: 2 = Valkurm Dunes
+        -- 2: 3 = Jugner Forest
+        -- 3: 4 = Konschtat Highlands
+        -- 4: 5 = Pashhow Marshlands
+        -- 5: 6 = Tahrongi Canyon
+        -- 6: 7 = Buburimu Peninsula
+        -- 7: 8 = Meriphataud Mountains
+        -- 8: 9 = The Sanctuary of Zi'tah
+        -- 9: 10 = Yuhtunga Jungle
+        -- 10: 11 = Yhoator Jungle
+        -- 11: 12 = Western Altepa Desert
+        -- 12: 13 = Eastern Altepa Desert
+        diggingZone = math.random(#digZoneIds)
+        player:setCharVar('Mission[10][6]diggingZone', diggingZone)
     end
 
     return diggingZone
@@ -103,103 +103,248 @@ end
 
 xi.amk.helpers.digSites =
 {
-    -- NOTE: These have been picked at random, and not checked against
-    --       possible points that might exist in retail
-
-    -- 1 = Valkurm Dunes
-    [1] =
+    [xi.zone.LA_THEINE_PLATEAU] =
     {
-        { x = 141, z =  28 },
-        { x = 392, z = -91 },
+        eventID = 0,
+        spots =
+        {
+            { x = 614.670, z = -427.080 },  -- (L-10)
+            { x = -310.800, z = 47.260 },   -- (F-7)
+            { x = -351.320, z = -167.000 }, -- (F-9)
+            { x = -208.850, z = -43.290 },  -- (G-8)
+            { x = -698.450, z = 209.590 },  -- (D-7)
+            { x = -197.040, z = 275.560 },  -- (G-6) (NW corner of carby circle)
+            { x = 489.060, z = 472.610 },   -- (K-5) (on  a small gray patchin the grass)
+            { x = 528.760, z = -433.580 },  -- (K-10) (SE corner bottom of ramp)
+            { x = -191.890, z = -472.910 }, -- (G-11) (small gray plot near edge of cliffe
+            { x = 107.780, z = -575.280 },  -- (I-11) (slightly to left of lone tree on the map)
+        },
     },
-    -- 2 = Jugner Forest
-    [2] =
+    [xi.zone.VALKURM_DUNES] =
     {
-        { x = 247, z = -130 },
+        eventID = 1,
+        spots =
+        {
+            { x = -718.320, z = 131.920 }, -- (B-7)
+            { x = 201.800, z = -70.300 },  -- (H-8)
+            { x = -261.660, z = 154.590 }, -- (E-7)
+            { x = -514.010, z = 125.600 }, -- (D-7)
+            { x = -386.190, z = 317.570 }, -- (D-6) (ne corner near tree)
+            { x = 615.06, z = 124.010 },   -- (J-7) (5 yalms from flowers near a large rock)
+            { x = 662.250, z = -68.980 },  -- (K-8) (on corner of road)
+            { x = -80.900, z = 181.840 },  -- (F-7) (next to root closest to trees)
+        },
     },
-    -- 3 = Konschtat Highlands
-    [3] =
+    [xi.zone.JUGNER_FOREST] =
     {
-        { x = 366, z = 468 },
+        eventID = 2,
+        spots =
+        {
+            { x = 514.850, z = 320.160 },   -- (K-6)
+            { x = -273.420, z = 207.460 },  -- (G-7) (nw corner)
+            { x = -242.710, z = -68.550 },  -- (G-8) (SW corner)
+            { x = -275.370, z = -157.800 }, -- (G-9) (W side)
+            { x = 114.150, z = 476.240 },   -- (I-5)
+            { x = 117.450, z = -207.740 },  -- (I-9)
+            { x = 258.960, z = 504.140 },   -- (J-5)
+            { x = 591.460, z = 230.220 },   -- (L-7)
+        },
     },
-    -- 4 = Pashhow Marshlands
-    [4] =
+    [xi.zone.KONSCHTAT_HIGHLANDS] =
     {
-        { x = 542, z = 498 },
+        eventID = 3,
+        spots =
+        {
+            { x = -424.130, z = 300.000 },  -- (E-6)
+            { x = -463.780, z = -112.270 }, -- (E-9) (center a bit NW of big rock)
+            { x = -250.490, z = 569.500 },  -- (F-5)
+            { x = -190.000, z = -190.000 }, -- (G-9)
+            { x = -115.810, z = -640.600 }, -- (G-12)
+            { x = 473.570, z = 565.430 },   -- (K-5)
+            { x = 469.660, z = 170.000 },   -- (K-7)
+            { x = 36.570, z = 477.320 },    -- (H-5)
+            { x = 62.150, z = -549.440 },   -- (H-12)
+            { x = 246.900, z = 634.040 },   -- (J-4)
+        },
     },
-    -- 5 = Tahrongi Canyon
-    [5] =
+    [xi.zone.PASHHOW_MARSHLANDS] =
     {
-        { x = 91, z = -106 },
+        eventID = 4,
+        spots =
+        {
+            { x = 620.090, z = 228.850 },   -- (L-7)
+            { x = 488.390, z = 400.000 },   -- (K-6)
+            { x = 219.090, z = 144.480 },   -- (I-7)
+            { x = 185.250, z = 67.920 },    -- (I-8)
+            { x = -22.820, z = 341.160 },   -- (H-6)
+            { x = -169.300, z = 123.150 },  -- (G-7/8)
+            { x = -362.290, z = 512.750 },  -- (F-5)
+            { x = -394.710, z = -230.800 }, -- (E/F-10)
+            { x = 422.530, z = -301.460 },  -- (K-10)
+        },
     },
-    -- 6 = Buburimu Peninsula
-    [6] =
+    [xi.zone.TAHRONGI_CANYON] =
     {
-        { x = -111, z = -235 },
+        eventID = 5,
+        spots =
+        {
+            { x = 0.000, z = 565.630 },     -- (H-4) (Center)
+            { x = 0.000, z = -163.160 },    -- (H-9)
+            { x = -42.080, z = -398.800 },  -- (H-10)
+            { x = -423.860, z = -185.390 }, -- (E-9)
+            { x = -205.620, z = 542.280 },  -- (G-4)
+            { x = 80.820, z = 121.230 },    -- (I-7)
+            { x = 267.400, z = 78.200 },    -- (J-7)
+            { x = 115.480, z = -206.400 },  -- (I-9)
+            { x = 290.840, z = -344.020 },  -- (J-10) SW corner near a green patch
+            { x = -369.270, z = 390.010 },  -- (F-5) SW corner on a green patch
+            { x = -197.830, z = -153.650 }, -- (G-9) NW corner
+            { x = -306.550, z = 265.430 },  -- (F-6) directly on center of grid
+        },
     },
-    -- 7 = Meriphataud Mountains
-    [7] =
+    [xi.zone.BUBURIMU_PENINSULA] =
     {
-        { x = 698, z = -33 },
+        eventID = 6,
+        spots =
+        {
+            { x = -241.800, z = -271.150 }, -- (G-9) Near the song runes
+            { x = -444.840, z = -263.150 }, -- (E-9)
+            { x = -332.890, z = 246.850 },  -- (F-6)
+            { x = -313.480, z = -107.170 }, -- (F-8) Near group of cacti
+            { x = 392.490, z = 314.650 },   -- (J-6) NE corner
+            { x = 392.970, z = 157.610 },   -- (J-7) NE corner
+            { x = -32.940, z = 251.870 },   -- (H-6) Green patch on ground
+            { x = -275.140, z = -258.90 },  -- (F-9) Center of grid (kind of impossible)
+            { x = 426.50, z = -231.660 },   -- (K-9) Few feet west of sign post
+        },
     },
-    -- 8 = The Sanctuary of Zi'tah
-    [8] =
+    [xi.zone.MERIPHATAUD_MOUNTAINS] =
     {
-        { x = 421, z = -303 },
+        eventID = 7,
+        spots =
+        {
+            { x = 528.210, z = 632.550 },  -- (J-4)
+            { x = 189.600, z = -490.170 }, -- (H-11)
+            { x = 650.320, z = -349.700 }, -- (K-10)
+            { x = 631.820, z = 133.470 },  -- (K-7)
+            { x = -470.700, z = -29.390 }, -- (D-8)
+            { x = -516.070, z = 306.270 }, -- (D-6) W of center
+            { x = 112.600, z = 555.390 },  -- (H-5) NW corner
+            { x = -465.640, z = -296.50 }, -- (D-10)
+            { x = 164.510, z = 165.470 },  -- (H-7) Middle on top of little ledge
+        },
     },
-    -- 9 = Yuhtunga Jungle
-    [9] =
+    [xi.zone.THE_SANCTUARY_OF_ZITAH] =
     {
-        { x = -162, z = 250 },
+        eventID = 8,
+        spots =
+        {
+            { x = -439.047, z = 122.349 },  -- (E-8)
+            { x = -343.491, z = 133.725 },  -- (F-8)
+            { x = -177.383, z = -279.362 }, -- (G-10)
+            { x = 13.719, z = 88.664 },     -- (H-8)
+            { x = 20.483, z = -146.541 },   -- (H-9)
+            { x = 236.046, z = -273.312 },  -- (I-10)
+            { x = 275.428, z = 159.460 },   -- (J-7)
+        },
     },
-    -- 10 = Yhoator Jungle
-    [10] =
+    [xi.zone.YUHTUNGA_JUNGLE] =
     {
-        { x = 198, z = -487 },
+        eventID = 9,
+        spots =
+        {
+            { x = -555.544, z = -80.067 },  -- (E-9)
+            { x = -438.777, z = -388.825 }, -- (F-11)
+            { x = -402.770, z = -259.826 }, -- (F-10)
+            { x = -201.421, z = -438.868 }, -- (G-11)
+            { x = 294.342, z = 211.039 },   -- (J-7)
+            { x = 122.505, z = 432.139 },   -- (I-6)
+            { x = -122.441, z = 444.200 },  -- (H-6)
+            { x = -130.948, z = 203.126 },  -- (H-7)
+        },
     },
-    -- 11 = Western Altepa Desert
-    [11] =
+    [xi.zone.YHOATOR_JUNGLE] =
     {
-        { x = -37, z = 398 },
+        eventID = 10,
+        spots =
+        {
+            { x = -2.428, z = -359.037 },   -- (H-10)
+            { x = -397.683, z = -260.857 }, -- (F-9) Under the log
+            { x = -255.970, z = -123.890 }, -- (F-9) NE of tele
+            { x = -385.761, z = -383.388 }, -- (F-10)
+            { x = 186.28, z = -187.310 },   -- (I-9)
+            { x = -83.513, z = 224.256 },   -- (G-7) Directly under the signpost
+            { x = -231.969, z = -144.198 }, -- (G-9) Just east of telepoint
+        },
     },
-    -- 12 = Eastern Altepa Desert
-    [12] =
+    [xi.zone.WESTERN_ALTEPA_DESERT] =
     {
-        { x = 14, z = 187 },
+        eventID = 11,
+        spots =
+        {
+            { x = -811.000, z = -396.380 }, -- (D-10)
+            { x = -637.710, z = -676.310 }, -- (E-11)
+            { x = -429.9, z = -33.000 },    -- (F-7)
+            { x = -165.390, z = -172.490 }, -- (H-8)
+            { x = 90.920, z = 50.630 },     -- (I-7)
+            { x = 567.740, z = 230.710 },   -- (L-6)
+            { x = 571.580, z = -10.900 },   -- (L-7) SE corner between two large cacti
+            { x = 674.245, z = 46.084 },    -- (M-7)
+            { x = -3.805, z = 348.229 },    -- (I-5)
+            { x = 334.699, z = 105.761 },   -- (K-7) NW corner
+        },
+    },
+    [xi.zone.EASTERN_ALTEPA_DESERT] =
+    {
+        eventID = 12,
+        spots =
+        {
+            { x = -309.358, z = 49.217 },   -- (F-8) NW corner
+            { x = 419.165, z = 38.675 },    -- (J-8) NE of center
+            { x = 368.639, z = -208.379 },  -- (J-9) SW corner
+            { x = 37.012, z = -393.275 },   -- (H-10) SW corner
+            { x = -197.142, z = 285.642 },  -- (F-6) SE corner
+            { x = 20.214, z = 73.494 },     -- (H-8) NW corner
+            { x = -189.196, z = 32.195 },   -- (F-8) NE corner
+            { x = 85.507, z = 313.316},     -- (H-6) Center
+            { x = 469.810, z = 222.405 },   -- (J/K-7) Upper third of square
+            { x = -215.823, z = -181.996 }, -- (F-9) Center
+        },
     },
 }
 
 xi.amk.helpers.tryRandomlyPlaceDiggingLocation = function(player)
     local diggingZoneOffset = xi.amk.helpers.getDiggingZone(player)
-    local diggingSiteTable  = xi.amk.helpers.digSites[diggingZoneOffset]
+    local diggingZoneId = digZoneIds[diggingZoneOffset]
+    local diggingSiteTable = xi.amk.helpers.digSites[diggingZoneId].spots
 
-    player:setLocalVar('AMK_DIG_SITE_INDEX', math.random(1, #diggingSiteTable))
+    player:setLocalVar('Mission[10][6]diggingSpot', math.random(1, #diggingSiteTable))
 end
 
-xi.amk.helpers.chocoboDig = function(player, zoneID, text)
+xi.amk.helpers.chocoboDig = function(player, zoneId, text)
     local diggingZoneOffset = xi.amk.helpers.getDiggingZone(player)
 
     if
         player:hasKeyItem(xi.ki.MOLDY_WORM_EATEN_CHEST) or
-        player:getZoneID() ~= digZoneIds[diggingZoneOffset]
+        zoneId ~= digZoneIds[diggingZoneOffset]
     then
         return false
     end
 
     local playerPos = player:getPos()
 
-    -- Get target position from the digSites table using AMK_DIG_SITE_INDEX
-    local diggingSiteTable  = xi.amk.helpers.digSites[diggingZoneOffset]
-    local digSiteIndex      = player:getLocalVar('AMK_DIG_SITE_INDEX')
+    -- Get target position from the digSites table
+    local diggingSiteTable  = xi.amk.helpers.digSites[zoneId].spots
+    local diggingSpot = player:getLocalVar('Mission[10][6]diggingSpot')
 
-    local targetPos = diggingSiteTable[digSiteIndex]
-    local targetX   = targetPos.x
-    local targetZ   = targetPos.z
+    local targetPos = diggingSiteTable[diggingSpot]
+    local targetX = targetPos.x
+    local targetZ = targetPos.z
 
     local distance = player:checkDistance(targetX, playerPos.y, targetZ)
 
     -- Success!
-    if distance < 2.5 then
+    if distance < 5 then
         npcUtil.giveKeyItem(player, xi.ki.MOLDY_WORM_EATEN_CHEST)
         return true
     end
@@ -219,22 +364,22 @@ xi.amk.helpers.chocoboDig = function(player, zoneID, text)
     -- No additional hint (Approx: 201'+ from target)
     if distance > 200 then
     -- You have a hunch this area would be favored by moogles... (Approx. 81-200' from target or two map grids)
-    elseif distance > 80 then
+    elseif distance > 120 then
         player:messageSpecial(text.AMK_DIGGING_OFFSET + 5, direction)
     -- You have a vague feeling that a moogle would enjoy traversing this terrain... (Approx. 51-80' from target)
-    elseif distance > 50 then
+    elseif distance > 80 then
         player:messageSpecial(text.AMK_DIGGING_OFFSET + 4, direction)
     -- You suspect that the scenery around here would be to a moogle's liking... (Approx. 21-50' from target)
-    elseif distance > 20 then
+    elseif distance > 50 then
         player:messageSpecial(text.AMK_DIGGING_OFFSET + 3, direction)
     -- You have a feeling your moogle friend has been through this way... (Approx. 11-20' from target)
-    elseif distance > 10 then
+    elseif distance > 20 then
         player:messageSpecial(text.AMK_DIGGING_OFFSET + 2, direction)
     -- You get the distinct sense that your moogle friend frequents this spot... (Approx. 5-10' from target)
-    elseif distance > 5 then
+    elseif distance > 10 then
         player:messageSpecial(text.AMK_DIGGING_OFFSET + 1, direction)
     -- You are convinced that your moogle friend has been digging in the immediate vicinity. (Less than 5' from target)
-    elseif distance > 2.5 then
+    elseif distance > 5 then
         player:messageSpecial(text.AMK_DIGGING_OFFSET + 0, direction)
     end
 

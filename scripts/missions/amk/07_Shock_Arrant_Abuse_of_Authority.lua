@@ -32,8 +32,9 @@ mission.sections =
             {
                 -- Reminder
                 onTrigger = function(player, npc)
+                    -- Variable is stored as 1-indexed zone offset, cutscenes are 0-indexed
                     local diggingZone = xi.amk.helpers.getDiggingZone(player)
-                    return mission:progressEvent(10182, diggingZone)
+                    return mission:progressEvent(10182, diggingZone) - 1
                 end,
             },
 
@@ -59,7 +60,8 @@ mission.sections =
             {
                 -- Reminder
                 onTrigger = function(player, npc)
-                    local diggingZone = xi.amk.helpers.getDiggingZone(player)
+                    -- Variable is stored as 1-indexed zone offset, cutscenes are 0-indexed
+                    local diggingZone = xi.amk.helpers.getDiggingZone(player) - 1
                     return mission:progressEvent(10189, diggingZone)
                 end,
             },

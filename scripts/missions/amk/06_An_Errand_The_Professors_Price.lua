@@ -36,6 +36,7 @@ local orbKeyItems =
 }
 
 local beginCardianFight = function(player, npc)
+    -- TODO: Increase default number of cardians to 20 as is required. Mob IDs missing
     local numToSpawn = 15
 
     local modsToAdd = {}
