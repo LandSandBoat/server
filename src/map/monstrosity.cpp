@@ -139,6 +139,7 @@ void monstrosity::HandleEquipChangePacket(CCharEntity* PChar, CBasicPacket& data
     // TODO: Validate that we have the species/instinct that we're trying to equip
 
     // TODO: Validate that we'll have enough points to hold our instincts when we equip
+    // NOTE: The amount of pointer per level is level + 10, this is set in the client
 
     uint8 flag = data.ref<uint16>(0x0A);
     if (flag == 0x01) // Species Change
