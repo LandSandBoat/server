@@ -495,7 +495,7 @@ INSERT INTO `guild_shops` VALUES
     (530, 4441, 720, 4650, 165, 0, 65), -- bottle of grape juice
     (530, 4371, 266, 853, 55, 0, 22), -- slice of grilled hare
     (530, 4409, 72, 371, 165, 0, 65), -- hard-boiled egg
-    (530, 4358, 139, 136, 255, 0, 100), -- slice of hare meat
+    (530, 4358, 136, 139, 255, 0, 100), -- slice of hare meat
     (530, 4370, 240, 590, 255, 0, 100), -- pot of honey
     (530, 631, 200, 200, 255, 0, 100), -- bag of horo flour
     (530, 4556, 10644, 10644, 55, 0, 22), -- serving of icecap rolanberry
