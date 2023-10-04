@@ -21,6 +21,7 @@ zones[xi.zone.OLDTON_MOVALPOLOS] =
         MEMBERS_LEVELS_ARE_RESTRICTED = 7023, -- Your party is unable to participate because certain members' levels are restricted.
         CONQUEST_BASE                 = 7060, -- Tallying conquest results...
         FISHING_MESSAGE_OFFSET        = 7579, -- You can't fish here.
+        NOTHING_OUT_OF_ORDINARY       = 7689, -- There is nothing out of the ordinary here.
         MINING_IS_POSSIBLE_HERE       = 7710, -- Mining is possible here if you have <item>.
         BRAKOBRIK_1                   = 7718, -- Stupid people. You don't getting what I'm saying.
         BRAKOBRIK_2                   = 7722, -- Killing bombs. Bringing *item*
@@ -30,6 +31,8 @@ zones[xi.zone.OLDTON_MOVALPOLOS] =
         ALTANA_DIE                    = 7736, -- Aaaltaaanaaa...Diiieee!!!
         MONSTER_APPEARED              = 7749, -- A monster has appeared!
         CHEST_UNLOCKED                = 7758, -- You unlock the chest!
+        RUSTY_IRON_BOX                = 8057, -- There is a rusty iron box with strange markings and a narrow slit on the lid.
+        RECOMMENDATION_LETTER         = 8058, -- You slip the recommendation letter through the opening on the lid of the box.
         COMMON_SENSE_SURVIVAL         = 8116, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
     mob =
@@ -39,14 +42,22 @@ zones[xi.zone.OLDTON_MOVALPOLOS] =
             [16822421] = 16822423, -- -81.31 31.493 210.675 (west)
             [16822426] = 16822427, -- 58.013, 15.5, -121.928 (east)
         },
-        GOBLIN_WOLFMAN        = 16822459,
-        BUGALLUG              = 16822456,
+        GOBLIN_WOLFMAN               = 16822459,
+        BUGALLUG                     = 16822456,
+        GOBLIN_PRECEPTOR             = 16822460,
+        GRIMOIRE_GURU_GRIMOGEK       = 16822461,
+        DREAD_DEALING_DREDODAK       = 16822462,
+        BUGBEAR_PORTERMAN1           = 16822463,
+        BUGBEAR_PORTERMAN2           = 16822464,
+        BUGBEAR_PORTERMAN3           = 16822465,
+        BUGBEAR_PORTERMAN4           = 16822466,
     },
     npc =
     {
         SCRAWLED_WRITING = 16822469,
         OVERSEER_BASE    = 16822509, -- first Conquest_Banner in npc_list
         TREASURE_CHEST   = 16822531,
+        IRON_BOX         = 16822544,
         MINING =
         {
             16822525,
