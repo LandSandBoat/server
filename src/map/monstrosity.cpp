@@ -44,9 +44,18 @@ struct MonstrositySpeciesRow
     uint16      look;
 };
 
+struct MonstrosityInstinctRow
+{
+    uint16                 monstrosityInstinctId;
+    uint8                  cost;
+    std::string            name;
+    std::vector<CModifier> mods;
+};
+
 namespace
 {
-    std::unordered_map<uint16, MonstrositySpeciesRow> gMonstrosityDataBySpeciesMap;
+    std::unordered_map<uint16, MonstrositySpeciesRow> gMonstrositySpeciesMap;
+    std::unordered_map<uint16, MonstrosityInstinctRow> gMonstrosityInstinctMap;
 } // namespace
 
 monstrosity::MonstrosityData_t::MonstrosityData_t()
@@ -92,7 +101,36 @@ void monstrosity::LoadStaticData()
             row.name                   = sql->GetStringData(2);
             row.look                   = static_cast<uint16>(sql->GetUIntData(3));
 
-            gMonstrosityDataBySpeciesMap[row.monstrositySpeciesCode] = row;
+            gMonstrositySpeciesMap[row.monstrositySpeciesCode] = row;
+        }
+    }
+
+    ret = sql->Query("SELECT monstrosity_instinct_id, cost, name FROM monstrosity_instincts;");
+    if (ret != SQL_ERROR && sql->NumRows() != 0)
+    {
+        while (sql->NextRow() == SQL_SUCCESS)
+        {
+            MonstrosityInstinctRow row;
+
+            row.monstrosityInstinctId  = static_cast<uint16>(sql->GetUIntData(0));
+            row.cost                   = static_cast<uint8>(sql->GetUIntData(1));
+            row.name                   = sql->GetStringData(2);
+
+            gMonstrosityInstinctMap[row.monstrosityInstinctId] = row;
+        }
+    }
+
+    for (auto& [_, entry] : gMonstrosityInstinctMap)
+    {
+        ret = sql->Query("SELECT monstrosity_instinct_id, modId, value FROM monstrosity_instinct_mods WHERE monstrosity_instinct_id = %d;", entry.monstrosityInstinctId);
+        if (ret != SQL_ERROR && sql->NumRows() != 0)
+        {
+            while (sql->NextRow() == SQL_SUCCESS)
+            {
+                auto mod = static_cast<Mod>(sql->GetUIntData(0));
+                auto val = static_cast<int16>(sql->GetIntData(1));
+                entry.mods.emplace_back(CModifier(mod, val));
+            }
         }
     }
 }
@@ -162,7 +200,7 @@ void monstrosity::HandleEquipChangePacket(CCharEntity* PChar, CBasicPacket& data
 
         auto newSpecies = data.ref<uint16>(0x0C);
 
-        auto data = gMonstrosityDataBySpeciesMap[newSpecies];
+        auto data = gMonstrositySpeciesMap[newSpecies];
 
         // For debugging and data entry
         ShowInfo(fmt::format("Species: {}: {}", newSpecies, data.name));
@@ -219,7 +257,7 @@ void monstrosity::HandleEquipChangePacket(CCharEntity* PChar, CBasicPacket& data
 
 void monstrosity::MaxAllLevels(CCharEntity* PChar)
 {
-    for (auto const& [_, entry] : gMonstrosityDataBySpeciesMap)
+    for (auto const& [_, entry] : gMonstrositySpeciesMap)
     {
         PChar->m_PMonstrosity->levels[entry.monstrosityId] = 99;
     }
@@ -228,7 +266,7 @@ void monstrosity::MaxAllLevels(CCharEntity* PChar)
 void monstrosity::UnlockAllInstincts(CCharEntity* PChar)
 {
     // Level based
-    for (auto const& [_, entry] : gMonstrosityDataBySpeciesMap)
+    for (auto const& [_, entry] : gMonstrositySpeciesMap)
     {
         uint8 level        = 99;
         uint8 byteOffset   = entry.monstrosityId / 4;
