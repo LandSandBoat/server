@@ -140,6 +140,13 @@ void monstrosity::HandleEquipChangePacket(CCharEntity* PChar, CBasicPacket& data
     {
         PChar->m_PMonstrosity->Species = data.ref<uint16>(0x0C);
         PChar->m_PMonstrosity->Look = gMonstrositySpeciesMap[PChar->m_PMonstrosity->Species].look;
+
+        // TODO: Detect variants and don't remove instincts
+        // Remove All
+        for (std::size_t idx = 0; idx < 12; ++idx)
+        {
+            PChar->m_PMonstrosity->EquippedInstincts[idx] = 0x0000;
+        }
     }
     else if (flag == 0x04) // Instinct Change
     {
@@ -148,14 +155,18 @@ void monstrosity::HandleEquipChangePacket(CCharEntity* PChar, CBasicPacket& data
         {
             for (std::size_t idx = 0; idx < 12; ++idx)
             {
-                PChar->m_PMonstrosity->EquippedInstincts[idx] = 0x0000;
+                uint16 value = data.ref<uint16>(0x10 + (idx * 2));
+                if (value != 0)
+                {
+                    PChar->m_PMonstrosity->EquippedInstincts[idx] = 0x0000;
+                }
             }
         }
         else // Set
         {
             for (std::size_t idx = 0; idx < 12; ++idx)
             {
-                uint16& value = data.ref<uint16>(0x10 + (idx * 2));
+                uint16 value = data.ref<uint16>(0x10 + (idx * 2));
                 if (value != 0)
                 {
                     PChar->m_PMonstrosity->EquippedInstincts[idx] = value;
