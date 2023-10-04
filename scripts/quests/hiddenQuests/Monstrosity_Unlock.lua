@@ -13,7 +13,7 @@ quest.sections =
     -- Intro chatter
     {
         check = function(player, questVars, vars)
-            return quest:getVar(player, 'Prog') == 0
+            return settings.main.ENABLE_MONSTROSITY == 1 and quest:getVar(player, 'Prog') == 0
         end,
 
         [xi.zone.PASHHOW_MARSHLANDS] =
