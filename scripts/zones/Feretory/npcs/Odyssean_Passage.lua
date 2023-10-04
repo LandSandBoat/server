@@ -19,7 +19,8 @@ end
 
 entity.onEventFinish = function(player, csid, option, npc)
     print('finish', csid, option)
-    -- Option 1: Leave?
+    -- Option 1: Leave & Teleport to last city zone
+    -- Option 529: Teleport to Al'Taieu
 end
 
 return entity
