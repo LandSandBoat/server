@@ -2453,8 +2453,8 @@ ID Number    Costume Name
 2468    Altana???
 2500
 2678    Arciela
-2882    FF14 Spriggan
 2881    DQ Slime
+2882    FF14 Spriggan
 2907    DQ She-Slime (Red Slime)
 2908    DQ Metal Slime
 2909    FF14 Spriggan

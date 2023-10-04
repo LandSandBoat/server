@@ -36,6 +36,7 @@ namespace monstrosity
     public:
         MonstrosityData_t();
 
+        uint8  MonstrosityId;
         uint16 Species;
         uint16 Flags;
         uint16 Look;

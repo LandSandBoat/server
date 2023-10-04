@@ -39,17 +39,19 @@ extern std::unique_ptr<SqlConnection> sql;
 struct MonstrositySpeciesRow
 {
     uint8       monstrosityId;
+    uint16      monstrositySpeciesCode;
     std::string name;
     uint16      look;
 };
 
 namespace
 {
-    std::unordered_map<uint8, MonstrositySpeciesRow> gMonstrositySpeciesMap;
+    std::unordered_map<uint16, MonstrositySpeciesRow> gMonstrosityDataBySpeciesMap;
 } // namespace
 
 monstrosity::MonstrosityData_t::MonstrosityData_t()
-: Species(0x0001)
+: MonstrosityId(0x01)
+, Species(0x0001)
 , Flags(0x0B44)
 , Look(0x010C)
 , NameBase(0x8001)
@@ -61,18 +63,19 @@ monstrosity::MonstrosityData_t::MonstrosityData_t()
 
 void monstrosity::LoadStaticData()
 {
-    int32 ret = sql->Query("SELECT monstrosity_id, name, look FROM monstrosity_species;");
+    int32 ret = sql->Query("SELECT monstrosity_id, monstrosity_species_code, name, look FROM monstrosity_species;");
     if (ret != SQL_ERROR && sql->NumRows() != 0)
     {
         while (sql->NextRow() == SQL_SUCCESS)
         {
             MonstrositySpeciesRow row;
 
-            row.monstrosityId = static_cast<uint8>(sql->GetUIntData(0));
-            row.name          = sql->GetStringData(1);
-            row.look          = static_cast<uint16>(sql->GetUIntData(2));
+            row.monstrosityId          = static_cast<uint8>(sql->GetUIntData(0));
+            row.monstrositySpeciesCode = static_cast<uint16>(sql->GetUIntData(1));
+            row.name                   = sql->GetStringData(2);
+            row.look                   = static_cast<uint16>(sql->GetUIntData(3));
 
-            gMonstrositySpeciesMap[row.monstrosityId] = row;
+            gMonstrosityDataBySpeciesMap[row.monstrositySpeciesCode] = row;
         }
     }
 }
@@ -115,6 +118,8 @@ void monstrosity::SendFullMonstrosityUpdate(CCharEntity* PChar)
     //     : The species box on the UI should never be empty - everything breaks if that happens.
     //     : We should detect a bad state and fall back to being a Lv1 Bunny if that happens.
 
+    // TODO: Only send model change packets when the model actually changes - otherwise it disappears!
+
     PChar->pushPacket(new CMonipulatorPacket1(PChar));
     PChar->pushPacket(new CMonipulatorPacket2(PChar));
     PChar->pushPacket(new CCharJobsPacket(PChar));
@@ -138,14 +143,26 @@ void monstrosity::HandleEquipChangePacket(CCharEntity* PChar, CBasicPacket& data
     uint8 flag = data.ref<uint16>(0x0A);
     if (flag == 0x01) // Species Change
     {
-        PChar->m_PMonstrosity->Species = data.ref<uint16>(0x0C);
-        PChar->m_PMonstrosity->Look = gMonstrositySpeciesMap[PChar->m_PMonstrosity->Species].look;
+        auto previousId = PChar->m_PMonstrosity->MonstrosityId;
 
-        // TODO: Detect variants and don't remove instincts
-        // Remove All
-        for (std::size_t idx = 0; idx < 12; ++idx)
+        auto newSpecies = data.ref<uint16>(0x0C);
+
+        auto data = gMonstrosityDataBySpeciesMap[newSpecies];
+
+        // For debugging and data entry
+        ShowInfo(fmt::format("Species: {}: {}", newSpecies, data.name));
+
+        PChar->m_PMonstrosity->Species = newSpecies;
+
+        PChar->m_PMonstrosity->MonstrosityId = data.monstrosityId;
+        PChar->m_PMonstrosity->Look          = data.look;
+
+        if (PChar->m_PMonstrosity->MonstrosityId != previousId)
         {
-            PChar->m_PMonstrosity->EquippedInstincts[idx] = 0x0000;
+            for (std::size_t idx = 0; idx < 12; ++idx)
+            {
+                PChar->m_PMonstrosity->EquippedInstincts[idx] = 0x0000;
+            }
         }
     }
     else if (flag == 0x04) // Instinct Change
@@ -169,6 +186,7 @@ void monstrosity::HandleEquipChangePacket(CCharEntity* PChar, CBasicPacket& data
                 uint16 value = data.ref<uint16>(0x10 + (idx * 2));
                 if (value != 0)
                 {
+                    ShowInfo(fmt::format("{}: {}", idx, value));
                     PChar->m_PMonstrosity->EquippedInstincts[idx] = value == 0xFFFF ? 0x0000 : value;
                 }
             }
@@ -180,34 +198,27 @@ void monstrosity::HandleEquipChangePacket(CCharEntity* PChar, CBasicPacket& data
         PChar->m_PMonstrosity->NamePrefix2 = data.ref<uint8>(0x29);
     }
 
-    // std::string EquipStr = "";
-    // for (std::size_t idx = 0; idx < 12; ++idx)
-    // {
-    //     EquipStr += fmt::format("{}: {}, ", idx, PChar->m_PMonstrosity->EquippedInstincts[idx]);
-    // }
-    // ShowInfo(EquipStr.c_str());
-
     // TODO: Is this too much traffic?
     SendFullMonstrosityUpdate(PChar);
 }
 
 void monstrosity::MaxAllLevels(CCharEntity* PChar)
 {
-    for (auto const& [monstrosityId, entry] : gMonstrositySpeciesMap)
+    for (auto const& [_, entry] : gMonstrosityDataBySpeciesMap)
     {
-        PChar->m_PMonstrosity->levels[monstrosityId] = 99;
+        PChar->m_PMonstrosity->levels[entry.monstrosityId] = 99;
     }
 }
 
 void monstrosity::UnlockAllInstincts(CCharEntity* PChar)
 {
     // Level based
-    for (auto const& [monstrosityId, entry] : gMonstrositySpeciesMap)
+    for (auto const& [_, entry] : gMonstrosityDataBySpeciesMap)
     {
         uint8 level        = 99;
-        uint8 byteOffset   = monstrosityId / 4;
+        uint8 byteOffset   = entry.monstrosityId / 4;
         uint8 unlockAmount = level / 30;
-        uint8 shiftAmount  = (monstrosityId * 2) % 8;
+        uint8 shiftAmount  = (entry.monstrosityId * 2) % 8;
 
         // Special case for writing Slime & Spriggan data at the end of the 64-byte array
         if (byteOffset == 31)
