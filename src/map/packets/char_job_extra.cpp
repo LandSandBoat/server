@@ -142,10 +142,8 @@ CCharJobExtraPacket::CCharJobExtraPacket(CCharEntity* PChar, bool mjob)
     {
         ref<uint16>(0x08) = PChar->m_PMonstrosity->Species;
 
-        for (std::size_t idx = 0; idx < 12; ++idx)
-        {
-            ref<uint8>(0x0C + (idx * 2)) = PChar->m_PMonstrosity->EquippedInstincts[idx];
-        }
+        std::memcpy(data + 0x0C, PChar->m_PMonstrosity->EquippedInstincts.data(), sizeof(PChar->m_PMonstrosity->EquippedInstincts));
+
 
         // 0x24: Name1?
         // 0x25: Name2?
