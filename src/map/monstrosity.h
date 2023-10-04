@@ -41,7 +41,6 @@ namespace monstrosity
         uint16 Flags;
         uint16 Look;
 
-        uint16 NameBase;
         uint8  NamePrefix1;
         uint8  NamePrefix2;
 
@@ -51,7 +50,8 @@ namespace monstrosity
         std::array<uint8, 32>  variants{ 0 };
     };
 
-    void   LoadStaticData();
+    void LoadStaticData();
+
     void   HandleZoneIn(CCharEntity* PChar);
     uint32 GetPackedMonstrosityName(CCharEntity* PChar);
     void   SendFullMonstrosityUpdate(CCharEntity* PChar);

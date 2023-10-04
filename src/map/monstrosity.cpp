@@ -54,15 +54,32 @@ monstrosity::MonstrosityData_t::MonstrosityData_t()
 , Species(0x0001)
 , Flags(0x0B44)
 , Look(0x010C)
-, NameBase(0x8001)
 , NamePrefix1(0x00)
 , NamePrefix2(0x00)
 {
     // TODO: Populate instinct and levels from db
+
+    // To load:
+    // Currrent MonstrosityId
+    // Current Species
+    // Current SpeciesExp
+    // Current NamePrefix1
+    // Current NamePrefix2
+    // Current EquippedInstincts
+    // Current levels
+    // Current instincts
+    // Current variants
+
+    // Can be inferred/looked up:
+    // Current Look
+    // Current Flags (?) // Maybe these should be in the static data, if its mob size flags
+    // Current SpeciesLevel (levels[MonstrosityId])
 }
 
 void monstrosity::LoadStaticData()
 {
+    ShowInfo("Loading Monstrosity data");
+
     int32 ret = sql->Query("SELECT monstrosity_id, monstrosity_species_code, name, look FROM monstrosity_species;");
     if (ret != SQL_ERROR && sql->NumRows() != 0)
     {
@@ -82,9 +99,6 @@ void monstrosity::LoadStaticData()
 
 void monstrosity::HandleZoneIn(CCharEntity* PChar)
 {
-    // TODO: Move to map.cpp
-    LoadStaticData();
-
     // TODO: Check we're about to enter monstrosity, charvar, flag, etc.
     if (charutils::GetCharVar(PChar, "MONSTROSITY_START") == 1)
     {
