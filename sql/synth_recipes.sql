@@ -1299,6 +1299,7 @@ INSERT INTO `synth_recipes` VALUES (15514,0,0,0,118,0,0,0,0,0,0,4096,4238,687,87
 -- INSERT INTO `synth_recipes` VALUES (15531,0,1997,0,255,0,0,0,0,0,0,4096,4238,4075,9248,21558,0,0,0,0,0,21559,21560,21560,21560,1,1,1,1,'Raetic Kris');
 -- INSERT INTO `synth_recipes` VALUES (15532,0,0,255,255,0,0,0,0,0,0,4096,4238,4077,4080,9246,16942,0,0,0,0,21656,21657,21657,21657,1,1,1,1,'Dyrnwyn');
 -- INSERT INTO `synth_recipes` VALUES (15533,0,1998,0,255,0,0,0,255,0,0,4102,4244,9005,9062,9249,9831,9844,9845,9845,9864,21582,21583,21584,21584,1,1,1,1,'Etoile Knife');
+INSERT INTO `synth_recipes` VALUES (19900,1,0,0,87,0,0,0,0,0,0,4100,4242,17286,0,0,0,0,0,0,0,914,1225,1225,657,1,4,6,1,'Rising Sun (desynth)');
 INSERT INTO `synth_recipes` VALUES (19901,1,0,0,21,0,0,0,0,0,0,4100,4242,15288,0,0,0,0,0,0,0,672,850,850,850,1,1,2,4,'Pellet Belt (desynth)'); -- use synth lvl, scaled xiclopedia data from 1/1/1/4
 INSERT INTO `synth_recipes` VALUES (19902,1,0,0,18,0,0,0,0,0,0,4100,4242,12299,0,0,0,0,0,0,0,715,649,649,649,1,3,2,3,'Aspis (desynth)');
 INSERT INTO `synth_recipes` VALUES (19903,1,0,0,25,0,0,0,0,0,0,4100,4242,16565,0,0,0,0,0,0,0,649,649,649,852,1,2,3,1,'Spatha (desynth)'); -- based on synth lvl, xiclopedia results data
