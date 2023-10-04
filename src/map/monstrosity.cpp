@@ -169,7 +169,7 @@ void monstrosity::HandleEquipChangePacket(CCharEntity* PChar, CBasicPacket& data
                 uint16 value = data.ref<uint16>(0x10 + (idx * 2));
                 if (value != 0)
                 {
-                    PChar->m_PMonstrosity->EquippedInstincts[idx] = value;
+                    PChar->m_PMonstrosity->EquippedInstincts[idx] = value == 0xFFFF ? 0x0000 : value;
                 }
             }
         }
