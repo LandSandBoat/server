@@ -41,8 +41,8 @@ namespace monstrosity
         uint16 Flags;
         uint16 Look;
 
-        uint8  NamePrefix1;
-        uint8  NamePrefix2;
+        uint8 NamePrefix1;
+        uint8 NamePrefix2;
 
         std::array<uint16, 12> EquippedInstincts{ 0 };
         std::array<uint8, 128> levels{ 0 };

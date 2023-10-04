@@ -54,15 +54,15 @@ struct MonstrosityInstinctRow
 
 namespace
 {
-    std::unordered_map<uint16, MonstrositySpeciesRow> gMonstrositySpeciesMap;
+    std::unordered_map<uint16, MonstrositySpeciesRow>  gMonstrositySpeciesMap;
     std::unordered_map<uint16, MonstrosityInstinctRow> gMonstrosityInstinctMap;
 } // namespace
 
 monstrosity::MonstrosityData_t::MonstrosityData_t()
-: MonstrosityId(0x01)
-, Species(0x0001)
-, Flags(0x0B44)
-, Look(0x010C)
+: MonstrosityId(0x01) // Rabbit
+, Species(0x0001)     // Rabbit
+, Flags(0x0B44)       // ?
+, Look(0x010C)        // Rabbit
 , NamePrefix1(0x00)
 , NamePrefix2(0x00)
 {
@@ -112,9 +112,9 @@ void monstrosity::LoadStaticData()
         {
             MonstrosityInstinctRow row;
 
-            row.monstrosityInstinctId  = static_cast<uint16>(sql->GetUIntData(0));
-            row.cost                   = static_cast<uint8>(sql->GetUIntData(1));
-            row.name                   = sql->GetStringData(2);
+            row.monstrosityInstinctId = static_cast<uint16>(sql->GetUIntData(0));
+            row.cost                  = static_cast<uint8>(sql->GetUIntData(1));
+            row.name                  = sql->GetStringData(2);
 
             gMonstrosityInstinctMap[row.monstrosityInstinctId] = row;
         }
