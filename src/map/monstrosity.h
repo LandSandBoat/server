@@ -41,8 +41,8 @@ namespace monstrosity
         uint16 Flags;
         uint16 Look;
 
-        uint8  NamePrefix1;
-        uint8  NamePrefix2;
+        uint8 NamePrefix1;
+        uint8 NamePrefix2;
 
         std::array<uint16, 12> EquippedInstincts{ 0 };
         std::array<uint8, 128> levels{ 0 };
@@ -56,6 +56,8 @@ namespace monstrosity
     uint32 GetPackedMonstrosityName(CCharEntity* PChar);
     void   SendFullMonstrosityUpdate(CCharEntity* PChar);
     void   HandleEquipChangePacket(CCharEntity* PChar, CBasicPacket& data);
+
+    void SetLevel(CCharEntity* PChar, uint8 id, uint8 level);
 
     // Debug
     void MaxAllLevels(CCharEntity* PChar);

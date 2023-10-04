@@ -54,15 +54,15 @@ struct MonstrosityInstinctRow
 
 namespace
 {
-    std::unordered_map<uint16, MonstrositySpeciesRow> gMonstrositySpeciesMap;
+    std::unordered_map<uint16, MonstrositySpeciesRow>  gMonstrositySpeciesMap;
     std::unordered_map<uint16, MonstrosityInstinctRow> gMonstrosityInstinctMap;
 } // namespace
 
 monstrosity::MonstrosityData_t::MonstrosityData_t()
-: MonstrosityId(0x01)
-, Species(0x0001)
-, Flags(0x0B44)
-, Look(0x010C)
+: MonstrosityId(0x01) // Rabbit
+, Species(0x0001)     // Rabbit
+, Flags(0x0B44)       // ?
+, Look(0x010C)        // Rabbit
 , NamePrefix1(0x00)
 , NamePrefix2(0x00)
 {
@@ -112,9 +112,9 @@ void monstrosity::LoadStaticData()
         {
             MonstrosityInstinctRow row;
 
-            row.monstrosityInstinctId  = static_cast<uint16>(sql->GetUIntData(0));
-            row.cost                   = static_cast<uint8>(sql->GetUIntData(1));
-            row.name                   = sql->GetStringData(2);
+            row.monstrosityInstinctId = static_cast<uint16>(sql->GetUIntData(0));
+            row.cost                  = static_cast<uint8>(sql->GetUIntData(1));
+            row.name                  = sql->GetStringData(2);
 
             gMonstrosityInstinctMap[row.monstrosityInstinctId] = row;
         }
@@ -203,7 +203,7 @@ void monstrosity::HandleEquipChangePacket(CCharEntity* PChar, CBasicPacket& data
         auto data = gMonstrositySpeciesMap[newSpecies];
 
         // For debugging and data entry
-        ShowInfo(fmt::format("Species: {}: {}", newSpecies, data.name));
+        // ShowInfo(fmt::format("Species: {}: {}", newSpecies, data.name));
 
         PChar->m_PMonstrosity->Species = newSpecies;
 
@@ -239,8 +239,24 @@ void monstrosity::HandleEquipChangePacket(CCharEntity* PChar, CBasicPacket& data
                 uint16 value = data.ref<uint16>(0x10 + (idx * 2));
                 if (value != 0)
                 {
-                    ShowInfo(fmt::format("{}: {}", idx, value));
-                    PChar->m_PMonstrosity->EquippedInstincts[idx] = value == 0xFFFF ? 0x0000 : value;
+                    if (value == 0xFFFF)
+                    {
+                        // Remove
+                        PChar->m_PMonstrosity->EquippedInstincts[idx] = 0x0000;
+                    }
+                    else
+                    {
+                        auto maybeInstinct = gMonstrosityInstinctMap.find(value);
+                        if (maybeInstinct != gMonstrosityInstinctMap.end())
+                        {
+                            auto instinct = (*maybeInstinct).second;
+
+                            // TODO: Check:
+                            // instinct.cost
+
+                            PChar->m_PMonstrosity->EquippedInstincts[idx] = value;
+                        }
+                    }
                 }
             }
         }
@@ -253,6 +269,13 @@ void monstrosity::HandleEquipChangePacket(CCharEntity* PChar, CBasicPacket& data
 
     // TODO: Is this too much traffic?
     SendFullMonstrosityUpdate(PChar);
+}
+
+void monstrosity::SetLevel(CCharEntity* PChar, uint8 id, uint8 level)
+{
+    // TODO: Validate id and level
+    // TODO: If not unlocked, unlock whatever id is
+    PChar->m_PMonstrosity->levels[id] = level;
 }
 
 void monstrosity::MaxAllLevels(CCharEntity* PChar)
