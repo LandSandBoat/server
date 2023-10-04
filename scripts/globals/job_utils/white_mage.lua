@@ -108,7 +108,7 @@ end
 
 xi.job_utils.white_mage.useDevotion = function(player, target, ability)
     -- Plus 5 percent mp recovers per extra devotion merit
-    local meritBonus = player:getMerit(xi.merit.DEVOTION) - 5
+    local meritBonus = player:getMerit(xi.merit.DEVOTION) * 5
     local mpPercent  = (25 + meritBonus) / 100
     local damageHP   = math.floor(player:getHP() * 0.25)
 
