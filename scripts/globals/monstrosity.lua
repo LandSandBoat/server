@@ -32,6 +32,10 @@ xi.monstrosity.unlockStartingMONs = function(player, choice)
             [xi.monstrosity.species.RABBIT]     = 1,
             [xi.monstrosity.species.MANDRAGORA] = 1,
             [xi.monstrosity.species.LIZARD]     = 1,
+        },
+        instincts =
+        {
+            [20] = 0x1F, -- Unlock all first tier player race instincts
         }
     }
 

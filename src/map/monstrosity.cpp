@@ -29,6 +29,7 @@
 #include "packets/char_appearance.h"
 #include "packets/char_job_extra.h"
 #include "packets/char_jobs.h"
+#include "packets/char_stats.h"
 #include "packets/monipulator1.h"
 #include "packets/monipulator2.h"
 
@@ -111,8 +112,9 @@ void monstrosity::LoadStaticData()
         {
             while (sql->NextRow() == SQL_SUCCESS)
             {
-                auto mod = static_cast<Mod>(sql->GetUIntData(0));
-                auto val = static_cast<int16>(sql->GetIntData(1));
+                std::ignore = static_cast<uint16>(sql->GetUIntData(0)); // id
+                auto mod    = static_cast<Mod>(sql->GetUIntData(1));
+                auto val    = static_cast<int16>(sql->GetIntData(2));
                 entry.mods.emplace_back(CModifier(mod, val));
             }
         }
@@ -266,6 +268,20 @@ void monstrosity::HandleZoneIn(CCharEntity* PChar)
         // This handles !monstrosity GM command, is this needed?
         WriteMonstrosityData(PChar);
 
+        // Add stats from equipped instincts
+        for (auto instinctId : PChar->m_PMonstrosity->EquippedInstincts)
+        {
+            auto maybeInstinct = gMonstrosityInstinctMap.find(instinctId);
+            if (maybeInstinct != gMonstrosityInstinctMap.end())
+            {
+                auto instinct = (*maybeInstinct).second;
+                for (auto const& mod : instinct.mods)
+                {
+                    PChar->addModifier(mod.getModID(), mod.getModAmount());
+                }
+            }
+        }
+
         PChar->updatemask |= UPDATE_LOOK;
     }
 }
@@ -307,6 +323,7 @@ void monstrosity::SendFullMonstrosityUpdate(CCharEntity* PChar)
     PChar->pushPacket(new CCharJobExtraPacket(PChar, true));
     PChar->pushPacket(new CCharJobExtraPacket(PChar, false));
     PChar->pushPacket(new CCharAppearancePacket(PChar));
+    PChar->pushPacket(new CCharStatsPacket(PChar));
     PChar->updatemask |= UPDATE_LOOK;
 }
 
@@ -354,6 +371,8 @@ void monstrosity::HandleEquipChangePacket(CCharEntity* PChar, CBasicPacket& data
     }
     else if (flag == 0x04) // Instinct Change
     {
+        auto previousEquipped = PChar->m_PMonstrosity->EquippedInstincts;
+
         // TODO:
         // NOTE: This is set by the client
         auto maxPoints = PChar->m_PMonstrosity->levels[PChar->m_PMonstrosity->MonstrosityId] + 10;
@@ -382,6 +401,11 @@ void monstrosity::HandleEquipChangePacket(CCharEntity* PChar, CBasicPacket& data
                     {
                         // Remove
                         PChar->m_PMonstrosity->EquippedInstincts[idx] = 0x0000;
+
+                        for (auto const& mod : gMonstrosityInstinctMap[previousEquipped[idx]].mods)
+                        {
+                            PChar->delModifier(mod.getModID(), mod.getModAmount());
+                        }
                     }
                     else
                     {
@@ -394,6 +418,11 @@ void monstrosity::HandleEquipChangePacket(CCharEntity* PChar, CBasicPacket& data
                             // instinct.cost
 
                             PChar->m_PMonstrosity->EquippedInstincts[idx] = value;
+
+                            for (auto const& mod : instinct.mods)
+                            {
+                                PChar->addModifier(mod.getModID(), mod.getModAmount());
+                            }
                         }
                     }
                 }

@@ -48,7 +48,6 @@ CMonipulatorPacket2::CMonipulatorPacket2(CCharEntity* PChar)
     // Spriggan Level
     ref<uint8>(0x87) = PChar->m_PMonstrosity->levels[127];
 
-    // Bitpacked 2-bit values. 0 = no instincts from that species, 1 == first instinct, 2 == first and second instinct, 3 == first, second, and third instinct.
     // Contains job/race instincts from the 0x03 set. Has 8 unused bytes. This is a 1:1 mapping.
     // Since this has 8 unused bytes, we're only going to use 4 from instincts[20:23]
     std::memcpy(data + 0x88, PChar->m_PMonstrosity->instincts.data() + 20, 4); // Instinct Bitfield 3
