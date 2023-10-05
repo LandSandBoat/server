@@ -6309,32 +6309,60 @@ void CLuaBaseEntity::addJobTraits(uint8 jobID, uint8 level)
 void CLuaBaseEntity::setMonstrosity(sol::table table)
 {
     auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity);
-    if (PChar == nullptr || PChar->m_PMonstrosity == nullptr)
+    if (PChar == nullptr)
     {
         return;
     }
 
-    for (auto const& [keyObj, valObj] : table.get<sol::table>("levels"))
+    // NOTE: This will populate m_PMonstrosity if it doesn't exist
+    monstrosity::ReadMonstrosityData(PChar);
+
+    if (table["monstrosityId"].valid())
     {
-        uint8 key = keyObj.as<uint8>();
-        uint8 val = valObj.as<uint8>();
-        PChar->m_PMonstrosity->levels[key] |= val;
+        PChar->m_PMonstrosity->MonstrosityId = table.get<uint8>("monstrosityId");
     }
 
-    for (auto const& [keyObj, valObj] : table.get<sol::table>("instincts"))
+    if (table["species"].valid())
     {
-        uint8 key = keyObj.as<uint8>();
-        uint8 val = valObj.as<uint8>();
-        PChar->m_PMonstrosity->instincts[key] |= val;
+        PChar->m_PMonstrosity->Species = table.get<uint16>("species");
     }
 
-    for (auto const& [keyObj, valObj] : table.get<sol::table>("variants"))
+    if (table["flags"].valid())
     {
-        uint8 key = keyObj.as<uint8>();
-        uint8 val = valObj.as<uint8>();
-        PChar->m_PMonstrosity->variants[key] |= val;
+        PChar->m_PMonstrosity->Flags = table.get<uint16>("flags");
     }
 
+    if (table["levels"].valid())
+    {
+        for (auto const& [keyObj, valObj] : table.get<sol::table>("levels"))
+        {
+            uint8 key = keyObj.as<uint8>();
+            uint8 val = valObj.as<uint8>();
+            PChar->m_PMonstrosity->levels[key] = val;
+        }
+    }
+
+    if (table["instincts"].valid())
+    {
+        for (auto const& [keyObj, valObj] : table.get<sol::table>("instincts"))
+        {
+            uint8 key = keyObj.as<uint8>();
+            uint8 val = valObj.as<uint8>();
+            PChar->m_PMonstrosity->instincts[key] |= val;
+        }
+    }
+
+    if (table["variants"].valid())
+    {
+        for (auto const& [keyObj, valObj] : table.get<sol::table>("variants"))
+        {
+            uint8 key = keyObj.as<uint8>();
+            uint8 val = valObj.as<uint8>();
+            PChar->m_PMonstrosity->variants[key] |= val;
+        }
+    }
+
+    monstrosity::WriteMonstrosityData(PChar);
     monstrosity::SendFullMonstrosityUpdate(PChar);
 }
 

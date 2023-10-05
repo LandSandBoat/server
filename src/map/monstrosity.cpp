@@ -186,6 +186,21 @@ void monstrosity::WriteMonstrosityData(CCharEntity* PChar)
         return;
     }
 
+    // TODO: Ensure there's a row to write to
+    {
+        bool needToCreate = false;
+        int32 ret = sql->Query("SELECT * FROM char_monstrosity WHERE charid = %d;", PChar->id);
+        if (ret != SQL_ERROR && sql->NumRows() == 0)
+        {
+            needToCreate = true;
+        }
+
+        if (needToCreate)
+        {
+            sql->Query("INSERT INTO char_monstrosity VALUES (%d, 1, 1, 0, 0, 0, 0, 0, 0, 0);;", PChar->id);
+        }
+    }
+
     const char* Query = "UPDATE char_monstrosity SET "
                         "current_monstrosity_id = '%d', "
                         "current_monstrosity_species = '%d', "
@@ -248,6 +263,9 @@ void monstrosity::HandleZoneIn(CCharEntity* PChar)
         // Populates PChar->m_PMonstrosity
         ReadMonstrosityData(PChar);
 
+        // This handles !monstrosity GM command, is this needed?
+        WriteMonstrosityData(PChar);
+
         PChar->updatemask |= UPDATE_LOOK;
     }
 }
@@ -274,6 +292,9 @@ void monstrosity::SendFullMonstrosityUpdate(CCharEntity* PChar)
         return;
     }
 
+    // Make sure look is up to date before we send packets
+    PChar->m_PMonstrosity->Look = gMonstrositySpeciesMap[PChar->m_PMonstrosity->Species].look;
+
     // TODO: Safety checks:
     //     : The species box on the UI should never be empty - everything breaks if that happens.
     //     : We should detect a bad state and fall back to being a Lv1 Bunny if that happens.
@@ -287,6 +308,11 @@ void monstrosity::SendFullMonstrosityUpdate(CCharEntity* PChar)
     PChar->pushPacket(new CCharJobExtraPacket(PChar, false));
     PChar->pushPacket(new CCharAppearancePacket(PChar));
     PChar->updatemask |= UPDATE_LOOK;
+}
+
+void monstrosity::HandleMonsterSkillActionPacket(CCharEntity* PChar, CBasicPacket& data)
+{
+    // TODO:
 }
 
 void monstrosity::HandleEquipChangePacket(CCharEntity* PChar, CBasicPacket& data)

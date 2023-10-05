@@ -13,7 +13,7 @@ quest.sections =
     -- Intro chatter
     {
         check = function(player, questVars, vars)
-            return settings.main.ENABLE_MONSTROSITY == 1 and quest:getVar(player, 'Prog') == 0
+            return xi.settings.main.ENABLE_MONSTROSITY == 1 and quest:getVar(player, 'Prog') == 0
         end,
 
         [xi.zone.PASHHOW_MARSHLANDS] =
@@ -99,6 +99,10 @@ quest.sections =
             },
         },
     },
+
+    -- On complete:
+    -- xi.monstrosity.unlockStartingMONs(player, xi.monstrosity.species.MANDRAGORA)
+    -- Then zone to Feretory
 }
 
 return quest
