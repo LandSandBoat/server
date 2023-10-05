@@ -133,9 +133,9 @@ void monstrosity::ReadMonstrosityData(CCharEntity* PChar)
             data->Species       = static_cast<uint16>(sql->GetUIntData(2));
             data->Look          = gMonstrositySpeciesMap[data->Species].look;
 
-            data->NamePrefix1   = static_cast<uint8>(sql->GetUIntData(3));
-            data->NamePrefix2   = static_cast<uint8>(sql->GetUIntData(4));
-            data->CurrentExp    = static_cast<uint32>(sql->GetUIntData(5));
+            data->NamePrefix1 = static_cast<uint8>(sql->GetUIntData(3));
+            data->NamePrefix2 = static_cast<uint8>(sql->GetUIntData(4));
+            data->CurrentExp  = static_cast<uint32>(sql->GetUIntData(5));
 
             // TODO: Make these a template in sql.h
             // equip
@@ -171,7 +171,7 @@ void monstrosity::ReadMonstrosityData(CCharEntity* PChar)
             }
 
             // TODO:
-            auto level = data->levels[data->MonstrosityId];
+            auto level  = data->levels[data->MonstrosityId];
             std::ignore = level;
         }
     }
@@ -228,16 +228,16 @@ void monstrosity::WriteMonstrosityData(CCharEntity* PChar)
     }
 
     sql->Query(Query,
-        PChar->m_PMonstrosity->MonstrosityId,
-        PChar->m_PMonstrosity->Species,
-        PChar->m_PMonstrosity->NamePrefix1,
-        PChar->m_PMonstrosity->NamePrefix2,
-        PChar->m_PMonstrosity->CurrentExp,
-        equipEscaped,
-        levelsEscaped,
-        instinctsEscaped,
-        variantsEscaped,
-        PChar->id);
+               PChar->m_PMonstrosity->MonstrosityId,
+               PChar->m_PMonstrosity->Species,
+               PChar->m_PMonstrosity->NamePrefix1,
+               PChar->m_PMonstrosity->NamePrefix2,
+               PChar->m_PMonstrosity->CurrentExp,
+               equipEscaped,
+               levelsEscaped,
+               instinctsEscaped,
+               variantsEscaped,
+               PChar->id);
 }
 
 void monstrosity::HandleZoneIn(CCharEntity* PChar)
@@ -331,7 +331,7 @@ void monstrosity::HandleEquipChangePacket(CCharEntity* PChar, CBasicPacket& data
         // TODO:
         // NOTE: This is set by the client
         auto maxPoints = PChar->m_PMonstrosity->levels[PChar->m_PMonstrosity->MonstrosityId] + 10;
-        std::ignore = maxPoints;
+        std::ignore    = maxPoints;
 
         // Remove All
         if (data.ref<uint16>(0x16) == 0xFFFF)

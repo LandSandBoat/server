@@ -6308,31 +6308,31 @@ void CLuaBaseEntity::addJobTraits(uint8 jobID, uint8 level)
 
 void CLuaBaseEntity::setMonstrosity(sol::table table)
 {
-    auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
-    if (PChar->m_PMonstrosity == nullptr)
+    auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity);
+    if (PChar == nullptr || PChar->m_PMonstrosity == nullptr)
     {
         return;
     }
 
     for (auto const& [keyObj, valObj] : table.get<sol::table>("levels"))
     {
-        uint8 key                          = keyObj.as<uint8>();
-        uint8 val                          = valObj.as<uint8>();
-        PChar->m_PMonstrosity->levels[key] = val;
+        uint8 key = keyObj.as<uint8>();
+        uint8 val = valObj.as<uint8>();
+        PChar->m_PMonstrosity->levels[key] |= val;
     }
 
     for (auto const& [keyObj, valObj] : table.get<sol::table>("instincts"))
     {
-        uint8 key                             = keyObj.as<uint8>();
-        uint8 val                             = valObj.as<uint8>();
-        PChar->m_PMonstrosity->instincts[key] = val;
+        uint8 key = keyObj.as<uint8>();
+        uint8 val = valObj.as<uint8>();
+        PChar->m_PMonstrosity->instincts[key] |= val;
     }
 
     for (auto const& [keyObj, valObj] : table.get<sol::table>("variants"))
     {
-        uint8 key                            = keyObj.as<uint8>();
-        uint8 val                            = valObj.as<uint8>();
-        PChar->m_PMonstrosity->variants[key] = val;
+        uint8 key = keyObj.as<uint8>();
+        uint8 val = valObj.as<uint8>();
+        PChar->m_PMonstrosity->variants[key] |= val;
     }
 
     monstrosity::SendFullMonstrosityUpdate(PChar);
