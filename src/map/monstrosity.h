@@ -44,6 +44,8 @@ namespace monstrosity
         uint8 NamePrefix1;
         uint8 NamePrefix2;
 
+        uint32 CurrentExp;
+
         std::array<uint16, 12> EquippedInstincts{ 0 };
         std::array<uint8, 128> levels{ 0 };
         std::array<uint8, 64>  instincts{ 0 };
@@ -51,6 +53,9 @@ namespace monstrosity
     };
 
     void LoadStaticData();
+
+    void ReadMonstrosityData(CCharEntity* PChar);
+    void WriteMonstrosityData(CCharEntity* PChar);
 
     void   HandleZoneIn(CCharEntity* PChar);
     uint32 GetPackedMonstrosityName(CCharEntity* PChar);

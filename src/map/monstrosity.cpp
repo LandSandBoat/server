@@ -63,26 +63,10 @@ monstrosity::MonstrosityData_t::MonstrosityData_t()
 , Species(0x0001)     // Rabbit
 , Flags(0x0B44)       // ?
 , Look(0x010C)        // Rabbit
-, NamePrefix1(0x00)
-, NamePrefix2(0x00)
+, NamePrefix1(0x00)   // Nothing
+, NamePrefix2(0x00)   // Nothing
+, CurrentExp(0)       // No exp
 {
-    // TODO: Populate instinct and levels from db
-
-    // To load:
-    // Currrent MonstrosityId
-    // Current Species
-    // Current SpeciesExp
-    // Current NamePrefix1
-    // Current NamePrefix2
-    // Current EquippedInstincts
-    // Current levels
-    // Current instincts
-    // Current variants
-
-    // Can be inferred/looked up:
-    // Current Look
-    // Current Flags (?) // Maybe these should be in the static data, if its mob size flags
-    // Current SpeciesLevel (levels[MonstrosityId])
 }
 
 void monstrosity::LoadStaticData()
@@ -135,22 +119,146 @@ void monstrosity::LoadStaticData()
     }
 }
 
+void monstrosity::ReadMonstrosityData(CCharEntity* PChar)
+{
+    auto data = std::make_unique<MonstrosityData_t>();
+
+    auto ret = sql->Query("SELECT charid, current_monstrosity_id, current_monstrosity_species, current_monstrosity_name_prefix_1, current_monstrosity_name_prefix_2, current_exp, equip, levels, instincts, variants FROM char_monstrosity WHERE charid = %d LIMIT 1;", PChar->id);
+    if (ret != SQL_ERROR && sql->NumRows() != 0)
+    {
+        while (sql->NextRow() == SQL_SUCCESS)
+        {
+            // charid: 0
+            data->MonstrosityId = static_cast<uint16>(sql->GetUIntData(1));
+            data->Species       = static_cast<uint16>(sql->GetUIntData(2));
+            data->Look          = gMonstrositySpeciesMap[data->Species].look;
+
+            data->NamePrefix1 = static_cast<uint8>(sql->GetUIntData(3));
+            data->NamePrefix2 = static_cast<uint8>(sql->GetUIntData(4));
+            data->CurrentExp  = static_cast<uint32>(sql->GetUIntData(5));
+
+            // TODO: Make these a template in sql.h
+            // equip
+            {
+                size_t length = 0;
+                char*  buffer = nullptr;
+                sql->GetData(6, &buffer, &length);
+                std::memcpy(&data->EquippedInstincts[0], buffer, (length > sizeof(data->EquippedInstincts) ? sizeof(data->EquippedInstincts) : length));
+            }
+
+            // levels
+            {
+                size_t length = 0;
+                char*  buffer = nullptr;
+                sql->GetData(7, &buffer, &length);
+                std::memcpy(&data->levels[0], buffer, (length > sizeof(data->levels) ? sizeof(data->levels) : length));
+            }
+
+            // instincts
+            {
+                size_t length = 0;
+                char*  buffer = nullptr;
+                sql->GetData(8, &buffer, &length);
+                std::memcpy(&data->instincts[0], buffer, (length > sizeof(data->instincts) ? sizeof(data->instincts) : length));
+            }
+
+            // variants
+            {
+                size_t length = 0;
+                char*  buffer = nullptr;
+                sql->GetData(9, &buffer, &length);
+                std::memcpy(&data->variants[0], buffer, (length > sizeof(data->variants) ? sizeof(data->variants) : length));
+            }
+
+            // TODO:
+            auto level  = data->levels[data->MonstrosityId];
+            std::ignore = level;
+        }
+    }
+
+    PChar->m_PMonstrosity = std::move(data);
+}
+
+void monstrosity::WriteMonstrosityData(CCharEntity* PChar)
+{
+    if (PChar->m_PMonstrosity == nullptr)
+    {
+        return;
+    }
+
+    const char* Query = "UPDATE char_monstrosity SET "
+                        "current_monstrosity_id = '%d', "
+                        "current_monstrosity_species = '%d', "
+                        "current_monstrosity_name_prefix_1 = '%d', "
+                        "current_monstrosity_name_prefix_2 = '%d', "
+                        "current_exp = '%d', "
+                        "equip = '%s', "
+                        "levels = '%s', "
+                        "instincts = '%s', "
+                        "variants = '%s'"
+                        "WHERE charid = %u;";
+
+    // TODO: Make these a template in sql.h
+    char equipEscaped[sizeof(PChar->m_PMonstrosity->EquippedInstincts) * 2 + 1];
+    {
+        char dataBlob[sizeof(PChar->m_PMonstrosity->EquippedInstincts)];
+        std::memcpy(dataBlob, &PChar->m_PMonstrosity->EquippedInstincts[0], sizeof(dataBlob));
+        sql->EscapeStringLen(equipEscaped, dataBlob, sizeof(dataBlob));
+    }
+
+    char levelsEscaped[sizeof(PChar->m_PMonstrosity->levels) * 2 + 1];
+    {
+        char dataBlob[sizeof(PChar->m_PMonstrosity->levels)];
+        std::memcpy(dataBlob, &PChar->m_PMonstrosity->levels[0], sizeof(dataBlob));
+        sql->EscapeStringLen(levelsEscaped, dataBlob, sizeof(dataBlob));
+    }
+
+    char instinctsEscaped[sizeof(PChar->m_PMonstrosity->instincts) * 2 + 1];
+    {
+        char dataBlob[sizeof(PChar->m_PMonstrosity->instincts)];
+        std::memcpy(dataBlob, &PChar->m_PMonstrosity->instincts[0], sizeof(dataBlob));
+        sql->EscapeStringLen(instinctsEscaped, dataBlob, sizeof(dataBlob));
+    }
+
+    char variantsEscaped[sizeof(PChar->m_PMonstrosity->variants) * 2 + 1];
+    {
+        char dataBlob[sizeof(PChar->m_PMonstrosity->variants)];
+        std::memcpy(dataBlob, &PChar->m_PMonstrosity->variants[0], sizeof(dataBlob));
+        sql->EscapeStringLen(variantsEscaped, dataBlob, sizeof(dataBlob));
+    }
+
+    sql->Query(Query,
+               PChar->m_PMonstrosity->MonstrosityId,
+               PChar->m_PMonstrosity->Species,
+               PChar->m_PMonstrosity->NamePrefix1,
+               PChar->m_PMonstrosity->NamePrefix2,
+               PChar->m_PMonstrosity->CurrentExp,
+               equipEscaped,
+               levelsEscaped,
+               instinctsEscaped,
+               variantsEscaped,
+               PChar->id);
+}
+
 void monstrosity::HandleZoneIn(CCharEntity* PChar)
 {
     // TODO: Check we're about to enter monstrosity, charvar, flag, etc.
     if (charutils::GetCharVar(PChar, "MONSTROSITY_START") == 1)
     {
-        PChar->m_PMonstrosity = std::make_unique<monstrosity::MonstrosityData_t>();
-        PChar->updatemask |= UPDATE_LOOK;
+        // Populates PChar->m_PMonstrosity
+        ReadMonstrosityData(PChar);
 
-        MaxAllLevels(PChar);
-        UnlockAllInstincts(PChar);
-        UnlockAllVariants(PChar);
+        PChar->updatemask |= UPDATE_LOOK;
     }
 }
 
 uint32 monstrosity::GetPackedMonstrosityName(CCharEntity* PChar)
 {
+    if (PChar->m_PMonstrosity == nullptr)
+    {
+        return 0x00000000;
+    }
+
     uint16 a = 0x8000 | PChar->m_PMonstrosity->Species;
     uint8  b = PChar->m_PMonstrosity->NamePrefix1;
     uint8  c = PChar->m_PMonstrosity->NamePrefix2;
@@ -220,6 +328,11 @@ void monstrosity::HandleEquipChangePacket(CCharEntity* PChar, CBasicPacket& data
     }
     else if (flag == 0x04) // Instinct Change
     {
+        // TODO:
+        // NOTE: This is set by the client
+        auto maxPoints = PChar->m_PMonstrosity->levels[PChar->m_PMonstrosity->MonstrosityId] + 10;
+        std::ignore    = maxPoints;
+
         // Remove All
         if (data.ref<uint16>(0x16) == 0xFFFF)
         {
@@ -267,12 +380,18 @@ void monstrosity::HandleEquipChangePacket(CCharEntity* PChar, CBasicPacket& data
         PChar->m_PMonstrosity->NamePrefix2 = data.ref<uint8>(0x29);
     }
 
+    WriteMonstrosityData(PChar);
+
     // TODO: Is this too much traffic?
     SendFullMonstrosityUpdate(PChar);
 }
 
 void monstrosity::SetLevel(CCharEntity* PChar, uint8 id, uint8 level)
 {
+    if (PChar->m_PMonstrosity == nullptr)
+    {
+        return;
+    }
     // TODO: Validate id and level
     // TODO: If not unlocked, unlock whatever id is
     PChar->m_PMonstrosity->levels[id] = level;
@@ -280,14 +399,24 @@ void monstrosity::SetLevel(CCharEntity* PChar, uint8 id, uint8 level)
 
 void monstrosity::MaxAllLevels(CCharEntity* PChar)
 {
+    if (PChar->m_PMonstrosity == nullptr)
+    {
+        return;
+    }
+
     for (auto const& [_, entry] : gMonstrositySpeciesMap)
     {
-        PChar->m_PMonstrosity->levels[entry.monstrosityId] = 99;
+        SetLevel(PChar, entry.monstrosityId, 99);
     }
 }
 
 void monstrosity::UnlockAllInstincts(CCharEntity* PChar)
 {
+    if (PChar->m_PMonstrosity == nullptr)
+    {
+        return;
+    }
+
     // Level based
     for (auto const& [_, entry] : gMonstrositySpeciesMap)
     {
@@ -333,6 +462,11 @@ void monstrosity::UnlockAllInstincts(CCharEntity* PChar)
 
 void monstrosity::UnlockAllVariants(CCharEntity* PChar)
 {
+    if (PChar->m_PMonstrosity == nullptr)
+    {
+        return;
+    }
+
     for (std::size_t idx = 0; idx < 256; ++idx)
     {
         uint8 byteOffset  = static_cast<uint8>(idx) / 8;

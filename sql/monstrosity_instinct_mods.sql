@@ -17,7 +17,7 @@ INSERT INTO `monstrosity_instinct_mods` VALUES (4,9,5);   -- DEX: 5
 INSERT INTO `monstrosity_instinct_mods` VALUES (4,68,10); -- EVA: 15
 
 -- Rabbit instinct III
+INSERT INTO `monstrosity_instinct_mods` VALUES (5,1,20);  -- DEF: 20
 INSERT INTO `monstrosity_instinct_mods` VALUES (5,9,5);   -- DEX: 5
 INSERT INTO `monstrosity_instinct_mods` VALUES (5,11,5);  -- AGI: 5
-INSERT INTO `monstrosity_instinct_mods` VALUES (5,1,20);  -- DEF: 20
-INSERT INTO `monstrosity_instinct_mods` VALUES (5,1,288); -- DOUBLE_ATTACK: 2
+INSERT INTO `monstrosity_instinct_mods` VALUES (5,288,2); -- DOUBLE_ATTACK: 2
