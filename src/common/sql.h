@@ -185,6 +185,16 @@ public:
 
     std::string GetStringData(size_t col);
 
+    template <typename T>
+    void GetBlobData(size_t col, T& destination)
+    {
+        // TTODO: Fix me
+        size_t length = 0;
+        char*  buffer = nullptr;
+        GetData(col, &buffer, &length);
+        // std::memcpy((void*)destination, buffer, (length > sizeof(T) ? sizeof(T) : length));
+    }
+
     /// Frees the result of the query.
     void FreeResult();
 

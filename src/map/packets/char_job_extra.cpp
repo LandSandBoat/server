@@ -52,7 +52,7 @@ CCharJobExtraPacket::CCharJobExtraPacket(CCharEntity* PChar, bool mjob)
         job = PChar->GetSJob();
     }
 
-    if (PChar->loc.zone->GetID() == ZONE_FERETORY && PChar->m_PMonstrosity != nullptr)
+    if (PChar->m_PMonstrosity != nullptr)
     {
         job = JOB_MON;
     }
@@ -138,7 +138,7 @@ CCharJobExtraPacket::CCharJobExtraPacket(CCharEntity* PChar, bool mjob)
 
         ref<uint8>(0x9C) = PChar->getMod(Mod::AUTO_ELEM_CAPACITY);
     }
-    else if (job == JOB_MON && PChar->loc.zone->GetID() == ZONE_FERETORY && PChar->m_PMonstrosity != nullptr)
+    else if (job == JOB_MON && PChar->m_PMonstrosity != nullptr)
     {
         ref<uint16>(0x08) = PChar->m_PMonstrosity->Species;
 
