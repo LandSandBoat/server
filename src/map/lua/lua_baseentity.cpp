@@ -6338,7 +6338,7 @@ void CLuaBaseEntity::setMonstrosity(sol::table table)
         {
             uint8 key = keyObj.as<uint8>();
             uint8 val = valObj.as<uint8>();
-            PChar->m_PMonstrosity->levels[key] = val;
+            PChar->m_PMonstrosity->levels[key] |= val;
         }
     }
 
