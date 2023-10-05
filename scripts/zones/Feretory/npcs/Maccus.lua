@@ -3,6 +3,8 @@
 --  NPC: Maccus
 -- !pos TODO
 -----------------------------------
+require('scripts/globals/monstrosity')
+-----------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

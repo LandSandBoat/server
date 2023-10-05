@@ -60,7 +60,9 @@ namespace monstrosity
     void   HandleZoneIn(CCharEntity* PChar);
     uint32 GetPackedMonstrosityName(CCharEntity* PChar);
     void   SendFullMonstrosityUpdate(CCharEntity* PChar);
-    void   HandleEquipChangePacket(CCharEntity* PChar, CBasicPacket& data);
+
+    void HandleMonsterSkillActionPacket(CCharEntity* PChar, CBasicPacket& data);
+    void HandleEquipChangePacket(CCharEntity* PChar, CBasicPacket& data);
 
     void SetLevel(CCharEntity* PChar, uint8 id, uint8 level);
 

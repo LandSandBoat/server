@@ -849,6 +849,8 @@ void SmallPacket0x01A(map_session_data_t* const PSession, CCharEntity* const PCh
                 return "Ballista - Scout";
             case 0x18:
                 return "Blockaid";
+            case 0x19:
+                return "Monstrosity Monster Skill";
             case 0x1A:
                 return "Mounts";
             default:
@@ -1173,6 +1175,11 @@ void SmallPacket0x01A(map_session_data_t* const PSession, CCharEntity* const PCh
             {
                 PChar->pushPacket(new CMessageSystemPacket(0, 0, 142));
             }
+        }
+        break;
+        case 0x19: // Monstrosity Monster Skill
+        {
+            monstrosity::HandleMonsterSkillActionPacket(PChar, data);
         }
         break;
         case 0x1A: // mounts

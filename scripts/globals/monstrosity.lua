@@ -8,6 +8,37 @@ xi = xi or {}
 xi.monstrosity = xi.monstrosity or {}
 
 -----------------------------------
+-- Enums
+-----------------------------------
+
+xi.monstrosity.species =
+{
+    RABBIT     =  1,
+    MANDRAGORA = 18,
+    LIZARD     = 43,
+}
+
+-----------------------------------
+-- Helpers
+-----------------------------------
+
+xi.monstrosity.unlockStartingMONs = function(player, choice)
+    local data =
+    {
+        monstrosityId = choice,
+        species       = choice,
+        levels        =
+        {
+            [xi.monstrosity.species.RABBIT]     = 1,
+            [xi.monstrosity.species.MANDRAGORA] = 1,
+            [xi.monstrosity.species.LIZARD]     = 1,
+        }
+    }
+
+    player:setMonstrosity(data)
+end
+
+-----------------------------------
 -- Odyssean Passage
 -----------------------------------
 
