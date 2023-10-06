@@ -46,6 +46,9 @@ end
 -- Odyssean Passage
 -----------------------------------
 
+xi.monstrosity.odysseanPassageOnTrade = function(player, npc, trade)
+end
+
 xi.monstrosity.odysseanPassageOnTrigger = function(player, npc)
     -- TODO: Handle xi.settings.main.ENABLE_MONSTROSITY
 
@@ -57,6 +60,17 @@ xi.monstrosity.odysseanPassageOnTrigger = function(player, npc)
 
     -- TODO: If passage in Feretory, do logic Y
     -- In Feretory: Event 5 (0, 0, 0, 0, 0, 0, 0, 0)
+end
+
+xi.monstrosity.odysseanPassageOnEventUpdate = function(player, csid, option, npc)
+    print('update', csid, option)
+    player:updateEvent(0, 0, 0, 0, 1, 0, 0, 0)
+end
+
+xi.monstrosity.odysseanPassageOnEventFinish = function(player, csid, option, npc)
+    print('finish', csid, option)
+    -- Option 1: Leave & Teleport to last city zone
+    -- Option 529: Teleport to Al'Taieu
 end
 
 -----------------------------------
@@ -85,19 +99,102 @@ end
 -----------------------------------
 -- Aengus (Feretory NPC)
 -----------------------------------
--- Event 13 (As Lizard: 0, 0, 2, 0, 2, 90, 0, 0)
+
+xi.monstrosity.aengusOnTrade = function(player, npc, trade)
+end
+
+xi.monstrosity.aengusOnTrigger = function(player, npc)
+    -- Event 13 (As Lizard: 0, 0, 2, 0, 2, 90, 0, 0)
+    player:startEvent(13, 0, 0, 2, 0, 2, 90, 0, 0)
+end
+
+xi.monstrosity.aengusOnEventUpdate = function(player, csid, option, npc)
+    print('update', csid, option)
+end
+
+xi.monstrosity.aengusOnEventFinish = function(player, csid, option, npc)
+    print('finish', csid, option)
+    if csid == 13 and option == 1 then
+        -- Selected: Enter Belligerency
+    end
+end
 
 -----------------------------------
 -- Teyrnon (Feretory NPC)
 -----------------------------------
--- Event 7 (As Lizard: 0, 0, 0, 0, 0, 0, 0, 0)
+
+xi.monstrosity.teyrnonOnTrade = function(player, npc, trade)
+end
+
+xi.monstrosity.teyrnonOnTrigger = function(player, npc)
+    player:startEvent(7, 0, 0, 0, 0, 0, 0, 0, 0)
+end
+
+xi.monstrosity.teyrnonOnEventUpdate = function(player, csid, option, npc)
+    print('update', csid, option)
+    if csid == 7 and option == 0 then -- Monsters Menu
+        player:updateEvent(0, 0, 0, 0, 0, 0, 0, 0)
+    elseif csid == 7 and option == 1 then -- Instinct menu
+        player:updateEvent(0, 0, 0, 0, 0, 0, 0, 0)
+    end
+end
+
+xi.monstrosity.teyrnonOnEventFinish = function(player, csid, option, npc)
+    print('finish', csid, option)
+    -- Support Menu:
+    -- option    3: Dedication 1
+    -- option  259: Dedication 2
+    -- option  515: Regen
+    -- option  771: Refresh
+    -- option 1027: Protect
+    -- option 1283: Shell
+    -- option 1539: Haste
+end
 
 -----------------------------------
 -- Maccus (Feretory NPC)
 -----------------------------------
--- Event 9 (As Lizard: 285, 2, 2, 0, 0, 0, 0, 0)
+
+xi.monstrosity.maccusOnTrade = function(player, npc, trade)
+end
+
+xi.monstrosity.maccusOnTrigger = function(player, npc)
+    player:startEvent(9, 285, 2, 2, 0, 0, 0, 0, 0)
+end
+
+xi.monstrosity.maccusOnEventUpdate = function(player, csid, option, npc)
+    print('update', csid, option)
+end
+
+xi.monstrosity.maccusOnEventFinish = function(player, csid, option, npc)
+    print('finish', csid, option)
+end
 
 -----------------------------------
 -- Suibhne (Feretory NPC)
 -----------------------------------
--- Event 11 (As Lizard: 1, 1, 0, 0, 0, 0, 0, 0)
+
+xi.monstrosity.suibhneOnTrade = function(player, npc, trade)
+end
+
+xi.monstrosity.suibhneOnTrigger = function(player, npc)
+    player:startEvent(11, 1, 1, 0, 0, 0, 0, 0, 0)
+end
+
+xi.monstrosity.suibhneOnEventUpdate = function(player, csid, option, npc)
+    print('update', csid, option)
+end
+
+xi.monstrosity.suibhneOnEventFinish = function(player, csid, option, npc)
+    print('finish', csid, option)
+    -- Answers:
+    -- 1) 4. Teyrnon
+    -- 2) 3. Suibhne
+    -- 3) 1. Aengus
+    if csid == 11 and option == 2 then
+        -- Quiz failed
+    elseif csid == 11 and option == 6029313 then
+        -- Quiz succeeded
+        -- TODO: Unlock Bee (MON)
+    end
+end

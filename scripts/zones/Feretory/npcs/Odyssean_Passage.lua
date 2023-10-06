@@ -8,21 +8,19 @@ require('scripts/globals/monstrosity')
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
+    xi.monstrosity.odysseanPassageOnTrade(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    player:startEvent(5, 0, 0, 0, 0, 1, 0, 0, 0)
+    xi.monstrosity.odysseanPassageOnTrigger(player, npc)
 end
 
 entity.onEventUpdate = function(player, csid, option, npc)
-    print('update', csid, option)
-    player:updateEvent(0, 0, 0, 0, 1, 0, 0, 0)
+    xi.monstrosity.odysseanPassageOnEventUpdate(player, csid, option, npc)
 end
 
 entity.onEventFinish = function(player, csid, option, npc)
-    print('finish', csid, option)
-    -- Option 1: Leave & Teleport to last city zone
-    -- Option 529: Teleport to Al'Taieu
+    xi.monstrosity.odysseanPassageOnEventFinish(player, csid, option, npc)
 end
 
 return entity
