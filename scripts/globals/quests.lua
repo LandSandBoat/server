@@ -547,6 +547,7 @@ xi.quest.id =
         PICTURE_PERFECT                 = 31,
         WAKING_THE_BEAST                = 32,
         SURVIVAL_OF_THE_WISEST          = 33,
+        MONSTROSITY                     = 34, -- + Converted
         A_HARD_DAYS_KNIGHT              = 64, -- + Converted
         X_MARKS_THE_SPOT                = 65,
         A_BITTER_PAST                   = 66,
