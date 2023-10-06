@@ -83,6 +83,14 @@ CMessageStandardPacket::CMessageStandardPacket(CCharEntity* PChar, uint32 param0
 
             snprintf((char*)data + (0x0D), 24, "string2 %s", PChar->GetName().c_str());
         }
+        else if (MessageID == MsgStd::MonstrosityCheckIn || MessageID == MsgStd::MonstrosityCheckOut)
+        {
+            this->setSize(0x20);
+
+            ref<uint16>(0x0A) = static_cast<uint16>(MessageID);
+
+            snprintf((char*)data + (0x0D), 24, "string2 %s", PChar->GetName().c_str());
+        }
     }
     else
     {

@@ -99,6 +99,8 @@ enum class MsgStd
     CannotHere                   = 256, // You cannot use that command in this area.
     HeadgearShow                 = 260,
     HeadgearHide                 = 261,
+    MonstrosityCheckOut          = 263, // This monster is currently possessed by <player>!
+    MonstrosityCheckIn           = 264, // <player> stares at you intently, evidently aware that you have discovered its true form.
     TrustCannotJoinParty         = 265, // You are unable to join a party whose leader currently has an alter ego present.
     TrustCannotJoinAlliance      = 266, // You are unable to join an alliance whose leader currently has an alter ego present.
     StyleLockOn                  = 267, // Style lock mode enabled.
