@@ -19,9 +19,9 @@ local baseNpcEvents =
 
 local tradeItems =
 {
-    xi.item.LIZARD_TAIL,
-    xi.item.RABBIT_HIDE,
-    xi.item.TWO_LEAF_MANDRAGORA_BUD,
+    { xi.item.LIZARD_TAIL, xi.monstrosity.species.LIZARD },
+    { xi.item.RABBIT_HIDE, xi.monstrosity.species.RABBIT },
+    { xi.item.TWO_LEAF_MANDRAGORA_BUD, xi.monstrosity.species.MANDRAGORA },
 }
 
 local suspiciousCityNpc =
@@ -31,8 +31,10 @@ local suspiciousCityNpc =
             return
         end
 
-        for _, itemId in ipairs(tradeItems) do
+        for _, entry in ipairs(tradeItems) do
+            local itemId = entry[1]
             if npcUtil.tradeHasExactly(trade, itemId) then
+                player:setLocalVar('MONSTROSITY_UNLOCK', entry[2])
                 return quest:progressEvent(baseNpcEvents[player:getZoneID()] + 1, itemId)
             end
         end
@@ -51,6 +53,10 @@ local suspiciousCityNpc =
 
 local tradeEventFinish = function(player, csid, option, npc)
     npcUtil.giveKeyItem(player, xi.ki.RING_OF_SUPERNAL_DISJUNCTION)
+    local species = player:getLocalVar('MONSTROSITY_UNLOCK')
+    if species > 0 then
+        xi.monstrosity.unlockStartingMONs(player, species)
+    end
 end
 
 local odysseanPassageNpc =
