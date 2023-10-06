@@ -6314,6 +6314,8 @@ void CLuaBaseEntity::setMonstrosity(sol::table table)
         return;
     }
 
+    bool startsWithMonstrosityData = PChar->m_PMonstrosity != nullptr;
+
     // NOTE: This will populate m_PMonstrosity if it doesn't exist
     monstrosity::ReadMonstrosityData(PChar);
 
@@ -6363,7 +6365,17 @@ void CLuaBaseEntity::setMonstrosity(sol::table table)
     }
 
     monstrosity::WriteMonstrosityData(PChar);
-    monstrosity::SendFullMonstrosityUpdate(PChar);
+
+    // If we didn't start with Monstrosity data, we should wipe it out now so we
+    // don't change modes
+    if (!startsWithMonstrosityData)
+    {
+        PChar->m_PMonstrosity = nullptr;
+    }
+    else
+    {
+        monstrosity::SendFullMonstrosityUpdate(PChar);
+    }
 }
 
 /************************************************************************
