@@ -70,6 +70,7 @@ zones[xi.zone.PORT_BASTOK] =
         CLOUD_BAD_ITEM                = 9257,  -- What the hell is this junk!? Why don't you try bringin' what I asked for before I shove one of my sandals up your...nose!
         OBTAINED_NUM_KEYITEMS         = 13084, -- Obtained key item: <number> <keyitem>!
         NOT_ACQUAINTED                = 13086, -- I'm sorry, but I don't believe we're acquainted. Please leave me be.
+        NOTHING_HAPPENS               = 13237, -- Nothing Happens...
     },
     mob =
     {

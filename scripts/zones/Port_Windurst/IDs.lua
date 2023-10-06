@@ -72,6 +72,7 @@ zones[xi.zone.PORT_WINDURST] =
         RETRIEVE_DIALOG_ID              = 15915, -- You retrieve <item> from the porter moogle's care.
         OBTAINED_NUM_KEYITEMS           = 15957, -- Obtained key item: <number> <keyitem>!
         NOT_ACQUAINTED                  = 15959, -- I'm sorry, but I don't believe we're acquainted. Please leave me be.
+        NOTHING_HAPPENS                 = 16117, -- Nothing Happens...
         COMMON_SENSE_SURVIVAL           = 16329, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
     mob =
