@@ -6243,6 +6243,13 @@ void SmallPacket0x0DD(map_session_data_t* const PSession, CCharEntity* const PCh
             {
                 CCharEntity* PTarget = (CCharEntity*)PEntity;
 
+                if (PTarget->m_PMonstrosity)
+                {
+                    PChar->pushPacket(new CMessageStandardPacket(PTarget, 0, 0, MsgStd::MonstrosityCheckOut));
+                    PTarget->pushPacket(new CMessageStandardPacket(PChar, 0, 0, MsgStd::MonstrosityCheckIn));
+                    return;
+                }
+
                 if (!PChar->m_isGMHidden || (PChar->m_isGMHidden && PTarget->m_GMlevel >= PChar->m_GMlevel))
                 {
                     PTarget->pushPacket(new CMessageStandardPacket(PChar, 0, 0, MsgStd::Examine));
