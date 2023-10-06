@@ -72,7 +72,7 @@ quest.sections =
 {
     {
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE
+            return xi.settings.main.ENABLE_MONSTROSITY == 1 and status == QUEST_AVAILABLE
         end,
 
         [xi.zone.PASHHOW_MARSHLANDS] =
