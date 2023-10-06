@@ -22,6 +22,37 @@ INSERT INTO `monstrosity_instinct_mods` VALUES (5,9,5);   -- DEX: 5
 INSERT INTO `monstrosity_instinct_mods` VALUES (5,11,5);  -- AGI: 5
 INSERT INTO `monstrosity_instinct_mods` VALUES (5,288,2); -- DOUBLE_ATTACK: 2
 
+-- Mandragora instinct I
+INSERT INTO `monstrosity_instinct_mods` VALUES (54,9,5);     -- DEX: 5
+INSERT INTO `monstrosity_instinct_mods` VALUES (54,25,10);   -- ACC: 5
+INSERT INTO `monstrosity_instinct_mods` VALUES (54,384,100); -- HASTE_GEAR: 100
+
+-- Mandragora instinct II
+INSERT INTO `monstrosity_instinct_mods` VALUES (55,1,10);  -- DEF: 10
+INSERT INTO `monstrosity_instinct_mods` VALUES (55,13,5);  -- MND: 5
+INSERT INTO `monstrosity_instinct_mods` VALUES (55,23,10); -- ATT: 10
+INSERT INTO `monstrosity_instinct_mods` VALUES (55,288,1); -- DOUBLE_ATTACK: 1
+
+-- Mandragora instinct III
+INSERT INTO `monstrosity_instinct_mods` VALUES (56,3,3);     -- HPP: 3
+INSERT INTO `monstrosity_instinct_mods` VALUES (56,289,3);   -- SUBTLE_BLOW: 3
+INSERT INTO `monstrosity_instinct_mods` VALUES (56,384,300); -- HASTE_GEAR: 300
+
+-- Lizard instinct I
+INSERT INTO `monstrosity_instinct_mods` VALUES (129,3,1);  -- HPP: 1
+INSERT INTO `monstrosity_instinct_mods` VALUES (129,10,5); -- VIT: 5
+INSERT INTO `monstrosity_instinct_mods` VALUES (129,1,20); -- DEF: 20
+
+-- Lizard instinct II
+INSERT INTO `monstrosity_instinct_mods` VALUES (130,8,4);   -- STR: 4
+INSERT INTO `monstrosity_instinct_mods` VALUES (130,23,14); -- ATT: 14
+INSERT INTO `monstrosity_instinct_mods` VALUES (130,73,3);  -- STORETP: 3
+
+-- Lizard instinct III
+INSERT INTO `monstrosity_instinct_mods` VALUES (131,3,10); -- HPP: 10
+INSERT INTO `monstrosity_instinct_mods` VALUES (131,62,1); -- ATTP: 1
+INSERT INTO `monstrosity_instinct_mods` VALUES (131,1,30); -- DEF: 30
+
 -- Hume's instinct I
 INSERT INTO `monstrosity_instinct_mods` VALUES (768,8,2);  -- STR: 2
 INSERT INTO `monstrosity_instinct_mods` VALUES (768,9,2);  -- DEX: 2
