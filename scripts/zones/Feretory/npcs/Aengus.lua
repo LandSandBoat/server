@@ -8,21 +8,19 @@ require('scripts/globals/monstrosity')
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
+    xi.monstrosity.aengusOnTrade(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    player:startEvent(13, 0, 0, 2, 0, 2, 90, 0, 0)
+    xi.monstrosity.aengusOnTrigger(player, npc)
 end
 
 entity.onEventUpdate = function(player, csid, option, npc)
-    print('update', csid, option)
+    xi.monstrosity.aengusOnEventUpdate(player, csid, option, npc)
 end
 
 entity.onEventFinish = function(player, csid, option, npc)
-    print('finish', csid, option)
-    if csid == 13 and option == 1 then
-        -- Selected: Enter Belligerency
-    end
+    xi.monstrosity.aengusOnEventFinish(player, csid, option, npc)
 end
 
 return entity
