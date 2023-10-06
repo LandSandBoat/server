@@ -1009,6 +1009,14 @@ void SmallPacket0x01A(map_session_data_t* const PSession, CCharEntity* const PCh
             {
                 return;
             }
+
+            if (PChar->m_PMonstrosity)
+            {
+                auto type = data.ref<uint8>(0x0C);
+                monstrosity::HandleDeathMenu(PChar, type);
+                return;
+            }
+
             PChar->setCharVar("expLost", 0);
             charutils::HomePoint(PChar);
         }

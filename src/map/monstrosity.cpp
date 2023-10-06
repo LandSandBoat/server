@@ -34,6 +34,7 @@
 #include "packets/monipulator2.h"
 
 #include "utils/charutils.h"
+#include "utils/zoneutils.h"
 
 extern std::unique_ptr<SqlConnection> sql;
 
@@ -190,8 +191,8 @@ void monstrosity::WriteMonstrosityData(CCharEntity* PChar)
 
     // TODO: Ensure there's a row to write to
     {
-        bool needToCreate = false;
-        int32 ret = sql->Query("SELECT * FROM char_monstrosity WHERE charid = %d;", PChar->id);
+        bool  needToCreate = false;
+        int32 ret          = sql->Query("SELECT * FROM char_monstrosity WHERE charid = %d;", PChar->id);
         if (ret != SQL_ERROR && sql->NumRows() == 0)
         {
             needToCreate = true;
@@ -450,6 +451,45 @@ void monstrosity::SetLevel(CCharEntity* PChar, uint8 id, uint8 level)
     // TODO: Validate id and level
     // TODO: If not unlocked, unlock whatever id is
     PChar->m_PMonstrosity->levels[id] = level;
+}
+
+void monstrosity::HandleDeathMenu(CCharEntity* PChar, uint8 type)
+{
+    if (PChar->m_PMonstrosity == nullptr)
+    {
+        return;
+    }
+
+    // remove weakness on homepoint
+    // PChar->StatusEffectContainer->DelStatusEffectSilent(EFFECT_WEAKNESS);
+    // PChar->StatusEffectContainer->DelStatusEffectSilent(EFFECT_LEVEL_SYNC);
+
+    PChar->SetDeathTimestamp(0);
+
+    PChar->health.hp = PChar->GetMaxHP();
+    PChar->health.mp = PChar->GetMaxMP();
+
+    PChar->status    = STATUS_TYPE::DISAPPEAR;
+    PChar->animation = ANIMATION_NONE;
+    PChar->updatemask |= UPDATE_HP;
+
+    PChar->clearPacketList();
+
+    // Monstrosity death menu:
+    // 2: Retry
+    // 1: Cancel
+    if (type == 1)
+    {
+        // Return to Feretory
+        PChar->loc.destination = ZONE_FERETORY;
+    }
+    else if (type == 2)
+    {
+        // Restart this zone with Gestation effect
+        PChar->loc.destination = PChar->loc.zone->GetID();
+    }
+
+    charutils::SendToZone(PChar, 2, zoneutils::GetZoneIPP(PChar->loc.destination));
 }
 
 void monstrosity::MaxAllLevels(CCharEntity* PChar)

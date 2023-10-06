@@ -66,6 +66,8 @@ namespace monstrosity
 
     void SetLevel(CCharEntity* PChar, uint8 id, uint8 level);
 
+    void HandleDeathMenu(CCharEntity* PChar, uint8 type);
+
     // Debug
     void MaxAllLevels(CCharEntity* PChar);
     void UnlockAllInstincts(CCharEntity* PChar);
