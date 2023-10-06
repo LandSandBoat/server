@@ -38,6 +38,21 @@ INSERT INTO `monstrosity_instinct_mods` VALUES (56,3,3);     -- HPP: 3
 INSERT INTO `monstrosity_instinct_mods` VALUES (56,289,3);   -- SUBTLE_BLOW: 3
 INSERT INTO `monstrosity_instinct_mods` VALUES (56,384,300); -- HASTE_GEAR: 300
 
+-- Bee instinct I
+INSERT INTO `monstrosity_instinct_mods` VALUES (81,11,5);  -- AGI: 5
+INSERT INTO `monstrosity_instinct_mods` VALUES (81,23,10); -- ATT: 10
+INSERT INTO `monstrosity_instinct_mods` VALUES (81,68,5);  -- EVA: 5
+
+-- Bee instinct II
+INSERT INTO `monstrosity_instinct_mods` VALUES (82,3,2);  -- HPP: 2
+INSERT INTO `monstrosity_instinct_mods` VALUES (82,5,50); -- MP: 50
+INSERT INTO `monstrosity_instinct_mods` VALUES (82,12,5); -- INT: 5
+
+-- Bee instinct III
+INSERT INTO `monstrosity_instinct_mods` VALUES (83,8,10);    -- STR: 10
+INSERT INTO `monstrosity_instinct_mods` VALUES (83,10,5);    -- VIT: 5
+INSERT INTO `monstrosity_instinct_mods` VALUES (83,384,300); -- HASTE_GEAR: 300
+
 -- Lizard instinct I
 INSERT INTO `monstrosity_instinct_mods` VALUES (129,3,1);  -- HPP: 1
 INSERT INTO `monstrosity_instinct_mods` VALUES (129,10,5); -- VIT: 5

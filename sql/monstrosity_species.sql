@@ -223,10 +223,10 @@ INSERT INTO `monstrosity_species` VALUES (75, 359, "Toucalibri (Colibri)", 0x000
 INSERT INTO `monstrosity_species` VALUES (76, 76, "Amphiptere", 0x0000);
 INSERT INTO `monstrosity_species` VALUES (76, 360, "Sanguiptere (Amphiptere)", 0x0000);
 
-INSERT INTO `monstrosity_species` VALUES (126, 254, "DQ Slime", 0x0B41); -- TODO: Look guessed not capped
-INSERT INTO `monstrosity_species` VALUES (126, 508, "DQ She-Slime", 0x0B5B); -- TODO: Look guessed not capped
-INSERT INTO `monstrosity_species` VALUES (126, 509, "DQ Metal Slime", 0x0B5C); -- TODO: Look guessed not capped
+INSERT INTO `monstrosity_species` VALUES (126, 254, "Astoltian Slime", 0x0B41); -- TODO: Look guessed not capped
+INSERT INTO `monstrosity_species` VALUES (126, 508, "Astoltian She-Slime", 0x0B5B); -- TODO: Look guessed not capped
+INSERT INTO `monstrosity_species` VALUES (126, 509, "Astoltian Metal Slime", 0x0B5C); -- TODO: Look guessed not capped
 
-INSERT INTO `monstrosity_species` VALUES (127, 255, "FFXIV Spriggan", 0x0B42); -- TODO: Look guessed not capped
-INSERT INTO `monstrosity_species` VALUES (127, 510, "FFXIV Spriggan.C", 0x0B5D); -- TODO: Look guessed not capped
-INSERT INTO `monstrosity_species` VALUES (127, 511, "FFXIV Spriggan.G", 0x0B5E); -- TODO: Look guessed not capped
+INSERT INTO `monstrosity_species` VALUES (127, 255, "Eorzean Spriggan", 0x0B42); -- TODO: Look guessed not capped
+INSERT INTO `monstrosity_species` VALUES (127, 510, "Eorzean Spriggan.C", 0x0B5D); -- TODO: Look guessed not capped
+INSERT INTO `monstrosity_species` VALUES (127, 511, "Eorzean Spriggan.G", 0x0B5E); -- TODO: Look guessed not capped
