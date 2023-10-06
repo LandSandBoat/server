@@ -163,7 +163,7 @@ void CCharPacket::updateWith(CCharEntity* PChar, ENTITYUPDATE type, uint8 update
                 ref<uint8>(0x42) = 0x50 + PChar->StatusEffectContainer->GetStatusEffect(EFFECT_COLURE_ACTIVE)->GetPower();
             }
 
-            ref<uint8>(0x43) = 0x04;
+            ref<uint8>(0x43) = 0x04; // Seen as 0x0C and 0x06 in Monstrosity?
 
             if (updatemask & UPDATE_LOOK)
             {
@@ -181,6 +181,7 @@ void CCharPacket::updateWith(CCharEntity* PChar, ENTITYUPDATE type, uint8 update
 
                 if (PChar->m_PMonstrosity != nullptr)
                 {
+                    ref<uint32>(0x3E) = monstrosity::GetPackedMonstrosityName(PChar);
                     ref<uint16>(0x48) = PChar->m_PMonstrosity->Look;
                     ref<uint16>(0x58) = 0xFFFF;
                 }
