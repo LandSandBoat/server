@@ -69,7 +69,7 @@ xi.settings.main =
     -- VoidWalker
     ENABLE_VOIDWALKER = 1,
 
-    -- VoidWalker
+    -- Monstrosity
     ENABLE_MONSTROSITY = 1,
 
     -- TREASURE CASKETS
