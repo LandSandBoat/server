@@ -31,17 +31,12 @@
 #include "merit.h"
 #include "monstrosity.h"
 
-namespace
-{
-    uint8 JOB_MON = 23;
-} // namespace
-
 CCharJobExtraPacket::CCharJobExtraPacket(CCharEntity* PChar, bool mjob)
 {
     this->setType(0x44);
     this->setSize(0xA0);
 
-    uint8 job = JOB_NON;
+    JOBTYPE job = JOB_NON;
 
     if (mjob)
     {
@@ -146,8 +141,5 @@ CCharJobExtraPacket::CCharJobExtraPacket(CCharEntity* PChar, bool mjob)
         {
             ref<uint16>(0x0C + (idx * 2)) = PChar->m_PMonstrosity->EquippedInstincts[idx];
         }
-
-        // 0x24: Name1?
-        // 0x25: Name2?
     }
 }
