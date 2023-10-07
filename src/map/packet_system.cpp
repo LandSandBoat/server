@@ -795,13 +795,20 @@ void SmallPacket0x01A(map_session_data_t* const PSession, CCharEntity* const PCh
 
     uint16     TargID       = data.ref<uint16>(0x08);
     uint8      action       = data.ref<uint8>(0x0A);
-    position_t actionOffset = {
+    position_t actionOffset =
+    {
         data.ref<float>(0x10),
         data.ref<float>(0x14),
         data.ref<float>(0x18),
-        0, // packet only contains x/y/z
-        0, //
+        0, // moving (packet only contains x/y/z)
+        0, // rotation (packet only contains x/y/z)
     };
+
+    // Monstrosity: Can't really do anything while under Gestation until you click it off
+    if (PChar->StatusEffectContainer->HasStatusEffect(EFFECT_GESTATION))
+    {
+        return;
+    }
 
     constexpr auto actionToStr = [](uint8 actionIn)
     {
