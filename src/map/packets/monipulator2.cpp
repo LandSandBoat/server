@@ -39,7 +39,7 @@ CMonipulatorPacket2::CMonipulatorPacket2(CCharEntity* PChar)
 
     // TODO: What are these?
     std::array<uint8, 3> packet2 = { 0x04, 0x00, 0xB0 };
-    std::memcpy(data + (0x04), &packet2, sizeof(packet2));
+    std::memcpy(data + 0x04, &packet2, sizeof(packet2));
 
     // NOTE: SE added these after-the-fact, so they're not sent in Monipulator1 and they're at the end of the array!
     // Slime Level

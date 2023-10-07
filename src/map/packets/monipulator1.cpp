@@ -39,7 +39,7 @@ CMonipulatorPacket1::CMonipulatorPacket1(CCharEntity* PChar)
     ref<uint8>(0x04) = 0x03; // Update Type
     ref<uint8>(0x06) = 0xD8; // Variable Data Size
 
-    ref<uint16>(0x08) = PChar->m_PMonstrosity->Species; // 0x2412; //0xFCFE; // Species? Also seen 0x3F1F
+    ref<uint16>(0x08) = PChar->m_PMonstrosity->Species;
     ref<uint16>(0x0A) = PChar->m_PMonstrosity->Flags;
 
     ref<uint8>(0x0C) = 0; // Monstrosity Rank (0 = Mon, 1 = NM, 2 = HNM)

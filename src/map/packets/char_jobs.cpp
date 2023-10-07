@@ -45,7 +45,7 @@ CCharJobsPacket::CCharJobsPacket(CCharEntity* PChar)
     ref<uint32>(0x3C) = PChar->health.maxhp;
     ref<uint32>(0x40) = PChar->health.maxmp;
 
-    ref<uint32>(0x44) = PChar->jobs.unlocked & 1; // первый бит в unlocked отвечает за дополнительную профессию
+    ref<uint32>(0x44) = PChar->jobs.unlocked & 1; // The first bit in Unlocked is responsible for the additional profession
 
     ref<uint16>(0x60) = PChar->m_EquipBlock; // Locked equipment slots
     ref<uint16>(0x62) =
@@ -60,25 +60,11 @@ CCharJobsPacket::CCharJobsPacket(CCharEntity* PChar)
 
     if (PChar->m_PMonstrosity)
     {
-        ref<uint8>(0x08) = 0x17; // JOB_MON
-        ref<uint8>(0x0B) = 0x17; // JOB_MON
+        ref<uint8>(0x08) = static_cast<uint8>(JOB_MON);
+        ref<uint8>(0x0B) = static_cast<uint8>(JOB_MON);
 
-        ref<uint8>(0x10) = 0x01;
-        /*
-        ref<uint8>(0x2E) = 0x07;
-        ref<uint8>(0x30) = 0x07;
-        ref<uint8>(0x32) = 0x0A;
-        ref<uint8>(0x34) = 0x07;
-        ref<uint8>(0x36) = 0x04;
-        ref<uint8>(0x38) = 0x07;
-        ref<uint8>(0x3A) = 0x04;
+        // ref<uint8>(0x10) = 0x01; // ?
 
-        ref<uint8>(0x48) = 0x01;
-
-        ref<uint8>(0x5F) = 0x10; // MON level
-        ref<uint8>(0x64) = 0x03;
-        ref<uint8>(0x66) = 0x02;
-        ref<uint8>(0x69) = 0x20;
-        */
+        // ref<uint8>(0x5F) = 0x10; // MON level ?
     }
 }

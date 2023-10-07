@@ -92,9 +92,13 @@ enum JOBTYPE
     JOB_DNC = 19,
     JOB_SCH = 20,
     JOB_GEO = 21,
-    JOB_RUN = 22
+    JOB_RUN = 22,
+    JOB_MON = 23, // See note below (in battleentity.h)
 };
 
+// NOTE: Comparisons to this are specified with operator< (less than), so that JOB_MON is never reached.
+// JOB_MON is not a full job, but it is used in a couple of places while Monstrosity is in use.
+// It doesn't have its own (direct) stat tiers, merits, traits, etc. so we don't want to iterate to it.
 #define MAX_JOBTYPE 23
 
 enum SKILLTYPE
