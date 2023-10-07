@@ -226,7 +226,8 @@ void monstrosity::HandleZoneIn(CCharEntity* PChar)
 
         if (PChar->loc.zone->GetID() != ZONE_FERETORY)
         {
-            CStatusEffect* PEffect = new CStatusEffect(EFFECT::EFFECT_GESTATION, EFFECT::EFFECT_GESTATION, 0, 0, 0);
+            // TODO: If belligerency, timer is 60s
+            CStatusEffect* PEffect = new CStatusEffect(EFFECT::EFFECT_GESTATION, EFFECT::EFFECT_GESTATION, 0, 0, 64800); // 18 hours
 
             // TODO: You cannot attack while you're in Gest., you have to click it off
 
@@ -236,8 +237,10 @@ void monstrosity::HandleZoneIn(CCharEntity* PChar)
             PEffect->AddEffectFlag(EFFECTFLAG_ATTACK);
             PEffect->AddEffectFlag(EFFECTFLAG_MAGIC_BEGIN);
             PEffect->AddEffectFlag(EFFECTFLAG_DETECTABLE);
-            PEffect->AddEffectFlag(EFFECTFLAG_LOGOUT);
             PEffect->AddEffectFlag(EFFECTFLAG_ON_ZONE);
+
+            // TODO: Does the timer survive logout, does it tick while offline, does it reset?
+            // PEffect->AddEffectFlag(EFFECTFLAG_LOGOUT);
 
             // NOTE: It DOES say the effect wears off
             // PEffect->AddEffectFlag(EFFECTFLAG_NO_LOSS_MESSAGE);
