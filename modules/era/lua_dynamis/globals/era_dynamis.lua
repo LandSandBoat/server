@@ -66,6 +66,28 @@ local function checkGM(player)
     end
 end
 
+local function getDynamisTavWinParam(player)
+    local zmComplete = player:getCurrentMission(xi.mission.log_id.ZILART) >= xi.mission.id.zilart.AWAKENING
+    local copComplete = player:getCurrentMission(xi.mission.log_id.COP) >= xi.mission.id.cop.DAWN
+    local anComplete = player:hasCompletedQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.APOCALYPSE_NIGH)
+
+    if anComplete then
+        -- AN requires ZM and CoP
+        return 3
+    elseif zmComplete then
+        if copComplete then
+            -- ZM and CoP
+            return 2
+        end
+
+        -- ZM only
+        return 1
+    end
+
+    -- Not ZM complete
+    return 0
+end
+
 xi.dynamis.dynaIDLookup = -- Used to check for different IDs based on zoneID. Replaces the need to overwrite IDs.lua for each zone.
 {
     --------------------------------------------
@@ -420,6 +442,7 @@ xi.dynamis.entryInfoEra =
         csDyna = 58,
         maxCapacity = 36,
         enabled = true,
+        hasSeenFirstCSVar = "DynamisCop_First",
         winVar = "DynaValkurm_Win",
         enteredVar = "DynaValkurm_entered",
         hasSeenWinCSVar = "DynaValkurm_HasSeenWinCS",
@@ -439,6 +462,7 @@ xi.dynamis.entryInfoEra =
         csDyna = 22,
         maxCapacity = 36,
         enabled = true,
+        hasSeenFirstCSVar = "DynamisCop_First",
         winVar = "DynaBuburimu_Win",
         enteredVar = "DynaBuburimu_entered",
         hasSeenWinCSVar = "DynaBuburimu_HasSeenWinCS",
@@ -458,6 +482,7 @@ xi.dynamis.entryInfoEra =
         csDyna = 3,
         maxCapacity = 36,
         enabled = true,
+        hasSeenFirstCSVar = "DynamisCop_First",
         winVar = "DynaQufim_Win",
         enteredVar = "DynaQufim_entered",
         hasSeenWinCSVar = "DynaQufim_HasSeenWinCS",
@@ -477,6 +502,7 @@ xi.dynamis.entryInfoEra =
         csDyna = 588,
         maxCapacity = 18,
         enabled = true,
+        hasSeenFirstCSVar = "DynaTavnazia_First",
         winVar = "DynaTavnazia_Win",
         enteredVar = "DynaTavnazia_entered",
         hasSeenWinCSVar = "DynaTavnazia_HasSeenWinCS",
@@ -689,8 +715,10 @@ xi.dynamis.dynaInfoEra =
         enteredVar = "DynaTavnazia_entered",
         hasSeenWinCSVar = "DynaTavnazia_HasSeenWinCS",
         winKI = xi.ki.DYNAMIS_TAVNAZIA_SLIVER,
-        winTitle = xi.title.DYNAMIS_TAVNAZIA_INTERLOPER,
-        winQM = nil,
+        qmTitle = xi.title.DYNAMIS_TAVNAZIA_INTERLOPER,
+        winTitle = xi.title.NIGHTMARE_AWAKENER,
+        csTitle = xi.title.CONFRONTER_OF_NIGHTMARES,
+        winQM = 16949398,
         entryPos = { 0.1, -7, -21, 190, xi.zone.DYNAMIS_TAVNAZIA },
         ejectPos = { 0  , -7, -23, 195, xi.zone.TAVNAZIAN_SAFEHOLD },
         timeExtensions = { 16949396, 16949397 },
@@ -869,7 +897,7 @@ xi.dynamis.handleDynamis = function(zone)
                         end
                     end
 
-                    player:addStatusEffect(xi.effect.SJ_RESTRICTION, 0, 0, 0, 18000) -- Inflict SJ Restriction
+                    player:addStatusEffect(xi.effect.SJ_RESTRICTION, 0, 0, 18000) -- Inflict SJ Restriction
                 end
             end
 
@@ -1379,11 +1407,21 @@ m:addOverride("xi.dynamis.entryNpcOnTrigger", function(player, npc)
     then -- If player does not have sand, start CS to give sand.
         player:startEvent(xi.dynamis.entryInfoEra[zoneID].csSand)
     elseif
+        xi.dynamis.entryInfoEra[zoneID].csFirst ~= nil and
+        checkEntryReqs(player, zoneID) and
+        player:getCharVar(xi.dynamis.entryInfoEra[zoneID].hasSeenFirstCSVar) == 0
+    then
+        player:startEvent(xi.dynamis.entryInfoEra[zoneID].csFirst)
+    elseif
         xi.dynamis.entryInfoEra[zoneID].csWin ~= nil and
         player:hasKeyItem(xi.dynamis.entryInfoEra[zoneID].winKI) and
         player:getCharVar(xi.dynamis.entryInfoEra[zoneID].hasSeenWinCSVar) == 0
     then -- If player hasn't seen win CS play win CS.
-        player:startEvent(xi.dynamis.entryInfoEra[zoneID].csWin)
+        if zoneID == xi.zone.DYNAMIS_TAVNAZIA then
+            player:startEvent(xi.dynamis.entryInfoEra[zoneID].csWin, 0, getDynamisTavWinParam(player))
+        else
+            player:startEvent(xi.dynamis.entryInfoEra[zoneID].csWin)
+        end
     else
         player:messageSpecial(zones[zoneID].text.DYNA_NPC_DEFAULT_MESSAGE) -- Just play default message otherwise.
     end
@@ -1441,8 +1479,13 @@ m:addOverride("xi.dynamis.entryNpcOnEventFinish", function(player, csid, option)
         end
     elseif csid == xi.dynamis.entryInfoEra[zoneID].csSand then -- Give Shrouded Sand KI
         npcUtil.giveKeyItem(player, xi.ki.VIAL_OF_SHROUDED_SAND)
+    elseif csid == xi.dynamis.entryInfoEra[zoneID].csFirst then -- Seen Win CS
+        player:setCharVar(xi.dynamis.entryInfoEra[zoneID].hasSeenFirstCSVar, 1)
     elseif csid == xi.dynamis.entryInfoEra[zoneID].csWin then -- Seen Win CS
         player:setCharVar(xi.dynamis.entryInfoEra[zoneID].hasSeenWinCSVar, 1)
+        if zoneID == xi.zone.DYNAMIS_TAVNAZIA then
+            player:addTitle(xi.dynamis.dynaInfoEra[zoneID].csTitle)
+        end
     end
 end)
 
@@ -1477,8 +1520,13 @@ end
 
 m:addOverride("xi.dynamis.qmOnTrigger", function(player, npc) -- Override standard qmOnTrigger()
     local zoneId = npc:getZoneID()
+
     if not player:hasKeyItem(xi.dynamis.dynaInfoEra[zoneId].winKI) then
         npcUtil.giveKeyItem(player, xi.dynamis.dynaInfoEra[zoneId].winKI)
+    end
+
+    if zoneId == xi.zone.DYNAMIS_TAVNAZIA then
+        player:addTitle(xi.dynamis.dynaInfoEra[zoneId].qmTitle)
     end
 end)
 

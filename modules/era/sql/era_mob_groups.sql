@@ -441,6 +441,11 @@ UPDATE mob_groups SET HP = 12000 WHERE name = "Nightmare_Worm" and zoneid = 42;
 UPDATE mob_groups SET HP = 14000 WHERE name = "Nightmare_Antlion" and zoneid = 42;
 UPDATE mob_groups SET HP = 6000 WHERE name = "Nightmare_Leech" and zoneid = 42;
 UPDATE mob_groups SET HP = 6000 WHERE name = "Nightmare_Cluster" and zoneid = 42;
+UPDATE mob_groups SET HP = 30000 WHERE name = "Diabolos_Spade" and zoneid = 42;
+UPDATE mob_groups SET HP = 30000 WHERE name = "Diabolos_Heart" and zoneid = 42;
+UPDATE mob_groups SET HP = 30000 WHERE name = "Diabolos_Diamond" and zoneid = 42;
+UPDATE mob_groups SET HP = 30000 WHERE name = "Diabolos_Club" and zoneid = 42;
+UPDATE mob_groups SET HP = 15000 WHERE name = "Diaboloss_Shard" and zoneid = 42;
 
 -- ------------------------------------------------------------
 -- Bhaflau_Thickets (Zone 52)

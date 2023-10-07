@@ -2190,10 +2190,10 @@ INSERT INTO `mob_groups` VALUES (177,4168,41,'Vanguard_Oracle',600,0,2551,4000,0
 -- Dynamis-Tavnazia (Zone 42)
 -- ------------------------------------------------------------
 
-INSERT INTO `mob_groups` VALUES (1,1031,42,'Diabolos_Spade',0,128,2908,15000,0,85,85,0);
-INSERT INTO `mob_groups` VALUES (2,1030,42,'Diabolos_Heart',0,128,2908,15000,0,85,85,0);
-INSERT INTO `mob_groups` VALUES (3,1029,42,'Diabolos_Diamond',0,128,2908,15000,0,85,85,0);
-INSERT INTO `mob_groups` VALUES (4,1028,42,'Diabolos_Club',0,128,2908,15000,0,85,85,0);
+INSERT INTO `mob_groups` VALUES (1,1031,42,'Diabolos_Spade',0,128,2908,15000,5000,85,85,0);
+INSERT INTO `mob_groups` VALUES (2,1030,42,'Diabolos_Heart',0,128,2908,15000,5000,85,85,0);
+INSERT INTO `mob_groups` VALUES (3,1029,42,'Diabolos_Diamond',0,128,2908,15000,5000,85,85,0);
+INSERT INTO `mob_groups` VALUES (4,1028,42,'Diabolos_Club',0,128,2908,15000,5000,85,85,0);
 INSERT INTO `mob_groups` VALUES (5,1032,42,'Diaboloss_Shard',0,128,0,9000,0,80,80,0);
 INSERT INTO `mob_groups` VALUES (6,2843,42,'Nightmare_Bugard',600,0,1795,5000,0,78,80,0);
 INSERT INTO `mob_groups` VALUES (7,2875,42,'Nightmare_Worm',600,0,1807,5000,0,78,80,0);

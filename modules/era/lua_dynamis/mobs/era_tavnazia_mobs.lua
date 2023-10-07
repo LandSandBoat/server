@@ -4,6 +4,7 @@
 require("scripts/globals/zone")
 require("scripts/globals/utils")
 require("scripts/globals/dynamis")
+local ID = require('scripts/zones/Dynamis-Tavnazia/IDs')
 -----------------------------------
 xi = xi or {}
 xi.dynamis = xi.dynamis or {}
@@ -27,6 +28,16 @@ local antlionPositions =
 
 local firstEyes  = { "eyeOneKilled", "eyeTwoKilled" }
 local secondEyes = { "eyeThreeKilled", "eyeFourKilled" }
+
+local function checkRuinousOmen(mob)
+    if
+        mob:isAlive() and
+        mob:getHPP() < mob:getLocalVar("RuinousOmenHPP")
+    then
+        mob:setLocalVar("RuinousOmenHPP", 0)
+        mob:useMobAbility(1911)
+    end
+end
 
 xi.dynamis.onSpawnNightmareWorm = function(mob)
     xi.dynamis.setNMStats(mob)
@@ -133,6 +144,8 @@ xi.dynamis.onSpawnUmbralDiabolos = function(mob)
     mob:setAutoAttackEnabled(false)
     mob:setMobType(xi.mobskills.mobType.BATTLEFIELD)
     mob:addStatusEffect(xi.effect.BATTLEFIELD, 1, 0, 0, true)
+    mob:setMobMod(xi.mobMod.DETECTION, xi.detects.SIGHT)
+    mob:setMobMod(xi.mobMod.ALWAYS_AGGRO, 1)
 end
 
 xi.dynamis.onMobEngagedUmbralDiabolos = function(mob, target)
@@ -146,6 +159,9 @@ xi.dynamis.onMobEngagedUmbralDiabolos = function(mob, target)
             member:changeMusic(1, 239) -- 1 Background Music (Starlight Celebration Music)
         end
     end
+
+    mob:messageText(mob, ID.text.I_AM_A_UNIQUE_ENTITY + zone:getLocalVar("UmbralTextOffset"))
+    zone:setLocalVar("UmbralTextOffset", zone:getLocalVar("UmbralTextOffset") + 1)
 
     local remainingDiabolos = {}
     if zone:getLocalVar("DiabolosClub") == 0 then
@@ -165,57 +181,260 @@ xi.dynamis.onMobEngagedUmbralDiabolos = function(mob, target)
     end
 
     xi.dynamis.nmDynamicSpawn(remainingDiabolos[math.random(#remainingDiabolos)], nil, false, zoneID)
-    mob:setHP(0)
+    DespawnMob(mob:getID())
+end
+
+xi.dynamis.setDiabolosCommonTraits = function(mob)
+    mob:setMod(xi.mod.BINDRES, 100)
+    mob:setMod(xi.mod.GRAVITYRES, 100)
+    mob:setMod(xi.mod.LULLABYRES, 100)
+    mob:setMod(xi.mod.SLEEPRES, 100)
+    -- Some forum posts claim a stun or so would get through unresisted.
+    mob:setMod(xi.mod.STUNRES, 95)
+    mob:setMod(xi.mod.SILENCERES, 100)
+    mob:setMod(xi.mod.BLINDRES, 100)
+    mob:setMod(xi.mod.CURSERES, 100)
+    mob:setMod(xi.mod.PARALYZERES, 100)
+    mob:setMod(xi.mod.SLOWRES, 95)
+    mob:setMod(xi.mod.POISONRES, 95)
+    mob:setMobMod(xi.mobMod.SUPERLINK, 5)
+    -- MP is a non-issue for these bosses.  No reports of being able to kite them out of MP
+    -- And Heart will cast death - costing 666mp
+    mob:setMod(xi.mod.REFRESH, 700)
+    mob:setLocalVar("RuinousOmenHPP", math.random(35, 65))
+    mob:setMobMod(xi.mobMod.NO_STANDBACK, 1)
+    -- almost all in era videos show diabolos using a tp move on pull
+    -- either scripted usage or a regain - hard to tell if its regain since most videos have 18 ppl feeding tp
+    mob:setMod(xi.mod.REGAIN, 50)
 end
 
 xi.dynamis.onSpawnDiabolosClub = function(mob)
     local zone = mob:getZone()
     zone:setLocalVar("DiabolosClub", mob:getID())
-    xi.dynamis.setNMStats(mob)
-    mob:setMobMod(xi.mobMod.SUPERLINK, 5)
+    xi.dynamis.setMegaBossStats(mob)
+    xi.dynamis.setDiabolosCommonTraits(mob)
+    mob:setLocalVar("ShardSummon1", math.random(50, 75))
+    mob:setLocalVar("ShardSummon2", math.random(25, 40))
 end
 
-xi.dynamis.onMobEngagedDiabolosClub = function(mob, target)
-    local zoneID = mob:getZoneID()
-    xi.dynamis.nmDynamicSpawn(252, 110, true, zoneID, target, mob)
+xi.dynamis.onMobFightDiabolosClub = function(mob, mobTarget)
+    if
+        mob:getLocalVar("ShardSummon1") > 0 and
+        mob:isAlive() and
+        mob:getHPP() < mob:getLocalVar("ShardSummon1")
+    then
+        mob:setLocalVar("ShardSummon1", 0)
+        local zoneID = mob:getZoneID()
+        xi.dynamis.nmDynamicSpawn(252, 110, true, zoneID, mob, mob)
+    end
+
+    if
+        mob:getLocalVar("ShardSummon2") > 0 and
+        mob:isAlive() and
+        mob:getHPP() < mob:getLocalVar("ShardSummon2")
+    then
+        mob:setLocalVar("ShardSummon2", 0)
+        local zoneID = mob:getZoneID()
+        xi.dynamis.nmDynamicSpawn(252, 110, true, zoneID, mob, mob)
+    end
+
+    if mob:getLocalVar("RuinousOmenHPP") > 0 then
+        checkRuinousOmen(mob)
+    end
 end
 
 xi.dynamis.onSpawnDiabolosHeart = function(mob)
     local zone = mob:getZone()
     zone:setLocalVar("DiabolosHeart", mob:getID())
-    xi.dynamis.setNMStats(mob)
-    mob:setMobMod(xi.mobMod.SUPERLINK, 5)
+    xi.dynamis.setMegaBossStats(mob)
+    xi.dynamis.setDiabolosCommonTraits(mob)
+    mob:setMobMod(xi.mobMod.MAGIC_COOL, 15)
+end
+
+xi.dynamis.onMobFightDiabolosHeart = function(mob, mobTarget)
+    if mob:getLocalVar("RuinousOmenHPP") > 0 then
+        checkRuinousOmen(mob)
+    end
+end
+
+xi.dynamis.onMobMagicPrepareDiabolosHeart = function(mob, mobTarget, spellId)
+    if
+        mob:getHPP() <= 20
+    then
+        mob:setMobMod(xi.mobMod.MAGIC_COOL, 10)
+        local rand = math.random(1, 3)
+        if rand <= 2 then
+            return xi.magic.spell.DRAIN
+        end
+    else
+        mob:setMobMod(xi.mobMod.MAGIC_COOL, 15)
+    end
 end
 
 xi.dynamis.onSpawnDiabolosSpade = function(mob)
     local zone = mob:getZone()
     zone:setLocalVar("DiabolosSpade", mob:getID())
-    xi.dynamis.setNMStats(mob)
-    mob:setMobMod(xi.mobMod.SUPERLINK, 5)
+    xi.dynamis.setMegaBossStats(mob)
+    xi.dynamis.setDiabolosCommonTraits(mob)
+end
+
+xi.dynamis.onMobFightDiabolosSpade = function(mob, mobTarget)
+    if mob:getLocalVar("RuinousOmenHPP") > 0 then
+        checkRuinousOmen(mob)
+    end
+end
+
+xi.dynamis.onMobWeaponSkillPrepareDiabolosSpade = function(mob, target)
+    -- Favors/Spams Nether Blast per some reports
+    -- Consider adding a higher percentage of usage
+    --[[
+    if math.random(1,2) == 2 then
+        return 1910
+    end
+    ]]
 end
 
 xi.dynamis.onSpawnDiabolosDiamond = function(mob)
     local zone = mob:getZone()
     zone:setLocalVar("DiabolosDiamond", mob:getID())
-    xi.dynamis.setNMStats(mob)
-    mob:setMobMod(xi.mobMod.SUPERLINK, 5)
+    xi.dynamis.setMegaBossStats(mob)
+    xi.dynamis.setDiabolosCommonTraits(mob)
+    mob:setAutoAttackEnabled(false)
+    mob:setMobMod(xi.mobMod.MAGIC_COOL, 25)
+end
+
+xi.dynamis.onMobFightDiabolosDiamond = function(mob, mobTarget)
+    if mob:getLocalVar("RuinousOmenHPP") > 0 then
+        checkRuinousOmen(mob)
+    end
+end
+
+xi.dynamis.onMobWeaponSkillDiabolosDiamond = function(target, mob, skill)
+    -- Nightmare was used - the fun begins
+    if skill:getID() == 1908 then
+        -- Needs more info
+        -- Reported to get stronger the more times nightmare happens.
+        -- Video evidence showed 5 charms at low HP https://youtu.be/Bvp-T3_U7xA?t=74
+        local numDaydreams = 5 --math.min(10 - (mob:getHPP() % 10), 5)
+        for i = 0, numDaydreams do
+            mob:useMobAbility(1919)
+        end
+    end
+end
+
+xi.dynamis.onSpawnDiabolosShard = function(mob)
+    xi.dynamis.setMegaBossStats(mob)
+    xi.dynamis.setDiabolosCommonTraits(mob)
+end
+
+xi.dynamis.onMobFightDiabolosShard = function(mob, mobTarget)
+    mob:useMobAbility(1903)
+end
+
+xi.dynamis.onMobWeaponSkillDiabolosShard = function(target, mob, skill)
+    mob:setHP(0)
 end
 
 -- ToDo
 -- Umbrals are suposed to be NPCs
--- Despawn all remaining Umbrals on Diabolos boss engage?
--- Give title when the last diabolos dies
--- Spawn ??? when the last diabolos dies (which gives different title)
--- When does music change? when diabolos spawns?
 
-xi.dynamis.mobOnDeathDiabolosClub = function(mob, player, optParams)
+xi.dynamis.mobOnDeathDiabolos = function(mob, player, optParams)
+    local zone = mob:getZone()
+    if zone:getLocalVar("ProcessMegaBossDeathOnce") > 0 then
+        return
+    end
+
+    local allDead = true
+
+    local aliveDiabolos = {}
+    if zone:getLocalVar("DiabolosClub") > 0 then
+        table.insert(aliveDiabolos, GetMobByID(zone:getLocalVar("DiabolosClub")))
+    end
+
+    if zone:getLocalVar("DiabolosHeart") > 0 then
+        table.insert(aliveDiabolos, GetMobByID(zone:getLocalVar("DiabolosHeart")))
+    end
+
+    if zone:getLocalVar("DiabolosSpade") > 0 then
+        table.insert(aliveDiabolos, GetMobByID(zone:getLocalVar("DiabolosSpade")))
+    end
+
+    if zone:getLocalVar("DiabolosDiamond") > 0 then
+        table.insert(aliveDiabolos, GetMobByID(zone:getLocalVar("DiabolosDiamond")))
+    end
+
+    for _, v in pairs(aliveDiabolos) do
+        if
+            v ~= nil and
+            v:isAlive()
+        then
+            allDead = false
+        end
+    end
+
+    if allDead then
+        zone:setLocalVar("ProcessMegaBossDeathOnce", 1)
+        -- despawn Umbrals
+        for i = 106, 109 do
+            local mobID = zone:getLocalVar(string.format("%s", i))
+            if mobID > 0 then
+                DespawnMob(mobID)
+            end
+        end
+
+        xi.dynamis.megaBossOnDeath(mob, player, optParams)
+    end
 end
 
-xi.dynamis.mobOnDeathDiabolosHeart = function(mob, player, optParams)
+xi.dynamis.onMobEngagedDiabolos = function(mob, mobTarget)
+    mob:setLocalVar("hasEngaged", 1)
 end
 
-xi.dynamis.mobOnDeathDiabolosSpade = function(mob, player, optParams)
-end
+xi.dynamis.onMobRoamDiabolos = function(mob)
+    if mob:getLocalVar("hasEngaged") == 0 then
+        return
+    end
 
-xi.dynamis.mobOnDeathDiabolosDiamond = function(mob, player, optParams)
+    local zone = mob:getZone()
+    local noHate = true
+    local spawnedDiabolos = {}
+    if zone:getLocalVar("DiabolosClub") > 0 then
+        table.insert(spawnedDiabolos, GetMobByID(zone:getLocalVar("DiabolosClub")))
+    end
+
+    if zone:getLocalVar("DiabolosHeart") > 0 then
+        table.insert(spawnedDiabolos, GetMobByID(zone:getLocalVar("DiabolosHeart")))
+    end
+
+    if zone:getLocalVar("DiabolosSpade") > 0 then
+        table.insert(spawnedDiabolos, GetMobByID(zone:getLocalVar("DiabolosSpade")))
+    end
+
+    if zone:getLocalVar("DiabolosDiamond") > 0 then
+        table.insert(spawnedDiabolos, GetMobByID(zone:getLocalVar("DiabolosDiamond")))
+    end
+
+    for _, v in pairs(spawnedDiabolos) do
+        if
+            v ~= nil and
+            v:isEngaged()
+        then
+            noHate = false
+        end
+    end
+
+    mob:messageText(mob, ID.text.NOW_I_WILL_JOIN_THEM)
+
+    if noHate then
+        for _, v in pairs(spawnedDiabolos) do
+            DespawnMob(v:getID())
+        end
+
+        for i = 106, 109 do
+            local mobID = zone:getLocalVar(string.format("%s", i))
+            if mobID > 0 then
+                DespawnMob(mobID)
+            end
+        end
+    end
 end

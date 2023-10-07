@@ -1427,6 +1427,10 @@ m:addOverride("xi.globals.mobskills.daze.onMobSkillCheck", function(target, mob,
     return 0
 end)
 
+m:addOverride("xi.globals.mobskills.daydream.onMobSkillCheck", function(target, mob, skill)
+    return 0
+end)
+
 m:addOverride("xi.globals.mobskills.deadeye.onMobSkillCheck", function(target, mob, skill)
     return 0
 end)
@@ -1729,6 +1733,17 @@ m:addOverride("xi.globals.mobskills.dread_shriek.onMobSkillCheck", function(targ
 end)
 
 m:addOverride("xi.globals.mobskills.dream_flower.onMobSkillCheck", function(target, mob, skill)
+    return 0
+end)
+
+m:addOverride("xi.globals.mobskills.dream_shroud.onMobSkillCheck", function(target, mob, skill)
+    if
+        mob:hasStatusEffect(xi.effect.MAGIC_ATK_BOOST) or
+        mob:hasStatusEffect(xi.effect.MAGIC_DEF_BOOST)
+    then
+        return 1
+    end
+
     return 0
 end)
 
@@ -3048,6 +3063,10 @@ m:addOverride("xi.globals.mobskills.hyper_pulse.onMobSkillCheck", function(targe
     return 1
 end)
 
+m:addOverride("xi.globals.mobskills.hypnogenesis.onMobSkillCheck", function(target, mob, skill)
+    return 0
+end)
+
 m:addOverride("xi.globals.mobskills.hypnosis.onMobSkillCheck", function(target, mob, skill)
     return 0
 end)
@@ -3965,11 +3984,18 @@ end)
 
 m:addOverride("xi.globals.mobskills.nether_blast.onMobSkillCheck", function(target, mob, skill)
     -- Ranged attack only used when target is out of range
-    if mob:checkDistance(target) > 2 then
+    if
+        mob:checkDistance(target) > 2 or
+        skill:getID() == 1910 -- Diabolos Dynamis Tavnazia doesnt care about range
+    then
         return 0
     else
         return 1
     end
+end)
+
+m:addOverride("xi.globals.mobskills.nether_tempest.onMobSkillCheck", function(target, mob, skill)
+    return 0
 end)
 
 m:addOverride("xi.globals.mobskills.nightmare.onMobSkillCheck", function(target, mob, skill)
@@ -5834,6 +5860,10 @@ m:addOverride("xi.globals.mobskills.sweep.onMobSkillCheck", function(target, mob
 end)
 
 m:addOverride("xi.globals.mobskills.sweeping_flail.onMobSkillCheck", function(target, mob, skill)
+    return 0
+end)
+
+m:addOverride("xi.globals.mobskills.sweeping_somnolence.onMobSkillCheck", function(target, mob, skill)
     return 0
 end)
 
