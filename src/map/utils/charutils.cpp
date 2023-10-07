@@ -152,6 +152,15 @@ namespace charutils
         JOBTYPE    sjob        = PChar->GetSJob();
         MERIT_TYPE statMerit[] = { MERIT_STR, MERIT_DEX, MERIT_VIT, MERIT_AGI, MERIT_INT, MERIT_MND, MERIT_CHR };
 
+        // NOTE: Monstrosity (MON) is treated as its own job, but each species is it's own
+        //     : combination of main/sub job for stats, traits and abilities.
+        if (mjob == JOB_MON || sjob == JOB_MON)
+        {
+            // TODO: Look up species jobs, hardcoded as WAR for now
+            mjob = JOB_WAR;
+            sjob = JOB_WAR;
+        }
+
         uint8 race = 0; // Hume
 
         switch (PChar->look.race)
@@ -2932,19 +2941,15 @@ namespace charutils
 
     void BuildingCharAbilityTable(CCharEntity* PChar)
     {
-        std::vector<CAbility*> AbilitiesList;
-
         if (PChar == nullptr)
         {
             ShowWarning("charutils::BuildingCharAbilityTable() - PChar was null.");
             return;
         }
 
-        memset(&PChar->m_Abilities, 0, sizeof(PChar->m_Abilities));
+        std::memset(&PChar->m_Abilities, 0, sizeof(PChar->m_Abilities));
 
-        AbilitiesList = ability::GetAbilities(PChar->GetMJob());
-
-        for (auto PAbility : AbilitiesList)
+        for (auto PAbility : ability::GetAbilities(PChar->GetMJob()))
         {
             if (PAbility == nullptr)
             {
@@ -2982,9 +2987,7 @@ namespace charutils
             return;
         }
 
-        AbilitiesList = ability::GetAbilities(PChar->GetSJob());
-
-        for (auto PAbility : AbilitiesList)
+        for (auto PAbility : ability::GetAbilities(PChar->GetSJob()))
         {
             if (PChar->GetSLevel() >= PAbility->getLevel())
             {
@@ -5412,7 +5415,7 @@ namespace charutils
 
     /************************************************************************
      *                                                                       *
-     *  Сохраняем текущие уровни профессий персонажа                         *
+     *  We save the current levels of character professions                         *
      *                                                                       *
      ************************************************************************/
 
@@ -5423,6 +5426,12 @@ namespace charutils
         if (job == JOB_NON || job >= MAX_JOBTYPE)
         {
             ShowWarning("Attempt to save Invalid Job with JOBTYPE %d.", job);
+            return;
+        }
+
+        // Monstrosity job and level data is handled elsewhere, bail out now
+        if (job == JOB_MON)
+        {
             return;
         }
 
@@ -5510,6 +5519,12 @@ namespace charutils
         if (job == JOB_NON || job >= MAX_JOBTYPE)
         {
             ShowWarning("Attempt to save Char XP with invalid JOBTYPE %d.", job);
+            return;
+        }
+
+        // Monstrosity exp data is handled elsewhere, bail out now
+        if (job == JOB_MON)
+        {
             return;
         }
 
