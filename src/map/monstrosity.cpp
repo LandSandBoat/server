@@ -337,12 +337,24 @@ void monstrosity::HandleEquipChangePacket(CCharEntity* PChar, CBasicPacket& data
     }
     else if (flag == 0x04) // Instinct Change
     {
+        // clang-format off
+        auto getTotalCost = [&](std::array<uint16, 12> input) -> uint8
+        {
+            uint8 total = 0;
+
+            for (auto const& idx : input)
+            {
+                total += gMonstrosityInstinctMap[idx].cost;
+            }
+
+            return total;
+        };
+        // clang-format on
+
         auto previousEquipped = PChar->m_PMonstrosity->EquippedInstincts;
 
-        // TODO:
         // NOTE: This is set by the client
         auto maxPoints = PChar->m_PMonstrosity->levels[PChar->m_PMonstrosity->MonstrosityId] + 10;
-        std::ignore    = maxPoints;
 
         // Remove All
         if (data.ref<uint16>(0x16) == 0xFFFF)
@@ -380,14 +392,20 @@ void monstrosity::HandleEquipChangePacket(CCharEntity* PChar, CBasicPacket& data
                         {
                             auto instinct = (*maybeInstinct).second;
 
-                            // TODO: Check:
-                            // instinct.cost
-
                             PChar->m_PMonstrosity->EquippedInstincts[idx] = value;
 
-                            for (auto const& mod : instinct.mods)
+                            // Validate:
+                            if (getTotalCost(PChar->m_PMonstrosity->EquippedInstincts) > maxPoints)
                             {
-                                PChar->addModifier(mod.getModID(), mod.getModAmount());
+                                // Reset to what it was before and don't handle mods
+                                PChar->m_PMonstrosity->EquippedInstincts = previousEquipped;
+                            }
+                            else
+                            {
+                                for (auto const& mod : instinct.mods)
+                                {
+                                    PChar->addModifier(mod.getModID(), mod.getModAmount());
+                                }
                             }
                         }
                     }
