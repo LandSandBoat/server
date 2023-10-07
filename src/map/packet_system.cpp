@@ -885,6 +885,11 @@ void SmallPacket0x01A(map_session_data_t* const PSession, CCharEntity* const PCh
                 return;
             }
 
+            if (PChar->m_PMonstrosity != nullptr)
+            {
+                return;
+            }
+
             CBaseEntity* PNpc = nullptr;
             PNpc              = PChar->GetEntity(TargID, TYPE_NPC | TYPE_MOB);
 
@@ -7249,8 +7254,12 @@ void SmallPacket0x100(map_session_data_t* const PSession, CCharEntity* const PCh
 
         PChar->StatusEffectContainer->DelStatusEffectsByFlag(EFFECTFLAG_DISPELABLE | EFFECTFLAG_ROLL | EFFECTFLAG_ON_JOBCHANGE);
 
+        // clang-format off
         PChar->ForParty([](CBattleEntity* PMember)
-                        { ((CCharEntity*)PMember)->PLatentEffectContainer->CheckLatentsPartyJobs(); });
+        {
+            ((CCharEntity*)PMember)->PLatentEffectContainer->CheckLatentsPartyJobs();
+        });
+        // clang-format on
 
         PChar->UpdateHealth();
 
