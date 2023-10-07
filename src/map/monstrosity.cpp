@@ -166,23 +166,6 @@ void monstrosity::WriteMonstrosityData(CCharEntity* PChar)
         return;
     }
 
-    /*
-    // TODO: Ensure there's a row to write to
-    {
-        bool  needToCreate = false;
-        int32 ret          = sql->Query("SELECT * FROM char_monstrosity WHERE charid = %d;", PChar->id);
-        if (ret != SQL_ERROR && sql->NumRows() == 0)
-        {
-            needToCreate = true;
-        }
-
-        if (needToCreate)
-        {
-            sql->Query("INSERT INTO char_monstrosity VALUES (%d, 1, 1, 0, 0, 0, 0, 0, 0, 0);;", PChar->id);
-        }
-    }
-    */
-
     const char* Query = "REPLACE INTO char_monstrosity SET "
                         "charid = '%u', "
                         "current_monstrosity_id = '%d', "
@@ -238,6 +221,13 @@ void monstrosity::HandleZoneIn(CCharEntity* PChar)
             }
         }
 
+        if (PChar->loc.zone->GetID() != ZONE_FERETORY)
+        {
+            // TODO: Add Gestation effect
+        }
+
+        // TODO: Lua binding
+
         PChar->updatemask |= UPDATE_LOOK;
     }
 }
@@ -285,7 +275,9 @@ void monstrosity::SendFullMonstrosityUpdate(CCharEntity* PChar)
 
 void monstrosity::HandleMonsterSkillActionPacket(CCharEntity* PChar, CBasicPacket& data)
 {
-    // TODO:
+    // TODO
+
+    // TODO: Lua binding
 }
 
 void monstrosity::HandleEquipChangePacket(CCharEntity* PChar, CBasicPacket& data)
@@ -308,9 +300,6 @@ void monstrosity::HandleEquipChangePacket(CCharEntity* PChar, CBasicPacket& data
         auto newSpecies = data.ref<uint16>(0x0C);
 
         auto data = gMonstrositySpeciesMap[newSpecies];
-
-        // For debugging and data entry
-        // ShowInfo(fmt::format("Species: {}: {}", newSpecies, data.name));
 
         PChar->m_PMonstrosity->Species = newSpecies;
 
@@ -385,9 +374,12 @@ void monstrosity::HandleEquipChangePacket(CCharEntity* PChar, CBasicPacket& data
             }
         }
     }
-    else if (flag == 0x08) // Name Change
+    else if (flag == 0x08) // Name Change 1
     {
         PChar->m_PMonstrosity->NamePrefix1 = data.ref<uint8>(0x28);
+    }
+    else if (flag == 0x10) // Name Change 2
+    {
         PChar->m_PMonstrosity->NamePrefix2 = data.ref<uint8>(0x29);
     }
 
