@@ -259,14 +259,13 @@ CZoneInPacket::CZoneInPacket(CCharEntity* PChar, const EventInfo* currentEvent)
 
     if (PChar->m_PMonstrosity != nullptr)
     {
-        // NOTE: When you log in on retail, your model is correct immediately, but the name "pops in" a tick
-        // or two later.
-
-        // TODO: These make the spawn in cleaner, but then the name doesn't work correctly
-        // ref<uint16>(0x04)  = PChar->m_PMonstrosity->Look;
-        // ref<uint16>(0x14) = 0xFFFF;
+        // look_t data from above
+        ref<uint16>(0x44) = PChar->m_PMonstrosity->Look;
+        ref<uint16>(0x54) = 0xFFFF;
 
         // Enable Monstrosity menu options
-        ref<uint8>(0x7E) = 0x1F;
+        ref<uint8>(0x7E)  = 0x1F;
+
+        ref<uint32>(0x98) = monstrosity::GetPackedMonstrosityName(PChar);
     }
 }
