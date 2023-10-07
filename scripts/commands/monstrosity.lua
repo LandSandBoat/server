@@ -7,10 +7,8 @@ commandObj.cmdprops =
 }
 
 commandObj.onTrigger = function(player)
-    if player:getCharVar('MONSTROSITY_START') == 1 then
-        player:setCharVar('MONSTROSITY_START', 0)
-    else
-        player:setCharVar('MONSTROSITY_START', 1)
+    if not player:getMainJob() ~= xi.job.MON then
+        player:changeJob(xi.job.MON)
     end
 
     player:setPos(player:getXPos(), player:getYPos(), player:getZPos(), player:getRotPos(), player:getZoneID())
