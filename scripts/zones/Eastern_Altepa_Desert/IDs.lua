@@ -30,6 +30,7 @@ zones[xi.zone.EASTERN_ALTEPA_DESERT] =
         FIND_NOTHING                  = 7576,  -- You dig and you dig, but find nothing.
         AMK_DIGGING_OFFSET            = 7642,  -- You spot some familiar footprints. You are convinced that your moogle friend has been digging in the immediate vicinity.
         ALREADY_OBTAINED_TELE         = 7670,  -- You already possess the gate crystal for this telepoint.
+        HOSTILE_GAZE                  = 7675,  -- You feel a hostile gaze upon you!
         GARRISON_BASE                 = 7696,  -- Hm? What is this? %? How do I know this is not some [San d'Orian/Bastokan/Windurstian] trick?
         PLAYER_OBTAINS_ITEM           = 7769,  -- <name> obtains <item>!
         UNABLE_TO_OBTAIN_ITEM         = 7770,  -- You were unable to obtain the item.

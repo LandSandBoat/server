@@ -1222,7 +1222,7 @@ xi.treasure.treasureInfo =
                     {
                         test = function(player)
                             return player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.KNIGHT_STALKER) == QUEST_ACCEPTED and
-                                player:getCharVar("KnightStalker_Progress") == 1
+                                player:getCharVar("Quest[0][96]Prog") == 1
                         end,
 
                         code = function(player)
