@@ -3976,6 +3976,16 @@ void SmallPacket0x05E(map_session_data_t* const PSession, CCharEntity* const PCh
                 PChar->status = STATUS_TYPE::NORMAL;
                 return;
             }
+            else if (PChar->m_PMonstrosity) // Not allowed to use zonelines while MON
+            {
+                PChar->loc.p.rotation += 128;
+
+                PChar->pushPacket(new CMessageSystemPacket(0, 0, 2)); // You could not enter the next area.
+                PChar->pushPacket(new CCSPositionPacket(PChar));
+
+                PChar->status = STATUS_TYPE::NORMAL;
+                return;
+            }
             else
             {
                 // Ensure the destination exists
