@@ -320,7 +320,19 @@ void monstrosity::HandleEquipChangePacket(CCharEntity* PChar, CBasicPacket& data
 
         auto newSpecies = data.ref<uint16>(0x0C);
 
+        // Invalid species
+        if (gMonstrositySpeciesMap.find(newSpecies) == gMonstrositySpeciesMap.end())
+        {
+            return;
+        }
+
         auto data = gMonstrositySpeciesMap[newSpecies];
+
+        // Not unlocked
+        if (PChar->m_PMonstrosity->levels[data.monstrosityId] == 0)
+        {
+            return;
+        }
 
         PChar->m_PMonstrosity->Species = newSpecies;
 
