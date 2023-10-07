@@ -176,7 +176,7 @@ entity.onMobFight = function(mob, target)
     end)
 -- Weakness trigger, hit with Zephyr
     mob:addListener("EFFECT_GAIN", "ZEPHYR", function(mob, effect)
-        if effect:getType() == xi.effect.AMNESIA then
+        if effect:getEffectType() == xi.effect.AMNESIA then
             mob:weaknessTrigger(3)
             mob:delStatusEffect(xi.effect.ICE_SPIKES)
             mob:setMod(xi.mod.ICE_MEVA, 0)
