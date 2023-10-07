@@ -69,6 +69,11 @@ monstrosity::MonstrosityData_t::MonstrosityData_t()
 , NamePrefix2(0x00)   // Nothing
 , CurrentExp(0)       // No exp
 {
+    levels[1]  = 1; // Rabbit
+    levels[18] = 1; // Mandragora
+    levels[43] = 1; // Lizard
+
+    instincts[20] = 0x1F; // Default player race instincts
 }
 
 void monstrosity::LoadStaticData()
@@ -140,38 +145,10 @@ void monstrosity::ReadMonstrosityData(CCharEntity* PChar)
             data->NamePrefix2 = static_cast<uint8>(sql->GetUIntData(4));
             data->CurrentExp  = static_cast<uint32>(sql->GetUIntData(5));
 
-            // TODO: Make these a template in sql.h
-            // equip
-            {
-                size_t length = 0;
-                char*  buffer = nullptr;
-                sql->GetData(6, &buffer, &length);
-                std::memcpy(&data->EquippedInstincts[0], buffer, (length > sizeof(data->EquippedInstincts) ? sizeof(data->EquippedInstincts) : length));
-            }
-
-            // levels
-            {
-                size_t length = 0;
-                char*  buffer = nullptr;
-                sql->GetData(7, &buffer, &length);
-                std::memcpy(&data->levels[0], buffer, (length > sizeof(data->levels) ? sizeof(data->levels) : length));
-            }
-
-            // instincts
-            {
-                size_t length = 0;
-                char*  buffer = nullptr;
-                sql->GetData(8, &buffer, &length);
-                std::memcpy(&data->instincts[0], buffer, (length > sizeof(data->instincts) ? sizeof(data->instincts) : length));
-            }
-
-            // variants
-            {
-                size_t length = 0;
-                char*  buffer = nullptr;
-                sql->GetData(9, &buffer, &length);
-                std::memcpy(&data->variants[0], buffer, (length > sizeof(data->variants) ? sizeof(data->variants) : length));
-            }
+            sql->GetBlobData(6, &data->EquippedInstincts);
+            sql->GetBlobData(7, &data->levels);
+            sql->GetBlobData(8, &data->instincts);
+            sql->GetBlobData(9, &data->variants);
 
             // TODO:
             auto level  = data->levels[data->MonstrosityId];
@@ -189,6 +166,7 @@ void monstrosity::WriteMonstrosityData(CCharEntity* PChar)
         return;
     }
 
+    /*
     // TODO: Ensure there's a row to write to
     {
         bool  needToCreate = false;
@@ -203,8 +181,10 @@ void monstrosity::WriteMonstrosityData(CCharEntity* PChar)
             sql->Query("INSERT INTO char_monstrosity VALUES (%d, 1, 1, 0, 0, 0, 0, 0, 0, 0);;", PChar->id);
         }
     }
+    */
 
-    const char* Query = "UPDATE char_monstrosity SET "
+    const char* Query = "REPLACE INTO char_monstrosity SET "
+                        "charid = '%u', "
                         "current_monstrosity_id = '%d', "
                         "current_monstrosity_species = '%d', "
                         "current_monstrosity_name_prefix_1 = '%d', "
@@ -213,49 +193,24 @@ void monstrosity::WriteMonstrosityData(CCharEntity* PChar)
                         "equip = '%s', "
                         "levels = '%s', "
                         "instincts = '%s', "
-                        "variants = '%s'"
-                        "WHERE charid = %u;";
+                        "variants = '%s';";
 
-    // TODO: Make these a template in sql.h
-    char equipEscaped[sizeof(PChar->m_PMonstrosity->EquippedInstincts) * 2 + 1];
-    {
-        char dataBlob[sizeof(PChar->m_PMonstrosity->EquippedInstincts)];
-        std::memcpy(dataBlob, &PChar->m_PMonstrosity->EquippedInstincts[0], sizeof(dataBlob));
-        sql->EscapeStringLen(equipEscaped, dataBlob, sizeof(dataBlob));
-    }
-
-    char levelsEscaped[sizeof(PChar->m_PMonstrosity->levels) * 2 + 1];
-    {
-        char dataBlob[sizeof(PChar->m_PMonstrosity->levels)];
-        std::memcpy(dataBlob, &PChar->m_PMonstrosity->levels[0], sizeof(dataBlob));
-        sql->EscapeStringLen(levelsEscaped, dataBlob, sizeof(dataBlob));
-    }
-
-    char instinctsEscaped[sizeof(PChar->m_PMonstrosity->instincts) * 2 + 1];
-    {
-        char dataBlob[sizeof(PChar->m_PMonstrosity->instincts)];
-        std::memcpy(dataBlob, &PChar->m_PMonstrosity->instincts[0], sizeof(dataBlob));
-        sql->EscapeStringLen(instinctsEscaped, dataBlob, sizeof(dataBlob));
-    }
-
-    char variantsEscaped[sizeof(PChar->m_PMonstrosity->variants) * 2 + 1];
-    {
-        char dataBlob[sizeof(PChar->m_PMonstrosity->variants)];
-        std::memcpy(dataBlob, &PChar->m_PMonstrosity->variants[0], sizeof(dataBlob));
-        sql->EscapeStringLen(variantsEscaped, dataBlob, sizeof(dataBlob));
-    }
+    auto equipEscaped     = sql->ObjectToBlobString(&PChar->m_PMonstrosity->EquippedInstincts);
+    auto levelsEscaped    = sql->ObjectToBlobString(&PChar->m_PMonstrosity->levels);
+    auto instinctsEscaped = sql->ObjectToBlobString(&PChar->m_PMonstrosity->instincts);
+    auto variantsEscaped  = sql->ObjectToBlobString(&PChar->m_PMonstrosity->variants);
 
     sql->Query(Query,
+               PChar->id,
                PChar->m_PMonstrosity->MonstrosityId,
                PChar->m_PMonstrosity->Species,
                PChar->m_PMonstrosity->NamePrefix1,
                PChar->m_PMonstrosity->NamePrefix2,
                PChar->m_PMonstrosity->CurrentExp,
-               equipEscaped,
-               levelsEscaped,
-               instinctsEscaped,
-               variantsEscaped,
-               PChar->id);
+               equipEscaped.c_str(),
+               levelsEscaped.c_str(),
+               instinctsEscaped.c_str(),
+               variantsEscaped.c_str());
 }
 
 void monstrosity::HandleZoneIn(CCharEntity* PChar)
