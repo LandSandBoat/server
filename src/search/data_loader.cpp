@@ -30,6 +30,11 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "data_loader.h"
 #include "search.h"
 
+namespace
+{
+    uint8 JOB_MON = 23;
+} // namespace
+
 CDataLoader::CDataLoader()
 : sql(std::make_unique<SqlConnection>())
 {
@@ -287,36 +292,49 @@ std::list<SearchEntity*> CDataLoader::GetPlayersList(search_req sr, int* count)
             {
                 PPlayer->flags1 |= 0x0001;
             }
+
             if (partyid == PPlayer->id)
             {
                 PPlayer->flags1 |= 0x0008;
             }
+
             if (PPlayer->seacom_type)
             {
                 PPlayer->flags1 |= 0x0010;
             }
+
             if (nameflag & FLAG_AWAY)
             {
                 PPlayer->flags1 |= 0x0100;
             }
+
             if (nameflag & FLAG_DC)
             {
                 PPlayer->flags1 |= 0x0800;
             }
+
             if (partyid != 0)
             {
                 PPlayer->flags1 |= 0x2000;
             }
+
             if (nameflag & FLAG_ANON)
             {
                 PPlayer->flags1 |= 0x4000;
             }
+
             if (nameflag & FLAG_INVITE)
             {
                 PPlayer->flags1 |= 0x8000;
             }
 
             PPlayer->flags2 = PPlayer->flags1;
+
+            if (PPlayer->mjob == JOB_MON || PPlayer->sjob == JOB_MON)
+            {
+                PPlayer->mjob = 0;
+                PPlayer->sjob = 0;
+            }
 
             // filter by job
             if (sr.jobid > 0 && sr.jobid != PPlayer->mjob)
