@@ -47,6 +47,8 @@ struct MonstrositySpeciesRow
     uint8       monstrosityId;
     uint16      monstrositySpeciesCode;
     std::string name;
+    JOBTYPE     mjob;
+    JOBTYPE     sjob;
     uint16      look;
 };
 
@@ -84,7 +86,7 @@ void monstrosity::LoadStaticData()
 {
     ShowInfo("Loading Monstrosity data");
 
-    int32 ret = sql->Query("SELECT monstrosity_id, monstrosity_species_code, name, look FROM monstrosity_species;");
+    int32 ret = sql->Query("SELECT monstrosity_id, monstrosity_species_code, name, mjob, sjob, look FROM monstrosity_species;");
     if (ret != SQL_ERROR && sql->NumRows() != 0)
     {
         while (sql->NextRow() == SQL_SUCCESS)
@@ -94,7 +96,9 @@ void monstrosity::LoadStaticData()
             row.monstrosityId          = static_cast<uint8>(sql->GetUIntData(0));
             row.monstrositySpeciesCode = static_cast<uint16>(sql->GetUIntData(1));
             row.name                   = sql->GetStringData(2);
-            row.look                   = static_cast<uint16>(sql->GetUIntData(3));
+            row.mjob                   = static_cast<JOBTYPE>(sql->GetUIntData(3));
+            row.sjob                   = static_cast<JOBTYPE>(sql->GetUIntData(4));
+            row.look                   = static_cast<uint16>(sql->GetUIntData(5));
 
             gMonstrositySpeciesMap[row.monstrositySpeciesCode] = row;
         }

@@ -94,7 +94,7 @@ xi.monstrosity.variants =
     LAPINION         = 2,
 
     -- Behemoth
-    ELSAMOTH = 3,
+    ELASMOTH = 3,
 
     -- Tiger
     LEGENDARY_TIGER = 5,
