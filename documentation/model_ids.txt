@@ -404,7 +404,7 @@ ID Number    Costume Name
 402    Manticore
 403    Kirin
 404    Behemoth
-405    Elsamoth(Abys)
+405    Elasamoth(Abys)
 406    Crawler 3(Eruca)
 407    Genbu
 408    Beetle 1(green)
