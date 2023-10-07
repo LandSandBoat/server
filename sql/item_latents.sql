@@ -998,6 +998,10 @@ INSERT INTO `item_latents` VALUES (14901,302,2,49,5929); -- triple attack 2% Ojo
 INSERT INTO `item_latents` VALUES (14921,8,13,26,2);     -- Dusk - Dawn: STR +13
 INSERT INTO `item_latents` VALUES (14921,384,400,26,2);  -- Dusk - Dawn: Haste +4%
 
+-- Carbuncles Cuffs
+INSERT INTO `item_latents` VALUES (14931,370,5,13,154);  -- Shining Ruby: Regen +5HP/tick
+
+-- Storm Gages
 INSERT INTO `item_latents` VALUES (14937,71,3,58,0);     -- storm gages hmp +3
 
 -- Deadeye Gloves
