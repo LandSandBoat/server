@@ -202,8 +202,7 @@ void monstrosity::WriteMonstrosityData(CCharEntity* PChar)
 
 void monstrosity::HandleZoneIn(CCharEntity* PChar)
 {
-    // TODO: Check we're about to enter monstrosity, charvar, flag, etc.
-    if (charutils::GetCharVar(PChar, "MONSTROSITY_START") == 1)
+    if (PChar->GetMJob() == JOB_MON)
     {
         // Populates PChar->m_PMonstrosity
         ReadMonstrosityData(PChar);
@@ -404,9 +403,11 @@ void monstrosity::HandleEquipChangePacket(CCharEntity* PChar, CBasicPacket& data
                         {
                             auto instinct = (*maybeInstinct).second;
 
+                            // TODO: Validate whether or not this instinct is unlocked
+
                             PChar->m_PMonstrosity->EquippedInstincts[idx] = value;
 
-                            // Validate:
+                            // Validate cost
                             if (getTotalCost(PChar->m_PMonstrosity->EquippedInstincts) > maxPoints)
                             {
                                 // Reset to what it was before and don't handle mods
