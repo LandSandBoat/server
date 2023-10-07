@@ -2086,7 +2086,7 @@ INSERT INTO `synth_recipes` VALUES (29945,1,0,0,0,49,0,0,0,0,0,4100,4242,13979,0
 INSERT INTO `synth_recipes` VALUES (29947,1,0,0,0,12,0,0,0,0,0,4100,4242,12705,0,0,0,0,0,0,0,650,850,649,649,1,1,1,1,'Brass Mittens (desynth)'); -- 2022.03.04 Base on FFXIclopedia Strange result, normal result would have bronze ingot yield and brass ingot hq3
 INSERT INTO `synth_recipes` VALUES (29948,1,0,0,0,71,0,0,0,0,0,4100,4242,12802,0,0,0,0,0,0,0,914,851,931,745,1,1,1,1,'Gold Cuisses (desynth)'); -- 2022.03.04 Base on FFXIclopedia
 INSERT INTO `synth_recipes` VALUES (29949,1,0,0,0,16,0,0,0,0,0,4100,4242,12833,0,0,0,0,0,0,0,817,850,649,650,3,1,1,1,'Brass Subligar (desynth)'); -- 2022.03.04 Base on FFXIclopedia
--- INSERT INTO `synth_recipes` VALUES (29950,1,0,0,0,30,0,0,0,0,0,4100,4242,16451,0,0,0,0,0,0,0,1226,1226,1226,1226,6,6,6,6,'Mythril Dagger (desynth)'); -- 2022.03.04 Base on FFXIclopedia normal yield abnormal and no hq result
+INSERT INTO `synth_recipes` VALUES (29950,1,0,0,0,30,0,0,0,0,0,4100,4242,16451,0,0,0,0,0,0,0,651,651,1226,1226,1,1,4,6,'Mythril Dagger (desynth)'); -- 2023.10.07 Base on FFXIclopedia
 INSERT INTO `synth_recipes` VALUES (29951,1,0,0,0,55,0,0,0,0,0,4100,4242,13478,0,0,0,0,0,0,0,808,808,653,653,1,1,1,2,'Goshenite Ring (desynth)');
 -- INSERT INTO `synth_recipes` VALUES (29952,1,0,0,0,21,0,0,0,0,0,4100,4242,17399,0,0,0,0,0,0,0,648,648,818,818,1,2,2,2,'Sabiki Rig (desynth)'); -- 2022.03.04 Base on FFXIclopedia removed Hq2 stated copper ingot X 3 strange result and flag needing verification
 INSERT INTO `synth_recipes` VALUES (29953,1,0,0,0,66,0,0,0,0,0,4100,4242,12673,0,0,0,0,0,0,0,817,850,653,1228,6,4,1,6,'Mythril Gauntlets (desynth)'); -- 2022.03.04 Base on FFXIclopedia
