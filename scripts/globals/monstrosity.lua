@@ -349,6 +349,13 @@ end
 -----------------------------------
 
 xi.monstrosity.unlockAll = function(player)
+    -- Complete quest
+    local logId = xi.quest.log_id.OTHER_AREAS
+    player:completeQuest(logId, xi.quest.id[xi.quest.area[logId]].MONSTROSITY)
+
+    -- Add Monstrosity key item
+    player:addKeyItem(xi.keyItem.RING_OF_SUPERNAL_DISJUNCTION)
+
     local data =
     {
         -- 1 byte per entry, mapped out to species table
@@ -399,8 +406,6 @@ xi.monstrosity.unlockAll = function(player)
         local byteOffset   = 20 + math.floor(val / 8)
         local shiftAmount  = val % 8
 
-        -- print(val, byteOffset, shiftAmount)
-
         if byteOffset >= 20 and byteOffset < 24 then
             data.instincts[byteOffset] = bit.bor(data.instincts[byteOffset] or 0, bit.lshift(0x01, shiftAmount))
         else
@@ -415,8 +420,6 @@ xi.monstrosity.unlockAll = function(player)
         local byteOffset   = math.floor(speciesKey / 8)
         local shiftAmount  = speciesKey % 8
 
-        -- print(speciesKey, byteOffset, shiftAmount)
-
         if byteOffset < 32 then
             data.variants[byteOffset] = bit.bor(data.variants[byteOffset] or 0, bit.lshift(0x01, shiftAmount))
         else
@@ -424,6 +427,7 @@ xi.monstrosity.unlockAll = function(player)
         end
     end
 
+    -- Set data
     player:setMonstrosity(data);
 end
 
@@ -448,12 +452,12 @@ xi.monstrosity.odysseanPassageOnTrigger = function(player, npc)
 end
 
 xi.monstrosity.odysseanPassageOnEventUpdate = function(player, csid, option, npc)
-    print('update', csid, option)
+    -- print('update', csid, option)
     player:updateEvent(0, 0, 0, 0, 1, 0, 0, 0)
 end
 
 xi.monstrosity.odysseanPassageOnEventFinish = function(player, csid, option, npc)
-    print('finish', csid, option)
+    -- print('finish', csid, option)
     -- Option 1: Leave & Teleport to last city zone
     -- Option 529: Teleport to Al'Taieu
 end
@@ -463,11 +467,6 @@ end
 -----------------------------------
 
 xi.monstrosity.feretoryOnZoneIn = function(player, prevZone)
-    -- TODO: Handle xi.settings.main.ENABLE_MONSTROSITY
-
-    -- TODO: Rabbit, Mandy, and Lizard are all unlocked to begin with, but you
-    --     : start as whatever matching item you traded
-
     local cs = -1
 
     player:setPos(-358.000, -3.400, -440.00, 63)
@@ -489,16 +488,15 @@ xi.monstrosity.aengusOnTrade = function(player, npc, trade)
 end
 
 xi.monstrosity.aengusOnTrigger = function(player, npc)
-    -- Event 13 (As Lizard: 0, 0, 2, 0, 2, 90, 0, 0)
     player:startEvent(13, 0, 0, 2, 0, 2, 90, 0, 0)
 end
 
 xi.monstrosity.aengusOnEventUpdate = function(player, csid, option, npc)
-    print('update', csid, option)
+    -- print('update', csid, option)
 end
 
 xi.monstrosity.aengusOnEventFinish = function(player, csid, option, npc)
-    print('finish', csid, option)
+    -- print('finish', csid, option)
     if csid == 13 and option == 1 then
         -- Selected: Enter Belligerency
     end
@@ -516,7 +514,7 @@ xi.monstrosity.teyrnonOnTrigger = function(player, npc)
 end
 
 xi.monstrosity.teyrnonOnEventUpdate = function(player, csid, option, npc)
-    print('update', csid, option)
+    -- print('update', csid, option)
     if csid == 7 and option == 0 then -- Monsters Menu
         player:updateEvent(0, 0, 0, 0, 0, 0, 0, 0)
     elseif csid == 7 and option == 1 then -- Instinct menu
@@ -525,7 +523,7 @@ xi.monstrosity.teyrnonOnEventUpdate = function(player, csid, option, npc)
 end
 
 xi.monstrosity.teyrnonOnEventFinish = function(player, csid, option, npc)
-    print('finish', csid, option)
+    -- print('finish', csid, option)
     -- Support Menu:
     -- option    3: Dedication 1
     -- option  259: Dedication 2
@@ -548,11 +546,11 @@ xi.monstrosity.maccusOnTrigger = function(player, npc)
 end
 
 xi.monstrosity.maccusOnEventUpdate = function(player, csid, option, npc)
-    print('update', csid, option)
+    -- print('update', csid, option)
 end
 
 xi.monstrosity.maccusOnEventFinish = function(player, csid, option, npc)
-    print('finish', csid, option)
+    -- print('finish', csid, option)
 end
 
 -----------------------------------
@@ -567,11 +565,11 @@ xi.monstrosity.suibhneOnTrigger = function(player, npc)
 end
 
 xi.monstrosity.suibhneOnEventUpdate = function(player, csid, option, npc)
-    print('update', csid, option)
+    -- print('update', csid, option)
 end
 
 xi.monstrosity.suibhneOnEventFinish = function(player, csid, option, npc)
-    print('finish', csid, option)
+    -- print('finish', csid, option)
     -- Answers:
     -- 1) 4. Teyrnon
     -- 2) 3. Suibhne
