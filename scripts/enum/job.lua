@@ -25,6 +25,7 @@ xi.job =
     SCH  = 20,
     GEO  = 21,
     RUN  = 22,
+    MON  = 23,
 }
 
-xi.MAX_JOB_TYPE = 23
+xi.MAX_JOB_TYPE = 24
