@@ -339,19 +339,92 @@ xi.monstrosity.unlockStartingMONs = function(player, choice)
     {
         monstrosityId = choice,
         species       = choice,
-        levels        =
-        {
-            [xi.monstrosity.species.RABBIT]     = 1,
-            [xi.monstrosity.species.MANDRAGORA] = 1,
-            [xi.monstrosity.species.LIZARD]     = 1,
-        },
-        instincts =
-        {
-            [20] = 0x1F, -- Unlock all first tier player race instincts
-        }
     }
 
     player:setMonstrosity(data)
+end
+
+-----------------------------------
+-- Debug
+-----------------------------------
+
+xi.monstrosity.unlockAll = function(player)
+    local data =
+    {
+        -- 1 byte per entry, mapped out to species table
+        -- (0 - 127)
+        levels =
+        {
+        },
+
+        -- Bitfield (0 - 63)
+        instincts =
+        {
+        },
+
+        -- Bitfield (0 - 31)
+        variants =
+        {
+        },
+    }
+
+    -- Set all levels to 99
+    for _, val in pairs(xi.monstrosity.species) do
+        data.levels[val] = 99
+    end
+
+    -- Instincts by MON level
+    -- NOTE: Since this is a bitfield, it's zero-indexed!
+    for _, val in pairs(xi.monstrosity.species) do
+        local speciesKey   = val
+        local speciesLevel = data.levels[val]
+        local byteOffset   = math.floor(speciesKey / 4)
+        local unlockAmount = math.floor(speciesLevel / 30)
+        local shiftAmount  = (speciesKey * 2) % 8
+
+        -- Special case for writing Slime & Spriggan data at the end of the 64-byte array
+        if byteOffset == 31 then
+            byteOffset = 63
+        end
+
+        if byteOffset < 64 then
+            data.instincts[byteOffset] = bit.bor(data.instincts[byteOffset] or 0, bit.lshift(unlockAmount, shiftAmount))
+        else
+            print("byteOffset out of range")
+        end
+    end
+
+    -- Instincts (Purchasable)
+    for _, val in pairs(xi.monstrosity.purchasableInstincts) do
+        local byteOffset   = 20 + math.floor(val / 8)
+        local shiftAmount  = val % 8
+
+        -- print(val, byteOffset, shiftAmount)
+
+        if byteOffset >= 20 and byteOffset < 24 then
+            data.instincts[byteOffset] = bit.bor(data.instincts[byteOffset] or 0, bit.lshift(0x01, shiftAmount))
+        else
+            print("byteOffset out of range")
+        end
+    end
+
+    -- Variants
+    -- Force unlock all
+    for _, val in pairs(xi.monstrosity.variants) do
+        local speciesKey   = val
+        local byteOffset   = math.floor(speciesKey / 8)
+        local shiftAmount  = speciesKey % 8
+
+        -- print(speciesKey, byteOffset, shiftAmount)
+
+        if byteOffset < 32 then
+            data.variants[byteOffset] = bit.bor(data.variants[byteOffset] or 0, bit.lshift(0x01, shiftAmount))
+        else
+            print("byteOffset out of range")
+        end
+    end
+
+    player:setMonstrosity(data);
 end
 
 -----------------------------------
