@@ -36,6 +36,9 @@
 #include "utils/charutils.h"
 #include "utils/zoneutils.h"
 
+#include "status_effect.h"
+#include "status_effect_container.h"
+
 extern std::unique_ptr<SqlConnection> sql;
 
 struct MonstrositySpeciesRow
@@ -223,10 +226,24 @@ void monstrosity::HandleZoneIn(CCharEntity* PChar)
 
         if (PChar->loc.zone->GetID() != ZONE_FERETORY)
         {
-            // TODO: Add Gestation effect
-        }
+            CStatusEffect* PEffect = new CStatusEffect(EFFECT::EFFECT_GESTATION, EFFECT::EFFECT_GESTATION, 0, 0, 0);
 
-        // TODO: Lua binding
+            // TODO: You cannot attack while you're in Gest., you have to click it off
+
+            // TODO: Move these into the db
+            PEffect->AddEffectFlag(EFFECTFLAG_INVISIBLE);
+            PEffect->AddEffectFlag(EFFECTFLAG_DEATH);
+            PEffect->AddEffectFlag(EFFECTFLAG_ATTACK);
+            PEffect->AddEffectFlag(EFFECTFLAG_MAGIC_BEGIN);
+            PEffect->AddEffectFlag(EFFECTFLAG_DETECTABLE);
+            PEffect->AddEffectFlag(EFFECTFLAG_LOGOUT);
+            PEffect->AddEffectFlag(EFFECTFLAG_ON_ZONE);
+
+            // NOTE: It DOES say the effect wears off
+            // PEffect->AddEffectFlag(EFFECTFLAG_NO_LOSS_MESSAGE);
+
+            PChar->StatusEffectContainer->AddStatusEffect(PEffect, true);
+        }
 
         PChar->updatemask |= UPDATE_LOOK;
     }
@@ -428,6 +445,7 @@ void monstrosity::HandleDeathMenu(CCharEntity* PChar, uint8 type)
     if (type == 1)
     {
         // Return to Feretory
+        // TODO: This should return you to the Odyssean Passage you entered with, not Feretory!
         PChar->loc.destination = ZONE_FERETORY;
     }
     else if (type == 2)
