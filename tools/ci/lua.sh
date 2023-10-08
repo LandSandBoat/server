@@ -109,10 +109,6 @@ global_objects=(
 
     SetExplorerMoogles
 
-    applyHalloweenNpcCostumes
-    isHalloweenEnabled
-    onHalloweenTrade
-
     addBonuses
     addBonusesAbility
     applyBarspell

@@ -166,12 +166,6 @@ zones[xi.zone.NORTHERN_SAN_DORIA] =
     },
     npc =
     {
-        HALLOWEEN_SKINS =
-        {
-            [17723487] = 53, -- Vichuel
-            [17723492] = 52, -- Antonian
-            [17723497] = 51, -- Attarena
-        },
         STARLIGHT_DECORATIONS =
         {
             [17723785] = 17723785,  -- Starlight Celebration Banner

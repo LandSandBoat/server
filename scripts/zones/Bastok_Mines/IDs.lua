@@ -113,14 +113,6 @@ zones[xi.zone.BASTOK_MINES] =
     },
     npc =
     {
-        HALLOWEEN_SKINS =
-        {
-            [17735742] = 41, -- Faustin
-            [17735744] = 43, -- Mille
-            [17735747] = 42, -- Aulavia
-            [17735795] = 40, -- Proud Beard
-            [17735818] = 44, -- Emaliveulaux
-        },
         STARLIGHT_DECORATIONS =
         {
             [17735995] = 17735995,  -- Christina

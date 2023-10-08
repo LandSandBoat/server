@@ -4,7 +4,6 @@
 -- Tavnazian Archipelago Regional Merchant
 -----------------------------------
 local ID = require("scripts/zones/Bastok_Mines/IDs")
-require("scripts/globals/events/harvest_festivals")
 require("scripts/globals/conquest")
 require("scripts/globals/missions")
 require("scripts/globals/shop")
@@ -12,7 +11,7 @@ require("scripts/globals/shop")
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    onHalloweenTrade(player, trade, npc)
+    xi.events.harvest.onHalloweenTrade(player, trade, npc)
 end
 
 entity.onTrigger = function(player, npc)

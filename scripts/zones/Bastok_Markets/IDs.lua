@@ -95,10 +95,6 @@ zones[xi.zone.BASTOK_MARKETS] =
     {
         AQUILLINA = GetFirstID("Aquillina"),
 
-        HALLOWEEN_SKINS =
-        {
-            [GetFirstID("Olwyn")] = 45, -- Olwyn
-        },
         STARLIGHT_DECORATIONS =
         {
             [17740161] = 17740161,  -- Starlight Celebration Center Fountain
