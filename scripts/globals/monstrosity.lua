@@ -377,6 +377,50 @@ xi.monstrosity.hasUnlockedSpecies = function(player, species)
     return xi.monstrosity.getSpeciesLevel(player, species) > 0
 end
 
+xi.monstrosity.setSpeciesLevel = function(player, species, level)
+    local data = player:getMonstrosityData()
+    data.levels[species] = level
+    player:setMonstrosityData(data)
+end
+
+xi.monstrosity.unlockSpecies = function(player, species)
+    if not xi.monstrosity.hasUnlockedSpecies(player, species) then
+        xi.monstrosity.setSpeciesLevel(player, species, 1)
+    end
+end
+
+-- Use xi.monstrosity.variants
+xi.monstrosity.hasUnlockedVariant = function(player, variant)
+    local data = player:getMonstrosityData()
+
+    local byteOffset   = math.floor(variant / 8)
+    local shiftAmount  = variant % 8
+
+    if byteOffset < 32 then
+        return bit.band(data.variants[byteOffset] or 0, bit.lshift(0x01, shiftAmount)) > 0
+    end
+
+    return false
+end
+
+-- Use xi.monstrosity.variants
+xi.monstrosity.unlockVariant = function(player, variant)
+    if not xi.monstrosity.hasUnlockedVariant(player, variant) then
+        local data = player:getMonstrosityData()
+
+        local byteOffset   = math.floor(variant / 8)
+        local shiftAmount  = variant % 8
+
+        if byteOffset < 32 then
+            data.variants[byteOffset] = bit.bor(data.variants[byteOffset] or 0, bit.lshift(0x01, shiftAmount))
+        else
+            print('byteOffset out of range')
+        end
+
+        player:setMonstrosityData(data)
+    end
+end
+
 -----------------------------------
 -- Bound by C++ (DO NOT CHANGE SIGNATURE)
 -----------------------------------
@@ -606,33 +650,4 @@ end
 
 xi.monstrosity.maccusOnEventFinish = function(player, csid, option, npc)
     -- print('finish', csid, option)
-end
-
------------------------------------
--- Suibhne (Feretory NPC)
------------------------------------
-
-xi.monstrosity.suibhneOnTrade = function(player, npc, trade)
-end
-
-xi.monstrosity.suibhneOnTrigger = function(player, npc)
-    player:startEvent(11, 1, 1, 0, 0, 0, 0, 0, 0)
-end
-
-xi.monstrosity.suibhneOnEventUpdate = function(player, csid, option, npc)
-    -- print('update', csid, option)
-end
-
-xi.monstrosity.suibhneOnEventFinish = function(player, csid, option, npc)
-    -- print('finish', csid, option)
-    -- Answers:
-    -- 1) 4. Teyrnon
-    -- 2) 3. Suibhne
-    -- 3) 1. Aengus
-    if csid == 11 and option == 2 then
-        -- Quiz failed
-    elseif csid == 11 and option == 6029313 then
-        -- Quiz succeeded
-        -- TODO: Unlock Bee (MON)
-    end
 end
