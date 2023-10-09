@@ -26,6 +26,8 @@
 
 #include "entities/charentity.h"
 
+#include "lua/luautils.h"
+
 #include "packets/char_abilities.h"
 #include "packets/char_appearance.h"
 #include "packets/char_job_extra.h"
@@ -224,48 +226,53 @@ void monstrosity::TryPopulateMonstrosityData(CCharEntity* PChar)
 
 void monstrosity::HandleZoneIn(CCharEntity* PChar)
 {
-    if (PChar->m_PMonstrosity != nullptr)
+    if (PChar->m_PMonstrosity == nullptr)
     {
-        // Add stats from equipped instincts
-        for (auto instinctId : PChar->m_PMonstrosity->EquippedInstincts)
+        return;
+    }
+
+    // Add stats from equipped instincts
+    for (auto instinctId : PChar->m_PMonstrosity->EquippedInstincts)
+    {
+        auto maybeInstinct = gMonstrosityInstinctMap.find(instinctId);
+        if (maybeInstinct != gMonstrosityInstinctMap.end())
         {
-            auto maybeInstinct = gMonstrosityInstinctMap.find(instinctId);
-            if (maybeInstinct != gMonstrosityInstinctMap.end())
+            auto instinct = (*maybeInstinct).second;
+            for (auto const& mod : instinct.mods)
             {
-                auto instinct = (*maybeInstinct).second;
-                for (auto const& mod : instinct.mods)
-                {
-                    PChar->addModifier(mod.getModID(), mod.getModAmount());
-                }
+                PChar->addModifier(mod.getModID(), mod.getModAmount());
             }
         }
-
-        if (PChar->loc.zone->GetID() != ZONE_FERETORY)
-        {
-            // TODO: If belligerency, timer is 60s
-            CStatusEffect* PEffect = new CStatusEffect(EFFECT::EFFECT_GESTATION, EFFECT::EFFECT_GESTATION, 0, 0, 64800); // 18 hours
-
-            // TODO: You cannot attack while you're in Gest., you have to click it off
-
-            // TODO: Move these into the db
-            PEffect->AddEffectFlag(EFFECTFLAG_INVISIBLE);
-            PEffect->AddEffectFlag(EFFECTFLAG_DEATH);
-            PEffect->AddEffectFlag(EFFECTFLAG_ATTACK);
-            PEffect->AddEffectFlag(EFFECTFLAG_MAGIC_BEGIN);
-            PEffect->AddEffectFlag(EFFECTFLAG_DETECTABLE);
-            PEffect->AddEffectFlag(EFFECTFLAG_ON_ZONE);
-
-            // TODO: Does the timer survive logout, does it tick while offline, does it reset?
-            // PEffect->AddEffectFlag(EFFECTFLAG_LOGOUT);
-
-            // NOTE: It DOES say the effect wears off
-            // PEffect->AddEffectFlag(EFFECTFLAG_NO_LOSS_MESSAGE);
-
-            PChar->StatusEffectContainer->AddStatusEffect(PEffect, true);
-        }
-
-        PChar->updatemask |= UPDATE_LOOK;
     }
+
+    // TODO: There are more conditions to handle here
+    if (PChar->loc.zone->GetID() != ZONE_FERETORY)
+    {
+        // TODO: If belligerency, timer is 60s
+        CStatusEffect* PEffect = new CStatusEffect(EFFECT::EFFECT_GESTATION, EFFECT::EFFECT_GESTATION, 0, 0, 64800); // 18 hours
+
+        // TODO: You cannot attack while you're in Gest., you have to click it off
+
+        // TODO: Move these into the db
+        PEffect->AddEffectFlag(EFFECTFLAG_INVISIBLE);
+        PEffect->AddEffectFlag(EFFECTFLAG_DEATH);
+        PEffect->AddEffectFlag(EFFECTFLAG_ATTACK);
+        PEffect->AddEffectFlag(EFFECTFLAG_MAGIC_BEGIN);
+        PEffect->AddEffectFlag(EFFECTFLAG_DETECTABLE);
+        PEffect->AddEffectFlag(EFFECTFLAG_ON_ZONE);
+
+        // TODO: Does the timer survive logout, does it tick while offline, does it reset?
+        // PEffect->AddEffectFlag(EFFECTFLAG_LOGOUT);
+
+        // NOTE: It DOES say the effect wears off
+        // PEffect->AddEffectFlag(EFFECTFLAG_NO_LOSS_MESSAGE);
+
+        PChar->StatusEffectContainer->AddStatusEffect(PEffect, true);
+    }
+
+    SendFullMonstrosityUpdate(PChar);
+
+    PChar->updatemask |= UPDATE_LOOK;
 }
 
 uint32 monstrosity::GetPackedMonstrosityName(CCharEntity* PChar)
@@ -300,6 +307,8 @@ void monstrosity::SendFullMonstrosityUpdate(CCharEntity* PChar)
     // TODO: Only send model change packets when the model actually changes - otherwise it disappears!
 
     charutils::BuildingCharTraitsTable(PChar);
+
+    luautils::OnMonstrosityUpdate(PChar);
 
     PChar->pushPacket(new CMonipulatorPacket1(PChar));
     PChar->pushPacket(new CMonipulatorPacket2(PChar));
