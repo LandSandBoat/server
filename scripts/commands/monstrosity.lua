@@ -1,3 +1,7 @@
+-----------------------------------
+-- func: monstrosity
+-- desc: scripts/globals/monstrosity.lua for a general overview of how Monstrosity works and is designed.
+-----------------------------------
 local commandObj = {}
 
 commandObj.cmdprops =

@@ -19,6 +19,10 @@
 ===========================================================================
 */
 
+// ===
+// See scripts/globals/monstrosity.lua for a general overview of how Monstrosity works and is designed.
+// ===
+
 #include "monstrosity.h"
 
 #include "common/logging.h"

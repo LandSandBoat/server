@@ -1,5 +1,29 @@
 -----------------------------------
--- Monstrosity
+-- Monstrosity (MON)
+--
+-- === How does it work? ===
+--
+-- Monstrosity is enabled through two mechanisms: setting your job to JOB_MON (23) and zoning.
+-- Currently, there are some details that seemingly can only be populated at zone-time, so switching in/out
+-- of MON mode is reliant on zoning.
+--
+-- When you zone your job will be checked, and if it is JOB_MON, then PChar->m_PMonstrosity will get
+-- populated with your relevant Monstrosity data from table defined in char_monstrosity.sql. If you don't have
+-- this information yet, it'll be created and saved for you with the defaults (the starting 3 MONs and the basic instincts).
+--
+-- Most other logic for determining stats, exp, exp ranges, traits, etc. will check you are either JOB_MON
+-- or have m_PMonstrosity populated, and then look up what main/sub job your current species is, and then
+-- forward that information into the relevant code for working out stats, etc.
+--
+-- IT IS VITAL that m_PMonstrosity is managed correctly, or that it's existance is constantly checked.
+--
+-- There is _a lot_ of client-side validation for MON, but we have all the information available server-side,
+-- so we make sure to validate everything that comes through the zone_in and MON equip packets. It's also important
+-- to validate all things for MON, because if they're invalid the client will get stuck in a state where they can't change
+-- jobs, species, instincts, or names without GM intervention.
+--
+-- MONs main and subjob are in lock-step, so if you are a MNK15/NIN, the NIN will also be Lv15, and you'll get all the abilities,
+-- traits, and stat contributions (TODO?) from both - except for the 2H which comes from the main job.
 -----------------------------------
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
