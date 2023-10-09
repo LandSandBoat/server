@@ -67,7 +67,7 @@ quest.sections =
                 [11] = function(player, csid, option, npc)
                     if option == 1 + getCheckValue(quest:getVar(player, 'Option')) then
                         if quest:complete(player) then
-                            -- TODO: Unlock Bee Species!
+                            xi.monstrosity.unlockSpecies(xi.monstrosity.species.BEE)
                             player:messageSpecial(feretoryID.text.MAY_POSSESS_BEES)
                         end
                     elseif option == 2 then
