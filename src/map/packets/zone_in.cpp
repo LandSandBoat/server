@@ -264,7 +264,7 @@ CZoneInPacket::CZoneInPacket(CCharEntity* PChar, const EventInfo* currentEvent)
         ref<uint16>(0x54) = 0xFFFF;
 
         // Enable Monstrosity menu options
-        ref<uint8>(0x7E)  = 0x1F;
+        ref<uint8>(0x7E) = 0x1F;
 
         ref<uint32>(0x98) = monstrosity::GetPackedMonstrosityName(PChar);
     }

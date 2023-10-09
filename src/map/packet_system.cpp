@@ -793,8 +793,10 @@ void SmallPacket0x01A(map_session_data_t* const PSession, CCharEntity* const PCh
 {
     TracyZoneScoped;
 
-    uint16     TargID       = data.ref<uint16>(0x08);
-    uint8      action       = data.ref<uint8>(0x0A);
+    uint16     TargID = data.ref<uint16>(0x08);
+    uint8      action = data.ref<uint8>(0x0A);
+
+    // clang-format off
     position_t actionOffset =
     {
         data.ref<float>(0x10),
@@ -803,12 +805,7 @@ void SmallPacket0x01A(map_session_data_t* const PSession, CCharEntity* const PCh
         0, // moving (packet only contains x/y/z)
         0, // rotation (packet only contains x/y/z)
     };
-
-    // Monstrosity: Can't really do anything while under Gestation until you click it off
-    if (PChar->StatusEffectContainer->HasStatusEffect(EFFECT_GESTATION))
-    {
-        return;
-    }
+    // clang-format on
 
     constexpr auto actionToStr = [](uint8 actionIn)
     {
@@ -865,6 +862,14 @@ void SmallPacket0x01A(map_session_data_t* const PSession, CCharEntity* const PCh
         }
     };
 
+    // Monstrosity: Can't really do anything while under Gestation until you click it off.
+    //            : MONs can trigger doors, so we'll handle that later.
+    // TODO!
+    if (PChar->StatusEffectContainer->HasStatusEffect(EFFECT_GESTATION) && action != 0x00 /* trigger */)
+    {
+        return;
+    }
+
     auto actionStr = fmt::format("Player Action: {}: {} (0x{:02X}) -> targid: {}", PChar->GetName(), actionToStr(action), action, TargID);
     TracyZoneString(actionStr);
     ShowTrace(actionStr);
@@ -882,11 +887,6 @@ void SmallPacket0x01A(map_session_data_t* const PSession, CCharEntity* const PCh
             if (PChar->m_Costume != 0 || PChar->animation == ANIMATION_SYNTH)
             {
                 PChar->pushPacket(new CReleasePacket(PChar, RELEASE_TYPE::STANDARD));
-                return;
-            }
-
-            if (PChar->m_PMonstrosity != nullptr)
-            {
                 return;
             }
 
@@ -1022,7 +1022,7 @@ void SmallPacket0x01A(map_session_data_t* const PSession, CCharEntity* const PCh
                 return;
             }
 
-            if (PChar->m_PMonstrosity)
+            if (PChar->m_PMonstrosity != nullptr)
             {
                 auto type = data.ref<uint8>(0x0C);
                 monstrosity::HandleDeathMenu(PChar, type);
@@ -3976,7 +3976,7 @@ void SmallPacket0x05E(map_session_data_t* const PSession, CCharEntity* const PCh
                 PChar->status = STATUS_TYPE::NORMAL;
                 return;
             }
-            else if (PChar->m_PMonstrosity) // Not allowed to use zonelines while MON
+            else if (PChar->m_PMonstrosity != nullptr) // Not allowed to use zonelines while MON
             {
                 PChar->loc.p.rotation += 128;
 

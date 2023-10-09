@@ -1011,7 +1011,6 @@ void CZone::createZoneTimers()
 void CZone::CharZoneIn(CCharEntity* PChar)
 {
     TracyZoneScoped;
-    // ищем свободный targid для входящего в зону персонажа
 
     PChar->loc.zone              = this;
     PChar->loc.zoning            = false;
@@ -1094,9 +1093,9 @@ void CZone::CharZoneIn(CCharEntity* PChar)
         }
     }
 
-    PChar->PLatentEffectContainer->CheckLatentsZone();
-
     monstrosity::HandleZoneIn(PChar);
+
+    PChar->PLatentEffectContainer->CheckLatentsZone();
 
     charutils::ReadHistory(PChar);
 

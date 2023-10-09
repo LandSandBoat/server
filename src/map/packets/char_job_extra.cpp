@@ -133,7 +133,7 @@ CCharJobExtraPacket::CCharJobExtraPacket(CCharEntity* PChar, bool mjob)
 
         ref<uint8>(0x9C) = PChar->getMod(Mod::AUTO_ELEM_CAPACITY);
     }
-    else if (job == JOB_MON && PChar->m_PMonstrosity != nullptr)
+    else if (PChar->m_PMonstrosity != nullptr)
     {
         ref<uint16>(0x08) = PChar->m_PMonstrosity->Species;
 

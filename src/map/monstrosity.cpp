@@ -73,6 +73,8 @@ monstrosity::MonstrosityData_t::MonstrosityData_t()
 , Look(0x010C)        // Rabbit
 , NamePrefix1(0x00)   // Nothing
 , NamePrefix2(0x00)   // Nothing
+, MainJob(JOB_WAR)    //
+, SubJob(JOB_WAR)     //
 , CurrentExp(0)       // No exp
 {
     levels[1]  = 1; // Rabbit
@@ -158,6 +160,10 @@ void monstrosity::ReadMonstrosityData(CCharEntity* PChar)
             sql->GetBlobData(8, &data->instincts);
             sql->GetBlobData(9, &data->variants);
 
+            // Build additional data from lookups
+            data->MainJob = gMonstrositySpeciesMap[data->Species].mjob;
+            data->SubJob  = gMonstrositySpeciesMap[data->Species].sjob;
+
             // TODO:
             auto level  = data->levels[data->MonstrosityId];
             std::ignore = level;
@@ -204,7 +210,7 @@ void monstrosity::WriteMonstrosityData(CCharEntity* PChar)
                variantsEscaped.c_str());
 }
 
-void monstrosity::HandleZoneIn(CCharEntity* PChar)
+void monstrosity::TryPopulateMonstrosityData(CCharEntity* PChar)
 {
     if (PChar->GetMJob() == JOB_MON)
     {
@@ -213,7 +219,13 @@ void monstrosity::HandleZoneIn(CCharEntity* PChar)
 
         // This handles !monstrosity GM command, is this needed?
         WriteMonstrosityData(PChar);
+    }
+}
 
+void monstrosity::HandleZoneIn(CCharEntity* PChar)
+{
+    if (PChar->m_PMonstrosity != nullptr)
+    {
         // Add stats from equipped instincts
         for (auto instinctId : PChar->m_PMonstrosity->EquippedInstincts)
         {
@@ -287,6 +299,8 @@ void monstrosity::SendFullMonstrosityUpdate(CCharEntity* PChar)
 
     // TODO: Only send model change packets when the model actually changes - otherwise it disappears!
 
+    charutils::BuildingCharTraitsTable(PChar);
+
     PChar->pushPacket(new CMonipulatorPacket1(PChar));
     PChar->pushPacket(new CMonipulatorPacket2(PChar));
     PChar->pushPacket(new CCharJobsPacket(PChar));
@@ -294,6 +308,8 @@ void monstrosity::SendFullMonstrosityUpdate(CCharEntity* PChar)
     PChar->pushPacket(new CCharJobExtraPacket(PChar, false));
     PChar->pushPacket(new CCharAppearancePacket(PChar));
     PChar->pushPacket(new CCharStatsPacket(PChar));
+    PChar->pushPacket(new CCharAbilitiesPacket(PChar));
+
     PChar->updatemask |= UPDATE_LOOK;
 }
 
@@ -340,6 +356,8 @@ void monstrosity::HandleEquipChangePacket(CCharEntity* PChar, CBasicPacket& data
         PChar->m_PMonstrosity->Species = newSpecies;
 
         PChar->m_PMonstrosity->MonstrosityId = data.monstrosityId;
+        PChar->m_PMonstrosity->MainJob       = data.mjob;
+        PChar->m_PMonstrosity->SubJob        = data.sjob;
         PChar->m_PMonstrosity->Look          = data.look;
 
         if (PChar->m_PMonstrosity->MonstrosityId != previousId)
