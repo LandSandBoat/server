@@ -865,7 +865,7 @@ void SmallPacket0x01A(map_session_data_t* const PSession, CCharEntity* const PCh
     // Monstrosity: Can't really do anything while under Gestation until you click it off.
     //            : MONs can trigger doors, so we'll handle that later.
     // TODO!
-    if (PChar->StatusEffectContainer->HasStatusEffect(EFFECT_GESTATION) && action != 0x00 /* trigger */)
+    if (PChar->StatusEffectContainer->HasStatusEffect(EFFECT_GESTATION))
     {
         return;
     }
