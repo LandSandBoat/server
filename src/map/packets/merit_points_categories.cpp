@@ -28,28 +28,28 @@
 #include "entities/charentity.h"
 
 /*
-пакет, содержащий информацию об примененных меритах и количестве, необходимом для следующего усиления
-информации много, отправляется в трех пакетах. начало у всех стандартное:
+Package containing information about the applied merites and the amount required for the next boost
+There is a lot of information, sent in three packages. The beginning is standard for everyone:
 
 0x8c 0x80 0x05 0x00 0x3D 0x00 0x00 0x00
 
-далее идут данные в виде структур
+Next comes the data in the form of structures
 
 struct
 {
-  unsigned sort // id мерита
-  unsigned char // необходимое количество меритов для следующего усиления (0 - усиление этого мерита невозможно)
-  unsigned char // количестов усилений, сделанных персонажем
+  unsigned sort // Merit id
+  unsigned char // Required number of merits for the next enhancement (0 - strengthening of this merit is impossible)
+  unsigned char // Number of enhancements made by the character
 };
 
-начало категории кратно 0x40 далее идет прибавление id значения. все id кратны двум
+The beginning of the category is a multiple of 0x40, then the id value is added. All ids are multiples of two
 
-количество необходимых меритов для следующего усиления передаются персонажу только при входе в moghouse
+The number of required merits for the next enhancement is transferred to the character only when entering the moghouse
 */
 
 /************************************************************************
  *                                                                       *
- *  Отправляем персонажу информацию о всех merit (5 пакетов)             *
+ *  Send the character information about all merits (5 packages)         *
  *                                                                       *
  ************************************************************************/
 
@@ -73,7 +73,7 @@ CMeritPointsCategoriesPacket::CMeritPointsCategoriesPacket(CCharEntity* PChar)
 
 /************************************************************************
  *                                                                       *
- *  Отправляем персонажу информуцию об одном merit                       *
+ *  Send the character information about one merit                       *
  *                                                                       *
  ************************************************************************/
 
@@ -86,12 +86,6 @@ CMeritPointsCategoriesPacket::CMeritPointsCategoriesPacket(CCharEntity* PChar, M
     ref<uint32>(0x08) = PChar->PMeritPoints->GetMerit(merit)->data;
 }
 
-/************************************************************************
- *                                                                       *
- *                                                                       *
- *                                                                       *
- ************************************************************************/
-
 void CMeritPointsCategoriesPacket::MeritPointsCategoriesPacket(CCharEntity* PChar, uint8 offset)
 {
     for (uint8 i = 0; i < MAX_MERITS_IN_PACKET; ++i)
@@ -103,18 +97,10 @@ void CMeritPointsCategoriesPacket::MeritPointsCategoriesPacket(CCharEntity* PCha
     {
         for (uint8 i = 0; i < MAX_MERITS_IN_PACKET; ++i)
         {
-            (*(Merit_t*)(data + (0x08) + sizeof(uint32) * i)).next = 0; // обнуляем значение next у всех merit
+            (*(Merit_t*)(data + (0x08) + sizeof(uint32) * i)).next = 0; // Reset the next value for all merits
         }
     }
 }
-
-/************************************************************************
- *                                                                       *
- *                                                                       *
- *                                                                       *
- ************************************************************************/
-
-// TODO: не помню, зачем я сунул это сюда ((
 
 /*
 
