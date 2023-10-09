@@ -6306,6 +6306,63 @@ void CLuaBaseEntity::addJobTraits(uint8 jobID, uint8 level)
     }
 }
 
+sol::table CLuaBaseEntity::getMonstrosity()
+{
+    auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity);
+    if (PChar == nullptr)
+    {
+        return sol::lua_nil;
+    }
+
+    bool startsWithMonstrosityData = PChar->m_PMonstrosity != nullptr;
+    if (!startsWithMonstrosityData)
+    {
+        monstrosity::ReadMonstrosityData(PChar);
+    }
+
+    auto table = lua.create_table();
+
+    table["monstrosityId"] = PChar->m_PMonstrosity->MonstrosityId;
+    table["species"]       = PChar->m_PMonstrosity->Species;
+    table["flags"]         = PChar->m_PMonstrosity->Flags;
+
+    {
+        std::size_t idx = 0;
+        table["levels"] = lua.create_table();
+        for (auto entry : PChar->m_PMonstrosity->levels)
+        {
+            table["levels"][idx++] = entry;
+        }
+    }
+
+    {
+        std::size_t idx = 0;
+        table["instincts"] = lua.create_table();
+        for (auto entry : PChar->m_PMonstrosity->instincts)
+        {
+            table["instincts"][idx++] = entry;
+        }
+    }
+
+    {
+        std::size_t idx = 0;
+        table["variants"] = lua.create_table();
+        for (auto entry : PChar->m_PMonstrosity->variants)
+        {
+            table["variants"][idx++] = entry;
+        }
+    }
+
+    // If we didn't start with Monstrosity data, we should wipe it out now so we
+    // don't change modes
+    if (!startsWithMonstrosityData)
+    {
+        PChar->m_PMonstrosity = nullptr;
+    }
+
+    return table;
+}
+
 void CLuaBaseEntity::setMonstrosity(sol::table table)
 {
     auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity);
