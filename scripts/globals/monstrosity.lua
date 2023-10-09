@@ -344,6 +344,15 @@ xi.monstrosity.unlockStartingMONs = function(player, choice)
     player:setMonstrosity(data)
 end
 
+xi.monstrosity.getSpeciesLevel = function(player, species)
+    local data = player:getMonstrosity()
+    return data['levels'][species]
+end
+
+xi.monstrosity.hasUnlockedSpecies = function(player, species)
+    return xi.monstrosity.getSpeciesLevel(player, species) > 0
+end
+
 -----------------------------------
 -- Debug
 -----------------------------------
@@ -428,7 +437,7 @@ xi.monstrosity.unlockAll = function(player)
     end
 
     -- Set data
-    player:setMonstrosity(data);
+    player:setMonstrosity(data)
 end
 
 -----------------------------------

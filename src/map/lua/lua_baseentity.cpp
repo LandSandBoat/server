@@ -6336,7 +6336,7 @@ sol::table CLuaBaseEntity::getMonstrosity()
     }
 
     {
-        std::size_t idx = 0;
+        std::size_t idx    = 0;
         table["instincts"] = lua.create_table();
         for (auto entry : PChar->m_PMonstrosity->instincts)
         {
@@ -6345,7 +6345,7 @@ sol::table CLuaBaseEntity::getMonstrosity()
     }
 
     {
-        std::size_t idx = 0;
+        std::size_t idx   = 0;
         table["variants"] = lua.create_table();
         for (auto entry : PChar->m_PMonstrosity->variants)
         {
@@ -17205,6 +17205,7 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("levelRestriction", CLuaBaseEntity::levelRestriction);
     SOL_REGISTER("addJobTraits", CLuaBaseEntity::addJobTraits);
 
+    SOL_REGISTER("getMonstrosity", CLuaBaseEntity::getMonstrosity);
     SOL_REGISTER("setMonstrosity", CLuaBaseEntity::setMonstrosity);
 
     // Player Titles and Fame
