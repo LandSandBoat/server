@@ -1861,6 +1861,24 @@ xi.dynamis.nmDynamicSpawn = function(mobIndex, oMobIndex, forceLink, zoneID, tar
                 mob:addImmunity(xi.immunity.SLEEP)
             end },
 
+            ["onMobEngaged"] = { function(mob, mobTarget)
+            end },
+
+            ["onMobFight"] = { function(mob, mobTarget)
+            end },
+
+            ["onMobRoam"] = { function(mob)
+            end },
+
+            ["onMobMagicPrepare"] = { function(mob, mobTarget, spellId)
+            end },
+
+            ["onMobWeaponSkillPrepare"] = { function(mob)
+            end },
+
+            ["onMobWeaponSkill"] = { function(mob)
+            end },
+
             ["onMobDeath"] = { function(mob, player, optParams)
                 xi.dynamis.mobOnDeath(mob, player, optParams)
             end },
