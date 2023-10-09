@@ -25,6 +25,8 @@
 
 #include "packets/basic.h"
 
+#include "entities/battleentity.h"
+
 #include <array>
 
 class CCharEntity;
@@ -44,7 +46,9 @@ namespace monstrosity
         uint8 NamePrefix1;
         uint8 NamePrefix2;
 
-        uint32 CurrentExp;
+        JOBTYPE MainJob;
+        JOBTYPE SubJob;
+        uint32  CurrentExp;
 
         std::array<uint16, 12> EquippedInstincts{ 0 };
         std::array<uint8, 128> levels{ 0 };
@@ -57,6 +61,7 @@ namespace monstrosity
     void ReadMonstrosityData(CCharEntity* PChar);
     void WriteMonstrosityData(CCharEntity* PChar);
 
+    void   TryPopulateMonstrosityData(CCharEntity* PChar);
     void   HandleZoneIn(CCharEntity* PChar);
     uint32 GetPackedMonstrosityName(CCharEntity* PChar);
     void   SendFullMonstrosityUpdate(CCharEntity* PChar);

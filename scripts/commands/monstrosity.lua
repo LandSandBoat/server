@@ -7,7 +7,7 @@ commandObj.cmdprops =
 }
 
 commandObj.onTrigger = function(player)
-    if not player:getMainJob() ~= xi.job.MON then
+    if player:getMainJob() ~= xi.job.MON then
         player:changeJob(xi.job.MON)
     end
 
