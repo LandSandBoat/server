@@ -176,6 +176,7 @@ CCharEntity::CCharEntity()
     m_PMonstrosity = nullptr;
 
     m_Costume             = 0;
+    m_Costume2            = 0;
     m_hasTractor          = 0;
     m_hasRaise            = 0;
     m_weaknessLvl         = 0;

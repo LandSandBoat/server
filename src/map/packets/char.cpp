@@ -178,6 +178,12 @@ void CCharPacket::updateWith(CCharEntity* PChar, ENTITYUPDATE type, uint8 update
                 ref<uint16>(0x54) = look->main + 0x6000;
                 ref<uint16>(0x56) = look->sub + 0x7000;
                 ref<uint16>(0x58) = look->ranged + 0x8000;
+
+                if (PChar->m_Costume2 != 0)
+                {
+                    ref<uint16>(0x48) = PChar->m_Costume2;
+                    ref<uint16>(0x58) = 0xFFFF;
+                }
             }
 
             if (updatemask & UPDATE_NAME)
