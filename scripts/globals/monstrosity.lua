@@ -377,6 +377,50 @@ xi.monstrosity.hasUnlockedSpecies = function(player, species)
     return xi.monstrosity.getSpeciesLevel(player, species) > 0
 end
 
+xi.monstrosity.setSpeciesLevel = function(player, species, level)
+    local data = player:getMonstrosityData()
+    data.levels[species] = level
+    player:setMonstrosityData(data)
+end
+
+xi.monstrosity.unlockSpecies = function(player, species)
+    if not xi.monstrosity.hasUnlockedSpecies(player, species) then
+        xi.monstrosity.setSpeciesLevel(player, species, 1)
+    end
+end
+
+-- Use xi.monstrosity.variants
+xi.monstrosity.hasUnlockedVariant = function(player, variant)
+    local data = player:getMonstrosityData()
+
+    local byteOffset   = math.floor(variant / 8)
+    local shiftAmount  = variant % 8
+
+    if byteOffset < 32 then
+        return bit.band(data.variants[byteOffset] or 0, bit.lshift(0x01, shiftAmount)) > 0
+    end
+
+    return false
+end
+
+-- Use xi.monstrosity.variants
+xi.monstrosity.unlockVariant = function(player, variant)
+    if not xi.monstrosity.hasUnlockedVariant(player, variant) then
+        local data = player:getMonstrosityData()
+
+        local byteOffset   = math.floor(variant / 8)
+        local shiftAmount  = variant % 8
+
+        if byteOffset < 32 then
+            data.variants[byteOffset] = bit.bor(data.variants[byteOffset] or 0, bit.lshift(0x01, shiftAmount))
+        else
+            print('byteOffset out of range')
+        end
+
+        player:setMonstrosityData(data)
+    end
+end
+
 -----------------------------------
 -- Bound by C++ (DO NOT CHANGE SIGNATURE)
 -----------------------------------
