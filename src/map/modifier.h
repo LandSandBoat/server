@@ -544,6 +544,7 @@ enum class Mod
     CARBUNCLE_LVL_BONUS       = 1041, // Carbuncle: Lv.+ (Increases Carbuncle's base level above 99)
     CAIT_SITH_LVL_BONUS       = 1042, // Cait Sith: Lv.+ (Increases Cait Sith's base level above 99)
     ENHANCES_MANA_CEDE        = 74,   // Bonus % to Mana Cede effect, +1 = 1%
+    SUMMONING_MAGIC_CAST      = 1078, // Summoning magic casting time reduction in seconds
 
     // Blue Mage
     BLUE_POINTS          = 309,  // Tracks extra blue points
@@ -987,7 +988,7 @@ enum class Mod
     // 217 to 223
     // 271 to 280
     //
-    // SPARE = 1078 and onward
+    // SPARE = 1079 and onward
 };
 
 // temporary workaround for using enum class as unordered_map key until compilers support it
