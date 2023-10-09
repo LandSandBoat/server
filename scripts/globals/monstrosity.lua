@@ -397,7 +397,7 @@ xi.monstrosity.unlockAll = function(player)
         if byteOffset < 64 then
             data.instincts[byteOffset] = bit.bor(data.instincts[byteOffset] or 0, bit.lshift(unlockAmount, shiftAmount))
         else
-            print("byteOffset out of range")
+            print('byteOffset out of range')
         end
     end
 
@@ -409,7 +409,7 @@ xi.monstrosity.unlockAll = function(player)
         if byteOffset >= 20 and byteOffset < 24 then
             data.instincts[byteOffset] = bit.bor(data.instincts[byteOffset] or 0, bit.lshift(0x01, shiftAmount))
         else
-            print("byteOffset out of range")
+            print('byteOffset out of range')
         end
     end
 
@@ -423,7 +423,7 @@ xi.monstrosity.unlockAll = function(player)
         if byteOffset < 32 then
             data.variants[byteOffset] = bit.bor(data.variants[byteOffset] or 0, bit.lshift(0x01, shiftAmount))
         else
-            print("byteOffset out of range")
+            print('byteOffset out of range')
         end
     end
 
@@ -470,6 +470,10 @@ xi.monstrosity.feretoryOnZoneIn = function(player, prevZone)
     local cs = -1
 
     player:setPos(-358.000, -3.400, -440.00, 63)
+
+    if player:getMainJob() ~= xi.job.MON then
+        player:changeJob(xi.job.MON)
+    end
 
     return cs
 end
