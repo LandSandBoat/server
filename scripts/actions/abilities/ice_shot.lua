@@ -19,6 +19,7 @@ abilityObject.onAbilityCheck = function(player, target, ability)
         player:hasItem(xi.item.ICE_CARD, 0) or
         player:hasItem(xi.item.TRUMP_CARD, 0)
     then
+        ability:setRecast(math.max(0, ability:getRecast() - player:getMod(xi.mod.QUICK_DRAW_RECAST)))
         return 0, 0
     else
         return 71, 0
@@ -79,7 +80,6 @@ abilityObject.onUseAbility = function(player, target, ability, action)
     end
 
     local _ = player:delItem(xi.item.ICE_CARD, 1) or player:delItem(xi.item.TRUMP_CARD, 1)
-
     target:updateClaim(player)
 
     return dmg

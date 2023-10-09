@@ -447,7 +447,8 @@ enum class Mod
     CHARM_CHANCE        = 391,  // extra chance to charm (light+apollo staff ect)
     FERAL_HOWL_DURATION = 503,  // +20% duration per merit when wearing augmented Monster Jackcoat +2
     JUG_LEVEL_RANGE     = 564,  // Decreases the level range of spawned jug pets. Maxes out at 2.
-    SIC_READY_RECAST    = 1052, // TODO: SIC/Ready recast reduction (seconds)
+    CALL_BEAST_DELAY    = 572,  // Lowers Call Beast recast
+    SIC_READY_RECAST    = 1052, // SIC/Ready recast reduction (seconds)
 
     // Bard
     MINNE_EFFECT           = 433,  //
@@ -483,6 +484,7 @@ enum class Mod
     RAPID_SHOT              = 359,  // Percent chance to proc rapid shot
     WIDESCAN                = 340,  //
     BARRAGE_ACC             = 420,  // Barrage accuracy
+    BARRAGE_COUNT           = 138,  // Increases Barrage shots by 1
     DOUBLE_SHOT_RATE        = 422,  // The rate that double shot can proc. Without this, the default is 40%.
     VELOCITY_SNAPSHOT_BONUS = 423,  // Increases Snapshot whilst Velocity Shot is up.
     VELOCITY_RATT_BONUS     = 424,  // Increases Ranged Attack whilst Velocity Shot is up.
@@ -556,7 +558,7 @@ enum class Mod
     ROLL_RANGE        = 528,  // Additional range for COR roll abilities.
     JOB_BONUS_CHANCE  = 542,  // Chance to apply job bonus to COR roll without having the job in the party.
     TRIPLE_SHOT_RATE  = 999,  // Percent increase to Triple Shot Rate
-    QUICK_DRAW_RECAST = 1060, // TODO: Quick Draw Charge Reduction (seconds)
+    QUICK_DRAW_RECAST = 1060, // Quick Draw Charge Reduction (seconds)
 
     DMG_REFLECT            = 316,  // Tracks totals
     ROLL_ROGUES            = 317,  // Tracks totals
@@ -632,6 +634,7 @@ enum class Mod
     SAMBA_PDURATION          = 498,  // Samba percent duration bonus
     REVERSE_FLOURISH_EFFECT  = 836,  // Reverse Flourish effect in tenths of squared term multiplier
     MAX_FINISHING_MOVE_BONUS = 988,  // Increases the maximum number of finishing moves that may be stored
+    WALTZ_COST               = 139,  // Reduce Waltz cost by 5tp (50 post 1000tp scale)
     STEP_TP_CONSUMED         = 1077, // Modifies the amount of TP consumed when using steps
 
     // Scholar

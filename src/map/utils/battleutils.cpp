@@ -4627,6 +4627,8 @@ namespace battleutils
             shotCount += 7;
         }
 
+        shotCount += PChar->getMod(Mod::BARRAGE_COUNT);
+
         // make sure we have enough ammo for all these shots
         CItemWeapon* PAmmo = (CItemWeapon*)PChar->getEquip(SLOT_AMMO);
 

@@ -367,8 +367,10 @@ xi.mod =
     STEP_ACCURACY                   = 403, -- Accuracy bonus for steps
     WALTZ_DELAY                     = 497, -- Waltz Ability Delay modifier (-1 mod is -1 second)
     SAMBA_PDURATION                 = 498, -- Samba percent duration bonus
+    WALTZ_COST                      = 139, -- Reduce Waltz cost by 5tp (50 post 1000tp scale)
     WIDESCAN                        = 340,
     BARRAGE_ACC                     = 420,
+    BARRAGE_COUNT                   = 138, -- Increases Barrage shots by 1
     ENSPELL                         = 341,
     SPIKES                          = 342,
     ENSPELL_DMG                     = 343,
@@ -852,6 +854,7 @@ xi.mod =
     COVER_DURATION                  = 967, -- Increases Cover Duration
     WYVERN_SUBJOB_TRAITS            = 974, -- Adds subjob traits to wyvern
     GARDENING_WILT_BONUS            = 975, -- Increases the number of Vanadays a plant can survive before it wilts
+    CALL_BEAST_DELAY                = 572, -- Lowers Call Beast recast
 
     WYVERN_BREATH_MACC              = 986,
     REGEN_BONUS                     = 989,
@@ -892,7 +895,7 @@ xi.mod =
     GEOMANCY_MP_NO_DEPLETE = 1037, -- Percent chance for Geomancy to cost 0 MP (GEO AF3 Sets)
 
     -- Job Point Gifts
-    SIC_READY_RECAST        = 1052, -- TODO: SIC/Ready recast reduction (seconds)
+    SIC_READY_RECAST        = 1052, -- SIC/Ready recast reduction (seconds)
     TRUE_SHOT_EFFECT        = 1053, -- TODO: True Shot Ranged Damage increase (percent)
     DEAD_AIM_EFFECT         = 1054, -- TODO: Dead Aim Critical Damage increase (percent)
     THIRD_EYE_BONUS         = 1055, -- TODO: Bonus Third Eye Evasions (count)
@@ -900,7 +903,7 @@ xi.mod =
     DRAGOON_BREATH_RECAST   = 1057, -- Restoring/Smithing Breath Recast Reduction (seconds)
     BLUE_JOB_TRAIT_BONUS    = 1058, -- TODO: Increases job traits gained from equipped blue magic (percent)
     BLUE_MAGIC_EFFECT       = 1059, -- TODO: Bonus to Attribute Value of spell (percent)
-    QUICK_DRAW_RECAST       = 1060, -- TODO: Quick Draw Charge Reduction (seconds)
+    QUICK_DRAW_RECAST       = 1060, -- Quick Draw Charge Reduction (seconds)
 
     DIG_BYPASS_FATIGUE      = 1074, -- Chocobo digging modifier found in "Blue Race Silks". Modifier works as a direct percent.
     BREATH_DMG_DEALT        = 1075, -- Breath damage dealt
