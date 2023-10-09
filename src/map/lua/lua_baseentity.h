@@ -331,8 +331,9 @@ public:
     uint8 levelRestriction(sol::object const& level); // Establish/return current level restriction
     void  addJobTraits(uint8 jobID, uint8 level);
 
-    auto getMonstrosity() -> sol::table;
-    void setMonstrosity(sol::table table);
+    // Monstrosity
+    auto getMonstrosityData() -> sol::table;
+    void setMonstrosityData(sol::table table);
 
     // Player Titles and Fame
     uint16 getTitle();

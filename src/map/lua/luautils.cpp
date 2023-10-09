@@ -3874,6 +3874,26 @@ namespace luautils
         return result.get_type(0) == sol::type::number ? result.get<int32>(0) : 0;
     }
 
+    void OnMonstrosityUpdate(CBaseEntity* PChar)
+    {
+        TracyZoneScoped;
+
+        sol::function onMonstrosityUpdate = lua["xi"]["monstrosity"]["onMonstrosityUpdate"];
+        if (!onMonstrosityUpdate.valid())
+        {
+            ShowError("luautils::OnMonstrosityUpdate");
+            return;
+        }
+
+        auto result = onMonstrosityUpdate(CLuaBaseEntity(PChar));
+        if (!result.valid())
+        {
+            sol::error err = result;
+            ShowError("luautils::OnMonstrosityUpdate: %s", err.what());
+            return;
+        }
+    }
+
     int32 OnMagicCastingCheck(CBaseEntity* PChar, CBaseEntity* PTarget, CSpell* PSpell)
     {
         TracyZoneScoped;

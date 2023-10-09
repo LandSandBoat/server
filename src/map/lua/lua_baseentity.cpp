@@ -6348,7 +6348,7 @@ void CLuaBaseEntity::addJobTraits(uint8 jobID, uint8 level)
     }
 }
 
-sol::table CLuaBaseEntity::getMonstrosity()
+sol::table CLuaBaseEntity::getMonstrosityData()
 {
     auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity);
     if (PChar == nullptr)
@@ -6405,7 +6405,7 @@ sol::table CLuaBaseEntity::getMonstrosity()
     return table;
 }
 
-void CLuaBaseEntity::setMonstrosity(sol::table table)
+void CLuaBaseEntity::setMonstrosityData(sol::table table)
 {
     auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity);
     if (PChar == nullptr)
@@ -17249,8 +17249,9 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("levelRestriction", CLuaBaseEntity::levelRestriction);
     SOL_REGISTER("addJobTraits", CLuaBaseEntity::addJobTraits);
 
-    SOL_REGISTER("getMonstrosity", CLuaBaseEntity::getMonstrosity);
-    SOL_REGISTER("setMonstrosity", CLuaBaseEntity::setMonstrosity);
+    // Monstrosity
+    SOL_REGISTER("getMonstrosityData", CLuaBaseEntity::getMonstrosityData);
+    SOL_REGISTER("setMonstrosityData", CLuaBaseEntity::setMonstrosityData);
 
     // Player Titles and Fame
     SOL_REGISTER("getTitle", CLuaBaseEntity::getTitle);
