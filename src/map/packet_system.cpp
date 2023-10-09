@@ -793,8 +793,8 @@ void SmallPacket0x01A(map_session_data_t* const PSession, CCharEntity* const PCh
 {
     TracyZoneScoped;
 
-    uint16     TargID = data.ref<uint16>(0x08);
-    uint8      action = data.ref<uint8>(0x0A);
+    uint16 TargID = data.ref<uint16>(0x08);
+    uint8  action = data.ref<uint8>(0x0A);
 
     // clang-format off
     position_t actionOffset =
