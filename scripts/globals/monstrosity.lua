@@ -357,7 +357,7 @@ xi.monstrosity.purchasableInstincts =
 -----------------------------------
 -- Helpers
 -----------------------------------
-
+-- Use xi.monstrosity.species
 xi.monstrosity.unlockStartingMONs = function(player, choice)
     local data =
     {
@@ -368,21 +368,25 @@ xi.monstrosity.unlockStartingMONs = function(player, choice)
     player:setMonstrosityData(data)
 end
 
+-- Use xi.monstrosity.species
 xi.monstrosity.getSpeciesLevel = function(player, species)
     local data = player:getMonstrosityData()
     return data['levels'][species]
 end
 
+-- Use xi.monstrosity.species
 xi.monstrosity.hasUnlockedSpecies = function(player, species)
     return xi.monstrosity.getSpeciesLevel(player, species) > 0
 end
 
+-- Use xi.monstrosity.species
 xi.monstrosity.setSpeciesLevel = function(player, species, level)
     local data = player:getMonstrosityData()
     data.levels[species] = level
     player:setMonstrosityData(data)
 end
 
+-- Use xi.monstrosity.species
 xi.monstrosity.unlockSpecies = function(player, species)
     if not xi.monstrosity.hasUnlockedSpecies(player, species) then
         xi.monstrosity.setSpeciesLevel(player, species, 1)
