@@ -39,7 +39,7 @@ CReleasePacket::CReleasePacket(CCharEntity* PChar, RELEASE_TYPE releaseType)
     PChar->m_Substate = CHAR_SUBSTATE::SUBSTATE_NONE;
 }
 
-// типы release
-// 0 - разговор с npc без старта события
-// 2 - событие (с указание id события)
-// 4 - рыбалка
+// Release Types
+// 0 - Conversation with npc without starting the event
+// 2 - Event (indicating the event id)
+// 4 - Fishing

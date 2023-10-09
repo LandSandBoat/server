@@ -98,8 +98,8 @@ public:
     CQuestMissionLogPacket(CCharEntity* PChar, uint8 logID, LOG_TYPE logType);
 
 private:
-    // формирование пакетов вынес в отдельные функции, специально для тех,
-    // кто захочет понять, что же на самом деле происходит в switch(logID)
+    // I moved the formation of packages into separate functions, especially for those
+    // who wants to understand what actually happens in switch(logID)
 
     void generateQuestPacket(CCharEntity* PChar, uint8 logID, LOG_TYPE logType);
     void generateCurrentMissionPacket(CCharEntity* PChar);
