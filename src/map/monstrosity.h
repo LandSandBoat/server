@@ -31,6 +31,9 @@
 
 class CCharEntity;
 
+// ===
+// See scripts/globals/monstrosity.lua for a general overview of how Monstrosity works and is designed.
+// ===
 namespace monstrosity
 {
     struct MonstrosityData_t
