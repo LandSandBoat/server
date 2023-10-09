@@ -5149,6 +5149,25 @@ void CLuaBaseEntity::setModelId(uint16 modelId, sol::object const& slotObj)
 }
 
 /************************************************************************
+ *  Function: getCostume()
+ *  Purpose : Returns the PC's appearance
+ *  Example : player:getCostume()
+ ************************************************************************/
+
+uint16 CLuaBaseEntity::getCostume()
+{
+    if (m_PBaseEntity->objtype != TYPE_PC)
+    {
+        ShowWarning("Invalid entity type calling function (%s).", m_PBaseEntity->GetName());
+        return 0;
+    }
+
+    auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
+
+    return PChar->m_Costume;
+}
+
+/************************************************************************
  *  Function: setCostume()
  *  Purpose : Updates the PC's appearance
  *  Example : player:setCostume( costumeId )
@@ -5173,12 +5192,12 @@ void CLuaBaseEntity::setCostume(uint16 costume)
 }
 
 /************************************************************************
- *  Function: getCostume()
+ *  Function: getCostume2()
  *  Purpose : Returns the PC's appearance
  *  Example : player:getCostume()
  ************************************************************************/
 
-uint16 CLuaBaseEntity::getCostume()
+uint16 CLuaBaseEntity::getCostume2()
 {
     if (m_PBaseEntity->objtype != TYPE_PC)
     {
@@ -5188,9 +5207,32 @@ uint16 CLuaBaseEntity::getCostume()
 
     auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
 
-    return PChar->m_Costume;
+    return PChar->m_Costume2;
 }
 
+/************************************************************************
+ *  Function: setCostume2()
+ *  Purpose : Updates the PC's appearance
+ *  Example : player:setCostume2( costumeId )
+ ************************************************************************/
+
+void CLuaBaseEntity::setCostume2(uint16 costume)
+{
+    if (m_PBaseEntity->objtype != TYPE_PC)
+    {
+        ShowWarning("Invalid entity type calling function (%s).", m_PBaseEntity->GetName());
+        return;
+    }
+
+    auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
+
+    if (PChar->m_Costume2 != costume && PChar->status != STATUS_TYPE::SHUTDOWN && PChar->status != STATUS_TYPE::DISAPPEAR)
+    {
+        PChar->m_Costume2 = costume;
+        PChar->updatemask |= UPDATE_LOOK;
+        PChar->pushPacket(new CCharAppearancePacket(PChar));
+    }
+}
 /************************************************************************
  *  Function: getAnimation()
  *  Purpose : Returns the assigned default animation of an entity
@@ -17179,8 +17221,10 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("checkNameFlags", CLuaBaseEntity::checkNameFlags);
     SOL_REGISTER("getModelId", CLuaBaseEntity::getModelId);
     SOL_REGISTER("setModelId", CLuaBaseEntity::setModelId);
-    SOL_REGISTER("setCostume", CLuaBaseEntity::setCostume);
     SOL_REGISTER("getCostume", CLuaBaseEntity::getCostume);
+    SOL_REGISTER("setCostume", CLuaBaseEntity::setCostume);
+    SOL_REGISTER("getCostume2", CLuaBaseEntity::getCostume2);
+    SOL_REGISTER("setCostume2", CLuaBaseEntity::setCostume2);
     SOL_REGISTER("getAnimation", CLuaBaseEntity::getAnimation);
     SOL_REGISTER("setAnimation", CLuaBaseEntity::setAnimation);
     SOL_REGISTER("getAnimationSub", CLuaBaseEntity::getAnimationSub);

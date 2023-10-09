@@ -453,6 +453,7 @@ public:
     uint32     m_InsideTriggerAreaID; // The ID of the trigger area the character is inside
     uint8      m_LevelRestriction;    // Character level limit
     uint16     m_Costume;
+    uint16     m_Costume2;
     uint32     m_AHHistoryTimestamp;
     uint32     m_DeathTimestamp;
     time_point m_deathSyncTime; // Timer used for sending an update packet at a regular interval while the character is dead

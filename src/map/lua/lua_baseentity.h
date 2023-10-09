@@ -269,17 +269,18 @@ public:
     bool   checkNameFlags(uint32 flags); // this is check and not get because it tests for a flag, it doesn't return all flags
     uint16 getModelId();
     void   setModelId(uint16 modelId, sol::object const& slotObj);
-    void   setCostume(uint16 costume);
     uint16 getCostume();
-
-    uint8 getAnimation();
-    void  setAnimation(uint8 animation);
-    uint8 getAnimationSub();
-    void  setAnimationSub(uint8 animationsub);
-    bool  getCallForHelpFlag() const;
-    void  setCallForHelpFlag(bool cfh);
-    bool  getCallForHelpBlocked() const;
-    void  setCallForHelpBlocked(bool blocked);
+    void   setCostume(uint16 costume);
+    uint16 getCostume2();
+    void   setCostume2(uint16 costume);
+    uint8  getAnimation();
+    void   setAnimation(uint8 animation);
+    uint8  getAnimationSub();
+    void   setAnimationSub(uint8 animationsub);
+    bool   getCallForHelpFlag() const;
+    void   setCallForHelpFlag(bool cfh);
+    bool   getCallForHelpBlocked() const;
+    void   setCallForHelpBlocked(bool blocked);
 
     // Player Status
     uint8 getNation();
