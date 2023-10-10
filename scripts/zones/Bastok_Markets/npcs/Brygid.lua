@@ -121,7 +121,11 @@ entity.onEventFinish = function(player, csid, option)
         player:delQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.BRYGID_THE_STYLIST_RETURNS)
         player:addQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.BRYGID_THE_STYLIST_RETURNS)
 
-    elseif csid == 382 and option ~= 99 then
+    elseif
+        csid == 382 and
+        option <= 13 and
+        option > 0
+    then
         player:setCharVar("BrygidWantsSubligar", option)
 
     elseif csid == 383 then
