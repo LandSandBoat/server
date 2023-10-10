@@ -1,4 +1,4 @@
-﻿/*
+/*
 ===========================================================================
 
 Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -864,8 +864,7 @@ void SmallPacket0x01A(map_session_data_t* const PSession, CCharEntity* const PCh
 
     // Monstrosity: Can't really do anything while under Gestation until you click it off.
     //            : MONs can trigger doors, so we'll handle that later.
-    // TODO!
-    if (PChar->StatusEffectContainer->HasStatusEffect(EFFECT_GESTATION))
+    if (PChar->StatusEffectContainer->HasStatusEffect(EFFECT_GESTATION) && action == 0x00)
     {
         return;
     }
@@ -892,6 +891,13 @@ void SmallPacket0x01A(map_session_data_t* const PSession, CCharEntity* const PCh
 
             CBaseEntity* PNpc = nullptr;
             PNpc              = PChar->GetEntity(TargID, TYPE_NPC | TYPE_MOB);
+
+            // MONs are allowed to use doors, but nothing else
+            if (PChar->m_PMonstrosity != nullptr && PNpc->look.size != 0x02)
+            {
+                PChar->pushPacket(new CReleasePacket(PChar, RELEASE_TYPE::STANDARD));
+                return;
+            }
 
             // NOTE: Moogles inside of mog houses are the exception for not requiring Spawned or Status checks.
             if (PNpc != nullptr && distance(PNpc->loc.p, PChar->loc.p) <= 10 && ((PNpc->PAI->IsSpawned() && PNpc->status == STATUS_TYPE::NORMAL) || PChar->m_moghouseID != 0))
