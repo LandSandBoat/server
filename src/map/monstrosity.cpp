@@ -552,10 +552,10 @@ bool monstrosity::IsInstinctUnlocked(CCharEntity* PChar, uint16 instinct)
         return false;
     }
 
-    // Purchasable instincts are 768 + 5 onwards
-    if (instinct >= 773)
+    // Purchasable instincts are 768 onwards
+    if (instinct >= 768)
     {
-        auto  idx         = instinct - 765;
+        auto  idx         = instinct - 768;
         uint8 byteOffset  = 20 + (idx / 8);
         uint8 shiftAmount = idx % 8;
 
