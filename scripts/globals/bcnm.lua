@@ -816,7 +816,7 @@ local function checkReqs(player, npc, bfid, registrant)
         end,
 
         [481] = function() -- Quest: Class Reunion
-            return player:getCharVar("Quest[2][82]Prog") == 4
+            return player:getCharVar("Quest[2][82]Prog") == 5
         end,
 
         [482] = function() -- Quest: Trial-size Trial by Ice
