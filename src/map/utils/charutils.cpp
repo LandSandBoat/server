@@ -4649,6 +4649,12 @@ namespace charutils
             return;
         }
 
+        // MONs don't lose exp on death
+        if (PChar->m_PMonstrosity != nullptr)
+        {
+            return;
+        }
+
         uint8  mLevel  = (PChar->m_LevelRestriction != 0 && PChar->m_LevelRestriction < PChar->GetMLevel()) ? PChar->m_LevelRestriction : PChar->GetMLevel();
         uint16 exploss = mLevel <= 67 ? (GetExpNEXTLevel(mLevel) * 8) / 100 : 2400;
 
