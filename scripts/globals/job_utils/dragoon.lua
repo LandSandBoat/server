@@ -771,7 +771,7 @@ xi.job_utils.dragoon.pickAndUseDamageBreath = function(player, target)
         target:getMod(xi.mod.WATER_EEM),
     }
 
-    local highestEEM = resistances[1]
+    local highestEEM = 0
     local breath = breathList[math.random(#breathList)]
     local headEquip = player:getEquippedItem(xi.slot.HEAD)
     local headEquipID = 0

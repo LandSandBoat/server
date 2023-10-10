@@ -23,7 +23,7 @@ entity.onMobMagicPrepare = function(mob, target, spell)
     -- Increase magic rank after every 3 casts
     if mob:getLocalVar("casts") % 3 == 0 and mob:getLocalVar("magicRank") < 4 then
         mob:setLocalVar("magicRank", mob:getLocalVar("magicRank") + 1)
-        mob:addMod(xi.mod.MATT, 100)
+        mob:addMod(xi.mod.MATT, 50)
     end
 
     local rank = mob:getLocalVar("magicRank")
@@ -48,7 +48,7 @@ entity.onMobFight = function(mob)
 
     if mob:hasStatusEffect(xi.effect.SILENCE) then
         mob:setLocalVar("magicRank", 5)
-        mob:setMod(xi.mod.MATT, 400)
+        mob:setMod(xi.mod.MATT, 200)
     end
 
     if

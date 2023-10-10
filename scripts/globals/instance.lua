@@ -112,7 +112,7 @@ xi.instance.lookup =
         { 6600, { 505, 11, -4, 0, 60, 0, 1 }, { 505, 4 }, { 511, 0 } }, -- Assault: Imperial Agent Rescue
         -- Assault: Preemptive Strike
         -- Assault: Sagelord Elimination
-        -- Assault: Breaking Morale
+        { 6603, { 505, 14, -4, 0, 60, 0, 1 }, { 505, 4 }, { 511, 0 } }, -- Assault: Breaking Morale
         -- Assault: The Double Agent
         -- Assault: Imperial Treasure Retrieval
         -- Assault: Blitzkrieg

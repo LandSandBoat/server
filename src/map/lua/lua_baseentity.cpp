@@ -13744,7 +13744,7 @@ void CLuaBaseEntity::petAttack(CLuaBaseEntity* PEntity)
     XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype == TYPE_NPC);
 
     CBattleEntity* PBattle = static_cast<CBattleEntity*>(m_PBaseEntity)->PPet;
-    if (PBattle != nullptr)
+    if (PBattle != nullptr && PEntity != nullptr)
     {
         if (PBattle->objtype == TYPE_PET)
         {

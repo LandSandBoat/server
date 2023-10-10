@@ -27,8 +27,7 @@ quest.sections =
         check = function(player, status, vars)
             return status == QUEST_AVAILABLE and
                 player:getMainLvl() >= xi.settings.main.AF1_QUEST_LEVEL and
-                player:getMainJob() == xi.job.SMN and
-                not quest:getMustZone(player)
+                player:getMainJob() == xi.job.SMN
         end,
 
         [xi.zone.WINDURST_WALLS] =
@@ -141,7 +140,7 @@ quest.sections =
 
         [xi.zone.WINDURST_WALLS] =
         {
-            ['Koru-Moru'] = quest:event(405):replaceDefault(),
+            ['Koru_Moru'] = quest:event(405):replaceDefault(),
         },
     },
 }

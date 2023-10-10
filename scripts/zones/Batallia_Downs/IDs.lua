@@ -28,6 +28,7 @@ zones[xi.zone.BATALLIA_DOWNS] =
         DIG_THROW_AWAY                = 7254,  -- You dig up <item>, but your inventory is full. You regretfully throw the <item> away.
         FIND_NOTHING                  = 7256,  -- You dig and you dig, but find nothing.
         SPARKLING_LIGHT               = 7350,  -- The ground is sparkling with a strange light.
+        EVIL_PRESENSE                 = 7438,  -- You sense an evil Presense
         SENSE_SOMETHING_LURKING       = 7440,  -- You sense something lurking close by!
         NO_GRASS_GROWING_HERE         = 7488,  -- There is no grass growing here...
         BEING_ATTACKED                = 7625,  -- You are being attacked!

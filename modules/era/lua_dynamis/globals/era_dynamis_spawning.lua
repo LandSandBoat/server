@@ -92,7 +92,7 @@ xi.dynamis.spawnWave = function(zone, zoneID, waveNumber)
         end
     end
 
-    if waveNumber == 5 and zoneID == xi.zone.DYNAMIS_XARCABARD then
+    if waveNumber == 4 and zoneID == xi.zone.DYNAMIS_XARCABARD then
         local playersInZone = zone:getPlayers()
         for _, player in pairs(playersInZone) do
             player:messageSpecial(zones[xi.zone.DYNAMIS_XARCABARD].text.PRISON_OF_SOULS_HAS_SET_FREE)
@@ -116,10 +116,7 @@ xi.dynamis.parentOnEngaged = function(mob, target)
 
         if xi.dynamis.mobList[zoneID][oMobIndex].nmchildren ~= nil then
             for index, MobIndex in pairs(xi.dynamis.mobList[zoneID][oMobIndex].nmchildren) do
-                if
-                    MobIndex or
-                    not MobIndex
-                then
+                if type(MobIndex) == "boolean" then
                     index = index + 1
                 else
                     local forceLink = xi.dynamis.mobList[zoneID][oMobIndex].nmchildren[1]
@@ -1280,6 +1277,10 @@ xi.dynamis.nmDynamicSpawn = function(mobIndex, oMobIndex, forceLink, zoneID, tar
         },
         ["Goublefaupe"] =
         {
+            ["onMobInitialize"] = { function(mob)
+                mob:setMobMod(xi.mobMod.MP_BASE, 100)
+            end },
+
             ["onMobSpawn"] = { function(mob)
                 xi.dynamis.onSpawnGouble(mob)
             end },
@@ -1340,6 +1341,10 @@ xi.dynamis.nmDynamicSpawn = function(mobIndex, oMobIndex, forceLink, zoneID, tar
         },
         ["Quiebitiel"] =
         {
+            ["onMobInitialize"] = { function(mob)
+                mob:setMobMod(xi.mobMod.MP_BASE, 100)
+            end },
+
             ["onMobSpawn"] = { function(mob)
                 xi.dynamis.onSpawnQuieb(mob)
             end },
@@ -1370,6 +1375,10 @@ xi.dynamis.nmDynamicSpawn = function(mobIndex, oMobIndex, forceLink, zoneID, tar
         },
         ["Velosareon"] =
         {
+            ["onMobInitialize"] = { function(mob)
+                mob:setMobMod(xi.mobMod.MP_BASE, 100)
+            end },
+
             ["onMobSpawn"] = { function(mob)
                 xi.dynamis.onSpawnVelosar(mob)
             end },
@@ -1852,6 +1861,24 @@ xi.dynamis.nmDynamicSpawn = function(mobIndex, oMobIndex, forceLink, zoneID, tar
                 mob:addImmunity(xi.immunity.SLEEP)
             end },
 
+            ["onMobEngaged"] = { function(mob, mobTarget)
+            end },
+
+            ["onMobFight"] = { function(mob, mobTarget)
+            end },
+
+            ["onMobRoam"] = { function(mob)
+            end },
+
+            ["onMobMagicPrepare"] = { function(mob, mobTarget, spellId)
+            end },
+
+            ["onMobWeaponSkillPrepare"] = { function(mob)
+            end },
+
+            ["onMobWeaponSkill"] = { function(mob)
+            end },
+
             ["onMobDeath"] = { function(mob, player, optParams)
                 xi.dynamis.mobOnDeath(mob, player, optParams)
             end },
@@ -2085,6 +2112,15 @@ xi.dynamis.nmDynamicSpawn = function(mobIndex, oMobIndex, forceLink, zoneID, tar
         rotation = rPos,
         groupId = xi.dynamis.nmInfoLookup[mobName][2],
         groupZoneId = xi.dynamis.nmInfoLookup[mobName][3],
+        -- certain NMs need onMobInitialize functions to set mob mods (as dynamic mobs do not get pool mob mods)
+        onMobInitialize = function(mob)
+            local specFuncTable = xi.dynamis.nmFunctions[xi.dynamis.nmInfoLookup[mobName][7]]["onMobInitialize"]
+            if specFuncTable ~= nil then
+                local specFunc = specFuncTable[1]
+                specFunc(mob)
+            end
+        end,
+
         onMobSpawn = function(mob)
             local specFunc = xi.dynamis.nmFunctions[xi.dynamis.nmInfoLookup[mobName][7]]["onMobSpawn"][1]
             specFunc(mob)

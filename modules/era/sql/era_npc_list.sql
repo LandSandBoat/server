@@ -5,7 +5,7 @@
 
 LOCK TABLES `npc_list` WRITE;
 
---Fei'yin WHM AF3 Fight. https://ffxiclopedia.fandom.com/wiki/Pieuje%27s_Decision?direction=next&oldid=23449
+-- Fei'yin WHM AF3 Fight. https://ffxiclopedia.fandom.com/wiki/Pieuje%27s_Decision?direction=next&oldid=23449
 UPDATE npc_list SET pos_x = 173.143, pos_y = -24.016, pos_z = -81.385 WHERE npcid = "17613245";
 
 -- ----------------------------------------------------
@@ -48,20 +48,20 @@ UPDATE npc_list SET status = 2 WHERE npcid = "17735749" AND polutils_name = "Hom
 UPDATE npc_list SET status = 2 WHERE npcid = "17735750" AND polutils_name = "Home Point #3";
 
 -- Bhaflau Thickets
-UPDATE npc_list SET status = 2 WHERE npcid = "16990618" AND polutils_name = "Home Point #1";
+UPDATE npc_list SET status = 2 WHERE npcid = "16990651" AND polutils_name = "Home Point #1";
 
 -- Caedarva Mire
-UPDATE npc_list SET status = 2 WHERE npcid = "17101362" AND polutils_name = "Home Point #1";
+UPDATE npc_list SET status = 2 WHERE npcid = "17101402" AND polutils_name = "Home Point #1";
 
 -- Cape Teriggan
 UPDATE npc_list SET status = 2 WHERE npcid = "17240529" AND polutils_name = "Home Point #1";
 
 -- Castle Zvahl Keep
-UPDATE npc_list SET status = 2 WHERE npcid = "17441102" AND polutils_name = "Home Point #1";
-UPDATE npc_list SET status = 2 WHERE npcid = "17441103" AND polutils_name = "Home Point #2";
-UPDATE npc_list SET status = 2 WHERE npcid = "17441104" AND polutils_name = "Home Point #3";
-UPDATE npc_list SET status = 2 WHERE npcid = "17441105" AND polutils_name = "Home Point #4";
-UPDATE npc_list SET status = 2 WHERE npcid = "17441106" AND polutils_name = "Home Point #5";
+UPDATE npc_list SET status = 2 WHERE npcid = "17441104" AND polutils_name = "Home Point #1";
+UPDATE npc_list SET status = 2 WHERE npcid = "17441105" AND polutils_name = "Home Point #2";
+UPDATE npc_list SET status = 2 WHERE npcid = "17441106" AND polutils_name = "Home Point #3";
+UPDATE npc_list SET status = 2 WHERE npcid = "17441107" AND polutils_name = "Home Point #4";
+UPDATE npc_list SET status = 2 WHERE npcid = "17441108" AND polutils_name = "Home Point #5";
 
 -- Den of Rancor
 UPDATE npc_list SET status = 2 WHERE npcid = "17433096" AND polutils_name = "Home Point #1";
@@ -120,11 +120,11 @@ UPDATE npc_list SET status = 2 WHERE npcid = "16880014" AND polutils_name = "Hom
 UPDATE npc_list SET status = 2 WHERE npcid = "17027627" AND polutils_name = "Home Point #1";
 
 -- Newton Movalpolos
-UPDATE npc_list SET status = 2 WHERE npcid = "16826628" AND polutils_name = "Home Point #1";
-UPDATE npc_list SET status = 2 WHERE npcid = "16826629" AND polutils_name = "Home Point #2";
-UPDATE npc_list SET status = 2 WHERE npcid = "16826630" AND polutils_name = "Home Point #3";
-UPDATE npc_list SET status = 2 WHERE npcid = "16826631" AND polutils_name = "Home Point #4";
-UPDATE npc_list SET status = 2 WHERE npcid = "16826632" AND polutils_name = "Home Point #5";
+UPDATE npc_list SET status = 2 WHERE npcid = "16826630" AND polutils_name = "Home Point #1";
+UPDATE npc_list SET status = 2 WHERE npcid = "16826631" AND polutils_name = "Home Point #2";
+UPDATE npc_list SET status = 2 WHERE npcid = "16826632" AND polutils_name = "Home Point #3";
+UPDATE npc_list SET status = 2 WHERE npcid = "16826633" AND polutils_name = "Home Point #4";
+UPDATE npc_list SET status = 2 WHERE npcid = "16826634" AND polutils_name = "Home Point #5";
 
 -- Nashmau
 UPDATE npc_list SET status = 0 WHERE npcid = "16994332" AND polutils_name = "Home Point #1";
@@ -174,11 +174,11 @@ UPDATE npc_list SET status = 2 WHERE npcid = "16814570" AND polutils_name = "Hom
 UPDATE npc_list SET status = 2 WHERE npcid = "16814571" AND polutils_name = "Home Point #5";
 
 -- Qufim Island
-UPDATE npc_list SET status = 2 WHERE npcid = "17293831" AND polutils_name = "Home Point #1";
-UPDATE npc_list SET status = 2 WHERE npcid = "17293832" AND polutils_name = "Home Point #2";
-UPDATE npc_list SET status = 2 WHERE npcid = "17293833" AND polutils_name = "Home Point #3";
-UPDATE npc_list SET status = 2 WHERE npcid = "17293834" AND polutils_name = "Home Point #4";
-UPDATE npc_list SET status = 2 WHERE npcid = "17293835" AND polutils_name = "Home Point #5";
+UPDATE npc_list SET status = 2 WHERE npcid = "17293833" AND polutils_name = "Home Point #1";
+UPDATE npc_list SET status = 2 WHERE npcid = "17293834" AND polutils_name = "Home Point #2";
+UPDATE npc_list SET status = 2 WHERE npcid = "17293835" AND polutils_name = "Home Point #3";
+UPDATE npc_list SET status = 2 WHERE npcid = "17293836" AND polutils_name = "Home Point #4";
+UPDATE npc_list SET status = 2 WHERE npcid = "17293837" AND polutils_name = "Home Point #5";
 
 -- Quicksand Caves
 UPDATE npc_list SET status = 2 WHERE npcid = "17629785" AND polutils_name = "Home Point #1";
@@ -209,7 +209,7 @@ UPDATE npc_list SET status = 2 WHERE npcid = "17772845" AND polutils_name = "Hom
 UPDATE npc_list SET status = 2 WHERE npcid = "17772846" AND polutils_name = "Home Point #2";
 UPDATE npc_list SET status = 2 WHERE npcid = "17772847" AND polutils_name = "Home Point #3";
 
---Selbina
+-- Selbina
 UPDATE npc_list SET status = 0 WHERE npcid = "17793069" AND polutils_name = "Home Point #1";
 
 -- Southern San d'Oria

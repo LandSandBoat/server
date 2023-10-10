@@ -462,21 +462,22 @@ namespace petutils
             case 24: // COURIER CARRIE
             case 33: // BEETLE FAMILIAR
             case 45: // PANZER GALAHAD
-                return 48.133 * level - 460;
+                calculatedHp = 48.133 * level - 460;
+                break;
             case 25: // HOMUNCULUS
             case 28: // FLOWERPOT BILL
             case 38: // FLOWERPOT BEN
                 calculatedHp = 61.7471 * level - 1260.99;
-                return std::max(calculatedHp, 500);
+                break;
             case 34: // ANTLION FAMILIAR
             case 46: // CHOPSUEY CHUCKY
             case 47: // AMIGO SABOTENDER
                 calculatedHp = 60.24 * level - 1246;
-                return std::max(calculatedHp, 500);
+                break;
             case 35: // MITE FAMILIAR
             case 44: // LIFEDRINKER LARS
                 calculatedHp = 57.7 * level - 1203.5;
-                return std::max(calculatedHp, 500);
+                break;
             case 21: // SHEEP FAMILIAR
             case 22: // HARE FAMILIAR
             case 26: // FLYTRAP FAMILIAR
@@ -494,8 +495,100 @@ namespace petutils
             case 43: // AMBUSHER ALLIE
             default:
                 calculatedHp = -0.0207189 * pow(level, 3) + 3.05448 * pow(level, 2) - 86.9204 * level + 1061.84;
-                return std::max(calculatedHp, 500);
+                break;
         }
+        return std::max(calculatedHp, 500);
+    }
+
+    /// <summary>
+    /// Function used to true up Jug Pet Stats.
+    /// Era source values pulled from https://www.ffxiah.com/node/371
+    /// These defense boosts are calculated from working backwards between current calculations and target values
+    /// Does currently consider that pets have traits (attack and defense bonus)
+    /// </summary>
+    /// <param name="PMob">Jug Pet to have corrections applied</param>
+    void ApplyJugStatCorrections(CPetEntity* PMob)
+    {
+        switch (PMob->m_PetID)
+        {
+            case 23: // CRAB FAMILIAR
+            case 24: // COURIER CARRIE
+                PMob->addModifier(Mod::DEFP, 22);
+                break;
+            case 33: // BEETLE FAMILIAR
+            case 45: // PANZER GALAHAD
+            case 32: // FUNGUAR FAMILIAR
+            case 27: // TIGER FAMILIAR
+            case 39: // SABER SIRAVARDE
+            case 26: // FLYTRAP FAMILIAR
+            case 42: // VORACIOUS AUDREY
+            case 30: // LIZARD FAMILIAR
+            case 40: // COLDBLOOD COMO
+            case 31: // MAYFLY FAMILIAR
+            case 41: // SHELLBUSTER OROB
+                PMob->addModifier(Mod::DEFP, 20);
+                break;
+            case 25: // HOMUNCULUS
+            case 28: // FLOWERPOT BILL
+            case 38: // FLOWERPOT BEN
+                PMob->addModifier(Mod::DEFP, 24);
+                break;
+            case 34: // ANTLION FAMILIAR
+            case 46: // CHOPSUEY CHUCKY
+                // 52% defense boost seems quite large however
+                // base calcs are off for most pets in the 20% range
+                // Antlion Family has a 30% def boost per the page referenced above
+                PMob->addModifier(Mod::DEFP, 52);
+                break;
+            case 47: // AMIGO SABOTENDER
+                PMob->addModifier(Mod::DEFP, 19);
+                break;
+            case 35: // MITE FAMILIAR
+            case 44: // LIFEDRINKER LARS
+                PMob->addModifier(Mod::DEFP, 18);
+                PMob->addModifier(Mod::ATTP, 30);
+                break;
+            case 21: // SHEEP FAMILIAR
+            case 22: // HARE FAMILIAR
+            case 29: // EFT FAMILIAR
+            case 36: // LULLABY MELODIA
+            case 37: // KEENEARED STEFFI
+            case 43: // AMBUSHER ALLIE
+            default:
+                PMob->addModifier(Mod::DEFP, 10);
+                break;
+        }
+    }
+
+    /// <summary>
+    /// Gets the evasion rank for a jug pet.  Based on information found in https://www.ffxiah.com/node/371
+    /// </summary>
+    /// <param name="PMob">Jug Pet to get evasion rank for</param>
+    /// <returns>Evasion Rank, overriding normal mob family ratings</returns>
+    int GetJugEvasionRank(CPetEntity* PMob)
+    {
+        int evasionRank = 3;
+
+        switch (PMob->m_PetID)
+        {
+            case 23: // CRAB FAMILIAR
+            case 24: // COURIER CARRIE
+            case 33: // BEETLE FAMILIAR
+            case 45: // PANZER GALAHAD
+            case 25: // HOMUNCULUS
+            case 34: // ANTLION FAMILIAR
+            case 46: // CHOPSUEY CHUCKY
+            case 47: // AMIGO SABOTENDER
+            case 35: // MITE FAMILIAR
+            case 44: // LIFEDRINKER LARS
+                evasionRank = 1;
+                break;
+            default:
+                evasionRank = 2;
+                break;
+        }
+
+        return evasionRank;
     }
 
     void LoadJugStats(CPetEntity* PMob, Pet_t* petStats)
@@ -651,10 +744,14 @@ namespace petutils
                 break;
         }
 
+        // It appears that Rabbit and Eft have lower stats (acc atk) than their counterparts
+        // Require some more data points to see if we should special case those to rank 3 instead of rank 1
         PMob->setModifier(Mod::DEF, mobutils::GetDefense(PMob, PMob->defRank));
-        PMob->setModifier(Mod::EVA, mobutils::GetBase(PMob, PMob->evaRank));
+        PMob->setModifier(Mod::EVA, mobutils::GetBase(PMob, GetJugEvasionRank(PMob)));
         PMob->setModifier(Mod::ATT, mobutils::GetBase(PMob, PMob->attRank));
         PMob->setModifier(Mod::ACC, mobutils::GetBase(PMob, PMob->accRank));
+
+        ApplyJugStatCorrections(PMob);
     }
 
     void LoadAutomatonStats(CCharEntity* PMaster, CPetEntity* PPet, Pet_t* petStats)

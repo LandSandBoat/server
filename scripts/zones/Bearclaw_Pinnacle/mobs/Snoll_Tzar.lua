@@ -27,7 +27,10 @@ entity.onMobFight = function(mob, player, target)
     end
 
     -- salt cooldown time reset
-    if (mob:getLocalVar("cooldown") < os.time() and mob:getLocalVar("salty") == 1) then
+    if
+        mob:getLocalVar("cooldown") < os.time() and
+        mob:getLocalVar("salty") == 1
+    then
         player:messageText(player, ID.text.SHOOK_SALT)
         mob:setLocalVar("salty", 0)
     end
@@ -70,7 +73,6 @@ entity.onMobFight = function(mob, player, target)
     then
         mob:useMobAbility(1644)
         mob:setLocalVar("changeTime", mob:getBattleTime())
-        mob:setLocalVar("gameover", 1)
     end
 end
 

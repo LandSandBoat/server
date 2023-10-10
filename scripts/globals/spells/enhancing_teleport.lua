@@ -46,7 +46,8 @@ xi.spells.enhancing.useTeleportSpell = function(caster, target, spell)
     if
         target:getObjType() == xi.objType.PC and
         (keyItem == 0 or (keyItem > 0 and target:hasKeyItem(keyItem))) and
-        (not campaign or (campaign and target:getCampaignAllegiance() > 0))
+        (not campaign or (campaign and target:getCampaignAllegiance() > 0)) and
+        not target:isInMogHouse()
     then
         target:addStatusEffectEx(xi.effect.TELEPORT, 0, teleportId, 0, paramFive)
         spell:setMsg(xi.msg.basic.MAGIC_TELEPORT)

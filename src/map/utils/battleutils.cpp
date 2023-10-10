@@ -6260,7 +6260,7 @@ namespace battleutils
         // Snap nearEntity to a guaranteed valid position
         if (PMob->loc.zone->m_navMesh)
         {
-            PMob->loc.zone->m_navMesh->snapToValidPosition(nearEntity);
+            PMob->loc.zone->m_navMesh->snapToValidPosition(nearEntity, pos.y, true);
         }
 
         // Move the target a little higher, just in case
@@ -6715,6 +6715,10 @@ namespace battleutils
                     cast = (uint32)(cast * (1.0f + PEntity->getMod(Mod::WHITE_MAGIC_CAST) / 100.0f));
                 }
             }
+        }
+        else if (PSpell->getSpellGroup() == SPELLGROUP_SUMMONING)
+        {
+            cast -= 1000 * PEntity->getMod(Mod::SUMMONING_MAGIC_CAST);
         }
         else if (PSpell->getSpellGroup() == SPELLGROUP_SONG)
         {

@@ -32,8 +32,10 @@ mission.sections =
 
     {
         check = function(player, currentMission, missionStatus, vars)
-            return currentMission == mission.missionId and
-                not mission:getMustZone(player)
+            return
+                currentMission == mission.missionId
+                and os.time() >= vars.Stage
+                and not mission:getMustZone(player)
         end,
 
         [xi.zone.AHT_URHGAN_WHITEGATE] =

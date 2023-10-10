@@ -47,8 +47,8 @@ function onTrigger(player, zoneName)
         return
     end
 
-    -- Get Instance ID for zone 
-    local instanceID = GetServerVariable(string.format("[DYNA]InstanceID_%s", zone:getID()));
+    -- Get Instance ID for zone
+    local instanceID = GetServerVariable(string.format("[DYNA]InstanceID_%s", zone:getID()))
 
     -- Eject inhabiting players
     if #zone:getPlayers() > 0 then
@@ -59,6 +59,7 @@ function onTrigger(player, zoneName)
     xi.dynamis.cleanupDynamis(zone)
 
     -- Reset all player's dynamis variables
+    -- luacheck: ignore 113
     ResetDynamisInstance(instanceID)
     player:PrintToPlayer(string.format("ResetDyna: Successfully reset Dynamis Instance %s for Zone: %s", instanceID, zoneName))
 end

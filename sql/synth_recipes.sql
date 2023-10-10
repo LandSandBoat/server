@@ -1299,6 +1299,7 @@ INSERT INTO `synth_recipes` VALUES (15514,0,0,0,118,0,0,0,0,0,0,4096,4238,687,87
 -- INSERT INTO `synth_recipes` VALUES (15531,0,1997,0,255,0,0,0,0,0,0,4096,4238,4075,9248,21558,0,0,0,0,0,21559,21560,21560,21560,1,1,1,1,'Raetic Kris');
 -- INSERT INTO `synth_recipes` VALUES (15532,0,0,255,255,0,0,0,0,0,0,4096,4238,4077,4080,9246,16942,0,0,0,0,21656,21657,21657,21657,1,1,1,1,'Dyrnwyn');
 -- INSERT INTO `synth_recipes` VALUES (15533,0,1998,0,255,0,0,0,255,0,0,4102,4244,9005,9062,9249,9831,9844,9845,9845,9864,21582,21583,21584,21584,1,1,1,1,'Etoile Knife');
+INSERT INTO `synth_recipes` VALUES (19900,1,0,0,87,0,0,0,0,0,0,4100,4242,17286,0,0,0,0,0,0,0,914,1225,1225,657,1,4,6,1,'Rising Sun (desynth)');
 INSERT INTO `synth_recipes` VALUES (19901,1,0,0,21,0,0,0,0,0,0,4100,4242,15288,0,0,0,0,0,0,0,672,850,850,850,1,1,2,4,'Pellet Belt (desynth)'); -- use synth lvl, scaled xiclopedia data from 1/1/1/4
 INSERT INTO `synth_recipes` VALUES (19902,1,0,0,18,0,0,0,0,0,0,4100,4242,12299,0,0,0,0,0,0,0,715,649,649,649,1,3,2,3,'Aspis (desynth)');
 INSERT INTO `synth_recipes` VALUES (19903,1,0,0,25,0,0,0,0,0,0,4100,4242,16565,0,0,0,0,0,0,0,649,649,649,852,1,2,3,1,'Spatha (desynth)'); -- based on synth lvl, xiclopedia results data
@@ -2028,6 +2029,7 @@ INSERT INTO `synth_recipes` VALUES (25514,0,0,0,0,118,0,0,0,0,0,4096,4238,3323,8
 -- INSERT INTO `synth_recipes` VALUES (25527,0,2004,0,0,255,0,0,0,0,0,4096,4238,4076,9250,16408,0,0,0,0,0,21513,21514,21514,21514,1,1,1,1,'Raetic Baghnakhs');
 -- INSERT INTO `synth_recipes` VALUES (25528,0,0,0,255,255,0,0,0,0,0,4096,4238,4077,4081,9248,16605,0,0,0,0,21606,21607,21607,21607,1,1,1,1,'Enriching Sword');
 -- INSERT INTO `synth_recipes` VALUES (25529,0,2005,0,0,255,0,255,0,0,0,4102,4244,9003,9062,9251,9832,9844,9845,9845,9852,21628,21629,21630,21630,1,1,1,1,'Valor Sword');
+INSERT INTO `synth_recipes` VALUES (29893,1,0,0,0,57,0,0,0,0,0,4100,4242,13315,0,0,0,0,0,0,0,745,745,745,745,1,1,2,2,'Gold Earring (desynth)');
 INSERT INTO `synth_recipes` VALUES (29894,1,0,0,0,75,0,0,0,0,0,4100,4242,13484,0,0,0,0,0,0,0,745,745,745,784,1,1,2,1,'Jadeite Ring (desynth)');
 INSERT INTO `synth_recipes` VALUES (29895,1,0,0,0,75,0,0,0,0,0,4100,4242,13486,0,0,0,0,0,0,0,745,745,745,805,1,1,2,1,'Zircon Ring (desynth)');
 INSERT INTO `synth_recipes` VALUES (29896,1,0,0,0,75,0,0,0,0,0,4100,4242,13487,0,0,0,0,0,0,0,745,745,745,810,1,1,2,1,'Fluorite Ring (desynth)');
@@ -2084,7 +2086,7 @@ INSERT INTO `synth_recipes` VALUES (29945,1,0,0,0,49,0,0,0,0,0,4100,4242,13979,0
 INSERT INTO `synth_recipes` VALUES (29947,1,0,0,0,12,0,0,0,0,0,4100,4242,12705,0,0,0,0,0,0,0,650,850,649,649,1,1,1,1,'Brass Mittens (desynth)'); -- 2022.03.04 Base on FFXIclopedia Strange result, normal result would have bronze ingot yield and brass ingot hq3
 INSERT INTO `synth_recipes` VALUES (29948,1,0,0,0,71,0,0,0,0,0,4100,4242,12802,0,0,0,0,0,0,0,914,851,931,745,1,1,1,1,'Gold Cuisses (desynth)'); -- 2022.03.04 Base on FFXIclopedia
 INSERT INTO `synth_recipes` VALUES (29949,1,0,0,0,16,0,0,0,0,0,4100,4242,12833,0,0,0,0,0,0,0,817,850,649,650,3,1,1,1,'Brass Subligar (desynth)'); -- 2022.03.04 Base on FFXIclopedia
--- INSERT INTO `synth_recipes` VALUES (29950,1,0,0,0,30,0,0,0,0,0,4100,4242,16451,0,0,0,0,0,0,0,1226,1226,1226,1226,6,6,6,6,'Mythril Dagger (desynth)'); -- 2022.03.04 Base on FFXIclopedia normal yield abnormal and no hq result
+INSERT INTO `synth_recipes` VALUES (29950,1,0,0,0,30,0,0,0,0,0,4100,4242,16451,0,0,0,0,0,0,0,651,651,1226,1226,1,1,4,6,'Mythril Dagger (desynth)'); -- 2023.10.07 Base on FFXIclopedia
 INSERT INTO `synth_recipes` VALUES (29951,1,0,0,0,55,0,0,0,0,0,4100,4242,13478,0,0,0,0,0,0,0,808,808,653,653,1,1,1,2,'Goshenite Ring (desynth)');
 -- INSERT INTO `synth_recipes` VALUES (29952,1,0,0,0,21,0,0,0,0,0,4100,4242,17399,0,0,0,0,0,0,0,648,648,818,818,1,2,2,2,'Sabiki Rig (desynth)'); -- 2022.03.04 Base on FFXIclopedia removed Hq2 stated copper ingot X 3 strange result and flag needing verification
 INSERT INTO `synth_recipes` VALUES (29953,1,0,0,0,66,0,0,0,0,0,4100,4242,12673,0,0,0,0,0,0,0,817,850,653,1228,6,4,1,6,'Mythril Gauntlets (desynth)'); -- 2022.03.04 Base on FFXIclopedia

@@ -28,9 +28,11 @@ local varNames =
     ["registered_players"] = function(zone)
         return GetServerVariable(string.format("[DYNA]RegisteredPlayers_%s", zone:getID()))
     end,
+
     ["token"] = function(zone)
         return GetServerVariable(string.format("[DYNA]Token_%s", zone:getID()))
     end,
+
     ["timepoint"] = function(zone)
         local timepoint = GetServerVariable(string.format("[DYNA]Timepoint_%s", zone:getID()))
         if timepoint then
@@ -39,18 +41,23 @@ local varNames =
             return 0
         end
     end,
+
     ["10minwarning"] = function(zone)
         return GetServerVariable(string.format("[DYNA]Given10MinuteWarning_%s", zone:getID()))
     end,
+
     ["3minwarning"] = function(zone)
         return GetServerVariable(string.format("[DYNA]Given3MinuteWarning_%s", zone:getID()))
     end,
+
     ["1minwarning"] = function(zone)
         return GetServerVariable(string.format("[DYNA]Given1MinuteWarning_%s", zone:getID()))
     end,
+
     ["registrant"] = function(zone)
         return GetServerVariable(string.format("[DYNA]OriginalRegistrant_%s", zone:getID()))
     end,
+
     ["wave"] = function(zone)
         return GetServerVariable(string.format("[DYNA]CurrentWave_%s", zone:getID()))
     end,

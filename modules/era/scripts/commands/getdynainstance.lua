@@ -43,12 +43,12 @@ function onTrigger(player, zoneName)
         return
     end
 
-    -- Get Instance ID for zone 
-    local instanceID = GetServerVariable(string.format("[DYNA]InstanceID_%s", zone:getID()));
+    -- Get Instance ID for zone
+    local instanceID = GetServerVariable(string.format("[DYNA]InstanceID_%s", zone:getID()))
 
     if not instanceID or instanceID == 0 then
-      player:PrintToPlayer(string.format("GetDynaInstance: Zone (%s) No Active Instances", zoneName))
+        player:PrintToPlayer(string.format("GetDynaInstance: Zone (%s) No Active Instances", zoneName))
     else
-      player:PrintToPlayer(string.format("GetDynaInstance: Zone (%s) InstanceID (%s)", zoneName, instanceID))
+        player:PrintToPlayer(string.format("GetDynaInstance: Zone (%s) InstanceID (%s)", zoneName, instanceID))
     end
 end

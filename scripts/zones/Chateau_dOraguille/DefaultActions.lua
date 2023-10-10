@@ -10,4 +10,5 @@ return {
     ['Chupaile']    = { event = 514 },
     ['Ferdechiond'] = { event = 511 },
     ['Halver']      = { text = ID.text.HALVER_OFFSET + 1092 },
+    ['Rahal']       = { event = 529 },
 }

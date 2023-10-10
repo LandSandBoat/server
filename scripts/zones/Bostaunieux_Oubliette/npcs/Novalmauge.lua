@@ -33,25 +33,9 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local theHolyCrestStat = player:getCharVar("TheHolyCrest_Event")
-
-    -- THE HOLY CREST
-    if theHolyCrestStat == 1 then
-        player:startEvent(6)
-    elseif
-        theHolyCrestStat == 2 and
-        player:getCharVar("theHolyCrestCheck") == 0
-    then
-        player:startEvent(7)
-    end
 end
 
 entity.onEventFinish = function(player, csid, option, npc)
-    if csid == 6 then
-        player:setCharVar("TheHolyCrest_Event", 2)
-    elseif csid == 7 then
-        player:setCharVar("theHolyCrestCheck", 1)
-    end
 end
 
 return entity

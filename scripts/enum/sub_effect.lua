@@ -32,6 +32,7 @@ xi.subEffect =
     EVASION_DOWN        = 18,  -- Verified shared group 2
     ATTACK_DOWN         = 18,  -- Verified shared group 2
     SLOW                = 18,  -- Verified shared group 2
+    BIND                = 18,  -- Verified shared group 2
     DEATH               = 19,
     SHIELD              = 20,
     HP_DRAIN            = 21,  -- 1-10101      43

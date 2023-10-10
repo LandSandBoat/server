@@ -24424,7 +24424,7 @@ INSERT INTO `item_mods` VALUES (14930,505,5); -- OVERLOAD_THRESH: 5
 
 -- Carbuncles Cuffs
 INSERT INTO `item_mods` VALUES (14931,1,14);   -- DEF: 14
-INSERT INTO `item_mods` VALUES (14931,1179,1); -- Summoning magic casting time -1
+INSERT INTO `item_mods` VALUES (14931,1078,1); -- Summoning magic casting time -1
 
 -- Sipahi Dastana
 INSERT INTO `item_mods` VALUES (14932,1,13); -- DEF: 13
@@ -32599,7 +32599,7 @@ INSERT INTO `item_mods` VALUES (16788,25,5); -- ACC: 5
 -- Death Scythe +1
 INSERT INTO `item_mods` VALUES (16791,431,5);  -- ITEM_ADDEFFECT_TYPE: 5
 INSERT INTO `item_mods` VALUES (16791,499,21); -- ITEM_SUBEFFECT: 21
-INSERT INTO `item_mods` VALUES (16791,500,10); -- ITEM_ADDEFFECT_DMG: 10
+INSERT INTO `item_mods` VALUES (16791,500,60); -- ITEM_ADDEFFECT_DMG: 60
 INSERT INTO `item_mods` VALUES (16791,501,10); -- ITEM_ADDEFFECT_CHANCE: 10
 INSERT INTO `item_mods` VALUES (16791,950,8);  -- ITEM_ADDEFFECT_ELEMENT: 8
 
