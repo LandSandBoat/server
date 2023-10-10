@@ -76,6 +76,9 @@ namespace monstrosity
 
     void HandleDeathMenu(CCharEntity* PChar, uint8 type);
 
+    bool IsInstinctUnlocked(CCharEntity* PChar, uint16 instinct);
+    bool IsVariantUnlocked(CCharEntity* PChar, uint8 variant);
+
     // Debug
     void MaxAllLevels(CCharEntity* PChar);
     void UnlockAllInstincts(CCharEntity* PChar);

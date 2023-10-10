@@ -255,8 +255,6 @@ void monstrosity::HandleZoneIn(CCharEntity* PChar)
         // TODO: If belligerency, timer is 60s
         CStatusEffect* PEffect = new CStatusEffect(EFFECT::EFFECT_GESTATION, EFFECT::EFFECT_GESTATION, 0, 0, 64800); // 18 hours
 
-        // TODO: You cannot attack while you're in Gest., you have to click it off
-
         // TODO: Move these into the db
         PEffect->AddEffectFlag(EFFECTFLAG_INVISIBLE);
         PEffect->AddEffectFlag(EFFECTFLAG_DEATH);
@@ -340,10 +338,35 @@ void monstrosity::HandleEquipChangePacket(CCharEntity* PChar, CBasicPacket& data
         return;
     }
 
-    // TODO: Validate that we have the species/instinct that we're trying to equip
-
-    // TODO: Validate that we'll have enough points to hold our instincts when we equip
     // NOTE: The amount of pointer per level is level + 10, this is set in the client
+
+    // clang-format off
+    auto getTotalInstinctsCost = [&](std::array<uint16, 12> input) -> uint8
+    {
+        uint8 total = 0;
+
+        for (auto const& idx : input)
+        {
+            total += gMonstrosityInstinctMap[idx].cost;
+        }
+
+        return total;
+    };
+
+    auto instinctsContainDuplicates = [&](std::array<uint16, 12> input) -> bool
+    {
+        std::unordered_set<uint16> set;
+        for (auto const& idx : input)
+        {
+            if (set.find(idx) != set.end())
+            {
+                // Found dupe
+                return true;
+            }
+        }
+        return false;
+    };
+    // clang-format on
 
     uint8 flag = data.ref<uint16>(0x0A);
     if (flag == 0x01) // Species Change
@@ -366,6 +389,12 @@ void monstrosity::HandleEquipChangePacket(CCharEntity* PChar, CBasicPacket& data
             return;
         }
 
+        // If is a variant, and isn't unlocked, bail
+        if (newSpecies >= 256 && !IsVariantUnlocked(PChar, newSpecies - 256))
+        {
+            return;
+        }
+
         PChar->m_PMonstrosity->Species = newSpecies;
 
         PChar->m_PMonstrosity->MonstrosityId = data.monstrosityId;
@@ -383,20 +412,6 @@ void monstrosity::HandleEquipChangePacket(CCharEntity* PChar, CBasicPacket& data
     }
     else if (flag == 0x04) // Instinct Change
     {
-        // clang-format off
-        auto getTotalCost = [&](std::array<uint16, 12> input) -> uint8
-        {
-            uint8 total = 0;
-
-            for (auto const& idx : input)
-            {
-                total += gMonstrosityInstinctMap[idx].cost;
-            }
-
-            return total;
-        };
-        // clang-format on
-
         auto previousEquipped = PChar->m_PMonstrosity->EquippedInstincts;
 
         // NOTE: This is set by the client
@@ -436,20 +451,23 @@ void monstrosity::HandleEquipChangePacket(CCharEntity* PChar, CBasicPacket& data
                         auto maybeInstinct = gMonstrosityInstinctMap.find(value);
                         if (maybeInstinct != gMonstrosityInstinctMap.end())
                         {
-                            auto instinct = (*maybeInstinct).second;
-
-                            // TODO: Validate whether or not this instinct is unlocked
+                            if (!IsInstinctUnlocked(PChar, value))
+                            {
+                                return;
+                            }
 
                             PChar->m_PMonstrosity->EquippedInstincts[idx] = value;
 
                             // Validate cost
-                            if (getTotalCost(PChar->m_PMonstrosity->EquippedInstincts) > maxPoints)
+                            if (getTotalInstinctsCost(PChar->m_PMonstrosity->EquippedInstincts) > maxPoints ||
+                                instinctsContainDuplicates(PChar->m_PMonstrosity->EquippedInstincts))
                             {
                                 // Reset to what it was before and don't handle mods
                                 PChar->m_PMonstrosity->EquippedInstincts = previousEquipped;
                             }
                             else
                             {
+                                auto instinct = (*maybeInstinct).second;
                                 for (auto const& mod : instinct.mods)
                                 {
                                     PChar->addModifier(mod.getModID(), mod.getModAmount());
@@ -525,6 +543,53 @@ void monstrosity::HandleDeathMenu(CCharEntity* PChar, uint8 type)
     }
 
     charutils::SendToZone(PChar, 2, zoneutils::GetZoneIPP(PChar->loc.destination));
+}
+
+bool monstrosity::IsInstinctUnlocked(CCharEntity* PChar, uint16 instinct)
+{
+    if (PChar->m_PMonstrosity == nullptr)
+    {
+        return false;
+    }
+
+    // Purchasable instincts are 768 + 5 onwards
+    if (instinct >= 773)
+    {
+        auto  idx         = instinct - 765;
+        uint8 byteOffset  = 20 + (idx / 8);
+        uint8 shiftAmount = idx % 8;
+
+        // There is a gap in the instincts bitpack, so we put the purchase information
+        // for these instincts in there. Sneaky sneaky.
+        if (byteOffset >= 20 && byteOffset < 24)
+        {
+            return PChar->m_PMonstrosity->instincts[byteOffset] & (0x01 << shiftAmount);
+        }
+    }
+    else
+    {
+        // TODO: Level-based instincts
+    }
+
+    return false;
+}
+
+bool monstrosity::IsVariantUnlocked(CCharEntity* PChar, uint8 variant)
+{
+    if (PChar->m_PMonstrosity == nullptr)
+    {
+        return false;
+    }
+
+    uint8 byteOffset  = static_cast<uint8>(variant) / 8;
+    uint8 shiftAmount = static_cast<uint8>(variant) % 8;
+
+    if (byteOffset < 32)
+    {
+        return PChar->m_PMonstrosity->variants[byteOffset] & (0x01 << shiftAmount);
+    }
+
+    return false;
 }
 
 void monstrosity::MaxAllLevels(CCharEntity* PChar)
