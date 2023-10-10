@@ -285,7 +285,9 @@ namespace luautils
     int32  OnAutomatonAbilityCheck(CBaseEntity* PChar, CAutomatonEntity* PAutomaton, CMobSkill* PMobSkill);
     int32  OnAutomatonAbility(CBaseEntity* PTarget, CBaseEntity* PMob, CMobSkill* PMobSkill, CBaseEntity* PMobMaster, action_t* action);
 
-    void OnMonstrosityUpdate(CBaseEntity* PChar);
+    auto GetMonstrosityLuaTable(CCharEntity* PChar) -> sol::table;
+    void SetMonstrosityLuaTable(CCharEntity* PChar, sol::table data);
+    void OnMonstrosityUpdate(CCharEntity* PChar);
 
     int32 OnAbilityCheck(CBaseEntity* PChar, CBaseEntity* PTarget, CAbility* PAbility, CBaseEntity** PMsgTarget);
     int32 OnPetAbility(CBaseEntity* PTarget, CBaseEntity* PMob, CMobSkill* PMobSkill, CBaseEntity* PPetMaster, action_t* action);

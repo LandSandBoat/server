@@ -429,9 +429,7 @@ end
 -- Bound by C++ (DO NOT CHANGE SIGNATURE)
 -----------------------------------
 
-xi.monstrosity.onMonstrosityUpdate = function(player)
-    local data = player:getMonstrosityData()
-
+xi.monstrosity.onMonstrosityUpdate = function(player, data)
     -- Tap level-based unlocks
 
     -- Instincts by MON level
@@ -456,8 +454,6 @@ xi.monstrosity.onMonstrosityUpdate = function(player)
     end
 
     -- TODO: Handle level-based variants here
-
-    player:setMonstrosityData(data)
 end
 
 -----------------------------------
