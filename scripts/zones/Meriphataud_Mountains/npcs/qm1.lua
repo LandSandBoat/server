@@ -10,27 +10,15 @@ require("scripts/globals/npc_util")
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    if
-        npcUtil.tradeHas(trade, 1159) and
-        player:getCharVar("TheHolyCrest_Event") == 4
-    then
-        player:startEvent(56)
-    end
 end
 
 entity.onTrigger = function(player, npc)
-    player:messageSpecial(ID.text.NOTHING_FOUND)
 end
 
 entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    if csid == 56 then
-        player:setCharVar("TheHolyCrest_Event", 5)
-        player:confirmTrade()
-        player:startEvent(33)
-    end
 end
 
 return entity

@@ -3319,6 +3319,7 @@ xi.items =
     HEADGEAR_P1                     = 12471,
     WOOL_HAT                        = 12474,
     FUNGUS_HAT                      = 12485,
+    GOLD_HAIRPIN                    = 12494,
     COPPER_HAIRPIN                  = 12496,
     BRASS_HAIRPIN                   = 12497,
     COTTON_HEADBAND                 = 12498,
