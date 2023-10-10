@@ -41,18 +41,16 @@ quest.sections =
 
         [xi.zone.WINDURST_WOODS] =
         {
-            ['Illu_Bohjaa'] =
+            ['Illu_Bohjaa'] = quest:event(334, 0, xi.item.SPOOL_OF_SILK_THREAD, 0, xi.item.CRAWLER_CALCULUS),
             {
                 onTrade = function(player, npc, trade)
                     if
-                        npcUtil.tradeHas(trade, { { xi.item.SPOOL_OF_SILK_THREAD, 3 } }) or
-                        npcUtil.tradeHas(trade, { { xi.item.CRAWLER_CALCULUS, 3 } })
+                        npcUtil.tradeHasExactly(trade, { { xi.item.SPOOL_OF_SILK_THREAD, 3 } }) or
+                        npcUtil.tradeHasExactly(trade, { { xi.item.CRAWLER_CALCULUS, 3 } })
                     then
                         return quest:event(335, 600 * xi.settings.main.GIL_RATE, xi.item.SPOOL_OF_SILK_THREAD, 0, xi.item.CRAWLER_CALCULUS)
                     end
                 end,
-
-                onTrigger = quest:event(334, 0, xi.item.SPOOL_OF_SILK_THREAD, 0, xi.item.CRAWLER_CALCULUS),
             },
 
             onEventFinish =
@@ -82,10 +80,7 @@ quest.sections =
 
         [xi.zone.WINDURST_WOODS] =
         {
-            ['Illu_Bohjaa'] =
-            {
-                onTrigger = quest:event(336):replaceDefault(),
-            },
+            ['Illu_Bohjaa'] = quest:event(336):replaceDefault(),
         },
     },
 }
