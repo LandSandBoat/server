@@ -146,6 +146,13 @@ namespace charutils
         JOBTYPE    sjob        = PChar->GetSJob();
         MERIT_TYPE statMerit[] = { MERIT_STR, MERIT_DEX, MERIT_VIT, MERIT_AGI, MERIT_INT, MERIT_MND, MERIT_CHR };
 
+        // We have to make sure we don't leave the job as JOB_MON - we CANNOT generate stats for it.
+        if (mjob == JOB_MON || sjob == JOB_MON)
+        {
+            mjob = JOB_WAR;
+            sjob = JOB_WAR;
+        }
+
         // NOTE: Monstrosity (MON) is treated as its own job, but each species is it's own
         //     : combination of main/sub job for stats, traits and abilities.
         if (PChar->m_PMonstrosity != nullptr)
