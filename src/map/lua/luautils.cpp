@@ -75,6 +75,7 @@
 #include "map.h"
 #include "message.h"
 #include "mobskill.h"
+#include "monstrosity.h"
 #include "packets/action.h"
 #include "packets/char_emotion.h"
 #include "packets/char_update.h"
@@ -3874,7 +3875,98 @@ namespace luautils
         return result.get_type(0) == sol::type::number ? result.get<int32>(0) : 0;
     }
 
-    void OnMonstrosityUpdate(CBaseEntity* PChar)
+    auto GetMonstrosityLuaTable(CCharEntity* PChar) -> sol::table
+    {
+        TracyZoneScoped;
+
+        // TODO: lua_monstrosity.cpp?
+        auto table = lua.create_table();
+
+        table["monstrosityId"] = PChar->m_PMonstrosity->MonstrosityId;
+        table["species"]       = PChar->m_PMonstrosity->Species;
+        table["flags"]         = PChar->m_PMonstrosity->Flags;
+
+        {
+            std::size_t idx = 0;
+            table["levels"] = lua.create_table();
+            for (auto entry : PChar->m_PMonstrosity->levels)
+            {
+                table["levels"][idx++] = entry;
+            }
+        }
+
+        {
+            std::size_t idx    = 0;
+            table["instincts"] = lua.create_table();
+            for (auto entry : PChar->m_PMonstrosity->instincts)
+            {
+                table["instincts"][idx++] = entry;
+            }
+        }
+
+        {
+            std::size_t idx   = 0;
+            table["variants"] = lua.create_table();
+            for (auto entry : PChar->m_PMonstrosity->variants)
+            {
+                table["variants"][idx++] = entry;
+            }
+        }
+
+        return table;
+    }
+
+    void SetMonstrosityLuaTable(CCharEntity* PChar, sol::table table)
+    {
+        TracyZoneScoped;
+
+        if (table["monstrosityId"].valid())
+        {
+            PChar->m_PMonstrosity->MonstrosityId = table.get<uint8>("monstrosityId");
+        }
+
+        if (table["species"].valid())
+        {
+            PChar->m_PMonstrosity->Species = table.get<uint16>("species");
+        }
+
+        if (table["flags"].valid())
+        {
+            PChar->m_PMonstrosity->Flags = table.get<uint16>("flags");
+        }
+
+        if (table["levels"].valid())
+        {
+            for (auto const& [keyObj, valObj] : table.get<sol::table>("levels"))
+            {
+                uint8 key = keyObj.as<uint8>();
+                uint8 val = valObj.as<uint8>();
+                PChar->m_PMonstrosity->levels[key] |= val;
+            }
+        }
+
+        if (table["instincts"].valid())
+        {
+            for (auto const& [keyObj, valObj] : table.get<sol::table>("instincts"))
+            {
+                uint8 key = keyObj.as<uint8>();
+                uint8 val = valObj.as<uint8>();
+                PChar->m_PMonstrosity->instincts[key] |= val;
+            }
+        }
+
+        if (table["variants"].valid())
+        {
+            for (auto const& [keyObj, valObj] : table.get<sol::table>("variants"))
+            {
+                uint8 key = keyObj.as<uint8>();
+                uint8 val = valObj.as<uint8>();
+                PChar->m_PMonstrosity->variants[key] |= val;
+            }
+        }
+    }
+
+    void OnMonstrosityUpdate(CCharEntity* PChar)
     {
         TracyZoneScoped;
 
@@ -3885,7 +3977,7 @@ namespace luautils
             return;
         }
 
-        auto result = onMonstrosityUpdate(CLuaBaseEntity(PChar));
+        auto result = onMonstrosityUpdate(CLuaBaseEntity(PChar), GetMonstrosityLuaTable(PChar));
         if (!result.valid())
         {
             sol::error err = result;

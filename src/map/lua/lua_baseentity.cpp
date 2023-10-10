@@ -6362,38 +6362,7 @@ sol::table CLuaBaseEntity::getMonstrosityData()
         monstrosity::ReadMonstrosityData(PChar);
     }
 
-    auto table = lua.create_table();
-
-    table["monstrosityId"] = PChar->m_PMonstrosity->MonstrosityId;
-    table["species"]       = PChar->m_PMonstrosity->Species;
-    table["flags"]         = PChar->m_PMonstrosity->Flags;
-
-    {
-        std::size_t idx = 0;
-        table["levels"] = lua.create_table();
-        for (auto entry : PChar->m_PMonstrosity->levels)
-        {
-            table["levels"][idx++] = entry;
-        }
-    }
-
-    {
-        std::size_t idx    = 0;
-        table["instincts"] = lua.create_table();
-        for (auto entry : PChar->m_PMonstrosity->instincts)
-        {
-            table["instincts"][idx++] = entry;
-        }
-    }
-
-    {
-        std::size_t idx   = 0;
-        table["variants"] = lua.create_table();
-        for (auto entry : PChar->m_PMonstrosity->variants)
-        {
-            table["variants"][idx++] = entry;
-        }
-    }
+    auto table = luautils::GetMonstrosityLuaTable(PChar);
 
     // If we didn't start with Monstrosity data, we should wipe it out now so we
     // don't change modes
@@ -6418,50 +6387,7 @@ void CLuaBaseEntity::setMonstrosityData(sol::table table)
     // NOTE: This will populate m_PMonstrosity if it doesn't exist
     monstrosity::ReadMonstrosityData(PChar);
 
-    if (table["monstrosityId"].valid())
-    {
-        PChar->m_PMonstrosity->MonstrosityId = table.get<uint8>("monstrosityId");
-    }
-
-    if (table["species"].valid())
-    {
-        PChar->m_PMonstrosity->Species = table.get<uint16>("species");
-    }
-
-    if (table["flags"].valid())
-    {
-        PChar->m_PMonstrosity->Flags = table.get<uint16>("flags");
-    }
-
-    if (table["levels"].valid())
-    {
-        for (auto const& [keyObj, valObj] : table.get<sol::table>("levels"))
-        {
-            uint8 key = keyObj.as<uint8>();
-            uint8 val = valObj.as<uint8>();
-            PChar->m_PMonstrosity->levels[key] |= val;
-        }
-    }
-
-    if (table["instincts"].valid())
-    {
-        for (auto const& [keyObj, valObj] : table.get<sol::table>("instincts"))
-        {
-            uint8 key = keyObj.as<uint8>();
-            uint8 val = valObj.as<uint8>();
-            PChar->m_PMonstrosity->instincts[key] |= val;
-        }
-    }
-
-    if (table["variants"].valid())
-    {
-        for (auto const& [keyObj, valObj] : table.get<sol::table>("variants"))
-        {
-            uint8 key = keyObj.as<uint8>();
-            uint8 val = valObj.as<uint8>();
-            PChar->m_PMonstrosity->variants[key] |= val;
-        }
-    }
+    luautils::SetMonstrosityLuaTable(PChar, table);
 
     monstrosity::WriteMonstrosityData(PChar);
 
