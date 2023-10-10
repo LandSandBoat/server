@@ -24,19 +24,21 @@ entity.onMobDespawn = function(mob)
 
     -- the quest version of this NM doesn't respawn or count toward hq nm
     if nqId == ID.mob.YAGUDO_AVATAR then
-        SetServerVariable("[POPNUM]Tzee_Xicu_the_Manifest", math.random(1, 5))
-        local hqId        = mob:getID() + 3
+        local hqId        = ID.mob.TZEE_XICU_THE_MANIFEST
         local timeOfDeath = GetServerVariable("[POP]Tzee_Xicu_the_Manifest")
         local kills       = GetServerVariable("[PH]Tzee_Xicu_the_Manifest")
-        local popNow      = GetServerVariable("[POPNUM]Tzee_Xicu_the_Manifest") == 3 or kills > 6
+        SetServerVariable("[POPNUM]Tzee_Xicu_the_Manifest", math.random(kills, 4))
+        local popNow      = GetServerVariable("[POPNUM]Tzee_Xicu_the_Manifest") == 4
 
         if os.time() > timeOfDeath and popNow then
             DisallowRespawn(nqId, true)
             DisallowRespawn(hqId, false)
             xi.mob.nmTODPersist(GetMobByID(hqId), math.random(75600, 86400))
-        else
+        elseif os.time() > timeOfDeath then -- Track NQ kills after 3 days
             xi.mob.nmTODPersist(GetMobByID(nqId), math.random(75600, 86400))
             SetServerVariable("[PH]Tzee_Xicu_the_Manifest", kills + 1)
+        else
+            xi.mob.nmTODPersist(GetMobByID(nqId), math.random(75600, 86400))
         end
     end
 end

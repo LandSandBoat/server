@@ -31,19 +31,21 @@ entity.onMobDespawn = function(mob)
 
     -- the quest version of this NM doesn't respawn or count toward hq nm
     if nqID == ID.mob.DIAMOND_QUADAV then
-        local hqID = ID.mob.ZADHA_ADAMANTKING
-        local hqMob = GetMobByID(hqID)
+        local hqID        = ID.mob.ZADHA_ADAMANTKING
         local timeOfDeath = GetServerVariable("[POP]Za_Dha_Adamantking")
-        local kills = GetServerVariable("[PH]Za_Dha_Adamantking")
-        local popNow = (math.random(1, 5) == 3 or kills > 6)
+        local kills       = GetServerVariable("[PH]Za_Dha_Adamantking")
+        SetServerVariable("[POPNUM]Za_Dha_Adamantking", math.random(kills, 4))
+        local popNow      = GetServerVariable("[POPNUM]Za_Dha_Adamantking") == 4
 
         if os.time() > timeOfDeath and popNow then
             DisallowRespawn(nqID, true)
             DisallowRespawn(hqID, false)
-            xi.mob.nmTODPersist(hqMob, math.random(75600, 86400)) -- 21 to 24 hours
-        else
-            xi.mob.nmTODPersist(mob, math.random(75600, 86400)) -- 21 to 24 hours
+            xi.mob.nmTODPersist(GetMobByID(hqID), math.random(75600, 86400)) -- 21 to 24 hours
+        elseif os.time() > timeOfDeath then -- Track NQ kills after 3 days
+            xi.mob.nmTODPersist(GetMobByID(nqID), math.random(75600, 86400))
             SetServerVariable("[PH]Za_Dha_Adamantking", kills + 1)
+        else
+            xi.mob.nmTODPersist(GetMobByID(nqID), math.random(75600, 86400))
         end
     end
 end

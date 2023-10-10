@@ -8,7 +8,10 @@ local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
     -- NM Persistence
-    if GetServerVariable("[PH]Za_Dha_Adamantking") == 1 then
+    local timeOfDeath = GetServerVariable("[POP]Za_Dha_Adamantking")
+    local popNow      = GetServerVariable("[POPNUM]Za_Dha_Adamantking") == 4
+
+    if os.time() > timeOfDeath and popNow then
         xi.mob.nmTODPersistCache(zone, ID.mob.ZADHA_ADAMANTKING)
     else
         xi.mob.nmTODPersistCache(zone, ID.mob.DIAMOND_QUADAV)
