@@ -545,6 +545,7 @@ enum class Mod
     CARBUNCLE_LVL_BONUS       = 1041, // Carbuncle: Lv.+ (Increases Carbuncle's base level above 99)
     CAIT_SITH_LVL_BONUS       = 1042, // Cait Sith: Lv.+ (Increases Cait Sith's base level above 99)
     ENHANCES_MANA_CEDE        = 74,   // Bonus % to Mana Cede effect, +1 = 1%
+    SUMMONING_MAGIC_CAST      = 1078, // Summoning magic casting time reduction in seconds
     SPIRIT_SPELLCAST_DELAY    = 1179, // Reduces the time between spellcasts of a summoned spirit by seconds provided
 
     // Blue Mage
@@ -994,20 +995,20 @@ enum class Mod
     PET_DMG_TAKEN_PHYSICAL = 1154, // Percent increase/decrease in pet physical damage taken for the target.
     PET_DMG_TAKEN_MAGICAL  = 1155, // Percent increase/decrease in pet physical damage taken for the target.
     PET_DMG_TAKEN_BREATH   = 1156, // Percent increase/decrease in pet physical damage taken for the target.
-    // 1157 FREE
-    FIRE_EEM               = 1158, // Elemental Evasion Multiplier (Known as SDT in common magic accuracy formulas) (out of 100)
-    ICE_EEM                = 1159, // Elemental Evasion Multiplier (Known as SDT in common magic accuracy formulas) (out of 100)
-    WIND_EEM               = 1160, // Elemental Evasion Multiplier (Known as SDT in common magic accuracy formulas) (out of 100)
-    EARTH_EEM              = 1161, // Elemental Evasion Multiplier (Known as SDT in common magic accuracy formulas) (out of 100)
-    THUNDER_EEM            = 1162, // Elemental Evasion Multiplier (Known as SDT in common magic accuracy formulas) (out of 100)
-    WATER_EEM              = 1163, // Elemental Evasion Multiplier (Known as SDT in common magic accuracy formulas) (out of 100)
-    LIGHT_EEM              = 1164, // Elemental Evasion Multiplier (Known as SDT in common magic accuracy formulas) (out of 100)
-    DARK_EEM               = 1165, // Elemental Evasion Multiplier (Known as SDT in common magic accuracy formulas) (out of 100)
-    TAME_SUCCESS_RATE      = 1166, // Tame Success Rate +
-    RAMPART_MAGIC_SHIELD   = 1167, // Rampart Magic Shield
-    CRITHITRATE_SLOT       = 1168, // CRITHITRATE for slot
-    ATT_SLOT               = 1169, // ATT for slot
-    UDMG                   = 1170, // Uncapped dmg taken (all types)
+                                   // 1157 FREE
+    FIRE_EEM             = 1158,   // Elemental Evasion Multiplier (Known as SDT in common magic accuracy formulas) (out of 100)
+    ICE_EEM              = 1159,   // Elemental Evasion Multiplier (Known as SDT in common magic accuracy formulas) (out of 100)
+    WIND_EEM             = 1160,   // Elemental Evasion Multiplier (Known as SDT in common magic accuracy formulas) (out of 100)
+    EARTH_EEM            = 1161,   // Elemental Evasion Multiplier (Known as SDT in common magic accuracy formulas) (out of 100)
+    THUNDER_EEM          = 1162,   // Elemental Evasion Multiplier (Known as SDT in common magic accuracy formulas) (out of 100)
+    WATER_EEM            = 1163,   // Elemental Evasion Multiplier (Known as SDT in common magic accuracy formulas) (out of 100)
+    LIGHT_EEM            = 1164,   // Elemental Evasion Multiplier (Known as SDT in common magic accuracy formulas) (out of 100)
+    DARK_EEM             = 1165,   // Elemental Evasion Multiplier (Known as SDT in common magic accuracy formulas) (out of 100)
+    TAME_SUCCESS_RATE    = 1166,   // Tame Success Rate +
+    RAMPART_MAGIC_SHIELD = 1167,   // Rampart Magic Shield
+    CRITHITRATE_SLOT     = 1168,   // CRITHITRATE for slot
+    ATT_SLOT             = 1169,   // ATT for slot
+    UDMG                 = 1170,   // Uncapped dmg taken (all types)
 
     // Per PR comment - New ASB section starting at 2000
     TANDEM_STRIKE = 2000, // Beastmaster trait - provides acc/macc to master and pet when both engage the same target
@@ -1025,7 +1026,7 @@ enum class Mod
     // 217 to 223
     // 271 to 280
     //
-    // 1076 and onward are RESERVED for LSB/core values
+    // 1079 and onward are RESERVED for LSB/core values
     //
     // ANY ASB ADDITIONS SHOULD BE 2002++
 };
