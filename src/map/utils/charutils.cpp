@@ -1629,11 +1629,17 @@ namespace charutils
 
     bool CanTrade(CCharEntity* PChar, CCharEntity* PTarget)
     {
+        if (PChar->m_PMonstrosity != nullptr || PTarget->m_PMonstrosity != nullptr)
+        {
+            return false;
+        }
+
         if (PTarget->getStorage(LOC_INVENTORY)->GetFreeSlotsCount() < PChar->UContainer->GetItemsCount())
         {
             ShowDebug("Unable to trade, %s doesn't have enough inventory space", PTarget->GetName());
             return false;
         }
+
         for (uint8 slotid = 0; slotid <= 8; ++slotid)
         {
             CItem* PItem = PChar->UContainer->GetItem(slotid);
@@ -1647,6 +1653,7 @@ namespace charutils
                 }
             }
         }
+
         return true;
     }
 
