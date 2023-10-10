@@ -496,6 +496,11 @@ UPDATE mob_groups SET content_tag='ABYSSEA' WHERE name='Deforester' AND groupid=
 UPDATE mob_groups SET content_tag='ABYSSEA' WHERE name='Slough_Skua' AND groupid='28' AND zoneid='79';
 UPDATE mob_groups SET content_tag='ABYSSEA' WHERE name='Vauxia_Fly' AND groupid='45' AND zoneid='79';
 
+-- ASB Section (Offset by 100 to avoid merge conflicts)
+INSERT INTO `mob_groups` (`groupid`, `poolid`, `zoneid`, `name`, `respawntime`, `spawntype`, `dropid`, `HP`, `MP`, `minLevel`, `maxLevel`, `allegiance`) VALUES
+(100,714,79,'Peallaidh_Chigoe',0,0,466,350,0,70,71,0),
+(101,714,79,'Karakul_Chigoe',0,0,466,50,0,62,66,0);
+
 -- ------------------------------------------------------------
 -- Jugner_Forest_[S] (Zone 82)
 -- ------------------------------------------------------------

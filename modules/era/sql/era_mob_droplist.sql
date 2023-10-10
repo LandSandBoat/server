@@ -6318,7 +6318,7 @@ INSERT INTO `mob_droplist` VALUES (763,2,0,1000,749,0);        -- Mythril Beastc
 INSERT INTO `mob_droplist` VALUES (763,4,0,1000,4552,0);       -- Serving Of Herb Crawler Eggs (Despoil)
 
 -- ZoneID:  52 - Emergent Elm
-INSERT INTO `mob_droplist` VALUES (764,0,0,1000,18386,@COMMON);   -- Gloom Claymore (Common, 15%)
+INSERT INTO `mob_droplist` VALUES (764,0,0,1000,18386,@VCOMMON);   -- Gloom Claymore (Very Common, 24%)
 INSERT INTO `mob_droplist` VALUES (764,0,0,1000,15701,@UNCOMMON); -- Arborist Nails (Uncommon, 10%)
 
 -- ZoneID:  75 - Wandering Wamoura
