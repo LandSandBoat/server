@@ -467,6 +467,13 @@ UPDATE mob_groups SET content_tag='ABYSSEA' WHERE name='Orichalcumshell' AND gro
 UPDATE mob_groups SET content_tag='ABYSSEA' WHERE name='Scoriaceous_Eruca' AND groupid='35' AND zoneid='61';
 
 -- ------------------------------------------------------------
+-- Mamool_Ja_Training_Grounds (Zone 66)
+-- ------------------------------------------------------------
+
+UPDATE mob_groups SET HP='3000', minLevel='70', maxLevel='70' WHERE name='Mamool_Ja_Recruit' AND groupid='14' AND zoneid='66';
+UPDATE mob_groups SET HP='3500', minLevel='77', maxLevel='78' WHERE name='Mamool_Ja_Trainer' AND groupid='15' AND zoneid='66';
+
+-- ------------------------------------------------------------
 -- Aydeewa_Subterrane (Zone 68)
 -- ------------------------------------------------------------
 

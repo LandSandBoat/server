@@ -411,6 +411,50 @@ INSERT INTO `instance_entities` VALUES (6601, 17047870);
 INSERT INTO `instance_entities` VALUES (6601, 17047874);
 INSERT INTO `instance_entities` VALUES (6601, 17047875);
 
+-- Breaking Morale
+-- mobs
+INSERT INTO `instance_entities` VALUES (6603, 17047610);
+INSERT INTO `instance_entities` VALUES (6603, 17047611);
+INSERT INTO `instance_entities` VALUES (6603, 17047612);
+INSERT INTO `instance_entities` VALUES (6603, 17047613);
+INSERT INTO `instance_entities` VALUES (6603, 17047614);
+INSERT INTO `instance_entities` VALUES (6603, 17047615);
+INSERT INTO `instance_entities` VALUES (6603, 17047616);
+INSERT INTO `instance_entities` VALUES (6603, 17047617);
+INSERT INTO `instance_entities` VALUES (6603, 17047618);
+INSERT INTO `instance_entities` VALUES (6603, 17047619);
+INSERT INTO `instance_entities` VALUES (6603, 17047620);
+INSERT INTO `instance_entities` VALUES (6603, 17047621);
+INSERT INTO `instance_entities` VALUES (6603, 17047622);
+INSERT INTO `instance_entities` VALUES (6603, 17047623);
+INSERT INTO `instance_entities` VALUES (6603, 17047624);
+INSERT INTO `instance_entities` VALUES (6603, 17047625);
+INSERT INTO `instance_entities` VALUES (6603, 17047626);
+INSERT INTO `instance_entities` VALUES (6603, 17047627);
+-- npcs
+INSERT INTO `instance_entities` VALUES (6603, 17047808); -- Ancient Lockbox
+INSERT INTO `instance_entities` VALUES (6603, 17047809); -- Rune of Release
+INSERT INTO `instance_entities` VALUES (6603, 17047821); -- Quhaaja
+INSERT INTO `instance_entities` VALUES (6603, 17047812); -- Viscous Liquid
+INSERT INTO `instance_entities` VALUES (6603, 17047813); -- Supplies Crate
+INSERT INTO `instance_entities` VALUES (6603, 17047814); -- Supplies Crate
+INSERT INTO `instance_entities` VALUES (6603, 17047815); -- Supplies Crate
+INSERT INTO `instance_entities` VALUES (6603, 17047816); -- Supplies Crate
+INSERT INTO `instance_entities` VALUES (6603, 17047817); -- Supplies Crate
+INSERT INTO `instance_entities` VALUES (6603, 17047818); -- Supplies Crate
+INSERT INTO `instance_entities` VALUES (6603, 17047819); -- Supplies Crate
+INSERT INTO `instance_entities` VALUES (6603, 17047820); -- Supplies Crate
+INSERT INTO `instance_entities` VALUES (6603, 17047862); -- Door
+INSERT INTO `instance_entities` VALUES (6603, 17047863); -- Door
+INSERT INTO `instance_entities` VALUES (6603, 17047865); -- Door
+INSERT INTO `instance_entities` VALUES (6603, 17047871); -- Door
+INSERT INTO `instance_entities` VALUES (6603, 17047872); -- Door
+INSERT INTO `instance_entities` VALUES (6603, 17047897); -- Door
+INSERT INTO `instance_entities` VALUES (6603, 17047908); -- Door
+INSERT INTO `instance_entities` VALUES (6603, 17047909); -- Door
+INSERT INTO `instance_entities` VALUES (6603, 17047910); -- Door
+INSERT INTO `instance_entities` VALUES (6603, 17047911); -- Door
+
 -- Leujaoam Cleansing
 -- mobs
 INSERT INTO `instance_entities` VALUES (6900,17059841);

@@ -3229,8 +3229,8 @@ INSERT INTO `mob_groups` VALUES (10,3437,66,'Sagelord_Molaal_Ja',0,128,0,0,0,82,
 INSERT INTO `mob_groups` VALUES (11,2542,66,'Mamool_Ja_Trainee_nin',0,128,0,0,0,77,78,0);
 INSERT INTO `mob_groups` VALUES (12,6675,66,'Mamool_Ja_Trainee_bst',0,128,0,0,0,77,78,0);
 INSERT INTO `mob_groups` VALUES (13,6676,66,'Mamool_Ja_Trainee_blu',0,128,0,0,0,77,78,0);
-INSERT INTO `mob_groups` VALUES (14,2531,66,'Mamool_Ja_Recruit',0,128,0,0,0,77,78,0);
-INSERT INTO `mob_groups` VALUES (15,4815,66,'Mamool_Ja_Trainer',0,128,0,0,0,77,78,0);
+INSERT INTO `mob_groups` VALUES (14,2531,66,'Mamool_Ja_Recruit',0,128,0,3000,0,70,70,0);
+INSERT INTO `mob_groups` VALUES (15,4815,66,'Mamool_Ja_Trainer',0,128,0,3500,0,77,78,0);
 INSERT INTO `mob_groups` VALUES (16,3223,66,'Puk',0,128,0,0,0,62,67,0);
 INSERT INTO `mob_groups` VALUES (17,3142,66,'Pit_Bugard',0,128,0,0,0,75,75,0); -- TODO: capture level from retail
 INSERT INTO `mob_groups` VALUES (18,3144,66,'Pit_Lindwurm',0,128,0,0,0,75,75,0); -- TODO: capture level from retail
