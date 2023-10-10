@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
 Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -1532,6 +1532,13 @@ void SmallPacket0x029(map_session_data_t* const PSession, CCharEntity* const PCh
 void SmallPacket0x032(map_session_data_t* const PSession, CCharEntity* const PChar, CBasicPacket& data)
 {
     TracyZoneScoped;
+
+    // MONs can't trade
+    if (PChar->m_PMonstrosity != nullptr)
+    {
+        return;
+    }
+
     uint32 charid = data.ref<uint32>(0x04);
     uint16 targid = data.ref<uint16>(0x08);
 
@@ -1635,6 +1642,13 @@ void SmallPacket0x032(map_session_data_t* const PSession, CCharEntity* const PCh
 void SmallPacket0x033(map_session_data_t* const PSession, CCharEntity* const PChar, CBasicPacket& data)
 {
     TracyZoneScoped;
+
+    // MONs can't trade
+    if (PChar->m_PMonstrosity != nullptr)
+    {
+        return;
+    }
+
     CCharEntity* PTarget = (CCharEntity*)PChar->GetEntity(PChar->TradePending.targid, TYPE_PC);
 
     if (PTarget != nullptr && PChar->TradePending.id == PTarget->id)
@@ -1736,6 +1750,13 @@ void SmallPacket0x033(map_session_data_t* const PSession, CCharEntity* const PCh
 void SmallPacket0x034(map_session_data_t* const PSession, CCharEntity* const PChar, CBasicPacket& data)
 {
     TracyZoneScoped;
+
+    // MONs can't trade
+    if (PChar->m_PMonstrosity != nullptr)
+    {
+        return;
+    }
+
     uint32 quantity    = data.ref<uint32>(0x04);
     uint16 itemID      = data.ref<uint16>(0x08);
     uint8  invSlotID   = data.ref<uint8>(0x0A);
@@ -1840,6 +1861,12 @@ void SmallPacket0x036(map_session_data_t* const PSession, CCharEntity* const PCh
         return;
     }
 
+    // MONs can't trade
+    if (PChar->m_PMonstrosity != nullptr)
+    {
+        return;
+    }
+
     uint32 npcid  = data.ref<uint32>(0x04);
     uint16 targid = data.ref<uint16>(0x3A);
 
@@ -1888,6 +1915,12 @@ void SmallPacket0x036(map_session_data_t* const PSession, CCharEntity* const PCh
 void SmallPacket0x037(map_session_data_t* const PSession, CCharEntity* const PChar, CBasicPacket& data)
 {
     TracyZoneScoped;
+
+    // MONs can't use usable items
+    if (PChar->m_PMonstrosity != nullptr)
+    {
+        return;
+    }
 
     uint16 TargetID  = data.ref<uint16>(0x0C);
     uint8  SlotID    = data.ref<uint8>(0x0E);
