@@ -257,6 +257,11 @@ CZoneInPacket::CZoneInPacket(CCharEntity* PChar, const EventInfo* currentEvent)
 
     ref<uint8>(0x100) = 0x01; // observed: RoZ = 3, CoP = 5, ToAU = 9, WoTG = 11, SoA/original areas = 1
 
+    if (PChar->GetMJob() == JOB_MON)
+    {
+        monstrosity::ReadMonstrosityData(PChar);
+    }
+
     if (PChar->m_PMonstrosity != nullptr)
     {
         // look_t data from above
