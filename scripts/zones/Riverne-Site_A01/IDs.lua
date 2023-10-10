@@ -20,12 +20,12 @@ zones[xi.zone.RIVERNE_SITE_A01] =
         A_GLOWING_MIST                = 7255, -- A glowing mist of ever-changing proportions floats before you...
         PARTY_MEMBERS_HAVE_FALLEN     = 7569, -- All party members have fallen in battle. Now leaving the battlefield.
         THE_PARTY_WILL_BE_REMOVED     = 7576, -- If all party members' HP are still zero after # minute[/s], the party will be removed from the battlefield.
-        SD_VERY_SMALL                 = 7599, -- The spatial displacement is very small. If you only had some item that could make it bigger...
-        SD_HAS_GROWN                  = 7600, -- The spatial displacement has grown.
-        SPACE_SEEMS_DISTORTED         = 7601, -- The space around you seems oddly distorted and disrupted.
-        MONUMENT                      = 7608, -- Something has been engraved on this stone, but the message is too difficult to make out.
-        HOMEPOINT_SET                 = 7736, -- Home point set!
-        UNITY_WANTED_BATTLE_INTERACT  = 7794, -- Those who have accepted % must pay # Unity accolades to participate. The content for this Wanted battle is #. [Ready to begin?/You do not have the appropriate object set, so your rewards will be limited.]
+        SD_VERY_SMALL                 = 7600, -- The spatial displacement is very small. If you only had some item that could make it bigger...
+        SD_HAS_GROWN                  = 7601, -- The spatial displacement has grown.
+        SPACE_SEEMS_DISTORTED         = 7602, -- The space around you seems oddly distorted and disrupted.
+        MONUMENT                      = 7609, -- Something has been engraved on this stone, but the message is too difficult to make out.
+        HOMEPOINT_SET                 = 7737, -- Home point set!
+        UNITY_WANTED_BATTLE_INTERACT  = 7795, -- Those who have accepted % must pay # Unity accolades to participate. The content for this Wanted battle is #. [Ready to begin?/You do not have the appropriate object set, so your rewards will be limited.]
     },
     mob =
     {
