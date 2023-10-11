@@ -2,7 +2,6 @@
 -- Zone: Southern_San_dOria (230)
 -----------------------------------
 local ID = require('scripts/zones/Southern_San_dOria/IDs')
-require('scripts/globals/events/harvest_festivals')
 require('scripts/globals/events/starlight_celebrations')
 require('scripts/globals/events/sunbreeze_festival')
 require('scripts/quests/flyers_for_regine')
@@ -17,9 +16,9 @@ zoneObject.onInitialize = function(zone)
     zone:registerTriggerArea(1, -292, -10, 90 , -258, 10, 105)
     quests.ffr.initZone(zone) -- register trigger areas 2 through 6
 
-    applyHalloweenNpcCostumes(zone:getID())
     xi.events.starlightCelebration.applyStarlightDecorations(zone:getID())
     xi.events.sunbreeze_festival.showDecorations(zone:getID())
+    xi.events.harvest.showEntities(zone:getID())
 
     xi.chocobo.initZone(zone)
     xi.conquest.toggleRegionalNPCs(zone)

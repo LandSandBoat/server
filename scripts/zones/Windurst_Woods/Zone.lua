@@ -2,7 +2,6 @@
 -- Zone: Windurst_Woods (241)
 -----------------------------------
 local ID = require('scripts/zones/Windurst_Woods/IDs')
-require('scripts/globals/events/harvest_festivals')
 require('scripts/globals/events/starlight_celebrations')
 require('scripts/globals/events/sunbreeze_festival')
 require('scripts/globals/conquest')
@@ -13,10 +12,10 @@ require('scripts/globals/zone')
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
-    applyHalloweenNpcCostumes(zone:getID())
     xi.events.starlightCelebration.applyStarlightDecorations(zone:getID())
     xi.events.sunbreeze_festival.showDecorations(zone:getID())
     xi.events.sunbreeze_festival.showNPCs(zone:getID())
+    xi.events.harvest.showEntities(zone:getID())
     xi.chocobo.initZone(zone)
     xi.conquest.toggleRegionalNPCs(zone)
 end

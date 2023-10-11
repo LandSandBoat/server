@@ -4,7 +4,6 @@
 -- Only sells when Windurst controlls Aragoneu Region
 -- Confirmed shop stock, August 2013
 -----------------------------------
-require("scripts/globals/events/harvest_festivals")
 local ID = require("scripts/zones/Windurst_Waters/IDs")
 require("scripts/globals/conquest")
 require("scripts/globals/shop")
@@ -12,7 +11,7 @@ require("scripts/globals/shop")
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    onHalloweenTrade(player, trade, npc)
+    xi.events.harvest.onHalloweenTrade(player, trade, npc)
 end
 
 entity.onTrigger = function(player, npc)
