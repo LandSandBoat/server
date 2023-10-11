@@ -354,6 +354,31 @@ xi.monstrosity.purchasableInstincts =
     RUN = 31,
 }
 
+xi.monstrosity.teleports =
+{
+    [xi.zone.EAST_RONFAURE] =
+    {
+        { 120,     0.5, -530, 192 },
+        { 115, -59.684,  247,  16 },
+    },
+
+    [xi.zone.QUFIM_ISLAND] =
+    {
+        {  -2, -20.001, 324,  64 },
+        { 161,     -20,  37, 192 },
+    },
+
+    [xi.zone.VALKURM_DUNES] =
+    {
+        { 838, 0, -162, 64 },
+    },
+
+    [xi.zone.WESTERN_ALTEPA_DESERT] =
+    {
+        { 685.548, -1.744, -50.395, 128 },
+    },
+}
+
 -----------------------------------
 -- Helpers
 -----------------------------------
@@ -527,34 +552,52 @@ xi.monstrosity.unlockAll = function(player)
 end
 
 -----------------------------------
--- Odyssean Passage
+-- Odyssean Passage (Feretory Only)
 -----------------------------------
 
 xi.monstrosity.odysseanPassageOnTrade = function(player, npc, trade)
 end
 
 xi.monstrosity.odysseanPassageOnTrigger = function(player, npc)
-    -- TODO: Handle xi.settings.main.ENABLE_MONSTROSITY
-
-    -- TODO: If passage in the overworld, do logic X
-    local isMonstrosityUnlocked = player:hasKeyItem(xi.keyItem.RING_OF_SUPERNAL_DISJUNCTION)
-    if isMonstrosityUnlocked then
-        player:startEvent(883)
+    if xi.settings.main.ENABLE_MONSTROSITY ~= 1 then
+        return
     end
 
-    -- TODO: If passage in Feretory, do logic Y
-    -- In Feretory: Event 5 (0, 0, 0, 0, 0, 0, 0, 0)
+    local monSize = 1 -- 0-index, Small, Medium, Large
+
+    -- NOTE: Param5 is not consistent, Bee has seen 0, 1, and 2 so far
+    -- player:startEvent(5, 0, 0, 0, 0, 2, 0, 0, 0) -- Bee
+    player:startEvent(5, 0, monSize, 0, 0, 0, 0, 0, 0) -- Tiger
 end
 
 xi.monstrosity.odysseanPassageOnEventUpdate = function(player, csid, option, npc)
-    -- print('update', csid, option)
     player:updateEvent(0, 0, 0, 0, 1, 0, 0, 0)
 end
 
 xi.monstrosity.odysseanPassageOnEventFinish = function(player, csid, option, npc)
-    -- print('finish', csid, option)
-    -- Option 1: Leave & Teleport to last city zone
-    -- Option 529: Teleport to Al'Taieu
+    local eventOption  = bit.band(option, 0xF)
+    local zoneSelected = bit.rshift(option, 4)
+
+    if eventOption == 1 then
+        if zoneSelected == 0 then
+            -- TODO: Return to Zone the Player entered Feretory from
+            utils.unused()
+        else
+            if xi.monstrosity.teleports[zoneSelected] then
+                local teleportPos = xi.monstrosity.teleports[zoneSelected][math.random(1, #xi.monstrosity.teleports[zoneSelected])]
+
+                player:setPos(teleportPos[1],
+                    teleportPos[2],
+                    teleportPos[3],
+                    teleportPos[4],
+                    zoneSelected
+                )
+            else
+                print('Monstrosity Teleport - No Valid Entries for Zone' .. zoneSelected ..'. Setting pos to (0, 0, 0)!')
+                player:setPos(0, 0, 0, 0, zoneSelected)
+            end
+        end
+    end
 end
 
 -----------------------------------
