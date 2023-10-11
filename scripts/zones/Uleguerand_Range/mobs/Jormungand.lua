@@ -99,7 +99,7 @@ entity.onMobFight = function(mob, target)
         if -- If mob uses its 2hr
             mob:getAnimationSub() == 2 and
             os.time() > twohourTime and
-            mob:getHP() <= 85
+            mob:getHPP() <= 85
         then
             mob:useMobAbility(695)
             twohourTime = os.time() + 300
