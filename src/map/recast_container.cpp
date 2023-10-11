@@ -29,12 +29,6 @@
 #include "item_container.h"
 #include "recast_container.h"
 
-/************************************************************************
- *                                                                       *
- *                                                                       *
- *                                                                       *
- ************************************************************************/
-
 CRecastContainer::CRecastContainer(CBattleEntity* PEntity)
 : m_PEntity(PEntity)
 {
@@ -48,7 +42,7 @@ CRecastContainer::CRecastContainer(CBattleEntity* PEntity)
 
 /************************************************************************
  *                                                                       *
- *  Получаем указатель на указанный RecastList                           *
+ *  Get a pointer to the specified RecastList                            *
  *                                                                       *
  ************************************************************************/
 
@@ -68,12 +62,6 @@ RecastList_t* CRecastContainer::GetRecastList(RECASTTYPE type)
     return nullptr;
 }
 
-/************************************************************************
- *                                                                       *
- *  Get Recast                                                           *
- *                                                                       *
- ************************************************************************/
-
 Recast_t* CRecastContainer::GetRecast(RECASTTYPE type, uint16 id)
 {
     RecastList_t* list = GetRecastList(type);
@@ -89,7 +77,7 @@ Recast_t* CRecastContainer::GetRecast(RECASTTYPE type, uint16 id)
 
 /************************************************************************
  *                                                                       *
- *  Добавляем запись в контейнер                                         *
+ *  Adding an entry to the container                                     *
  *                                                                       *
  ************************************************************************/
 
@@ -142,7 +130,7 @@ Recast_t* CRecastContainer::Load(RECASTTYPE type, uint16 id, uint32 duration, ui
 
 /************************************************************************
  *                                                                       *
- *  Удаляем все элементы указанного типа                                 *
+ *  Remove all elements of the specified type                            *
  *                                                                       *
  ************************************************************************/
 
@@ -164,7 +152,7 @@ void CRecastContainer::Del(RECASTTYPE type)
 
 /************************************************************************
  *                                                                       *
- *  Удаляем указанный элемент указанного типа                            *
+ *  Remove the specified element of the specified type                   *
  *                                                                       *
  ************************************************************************/
 
@@ -189,7 +177,7 @@ void CRecastContainer::Del(RECASTTYPE type, uint16 id)
 
 /************************************************************************
  *                                                                       *
- *  Deletes a recast by index                                           *
+ *  Delete a recast by index                                             *
  *                                                                       *
  ************************************************************************/
 
@@ -208,7 +196,7 @@ void CRecastContainer::DeleteByIndex(RECASTTYPE type, uint8 index)
 
 /************************************************************************
  *                                                                       *
- *  Проверяем наличие элемента с указанным ID                            *
+ *  Check for the presence of an element with the specified ID           *
  *                                                                       *
  ************************************************************************/
 
@@ -265,7 +253,7 @@ bool CRecastContainer::HasRecast(RECASTTYPE type, uint16 id, uint32 recast)
 
 /************************************************************************
  *                                                                       *
- *  Проверяем список на устаревшие записи                                *
+ *  Check the list for outdated entries                                  *
  *                                                                       *
  ************************************************************************/
 
