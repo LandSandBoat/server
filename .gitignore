@@ -13,7 +13,10 @@
 
 # Build results
 build/
+build*/
 lbuild/
+build_mariadb_32/
+build_mariadb_64/
 out/
 [Dd]ebug/
 [Rr]elease/
