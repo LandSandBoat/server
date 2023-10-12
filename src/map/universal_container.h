@@ -41,12 +41,12 @@ enum UCONTAINERTYPE
 #define UCONTAINER_SIZE 16
 
 /************************************************************************
- *                                                                        *
- *  Универсальный контейнер общего назначения                            *
- *                                                                        *
+ *                                                                       *
+ *  Universal general purpose container                                  *
+ *                                                                       *
  ************************************************************************/
 
-// главный предмет (gil, кристалл, используемый предмет ...)
+// main item (gil, crystal, used item...)
 
 class CItem;
 class CBaseEntity;
