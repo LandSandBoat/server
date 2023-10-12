@@ -1,12 +1,19 @@
 -----------------------------------
 -- Zone: Fort_Karugo-Narugo_[S] (96)
 -----------------------------------
+require('scripts/globals/dark_ixion')
+-----------------------------------
 local ID = zones[xi.zone.FORT_KARUGO_NARUGO_S]
 -----------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
     xi.helm.initZone(zone, xi.helm.type.LOGGING)
+    xi.darkixion.zoneOnInit(zone)
+end
+
+zoneObject.onGameHour = function(zone)
+    xi.darkixion.zoneOnGameHour(zone)
 end
 
 zoneObject.onZoneIn = function(player, prevZone)
