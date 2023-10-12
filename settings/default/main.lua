@@ -291,7 +291,7 @@ xi.settings.main =
 
     -- SYSTEM
     DISABLE_INACTIVITY_WATCHDOG = false, -- true/false. If this is enabled, the watchdog which detects if the main loop isn't being ticked will no longer be able to kill the process.
-    INACTIVITY_WATCHDOG_PERIOD  = 2000,  -- Time in milliseconds which the inactivity watchdog will wait between ticks of the main loop before potentially killing the target process.
+    INACTIVITY_WATCHDOG_PERIOD  = 4000,  -- Time in milliseconds which the inactivity watchdog will wait between ticks of the main loop before potentially killing the target process.
 
     -- CatsEyeXI
     DI_EVENT_MULTIPLIER          = 0, -- All Domain Invasion beads multiplied by 1.5.
