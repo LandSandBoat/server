@@ -21,7 +21,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 
 #pragma once
 
-#include "besieged_data.h"
+#include "map/besieged_data.h"
 
 namespace besieged
 {

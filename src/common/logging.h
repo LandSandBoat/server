@@ -107,6 +107,7 @@ namespace logging
 #define DebugSQL(...)      LOGGER_ENABLE("logging.DEBUG_SQL", ShowDebug(__VA_ARGS__))
 #define DebugIDLookup(...) LOGGER_ENABLE("logging.DEBUG_ID_LOOKUP", ShowDebug(__VA_ARGS__))
 #define DebugModules(...)  LOGGER_ENABLE("logging.DEBUG_MODULES", ShowDebug(__VA_ARGS__))
+#define DebugBesieged(...)  LOGGER_ENABLE("logging.DEBUG_BESIEGED", ShowDebug(__VA_ARGS__))
 
 // Crash dump utils
 #define DumpBacktrace() spdlog::get("trace")->dump_backtrace()

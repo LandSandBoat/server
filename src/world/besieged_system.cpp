@@ -28,6 +28,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 
 BesiegedSystem::BesiegedSystem()
 : sql(std::make_unique<SqlConnection>())
+, besiegedData(std::make_unique<BesiegedData>(sql))
 {
 }
 
@@ -36,31 +37,133 @@ bool BesiegedSystem::handleMessage(std::vector<uint8>&& payload,
                                    uint16               from_port)
 {
     // TODO: Handle incoming map messages
-    if (settings::get<bool>("logging.DEBUG_BESIEGED"))
-    {
-        ShowDebug(fmt::format("Message: unknown conquest type received from {}:{}",
+    DebugBesieged(fmt::format("Message: unknown conquest type received from {}:{}",
                               from_addr.s_addr,
                               from_port));
-    }
 
     return false;
 }
 
 void BesiegedSystem::updateVanaHourlyBesieged()
 {
-    auto strongholdInfos = this->getStrongholdInfos();
-
-    // Note to reviewer: logging.DEBUG_BESIEGED is not read properly from world.
-    // It is from map. Other settings in world seem to use main.conf
-    if (settings::get<bool>("logging.DEBUG_BESIEGED"))
+    if (!settings::get<bool>("main.BESIEGED_ENABLED"))
     {
-        ShowInfo("Sending besieged Stronghold Data:");
-        for (uint8 strongholdId = 0; strongholdId < strongholdInfos.size(); strongholdId++)
+        return;
+    }
+
+    updateBeastmenForces();
+    sendStrongholdInfosMsg();
+}
+
+void BesiegedSystem::updateBeastmenForces()
+{
+    for (auto strongholdId : { BESIEGED_STRONGHOLD::MAMOOK, BESIEGED_STRONGHOLD::HALVUNG, BESIEGED_STRONGHOLD::ARRAPAGO })
+    {
+        // If not training or preparing, skip this
+        auto strongholdInfo = this->besiegedData->getBeastmenStrongholdInfo(strongholdId);
+        if (strongholdInfo.orders != BEASTMEN_BESIEGED_ORDERS::TRAIN &&
+            strongholdInfo.orders != BEASTMEN_BESIEGED_ORDERS::PREPARE)
         {
-            stronghold_info_t strongholdInfo = strongholdInfos[strongholdId];
-            ShowInfo("Stronghold %d: Orders %d, Level %d, Forces %d, Mirrors %d, Prisoners %d, Owns Astral Candescence %d",
-                     strongholdId, strongholdInfo.orders, strongholdInfo.stronghold_level, strongholdInfo.forces, strongholdInfo.mirrors, strongholdInfo.prisoners, strongholdInfo.ownsAstralCandescence);
+            continue;
         }
+
+        stronghold_info_t updatedInfo = strongholdInfo;
+
+        // Increase forces and log this increase
+        auto forceIncreaseRate = getForcesPerTick(strongholdInfo);
+        updatedInfo.forces += forceIncreaseRate;
+        DebugBesieged("Stronghold %d: Forces increased by %f to %f", strongholdInfo.strongholdId, forceIncreaseRate, updatedInfo.forces);
+
+        if (strongholdInfo.orders == BEASTMEN_BESIEGED_ORDERS::TRAIN)
+        {
+            handleTrainingPhase(updatedInfo);
+        }
+
+        if (updatedInfo.orders == BEASTMEN_BESIEGED_ORDERS::PREPARE)
+        {
+            handlePreparingPhase(updatedInfo);
+        }
+
+        this->besiegedData->updateStrongholdInfo(updatedInfo);
+        this->besiegedData->commit(sql);
+    }
+}
+
+float BesiegedSystem::getForcesPerTick(stronghold_info_t strongholdInfo) const
+{
+    // These rates are currently linear
+    // However, retail behavior has been observed, where force buildup
+    // is slower as the forces get closer to 100
+    // For now, we keep a linear growth rate, but we may want to change
+    // this in the future
+    auto minBeastmenTrainingRate  = settings::get<float>("main.BESIEGED_MIN_TRAINING_RATE");
+    auto perMirrorTrainRate       = settings::get<float>("main.BESIEGED_PER_MIRROR_TRAINING_RATE");
+    auto minBeastmenPreparingRate = settings::get<float>("main.BESIEGED_MIN_PREPARING_RATE");
+    auto perMirrorPrepareRate     = settings::get<float>("main.BESIEGED_PER_MIRROR_PREPARING_RATE");
+
+    if (strongholdInfo.orders == BEASTMEN_BESIEGED_ORDERS::TRAIN)
+    {
+        return std::max(minBeastmenTrainingRate, strongholdInfo.mirrors * perMirrorTrainRate);
+    }
+    else if (strongholdInfo.orders == BEASTMEN_BESIEGED_ORDERS::PREPARE)
+    {
+        return std::max(minBeastmenPreparingRate, strongholdInfo.mirrors * perMirrorPrepareRate);
+    }
+
+    return 0;
+}
+
+void BesiegedSystem::handleTrainingPhase(stronghold_info_t& strongholdInfo) const
+{
+    // If forces are less than 100, we are still in training
+    DebugBesieged("Stronghold %d: Training. Current forces: %f", strongholdInfo.strongholdId, strongholdInfo.forces);
+    if (strongholdInfo.forces < 100)
+    {
+        return;
+    }
+
+    // If forces are at 100, we need to change from training to preparing.
+    // Preparing ends when the military force reaches
+    // 100 + [10 * the number of times it was consecutively defeated] to a maximum of 200
+    auto targetPrepareForces = std::min<uint8>(200, 100 + strongholdInfo.consecutiveDefeats * 10);
+
+    // Copy the given info and update the orders + stronghold level
+    // Set stronghold level based on forces during prepare stage
+    // Level 1: 100 to 110
+    // Level 2: 120
+    // Level 3: 130
+    // Level 4: 140
+    // Level 5: 150
+    // Level 6: 160
+    // Level 7: 170
+    // Level 8: 180, 190 or 200
+    strongholdInfo.orders          = BEASTMEN_BESIEGED_ORDERS::PREPARE;
+    strongholdInfo.strongholdLevel = targetPrepareForces <= 110 ? STRONGHOLD_LEVEL::LEVEL1 : (STRONGHOLD_LEVEL)std::min(8, 1 + (targetPrepareForces - 110) / 10);
+    DebugBesieged("Stronghold %d: Orders changed to PREPARE. Stronghold Level: %d. Target forces: %d", strongholdInfo.strongholdId, strongholdInfo.strongholdLevel, targetPrepareForces);
+}
+
+void BesiegedSystem::handlePreparingPhase(stronghold_info_t& strongholdInfo) const
+{
+    // If we still haven't reached the target forces, we are still in preparing phase.
+    auto targetPrepareForces = std::min<uint8>(200, 100 + strongholdInfo.consecutiveDefeats * 10);
+    DebugBesieged("Stronghold %d: Preparing. Target forces: %d. Current forces: %f", strongholdInfo.strongholdId, targetPrepareForces, strongholdInfo.forces);
+    if (strongholdInfo.forces < targetPrepareForces)
+    {
+        return;
+    }
+
+    strongholdInfo.orders = BEASTMEN_BESIEGED_ORDERS::ADVANCE;
+    DebugBesieged("Stronghold %d: Orders changed to ADVANCE. Stronghold Level: %d", strongholdInfo.strongholdId, strongholdInfo.strongholdLevel);
+}
+
+void BesiegedSystem::sendStrongholdInfosMsg() const
+{
+    auto strongholdInfos = this->besiegedData->getStrongholdInfos();
+
+    DebugBesieged("Sending besieged Stronghold Data:");
+    for (auto line : this->besiegedData->getFormattedData())
+    {
+        DebugBesieged(line);
     }
 
     // Base length is the type + subtype + vector size
@@ -79,51 +182,17 @@ void BesiegedSystem::updateVanaHourlyBesieged()
     {
         // Everything is offset by i*size of region control struct + headerLength
         // Every field is one byte, so we can just add the offset to the start of the data
-        const std::size_t start             = headerLength + sizeof(size_t) + i * sizeof(stronghold_info_t);
-        ref<uint8>((uint8*)data, start)     = strongholdInfos[i].orders;
-        ref<uint8>((uint8*)data, start + 1) = strongholdInfos[i].stronghold_level;
-        ref<uint8>((uint8*)data, start + 2) = strongholdInfos[i].forces;
-        ref<uint8>((uint8*)data, start + 3) = strongholdInfos[i].mirrors;
-        ref<uint8>((uint8*)data, start + 4) = strongholdInfos[i].prisoners;
-        ref<uint8>((uint8*)data, start + 6) = strongholdInfos[i].ownsAstralCandescence;
+        const std::size_t start               = headerLength + sizeof(size_t) + i * sizeof(stronghold_info_t);
+        ref<uint8>((uint8*)data, start)       = strongholdInfos[i].strongholdId;
+        ref<uint8>((uint8*)data, start + 1)   = strongholdInfos[i].orders;
+        ref<uint8>((uint8*)data, start + 2)   = strongholdInfos[i].strongholdLevel;
+        ref<float>((uint8*)data, start + 3)   = strongholdInfos[i].forces;
+        ref<uint8>((uint8*)data, start + 7)   = strongholdInfos[i].mirrors;
+        ref<uint8>((uint8*)data, start + 8)   = strongholdInfos[i].prisoners;
+        ref<uint8>((uint8*)data, start + 9)   = strongholdInfos[i].ownsAstralCandescence;
+        ref<uint32>((uint8*)data, start + 10) = strongholdInfos[i].consecutiveDefeats;
     }
 
     // Send to map
     queue_data_broadcast(MSG_WORLD2MAP_REGIONAL_EVENT, data, dataLen);
-}
-
-auto BesiegedSystem::getStrongholdInfos() -> std::vector<stronghold_info_t> const
-{
-    const char* Query = "SELECT stronghold_id, orders, stronghold_level, forces, prisoners, owns_astral_candescence, \
-                        (SELECT COUNT(*) FROM besieged_mirrors WHERE destroyed = 0 AND besieged_mirrors.stronghold_id = besieged_strongholds.stronghold_id) AS mirrors \
-                        FROM besieged_strongholds;";
-
-    int32                          ret             = sql->Query(Query);
-    const std::size_t              strongholdCount = 4;
-    std::vector<stronghold_info_t> strongholdInfos(strongholdCount);
-
-    if (ret != SQL_ERROR && sql->NumRows() != 0)
-    {
-        while (sql->NextRow() == SQL_SUCCESS)
-        {
-            uint8 strongholdId = sql->GetUIntData(0);
-            if (strongholdId > 3)
-            {
-                ShowError("Invalid stronghold id %d", strongholdId);
-                throw std::runtime_error("Besieged stronghold id out of range");
-            }
-
-            stronghold_info_t strongholdInfo;
-            strongholdInfo.orders                = sql->GetUIntData<BEASTMEN_BESIEGED_ORDERS>(1);
-            strongholdInfo.stronghold_level      = sql->GetUIntData<STRONGHOLD_LEVEL>(2);
-            strongholdInfo.forces                = sql->GetUIntData(3);
-            strongholdInfo.prisoners             = sql->GetUIntData(4);
-            strongholdInfo.ownsAstralCandescence = sql->GetUIntData(5);
-            strongholdInfo.mirrors               = sql->GetUIntData(6);
-
-            strongholdInfos[sql->GetUIntData(0)] = strongholdInfo;
-        }
-    }
-
-    return strongholdInfos;
 }

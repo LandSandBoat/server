@@ -45,18 +45,14 @@ namespace besieged
     {
         TracyZoneScoped;
 
-        if (settings::get<bool>("logging.DEBUG_BESIEGED"))
-        {
-            ShowInfo("Received besieged Stronghold Data:");
-            for (uint8 strongholdId = 0; strongholdId < strongHoldInfos.size(); strongholdId++)
-            {
-                stronghold_info_t strongholdInfo = strongHoldInfos[strongholdId];
-                ShowInfo("Stronghold %d: Orders %d, Level %d, Forces %d, Mirrors %d, Prisoners %d, Owns Astral Candescence %d",
-                         strongholdId, strongholdInfo.orders, strongholdInfo.stronghold_level, strongholdInfo.forces, strongholdInfo.mirrors, strongholdInfo.prisoners, strongholdInfo.ownsAstralCandescence);
-            }
-        }
+        auto besiegedData = GetBesiegedData();
+        besiegedData->updateStrongholdInfos(strongHoldInfos);
 
-        GetBesiegedData()->updateStrongholdInfos(strongHoldInfos);
+        DebugBesieged("Received besieged Stronghold Data:");
+        for (auto line : besiegedData->getFormattedData())
+        {
+            DebugBesieged(line);
+        }
     }
 
     /**
@@ -77,12 +73,14 @@ namespace besieged
                     const std::size_t start = headerLength + sizeof(size_t) + i * sizeof(stronghold_info_t);
 
                     stronghold_info_t strongholdInfo;
-                    strongholdInfo.orders                = (BEASTMEN_BESIEGED_ORDERS)ref<uint8>(data, start);
-                    strongholdInfo.stronghold_level      = (STRONGHOLD_LEVEL)ref<uint8>(data, start + 1);
-                    strongholdInfo.forces                = ref<uint8>(data, start + 2);
-                    strongholdInfo.mirrors               = ref<uint8>(data, start + 3);
-                    strongholdInfo.prisoners             = ref<uint8>(data, start + 4);
-                    strongholdInfo.ownsAstralCandescence = ref<uint8>(data, start + 6);
+                    strongholdInfo.strongholdId          = (BESIEGED_STRONGHOLD)ref<uint8>(data, start);
+                    strongholdInfo.orders                = (BEASTMEN_BESIEGED_ORDERS)ref<uint8>(data, start + 1);
+                    strongholdInfo.strongholdLevel       = (STRONGHOLD_LEVEL)ref<uint8>(data, start + 2);
+                    strongholdInfo.forces                = ref<float>(data, start + 3);
+                    strongholdInfo.mirrors               = ref<uint8>(data, start + 7);
+                    strongholdInfo.prisoners             = ref<uint8>(data, start + 8);
+                    strongholdInfo.ownsAstralCandescence = ref<uint8>(data, start + 9);
+                    strongholdInfo.consecutiveDefeats    = ref<uint32>(data, start + 10);
 
                     strongholdInfos[i] = strongholdInfo;
                 }

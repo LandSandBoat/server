@@ -201,6 +201,16 @@ xi.settings.main =
     -- LIMBUS SETTINGS
     COSMO_CLEANSE_BASE_COST     = 15000,    -- Base gil cost for a Cosmo Cleanse from Sagheera
 
+    -- BESIEGED SETTINGS
+    -- TODO: Proper captures for mirror formulas.
+    -- We have captures showing a rate of 1 force per Vana'Diel hour with 8 mirrors, but need captures of each mirror's contribution,
+    -- as well as what the minimum rate is with 0 mirrors.
+    BESIEGED_ENABLED                          = false,  -- Global toggle to enable / disable the besieged feature
+    BESIEGED_MIN_TRAINING_RATE                = 0.05,   -- Minimum rate at which beastmen forces increase during training stage. Even with 0 mirrors.
+    BESIEGED_PER_MIRROR_TRAINING_RATE         = 0.125,  -- Additive amount at which each mirror increases the beastment forces during training stage, per Vana'diel hour. 8x Mirrors = 1 force per vana hour.
+    BESIEGED_MIN_PREPARING_RATE               = 0.005,  -- Minimum rate at which beastmen forces increase during preparig stage. Even with 0 mirrors.
+    BESIEGED_PER_MIRROR_PREPARING_RATE        = 0.0050, -- Additive amount at which each mirror increases the beastment forces during preparing stage, per Vana'diel hour. 8x Mirrors ~= 1 force per vana day.
+
     -- QUEST/MISSION SPECIFIC SETTINGS
     AF1_QUEST_LEVEL     = 40,               -- Minimum level to start AF1 quest
     AF2_QUEST_LEVEL     = 50,               -- Minimum level to start AF2 quest
