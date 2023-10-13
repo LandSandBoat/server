@@ -354,6 +354,22 @@ xi.monstrosity.purchasableInstincts =
     RUN = 31,
 }
 
+local limitBreakQuests =
+{
+    [xi.job.BLU] = { xi.quest.log_id.AHT_URHGAN,  xi.quest.id.ahtUrhgan.THE_BEAST_WITHIN           },
+    [xi.job.COR] = { xi.quest.log_id.AHT_URHGAN,  xi.quest.id.ahtUrhgan.BREAKING_THE_BONDS_OF_FATE },
+    [xi.job.PUP] = { xi.quest.log_id.BASTOK,      xi.quest.id.bastok.ACHIEVING_TRUE_POWER          },
+    [xi.job.DNC] = { xi.quest.log_id.JEUNO,       xi.quest.id.jeuno.A_FURIOUS_FINALE               },
+    [xi.job.SCH] = { xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.SURVIVAL_OF_THE_WISEST    },
+    [xi.job.GEO] = { xi.quest.log_id.ADOULIN,     xi.quest.id.adoulin.ELEMENTARY_MY_DEAR_SYLVIE    },
+    [xi.job.RUN] = { xi.quest.log_id.ADOULIN,     xi.quest.id.adoulin.ENDEAVORING_TO_AWAKEN        },
+}
+
+local terynonMonData =
+{
+
+}
+
 xi.monstrosity.teleports =
 {
     [xi.zone.EAST_RONFAURE] =
@@ -422,8 +438,8 @@ end
 xi.monstrosity.hasUnlockedVariant = function(player, variant)
     local data = player:getMonstrosityData()
 
-    local byteOffset   = math.floor(variant / 8)
-    local shiftAmount  = variant % 8
+    local byteOffset  = math.floor(variant / 8)
+    local shiftAmount = variant % 8
 
     if byteOffset < 32 then
         return bit.band(data.variants[byteOffset] or 0, bit.lshift(0x01, shiftAmount)) > 0
@@ -448,6 +464,72 @@ xi.monstrosity.unlockVariant = function(player, variant)
 
         player:setMonstrosityData(data)
     end
+end
+
+local function hasPurchasedInstinct(player, purchasableInstinctId)
+    local data        = player:getMonstrosityData()
+    local byteOffset  = 20 + math.floor(purchasableInstinctId / 8)
+    local shiftAmount = purchasableInstinctId % 8
+
+    if byteOffset >= 20 and byteOffset < 24 then
+        return bit.band(data.instincts[byteOffset], bit.lshift(1, shiftAmount)) > 0
+    else
+        print('byteOffset out of range')
+    end
+end
+
+local function getPurchasedInstinctsMask(player)
+    local instinctMask = 0
+
+    for _, purchasableInstinctId in pairs(xi.monstrosity.purchasableInstincts) do
+        if
+            purchasableInstinctId >= xi.monstrosity.purchasableInstincts.HUME_II and
+            hasPurchasedInstinct(player, purchasableInstinctId)
+        then
+            instinctMask = utils.mask.setBit(instinctMask, purchasableInstinctId - xi.monstrosity.purchasableInstincts.HUME_II, true)
+        end
+    end
+
+    return instinctMask
+end
+
+local function addPurchasedInstinct(player, purchasableInstinctId)
+    local data        = player:getMonstrosityData()
+    local byteOffset  = 20 + math.floor(purchasableInstinctId / 8)
+    local shiftAmount = purchasableInstinctId % 8
+
+    if byteOffset >= 20 and byteOffset < 24 then
+        data.instincts[byteOffset] = bit.bor(data.instincts[byteOffset] or 0, bit.lshift(0x01, shiftAmount))
+    else
+        print('byteOffset out of range')
+    end
+
+    player:setMonstrosityData(data)
+end
+
+-- When generating Terynon's mask for discounts, we need a bitmask for
+-- specific jobs.  Since only one quest exists for pre-ToAU jobs, use
+-- Maat's Cap tracking for those.
+local function hasCompletedLimitBreak(player, jobId)
+    if jobId <= xi.job.SMN then
+        local maatsCap = player:getCharVar('maatsCap')
+
+        return utils.mask.getBit(maatsCap, jobId - 1)
+    else
+        return player:hasCompletedQuest(unpack(limitBreakQuests[jobId]))
+    end
+end
+
+local function getLimitBreakMask(player)
+    local limitMask = 0
+
+    for jobId = xi.job.WAR, xi.job.RUN do
+        if hasCompletedLimitBreak(player, jobId) then
+            limitMask = utils.mask.setBit(limitMask, jobId - 1, true)
+        end
+    end
+
+    return limitMask
 end
 
 -----------------------------------
@@ -563,11 +645,12 @@ xi.monstrosity.odysseanPassageOnTrigger = function(player, npc)
         return
     end
 
-    local monSize = 1 -- 0-index, Small, Medium, Large
+    local monSize         = 1 -- 0-index, Small, Medium, Large
+    local hasBelligerency = player:hasKeyItem(xi.ki.GLADIATORIAL_WRIT_OF_SUMMONS) and 1 or 0
 
     -- NOTE: Param5 is not consistent, Bee has seen 0, 1, and 2 so far
     -- player:startEvent(5, 0, 0, 0, 0, 2, 0, 0, 0) -- Bee
-    player:startEvent(5, 0, monSize, 0, 0, 0, 0, 0, 0) -- Tiger
+    player:startEvent(5, 0, monSize, hasBelligerency, 0, 0, 0, 0, 0) -- Tiger
 end
 
 xi.monstrosity.odysseanPassageOnEventUpdate = function(player, csid, option, npc)
@@ -593,7 +676,7 @@ xi.monstrosity.odysseanPassageOnEventFinish = function(player, csid, option, npc
                     zoneSelected
                 )
             else
-                print('Monstrosity Teleport - No Valid Entries for Zone' .. zoneSelected ..'. Setting pos to (0, 0, 0)!')
+                print('Monstrosity Teleport - No Valid Entries for Zone' .. zoneSelected .. '. Setting pos to (0, 0, 0)!')
                 player:setPos(0, 0, 0, 0, zoneSelected)
             end
         end
@@ -630,7 +713,7 @@ xi.monstrosity.aengusOnTrade = function(player, npc, trade)
 end
 
 xi.monstrosity.aengusOnTrigger = function(player, npc)
-    player:startEvent(13, 0, 0, 2, 0, 2, 90, 0, 0)
+    player:startEvent(13, 0, player:getCurrency('infamy'), 0, 0, 0, 0, 0, 0)
 end
 
 xi.monstrosity.aengusOnEventUpdate = function(player, csid, option, npc)
@@ -652,28 +735,77 @@ xi.monstrosity.teyrnonOnTrade = function(player, npc, trade)
 end
 
 xi.monstrosity.teyrnonOnTrigger = function(player, npc)
-    player:startEvent(7, 0, 0, 0, 0, 0, 0, 0, 0)
+    player:startEvent(7, player:getCurrency('infamy'), 0, 0, 0, 0, 0, 0, 0)
 end
 
 xi.monstrosity.teyrnonOnEventUpdate = function(player, csid, option, npc)
-    -- print('update', csid, option)
-    if csid == 7 and option == 0 then -- Monsters Menu
-        player:updateEvent(0, 0, 0, 0, 0, 0, 0, 0)
-    elseif csid == 7 and option == 1 then -- Instinct menu
-        player:updateEvent(0, 0, 0, 0, 0, 0, 0, 0)
+    if csid == 7 then
+        if option == 0 then
+            -- Monsters
+            utils.unused(terynonMonData)
+
+            player:updateEvent(2, 0, 0, 0, 0, 0, 0, 0)
+        elseif option == 1 then
+            -- Instincts
+
+            local purchasedInstincts = getPurchasedInstinctsMask(player)
+            local completedLimits    = getLimitBreakMask(player)
+
+            player:updateEvent(purchasedInstincts, completedLimits, 0, 0, 0, 0, 0, 0)
+        end
     end
 end
 
 xi.monstrosity.teyrnonOnEventFinish = function(player, csid, option, npc)
-    -- print('finish', csid, option)
-    -- Support Menu:
-    -- option    3: Dedication 1
-    -- option  259: Dedication 2
-    -- option  515: Regen
-    -- option  771: Refresh
-    -- option 1027: Protect
-    -- option 1283: Shell
-    -- option 1539: Haste
+    local optionType = bit.band(option, 0xFF)
+
+    if optionType == 1 then
+
+    elseif optionType == 2 then
+        -- Instincts: Costs are hardcoded, and adjusted based on having completed certain
+        -- prerequisites.  This data is not tabled with Terynon, as it cannot be controlled.
+
+        local selectedInstinct = bit.band(bit.rshift(option, 8), 0xFF)
+        local instinctPrice    = selectedInstinct > xi.monstrosity.purchasableInstincts.GALKA_II and 10000 or 500
+        local checkValue       = bit.rshift(option, 16)
+
+        if checkValue ~= 119 then
+            print(string.format('Invalid Event Finish Option received by Terynon! (%s:%d)', player:getName(), option))
+            return
+        end
+
+        if
+            selectedInstinct > xi.monstrosity.purchasableInstincts.GALKA_II and
+            hasCompletedLimitBreak(player, selectedInstinct - xi.monstrosity.purchasableInstincts.GALKA_II)
+        then
+            instinctPrice = instinctPrice / 2
+        end
+
+        if player:getCurrency('infamy') >= instinctPrice then
+            addPurchasedInstinct(player, selectedInstinct)
+
+            -- NOTE: The offset below is the beginning parameter for purchased instincts used by this message, and
+            -- lower values will result in an item being placed in the message.  Base offset for all instincts
+            -- is 29696 (29696 + 3 -> Rabbit Instinct I)
+            player:messageSpecial(zones[xi.zone.FERETORY].text.YOU_LEARNED_INSTINCT, 30464 + selectedInstinct)
+        end
+
+    elseif optionType == 3 then
+        local selectedEffect = bit.rshift(option, 8)
+
+        utils.unused(selectedEffect)
+        -- TODO: Use Abyssea buff method with tabled data here.  Do we need a check to remove
+        -- these statuses when MON is removed?
+
+        -- selectedEffect:
+        -- 0: Dedication 1
+        -- 1: Dedication 2
+        -- 2: Regen
+        -- 3: Refresh
+        -- 4: Protect
+        -- 5: Shell
+        -- 6: Haste
+    end
 end
 
 -----------------------------------
