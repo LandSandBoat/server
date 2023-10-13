@@ -457,6 +457,7 @@ UPDATE mob_groups SET content_tag='ROV' WHERE name='Locus_Wivre' AND groupid='53
 UPDATE mob_groups SET content_tag='ROV' WHERE name='Nirgali' AND groupid='40' AND zoneid='54';
 UPDATE mob_groups SET content_tag='ROV' WHERE name='Nostokulshedra' AND groupid='52' AND zoneid='54';
 UPDATE mob_groups SET content_tag='ROV' WHERE name='Dweomershell' AND groupid='65' AND zoneid='54';
+UPDATE mob_groups SET HP='4000' WHERE name='Lamia_Exon' AND groupid='84' AND zoneid='54';
 
 -- ------------------------------------------------------------
 -- Mount_Zhayolm (Zone 61)
@@ -465,6 +466,25 @@ UPDATE mob_groups SET content_tag='ROV' WHERE name='Dweomershell' AND groupid='6
 UPDATE mob_groups SET content_tag='ABYSSEA' WHERE name='Sulphuric_Jagil' AND groupid='9' AND zoneid='61';
 UPDATE mob_groups SET content_tag='ABYSSEA' WHERE name='Orichalcumshell' AND groupid='33' AND zoneid='61';
 UPDATE mob_groups SET content_tag='ABYSSEA' WHERE name='Scoriaceous_Eruca' AND groupid='35' AND zoneid='61';
+UPDATE mob_groups SET HP='10500', minlevel='79' WHERE name='Energetic_Eruca' AND groupid='41' AND zoneid='61';
+UPDATE mob_groups SET respawntime='0' WHERE name='Garharlor_the_Unruly' AND groupid='42' AND zoneid='61';
+UPDATE mob_groups SET respawntime='0' WHERE name='Garfurlar_the_Rabid' AND groupid='43' AND zoneid='61';
+UPDATE mob_groups SET respawntime='0' WHERE name='Garhorlur_the_Brutal' AND groupid='44' AND zoneid='61';
+
+-- ------------------------------------------------------------
+-- Halvung (Zone 62)
+-- ------------------------------------------------------------
+
+UPDATE mob_groups SET HP='4000' WHERE name='Hilltroll_Elite_Guard' AND groupid='47' AND zoneid='62';
+UPDATE mob_groups SET HP='4000' WHERE name='Woodtroll_Elite_Guard' AND groupid='48' AND zoneid='62';
+
+-- ------------------------------------------------------------
+-- Mamook (Zone 65)
+-- ------------------------------------------------------------
+
+UPDATE mob_groups SET HP='4000' WHERE name='Mamool_Ja_Chamberlain' AND groupid='55' AND zoneid='65';
+UPDATE mob_groups SET HP='4000' WHERE name='Mamool_Ja_Palatine' AND groupid='56' AND zoneid='65';
+UPDATE mob_groups SET HP='14000' WHERE name='Zizzy_Zillah' AND groupid='20' AND zoneid='65';
 
 -- ------------------------------------------------------------
 -- Mamool_Ja_Training_Grounds (Zone 66)

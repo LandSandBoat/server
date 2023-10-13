@@ -1,61 +1,94 @@
 -----------------------------------
 -- Area: Mamook
 --  Mob: Gulool Ja Ja
+-- TODO: resists, attack/def boosts
+--
+-- Notes: Each supporting mob to Gulool Ja Ja has an individual 30 second
+--  respawn timer. This fight also seems to have an arena draw in pattern.
+--  Adds reset respawn timer in their lua onMobDeath
+--  Gulool's draw in mechancss appear to take effect whenever the target leaves
+--  a certain distance from the centre of the arena.
 -----------------------------------
-require("scripts/globals/titles")
-local ID = require("scripts/zones/Mamook/IDs")
 mixins = { require("scripts/mixins/job_special") }
-
 -----------------------------------
 local entity = {}
 
+local arena =
+{
+    x = -272.5, y = 17.5, z = -380
+}
+
 entity.onMobSpawn = function(mob)
-    mob:setMod(xi.mod.DOUBLE_ATTACK, 20)
-    mob:setMobMod(xi.mobMod.DRAW_IN, 2)
+    xi.mix.jobSpecial.config(mob, {
+        specials =
+        {
+            { id = xi.jsa.MIJIN_GAKURE, hpp = 3 },
+        },
+    })
+
+    mob:setMobMod(xi.mobMod.NO_STANDBACK, 1)
+    mob:setMobMod(xi.mobMod.NO_MOVE, 1)
 end
 
 entity.onMobEngaged = function(mob, target)
-    for i = ID.mob.GULOOL_JA_JA + 1, ID.mob.GULOOL_JA_JA + 4 do
-        SpawnMob(i):updateEnmity(target)
+    target:showText(mob, zones[mob:getZoneID()].text.GULOOL_ENGAGE)
+    mob:setMobMod(xi.mobMod.NO_MOVE, 0)
+
+    for id = mob:getID() + 1, mob:getID() + 4 do
+        SpawnMob(id):updateEnmity(target)
     end
 end
 
 entity.onMobFight = function(mob, target)
-    if mob:getBattleTime() % 60 < 2 and mob:getBattleTime() > 10 then
-        if not GetMobByID(ID.mob.GULOOL_JA_JA + 1):isSpawned() then
-            GetMobByID(ID.mob.GULOOL_JA_JA + 1):setSpawn(mob:getXPos() + math.random(1, 5), mob:getYPos(), mob:getZPos() + math.random(1, 5))
-            SpawnMob(ID.mob.GULOOL_JA_JA + 1):updateEnmity(target)
-        elseif not GetMobByID(ID.mob.GULOOL_JA_JA + 2):isSpawned() then
-            GetMobByID(ID.mob.GULOOL_JA_JA + 2):setSpawn(mob:getXPos() + math.random(1, 5), mob:getYPos(), mob:getZPos() + math.random(1, 5))
-            SpawnMob(ID.mob.GULOOL_JA_JA + 2):updateEnmity(target)
-        elseif not GetMobByID(ID.mob.GULOOL_JA_JA + 3):isSpawned() then
-            GetMobByID(ID.mob.GULOOL_JA_JA + 3):setSpawn(mob:getXPos() + math.random(1, 5), mob:getYPos(), mob:getZPos() + math.random(1, 5))
-            SpawnMob(ID.mob.GULOOL_JA_JA + 3):updateEnmity(target)
-        elseif not GetMobByID(ID.mob.GULOOL_JA_JA + 4):isSpawned() then
-            GetMobByID(ID.mob.GULOOL_JA_JA + 4):setSpawn(mob:getXPos() + math.random(1, 5), mob:getYPos(), mob:getZPos() + math.random(1, 5))
-            SpawnMob(ID.mob.GULOOL_JA_JA + 4):updateEnmity(target)
-        end
-    end
+    local arenaArg =
+    {
+        condition1 = target:checkDistance(arena) > 15,
+        position   = { arena.x + math.random(-3, 3), arena.y, arena.z + math.random(-3, 3), target:getRotPos() },
+    }
 
-    for i = ID.mob.GULOOL_JA_JA + 1, ID.mob.GULOOL_JA_JA + 4 do
-        local pet = GetMobByID(i)
-        if pet:getCurrentAction() == xi.act.ROAMING then
+    utils.arenaDrawIn(mob, target, arenaArg)
+
+    for id = mob:getID() + 1, mob:getID() + 4 do
+        local pet = GetMobByID(id)
+        if
+            not pet:isSpawned() and
+            mob:getLocalVar("[GULOOL]respawnAdd" .. id) < os.time()
+        then
+            SpawnMob(id)
+        end
+
+        if
+            pet:isAlive() and
+            pet:getCurrentAction() == xi.act.ROAMING
+        then
             pet:updateEnmity(target)
         end
     end
 end
 
 entity.onMobDisengage = function(mob)
-    for i = 1, 4 do DespawnMob(ID.mob.GULOOL_JA_JA + i) end
+    -- Return to Throne
+    mob:setMobMod(xi.mobMod.NO_MOVE, 1)
+    mob:timer(10000, function(mobArg)
+        local spawn = mobArg:getSpawnPos()
+        mobArg:setPos(spawn.x, spawn.y, spawn.z, spawn.rot)
+    end)
+
+    for id = 1, 4 do
+        DespawnMob(mob:getID() + id)
+    end
 end
 
 entity.onMobDeath = function(mob, player, optParams)
     player:addTitle(xi.title.SHINING_SCALE_RIFLER)
-    for i = 1, 4 do DespawnMob(ID.mob.GULOOL_JA_JA + i) end
+    player:showText(mob, zones[mob:getZoneID()].text.GULOOL_DEAD)
+
+    for id = 1, 4 do
+        DespawnMob(mob:getID() + id)
+    end
 end
 
 entity.onMobDespawn = function(mob)
-    for i = 1, 4 do DespawnMob(ID.mob.GULOOL_JA_JA + i) end
 end
 
 return entity

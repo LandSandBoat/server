@@ -8,4 +8,5 @@ return {
     ['qm6']  = { messageSpecial = ID.text.NOTHING_OUT_OF_ORDINARY },
     ['qm9']  = { messageSpecial = ID.text.NOTHING_OUT_OF_ORDINARY },
     ['qm10'] = { messageSpecial = ID.text.NOTHING_OUT_OF_ORDINARY },
+    ['_ji7'] = { messageSpecial = ID.text.KEYHOLE },
 }
