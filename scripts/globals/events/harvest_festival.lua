@@ -275,7 +275,7 @@ xi.events.harvest.showEntities = function(zoneID)
 
             if
                 npc and
-                npc.costume == 0
+                entity.costume == 0
             then
                 npc:setStatus(xi.status.DISAPPEAR)
             end
