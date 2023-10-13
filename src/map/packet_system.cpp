@@ -893,7 +893,7 @@ void SmallPacket0x01A(map_session_data_t* const PSession, CCharEntity* const PCh
             PNpc              = PChar->GetEntity(TargID, TYPE_NPC | TYPE_MOB);
 
             // MONs are allowed to use doors, but nothing else
-            if (PChar->m_PMonstrosity != nullptr && PNpc->look.size != 0x02)
+            if (PChar->m_PMonstrosity != nullptr && PNpc->look.size != 0x02 && PChar->getZone() != ZONEID::ZONE_FERETORY)
             {
                 PChar->pushPacket(new CReleasePacket(PChar, RELEASE_TYPE::STANDARD));
                 return;
