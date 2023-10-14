@@ -168,9 +168,9 @@ local treatsTable2005 =
 local hqRewardList =
 {
     [1] = { required = xi.items.PUMPKIN_HEAD,   reward = xi.items.HORROR_HEAD, },
-    [2] = { required = xi.items.PUMPKIN_HEAD_2, reward = xi.items.HORROR_HEAD, },
-    [3] = { required = xi.items.TRICK_STAFF,    reward = xi.items.HORROR_HEAD, },
-    [4] = { required = xi.items.TRICK_STAFF_2,  reward = xi.items.HORROR_HEAD, },
+    [2] = { required = xi.items.PUMPKIN_HEAD_2, reward = xi.items.HORROR_HEAD_2, },
+    [3] = { required = xi.items.TRICK_STAFF,    reward = xi.items.TREAT_STAFF, },
+    [4] = { required = xi.items.TRICK_STAFF_2,  reward = xi.items.TREAT_STAFF_2, },
     [5] = { required = xi.items.PITCHFORK,      reward = xi.items.HORROR_HEAD, },
 }
 
