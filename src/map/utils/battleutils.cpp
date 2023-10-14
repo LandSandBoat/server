@@ -1804,21 +1804,6 @@ namespace battleutils
 
         if (chance < check)
         {
-            // Prevent interrupt if Aquaveil is active, if it were to interrupt.
-            if (PDefender->StatusEffectContainer->HasStatusEffect(EFFECT_AQUAVEIL))
-            {
-                auto aquaCount = PDefender->StatusEffectContainer->GetStatusEffect(EFFECT_AQUAVEIL)->GetPower();
-                if (aquaCount - 1 == 0) // removes the status, but still prevents the interrupt
-                {
-                    PDefender->StatusEffectContainer->DelStatusEffect(EFFECT_AQUAVEIL);
-                }
-                else
-                {
-                    PDefender->StatusEffectContainer->GetStatusEffect(EFFECT_AQUAVEIL)->SetPower(aquaCount - 1);
-                }
-                return false;
-            }
-            // Otherwise interrupt the spell cast.
             return true;
         }
 
