@@ -9,50 +9,50 @@ local entity = {}
 
 local drawInPos =
 {
-    { -280.20, -23.88,  -5.94 },
-    { -272.08, -23.75,  -1.73 },
-    { -276.90, -24.00,   2.09 },
-    { -268.59, -23.96, -16.00 },
-    { -285.57, -24.20,  -0.56 },
-    { -282.16, -24.00,   1.95 },
-    { -271.35, -23.66,  -5.46 },
-    { -272.75, -23.55, -11.25 },
+    { x = -280.20, y = -23.88, z =  -5.94 },
+    { x = -272.08, y = -23.75, z =  -1.73 },
+    { x = -276.90, y = -24.00, z =   2.09 },
+    { x = -268.59, y = -23.96, z = -16.00 },
+    { x = -285.57, y = -24.20, z =  -0.56 },
+    { x = -282.16, y = -24.00, z =   1.95 },
+    { x = -271.35, y = -23.66, z =  -5.46 },
+    { x = -272.75, y = -23.55, z = -11.25 },
 }
 
 entity.onMobFight = function(mob, target)
     local battletime = mob:getBattleTime()
-    local headgrow = mob:getLocalVar("headgrow")
     local broken = mob:getAnimationSub()
 
-    if headgrow < battletime and broken > 4 then
+    if
+        mob:getLocalVar("headgrow") < battletime and
+        broken > 4
+    then
         mob:setAnimationSub(broken - 1)
         mob:setLocalVar("headgrow", battletime + 300)
     end
 
-    local drawInWait = mob:getLocalVar("DrawInWait")
+    if
+        (target:getXPos() < -295 or target:getXPos() > -260 or
+        target:getZPos() < -25 or target:getZPos() > 13) and
+        os.time() > mob:getLocalVar("DrawInWait")
+    then
+        local pos = math.random(1, 8)
 
-    if (target:getXPos() < -295 or target:getXPos() > -260) and os.time() > drawInWait then
-        local rot = target:getRotPos()
-        local position = math.random(1,8)
-        target:setPos(drawInPos[position][1],drawInPos[position][2],drawInPos[position][3],rot)
-        mob:messageBasic(232, 0, 0, target)
-        mob:setLocalVar("DrawInWait", os.time() + 2)
-    elseif (target:getZPos() < -25 or target:getZPos() > 13) and os.time() > drawInWait then
-        local rot = target:getRotPos()
-        local position = math.random(1,8)
-        target:setPos(drawInPos[position][1],drawInPos[position][2],drawInPos[position][3],rot)
+        target:setPos(drawInPos[pos])
         mob:messageBasic(232, 0, 0, target)
         mob:setLocalVar("DrawInWait", os.time() + 2)
     end
 end
 
 entity.onCriticalHit = function(mob)
-    local rand = math.random()
     local battletime = mob:getBattleTime()
-    local headbreak = mob:getLocalVar("headbreak")
     local broken = mob:getAnimationSub()
 
-    if rand <= 0.15 and battletime >= headbreak and broken < 6 then
+    if
+        math.random() <= 0.15 and
+        battletime >= mob:getLocalVar("headbreak") and
+        broken < 6
+    then
         mob:setAnimationSub(broken + 1)
         mob:setLocalVar("headgrow", battletime + math.random(120, 240))
         mob:setLocalVar("headbreak", battletime + 300)
