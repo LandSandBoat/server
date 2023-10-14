@@ -150,11 +150,11 @@ quest.sections =
             onEventFinish =
             {
                 [816] = function(player, csid, option, npc)
-                    quest:setVar(player, 'taruTalk1', 1)
+                    quest:setVar(player, 'taruTalk2', 1)
                 end,
 
                 [817] = function(player, csid, option, npc)
-                    quest:setVar(player, 'taruTalk2', 1)
+                    quest:setVar(player, 'taruTalk1', 1)
                 end,
             },
         },
