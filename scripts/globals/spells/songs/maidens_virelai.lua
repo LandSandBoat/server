@@ -33,7 +33,10 @@ spellObject.onSpellCast = function(caster, target, spell)
     params.effect = xi.effect.CHARM_I
     local resist = xi.magic.applyResistanceEffect(caster, target, spell, params)
 
-    if resist >= 0.25 and xi.magic.getCharmChance(caster, target, false) > 0 then
+    if
+        resist >= 0.25 and
+        xi.magic.getCharmChance(caster, target, false, true) > 0
+    then
         spell:setMsg(xi.msg.basic.MAGIC_ENFEEB_IS)
 
         duration = duration * resist
