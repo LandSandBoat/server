@@ -204,7 +204,7 @@ CZoneInPacket::CZoneInPacket(CCharEntity* PChar, const EventInfo* currentEvent)
 
     if (PChar->m_moghouseID != 0)
     {
-        ref<uint8>(0x80) = 1;
+        ref<uint8>(0x80) = 0x01;
 
         if (PChar->profile.mhflag & 0x0040) // On MH2F
         {
@@ -216,7 +216,7 @@ CZoneInPacket::CZoneInPacket(CCharEntity* PChar, const EventInfo* currentEvent)
     }
     else
     {
-        ref<uint8>(0x80)  = 2;
+        ref<uint8>(0x80)  = 0x02;
         ref<uint16>(0xAA) = 0x01FF;
 
         // TODO: This has also been seen as 0x04 and 0x07
@@ -260,6 +260,15 @@ CZoneInPacket::CZoneInPacket(CCharEntity* PChar, const EventInfo* currentEvent)
     if (PChar->GetMJob() == JOB_MON)
     {
         monstrosity::ReadMonstrosityData(PChar);
+    }
+
+    if (PChar->loc.zone->GetID() == ZONE_FERETORY)
+    {
+        // This disables the zone model, but also disables abilities etc.
+        ref<uint8>(0x80) = 0x01;
+
+        // Zone Model
+        ref<uint16>(0xAA) = 0x02D9; // 729
     }
 
     if (PChar->m_PMonstrosity != nullptr)
