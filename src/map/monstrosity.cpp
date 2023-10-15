@@ -82,6 +82,7 @@ monstrosity::MonstrosityData_t::MonstrosityData_t()
 , MainJob(JOB_WAR)    //
 , SubJob(JOB_WAR)     //
 , CurrentExp(0)       // No exp
+, Belligerency(false) //
 {
     levels[1]  = 1; // Rabbit
     levels[18] = 1; // Mandragora
@@ -147,7 +148,7 @@ void monstrosity::ReadMonstrosityData(CCharEntity* PChar)
 {
     auto data = std::make_unique<MonstrosityData_t>();
 
-    auto ret = sql->Query("SELECT charid, current_monstrosity_id, current_monstrosity_species, current_monstrosity_name_prefix_1, current_monstrosity_name_prefix_2, current_exp, equip, levels, instincts, variants FROM char_monstrosity WHERE charid = %d LIMIT 1;", PChar->id);
+    auto ret = sql->Query("SELECT charid, current_monstrosity_id, current_monstrosity_species, current_monstrosity_name_prefix_1, current_monstrosity_name_prefix_2, current_exp, equip, levels, instincts, variants, belligerency FROM char_monstrosity WHERE charid = %d LIMIT 1;", PChar->id);
     if (ret != SQL_ERROR && sql->NumRows() != 0)
     {
         while (sql->NextRow() == SQL_SUCCESS)
@@ -165,6 +166,8 @@ void monstrosity::ReadMonstrosityData(CCharEntity* PChar)
             sql->GetBlobData(7, &data->levels);
             sql->GetBlobData(8, &data->instincts);
             sql->GetBlobData(9, &data->variants);
+
+            data->Belligerency = static_cast<bool>(sql->GetUIntData(10));
 
             // Build additional data from lookups
             data->MainJob = gMonstrositySpeciesMap[data->Species].mjob;
@@ -196,7 +199,8 @@ void monstrosity::WriteMonstrosityData(CCharEntity* PChar)
                         "equip = '%s', "
                         "levels = '%s', "
                         "instincts = '%s', "
-                        "variants = '%s';";
+                        "variants = '%s', "
+                        "belligerency = '%d';";
 
     auto equipEscaped     = sql->ObjectToBlobString(&PChar->m_PMonstrosity->EquippedInstincts);
     auto levelsEscaped    = sql->ObjectToBlobString(&PChar->m_PMonstrosity->levels);
@@ -213,7 +217,8 @@ void monstrosity::WriteMonstrosityData(CCharEntity* PChar)
                equipEscaped.c_str(),
                levelsEscaped.c_str(),
                instinctsEscaped.c_str(),
-               variantsEscaped.c_str());
+               variantsEscaped.c_str(),
+               static_cast<uint8>(PChar->m_PMonstrosity->Belligerency));
 }
 
 void monstrosity::TryPopulateMonstrosityData(CCharEntity* PChar)
@@ -249,11 +254,14 @@ void monstrosity::HandleZoneIn(CCharEntity* PChar)
         }
     }
 
-    // TODO: There are more conditions to handle here
+    // NOTE: Whenever you log in as a MON, you'll have Gestation - even if you've previously clicked it off.
+    // TODO: Check this is true in Belligerency.
+    // TODO: There are more conditions to handle here?
     if (PChar->loc.zone->GetID() != ZONE_FERETORY)
     {
-        // TODO: If belligerency, timer is 60s
-        CStatusEffect* PEffect = new CStatusEffect(EFFECT::EFFECT_GESTATION, EFFECT::EFFECT_GESTATION, 0, 0, 64800); // 18 hours
+        uint32 duration = PChar->m_PMonstrosity->Belligerency ? 60 : 64800 /* 18 hours */;
+
+        CStatusEffect* PEffect = new CStatusEffect(EFFECT::EFFECT_GESTATION, EFFECT::EFFECT_GESTATION, 0, 0, duration);
 
         // TODO: Move these into the db
         PEffect->AddEffectFlag(EFFECTFLAG_INVISIBLE);
@@ -263,7 +271,6 @@ void monstrosity::HandleZoneIn(CCharEntity* PChar)
         PEffect->AddEffectFlag(EFFECTFLAG_DETECTABLE);
         PEffect->AddEffectFlag(EFFECTFLAG_ON_ZONE);
 
-        // TODO: Does the timer survive logout, does it tick while offline, does it reset?
         // PEffect->AddEffectFlag(EFFECTFLAG_LOGOUT);
 
         // NOTE: It DOES say the effect wears off
@@ -592,6 +599,18 @@ bool monstrosity::IsVariantUnlocked(CCharEntity* PChar, uint8 variant)
     }
 
     return false;
+}
+
+void monstrosity::SetBelligerencyFlag(CCharEntity* PChar, bool flag)
+{
+    if (PChar->m_PMonstrosity == nullptr)
+    {
+        return;
+    }
+
+    PChar->m_PMonstrosity->Belligerency = flag;
+
+    WriteMonstrosityData(PChar);
 }
 
 void monstrosity::MaxAllLevels(CCharEntity* PChar)

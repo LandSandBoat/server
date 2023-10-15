@@ -1214,17 +1214,17 @@ xi.monstrosity.aengusOnTrade = function(player, npc, trade)
 end
 
 xi.monstrosity.aengusOnTrigger = function(player, npc)
-    player:startEvent(13, 0, player:getCurrency('infamy'), 0, 0, 0, 0, 0, 0)
+    local inBelligerency = player:getBelligerencyFlag() and 1 or 0
+    player:startEvent(13, inBelligerency, player:getCurrency('infamy'), 0, 0, 0, 0, 0, 0)
 end
 
 xi.monstrosity.aengusOnEventUpdate = function(player, csid, option, npc)
-    -- print('update', csid, option)
 end
 
 xi.monstrosity.aengusOnEventFinish = function(player, csid, option, npc)
-    -- print('finish', csid, option)
     if csid == 13 and option == 1 then
-        -- Selected: Enter Belligerency
+        -- Toggle
+        player:setBelligerencyFlag(not player:getBelligerencyFlag())
     end
 end
 

@@ -334,6 +334,8 @@ public:
     // Monstrosity
     auto getMonstrosityData() -> sol::table;
     void setMonstrosityData(sol::table table);
+    bool getBelligerencyFlag();
+    void setBelligerencyFlag(bool flag);
 
     // Player Titles and Fame
     uint16 getTitle();

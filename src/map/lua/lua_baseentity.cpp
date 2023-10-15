@@ -6403,6 +6403,33 @@ void CLuaBaseEntity::setMonstrosityData(sol::table table)
     }
 }
 
+bool CLuaBaseEntity::getBelligerencyFlag()
+{
+    auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity);
+    if (PChar == nullptr)
+    {
+        return false;
+    }
+
+    if (PChar->m_PMonstrosity == nullptr)
+    {
+        return false;
+    }
+
+    return PChar->m_PMonstrosity->Belligerency;
+}
+
+void CLuaBaseEntity::setBelligerencyFlag(bool flag)
+{
+    auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity);
+    if (PChar == nullptr)
+    {
+        return;
+    }
+
+    monstrosity::SetBelligerencyFlag(PChar, flag);
+}
+
 /************************************************************************
  *  Function: getTitle()
  *  Purpose : Returns the integer value of the player's current title
@@ -17211,6 +17238,8 @@ void CLuaBaseEntity::Register()
     // Monstrosity
     SOL_REGISTER("getMonstrosityData", CLuaBaseEntity::getMonstrosityData);
     SOL_REGISTER("setMonstrosityData", CLuaBaseEntity::setMonstrosityData);
+    SOL_REGISTER("getBelligerencyFlag", CLuaBaseEntity::getBelligerencyFlag);
+    SOL_REGISTER("setBelligerencyFlag", CLuaBaseEntity::setBelligerencyFlag);
 
     // Player Titles and Fame
     SOL_REGISTER("getTitle", CLuaBaseEntity::getTitle);

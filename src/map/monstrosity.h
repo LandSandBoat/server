@@ -57,6 +57,8 @@ namespace monstrosity
         std::array<uint8, 128> levels{ 0 };
         std::array<uint8, 64>  instincts{ 0 };
         std::array<uint8, 32>  variants{ 0 };
+
+        bool Belligerency;
     };
 
     void LoadStaticData();
@@ -78,6 +80,8 @@ namespace monstrosity
 
     bool IsInstinctUnlocked(CCharEntity* PChar, uint16 instinct);
     bool IsVariantUnlocked(CCharEntity* PChar, uint8 variant);
+
+    void SetBelligerencyFlag(CCharEntity* PChar, bool flag);
 
     // Debug
     void MaxAllLevels(CCharEntity* PChar);

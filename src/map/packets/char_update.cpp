@@ -100,7 +100,7 @@ CCharUpdatePacket::CCharUpdatePacket(CCharEntity* PChar)
 
     ref<uint8>(0x36) = flag;
 
-    // Sword & Shield Icon
+    // Sword & Shield Icon (Campaign battles, etc?)
     // ref<uint8>(0x37) = 0x01;
 
     uint32 timeRemainingToForcedHomepoint = PChar->GetTimeRemainingUntilDeathHomepoint();
@@ -138,9 +138,8 @@ CCharUpdatePacket::CCharUpdatePacket(CCharEntity* PChar)
     {
         ref<uint32>(0x54) = monstrosity::GetPackedMonstrosityName(PChar);
 
-        // TODO:
-        bool belligerencyEnabled = false;
-        if (belligerencyEnabled)
+        // Sword & Shield icon only shows outside of the Feretory
+        if (PChar->m_PMonstrosity->Belligerency && PChar->loc.zone->GetID() != ZONE_FERETORY)
         {
             ref<uint8>(0x37) |= 0x01;
         }

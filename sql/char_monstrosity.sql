@@ -10,5 +10,6 @@ CREATE TABLE `char_monstrosity` (
     `levels` blob DEFAULT NULL,
     `instincts` blob DEFAULT NULL,
     `variants` blob DEFAULT NULL,
+    `belligerency` tinyint(3) unsigned NOT NULL DEFAULT 0,
   PRIMARY KEY (`charid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
