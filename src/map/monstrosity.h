@@ -45,6 +45,7 @@ namespace monstrosity
         uint16 Species;
         uint16 Flags;
         uint16 Look;
+        uint8  Size;
 
         uint8 NamePrefix1;
         uint8 NamePrefix2;

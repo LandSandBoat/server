@@ -55,6 +55,7 @@ struct MonstrositySpeciesRow
     std::string name;
     JOBTYPE     mjob;
     JOBTYPE     sjob;
+    uint8       size;
     uint16      look;
 };
 
@@ -77,6 +78,7 @@ monstrosity::MonstrosityData_t::MonstrosityData_t()
 , Species(0x0001)     // Rabbit
 , Flags(0x0B44)       // ?
 , Look(0x010C)        // Rabbit
+, Size(0x00)          // Size (0: Small, 1: Medium, 2: Large)
 , NamePrefix1(0x00)   // Nothing
 , NamePrefix2(0x00)   // Nothing
 , MainJob(JOB_WAR)    //
@@ -95,7 +97,7 @@ void monstrosity::LoadStaticData()
 {
     ShowInfo("Loading Monstrosity data");
 
-    int32 ret = sql->Query("SELECT monstrosity_id, monstrosity_species_code, name, mjob, sjob, look FROM monstrosity_species;");
+    int32 ret = sql->Query("SELECT monstrosity_id, monstrosity_species_code, name, mjob, sjob, size, look FROM monstrosity_species;");
     if (ret != SQL_ERROR && sql->NumRows() != 0)
     {
         while (sql->NextRow() == SQL_SUCCESS)
@@ -107,7 +109,8 @@ void monstrosity::LoadStaticData()
             row.name                   = sql->GetStringData(2);
             row.mjob                   = static_cast<JOBTYPE>(sql->GetUIntData(3));
             row.sjob                   = static_cast<JOBTYPE>(sql->GetUIntData(4));
-            row.look                   = static_cast<uint16>(sql->GetUIntData(5));
+            row.size                   = static_cast<uint8>(sql->GetUIntData(5));
+            row.look                   = static_cast<uint16>(sql->GetUIntData(6));
 
             gMonstrositySpeciesMap[row.monstrositySpeciesCode] = row;
         }
@@ -172,6 +175,7 @@ void monstrosity::ReadMonstrosityData(CCharEntity* PChar)
             // Build additional data from lookups
             data->MainJob = gMonstrositySpeciesMap[data->Species].mjob;
             data->SubJob  = gMonstrositySpeciesMap[data->Species].sjob;
+            data->Size    = gMonstrositySpeciesMap[data->Species].size;
 
             // TODO:
             auto level  = data->levels[data->MonstrosityId];
@@ -409,6 +413,7 @@ void monstrosity::HandleEquipChangePacket(CCharEntity* PChar, CBasicPacket& data
         PChar->m_PMonstrosity->MonstrosityId = data.monstrosityId;
         PChar->m_PMonstrosity->MainJob       = data.mjob;
         PChar->m_PMonstrosity->SubJob        = data.sjob;
+        PChar->m_PMonstrosity->Size          = data.size;
         PChar->m_PMonstrosity->Look          = data.look;
 
         if (PChar->m_PMonstrosity->MonstrosityId != previousId)

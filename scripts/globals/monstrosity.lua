@@ -1075,15 +1075,19 @@ xi.monstrosity.relinquishSteps =
     [0] = function(player)
         player:messageBasic(xi.msg.basic.FERETORY_COUNTDOWN, 0, 4)
     end,
+
     [1] = function(player)
         player:messageBasic(xi.msg.basic.FERETORY_COUNTDOWN, 0, 3)
     end,
+
     [2] = function(player)
         player:messageBasic(xi.msg.basic.FERETORY_COUNTDOWN, 0, 2)
     end,
+
     [3] = function(player)
         player:messageBasic(xi.msg.basic.FERETORY_COUNTDOWN, 0, 1)
     end,
+
     [4] = function(player)
         player:setPos(0, 0, 0, 0, xi.zone.FERETORY)
     end,
@@ -1185,7 +1189,7 @@ xi.monstrosity.odysseanPassageOnTrigger = function(player, npc)
         return
     end
 
-    local monSize         = 1 -- 0-index, Small, Medium, Large
+    local monSize         = player:getMonstrositySize()
     local hasBelligerency = player:getBelligerencyFlag() and 1 or 0
 
     -- NOTE: The list of available zones is built from the char's list of

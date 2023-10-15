@@ -336,6 +336,7 @@ public:
     void setMonstrosityData(sol::table table);
     bool getBelligerencyFlag();
     void setBelligerencyFlag(bool flag);
+    auto getMonstrositySize() -> uint8;
 
     // Player Titles and Fame
     uint16 getTitle();
