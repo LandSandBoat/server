@@ -3,9 +3,6 @@
 -- Mob: Princess Jelly
 -- BCNM: Royal Jelly
 -----------------------------------
-require('scripts/globals/pathfind')
-require('scripts/globals/utils')
------------------------------------
 local elementalSpells =
 {
     { xi.magic.spell.BURN,  xi.magic.spell.FIRE },
