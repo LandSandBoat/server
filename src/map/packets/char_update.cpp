@@ -100,6 +100,9 @@ CCharUpdatePacket::CCharUpdatePacket(CCharEntity* PChar)
 
     ref<uint8>(0x36) = flag;
 
+    // Sword & Shield Icon
+    // ref<uint8>(0x37) = 0x01;
+
     uint32 timeRemainingToForcedHomepoint = PChar->GetTimeRemainingUntilDeathHomepoint();
     ref<uint32>(0x3C)                     = timeRemainingToForcedHomepoint;
 
@@ -134,5 +137,12 @@ CCharUpdatePacket::CCharUpdatePacket(CCharEntity* PChar)
     if (PChar->m_PMonstrosity != nullptr)
     {
         ref<uint32>(0x54) = monstrosity::GetPackedMonstrosityName(PChar);
+
+        // TODO:
+        bool belligerencyEnabled = false;
+        if (belligerencyEnabled)
+        {
+            ref<uint8>(0x37) |= 0x01;
+        }
     }
 }

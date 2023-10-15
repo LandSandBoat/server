@@ -284,6 +284,8 @@ uint32 monstrosity::GetPackedMonstrosityName(CCharEntity* PChar)
         return 0x00000000;
     }
 
+    // NOTE: Changing this 0x8000 to 0xC000 will hide the species name.
+    //     : This looks to be a quirk of the client and not intended.
     uint16 a = 0x8000 | PChar->m_PMonstrosity->Species;
     uint8  b = PChar->m_PMonstrosity->NamePrefix1;
     uint8  c = PChar->m_PMonstrosity->NamePrefix2;

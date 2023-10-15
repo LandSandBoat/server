@@ -37,14 +37,14 @@ CCharSyncPacket::CCharSyncPacket(CCharEntity* PChar)
     ref<uint32>(0x08) = PChar->id;
     // ref<uint16>(0x0C) = PChar->PFellow ? PChar->PFellow->targid : 0
 
-    ref<uint8>(0x10) = PChar->StatusEffectContainer->HasStatusEffect(EFFECT_ALLIED_TAGS) ? 2 : 0; // 0x02 - Campaign Battle, 0x04 - Level Sync
+    ref<uint8>(0x10) = PChar->StatusEffectContainer->HasStatusEffect(EFFECT_ALLIED_TAGS) ? 0x02 : 0x00; // 0x02 - Campaign Battle, 0x04 - Level Sync
 
     if (PChar->m_LevelRestriction && PChar->StatusEffectContainer->HasStatusEffect(EFFECT_LEVEL_SYNC))
     {
         if (PChar->PBattlefield == nullptr)
         {
             // Only display the level sync icon outside of BCNMs
-            ref<uint8>(0x10) |= 4;
+            ref<uint8>(0x10) |= 0x04;
         }
 
         ref<uint8>(0x26) = PChar->m_LevelRestriction;
