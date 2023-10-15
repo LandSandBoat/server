@@ -521,6 +521,7 @@ class CSpell;
 class CItemEquipment;
 class CAbilityState;
 class CAttackState;
+class CMobSkillState;
 class CWeaponSkillState;
 class CMagicState;
 class CDespawnState;
@@ -701,6 +702,7 @@ public:
     virtual void OnCastInterrupted(CMagicState&, action_t&, MSGBASIC_ID msg, bool blockedCast);
     /* Weaponskill */
     virtual void OnWeaponSkillFinished(CWeaponSkillState& state, action_t& action);
+    virtual void OnMobSkillFinished(CMobSkillState& state, action_t& action);
     virtual void OnChangeTarget(CBattleEntity* PTarget);
 
     // Used to set an action to an "interrupted" state

@@ -22,13 +22,14 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "mobskill_state.h"
 #include "ai/ai_container.h"
 #include "enmity_container.h"
+#include "entities/battleentity.h"
 #include "entities/mobentity.h"
 #include "mobskill.h"
 #include "packets/action.h"
 #include "status_effect_container.h"
 #include "utils/battleutils.h"
 
-CMobSkillState::CMobSkillState(CMobEntity* PEntity, uint16 targid, uint16 wsid)
+CMobSkillState::CMobSkillState(CBattleEntity* PEntity, uint16 targid, uint16 wsid)
 : CState(PEntity, targid)
 , m_PEntity(PEntity)
 , m_spentTP(0)

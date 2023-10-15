@@ -25,6 +25,8 @@
 
 #include "monstrosity.h"
 
+#include "ai/ai_container.h"
+
 #include "common/logging.h"
 #include "common/sql.h"
 
@@ -339,9 +341,25 @@ void monstrosity::SendFullMonstrosityUpdate(CCharEntity* PChar)
 
 void monstrosity::HandleMonsterSkillActionPacket(CCharEntity* PChar, CBasicPacket& data)
 {
-    // TODO
+    if (PChar->GetMJob() != JOB_MON)
+    {
+        return;
+    }
 
-    // TODO: Lua binding
+    if (PChar->m_PMonstrosity == nullptr)
+    {
+        return;
+    }
+
+    // uint16 other = data.ref<uint16>(0x0A); // Always 25?
+
+    uint16 targId  = data.ref<uint16>(0x08);
+    uint16 skillId = data.ref<uint16>(0x0C);
+
+    // TODO: Validate that this move is available at this level, for this species, and that
+    // we're capable of using it (state, TP, etc.).
+
+    PChar->PAI->Internal_MobSkill(targId, skillId);
 }
 
 void monstrosity::HandleEquipChangePacket(CCharEntity* PChar, CBasicPacket& data)

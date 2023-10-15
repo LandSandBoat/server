@@ -25,12 +25,12 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "mobskill.h"
 #include "state.h"
 
-class CMobEntity;
+class CBattleEntity;
 
 class CMobSkillState : public CState
 {
 public:
-    CMobSkillState(CMobEntity* PEntity, uint16 targid, uint16 wsid);
+    CMobSkillState(CBattleEntity* PEntity, uint16 targid, uint16 wsid);
 
     CMobSkill* GetSkill();
 
@@ -57,7 +57,7 @@ protected:
     void         SpendCost();
 
 private:
-    CMobEntity* const          m_PEntity;
+    CBattleEntity* const       m_PEntity;
     std::unique_ptr<CMobSkill> m_PSkill;
     time_point                 m_finishTime;
     duration                   m_castTime{};
