@@ -851,6 +851,14 @@ xi.monstrosity.teleports =
     },
 }
 
+-- NOTE: The zones in this list are not customisable, but the level caps are!
+xi.monstrosity.belligerencyCaps =
+{
+    [xi.zone.BUBURIMU_PENINSULA] = 30,
+    [xi.zone.XARCABARD]          = 60,
+    [xi.zone.ULEGUERAND_RANGE]   = 90,
+}
+
 -----------------------------------
 -- Helpers
 -----------------------------------
@@ -1141,15 +1149,19 @@ xi.monstrosity.odysseanPassageOnTrigger = function(player, npc)
     end
 
     local monSize         = 1 -- 0-index, Small, Medium, Large
-    local hasBelligerency = player:hasKeyItem(xi.ki.GLADIATORIAL_WRIT_OF_SUMMONS) and 1 or 0
+    local hasBelligerency = player:getBelligerencyFlag() and 1 or 0
 
+    -- NOTE: The list of available zones is built from the char's list of
+    -- visited zones. If you haven't visited any zones in a category it'll back
+    -- out immediately.
     -- NOTE: Param5 is not consistent, Bee has seen 0, 1, and 2 so far
     -- player:startEvent(5, 0, 0, 0, 0, 2, 0, 0, 0) -- Bee
     player:startEvent(5, 0, monSize, hasBelligerency, 0, 0, 0, 0, 0) -- Tiger
 end
 
 xi.monstrosity.odysseanPassageOnEventUpdate = function(player, csid, option, npc)
-    player:updateEvent(0, 0, 0, 0, 1, 0, 0, 0)
+    local zoneSelected = bit.rshift(option, 4)
+    player:updateEvent(xi.monstrosity.belligerencyCaps[zoneSelected], 0, 0, 0, 1, 0, 0, 0)
 end
 
 xi.monstrosity.odysseanPassageOnEventFinish = function(player, csid, option, npc)
