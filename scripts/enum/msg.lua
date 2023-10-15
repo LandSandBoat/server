@@ -375,6 +375,9 @@ xi.msg.basic =
     -- TRUST & ALTER EGO
     TRUST_NO_CAST_TRUST     = 700,  -- You are unable to use Trust magic at this time.
     TRUST_NO_CALL_AE        = 717,  -- You cannot call forth alter egos here.
+
+    -- Monstrosity
+    FERETORY_COUNTDOWN = 679, -- <actor> will return to the Feretory in <n>
 }
 
 -- Used to modify certain basic messages.

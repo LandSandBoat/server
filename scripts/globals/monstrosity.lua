@@ -1067,6 +1067,43 @@ xi.monstrosity.onMonstrosityUpdate = function(player, data)
 end
 
 -----------------------------------
+-- Relinquish
+-----------------------------------
+
+xi.monstrosity.relinquishSteps =
+{
+    [0] = function(player)
+        player:messageBasic(xi.msg.basic.FERETORY_COUNTDOWN, 0, 4)
+    end,
+    [1] = function(player)
+        player:messageBasic(xi.msg.basic.FERETORY_COUNTDOWN, 0, 3)
+    end,
+    [2] = function(player)
+        player:messageBasic(xi.msg.basic.FERETORY_COUNTDOWN, 0, 2)
+    end,
+    [3] = function(player)
+        player:messageBasic(xi.msg.basic.FERETORY_COUNTDOWN, 0, 1)
+    end,
+    [4] = function(player)
+        player:setPos(0, 0, 0, 0, xi.zone.FERETORY)
+    end,
+}
+
+xi.monstrosity.relinquishFuncBody = function(player)
+    -- TODO: Make this countdown interruptable
+    player:timer(1000, function(playerArg)
+        local step = utils.clamp(playerArg:getLocalVar('RELINQUISH_COUNTDOWN'), 0, 4)
+        xi.monstrosity.relinquishSteps[step](playerArg)
+        playerArg:setLocalVar('RELINQUISH_COUNTDOWN', step + 1)
+        xi.monstrosity.relinquishFuncBody(playerArg)
+    end)
+end
+
+xi.monstrosity.relinquishOnAbility = function(player, target, ability)
+    xi.monstrosity.relinquishFuncBody(player)
+end
+
+-----------------------------------
 -- Debug
 -----------------------------------
 
