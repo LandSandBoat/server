@@ -1051,7 +1051,6 @@ xi.regime.clearRegimeVars = function(player)
     player:setCharVar('[regime]zone', 0)
     player:setCharVar('[regime]id', 0)
     player:setCharVar('[regime]repeat', 0)
-    player:setCharVar('[regime]lastReward', 0)
 
     for i = 1, 4 do
         player:setCharVar('[regime]needed' .. i, 0)
@@ -1451,6 +1450,9 @@ xi.regime.checkRegime = function(player, mob, regimeId, index, regimeType)
         reward = math.floor(reward * avgCapLevel / avgMobLevel)
     end
 
+    -- Preserve baseReward amount for CW EXP
+    local baseReward = reward
+
     -- prowess buffs from completing Grounds regimes
     if regimeType == xi.regime.type.GROUNDS then
         addGovProwessBonusEffect(player)
@@ -1459,7 +1461,6 @@ xi.regime.checkRegime = function(player, mob, regimeId, index, regimeType)
         if player:hasStatusEffect(xi.effect.PROWESS) then
             -- increase reward based on number of clears. hard caps at 2x base reward.
             local govClears  = player:getStatusEffect(xi.effect.PROWESS):getPower()
-            local baseReward = reward
 
             reward = reward * (100 + (govClears * 4)) / 100
             reward = utils.clamp(reward, 0, baseReward * 2)
@@ -1492,12 +1493,35 @@ xi.regime.checkRegime = function(player, mob, regimeId, index, regimeType)
         player:messageBasic(xi.msg.basic.FOV_OBTAINS_TABS, tabs, player:getCurrency('valor_point'))
 
         player:setCharVar('[regime]lastReward', vanadielEpoch)
+
+        if
+            player:isCrystalWarrior() or
+            player:isClassicMode()
+        then
+            player:setCharVar("[regime]repeatedToday", 0)
+        end
     end
 
     -- Award EXP for page completion
     -- Player must be equal or greater than REGIME_REWARD_THRESHOLD levels below the minimum suggested level
     if player:getMainLvl() >= math.max(1, page[5] - xi.settings.main.REGIME_REWARD_THRESHOLD) then
-        player:addExp(reward * xi.settings.main.BOOK_EXP_RATE)
+        if
+            player:isCrystalWarrior() or
+            player:isClassicMode()
+        then
+            local completions = player:getCharVar("[regime]repeatedToday")
+
+            if completions > 0 then
+                baseReward = math.ceil(baseReward * (.85 ^ completions))
+                player:PrintToPlayer(string.format("You receive reduced experience (%u time(s) completed today)", completions), xi.msg.channel.SYSTEM_3)
+            end
+
+            player:setCharVar("[regime]repeatedToday", completions + 1)
+
+            player:addExp(baseReward * xi.settings.main.BOOK_EXP_RATE)
+        else
+            player:addExp(reward * xi.settings.main.BOOK_EXP_RATE)
+        end
     end
 
     -- repeating regimes
