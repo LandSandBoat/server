@@ -599,20 +599,11 @@ void monstrosity::HandleDeathMenu(CCharEntity* PChar, uint8 type)
         return;
     }
 
-    // remove weakness on homepoint
-    // PChar->StatusEffectContainer->DelStatusEffectSilent(EFFECT_WEAKNESS);
-    // PChar->StatusEffectContainer->DelStatusEffectSilent(EFFECT_LEVEL_SYNC);
-
-    PChar->SetDeathTimestamp(0);
-
     PChar->health.hp = PChar->GetMaxHP();
     PChar->health.mp = PChar->GetMaxMP();
-
-    PChar->status    = STATUS_TYPE::DISAPPEAR;
     PChar->animation = ANIMATION_NONE;
-    PChar->updatemask |= UPDATE_HP;
 
-    PChar->clearPacketList();
+    PChar->updatemask |= UPDATE_HP;
 
     // Monstrosity death menu:
     // 2: Retry
@@ -623,6 +614,18 @@ void monstrosity::HandleDeathMenu(CCharEntity* PChar, uint8 type)
     }
     else if (type == 2)
     {
+        // TODO: Pick a location from the starting points list
+
+        PChar->loc.p.x = 0.0f;
+        PChar->loc.p.y = 0.0f;
+        PChar->loc.p.z = 0.0f;
+
+        PChar->SetDeathTimestamp(0);
+
+        PChar->status = STATUS_TYPE::DISAPPEAR;
+
+        PChar->clearPacketList();
+
         // Restart this zone with Gestation effect
         PChar->loc.destination = PChar->loc.zone->GetID();
         charutils::SendToZone(PChar, 2, zoneutils::GetZoneIPP(PChar->loc.destination));

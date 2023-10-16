@@ -43,7 +43,7 @@ quest.sections =
     {
         check = function(player, questVars, vars)
             return quest:getVar(player, 'Timer') <= VanadielUniqueDay() and
-                not xi.monstrosity.hasUnlockedSpecies(xi.monstrosity.species.BEE)
+                not xi.monstrosity.hasUnlockedSpecies(player, xi.monstrosity.species.BEE)
         end,
 
         [xi.zone.FERETORY] =

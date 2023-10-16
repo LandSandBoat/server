@@ -1256,7 +1256,7 @@ xi.monstrosity.odysseanPassageOnEventFinish = function(player, csid, option, npc
                     zoneSelected
                 )
             else
-                print('Monstrosity Teleport - No Valid Entries for Zone' .. zoneSelected .. '. Setting pos to (0, 0, 0)!')
+                print('Monstrosity Teleport - No Valid Entries for Zone ' .. zoneSelected .. '. Setting pos to (0, 0, 0)!')
                 player:setPos(0, 0, 0, 0, zoneSelected)
             end
         end

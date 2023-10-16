@@ -2,7 +2,13 @@
 -- Monstrosity
 -----------------------------------
 -- Log ID: 4, Quest ID: 34
--- Suspicious Hume : !pos -491.817 24.988 -618.552 109
+-- Suspicious Hume     : !pos -491.817 24.988 -618.552 109
+-- Suspicious Elvaan   : !pos 82.217 -0.199 42.682 231
+-- Suspicious Galka    : !pos 81.610 8.499 -229.065 236
+-- Suspicious Tarutaru : !pos 221.286 -12.000 225.311 241
+-- Rabbit Hide         : !additem 856
+-- Lizard Tail         : !additem 926
+-- Two-leaf Mandy Bud  : !additem 4368
 -----------------------------------
 
 local quest = Quest:new(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.MONSTROSITY)
@@ -170,7 +176,7 @@ quest.sections =
             {
                 [2] = function(player, csid, option, npc)
                     if option == 1 then
-                        -- TODO: Give monstrosity things here or earlier, and wire up this update
+                        -- TODO: Character appearance has to be encoded here to make the CS show the right character
                         player:updateEvent(7, 10, 2, 1024, 2, 0, 0, 0)
                     end
                 end,
