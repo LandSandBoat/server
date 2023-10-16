@@ -33,7 +33,7 @@ INSERT INTO `monstrosity_species` VALUES (3, 3, "Tiger", 1, 1, 1, 0x0134); -- TO
 INSERT INTO `monstrosity_species` VALUES (3, 261, "Legendary Tiger", 1, 6, 1, 0x0135); -- TODO: Look guessed not capped
 INSERT INTO `monstrosity_species` VALUES (3, 262, "Smilodon (Tiger)", 1, 1, 1, 0x08C8); -- TODO: Look guessed not capped
 
-INSERT INTO `monstrosity_species` VALUES (4, 4, "Sheep", 1, 1, 1, 0x0154); -- TODO: Look guessed not capped
+INSERT INTO `monstrosity_species` VALUES (4, 4, "Sheep", 1, 1, 1, 0x0154);
 INSERT INTO `monstrosity_species` VALUES (4, 263, "Karakul (Sheep)", 1, 1, 1, 0x0951); -- TODO: Look guessed not capped
 
 INSERT INTO `monstrosity_species` VALUES (5, 5, "Ram (Sheep)", 1, 1, 2, 0x0000); -- TODO
@@ -59,11 +59,11 @@ INSERT INTO `monstrosity_species` VALUES (12, 269, "Orthrus (Cerberus)", 1, 4, 2
 INSERT INTO `monstrosity_species` VALUES (13, 13, "Gnole", 2, 2, 1, 0x0000); -- TODO
 INSERT INTO `monstrosity_species` VALUES (13, 270, "Bipedal Gnole", 2, 2, 1, 0x0000); -- TODO
 
-INSERT INTO `monstrosity_species` VALUES (15, 15, "Funguar", 1, 1, 0, 0x0000); -- TODO
+INSERT INTO `monstrosity_species` VALUES (15, 15, "Funguar", 1, 1, 0, 0x0178);
 INSERT INTO `monstrosity_species` VALUES (15, 271, "Coppercap (Funguar)", 1, 1, 0, 0x0000); -- TODO
 
-INSERT INTO `monstrosity_species` VALUES (16, 16, "Treant Sapling", 1, 1, 0, 0x0000); -- TODO
-INSERT INTO `monstrosity_species` VALUES (16, 272, "Treant", 1, 4, 2, 0x0000); -- TODO
+INSERT INTO `monstrosity_species` VALUES (16, 16, "Treant Sapling", 1, 1, 0, 0x0188);
+INSERT INTO `monstrosity_species` VALUES (16, 272, "Treant", 1, 4, 2, 0x0B3C);
 INSERT INTO `monstrosity_species` VALUES (16, 273, "Flowering Treant", 1, 4, 2, 0x0000); -- TODO
 INSERT INTO `monstrosity_species` VALUES (16, 274, "Scarlet-tinged Treant", 1, 4, 2, 0x0000); -- TODO
 INSERT INTO `monstrosity_species` VALUES (16, 275, "Barren Treant", 1, 4, 2, 0x0000); -- TODO
@@ -71,7 +71,7 @@ INSERT INTO `monstrosity_species` VALUES (16, 276, "Necklaced Treant", 1, 4, 2, 
 
 INSERT INTO `monstrosity_species` VALUES (17, 17, "Morbol", 1, 1, 2, 0x017C);
 INSERT INTO `monstrosity_species` VALUES (17, 277, "Pygmy Morbol", 1, 1, 1, 0x0950);
-INSERT INTO `monstrosity_species` VALUES (17, 278, "Scarce Morbol", 1, 1, 2, 0x0000); -- TODO
+INSERT INTO `monstrosity_species` VALUES (17, 278, "Scarce Morbol", 1, 1, 2, 0x00017D);
 INSERT INTO `monstrosity_species` VALUES (17, 279, "Ameretat (Morbol)", 1, 1, 2, 0x0000); -- TODO
 INSERT INTO `monstrosity_species` VALUES (17, 280, "Purbol (Morbol)", 1, 4, 2, 0x0000); -- TODO
 
@@ -94,13 +94,13 @@ INSERT INTO `monstrosity_species` VALUES (21, 21, "Goobbue", 1, 1, 2, 0x0000); -
 INSERT INTO `monstrosity_species` VALUES (22, 22, "Rafflesia", 8, 1, 1, 0x0000); -- TODO
 INSERT INTO `monstrosity_species` VALUES (22, 289, "Mitrastema (Rafflesia)", 8, 4, 1, 0x0000); -- TODO
 
-INSERT INTO `monstrosity_species` VALUES (23, 23, "Panopt", 4, 4, 0, 0x0000); -- TODO
+INSERT INTO `monstrosity_species` VALUES (23, 23, "Panopt", 4, 4, 0, 0x0205);
 
-INSERT INTO `monstrosity_species` VALUES (27, 27, "Bee", 1, 1, 0, 0x0110); -- TODO: Look guessed not capped
-INSERT INTO `monstrosity_species` VALUES (27, 290, "Vermillion and Onyx Bee", 1, 5, 0, 0x0111); -- TODO: Look guessed not capped
-INSERT INTO `monstrosity_species` VALUES (27, 291, "Zaffre Bee", 1, 4, 0, 0x0000); -- TODO
+INSERT INTO `monstrosity_species` VALUES (27, 27, "Bee", 1, 1, 0, 0x0110);
+INSERT INTO `monstrosity_species` VALUES (27, 290, "Vermillion and Onyx Bee", 1, 5, 0, 0x0111);
+INSERT INTO `monstrosity_species` VALUES (27, 291, "Zaffre Bee", 1, 4, 0, 0x0790);
 
-INSERT INTO `monstrosity_species` VALUES (28, 28, "Beetle", 7, 7, 0, 0x0000); -- TODO
+INSERT INTO `monstrosity_species` VALUES (28, 28, "Beetle", 7, 7, 0, 0x0198);
 INSERT INTO `monstrosity_species` VALUES (28, 292, "Onyx Beetle", 7, 4, 0, 0x0000); -- TODO
 INSERT INTO `monstrosity_species` VALUES (28, 293, "Gamboge Beetle", 7, 5, 0, 0x0000); -- TODO
 
@@ -109,7 +109,7 @@ INSERT INTO `monstrosity_species` VALUES (29, 294, "Eruca (Crawler)", 1, 5, 1, 0
 INSERT INTO `monstrosity_species` VALUES (29, 295, "Emerald Crawler", 3, 4, 1, 0x0000); -- TODO
 INSERT INTO `monstrosity_species` VALUES (29, 296, "Pygmy Emerald Crawler", 3, 4, 0, 0x0000); -- TODO
 
-INSERT INTO `monstrosity_species` VALUES (30, 30, "Fly", 1, 1, 1, 0x0000); -- TODO
+INSERT INTO `monstrosity_species` VALUES (30, 30, "Fly", 1, 1, 1, 0x01C0);
 INSERT INTO `monstrosity_species` VALUES (30, 297, "Vermillion Fly", 1, 5, 1, 0x0000); -- TODO
 
 INSERT INTO `monstrosity_species` VALUES (31, 31, "Scorpion", 1, 1, 1, 0x0000); -- TODO
@@ -141,10 +141,10 @@ INSERT INTO `monstrosity_species` VALUES (37, 309, "Gold Ladybug", 6, 5, 0, 0x00
 INSERT INTO `monstrosity_species` VALUES (38, 38, "Gnat", 1, 1, 0, 0x0000); -- TODO
 INSERT INTO `monstrosity_species` VALUES (38, 310, "Midge (Gnat)", 1, 1, 0, 0x0000); -- TODO
 
-INSERT INTO `monstrosity_species` VALUES (43, 43, "Lizard", 1, 1, 0, 0x0148); -- TODO
-INSERT INTO `monstrosity_species` VALUES (43, 315, "Ashen Lizard", 1, 4, 0, 0x0149); -- TODO: Look guessed not capped
+INSERT INTO `monstrosity_species` VALUES (43, 43, "Lizard", 1, 1, 0, 0x0148);
+INSERT INTO `monstrosity_species` VALUES (43, 315, "Ashen Lizard", 1, 4, 0, 0x0149);
 
-INSERT INTO `monstrosity_species` VALUES (44, 44, "Raptor", 1, 1, 1, 0x0000); -- TODO
+INSERT INTO `monstrosity_species` VALUES (44, 44, "Raptor", 1, 1, 1, 0x013C);
 INSERT INTO `monstrosity_species` VALUES (44, 316, "Emerald Raptor", 1, 1, 1, 0x0000); -- TODO
 INSERT INTO `monstrosity_species` VALUES (44, 317, "Vermillion Raptor", 1, 1, 1, 0x0000); -- TODO
 
@@ -153,13 +153,13 @@ INSERT INTO `monstrosity_species` VALUES (45, 318, "Pygmy Adamantoise", 1, 1, 1,
 INSERT INTO `monstrosity_species` VALUES (45, 319, "Legendary Adamantoise", 1, 1, 2, 0x0000); -- TODO
 INSERT INTO `monstrosity_species` VALUES (45, 320, "Ferromantoise (Adamantoise)", 1, 1, 2, 0x0000); -- TODO
 
-INSERT INTO `monstrosity_species` VALUES (46, 46, "Bugard", 1, 1, 2, 0x0000); -- TODO
-INSERT INTO `monstrosity_species` VALUES (46, 321, "Abyssobugard (Bugard)", 1, 1, 2, 0x0000); -- TODO
+INSERT INTO `monstrosity_species` VALUES (46, 46, "Bugard", 1, 1, 2, 0x0547);
+INSERT INTO `monstrosity_species` VALUES (46, 321, "Abyssobugard (Bugard)", 1, 1, 2, 0x0548);
 
 INSERT INTO `monstrosity_species` VALUES (47, 47, "Eft", 1, 1, 0, 0x0000); -- TODO
 INSERT INTO `monstrosity_species` VALUES (47, 322, "Tarichuk (Eft)", 1, 1, 0, 0x0000); -- TODO
 
-INSERT INTO `monstrosity_species` VALUES (48, 48, "Wivre", 1, 1, 2, 0x0000); -- TODO
+INSERT INTO `monstrosity_species` VALUES (48, 48, "Wivre", 1, 1, 2, 0x08B9);
 INSERT INTO `monstrosity_species` VALUES (48, 323, "Unusual Wivre", 1, 1, 2, 0x0000); -- TODO
 
 INSERT INTO `monstrosity_species` VALUES (49, 49, "Peiste", 1, 1, 1, 0x0000); -- TODO
@@ -182,17 +182,17 @@ INSERT INTO `monstrosity_species` VALUES (57, 57, "Sandworm", 1, 1, 2, 0x0000); 
 INSERT INTO `monstrosity_species` VALUES (57, 334, "Pygmy Sandworm", 1, 1, 1, 0x0000); -- TODO
 INSERT INTO `monstrosity_species` VALUES (57, 335, "Gigaworm (Sandworm)", 1, 1, 2, 0x0000); -- TODO
 
-INSERT INTO `monstrosity_species` VALUES (58, 58, "Leech", 1, 1, 0, 0x0000); -- TODO
-INSERT INTO `monstrosity_species` VALUES (58, 336, "Azure Leech", 1, 1, 0, 0x0000); -- TODO
+INSERT INTO `monstrosity_species` VALUES (58, 58, "Leech", 1, 1, 0, 0x0114);
+INSERT INTO `monstrosity_species` VALUES (58, 336, "Azure Leech", 1, 1, 0, 0x0115);
 INSERT INTO `monstrosity_species` VALUES (58, 337, "Obdella (Leech)", 1, 1, 0, 0x0000); -- TODO
 
-INSERT INTO `monstrosity_species` VALUES (60, 60, "Crab", 1, 1, 0, 0x0164); -- TODO: Look guessed not capped
+INSERT INTO `monstrosity_species` VALUES (60, 60, "Crab", 1, 1, 0, 0x0164);
 INSERT INTO `monstrosity_species` VALUES (60, 340, "Vermillion Crab", 1, 1, 0, 0x0165); -- TODO: Look guessed not capped
 INSERT INTO `monstrosity_species` VALUES (60, 341, "Basket-burdened Crab", 1, 1, 0, 0x0000); -- TODO
 INSERT INTO `monstrosity_species` VALUES (60, 342, "Vermillion Basket-burdened Crab", 1, 1, 0, 0x0000); -- TODO
 INSERT INTO `monstrosity_species` VALUES (60, 343, "Porter Crab (Crab)", 1, 1, 0, 0x0000); -- TODO
 
-INSERT INTO `monstrosity_species` VALUES (61, 61, "Pugil", 1, 1, 0, 0x0000); -- TODO
+INSERT INTO `monstrosity_species` VALUES (61, 61, "Pugil", 1, 1, 0, 0x015C);
 INSERT INTO `monstrosity_species` VALUES (61, 344, "Jagil (Pugil)", 1, 1, 0, 0x0000); -- TODO
 
 INSERT INTO `monstrosity_species` VALUES (62, 62, "Sea Monk", 1, 1, 1, 0x0000); -- TODO
@@ -238,9 +238,9 @@ INSERT INTO `monstrosity_species` VALUES (76, 76, "Amphiptere", 1, 4, 2, 0x0000)
 INSERT INTO `monstrosity_species` VALUES (76, 360, "Sanguiptere (Amphiptere)", 4, 1, 2, 0x0000); -- TODO
 
 INSERT INTO `monstrosity_species` VALUES (126, 254, "Astoltian Slime", 1, 1, 0, 0x0B41);
-INSERT INTO `monstrosity_species` VALUES (126, 508, "Astoltian She-Slime", 1, 1, 0, 0x0B5B); -- TODO: Look guessed not capped
+INSERT INTO `monstrosity_species` VALUES (126, 508, "Astoltian She-Slime", 1, 1, 0, 0x0B5B);
 INSERT INTO `monstrosity_species` VALUES (126, 509, "Astoltian Metal Slime", 4, 1, 0, 0x0B5C);
 
-INSERT INTO `monstrosity_species` VALUES (127, 255, "Eorzean Spriggan", 1, 4, 0, 0x0B42); -- TODO: Look guessed not capped
-INSERT INTO `monstrosity_species` VALUES (127, 510, "Eorzean Spriggan.C", 1, 4, 0, 0x0B5D); -- TODO: Look guessed not capped
-INSERT INTO `monstrosity_species` VALUES (127, 511, "Eorzean Spriggan.G", 4, 1, 0, 0x0B5E); -- TODO: Look guessed not capped
+INSERT INTO `monstrosity_species` VALUES (127, 255, "Eorzean Spriggan", 1, 4, 0, 0x0B42);
+INSERT INTO `monstrosity_species` VALUES (127, 510, "Eorzean Spriggan.C", 1, 4, 0, 0x0B5D);
+INSERT INTO `monstrosity_species` VALUES (127, 511, "Eorzean Spriggan.G", 4, 1, 0, 0x0B5E);
