@@ -252,7 +252,7 @@ namespace zoneutils
 
     /************************************************************************
      *                                                                       *
-     *  Uploading a list of NPCs to the specified zone                       *
+     *  Upload a list of NPCs to the specified zone                          *
      *                                                                       *
      ************************************************************************/
 
@@ -378,7 +378,7 @@ namespace zoneutils
 
     /************************************************************************
      *                                                                       *
-     *  Uploading a list of MOBs to the specified zone                       *
+     *  Upload a list of MOBs to the specified zone                          *
      *                                                                       *
      ************************************************************************/
 
@@ -547,7 +547,6 @@ namespace zoneutils
                                 PMob->HPscale = sql->GetFloatData(65);
                                 PMob->MPscale = sql->GetFloatData(66);
 
-                                // TODO: Remove me
                                 // Check if we should be looking up scripts for this mob
                                 // PMob->m_HasSpellScript = (uint8)sql->GetIntData(67);
 
@@ -680,7 +679,7 @@ namespace zoneutils
 
     /************************************************************************
      *                                                                       *
-     *  Creates a new zone.                                                  *
+     *  Create a new zone.                                                   *
      *                                                                       *
      ************************************************************************/
 
@@ -711,14 +710,14 @@ namespace zoneutils
 
     /************************************************************************
      *                                                                       *
-     *  Инициализация зон. Возрождаем всех монстров при старте сервера.      *
+     *  Initialization of zones. Revive all monsters at server start.        *
      *                                                                       *
      ************************************************************************/
 
     void LoadZoneList()
     {
         TracyZoneScoped;
-        g_PTrigger = new CNpcEntity(); // нужно в конструкторе CNpcEntity задавать модель по умолчанию
+        g_PTrigger = new CNpcEntity(); // you need to set the default model in the CNpcEntity constructor
 
         std::vector<uint16> zones;
         const char*         query = "SELECT zoneid FROM zone_settings WHERE IF(%d <> 0, '%s' = zoneip AND %d = zoneport, TRUE);";
@@ -804,7 +803,7 @@ namespace zoneutils
 
     /************************************************************************
      *                                                                       *
-     *  Returns current region from zone id                                  *
+     *  Return current region from zone id                                   *
      *                                                                       *
      ************************************************************************/
 
@@ -1148,7 +1147,7 @@ namespace zoneutils
 
     /************************************************************************
      *                                                                       *
-     *  Освобождаем список зон                                               *
+     *  Clear (free up) the list of zones                                    *
      *                                                                       *
      ************************************************************************/
 
@@ -1192,7 +1191,7 @@ namespace zoneutils
 
     /************************************************************************
      *                                                                       *
-     *  Checks whether or not the zone is a residential area                 *
+     *  Check whether or not the zone is a residential area                  *
      *                                                                       *
      ************************************************************************/
 

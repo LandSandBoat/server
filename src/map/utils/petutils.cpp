@@ -62,11 +62,6 @@ std::vector<Pet_t*> g_PPetList;
 
 namespace petutils
 {
-    /************************************************************************
-     *                                                                      *
-     *  Загружаем список прототипов питомцев                                    *
-     *                                                                      *
-     ************************************************************************/
 
     void LoadPetList()
     {
@@ -186,12 +181,6 @@ namespace petutils
             }
         }
     }
-
-    /************************************************************************
-     *                                                                      *
-     *  Освобождаем список прототипов питомцев                              *
-     *                                                                      *
-     ************************************************************************/
 
     void FreePetList()
     {
@@ -652,7 +641,7 @@ namespace petutils
                   (grade::GetHPScale(grade, scaleOver30Column) * mainLevelOver30) + (grade::GetHPScale(grade, scaleOver60Column) * mainLevelOver60To75) +
                   (grade::GetHPScale(grade, scaleOver75Column) * mainLevelOver75);
 
-        // Расчет бонусных HP
+        // Bonus HP calculation
         bonusStat = (mainLevelOver10 + mainLevelOver50andUnder60) * 2;
         if (PPet->m_PetID == PETID_ODIN || PPet->m_PetID == PETID_ALEXANDER)
         {
@@ -1094,12 +1083,6 @@ namespace petutils
         }
     }
 
-    /************************************************************************
-     *                                                                      *
-     *                                                                      *
-     *                                                                      *
-     ************************************************************************/
-
     void SpawnPet(CBattleEntity* PMaster, uint32 PetID, bool spawningFromZone)
     {
         if (PMaster->PPet != nullptr)
@@ -1332,12 +1315,6 @@ namespace petutils
         PChar->pushPacket(new CCharAbilitiesPacket(PChar));
         PChar->pushPacket(new CPetSyncPacket(PChar));
     }
-
-    /************************************************************************
-     *                                                                      *
-     *                                                                      *
-     *                                                                      *
-     ************************************************************************/
 
     void DespawnPet(CBattleEntity* PMaster)
     {

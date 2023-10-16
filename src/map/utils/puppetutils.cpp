@@ -619,7 +619,7 @@ namespace puppetutils
                 uint8  SkillAmount = 1;
                 uint8  tier        = std::min(1 + (Diff / 5), 5);
 
-                for (uint8 i = 0; i < 4; ++i) // 1 + 4 возможных дополнительных (максимум 5)
+                for (uint8 i = 0; i < 4; ++i) // 1 + 4 possible additional ones (maximum 5)
                 {
                     random = xirand::GetRandomNumber(1.);
 
