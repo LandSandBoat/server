@@ -69,8 +69,8 @@ xi.settings.main =
     -- VoidWalker
     ENABLE_VOIDWALKER = 1,
 
-    -- Monstrosity
-    ENABLE_MONSTROSITY               = 1,
+    -- Monstrosity (Heavily in development, use at your own risk!)
+    ENABLE_MONSTROSITY               = 0,
     MONSTROSITY_INFAMY_RATIO         = 0.1, -- (float) The ratio of exp gained to infamy gained on defeating a mob.
     MONSTROSITY_INFAMY_MESSAGING     = 0,   -- Show a message when you gain infamy.
     MONSTROSITY_TELEPORT_TO_FERETORY = 0,   -- Return to Feretory instead of the zone where you entered Feretory when Relinquishing or after death.
