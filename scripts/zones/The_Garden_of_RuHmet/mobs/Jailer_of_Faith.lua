@@ -117,6 +117,8 @@ entity.onMobDeath = function(mob)
 end
 
 entity.onMobDespawn = function(mob)
+    local qmFaith = GetNPCByID(ID.npc.QM_JAILER_OF_FAITH)
+    qmFaith:setLocalVar("nextMove", os.time() + 1800 + xi.settings.main.FORCE_SPAWN_QM_RESET_TIME) -- 30 minutes from the time the QM respawns
     -- Move QM to random location
     GetNPCByID(ID.npc.QM_JAILER_OF_FAITH):setPos(unpack(ID.npc.QM_JAILER_OF_FAITH_POS[math.random(1, 5)]))
 end
