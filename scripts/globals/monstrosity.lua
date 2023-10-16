@@ -1079,7 +1079,10 @@ xi.monstrosity.onMonstrosityReturnToEntrance = function(player)
 
     -- TODO: Sanity check
 
-    -- TODO: Check settings to see if we should go to Feretory or not
+    for _, effect in pairs(player:getStatusEffects()) do
+        player:delStatusEffectSilent(effect:getEffectType())
+    end
+
     if xi.settings.main.MONSTROSITY_TELEPORT_TO_FERETORY == 1 then
         if player:getZoneID() ~= xi.zone.FERETORY then
             player:setPos(-358, -3.4, -440, 64, xi.zone.FERETORY)
@@ -1213,10 +1216,6 @@ xi.monstrosity.odysseanPassageOnTrade = function(player, npc, trade)
 end
 
 xi.monstrosity.odysseanPassageOnTrigger = function(player, npc)
-    if xi.settings.main.ENABLE_MONSTROSITY ~= 1 then
-        return
-    end
-
     local monSize         = player:getMonstrositySize()
     local hasBelligerency = player:getBelligerencyFlag() and 1 or 0
 
@@ -1282,7 +1281,21 @@ xi.monstrosity.feretoryOnZoneIn = function(player, prevZone)
         player:changeJob(xi.job.MON)
     end
 
+    for _, effect in pairs(player:getStatusEffects()) do
+        player:delStatusEffectSilent(effect:getEffectType())
+    end
+
     return cs
+end
+
+xi.monstrosity.feretoryOnZoneOut = function(player)
+    -- Mark all status effects so they'll survive zoning
+    -- (there are some routines that will force them off anyway)
+    for _, effect in pairs(player:getStatusEffects()) do
+        print(effect)
+        effect:delEffectFlag(xi.effectFlag.ON_ZONE)
+        effect:delEffectFlag(xi.effectFlag.LOGOUT)
+    end
 end
 
 xi.monstrosity.feretoryOnEventUpdate = function(player, csid, option, npc)
