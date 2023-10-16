@@ -60,6 +60,11 @@ namespace monstrosity
         std::array<uint8, 32>  variants{ 0 };
 
         bool Belligerency;
+
+        position_t EntryPos{};
+        uint16     EntryZoneId;
+        uint8      EntryMainJob;
+        uint8      EntrySubJob;
     };
 
     void LoadStaticData();

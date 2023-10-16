@@ -288,6 +288,7 @@ namespace luautils
     auto GetMonstrosityLuaTable(CCharEntity* PChar) -> sol::table;
     void SetMonstrosityLuaTable(CCharEntity* PChar, sol::table data);
     void OnMonstrosityUpdate(CCharEntity* PChar);
+    void OnMonstrosityReturnToEntrance(CCharEntity* PChar);
 
     int32 OnAbilityCheck(CBaseEntity* PChar, CBaseEntity* PTarget, CAbility* PAbility, CBaseEntity** PMsgTarget);
     int32 OnPetAbility(CBaseEntity* PTarget, CBaseEntity* PMob, CMobSkill* PMobSkill, CBaseEntity* PPetMaster, action_t* action);

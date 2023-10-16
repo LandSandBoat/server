@@ -1066,6 +1066,33 @@ xi.monstrosity.onMonstrosityUpdate = function(player, data)
     -- TODO: Handle level-based variants here
 end
 
+xi.monstrosity.onMonstrosityReturnToEntrance = function(player)
+    local data   = player:getMonstrosityData()
+    local x      = data.entry_x;
+    local y      = data.entry_y;
+    local z      = data.entry_z;
+    local rot    = data.entry_rot;
+    local zoneId = data.entry_zone_id;
+    local mjob   = data.entry_mjob;
+    local sjob   = data.entry_sjob;
+
+    -- TODO: Sanity check
+
+    -- TODO: Check settings to see if we should go to Feretory or not
+    if xi.settings.main.MONSTROSITY_TELEPORT_TO_FERETORY == 1 then
+        if player:getZoneID() ~= xi.zone.FERETORY then
+            player:setPos(-358, -3.4, -440, 64, xi.zone.FERETORY)
+            return
+        end
+
+        -- Otherwise fallthrough and exit as normal
+    end
+
+    player:changeJob(mjob)
+    player:changesJob(sjob)
+    player:setPos(x, y, z, rot, zoneId)
+end
+
 -----------------------------------
 -- Relinquish
 -----------------------------------
@@ -1089,7 +1116,7 @@ xi.monstrosity.relinquishSteps =
     end,
 
     [4] = function(player)
-        player:setPos(0, 0, 0, 0, xi.zone.FERETORY)
+        xi.monstrosity.onMonstrosityReturnToEntrance(player)
     end,
 }
 
@@ -1211,8 +1238,7 @@ xi.monstrosity.odysseanPassageOnEventFinish = function(player, csid, option, npc
 
     if eventOption == 1 then
         if zoneSelected == 0 then
-            -- TODO: Return to Zone the Player entered Feretory from
-            utils.unused()
+            xi.monstrosity.onMonstrosityReturnToEntrance(player)
         else
             if xi.monstrosity.teleports[zoneSelected] then
                 local teleportPos = xi.monstrosity.teleports[zoneSelected][math.random(1, #xi.monstrosity.teleports[zoneSelected])]

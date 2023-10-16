@@ -6446,6 +6446,38 @@ auto CLuaBaseEntity::getMonstrositySize() -> uint8
     return PChar->m_PMonstrosity->Size;
 }
 
+void CLuaBaseEntity::setMonstrosityEntryData(float x, float y, float z, uint8 rot, uint16 zoneId, uint8 mjob, uint8 sjob)
+{
+    auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity);
+    if (PChar == nullptr)
+    {
+        return;
+    }
+
+    bool startsWithMonstrosityData = PChar->m_PMonstrosity != nullptr;
+    if (!startsWithMonstrosityData)
+    {
+        monstrosity::ReadMonstrosityData(PChar);
+    }
+
+    PChar->m_PMonstrosity->EntryPos.x        = x;
+    PChar->m_PMonstrosity->EntryPos.y        = y;
+    PChar->m_PMonstrosity->EntryPos.z        = z;
+    PChar->m_PMonstrosity->EntryPos.rotation = rot;
+    PChar->m_PMonstrosity->EntryZoneId       = zoneId;
+    PChar->m_PMonstrosity->EntryMainJob      = mjob;
+    PChar->m_PMonstrosity->EntrySubJob       = sjob;
+
+    monstrosity::WriteMonstrosityData(PChar);
+
+    // If we didn't start with Monstrosity data, we should wipe it out now so we
+    // don't change modes
+    if (!startsWithMonstrosityData)
+    {
+        PChar->m_PMonstrosity = nullptr;
+    }
+}
+
 /************************************************************************
  *  Function: getTitle()
  *  Purpose : Returns the integer value of the player's current title
@@ -17257,6 +17289,7 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("getBelligerencyFlag", CLuaBaseEntity::getBelligerencyFlag);
     SOL_REGISTER("setBelligerencyFlag", CLuaBaseEntity::setBelligerencyFlag);
     SOL_REGISTER("getMonstrositySize", CLuaBaseEntity::getMonstrositySize);
+    SOL_REGISTER("setMonstrosityEntryData", CLuaBaseEntity::setMonstrosityEntryData);
 
     // Player Titles and Fame
     SOL_REGISTER("getTitle", CLuaBaseEntity::getTitle);

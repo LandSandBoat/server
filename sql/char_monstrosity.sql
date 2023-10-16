@@ -11,5 +11,12 @@ CREATE TABLE `char_monstrosity` (
     `instincts` blob DEFAULT NULL,
     `variants` blob DEFAULT NULL,
     `belligerency` tinyint(3) unsigned NOT NULL DEFAULT 0,
+    `entry_x` float(7,3) NOT NULL DEFAULT '0.000',
+    `entry_y` float(7,3) NOT NULL DEFAULT '0.000',
+    `entry_z` float(7,3) NOT NULL DEFAULT '0.000',
+    `entry_rot` tinyint(3) unsigned NOT NULL DEFAULT '0',
+    `entry_zone_id` smallint(3) unsigned NOT NULL DEFAULT '0',
+    `entry_mjob` tinyint(2) unsigned NOT NULL DEFAULT '0',
+    `entry_sjob` tinyint(2) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`charid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;

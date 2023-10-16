@@ -3899,6 +3899,13 @@ namespace luautils
         table["monstrosityId"] = PChar->m_PMonstrosity->MonstrosityId;
         table["species"]       = PChar->m_PMonstrosity->Species;
         table["flags"]         = PChar->m_PMonstrosity->Flags;
+        table["entry_x"]       = PChar->m_PMonstrosity->EntryPos.x;
+        table["entry_y"]       = PChar->m_PMonstrosity->EntryPos.y;
+        table["entry_z"]       = PChar->m_PMonstrosity->EntryPos.z;
+        table["entry_rot"]     = PChar->m_PMonstrosity->EntryPos.rotation;
+        table["entry_zone_id"] = PChar->m_PMonstrosity->EntryZoneId;
+        table["entry_mjob"]    = PChar->m_PMonstrosity->EntryMainJob;
+        table["entry_sjob"]    = PChar->m_PMonstrosity->EntrySubJob;
 
         {
             std::size_t idx = 0;
@@ -3949,6 +3956,41 @@ namespace luautils
             PChar->m_PMonstrosity->Flags = table.get<uint16>("flags");
         }
 
+        if (table["entry_x"].valid())
+        {
+            PChar->m_PMonstrosity->EntryPos.x = table.get<float>("entry_x");
+        }
+
+        if (table["entry_y"].valid())
+        {
+            PChar->m_PMonstrosity->EntryPos.y = table.get<float>("entry_y");
+        }
+
+        if (table["entry_z"].valid())
+        {
+            PChar->m_PMonstrosity->EntryPos.z = table.get<float>("entry_z");
+        }
+
+        if (table["entry_rot"].valid())
+        {
+            PChar->m_PMonstrosity->EntryPos.rotation = table.get<uint8>("entry_rot");
+        }
+
+        if (table["entry_zone_id"].valid())
+        {
+            PChar->m_PMonstrosity->EntryZoneId = table.get<uint16>("entry_zone_id");
+        }
+
+        if (table["entry_mjob"].valid())
+        {
+            PChar->m_PMonstrosity->EntryMainJob = table.get<uint8>("entry_mjob");
+        }
+
+        if (table["entry_sjob"].valid())
+        {
+            PChar->m_PMonstrosity->EntrySubJob = table.get<uint8>("entry_sjob");
+        }
+
         if (table["levels"].valid())
         {
             for (auto const& [keyObj, valObj] : table.get<sol::table>("levels"))
@@ -3996,6 +4038,26 @@ namespace luautils
         {
             sol::error err = result;
             ShowError("luautils::OnMonstrosityUpdate: %s", err.what());
+            return;
+        }
+    }
+
+    void OnMonstrosityReturnToEntrance(CCharEntity* PChar)
+    {
+        TracyZoneScoped;
+
+        sol::function onMonstrosityReturnToEntrance = lua["xi"]["monstrosity"]["onMonstrosityReturnToEntrance"];
+        if (!onMonstrosityReturnToEntrance.valid())
+        {
+            ShowError("luautils::retuonMonstrosityReturnToEntrancernToEntrance");
+            return;
+        }
+
+        auto result = onMonstrosityReturnToEntrance(CLuaBaseEntity(PChar));
+        if (!result.valid())
+        {
+            sol::error err = result;
+            ShowError("luautils::onMonstrosityReturnToEntrance: %s", err.what());
             return;
         }
     }

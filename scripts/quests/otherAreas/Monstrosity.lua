@@ -70,6 +70,8 @@ local odysseanPassageNpc =
 
 local odysseanPassageOnEventFinish = function(player, csid, option, npc)
     if option == 1 then
+        local pos = player:getPos()
+        player:setMonstrosityEntryData(pos.x, pos.y, pos.z, pos.rot, player:getZoneID(), player:getMainJob(), player:getSubJob())
         player:setPos(-358, -3.4, -440, 64, xi.zone.FERETORY)
     end
 end

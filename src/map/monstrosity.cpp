@@ -87,6 +87,9 @@ monstrosity::MonstrosityData_t::MonstrosityData_t()
 , SubJob(JOB_WAR)     //
 , CurrentExp(0)       // No exp
 , Belligerency(false) //
+, EntryZoneId(0)      //
+, EntryMainJob(0)     //
+, EntrySubJob(0)      //
 {
     levels[1]  = 1; // Rabbit
     levels[18] = 1; // Mandragora
@@ -153,7 +156,30 @@ void monstrosity::ReadMonstrosityData(CCharEntity* PChar)
 {
     auto data = std::make_unique<MonstrosityData_t>();
 
-    auto ret = sql->Query("SELECT charid, current_monstrosity_id, current_monstrosity_species, current_monstrosity_name_prefix_1, current_monstrosity_name_prefix_2, current_exp, equip, levels, instincts, variants, belligerency FROM char_monstrosity WHERE charid = %d LIMIT 1;", PChar->id);
+    // clang-format off
+    auto ret = sql->Query("SELECT "
+                          "charid, "
+                          "current_monstrosity_id, "
+                          "current_monstrosity_species, "
+                          "current_monstrosity_name_prefix_1, "
+                          "current_monstrosity_name_prefix_2, "
+                          "current_exp, "
+                          "equip, "
+                          "levels, "
+                          "instincts, "
+                          "variants, "
+                          "belligerency, "
+                          "entry_x, "
+                          "entry_y, "
+                          "entry_z, "
+                          "entry_rot, "
+                          "entry_zone_id, "
+                          "entry_mjob, "
+                          "entry_sjob "
+                          "FROM char_monstrosity WHERE charid = %d LIMIT 1;",
+                          PChar->id);
+    // clang-format on
+
     if (ret != SQL_ERROR && sql->NumRows() != 0)
     {
         while (sql->NextRow() == SQL_SUCCESS)
@@ -173,6 +199,14 @@ void monstrosity::ReadMonstrosityData(CCharEntity* PChar)
             sql->GetBlobData(9, &data->variants);
 
             data->Belligerency = static_cast<bool>(sql->GetUIntData(10));
+
+            data->EntryPos.x        = sql->GetFloatData(11);
+            data->EntryPos.y        = sql->GetFloatData(12);
+            data->EntryPos.z        = sql->GetFloatData(13);
+            data->EntryPos.rotation = static_cast<uint8>(sql->GetUIntData(14));
+            data->EntryZoneId       = static_cast<uint16>(sql->GetUIntData(15));
+            data->EntryMainJob      = static_cast<uint8>(sql->GetUIntData(16));
+            data->EntrySubJob       = static_cast<uint8>(sql->GetUIntData(17));
 
             // Build additional data from lookups
             data->MainJob = gMonstrositySpeciesMap[data->Species].mjob;
@@ -206,7 +240,14 @@ void monstrosity::WriteMonstrosityData(CCharEntity* PChar)
                         "levels = '%s', "
                         "instincts = '%s', "
                         "variants = '%s', "
-                        "belligerency = '%d';";
+                        "belligerency = '%d', "
+                        "entry_x = '%.3f', "
+                        "entry_y = '%.3f', "
+                        "entry_z = '%.3f', "
+                        "entry_rot = '%u', "
+                        "entry_zone_id = '%d', "
+                        "entry_mjob = '%d', "
+                        "entry_sjob = '%d';";
 
     auto equipEscaped     = sql->ObjectToBlobString(&PChar->m_PMonstrosity->EquippedInstincts);
     auto levelsEscaped    = sql->ObjectToBlobString(&PChar->m_PMonstrosity->levels);
@@ -224,7 +265,14 @@ void monstrosity::WriteMonstrosityData(CCharEntity* PChar)
                levelsEscaped.c_str(),
                instinctsEscaped.c_str(),
                variantsEscaped.c_str(),
-               static_cast<uint8>(PChar->m_PMonstrosity->Belligerency));
+               static_cast<uint8>(PChar->m_PMonstrosity->Belligerency),
+               PChar->m_PMonstrosity->EntryPos.x,
+               PChar->m_PMonstrosity->EntryPos.y,
+               PChar->m_PMonstrosity->EntryPos.z,
+               PChar->m_PMonstrosity->EntryPos.rotation,
+               PChar->m_PMonstrosity->EntryZoneId,
+               PChar->m_PMonstrosity->EntryMainJob,
+               PChar->m_PMonstrosity->EntrySubJob);
 }
 
 void monstrosity::TryPopulateMonstrosityData(CCharEntity* PChar)
@@ -564,17 +612,14 @@ void monstrosity::HandleDeathMenu(CCharEntity* PChar, uint8 type)
     // 1: Cancel
     if (type == 1)
     {
-        // Return to Feretory
-        // TODO: This should return you to the Odyssean Passage you entered with, not Feretory!
-        PChar->loc.destination = ZONE_FERETORY;
+        luautils::OnMonstrosityReturnToEntrance(PChar);
     }
     else if (type == 2)
     {
         // Restart this zone with Gestation effect
         PChar->loc.destination = PChar->loc.zone->GetID();
+        charutils::SendToZone(PChar, 2, zoneutils::GetZoneIPP(PChar->loc.destination));
     }
-
-    charutils::SendToZone(PChar, 2, zoneutils::GetZoneIPP(PChar->loc.destination));
 }
 
 bool monstrosity::IsInstinctUnlocked(CCharEntity* PChar, uint16 instinct)
