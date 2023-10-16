@@ -131,27 +131,27 @@ namespace charutils
     void   AddItemToRecycleBin(CCharEntity* PChar, uint32 container, uint8 slotID, uint8 quantity);
     void   EmptyRecycleBin(CCharEntity* PChar);
 
-    bool hasKeyItem(CCharEntity* PChar, uint16 KeyItemID);    // проверяем наличие ключевого предмета
-    bool seenKeyItem(CCharEntity* PChar, uint16 KeyItemID);   // проверяем, было ли описание ключевого предмета прочитано
-    void unseenKeyItem(CCharEntity* PChar, uint16 KeyItemID); // Attempt to remove keyitem from seen list
-    void addKeyItem(CCharEntity* PChar, uint16 KeyItemID);    // добавляем ключевой предмет
-    void delKeyItem(CCharEntity* PChar, uint16 KeyItemID);    // улаляем ключевой предмет
+    bool hasKeyItem(CCharEntity* PChar, uint16 KeyItemID);    // checking the presence of a key item
+    bool seenKeyItem(CCharEntity* PChar, uint16 KeyItemID);   // checking whether the description of the key item has been read
+    void unseenKeyItem(CCharEntity* PChar, uint16 KeyItemID); // attempt to remove keyitem from seen list
+    void addKeyItem(CCharEntity* PChar, uint16 KeyItemID);    // add a key item
+    void delKeyItem(CCharEntity* PChar, uint16 KeyItemID);    // delete a key item
 
-    int32 hasSpell(CCharEntity* PChar, uint16 SpellID); // проверяем наличие заклинания
-    int32 addSpell(CCharEntity* PChar, uint16 SpellID); // добавляем заклинание
-    int32 delSpell(CCharEntity* PChar, uint16 SpellID); // улаляем заклинание
+    int32 hasSpell(CCharEntity* PChar, uint16 SpellID); // checking for the presence of a spell
+    int32 addSpell(CCharEntity* PChar, uint16 SpellID); // add a spell
+    int32 delSpell(CCharEntity* PChar, uint16 SpellID); // delete a spell
 
-    int32 hasLearnedAbility(CCharEntity* PChar, uint16 AbilityID); // проверяем наличие заклинания
-    int32 addLearnedAbility(CCharEntity* PChar, uint16 AbilityID); // добавляем заклинание
-    int32 delLearnedAbility(CCharEntity* PChar, uint16 AbilityID); // улаляем заклинание
+    int32 hasLearnedAbility(CCharEntity* PChar, uint16 AbilityID); // checking for the presence of a learned ability
+    int32 addLearnedAbility(CCharEntity* PChar, uint16 AbilityID); // add a learned ability
+    int32 delLearnedAbility(CCharEntity* PChar, uint16 AbilityID); // delete a learned ability
 
     bool hasLearnedWeaponskill(CCharEntity* PChar, uint8 wsUnlockId);
     void addLearnedWeaponskill(CCharEntity* PChar, uint8 wsUnlockId);
     void delLearnedWeaponskill(CCharEntity* PChar, uint8 wsUnlockId);
 
-    int32 hasAbility(CCharEntity* PChar, uint16 AbilityID); // проверяем наличие ключевого предмета
-    int32 addAbility(CCharEntity* PChar, uint16 AbilityID); // добавляем ключевой предмет
-    int32 delAbility(CCharEntity* PChar, uint16 AbilityID); // улаляем ключевой предмет
+    int32 hasAbility(CCharEntity* PChar, uint16 AbilityID); // checking the presence of an ability
+    int32 addAbility(CCharEntity* PChar, uint16 AbilityID); // add an ability
+    int32 delAbility(CCharEntity* PChar, uint16 AbilityID); // delete an ability
 
     int32 hasTitle(CCharEntity* PChar, uint16 Title);
     int32 addTitle(CCharEntity* PChar, uint16 Title);
@@ -170,40 +170,40 @@ namespace charutils
     int32 hasWeaponSkill(CCharEntity* PChar, uint16 WeaponSkillID); // declaration of function to check for weapon skill
     int32 delWeaponSkill(CCharEntity* PChar, uint16 WeaponSkillID); // declaration of function to delete weapon skill
 
-    void SaveCharJob(CCharEntity* PChar, JOBTYPE job); // сохраняем уровень для выбранной профессий персонажа
-    void SaveCharExp(CCharEntity* PChar, JOBTYPE job); // сохраняем опыт для выбранной профессии персонажа
-    void SaveCharEquip(CCharEntity* PChar);            // сохраняем экипировку и внешний вид персонажа
-    void SaveCharLook(CCharEntity* PChar);             // Saves a character's appearance based on style locking.
-    void SaveCharPosition(CCharEntity* PChar);         // сохраняем позицию персонажа
-    // void SaveCharLinkshells(CCharEntity* PChar);            // TODO
-    void SaveMissionsList(CCharEntity* PChar);                 // Save the missions list
-    void SaveEminenceData(CCharEntity* PChar);                 // Save Eminence Record (RoE) data
-    void SaveQuestsList(CCharEntity* PChar);                   // сохраняем список ксевтов
-    void SaveFame(CCharEntity* PChar);                         // Save area fame / reputation
-    void SaveZonesVisited(CCharEntity* PChar);                 // сохраняем посещенные зоны
-    void SaveKeyItems(CCharEntity* PChar);                     // сохраняем ключевые предметы
-    void SaveCharInventoryCapacity(CCharEntity* PChar);        // Save Character inventory capacity
-    void SaveSpell(CCharEntity* PChar, uint16 spellID);        // сохраняем выученные заклинания
-    void DeleteSpell(CCharEntity* PChar, uint16 spellID);      //
-    void SaveLearnedAbilities(CCharEntity* PChar);             // saved learned abilities (corsair rolls)
-    void SaveTitles(CCharEntity* PChar);                       // сохраняем заслуженные звания
-    void SaveCharStats(CCharEntity* PChar);                    // сохраняем флаги, текущие значения жихней, маны и профессий
-    void SaveCharGMLevel(CCharEntity* PChar);                  // saves the char's gm level and nameflags
-    void SaveMentorFlag(CCharEntity* PChar);                   // saves the char's mentor flag
-    void SaveJobMasterDisplay(CCharEntity* PChar);             // Saves the char's job master display status
-    void SaveMenuConfigFlags(CCharEntity* PChar);              // saves the char's unnamed flags
-    void SaveChatFilterFlags(CCharEntity* PChar);              // saves the char's chat filters
-    void SaveLanguages(CCharEntity* PChar);                    // saves the char's language preference
-    void SaveCharNation(CCharEntity* PChar);                   // Save the character's nation of allegiance.
-    void SaveCampaignAllegiance(CCharEntity* PChar);           // Save the character's campaign allegiance.
-    void SaveCharMoghancement(CCharEntity* PChar);             // Save the character's current moghancement
-    void SaveCharSkills(CCharEntity* PChar, uint8 skillID);    // сохраняем указанный skill персонажа
-    void SaveTeleport(CCharEntity* PChar, TELEPORT_TYPE type); // Homepoints, outposts, etc
-    void SaveDeathTime(CCharEntity* PChar);                    // Saves when this character last died.
-    void SavePlayTime(CCharEntity* PChar);                     // Saves this characters total play time.
-    bool hasMogLockerAccess(CCharEntity* PChar);               // true if have access, false otherwise.
+    void SaveCharJob(CCharEntity* PChar, JOBTYPE job); // save the level for the selected character's jobs
+    void SaveCharExp(CCharEntity* PChar, JOBTYPE job); // save experience for the selected character’s chosen job
+    void SaveCharEquip(CCharEntity* PChar);            // preserve the character’s equipment and appearance
+    void SaveCharLook(CCharEntity* PChar);             // saves a character's appearance based on style locking
+    void SaveCharPosition(CCharEntity* PChar);         // save the character's position (x/y/z)
+    // void SaveCharLinkshells(CCharEntity* PChar);     // TODO: save the character's linkshells
+    void SaveMissionsList(CCharEntity* PChar);          // save the missions list
+    void SaveEminenceData(CCharEntity* PChar);          // save Eminence Record (RoE) data
+    void SaveQuestsList(CCharEntity* PChar);            // save the list of quests
+    void SaveFame(CCharEntity* PChar);                  // save area fame / reputation
+    void SaveZonesVisited(CCharEntity* PChar);          // save visited areas
+    void SaveKeyItems(CCharEntity* PChar);              // save key items
+    void SaveCharInventoryCapacity(CCharEntity* PChar); // save Character inventory capacity
+    void SaveSpell(CCharEntity* PChar, uint16 spellID); // save learned spells
+    void DeleteSpell(CCharEntity* PChar, uint16 spellID);
+    void SaveLearnedAbilities(CCharEntity* PChar);             // save learned abilities (e.g., corsair rolls)
+    void SaveTitles(CCharEntity* PChar);                       // save character's titles
+    void SaveCharStats(CCharEntity* PChar);                    // save flags, current values of character stats (jobs/HP/MP/etc.)
+    void SaveCharGMLevel(CCharEntity* PChar);                  // save the character's gm level and nameflags
+    void SaveMentorFlag(CCharEntity* PChar);                   // save the character's mentor flag
+    void SaveJobMasterDisplay(CCharEntity* PChar);             // Save the character's job master display status
+    void SaveMenuConfigFlags(CCharEntity* PChar);              // save the character's unnamed flags
+    void SaveChatFilterFlags(CCharEntity* PChar);              // save the character's chat filters
+    void SaveLanguages(CCharEntity* PChar);                    // save the character's language preference
+    void SaveCharNation(CCharEntity* PChar);                   // save the character's nation of allegiance
+    void SaveCampaignAllegiance(CCharEntity* PChar);           // save the character's campaign allegiance
+    void SaveCharMoghancement(CCharEntity* PChar);             // save the character's current moghancement
+    void SaveCharSkills(CCharEntity* PChar, uint8 skillID);    // save the character's skills
+    void SaveTeleport(CCharEntity* PChar, TELEPORT_TYPE type); // save the character's teleports (homepoints, outposts, maws, etc)
+    void SaveDeathTime(CCharEntity* PChar);                    // save when this character last died
+    void SavePlayTime(CCharEntity* PChar);                     // save this character's total play time
+    bool hasMogLockerAccess(CCharEntity* PChar);               // true if have access, false otherwise
 
-    uint8 getQuestStatus(CCharEntity* PChar, uint8 log, uint8 quest); // Get Quest status. Used in FishingUtils.cpp, allows to fish quest specific mobs, like PLD AF NM.
+    uint8 getQuestStatus(CCharEntity* PChar, uint8 log, uint8 quest); // Get Quest status (used in FishingUtils.cpp, allows to fish quest specific mobs, like PLD AF NM)
 
     float AddExpBonus(CCharEntity* PChar, float exp);
 
