@@ -1067,14 +1067,15 @@ xi.monstrosity.onMonstrosityUpdate = function(player, data)
 end
 
 xi.monstrosity.onMonstrosityReturnToEntrance = function(player)
-    local data   = player:getMonstrosityData()
-    local x      = data.entry_x;
-    local y      = data.entry_y;
-    local z      = data.entry_z;
-    local rot    = data.entry_rot;
-    local zoneId = data.entry_zone_id;
-    local mjob   = data.entry_mjob;
-    local sjob   = data.entry_sjob;
+    local data = player:getMonstrosityData()
+
+    local x      = data.entry_x
+    local y      = data.entry_y
+    local z      = data.entry_z
+    local rot    = data.entry_rot
+    local zoneId = data.entry_zone_id
+    local mjob   = data.entry_mjob
+    local sjob   = data.entry_sjob
 
     -- TODO: Sanity check
 
@@ -1219,12 +1220,17 @@ xi.monstrosity.odysseanPassageOnTrigger = function(player, npc)
     local monSize         = player:getMonstrositySize()
     local hasBelligerency = player:getBelligerencyFlag() and 1 or 0
 
+    -- Show the full menu, not the restricted one
+    if xi.settings.main.MONSTROSITY_PVP_ZONE_BYPASS == 1 then
+        hasBelligerency = 0
+    end
+
     -- NOTE: The list of available zones is built from the char's list of
     -- visited zones. If you haven't visited any zones in a category it'll back
     -- out immediately.
     -- NOTE: Param5 is not consistent, Bee has seen 0, 1, and 2 so far
     -- player:startEvent(5, 0, 0, 0, 0, 2, 0, 0, 0) -- Bee
-    player:startEvent(5, 0, monSize, hasBelligerency, 0, 0, 0, 0, 0) -- Tiger
+    player:startEvent(5, 0, monSize, hasBelligerency, 0, 0, 0, 0, 0)
 end
 
 xi.monstrosity.odysseanPassageOnEventUpdate = function(player, csid, option, npc)

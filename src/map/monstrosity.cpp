@@ -482,11 +482,18 @@ void monstrosity::HandleEquipChangePacket(CCharEntity* PChar, CBasicPacket& data
         PChar->m_PMonstrosity->Size          = data.size;
         PChar->m_PMonstrosity->Look          = data.look;
 
+        // If changing "family" of species
         if (PChar->m_PMonstrosity->MonstrosityId != previousId)
         {
+            // Unequip all instincts
             for (std::size_t idx = 0; idx < 12; ++idx)
             {
                 PChar->m_PMonstrosity->EquippedInstincts[idx] = 0x0000;
+            }
+
+            if (!settings::get<bool>("main.MONSTROSITY_DONT_WIPE_BUFFS"))
+            {
+                PChar->StatusEffectContainer->EraseAllStatusEffect();
             }
         }
     }
