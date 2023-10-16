@@ -1419,20 +1419,149 @@ xi.monstrosity.teyrnonOnEventFinish = function(player, csid, option, npc)
         end
 
     elseif optionType == 3 then
+        -- TODO: The casting effects and animations
+
+        local tryPayCost = function(playerArg, cost)
+            if playerArg:getCurrency('infamy') < cost then
+                playerArg:messageSpecial(zones[xi.zone.FERETORY].text.THY_BRAZEN_DISREGARD)
+                return false
+            end
+
+            playerArg:delCurrency('infamy', cost)
+            return true
+        end
+
         local selectedEffect = bit.rshift(option, 8)
+        switch(selectedEffect): caseof
+        {
+            -- 0: Dedication 1
+            -- 50% experience bonus 60 minutes or until a maximum bonus of 10,000 EXP is gained
+            [0] = function()
+                if not tryPayCost(player, 3000) then
+                    return
+                end
 
-        utils.unused(selectedEffect)
-        -- TODO: Use Abyssea buff method with tabled data here.  Do we need a check to remove
-        -- these statuses when MON is removed?
+                local effect   = xi.effect.DEDICATION
+                local power    = 50
+                local duration = utils.minutes(60)
+                local subpower = 10000
+                player:delStatusEffectSilent(power)
+                xi.itemUtils.addItemExpEffect(player, effect, power, duration, subpower)
+            end,
 
-        -- selectedEffect:
-        -- 0: Dedication 1
-        -- 1: Dedication 2
-        -- 2: Regen
-        -- 3: Refresh
-        -- 4: Protect
-        -- 5: Shell
-        -- 6: Haste
+            -- 1: Dedication 2
+            -- 100% experience bonus 60 minutes or until a maximum bonus of 2,000 EXP is gained
+            [1] = function()
+                if not tryPayCost(player, 400) then
+                    return
+                end
+
+                local effect   = xi.effect.DEDICATION
+                local power    = 100
+                local duration = utils.minutes(60)
+                local subpower = 2000
+                player:delStatusEffectSilent(power)
+                xi.itemUtils.addItemExpEffect(player, effect, power, duration, subpower)
+            end,
+
+            -- 2: Regen
+            [2] = function()
+                if not tryPayCost(player, 10) then
+                    return
+                end
+
+                player:delStatusEffectSilent(xi.effect.REGEN)
+                player:addStatusEffect(xi.effect.REGEN, 1, 3, 3600)
+            end,
+
+            -- 3: Refresh
+            [3] = function()
+                if not tryPayCost(player, 10) then
+                    return
+                end
+
+                player:delStatusEffectSilent(xi.effect.REFRESH)
+                player:delStatusEffect(xi.effect.SUBLIMATION_COMPLETE)
+                player:delStatusEffect(xi.effect.SUBLIMATION_ACTIVATED)
+                player:addStatusEffect(xi.effect.REFRESH, 1, 3, 3600, 0, 3)
+            end,
+
+            -- 4: Protect
+            [4] = function()
+                if not tryPayCost(player, 100) then
+                    return
+                end
+
+                local mLvl  = player:getMainLvl()
+                local power = 220
+                local tier  = 5
+
+                if mLvl < 27 then
+                    power = 20
+                    tier = 1
+                elseif mLvl < 47 then
+                    power = 50
+                    tier = 2
+                elseif mLvl < 63 then
+                    power = 90
+                    tier = 3
+                elseif mLvl < 76 then
+                    power = 140
+                    tier = 4
+                end
+
+                local bonus = 0
+                if player:getMod(xi.mod.ENHANCES_PROT_SHELL_RCVD) > 0 then
+                    bonus = 2 -- 2x Tier from MOD
+                end
+
+                power = power + (bonus * tier)
+                player:delStatusEffectSilent(xi.effect.PROTECT)
+                player:addStatusEffect(xi.effect.PROTECT, power, 0, 1800, 0, 0, tier)
+            end,
+
+            -- 5: Shell
+            [5] = function()
+                if not tryPayCost(player, 100) then
+                    return
+                end
+
+                local mLvl  = player:getMainLvl()
+
+                -- Shell V (75/256)
+                local power = 2930
+                local tier  = 5
+
+                if mLvl < 37 then
+                    power = 1055 -- Shell I   (27/256)
+                    tier = 1
+                elseif mLvl < 57 then
+                    power = 1641 -- Shell II  (42/256)
+                    tier = 2
+                elseif mLvl < 68 then
+                    power = 2188 -- Shell III (56/256)
+                    tier = 3
+                elseif mLvl < 76 then
+                    power = 2617 -- Shell IV  (67/256)
+                    tier = 4
+                end
+
+                local bonus = 0
+                if player:getMod(xi.mod.ENHANCES_PROT_SHELL_RCVD) > 0 then
+                    bonus = 39   -- (1/256 bonus buff per tier of spell)
+                end
+
+                power = power + (bonus * tier)
+                player:delStatusEffectSilent(xi.effect.SHELL)
+                player:addStatusEffect(xi.effect.SHELL, power, 0, 1800, 0, 0, tier)
+            end,
+
+            -- 6: Haste
+            [6] = function()
+                player:delStatusEffectSilent(xi.effect.HASTE)
+                player:addStatusEffect(xi.effect.HASTE, 1000, 0, 600)
+            end,
+        }
     end
 end
 
