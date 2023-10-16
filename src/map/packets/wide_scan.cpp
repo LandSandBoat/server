@@ -45,13 +45,13 @@ CWideScanPacket::CWideScanPacket(CCharEntity* PChar, CBaseEntity* PEntity)
         ref<uint8>(0x06) = ((CBattleEntity*)PEntity)->GetMLevel();
     }
 
-    // 0 - черная точка (? Char ?)
-    // 1 - зеленая точка (NPC)
-    // 2 - красная точка (Mob)
+    // 0 - Black dot (Char??)
+    // 1 - Green dot (NPC)
+    // 2 - Red dot (Mob)
     ref<uint8>(0x07) = PEntity->objtype / 2;
 
-    ref<uint16>(0x08) = (int16)(PEntity->loc.p.x - PChar->loc.p.x); // x - разница координат персонажа и объекта
-    ref<uint16>(0x0A) = (int16)(PEntity->loc.p.z - PChar->loc.p.z); // z - разница координат персонажа и объекта
+    ref<uint16>(0x08) = (int16)(PEntity->loc.p.x - PChar->loc.p.x); // Difference in x-value between character and object coordinates
+    ref<uint16>(0x0A) = (int16)(PEntity->loc.p.z - PChar->loc.p.z); // Difference in z-value between character and object coordinates
 
     // memcpy(data+(0x0C), PEntity->GetName(), (PEntity->name.size() > 14 ? 14 : PEntity->name.size()));
 }

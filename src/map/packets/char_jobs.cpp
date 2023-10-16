@@ -44,7 +44,7 @@ CCharJobsPacket::CCharJobsPacket(CCharEntity* PChar)
     ref<uint32>(0x3C) = PChar->health.maxhp;
     ref<uint32>(0x40) = PChar->health.maxmp;
 
-    ref<uint32>(0x44) = PChar->jobs.unlocked & 1; // первый бит в unlocked отвечает за дополнительную профессию
+    ref<uint32>(0x44) = PChar->jobs.unlocked & 1; // The first bit in jobs.unlocked is responsible for an additional job
 
     ref<uint16>(0x60) = PChar->m_EquipBlock; // Locked equipment slots
     ref<uint16>(0x62) =

@@ -29,8 +29,8 @@ CMessageTextPacket::CMessageTextPacket(CBaseEntity* PEntity, uint16 messageID, b
     this->setType(0x36);
     this->setSize(0x10);
 
-    // если в качестве объекта передается персонаж,
-    // то не будем отображать имя
+    // if a character is passed as an object,
+    // then we won't display the name
 
     if (PEntity->objtype == TYPE_PC || !showName)
     {

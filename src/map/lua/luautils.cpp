@@ -156,6 +156,7 @@ namespace luautils
         lua.set_function("GarbageCollectStep", &luautils::garbageCollectStep);
         lua.set_function("GarbageCollectFull", &luautils::garbageCollectFull);
         lua.set_function("GetZone", &luautils::GetZone);
+        lua.set_function("GetItemByID", &luautils::GetItemByID);
         lua.set_function("GetNPCByID", &luautils::GetNPCByID);
         lua.set_function("GetMobByID", &luautils::GetMobByID);
         lua.set_function("GetEntityByID", &luautils::GetEntityByID);
@@ -1048,6 +1049,16 @@ namespace luautils
         {
             PNpc->loc.zone->PushPacket(PNpc, CHAR_INRANGE, new CEntityVisualPacket(PNpc, command));
         }
+    }
+
+    std::optional<CLuaItem> GetItemByID(uint32 itemId)
+    {
+        if (auto* PItem = itemutils::GetItemPointer(itemId))
+        {
+            return CLuaItem(PItem);
+        }
+
+        return std::nullopt;
     }
 
     std::optional<CLuaBaseEntity> GetNPCByID(uint32 npcid, sol::object const& instanceObj)

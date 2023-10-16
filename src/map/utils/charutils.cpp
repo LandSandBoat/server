@@ -115,12 +115,6 @@ static constexpr int32                               ExpTableRowCount = 60;
 std::array<std::array<uint16, 20>, ExpTableRowCount> g_ExpTable;
 std::array<uint16, 100>                              g_ExpPerLevel;
 
-/************************************************************************
- *                                                                       *
- *                                                                       *
- *                                                                       *
- ************************************************************************/
-
 namespace charutils
 {
     /************************************************************************
@@ -190,7 +184,7 @@ namespace charutils
         int32 subLevelOver10 = std::clamp(slvl - 10, 0, 20); // + 1HP for each level after 10 (/ 2)
         int32 subLevelOver30 = (slvl < 30 ? 0 : slvl - 30);  // + 1HP for each level after 30
 
-        // Расчет Racestat Jobstat Bonusstat Sjobstat
+        // Calculate Racestat Jobstat Bonusstat Sjobstat
         // Calculation of race
 
         grade = grade::GetRaceGrades(race, 0);
@@ -998,7 +992,7 @@ namespace charutils
 
                     if (PItem->isType(ITEM_FURNISHING) && (PItem->getLocationID() == LOC_MOGSAFE || PItem->getLocationID() == LOC_MOGSAFE2))
                     {
-                        if (((CItemFurnishing*)PItem)->isInstalled()) // способ узнать, что предмет действительно установлен
+                        if (((CItemFurnishing*)PItem)->isInstalled()) // Check if furniture (furnishing) item is actually installed
                         {
                             PChar->getStorage(LOC_STORAGE)->AddBuff(((CItemFurnishing*)PItem)->getStorage());
                         }
@@ -1147,7 +1141,7 @@ namespace charutils
 
     /************************************************************************
      *                                                                       *
-     *  We send a list of current / completed quests and missions.           *
+     *  Send lists of current / completed quests and missions.               *
      *                                                                       *
      ************************************************************************/
 
@@ -1200,7 +1194,7 @@ namespace charutils
 
     /************************************************************************
      *                                                                       *
-     *  We send the character all its inventory                              *
+     *  Send the character all its inventory                                 *
      *                                                                       *
      ************************************************************************/
 
@@ -1611,7 +1605,7 @@ namespace charutils
 
     /************************************************************************
      *                                                                       *
-     *  Check the possibility of trade between the characters                *
+     *  Check the possibility of trade between characters                    *
      *                                                                       *
      ************************************************************************/
 
@@ -1676,8 +1670,8 @@ namespace charutils
 
     /************************************************************************
      *                                                                       *
-     * Remove from the character equipped item without updating the external *
-     * species. Used as an auxiliary function in a bundle with others        *
+     *  Remove equipped item from character without updating the external    *
+     *  species (used as an auxiliary function in a bundle with others)      *
      *                                                                       *
      ************************************************************************/
 
@@ -1875,7 +1869,7 @@ namespace charutils
 
     /************************************************************************
      *                                                                       *
-     * We are trying to equip the subject in compliance with all conditions  *
+     *  Try to equip the subject in compliance with all conditions           *
      *                                                                       *
      ************************************************************************/
 
@@ -2685,7 +2679,7 @@ namespace charutils
 
     /************************************************************************
      *                                                                       *
-     * Check the feature of the character wearing the items equipped on it   *
+     *  Check the feature of the character wearing the items equipped on it  *
      *                                                                       *
      ************************************************************************/
 
@@ -2926,7 +2920,7 @@ namespace charutils
     /************************************************************************
      *                                                                       *
      *  Collect the work table of the character's abilities.With zero level  *
-     *  There must be 2H abilities.On this condition, sift them for SJOB     *
+     *  There must be 2H abilities .On this condition, sift them for SJOB    *
      *                                                                       *
      ************************************************************************/
 
@@ -3023,7 +3017,7 @@ namespace charutils
     /************************************************************************
      *                                                                       *
      *  Collect the work table of the character skills based on real.        *
-     *  Add restrictions, note the skills of the main profession (rank! = 0) *
+     *  Add restrictions, note the skills of the main job (rank! = 0)        *
      *                                                                       *
      ************************************************************************/
 
@@ -3236,7 +3230,7 @@ namespace charutils
 
     /************************************************************************
      *                                                                       *
-     *  Пытаемся увеличить значение умения                                   *
+     *  Try to increase the value of the skill                               *
      *                                                                       *
      ************************************************************************/
 
@@ -3311,7 +3305,7 @@ namespace charutils
                 uint8  SkillAmount = 1;
                 uint8  tier        = std::min(1 + (Diff / 5), 5);
 
-                for (uint8 i = 0; i < 4; ++i) // 1 + 4 возможных дополнительных (максимум 5)
+                for (uint8 i = 0; i < 4; ++i) // 1 + 4 possible additional ones (maximum 5)
                 {
                     random = xirand::GetRandomNumber(1.);
 
@@ -3512,7 +3506,7 @@ namespace charutils
 
     /************************************************************************
      *                                                                       *
-     *  Методы для работы с заклинаниями                                     *
+     *  Methods for working with spells                                      *
      *                                                                       *
      ************************************************************************/
 
@@ -3652,7 +3646,7 @@ namespace charutils
 
     /************************************************************************
      *                                                                       *
-     *  Методы для работы с основными способностями                          *
+     *  Methods for working with basic abilities                             *
      *                                                                       *
      ************************************************************************/
 
@@ -3729,10 +3723,11 @@ namespace charutils
     }
 
     /************************************************************************
-     *
-     *       Pet Command Functions
-     *
-     *************************************************************************/
+     *                                                                       *
+     *  Pet Command Functions                                                *
+     *                                                                       *
+     ************************************************************************/
+
     int32 hasPetAbility(CCharEntity* PChar, uint16 AbilityID)
     {
         return hasBit(AbilityID, PChar->m_PetCommands, sizeof(PChar->m_PetCommands));
@@ -3750,7 +3745,7 @@ namespace charutils
 
     /************************************************************************
      *                                                                       *
-     *  Инициализируем таблицу опыта                                         *
+     *  Initialize the experience (exp) table                                *
      *                                                                       *
      ************************************************************************/
 
@@ -3794,9 +3789,10 @@ namespace charutils
 
     /************************************************************************
      *                                                                       *
-     *  Returns mob difficulty according to level difference                 *
+     *  Return mob difficulty according to level difference                  *
      *                                                                       *
      ************************************************************************/
+
     EMobDifficulty CheckMob(uint8 charlvl, uint8 moblvl)
     {
         uint32 baseExp = GetBaseExp(charlvl, moblvl);
@@ -3853,7 +3849,7 @@ namespace charutils
 
     /************************************************************************
      *                                                                       *
-     *  Узнаем количество опыта, необходимое для получения следующего уровня *
+     *  Calculate the amount of experience required to get the next level    *
      *                                                                       *
      ************************************************************************/
 
@@ -4603,6 +4599,7 @@ namespace charutils
      *  1 means no exp loss. A value of 0 means full exp loss.               *
      *                                                                       *
      ************************************************************************/
+
     void DelExperiencePoints(CCharEntity* PChar, float retainPercent, uint16 forcedXpLoss)
     {
         TracyZoneScoped;
@@ -4714,7 +4711,7 @@ namespace charutils
 
     /************************************************************************
      *                                                                       *
-     *  Добавляем очки опытка указанному персонажу                           *
+     *  Add experience points to the specified character                     *
      *                                                                       *
      ************************************************************************/
 
@@ -4943,7 +4940,7 @@ namespace charutils
 
     /************************************************************************
      *                                                                       *
-     *  Establish a restriction of character level                          *
+     *  Establish a restriction of character level                           *
      *                                                                       *
      ************************************************************************/
 
@@ -5132,7 +5129,7 @@ namespace charutils
 
     /************************************************************************
      *                                                                       *
-     *  Cохраняем список колючевых предметов                                 *
+     *  Save list of key items                                               *
      *                                                                       *
      ************************************************************************/
 
@@ -5361,7 +5358,7 @@ namespace charutils
 
     /************************************************************************
      *                                                                       *
-     *  Saves character nation changes                                       *
+     *  Save character's nation changes                                      *
      *                                                                       *
      ************************************************************************/
 
@@ -5378,7 +5375,7 @@ namespace charutils
 
     /************************************************************************
      *                                                                       *
-     *  Saves characters current campaign allegiance                         *
+     *  Save character's current campaign allegiance                         *
      *                                                                       *
      ************************************************************************/
 
@@ -5395,7 +5392,7 @@ namespace charutils
 
     /************************************************************************
      *                                                                       *
-     *  Saves character's current moghancement
+     *  Saves character's current moghancement                               *
      *                                                                       *
      ************************************************************************/
 
@@ -5412,7 +5409,7 @@ namespace charutils
 
     /************************************************************************
      *                                                                       *
-     *  Сохраняем текущие уровни профессий персонажа                         *
+     *  Save the current levels of the character's jobs                      *
      *                                                                       *
      ************************************************************************/
 
@@ -5614,7 +5611,7 @@ namespace charutils
 
     /************************************************************************
      *                                                                       *
-     *  Save Teleports - Homepoints, outposts, maws, etc                     *
+     *  Save Teleports - (homepoints, outposts, maws, etc)                   *
      *                                                                       *
      ************************************************************************/
 

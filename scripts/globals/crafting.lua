@@ -38,6 +38,20 @@ xi.crafting.rank =
     EXPERT     = 10,
 }
 
+xi.crafting.guildTable =
+{
+    -- [guildId] = { skill used,   'currency used'      },
+    [0] = { xi.skill.FISHING,      'guild_fishing'      },
+    [1] = { xi.skill.WOODWORKING,  'guild_woodworking'  },
+    [2] = { xi.skill.SMITHING,     'guild_smithing'     },
+    [3] = { xi.skill.GOLDSMITHING, 'guild_goldsmithing' },
+    [4] = { xi.skill.CLOTHCRAFT,   'guild_weaving'      },
+    [5] = { xi.skill.LEATHERCRAFT, 'guild_leathercraft' },
+    [6] = { xi.skill.BONECRAFT,    'guild_bonecraft'    },
+    [7] = { xi.skill.ALCHEMY,      'guild_alchemy'      },
+    [8] = { xi.skill.COOKING,      'guild_cooking'      },
+}
+
 -- Keys are based on the player's current rank in the guild in order to be eligible
 -- for the next rank-up test.  Example: At Amateur, a value of 256 is required to
 -- be eligible for the test to move to Recruit
@@ -87,20 +101,6 @@ local hqCrystals =
     [6] = { id = xi.item.TORRENT_CRYSTAL,  cost =  200 },
     [7] = { id = xi.item.AURORA_CRYSTAL,   cost =  500 },
     [8] = { id = xi.item.TWILIGHT_CRYSTAL, cost =  500 },
-}
-
-local guildTable =
-{
-    -- [guildId] = { skill used,   'currency used'      },
-    [0] = { xi.skill.FISHING,      'guild_fishing'      },
-    [1] = { xi.skill.WOODWORKING,  'guild_woodworking'  },
-    [2] = { xi.skill.SMITHING,     'guild_smithing'     },
-    [3] = { xi.skill.GOLDSMITHING, 'guild_goldsmithing' },
-    [4] = { xi.skill.CLOTHCRAFT,   'guild_weaving'      },
-    [5] = { xi.skill.LEATHERCRAFT, 'guild_leathercraft' },
-    [6] = { xi.skill.BONECRAFT,    'guild_bonecraft'    },
-    [7] = { xi.skill.ALCHEMY,      'guild_alchemy'      },
-    [8] = { xi.skill.COOKING,      'guild_cooking'      },
 }
 
 local guildKeyItemTable =
@@ -448,10 +448,10 @@ end
 
 xi.crafting.guildPointOnTrigger = function(player, csid, guildId)
     local gpItem, remainingPoints = player:getCurrentGPItem(guildId)
-    local rank                    = player:getSkillRank(guildTable[guildId][1])
+    local rank                    = player:getSkillRank(xi.crafting.guildTable[guildId][1])
     local skillCap                = (rank + 1) * 10
     local keyItemBits             = 0
-    local currency                = guildTable[guildId][2]
+    local currency                = xi.crafting.guildTable[guildId][2]
     local keyItems                = guildKeyItemTable[guildId]
 
     for currentBit, keyItem in pairs(keyItems) do
@@ -467,9 +467,9 @@ end
 
 xi.crafting.guildPointOnEventFinish = function(player, option, target, guildId)
     local ID       = zones[player:getZoneID()]
-    local rank     = player:getSkillRank(guildTable[guildId][1])
+    local rank     = player:getSkillRank(xi.crafting.guildTable[guildId][1])
     local category = bit.band(bit.rshift(option, 2), 3)
-    local currency = guildTable[guildId][2]
+    local currency = xi.crafting.guildTable[guildId][2]
     local keyItems = guildKeyItemTable[guildId]
     local items    = guildItemTable[guildId]
 
@@ -526,7 +526,10 @@ xi.crafting.guildPointOnEventFinish = function(player, option, target, guildId)
         end
 
     -- HQ crystal Option.
-    elseif category == 0 and option ~= 1073741824 then
+    elseif
+        category == 0 and
+        option ~= utils.EVENT_CANCELLED_OPTION
+    then
         local crystal  = hqCrystals[bit.band(bit.rshift(option, 5), 15)]
         local quantity = bit.rshift(option, 9)
         local cost     = quantity * crystal.cost

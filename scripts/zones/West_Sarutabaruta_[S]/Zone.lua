@@ -1,11 +1,18 @@
 -----------------------------------
 -- Zone: West_Sarutabaruta_[S] (95)
 -----------------------------------
+require('scripts/globals/dark_ixion')
+-----------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
     xi.helm.initZone(zone, xi.helm.type.HARVESTING)
     xi.voidwalker.zoneOnInit(zone)
+    xi.darkixion.zoneOnInit(zone)
+end
+
+zoneObject.onGameHour = function(zone)
+    xi.darkixion.zoneOnGameHour(zone)
 end
 
 zoneObject.onZoneIn = function(player, prevZone)

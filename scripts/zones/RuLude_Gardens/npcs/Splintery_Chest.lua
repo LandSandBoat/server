@@ -74,7 +74,7 @@ entity.onEventFinish = function(player, csid, option, npc)
 
     local itemId = optionTable[option] and optionTable[option] or nil
 
-    if option ~= 1073741824 then
+    if option ~= utils.EVENT_CANCELLED_OPTION then
         if not itemId then
             -- How did you get here??
             player:PrintToPlayer('itemId or OptionID related script error!')

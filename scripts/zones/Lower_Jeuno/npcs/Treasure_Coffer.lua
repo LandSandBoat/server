@@ -493,7 +493,7 @@ local keyitems =
                 augments =
                 {
                     {  25, 0, 4 }, -- Attack+1-5
-                    { 516, 0, 1 }, -- INT+1-2
+                    { 516, 0, 0 }, -- INT+1
                     {  97, 0, 4 }, -- Pet: Attack and Ranged Attack+1-5
                     {  29, 0, 4 }, -- Ranged Attack+1-5
                     { 512, 0, 1 }, -- STR+1-2
@@ -1473,7 +1473,7 @@ local keyitems =
                 augments =
                 {
                     -- assumed magic skill caps are all the same
-                    { 133, 0,  5 }, -- Magic Attack Bonus+1-2
+                    { 133, 0,  1 }, -- Magic Attack Bonus+1-2
                     {  35, 0,  1 }, -- Magic Accuracy+1-2
                     { 141, 0,  2 }, -- Conserve MP+1-3
                     {  53, 0,  4 }, -- Spell Interruption Rate-1-5%

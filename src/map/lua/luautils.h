@@ -130,6 +130,7 @@ namespace luautils
     void SendEntityVisualPacket(uint32 npcid, const char* command);
     void InitInteractionGlobal();
     auto GetZone(uint16 zoneId) -> std::optional<CLuaZone>;
+    auto GetItemByID(uint32 itemId) -> std::optional<CLuaItem>;
     auto GetNPCByID(uint32 npcid, sol::object const& instanceObj) -> std::optional<CLuaBaseEntity>;
     auto GetMobByID(uint32 mobid, sol::object const& instanceObj) -> std::optional<CLuaBaseEntity>;
     auto GetEntityByID(uint32 mobid, sol::object const& instanceObj, sol::object const& arg3) -> std::optional<CLuaBaseEntity>;

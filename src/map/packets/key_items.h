@@ -26,7 +26,7 @@
 
 #include "basic.h"
 
-// нет какой-либо зависимости между номерами таблиц и типами ключевых предметов
+// There is no relationship between table numbers and key item types
 
 enum KEYS_TABLE
 {

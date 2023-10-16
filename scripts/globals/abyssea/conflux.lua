@@ -222,7 +222,7 @@ xi.conflux.confluxEventFinish = function(player, csid, option, npc)
     if
         option ~= 0 and
         option ~= 9 and -- Conflux 0 option, always free
-        option ~= 1073741824 and
+        option ~= utils.EVENT_CANCELLED_OPTION and
         utils.mask.getBit(activatedMask, confluxInfo[1])
     then
         player:delCurrency('cruor', confluxInfo[3][option])

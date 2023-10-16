@@ -1,12 +1,19 @@
 -----------------------------------
 -- Zone: Jugner_Forest_[S] (82)
 -----------------------------------
+require('scripts/globals/dark_ixion')
+-----------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
     xi.helm.initZone(zone, xi.helm.type.LOGGING)
     xi.chocobo.initZone(zone)
     xi.voidwalker.zoneOnInit(zone)
+    xi.darkixion.zoneOnInit(zone)
+end
+
+zoneObject.onGameHour = function(zone)
+    xi.darkixion.zoneOnGameHour(zone)
 end
 
 zoneObject.onZoneIn = function(player, prevZone)
