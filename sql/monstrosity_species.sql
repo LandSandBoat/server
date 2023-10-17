@@ -53,8 +53,8 @@ INSERT INTO `monstrosity_species` VALUES (10, 10, "Buffalo", 7, 7, 2, 0x0000); -
 
 INSERT INTO `monstrosity_species` VALUES (11, 11, "Marid", 1, 1, 2, 0x06CA); -- TODO: Look guessed not capped
 
-INSERT INTO `monstrosity_species` VALUES (12, 12, "Cerberus", 1, 1, 2, 0x0000); -- TODO
-INSERT INTO `monstrosity_species` VALUES (12, 269, "Orthrus (Cerberus)", 1, 4, 2, 0x0000); -- TODO
+INSERT INTO `monstrosity_species` VALUES (12, 12, "Cerberus", 1, 1, 2, 0x0701); -- TODO: Look guessed not capped
+INSERT INTO `monstrosity_species` VALUES (12, 269, "Orthrus (Cerberus)", 1, 4, 2, 0x0702); -- TODO
 
 INSERT INTO `monstrosity_species` VALUES (13, 13, "Gnole", 2, 2, 1, 0x0000); -- TODO
 INSERT INTO `monstrosity_species` VALUES (13, 270, "Bipedal Gnole", 2, 2, 1, 0x0000); -- TODO
@@ -72,16 +72,16 @@ INSERT INTO `monstrosity_species` VALUES (16, 276, "Necklaced Treant", 1, 4, 2, 
 INSERT INTO `monstrosity_species` VALUES (17, 17, "Morbol", 1, 1, 2, 0x017C);
 INSERT INTO `monstrosity_species` VALUES (17, 277, "Pygmy Morbol", 1, 1, 1, 0x0950);
 INSERT INTO `monstrosity_species` VALUES (17, 278, "Scarce Morbol", 1, 1, 2, 0x00017D);
-INSERT INTO `monstrosity_species` VALUES (17, 279, "Ameretat (Morbol)", 1, 1, 2, 0x0000); -- TODO
-INSERT INTO `monstrosity_species` VALUES (17, 280, "Purbol (Morbol)", 1, 4, 2, 0x0000); -- TODO
+INSERT INTO `monstrosity_species` VALUES (17, 279, "Ameretat (Morbol)", 1, 1, 2, 0x08B6); -- TODO: Look guessed not capped
+INSERT INTO `monstrosity_species` VALUES (17, 280, "Purbol (Morbol)", 1, 4, 2, 0x017F); -- TODO: Look guessed not capped
 
 INSERT INTO `monstrosity_species` VALUES (18, 18, "Mandragora", 2, 2, 0, 0x012C);
 INSERT INTO `monstrosity_species` VALUES (18, 281, "Korrigan (Mandragora)", 2, 4, 0, 0x012D); -- TODO: Look guessed not capped
 INSERT INTO `monstrosity_species` VALUES (18, 282, "Lycopodium (Mandragora)", 2, 3, 0, 0x08C7); -- TODO: Look guessed not capped
-INSERT INTO `monstrosity_species` VALUES (18, 283, "Pygmy Mandragora", 2, 2, 0, 0x012C); -- TODO: Look guessed not capped, this is the wrong id
-INSERT INTO `monstrosity_species` VALUES (18, 284, "Adenium (Mandragora)", 2, 5, 0, 0x012C); -- TODO: Look guessed not capped, this is the wrong id
-INSERT INTO `monstrosity_species` VALUES (18, 285, "Pachypodium (Mandragora)", 2, 2, 0, 0x012C); -- TODO: Look guessed not capped, this is the wrong id
-INSERT INTO `monstrosity_species` VALUES (18, 286, "Enlightened Mandragora", 2, 2, 0, 0x012C); -- TODO: Look guessed not capped, this is the wrong id
+INSERT INTO `monstrosity_species` VALUES (18, 283, "Pygmy Mandragora", 2, 2, 0, 0x089C); -- TODO: Look guessed not capped
+INSERT INTO `monstrosity_species` VALUES (18, 284, "Adenium (Mandragora)", 2, 5, 0, 0x0950); -- TODO: Look guessed not capped
+INSERT INTO `monstrosity_species` VALUES (18, 285, "Pachypodium (Mandragora)", 2, 2, 0, 0x0949); -- TODO: Look guessed not capped
+INSERT INTO `monstrosity_species` VALUES (18, 286, "Enlightened Mandragora", 2, 2, 0, 0x0930); -- TODO: Look guessed not capped, this is the wrong id?
 INSERT INTO `monstrosity_species` VALUES (18, 287, "New Year Mandragora", 2, 13, 0, 0x0B48);
 
 INSERT INTO `monstrosity_species` VALUES (19, 19, "Sabotender", 1, 1, 0, 0x0000); -- TODO
@@ -184,7 +184,7 @@ INSERT INTO `monstrosity_species` VALUES (57, 335, "Gigaworm (Sandworm)", 1, 1, 
 
 INSERT INTO `monstrosity_species` VALUES (58, 58, "Leech", 1, 1, 0, 0x0114);
 INSERT INTO `monstrosity_species` VALUES (58, 336, "Azure Leech", 1, 1, 0, 0x0115);
-INSERT INTO `monstrosity_species` VALUES (58, 337, "Obdella (Leech)", 1, 1, 0, 0x0000); -- TODO
+INSERT INTO `monstrosity_species` VALUES (58, 337, "Obdella (Leech)", 1, 1, 0, 0x078E); -- TODO: Look guessed not capped
 
 INSERT INTO `monstrosity_species` VALUES (60, 60, "Crab", 1, 1, 0, 0x0164);
 INSERT INTO `monstrosity_species` VALUES (60, 340, "Vermillion Crab", 1, 1, 0, 0x0165); -- TODO: Look guessed not capped
