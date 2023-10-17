@@ -504,8 +504,9 @@ public:
     uint32 canLearnSpell(uint16 spellID);
     void   delSpell(uint16 spellID);
 
-    void recalculateSkillsTable();
-    void recalculateAbilitiesTable();
+    void       recalculateSkillsTable();
+    void       recalculateAbilitiesTable();
+    sol::table getPlayersInRange(uint32 dist);
 
     // Parties and Alliances
     auto   getParty() -> sol::table;

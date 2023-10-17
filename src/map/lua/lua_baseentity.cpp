@@ -10023,6 +10023,28 @@ void CLuaBaseEntity::recalculateAbilitiesTable()
 }
 
 /************************************************************************
+ *  Function: getPlayersInRange()
+ *  Purpose : Returns a Lua table of players within range of the base entity
+ *  Example : local players = npc:getPlayersInRange(50)
+ *  Notes   : if the passed argument is nil or 0, just returns all players in the zone
+ ************************************************************************/
+
+sol::table CLuaBaseEntity::getPlayersInRange(uint32 dist = 0)
+{
+    auto players = lua.create_table();
+
+    zoneutils::GetZone(m_PBaseEntity->getZone())->ForEachChar([&](CCharEntity* PChar)
+    {
+        if (!dist || distance(PChar->loc.p, m_PBaseEntity->loc.p) < dist)
+        {
+            players.add(CLuaBaseEntity(PChar));
+        }
+    });
+
+    return players;
+}
+
+/************************************************************************
  *  Function: getParty()
  *  Purpose : Returns a Lua table of party member Entity objects
  *  Example : local party = player:getParty()
@@ -17454,6 +17476,7 @@ void CLuaBaseEntity::Register()
 
     SOL_REGISTER("recalculateSkillsTable", CLuaBaseEntity::recalculateSkillsTable);
     SOL_REGISTER("recalculateAbilitiesTable", CLuaBaseEntity::recalculateAbilitiesTable);
+    SOL_REGISTER("getPlayersInRange", CLuaBaseEntity::getPlayersInRange);
 
     // Parties and Alliances
     SOL_REGISTER("getParty", CLuaBaseEntity::getParty);
