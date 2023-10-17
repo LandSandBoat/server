@@ -88,6 +88,8 @@ set(SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/mobskill.h
     ${CMAKE_CURRENT_SOURCE_DIR}/modifier.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/modifier.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/monstrosity.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/monstrosity.h
     ${CMAKE_CURRENT_SOURCE_DIR}/navmesh.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/navmesh.h
     ${CMAKE_CURRENT_SOURCE_DIR}/notoriety_container.cpp

@@ -29,6 +29,7 @@
 #include "entities/automatonentity.h"
 #include "entities/charentity.h"
 #include "merit.h"
+#include "monstrosity.h"
 
 CCharJobExtraPacket::CCharJobExtraPacket(CCharEntity* PChar, bool mjob)
 {
@@ -44,6 +45,11 @@ CCharJobExtraPacket::CCharJobExtraPacket(CCharEntity* PChar, bool mjob)
     else
     {
         job = PChar->GetSJob();
+    }
+
+    if (PChar->m_PMonstrosity != nullptr)
+    {
+        job = JOB_MON;
     }
 
     ref<uint8>(0x04) = job;
@@ -126,5 +132,14 @@ CCharJobExtraPacket::CCharJobExtraPacket(CCharEntity* PChar, bool mjob)
         ref<uint16>(0x9A) = PChar->PAutomaton->getMod(Mod::CHR);
 
         ref<uint8>(0x9C) = PChar->getMod(Mod::AUTO_ELEM_CAPACITY);
+    }
+    else if (PChar->m_PMonstrosity != nullptr)
+    {
+        ref<uint16>(0x08) = PChar->m_PMonstrosity->Species;
+
+        for (std::size_t idx = 0; idx < 12; ++idx)
+        {
+            ref<uint16>(0x0C + (idx * 2)) = PChar->m_PMonstrosity->EquippedInstincts[idx];
+        }
     }
 }

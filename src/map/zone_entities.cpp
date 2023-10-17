@@ -740,6 +740,19 @@ void CZoneEntities::SpawnPCs(CCharEntity* PChar)
             continue;
         }
 
+        // TODO: This is a temporary fix so that Feretory _seems_ like a solo zone.
+        // We need a better solution for this that properly supports:
+        // - Shared moghouse (both floors)
+        // - Mog Garden
+        // - Feretory
+        // and the NPCs that exist per-player in those zones (Garden, Music Items in MH, etc.)
+        // Despawn character if it's a hidden GM, is in a different mog house, or if player is in a conflict while other is not, or too far up/down
+        if (PChar->loc.zone->GetID() == ZONE_FERETORY)
+        {
+            toRemove.emplace_back(pc);
+            continue;
+        }
+
         // Despawn character if it's currently spawned and is far away
         float charDistance = distance(PChar->loc.p, pc->loc.p);
         if (charDistance >= CHARACTER_DESPAWN_DISTANCE)

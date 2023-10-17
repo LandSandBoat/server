@@ -49,6 +49,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "map.h"
 #include "message.h"
 #include "mob_modifier.h"
+#include "monstrosity.h"
 #include "notoriety_container.h"
 #include "packet_system.h"
 #include "party.h"
@@ -80,6 +81,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "lua/luautils.h"
 
 #include "packets/auction_house.h"
+#include "packets/basic.h"
 #include "packets/bazaar_check.h"
 #include "packets/bazaar_close.h"
 #include "packets/bazaar_confirmation.h"
@@ -791,15 +793,19 @@ void SmallPacket0x01A(map_session_data_t* const PSession, CCharEntity* const PCh
 {
     TracyZoneScoped;
 
-    uint16     TargID       = data.ref<uint16>(0x08);
-    uint8      action       = data.ref<uint8>(0x0A);
-    position_t actionOffset = {
+    uint16 TargID = data.ref<uint16>(0x08);
+    uint8  action = data.ref<uint8>(0x0A);
+
+    // clang-format off
+    position_t actionOffset =
+    {
         data.ref<float>(0x10),
         data.ref<float>(0x14),
         data.ref<float>(0x18),
-        0, // packet only contains x/y/z
-        0, //
+        0, // moving (packet only contains x/y/z)
+        0, // rotation (packet only contains x/y/z)
     };
+    // clang-format on
 
     constexpr auto actionToStr = [](uint8 actionIn)
     {
@@ -847,12 +853,21 @@ void SmallPacket0x01A(map_session_data_t* const PSession, CCharEntity* const PCh
                 return "Ballista - Scout";
             case 0x18:
                 return "Blockaid";
+            case 0x19:
+                return "Monstrosity Monster Skill";
             case 0x1A:
                 return "Mounts";
             default:
                 return "Unknown";
         }
     };
+
+    // Monstrosity: Can't really do anything while under Gestation until you click it off.
+    //            : MONs can trigger doors, so we'll handle that later.
+    if (PChar->StatusEffectContainer->HasStatusEffect(EFFECT_GESTATION) && action == 0x00)
+    {
+        return;
+    }
 
     auto actionStr = fmt::format("Player Action: {}: {} (0x{:02X}) -> targid: {}", PChar->GetName(), actionToStr(action), action, TargID);
     TracyZoneString(actionStr);
@@ -876,6 +891,16 @@ void SmallPacket0x01A(map_session_data_t* const PSession, CCharEntity* const PCh
 
             CBaseEntity* PNpc = nullptr;
             PNpc              = PChar->GetEntity(TargID, TYPE_NPC | TYPE_MOB);
+
+            // MONs are allowed to use doors, but nothing else
+            if (PChar->m_PMonstrosity != nullptr &&
+                PNpc->look.size != 0x02 &&
+                PChar->getZone() != ZONEID::ZONE_FERETORY &&
+                !settings::get<bool>("main.MONSTROSITY_TRIGGER_NPCS"))
+            {
+                PChar->pushPacket(new CReleasePacket(PChar, RELEASE_TYPE::STANDARD));
+                return;
+            }
 
             // NOTE: Moogles inside of mog houses are the exception for not requiring Spawned or Status checks.
             if (PNpc != nullptr && distance(PNpc->loc.p, PChar->loc.p) <= 10 && ((PNpc->PAI->IsSpawned() && PNpc->status == STATUS_TYPE::NORMAL) || PChar->m_moghouseID != 0))
@@ -1005,6 +1030,14 @@ void SmallPacket0x01A(map_session_data_t* const PSession, CCharEntity* const PCh
             {
                 return;
             }
+
+            if (PChar->m_PMonstrosity != nullptr)
+            {
+                auto type = data.ref<uint8>(0x0C);
+                monstrosity::HandleDeathMenu(PChar, type);
+                return;
+            }
+
             PChar->setCharVar("expLost", 0);
             charutils::HomePoint(PChar);
         }
@@ -1171,6 +1204,11 @@ void SmallPacket0x01A(map_session_data_t* const PSession, CCharEntity* const PCh
             {
                 PChar->pushPacket(new CMessageSystemPacket(0, 0, 142));
             }
+        }
+        break;
+        case 0x19: // Monstrosity Monster Skill
+        {
+            monstrosity::HandleMonsterSkillActionPacket(PChar, data);
         }
         break;
         case 0x1A: // mounts
@@ -1497,6 +1535,13 @@ void SmallPacket0x029(map_session_data_t* const PSession, CCharEntity* const PCh
 void SmallPacket0x032(map_session_data_t* const PSession, CCharEntity* const PChar, CBasicPacket& data)
 {
     TracyZoneScoped;
+
+    // MONs can't trade
+    if (PChar->m_PMonstrosity != nullptr)
+    {
+        return;
+    }
+
     uint32 charid = data.ref<uint32>(0x04);
     uint16 targid = data.ref<uint16>(0x08);
 
@@ -1600,6 +1645,13 @@ void SmallPacket0x032(map_session_data_t* const PSession, CCharEntity* const PCh
 void SmallPacket0x033(map_session_data_t* const PSession, CCharEntity* const PChar, CBasicPacket& data)
 {
     TracyZoneScoped;
+
+    // MONs can't trade
+    if (PChar->m_PMonstrosity != nullptr)
+    {
+        return;
+    }
+
     CCharEntity* PTarget = (CCharEntity*)PChar->GetEntity(PChar->TradePending.targid, TYPE_PC);
 
     if (PTarget != nullptr && PChar->TradePending.id == PTarget->id)
@@ -1701,6 +1753,13 @@ void SmallPacket0x033(map_session_data_t* const PSession, CCharEntity* const PCh
 void SmallPacket0x034(map_session_data_t* const PSession, CCharEntity* const PChar, CBasicPacket& data)
 {
     TracyZoneScoped;
+
+    // MONs can't trade
+    if (PChar->m_PMonstrosity != nullptr)
+    {
+        return;
+    }
+
     uint32 quantity    = data.ref<uint32>(0x04);
     uint16 itemID      = data.ref<uint16>(0x08);
     uint8  invSlotID   = data.ref<uint8>(0x0A);
@@ -1805,6 +1864,12 @@ void SmallPacket0x036(map_session_data_t* const PSession, CCharEntity* const PCh
         return;
     }
 
+    // MONs can't trade
+    if (PChar->m_PMonstrosity != nullptr)
+    {
+        return;
+    }
+
     uint32 npcid  = data.ref<uint32>(0x04);
     uint16 targid = data.ref<uint16>(0x3A);
 
@@ -1853,6 +1918,12 @@ void SmallPacket0x036(map_session_data_t* const PSession, CCharEntity* const PCh
 void SmallPacket0x037(map_session_data_t* const PSession, CCharEntity* const PChar, CBasicPacket& data)
 {
     TracyZoneScoped;
+
+    // MONs can't use usable items
+    if (PChar->m_PMonstrosity != nullptr)
+    {
+        return;
+    }
 
     uint16 TargetID  = data.ref<uint16>(0x0C);
     uint8  SlotID    = data.ref<uint8>(0x0E);
@@ -3939,6 +4010,16 @@ void SmallPacket0x05E(map_session_data_t* const PSession, CCharEntity* const PCh
             {
                 ShowError("SmallPacket0x5E: Zone line %u not found", zoneLineID);
 
+                PChar->loc.p.rotation += 128;
+
+                PChar->pushPacket(new CMessageSystemPacket(0, 0, 2)); // You could not enter the next area.
+                PChar->pushPacket(new CCSPositionPacket(PChar));
+
+                PChar->status = STATUS_TYPE::NORMAL;
+                return;
+            }
+            else if (PChar->m_PMonstrosity != nullptr) // Not allowed to use zonelines while MON
+            {
                 PChar->loc.p.rotation += 128;
 
                 PChar->pushPacket(new CMessageSystemPacket(0, 0, 2)); // You could not enter the next area.
@@ -6234,6 +6315,13 @@ void SmallPacket0x0DD(map_session_data_t* const PSession, CCharEntity* const PCh
             {
                 CCharEntity* PTarget = (CCharEntity*)PEntity;
 
+                if (PTarget->m_PMonstrosity)
+                {
+                    PChar->pushPacket(new CMessageStandardPacket(PTarget, 0, 0, MsgStd::MonstrosityCheckOut));
+                    PTarget->pushPacket(new CMessageStandardPacket(PChar, 0, 0, MsgStd::MonstrosityCheckIn));
+                    return;
+                }
+
                 if (!PChar->m_isGMHidden || (PChar->m_isGMHidden && PTarget->m_GMlevel >= PChar->m_GMlevel))
                 {
                     PTarget->pushPacket(new CMessageStandardPacket(PChar, 0, 0, MsgStd::Examine));
@@ -7218,8 +7306,12 @@ void SmallPacket0x100(map_session_data_t* const PSession, CCharEntity* const PCh
 
         PChar->StatusEffectContainer->DelStatusEffectsByFlag(EFFECTFLAG_DISPELABLE | EFFECTFLAG_ROLL | EFFECTFLAG_ON_JOBCHANGE);
 
+        // clang-format off
         PChar->ForParty([](CBattleEntity* PMember)
-                        { ((CCharEntity*)PMember)->PLatentEffectContainer->CheckLatentsPartyJobs(); });
+        {
+            ((CCharEntity*)PMember)->PLatentEffectContainer->CheckLatentsPartyJobs();
+        });
+        // clang-format on
 
         PChar->UpdateHealth();
 
@@ -7246,7 +7338,7 @@ void SmallPacket0x100(map_session_data_t* const PSession, CCharEntity* const PCh
 
 /************************************************************************
  *                                                                       *
- *  Set Blue Magic Spells                                                *
+ *  Set Blue Magic Spells / PUP Attachments / MON equip                  *
  *                                                                       *
  ************************************************************************/
 
@@ -7388,6 +7480,10 @@ void SmallPacket0x102(map_session_data_t* const PSession, CCharEntity* const PCh
         PChar->pushPacket(new CCharJobExtraPacket(PChar, true));
         PChar->pushPacket(new CCharJobExtraPacket(PChar, false));
         puppetutils::SaveAutomaton(PChar);
+    }
+    else if (PChar->loc.zone->GetID() == ZONE_FERETORY && PChar->m_PMonstrosity != nullptr)
+    {
+        monstrosity::HandleEquipChangePacket(PChar, data);
     }
 }
 

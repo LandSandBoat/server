@@ -285,6 +285,11 @@ namespace luautils
     int32  OnAutomatonAbilityCheck(CBaseEntity* PChar, CAutomatonEntity* PAutomaton, CMobSkill* PMobSkill);
     int32  OnAutomatonAbility(CBaseEntity* PTarget, CBaseEntity* PMob, CMobSkill* PMobSkill, CBaseEntity* PMobMaster, action_t* action);
 
+    auto GetMonstrosityLuaTable(CCharEntity* PChar) -> sol::table;
+    void SetMonstrosityLuaTable(CCharEntity* PChar, sol::table data);
+    void OnMonstrosityUpdate(CCharEntity* PChar);
+    void OnMonstrosityReturnToEntrance(CCharEntity* PChar);
+
     int32 OnAbilityCheck(CBaseEntity* PChar, CBaseEntity* PTarget, CAbility* PAbility, CBaseEntity** PMsgTarget);
     int32 OnPetAbility(CBaseEntity* PTarget, CBaseEntity* PMob, CMobSkill* PMobSkill, CBaseEntity* PPetMaster, action_t* action);
     int32 OnPetAbility(CBaseEntity* PTarget, CPetEntity* PPet, CPetSkill* PMobSkill, CBaseEntity* PPetMaster, action_t* action);                                                                // triggers when pet uses an ability, specialized for pets

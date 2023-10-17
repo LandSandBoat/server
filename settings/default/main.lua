@@ -64,10 +64,25 @@ xi.settings.main =
     CAP_CURRENCY_VALOR     = 50000,
 
     -- Magian Trials
-    ENABLE_MAGIAN_TRIALS             = 1,
+    ENABLE_MAGIAN_TRIALS = 1,
 
     -- VoidWalker
     ENABLE_VOIDWALKER = 1,
+
+    -- Monstrosity (Heavily in development, use at your own risk!)
+    ENABLE_MONSTROSITY               = 0,
+    MONSTROSITY_INFAMY_RATIO         = 0.1, -- (float) The ratio of exp gained to infamy gained on defeating a mob.
+    MONSTROSITY_INFAMY_MESSAGING     = 0,   -- Show a message when you gain infamy.
+    MONSTROSITY_TELEPORT_TO_FERETORY = 0,   -- Return to Feretory instead of the zone where you entered Feretory when Relinquishing or after death.
+    MONSTROSITY_TRIGGER_NPCS         = 0,   -- Allow Monipulators to trigger NPCs outside of the Feretory.
+    MONSTROSITY_DONT_WIPE_BUFFS      = 0,   -- If set, buffs won't be wiped when changing species in the Feretory.
+
+    -- Monstrosity PVP Mode
+    -- 0: Retail (fully restricted): Monipulators and Players must both be flagged for Beligerency before they can fight
+    -- 1: (partially restricted): Players do not need to be flagged to fight, but Monipulators do.
+    -- 2: (open): Belligerency is not needed for Players and Monipulators to fight.
+    MONSTROSITY_PVP_MODE        = 0,
+    MONSTROSITY_PVP_ZONE_BYPASS = 0, -- Show the full zone teleport menu from Feretory while Belligerency is flagged.
 
     -- TREASURE CASKETS
     -- Retail droprate = 0.1 (10%) with no other effects active

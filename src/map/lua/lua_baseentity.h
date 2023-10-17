@@ -269,9 +269,9 @@ public:
     bool   checkNameFlags(uint32 flags); // this is check and not get because it tests for a flag, it doesn't return all flags
     uint16 getModelId();
     void   setModelId(uint16 modelId, sol::object const& slotObj);
-    void   setCostume(uint16 costume);
     uint16 getCostume();
-    uint16 getCostume2(); // monstrosity costume
+    void   setCostume(uint16 costume);
+    uint16 getCostume2();
     void   setCostume2(uint16 costume);
     uint8  getAnimation();
     void   setAnimation(uint8 animation);
@@ -330,6 +330,14 @@ public:
     void  setLevelCap(uint8 cap);
     uint8 levelRestriction(sol::object const& level); // Establish/return current level restriction
     void  addJobTraits(uint8 jobID, uint8 level);
+
+    // Monstrosity
+    auto getMonstrosityData() -> sol::table;
+    void setMonstrosityData(sol::table table);
+    bool getBelligerencyFlag();
+    void setBelligerencyFlag(bool flag);
+    auto getMonstrositySize() -> uint8;
+    void setMonstrosityEntryData(float x, float y, float z, uint8 rot, uint16 zoneId, uint8 mjob, uint8 sjob);
 
     // Player Titles and Fame
     uint16 getTitle();

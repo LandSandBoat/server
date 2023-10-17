@@ -41,9 +41,15 @@ CCharAppearancePacket::CCharAppearancePacket(CCharEntity* PChar)
     ref<uint16>(0x12) = look->sub + 0x7000;
     ref<uint16>(0x14) = look->ranged + 0x8000;
 
-    if (PChar->m_Monstrosity != 0)
+    if (PChar->m_Costume2 != 0)
     {
-        ref<uint16>(0x04) = PChar->m_Monstrosity;
+        ref<uint16>(0x04) = PChar->m_Costume2;
+        ref<uint16>(0x14) = 0xFFFF;
+    }
+
+    if (PChar->m_PMonstrosity != nullptr)
+    {
+        ref<uint16>(0x04) = PChar->m_PMonstrosity->Look;
         ref<uint16>(0x14) = 0xFFFF;
     }
 }
