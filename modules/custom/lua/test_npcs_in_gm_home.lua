@@ -6,6 +6,59 @@ require('scripts/zones/GM_Home/Zone')
 -----------------------------------
 local m = Module:new('test_npcs_in_gm_home')
 
+-- Forward declarations (required)
+local menu  = {}
+local page1 = {}
+local page2 = {}
+
+-- We need just a tiny delay to let the previous menu context be cleared out
+-- 'New pages' are actually just whole new menus!
+local delaySendMenu = function(player)
+    player:timer(50, function(playerArg)
+        playerArg:customMenu(menu)
+    end)
+end
+
+menu =
+{
+    title = 'Test Menu (Paginated)',
+    options = {},
+}
+
+page1 =
+{
+    {
+        'Send me to Jeuno!',
+        function(playerArg)
+            playerArg:setPos(0, 0, 0, 0, xi.zone.LOWER_JEUNO)
+        end,
+    },
+    {
+        'Next Page',
+        function(playerArg)
+            menu.options = page2
+            delaySendMenu(playerArg)
+        end,
+    },
+}
+
+page2 =
+{
+    {
+        'Send me to Aht Urghan!',
+        function(playerArg)
+            playerArg:setPos(0, 0, 0, 0, xi.zone.AHT_URHGAN_WHITEGATE)
+        end,
+    },
+    {
+        'Previous Page',
+        function(playerArg)
+            menu.options = page1
+            delaySendMenu(playerArg)
+        end,
+    },
+}
+
 m:addOverride('xi.zones.GM_Home.Zone.onInitialize', function(zone)
     -- Call the zone's original function for onInitialize
     super(zone)
@@ -67,6 +120,22 @@ m:addOverride('xi.zones.GM_Home.Zone.onInitialize', function(zone)
 
     -- You could also just not capture the object
     -- zone:insertDynamicEntity({ ...
+
+    -- Menu NPC Example
+    zone:insertDynamicEntity({
+        objtype   = xi.objType.NPC,
+        name      = 'Menu Example',
+        look      = 2433,
+        x         = 5.000,
+        y         = 0.000,
+        z         = 5.000,
+        rotation  = 0,
+        widescan  = 1,
+        onTrigger  = function(player, npc)
+            menu.options = page1
+            delaySendMenu(player)
+        end,
+    })
 end)
 
 return m
