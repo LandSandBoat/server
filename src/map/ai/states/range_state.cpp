@@ -135,6 +135,8 @@ bool CRangeState::Update(time_point tick)
             m_PEntity->OnRangedAttack(*this, action);
             m_PEntity->loc.zone->PushPacket(m_PEntity, CHAR_INRANGE_SELF, new CActionPacket(action));
         }
+
+        m_PEntity->PAI->EventHandler.triggerListener("RANGE_STATE_EXIT", CLuaBaseEntity(m_PEntity), CLuaBaseEntity(PTarget), CLuaAction(&action));
         Complete();
     }
 
