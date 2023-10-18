@@ -69,10 +69,20 @@ struct MonstrosityInstinctRow
     std::vector<CModifier> mods;
 };
 
+struct MonstrositySkillRow
+{
+    uint16 monstrositySpeciesCode;
+    uint16 monstrositySkillId;
+    uint16 monsterSkillId;
+    uint8  levelUnlocked;
+    uint16 tpCost;
+};
+
 namespace
 {
     std::unordered_map<uint16, MonstrositySpeciesRow>  gMonstrositySpeciesMap;
     std::unordered_map<uint16, MonstrosityInstinctRow> gMonstrosityInstinctMap;
+    std::unordered_map<uint16, MonstrositySkillRow>    gMonstrositySkillMap;
 } // namespace
 
 monstrosity::MonstrosityData_t::MonstrosityData_t()
@@ -147,6 +157,27 @@ void monstrosity::LoadStaticData()
                 auto mod    = static_cast<Mod>(sql->GetUIntData(1));
                 auto val    = static_cast<int16>(sql->GetIntData(2));
                 entry.mods.emplace_back(CModifier(mod, val));
+            }
+        }
+    }
+
+    ret = sql->Query("SELECT monstrosity_species_id, dat_skill_id, mob_skill_id, unlock_level, tp_cost FROM monstrosity_tp_skills;");
+    if (ret != SQL_ERROR && sql->NumRows() != 0)
+    {
+        while (sql->NextRow() == SQL_SUCCESS)
+        {
+            MonstrositySkillRow row;
+
+            row.monstrositySpeciesCode = static_cast<uint16>(sql->GetUIntData(0));
+            row.monstrositySkillId     = static_cast<uint16>(sql->GetUIntData(1));
+            row.monsterSkillId         = static_cast<uint16>(sql->GetUIntData(2));
+            row.levelUnlocked          = static_cast<uint8>(sql->GetUIntData(3));
+            row.tpCost                 = static_cast<uint16>(sql->GetUIntData(4));
+
+            // NOTE: Only keep the first results
+            if (gMonstrositySkillMap.find(row.monstrositySkillId) == gMonstrositySkillMap.end())
+            {
+                gMonstrositySkillMap[row.monstrositySkillId] = row;
             }
         }
     }
@@ -409,10 +440,22 @@ void monstrosity::HandleMonsterSkillActionPacket(CCharEntity* PChar, CBasicPacke
     uint16 targId  = data.ref<uint16>(0x08);
     uint16 skillId = data.ref<uint16>(0x0C);
 
+    // Translate skillId from the dat-based Monstrosity ID to the ID's we use for regular mob skills
+    auto skill = gMonstrositySkillMap[skillId];
+
+    skillId = skill.monsterSkillId;
+
     // TODO: Validate that this move is available at this level, for this species, and that
     // we're capable of using it (state, TP, etc.).
 
-    PChar->PAI->Internal_MobSkill(targId, skillId);
+    if (PChar->health.tp >= skill.tpCost)
+    {
+        PChar->PAI->Internal_MobSkill(targId, skillId);
+    }
+    else
+    {
+        // TODO: Rejection message
+    }
 }
 
 void monstrosity::HandleEquipChangePacket(CCharEntity* PChar, CBasicPacket& data)
