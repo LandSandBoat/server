@@ -13,7 +13,7 @@ CREATE TABLE IF NOT EXISTS `monstrosity_tp_skills` (
 INSERT INTO `monstrosity_tp_skills` VALUES ('Rabbit', '1', 'foot_kick', '257', '257', '1', '1000');
 INSERT INTO `monstrosity_tp_skills` VALUES ('Rabbit', '1', 'dust_cloud', '258', '258', '10', '800');
 INSERT INTO `monstrosity_tp_skills` VALUES ('Rabbit', '1', 'whirl_claws', '259', '259', '20', '1800');
--- INSERT INTO `monstrosity_tp_skills` VALUES ('Rabbit', '1', 'wild_carrot', '314', '323', '30', '1000');
+INSERT INTO `monstrosity_tp_skills` VALUES ('Rabbit', '1', 'wild_carrot', '314', '323', '30', '1000');
 
 -- INSERT INTO `monstrosity_tp_skills` VALUES ('Behemoth', '2', 'wild_horn', '444', '628', '1', '1000');
 -- INSERT INTO `monstrosity_tp_skills` VALUES ('Behemoth', '2', 'shock_wave', '446', '631', '10', '1000');
@@ -122,17 +122,12 @@ INSERT INTO `monstrosity_tp_skills` VALUES ('Rabbit', '1', 'whirl_claws', '259',
 -- INSERT INTO `monstrosity_tp_skills` VALUES ('Morbol', '17', 'bad_breath', '310', '727', '30', '2000');
 -- INSERT INTO `monstrosity_tp_skills` VALUES ('Morbol', '17', 'bad_breath', '310', '319', '30', '2000');
 
--- INSERT INTO `monstrosity_tp_skills` VALUES ('Mandragora', '18', 'wild_oats', '296', '302', '1', '500');
--- INSERT INTO `monstrosity_tp_skills` VALUES ('Mandragora', '18', 'wild_oats', '296', '3351', '1', '500');
--- INSERT INTO `monstrosity_tp_skills` VALUES ('Mandragora', '18', 'scream', '299', '306', '10', '500');
--- INSERT INTO `monstrosity_tp_skills` VALUES ('Mandragora', '18', 'photosynthesis', '297', '324', '20', '1500');
--- INSERT INTO `monstrosity_tp_skills` VALUES ('Mandragora', '18', 'photosynthesis', '297', '304', '20', '1500');
--- INSERT INTO `monstrosity_tp_skills` VALUES ('Mandragora', '18', 'leaf_dagger', '298', '305', '30', '800');
--- INSERT INTO `monstrosity_tp_skills` VALUES ('Mandragora', '18', 'dream_flower', '295', '301', '40', '1200');
--- INSERT INTO `monstrosity_tp_skills` VALUES ('Mandragora', '18', 'head_butt', '294', '612', '50', '1000');
--- INSERT INTO `monstrosity_tp_skills` VALUES ('Mandragora', '18', 'head_butt', '294', '300', '50', '1000');
--- INSERT INTO `monstrosity_tp_skills` VALUES ('Mandragora', '18', 'head_butt', '294', '1076', '50', '1000');
--- INSERT INTO `monstrosity_tp_skills` VALUES ('Mandragora', '18', 'head_butt', '294', '3354', '50', '1000');
+INSERT INTO `monstrosity_tp_skills` VALUES ('Mandragora', '18', 'head_butt', '294', '300', '50', '1000');
+INSERT INTO `monstrosity_tp_skills` VALUES ('Mandragora', '18', 'dream_flower', '295', '301', '40', '1200');
+INSERT INTO `monstrosity_tp_skills` VALUES ('Mandragora', '18', 'wild_oats', '296', '302', '1', '500');
+INSERT INTO `monstrosity_tp_skills` VALUES ('Mandragora', '18', 'photosynthesis', '297', '304', '20', '1500');
+INSERT INTO `monstrosity_tp_skills` VALUES ('Mandragora', '18', 'leaf_dagger', '298', '305', '30', '800');
+INSERT INTO `monstrosity_tp_skills` VALUES ('Mandragora', '18', 'scream', '299', '306', '10', '500');
 -- INSERT INTO `monstrosity_tp_skills` VALUES ('Mandragora', '18', 'demonic_flower', '603', '2410', '60', '1000');
 
 -- INSERT INTO `monstrosity_tp_skills` VALUES ('Sabotender', '19', 'needleshot', '312', '321', '1', '1000');
@@ -162,9 +157,9 @@ INSERT INTO `monstrosity_tp_skills` VALUES ('Rabbit', '1', 'whirl_claws', '259',
 -- INSERT INTO `monstrosity_tp_skills` VALUES ('Panopt', '23', 'sylvan_slumber', '679', '3031', '10', '1000');
 -- INSERT INTO `monstrosity_tp_skills` VALUES ('Panopt', '23', 'crushing_gaze', '680', '3032', '20', '1000');
 
--- INSERT INTO `monstrosity_tp_skills` VALUES ('Bee', '27', 'sharp_sting', '319', '334', '1', '1000');
--- INSERT INTO `monstrosity_tp_skills` VALUES ('Bee', '27', 'pollen', '320', '335', '10', '1500');
--- INSERT INTO `monstrosity_tp_skills` VALUES ('Bee', '27', 'final_sting', '321', '336', '20', '2000');
+INSERT INTO `monstrosity_tp_skills` VALUES ('Bee', '27', 'sharp_sting', '319', '334', '1', '1000');
+INSERT INTO `monstrosity_tp_skills` VALUES ('Bee', '27', 'pollen', '320', '335', '10', '1500');
+INSERT INTO `monstrosity_tp_skills` VALUES ('Bee', '27', 'final_sting', '321', '336', '20', '2000');
 
 -- INSERT INTO `monstrosity_tp_skills` VALUES ('Beetle', '28', 'power_attack', '322', '666', '1', '1000');
 -- INSERT INTO `monstrosity_tp_skills` VALUES ('Beetle', '28', 'spoil', '326', '343', '10', '800');
@@ -236,14 +231,13 @@ INSERT INTO `monstrosity_tp_skills` VALUES ('Rabbit', '1', 'whirl_claws', '259',
 -- INSERT INTO `monstrosity_tp_skills` VALUES ('Chapuli', '42', 'sanguinary_slash', '668', '2948', '20', '1000');
 -- INSERT INTO `monstrosity_tp_skills` VALUES ('Chapuli', '42', 'orthopterror', '669', '2949', '40', '1000');
 
+INSERT INTO `monstrosity_tp_skills` VALUES ('Lizard', '43', 'tail_blow', '342', '366', '70', '1000');
 -- INSERT INTO `monstrosity_tp_skills` VALUES ('Lizard', '43', 'fireball', '343', '367', '1', '1000');
--- INSERT INTO `monstrosity_tp_skills` VALUES ('Lizard', '43', 'secretion', '349', '373', '10', '500');
--- INSERT INTO `monstrosity_tp_skills` VALUES ('Lizard', '43', 'brain_crush', '345', '369', '20', '1200');
 -- INSERT INTO `monstrosity_tp_skills` VALUES ('Lizard', '43', 'blockhead', '344', '368', '30', '1500');
--- INSERT INTO `monstrosity_tp_skills` VALUES ('Lizard', '43', 'baleful_gaze', '346', '411', '40', '1000');
+-- INSERT INTO `monstrosity_tp_skills` VALUES ('Lizard', '43', 'brain_crush', '345', '369', '20', '1200');
 -- INSERT INTO `monstrosity_tp_skills` VALUES ('Lizard', '43', 'baleful_gaze', '346', '370', '40', '1000');
 -- INSERT INTO `monstrosity_tp_skills` VALUES ('Lizard', '43', 'infrasonics', '348', '372', '60', '800');
--- INSERT INTO `monstrosity_tp_skills` VALUES ('Lizard', '43', 'tail_blow', '342', '366', '70', '1000');
+-- INSERT INTO `monstrosity_tp_skills` VALUES ('Lizard', '43', 'secretion', '349', '373', '10', '500');
 
 -- INSERT INTO `monstrosity_tp_skills` VALUES ('Raptor', '44', 'ripper_fang', '350', '374', '1', '1000');
 -- INSERT INTO `monstrosity_tp_skills` VALUES ('Raptor', '44', 'chomp_rush', '354', '379', '10', '1000');
