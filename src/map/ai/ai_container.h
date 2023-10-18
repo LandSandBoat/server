@@ -70,7 +70,7 @@ public:
     bool Internal_ChangeTarget(uint16 targetid);
     bool Internal_Disengage();
     bool Internal_WeaponSkill(uint16 targid, uint16 wsid);
-    bool Internal_MobSkill(uint16 targid, uint16 wsid);
+    bool Internal_MobSkill(uint16 targid, uint16 wsid, uint16 manualTPCost = 0);
     bool Internal_PetSkill(uint16 targid, uint16 abilityid);
     bool Internal_Ability(uint16 targetid, uint16 abilityid);
     bool Internal_RangedAttack(uint16 targetid);

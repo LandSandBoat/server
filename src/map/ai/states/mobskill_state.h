@@ -30,7 +30,7 @@ class CBattleEntity;
 class CMobSkillState : public CState
 {
 public:
-    CMobSkillState(CBattleEntity* PEntity, uint16 targid, uint16 wsid);
+    CMobSkillState(CBattleEntity* PEntity, uint16 targid, uint16 wsid, uint16 manualTPCost = 0);
 
     CMobSkill* GetSkill();
 
@@ -62,6 +62,7 @@ private:
     time_point                 m_finishTime;
     duration                   m_castTime{};
     int16                      m_spentTP;
+    uint16                     m_manualTPCost;
 };
 
 #endif

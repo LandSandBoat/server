@@ -458,7 +458,7 @@ void monstrosity::HandleMonsterSkillActionPacket(CCharEntity* PChar, CBasicPacke
 
     if (PChar->health.tp >= skill.tpCost)
     {
-        PChar->PAI->Internal_MobSkill(targId, skillId);
+        PChar->PAI->Internal_MobSkill(targId, skillId, skill.tpCost);
     }
     else
     {
