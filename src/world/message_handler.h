@@ -23,18 +23,56 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 
 #include "common/mmo.h"
 
+#include <task_system.hpp>
+#ifdef WIN32
+#include <winsock2.h>
+#else
+#include <netinet/in.h>
+#endif
+
+/**
+ * Class responsible for handling messages recieved from the message server.
+ *
+ * Implementations of this class are responsible for queueing any work
+ * that affects internal state / sql queries via the given task system, using
+ * the submit() method.
+ *
+ * This is done to ensure thread-safety outside of the message_server thread.
+ */
 class IMessageHandler
 {
 public:
-    virtual ~IMessageHandler()
+    IMessageHandler()
     {
+        ts = new ts::task_system(1);
     }
 
-    /*
-     * NOTE: The copy of payload here is intentional, since these systems will eventually
-     *     : be moved to their own threads.
+    virtual ~IMessageHandler()
+    {
+        delete ts;
+    }
+
+    /**
+     * Handles messages recieved from the map servers.
      */
-    virtual bool handleMessage(std::vector<uint8> payload,
-                               in_addr            from_addr,
-                               uint16             from_port) = 0;
+    virtual bool handleMessage(const std::vector<uint8>& payload,
+                               in_addr                   from_addr,
+                               uint16                    from_port) = 0;
+
+    /**
+     * Submits work to be executed asynchronously by the task system.
+     * This work will happen serialy, on a single thread.
+     */
+    void submit(std::function<void()> func)
+    {
+        // clang-format off
+        ts->schedule([func]()
+        {
+            func();
+        });
+        // clang-format on
+    }
+
+private:
+    ts::task_system* ts;
 };

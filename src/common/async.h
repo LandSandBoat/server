@@ -27,6 +27,11 @@
 #include <functional>
 #include <string>
 
+/**
+ * This class can be used to schedule either sql queries or tasks for work
+ * in a single thread pool.
+ * This can be used to obtain thread-safety without using locks.
+ */
 class Async
 {
 public:
