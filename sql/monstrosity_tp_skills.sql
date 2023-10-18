@@ -401,20 +401,21 @@ INSERT INTO `monstrosity_tp_skills` VALUES ('Lizard', '43', 'tail_blow', '342', 
 -- INSERT INTO `monstrosity_tp_skills` VALUES ('Amphiptere', '76', 'reaving_wind', '606', '2431', '20', '1500');
 -- INSERT INTO `monstrosity_tp_skills` VALUES ('Amphiptere', '76', 'calamitous_wind', '608', '2433', '30', '1700');
 
--- INSERT INTO `monstrosity_tp_skills` VALUES ('Onyx Rabbit', '256', 'foot_kick', '257', '257', '1', '1000');
--- INSERT INTO `monstrosity_tp_skills` VALUES ('Onyx Rabbit', '256', 'dust_cloud', '258', '258', '10', '800');
--- INSERT INTO `monstrosity_tp_skills` VALUES ('Onyx Rabbit', '256', 'whirl_claws', '259', '259', '20', '1800');
--- INSERT INTO `monstrosity_tp_skills` VALUES ('Onyx Rabbit', '256', 'wild_carrot', '314', '323', '30', '1000');
+INSERT INTO `monstrosity_tp_skills` VALUES ('Onyx Rabbit', '256', 'foot_kick', '257', '257', '1', '1000');
+INSERT INTO `monstrosity_tp_skills` VALUES ('Onyx Rabbit', '256', 'dust_cloud', '258', '258', '10', '800');
+INSERT INTO `monstrosity_tp_skills` VALUES ('Onyx Rabbit', '256', 'whirl_claws', '259', '259', '20', '1800');
+INSERT INTO `monstrosity_tp_skills` VALUES ('Onyx Rabbit', '256', 'wild_carrot', '314', '323', '30', '1000');
 
--- INSERT INTO `monstrosity_tp_skills` VALUES ('Alabaster Rabbit', '257', 'foot_kick', '257', '257', '1', '1000');
--- INSERT INTO `monstrosity_tp_skills` VALUES ('Alabaster Rabbit', '257', 'whirl_claws', '259', '259', '20', '1800');
--- INSERT INTO `monstrosity_tp_skills` VALUES ('Alabaster Rabbit', '257', 'wild_carrot', '314', '323', '30', '1000');
--- INSERT INTO `monstrosity_tp_skills` VALUES ('Alabaster Rabbit', '257', 'snow_cloud', '455', '661', '40', '1000');
+INSERT INTO `monstrosity_tp_skills` VALUES ('Alabaster Rabbit', '257', 'foot_kick', '257', '257', '1', '1000');
+INSERT INTO `monstrosity_tp_skills` VALUES ('Alabaster Rabbit', '257', 'whirl_claws', '259', '259', '20', '1800');
+INSERT INTO `monstrosity_tp_skills` VALUES ('Alabaster Rabbit', '257', 'wild_carrot', '314', '323', '30', '1000');
+INSERT INTO `monstrosity_tp_skills` VALUES ('Alabaster Rabbit', '257', 'snow_cloud', '455', '661', '40', '1000');
+INSERT INTO `monstrosity_tp_skills` VALUES ('Alabaster Rabbit', '257', 'wild_ginseng', '501', '1362', '50', '1000');
 
--- INSERT INTO `monstrosity_tp_skills` VALUES ('Lapinion (Rabbit)', '258', 'foot_kick', '257', '257', '1', '1000');
--- INSERT INTO `monstrosity_tp_skills` VALUES ('Lapinion (Rabbit)', '258', 'dust_cloud', '258', '258', '10', '800');
--- INSERT INTO `monstrosity_tp_skills` VALUES ('Lapinion (Rabbit)', '258', 'whirl_claws', '259', '259', '20', '1800');
--- INSERT INTO `monstrosity_tp_skills` VALUES ('Lapinion (Rabbit)', '258', 'wild_carrot', '314', '323', '30', '1000');
+INSERT INTO `monstrosity_tp_skills` VALUES ('Lapinion (Rabbit)', '258', 'foot_kick', '257', '257', '1', '1000');
+INSERT INTO `monstrosity_tp_skills` VALUES ('Lapinion (Rabbit)', '258', 'dust_cloud', '258', '258', '10', '800');
+INSERT INTO `monstrosity_tp_skills` VALUES ('Lapinion (Rabbit)', '258', 'whirl_claws', '259', '259', '20', '1800');
+INSERT INTO `monstrosity_tp_skills` VALUES ('Lapinion (Rabbit)', '258', 'wild_carrot', '314', '323', '30', '1000');
 
 -- INSERT INTO `monstrosity_tp_skills` VALUES ('Elasmoth (Behemoth)', '259', 'wild_horn', '444', '628', '1', '1000');
 -- INSERT INTO `monstrosity_tp_skills` VALUES ('Elasmoth (Behemoth)', '259', 'shock_wave', '446', '631', '10', '1000');
