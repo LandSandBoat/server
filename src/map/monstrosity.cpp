@@ -440,6 +440,14 @@ void monstrosity::HandleMonsterSkillActionPacket(CCharEntity* PChar, CBasicPacke
     uint16 targId  = data.ref<uint16>(0x08);
     uint16 skillId = data.ref<uint16>(0x0C);
 
+    // If not found, bail out
+    if (gMonstrositySkillMap.find(skillId) == gMonstrositySkillMap.end())
+    {
+        ShowWarning(fmt::format("Monstrosity skill {} not implemented.", skillId));
+        PChar->pushPacket(std::make_unique<CMessageBasicPacket>(PChar, PChar, 0, 0, MSGBASIC_CANNOT_PERFORM_ACTION));
+        return;
+    }
+
     // Translate skillId from the dat-based Monstrosity ID to the ID's we use for regular mob skills
     auto skill = gMonstrositySkillMap[skillId];
 
@@ -454,7 +462,8 @@ void monstrosity::HandleMonsterSkillActionPacket(CCharEntity* PChar, CBasicPacke
     }
     else
     {
-        // TODO: Rejection message
+        // TODO: Correct rejection message
+        PChar->pushPacket(std::make_unique<CMessageBasicPacket>(PChar, PChar, 0, 0, MSGBASIC_CANNOT_PERFORM_ACTION));
     }
 }
 
