@@ -30,16 +30,22 @@ CMonipulatorPacket2::CMonipulatorPacket2(CCharEntity* PChar)
     this->setType(0x63);
     this->setSize(0xB4);
 
+    // NOTE: These packets have to be at least partially populated, or the
+    // player will lose their abilities and get a big selection of incorrect traits.
+
+    std::memset(data + 4, 0, PACKET_SIZE - 4);
+
+    // NOTE: These are the equivalent entries from Monipulator1 packet
+    // ref<uint8>(0x04) = 0x03; // Update Type
+    // ref<uint8>(0x06) = 0xD8; // Variable Data Size
+
+    std::array<uint8, 3> packet2 = { 0x04, 0x00, 0xB0 };
+    std::memcpy(data + 0x04, &packet2, sizeof(packet2));
+
     if (PChar->m_PMonstrosity == nullptr)
     {
         return;
     }
-
-    std::memset(data + 4, 0, PACKET_SIZE - 4);
-
-    // TODO: What are these?
-    std::array<uint8, 3> packet2 = { 0x04, 0x00, 0xB0 };
-    std::memcpy(data + 0x04, &packet2, sizeof(packet2));
 
     // NOTE: SE added these after-the-fact, so they're not sent in Monipulator1 and they're at the end of the array!
     // Slime Level
