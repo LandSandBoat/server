@@ -1,4 +1,5 @@
-﻿#include "../src/map/utils/moduleutils.h"
+﻿#include "../src/map/packet_guard.h"
+#include "../src/map/utils/moduleutils.h"
 #include "../src/map/zone.h"
 
 extern uint8                                                                             PacketSize[512];
@@ -87,6 +88,11 @@ class RenamerModule : public CPPModule
 
             SendListPacket(PChar, dataString);
         };
+
+        // Add new possible packet to PacketGuard allow list
+        auto& allowList = PacketGuard::GetPacketAllowList();
+
+        allowList[SUBSTATE_IN_CS][0x01] = true;
     }
 };
 

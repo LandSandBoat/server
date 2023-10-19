@@ -136,4 +136,9 @@ namespace PacketGuard
         output += "=======================================\n";
         ShowInfo(output);
     }
+
+    auto GetPacketAllowList() -> std::unordered_map<CHAR_SUBSTATE, std::unordered_map<uint16, bool>>&
+    {
+        return allowList;
+    }
 } // namespace PacketGuard
