@@ -31,6 +31,7 @@ abilityObject.onUseAbility = function(player, target, ability)
         ability:setMsg(xi.msg.basic.JA_NO_EFFECT)
         return 0
     end
+
     local tameBonus   = 0
     local charmChance = xi.magic.getCharmChance(player, target, false)
 

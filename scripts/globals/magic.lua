@@ -1933,7 +1933,11 @@ xi.magic.doAbsorbSpell = function(caster, target, spell, params)
     return spellTable[isAbsorbTp].returnVal
 end
 
-xi.magic.getCharmChance = function(charmer, target, includeCharmAffinityAndChanceMods)
+xi.magic.getCharmChance = function(charmer, target, includeCharmAffinityAndChanceMods, isMaidensVirelai)
+    if isMaidensVirelai == nil then
+        isMaidensVirelai = false
+    end
+
     -- Paranoid check
     if
         (not charmer or not target) or                            -- Invalid params
@@ -1950,28 +1954,25 @@ xi.magic.getCharmChance = function(charmer, target, includeCharmAffinityAndChanc
     local targetLevel     = target:getMainLvl()
     local charmres        = target:getMod(xi.mod.CHARMRES)
     local charmChance     = 50 - charmres
-    local charmerBSTLevel = 0
+    local charmerJobLevel = 0
 
     if charmer:isPC() then
-        charmerBSTLevel = charmer:getJobLevel(xi.job.BST)
-        local charmerBRDLevel = charmer:getJobLevel(xi.job.BRD)
-        -- Maiden's Virelai check
-        if charmer:getMainJob() == xi.job.BST and charmerBRDLevel > charmerBSTLevel then
-            charmerBSTLevel = charmerBRDLevel
+        if isMaidensVirelai then
+            charmerJobLevel = charmer:getJobLevel(xi.job.BRD)
+        else
+            charmerJobLevel = charmer:getJobLevel(xi.job.BST)
         end
-
-        charmerBSTLevel = math.min(charmerBSTLevel, charmerLevel)
     else
-        charmerBSTLevel = charmerLevel
+        charmerJobLevel = charmerLevel
     end
 
     -- dLvl varies for different level ranges
     if targetLevel >= 71 then
-        charmChance = charmChance - 10 * (targetLevel - charmerBSTLevel)
+        charmChance = charmChance - 10 * (targetLevel - charmerJobLevel)
     elseif targetLevel >= 51 then
-        charmChance = charmChance - 5 * (targetLevel - charmerBSTLevel)
+        charmChance = charmChance - 5 * (targetLevel - charmerJobLevel)
     else
-        charmChance = charmChance - 3 * (targetLevel - charmerBSTLevel)
+        charmChance = charmChance - 3 * (targetLevel - charmerJobLevel)
     end
 
     -- Multiplier determined by target's light EEM
