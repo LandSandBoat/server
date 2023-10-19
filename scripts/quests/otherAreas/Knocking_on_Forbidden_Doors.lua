@@ -2,7 +2,7 @@
 -- Knocking on Forbidden Doors
 -----------------------------------
 -- Log ID: 4, Quest ID: 78
--- Enaremand       : !pos 95.962 -41 51.613
+-- Enaremand       : !pos 95.962 -41 51.613 26
 -- Fyi_Chalmwoh    : !pos -39.273 -16.000 70.126 249
 -- Alsha Spawn QM  : !pos -155.805 -15.692 644.617
 -- Mire Incense KI : 709
@@ -186,21 +186,21 @@ quest.sections =
                             richEnough = 1
                         end
 
-                        player:updateEvent({ [0] = richEnough, -- Not sure if this is the legitimate use, but it works.
-                                             [1] = xi.mannequin.getMannequins(player),
-                                             [2] = option,
-                        })
+                        player:updateEvent({
+                            [0] = richEnough, -- Not sure if this is the legitimate use, but it works.
+                            [1] = xi.mannequin.getMannequins(player),
+                            [2] = option })
                     elseif
                         option >= 11 and
                         option <= 18
                     then
                         -- Pose a mannequin
                         local race = option - 10 -- From 1 to 8, for consistency in lua
-                        player:updateEvent({ [0] = 1,
-                                             [1] = xi.mannequin.getMannequins(player),
-                                             [2] = option,
-                                             [3] = xi.mannequin.getMannequinPose(player, race),
-                        })
+                        player:updateEvent({
+                            [0] = 1,
+                            [1] = xi.mannequin.getMannequins(player),
+                            [2] = option,
+                            [3] = xi.mannequin.getMannequinPose(player, race) })
                     end
                 end,
             },
@@ -217,6 +217,7 @@ quest.sections =
                         local pose = math.floor(option / 32) -- Same as rshift(5)
                         xi.mannequin.setMannequinPose(player, race, pose)
                     end
+
                     quest:complete(player)
                 end,
             },
@@ -235,12 +236,12 @@ quest.sections =
             ['Fyi_Chalmwoh'] =
             {
                 onTrigger = function(player, npc)
-                    return quest:event(321, { [1] = xi.mannequin.getMannequins(player),
-                                              [2] = xi.mannequin.cost.PURCHASE,
-                                              [3] = xi.mannequin.cost.TRADE,
-                                              [4] = xi.mannequin.cost.POSE,
-                                              [5] = player:getGil(),
-                                              })
+                    return quest:event(321, {
+                        [1] = xi.mannequin.getMannequins(player),
+                        [2] = xi.mannequin.cost.PURCHASE,
+                        [3] = xi.mannequin.cost.TRADE,
+                        [4] = xi.mannequin.cost.POSE,
+                        [5] = player:getGil() })
                 end,
 
                 onTrade = function(player, npc, trade)
@@ -250,16 +251,17 @@ quest.sections =
                     for itemId = xi.items.HUME_M_MANNEQUIN, xi.items.GALKA_MANNEQUIN do
                         if npcUtil.tradeHasExactly(trade, itemId) then
                             tradedMannequin = itemId
+                            break
                         end
                     end
 
-                    if tradedMannequin then
-                        return quest:progressEvent(319, { [0] = 2,
+                    if tradedMannequin ~= 0 then
+                        return quest:progressEvent(319, {
+                            [0] = 2,
                             [1] = xi.mannequin.getMannequins(player), -- Player Mannequin List
                             [2] = xi.mannequin.cost.PURCHASE,
                             [3] = xi.mannequin.cost.TRADE,
-                            [4] = 1, -- Leaving this out gives a "It's still in pretty good condition" message
-                            })
+                            [4] = 1 }) -- Leaving this out gives a "It's still in pretty good condition" message
                     end
                 end,
             },
@@ -274,21 +276,21 @@ quest.sections =
                             richEnough = 1
                         end
 
-                        player:updateEvent({ [0] = richEnough, -- Not sure if this is the legitimate use, but it works.
-                                             [1] = xi.mannequin.getMannequins(player),
-                                             [2] = option,
-                        })
+                        player:updateEvent({
+                            [0] = richEnough, -- Not sure if this is the legitimate use, but it works.
+                            [1] = xi.mannequin.getMannequins(player),
+                            [2] = option })
                     elseif
                         option >= 11 and
                         option <= 18
                     then
                         -- Pose a mannequin
                         local race = option - 10 -- From 1 to 8, for consistency in lua
-                        player:updateEvent({ [0] = 1,
-                                             [1] = xi.mannequin.getMannequins(player),
-                                             [2] = option,
-                                             [3] = xi.mannequin.getMannequinPose(player, race),
-                        })
+                        player:updateEvent({
+                            [0] = 1,
+                            [1] = xi.mannequin.getMannequins(player),
+                            [2] = option,
+                            [3] = xi.mannequin.getMannequinPose(player, race) })
                     end
                 end,
             },
@@ -304,6 +306,8 @@ quest.sections =
                     then
                         player:confirmTrade()
                         npcUtil.giveItem(player, xi.items.HUME_M_MANNEQUIN + option - 1)
+                        local race = ((option - 1) % 8) + 1
+                        xi.mannequin.setMannequinPose(player, race, 0)
                     end
                 end,
 
@@ -317,6 +321,8 @@ quest.sections =
                     then
                         player:messageSpecial(mhauraID.text.ITEM_OBTAINED, xi.items.HUME_M_MANNEQUIN + option - 1)
                         player:addItem(xi.items.HUME_M_MANNEQUIN + option - 1)
+                        local race = ((option - 1) % 8) + 1
+                        xi.mannequin.setMannequinPose(player, race, 0)
                     elseif
                         option >= 10 and
                         player:delGil(xi.mannequin.cost.POSE)
