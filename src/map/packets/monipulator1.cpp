@@ -31,13 +31,16 @@ CMonipulatorPacket1::CMonipulatorPacket1(CCharEntity* PChar)
     this->setType(0x63);
     this->setSize(0xDC);
 
+    // NOTE: These packets have to be at least partially populated, or the
+    // player will lose their abilities and get a big selection of incorrect traits.
+
+    ref<uint8>(0x04) = 0x03; // Update Type
+    ref<uint8>(0x06) = 0xD8; // Variable Data Size
+
     if (PChar->m_PMonstrosity == nullptr)
     {
         return;
     }
-
-    ref<uint8>(0x04) = 0x03; // Update Type
-    ref<uint8>(0x06) = 0xD8; // Variable Data Size
 
     ref<uint16>(0x08) = PChar->m_PMonstrosity->Species;
     ref<uint16>(0x0A) = PChar->m_PMonstrosity->Flags;
