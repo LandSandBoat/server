@@ -2,18 +2,20 @@
 -- func: gotoid
 -- desc: Go to given mob or npc ID
 -----------------------------------
-cmdprops =
+local commandObj = {}
+
+commandObj.cmdprops =
 {
     permission = 1,
     parameters = 'i'
 }
 
-function error(player, msg)
+local function error(player, msg)
     player:PrintToPlayer(msg)
     player:PrintToPlayer('!gotoid <mobId|npcId>')
 end
 
-function onTrigger(player, target)
+commandObj.onTrigger = function(player, target)
     -- validate npc
     if not target or target == 0 then
         error(player, 'You must enter a mob or NPC ID.')
@@ -66,3 +68,5 @@ function onTrigger(player, target)
         end)
     end
 end
+
+return commandObj

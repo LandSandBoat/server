@@ -2,20 +2,21 @@
 -- func: setplayermodel <modelid> <slot> <player>
 -- desc: Sets the look of the user or target player based on model id offset and slot (for testing).
 -----------------------------------
+local commandObj = {}
 
-cmdprops =
+commandObj.cmdprops =
 {
     permission = 1,
     parameters = 'iis'
 }
 
-function error(player, msg)
+local function error(player, msg)
     player:PrintToPlayer(msg)
     player:PrintToPlayer('!setplayermodel <model> <slot> (player)')
     player:PrintToPlayer('Slots: 0=main 1=sub 2=ranged 3=ammo 4=head 5=body 6=hands 7=legs 8=feet')
 end
 
-function onTrigger(player, model, slot, target)
+commandObj.onTrigger = function(player, model, slot, target)
     -- validate model
     if model == nil then
         error(player, 'Invalid model ID.')
@@ -57,3 +58,5 @@ function onTrigger(player, model, slot, target)
     targ:setModelId(model, slot)
     player:PrintToPlayer(string.format('Set %s\'s %s slot to model %i.', targ:getName(), slotNameByNum[slot], model))
 end
+
+return commandObj

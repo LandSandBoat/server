@@ -47,12 +47,10 @@ global_objects=(
     switch
     getVanaMidnight
     getMidnight
-    getConquestTally
 
     Mission
     Quest
     HiddenQuest
-    fileExists
     InteractionGlobal
     InteractionLookup
     Action
@@ -77,13 +75,6 @@ global_objects=(
 
     onBattlefieldHandlerInitialise
     applyResistanceAddEffect
-
-    RoeParseTimed
-    RoeParseRecords
-
-    cmdprops
-    error
-    onTrigger
 
     addBonuses
     addBonusesAbility
@@ -121,10 +112,6 @@ global_objects=(
     TPMOD_ACC
     TPMOD_ATTACK
     TPMOD_DURATION
-
-    INT_BASED
-    CHR_BASED
-    MND_BASED
 
     ForceCrash
     BuildString

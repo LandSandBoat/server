@@ -7,6 +7,7 @@ DROP TABLE IF EXISTS `server_variables`;
 CREATE TABLE `server_variables` (
   `name` varchar(50) NOT NULL,
   `value` int(11) NOT NULL,
+  `expiry` int(11) NOT NULL DEFAULT 0,
   PRIMARY KEY (`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 

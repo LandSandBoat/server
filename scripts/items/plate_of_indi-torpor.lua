@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 6096
 -- plate_of_indi-torpor
 -- Teaches INDI-TORPOR
------------------------------------------
+-----------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

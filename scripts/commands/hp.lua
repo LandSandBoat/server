@@ -2,19 +2,20 @@
 -- func: hp <amount> <player>
 -- desc: Sets the GM or target players health.
 -----------------------------------
+local commandObj = {}
 
-cmdprops =
+commandObj.cmdprops =
 {
     permission = 1,
     parameters = 'is'
 }
 
-function error(player, msg)
+local function error(player, msg)
     player:PrintToPlayer(msg)
     player:PrintToPlayer('!hp <amount> (player)')
 end
 
-function onTrigger(player, hp, target)
+commandObj.onTrigger = function(player, hp, target)
     -- validate target
     local targ
     local cursorTarget = player:getCursorTarget()
@@ -50,3 +51,5 @@ function onTrigger(player, hp, target)
         player:PrintToPlayer(string.format('%s is currently dead.', targ:getName()))
     end
 end
+
+return commandObj

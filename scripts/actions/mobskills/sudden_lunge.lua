@@ -1,7 +1,7 @@
----------------------------------------------
+-----------------------------------
 -- Sudden Lunge
 -- Knockback damage and Stun effect. Ignores Utsusemi, reduces Ladybug's HP by 5%-15% whether it hits or not.
--------------------------------------------------------------
+-----------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

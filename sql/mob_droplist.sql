@@ -7706,6 +7706,7 @@ INSERT INTO `mob_droplist` VALUES (941,0,0,1000,1061,30); -- Sacrarium Chest Key
 -- ZoneID: 195 - Gazer
 INSERT INTO `mob_droplist` VALUES (942,0,0,1000,914,770); -- Vial Of Mercury (77.0%)
 INSERT INTO `mob_droplist` VALUES (942,0,0,1000,939,660); -- Hecteyes Eye (66.0%)
+INSERT INTO `mob_droplist` VALUES (942,0,0,1000,1289,70); -- Burning Hakutaku Eye (7.0%)
 
 -- ZoneID: 149 - Geezard
 INSERT INTO `mob_droplist` VALUES (943,0,0,1000,926,@ALWAYS); -- Lizard Tail (Always, 100%)
@@ -11004,10 +11005,7 @@ INSERT INTO `mob_droplist` VALUES (1347,0,0,1000,4105,@COMMON); -- Ice Cluster (
 INSERT INTO `mob_droplist` VALUES (1348,0,0,1000,16511,@ALWAYS); -- Burnite Shell Stone (Always, 100%)
 INSERT INTO `mob_droplist` VALUES (1348,0,0,1000,637,@UNCOMMON); -- Vial Of Slime Oil (Uncommon, 10%)
 
--- ZoneID: 138 - Star Ruby Quadav
-INSERT INTO `mob_droplist` VALUES (1349,0,0,1000,1470,80); -- Sparkling Stone (8.0%)
-INSERT INTO `mob_droplist` VALUES (1349,0,0,1000,1474,80); -- Infinity Core (8.0%)
-INSERT INTO `mob_droplist` VALUES (1349,0,0,1000,4248,80); -- Copy Of Ginuvas Battle Theory (8.0%)
+-- 1349: Free to use
 
 -- ZoneID:  16 - Idle Wanderer
 -- ZoneID:  20 - Idle Wanderer

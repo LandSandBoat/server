@@ -171,8 +171,8 @@ xi.pets.wyvern.onMobSpawn = function(mob)
     end)
 
     -- https://www.bg-wiki.com/ffxi/Wyvern_(Dragoon_Pet)#Parameter_Increase
-    master:addListener('EXPERIENCE_POINTS', 'PET_WYVERN_EXP', function(player, exp)
-        xi.job_utils.dragoon.addWyvernExp(player, exp)
+    master:addListener('EXPERIENCE_POINTS', 'PET_WYVERN_EXP', function(playerObj, mobObj, exp)
+        xi.job_utils.dragoon.addWyvernExp(playerObj, exp)
     end)
 end
 

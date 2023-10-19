@@ -2,19 +2,20 @@
 -- func: despawnmob <mobid-optional>
 -- desc: Despawns the given mob <t> or mobID)
 -----------------------------------
+local commandObj = {}
 
-cmdprops =
+commandObj.cmdprops =
 {
     permission = 1,
     parameters = 'i'
 }
 
-function error(player, msg)
+local function error(player, msg)
     player:PrintToPlayer(msg)
     player:PrintToPlayer('!despawnmob (mobID)')
 end
 
-function onTrigger(player, mobId)
+commandObj.onTrigger = function(player, mobId)
     -- validate mobId
     local targ
     if mobId == nil then
@@ -35,3 +36,5 @@ function onTrigger(player, mobId)
     DespawnMob(targ:getID())
     player:PrintToPlayer(string.format('Despawned %s %i.', targ:getName(), targ:getID()))
 end
+
+return commandObj

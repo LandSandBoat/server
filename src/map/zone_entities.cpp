@@ -740,6 +740,19 @@ void CZoneEntities::SpawnPCs(CCharEntity* PChar)
             continue;
         }
 
+        // TODO: This is a temporary fix so that Feretory _seems_ like a solo zone.
+        // We need a better solution for this that properly supports:
+        // - Shared moghouse (both floors)
+        // - Mog Garden
+        // - Feretory
+        // and the NPCs that exist per-player in those zones (Garden, Music Items in MH, etc.)
+        // Despawn character if it's a hidden GM, is in a different mog house, or if player is in a conflict while other is not, or too far up/down
+        if (PChar->loc.zone->GetID() == ZONE_FERETORY)
+        {
+            toRemove.emplace_back(pc);
+            continue;
+        }
+
         // Despawn character if it's currently spawned and is far away
         float charDistance = distance(PChar->loc.p, pc->loc.p);
         if (charDistance >= CHARACTER_DESPAWN_DISTANCE)
@@ -1373,9 +1386,19 @@ void CZoneEntities::ZoneServer(time_point tick)
 
         if (PMob->status == STATUS_TYPE::DISAPPEAR && PMob->m_bReleaseTargIDOnDisappear)
         {
+            if (PMob->PPet != nullptr)
+            {
+                PMob->PPet->PMaster = nullptr;
+            }
+
+            if (PMob->PMaster != nullptr)
+            {
+                PMob->PMaster->PPet = nullptr;
+            }
+
             for (auto PMobIt : m_mobList)
             {
-                CMobEntity* PCurrentMob = (CMobEntity*)PMobIt.second;
+                CMobEntity* PCurrentMob = static_cast<CMobEntity*>(PMobIt.second);
                 PCurrentMob->PEnmityContainer->Clear(PMob->id);
             }
 
@@ -1386,7 +1409,18 @@ void CZoneEntities::ZoneServer(time_point tick)
 
             for (EntityList_t::const_iterator it = m_charList.begin(); it != m_charList.end(); ++it)
             {
-                CCharEntity* PChar = (CCharEntity*)it->second;
+                CCharEntity* PChar = static_cast<CCharEntity*>(it->second);
+
+                if (PChar->PClaimedMob == PMob)
+                {
+                    PChar->PClaimedMob = nullptr;
+                }
+
+                if (PChar->currentEvent && PChar->currentEvent->targetEntity == PMob)
+                {
+                    PChar->currentEvent->targetEntity = nullptr;
+                }
+
                 if (distance(PChar->loc.p, PMob->loc.p) < 50)
                 {
                     PChar->SpawnMOBList.erase(PMob->id);

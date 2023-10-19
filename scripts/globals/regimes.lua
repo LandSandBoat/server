@@ -1380,7 +1380,7 @@ xi.regime.checkRegime = function(player, mob, regimeId, index, regimeType)
         return
     end
 
-    -- people in alliance get no fields credit unless FOV_REWARD_ALLIANCE is 1 in scripts/globals/settings.lua
+    -- people in alliance get no fields credit unless FOV_REWARD_ALLIANCE is 1 in settings/main.lua
     if
         xi.settings.main.FOV_REWARD_ALLIANCE ~= 1 and
         regimeType == xi.regime.type.FIELDS and
@@ -1389,7 +1389,7 @@ xi.regime.checkRegime = function(player, mob, regimeId, index, regimeType)
         return
     end
 
-    -- people in alliance get no grounds credit unless GOV_REWARD_ALLIANCE is 1 in scripts/globals/settings.lua
+    -- people in alliance get no grounds credit unless GOV_REWARD_ALLIANCE is 1 in settings/main.lua
     if
         xi.settings.main.GOV_REWARD_ALLIANCE ~= 1 and
         regimeType == xi.regime.type.GROUNDS and
@@ -1494,8 +1494,11 @@ xi.regime.checkRegime = function(player, mob, regimeId, index, regimeType)
         player:setCharVar('[regime]lastReward', vanadielEpoch)
     end
 
-    -- award XP every page completion
-    player:addExp(reward * xi.settings.main.BOOK_EXP_RATE)
+    -- Award EXP for page completion
+    -- Player must be equal or greater than REGIME_REWARD_THRESHOLD levels below the minimum suggested level
+    if player:getMainLvl() >= math.max(1, page[5] - xi.settings.main.REGIME_REWARD_THRESHOLD) then
+        player:addExp(reward * xi.settings.main.BOOK_EXP_RATE)
+    end
 
     -- repeating regimes
     if player:getCharVar('[regime]repeat') == 1 then

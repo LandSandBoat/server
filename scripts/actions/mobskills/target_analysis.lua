@@ -1,8 +1,8 @@
----------------------------------------------
+-----------------------------------
 -- Target Analysis
 -- Description: AoE Absorb All with randomness
 -- Type: Magical
--------------------------------------------------------
+-----------------------------------
 local mobskillObject = {}
 
 local attributesDown =

@@ -2,14 +2,15 @@
 -- func: hide
 -- desc: Hides the GM from other players.
 -----------------------------------
+local commandObj = {}
 
-cmdprops =
+commandObj.cmdprops =
 {
     permission = 1,
     parameters = 's'
 }
 
-function onTrigger(player, cmd)
+commandObj.onTrigger = function(player, cmd)
     -- Obtain the players hide status..
     local isHidden = player:getCharVar('GMHidden')
     if cmd ~= nil then
@@ -37,3 +38,5 @@ function onTrigger(player, cmd)
         player:PrintToPlayer('You are no longer GM hidden from other players.')
     end
 end
+
+return commandObj

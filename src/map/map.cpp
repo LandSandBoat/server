@@ -43,6 +43,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "linkshell.h"
 #include "message.h"
 #include "mob_spell_list.h"
+#include "monstrosity.h"
 #include "packet_guard.h"
 #include "packet_system.h"
 #include "roe.h"
@@ -98,6 +99,8 @@ extern std::map<uint16, CZone*> g_PZoneList; // Global array of pointers for zon
 bool gLoadAllLua = false;
 
 std::unordered_map<uint32, std::unordered_map<uint16, std::vector<std::pair<uint16, uint8>>>> PacketMods;
+
+extern std::atomic<bool> gProcessLoaded;
 
 namespace
 {
@@ -272,6 +275,8 @@ int32 do_init(int32 argc, char** argv)
     fishingutils::InitializeFishingSystem();
     instanceutils::LoadInstanceList();
 
+    monstrosity::LoadStaticData();
+
     ShowInfo("do_init: server is binding with port %u", map_port == 0 ? settings::get<uint16>("network.MAP_PORT") : map_port);
     map_fd = makeBind_udp(INADDR_ANY, map_port == 0 ? settings::get<uint16>("network.MAP_PORT") : map_port);
 
@@ -285,6 +290,11 @@ int32 do_init(int32 argc, char** argv)
     CTaskMgr::getInstance()->AddTask("map_cleanup", server_clock::now(), nullptr, CTaskMgr::TASK_INTERVAL, map_cleanup, 5s);
     CTaskMgr::getInstance()->AddTask("garbage_collect", server_clock::now(), nullptr, CTaskMgr::TASK_INTERVAL, map_garbage_collect, 15min);
     CTaskMgr::getInstance()->AddTask("persist_server_vars", server_clock::now(), nullptr, CTaskMgr::TASK_INTERVAL, serverutils::PersistVolatileServerVars, 1min);
+
+    ShowInfo("do_init: Removing expired database variables");
+    uint32 currentTimestamp = CVanaTime::getInstance()->getSysTime();
+    sql->Query("DELETE FROM char_vars WHERE expiry > 0 AND expiry <= %d", currentTimestamp);
+    sql->Query("DELETE FROM server_variables WHERE expiry > 0 AND expiry <= %d", currentTimestamp);
 
     g_PBuff   = new int8[MAX_BUFFER_SIZE + 20];
     PTempBuff = new int8[MAX_BUFFER_SIZE + 20];
@@ -363,6 +373,8 @@ int32 do_init(int32 argc, char** argv)
         gRunFlag = false;
     });
     // clang-format on
+
+    gProcessLoaded = true;
 
     return 0;
 }
@@ -1075,45 +1087,102 @@ int32 map_cleanup(time_point tick, CTaskMgr::CTask* PTask)
             {
                 if (PChar != nullptr)
                 {
-                    if (map_session_data->shuttingDown == 0)
+                    // Check if the PChar current zone is on this server
+                    CZone* PZone    = nullptr;
+                    bool   otherMap = false;
+
+                    // Get zone if available
+                    if (PChar->loc.zone && PChar->loc.zone->GetID() && (g_PZoneList.find(PChar->loc.zone->GetID()) != g_PZoneList.end()))
                     {
-                        // [Alliance] fix to stop server crashing:
-                        // if a party within an alliance only has 1 char (that char will be party leader)
-                        // if char then disconnects we need to tell the server about the alliance change
-                        if (PChar->PParty != nullptr && PChar->PParty->m_PAlliance != nullptr && PChar->PParty->GetLeader() == PChar)
+                        PZone = PChar->loc.zone;
+                    }
+
+                    // if PChar->loc.zone != null, maybe we didn't receive 0x00D, check accounts_sessions
+                    if (PZone)
+                    {
+                        const char* fmtQuery = "select server_addr, server_port from accounts_sessions WHERE charid = %u";
+                        sql->Query(fmtQuery, PChar->id);
+                        if (sql->NextRow() == SQL_SUCCESS)
                         {
-                            if (PChar->PParty->HasOnlyOneMember())
+                            uint32 server_addr = sql->GetUIntData(0);
+                            uint32 server_port = sql->GetUIntData(1);
+
+                            if (server_addr != PZone->GetIP() || server_port != PZone->GetPort())
                             {
-                                if (PChar->PParty->m_PAlliance->hasOnlyOneParty())
-                                {
-                                    PChar->PParty->m_PAlliance->dissolveAlliance();
-                                }
-                                else
-                                {
-                                    PChar->PParty->m_PAlliance->removeParty(PChar->PParty);
-                                }
+                                otherMap = true;
                             }
                         }
+                    }
 
-                        // uncharm pet if player d/c
-                        if (PChar->PPet != nullptr && PChar->PPet->objtype == TYPE_MOB)
+                    if (map_session_data->shuttingDown == 0)
+                    {
+                        if (!otherMap)
                         {
-                            petutils::DespawnPet(PChar);
+                            // [Alliance] fix to stop server crashing:
+                            // if a party within an alliance only has 1 char (that char will be party leader)
+                            // if char then disconnects we need to tell the server about the alliance change
+                            if (PChar->PParty != nullptr && PChar->PParty->m_PAlliance != nullptr && PChar->PParty->GetLeader() == PChar)
+                            {
+                                if (PChar->PParty->HasOnlyOneMember())
+                                {
+                                    if (PChar->PParty->m_PAlliance->hasOnlyOneParty())
+                                    {
+                                        PChar->PParty->m_PAlliance->dissolveAlliance();
+                                    }
+                                    else
+                                    {
+                                        PChar->PParty->m_PAlliance->removeParty(PChar->PParty);
+                                    }
+                                }
+                            }
+
+                            // uncharm pet if player d/c
+                            if (PChar->PPet != nullptr && PChar->PPet->objtype == TYPE_MOB)
+                            {
+                                petutils::DespawnPet(PChar);
+                            }
+
+                            PChar->StatusEffectContainer->SaveStatusEffects(true);
+                            charutils::SaveCharPosition(PChar);
+
+                            ShowDebug("map_cleanup: %s timed out, closing session", PChar->GetName());
+
+                            PChar->status    = STATUS_TYPE::SHUTDOWN;
+                            auto basicPacket = CBasicPacket();
+                            PacketParser[0x00D](map_session_data, PChar, basicPacket);
                         }
+                        else
+                        {
+                            ShowDebug(fmt::format("Clearing map server session for player: {} in zone: {} (On other map server = {})", PChar->name, PChar->loc.zone ? PChar->loc.zone->GetName() : "None", otherMap ? "Yes" : "No"));
 
-                        PChar->StatusEffectContainer->SaveStatusEffects(true);
-                        charutils::SaveCharPosition(PChar);
+                            if (PZone)
+                            {
+                                PZone->DecreaseZoneCounter(PChar);
+                            }
 
-                        ShowDebug("map_cleanup: %s timed out, closing session", PChar->GetName());
+                            destroy_arr(map_session_data->server_packet_data);
+                            destroy(map_session_data->PChar);
+                            destroy(map_session_data);
 
-                        PChar->status    = STATUS_TYPE::SHUTDOWN;
-                        auto basicPacket = CBasicPacket();
-                        PacketParser[0x00D](map_session_data, PChar, basicPacket);
+                            map_session_list.erase(it++);
+                            continue;
+                        }
                     }
                     else
                     {
-                        map_session_data->PChar->StatusEffectContainer->SaveStatusEffects(true);
-                        sql->Query("DELETE FROM accounts_sessions WHERE charid = %u;", map_session_data->PChar->id);
+                        if (!otherMap)
+                        {
+                            // Player session is attached to this map process and has stopped responding.
+                            map_session_data->PChar->StatusEffectContainer->SaveStatusEffects(true);
+                            sql->Query("DELETE FROM accounts_sessions WHERE charid = %u;", map_session_data->PChar->id);
+                        }
+
+                        ShowDebug(fmt::format("Clearing map server session for player: {} in zone: {} (On other map server = {})", PChar->name, PChar->loc.zone ? PChar->loc.zone->GetName() : "None", otherMap ? "Yes" : "No"));
+
+                        if (PZone)
+                        {
+                            PZone->DecreaseZoneCounter(PChar);
+                        }
 
                         destroy_arr(map_session_data->server_packet_data);
                         destroy(map_session_data->PChar);

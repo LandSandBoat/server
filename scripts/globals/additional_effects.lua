@@ -1,4 +1,4 @@
-------------------------------------------------------------------------------
+-----------------------------------
 -- This global is intended to handle additional effects from item sources of:
 -- melee attacks, ranged attacks, auto-spikes
 -- Notes:
@@ -10,11 +10,11 @@
 -- In testing my fire sword had the same damage ranges no matter my level vs same mob.
 -- Weakness/resistance to element would swing damage range a lot
 -- For status effects is it possible to land on highly resistant mobs because of flooring.
-------------------------------------------------------------------------------
+-----------------------------------
 require('scripts/globals/teleports') -- For warp weapon proc.
 require('scripts/globals/magic') -- For resist functions
 require('scripts/globals/utils') -- For clamping function
---------------------------------------
+-----------------------------------
 xi = xi or {}
 xi.additionalEffect = xi.additionalEffect or {}
 

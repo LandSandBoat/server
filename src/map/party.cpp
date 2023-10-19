@@ -149,9 +149,8 @@ void CParty::DisbandParty(bool playerInitiated)
         // make sure chat server isn't notified of a disband if this came from the chat server already
         if (playerInitiated)
         {
-            uint8 data[8]{};
+            uint8 data[4]{};
             ref<uint32>(data, 0) = m_PartyID;
-            ref<uint32>(data, 4) = m_PartyID;
             message::send(MSG_PT_DISBAND, data, sizeof data, nullptr);
         }
     }
@@ -206,8 +205,16 @@ void CParty::AssignPartyRole(const std::string& MemberName, uint8 role)
             break;
     }
     uint8 data[4]{};
-    ref<uint32>(data, 0) = m_PartyID;
-    message::send(MSG_PT_RELOAD, data, sizeof data, nullptr);
+    if (m_PAlliance)
+    {
+        ref<uint32>(data, 0) = m_PAlliance->m_AllianceID;
+        message::send(MSG_ALLIANCE_RELOAD, data, sizeof data, nullptr);
+    }
+    else
+    {
+        ref<uint32>(data, 0) = m_PartyID;
+        message::send(MSG_PT_RELOAD, data, sizeof data, nullptr);
+    }
 }
 
 // get number of members in specified zone
@@ -328,8 +335,16 @@ void CParty::RemoveMember(CBattleEntity* PEntity)
                 sql->Query("DELETE FROM accounts_parties WHERE charid = %u;", PChar->id);
 
                 uint8 data[4]{};
-                ref<uint32>(data, 0) = m_PartyID;
-                message::send(MSG_PT_RELOAD, data, sizeof data, nullptr);
+                if (m_PAlliance)
+                {
+                    ref<uint32>(data, 0) = m_PAlliance->m_AllianceID;
+                    message::send(MSG_ALLIANCE_RELOAD, data, sizeof data, nullptr);
+                }
+                else
+                {
+                    ref<uint32>(data, 0) = m_PartyID;
+                    message::send(MSG_PT_RELOAD, data, sizeof data, nullptr);
+                }
 
                 if (PChar->PTreasurePool != nullptr && PChar->PTreasurePool->GetPoolType() != TREASUREPOOL_ZONE)
                 {
@@ -574,8 +589,17 @@ void CParty::AddMember(CBattleEntity* PEntity)
         sql->Query("INSERT INTO accounts_parties (charid, partyid, allianceid, partyflag) VALUES (%u, %u, %u, %u);", PChar->id, m_PartyID, allianceid,
                    GetMemberFlags(PChar));
         uint8 data[4]{};
-        ref<uint32>(data, 0) = m_PartyID;
-        message::send(MSG_PT_RELOAD, data, sizeof data, nullptr);
+        if (m_PAlliance)
+        {
+            ref<uint32>(data, 0) = m_PAlliance->m_AllianceID;
+            message::send(MSG_ALLIANCE_RELOAD, data, sizeof data, nullptr);
+        }
+        else
+        {
+            ref<uint32>(data, 0) = m_PartyID;
+            message::send(MSG_PT_RELOAD, data, sizeof data, nullptr);
+        }
+
         ReloadTreasurePool(PChar);
 
         if (PChar->nameflags.flags & FLAG_INVITE)
@@ -636,10 +660,17 @@ void CParty::AddMember(uint32 id)
         }
         sql->Query("INSERT INTO accounts_parties (charid, partyid, allianceid, partyflag) VALUES (%u, %u, %u, %u);", id, m_PartyID, allianceid,
                    Flags);
-        uint8 data[8]{};
-        ref<uint32>(data, 0) = m_PartyID;
-        ref<uint32>(data, 4) = id;
-        message::send(MSG_PT_RELOAD, data, sizeof data, nullptr);
+        uint8 data[4]{};
+        if (m_PAlliance)
+        {
+            ref<uint32>(data, 0) = m_PAlliance->m_AllianceID;
+            message::send(MSG_ALLIANCE_RELOAD, data, sizeof data, nullptr);
+        }
+        else
+        {
+            ref<uint32>(data, 0) = m_PartyID;
+            message::send(MSG_PT_RELOAD, data, sizeof data, nullptr);
+        }
 
         /*if (PChar->nameflags.flags & FLAG_INVITE)
         {
@@ -1281,6 +1312,11 @@ bool CParty::HasTrusts()
 
 void CParty::RefreshFlags(std::vector<partyInfo_t>& info)
 {
+    // Clear pointers in case they no longer exist on this instance
+    m_PLeader        = nullptr;
+    m_PQuarterMaster = nullptr;
+    m_PSyncTarget    = nullptr;
+
     for (auto&& memberinfo : info)
     {
         if (memberinfo.partyid == m_PartyID)

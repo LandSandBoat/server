@@ -49,10 +49,10 @@ entity.onTrigger = function(player, npc)
     elseif
         player:getCurrentMission(xi.mission.log_id.TOAU) > xi.mission.id.toau.PRESIDENT_SALAHEEM or
         (player:getCurrentMission(xi.mission.log_id.TOAU) == xi.mission.id.toau.PRESIDENT_SALAHEEM and
-        player:getVar('ToAU3Progress') >= 1)
+        player:getCharVar('ToAU3Progress') >= 1)
     then
         local currentTime = os.time()
-        local refreshTime = player:getVar('nextTagTime')
+        local refreshTime = player:getCharVar('nextTagTime')
         local idTagPeriod = 86400
 
         if player:hasKeyItem(xi.ki.RHAPSODY_IN_AZURE) then
@@ -122,7 +122,7 @@ entity.onEventFinish = function(player, csid, option, npc)
         end
 
         if tagStock >= 3 then
-            player:setVar('nextTagTime', os.time() + idTagPeriod)
+            player:setCharVar('nextTagTime', os.time() + idTagPeriod)
         end
 
         player:setCurrency('id_tags', tagStock - 1)

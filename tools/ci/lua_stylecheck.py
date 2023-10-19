@@ -109,7 +109,7 @@ class LuaStyleCheck:
         Multi-line tables should use Allman braces, and all braces should be have at least one space or newline
         prior to any nested table definition.
 
-        See: https://github.com/LandSandBoat/server/wiki/Development-Guide-Lua#allman-braces
+        See: https://github.com/LandSandBoat/server/wiki/Development-Guide#lua-allman-braces
         """
         # [ ]{0,} : Any number of spaces
         # =       : = character
@@ -145,10 +145,18 @@ class LuaStyleCheck:
         for _ in re.finditer(",[^ \n]", line):
             self.error("Multiple parameters used without an appropriate following space or newline")
 
+    def check_conditional_padding(self, line):
+        # \s{2,}(and|or)(\s{1,}|$)|\s{1,}(and|or)\s{2,}
+
+        # lstrip current line to prevent false-positives from indentation
+        code_line = line.lstrip()
+        if re.search("\s{2,}(and|or)(\s{1,}|$)|\s{1,}(and|or)\s{2,}", code_line):
+            self.error("Multiple spaces detected around logical operator.")
+
     def check_semicolon(self, line):
         """No semi-colons should be used in Lua scripts.
 
-        See: https://github.com/LandSandBoat/server/wiki/Development-Guide-Lua#no-semicolons
+        See: https://github.com/LandSandBoat/server/wiki/Development-Guide#lua-no-semicolons
         """
 
         # Ignore strings in line
@@ -163,7 +171,7 @@ class LuaStyleCheck:
     def check_variable_names(self, line):
         """Variables should not use underscores and be lowerCamelCased with the exception of `ID`
 
-        See: https://github.com/LandSandBoat/server/wiki/Development-Guide-Lua#naming-and-misc
+        See: https://github.com/LandSandBoat/server/wiki/Development-Guide#lua-naming-and-misc
         """
         # local     : 'local ' (with a space)
         # (?=       : Positive lookahead
@@ -201,11 +209,18 @@ class LuaStyleCheck:
         for _ in re.finditer("[^ =~\<\>][\=\+\*\~\/\>\<]|[\=\+\*\/\>\<][^ =\n]", line):
             self.error("Operator or comparator without padding detected at end of line")
 
+        # For now, ignore all content in single-line tables to allow for formatting
+        stripped_line = line.lstrip()
+        brace_regex = regex.compile("\{(([^\}\{]+)|(?R))*+\}", re.S)
+        stripped_line = regex.sub(brace_regex, "", stripped_line)
+        for _ in re.finditer("\s{2,}(>=|<=|==|~=|\+|\*|%|>|<|\^)|(>=|<=|==|~=|\+|\*|%|>|<|\^)\s{2,}", stripped_line):
+            self.error("Excessive padding detected around operator or comparator.")
+
     def check_parentheses_padding(self, line):
         """Parentheses should have padding prior to opening and after closing, but must not contain padding after
         the open parenthesis, or prior to closing.
 
-        See: https://github.com/LandSandBoat/server/wiki/Development-Guide-Lua#no-excess-whitespace-inside-of-parentheses-or-solely-for-alignment
+        See: https://github.com/LandSandBoat/server/wiki/Development-Guide#lua-no-excess-whitespace
         """
 
         if len(re.findall("\([ ]| [\)]", line)) > 0:
@@ -275,7 +290,7 @@ class LuaStyleCheck:
         """Multi-line conditional blocks should contain if/elseif and then on their own lines,
         with conditions indented between them.
 
-        See: https://github.com/LandSandBoat/server/wiki/Development-Guide-Lua#formatting-conditional-blocks
+        See: https://github.com/LandSandBoat/server/wiki/Development-Guide#lua-formatting-conditional-blocks
         """
 
         stripped_line = re.sub("\".*?\"|'.*?'", "", line) # Ignore data in quotes
@@ -351,12 +366,18 @@ class LuaStyleCheck:
                 if in_block_comment:
                     continue
 
-                # Remove in-line comments
-                code_line = re.sub("(?=--)(.*?)(?=\r\n|\n)", "", line)
+                comment_header = line.rstrip("\n")
+                if re.search("^-+$", comment_header) and len(comment_header) > 2 and len(comment_header) != 35:
+                    # For now, ignore empty comments with only `--`
+                    self.error("Standard comment block lines of '-' should be 35 characters.")
 
-                # Before replacing strings, see if we're only using single quotes
+                # Remove in-line comments
+                code_line = re.sub("(?=--)(.*?)(?=\r\n|\n)", "", line).rstrip()
+
+                # Before replacing strings, see if we're only using single quotes and check requires
                 if re.search(r"\"[^\"']*\"(?=(?:[^']*'[^']*')*[^']*$)", code_line):
                     self.error("Strings should only be contained by single quotes")
+                self.check_deprecated_require(code_line)
 
                 # Replace quoted strings with a placeholder, and ignore escaped quotes
                 code_line = code_line.replace("\\'", '')
@@ -371,6 +392,7 @@ class LuaStyleCheck:
                 self.check_variable_names(code_line)
                 self.check_semicolon(code_line)
                 self.check_indentation(code_line)
+                self.check_conditional_padding(code_line)
                 self.check_operator_padding(code_line)
                 self.check_parentheses_padding(code_line)
                 self.check_no_single_line_functions(code_line)
@@ -379,7 +401,6 @@ class LuaStyleCheck:
                 self.check_no_newline_after_function_decl(code_line)
                 self.check_no_newline_before_end(code_line)
                 self.check_no_function_decl_padding(code_line)
-                self.check_deprecated_require(code_line)
                 self.check_invalid_enum(code_line)
 
                 # Keep track of ID variable assignments and if they are referenced.
@@ -396,6 +417,15 @@ class LuaStyleCheck:
 
                 self.check_deprecated_functions(code_line)
                 self.check_function_parameters(code_line)
+
+                # Multiple line conditions can occur in several places.  Check every individual
+                # line to ensure none start with and|or, or end with not
+                stripped_line = code_line.strip()
+                if stripped_line.startswith('and ') or stripped_line.startswith('or '):
+                    self.error('Multiline conditions should not start with and|or')
+
+                if stripped_line.endswith('not'):
+                    self.error('Multiline conditions should not end with not')
 
                 # Condition blocks/lines should not have outer parentheses
                 # Find all strings contained in parentheses: \((([^\)\(]+)|(?R))*+\)
@@ -429,15 +459,6 @@ class LuaStyleCheck:
                     # Multiline conditions
                     else:
                         in_condition = True
-
-                    # Do single line rules for condition here, space in string check is intentional to allow
-                    # and|or on its own line in some cases.
-                    stripped_line = code_line.strip()
-                    if stripped_line.startswith('and ') or stripped_line.startswith('or '):
-                        self.error('Multiline conditions should not start with and|or')
-
-                    if stripped_line.endswith('not'):
-                        self.error('Multiline conditions should not end with not')
                 
             if "DefaultActions" not in self.filename and uses_id == True and not has_id_ref:
                 self.error("ID variable is assigned but unused", suppress_line_ref = True)
@@ -475,7 +496,7 @@ elif target == 'scripts':
         total_errors += LuaStyleCheck(filename).errcount
 elif target == 'test':
     total_errors = LuaStyleCheck('tools/ci/tests/stylecheck.lua', show_errors = False).errcount
-    expected_errors = 59
+    expected_errors = 82
 else:
     total_errors = LuaStyleCheck(target).errcount
 

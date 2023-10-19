@@ -1,6 +1,7 @@
 -----------------------------------
 -- lua_stylecheck Unit Tests
 -----------------------------------
+-- Note: The above two header lines are also compared, PASS x2
 
 -- check_table_formatting()
 local badTable = { -- FAIL
@@ -199,3 +200,43 @@ elseif x == 2 then y = 3 -- FAIL
 'if x then y' -- PASS
 '( x-y == 0 )' -- PASS
 'if x then y end' -- PASS
+
+require('scripts/zones/something') -- PASS
+require('scripts/globals/items') -- FAIL
+require('scripts/globals/keyitems') -- FAIL
+require('scripts/globals/loot') -- FAIL
+require('scripts/globals/msg') -- FAIL
+require('scripts/globals/settings') -- FAIL
+require('scripts/globals/spell_data') -- FAIL
+require('scripts/globals/status') -- FAIL
+require('scripts/globals/titles') -- FAIL
+require('scripts/globals/zone') -- FAIL
+require('scripts/enum/item') -- FAIL
+require('scripts/zones/Bastok_Markets/IDs') -- FAIL
+
+-- Good:
+-----------------------------------
+
+-- Bad:
+-------------------------------------
+---------------------------------
+
+this and this -- PASS
+this or this -- PASS
+this  and -- FAIL
+this and  this -- FAIL
+this  or -- FAIL
+this or  this -- FAIL
+
+local testVar = this
+    and this -- FAIL
+    or this and -- FAIL
+    this not -- FAIL
+    that
+
+x  + y -- FAIL
+x +  y -- FAIL
+x ==   y -- FAIL
+x  ~= y -- FAIL
+
+x = { x  + y } -- PASS

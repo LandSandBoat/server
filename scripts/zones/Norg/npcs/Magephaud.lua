@@ -27,7 +27,7 @@ entity.onTrigger = function(player, npc)
         nFame >= 2
     then
         player:startEvent(116, xi.item.GOLD_BEASTCOIN)  -- Quest start - you have tonberry kills?! I got yo back ^.-
-    elseif player:getCharVar('EveryonesGrudgeStarted')  == 1 then
+    elseif player:getCharVar('EveryonesGrudgeStarted') == 1 then
         player:startEvent(117, xi.item.GOLD_BEASTCOIN)
     elseif player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.EVERYONES_GRUDGE) == QUEST_COMPLETED then
         player:startEvent(119)  -- After completion cs

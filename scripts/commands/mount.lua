@@ -1,15 +1,17 @@
-cmdprops =
+local commandObj = {}
+
+commandObj.cmdprops =
 {
     permission = 1,
     parameters = 'sss'
 }
 
-function error(player, msg)
+local function error(player, msg)
     player:PrintToPlayer(msg)
     player:PrintToPlayer('!mount <mount ID> (player)')
 end
 
-function onTrigger(player, mount, target)
+commandObj.onTrigger = function(player, mount, target)
     -- Default to Chocobo (0)
     if mount == nil then
         mount = 0
@@ -36,3 +38,5 @@ function onTrigger(player, mount, target)
 
     targ:addStatusEffectEx(xi.effect.MOUNTED, xi.effect.MOUNTED, mount, 0, 0, true)
 end
+
+return commandObj

@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 6087
 -- plate_of_indi-precision
 -- Teaches INDI-PRECISION
------------------------------------------
+-----------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

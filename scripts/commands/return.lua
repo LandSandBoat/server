@@ -2,19 +2,20 @@
 -- func: return <player>
 -- desc: Warps GM or target player to their previous zone
 -----------------------------------
+local commandObj = {}
 
-cmdprops =
+commandObj.cmdprops =
 {
     permission = 1,
     parameters = 's'
 }
 
-function error(player, msg)
+local function error(player, msg)
     player:PrintToPlayer(msg)
     player:PrintToPlayer('!return (player)')
 end
 
-function onTrigger(player, target)
+commandObj.onTrigger = function(player, target)
     -- validate target
     local targ
     if target == nil then
@@ -44,3 +45,5 @@ function onTrigger(player, target)
         player:PrintToPlayer(string.format('%s was returned to zone %i.', targ:getName(), zoneId))
     end
 end
+
+return commandObj

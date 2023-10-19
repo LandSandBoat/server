@@ -1,14 +1,16 @@
----------------------------------------------------------------------------------------------------
+-----------------------------------
 -- func: stun
 -- desc: stuns a non-NPC target for an hour. good for testing damage/mechanics on a punching bag.
----------------------------------------------------------------------------------------------------
-cmdprops =
+-----------------------------------
+local commandObj = {}
+
+commandObj.cmdprops =
 {
     permission = 3,
     parameters = ''
 }
 
-function onTrigger(player)
+commandObj.onTrigger = function(player)
     local targ = player:getCursorTarget()
     if targ and not targ:isNPC() then
         local stun = targ:getStatusEffect(xi.effect.STUN)
@@ -23,3 +25,5 @@ function onTrigger(player)
         player:PrintToPlayer('Must select a non-NPC target using in game cursor first.')
     end
 end
+
+return commandObj

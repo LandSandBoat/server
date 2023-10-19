@@ -2,18 +2,20 @@
 -- func: animation
 -- desc: Sets the players current animation.
 -----------------------------------
-cmdprops =
+local commandObj = {}
+
+commandObj.cmdprops =
 {
     permission = 1,
     parameters = 's'
 }
 
-function error(player, msg)
+local function error(player, msg)
     player:PrintToPlayer(msg)
     player:PrintToPlayer('!animation (animationID)')
 end
 
-function onTrigger(player, animationId)
+commandObj.onTrigger = function(player, animationId)
     local oldAnimation = player:getAnimation()
 
     if animationId == nil then
@@ -32,3 +34,5 @@ function onTrigger(player, animationId)
     player:setAnimation(animationId)
     player:PrintToPlayer(string.format('%s | Old animation: %i | New animation: %i\n', player:getName(), oldAnimation, animationId))
 end
+
+return commandObj

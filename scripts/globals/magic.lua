@@ -865,7 +865,7 @@ function addBonuses(caster, spell, target, dmg, params)
     if burst > 1.0 then
         spell:setMsg(spell:getMagicBurstMessage()) -- "Magic Burst!"
 
-        caster:triggerRoeEvent(xi.roeTriggers.MAGIC_BURST)
+        caster:triggerRoeEvent(xi.roeTrigger.MAGIC_BURST)
     end
 
     dmg = math.floor(dmg * burst)

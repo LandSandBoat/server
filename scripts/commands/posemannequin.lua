@@ -2,21 +2,20 @@
 -- func: posemannequin
 -- desc: changes the pose of a mannequin
 -----------------------------------
-require('scripts/globals/mannequins')
------------------------------------
+local commandObj = {}
 
-cmdprops =
+commandObj.cmdprops =
 {
     permission = 1,
     parameters = 'iis'
 }
 
-function error(player, msg)
+local function error(player, msg)
     player:PrintToPlayer(msg)
     player:PrintToPlayer('!posemannequin <race> <pose> [target])')
 end
 
-function onTrigger(player, race, pose, target)
+commandObj.onTrigger = function(player, race, pose, target)
     -- Get the target
     if target then
         target = GetPlayerByName(target)
@@ -39,3 +38,5 @@ function onTrigger(player, race, pose, target)
         xi.mannequin.setMannequinPose(player, race, pose)
     end
 end
+
+return commandObj

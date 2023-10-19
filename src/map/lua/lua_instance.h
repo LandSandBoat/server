@@ -77,6 +77,11 @@ public:
 
     auto insertAlly(uint32 groupid) -> std::optional<CLuaBaseEntity>;
 
+    bool operator==(const CLuaInstance& other) const
+    {
+        return this->m_PLuaInstance == other.m_PLuaInstance;
+    }
+
     static void Register();
 };
 

@@ -1,6 +1,6 @@
-----------------------------
+-----------------------------------
 ----- Message class
-----------------------------
+-----------------------------------
 require('scripts/globals/interaction/actions/action')
 
 Message = Action:new(Action.Type.Message)

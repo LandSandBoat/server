@@ -19,7 +19,7 @@ entity.onTrigger = function(player, npc)
 
     local message = ID.text.WILL_REACH_BASTOK
 
-    if vHour ==  0 then
+    if vHour == 0 then
         if vMin >= 13 then
             vHour = 3
             message = ID.text.WILL_REACH_JEUNO

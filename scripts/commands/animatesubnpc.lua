@@ -2,18 +2,20 @@
 -- func: animatesubnpc
 -- desc: Changes the animationSub of the given npc. (For testing purposes.)
 -----------------------------------
-cmdprops =
+local commandObj = {}
+
+commandObj.cmdprops =
 {
     permission = 1,
     parameters = 'ss'
 }
 
-function error(player, msg)
+local function error(player, msg)
     player:PrintToPlayer(msg)
     player:PrintToPlayer('!animatesubnpc (npcID) <animationID>')
 end
 
-function onTrigger(player, arg1, arg2)
+commandObj.onTrigger = function(player, arg1, arg2)
     local targ
     local animationId
 
@@ -52,3 +54,5 @@ function onTrigger(player, arg1, arg2)
     targ:setAnimationSub(animationId)
     player:PrintToPlayer(string.format('NPC ID: %i - %s | Old animationSub: %i | New animationSub: %i\n', targ:getID(), targ:getName(), oldAnimation, animationId))
 end
+
+return commandObj

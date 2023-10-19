@@ -13,6 +13,7 @@ entity.onAdditionalEffect = function(mob, target, damage)
 end
 
 entity.onMobDeath = function(mob, player, optParams)
+    xi.magian.onMobDeath(mob, player, optParams, set{ 2 })
     xi.hunts.checkHunt(mob, player, 287)
 end
 

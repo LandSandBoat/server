@@ -53,6 +53,11 @@ public:
     uint16 getMsg();
     uint16 getTotalTargets();
 
+    bool operator==(const CLuaMobSkill& other) const
+    {
+        return this->m_PLuaMobSkill == other.m_PLuaMobSkill;
+    }
+
     static void Register();
 };
 

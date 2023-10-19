@@ -15,7 +15,7 @@ entity.onTrigger = function(player, npc)
     if
         ecoStatus == 0 and
         player:getFameLevel(xi.quest.fame_area.WINDURST) >= 1 and
-        player:getCharVar('EcoReset') < os.time()
+        player:getCharVar('EcoReset') == 0
     then
         player:startEvent(818) -- Offer Eco-Warrior quest
     elseif ecoStatus == 201 then
@@ -51,7 +51,7 @@ entity.onEventFinish = function(player, csid, option, npc)
         })
     then
         player:delKeyItem(xi.ki.INDIGESTED_MEAT)
-        player:setCharVar('EcoReset', getConquestTally())
+        player:setCharVar('EcoReset', 1, NextConquestTally())
     end
 end
 

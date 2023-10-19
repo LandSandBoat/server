@@ -2,19 +2,20 @@
 -- func: promote
 -- desc: Promotes the player to a new GM level.
 -----------------------------------
+local commandObj = {}
 
-cmdprops =
+commandObj.cmdprops =
 {
     permission = 1,
     parameters = 'si'
 }
 
-function error(player, msg)
+local function error(player, msg)
     player:PrintToPlayer(msg)
     player:PrintToPlayer('!promote <player> <level>')
 end
 
-function onTrigger(player, target, level)
+commandObj.onTrigger = function(player, target, level)
     -- determine maximum level player can promote to
     local maxLevel = player:getGMLevel() - 1
     if maxLevel < 1 then
@@ -118,3 +119,5 @@ function onTrigger(player, target, level)
     player:PrintToPlayer(string.format('%s set to tier %i.', targ:getName(), level))
     targ:PrintToPlayer(string.format('You have been set to tier %i.', level))
 end
+
+return commandObj

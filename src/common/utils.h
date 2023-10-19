@@ -117,21 +117,4 @@ std::set<std::filesystem::path> sorted_directory_iterator(std::string path_name)
     return sorted_by_name;
 }
 
-class ScopeGuard
-{
-public:
-    ScopeGuard(std::function<void()> func)
-    : func(func)
-    {
-    }
-
-    ~ScopeGuard()
-    {
-        func();
-    }
-
-private:
-    std::function<void()> func;
-};
-
 #endif

@@ -2,17 +2,17 @@
 -- func: !checkquest <logID> <questID> (player)
 -- desc: Prints status of the quest to the in game chatlog
 -----------------------------------
-require('scripts/globals/quests')
 local logIdHelpers = require('scripts/globals/log_ids')
 -----------------------------------
+local commandObj = {}
 
-cmdprops =
+commandObj.cmdprops =
 {
     permission = 1,
     parameters = 'sss'
 }
 
-function error(player, msg)
+local function error(player, msg)
     player:PrintToPlayer(msg)
     player:PrintToPlayer('!checkquest <logID> <questID> (player)')
 end
@@ -24,7 +24,7 @@ local questStatusString =
     [2] = 'COMPLETED',
 }
 
-function onTrigger(player, logId, questId, target)
+commandObj.onTrigger = function(player, logId, questId, target)
     -- validate logId
     local questLog = logIdHelpers.getQuestLogInfo(logId)
 
@@ -68,3 +68,5 @@ function onTrigger(player, logId, questId, target)
     -- show quest status
     player:PrintToPlayer(string.format('%s\'s status for %s quest ID %i is: %s', targ:getName(), logName, questId, questStatusString[status]))
 end
+
+return commandObj

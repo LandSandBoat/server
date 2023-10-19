@@ -105,7 +105,7 @@ quest.sections =
                         player:delKeyItem(xi.ki.MAP_TO_THE_ANNALS_OF_TRUTH)
                         player:delKeyItem(xi.ki.ANNALS_OF_TRUTH)
                         player:delKeyItem(xi.ki.WEAPON_TRAINING_GUIDE)
-                        player:addLearnedWeaponskill(xi.ws_unlock.RETRIBUTION)
+                        player:addLearnedWeaponskill(xi.wsUnlock.RETRIBUTION)
                         player:messageSpecial(windurstWallsID.text.RETRIBUTION_LEARNED)
                         player:setPos(121, -3, 111)
                     end

@@ -355,7 +355,9 @@ xi.dynamis.entryNpcOnTrigger = function(player, npc)
 
         -- victory cutscene
         elseif player:getCharVar(info.beatVar) == 1 then
-            player:startEvent(info.csBeat, info.beatKI)
+            -- NOTE: The hourglass and shrouded sand parameter is only required for Beaucedine, but has no
+            -- effect on the others.
+            player:startEvent(info.csBeat, info.beatKI, 0, xi.ki.PRISMATIC_HOURGLASS , xi.ki.VIAL_OF_SHROUDED_SAND)
 
         -- dynamis entry
         elseif not info.reqs or info.reqs(player) then

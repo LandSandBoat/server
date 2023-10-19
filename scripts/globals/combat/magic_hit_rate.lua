@@ -8,9 +8,9 @@ xi = xi or {}
 xi.combat = xi.combat or {}
 xi.combat.magicHitRate = xi.combat.magicHitRate or {}
 
----------------------------------------------------------------------------
+-----------------------------------
 -- Calculate Actor Magic Accuracy
----------------------------------------------------------------------------
+-----------------------------------
 
 -- Magic Accuracy from spell's skill.
 local function magicAccuracyFromSkill(actor, skillType)
@@ -309,9 +309,9 @@ xi.combat.magicHitRate.calculateActorMagicAccuracy = function(actor, target, spe
     return finalMagicAcc
 end
 
----------------------------------------------------------------------------
+-----------------------------------
 -- Calculate Target Magic Evasion
----------------------------------------------------------------------------
+-----------------------------------
 local resistRankMultiplier =
 {
 -- [Rank] = Magic Evasion multiplier.
@@ -368,9 +368,9 @@ xi.combat.magicHitRate.calculateTargetMagicEvasion = function(actor, target, spe
     return magicEva
 end
 
----------------------------------------------------------------------------
+-----------------------------------
 -- Magic Hit Rate. The function gets fed the result of both functions above.
----------------------------------------------------------------------------
+-----------------------------------
 
 xi.combat.magicHitRate.calculateMagicHitRate = function(magicAcc, magicEva)
     local magicAccDiff = magicAcc - magicEva
@@ -384,9 +384,9 @@ xi.combat.magicHitRate.calculateMagicHitRate = function(magicAcc, magicEva)
     return magicHitRate
 end
 
----------------------------------------------------------------------------
+-----------------------------------
 -- Calculate resist tier.
----------------------------------------------------------------------------
+-----------------------------------
 
 xi.combat.magicHitRate.calculateResistRate = function(actor, target, skillType, spellElement, magicHitRate, rankModifier)
     local targetResistRate = 0 -- The variable we return.

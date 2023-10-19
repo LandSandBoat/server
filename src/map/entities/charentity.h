@@ -23,6 +23,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #define _CHARENTITY_H
 
 #include "event_info.h"
+#include "monstrosity.h"
 #include "packets/char.h"
 #include "packets/entity_update.h"
 
@@ -142,7 +143,7 @@ struct telepoint_t
 
 struct waypoint_t
 {
-    uint32 access[5];
+    uint32 access[2];
     bool   confirmation;
 
     waypoint_t()
@@ -447,10 +448,12 @@ public:
     EntityID_t   BazaarID{};      // Pointer to the bazaar we are browsing.
     BazaarList_t BazaarCustomers; // Array holding the IDs of the current customers
 
+    std::unique_ptr<monstrosity::MonstrosityData_t> m_PMonstrosity;
+
     uint32     m_InsideTriggerAreaID; // The ID of the trigger area the character is inside
     uint8      m_LevelRestriction;    // Character level limit
     uint16     m_Costume;
-    uint16     m_Monstrosity; // Monstrosity model ID
+    uint16     m_Costume2;
     uint32     m_AHHistoryTimestamp;
     uint32     m_DeathTimestamp;
     time_point m_deathSyncTime; // Timer used for sending an update packet at a regular interval while the character is dead
@@ -582,9 +585,9 @@ public:
     virtual void OnItemFinish(CItemState&, action_t&);
 
     int32 getCharVar(std::string const& varName);
-    void  setCharVar(std::string const& varName, int32 value);
-    void  setVolatileCharVar(std::string const& varName, int32 value);
-    void  updateCharVarCache(std::string const& varName, int32 value);
+    void  setCharVar(std::string const& varName, int32 value, uint32 expiry = 0);
+    void  setVolatileCharVar(std::string const& varName, int32 value, uint32 expiry = 0);
+    void  updateCharVarCache(std::string const& varName, int32 value, uint32 expiry = 0);
     void  removeFromCharVarCache(std::string const& varName);
 
     void clearCharVarsWithPrefix(std::string const& prefix);
@@ -623,8 +626,8 @@ private:
     bool m_isBlockingAid;
     bool m_reloadParty;
 
-    std::unordered_map<std::string, int32> charVarCache;
-    std::unordered_set<std::string>        charVarChanges;
+    std::unordered_map<std::string, std::pair<int32, uint32>> charVarCache;
+    std::unordered_set<std::string>                           charVarChanges;
 
     uint8      dataToPersist = 0;
     time_point nextDataPersistTime;

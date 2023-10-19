@@ -26,6 +26,7 @@ end
 entity.onMobDeath = function(mob, player, optParams)
     xi.voidwalker.onMobDeath(mob, player, optParams, xi.keyItem.BLUE_ABYSSITE)
     xi.hunts.checkHunt(mob, player, 545)
+    xi.magian.onMobDeath(mob, player, optParams, set{ 8, 518, 897 })
 end
 
 return entity

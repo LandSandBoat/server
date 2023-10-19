@@ -2,19 +2,20 @@
 -- func: setlocalvar <varName> <player/mob/npc> <ID>
 -- desc: set player npc or mob local variable and value.
 -----------------------------------
+local commandObj = {}
 
-cmdprops =
+commandObj.cmdprops =
 {
     permission = 3,
     parameters = 'siss'
 }
 
-function error(player, msg)
+local function error(player, msg)
     player:PrintToPlayer(msg)
     player:PrintToPlayer('!setlocalvar <variable name> <value> { \'player\', \'mob\', or \'npc\' } { name or ID }')
 end
 
-function onTrigger(player, arg1, arg2, arg3, arg4)
+commandObj.onTrigger = function(player, arg1, arg2, arg3, arg4)
     local zone = player:getZone()
     local varName = arg1
     local varValue = arg2
@@ -63,3 +64,5 @@ function onTrigger(player, arg1, arg2, arg3, arg4)
     targ:setLocalVar(varName, varValue)
     player:PrintToPlayer(string.format('%s\'s variable \'%s\' : %i', targ:getName(), varName, varValue))
 end
+
+return commandObj

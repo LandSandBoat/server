@@ -49,6 +49,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "map.h"
 #include "message.h"
 #include "mob_modifier.h"
+#include "monstrosity.h"
 #include "notoriety_container.h"
 #include "packet_system.h"
 #include "party.h"
@@ -80,6 +81,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "lua/luautils.h"
 
 #include "packets/auction_house.h"
+#include "packets/basic.h"
 #include "packets/bazaar_check.h"
 #include "packets/bazaar_close.h"
 #include "packets/bazaar_confirmation.h"
@@ -791,15 +793,19 @@ void SmallPacket0x01A(map_session_data_t* const PSession, CCharEntity* const PCh
 {
     TracyZoneScoped;
 
-    uint16     TargID       = data.ref<uint16>(0x08);
-    uint8      action       = data.ref<uint8>(0x0A);
-    position_t actionOffset = {
+    uint16 TargID = data.ref<uint16>(0x08);
+    uint8  action = data.ref<uint8>(0x0A);
+
+    // clang-format off
+    position_t actionOffset =
+    {
         data.ref<float>(0x10),
         data.ref<float>(0x14),
         data.ref<float>(0x18),
-        0, // packet only contains x/y/z
-        0, //
+        0, // moving (packet only contains x/y/z)
+        0, // rotation (packet only contains x/y/z)
     };
+    // clang-format on
 
     constexpr auto actionToStr = [](uint8 actionIn)
     {
@@ -847,12 +853,21 @@ void SmallPacket0x01A(map_session_data_t* const PSession, CCharEntity* const PCh
                 return "Ballista - Scout";
             case 0x18:
                 return "Blockaid";
+            case 0x19:
+                return "Monstrosity Monster Skill";
             case 0x1A:
                 return "Mounts";
             default:
                 return "Unknown";
         }
     };
+
+    // Monstrosity: Can't really do anything while under Gestation until you click it off.
+    //            : MONs can trigger doors, so we'll handle that later.
+    if (PChar->StatusEffectContainer->HasStatusEffect(EFFECT_GESTATION) && action == 0x00)
+    {
+        return;
+    }
 
     auto actionStr = fmt::format("Player Action: {}: {} (0x{:02X}) -> targid: {}", PChar->GetName(), actionToStr(action), action, TargID);
     TracyZoneString(actionStr);
@@ -876,6 +891,16 @@ void SmallPacket0x01A(map_session_data_t* const PSession, CCharEntity* const PCh
 
             CBaseEntity* PNpc = nullptr;
             PNpc              = PChar->GetEntity(TargID, TYPE_NPC | TYPE_MOB);
+
+            // MONs are allowed to use doors, but nothing else
+            if (PChar->m_PMonstrosity != nullptr &&
+                PNpc->look.size != 0x02 &&
+                PChar->getZone() != ZONEID::ZONE_FERETORY &&
+                !settings::get<bool>("main.MONSTROSITY_TRIGGER_NPCS"))
+            {
+                PChar->pushPacket(new CReleasePacket(PChar, RELEASE_TYPE::STANDARD));
+                return;
+            }
 
             // NOTE: Moogles inside of mog houses are the exception for not requiring Spawned or Status checks.
             if (PNpc != nullptr && distance(PNpc->loc.p, PChar->loc.p) <= 10 && ((PNpc->PAI->IsSpawned() && PNpc->status == STATUS_TYPE::NORMAL) || PChar->m_moghouseID != 0))
@@ -1005,6 +1030,14 @@ void SmallPacket0x01A(map_session_data_t* const PSession, CCharEntity* const PCh
             {
                 return;
             }
+
+            if (PChar->m_PMonstrosity != nullptr)
+            {
+                auto type = data.ref<uint8>(0x0C);
+                monstrosity::HandleDeathMenu(PChar, type);
+                return;
+            }
+
             PChar->setCharVar("expLost", 0);
             charutils::HomePoint(PChar);
         }
@@ -1171,6 +1204,11 @@ void SmallPacket0x01A(map_session_data_t* const PSession, CCharEntity* const PCh
             {
                 PChar->pushPacket(new CMessageSystemPacket(0, 0, 142));
             }
+        }
+        break;
+        case 0x19: // Monstrosity Monster Skill
+        {
+            monstrosity::HandleMonsterSkillActionPacket(PChar, data);
         }
         break;
         case 0x1A: // mounts
@@ -1497,6 +1535,13 @@ void SmallPacket0x029(map_session_data_t* const PSession, CCharEntity* const PCh
 void SmallPacket0x032(map_session_data_t* const PSession, CCharEntity* const PChar, CBasicPacket& data)
 {
     TracyZoneScoped;
+
+    // MONs can't trade
+    if (PChar->m_PMonstrosity != nullptr)
+    {
+        return;
+    }
+
     uint32 charid = data.ref<uint32>(0x04);
     uint16 targid = data.ref<uint16>(0x08);
 
@@ -1600,6 +1645,13 @@ void SmallPacket0x032(map_session_data_t* const PSession, CCharEntity* const PCh
 void SmallPacket0x033(map_session_data_t* const PSession, CCharEntity* const PChar, CBasicPacket& data)
 {
     TracyZoneScoped;
+
+    // MONs can't trade
+    if (PChar->m_PMonstrosity != nullptr)
+    {
+        return;
+    }
+
     CCharEntity* PTarget = (CCharEntity*)PChar->GetEntity(PChar->TradePending.targid, TYPE_PC);
 
     if (PTarget != nullptr && PChar->TradePending.id == PTarget->id)
@@ -1701,6 +1753,13 @@ void SmallPacket0x033(map_session_data_t* const PSession, CCharEntity* const PCh
 void SmallPacket0x034(map_session_data_t* const PSession, CCharEntity* const PChar, CBasicPacket& data)
 {
     TracyZoneScoped;
+
+    // MONs can't trade
+    if (PChar->m_PMonstrosity != nullptr)
+    {
+        return;
+    }
+
     uint32 quantity    = data.ref<uint32>(0x04);
     uint16 itemID      = data.ref<uint16>(0x08);
     uint8  invSlotID   = data.ref<uint8>(0x0A);
@@ -1805,6 +1864,12 @@ void SmallPacket0x036(map_session_data_t* const PSession, CCharEntity* const PCh
         return;
     }
 
+    // MONs can't trade
+    if (PChar->m_PMonstrosity != nullptr)
+    {
+        return;
+    }
+
     uint32 npcid  = data.ref<uint32>(0x04);
     uint16 targid = data.ref<uint16>(0x3A);
 
@@ -1853,6 +1918,12 @@ void SmallPacket0x036(map_session_data_t* const PSession, CCharEntity* const PCh
 void SmallPacket0x037(map_session_data_t* const PSession, CCharEntity* const PChar, CBasicPacket& data)
 {
     TracyZoneScoped;
+
+    // MONs can't use usable items
+    if (PChar->m_PMonstrosity != nullptr)
+    {
+        return;
+    }
 
     uint16 TargetID  = data.ref<uint16>(0x0C);
     uint8  SlotID    = data.ref<uint8>(0x0E);
@@ -3947,6 +4018,16 @@ void SmallPacket0x05E(map_session_data_t* const PSession, CCharEntity* const PCh
                 PChar->status = STATUS_TYPE::NORMAL;
                 return;
             }
+            else if (PChar->m_PMonstrosity != nullptr) // Not allowed to use zonelines while MON
+            {
+                PChar->loc.p.rotation += 128;
+
+                PChar->pushPacket(new CMessageSystemPacket(0, 0, 2)); // You could not enter the next area.
+                PChar->pushPacket(new CCSPositionPacket(PChar));
+
+                PChar->status = STATUS_TYPE::NORMAL;
+                return;
+            }
             else
             {
                 // Ensure the destination exists
@@ -4462,10 +4543,22 @@ void SmallPacket0x071(map_session_data_t* const PSession, CCharEntity* const PCh
                             sql->AffectedRows())
                         {
                             ShowDebug("%s has removed %s from party", PChar->GetName(), data[0x0C]);
-                            uint8 removeData[8]{};
-                            ref<uint32>(removeData, 0) = PChar->PParty->GetPartyID();
-                            ref<uint32>(removeData, 4) = id;
-                            message::send(MSG_PT_RELOAD, removeData, sizeof removeData, nullptr);
+
+                            uint8 reloadData[4]{};
+                            if (PChar->PParty && PChar->PParty->m_PAlliance)
+                            {
+                                ref<uint32>(reloadData, 0) = PChar->PParty->m_PAlliance->m_AllianceID;
+                                message::send(MSG_ALLIANCE_RELOAD, reloadData, sizeof reloadData, nullptr);
+                            }
+                            else // No alliance, notify party.
+                            {
+                                ref<uint32>(reloadData, 0) = PChar->PParty->GetPartyID();
+                                message::send(MSG_PT_RELOAD, reloadData, sizeof reloadData, nullptr);
+                            }
+
+                            // Notify the player they were just kicked -- they are no longer in the DB and party/alliance reloads won't notify them.
+                            ref<uint32>(reloadData, 0) = id;
+                            message::send(MSG_PLAYER_KICK, reloadData, sizeof reloadData, nullptr);
                         }
                     }
                 }
@@ -4535,26 +4628,33 @@ void SmallPacket0x071(map_session_data_t* const PSession, CCharEntity* const PCh
                 }
                 if (!PVictim && PChar->PParty->m_PAlliance->getMainParty() == PChar->PParty)
                 {
-                    char victimName[31]{};
+                    char   victimName[31]{};
+                    uint32 allianceID = PChar->PParty->m_PAlliance->m_AllianceID;
+
                     sql->EscapeStringLen(victimName, (const char*)data[0x0C], std::min<size_t>(strlen((const char*)data[0x0C]), 15));
                     int32 ret = sql->Query("SELECT charid FROM chars WHERE charname = '%s';", victimName);
                     if (ret != SQL_ERROR && sql->NumRows() == 1 && sql->NextRow() == SQL_SUCCESS)
                     {
-                        uint32 id = sql->GetUIntData(0);
-                        ret       = sql->Query(
-                                  "SELECT partyid FROM accounts_parties WHERE charid = %u AND allianceid = %u AND partyflag & %d AND partyflag & %d", id,
-                                  PChar->PParty->m_PAlliance->m_AllianceID, PARTY_LEADER, PARTY_SECOND | PARTY_THIRD);
+                        uint32 charid = sql->GetUIntData(0);
+                        ret           = sql->Query(
+                                      "SELECT partyid FROM accounts_parties WHERE charid = %u AND allianceid = %u AND partyflag & %d",
+                                      charid, PChar->PParty->m_PAlliance->m_AllianceID, PARTY_LEADER | PARTY_SECOND | PARTY_THIRD);
                         if (ret != SQL_ERROR && sql->NumRows() == 1 && sql->NextRow() == SQL_SUCCESS)
                         {
+                            uint32 partyid = sql->GetUIntData(0);
                             if (sql->Query("UPDATE accounts_parties SET allianceid = 0, partyflag = partyflag & ~%d WHERE partyid = %u;",
-                                           PARTY_SECOND | PARTY_THIRD, id) == SQL_SUCCESS &&
+                                           PARTY_SECOND | PARTY_THIRD, partyid) == SQL_SUCCESS &&
                                 sql->AffectedRows())
                             {
                                 ShowDebug("%s has removed %s party from alliance", PChar->GetName(), data[0x0C]);
-                                uint8 removeData[8]{};
-                                ref<uint32>(removeData, 0) = PChar->PParty->GetPartyID();
-                                ref<uint32>(removeData, 4) = id;
+                                // notify party they were removed
+                                uint8 removeData[4]{};
+                                ref<uint32>(removeData, 0) = partyid;
                                 message::send(MSG_PT_RELOAD, removeData, sizeof removeData, nullptr);
+
+                                // notify alliance a party was removed
+                                ref<uint32>(removeData, 0) = allianceID;
+                                message::send(MSG_ALLIANCE_RELOAD, removeData, sizeof removeData, nullptr);
                             }
                         }
                     }
@@ -4763,9 +4863,10 @@ void SmallPacket0x077(map_session_data_t* const PSession, CCharEntity* const PCh
 
                 ShowDebug(fmt::format("(Alliance)Changing leader to {}", memberName));
                 PChar->PParty->m_PAlliance->assignAllianceLeader((const char*)data[0x04]);
-                uint8 leaderData[4]{};
-                ref<uint32>(leaderData, 0) = PChar->PParty->m_PAlliance->m_AllianceID;
-                message::send(MSG_PT_RELOAD, leaderData, sizeof leaderData, nullptr);
+
+                uint8 allianceData[4]{};
+                ref<uint32>(allianceData, 0) = PChar->PParty->m_PAlliance->m_AllianceID;
+                message::send(MSG_ALLIANCE_RELOAD, allianceData, sizeof allianceData, nullptr);
             }
         }
         break;
@@ -5314,9 +5415,18 @@ void SmallPacket0x0B5(map_session_data_t* const PSession, CCharEntity* const PCh
                     if (PChar->PParty != nullptr)
                     {
                         int8 packetData[8]{};
-                        ref<uint32>(packetData, 0) = PChar->PParty->GetPartyID();
-                        ref<uint32>(packetData, 4) = PChar->id;
-                        message::send(MSG_CHAT_PARTY, packetData, sizeof packetData, new CChatMessagePacket(PChar, MESSAGE_PARTY, (const char*)data[6]));
+                        if(PChar->PParty->m_PAlliance)
+                        {
+                            ref<uint32>(packetData, 0) = PChar->PParty->m_PAlliance->m_AllianceID;
+                            ref<uint32>(packetData, 4) = PChar->id;
+                            message::send(MSG_CHAT_ALLIANCE, packetData, sizeof packetData, new CChatMessagePacket(PChar, MESSAGE_PARTY, (const char*)data[6]));
+                        }
+                        else
+                        {
+                            ref<uint32>(packetData, 0) = PChar->PParty->GetPartyID();
+                            ref<uint32>(packetData, 4) = PChar->id;
+                            message::send(MSG_CHAT_PARTY, packetData, sizeof packetData, new CChatMessagePacket(PChar, MESSAGE_PARTY, (const char*)data[6]));
+                        }
 
                         if (settings::get<bool>("map.AUDIT_CHAT") && settings::get<uint8>("map.AUDIT_PARTY"))
                         {
@@ -6205,6 +6315,13 @@ void SmallPacket0x0DD(map_session_data_t* const PSession, CCharEntity* const PCh
             {
                 CCharEntity* PTarget = (CCharEntity*)PEntity;
 
+                if (PTarget->m_PMonstrosity)
+                {
+                    PChar->pushPacket(new CMessageStandardPacket(PTarget, 0, 0, MsgStd::MonstrosityCheckOut));
+                    PTarget->pushPacket(new CMessageStandardPacket(PChar, 0, 0, MsgStd::MonstrosityCheckIn));
+                    return;
+                }
+
                 if (!PChar->m_isGMHidden || (PChar->m_isGMHidden && PTarget->m_GMlevel >= PChar->m_GMlevel))
                 {
                     PTarget->pushPacket(new CMessageStandardPacket(PChar, 0, 0, MsgStd::Examine));
@@ -6869,7 +6986,7 @@ void SmallPacket0x0FC(map_session_data_t* const PSession, CCharEntity* const PCh
         PPotItem->cleanPot();
         PPotItem->setPlant(CItemFlowerpot::getPlantFromSeed(itemID));
         PPotItem->setPlantTimestamp(CVanaTime::getInstance()->getVanaTime());
-        PPotItem->setStrength(xirand::GetRandomNumber(32));
+        PPotItem->setStrength(xirand::GetRandomNumber(33));
         gardenutils::GrowToNextStage(PPotItem);
     }
     else if (itemID >= 4096 && itemID <= 4111)
@@ -7189,8 +7306,12 @@ void SmallPacket0x100(map_session_data_t* const PSession, CCharEntity* const PCh
 
         PChar->StatusEffectContainer->DelStatusEffectsByFlag(EFFECTFLAG_DISPELABLE | EFFECTFLAG_ROLL | EFFECTFLAG_ON_JOBCHANGE);
 
+        // clang-format off
         PChar->ForParty([](CBattleEntity* PMember)
-                        { ((CCharEntity*)PMember)->PLatentEffectContainer->CheckLatentsPartyJobs(); });
+        {
+            ((CCharEntity*)PMember)->PLatentEffectContainer->CheckLatentsPartyJobs();
+        });
+        // clang-format on
 
         PChar->UpdateHealth();
 
@@ -7217,7 +7338,7 @@ void SmallPacket0x100(map_session_data_t* const PSession, CCharEntity* const PCh
 
 /************************************************************************
  *                                                                       *
- *  Set Blue Magic Spells                                                *
+ *  Set Blue Magic Spells / PUP Attachments / MON equip                  *
  *                                                                       *
  ************************************************************************/
 
@@ -7359,6 +7480,10 @@ void SmallPacket0x102(map_session_data_t* const PSession, CCharEntity* const PCh
         PChar->pushPacket(new CCharJobExtraPacket(PChar, true));
         PChar->pushPacket(new CCharJobExtraPacket(PChar, false));
         puppetutils::SaveAutomaton(PChar);
+    }
+    else if (PChar->loc.zone->GetID() == ZONE_FERETORY && PChar->m_PMonstrosity != nullptr)
+    {
+        monstrosity::HandleEquipChangePacket(PChar, data);
     }
 }
 

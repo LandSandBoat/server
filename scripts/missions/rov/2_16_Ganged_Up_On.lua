@@ -11,7 +11,7 @@ local mission = Mission:new(xi.mission.log_id.ROV, xi.mission.id.rov.GANGED_UP_O
 
 mission.reward =
 {
-    item        = xi.item.CIPHER_OF_LILISETTES_ALT_EGO_II,
+    item        = xi.item.CIPHER_OF_LILISETTES_ALTER_EGO_II,
     nextMission = { xi.mission.log_id.ROV, xi.mission.id.rov.SACRIFICE },
 }
 
@@ -33,7 +33,7 @@ mission.sections =
 
                             mission:complete(player)
                         else
-                            player:messageName(pastSandoriaID.text.ITEM_CANNOT_BE_OBTAINED, nil, xi.item.CIPHER_OF_LILISETTES_ALT_EGO_II)
+                            player:messageName(pastSandoriaID.text.ITEM_CANNOT_BE_OBTAINED, nil, xi.item.CIPHER_OF_LILISETTES_ALTER_EGO_II)
                         end
 
                         return mission:noAction()
@@ -87,7 +87,7 @@ mission.sections =
 
                         mission:complete(player)
                     else
-                        player:messageName(pastSandoriaID.text.CANNOT_OBTAIN_MYSTIC, nil, xi.item.CIPHER_OF_LILISETTES_ALT_EGO_II)
+                        player:messageName(pastSandoriaID.text.CANNOT_OBTAIN_MYSTIC, nil, xi.item.CIPHER_OF_LILISETTES_ALTER_EGO_II)
                         mission:setVar(player, 'Status', 1)
                     end
                 end,

@@ -43,7 +43,7 @@ battlefieldObject.onEventFinish = function(player, csid, option, npc)
         player:delKeyItem(xi.ki.DRAGON_CURSE_REMEDY)
         player:unlockJob(xi.job.DRG)
         player:messageSpecial(ID.text.YOU_CAN_NOW_BECOME_A_DRAGOON)
-        player:setPetName(xi.pet.type.WYVERN, option + 1)
+        player:setPetName(xi.petType.WYVERN, option + 1)
     end
 end
 

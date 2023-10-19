@@ -3,6 +3,10 @@ require('scripts/globals/interaction/quest')
 
 utils = {}
 
+-- Event cancelled constant, replaces the hardcoded value of 1073741824 in many
+-- scripts.
+utils.EVENT_CANCELLED_OPTION = bit.lshift(1, 30)
+
 -- Max uint32 constant, replaces negative values in event parameters
 -- Note: If correcting a negative value, this is *already* -1, adjust accordingly!
 utils.MAX_UINT32 = 4294967295
@@ -227,6 +231,128 @@ function utils.clamp(input, min_val, max_val)
     return input
 end
 
+--  Returns a table containing all the elements in the specified range.
+--  Source: https://github.com/mebens/range
+function utils.range(from, to, step)
+    local t = {}
+    local argType = type(from)
+    step = step or 1
+
+    if argType == 'number' then
+        for i = from, to, step do t[#t + 1] = i end
+    elseif argType == 'string' then
+        local e = string.byte(to)
+        for i = string.byte(from), e, step do t[#t + 1] = string.char(i) end
+    elseif argType == 'table' then
+        local metaNext = getmetatable(from).__next
+
+        if metaNext then
+            local i = from
+
+            while i < to do
+                t[#t + 1] = i
+                i = metaNext(i, step)
+            end
+
+            t[#t + 1] = to
+        end
+    end
+
+    return t
+end
+
+-----------------------------------
+--
+-- Functional
+--
+-- Functional methods provide a means to simplify logic that consists in
+-- simple operations when iterating a table.
+-- In general, they can make code much more concise and readable, but they
+-- can also end up making it a cluttered mess, so use your judgement
+-- when deciding if you want to use these methods
+-----------------------------------
+
+-- Given a table and a mapping function, returns a new table created by
+-- applying the given mapping function to the given table elements
+function utils.map(tbl, func)
+    local t = {}
+
+    for k, v in pairs(tbl) do
+        t[k] = func(k, v)
+    end
+
+    return t
+end
+
+-- Given a table and a filter function, returns a new table composed of the
+-- elements that pass the given filter.
+-- e.g: utils.filter({ 'a', 'b', 'c', 'd' }, function(k, v) return v >= 'c' end)  --> { 'c', 'd }
+function utils.filter(tbl, func)
+    local out = {}
+
+    for k, v in pairs(tbl) do
+        if func(k, v) then
+            out[k] = v
+        end
+    end
+
+    return out
+end
+
+-- Given a table and a filter function, returns a new table composed of the
+-- elements that pass the given filter.
+-- Unlike utils.filter, this method will return an iterable table.
+-- e.g utils.filterArray({ 'a', 'b', 'c', 'd' }, function(k, v) return v >= 'c' end)  --> { 1 => 'c', 2 => 'd' }
+function utils.filterArray(tbl, func)
+    local out = {}
+
+    for k, v in pairs(tbl) do
+        if func(k, v) then
+            table.insert(out, v)
+        end
+    end
+
+    return out
+end
+
+-- Returns true if any member of the given table passes the given
+-- predicate function
+function utils.any(tbl, predicate)
+    for k, v in pairs(tbl) do
+        if predicate(k, v) then
+            return true
+        end
+    end
+
+    return false
+end
+
+-- Returns the sum of applying the given function to each element of the given table
+-- e.g: utils.sum({ 1, 2, 3 }, function(k, v) return v end)  --> 6
+function utils.sum(tbl, func)
+    local sum = 0
+
+    for k, v in pairs(tbl) do
+        sum = sum + func(k, v)
+    end
+
+    return sum
+end
+
+-- To be used with utils.sum.
+-- Used to count the number of times an element in a table
+-- matches the given predicate
+-- e.g: utils.sum({ 'a, 'a', 'b' }, utils.counter(function (k, v) return v == 'a' end)) --> 2
+function utils.counter(predicate)
+    return function(k, v)
+        if predicate(k, v) then
+            return 1
+        else
+            return 0
+        end
+    end
+end
+
 -- returns unabsorbed damage
 function utils.stoneskin(target, dmg)
     --handling stoneskin
@@ -247,7 +373,7 @@ function utils.stoneskin(target, dmg)
     return dmg
 end
 
--- returns reduced magic damage from RUN buff, "One for All"
+-- returns reduced magic damage from RUN buff, 'One for All'
 function utils.oneforall(target, dmg)
     if dmg > 0 then
         local oneForAllEffect = target:getStatusEffect(xi.effect.ONE_FOR_ALL)
@@ -336,12 +462,12 @@ function utils.conalDamageAdjustment(attacker, target, skill, maxDamage, minimum
     -- #TODO: Currently all cone attacks use static 45 degree (360 scale) angles in core, when cone attacks
     -- have different angles and there's a method to fetch the angle, use a line like the below
     -- local coneAngle = skill:getConalAngle()
-    local coneAngle = 32 -- 256-degree based, equivalent to "45 degrees" on 360 degree scale
+    local coneAngle = 32 -- 256-degree based, equivalent to '45 degrees' on 360 degree scale
 
-    -- #TODO: Conal attacks hit targets in a cone with a center line of the "primary" target (the mob's
+    -- #TODO: Conal attacks hit targets in a cone with a center line of the 'primary' target (the mob's
     -- highest enmity target). These primary targets can be within 128 degrees of the mob's front. However,
     -- there's currently no way for a conal skill to store (and later check) the primary target a mob skill
-    -- was trying to hit. Therefore the "damage drop off" here is based from an origin of the mob's rotation
+    -- was trying to hit. Therefore the 'damage drop off' here is based from an origin of the mob's rotation
     -- instead. Should conal skills become capable of identifying their primary target, this should be changed
     -- to be based on the degree difference from the primary target instead.
     local conalAnglePower = coneAngle - math.abs(attacker:getFacingAngle(target))
@@ -759,9 +885,9 @@ function utils.mobTeleport(mob, hideDuration, pos, disAnim, reapAnim)
     end)
 end
 
-------------------------------
+-----------------------------------
 -- Spatial position utilities
-------------------------------
+-----------------------------------
 local ffxiRotConversionFactor = 360.0 / 255.0
 
 function utils.ffxiRotToDegrees(ffxiRot)
@@ -865,4 +991,18 @@ end
 -- Returns 24h Clock Time (example: 04:30 = 430, 21:30 = 2130)
 function utils.vanadielClockTime()
     return tonumber(VanadielHour() .. string.format('%02d', VanadielMinute()))
+end
+
+-- Converts a number to a binary string
+function utils.intToBinary(x)
+    local bin = ''
+
+    while x > 1 do
+        bin = tostring(x % 2) .. bin
+        x = math.floor(x / 2)
+    end
+
+    bin = tostring(x) .. bin
+
+    return bin
 end

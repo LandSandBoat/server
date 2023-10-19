@@ -40,6 +40,7 @@
 #include "linkshell.h"
 #include "map.h"
 #include "message.h"
+#include "monstrosity.h"
 #include "notoriety_container.h"
 #include "party.h"
 #include "spell.h"
@@ -1010,7 +1011,6 @@ void CZone::createZoneTimers()
 void CZone::CharZoneIn(CCharEntity* PChar)
 {
     TracyZoneScoped;
-    // ищем свободный targid для входящего в зону персонажа
 
     PChar->loc.zone              = this;
     PChar->loc.zoning            = false;
@@ -1092,6 +1092,8 @@ void CZone::CharZoneIn(CCharEntity* PChar)
             PChar->PPet->StatusEffectContainer->DelStatusEffectsByFlag(EFFECTFLAG_CONFRONTATION, true);
         }
     }
+
+    monstrosity::HandleZoneIn(PChar);
 
     PChar->PLatentEffectContainer->CheckLatentsZone();
 
@@ -1190,8 +1192,17 @@ void CZone::CharZoneOut(CCharEntity* PChar)
     if (PChar->PParty && PChar->loc.destination != 0 && PChar->m_moghouseID == 0)
     {
         uint8 data[4]{};
-        ref<uint32>(data, 0) = PChar->PParty->GetPartyID();
-        message::send(MSG_PT_RELOAD, data, sizeof data, nullptr);
+
+        if (PChar->PParty->m_PAlliance)
+        {
+            ref<uint32>(data, 0) = PChar->PParty->m_PAlliance->m_AllianceID;
+            message::send(MSG_ALLIANCE_RELOAD, data, sizeof data, nullptr);
+        }
+        else
+        {
+            ref<uint32>(data, 0) = PChar->PParty->GetPartyID();
+            message::send(MSG_PT_RELOAD, data, sizeof data, nullptr);
+        }
     }
 
     if (PChar->PParty)

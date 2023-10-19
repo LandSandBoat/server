@@ -58,14 +58,14 @@ public:
     void setAoE(uint16 AoE);
 
 private:
-    uint8  m_UseDelay;   // задержка использования после экипировки
-    uint8  m_MaxCharges; // максимальное количество зарядов предмета
+    uint8  m_UseDelay;
+    uint8  m_MaxCharges;
     uint16 m_Animation;
-    uint16 m_AnimationTime;  // время анимации для правильного отображения сообщения (эффектов)
-    uint16 m_ActivationTime; // время активации предмета во время использования
+    uint16 m_AnimationTime;
+    uint16 m_ActivationTime;
     uint16 m_ValidTarget;
-    uint32 m_ReuseDelay; // задержка между использованием предмета
-    uint32 m_AssignTime; // время экипировки предмета
+    uint32 m_ReuseDelay;
+    uint32 m_AssignTime;
     uint16 m_AoE;
 };
 

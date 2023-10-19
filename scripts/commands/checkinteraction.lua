@@ -1,20 +1,14 @@
----------------------------------------------------------------------------------------------------
+-----------------------------------
 -- func: !checkinteraction (handlerName)
 -- desc:
----------------------------------------------------------------------------------------------------
+-----------------------------------
+local commandObj = {}
 
-require('scripts/globals/interaction/interaction_util')
-
-cmdprops =
+commandObj.cmdprops =
 {
     permission = 5,
     parameters = 's'
 }
-
-function error(player, msg)
-    player:PrintToPlayer(msg)
-    player:PrintToPlayer('!checkinteraction (handlerName)')
-end
 
 local typeToName = {}
 for name, typeVal in pairs(Action.Type) do
@@ -50,7 +44,7 @@ local function handlerToString(handler, player, containerVarCache, varCache)
     return message
 end
 
-function onTrigger(player, handlerName)
+commandObj.onTrigger = function(player, handlerName)
     local function cmdPrint(message, ...)
         player:PrintToPlayer(string.format(message, unpack({ ... }) or nil), 17)
     end
@@ -121,3 +115,5 @@ function onTrigger(player, handlerName)
     printHandlers('Trigger', onTriggers)
     printHandlers('Trade', onTrades)
 end
+
+return commandObj

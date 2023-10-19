@@ -1,21 +1,16 @@
----------------------------------------------------------------------------------------------------
+-----------------------------------
 -- func: reloadinteractions
 -- desc: Reloads the interaction framework
----------------------------------------------------------------------------------------------------
-require('scripts/globals/interaction/interaction_global')
+-----------------------------------
+local commandObj = {}
 
-cmdprops =
+commandObj.cmdprops =
 {
     permission = 5,
     parameters = 'b'
 }
 
-function error(player, msg)
-    player:PrintToPlayer(msg)
-    player:PrintToPlayer('!reloadinteraction <reload-data>')
-end
-
-function onTrigger(player, shouldReloadData)
+commandObj.onTrigger = function(player, shouldReloadData)
     local filesToUnload =
     {
         'scripts/globals/interaction/interaction_lookup',
@@ -30,3 +25,5 @@ function onTrigger(player, shouldReloadData)
     InteractionGlobal.reload(shouldReloadData)
     player:PrintToPlayer('Interaction framework was reloaded')
 end
+
+return commandObj

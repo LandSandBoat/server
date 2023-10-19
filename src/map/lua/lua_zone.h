@@ -72,6 +72,11 @@ public:
 
     sol::table queryEntitiesByName(std::string const& name);
 
+    bool operator==(const CLuaZone& other) const
+    {
+        return this->m_pLuaZone == other.m_pLuaZone;
+    }
+
     static void Register();
 };
 

@@ -2,18 +2,20 @@
 -- func: getskill <skill name or ID> <target>
 -- desc: returns target's level of specified skill
 -----------------------------------
-cmdprops =
+local commandObj = {}
+
+commandObj.cmdprops =
 {
     permission = 1,
     parameters = 'ss'
 }
 
-function error(player, msg)
+local function error(player, msg)
     player:PrintToPlayer(msg)
     player:PrintToPlayer('!getskill <skill name or ID> (player)')
 end
 
-function onTrigger(player, skillName, target)
+commandObj.onTrigger = function(player, skillName, target)
     if skillName == nil then
         error(player, 'You must specify a skill to check!')
         return
@@ -57,3 +59,5 @@ function onTrigger(player, skillName, target)
     player:PrintToPlayer(string.format('%s\'s current skillID \'%s\' Skill: %s (real value: %s)',
     targ:getName(), skillName, (targ:getCharSkillLevel(skillID) / 10) .. '.x', targ:getCharSkillLevel(skillID)))
 end
+
+return commandObj

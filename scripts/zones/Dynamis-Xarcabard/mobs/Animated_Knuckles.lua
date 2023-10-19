@@ -20,6 +20,7 @@ end
 
 entity.onMobDeath = function(mob, player, optParams)
     player:showText(mob, ID.text.ANIMATED_KNUCKLES_DIALOG + 1)
+    xi.magian.onMobDeath(mob, player, optParams, set{ 3097 })
 end
 
 return entity

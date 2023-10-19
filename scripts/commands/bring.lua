@@ -2,19 +2,20 @@
 -- func: bring <player>
 -- desc: Brings the target to the player.
 -----------------------------------
+local commandObj = {}
 
-cmdprops =
+commandObj.cmdprops =
 {
     permission = 1,
     parameters = 'si'
 }
 
-function error(player, msg)
+local function error(player, msg)
     player:PrintToPlayer(msg)
     player:PrintToPlayer('!bring <player> (forceZone)')
 end
 
-function onTrigger(player, target, forceZone)
+commandObj.onTrigger = function(player, target, forceZone)
     -- validate target
     if target == nil then
         error(player, 'You must enter a target player name.')
@@ -47,3 +48,5 @@ function onTrigger(player, target, forceZone)
         targ:setPos(player:getXPos(), player:getYPos(), player:getZPos(), player:getRotPos())
     end
 end
+
+return commandObj

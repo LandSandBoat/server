@@ -4,7 +4,7 @@
 -- Type: Abyssea Service NPC
 -- !pos 8.27 -4 -65 232
 -----------------------------------
-----------------------------------
+-----------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

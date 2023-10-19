@@ -43,6 +43,20 @@ local animationTable =
     [12] = { 23, 33 },
 }
 
+local terpsichoreTable =
+set{
+    xi.item.TERPSICHORE_75,
+    xi.item.TERPSICHORE_80,
+    xi.item.TERPSICHORE_85,
+    xi.item.TERPSICHORE_90,
+    xi.item.TERPSICHORE_95,
+    xi.item.TERPSICHORE_99,
+    xi.item.TERPSICHORE_99_II,
+    xi.item.TERPSICHORE_119,
+    xi.item.TERPSICHORE_119_II,
+    xi.item.TERPSICHORE_119_III
+}
+
 -----------------------------------
 -- Local functions.
 -----------------------------------
@@ -60,6 +74,13 @@ local function getStepFinishingMovesBase(player)
         numAwardedMoves = 5
     elseif player:getMainJob() == xi.job.DNC then
         numAwardedMoves = 2
+    end
+
+    -- Terpsichore FM bonus. (Confirmed main-hand only)
+    local mainHandWeapon = player:getEquipID(xi.slot.MAIN)
+
+    if terpsichoreTable[mainHandWeapon] then
+        numAwardedMoves = numAwardedMoves + player:getMod(xi.mod.STEP_FINISH)
     end
 
     return numAwardedMoves
@@ -126,6 +147,7 @@ xi.job_utils.dancer.checkStepAbility = function(player, target, ability)
         if player:hasStatusEffect(xi.effect.TRANCE) then
             return 0, 0
         elseif player:getTP() < 100 then
+            -- TODO: Does Step TP Consumed modifier adjust this check?
             return xi.msg.basic.NOT_ENOUGH_TP, 0
         else
             return 0, 0
@@ -216,7 +238,7 @@ xi.job_utils.dancer.useStepAbility = function(player, target, ability, action, s
 
     -- Only remove TP if the player doesn't have Trance.
     if not player:hasStatusEffect(xi.effect.TRANCE) then
-        player:delTP(100)
+        player:delTP(100 + player:getMod(xi.mod.STEP_TP_CONSUMED))
     end
 
     if math.random() <= xi.weaponskills.getHitRate(player, target, true, player:getMod(xi.mod.STEP_ACCURACY)) then

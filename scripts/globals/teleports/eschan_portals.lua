@@ -1,10 +1,10 @@
--------------------------------------------
+-----------------------------------
 -- Escha/Reisenjima Portals Global
--------------------------------------------
+-----------------------------------
 require('scripts/globals/npc_util')
 require('scripts/globals/teleports')
 require('scripts/globals/utils')
--------------------------------------------
+-----------------------------------
 xi = xi or {}
 xi.escha = xi.escha or {}
 xi.escha.portals = xi.escha.portals or {}
@@ -33,12 +33,12 @@ local portalOffsets =
     [xi.zone.REISENJIMA ] = { 23, 31 },
 }
 
--------------------------------------------------------------------------------------------------------------
+-----------------------------------
 -- Notes:
 -- Portal base cost is 50 in every escha zone.
 -- Vorseal Luck+ (Portal Cost per unpgrade) -5%, -10%, -15%, -20%, -25%, -30%, -35%, -40%, -45%, -50%, -55%
 -- Vorseal status effect = 602
--------------------------------------------------------------------------------------------------------------
+-----------------------------------
 local function getPortalCost(player)
     local cost             = 50
     local luckVorsealPower = 0
@@ -119,7 +119,7 @@ xi.escha.portals.eschanPortalEventFinish = function(player, csid, option, npc)
     elseif
         option ~= 0 and
         option ~= 4 and -- Scintillating Rhapsody usage.
-        option ~= 1073741824
+        option ~= utils.EVENT_CANCELLED_OPTION
     then
         player:delCurrency('escha_silt', portalCost)
     end

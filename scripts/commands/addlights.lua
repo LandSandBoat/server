@@ -1,12 +1,12 @@
----------------------------------------------------------------------------------------------------
+-----------------------------------
 -- func: addlights <light type> <amount> <target player>
 -- desc: Adds the amount of specified light to the player
----------------------------------------------------------------------------------------------------
+-----------------------------------
 -- lights: 1: pearl, 2: azure, 3: ruby, 4: amber, 5: gold, 6: silver, 7: ebon
----------------------------------------------------------------------------------------------------
-require('scripts/globals/abyssea')
+-----------------------------------
+local commandObj = {}
 
-cmdprops =
+commandObj.cmdprops =
 {
     permission = 1,
     parameters = 'sis'
@@ -23,12 +23,12 @@ local lightType =
     amber  = 7,
 }
 
-function error(player, msg)
+local function error(player, msg)
     player:PrintToPlayer(msg)
     player:PrintToPlayer('!addlights <light type> <amount> (player)')
 end
 
-function onTrigger(player, light, amount, target)
+commandObj.onTrigger = function(player, light, amount, target)
     -- validate target
     local targ
     if target == nil then
@@ -43,7 +43,7 @@ function onTrigger(player, light, amount, target)
 
     local selectedLight = tostring(light)
 
-    if lightType[selectedLight] == nil  or selectedLight == nil then
+    if lightType[selectedLight] == nil or selectedLight == nil then
         error(player, 'Invalid light type.\nValid light types: pearl, azure, ruby, amber, gold, silver, ebon')
         return
     end
@@ -64,3 +64,5 @@ function onTrigger(player, light, amount, target)
     local newAmount = targ:getCharVar(light..'Light')
     player:PrintToPlayer(string.format('%s was given %i %s light, for a total of %i.', targ:getName(), amount, light, newAmount))
 end
+
+return commandObj

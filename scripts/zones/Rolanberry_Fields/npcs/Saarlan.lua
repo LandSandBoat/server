@@ -59,12 +59,14 @@ entity.onTrigger = function(player, npc)
     elseif player:getCharVar('LegionStatus') == 1 then
         local maximus = player:hasKeyItem(xi.ki.LEGION_TOME_PAGE_MAXIMUS) and 1 or 0
         local minimus = player:hasKeyItem(xi.ki.LEGION_TOME_PAGE_MINIMUS) and 1 or 0
+
+        -- TODO: Table these and iterate
         local title =
-            (player:hasTitle(xi.title.SUBJUGATOR_OF_THE_LOFTY)   and  1 or 0) +
-            (player:hasTitle(xi.title.SUBJUGATOR_OF_THE_MIRED)   and  2 or 0) +
-            (player:hasTitle(xi.title.SUBJUGATOR_OF_THE_SOARING) and  4 or 0) +
-            (player:hasTitle(xi.title.SUBJUGATOR_OF_THE_VEILED)  and  8 or 0) +
-            (player:hasTitle(xi.title.LEGENDARY_LEGIONNAIRE)     and 16 or 0)
+            (player:hasTitle(xi.title.SUBJUGATOR_OF_THE_LOFTY) and 1 or 0) +
+            (player:hasTitle(xi.title.SUBJUGATOR_OF_THE_MIRED) and 2 or 0) +
+            (player:hasTitle(xi.title.SUBJUGATOR_OF_THE_SOARING) and 4 or 0) +
+            (player:hasTitle(xi.title.SUBJUGATOR_OF_THE_VEILED) and 8 or 0) +
+            (player:hasTitle(xi.title.LEGENDARY_LEGIONNAIRE) and 16 or 0)
 
         player:startEvent(8005, 0, title, maximus, player:getCurrency('legion_point'), minimus)
     end

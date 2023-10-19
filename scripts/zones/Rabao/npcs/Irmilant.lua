@@ -62,7 +62,7 @@ entity.onEventFinish = function(player, csid, option, npc)
         player:addQuest(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.INDOMITABLE_SPIRIT)
     elseif csid == 132 then
         player:confirmTrade()
-        player:setCharVar('IndomitableSpiritTimer', getConquestTally()) -- Player must wait until next CQ tally
+        player:setCharVar('IndomitableSpiritTimer', NextConquestTally()) -- Player must wait until next CQ tally
     elseif csid == 134 then
         npcUtil.completeQuest(player, xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.INDOMITABLE_SPIRIT, { item = 17011, fameArea = xi.quest.fame_area.SELBINA_RABAO, fame = 100, title = xi.title.INDOMITABLE_FISHER, var = 'IndomitableSpiritTimer' })
     end

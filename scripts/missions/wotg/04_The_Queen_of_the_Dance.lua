@@ -21,8 +21,8 @@ mission.sections =
     -- 0: Try to enter without a ticket
     {
         check = function(player, currentMission, missionStatus, vars)
-            return currentMission == mission.missionId and missionStatus == 0
-            and xi.wotg.helpers.meetsMission4Reqs(player)
+            return currentMission == mission.missionId and missionStatus == 0 and
+                xi.wotg.helpers.meetsMission4Reqs(player)
         end,
 
         [xi.zone.SOUTHERN_SAN_DORIA_S] =

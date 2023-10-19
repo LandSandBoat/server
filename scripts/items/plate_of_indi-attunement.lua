@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 6090
 -- plate_of_indi-attunement
 -- Teaches INDI-ATTUNEMENT
------------------------------------------
+-----------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

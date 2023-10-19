@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 5261
 -- Item: Bottle Of Psychoanima
 -- Item Effect: Intimidate
------------------------------------------
+-----------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, player)

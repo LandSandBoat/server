@@ -2,19 +2,20 @@
 -- func: mp <amount> <player>
 -- desc: Sets the GM or target players mana.
 -----------------------------------
+local commandObj = {}
 
-cmdprops =
+commandObj.cmdprops =
 {
     permission = 1,
     parameters = 'is'
 }
 
-function error(player, msg)
+local function error(player, msg)
     player:PrintToPlayer(msg)
     player:PrintToPlayer('!mp <amount> (player)')
 end
 
-function onTrigger(player, mp, target)
+commandObj.onTrigger = function(player, mp, target)
     -- validate target
     local targ
     local cursorTarget = player:getCursorTarget()
@@ -50,3 +51,5 @@ function onTrigger(player, mp, target)
         player:PrintToPlayer(string.format('%s is currently dead.', targ:getName()))
     end
 end
+
+return commandObj

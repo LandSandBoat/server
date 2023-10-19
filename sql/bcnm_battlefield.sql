@@ -324,7 +324,7 @@ INSERT INTO `bcnm_battlefield` VALUES (75,3,17367120,3);
 INSERT INTO `bcnm_battlefield` VALUES (76,1,17367230,3); -- hills_are_alive
 INSERT INTO `bcnm_battlefield` VALUES (76,2,17367232,3);
 INSERT INTO `bcnm_battlefield` VALUES (76,3,17367234,3);
-INSERT INTO `bcnm_battlefield` VALUES (77,1,17367173,3); -- royal_jelly
+INSERT INTO `bcnm_battlefield` VALUES (77,1,17367173,2); -- royal_jelly
 INSERT INTO `bcnm_battlefield` VALUES (77,1,17367174,3);
 INSERT INTO `bcnm_battlefield` VALUES (77,1,17367175,3);
 INSERT INTO `bcnm_battlefield` VALUES (77,1,17367176,3);
@@ -333,7 +333,7 @@ INSERT INTO `bcnm_battlefield` VALUES (77,1,17367178,3);
 INSERT INTO `bcnm_battlefield` VALUES (77,1,17367179,3);
 INSERT INTO `bcnm_battlefield` VALUES (77,1,17367180,3);
 INSERT INTO `bcnm_battlefield` VALUES (77,1,17367181,3);
-INSERT INTO `bcnm_battlefield` VALUES (77,2,17367183,3);
+INSERT INTO `bcnm_battlefield` VALUES (77,2,17367183,2);
 INSERT INTO `bcnm_battlefield` VALUES (77,2,17367184,3);
 INSERT INTO `bcnm_battlefield` VALUES (77,2,17367185,3);
 INSERT INTO `bcnm_battlefield` VALUES (77,2,17367186,3);
@@ -342,7 +342,7 @@ INSERT INTO `bcnm_battlefield` VALUES (77,2,17367188,3);
 INSERT INTO `bcnm_battlefield` VALUES (77,2,17367189,3);
 INSERT INTO `bcnm_battlefield` VALUES (77,2,17367190,3);
 INSERT INTO `bcnm_battlefield` VALUES (77,2,17367191,3);
-INSERT INTO `bcnm_battlefield` VALUES (77,3,17367193,3);
+INSERT INTO `bcnm_battlefield` VALUES (77,3,17367193,2);
 INSERT INTO `bcnm_battlefield` VALUES (77,3,17367194,3);
 INSERT INTO `bcnm_battlefield` VALUES (77,3,17367195,3);
 INSERT INTO `bcnm_battlefield` VALUES (77,3,17367196,3);

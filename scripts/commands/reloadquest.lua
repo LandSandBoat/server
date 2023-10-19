@@ -1,22 +1,21 @@
----------------------------------------------------------------------------------------------------
+-----------------------------------
 -- func: reloadquest
 -- desc: Attempt to reload specified quest lua without a restart.
----------------------------------------------------------------------------------------------------
-require('scripts/globals/utils')
-require('scripts/globals/interaction/interaction_global')
+-----------------------------------
+local commandObj = {}
 
-cmdprops =
+commandObj.cmdprops =
 {
     permission = 5,
     parameters = 's'
 }
 
-function error(player, msg)
+local function error(player, msg)
     player:PrintToPlayer(msg)
     player:PrintToPlayer('!reloadquest <lua-file-name>')
 end
 
-function fileExists(path)
+local function fileExists(path)
     local f = io.open(path, 'r')
     return f ~= nil and io.close(f)
 end
@@ -35,7 +34,7 @@ local folders =
     'adoulin',
 }
 
-function onTrigger(player, questName)
+commandObj.onTrigger = function(player, questName)
     if questName == nil then
         error(player, 'Unable to reload quest.')
     end
@@ -63,3 +62,5 @@ function onTrigger(player, questName)
 
     error(player, string.format('Unable to find quest \'%s\' to reload.', questName))
 end
+
+return commandObj

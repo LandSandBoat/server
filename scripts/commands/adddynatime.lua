@@ -2,19 +2,20 @@
 -- func: adddynatime
 -- desc: Adds an amount of time to the given target. If no target then to the current player.
 -----------------------------------
+local commandObj = {}
 
-cmdprops =
+commandObj.cmdprops =
 {
     permission = 1,
     parameters = 'is'
 }
 
-function error(player, msg)
+local function error(player, msg)
     player:PrintToPlayer(msg)
     player:PrintToPlayer('!adddynatime <minutes> (player)')
 end
 
-function onTrigger(player, minutes, target)
+commandObj.onTrigger = function(player, minutes, target)
     -- validate target
     local targ
     if target == nil then
@@ -48,3 +49,5 @@ function onTrigger(player, minutes, target)
     targ:setLocalVar('dynamis_lasttimeupdate', effect:getTimeRemaining() / 1000)
     targ:messageSpecial(ID.text.DYNAMIS_TIME_EXTEND, minutes)
 end
+
+return commandObj

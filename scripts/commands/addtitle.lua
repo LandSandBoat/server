@@ -2,19 +2,20 @@
 -- func: addtitle
 -- desc: Add and set player title.
 -----------------------------------
+local commandObj = {}
 
-cmdprops =
+commandObj.cmdprops =
 {
     permission = 1,
     parameters = 'ss'
 }
 
-function error(player, msg)
+local function error(player, msg)
     player:PrintToPlayer(msg)
     player:PrintToPlayer('!addtitle <title ID> (player)')
 end
 
-function onTrigger(player, titleId, target)
+commandObj.onTrigger = function(player, titleId, target)
     -- validate titleId
     if titleId == nil then
         error(player, 'You must supply a title ID.')
@@ -43,3 +44,5 @@ function onTrigger(player, titleId, target)
     targ:addTitle(titleId)
     player:PrintToPlayer(string.format('%s was given title %s.', targ:getName(), titleId))
 end
+
+return commandObj

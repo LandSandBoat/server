@@ -60,22 +60,23 @@ zones[xi.zone.CAEDARVA_MIRE] =
             [17100875] = 17101143, -- 315.793 -16.336 -402.407
             [17100876] = 17101143, -- 321.809 -16.843 -373.780
         },
+
         AYNU_KAYSEY           = 17101099,
         CAEDARVA_TOAD         = 17101145,
         JAZARAAT              = 17101146,
         LAMIA_NO27            = 17101148,
         MOSHDAHN              = 17101149,
-        KHIMAIRA              = 17101201,
-        VERDELET              = 17101202,
-        TYGER                 = 17101203,
-        MAHJLAEF_THE_PAINTORN = 17101204,
-        EXPERIMENTAL_LAMIA    = 17101205,
+        KHIMAIRA              = 17101197,
+        VERDELET              = 17101198,
+        TYGER                 = 17101199,
+        MAHJLAEF_THE_PAINTORN = 17101200,
+        EXPERIMENTAL_LAMIA    = 17101201,
     },
     npc =
     {
         LOGGING             = GetTableOfIDs('Logging_Point'),
-        RUNIC_PORTAL_AZOUPH = 17101271,
-        RUNIC_PORTAL_DVUCCA = 17101274,
+        RUNIC_PORTAL_AZOUPH = 17101318,
+        RUNIC_PORTAL_DVUCCA = 17101321,
     },
 }
 

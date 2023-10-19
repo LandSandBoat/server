@@ -49,8 +49,8 @@ public:
     bool DelStatusEffect(EFFECT StatusID);
     bool DelStatusEffectSilent(EFFECT StatusID);
     bool DelStatusEffect(EFFECT StatusID, uint16 SubID);
-    void DelStatusEffectsByFlag(uint32 flag, bool silent = false); // Remove all effects with the specified type
-    void DelStatusEffectsByIcon(uint16 IconID);                    // Remove all effects with the indicated icon
+    void DelStatusEffectsByFlag(uint32 flag, bool silent = false); // Remove all the status effects with the specified type
+    void DelStatusEffectsByIcon(uint16 IconID);                    // Remove all effects with the specified icon
     void DelStatusEffectsByType(uint16 Type);
     bool DelStatusEffectByTier(EFFECT StatusID, uint16 power);
     void KillAllStatusEffect();

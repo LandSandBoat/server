@@ -20,6 +20,7 @@ end
 
 entity.onMobDeath = function(mob, player, optParams)
     player:showText(mob, ID.text.ANIMATED_HORN_DIALOG + 1)
+    xi.magian.onMobDeath(mob, player, optParams, set{ 3128 })
 end
 
 return entity
