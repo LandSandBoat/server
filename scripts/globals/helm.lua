@@ -1557,7 +1557,7 @@ xi.helm.onTrade = function(player, npc, trade, helmType, csid, func)
             npcUtil.giveKeyItem(player, xi.ki.RAINBOW_BERRY)
         end
 
-        -- AMK04
+        -- AMK mission 4 (index 3)
         if xi.settings.main.ENABLE_AMK == 1 then
             xi.amk.helpers.helmTrade(player, helmType, broke)
         end
