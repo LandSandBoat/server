@@ -20,9 +20,10 @@ CREATE TABLE `besieged_strongholds` (
   `stronghold_id` tinyint(2) NOT NULL DEFAULT 0,
   `orders` tinyint(2) unsigned NOT NULL DEFAULT 0,
   `stronghold_level` tinyint(2) unsigned NOT NULL DEFAULT 0,
-  `forces` tinyint(3) unsigned NOT NULL DEFAULT 0,
+  `forces` float unsigned NOT NULL DEFAULT 0,
   `prisoners` tinyint(3) unsigned NOT NULL DEFAULT 0,
   `owns_astral_candescence` tinyint(1) unsigned NOT NULL DEFAULT 0,
+  `consecutive_defeats` int(10) unsigned NOT NULL DEFAULT 0,
   `mirror_respawn_time` int(11) DEFAULT NULL,
   PRIMARY KEY (`stronghold_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -34,10 +35,10 @@ CREATE TABLE `besieged_strongholds` (
 
 LOCK TABLES `besieged_strongholds` WRITE;
 /*!40000 ALTER TABLE `besieged_strongholds` DISABLE KEYS */;
-INSERT INTO `besieged_strongholds` VALUES (0,0,0,0,0,1,0);
-INSERT INTO `besieged_strongholds` VALUES (1,0,0,0,0,0,0);
-INSERT INTO `besieged_strongholds` VALUES (2,0,0,0,0,0,0);
-INSERT INTO `besieged_strongholds` VALUES (3,0,0,0,0,0,0);
+INSERT INTO `besieged_strongholds` VALUES (0,0,0,0,0,1,0,0);
+INSERT INTO `besieged_strongholds` VALUES (1,0,0,0,0,0,0,0);
+INSERT INTO `besieged_strongholds` VALUES (2,0,0,0,0,0,0,0);
+INSERT INTO `besieged_strongholds` VALUES (3,0,0,0,0,0,0,0);
 /*!40000 ALTER TABLE `besieged_strongholds` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;

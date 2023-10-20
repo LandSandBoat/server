@@ -31,7 +31,6 @@ set(SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/battlefield_handler.h
     ${CMAKE_CURRENT_SOURCE_DIR}/battlefield.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/battlefield.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/besieged_data.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/besieged_data.h
     ${CMAKE_CURRENT_SOURCE_DIR}/besieged_system.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/besieged_system.h

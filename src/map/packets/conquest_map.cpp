@@ -85,15 +85,15 @@ CConquestPacket::CConquestPacket(CCharEntity* PChar)
     packBitsBE(data + 0xA0, besiegedData->getAstralCandescenceOwner(), 0, 2);
     packBitsBE(data + 0xA0, besiegedData->getAlZhabiOrders(), 2, 2);
 
-    stronghold_info_t mamook   = besiegedData->getStrongholdInfo(BESIEGED_STRONGHOLD::MAMOOK);
-    stronghold_info_t halvung  = besiegedData->getStrongholdInfo(BESIEGED_STRONGHOLD::HALVUNG);
-    stronghold_info_t arrapago = besiegedData->getStrongholdInfo(BESIEGED_STRONGHOLD::ARRAPAGO);
+    stronghold_info_t mamook   = besiegedData->getBeastmenStrongholdInfo(BESIEGED_STRONGHOLD::MAMOOK);
+    stronghold_info_t halvung  = besiegedData->getBeastmenStrongholdInfo(BESIEGED_STRONGHOLD::HALVUNG);
+    stronghold_info_t arrapago = besiegedData->getBeastmenStrongholdInfo(BESIEGED_STRONGHOLD::ARRAPAGO);
 
     // These are redundant with the data later on.
     // TODO: Verify they are needed or correct
-    packBitsBE(data + 0xA0, mamook.stronghold_level, 4, 4);
-    packBitsBE(data + 0xA1, halvung.stronghold_level, 0, 4);
-    packBitsBE(data + 0xA1, arrapago.stronghold_level, 4, 4);
+    packBitsBE(data + 0xA0, mamook.strongholdLevel, 4, 4);
+    packBitsBE(data + 0xA1, halvung.strongholdLevel, 0, 4);
+    packBitsBE(data + 0xA1, arrapago.strongholdLevel, 4, 4);
 
     // These are redundant with the data later on.
     // TODO: Verify they are needed or correct
@@ -107,7 +107,7 @@ CConquestPacket::CConquestPacket(CCharEntity* PChar)
     // Mamook Stronghold - Mamool Ja Data
     packBitsBE(data + 0xA4, mamook.orders, 0, 3);
     packBitsBE(data + 0xA4, mamook.forces, 3, 8);
-    packBitsBE(data + 0xA4, mamook.stronghold_level, 11, 4);
+    packBitsBE(data + 0xA4, mamook.strongholdLevel, 11, 4);
     packBitsBE(data + 0xA4, mamook.mirrors % 2 != 0, 15, 1);
     packBitsBE(data + 0xA6, (mamook.mirrors / 2), 0, 4);
     packBitsBE(data + 0xA6, mamook.prisoners, 4, 4);
@@ -116,7 +116,7 @@ CConquestPacket::CConquestPacket(CCharEntity* PChar)
     // Halvung Stronghold - Trolls Data
     packBitsBE(data + 0xA8, halvung.orders, 0, 3);
     packBitsBE(data + 0xA8, halvung.forces, 3, 8);
-    packBitsBE(data + 0xA8, halvung.stronghold_level, 11, 4);
+    packBitsBE(data + 0xA8, halvung.strongholdLevel, 11, 4);
     packBitsBE(data + 0xA8, halvung.mirrors % 2 != 0, 15, 1);
     packBitsBE(data + 0xAA, (halvung.mirrors / 2), 0, 4);
     packBitsBE(data + 0xAA, halvung.prisoners, 4, 4);
@@ -125,7 +125,7 @@ CConquestPacket::CConquestPacket(CCharEntity* PChar)
     // Arrapago Stronghold - Undead Data
     packBitsBE(data + 0xAC, arrapago.orders, 0, 3);
     packBitsBE(data + 0xAC, arrapago.forces, 3, 8);
-    packBitsBE(data + 0xAC, arrapago.stronghold_level, 11, 4);
+    packBitsBE(data + 0xAC, arrapago.strongholdLevel, 11, 4);
     packBitsBE(data + 0xAC, arrapago.mirrors % 2 != 0, 15, 1);
     packBitsBE(data + 0xAE, (arrapago.mirrors / 2), 0, 4);
     packBitsBE(data + 0xAE, arrapago.prisoners, 4, 4);

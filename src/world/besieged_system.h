@@ -49,5 +49,13 @@ public:
 
 private:
     std::unique_ptr<SqlConnection> sql;
-    auto                           getStrongholdInfos() -> std::vector<stronghold_info_t> const;
+    std::unique_ptr<BesiegedData>  besiegedData;
+
+    // Methods used for beastmen state updates
+    void  updateBeastmenForces();
+    float getForcesPerTick(stronghold_info_t strongholdInfo) const;
+    void  handleTrainingPhase(stronghold_info_t& strongholdInfo) const;
+    void  handlePreparingPhase(stronghold_info_t& strongholdInfo) const;
+
+    void sendStrongholdInfosMsg() const;
 };
