@@ -46,7 +46,7 @@ void CLuaAction::ID(uint32 actionTargetID, uint32 newActionTargetID)
 // Get the first (primary) target's long ID, if available.
 uint32 CLuaAction::getPrimaryTargetID()
 {
-    if (m_PLuaAction->actionLists.size() > 0)
+    if (!m_PLuaAction->actionLists.empty())
     {
         return m_PLuaAction->actionLists[0].ActionTargetID;
     }
