@@ -6,6 +6,7 @@ return {
     ['Hadahda']            = { event = 518 },
     ['Fari-Wari']          = { event = 833 },
     ['Imperial_Whitegate'] = { messageSpecial = ID.text.GATE_IS_FIRMLY_CLOSED },
+    ['Iruki-Waraki']       = { event = 259 },
     ['Lathuya']            = { event = 770 },
     ['Mathlouq']           = { event = 543 },
     ['Matifa']             = { event = 541 },
