@@ -1,7 +1,7 @@
-﻿/*
+/*
 ===========================================================================
 
-  Copyright (c) 2010-2015 Darkstar Dev Teams
+  Copyright (c) 2023 LandSandBoat Dev Teams
 
   This program is free software: you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -19,36 +19,50 @@
 ===========================================================================
 */
 
-#ifndef _CTIMETRIGGERS_H
-#define _CTIMETRIGGERS_H
+#pragma once
 
-#include "common/cbasetypes.h"
-#include "common/singleton.h"
-#include "entities/npcentity.h"
-#include <vector>
+#include <memory>
 
-struct Trigger_t
-{
-    uint8 id; // trigger id unique to the NPC.
-
-    CNpcEntity* npc; // NPC entity that the trigger belongs to
-
-    uint16 period;       // The time in vanadiel minutes between two firings of the trigger
-    uint16 minuteOffset; // The time in vanadiel minutes after SE epoch which the period syncs to
-
-    uint32 lastTrigger; // Used to store the last firing of the trigger
-};
-
-class CTriggerHandler : public Singleton<CTriggerHandler>
+template <class T>
+class Singleton
 {
 public:
-    void insertTrigger(Trigger_t);
-    void triggerTimer();
+    Singleton(const Singleton&)            = delete;
+    Singleton& operator=(const Singleton&) = delete;
+
+    static T* getInstance()
+    {
+        if (!_instance)
+        {
+            _instance = std::make_unique<T_Instance>();
+        }
+
+        return _instance.get();
+    }
+
+    static void delInstance()
+    {
+        _instance = nullptr;
+    }
 
 protected:
-    CTriggerHandler() = default;
+    Singleton()
+    {
+    }
+
+    virtual ~Singleton()
+    {
+    }
 
 private:
-    std::vector<Trigger_t> triggerList;
+    // https://stackoverflow.com/a/55932298
+    struct T_Instance : public T
+    {
+        T_Instance()
+        : T()
+        {
+        }
+    };
+
+    static inline std::unique_ptr<T> _instance = nullptr;
 };
-#endif

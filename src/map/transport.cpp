@@ -33,18 +33,6 @@
 #include "utils/zoneutils.h"
 #include "zone.h"
 
-std::unique_ptr<CTransportHandler> CTransportHandler::_instance;
-
-CTransportHandler* CTransportHandler::getInstance()
-{
-    if (!_instance)
-    {
-        _instance.reset(new CTransportHandler);
-    }
-
-    return _instance.get();
-}
-
 void Transport_Ship::setVisible(bool visible) const
 {
     if (visible)

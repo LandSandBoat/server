@@ -25,28 +25,9 @@
 
 #include "vana_time.h"
 
-CVanaTime* CVanaTime::_instance = nullptr;
-
 CVanaTime::CVanaTime()
 {
     setCustomEpoch(0);
-}
-
-CVanaTime* CVanaTime::getInstance()
-{
-    if (_instance == nullptr)
-    {
-        _instance = new CVanaTime();
-    }
-    return _instance;
-}
-
-void CVanaTime::delInstance()
-{
-    if (_instance)
-    {
-        destroy(_instance);
-    }
 }
 
 uint32 CVanaTime::getDate() const
