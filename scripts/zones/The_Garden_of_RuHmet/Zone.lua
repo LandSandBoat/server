@@ -86,12 +86,11 @@ zoneObject.afterZoneIn = function(player)
 end
 
 zoneObject.onGameHour = function(zone)
-    local vanadielHour = VanadielHour()
     local qmDrk = GetNPCByID(ID.npc.QM_IXAERN_DRK) -- Ix'aern drk
     local qmFaith = GetNPCByID(ID.npc.QM_JAILER_OF_FAITH)
 
     -- Jailer of Faith spawn randomiser
-    if  
+    if
         qmFaith:getStatus() ~= xi.status.DISAPPEAR and
         qmFaith:getLocalVar("nextMove") < os.time()
     then -- Change ??? position every 30 mins
