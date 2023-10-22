@@ -16,6 +16,7 @@ abilityObject.onAbilityCheck = function(player, target, ability)
         return xi.msg.basic.CANT_BE_USED_IN_AREA, 0
     end
 
+    ability:setRecast(math.max(0, ability:getRecast() - player:getMod(xi.mod.CALL_BEAST_DELAY)))
     return 0, 0
 end
 

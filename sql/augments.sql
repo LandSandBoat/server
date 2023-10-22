@@ -404,10 +404,10 @@ INSERT INTO `augments` VALUES (320,0,357,1,0,0); -- Blood Pact ability delay -1
 INSERT INTO `augments` VALUES (321,0,346,1,0,0); -- Avatar perpetuation cost -1
 INSERT INTO `augments` VALUES (322,0,455,1,0,0); -- Song spellcasting time -1%
 INSERT INTO `augments` VALUES (323,0,519,1,0,0); -- Cure spellcasting time -1%
-INSERT INTO `augments` VALUES (324,0,0,0,0,0); -- Call Beast ability delay -1
-INSERT INTO `augments` VALUES (325,0,0,0,0,0); -- Quick Draw ability delay -1
+INSERT INTO `augments` VALUES (324,0,572,1,0,0); -- Call Beast ability delay -1
+INSERT INTO `augments` VALUES (325,0,1060,1,0,0); -- Quick Draw ability delay -1
 INSERT INTO `augments` VALUES (326,0,48,1,0,0); -- Weapon Skill Acc.+1
-INSERT INTO `augments` VALUES (327,0,0,0,0,0); -- Weapon skill damage+1% (unsure if this is all hits damage or first hit damage, leaving blank until determined)
+INSERT INTO `augments` VALUES (327,0,840,1,0,0); -- Weapon skill damage+1% "However, some sources apply to all swings of the weapon skill (like Magian Trials Weapon Skill Damage +n% weapons)" (i.e. this indicates the augment is for all hits)
 INSERT INTO `augments` VALUES (328,0,421,1,0,0); -- Crit. hit damage+1%
 INSERT INTO `augments` VALUES (329,0,374,1,0,0); -- Cure potency+1%
 INSERT INTO `augments` VALUES (330,0,491,1,0,0); -- Waltz potency+1%
@@ -416,13 +416,13 @@ INSERT INTO `augments` VALUES (332,100,175,1,0,0); -- Sklchn.dmg.+1%
 INSERT INTO `augments` VALUES (333,0,944,1,0,0); -- Conserve TP+1
 INSERT INTO `augments` VALUES (334,0,487,1,0,0); -- Magic burst dmg.+1%
 INSERT INTO `augments` VALUES (335,0,563,1,0,0); -- Mag. crit. hit dmg.+1%
-INSERT INTO `augments` VALUES (336,0,0,0,0,0); -- Sic and Ready ability delay -1
+INSERT INTO `augments` VALUES (336,0,1052,1,0,0); -- Sic and Ready ability delay -1
 INSERT INTO `augments` VALUES (337,0,833,1,0,0); -- Song recast delay -1
-INSERT INTO `augments` VALUES (338,0,0,0,0,0); -- Barrage+1 (additional shots,NOT acc)
+INSERT INTO `augments` VALUES (338,0,138,1,0,0); -- Barrage+1 (additional shots,NOT acc)
 INSERT INTO `augments` VALUES (339,5,540,1,0,0); -- Elemental Siphon+5 (value*5) Use Multiplier field.
-INSERT INTO `augments` VALUES (340,0,1076,1,0,0); -- Phantom Roll ability recast -1
+INSERT INTO `augments` VALUES (340,0,1076,1,0,0); -- Phantom Roll ability delay -1
 INSERT INTO `augments` VALUES (341,0,854,1,0,0); -- Repair potency+1%
-INSERT INTO `augments` VALUES (342,0,0,0,0,0); -- Waltz TP cost -1
+INSERT INTO `augments` VALUES (342,0,139,1,0,0); -- Waltz TP cost -1
 INSERT INTO `augments` VALUES (343,0,315,1,0,0); -- "Drain" and "Aspir" Potency +1
 
 -- 344 to 346 currently unused. Leave at zero. Edit+move or remove this note as new augments get discovered.
@@ -1114,7 +1114,7 @@ INSERT INTO `augments` VALUES (909,0,0,0,0,0);
 INSERT INTO `augments` VALUES (910,0,0,0,0,0);
 INSERT INTO `augments` VALUES (911,0,0,0,0,0);
 INSERT INTO `augments` VALUES (912,0,0,0,0,0);
-INSERT INTO `augments` VALUES (913,0,0,0,0,0);
+INSERT INTO `augments` VALUES (913,0,169,6,0,0); -- Movement Speed
 INSERT INTO `augments` VALUES (914,0,0,0,0,0);
 INSERT INTO `augments` VALUES (915,0,0,0,0,0);
 INSERT INTO `augments` VALUES (916,0,0,0,0,0);

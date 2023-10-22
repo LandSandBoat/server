@@ -1420,6 +1420,10 @@ void CCharEntity::OnAbility(CAbilityState& state, action_t& action)
                 action.recast -= 10; // remove 10 seconds
             }
         }
+        else if (PAbility->getID() == ABILITY_READY || PAbility->getID() == ABILITY_SIC)
+        {
+            action.recast = static_cast<uint16>(std::max<int16>(0, action.recast - getMod(Mod::SIC_READY_RECAST)));
+        }
 
         action.id         = this->id;
         action.actiontype = PAbility->getActionType();
