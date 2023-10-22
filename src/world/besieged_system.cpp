@@ -32,14 +32,12 @@ BesiegedSystem::BesiegedSystem()
 {
 }
 
-bool BesiegedSystem::handleMessage(std::vector<uint8>&& payload,
-                                   in_addr              from_addr,
-                                   uint16               from_port)
+bool BesiegedSystem::handleMessage(HandleableMessage&& message)
 {
     // TODO: Handle incoming map messages
     DebugBesieged(fmt::format("Message: unknown conquest type received from {}:{}",
-                              from_addr.s_addr,
-                              from_port));
+                              message.from_addr.s_addr,
+                              message.from_port));
 
     return false;
 }

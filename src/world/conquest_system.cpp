@@ -28,49 +28,55 @@ ConquestSystem::ConquestSystem()
 {
 }
 
-bool ConquestSystem::handleMessage(std::vector<uint8>&& payload,
-                                   in_addr              from_addr,
-                                   uint16               from_port)
+bool ConquestSystem::handleMessage(HandleableMessage&& message)
 {
-    const uint8 conquestMsgType = payload[1];
-    if (conquestMsgType == CONQUESTMSGTYPE::CONQUEST_MAP2WORLD_GM_WEEKLY_UPDATE)
+    const uint8 conquestMsgType = message.payload[1];
+    switch (conquestMsgType)
     {
-        updateWeekConquest();
-        return true;
+        case CONQUESTMSGTYPE::CONQUEST_MAP2WORLD_GM_WEEKLY_UPDATE:
+        {
+            updateWeekConquest();
+            return true;
+        }
+        break;
+        case CONQUESTMSGTYPE::CONQUEST_MAP2WORLD_ADD_INFLUENCE_POINTS:
+        {
+            // const int32  points = ref<int32>(data, 2);
+            int32  points = 0;
+            uint32 nation = 0;
+            uint8  region = 0;
+            std::memcpy(&points, message.payload.data() + 2, sizeof(int32));
+            std::memcpy(&nation, message.payload.data() + 6, sizeof(uint32));
+            std::memcpy(&region, message.payload.data() + 10, sizeof(uint8));
+
+            // We update influence but do not immediately send this update to all map servers
+            // Influence updates are sent periodically via time_server instead.
+            // It is okay for map servers to be eventually consistent.
+            updateInfluencePoints(points, nation, (REGION_TYPE)region);
+            return true;
+        }
+        break;
+        case CONQUESTMSGTYPE::CONQUEST_MAP2WORLD_GM_CONQUEST_UPDATE:
+        {
+            // Convert from_addr to ip + port
+            uint64 ipp = message.from_addr.s_addr;
+            ipp |= (((uint64)message.from_port) << 32);
+
+            // Send influence data to the requesting map server
+            sendInfluencesMsg(true, ipp);
+            return true;
+        }
+        break;
+        default:
+        {
+            ShowDebug(fmt::format("Message: unknown conquest type received: {} from {}:{}",
+                                  static_cast<uint8>(conquestMsgType),
+                                  message.from_addr.s_addr,
+                                  message.from_port));
+        }
+        break;
     }
 
-    if (conquestMsgType == CONQUESTMSGTYPE::CONQUEST_MAP2WORLD_ADD_INFLUENCE_POINTS)
-    {
-        // const int32  points = ref<int32>(data, 2);
-        int32  points = 0;
-        uint32 nation = 0;
-        uint8  region = 0;
-        std::memcpy(&points, payload.data() + 2, sizeof(int32));
-        std::memcpy(&nation, payload.data() + 6, sizeof(uint32));
-        std::memcpy(&region, payload.data() + 10, sizeof(uint8));
-
-        // We update influence but do not immediately send this update to all map servers
-        // Influence updates are sent periodically via time_server instead.
-        // It is okay for map servers to be eventually consistent.
-        updateInfluencePoints(points, nation, (REGION_TYPE)region);
-        return true;
-    }
-
-    if (conquestMsgType == CONQUESTMSGTYPE::CONQUEST_MAP2WORLD_GM_CONQUEST_UPDATE)
-    {
-        // Convert from_addr to ip + port
-        uint64 ipp = from_addr.s_addr;
-        ipp |= (((uint64)from_port) << 32);
-
-        // Send influence data to the requesting map server
-        sendInfluencesMsg(true, ipp);
-        return true;
-    }
-
-    ShowDebug(fmt::format("Message: unknown conquest type received: {} from {}:{}",
-                          static_cast<uint8>(conquestMsgType),
-                          from_addr.s_addr,
-                          from_port));
     return false;
 }
 
