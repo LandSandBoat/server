@@ -83,6 +83,7 @@ namespace
     std::unordered_map<uint16, MonstrositySpeciesRow>  gMonstrositySpeciesMap;
     std::unordered_map<uint16, MonstrosityInstinctRow> gMonstrosityInstinctMap;
     std::unordered_map<uint16, MonstrositySkillRow>    gMonstrositySkillMap;
+    std::unordered_map<uint8, uint32>                  gMonstrosityExpMap;
 } // namespace
 
 monstrosity::MonstrosityData_t::MonstrosityData_t()
@@ -179,6 +180,18 @@ void monstrosity::LoadStaticData()
             {
                 gMonstrositySkillMap[row.monstrositySkillId] = row;
             }
+        }
+    }
+
+    ret = sql->Query("SELECT level, amount FROM monstrosity_exp_table;");
+    if (ret != SQL_ERROR && sql->NumRows() != 0)
+    {
+        while (sql->NextRow() == SQL_SUCCESS)
+        {
+            auto level  = static_cast<uint8>(sql->GetUIntData(0));
+            auto amount = static_cast<uint32>(sql->GetUIntData(1));
+
+            gMonstrosityExpMap[level] = amount;
         }
     }
 }
