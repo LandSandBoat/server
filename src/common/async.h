@@ -21,27 +21,20 @@
 
 #pragma once
 
+#include "singleton.h"
 #include "sql.h"
 #include <task_system.hpp>
 
 #include <functional>
 #include <string>
 
-class Async
+class Async : public Singleton<Async>, private ts::task_system
 {
 public:
-    ~Async() = default;
-
-    static Async* getInstance();
-
     void query(std::string const& query);
     void query(std::function<void(SqlConnection*)> const& func);
     void submit(std::function<void()> const& func);
 
-private:
-    Async() = default;
-
-    static Async*           _instance;
-    static SqlConnection*   _sql;
-    static ts::task_system* _ts;
+protected:
+    Async();
 };

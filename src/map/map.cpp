@@ -21,6 +21,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 
 #include "map.h"
 
+#include "common/async.h"
 #include "common/blowfish.h"
 #include "common/console_service.h"
 #include "common/logging.h"
@@ -408,6 +409,7 @@ void do_final(int code)
 
     CTaskMgr::delInstance();
     CVanaTime::delInstance();
+    Async::delInstance();
 
     timer_final();
     socket_final();

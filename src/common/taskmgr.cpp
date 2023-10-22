@@ -27,26 +27,6 @@
 #include "common/tracy.h"
 #include "common/utils.h"
 
-CTaskMgr* CTaskMgr::_instance = nullptr;
-
-CTaskMgr* CTaskMgr::getInstance()
-{
-    TracyZoneScoped;
-    if (_instance == nullptr)
-    {
-        _instance = new CTaskMgr();
-    }
-    return _instance;
-}
-
-void CTaskMgr::delInstance()
-{
-    if (_instance)
-    {
-        destroy(_instance);
-    }
-}
-
 CTaskMgr::CTask* CTaskMgr::AddTask(std::string const& InitName, time_point InitTick, std::any InitData, TASKTYPE InitType, TaskFunc_t InitFunc, duration InitInterval)
 {
     TracyZoneScoped;
