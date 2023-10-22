@@ -10,7 +10,7 @@ require("scripts/globals/shop")
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    xi.events.harvest.onHalloweenTrade(player, trade, npc)
+    xi.events.harvest.onHalloweenTrade(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
