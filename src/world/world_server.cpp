@@ -25,6 +25,54 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "common/logging.h"
 #include "time_server.h"
 
+int32 forward_queued_messages_to_handlers(time_point tick, CTaskMgr::CTask* PTask)
+{
+    TracyZoneScoped;
+    WorldServer* worldServer = std::any_cast<WorldServer*>(PTask->m_data);
+
+    while (std::optional<HandleableMessage> maybeMessage = pop_external_processing_message())
+    {
+        HandleableMessage message = *maybeMessage;
+        auto              subType = static_cast<REGIONALMSGTYPE>(ref<uint8>(message.payload.data(), 0));
+        IMessageHandler*  handler = nullptr;
+        switch (subType)
+        {
+            case REGIONAL_EVT_MSG_CONQUEST:
+            {
+                handler = worldServer->conquestSystem.get();
+            }
+            break;
+            case REGIONAL_EVT_MSG_BESIEGED:
+            {
+                handler = worldServer->besiegedSystem.get();
+            }
+            break;
+            case REGIONAL_EVT_MSG_CAMPAIGN:
+            {
+                handler = worldServer->campaignSystem.get();
+            }
+            break;
+            case REGIONAL_EVT_MSG_COLONIZATION:
+            {
+                handler = worldServer->colonizationSystem.get();
+            }
+            break;
+            default:
+            {
+                ShowError("Unknown IMessageHandler type requested: %i", subType);
+            }
+            break;
+        }
+
+        if (handler)
+        {
+            handler->handleMessage(std::move(message));
+        }
+    }
+
+    return 0;
+}
+
 WorldServer::WorldServer(int argc, char** argv)
 : Application("world", argc, argv)
 , sql(std::make_unique<SqlConnection>())
@@ -37,6 +85,9 @@ WorldServer::WorldServer(int argc, char** argv)
 {
     // Tasks
     CTaskMgr::getInstance()->AddTask("time_server", server_clock::now(), this, CTaskMgr::TASK_INTERVAL, time_server, 2400ms);
+
+    // TODO: Make this more reactive than a polling job
+    CTaskMgr::getInstance()->AddTask("forward_queued_messages_to_handlers", server_clock::now(), this, CTaskMgr::TASK_INTERVAL, forward_queued_messages_to_handlers, 250ms);
 }
 
 WorldServer::~WorldServer() = default;
