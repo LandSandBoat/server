@@ -1,4 +1,4 @@
-name: "github"
+name: "pr_checkboxes"
 
 on:
   pull_request_target:

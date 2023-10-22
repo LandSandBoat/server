@@ -1,0 +1,32 @@
+name: "pr_labels"
+
+on:
+  pull_request_target:
+    types:
+      - opened
+      - labeled
+      - unlabeled
+
+jobs:
+  Check_Blocking_Labels:
+    runs-on: ubuntu-latest
+    permissions: write-all
+    steps:
+      - uses: actions/github-script@v6
+        with:
+          script: |
+            const response = await github.rest.issues.listLabelsOnIssue({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  issue_number: context.issue.number,
+            });
+
+            for (const idx in response.data)
+            {
+                const entry = response.data[idx];
+                if (entry.name === "hold" || entry.name === "squash")
+                {
+                    console.log("Found PR-blocking label: " + entry.name)
+                    core.setFailed("Found PR-blocking label: " + entry.name)
+                }
+            }
