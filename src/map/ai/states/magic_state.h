@@ -58,7 +58,7 @@ public:
     void   ApplyEnmity(CBattleEntity* PTarget, int ce, int ve);
     void   ApplyMagicCoverEnmity(CBattleEntity* PCoverAbilityTarget, CBattleEntity* PCoverAbilityUser, CMobEntity* PMob);
 
-    void SetInstantCast(const bool bInstantCast)
+    void SetInstantCast(bool const bInstantCast)
     {
         m_instantCast = bInstantCast;
     }

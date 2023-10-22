@@ -48,13 +48,13 @@ namespace
     zmq::context_t                 zContext;
     std::unique_ptr<zmq::socket_t> zSocket;
 
-    moodycamel::ConcurrentQueue<chat_message_t> outgoing_queue;
+    moodycamel::ConcurrentQueue<chat_message_t>    outgoing_queue;
+    moodycamel::ConcurrentQueue<HandleableMessage> external_processing_queue;
 
-    std::unique_ptr<SqlConnection>                                        sql;
-    std::unordered_map<REGIONALMSGTYPE, std::shared_ptr<IMessageHandler>> regionalMsgHandlers;
-    std::unordered_map<uint16, zone_settings_t>                           zoneSettingsMap;
-    std::vector<uint64>                                                   mapEndpoints;
-    std::vector<uint64>                                                   yellMapEndpoints;
+    std::unique_ptr<SqlConnection>              sql;
+    std::unordered_map<uint16, zone_settings_t> zoneSettingsMap;
+    std::vector<uint64>                         mapEndpoints;
+    std::vector<uint64>                         yellMapEndpoints;
 } // namespace
 
 void queue_message(uint64 ipp, MSGSERVTYPE type, zmq::message_t* extra, zmq::message_t* packet)
@@ -78,6 +78,12 @@ void queue_message_broadcast(MSGSERVTYPE type, zmq::message_t* extra, zmq::messa
     {
         queue_message(ipp, type, extra, packet);
     }
+}
+
+auto pop_external_processing_message() -> std::optional<HandleableMessage>
+{
+    HandleableMessage out;
+    return external_processing_queue.try_dequeue(out) ? std::optional<HandleableMessage>(out) : std::nullopt;
 }
 
 void message_server_send(uint64 ipp, MSGSERVTYPE type, zmq::message_t* extra, zmq::message_t* packet)
@@ -234,20 +240,12 @@ void message_server_parse(MSGSERVTYPE type, zmq::message_t* extra, zmq::message_
         }
         case MSG_MAP2WORLD_REGIONAL_EVENT:
         {
-            uint8*      data    = (uint8*)extra->data();
-            const uint8 subType = ref<uint8>(data, 0);
+            uint8* data = (uint8*)extra->data();
 
+            // Create a copy
             std::vector<uint8> bytes(data, data + extra->size());
-            try
-            {
-                auto& handler = regionalMsgHandlers.at((REGIONALMSGTYPE)subType);
-                handler->handleMessage(bytes, from_ip, from_port);
-            }
-            catch (const std::out_of_range& e)
-            {
-                ShowError(fmt::format("Handler not found: {}", e.what()));
-            }
 
+            external_processing_queue.enqueue(HandleableMessage{ bytes, from_ip, from_port });
             break;
         }
         default:
@@ -278,7 +276,7 @@ void message_server_parse(MSGSERVTYPE type, zmq::message_t* extra, zmq::message_
     }
 }
 
-void message_server_listen(const bool& requestExit)
+void message_server_listen(bool const& requestExit)
 {
     while (!requestExit)
     {
@@ -359,15 +357,12 @@ void cache_zone_settings()
     std::copy(yellMapEndpointSet.begin(), yellMapEndpointSet.end(), std::back_inserter(yellMapEndpoints));
 }
 
-void message_server_init(const bool& requestExit)
+void message_server_init(bool const& requestExit)
 {
     TracySetThreadName("Message Server (ZMQ)");
 
     // Setup SQL
     sql = std::make_unique<SqlConnection>();
-
-    // Handler map registrations
-    regionalMsgHandlers[REGIONALMSGTYPE::REGIONAL_EVT_MSG_CONQUEST] = std::make_shared<ConquestSystem>();
 
     // Populate zoneSettingsCache with sql data
     cache_zone_settings();

@@ -89,7 +89,7 @@ struct SearchCommInfo
     uint16 port;
 };
 
-void TaskManagerThread(const bool& requestExit);
+void TaskManagerThread(bool const& requestExit);
 
 int32 ah_cleanup(time_point tick, CTaskMgr::CTask* PTask);
 
@@ -930,7 +930,7 @@ search_req _HandleSearchRequest(CTCPRequestPacket& PTCPRequest)
  *                                                                       *
  ************************************************************************/
 
-void TaskManagerThread(const bool& requestExit)
+void TaskManagerThread(bool const& requestExit)
 {
     duration next;
     while (!requestExit)
