@@ -39,7 +39,12 @@ zones[xi.zone.BHAFLAU_THICKETS] =
     },
     mob =
     {
-        MAHISHASURA_PH     =
+        CHIGOES              =
+        {
+            ['Marid']        = GetTableOfIDs('Chigoe', 5),
+            ['Grand_Marid']  = GetTableOfIDs('Chigoe', 5),
+        },
+        MAHISHASURA_PH       =
         {
             [16990296] = 16990306, -- 215.000 -18.000 372.000
         },

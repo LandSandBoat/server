@@ -3,6 +3,7 @@
 --  Mob: Wild Karakul
 -- Note: PH for Peallaidh
 -----------------------------------
+mixins = { require('scripts/mixins/families/chigoe_pet') }
 local ID = zones[xi.zone.CAEDARVA_MIRE]
 -----------------------------------
 local entity = {}
