@@ -131,7 +131,8 @@ namespace battleutils
             {
                 auto SkillID = std::clamp<uint8>(sql->GetIntData(0), 0, MAX_SKILLTYPE - 1);
 
-                for (uint32 y = 1; y < MAX_JOBTYPE; ++y)
+                // NOTE: Skip over Monstrosity, they re-use other jobs ranks
+                for (uint32 y = 1; y < JOB_MON; ++y)
                 {
                     g_SkillRanks[SkillID][y] = std::clamp<uint8>(sql->GetIntData(y), 0, 11);
                 }
@@ -4619,6 +4620,8 @@ namespace battleutils
         {
             shotCount += 7;
         }
+
+        shotCount += PChar->getMod(Mod::BARRAGE_COUNT);
 
         // make sure we have enough ammo for all these shots
         CItemWeapon* PAmmo = (CItemWeapon*)PChar->getEquip(SLOT_AMMO);

@@ -189,6 +189,7 @@ end
 
 xi.job_utils.dancer.checkWaltzAbility = function(player, target, ability)
     local waltzInfo = waltzAbilities[ability:getID()]
+    local waltzCost = waltzInfo[1] - player:getMod(xi.mod.WALTZ_COST) * 10
 
     if target:getHP() == 0 then
         return xi.msg.basic.CANNOT_ON_THAT_TARG, 0
@@ -198,7 +199,7 @@ xi.job_utils.dancer.checkWaltzAbility = function(player, target, ability)
         ability:setRecast(math.min(ability:getRecast(), 6))
 
         return 0, 0
-    elseif player:getTP() < waltzInfo[1] then
+    elseif player:getTP() < waltzCost then
         return xi.msg.basic.NOT_ENOUGH_TP, 0
     else
         local newRecast = ability:getRecast()
@@ -467,6 +468,7 @@ end
 xi.job_utils.dancer.useWaltzAbility = function(player, target, ability, action)
     local abilityId      = ability:getID()
     local waltzInfo      = waltzAbilities[abilityId]
+    local waltzCost      = waltzInfo[1] - player:getMod(xi.mod.WALTZ_COST) * 10
     local statMultiplier = waltzInfo[2]
     local amtCured       = 0
 
@@ -477,10 +479,10 @@ xi.job_utils.dancer.useWaltzAbility = function(player, target, ability, action)
             abilityId == xi.jobAbility.DIVINE_WALTZ_II
         then
             if player:getID() == target:getID() then
-                player:delTP(waltzInfo[1])
+                player:delTP(waltzCost)
             end
         else
-            player:delTP(waltzInfo[1])
+            player:delTP(waltzCost)
         end
     end
 

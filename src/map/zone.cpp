@@ -39,6 +39,7 @@
 #include "linkshell.h"
 #include "map.h"
 #include "message.h"
+#include "monstrosity.h"
 #include "notoriety_container.h"
 #include "party.h"
 #include "spell.h"
@@ -1009,7 +1010,6 @@ void CZone::createZoneTimers()
 void CZone::CharZoneIn(CCharEntity* PChar)
 {
     TracyZoneScoped;
-    // ищем свободный targid для входящего в зону персонажа
 
     PChar->loc.zone              = this;
     PChar->loc.zoning            = false;
@@ -1091,6 +1091,8 @@ void CZone::CharZoneIn(CCharEntity* PChar)
             PChar->PPet->StatusEffectContainer->DelStatusEffectsByFlag(EFFECTFLAG_CONFRONTATION, true);
         }
     }
+
+    monstrosity::HandleZoneIn(PChar);
 
     PChar->PLatentEffectContainer->CheckLatentsZone();
 

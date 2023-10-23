@@ -23,6 +23,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #define _CHARENTITY_H
 
 #include "event_info.h"
+#include "monstrosity.h"
 #include "packets/char.h"
 #include "packets/entity_update.h"
 
@@ -447,10 +448,12 @@ public:
     EntityID_t   BazaarID{};      // Pointer to the bazaar we are browsing.
     BazaarList_t BazaarCustomers; // Array holding the IDs of the current customers
 
+    std::unique_ptr<monstrosity::MonstrosityData_t> m_PMonstrosity;
+
     uint32     m_InsideTriggerAreaID; // The ID of the trigger area the character is inside
     uint8      m_LevelRestriction;    // Character level limit
     uint16     m_Costume;
-    uint16     m_Monstrosity; // Monstrosity model ID
+    uint16     m_Costume2;
     uint32     m_AHHistoryTimestamp;
     uint32     m_DeathTimestamp;
     time_point m_deathSyncTime; // Timer used for sending an update packet at a regular interval while the character is dead

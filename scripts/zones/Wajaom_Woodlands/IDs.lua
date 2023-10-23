@@ -35,6 +35,10 @@ zones[xi.zone.WAJAOM_WOODLANDS] =
     },
     mob =
     {
+        CHIGOES                =
+        {
+            ['Marid'] = GetTableOfIDs('Chigoe', 5),
+        },
         JADED_JODY_PH          =
         {
             [16986376] = 16986378, -- -560 -8 -360

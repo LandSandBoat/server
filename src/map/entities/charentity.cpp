@@ -173,8 +173,10 @@ CCharEntity::CCharEntity()
     m_mkeCurrent = 0;
     m_asaCurrent = 0;
 
+    m_PMonstrosity = nullptr;
+
     m_Costume             = 0;
-    m_Monstrosity         = 0;
+    m_Costume2            = 0;
     m_hasTractor          = 0;
     m_hasRaise            = 0;
     m_weaknessLvl         = 0;
@@ -1417,6 +1419,10 @@ void CCharEntity::OnAbility(CAbilityState& state, action_t& action)
                 // The Bison/Brave's Warbonnet & Khimaira/Stout Bonnet reduces recast time by 10 seconds.
                 action.recast -= 10; // remove 10 seconds
             }
+        }
+        else if (PAbility->getID() == ABILITY_READY || PAbility->getID() == ABILITY_SIC)
+        {
+            action.recast = static_cast<uint16>(std::max<int16>(0, action.recast - getMod(Mod::SIC_READY_RECAST)));
         }
 
         action.id         = this->id;

@@ -146,6 +146,23 @@ namespace charutils
         JOBTYPE    sjob        = PChar->GetSJob();
         MERIT_TYPE statMerit[] = { MERIT_STR, MERIT_DEX, MERIT_VIT, MERIT_AGI, MERIT_INT, MERIT_MND, MERIT_CHR };
 
+        // We have to make sure we don't leave the job as JOB_MON - we CANNOT generate stats for it.
+        if (mjob == JOB_MON || sjob == JOB_MON)
+        {
+            mjob = JOB_WAR;
+            sjob = JOB_WAR;
+        }
+
+        // NOTE: Monstrosity (MON) is treated as its own job, but each species is it's own
+        //     : combination of main/sub job for stats, traits and abilities.
+        if (PChar->m_PMonstrosity != nullptr)
+        {
+            mjob = PChar->m_PMonstrosity->MainJob;
+            sjob = PChar->m_PMonstrosity->SubJob;
+            mlvl = PChar->m_PMonstrosity->levels[PChar->m_PMonstrosity->MonstrosityId];
+            slvl = mlvl;
+        }
+
         uint8 race = 0; // Hume
 
         switch (PChar->look.race)
@@ -855,6 +872,8 @@ namespace charutils
         {
             PChar->m_FieldChocobo = sql->GetUIntData(0);
         }
+
+        monstrosity::TryPopulateMonstrosityData(PChar);
 
         charutils::LoadInventory(PChar);
 
@@ -1611,11 +1630,17 @@ namespace charutils
 
     bool CanTrade(CCharEntity* PChar, CCharEntity* PTarget)
     {
+        if (PChar->m_PMonstrosity != nullptr || PTarget->m_PMonstrosity != nullptr)
+        {
+            return false;
+        }
+
         if (PTarget->getStorage(LOC_INVENTORY)->GetFreeSlotsCount() < PChar->UContainer->GetItemsCount())
         {
             ShowDebug("Unable to trade, %s doesn't have enough inventory space", PTarget->GetName());
             return false;
         }
+
         for (uint8 slotid = 0; slotid <= 8; ++slotid)
         {
             CItem* PItem = PChar->UContainer->GetItem(slotid);
@@ -1629,6 +1654,7 @@ namespace charutils
                 }
             }
         }
+
         return true;
     }
 
@@ -2926,19 +2952,15 @@ namespace charutils
 
     void BuildingCharAbilityTable(CCharEntity* PChar)
     {
-        std::vector<CAbility*> AbilitiesList;
-
         if (PChar == nullptr)
         {
             ShowWarning("charutils::BuildingCharAbilityTable() - PChar was null.");
             return;
         }
 
-        memset(&PChar->m_Abilities, 0, sizeof(PChar->m_Abilities));
+        std::memset(&PChar->m_Abilities, 0, sizeof(PChar->m_Abilities));
 
-        AbilitiesList = ability::GetAbilities(PChar->GetMJob());
-
-        for (auto PAbility : AbilitiesList)
+        for (auto PAbility : ability::GetAbilities(PChar->GetMJob()))
         {
             if (PAbility == nullptr)
             {
@@ -2976,9 +2998,7 @@ namespace charutils
             return;
         }
 
-        AbilitiesList = ability::GetAbilities(PChar->GetSJob());
-
-        for (auto PAbility : AbilitiesList)
+        for (auto PAbility : ability::GetAbilities(PChar->GetSJob()))
         {
             if (PChar->GetSLevel() >= PAbility->getLevel())
             {
@@ -3214,17 +3234,32 @@ namespace charutils
         PChar->TraitList.clear();
         memset(&PChar->m_TraitList, 0, sizeof(PChar->m_TraitList));
 
-        battleutils::AddTraits(PChar, traits::GetTraits(PChar->GetMJob()), PChar->GetMLevel());
-        battleutils::AddTraits(PChar, traits::GetTraits(PChar->GetSJob()), PChar->GetSLevel());
+        auto mjob = PChar->GetMJob();
+        auto sjob = PChar->GetSJob();
+        auto mlvl = PChar->GetMLevel();
+        auto slvl = PChar->GetSLevel();
 
-        if (PChar->GetMJob() == JOB_BLU || PChar->GetSJob() == JOB_BLU)
+        // NOTE: Monstrosity (MON) is treated as its own job, but each species is it's own
+        //     : combination of main/sub job for stats, traits and abilities.
+        if (PChar->m_PMonstrosity != nullptr)
+        {
+            mjob = PChar->m_PMonstrosity->MainJob;
+            sjob = PChar->m_PMonstrosity->SubJob;
+            mlvl = PChar->m_PMonstrosity->levels[PChar->m_PMonstrosity->MonstrosityId];
+            slvl = mlvl;
+        }
+
+        battleutils::AddTraits(PChar, traits::GetTraits(mjob), mlvl);
+        battleutils::AddTraits(PChar, traits::GetTraits(sjob), slvl);
+
+        if (mjob == JOB_BLU || sjob == JOB_BLU)
         {
             blueutils::CalculateTraits(PChar);
         }
 
         PChar->delModifier(Mod::MEVA, PChar->m_magicEvasion);
 
-        PChar->m_magicEvasion = battleutils::GetMaxSkill(12, PChar->GetMLevel()); // Player MEVA is Rank G
+        PChar->m_magicEvasion = battleutils::GetMaxSkill(12, mlvl); // Player MEVA is Rank G
         PChar->addModifier(Mod::MEVA, PChar->m_magicEvasion);
     }
 
@@ -4621,6 +4656,12 @@ namespace charutils
             return;
         }
 
+        // MONs don't lose exp on death
+        if (PChar->m_PMonstrosity != nullptr)
+        {
+            return;
+        }
+
         uint8  mLevel  = (PChar->m_LevelRestriction != 0 && PChar->m_LevelRestriction < PChar->GetMLevel()) ? PChar->m_LevelRestriction : PChar->GetMLevel();
         uint16 exploss = mLevel <= 67 ? (GetExpNEXTLevel(mLevel) * 8) / 100 : 2400;
 
@@ -5423,6 +5464,12 @@ namespace charutils
             return;
         }
 
+        // Monstrosity job and level data is handled elsewhere, bail out now
+        if (job == JOB_MON)
+        {
+            return;
+        }
+
         const char* fmtQuery = "";
 
         switch (job)
@@ -5507,6 +5554,12 @@ namespace charutils
         if (job == JOB_NON || job >= MAX_JOBTYPE)
         {
             ShowWarning("Attempt to save Char XP with invalid JOBTYPE %d.", job);
+            return;
+        }
+
+        // Monstrosity exp data is handled elsewhere, bail out now
+        if (job == JOB_MON)
+        {
             return;
         }
 

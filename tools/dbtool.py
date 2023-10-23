@@ -196,6 +196,7 @@ player_data = [
     "char_job_points.sql",
     "char_look.sql",
     "char_merit.sql",
+    "char_monstrosity.sql",
     "char_pet.sql",
     "char_points.sql",
     "char_profile.sql",

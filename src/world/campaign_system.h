@@ -21,9 +21,16 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 
 #pragma once
 
-class CampaignSystem
+#include "message_handler.h"
+
+class CampaignSystem : public IMessageHandler
 {
 public:
     CampaignSystem()  = default;
     ~CampaignSystem() = default;
+
+    bool handleMessage(HandleableMessage&& message) override
+    {
+        return false;
+    }
 };

@@ -92,10 +92,11 @@ enum JOBTYPE
     JOB_DNC = 19,
     JOB_SCH = 20,
     JOB_GEO = 21,
-    JOB_RUN = 22
+    JOB_RUN = 22,
+    JOB_MON = 23, // NOTE: MON is not a full job
 };
 
-#define MAX_JOBTYPE 23
+#define MAX_JOBTYPE 24
 
 enum SKILLTYPE
 {
@@ -520,6 +521,7 @@ class CSpell;
 class CItemEquipment;
 class CAbilityState;
 class CAttackState;
+class CMobSkillState;
 class CWeaponSkillState;
 class CMagicState;
 class CDespawnState;
@@ -700,6 +702,7 @@ public:
     virtual void OnCastInterrupted(CMagicState&, action_t&, MSGBASIC_ID msg, bool blockedCast);
     /* Weaponskill */
     virtual void OnWeaponSkillFinished(CWeaponSkillState& state, action_t& action);
+    virtual void OnMobSkillFinished(CMobSkillState& state, action_t& action);
     virtual void OnChangeTarget(CBattleEntity* PTarget);
 
     // Used to set an action to an "interrupted" state

@@ -171,12 +171,14 @@ enum MSGBASIC_ID : uint16
     MSGBASIC_MERIT_INCREASE = 380, // Your <merit> modification has risen to level <level>
     MSGBASIC_MERIT_DECREASE = 381, // Your <merit> modification has dropped to level <level>
     /* DEBUG MESSAGES */
-    MSGBASIC_DEBUG_RESISTED_SPELL   = 66, /* Debug: Resisted spell! */
-    MSGBASIC_DEBUG_RECEIVED_STATUS  = 73, /* Debug: <target>'s status is now .. */
-    MSGBASIC_DEBUG_RECOVERED_STATUS = 74, /* Debug: <target> recovers from .. */
-    MSGBASIC_DEBUG_DBLATK_PROC      = 79, /* Debug: <target> uses Double Attack (..%) */
-    MSGBASIC_DEBUG_TRPATK_PROC      = 80, /* Debug: <target> uses Triple Attack (..%) */
-    MSGBASIC_DEBUG_SUCCESS_CHANCE   = 255 /* DEBUG: ..% chance of success */
+    MSGBASIC_DEBUG_RESISTED_SPELL   = 66,  /* Debug: Resisted spell! */
+    MSGBASIC_DEBUG_RECEIVED_STATUS  = 73,  /* Debug: <target>'s status is now .. */
+    MSGBASIC_DEBUG_RECOVERED_STATUS = 74,  /* Debug: <target> recovers from .. */
+    MSGBASIC_DEBUG_DBLATK_PROC      = 79,  /* Debug: <target> uses Double Attack (..%) */
+    MSGBASIC_DEBUG_TRPATK_PROC      = 80,  /* Debug: <target> uses Triple Attack (..%) */
+    MSGBASIC_DEBUG_SUCCESS_CHANCE   = 255, /* DEBUG: ..% chance of success */
+    /* Monstrosity */
+    MSGBASIC_FERETORY_COUNTDOWN = 679, // <actor> will return to the Feretory in <n>
 };
 
 class CBaseEntity;

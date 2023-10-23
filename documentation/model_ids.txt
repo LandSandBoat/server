@@ -27,11 +27,11 @@ ID Number    Costume Name
 25    Diabolos
 26    Odin
 27    Alexander
-28    Mandragora
-29    Mandragora
-30    Mandragora
+28    Cait Sith
+29    Atomos
+30    Siren
 31    Mandragora
-32    Hume Male
+32    Hume Male with hood
 33
 34
 35
@@ -404,7 +404,7 @@ ID Number    Costume Name
 402    Manticore
 403    Kirin
 404    Behemoth
-405    Elsamoth(Abys)
+405    Elasamoth(Abys)
 406    Crawler 3(Eruca)
 407    Genbu
 408    Beetle 1(green)
@@ -1931,7 +1931,7 @@ ID Number    Costume Name
 1931
 1932    Sturdy Pyxis
 1933    Samursk(AbysNM)
-1934    Leech (Black) Abys
+1934    Leech (Black) Abys - Obdella
 1935    Wyvern (Red) Abys
 1936    Bee (Blue) Abys
 1937    Rabbit(Orange) Abys
@@ -2201,7 +2201,7 @@ ID Number    Costume Name
 2201    Dancer NPC2(HolidayDeco)
 2202    Aphmau White (arm raised)
 2203    Lion (dagger toss)
-2204    Mandragora
+2204    Tiny/Pygmy Mandragora
 2205    Dark Ixion
 2206    Ruszor
 2207    Lynx
@@ -2453,8 +2453,8 @@ ID Number    Costume Name
 2468    Altana???
 2500
 2678    Arciela
-2882    FF14 Spriggan
 2881    DQ Slime
+2882    FF14 Spriggan
 2907    DQ She-Slime (Red Slime)
 2908    DQ Metal Slime
 2909    FF14 Spriggan

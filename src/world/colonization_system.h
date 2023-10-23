@@ -21,9 +21,16 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 
 #pragma once
 
-class ColonizationSystem
+#include "message_handler.h"
+
+class ColonizationSystem : public IMessageHandler
 {
 public:
     ColonizationSystem()  = default;
     ~ColonizationSystem() = default;
+
+    bool handleMessage(HandleableMessage&& message) override
+    {
+        return false;
+    }
 };

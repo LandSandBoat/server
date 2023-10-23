@@ -5149,6 +5149,25 @@ void CLuaBaseEntity::setModelId(uint16 modelId, sol::object const& slotObj)
 }
 
 /************************************************************************
+ *  Function: getCostume()
+ *  Purpose : Returns the PC's appearance
+ *  Example : player:getCostume()
+ ************************************************************************/
+
+uint16 CLuaBaseEntity::getCostume()
+{
+    if (m_PBaseEntity->objtype != TYPE_PC)
+    {
+        ShowWarning("Invalid entity type calling function (%s).", m_PBaseEntity->GetName());
+        return 0;
+    }
+
+    auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
+
+    return PChar->m_Costume;
+}
+
+/************************************************************************
  *  Function: setCostume()
  *  Purpose : Updates the PC's appearance
  *  Example : player:setCostume( costumeId )
@@ -5173,29 +5192,9 @@ void CLuaBaseEntity::setCostume(uint16 costume)
 }
 
 /************************************************************************
- *  Function: getCostume()
+ *  Function: getCostume2()
  *  Purpose : Returns the PC's appearance
  *  Example : player:getCostume()
- ************************************************************************/
-
-uint16 CLuaBaseEntity::getCostume()
-{
-    if (m_PBaseEntity->objtype != TYPE_PC)
-    {
-        ShowWarning("Invalid entity type calling function (%s).", m_PBaseEntity->GetName());
-        return 0;
-    }
-
-    auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
-
-    return PChar->m_Costume;
-}
-
-/************************************************************************
- *  Function: getCostume2()
- *  Purpose : Sets or returns a monstrosity costume
- *  Example : player:costume2( costumeId )
- *  Notes   : Not currently implemented
  ************************************************************************/
 
 uint16 CLuaBaseEntity::getCostume2()
@@ -5207,14 +5206,14 @@ uint16 CLuaBaseEntity::getCostume2()
     }
 
     auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
-    return PChar->m_Monstrosity;
+
+    return PChar->m_Costume2;
 }
 
 /************************************************************************
  *  Function: setCostume2()
- *  Purpose : Sets or returns a monstrosity costume
- *  Example : player:costume2( costumeId )
- *  Notes   : Not currently implemented
+ *  Purpose : Updates the PC's appearance
+ *  Example : player:setCostume2( costumeId )
  ************************************************************************/
 
 void CLuaBaseEntity::setCostume2(uint16 costume)
@@ -5227,14 +5226,13 @@ void CLuaBaseEntity::setCostume2(uint16 costume)
 
     auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
 
-    if (PChar->m_Monstrosity != costume && PChar->status != STATUS_TYPE::SHUTDOWN && PChar->status != STATUS_TYPE::DISAPPEAR)
+    if (PChar->m_Costume2 != costume && PChar->status != STATUS_TYPE::SHUTDOWN && PChar->status != STATUS_TYPE::DISAPPEAR)
     {
-        PChar->m_Monstrosity = costume;
+        PChar->m_Costume2 = costume;
         PChar->updatemask |= UPDATE_LOOK;
         PChar->pushPacket(new CCharAppearancePacket(PChar));
     }
 }
-
 /************************************************************************
  *  Function: getAnimation()
  *  Purpose : Returns the assigned default animation of an entity
@@ -6347,6 +6345,136 @@ void CLuaBaseEntity::addJobTraits(uint8 jobID, uint8 level)
     if (PEntity != nullptr)
     {
         battleutils::AddTraits(PEntity, traits::GetTraits(jobID), level);
+    }
+}
+
+sol::table CLuaBaseEntity::getMonstrosityData()
+{
+    auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity);
+    if (PChar == nullptr)
+    {
+        return sol::lua_nil;
+    }
+
+    bool startsWithMonstrosityData = PChar->m_PMonstrosity != nullptr;
+    if (!startsWithMonstrosityData)
+    {
+        monstrosity::ReadMonstrosityData(PChar);
+    }
+
+    auto table = luautils::GetMonstrosityLuaTable(PChar);
+
+    // If we didn't start with Monstrosity data, we should wipe it out now so we
+    // don't change modes
+    if (!startsWithMonstrosityData)
+    {
+        PChar->m_PMonstrosity = nullptr;
+    }
+
+    return table;
+}
+
+void CLuaBaseEntity::setMonstrosityData(sol::table table)
+{
+    auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity);
+    if (PChar == nullptr)
+    {
+        return;
+    }
+
+    bool startsWithMonstrosityData = PChar->m_PMonstrosity != nullptr;
+
+    // NOTE: This will populate m_PMonstrosity if it doesn't exist
+    monstrosity::ReadMonstrosityData(PChar);
+
+    luautils::SetMonstrosityLuaTable(PChar, table);
+
+    monstrosity::WriteMonstrosityData(PChar);
+
+    // If we didn't start with Monstrosity data, we should wipe it out now so we
+    // don't change modes
+    if (!startsWithMonstrosityData)
+    {
+        PChar->m_PMonstrosity = nullptr;
+    }
+    else
+    {
+        monstrosity::SendFullMonstrosityUpdate(PChar);
+    }
+}
+
+bool CLuaBaseEntity::getBelligerencyFlag()
+{
+    auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity);
+    if (PChar == nullptr)
+    {
+        return false;
+    }
+
+    if (PChar->m_PMonstrosity == nullptr)
+    {
+        return false;
+    }
+
+    return PChar->m_PMonstrosity->Belligerency;
+}
+
+void CLuaBaseEntity::setBelligerencyFlag(bool flag)
+{
+    auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity);
+    if (PChar == nullptr)
+    {
+        return;
+    }
+
+    monstrosity::SetBelligerencyFlag(PChar, flag);
+}
+
+auto CLuaBaseEntity::getMonstrositySize() -> uint8
+{
+    auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity);
+    if (PChar == nullptr)
+    {
+        return 0;
+    }
+
+    if (PChar->m_PMonstrosity == nullptr)
+    {
+        return 0;
+    }
+
+    return PChar->m_PMonstrosity->Size;
+}
+
+void CLuaBaseEntity::setMonstrosityEntryData(float x, float y, float z, uint8 rot, uint16 zoneId, uint8 mjob, uint8 sjob)
+{
+    auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity);
+    if (PChar == nullptr)
+    {
+        return;
+    }
+
+    bool startsWithMonstrosityData = PChar->m_PMonstrosity != nullptr;
+    if (!startsWithMonstrosityData)
+    {
+        monstrosity::ReadMonstrosityData(PChar);
+    }
+
+    PChar->m_PMonstrosity->EntryPos.x        = x;
+    PChar->m_PMonstrosity->EntryPos.y        = y;
+    PChar->m_PMonstrosity->EntryPos.z        = z;
+    PChar->m_PMonstrosity->EntryPos.rotation = rot;
+    PChar->m_PMonstrosity->EntryZoneId       = zoneId;
+    PChar->m_PMonstrosity->EntryMainJob      = mjob;
+    PChar->m_PMonstrosity->EntrySubJob       = sjob;
+
+    monstrosity::WriteMonstrosityData(PChar);
+
+    // If we didn't start with Monstrosity data, we should wipe it out now so we
+    // don't change modes
+    if (!startsWithMonstrosityData)
+    {
+        PChar->m_PMonstrosity = nullptr;
     }
 }
 
@@ -17094,11 +17222,10 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("checkNameFlags", CLuaBaseEntity::checkNameFlags);
     SOL_REGISTER("getModelId", CLuaBaseEntity::getModelId);
     SOL_REGISTER("setModelId", CLuaBaseEntity::setModelId);
-    SOL_REGISTER("setCostume", CLuaBaseEntity::setCostume);
     SOL_REGISTER("getCostume", CLuaBaseEntity::getCostume);
+    SOL_REGISTER("setCostume", CLuaBaseEntity::setCostume);
     SOL_REGISTER("getCostume2", CLuaBaseEntity::getCostume2);
     SOL_REGISTER("setCostume2", CLuaBaseEntity::setCostume2);
-
     SOL_REGISTER("getAnimation", CLuaBaseEntity::getAnimation);
     SOL_REGISTER("setAnimation", CLuaBaseEntity::setAnimation);
     SOL_REGISTER("getAnimationSub", CLuaBaseEntity::getAnimationSub);
@@ -17155,6 +17282,14 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("setLevelCap", CLuaBaseEntity::setLevelCap);
     SOL_REGISTER("levelRestriction", CLuaBaseEntity::levelRestriction);
     SOL_REGISTER("addJobTraits", CLuaBaseEntity::addJobTraits);
+
+    // Monstrosity
+    SOL_REGISTER("getMonstrosityData", CLuaBaseEntity::getMonstrosityData);
+    SOL_REGISTER("setMonstrosityData", CLuaBaseEntity::setMonstrosityData);
+    SOL_REGISTER("getBelligerencyFlag", CLuaBaseEntity::getBelligerencyFlag);
+    SOL_REGISTER("setBelligerencyFlag", CLuaBaseEntity::setBelligerencyFlag);
+    SOL_REGISTER("getMonstrositySize", CLuaBaseEntity::getMonstrositySize);
+    SOL_REGISTER("setMonstrosityEntryData", CLuaBaseEntity::setMonstrosityEntryData);
 
     // Player Titles and Fame
     SOL_REGISTER("getTitle", CLuaBaseEntity::getTitle);

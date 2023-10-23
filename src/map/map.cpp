@@ -21,6 +21,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 
 #include "map.h"
 
+#include "common/async.h"
 #include "common/blowfish.h"
 #include "common/console_service.h"
 #include "common/logging.h"
@@ -43,6 +44,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "linkshell.h"
 #include "message.h"
 #include "mob_spell_list.h"
+#include "monstrosity.h"
 #include "packet_guard.h"
 #include "packet_system.h"
 #include "roe.h"
@@ -274,6 +276,8 @@ int32 do_init(int32 argc, char** argv)
     fishingutils::InitializeFishingSystem();
     instanceutils::LoadInstanceList();
 
+    monstrosity::LoadStaticData();
+
     ShowInfo("do_init: server is binding with port %u", map_port == 0 ? settings::get<uint16>("network.MAP_PORT") : map_port);
     map_fd = makeBind_udp(INADDR_ANY, map_port == 0 ? settings::get<uint16>("network.MAP_PORT") : map_port);
 
@@ -405,6 +409,7 @@ void do_final(int code)
 
     CTaskMgr::delInstance();
     CVanaTime::delInstance();
+    Async::delInstance();
 
     timer_final();
     socket_final();
