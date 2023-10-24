@@ -1117,6 +1117,7 @@ void SmallPacket0x01A(map_session_data_t* const PSession, CCharEntity* const PCh
             {
                 return;
             }
+            PChar->setCharVar("expLost", 0);
             charutils::HomePoint(PChar);
         }
         break;

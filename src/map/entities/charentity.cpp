@@ -2039,6 +2039,7 @@ void CCharEntity::HandleErrorMessage(std::unique_ptr<CBasicPacket>& msg)
 void CCharEntity::OnDeathTimer()
 {
     TracyZoneScoped;
+    charutils::SetCharVar(this, "expLost", 0);
     charutils::HomePoint(this);
 }
 
@@ -2116,32 +2117,15 @@ void CCharEntity::OnRaise()
 
         loc.zone->PushPacket(this, CHAR_INRANGE_SELF, new CActionPacket(action));
 
-        uint8 mLevel = charutils::GetCharVar(this, "DeathLevel");
+        // Do not return EXP to the player if they do not have experienceLost variable.
+        uint16 expLost = charutils::GetCharVar(this, "expLost");
 
-        // Do not return EXP to the player if they do not have a level at death set
-        if (mLevel != 0)
+        if (expLost != 0)
         {
-            uint16 expLost = mLevel <= 67 ? (charutils::GetExpNEXTLevel(mLevel) * 8) / 100 : 2400;
-
-            uint16 xpNeededToLevel = charutils::GetExpNEXTLevel(jobs.job[GetMJob()]) - jobs.exp[GetMJob()];
-
-            // Player died within a battlefield, reward the battlefield level equivalent EXP
-            if (StatusEffectContainer->HasStatusEffect(EFFECT_BATTLEFIELD))
-            {
-                expLost = m_LevelRestriction >= 1 && m_LevelRestriction <= 67 ? (charutils::GetExpNEXTLevel(m_LevelRestriction) * 8) / 100 : 2400;
-            }
-
-            // Exp is enough to level you and (you're not under a level restriction, or the level restriction is higher than your current main level).
-            if (xpNeededToLevel < expLost && (m_LevelRestriction == 0 || GetMLevel() < m_LevelRestriction))
-            {
-                // Player probably leveled down when they died.  Give they xp for the next level.
-                expLost = GetMLevel() <= 67 ? (charutils::GetExpNEXTLevel(jobs.job[GetMJob()] + 1) * 8) / 100 : 2400;
-            }
-
             uint16 xpReturned = (uint16)(ceil(expLost * ratioReturned));
             charutils::AddExperiencePoints(true, this, this, xpReturned);
 
-            charutils::SetCharVar(this, "DeathLevel", 0);
+            charutils::SetCharVar(this, "expLost", 0);
         }
 
         // If Arise was used then apply a reraise 3 effect on the target
@@ -2340,10 +2324,6 @@ void CCharEntity::Die()
         (PBattlefield == nullptr || (PBattlefield->GetRuleMask() & RULES_LOSE_EXP) == RULES_LOSE_EXP) &&
         GetMLevel() >= settings::get<uint8>("map.EXP_LOSS_LEVEL"))
     {
-        // Track what level the player died at to properly give EXP back on raise
-        int32 level = (m_LevelRestriction > 0 && m_LevelRestriction < GetMLevel()) ? m_LevelRestriction : GetMLevel();
-        charutils::SetCharVar(this, "DeathLevel", level);
-
         float retainPercent = std::clamp(settings::get<uint8>("map.EXP_RETAIN") + getMod(Mod::EXPERIENCE_RETAINED) / 100.0f, 0.0f, 1.0f);
         charutils::DelExperiencePoints(this, retainPercent, 0);
 
