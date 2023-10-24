@@ -48,13 +48,11 @@ CMonipulatorPacket1::CMonipulatorPacket1(CCharEntity* PChar)
     int32 infamy = charutils::GetPoints(PChar, "infamy");
 
     // Monstrosity Rank (0 = Mon, 1 = NM, 2 = HNM)
-    // TODO: The ranks are listed as:
+    // The ranks are listed as:
     // 0~10,000 Mon. (Monster)
     // 10,001~20,000 NM (Notorious Monster)
     // 20,001+ HNM (Highly Notorious Monster)
-    // But this integer division gives the next rank on 10'000 etc.
-    // FIXME
-    ref<uint8>(0x0C) = static_cast<uint8>(infamy / 10000);
+    ref<uint8>(0x0C) = static_cast<uint8>(std::min(2, (infamy - 1) / 10000));
 
     // Unknown
     ref<uint8>(0x10) = 0xEC;

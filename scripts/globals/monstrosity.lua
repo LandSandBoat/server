@@ -840,6 +840,11 @@ xi.monstrosity.teleports =
         { 161,     -20,  37, 192 },
     },
 
+    [xi.zone.SOUTH_GUSTABERG] =
+    {
+        { -115, -0.136, -165, 64 },
+    },
+
     [xi.zone.VALKURM_DUNES] =
     {
         { 838, 0, -162, 64 },
