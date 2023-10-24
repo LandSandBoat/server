@@ -190,6 +190,7 @@ xi.autows.doAutoPhysicalWeaponskill = function(attacker, target, wsID, tp, prima
     }
 
     local calcParams = {}
+    calcParams.wsID = wsID
     calcParams.weaponDamage = xi.weaponskills.getMeleeDmg(attacker, attack.weaponType, wsParams.kick)
     calcParams.attackInfo = attack
     calcParams.fSTR = utils.clamp(attacker:getStat(xi.mod.STR) - target:getStat(xi.mod.VIT), -10, 10)
@@ -282,6 +283,7 @@ xi.autows.doAutoRangedWeaponskill = function(attacker, target, wsID, wsParams, t
 
     local calcParams =
     {
+        wsID = wsID,
         weaponDamage = { wsParams.weaponDamage or rangedDamage },
         attackInfo = attack,
         fSTR = utils.clamp(attacker:getStat(xi.mod.STR) - target:getStat(xi.mod.VIT), -10, 10),
