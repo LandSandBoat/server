@@ -985,6 +985,35 @@ xi.magic.getMagicHitRate = function(caster, target, skillType, element, effect, 
         local elementBonus = caster:getMod(spellAcc[element])
         xi.msg.debugValue(caster, "Elemental Bonus", elementBonus)
         bonusAcc = bonusAcc + affinityBonus + elementBonus
+        if
+            math.random(1, 100) <= 33 or
+            caster:getMod(xi.magic.elementalObi[element]) >= 1
+        then
+            local dayElement = VanadielDayElement()
+            -- Strong day.
+            if dayElement == element then
+                bonusAcc = bonusAcc + 5
+
+            -- Weak day.
+            elseif dayElement == xi.magic.elementDescendant[element] then
+                bonusAcc = bonusAcc - 5
+            end
+
+            local weather = caster:getWeather()
+            -- Strong weathers.
+            if weather == xi.magic.singleWeatherStrong[element] then
+                bonusAcc = bonusAcc + caster:getMod(xi.mod.IRIDESCENCE) * 5 + 5
+            elseif weather == xi.magic.doubleWeatherStrong[element] then
+                bonusAcc = bonusAcc + caster:getMod(xi.mod.IRIDESCENCE) * 5 + 10
+
+            -- Weak weathers.
+            elseif weather == xi.magic.singleWeatherWeak[element] then
+                bonusAcc = bonusAcc - caster:getMod(xi.mod.IRIDESCENCE) * 5 - 5
+            elseif weather == xi.magic.doubleWeatherWeak[element] then
+                bonusAcc = bonusAcc - caster:getMod(xi.mod.IRIDESCENCE) * 5 - 10
+            end
+        end
+
         xi.msg.debugValue(caster, "Bonus Magic Accuracy", bonusAcc)
     end
 

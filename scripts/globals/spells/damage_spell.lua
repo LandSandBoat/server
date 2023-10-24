@@ -484,6 +484,35 @@ xi.spells.damage.calculateResist = function(caster, target, spell, skillType, sp
         local elementBonus  = caster:getMod(spellAcc[spellElement])
         xi.msg.debugValue(caster, "Elemental Bonus", elementBonus)
         magicAcc = magicAcc + affinityBonus + elementBonus
+        if
+            math.random(1, 100) <= 33 or
+            caster:getMod(elementalObi[spellElement]) >= 1
+        then
+            local dayElement = VanadielDayElement()
+            -- Strong day.
+            if dayElement == spellElement then
+                magicAcc = magicAcc + 5
+
+            -- Weak day.
+            elseif dayElement == xi.magic.elementDescendant[spellElement] then
+                magicAcc = magicAcc - 5
+            end
+
+            local weather = caster:getWeather()
+            -- Strong weathers.
+            if weather == xi.magic.singleWeatherStrong[spellElement] then
+                magicAcc = magicAcc + caster:getMod(xi.mod.IRIDESCENCE) * 5 + 5
+            elseif weather == xi.magic.doubleWeatherStrong[spellElement] then
+                magicAcc = magicAcc + caster:getMod(xi.mod.IRIDESCENCE) * 5 + 10
+
+            -- Weak weathers.
+            elseif weather == xi.magic.singleWeatherWeak[spellElement] then
+                magicAcc = magicAcc - caster:getMod(xi.mod.IRIDESCENCE) * 5 - 5
+            elseif weather == xi.magic.doubleWeatherWeak[spellElement] then
+                magicAcc = magicAcc - caster:getMod(xi.mod.IRIDESCENCE) * 5 - 10
+            end
+        end
+
         xi.msg.debugValue(caster, "Adjusted Magic Accuracy", magicAcc)
     end
 
