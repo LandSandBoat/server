@@ -53,7 +53,6 @@ entity.onMobInitialize = function(mob)
 end
 
 entity.onMobSpawn = function(mob)
-
     -- Observed to use manafont at 80/50/25% HP
     xi.mix.jobSpecial.config(mob, {
         specials =
@@ -95,7 +94,10 @@ entity.onMobFight = function(mob)
         local sum = mobArg:getLocalVar("PhysicalDamage") + mobArg:getLocalVar("MagicalDamage") + mobArg:getLocalVar("RangedDamage") + mobArg:getLocalVar("BreathDamage")
         if mobArg:getAnimationSub() == 2 and sum > 1500 then -- Faith will close flower upon taking 1500 damage combined.
             closeFlower(mobArg)
-        elseif mobArg:getAnimationSub() <= 1 and mobArg:getBattleTime() > mobArg:getLocalVar("[faith]changeTime") then
+        elseif
+            mobArg:getAnimationSub() <= 1 and
+            mobArg:getBattleTime() > mobArg:getLocalVar("[faith]changeTime")
+        then
             openFlower(mobArg)
         else
             -- if no dmg taken - dont trigger a change
@@ -117,6 +119,8 @@ entity.onMobDeath = function(mob)
 end
 
 entity.onMobDespawn = function(mob)
+    local qmFaith = GetNPCByID(ID.npc.QM_JAILER_OF_FAITH)
+    qmFaith:setLocalVar("nextMove", os.time() + 1800 + xi.settings.main.FORCE_SPAWN_QM_RESET_TIME) -- 30 minutes from the time the QM respawns
     -- Move QM to random location
     GetNPCByID(ID.npc.QM_JAILER_OF_FAITH):setPos(unpack(ID.npc.QM_JAILER_OF_FAITH_POS[math.random(1, 5)]))
 end
