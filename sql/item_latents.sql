@@ -411,7 +411,7 @@ INSERT INTO `item_latents` VALUES (13288,374,10,2,75);   -- "Cure" potency +10% 
 -- -------------------------------------------------------
 -- Sorcerer's Ring
 -- -------------------------------------------------------
-INSERT INTO `item_latents` VALUES (13289,28,10,44,76);    -- "Magic Atk. Bonus"+10 while HP <76% and TP <100%
+INSERT INTO `item_latents` VALUES (13289,28,10,44,75);    -- "Magic Atk. Bonus"+10 while HP <76% and TP <100%
 
 -- -------------------------------------------------------
 -- Fencer's Ring
