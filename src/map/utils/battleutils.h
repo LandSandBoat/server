@@ -96,6 +96,12 @@ enum ELEMENT
     ELEMENT_DARK    = 8
 };
 
+const std::unordered_set<JOBTYPE> JOBS_WITH_PARRY_SKILL = {
+    JOB_WAR, JOB_RDM, JOB_THF, JOB_PLD, JOB_DRK, JOB_BST,
+    JOB_BRD, JOB_SAM, JOB_NIN, JOB_DRG, JOB_COR, JOB_DNC,
+    JOB_BLU, JOB_PUP, JOB_SCH, JOB_GEO
+};
+
 namespace battleutils
 {
     void LoadSkillTable();

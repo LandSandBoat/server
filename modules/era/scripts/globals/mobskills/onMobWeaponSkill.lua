@@ -5663,7 +5663,7 @@ end)
 m:addOverride("xi.globals.mobskills.flame_blast_alt.onMobWeaponSkill", function(target, mob, skill)
     local dmgmod = 2.5
     local info = xi.mobskills.mobMagicalMove(mob, target, skill, mob:getMobWeaponDmg(xi.slot.MAIN), xi.magic.ele.FIRE, dmgmod, xi.mobskills.magicalTpBonus.NO_EFFECT)
-    local dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.FIRE)
+    local dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.FIRE, xi.mobskills.shadowBehavior.IGNORE_SHADOWS)
     target:takeDamage(dmg, mob, xi.attackType.MAGICAL, xi.damageType.FIRE)
     skill:setMsg(xi.msg.basic.HIT_DMG)
     return dmg
@@ -6699,7 +6699,7 @@ m:addOverride("xi.globals.mobskills.guided_missile.onMobWeaponSkill", function(t
     local ftp300 = 3
     local numhits = math.random(1, 3)
     local accmod = 1
-    local info = xi.mobskills.mobPhysicalMove(mob, target, skill, numhits, accmod, 1, xi.mobskills.magicalTpBonus.NO_EFFECT, numhits * ftp100, numhits * ftp200, numhits * ftp300)
+    local info = xi.mobskills.mobPhysicalMove(mob, target, skill, numhits, accmod, 1, xi.mobskills.magicalTpBonus.NO_EFFECT, ftp100, ftp200, ftp300)
     local dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.SLASHING, info.hitslanded)
 
     if not skill:hasMissMsg() then

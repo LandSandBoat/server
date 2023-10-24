@@ -539,9 +539,7 @@ namespace mobutils
         {
             PMob->addModifier(Mod::PARRY, GetBase(PMob, PMob->getMobMod(MOBMOD_CAN_PARRY)));
         }
-
-        // Mobs in Dyna Can Parry
-        if (PMob->isInDynamis())
+        else if (PMob->isInDynamis()) // Mobs in Dyna Can Parry
         {
             PMob->addModifier(Mod::PARRY, GetBase(PMob, 3)); // Base Parry for all mobs is Rank C
         }
