@@ -45,6 +45,7 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
     }
     local calcParams =
     {
+        wsID = wsID,
         criticalHit = false,
         tpHitsLanded = 0,
         extraHitsLanded = 0,
