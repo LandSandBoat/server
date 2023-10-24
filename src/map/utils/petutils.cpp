@@ -1140,10 +1140,11 @@ namespace petutils
 
     void CalculateAvatarStats(CBattleEntity* PMaster, CPetEntity* PPet)
     {
-        uint32       petID    = PPet->m_PetID;
-        Pet_t*       PPetData = *std::find_if(g_PPetList.begin(), g_PPetList.end(), [petID](Pet_t* t)
-                                              { return t->PetID == petID; });
-        CCharEntity* PChar    = static_cast<CCharEntity*>(PMaster);
+        uint32 petID    = PPet->m_PetID;
+        Pet_t* PPetData = *std::find_if(g_PPetList.begin(), g_PPetList.end(), [petID](Pet_t* t)
+                                        { return t->PetID == petID; });
+
+        const auto PChar = dynamic_cast<CCharEntity*>(PMaster);
 
         uint8 mLvl = PMaster->GetMLevel();
 
@@ -1167,7 +1168,7 @@ namespace petutils
             PPet->SetMLevel(PMaster->GetSLevel());
             PPet->SetSLevel(PMaster->GetSLevel());
         }
-        else if ((charutils::HasItem(PChar, 14656) == true) && (petID == PETID_WATERSPIRIT)) // Check if Player has Poseidon Ring & PetID == Water Spirit
+        else if (PChar && (charutils::HasItem(PChar, 14656) == true) && (petID == PETID_WATERSPIRIT)) // Check if Player has Poseidon Ring & PetID == Water Spirit
         {
             PPet->SetMLevel(mLvl);
             PPet->SetSLevel(mLvl);
