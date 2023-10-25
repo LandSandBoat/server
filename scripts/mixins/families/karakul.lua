@@ -11,13 +11,6 @@ xi.mix.karakul.config(mob, {
     sleepHour = 20,
     wakeHour = 4,
 })
-
-NOTE:
-According to the suggested behavior, Karakul will spawn a chigoe each time they use a weaponskill. However there are
-not an appropriate ratio of Chigoe IDs to Karakul IDs. There appears to be, however, 10 reserved IDs for chigoes from Karakul.
-The first being for Wild Karakul, and the others for the Peallaidh NM.
-***This would mean that the zone would only be able to support up to 5 chigoe being spawned by Wild Karakul at once.***
-
 --]]
 require("scripts/globals/mixins")
 -----------------------------------
@@ -88,29 +81,6 @@ g_mixins.families.karakul = function(karakulMob)
             wakeUp(mob)
         end
     end)
-
-    -- ******Chigoe pet behavior omitted until https://github.com/LandSandBoat/server/pull/4381 is merged*******
-
-    -- karakulMob:addListener("WEAPONSKILL_STATE_EXIT", "KARAKUL_WEAPONSKILL_STATE_EXIT", function(mob, target, skill)
-    --     local spawn = mob:getPos()
-
-    --     for i = 0, 4 do
-    --         local chigoe = GetMobByID(zones[mob:getZoneID()].mob.WILD_KARAKUL_CHIGOE + i)
-
-    --         if not chigoe:isAlive() then
-    --             chigoe:setSpawn(spawn.x, spawn.y, spawn.z)
-    --             SpawnMob(chigoe:getID()):updateEnmity(target)
-    --             chigoe:setMobMod(xi.mobMod.IDLE_DESPAWN, 180)
-
-    --             -- Targets master if target is pet
-    --             if target:isPet() then
-    --                 chigoe:updateEnmity(target:getMaster())
-    --             end
-
-    --             return -- Spawn only one
-    --         end
-    --     end
-    -- end)
 
     karakulMob:addListener("ENGAGE", "KARAKUL_ENGAGE", function(mob, target)
         if mob:getAnimationSub() == 1 then

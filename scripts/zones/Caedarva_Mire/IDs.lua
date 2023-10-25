@@ -60,8 +60,6 @@ zones[xi.zone.CAEDARVA_MIRE] =
             [17100875] = 17101143, -- 315.793 -16.336 -402.407
             [17100876] = 17101143, -- 321.809 -16.843 -373.780
         },
-        WILD_KARAKUL_CHIGOE   = 17100806,
-        PEALLAIDH_CHIGOES     = 17100811,
         AYNU_KAYSEY           = 17101099,
         CAEDARVA_TOAD         = 17101145,
         JAZARAAT              = 17101146,
