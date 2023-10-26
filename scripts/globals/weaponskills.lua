@@ -248,9 +248,19 @@ local function getMultiAttacks(attacker, target, wsParams)
         end
     end
 
-    numHits = utils.clamp(numHits + bonusHits, 1, 8)
+    -- Only get an additional offHand hit with H2H if the wsParams.numHits == 1
+    -- "Note that Hand-to-Hand weaponskills' listed hits do include the offhand hit. However, if a weaponskill does not list multiple hits, it still has an additional offhand hit."
+    -- see "hits" column: https://wiki-ffo-jp.translate.goog/html/19049.html?_x_tr_sch=http&_x_tr_sl=auto&_x_tr_tl=en&_x_tr_hl=it&_x_tr_pto=wapp
+    -- basically h2h always gets 2 "initial" hits, but `numHits` is hard respected for the extra hits
+    -- whereas dual wiedling gets 2 "initial" hits, but `numHits` for e.g. dancing edge is respected as though only one "initial" was performed
+    -- tl;dr: DW gives an extra WS hit everytime, H2H simply ensures every WS gets at least 2 hits (yes backhand blow and dragon kick are both 2-hit ws...)
+    numHits = numHits + bonusHits
+    if attacker:getOffhandDmg() > 0 then
+        numHits = numHits + 1
+    end
 
-    return numHits
+    -- cap total hits at 8
+    return utils.clamp(numHits, 1, 8)
 end
 
 local function cRangedRatio(attacker, defender, params, ignoredDef, tp)
@@ -578,6 +588,7 @@ xi.weaponskills.calculateRawWSDmg = function(attacker, target, wsID, tp, action,
     calcParams.critRate = critrate
 
     -- Start the WS
+    local hitsDone = 1
     local hitdmg = 0
     local finaldmg = 0
     calcParams.hitsLanded = 0
@@ -629,6 +640,7 @@ xi.weaponskills.calculateRawWSDmg = function(attacker, target, wsID, tp, action,
 
     -- Do the extra hit for our offhand if applicable
     if calcParams.extraOffhandHit and finaldmg < targetHp then
+        hitsDone = hitsDone + 1
         local offhandDmg = (calcParams.weaponDamage[2] + wsMods) * ftp
         hitdmg, calcParams = getSingleHitDamage(attacker, target, offhandDmg, wsParams, calcParams)
 
@@ -649,7 +661,6 @@ xi.weaponskills.calculateRawWSDmg = function(attacker, target, wsID, tp, action,
 
     -- Calculate additional hits if a multiHit WS (or we're supposed to get a DA/TA/QA proc from main hit)
     dmg = mainBase * ftp
-    local hitsDone = 1
     local numHits = getMultiAttacks(attacker, target, wsParams)
 
     while hitsDone < numHits and finaldmg < targetHp do -- numHits is hits in the base WS _and_ DA/TA/QA procs during those hits
