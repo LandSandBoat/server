@@ -1127,6 +1127,9 @@ bool CLatentEffectContainer::ProcessLatentEffect(CLatentEffect& latentEffect)
                 }
             }
             break;
+        case LATENT::MAINJOB:
+            expression = m_POwner->GetMJob() == latentEffect.GetConditionsValue();
+            break;
         case LATENT::EQUIPPED_IN_SLOT:
             expression = latentEffect.GetSlot() == latentEffect.GetConditionsValue();
             break;
