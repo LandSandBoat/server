@@ -758,13 +758,14 @@ xi.garrison.onTrade = function(player, npc, trade, guardNation)
     -- Get zone information
     local zone     = player:getZone()
     local zoneID   = zone:getID()
-    local nationID = GetRegionOwner(zone:getRegionID())
     local zoneData = xi.garrison.zoneData[zoneID]
 
     -- If called outside of Garrison areas
-    if zoneData == nil then
+    if not zoneData then
         return
     end
+
+    local nationID = GetRegionOwner(zone:getRegionID())
 
     -- If info is missing, a debug message will be logged and Garrison will not begin
     if xi.garrison.getAllyInfo(zoneID, zoneData, nationID) == nil then
