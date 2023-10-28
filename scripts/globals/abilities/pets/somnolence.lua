@@ -21,7 +21,10 @@ abilityObject.onPetAbility = function(target, pet, skill)
 
     local damage = xi.summon.avatarMagicSkill(pet, target, skill, params)
 
+    local dINT = pet:getStat(xi.mod.INT) - target:getStat(xi.mod.INT)
+
     local effectParams = {}
+    effectParams.dStat = dINT
     effectParams.element = xi.magic.ele.DARK
     effectParams.effect = xi.effect.WEIGHT
     effectParams.duration = 60
