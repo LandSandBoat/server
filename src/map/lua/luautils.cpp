@@ -1438,11 +1438,13 @@ namespace luautils
     uint32 NextJstWeek()
     {
         TracyZoneScoped;
-        uint32 jstWeekday      = CVanaTime::getInstance()->getJstWeekDay();
+        uint32 jstWeekday      = (CVanaTime::getInstance()->getJstWeekDay() + 6) % 7;
         uint32 nextJstMidnight = CVanaTime::getInstance()->getJstMidnight();
 
         // Start with the "Next" Midnight, and apply N days worth of time to it
-        return nextJstMidnight + (7 - jstWeekday) * 60 * 60 * 24;
+        // jstWeekday is offset by 1 here, so that Monday (JST) is the reference.
+
+        return nextJstMidnight + (6 - jstWeekday) * 60 * 60 * 24;
     }
 
     // NOTE: NextConquestTally exists for clarity, and is bound to the above function
