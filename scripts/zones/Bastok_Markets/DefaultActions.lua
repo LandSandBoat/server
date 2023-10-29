@@ -28,7 +28,6 @@ return {
     ['Matthias']    = { event = 499 },
     ['Michea']      = { event = 125 },
     ['Nbu_Latteh']  = { event = 127 },
-    ['Nudara']      = { event = 118 },
     ['Offa']        = { event = 124 },
     ['Parnika']     = { event = 136 },
     ['Pavel']       = { event = 128 },
