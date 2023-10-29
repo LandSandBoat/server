@@ -79,6 +79,10 @@ zoneObject.onTransportEvent = function(player, transport)
     end
 end
 
+zoneObject.onGameHour = function()
+    xi.dark_rider.init()
+end
+
 zoneObject.onEventUpdate = function(player, csid, option)
 end
 
