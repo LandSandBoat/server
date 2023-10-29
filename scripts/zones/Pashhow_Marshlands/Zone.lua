@@ -76,7 +76,10 @@ zoneObject.onZoneWeatherChange = function(weather)
     if xi.settings.main.ENABLE_WOTG == 1 then
         if weather == xi.weather.RAIN or weather == xi.weather.SQUALL then
             DisallowRespawn(ID.mob.TOXIC_TAMLYN, false)
-            if os.time() > GetServerVariable("TamlynRespawn") then
+            if
+                os.time() > GetServerVariable("TamlynRespawn") and
+                not GetMobByID(ID.mob.TOXIC_TAMLYN):isSpawned()
+            then
                 SpawnMob(ID.mob.TOXIC_TAMLYN)
             end
         elseif weather ~= xi.weather.RAIN or weather ~= xi.weather.SQUALL then

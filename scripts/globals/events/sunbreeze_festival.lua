@@ -361,14 +361,16 @@ xi.events.sunbreeze_festival.setMusic = function(flag)
 end
 
 xi.events.sunbreeze_festival.onZoneTick = function(zone)
-    local npc = GetNPCByID(zones[zone:getID()].npc.GOLDFISH_NPC)
+    if xi.events.sunbreeze_festival.enabledCheck() then
+        local npc = GetNPCByID(zones[zone:getID()].npc.GOLDFISH_NPC)
 
-    if
-        xi.events.sunbreeze_festival.enabledCheck and
-        npc:getLocalVar("[SUNBREEZE]goldfishDialogueTimer") < os.time()
-    then
-        npc:showText(npc, zones[zone:getID()].text.GOLDFISH_NPC_DIALOGUE + math.random(0, 2))
-        npc:setLocalVar("[SUNBREEZE]goldfishDialogueTimer", os.time() + 20)
+        if
+            xi.events.sunbreeze_festival.enabledCheck and
+            npc:getLocalVar("[SUNBREEZE]goldfishDialogueTimer") < os.time()
+        then
+            npc:showText(npc, zones[zone:getID()].text.GOLDFISH_NPC_DIALOGUE + math.random(0, 2))
+            npc:setLocalVar("[SUNBREEZE]goldfishDialogueTimer", os.time() + 20)
+        end
     end
 end
 
