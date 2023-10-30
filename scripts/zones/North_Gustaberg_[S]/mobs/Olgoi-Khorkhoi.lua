@@ -13,6 +13,7 @@ end
 
 entity.onMobDespawn = function(mob)
     -- Sets to respawn between 90 to 120 minutes
+    UpdateNMSpawnPoint(mob:getID())
     mob:setRespawnTime(math.random(5400, 7200))
 end
 

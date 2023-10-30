@@ -5298,7 +5298,7 @@ INSERT INTO `mob_groups` VALUES (23,6546,88,'Enchanted_Bones_blm',330,1,677,0,0,
 INSERT INTO `mob_groups` VALUES (24,6419,88,'Rock_Eater',330,0,1725,0,0,32,35,0);
 INSERT INTO `mob_groups` VALUES (25,1623,88,'Gloomanita',0,32,1006,0,0,42,53,0);
 INSERT INTO `mob_groups` VALUES (26,6464,88,'Fledermaus',330,2,82,0,0,45,47,0);
-INSERT INTO `mob_groups` VALUES (27,5870,88,'Olgoi-Khorkhoi',0,128,3285,4500,0,53,54,0);
+INSERT INTO `mob_groups` VALUES (27,5870,88,'Olgoi-Khorkhoi',0,0,3285,4500,0,53,54,0);
 INSERT INTO `mob_groups` VALUES (28,6239,88,'Veteran_Quadav',330,0,2578,0,0,59,63,0);
 INSERT INTO `mob_groups` VALUES (29,6237,88,'Greater_Quadav',330,0,1233,0,0,59,64,0);
 INSERT INTO `mob_groups` VALUES (30,6238,88,'Onyx_Quadav',330,0,1861,0,0,59,63,0);
