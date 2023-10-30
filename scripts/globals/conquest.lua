@@ -1123,6 +1123,7 @@ xi.conquest.overseerOnTrade = function(player, npc, trade, guardNation, guardTyp
 
         -- RECHARGE EXP RING
         if not tradeConfirmed and expRings[item] and npcUtil.tradeHas(trade, item) then
+            -- TODO: Can you recharge a full ring? This case would need to be handled.
             if
                 xi.settings.main.BYPASS_EXP_RING_ONE_PER_WEEK == 1 or
                 player:getCharVar('CONQUEST_RING_RECHARGE') == 0

@@ -6398,6 +6398,12 @@ namespace battleutils
         else if (PSpell->getSpellGroup() == SPELLGROUP_SUMMONING)
         {
             cast -= 1000 * PEntity->getMod(Mod::SUMMONING_MAGIC_CAST);
+
+            if (PEntity->objtype == TYPE_PC)
+            {
+                auto* PChar = static_cast<CCharEntity*>(PEntity);
+                cast -= base * 0.01 * PChar->PMeritPoints->GetMeritValue(MERIT_SUMMONING_MAGIC_CAST_TIME, PChar);
+            }
         }
         else if (PSpell->getSpellGroup() == SPELLGROUP_SONG)
         {

@@ -1628,6 +1628,12 @@ INSERT INTO `item_latents` VALUES (17212,26,20,37,3);
 INSERT INTO `item_latents` VALUES (17212,26,20,37,5);
 INSERT INTO `item_latents` VALUES (17212,26,25,37,4);
 
+-- Shigeto Bow
+INSERT INTO `item_latents` VALUES (18142,26,7,62,12);     -- RACC +7 for Samurai main job
+
+-- Shigeto Bow +1
+INSERT INTO `item_latents` VALUES (18143,26,8,62,12);     -- RACC +8 for Samurai main job
+
 -- Musketeer Gun +1/+2
 INSERT INTO `item_latents` VALUES (17269,24,8,53,1);     -- RATT +8 in areas outside own nation's control
 INSERT INTO `item_latents` VALUES (17270,24,9,53,1);     -- RATT +9 in areas outside own nation's control
