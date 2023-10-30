@@ -58,22 +58,22 @@ local prizes =
           -- 3706, -- Vanaclock
 
         -- Cycle #2
-            267, -- Fafnir Statue
-            268, -- N moogle Statue
-            269, -- S lord Statue
-            270, -- Odin Statue
-            271, -- Alexander Statue
-            277, -- Prishe Statue
-            278, -- Cardian Statue
+          --  267, -- Fafnir Statue
+          --  268, -- N moogle Statue
+          --  269, -- S lord Statue
+          --  270, -- Odin Statue
+          --  271, -- Alexander Statue
+          --  277, -- Prishe Statue
+          --  278, -- Cardian Statue
 
         -- Cycle #3
-           --  279, -- S Lord Statue II
-           --  280, -- S Lord Statue III
-           --  281, -- Atomos Statue
-           --  284, -- Goobbue Statue
-           --  286, -- Nanaa Mihgo Statue
-           --  287, -- Nanaa Mihgo S II
-           --  320, -- Harpsichord
+            279, -- S Lord Statue II
+            280, -- S Lord Statue III
+            281, -- Atomos Statue
+            284, -- Goobbue Statue
+            286, -- Nanaa Mihgo Statue
+            287, -- Nanaa Mihgo S II
+            320, -- Harpsichord
 
         -- Cycle #4
         --    365,  -- Poele Classique
@@ -169,46 +169,46 @@ local prizes =
         -- 27455, -- Pupil's Shoes
 
         -- Cycle #4
-        25649, -- Gazer's Helmet
-        25713, -- Track Shirt
-        25722, -- Jubilee Shirt
-        25755, -- Crustacean Shirt
-        25758, -- Rhapsody Shirt
-        26516, -- Citrullus Shirt
-        26517, -- Shadow Lord Shirt
-        26518, -- Jody Shirt
-        26519, -- Mandragora Shirt
-        26524, -- Gil Nabber Shirt
-        26545, -- Mithkabob Shirt
-        26965, -- Ta Moko
-        26967, -- Cossie Top
-        27291, -- Swimming Togs
-        27293, -- Cossie Bottom
-        27325, -- Track Pants
-        27899, -- Alliance Shirt
-        28185, -- Alliance Pants
-        28324, -- Alliance Boots
+        -- 25649, -- Gazer's Helmet
+        -- 25713, -- Track Shirt
+        -- 25722, -- Jubilee Shirt
+        -- 25755, -- Crustacean Shirt
+        -- 25758, -- Rhapsody Shirt
+        -- 26516, -- Citrullus Shirt
+        -- 26517, -- Shadow Lord Shirt
+        -- 26518, -- Jody Shirt
+        -- 26519, -- Mandragora Shirt
+        -- 26524, -- Gil Nabber Shirt
+        -- 26545, -- Mithkabob Shirt
+        -- 26965, -- Ta Moko
+        -- 26967, -- Cossie Top
+        -- 27291, -- Swimming Togs
+        -- 27293, -- Cossie Bottom
+        -- 27325, -- Track Pants
+        -- 27899, -- Alliance Shirt
+        -- 28185, -- Alliance Pants
+        -- 28324, -- Alliance Boots
 
         -- Cycle #5
-            -- 10446, -- Ahriman Cap
-            -- 10875, -- Snowman Cap
-            -- 23731, -- Royal Chocobo Beret
-            -- 23753, -- Sandogasa
-            -- 23790, -- Adenium Masque
-            -- 23791, -- Adenium Suit
-            -- 25604, -- Buffalo Cap
-            -- 25648, -- Curmudgeon's Helmet
-            -- 25670, -- Rarab Cap
-            -- 25672, -- Snoll Masque
-            -- 25677, -- Arthro's Cap
-            -- 25910, -- Cait Sith Subligar
-            -- 26520, -- Akitu Shirt
-            -- 26693, -- Morbol Cap
-            -- 26703, -- Lycopodium Masque
-            -- 26729, -- Corolla
-            -- 27716, -- Green Moogle Masque
-            -- 27757, -- Bomb Masque
-            -- 27867, -- Green Moogle Suit
+            10446, -- Ahriman Cap
+            10875, -- Snowman Cap
+            23731, -- Royal Chocobo Beret
+            23753, -- Sandogasa
+            23790, -- Adenium Masque
+            23791, -- Adenium Suit
+            25604, -- Buffalo Cap
+            25648, -- Curmudgeon's Helmet
+            25670, -- Rarab Cap
+            25672, -- Snoll Masque
+            25677, -- Arthro's Cap
+            25910, -- Cait Sith Subligar
+            26520, -- Akitu Shirt
+            26693, -- Morbol Cap
+            26703, -- Lycopodium Masque
+            26729, -- Corolla
+            27716, -- Green Moogle Masque
+            27757, -- Bomb Masque
+            27867, -- Green Moogle Suit
 
         -- Cycle #6 (Costumes)
             -- 5113,  -- Cracked Nut
@@ -276,25 +276,25 @@ local prizes =
         -- WEAPON COSTUMES and crafting latent items
 
         -- Cycle #1/#5
-            -- 20514, -- Aphelion Knuckles
-            -- 20578, -- Wind Knife
-            -- 20665, -- Kam'lanaut's Sword
-            -- 20694, -- Fermion Sword
-            -- 21693, -- Irradiance Blade
-            -- 21741, -- Demonic Axe
-            -- 21745, -- Dullahan Axe
-            -- 21820, -- Lost Sickle
-            -- 21862, -- Mizukage Naginata
-            -- 21977, -- Mutsonokami -- BROKEN
-            -- 22005, -- Burrower's Wand
-            -- 22019, -- Jingly Rod
-            -- 22067, -- Levin
-            -- 22124, -- Artemis's Bow
-            -- 22153, -- Silver Gun
-            -- 22282, -- Grudge
-            -- 22283, -- Marvelous Cheer
-            -- 26412, -- Kam'lanaut's Shield
-            -- 28661, -- Glinting Shield
+        20514, -- Aphelion Knuckles
+        20578, -- Wind Knife
+        20665, -- Kam'lanaut's Sword
+        20694, -- Fermion Sword
+        21693, -- Irradiance Blade
+        21741, -- Demonic Axe
+        21745, -- Dullahan Axe
+        21820, -- Lost Sickle
+        21862, -- Mizukage Naginata
+        21977, -- Mutsonokami -- BROKEN
+        22005, -- Burrower's Wand
+        22019, -- Jingly Rod
+        22067, -- Levin
+        22124, -- Artemis's Bow
+        22153, -- Silver Gun
+        22282, -- Grudge
+        22283, -- Marvelous Cheer
+        26412, -- Kam'lanaut's Shield
+        28661, -- Glinting Shield
 
         -- Cycle #2/#6
         --    18102, -- Pitchfork
@@ -371,13 +371,13 @@ local prizes =
         --  19274, -- Trainee Burin
 
         -- Cycle #6 (Costumes)
-            10849, -- Yagudo Belt
-            10851, -- Slime Belt
-            15919, -- Drover's Belt
-            15921, -- Detonator Belt
-            16273, -- Pullus Torque
-            17031, -- Shell Scepter
-            27718, -- Worm Masque +1
+        --  10849, -- Yagudo Belt
+        --  10851, -- Slime Belt
+        --  15919, -- Drover's Belt
+        --  15921, -- Detonator Belt
+        --  16273, -- Pullus Torque
+        --  17031, -- Shell Scepter
+        --  27718, -- Worm Masque +1
         },
     },
 
@@ -494,23 +494,23 @@ local prizes =
         -- NICE TO HAVE STUFF
 
         -- Cycle #1 -- Crafting/Nyzul sets <- These need to be highest login tier next time!
-            -- 14568, -- Askar Korazin
-            -- 14569, -- Denali Jacket
-            -- 14570, -- Goliard Saio
-            -- 14983, -- Askar Manopolas
-            -- 14984, -- Denali Wristbands
-            -- 14985, -- Goliard Cuffs
-            -- 15647, -- Askar Dirs
-            -- 15648, -- Denali Kecks
-            -- 15649, -- Goliard Trews
-            -- 15733, -- Askar Gambieras
-            -- 15734, -- Denali Gamashes
-            -- 15735, -- Goliard Clogs
-            -- 16106, -- Askar Zucchetto
-            -- 16107, -- Denali Bonnet
-            -- 16108, -- Goliard Chapeau
-            -- 28585, -- Craftkeeper's Ring
-            -- 28587, -- Artificer's Ring
+        14568, -- Askar Korazin
+        14569, -- Denali Jacket
+        14570, -- Goliard Saio
+        14983, -- Askar Manopolas
+        14984, -- Denali Wristbands
+        14985, -- Goliard Cuffs
+        15647, -- Askar Dirs
+        15648, -- Denali Kecks
+        15649, -- Goliard Trews
+        15733, -- Askar Gambieras
+        15734, -- Denali Gamashes
+        15735, -- Goliard Clogs
+        16106, -- Askar Zucchetto
+        16107, -- Denali Bonnet
+        16108, -- Goliard Chapeau
+        28585, -- Craftkeeper's Ring
+        28587, -- Artificer's Ring
 
         -- Cycle #2 -- Nexus/ToAU rings/Odin Prime/Alexander Prime/CoP items
         --    11343, -- Thrakon Breastplate
@@ -585,17 +585,17 @@ local prizes =
         --   19235, -- Veuglaire
 
         -- Cycle #6 --Apollyon AF+1 items part 2
-             1951,  -- Charcoal Cotton (RNG)
-             1953,  -- Kurogane (SAM)
-             1955,  -- Ebony Lacquer (NIN)
-             1957,  -- Blue Rivet (DRG)
-             1959,  -- Astral Leather (SMN)
-             2657,  -- Flameshun Cloth (BLU)
-             2659,  -- Canvas Toile (COR)
-             2661,  -- Corduroy Cloth (PUP)
-             2715,  -- Gold Stud (DNC)
-             2717,  -- Electrum Stud (SCH)
-             27556, -- Echad Ring
+        --   1951,  -- Charcoal Cotton (RNG)
+        --   1953,  -- Kurogane (SAM)
+        --   1955,  -- Ebony Lacquer (NIN)
+        --   1957,  -- Blue Rivet (DRG)
+        --   1959,  -- Astral Leather (SMN)
+        --   2657,  -- Flameshun Cloth (BLU)
+        --   2659,  -- Canvas Toile (COR)
+        --   2661,  -- Corduroy Cloth (PUP)
+        --   2715,  -- Gold Stud (DNC)
+        --   2717,  -- Electrum Stud (SCH)
+        --   27556, -- Echad Ring
         },
     },
 
@@ -662,46 +662,46 @@ local prizes =
         -- 26219, -- Naji's Loop
 
         -- Cycle #5 -- WOTG Nations
-           11545, -- Fourth Mantle
-           11588, -- Mrc.Mjr. Charm
-           11636, -- R.K. Sigil Ring
-           15844, -- Patronus Ring
-           15934, -- Crimson Belt
-           15935, -- Capricornian Rope
-           15936, -- Earthy Belt
-           15966, -- Silver Fox Earring
-           15967, -- Temple Earring
-           16258, -- Arrestor Mantle
-           16291, -- Shield Collar
-           16292, -- Bull Necklace
-           16293, -- Cougar Pendant
-           16294, -- Crocodile Collar
-           18734, -- Sturm's Report
-           18735, -- Sonia's Plectrum
-           19041, -- Rose Strap
-           19042, -- Ariesian Grip
+        -- 11545, -- Fourth Mantle
+        -- 11588, -- Mrc.Mjr. Charm
+        -- 11636, -- R.K. Sigil Ring
+        -- 15844, -- Patronus Ring
+        -- 15934, -- Crimson Belt
+        -- 15935, -- Capricornian Rope
+        -- 15936, -- Earthy Belt
+        -- 15966, -- Silver Fox Earring
+        -- 15967, -- Temple Earring
+        -- 16258, -- Arrestor Mantle
+        -- 16291, -- Shield Collar
+        -- 16292, -- Bull Necklace
+        -- 16293, -- Cougar Pendant
+        -- 16294, -- Crocodile Collar
+        -- 18734, -- Sturm's Report
+        -- 18735, -- Sonia's Plectrum
+        -- 19041, -- Rose Strap
+        -- 19042, -- Ariesian Grip
 
         -- Cycle #6 -- Temenos AF+1 items (Change point cost to 1500 for this cycle only!)
-        --  1930, -- Ecarlate Cloth (WAR)
-        --  1932, -- Utopian Gold Thread (MNK)
-        --  1934, -- Benedict Silk (WHM)
-        --  1936, -- Diabolic Silk (BLM)
-        --  1938, -- Ruby Silk Thread (RDM)
-        --  1940, -- Supple Skin (THF)
-        --  1942, -- Snowy Cermet (PLD)
-        --  1944, -- Dark Orichalcum (DRK)
-        --  1946, -- Smalt Leather (BST)
-        --  1948, -- Coiled Yarn (BRD)
-        --  1950, -- Chameleon Yarn (RNG)
-        --  1952, -- Scarlet Odoshi (SAM)
-        --  1954, -- Plaited Cord (NIN)
-        --  1956, -- Cobalt Mythril Sheet (DRG)
-        --  1958, -- Glittering Yarn (SMN)
-        --  2656, -- Luminian Thread (BLU)
-        --  2658, -- Silkworm Thread (COR)
-        --  2660, -- Pantin Wire (PUP)
-        --  2714, -- Filet Lace (DNC)
-        --  2716, -- Brilliantine (SCH)
+        1930, -- Ecarlate Cloth (WAR)
+        1932, -- Utopian Gold Thread (MNK)
+        1934, -- Benedict Silk (WHM)
+        1936, -- Diabolic Silk (BLM)
+        1938, -- Ruby Silk Thread (RDM)
+        1940, -- Supple Skin (THF)
+        1942, -- Snowy Cermet (PLD)
+        1944, -- Dark Orichalcum (DRK)
+        1946, -- Smalt Leather (BST)
+        1948, -- Coiled Yarn (BRD)
+        1950, -- Chameleon Yarn (RNG)
+        1952, -- Scarlet Odoshi (SAM)
+        1954, -- Plaited Cord (NIN)
+        1956, -- Cobalt Mythril Sheet (DRG)
+        1958, -- Glittering Yarn (SMN)
+        2656, -- Luminian Thread (BLU)
+        2658, -- Silkworm Thread (COR)
+        2660, -- Pantin Wire (PUP)
+        2714, -- Filet Lace (DNC)
+        2716, -- Brilliantine (SCH)
         },
     },
 }
