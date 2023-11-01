@@ -3,7 +3,7 @@
 --  NPC: ??? (Spawn Nuhn(ZNM T3))
 -- !pos -451 -7 389 54
 -----------------------------------
-local ID = zones[xi.zone.ARRAPAGO_REMNANTS]
+local ID = zones[xi.zone.ARRAPAGO_REEF]
 -----------------------------------
 local entity = {}
 

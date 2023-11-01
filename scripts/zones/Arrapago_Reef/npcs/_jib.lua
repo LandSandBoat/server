@@ -3,7 +3,7 @@
 -- Door: Heavy Iron Gate
 -- !pos 5 -9 579 54
 -----------------------------------
-local ID = zones[xi.zone.ARRAPAGO_REMNANTS]
+local ID = zones[xi.zone.ARRAPAGO_REEF]
 -----------------------------------
 local entity = {}
 

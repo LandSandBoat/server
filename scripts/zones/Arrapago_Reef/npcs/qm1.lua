@@ -3,7 +3,7 @@
 --  NPC: ??? (Spawn Lil'Apkallu(ZNM T1))
 -- !pos 488 -1 166 54
 -----------------------------------
-local ID = zones[xi.zone.ARRAPAGO_REMNANTS]
+local ID = zones[xi.zone.ARRAPAGO_REEF]
 -----------------------------------
 local entity = {}
 
