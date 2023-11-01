@@ -4,7 +4,7 @@
 -- Arrapago Reef Teleporter Back to Aht Urhgan Whitegate
 -- !pos 15 -7 627 54
 -----------------------------------
-local ID = zones[xi.zone.ARRAPAGO_REMNANTS]
+local ID = zones[xi.zone.ARRAPAGO_REEF]
 -----------------------------------
 local entity = {}
 

@@ -3,7 +3,7 @@
 -- Door: Iron Gate (Lamian Fang Key)
 -- !pos 580 -17 120
 -----------------------------------
-local ID = zones[xi.zone.ARRAPAGO_REMNANTS]
+local ID = zones[xi.zone.ARRAPAGO_REEF]
 -----------------------------------
 local entity = {}
 

@@ -3,7 +3,7 @@
 --  NPC: ??? (Spawn Zareehkl the Jubilant(ZNM T2))
 -- !pos 176 -4 182 54
 -----------------------------------
-local ID = zones[xi.zone.ARRAPAGO_REMNANTS]
+local ID = zones[xi.zone.ARRAPAGO_REEF]
 -----------------------------------
 local entity = {}
 

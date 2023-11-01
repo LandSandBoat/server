@@ -1,4 +1,4 @@
-local ID = zones[xi.zone.ARRAPAGO_REMNANTS]
+local ID = zones[xi.zone.ARRAPAGO_REEF]
 
 return {
     ['qm1']  = { messageSpecial = ID.text.SLIMY_TOUCH },

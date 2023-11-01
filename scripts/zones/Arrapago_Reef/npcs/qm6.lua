@@ -4,7 +4,7 @@
 -- Involved in Quests: 'Luck of the Draw', 'Equipped for All Occasions', 'Navigating the Unfriendly Seas'
 -- !pos 468.767 -12.292 111.817 54
 -----------------------------------
-local ID = zones[xi.zone.ARRAPAGO_REMNANTS]
+local ID = zones[xi.zone.ARRAPAGO_REEF]
 -----------------------------------
 local entity = {}
 

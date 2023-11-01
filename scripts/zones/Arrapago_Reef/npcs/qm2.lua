@@ -3,7 +3,7 @@
 --  NPC: ??? (Spawn Velionis(ZNM T1))
 -- !pos 311 -3 27 54
 -----------------------------------
-local ID = zones[xi.zone.ARRAPAGO_REMNANTS]
+local ID = zones[xi.zone.ARRAPAGO_REEF]
 -----------------------------------
 local entity = {}
 
