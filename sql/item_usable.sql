@@ -1875,6 +1875,8 @@ INSERT INTO `item_usable` VALUES (6218,'slice_of_anchovy_pizza_+1',1,1,28,0,0,0,
 INSERT INTO `item_usable` VALUES (6223,'cehuetzi_snow_cone',1,1,26,0,0,0,0,0);
 INSERT INTO `item_usable` VALUES (6224,'apingaut_snow_cone',1,1,26,0,0,0,0,0);
 INSERT INTO `item_usable` VALUES (6225,'cyclical_coalescence',1,1,26,0,0,0,0,0);
+INSERT INTO `item_usable` VALUES (6258,'piece_of_shiromochi',1,1,28,0,0,0,0,0);
+INSERT INTO `item_usable` VALUES (6259,'piece_of_shiromochi_+1',1,1,28,0,0,0,0,0);
 INSERT INTO `item_usable` VALUES (6260,'piece_of_akamochi',1,1,28,0,0,0,0,0);
 INSERT INTO `item_usable` VALUES (6261,'piece_of_akamochi_+1',1,1,28,0,0,0,0,0);
 INSERT INTO `item_usable` VALUES (6262,'piece_of_kusamochi',1,1,28,0,0,0,0,0);
