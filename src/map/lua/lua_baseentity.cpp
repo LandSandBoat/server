@@ -2894,6 +2894,22 @@ void CLuaBaseEntity::setPos(sol::variadic_args va)
                 return;
             }
 
+            const char* fmtQuery = "SELECT content_tag FROM zone_settings WHERE zoneid = %u";
+            int32       ret      = sql->Query(fmtQuery, zoneid);
+            if (ret != SQL_ERROR && sql->NumRows() != 0)
+            {
+                while (sql->NextRow() == SQL_SUCCESS)
+                {
+                    std::string contentTagZoningInto = sql->GetStringData(0);
+                    if (!luautils::IsContentEnabled(contentTagZoningInto.c_str()))
+                    {
+                        ShowWarning(fmt::format("Char {} requested zone ({}) but that zone's content tag isn't enabled", PChar->name, zoneid));
+                        PChar->pushPacket(new CMessageSystemPacket(0, 0, 2)); // You could not enter the next area.
+                        return;
+                    }
+                }
+            }
+
             auto ipp = zoneutils::GetZoneIPP(zoneid);
             if (ipp == 0)
             {
