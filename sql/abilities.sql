@@ -551,7 +551,7 @@ INSERT INTO `abilities` VALUES (695,'big_scissors',9,25,257,1,102,0,0,0,2000,0,6
 INSERT INTO `abilities` VALUES (696,'scissor_guard',9,25,257,2,102,0,0,0,2000,0,6,18.0,0,1,60,0,0,NULL);
 INSERT INTO `abilities` VALUES (697,'metallic_body',9,25,257,1,102,0,0,0,2000,0,6,18.0,0,1,60,0,0,NULL);
 INSERT INTO `abilities` VALUES (698,'needleshot',9,25,257,1,102,0,0,0,2000,0,6,18.0,0,1,60,0,0,NULL);
-INSERT INTO `abilities` VALUES (699,'qmqmqm_needles',9,25,257,3,102,0,0,0,2000,0,6,18.0,0,1,60,0,0,NULL);
+INSERT INTO `abilities` VALUES (699,'questionmarks_needles',9,25,257,3,102,0,0,0,2000,0,6,18.0,0,1,60,0,0,NULL);
 INSERT INTO `abilities` VALUES (700,'frogkick',9,25,257,1,102,0,0,0,2000,0,6,18.0,0,1,60,0,0,NULL);
 INSERT INTO `abilities` VALUES (701,'spore',9,25,257,1,102,0,0,0,2000,0,6,18.0,0,1,60,0,0,NULL);
 INSERT INTO `abilities` VALUES (702,'queasyshroom',9,25,257,1,102,0,0,0,2000,0,6,18.0,0,1,60,0,0,NULL);
