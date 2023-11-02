@@ -12,28 +12,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local notes = player:getCurrency('allied_notes')
-    local freelances = 99 -- Faking it for now
-    local cipher = xi.extravaganza.campaignActive() * 4
-    -- 0 for not displaying ciphers
-    -- 4 for Valaneiral (New Year's & Summer Alter Ego Extravaganzas)
-    -- 8 for Adelheid (Spring & Autumn Alter Ego Extravaganzas)
-    -- 12 to display both
-    local medalRank = xi.campaign.getMedalRank(player)
-    local bonusEffects = 0 -- 1 = regen, 2 = refresh, 4 = meal duration, 8 = exp loss reduction, 15 = all
-    local timeStamp = 0 -- xi.campaign.getSigilTimeStamp(player)
-    local allegiance = player:getCampaignAllegiance()
-
-    -- if ( medal_rank > 25 and nation controls Throne_Room_S ) then
-        -- medal_rank = 32
-        -- this decides if allied ring is in the Allied Notes item list.
-    -- end
-
-    if medalRank == 0 then
-        player:startEvent(14)
-    else
-        player:startEvent(13, allegiance, notes, freelances, cipher, medalRank, bonusEffects, timeStamp, 0)
-    end
+    xi.campaign.sigilOnTrigger(player, npc)
 end
 
 entity.onEventUpdate = function(player, csid, option, npc)

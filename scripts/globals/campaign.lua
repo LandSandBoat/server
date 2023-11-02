@@ -1,82 +1,36 @@
 -----------------------------------
--- Campaign global
------------------------------------
-require('scripts/globals/teleports')
+-- Campaign Global
 -----------------------------------
 xi = xi or {}
 xi.campaign = {}
 
 xi.campaign.control =
 {
-    Sandoria = 2,
-    Bastok   = 4,
-    Windurst = 6,
-    Beastman = 8,
+    SANDORIA = 2,
+    BASTOK   = 4,
+    WINDURST = 6,
+    BEASTMEN = 8,
 }
 
 xi.campaign.union =
 {
-    Adder  = 1,
-    Bison  = 2,
-    Coyote = 3,
-    Dhole  = 4,
-    Eland  = 5,
+    ADDER  = 1,
+    BISON  = 2,
+    COYOTE = 3,
+    DHOLE  = 4,
+    ELAND  = 5,
 }
 
 xi.campaign.army =
 {
-    Sandoria = 0,
-    Bastok   = 1,
-    Windurst = 2,
-    Orcish   = 3,
-    Quadav   = 4,
-    Yagudo   = 5,
-    Kindred  = 6,
+    SANDORIA = 0,
+    BASTOK   = 1,
+    WINDURST = 2,
+    ORCISH   = 3,
+    QUADAV   = 4,
+    YAGUDO   = 5,
+    KINDRED  = 6,
 }
-
-xi.campaign.zone =
-{
-    SouthernSandOria     = 80,
-    EastRonfaure         = 81,
-    JugnerForest         = 82,
-    VunkerlInlet         = 83,
-    BatalliaDowns        = 84,
-    LaVaule              = 85,
-    TheEldiemeNecropolis = 175,
-    BastokMarkets        = 87,
-    NorthGustaberg       = 88,
-    Grauberg             = 89,
-    PashhowMarshlands    = 90,
-    RolanberryFields     = 91,
-    Beadeaux             = 92,
-    CrawlersNest         = 171,
-    WindurstWaters       = 94,
-    WestSarutabaruta     = 95,
-    FortKarugoNarugo     = 96,
-    MeriphataudMountains = 97,
-    SauromugueChampaign  = 98,
-    CastleOztroja        = 99,
-    GarlaigeCitadel      = 164,
-    BeaucedineGlacier    = 136,
-    Xarcabard            = 137,
-    CastleZvahlBaileys   = 138,
-    CastleZvahlKeep      = 155,
-    ThroneRoom           = 156,
-}
-
-xi.campaign.getMedalRank = function(player)
-    local rank = 0
-
-    for keyItemId = xi.ki.BRONZE_RIBBON_OF_SERVICE, xi.ki.MEDAL_OF_ALTANA do
-        if player:hasKeyItem(keyItemId) then
-            rank = rank + 1
-        else
-            break
-        end
-    end
-
-    return rank
-end
 
 -- First nibble: 2, Second Nibble: Page, rshift 8: entry
 local noteRewardItems =
@@ -264,16 +218,108 @@ local noteRewardItems =
     },
 }
 
--- -------------------------------------------------------------------
--- getSigilTimeStamp(player)
--- This is for the time-stamp telling player what day/time the
--- effect will last until, NOT the actual status effect duration.
--- -------------------------------------------------------------------
+local sigilNpcEvent =
+{
+    [xi.zone.BASTOK_MARKETS_S    ] = 13,
+    [xi.zone.SOUTHERN_SAN_DORIA_S] = 110,
+    [xi.zone.WINDURST_WATERS_S   ] = 13,
+}
 
-xi.campaign.getSigilTimeStamp = function(player)
-    local timeStamp = 0 -- zero'd till math is done.
+-- Returns the Vanadiel time in which Sigil will expire or 0
+local function getSigilTimeStamp(player)
+    local sigilTimestamp = VanadielTime()
+    local sigilEffect    = player:getStatusEffect(xi.effect.SIGIL)
 
-    -- TODO: calculate time stamp for menu display of when it wears off
+    if sigilEffect then
+        sigilTimestamp = sigilTimestamp + sigilEffect:getTimeRemaining() / 1000
+    end
 
-    return timeStamp
+    return sigilTimestamp
+end
+
+local function getSigilRankMask(player)
+    local rankMask = 0
+
+    -- Rank Category is separated into five groups, each with four KIs and represented as bits 0..4 in
+    -- the mask.
+    for keyItemId = xi.ki.BRONZE_RIBBON_OF_SERVICE, xi.ki.MEDAL_OF_ALTANA do
+        if player:hasKeyItem(keyItemId) then
+            utils.mask.setBit(rankMask, math.floor(keyItemId - xi.ki.BRONZE_RIBBON_OF_SERVICE) / 4, true)
+        else
+            break
+        end
+    end
+
+    -- TODO: If the nation in question (based on zone) controls Throne Room (S), then set bit 5 to allow
+    -- for purchase of Allied Ring.
+
+    return rankMask
+end
+
+local function getSigilMenuOptions(player)
+    local optionMask = 0
+
+    -- Bit Values:
+    -- 0: Medal Expired (1 = Expired)
+    -- 1: Sigil state (1 = No Sigil Active)
+    -- 2: Valaineral Available (1 = Available)
+    -- 3: Adelheid Available (1 = Available)
+
+    -- TODO: Implement logic for the above
+    return 3 + xi.extravaganza.campaignActive() * 4
+end
+
+local function getAvailableBonuses(player)
+    -- Bit Values (1 = Available):
+    -- 0: Regen
+    -- 1: Refresh
+    -- 2: Meal Duration
+    -- 3: EXP Loss Reduction
+
+    -- TODO: Implement logic for the above
+    return 0
+end
+
+-- TODO: Is this deprecated by the mask function?
+xi.campaign.getMedalRank = function(player)
+    local rank = 0
+
+    for keyItemId = xi.ki.BRONZE_RIBBON_OF_SERVICE, xi.ki.MEDAL_OF_ALTANA do
+        if player:hasKeyItem(keyItemId) then
+            rank = rank + 1
+        else
+            break
+        end
+    end
+
+    return rank
+end
+
+-- Sigil NPC
+xi.campaign.sigilOnTrigger = function(player, npc)
+    local baseEvent     = sigilNpcEvent[player:getZoneID()]
+    local freelanceMask = 0 -- TODO: Update on implementation
+
+    if medalRank == 0 then
+        player:startEvent(baseEvent + 1)
+    else
+        player:startEvent(baseEvent,
+            player:getCampaignAllegiance(),
+            player:getCurrency('allied_notes'),
+            freelanceMask,
+            getSigilMenuOptions(player),
+            getSigilRankMask(player),
+            getAvailableBonuses(player),
+            getSigilTimeStamp(player),
+            0
+        )
+    end
+end
+
+xi.campaign.sigilOnEventUpdate = function(player, csid, option, npc)
+
+end
+
+xi.campaign.sigilOnEventFinish = function(player, csid, option, npc)
+
 end
