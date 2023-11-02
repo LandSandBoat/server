@@ -2298,6 +2298,7 @@ xi.item =
     TRAINING_MANUAL                     = 5119,
     TITANIC_SAWFISH                     = 5120,
     GUGRUSAURUS                         = 5127,
+    CONE_CALAMARY                       = 5128,
     LIK                                 = 5129,
     PTERYGOTUS                          = 5133,
     MOLA_MOLA                           = 5134,
