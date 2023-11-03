@@ -25,6 +25,8 @@ xi.settings.main =
     RESTRICT_CONTENT = 0,
 
     -- Enable Expansion (1 = Enabled, 0 = Disabled)
+    ENABLE_VANILLA   = 1;
+    ENABLE_ROZ       = 1;
     ENABLE_COP       = 1,
     ENABLE_TOAU      = 1,
     ENABLE_WOTG      = 1,
