@@ -3200,7 +3200,7 @@ INSERT INTO `mob_skills` VALUES (3172,279,'stalking_prey',1,18.0,2000,1000,4,0,0
 -- INSERT INTO `mob_skills` VALUES (3186,434,'yaegasumi',0,7.0,2000,1500,4,0,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (3187,2931,'dragonfall',0,7.0,2000,1500,4,0,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (3188,2932,'tachi_fudo',0,7.0,2000,1500,4,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (3189,1508,'king_cobra_clamp',0,7.0,2000,1500,4,0,0,0,0,0,0); -- Nanaa Mihgo
+INSERT INTO `mob_skills` VALUES (3189,1508,'king_cobra_clamp',1,7.0,2000,1500,4,0,0,0,12,10,0); -- Nanaa Mihgo
 -- INSERT INTO `mob_skills` VALUES (3190,2934,'red_lotus_blade',0,7.0,2000,1500,4,0,0,0,3,6,0);
 -- INSERT INTO `mob_skills` VALUES (3191,2935,'spirits_within',0,7.0,2000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (3192,681,'vorpal_blade',0,7.0,2000,1500,4,0,0,0,4,8,0); -- Trion
