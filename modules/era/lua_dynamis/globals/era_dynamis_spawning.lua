@@ -1762,7 +1762,7 @@ xi.dynamis.nmDynamicSpawn = function(mobIndex, oMobIndex, forceLink, zoneID, tar
 
             ["mixins"] = {   },
         },
-        ["Buburimu Dwagon"] =
+        ["Buburimu Dragon"] =
         {
             ["onMobSpawn"] = { function(mob)
                 xi.dynamis.onSpawnNoAuto(mob)
@@ -1772,11 +1772,11 @@ xi.dynamis.nmDynamicSpawn = function(mobIndex, oMobIndex, forceLink, zoneID, tar
             end },
 
             ["onMobFight"] = { function(mob, mobTarget)
-                xi.dynamis.onFightDwagon(mob, mobTarget)
+                xi.dynamis.onFightDragon(mob, mobTarget)
             end },
 
             ["onMobRoam"] = { function(mob)
-                xi.dynamis.onRoamDwagon(mob)
+                xi.dynamis.onRoamDragon(mob)
             end },
 
             ["onMobMagicPrepare"] = { function(mob, mobTarget, spellId)
