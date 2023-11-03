@@ -6,7 +6,7 @@
 local entity = {}
 
 entity.onMobSpawn = function(mob)
-    mob:setMobSkillAttack(412)
+    mob:setMobSkillAttack(4049)
 end
 
 entity.onMobDeath = function(mob, player, optParams)
