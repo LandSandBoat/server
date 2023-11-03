@@ -65,11 +65,10 @@ CPMAddPackage(
     GIT_TAG v1.12.0
 ) # defines: spdlog
 
-# NOTE: Using the 'release-2.0' branch
 CPMAddPackage(
     NAME recastnavigation
     GITHUB_REPOSITORY recastnavigation/recastnavigation
-    GIT_TAG 67c36bda750f36b2b4152db57a23170ed7a0683c
+    GIT_TAG cd898904b72a300011fbb24d578620bafa08ef2c
     OPTIONS
         "RECASTNAVIGATION_DEMO OFF"
         "RECASTNAVIGATION_TESTS OFF"
