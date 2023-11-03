@@ -33,20 +33,20 @@ xi.job_utils.red_mage.useComposure = function(player, target, ability)
 end
 
 xi.job_utils.red_mage.useConvert = function(player, target, ability)
-    local playerMP = player:getMP()
-    local playerHP = player:getHP()
-    local jpValue  = player:getJobPointLevel(xi.jp.CONVERT_EFFECT)
+    local playerMP    = player:getMP()
+    local playerHP    = player:getHP()
+    local playerMaxHP = player:getMaxHP()
 
-    if playerMP > 0 then
-        -- Murgleis sword augments Convert
-        if
-            player:getMod(xi.mod.AUGMENTS_CONVERT) > 0 and
-            playerHP > player:getMaxHP() / 2
-        then
-            playerHP = playerHP * player:getMod(xi.mod.AUGMENTS_CONVERT)
-        end
+    -- HP bonuses
+    local jpExtraHP       = math.floor(playerMaxHP * player:getJobPointLevel(xi.jp.CONVERT_EFFECT) / 100)
+    local murgleisExtraHP = 0
 
-        player:setHP(playerMP + (playerHP * (jpValue * 0.01)))
+    if player:getMod(xi.mod.AUGMENTS_CONVERT) > 0 then
+        murgleisExtraHP = math.floor(playerMaxHP * player:getMod(xi.mod.AUGMENTS_CONVERT) / 100)
+    end
+
+    if playerMP > 0 then -- Safety check, not really needed.
+        player:setHP(playerMP + jpExtraHP + murgleisExtraHP)
         player:setMP(playerHP)
     end
 end
