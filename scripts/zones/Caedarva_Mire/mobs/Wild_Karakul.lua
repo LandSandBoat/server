@@ -4,6 +4,7 @@
 -- Note: PH for Peallaidh
 -----------------------------------
 local ID = require("scripts/zones/Caedarva_Mire/IDs")
+mixins = { require("scripts/mixins/families/karakul") }
 require("scripts/globals/mobs")
 -----------------------------------
 local entity = {}
