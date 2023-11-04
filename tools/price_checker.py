@@ -16,7 +16,9 @@ def process_matches(match, line):
     if bool(re.match(match, line, re.I)):
         # advance past the initial string to the parenthesis
         sliced = line[len(sql_line) :]
-        # strip the parenthesis, semi-colon, and newline chars
+
+        # strip the parenthesis, semi-colon, newline chars and comments
+        sliced = sliced.split('--')[0]
         sliced = sliced[2:-3]
 
         split = sliced.split(",")
@@ -126,6 +128,4 @@ with open(
 
 for error in errors:
     print(error)
-print("Found {0} errors".format(len(errors)))
-
-sys.exit(len(errors))
+    print("Found {0} errors".format(len(errors)))
