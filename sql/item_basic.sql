@@ -10059,7 +10059,7 @@ INSERT INTO `item_basic` VALUES (12720,0,'gloves','gloves',1,2084,19,0,303);
 INSERT INTO `item_basic` VALUES (12721,0,'cotton_gloves','cotton_gloves',1,2084,19,0,372);
 INSERT INTO `item_basic` VALUES (12722,0,'bracers','bracers',1,2084,19,0,315);
 INSERT INTO `item_basic` VALUES (12723,0,'wool_bracers','wool_bracers',1,2084,19,0,3440);
-INSERT INTO `item_basic` VALUES (12724,0,'battle_bracers','battle_bracers',1,2084,19,0,1); -- TODO: Replace with actual value
+INSERT INTO `item_basic` VALUES (12724,0,'battle_bracers','battle_bracers',1,2084,19,0,4207);
 INSERT INTO `item_basic` VALUES (12725,0,'war_gloves','war_gloves',1,2084,19,0,6140);
 INSERT INTO `item_basic` VALUES (12726,0,'mercenary_captains_gloves','mrc.cpt._gloves',1,2084,19,0,1634);
 INSERT INTO `item_basic` VALUES (12727,0,'engineers_gloves','engineers_gloves',1,26704,0,0,3179);
@@ -10675,7 +10675,7 @@ INSERT INTO `item_basic` VALUES (13339,0,'goshenite_earring','goshenite_earring'
 INSERT INTO `item_basic` VALUES (13340,0,'ametrine_earring','ametrine_earring',1,2084,24,0,1253);
 INSERT INTO `item_basic` VALUES (13341,0,'turquoise_earring','turquoise_earring',1,2084,24,0,1253);
 INSERT INTO `item_basic` VALUES (13342,0,'sphene_earring','sphene_earring',1,2084,24,0,1253);
-INSERT INTO `item_basic` VALUES (13343,0,'green_earring','green_earring',1,2084,24,0,1981);
+INSERT INTO `item_basic` VALUES (13343,0,'green_earring','green_earring',1,2084,24,0,2062);
 INSERT INTO `item_basic` VALUES (13344,0,'sun_earring','sun_earring',1,2084,24,0,1981);
 INSERT INTO `item_basic` VALUES (13345,0,'zircon_earring','zircon_earring',1,2084,24,0,1981);
 INSERT INTO `item_basic` VALUES (13346,0,'purple_earring','purple_earring',1,2084,24,0,1981);
