@@ -17,9 +17,18 @@ effectObject.onEffectGain = function(target, effect)
         effect:setSubPower(subPower)
     end
 
-    for i = xi.mod.SLASH_SDT, xi.mod.DARK_SDT do
-        target:addMod(i, power)
-    end
+    target:addMod(xi.mod.SLASH_SDT, power)
+    target:addMod(xi.mod.PIERCE_SDT, power)
+    target:addMod(xi.mod.IMPACT_SDT, power)
+    target:addMod(xi.mod.HTH_SDT, power)
+    target:addMod(xi.mod.FIRE_SDT, power)
+    target:addMod(xi.mod.ICE_SDT, power)
+    target:addMod(xi.mod.WIND_SDT, power)
+    target:addMod(xi.mod.EARTH_SDT, power)
+    target:addMod(xi.mod.THUNDER_SDT, power)
+    target:addMod(xi.mod.WATER_SDT, power)
+    target:addMod(xi.mod.LIGHT_SDT, power)
+    target:addMod(xi.mod.DARK_SDT, power)
 end
 
 effectObject.onEffectTick = function(target, effect)
@@ -37,9 +46,18 @@ effectObject.onEffectLose = function(target, effect)
         target:delMod(xi.mod.FASTCAST, subPower)
     end
 
-    for i = xi.mod.SLASH_SDT, xi.mod.DARK_SDT do
-        target:delMod(i, power)
-    end
+    target:delMod(xi.mod.SLASH_SDT, power)
+    target:delMod(xi.mod.PIERCE_SDT, power)
+    target:delMod(xi.mod.IMPACT_SDT, power)
+    target:delMod(xi.mod.HTH_SDT, power)
+    target:delMod(xi.mod.FIRE_SDT, power)
+    target:delMod(xi.mod.ICE_SDT, power)
+    target:delMod(xi.mod.WIND_SDT, power)
+    target:delMod(xi.mod.EARTH_SDT, power)
+    target:delMod(xi.mod.THUNDER_SDT, power)
+    target:delMod(xi.mod.WATER_SDT, power)
+    target:delMod(xi.mod.LIGHT_SDT, power)
+    target:delMod(xi.mod.DARK_SDT, power)
 end
 
 return effectObject
