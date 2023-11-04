@@ -162,6 +162,9 @@ jobs:
             fi
           fi
         done
+
+        python3 tools/price_checker.py >> sql_checks.txt
+
         cat sql_checks.txt
         if [ -s sql_checks.txt ]
         then
