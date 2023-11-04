@@ -34,42 +34,42 @@ public:
 
     CCharEntity* GetCharByName(const std::string& name); // finds the player if exists in zone
     CCharEntity* GetCharByID(uint32 id);
-    CBaseEntity* GetEntity(uint16 targid, uint8 filter = -1); // получаем указатель на любую сущность в зоне
+    CBaseEntity* GetEntity(uint16 targid, uint8 filter = -1); // get a pointer to any entity in the zone
 
     void UpdateCharPacket(CCharEntity* PChar, ENTITYUPDATE type, uint8 updatemask);
     void UpdateEntityPacket(CBaseEntity* PEntity, ENTITYUPDATE type, uint8 updatemask, bool alwaysInclude = false);
 
-    void SpawnPCs(CCharEntity* PChar);  // отображаем персонажей в зоне
-    void SpawnMOBs(CCharEntity* PChar); // отображаем MOBs в зоне
-    void SpawnPETs(CCharEntity* PChar); // отображаем PETs в зоне
-    void SpawnNPCs(CCharEntity* PChar); // отображаем NPCs в зоне
+    void SpawnPCs(CCharEntity* PChar);
+    void SpawnMOBs(CCharEntity* PChar);
+    void SpawnPETs(CCharEntity* PChar);
+    void SpawnNPCs(CCharEntity* PChar);
     void SpawnTRUSTs(CCharEntity* PChar);
-    void SpawnMoogle(CCharEntity* PChar);    // отображаем Moogle в MogHouse
-    void SpawnTransport(CCharEntity* PChar); // отображаем транспорт
+    void SpawnMoogle(CCharEntity* PChar);    // display Moogle in MogHouse in zone
+    void SpawnTransport(CCharEntity* PChar); // display ship/boat in zone
     void DespawnPC(CCharEntity* PChar);
     void SavePlayTime();
 
-    void WideScan(CCharEntity* PChar, uint16 radius); // сканирование местности с заданным радиусом
+    void WideScan(CCharEntity* PChar, uint16 radius);
 
-    void DecreaseZoneCounter(CCharEntity* PChar); // добавляем персонажа в зону
+    void DecreaseZoneCounter(CCharEntity* PChar); // add a character to the zone
 
     void InsertAlly(CBaseEntity* PMob);
     void InsertPC(CCharEntity* PChar);
-    void InsertNPC(CBaseEntity* PNpc); // добавляем в зону npc
-    void InsertMOB(CBaseEntity* PMob); // добавляем в зону mob
-    void InsertPET(CBaseEntity* PPet); // добавляем в зону pet
+    void InsertNPC(CBaseEntity* PNpc);
+    void InsertMOB(CBaseEntity* PMob);
+    void InsertPET(CBaseEntity* PPet);
     void InsertTRUST(CBaseEntity* PTrust);
-    void DeletePET(CBaseEntity* PPet); // derefs the pet's ID from this zone
+    void DeletePET(CBaseEntity* PPet);
     void DeleteTRUST(CBaseEntity* PTrust);
 
-    void FindPartyForMob(CBaseEntity* PEntity);         // ищем группу для монстра
-    void TransportDepart(uint16 boundary, uint16 zone); // транспотр отправляется, необходимо собрать пассажиров
+    void FindPartyForMob(CBaseEntity* PEntity);         // looking for a party for the monster
+    void TransportDepart(uint16 boundary, uint16 zone); // ship/boat is leaving, passengers need to be collected
 
-    void TOTDChange(TIMETYPE TOTD); // обработка реакции мира на смену времени суток
+    void TOTDChange(TIMETYPE TOTD); // process the world's reactions to changing time of day
     void WeatherChange(WEATHER weather);
     void MusicChange(uint8 BlockID, uint8 MusicTrackID);
 
-    void PushPacket(CBaseEntity*, GLOBAL_MESSAGE_TYPE, CBasicPacket*); // отправляем глобальный пакет в пределах зоны
+    void PushPacket(CBaseEntity*, GLOBAL_MESSAGE_TYPE, CBasicPacket*); // send a global package within the zone
 
     void ZoneServer(time_point tick);
 
@@ -83,16 +83,16 @@ public:
     void   AssignDynamicTargIDandLongID(CBaseEntity* PEntity);
 
     EntityList_t m_allyList;
-    EntityList_t m_mobList; // список всех MOBs в зоне
-    EntityList_t m_petList; // список всех PETs в зоне
+    EntityList_t m_mobList;
+    EntityList_t m_petList;
     EntityList_t m_trustList;
-    EntityList_t m_npcList;  // список всех NPCs в зоне
-    EntityList_t m_charList; // список всех PCs  в зоне
+    EntityList_t m_npcList;
+    EntityList_t m_charList;
 
-    std::set<uint16> charTargIds;    // Sorted set of targids for characters
-    std::set<uint16> dynamicTargIds; // Sorted set of targids for dynamic entities
+    std::set<uint16> charTargIds;    // sorted set of targids for characters
+    std::set<uint16> dynamicTargIds; // sorted set of targids for dynamic entities
 
-    std::vector<std::pair<uint16, time_point>> dynamicTargIdsToDelete; // List of targids pending deletion at a later date
+    std::vector<std::pair<uint16, time_point>> dynamicTargIdsToDelete; // list of targids pending deletion at a later date
 
     CZoneEntities(CZone*);
     ~CZoneEntities();
