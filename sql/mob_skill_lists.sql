@@ -3857,7 +3857,9 @@ INSERT INTO `mob_skill_lists` VALUES ('Fahrafahr_the_Bloodied',1198,2083); -- dr
 
 INSERT INTO `mob_skill_lists` VALUES ('Emela-ntouka',1099,368); -- blockhead
 
--- Next available ID: 2000
+INSERT INTO `mob_skill_lists` VALUES ('Flockbock',2000,269); -- petribreath
+
+-- Next available ID: 2001
 
 -- ------------------------------------------------------------
 -- Start of Ambuscade section

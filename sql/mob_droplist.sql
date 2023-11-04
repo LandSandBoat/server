@@ -26781,6 +26781,9 @@ INSERT INTO `mob_droplist` VALUES (3286,0,0,1000,19234,@VCOMMON); -- Lyft Hexagu
 INSERT INTO `mob_droplist` VALUES (3287,0,0,1000,2815,@UNCOMMON); -- Aptant of arkhe (Uncommon, 10%)
 INSERT INTO `mob_droplist` VALUES (3287,0,0,1000,2818,@COMMON);   -- Aptant of ishis (Common, 15%)
 
+-- ZoneID: 24 - Flockbock
+INSERT INTO `mob_droplist` VALUES (3288,0,0,1000,2836,@UNCOMMON); -- Woolly Pelage (Uncommon, 10%)
+
 /*!40000 ALTER TABLE `mob_droplist` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
