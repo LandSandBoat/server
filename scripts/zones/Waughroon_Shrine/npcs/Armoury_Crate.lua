@@ -286,10 +286,11 @@ local loot =
     [76] =
     {
         {
-            { itemid = 3343, droprate = 1000 }, -- Blue Pondweed
+            { itemid = 3344, droprate = 1000 }, -- Red Pondweed
         },
 
         {
+            { itemid = 17738, droprate =  50 }, -- Hauteclaire (custom drop)
             { itemid = 18047, droprate = 188 }, -- Havoc Scythe
             { itemid = 17939, droprate =  27 }, -- Kriegsbeil
             { itemid = 17937, droprate = 170 }, -- Leopard Axe
@@ -439,9 +440,10 @@ local loot =
             { itemid = xi.item.STEEL_INGOT,          droprate = 238 },
         },
         {
-            { itemid = xi.item.SCROLL_OF_REFRESH,     droprate = 263 },
+
+            { itemid = xi.item.SCROLL_OF_REFRESH,     droprate = 333 },
             { itemid = xi.item.SCROLL_OF_ICE_SPIKES,  droprate = 246 },
-            { itemid = xi.item.SCROLL_OF_UTSUSEMI_NI, droprate = 177 },
+            { itemid = xi.item.SCROLL_OF_UTSUSEMI_NI, droprate = 333 },
             { itemid = xi.item.GOLD_BEASTCOIN,        droprate = 182 },
             { itemid = xi.item.MYTHRIL_BEASTCOIN,     droprate = 133 },
             { itemid = xi.item.PERIDOT,               droprate =  27 },
@@ -586,13 +588,84 @@ local loot =
         },
     },
 
+        -- KSNM Copycat
+    [80] =
+    {
+        {
+            { itemid =   655, droprate = 1000 }, -- Adaman Ingot
+        },
+        {
+            { itemid =  1474, droprate = 1000 }, -- Infinity Core (custom drop)
+        },
+        {
+            { itemid =   557, droprate =  250 }, -- Ahriman Lens
+            { itemid =   935, droprate =  250 }, -- Ahriman Wing
+            { itemid = 19025, droprate =   50 }, -- Pole Grip
+            { itemid = 19024, droprate =   15 }, -- Sword Strap
+            { itemid = 19026, droprate =  250 }, -- Spear Strap
+        },
+        {
+            { itemid = 17275, droprate =  250 }, -- Coffinmaker
+            { itemid = 17509, droprate =  250 }, -- Destroyers
+            { itemid = 17207, droprate =  250 }, -- Expunger
+            { itemid = 17944, droprate =  250 }, -- Retributor
+        },
+        {
+            { itemid = 14762, droprate =  250 }, -- Atillas Earring
+            { itemid = 17700, droprate =  250 }, -- Durandal
+            { itemid = 18006, droprate =  250 }, -- Hoplites Harpe
+            { itemid = 17842, droprate =  250 }, -- Sorrowful Harpe
+        },
+        {
+            { itemid = 15327, droprate =  550 }, -- Fuma Sune-ate
+            { itemid =   646, droprate =  200 }, -- Chunk of Adaman Ore
+            { itemid =   747, droprate =  250 }, -- Orichalcum Ingot
+        },
+        {
+            { itemid =   887, droprate =   50 }, -- Coral Fragment
+            { itemid =   645, droprate =   50 }, -- Chunk of Darksteel Ore
+            { itemid =   902, droprate =   50 }, -- Demon Horn
+            { itemid =   702, droprate =   50 }, -- Ebony Log
+            { itemid =   737, droprate =   50 }, -- Chunk of Gold Ore
+            { itemid =   823, droprate =   50 }, -- Spool of Gold Thread
+            { itemid =  4173, droprate =   50 }, -- Hi-Reraiser
+            { itemid =   738, droprate =   50 }, -- Chunk of Platinum Ore
+            { itemid =   700, droprate =   50 }, -- Mahogany Log
+            { itemid =   837, droprate =   50 }, -- Spool of Malboro Fiber
+            { itemid =   644, droprate =   50 }, -- Chunk of Mythril Ore
+            { itemid =   703, droprate =   50 }, -- Petrified Log
+            { itemid =   830, droprate =   50 }, -- Square of Rainbow Cloth
+            { itemid =   895, droprate =   50 }, -- Ram Horn
+            { itemid =  1132, droprate =   50 }, -- Square of Raxa
+            { itemid =  4172, droprate =   50 }, -- Reraiser
+            { itemid =  4174, droprate =   50 }, -- Vile Elixier
+            { itemid =  4175, droprate =   50 }, -- Vile Elixir +1
+            { itemid =  2142, droprate =   50 }, -- Wailing Ram Horn
+            { itemid =  866,  droprate =   50 }, -- Handful of Wyvern Scales
+            { itemid =  942,  droprate =   50 }, -- Philosophers Stone
+        },
+        {
+            { itemid = 1110,  droprate =   50 }, -- Vial of Black Beetle Blood
+            { itemid =  836,  droprate =   50 }, -- Square of Damascene Cloth
+            { itemid =  658,  droprate =   50 }, -- Damascus Ingot
+            { itemid =  837,  droprate =   50 }, -- Spool of Malboro Fiber
+            { itemid =  942,  droprate =  300 }, -- Philosophers Stone
+            { itemid =  844,  droprate =  300 }, -- Phoenix Feather
+            { itemid =  1132, droprate =  200 }, -- Square of Raxa
+        },
+    },
+
     -- KSNM Operation Desert Swarm
     [81] =
     {
         {
-            { itemid =  1473, droprate = 813 }, -- High-quality Scorpion Shell
-            { itemid = 13552, droprate =  55 }, -- Serket Ring
-            { itemid =   901, droprate = 123 }, -- Venomous Claw
+            { itemid =  1474, droprate = 1000 }, -- Infinity Core (custom drop)
+        },
+
+        {
+            { itemid =  1473, droprate =  813 }, -- High-quality Scorpion Shell
+            { itemid = 13552, droprate =   55 }, -- Serket Ring
+            { itemid =   901, droprate =  123 }, -- Venomous Claw
         },
 
         {
@@ -612,6 +685,7 @@ local loot =
         },
 
         {
+            { itemid = 11287, droprate =  50 }, -- Antares Harness (custom drop)
             { itemid = 15295, droprate = 287 }, -- Hierarch Belt
             { itemid = 12407, droprate = 216 }, -- Palmerins Shield
             { itemid = 14871, droprate = 198 }, -- Trainers Gloves
