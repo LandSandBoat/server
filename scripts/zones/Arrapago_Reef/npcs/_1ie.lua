@@ -12,7 +12,7 @@ entity.onTrade = function(player, npc, trade)
         if npcUtil.tradeHas(trade, xi.item.LAMIAN_FANG_KEY) then
             npc:openDoor()
             player:messageSpecial(ID.text.KEY_BREAKS, xi.item.LAMIAN_FANG_KEY)
-            player:confirmTrade()
+            player:tradeComplete()
         elseif
             npcUtil.tradeHas(trade, xi.item.SET_OF_THIEFS_TOOLS) and
             player:getMainJob() == xi.job.THF
