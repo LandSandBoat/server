@@ -652,7 +652,7 @@ INSERT INTO `guild_shops` VALUES (5272,13333,1186,1238,20,0,20);     -- amethyst
 INSERT INTO `guild_shops` VALUES (5272,13334,1186,1238,20,0,20);     -- lapis_laz._earring
 INSERT INTO `guild_shops` VALUES (5272,13340,12880,12880,20,0,10);   -- ametrine_earring
 INSERT INTO `guild_shops` VALUES (5272,13342,12250,12250,20,0,10);   -- sphene_earring
-INSERT INTO `guild_shops` VALUES (5272,13343,1775,5000,20,0,10);     -- green_earring
+INSERT INTO `guild_shops` VALUES (5272,13343,1987,5000,20,0,10);     -- green_earring
 INSERT INTO `guild_shops` VALUES (5272,13344,1987,5000,20,0,10);     -- sun_earring
 INSERT INTO `guild_shops` VALUES (5272,13454,72,179,20,0,20);        -- copper_ring
 INSERT INTO `guild_shops` VALUES (5272,13468,1875,2400,20,0,15);     -- tourmaline_ring
