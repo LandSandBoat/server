@@ -26777,6 +26777,10 @@ INSERT INTO `mob_droplist` VALUES (3285,0,0,1000,18768,@COMMON); -- Poppet Katar
 -- ZoneID:  65 - Firedance Magmaal Ja
 INSERT INTO `mob_droplist` VALUES (3286,0,0,1000,19234,@VCOMMON); -- Lyft Hexagun (Very common, 24%)
 
+-- ZoneID:  61 - Chary Apkallu
+INSERT INTO `mob_droplist` VALUES (3287,0,0,1000,2815,@UNCOMMON); -- Aptant of arkhe (Uncommon, 10%)
+INSERT INTO `mob_droplist` VALUES (3287,0,0,1000,2818,@COMMON);   -- Aptant of ishis (Common, 15%)
+
 /*!40000 ALTER TABLE `mob_droplist` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
