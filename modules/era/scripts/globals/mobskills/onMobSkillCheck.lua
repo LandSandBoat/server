@@ -963,6 +963,7 @@ m:addOverride("xi.globals.mobskills.chainspell.onMobSkillCheck", function(target
 end)
 
 m:addOverride("xi.globals.mobskills.chains_of_apathy.onMobSkillCheck", function(target, mob, skill)
+    local ID = require("scripts/zones/Empyreal_Paradox/IDs")
     local targets = mob:getEnmityList()
     for i, v in pairs(targets) do
         if v.entity:isPC() then
@@ -981,6 +982,7 @@ m:addOverride("xi.globals.mobskills.chains_of_apathy.onMobSkillCheck", function(
 end)
 
 m:addOverride("xi.globals.mobskills.chains_of_arrogance.onMobSkillCheck", function(target, mob, skill)
+    local ID = require("scripts/zones/Empyreal_Paradox/IDs")
     local targets = mob:getEnmityList()
     for i, v in pairs(targets) do
         if v.entity:isPC() then
@@ -999,6 +1001,7 @@ m:addOverride("xi.globals.mobskills.chains_of_arrogance.onMobSkillCheck", functi
 end)
 
 m:addOverride("xi.globals.mobskills.chains_of_cowardice.onMobSkillCheck", function(target, mob, skill)
+    local ID = require("scripts/zones/Empyreal_Paradox/IDs")
     local targets = mob:getEnmityList()
     for i, v in pairs(targets) do
         if v.entity:isPC() then
@@ -1017,6 +1020,7 @@ m:addOverride("xi.globals.mobskills.chains_of_cowardice.onMobSkillCheck", functi
 end)
 
 m:addOverride("xi.globals.mobskills.chains_of_envy.onMobSkillCheck", function(target, mob, skill)
+    local ID = require("scripts/zones/Empyreal_Paradox/IDs")
     local targets = mob:getEnmityList()
     for i, v in pairs(targets) do
         if v.entity:isPC() then
@@ -1035,6 +1039,7 @@ m:addOverride("xi.globals.mobskills.chains_of_envy.onMobSkillCheck", function(ta
 end)
 
 m:addOverride("xi.globals.mobskills.chains_of_rage.onMobSkillCheck", function(target, mob, skill)
+    local ID = require("scripts/zones/Empyreal_Paradox/IDs")
     local targets = mob:getEnmityList()
     for i, v in pairs(targets) do
         if v.entity:isPC() then

@@ -8,7 +8,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if player:setCharVar("theLostCardianVar") > 1 then
+    if player:getCharVar("theLostCardianVar") > 1 then
         player:startEvent(77)
     else
         player:startEvent(78)

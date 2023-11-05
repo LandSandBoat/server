@@ -52,7 +52,11 @@ entity.onMobSpawn = function(mob)
     mob:setMobAbilityEnabled(true)
 
     mob:addListener("TAKE_DAMAGE", "RUNNER_TAKE_DAMAGE", function(mobArg, amount, attacker, attackType, damageType)
-        if amount > 0 and not attacker:isPet() then
+        if
+            amount > 0 and
+            attacker and
+            not attacker:isPet()
+        then
             mobArg:setLocalVar("currHits", mobArg:getLocalVar("currHits") + 1)
         end
 

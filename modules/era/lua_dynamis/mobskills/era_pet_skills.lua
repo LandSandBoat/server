@@ -20,7 +20,10 @@ xi.dynamis.onFightApocDRG = function(mob, target)
         DespawnMob(mob:getID())
     end
 
-    if mob:getMaster() and (os.time() >= mob:getMaster():getLocalVar("next2hrTime")) then
+    if
+        mob:getMaster() and
+        (os.time() >= mob:getMaster():getLocalVar("next2hrTime"))
+    then
         DespawnMob(mob:getID())
     end
 end
@@ -34,7 +37,10 @@ xi.dynamis.onRoamApocDRG = function(mob)
         mob:updateEnmity(mob:getMaster():getTarget())
     end
 
-    if mob:getMaster() and (os.time() >= mob:getMaster():getLocalVar("next2hrTime")) then
+    if
+        mob:getMaster() and
+        (os.time() >= mob:getMaster():getLocalVar("next2hrTime"))
+    then
         DespawnMob(mob:getID())
     end
 end
@@ -55,8 +61,9 @@ xi.dynamis.onRoamMultiPet = function(mob)
 end
 
 xi.dynamis.onPetDeath = function(mob)
-    if mob:getMaster():getMainJob() == xi.job.BST then
-        mob:getMaster():setLocalVar("[jobSpecial]ability_", 710)
+    local master = mob:getMaster()
+    if master and master:getMainJob() == xi.job.BST then
+        master:setLocalVar("[jobSpecial]ability_", 710)
     end
 end
 

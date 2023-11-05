@@ -85,9 +85,11 @@ xi.dynamis.onSpawnFairy = function(mob)
     xi.dynamis.onSpawnNoAuto(mob)
 end
 
-xi.dynamis.onFightMorbol = function(mob, target)
-    local cirrateID = mob:getLocalVar("ParentID")
-    mob:setSpeed(GetMobByID(cirrateID):getSpeed())
+xi.dynamis.onEngageMorbol = function(mob, target)
+    local cirrate = GetMobByID(mob:getLocalVar("ParentID"))
+    if cirrate then
+        mob:setSpeed(cirrate:getSpeed())
+    end
 end
 
 xi.dynamis.onEngagedCirrate = function(mob, target)

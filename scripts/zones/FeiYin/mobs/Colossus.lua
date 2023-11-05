@@ -4,6 +4,7 @@
 -- Note: PH for Goliath
 -----------------------------------
 require("scripts/globals/regimes")
+local ID = require("scripts/zones/FeiYin/IDs")
 require("scripts/globals/mobs")
 -----------------------------------
 local entity = {}

@@ -4,6 +4,7 @@
 -- Note: PH for Mind Hoarder
 -----------------------------------
 require("scripts/globals/mobs")
+local ID = require("scripts/zones/FeiYin/IDs")
 -----------------------------------
 local entity = {}
 
