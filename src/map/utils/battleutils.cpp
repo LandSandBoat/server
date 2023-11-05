@@ -1388,30 +1388,30 @@ namespace battleutils
 
                 if (daze == EFFECT_DRAIN_DAZE && power > 0)
                 {
-                    uint16 multiplier = (uint16)(3 + (5.5f * power - 1));
+                    uint16 multiplier = (uint16)(3 + 5.5f * (power - 1));
                     int8   Samba      = xirand::GetRandomNumber(1, (delay * multiplier) / 100 + 1);
 
                     // vary damage based on lvl diff
-                    int8 lvlDiff = (PDefender->GetMLevel() - PAttacker->GetMLevel()) / 2;
+                    int8 lvlDiff = (PDefender->GetMLevel() - PAttacker->GetMLevel());
 
-                    if (lvlDiff < -5)
+                    if (lvlDiff > 0)
                     {
-                        lvlDiff = -5;
-                    }
-
-                    Samba -= lvlDiff;
-
-                    if (Samba > (finaldamage / 2))
-                    {
-                        Samba = finaldamage / 2;
+                        if (lvlDiff > 10)
+                        {
+                            lvlDiff = 10;
+                        }
+                        Samba -= ceil(Samba * lvlDiff * .04); // 4% penalty per level
                     }
 
                     if (finaldamage <= 2)
                     {
                         Samba = 0;
                     }
-
-                    if (Samba < 0)
+                    else if (Samba > (finaldamage / 2))
+                    {
+                        Samba = finaldamage / 2;
+                    }
+                    else if (Samba < 0)
                     {
                         Samba = 0;
                     }
@@ -1420,7 +1420,7 @@ namespace battleutils
                     Action->addEffectMessage = 161;
                     Action->addEffectParam   = Samba;
 
-                    PAttacker->addHP(Samba); // does not do any additional drain to targets HP, only a portion of it
+                    PAttacker->addHP(Samba); // does not do any additional damage to targets HP, only heals the attacker
 
                     if (PChar != nullptr)
                     {
@@ -1429,20 +1429,18 @@ namespace battleutils
                 }
                 else if (daze == EFFECT_ASPIR_DAZE && power > 0 && PDefender->GetMaxMP() > 0)
                 {
-                    uint16 multiplier = 1 + (2 * power - 1);
+                    uint16 multiplier = 1 + 2 * (power - 1);
                     int8   Samba      = xirand::GetRandomNumber(1, (delay * multiplier) / 100 + 1);
-
-                    if (Samba >= finaldamage / 4)
-                    {
-                        Samba = finaldamage / 4;
-                    }
 
                     if (finaldamage <= 2)
                     {
                         Samba = 0;
                     }
-
-                    if (Samba < 0)
+                    else if (Samba >= finaldamage / 4)
+                    {
+                        Samba = finaldamage / 4;
+                    }
+                    else if (Samba < 0)
                     {
                         Samba = 0;
                     }
