@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
 Copyright (c) 2023 LandSandBoat Dev Teams
@@ -41,7 +41,6 @@ bool ConquestSystem::handleMessage(HandleableMessage&& message)
         break;
         case CONQUESTMSGTYPE::CONQUEST_MAP2WORLD_ADD_INFLUENCE_POINTS:
         {
-            // const int32  points = ref<int32>(data, 2);
             int32  points = 0;
             uint32 nation = 0;
             uint8  region = 0;

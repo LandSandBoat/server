@@ -1,6 +1,5 @@
 import re
 import os
-import sys
 
 logging = False
 sql_items = dict()
