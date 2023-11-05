@@ -15,21 +15,31 @@ entity.onMobFight = function(mob, target)
     local model = mob:getLocalVar("petModel")
 
     -- Ice Maneuver (Magic automaton casts spells)
-    if fantoccini:getLocalVar("petModel") == 3 and mob:hasStatusEffect(xi.effect.ICE_MANEUVER) then
+    if
+        fantoccini:getLocalVar("petModel") == 3 and
+        mob:hasStatusEffect(xi.effect.ICE_MANEUVER)
+    then
         mob:setMobMod(xi.mobMod.SPELL_LIST, ID.jobTable[xi.job.PUP].petSpellList[model])
+        mob:setMagicCastingEnabled(true)
     else
-        mob:setMobMod(xi.mobMod.SPELL_LIST, 0)
+        mob:setMagicCastingEnabled(false)
     end
 
     -- Thunder Maneuver (Ranged automaton uses weapon skills)
-    if fantoccini:getLocalVar("petModel") == 2 and mob:hasStatusEffect(xi.effect.ICE_MANEUVER) then
+    if
+        fantoccini:getLocalVar("petModel") == 2 and
+        mob:hasStatusEffect(xi.effect.ICE_MANEUVER)
+    then
         mob:setMobMod(xi.mobMod.SKILL_LIST, ID.jobTable[xi.job.PUP].petSkillList[model])
     else
         mob:setMobMod(xi.mobMod.SKILL_LIST, 0)
     end
 
     -- Fire Maneuver (Ranged and Magic automatons use weapon skills)
-    if fantoccini:getLocalVar("petModel") ~= 2 and mob:hasStatusEffect(xi.effect.FIRE_MANEUVER) then
+    if
+        fantoccini:getLocalVar("petModel") ~= 2 and
+        mob:hasStatusEffect(xi.effect.FIRE_MANEUVER)
+    then
         mob:setMobMod(xi.mobMod.SKILL_LIST, ID.jobTable[xi.job.PUP].petSkillList[model])
     else
         mob:setMobMod(xi.mobMod.SKILL_LIST, 0)

@@ -96,8 +96,9 @@ entity.onMobFight = function(mob, target)
         mob:hasStatusEffect(xi.effect.MANAFONT)
     then
         mob:setMobMod(xi.mobMod.SPELL_LIST, ID.jobTable[mob:getMainJob()].spellListID)
+        mob:setMagicCastingEnabled(true)
     else
-        mob:setMobMod(xi.mobMod.SPELL_LIST, 0)
+        mob:setMagicCastingEnabled(false)
     end
 end
 
