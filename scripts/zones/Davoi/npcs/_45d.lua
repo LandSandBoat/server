@@ -25,9 +25,9 @@ end
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 42 and option == 0 then
         player:messageSpecial(ID.text.POWER_OF_THE_ORB_ALLOW_PASS)
-        npc:openDoor(20)
 
-        -- Animation for the "door" being open
+        -- Animation for the "door" being open.
+        -- NOTE: npc:openDoor sends a different animation packet and doesn't work.
         npc:setAnimation(8)
         npc:timer(1000 * 20, function(npcArg)
             npcArg:setAnimation(9)
