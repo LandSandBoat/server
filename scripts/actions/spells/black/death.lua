@@ -6,7 +6,7 @@
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)
-    spell:addEffectFlag(xi.magic.spellFlag.IGNORE_SHADOWS)
+    spell:setFlag(xi.magic.spellFlag.IGNORE_SHADOWS)
     return 0
 end
 

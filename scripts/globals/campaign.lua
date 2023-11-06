@@ -1,298 +1,419 @@
 -----------------------------------
--- Campaign global
------------------------------------
-require('scripts/globals/teleports')
+-- Campaign Global
 -----------------------------------
 xi = xi or {}
 xi.campaign = {}
 
 xi.campaign.control =
 {
-    Sandoria = 2,
-    Bastok   = 4,
-    Windurst = 6,
-    Beastman = 8,
+    SANDORIA = 2,
+    BASTOK   = 4,
+    WINDURST = 6,
+    BEASTMEN = 8,
 }
 
 xi.campaign.union =
 {
-    Adder  = 1,
-    Bison  = 2,
-    Coyote = 3,
-    Dhole  = 4,
-    Eland  = 5,
+    ADDER  = 1,
+    BISON  = 2,
+    COYOTE = 3,
+    DHOLE  = 4,
+    ELAND  = 5,
 }
 
 xi.campaign.army =
 {
-    Sandoria = 0,
-    Bastok   = 1,
-    Windurst = 2,
-    Orcish   = 3,
-    Quadav   = 4,
-    Yagudo   = 5,
-    Kindred  = 6,
+    SANDORIA = 0,
+    BASTOK   = 1,
+    WINDURST = 2,
+    ORCISH   = 3,
+    QUADAV   = 4,
+    YAGUDO   = 5,
+    KINDRED  = 6,
 }
 
-xi.campaign.zone =
+-- First nibble: 2, Second Nibble: Page, rshift 8: entry
+local noteRewardItems =
 {
-    SouthernSandOria     = 80,
-    EastRonfaure         = 81,
-    JugnerForest         = 82,
-    VunkerlInlet         = 83,
-    BatalliaDowns        = 84,
-    LaVaule              = 85,
-    TheEldiemeNecropolis = 175,
-    BastokMarkets        = 87,
-    NorthGustaberg       = 88,
-    Grauberg             = 89,
-    PashhowMarshlands    = 90,
-    RolanberryFields     = 91,
-    Beadeaux             = 92,
-    CrawlersNest         = 171,
-    WindurstWaters       = 94,
-    WestSarutabaruta     = 95,
-    FortKarugoNarugo     = 96,
-    MeriphataudMountains = 97,
-    SauromugueChampaign  = 98,
-    CastleOztroja        = 99,
-    GarlaigeCitadel      = 164,
-    BeaucedineGlacier    = 136,
-    Xarcabard            = 137,
-    CastleZvahlBaileys   = 138,
-    CastleZvahlKeep      = 155,
-    ThroneRoom           = 156,
+    [xi.zone.SOUTHERN_SAN_DORIA_S] =
+    {
+        [0] = -- Common
+        {
+            -- BitPos = { itemId, basePrice (allied), isAdjusted },
+            [0] = { xi.item.SPRINTERS_SHOES,                  980, false },
+            [1] = { xi.item.SCROLL_OF_INSTANT_RETRACE,         10, false },
+            [2] = { xi.item.IRON_RAM_JACK_COAT,              1000, true  },
+            [3] = { xi.item.PILGRIM_TUNICA,                  1000, true  },
+            [4] = { xi.item.IRON_RAM_SHIELD,                 3000, true  },
+            [5] = { xi.item.RECALL_RING_JUGNER,              5000, false },
+            [6] = { xi.item.RECALL_RING_PASHHOW,             5000, false },
+            [7] = { xi.item.RECALL_RING_MERIPHATAUD,         5000, false },
+            [8] = { xi.item.CIPHER_OF_VALAINERALS_ALTER_EGO, 2000, false },
+            [9] = { xi.item.CIPHER_OF_ADELHEIDS_ALTER_EGO,   2000, false },
+        },
+
+        [1] = -- Stars of Service
+        {
+            [0] = { xi.item.IRON_RAM_CHAINMAIL, 10000, true },
+            [1] = { xi.item.IRON_RAM_MUFFLERS,   7000, true },
+            [2] = { xi.item.IRON_RAM_SOLLERETS,  7000, true },
+            [3] = { xi.item.IRON_RAM_HELM,       7000, true },
+            [4] = { xi.item.IRON_RAM_BREECHES,   7000, true },
+        },
+
+        [2] = -- Emblems of Service
+        {
+            [0] = { xi.item.IRON_RAM_HORN,     20000, true },
+            [1] = { xi.item.IRON_RAM_LANCE,    20000, true },
+            [2] = { xi.item.IRON_RAM_PICK,     20000, true },
+            [3] = { xi.item.IRON_RAM_SALLET,   40000, true },
+            [4] = { xi.item.IRON_RAM_DASTANAS, 40000, true },
+        },
+
+        [3] = -- Wings of Service
+        {
+            [0] = { xi.item.IRON_RAM_GREAVES, 50000, true },
+            [1] = { xi.item.IRON_RAM_HOSE,    50000, true },
+        },
+
+        [4] = -- Medals of Service
+        {
+            [0] = { xi.item.PATRONUS_RING,      30000, true },
+            [1] = { xi.item.FOX_EARRING,        30000, true },
+            [2] = { xi.item.TEMPLE_EARRING,     30000, true },
+            [3] = { xi.item.CRIMSON_BELT,       30000, true },
+            [4] = { xi.item.ROSE_STRAP,         30000, true },
+            [5] = { xi.item.IRON_RAM_HAUBERK,   75000, true },
+            [6] = { xi.item.ROYAL_GUARD_LIVERY, 10000, true },
+            [7] = { xi.item.ALLIED_RING,        15000, true },
+        },
+
+        [5] = -- Medals of Altana
+        {
+            [0] = { xi.item.GRIFFINCLAW,             100000, true },
+            [1] = { xi.item.ROYAL_KNIGHT_SIGIL_RING,  50000, true },
+        },
+    },
+
+    [xi.zone.BASTOK_MARKETS_S] =
+    {
+        [0] = -- Common
+        {
+            [0] = { xi.item.SPRINTERS_SHOES,                  980, false },
+            [1] = { xi.item.SCROLL_OF_INSTANT_RETRACE,         10, false },
+            [2] = { xi.item.FOURTH_DIVISION_TUNICA,          1000, true  },
+            [3] = { xi.item.PILGRIM_TUNICA,                  1000, true  },
+            [4] = { xi.item.FOURTH_DIVISION_GUN,             3000, true  },
+            [5] = { xi.item.RECALL_RING_JUGNER,              5000, false },
+            [6] = { xi.item.RECALL_RING_PASHHOW,             5000, false },
+            [7] = { xi.item.RECALL_RING_MERIPHATAUD,         5000, false },
+            [8] = { xi.item.CIPHER_OF_VALAINERALS_ALTER_EGO, 2000, false },
+            [9] = { xi.item.CIPHER_OF_ADELHEIDS_ALTER_EGO,   2000, false },
+        },
+
+        [1] = -- Stars of Service
+        {
+            [0] = { xi.item.FOURTH_DIVISION_CUIRASS,   10000, true },
+            [1] = { xi.item.FOURTH_DIVISION_GAUNTLETS,  7000, true },
+            [2] = { xi.item.FOURTH_DIVISION_SABATONS,   7000, true },
+            [3] = { xi.item.FOURTH_DIVISION_ARMET,      7000, true },
+            [4] = { xi.item.FOURTH_DIVISION_CUISSES,    7000, true },
+        },
+
+        [2] = -- Emblems of Service
+        {
+            [0] = { xi.item.FOURTH_DIVISION_TOPOROK, 20000, true },
+            [1] = { xi.item.FOURTH_DIVISION_MACE,    20000, true },
+            [2] = { xi.item.FOURTH_DIVISION_ZAGHNAL, 20000, true },
+            [3] = { xi.item.FOURTH_DIVISION_HAUBE,   40000, true },
+            [4] = { xi.item.FOURTH_DIVISION_HENTZES, 40000, true },
+        },
+
+        [3] = -- Wings of Service
+        {
+            [0] = { xi.item.FOURTH_DIVISION_SCHUHS, 50000, true },
+            [1] = { xi.item.FOURTH_DIVISION_SCHOSS, 50000, true },
+        },
+
+        [4] = -- Medals of Service
+        {
+            [0] = { xi.item.SHIELD_COLLAR,            30000, true },
+            [1] = { xi.item.STURMS_REPORT,            30000, true },
+            [2] = { xi.item.SONIAS_PLECTRUM,          30000, true },
+            [3] = { xi.item.BULL_NECKLACE,            30000, true },
+            [4] = { xi.item.ARRESTOR_MANTLE,          30000, true },
+            [5] = { xi.item.FOURTH_DIVISION_BRUNNE,   75000, true },
+            [6] = { xi.item.MYTHRIL_MUSKETEER_LIVERY, 10000, true },
+            [7] = { xi.item.ALLIED_RING,              15000, true },
+        },
+
+        [5] = -- Medals of Altana
+        {
+            [0] = { xi.item.LEX_TALIONIS,           100000, true },
+            [1] = { xi.item.FOURTH_DIVISION_MANTLE,  50000, true },
+        },
+    },
+
+    [xi.zone.WINDURST_WATERS_S] =
+    {
+        [0] = -- Common
+        {
+            [0] = { xi.item.SPRINTERS_SHOES,                  980, false },
+            [1] = { xi.item.SCROLL_OF_INSTANT_RETRACE,         10, false },
+            [2] = { xi.item.COBRA_UNIT_TUNICA,               1000, true  },
+            [3] = { xi.item.PILGRIM_TUNICA,                  1000, true  },
+            [4] = { xi.item.COBRA_UNIT_CLAYMORE,             3000, true  },
+            [5] = { xi.item.RECALL_RING_JUGNER,              5000, false },
+            [6] = { xi.item.RECALL_RING_PASHHOW,             5000, false },
+            [7] = { xi.item.RECALL_RING_MERIPHATAUD,         5000, false },
+            [8] = { xi.item.CIPHER_OF_VALAINERALS_ALTER_EGO, 2000, false },
+            [9] = { xi.item.CIPHER_OF_ADELHEIDS_ALTER_EGO,   2000, false },
+        },
+
+        [1] = -- Stars of Service
+        {
+            [0] = { xi.item.COBRA_UNIT_COAT,    10000, true },
+            [1] = { xi.item.COBRA_UNIT_CUFFS,    7000, true },
+            [2] = { xi.item.COBRA_UNIT_PIGACHES, 7000, true },
+            [3] = { xi.item.COBRA_UNIT_HAT,      7000, true },
+            [4] = { xi.item.COBRA_UNIT_SLOPS,    7000, true },
+        },
+
+        [2] = -- Emblems of Service
+        {
+            [0] = { xi.item.COBRA_UNIT_BAGHNAKHS, 20000, true },
+            [1] = { xi.item.COBRA_UNIT_KNIFE,     20000, true },
+            [2] = { xi.item.COBRA_UNIT_BOW,       20000, true },
+            [3] = { xi.item.COBRA_UNIT_CAP,       40000, true },
+            [4] = { xi.item.COBRA_UNIT_MITTENS,   40000, true },
+            [5] = { xi.item.COBRA_UNIT_CLOCHE,    40000, true },
+            [6] = { xi.item.COBRA_UNIT_GLOVES,    40000, true },
+        },
+
+        [3] = -- Wings of Service
+        {
+            [0] = { xi.item.COBRA_UNIT_LEGGINGS, 50000, true },
+            [1] = { xi.item.COBRA_UNIT_SUBLIGAR, 50000, true },
+            [2] = { xi.item.COBRA_UNIT_CRACKOWS, 50000, true },
+            [3] = { xi.item.COBRA_UNIT_TREWS,    50000, true },
+        },
+
+        [4] = -- Medals of Service
+        {
+            [0] = { xi.item.CAPRICORNIAN_ROPE,  30000, true },
+            [1] = { xi.item.EARTHY_BELT,        30000, true },
+            [2] = { xi.item.COUGAR_PENDANT,     30000, true },
+            [3] = { xi.item.CROCODILE_COLLAR,   30000, true },
+            [4] = { xi.item.ARIESIAN_GRIP,      30000, true },
+            [5] = { xi.item.COBRA_UNIT_HARNESS, 75000, true },
+            [6] = { xi.item.COBRA_UNIT_ROBE,    75000, true },
+            [7] = { xi.item.ALLIED_RING,        15000, true }
+        },
+
+        [5] = -- Medals of Altana
+        {
+            [0] = { xi.item.SAMUDRA,               100000, true },
+            [1] = { xi.item.MERCENARY_MAJOR_CHARM,  50000, true },
+        },
+    },
 }
 
------------------------------------
--- Variable for getNationTeleport and getPoint
------------------------------------
+local sigilNpcInfo =
+{
+    [xi.zone.BASTOK_MARKETS_S    ] = {  13, 2 }, -- !pos -248.5 0 81.2 87
+    [xi.zone.SOUTHERN_SAN_DORIA_S] = { 110, 1 }, -- !pos 107 1 -31 80
+    [xi.zone.WINDURST_WATERS_S   ] = {  13, 3 }, -- !pos -31.869 -6.009 226.793 94
+}
 
---[[
-ALLIED_NOTES = 11
-MAW = 4
-PAST_SANDORIA = 5
-PAST_BASTOK = 6
-PAST_WINDURST = 7
-]]
+-- There appears to be no mathematical correlation between combination of effects and their
+-- cost.  Each index in the table represents the bitmask value, and corresponding cost.
+local bonusEffectCosts =
+{
+    [ 1] = 50,
+    [ 2] = 50,
+    [ 3] = 100,
+    [ 4] = 50,
+    [ 5] = 100,
+    [ 6] = 100,
+    [ 7] = 150,
+    [ 8] = 100,
+    [ 9] = 150,
+    [10] = 150,
+    [11] = 150,
+    [12] = 100,
+    [13] = 150,
+    [14] = 150,
+    [15] = 200,
+}
 
--- -------------------------------------------------------------------
--- getMedalRank()
--- Returns the numerical Campaign Medal of the player.
--- -------------------------------------------------------------------
+-- Returns the Vanadiel time in which Sigil will expire or 0
+local function getSigilTimeStamp(player)
+    local sigilTimestamp = VanadielTime()
+    local sigilEffect    = player:getStatusEffect(xi.effect.SIGIL)
 
+    if sigilEffect then
+        sigilTimestamp = sigilTimestamp + sigilEffect:getTimeRemaining() / 1000
+    end
+
+    return sigilTimestamp
+end
+
+local function getSigilRankMask(player)
+    local rankMask = 0
+
+    -- Rank Category is separated into five groups, each with four KIs and represented as bits 0..4 in
+    -- the mask.
+    for keyItemId = xi.ki.BRONZE_RIBBON_OF_SERVICE, xi.ki.MEDAL_OF_ALTANA do
+        if player:hasKeyItem(keyItemId) then
+            utils.mask.setBit(rankMask, math.floor(keyItemId - xi.ki.BRONZE_RIBBON_OF_SERVICE) / 4, true)
+        else
+            break
+        end
+    end
+
+    -- TODO: If the nation in question (based on zone) controls Throne Room (S), then set bit 5 to allow
+    -- for purchase of Allied Ring.
+
+    return rankMask
+end
+
+local function getSigilMenuOptions(player)
+    -- Bit Values:
+    -- 0: Medal Expired (1 = Expired)
+    -- 1: Sigil state (1 = No Sigil Active)
+    -- 2: Valaineral Available (1 = Available)
+    -- 3: Adelheid Available (1 = Available)
+
+    local optionMask = xi.extravaganza.campaignActive() * 4
+
+    if not player:hasStatusEffect(xi.effect.SIGIL) then
+        optionMask = utils.mask.setBit(optionMask, 1, true)
+    end
+
+    -- TODO: Hangle Campaign Medal Active/Expired when implemented
+
+    return optionMask
+end
+
+-- TODO: Is this deprecated by the mask function?
 xi.campaign.getMedalRank = function(player)
     local rank = 0
-    -- TODO: Use xi.ki enum in this table
-    local medals =
-    {
-        924, 925, 926, 927, 928, 929, 930,
-        931, 932, 933, 934, 935, 936, 937,
-        938, 939, 940, 941, 942, 943
-    }
 
-    while player:hasKeyItem(medals[rank + 1]) do
-        rank = rank + 1
+    for keyItemId = xi.ki.BRONZE_RIBBON_OF_SERVICE, xi.ki.MEDAL_OF_ALTANA do
+        if player:hasKeyItem(keyItemId) then
+            rank = rank + 1
+        else
+            break
+        end
     end
 
     return rank
 end
 
--- -------------------------------------------------------------------
--- get[nation]NotesItem()
--- Returns the item ID and cost of the Allied Notes indexed item
--- (the same value as that used by the vendor event)
--- Format:
--- ListName_AN_item[optionID] = itemID -- ItemName
--- ListName_AN_price[optionID] = cost -- ItemName
--- -------------------------------------------------------------------
+-- Sigil NPC
+xi.campaign.sigilOnTrigger = function(player, npc)
+    local baseEvent     = sigilNpcInfo[player:getZoneID()][1]
+    local freelanceMask = 0
 
-xi.campaign.getSandOriaNotesItem = function(i)
-    local sandOriaAlliedNotesItems =
-    {
-        [2] = { id = 15754, price = 980 }, -- Sprinter's Shoes
-        [258] = { id = 5428, price = 10 }, -- Scroll of Instant Retrace
-        [514] = { id = 14584, price = 1500, adj = 1000 }, -- Iron Ram jack coat
-        [770] = { id = 14587, price = 1500, adj = 1000 }, -- Pilgrim Tunica
-        [1026] = { id = 16172, price = 4500, adj = 3000 }, -- Iron Ram Shield
-        [1282] = { id = 15841, price = 5000, adj = 5000 }, -- Recall Ring: Jugner
-        [1538] = { id = 15842, price = 5000, adj = 5000 }, -- Recall Ring: Pashow
-        [1794] = { id = 15843, price = 5000, adj = 5000 }, -- Recall Ring: Meriphataud
-        [2050] = { id = xi.item.CIPHER_OF_VALAINERALS_ALTER_EGO, price = 2000 }, -- Cipher: Valaineral
-        [2306] = { id = xi.item.CIPHER_OF_ADELHEIDS_ALTER_EGO, price = 2000 }, -- Cipher: Adelheid
-        -- Stars Service
-        [18] = { id = 14581, price = 15000, adj = 10000 }, -- Iron Ram Chainmain
-        [274] = { id = 15005, price = 10500, adj = 7000 }, -- Iron Ram Mufflers
-        [530] = { id = 15749, price = 10500, adj = 7000 }, -- Iron Ram Sollerets
-        [786] = { id = 16141, price = 10500, adj = 7000 }, -- Iron Ram Helm
-        [1042] = { id = 16312, price = 10500, adj = 7000 }, -- Iron Ram Breeches
-        -- Emblems Service
-        [34] = { id = 17853, price = 30000, adj = 20000 }, -- Iron Ram Horn
-        [290] = { id = 18074, price = 30000, adj = 20000 }, -- Iron Ram Lance
-        [546] = { id = 17958, price = 30000, adj = 20000 }, -- Iron Ram Pick
-        [802] = { id = 16146, price = 60000, adj = 40000 }, -- Iron Ram Sallet
-        [1058] = { id = 15009, price = 60000, adj = 40000 }, -- Iron Ram Dastanas
-        -- Wings Service
-        [50] = { id = 15755, price = 75000, adj = 50000 }, -- Iron Ram Greaves
-        [306] = { id = 16315, price = 75000, adj = 50000 }, -- Iron Ram Hose
-        -- Medals Service
-        [66] = { id = 15844, price = 45000, adj = 30000 }, -- Patronus Ring
-        [322] = { id = 15966, price = 45000, adj = 30000 }, -- Fox Earring
-        [578] = { id = 15961, price = 45000, adj = 30000 }, -- Temple Earring
-        [834] = { id = 15934, price = 45000, adj = 30000 }, -- Crimson Belt
-        [1090] = { id = 19041, price = 45000, adj = 30000 }, -- Rose Strap
-        [1346] = { id = 14588, price = 112500, adj = 75000 }, -- Iron Ram Hauberk
-        [1602] = { id = 11356, price = 15000, adj = 10000 }, -- Royal Guard Livery
-        [1858] = { id = 14671, price = 22500, adj = 15000 }, -- Alied ring
-        -- Medal of Altana
-        [82] = { id = 17684, price = 150000, adj = 100000 }, -- Griffinclaw
-        [338] = { id = 11636, price = 75000, adj = 50000 } -- Royal Knight Sigil Ring
-    }
-    local item = sandOriaAlliedNotesItems[i]
-    return item.id, item.price, item.adj
+    -- TODO: Update freelanceMask on implementation.  Bit 0 is required
+    -- to be true to allow for Reduced XP Loss
+
+    if xi.campaign.getMedalRank(player) == 0 then
+        player:startEvent(baseEvent + 1)
+    else
+        player:startEvent(baseEvent,
+            player:getCampaignAllegiance(),
+            player:getCurrency('allied_notes'),
+            freelanceMask,
+            getSigilMenuOptions(player),
+            getSigilRankMask(player),
+            0,
+            getSigilTimeStamp(player),
+            0
+        )
+    end
 end
 
-xi.campaign.getBastokNotesItem = function(i)
-    local bastokAlliedNotesItems =
-    {
-        [2] = { id = 15754, price = 980 }, -- Sprinter's Shoes
-        [258] = { id = 5428, price = 10 }, -- Scroll of Instant Retrace
-        [514] = { id = 14585, price = 1500, adj = 1000 }, -- Fourth Tunica
-        [770] = { id = 14587, price = 1500, adj = 1000 }, -- Pilgrim Tunica
-        [1026] = { id = 18727, price = 4500, adj = 3000 }, -- Fourth Gun
-        [1282] = { id = 15841, price = 5000 }, -- Recall Ring: Jugner
-        [1538] = { id = 15842, price = 5000 }, -- Recall Ring: Pashow
-        [1794] = { id = 15843, price = 5000 }, -- Recall Ring: Meriphataud
-        [2050] = { id = 10116, price = 2000 }, -- Cipher: Valaineral
-        [2306] = { id = 10153, price = 2000 }, -- Cipher: Adelheid
-        -- Stars Service
-        [18] = { id = 14582, price = 15000, adj = 10000 }, -- Fourth Cuirass
-        [274] = { id = 15006, price = 10500, adj = 7000 }, -- Fourth Gauntlets
-        [530] = { id = 15750, price = 10500, adj = 7000 }, -- Fourth Sabatons
-        [786] = { id = 16142, price = 10500, adj = 7000 }, -- Fourth Armet
-        [1042] = { id = 16313, price = 10500, adj = 7000 }, -- Fourth Cuisses
-        -- Emblems Service
-        [34] = { id = 18494, price = 30000, adj = 20000 }, -- Fourth Toporok
-        [290] = { id = 18854, price = 30000, adj = 20000 }, -- Fourth Mace
-        [546] = { id = 18946, price = 30000, adj = 20000 }, -- Fourth Zaghnal
-        [802] = { id = 16147, price = 60000, adj = 40000 }, -- Fourth Haube
-        [1058] = { id = 15010, price = 60000, adj = 40000 }, -- Fourth Hentzes
-        -- Wings Service
-        [50] = { id = 15756, price = 75000, adj = 50000 }, -- Fourth Schuhs
-        [306] = { id = 16316, price = 75000, adj = 50000 }, -- Fourth Schoss
-        -- Medals Service
-        [66] = { id = 16291, price = 45000, adj = 30000 }, -- Shield Collar
-        [322] = { id = 18734, price = 45000, adj = 30000 }, -- Sturm's Report
-        [578] = { id = 18735, price = 45000, adj = 30000 }, -- Sonia's Plectrum
-        [834] = { id = 16292, price = 45000, adj = 30000 }, -- Bull Necklace
-        [1090] = { id = 16258, price = 45000, adj = 30000 }, -- Arrestor Mantle
-        [1346] = { id = 14589, price = 112500, adj = 75000 }, -- Fourth Division Brunne
-        [1602] = { id = 11357, price = 15000, adj = 10000 }, -- Mythril Musketeer Livery
-        [1858] = { id = 14671, price = 22500, adj = 15000 }, -- Alied ring
-        -- Medal of Altana
-        [82] = { id = 17685, price = 150000, adj = 100000 }, -- Lex Talionis
-        [338] = { id = 11545, price = 75000, adj = 50000 } -- Fourth Mantle
-    }
-    local item = bastokAlliedNotesItems[i]
-    return item.id, item.price, item.adj
+xi.campaign.sigilOnEventUpdate = function(player, csid, option, npc)
+    local optionType   = bit.band(option, 0xF)
+
+    if
+        csid == 13 and
+        optionType == 2
+    then
+        local itemPage     = bit.band(bit.rshift(option, 4), 0xF)
+        local selectedItem = bit.rshift(option, 8)
+        local itemInfo     = noteRewardItems[player:getZoneID()][itemPage][selectedItem]
+        local canEquip     = 2
+
+        -- canEquip Values:
+        -- 0: Incorrect Job
+        -- 1: Incorrect Level
+        -- 2: Everything is in order
+        -- 3: (Or Greater) exits the menu
+
+        -- NOTE: There are some items that are not equipment, and checking reqLvl will
+        -- return 0 for non-equippable items.  There are two canEquipItem calls to simplify
+        -- needing to check types.  The first checks job requirement only, followed by
+        -- job requirement _and_ level so that the appropriate message is displayed.
+
+        if GetItemByID(itemInfo[1]):getReqLvl() > 0 then
+            if not player:canEquipItem(itemInfo[1]) then
+                canEquip = 0
+            elseif not player:canEquipItem(itemInfo[1], true) then
+                canEquip = 1
+            end
+        end
+
+        player:updateEvent(0, 0, 0, 0, 0, 0, 0, canEquip)
+    end
 end
 
-xi.campaign.getWindurstNotesItem = function(i)
-    local windurstAlliedNotesItems =
-    {
-        [2] = { id = 15754, price = 980 }, -- Sprinter's Shoes
-        [258] = { id = 5428, price = 10 }, -- Scroll of Instant Retrace
-        [514] = { id = 14586, price = 1500, adj = 1000 }, -- Cobra Tunica
-        [770] = { id = 14587, price = 1500, adj = 1000 }, -- Pilgrim Tunica
-        [1026] = { id = 19150, price = 4500, adj = 3000 }, -- Cobra CLaymore
-        [1282] = { id = 15841, price = 5000 }, -- Recall Ring: Jugner
-        [1538] = { id = 15842, price = 5000 }, -- Recall Ring: Pashow
-        [1794] = { id = 15843, price = 5000 }, -- Recall Ring: Meriphataud
-        [2050] = { id = 10116, price = 2000 }, -- Cipher: Valaineral
-        [2306] = { id = 10153, price = 2000 }, -- Cipher: Adelheid
-        -- Stars Service
-        [18] = { id = 14583, price = 15000, adj = 10000 }, -- Cobra Coat
-        [274] = { id = 15007, price = 10500, adj = 7000 }, -- Cobra Cuffs
-        [530] = { id = 15751, price = 10500, adj = 7000 }, -- Cobra Pigaches
-        [786] = { id = 16143, price = 10500, adj = 7000 }, -- Cobra Hat
-        [1042] = { id = 16314, price = 10500, adj = 7000 }, -- Cobra Slops
-        -- Emblems Service
-        [34] = { id = 18756, price = 30000, adj = 20000 }, -- Cobra Unit Baghnakhs
-        [290] = { id = 19100, price = 30000, adj = 20000 }, -- Cobra Unit Knife
-        [546] = { id = 18728, price = 30000, adj = 20000 }, -- Cobra Unit Bow
-        [802] = { id = 16148, price = 60000, adj = 40000 }, -- Cobra Unit Cap
-        [1058] = { id = 15011, price = 60000, adj = 40000 }, -- Cobra Unit Mittens
-        [1314] = { id = 16149, price = 60000, adj = 40000 }, -- Cobra Unit Cloche
-        [1570] = { id = 15012, price = 60000, adj = 40000 }, -- Cobra Unit Gloves
-        -- Wings Service
-        [50] = { id = 15757, price = 75000, adj = 50000 }, -- Cobra Unit Leggings
-        [306] = { id = 16317, price = 75000, adj = 50000 }, -- Cobra Unit Subligar
-        [562] = { id = 15758, price = 75000, adj = 50000 }, -- Cobra Unit Crackows
-        [818] = { id = 16318, price = 75000, adj = 50000 }, -- Cobra Unit Trews
-        -- Medals Service
-        [66] = { id = 15935, price = 45000, adj = 30000 }, -- Capricornian Rope
-        [322] = { id = 15936, price = 45000, adj = 30000 }, -- Earthly Belt
-        [578] = { id = 16293, price = 45000, adj = 30000 }, -- Cougar Pendant
-        [834] = { id = 16294, price = 45000, adj = 30000 }, -- Crocodile Collar
-        [1090] = { id = 19042, price = 45000, adj = 30000 }, -- Ariesian Grip
-        [1346] = { id = 14590, price = 112500, adj = 75000 }, -- Cobra Unit Harness
-        [1602] = { id = 14591, price = 15000, adj = 75000 }, -- Cobra Unit Robe
-        [1858] = { id = 14671, price = 22500, adj = 15000 }, -- Alied ring
-        -- Medal of Altana
-        [82] = { id = 17684, price = 150000, adj = 10000 }, -- Samudra
-        [338] = { id = 11636, price = 75000, adj = 50000 } -- Mercenary Major Charm
-    }
-    local item = windurstAlliedNotesItems[i]
-    return item.id, item.price, item.adj
-end
+xi.campaign.sigilOnEventFinish = function(player, csid, option, npc)
+    local zoneId = player:getZoneID()
 
--- -------------------------------------------------------------------
--- getSigilTimeStamp(player)
--- This is for the time-stamp telling player what day/time the
--- effect will last until, NOT the actual status effect duration.
--- -------------------------------------------------------------------
+    if
+        option ~= utils.EVENT_CANCELLED_OPTION and
+        csid == sigilNpcInfo[zoneId][1]
+    then
+        local optionType = bit.band(option, 0xF)
 
-xi.campaign.getSigilTimeStamp = function(player)
-    local timeStamp = 0 -- zero'd till math is done.
+        if optionType == 1 then
+            local selectedEffects = bit.rshift(option, 16)
+            local bonusCost       = bonusEffectCosts[selectedEffects] and bonusEffectCosts[selectedEffects] or 0
+            local duration        = 10800 + ((15 * xi.campaign.getMedalRank(player)) * 60) -- 3hrs +15 min per medal (minimum 3hr 15 min with 1st medal)
+            local subPower        = 35 -- Sets % trigger for regen/refresh. Static at minimum value (35%) for now.
+            -- Selected Effect Mask:
+            -- 0: Regen
+            -- 1: Refresh
+            -- 2: Meal Duration
+            -- 3: EXP Loss Reduction
 
-    -- TODO: calculate time stamp for menu display of when it wears off
+            player:delStatusEffectsByFlag(xi.effectFlag.INFLUENCE, true)
+            player:addStatusEffect(xi.effect.SIGIL, selectedEffects, 0, duration, 0, subPower, 0)
+            player:messageSpecial(zones[zoneId].text.ALLIED_SIGIL)
 
-    return timeStamp
-end
+            if bonusCost > 0 then
+                player:delCurrency('allied_notes', bonusCost)
+            end
 
------------------------------------
--- hasMawActivated Action
------------------------------------
+        elseif optionType == 2 then
+            local itemPage     = bit.band(bit.rshift(option, 4), 0xF)
+            local selectedItem = bit.rshift(option, 8)
+            local itemInfo     = noteRewardItems[zoneId][itemPage][selectedItem]
 
--- 1st number for hasMawActivated()
--- 2nd number for player:addNationTeleport()
+            if npcUtil.giveItem(player, itemInfo[1]) then
+                local itemPrice = itemInfo[2]
 
--- 0    1   Batallia Downs (S) (H-5)
--- 1    2   Rolanberry Fields (S) (H-6)
--- 2    4   Sauromugue Champaign (S) (K-9)
--- 3    8   Jugner Forest (S) (H-11)
--- 4    16  Pashhow Marshlands (S) (K-8)
--- 5    32  Meriphataud Mountains (S) (K-6)
--- 6    64  East Ronfaure (S) (H-5)
--- 7    128 North Gustaberg (S) (K-7)
--- 8    256 West Sarutabaruta (S) (H-9)
---[[
-function hasMawActivated(player, portal)
-    local mawActivated = player:getNationTeleport(MAW)
-    local bit = {}
+                if
+                    itemInfo[3] and
+                    player:getCampaignAllegiance() ~= sigilNpcInfo[zoneId][2]
+                then
+                    itemPrice = itemPrice * 1.5
+                end
 
-    for i = 8, 0, -1 do
-        local twop = 2^i
-
-        if (mawActivated >= twop) then
-            bit[i] = true mawActivated = mawActivated - twop
-        else
-            bit[i] = false
+                player:delCurrency('allied_notes', itemPrice)
+            end
         end
     end
-
-    return bit[portal]
 end
-]]
--- TODO:
--- Past nation teleport

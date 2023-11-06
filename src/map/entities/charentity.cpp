@@ -899,12 +899,13 @@ bool CCharEntity::ValidTarget(CBattleEntity* PInitiator, uint16 targetFlags)
     bool isSameParty      = PParty && PInitiator->PParty && PInitiator->PParty == PParty;
     bool isSameAlliance   = PParty && PParty->m_PAlliance && PInitiator->PParty && PInitiator->PParty->m_PAlliance && PParty->m_PAlliance == PInitiator->PParty->m_PAlliance;
     bool isPartyPetMaster = PInitiator->PMaster && PInitiator->PMaster->PParty && PInitiator->PMaster->PParty == PParty;
+    bool isSoloPetMaster  = PParty == nullptr && PInitiator->PMaster == this;
     bool targetsParty     = targetFlags & TARGET_PLAYER_PARTY;
     bool targetsAlliance  = targetFlags & TARGET_PLAYER_ALLIANCE;
     bool hasPianissimo    = (targetFlags & TARGET_PLAYER_PARTY_PIANISSIMO) && PInitiator->StatusEffectContainer->HasStatusEffect(EFFECT_PIANISSIMO);
     bool isDifferentChar  = PInitiator != this;
     if ((targetsParty || targetsAlliance || hasPianissimo) &&
-        (isSameParty || isSameAlliance || isPartyPetMaster) &&
+        (isSameParty || isSameAlliance || isPartyPetMaster || isSoloPetMaster) &&
         isDifferentChar)
     {
         return true;
@@ -1297,9 +1298,16 @@ void CCharEntity::OnAbility(CAbilityState& state, action_t& action)
         return;
     }
 
+    uint8 findFlags = 0;
+
+    if ((PAbility->getValidTarget() & TARGET_PLAYER_DEAD) == TARGET_PLAYER_DEAD)
+    {
+        findFlags |= FINDFLAGS_DEAD;
+    }
+
     auto* PTarget = static_cast<CBattleEntity*>(state.GetTarget());
     PAI->TargetFind->reset();
-    PAI->TargetFind->findSingleTarget(PTarget);
+    PAI->TargetFind->findSingleTarget(PTarget, findFlags);
 
     // Check if target is untargetable
     if (PAI->TargetFind->m_targets.size() == 0)
@@ -1526,7 +1534,7 @@ void CCharEntity::OnAbility(CAbilityState& state, action_t& action)
 
             float distance = PAbility->getRange();
 
-            PAI->TargetFind->findWithinArea(this, AOE_RADIUS::ATTACKER, distance);
+            PAI->TargetFind->findWithinArea(this, AOE_RADIUS::ATTACKER, distance, findFlags);
 
             uint16 prevMsg = 0;
             for (auto&& PTargetFound : PAI->TargetFind->m_targets)

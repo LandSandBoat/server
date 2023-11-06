@@ -4,7 +4,7 @@
 -- The ship for The Black Coffin Battle (TOAU-15)
 -- !pos -462 -2 -394 54
 -----------------------------------
-local ID = zones[xi.zone.ARRAPAGO_REMNANTS]
+local ID = zones[xi.zone.ARRAPAGO_REEF]
 -----------------------------------
 local entity = {}
 

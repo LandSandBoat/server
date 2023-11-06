@@ -4,7 +4,7 @@
 -- Type: Assault
 -- !pos 22.446 -7.920 573.390 54
 -----------------------------------
-local ID = zones[xi.zone.ARRAPAGO_REMNANTS]
+local ID = zones[xi.zone.ARRAPAGO_REEF]
 -----------------------------------
 local entity = {}
 

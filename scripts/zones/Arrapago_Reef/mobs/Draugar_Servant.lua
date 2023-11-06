@@ -3,7 +3,7 @@
 --  Mob: Draugar Servant
 -- Note: PH for Bloody Bones
 -----------------------------------
-local ID = zones[xi.zone.ARRAPAGO_REMNANTS]
+local ID = zones[xi.zone.ARRAPAGO_REEF]
 -----------------------------------
 local entity = {}
 

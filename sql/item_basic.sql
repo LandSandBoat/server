@@ -10675,7 +10675,7 @@ INSERT INTO `item_basic` VALUES (13339,0,'goshenite_earring','goshenite_earring'
 INSERT INTO `item_basic` VALUES (13340,0,'ametrine_earring','ametrine_earring',1,2084,24,0,1253);
 INSERT INTO `item_basic` VALUES (13341,0,'turquoise_earring','turquoise_earring',1,2084,24,0,1253);
 INSERT INTO `item_basic` VALUES (13342,0,'sphene_earring','sphene_earring',1,2084,24,0,1253);
-INSERT INTO `item_basic` VALUES (13343,0,'green_earring','green_earring',1,2084,24,0,1981);
+INSERT INTO `item_basic` VALUES (13343,0,'green_earring','green_earring',1,2084,24,0,2062);
 INSERT INTO `item_basic` VALUES (13344,0,'sun_earring','sun_earring',1,2084,24,0,1981);
 INSERT INTO `item_basic` VALUES (13345,0,'zircon_earring','zircon_earring',1,2084,24,0,1981);
 INSERT INTO `item_basic` VALUES (13346,0,'purple_earring','purple_earring',1,2084,24,0,1981);
