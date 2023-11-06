@@ -656,9 +656,14 @@ bool CLatentEffectContainer::ProcessLatentEffect(CLatentEffect& latentEffect)
     auto expression  = false;
     auto latentFound = true;
 
+    if (m_POwner == nullptr)
+    {
+        return false;
+    }
+
     // this gets the current zone ID or destination zone ID if zoning
     uint16 playerZoneID = m_POwner->getZone();
-    if (m_POwner == nullptr || playerZoneID == 0)
+    if (playerZoneID == 0)
     {
         return false;
     }
@@ -1022,19 +1027,12 @@ bool CLatentEffectContainer::ProcessLatentEffect(CLatentEffect& latentEffect)
             break;
         case LATENT::NATION_CONTROL:
         {
-           // player is logging in/zoning
-            // checking the state of the user's current zone and
-            // the destination zone in tandem seems to work.
-            if (m_POwner->loc.zone == nullptr && static_cast<uint16_t>(m_POwner->loc.destination) == 0)
-            {
-                return false;
-            }
-            // Grab the user's destination if they're zoning.
-            // Otherwise, grab their current zone.
-            auto region      = m_POwner->loc.zone == nullptr ? zoneutils::GetCurrentRegion(m_POwner->loc.destination) : zoneutils::GetCurrentRegion(playerZoneID);
-            auto hasSignet   = m_POwner->StatusEffectContainer->HasStatusEffect(EFFECT_SIGNET);
-            auto hasSanction = m_POwner->StatusEffectContainer->HasStatusEffect(EFFECT_SANCTION);
-            auto hasSigil    = m_POwner->StatusEffectContainer->HasStatusEffect(EFFECT_SIGIL);
+            // playerZoneId represents the player's destination if they're zoning.
+            // Otherwise, it represents their current zone.
+            auto region                   = zoneutils::GetCurrentRegion(playerZoneID);
+            auto hasSignet                = m_POwner->StatusEffectContainer->HasStatusEffect(EFFECT_SIGNET);
+            auto hasSanction              = m_POwner->StatusEffectContainer->HasStatusEffect(EFFECT_SANCTION);
+            auto hasSigil                 = m_POwner->StatusEffectContainer->HasStatusEffect(EFFECT_SIGIL);
             auto regionAlwaysOutOfControl = zoneutils::IsAlwaysOutOfNationControl(region);
             switch (latentEffect.GetConditionsValue())
             {
@@ -1053,17 +1051,8 @@ bool CLatentEffectContainer::ProcessLatentEffect(CLatentEffect& latentEffect)
         }
         case LATENT::ZONE_HOME_NATION:
         {
-
-            // player is logging in/zoning
-            // checking the state of the user's current zone and
-            // the destination zone in tandem seems to work.
-            if (m_POwner->loc.zone == nullptr && static_cast<uint16_t>(m_POwner->loc.destination) == 0)
-            {
-                return false;
-            }
-
             auto  nationRegion = static_cast<REGION_TYPE>(latentEffect.GetConditionsValue());
-            auto  region = m_POwner->loc.zone == nullptr ? zoneutils::GetCurrentRegion(m_POwner->loc.destination) : zoneutils::GetCurrentRegion(playerZoneID);
+            auto  region       = zoneutils::GetCurrentRegion(playerZoneID);
 
             switch (nationRegion)
             {
@@ -1115,6 +1104,9 @@ bool CLatentEffectContainer::ProcessLatentEffect(CLatentEffect& latentEffect)
                     expression = PMob->m_SuperFamily == latentEffect.GetConditionsValue();
                 }
             }
+            break;
+        case LATENT::MAINJOB:
+            expression = m_POwner->GetMJob() == latentEffect.GetConditionsValue();
             break;
         case LATENT::EQUIPPED_IN_SLOT:
             expression = latentEffect.GetSlot() == latentEffect.GetConditionsValue();

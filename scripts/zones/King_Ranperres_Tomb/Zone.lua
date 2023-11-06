@@ -55,11 +55,13 @@ zoneObject.onEventFinish = function(player, csid, option)
 end
 
 zoneObject.onGameHour = function(zone)
-    -- Don't allow Ankou to spawn outside of night
-    if VanadielHour() >= 4 and VanadielHour() < 20 then
-        DisallowRespawn(ID.mob.ANKOU, true)
-    else
-        DisallowRespawn(ID.mob.ANKOU, false)
+    if xi.settings.main.ENABLE_WOTG == 1 then
+        -- Don't allow Ankou to spawn outside of night
+        if VanadielHour() >= 4 and VanadielHour() < 20 then
+            DisallowRespawn(ID.mob.ANKOU, true)
+        else
+            DisallowRespawn(ID.mob.ANKOU, false)
+        end
     end
 end
 

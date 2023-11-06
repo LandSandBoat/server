@@ -313,7 +313,10 @@ xi.magic.calculateMagicHitRate = function(magicacc, magiceva, target, element, s
 
     if target and element and element ~= xi.magic.ele.NONE and target:isMob() then
         eemTier = xi.magic.calculateEEMTier(target, element, skillchainCount)
-        resBuild = utils.ternary(target:isNM() and isDamageSpell, xi.magic.tryBuildResistance(target, xi.magic.resistMod[element], false, caster), 0)
+        if target:isNM() and isDamageSpell then
+            resBuild = xi.magic.tryBuildNukeWall(target, xi.magic.resistMod[element], caster)
+        end
+
         mevaMult = xi.magic.calculateMEVAMult(utils.clamp(eemTier + resBuild, -18, 11))
         eemBonus = (target:getMod(xi.mod.MEVA) * mevaMult) - target:getMod(xi.mod.MEVA)
     end
@@ -1084,8 +1087,11 @@ xi.magic.getMagicResist = function(magicHitRate, target, element, effectRes, ski
     local eemVal = 1
     local resMod = 0
     local eemTier = 0
-    local resistTier = utils.ternary(target:isNM(), xi.magic.getBuildResistance(target, xi.magic.resistMod[element]), 0)
     local damageSpell = utils.ternary(isDamageSpell, true, false)
+    local resistTier = 0
+    if target:isNM() and damageSpell then
+        resistTier = xi.magic.getBuildNukeWall(target, xi.magic.resistMod[element])
+    end
 
     xi.msg.debugValue(caster, "Base Resist Tier", resistTier)
     xi.msg.debugValue(caster, "Damaging Spell?", utils.ternary(damageSpell, "Yes", "No"))
@@ -1234,7 +1240,7 @@ xi.magic.getMagicResist = function(magicHitRate, target, element, effectRes, ski
     return resist
 end
 
-xi.magic.tryBuildResistance = function(target, resistance, isEnfeeb, caster)
+xi.magic.tryBuildNukeWall = function(target, resistance, caster)
     local baseRes = target:getLocalVar(string.format("[RES]Base_%s", resistance))
     local castCool = target:getLocalVar(string.format("[RES]CastCool_%s", resistance))
     local resBuilt = target:getLocalVar(string.format("[RES]ResTier_%s", resistance))
@@ -1256,7 +1262,7 @@ xi.magic.tryBuildResistance = function(target, resistance, isEnfeeb, caster)
     end
 end
 
-xi.magic.getBuildResistance = function(target, resistance)
+xi.magic.getBuildNukeWall = function(target, resistance)
     local castCool = target:getLocalVar(string.format("[RES]CastCool_%s", resistance))
     local coolTime = 20
 

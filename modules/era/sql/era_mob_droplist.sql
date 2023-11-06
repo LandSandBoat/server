@@ -14974,8 +14974,8 @@ INSERT INTO `mob_droplist` VALUES (1854,0,0,1000,1783,@RARE);     -- Sample Of L
 INSERT INTO `mob_droplist` VALUES (1854,4,0,1000,1783,0);         -- Sample Of Luminian Tissue (Despoil)
 
 -- ZoneID:  33 - Omphuabo
-INSERT INTO `mob_droplist` VALUES (1855,0,0,1000,1784,@UNCOMMON); -- Phuabo Organ (Uncommon, 10%)
-INSERT INTO `mob_droplist` VALUES (1855,0,0,1000,1784,@UNCOMMON); -- Phuabo Organ (Uncommon, 10%)
+INSERT INTO `mob_droplist` VALUES (1855,0,0,1000,1784,@COMMON); -- Phuabo Organ (Common, 15%)
+INSERT INTO `mob_droplist` VALUES (1855,0,0,1000,1784,@COMMON); -- Phuabo Organ (Common, 15%)
 INSERT INTO `mob_droplist` VALUES (1855,0,0,1000,1783,@RARE);     -- Sample Of Luminian Tissue (Rare, 5%)
 INSERT INTO `mob_droplist` VALUES (1855,0,0,1000,1852,@RARE);     -- High-Quality Phuabo Organ (Rare, 5%)
 INSERT INTO `mob_droplist` VALUES (1855,4,0,1000,1783,0);         -- Sample Of Luminian Tissue (Despoil)

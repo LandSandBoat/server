@@ -300,6 +300,7 @@ xi.settings.main =
     FORCE_SPAWN_QM_RESET_TIME    = 900,  -- Number of seconds the ??? remains hidden for after the despawning of the mob it force spawns.
     MAP_VENDORS_ALL_MAPS         = false, -- If true, all map vendors can sell all vendorable maps
     ENABLE_TUTORIAL              = false, -- If true, enable Tutorial NPCs (WotG): Alaune (17719618), Gulldago (17739939), Selele (17764600)
+    ENABLE_DARK_RIDER            = false, -- If true, enables Dark Rider to spawn as in era.
 
     -- Synergy
     ENABLE_SYNERGY = 0, -- Default to off as Synergy is not coded

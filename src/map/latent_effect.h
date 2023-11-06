@@ -91,10 +91,11 @@ enum class LATENT : uint16
     VS_ECOSYSTEM               = 59, // Vs. Specific Ecosystem ID (e.g. Vs. Plantoid: Accuracy+3)
     VS_FAMILY                  = 60, // Vs. Specific Family ID (e.g. Vs. Korrigan: Accuracy+3)
     VS_SUPERFAMILY             = 61, // Vs. Specific SuperFamily ID (e.g. Vs. Mandragora: Accuracy+3)
+    MAINJOB                    = 62, // mainjob - PARAM: JOBTYPE
     CITIZEN_OF_NATION          = 70, // Player is a citizen of the provided nation
 };
 
-#define MAX_LATENTEFFECTID 61
+#define MAX_LATENTEFFECTID 63
 
 /************************************************************************
  *                                                                       *

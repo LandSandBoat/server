@@ -55,18 +55,6 @@ end
 zoneObject.onTriggerAreaEnter = function(player, triggerArea)
     switch (triggerArea:GetTriggerAreaID()): caseof
     {
-        [1] = function()  -- Cutscene for Got It All quest.
-            if player:getCharVar("gotitallCS") == 5 then
-                player:startEvent(526)
-            end
-        end,
-
-        [2] = function() -- CS for Vanishing Act Quest
-            if player:getCharVar("vanishingactCS") == 3 then
-                player:startEvent(44)
-            end
-        end,
-
         [5] = function() -- AH mission
             if
                 player:getQuestStatus(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.NAVIGATING_THE_UNFRIENDLY_SEAS) == QUEST_COMPLETED and
@@ -91,14 +79,15 @@ zoneObject.onTransportEvent = function(player, transport)
     end
 end
 
+zoneObject.onGameHour = function()
+    xi.dark_rider.init()
+end
+
 zoneObject.onEventUpdate = function(player, csid, option)
 end
 
 zoneObject.onEventFinish = function(player, csid, option)
-    if csid == 44 then
-        player:setCharVar("vanishingactCS", 4)
-        player:setPos(-80, -6, 122, 5)
-    elseif csid == 200 then
+    if csid == 200 then
         player:setPos(0, -2, 0, 0, 47)
     elseif csid == 201 then
         player:setPos(-11, 2, -142, 192)
@@ -107,9 +96,6 @@ zoneObject.onEventFinish = function(player, csid, option)
         player:setPos(0, -2, 0, 0, 58)
     elseif csid == 204 then
         player:setPos(11, 2, 142, 64)
-    elseif csid == 526 then
-        player:setCharVar("gotitallCS", 6)
-        player:setPos(60, 0, -71, 38)
     elseif csid == 797 then
         player:setCharVar("Quest[6][26]Prog", 1) -- Set For Corsair BCNM
         player:addQuest(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.AGAINST_ALL_ODDS) -- Start of af 3 not completed yet

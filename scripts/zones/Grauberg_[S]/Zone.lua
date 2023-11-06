@@ -28,16 +28,18 @@ zoneObject.onTriggerAreaEnter = function(player, triggerArea)
 end
 
 zoneObject.onZoneWeatherChange = function(weather)
-    local npc = GetNPCByID(ID.npc.INDESCRIPT_MARKINGS)
+    if xi.settings.main.ENABLE_WOTG == 1 then
+        local npc = GetNPCByID(ID.npc.INDESCRIPT_MARKINGS)
 
-    if npc ~= nil then
-        if
-            weather == xi.weather.WIND or
-            weather == xi.weather.GALES
-        then
-            npc:setStatus(xi.status.NORMAL)
-        else
-            npc:setStatus(xi.status.DISAPPEAR)
+        if npc ~= nil then
+            if
+                weather == xi.weather.WIND or
+                weather == xi.weather.GALES
+            then
+                npc:setStatus(xi.status.NORMAL)
+            else
+                npc:setStatus(xi.status.DISAPPEAR)
+            end
         end
     end
 end

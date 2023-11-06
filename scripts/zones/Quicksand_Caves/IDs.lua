@@ -60,7 +60,7 @@ zones[xi.zone.QUICKSAND_CAVES] =
         },
         ANTICAN_MAGISTER_PH     =
         {
-            [17629280] = 17629280, -- 856.187 1.120 -657.310
+            [17629411] = 17629412, -- -77 -0.5 -56
         },
         ANTICAN_PRAEFECTUS_PH   =
         {

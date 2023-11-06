@@ -4139,6 +4139,9 @@ INSERT INTO `mob_skill_lists` VALUES ('Nightmare_Worm',4081,1887); -- Sandspin (
 INSERT INTO `mob_skill_lists` VALUES ('Nightmare_Worm',4081,1888); -- Tremors (Larger dmg)
 INSERT INTO `mob_skill_lists` VALUES ('Nightmare_Worm',4081,1889); -- Spirit Vacuum
 INSERT INTO `mob_skill_lists` VALUES ('Nightmare_Worm',4081,1890); -- Sound Vacuum
+
+INSERT INTO `mob_skill_lists` VALUES ('Dark_Rider',4083,2126); -- Zantetsuken
+
 -- End of AirSkyBoat section
 
 -- ------------------------------------------------------------
