@@ -27,12 +27,6 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "status_effect_container.h"
 #include "utils/zoneutils.h"
 
-/************************************************************************
- *                                                                       *
- *  Класс CZoneInstance                                                  *
- *                                                                       *
- ************************************************************************/
-
 CZoneInstance::CZoneInstance(ZONEID ZoneID, REGION_TYPE RegionID, CONTINENT_TYPE ContinentID, uint8 levelRestriction)
 : CZone(ZoneID, RegionID, ContinentID, levelRestriction)
 {
