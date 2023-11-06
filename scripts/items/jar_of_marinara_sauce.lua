@@ -5,6 +5,7 @@
 -----------------------------------
 -- Mind 2
 -- Intelligence 1
+-- HP recovered while healing +1
 -----------------------------------
 local itemObject = {}
 
@@ -19,11 +20,13 @@ end
 itemObject.onEffectGain = function(target, effect)
     target:addMod(xi.mod.MND, 2)
     target:addMod(xi.mod.INT, 1)
+    target:addMod(xi.mod.HPHEAL, 1)
 end
 
 itemObject.onEffectLose = function(target, effect)
     target:delMod(xi.mod.MND, 2)
     target:delMod(xi.mod.INT, 1)
+    target:delMod(xi.mod.HPHEAL, 1)
 end
 
 return itemObject
