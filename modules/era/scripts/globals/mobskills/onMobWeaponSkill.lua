@@ -940,6 +940,7 @@ m:addOverride("xi.globals.mobskills.auroral_drape.onMobWeaponSkill", function(ta
 end)
 
 m:addOverride("xi.globals.mobskills.auroral_uppercut.onMobWeaponSkill", function(target, mob, skill)
+    local ID = require("scripts/zones/Empyreal_Paradox/IDs")
     mob:showText(mob, ID.text.PRISHE_TEXT + 4)
     local numhits = 1
     local accmod  = 1
@@ -1195,6 +1196,7 @@ m:addOverride("xi.globals.mobskills.barrier_tusk.onMobWeaponSkill", function(tar
 end)
 
 m:addOverride("xi.globals.mobskills.bastion_of_twilight.onMobWeaponSkill", function(target, mob, skill)
+    local ID = require("scripts/zones/Empyreal_Paradox/IDs")
     mob:showText(mob, ID.text.PROMATHIA_TEXT + 5)
     mob:addStatusEffect(xi.effect.MAGIC_SHIELD, 1, 0, 0)
     mob:setAnimationSub(2)
@@ -8468,6 +8470,7 @@ m:addOverride("xi.globals.mobskills.luminous_drape.onMobWeaponSkill", function(t
 end)
 
 m:addOverride("xi.globals.mobskills.luminous_lance.onMobWeaponSkill", function(target, mob, skill)
+    local ID = require("scripts/zones/Empyreal_Paradox/IDs")
     mob:showText(mob, ID.text.SELHTEUS_TEXT + 1)
 
     local numhits = 1
@@ -8773,6 +8776,7 @@ m:addOverride("xi.globals.mobskills.mantle_pierce.onMobWeaponSkill", function(ta
 end)
 
 m:addOverride("xi.globals.mobskills.marionette_dice_2hr.onMobWeaponSkill", function(target, mob, skill)
+    local ID = require("scripts/zones/Mine_Shaft_2716/IDs")
     local ability = ID.jobTable[target:getMainJob()].twoHour
 
     if ability > 0 then
@@ -8838,6 +8842,7 @@ m:addOverride("xi.globals.mobskills.marionette_dice_hp_mp.onMobWeaponSkill", fun
 end)
 
 m:addOverride("xi.globals.mobskills.marionette_dice_ja_reset.onMobWeaponSkill", function(target, mob, skill)
+    local ID = require("scripts/zones/Mine_Shaft_2716/IDs")
     mob:timer(5000, function(mobArg)
         mobArg:showText(mobArg, ID.text.NOT_HOW)
         target:resetRecasts()
@@ -8859,6 +8864,7 @@ m:addOverride("xi.globals.mobskills.marionette_dice_mp.onMobWeaponSkill", functi
 end)
 
 m:addOverride("xi.globals.mobskills.marionette_dice_special.onMobWeaponSkill", function(target, mob, skill)
+    local ID = require("scripts/zones/Mine_Shaft_2716/IDs")
     local ability = ID.jobTable[target:getMainJob()].ability
     local spells = ID.jobTable[target:getMainJob()].spellListID
 
@@ -8889,6 +8895,7 @@ m:addOverride("xi.globals.mobskills.marionette_dice_special.onMobWeaponSkill", f
 end)
 
 m:addOverride("xi.globals.mobskills.marionette_dice_tp.onMobWeaponSkill", function(target, mob, skill)
+    local ID = require("scripts/zones/Mine_Shaft_2716/IDs")
     -- Force Fantoccini to use an ability
     local skillList = ID.jobTable[target:getLocalVar("job")].skillList
     target:setTP(3000)
@@ -9791,6 +9798,7 @@ m:addOverride("xi.globals.mobskills.nuclear_waste.onMobWeaponSkill", function(ta
 end)
 
 m:addOverride("xi.globals.mobskills.nullifying_dropkick.onMobWeaponSkill", function(target, mob, skill)
+    local ID = require("scripts/zones/Empyreal_Paradox/IDs")
     mob:showText(mob, ID.text.PRISHE_TEXT + 5)
     local numhits = 1
     local accmod = 1
@@ -10918,6 +10926,7 @@ m:addOverride("xi.globals.mobskills.primal_drill.onMobWeaponSkill", function(tar
 end)
 
 m:addOverride("xi.globals.mobskills.prishe_item_1.onMobWeaponSkill", function(target, mob, skill)
+    local ID = require("scripts/zones/Empyreal_Paradox/IDs")
     skill:setMsg(xi.msg.basic.NONE)
     if mob:getTarget() and mob:getTarget():getFamily() == 478 then
         -- using Ambrosia!
@@ -10933,6 +10942,7 @@ m:addOverride("xi.globals.mobskills.prishe_item_1.onMobWeaponSkill", function(ta
 end)
 
 m:addOverride("xi.globals.mobskills.prishe_item_2.onMobWeaponSkill", function(target, mob, skill)
+    local ID = require("scripts/zones/Empyreal_Paradox/IDs")
     skill:setMsg(xi.msg.basic.NONE)
     if
         mob:hasStatusEffect(xi.effect.PLAGUE) or
@@ -12265,6 +12275,7 @@ m:addOverride("xi.globals.mobskills.scythe_tail.onMobWeaponSkill", function(targ
 end)
 
 m:addOverride("xi.globals.mobskills.seal_of_quiescence.onMobWeaponSkill", function(target, mob, skill)
+    local ID = require("scripts/zones/Empyreal_Paradox/IDs")
     mob:showText(mob, ID.text.PROMATHIA_TEXT + 6)
     local typeEffect = xi.effect.MUTE
     local power = 30
@@ -16360,6 +16371,7 @@ m:addOverride("xi.globals.mobskills.wheeling_thrust.onMobWeaponSkill", function(
 end)
 
 m:addOverride("xi.globals.mobskills.wheel_of_impregnability.onMobWeaponSkill", function(target, mob, skill)
+    local ID = require("scripts/zones/Empyreal_Paradox/IDs")
     mob:showText(mob, ID.text.PROMATHIA_TEXT + 5)
     -- local typeEffect = xi.effect.PHYSICAL_SHIELD
 
@@ -16573,6 +16585,7 @@ m:addOverride("xi.globals.mobskills.wild_rage.onMobWeaponSkill", function(target
 end)
 
 m:addOverride("xi.globals.mobskills.winds_of_oblivion.onMobWeaponSkill", function(target, mob, skill)
+    local ID = require("scripts/zones/Empyreal_Paradox/IDs")
     mob:showText(mob, ID.text.PROMATHIA_TEXT + 6)
     local typeEffect = xi.effect.AMNESIA
     local power = 30
