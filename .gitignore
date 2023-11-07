@@ -240,3 +240,6 @@ xi_search.dSYM
 # Keys and Certs
 **/*.key
 **/*.cert
+
+# Catseye proprietary
+modules/catseyexi
