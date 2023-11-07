@@ -32,33 +32,33 @@ class CZoneInstance : public CZone
 public:
     virtual CCharEntity* GetCharByName(std::string const& name) override; // finds the player if exists in zone
     virtual CCharEntity* GetCharByID(uint32 id) override;
-    virtual CBaseEntity* GetEntity(uint16 targid, uint8 filter = -1) override; // получаем указатель на любую сущность в зоне
+    virtual CBaseEntity* GetEntity(uint16 targid, uint8 filter = -1) override; // get a pointer to any entity in the zone
 
-    virtual void SpawnPCs(CCharEntity* PChar) override;  // отображаем персонажей в зоне
-    virtual void SpawnMOBs(CCharEntity* PChar) override; // отображаем MOBs в зоне
-    virtual void SpawnPETs(CCharEntity* PChar) override; // отображаем PETs в зоне
+    virtual void SpawnPCs(CCharEntity* PChar) override;
+    virtual void SpawnMOBs(CCharEntity* PChar) override;
+    virtual void SpawnPETs(CCharEntity* PChar) override;
     virtual void SpawnTRUSTs(CCharEntity* PChar) override;
-    virtual void SpawnNPCs(CCharEntity* PChar) override;      // отображаем NPCs в зоне
-    virtual void SpawnMoogle(CCharEntity* PChar) override;    // отображаем Moogle в MogHouse
-    virtual void SpawnTransport(CCharEntity* PChar) override; // отображаем транспорт
+    virtual void SpawnNPCs(CCharEntity* PChar) override;
+    virtual void SpawnMoogle(CCharEntity* PChar) override;    // display Moogle in MogHouse in zone
+    virtual void SpawnTransport(CCharEntity* PChar) override; // display ship/boat in zone
 
-    virtual void WideScan(CCharEntity* PChar, uint16 radius) override; // сканирование местности с заданным радиусом
+    virtual void WideScan(CCharEntity* PChar, uint16 radius) override;
 
-    virtual void DecreaseZoneCounter(CCharEntity* PChar) override; // добавляем персонажа в зону
-    virtual void IncreaseZoneCounter(CCharEntity* PChar) override; // удаляем персонажа из зоны
+    virtual void DecreaseZoneCounter(CCharEntity* PChar) override; // add a character to the zone
+    virtual void IncreaseZoneCounter(CCharEntity* PChar) override; // remove a character from the zone
 
-    virtual void InsertNPC(CBaseEntity* PNpc) override; // добавляем в зону npc
-    virtual void InsertMOB(CBaseEntity* PMob) override; // добавляем в зону mob
-    virtual void InsertPET(CBaseEntity* PPet) override; // добавляем в зону pet
+    virtual void InsertNPC(CBaseEntity* PNpc) override;
+    virtual void InsertMOB(CBaseEntity* PMob) override;
+    virtual void InsertPET(CBaseEntity* PPet) override;
     virtual void InsertTRUST(CBaseEntity* PTrust) override;
     virtual void DeleteTRUST(CBaseEntity* PTrust) override;
-    virtual void DeletePET(CBaseEntity* PPet) override; // derefs the pet's ID from this zone
+    virtual void DeletePET(CBaseEntity* PPet) override;
 
-    virtual void FindPartyForMob(CBaseEntity* PEntity) override;
-    virtual void TransportDepart(uint16 boundary, uint16 zone) override;
+    virtual void FindPartyForMob(CBaseEntity* PEntity) override;         // looking for a party for the monster
+    virtual void TransportDepart(uint16 boundary, uint16 zone) override; // ship/boat is leaving, passengers need to be collected
 
-    virtual void TOTDChange(TIMETYPE TOTD) override;
-    virtual void PushPacket(CBaseEntity*, GLOBAL_MESSAGE_TYPE, CBasicPacket*) override;
+    virtual void TOTDChange(TIMETYPE TOTD) override;                                    // process the world's reactions to changing time of day
+    virtual void PushPacket(CBaseEntity*, GLOBAL_MESSAGE_TYPE, CBasicPacket*) override; // send a global package within the zone
 
     virtual void UpdateCharPacket(CCharEntity* PChar, ENTITYUPDATE type, uint8 updatemask) override;
     virtual void UpdateEntityPacket(CBaseEntity* PEntity, ENTITYUPDATE type, uint8 updatemask, bool alwaysInclude = false) override;
