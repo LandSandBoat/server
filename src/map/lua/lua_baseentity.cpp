@@ -10033,6 +10033,7 @@ sol::table CLuaBaseEntity::getPlayersInRange(uint32 dist = 0)
 {
     auto players = lua.create_table();
 
+    // clang-format off
     zoneutils::GetZone(m_PBaseEntity->getZone())->ForEachChar([&](CCharEntity* PChar)
     {
         if (!dist || distance(PChar->loc.p, m_PBaseEntity->loc.p) < dist)
@@ -10040,6 +10041,7 @@ sol::table CLuaBaseEntity::getPlayersInRange(uint32 dist = 0)
             players.add(CLuaBaseEntity(PChar));
         }
     });
+    // clang-format on
 
     return players;
 }
