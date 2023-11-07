@@ -9,14 +9,7 @@
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
-    if mob:getFamily() == 316 then -- PW
-        local mobSkin = mob:getModelId()
-        if mobSkin == 1796 then
-            return 0
-        else
-            return 1
-        end
-    elseif mob:getFamily() == 313 then -- Tinnin can use at will
+    if mob:getFamily() == 313 then -- Tinnin can use at will
         return 0
     else
         if mob:getAnimationSub() == 0 then

@@ -4,7 +4,10 @@
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
-    if mob:isMobType(xi.mobskills.mobType.NOTORIOUS) or mob:getHPP() > 75 then
+    if
+        (mob:isMobType(xi.mobskills.mobType.NOTORIOUS) or mob:getHPP() > 75) and
+        mob:getFamily() ~= 91 -- Pandemonium Lamp can always use
+    then
         return 1
     end
 

@@ -9,16 +9,6 @@
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
-    if mob:getFamily() == 316 then
-        local mobSkin = mob:getModelId()
-
-        if mobSkin == 1796 then
-            return 0
-        else
-            return 1
-        end
-    end
-
     if mob:getAnimationSub() == 0 then
         return 0
     else
