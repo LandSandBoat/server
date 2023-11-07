@@ -12,6 +12,7 @@
 *.h text eol=lf
 *.sql text eol=lf
 *.sh text eol=lf
+*.patch text eol=lf
 
 # Retaining CRLF line ends in the documentation dir (for now..)
 *.txt text eol=crlf
