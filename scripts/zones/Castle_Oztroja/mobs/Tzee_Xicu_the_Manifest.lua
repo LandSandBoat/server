@@ -32,13 +32,12 @@ end
 entity.onMobDespawn = function(mob)
     -- reset hqnm system back to the nm placeholder
     local nqID = mob:getID() - 3
-    local nqMob = GetMobByID(mob:getID() - 3)
     SetServerVariable("[POP]Tzee_Xicu_the_Manifest", os.time() + 259200) -- 3 days
     SetServerVariable("[PH]Tzee_Xicu_the_Manifest", 0)
     SetServerVariable("[POPNUM]Tzee_Xicu_the_Manifest", 0)
     DisallowRespawn(mob:getID(), true)
     DisallowRespawn(nqID, false)
-    xi.mob.nmTODPersist(nqMob, math.random(75600, 86400)) -- 21 to 24 hours
+    xi.mob.nmTODPersist(GetMobByID(nqID), math.random(75600, 86400)) -- 21 to 24 hours
 end
 
 return entity
