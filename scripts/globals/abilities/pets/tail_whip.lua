@@ -25,7 +25,10 @@ abilityObject.onPetAbility = function(target, pet, skill)
     local totaldamage = xi.summon.avatarFinalAdjustments(damage.dmg, pet, skill, target, xi.attackType.PHYSICAL, xi.damageType.BLUNT, damage.hitslanded)
     target:takeDamage(totaldamage, pet, xi.attackType.PHYSICAL, xi.damageType.BLUNT)
 
+    local dINT = pet:getStat(xi.mod.INT) - target:getStat(xi.mod.INT)
+
     local effectParams = {}
+    effectParams.dStat = dINT
     effectParams.element = xi.magic.ele.DARK
     effectParams.effect = xi.effect.WEIGHT
     effectParams.duration = 60

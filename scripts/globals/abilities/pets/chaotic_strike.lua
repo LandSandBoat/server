@@ -20,7 +20,10 @@ abilityObject.onPetAbility = function(target, pet, skill)
     params.melee = true
     local damage = xi.summon.avatarPhysicalMove(pet, target, skill, params)
 
+    local dINT = pet:getStat(xi.mod.INT) - target:getStat(xi.mod.INT)
+
     local effectParams = {}
+    effectParams.dStat = dINT
     effectParams.element = xi.magic.ele.LIGHTNING
     effectParams.effect = xi.effect.STUN
     effectParams.duration = 12

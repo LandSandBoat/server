@@ -784,7 +784,7 @@ xi.magic.applyAbilityResistance = function(player, target, params)
         -- this will allow effects like shell crusher to overwrite lower power defense down
         -- note: the final decision on if an effect is applied occurs in CStatusEffectContainer::AddStatusEffect
         if params.power <= existingEffect:getPower() then
-            return
+            return 0
         end
     end
 
@@ -794,14 +794,6 @@ xi.magic.applyAbilityResistance = function(player, target, params)
 
     if not params.skillType then
         params.skillType = nil
-    end
-
-    if params.effect and not params.tick then
-        params.tick = 0
-    end
-
-    if params.effect and not params.power then
-        params.power = 1
     end
 
     local effectRes = 0
@@ -820,7 +812,7 @@ xi.magic.applyAbilityResistance = function(player, target, params)
         skillchainCount = params.skillchainCount
     end
 
-    local p = xi.magic.getMagicHitRate(player, target, params.skillType, params.element, params.effect, effectRes, params.maccBonus, dStat, utils.ternary(params.damageSpell, true, false))
+    local p = xi.magic.getMagicHitRate(player, target, params.skillType, params.element, params.effect, effectRes, params.maccBonus, dStat, skillchainCount, utils.ternary(params.damageSpell, true, false))
 
     -- Nether blast does not have a hit check so return a hit
     if params.netherBlast then
@@ -833,18 +825,18 @@ xi.magic.applyAbilityResistance = function(player, target, params)
         params.effect and
         params.chance and
         params.chance * resist > math.random() * 150 and
-        params.duration * resist > 0
+        resist >= 0.5
     then
         target:addStatusEffect(params.effect, params.power, params.tick, params.duration * resist)
     elseif
         params.effect and
-        params.duration * resist > 0 and
+        resist >= 0.5 and
         not params.chance
     then
         target:addStatusEffect(params.effect, params.power, params.tick, params.duration * resist)
-    else
-        return resist
     end
+
+    return resist
 end
 
 -- TODO: Reduce complexity
@@ -1066,6 +1058,11 @@ xi.magic.getMagicHitRate = function(caster, target, skillType, element, effect, 
     if target:isPC() then
         magiceva = magiceva + resMod
         xi.msg.debugValue(caster, "PC Magic Evasion", magiceva)
+    elseif caster:isPet() then
+        -- dLvl only helps pets
+        dLvl = math.min(dLvl, 0)
+        xi.msg.debugValue(caster, "dLvl", dLvl)
+        magiceva = magiceva + (4 * dLvl) + resMod
     else
         dLvl = math.max(dLvl, 0) -- Mobs should not have a disadvantage when targeted
         xi.msg.debugValue(caster, "dLvl", dLvl)

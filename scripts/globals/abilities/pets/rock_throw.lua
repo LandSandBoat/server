@@ -21,7 +21,10 @@ abilityObject.onPetAbility = function(target, pet, skill, summoner)
 
     local damage = xi.summon.avatarPhysicalMove(pet, target, skill, params)
 
+    local dMND = pet:getStat(xi.mod.MND) - target:getStat(xi.mod.MND)
+
     local effectParams = {}
+    effectParams.dStat = dMND
     effectParams.element = xi.magic.ele.EARTH
     effectParams.effect = xi.effect.SLOW
     effectParams.duration = 120
