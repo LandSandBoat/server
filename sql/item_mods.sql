@@ -39258,6 +39258,9 @@ INSERT INTO `item_mods` VALUES (19209,24,45);  -- RATT: 45
 INSERT INTO `item_mods` VALUES (19209,28,30);  -- MATT: 30
 INSERT INTO `item_mods` VALUES (19209,421,10); -- CRIT_DMG_INCREASE: 10
 
+-- Stygian Ash
+INSERT INTO `item_mods` VALUES (19210,26,150);  -- RACC: 150
+
 -- Reacton Arm
 INSERT INTO `item_mods` VALUES (19211,23,10); -- ATT: 10
 
