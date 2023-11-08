@@ -3837,7 +3837,9 @@ INSERT INTO `mob_skill_lists` VALUES ('Emela-ntouka',1099,368); -- blockhead
 
 INSERT INTO `mob_skill_lists` VALUES ('Flockbock',2000,269); -- petribreath
 
--- Next available ID: 2001
+INSERT INTO `mob_skill_lists` VALUES ('Zmey_Gorynych',2001,380); -- scythe_tail
+
+-- Next available ID: 2002
 
 -- ------------------------------------------------------------
 -- Start of Ambuscade section

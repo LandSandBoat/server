@@ -56,6 +56,7 @@ zones[xi.zone.CAPE_TERIGGAN] =
         KREUTZET               = 17240413,
         AXESARION_THE_WANDERER = 17240414,
         STOLAS                 = 17240424,
+        ZMEY_GORYNYCH          = GetFirstID('Zmey_Gorynych')
     },
     npc =
     {
