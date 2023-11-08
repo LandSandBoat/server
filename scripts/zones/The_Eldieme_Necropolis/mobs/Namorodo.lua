@@ -23,14 +23,27 @@ entity.onMobFight = function(mob, target)
 end
 
 entity.onMobDeath = function(mob, player, optParams)
-    local personality = player:getFellowValue("personality")
-    local fellow = player:getFellow()
-    if fellow ~= nil then
-        player:showText(fellow, ID.text.SEEMS_TO_BE_THE_END + xi.fellow_utils.checkPersonality(personality))
-        player:setCharVar("[Quest]Looking_Glass", 3)
-        player:timer(30000, function(playerArg)
-            playerArg:despawnFellow()
-        end) -- 30 sec to talk to fellow
+    if
+        GetMobByID(ID.mob.NAMORODO):isDead() and
+        GetMobByID(ID.mob.NAMORODO + 1):isDead() and
+        GetMobByID(ID.mob.NAMORODO + 2):isDead() and
+        optParams.isKiller
+    then
+        for _, v in ipairs(player:getParty()) do
+            if
+                player:getZoneID() == v:getZoneID() and
+                player:checkDistance(v) <= 50
+            then
+                local fellow = v:getFellow()
+                if fellow ~= nil then
+                    v:showText(fellow, ID.text.SEEMS_TO_BE_THE_END + xi.fellow_utils.checkPersonality(fellow))
+                    v:setCharVar("[Quest]Looking_Glass", 3)
+                    v:timer(45000, function(playerArg)
+                        playerArg:despawnFellow()
+                    end) -- 45 sec to talk to fellow
+                end
+            end
+        end
     end
 end
 
