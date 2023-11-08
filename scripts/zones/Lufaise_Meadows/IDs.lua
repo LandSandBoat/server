@@ -41,6 +41,7 @@ zones[xi.zone.LUFAISE_MEADOWS] =
             16875703, -- !pos -378.950 -15.742 144.215
             16875748, -- !pos -141.523 -15.529 91.709
         },
+        FLOCKBOCK             = GetFirstID('Flockbock'),
         MEGALOBUGARD_PH       =
         {
             [16875720] = 16875741, -- -137.168 -15.390 91.016
