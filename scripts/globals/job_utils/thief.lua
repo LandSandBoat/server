@@ -91,13 +91,16 @@ xi.job_utils.thief.checkCollaborator = function(player, target, ability)
 end
 
 xi.job_utils.thief.checkDespoil = function(player, target, ability)
-    if player:getFreeSlotsCount() == 0 then
-        return xi.msg.basic.FULL_INVENTORY, 0
-    end
-
-    if player:getObjType() == xi.objType.TRUST then
-        if player:getMaster():getFreeSlotsCount() == 0 then
+    if player:getObjType() == xi.objType.TRUST then -- Trust
+        if
+            player:getMaster():getFreeSlotsCount() == 0 or
+            not target:getDespoilItem()
+        then
             return 1, 0
+        end
+    else -- Player
+        if player:getFreeSlotsCount() == 0 then
+            return xi.msg.basic.FULL_INVENTORY, 0
         end
     end
 
@@ -212,7 +215,11 @@ xi.job_utils.thief.useDespoil = function(player, target, ability, action)
 
     local stolen = target:getDespoilItem()
 
-    if target:isMob() and math.random(100) < despoilChance and stolen then
+    if
+        target:isMob() and
+        math.random(1, 100) <= despoilChance and
+        stolen
+    then
         if player:getObjType() == xi.objType.TRUST then
             player:getMaster():addItem(stolen)
         else
