@@ -17,7 +17,7 @@ zones[xi.zone.DYNAMIS_JEUNO_D] =
         LOGIN_CAMPAIGN_UNDERWAY       = 7002, -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!
         LOGIN_NUMBER                  = 7003, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
         MEMBERS_LEVELS_ARE_RESTRICTED = 7023, -- Your party is unable to participate because certain members' levels are restricted.
-        CONQUEST_BASE                 = 7057, -- Tallying conquest results...
+        CONQUEST_BASE                 = 7058, -- Tallying conquest results...
     },
     mob =
     {
