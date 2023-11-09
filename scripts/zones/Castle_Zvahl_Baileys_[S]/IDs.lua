@@ -16,9 +16,9 @@ zones[xi.zone.CASTLE_ZVAHL_BAILEYS_S] =
         LOGIN_CAMPAIGN_UNDERWAY       = 7002, -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!
         LOGIN_NUMBER                  = 7003, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
         MEMBERS_LEVELS_ARE_RESTRICTED = 7023, -- Your party is unable to participate because certain members' levels are restricted.
-        CANNOT_FIND_FLARE             = 7678, -- You cannot find the <keyitem>. Try searching again at a later time.
-        NO_RESPONSE                   = 7892, -- There is no response...
-        COMMON_SENSE_SURVIVAL         = 7950, -- It appears that you have arrived at a new survival guide provided by the Servicemen's Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
+        CANNOT_FIND_FLARE             = 7679, -- You cannot find the <keyitem>. Try searching again at a later time.
+        NO_RESPONSE                   = 7893, -- There is no response...
+        COMMON_SENSE_SURVIVAL         = 7951, -- It appears that you have arrived at a new survival guide provided by the Servicemen's Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
     mob =
     {

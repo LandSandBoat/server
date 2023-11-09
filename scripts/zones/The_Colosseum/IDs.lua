@@ -15,9 +15,9 @@ zones[xi.zone.THE_COLOSSEUM] =
         LOGIN_CAMPAIGN_UNDERWAY       = 7002,  -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!
         LOGIN_NUMBER                  = 7003,  -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
         MEMBERS_LEVELS_ARE_RESTRICTED = 7023,  -- Your party is unable to participate because certain members' levels are restricted.
-        THANKS_FOR_STOPPING_BY        = 11509, -- Thanks for stopping by. I'll be seeing you around, <name>!
-        I_CAN_GIVE_YOU                = 11510, -- Let me see... I can give you <number> [jetton/jettons] for this amount.
-        EXCEED_THE_LIMIT_OF_JETTONS   = 11512, -- By exchanging for this amount, you will exceed the limit of jettons that you can carry.
+        THANKS_FOR_STOPPING_BY        = 11510, -- Thanks for stopping by. I'll be seeing you around, <name>!
+        I_CAN_GIVE_YOU                = 11511, -- Let me see... I can give you <number> [jetton/jettons] for this amount.
+        EXCEED_THE_LIMIT_OF_JETTONS   = 11513, -- By exchanging for this amount, you will exceed the limit of jettons that you can carry.
     },
     mob =
     {
