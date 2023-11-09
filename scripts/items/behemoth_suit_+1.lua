@@ -30,7 +30,7 @@ itemObject.onItemUse = function(target)
         { 22, xi.item.SLICE_OF_HARE_MEAT        },
         {  5, xi.item.CHUNK_OF_HYDRA_MEAT       },
         {  4, xi.item.SLICE_OF_KARAKUL_MEAT     },
-        {  9, xi.item.LAND_CRAB_MEAT            },
+        {  9, xi.item.SLICE_OF_LAND_CRAB_MEAT   },
         {  7, xi.item.SLICE_OF_LUCEREWE_MEAT    },
         {  5, xi.item.LYNX_MEAT                 },
         {  9, xi.item.CHUNK_OF_OROBON_MEAT      },

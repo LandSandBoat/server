@@ -17,7 +17,7 @@ entity.onTrade = function(player, npc, trade)
         not GetMobByID(ID.mob.NIDHOGG):isSpawned()
     then
         if
-            npcUtil.tradeHasExactly(trade, xi.item.HONEY_WINE) and
+            npcUtil.tradeHasExactly(trade, xi.item.JUG_OF_HONEY_WINE) and
             npcUtil.popFromQM(player, npc, ID.mob.FAFNIR)
         then
             player:confirmTrade()

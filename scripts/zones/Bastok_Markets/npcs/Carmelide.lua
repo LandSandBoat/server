@@ -14,7 +14,7 @@ entity.onTrigger = function(player, npc)
         xi.item.TOURMALINE,   1937, 2,
         xi.item.SARDONYX,     1937, 2,
         xi.item.AMETHYST,     1937, 2,
-        xi.item.AMBER,        1937, 2,
+        xi.item.AMBER_STONE,  1937, 2,
         xi.item.LAPIS_LAZULI, 1937, 2,
         xi.item.CLEAR_TOPAZ,  1937, 2,
         xi.item.ONYX,         1937, 2,
