@@ -788,6 +788,16 @@ xi.magic.applyAbilityResistance = function(player, target, params)
         end
     end
 
+    local subEffect = 0
+    if params.subEffect then
+        subEffect = params.subEffect
+    end
+
+    local subPower = 0
+    if params.subPower then
+        subPower = params.subPower
+    end
+
     if not params.element then
         params.element = xi.magic.ele.NONE
     end
@@ -827,13 +837,13 @@ xi.magic.applyAbilityResistance = function(player, target, params)
         params.chance * resist > math.random() * 150 and
         resist >= 0.5
     then
-        target:addStatusEffect(params.effect, params.power, params.tick, params.duration * resist)
+        target:addStatusEffect(params.effect, params.power, params.tick, params.duration * resist, subEffect, subPower)
     elseif
         params.effect and
         resist >= 0.5 and
         not params.chance
     then
-        target:addStatusEffect(params.effect, params.power, params.tick, params.duration * resist)
+        target:addStatusEffect(params.effect, params.power, params.tick, params.duration * resist, subEffect, subPower)
     end
 
     return resist
