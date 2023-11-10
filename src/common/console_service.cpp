@@ -143,6 +143,12 @@ ConsoleService::ConsoleService()
         }
     });
 
+    RegisterCommand("crash", "Crash the process",
+    [](std::vector<std::string>& inputs)
+    {
+        crash();
+    });
+
     bool attached = isatty(0);
     if (attached)
     {
