@@ -19,7 +19,7 @@ entity.onMobDeath = function(mob, player, optParams)
     xi.hunts.checkHunt(mob, player, 445)
 
     -- Set respawn timer for ???s
-    for i = 1, 6 do
+    for i = 0, 5 do
         GetNPCByID(ID.npc.ZIPHIUS_QM_BASE + i):updateNPCHideTime(xi.settings.main.FORCE_SPAWN_QM_RESET_TIME)
     end
 end

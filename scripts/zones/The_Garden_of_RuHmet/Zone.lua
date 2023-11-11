@@ -209,7 +209,7 @@ end
 
 zoneObject.onEventFinish = function(player, csid, option)
     if csid == 101 and option == 1 then
-        player:setPos(540, -1, -499.900, 62, 36)
+        player:setPos(540, -1, -500, 62, 36)
         player:setCharVar("Ru-Hmet-TP", 0)
         xi.teleport.clearEnmityList(player)
 
