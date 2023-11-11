@@ -24,7 +24,7 @@ entity.onTrigger = function(player, npc)
 
     if
         player:getCurrentMission(xi.mission.log_id.COP) == xi.mission.id.cop.GARDEN_OF_ANTIQUITY and
-        player:getCharVar('PromathiaStatus') == 1
+        player:getCharVar('PromathiaStatus') == 0
     then
         player:startEvent(164)
     elseif
