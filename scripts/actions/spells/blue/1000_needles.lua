@@ -21,7 +21,7 @@ end
 spellObject.onSpellCast = function(caster, target, spell)
     local params = {}
     params.ecosystem = xi.ecosystem.PLANTOID
-    params.tpmod = TPMOD_CRITICAL
+    params.tpmod = TPMOD_DAMAGE
     params.attackType = xi.attackType.MAGICAL
     params.damageType = xi.damageType.LIGHT
     params.skillType = xi.skill.BLUE_MAGIC

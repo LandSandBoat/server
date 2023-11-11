@@ -21,7 +21,7 @@ end
 spellObject.onSpellCast = function(caster, target, spell)
     local params = {}
     params.ecosystem = xi.ecosystem.PLANTOID
-    params.tpmod = TPMOD_CRITICAL
+    params.tpmod = TPMOD_DURATION
     params.attackType = xi.attackType.RANGED
     params.damageType = xi.damageType.PIERCING
     params.scattr = xi.skillchainType.COMPRESSION
