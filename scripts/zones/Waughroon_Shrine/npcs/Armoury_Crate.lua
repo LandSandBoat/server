@@ -418,7 +418,7 @@ local loot =
         },
         {
             { itemid = xi.item.MANA_RING,             droprate = 469 },
-            { itemid = xi.item.GRUDGE_SWORD0,         droprate = 152 },
+            { itemid = xi.item.GRUDGE_SWORD,          droprate = 152 },
             { itemid = xi.item.DE_SAINTRES_AXE,       droprate = 120 },
             { itemid = xi.item.BUZZARD_TUCK,          droprate = 118 },
             { itemid = xi.item.SCROLL_OF_UTSUSEMI_NI, droprate = 106 },
