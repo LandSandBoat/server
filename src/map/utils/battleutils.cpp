@@ -2107,11 +2107,12 @@ namespace battleutils
             if (isBlocked)
             {
                 uint8 absorb = 100;
-                if (PDefender->m_Weapons[SLOT_SUB]->IsShield())
+                if (const auto PChar = dynamic_cast<CCharEntity*>(PDefender))
                 {
-                    if (PDefender->objtype == TYPE_PC)
+                    CItemEquipment* slotSub = PChar->getEquip(SLOT_SUB);
+                    if (slotSub && slotSub->IsShield())
                     {
-                        absorb = std::clamp(100 - PDefender->m_Weapons[SLOT_SUB]->getShieldAbsorption(), 0, 100);
+                        absorb = std::clamp(100 - slotSub->getShieldAbsorption(), 0, 100);
                         absorb -= PDefender->getMod(Mod::SHIELD_DEF_BONUS); // Include Shield Defense Bonus in absorb amount
 
                         // Shield Mastery
@@ -2727,10 +2728,12 @@ namespace battleutils
                 critHitRate += PCharAttacker->PMeritPoints->GetMeritValue(MERIT_CRIT_HIT_RATE, PCharAttacker);
 
                 // Add Fencer crit hit rate
-                CItemWeapon* PMain = dynamic_cast<CItemWeapon*>(PCharAttacker->m_Weapons[SLOT_MAIN]);
-                CItemWeapon* PSub  = dynamic_cast<CItemWeapon*>(PCharAttacker->m_Weapons[SLOT_SUB]);
+                CItemWeapon*    PMain      = dynamic_cast<CItemWeapon*>(PCharAttacker->m_Weapons[SLOT_MAIN]);
+                CItemEquipment* PSub       = PCharAttacker->getEquip(SLOT_SUB);
+                CItemWeapon*    PSubWeapon = dynamic_cast<CItemWeapon*>(PCharAttacker->m_Weapons[SLOT_SUB]);
+
                 if (PMain && !PMain->isTwoHanded() && !PMain->isHandToHand() &&
-                    (!PSub || PSub->getSkillType() == SKILL_NONE || PCharAttacker->m_Weapons[SLOT_SUB]->IsShield()))
+                    (!PSub || (PSubWeapon && PSubWeapon->getSkillType() == SKILL_NONE) || PSub->IsShield()))
                 {
                     critHitRate += PCharAttacker->getMod(Mod::FENCER_CRITHITRATE);
                 }
@@ -6742,10 +6745,12 @@ namespace battleutils
                 }
 
                 // Add Fencer TP Bonus
-                CItemWeapon* PMain = dynamic_cast<CItemWeapon*>(PEntity->m_Weapons[SLOT_MAIN]);
-                CItemWeapon* PSub  = dynamic_cast<CItemWeapon*>(PEntity->m_Weapons[SLOT_SUB]);
+                CItemWeapon*    PMain      = dynamic_cast<CItemWeapon*>(PChar->m_Weapons[SLOT_MAIN]);
+                CItemEquipment* PSub       = PChar->getEquip(SLOT_SUB);
+                CItemWeapon*    PSubWeapon = dynamic_cast<CItemWeapon*>(PChar->m_Weapons[SLOT_SUB]);
+
                 if (PMain && !PMain->isTwoHanded() && !PMain->isHandToHand() &&
-                    (!PSub || PSub->getSkillType() == SKILL_NONE || PEntity->m_Weapons[SLOT_SUB]->IsShield()))
+                    (!PSub || (PSubWeapon && PSubWeapon->getSkillType() == SKILL_NONE) || PSub->IsShield()))
                 {
                     tp += PEntity->getMod(Mod::FENCER_TP_BONUS);
                 }
