@@ -602,6 +602,7 @@ public:
                              DAMAGE_TYPE damageType = DAMAGE_TYPE::NONE, bool isSkillchainDamage = false);
 
     int16 getMod(Mod modID);
+    int16 getMaxGearMod(Mod modID);
 
     bool CanRest();        // checks if able to heal
     bool Rest(float rate); // heal an amount of hp / mp
