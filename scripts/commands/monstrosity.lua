@@ -11,6 +11,11 @@ commandObj.cmdprops =
 }
 
 commandObj.onTrigger = function(player)
+    if xi.settings.main.ENABLE_MONSTROSITY ~= 1 then
+        player:PrintToPlayer('Setting main.ENABLE_MONSTROSITY is not enabled.')
+        return
+    end
+
     if player:getMainJob() ~= xi.job.MON then
         local pos = player:getPos()
         player:setMonstrosityEntryData(pos.x, pos.y, pos.z, pos.rot, player:getZoneID(), player:getMainJob(), player:getSubJob())

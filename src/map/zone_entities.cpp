@@ -1209,7 +1209,7 @@ void CZoneEntities::PushPacket(CBaseEntity* PEntity, GLOBAL_MESSAGE_TYPE message
         // clang-format off
         switch (message_type)
         {
-            case CHAR_INRANGE_SELF:
+            case CHAR_INRANGE_SELF: // NOTE!!!: This falls through to CHAR_INRANGE so both self and the local area get the packet
             {
                 TracyZoneCString("CHAR_INRANGE_SELF");
                 if (PEntity->objtype == TYPE_PC)
