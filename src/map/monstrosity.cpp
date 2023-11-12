@@ -277,7 +277,7 @@ void monstrosity::WriteMonstrosityData(CCharEntity* PChar)
 
 void monstrosity::TryPopulateMonstrosityData(CCharEntity* PChar)
 {
-    if (PChar->GetMJob() == JOB_MON)
+    if (settings::get<bool>("main.ENABLE_MONSTROSITY") && PChar->GetMJob() == JOB_MON)
     {
         // Populates PChar->m_PMonstrosity
         ReadMonstrosityData(PChar);
@@ -289,6 +289,11 @@ void monstrosity::TryPopulateMonstrosityData(CCharEntity* PChar)
 
 void monstrosity::HandleZoneIn(CCharEntity* PChar)
 {
+    if (!settings::get<bool>("main.ENABLE_MONSTROSITY"))
+    {
+        return;
+    }
+
     if (PChar->m_PMonstrosity == nullptr)
     {
         return;
@@ -587,6 +592,7 @@ void monstrosity::SetLevel(CCharEntity* PChar, uint8 id, uint8 level)
     {
         return;
     }
+
     // TODO: Validate id and level
     // TODO: If not unlocked, unlock whatever id is
     PChar->m_PMonstrosity->levels[id] = level;

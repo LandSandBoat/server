@@ -42,7 +42,8 @@ quest.sections =
 {
     {
         check = function(player, questVars, vars)
-            return quest:getVar(player, 'Timer') <= VanadielUniqueDay() and
+            return xi.settings.main.ENABLE_MONSTROSITY == 1 and
+                quest:getVar(player, 'Timer') <= VanadielUniqueDay() and
                 not xi.monstrosity.hasUnlockedSpecies(player, xi.monstrosity.species.BEE)
         end,
 
