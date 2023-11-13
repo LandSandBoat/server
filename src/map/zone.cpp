@@ -1196,6 +1196,8 @@ void CZone::CharZoneOut(CCharEntity* PChar)
         PChar->StatusEffectContainer->DelStatusEffectSilent(EFFECT_LEVEL_RESTRICTION);
     }
 
+    PChar->StatusEffectContainer->DelStatusEffectsByFlag(EFFECTFLAG_ON_ZONE);
+
     if (PChar->PLinkshell1 != nullptr)
     {
         PChar->PLinkshell1->DelMember(PChar);
