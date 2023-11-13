@@ -874,6 +874,19 @@ void SmallPacket0x01A(map_session_data_t* const PSession, CCharEntity* const PCh
     ShowTrace(actionStr);
     DebugActions(actionStr);
 
+    // Retrigger latents if the previous packet parse in this chunk included equip/equipset
+    if (PChar->retriggerLatents)
+    {
+        for (uint8 equipSlotID = 0; equipSlotID < 16; ++equipSlotID)
+        {
+            if (PChar->equip[equipSlotID] != 0)
+            {
+                PChar->PLatentEffectContainer->CheckLatentsEquip(equipSlotID);
+            }
+        }
+        PChar->retriggerLatents = false; // reset as we have retriggered the latents somewhere
+    }
+
     switch (action)
     {
         case 0x00: // trigger
@@ -3478,7 +3491,7 @@ void SmallPacket0x050(map_session_data_t* const PSession, CCharEntity* const PCh
     charutils::SaveCharLook(PChar);
     luautils::CheckForGearSet(PChar); // check for gear set on gear change
     PChar->UpdateHealth();
-    PChar->retriggerLatentsAfterPacketParsing = true; // retrigger all latents after all equip packets are parsed
+    PChar->retriggerLatents = true; // retrigger all latents later because our gear has changed
 }
 
 /************************************************************************
@@ -3511,6 +3524,7 @@ void SmallPacket0x051(map_session_data_t* const PSession, CCharEntity* const PCh
     charutils::SaveCharLook(PChar);
     luautils::CheckForGearSet(PChar); // check for gear set on gear change
     PChar->UpdateHealth();
+    PChar->retriggerLatents = true; // retrigger all latents later because our gear has changed
 }
 
 /************************************************************************
