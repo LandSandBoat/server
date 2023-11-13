@@ -422,7 +422,7 @@ public:
     bool           MeritMode;
 
     CLatentEffectContainer* PLatentEffectContainer;
-    bool                    retriggerLatentsAfterPacketParsing; // used to retrigger all latent effects after packet parsing is done in map.cpp
+    bool                    retriggerLatents; // used to retrigger all latent effects if some event requires them to be retriggered
 
     CItemContainer* PGuildShop;
     CItemContainer* getStorage(uint8 LocationID);
