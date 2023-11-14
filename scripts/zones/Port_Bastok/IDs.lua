@@ -7,6 +7,7 @@ zones[xi.zone.PORT_BASTOK] =
 {
     text =
     {
+        NOTHING_HAPPENS               = 119,   -- Nothing happens...
         ITEM_CANNOT_BE_OBTAINED       = 6384,  -- You cannot obtain the <item>. Come back after sorting your inventory.
         FULL_INVENTORY_AFTER_TRADE    = 6388,  -- You cannot obtain the <item>. Try trading again after sorting your inventory.
         ITEM_OBTAINED                 = 6390,  -- Obtained: <item>.
@@ -76,7 +77,6 @@ zones[xi.zone.PORT_BASTOK] =
         OBTAINED_GUILD_POINTS         = 12692, -- Obtained: <number> guild points.
         OBTAINED_NUM_KEYITEMS         = 13085, -- Obtained key item: <number> <keyitem>!
         NOT_ACQUAINTED                = 13087, -- I'm sorry, but I don't believe we're acquainted. Please leave me be.
-        NOTHING_HAPPENS               = 13238, -- Nothing happens...
     },
     mob =
     {
