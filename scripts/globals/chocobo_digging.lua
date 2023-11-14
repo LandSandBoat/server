@@ -12,14 +12,14 @@ require("scripts/missions/amk/helpers")
 xi = xi or {}
 xi.chocoboDig = xi.chocoboDig or {}
 
-local DIG_RATE = xi.settings.main.DIG_RATE
-local DIG_FATIGUE = xi.settings.main.DIG_FATIGUE
-local DIG_ZONE_LIMIT = xi.settings.main.DIG_ZONE_LIMIT
-local DIG_GRANT_BURROW = xi.settings.main.DIG_GRANT_BURROW
-local DIG_GRANT_BORE = xi.settings.main.DIG_GRANT_BORE
-local DIG_DISTANCE_REQ = xi.settings.main.DIG_DISTANCE_REQ
+local digRate = xi.settings.main.DIG_RATE
+local digFatigue = xi.settings.main.DIG_FATIGUE
+local digZoneLimit = xi.settings.main.DIG_ZONE_LIMIT
+local digGrantBurrow = xi.settings.main.DIG_GRANT_BURROW
+local digGrantBore = xi.settings.main.DIG_GRANT_BORE
+local digDistanceReq = xi.settings.main.DIG_DISTANCE_REQ
 
-local find_nothing = "You dig and you dig, but you find nothing."
+local findNothing = "You dig and you dig, but you find nothing."
 
 local digReq =
 {
@@ -858,7 +858,7 @@ local function canDig(player)
     local currentTime     = os.time()
     local skillRank       = player:getSkillRank(xi.skill.DIG)
     -- personal dig caps
-    local digCap          = DIG_FATIGUE + (skillRank * 10)
+    local digCap          = digFatigue + (skillRank * 10)
     -- base delay -5 for each rank
     local digDelay        = 16 - (skillRank * 5)
     local areaDigDelay    = 60 - (skillRank * 5)
@@ -876,14 +876,12 @@ local function canDig(player)
         end
 
         -- neither player nor zone have reached their dig limit
-        if
-            (digCount < digCap)
-        then
+        if digCount < digCap then
             -- pesky delays
             if
                 (zoneInTime + areaDigDelay) <= currentTime and
                 (lastDigTime + digDelay) <= currentTime and
-                distanceSquared > DIG_DISTANCE_REQ
+                distanceSquared > digDistanceReq
             then
                 player:setCharVar('[DIG]LastDigX', currX)
                 player:setCharVar('[DIG]LastDigY', currY)
@@ -963,8 +961,8 @@ end
 -- luacheck: ignore 561
 local function getChocoboDiggingItem(player)
     local allItems        = digInfo[player:getZoneID()]
-    local burrowAbility = (DIG_GRANT_BURROW == 1) and 1 or 0
-    local boreAbility   = (DIG_GRANT_BORE == 1) and 1 or 0
+    local burrowAbility = (digGrantBurrow == 1) and 1 or 0
+    local boreAbility   = (digGrantBore == 1) and 1 or 0
     local modifier               = player:getMod(xi.mod.EGGHELM)
     local totd                   = VanadielTOTD()
     -- Zone Weather
@@ -1009,6 +1007,7 @@ local function getChocoboDiggingItem(player)
                 if DigRank > 0 then
                     if itemWeight >= v[1] then
                         itemWeight = itemWeight * (v[2]^DigRank)
+                        break
                     end
                 end
             end
@@ -1055,6 +1054,7 @@ local function getChocoboDiggingItem(player)
             if DigRank > 0 then
                 if itemWeight >= v[1] then
                     itemWeight = itemWeight * (v[2]^DigRank)
+                    break
                 end
             end
         end
@@ -1101,13 +1101,13 @@ xi.chocoboDig.start = function(player, precheck)
 
     -- make sure the player can dig before going any further
     -- (and also cause i need a return before core can go any further with this)
-    if canDig(player) == true then
-    local roll           = math.random(0, 100)
-    local moon           = VanadielMoonPhase()
-    local moonmodifier   = 1
-    local skillmodifier  = 0.5 + (skillRank / 20) -- 50% at amateur, 55% at recruit, 60% at initiate, and so on, to 100% at exper
-    local zonedug        = '[DIG]ZONE'..player:getZoneID()..'_ITEMS'
-    local zoneDugCurrent = GetServerVariable(zonedug)
+    if canDig(player) then
+        local roll           = math.random(0, 100)
+        local moon           = VanadielMoonPhase()
+        local moonmodifier   = 1
+        local skillmodifier  = 0.5 + (skillRank / 20) -- 50% at amateur, 55% at recruit, 60% at initiate, and so on, to 100% at exper
+        local zonedug        = '[DIG]ZONE'..player:getZoneID()..'_ITEMS'
+        local zoneDugCurrent = GetServerVariable(zonedug)
 
         if moon < 50 then
             moon = 100 - moon -- This converts moon phase percent to a number that represents how FAR the moon phase is from 50
@@ -1119,20 +1119,20 @@ xi.chocoboDig.start = function(player, precheck)
             player:setCharVar('[DIG]DigCount', 0) -- Reset player dig count/fatigue.
         end
 
-        if zoneDugCurrent + 1 > DIG_ZONE_LIMIT then
+        if zoneDugCurrent + 1 > digZoneLimit then
             if skillRank < 10 and xi.settings.main.DIG_FATIGUE_SKILL_UP then -- Safety check. Let's not try to skill-up if at max skill.
                 calculateSkillUp(player)
             end
 
-            player:PrintToPlayer(find_nothing, 13)
+            player:PrintToPlayer(findNothing, 13)
             player:setCharVar('[DIG]LastDigTime', os.time())
 
             return true
         end
 
         -- dig chance failure
-        if roll > (DIG_RATE * moonmodifier * skillmodifier) then -- base digging rate is 85% and it is multiplied by the moon and skill modifiers
-            player:PrintToPlayer(find_nothing, 13)
+        if roll > (digRate * moonmodifier * skillmodifier) then -- base digging rate is 85% and it is multiplied by the moon and skill modifiers
+            player:PrintToPlayer(findNothing, 13)
             player:setCharVar('[DIG]LastDigTime', os.time())
         -- dig chance success
         else
@@ -1153,7 +1153,7 @@ xi.chocoboDig.start = function(player, precheck)
 
             -- got a crystal ore, but lacked weather or skill to dig it up
             else
-                player:PrintToPlayer(find_nothing, 13)
+                player:PrintToPlayer(findNothing, 13)
                 player:setCharVar('[DIG]LastDigTime', os.time())
             end
         end
