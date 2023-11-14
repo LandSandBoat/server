@@ -10,6 +10,7 @@ zones[xi.zone.NORTHERN_SAN_DORIA] =
         YOU_ACCEPT_THE_MISSION        = 5,     -- You accept the mission.
         ORIGINAL_MISSION_OFFSET       = 16,    -- Bring me one of those axes, and your mission will be a success. No running away now; we've a proud country to defend!
         HOMEPOINT_SET                 = 188,   -- Home point set!
+        NOTHING_HAPPENS               = 327,   -- Nothing happens...
         ITEM_CANNOT_BE_OBTAINED       = 6592,  -- You cannot obtain the <item>. Come back after sorting your inventory.
         ITEM_OBTAINED                 = 6598,  -- Obtained: <item>.
         GIL_OBTAINED                  = 6599,  -- Obtained <number> gil.
@@ -122,7 +123,6 @@ zones[xi.zone.NORTHERN_SAN_DORIA] =
         FRAGMENT_FAR_TOO_SMALL        = 18120, -- You obtain <keyitem>. However, it is far too small to house an adequate amount of energy. Alone, it serves no purpose.
         FRAGMENTS_MELD                = 18121, -- The tiny fragments of Lilisette's memory meld together to form <keyitem>!
         RETRIEVE_DIALOG_ID            = 18156, -- You retrieve <item> from the porter moogle's care.
-        NOTHING_HAPPENS               = 18322, -- Nothing happens...
         COMMON_SENSE_SURVIVAL         = 18502, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
         MAP_MARKER_TUTORIAL           = 18624, -- Selecting Map from the main menu opens the map of the area in which you currently reside. Select Markers and press the right arrow key to see all the markers placed on your map.
     },
