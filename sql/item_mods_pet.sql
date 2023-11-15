@@ -794,6 +794,11 @@ INSERT INTO `item_mods_pet` VALUES (23147,25,40,3); -- Automaton: ACC: 40
 INSERT INTO `item_mods_pet` VALUES (23147,26,40,3); -- Automaton: RACC: 40
 INSERT INTO `item_mods_pet` VALUES (23147,73,14,3); -- Automaton: STORETP: 14
 
+-- Nukumi Gausape +2
+INSERT INTO `item_mods_pet` VALUES (23160,25,54,0); -- Pet: ACC: 54
+INSERT INTO `item_mods_pet` VALUES (23160,26,54,0); -- Pet: RACC: 54
+INSERT INTO `item_mods_pet` VALUES (23160,30,54,0); -- Pet: MACC: 54
+
 -- Foire Dastanas +2
 INSERT INTO `item_mods_pet` VALUES (23191,25,32,3);   -- Automaton - ACC: 32
 INSERT INTO `item_mods_pet` VALUES (23191,384,500,3); -- Automaton - HASTE_GEAR: 500
