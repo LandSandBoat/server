@@ -12,11 +12,8 @@ end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local typeEffect = xi.effect.AMNESIA
-    local power = 30
-    local duration = 75
-
-    skill:setMsg(xi.mobskills.mobStatusEffectMove(mob, target, typeEffect, power, 0, duration))
-
+    -- Subpower 100 prevents removal by Ecphoria Ring
+    skill:setMsg(xi.mobskills.mobStatusEffectMove(mob, target, typeEffect, 30, 0, 75, 100))
     return typeEffect
 end
 
