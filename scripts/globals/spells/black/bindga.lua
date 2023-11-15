@@ -10,15 +10,23 @@ spellObject.onMagicCastingCheck = function(caster, target, spell)
 end
 
 spellObject.onSpellCast = function(caster, target, spell)
-    --Pull base stats.
-    -- local dINT = (caster:getStat(xi.mod.INT) - target:getStat(xi.mod.INT))
+    if target:hasImmunity(xi.immunity.BIND) then
+        spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
+        return
+    end
 
-    --Duration, including resistance.  May need more research.
-    local duration = 60
+    -- Pull base stats.
+    local dINT = caster:getStat(xi.mod.INT) - target:getStat(xi.mod.INT)
 
-    --Resist
+    -- Duration not impacted by any non-random effects
+    -- Duration from normal distribution with mean of 21 and std dev of 12 based on retail testing
+    -- Use the Box-Muller transform to sample from the distribution
+    local z0 = math.sqrt(-2 * math.log(math.random())) * math.cos(2 * math.pi * math.random())
+    local randomDuration = utils.clamp(math.floor(30 + z0 * 12), 1, 60)
+
+    -- Resist
     local params = {}
-    params.diff = nil
+    params.diff = dINT
     params.attribute = xi.mod.INT
     params.skillType = xi.skill.ENFEEBLING_MAGIC
     params.bonus = 0
@@ -26,11 +34,12 @@ spellObject.onSpellCast = function(caster, target, spell)
     local resist = xi.magic.applyResistanceEffect(caster, target, spell, params)
 
     if resist >= 0.5 then --Do it!
-        local resduration = duration * resist
+        local randomResDuration = randomDuration * resist
 
-        resduration = xi.magic.calculateBuildDuration(target, resduration, params.effect, caster)
+        -- still apply build res
+        randomResDuration = xi.magic.calculateBuildDuration(target, randomResDuration, params.effect, caster)
 
-        if target:addStatusEffect(xi.effect.BIND, target:getSpeed(), 0, resduration) then
+        if target:addStatusEffect(params.effect, target:getSpeed(), 0, randomResDuration) then
             spell:setMsg(xi.msg.basic.MAGIC_ENFEEB_IS)
             -- only increment the resbuild if successful (not on a no effect)
             xi.magic.incrementBuildDuration(target, params.effect, caster)
@@ -42,7 +51,7 @@ spellObject.onSpellCast = function(caster, target, spell)
         spell:setMsg(xi.msg.basic.MAGIC_RESIST)
     end
 
-    return xi.effect.BIND
+    return params.effect
 end
 
 return spellObject

@@ -1729,9 +1729,9 @@ REPLACE INTO `mob_droplist` VALUES (2546,1,1,@UNCOMMON,15146,67);  -- SMN Feet
 -- REPLACE INTO `mob_droplist` VALUES (2546,1,2,@UNCOMMON,15031,334); -- PUP Hands (Comment in for ToAU)
 -- REPLACE INTO `mob_droplist` VALUES (2546,1,3,@UNCOMMON,16352,500); -- DNC Feet  (Comment in for WoTG)
 -- REPLACE INTO `mob_droplist` VALUES (2546,1,3,@UNCOMMON,16362,500); -- SCH Legs  (Comment in for WoTG)
-REPLACE INTO `mob_droplist` VALUES (2546,0,0,1000,1449,@COMMON); -- Bronzepiece
-REPLACE INTO `mob_droplist` VALUES (2546,0,0,1000,1449,@UNCOMMON); -- Bronzepiece
-REPLACE INTO `mob_droplist` VALUES (2546,2,0,1000,1449,0); -- Bronzepiece
+REPLACE INTO `mob_droplist` VALUES (2546,0,0,1000,1452,@COMMON); -- Bronzepiece
+REPLACE INTO `mob_droplist` VALUES (2546,0,0,1000,1452,@UNCOMMON); -- Bronzepiece
+REPLACE INTO `mob_droplist` VALUES (2546,2,0,1000,1452,0); -- Bronzepiece
 DELETE FROM `mob_droplist` WHERE dropid = "2556"; -- Quadav
 REPLACE INTO `mob_droplist` VALUES (2556,1,1,@UNCOMMON,15072,66);  -- WAR Head
 REPLACE INTO `mob_droplist` VALUES (2556,1,1,@UNCOMMON,15103,66);  -- MNK Hands
