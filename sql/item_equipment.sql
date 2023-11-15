@@ -10197,7 +10197,7 @@ INSERT INTO `item_equipment` VALUES (21076,'septoptic_+1',99,119,1622044,359,0,0
 INSERT INTO `item_equipment` VALUES (21077,'mjollnir',99,119,4,553,0,1,3,0,0);
 INSERT INTO `item_equipment` VALUES (21078,'yagrush',99,119,4,556,0,1,3,0,0);
 INSERT INTO `item_equipment` VALUES (21079,'gambanteinn',99,119,4,580,0,1,3,0,0);
-INSERT INTO `item_equipment` VALUES (21080,'idris',99,119,1048576,707,0,0,3,0,0);
+INSERT INTO `item_equipment` VALUES (21080,'idris',99,119,1048576,834,0,0,3,0,0);
 INSERT INTO `item_equipment` VALUES (21082,'tishtrya',99,119,1048580,769,0,0,3,0,0);
 INSERT INTO `item_equipment` VALUES (21083,'sucellus',99,119,1589260,336,0,0,3,0,0);
 INSERT INTO `item_equipment` VALUES (21084,'queller_rod',99,119,4,240,0,0,3,0,0);
@@ -10736,7 +10736,7 @@ INSERT INTO `item_equipment` VALUES (21681,'ophidian_sword',1,0,4194303,863,0,0,
 INSERT INTO `item_equipment` VALUES (21682,'lament',1,0,4194303,808,0,0,1,0,0);
 INSERT INTO `item_equipment` VALUES (21683,'ragnarok',99,119,193,546,0,1,1,0,0);
 INSERT INTO `item_equipment` VALUES (21684,'caladbolg',99,119,192,573,0,1,1,0,0);
-INSERT INTO `item_equipment` VALUES (21685,'epeolatry',99,119,2097152,706,0,0,1,0,0);
+INSERT INTO `item_equipment` VALUES (21685,'epeolatry',99,119,2097152,833,0,0,1,0,0);
 INSERT INTO `item_equipment` VALUES (21686,'zulfiqar',99,119,2097281,529,0,0,1,0,0);
 INSERT INTO `item_equipment` VALUES (21687,'takoba',99,119,2097344,542,0,0,1,0,0);
 INSERT INTO `item_equipment` VALUES (21688,'montante',99,119,2097345,377,0,0,1,0,0);
