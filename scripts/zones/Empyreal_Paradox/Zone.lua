@@ -30,7 +30,7 @@ zoneObject.onZoneIn = function(player, prevZone)
 end
 
 zoneObject.onTriggerAreaEnter = function(player, triggerArea)
-    if triggerArea:GetTriggerAreaID() == 1 then
+    if triggerArea:GetTriggerAreaID() == 1 and player:getZPos() ~= -500 then
         player:startEvent(100)
     end
 end

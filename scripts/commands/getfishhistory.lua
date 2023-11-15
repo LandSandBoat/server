@@ -35,6 +35,6 @@ function onTrigger(player, target)
     player:PrintToPlayer(string.format("Showing Fishing Stats for: %s", targ:getName()), xi.msg.channel.SYSTEM_3)
     player:PrintToPlayer(string.format("Lines Cast: %s", fishStats["fishLinesCast"]), xi.msg.channel.SYSTEM_3)
     player:PrintToPlayer(string.format("Fish Caught: %s", fishStats["fishReeled"]), xi.msg.channel.SYSTEM_3)
-    player:PrintToPlayer(string.format("Biggest Fish: %s ilms (%s)", fishStats["fishLongestLength"], xi.fish.getFishName(fishStats['fishLongestId'])), xi.msg.channel.SYSTEM_3)
-    player:PrintToPlayer(string.format("Heaviest Fish: %s ponzes (%s)", fishStats["fishHeaviestWeight"], xi.fish.getFishName(fishStats['fishHeaviestId'])), xi.msg.channel.SYSTEM_3)
+    player:PrintToPlayer(string.format("Biggest Fish: %s ilms (%s)", fishStats["fishLongestLength"], xi.fishing.getFishName(fishStats['fishLongestId'])), xi.msg.channel.SYSTEM_3)
+    player:PrintToPlayer(string.format("Heaviest Fish: %s ponzes (%s)", fishStats["fishHeaviestWeight"], xi.fishing.getFishName(fishStats['fishHeaviestId'])), xi.msg.channel.SYSTEM_3)
 end

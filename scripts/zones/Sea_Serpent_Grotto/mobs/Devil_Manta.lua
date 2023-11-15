@@ -20,7 +20,11 @@ entity.onMobDespawn = function(mob)
     local mantaOne = ID.mob.CHARYBDIS - 2
     local mantaTwo = ID.mob.CHARYBDIS - 4
 
-    if not xi.mob.phOnDespawn(mob, ID.mob.CHARYBDIS_PH, 10, 28800) then
+    if
+        (mob:getID() == mantaOne or
+        mob:getID() == mantaTwo) and
+        not xi.mob.phOnDespawn(mob, ID.mob.CHARYBDIS_PH, 10, 28800)
+    then
         -- Charbydis is not queued to spawn.
         -- Choose a Charbydis PH randomly to spawn next.
         local chooseManta = math.random(1, 2)

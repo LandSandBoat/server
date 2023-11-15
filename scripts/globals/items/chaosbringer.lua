@@ -14,6 +14,7 @@ itemObject.onItemEquip = function(player, item)
             mobAttkListener:addListener("ATTACKED", "VALID_KILL", function(mobAttkedListener, playerAttkedListener, action)
                 mobAttkedListener:setLocalVar("CBListenerApplied", 1)
                 if
+                    playerAttkedListener:isPC() and
                     playerAttkedListener:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.BLADE_OF_DARKNESS) >= QUEST_ACCEPTED and
                     playerAttkedListener:getEquipID(xi.slot.MAIN) == xi.items.CHAOSBRINGER and
                     mobAttkedListener:getHP() == 0

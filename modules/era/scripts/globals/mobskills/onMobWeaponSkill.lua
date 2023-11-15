@@ -807,7 +807,7 @@ m:addOverride("xi.globals.mobskills.astral_flow_pet.onMobWeaponSkill", function(
     skill:setMsg(xi.msg.basic.USES)
 
     -- no effect if pet is inactive
-    if petInactive(pet) then
+    if pet and petInactive(pet) then
         return xi.effect.ASTRAL_FLOW
     end
 
