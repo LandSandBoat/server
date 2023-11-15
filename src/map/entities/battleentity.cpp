@@ -226,15 +226,48 @@ int32 CBattleEntity::GetMaxMP() const
 
 uint8 CBattleEntity::GetSpeed()
 {
-    // Note: retail treats mounted speed as double what it actually is! 40 is in fact retail accurate!
-    int16 startingSpeed = isMounted() ? 40 + settings::get<int8>("map.MOUNT_SPEED_MOD") : speed;
-    // Mod::MOVE (169)
-    // Mod::MOUNT_MOVE (972)
-    Mod mod = isMounted() ? Mod::MOUNT_MOVE : Mod::MOVE;
+    uint8 baseSpeed   = speed;
+    uint8 outputSpeed = 0;
 
-    float modAmount     = (100.0f + static_cast<float>(getMod(mod))) / 100.0f;
-    float modifiedSpeed = static_cast<float>(startingSpeed) * modAmount;
-    uint8 outputSpeed   = static_cast<uint8>(modifiedSpeed);
+    // Mount speed. Independent from regular speed and unaffected by most things.
+    // Note: retail treats mounted speed as double what it actually is! 40 is in fact retail accurate!
+    if (isMounted())
+    {
+        baseSpeed   = 40 + settings::get<int8>("map.MOUNT_SPEED_MOD");
+        outputSpeed = baseSpeed * (100 + getMod(Mod::MOUNT_MOVE)) / 100;
+
+        return std::clamp<uint8>(outputSpeed, std::numeric_limits<uint8>::min(), std::numeric_limits<uint8>::max());
+    }
+
+    // Flee, KIs, Gear penalties, Bolters Roll.
+    float additiveMods = 1.0f + static_cast<float>(getMod(Mod::MOVE_SPEED_STACKABLE)) / 100.0f;
+
+    // Quickening and Mazurka. Only highest applies.
+    Mod modToUse = getMod(Mod::MOVE_SPEED_QUICKENING) > getMod(Mod::MOVE_SPEED_MAZURKA) ? Mod::MOVE_SPEED_QUICKENING : Mod::MOVE_SPEED_MAZURKA;
+
+    float effectBonus = 1.0f + static_cast<float>(getMod(modToUse)) / 100.0f;
+
+    // Positive movement speed from gear. Only highest applies.
+    float gearBonus = 1.0f;
+
+    if (objtype == TYPE_PC)
+    {
+        gearBonus = 1.0f + static_cast<float>(getMaxGearMod(Mod::MOVE_SPEED_GEAR_BONUS)) / 100.0f;
+    }
+
+    // Gravity and Curse. They seem additive to each other and the sum seems to be multiplicative.
+    float weightPenalties = std::clamp<float>(1.0f - static_cast<float>(getMod(Mod::MOVE_SPEED_WEIGHT_PENALTY)), 0.1f, 100.0f);
+
+    // We have all the modifiers needed. Calculate final speed.
+    float modifiedSpeed = static_cast<float>(baseSpeed) * (additiveMods + effectBonus) * gearBonus * weightPenalties;
+
+    outputSpeed = static_cast<uint8>(modifiedSpeed);
+
+    // Set cap.
+    outputSpeed = std::clamp<uint8>(outputSpeed, 0, 80 + settings::get<int8>("map.SPEED_MOD"));
+
+    // Feast of Swords bypasses this cap.
+    // TODO: Find exceptions. Add them here.
 
     return std::clamp<uint8>(outputSpeed, std::numeric_limits<uint8>::min(), std::numeric_limits<uint8>::max());
 }
