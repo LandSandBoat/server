@@ -504,7 +504,7 @@ bool CAIContainer::IsEngaged()
 
 bool CAIContainer::IsUntargetable()
 {
-    return PEntity->PAI->IsCurrentState<CInactiveState>() && static_cast<CInactiveState*>(PEntity->PAI->GetCurrentState())->GetUntargetable();
+    return (PEntity->PAI->IsCurrentState<CInactiveState>() && static_cast<CInactiveState*>(PEntity->PAI->GetCurrentState())->GetUntargetable()) || PEntity->GetUntargetable();
 }
 
 time_point CAIContainer::getTick()
