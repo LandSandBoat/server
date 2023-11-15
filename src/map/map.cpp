@@ -375,6 +375,10 @@ int32 do_init(int32 argc, char** argv)
     });
     // clang-format on
 
+#ifdef TRACY_ENABLE
+    ShowInfo("*** TRACY IS ENABLED ***");
+#endif // TRACY_ENABLE
+
     gProcessLoaded = true;
 
     return 0;
