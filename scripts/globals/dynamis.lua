@@ -325,9 +325,10 @@ xi.dynamis.entryNpcOnTrigger = function(player, npc)
     local info          = entryInfo[zoneId]
     local ID            = zones[zoneId]
     local dynaMask      = player:getCharVar("Dynamis_Status")
+    printf("dynaMask %s", dynaMask)
     local unlockingDyna = utils.mask.getBit(dynaMask, 0)
     local tavnaziaFirst = false
-
+    printf("info.reqs(player) %s", info.reqs(player))
     -- Tavnazia is unique;  plays the first time cs directly on trigger without message or transporting
     if
         info.csBit == 10 and
