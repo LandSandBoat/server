@@ -12,6 +12,7 @@ abilityObject.onAbilityCheck = function(player, target, ability)
 end
 
 abilityObject.onUseAbility = function(player, target, ability)
+    player:delStatusEffect(xi.effect.BARRAGE)
     player:addStatusEffect(xi.effect.UNLIMITED_SHOT, 1, 0, 60)
 end
 
