@@ -869,7 +869,7 @@ xi.dynamis.handleDynamis = function(zone)
                         end
                     end
 
-                    player:addStatusEffect(xi.effect.SJ_RESTRICTION, 0, 0, 0, 18000) -- Inflict SJ Restriction
+                    player:addStatusEffect(xi.effect.SJ_RESTRICTION, 0, 0, 18000) -- Inflict SJ Restriction
                 end
             end
 

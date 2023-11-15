@@ -16,7 +16,7 @@ battlefieldObject.onBattlefieldRegister = function(player, battlefield)
 end
 
 battlefieldObject.onBattlefieldEnter = function(player, battlefield)
-    player:addStatusEffect(xi.effect.SJ_RESTRICTION, 0, 0, 0, 600) -- Inflict SJ Restriction
+    player:addStatusEffect(xi.effect.SJ_RESTRICTION, 0, 0, 600) -- Inflict SJ Restriction
 end
 
 battlefieldObject.onBattlefieldLeave = function(player, battlefield, leavecode)
