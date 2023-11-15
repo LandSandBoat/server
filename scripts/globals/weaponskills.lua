@@ -216,10 +216,12 @@ local function getMultiAttacks(attacker, target, wsParams)
     -- The logic here wasnt actually checking for the augment.
     -- Also, it was in a completely different scale, making triple attack trigger always.
 
-    -- QA/TA/DA can only proc on the first hit of each weapon or each fist
+    -- QA/TA/DA can only proc a maximum of twice per weaponskill
+    -- Can proc once per hit of WS, and once per hand if dual wielding/HtH - up to a maximum of 2 times
     if
         attacker:getOffhandDmg() > 0 or
-        attacker:getWeaponSkillType(xi.slot.MAIN) == xi.skill.HAND_TO_HAND
+        attacker:getWeaponSkillType(xi.slot.MAIN) == xi.skill.HAND_TO_HAND or
+        numHits >= 2
     then
         multiChances = 2
     end
