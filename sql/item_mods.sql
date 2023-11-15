@@ -34328,6 +34328,9 @@ INSERT INTO `item_mods` VALUES (17449,23,5); -- ATT: 5
 -- Healing Mace
 INSERT INTO `item_mods` VALUES (17450,112,7); -- HEALING: 7
 
+-- Morgenstern
+INSERT INTO `item_mods` VALUES (17451,377,13); -- MAIN_DMG_RANK: 13
+
 -- Bastokan Hammer
 INSERT INTO `item_mods` VALUES (17452,25,2); -- ACC: 2
 
@@ -35110,6 +35113,9 @@ INSERT INTO `item_mods` VALUES (17587,5,1); -- MP: 1
 -- Treat Staff Ii
 INSERT INTO `item_mods` VALUES (17588,2,5); -- HP: 5
 INSERT INTO `item_mods` VALUES (17588,5,5); -- MP: 5
+
+-- Thyrsusstab
+INSERT INTO `item_mods` VALUES (17589,377,13); -- MAIN_DMG_RANK: 13
 
 -- Primate Staff
 INSERT INTO `item_mods` VALUES (17590,165,5); -- CRITHITRATE: 5
@@ -35983,6 +35989,9 @@ INSERT INTO `item_mods` VALUES (17824,8,2); -- STR: 2
 -- Messhikimaru
 INSERT INTO `item_mods` VALUES (17826,14,2); -- CHR: 2
 
+-- Michishiba
+INSERT INTO `item_mods` VALUES (17827,377,13); -- MAIN_DMG_RANK: 13
+
 -- Koen
 INSERT INTO `item_mods` VALUES (17828,431,1);  -- ITEM_ADDEFFECT_TYPE: 1
 INSERT INTO `item_mods` VALUES (17828,499,1);  -- ITEM_SUBEFFECT: 1
@@ -36531,6 +36540,9 @@ INSERT INTO `item_mods` VALUES (18048,14,5); -- CHR: 5
 
 -- Mighty Zaghnal
 INSERT INTO `item_mods` VALUES (18049,12,2); -- INT: 2
+
+-- Gravedigger
+INSERT INTO `item_mods` VALUES (18053,377,13); -- MAIN_DMG_RANK: 13
 
 -- Ivory Sickle
 INSERT INTO `item_mods` VALUES (18054,7,10); -- CONVHPTOMP: 10
@@ -37099,6 +37111,9 @@ INSERT INTO `item_mods` VALUES (18212,11,1); -- AGI: 1
 -- Mighty Axe
 INSERT INTO `item_mods` VALUES (18213,10,1); -- VIT: 1
 INSERT INTO `item_mods` VALUES (18213,11,1); -- AGI: 1
+
+-- Rampager
+INSERT INTO `item_mods` VALUES (18217,377,13); -- MAIN_DMG_RANK: 13
 
 -- Prominence Axe
 INSERT INTO `item_mods` VALUES (18220,431,1);  -- ITEM_ADDEFFECT_TYPE: 1
