@@ -19,10 +19,10 @@ spellObject.onSpellCast = function(caster, target, spell)
     local dINT = caster:getStat(xi.mod.INT) - target:getStat(xi.mod.INT)
 
     -- Duration not impacted by any non-random effects
-    -- Duration from normal distribution with mean of 21 and std dev of 12 based on retail testing
+    -- Duration from normal distribution with mean of 30 and std dev of 12 based on retail testing
     -- Use the Box-Muller transform to sample from the distribution
     local z0 = math.sqrt(-2 * math.log(math.random())) * math.cos(2 * math.pi * math.random())
-    local randomDuration = utils.clamp(math.floor(21 + z0 * 12), 1, 60)
+    local randomDuration = utils.clamp(math.floor(30 + z0 * 12), 1, 60)
 
     -- Resist
     local params = {}
