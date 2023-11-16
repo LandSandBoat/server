@@ -799,6 +799,11 @@ INSERT INTO `item_mods_pet` VALUES (23160,25,54,0); -- Pet: ACC: 54
 INSERT INTO `item_mods_pet` VALUES (23160,26,54,0); -- Pet: RACC: 54
 INSERT INTO `item_mods_pet` VALUES (23160,30,54,0); -- Pet: MACC: 54
 
+-- Peltast's plackart +2
+INSERT INTO `item_mods_pet` VALUES (23165,25,54,2); -- Wyvern: ACC: 54
+INSERT INTO `item_mods_pet` VALUES (23165,30,54,2); -- Wyvern: MACC: 54
+-- TODO: Wyvern: Grants food effect
+
 -- Foire Dastanas +2
 INSERT INTO `item_mods_pet` VALUES (23191,25,32,3);   -- Automaton - ACC: 32
 INSERT INTO `item_mods_pet` VALUES (23191,384,500,3); -- Automaton - HASTE_GEAR: 500
