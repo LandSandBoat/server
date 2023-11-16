@@ -11,38 +11,38 @@ local pathStart =
 
 local pathBranch1 =
 {
-    { x = 102.00, y = -0.19, z = 3.00 },
-    { x = 109.49, y = 0.59, z = -0.07 },
-    { x = 124.47, y = 0.00, z = -42.08 },
-    { x = 91.93, y = -5.15, z = -58.24 },
-    { x = 66.46, y = -8.81, z = -62.91 },
-    { x = 60.86, y = -9.02, z = -73.80 },
-    { x = 57.09, y = -9.37, z = -96.88 },
-    { x = 38.39, y = -8.62, z = -98.74 },
-    { x = 15.73, y = -1.02, z = -94.88 },
-    { x = -0.65, y = 0.00, z = -84.13 },
+    { x = 102.00, y = -0.19, z =   3.00 },
+    { x = 109.49, y =  0.59, z =  -0.07 },
+    { x = 124.47, y =  0.00, z = -42.08 },
+    { x =  91.93, y = -5.15, z = -58.24 },
+    { x =  66.46, y = -8.81, z = -62.91 },
+    { x =  60.86, y = -9.02, z = -73.80 },
+    { x =  57.09, y = -9.37, z = -96.88 },
+    { x =  38.39, y = -8.62, z = -98.74 },
+    { x =  15.73, y = -1.02, z = -94.88 },
+    { x =  -0.65, y =  0.00, z = -84.13 },
 }
 
 local pathBranch2 =
 {
     { x = -40.24, y = 0.00, z = -38.35 },
-    { x = -44.36, y = 0.68, z = 13.98 },
+    { x = -44.36, y = 0.68, z =  13.98 },
 }
 
 local pathBranch3 =
 {
     { x = -31.28, y = -0.23, z = 48.64 },
-    { x = -0.52, y = 0.00, z = 82.02 },
+    { x =  -0.52, y =  0.00, z = 82.02 },
 }
 
 local pathBranch4 =
 {
-    { x = 3.06, y = 0.15, z = 125.56 },
-    { x = 40.12, y = 0.000, z = 158.89 },
-    { x = 60.35, y = -4.24, z = 143.23 },
-    { x = 79.86, y = -8.75, z = 139.89 },
-    { x = 85.86, y = -8.82, z = 138.11 },
-    { x = 91.87, y = -8.83, z = 142.52 },
+    { x =   3.06, y =  0.15, z = 125.56 },
+    { x =  40.12, y =  0.00, z = 158.89 },
+    { x =  60.35, y = -4.24, z = 143.23 },
+    { x =  79.86, y = -8.75, z = 139.89 },
+    { x =  85.86, y = -8.82, z = 138.11 },
+    { x =  91.87, y = -8.83, z = 142.52 },
     { x = 101.60, y = -8.71, z = 143.17 },
 }
 
@@ -50,8 +50,8 @@ local pathBranch5 =
 {
     { x = 100.62, y = -8.75, z = 78.86 },
     { x = 108.29, y = -4.60, z = 54.26 },
-    { x = 118.98, y = 0.00, z = 38.12 },
-    { x = 102.00, y = -0.19, z = 3.00 },
+    { x = 118.98, y =  0.00, z = 38.12 },
+    { x = 102.00, y = -0.19, z =  3.00 },
 }
 
 local pathFind =
@@ -145,16 +145,16 @@ local pathFind =
 }
 
 entity.onMobInitialize = function(mob)
-    --Guivre has increased movespeed, sight range with
-    --natural double/triple attack.
-    mob:setMod(xi.mod.MOVE, 150)
+    -- Guivre has increased movespeed, sight range with
+    -- Natural double/triple attack.
+    mob:setMod(xi.mod.MOVE_SPEED_STACKABLE, 150)
     mob:setMobMod(xi.mobMod.SIGHT_RANGE, 30)
     mob:setMod(xi.mod.DOUBLE_ATTACK, 25)
     mob:setMod(xi.mod.TRIPLE_ATTACK, 15)
 end
 
 entity.onMobSpawn = function(mob)
-    --Guivre will despawn if not claimed within 3-5 hours.
+    -- Guivre will despawn if not claimed within 3-5 hours.
     mob:setLocalVar('despawnTime', math.random(10800, 18000) + os.time())
     mob:setLocalVar('isPaused', 0)
     mob:setLocalVar('mobPath', 1)
