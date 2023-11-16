@@ -240,34 +240,40 @@ uint8 CBattleEntity::GetSpeed()
     }
 
     // Flee, KIs, Gear penalties, Bolters Roll.
-    float additiveMods = 1.0f + static_cast<float>(getMod(Mod::MOVE_SPEED_STACKABLE)) / 100.0f;
+    float additiveMods = static_cast<float>(getMod(Mod::MOVE_SPEED_STACKABLE)) / 100.0f;
 
     // Quickening and Mazurka. Only highest applies.
     Mod modToUse = getMod(Mod::MOVE_SPEED_QUICKENING) > getMod(Mod::MOVE_SPEED_MAZURKA) ? Mod::MOVE_SPEED_QUICKENING : Mod::MOVE_SPEED_MAZURKA;
 
-    float effectBonus = 1.0f + static_cast<float>(getMod(modToUse)) / 100.0f;
+    float effectBonus = static_cast<float>(getMod(modToUse)) / 100.0f;
 
     // Positive movement speed from gear. Only highest applies.
-    float gearBonus = 1.0f;
+    float gearBonus = 0.0f;
 
     if (objtype == TYPE_PC)
     {
-        gearBonus = 1.0f + static_cast<float>(getMaxGearMod(Mod::MOVE_SPEED_GEAR_BONUS)) / 100.0f;
+        gearBonus = static_cast<float>(getMaxGearMod(Mod::MOVE_SPEED_GEAR_BONUS)) / 100.0f;
     }
 
     // Gravity and Curse. They seem additive to each other and the sum seems to be multiplicative.
-    float weightPenalties = std::clamp<float>(1.0f - static_cast<float>(getMod(Mod::MOVE_SPEED_WEIGHT_PENALTY)), 0.1f, 100.0f);
+    float weightPenalties = static_cast<float>(getMod(Mod::MOVE_SPEED_WEIGHT_PENALTY)) / 100.0f;
 
     // We have all the modifiers needed. Calculate final speed.
-    float modifiedSpeed = static_cast<float>(baseSpeed) * (additiveMods + effectBonus) * gearBonus * weightPenalties;
+    float modifiedSpeed = static_cast<float>(baseSpeed) * std::clamp<float>(1.0f + additiveMods + effectBonus, 0.1f, 1.6f) * (1.0f + gearBonus) * std::clamp<float>(1.0f - weightPenalties, 0.1f, 1.0f);
 
     outputSpeed = static_cast<uint8>(modifiedSpeed);
 
     // Set cap.
     outputSpeed = std::clamp<uint8>(outputSpeed, 0, 80 + settings::get<int8>("map.SPEED_MOD"));
 
-    // Feast of Swords bypasses this cap.
+    // Speed cap can be bypassed. Ex. Feast of swords. GM speed.
     // TODO: Find exceptions. Add them here.
+
+    // GM speed bypass.
+    if (getMod(Mod::MOVE_SPEED_OVERIDE) > 0)
+    {
+        outputSpeed = getMod(Mod::MOVE_SPEED_OVERIDE);
+    }
 
     return std::clamp<uint8>(outputSpeed, std::numeric_limits<uint8>::min(), std::numeric_limits<uint8>::max());
 }
