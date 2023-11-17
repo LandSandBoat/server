@@ -15,8 +15,8 @@ zones[xi.zone.CRAWLERS_NEST_S] =
         LOGIN_CAMPAIGN_UNDERWAY       = 7524, -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!
         LOGIN_NUMBER                  = 7525, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
         MEMBERS_LEVELS_ARE_RESTRICTED = 7545, -- Your party is unable to participate because certain members' levels are restricted.
-        ITEM_DELIVERY_DIALOG          = 7688, -- Hello! Any packages to sendy-wend?
-        COMMON_SENSE_SURVIVAL         = 8653, -- It appears that you have arrived at a new survival guide provided by the Servicemen's Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
+        ITEM_DELIVERY_DIALOG          = 7689, -- Hello! Any packages to sendy-wend?
+        COMMON_SENSE_SURVIVAL         = 8654, -- It appears that you have arrived at a new survival guide provided by the Servicemen's Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
     mob =
     {

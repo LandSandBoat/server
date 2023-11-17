@@ -7758,7 +7758,7 @@ xi.roe.records =
     { -- Spoils - Land Crab Meat (UC)
         trigger = xi.roeTrigger.LOOT_ITEM,
         goal = 5,
-        reqs = { itemID = set { xi.item.LAND_CRAB_MEAT }, unityLeader = xi.unityLeader.AYAME },
+        reqs = { itemID = set { xi.item.SLICE_OF_LAND_CRAB_MEAT }, unityLeader = xi.unityLeader.AYAME },
         flags = set { 'unity' },
         reward = { sparks = 100, xp = 500, accolades = 500 },
     },

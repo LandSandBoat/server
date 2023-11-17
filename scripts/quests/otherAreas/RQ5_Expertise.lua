@@ -94,7 +94,7 @@ quest.sections =
             {
                 onTrigger = function(player, npc)
                     if quest:getVar(player, 'Prog') == 0 then
-                        return quest:progressEvent(102, xi.item.SCREAM_FUNGUS, xi.item.LAND_CRAB_MEAT) -- Ask for ingredients to cook.
+                        return quest:progressEvent(102, xi.item.SCREAM_FUNGUS, xi.item.SLICE_OF_LAND_CRAB_MEAT) -- Ask for ingredients to cook.
                     elseif quest:getVar(player, 'Prog') == 1 then
                         return quest:event(104) -- Reminder.
                     elseif quest:getVar(player, 'Prog') == 2 then
@@ -112,7 +112,7 @@ quest.sections =
                 end,
 
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, { xi.item.SCREAM_FUNGUS, xi.item.LAND_CRAB_MEAT }) then
+                    if npcUtil.tradeHasExactly(trade, { xi.item.SCREAM_FUNGUS, xi.item.SLICE_OF_LAND_CRAB_MEAT }) then
                         return quest:progressEvent(103) -- Give ingredients.
                     end
                 end,

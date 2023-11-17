@@ -125,13 +125,8 @@ INSERT INTO `mob_skill_lists` VALUES ('Avatar-Ifrit',38,844);
 INSERT INTO `mob_skill_lists` VALUES ('Avatar-Ifrit',38,845);
 INSERT INTO `mob_skill_lists` VALUES ('Avatar-Ifrit',38,846);
 INSERT INTO `mob_skill_lists` VALUES ('Avatar-Ifrit',38,847);
--- INSERT INTO `mob_skill_lists` VALUES ('Avatar-Ixion',39,1542);
-INSERT INTO `mob_skill_lists` VALUES ('Avatar-Ixion',39,2334);
-INSERT INTO `mob_skill_lists` VALUES ('Avatar-Ixion',39,2335);
-INSERT INTO `mob_skill_lists` VALUES ('Avatar-Ixion',39,2336);
-INSERT INTO `mob_skill_lists` VALUES ('Avatar-Ixion',39,2337);
-INSERT INTO `mob_skill_lists` VALUES ('Avatar-Ixion',39,2338);
-INSERT INTO `mob_skill_lists` VALUES ('Avatar-Ixion',39,2369);
+INSERT INTO `mob_skill_lists` VALUES ('Ixion_Melee',39,2341); -- di hoof attack
+INSERT INTO `mob_skill_lists` VALUES ('Ixion_Melee',39,2342); -- di horn attack
 INSERT INTO `mob_skill_lists` VALUES ('Avatar-Leviathan',40,858);
 INSERT INTO `mob_skill_lists` VALUES ('Avatar-Leviathan',40,859);
 INSERT INTO `mob_skill_lists` VALUES ('Avatar-Leviathan',40,860);
@@ -380,27 +375,9 @@ INSERT INTO `mob_skill_lists` VALUES ('Dvergr',90,2116);
 INSERT INTO `mob_skill_lists` VALUES ('Dvergr',90,2117);
 INSERT INTO `mob_skill_lists` VALUES ('Dvergr',90,2118);
 INSERT INTO `mob_skill_lists` VALUES ('Dvergr',90,2119);
-INSERT INTO `mob_skill_lists` VALUES ('PandemoniumLamp',91,594);
-INSERT INTO `mob_skill_lists` VALUES ('PandemoniumLamp',91,596);
-INSERT INTO `mob_skill_lists` VALUES ('PandemoniumLamp',91,1171);
-INSERT INTO `mob_skill_lists` VALUES ('PandemoniumLamp',91,1172);
-INSERT INTO `mob_skill_lists` VALUES ('PandemoniumLamp',91,1173);
-INSERT INTO `mob_skill_lists` VALUES ('PandemoniumLamp',91,1174);
-INSERT INTO `mob_skill_lists` VALUES ('PandemoniumLamp',91,1718);
-INSERT INTO `mob_skill_lists` VALUES ('PandemoniumLamp',91,1720);
-INSERT INTO `mob_skill_lists` VALUES ('PandemoniumLamp',91,1723);
-INSERT INTO `mob_skill_lists` VALUES ('PandemoniumLamp',91,1743);
-INSERT INTO `mob_skill_lists` VALUES ('PandemoniumLamp',91,1745);
-INSERT INTO `mob_skill_lists` VALUES ('PandemoniumLamp',91,1746);
-INSERT INTO `mob_skill_lists` VALUES ('PandemoniumLamp',91,1758);
-INSERT INTO `mob_skill_lists` VALUES ('PandemoniumLamp',91,1759);
-INSERT INTO `mob_skill_lists` VALUES ('PandemoniumLamp',91,1922);
-INSERT INTO `mob_skill_lists` VALUES ('PandemoniumLamp',91,1923);
-INSERT INTO `mob_skill_lists` VALUES ('PandemoniumLamp',91,1930);
-INSERT INTO `mob_skill_lists` VALUES ('PandemoniumLamp',91,2041);
-INSERT INTO `mob_skill_lists` VALUES ('PandemoniumLamp',91,2045);
 INSERT INTO `mob_skill_lists` VALUES ('PandemoniumLamp',91,2113);
 INSERT INTO `mob_skill_lists` VALUES ('PandemoniumLamp',91,2114);
+INSERT INTO `mob_skill_lists` VALUES ('PandemoniumLamp',91,2115);
 INSERT INTO `mob_skill_lists` VALUES ('PandemoniumLamp',91,2116);
 INSERT INTO `mob_skill_lists` VALUES ('PandemoniumLamp',91,2117);
 INSERT INTO `mob_skill_lists` VALUES ('PandemoniumLamp',91,2119);
@@ -1430,6 +1407,7 @@ INSERT INTO `mob_skill_lists` VALUES ('Tyger',315,2027);
 INSERT INTO `mob_skill_lists` VALUES ('Tyger',315,2028);
 INSERT INTO `mob_skill_lists` VALUES ('Pandemonium',316,2113);
 INSERT INTO `mob_skill_lists` VALUES ('Pandemonium',316,2114);
+INSERT INTO `mob_skill_lists` VALUES ('Pandemonium',316,2115);
 INSERT INTO `mob_skill_lists` VALUES ('Pandemonium',316,2116);
 INSERT INTO `mob_skill_lists` VALUES ('Pandemonium',316,2117);
 INSERT INTO `mob_skill_lists` VALUES ('Pandemonium',316,2118);
@@ -3857,7 +3835,11 @@ INSERT INTO `mob_skill_lists` VALUES ('Fahrafahr_the_Bloodied',1198,2083); -- dr
 
 INSERT INTO `mob_skill_lists` VALUES ('Emela-ntouka',1099,368); -- blockhead
 
--- Next available ID: 2000
+INSERT INTO `mob_skill_lists` VALUES ('Flockbock',2000,269); -- petribreath
+
+INSERT INTO `mob_skill_lists` VALUES ('Zmey_Gorynych',2001,380); -- scythe_tail
+
+-- Next available ID: 2002
 
 -- ------------------------------------------------------------
 -- Start of Ambuscade section

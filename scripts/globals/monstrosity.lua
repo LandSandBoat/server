@@ -1221,6 +1221,10 @@ xi.monstrosity.odysseanPassageOnTrade = function(player, npc, trade)
 end
 
 xi.monstrosity.odysseanPassageOnTrigger = function(player, npc)
+    if xi.settings.main.ENABLE_MONSTROSITY ~= 1 then
+        return
+    end
+
     local monSize         = player:getMonstrositySize()
     local hasBelligerency = player:getBelligerencyFlag() and 1 or 0
 
@@ -1282,6 +1286,10 @@ xi.monstrosity.feretoryOnZoneIn = function(player, prevZone)
         player:setPos(-358.000, -3.400, -440.00, 63)
     end
 
+    if xi.settings.main.ENABLE_MONSTROSITY ~= 1 then
+        return cs
+    end
+
     if player:getMainJob() ~= xi.job.MON then
         player:changeJob(xi.job.MON)
     end
@@ -1294,10 +1302,13 @@ xi.monstrosity.feretoryOnZoneIn = function(player, prevZone)
 end
 
 xi.monstrosity.feretoryOnZoneOut = function(player)
+    if xi.settings.main.ENABLE_MONSTROSITY ~= 1 then
+        return
+    end
+
     -- Mark all status effects so they'll survive zoning
     -- (there are some routines that will force them off anyway)
     for _, effect in pairs(player:getStatusEffects()) do
-        print(effect)
         effect:delEffectFlag(xi.effectFlag.ON_ZONE)
         effect:delEffectFlag(xi.effectFlag.LOGOUT)
     end
@@ -1317,6 +1328,10 @@ xi.monstrosity.aengusOnTrade = function(player, npc, trade)
 end
 
 xi.monstrosity.aengusOnTrigger = function(player, npc)
+    if xi.settings.main.ENABLE_MONSTROSITY ~= 1 then
+        return
+    end
+
     local inBelligerency = player:getBelligerencyFlag() and 1 or 0
     player:startEvent(13, inBelligerency, player:getCurrency('infamy'), 0, 0, 0, 0, 0, 0)
 end
@@ -1339,6 +1354,10 @@ xi.monstrosity.teyrnonOnTrade = function(player, npc, trade)
 end
 
 xi.monstrosity.teyrnonOnTrigger = function(player, npc)
+    if xi.settings.main.ENABLE_MONSTROSITY ~= 1 then
+        return
+    end
+
     player:startEvent(7, player:getCurrency('infamy'), 0, 0, 0, 0, 0, 0, 0)
 end
 
@@ -1578,6 +1597,10 @@ xi.monstrosity.maccusOnTrade = function(player, npc, trade)
 end
 
 xi.monstrosity.maccusOnTrigger = function(player, npc)
+    if xi.settings.main.ENABLE_MONSTROSITY ~= 1 then
+        return
+    end
+
     player:startEvent(9, 285, 2, 2, 0, 0, 0, 0, 0)
 end
 

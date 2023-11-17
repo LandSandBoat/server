@@ -29,18 +29,18 @@ entity.onTrigger = function(player, npc)
         [xi.assault.mission.IMPERIAL_AGENT_RESCUE] =
         {
             {
-                { itemid = xi.item.HI_POTION_II, droprate = 900 },
-                { itemid =    0,                  droprate = 100 },
+                { itemid = xi.item.HI_POTION_P2, droprate = 900 },
+                { itemid =    0,                 droprate = 100 },
             },
 
             {
                 { itemid = xi.item.HI_POTION_TANK, droprate = 100 },
-                { itemid =     0,                   droprate = 900 },
+                { itemid =     0,                  droprate = 900 },
             },
 
             {
                 { itemid = xi.item.RERAISER, droprate = 530 },
-                { itemid =    0,              droprate = 470 },
+                { itemid =    0,             droprate = 470 },
             },
         },
 

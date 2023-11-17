@@ -196,6 +196,11 @@ void CCharPacket::updateWith(CCharEntity* PChar, ENTITYUPDATE type, uint8 update
                 ref<uint32>(0x3E) = monstrosity::GetPackedMonstrosityName(PChar);
                 ref<uint16>(0x48) = PChar->m_PMonstrosity->Look;
                 ref<uint16>(0x58) = 0xFFFF;
+
+                if (PChar->m_PMonstrosity->Belligerency)
+                {
+                    ref<uint8>(0x29) |= 0x08;
+                }
             }
         }
         break;

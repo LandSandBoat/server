@@ -45,7 +45,7 @@ INSERT INTO `pet_list` VALUES (16,'Diabolos',4590,1,99,0,8);
 INSERT INTO `pet_list` VALUES (17,'Alexander',4589,1,99,0,7);
 INSERT INTO `pet_list` VALUES (18,'Odin',4591,1,99,0,8);
 INSERT INTO `pet_list` VALUES (19,'Atomos',1,1,99,0,0);
-INSERT INTO `pet_list` VALUES (20,'CaitSith',1,1,99,0,0);
+INSERT INTO `pet_list` VALUES (20,'Cait Sith',5775,1,99,0,7);
 INSERT INTO `pet_list` VALUES (21,'SheepFamiliar',4598,23,35,3600,0);
 INSERT INTO `pet_list` VALUES (22,'HareFamiliar',4641,23,35,5400,0);
 INSERT INTO `pet_list` VALUES (23,'CrabFamiliar',4610,23,55,1800,0);

@@ -636,6 +636,7 @@ uint16 CBattleEntity::ATT()
     TracyZoneScoped;
     // TODO: consider which weapon!
     int32 ATT    = 8 + m_modStat[Mod::ATT];
+    auto  ATTP   = m_modStat[Mod::ATTP];
     auto* weapon = dynamic_cast<CItemWeapon*>(m_Weapons[SLOT_MAIN]);
     if (weapon && weapon->isTwoHanded())
     {
@@ -661,10 +662,10 @@ uint16 CBattleEntity::ATT()
         {
             ATT += GetSkill(weapon->getSkillType()) + weapon->getILvlSkill();
 
-            // Smite applies when using 2H or H2H weapons
+            // Smite applies (bonus ATTP) when using 2H or H2H weapons
             if (weapon->isTwoHanded() || weapon->isHandToHand())
             {
-                ATT += static_cast<int32>(ATT * this->getMod(Mod::SMITE) / 256.f); // Divide Smite value by 256
+                ATTP += static_cast<int32>(this->getMod(Mod::SMITE) / 256.f * 100); // Divide Smite value by 256
             }
         }
     }
@@ -672,7 +673,7 @@ uint16 CBattleEntity::ATT()
     {
         ATT += this->GetSkill(SKILL_AUTOMATON_MELEE);
     }
-    return ATT + (ATT * m_modStat[Mod::ATTP] / 100) + std::min<int16>((ATT * m_modStat[Mod::FOOD_ATTP] / 100), m_modStat[Mod::FOOD_ATT_CAP]);
+    return ATT + (ATT * ATTP / 100) + std::min<int16>((ATT * m_modStat[Mod::FOOD_ATTP] / 100), m_modStat[Mod::FOOD_ATT_CAP]);
 }
 
 uint16 CBattleEntity::RATT(uint8 skill, uint16 bonusSkill)
@@ -1187,6 +1188,41 @@ int16 CBattleEntity::getMod(Mod modID)
 {
     TracyZoneScoped;
     return m_modStat[modID];
+}
+
+/************************************************************************
+ *                                                                      *
+ *  Get the highest value of the specified modifier across all gear     *
+ *                                                                      *
+ ************************************************************************/
+int16 CBattleEntity::getMaxGearMod(Mod modID)
+{
+    TracyZoneScoped;
+    CCharEntity* PChar       = dynamic_cast<CCharEntity*>(this);
+    uint16       maxModValue = 0;
+
+    if (!PChar)
+    {
+        ShowWarning("CBattleEntity::getMaxGearMod() - Entity is not a player.");
+
+        return 0;
+    }
+
+    for (uint8 i = 0; i < SLOT_BACK; ++i)
+    {
+        auto* PItem = PChar->getEquip((SLOTTYPE)i);
+        if (PItem && (PItem->isType(ITEM_EQUIPMENT) || PItem->isType(ITEM_WEAPON)))
+        {
+            uint16 modValue = PItem->getModifier(modID);
+
+            if (modValue > maxModValue)
+            {
+                maxModValue = modValue;
+            }
+        }
+    }
+
+    return maxModValue;
 }
 
 void CBattleEntity::addPetModifier(Mod type, PetModType petmod, int16 amount)

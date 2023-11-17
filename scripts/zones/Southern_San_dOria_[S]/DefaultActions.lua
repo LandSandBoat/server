@@ -54,7 +54,7 @@ return {
     ['Rongelouts_N_Distaud']     = { event = 604 },
     ['Sabiliont']                = { event = 608 },
     ['Saphiriance_TK']           = { event = 450 },
-    ['Scarlette_CA']             = { event = 489 },
+    ['Scarlette_CA']             = { event = 459 },
     ['Suspicious_Object']        = { text = ID.text.NOTHING_OUT_OF_ORDINARY },
     ['Thierride']                = { event = 333 },
     ['Touttaures']               = { event = 603 },

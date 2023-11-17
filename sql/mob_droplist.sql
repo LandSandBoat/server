@@ -26781,6 +26781,19 @@ INSERT INTO `mob_droplist` VALUES (3286,0,0,1000,19234,@VCOMMON); -- Lyft Hexagu
 INSERT INTO `mob_droplist` VALUES (3287,0,0,1000,2815,@UNCOMMON); -- Aptant of arkhe (Uncommon, 10%)
 INSERT INTO `mob_droplist` VALUES (3287,0,0,1000,2818,@COMMON);   -- Aptant of ishis (Common, 15%)
 
+-- ZoneID: 24 - Flockbock
+INSERT INTO `mob_droplist` VALUES (3288,0,0,1000,2836,@UNCOMMON); -- Woolly Pelage (Uncommon, 10%)
+
+-- ZoneID: 113 - Zmey Gorynych
+INSERT INTO `mob_droplist` VALUES (3289,0,0,1000,2811,@COMMON); -- Aptant of primus (Common, 15%)
+INSERT INTO `mob_droplist` VALUES (3289,0,0,1000,2813,@COMMON); -- Aptant of durus (Common, 15%)
+
+INSERT INTO `mob_droplist` VALUES (3290,0,0,1000,19107,@VCOMMON); -- Dark Ixion: Azoth
+INSERT INTO `mob_droplist` VALUES (3290,0,0,1000,11289,@COMMON);  -- Dark Ixion: Ixion Cloak
+INSERT INTO `mob_droplist` VALUES (3290,0,0,1000,16242,@VCOMMON); -- Dark Ixion: Ixion Cape
+INSERT INTO `mob_droplist` VALUES (3290,0,0,1000,2654,@ALWAYS);   -- Dark Ixion: Horn
+INSERT INTO `mob_droplist` VALUES (3290,0,0,1000,2655,@ALWAYS);   -- Dark Ixion: Tail
+
 /*!40000 ALTER TABLE `mob_droplist` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;

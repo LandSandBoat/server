@@ -375,6 +375,10 @@ int32 do_init(int32 argc, char** argv)
     });
     // clang-format on
 
+#ifdef TRACY_ENABLE
+    ShowInfo("*** TRACY IS ENABLED ***");
+#endif // TRACY_ENABLE
+
     gProcessLoaded = true;
 
     return 0;
@@ -806,7 +810,7 @@ int32 parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_data_t*
         }
     }
 
-    if (PChar->retriggerLatentsAfterPacketParsing)
+    if (PChar->retriggerLatents)
     {
         for (uint8 equipSlotID = 0; equipSlotID < 16; ++equipSlotID)
         {
@@ -815,7 +819,7 @@ int32 parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_data_t*
                 PChar->PLatentEffectContainer->CheckLatentsEquip(equipSlotID);
             }
         }
-        PChar->retriggerLatentsAfterPacketParsing = false; // reset for next packet parse
+        PChar->retriggerLatents = false; // reset as we have retriggered the latents somewhere
     }
 
     map_session_data->client_packet_id = SmallPD_Code;

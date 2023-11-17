@@ -72,7 +72,7 @@ CMobSkillState::CMobSkillState(CBattleEntity* PEntity, uint16 targid, uint16 wsi
         actionTarget.animation  = 0;
         actionTarget.param      = m_PSkill->getID();
         actionTarget.messageID  = 43;
-        m_PEntity->loc.zone->PushPacket(m_PEntity, CHAR_INRANGE, new CActionPacket(action));
+        m_PEntity->loc.zone->PushPacket(m_PEntity, CHAR_INRANGE_SELF, new CActionPacket(action));
     }
     m_PEntity->PAI->EventHandler.triggerListener("WEAPONSKILL_STATE_ENTER", CLuaBaseEntity(m_PEntity), m_PSkill->getID());
     SpendCost();
@@ -153,7 +153,7 @@ void CMobSkillState::Cleanup(time_point tick)
         actionTarget.animation       = 0x1FC; // Not perfectly accurate, this animation ID can change from time to time for unknown reasons.
         actionTarget.reaction        = REACTION::HIT;
 
-        m_PEntity->loc.zone->PushPacket(m_PEntity, CHAR_INRANGE, new CActionPacket(action));
+        m_PEntity->loc.zone->PushPacket(m_PEntity, CHAR_INRANGE_SELF, new CActionPacket(action));
 
         // On retail testing, mobs lose 33% of their TP at 2900 or higher TP
         // But lose 25% at < 2900 TP.
