@@ -450,14 +450,27 @@
         "BuildString",
         "SendLuaFuncStringToZone",
         "GetFirstID",
+        "GetTableOfIDs",
+        "NextConquestTally",
+        "NextJstDay",
+        "GetEntityByID",
+        "GetItemByID",
+        "GetItemIDByName",
+        "GetContainerFilenamesList",
+        "GetElevatorState",
     ],
     "Lua.diagnostics.disable": [
         "lowercase-global"
     ],
+    "Lua.diagnostics.ignoredFiles": "Disable",
     "Lua.hint.enable": true,
     "Lua.hint.setType": true,
     "Lua.runtime.version": "LuaJIT",
     "Lua.workspace.preloadFileSize": 10000,
+    "Lua.workspace.ignoreDir": [
+        ".vscode",
+        "tools/ci/tests/stylecheck.lua"
+    ],
     "[python]": {
         "editor.defaultFormatter": "ms-python.black-formatter",
         "editor.formatOnSave": true

@@ -1,3 +1,4 @@
+#ifdef __linux__
 #include <csignal>
 #include <sys/ptrace.h>
 #include <sys/resource.h>
@@ -79,3 +80,4 @@ bool debug::isRunningUnderDebugger()
     }
     return underDebugger;
 }
+#endif // __linux__

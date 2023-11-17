@@ -1,4 +1,5 @@
-﻿#include "debug.h"
+﻿#ifdef _WIN32
+#include "debug.h"
 
 #include "WheatyExceptionReport.h"
 
@@ -13,3 +14,4 @@ bool debug::isRunningUnderDebugger()
 {
     return IsDebuggerPresent();
 }
+#endif // _WIN32
