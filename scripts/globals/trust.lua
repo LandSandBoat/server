@@ -438,7 +438,7 @@ end
 -- For debugging and lining up teamwork messages
 xi.trust.dumpMessages = function(mob, pageOffset)
     for i = 0, 20 do
-        xi.trust.message(mob, pageOffset, i)
+        xi.trust.message(mob, pageOffset)
     end
 end
 

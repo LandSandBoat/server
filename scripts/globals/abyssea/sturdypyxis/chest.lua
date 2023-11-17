@@ -69,7 +69,7 @@ end
 -----------------------------------
 -- Desc: Messages sent to all players in a party in the zone
 -----------------------------------
-xi.pyxis.messageChest = function(player, messageid, param1, param2, param3, param4)
+xi.pyxis.messageChest = function(player, messageid, param1, param2, param3, param4, npc)
     local alliance = player:getAlliance()
 
     for _, member in ipairs(alliance) do

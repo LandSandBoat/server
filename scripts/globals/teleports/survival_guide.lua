@@ -132,7 +132,7 @@ xi.survivalGuide.onEventUpdate = function(player, csid, option, npc)
     end
 end
 
-xi.survivalGuide.onEventFinish = function(player, eventId, option)
+xi.survivalGuide.onEventFinish = function(player, eventId, option, npc)
     if
         eventId == 8500 and
         bit.band(option, 0xFF) == optionMap.TELEPORT
