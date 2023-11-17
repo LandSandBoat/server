@@ -1455,7 +1455,7 @@ xi.regime.checkRegime = function(player, mob, regimeId, index, regimeType)
 
     -- prowess buffs from completing Grounds regimes
     if regimeType == xi.regime.type.GROUNDS then
-        if not player.isClassicMode() then
+        if not player:isClassicMode() then
             addGovProwessBonusEffect(player)
 
             -- repeat clears bonus
