@@ -1455,23 +1455,24 @@ xi.regime.checkRegime = function(player, mob, regimeId, index, regimeType)
 
     -- prowess buffs from completing Grounds regimes
     if regimeType == xi.regime.type.GROUNDS then
-        addGovProwessBonusEffect(player)
+        if not player:isClassicMode() then
+            addGovProwessBonusEffect(player)
 
-        -- repeat clears bonus
-        if player:hasStatusEffect(xi.effect.PROWESS) then
-            -- increase reward based on number of clears. hard caps at 2x base reward.
-            local govClears  = player:getStatusEffect(xi.effect.PROWESS):getPower()
+            -- repeat clears bonus
+            if player:hasStatusEffect(xi.effect.PROWESS) then
+                -- increase reward based on number of clears. hard caps at 2x base reward.
+                local govClears  = player:getStatusEffect(xi.effect.PROWESS):getPower()
 
-            reward = reward * (100 + (govClears * 4)) / 100
-            reward = utils.clamp(reward, 0, baseReward * 2)
+                reward = reward * (100 + (govClears * 4)) / 100
+                reward = utils.clamp(reward, 0, baseReward * 2)
 
-            -- increment clears
-            player:delStatusEffectSilent(xi.effect.PROWESS)
-            player:addStatusEffect(xi.effect.PROWESS, govClears + 1, 0, 0)
-
-        else
-            -- keep track of number of clears
-            player:addStatusEffect(xi.effect.PROWESS, 1, 0, 0)
+                -- increment clears
+                player:delStatusEffectSilent(xi.effect.PROWESS)
+                player:addStatusEffect(xi.effect.PROWESS, govClears + 1, 0, 0)
+           else
+                -- keep track of number of clears
+                player:addStatusEffect(xi.effect.PROWESS, 1, 0, 0)
+           end
         end
     end
 
@@ -1513,7 +1514,12 @@ xi.regime.checkRegime = function(player, mob, regimeId, index, regimeType)
 
             if completions > 0 then
                 baseReward = math.ceil(baseReward * (.85 ^ completions))
-                player:PrintToPlayer(string.format("You receive reduced experience (%u time(s) completed today)", completions), xi.msg.channel.SYSTEM_3)
+
+                if completions == 1 then
+                    player:PrintToPlayer(string.format("You receive reduced experience. (%u time completed today)", completions), xi.msg.channel.SYSTEM_3)
+                else
+                    player:PrintToPlayer(string.format("You receive reduced experience. (%u times completed today)", completions), xi.msg.channel.SYSTEM_3)
+                end
             end
 
             player:setCharVar("[regime]repeatedToday", completions + 1)
