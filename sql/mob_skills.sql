@@ -1866,7 +1866,7 @@ INSERT INTO `mob_skills` VALUES (1906,917,'ultimate_terror',1,30.0,2000,1500,4,0
 INSERT INTO `mob_skills` VALUES (1907,1127,'dream_shroud',1,10.0,2000,1500,1,128,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (1908,918,'nightmare',1,30.0,2000,1500,4,128,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (1909,1128,'cacodemonia',1,10.0,2000,1500,4,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (1910,1282,'nether_blast',0,15.0,2000,1500,4,64,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (1910,1129,'nether_blast',0,15.0,2000,1500,4,64,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (1911,1125,'ruinous_omen',1,30.0,2000,200,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (1912,1125,'hypnogenesis',1,20.0,2000,1500,4,0,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (1913,1657,'stunbolt',0,7.0,2000,1500,4,0,0,0,0,0,0);
@@ -1874,7 +1874,7 @@ INSERT INTO `mob_skills` VALUES (1912,1125,'hypnogenesis',1,20.0,2000,1500,4,0,0
 -- INSERT INTO `mob_skills` VALUES (1915,1659,'.',0,7.0,2000,1500,4,0,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (1916,1660,'blessed_radiance',0,7.0,2000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (1917,1280,'sweeping_somnolence',4,20.0,2000,1500,4,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (1918,1129,'nether_tempest',1,20,2000,2000,4,0,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (1918,1282,'nether_tempest',1,20,2000,2000,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (1919,1281,'daydream',0,7.0,2000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (1920,1264,'rushing_drub',0,7.0,2000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (1921,1265,'forceful_blow',0,7.0,2000,1000,4,0,0,0,0,0,0);
