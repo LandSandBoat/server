@@ -237,9 +237,7 @@ INSERT INTO `item_latents` VALUES (13143,368,25,13,193);
 -- Uggalepih Pendant
 INSERT INTO `item_latents` VALUES (13145,28,8,4,51);     -- "Magic Atk. Bonus" while MP <51%
 
-----------------------------------------------------------
--- Brisingamen+1
-----------------------------------------------------------
+-- Brisingamen +1
 INSERT INTO `item_latents` VALUES (13162,2,12,26,0);     -- Daytime: HP +12
 INSERT INTO `item_latents` VALUES (13162,5,12,26,1);     -- Nighttime: MP +12
 INSERT INTO `item_latents` VALUES (13162,8,7,28,0);      -- Firesday: STR +7
