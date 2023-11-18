@@ -6,7 +6,7 @@ require('scripts/globals/abyssea')
 xi = xi or {}
 xi.atmaFabricant = xi.atmaFabricant or {}
 
-xi.atmaFabricant.onTrade = function(player, npc)
+xi.atmaFabricant.onTrade = function(player, npc, trade)
 end
 
 xi.atmaFabricant.onTrigger = function(player, npc)

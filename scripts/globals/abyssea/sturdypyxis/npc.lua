@@ -88,7 +88,7 @@ xi.pyxis.npc.onPyxisTrade = function(player, npc, trade)
             player:tradeComplete()
             xi.pyxis.getDrops(npc, dropType, chestTier)
             xi.pyxis.messageChest(player, ID.text.TRADE_KEY_OPEN, 2490, 0, 0, 0, npc)
-            xi.pyxis.openChest(player, npc, dropType)
+            xi.pyxis.openChest(player, npc)
         end
     end
 end

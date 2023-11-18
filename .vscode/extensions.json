@@ -1,11 +1,17 @@
 {
     "recommendations": [
-        "koihik.vscode-lua-format",
         "jkiviluoto.tws",
         "sumneko.lua",
         "wwm.better-align",
         "tomblind.local-lua-debugger-vscode",
         "ms-python.python",
-        "ms-python.black-formatter"
+        "ms-python.black-formatter",
+        "eamodio.gitlens",
+        "donjayamanne.githistory",
+        "josetr.cmake-language-support-vscode",
+        "ms-vscode.cpptools-themes",
+        "ms-vscode.cpptools-extension-pack",
+        "ms-vscode.cpptools",
+        "jeff-hykin.better-cpp-syntax"
     ]
 }

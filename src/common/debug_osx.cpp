@@ -1,3 +1,4 @@
+#ifdef __APPLE__
 #include <csignal>
 #include <sys/ptrace.h>
 #include <sys/resource.h>
@@ -85,3 +86,4 @@ bool debug::isRunningUnderDebugger()
     }
     return underDebugger;
 }
+#endif // __APPLE__

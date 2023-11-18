@@ -91,6 +91,9 @@ add_definitions(
     -DSOL_PRINT_ERRORS=0
 )
 
+# For external libs
+set(CMAKE_WARN_DEPRECATED OFF CACHE BOOL "" FORCE)
+
 add_subdirectory(ext)
 
 include(ClangTidy)
