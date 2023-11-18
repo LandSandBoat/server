@@ -329,7 +329,11 @@ xi.spells.damage.calculateMTDR = function(caster, target, spell)
     local multipleTargetReduction = 1 -- The variable we want to calculate.
     local targets                 = spell:getTotalTargets()
 
-    if targets > 1 then
+    if
+        targets > 1 and
+        caster:isPC() and
+        spell:getSpellGroup() ~= xi.magic.spellGroup.BLUE
+    then
         if targets > 1 and targets < 10 then
             multipleTargetReduction = 0.9 - 0.05 * targets
         else
