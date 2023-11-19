@@ -68,15 +68,9 @@ entity.onMobSpawn = function(mob)
             mob:setMobAbilityEnabled(false)
         end
     end)
-
-    entity.onMobRoam(mob)
-    mob:pathThrough(pathNodes, bit.bor(xi.path.flag.PATROL, xi.path.flag.REVERSE))
 end
 
 entity.onMobRoam = function(mob)
-    local bfNum = mob:getBattlefield():getArea()
-    local point = math.random(1, 8)
-    mob:pathTo(pathNodes[bfNum][point][1], pathNodes[bfNum][point][2], pathNodes[bfNum][point][3], xi.path.flag.SCRIPT)
 end
 
 entity.onMobWeaponSkillPrepare = function(mob, target)

@@ -13,7 +13,7 @@ end
 
 entity.onMobSpawn = function(mob)
     mob:setLocalVar("HPThreshold", math.random(10, 90))
-    mob:setMod(xi.mod.FIRE_ABSORB, 1000)
+    mob:setMod(xi.mod.FIRE_ABSORB, 100)
 end
 
 entity.onAdditionalEffect = function(mob, target, damage)
