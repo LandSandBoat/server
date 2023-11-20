@@ -1507,8 +1507,8 @@ xi.regime.checkRegime = function(player, mob, regimeId, index, regimeType)
     -- Player must be equal or greater than REGIME_REWARD_THRESHOLD levels below the minimum suggested level
     if player:getMainLvl() >= math.max(1, page[5] - xi.settings.main.REGIME_REWARD_THRESHOLD) then
         if
-            player:isCrystalWarrior() or
-            player:isClassicMode()
+            (player:isCrystalWarrior() or player:isClassicMode()) and
+            (player:partyHighestLevel > page[6] - 6)
         then
             local completions = player:getCharVar("[regime]repeatedToday")
 
