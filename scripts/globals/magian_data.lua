@@ -4036,7 +4036,7 @@ xi.magian.trials =
             itemId       = xi.item.SPHARAI,
             itemAugments =
             {
-                [1] = { 740, 5 }, -- DMG:+8
+                [1] = { 740, 7 }, -- DMG:+8
             },
         },
     },
