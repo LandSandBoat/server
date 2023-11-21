@@ -11763,21 +11763,7 @@ INSERT INTO `mob_droplist` VALUES (1441,2,0,1000,1455,0);       -- One Byne Bill
 -- ZoneID: 135 - Kindred Warrior
 -- ZoneID: 135 - Kindred Monk
 -- ZoneID: 135 - Kindred Thief
--- ZoneID: 135 - Kindred Warrior
--- ZoneID: 135 - Kindred White Mage
--- ZoneID: 135 - Kindred Red Mage
--- ZoneID: 135 - Kindred Monk
--- ZoneID: 135 - Kindred Black Mage
--- ZoneID: 135 - Kindred Thief
--- ZoneID: 135 - Kindred Paladin
--- ZoneID: 135 - Kindred Dark Knight
--- ZoneID: 135 - Kindred Beastmaster
--- ZoneID: 135 - Kindred Bard
--- ZoneID: 135 - Kindred Ranger
--- ZoneID: 135 - Kindred Samurai
--- ZoneID: 135 - Kindred Ninja
--- ZoneID: 135 - Kindred Dragoon
--- ZoneID: 135 - Kindred Summoner
+INSERT INTO `mob_droplist` VALUES (1442,0,0,1000,3494,@RARE);   -- Forgotten Hope (Rare, 5%)
 INSERT INTO `mob_droplist` VALUES (1442,0,0,1000,11305,@VRARE); -- Etoile Casaque (Very Rare, 1%)
 INSERT INTO `mob_droplist` VALUES (1442,0,0,1000,11465,@VRARE); -- Mirage Keffiyeh (Very Rare, 1%)
 INSERT INTO `mob_droplist` VALUES (1442,0,0,1000,11468,@VRARE); -- Commodore Tricorne (Very Rare, 1%)
