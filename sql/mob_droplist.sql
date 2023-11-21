@@ -11763,21 +11763,7 @@ INSERT INTO `mob_droplist` VALUES (1441,2,0,1000,1455,0);       -- One Byne Bill
 -- ZoneID: 135 - Kindred Warrior
 -- ZoneID: 135 - Kindred Monk
 -- ZoneID: 135 - Kindred Thief
--- ZoneID: 135 - Kindred Warrior
--- ZoneID: 135 - Kindred White Mage
--- ZoneID: 135 - Kindred Red Mage
--- ZoneID: 135 - Kindred Monk
--- ZoneID: 135 - Kindred Black Mage
--- ZoneID: 135 - Kindred Thief
--- ZoneID: 135 - Kindred Paladin
--- ZoneID: 135 - Kindred Dark Knight
--- ZoneID: 135 - Kindred Beastmaster
--- ZoneID: 135 - Kindred Bard
--- ZoneID: 135 - Kindred Ranger
--- ZoneID: 135 - Kindred Samurai
--- ZoneID: 135 - Kindred Ninja
--- ZoneID: 135 - Kindred Dragoon
--- ZoneID: 135 - Kindred Summoner
+INSERT INTO `mob_droplist` VALUES (1442,0,0,1000,3494,@RARE);   -- Forgotten Hope (Rare, 5%)
 INSERT INTO `mob_droplist` VALUES (1442,0,0,1000,11305,@VRARE); -- Etoile Casaque (Very Rare, 1%)
 INSERT INTO `mob_droplist` VALUES (1442,0,0,1000,11465,@VRARE); -- Mirage Keffiyeh (Very Rare, 1%)
 INSERT INTO `mob_droplist` VALUES (1442,0,0,1000,11468,@VRARE); -- Commodore Tricorne (Very Rare, 1%)
@@ -20190,20 +20176,9 @@ INSERT INTO `mob_droplist` VALUES (2542,2,0,1000,1455,0);       -- One Byne Bill
 -- ZoneID: 188 - Vanguard Ambusher
 -- ZoneID: 188 - Vanguard Necromancer
 -- ZoneID: 188 - Vanguard Ronin
--- ZoneID: 188 - Vanguard Smithy
--- ZoneID: 188 - Vanguard Pitfighter
--- ZoneID: 188 - Vanguard Welldigger
--- ZoneID: 188 - Vanguard Alchemist
--- ZoneID: 188 - Vanguard Shaman
--- ZoneID: 188 - Vanguard Tinkerer
--- ZoneID: 188 - Vanguard Maestro
--- ZoneID: 188 - Vanguard Ronin
--- ZoneID: 188 - Vanguard Armorer
--- ZoneID: 188 - Vanguard Necromancer
--- ZoneID: 188 - Vanguard Ambusher
--- ZoneID: 188 - Vanguard Hitman
 INSERT INTO `mob_droplist` VALUES (2543,0,0,1000,1470,80);      -- Sparkling Stone (8.0%)
 INSERT INTO `mob_droplist` VALUES (2543,0,0,1000,1520,80);      -- Jar Of Goblin Grease (8.0%)
+INSERT INTO `mob_droplist` VALUES (2543,0,0,1000,3496,@VRARE);  -- Forgotten Journey (Very Rare, 1%)
 INSERT INTO `mob_droplist` VALUES (2543,0,0,1000,15028,20);     -- Commodore Gants (2.0%)
 INSERT INTO `mob_droplist` VALUES (2543,0,0,1000,15066,20);     -- Relic Shield (2.0%)
 INSERT INTO `mob_droplist` VALUES (2543,0,0,1000,15102,20);     -- Warriors Mufflers (2.0%)
@@ -20926,25 +20901,10 @@ INSERT INTO `mob_droplist` VALUES (2557,2,0,1000,1455,0);       -- One Byne Bill
 -- ZoneID: 186 - Vanguard Minstrel
 -- ZoneID: 186 - Vanguard Mason
 -- ZoneID: 186 - Vanguard Undertaker
--- ZoneID: 186 - Vanguard Vindicator
--- ZoneID: 186 - Vanguard Militant
--- ZoneID: 186 - Vanguard Constable
--- ZoneID: 186 - Vanguard Thaumaturge
--- ZoneID: 186 - Vanguard Protector
--- ZoneID: 186 - Vanguard Defender
--- ZoneID: 186 - Vanguard Beasttender
--- ZoneID: 186 - Vanguard Drakekeeper
--- ZoneID: 186 - Vanguard Purloiner
--- ZoneID: 186 - Vanguard Vigilante
--- ZoneID: 186 - Vanguard Minstrel
--- ZoneID: 186 - Vanguard Hatamoto
--- ZoneID: 186 - Vanguard Mason
--- ZoneID: 186 - Vanguard Kusa
--- ZoneID: 186 - Vanguard Undertaker
--- ZoneID: 186 - Vanguard Defender
 INSERT INTO `mob_droplist` VALUES (2558,0,0,1000,1469,80);      -- Chunk Of Wootz Ore (8.0%)
 INSERT INTO `mob_droplist` VALUES (2558,0,0,1000,1470,80);      -- Sparkling Stone (8.0%)
 INSERT INTO `mob_droplist` VALUES (2558,0,0,1000,1521,80);      -- Vial Of Slime Juice (8.0%)
+INSERT INTO `mob_droplist` VALUES (2558,0,0,1000,3496,@RARE);   -- Forgotten Journey (Rare, 5%)
 INSERT INTO `mob_droplist` VALUES (2558,0,0,1000,18278,20);     -- Relic Blade (2.0%)
 INSERT INTO `mob_droplist` VALUES (2558,0,0,1000,18284,20);     -- Relic Axe (2.0%)
 INSERT INTO `mob_droplist` VALUES (2558,0,0,1000,18302,20);     -- Relic Scythe (2.0%)
@@ -20977,7 +20937,7 @@ INSERT INTO `mob_droplist` VALUES (2559,0,0,1000,1453,@VRARE);  -- Montiont Silv
 INSERT INTO `mob_droplist` VALUES (2559,0,0,1000,1456,@VRARE);  -- One Hundred Byne Bill (Very Rare, 1%)
 
 -- ZoneID: 188 - Vanguard Enchanter
--- ZoneID: 188 - Vanguard Enchanter
+INSERT INTO `mob_droplist` VALUES (2560,0,0,1000,3496,@VRARE);  -- Forgotten Journey (Very Rare, 1%)
 INSERT INTO `mob_droplist` VALUES (2560,0,0,1000,15028,20);     -- Commodore Gants (2.0%)
 INSERT INTO `mob_droplist` VALUES (2560,0,0,1000,15066,20);     -- Relic Shield (2.0%)
 INSERT INTO `mob_droplist` VALUES (2560,0,0,1000,15102,20);     -- Warriors Mufflers (2.0%)
@@ -21046,8 +21006,8 @@ INSERT INTO `mob_droplist` VALUES (2562,0,0,1000,16349,@VRARE); -- Commodore Tre
 INSERT INTO `mob_droplist` VALUES (2562,2,0,1000,1452,0);       -- Ordelle Bronzepiece (Steal)
 
 -- ZoneID: 188 - Vanguard Pathfinder
--- ZoneID: 188 - Vanguard Pathfinder
 INSERT INTO `mob_droplist` VALUES (2563,0,0,1000,1520,80);      -- Jar Of Goblin Grease (8.0%)
+INSERT INTO `mob_droplist` VALUES (2563,0,0,1000,3496,@VRARE);  -- Forgotten Journey (Very Rare, 1%)
 INSERT INTO `mob_droplist` VALUES (2563,0,0,1000,15028,20);     -- Commodore Gants (2.0%)
 INSERT INTO `mob_droplist` VALUES (2563,0,0,1000,15066,20);     -- Relic Shield (2.0%)
 INSERT INTO `mob_droplist` VALUES (2563,0,0,1000,15102,20);     -- Warriors Mufflers (2.0%)
