@@ -2651,7 +2651,10 @@ INSERT INTO `item_latents` VALUES (23100,311,26,13,164); -- Hashishin Kavuk +2: 
 INSERT INTO `item_latents` VALUES (23103,165,1,13,443);  -- Maculele Tiara +2: EFFECT_CLIMACTIC_FLOURISH: CRITHITRATE: 1
 INSERT INTO `item_latents` VALUES (23103,421,28,13,443); -- Maculele Tiara +2: EFFECT_CLIMACTIC_FLOURISH: CRIT_DMG_INCREASE: 28%
 
-INSERT INTO `item_latents` VALUES (23197,518,10,13,57);  -- WAR AF2 119 +2 Hands Defender Shield Rate +10
+INSERT INTO `item_latents` VALUES (23171,27,-26,13,401); -- Arbatel Gown +2: EFFECT_ADDENDUM_WHITE: ENMITY: -26
+INSERT INTO `item_latents` VALUES (23171,27,-26,13,402); -- Arbatel Gown +2: EFFECT_ADDENDUM_BLACK: ENMITY: -26
+
+INSERT INTO `item_latents` VALUES (23197,518,10,13,57);  -- Agoge Mufflers +2: EFFECT_DEFENDER: SHIELDBLOCKRATE: 10
 
 -- Hachiya Kyahan +2
 INSERT INTO `item_latents` VALUES (23320,169,25,26,2);   -- Dusk to dawn: Movement speed +25%
