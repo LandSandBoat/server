@@ -6402,6 +6402,8 @@ namespace charutils
             PChar->resetPetZoningInfo();
         }
 
+        SaveCharEquip(PChar);
+        SaveCharLook(PChar);
         PChar->pushPacket(new CServerIPPacket(PChar, type, ipp));
     }
 

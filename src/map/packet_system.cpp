@@ -173,6 +173,11 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "packets/zone_in.h"
 #include "packets/zone_visited.h"
 
+namespace
+{
+    const std::string swapRateLimitVar = "core-LastGearSwap";
+} // namespace
+
 uint8 PacketSize[512];
 
 std::function<void(map_session_data_t* const, CCharEntity* const, CBasicPacket&)> PacketParser[512];
@@ -3487,8 +3492,15 @@ void SmallPacket0x050(map_session_data_t* const PSession, CCharEntity* const PCh
     }
 
     charutils::EquipItem(PChar, slotID, equipSlotID, containerID); // current
-    charutils::SaveCharEquip(PChar);
-    charutils::SaveCharLook(PChar);
+    // Only save char look to db every X seconds (or more) to avoid db spam when changing individual pieces
+    // Do not save equipment at all since SaveCharEquip is a very expensive operation
+    auto lastSwapTime   = PChar->GetLocalVar(swapRateLimitVar.c_str());
+    auto timeNowSeconds = std::chrono::time_point_cast<std::chrono::seconds>(server_clock::now());
+    if (lastSwapTime == 0 || (timeNowSeconds.time_since_epoch().count() - lastSwapTime) > 30)
+    {
+        charutils::SaveCharLook(PChar);
+    }
+    PChar->SetLocalVar(swapRateLimitVar.c_str(), static_cast<uint32>(timeNowSeconds.time_since_epoch().count()));
     luautils::CheckForGearSet(PChar); // check for gear set on gear change
     PChar->UpdateHealth();
     PChar->retriggerLatents = true; // retrigger all latents later because our gear has changed
@@ -3520,8 +3532,15 @@ void SmallPacket0x051(map_session_data_t* const PSession, CCharEntity* const PCh
             charutils::EquipItem(PChar, slotID, equipSlotID, containerID);
         }
     }
-    charutils::SaveCharEquip(PChar);
-    charutils::SaveCharLook(PChar);
+    // Only save char look to db every X seconds (or more) to avoid db spam when changing individual pieces
+    // Do not save equipment at all since SaveCharEquip is a very expensive operation
+    auto lastSwapTime   = PChar->GetLocalVar(swapRateLimitVar.c_str());
+    auto timeNowSeconds = std::chrono::time_point_cast<std::chrono::seconds>(server_clock::now());
+    if (lastSwapTime == 0 || (timeNowSeconds.time_since_epoch().count() - lastSwapTime) > 30)
+    {
+        charutils::SaveCharLook(PChar);
+    }
+    PChar->SetLocalVar(swapRateLimitVar.c_str(), static_cast<uint32>(timeNowSeconds.time_since_epoch().count()));
     luautils::CheckForGearSet(PChar); // check for gear set on gear change
     PChar->UpdateHealth();
     PChar->retriggerLatents = true; // retrigger all latents later because our gear has changed
@@ -6653,6 +6672,9 @@ void SmallPacket0x0E7(map_session_data_t* const PSession, CCharEntity* const PCh
     {
         return;
     }
+
+    charutils::SaveCharEquip(PChar);
+    charutils::SaveCharLook(PChar);
 
     if (PChar->m_moghouseID || PChar->nameflags.flags & FLAG_GM || PChar->m_GMlevel > 0)
     {
