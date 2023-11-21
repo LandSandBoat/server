@@ -225,7 +225,7 @@ xi.dynamis.onMobFightDiabolosClub = function(mob, mobTarget)
     then
         mob:setLocalVar("ShardSummon1", 0)
         local zoneID = mob:getZoneID()
-        xi.dynamis.nmDynamicSpawn(252, 110, true, zoneID, mob, mob)
+        xi.dynamis.nmDynamicSpawn(252, 110, true, zoneID, mobTarget, mob)
     end
 
     if
@@ -235,7 +235,7 @@ xi.dynamis.onMobFightDiabolosClub = function(mob, mobTarget)
     then
         mob:setLocalVar("ShardSummon2", 0)
         local zoneID = mob:getZoneID()
-        xi.dynamis.nmDynamicSpawn(252, 110, true, zoneID, mob, mob)
+        xi.dynamis.nmDynamicSpawn(252, 110, true, zoneID, mobTarget, mob)
     end
 
     if mob:getLocalVar("RuinousOmenHPP") > 0 then

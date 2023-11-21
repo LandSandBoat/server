@@ -2148,7 +2148,7 @@ end)
 m:addOverride("xi.globals.mobskills.cacodemonia.onMobWeaponSkill", function(target, mob, skill)
     local typeEffect = xi.effect.CURSE_I
     local power = 40
-    if skill:getID() == 1909 then -- Diabolos Dynamis Tavnazia - 48%
+    if mob:getZoneID() == xi.zone.DYNAMIS_TAVNAZIA then -- Diabolos Dynamis Tavnazia - 48%
         power = 48
     end
 
@@ -2238,7 +2238,7 @@ m:addOverride("xi.globals.mobskills.camisado.onMobWeaponSkill", function(target,
     local dmgmod = 1
 
     -- Diabolos Dynamis Tavnazia - covering skill IDs: single target 656 and AoE 1903
-    if mob:getZoneID() == 42 then
+    if mob:getZoneID() == xi.zone.DYNAMIS_TAVNAZIA then
         accmod = 4
         dmgmod = 4
     end
@@ -2246,7 +2246,10 @@ m:addOverride("xi.globals.mobskills.camisado.onMobWeaponSkill", function(target,
     local info = xi.mobskills.mobPhysicalMove(mob, target, skill, numhits, accmod, dmgmod, xi.mobskills.magicalTpBonus.NO_EFFECT)
 
     local shadows = info.hitslanded
-    if skill:getID() == 1903 then
+    if
+        mob:getZoneID() == xi.zone.DYNAMIS_TAVNAZIA and
+        skill:getID() == 1903
+    then
         shadows = xi.mobskills.shadowBehavior.WIPE_SHADOWS
     end
 
@@ -4529,7 +4532,7 @@ m:addOverride("xi.globals.mobskills.dream_shroud.onMobWeaponSkill", function(tar
     local multiplier = 1
 
     -- Diabolos Dynamis Tavnazia
-    if skill:getID() == 1907 then
+    if mob:getZoneID() == xi.zone.DYNAMIS_TAVNAZIA then
         multiplier = 2
     end
 
@@ -9760,7 +9763,7 @@ end)
 m:addOverride("xi.globals.mobskills.nether_blast.onMobWeaponSkill", function(target, mob, skill)
     local multiplier = 5
     -- Diabolos Dynamis Tavnazia tosses nether blast for ~1k
-    if skill:getID() == 1910 then
+    if mob:getZoneID() == xi.zone.DYNAMIS_TAVNAZIA then
         multiplier = 10
     end
 
@@ -9808,7 +9811,7 @@ m:addOverride("xi.globals.mobskills.nightmare.onMobWeaponSkill", function(target
         subPower = 14       -- Unresisted, 10 ticks at 14 hp/tick = 140hp per target
     end
 
-    if skill:getID() == 1908 then -- Diabolos Dynamis Tavnazia - 35/tick, at least 60s
+    if mob:getZoneID() == xi.zone.DYNAMIS_TAVNAZIA then -- Diabolos Dynamis Tavnazia - 35/tick, at least 60s
         duration = 60
         subPower = 35
     end
@@ -9862,7 +9865,7 @@ end)
 m:addOverride("xi.globals.mobskills.noctoshield.onMobWeaponSkill", function(target, mob, skill)
     local power = 13
     -- Diabolos Dynamis Tavnazia
-    if skill:getID() == 1905 then
+    if mob:getZoneID() == xi.zone.DYNAMIS_TAVNAZIA then
         power = 35
     end
 
@@ -11977,7 +11980,7 @@ m:addOverride("xi.globals.mobskills.ruinous_omen.onMobWeaponSkill", function(tar
     local ratio = 4
 
     -- Diabolos Dynamis Tavnazia - Observed 60%-95%, with most being above 80%
-    if skill:getID() == 1911 then
+    if mob:getZoneID() == xi.zone.DYNAMIS_TAVNAZIA then
         hppTarget = 80
         hppMax = 95
         hppMin = 60
@@ -15697,7 +15700,7 @@ end)
 
 m:addOverride("xi.globals.mobskills.ultimate_terror.onMobWeaponSkill", function(target, mob, skill)
     -- Diabolos Dynamis Tavnazia -- adds TERROR
-    if skill:getID() == 1906 then
+    if mob:getZoneID() == xi.zone.DYNAMIS_TAVNAZIA then
         xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.TERROR, 1, 0, 30)
     end
 
