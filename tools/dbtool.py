@@ -993,18 +993,15 @@ def present_menu(title, contents):
 # fmt: on
 
 
-def configure_and_launch_multi_process_by_zonetype():
-    db_query(
-        f"""
-        UPDATE xidb.zone_settings SET zoneport = 54230 WHERE zonetype = 0;
-        UPDATE xidb.zone_settings SET zoneport = 54231 WHERE zonetype = 1;
-        UPDATE xidb.zone_settings SET zoneport = 54232 WHERE zonetype = 2;
-        UPDATE xidb.zone_settings SET zoneport = 54233 WHERE zonetype = 3;
-        UPDATE xidb.zone_settings SET zoneport = 54234 WHERE zonetype = 4;
-        UPDATE xidb.zone_settings SET zoneport = 54235 WHERE zonetype = 5;
-        UPDATE xidb.zone_settings SET zoneport = 54236 WHERE zonetype = 6;
-        """
-    )
+def configure_and_launch_multi_process_by_modulus(mod):
+    # Build query string based on mod
+    query = ""
+    for idx in range(0, mod):
+        query += f"UPDATE xidb.zone_settings SET zoneport = 54230 + {idx} WHERE zoneid % {mod} = {idx};\n"
+
+    print(query)
+
+    db_query(query)
 
     result = db_query(
         f"""
@@ -1015,6 +1012,8 @@ def configure_and_launch_multi_process_by_zonetype():
     ports = result.stdout.split("\n")[1:-1]
 
     executable = from_server_path(f"xi_map{exe}")
+
+    print(f"Ports: {ports}\n")
 
     # fmt: off
     for port in ports:
@@ -1028,6 +1027,14 @@ def configure_and_launch_multi_process_by_zonetype():
             stderr=subprocess.DEVNULL,
         )
     # fmt: on
+
+
+def configure_and_launch_multi_process_by_modulus_3():
+    configure_and_launch_multi_process_by_modulus(3)
+
+
+def configure_and_launch_multi_process_by_modulus_7():
+    configure_and_launch_multi_process_by_modulus(7)
 
 
 def update_submodules():
@@ -1188,9 +1195,13 @@ def tasks_menu():
             #     "Offload historical auction data to auction_house_history",
             #     offload_to_auction_house_history,
             # ],
+            "b": [
+                "Configure and launch multi-process server (3 processes)",
+                configure_and_launch_multi_process_by_modulus_3,
+            ],
             "c": [
-                "Configure and launch multi-process server (by zonetype, 7 processes)",
-                configure_and_launch_multi_process_by_zonetype,
+                "Configure and launch multi-process server (7 processes)",
+                configure_and_launch_multi_process_by_modulus_7,
             ],
             "d": ["Dump Table", dump_table],
             "a": ["Dump All Tables", dump_all_tables],
