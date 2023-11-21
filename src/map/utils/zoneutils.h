@@ -51,8 +51,9 @@ namespace zoneutils
     CCharEntity* GetChar(uint32 id);                              // returns pointer to character by id
     CCharEntity* GetCharToUpdate(uint32 primary, uint32 ternary); // returns pointer to preferred char to update for party changes
     void         ForEachZone(const std::function<void(CZone*)>& func);
-    uint64       GetZoneIPP(uint16 zoneid);       // returns IPP for zone ID
-    bool         IsResidentialArea(CCharEntity*); // returns whether or not the area is a residential zone
+    uint64       GetZoneIPP(uint16 zoneid);                      // returns IPP for zone ID
+    bool         IsResidentialArea(CCharEntity*);                // returns whether or not the area is a residential zone
+    bool         IsAlwaysOutOfNationControl(REGION_TYPE region); // returns true if a region should never trigger "in areas outside own nation's control" latent effect; false otherwise.
 
     void AfterZoneIn(CBaseEntity* PEntity); // triggers after a player has finished zoning in
 

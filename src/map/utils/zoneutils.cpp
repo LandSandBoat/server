@@ -1211,4 +1211,9 @@ namespace zoneutils
         luautils::AfterZoneIn(PChar);
     }
 
+    bool IsAlwaysOutOfNationControl(REGION_TYPE region)
+    {
+        return region >= REGION_TYPE::SANDORIA && region <= REGION_TYPE::LIMBUS;
+    }
+
 }; // namespace zoneutils
