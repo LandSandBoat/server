@@ -1000,8 +1000,11 @@ def configure_and_launch_multi_process_by_modulus(mod):
         query += f"UPDATE xidb.zone_settings SET zoneport = 54230 + {idx} WHERE zoneid % {mod} = {idx};\n"
 
     print(query)
-
     db_query(query)
+
+    result = db_query("SELECT DISTINCT zoneip FROM xidb.zone_settings;")
+
+    zoneip = result.stdout.split("\n")[1]
 
     result = db_query(
         f"""
@@ -1013,13 +1016,13 @@ def configure_and_launch_multi_process_by_modulus(mod):
 
     executable = from_server_path(f"xi_map{exe}")
 
-    print(f"Ports: {ports}\n")
+    print(f"ZoneIP: {zoneip}, Ports: {ports}\n")
 
     # fmt: off
     for port in ports:
-        print(f"Launching {executable} --log log/map-server-{port}.log --ip 127.0.0.1 --port {port}")
+        print(f"Launching {executable} --log log/map-server-{port}.log --ip {zoneip} --port {port}")
         subprocess.Popen(
-            [executable, "--log", f"log/map-server-{port}.log", "--ip", "127.0.0.1", "--port", port],
+            [executable, "--log", f"log/map-server-{port}.log", "--ip", zoneip, "--port", port],
             shell=True,
             creationflags=subprocess.DETACHED_PROCESS | subprocess.CREATE_NEW_PROCESS_GROUP,
             cwd=server_dir_path,
