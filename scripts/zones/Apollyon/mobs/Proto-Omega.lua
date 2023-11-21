@@ -6,7 +6,7 @@ local entity = {}
 
 local quadrupedForm = function(mob)
     mob:setAnimationSub(1)
-    mob:setMod(xi.mod.MOVE, 100)
+    mob:setMod(xi.mod.MOVE_SPEED_STACKABLE, 100)
     mob:setMod(xi.mod.ATTP, 100)
     mob:setMod(xi.mod.UDMGPHYS, -9000)
     mob:setMod(xi.mod.UDMGRANGE, -9000)
@@ -16,7 +16,7 @@ end
 
 local bipedForm = function(mob)
     mob:setAnimationSub(2)
-    mob:setMod(xi.mod.MOVE, 0)
+    mob:setMod(xi.mod.MOVE_SPEED_STACKABLE, 0)
     mob:setMod(xi.mod.ATTP, 200)
     mob:setMod(xi.mod.UDMGPHYS, -3000)
     mob:setMod(xi.mod.UDMGRANGE, -3000)

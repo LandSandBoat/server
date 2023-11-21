@@ -18,12 +18,12 @@ end
 
 itemObject.onEffectGain = function(target, effect)
     target:addMod(xi.mod.STR, 1)
-    target:addMod(xi.mod.MOVE, 13)
+    target:addMod(xi.mod.MOVE_SPEED_QUICKENING, 12)
 end
 
 itemObject.onEffectLose = function(target, effect)
     target:delMod(xi.mod.STR, 1)
-    target:delMod(xi.mod.MOVE, 13)
+    target:delMod(xi.mod.MOVE_SPEED_QUICKENING, 12)
 end
 
 return itemObject

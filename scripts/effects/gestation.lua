@@ -21,14 +21,14 @@ local effectObject = {}
 local boostAmount = 50 -- +50% movement speed
 
 effectObject.onEffectGain = function(target, effect)
-    target:addMod(xi.mod.MOVE, boostAmount)
+    target:addMod(xi.mod.MOVE_SPEED_STACKABLE, boostAmount)
 end
 
 effectObject.onEffectTick = function(target, effect)
 end
 
 effectObject.onEffectLose = function(target, effect)
-    target:delMod(xi.mod.MOVE, boostAmount)
+    target:delMod(xi.mod.MOVE_SPEED_STACKABLE, boostAmount)
 end
 
 return effectObject

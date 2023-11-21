@@ -18,7 +18,7 @@ entity.onMobSpawn = function(mob)
         end
     end)
 
-    mob:setMod(xi.mod.MOVE, 64)
+    mob:setMod(xi.mod.MOVE_SPEED_STACKABLE, 64)
     mob:setAnimationSub(4)
 end
 

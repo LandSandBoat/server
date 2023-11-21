@@ -234,11 +234,19 @@ enum class Mod
     TACTICAL_GUARD = 899, // Tp increase when guarding
     GUARD_PERCENT  = 976, // Guard Percent
 
-    HASTE_MAGIC             = 167, // Haste (and Slow) from magic - 10000 base, 375 = 3.75%
-    HASTE_ABILITY           = 383, // Haste (and Slow) from abilities - 10000 base, 375 = 3.75%
-    HASTE_GEAR              = 384, // Haste (and Slow) from equipment - 10000 base, 375 = 3.75%
-    SPELLINTERRUPT          = 168, // % Spell Interruption Rate
-    MOVE                    = 169, // % Movement Speed
+    HASTE_MAGIC    = 167, // Haste (and Slow) from magic - 10000 base, 375 = 3.75%
+    HASTE_ABILITY  = 383, // Haste (and Slow) from abilities - 10000 base, 375 = 3.75%
+    HASTE_GEAR     = 384, // Haste (and Slow) from equipment - 10000 base, 375 = 3.75%
+    SPELLINTERRUPT = 168, // % Spell Interruption Rate
+
+    // New movement speed modifiers.
+    MOVE_SPEED_OVERIDE        = 169, // Modifier used to overide regular speed caps. (GM speed and Feast of Swords)
+    MOVE_SPEED_STACKABLE      = 75,  // Gear movement speed penalties, flee bonus, etc.
+    MOVE_SPEED_GEAR_BONUS     = 76,  // Gear movement speed bonuses. DOES NOT STACK with each other, only highest applies.
+    MOVE_SPEED_WEIGHT_PENALTY = 77,  // For Gravity and curse.
+    MOVE_SPEED_QUICKENING     = 78,  // Jig, spreinter shoes, etc. Only highest of Mazurka OR quickening will take effect.
+    MOVE_SPEED_MAZURKA        = 79,  // Song movement speed. Only highest of Mazurka OR quickening will take effect.
+
     MOUNT_MOVE              = 972, // % Mount Movement Speed
     FASTCAST                = 170, // Increases Spell Cast Time (TRAIT)
     UFASTCAST               = 407, // uncapped fast cast
@@ -986,7 +994,6 @@ enum class Mod
     // 570 through 825 used by WS DMG mods these are not spares.
     //
     // SPARE IDs:
-    // 75 to 79
     // 138 to 143
     // 157 to 159
     // 217 to 223
