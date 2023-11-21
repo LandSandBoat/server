@@ -1502,7 +1502,7 @@ xi.helm.result = function(player, helmType, broke, itemID)
         npcUtil.giveKeyItem(player, xi.ki.RAINBOW_BERRY)
     end
 
-    -- Missiom: AMK04
+    -- AMK mission 4 (index 3)
     if xi.settings.main.ENABLE_AMK == 1 then
         xi.amk.helpers.helmTrade(player, helmType, broke)
     end
@@ -1561,10 +1561,6 @@ xi.helm.onTrade = function(player, npc, trade, helmType, csid, func)
         end
 
         xi.helm.result(player, helmType, broke, itemID)
-
-        if type(func) == 'function' then
-            func(player)
-        end
     else
         player:messageSpecial(zones[zoneId].text[info.message], info.tool)
     end
