@@ -605,16 +605,13 @@ INSERT INTO `mob_spawn_mods` VALUES (17236201,55,180,1); -- IDLE_DESPAWN: 180
 -- Boreal Hound
 INSERT INTO `mob_spawn_mods` VALUES (17236202,12,15,1);  -- DRAW_IN: 15
 INSERT INTO `mob_spawn_mods` VALUES (17236202,160,50,0); -- DMG: 50
-INSERT INTO `mob_spawn_mods` VALUES (17236202,169,10,0); -- MOVE: 10
 
 -- Boreal Coeurl
 INSERT INTO `mob_spawn_mods` VALUES (17236203,12,15,1);  -- DRAW_IN: 15
 INSERT INTO `mob_spawn_mods` VALUES (17236203,23,8,1);   -- IMMUNITY: 8
-INSERT INTO `mob_spawn_mods` VALUES (17236203,169,10,0); -- MOVE: 10
 
 -- Boreal Tiger
 INSERT INTO `mob_spawn_mods` VALUES (17236204,12,15,1);  -- DRAW_IN: 15
-INSERT INTO `mob_spawn_mods` VALUES (17236204,169,10,0); -- MOVE: 10
 
 -- Koenigstiger
 INSERT INTO `mob_spawn_mods` VALUES (17236205,55,240,1); -- IDLE_DESPAWN: 240
