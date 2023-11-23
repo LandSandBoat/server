@@ -31,6 +31,7 @@ spellObject.onSpellCast = function(caster, target, spell)
     --add in target adjustment
     dmg = adjustForTarget(target, dmg, spell:getElement())
     --add in final adjustments
+    dmg = finalMagicAdjustments(caster, target, spell, dmg)
 
     if dmg < 0 then
         dmg = 0
@@ -42,10 +43,8 @@ spellObject.onSpellCast = function(caster, target, spell)
 
     if target:isUndead() then
         spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT) -- No effect
-        return dmg
+        return 0
     end
-
-    dmg = finalMagicAdjustments(caster, target, spell, dmg)
 
     caster:addHP(dmg)
     return dmg
