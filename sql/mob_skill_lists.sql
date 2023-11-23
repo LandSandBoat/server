@@ -2854,6 +2854,7 @@ INSERT INTO `mob_skill_lists` VALUES ('Glavoid',839,2191); -- desiccation
 INSERT INTO `mob_skill_lists` VALUES ('Hedetet',840,353); -- death scissors
 INSERT INTO `mob_skill_lists` VALUES ('Hedetet',840,2221); -- hell scissors
 INSERT INTO `mob_skill_lists` VALUES ('Iratham',841,2566); -- diabolic claw
+INSERT INTO `mob_skill_lists` VALUES ('Iratham',841,2567); -- Stygian Tornado
 INSERT INTO `mob_skill_lists` VALUES ('Iratham',841,2568); -- deathly diminuendo
 INSERT INTO `mob_skill_lists` VALUES ('Iratham',841,2569); -- hellish crescendo
 INSERT INTO `mob_skill_lists` VALUES ('Iratham',841,2570); -- afflicting gaze

@@ -1779,7 +1779,7 @@ INSERT INTO `mob_spell_lists` VALUES ('Iratham_HP_50to100',153,259,1,255); -- sl
 -- Iratham_HP_under_50 (154)
 INSERT INTO `mob_spell_lists` VALUES ('Iratham_HP_under_50',154,181,1,255); -- blizzaga_iii (1~255)
 INSERT INTO `mob_spell_lists` VALUES ('Iratham_HP_under_50',154,182,1,255); -- blizzaga_iv (1~255)
-INSERT INTO `mob_spell_lists` VALUES ('Iratham_HP_under_50',154,206,1,255); -- freeze (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Iratham_HP_under_50',154,206,1,255); -- freeze ii (1~255)
 INSERT INTO `mob_spell_lists` VALUES ('Iratham_HP_under_50',154,259,1,255); -- sleep_ii (1~255)
 
 -- Iratham_HP_under_20 (155)

@@ -15904,7 +15904,10 @@ INSERT INTO `mob_droplist` VALUES (1971,0,0,1000,2920,@UNCOMMON);  -- Clump Of A
 INSERT INTO `mob_droplist` VALUES (1971,4,0,1000,834,0);     -- Ball Of Saruta Cotton (Despoil)
 INSERT INTO `mob_droplist` VALUES (1971,4,0,1000,4368,0);    -- Two-Leaf Mandragora Bud (Despoil)
 
--- 1972 Available
+-- ZoneID:  254 - Peak Pugil
+INSERT INTO `mob_droplist` VALUES (1972,0,0,1000,3270,@COMMON); -- High-Quality Pugil Scale (15.0%)
+INSERT INTO `mob_droplist` VALUES (1972,0,0,1000,868,369);      -- Pugil Scales (36.9%)
+INSERT INTO `mob_droplist` VALUES (1972,4,0,1000,868,0);        -- Pugil Scales (Despoil)
 
 -- ZoneID: 176 - Pahh The Gullcaller
 INSERT INTO `mob_droplist` VALUES (1973,0,0,1000,888,340);        -- Seashell (34.0%)
@@ -24377,7 +24380,7 @@ INSERT INTO `mob_droplist` VALUES (3012,0,0,1000,1181,49);  -- Clump Of Goobbue 
 INSERT INTO `mob_droplist` VALUES (3012,4,0,1000,919,0);    -- Clump Of Boyahda Moss (Despoil)
 INSERT INTO `mob_droplist` VALUES (3012,4,0,1000,1237,0);   -- Bag Of Tree Cuttings (Despoil)
 
--- ZoneID: Unknown - Unknown
+-- ZoneID: 216 - Boartrap
 INSERT INTO `mob_droplist` VALUES (3013,0,0,1000,3096,142); -- Spotted Flyfrond (14.2%)
 INSERT INTO `mob_droplist` VALUES (3013,0,0,1000,1617,85);  -- Flytrap Leaf (8.5%)
 
