@@ -26,21 +26,20 @@ effectObject.onEffectGain = function(target, effect)
         target:getCharVar('GEO_DWL_Luopan') == 0
     then
         local ID                = zones[target:getZoneID()]
-        local currentTime       = os.time()
         local maxWaitTime       = 480 -- Max wait of 8 minutes.
         local secondsPerTick    = xi.settings.map.HEALING_TICK_DELAY
         local minWaitTime       = math.min(3 * secondsPerTick, maxWaitTime)
         local waitTimeInSeconds = math.random(minWaitTime, maxWaitTime)
 
         target:messageSpecial(ID.text.ENERGIES_COURSE)
-        target:setLocalVar('GEO_DWL_Resting', currentTime + waitTimeInSeconds)
+        target:setLocalVar('GEO_DWL_Resting', os.time() + waitTimeInSeconds)
 
         target:timer(waitTimeInSeconds * 1000, function(targetArg)
             local finishTime = targetArg:getLocalVar('GEO_DWL_Resting')
 
             if
                 finishTime > 0 and
-                currentTime >= finishTime
+                os.time() >= finishTime
             then
                 targetArg:messageSpecial(ID.text.MYSTICAL_WARMTH) -- You feel a mystical warmth welling up inside you!
                 targetArg:setLocalVar('GEO_DWL_Resting', 0)
