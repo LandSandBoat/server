@@ -817,9 +817,11 @@ xi.dynamis.nmDynamicSpawn = function(mobIndex, oMobIndex, forceLink, zoneID, tar
 
     -- special spawning of DL clones near victems
     if
-        mobIndex == 179 and
+        ((zoneID == xi.zone.DYNAMIS_TAVNAZIA and
+        mobIndex == 252) or
+        (mobIndex == 179 and
         oMobIndex == 179 and
-        zoneID == xi.zone.DYNAMIS_XARCABARD and
+        zoneID == xi.zone.DYNAMIS_XARCABARD)) and
         target
     then
         xPos = target:getXPos() + math.random() * 6 - 3

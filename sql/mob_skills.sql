@@ -1510,7 +1510,7 @@ INSERT INTO `mob_skills` VALUES (1550,1144,'summon_wyrm',0,15.0,2000,0,1,0,0,0,0
 INSERT INTO `mob_skills` VALUES (1551,1136,'megaflare',4,15.0,6000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (1552,1137,'gigaflare',1,20.0,6000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (1553,1138,'teraflare',1,25.0,2000,1500,4,0,0,0,0,0,0);
--- INSERT INTO `mob_skills` VALUES (1554,1298,'camisado',0,7.0,2000,1500,4,0,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (1554,915,'camisado',0,10.0,2000,1500,4,0,0,2,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (1555,1299,'blessed_radiance',0,7.0,2000,1500,4,0,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (1556,1300,'regeneration',0,7.0,2000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (1557,1146,'eagle_eye_shot',0,25.0,2000,0,4,2,0,0,0,0,0); -- ees breath
@@ -1859,7 +1859,7 @@ INSERT INTO `mob_skills` VALUES (1897,1244,'diamondhide',0,7.0,2000,1500,4,0,0,0
 -- INSERT INTO `mob_skills` VALUES (1900,1247,'healing_stomp',0,7.0,2000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (1901,505,'activate',0,7.0,2000,0,1,4,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (1902,1646,'.',0,7.0,2000,1500,4,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (1903,915,'camisado',0,10.0,2000,1500,4,0,0,2,0,0,0);
+INSERT INTO `mob_skills` VALUES (1903,915,'camisado',1,10.0,2000,1500,4,0,0,2,0,0,0);
 INSERT INTO `mob_skills` VALUES (1904,1126,'somnolence',0,10.0,2000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (1905,916,'noctoshield',1,10.0,2000,1800,1,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (1906,917,'ultimate_terror',1,30.0,2000,1500,4,0,0,0,0,0,0);
