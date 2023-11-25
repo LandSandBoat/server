@@ -16,7 +16,6 @@ end
 entity.onTrigger = function(player, npc)
     local triggerFellow = player:getLocalVar("triggerFellow")
     local lookingGlass = player:getCharVar("[Quest]Looking_Glass")
-    local fellowParam = xi.fellow_utils.getFellowParam(player)
     local queue = GetServerVariable("[Looking_Glass]Queue")
 
     if
@@ -26,13 +25,29 @@ entity.onTrigger = function(player, npc)
     then
         player:messageSpecial(ID.text.NOT_TIME_TO_SEARCH)
     elseif
+        -- Gating party Size to 3 since fellows count against party limit
+        #player:getParty() > 3
+    then
+        player:messageSpecial(ID.text.NOT_TIME_TO_SEARCH)
+    elseif
         player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.GIRL_IN_THE_LOOKING_GLASS) == QUEST_ACCEPTED and
         (lookingGlass == 2 or
         lookingGlass == 3)
     then
-        player:startEvent(65, 195, 0, 0, 0, 0, 0, 0, fellowParam)
-        player:setCharVar("[Quest]Looking_Glass", 2)
         SetServerVariable("[Looking_Glass]Queue", os.time() + 180)
+        for _, v in ipairs(player:getParty()) do
+            if
+                v:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.GIRL_IN_THE_LOOKING_GLASS) == QUEST_ACCEPTED and
+                (v:getCharVar("[Quest]Looking_Glass") == 2 or
+                v:getCharVar("[Quest]Looking_Glass") == 3) and
+                player:getZoneID() == v:getZoneID() and
+                player:checkDistance(v) <= 50
+            then
+                local fellowParam = xi.fellow_utils.getFellowParam(v)
+                v:startEvent(65, 195, 0, 0, 0, 0, 0, 0, fellowParam)
+                v:setCharVar("[Quest]Looking_Glass", 2)
+            end
+        end
     else
         player:messageSpecial(ID.text.NOTHING_OUT_OF_ORDINARY)
     end
@@ -43,13 +58,19 @@ end
 
 entity.onEventFinish = function(player, csid, option)
     if csid == 65 then
-        SpawnMob(ID.mob.NAMORODO)
-        player:setLocalVar("FellowAttack", 1) -- fellow cannot sync attack
-        player:setLocalVar("FellowDisengage", 1) -- fellow cannot sync disengage
-        player:setLocalVar("triggerFellow", 1) -- must talk to fellow(alive) after fight to proceed
-        player:spawnFellow(player:getFellowValue("fellowid"))
-        player:getFellow():setPos(-259, 0, 144.5, 146)
-        player:fellowAttack(GetMobByID(ID.mob.NAMORODO))
+        local offset = 0
+        for _, v in ipairs(player:getParty()) do
+            local mobID = ID.mob.NAMORODO + offset
+            SpawnMob(mobID)
+            v:setLocalVar("FellowAttack", 1) -- fellow cannot sync attack
+            v:setLocalVar("FellowDisengage", 1) -- fellow cannot sync disengage
+            v:setLocalVar("triggerFellow", 1) -- must talk to fellow(alive) after fight to proceed
+            v:spawnFellow(v:getFellowValue("fellowid"))
+            v:getFellow():setPos(-259, 0, 141.5 + (offset * 4), 139)
+            v:fellowAttack(GetMobByID(mobID))
+            offset = offset + 1
+        end
+
         SetServerVariable("[Looking_Glass]Queue", 0)
     end
 end
