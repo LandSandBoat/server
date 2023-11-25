@@ -101,7 +101,7 @@ INSERT INTO `status_effects` VALUES (63,'souleater',4194344,0,0,0,0,0,0,0,0);
 INSERT INTO `status_effects` VALUES (64,'last_resort',41,0,0,0,0,0,0,0,0);
 INSERT INTO `status_effects` VALUES (65,'sneak_attack',4194340,0,0,0,0,0,0,0,0);
 INSERT INTO `status_effects` VALUES (66,'copy_image',33,0,0,0,0,36,3,0,50);
-INSERT INTO `status_effects` VALUES (67,'third_eye',41,0,0,0,0,0,0,0,0);
+INSERT INTO `status_effects` VALUES (67,'third_eye',41,0,0,3,0,0,0,0,0);
 INSERT INTO `status_effects` VALUES (68,'warcry',41,0,0,0,0,460,0,0,400);
 INSERT INTO `status_effects` VALUES (69,'invisible',3429,0,0,2,0,0,3,0,850);
 INSERT INTO `status_effects` VALUES (70,'deodorize',2341,0,0,2,0,0,3,0,1100);
