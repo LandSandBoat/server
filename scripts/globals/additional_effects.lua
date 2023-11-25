@@ -247,11 +247,7 @@ xi.additionalEffect.attack = function(attacker, defender, baseAttackDamage, item
         end
 
     elseif addType == procType.SELF_BUFF then
-        if addStatus == xi.effect.TELEPORT then -- WARP
-            attacker:addStatusEffectEx(xi.effect.TELEPORT, 0, xi.teleport.id.WARP, 0, 3)
-            msgID    = xi.msg.basic.ADD_EFFECT_WARP
-            msgParam = 0
-        elseif addStatus == xi.effect.BLINK then -- BLINK http://www.ffxiah.com/item/18830/gusterion
+        if addStatus == xi.effect.BLINK then -- BLINK http://www.ffxiah.com/item/18830/gusterion
             -- Does not stack with or replace other shadows
             if
                 attacker:hasStatusEffect(xi.effect.BLINK) or
@@ -268,6 +264,15 @@ xi.additionalEffect.attack = function(attacker, defender, baseAttackDamage, item
             -- Todo: verify power/duration/tier/overwrite etc
             msgID    = xi.msg.basic.ADD_EFFECT_SELFBUFF
             msgParam = xi.effect.HASTE
+        elseif
+            -- Treat Staff
+            addStatus == xi.effect.TELEPORT and
+            xi.events.harvestFestival.isHalloweenEnabled()
+            -- https://ffxiclopedia.fandom.com/wiki/Treat_Staff
+        then
+            attacker:addStatusEffectEx(xi.effect.TELEPORT, 0, xi.teleport.id.WARP, 0, 0) -- It's faster than normal warp
+            msgID    = xi.msg.basic.ADD_EFFECT_WARP
+            msgParam = 0
         else
             print('scripts/globals/additional_effects.lua : unhandled additional effect selfbuff! Effect ID: '..addStatus)
         end
