@@ -10,7 +10,7 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    target:addStatusEffectEx(xi.effect.TELEPORT, 0, xi.teleport.id.MAAT, 0, 1)
+    target:addStatusEffectEx(xi.effect.TELEPORT, 0, xi.teleport.id.MAAT, 0, 4)
 end
 
 return itemObject
