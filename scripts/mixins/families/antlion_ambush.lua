@@ -9,8 +9,10 @@ g_mixins.families.antlion_ambush = function(antlionAmbushMob)
     antlionAmbushMob:addListener("SPAWN", "ANTLION_AMBUSH_SPAWN", function(mob)
         mob:hideName(true)
         mob:setUntargetable(true)
-        mob:setAnimationSub(0)
-        mob:wait(2000)
+        if mob:getZoneID() ~= xi.zone.DYNAMIS_TAVNAZIA then
+            mob:setAnimationSub(0)
+            mob:wait(2000)
+        end
     end)
 
     antlionAmbushMob:addListener("ENGAGE", "ANTLION_AMBUSH_ENGAGE", function(mob, target)

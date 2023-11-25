@@ -434,8 +434,6 @@ xi.dynamis.mobList[zoneID].waveDefeatRequirements =
 xi.dynamis.mobList[zoneID][1].wave =
 {
     1,  -- ( 001 )-Nightmare Bugard(15)
-    2,  -- ( 002 )-Nightmare Worm
-    3,  -- ( 003 )-Nightmare Antlion(30)
     4,  -- ( 004 )-Nightmare Hornet (×3)
     5,  -- ( 005 )-Nightmare Hornet (×3)
     6,  -- (006-H) Vanguard Eye

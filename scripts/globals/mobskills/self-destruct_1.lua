@@ -7,7 +7,7 @@ require("scripts/globals/mobskills")
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
-    if mob:getHPP() > 21 or mob:getAnimationSub() ~= 6  then
+    if mob:getHPP() > 21 or mob:getAnimationSub() ~= 0  then
         return 1
     end
 

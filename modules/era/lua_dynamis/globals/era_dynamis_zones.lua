@@ -119,6 +119,7 @@ for _, zoneID in pairs(dynamisZones) do
     m:addOverride(string.format("xi.zones.%s.Zone.onInitialize", zoneID[2]),
     function(zone)
         xi.dynamis.cleanupDynamis(zone) -- Run cleanupDynamis
+        xi.dynamis.zoneOnZoneInitializeEra(zone) -- Run Init
     end)
 
     m:addOverride(string.format("xi.zones.%s.Zone.onZoneOut", zoneID[2]),
@@ -152,6 +153,11 @@ for _, zoneID in pairs(dynamisZones) do
         m:addOverride(string.format("xi.zones.%s.npcs.qm1.onTrigger", zoneID[2]),
         function(player, npc)
             xi.dynamis.timeExtensionOnTrigger(player, npc)
+        end)
+
+        m:addOverride(string.format("xi.zones.%s.Zone.onTriggerAreaEnter", zoneID[2]),
+        function(player, triggerArea)
+            xi.dynamis.onTriggerAreaEnter(player, triggerArea)
         end)
     end
 end

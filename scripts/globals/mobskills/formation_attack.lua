@@ -12,7 +12,7 @@ require("scripts/globals/mobskills")
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
-    if mob:getAnimationSub() == 6  then
+    if mob:getAnimationSub() == 2  then
         return 1
     end
 
@@ -24,9 +24,9 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local accmod = 1
     local bombNum = 2 -- Base FTP
 
-    if mob:getAnimationSub() == 4 then
+    if mob:getAnimationSub() == 0 then
         bombNum = bombNum + 3
-    elseif mob:getAnimationSub() == 5 then
+    elseif mob:getAnimationSub() == 1 then
         bombNum = bombNum + 2
     end
 

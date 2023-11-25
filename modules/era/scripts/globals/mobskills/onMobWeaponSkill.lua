@@ -139,7 +139,7 @@ end)
 m:addOverride("xi.globals.mobskills.acid_mist.onMobWeaponSkill", function(target, mob, skill)
     local power = 50
     if skill:getID() == 1872 then -- Nightmare Leech - Reduces to 1 attack
-        power = 999
+        power = 99
     end
 
     xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.ATTACK_DOWN, power, 0, math.random(60, 120))
@@ -2664,13 +2664,11 @@ m:addOverride("xi.globals.mobskills.circle_blade.onMobWeaponSkill", function(tar
 end)
 
 m:addOverride("xi.globals.mobskills.circle_of_flames.onMobWeaponSkill", function(target, mob, skill)
-    local numberOfBombs = 7 - mob:getAnimationSub()
-    local bombNum = 0.5 -- Base damage
+    local numberOfBombs = 3 - mob:getAnimationSub()
+    local bombNum = 50 * numberOfBombs
 
-    if mob:getAnimationSub() == 4 then -- 3 bombs
-        bombNum = bombNum + 25 * 3
-    elseif mob:getAnimationSub() == 5 then -- 2 bombs
-        bombNum = bombNum + 25 * 2
+    if mob:getZoneID() == xi.zone.DYNAMIS_TAVNAZIA then
+        bombNum = bombNum * 1.75
     end
 
     local info = xi.mobskills.mobMagicalMove(mob, target, skill, bombNum, xi.magic.ele.FIRE, 1, xi.mobskills.magicalTpBonus.NO_EFFECT, 0, 0, 1, 1.1, 1.2)
@@ -5931,9 +5929,9 @@ m:addOverride("xi.globals.mobskills.formation_attack.onMobWeaponSkill", function
     local accmod = 1
     local bombNum = 2 -- Base FTP
 
-    if mob:getAnimationSub() == 4 then
+    if mob:getAnimationSub() == 0 then
         bombNum = bombNum + 3
-    elseif mob:getAnimationSub() == 5 then
+    elseif mob:getAnimationSub() == 1 then
         bombNum = bombNum + 2
     end
 
@@ -10651,10 +10649,10 @@ end)
 
 m:addOverride("xi.globals.mobskills.pit_ambush.onMobWeaponSkill", function(target, mob, skill)
     local numhits = 1
-    local accmod = 100
+    local accmod = 10
     local dmgmod = 3
     if skill:getID() == 1844 then -- Nightmare Antlion - Reported to almost one shot paladins
-        dmgmod = 15
+        dmgmod = 10
     end
 
     local info = xi.mobskills.mobPhysicalMove(mob, target, skill, numhits, accmod, dmgmod, xi.mobskills.magicalTpBonus.NO_EFFECT)
@@ -12496,7 +12494,7 @@ m:addOverride("xi.globals.mobskills.self-destruct_2.onMobWeaponSkill", function(
     local info = xi.mobskills.mobMagicalMove(mob, target, skill, damage, xi.magic.ele.FIRE, 1, xi.mobskills.magicalTpBonus.MAB_BONUS, 1, 0, 1, 1.1, 1.2)
     local dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.FIRE, xi.mobskills.shadowBehavior.IGNORE_SHADOWS)
 
-    mob:setAnimationSub(6)
+    mob:setAnimationSub(2)
 
     target:takeDamage(dmg, mob, xi.attackType.MAGICAL, xi.damageType.FIRE)
     return dmg
@@ -12527,7 +12525,7 @@ m:addOverride("xi.globals.mobskills.self-destruct_3.onMobWeaponSkill", function(
     local info = xi.mobskills.mobMagicalMove(mob, target, skill, damage, xi.magic.ele.FIRE, 1, xi.mobskills.magicalTpBonus.MAB_BONUS, 1, 0, 1, 1.1, 1.2)
     local dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.FIRE, xi.mobskills.shadowBehavior.IGNORE_SHADOWS)
 
-    mob:setAnimationSub(5)
+    mob:setAnimationSub(1)
 
     target:takeDamage(dmg, mob, xi.attackType.MAGICAL, xi.damageType.FIRE)
     return dmg

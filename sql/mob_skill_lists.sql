@@ -4133,11 +4133,11 @@ INSERT INTO `mob_skill_lists` VALUES ('Nightmare_Tarus',4080,1882); -- Fightful 
 INSERT INTO `mob_skill_lists` VALUES ('Nightmare_Tarus',4080,1883); -- Mortal Ray
 INSERT INTO `mob_skill_lists` VALUES ('Nightmare_Tarus',4080,1884); -- Unblessed Armor
 
-INSERT INTO `mob_skill_lists` VALUES ('Nightmare_Worm',4081,1885); -- Full-Force Blow (Larger knock back)
-INSERT INTO `mob_skill_lists` VALUES ('Nightmare_Worm',4081,1886); -- Gastric Bomb (Very large attack down)
-INSERT INTO `mob_skill_lists` VALUES ('Nightmare_Worm',4081,1887); -- Sandspin (-200 acc)
+-- INSERT INTO `mob_skill_lists` VALUES ('Nightmare_Worm',4081,1885); -- Full-Force Blow (Larger knock back)
+-- INSERT INTO `mob_skill_lists` VALUES ('Nightmare_Worm',4081,1886); -- Gastric Bomb (Very large attack down)
+-- INSERT INTO `mob_skill_lists` VALUES ('Nightmare_Worm',4081,1887); -- Sandspin (-200 acc)
 INSERT INTO `mob_skill_lists` VALUES ('Nightmare_Worm',4081,1888); -- Tremors (Larger dmg)
-INSERT INTO `mob_skill_lists` VALUES ('Nightmare_Worm',4081,1889); -- Spirit Vacuum
+-- INSERT INTO `mob_skill_lists` VALUES ('Nightmare_Worm',4081,1889); -- Spirit Vacuum
 INSERT INTO `mob_skill_lists` VALUES ('Nightmare_Worm',4081,1890); -- Sound Vacuum
 
 INSERT INTO `mob_skill_lists` VALUES ('Diabolos_Diamond',4082,1909); -- Cacodemonia
@@ -4152,7 +4152,7 @@ INSERT INTO `mob_skill_lists` VALUES ('Diabolos_Club',4084,1908); -- Nightmare
 INSERT INTO `mob_skill_lists` VALUES ('Diabolos_Club',4084,1905); -- Noctoshield
 
 INSERT INTO `mob_skill_lists` VALUES ('Diabolos_Spade',4085,1554); -- Camisado: Using old non-AoE Camisado
-INSERT INTO `mob_skill_lists` VALUES ('Diabolos_Spade',4085,1910); -- Nether Blast
+INSERT INTO `mob_skill_lists` VALUES ('Diabolos_Spade',4085,1906); -- Ultimate Terror
 INSERT INTO `mob_skill_lists` VALUES ('Diabolos_Spade',4085,1918); -- Nether Tempest
 INSERT INTO `mob_skill_lists` VALUES ('Diabolos_Spade',4085,1905); -- Noctoshield
 INSERT INTO `mob_skill_lists` VALUES ('Diabolos_Spade',4085,1917); -- Sweeping Somnolence

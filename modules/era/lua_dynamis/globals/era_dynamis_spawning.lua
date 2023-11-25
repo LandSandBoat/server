@@ -795,11 +795,6 @@ xi.dynamis.nonStandardDynamicSpawn = function(mobIndex, oMob, forceLink, zoneID,
             mob:updateEnmity(target)
         end
     end
-
-    if mob:getFamily() == 68 then
-        -- temp fix to ensure clusters have the right animation sub
-        mob:setAnimationSub(4)
-    end
 end
 
 xi.dynamis.nmDynamicSpawn = function(mobIndex, oMobIndex, forceLink, zoneID, target, oMob, mainDynaLord)
@@ -815,10 +810,13 @@ xi.dynamis.nmDynamicSpawn = function(mobIndex, oMobIndex, forceLink, zoneID, tar
 
     local mobName = xi.dynamis.mobList[zoneID][mobIndex].info[2]
 
-    -- special spawning of DL clones near victems
     if
+        -- Special spawning of Diabolos Shard, Nightmare Worm, and Nightmare Antlion
         ((zoneID == xi.zone.DYNAMIS_TAVNAZIA and
-        mobIndex == 252) or
+        (mobIndex == 252 or
+        mobIndex == 2 or
+        mobIndex == 3)) or
+        -- Special spawning of DL clones near victems
         (mobIndex == 179 and
         oMobIndex == 179 and
         zoneID == xi.zone.DYNAMIS_XARCABARD)) and

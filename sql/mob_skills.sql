@@ -1875,7 +1875,7 @@ INSERT INTO `mob_skills` VALUES (1912,1125,'hypnogenesis',1,20.0,2000,1500,4,0,0
 -- INSERT INTO `mob_skills` VALUES (1916,1660,'blessed_radiance',0,7.0,2000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (1917,1280,'sweeping_somnolence',4,20.0,2000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (1918,1282,'nether_tempest',1,20,2000,2000,4,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (1919,1281,'daydream',0,7.0,2000,1500,4,0,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (1919,1281,'daydream',0,25.0,2000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (1920,1264,'rushing_drub',0,7.0,2000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (1921,1265,'forceful_blow',0,7.0,2000,1000,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (1922,1266,'somersault_kick',0,7.0,2000,1000,4,0,0,4,0,0,0);
