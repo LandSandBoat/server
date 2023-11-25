@@ -1202,7 +1202,7 @@ xi.regime.bookOnEventFinish = function(player, option, regimeType)
             end,
 
             ['HOMING_INSTINCT'] = function()
-                player:addStatusEffectEx(xi.effect.TELEPORT, 0, xi.teleport.id.WARP, 0, 1)
+                player:addStatusEffectEx(xi.effect.TELEPORT, 0, xi.teleport.id.WARP, 0, 3)
             end,
 
             ['RERAISE'] = function()
