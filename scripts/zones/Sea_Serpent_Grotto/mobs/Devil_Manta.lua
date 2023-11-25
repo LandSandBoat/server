@@ -21,26 +21,27 @@ entity.onMobDespawn = function(mob)
     local mantaTwo = ID.mob.CHARYBDIS - 4
 
     if
-        (mob:getID() == mantaOne or
-        mob:getID() == mantaTwo) and
-        not xi.mob.phOnDespawn(mob, ID.mob.CHARYBDIS_PH, 10, 28800)
+        mob:getID() == mantaOne or
+        mob:getID() == mantaTwo
     then
-        -- Charbydis is not queued to spawn.
-        -- Choose a Charbydis PH randomly to spawn next.
-        local chooseManta = math.random(1, 2)
+        if not xi.mob.phOnDespawn(mob, ID.mob.CHARYBDIS_PH, 10, 28800) then
+            -- Charbydis is not queued to spawn.
+            -- Choose a Charbydis PH randomly to spawn next.
+            local chooseManta = math.random(1, 2)
 
-        if chooseManta == 2 then
+            if chooseManta == 2 then
+                DisallowRespawn(mantaOne, true)
+                DisallowRespawn(mantaTwo, false)
+                GetMobByID(mantaTwo):setRespawnTime(GetMobRespawnTime(mantaTwo))
+            elseif chooseManta == 1 then
+                DisallowRespawn(mantaOne, false)
+                DisallowRespawn(mantaTwo, true)
+                GetMobByID(mantaOne):setRespawnTime(GetMobRespawnTime(mantaOne))
+            end
+        else
             DisallowRespawn(mantaOne, true)
-            DisallowRespawn(mantaTwo, false)
-            GetMobByID(mantaTwo):setRespawnTime(GetMobRespawnTime(mantaTwo))
-        elseif chooseManta == 1 then
-            DisallowRespawn(mantaOne, false)
             DisallowRespawn(mantaTwo, true)
-            GetMobByID(mantaOne):setRespawnTime(GetMobRespawnTime(mantaOne))
         end
-    else
-        DisallowRespawn(mantaOne, true)
-        DisallowRespawn(mantaTwo, true)
     end
 end
 
