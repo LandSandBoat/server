@@ -1646,6 +1646,15 @@ namespace petutils
             {
                 PMob->PAI->Disengage();
 
+                // reset familiar so the same mob can be familiared again
+                if (PMob->GetLocalVar("ReceivedFamiliar") == 1)
+                {
+                    // decrease max hp by 10%
+                    PPet->delModifier(Mod::HPP, 10);
+                    PMob->UpdateHealth();
+                    PMob->SetLocalVar("ReceivedFamiliar", 0);
+                }
+
                 // charm time is up, mob attacks player now
                 if (PMob->PEnmityContainer->IsWithinEnmityRange(PMob->PMaster) && petUncharm)
                 {
@@ -1998,13 +2007,12 @@ namespace petutils
             PPet->charmTime += std::chrono::milliseconds(baseTime - randTime);
         }
 
-        float rate = 0.10f;
-
-        // boost hp by 10%
-        uint16 boost = (uint16)(PPet->health.maxhp * rate);
-
-        PPet->health.maxhp += boost;
-        PPet->health.hp += boost;
+        // add 10% HP boost but keep the same HP percent
+        auto currentMaxHP = PPet->GetMaxHP();
+        PPet->addModifier(Mod::HPP, 10);
+        PPet->UpdateHealth();
+        auto newMaxHP = PPet->GetMaxHP();
+        PPet->addHP(newMaxHP - currentMaxHP);
         PPet->UpdateHealth();
     }
 

@@ -24,16 +24,8 @@ entity.onMobSpawn = function(mob)
     mob:setLocalVar("fomorHateAdj", 2)
     mob:setMod(xi.mod.MATT, 125)
     mob:setMod(xi.mod.ATT, 550)
-end
-
-entity.onMobFight = function(mob, target)
-    local enmityList = mob:getEnmityList()
-    for _, v in ipairs(enmityList) do
-        -- repeatedly apply short duration intimidate (5 sec) with 50% power to all entities on enmity list
-        if not v["entity"]:hasStatusEffect(xi.effect.INTIMIDATE) then
-            v["entity"]:addStatusEffectEx(xi.effect.INTIMIDATE, 0, 50, 3, 5)
-        end
-    end
+    -- add intimidation rate of 50% to players
+    mob:setMod(xi.mod.HUMANOID_KILLER, 50)
 end
 
 entity.onMobDeath = function(mob, player, optParams)
