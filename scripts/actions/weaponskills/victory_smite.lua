@@ -20,8 +20,7 @@ local weaponskillObject = {}
 
 weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary, action, taChar)
     local params = {}
-    params.numHits = 3
-    -- This is a 4 hit ws but H2H ws are done in a different way, the off hand hit is been taking into account in another place
+    params.numHits = 4
     params.ftp100 = 2.25 params.ftp200 = 2.25 params.ftp300 = 2.25
     params.str_wsc = 0.6 params.dex_wsc = 0.0 params.vit_wsc = 0.0 params.agi_wsc = 0.0 params.int_wsc = 0.0 params.mnd_wsc = 0.0 params.chr_wsc = 0.0
     params.crit100 = 0.1 params.crit200 = 0.25 params.crit300 = 0.45
