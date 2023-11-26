@@ -8,14 +8,23 @@ local entity = {}
 
 local drawInPos =
 {
-    { 330.00, -23.91, -89.09 },
-    { 330.15, -24.00, -80.97 },
-    { 323.57, -24.00, -80.17 },
-    { 325.03, -24.00, -84.18 },
-    { 321.71, -23.99, -87.13 },
-    { 315.91, -24.14, -87.18 },
-    { 315.18, -23.96, -80.03 },
-    { 317.55, -23.95, -83.00 },
+    { x = 330.00, y = -23.91, z = -89.09 },
+    { x = 330.15, y = -24.00, z = -80.97 },
+    { x = 323.57, y = -24.00, z = -80.17 },
+    { x = 325.03, y = -24.00, z = -84.18 },
+    { x = 321.71, y = -23.99, z = -87.13 },
+    { x = 315.91, y = -24.14, z = -87.18 },
+    { x = 315.18, y = -23.96, z = -80.03 },
+    { x = 317.55, y = -23.95, z = -83.00 },
+}
+
+local mobSkills =
+{
+    1785,
+    1786,
+    1787,
+    1788,
+    1789,
 }
 
 entity.onMobSpawn = function(mob)
@@ -27,18 +36,11 @@ entity.onMobSpawn = function(mob)
 end
 
 entity.onMobWeaponSkillPrepare = function(mob, target)
-    -- skills without GoH
-    local mobSkills = { 1785, 1786, 1787, 1788, 1789 }
-    -- if less than 25% HP
-    if mob:getHPP() <= 25 then
-        -- select GoH with 50% probability
-        if math.random() < 0.50 then
-            return 1790
-        -- else select random skill
-        else
-            return mobSkills[math.random(#mobSkills)]
-        end
-    -- else select random skill
+    if
+        mob:getHPP() <= 25 and
+        math.random() < 0.50
+    then
+        return 1790 -- Gates of Hell
     else
         return mobSkills[math.random(#mobSkills)]
     end
@@ -51,25 +53,14 @@ entity.onMobFight = function(mob, target)
         mob:setMod(xi.mod.REGAIN, 70)
     end
 
-    -- retail cerb uses weird custom draw-in mechanism to fixed points
-    local drawInWait = mob:getLocalVar("DrawInWait")
-
     if
-        (target:getXPos() < 305 or target:getXPos() > 340) and
-        os.time() > drawInWait
+        (target:getXPos() < 305 or target:getXPos() > 340 or
+        target:getZPos() < -100 or target:getZPos() > -70) and
+        os.time() > mob:getLocalVar("DrawInWait")
     then
-        local rot = target:getRotPos()
-        local position = math.random(1, 8)
-        target:setPos(drawInPos[position][1], drawInPos[position][2], drawInPos[position][3], rot)
-        mob:messageBasic(232, 0, 0, target)
-        mob:setLocalVar("DrawInWait", os.time() + 2)
-    elseif
-        (target:getZPos() < -100 or target:getZPos() > -70) and
-        os.time() > drawInWait
-    then
-        local rot = target:getRotPos()
-        local position = math.random(1, 8)
-        target:setPos(drawInPos[position][1], drawInPos[position][2], drawInPos[position][3], rot)
+        local pos = math.random(1, 8)
+
+        target:setPos(drawInPos[pos])
         mob:messageBasic(232, 0, 0, target)
         mob:setLocalVar("DrawInWait", os.time() + 2)
     end

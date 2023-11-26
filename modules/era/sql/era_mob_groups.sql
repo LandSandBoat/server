@@ -460,6 +460,7 @@ UPDATE mob_groups SET content_tag='ROV' WHERE name='Locus_Wivre' AND groupid='53
 -- ------------------------------------------------------------
 
 UPDATE mob_groups SET content_tag='ROV' WHERE name='Nirgali' AND groupid='40' AND zoneid='54';
+UPDATE mob_groups SET HP='12500', maxLevel='83' WHERE name='Bloody_Bones' AND groupid='48' AND zoneid='54';
 UPDATE mob_groups SET content_tag='ROV' WHERE name='Nostokulshedra' AND groupid='52' AND zoneid='54';
 UPDATE mob_groups SET content_tag='ROV' WHERE name='Dweomershell' AND groupid='65' AND zoneid='54';
 UPDATE mob_groups SET HP='4000' WHERE name='Lamia_Exon' AND groupid='84' AND zoneid='54';
@@ -490,6 +491,12 @@ UPDATE mob_groups SET HP='4000' WHERE name='Woodtroll_Elite_Guard' AND groupid='
 UPDATE mob_groups SET HP='4000' WHERE name='Mamool_Ja_Chamberlain' AND groupid='55' AND zoneid='65';
 UPDATE mob_groups SET HP='4000' WHERE name='Mamool_Ja_Palatine' AND groupid='56' AND zoneid='65';
 UPDATE mob_groups SET HP='14000' WHERE name='Zizzy_Zillah' AND groupid='20' AND zoneid='65';
+
+-- ------------------------------------------------------------
+-- Halvung (Zone 62)
+-- ------------------------------------------------------------
+
+UPDATE mob_groups SET HP='12500' WHERE name='Big_Bomb' AND groupid='29' AND zoneid='62';
 
 -- ------------------------------------------------------------
 -- Mamool_Ja_Training_Grounds (Zone 66)

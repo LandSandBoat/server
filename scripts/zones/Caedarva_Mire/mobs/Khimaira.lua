@@ -8,29 +8,25 @@ local entity = {}
 
 local drawInPos =
 {
-    { 838.88,  0.00, 358.86 },
-    { 834.93, -0.14, 363.68 },
-    { 840.13, -0.31, 366.46 },
-    { 842.69,  0.00, 360.12 },
-    { 846.15, -0.27, 360.25 },
-    { 845.30, -0.51, 366.68 },
-    { 850.33, -1.34, 365.43 },
-    { 850.40, -1.45, 355.85 },
+    { x = 838.88, y =  0.00, z = 358.86 },
+    { x = 834.93, y = -0.14, z = 363.68 },
+    { x = 840.13, y = -0.31, z = 366.46 },
+    { x = 842.69, y =  0.00, z = 360.12 },
+    { x = 846.15, y = -0.27, z = 360.25 },
+    { x = 845.30, y = -0.51, z = 366.68 },
+    { x = 850.33, y = -1.34, z = 365.43 },
+    { x = 850.40, y = -1.45, z = 355.85 },
 }
 
 entity.onMobFight = function(mob, target)
-    local drawInWait = mob:getLocalVar("DrawInWait")
+    if
+        (target:getXPos() < 814 or target:getXPos() > 865 or
+        target:getZPos() < 345 or target:getZPos() > 377) and
+        os.time() > mob:getLocalVar("DrawInWait")
+    then
+        local pos = math.random(1, 8)
 
-    if (target:getXPos() < 814 or target:getXPos() > 865) and os.time() > drawInWait then
-        local rot = target:getRotPos()
-        local position = math.random(1,8)
-        target:setPos(drawInPos[position][1],drawInPos[position][2],drawInPos[position][3],rot)
-        mob:messageBasic(232, 0, 0, target)
-        mob:setLocalVar("DrawInWait", os.time() + 2)
-    elseif (target:getZPos() < 345 or target:getZPos() > 377) and os.time() > drawInWait then
-        local rot = target:getRotPos()
-        local position = math.random(1,8)
-        target:setPos(drawInPos[position][1],drawInPos[position][2],drawInPos[position][3],rot)
+        target:setPos(drawInPos[pos])
         mob:messageBasic(232, 0, 0, target)
         mob:setLocalVar("DrawInWait", os.time() + 2)
     end

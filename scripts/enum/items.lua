@@ -1109,6 +1109,7 @@ xi.items =
     HI_CHOCOLIXIR                   = 2345,
     TORNADO_SALAD                   = 2346,
     STAR_SAPPHIRE                   = 2359,
+    SMOKE_FILLED_GLASS              = 2384,
     MOLDY_BUCKLER                   = 2385,
     HOARY_BATTLE_HORN               = 2386,
     FLICKERING_LANTERN              = 2387,

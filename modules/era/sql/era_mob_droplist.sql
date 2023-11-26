@@ -2727,9 +2727,9 @@ INSERT INTO `mob_droplist` VALUES (276,0,0,1000,736,@VRARE);     -- Chunk Of Sil
 INSERT INTO `mob_droplist` VALUES (276,2,0,1000,737,0);          -- Chunk Of Gold Ore (Steal)
 
 -- ZoneID:  62 - Big Bomb
-INSERT INTO `mob_droplist` VALUES (277,0,0,1000,17471,@COMMON); -- Horrent Mace (Common, 15%)
-INSERT INTO `mob_droplist` VALUES (277,0,0,1000,18707,@COMMON); -- Fire Bomblet (Common, 15%)
-INSERT INTO `mob_droplist` VALUES (277,2,0,1000,17316,0);       -- Bomb Arm (Steal)
+INSERT INTO `mob_droplist` VALUES (277,0,0,1000,17471,@VCOMMON);  -- Horrent Mace (Very Common, 24%)
+INSERT INTO `mob_droplist` VALUES (277,0,0,1000,18707,@UNCOMMON); -- Fire Bomblet (Uncommon, 10%)
+INSERT INTO `mob_droplist` VALUES (277,2,0,1000,17316,0);         -- Bomb Arm (Steal)
 
 -- ZoneID:  27 - Big Jaw Noaggro
 INSERT INTO `mob_droplist` VALUES (278,0,0,1000,1888,@COMMON);  -- Sack Of Silica (Common, 15%)
