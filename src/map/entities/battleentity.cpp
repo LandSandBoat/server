@@ -253,6 +253,25 @@ uint8 CBattleEntity::GetSpeed()
     if (objtype == TYPE_PC)
     {
         gearBonus = static_cast<float>(getMaxGearMod(Mod::MOVE_SPEED_GEAR_BONUS)) / 100.0f;
+
+        float latentSpeedHead = static_cast<float>(getMod(Mod::LATENT_SPEED_HEAD)) / 100.0f;
+        float latentSpeedBody = static_cast<float>(getMod(Mod::LATENT_SPEED_BODY)) / 100.0f;
+        float latentSpeedFeet = static_cast<float>(getMod(Mod::LATENT_SPEED_FEET)) / 100.0f;
+
+        if (latentSpeedHead > gearBonus)
+        {
+            gearBonus = latentSpeedHead;
+        }
+
+        if (latentSpeedBody > gearBonus)
+        {
+            gearBonus = latentSpeedBody;
+        }
+
+        if (latentSpeedFeet > gearBonus)
+        {
+            gearBonus = latentSpeedFeet;
+        }
     }
 
     // Gravity and Curse. They seem additive to each other and the sum seems to be multiplicative.
