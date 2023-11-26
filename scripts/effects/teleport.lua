@@ -27,6 +27,9 @@ effectObject.onEffectLose = function(target, effect)
         xi.teleport.toHomeNation(target)
     elseif destination == xi.teleport.id.RETRACE then
         xi.teleport.toAlliedNation(target)
+    elseif destination == xi.teleport.id.CAMPAIGN then
+        local campaignDestination = effect:getSubPower()
+        xi.teleport.toCampaign(target, campaignDestination)
     elseif destination == xi.teleport.id.TIDAL_TALISMAN then
         xi.teleport.tidalTeleport(target)
     else

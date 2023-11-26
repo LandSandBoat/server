@@ -78,6 +78,7 @@ local ids =
     QUFIM_CONFLUENCE      = 65,
     ESCHA_RUAUN           = 66,
     MISAREAUX_CONFLUENCE  = 67,
+    CAMPAIGN              = 68,
     TIDAL_TALISMAN        = 69,
 }
 xi.teleport.id = ids
