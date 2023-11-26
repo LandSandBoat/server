@@ -155,12 +155,10 @@ INSERT INTO `mob_family_mods` VALUES (47,10,3,1);   -- SUBLINK: 3
 INSERT INTO `mob_family_mods` VALUES (47,36,35,1);  -- ROAM_COOL: 35
 INSERT INTO `mob_family_mods` VALUES (47,51,2,1);   -- ROAM_TURNS: 2
 INSERT INTO `mob_family_mods` VALUES (47,52,30,1);  -- ROAM_RATE: 30
-INSERT INTO `mob_family_mods` VALUES (47,240,50,0); -- SLEEPRES: 50
 
 -- Bee
 INSERT INTO `mob_family_mods` VALUES (48,36,15,1);  -- ROAM_COOL: 15
 INSERT INTO `mob_family_mods` VALUES (48,51,2,1);   -- ROAM_TURNS: 2
-INSERT INTO `mob_family_mods` VALUES (48,240,50,0); -- SLEEPRES: 50
 
 -- Beetle
 INSERT INTO `mob_family_mods` VALUES (49,31,15,1); -- ROAM_DISTANCE: 15
@@ -171,7 +169,6 @@ INSERT INTO `mob_family_mods` VALUES (49,52,30,1); -- ROAM_RATE: 30
 INSERT INTO `mob_family_mods` VALUES (51,36,50,1); -- ROAM_COOL: 50
 
 -- Bhoot
-INSERT INTO `mob_family_mods` VALUES (52,240,100,0); -- SLEEPRES: 100
 INSERT INTO `mob_family_mods` VALUES (52,242,20,0);  -- PARALYZERES: 20
 
 -- Bomb
@@ -243,7 +240,6 @@ INSERT INTO `mob_family_mods` VALUES (74,29,25,0);   -- MDEF: 25
 INSERT INTO `mob_family_mods` VALUES (74,36,50,1);   -- ROAM_COOL: 50
 INSERT INTO `mob_family_mods` VALUES (74,51,2,1);    -- ROAM_TURNS: 2
 INSERT INTO `mob_family_mods` VALUES (74,52,30,1);   -- ROAM_RATE: 30
-INSERT INTO `mob_family_mods` VALUES (74,240,100,0); -- SLEEPRES: 100
 INSERT INTO `mob_family_mods` VALUES (74,389,-25,0); -- UDMGMAGIC: -25
 
 -- Crab
@@ -286,7 +282,6 @@ INSERT INTO `mob_family_mods` VALUES (85,52,30,1); -- ROAM_RATE: 30
 -- Doomed
 INSERT INTO `mob_family_mods` VALUES (86,36,55,1);   -- ROAM_COOL: 55
 INSERT INTO `mob_family_mods` VALUES (86,52,30,1);   -- ROAM_RATE: 30
-INSERT INTO `mob_family_mods` VALUES (86,240,100,0); -- SLEEPRES: 100
 
 -- Dragon
 INSERT INTO `mob_family_mods` VALUES (87,3,10,1);    -- MP_BASE: 10
@@ -295,12 +290,6 @@ INSERT INTO `mob_family_mods` VALUES (87,5,10,1);    -- SOUND_RANGE: 10
 INSERT INTO `mob_family_mods` VALUES (87,36,55,1);   -- ROAM_COOL: 55
 INSERT INTO `mob_family_mods` VALUES (87,54,1000,1); -- GIL_BONUS: 1000
 INSERT INTO `mob_family_mods` VALUES (87,62,20,0);   -- ATTP: 20
-
--- Draugar
-INSERT INTO `mob_family_mods` VALUES (88,240,100,0); -- SLEEPRES: 100
-
--- Draugar
-INSERT INTO `mob_family_mods` VALUES (89,240,100,0); -- SLEEPRES: 100
 
 -- Dynamisstatue-Goblin
 INSERT INTO `mob_family_mods` VALUES (92,23,2047,1); -- IMMUNITY: 2047
@@ -382,8 +371,6 @@ INSERT INTO `mob_family_mods` VALUES (115,36,50,1);   -- ROAM_COOL: 50
 INSERT INTO `mob_family_mods` VALUES (115,51,2,1);    -- ROAM_TURNS: 2
 INSERT INTO `mob_family_mods` VALUES (115,52,30,1);   -- ROAM_RATE: 30
 INSERT INTO `mob_family_mods` VALUES (115,54,100,1);  -- GIL_BONUS: 100
-INSERT INTO `mob_family_mods` VALUES (115,240,100,0); -- SLEEPRES: 100
-INSERT INTO `mob_family_mods` VALUES (115,254,25,0);  -- LULLABYRES: 25
 
 -- Funguar
 INSERT INTO `mob_family_mods` VALUES (116,31,15,1); -- ROAM_DISTANCE: 15
@@ -393,8 +380,6 @@ INSERT INTO `mob_family_mods` VALUES (116,52,30,1); -- ROAM_RATE: 30
 -- Ghost
 INSERT INTO `mob_family_mods` VALUES (121,36,50,1);   -- ROAM_COOL: 50
 INSERT INTO `mob_family_mods` VALUES (121,52,30,1);   -- ROAM_RATE: 30
-INSERT INTO `mob_family_mods` VALUES (121,240,100,0); -- SLEEPRES: 100
-INSERT INTO `mob_family_mods` VALUES (121,242,20,0);  -- PARALYZERES: 20
 
 -- Ghrah
 INSERT INTO `mob_family_mods` VALUES (122,389,-13,0); -- UDMGMAGIC: -13
@@ -409,7 +394,6 @@ INSERT INTO `mob_family_mods` VALUES (124,389,-13,0); -- UDMGMAGIC: -13
 INSERT INTO `mob_family_mods` VALUES (125,36,40,1);   -- ROAM_COOL: 40
 INSERT INTO `mob_family_mods` VALUES (125,51,2,1);    -- ROAM_TURNS: 2
 INSERT INTO `mob_family_mods` VALUES (125,52,30,1);   -- ROAM_RATE: 30
-INSERT INTO `mob_family_mods` VALUES (125,240,100,0); -- SLEEPRES: 100
 
 -- Gigas
 INSERT INTO `mob_family_mods` VALUES (126,31,5,1);   -- ROAM_DISTANCE: 5
@@ -466,7 +450,6 @@ INSERT INTO `mob_family_mods` VALUES (139,36,55,1);   -- ROAM_COOL: 55
 INSERT INTO `mob_family_mods` VALUES (139,52,30,1);   -- ROAM_RATE: 30
 INSERT INTO `mob_family_mods` VALUES (139,56,-1,1);   -- HP_STANDBACK: -1
 INSERT INTO `mob_family_mods` VALUES (139,68,10,0);   -- EVA: 10
-INSERT INTO `mob_family_mods` VALUES (139,240,100,0); -- SLEEPRES: 100
 
 -- Hippogryph
 INSERT INTO `mob_family_mods` VALUES (140,3,50,1);  -- MP_BASE: 50
@@ -482,13 +465,11 @@ INSERT INTO `mob_family_mods` VALUES (141,51,2,1);  -- ROAM_TURNS: 2
 INSERT INTO `mob_family_mods` VALUES (142,36,50,1);   -- ROAM_COOL: 50
 INSERT INTO `mob_family_mods` VALUES (142,51,3,1);    -- ROAM_TURNS: 3
 INSERT INTO `mob_family_mods` VALUES (142,52,30,1);   -- ROAM_RATE: 30
-INSERT INTO `mob_family_mods` VALUES (142,240,100,0); -- SLEEPRES: 100
 
 -- Hound
 INSERT INTO `mob_family_mods` VALUES (143,36,50,1);   -- ROAM_COOL: 50
 INSERT INTO `mob_family_mods` VALUES (143,51,3,1);    -- ROAM_TURNS: 3
 INSERT INTO `mob_family_mods` VALUES (143,52,30,1);   -- ROAM_RATE: 30
-INSERT INTO `mob_family_mods` VALUES (143,240,100,0); -- SLEEPRES: 100
 
 -- Humanoid-Hume
 INSERT INTO `mob_family_mods` VALUES (150,4,30,1); -- SIGHT_RANGE: 30
@@ -544,8 +525,6 @@ INSERT INTO `mob_family_mods` VALUES (169,31,15,1);   -- ROAM_DISTANCE: 15
 INSERT INTO `mob_family_mods` VALUES (169,36,50,1);   -- ROAM_COOL: 50
 INSERT INTO `mob_family_mods` VALUES (169,51,3,1);    -- ROAM_TURNS: 3
 INSERT INTO `mob_family_mods` VALUES (169,54,120,1);  -- GIL_BONUS: 120
-INSERT INTO `mob_family_mods` VALUES (169,240,50,0);  -- SLEEPRES: 50
-INSERT INTO `mob_family_mods` VALUES (169,254,25,0);  -- LULLABYRES: 25
 INSERT INTO `mob_family_mods` VALUES (169,389,-25,0); -- UDMGMAGIC: -25
 
 -- Lamiae
@@ -621,19 +600,16 @@ INSERT INTO `mob_family_mods` VALUES (199,10,12,1); -- SUBLINK: 12
 INSERT INTO `mob_family_mods` VALUES (203,36,50,1);   -- ROAM_COOL: 50
 INSERT INTO `mob_family_mods` VALUES (203,51,3,1);    -- ROAM_TURNS: 3
 INSERT INTO `mob_family_mods` VALUES (203,52,30,1);   -- ROAM_RATE: 30
-INSERT INTO `mob_family_mods` VALUES (203,240,100,0); -- SLEEPRES: 100
 
 -- Qutrub
 INSERT INTO `mob_family_mods` VALUES (204,36,50,1);   -- ROAM_COOL: 50
 INSERT INTO `mob_family_mods` VALUES (204,51,3,1);    -- ROAM_TURNS: 3
 INSERT INTO `mob_family_mods` VALUES (204,52,30,1);   -- ROAM_RATE: 30
-INSERT INTO `mob_family_mods` VALUES (204,240,100,0); -- SLEEPRES: 100
 
 -- Qutrub
 INSERT INTO `mob_family_mods` VALUES (205,36,50,1);   -- ROAM_COOL: 50
 INSERT INTO `mob_family_mods` VALUES (205,51,3,1);    -- ROAM_TURNS: 3
 INSERT INTO `mob_family_mods` VALUES (205,52,30,1);   -- ROAM_RATE: 30
-INSERT INTO `mob_family_mods` VALUES (205,240,100,0); -- SLEEPRES: 100
 
 -- Rabbit
 INSERT INTO `mob_family_mods` VALUES (206,31,15,1); -- ROAM_DISTANCE: 15
@@ -684,19 +660,16 @@ INSERT INTO `mob_family_mods` VALUES (219,36,30,1); -- ROAM_COOL: 30
 INSERT INTO `mob_family_mods` VALUES (221,36,50,1);   -- ROAM_COOL: 50
 INSERT INTO `mob_family_mods` VALUES (221,51,2,1);    -- ROAM_TURNS: 2
 INSERT INTO `mob_family_mods` VALUES (221,52,30,1);   -- ROAM_RATE: 30
-INSERT INTO `mob_family_mods` VALUES (221,240,100,0); -- SLEEPRES: 100
 
 -- Shadow
 INSERT INTO `mob_family_mods` VALUES (222,36,50,1);   -- ROAM_COOL: 50
 INSERT INTO `mob_family_mods` VALUES (222,51,2,1);    -- ROAM_TURNS: 2
 INSERT INTO `mob_family_mods` VALUES (222,52,30,1);   -- ROAM_RATE: 30
-INSERT INTO `mob_family_mods` VALUES (222,240,100,0); -- SLEEPRES: 100
 
 -- Shadow
 INSERT INTO `mob_family_mods` VALUES (223,36,50,1);   -- ROAM_COOL: 50
 INSERT INTO `mob_family_mods` VALUES (223,51,2,1);    -- ROAM_TURNS: 2
 INSERT INTO `mob_family_mods` VALUES (223,52,30,1);   -- ROAM_RATE: 30
-INSERT INTO `mob_family_mods` VALUES (223,240,100,0); -- SLEEPRES: 100
 
 -- Sheep
 INSERT INTO `mob_family_mods` VALUES (226,31,15,1); -- ROAM_DISTANCE: 15
@@ -708,7 +681,6 @@ INSERT INTO `mob_family_mods` VALUES (226,52,30,1); -- ROAM_RATE: 30
 INSERT INTO `mob_family_mods` VALUES (227,36,65,1);   -- ROAM_COOL: 65
 INSERT INTO `mob_family_mods` VALUES (227,51,5,1);    -- ROAM_TURNS: 5
 INSERT INTO `mob_family_mods` VALUES (227,52,30,1);   -- ROAM_RATE: 30
-INSERT INTO `mob_family_mods` VALUES (227,240,100,0); -- SLEEPRES: 100
 
 -- Snoll
 INSERT INTO `mob_family_mods` VALUES (232,36,40,1); -- ROAM_COOL: 40
@@ -881,8 +853,6 @@ INSERT INTO `mob_family_mods` VALUES (358,31,15,1);   -- ROAM_DISTANCE: 15
 INSERT INTO `mob_family_mods` VALUES (358,36,50,1);   -- ROAM_COOL: 50
 INSERT INTO `mob_family_mods` VALUES (358,51,3,1);    -- ROAM_TURNS: 3
 INSERT INTO `mob_family_mods` VALUES (358,54,120,1);  -- GIL_BONUS: 120
-INSERT INTO `mob_family_mods` VALUES (358,240,50,0);  -- SLEEPRES: 50
-INSERT INTO `mob_family_mods` VALUES (358,254,25,0);  -- LULLABYRES: 25
 INSERT INTO `mob_family_mods` VALUES (358,389,-25,0); -- UDMGMAGIC: -25
 
 -- Fomor
@@ -890,8 +860,6 @@ INSERT INTO `mob_family_mods` VALUES (359,36,50,1);   -- ROAM_COOL: 50
 INSERT INTO `mob_family_mods` VALUES (359,51,2,1);    -- ROAM_TURNS: 2
 INSERT INTO `mob_family_mods` VALUES (359,52,30,1);   -- ROAM_RATE: 30
 INSERT INTO `mob_family_mods` VALUES (359,54,100,1);  -- GIL_BONUS: 100
-INSERT INTO `mob_family_mods` VALUES (359,240,100,0); -- SLEEPRES: 100
-INSERT INTO `mob_family_mods` VALUES (359,254,25,0);  -- LULLABYRES: 25
 
 -- Sabotender-Florido
 INSERT INTO `mob_family_mods` VALUES (362,10,7,1); -- SUBLINK: 7
