@@ -2794,8 +2794,7 @@ namespace charutils
         PChar->pushPacket(new CCharAppearancePacket(PChar));
 
         BuildingCharWeaponSkills(PChar);
-        SaveCharEquip(PChar);
-        SaveCharLook(PChar);
+        PChar->RequestPersist(CHAR_PERSIST::EQUIP);
     }
 
     void RemoveAllEquipment(CCharEntity* PChar)
@@ -2815,8 +2814,7 @@ namespace charutils
         CheckUnarmedWeapon(PChar);
 
         BuildingCharWeaponSkills(PChar);
-        SaveCharEquip(PChar);
-        SaveCharLook(PChar);
+        PChar->RequestPersist(CHAR_PERSIST::EQUIP);
     }
 
     /************************************************************************
