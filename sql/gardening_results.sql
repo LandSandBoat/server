@@ -1944,421 +1944,421 @@ INSERT INTO `gardening_results` VALUES (1930, 6, 8, 8, 1228, 4, 12, 20); -- Dark
 INSERT INTO `gardening_results` VALUES (1931, 7, 0, 0, 936, 12, 24, 30); -- Rock Salt
 INSERT INTO `gardening_results` VALUES (1932, 7, 0, 0, 4449, 1, 2, 30); -- Reishi Mushroom
 INSERT INTO `gardening_results` VALUES (1933, 7, 0, 0, 1309, 4, 12, 28); -- Gold Leaf
-INSERT INTO `gardening_results` VALUES (1934, 7, 0, 0, 1261, 1, 2, 12); -- Light Ore
+INSERT INTO `gardening_results` VALUES (1934, 7, 0, 0, 1261, 1, 1, 12); -- Light Ore
 INSERT INTO `gardening_results` VALUES (1935, 7, 0, 1, 936, 12, 24, 15); -- Rock Salt
 INSERT INTO `gardening_results` VALUES (1936, 7, 0, 1, 4105, 1, 2, 24); -- Ice Cluster
 INSERT INTO `gardening_results` VALUES (1937, 7, 0, 1, 4449, 1, 2, 15); -- Reishi Mushroom
 INSERT INTO `gardening_results` VALUES (1938, 7, 0, 1, 628, 1, 2, 20); -- Cinnamon
 INSERT INTO `gardening_results` VALUES (1939, 7, 0, 1, 1309, 4, 12, 14); -- Gold Leaf
-INSERT INTO `gardening_results` VALUES (1940, 7, 0, 1, 1255, 1, 2, 6); -- Fire Ore
-INSERT INTO `gardening_results` VALUES (1941, 7, 0, 1, 1261, 1, 2, 6); -- Light Ore
+INSERT INTO `gardening_results` VALUES (1940, 7, 0, 1, 1255, 1, 1, 6); -- Fire Ore
+INSERT INTO `gardening_results` VALUES (1941, 7, 0, 1, 1261, 1, 1, 6); -- Light Ore
 INSERT INTO `gardening_results` VALUES (1942, 7, 0, 2, 936, 12, 24, 15); -- Rock Salt
 INSERT INTO `gardening_results` VALUES (1943, 7, 0, 2, 4106, 1, 2, 24); -- Wind Cluster
 INSERT INTO `gardening_results` VALUES (1944, 7, 0, 2, 4449, 1, 2, 15); -- Reishi Mushroom
 INSERT INTO `gardening_results` VALUES (1945, 7, 0, 2, 1310, 6, 12, 20); -- Platinum Leaf
 INSERT INTO `gardening_results` VALUES (1946, 7, 0, 2, 1309, 4, 12, 14); -- Gold Leaf
-INSERT INTO `gardening_results` VALUES (1947, 7, 0, 2, 1256, 1, 2, 6); -- Ice Ore
-INSERT INTO `gardening_results` VALUES (1948, 7, 0, 2, 1261, 1, 2, 6); -- Light Ore
+INSERT INTO `gardening_results` VALUES (1947, 7, 0, 2, 1256, 1, 1, 6); -- Ice Ore
+INSERT INTO `gardening_results` VALUES (1948, 7, 0, 2, 1261, 1, 1, 6); -- Light Ore
 INSERT INTO `gardening_results` VALUES (1949, 7, 0, 3, 936, 12, 24, 15); -- Rock Salt
 INSERT INTO `gardening_results` VALUES (1950, 7, 0, 3, 4107, 1, 2, 24); -- Earth Cluster
 INSERT INTO `gardening_results` VALUES (1951, 7, 0, 3, 4449, 1, 2, 15); -- Reishi Mushroom
 INSERT INTO `gardening_results` VALUES (1952, 7, 0, 3, 635, 24, 48, 20); -- Clump Of Windurstian Tea Leaves
 INSERT INTO `gardening_results` VALUES (1953, 7, 0, 3, 1309, 4, 12, 14); -- Gold Leaf
-INSERT INTO `gardening_results` VALUES (1954, 7, 0, 3, 1257, 1, 2, 6); -- Wind Ore
-INSERT INTO `gardening_results` VALUES (1955, 7, 0, 3, 1261, 1, 2, 6); -- Light Ore
+INSERT INTO `gardening_results` VALUES (1954, 7, 0, 3, 1257, 1, 1, 6); -- Wind Ore
+INSERT INTO `gardening_results` VALUES (1955, 7, 0, 3, 1261, 1, 1, 6); -- Light Ore
 INSERT INTO `gardening_results` VALUES (1956, 7, 0, 4, 936, 12, 24, 15); -- Rock Salt
 INSERT INTO `gardening_results` VALUES (1957, 7, 0, 4, 4108, 1, 2, 24); -- Lightning Cluster
 INSERT INTO `gardening_results` VALUES (1958, 7, 0, 4, 4449, 1, 2, 15); -- Reishi Mushroom
 INSERT INTO `gardening_results` VALUES (1959, 7, 0, 4, 4273, 8, 16, 20); -- Kitron
 INSERT INTO `gardening_results` VALUES (1960, 7, 0, 4, 1309, 4, 12, 14); -- Gold Leaf
-INSERT INTO `gardening_results` VALUES (1961, 7, 0, 4, 1258, 1, 2, 6); -- Earth Ore
-INSERT INTO `gardening_results` VALUES (1962, 7, 0, 4, 1261, 1, 2, 6); -- Light Ore
+INSERT INTO `gardening_results` VALUES (1961, 7, 0, 4, 1258, 1, 1, 6); -- Earth Ore
+INSERT INTO `gardening_results` VALUES (1962, 7, 0, 4, 1261, 1, 1, 6); -- Light Ore
 INSERT INTO `gardening_results` VALUES (1963, 7, 0, 5, 936, 12, 24, 15); -- Rock Salt
 INSERT INTO `gardening_results` VALUES (1964, 7, 0, 5, 4109, 1, 2, 24); -- Water Cluster
 INSERT INTO `gardening_results` VALUES (1965, 7, 0, 5, 4449, 1, 2, 15); -- Reishi Mushroom
 INSERT INTO `gardening_results` VALUES (1966, 7, 0, 5, 1307, 8, 16, 20); -- Silver Leaf
 INSERT INTO `gardening_results` VALUES (1967, 7, 0, 5, 1309, 4, 12, 14); -- Gold Leaf
-INSERT INTO `gardening_results` VALUES (1968, 7, 0, 5, 1259, 1, 2, 6); -- Lightning Ore
-INSERT INTO `gardening_results` VALUES (1969, 7, 0, 5, 1261, 1, 2, 6); -- Light Ore
+INSERT INTO `gardening_results` VALUES (1968, 7, 0, 5, 1259, 1, 1, 6); -- Lightning Ore
+INSERT INTO `gardening_results` VALUES (1969, 7, 0, 5, 1261, 1, 1, 6); -- Light Ore
 INSERT INTO `gardening_results` VALUES (1970, 7, 0, 6, 936, 12, 24, 15); -- Rock Salt
 INSERT INTO `gardening_results` VALUES (1971, 7, 0, 6, 4104, 1, 2, 24); -- Fire Cluster
 INSERT INTO `gardening_results` VALUES (1972, 7, 0, 6, 4449, 1, 2, 15); -- Reishi Mushroom
 INSERT INTO `gardening_results` VALUES (1973, 7, 0, 6, 1308, 6, 12, 20); -- Mythril Leaf
 INSERT INTO `gardening_results` VALUES (1974, 7, 0, 6, 1309, 4, 12, 14); -- Gold Leaf
-INSERT INTO `gardening_results` VALUES (1975, 7, 0, 6, 1260, 1, 2, 6); -- Water Ore
-INSERT INTO `gardening_results` VALUES (1976, 7, 0, 6, 1261, 1, 2, 6); -- Light Ore
+INSERT INTO `gardening_results` VALUES (1975, 7, 0, 6, 1260, 1, 1, 6); -- Water Ore
+INSERT INTO `gardening_results` VALUES (1976, 7, 0, 6, 1261, 1, 1, 6); -- Light Ore
 INSERT INTO `gardening_results` VALUES (1977, 7, 0, 7, 936, 12, 24, 15); -- Rock Salt
 INSERT INTO `gardening_results` VALUES (1978, 7, 0, 7, 17397, 24, 48, 15); -- Shell Bug
 INSERT INTO `gardening_results` VALUES (1979, 7, 0, 7, 4449, 1, 2, 15); -- Reishi Mushroom
 INSERT INTO `gardening_results` VALUES (1980, 7, 0, 7, 4111, 1, 2, 15); -- Dark Cluster
 INSERT INTO `gardening_results` VALUES (1981, 7, 0, 7, 1309, 4, 12, 34); -- Gold Leaf
-INSERT INTO `gardening_results` VALUES (1982, 7, 0, 7, 1261, 1, 2, 6); -- Light Ore
+INSERT INTO `gardening_results` VALUES (1982, 7, 0, 7, 1261, 1, 1, 6); -- Light Ore
 INSERT INTO `gardening_results` VALUES (1983, 7, 0, 8, 936, 12, 24, 30); -- Rock Salt
 INSERT INTO `gardening_results` VALUES (1984, 7, 0, 8, 4449, 1, 2, 15); -- Reishi Mushroom
 INSERT INTO `gardening_results` VALUES (1985, 7, 0, 8, 4110, 1, 2, 15); -- Light Cluster
 INSERT INTO `gardening_results` VALUES (1986, 7, 0, 8, 1309, 4, 12, 14); -- Gold Leaf
 INSERT INTO `gardening_results` VALUES (1987, 7, 0, 8, 4274, 4, 8, 14); -- Persikos
-INSERT INTO `gardening_results` VALUES (1988, 7, 0, 8, 1261, 1, 2, 6); -- Light Ore
-INSERT INTO `gardening_results` VALUES (1989, 7, 0, 8, 1262, 1, 2, 6); -- Dark Ore
+INSERT INTO `gardening_results` VALUES (1988, 7, 0, 8, 1261, 1, 1, 6); -- Light Ore
+INSERT INTO `gardening_results` VALUES (1989, 7, 0, 8, 1262, 1, 1, 6); -- Dark Ore
 INSERT INTO `gardening_results` VALUES (1990, 7, 1, 0, 936, 12, 24, 15); -- Rock Salt
 INSERT INTO `gardening_results` VALUES (1991, 7, 1, 0, 4105, 1, 2, 24); -- Ice Cluster
 INSERT INTO `gardening_results` VALUES (1992, 7, 1, 0, 4449, 1, 2, 15); -- Reishi Mushroom
 INSERT INTO `gardening_results` VALUES (1993, 7, 1, 0, 628, 1, 2, 20); -- Cinnamon
 INSERT INTO `gardening_results` VALUES (1994, 7, 1, 0, 1309, 4, 12, 14); -- Gold Leaf
-INSERT INTO `gardening_results` VALUES (1995, 7, 1, 0, 1255, 1, 2, 6); -- Fire Ore
-INSERT INTO `gardening_results` VALUES (1996, 7, 1, 0, 1261, 1, 2, 6); -- Light Ore
+INSERT INTO `gardening_results` VALUES (1995, 7, 1, 0, 1255, 1, 1, 6); -- Fire Ore
+INSERT INTO `gardening_results` VALUES (1996, 7, 1, 0, 1261, 1, 1, 6); -- Light Ore
 INSERT INTO `gardening_results` VALUES (1997, 7, 1, 1, 4105, 1, 2, 48); -- Ice Cluster
 INSERT INTO `gardening_results` VALUES (1998, 7, 1, 1, 628, 1, 2, 40); -- Cinnamon
-INSERT INTO `gardening_results` VALUES (1999, 7, 1, 1, 1255, 1, 2, 12); -- Fire Ore
+INSERT INTO `gardening_results` VALUES (1999, 7, 1, 1, 1255, 1, 1, 12); -- Fire Ore
 INSERT INTO `gardening_results` VALUES (2000, 7, 1, 2, 4105, 1, 2, 24); -- Ice Cluster
 INSERT INTO `gardening_results` VALUES (2001, 7, 1, 2, 4106, 1, 2, 24); -- Wind Cluster
 INSERT INTO `gardening_results` VALUES (2002, 7, 1, 2, 628, 1, 2, 20); -- Cinnamon
 INSERT INTO `gardening_results` VALUES (2003, 7, 1, 2, 1310, 6, 12, 20); -- Platinum Leaf
-INSERT INTO `gardening_results` VALUES (2004, 7, 1, 2, 1255, 1, 2, 6); -- Fire Ore
-INSERT INTO `gardening_results` VALUES (2005, 7, 1, 2, 1256, 1, 2, 6); -- Ice Ore
+INSERT INTO `gardening_results` VALUES (2004, 7, 1, 2, 1255, 1, 1, 6); -- Fire Ore
+INSERT INTO `gardening_results` VALUES (2005, 7, 1, 2, 1256, 1, 1, 6); -- Ice Ore
 INSERT INTO `gardening_results` VALUES (2006, 7, 1, 3, 4105, 1, 2, 24); -- Ice Cluster
 INSERT INTO `gardening_results` VALUES (2007, 7, 1, 3, 4107, 1, 2, 24); -- Earth Cluster
 INSERT INTO `gardening_results` VALUES (2008, 7, 1, 3, 628, 1, 2, 20); -- Cinnamon
 INSERT INTO `gardening_results` VALUES (2009, 7, 1, 3, 635, 24, 48, 20); -- Clump Of Windurstian Tea Leaves
-INSERT INTO `gardening_results` VALUES (2010, 7, 1, 3, 1255, 1, 2, 6); -- Fire Ore
-INSERT INTO `gardening_results` VALUES (2011, 7, 1, 3, 1257, 1, 2, 6); -- Wind Ore
+INSERT INTO `gardening_results` VALUES (2010, 7, 1, 3, 1255, 1, 1, 6); -- Fire Ore
+INSERT INTO `gardening_results` VALUES (2011, 7, 1, 3, 1257, 1, 1, 6); -- Wind Ore
 INSERT INTO `gardening_results` VALUES (2012, 7, 1, 4, 4105, 1, 2, 24); -- Ice Cluster
 INSERT INTO `gardening_results` VALUES (2013, 7, 1, 4, 4108, 1, 2, 24); -- Lightning Cluster
 INSERT INTO `gardening_results` VALUES (2014, 7, 1, 4, 628, 1, 2, 20); -- Cinnamon
 INSERT INTO `gardening_results` VALUES (2015, 7, 1, 4, 4273, 8, 16, 20); -- Kitron
-INSERT INTO `gardening_results` VALUES (2016, 7, 1, 4, 1255, 1, 2, 6); -- Fire Ore
-INSERT INTO `gardening_results` VALUES (2017, 7, 1, 4, 1258, 1, 2, 6); -- Earth Ore
+INSERT INTO `gardening_results` VALUES (2016, 7, 1, 4, 1255, 1, 1, 6); -- Fire Ore
+INSERT INTO `gardening_results` VALUES (2017, 7, 1, 4, 1258, 1, 1, 6); -- Earth Ore
 INSERT INTO `gardening_results` VALUES (2018, 7, 1, 5, 4105, 1, 2, 24); -- Ice Cluster
 INSERT INTO `gardening_results` VALUES (2019, 7, 1, 5, 4109, 1, 2, 24); -- Water Cluster
 INSERT INTO `gardening_results` VALUES (2020, 7, 1, 5, 628, 1, 2, 20); -- Cinnamon
 INSERT INTO `gardening_results` VALUES (2021, 7, 1, 5, 1307, 8, 16, 20); -- Silver Leaf
-INSERT INTO `gardening_results` VALUES (2022, 7, 1, 5, 1255, 1, 2, 6); -- Fire Ore
-INSERT INTO `gardening_results` VALUES (2023, 7, 1, 5, 1259, 1, 2, 6); -- Lightning Ore
+INSERT INTO `gardening_results` VALUES (2022, 7, 1, 5, 1255, 1, 1, 6); -- Fire Ore
+INSERT INTO `gardening_results` VALUES (2023, 7, 1, 5, 1259, 1, 1, 6); -- Lightning Ore
 INSERT INTO `gardening_results` VALUES (2024, 7, 1, 6, 4105, 1, 2, 24); -- Ice Cluster
 INSERT INTO `gardening_results` VALUES (2025, 7, 1, 6, 4104, 1, 2, 24); -- Fire Cluster
 INSERT INTO `gardening_results` VALUES (2026, 7, 1, 6, 628, 1, 2, 20); -- Cinnamon
 INSERT INTO `gardening_results` VALUES (2027, 7, 1, 6, 1308, 6, 12, 20); -- Mythril Leaf
-INSERT INTO `gardening_results` VALUES (2028, 7, 1, 6, 1255, 1, 2, 6); -- Fire Ore
-INSERT INTO `gardening_results` VALUES (2029, 7, 1, 6, 1260, 1, 2, 6); -- Water Ore
+INSERT INTO `gardening_results` VALUES (2028, 7, 1, 6, 1255, 1, 1, 6); -- Fire Ore
+INSERT INTO `gardening_results` VALUES (2029, 7, 1, 6, 1260, 1, 1, 6); -- Water Ore
 INSERT INTO `gardening_results` VALUES (2030, 7, 1, 7, 4105, 1, 2, 24); -- Ice Cluster
 INSERT INTO `gardening_results` VALUES (2031, 7, 1, 7, 17397, 24, 48, 15); -- Shell Bug
 INSERT INTO `gardening_results` VALUES (2032, 7, 1, 7, 628, 1, 2, 20); -- Cinnamon
 INSERT INTO `gardening_results` VALUES (2033, 7, 1, 7, 4111, 1, 2, 15); -- Dark Cluster
-INSERT INTO `gardening_results` VALUES (2034, 7, 1, 7, 1255, 1, 2, 6); -- Fire Ore
+INSERT INTO `gardening_results` VALUES (2034, 7, 1, 7, 1255, 1, 1, 6); -- Fire Ore
 INSERT INTO `gardening_results` VALUES (2035, 7, 1, 7, 1309, 4, 12, 20); -- Gold Leaf
 INSERT INTO `gardening_results` VALUES (2036, 7, 1, 8, 4105, 1, 2, 24); -- Ice Cluster
 INSERT INTO `gardening_results` VALUES (2037, 7, 1, 8, 936, 12, 24, 15); -- Rock Salt
 INSERT INTO `gardening_results` VALUES (2038, 7, 1, 8, 628, 1, 2, 20); -- Cinnamon
 INSERT INTO `gardening_results` VALUES (2039, 7, 1, 8, 4110, 1, 2, 15); -- Light Cluster
-INSERT INTO `gardening_results` VALUES (2040, 7, 1, 8, 1255, 1, 2, 6); -- Fire Ore
+INSERT INTO `gardening_results` VALUES (2040, 7, 1, 8, 1255, 1, 1, 6); -- Fire Ore
 INSERT INTO `gardening_results` VALUES (2041, 7, 1, 8, 4274, 4, 8, 14); -- Persikos
-INSERT INTO `gardening_results` VALUES (2042, 7, 1, 8, 1262, 1, 2, 6); -- Dark Ore
+INSERT INTO `gardening_results` VALUES (2042, 7, 1, 8, 1262, 1, 1, 6); -- Dark Ore
 INSERT INTO `gardening_results` VALUES (2043, 7, 2, 0, 936, 12, 24, 15); -- Rock Salt
 INSERT INTO `gardening_results` VALUES (2044, 7, 2, 0, 4106, 1, 2, 24); -- Wind Cluster
 INSERT INTO `gardening_results` VALUES (2045, 7, 2, 0, 4449, 1, 2, 15); -- Reishi Mushroom
 INSERT INTO `gardening_results` VALUES (2046, 7, 2, 0, 1310, 6, 12, 20); -- Platinum Leaf
 INSERT INTO `gardening_results` VALUES (2047, 7, 2, 0, 1309, 4, 12, 14); -- Gold Leaf
-INSERT INTO `gardening_results` VALUES (2048, 7, 2, 0, 1256, 1, 2, 6); -- Ice Ore
-INSERT INTO `gardening_results` VALUES (2049, 7, 2, 0, 1261, 1, 2, 6); -- Light Ore
+INSERT INTO `gardening_results` VALUES (2048, 7, 2, 0, 1256, 1, 1, 6); -- Ice Ore
+INSERT INTO `gardening_results` VALUES (2049, 7, 2, 0, 1261, 1, 1, 6); -- Light Ore
 INSERT INTO `gardening_results` VALUES (2050, 7, 2, 1, 4105, 1, 2, 24); -- Ice Cluster
 INSERT INTO `gardening_results` VALUES (2051, 7, 2, 1, 4106, 1, 2, 24); -- Wind Cluster
 INSERT INTO `gardening_results` VALUES (2052, 7, 2, 1, 628, 1, 2, 20); -- Cinnamon
 INSERT INTO `gardening_results` VALUES (2053, 7, 2, 1, 1310, 6, 12, 20); -- Platinum Leaf
-INSERT INTO `gardening_results` VALUES (2054, 7, 2, 1, 1255, 1, 2, 6); -- Fire Ore
-INSERT INTO `gardening_results` VALUES (2055, 7, 2, 1, 1256, 1, 2, 6); -- Ice Ore
+INSERT INTO `gardening_results` VALUES (2054, 7, 2, 1, 1255, 1, 1, 6); -- Fire Ore
+INSERT INTO `gardening_results` VALUES (2055, 7, 2, 1, 1256, 1, 1, 6); -- Ice Ore
 INSERT INTO `gardening_results` VALUES (2056, 7, 2, 2, 4106, 1, 2, 48); -- Wind Cluster
 INSERT INTO `gardening_results` VALUES (2057, 7, 2, 2, 1310, 6, 12, 40); -- Platinum Leaf
-INSERT INTO `gardening_results` VALUES (2058, 7, 2, 2, 1256, 1, 2, 12); -- Ice Ore
+INSERT INTO `gardening_results` VALUES (2058, 7, 2, 2, 1256, 1, 1, 12); -- Ice Ore
 INSERT INTO `gardening_results` VALUES (2059, 7, 2, 3, 4106, 1, 2, 24); -- Wind Cluster
 INSERT INTO `gardening_results` VALUES (2060, 7, 2, 3, 4107, 1, 2, 24); -- Earth Cluster
 INSERT INTO `gardening_results` VALUES (2061, 7, 2, 3, 1310, 6, 12, 20); -- Platinum Leaf
 INSERT INTO `gardening_results` VALUES (2062, 7, 2, 3, 635, 24, 48, 20); -- Clump Of Windurstian Tea Leaves
-INSERT INTO `gardening_results` VALUES (2063, 7, 2, 3, 1256, 1, 2, 6); -- Ice Ore
-INSERT INTO `gardening_results` VALUES (2064, 7, 2, 3, 1257, 1, 2, 6); -- Wind Ore
+INSERT INTO `gardening_results` VALUES (2063, 7, 2, 3, 1256, 1, 1, 6); -- Ice Ore
+INSERT INTO `gardening_results` VALUES (2064, 7, 2, 3, 1257, 1, 1, 6); -- Wind Ore
 INSERT INTO `gardening_results` VALUES (2065, 7, 2, 4, 4106, 1, 2, 24); -- Wind Cluster
 INSERT INTO `gardening_results` VALUES (2066, 7, 2, 4, 4108, 1, 2, 24); -- Lightning Cluster
 INSERT INTO `gardening_results` VALUES (2067, 7, 2, 4, 1310, 6, 12, 20); -- Platinum Leaf
 INSERT INTO `gardening_results` VALUES (2068, 7, 2, 4, 4273, 8, 16, 20); -- Kitron
-INSERT INTO `gardening_results` VALUES (2069, 7, 2, 4, 1256, 1, 2, 6); -- Ice Ore
-INSERT INTO `gardening_results` VALUES (2070, 7, 2, 4, 1258, 1, 2, 6); -- Earth Ore
+INSERT INTO `gardening_results` VALUES (2069, 7, 2, 4, 1256, 1, 1, 6); -- Ice Ore
+INSERT INTO `gardening_results` VALUES (2070, 7, 2, 4, 1258, 1, 1, 6); -- Earth Ore
 INSERT INTO `gardening_results` VALUES (2071, 7, 2, 5, 4106, 1, 2, 24); -- Wind Cluster
 INSERT INTO `gardening_results` VALUES (2072, 7, 2, 5, 4109, 1, 2, 24); -- Water Cluster
 INSERT INTO `gardening_results` VALUES (2073, 7, 2, 5, 1310, 6, 12, 20); -- Platinum Leaf
 INSERT INTO `gardening_results` VALUES (2074, 7, 2, 5, 1307, 8, 16, 20); -- Silver Leaf
-INSERT INTO `gardening_results` VALUES (2075, 7, 2, 5, 1256, 1, 2, 6); -- Ice Ore
-INSERT INTO `gardening_results` VALUES (2076, 7, 2, 5, 1259, 1, 2, 6); -- Lightning Ore
+INSERT INTO `gardening_results` VALUES (2075, 7, 2, 5, 1256, 1, 1, 6); -- Ice Ore
+INSERT INTO `gardening_results` VALUES (2076, 7, 2, 5, 1259, 1, 1, 6); -- Lightning Ore
 INSERT INTO `gardening_results` VALUES (2077, 7, 2, 6, 4106, 1, 2, 24); -- Wind Cluster
 INSERT INTO `gardening_results` VALUES (2078, 7, 2, 6, 4104, 1, 2, 24); -- Fire Cluster
 INSERT INTO `gardening_results` VALUES (2079, 7, 2, 6, 1310, 6, 12, 20); -- Platinum Leaf
 INSERT INTO `gardening_results` VALUES (2080, 7, 2, 6, 1308, 6, 12, 20); -- Mythril Leaf
-INSERT INTO `gardening_results` VALUES (2081, 7, 2, 6, 1256, 1, 2, 6); -- Ice Ore
-INSERT INTO `gardening_results` VALUES (2082, 7, 2, 6, 1260, 1, 2, 6); -- Water Ore
+INSERT INTO `gardening_results` VALUES (2081, 7, 2, 6, 1256, 1, 1, 6); -- Ice Ore
+INSERT INTO `gardening_results` VALUES (2082, 7, 2, 6, 1260, 1, 1, 6); -- Water Ore
 INSERT INTO `gardening_results` VALUES (2083, 7, 2, 7, 4106, 1, 2, 24); -- Wind Cluster
 INSERT INTO `gardening_results` VALUES (2084, 7, 2, 7, 17397, 24, 48, 15); -- Shell Bug
 INSERT INTO `gardening_results` VALUES (2085, 7, 2, 7, 1310, 6, 12, 20); -- Platinum Leaf
 INSERT INTO `gardening_results` VALUES (2086, 7, 2, 7, 4111, 1, 2, 15); -- Dark Cluster
-INSERT INTO `gardening_results` VALUES (2087, 7, 2, 7, 1256, 1, 2, 6); -- Ice Ore
+INSERT INTO `gardening_results` VALUES (2087, 7, 2, 7, 1256, 1, 1, 6); -- Ice Ore
 INSERT INTO `gardening_results` VALUES (2088, 7, 2, 7, 1309, 4, 12, 20); -- Gold Leaf
 INSERT INTO `gardening_results` VALUES (2089, 7, 2, 8, 4106, 1, 2, 24); -- Wind Cluster
 INSERT INTO `gardening_results` VALUES (2090, 7, 2, 8, 936, 12, 24, 15); -- Rock Salt
 INSERT INTO `gardening_results` VALUES (2091, 7, 2, 8, 1310, 6, 12, 20); -- Platinum Leaf
 INSERT INTO `gardening_results` VALUES (2092, 7, 2, 8, 4110, 1, 2, 15); -- Light Cluster
-INSERT INTO `gardening_results` VALUES (2093, 7, 2, 8, 1256, 1, 2, 6); -- Ice Ore
+INSERT INTO `gardening_results` VALUES (2093, 7, 2, 8, 1256, 1, 1, 6); -- Ice Ore
 INSERT INTO `gardening_results` VALUES (2094, 7, 2, 8, 4274, 4, 8, 14); -- Persikos
-INSERT INTO `gardening_results` VALUES (2095, 7, 2, 8, 1262, 1, 2, 6); -- Dark Ore
+INSERT INTO `gardening_results` VALUES (2095, 7, 2, 8, 1262, 1, 1, 6); -- Dark Ore
 INSERT INTO `gardening_results` VALUES (2096, 7, 3, 0, 936, 12, 24, 15); -- Rock Salt
 INSERT INTO `gardening_results` VALUES (2097, 7, 3, 0, 4107, 1, 2, 24); -- Earth Cluster
 INSERT INTO `gardening_results` VALUES (2098, 7, 3, 0, 4449, 1, 2, 15); -- Reishi Mushroom
 INSERT INTO `gardening_results` VALUES (2099, 7, 3, 0, 635, 24, 48, 20); -- Clump Of Windurstian Tea Leaves
 INSERT INTO `gardening_results` VALUES (2100, 7, 3, 0, 1309, 4, 12, 14); -- Gold Leaf
-INSERT INTO `gardening_results` VALUES (2101, 7, 3, 0, 1257, 1, 2, 6); -- Wind Ore
-INSERT INTO `gardening_results` VALUES (2102, 7, 3, 0, 1261, 1, 2, 6); -- Light Ore
+INSERT INTO `gardening_results` VALUES (2101, 7, 3, 0, 1257, 1, 1, 6); -- Wind Ore
+INSERT INTO `gardening_results` VALUES (2102, 7, 3, 0, 1261, 1, 1, 6); -- Light Ore
 INSERT INTO `gardening_results` VALUES (2103, 7, 3, 1, 4105, 1, 2, 24); -- Ice Cluster
 INSERT INTO `gardening_results` VALUES (2104, 7, 3, 1, 4107, 1, 2, 24); -- Earth Cluster
 INSERT INTO `gardening_results` VALUES (2105, 7, 3, 1, 628, 1, 2, 20); -- Cinnamon
 INSERT INTO `gardening_results` VALUES (2106, 7, 3, 1, 635, 24, 48, 20); -- Clump Of Windurstian Tea Leaves
-INSERT INTO `gardening_results` VALUES (2107, 7, 3, 1, 1255, 1, 2, 6); -- Fire Ore
-INSERT INTO `gardening_results` VALUES (2108, 7, 3, 1, 1257, 1, 2, 6); -- Wind Ore
+INSERT INTO `gardening_results` VALUES (2107, 7, 3, 1, 1255, 1, 1, 6); -- Fire Ore
+INSERT INTO `gardening_results` VALUES (2108, 7, 3, 1, 1257, 1, 1, 6); -- Wind Ore
 INSERT INTO `gardening_results` VALUES (2109, 7, 3, 2, 4106, 1, 2, 24); -- Wind Cluster
 INSERT INTO `gardening_results` VALUES (2110, 7, 3, 2, 4107, 1, 2, 24); -- Earth Cluster
 INSERT INTO `gardening_results` VALUES (2111, 7, 3, 2, 1310, 6, 12, 20); -- Platinum Leaf
 INSERT INTO `gardening_results` VALUES (2112, 7, 3, 2, 635, 24, 48, 20); -- Clump Of Windurstian Tea Leaves
-INSERT INTO `gardening_results` VALUES (2113, 7, 3, 2, 1256, 1, 2, 6); -- Ice Ore
-INSERT INTO `gardening_results` VALUES (2114, 7, 3, 2, 1257, 1, 2, 6); -- Wind Ore
+INSERT INTO `gardening_results` VALUES (2113, 7, 3, 2, 1256, 1, 1, 6); -- Ice Ore
+INSERT INTO `gardening_results` VALUES (2114, 7, 3, 2, 1257, 1, 1, 6); -- Wind Ore
 INSERT INTO `gardening_results` VALUES (2115, 7, 3, 3, 4107, 1, 2, 48); -- Earth Cluster
 INSERT INTO `gardening_results` VALUES (2116, 7, 3, 3, 635, 24, 48, 40); -- Clump Of Windurstian Tea Leaves
-INSERT INTO `gardening_results` VALUES (2117, 7, 3, 3, 1257, 1, 2, 12); -- Wind Ore
+INSERT INTO `gardening_results` VALUES (2117, 7, 3, 3, 1257, 1, 1, 12); -- Wind Ore
 INSERT INTO `gardening_results` VALUES (2118, 7, 3, 4, 4107, 1, 2, 24); -- Earth Cluster
 INSERT INTO `gardening_results` VALUES (2119, 7, 3, 4, 4108, 1, 2, 24); -- Lightning Cluster
 INSERT INTO `gardening_results` VALUES (2120, 7, 3, 4, 635, 24, 48, 20); -- Clump Of Windurstian Tea Leaves
 INSERT INTO `gardening_results` VALUES (2121, 7, 3, 4, 4273, 8, 16, 20); -- Kitron
-INSERT INTO `gardening_results` VALUES (2122, 7, 3, 4, 1257, 1, 2, 6); -- Wind Ore
-INSERT INTO `gardening_results` VALUES (2123, 7, 3, 4, 1258, 1, 2, 6); -- Earth Ore
+INSERT INTO `gardening_results` VALUES (2122, 7, 3, 4, 1257, 1, 1, 6); -- Wind Ore
+INSERT INTO `gardening_results` VALUES (2123, 7, 3, 4, 1258, 1, 1, 6); -- Earth Ore
 INSERT INTO `gardening_results` VALUES (2124, 7, 3, 5, 4107, 1, 2, 24); -- Earth Cluster
 INSERT INTO `gardening_results` VALUES (2125, 7, 3, 5, 4109, 1, 2, 24); -- Water Cluster
 INSERT INTO `gardening_results` VALUES (2126, 7, 3, 5, 635, 24, 48, 20); -- Clump Of Windurstian Tea Leaves
 INSERT INTO `gardening_results` VALUES (2127, 7, 3, 5, 1307, 8, 16, 20); -- Silver Leaf
-INSERT INTO `gardening_results` VALUES (2128, 7, 3, 5, 1257, 1, 2, 6); -- Wind Ore
-INSERT INTO `gardening_results` VALUES (2129, 7, 3, 5, 1259, 1, 2, 6); -- Lightning Ore
+INSERT INTO `gardening_results` VALUES (2128, 7, 3, 5, 1257, 1, 1, 6); -- Wind Ore
+INSERT INTO `gardening_results` VALUES (2129, 7, 3, 5, 1259, 1, 1, 6); -- Lightning Ore
 INSERT INTO `gardening_results` VALUES (2130, 7, 3, 6, 4107, 1, 2, 24); -- Earth Cluster
 INSERT INTO `gardening_results` VALUES (2131, 7, 3, 6, 4104, 1, 2, 24); -- Fire Cluster
 INSERT INTO `gardening_results` VALUES (2132, 7, 3, 6, 635, 24, 48, 20); -- Clump Of Windurstian Tea Leaves
 INSERT INTO `gardening_results` VALUES (2133, 7, 3, 6, 1308, 6, 12, 20); -- Mythril Leaf
-INSERT INTO `gardening_results` VALUES (2134, 7, 3, 6, 1257, 1, 2, 6); -- Wind Ore
-INSERT INTO `gardening_results` VALUES (2135, 7, 3, 6, 1260, 1, 2, 6); -- Water Ore
+INSERT INTO `gardening_results` VALUES (2134, 7, 3, 6, 1257, 1, 1, 6); -- Wind Ore
+INSERT INTO `gardening_results` VALUES (2135, 7, 3, 6, 1260, 1, 1, 6); -- Water Ore
 INSERT INTO `gardening_results` VALUES (2136, 7, 3, 7, 4107, 1, 2, 24); -- Earth Cluster
 INSERT INTO `gardening_results` VALUES (2137, 7, 3, 7, 17397, 24, 48, 15); -- Shell Bug
 INSERT INTO `gardening_results` VALUES (2138, 7, 3, 7, 635, 24, 48, 20); -- Clump Of Windurstian Tea Leaves
 INSERT INTO `gardening_results` VALUES (2139, 7, 3, 7, 4111, 1, 2, 15); -- Dark Cluster
-INSERT INTO `gardening_results` VALUES (2140, 7, 3, 7, 1257, 1, 2, 6); -- Wind Ore
+INSERT INTO `gardening_results` VALUES (2140, 7, 3, 7, 1257, 1, 1, 6); -- Wind Ore
 INSERT INTO `gardening_results` VALUES (2141, 7, 3, 7, 1309, 4, 12, 20); -- Gold Leaf
 INSERT INTO `gardening_results` VALUES (2142, 7, 3, 8, 4107, 1, 2, 24); -- Earth Cluster
 INSERT INTO `gardening_results` VALUES (2143, 7, 3, 8, 936, 12, 24, 15); -- Rock Salt
 INSERT INTO `gardening_results` VALUES (2144, 7, 3, 8, 635, 24, 48, 20); -- Clump Of Windurstian Tea Leaves
 INSERT INTO `gardening_results` VALUES (2145, 7, 3, 8, 4110, 1, 2, 15); -- Light Cluster
-INSERT INTO `gardening_results` VALUES (2146, 7, 3, 8, 1257, 1, 2, 6); -- Wind Ore
+INSERT INTO `gardening_results` VALUES (2146, 7, 3, 8, 1257, 1, 1, 6); -- Wind Ore
 INSERT INTO `gardening_results` VALUES (2147, 7, 3, 8, 4274, 4, 8, 14); -- Persikos
-INSERT INTO `gardening_results` VALUES (2148, 7, 3, 8, 1262, 1, 2, 6); -- Dark Ore
+INSERT INTO `gardening_results` VALUES (2148, 7, 3, 8, 1262, 1, 1, 6); -- Dark Ore
 INSERT INTO `gardening_results` VALUES (2149, 7, 4, 0, 936, 12, 24, 15); -- Rock Salt
 INSERT INTO `gardening_results` VALUES (2150, 7, 4, 0, 4108, 1, 2, 24); -- Lightning Cluster
 INSERT INTO `gardening_results` VALUES (2151, 7, 4, 0, 4449, 1, 2, 15); -- Reishi Mushroom
 INSERT INTO `gardening_results` VALUES (2152, 7, 4, 0, 4273, 8, 16, 20); -- Kitron
 INSERT INTO `gardening_results` VALUES (2153, 7, 4, 0, 1309, 4, 12, 14); -- Gold Leaf
-INSERT INTO `gardening_results` VALUES (2154, 7, 4, 0, 1258, 1, 2, 6); -- Earth Ore
-INSERT INTO `gardening_results` VALUES (2155, 7, 4, 0, 1261, 1, 2, 6); -- Light Ore
+INSERT INTO `gardening_results` VALUES (2154, 7, 4, 0, 1258, 1, 1, 6); -- Earth Ore
+INSERT INTO `gardening_results` VALUES (2155, 7, 4, 0, 1261, 1, 1, 6); -- Light Ore
 INSERT INTO `gardening_results` VALUES (2156, 7, 4, 1, 4105, 1, 2, 24); -- Ice Cluster
 INSERT INTO `gardening_results` VALUES (2157, 7, 4, 1, 4108, 1, 2, 24); -- Lightning Cluster
 INSERT INTO `gardening_results` VALUES (2158, 7, 4, 1, 628, 1, 2, 20); -- Cinnamon
 INSERT INTO `gardening_results` VALUES (2159, 7, 4, 1, 4273, 8, 16, 20); -- Kitron
-INSERT INTO `gardening_results` VALUES (2160, 7, 4, 1, 1255, 1, 2, 6); -- Fire Ore
-INSERT INTO `gardening_results` VALUES (2161, 7, 4, 1, 1258, 1, 2, 6); -- Earth Ore
+INSERT INTO `gardening_results` VALUES (2160, 7, 4, 1, 1255, 1, 1, 6); -- Fire Ore
+INSERT INTO `gardening_results` VALUES (2161, 7, 4, 1, 1258, 1, 1, 6); -- Earth Ore
 INSERT INTO `gardening_results` VALUES (2162, 7, 4, 2, 4106, 1, 2, 24); -- Wind Cluster
 INSERT INTO `gardening_results` VALUES (2163, 7, 4, 2, 4108, 1, 2, 24); -- Lightning Cluster
 INSERT INTO `gardening_results` VALUES (2164, 7, 4, 2, 1310, 6, 12, 20); -- Platinum Leaf
 INSERT INTO `gardening_results` VALUES (2165, 7, 4, 2, 4273, 8, 16, 20); -- Kitron
-INSERT INTO `gardening_results` VALUES (2166, 7, 4, 2, 1256, 1, 2, 6); -- Ice Ore
-INSERT INTO `gardening_results` VALUES (2167, 7, 4, 2, 1258, 1, 2, 6); -- Earth Ore
+INSERT INTO `gardening_results` VALUES (2166, 7, 4, 2, 1256, 1, 1, 6); -- Ice Ore
+INSERT INTO `gardening_results` VALUES (2167, 7, 4, 2, 1258, 1, 1, 6); -- Earth Ore
 INSERT INTO `gardening_results` VALUES (2168, 7, 4, 3, 4107, 1, 2, 24); -- Earth Cluster
 INSERT INTO `gardening_results` VALUES (2169, 7, 4, 3, 4108, 1, 2, 24); -- Lightning Cluster
 INSERT INTO `gardening_results` VALUES (2170, 7, 4, 3, 635, 24, 48, 20); -- Clump Of Windurstian Tea Leaves
 INSERT INTO `gardening_results` VALUES (2171, 7, 4, 3, 4273, 8, 16, 20); -- Kitron
-INSERT INTO `gardening_results` VALUES (2172, 7, 4, 3, 1257, 1, 2, 6); -- Wind Ore
-INSERT INTO `gardening_results` VALUES (2173, 7, 4, 3, 1258, 1, 2, 6); -- Earth Ore
+INSERT INTO `gardening_results` VALUES (2172, 7, 4, 3, 1257, 1, 1, 6); -- Wind Ore
+INSERT INTO `gardening_results` VALUES (2173, 7, 4, 3, 1258, 1, 1, 6); -- Earth Ore
 INSERT INTO `gardening_results` VALUES (2174, 7, 4, 4, 4108, 1, 2, 48); -- Lightning Cluster
 INSERT INTO `gardening_results` VALUES (2175, 7, 4, 4, 4273, 8, 16, 40); -- Kitron
-INSERT INTO `gardening_results` VALUES (2176, 7, 4, 4, 1258, 1, 2, 12); -- Earth Ore
+INSERT INTO `gardening_results` VALUES (2176, 7, 4, 4, 1258, 1, 1, 12); -- Earth Ore
 INSERT INTO `gardening_results` VALUES (2177, 7, 4, 5, 4108, 1, 2, 24); -- Lightning Cluster
 INSERT INTO `gardening_results` VALUES (2178, 7, 4, 5, 4109, 1, 2, 24); -- Water Cluster
 INSERT INTO `gardening_results` VALUES (2179, 7, 4, 5, 4273, 8, 16, 20); -- Kitron
 INSERT INTO `gardening_results` VALUES (2180, 7, 4, 5, 1307, 8, 16, 20); -- Silver Leaf
-INSERT INTO `gardening_results` VALUES (2181, 7, 4, 5, 1258, 1, 2, 6); -- Earth Ore
-INSERT INTO `gardening_results` VALUES (2182, 7, 4, 5, 1259, 1, 2, 6); -- Lightning Ore
+INSERT INTO `gardening_results` VALUES (2181, 7, 4, 5, 1258, 1, 1, 6); -- Earth Ore
+INSERT INTO `gardening_results` VALUES (2182, 7, 4, 5, 1259, 1, 1, 6); -- Lightning Ore
 INSERT INTO `gardening_results` VALUES (2183, 7, 4, 6, 4108, 1, 2, 24); -- Lightning Cluster
 INSERT INTO `gardening_results` VALUES (2184, 7, 4, 6, 4104, 1, 2, 24); -- Fire Cluster
 INSERT INTO `gardening_results` VALUES (2185, 7, 4, 6, 4273, 8, 16, 20); -- Kitron
 INSERT INTO `gardening_results` VALUES (2186, 7, 4, 6, 1308, 6, 12, 20); -- Mythril Leaf
-INSERT INTO `gardening_results` VALUES (2187, 7, 4, 6, 1258, 1, 2, 6); -- Earth Ore
-INSERT INTO `gardening_results` VALUES (2188, 7, 4, 6, 1260, 1, 2, 6); -- Water Ore
+INSERT INTO `gardening_results` VALUES (2187, 7, 4, 6, 1258, 1, 1, 6); -- Earth Ore
+INSERT INTO `gardening_results` VALUES (2188, 7, 4, 6, 1260, 1, 1, 6); -- Water Ore
 INSERT INTO `gardening_results` VALUES (2189, 7, 4, 7, 4108, 1, 2, 24); -- Lightning Cluster
 INSERT INTO `gardening_results` VALUES (2190, 7, 4, 7, 17397, 24, 48, 15); -- Shell Bug
 INSERT INTO `gardening_results` VALUES (2191, 7, 4, 7, 4273, 8, 16, 20); -- Kitron
 INSERT INTO `gardening_results` VALUES (2192, 7, 4, 7, 4111, 1, 2, 15); -- Dark Cluster
-INSERT INTO `gardening_results` VALUES (2193, 7, 4, 7, 1258, 1, 2, 6); -- Earth Ore
+INSERT INTO `gardening_results` VALUES (2193, 7, 4, 7, 1258, 1, 1, 6); -- Earth Ore
 INSERT INTO `gardening_results` VALUES (2194, 7, 4, 7, 1309, 4, 12, 20); -- Gold Leaf
 INSERT INTO `gardening_results` VALUES (2195, 7, 4, 8, 4108, 1, 2, 24); -- Lightning Cluster
 INSERT INTO `gardening_results` VALUES (2196, 7, 4, 8, 936, 12, 24, 15); -- Rock Salt
 INSERT INTO `gardening_results` VALUES (2197, 7, 4, 8, 4273, 8, 16, 20); -- Kitron
 INSERT INTO `gardening_results` VALUES (2198, 7, 4, 8, 4110, 1, 2, 15); -- Light Cluster
-INSERT INTO `gardening_results` VALUES (2199, 7, 4, 8, 1258, 1, 2, 6); -- Earth Ore
+INSERT INTO `gardening_results` VALUES (2199, 7, 4, 8, 1258, 1, 1, 6); -- Earth Ore
 INSERT INTO `gardening_results` VALUES (2200, 7, 4, 8, 4274, 4, 8, 14); -- Persikos
-INSERT INTO `gardening_results` VALUES (2201, 7, 4, 8, 1262, 1, 2, 6); -- Dark Ore
+INSERT INTO `gardening_results` VALUES (2201, 7, 4, 8, 1262, 1, 1, 6); -- Dark Ore
 INSERT INTO `gardening_results` VALUES (2202, 7, 5, 0, 936, 12, 24, 15); -- Rock Salt
 INSERT INTO `gardening_results` VALUES (2203, 7, 5, 0, 4109, 1, 2, 24); -- Water Cluster
 INSERT INTO `gardening_results` VALUES (2204, 7, 5, 0, 4449, 1, 2, 15); -- Reishi Mushroom
 INSERT INTO `gardening_results` VALUES (2205, 7, 5, 0, 1307, 8, 16, 20); -- Silver Leaf
 INSERT INTO `gardening_results` VALUES (2206, 7, 5, 0, 1309, 4, 12, 14); -- Gold Leaf
-INSERT INTO `gardening_results` VALUES (2207, 7, 5, 0, 1259, 1, 2, 6); -- Lightning Ore
-INSERT INTO `gardening_results` VALUES (2208, 7, 5, 0, 1261, 1, 2, 6); -- Light Ore
+INSERT INTO `gardening_results` VALUES (2207, 7, 5, 0, 1259, 1, 1, 6); -- Lightning Ore
+INSERT INTO `gardening_results` VALUES (2208, 7, 5, 0, 1261, 1, 1, 6); -- Light Ore
 INSERT INTO `gardening_results` VALUES (2209, 7, 5, 1, 4105, 1, 2, 24); -- Ice Cluster
 INSERT INTO `gardening_results` VALUES (2210, 7, 5, 1, 4109, 1, 2, 24); -- Water Cluster
 INSERT INTO `gardening_results` VALUES (2211, 7, 5, 1, 628, 1, 2, 20); -- Cinnamon
 INSERT INTO `gardening_results` VALUES (2212, 7, 5, 1, 1307, 8, 16, 20); -- Silver Leaf
-INSERT INTO `gardening_results` VALUES (2213, 7, 5, 1, 1255, 1, 2, 6); -- Fire Ore
-INSERT INTO `gardening_results` VALUES (2214, 7, 5, 1, 1259, 1, 2, 6); -- Lightning Ore
+INSERT INTO `gardening_results` VALUES (2213, 7, 5, 1, 1255, 1, 1, 6); -- Fire Ore
+INSERT INTO `gardening_results` VALUES (2214, 7, 5, 1, 1259, 1, 1, 6); -- Lightning Ore
 INSERT INTO `gardening_results` VALUES (2215, 7, 5, 2, 4106, 1, 2, 24); -- Wind Cluster
 INSERT INTO `gardening_results` VALUES (2216, 7, 5, 2, 4109, 1, 2, 24); -- Water Cluster
 INSERT INTO `gardening_results` VALUES (2217, 7, 5, 2, 1310, 6, 12, 20); -- Platinum Leaf
 INSERT INTO `gardening_results` VALUES (2218, 7, 5, 2, 1307, 8, 16, 20); -- Silver Leaf
-INSERT INTO `gardening_results` VALUES (2219, 7, 5, 2, 1256, 1, 2, 6); -- Ice Ore
-INSERT INTO `gardening_results` VALUES (2220, 7, 5, 2, 1259, 1, 2, 6); -- Lightning Ore
+INSERT INTO `gardening_results` VALUES (2219, 7, 5, 2, 1256, 1, 1, 6); -- Ice Ore
+INSERT INTO `gardening_results` VALUES (2220, 7, 5, 2, 1259, 1, 1, 6); -- Lightning Ore
 INSERT INTO `gardening_results` VALUES (2221, 7, 5, 3, 4107, 1, 2, 24); -- Earth Cluster
 INSERT INTO `gardening_results` VALUES (2222, 7, 5, 3, 4109, 1, 2, 24); -- Water Cluster
 INSERT INTO `gardening_results` VALUES (2223, 7, 5, 3, 635, 24, 48, 20); -- Clump Of Windurstian Tea Leaves
 INSERT INTO `gardening_results` VALUES (2224, 7, 5, 3, 1307, 8, 16, 20); -- Silver Leaf
-INSERT INTO `gardening_results` VALUES (2225, 7, 5, 3, 1257, 1, 2, 6); -- Wind Ore
-INSERT INTO `gardening_results` VALUES (2226, 7, 5, 3, 1259, 1, 2, 6); -- Lightning Ore
+INSERT INTO `gardening_results` VALUES (2225, 7, 5, 3, 1257, 1, 1, 6); -- Wind Ore
+INSERT INTO `gardening_results` VALUES (2226, 7, 5, 3, 1259, 1, 1, 6); -- Lightning Ore
 INSERT INTO `gardening_results` VALUES (2227, 7, 5, 4, 4108, 1, 2, 24); -- Lightning Cluster
 INSERT INTO `gardening_results` VALUES (2228, 7, 5, 4, 4109, 1, 2, 24); -- Water Cluster
 INSERT INTO `gardening_results` VALUES (2229, 7, 5, 4, 4273, 8, 16, 20); -- Kitron
 INSERT INTO `gardening_results` VALUES (2230, 7, 5, 4, 1307, 8, 16, 20); -- Silver Leaf
-INSERT INTO `gardening_results` VALUES (2231, 7, 5, 4, 1258, 1, 2, 6); -- Earth Ore
-INSERT INTO `gardening_results` VALUES (2232, 7, 5, 4, 1259, 1, 2, 6); -- Lightning Ore
+INSERT INTO `gardening_results` VALUES (2231, 7, 5, 4, 1258, 1, 1, 6); -- Earth Ore
+INSERT INTO `gardening_results` VALUES (2232, 7, 5, 4, 1259, 1, 1, 6); -- Lightning Ore
 INSERT INTO `gardening_results` VALUES (2233, 7, 5, 5, 4109, 1, 2, 48); -- Water Cluster
 INSERT INTO `gardening_results` VALUES (2234, 7, 5, 5, 1307, 8, 16, 40); -- Silver Leaf
-INSERT INTO `gardening_results` VALUES (2235, 7, 5, 5, 1259, 1, 2, 12); -- Lightning Ore
+INSERT INTO `gardening_results` VALUES (2235, 7, 5, 5, 1259, 1, 1, 12); -- Lightning Ore
 INSERT INTO `gardening_results` VALUES (2236, 7, 5, 6, 4109, 1, 2, 24); -- Water Cluster
 INSERT INTO `gardening_results` VALUES (2237, 7, 5, 6, 4104, 1, 2, 24); -- Fire Cluster
 INSERT INTO `gardening_results` VALUES (2238, 7, 5, 6, 1307, 8, 16, 20); -- Silver Leaf
 INSERT INTO `gardening_results` VALUES (2239, 7, 5, 6, 1308, 6, 12, 20); -- Mythril Leaf
-INSERT INTO `gardening_results` VALUES (2240, 7, 5, 6, 1259, 1, 2, 6); -- Lightning Ore
-INSERT INTO `gardening_results` VALUES (2241, 7, 5, 6, 1260, 1, 2, 6); -- Water Ore
+INSERT INTO `gardening_results` VALUES (2240, 7, 5, 6, 1259, 1, 1, 6); -- Lightning Ore
+INSERT INTO `gardening_results` VALUES (2241, 7, 5, 6, 1260, 1, 1, 6); -- Water Ore
 INSERT INTO `gardening_results` VALUES (2242, 7, 5, 7, 4109, 1, 2, 24); -- Water Cluster
 INSERT INTO `gardening_results` VALUES (2243, 7, 5, 7, 17397, 24, 48, 15); -- Shell Bug
 INSERT INTO `gardening_results` VALUES (2244, 7, 5, 7, 1307, 8, 16, 20); -- Silver Leaf
 INSERT INTO `gardening_results` VALUES (2245, 7, 5, 7, 4111, 1, 2, 15); -- Dark Cluster
-INSERT INTO `gardening_results` VALUES (2246, 7, 5, 7, 1259, 1, 2, 6); -- Lightning Ore
+INSERT INTO `gardening_results` VALUES (2246, 7, 5, 7, 1259, 1, 1, 6); -- Lightning Ore
 INSERT INTO `gardening_results` VALUES (2247, 7, 5, 7, 1309, 4, 12, 20); -- Gold Leaf
 INSERT INTO `gardening_results` VALUES (2248, 7, 5, 8, 4109, 1, 2, 24); -- Water Cluster
 INSERT INTO `gardening_results` VALUES (2249, 7, 5, 8, 936, 12, 24, 15); -- Rock Salt
 INSERT INTO `gardening_results` VALUES (2250, 7, 5, 8, 1307, 8, 16, 20); -- Silver Leaf
 INSERT INTO `gardening_results` VALUES (2251, 7, 5, 8, 4110, 1, 2, 15); -- Light Cluster
-INSERT INTO `gardening_results` VALUES (2252, 7, 5, 8, 1259, 1, 2, 6); -- Lightning Ore
+INSERT INTO `gardening_results` VALUES (2252, 7, 5, 8, 1259, 1, 1, 6); -- Lightning Ore
 INSERT INTO `gardening_results` VALUES (2253, 7, 5, 8, 4274, 4, 8, 14); -- Persikos
-INSERT INTO `gardening_results` VALUES (2254, 7, 5, 8, 1262, 1, 2, 6); -- Dark Ore
+INSERT INTO `gardening_results` VALUES (2254, 7, 5, 8, 1262, 1, 1, 6); -- Dark Ore
 INSERT INTO `gardening_results` VALUES (2255, 7, 6, 0, 936, 12, 24, 15); -- Rock Salt
 INSERT INTO `gardening_results` VALUES (2256, 7, 6, 0, 4104, 1, 2, 24); -- Fire Cluster
 INSERT INTO `gardening_results` VALUES (2257, 7, 6, 0, 4449, 1, 2, 15); -- Reishi Mushroom
 INSERT INTO `gardening_results` VALUES (2258, 7, 6, 0, 1308, 6, 12, 20); -- Mythril Leaf
 INSERT INTO `gardening_results` VALUES (2259, 7, 6, 0, 1309, 4, 12, 14); -- Gold Leaf
-INSERT INTO `gardening_results` VALUES (2260, 7, 6, 0, 1260, 1, 2, 6); -- Water Ore
-INSERT INTO `gardening_results` VALUES (2261, 7, 6, 0, 1261, 1, 2, 6); -- Light Ore
+INSERT INTO `gardening_results` VALUES (2260, 7, 6, 0, 1260, 1, 1, 6); -- Water Ore
+INSERT INTO `gardening_results` VALUES (2261, 7, 6, 0, 1261, 1, 1, 6); -- Light Ore
 INSERT INTO `gardening_results` VALUES (2262, 7, 6, 1, 4105, 1, 2, 24); -- Ice Cluster
 INSERT INTO `gardening_results` VALUES (2263, 7, 6, 1, 4104, 1, 2, 24); -- Fire Cluster
 INSERT INTO `gardening_results` VALUES (2264, 7, 6, 1, 628, 1, 2, 20); -- Cinnamon
 INSERT INTO `gardening_results` VALUES (2265, 7, 6, 1, 1308, 6, 12, 20); -- Mythril Leaf
-INSERT INTO `gardening_results` VALUES (2266, 7, 6, 1, 1255, 1, 2, 6); -- Fire Ore
-INSERT INTO `gardening_results` VALUES (2267, 7, 6, 1, 1260, 1, 2, 6); -- Water Ore
+INSERT INTO `gardening_results` VALUES (2266, 7, 6, 1, 1255, 1, 1, 6); -- Fire Ore
+INSERT INTO `gardening_results` VALUES (2267, 7, 6, 1, 1260, 1, 1, 6); -- Water Ore
 INSERT INTO `gardening_results` VALUES (2268, 7, 6, 2, 4106, 1, 2, 24); -- Wind Cluster
 INSERT INTO `gardening_results` VALUES (2269, 7, 6, 2, 4104, 1, 2, 24); -- Fire Cluster
 INSERT INTO `gardening_results` VALUES (2270, 7, 6, 2, 1310, 6, 12, 20); -- Platinum Leaf
 INSERT INTO `gardening_results` VALUES (2271, 7, 6, 2, 1308, 6, 12, 20); -- Mythril Leaf
-INSERT INTO `gardening_results` VALUES (2272, 7, 6, 2, 1256, 1, 2, 6); -- Ice Ore
-INSERT INTO `gardening_results` VALUES (2273, 7, 6, 2, 1260, 1, 2, 6); -- Water Ore
+INSERT INTO `gardening_results` VALUES (2272, 7, 6, 2, 1256, 1, 1, 6); -- Ice Ore
+INSERT INTO `gardening_results` VALUES (2273, 7, 6, 2, 1260, 1, 1, 6); -- Water Ore
 INSERT INTO `gardening_results` VALUES (2274, 7, 6, 3, 4107, 1, 2, 24); -- Earth Cluster
 INSERT INTO `gardening_results` VALUES (2275, 7, 6, 3, 4104, 1, 2, 24); -- Fire Cluster
 INSERT INTO `gardening_results` VALUES (2276, 7, 6, 3, 635, 24, 48, 20); -- Clump Of Windurstian Tea Leaves
 INSERT INTO `gardening_results` VALUES (2277, 7, 6, 3, 1308, 6, 12, 20); -- Mythril Leaf
-INSERT INTO `gardening_results` VALUES (2278, 7, 6, 3, 1257, 1, 2, 6); -- Wind Ore
-INSERT INTO `gardening_results` VALUES (2279, 7, 6, 3, 1260, 1, 2, 6); -- Water Ore
+INSERT INTO `gardening_results` VALUES (2278, 7, 6, 3, 1257, 1, 1, 6); -- Wind Ore
+INSERT INTO `gardening_results` VALUES (2279, 7, 6, 3, 1260, 1, 1, 6); -- Water Ore
 INSERT INTO `gardening_results` VALUES (2280, 7, 6, 4, 4108, 1, 2, 24); -- Lightning Cluster
 INSERT INTO `gardening_results` VALUES (2281, 7, 6, 4, 4104, 1, 2, 24); -- Fire Cluster
 INSERT INTO `gardening_results` VALUES (2282, 7, 6, 4, 4273, 8, 16, 20); -- Kitron
 INSERT INTO `gardening_results` VALUES (2283, 7, 6, 4, 1308, 6, 12, 20); -- Mythril Leaf
-INSERT INTO `gardening_results` VALUES (2284, 7, 6, 4, 1258, 1, 2, 6); -- Earth Ore
-INSERT INTO `gardening_results` VALUES (2285, 7, 6, 4, 1260, 1, 2, 6); -- Water Ore
+INSERT INTO `gardening_results` VALUES (2284, 7, 6, 4, 1258, 1, 1, 6); -- Earth Ore
+INSERT INTO `gardening_results` VALUES (2285, 7, 6, 4, 1260, 1, 1, 6); -- Water Ore
 INSERT INTO `gardening_results` VALUES (2286, 7, 6, 5, 4109, 1, 2, 24); -- Water Cluster
 INSERT INTO `gardening_results` VALUES (2287, 7, 6, 5, 4104, 1, 2, 24); -- Fire Cluster
 INSERT INTO `gardening_results` VALUES (2288, 7, 6, 5, 1307, 8, 16, 20); -- Silver Leaf
 INSERT INTO `gardening_results` VALUES (2289, 7, 6, 5, 1308, 6, 12, 20); -- Mythril Leaf
-INSERT INTO `gardening_results` VALUES (2290, 7, 6, 5, 1259, 1, 2, 6); -- Lightning Ore
-INSERT INTO `gardening_results` VALUES (2291, 7, 6, 5, 1260, 1, 2, 6); -- Water Ore
+INSERT INTO `gardening_results` VALUES (2290, 7, 6, 5, 1259, 1, 1, 6); -- Lightning Ore
+INSERT INTO `gardening_results` VALUES (2291, 7, 6, 5, 1260, 1, 1, 6); -- Water Ore
 INSERT INTO `gardening_results` VALUES (2292, 7, 6, 6, 4104, 1, 2, 48); -- Fire Cluster
 INSERT INTO `gardening_results` VALUES (2293, 7, 6, 6, 1308, 6, 12, 40); -- Mythril Leaf
-INSERT INTO `gardening_results` VALUES (2294, 7, 6, 6, 1260, 1, 2, 12); -- Water Ore
+INSERT INTO `gardening_results` VALUES (2294, 7, 6, 6, 1260, 1, 1, 12); -- Water Ore
 INSERT INTO `gardening_results` VALUES (2295, 7, 6, 7, 4104, 1, 2, 24); -- Fire Cluster
 INSERT INTO `gardening_results` VALUES (2296, 7, 6, 7, 17397, 24, 48, 15); -- Shell Bug
 INSERT INTO `gardening_results` VALUES (2297, 7, 6, 7, 1308, 6, 12, 20); -- Mythril Leaf
 INSERT INTO `gardening_results` VALUES (2298, 7, 6, 7, 4111, 1, 2, 15); -- Dark Cluster
-INSERT INTO `gardening_results` VALUES (2299, 7, 6, 7, 1260, 1, 2, 6); -- Water Ore
+INSERT INTO `gardening_results` VALUES (2299, 7, 6, 7, 1260, 1, 1, 6); -- Water Ore
 INSERT INTO `gardening_results` VALUES (2300, 7, 6, 7, 1309, 4, 12, 20); -- Gold Leaf
 INSERT INTO `gardening_results` VALUES (2301, 7, 6, 8, 4104, 1, 2, 24); -- Fire Cluster
 INSERT INTO `gardening_results` VALUES (2302, 7, 6, 8, 936, 12, 24, 15); -- Rock Salt
 INSERT INTO `gardening_results` VALUES (2303, 7, 6, 8, 1308, 6, 12, 20); -- Mythril Leaf
 INSERT INTO `gardening_results` VALUES (2304, 7, 6, 8, 4110, 1, 2, 15); -- Light Cluster
-INSERT INTO `gardening_results` VALUES (2305, 7, 6, 8, 1260, 1, 2, 6); -- Water Ore
+INSERT INTO `gardening_results` VALUES (2305, 7, 6, 8, 1260, 1, 1, 6); -- Water Ore
 INSERT INTO `gardening_results` VALUES (2306, 7, 6, 8, 4274, 4, 8, 14); -- Persikos
-INSERT INTO `gardening_results` VALUES (2307, 7, 6, 8, 1262, 1, 2, 6); -- Dark Ore
+INSERT INTO `gardening_results` VALUES (2307, 7, 6, 8, 1262, 1, 1, 6); -- Dark Ore
 INSERT INTO `gardening_results` VALUES (2308, 7, 7, 0, 936, 12, 24, 15); -- Rock Salt
 INSERT INTO `gardening_results` VALUES (2309, 7, 7, 0, 17397, 24, 48, 15); -- Shell Bug
 INSERT INTO `gardening_results` VALUES (2310, 7, 7, 0, 4449, 1, 2, 15); -- Reishi Mushroom
 INSERT INTO `gardening_results` VALUES (2311, 7, 7, 0, 4111, 1, 2, 15); -- Dark Cluster
 INSERT INTO `gardening_results` VALUES (2312, 7, 7, 0, 1309, 4, 12, 34); -- Gold Leaf
-INSERT INTO `gardening_results` VALUES (2313, 7, 7, 0, 1261, 1, 2, 6); -- Light Ore
+INSERT INTO `gardening_results` VALUES (2313, 7, 7, 0, 1261, 1, 1, 6); -- Light Ore
 INSERT INTO `gardening_results` VALUES (2314, 7, 7, 1, 4105, 1, 2, 24); -- Ice Cluster
 INSERT INTO `gardening_results` VALUES (2315, 7, 7, 1, 17397, 24, 48, 15); -- Shell Bug
 INSERT INTO `gardening_results` VALUES (2316, 7, 7, 1, 628, 1, 2, 20); -- Cinnamon
 INSERT INTO `gardening_results` VALUES (2317, 7, 7, 1, 4111, 1, 2, 15); -- Dark Cluster
-INSERT INTO `gardening_results` VALUES (2318, 7, 7, 1, 1255, 1, 2, 6); -- Fire Ore
+INSERT INTO `gardening_results` VALUES (2318, 7, 7, 1, 1255, 1, 1, 6); -- Fire Ore
 INSERT INTO `gardening_results` VALUES (2319, 7, 7, 1, 1309, 4, 12, 20); -- Gold Leaf
 INSERT INTO `gardening_results` VALUES (2320, 7, 7, 2, 4106, 1, 2, 24); -- Wind Cluster
 INSERT INTO `gardening_results` VALUES (2321, 7, 7, 2, 17397, 24, 48, 15); -- Shell Bug
 INSERT INTO `gardening_results` VALUES (2322, 7, 7, 2, 1310, 6, 12, 20); -- Platinum Leaf
 INSERT INTO `gardening_results` VALUES (2323, 7, 7, 2, 4111, 1, 2, 15); -- Dark Cluster
-INSERT INTO `gardening_results` VALUES (2324, 7, 7, 2, 1256, 1, 2, 6); -- Ice Ore
+INSERT INTO `gardening_results` VALUES (2324, 7, 7, 2, 1256, 1, 1, 6); -- Ice Ore
 INSERT INTO `gardening_results` VALUES (2325, 7, 7, 2, 1309, 4, 12, 20); -- Gold Leaf
 INSERT INTO `gardening_results` VALUES (2326, 7, 7, 3, 4107, 1, 2, 24); -- Earth Cluster
 INSERT INTO `gardening_results` VALUES (2327, 7, 7, 3, 17397, 24, 48, 15); -- Shell Bug
 INSERT INTO `gardening_results` VALUES (2328, 7, 7, 3, 635, 24, 48, 20); -- Clump Of Windurstian Tea Leaves
 INSERT INTO `gardening_results` VALUES (2329, 7, 7, 3, 4111, 1, 2, 15); -- Dark Cluster
-INSERT INTO `gardening_results` VALUES (2330, 7, 7, 3, 1257, 1, 2, 6); -- Wind Ore
+INSERT INTO `gardening_results` VALUES (2330, 7, 7, 3, 1257, 1, 1, 6); -- Wind Ore
 INSERT INTO `gardening_results` VALUES (2331, 7, 7, 3, 1309, 4, 12, 20); -- Gold Leaf
 INSERT INTO `gardening_results` VALUES (2332, 7, 7, 4, 4108, 1, 2, 24); -- Lightning Cluster
 INSERT INTO `gardening_results` VALUES (2333, 7, 7, 4, 17397, 24, 48, 15); -- Shell Bug
 INSERT INTO `gardening_results` VALUES (2334, 7, 7, 4, 4273, 8, 16, 20); -- Kitron
 INSERT INTO `gardening_results` VALUES (2335, 7, 7, 4, 4111, 1, 2, 15); -- Dark Cluster
-INSERT INTO `gardening_results` VALUES (2336, 7, 7, 4, 1258, 1, 2, 6); -- Earth Ore
+INSERT INTO `gardening_results` VALUES (2336, 7, 7, 4, 1258, 1, 1, 6); -- Earth Ore
 INSERT INTO `gardening_results` VALUES (2337, 7, 7, 4, 1309, 4, 12, 20); -- Gold Leaf
 INSERT INTO `gardening_results` VALUES (2338, 7, 7, 5, 4109, 1, 2, 24); -- Water Cluster
 INSERT INTO `gardening_results` VALUES (2339, 7, 7, 5, 17397, 24, 48, 15); -- Shell Bug
 INSERT INTO `gardening_results` VALUES (2340, 7, 7, 5, 1307, 8, 16, 20); -- Silver Leaf
 INSERT INTO `gardening_results` VALUES (2341, 7, 7, 5, 4111, 1, 2, 15); -- Dark Cluster
-INSERT INTO `gardening_results` VALUES (2342, 7, 7, 5, 1259, 1, 2, 6); -- Lightning Ore
+INSERT INTO `gardening_results` VALUES (2342, 7, 7, 5, 1259, 1, 1, 6); -- Lightning Ore
 INSERT INTO `gardening_results` VALUES (2343, 7, 7, 5, 1309, 4, 12, 20); -- Gold Leaf
 INSERT INTO `gardening_results` VALUES (2344, 7, 7, 6, 4104, 1, 2, 24); -- Fire Cluster
 INSERT INTO `gardening_results` VALUES (2345, 7, 7, 6, 17397, 24, 48, 15); -- Shell Bug
 INSERT INTO `gardening_results` VALUES (2346, 7, 7, 6, 1308, 6, 12, 20); -- Mythril Leaf
 INSERT INTO `gardening_results` VALUES (2347, 7, 7, 6, 4111, 1, 2, 15); -- Dark Cluster
-INSERT INTO `gardening_results` VALUES (2348, 7, 7, 6, 1260, 1, 2, 6); -- Water Ore
+INSERT INTO `gardening_results` VALUES (2348, 7, 7, 6, 1260, 1, 1, 6); -- Water Ore
 INSERT INTO `gardening_results` VALUES (2349, 7, 7, 6, 1309, 4, 12, 20); -- Gold Leaf
 INSERT INTO `gardening_results` VALUES (2350, 7, 7, 7, 17397, 24, 48, 30); -- Shell Bug
 INSERT INTO `gardening_results` VALUES (2351, 7, 7, 7, 4111, 1, 2, 30); -- Dark Cluster
@@ -2369,67 +2369,67 @@ INSERT INTO `gardening_results` VALUES (2355, 7, 7, 8, 4111, 1, 2, 15); -- Dark 
 INSERT INTO `gardening_results` VALUES (2356, 7, 7, 8, 4110, 1, 2, 15); -- Light Cluster
 INSERT INTO `gardening_results` VALUES (2357, 7, 7, 8, 1309, 4, 12, 20); -- Gold Leaf
 INSERT INTO `gardening_results` VALUES (2358, 7, 7, 8, 4274, 4, 8, 14); -- Persikos
-INSERT INTO `gardening_results` VALUES (2359, 7, 7, 8, 1262, 1, 2, 6); -- Dark Ore
+INSERT INTO `gardening_results` VALUES (2359, 7, 7, 8, 1262, 1, 1, 6); -- Dark Ore
 INSERT INTO `gardening_results` VALUES (2360, 7, 8, 0, 936, 12, 24, 30); -- Rock Salt
 INSERT INTO `gardening_results` VALUES (2361, 7, 8, 0, 4449, 1, 2, 15); -- Reishi Mushroom
 INSERT INTO `gardening_results` VALUES (2362, 7, 8, 0, 4110, 1, 2, 15); -- Light Cluster
 INSERT INTO `gardening_results` VALUES (2363, 7, 8, 0, 1309, 4, 12, 14); -- Gold Leaf
 INSERT INTO `gardening_results` VALUES (2364, 7, 8, 0, 4274, 4, 8, 14); -- Persikos
-INSERT INTO `gardening_results` VALUES (2365, 7, 8, 0, 1261, 1, 2, 6); -- Light Ore
-INSERT INTO `gardening_results` VALUES (2366, 7, 8, 0, 1262, 1, 2, 6); -- Dark Ore
+INSERT INTO `gardening_results` VALUES (2365, 7, 8, 0, 1261, 1, 1, 6); -- Light Ore
+INSERT INTO `gardening_results` VALUES (2366, 7, 8, 0, 1262, 1, 1, 6); -- Dark Ore
 INSERT INTO `gardening_results` VALUES (2367, 7, 8, 1, 4105, 1, 2, 24); -- Ice Cluster
 INSERT INTO `gardening_results` VALUES (2368, 7, 8, 1, 936, 12, 24, 15); -- Rock Salt
 INSERT INTO `gardening_results` VALUES (2369, 7, 8, 1, 628, 1, 2, 20); -- Cinnamon
 INSERT INTO `gardening_results` VALUES (2370, 7, 8, 1, 4110, 1, 2, 15); -- Light Cluster
-INSERT INTO `gardening_results` VALUES (2371, 7, 8, 1, 1255, 1, 2, 6); -- Fire Ore
+INSERT INTO `gardening_results` VALUES (2371, 7, 8, 1, 1255, 1, 1, 6); -- Fire Ore
 INSERT INTO `gardening_results` VALUES (2372, 7, 8, 1, 4274, 4, 8, 14); -- Persikos
-INSERT INTO `gardening_results` VALUES (2373, 7, 8, 1, 1262, 1, 2, 6); -- Dark Ore
+INSERT INTO `gardening_results` VALUES (2373, 7, 8, 1, 1262, 1, 1, 6); -- Dark Ore
 INSERT INTO `gardening_results` VALUES (2374, 7, 8, 2, 4106, 1, 2, 24); -- Wind Cluster
 INSERT INTO `gardening_results` VALUES (2375, 7, 8, 2, 936, 12, 24, 15); -- Rock Salt
 INSERT INTO `gardening_results` VALUES (2376, 7, 8, 2, 1310, 6, 12, 20); -- Platinum Leaf
 INSERT INTO `gardening_results` VALUES (2377, 7, 8, 2, 4110, 1, 2, 15); -- Light Cluster
-INSERT INTO `gardening_results` VALUES (2378, 7, 8, 2, 1256, 1, 2, 6); -- Ice Ore
+INSERT INTO `gardening_results` VALUES (2378, 7, 8, 2, 1256, 1, 1, 6); -- Ice Ore
 INSERT INTO `gardening_results` VALUES (2379, 7, 8, 2, 4274, 4, 8, 14); -- Persikos
-INSERT INTO `gardening_results` VALUES (2380, 7, 8, 2, 1262, 1, 2, 6); -- Dark Ore
+INSERT INTO `gardening_results` VALUES (2380, 7, 8, 2, 1262, 1, 1, 6); -- Dark Ore
 INSERT INTO `gardening_results` VALUES (2381, 7, 8, 3, 4107, 1, 2, 24); -- Earth Cluster
 INSERT INTO `gardening_results` VALUES (2382, 7, 8, 3, 936, 12, 24, 15); -- Rock Salt
 INSERT INTO `gardening_results` VALUES (2383, 7, 8, 3, 635, 24, 48, 20); -- Clump Of Windurstian Tea Leaves
 INSERT INTO `gardening_results` VALUES (2384, 7, 8, 3, 4110, 1, 2, 15); -- Light Cluster
-INSERT INTO `gardening_results` VALUES (2385, 7, 8, 3, 1257, 1, 2, 6); -- Wind Ore
+INSERT INTO `gardening_results` VALUES (2385, 7, 8, 3, 1257, 1, 1, 6); -- Wind Ore
 INSERT INTO `gardening_results` VALUES (2386, 7, 8, 3, 4274, 4, 8, 14); -- Persikos
-INSERT INTO `gardening_results` VALUES (2387, 7, 8, 3, 1262, 1, 2, 6); -- Dark Ore
+INSERT INTO `gardening_results` VALUES (2387, 7, 8, 3, 1262, 1, 1, 6); -- Dark Ore
 INSERT INTO `gardening_results` VALUES (2388, 7, 8, 4, 4108, 1, 2, 24); -- Lightning Cluster
 INSERT INTO `gardening_results` VALUES (2389, 7, 8, 4, 936, 12, 24, 15); -- Rock Salt
 INSERT INTO `gardening_results` VALUES (2390, 7, 8, 4, 4273, 8, 16, 20); -- Kitron
 INSERT INTO `gardening_results` VALUES (2391, 7, 8, 4, 4110, 1, 2, 15); -- Light Cluster
-INSERT INTO `gardening_results` VALUES (2392, 7, 8, 4, 1258, 1, 2, 6); -- Earth Ore
+INSERT INTO `gardening_results` VALUES (2392, 7, 8, 4, 1258, 1, 1, 6); -- Earth Ore
 INSERT INTO `gardening_results` VALUES (2393, 7, 8, 4, 4274, 4, 8, 14); -- Persikos
-INSERT INTO `gardening_results` VALUES (2394, 7, 8, 4, 1262, 1, 2, 6); -- Dark Ore
+INSERT INTO `gardening_results` VALUES (2394, 7, 8, 4, 1262, 1, 1, 6); -- Dark Ore
 INSERT INTO `gardening_results` VALUES (2395, 7, 8, 5, 4109, 1, 2, 24); -- Water Cluster
 INSERT INTO `gardening_results` VALUES (2396, 7, 8, 5, 936, 12, 24, 15); -- Rock Salt
 INSERT INTO `gardening_results` VALUES (2397, 7, 8, 5, 1307, 8, 16, 20); -- Silver Leaf
 INSERT INTO `gardening_results` VALUES (2398, 7, 8, 5, 4110, 1, 2, 15); -- Light Cluster
-INSERT INTO `gardening_results` VALUES (2399, 7, 8, 5, 1259, 1, 2, 6); -- Lightning Ore
+INSERT INTO `gardening_results` VALUES (2399, 7, 8, 5, 1259, 1, 1, 6); -- Lightning Ore
 INSERT INTO `gardening_results` VALUES (2400, 7, 8, 5, 4274, 4, 8, 14); -- Persikos
-INSERT INTO `gardening_results` VALUES (2401, 7, 8, 5, 1262, 1, 2, 6); -- Dark Ore
+INSERT INTO `gardening_results` VALUES (2401, 7, 8, 5, 1262, 1, 1, 6); -- Dark Ore
 INSERT INTO `gardening_results` VALUES (2402, 7, 8, 6, 4104, 1, 2, 24); -- Fire Cluster
 INSERT INTO `gardening_results` VALUES (2403, 7, 8, 6, 936, 12, 24, 15); -- Rock Salt
 INSERT INTO `gardening_results` VALUES (2404, 7, 8, 6, 1308, 6, 12, 20); -- Mythril Leaf
 INSERT INTO `gardening_results` VALUES (2405, 7, 8, 6, 4110, 1, 2, 15); -- Light Cluster
-INSERT INTO `gardening_results` VALUES (2406, 7, 8, 6, 1260, 1, 2, 6); -- Water Ore
+INSERT INTO `gardening_results` VALUES (2406, 7, 8, 6, 1260, 1, 1, 6); -- Water Ore
 INSERT INTO `gardening_results` VALUES (2407, 7, 8, 6, 4274, 4, 8, 14); -- Persikos
-INSERT INTO `gardening_results` VALUES (2408, 7, 8, 6, 1262, 1, 2, 6); -- Dark Ore
+INSERT INTO `gardening_results` VALUES (2408, 7, 8, 6, 1262, 1, 1, 6); -- Dark Ore
 INSERT INTO `gardening_results` VALUES (2409, 7, 8, 7, 17397, 24, 48, 15); -- Shell Bug
 INSERT INTO `gardening_results` VALUES (2410, 7, 8, 7, 936, 12, 24, 15); -- Rock Salt
 INSERT INTO `gardening_results` VALUES (2411, 7, 8, 7, 4111, 1, 2, 15); -- Dark Cluster
 INSERT INTO `gardening_results` VALUES (2412, 7, 8, 7, 4110, 1, 2, 15); -- Light Cluster
 INSERT INTO `gardening_results` VALUES (2413, 7, 8, 7, 1309, 4, 12, 20); -- Gold Leaf
 INSERT INTO `gardening_results` VALUES (2414, 7, 8, 7, 4274, 4, 8, 14); -- Persikos
-INSERT INTO `gardening_results` VALUES (2415, 7, 8, 7, 1262, 1, 2, 6); -- Dark Ore
+INSERT INTO `gardening_results` VALUES (2415, 7, 8, 7, 1262, 1, 1, 6); -- Dark Ore
 INSERT INTO `gardening_results` VALUES (2416, 7, 8, 8, 936, 12, 24, 30); -- Rock Salt
 INSERT INTO `gardening_results` VALUES (2417, 7, 8, 8, 4110, 1, 2, 30); -- Light Cluster
 INSERT INTO `gardening_results` VALUES (2418, 7, 8, 8, 4274, 4, 8, 28); -- Persikos
-INSERT INTO `gardening_results` VALUES (2419, 7, 8, 8, 1262, 1, 2, 12); -- Dark Ore
+INSERT INTO `gardening_results` VALUES (2419, 7, 8, 8, 1262, 1, 1, 12); -- Dark Ore
 INSERT INTO `gardening_results` VALUES (2420, 8, 0, 0, 936, 12, 24, 30); -- Rock Salt
 INSERT INTO `gardening_results` VALUES (2421, 8, 0, 0, 4366, 6, 12, 20); -- La Theine Cabbage
 INSERT INTO `gardening_results` VALUES (2422, 8, 0, 0, 774, 1, 2, 30); -- Purple Rock

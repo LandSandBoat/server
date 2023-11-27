@@ -30,7 +30,7 @@
 // 02 - Crystal feed element ID (FLOWERPOT_ELEMENT_TYPE). 4095 + element ID is the crystal item ID. This one is only used by trees that take two feedings.
 // 03 - Same as 0x02 but is the common one used by all plants.
 // 04 - Seed type (FLOWERPOT_PLANT_TYPE) of the plant
-// 05 - Unknown
+// 05 - Bit 1 tracks if the plant was examined since the last wilting check. Bits 2-N store the RNG "strength" of the plant.
 // 06-0B - MH Display info used in CItemFurnishing
 // 0C-0F - Vanatime of when the seed was planted in the flowerpot
 // 10-13 - Vanatime of when the next plant stage will occur
