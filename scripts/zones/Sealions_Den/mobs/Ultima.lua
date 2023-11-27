@@ -60,8 +60,11 @@ entity.onMobWeaponSkill = function(target, mob, skill)
         mob:getLocalVar("nuclearWaste") == 1
     then
         mob:timer(4000, function(mobArg)
-            local ability = math.random(1262, 1267)
-            mob:useMobAbility(ability)
+            if mobArg:getLocalVar("nuclearWaste") == 1 then
+                mobArg:setLocalVar("nuclearWaste", 0)
+                local ability = math.random(1262, 1267)
+                mobArg:useMobAbility(ability)
+            end
         end)
     end
 end
