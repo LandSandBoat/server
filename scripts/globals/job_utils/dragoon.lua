@@ -767,28 +767,31 @@ xi.job_utils.dragoon.pickAndUseDamageBreath = function(player, target)
 
     local resistances =
     {
-        target:getMod(xi.mod.FIRE_MEVA),
-        target:getMod(xi.mod.ICE_MEVA),
-        target:getMod(xi.mod.WIND_MEVA),
-        target:getMod(xi.mod.EARTH_MEVA),
-        target:getMod(xi.mod.THUNDER_MEVA),
-        target:getMod(xi.mod.WATER_MEVA),
+        xi.mod.FIRE_RES_RANK,
+        xi.mod.ICE_RES_RANK,
+        xi.mod.WIND_RES_RANK,
+        xi.mod.EARTH_RES_RANK,
+        xi.mod.THUNDER_RES_RANK,
+        xi.mod.WATER_RES_RANK,
     }
 
-    local lowest = resistances[1]
-    local breath = breathList[1]
+    local lowestModValue  = 11
+    local currentModValue = 0
+    local breathToUse     = breathList[1]
 
     -- https://www.bg-wiki.com/ffxi/Wyvern_(Dragoon_Pet)#Elemental_Breath
     -- The wyvern simply picks the lowest resistance breath and no longer relies on Drachen Armet et al
     -- if all resistances are equal, Flame Breath is picked first.
     for i, v in ipairs(breathList) do
-        if resistances[i] < lowest then
-            lowest = resistances[i]
-            breath = v
+        currentModValue = target:getMod(resistances[i])
+
+        if currentModValue < lowestModValue then
+            lowestModValue = currentModValue
+            breathToUse    = v
         end
     end
 
-    player:getPet():useJobAbility(breath, target)
+    player:getPet():useJobAbility(breathToUse, target)
 end
 
 xi.job_utils.dragoon.useRestoringBreath = function(player, ability, action)
