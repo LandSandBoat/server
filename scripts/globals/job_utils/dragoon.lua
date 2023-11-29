@@ -677,16 +677,16 @@ end
 
 -- https://www.bg-wiki.com/ffxi/Wyvern_(Dragoon_Pet)#Elemental_Breath
 xi.job_utils.dragoon.useDamageBreath = function(wyvern, target, skill, action, damageType)
-    local master              = wyvern:getMaster()
-    local deepBreathingMerits = master:getMerit(xi.merit.DEEP_BREATHING)
-    local deepMult            = 0
+    local master                  = wyvern:getMaster()
+    local deepBreathingMerits     = master:getMerit(xi.merit.DEEP_BREATHING)
+    local deepBreathingMultiplier = 0
 
     if wyvern:hasStatusEffect(xi.effect.MAGIC_ATK_BOOST) then
-        deepMult = 0.75 + (0.25 * deepBreathingMerits)
+        deepBreathingMultiplier = 0.75 + (0.25 * deepBreathingMerits)
 
         -- add in augment power, +0.1 per merit level (including first)
         if master:getMod(xi.mod.ENHANCE_DEEP_BREATHING) > 0 then
-            deepMult = deepMult + deepBreathingMerits * 0.1
+            deepBreathingMultiplier = deepBreathingMultiplier + deepBreathingMerits * 0.1
         end
 
         wyvern:delStatusEffect(xi.effect.MAGIC_ATK_BOOST)
@@ -694,12 +694,12 @@ xi.job_utils.dragoon.useDamageBreath = function(wyvern, target, skill, action, d
 
     local jobPointBonus       = master:getJobPointLevel(xi.jp.WYVERN_BREATH_EFFECT) * 10
     local breathAugmentsBonus = master:getMod(xi.mod.UNCAPPED_WYVERN_BREATH) / 100
-    local gear                = master:getMod(xi.mod.WYVERN_BREATH) -- Master gear that enhances breath
+    local gearMultiplier      = master:getMod(xi.mod.WYVERN_BREATH) -- Master gear that enhances breath
 
     -- gear cap of 64/256 in multiplier
-    local multiplier = 1.0 + (math.min(gear, 64)) / 256
+    gearMultiplier = 1.0 + (math.min(gearMultiplier, 64)) / 256
 
-    local damage = math.floor(math.floor(wyvern:getHP() / 6 + 15 + jobPointBonus)) * multiplier * (1.0 + breathAugmentsBonus + deepMult)
+    local damage = math.floor(wyvern:getHP() / 6 + 15 + jobPointBonus) * gearMultiplier * (1.0 + breathAugmentsBonus + deepBreathingMultiplier)
 
     -- strafe merits are +10 per merit
     local strafeMeritPower = master:getMerit(xi.merit.STRAFE_EFFECT)
