@@ -237,7 +237,7 @@ xi.merit =
     AVATAR_PHYSICAL_ATTACK      = meritCategory.SMN_1 + 0x02,
     AVATAR_MAGICAL_ACCURACY     = meritCategory.SMN_1 + 0x04,
     AVATAR_MAGICAL_ATTACK       = meritCategory.SMN_1 + 0x06,
-    SUMMONING_MAGIC_CAST_TIME   = meritCategory.SMN_1 + 0x08,
+    ELEMENTAL_PERP_REDUCTION    = meritCategory.SMN_1 + 0x08,
 
     -- BLU 1
     CHAIN_AFFINITY_RECAST       = meritCategory.BLU_1 + 0x00,
