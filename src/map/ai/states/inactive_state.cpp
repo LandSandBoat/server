@@ -46,7 +46,7 @@ bool CInactiveState::Update(time_point tick)
             return true;
         }
 
-        if (!PBattleEntity->StatusEffectContainer->HasPreventActionEffect())
+        if (!PBattleEntity->StatusEffectContainer->HasPreventActionEffect(true))
         {
             return true;
         }
