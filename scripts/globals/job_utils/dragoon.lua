@@ -677,16 +677,16 @@ end
 
 -- https://www.bg-wiki.com/ffxi/Wyvern_(Dragoon_Pet)#Elemental_Breath
 xi.job_utils.dragoon.useDamageBreath = function(wyvern, target, skill, action, damageType)
-    local master              = wyvern:getMaster()
-    local deepBreathingMerits = master:getMerit(xi.merit.DEEP_BREATHING)
-    local deepMult            = 0
+    local master                  = wyvern:getMaster()
+    local deepBreathingMerits     = master:getMerit(xi.merit.DEEP_BREATHING)
+    local deepBreathingMultiplier = 0
 
     if wyvern:hasStatusEffect(xi.effect.MAGIC_ATK_BOOST) then
-        deepMult = 0.75 + (0.25 * deepBreathingMerits)
+        deepBreathingMultiplier = 0.75 + (0.25 * deepBreathingMerits)
 
         -- add in augment power, +0.1 per merit level (including first)
         if master:getMod(xi.mod.ENHANCE_DEEP_BREATHING) > 0 then
-            deepMult = deepMult + deepBreathingMerits * 0.1
+            deepBreathingMultiplier = deepBreathingMultiplier + deepBreathingMerits * 0.1
         end
 
         wyvern:delStatusEffect(xi.effect.MAGIC_ATK_BOOST)
@@ -694,12 +694,12 @@ xi.job_utils.dragoon.useDamageBreath = function(wyvern, target, skill, action, d
 
     local jobPointBonus       = master:getJobPointLevel(xi.jp.WYVERN_BREATH_EFFECT) * 10
     local breathAugmentsBonus = master:getMod(xi.mod.UNCAPPED_WYVERN_BREATH) / 100
-    local gear                = master:getMod(xi.mod.WYVERN_BREATH) -- Master gear that enhances breath
+    local gearMultiplier      = master:getMod(xi.mod.WYVERN_BREATH) -- Master gear that enhances breath
 
     -- gear cap of 64/256 in multiplier
-    local multiplier = 1.0 + (math.min(gear, 64)) / 256
+    gearMultiplier = 1.0 + (math.min(gearMultiplier, 64)) / 256
 
-    local damage = math.floor(math.floor(wyvern:getHP() / 6 + 15 + jobPointBonus)) * multiplier * (1.0 + breathAugmentsBonus + deepMult)
+    local damage = math.floor(wyvern:getHP() / 6 + 15 + jobPointBonus) * gearMultiplier * (1.0 + breathAugmentsBonus + deepBreathingMultiplier)
 
     -- strafe merits are +10 per merit
     local strafeMeritPower = master:getMerit(xi.merit.STRAFE_EFFECT)
@@ -767,28 +767,31 @@ xi.job_utils.dragoon.pickAndUseDamageBreath = function(player, target)
 
     local resistances =
     {
-        target:getMod(xi.mod.FIRE_MEVA),
-        target:getMod(xi.mod.ICE_MEVA),
-        target:getMod(xi.mod.WIND_MEVA),
-        target:getMod(xi.mod.EARTH_MEVA),
-        target:getMod(xi.mod.THUNDER_MEVA),
-        target:getMod(xi.mod.WATER_MEVA),
+        xi.mod.FIRE_RES_RANK,
+        xi.mod.ICE_RES_RANK,
+        xi.mod.WIND_RES_RANK,
+        xi.mod.EARTH_RES_RANK,
+        xi.mod.THUNDER_RES_RANK,
+        xi.mod.WATER_RES_RANK,
     }
 
-    local lowest = resistances[1]
-    local breath = breathList[1]
+    local lowestModValue  = 11
+    local currentModValue = 0
+    local breathToUse     = breathList[1]
 
     -- https://www.bg-wiki.com/ffxi/Wyvern_(Dragoon_Pet)#Elemental_Breath
     -- The wyvern simply picks the lowest resistance breath and no longer relies on Drachen Armet et al
     -- if all resistances are equal, Flame Breath is picked first.
     for i, v in ipairs(breathList) do
-        if resistances[i] < lowest then
-            lowest = resistances[i]
-            breath = v
+        currentModValue = target:getMod(resistances[i])
+
+        if currentModValue < lowestModValue then
+            lowestModValue = currentModValue
+            breathToUse    = v
         end
     end
 
-    player:getPet():useJobAbility(breath, target)
+    player:getPet():useJobAbility(breathToUse, target)
 end
 
 xi.job_utils.dragoon.useRestoringBreath = function(player, ability, action)
