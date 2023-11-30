@@ -11631,6 +11631,35 @@ bool CLuaBaseEntity::isUsingH2H()
 }
 
 /************************************************************************
+ *  Function: getBaseWeaponDelay(bool offhand)
+ *  Purpose : Returns the unmodified base delay of an PCs's melee attack without any form of delay reduction
+ *  Example : local delay = player:getBaseWeaponDelay(false)
+ *  Notes   :
+ ************************************************************************/
+
+uint16 CLuaBaseEntity::getBaseWeaponDelay(uint16 slot)
+{
+    if (m_PBaseEntity->objtype != TYPE_PC)
+    {
+        ShowWarning("Invalid entity type calling function (%s).", m_PBaseEntity->GetName());
+        return false;
+    }
+    CCharEntity* PCharEntity = dynamic_cast<CCharEntity*>(m_PBaseEntity);
+
+    if (PCharEntity)
+    {
+        CItemWeapon* PWeapon = dynamic_cast<CItemWeapon*>(PCharEntity->getEquip(static_cast<SLOTTYPE>(slot)));
+
+        if (PWeapon)
+        {
+            return PWeapon->getBaseDelay();
+        }
+    }
+
+    return 0;
+}
+
+/************************************************************************
  *  Function: getBaseDelay()
  *  Purpose : Returns the unmodified base delay of an entity's melee attack without any form of delay reduction
  *  Example : local delay = player:getBaseDelay()
@@ -13581,6 +13610,38 @@ uint16 CLuaBaseEntity::getAmmoDmg()
     }
 
     return weapon->getDamage();
+}
+
+/************************************************************************
+ *  Function: getWeaponHitCount(false)
+ *  Purpose : Gets the number of hits from a weapon
+ *  Example : local numMainHandHits = player:getWeaponHitCount(false)
+ ************************************************************************/
+
+uint16 CLuaBaseEntity::getWeaponHitCount(bool offhand)
+{
+    if (m_PBaseEntity->objtype != TYPE_PC)
+    {
+        ShowWarning("Invalid entity type calling function (%s).", m_PBaseEntity->GetName());
+        return 0;
+    }
+
+    if (CCharEntity* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity))
+    {
+        CItemWeapon* PMain = dynamic_cast<CItemWeapon*>(PChar->getEquip(SLOT_MAIN));
+        CItemWeapon* PSub  = dynamic_cast<CItemWeapon*>(PChar->getEquip(SLOT_SUB));
+
+        if (offhand && PSub)
+        {
+            return PSub->getHitCount();
+        }
+        else if (PMain)
+        {
+            return PMain->getHitCount();
+        }
+    }
+
+    return 0;
 }
 
 /************************************************************************
@@ -17530,6 +17591,7 @@ void CLuaBaseEntity::Register()
 
     SOL_REGISTER("isDualWielding", CLuaBaseEntity::isDualWielding);
     SOL_REGISTER("isUsingH2H", CLuaBaseEntity::isUsingH2H);
+    SOL_REGISTER("getBaseWeaponDelay", CLuaBaseEntity::getBaseWeaponDelay);
     SOL_REGISTER("getBaseDelay", CLuaBaseEntity::getBaseDelay);
     SOL_REGISTER("getBaseRangedDelay", CLuaBaseEntity::getBaseRangedDelay);
 
@@ -17628,6 +17690,7 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("getRangedDmg", CLuaBaseEntity::getRangedDmg);
     SOL_REGISTER("getRangedDmgRank", CLuaBaseEntity::getRangedDmgRank);
     SOL_REGISTER("getAmmoDmg", CLuaBaseEntity::getAmmoDmg);
+    SOL_REGISTER("getWeaponHitCount", CLuaBaseEntity::getWeaponHitCount);
 
     SOL_REGISTER("removeAmmo", CLuaBaseEntity::removeAmmo);
 
