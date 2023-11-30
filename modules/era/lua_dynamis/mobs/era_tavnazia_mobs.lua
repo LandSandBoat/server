@@ -26,6 +26,48 @@ local antlionPositions =
     { -21.65, -36, 18.61, 25 },
 }
 
+xi.dynamis.dynamisTavnaziaOnNewDynamis = function(player, zone)
+    zone:setLocalVar("nightmareWormArea", math.random(#wormPositions))
+    zone:setLocalVar("nightmareAntlionArea", math.random(#antlionPositions) + 5)
+end
+
+xi.dynamis.dynamisTavnaziaOnZoneInitializeEra = function(zone)
+    local i = 0
+
+    -- Creates a thin rectangular area centered around the spawn points in the table
+    for _, v in pairs(wormPositions) do
+        i = i + 1
+        zone:registerTriggerArea(i, wormPositions[i][1] - 5, -23, wormPositions[i][3] - 5, wormPositions[i][1] + 5, -22, wormPositions[i][3] + 5)
+    end
+
+    for _, v in pairs(antlionPositions) do
+        i = i + 1
+        zone:registerTriggerArea(i, antlionPositions[i - 5][1] - 5, -36, antlionPositions[i - 5][3] - 5, antlionPositions[i - 5][1] + 5, -35, antlionPositions[i - 5][3] + 5)
+    end
+end
+
+xi.dynamis.dynamisTavnaziaOnTriggerAreaEnter = function(player, triggerArea)
+    local zone = player:getZone()
+
+    if
+        zone:getLocalVar("nightmareWormSpawned") == 0 and
+        triggerArea:GetTriggerAreaID() == zone:getLocalVar("nightmareWormArea")
+    then
+        zone:setLocalVar("nightmareWormSpawned", 1)
+        -- spawn worm
+        xi.dynamis.nmDynamicSpawn(2, nil, true, xi.zone.DYNAMIS_TAVNAZIA, player)
+    end
+
+    if
+        zone:getLocalVar("nightmareAntlionSpawned") == 0 and
+        triggerArea:GetTriggerAreaID() == zone:getLocalVar("nightmareAntlionArea")
+    then
+        zone:setLocalVar("nightmareAntlionSpawned", 1)
+        -- spawn antlion
+        xi.dynamis.nmDynamicSpawn(3, nil, true, xi.zone.DYNAMIS_TAVNAZIA, player)
+    end
+end
+
 local firstEyes  = { "eyeOneKilled", "eyeTwoKilled" }
 local secondEyes = { "eyeThreeKilled", "eyeFourKilled" }
 
@@ -42,22 +84,10 @@ end
 xi.dynamis.onSpawnNightmareWorm = function(mob)
     xi.dynamis.setNMStats(mob)
     mob:setRoamFlags(xi.roamFlag.WORM)
-    -- This is sneaky.  All of our code checks animation sub 0 or 1 for worms.
-    -- 4 and 5 have the same functionality, but we want this worm to aggro, so we use 5
-    mob:setAnimationSub(5)
-    mob:hideName(true)
-    mob:setUntargetable(true)
-    local newPosition = math.random(1, #wormPositions)
-    mob:setPos(wormPositions[newPosition][1], wormPositions[newPosition][2], wormPositions[newPosition][3], wormPositions[newPosition][4])
 end
 
 xi.dynamis.onSpawnNightmareAntlion = function(mob)
     xi.dynamis.setNMStats(mob)
-    mob:setMobMod(xi.mobMod.ROAM_TURNS, 0)
-    mob:setMobMod(xi.mobMod.ROAM_RATE, 0)
-    mob:setMobMod(xi.mobMod.ROAM_DISTANCE, 0)
-    local newPosition = math.random(1, #antlionPositions)
-    mob:setPos(antlionPositions[newPosition][1], antlionPositions[newPosition][2], antlionPositions[newPosition][3], antlionPositions[newPosition][4])
 end
 
 xi.dynamis.onMobEngagedNightmareWorm = function(mob, target)
@@ -311,14 +341,48 @@ end
 
 xi.dynamis.onMobWeaponSkillDiabolosDiamond = function(target, mob, skill)
     -- Nightmare was used - the fun begins
-    if skill:getID() == 1908 then
+    if
+        skill:getID() == 1908 and
+        mob:getLocalVar("DayDreamsLeft") == 0
+    then
         -- Needs more info
         -- Reported to get stronger the more times nightmare happens.
         -- Video evidence showed 5 charms at low HP https://youtu.be/Bvp-T3_U7xA?t=74
-        local numDaydreams = 5 --math.min(10 - (mob:getHPP() % 10), 5)
-        for i = 0, numDaydreams do
-            mob:useMobAbility(1919)
-        end
+        mob:setLocalVar("DayDreamsLeft", 5)
+        mob:queue(1000, function(mobArg)
+                if mobArg:isDead() then
+                    return
+                end
+
+                local dayDreamTarget = mobArg:getTarget()
+                if dayDreamTarget:isPet() then
+                    dayDreamTarget = dayDreamTarget:getMaster()
+                end
+
+                mobArg:triggerDrawIn(mobArg, false, 20, nil, dayDreamTarget)
+                mobArg:useMobAbility(1919, dayDreamTarget)
+            end)
+    end
+
+    if
+        skill:getID() == 1919 and
+        mob:getLocalVar("DayDreamsLeft") > 0
+    then
+        mob:setLocalVar("DayDreamsLeft", mob:getLocalVar("DayDreamsLeft") - 1)
+        -- duplicated code, could be pulled into a local fcn
+        mob:queue(1000, function(mobArg)
+                if mobArg:isDead() then
+                    return
+                end
+
+                local dayDreamTarget = mobArg:getTarget()
+                if dayDreamTarget:isPet() then
+                    dayDreamTarget = dayDreamTarget:getMaster()
+                end
+
+                mobArg:triggerDrawIn(mobArg, false, 20, nil, dayDreamTarget)
+                mobArg:useMobAbility(1919, dayDreamTarget)
+            end)
     end
 end
 

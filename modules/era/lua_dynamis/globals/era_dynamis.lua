@@ -1000,6 +1000,10 @@ xi.dynamis.onNewDynamis = function(player)
         GetNPCByID(xi.dynamis.dynaInfoEra[zoneID].sjRestrictionNPC):setPos(sjNPCLocation[1], sjNPCLocation[2], sjNPCLocation[3])
         GetNPCByID(xi.dynamis.dynaInfoEra[zoneID].sjRestrictionNPC):setStatus(xi.status.NORMAL)
     end
+
+    if zoneID == xi.zone.DYNAMIS_TAVNAZIA then
+        xi.dynamis.dynamisTavnaziaOnNewDynamis(player, zone)
+    end
 end
 
 --------------------------------------------
@@ -1533,6 +1537,20 @@ end)
 --------------------------------------------
 --      Dynamis Player/Zone Functions     --
 --------------------------------------------
+
+xi.dynamis.zoneOnZoneInitializeEra = function(zone)
+    local zoneID = zone:getID()
+    if zoneID == xi.zone.DYNAMIS_TAVNAZIA then
+        xi.dynamis.dynamisTavnaziaOnZoneInitializeEra(zone)
+    end
+end
+
+xi.dynamis.onTriggerAreaEnter = function(player, triggerArea)
+    local zoneID = player:getZoneID()
+    if zoneID == xi.zone.DYNAMIS_TAVNAZIA then
+        xi.dynamis.dynamisTavnaziaOnTriggerAreaEnter(player, triggerArea)
+    end
+end
 
 xi.dynamis.zoneOnZoneInEra = function(player, prevZone)
     local zoneID = player:getZoneID()

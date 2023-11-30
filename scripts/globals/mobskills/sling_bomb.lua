@@ -12,7 +12,7 @@ require("scripts/globals/mobskills")
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
-    if mob:getAnimationSub() == 6  then
+    if mob:getAnimationSub() == 2  then -- 1 Bomb
         return 1
     end
 

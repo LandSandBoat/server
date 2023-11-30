@@ -7,7 +7,7 @@ require("scripts/globals/mobskills")
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
-    if (mob:getHPP() > 66 or mob:getAnimationSub() ~= 4) and math.random() < .2 then -- 20% chance for all bombs to explode
+    if (mob:getHPP() > 66 or mob:getAnimationSub() ~= 0) and math.random() < .2 then -- 20% chance for all bombs to explode
         return 1
     end
 

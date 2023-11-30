@@ -11,7 +11,7 @@ require("scripts/globals/mobskills")
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
-    if mob:getAnimationSub() == 6 then -- 1 bomb
+    if mob:getAnimationSub() == 2 then -- 1 bomb
         return 1
     end
 
@@ -19,13 +19,11 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    local numberOfBombs = 7 - mob:getAnimationSub()
-    local bombNum = 0.5 -- Base damage
+    local numberOfBombs = 3 - mob:getAnimationSub()
+    local bombNum = 50 * numberOfBombs
 
-    if mob:getAnimationSub() == 4 then -- 3 bombs
-        bombNum = bombNum + 25 * 3
-    elseif mob:getAnimationSub() == 5 then -- 2 bombs
-        bombNum = bombNum + 25 * 2
+    if mob:getZoneID() == xi.zone.DYNAMIS_TAVNAZIA then
+        bombNum = bombNum * 1.75
     end
 
     local info = xi.mobskills.mobMagicalMove(mob, target, skill, bombNum, xi.magic.ele.FIRE, 1, xi.mobskills.magicalTpBonus.NO_EFFECT, 0, 0, 1, 1.1, 1.2)

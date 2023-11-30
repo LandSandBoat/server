@@ -179,6 +179,13 @@ xi.mobskills.mobPhysicalMove = function(mob, target, skill, numberofhits, accmod
     --work out hit rate for mobs
     local hitrate = xi.weaponskills.getHitRate(mob, target, 0, 0)
 
+    if
+        accmod and
+        accmod ~= 0
+    then
+        hitrate = utils.clamp((hitrate * accmod), 0.2, 0.95)
+    end
+
     if tpeffect == xi.mobskills.physicalTpBonus.RANGED then
         hitrate = xi.weaponskills.getRangedHitRate(mob, target, 0, 0)
     end
