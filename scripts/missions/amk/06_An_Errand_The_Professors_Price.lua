@@ -94,7 +94,7 @@ mission.sections =
     -- Go get the Starfruit
     {
         check = function(player, currentMission, missionStatus, vars)
-            return currentMission == mission.missionId and not player:hasKeyItem(xi.ki.RIPE_STARFRUIT)
+            return currentMission >= mission.missionId and not player:hasKeyItem(xi.ki.RIPE_STARFRUIT)
         end,
 
         [xi.zone.WINDURST_WALLS] =
@@ -111,14 +111,27 @@ mission.sections =
         {
             ['qm1'] =
             {
+                -- Only need one KI orb to start fight
                 onTrigger = function(player, npc)
-                    return mission:progressEvent(100)
+                    if
+                        player:hasKeyItem(xi.ki.ORB_OF_SWORDS) or
+                        player:hasKeyItem(xi.ki.ORB_OF_CUPS) or
+                        player:hasKeyItem(xi.ki.ORB_OF_BATONS) or
+                        player:hasKeyItem(xi.ki.ORB_OF_COINS)
+                    then
+                        -- Prompt to start the fight
+                        return mission:progressEvent(100)
+                    else
+                        -- Remind that orbs are needed
+                        return mission:messageSpecial(horutotoID.text.IF_HAD_ORBS, xi.ki.ORB_OF_SWORDS, xi.ki.ORB_OF_CUPS, xi.ki.ORB_OF_BATONS, xi.ki.ORB_OF_COINS)
+                    end
                 end,
             },
 
             onEventFinish =
             {
                 [100] = function(player, csid, option, npc)
+                    -- Violence was chosen, start fight
                     if option == 1 then
                         beginCardianFight(player, npc)
                     end
@@ -130,7 +143,7 @@ mission.sections =
     -- Got the Starfruit
     {
         check = function(player, currentMission, missionStatus, vars)
-            return currentMission == mission.missionId and
+            return currentMission >= mission.missionId and
                 player:hasKeyItem(xi.ki.RIPE_STARFRUIT) and
                 not player:needToZone()
         end,
@@ -164,7 +177,6 @@ mission.sections =
         {
             ['qm1'] =
             {
-                -- TODO: Reminder about the orbs
                 onTrigger = function(player, npc)
                     return mission:messageSpecial(horutotoID.text.CANNOT_ENTER_BATTLEFIELD, xi.ki.RIPE_STARFRUIT):setPriority(1000)
                 end,
