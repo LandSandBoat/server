@@ -67,6 +67,7 @@ quest.sections =
                 [595] = function(player, csid, option, npc)
                     quest:setVar(player, 'Prog', 3)
                 end,
+
                 [597] = function(player, csid, option, npc)
                     quest:complete(player)
                 end,
