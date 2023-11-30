@@ -396,7 +396,8 @@ namespace battleutils
     {
         return ((PSkill->getSkillLevel() > 0 && PChar->GetSkill(PSkill->getType()) >= PSkill->getSkillLevel() &&
                  (PSkill->getUnlockId() == 0 || charutils::hasLearnedWeaponskill(PChar, PSkill->getUnlockId()))) ||
-                (PSkill->getSkillLevel() == 0 && (PSkill->getUnlockId() == 0 || charutils::hasLearnedWeaponskill(PChar, PSkill->getUnlockId())))) &&
+                (PSkill->getSkillLevel() == 0 && (PSkill->getUnlockId() == 0 ||
+                                                  (charutils::hasLearnedWeaponskill(PChar, PSkill->getUnlockId()) && PChar->GetMLevel() >= 75)))) &&
                (PSkill->getJob(PChar->GetMJob()) > 0 || (PSkill->getJob(PChar->GetSJob()) > 0 && !PSkill->mainOnly()));
     }
 

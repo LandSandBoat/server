@@ -1237,6 +1237,7 @@ void CParty::RefreshSync()
             charutils::CalculateStats(member);
             charutils::BuildingCharTraitsTable(member);
             charutils::BuildingCharAbilityTable(member);
+            charutils::BuildingCharWeaponSkills(member);
             charutils::CheckValidEquipment(member);
             member->pushPacket(new CCharAbilitiesPacket(member));
         }
