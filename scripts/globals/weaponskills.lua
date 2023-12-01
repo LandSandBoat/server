@@ -636,6 +636,11 @@ xi.weaponskills.calculateRawWSDmg = function(attacker, target, wsID, tp, action,
         ftp = 1
     end
 
+    local offhandSkill = attacker:getWeaponSkillType(xi.slot.SUB)
+    if calcParams.skillType == xi.skill.HAND_TO_HAND then
+        offhandSkill = xi.skill.HAND_TO_HAND
+    end
+
     -- Do the extra hit for our offhand if applicable
     if calcParams.extraOffhandHit and finaldmg < targetHp then
         calcParams.hitsLanded = 0
@@ -647,7 +652,7 @@ xi.weaponskills.calculateRawWSDmg = function(attacker, target, wsID, tp, action,
         end
 
         if hitdmg > 0 then
-            attacker:trySkillUp(calcParams.skillType, targetLvl)
+            attacker:trySkillUp(offhandSkill, targetLvl)
         end
 
         finaldmg = finaldmg + hitdmg
@@ -694,7 +699,7 @@ xi.weaponskills.calculateRawWSDmg = function(attacker, target, wsID, tp, action,
         end
     end
 
-    -- Proc any offhand mainhand multi attacks.
+    -- Proc any mainhand multi attacks.
     local mainhandMultiHitsDone = 0
     while hitsDone < 8 and mainhandMultiHitsDone < numMainHandMultis and finaldmg < targetHp do
         calcParams.hitsLanded = 0
@@ -726,7 +731,7 @@ xi.weaponskills.calculateRawWSDmg = function(attacker, target, wsID, tp, action,
         end
 
         if hitdmg > 0 then
-            attacker:trySkillUp(calcParams.skillType, targetLvl)
+            attacker:trySkillUp(offhandSkill, targetLvl)
         end
 
         finaldmg                     = finaldmg + hitdmg
