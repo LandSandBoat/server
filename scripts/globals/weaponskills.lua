@@ -579,6 +579,10 @@ xi.weaponskills.calculateRawWSDmg = function(attacker, target, wsID, tp, action,
     local hitsDone                = 1
     local hitdmg                  = 0
     local finaldmg                = 0
+    local mainhandTPGain          = xi.combat.tp.getSingleWeaponTPReturn(attacker, defender, xi.slot.MAIN)
+    local subTPGain               = xi.combat.tp.getSingleWeaponTPReturn(attacker, defender, xi.slot.SUB)
+    local isJump                  = wsParams.isJump or false
+    local attackerTPMult          = wsParams.attackerTPMult or 1
     calcParams.hitsLanded         = 0
     calcParams.shadowsAbsorbed    = 0
     calcParams.mainhandHitsLanded = 0
@@ -594,6 +598,10 @@ xi.weaponskills.calculateRawWSDmg = function(attacker, target, wsID, tp, action,
 
     if calcParams.skillType and hitdmg > 0 then
         attacker:trySkillUp(calcParams.skillType, targetLvl)
+
+        if isJump then
+            attacker:addTP(mainhandTPGain * attackerTPMult)
+        end
     end
 
     finaldmg = finaldmg + hitdmg
@@ -639,6 +647,7 @@ xi.weaponskills.calculateRawWSDmg = function(attacker, target, wsID, tp, action,
     local offhandSkill = attacker:getWeaponSkillType(xi.slot.SUB)
     if calcParams.skillType == xi.skill.HAND_TO_HAND then
         offhandSkill = xi.skill.HAND_TO_HAND
+        subTPGain    = mainhandTPGain
     end
 
     -- Do the extra hit for our offhand if applicable
@@ -653,6 +662,10 @@ xi.weaponskills.calculateRawWSDmg = function(attacker, target, wsID, tp, action,
 
         if hitdmg > 0 then
             attacker:trySkillUp(offhandSkill, targetLvl)
+
+            if isJump then
+                attacker:addTP(subTPGain * attackerTPMult)
+            end
         end
 
         finaldmg = finaldmg + hitdmg
@@ -683,6 +696,10 @@ xi.weaponskills.calculateRawWSDmg = function(attacker, target, wsID, tp, action,
 
         if hitdmg > 0 then
             attacker:trySkillUp(calcParams.skillType, targetLvl)
+
+            if isJump then
+                attacker:addTP(mainhandTPGain * attackerTPMult)
+            end
         end
 
         finaldmg                  = finaldmg + hitdmg
@@ -711,6 +728,10 @@ xi.weaponskills.calculateRawWSDmg = function(attacker, target, wsID, tp, action,
 
         if hitdmg > 0 then
             attacker:trySkillUp(calcParams.skillType, targetLvl)
+
+            if isJump then
+                attacker:addTP(mainhandTPGain * attackerTPMult)
+            end
         end
 
         finaldmg                  = finaldmg + hitdmg
@@ -732,6 +753,10 @@ xi.weaponskills.calculateRawWSDmg = function(attacker, target, wsID, tp, action,
 
         if hitdmg > 0 then
             attacker:trySkillUp(offhandSkill, targetLvl)
+
+            if isJump then
+                attacker:addTP(subTPGain * attackerTPMult)
+            end
         end
 
         finaldmg                     = finaldmg + hitdmg
@@ -1065,12 +1090,6 @@ xi.weaponskills.takeWeaponskillDamage = function(defender, attacker, wsParams, p
 
     -- DA/TA/QA/OaT/Oa2-3 etc give full TP return per hit on Jumps
     if isJump then
-        local mainhandTPGain = xi.combat.tp.getSingleWeaponTPReturn(attacker, defender, xi.slot.MAIN)
-        local subTPGain      = xi.combat.tp.getSingleWeaponTPReturn(attacker, defender, xi.slot.SUB)
-
-        attacker:addTP(mainhandTPGain * wsResults.mainHitsLanded * attackerTPMult)
-        attacker:addTP(subTPGain * wsResults.offhandHitsLanded * attackerTPMult)
-
         -- Don't feed TP and don't gain TP from takeWeaponskillDamage
         attackerTPMult            = 0
         wsResults.extraHitsLanded = 0
