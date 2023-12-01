@@ -1,7 +1,7 @@
 -----------------------------------
 -- Orastery Woes
--- Kuroido-Moido !pos -112.5 -4.2 102.9 240
--- qm1 !pos 197 -8 -27.5 122
+-- Chipmy-Popmy !gotoid 17760309
+-- qm1 !gotoid 16793999
 -----------------------------------
 require('scripts/globals/interaction/quest')
 require('scripts/globals/npc_util')
@@ -17,6 +17,7 @@ quest.reward =
     gil = 3200,
     fame = 50,
     fameArea = xi.quest.fame_area.WINDURST,
+    title = xi.title.DEED_VERIFIER,
 }
 
 quest.sections =
@@ -24,7 +25,7 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == QUEST_AVAILABLE and
-            player:getFameLevel(xi.quest.fame_area.WINDURST) >= 6
+            player:getFameLevel(xi.quest.fame_area.WINDURST) >= 5
         end,
 
         [xi.zone.PORT_WINDURST] =
@@ -51,7 +52,10 @@ quest.sections =
             ['Chipmy-Popmy'] =
             {
                 onTrigger = function(player, npc)
-                    if quest:getVar(player, 'Prog') == 2 and player:hasKeyItem(xi.ki.DEED_TO_PURGONORGO_ISLE) then
+                    if
+                        quest:getVar(player, 'Prog') == 2 and
+                        player:hasKeyItem(xi.ki.DEED_TO_PURGONORGO_ISLE)
+                    then
                         return quest:progressEvent(595, 0, xi.ki.DEED_TO_PURGONORGO_ISLE)
                     elseif quest:getVar(player, 'Prog') == 4 then
                         return quest:progressEvent(597) -- Complete Quest
@@ -63,6 +67,7 @@ quest.sections =
                 [595] = function(player, csid, option, npc)
                     quest:setVar(player, 'Prog', 3)
                 end,
+
                 [597] = function(player, csid, option, npc)
                     quest:complete(player)
                 end,
@@ -74,7 +79,10 @@ quest.sections =
             ['qm_deed'] =
             {
                 onTrigger = function(player, npc)
-                    if quest:getVar(player, 'Prog') == 0 and npcUtil.popFromQM(player, npc, bibikiID.mob.PEERIFOOLS, { claim = true, hide = 0 }) then
+                    if
+                        quest:getVar(player, 'Prog') == 0 and
+                        npcUtil.popFromQM(player, npc, bibikiID.mob.PEERIFOOLS, { claim = true, hide = 0 })
+                    then
                         return quest:message(bibikiID.text.YOU_ARE_NOT_ALONE)
                     elseif quest:getVar(player, 'Prog') == 1 then
                         return quest:progressEvent(34)
@@ -82,7 +90,7 @@ quest.sections =
                 end,
             },
 
-            ['Perifool'] =
+            ['Peerifool'] =
             {
                 onMobDeath = function(mob, player, optParams)
                     if quest:getVar(player, 'Prog') == 0 then
