@@ -71,6 +71,7 @@ enum EFFECTFLAG
     EFFECTFLAG_AURA            = 0x04000000, // Is an aura type effect
     EFFECTFLAG_HIDE_TIMER      = 0x08000000, // Sends "Always" in the packet, even though timer is tracked
     EFFECTFLAG_ON_ZONE_PATHOS  = 0x10000000, // removes the effect zoning into a non instanced zone
+    EFFECTFLAG_ALWAYS_EXPIRING = 0x20000000, // Timer is always 4 seconds from now to have an illusion permanent "expiring", used for Auras
 };
 
 enum EFFECT
