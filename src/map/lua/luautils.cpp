@@ -709,7 +709,7 @@ namespace luautils
 
         if (!std::filesystem::exists(filename))
         {
-            ShowTrace("luautils::CacheLuaObjectFromFile: File does not exist: %s", filename);
+            ShowTrace("luautils::CacheLuaObjectFromFile: Tried to load file but it does not exist: %s", filename);
             return;
         }
 
