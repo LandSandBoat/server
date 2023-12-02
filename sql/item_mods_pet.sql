@@ -824,6 +824,17 @@ INSERT INTO `item_mods_pet` VALUES (23195,160,-1200,8); -- Luopan - DMG: -1200
 -- Ankusa Gloves +2
 INSERT INTO `item_mods_pet` VALUES (23205,161,-500,0); -- Pet: DMGPHYS: -5%
 
+-- Pteroslaver finger gauntlets +2
+INSERT INTO `item_mods_pet` VALUES (23210,163,-1000,2); -- Wyvern: DMGMAGIC: -10%
+
+-- Glyphic Bracers +2
+INSERT INTO `item_mods_pet` VALUES (23211,25,42,1);   -- Avatar: ACC: 42
+INSERT INTO `item_mods_pet` VALUES (23211,384,600,1); -- Avatar: HASTE_GEAR: 6%
+
+-- Pitre Dastanas +2
+INSERT INTO `item_mods_pet` VALUES (23214,289,10,3);  -- Automaton: SUBTLE_BLOW: 10
+INSERT INTO `item_mods_pet` VALUES (23214,384,600,3); -- Automaton: HASTE_GEAR: 6%
+
 -- Beckoner's Bracers +2
 INSERT INTO `item_mods_pet` VALUES (23233,126,8,1); -- Avatar - BP_DAMAGE: 8
 
