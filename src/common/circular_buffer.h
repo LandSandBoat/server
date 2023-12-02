@@ -3,6 +3,7 @@
 #pragma once
 
 #include <memory>
+#include <mutex>
 
 template <class T>
 class CircularBuffer
@@ -10,10 +11,13 @@ class CircularBuffer
 private:
     std::unique_ptr<T[]> buffer;
 
+    // TODO: Use atomics here to reduce the number of mutex locks
     std::size_t head = 0;
     std::size_t tail = 0;
     std::size_t max_size;
     T           empty_item;
+
+    std::mutex mutex;
 
 public:
     CircularBuffer<T>(std::size_t max_size)
@@ -22,6 +26,8 @@ public:
 
     void enqueue(T item)
     {
+        std::lock_guard<std::mutex> lock(mutex);
+
         if (is_full())
         {
             throw std::runtime_error("buffer is full");
@@ -34,6 +40,8 @@ public:
 
     T dequeue()
     {
+        std::lock_guard<std::mutex> lock(mutex);
+
         if (is_empty())
         {
             throw std::runtime_error("buffer is empty");
@@ -51,21 +59,25 @@ public:
 
     T front()
     {
+        std::lock_guard<std::mutex> lock(mutex);
         return buffer[head];
     }
 
     bool is_empty()
     {
+        std::lock_guard<std::mutex> lock(mutex);
         return head == tail;
     }
 
     bool is_full()
     {
+        std::lock_guard<std::mutex> lock(mutex);
         return tail == (head - 1) % max_size;
     }
 
     std::size_t size()
     {
+        std::lock_guard<std::mutex> lock(mutex);
         if (tail >= head)
         {
             return tail - head;
