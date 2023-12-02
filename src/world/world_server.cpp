@@ -59,7 +59,7 @@ int32 forward_queued_messages_to_handlers(time_point tick, CTaskMgr::CTask* PTas
             break;
             default:
             {
-                ShowError("Unknown IMessageHandler type requested: %i", subType);
+                ShowError(fmt::format("Unknown IMessageHandler type requested: {}", subType));
             }
             break;
         }

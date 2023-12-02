@@ -154,7 +154,7 @@ void message_server_parse(MSGSERVTYPE type, zmq::message_t* extra, zmq::message_
         {
             const char* query = "SELECT server_addr, server_port FROM accounts_sessions LEFT JOIN chars ON "
                                 "accounts_sessions.charid = chars.charid WHERE charname = '%s' LIMIT 1;";
-            ret               = sql->Query(query, (int8*)extra->data() + 4);
+            ret               = sql->Query(query, str((int8*)extra->data() + 4));
             if (sql->NumRows() == 0)
             {
                 query = "SELECT server_addr, server_port FROM accounts_sessions WHERE charid = %d LIMIT 1;";
