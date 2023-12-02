@@ -22,6 +22,22 @@ xi.combat.tp.getSingleMeleeHitTPReturn = function(actor, target, isZanshin)
     return math.floor(tpReturn * storeTPModifier)
 end
 
+-- returns a PC weapon slot's TP return for a single hit
+xi.combat.tp.getSingleWeaponTPReturn = function(actor, slot)
+    -- TODO: implement Zanshin check optionally?
+    if actor:isPC() then
+        local delay           = actor:getBaseWeaponDelay(slot)
+        local attackOutput    = xi.combat.tp.getModifiedDelayAndCanZanshin(actor, delay)
+        local tpReturn        = xi.combat.tp.calculateTPReturn(actor, attackOutput.modifiedDelay)
+        local storeTPModifier = (100 + actor:getMod(xi.mod.STORETP)) / 100
+
+        return math.floor(tpReturn * storeTPModifier)
+    end
+
+    -- TODO: print error message for non-PC?
+    return 0
+end
+
 xi.combat.tp.getModifiedDelayAndCanZanshin = function(actor, delay)
     local modifiedDelay = delay
     local canZanshin    = false

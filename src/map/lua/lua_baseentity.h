@@ -600,8 +600,9 @@ public:
 
     bool   isDualWielding();
     bool   isUsingH2H();
-    uint16 getBaseDelay();       // get base delay of entity, melee only
-    uint16 getBaseRangedDelay(); // get base delay of entity, ranged only
+    uint16 getBaseWeaponDelay(uint16 slot); // get base delay of weapon
+    uint16 getBaseDelay();                  // get base delay of entity, melee only
+    uint16 getBaseRangedDelay();            // get base delay of entity, ranged only
 
     float checkLiementAbsorb(uint16 damageType); // return 1.0 if did not absorb, return >= -1.0 if did absorb
 
@@ -696,6 +697,7 @@ public:
     uint16 getRangedDmg();                                                             // Get ranged weapon DMG rating
     uint16 getRangedDmgRank();                                                         // Get ranged weapond DMG rating used for calculating rank
     uint16 getAmmoDmg();                                                               // Get ammo DMG rating
+    uint16 getWeaponHitCount(bool offhand);                                            // Get PC weapon hit count (Occasionally Attacks N times weapons)
 
     void removeAmmo();
 
