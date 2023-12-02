@@ -639,7 +639,7 @@ void HandleAuctionHouseRequest(CTCPRequestPacket& PTCPRequest)
     }
 
     OrderByString.append(" item_basic.itemid");
-    int8* OrderByArray = (int8*)OrderByString.data();
+    const char* OrderByArray = OrderByString.data();
 
     CDataLoader          PDataLoader;
     std::vector<ahItem*> ItemList = PDataLoader.GetAHItemsToCategory(AHCatID, OrderByArray);
