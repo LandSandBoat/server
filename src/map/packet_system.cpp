@@ -5062,7 +5062,7 @@ void SmallPacket0x077(map_session_data_t* const PSession, CCharEntity* const PCh
                 char memberName[PacketNameLength] = {};
                 memcpy(&memberName, data[0x04], PacketNameLength - 1);
 
-                ShowDebug(fmt::format("(Party)Altering permissions of {} to {}", memberName, str(data[0x15])));
+                ShowDebug(fmt::format("(Party)Altering permissions of {} to {}", str(memberName), str(data[0x15])));
                 PChar->PParty->AssignPartyRole(memberName, data.ref<uint8>(0x15));
             }
         }
@@ -5101,8 +5101,8 @@ void SmallPacket0x077(map_session_data_t* const PSession, CCharEntity* const PCh
                 char memberName[PacketNameLength] = {};
                 memcpy(&memberName, data[0x04], PacketNameLength - 1);
 
-                ShowDebug(fmt::format("(Alliance)Changing leader to {}", memberName));
-                PChar->PParty->m_PAlliance->assignAllianceLeader((const char*)data[0x04]);
+                ShowDebug(fmt::format("(Alliance)Changing leader to {}", str(memberName)));
+                PChar->PParty->m_PAlliance->assignAllianceLeader(str(data[0x04]).c_str());
 
                 uint8 allianceData[4]{};
                 ref<uint32>(allianceData, 0) = PChar->PParty->m_PAlliance->m_AllianceID;

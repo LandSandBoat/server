@@ -128,7 +128,7 @@ std::string ipp_to_string(uint64 ipp)
     char target_address[INET_ADDRSTRLEN];
     inet_ntop(AF_INET, &target, target_address, INET_ADDRSTRLEN);
 
-    return fmt::format("{}:{}", target_address, port);
+    return fmt::format("{}:{}", str(target_address), port);
 }
 
 void message_server_parse(MSGSERVTYPE type, zmq::message_t* extra, zmq::message_t* packet, zmq::message_t* from)
@@ -265,7 +265,7 @@ void message_server_parse(MSGSERVTYPE type, zmq::message_t* extra, zmq::message_
         }
         default:
         {
-            ShowDebug(fmt::format("Message: unknown type received: {} from {}:{}", static_cast<uint8>(type), from_address, from_port));
+            ShowDebug(fmt::format("Message: unknown type received: {} from {}:{}", static_cast<uint8>(type), str(from_address), from_port));
             break;
         }
     }
@@ -276,7 +276,7 @@ void message_server_parse(MSGSERVTYPE type, zmq::message_t* extra, zmq::message_
     if (ret != SQL_ERROR)
     {
         ShowDebug(fmt::format("Message: Received message {} ({}) from {}:{}",
-                              msgTypeToStr(type), static_cast<uint8>(type), from_address, from_port));
+                              msgTypeToStr(type), static_cast<uint8>(type), str(from_address), from_port));
 
         while (sql->NextRow() == SQL_SUCCESS)
         {

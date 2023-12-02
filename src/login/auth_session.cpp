@@ -233,7 +233,7 @@ void auth_session::read_func()
             if (!settings::get<bool>("login.ACCOUNT_CREATION"))
             {
                 ShowWarning(fmt::format("login_parse: New account attempt <{}> but is disabled in settings.",
-                                        escaped_name));
+                                        str(escaped_name)));
                 ref<uint8>(data_, 0) = LOGIN_ERROR_CREATE_DISABLED;
                 do_write(1);
                 return;
@@ -306,7 +306,7 @@ void auth_session::read_func()
                                     escaped_name, escaped_pass);
             if (ret == SQL_ERROR || sql->NumRows() == 0)
             {
-                ShowWarning(fmt::format("login_parse: user <{}> could not be found using the provided information. Aborting.", escaped_name));
+                ShowWarning(fmt::format("login_parse: user <{}> could not be found using the provided information. Aborting.", str(escaped_name)));
                 ref<uint8>(data_, 0) = LOGIN_ERROR;
                 do_write(1);
                 return;
@@ -319,7 +319,7 @@ void auth_session::read_func()
 
             if (status & ACCOUNT_STATUS_CODE::BANNED)
             {
-                ShowInfo(fmt::format("login_parse: banned user <{}> detected. Aborting.", escaped_name));
+                ShowInfo(fmt::format("login_parse: banned user <{}> detected. Aborting.", str(escaped_name)));
                 ref<uint8>(data_, 0) = LOGIN_ERROR_CHANGE_PASSWORD;
                 do_write(1);
             }
@@ -331,7 +331,7 @@ void auth_session::read_func()
 
                 if (updated_password == "")
                 {
-                    ShowWarning(fmt::format("login_parse: Empty password; Could not update password for user <{}>.", escaped_name));
+                    ShowWarning(fmt::format("login_parse: Empty password; Could not update password for user <{}>.", str(escaped_name)));
                     ref<uint8>(data_, 0) = LOGIN_ERROR_CHANGE_PASSWORD;
                     do_write(1);
                     return;
@@ -346,7 +346,7 @@ void auth_session::read_func()
                                     escaped_updated_password, accid);
                 if (ret == SQL_ERROR)
                 {
-                    ShowWarning(fmt::format("login_parse: Error trying to update password in database for user <{}>.", escaped_name));
+                    ShowWarning(fmt::format("login_parse: Error trying to update password in database for user <{}>.", str(escaped_name)));
                     ref<uint8>(data_, 0) = LOGIN_ERROR_CHANGE_PASSWORD;
                     do_write(1);
                     return;
