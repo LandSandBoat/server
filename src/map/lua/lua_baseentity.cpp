@@ -6069,6 +6069,7 @@ void CLuaBaseEntity::setLevel(uint8 level)
         jobpointutils::RefreshGiftMods(PChar);
         charutils::BuildingCharSkillsTable(PChar);
         charutils::BuildingCharAbilityTable(PChar);
+        charutils::BuildingCharWeaponSkills(PChar);
         charutils::BuildingCharTraitsTable(PChar);
 
         PChar->UpdateHealth();
