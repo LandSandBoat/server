@@ -54,6 +54,10 @@ namespace logging
     void ShutDown();
 
     void SetPattern(std::string const& str);
+    void ClearSinks();
+
+    void AddBacktrace(std::string str);
+    auto GetBacktrace() -> std::vector<std::string>;
 } // namespace logging
 
 // clang-format off
@@ -112,7 +116,7 @@ inline auto format_as(type v) \
 // Regular Loggers
 // NOTE 1: Trace is not for logging to screen or file; it's for filling the crash backtrace buffer and reporting to Tracy.
 // NOTE 2: It isn't possible (or a good idea) to allow the user to disable TRACE, ERROR, or CRITICAL logging.
-#define ShowTrace(...)    LOGGER_BODY(SPDLOG_LOGGER_TRACE, "trace", __VA_ARGS__)
+#define ShowTrace(...)    logging::AddBacktrace(fmt::sprintf(__VA_ARGS__))
 #define ShowDebug(...)    LOGGER_ENABLE("logging.LOG_DEBUG", LOGGER_BODY(SPDLOG_LOGGER_DEBUG, "debug", __VA_ARGS__))
 #define ShowInfo(...)     LOGGER_ENABLE("logging.LOG_INFO", LOGGER_BODY(SPDLOG_LOGGER_INFO, "info", __VA_ARGS__))
 #define ShowWarning(...)  LOGGER_ENABLE("logging.LOG_WARNING", LOGGER_BODY(SPDLOG_LOGGER_WARN, "warn", __VA_ARGS__))
@@ -128,9 +132,6 @@ inline auto format_as(type v) \
 #define DebugSQL(...)      LOGGER_ENABLE("logging.DEBUG_SQL", ShowDebug(__VA_ARGS__))
 #define DebugIDLookup(...) LOGGER_ENABLE("logging.DEBUG_ID_LOOKUP", ShowDebug(__VA_ARGS__))
 #define DebugModules(...)  LOGGER_ENABLE("logging.DEBUG_MODULES", ShowDebug(__VA_ARGS__))
-
-// Crash dump utils
-#define DumpBacktrace() spdlog::get("trace")->dump_backtrace()
 
 // clang-format on
 

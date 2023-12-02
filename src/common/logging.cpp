@@ -24,6 +24,8 @@
 #include "tracy.h"
 #include "utils.h"
 
+#include "circular_buffer.h"
+
 #include "spdlog/common.h"
 
 #include "spdlog/async.h"
@@ -32,7 +34,12 @@
 #include "spdlog/sinks/daily_file_sink.h"
 #include "spdlog/sinks/stdout_color_sinks.h"
 
-std::string ServerName;
+namespace
+{
+    std::string ServerName;
+
+    CircularBuffer<std::string> BacktraceBuffer(16);
+} // namespace
 
 class star_formatter_flag : public spdlog::custom_flag_formatter
 {
@@ -170,5 +177,35 @@ namespace logging
         formatter->add_flag<q_formatter_flag>('q');
         formatter->set_pattern(str);
         spdlog::set_formatter(std::move(formatter));
+    }
+
+    void ClearSinks()
+    {
+        for (auto& name : logNames)
+        {
+            spdlog::get(name)->sinks().clear();
+        }
+    }
+
+    void AddBacktrace(std::string str)
+    {
+        if (BacktraceBuffer.is_full())
+        {
+            BacktraceBuffer.dequeue();
+        }
+
+        BacktraceBuffer.enqueue(str);
+    }
+
+    auto GetBacktrace() -> std::vector<std::string>
+    {
+        std::vector<std::string> backtrace;
+
+        while (!BacktraceBuffer.is_empty())
+        {
+            backtrace.push_back(BacktraceBuffer.dequeue());
+        }
+
+        return backtrace;
     }
 } // namespace logging

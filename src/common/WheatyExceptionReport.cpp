@@ -17,8 +17,6 @@
 #include "utils.h"
 #include "version.h"
 
-#include <spdlog/sinks/callback_sink.h>
-
 #ifdef __clang__
 // clang-cl doesn't have these hardcoded types available, correct ehdata_forceinclude.h that relies on it
 #define _ThrowInfo ThrowInfo
@@ -365,32 +363,24 @@ LONG WINAPI WheatyExceptionReport::WheatyUnhandledExceptionFilter(
         Log(_T("Git Date: %s"), version::GetGitDate());
         Log(_T("====================================================="));
 
-        // Add a new sink to spdlog::trace which will make sure things are printed to Log(_T(...))
-        // clang-format off
-        auto callbackSink = std::make_shared<spdlog::sinks::callback_sink_st>([&](spdlog::details::log_msg const& msg)
+        Log(_T("=== Backtrace ==="));
+        for (auto& line : logging::GetBacktrace())
         {
-            auto str = std::string(msg.payload.data(), msg.payload.size());
-            Log(_T(str.c_str()));
-        });
-        callbackSink->set_level(spdlog::level::trace);
-        spdlog::get("trace")->sinks().emplace_back(callbackSink);
-        // clang-format on
-
-        DumpBacktrace();
-
-        // Gotta wait a little for the backtrace to finish and flush
-        std::this_thread::sleep_for(std::chrono::milliseconds(100));
+            Log(_T("%s"), line.c_str());
+        }
 
         Log(_T("====================================================="));
 
         GenerateExceptionReport(pExceptionInfo);
-
     }
 
     Log(_T(fmt::format("WheatyUnhandledExceptionFilter Exit").c_str()));
 
     fclose(m_hReportFile);
     m_hReportFile = nullptr;
+
+    // Pause for a moment to give spdlog a chance to flush
+    std::this_thread::sleep_for(std::chrono::milliseconds(200));
 
     TerminateProcess(GetCurrentProcess(), 1);
     return EXCEPTION_EXECUTE_HANDLER; // Unreacheable code
