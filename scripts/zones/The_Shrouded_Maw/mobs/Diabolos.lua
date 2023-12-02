@@ -34,6 +34,8 @@ end
 entity.onMobSpawn = function(mob)
     local dBase = ID.mob.DIABOLOS_OFFSET
     local dPrimeBase = dBase + 27
+    mob:setAutoAttackEnabled(true)
+    mob:setMobAbilityEnabled(true)
 
     -- Only add these for the CoP Diabolos NOT Prime
     if mob:getID() >= dBase and mob:getID() <= dBase + 14 then  -- three possible instances of Diabolos
@@ -126,6 +128,7 @@ end
 -- After Nightmare or Ultimate Terror then always use Camisado
 entity.onMobWeaponSkill = function(target, mob, skill)
     local skillID = skill:getID()
+    -- ToDo this is prob incorrect since this will be triggered for each target hit by a skill
     if skillID == 659 or skillID == 1908 then
         useCamisado(mob)
     end
