@@ -14,6 +14,7 @@
 
 #include "cbasetypes.h"
 #include "logging.h"
+#include "utils.h"
 #include "version.h"
 
 #ifdef __clang__
@@ -63,7 +64,7 @@ std::string wstrtostr(const std::wstring &wstr)
     szTo[wstr.size()] = '\0';
     WideCharToMultiByte(CP_ACP, 0, wstr.c_str(), -1, szTo, (int)wstr.length(), NULL, NULL);
     strTo = szTo;
-    delete[] szTo;
+    destroy_arr(szTo);
     return strTo;
 }
 
@@ -75,7 +76,7 @@ std::wstring strtowstr(const std::string &str)
     wszTo[str.size()] = L'\0';
     MultiByteToWideChar(CP_ACP, 0, str.c_str(), -1, wszTo, (int)str.length());
     wstrTo = wszTo;
-    delete[] wszTo;
+    destroy_arr(wszTo);
     return wstrTo;
 }
 
@@ -362,18 +363,24 @@ LONG WINAPI WheatyExceptionReport::WheatyUnhandledExceptionFilter(
         Log(_T("Git Date: %s"), version::GetGitDate());
         Log(_T("====================================================="));
 
-        DumpBacktrace();
+        Log(_T("=== Backtrace ==="));
+        for (auto& line : logging::GetBacktrace())
+        {
+            Log(_T("%s"), line.c_str());
+        }
 
         Log(_T("====================================================="));
 
         GenerateExceptionReport(pExceptionInfo);
-
     }
 
     Log(_T(fmt::format("WheatyUnhandledExceptionFilter Exit").c_str()));
 
     fclose(m_hReportFile);
     m_hReportFile = nullptr;
+
+    // Pause for a moment to give spdlog a chance to flush
+    std::this_thread::sleep_for(std::chrono::milliseconds(200));
 
     TerminateProcess(GetCurrentProcess(), 1);
     return EXCEPTION_EXECUTE_HANDLER; // Unreacheable code
@@ -1645,15 +1652,6 @@ DWORD_PTR WheatyExceptionReport::DereferenceUnsafePointer(DWORD_PTR address)
     {
         return DWORD_PTR(-1);
     }
-}
-
-// trim from end (in place)
-static inline void rtrim(std::string &s)
-{
-    s.erase(std::find_if(s.rbegin(), s.rend(), [](unsigned char ch)
-    {
-        return !std::isspace(ch) && ch != '\n';
-    }).base(), s.end());
 }
 
 //============================================================================

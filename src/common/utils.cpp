@@ -816,6 +816,18 @@ std::string trim(std::string const& str, std::string const& whitespace)
     return str.substr(strBegin, strRange);
 }
 
+// trim from end (in place)
+void rtrim(std::string& s)
+{
+    // clang-format off
+    s.erase(std::find_if(s.rbegin(), s.rend(),
+    [](unsigned char ch)
+    {
+        return !std::isspace(ch) && ch != '\n';
+    }).base(), s.end());
+    // clang-format on
+}
+
 // Returns true if the given str matches the given pattern.
 // Wildcards can be used in the pattern to match "any character"
 // e.g: %anto% matches Shantotto or Canto-Ranto

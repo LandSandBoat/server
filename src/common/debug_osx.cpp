@@ -39,7 +39,10 @@ void dumpBacktrace(int signal)
     printer.color_mode = backward::ColorMode::always;
     printer.address    = true;
 
-    DumpBacktrace();
+    for (auto& line : logging::GetBacktrace())
+    {
+        safe_print(line.c_str());
+    }
 
     std::ostringstream traceStream;
     printer.print(trace, traceStream);
