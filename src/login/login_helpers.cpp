@@ -55,7 +55,7 @@ namespace loginHelpers
         uint32 reversed_ip = htonl(ip);
         char   address[INET_ADDRSTRLEN];
         inet_ntop(AF_INET, &reversed_ip, address, INET_ADDRSTRLEN);
-        return fmt::format("{}", address);
+        return fmt::format("{}", str(address));
     }
 
     uint32 str2ip(const char* ip_str)
