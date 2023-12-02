@@ -17,16 +17,16 @@ private:
     std::size_t max_size;
     T           empty_item;
 
-    std::mutex mutex;
+    std::recursive_mutex mutex;
 
 public:
     CircularBuffer<T>(std::size_t max_size)
     : buffer(std::unique_ptr<T[]>(new T[max_size]))
     , max_size(max_size){};
 
-    void enqueue(T item)
+    void enqueue(T const& item)
     {
-        std::lock_guard<std::mutex> lock(mutex);
+        std::lock_guard lock(mutex);
 
         if (is_full())
         {
@@ -40,7 +40,7 @@ public:
 
     T dequeue()
     {
-        std::lock_guard<std::mutex> lock(mutex);
+        std::lock_guard lock(mutex);
 
         if (is_empty())
         {
@@ -59,25 +59,25 @@ public:
 
     T front()
     {
-        std::lock_guard<std::mutex> lock(mutex);
+        std::lock_guard lock(mutex);
         return buffer[head];
     }
 
     bool is_empty()
     {
-        std::lock_guard<std::mutex> lock(mutex);
+        std::lock_guard lock(mutex);
         return head == tail;
     }
 
     bool is_full()
     {
-        std::lock_guard<std::mutex> lock(mutex);
+        std::lock_guard lock(mutex);
         return tail == (head - 1) % max_size;
     }
 
     std::size_t size()
     {
-        std::lock_guard<std::mutex> lock(mutex);
+        std::lock_guard lock(mutex);
         if (tail >= head)
         {
             return tail - head;

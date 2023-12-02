@@ -64,7 +64,7 @@ std::string wstrtostr(const std::wstring &wstr)
     szTo[wstr.size()] = '\0';
     WideCharToMultiByte(CP_ACP, 0, wstr.c_str(), -1, szTo, (int)wstr.length(), NULL, NULL);
     strTo = szTo;
-    delete[] szTo;
+    destroy_arr(szTo);
     return strTo;
 }
 
@@ -76,7 +76,7 @@ std::wstring strtowstr(const std::string &str)
     wszTo[str.size()] = L'\0';
     MultiByteToWideChar(CP_ACP, 0, str.c_str(), -1, wszTo, (int)str.length());
     wstrTo = wszTo;
-    delete[] wszTo;
+    destroy_arr(wszTo);
     return wstrTo;
 }
 
