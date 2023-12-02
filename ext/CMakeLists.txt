@@ -59,14 +59,10 @@ if(TRACY_ENABLE)
     endif()
 endif(TRACY_ENABLE)
 
-# NOTE: We are not using the latest versions of spdlog, since the
-#     : version of fmt it is bundled with deprecated some arg mapping
-#     : that we use in a lot of places (formatting enums as ints and
-#     : formatting non-void pointers).
 CPMAddPackage(
     NAME spdlog
     GITHUB_REPOSITORY gabime/spdlog
-    GIT_TAG v1.9.2
+    GIT_TAG v1.12.0
 ) # defines: spdlog
 
 # NOTE: Using the 'release-2.0' branch

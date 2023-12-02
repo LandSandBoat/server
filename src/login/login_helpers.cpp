@@ -55,7 +55,7 @@ namespace loginHelpers
         uint32 reversed_ip = htonl(ip);
         char   address[INET_ADDRSTRLEN];
         inet_ntop(AF_INET, &reversed_ip, address, INET_ADDRSTRLEN);
-        return fmt::format("{}", address);
+        return fmt::format("{}", str(address));
     }
 
     uint32 str2ip(const char* ip_str)
@@ -149,16 +149,16 @@ namespace loginHelpers
         auto sql = std::make_unique<SqlConnection>();
 
         if (sql->Query("INSERT INTO chars(charid,accid,charname,pos_zone,nation) VALUES(%u,%u,'%s',%u,%u);",
-                       charid, accid, createchar->m_name, createchar->m_zone, createchar->m_nation) == SQL_ERROR)
+                       charid, accid, str(createchar->m_name), createchar->m_zone, createchar->m_nation) == SQL_ERROR)
         {
-            ShowDebug(fmt::format("lobby_ccsave: char<{}>, accid: {}, charid: {}", createchar->m_name, accid, charid));
+            ShowDebug(fmt::format("lobby_ccsave: char<{}>, accid: {}, charid: {}", str(createchar->m_name), accid, charid));
             return -1;
         }
 
         if (sql->Query("INSERT INTO char_look(charid,face,race,size) VALUES(%u,%u,%u,%u);",
                        charid, createchar->m_look.face, createchar->m_look.race, createchar->m_look.size) == SQL_ERROR)
         {
-            ShowDebug(fmt::format("lobby_cLook: char<{}>, charid: {}", createchar->m_name, charid));
+            ShowDebug(fmt::format("lobby_cLook: char<{}>, charid: {}", str(createchar->m_name), charid));
             return -1;
         }
 
@@ -294,7 +294,7 @@ namespace loginHelpers
             return -1;
         }
 
-        ShowDebug(fmt::format("char<{}> successfully saved", createchar.m_name));
+        ShowDebug(fmt::format("char<{}> successfully saved", str(createchar.m_name)));
         return 0;
     }
 

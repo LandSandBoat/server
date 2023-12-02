@@ -113,7 +113,7 @@ std::string ipp_to_string(uint64 ipp)
     char target_address[INET_ADDRSTRLEN];
     inet_ntop(AF_INET, &target, target_address, INET_ADDRSTRLEN);
 
-    return fmt::format("{}:{}", target_address, port);
+    return fmt::format("{}:{}", str(target_address), port);
 }
 
 void message_server_parse(MSGSERVTYPE type, zmq::message_t* extra, zmq::message_t* packet, zmq::message_t* from)
@@ -139,7 +139,7 @@ void message_server_parse(MSGSERVTYPE type, zmq::message_t* extra, zmq::message_
         {
             const char* query = "SELECT server_addr, server_port FROM accounts_sessions LEFT JOIN chars ON "
                                 "accounts_sessions.charid = chars.charid WHERE charname = '%s' LIMIT 1;";
-            ret               = sql->Query(query, (int8*)extra->data() + 4);
+            ret               = sql->Query(query, str((int8*)extra->data() + 4));
             if (sql->NumRows() == 0)
             {
                 query = "SELECT server_addr, server_port FROM accounts_sessions WHERE charid = %d LIMIT 1;";
@@ -250,7 +250,7 @@ void message_server_parse(MSGSERVTYPE type, zmq::message_t* extra, zmq::message_
         }
         default:
         {
-            ShowDebug(fmt::format("Message: unknown type received: {} from {}:{}", static_cast<uint8>(type), from_address, from_port));
+            ShowDebug(fmt::format("Message: unknown type received: {} from {}:{}", static_cast<uint8>(type), str(from_address), from_port));
             break;
         }
     }
@@ -261,7 +261,7 @@ void message_server_parse(MSGSERVTYPE type, zmq::message_t* extra, zmq::message_
     if (ret != SQL_ERROR)
     {
         ShowDebug(fmt::format("Message: Received message {} ({}) from {}:{}",
-                              msgTypeToStr(type), static_cast<uint8>(type), from_address, from_port));
+                              msgTypeToStr(type), static_cast<uint8>(type), str(from_address), from_port));
 
         while (sql->NextRow() == SQL_SUCCESS)
         {
