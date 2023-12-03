@@ -32,7 +32,10 @@ zones[xi.zone.TEMPLE_OF_UGGALEPIH] =
         THE_DOOR_IS_LOCKED            = 7363,  -- The door is locked. You might be able to open it with <item>.
         PROTECTED_BY_UNKNOWN_FORCE    = 7364,  -- The door is protected by some unknown force.
         YOUR_KEY_BREAKS               = 7366,  -- Your <item> breaks!
+        RIPPED_STILL_HANGING          = 7382,  -- The ripped "Final Fantasy" painting still hangs on the wall!
+        RIPPED_FINAL_FANTASY_PAINTING = 7571,  -- Ripped "Final Fantasy" Painting.
         DOOR_LOCKED                   = 7384,  -- The door is locked.
+        SLASHES_PAINTING              = 7379,  -- A monster appears and slashes the painting!
         HATE_RESET                    = 7437,  -- The built-up hate has been cleansed...!
         DOOR_SHUT                     = 7439,  -- The door is firmly shut.
         NO_HATE                       = 7440,  -- You have no built-up hate to cleanse.
@@ -71,6 +74,7 @@ zones[xi.zone.TEMPLE_OF_UGGALEPIH] =
         {
             [17428740] = 17428737, -- 259 0.03 80
         },
+        TROMPE_LOEIL             = 17428487,
         TEMPLE_GUARDIAN          = 17428494,
         NIO_A                    = 17428495,
         NIO_HUM                  = 17428496,
