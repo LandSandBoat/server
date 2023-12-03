@@ -19,6 +19,10 @@ jobs:
   Sanity_Checks:
     runs-on: ubuntu-22.04
     steps:
+    # workaround for broken clang on ubuntu runner until fixed: https://github.com/actions/runner-images/issues/8659
+    - uses: mjp41/workaround8649@7929373c0fe5caf844d8115adccef39e3b5362e7
+      with:
+        os: ubuntu-22.04
     - uses: actions/checkout@v3
       with:
         fetch-depth: 0
@@ -193,6 +197,10 @@ jobs:
     needs: Sanity_Checks
     runs-on: ubuntu-22.04
     steps:
+    # workaround for broken clang on ubuntu runner until fixed: https://github.com/actions/runner-images/issues/8659
+    - uses: mjp41/workaround8649@7929373c0fe5caf844d8115adccef39e3b5362e7
+      with:
+        os: ubuntu-22.04
     - uses: actions/checkout@v3
       with:
         fetch-depth: 1
@@ -228,6 +236,10 @@ jobs:
     needs: Sanity_Checks
     runs-on: ubuntu-22.04
     steps:
+    # workaround for broken clang on ubuntu runner until fixed: https://github.com/actions/runner-images/issues/8659
+    - uses: mjp41/workaround8649@7929373c0fe5caf844d8115adccef39e3b5362e7
+      with:
+        os: ubuntu-22.04
     - uses: actions/checkout@v3
       with:
         fetch-depth: 1
@@ -259,6 +271,10 @@ jobs:
     needs: Sanity_Checks
     runs-on: ubuntu-22.04
     steps:
+    # workaround for broken clang on ubuntu runner until fixed: https://github.com/actions/runner-images/issues/8659
+    - uses: mjp41/workaround8649@7929373c0fe5caf844d8115adccef39e3b5362e7
+      with:
+        os: ubuntu-22.04
     - uses: actions/checkout@v3
       with:
         fetch-depth: 1
@@ -414,6 +430,10 @@ jobs:
           - 3306:3306
         options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=10s --health-retries=10
     steps:
+    # workaround for broken clang on ubuntu runner until fixed: https://github.com/actions/runner-images/issues/8659
+    - uses: mjp41/workaround8649@7929373c0fe5caf844d8115adccef39e3b5362e7
+      with:
+        os: ubuntu-22.04
     - uses: actions/checkout@v3
       with:
         fetch-depth: 1
@@ -591,6 +611,10 @@ jobs:
           - 3306:3306
         options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=10s --health-retries=10
     steps:
+    # workaround for broken clang on ubuntu runner until fixed: https://github.com/actions/runner-images/issues/8659
+    - uses: mjp41/workaround8649@7929373c0fe5caf844d8115adccef39e3b5362e7
+      with:
+        os: ubuntu-22.04
     - uses: actions/checkout@v3
       with:
         fetch-depth: 1

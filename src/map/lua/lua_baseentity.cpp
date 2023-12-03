@@ -13887,6 +13887,7 @@ void CLuaBaseEntity::spawnPet(sol::object const& arg0)
 
     if (m_PBaseEntity->objtype == TYPE_PC)
     {
+        auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
         if ((arg0 != sol::lua_nil) && arg0.is<int>())
         {
             uint32 petId = arg0.as<uint32>();
@@ -13894,7 +13895,7 @@ void CLuaBaseEntity::spawnPet(sol::object const& arg0)
             {
                 if (((CCharEntity*)m_PBaseEntity)->PAutomaton)
                 {
-                    petId = PETID_HARLEQUINFRAME + static_cast<CCharEntity*>(m_PBaseEntity)->PAutomaton->getFrame() - 0x20;
+                    petId = static_cast<uint32>(PETID_HARLEQUINFRAME) + static_cast<uint32>(PChar->PAutomaton->getFrame()) - 0x20;
                 }
                 else
                 {

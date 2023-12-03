@@ -148,7 +148,7 @@ std::string lua_to_string_depth(sol::object const& obj, std::size_t depth)
             // clang-format off
             std::string outStr = "\n" + unindent + "{" + (stringVec.empty() ? "" : "\n");
             outStr += std::accumulate(std::begin(stringVec), std::end(stringVec), std::string(),
-            [](std::string& ss, std::string& s)
+            [](std::string const& ss, std::string const& s)
             {
                 return ss.empty() ? s : (ss + ",\n" + s);
             });

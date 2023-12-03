@@ -20,7 +20,7 @@ private:
     std::recursive_mutex mutex;
 
 public:
-    CircularBuffer<T>(std::size_t max_size)
+    CircularBuffer(std::size_t max_size)
     : buffer(std::unique_ptr<T[]>(new T[max_size]))
     , max_size(max_size){};
 

@@ -65,11 +65,10 @@ CPMAddPackage(
     GIT_TAG v1.12.0
 ) # defines: spdlog
 
-# NOTE: Using the 'release-2.0' branch
 CPMAddPackage(
     NAME recastnavigation
     GITHUB_REPOSITORY recastnavigation/recastnavigation
-    GIT_TAG 67c36bda750f36b2b4152db57a23170ed7a0683c
+    GIT_TAG cd898904b72a300011fbb24d578620bafa08ef2c
     OPTIONS
         "RECASTNAVIGATION_DEMO OFF"
         "RECASTNAVIGATION_TESTS OFF"
@@ -117,6 +116,13 @@ CPMAddPackage(
     GITHUB_REPOSITORY martinmoene/jthread-lite
     GIT_TAG 5332bbd46dcba5f028a844795cc0931e9f2ffdf4
 ) # defines: jthread-lite
+
+# TODO: std::expected lands in C++23. Remove this once all compilers for all platforms implement.
+CPMAddPackage(
+    NAME expected-lite
+    GITHUB_REPOSITORY martinmoene/expected-lite
+    GIT_TAG 45a54fac224e5aae5f8e70bb1c2423181ae554da
+) # defines: expected-lite
 
 CPMAddPackage(
     NAME cpp-httplib
@@ -208,6 +214,7 @@ set(EXTERNAL_LIBS
     task_system
     efsw
     jthread-lite
+    expected-lite
     httplib::httplib
     nlohmann_json::nlohmann_json
     pcg-cpp

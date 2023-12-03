@@ -32,6 +32,9 @@
 //     : levels for different things.
 #define SPDLOG_ACTIVE_LEVEL SPDLOG_LEVEL_TRACE
 
+// TODO: Remove this
+#define FMT_CONSTEVAL
+
 #include "spdlog/spdlog.h"
 
 #include "spdlog/fmt/bundled/core.h"
