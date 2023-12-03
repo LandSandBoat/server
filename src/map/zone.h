@@ -612,7 +612,7 @@ public:
     weatherVector_t m_WeatherVector; // The probability of each weather type
 
     virtual void ZoneServer(time_point tick);
-    void         CheckTriggerAreas();
+    virtual void CheckTriggerAreas();
 
     virtual void ForEachChar(std::function<void(CCharEntity*)> const& func);
     virtual void ForEachCharInstance(CBaseEntity* PEntity, std::function<void(CCharEntity*)> const& func);
@@ -659,8 +659,7 @@ private:
 
     std::unordered_map<std::string, uint32> m_LocalVars;
 
-    triggerAreaList_t m_triggerAreaList;
-    zoneLineList_t    m_zoneLineList;
+    zoneLineList_t m_zoneLineList;
 
     void LoadZoneSettings();
     void LoadZoneLines();
@@ -675,6 +674,8 @@ private:
 protected:
     CTaskMgr::CTask* ZoneTimer; // The pointer to the created timer is Zoneserver.necessary for the possibility of stopping it
     CTaskMgr::CTask* ZoneTimerTriggerAreas;
+
+    triggerAreaList_t m_triggerAreaList;
 
     void createZoneTimers();
     void CharZoneIn(CCharEntity* PChar);
