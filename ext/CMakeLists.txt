@@ -117,6 +117,13 @@ CPMAddPackage(
     GIT_TAG 5332bbd46dcba5f028a844795cc0931e9f2ffdf4
 ) # defines: jthread-lite
 
+# TODO: std::expected lands in C++23. Remove this once all compilers for all platforms implement.
+CPMAddPackage(
+    NAME expected-lite
+    GITHUB_REPOSITORY martinmoene/expected-lite
+    GIT_TAG 45a54fac224e5aae5f8e70bb1c2423181ae554da
+) # defines: expected-lite
+
 CPMAddPackage(
     NAME cpp-httplib
     GITHUB_REPOSITORY yhirose/cpp-httplib
@@ -207,6 +214,7 @@ set(EXTERNAL_LIBS
     task_system
     efsw
     jthread-lite
+    expected-lite
     httplib::httplib
     nlohmann_json::nlohmann_json
     pcg-cpp
