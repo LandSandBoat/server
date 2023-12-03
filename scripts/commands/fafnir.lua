@@ -12,9 +12,14 @@ commandObj.cmdprops =
 }
 
 commandObj.onTrigger = function(player)
-    local zone = player:getZone()
+    local zoneOrInstanceObj = player:getZone()
 
-    local mob = zone:insertDynamicEntity({
+    local instance = player:getInstance()
+    if instance then
+        zoneOrInstanceObj = instance
+    end
+
+    local mob = zoneOrInstanceObj:insertDynamicEntity({
         -- NPC or MOB
         objtype = xi.objType.MOB,
 

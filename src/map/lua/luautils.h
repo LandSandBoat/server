@@ -71,6 +71,7 @@ class CPetEntity;
 class CCharEntity;
 class CBattlefield;
 class CItem;
+class CInstance;
 class CMobSkill;
 class CPetSkill;
 class CTriggerArea;
@@ -83,6 +84,7 @@ class CItemFurnishing;
 class CInstance;
 class CWeaponSkill;
 class CZone;
+class CZoneInstance;
 
 class CLuaAbility;
 class CLuaAction;
@@ -352,40 +354,46 @@ namespace luautils
     // Retrive the first itemId that matches a name
     uint16 GetItemIDByName(std::string const& name);
 
+    std::optional<CLuaBaseEntity> GenerateDynamicEntity(CZone* PZone, CInstance* PInstance, sol::table table);
+
     template <typename... Targs>
-    int32 invokeBattlefieldEvent(uint16 battlefieldId, const std::string& eventName, Targs... args)
-    {
-        // Calls the Battlefield event through the interaction object if it can find it
-        sol::table contents = lua["xi"]["battlefield"]["contents"];
-        if (!contents.valid())
-        {
-            return -1;
-        }
-
-        auto battlefield = contents[battlefieldId];
-        if (!battlefield.valid())
-        {
-            return -1;
-        }
-
-        auto content = battlefield.get<sol::table>();
-        auto handler = content[eventName];
-        if (!handler.valid())
-        {
-            return -1;
-        }
-
-        auto result = handler.get<sol::protected_function>()(content, args...);
-        if (!result.valid())
-        {
-            sol::error err = result;
-            ShowError("luautils::%s: %s", eventName, err.what());
-            return -1;
-        }
-
-        return 0;
-    }
+    int32 invokeBattlefieldEvent(uint16 battlefieldId, const std::string& eventName, Targs... args);
 
 }; // namespace luautils
+
+// template impl
+template <typename... Targs>
+int32 luautils::invokeBattlefieldEvent(uint16 battlefieldId, const std::string& eventName, Targs... args)
+{
+    // Calls the Battlefield event through the interaction object if it can find it
+    sol::table contents = lua["xi"]["battlefield"]["contents"];
+    if (!contents.valid())
+    {
+        return -1;
+    }
+
+    auto battlefield = contents[battlefieldId];
+    if (!battlefield.valid())
+    {
+        return -1;
+    }
+
+    auto content = battlefield.get<sol::table>();
+    auto handler = content[eventName];
+    if (!handler.valid())
+    {
+        return -1;
+    }
+
+    auto result = handler.get<sol::protected_function>()(content, args...);
+    if (!result.valid())
+    {
+        sol::error err = result;
+        ShowError("luautils::%s: %s", eventName, err.what());
+        return -1;
+    }
+
+    return 0;
+}
 
 #endif // _LUAUTILS_H -

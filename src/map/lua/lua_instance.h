@@ -76,6 +76,7 @@ public:
     bool completed();
 
     auto insertAlly(uint32 groupid) -> std::optional<CLuaBaseEntity>;
+    auto insertDynamicEntity(sol::table table) -> std::optional<CLuaBaseEntity>;
 
     bool operator==(const CLuaInstance& other) const
     {
