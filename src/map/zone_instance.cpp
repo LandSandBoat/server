@@ -422,6 +422,46 @@ void CZoneInstance::ZoneServer(time_point tick)
     }
 }
 
+void CZoneInstance::CheckTriggerAreas()
+{
+    TracyZoneScoped;
+
+    for (auto& instance : instanceList)
+    {
+        for (auto const& [targid, PEntity] : instance->m_charList)
+        {
+            auto* PChar = static_cast<CCharEntity*>(PEntity);
+
+            // TODO: When we start to use octrees or spatial hashing to split up zones,
+            //     : use them here to make the search domain smaller.
+
+            uint32 triggerAreaID = 0;
+            for (triggerAreaList_t::const_iterator triggerAreaItr = m_triggerAreaList.begin(); triggerAreaItr != m_triggerAreaList.end(); ++triggerAreaItr)
+            {
+                if ((*triggerAreaItr)->isPointInside(PChar->loc.p))
+                {
+                    triggerAreaID = (*triggerAreaItr)->GetTriggerAreaID();
+
+                    if ((*triggerAreaItr)->GetTriggerAreaID() != PChar->m_InsideTriggerAreaID)
+                    {
+                        luautils::OnTriggerAreaEnter(PChar, *triggerAreaItr);
+                    }
+
+                    if (PChar->m_InsideTriggerAreaID == 0)
+                    {
+                        break;
+                    }
+                }
+                else if ((*triggerAreaItr)->GetTriggerAreaID() == PChar->m_InsideTriggerAreaID)
+                {
+                    luautils::OnTriggerAreaLeave(PChar, *triggerAreaItr);
+                }
+            }
+            PChar->m_InsideTriggerAreaID = triggerAreaID;
+        }
+    }
+}
+
 void CZoneInstance::ForEachChar(std::function<void(CCharEntity*)> const& func)
 {
     TracyZoneScoped;

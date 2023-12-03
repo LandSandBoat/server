@@ -1208,6 +1208,7 @@ CZoneEntities* CZone::GetZoneEntities()
 void CZone::CheckTriggerAreas()
 {
     TracyZoneScoped;
+
     for (auto const& [targid, PEntity] : m_zoneEntities->m_charList)
     {
         auto* PChar = static_cast<CCharEntity*>(PEntity);

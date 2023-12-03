@@ -1879,11 +1879,14 @@ namespace luautils
     {
         TracyZoneScoped;
 
-        std::string filename;
+        std::string                 filename;
+        std::optional<CLuaInstance> optInstance = std::nullopt;
         if (PChar->PInstance)
         {
             filename =
                 std::string("./scripts/zones/") + PChar->loc.zone->GetName() + "/instances/" + PChar->PInstance->GetName() + ".lua";
+
+            optInstance = CLuaInstance(PChar->PInstance);
         }
         else
         {
@@ -1903,7 +1906,7 @@ namespace luautils
         if (PChar->PInstance)
         {
             auto instance_name = PChar->PInstance->GetName();
-            onTriggerAreaEnter = lua["xi"]["zones"][name]["instance"][instance_name]["onTriggerAreaEnter"];
+            onTriggerAreaEnter = lua["xi"]["zones"][name]["instances"][instance_name]["onTriggerAreaEnter"];
         }
         else
         {
@@ -1911,7 +1914,7 @@ namespace luautils
         }
 
         auto onTriggerAreaEnterFramework = lua["InteractionGlobal"]["onTriggerAreaEnter"];
-        auto result                      = onTriggerAreaEnterFramework(CLuaBaseEntity(PChar), CLuaTriggerArea(PTriggerArea), onTriggerAreaEnter);
+        auto result                      = onTriggerAreaEnterFramework(CLuaBaseEntity(PChar), CLuaTriggerArea(PTriggerArea), optInstance, onTriggerAreaEnter);
         if (!result.valid())
         {
             sol::error err = result;
@@ -1927,11 +1930,14 @@ namespace luautils
     {
         TracyZoneScoped;
 
-        std::string filename;
+        std::string                 filename;
+        std::optional<CLuaInstance> optInstance = std::nullopt;
         if (PChar->PInstance)
         {
             filename =
                 std::string("scripts/zones/") + PChar->loc.zone->GetName() + "/instances/" + PChar->PInstance->GetName() + ".lua";
+
+            optInstance = CLuaInstance(PChar->PInstance);
         }
         else
         {
@@ -1951,7 +1957,7 @@ namespace luautils
         if (PChar->PInstance && zoneId == PChar->PInstance->GetZone()->GetID())
         {
             auto instance_name = PChar->PInstance->GetName();
-            onTriggerAreaLeave = lua["xi"]["zones"][name]["instance"][instance_name]["onTriggerAreaLeave"];
+            onTriggerAreaLeave = lua["xi"]["zones"][name]["instances"][instance_name]["onTriggerAreaLeave"];
         }
         else
         {
@@ -1959,7 +1965,7 @@ namespace luautils
         }
 
         auto onTriggerAreaLeaveFramework = lua["InteractionGlobal"]["onTriggerAreaLeave"];
-        auto result                      = onTriggerAreaLeaveFramework(CLuaBaseEntity(PChar), CLuaTriggerArea(PTriggerArea), onTriggerAreaLeave);
+        auto result                      = onTriggerAreaLeaveFramework(CLuaBaseEntity(PChar), CLuaTriggerArea(PTriggerArea), optInstance, onTriggerAreaLeave);
         if (!result.valid())
         {
             sol::error err = result;
