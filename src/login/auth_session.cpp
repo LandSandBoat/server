@@ -38,8 +38,14 @@ void auth_session::start()
             }
             else
             {
-                ShowWarning(fmt::format("Error from {}: ({}), {}", ipAddress, ec.value(), ec.message()));
+                auto errStr = fmt::format("Error from {}: (EC: {}), {}", ipAddress, ec.value(), ec.message());
+                ShowWarning(errStr);
                 ShowWarning("Failed to handshake!");
+                if (errStr.find("wrong version number (SSL routines)") != std::string::npos)
+                {
+                    ShowWarning("This is likely due to the client using an outdated/incompatible version of xiloader.");
+                    ShowWarning("Please make sure you're using the latest release: https://github.com/LandSandBoat/xiloader/releases");
+                }
                 socket_.next_layer().close();
             }
         });
