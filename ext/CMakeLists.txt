@@ -60,9 +60,18 @@ if(TRACY_ENABLE)
 endif(TRACY_ENABLE)
 
 CPMAddPackage(
+    NAME fmt
+    GITHUB_REPOSITORY fmtlib/fmt
+    GIT_TAG 10.1.1
+) # defines: fmt::fmt
+
+CPMAddPackage(
     NAME spdlog
     GITHUB_REPOSITORY gabime/spdlog
     GIT_TAG v1.12.0
+    OPTIONS
+        "SPDLOG_ENABLE_PCH ON"
+        "SPDLOG_FMT_EXTERNAL ON"
 ) # defines: spdlog
 
 CPMAddPackage(
@@ -203,6 +212,7 @@ if(asio_ADDED)
 endif()
 
 set(EXTERNAL_LIBS
+    fmt::fmt
     spdlog
     concurrentqueue
     mariadbclient

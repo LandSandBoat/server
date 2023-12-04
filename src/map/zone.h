@@ -345,6 +345,7 @@ enum ZONEID : uint16
     ZONE_GWORA_THRONE_ROOM              = 299,
     MAX_ZONEID                          = 300,
 };
+DECLARE_FORMAT_AS_UNDERLYING(ZONEID);
 
 enum NATION_TYPE : uint8
 {
@@ -354,6 +355,7 @@ enum NATION_TYPE : uint8
     NATION_BEASTMEN = 0x03,
     NATION_NEUTRAL  = 0xFF,
 };
+DECLARE_FORMAT_AS_UNDERLYING(NATION_TYPE);
 
 enum class REGION_TYPE : uint8
 {
@@ -406,6 +408,7 @@ enum class REGION_TYPE : uint8
 
     UNKNOWN = 255
 };
+DECLARE_FORMAT_AS_UNDERLYING(REGION_TYPE);
 
 enum class CONTINENT_TYPE : uint8
 {
@@ -414,6 +417,7 @@ enum class CONTINENT_TYPE : uint8
     THE_SHADOWREIGN_ERA    = 3,
     OTHER_AREAS            = 4
 };
+DECLARE_FORMAT_AS_UNDERLYING(CONTINENT_TYPE);
 
 enum ZONE_TYPE : uint16
 {
@@ -428,6 +432,7 @@ enum ZONE_TYPE : uint16
     DYNAMIS   = 0x0080, // 128
     INSTANCED = 0x0100, // 256
 };
+DECLARE_FORMAT_AS_UNDERLYING(ZONE_TYPE);
 
 enum GLOBAL_MESSAGE_TYPE
 {
@@ -436,6 +441,7 @@ enum GLOBAL_MESSAGE_TYPE
     CHAR_INSHOUT,
     CHAR_INZONE
 };
+DECLARE_FORMAT_AS_UNDERLYING(GLOBAL_MESSAGE_TYPE);
 
 enum class TELEPORT_TYPE : uint8
 {
@@ -453,6 +459,7 @@ enum class TELEPORT_TYPE : uint8
     WAYPOINT        = 11,
     ESCHAN_PORTAL   = 12,
 };
+DECLARE_FORMAT_AS_UNDERLYING(TELEPORT_TYPE);
 
 enum ZONEMISC
 {
@@ -472,6 +479,7 @@ enum ZONEMISC
     MISC_LOS_PLAYER_BLOCK = 0x1000, // Players can't use magic/JAs through walls if this is set
     MISC_LOS_OFF          = 0x2000, // Zone should not have LoS checks
 };
+DECLARE_FORMAT_AS_UNDERLYING(ZONEMISC);
 
 struct zoneMusic_t
 {

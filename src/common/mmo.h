@@ -56,6 +56,7 @@ enum FLAGTYPE : uint32
     FLAG_GM_PRODUCER = 0x07000000,
     FLAG_BAZAAR      = 0x80000000,
 };
+DECLARE_FORMAT_AS_UNDERLYING(FLAGTYPE);
 
 enum NFLAGTYPE : uint32
 {
@@ -71,6 +72,7 @@ enum NFLAGTYPE : uint32
     NFLAG_DISPLAY_HEAD    = 0x08000000,
     NFLAG_RECRUIT         = 0x20000000,
 };
+DECLARE_FORMAT_AS_UNDERLYING(NFLAGTYPE);
 
 enum CHATFILTERTYPE : uint64
 {
@@ -126,6 +128,7 @@ enum CHATFILTERTYPE : uint64
     // NFLAG_SYSTEM_FILTER_H
     // Filter level is 0-3
 };
+DECLARE_FORMAT_AS_UNDERLYING(CHATFILTERTYPE);
 
 enum MSGSERVTYPE : uint8
 {
@@ -162,6 +165,7 @@ enum MSGSERVTYPE : uint8
     MSG_RPC_SEND, // sent by sender -> reciever
     MSG_RPC_RECV, // sent by reciever -> sender
 };
+DECLARE_FORMAT_AS_UNDERLYING(MSGSERVTYPE);
 
 enum REGIONALMSGTYPE : uint8
 {

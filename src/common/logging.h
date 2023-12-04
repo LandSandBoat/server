@@ -35,14 +35,12 @@
 // TODO: Remove this
 #define FMT_CONSTEVAL
 
+#include <fmt/chrono.h>
+#include <fmt/core.h>
+#include <fmt/format.h>
+#include <fmt/printf.h>
+
 #include "spdlog/spdlog.h"
-
-#include "spdlog/fmt/bundled/core.h"
-
-#include "spdlog/fmt/bundled/chrono.h"
-#include "spdlog/fmt/bundled/format.h"
-#include "spdlog/fmt/bundled/printf.h"
-#include "spdlog/fmt/fmt.h"
 
 // Forward declaration
 namespace settings
