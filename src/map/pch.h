@@ -95,13 +95,12 @@
 
 #include <concurrentqueue.h>
 
+#include <fmt/chrono.h>
+#include <fmt/core.h>
+#include <fmt/format.h>
+#include <fmt/printf.h>
+
 #include <spdlog/common.h>
 #include <spdlog/spdlog.h>
-
-#include <spdlog/fmt/bundled/chrono.h>
-#include <spdlog/fmt/bundled/core.h>
-#include <spdlog/fmt/bundled/format.h>
-#include <spdlog/fmt/bundled/printf.h>
-#include <spdlog/fmt/fmt.h>
 
 #endif // #define _PCH_H

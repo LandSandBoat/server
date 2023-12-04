@@ -41,6 +41,7 @@ enum class DEATH_TYPE : uint8
     WS_PHYSICAL = 3,
     WS_MAGICAL  = 4,
 };
+DECLARE_FORMAT_AS_UNDERLYING(DEATH_TYPE);
 
 enum class ECOSYSTEM : uint8
 {
@@ -67,6 +68,7 @@ enum class ECOSYSTEM : uint8
     VERMIN         = 20,
     VORAGEAN       = 21
 };
+DECLARE_FORMAT_AS_UNDERLYING(ECOSYSTEM);
 
 enum JOBTYPE
 {
@@ -95,8 +97,8 @@ enum JOBTYPE
     JOB_RUN = 22,
     JOB_MON = 23, // NOTE: MON is not a full job
 };
-
 #define MAX_JOBTYPE 24
+DECLARE_FORMAT_AS_UNDERLYING(JOBTYPE);
 
 enum SKILLTYPE
 {
@@ -152,8 +154,8 @@ enum SKILLTYPE
     SKILL_RID          = 58,
     SKILL_DIG          = 59
 };
-
 #define MAX_SKILLTYPE 64
+DECLARE_FORMAT_AS_UNDERLYING(SKILLTYPE);
 
 enum SUBSKILLTYPE
 {
@@ -213,6 +215,7 @@ enum SUBSKILLTYPE
     SUBSKILL_SILAS      = 67,
     SUBSKILL_TOLOI      = 68
 };
+DECLARE_FORMAT_AS_UNDERLYING(SUBSKILLTYPE);
 
 enum SLOTTYPE
 {
@@ -235,8 +238,8 @@ enum SLOTTYPE
     SLOT_LINK1  = 0x10,
     SLOT_LINK2  = 0x11,
 };
-
 #define MAX_SLOTTYPE 18
+DECLARE_FORMAT_AS_UNDERLYING(SLOTTYPE);
 
 enum class ATTACK_TYPE
 {
@@ -247,6 +250,7 @@ enum class ATTACK_TYPE
     SPECIAL  = 4,
     BREATH   = 5
 };
+DECLARE_FORMAT_AS_UNDERLYING(ATTACK_TYPE);
 
 enum class DAMAGE_TYPE : uint16
 {
@@ -265,6 +269,7 @@ enum class DAMAGE_TYPE : uint16
     LIGHT     = 12,
     DARK      = 13
 };
+DECLARE_FORMAT_AS_UNDERLYING(DAMAGE_TYPE);
 
 // This enum class is a set of bitfields that modify messages sent to the client.
 // There are helpers (PARRY/EVADE) because it is not inuitive
@@ -287,6 +292,7 @@ enum class REACTION : uint8
     EVADE   = 0x09, // Evasion (MISS + HIT)
     ABILITY = 0x10, // Observed on JA and WS
 };
+DECLARE_FORMAT_AS_UNDERLYING(REACTION);
 
 // These operators are used to combine bits that may not have a discrete value upon combining.
 inline REACTION operator|(REACTION a, REACTION b)
@@ -315,6 +321,7 @@ enum class SPECEFFECT
     RECOIL       = 0x20,
     CRITICAL_HIT = 0x22
 };
+DECLARE_FORMAT_AS_UNDERLYING(SPECEFFECT);
 
 enum class MODIFIER
 {
@@ -324,6 +331,7 @@ enum class MODIFIER
     MAGIC_BURST = 0x04, // Currently known to be used for Swipe/Lunge only
     IMMUNOBREAK = 0x08,
 };
+DECLARE_FORMAT_AS_UNDERLYING(MODIFIER);
 
 enum SUBEFFECT
 {
@@ -401,6 +409,7 @@ enum SUBEFFECT
     SUBEFFECT_WEIGHT,
     SUBEFFECT_AUSPICE
 };
+DECLARE_FORMAT_AS_UNDERLYING(SUBEFFECT);
 
 enum TARGETTYPE
 {
@@ -416,6 +425,7 @@ enum TARGETTYPE
     TARGET_PLAYER_PARTY_ENTRUST    = 0x200,
     TARGET_IGNORE_BATTLEID         = 0x400, // Can hit targets that do not have the same battle ID
 };
+DECLARE_FORMAT_AS_UNDERLYING(TARGETTYPE);
 
 enum SKILLCHAIN_ELEMENT
 {
@@ -440,9 +450,9 @@ enum SKILLCHAIN_ELEMENT
     SC_LIGHT_II    = 15, // Lv4 Light
     SC_DARKNESS_II = 16, // Lv4 Darkness
 };
-
 #define MAX_SKILLCHAIN_LEVEL (4)
 #define MAX_SKILLCHAIN_COUNT (5)
+DECLARE_FORMAT_AS_UNDERLYING(SKILLCHAIN_ELEMENT);
 
 enum IMMUNITY : uint16
 {
@@ -464,6 +474,7 @@ enum IMMUNITY : uint16
     IMMUNITY_TERROR      = 0x4000, // 16384
     IMMUNITY_DISPEL      = 0x8000, // 32768
 };
+DECLARE_FORMAT_AS_UNDERLYING(IMMUNITY);
 
 struct apAction_t
 {

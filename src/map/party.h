@@ -37,6 +37,7 @@ enum PARTYTYPE
     PARTY_PCS,
     PARTY_MOBS,
 };
+DECLARE_FORMAT_AS_UNDERLYING(PARTYTYPE);
 
 enum PARTYFLAG
 {
@@ -47,6 +48,7 @@ enum PARTYFLAG
     PARTY_QM        = 0x0010,
     PARTY_SYNC      = 0x0100
 };
+DECLARE_FORMAT_AS_UNDERLYING(PARTYFLAG);
 
 /************************************************************************
  *                                                                      *

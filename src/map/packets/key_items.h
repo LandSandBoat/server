@@ -38,8 +38,8 @@ enum KEYS_TABLE
     KEYS_TABLE_5,
     KEYS_TABLE_6
 };
-
 #define MAX_KEYS_TABLE 7
+DECLARE_FORMAT_AS_UNDERLYING(KEYS_TABLE);
 
 class CCharEntity;
 
