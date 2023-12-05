@@ -7610,6 +7610,20 @@ void SmallPacket0x102(map_session_data_t* const PSession, CCharEntity* const PCh
                 ShowDebug("No match found. ");
             }
         }
+
+        // Regardless what the set spell action is, force recast on all currently-set blu spells
+        for (uint8 i = 0; i < 20; i++)
+        {
+            if (PChar->m_SetBlueSpells[i] != 0)
+            {
+                auto  spellId = static_cast<SpellID>(PChar->m_SetBlueSpells[i] + 0x200);
+                auto* PSpell  = spell::GetSpell(spellId);
+                if (CBlueSpell* PBlueSpell = dynamic_cast<CBlueSpell*>(PSpell))
+                {
+                    PChar->PRecastContainer->Add(RECAST_MAGIC, static_cast<uint16>(PBlueSpell->getID()), 60);
+                }
+            }
+        }
     }
     else if ((PChar->GetMJob() == JOB_PUP || PChar->GetSJob() == JOB_PUP) && job == JOB_PUP && PChar->PAutomaton != nullptr && PChar->PPet == nullptr)
     {
