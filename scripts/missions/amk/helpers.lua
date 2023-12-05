@@ -58,9 +58,8 @@ end
 -- The rest of the players in alliance get the same outcome as the first
 xi.amk.helpers.cardianOrbDrop = function(mob, player, orb)
     if
-        player:getCurrentMission(xi.mission.log_id.AMK) < xi.mission.id.amk.AN_ERRAND_THE_PROFESSORS_PRICE or
         player == nil or
-        orb == nil
+        player:getCurrentMission(xi.mission.log_id.AMK) < xi.mission.id.amk.AN_ERRAND_THE_PROFESSORS_PRICE
     then
         return
     end
