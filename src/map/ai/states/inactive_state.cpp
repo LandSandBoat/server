@@ -46,7 +46,15 @@ bool CInactiveState::Update(time_point tick)
             return true;
         }
 
-        if (!PBattleEntity->StatusEffectContainer->HasPreventActionEffect(true))
+        bool ignoreCharm = false;
+        if (PBattleEntity->objtype == ENTITYTYPE::TYPE_PC)
+        {
+            // Player AI should ignore charm when considering if they can leave the idle state
+            // This enabled players who are slept before/during charm to re-engage after sleep wears
+            ignoreCharm = true;
+        }
+
+        if (!PBattleEntity->StatusEffectContainer->HasPreventActionEffect(ignoreCharm))
         {
             return true;
         }
