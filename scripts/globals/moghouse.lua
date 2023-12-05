@@ -235,7 +235,15 @@ end
 xi.moghouse.moogleTrigger = function(player, npc)
     if player:isInMogHouse() then
 
-        if xi.events.starlightCelebration.isStarlightEnabled() ~= 0 then
+        local furnitureQuestCS = false
+        if xi.moghouse.isInMogHouseInHomeNation(player) then
+            furnitureQuestCS = xi.furnitureQuests.checkForFurnitureQuest(player)
+        end
+
+        if
+            xi.events.starlightCelebration.isStarlightEnabled() ~= 0 and
+            not furnitureQuestCS
+        then
             if xi.moghouse.isInMogHouseInHomeNation(player) then
                 local treePlaced = player:getCharVar("[StarlightMisc]TreePlaced")
                 local placedDay = player:getCharVar("[StarlightMisc]TreeTimePlaced")
@@ -296,6 +304,11 @@ xi.moghouse.moogleEventFinish = function(player, csid, option)
         end
 
         npcUtil.giveItem(player, 5269)
+    end
+
+    -- Handle furniture quest events
+    if csid == 30003 then
+        xi.furnitureQuests.furnitureQuestsEventFinish(player, csid, option)
     end
 end
 

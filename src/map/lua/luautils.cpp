@@ -5509,7 +5509,7 @@ namespace luautils
             return;
         }
 
-        auto result = onFurniturePlaced(CLuaBaseEntity(PChar));
+        auto result = onFurniturePlaced(CLuaBaseEntity(PChar), CLuaItem(PItem));
         if (!result.valid())
         {
             sol::error err = result;
@@ -5531,7 +5531,7 @@ namespace luautils
             return;
         }
 
-        auto result = onFurnitureRemoved(CLuaBaseEntity(PChar));
+        auto result = onFurnitureRemoved(CLuaBaseEntity(PChar), CLuaItem(PItem));
         if (!result.valid())
         {
             sol::error err = result;
