@@ -14,8 +14,8 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
         -- local foodID = target:getStatusEffect(xi.effect.FOOD):getSubType()
         -- local duration = target:getStatusEffect(xi.effect.FOOD):getDuration()
         -- mob:addStatusEffect(xi.effect.FOOD, 0, 0, duration, foodID) -- Gives Colibri the players food.
-        target:delStatusEffect(xi.effect.FOOD)
-        skill:setMsg(xi.msg.basic.SKILL_ENFEEB_IS)
+        target:delStatusEffectSilent(xi.effect.FOOD)
+        skill:setMsg(xi.msg.basic.SKILL_ERASE)
     else
         skill:setMsg(xi.msg.basic.SKILL_MISS) -- no effect
     end
