@@ -574,6 +574,7 @@ void CLatentEffectContainer::CheckLatentsZone()
             case LATENT::IN_DYNAMIS:
             case LATENT::WEATHER_ELEMENT:
             case LATENT::NATION_CONTROL:
+            case LATENT::NATION_CITIZEN:
             case LATENT::ZONE_HOME_NATION:
                 return ProcessLatentEffect(latentEffect);
                 break;
@@ -1071,6 +1072,11 @@ bool CLatentEffectContainer::ProcessLatentEffect(CLatentEffect& latentEffect)
                                  (hasSignet || hasSanction || hasSigil);
                     break;
             }
+            break;
+        }
+        case LATENT::NATION_CITIZEN:
+        {
+            expression = m_POwner->profile.nation == latentEffect.GetConditionsValue();
             break;
         }
         case LATENT::ZONE_HOME_NATION:
