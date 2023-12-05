@@ -1065,7 +1065,7 @@ INSERT INTO `mob_skills` VALUES (1105,756,'dice_sleep',1,10.0,3000,1500,4,0,0,0,
 INSERT INTO `mob_skills` VALUES (1106,757,'dice_slow',1,10.0,3000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (1107,758,'dice_tp_loss',1,10.0,3000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (1108,759,'dice_dispel',1,10.0,3000,1500,4,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (1109,760,'dice_reset',1,10.0,3000,1500,1,0,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (1109,760,'dice_reset',1,10.0,3000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (1110,761,'seismostomp',1,15.0,3000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (1111,762,'numbing_glare',6,15.0,2000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (1112,763,'seismostomp',1,15.0,3000,1500,4,0,0,0,0,0,0);
