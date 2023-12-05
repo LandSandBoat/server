@@ -3,6 +3,8 @@ set(LUA_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/lua_ability.h
     ${CMAKE_CURRENT_SOURCE_DIR}/lua_action.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/lua_action.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/lua_attack.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/lua_attack.h
     ${CMAKE_CURRENT_SOURCE_DIR}/lua_baseentity.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/lua_baseentity.h
     ${CMAKE_CURRENT_SOURCE_DIR}/lua_battlefield.cpp
