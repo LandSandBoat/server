@@ -11,6 +11,7 @@ xi.items =
     NONE                            = 0,
     PILE_OF_CHOCOBO_BEDDING         = 1,
     DRAWING_DESK                    = 28,
+    CUPBOARD                        = 57,
     CHOCOBO_COMMODE                 = 54,
     KADOMATSU                       = 87,
     RUSTY_BUCKET                    = 90,
