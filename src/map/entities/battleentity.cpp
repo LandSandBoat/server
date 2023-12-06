@@ -2169,6 +2169,8 @@ bool CBattleEntity::OnAttack(CAttackState& state, action_t& action)
                 // Set this attack's critical flag.
                 attack.SetCritical(xirand::GetRandomNumber(100) < battleutils::GetCritHitRate(this, PTarget, !attack.IsFirstSwing()));
 
+                this->PAI->EventHandler.triggerListener("MELEE_SWING_HIT", CLuaBaseEntity(this), CLuaBaseEntity(PTarget), CLuaAttack(&attack));
+
                 actionTarget.reaction = REACTION::HIT;
 
                 // Critical hit.

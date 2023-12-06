@@ -246,6 +246,7 @@ namespace luautils
         // Register Sol Bindings
         CLuaAbility::Register();
         CLuaAction::Register();
+        CLuaAttack::Register();
         CLuaBaseEntity::Register();
         CLuaBattlefield::Register();
         CLuaInstance::Register();
