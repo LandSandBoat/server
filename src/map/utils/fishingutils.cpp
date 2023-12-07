@@ -1061,8 +1061,8 @@ namespace fishingutils
         gear.waist           = (waist == FISHERS_ROPE) ? waist : 0;
         gear.legs            = (legs == FISHERMANS_HOSE || legs == ANGLERS_HOSE) ? legs : 0;
         gear.feet            = (feet == FISHERMANS_BOOTS || feet == ANGLERS_BOOTS) ? feet : 0;
-        gear.ring1           = 0;
-        gear.ring2           = 0;
+        gear.ring1           = (PChar->getEquip(SLOT_RING1) != nullptr) ? PChar->getEquip(SLOT_RING1)->getID() : 0;
+        gear.ring2           = (PChar->getEquip(SLOT_RING2) != nullptr) ? PChar->getEquip(SLOT_RING2)->getID() : 0;
         gear.ranged          = 0;
         gear.ammo            = 0;
 
@@ -2346,7 +2346,21 @@ namespace fishingutils
             if (sub > 0)
             {
                 ItemPoolWeight -= sub;
-                NoCatchWeight += sub;
+                // These are truly weights, so we don't need any particular totals
+                // NoCatchWeight += sub;
+            }
+        }
+
+        // Fishing skill (artisan and above): Reduces chances of fishing up monsters.
+        if (fishingSkill >= 68 && (gear.ring1 == NODDY_RING || gear.ring2 == NODDY_RING) && MobPoolWeight > 0)
+        {
+            uint16 sub = (uint16)std::floor(MobPoolWeight * 0.25f);
+
+            if (sub > 0)
+            {
+                MobPoolWeight -= sub;
+                // These are truly weights, so we don't need any particular totals
+                // NoCatchWeight += sub;
             }
         }
 
