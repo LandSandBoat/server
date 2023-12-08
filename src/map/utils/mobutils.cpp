@@ -87,7 +87,7 @@ namespace mobutils
     }
 
     // Gest base skill rankings for ACC/ATT/EVA/MEVA
-    uint16 GetBase(CMobEntity* PMob, uint8 rank)
+    uint16 GetBaseSkill(CMobEntity* PMob, uint8 rank)
     {
         int8 mlvl = PMob->GetMLevel();
 
@@ -105,25 +105,28 @@ namespace mobutils
                 return battleutils::GetMaxSkill(SKILL_THROWING, JOB_MNK, mlvl); // E Skill (5)
         }
 
-        ShowError("Mobutils::GetBase rank (%d) is out of bounds for mob (%u) ", rank, PMob->id);
+        ShowError("mobutils::GetBaseSkill rank (%d) is out of bounds for mob (%u) ", rank, PMob->id);
         return 0;
     }
 
     uint16 GetMagicEvasion(CMobEntity* PMob)
     {
         uint8 mEvaRank = PMob->evaRank;
-        return GetBase(PMob, mEvaRank);
+        return GetBaseSkill(PMob, mEvaRank);
     }
 
     /************************************************************************
      *                                                                       *
-     *  Base value for defense                       *
+     *  Base value for defense and evasion                                   *
      *                                                                       *
      ************************************************************************/
 
-    uint16 GetDefense(CMobEntity* PMob, uint8 rank)
+    uint16 GetBaseDefEva(CMobEntity* PMob, uint8 rank)
     {
-        // family defense = [floor(defRank) + 8 + vit / 2 + job traits] * family multiplier
+        // See: https://w.atwiki.jp/studiogobli/pages/25.html
+        // Enemy defense = [f(Lv, racial defense rank) + 8 + [VIT/2] + job characteristics] x racial characteristics
+        // Enemy evasion = f(Lv, main job evasion skill rank) + [AGI/2] + job characteristics
+        // The funcion f is below
         uint8 lvl = PMob->GetMLevel();
 
         if (lvl > 50)
@@ -522,12 +525,12 @@ namespace mobutils
             }
         }
 
-        PMob->addModifier(Mod::DEF, GetDefense(PMob, PMob->defRank));
-        PMob->addModifier(Mod::EVA, GetBase(PMob, PMob->evaRank));  // Base Evasion for all mobs
-        PMob->addModifier(Mod::ATT, GetBase(PMob, PMob->attRank));  // Base Attack for all mobs is Rank A+ but pull from DB for specific cases
-        PMob->addModifier(Mod::ACC, GetBase(PMob, PMob->accRank));  // Base Accuracy for all mobs is Rank A+ but pull from DB for specific cases
-        PMob->addModifier(Mod::RATT, GetBase(PMob, PMob->attRank)); // Base Ranged Attack for all mobs is Rank A+ but pull from DB for specific cases
-        PMob->addModifier(Mod::RACC, GetBase(PMob, PMob->accRank)); // Base Ranged Accuracy for all mobs is Rank A+ but pull from DB for specific cases
+        PMob->addModifier(Mod::DEF, GetBaseDefEva(PMob, PMob->defRank)); // Base Defense for all mobs
+        PMob->addModifier(Mod::EVA, GetBaseDefEva(PMob, PMob->evaRank)); // Base Evasion for all mobs
+        PMob->addModifier(Mod::ATT, GetBaseSkill(PMob, PMob->attRank));  // Base Attack for all mobs is Rank A+ but pull from DB for specific cases
+        PMob->addModifier(Mod::ACC, GetBaseSkill(PMob, PMob->accRank));  // Base Accuracy for all mobs is Rank A+ but pull from DB for specific cases
+        PMob->addModifier(Mod::RATT, GetBaseSkill(PMob, PMob->attRank)); // Base Ranged Attack for all mobs is Rank A+ but pull from DB for specific cases
+        PMob->addModifier(Mod::RACC, GetBaseSkill(PMob, PMob->accRank)); // Base Ranged Accuracy for all mobs is Rank A+ but pull from DB for specific cases
 
         // Note: Known Base Parry for all mobs is Rank C
         // MOBMOD_CAN_PARRY uses the mod value as the rank. It is unknown if mobs in current retail or somewhere else have a different parry rank
@@ -537,11 +540,11 @@ namespace mobutils
         // 3) ???
         if (PMob->getMobMod(MOBMOD_CAN_PARRY) > 0)
         {
-            PMob->addModifier(Mod::PARRY, GetBase(PMob, PMob->getMobMod(MOBMOD_CAN_PARRY)));
+            PMob->addModifier(Mod::PARRY, GetBaseSkill(PMob, PMob->getMobMod(MOBMOD_CAN_PARRY)));
         }
         else if (PMob->isInDynamis()) // Mobs in Dyna Can Parry
         {
-            PMob->addModifier(Mod::PARRY, GetBase(PMob, 3)); // Base Parry for all mobs is Rank C
+            PMob->addModifier(Mod::PARRY, GetBaseSkill(PMob, 3)); // Base Parry for all mobs is Rank C
         }
 
         // natural magic evasion

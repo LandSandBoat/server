@@ -746,10 +746,10 @@ namespace petutils
 
         // It appears that Rabbit and Eft have lower stats (acc atk) than their counterparts
         // Require some more data points to see if we should special case those to rank 3 instead of rank 1
-        PMob->setModifier(Mod::DEF, mobutils::GetDefense(PMob, PMob->defRank));
-        PMob->setModifier(Mod::EVA, mobutils::GetBase(PMob, GetJugEvasionRank(PMob)));
-        PMob->setModifier(Mod::ATT, mobutils::GetBase(PMob, PMob->attRank));
-        PMob->setModifier(Mod::ACC, mobutils::GetBase(PMob, PMob->accRank));
+        PMob->setModifier(Mod::DEF, mobutils::GetBaseDefEva(PMob, PMob->defRank));
+        PMob->setModifier(Mod::EVA, mobutils::GetBaseSkill(PMob, GetJugEvasionRank(PMob)));
+        PMob->setModifier(Mod::ATT, mobutils::GetBaseSkill(PMob, PMob->attRank));
+        PMob->setModifier(Mod::ACC, mobutils::GetBaseSkill(PMob, PMob->accRank));
 
         ApplyJugStatCorrections(PMob);
     }
@@ -1207,21 +1207,21 @@ namespace petutils
         static_cast<CItemWeapon*>(PPet->m_Weapons[SLOT_MAIN])->setDamage(weaponDamage);
         static_cast<CItemWeapon*>(PPet->m_Weapons[SLOT_MAIN])->setBaseDelay((uint16)(floor(1000.0f * (PPetData->cmbDelay / 60.0f))));
 
-        PPet->setModifier(Mod::DEF, mobutils::GetDefense(PPet, PPet->defRank));
-        PPet->setModifier(Mod::EVA, mobutils::GetBase(PPet, PPet->evaRank));
-        PPet->setModifier(Mod::ATT, mobutils::GetBase(PPet, PPet->attRank));
-        PPet->setModifier(Mod::ACC, mobutils::GetBase(PPet, PPet->accRank));
+        PPet->setModifier(Mod::DEF, mobutils::GetBaseDefEva(PPet, PPet->defRank));
+        PPet->setModifier(Mod::EVA, mobutils::GetBaseSkill(PPet, PPet->evaRank));
+        PPet->setModifier(Mod::ATT, mobutils::GetBaseSkill(PPet, PPet->attRank));
+        PPet->setModifier(Mod::ACC, mobutils::GetBaseSkill(PPet, PPet->accRank));
 
         // Fenrir has been proven to have an additional 30% ATK
         if (petID == PETID_FENRIR)
         {
-            PPet->addModifier(Mod::ATT, 0.3 * mobutils::GetBase(PPet, PPet->attRank));
+            PPet->addModifier(Mod::ATT, 0.3 * mobutils::GetBaseSkill(PPet, PPet->attRank));
         }
 
         // Diabolos has been proven to have an additional 30% DEF
         if (petID == PETID_DIABOLOS)
         {
-            PPet->addModifier(Mod::DEF, 0.3 * mobutils::GetDefense(PPet, PPet->defRank));
+            PPet->addModifier(Mod::DEF, 0.3 * mobutils::GetBaseDefEva(PPet, PPet->defRank));
         }
 
         // cap all magic skills so they play nice with spell scripts
