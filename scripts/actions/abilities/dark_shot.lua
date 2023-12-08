@@ -19,14 +19,14 @@ abilityObject.onAbilityCheck = function(player, target, ability)
         player:hasItem(xi.item.DARK_CARD, 0) or
         player:hasItem(xi.item.TRUMP_CARD, 0)
     then
-        ability:setRecast(math.max(0, ability:getRecast() - player:getMod(xi.mod.QUICK_DRAW_RECAST)))
         return 0, 0
     else
         return 71, 0
     end
 end
 
-abilityObject.onUseAbility = function(player, target, ability)
+abilityObject.onUseAbility = function(player, target, ability, action)
+    action:setRecast(math.max(0, action:getRecast() - player:getMod(xi.mod.QUICK_DRAW_RECAST)))
     local duration = 60
     local bonusAcc = player:getStat(xi.mod.AGI) / 2 + player:getMerit(xi.merit.QUICK_DRAW_ACCURACY) + player:getMod(xi.mod.QUICK_DRAW_MACC)
     local resist   = applyResistanceAbility(player, target, xi.element.DARK, xi.skill.NONE, bonusAcc)

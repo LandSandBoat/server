@@ -19,7 +19,6 @@ abilityObject.onAbilityCheck = function(player, target, ability)
         player:hasItem(xi.item.EARTH_CARD, 0) or
         player:hasItem(xi.item.TRUMP_CARD, 0)
     then
-        ability:setRecast(math.max(0, ability:getRecast() - player:getMod(xi.mod.QUICK_DRAW_RECAST)))
         return 0, 0
     else
         return 71, 0
@@ -27,6 +26,7 @@ abilityObject.onAbilityCheck = function(player, target, ability)
 end
 
 abilityObject.onUseAbility = function(player, target, ability, action)
+    action:setRecast(math.max(0, action:getRecast() - player:getMod(xi.mod.QUICK_DRAW_RECAST)))
     local params = {}
     params.includemab = true
 
