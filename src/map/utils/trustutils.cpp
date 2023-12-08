@@ -704,13 +704,13 @@ namespace trustutils
             }
         }
 
-        PTrust->addModifier(Mod::DEF, mobutils::GetBase(PTrust, PTrust->defRank));
-        PTrust->addModifier(Mod::EVA, mobutils::GetBase(PTrust, PTrust->evaRank));
-        PTrust->addModifier(Mod::ATT, mobutils::GetBase(PTrust, PTrust->attRank));
-        PTrust->addModifier(Mod::ACC, mobutils::GetBase(PTrust, PTrust->accRank));
+        PTrust->addModifier(Mod::DEF, mobutils::GetBaseSkill(PTrust, PTrust->defRank));
+        PTrust->addModifier(Mod::EVA, mobutils::GetBaseSkill(PTrust, PTrust->evaRank));
+        PTrust->addModifier(Mod::ATT, mobutils::GetBaseSkill(PTrust, PTrust->attRank));
+        PTrust->addModifier(Mod::ACC, mobutils::GetBaseSkill(PTrust, PTrust->accRank));
 
-        PTrust->addModifier(Mod::RATT, mobutils::GetBase(PTrust, PTrust->attRank));
-        PTrust->addModifier(Mod::RACC, mobutils::GetBase(PTrust, PTrust->accRank));
+        PTrust->addModifier(Mod::RATT, mobutils::GetBaseSkill(PTrust, PTrust->attRank));
+        PTrust->addModifier(Mod::RACC, mobutils::GetBaseSkill(PTrust, PTrust->accRank));
 
         // Natural magic evasion
         PTrust->addModifier(Mod::MEVA, mobutils::GetMagicEvasion(PTrust));
