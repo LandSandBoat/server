@@ -36,7 +36,6 @@ local orbKeyItems =
 }
 
 local beginCardianFight = function(player, npc)
-    -- TODO: Increase default number of cardians to 20 as is required. Mob IDs missing
     local numToSpawn = 15
 
     local modsToAdd = {}
@@ -94,7 +93,9 @@ mission.sections =
     -- Go get the Starfruit
     {
         check = function(player, currentMission, missionStatus, vars)
-            return currentMission >= mission.missionId and not player:hasKeyItem(xi.ki.RIPE_STARFRUIT)
+            return currentMission >= mission.missionId and
+            missionStatus == 0 and
+            not player:hasKeyItem(xi.ki.RIPE_STARFRUIT)
         end,
 
         [xi.zone.WINDURST_WALLS] =
@@ -144,6 +145,7 @@ mission.sections =
     {
         check = function(player, currentMission, missionStatus, vars)
             return currentMission >= mission.missionId and
+                missionStatus == 0 and
                 player:hasKeyItem(xi.ki.RIPE_STARFRUIT) and
                 not player:needToZone()
         end,
@@ -164,10 +166,9 @@ mission.sections =
                     if option == 0 then -- Dont Pay
                         player:needToZone(true)
                     elseif option == 1 then -- Pay
-                        if mission:complete(player) then
-                            player:delGil(5000)
-                            player:delKeyItem(xi.ki.RIPE_STARFRUIT)
-                        end
+                        player:delGil(5000)
+                        player:delKeyItem(xi.ki.RIPE_STARFRUIT)
+                        player:setMissionStatus(xi.mission.log_id.AMK, 1)
                     end
                 end,
             },
@@ -179,6 +180,42 @@ mission.sections =
             {
                 onTrigger = function(player, npc)
                     return mission:messageSpecial(horutotoID.text.CANNOT_ENTER_BATTLEFIELD, xi.ki.RIPE_STARFRUIT):setPriority(1000)
+                end,
+            },
+        },
+    },
+
+    -- Watch Shantotto uncurse the moogle and get digging instructions
+    {
+        check = function(player, currentMission, missionStatus, vars)
+            return currentMission == mission.missionId and missionStatus == 1
+        end,
+
+        [xi.zone.WINDURST_WALLS] =
+        {
+            ['Shantotto'] =
+            {
+                onTrigger = function(player, npc)
+                    return mission:progressEvent(509)
+                end,
+            },
+        },
+
+        [xi.zone.UPPER_JEUNO] =
+        {
+            ['Inconspicuous_Door'] =
+            {
+                onTrigger = function(player, npc)
+                    local diggingZone = xi.amk.helpers.getDiggingZone(player)
+                    local diggingZoneCsId = xi.amk.helpers.digSites[diggingZone].eventID
+                    return mission:progressEvent(10182, diggingZoneCsId)
+                end,
+            },
+
+            onEventFinish =
+            {
+                [10182] = function(player, csid, option, npc)
+                    mission:complete(player)
                 end,
             },
         },
