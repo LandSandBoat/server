@@ -21,7 +21,7 @@ end
 
 itemObject.onItemUse = function(target)
     local region = target:getCurrentRegion()
-    target:addStatusEffectEx(xi.effect.TELEPORT, 0, xi.teleport.id.OUTPOST, 0, 1, 0, region)
+    target:addStatusEffectEx(xi.effect.TELEPORT, 0, xi.teleport.id.OUTPOST, 0, 4, 0, region)
 end
 
 return itemObject

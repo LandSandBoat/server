@@ -247,11 +247,7 @@ xi.additionalEffect.attack = function(attacker, defender, baseAttackDamage, item
         end
 
     elseif addType == procType.SELF_BUFF then
-        if addStatus == xi.effect.TELEPORT then -- WARP
-            attacker:addStatusEffectEx(xi.effect.TELEPORT, 0, xi.teleport.id.WARP, 0, 3)
-            msgID    = xi.msg.basic.ADD_EFFECT_WARP
-            msgParam = 0
-        elseif addStatus == xi.effect.BLINK then -- BLINK http://www.ffxiah.com/item/18830/gusterion
+        if addStatus == xi.effect.BLINK then -- BLINK http://www.ffxiah.com/item/18830/gusterion
             -- Does not stack with or replace other shadows
             if
                 attacker:hasStatusEffect(xi.effect.BLINK) or
