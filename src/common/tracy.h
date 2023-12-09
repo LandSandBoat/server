@@ -7,7 +7,7 @@
 #include "cbasetypes.h"
 
 #define TracyFrameMark          FrameMark
-#define TracyZoneScoped         ZoneScoped;
+#define TracyZoneScoped         ZoneScoped
 #define TracyZoneScopedN(n)     ZoneScopedN(n)
 #define TracyZoneNamed(var)     ZoneNamedN(var, #var, true)
 #define TracyZoneText(n, l)     ZoneText(n, l)
@@ -51,8 +51,8 @@ inline std::string Hex16ToString(uint16 hex)
     TracyReportGraphBytes("Lua Memory Usage", static_cast<double>(lua_gc(L, LUA_GCCOUNT, 0)) * 1024.0); \
 
 #else // Empty stubs for regular builds
-#define TracyFrameMark                     ;
-#define TracyZoneScoped                    ;
+#define TracyFrameMark                     std::ignore = 0;
+#define TracyZoneScoped                    std::ignore = 0;
 #define TracyZoneScopedN(n)                std::ignore = n;
 #define TracyZoneNamed(var)                std::ignore = #var;
 #define TracyZoneText(n, l)                std::ignore = n; std::ignore = l;

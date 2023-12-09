@@ -2372,9 +2372,7 @@ void CLuaBaseEntity::leaveGame()
     }
 
     auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
-
-    PChar->status = STATUS_TYPE::SHUTDOWN;
-    charutils::SendToZone(PChar, 1, 0);
+    charutils::ForceLogout(PChar);
 }
 
 /************************************************************************

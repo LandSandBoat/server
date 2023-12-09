@@ -23,6 +23,7 @@
 #define _LOGGING_H
 
 #include "cbasetypes.h"
+#include "tracy.h"
 
 #include <string>
 #include <string_view>
