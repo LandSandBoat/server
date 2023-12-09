@@ -8,7 +8,8 @@ local ID = zones[xi.zone.SEA_SERPENT_GROTTO]
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    if npcUtil.tradeHas(trade, xi.item.MYTHRIL_BEASTCOIN) then
+    -- The coin isn't consumed, so we only need to know if one was in the trade window
+    if trade:getItemQty(xi.item.MYTHRIL_BEASTCOIN) > 0 then
         if player:getCharVar('SSG_MythrilDoor') == 7 then
             npc:openDoor(5) -- Open the door if a mythril beastcoin has been traded after checking the door the required number of times
         end
