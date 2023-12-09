@@ -12,8 +12,8 @@ commandObj.cmdprops =
 }
 
 local function error(player, msg)
-    player:PrintToPlayer(msg)
-    player:PrintToPlayer('!mobhere (mobID) (noDepop)')
+    player:printToPlayer(msg)
+    player:printToPlayer('!mobhere (mobID) (noDepop)')
 end
 
 commandObj.onTrigger = function(player, mobId, noDepop)
@@ -39,7 +39,7 @@ commandObj.onTrigger = function(player, mobId, noDepop)
 
         if not targ:isSpawned() then
             SpawnMob(mobId, instance)
-            player:PrintToPlayer('Mob state changed to: Spawned.')
+            player:printToPlayer('Mob state changed to: Spawned.')
         end
 
         targ:setPos(player:getXPos(), player:getYPos(), player:getZPos(), player:getRotPos())
@@ -64,7 +64,7 @@ commandObj.onTrigger = function(player, mobId, noDepop)
 
         if not targ:isSpawned() then
             SpawnMob(mobId)
-            player:PrintToPlayer('Mob state changed to: Spawned.')
+            player:printToPlayer('Mob state changed to: Spawned.')
         end
 
         if player:getZoneID() == targ:getZoneID() then
@@ -72,10 +72,10 @@ commandObj.onTrigger = function(player, mobId, noDepop)
         else
             if noDepop == nil or noDepop == 0 then
                 DespawnMob(mobId)
-                player:PrintToPlayer('Despawned the mob because of an error.')
+                player:printToPlayer('Despawned the mob because of an error.')
             end
 
-            player:PrintToPlayer('Mob could not be moved to current pos - you are probably in the wrong zone.')
+            player:printToPlayer('Mob could not be moved to current pos - you are probably in the wrong zone.')
         end
     end
 end

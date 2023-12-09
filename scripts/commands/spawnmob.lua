@@ -11,8 +11,8 @@ commandObj.cmdprops =
 }
 
 local function error(player, msg)
-    player:PrintToPlayer(msg)
-    player:PrintToPlayer('!spawnmob <mob ID> (despawntime) (respawntime)')
+    player:printToPlayer(msg)
+    player:printToPlayer('!spawnmob <mob ID> (despawntime) (respawntime)')
 end
 
 commandObj.onTrigger = function(player, mobId, despawntime, respawntime)
@@ -37,7 +37,7 @@ commandObj.onTrigger = function(player, mobId, despawntime, respawntime)
         end
 
         SpawnMob(mobId, instance)
-        player:PrintToPlayer(string.format('Spawned %s %s in %s.', GetMobByID(mobId, instance):getName(), mobId, instance))
+        player:printToPlayer(string.format('Spawned %s %s in %s.', GetMobByID(mobId, instance):getName(), mobId, instance))
     else
         -- validate mobId
         if mobId == nil then
@@ -69,7 +69,7 @@ commandObj.onTrigger = function(player, mobId, despawntime, respawntime)
         end
 
         SpawnMob(targ:getID(), despawntime, respawntime)
-        player:PrintToPlayer(string.format('Spawned %s %s.', targ:getName(), mobId))
+        player:printToPlayer(string.format('Spawned %s %s.', targ:getName(), mobId))
     end
 end
 

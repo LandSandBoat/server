@@ -442,7 +442,7 @@ xi.mob.onAddEffect = function(mob, target, damage, effect, params)
             chance = utils.clamp(chance, 5, 95)
         end
 
-        -- target:PrintToPlayer(string.format('Chance: %i', chance)) -- DEBUG
+        -- target:printToPlayer(string.format('Chance: %i', chance)) -- DEBUG
 
         if math.random(1, 100) <= chance then
 
@@ -487,7 +487,7 @@ xi.mob.onAddEffect = function(mob, target, damage, effect, params)
                     power = dMod + target:getMainLvl() - mob:getMainLvl() + damage / 2
                 end
 
-                -- target:PrintToPlayer(string.format('Initial Power: %f', power)) -- DEBUG
+                -- target:printToPlayer(string.format('Initial Power: %f', power)) -- DEBUG
 
                 power = addBonusesAbility(mob, ae.ele, target, power, ae.bonusAbilityParams)
                 power = power * applyResistanceAddEffect(mob, target, ae.ele, 0)
@@ -497,7 +497,7 @@ xi.mob.onAddEffect = function(mob, target, damage, effect, params)
                     power = finalMagicNonSpellAdjustments(mob, target, ae.ele, power)
                 end
 
-                -- target:PrintToPlayer(string.format('Adjusted Power: %f', power)) -- DEBUG
+                -- target:printToPlayer(string.format('Adjusted Power: %f', power)) -- DEBUG
 
                 local message = ae.msg
                 if power < 0 then

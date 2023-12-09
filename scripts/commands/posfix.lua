@@ -11,8 +11,8 @@ commandObj.cmdprops =
 }
 
 local function error(player, msg)
-    player:PrintToPlayer(msg)
-    player:PrintToPlayer('!posfix <player>')
+    player:printToPlayer(msg)
+    player:printToPlayer('!posfix <player>')
 end
 
 commandObj.onTrigger = function(player, target)
@@ -21,7 +21,7 @@ commandObj.onTrigger = function(player, target)
         error(player, 'You must supply the name of an offline player.')
     else
         player:resetPlayer(target)
-        player:PrintToPlayer(string.format('Fixed %s\'s position.', target))
+        player:printToPlayer(string.format('Fixed %s\'s position.', target))
     end
 end
 

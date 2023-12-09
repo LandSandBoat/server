@@ -13,8 +13,8 @@ commandObj.cmdprops =
 }
 
 local function error(player, msg)
-    player:PrintToPlayer(msg)
-    player:PrintToPlayer('!completemission <logID> <missionID> (player)')
+    player:printToPlayer(msg)
+    player:printToPlayer('!completemission <logID> <missionID> (player)')
 end
 
 commandObj.onTrigger = function(player, logId, missionId, target)
@@ -54,8 +54,8 @@ commandObj.onTrigger = function(player, logId, missionId, target)
 
     -- complete mission
     targ:completeMission(logId, missionId)
-    player:PrintToPlayer(string.format('Completed %s Mission with ID %u for %s', logName, missionId, targ:getName()))
-    player:PrintToPlayer('NOTE! This does NOT clear or update ANY mission variables! ')
+    player:printToPlayer(string.format('Completed %s Mission with ID %u for %s', logName, missionId, targ:getName()))
+    player:printToPlayer('NOTE! This does NOT clear or update ANY mission variables! ')
 end
 
 return commandObj

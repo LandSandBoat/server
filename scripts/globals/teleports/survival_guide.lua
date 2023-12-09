@@ -80,7 +80,7 @@ xi.survivalGuide.onTrigger = function(player)
             player:startEvent(8500, 0, param, player:getGil(), g1, g2, g3, g4, expansions)
         end
     else
-        player:PrintToPlayer('Survival guides are not enabled!')
+        player:printToPlayer('Survival guides are not enabled!')
     end
 end
 

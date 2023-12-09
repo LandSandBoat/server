@@ -12,7 +12,7 @@ commandObj.cmdprops =
 
 commandObj.onTrigger = function(player)
     if xi.settings.main.ENABLE_MONSTROSITY ~= 1 then
-        player:PrintToPlayer('Setting main.ENABLE_MONSTROSITY is not enabled.')
+        player:printToPlayer('Setting main.ENABLE_MONSTROSITY is not enabled.')
         return
     end
 

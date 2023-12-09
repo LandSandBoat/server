@@ -11,8 +11,8 @@ commandObj.cmdprops =
 }
 
 local function error(player, msg)
-    player:PrintToPlayer(msg)
-    player:PrintToPlayer('!exec <Lua string>')
+    player:printToPlayer(msg)
+    player:printToPlayer('!exec <Lua string>')
 end
 
 commandObj.onTrigger = function(player, str)
@@ -33,8 +33,8 @@ commandObj.onTrigger = function(player, str)
     -- Ensure the command compiles / is valid..
     local scriptObj, err0 = loadstring(definePlayer .. defineTarget .. str)
     if scriptObj == nil then
-        player:PrintToPlayer('Failed to load the given string.')
-        player:PrintToPlayer(err0)
+        player:printToPlayer('Failed to load the given string.')
+        player:printToPlayer(err0)
         os = oldOs
         return
     end
@@ -42,7 +42,7 @@ commandObj.onTrigger = function(player, str)
     -- Execute the string..
     local successfullyExecuted, errorMessage = pcall(scriptObj)
     if not successfullyExecuted then
-        player:PrintToPlayer('Error calling: ' .. str .. '\n' .. errorMessage)
+        player:printToPlayer('Error calling: ' .. str .. '\n' .. errorMessage)
     end
 
     -- Restore the os table..

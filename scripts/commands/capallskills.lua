@@ -12,7 +12,7 @@ commandObj.cmdprops =
 
 commandObj.onTrigger = function(player)
     player:capAllSkills()
-    player:PrintToPlayer('All skills capped!')
+    player:printToPlayer('All skills capped!')
 end
 
 return commandObj

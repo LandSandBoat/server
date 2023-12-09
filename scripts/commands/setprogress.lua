@@ -19,9 +19,9 @@ commandObj.onTrigger = function(player, progress)
 
         instance:setProgress(progress)
 
-        player:PrintToPlayer(string.format('Progress changed from %i to %i', startProgress, progress))
+        player:printToPlayer(string.format('Progress changed from %i to %i', startProgress, progress))
     else
-        player:PrintToPlayer('Must be in an Instanced zone')
+        player:printToPlayer('Must be in an Instanced zone')
     end
 end
 

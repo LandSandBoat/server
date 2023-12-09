@@ -11,8 +11,8 @@ commandObj.cmdprops =
 }
 
 local function error(player, msg)
-    player:PrintToPlayer(msg)
-    player:PrintToPlayer('!raise (power) (player)')
+    player:printToPlayer(msg)
+    player:printToPlayer('!raise (power) (player)')
 end
 
 commandObj.onTrigger = function(player, arg1, arg2)
@@ -54,10 +54,10 @@ commandObj.onTrigger = function(player, arg1, arg2)
     if targ:isDead() then
         targ:sendRaise(power)
         if targ:getID() ~= player:getID() then
-            player:PrintToPlayer(string.format('Raise %i sent to %s.', power, targ:getName()))
+            player:printToPlayer(string.format('Raise %i sent to %s.', power, targ:getName()))
         end
     else
-        player:PrintToPlayer(string.format('%s is not dead.', targ:getName()))
+        player:printToPlayer(string.format('%s is not dead.', targ:getName()))
     end
 end
 

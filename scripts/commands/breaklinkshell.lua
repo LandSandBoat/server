@@ -11,8 +11,8 @@ commandObj.cmdprops =
 }
 
 local function error(player, msg)
-    player:PrintToPlayer(msg)
-    player:PrintToPlayer('!breaklinkshell <linkshell name>')
+    player:printToPlayer(msg)
+    player:printToPlayer('!breaklinkshell <linkshell name>')
 end
 
 commandObj.onTrigger = function(player, target)
@@ -23,7 +23,7 @@ commandObj.onTrigger = function(player, target)
     end
 
     if player:breakLinkshell(target) then
-        player:PrintToPlayer('Linkshell named \''..target..'\' has been broken!')
+        player:printToPlayer('Linkshell named \''..target..'\' has been broken!')
     else
         error(player, string.format('Linkshell named \'%s\' not found!', target))
     end

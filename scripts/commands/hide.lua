@@ -15,7 +15,7 @@ commandObj.onTrigger = function(player, cmd)
     local isHidden = player:getCharVar('GMHidden')
     if cmd ~= nil then
         if cmd == 'status' then
-            player:PrintToPlayer(string.format('Current hide status: %s', tostring(isHidden)))
+            player:printToPlayer(string.format('Current hide status: %s', tostring(isHidden)))
             return
         end
     end
@@ -31,11 +31,11 @@ commandObj.onTrigger = function(player, cmd)
     if isHidden == 1 then
         player:setCharVar('GMHidden', 1)
         player:setGMHidden(true)
-        player:PrintToPlayer('You are now GM hidden from other players.')
+        player:printToPlayer('You are now GM hidden from other players.')
     else
         player:setCharVar('GMHidden', 0)
         player:setGMHidden(false)
-        player:PrintToPlayer('You are no longer GM hidden from other players.')
+        player:printToPlayer('You are no longer GM hidden from other players.')
     end
 end
 

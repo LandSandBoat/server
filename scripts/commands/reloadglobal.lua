@@ -23,13 +23,13 @@ commandObj.onTrigger = function(player, globalLua, other)
         local pathString = table.concat({ 'scripts/globals/', globalLua })
         package.loaded[pathString] = nil
         require(pathString)
-        player:PrintToPlayer(string.format('Lua file \'%s\' has been reloaded.', pathString))
+        player:printToPlayer(string.format('Lua file \'%s\' has been reloaded.', pathString))
     elseif other == 'I_am_sure' then
         package.loaded[globalLua] = nil
         require(globalLua)
-        player:PrintToPlayer(string.format('Lua file \'%s\' has been reloaded.', globalLua))
+        player:printToPlayer(string.format('Lua file \'%s\' has been reloaded.', globalLua))
     else
-        player:PrintToPlayer('Must Specify a global lua file.')
+        player:printToPlayer('Must Specify a global lua file.')
     end
 end
 

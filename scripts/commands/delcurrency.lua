@@ -11,8 +11,8 @@ commandObj.cmdprops =
 }
 
 local function error(player, msg)
-    player:PrintToPlayer(msg)
-    player:PrintToPlayer('!delcurrency <currency type> <amount> (player)')
+    player:printToPlayer(msg)
+    player:printToPlayer('!delcurrency <currency type> <amount> (player)')
 end
 
 commandObj.onTrigger = function(player, currency, amount, target)
@@ -49,7 +49,7 @@ commandObj.onTrigger = function(player, currency, amount, target)
     -- delete currency
     targ:delCurrency(currency, amount)
     local newAmount = targ:getCurrency(currency)
-    player:PrintToPlayer(string.format('%i %s was taken from %s, for a total of %i.', amount, currency, targ:getName(), newAmount))
+    player:printToPlayer(string.format('%i %s was taken from %s, for a total of %i.', amount, currency, targ:getName(), newAmount))
 end
 
 return commandObj

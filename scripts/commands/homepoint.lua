@@ -11,8 +11,8 @@ commandObj.cmdprops =
 }
 
 local function error(player, msg)
-    player:PrintToPlayer(msg)
-    player:PrintToPlayer('!homepoint (player)')
+    player:printToPlayer(msg)
+    player:printToPlayer('!homepoint (player)')
 end
 
 commandObj.onTrigger = function(player, target)
@@ -31,7 +31,7 @@ commandObj.onTrigger = function(player, target)
     -- homepoint target
     targ:warp()
     if targ:getID() ~= player:getID() then
-        player:PrintToPlayer(string.format('Sent %s to their homepoint.', targ:getName()))
+        player:printToPlayer(string.format('Sent %s to their homepoint.', targ:getName()))
     end
 end
 

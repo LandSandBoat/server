@@ -13,8 +13,8 @@ commandObj.cmdprops =
 }
 
 local function error(player, msg)
-    player:PrintToPlayer(msg)
-    player:PrintToPlayer('!checkmissionstatus (player) (log ID) (index)')
+    player:printToPlayer(msg)
+    player:printToPlayer('!checkmissionstatus (player) (log ID) (index)')
 end
 
 commandObj.onTrigger = function(player, target, logId, statusIndex)
@@ -53,9 +53,9 @@ commandObj.onTrigger = function(player, target, logId, statusIndex)
     -- report mission
     local currentMissionStatus = targ:getMissionStatus(logId, statusIndex)
     if statusIndex then
-        player:PrintToPlayer(string.format('missionStatus for %s (%s index %s): %s', targ:getName(), logName, statusIndex, currentMissionStatus))
+        player:printToPlayer(string.format('missionStatus for %s (%s index %s): %s', targ:getName(), logName, statusIndex, currentMissionStatus))
     else
-        player:PrintToPlayer(string.format('missionStatus for %s (%s): %s', targ:getName(), logName, currentMissionStatus))
+        player:printToPlayer(string.format('missionStatus for %s (%s): %s', targ:getName(), logName, currentMissionStatus))
     end
 end
 

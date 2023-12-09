@@ -11,8 +11,8 @@ commandObj.cmdprops =
 }
 
 local function error(player, msg)
-    player:PrintToPlayer(msg)
-    player:PrintToPlayer('!hastitle <title ID> (player)')
+    player:printToPlayer(msg)
+    player:printToPlayer('!hastitle <title ID> (player)')
 end
 
 commandObj.onTrigger = function(player, titleId, target)
@@ -41,9 +41,9 @@ commandObj.onTrigger = function(player, titleId, target)
     end
 
     if targ:hasTitle(titleId) then
-        player:PrintToPlayer(string.format('%s has title %s.', targ:getName(), titleId))
+        player:printToPlayer(string.format('%s has title %s.', targ:getName(), titleId))
     else
-        player:PrintToPlayer(string.format('%s does not have title %s.', targ:getName(), titleId))
+        player:printToPlayer(string.format('%s does not have title %s.', targ:getName(), titleId))
     end
 end
 

@@ -13,8 +13,8 @@ commandObj.cmdprops =
 }
 
 local function error(player, msg)
-    player:PrintToPlayer(msg)
-    player:PrintToPlayer('!delmission <logID> <missionID> (player)')
+    player:printToPlayer(msg)
+    player:printToPlayer('!delmission <logID> <missionID> (player)')
 end
 
 commandObj.onTrigger = function(player, logId, missionId, target)
@@ -54,8 +54,8 @@ commandObj.onTrigger = function(player, logId, missionId, target)
 
     -- delete mission
     targ:delMission(logId, missionId)
-    player:PrintToPlayer(string.format('Deleted %s mission %i from %s.', logName, missionId, targ:getName()))
-    player:PrintToPlayer('NOTE! This does NOT clear or update ANY mission variables! ')
+    player:printToPlayer(string.format('Deleted %s mission %i from %s.', logName, missionId, targ:getName()))
+    player:printToPlayer('NOTE! This does NOT clear or update ANY mission variables! ')
 end
 
 return commandObj

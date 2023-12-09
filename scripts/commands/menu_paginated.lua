@@ -41,7 +41,7 @@ page1 =
     {
         'Option 1',
         function(playerArg)
-            playerArg:PrintToPlayer('Option 1 Selected', xi.msg.channel.NS_SAY)
+            playerArg:printToPlayer('Option 1 Selected', xi.msg.channel.NS_SAY)
             playerArg:independentAnimation(playerArg, 251, 4) -- Hearts
         end,
     },
@@ -59,7 +59,7 @@ page2 =
     {
         'Option 2',
         function(playerArg)
-            playerArg:PrintToPlayer('Option 2 Selected', xi.msg.channel.NS_SAY)
+            playerArg:printToPlayer('Option 2 Selected', xi.msg.channel.NS_SAY)
             playerArg:independentAnimation(playerArg, 252, 4) -- Music Notes
         end,
     },

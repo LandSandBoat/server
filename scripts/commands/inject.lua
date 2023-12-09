@@ -11,8 +11,8 @@ commandObj.cmdprops =
 }
 
 local function error(player, msg)
-    player:PrintToPlayer(msg)
-    player:PrintToPlayer('!inject <packet>')
+    player:printToPlayer(msg)
+    player:printToPlayer('!inject <packet>')
 end
 
 commandObj.onTrigger = function(player, packet)

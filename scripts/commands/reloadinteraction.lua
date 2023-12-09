@@ -23,7 +23,7 @@ commandObj.onTrigger = function(player, shouldReloadData)
 
     require('scripts/globals/interaction/interaction_global')
     InteractionGlobal.reload(shouldReloadData)
-    player:PrintToPlayer('Interaction framework was reloaded')
+    player:printToPlayer('Interaction framework was reloaded')
 end
 
 return commandObj

@@ -11,8 +11,8 @@ commandObj.cmdprops =
 }
 
 local function error(player, msg)
-    player:PrintToPlayer(msg)
-    player:PrintToPlayer('!animatenpc (npcID) <animationID>')
+    player:printToPlayer(msg)
+    player:printToPlayer('!animatenpc (npcID) <animationID>')
 end
 
 commandObj.onTrigger = function(player, arg1, arg2)
@@ -52,7 +52,7 @@ commandObj.onTrigger = function(player, arg1, arg2)
 
     local oldAnimation = targ:getAnimation()
     targ:setAnimation(animationId)
-    player:PrintToPlayer(string.format('NPC ID: %i - %s | Old animation: %i | New animation: %i\n', targ:getID(), targ:getName(), oldAnimation, animationId))
+    player:printToPlayer(string.format('NPC ID: %i - %s | Old animation: %i | New animation: %i\n', targ:getID(), targ:getName(), oldAnimation, animationId))
 end
 
 return commandObj

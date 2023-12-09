@@ -13,8 +13,8 @@ commandObj.cmdprops =
 }
 
 local function error(player, msg)
-    player:PrintToPlayer(msg)
-    player:PrintToPlayer('!checkquest <logID> <questID> (player)')
+    player:printToPlayer(msg)
+    player:printToPlayer('!checkquest <logID> <questID> (player)')
 end
 
 local questStatusString =
@@ -66,7 +66,7 @@ commandObj.onTrigger = function(player, logId, questId, target)
     local status = targ:getQuestStatus(logId, questId)
 
     -- show quest status
-    player:PrintToPlayer(string.format('%s\'s status for %s quest ID %i is: %s', targ:getName(), logName, questId, questStatusString[status]))
+    player:printToPlayer(string.format('%s\'s status for %s quest ID %i is: %s', targ:getName(), logName, questId, questStatusString[status]))
 end
 
 return commandObj

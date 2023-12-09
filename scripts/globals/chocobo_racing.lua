@@ -20,7 +20,7 @@ local debug = function(player, ...)
     if xi.settings.main.DEBUG_CHOCOBO_RACING then
         local t = { ... }
         print(unpack(t))
-        player:PrintToPlayer(table.concat(t, ' '), xi.msg.channel.SYSTEM_3, '')
+        player:printToPlayer(table.concat(t, ' '), xi.msg.channel.SYSTEM_3, '')
     end
 end
 

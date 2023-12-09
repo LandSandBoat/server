@@ -11,8 +11,8 @@ commandObj.cmdprops =
 }
 
 local function error(player, msg)
-    player:PrintToPlayer(msg)
-    player:PrintToPlayer('!wallhack (player)')
+    player:printToPlayer(msg)
+    player:printToPlayer('!wallhack (player)')
 end
 
 commandObj.onTrigger = function(player, target)
@@ -31,10 +31,10 @@ commandObj.onTrigger = function(player, target)
     -- toggle wallhack for target
     if targ:checkNameFlags(0x00000200) then
         targ:setFlag(0x00000200)
-        player:PrintToPlayer(string.format('Toggled %s\'s wallhack flag OFF.', targ:getName()))
+        player:printToPlayer(string.format('Toggled %s\'s wallhack flag OFF.', targ:getName()))
     else
         targ:setFlag(0x00000200)
-        player:PrintToPlayer(string.format('Toggled %s\'s wallhack flag ON.', targ:getName()))
+        player:printToPlayer(string.format('Toggled %s\'s wallhack flag ON.', targ:getName()))
     end
 end
 

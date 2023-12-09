@@ -11,8 +11,8 @@ commandObj.cmdprops =
 }
 
 local function error(player, msg)
-    player:PrintToPlayer(msg)
-    player:PrintToPlayer('!givels <linkshell name> (target)')
+    player:printToPlayer(msg)
+    player:printToPlayer('!givels <linkshell name> (target)')
 end
 
 commandObj.onTrigger = function(player, lsname, target)
@@ -34,7 +34,7 @@ commandObj.onTrigger = function(player, lsname, target)
     end
 
     if targ:addLinkpearl(lsname, false) then
-        player:PrintToPlayer('Linkpearl created for \''..lsname..'\'!')
+        player:printToPlayer('Linkpearl created for \''..lsname..'\'!')
     else
         error(player, string.format('Unable to create linkpearl for \'%s\'!', lsname))
     end

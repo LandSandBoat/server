@@ -11,8 +11,8 @@ commandObj.cmdprops =
 }
 
 local function error(player, msg)
-    player:PrintToPlayer(msg)
-    player:PrintToPlayer('!setplayervar <player> <variable> <value>')
+    player:printToPlayer(msg)
+    player:printToPlayer('!setplayervar <player> <variable> <value>')
 end
 
 commandObj.onTrigger = function(player, target, variable, value)
@@ -42,7 +42,7 @@ commandObj.onTrigger = function(player, target, variable, value)
     end
 
     targ:setCharVar(variable, value)
-    player:PrintToPlayer(string.format('Set %s\'s variable \'%s\' to %i.', targ:getName(), variable, value))
+    player:printToPlayer(string.format('Set %s\'s variable \'%s\' to %i.', targ:getName(), variable, value))
 end
 
 return commandObj

@@ -11,8 +11,8 @@ commandObj.cmdprops =
 }
 
 local function error(player, msg)
-    player:PrintToPlayer(msg)
-    player:PrintToPlayer('!goto <player> (forceZone)')
+    player:printToPlayer(msg)
+    player:printToPlayer('!goto <player> (forceZone)')
 end
 
 commandObj.onTrigger = function(player, target, forceZone)

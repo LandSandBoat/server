@@ -11,8 +11,8 @@ commandObj.cmdprops =
 }
 
 local function error(player, msg)
-    player:PrintToPlayer(msg)
-    player:PrintToPlayer('!capskill <skillID>')
+    player:printToPlayer(msg)
+    player:printToPlayer('!capskill <skillID>')
 end
 
 commandObj.onTrigger = function(player, skillId)
@@ -30,7 +30,7 @@ commandObj.onTrigger = function(player, skillId)
 
     -- cap skill
     player:capSkill(skillId)
-    player:PrintToPlayer(string.format('Capped skillID %i.', skillId))
+    player:printToPlayer(string.format('Capped skillID %i.', skillId))
 end
 
 return commandObj

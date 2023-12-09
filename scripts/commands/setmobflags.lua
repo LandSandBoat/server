@@ -12,8 +12,8 @@ commandObj.cmdprops =
 }
 
 local function error(player, msg)
-    player:PrintToPlayer(msg)
-    player:PrintToPlayer('!setmobflags <flags> (mob ID)')
+    player:printToPlayer(msg)
+    player:printToPlayer('!setmobflags <flags> (mob ID)')
 end
 
 commandObj.onTrigger = function(player, flags, target)
@@ -44,7 +44,7 @@ commandObj.onTrigger = function(player, flags, target)
     -- set flags
     player:setMobFlags(flags, targ:getID())
     local hex = '0x' .. string.format('%08x', flags)
-    player:PrintToPlayer(string.format('Set %s %i flags to %s (%i).', targ:getName(), targ:getID(), hex, flags))
+    player:printToPlayer(string.format('Set %s %i flags to %s (%i).', targ:getName(), targ:getID(), hex, flags))
 end
 
 return commandObj

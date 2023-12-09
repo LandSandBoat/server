@@ -11,8 +11,8 @@ commandObj.cmdprops =
 }
 
 local function error(player, msg)
-    player:PrintToPlayer(msg)
-    player:PrintToPlayer('!addeffect (player) <effect> (power) (duration) (subid) (subPower)')
+    player:printToPlayer(msg)
+    player:printToPlayer('!addeffect (player) <effect> (power) (duration) (subid) (subPower)')
 end
 
 commandObj.onTrigger = function(player, arg1, arg2, arg3, arg4, arg5, arg6)

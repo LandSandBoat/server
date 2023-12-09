@@ -11,9 +11,9 @@ commandObj.cmdprops =
 }
 
 local function error(player, msg)
-    player:PrintToPlayer(msg)
-    player:PrintToPlayer('!setmentor <mode> (player)')
-    player:PrintToPlayer('mode: 0 = Not a mentor, 1 = Unlocked but inactive.')
+    player:printToPlayer(msg)
+    player:printToPlayer('!setmentor <mode> (player)')
+    player:printToPlayer('mode: 0 = Not a mentor, 1 = Unlocked but inactive.')
 end
 
 commandObj.onTrigger = function(player, mentorMode, target)

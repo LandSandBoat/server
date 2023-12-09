@@ -11,8 +11,8 @@ commandObj.cmdprops =
 }
 
 local function error(player, msg)
-    player:PrintToPlayer(msg)
-    player:PrintToPlayer('!setplayerlevel (player) <level>')
+    player:printToPlayer(msg)
+    player:printToPlayer('!setplayerlevel (player) <level>')
 end
 
 commandObj.onTrigger = function(player, arg1, arg2)
@@ -42,7 +42,7 @@ commandObj.onTrigger = function(player, arg1, arg2)
     -- set level
     targ:setLevel(level)
     if targ:getID() ~= player:getID() then
-        player:PrintToPlayer(string.format('Set %s\'s level to %i.', targ:getName(), level))
+        player:printToPlayer(string.format('Set %s\'s level to %i.', targ:getName(), level))
     end
 end
 

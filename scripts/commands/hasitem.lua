@@ -11,8 +11,8 @@ commandObj.cmdprops =
 }
 
 local function error(player, msg)
-    player:PrintToPlayer(msg)
-    player:PrintToPlayer('!hasitem <itemID> (player)')
+    player:printToPlayer(msg)
+    player:printToPlayer('!hasitem <itemID> (player)')
 end
 
 commandObj.onTrigger = function(player, itemId, target)
@@ -42,9 +42,9 @@ commandObj.onTrigger = function(player, itemId, target)
 
     -- report hasItem
     if targ:hasItem(itemId) then
-        player:PrintToPlayer(string.format('%s has item %i.', targ:getName(), itemId))
+        player:printToPlayer(string.format('%s has item %i.', targ:getName(), itemId))
     else
-        player:PrintToPlayer(string.format('%s does not have item %i.', targ:getName(), itemId))
+        player:printToPlayer(string.format('%s does not have item %i.', targ:getName(), itemId))
     end
 end
 

@@ -12,14 +12,14 @@ commandObj.cmdprops =
 
 commandObj.onTrigger = function(player, target)
     if target == nil then
-        player:PrintToPlayer('You must enter a valid player name.')
+        player:printToPlayer('You must enter a valid player name.')
         return
     end
 
     -- Validate the target..
     local targ = GetPlayerByName(target)
     if targ == nil then
-        player:PrintToPlayer(string.format('Invalid player \'%s\' given.', target))
+        player:printToPlayer(string.format('Invalid player \'%s\' given.', target))
         return
     end
 

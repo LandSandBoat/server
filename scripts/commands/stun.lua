@@ -17,12 +17,12 @@ commandObj.onTrigger = function(player)
         targ:delStatusEffect(xi.effect.STUN)
         if not stun or stun:getPower() ~= 69 then -- it's toggleable
             targ:addStatusEffect(xi.effect.STUN, 69, 0, 3600)
-            player:PrintToPlayer('Gave target super Stun.')
+            player:printToPlayer('Gave target super Stun.')
         else
-            player:PrintToPlayer('Removed target mob\'s super Stun.')
+            player:printToPlayer('Removed target mob\'s super Stun.')
         end
     else
-        player:PrintToPlayer('Must select a non-NPC target using in game cursor first.')
+        player:printToPlayer('Must select a non-NPC target using in game cursor first.')
     end
 end
 

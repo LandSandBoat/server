@@ -11,8 +11,8 @@ commandObj.cmdprops =
 }
 
 local function error(player, msg)
-    player:PrintToPlayer(msg)
-    player:PrintToPlayer('!addallmaps (player)')
+    player:printToPlayer(msg)
+    player:printToPlayer('!addallmaps (player)')
 end
 
 commandObj.onTrigger = function(player, target)
@@ -45,7 +45,7 @@ commandObj.onTrigger = function(player, target)
         targ:addKeyItem(v)
     end
 
-    player:PrintToPlayer(string.format('%s now has all maps.', targ:getName()))
+    player:printToPlayer(string.format('%s now has all maps.', targ:getName()))
 end
 
 return commandObj

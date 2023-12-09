@@ -11,8 +11,8 @@ commandObj.cmdprops =
 }
 
 local function error(player, msg)
-    player:PrintToPlayer(msg)
-    player:PrintToPlayer('!getmod <modID>')
+    player:printToPlayer(msg)
+    player:printToPlayer('!getmod <modID>')
 end
 
 commandObj.onTrigger = function(player, id)
@@ -50,7 +50,7 @@ commandObj.onTrigger = function(player, id)
         return
     end
 
-    player:PrintToPlayer(string.format('%s\'s Mod %i (%s) is %i', effectTarget:getName(), modId, modName, effectTarget:getMod(modId)))
+    player:printToPlayer(string.format('%s\'s Mod %i (%s) is %i', effectTarget:getName(), modId, modName, effectTarget:getMod(modId)))
 end
 
 return commandObj

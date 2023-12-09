@@ -11,8 +11,8 @@ commandObj.cmdprops =
 }
 
 local function error(player, msg)
-    player:PrintToPlayer(msg)
-    player:PrintToPlayer('!setskill <skill name or ID> <skill level> (player)')
+    player:printToPlayer(msg)
+    player:printToPlayer('!setskill <skill name or ID> <skill level> (player)')
 end
 
 commandObj.onTrigger = function(player, skillName, skillLV, target)
@@ -55,7 +55,7 @@ commandObj.onTrigger = function(player, skillName, skillLV, target)
     else
         targ = GetPlayerByName(target)
         if targ == nil then
-            player:PrintToPlayer(string.format('Player named "%s" not found!', target))
+            player:printToPlayer(string.format('Player named "%s" not found!', target))
             return
         end
     end
@@ -64,7 +64,7 @@ commandObj.onTrigger = function(player, skillName, skillLV, target)
     targ:messageBasic(xi.msg.basic.SKILL_REACHES_LEVEL, skillID, skillLV)
 
     if targ ~= player then
-        player:PrintToPlayer(string.format('%s\'s new skillID \'%s\' Skill: %s', targ:getName(), skillName, (targ:getCharSkillLevel(skillID) / 10)..'.0'))
+        player:printToPlayer(string.format('%s\'s new skillID \'%s\' Skill: %s', targ:getName(), skillName, (targ:getCharSkillLevel(skillID) / 10)..'.0'))
     end
 end
 

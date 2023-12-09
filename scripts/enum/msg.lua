@@ -15,7 +15,7 @@ xi.msg.channel =
     TELL           = 3,
     PARTY          = 4,
     LINKSHELL      = 5,
-    SYSTEM_1       = 6, -- Standard "PrintToPlayer" default if no type specified
+    SYSTEM_1       = 6, -- Standard "printToPlayer" default if no type specified
     SYSTEM_2       = 7, -- Login / world announcement messages
     EMOTION        = 8,
     -- 9 / 10 / 11 = Does not work / nothing
@@ -45,7 +45,7 @@ xi.msg.channel =
     NA_ASSIST      = 35,
 }
 
--- used by PrintToArea
+-- used by player:printToArea
 xi.msg.area =
 {
     SYSTEM      = 0, -- Server wide like the purple stuff :)

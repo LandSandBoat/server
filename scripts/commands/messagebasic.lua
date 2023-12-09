@@ -11,8 +11,8 @@ commandObj.cmdprops =
 }
 
 local function error(player, msg)
-    player:PrintToPlayer(msg)
-    player:PrintToPlayer('!messagebasic <message ID> (param1) (param2)')
+    player:printToPlayer(msg)
+    player:printToPlayer('!messagebasic <message ID> (param1) (param2)')
 end
 
 commandObj.onTrigger = function(player, msgId, param1, param2)

@@ -1098,7 +1098,7 @@ xi.regime.bookOnTrigger = function(player, regimeType)
 
         player:startEvent(info.event, 0, arg2, cipher, arg4, 0, 0, player:getCurrency('valor_point'), player:getCharVar('[regime]id'))
     else
-        player:PrintToPlayer('Disabled.')
+        player:printToPlayer('Disabled.')
     end
 end
 

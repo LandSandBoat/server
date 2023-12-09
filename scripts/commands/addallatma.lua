@@ -33,8 +33,8 @@ local keyIds =
 }
 
 local function error(player, msg)
-    player:PrintToPlayer(msg)
-    player:PrintToPlayer('!addallatma (player)')
+    player:printToPlayer(msg)
+    player:printToPlayer('!addallatma (player)')
 end
 
 commandObj.onTrigger = function(player, target)
@@ -55,7 +55,7 @@ commandObj.onTrigger = function(player, target)
         targ:addKeyItem(v)
     end
 
-    player:PrintToPlayer(string.format('%s now has all Abyssea Atma.', targ:getName()))
+    player:printToPlayer(string.format('%s now has all Abyssea Atma.', targ:getName()))
 end
 
 return commandObj

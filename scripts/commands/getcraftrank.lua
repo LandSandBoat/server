@@ -11,8 +11,8 @@ commandObj.cmdprops =
 }
 
 local function error(player, msg)
-    player:PrintToPlayer(msg)
-    player:PrintToPlayer('!getcraftRank <craft skill or ID> (player)')
+    player:printToPlayer(msg)
+    player:printToPlayer('!getcraftRank <craft skill or ID> (player)')
 end
 
 commandObj.onTrigger = function(player, craftName, target)
@@ -43,12 +43,12 @@ commandObj.onTrigger = function(player, craftName, target)
     else
         targ = GetPlayerByName(target)
         if targ == nil then
-            player:PrintToPlayer(string.format('Player named "%s" not found!', target))
+            player:printToPlayer(string.format('Player named "%s" not found!', target))
             return
         end
     end
 
-    player:PrintToPlayer(string.format('%s\'s current skillID \'%s\' rank: %u', targ:getName(), craftName, targ:getSkillRank(skillID)))
+    player:printToPlayer(string.format('%s\'s current skillID \'%s\' rank: %u', targ:getName(), craftName, targ:getSkillRank(skillID)))
 end
 
 return commandObj

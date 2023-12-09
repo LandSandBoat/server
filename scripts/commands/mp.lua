@@ -11,8 +11,8 @@ commandObj.cmdprops =
 }
 
 local function error(player, msg)
-    player:PrintToPlayer(msg)
-    player:PrintToPlayer('!mp <amount> (player)')
+    player:printToPlayer(msg)
+    player:printToPlayer('!mp <amount> (player)')
 end
 
 commandObj.onTrigger = function(player, mp, target)
@@ -45,10 +45,10 @@ commandObj.onTrigger = function(player, mp, target)
     if targ:isAlive() then
         targ:setMP(mp)
         if targ:getID() ~= player:getID() then
-            player:PrintToPlayer(string.format('Set %s\'s MP to %i.', targ:getName(), targ:getMP()))
+            player:printToPlayer(string.format('Set %s\'s MP to %i.', targ:getName(), targ:getMP()))
         end
     else
-        player:PrintToPlayer(string.format('%s is currently dead.', targ:getName()))
+        player:printToPlayer(string.format('%s is currently dead.', targ:getName()))
     end
 end
 

@@ -11,8 +11,8 @@ commandObj.cmdprops =
 }
 
 local function error(player, msg)
-    player:PrintToPlayer(msg)
-    player:PrintToPlayer('!injectaction <action ID> <animation ID> (speceffect) (reaction) (message)')
+    player:printToPlayer(msg)
+    player:printToPlayer('!injectaction <action ID> <animation ID> (speceffect) (reaction) (message)')
 end
 
 commandObj.onTrigger = function(player, actionId, animationId, speceffect, reaction, message)

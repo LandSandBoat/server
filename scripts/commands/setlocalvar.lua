@@ -11,8 +11,8 @@ commandObj.cmdprops =
 }
 
 local function error(player, msg)
-    player:PrintToPlayer(msg)
-    player:PrintToPlayer('!setlocalvar <variable name> <value> { \'player\', \'mob\', or \'npc\' } { name or ID }')
+    player:printToPlayer(msg)
+    player:printToPlayer('!setlocalvar <variable name> <value> { \'player\', \'mob\', or \'npc\' } { name or ID }')
 end
 
 commandObj.onTrigger = function(player, arg1, arg2, arg3, arg4)
@@ -62,7 +62,7 @@ commandObj.onTrigger = function(player, arg1, arg2, arg3, arg4)
     end
 
     targ:setLocalVar(varName, varValue)
-    player:PrintToPlayer(string.format('%s\'s variable \'%s\' : %i', targ:getName(), varName, varValue))
+    player:printToPlayer(string.format('%s\'s variable \'%s\' : %i', targ:getName(), varName, varValue))
 end
 
 return commandObj

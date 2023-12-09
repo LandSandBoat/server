@@ -11,8 +11,8 @@ commandObj.cmdprops =
 }
 
 local function error(player, msg)
-    player:PrintToPlayer(msg)
-    player:PrintToPlayer('!release (name)')
+    player:printToPlayer(msg)
+    player:printToPlayer('!release (name)')
 end
 
 commandObj.onTrigger = function(player, name)

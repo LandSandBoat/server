@@ -11,8 +11,8 @@ commandObj.cmdprops =
 }
 
 local function error(player, msg)
-    player:PrintToPlayer(msg)
-    player:PrintToPlayer('!immortal (player)')
+    player:printToPlayer(msg)
+    player:printToPlayer('!immortal (player)')
 end
 
 commandObj.onTrigger = function(player, target)
@@ -57,15 +57,15 @@ commandObj.onTrigger = function(player, target)
             targ:setUnkillable(immortal)
 
             if immortal then
-                player:PrintToPlayer(string.format('%s is now immortal!', targ:getName()))
+                player:printToPlayer(string.format('%s is now immortal!', targ:getName()))
             else
-                player:PrintToPlayer(string.format('%s is mortal again.', targ:getName()))
+                player:printToPlayer(string.format('%s is mortal again.', targ:getName()))
             end
         else
-            player:PrintToPlayer(string.format('%s is already dead.', targ:getName()))
+            player:printToPlayer(string.format('%s is already dead.', targ:getName()))
         end
     else
-        player:PrintToPlayer(string.format('%s is an NPC. You should not be attacking them.', targ:getName()))
+        player:printToPlayer(string.format('%s is an NPC. You should not be attacking them.', targ:getName()))
     end
 end
 

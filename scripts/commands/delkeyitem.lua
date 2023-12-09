@@ -11,8 +11,8 @@ commandObj.cmdprops =
 }
 
 local function error(player, msg)
-    player:PrintToPlayer(msg)
-    player:PrintToPlayer('!delkeyitem <key item ID> (player)')
+    player:printToPlayer(msg)
+    player:printToPlayer('!delkeyitem <key item ID> (player)')
 end
 
 commandObj.onTrigger = function(player, keyId, target)
@@ -45,9 +45,9 @@ commandObj.onTrigger = function(player, keyId, target)
         local ID = zones[targ:getZoneID()]
         targ:delKeyItem(keyId)
         targ:messageSpecial(ID.text.KEYITEM_OBTAINED + 1, keyId)
-        player:PrintToPlayer(string.format('Key item %i deleted from %s.', keyId, targ:getName()))
+        player:printToPlayer(string.format('Key item %i deleted from %s.', keyId, targ:getName()))
     else
-        player:PrintToPlayer(string.format('%s does not have key item %i.', targ:getName(), keyId))
+        player:printToPlayer(string.format('%s does not have key item %i.', targ:getName(), keyId))
     end
 end
 

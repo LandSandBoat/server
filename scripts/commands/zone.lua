@@ -279,8 +279,8 @@ local zoneList =
 }
 
 local function error(player, msg)
-    player:PrintToPlayer(msg)
-    player:PrintToPlayer('!zone <zone ID or autotranslate phrase>')
+    player:printToPlayer(msg)
+    player:printToPlayer('!zone <zone ID or autotranslate phrase>')
 end
 
 local function getBytePos(s, needle)

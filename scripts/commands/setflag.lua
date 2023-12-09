@@ -11,8 +11,8 @@ commandObj.cmdprops =
 }
 
 local function error(player, msg)
-    player:PrintToPlayer(msg)
-    player:PrintToPlayer('!setflag <flags> (player)')
+    player:printToPlayer(msg)
+    player:printToPlayer('!setflag <flags> (player)')
 end
 
 commandObj.onTrigger = function(player, flags, target)

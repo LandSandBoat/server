@@ -19,9 +19,9 @@ commandObj.onTrigger = function(player, stage)
 
         instance:setStage(stage)
 
-        player:PrintToPlayer(string.format('Stage changed from %i to %i', startStage, stage))
+        player:printToPlayer(string.format('Stage changed from %i to %i', startStage, stage))
     else
-        player:PrintToPlayer('Must be in an Instanced zone')
+        player:printToPlayer('Must be in an Instanced zone')
     end
 end
 

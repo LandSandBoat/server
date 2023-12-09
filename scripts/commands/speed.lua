@@ -11,13 +11,13 @@ commandObj.cmdprops =
 }
 
 local function error(player, msg)
-    player:PrintToPlayer(msg)
-    player:PrintToPlayer('!speed <0-255>')
+    player:printToPlayer(msg)
+    player:printToPlayer('!speed <0-255>')
 end
 
 commandObj.onTrigger = function(player, speed)
     if not speed then
-        player:PrintToPlayer(string.format('Current Speed: %u', player:getSpeed()))
+        player:printToPlayer(string.format('Current Speed: %u', player:getSpeed()))
 
         return
     end
@@ -39,11 +39,11 @@ commandObj.onTrigger = function(player, speed)
             baseSpeed = 50 + xi.settings.map.SPEED_MOD
         end
 
-        player:PrintToPlayer('Returning to your regular speed.')
+        player:printToPlayer('Returning to your regular speed.')
     else
-        player:PrintToPlayer('Bypassing regular speed calculations and limits.')
-        player:PrintToPlayer('Set speed value to "0" to return to your regular speed.')
-        player:PrintToPlayer(string.format('New speed: %u', speed))
+        player:printToPlayer('Bypassing regular speed calculations and limits.')
+        player:printToPlayer('Set speed value to "0" to return to your regular speed.')
+        player:printToPlayer(string.format('New speed: %u', speed))
     end
 
     player:setMod(xi.mod.MOVE_SPEED_OVERIDE, speed)

@@ -11,8 +11,8 @@ commandObj.cmdprops =
 }
 
 local function error(player, msg)
-    player:PrintToPlayer(msg)
-    player:PrintToPlayer('!mobsub (mob ID) <animation ID>')
+    player:printToPlayer(msg)
+    player:printToPlayer('!mobsub (mob ID) <animation ID>')
 end
 
 commandObj.onTrigger = function(player, arg1, arg2)

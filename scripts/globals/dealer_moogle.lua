@@ -3384,7 +3384,7 @@ local debugInfo = function(player, item, list, option, altIDs, idx)
     end
 
     if debug.TO_PLAYER then
-        player:PrintToPlayer(string.format('DEBUG: list: %u, idx: %u, submenuid %u, slot: %u', list, idx, idxAlt1, idxAlt2), xi.msg.channel.SYSTEM_3)
+        player:printToPlayer(string.format('DEBUG: list: %u, idx: %u, submenuid %u, slot: %u', list, idx, idxAlt1, idxAlt2), xi.msg.channel.SYSTEM_3)
     else
         print(string.format('DEBUG: list: %u, idx: %u, submenuid %u, slot: %u', list, idx, idxAlt1, idxAlt2))
     end

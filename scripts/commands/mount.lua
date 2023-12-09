@@ -7,8 +7,8 @@ commandObj.cmdprops =
 }
 
 local function error(player, msg)
-    player:PrintToPlayer(msg)
-    player:PrintToPlayer('!mount <mount ID> (player)')
+    player:printToPlayer(msg)
+    player:printToPlayer('!mount <mount ID> (player)')
 end
 
 commandObj.onTrigger = function(player, mount, target)

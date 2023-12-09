@@ -11,9 +11,9 @@ commandObj.cmdprops =
 }
 
 local function error(player, msg)
-    player:PrintToPlayer(msg)
-    player:PrintToPlayer('!setplayernation (player) <nation>')
-    player:PrintToPlayer('Nations: 0 = San d\'Oria 1 = Bastok 2 = Windurst')
+    player:printToPlayer(msg)
+    player:printToPlayer('!setplayernation (player) <nation>')
+    player:printToPlayer('Nations: 0 = San d\'Oria 1 = Bastok 2 = Windurst')
 end
 
 commandObj.onTrigger = function(player, arg1, arg2)
@@ -50,8 +50,8 @@ commandObj.onTrigger = function(player, arg1, arg2)
 
     -- set nation
     targ:setNation(nation)
-    player:PrintToPlayer(string.format('Set %s\'s home nation to %s.', targ:getName(), nationByNum[nation]))
-    player:PrintToPlayer('NOTE! This does NOT clear or update ANY mission or related variables! ')
+    player:printToPlayer(string.format('Set %s\'s home nation to %s.', targ:getName(), nationByNum[nation]))
+    player:printToPlayer('NOTE! This does NOT clear or update ANY mission or related variables! ')
 end
 
 return commandObj

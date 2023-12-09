@@ -11,8 +11,8 @@ commandObj.cmdprops =
 }
 
 local function error(player, msg)
-    player:PrintToPlayer(msg)
-    player:PrintToPlayer('!promote <player> <level>')
+    player:printToPlayer(msg)
+    player:printToPlayer('!promote <player> <level>')
 end
 
 commandObj.onTrigger = function(player, target, level)
@@ -38,7 +38,7 @@ commandObj.onTrigger = function(player, target, level)
     -- catch players trying to change level of equal or higher tiered GMs.
     if targ:getGMLevel() >= player:getGMLevel() then
         printf('%s attempting to adjust same or higher tier GM %s.', player:getName(), targ:getName())
-        targ:PrintToPlayer(string.format('%s attempted to adjust your GM rank.', player:getName()))
+        targ:printToPlayer(string.format('%s attempted to adjust your GM rank.', player:getName()))
         error(player, 'You can not use this command on same or higher tiered GMs.')
         return
     end
@@ -116,8 +116,8 @@ commandObj.onTrigger = function(player, target, level)
         end
     end
 
-    player:PrintToPlayer(string.format('%s set to tier %i.', targ:getName(), level))
-    targ:PrintToPlayer(string.format('You have been set to tier %i.', level))
+    player:printToPlayer(string.format('%s set to tier %i.', targ:getName(), level))
+    targ:printToPlayer(string.format('You have been set to tier %i.', level))
 end
 
 return commandObj

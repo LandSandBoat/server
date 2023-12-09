@@ -11,8 +11,8 @@ commandObj.cmdprops =
 }
 
 local function error(player, msg)
-    player:PrintToPlayer(msg)
-    player:PrintToPlayer('!takexp <amount> (player)')
+    player:printToPlayer(msg)
+    player:printToPlayer('!takexp <amount> (player)')
 end
 
 commandObj.onTrigger = function(player, amount, target)
@@ -36,7 +36,7 @@ commandObj.onTrigger = function(player, amount, target)
 
     -- take xp
     targ:delExp(amount)
-    player:PrintToPlayer(string.format('Removed %i exp from %s. They are now level %i.', amount, targ:getName(), targ:getMainLvl()))
+    player:printToPlayer(string.format('Removed %i exp from %s. They are now level %i.', amount, targ:getName(), targ:getMainLvl()))
 end
 
 return commandObj

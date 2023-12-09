@@ -11,7 +11,7 @@ commandObj.cmdprops =
 }
 
 local function error(player, msg)
-    player:PrintToPlayer(msg
+    player:printToPlayer(msg
         .. '\n!packetmod (operation) (packet id) (offset) (value)'
         .. '\nOperations: add / del / clear / print')
 end

@@ -13,8 +13,8 @@ commandObj.cmdprops =
 }
 
 local function error(player, msg)
-    player:PrintToPlayer(msg)
-    player:PrintToPlayer('!addquest <logID> <questID> (player)')
+    player:printToPlayer(msg)
+    player:printToPlayer('!addquest <logID> <questID> (player)')
 end
 
 commandObj.onTrigger = function(player, logId, questId, target)
@@ -53,7 +53,7 @@ commandObj.onTrigger = function(player, logId, questId, target)
 
     -- add quest
     targ:addQuest(logId, questId)
-    player:PrintToPlayer(string.format('Added %s quest %i to %s.', logName, questId, targ:getName()))
+    player:printToPlayer(string.format('Added %s quest %i to %s.', logName, questId, targ:getName()))
 end
 
 return commandObj

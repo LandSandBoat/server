@@ -46,7 +46,7 @@ end
 
 commandObj.onTrigger = function(player, handlerName)
     local function cmdPrint(message, ...)
-        player:PrintToPlayer(string.format(message, unpack({ ... }) or nil), 17)
+        player:printToPlayer(string.format(message, unpack({ ... }) or nil), 17)
     end
 
     if handlerName == nil then

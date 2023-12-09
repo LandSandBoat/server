@@ -19,8 +19,8 @@ local nationNameToNum =
 }
 
 local function error(player, msg)
-    player:PrintToPlayer(msg)
-    player:PrintToPlayer('!cnation <player> <campaign allegiance>')
+    player:printToPlayer(msg)
+    player:printToPlayer('!cnation <player> <campaign allegiance>')
 end
 
 commandObj.onTrigger = function(player, target, nation)
@@ -44,7 +44,7 @@ commandObj.onTrigger = function(player, target, nation)
 
     -- show or set allegiance
     if nation == nil then
-        player:PrintToPlayer(string.format('%s\'s current campaign allegiance: %s', targ:getName(), nationNumToName[targ:getCampaignAllegiance()]))
+        player:printToPlayer(string.format('%s\'s current campaign allegiance: %s', targ:getName(), nationNumToName[targ:getCampaignAllegiance()]))
     else
         nation = tonumber(nation) or nationNameToNum[string.upper(nation)]
 
@@ -53,9 +53,9 @@ commandObj.onTrigger = function(player, target, nation)
             return
         end
 
-        player:PrintToPlayer(string.format('%s\'s old campaign allegiance: %s', targ:getName(), nationNumToName[targ:getCampaignAllegiance()]))
+        player:printToPlayer(string.format('%s\'s old campaign allegiance: %s', targ:getName(), nationNumToName[targ:getCampaignAllegiance()]))
         targ:setCampaignAllegiance(nation)
-        player:PrintToPlayer(string.format('%s\'s new campaign allegiance: %s', targ:getName(), nationNumToName[targ:getCampaignAllegiance()]))
+        player:printToPlayer(string.format('%s\'s new campaign allegiance: %s', targ:getName(), nationNumToName[targ:getCampaignAllegiance()]))
     end
 end
 

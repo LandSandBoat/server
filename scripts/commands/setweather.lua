@@ -11,8 +11,8 @@ commandObj.cmdprops =
 }
 
 local function error(player, msg)
-    player:PrintToPlayer(msg)
-    player:PrintToPlayer('!setweather <weather ID>')
+    player:printToPlayer(msg)
+    player:printToPlayer('!setweather <weather ID>')
 end
 
 commandObj.onTrigger = function(player, weather)
@@ -36,7 +36,7 @@ commandObj.onTrigger = function(player, weather)
 
     -- set weather
     player:setWeather(weather)
-    player:PrintToPlayer(string.format('Set weather to %s.', weatherByNum[weather]))
+    player:printToPlayer(string.format('Set weather to %s.', weatherByNum[weather]))
 end
 
 return commandObj

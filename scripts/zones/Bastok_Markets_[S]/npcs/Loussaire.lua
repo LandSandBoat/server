@@ -178,7 +178,7 @@ entity.onEventUpdate = function(player, csid, option, npc)
             player:setCharVar('AF_SCH_BODY', 1)
 
         elseif option > 7 then
-            player:PrintToPlayer('There was an error in the CS. Inform your Server Admin/GM.')
+            player:printToPlayer('There was an error in the CS. Inform your Server Admin/GM.')
         end
     end
 end

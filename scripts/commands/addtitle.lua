@@ -11,8 +11,8 @@ commandObj.cmdprops =
 }
 
 local function error(player, msg)
-    player:PrintToPlayer(msg)
-    player:PrintToPlayer('!addtitle <title ID> (player)')
+    player:printToPlayer(msg)
+    player:printToPlayer('!addtitle <title ID> (player)')
 end
 
 commandObj.onTrigger = function(player, titleId, target)
@@ -42,7 +42,7 @@ commandObj.onTrigger = function(player, titleId, target)
 
     -- add title
     targ:addTitle(titleId)
-    player:PrintToPlayer(string.format('%s was given title %s.', targ:getName(), titleId))
+    player:printToPlayer(string.format('%s was given title %s.', targ:getName(), titleId))
 end
 
 return commandObj

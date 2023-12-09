@@ -11,9 +11,9 @@ commandObj.cmdprops =
 }
 
 local function error(player, msg)
-    player:PrintToPlayer(msg)
-    player:PrintToPlayer('!setmusic <type ID> <song ID>')
-    player:PrintToPlayer('type IDs: 0 = BGM (Day), 1 = BGM (Night), 2 = Solo-Battle, 3 = Party-Battle, 4 = Chocobo, 5=Death, 6=Moghouse, 7=Fishing')
+    player:printToPlayer(msg)
+    player:printToPlayer('!setmusic <type ID> <song ID>')
+    player:printToPlayer('type IDs: 0 = BGM (Day), 1 = BGM (Night), 2 = Solo-Battle, 3 = Party-Battle, 4 = Chocobo, 5=Death, 6=Moghouse, 7=Fishing')
 end
 
 commandObj.onTrigger = function(player, typeId, songId)

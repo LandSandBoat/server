@@ -16,19 +16,19 @@ commandObj.onTrigger = function(player, target, selectedNum, eventNum)
         selectedNum == nil or
         eventNum == nil
     then
-        player:PrintToPlayer('You must enter a valid player name, number, and event number.')
+        player:printToPlayer('You must enter a valid player name, number, and event number.')
         return
     end
 
     local targ = GetPlayerByName(target)
     if targ == nil then
-        player:PrintToPlayer(string.format('Player named "%s" not found!', target))
+        player:printToPlayer(string.format('Player named "%s" not found!', target))
         return
     end
 
     -- Attempt to give the target the item..
     if targ:getFreeSlotsCount() == 0 then
-        player:PrintToPlayer(string.format('Player \'%s\' does not have free space for that item!', target))
+        player:printToPlayer(string.format('Player \'%s\' does not have free space for that item!', target))
     else
         targ:addItem({ id = xi.item.BONANZA_PEARL,
             exdata =
@@ -40,7 +40,7 @@ commandObj.onTrigger = function(player, target, selectedNum, eventNum)
             }
         })
 
-        player:PrintToPlayer(string.format('Gave player \'%s\' Item with ID of \'%u\'', target, xi.item.BONANZA_PEARL))
+        player:printToPlayer(string.format('Gave player \'%s\' Item with ID of \'%u\'', target, xi.item.BONANZA_PEARL))
     end
 end
 

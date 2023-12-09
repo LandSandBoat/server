@@ -11,8 +11,8 @@ commandObj.cmdprops =
 }
 
 local function error(player, msg)
-    player:PrintToPlayer(msg)
-    player:PrintToPlayer('!despawnmob (mobID)')
+    player:printToPlayer(msg)
+    player:printToPlayer('!despawnmob (mobID)')
 end
 
 commandObj.onTrigger = function(player, mobId)
@@ -34,7 +34,7 @@ commandObj.onTrigger = function(player, mobId)
 
     -- despawn mob
     DespawnMob(targ:getID())
-    player:PrintToPlayer(string.format('Despawned %s %i.', targ:getName(), targ:getID()))
+    player:printToPlayer(string.format('Despawned %s %i.', targ:getName(), targ:getID()))
 end
 
 return commandObj

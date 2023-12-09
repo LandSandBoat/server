@@ -11,8 +11,8 @@ commandObj.cmdprops =
 }
 
 local function error(player, msg)
-    player:PrintToPlayer(msg)
-    player:PrintToPlayer('!setmerits <amount> (player)')
+    player:printToPlayer(msg)
+    player:printToPlayer('!setmerits <amount> (player)')
 end
 
 commandObj.onTrigger = function(player, amount, target)
@@ -36,7 +36,7 @@ commandObj.onTrigger = function(player, amount, target)
 
     -- set merits
     targ:setMerits(amount)
-    player:PrintToPlayer(string.format('%s now has %i merits.', targ:getName(), targ:getMeritCount()))
+    player:printToPlayer(string.format('%s now has %i merits.', targ:getName(), targ:getMeritCount()))
 end
 
 return commandObj

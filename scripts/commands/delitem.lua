@@ -11,8 +11,8 @@ commandObj.cmdprops =
 }
 
 local function error(player, msg)
-    player:PrintToPlayer(msg)
-    player:PrintToPlayer('!delitem <itemID> (player)')
+    player:printToPlayer(msg)
+    player:printToPlayer('!delitem <itemID> (player)')
 end
 
 commandObj.onTrigger = function(player, itemId, target)
@@ -38,12 +38,12 @@ commandObj.onTrigger = function(player, itemId, target)
     for i = xi.inv.INVENTORY, xi.inv.WARDROBE8 do -- inventory locations enums
         if targ:hasItem(itemId, i) then
             targ:delItem(itemId, 1, i)
-            player:PrintToPlayer(string.format('Item %i was deleted from %s.', itemId, targ:getName()))
+            player:printToPlayer(string.format('Item %i was deleted from %s.', itemId, targ:getName()))
             break
         end
 
         if i == xi.inv.WARDROBE8 then -- Wardrobe 8 is the last inventory location, if it reaches this point then the player does not have the item anywhere.
-            player:PrintToPlayer(string.format('%s does not have item %i.', targ:getName(), itemId))
+            player:printToPlayer(string.format('%s does not have item %i.', targ:getName(), itemId))
         end
     end
 end

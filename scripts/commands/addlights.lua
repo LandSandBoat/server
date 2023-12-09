@@ -24,8 +24,8 @@ local lightType =
 }
 
 local function error(player, msg)
-    player:PrintToPlayer(msg)
-    player:PrintToPlayer('!addlights <light type> <amount> (player)')
+    player:printToPlayer(msg)
+    player:printToPlayer('!addlights <light type> <amount> (player)')
 end
 
 commandObj.onTrigger = function(player, light, amount, target)
@@ -62,7 +62,7 @@ commandObj.onTrigger = function(player, light, amount, target)
 
     xi.abyssea.addPlayerLights(targ, setLight, amount)
     local newAmount = targ:getCharVar(light..'Light')
-    player:PrintToPlayer(string.format('%s was given %i %s light, for a total of %i.', targ:getName(), amount, light, newAmount))
+    player:printToPlayer(string.format('%s was given %i %s light, for a total of %i.', targ:getName(), amount, light, newAmount))
 end
 
 return commandObj

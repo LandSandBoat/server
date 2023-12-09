@@ -11,8 +11,8 @@ commandObj.cmdprops =
 }
 
 local function error(player, msg)
-    player:PrintToPlayer(msg)
-    player:PrintToPlayer('!checklocalvar <variable name> { \'player\', \'mob\', or \'npc\' } { name or ID }')
+    player:printToPlayer(msg)
+    player:printToPlayer('!checklocalvar <variable name> { \'player\', \'mob\', or \'npc\' } { name or ID }')
 end
 
 commandObj.onTrigger = function(player, arg1, arg2, arg3)
@@ -55,7 +55,7 @@ commandObj.onTrigger = function(player, arg1, arg2, arg3)
         return
     end
 
-    player:PrintToPlayer(string.format('%s\'s variable \'%s\' : %i', targ:getName(), varName, targ:getLocalVar(varName)))
+    player:printToPlayer(string.format('%s\'s variable \'%s\' : %i', targ:getName(), varName, targ:getLocalVar(varName)))
 end
 
 return commandObj

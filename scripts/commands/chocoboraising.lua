@@ -36,7 +36,7 @@ commandObj.onTrigger = function(player)
         function(playerArg)
             xi.settings.main.ENABLE_CHOCOBO_RAISING = not xi.settings.main.ENABLE_CHOCOBO_RAISING
             xi.settings.main.DEBUG_CHOCOBO_RAISING  = not xi.settings.main.DEBUG_CHOCOBO_RAISING
-            playerArg:PrintToPlayer(string.format('Chocobo Raising setting: %s', xi.settings.main.ENABLE_CHOCOBO_RAISING),
+            playerArg:printToPlayer(string.format('Chocobo Raising setting: %s', xi.settings.main.ENABLE_CHOCOBO_RAISING),
                 xi.msg.channel.SYSTEM_3, '')
         end,
     })
@@ -55,7 +55,7 @@ commandObj.onTrigger = function(player)
                 local info = playerArg:getChocoboRaisingInfo()
                 info['created'] = info['created'] - epochDay
                 playerArg:setChocoboRaisingInfo(info)
-                playerArg:PrintToPlayer('Adding 1 day to state.created', xi.msg.channel.SYSTEM_3, '')
+                playerArg:printToPlayer('Adding 1 day to state.created', xi.msg.channel.SYSTEM_3, '')
             end,
         })
 
@@ -65,7 +65,7 @@ commandObj.onTrigger = function(player)
                 local info = playerArg:getChocoboRaisingInfo()
                 info['created'] = info['created'] - (epochDay * 10)
                 playerArg:setChocoboRaisingInfo(info)
-                playerArg:PrintToPlayer('Adding 10 days to state.created', xi.msg.channel.SYSTEM_3, '')
+                playerArg:printToPlayer('Adding 10 days to state.created', xi.msg.channel.SYSTEM_3, '')
             end,
         })
 
@@ -82,7 +82,7 @@ commandObj.onTrigger = function(player)
                 info['created'] = info['created'] - (epochDay * 10)
                 playerArg:setChocoboRaisingInfo(info)
 
-                playerArg:PrintToPlayer('Setting up debug scenario 1 (10d update)', xi.msg.channel.SYSTEM_3, '')
+                playerArg:printToPlayer('Setting up debug scenario 1 (10d update)', xi.msg.channel.SYSTEM_3, '')
             end,
         })
 
@@ -92,7 +92,7 @@ commandObj.onTrigger = function(player)
                 local info = playerArg:getChocoboRaisingInfo()
                 info['sex'] = (info['sex'] + 1) % 2
                 playerArg:setChocoboRaisingInfo(info)
-                playerArg:PrintToPlayer('Changed sex to ' .. sex[info['sex']], xi.msg.channel.SYSTEM_3, '')
+                playerArg:printToPlayer('Changed sex to ' .. sex[info['sex']], xi.msg.channel.SYSTEM_3, '')
             end,
         })
 
@@ -100,9 +100,9 @@ commandObj.onTrigger = function(player)
             'Dump chocoState',
             function(playerArg)
                 local info = playerArg:getChocoboRaisingInfo()
-                playerArg:PrintToPlayer('created ' .. os.date('%Y %m %d %H %M %S', info['created']), xi.msg.channel.SYSTEM_3, '')
+                playerArg:printToPlayer('created ' .. os.date('%Y %m %d %H %M %S', info['created']), xi.msg.channel.SYSTEM_3, '')
                 for k, v in pairs(info) do
-                    playerArg:PrintToPlayer(string.format('%s %s', k, v), xi.msg.channel.SYSTEM_3, '')
+                    playerArg:printToPlayer(string.format('%s %s', k, v), xi.msg.channel.SYSTEM_3, '')
                 end
             end,
         })
@@ -111,7 +111,7 @@ commandObj.onTrigger = function(player)
             'Delete chocoState',
             function(playerArg)
                 playerArg:deleteRaisedChocobo()
-                playerArg:PrintToPlayer('Deleted chocoState', xi.msg.channel.SYSTEM_3, '')
+                playerArg:printToPlayer('Deleted chocoState', xi.msg.channel.SYSTEM_3, '')
             end,
         })
     else
@@ -123,7 +123,7 @@ commandObj.onTrigger = function(player)
                 local egg = {}
                 local newChoco = xi.chocoboRaising.newChocobo(playerArg, egg)
                 player:setChocoboRaisingInfo(newChoco)
-                playerArg:PrintToPlayer('Created default chocoState', xi.msg.channel.SYSTEM_3, '')
+                playerArg:printToPlayer('Created default chocoState', xi.msg.channel.SYSTEM_3, '')
             end,
         })
 
@@ -147,7 +147,7 @@ commandObj.onTrigger = function(player)
                 info['created'] = info['created'] - (epochDay * 10)
                 playerArg:setChocoboRaisingInfo(info)
 
-                playerArg:PrintToPlayer('Setting up debug scenario 1 (10d update)', xi.msg.channel.SYSTEM_3, '')
+                playerArg:printToPlayer('Setting up debug scenario 1 (10d update)', xi.msg.channel.SYSTEM_3, '')
             end,
         })
     end

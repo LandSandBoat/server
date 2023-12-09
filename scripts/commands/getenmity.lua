@@ -11,8 +11,8 @@ commandObj.cmdprops =
 }
 
 local function error(player, msg)
-    player:PrintToPlayer(msg)
-    player:PrintToPlayer('!getenmity')
+    player:printToPlayer(msg)
+    player:printToPlayer('!getenmity')
 end
 
 commandObj.onTrigger = function(player)
@@ -23,7 +23,7 @@ commandObj.onTrigger = function(player)
         return
     end
 
-    player:PrintToPlayer(string.format('Your enmity against %s is ... CE = %u ... VE = %u', targ:getName(), targ:getCE(player), targ:getVE(player)))
+    player:printToPlayer(string.format('Your enmity against %s is ... CE = %u ... VE = %u', targ:getName(), targ:getCE(player), targ:getVE(player)))
 end
 
 return commandObj
