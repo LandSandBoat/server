@@ -183,6 +183,9 @@ public:
 
     void sendEntityUpdateToPlayer(CLuaBaseEntity* entityToUpdate, uint8 entityUpdate, uint8 updateMask);
 
+    void forceRezone();
+    void forceLogout();
+
     auto  getPos() -> sol::table;
     void  showPosition();
     float getXPos();
