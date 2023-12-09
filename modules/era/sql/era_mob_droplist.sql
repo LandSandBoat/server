@@ -15096,7 +15096,7 @@ INSERT INTO `mob_droplist` VALUES (1871,2,0,1000,751,0);   -- Platinum Beastcoin
 INSERT INTO `mob_droplist` VALUES (1872,0,0,1000,12342,@RARE); -- Lantern Shield (Rare, 5%)
 
 -- ZoneID: 105 - Orcish Beastrider
--- INSERT INTO `mob_droplist` VALUES (1873,0,0,1000,1706,@RARE);   -- Nyumomo Doll (Rare, 5%) WOTG item
+INSERT INTO `mob_droplist` VALUES (1873,0,0,1000,1706,@RARE);   -- Nyumomo Doll (Rare, 5%)
 INSERT INTO `mob_droplist` VALUES (1873,2,0,1000,750,0);        -- Silver Beastcoin (Steal)
 
 -- ZoneID: 149 - Orcish Beastrider
@@ -15143,7 +15143,7 @@ INSERT INTO `mob_droplist` VALUES (1878,2,0,1000,748,0); -- Gold Beastcoin (Stea
 
 -- ZoneID: 105 - Orcish Brawler
 -- ZoneID: 105 - Orcish Impaler
--- INSERT INTO `mob_droplist` VALUES (1879,0,0,1000,1706,@RARE);   -- Nyumomo Doll (Rare, 5%) WOTG item
+INSERT INTO `mob_droplist` VALUES (1879,0,0,1000,1706,@RARE);   -- Nyumomo Doll (Rare, 5%)
 INSERT INTO `mob_droplist` VALUES (1879,2,0,1000,750,0);        -- Silver Beastcoin (Steal)
 INSERT INTO `mob_droplist` VALUES (1879,4,0,1000,4376,0);       -- Strip Of Meat Jerky (Despoil)
 
@@ -15530,7 +15530,7 @@ INSERT INTO `mob_droplist` VALUES (1929,0,0,1000,12944,@VRARE); -- Scale Greaves
 INSERT INTO `mob_droplist` VALUES (1929,2,0,1000,656,0);        -- Beastcoin (Steal)
 
 -- ZoneID: 105 - Orcish Nightraider
--- INSERT INTO `mob_droplist` VALUES (1930,0,0,1000,1706,@RARE);   -- Nyumomo Doll (Rare, 5%) WOTG item
+INSERT INTO `mob_droplist` VALUES (1930,0,0,1000,1706,@RARE);   -- Nyumomo Doll (Rare, 5%)
 INSERT INTO `mob_droplist` VALUES (1930,2,0,1000,750,0);        -- Silver Beastcoin (Steal)
 
 -- ZoneID: 149 - Orcish Nightraider

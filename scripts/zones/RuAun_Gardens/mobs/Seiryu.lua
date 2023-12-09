@@ -8,18 +8,15 @@ require("scripts/globals/mobs")
 -----------------------------------
 local entity = {}
 
-entity.onMobInitialize = function(mob)
+entity.onMobSpawn = function(mob, target)
     mob:setMod(xi.mod.SILENCERES, 90)
     mob:addMod(xi.mod.ATT, 50)
-    mob:addMod(xi.mod.EVA, 80)
+    mob:setMod(xi.mod.EVA, 367)
     mob:addMod(xi.mod.DOUBLE_ATTACK, 10)
     mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
     mob:setMobMod(xi.mobMod.MAGIC_COOL, 35)
     -- TP move about every 9 seconds without TP feed
     mob:setMod(xi.mod.REGAIN, 750)
-end
-
-entity.onMobSpawn = function(mob, target)
     GetNPCByID(ID.npc.PORTAL_TO_SEIRYU):setAnimation(xi.anim.CLOSE_DOOR)
     mob:setMagicCastingEnabled(false)
 end
