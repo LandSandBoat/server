@@ -6937,7 +6937,7 @@ void SmallPacket0x0FA(map_session_data_t* const PSession, CCharEntity* const PCh
 
         // Update installed furniture placement orders
         // First we place the furniture into placed items using the order number as the index
-        std::array<CItemFurnishing*, MAX_CONTAINER_SIZE * 2> placedItems = { nullptr };
+        std::array<CItemFurnishing*, MAX_CONTAINER_SIZE* 2> placedItems = { nullptr };
         for (auto safeContainerId : { LOC_MOGSAFE, LOC_MOGSAFE2 })
         {
             CItemContainer* PContainer = PChar->getStorage(safeContainerId);
@@ -6961,7 +6961,7 @@ void SmallPacket0x0FA(map_session_data_t* const PSession, CCharEntity* const PCh
         }
 
         // Update the item's order number
-        for (int32 i = 0; i < MAX_CONTAINER_SIZE* 2; ++i)
+        for (int32 i = 0; i < MAX_CONTAINER_SIZE * 2; ++i)
         {
             // We can stop updating the order numbers once we hit an empty order number
             if (placedItems[i] == nullptr)
