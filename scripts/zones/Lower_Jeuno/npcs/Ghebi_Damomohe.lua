@@ -5,15 +5,23 @@
 -- Starts and Finishes Quest: Tenshodo Membership
 -- !pos 16 0 -5 245
 -----------------------------------
+local lowerJeunoID = zones[xi.zone.LOWER_JEUNO]
+-----------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     if
-        player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.TENSHODO_MEMBERSHIP) ~= QUEST_COMPLETED and
-        npcUtil.tradeHas(trade, xi.item.TENSHODO_INVITE)
+        trade:getItemQty(xi.item.TENSHODO_INVITE) > 0 and
+        player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.TENSHODO_MEMBERSHIP) ~= QUEST_COMPLETED
     then
-        -- Finish Quest: Tenshodo Membership (Invitation)
-        player:startEvent(108)
+        if player:getFreeSlotsCount() > 0 then
+            if npcUtil.tradeHas(trade, xi.item.TENSHODO_INVITE) then
+                -- Finish Quest: Tenshodo Membership (Invitation)
+                player:startEvent(108)
+            end
+        else
+            player:messageSpecial(lowerJeunoID.text.ITEM_CANNOT_BE_OBTAINED, xi.item.TENSHODO_INVITE)
+        end
     end
 end
 
