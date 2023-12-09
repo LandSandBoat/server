@@ -6403,6 +6403,23 @@ namespace charutils
         PChar->pushPacket(new CServerIPPacket(PChar, type, ipp));
     }
 
+    void ForceLogout(CCharEntity* PChar)
+    {
+        PChar->status = STATUS_TYPE::SHUTDOWN;
+        charutils::SendToZone(PChar, 1, 0);
+    }
+
+    void ForceRezone(CCharEntity* PChar)
+    {
+        PChar->loc.destination = PChar->getZone();
+        PChar->status          = STATUS_TYPE::DISAPPEAR;
+        PChar->loc.boundary    = 0;
+
+        PChar->clearPacketList();
+
+        SendToZone(PChar, 2, zoneutils::GetZoneIPP(PChar->loc.destination));
+    }
+
     void HomePoint(CCharEntity* PChar)
     {
         TracyZoneScoped;

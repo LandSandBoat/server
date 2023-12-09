@@ -2372,9 +2372,7 @@ void CLuaBaseEntity::leaveGame()
     }
 
     auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
-
-    PChar->status = STATUS_TYPE::SHUTDOWN;
-    charutils::SendToZone(PChar, 1, 0);
+    charutils::ForceLogout(PChar);
 }
 
 /************************************************************************
@@ -2712,6 +2710,22 @@ void CLuaBaseEntity::sendEntityUpdateToPlayer(CLuaBaseEntity* entityToUpdate, ui
         CCharEntity* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
 
         PChar->updateEntityPacket(entityToUpdate->GetBaseEntity(), static_cast<ENTITYUPDATE>(entityUpdate), updateMask);
+    }
+}
+
+void CLuaBaseEntity::forceRezone()
+{
+    if (auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity))
+    {
+        charutils::ForceRezone(PChar);
+    }
+}
+
+void CLuaBaseEntity::forceLogout()
+{
+    if (auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity))
+    {
+        charutils::ForceLogout(PChar);
     }
 }
 
@@ -17859,6 +17873,8 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("getPlayerTriggerAreaInZone", CLuaBaseEntity::getPlayerTriggerAreaInZone);
     SOL_REGISTER("updateToEntireZone", CLuaBaseEntity::updateToEntireZone);
     SOL_REGISTER("sendEntityUpdateToPlayer", CLuaBaseEntity::sendEntityUpdateToPlayer);
+    SOL_REGISTER("forceRezone", CLuaBaseEntity::forceRezone);
+    SOL_REGISTER("forceLogout", CLuaBaseEntity::forceLogout);
 
     // Abyssea
     SOL_REGISTER("getAvailableTraverserStones", CLuaBaseEntity::getAvailableTraverserStones);
