@@ -3270,6 +3270,7 @@ void SmallPacket0x04E(map_session_data_t* const PSession, CCharEntity* const PCh
                     PChar->pushPacket(new CAuctionHousePacket(action, 197, 0, 0, 0, 0));
                     return;
                 }
+
                 uint32 auctionFee = 0;
                 if (quantity == 0)
                 {
@@ -5002,22 +5003,22 @@ void SmallPacket0x085(map_session_data_t* const PSession, CCharEntity* const PCh
     {
         if (quantity < 1 || quantity > PItem->getStackSize()) // Possible exploit
         {
-            ShowWarning("SmallPacket0x085: Player %s trying to sell invalid quantity %u of itemID %u [to VENDOR] ", PChar->GetName(),
-                        quantity);
+            ShowWarning("SmallPacket0x085: Player %s trying to sell invalid quantity %u of itemID %u [to VENDOR] ",
+                        PChar->GetName(), quantity, PItem->getID());
             return;
         }
 
         if (PItem->isSubType(ITEM_LOCKED)) // Possible exploit
         {
-            ShowWarning("SmallPacket0x085: Player %s trying to sell %u of a LOCKED item! ID %i [to VENDOR] ", PChar->GetName(), quantity,
-                        PItem->getID());
+            ShowWarning("SmallPacket0x085: Player %s trying to sell %u of a LOCKED item! ID %i [to VENDOR] ",
+                        PChar->GetName(), quantity, PItem->getID());
             return;
         }
 
         if (PItem->getReserve() > 0) // Usually caused by bug during synth, trade, etc. reserving the item. We don't want such items sold in this state.
         {
-            ShowError("SmallPacket0x085: Player %s trying to sell %u of a RESERVED(%u) item! ID %i [to VENDOR] ", PChar->GetName(), quantity,
-                      PItem->getReserve(), PItem->getID());
+            ShowError("SmallPacket0x085: Player %s trying to sell %u of a RESERVED(%u) item! ID %i [to VENDOR] ",
+                      PChar->GetName(), quantity, PItem->getReserve(), PItem->getID());
             return;
         }
 
