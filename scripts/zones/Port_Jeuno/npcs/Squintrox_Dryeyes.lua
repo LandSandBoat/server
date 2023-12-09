@@ -143,7 +143,7 @@ local menuMetadata =
             costSeals        = 5,
             relevantKeyItems =
             {
-                xi.ki.SEEDSPALL_ASTRUM,
+                xi.ki.SEEDSPALL_ROSEUM,
                 xi.ki.SEEDSPALL_CAERULUM,
                 xi.ki.SEEDSPALL_VIRIDIS,
             },
