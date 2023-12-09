@@ -2904,7 +2904,7 @@ void SmallPacket0x04D(map_session_data_t* const PSession, CCharEntity* const PCh
                     if (!PChar->UContainer->IsSlotEmpty(deliverySlotID))
                     {
                         CItem* PItem = PChar->UContainer->GetItem(deliverySlotID);
-                        if (PItem->isSent())
+                        if (PItem && PItem->isSent())
                         {
                             ret = sql->Query("DELETE FROM delivery_box WHERE charid = %u AND box = 2 AND slot = %u LIMIT 1;", PChar->id, deliverySlotID);
                             if (ret != SQL_ERROR && sql->AffectedRows() == 1)
@@ -7763,6 +7763,10 @@ void SmallPacket0x106(map_session_data_t* const PSession, CCharEntity* const PCh
 
     CItemContainer* PBazaar         = PTarget->getStorage(LOC_INVENTORY);
     CItemContainer* PBuyerInventory = PChar->getStorage(LOC_INVENTORY);
+    if (PBazaar == nullptr || PBuyerInventory == nullptr)
+    {
+        return;
+    }
 
     if (PChar->id == PTarget->id || PBuyerInventory->GetFreeSlotsCount() == 0)
     {
@@ -7872,6 +7876,10 @@ void SmallPacket0x109(map_session_data_t* const PSession, CCharEntity* const PCh
 {
     TracyZoneScoped;
     CItemContainer* PStorage = PChar->getStorage(LOC_INVENTORY);
+    if (PStorage == nullptr)
+    {
+        return;
+    }
 
     for (uint8 slotID = 1; slotID <= PStorage->GetSize(); ++slotID)
     {
@@ -7898,7 +7906,17 @@ void SmallPacket0x10A(map_session_data_t* const PSession, CCharEntity* const PCh
     uint8  slotID = data.ref<uint8>(0x04);
     uint32 price  = data.ref<uint32>(0x08);
 
-    CItem* PItem = PChar->getStorage(LOC_INVENTORY)->GetItem(slotID);
+    auto* PStorage = PChar->getStorage(LOC_INVENTORY);
+    if (PStorage == nullptr)
+    {
+        return;
+    }
+
+    CItem* PItem = PStorage->GetItem(slotID);
+    if (PItem == nullptr)
+    {
+        return;
+    }
 
     if (PItem->getReserve() > 0)
     {

@@ -67,6 +67,7 @@ _ReSharper*
 
 # Jetbrains directories
 .idea
+.fleet
 cmake-*
 
 # NCrunch

@@ -93,9 +93,24 @@ bool CLuaItem::isType(uint8 type)
     return m_PLuaItem->isType(static_cast<ITEM_TYPE>(type));
 }
 
+void CLuaItem::setSubType(uint8 subtype)
+{
+    m_PLuaItem->setSubType(static_cast<ITEM_SUBTYPE>(subtype));
+}
+
 bool CLuaItem::isSubType(uint8 subtype)
 {
     return m_PLuaItem->isSubType(static_cast<ITEM_SUBTYPE>(subtype));
+}
+
+void CLuaItem::setReservedValue(uint8 reserved)
+{
+    m_PLuaItem->setReserve(reserved);
+}
+
+uint8 CLuaItem::getReservedValue()
+{
+    return m_PLuaItem->getReserve();
 }
 
 auto CLuaItem::getName() -> std::string
@@ -319,7 +334,10 @@ void CLuaItem::Register()
     SOL_REGISTER("getTrialNumber", CLuaItem::getTrialNumber);
     SOL_REGISTER("getWornUses", CLuaItem::getWornUses);
     SOL_REGISTER("isType", CLuaItem::isType);
+    SOL_REGISTER("setSubType", CLuaItem::setSubType);
     SOL_REGISTER("isSubType", CLuaItem::isSubType);
+    SOL_REGISTER("setReservedValue", CLuaItem::setReservedValue);
+    SOL_REGISTER("getReservedValue", CLuaItem::getReservedValue);
     SOL_REGISTER("getName", CLuaItem::getName);
     SOL_REGISTER("getILvl", CLuaItem::getILvl);
     SOL_REGISTER("getReqLvl", CLuaItem::getReqLvl);

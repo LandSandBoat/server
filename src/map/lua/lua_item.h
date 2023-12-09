@@ -54,8 +54,12 @@ public:
     uint8  getWornUses();  // check if the item has been used
     uint32 getBasePrice(); // get the base sell price
 
-    bool isType(uint8 type);       // check the item type
-    bool isSubType(uint8 subtype); // check the item's sub type
+    bool isType(uint8 type);        // check the item type
+    void setSubType(uint8 subtype); // set the item's sub type
+    bool isSubType(uint8 subtype);  // check the item's sub type
+
+    void  setReservedValue(uint8 reserved); // set the item's reserved value
+    uint8 getReservedValue();               // get the item's reserved value
 
     auto   getName() -> std::string; // get the item's name
     uint16 getILvl();                // get the item's ilvl
