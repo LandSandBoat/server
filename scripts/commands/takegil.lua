@@ -11,8 +11,8 @@ commandObj.cmdprops =
 }
 
 local function error(player, msg)
-    player:PrintToPlayer(msg)
-    player:PrintToPlayer('!takegil <amount> (player)')
+    player:printToPlayer(msg)
+    player:printToPlayer('!takegil <amount> (player)')
 end
 
 commandObj.onTrigger = function(player, amount, target)
@@ -41,7 +41,7 @@ commandObj.onTrigger = function(player, amount, target)
 
     -- remove gil
     targ:delGil(amount)
-    player:PrintToPlayer(string.format('Removed %i gil from %s.  They now have %i gil.', amount, targ:getName(), targ:getGil()))
+    player:printToPlayer(string.format('Removed %i gil from %s.  They now have %i gil.', amount, targ:getName(), targ:getGil()))
 end
 
 return commandObj

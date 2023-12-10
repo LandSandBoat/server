@@ -11,8 +11,8 @@ commandObj.cmdprops =
 }
 
 local function error(player, msg)
-    player:PrintToPlayer(msg)
-    player:PrintToPlayer('!gotoid <mobId|npcId>')
+    player:printToPlayer(msg)
+    player:printToPlayer('!gotoid <mobId|npcId>')
 end
 
 commandObj.onTrigger = function(player, target)
@@ -47,7 +47,7 @@ commandObj.onTrigger = function(player, target)
     if not targ then
         player:goToEntity(target)
     elseif pos0 then
-        player:PrintToPlayer(string.format('%s (%i) has not been given coordinates.', targ:getName(), targ:getID()))
+        player:printToPlayer(string.format('%s (%i) has not been given coordinates.', targ:getName(), targ:getID()))
     else
         -- determine whether we need zoneId parameter
         local gotoZone = nil
@@ -57,9 +57,9 @@ commandObj.onTrigger = function(player, target)
 
         -- display message
         if isUp then
-            player:PrintToPlayer(string.format('Going to %s (%i).', targ:getName(), targ:getID()))
+            player:printToPlayer(string.format('Going to %s (%i).', targ:getName(), targ:getID()))
         else
-            player:PrintToPlayer(string.format('%s (%i) is not currently up. Going to last known coordinates.', targ:getName(), targ:getID()))
+            player:printToPlayer(string.format('%s (%i) is not currently up. Going to last known coordinates.', targ:getName(), targ:getID()))
         end
 
         -- half a second later, go.  this delay gives time for previous message to appear

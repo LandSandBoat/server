@@ -293,15 +293,15 @@ void CLuaBaseEntity::messageText(CLuaBaseEntity* PLuaBaseEntity, uint16 messageI
 }
 
 /************************************************************************
- *  Function: PrintToPlayer()
+ *  Function: printToPlayer()
  *  Purpose : Displays either standad messages to a PC or custom text
- *  Example : player:PrintToPlayer("Hello!", xi.msg.channel.NS_SAY)
- *          : player:PrintToPlayer(string.format("Hello, %s!", player:getName()), xi.msg.channel.SYSTEM_1)
+ *  Example : player:printToPlayer("Hello!", xi.msg.channel.NS_SAY)
+ *          : player:printToPlayer(string.format("Hello, %s!", player:getName()), xi.msg.channel.SYSTEM_1)
  *  Notes   : see scripts/enum/msg.lua for message channels
  *          : Can modify the name shown through explicit declaration
  ************************************************************************/
 
-void CLuaBaseEntity::PrintToPlayer(std::string const& message, sol::object const& messageTypeObj, sol::object const& nameObj)
+void CLuaBaseEntity::printToPlayer(std::string const& message, sol::object const& messageTypeObj, sol::object const& nameObj)
 {
     if (m_PBaseEntity->objtype != TYPE_PC)
     {
@@ -319,13 +319,13 @@ void CLuaBaseEntity::PrintToPlayer(std::string const& message, sol::object const
 }
 
 /************************************************************************
- *  Function: PrintToArea()
- *  Purpose : version of PrintToPlayer that passes to messageserver
- *  Example : player:PrintToArea("Im a real boy!", xi.msg.channel.SHOUT, xi.msg.area.SYSTEM, "Pinocchio");
+ *  Function: printToArea()
+ *  Purpose : Version of printToPlayer that passes to message server
+ *  Example : player:printToArea("Im a real boy!", xi.msg.channel.SHOUT, xi.msg.area.SYSTEM, "Pinocchio");
  *          : would print a shout type message from Pinocchio to the entire server
  ************************************************************************/
 
-void CLuaBaseEntity::PrintToArea(std::string const& message, sol::object const& arg1, sol::object const& arg2, sol::object const& arg3)
+void CLuaBaseEntity::printToArea(std::string const& message, sol::object const& arg1, sol::object const& arg2, sol::object const& arg3)
 {
     if (m_PBaseEntity->objtype != TYPE_PC)
     {
@@ -382,7 +382,7 @@ void CLuaBaseEntity::PrintToArea(std::string const& message, sol::object const& 
     }
     else
     {
-        ShowError("CLuaBaseEntity::PrintToArea : invalid message area/messageRange value %u given by script.", messageRange);
+        ShowError("CLuaBaseEntity::printToArea : invalid message area/messageRange value %u given by script.", messageRange);
     }
     /*
     Todo: Assist channels
@@ -17081,8 +17081,8 @@ void CLuaBaseEntity::Register()
     // Messaging System
     SOL_REGISTER("showText", CLuaBaseEntity::showText);
     SOL_REGISTER("messageText", CLuaBaseEntity::messageText);
-    SOL_REGISTER("PrintToPlayer", CLuaBaseEntity::PrintToPlayer);
-    SOL_REGISTER("PrintToArea", CLuaBaseEntity::PrintToArea);
+    SOL_REGISTER("printToPlayer", CLuaBaseEntity::printToPlayer);
+    SOL_REGISTER("printToArea", CLuaBaseEntity::printToArea);
     SOL_REGISTER("messageBasic", CLuaBaseEntity::messageBasic);
     SOL_REGISTER("messageName", CLuaBaseEntity::messageName);
     SOL_REGISTER("messagePublic", CLuaBaseEntity::messagePublic);

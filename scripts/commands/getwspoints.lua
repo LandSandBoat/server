@@ -11,8 +11,8 @@ commandObj.cmdprops =
 }
 
 local function error(player, msg)
-    player:PrintToPlayer(msg)
-    player:PrintToPlayer('!getwspoints (main/sub/ranged) (optional target)')
+    player:printToPlayer(msg)
+    player:printToPlayer('!getwspoints (main/sub/ranged) (optional target)')
 end
 
 commandObj.onTrigger = function(player, equipSlot, name)
@@ -39,7 +39,7 @@ commandObj.onTrigger = function(player, equipSlot, name)
 
     if not equipSlot then
         equipSlot = 'main'
-        player:PrintToPlayer('No equip slot specified, defaulting to mainhand weapon.')
+        player:printToPlayer('No equip slot specified, defaulting to mainhand weapon.')
     end
 
     local equip = xi.slot[string.upper(equipSlot)]
@@ -49,7 +49,7 @@ commandObj.onTrigger = function(player, equipSlot, name)
     end
 
     local points = target:getStorageItem(0, 0, equip):getWeaponskillPoints()
-    player:PrintToPlayer(string.format('The weapon in %s\'s %s slot has %i ws points', name, equipSlot, points))
+    player:printToPlayer(string.format('The weapon in %s\'s %s slot has %i ws points', name, equipSlot, points))
 end
 
 return commandObj

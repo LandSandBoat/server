@@ -11,7 +11,7 @@ commandObj.cmdprops =
 }
 
 local function error(player, msg)
-    player:PrintToPlayer(msg .. '\n!instance <instance_id>')
+    player:printToPlayer(msg .. '\n!instance <instance_id>')
 end
 
 commandObj.onTrigger = function(player, instance_id)
@@ -22,10 +22,10 @@ commandObj.onTrigger = function(player, instance_id)
 
     local currentInstance = player:getInstance()
     if currentInstance then
-        player:PrintToPlayer('It is not safe to use this command while inside an instance, try again after exiting.')
+        player:printToPlayer('It is not safe to use this command while inside an instance, try again after exiting.')
         currentInstance:fail()
     else
-        player:PrintToPlayer('Creating instance: ' .. instance_id)
+        player:printToPlayer('Creating instance: ' .. instance_id)
         player:createInstance(instance_id)
     end
 end

@@ -11,8 +11,8 @@ commandObj.cmdprops =
 }
 
 local function error(player, msg)
-    player:PrintToPlayer(msg)
-    player:PrintToPlayer('!up <yalms> (target)')
+    player:printToPlayer(msg)
+    player:printToPlayer('!up <yalms> (target)')
 end
 
 commandObj.onTrigger = function(player, number, target)
@@ -20,16 +20,16 @@ commandObj.onTrigger = function(player, number, target)
     local cursor = player:getCursorTarget()
 
     if target == nil and cursor == nil then
-        player:PrintToPlayer('Moving self.. ')
+        player:printToPlayer('Moving self.. ')
     elseif target == nil and cursor ~= nil then
         entity = cursor
-        player:PrintToPlayer('Moving cursor target.. ')
+        player:printToPlayer('Moving cursor target.. ')
     elseif target ~= nil and GetPlayerByName(target) == nil then
         error(player, string.format('Player named "%s" not found!', target))
         return
     else
         entity = GetPlayerByName(target)
-        player:PrintToPlayer('Moving specified player.. ')
+        player:printToPlayer('Moving specified player.. ')
     end
 
     local pos = entity:getPos()

@@ -11,8 +11,8 @@ commandObj.cmdprops =
 }
 
 local function error(player, msg)
-    player:PrintToPlayer(msg)
-    player:PrintToPlayer('!delspell <spellID> (player)')
+    player:printToPlayer(msg)
+    player:printToPlayer('!delspell <spellID> (player)')
 end
 
 commandObj.onTrigger = function(player, spellId, target)
@@ -36,7 +36,7 @@ commandObj.onTrigger = function(player, spellId, target)
 
     -- add spell
     targ:delSpell(spellId)
-    player:PrintToPlayer(string.format('Deleted spell %i from %s.', spellId, targ:getName()))
+    player:printToPlayer(string.format('Deleted spell %i from %s.', spellId, targ:getName()))
 end
 
 return commandObj

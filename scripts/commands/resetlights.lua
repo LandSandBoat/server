@@ -11,8 +11,8 @@ commandObj.cmdprops =
 }
 
 local function error(player, msg)
-    player:PrintToPlayer(msg)
-    player:PrintToPlayer('!resetlights (player)')
+    player:printToPlayer(msg)
+    player:printToPlayer('!resetlights (player)')
 end
 
 commandObj.onTrigger = function(player, target)
@@ -29,7 +29,7 @@ commandObj.onTrigger = function(player, target)
     end
 
     xi.abyssea.resetPlayerLights(targ)
-    player:PrintToPlayer(string.format('%s\'s lights have been reset!. ', targ:getName()))
+    player:printToPlayer(string.format('%s\'s lights have been reset!. ', targ:getName()))
 end
 
 return commandObj

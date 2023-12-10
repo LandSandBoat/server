@@ -11,8 +11,8 @@ commandObj.cmdprops =
 }
 
 local function error(player, msg)
-    player:PrintToPlayer(msg)
-    player:PrintToPlayer('!getquestvar <player> <logId> <questId> <variable>')
+    player:printToPlayer(msg)
+    player:printToPlayer('!getquestvar <player> <logId> <questId> <variable>')
 end
 
 commandObj.onTrigger = function(player, target, logId, questId, variable, value)
@@ -44,7 +44,7 @@ commandObj.onTrigger = function(player, target, logId, questId, variable, value)
     end
 
     local questVarName = Quest.getVarPrefix(logId, questId) .. variable
-    player:PrintToPlayer(string.format('%s\'s Quest variable \'%s\' : %u', targ:getName(), questVarName, targ:getCharVar(questVarName)))
+    player:printToPlayer(string.format('%s\'s Quest variable \'%s\' : %u', targ:getName(), questVarName, targ:getCharVar(questVarName)))
 end
 
 return commandObj

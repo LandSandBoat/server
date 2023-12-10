@@ -12,8 +12,8 @@ commandObj.cmdprops =
 }
 
 local function error(player, msg)
-    player:PrintToPlayer(msg)
-    player:PrintToPlayer('!npchere (npcID) (noDepop)')
+    player:printToPlayer(msg)
+    player:printToPlayer('!npchere (npcID) (noDepop)')
 end
 
 commandObj.onTrigger = function(player, npcId, noDepop)
@@ -39,10 +39,10 @@ commandObj.onTrigger = function(player, npcId, noDepop)
     else
         if noDepop == nil or noDepop == 0 then
             targ:setStatus(xi.status.DISAPPEAR)
-            player:PrintToPlayer('Despawned the NPC because of an error.')
+            player:printToPlayer('Despawned the NPC because of an error.')
         end
 
-        player:PrintToPlayer('NPC could not be moved to current pos - you are probably in the wrong zone.')
+        player:printToPlayer('NPC could not be moved to current pos - you are probably in the wrong zone.')
     end
 end
 

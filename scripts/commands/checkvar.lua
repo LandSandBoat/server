@@ -11,8 +11,8 @@ commandObj.cmdprops =
 }
 
 local function error(player, msg)
-    player:PrintToPlayer(msg)
-    player:PrintToPlayer('!checkvar { \'server\', or player } <variable name>')
+    player:printToPlayer(msg)
+    player:printToPlayer('!checkvar { \'server\', or player } <variable name>')
 end
 
 commandObj.onTrigger = function(player, arg1, arg2)
@@ -55,9 +55,9 @@ commandObj.onTrigger = function(player, arg1, arg2)
 
     -- show variable
     if targ == 'server' then
-        player:PrintToPlayer(string.format('Server variable \'%s\' : %u ', varName, GetServerVariable(varName)))
+        player:printToPlayer(string.format('Server variable \'%s\' : %u ', varName, GetServerVariable(varName)))
     else
-        player:PrintToPlayer(string.format('%s\'s variable \'%s\' : %u', targ:getName(), varName, targ:getCharVar(varName)))
+        player:printToPlayer(string.format('%s\'s variable \'%s\' : %u', targ:getName(), varName, targ:getCharVar(varName)))
     end
 end
 

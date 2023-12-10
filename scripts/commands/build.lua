@@ -11,7 +11,7 @@ commandObj.cmdprops =
 }
 
 commandObj.onTrigger = function(player, target)
-    player:PrintToPlayer(BuildString())
+    player:printToPlayer(BuildString())
 end
 
 return commandObj

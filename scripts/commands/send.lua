@@ -281,8 +281,8 @@ local zoneList =
 }
 
 local function error(player, msg)
-    player:PrintToPlayer(msg)
-    player:PrintToPlayer('!send <player to send> <destination player or zone>')
+    player:printToPlayer(msg)
+    player:printToPlayer('!send <player to send> <destination player or zone>')
 end
 
 local function getBytePos(s, needle)
@@ -390,7 +390,7 @@ commandObj.onTrigger = function(player, bytes)
     -- send target to destination
     targ:setPos(x, y, z, rot, zone)
     if targ:getID() ~= player:getID() then
-        player:PrintToPlayer(string.format('Sent %s to zone %i.', targ:getName(), zone))
+        player:printToPlayer(string.format('Sent %s to zone %i.', targ:getName(), zone))
     end
 end
 

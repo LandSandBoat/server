@@ -35,7 +35,7 @@ enum CHAT_MESSAGE_TYPE
     MESSAGE_TELL      = 3,
     MESSAGE_PARTY     = 4,
     MESSAGE_LINKSHELL = 5,
-    MESSAGE_SYSTEM_1  = 6, // Standard "PrintToPlayer" default if no type specified
+    MESSAGE_SYSTEM_1  = 6, // Standard "printToPlayer" default if no type specified
     MESSAGE_SYSTEM_2  = 7, // Login / world announcement messages
     MESSAGE_EMOTION   = 8,
     // 9 / 10 / 11 = Does not work / nothing

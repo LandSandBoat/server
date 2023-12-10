@@ -11,8 +11,8 @@ commandObj.cmdprops =
 }
 
 local function error(player, msg)
-    player:PrintToPlayer(msg)
-    player:PrintToPlayer('!adddynatime <minutes> (player)')
+    player:printToPlayer(msg)
+    player:printToPlayer('!adddynatime <minutes> (player)')
 end
 
 commandObj.onTrigger = function(player, minutes, target)

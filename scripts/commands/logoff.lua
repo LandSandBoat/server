@@ -11,8 +11,8 @@ commandObj.cmdprops =
 }
 
 local function error(player, msg)
-    player:PrintToPlayer(msg)
-    player:PrintToPlayer('!logoff (player)')
+    player:printToPlayer(msg)
+    player:printToPlayer('!logoff (player)')
 end
 
 commandObj.onTrigger = function(player, target)
@@ -31,7 +31,7 @@ commandObj.onTrigger = function(player, target)
     -- logoff target
     targ:leaveGame()
     if targ:getID() ~= player:getID() then
-        player:PrintToPlayer(string.format('%s has been logged off.', targ:getName()))
+        player:printToPlayer(string.format('%s has been logged off.', targ:getName()))
     end
 end
 

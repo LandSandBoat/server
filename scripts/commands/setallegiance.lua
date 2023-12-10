@@ -11,8 +11,8 @@ commandObj.cmdprops =
 }
 
 local function error(player, msg)
-    player:PrintToPlayer(msg)
-    player:PrintToPlayer('!setallegiance <allegiance> <player>')
+    player:printToPlayer(msg)
+    player:printToPlayer('!setallegiance <allegiance> <player>')
 end
 
 commandObj.onTrigger = function(player, allegiance, target)
@@ -39,7 +39,7 @@ commandObj.onTrigger = function(player, allegiance, target)
 
     local toString = { 'Mob', 'Player', 'San d\'Oria', 'Bastok', 'Windurst', 'Wyverns', 'Griffons' }
 
-    player:PrintToPlayer(string.format('You set %s\'s allegiance to %s', targ:getName(), toString[allegiance + 1]))
+    player:printToPlayer(string.format('You set %s\'s allegiance to %s', targ:getName(), toString[allegiance + 1]))
     targ:setAllegiance(allegiance)
 end
 

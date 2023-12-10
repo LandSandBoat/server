@@ -11,8 +11,8 @@ commandObj.cmdprops =
 }
 
 local function error(player, msg)
-    player:PrintToPlayer(msg)
-    player:PrintToPlayer('!addallmonstrosity (player)')
+    player:printToPlayer(msg)
+    player:printToPlayer('!addallmonstrosity (player)')
 end
 
 commandObj.onTrigger = function(player, target)
@@ -30,7 +30,7 @@ commandObj.onTrigger = function(player, target)
 
     xi.monstrosity.unlockAll(targ)
 
-    player:PrintToPlayer(string.format('%s now has all monstrosity data.', targ:getName()))
+    player:printToPlayer(string.format('%s now has all monstrosity data.', targ:getName()))
 end
 
 return commandObj

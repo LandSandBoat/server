@@ -11,8 +11,8 @@ commandObj.cmdprops =
 }
 
 local function error(player, msg)
-    player:PrintToPlayer(msg)
-    player:PrintToPlayer('!masterjob <player>')
+    player:printToPlayer(msg)
+    player:printToPlayer('!masterjob <player>')
 end
 
 commandObj.onTrigger = function(player, target)
@@ -29,7 +29,7 @@ commandObj.onTrigger = function(player, target)
     end
 
     targ:masterJob()
-    player:PrintToPlayer(string.format('Mastered %s\'s main job!', targ:getName()))
+    player:printToPlayer(string.format('Mastered %s\'s main job!', targ:getName()))
 end
 
 return commandObj

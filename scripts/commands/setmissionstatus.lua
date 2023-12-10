@@ -13,8 +13,8 @@ commandObj.cmdprops =
 }
 
 local function error(player, msg)
-    player:PrintToPlayer(msg)
-    player:PrintToPlayer('!setmissionstatus (player) (value) (log ID) (index)')
+    player:printToPlayer(msg)
+    player:printToPlayer('!setmissionstatus (player) (value) (log ID) (index)')
 end
 
 commandObj.onTrigger = function(player, target, value, logId, statusIndex)
@@ -53,9 +53,9 @@ commandObj.onTrigger = function(player, target, value, logId, statusIndex)
     -- set mission
     targ:setMissionStatus(logId, value, statusIndex)
     if statusIndex then
-        player:PrintToPlayer(string.format('missionStatus for %s (%s index %s) set to %s', targ:getName(), logName, statusIndex, value))
+        player:printToPlayer(string.format('missionStatus for %s (%s index %s) set to %s', targ:getName(), logName, statusIndex, value))
     else
-        player:PrintToPlayer(string.format('missionStatus for %s (%s) set to %s', targ:getName(), logName, value))
+        player:printToPlayer(string.format('missionStatus for %s (%s) set to %s', targ:getName(), logName, value))
     end
 end
 

@@ -11,8 +11,8 @@ commandObj.cmdprops =
 }
 
 local function error(player, msg)
-    player:PrintToPlayer(msg)
-    player:PrintToPlayer('!addallweaponskills (player)')
+    player:printToPlayer(msg)
+    player:printToPlayer('!addallweaponskills (player)')
 end
 
 commandObj.onTrigger = function(player, target)
@@ -33,7 +33,7 @@ commandObj.onTrigger = function(player, target)
         targ:addLearnedWeaponskill(i)
     end
 
-    player:PrintToPlayer(string.format('%s now has all learned weaponskills.', targ:getName()))
+    player:printToPlayer(string.format('%s now has all learned weaponskills.', targ:getName()))
 end
 
 return commandObj

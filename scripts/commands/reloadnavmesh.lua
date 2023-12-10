@@ -14,7 +14,7 @@ commandObj.cmdprops =
 
 commandObj.onTrigger = function(player)
     local zone = player:getZone()
-    player:PrintToPlayer('Reloading Navmesh for ' .. zone:getName())
+    player:printToPlayer('Reloading Navmesh for ' .. zone:getName())
     zone:reloadNavmesh()
 end
 

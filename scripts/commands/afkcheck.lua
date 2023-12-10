@@ -18,12 +18,12 @@ commandObj.onTrigger = function(player)
     local target = player:getCursorTarget()
 
     if not target then
-        player:PrintToPlayer('No target selected target, using self')
+        player:printToPlayer('No target selected target, using self')
         target = player
     end
 
     if target:getObjType() ~= xi.objType.PC then
-        player:PrintToPlayer('Invalid target')
+        player:printToPlayer('Invalid target')
     end
 
     -- Generate options
@@ -36,7 +36,7 @@ commandObj.onTrigger = function(player)
         {
             string.format('%2i + %2i = %2i', a, b, c),
             function(playerArg)
-                playerArg:PrintToPlayer('AFK Check passed', xi.msg.channel.NS_SAY)
+                playerArg:printToPlayer('AFK Check passed', xi.msg.channel.NS_SAY)
                 playerArg:setLocalVar('CAPTCHA', 0)
             end,
         }
@@ -56,7 +56,7 @@ commandObj.onTrigger = function(player)
         {
             string.format('%2i + %2i = %2i', a, b, c),
             function(playerArg)
-                playerArg:PrintToPlayer('AFK Check failed', xi.msg.channel.NS_SAY)
+                playerArg:printToPlayer('AFK Check failed', xi.msg.channel.NS_SAY)
                 playerArg:setHP(0)
             end,
         }
@@ -79,7 +79,7 @@ commandObj.onTrigger = function(player)
 
         options = options,
         onCancelled = function(playerArg)
-            playerArg:PrintToPlayer('AFK Check failed!', xi.msg.channel.NS_SAY)
+            playerArg:printToPlayer('AFK Check failed!', xi.msg.channel.NS_SAY)
         end,
     }
     target:customMenu(menu)

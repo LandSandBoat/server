@@ -32,7 +32,7 @@ local checkWorldFirstServerVar = function(player, varName, worldMessage)
 
     if GetVolatileServerVariable(worldFirst) == 0 then -- Record hasn't been set yet
         local decoratedMessage = string.format('%s %s %s', openingDecoration, worldMessage, closingDecoration)
-        player:PrintToArea(decoratedMessage, xi.msg.channel.SYSTEM_3, 0, '') -- Sends announcement via ZMQ to all processes and zones
+        player:printToArea(decoratedMessage, xi.msg.channel.SYSTEM_3, 0, '') -- Sends announcement via ZMQ to all processes and zones
 
         -- Write out World First (WF) and World First Time (WT) to server vars)
         SetVolatileServerVariable(worldFirst, player:getID())

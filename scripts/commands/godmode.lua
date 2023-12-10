@@ -100,32 +100,32 @@ commandObj.onTrigger = function(player, tier)
     if mode == 0 and state == 0 then
         player:setCharVar('GodMode', 1)
         godModeOn(player)
-        player:PrintToPlayer('God Mode enabled.')
+        player:printToPlayer('God Mode enabled.')
     elseif mode == 0 and state == 1 then
         player:setCharVar('GodMode', 0)
         godModeOff(player)
-        player:PrintToPlayer('God Mode disabled.')
+        player:printToPlayer('God Mode disabled.')
     elseif mode == 0 and state == 2 then
         player:setCharVar('GodMode', 1)
         godModeTierOneOff(player)
         godModeOn(player)
-        player:PrintToPlayer('God Mode enabled.')
+        player:printToPlayer('God Mode enabled.')
     end
 
     -- Enables a toned down version of god mode
     if mode == 1 and state == 0 then
         player:setCharVar('GodMode', 2)
         godModeTierOneOn(player)
-        player:PrintToPlayer('God Mode Tier 1 enabled.')
+        player:printToPlayer('God Mode Tier 1 enabled.')
     elseif mode == 1 and state == 2 then
         player:setCharVar('GodMode', 0)
         godModeTierOneOff(player)
-        player:PrintToPlayer('God Mode Tier 1 disabled.')
+        player:printToPlayer('God Mode Tier 1 disabled.')
     elseif mode == 1 and state == 1 then
         player:setCharVar('GodMode', 2)
         godModeOff(player)
         godModeTierOneOn(player)
-        player:PrintToPlayer('God Mode Tier 1 enabled.')
+        player:printToPlayer('God Mode Tier 1 enabled.')
     end
 end
 

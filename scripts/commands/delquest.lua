@@ -13,8 +13,8 @@ commandObj.cmdprops =
 }
 
 local function error(player, msg)
-    player:PrintToPlayer(msg)
-    player:PrintToPlayer('!delquest <logID> <questID> (player)')
+    player:printToPlayer(msg)
+    player:printToPlayer('!delquest <logID> <questID> (player)')
 end
 
 commandObj.onTrigger = function(player, logId, questId, target)
@@ -53,7 +53,7 @@ commandObj.onTrigger = function(player, logId, questId, target)
 
     -- add quest
     targ:delQuest(logId, questId)
-    player:PrintToPlayer(string.format('Deleted %s quest %i from %s.', logName, questId, targ:getName()))
+    player:printToPlayer(string.format('Deleted %s quest %i from %s.', logName, questId, targ:getName()))
 end
 
 return commandObj

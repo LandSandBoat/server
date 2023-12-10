@@ -11,8 +11,8 @@ commandObj.cmdprops =
 }
 
 local function error(player)
-    player:PrintToPlayer('!time <offset>')
-    player:PrintToPlayer(string.format('Vana\'diel: %d/%d/%d/%d/%02d', VanadielYear(), VanadielMonth(), VanadielDayOfTheMonth(), VanadielHour(), VanadielMinute()))
+    player:printToPlayer('!time <offset>')
+    player:printToPlayer(string.format('Vana\'diel: %d/%d/%d/%d/%02d', VanadielYear(), VanadielMonth(), VanadielDayOfTheMonth(), VanadielHour(), VanadielMinute()))
 end
 
 commandObj.onTrigger = function(player, offset)
@@ -28,8 +28,8 @@ commandObj.onTrigger = function(player, offset)
         error(player)
         return
     else
-        player:PrintToPlayer('Time changed!')
-        player:PrintToPlayer(string.format('Vana\'diel: %d/%d/%d/%d/%02d', VanadielYear(), VanadielMonth(), VanadielDayOfTheMonth(), VanadielHour(), VanadielMinute()))
+        player:printToPlayer('Time changed!')
+        player:printToPlayer(string.format('Vana\'diel: %d/%d/%d/%d/%02d', VanadielYear(), VanadielMonth(), VanadielDayOfTheMonth(), VanadielHour(), VanadielMinute()))
     end
 end
 

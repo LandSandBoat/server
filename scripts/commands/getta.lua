@@ -16,12 +16,12 @@ commandObj.onTrigger = function(player)
     if targ ~= nil then
         local tatarget = player:getTrickAttackChar(targ)
         if tatarget ~= nil then
-            player:PrintToPlayer(string.format('Trick attack would select: %s', tatarget:getName()))
+            player:printToPlayer(string.format('Trick attack would select: %s', tatarget:getName()))
         else
-            player:PrintToPlayer('No valid TA target found.')
+            player:printToPlayer('No valid TA target found.')
         end
     else
-        player:PrintToPlayer('Must select a target using in game cursor first.')
+        player:printToPlayer('Must select a target using in game cursor first.')
     end
 end
 

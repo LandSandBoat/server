@@ -18,9 +18,9 @@ commandObj.onTrigger = function(player)
         local progress = instance:getProgress()
         local stage = instance:getStage()
 
-        player:PrintToPlayer(string.format('Progress: %i Stage: %i', progress, stage))
+        player:printToPlayer(string.format('Progress: %i Stage: %i', progress, stage))
     else
-        player:PrintToPlayer('Must be in an Instanced zone')
+        player:printToPlayer('Must be in an Instanced zone')
     end
 end
 

@@ -11,8 +11,8 @@ commandObj.cmdprops =
 }
 
 local function error(player, msg)
-    player:PrintToPlayer(msg)
-    player:PrintToPlayer('!return (player)')
+    player:printToPlayer(msg)
+    player:printToPlayer('!return (player)')
 end
 
 commandObj.onTrigger = function(player, target)
@@ -42,7 +42,7 @@ commandObj.onTrigger = function(player, target)
     -- zone target
     targ:setPos(0, 0, 0, 0, zoneId)
     if targ:getID() ~= player:getID() then
-        player:PrintToPlayer(string.format('%s was returned to zone %i.', targ:getName(), zoneId))
+        player:printToPlayer(string.format('%s was returned to zone %i.', targ:getName(), zoneId))
     end
 end
 

@@ -11,8 +11,8 @@ commandObj.cmdprops =
 }
 
 local function error(player, msg)
-    player:PrintToPlayer(msg)
-    player:PrintToPlayer('!completerecord <recordID> (player)')
+    player:printToPlayer(msg)
+    player:printToPlayer('!completerecord <recordID> (player)')
 end
 
 commandObj.onTrigger = function(player, recordID, target)
@@ -36,7 +36,7 @@ commandObj.onTrigger = function(player, recordID, target)
 
     -- complete quest
     targ:setEminenceCompleted(recordID)
-    player:PrintToPlayer(string.format('Completed RoE Record with ID %u for %s', recordID, targ:getName()))
+    player:printToPlayer(string.format('Completed RoE Record with ID %u for %s', recordID, targ:getName()))
 end
 
 return commandObj

@@ -11,8 +11,8 @@ commandObj.cmdprops =
 }
 
 local function error(player, msg)
-    player:PrintToPlayer(msg)
-    player:PrintToPlayer('!getmobaction (mobID)')
+    player:printToPlayer(msg)
+    player:printToPlayer('!getmobaction (mobID)')
 end
 
 commandObj.onTrigger = function(player, mobId)
@@ -33,7 +33,7 @@ commandObj.onTrigger = function(player, mobId)
     end
 
     -- report mob action
-    player:PrintToPlayer(string.format('%s %i current action ID is %i.', targ:getName(), targ:getID(), targ:getCurrentAction()))
+    player:printToPlayer(string.format('%s %i current action ID is %i.', targ:getName(), targ:getID(), targ:getCurrentAction()))
 end
 
 return commandObj

@@ -11,8 +11,8 @@ commandObj.cmdprops =
 }
 
 local function error(player, msg)
-    player:PrintToPlayer(msg)
-    player:PrintToPlayer('!setjobpoints <amount> (player)')
+    player:printToPlayer(msg)
+    player:printToPlayer('!setjobpoints <amount> (player)')
 end
 
 commandObj.onTrigger = function(player, amount, target)
@@ -45,7 +45,7 @@ commandObj.onTrigger = function(player, amount, target)
 
     -- set job points
     targ:setJobPoints(amount)
-    player:PrintToPlayer(string.format('%s now has %i job points on %s.', targ:getName(), amount, jobNameByNum[targ:getMainJob()]))
+    player:printToPlayer(string.format('%s now has %i job points on %s.', targ:getName(), amount, jobNameByNum[targ:getMainJob()]))
 end
 
 return commandObj

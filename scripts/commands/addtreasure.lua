@@ -11,8 +11,8 @@ commandObj.cmdprops =
 }
 
 local function error(player, msg)
-    player:PrintToPlayer(msg)
-    player:PrintToPlayer('!addtreasure <itemID> (player) (npcID)')
+    player:printToPlayer(msg)
+    player:printToPlayer('!addtreasure <itemID> (player) (npcID)')
 end
 
 commandObj.onTrigger = function(player, itemId, target, dropper)
@@ -49,7 +49,7 @@ commandObj.onTrigger = function(player, itemId, target, dropper)
 
     -- add treasure to pool
     targ:addTreasure(itemId, dropper)
-    player:PrintToPlayer(string.format('Item of ID %d was added to the treasure pool of %s or their party/alliance.', itemId, targ:getName()))
+    player:printToPlayer(string.format('Item of ID %d was added to the treasure pool of %s or their party/alliance.', itemId, targ:getName()))
 end
 
 return commandObj

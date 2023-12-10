@@ -45,7 +45,7 @@ end
 local function debugPrintToPlayers(players, msg)
     if enableDebugPrints then
         for _, player in pairs(players) do
-            player:PrintToPlayer(msg)
+            player:printToPlayer(msg)
         end
     end
 end
@@ -769,7 +769,7 @@ xi.garrison.onTrade = function(player, npc, trade, guardNation)
 
     -- If info is missing, a debug message will be logged and Garrison will not begin
     if xi.garrison.getAllyInfo(zoneID, zoneData, nationID) == nil then
-        player:PrintToPlayer('Garrison is currently unavailable for this region.', xi.msg.channel.SYSTEM_3)
+        player:printToPlayer('Garrison is currently unavailable for this region.', xi.msg.channel.SYSTEM_3)
         debugLog('Garrison was cancelled due to missing data.')
 
         return false

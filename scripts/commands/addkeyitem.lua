@@ -11,8 +11,8 @@ commandObj.cmdprops =
 }
 
 local function error(player, msg)
-    player:PrintToPlayer(msg)
-    player:PrintToPlayer('!addkeyitem <key item ID> (player)')
+    player:printToPlayer(msg)
+    player:printToPlayer('!addkeyitem <key item ID> (player)')
 end
 
 commandObj.onTrigger = function(player, keyId, target)
@@ -42,12 +42,12 @@ commandObj.onTrigger = function(player, keyId, target)
 
     -- add key item to target
     if targ:hasKeyItem(keyId) then
-        player:PrintToPlayer(string.format('%s already has key item %i.', targ:getName(), keyId))
+        player:printToPlayer(string.format('%s already has key item %i.', targ:getName(), keyId))
     else
         local ID = zones[targ:getZoneID()]
         targ:addKeyItem(keyId)
         targ:messageSpecial(ID.text.KEYITEM_OBTAINED, keyId)
-        player:PrintToPlayer(string.format('Key item %i was given to %s.', keyId, targ:getName()))
+        player:printToPlayer(string.format('Key item %i was given to %s.', keyId, targ:getName()))
     end
 end
 

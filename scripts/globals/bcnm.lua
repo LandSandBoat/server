@@ -1771,7 +1771,7 @@ end
 -- onEventUpdate
 -----------------------------------
 xi.bcnm.onEventUpdate = function(player, csid, option, extras)
-    -- player:PrintToPlayer(string.format('EventUpdateBCNM csid=%i option=%i extras=%i', csid, option, extras))
+    -- player:printToPlayer(string.format('EventUpdateBCNM csid=%i option=%i extras=%i', csid, option, extras))
 
     -- Requesting a battlefield
     if csid == 32000 then
@@ -1885,7 +1885,7 @@ end
 -----------------------------------
 
 xi.bcnm.onEventFinish = function(player, csid, option, npc)
-    -- player:PrintToPlayer(string.format('EventFinishBCNM csid=%i option=%i', csid, option))
+    -- player:printToPlayer(string.format('EventFinishBCNM csid=%i option=%i', csid, option))
     player:setLocalVar('[battlefield]area', 0)
 
     if player:hasStatusEffect(xi.effect.BATTLEFIELD) then

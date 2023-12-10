@@ -12,8 +12,8 @@ commandObj.cmdprops =
 }
 
 local function error(player, msg)
-    player:PrintToPlayer(msg)
-    player:PrintToPlayer('!reset (player)')
+    player:printToPlayer(msg)
+    player:printToPlayer('!reset (player)')
 end
 
 commandObj.onTrigger = function(player, target)
@@ -32,7 +32,7 @@ commandObj.onTrigger = function(player, target)
     -- reset target recasts
     targ:resetRecasts()
     if targ:getID() ~= player:getID() then
-        player:PrintToPlayer(string.format('Reset %s\'s recast timers.', targ:getName()))
+        player:printToPlayer(string.format('Reset %s\'s recast timers.', targ:getName()))
     end
 
     -- Clear debilitating effects from player

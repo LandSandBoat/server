@@ -11,8 +11,8 @@ commandObj.cmdprops =
 }
 
 local function error(player, msg)
-    player:PrintToPlayer(msg)
-    player:PrintToPlayer('!reloadbattlefield <lua-file-name>')
+    player:printToPlayer(msg)
+    player:printToPlayer('!reloadbattlefield <lua-file-name>')
 end
 
 local function fileExists(path)
@@ -46,7 +46,7 @@ commandObj.onTrigger = function(player, battlefieldName)
         container.filename = filename
         if InteractionGlobal and container then
             InteractionGlobal.lookup:addContainer(container)
-            player:PrintToPlayer(string.format('Battlefield \'%s\' at \'%s\' has been reloaded.', battlefieldName, filename))
+            player:printToPlayer(string.format('Battlefield \'%s\' at \'%s\' has been reloaded.', battlefieldName, filename))
         end
 
         return

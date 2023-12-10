@@ -17,16 +17,16 @@ local types =
 }
 
 local function error(player)
-    player:PrintToPlayer(string.format('!trustengage <type number>\n' ..
+    player:printToPlayer(string.format('!trustengage <type number>\n' ..
     '0: %s\n' ..
     '1: %s', types[0][2], types[1][2]))
     local type = player:getCharVar('TrustEngageType')
-    player:PrintToPlayer(string.format('Currently set to:\n %i: %s', type, types[type][2]))
+    player:printToPlayer(string.format('Currently set to:\n %i: %s', type, types[type][2]))
 end
 
 commandObj.onTrigger = function(player, type)
     if xi.settings.main.ENABLE_TRUST_CUSTOM_ENGAGEMENT ~= 1 then
-        player:PrintToPlayer('Trust custom engage conditions are disabled.')
+        player:printToPlayer('Trust custom engage conditions are disabled.')
         return
     end
 
@@ -35,7 +35,7 @@ commandObj.onTrigger = function(player, type)
     end
 
     player:setCharVar('TrustEngageType', type)
-    player:PrintToPlayer(string.format('Set Trust engage type to: %i: %s', type, types[type][2]))
+    player:printToPlayer(string.format('Set Trust engage type to: %i: %s', type, types[type][2]))
 end
 
 return commandObj

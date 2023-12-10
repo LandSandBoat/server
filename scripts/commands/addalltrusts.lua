@@ -11,8 +11,8 @@ commandObj.cmdprops =
 }
 
 local function error(player, msg)
-    player:PrintToPlayer(msg)
-    player:PrintToPlayer('!addalltrusts (player)')
+    player:printToPlayer(msg)
+    player:printToPlayer('!addalltrusts (player)')
 end
 
 commandObj.onTrigger = function(player, target)
@@ -51,7 +51,7 @@ commandObj.onTrigger = function(player, target)
         targ:addSpell(validSpells[i], silent, save, sendUpdate)
     end
 
-    player:PrintToPlayer(string.format('%s now has all trusts.', targ:getName()))
+    player:printToPlayer(string.format('%s now has all trusts.', targ:getName()))
 end
 
 return commandObj

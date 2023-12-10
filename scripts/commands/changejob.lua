@@ -11,8 +11,8 @@ commandObj.cmdprops =
 }
 
 local function error(player, msg)
-    player:PrintToPlayer(msg)
-    player:PrintToPlayer('!changejob <jobID> (level) (master: 0/1)')
+    player:printToPlayer(msg)
+    player:printToPlayer('!changejob <jobID> (level) (master: 0/1)')
 end
 
 commandObj.onTrigger = function(player, jobId, level, master)
@@ -57,7 +57,7 @@ commandObj.onTrigger = function(player, jobId, level, master)
 
     -- output new job to player
     local masterStr = masterJob and ' (Mastered)' or ''
-    player:PrintToPlayer(string.format('You are now a %s%i/%s%i%s.', jobNameByNum[player:getMainJob()], player:getMainLvl(), jobNameByNum[player:getSubJob()], player:getSubLvl(), masterStr))
+    player:printToPlayer(string.format('You are now a %s%i/%s%i%s.', jobNameByNum[player:getMainJob()], player:getMainLvl(), jobNameByNum[player:getSubJob()], player:getSubLvl(), masterStr))
 end
 
 return commandObj

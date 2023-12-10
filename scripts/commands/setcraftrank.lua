@@ -11,8 +11,8 @@ commandObj.cmdprops =
 }
 
 local function error(player, msg)
-    player:PrintToPlayer(msg)
-    player:PrintToPlayer('!setcraftRank <craft skill or ID> <craft rank> (player)')
+    player:printToPlayer(msg)
+    player:printToPlayer('!setcraftRank <craft skill or ID> <craft rank> (player)')
 end
 
 commandObj.onTrigger = function(player, craftName, tier, target)
@@ -54,15 +54,15 @@ commandObj.onTrigger = function(player, craftName, tier, target)
     else
         targ = GetPlayerByName(target)
         if targ == nil then
-            player:PrintToPlayer(string.format('Player named "%s" not found!', target))
+            player:printToPlayer(string.format('Player named "%s" not found!', target))
             return
         end
     end
 
     targ:setSkillRank(skillID, craftRank)
-    targ:PrintToPlayer(string.format('Your %s craft skill rank has been adjusted to: %s', craftName, craftRank))
+    targ:printToPlayer(string.format('Your %s craft skill rank has been adjusted to: %s', craftName, craftRank))
     if targ ~= player then
-        player:PrintToPlayer(string.format('%s\'s new skillID \'%s\' rank: %u', targ:getName(), craftName, targ:getSkillRank(skillID)))
+        player:printToPlayer(string.format('%s\'s new skillID \'%s\' rank: %u', targ:getName(), craftName, targ:getSkillRank(skillID)))
     end
 end
 

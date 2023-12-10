@@ -11,8 +11,8 @@ commandObj.cmdprops =
 }
 
 local function error(player, msg)
-    player:PrintToPlayer(msg)
-    player:PrintToPlayer('!cs <csID> (op1) (op2) (op3) (op4) (op5) (op6) (op7) (op8) (texttable)')
+    player:printToPlayer(msg)
+    player:printToPlayer('!cs <csID> (op1) (op2) (op3) (op4) (op5) (op6) (op7) (op8) (texttable)')
 end
 
 commandObj.onTrigger = function(player, csid, op1, op2, op3, op4, op5, op6, op7, op8, texttable)

@@ -11,9 +11,9 @@ commandObj.cmdprops =
 }
 
 local function error(player, msg)
-    player:PrintToPlayer(msg)
-    player:PrintToPlayer('!setplayermodel <model> <slot> (player)')
-    player:PrintToPlayer('Slots: 0=main 1=sub 2=ranged 3=ammo 4=head 5=body 6=hands 7=legs 8=feet')
+    player:printToPlayer(msg)
+    player:printToPlayer('!setplayermodel <model> <slot> (player)')
+    player:printToPlayer('Slots: 0=main 1=sub 2=ranged 3=ammo 4=head 5=body 6=hands 7=legs 8=feet')
 end
 
 commandObj.onTrigger = function(player, model, slot, target)
@@ -56,7 +56,7 @@ commandObj.onTrigger = function(player, model, slot, target)
 
     -- set model
     targ:setModelId(model, slot)
-    player:PrintToPlayer(string.format('Set %s\'s %s slot to model %i.', targ:getName(), slotNameByNum[slot], model))
+    player:printToPlayer(string.format('Set %s\'s %s slot to model %i.', targ:getName(), slotNameByNum[slot], model))
 end
 
 return commandObj

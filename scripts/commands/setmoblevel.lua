@@ -11,8 +11,8 @@ commandObj.cmdprops =
 }
 
 local function error(player, msg)
-    player:PrintToPlayer(msg)
-    player:PrintToPlayer('!setmoblevel <level>')
+    player:printToPlayer(msg)
+    player:printToPlayer('!setmoblevel <level>')
 end
 
 commandObj.onTrigger = function(player, lv)
@@ -20,13 +20,13 @@ commandObj.onTrigger = function(player, lv)
 
     -- set level
     if target and target:isMob() then
-        player:PrintToPlayer(string.format('Old MainJob(jID: %s) LV: %i / SubJob(jID: %s) LV: %i ',
+        player:printToPlayer(string.format('Old MainJob(jID: %s) LV: %i / SubJob(jID: %s) LV: %i ',
             target:getMainJob(), target:getMainLvl(), target:getSubJob(), target:getSubLvl()), xi.msg.channel.SYSTEM_3
         )
 
         target:setMobLevel(lv)
 
-        player:PrintToPlayer(string.format('New MainJob(jID: %s) LV: %i / SubJob(jID: %s) LV: %i ',
+        player:printToPlayer(string.format('New MainJob(jID: %s) LV: %i / SubJob(jID: %s) LV: %i ',
             target:getMainJob(), target:getMainLvl(), target:getSubJob(), target:getSubLvl()), xi.msg.channel.SYSTEM_3
         )
     else

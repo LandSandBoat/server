@@ -15,7 +15,7 @@ commandObj.cmdprops =
 
 local function error(player, msg)
     local usage = 'Usage: !garrison <command> (player)'
-    player:PrintToPlayer(msg .. '\n' .. usage)
+    player:printToPlayer(msg .. '\n' .. usage)
 end
 
 commandObj.onTrigger = function(player, command, target)
@@ -49,12 +49,12 @@ commandObj.onTrigger = function(player, command, target)
     {
         ['start'] = function()
             xi.garrison.start(targ, targ)
-            targ:PrintToPlayer(string.format('%s garrison started', zone:getName()))
+            targ:printToPlayer(string.format('%s garrison started', zone:getName()))
         end,
 
         ['stop'] = function()
             xi.garrison.stop(targ:getZone())
-            targ:PrintToPlayer(string.format('%s garrison stopped', zone:getName()))
+            targ:printToPlayer(string.format('%s garrison stopped', zone:getName()))
         end,
 
         ['win'] = function()

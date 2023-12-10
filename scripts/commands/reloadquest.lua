@@ -11,8 +11,8 @@ commandObj.cmdprops =
 }
 
 local function error(player, msg)
-    player:PrintToPlayer(msg)
-    player:PrintToPlayer('!reloadquest <lua-file-name>')
+    player:printToPlayer(msg)
+    player:printToPlayer('!reloadquest <lua-file-name>')
 end
 
 local function fileExists(path)
@@ -53,7 +53,7 @@ commandObj.onTrigger = function(player, questName)
             local res = utils.prequire(filename)
             if InteractionGlobal and res then
                 InteractionGlobal.lookup:addContainer(res)
-                player:PrintToPlayer(string.format('Quest \'%s\' at \'%s\' has been reloaded.', questName, filename))
+                player:printToPlayer(string.format('Quest \'%s\' at \'%s\' has been reloaded.', questName, filename))
             end
 
             return

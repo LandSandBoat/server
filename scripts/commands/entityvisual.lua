@@ -11,8 +11,8 @@ commandObj.cmdprops =
 }
 
 local function error(player, msg)
-    player:PrintToPlayer(msg)
-    player:PrintToPlayer('!entityvisual <animation string>')
+    player:printToPlayer(msg)
+    player:printToPlayer('!entityvisual <animation string>')
 end
 
 commandObj.onTrigger = function(player, visualstring)

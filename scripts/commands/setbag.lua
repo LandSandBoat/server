@@ -26,8 +26,8 @@ commandObj.cmdprops =
 }
 
 local function error(player, msg)
-    player:PrintToPlayer(msg)
-    player:PrintToPlayer('!bagsize <30-80 and multiple of 5>')
+    player:printToPlayer(msg)
+    player:printToPlayer('!bagsize <30-80 and multiple of 5>')
 end
 
 commandObj.onTrigger = function(player, bagsize)
@@ -49,8 +49,8 @@ commandObj.onTrigger = function(player, bagsize)
     end
 
     -- Inform player and set bag size
-    player:PrintToPlayer(string.format('Old Bag Size: %u', currentBagSize))
-    player:PrintToPlayer(string.format('New Bag Size: %u', bagsize))
+    player:printToPlayer(string.format('Old Bag Size: %u', currentBagSize))
+    player:printToPlayer(string.format('New Bag Size: %u', bagsize))
     player:changeContainerSize(xi.inv.INVENTORY, adjustment)
     player:changeContainerSize(xi.inv.MOGSATCHEL, adjustment)
 end

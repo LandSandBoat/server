@@ -11,8 +11,8 @@ commandObj.cmdprops =
 }
 
 local function error(player, msg)
-    player:PrintToPlayer(msg)
-    player:PrintToPlayer('!setgil <amount>')
+    player:printToPlayer(msg)
+    player:printToPlayer('!setgil <amount>')
 end
 
 commandObj.onTrigger = function(player, amount)
@@ -23,7 +23,7 @@ commandObj.onTrigger = function(player, amount)
     end
 
     player:setGil(amount)
-    player:PrintToPlayer(string.format('%s\'s gil was set to %i.', player:getName(), amount))
+    player:printToPlayer(string.format('%s\'s gil was set to %i.', player:getName(), amount))
 end
 
 return commandObj

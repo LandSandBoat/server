@@ -89,7 +89,7 @@ function utils.getDebugPrinter(printEntityName, settingOrCondition, prefix)
             local depth  = utils.getStackDepth()
             local player = utils.getObjectFromScope(printEntityName, depth + 1)
             if player then
-                player:PrintToPlayer(str, xi.msg.channel.SYSTEM_3, '')
+                player:printToPlayer(str, xi.msg.channel.SYSTEM_3, '')
             end
         end
     end

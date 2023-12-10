@@ -11,8 +11,8 @@ commandObj.cmdprops =
 }
 
 local function error(player, msg)
-    player:PrintToPlayer(msg)
-    player:PrintToPlayer('!setrank <player> <new rank>')
+    player:printToPlayer(msg)
+    player:printToPlayer('!setrank <player> <new rank>')
 end
 
 commandObj.onTrigger = function(player, target, rank)
@@ -33,7 +33,7 @@ commandObj.onTrigger = function(player, target, rank)
         return
     end
 
-    player:PrintToPlayer(string.format('You set %s\'s rank to %d', target, rank))
+    player:printToPlayer(string.format('You set %s\'s rank to %d', target, rank))
     targ:setRank(rank)
 end
 

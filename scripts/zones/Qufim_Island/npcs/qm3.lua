@@ -43,7 +43,7 @@ entity.onTrigger = function(player, npc)
         then
             -- Spawn Seed mandragora's
             player:setCharVar('SEED_MANDY', 1) -- This will need moved into Seed mandies onDeath script later.
-            player:PrintToPlayer('Confrontation Battles are not working yet.')
+            player:printToPlayer('Confrontation Battles are not working yet.')
             -- xi.effect.CONFRONTATION for 30 min
         elseif
             missionACP == xi.mission.id.acp.GATHERER_OF_LIGHT_II and

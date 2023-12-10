@@ -11,8 +11,8 @@ commandObj.cmdprops =
 }
 
 local function error(player, msg)
-    player:PrintToPlayer(msg)
-    player:PrintToPlayer('!addspell <spellID> (player)')
+    player:printToPlayer(msg)
+    player:printToPlayer('!addspell <spellID> (player)')
 end
 
 commandObj.onTrigger = function(player, spellId, target)
@@ -38,7 +38,7 @@ commandObj.onTrigger = function(player, spellId, target)
     local save = true
     local silent = false
     targ:addSpell(spellId, silent, save)
-    player:PrintToPlayer(string.format('Added spell %i to %s.', spellId, targ:getName()))
+    player:printToPlayer(string.format('Added spell %i to %s.', spellId, targ:getName()))
 end
 
 return commandObj

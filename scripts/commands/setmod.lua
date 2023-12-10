@@ -11,8 +11,8 @@ commandObj.cmdprops =
 }
 
 local function error(player, msg)
-    player:PrintToPlayer(msg)
-    player:PrintToPlayer('!setmod <modifier> <amount> (optional target)')
+    player:printToPlayer(msg)
+    player:printToPlayer('!setmod <modifier> <amount> (optional target)')
 end
 
 commandObj.onTrigger = function(player, modifier, amount, target)
@@ -40,7 +40,7 @@ commandObj.onTrigger = function(player, modifier, amount, target)
 
     local oldmod = target:getMod(modID)
     target:setMod(modID, amount)
-    player:PrintToPlayer(string.format('Target name: %s (Target ID: %i) | Old %s modifier value: %i | New %s modifier value: %i', target:getName(), target:getID(), modifier, oldmod, modifier, amount))
+    player:printToPlayer(string.format('Target name: %s (Target ID: %i) | Old %s modifier value: %i | New %s modifier value: %i', target:getName(), target:getID(), modifier, oldmod, modifier, amount))
 end
 
 return commandObj

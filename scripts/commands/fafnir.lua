@@ -76,7 +76,7 @@ commandObj.onTrigger = function(player)
 
     mob:spawn()
 
-    player:PrintToPlayer(string.format('Spawning Fafnir (Lv: %i, HP: %i)\n%s', mob:getMainLvl(), mob:getMaxHP(), mob))
+    player:printToPlayer(string.format('Spawning Fafnir (Lv: %i, HP: %i)\n%s', mob:getMainLvl(), mob:getMaxHP(), mob))
 end
 
 return commandObj

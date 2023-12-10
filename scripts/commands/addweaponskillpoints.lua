@@ -11,8 +11,8 @@ commandObj.cmdprops =
 }
 
 local function error(player, msg)
-    player:PrintToPlayer(msg)
-    player:PrintToPlayer('!addweaponskillpoints <slot main=0, sub=1, ranged=2> <points> (player)')
+    player:printToPlayer(msg)
+    player:printToPlayer('!addweaponskillpoints <slot main=0, sub=1, ranged=2> <points> (player)')
 end
 
 commandObj.onTrigger = function(player, slot, points, target)
@@ -48,9 +48,9 @@ commandObj.onTrigger = function(player, slot, points, target)
 
     -- add weaponskill points
     if target:addWeaponSkillPoints(slot, points) then
-        player:PrintToPlayer(string.format('Added %s weapon skill points to %s.', points, item:getName()))
+        player:printToPlayer(string.format('Added %s weapon skill points to %s.', points, item:getName()))
     else
-        player:PrintToPlayer(string.format('Could not add weapon skill points to %s.', item:getName()))
+        player:printToPlayer(string.format('Could not add weapon skill points to %s.', item:getName()))
     end
 end
 

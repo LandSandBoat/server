@@ -11,8 +11,8 @@ commandObj.cmdprops =
 }
 
 local function error(player, msg)
-    player:PrintToPlayer(msg)
-    player:PrintToPlayer('!cp <amount>')
+    player:printToPlayer(msg)
+    player:printToPlayer('!cp <amount>')
 end
 
 commandObj.onTrigger = function(player, cp)
@@ -24,7 +24,7 @@ commandObj.onTrigger = function(player, cp)
 
     -- add cp
     player:addCP(cp)
-    player:PrintToPlayer(string.format('Added %i cp to %s.', cp, player:getName()))
+    player:printToPlayer(string.format('Added %i cp to %s.', cp, player:getName()))
 end
 
 return commandObj

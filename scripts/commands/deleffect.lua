@@ -11,8 +11,8 @@ commandObj.cmdprops =
 }
 
 local function error(player, msg)
-    player:PrintToPlayer(msg)
-    player:PrintToPlayer('!deleffect (player) <effect>')
+    player:printToPlayer(msg)
+    player:printToPlayer('!deleffect (player) <effect>')
 end
 
 commandObj.onTrigger = function(player, arg1, arg2)
@@ -48,7 +48,7 @@ commandObj.onTrigger = function(player, arg1, arg2)
     -- delete status effect
     targ:delStatusEffect(id)
     if targ:getID() ~= player:getID() then
-        player:PrintToPlayer(string.format('Removed effect %i from %s.', id, targ:getName()))
+        player:printToPlayer(string.format('Removed effect %i from %s.', id, targ:getName()))
     end
 end
 

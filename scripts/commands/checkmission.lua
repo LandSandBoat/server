@@ -13,8 +13,8 @@ commandObj.cmdprops =
 }
 
 local function error(player, msg)
-    player:PrintToPlayer(msg)
-    player:PrintToPlayer('!checkmission <logID> (player)')
+    player:printToPlayer(msg)
+    player:printToPlayer('!checkmission <logID> (player)')
 end
 
 commandObj.onTrigger = function(player, logId, target)
@@ -48,9 +48,9 @@ commandObj.onTrigger = function(player, logId, target)
     local currentMission = targ:getCurrentMission(logId)
 
     if logId <= 3 and currentMission == 65535 then
-        player:PrintToPlayer(string.format('No current %s mission for %s.', logName, targ:getName()))
+        player:printToPlayer(string.format('No current %s mission for %s.', logName, targ:getName()))
     else
-        player:PrintToPlayer(string.format('Current %s Mission ID is %s for %s.', logName, currentMission, targ:getName()))
+        player:printToPlayer(string.format('Current %s Mission ID is %s for %s.', logName, currentMission, targ:getName()))
     end
 end
 

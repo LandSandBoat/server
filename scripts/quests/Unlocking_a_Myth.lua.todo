@@ -22,7 +22,7 @@ function quest.unlockingMyth.onTrade(player, npc, trade)
             if unlockingAMyth == QUEST_ACCEPTED then
                 local wsPoints = trade:getItem(0):getWeaponskillPoints()
 
-                -- player:PrintToPlayer(string.format('points Accumulated: %s', wsPoints))
+                -- player:printToPlayer(string.format('points Accumulated: %s', wsPoints))
 
                 if wsPoints <= 50 then
                     player:startEvent(10091)

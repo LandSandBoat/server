@@ -11,8 +11,8 @@ commandObj.cmdprops =
 }
 
 local function error(player, msg)
-    player:PrintToPlayer(msg)
-    player:PrintToPlayer('!pettp <amount>')
+    player:printToPlayer(msg)
+    player:printToPlayer('!pettp <amount>')
 end
 
 commandObj.onTrigger = function(player, tp)

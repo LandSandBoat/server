@@ -42,7 +42,7 @@ entity.onTrigger = function(player, npc)
         local newPosition = npcUtil.pickNewPosition(npc:getID(), positions)
 
         npc:setPos(newPosition.x, newPosition.y, newPosition.z)
-        -- player:PrintToPlayer('Markings moved to position index ' .. newPosition)
+        -- player:printToPlayer('Markings moved to position index ' .. newPosition)
     else
         player:messageSpecial(ID.text.NOTHING_OUT_OF_ORDINARY)
     end
