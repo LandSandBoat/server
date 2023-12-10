@@ -540,6 +540,8 @@ int32 zone_update_weather(uint32 tick, CTaskMgr::CTask* PTask);
 class CZone
 {
 public:
+    DISALLOW_COPY_AND_MOVE(CZone);
+
     ZONEID             GetID();
     ZONE_TYPE          GetTypeMask();
     REGION_TYPE        GetRegionID();
