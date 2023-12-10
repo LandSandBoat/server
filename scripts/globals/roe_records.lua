@@ -8857,7 +8857,7 @@ xi.roe.records =
     { -- Spoils - Dhalmel Meat (UC)
         trigger = xi.roeTrigger.LOOT_ITEM,
         goal = 5,
-        reqs = { itemID = set { xi.item.DHALMEL_MEAT }, unityLeader = xi.unityLeader.NAJA_SALAHEEM },
+        reqs = { itemID = set { xi.item.SLICE_OF_DHALMEL_MEAT }, unityLeader = xi.unityLeader.NAJA_SALAHEEM },
         flags = set { 'unity' },
         reward = { sparks = 100, xp = 500, accolades = 500 },
     },
