@@ -68,7 +68,7 @@ namespace blueutils
                     }
                     else
                     {
-                        ShowWarning("SetBlueSpell: Player %s trying to set spell ID %u they don't have! ", PChar->GetName(), spellID);
+                        ShowWarning("SetBlueSpell: Player %s trying to set spell ID %u they don't have! ", PChar->getName(), spellID);
                     }
                 }
                 SaveSetSpells(PChar);

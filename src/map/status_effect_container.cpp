@@ -1528,7 +1528,7 @@ void CStatusEffectContainer::LoadStatusEffects()
 {
     if (m_POwner->objtype != TYPE_PC)
     {
-        ShowWarning("Non-PC calling function (%s).", m_POwner->GetName());
+        ShowWarning("Non-PC calling function (%s).", m_POwner->getName());
         return;
     }
 
@@ -1617,7 +1617,7 @@ void CStatusEffectContainer::SaveStatusEffects(bool logout)
     // Print entity name and bail out if entity isn't a player.
     if (m_POwner->objtype != TYPE_PC)
     {
-        ShowDebug("Non-player entity %s (ID: %d) attempt to save Status Effect.", m_POwner->GetName(), m_POwner->id);
+        ShowDebug("Non-player entity %s (ID: %d) attempt to save Status Effect.", m_POwner->getName(), m_POwner->id);
 
         return;
     }

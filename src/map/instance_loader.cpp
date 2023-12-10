@@ -290,8 +290,8 @@ CInstance* CInstanceLoader::LoadInstance()
             // Add to cache
             luautils::CacheLuaObjectFromFile(
                 fmt::format("./scripts/zones/{}/mobs/{}.lua",
-                            PMob.second->loc.zone->GetName(),
-                            PMob.second->GetName()));
+                            PMob.second->loc.zone->getName(),
+                            PMob.second->getName()));
         }
 
         // Finish setting up NPCs
@@ -302,8 +302,8 @@ CInstance* CInstanceLoader::LoadInstance()
             // Add to cache
             luautils::CacheLuaObjectFromFile(
                 fmt::format("./scripts/zones/{}/npcs/{}.lua",
-                            PNpc.second->loc.zone->GetName(),
-                            PNpc.second->GetName()));
+                            PNpc.second->loc.zone->getName(),
+                            PNpc.second->getName()));
         }
 
         // Cache Instance script (TODO: This will be done multiple times, don't do that)

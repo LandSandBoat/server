@@ -713,7 +713,7 @@ namespace message
 
                 if (auto player = zoneutils::GetChar(charId))
                 {
-                    ShowDebug(fmt::format("Updating charvar for {} ({}): {} = {}", player->GetName(), charId, varName, value));
+                    ShowDebug(fmt::format("Updating charvar for {} ({}): {} = {}", player->getName(), charId, varName, value));
                     player->updateCharVarCache(varName, value, expiry);
                 }
                 break;

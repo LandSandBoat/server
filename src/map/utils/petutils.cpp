@@ -776,7 +776,7 @@ namespace petutils
         }
         else
         { // should never happen
-            ShowDebug("%s summoned an avatar but is not SMN main or SMN sub! Please report. ", PMaster->GetName());
+            ShowDebug("%s summoned an avatar but is not SMN main or SMN sub! Please report. ", PMaster->getName());
             PPet->SetMLevel(1);
         }
 
@@ -1103,7 +1103,7 @@ namespace petutils
     {
         if (PMaster->PPet != nullptr)
         {
-            ShowWarning("Pet was not null for %s.", PMaster->GetName());
+            ShowWarning("Pet was not null for %s.", PMaster->getName());
             return;
         }
 
@@ -1234,13 +1234,13 @@ namespace petutils
 
         if (PMaster->PPet == nullptr)
         {
-            ShowWarning("Pet is null for %s.", PMaster->GetName());
+            ShowWarning("Pet is null for %s.", PMaster->getName());
             return;
         }
 
         if (PMaster->objtype != TYPE_PC)
         {
-            ShowWarning("Non-PC passed into function (%s)", PMaster->GetName());
+            ShowWarning("Non-PC passed into function (%s)", PMaster->getName());
             return;
         }
 
@@ -1342,7 +1342,7 @@ namespace petutils
 
         if (PMaster->PPet == nullptr)
         {
-            ShowWarning("Pet is null for %s.", PMaster->GetName());
+            ShowWarning("Pet is null for %s.", PMaster->getName());
             return;
         }
 

@@ -1530,7 +1530,7 @@ namespace charutils
 
         if ((int32)(PItem->getQuantity() - PItem->getReserve() + quantity) < 0)
         {
-            ShowDebug("UpdateItem: %s trying to move invalid quantity %u of itemID %u", PChar->GetName(), quantity, ItemID);
+            ShowDebug("UpdateItem: %s trying to move invalid quantity %u of itemID %u", PChar->getName(), quantity, ItemID);
             return 0;
         }
 
@@ -1616,7 +1616,7 @@ namespace charutils
     {
         if (charutils::UpdateItem(PChar, container, slotID, -quantity) != 0)
         {
-            ShowInfo("Player %s DROPPING itemID: %s (%u) quantity: %u", PChar->GetName(), itemutils::GetItemPointer(ItemID)->getName(), ItemID, quantity);
+            ShowInfo("Player %s DROPPING itemID: %s (%u) quantity: %u", PChar->getName(), itemutils::GetItemPointer(ItemID)->getName(), ItemID, quantity);
             PChar->pushPacket(new CMessageStandardPacket(nullptr, ItemID, quantity, MsgStd::ThrowAway));
             PChar->pushPacket(new CInventoryFinishPacket());
         }
@@ -1637,7 +1637,7 @@ namespace charutils
 
         if (PTarget->getStorage(LOC_INVENTORY)->GetFreeSlotsCount() < PChar->UContainer->GetItemsCount())
         {
-            ShowDebug("Unable to trade, %s doesn't have enough inventory space", PTarget->GetName());
+            ShowDebug("Unable to trade, %s doesn't have enough inventory space", PTarget->getName());
             return false;
         }
 
@@ -1649,7 +1649,7 @@ namespace charutils
             {
                 if (HasItem(PTarget, PItem->getID()))
                 {
-                    ShowDebug("Unable to trade, %s has the rare item already (%s)", PTarget->GetName(), PItem->getName());
+                    ShowDebug("Unable to trade, %s has the rare item already (%s)", PTarget->getName(), PItem->getName());
                     return false;
                 }
             }
@@ -1666,7 +1666,7 @@ namespace charutils
 
     void DoTrade(CCharEntity* PChar, CCharEntity* PTarget)
     {
-        ShowDebug("%s->%s trade item movement started", PChar->GetName(), PTarget->GetName());
+        ShowDebug("%s->%s trade item movement started", PChar->getName(), PTarget->getName());
         for (uint8 slotid = 0; slotid <= 8; ++slotid)
         {
             CItem* PItem = PChar->UContainer->GetItem(slotid);
@@ -1676,16 +1676,16 @@ namespace charutils
                 if (PItem->getStackSize() == 1 && PItem->getReserve() == 1)
                 {
                     CItem* PNewItem = itemutils::GetItem(PItem);
-                    ShowDebug("Adding %s to %s inventory stacksize 1", PNewItem->getName(), PTarget->GetName());
+                    ShowDebug("Adding %s to %s inventory stacksize 1", PNewItem->getName(), PTarget->getName());
                     PNewItem->setReserve(0);
                     AddItem(PTarget, LOC_INVENTORY, PNewItem);
                 }
                 else
                 {
-                    ShowDebug("Adding %s to %s inventory", PItem->getName(), PTarget->GetName());
+                    ShowDebug("Adding %s to %s inventory", PItem->getName(), PTarget->getName());
                     AddItem(PTarget, LOC_INVENTORY, PItem->getID(), PItem->getReserve());
                 }
-                ShowDebug("Removing %s from %s's inventory", PItem->getName(), PChar->GetName());
+                ShowDebug("Removing %s from %s's inventory", PItem->getName(), PChar->getName());
                 auto amount = PItem->getReserve();
                 PItem->setReserve(0);
                 UpdateItem(PChar, LOC_INVENTORY, PItem->getSlotID(), (int32)(0 - amount));
@@ -2453,7 +2453,7 @@ namespace charutils
                 // Update db
                 if (sql->Query(Query, LOC_RECYCLEBIN, i - 1, PChar->id, LOC_RECYCLEBIN, i) == SQL_ERROR || sql->AffectedRows() == 0)
                 {
-                    ShowError("Problem moving Recycle Bin items! (%s - %s)", PChar->GetName(), PItem->getName());
+                    ShowError("Problem moving Recycle Bin items! (%s - %s)", PChar->getName(), PItem->getName());
                 }
             }
 
@@ -2462,7 +2462,7 @@ namespace charutils
             RecycleBin->InsertItem(PItem, 10);
             if (sql->Query(Query, LOC_RECYCLEBIN, 10, PChar->id, container, slotID) == SQL_ERROR || sql->AffectedRows() == 0)
             {
-                ShowError("Problem moving Recycle Bin items! (%s - %s)", PChar->GetName(), PItem->getName());
+                ShowError("Problem moving Recycle Bin items! (%s - %s)", PChar->getName(), PItem->getName());
             }
 
             // Send update packets

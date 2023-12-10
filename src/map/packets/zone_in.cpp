@@ -67,7 +67,7 @@ uint16 GetMogHouseModelID(CCharEntity* PChar)
         case REGION_TYPE::ADOULIN_ISLANDS:
             return 0x0124;
         default:
-            ShowWarning("Default case reached for GetMogHouseID by %s (%u)", PChar->GetName(), PChar->getZone());
+            ShowWarning("Default case reached for GetMogHouseID by %s (%u)", PChar->getName(), PChar->getZone());
             return 0x0100;
     }
     // clang-format on
@@ -224,7 +224,7 @@ CZoneInPacket::CZoneInPacket(CCharEntity* PChar, const EventInfo* currentEvent)
         ref<uint8>(0xAF) = PChar->loc.zone->CanUseMisc(MISC_MOGMENU); // flag allows you to use Mog Menu outside Mog House
     }
 
-    auto const& nameStr = PChar->GetName();
+    auto const& nameStr = PChar->getName();
     std::memcpy(data + 0x84, nameStr.data(), nameStr.size());
 
     ref<uint32>(0xA0) = PChar->GetPlayTime(); // time spent by the character in the game from the moment of creation

@@ -259,8 +259,8 @@ public:
     virtual void Spawn();
     virtual void FadeOut();
 
-    virtual const std::string& GetName();       // Internal name of entity
-    virtual const std::string& GetPacketName(); // Name of entity sent to the client
+    virtual const std::string& getName();       // Internal name of entity
+    virtual const std::string& getPacketName(); // Name of entity sent to the client
 
     uint16 getZone() const; // Current zone
     float  GetXPos() const; // Position of co-ordinate X
@@ -330,4 +330,4 @@ protected:
     std::map<std::string, uint32> m_localVars;
 };
 
-#endif
+#endif // _BASEENTITY_H

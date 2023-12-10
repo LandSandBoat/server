@@ -37,5 +37,5 @@ CBazaarMessagePacket::CBazaarMessagePacket(CCharEntity* PChar)
     ref<uint8>(0x7F)  = 0x07; // 0x06
     ref<uint16>(0x90) = PChar->profile.title;
 
-    memcpy(data + (0x80), PChar->GetName().c_str(), PChar->GetName().size());
+    memcpy(data + (0x80), PChar->getName().c_str(), PChar->getName().size());
 }

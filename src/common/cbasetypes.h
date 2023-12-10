@@ -110,6 +110,18 @@ struct PtrGreater
 template <class T>
 using MinHeapPtr = std::priority_queue<T, std::vector<T>, PtrGreater<T>>;
 
+#define DISALLOW_COPY(TypeName)                    \
+    TypeName(const TypeName&)            = delete; \
+    TypeName& operator=(const TypeName&) = delete;
+
+#define DISALLOW_MOVE(TypeName)               \
+    TypeName(TypeName&&)            = delete; \
+    TypeName& operator=(TypeName&&) = delete;
+
+#define DISALLOW_COPY_AND_MOVE(TypeName) \
+    DISALLOW_COPY(TypeName)              \
+    DISALLOW_MOVE(TypeName)
+
 #include "tracy.h"
 
 #endif /* _CBASETYPES_H_ */

@@ -540,6 +540,8 @@ int32 zone_update_weather(uint32 tick, CTaskMgr::CTask* PTask);
 class CZone
 {
 public:
+    DISALLOW_COPY_AND_MOVE(CZone);
+
     ZONEID             GetID();
     ZONE_TYPE          GetTypeMask();
     REGION_TYPE        GetRegionID();
@@ -550,7 +552,7 @@ public:
     uint16             GetTax() const;
     WEATHER            GetWeather();
     uint32             GetWeatherChangeTime() const;
-    const std::string& GetName();
+    const std::string& getName();
     zoneLine_t*        GetZoneLine(uint32 zoneLineID);
 
     uint8 GetSoloBattleMusic() const;

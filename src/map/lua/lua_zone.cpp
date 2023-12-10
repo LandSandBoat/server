@@ -151,7 +151,7 @@ ZONEID CLuaZone::getID()
 
 const std::string& CLuaZone::getName()
 {
-    return m_pLuaZone->GetName();
+    return m_pLuaZone->getName();
 }
 
 REGION_TYPE CLuaZone::getRegionID()
@@ -291,7 +291,7 @@ sol::table CLuaZone::queryEntitiesByName(std::string const& name)
 
     if (table.empty())
     {
-        ShowWarning("Query for entity name: %s in zone: %s returned no results", name, m_pLuaZone->GetName());
+        ShowWarning("Query for entity name: %s in zone: %s returned no results", name, m_pLuaZone->getName());
     }
 
     return table;

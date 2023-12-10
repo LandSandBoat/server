@@ -44,7 +44,7 @@ CAlliance::CAlliance(CBattleEntity* PEntity)
 {
     if (PEntity->PParty == nullptr)
     {
-        ShowError("Attempt to construct Alliance with a null Party (%s).", PEntity->GetName());
+        ShowError("Attempt to construct Alliance with a null Party (%s).", PEntity->getName());
         return;
     }
 

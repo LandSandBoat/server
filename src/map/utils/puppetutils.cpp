@@ -570,7 +570,7 @@ namespace puppetutils
         {
             default: // case FRAME_HARLEQUIN:
                 ShowWarning("puppetutils::LoadAutomatonStats Invalid frame detected for '%s', used Harlequin instead! (%u)",
-                            PChar->GetName(), (uint16)PChar->PAutomaton->getFrame());
+                            PChar->getName(), (uint16)PChar->PAutomaton->getFrame());
             case FRAME_HARLEQUIN:
                 petutils::LoadPet(PChar, PETID_HARLEQUINFRAME, false);
                 break;

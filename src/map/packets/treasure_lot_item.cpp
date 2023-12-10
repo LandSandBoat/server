@@ -49,7 +49,7 @@ CTreasureLotItemPacket::CTreasureLotItemPacket(CBaseEntity* PWinner, uint8 slotI
     ref<uint8>(0x14) = slotID;
     ref<uint8>(0x15) = MessageType;
 
-    memcpy(data + (0x16), PWinner->GetName().c_str(), PWinner->GetName().size());
+    memcpy(data + (0x16), PWinner->getName().c_str(), PWinner->getName().size());
 }
 
 CTreasureLotItemPacket::CTreasureLotItemPacket(CBaseEntity* PHighestLotter, uint16 HighestLot, CBaseEntity* PLotter, uint8 SlotID, uint16 Lot)
@@ -62,7 +62,7 @@ CTreasureLotItemPacket::CTreasureLotItemPacket(CBaseEntity* PHighestLotter, uint
         ref<uint32>(0x04) = PHighestLotter->id;
         ref<uint16>(0x0C) = PHighestLotter->targid;
         ref<uint16>(0x0E) = HighestLot;
-        memcpy(data + 0x16, PHighestLotter->GetName().c_str(), PHighestLotter->GetName().size());
+        memcpy(data + 0x16, PHighestLotter->getName().c_str(), PHighestLotter->getName().size());
     }
 
     ref<uint32>(0x08) = PLotter->id;
@@ -71,5 +71,5 @@ CTreasureLotItemPacket::CTreasureLotItemPacket(CBaseEntity* PHighestLotter, uint
     // ref<uint8>(data,(0x12)) = Lot;
     ref<uint8>(0x14) = SlotID;
 
-    memcpy(data + 0x26, PLotter->GetName().c_str(), PLotter->GetName().size());
+    memcpy(data + 0x26, PLotter->getName().c_str(), PLotter->getName().size());
 }

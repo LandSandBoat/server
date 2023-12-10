@@ -190,13 +190,13 @@ void CZoneInstance::IncreaseZoneCounter(CCharEntity* PChar)
 
     if (PChar->loc.zone != nullptr)
     {
-        ShowWarning("Zone was not null for %s.", PChar->GetName());
+        ShowWarning("Zone was not null for %s.", PChar->getName());
         return;
     }
 
     if (PChar->PTreasurePool != nullptr)
     {
-        ShowWarning("PTreasurePool was not empty for %s.", PChar->GetName());
+        ShowWarning("PTreasurePool was not empty for %s.", PChar->getName());
         return;
     }
 
@@ -245,7 +245,7 @@ void CZoneInstance::IncreaseZoneCounter(CCharEntity* PChar)
     else
     {
         ShowWarning(fmt::format("Failed to place {} in {} ({}). Placing them in that zone's instance exit area.",
-                                PChar->name, this->GetName(), this->GetID())
+                                PChar->name, this->getName(), this->GetID())
                         .c_str());
 
         // instance no longer exists: put them outside (at exit)

@@ -747,7 +747,7 @@ int32 parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_data_t*
 
     CCharEntity* PChar = map_session_data->PChar;
 
-    TracyZoneString(PChar->GetName());
+    TracyZoneString(PChar->getName());
 
     uint16 SmallPD_Size = 0;
     uint16 SmallPD_Type = 0;
@@ -773,26 +773,26 @@ int32 parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_data_t*
             if (SmallPD_Type != 0x15)
             {
                 DebugPackets("parse: %03hX | %04hX %04hX %02hX from user: %s",
-                             SmallPD_Type, ref<uint16>(SmallPD_ptr, 2), ref<uint16>(buff, 2), SmallPD_Size, PChar->GetName());
+                             SmallPD_Type, ref<uint16>(SmallPD_ptr, 2), ref<uint16>(buff, 2), SmallPD_Size, PChar->getName());
             }
 
             if (settings::get<bool>("map.PACKETGUARD_ENABLED") && PacketGuard::IsRateLimitedPacket(PChar, SmallPD_Type))
             {
-                ShowWarning("[PacketGuard] Rate-limiting packet: Player: %s - Packet: %03hX", PChar->GetName(), SmallPD_Type);
+                ShowWarning("[PacketGuard] Rate-limiting packet: Player: %s - Packet: %03hX", PChar->getName(), SmallPD_Type);
                 continue; // skip this packet
             }
 
             if (settings::get<bool>("map.PACKETGUARD_ENABLED") && !PacketGuard::PacketIsValidForPlayerState(PChar, SmallPD_Type))
             {
                 ShowWarning("[PacketGuard] Caught mismatch between player substate and recieved packet: Player: %s - Packet: %03hX",
-                            PChar->GetName(), SmallPD_Type);
+                            PChar->getName(), SmallPD_Type);
                 // TODO: Plug in optional jailutils usage
                 continue; // skip this packet
             }
 
             if (PChar->loc.zone == nullptr && SmallPD_Type != 0x0A)
             {
-                ShowWarning("This packet is unexpected from %s - Received %03hX earlier without matching 0x0A", PChar->GetName(), SmallPD_Type);
+                ShowWarning("This packet is unexpected from %s - Received %03hX earlier without matching 0x0A", PChar->getName(), SmallPD_Type);
             }
             else
             {
@@ -800,14 +800,14 @@ int32 parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_data_t*
                 // CBasicPacket is incredibly light when constructed from a pointer like we're doing here.
                 // It is just a bag of offsets to the data in SmallPD_ptr so its safe to construct.
                 auto basicPacket = CBasicPacket(reinterpret_cast<uint8*>(SmallPD_ptr));
-                ShowTrace(fmt::format("map::parse: Char: {} ({}): 0x{:03X}", PChar->GetName(), PChar->id, basicPacket.getType()).c_str());
+                ShowTrace(fmt::format("map::parse: Char: {} ({}): 0x{:03X}", PChar->getName(), PChar->id, basicPacket.getType()).c_str());
                 PacketParser[SmallPD_Type](map_session_data, PChar, basicPacket);
             }
         }
         else
         {
             ShowWarning("Bad packet size %03hX | %04hX %04hX %02hX from user: %s", SmallPD_Type, ref<uint16>(SmallPD_ptr, 2), ref<uint16>(buff, 2),
-                        SmallPD_Size, PChar->GetName());
+                        SmallPD_Size, PChar->getName());
         }
     }
 
@@ -1017,7 +1017,7 @@ int32 send_parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_da
                 return 0;
             }
             ShowWarning(fmt::format("Packet backlog for char {} in {} is {}! Limit is: {}",
-                                    PChar->name, PChar->loc.zone->GetName(), remainingPackets, MAX_PACKET_BACKLOG_SIZE));
+                                    PChar->name, PChar->loc.zone->getName(), remainingPackets, MAX_PACKET_BACKLOG_SIZE));
         }
     }
 
@@ -1152,7 +1152,7 @@ int32 map_cleanup(time_point tick, CTaskMgr::CTask* PTask)
                             PChar->StatusEffectContainer->SaveStatusEffects(true);
                             charutils::SaveCharPosition(PChar);
 
-                            ShowDebug("map_cleanup: %s timed out, closing session", PChar->GetName());
+                            ShowDebug("map_cleanup: %s timed out, closing session", PChar->getName());
 
                             PChar->status    = STATUS_TYPE::SHUTDOWN;
                             auto basicPacket = CBasicPacket();
@@ -1160,7 +1160,7 @@ int32 map_cleanup(time_point tick, CTaskMgr::CTask* PTask)
                         }
                         else
                         {
-                            ShowDebug(fmt::format("Clearing map server session for player: {} in zone: {} (On other map server = {})", PChar->name, PChar->loc.zone ? PChar->loc.zone->GetName() : "None", otherMap ? "Yes" : "No"));
+                            ShowDebug(fmt::format("Clearing map server session for player: {} in zone: {} (On other map server = {})", PChar->name, PChar->loc.zone ? PChar->loc.zone->getName() : "None", otherMap ? "Yes" : "No"));
 
                             if (PZone)
                             {
@@ -1184,7 +1184,7 @@ int32 map_cleanup(time_point tick, CTaskMgr::CTask* PTask)
                             sql->Query("DELETE FROM accounts_sessions WHERE charid = %u;", map_session_data->PChar->id);
                         }
 
-                        ShowDebug(fmt::format("Clearing map server session for player: {} in zone: {} (On other map server = {})", PChar->name, PChar->loc.zone ? PChar->loc.zone->GetName() : "None", otherMap ? "Yes" : "No"));
+                        ShowDebug(fmt::format("Clearing map server session for player: {} in zone: {} (On other map server = {})", PChar->name, PChar->loc.zone ? PChar->loc.zone->getName() : "None", otherMap ? "Yes" : "No"));
 
                         if (PZone)
                         {
