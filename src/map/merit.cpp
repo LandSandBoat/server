@@ -142,7 +142,7 @@ CMeritPoints::CMeritPoints(CCharEntity* PChar)
 {
     if (sizeof(merits) != sizeof(meritNameSpace::GMeritsTemplate))
     {
-        ShowWarning("Size mismatch between merits and GMeritsTemplate for %s.", PChar->GetName());
+        ShowWarning("Size mismatch between merits and GMeritsTemplate for %s.", PChar->getName());
         return;
     }
 

@@ -46,7 +46,7 @@ CMobController::CMobController(CMobEntity* PEntity)
 void CMobController::Tick(time_point tick)
 {
     TracyZoneScoped;
-    TracyZoneString(PMob->GetName());
+    TracyZoneString(PMob->getName());
 
     m_Tick = tick;
 
@@ -1130,10 +1130,10 @@ bool CMobController::Engage(uint16 targid)
 bool CMobController::CanAggroTarget(CBattleEntity* PTarget)
 {
     TracyZoneScoped;
-    TracyZoneString(PMob->GetName());
+    TracyZoneString(PMob->getName());
     if (PTarget)
     {
-        TracyZoneString(PTarget->GetName());
+        TracyZoneString(PTarget->getName());
 
         if (PMob->getBattleID() != PTarget->getBattleID())
         {

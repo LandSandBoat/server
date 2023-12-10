@@ -216,7 +216,7 @@ namespace gambits
                 {
                     if (isValidMember(PMember) && CheckTrigger(PMember, predicate))
                     {
-                        auto name = PMember->GetName();
+                        auto name = PMember->getName();
                         if (strcmpi(name.c_str(), "curilla") == 0)
                         {
                             result = true;
@@ -393,7 +393,7 @@ namespace gambits
                     {
                         if (isValidMember(target, PMember) && CheckTrigger(PMember, gambit.predicates[0]))
                         {
-                            auto name = PMember->GetName();
+                            auto name = PMember->getName();
                             if (strcmpi(name.c_str(), "curilla") == 0)
                             {
                                 target = PMember;

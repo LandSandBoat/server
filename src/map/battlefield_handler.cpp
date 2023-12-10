@@ -282,7 +282,7 @@ uint8 CBattlefieldHandler::RegisterBattlefield(CCharEntity* PChar, const Battlef
 {
     if (PChar->PBattlefield)
     {
-        ShowDebug("%s tried to enter another battlefield", PChar->GetName());
+        ShowDebug("%s tried to enter another battlefield", PChar->getName());
         return BATTLEFIELD_RETURN_CODE_WAIT;
     }
     // attempt to add to an existing battlefield

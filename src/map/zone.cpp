@@ -260,7 +260,7 @@ QueryByNameResult_t const& CZone::queryEntitiesByName(std::string const& pattern
     // clang-format off
     ForEachNpc([&](CNpcEntity* PNpc)
     {
-        if (matches(PNpc->GetName(), pattern))
+        if (matches(PNpc->getName(), pattern))
         {
             entities.emplace_back(PNpc);
         }
@@ -268,7 +268,7 @@ QueryByNameResult_t const& CZone::queryEntitiesByName(std::string const& pattern
 
     ForEachMob([&](CMobEntity* PMob)
     {
-        if (matches(PMob->GetName(), pattern))
+        if (matches(PMob->getName(), pattern))
         {
             entities.emplace_back(PMob);
         }

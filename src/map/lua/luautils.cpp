@@ -445,12 +445,12 @@ namespace luautils
     {
         TracyZoneScoped;
         TracyZoneString(funcName);
-        TracyZoneString(PEntity->GetName());
+        TracyZoneString(PEntity->getName());
 
         if (PEntity->objtype == TYPE_NPC)
         {
             std::string zone_name = PEntity->loc.zone->GetName();
-            std::string npc_name  = PEntity->GetName();
+            std::string npc_name  = PEntity->getName();
 
             if (auto cached_func = lua["xi"]["zones"][zone_name]["npcs"][npc_name][funcName]; cached_func.valid())
             {
@@ -460,7 +460,7 @@ namespace luautils
         else if (PEntity->objtype == TYPE_MOB)
         {
             std::string zone_name = PEntity->loc.zone->GetName();
-            std::string mob_name  = PEntity->GetName();
+            std::string mob_name  = PEntity->getName();
 
             if (auto cached_func = lua["xi"]["zones"][zone_name]["mobs"][mob_name][funcName]; cached_func.valid())
             {
@@ -478,7 +478,7 @@ namespace luautils
         }
         else if (PEntity->objtype == TYPE_TRUST)
         {
-            std::string mob_name = PEntity->GetName();
+            std::string mob_name = PEntity->getName();
 
             if (auto cached_func = lua["xi"]["actions"]["spells"]["trust"][mob_name][funcName]; cached_func.valid())
             {
@@ -808,13 +808,13 @@ namespace luautils
         if (PEntity->objtype == TYPE_NPC)
         {
             std::string zone_name = PEntity->loc.zone->GetName();
-            std::string npc_name  = PEntity->GetName();
+            std::string npc_name  = PEntity->getName();
             filename              = fmt::format("./scripts/zones/{}/npcs/{}.lua", zone_name, npc_name);
         }
         else if (PEntity->objtype == TYPE_MOB)
         {
             std::string zone_name = PEntity->loc.zone->GetName();
-            std::string mob_name  = PEntity->GetName();
+            std::string mob_name  = PEntity->getName();
             filename              = fmt::format("./scripts/zones/{}/mobs/{}.lua", zone_name, mob_name);
         }
         else if (PEntity->objtype == TYPE_PET)
@@ -824,8 +824,8 @@ namespace luautils
         }
         else if (PEntity->objtype == TYPE_TRUST)
         {
-            std::string mob_name = PEntity->GetName();
-            filename             = fmt::format("./scripts/actions/spells/trust/{}.lua", PEntity->GetName());
+            std::string mob_name = PEntity->getName();
+            filename             = fmt::format("./scripts/actions/spells/trust/{}.lua", PEntity->getName());
         }
 
         CacheLuaObjectFromFile(filename);
@@ -1597,7 +1597,7 @@ namespace luautils
                 }
                 else
                 {
-                    ShowDebug("SpawnMob: %u <%s> is already spawned", PMob->id, PMob->GetName());
+                    ShowDebug("SpawnMob: %u <%s> is already spawned", PMob->id, PMob->getName());
                 }
             }
         }
@@ -1994,7 +1994,7 @@ namespace luautils
         }
 
         auto        zone = PChar->loc.zone->GetName();
-        auto        name = PNpc->GetName();
+        auto        name = PNpc->getName();
         std::string pathFormat;
         switch (PNpc->objtype)
         {
@@ -2175,7 +2175,7 @@ namespace luautils
         TracyZoneScoped;
 
         auto zone     = PChar->loc.zone->GetName();
-        auto name     = PNpc->GetName();
+        auto name     = PNpc->getName();
         auto filename = fmt::format("./scripts/zones/{}/npcs/{}.lua", zone, name);
 
         PChar->eventPreparation->targetEntity = PNpc;
@@ -2232,7 +2232,7 @@ namespace luautils
         if (PAttacker->objtype == TYPE_MOB)
         {
             auto zone          = PAttacker->loc.zone->GetName();
-            auto name          = PAttacker->GetName();
+            auto name          = PAttacker->getName();
             onAdditionalEffect = lua[sol::create_if_nil]["xi"]["zones"][zone]["mobs"][name]["onAdditionalEffect"];
         }
 
@@ -2262,7 +2262,7 @@ namespace luautils
         TracyZoneScoped;
 
         auto zone = PDefender->loc.zone->GetName();
-        auto name = PDefender->GetName();
+        auto name = PDefender->getName();
 
         auto onSpikesDamage = lua["xi"]["zones"][zone]["mobs"][name]["onSpikesDamage"];
         if (!onSpikesDamage.valid())
@@ -2891,7 +2891,7 @@ namespace luautils
         lua.set("mixinOptions", sol::lua_nil);
 
         auto zone_name = PMob->loc.zone->GetName();
-        auto name      = PMob->GetName();
+        auto name      = PMob->getName();
 
         auto filename = fmt::format("./scripts/zones/{}/mobs/{}.lua", zone_name, name);
 
@@ -3201,7 +3201,7 @@ namespace luautils
         }
         else
         {
-            filename = fmt::format("./scripts/zones/{}/mobs/{}.lua", PMob->loc.zone->GetName(), PMob->GetName());
+            filename = fmt::format("./scripts/zones/{}/mobs/{}.lua", PMob->loc.zone->GetName(), PMob->getName());
         }
 
         if (PTarget->objtype == TYPE_PC)
@@ -3264,7 +3264,7 @@ namespace luautils
             return -1;
         }
 
-        auto filename = fmt::format("./scripts/zones/{}/mobs/{}.lua", PMob->loc.zone->GetName(), PMob->GetName());
+        auto filename = fmt::format("./scripts/zones/{}/mobs/{}.lua", PMob->loc.zone->GetName(), PMob->getName());
 
         if (PTarget->objtype == TYPE_PC)
         {
@@ -3357,7 +3357,7 @@ namespace luautils
         }
 
         std::string zone_name = PMob->loc.zone->GetName();
-        std::string mob_name  = PMob->GetName();
+        std::string mob_name  = PMob->getName();
 
         CCharEntity* PChar = dynamic_cast<CCharEntity*>(PKiller);
 
@@ -3395,7 +3395,7 @@ namespace luautils
             });
             // clang-format on
 
-            auto filename = fmt::format("./scripts/zones/{}/mobs/{}.lua", PMob->loc.zone->GetName(), PMob->GetName());
+            auto filename = fmt::format("./scripts/zones/{}/mobs/{}.lua", PMob->loc.zone->GetName(), PMob->getName());
 
             auto          onMobDeathFramework = lua["InteractionGlobal"]["onMobDeath"];
             sol::function onMobDeath          = getEntityCachedFunction(PMob, "onMobDeath");
@@ -3771,7 +3771,7 @@ namespace luautils
         // Mob Script
         {
             auto zone = PMob->loc.zone->GetName();
-            auto name = PMob->GetName();
+            auto name = PMob->getName();
 
             auto onMobWeaponSkill = lua["xi"]["zones"][zone]["mobs"][name]["onMobWeaponSkill"];
             if (onMobWeaponSkill.valid())
@@ -3834,7 +3834,7 @@ namespace luautils
         TracyZoneScoped;
 
         auto zone = PMob->loc.zone->GetName();
-        auto name = PMob->GetName();
+        auto name = PMob->getName();
 
         auto onMobSkillTarget = lua["xi"]["zones"][zone]["mobs"][name]["onMobSkillTarget"];
         if (!onMobSkillTarget.valid())
@@ -5077,7 +5077,7 @@ namespace luautils
      *     taken to ensure these are NEVER modified.                         *
      *                                                                       *
      *  example: local item = GetReadOnlyItem(16448)                         *
-     *           item:GetName()                 --Bronze Dagger              *
+     *           item:getName()                 --Bronze Dagger              *
      *           item:isTwoHanded()             --False                      *
      *                                                                       *
      ************************************************************************/
@@ -5649,7 +5649,7 @@ namespace luautils
         if (name.empty())
         {
             ShowWarning("Trying to spawn dynamic entity without a name! (%s - %s)",
-                        PEntity->GetName(), PZone->GetName());
+                        PEntity->getName(), PZone->GetName());
 
             // If the name hasn't been provided, use "DefaultName" for NPCs, and whatever comes from the mob_pool for Mobs
             name = PEntity->name;

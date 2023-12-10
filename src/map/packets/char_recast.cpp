@@ -63,7 +63,7 @@ CCharRecastPacket::CCharRecastPacket(CCharEntity* PChar)
         // This may change with Master Levels, as there is some padding that appears to be not used for each recast that could be removed to add more abilities.
         if (count > 30)
         {
-            ShowDebug("CCharRecastPacket constructor attempting to send recast packet to player '%s' with > 31 abilities. This is unsupported.", PChar->GetName());
+            ShowDebug("CCharRecastPacket constructor attempting to send recast packet to player '%s' with > 31 abilities. This is unsupported.", PChar->getName());
             break;
         }
     }

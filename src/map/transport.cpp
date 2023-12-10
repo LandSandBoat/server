@@ -428,7 +428,7 @@ void CTransportHandler::insertElevator(Elevator_t elevator)
     {
         Elevator_t* PElevator = &i;
 
-        if (PElevator->Elevator->GetName() == elevator.Elevator->GetName() && PElevator->zoneID == elevator.zoneID)
+        if (PElevator->Elevator->getName() == elevator.Elevator->getName() && PElevator->zoneID == elevator.zoneID)
         {
             ShowError("Elevator already exists.");
             return;

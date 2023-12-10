@@ -190,13 +190,13 @@ void CZoneInstance::IncreaseZoneCounter(CCharEntity* PChar)
 
     if (PChar->loc.zone != nullptr)
     {
-        ShowWarning("Zone was not null for %s.", PChar->GetName());
+        ShowWarning("Zone was not null for %s.", PChar->getName());
         return;
     }
 
     if (PChar->PTreasurePool != nullptr)
     {
-        ShowWarning("PTreasurePool was not empty for %s.", PChar->GetName());
+        ShowWarning("PTreasurePool was not empty for %s.", PChar->getName());
         return;
     }
 

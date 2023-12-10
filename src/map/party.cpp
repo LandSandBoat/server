@@ -258,7 +258,7 @@ CBattleEntity* CParty::GetMemberByName(const std::string& memberName)
 
     for (auto& member : members)
     {
-        if (strcmpi(memberName.c_str(), member->GetName().c_str()) == 0)
+        if (strcmpi(memberName.c_str(), member->getName().c_str()) == 0)
         {
             return member;
         }
@@ -574,7 +574,7 @@ void CParty::AddMember(CBattleEntity* PEntity)
     {
         if (PEntity->objtype != TYPE_PC)
         {
-            ShowWarning("Non-Player passed into function (%s).", PEntity->GetName());
+            ShowWarning("Non-Player passed into function (%s).", PEntity->getName());
             return;
         }
 

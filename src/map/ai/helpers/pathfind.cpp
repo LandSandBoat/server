@@ -461,7 +461,7 @@ bool CPathFind::FindPath(const position_t& start, const position_t& end)
 
     if (m_points.empty())
     {
-        DebugNavmesh("CPathFind::FindPath Entity (%s - %d) could not find path", m_POwner->GetName(), m_POwner->id);
+        DebugNavmesh("CPathFind::FindPath Entity (%s - %d) could not find path", m_POwner->getName(), m_POwner->id);
         return false;
     }
 

@@ -92,7 +92,7 @@ CCharJobExtraPacket::CCharJobExtraPacket(CCharEntity* PChar, bool mjob)
         ref<uint32>(0x50) = PChar->m_unlockedAttachments.attachments[6];
         ref<uint32>(0x54) = PChar->m_unlockedAttachments.attachments[7];
 
-        memcpy(data + (0x58), PChar->PAutomaton->GetName().c_str(), PChar->PAutomaton->GetName().size());
+        memcpy(data + (0x58), PChar->PAutomaton->getName().c_str(), PChar->PAutomaton->getName().size());
 
         ref<uint16>(0x68) = PChar->PAutomaton->health.hp == 0 ? PChar->PAutomaton->GetMaxHP() : PChar->PAutomaton->health.hp;
         ref<uint16>(0x6A) = PChar->PAutomaton->GetMaxHP();

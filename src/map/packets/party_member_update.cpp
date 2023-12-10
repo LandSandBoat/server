@@ -73,7 +73,7 @@ CPartyMemberUpdatePacket::CPartyMemberUpdatePacket(CCharEntity* PChar, uint8 Mem
         }
     }
 
-    memcpy(data + (0x28), PChar->GetName().c_str(), PChar->GetName().size());
+    memcpy(data + (0x28), PChar->getName().c_str(), PChar->getName().size());
 }
 
 CPartyMemberUpdatePacket::CPartyMemberUpdatePacket(CTrustEntity* PTrust, uint8 MemberNumber)

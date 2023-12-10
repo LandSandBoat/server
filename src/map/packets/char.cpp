@@ -188,7 +188,7 @@ void CCharPacket::updateWith(CCharEntity* PChar, ENTITYUPDATE type, uint8 update
 
             if (updatemask & UPDATE_NAME)
             {
-                memcpy(data + (0x5A), PChar->GetName().c_str(), PChar->GetName().size());
+                memcpy(data + (0x5A), PChar->getName().c_str(), PChar->getName().size());
             }
 
             if (PChar->m_PMonstrosity != nullptr && (updatemask & UPDATE_HP || updatemask & UPDATE_LOOK))

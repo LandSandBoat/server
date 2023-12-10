@@ -75,12 +75,12 @@ void CBaseEntity::FadeOut()
     updatemask |= UPDATE_HP;
 }
 
-const std::string& CBaseEntity::GetName()
+const std::string& CBaseEntity::getName()
 {
     return name;
 }
 
-const std::string& CBaseEntity::GetPacketName()
+const std::string& CBaseEntity::getPacketName()
 {
     return packetName;
 }
