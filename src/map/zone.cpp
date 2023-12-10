@@ -191,7 +191,7 @@ uint32 CZone::GetWeatherChangeTime() const
     return m_WeatherChangeTime;
 }
 
-const std::string& CZone::GetName()
+const std::string& CZone::getName()
 {
     return m_zoneName;
 }
@@ -447,7 +447,7 @@ void CZone::LoadNavMesh()
 
     char file[255];
     memset(file, 0, sizeof(file));
-    snprintf(file, sizeof(file), "navmeshes/%s.nav", GetName().c_str());
+    snprintf(file, sizeof(file), "navmeshes/%s.nav", getName().c_str());
 
     if (!m_navMesh->load(file))
     {
@@ -470,7 +470,7 @@ void CZone::LoadZoneLos()
         destroy(lineOfSight);
     }
 
-    lineOfSight = ZoneLos::Load((uint16)GetID(), fmt::sprintf("losmeshes/%s.obj", GetName()));
+    lineOfSight = ZoneLos::Load((uint16)GetID(), fmt::sprintf("losmeshes/%s.obj", getName()));
 }
 
 /************************************************************************

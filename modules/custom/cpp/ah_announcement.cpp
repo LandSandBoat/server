@@ -90,7 +90,7 @@ class AHAnnouncementModule : public CPPModule
                                 ORDER BY price
                                 LIMIT 1;
                                 )",
-                                PChar->GetName(), price, (uint32)time(nullptr), itemid, quantity == 0, price).c_str());
+                                PChar->getName(), price, (uint32)time(nullptr), itemid, quantity == 0, price).c_str());
                             // clang-format on
 
                             if (ret != SQL_ERROR && sql->AffectedRows() != 0)

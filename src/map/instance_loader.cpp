@@ -290,7 +290,7 @@ CInstance* CInstanceLoader::LoadInstance()
             // Add to cache
             luautils::CacheLuaObjectFromFile(
                 fmt::format("./scripts/zones/{}/mobs/{}.lua",
-                            PMob.second->loc.zone->GetName(),
+                            PMob.second->loc.zone->getName(),
                             PMob.second->getName()));
         }
 
@@ -302,7 +302,7 @@ CInstance* CInstanceLoader::LoadInstance()
             // Add to cache
             luautils::CacheLuaObjectFromFile(
                 fmt::format("./scripts/zones/{}/npcs/{}.lua",
-                            PNpc.second->loc.zone->GetName(),
+                            PNpc.second->loc.zone->getName(),
                             PNpc.second->getName()));
         }
 

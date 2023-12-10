@@ -2575,7 +2575,7 @@ auto CLuaBaseEntity::getZoneName() -> std::string
         return {};
     }
 
-    return m_PBaseEntity->loc.zone->GetName();
+    return m_PBaseEntity->loc.zone->getName();
 }
 
 /************************************************************************

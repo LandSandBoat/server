@@ -744,7 +744,7 @@ void SmallPacket0x016(map_session_data_t* const PSession, CCharEntity* const PCh
 
                 // PEntity->id will now be the full id of the entity we could not find
                 ShowWarning(fmt::format("Server missing npc_list.sql entry <{}> in zone <{} ({})>",
-                                        PEntity->id, zoneutils::GetZone(PChar->getZone())->GetName(), PChar->getZone()));
+                                        PEntity->id, zoneutils::GetZone(PChar->getZone())->getName(), PChar->getZone()));
             }
 
             // Special case for onZoneIn cutscenes in Mog House
@@ -2445,7 +2445,7 @@ void SmallPacket0x04D(map_session_data_t* const PSession, CCharEntity* const PCh
 
     if (!zoneutils::IsResidentialArea(PChar) && PChar->m_GMlevel == 0 && !PChar->loc.zone->CanUseMisc(MISC_AH) && !PChar->loc.zone->CanUseMisc(MISC_MOGMENU))
     {
-        ShowWarning("%s is trying to use the delivery box in a disallowed zone [%s]", PChar->getName(), PChar->loc.zone->GetName());
+        ShowWarning("%s is trying to use the delivery box in a disallowed zone [%s]", PChar->getName(), PChar->loc.zone->getName());
         return;
     }
 
@@ -3184,7 +3184,7 @@ void SmallPacket0x04E(map_session_data_t* const PSession, CCharEntity* const PCh
 
     if (PChar->m_GMlevel == 0 && !PChar->loc.zone->CanUseMisc(MISC_AH))
     {
-        ShowWarning("%s is trying to use the auction house in a disallowed zone [%s]", PChar->getName(), PChar->loc.zone->GetName());
+        ShowWarning("%s is trying to use the auction house in a disallowed zone [%s]", PChar->getName(), PChar->loc.zone->getName());
         return;
     }
 

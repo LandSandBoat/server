@@ -52,7 +52,7 @@ class RenamerModule : public CPPModule
         // Add a custom packet handler to the PacketParser array for id 0x01
         PacketParser[0x01] = [&](map_session_data_t* const, CCharEntity* const PChar, CBasicPacket&)
         {
-            ShowInfo(fmt::format("{} requested renamer list for {}", PChar->GetName(), PChar->loc.zone->GetName()));
+            ShowInfo(fmt::format("{} requested renamer list for {}", PChar->getName(), PChar->loc.zone->getName()));
 
             auto zoneId       = PChar->getZone();
             auto renamerTable = lua["xi"]["renamerTable"].get<sol::table>();

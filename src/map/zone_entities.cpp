@@ -100,7 +100,7 @@ void CZoneEntities::InsertPC(CCharEntity* PChar)
     PChar->loc.zone = m_zone;
     charTargIds.insert(PChar->targid);
     m_charList[PChar->targid] = PChar;
-    ShowDebug("CZone:: %s IncreaseZoneCounter <%u> %s", m_zone->GetName(), m_charList.size(), PChar->getName());
+    ShowDebug("CZone:: %s IncreaseZoneCounter <%u> %s", m_zone->getName(), m_charList.size(), PChar->getName());
 }
 
 void CZoneEntities::InsertAlly(CBaseEntity* PMob)
@@ -456,7 +456,7 @@ void CZoneEntities::DecreaseZoneCounter(CCharEntity* PChar)
     m_charList.erase(PChar->targid);
     charTargIds.erase(PChar->targid);
 
-    ShowDebug("CZone:: %s DecreaseZoneCounter <%u> %s", m_zone->GetName(), m_charList.size(), PChar->getName());
+    ShowDebug("CZone:: %s DecreaseZoneCounter <%u> %s", m_zone->getName(), m_charList.size(), PChar->getName());
 }
 
 uint16 CZoneEntities::GetNewCharTargID()
@@ -1353,7 +1353,7 @@ void CZoneEntities::WideScan(CCharEntity* PChar, uint16 radius)
 void CZoneEntities::ZoneServer(time_point tick)
 {
     TracyZoneScoped;
-    TracyZoneString(m_zone->GetName());
+    TracyZoneString(m_zone->getName());
 
     luautils::OnZoneTick(this->m_zone);
 

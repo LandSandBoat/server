@@ -1017,7 +1017,7 @@ int32 send_parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_da
                 return 0;
             }
             ShowWarning(fmt::format("Packet backlog for char {} in {} is {}! Limit is: {}",
-                                    PChar->name, PChar->loc.zone->GetName(), remainingPackets, MAX_PACKET_BACKLOG_SIZE));
+                                    PChar->name, PChar->loc.zone->getName(), remainingPackets, MAX_PACKET_BACKLOG_SIZE));
         }
     }
 
@@ -1160,7 +1160,7 @@ int32 map_cleanup(time_point tick, CTaskMgr::CTask* PTask)
                         }
                         else
                         {
-                            ShowDebug(fmt::format("Clearing map server session for player: {} in zone: {} (On other map server = {})", PChar->name, PChar->loc.zone ? PChar->loc.zone->GetName() : "None", otherMap ? "Yes" : "No"));
+                            ShowDebug(fmt::format("Clearing map server session for player: {} in zone: {} (On other map server = {})", PChar->name, PChar->loc.zone ? PChar->loc.zone->getName() : "None", otherMap ? "Yes" : "No"));
 
                             if (PZone)
                             {
@@ -1184,7 +1184,7 @@ int32 map_cleanup(time_point tick, CTaskMgr::CTask* PTask)
                             sql->Query("DELETE FROM accounts_sessions WHERE charid = %u;", map_session_data->PChar->id);
                         }
 
-                        ShowDebug(fmt::format("Clearing map server session for player: {} in zone: {} (On other map server = {})", PChar->name, PChar->loc.zone ? PChar->loc.zone->GetName() : "None", otherMap ? "Yes" : "No"));
+                        ShowDebug(fmt::format("Clearing map server session for player: {} in zone: {} (On other map server = {})", PChar->name, PChar->loc.zone ? PChar->loc.zone->getName() : "None", otherMap ? "Yes" : "No"));
 
                         if (PZone)
                         {
