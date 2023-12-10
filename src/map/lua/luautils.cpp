@@ -313,7 +313,7 @@ namespace luautils
 
         if (gLoadAllLua) // Load all lua files (for sanity testing, no need for during regular use)
         {
-            ShowInfo("*** CI ONLY: Smoke testing by running all Lua files. ***")
+            ShowInfo("*** CI ONLY: Smoke testing by running all Lua files. ***");
             for (auto const& entry : sorted_directory_iterator<std::filesystem::recursive_directory_iterator>("./scripts"))
             {
                 // If we try to reload IDs.lua files, we'll wipe out the results

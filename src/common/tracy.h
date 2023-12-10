@@ -69,7 +69,7 @@ inline std::string Hex16ToString(std::uint16_t hex)
     TracyPlot(name, num);
 
 #define TracyReportLuaMemory(L) \
-    TracyReportGraphBytes("Lua Memory Usage", static_cast<double>(lua_gc(L, LUA_GCCOUNT, 0)) * 1024.0); \
+    TracyReportGraphBytes("Lua Memory Usage", static_cast<double>(lua_gc(L, LUA_GCCOUNT, 0)) * 1024.0);
 
 #else // Empty stubs for regular builds
 #define TracyFrameMark                     std::ignore = 0

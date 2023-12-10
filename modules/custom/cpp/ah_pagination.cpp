@@ -26,8 +26,8 @@ class AHPaginationModule : public CPPModule
         auto ITEMS_PER_PAGE = 6U;
         auto TOTAL_PAGES    = 6;
 
-        ShowInfo("[AH PAGES] Setting AH_LIST_LIMIT to %i.", ITEMS_PER_PAGE * TOTAL_PAGES)
-            lua["xi"]["settings"]["search"]["AH_LIST_LIMIT"] = ITEMS_PER_PAGE * TOTAL_PAGES;
+        ShowInfo("[AH PAGES] Setting AH_LIST_LIMIT to %i.", ITEMS_PER_PAGE * TOTAL_PAGES);
+        lua["xi"]["settings"]["search"]["AH_LIST_LIMIT"] = ITEMS_PER_PAGE * TOTAL_PAGES;
 
         auto originalHandler = PacketParser[0x04E];
 

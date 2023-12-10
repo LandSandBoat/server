@@ -7421,7 +7421,7 @@ void SmallPacket0x100(map_session_data_t* const PSession, CCharEntity* const PCh
             }
 
             bool canUseMeritMode = PChar->jobs.job[PChar->GetMJob()] >= 75 && charutils::hasKeyItem(PChar, 606);
-            if (!canUseMeritMode && PChar->MeritMode == true)
+            if (!canUseMeritMode && PChar->MeritMode)
             {
                 if (sql->Query("UPDATE char_exp SET mode = %u WHERE charid = %u", 0, PChar->id) != SQL_ERROR)
                 {
