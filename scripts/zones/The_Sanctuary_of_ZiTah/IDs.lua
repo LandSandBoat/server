@@ -43,16 +43,16 @@ zones[xi.zone.THE_SANCTUARY_OF_ZITAH] =
         NO_LONGER_SENSE_EVIL          = 7780,  -- You no longer sense the evil presence, but there is still a feeling of unrest throughout the forest.
         NEWLY_SPROUTED_GLOWING        = 7781,  -- The newly sprouted <item> is glowing softly. You no longer feel as if you are being watched.
         NOT_THE_TIME_FOR_THAT         = 7782,  -- This is not the time for that!
-        SENSE_OMINOUS_PRESENCE        = 7854,  -- You sense an ominous presence...
-        GARRISON_BASE                 = 8041,  -- Hm? What is this? %? How do I know this is not some [San d'Orian/Bastokan/Windurstian] trick?
-        PLAYER_OBTAINS_ITEM           = 8088,  -- <name> obtains <item>!
-        UNABLE_TO_OBTAIN_ITEM         = 8089,  -- You were unable to obtain the item.
-        PLAYER_OBTAINS_TEMP_ITEM      = 8090,  -- <name> obtains the temporary item: <item>!
-        ALREADY_POSSESS_TEMP          = 8091,  -- You already possess that temporary item.
-        NO_COMBINATION                = 8096,  -- You were unable to enter a combination.
-        UNITY_WANTED_BATTLE_INTERACT  = 8158,  -- Those who have accepted % must pay # Unity accolades to participate. The content for this Wanted battle is #. [Ready to begin?/You do not have the appropriate object set, so your rewards will be limited.]
-        REGIME_REGISTERED             = 10274, -- New training regime registered!
-        COMMON_SENSE_SURVIVAL         = 12263, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
+        SENSE_OMINOUS_PRESENCE        = 7855,  -- You sense an ominous presence...
+        GARRISON_BASE                 = 8042,  -- Hm? What is this? %? How do I know this is not some [San d'Orian/Bastokan/Windurstian] trick?
+        PLAYER_OBTAINS_ITEM           = 8089,  -- <name> obtains <item>!
+        UNABLE_TO_OBTAIN_ITEM         = 8090,  -- You were unable to obtain the item.
+        PLAYER_OBTAINS_TEMP_ITEM      = 8091,  -- <name> obtains the temporary item: <item>!
+        ALREADY_POSSESS_TEMP          = 8092,  -- You already possess that temporary item.
+        NO_COMBINATION                = 8097,  -- You were unable to enter a combination.
+        UNITY_WANTED_BATTLE_INTERACT  = 8159,  -- Those who have accepted % must pay # Unity accolades to participate. The content for this Wanted battle is #. [Ready to begin?/You do not have the appropriate object set, so your rewards will be limited.]
+        REGIME_REGISTERED             = 10275, -- New training regime registered!
+        COMMON_SENSE_SURVIVAL         = 12264, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
     mob =
     {
