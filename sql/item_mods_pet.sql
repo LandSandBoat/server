@@ -836,6 +836,11 @@ INSERT INTO `item_mods_pet` VALUES (23214,289,10,3);  -- Automaton: SUBTLE_BLOW:
 INSERT INTO `item_mods_pet` VALUES (23214,384,600,3); -- Automaton: HASTE_GEAR: 6%
 
 -- Beckoner's Bracers +2
+INSERT INTO `item_mods_pet` VALUES (23227,25,52,0); -- Pet: ACC: 52
+INSERT INTO `item_mods_pet` VALUES (23227,26,52,0); -- Pet: RACC: 52
+INSERT INTO `item_mods_pet` VALUES (23227,30,52,0); -- Pet: MACC: 52
+
+-- Beckoner's Bracers +2
 INSERT INTO `item_mods_pet` VALUES (23233,126,8,1); -- Avatar - BP_DAMAGE: 8
 
 -- Vishap Brais +2
