@@ -24,7 +24,7 @@ itemObject.onItemUse = function(target)
         {  4, xi.item.SLICE_OF_CERBERUS_MEAT    },
         { 17, xi.item.SLICE_OF_COCKATRICE_MEAT  },
         { 13, xi.item.SLICE_OF_COEURL_MEAT      },
-        { 20, xi.item.DHALMEL_MEAT              },
+        { 20, xi.item.SLICE_OF_DHALMEL_MEAT     },
         {  5, xi.item.SLICE_OF_DRAGON_MEAT      },
         { 17, xi.item.SLICE_OF_GIANT_SHEEP_MEAT },
         { 22, xi.item.SLICE_OF_HARE_MEAT        },
