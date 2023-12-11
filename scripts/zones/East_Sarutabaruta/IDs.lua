@@ -28,13 +28,13 @@ zones[xi.zone.EAST_SARUTABARUTA] =
         QUH_BERHUJA_STOLEN_ORBS       = 7407, -- Yowl! That was a close call, with those ferrral Carrrdians barrrging in therrre! Of courrrse, I rrran away...for help, I mean...
         PORE_OHRE_DIALOG              = 7409, -- There are reports of evil Cardians attacking people to steal the Mana Orbs created at this tower. Yikey-wikey, is this job scary!?
         PORE_OHRE_STOLEN_ORBS         = 7451, -- If you're heading back to town, then please go tell Minister Apururu at the Manustery about those feral Cardians stealing our Mana Orbs! Thanks, and be careful on your way homey-womey!
-        PLAYER_OBTAINS_ITEM           = 7563, -- <name> obtains <item>!
-        UNABLE_TO_OBTAIN_ITEM         = 7564, -- You were unable to obtain the item.
-        PLAYER_OBTAINS_TEMP_ITEM      = 7565, -- <name> obtains the temporary item: <item>!
-        ALREADY_POSSESS_TEMP          = 7566, -- You already possess that temporary item.
-        NO_COMBINATION                = 7571, -- You were unable to enter a combination.
-        UNITY_WANTED_BATTLE_INTERACT  = 7633, -- Those who have accepted % must pay # Unity accolades to participate. The content for this Wanted battle is #. [Ready to begin?/You do not have the appropriate object set, so your rewards will be limited.]
-        REGIME_REGISTERED             = 9932, -- New training regime registered!
+        PLAYER_OBTAINS_ITEM           = 7564, -- <name> obtains <item>!
+        UNABLE_TO_OBTAIN_ITEM         = 7565, -- You were unable to obtain the item.
+        PLAYER_OBTAINS_TEMP_ITEM      = 7566, -- <name> obtains the temporary item: <item>!
+        ALREADY_POSSESS_TEMP          = 7567, -- You already possess that temporary item.
+        NO_COMBINATION                = 7572, -- You were unable to enter a combination.
+        UNITY_WANTED_BATTLE_INTERACT  = 7634, -- Those who have accepted % must pay # Unity accolades to participate. The content for this Wanted battle is #. [Ready to begin?/You do not have the appropriate object set, so your rewards will be limited.]
+        REGIME_REGISTERED             = 9933, -- New training regime registered!
     },
     mob =
     {

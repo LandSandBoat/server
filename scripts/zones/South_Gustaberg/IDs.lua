@@ -29,15 +29,15 @@ zones[xi.zone.SOUTH_GUSTABERG] =
         FIRE_TAKE                     = 7418, -- You take <item> out of the fire.
         FIRE_LONGER                   = 7419, -- It may take a little while more to cook the <item>.
         MEAT_ALREADY_PUT              = 7420, -- The <item> is already in the fire.
-        ITEMS_ITEMS_LA_LA             = 7517, -- You can hear a strange voice... Items, items, la la la la la
-        GOBLIN_SLIPPED_AWAY           = 7523, -- The Goblin slipped away when you were not looking...
-        PLAYER_OBTAINS_ITEM           = 7537, -- <name> obtains <item>!
-        UNABLE_TO_OBTAIN_ITEM         = 7538, -- You were unable to obtain the item.
-        PLAYER_OBTAINS_TEMP_ITEM      = 7539, -- <name> obtains the temporary item: <item>!
-        ALREADY_POSSESS_TEMP          = 7540, -- You already possess that temporary item.
-        NO_COMBINATION                = 7545, -- You were unable to enter a combination.
-        UNITY_WANTED_BATTLE_INTERACT  = 7607, -- Those who have accepted % must pay # Unity accolades to participate. The content for this Wanted battle is #. [Ready to begin?/You do not have the appropriate object set, so your rewards will be limited.]
-        REGIME_REGISTERED             = 9906, -- New training regime registered!
+        ITEMS_ITEMS_LA_LA             = 7518, -- You can hear a strange voice... Items, items, la la la la la
+        GOBLIN_SLIPPED_AWAY           = 7524, -- The Goblin slipped away when you were not looking...
+        PLAYER_OBTAINS_ITEM           = 7538, -- <name> obtains <item>!
+        UNABLE_TO_OBTAIN_ITEM         = 7539, -- You were unable to obtain the item.
+        PLAYER_OBTAINS_TEMP_ITEM      = 7540, -- <name> obtains the temporary item: <item>!
+        ALREADY_POSSESS_TEMP          = 7541, -- You already possess that temporary item.
+        NO_COMBINATION                = 7546, -- You were unable to enter a combination.
+        UNITY_WANTED_BATTLE_INTERACT  = 7608, -- Those who have accepted % must pay # Unity accolades to participate. The content for this Wanted battle is #. [Ready to begin?/You do not have the appropriate object set, so your rewards will be limited.]
+        REGIME_REGISTERED             = 9907, -- New training regime registered!
     },
     mob =
     {

@@ -27,15 +27,15 @@ zones[xi.zone.EASTERN_ALTEPA_DESERT] =
         FIND_NOTHING                  = 7577,  -- You dig and you dig, but find nothing.
         AMK_DIGGING_OFFSET            = 7643,  -- You spot some familiar footprints. You are convinced that your moogle friend has been digging in the immediate vicinity.
         ALREADY_OBTAINED_TELE         = 7671,  -- You already possess the gate crystal for this telepoint.
-        GARRISON_BASE                 = 7697,  -- Hm? What is this? %? How do I know this is not some [San d'Orian/Bastokan/Windurstian] trick?
-        PLAYER_OBTAINS_ITEM           = 7770,  -- <name> obtains <item>!
-        UNABLE_TO_OBTAIN_ITEM         = 7771,  -- You were unable to obtain the item.
-        PLAYER_OBTAINS_TEMP_ITEM      = 7772,  -- <name> obtains the temporary item: <item>!
-        ALREADY_POSSESS_TEMP          = 7773,  -- You already possess that temporary item.
-        NO_COMBINATION                = 7778,  -- You were unable to enter a combination.
-        UNITY_WANTED_BATTLE_INTERACT  = 7840,  -- Those who have accepted % must pay # Unity accolades to participate. The content for this Wanted battle is #. [Ready to begin?/You do not have the appropriate object set, so your rewards will be limited.]
-        REGIME_REGISTERED             = 9956,  -- New training regime registered!
-        COMMON_SENSE_SURVIVAL         = 11092, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
+        GARRISON_BASE                 = 7698,  -- Hm? What is this? %? How do I know this is not some [San d'Orian/Bastokan/Windurstian] trick?
+        PLAYER_OBTAINS_ITEM           = 7771,  -- <name> obtains <item>!
+        UNABLE_TO_OBTAIN_ITEM         = 7772,  -- You were unable to obtain the item.
+        PLAYER_OBTAINS_TEMP_ITEM      = 7773,  -- <name> obtains the temporary item: <item>!
+        ALREADY_POSSESS_TEMP          = 7774,  -- You already possess that temporary item.
+        NO_COMBINATION                = 7779,  -- You were unable to enter a combination.
+        UNITY_WANTED_BATTLE_INTERACT  = 7841,  -- Those who have accepted % must pay # Unity accolades to participate. The content for this Wanted battle is #. [Ready to begin?/You do not have the appropriate object set, so your rewards will be limited.]
+        REGIME_REGISTERED             = 9957,  -- New training regime registered!
+        COMMON_SENSE_SURVIVAL         = 11093, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
     mob =
     {
