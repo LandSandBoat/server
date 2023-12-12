@@ -8,7 +8,7 @@ local ID = require("scripts/zones/Empyreal_Paradox/IDs")
 local entity = {}
 
 entity.onMobInitialize = function(mob)
-    mob:addMod(xi.mod.REGAIN, 30)
+    mob:addMod(xi.mod.REGAIN, 50)
     mob:setMobMod(xi.mobMod.NO_REST, 1)
     mob:addListener('RAISE_RECEIVED', 'PRISHE_RAISE_RECEIVED', function(target, raiseLevel)
         target:setLocalVar("Raise", 1)

@@ -9,6 +9,10 @@ local entity = {}
 
 entity.onMobSpawn = function(mob)
     mob:addMod(xi.mod.REGAIN, 50)
+    mob:setMod(xi.mod.ICE_ABSORB, 100)
+    mob:setMod(xi.mod.UDMGPHYS, -6000)
+    mob:setMod(xi.mod.UDMGRANGE, -6000)
+    mob:setMobMod(xi.mobMod.MAGIC_RANGE, 40)
 
     xi.mix.jobSpecial.config(mob, {
         specials =
