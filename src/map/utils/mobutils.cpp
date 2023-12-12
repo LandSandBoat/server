@@ -56,6 +56,7 @@ namespace mobutils
     uint16 GetWeaponDamage(CMobEntity* PMob, uint16 slot)
     {
         uint16 lvl    = PMob->GetMLevel();
+        auto*  weapon = dynamic_cast<CItemWeapon*>(PMob->m_Weapons[SLOT_MAIN]);
         int8   bonus  = 2;
         uint16 damage = 0;
 
@@ -69,7 +70,17 @@ namespace mobutils
             bonus = 0;
         }
 
-        damage = lvl + bonus;
+        if (slot == SLOT_MAIN && (weapon == nullptr || weapon->getSkillType() == SKILL_HAND_TO_HAND))
+        {
+            // https://ffxiclopedia.fandom.com/wiki/Category:Hand-to-Hand
+            // base h2h weapon dmg for a given h2h skill: (0.11 * h2h skill) + 3
+            uint16 h2hskill = battleutils::GetMaxSkill(SKILL_HAND_TO_HAND, JOB_MNK, lvl);
+            damage          = 0.11f * h2hskill + 3;
+        }
+        else
+        {
+            damage = lvl + bonus;
+        }
 
         damage = (uint16)(damage * PMob->m_dmgMult / 100.0f);
 
