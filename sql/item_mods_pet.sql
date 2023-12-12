@@ -840,8 +840,15 @@ INSERT INTO `item_mods_pet` VALUES (23227,25,52,0); -- Pet: ACC: 52
 INSERT INTO `item_mods_pet` VALUES (23227,26,52,0); -- Pet: RACC: 52
 INSERT INTO `item_mods_pet` VALUES (23227,30,52,0); -- Pet: MACC: 52
 
+-- Peltast's vambraces +2
+INSERT INTO `item_mods_pet` VALUES (23232,25,52,2); -- Wyvern: ACC: 52
+INSERT INTO `item_mods_pet` VALUES (23232,30,52,2); -- Wyvern: MACC: 52
+
 -- Beckoner's Bracers +2
-INSERT INTO `item_mods_pet` VALUES (23233,126,8,1); -- Avatar - BP_DAMAGE: 8
+INSERT INTO `item_mods_pet` VALUES (23233,25,52,1); -- Avatar: ACC: 52
+INSERT INTO `item_mods_pet` VALUES (23233,26,52,1); -- Avatar: RACC: 52
+INSERT INTO `item_mods_pet` VALUES (23233,30,52,1); -- Avatar: MACC: 52
+INSERT INTO `item_mods_pet` VALUES (23233,126,8,1); -- Avatar: BP_DAMAGE: 8
 
 -- Vishap Brais +2
 INSERT INTO `item_mods_pet` VALUES (23254,3,25,2); -- Wyvern - HPP: 25
