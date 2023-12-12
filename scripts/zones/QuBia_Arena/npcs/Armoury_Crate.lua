@@ -202,11 +202,12 @@ local loot =
             { itemid = xi.items.CONJURER_EARRING,  droprate = 50 },
         },
         {
-            { itemid = 0, droprate = 400 }, -- nothing
+            { itemid = 0, droprate = 250 }, -- nothing
             { itemid = xi.items.OCEAN_SASH,  droprate = 150 },
             { itemid = xi.items.FOREST_SASH, droprate = 150 },
             { itemid = xi.items.STEPPE_SASH, droprate = 150 },
             { itemid = xi.items.JUNGLE_SASH, droprate = 150 },
+            { itemid = xi.items.DESERT_SASH, droprate = 150 },
         },
         {
             { itemid = 0, droprate = 450 }, -- nothing

@@ -73,43 +73,41 @@ xi.dynamis.onSpawnDynaLord = function(mob)
         elseif skillid == xi.jsa.CHAINSPELL then
             mobArg:messageText(mobArg, lordText + 13)
         end
-    end)
 
-    mob:addListener("WEAPONSKILL_STATE_EXIT", "DL_WEAPONSKILL_STATE_EXIT", function(mobArg, skillid)
         local zone = mobArg:getZone()
-        if mobArg:getLocalVar("Clone") == 1 then
-            if skillid == zone:getLocalVar("CloneMove") then
-                mobArg:timer(1000, function(mobAr)
-                    DespawnMob(mobAr:getID())
-                end)
-            end
+        if
+            mobArg:getLocalVar("Clone") == 1 and
+            skillid == zone:getLocalVar("CloneMove")
+        then
+            -- wait about 4 seconds for the TP to be attempted then despawn
+            mobArg:timer(4200, function(mobAr)
+                DespawnMob(mobAr:getID())
+            end)
         end
     end)
 
     mob:addListener("COMBAT_TICK", "DL_JSA_TICK", function(mobAr)
         -- Handle Clone Moves
-        if mobAr:getLocalVar("ws") == 1 then
+        if mobAr:getLocalVar("readyForCloneWS") == 1 then
             local move = mobAr:getZone():getLocalVar("CloneMove")
             if move >= 1131 and move < 1134 then
+                mobAr:setLocalVar("readyForCloneWS", 0)
                 mobAr:queue(0, function(mobArg)
-                    mobArg:setLocalVar("ws", 0)
                     mobArg:setMobAbilityEnabled(true)
                     mobArg:useMobAbility(move)
                 end)
             else
+                mobAr:setLocalVar("readyForCloneWS", 0)
                 mobAr:queue(0, function(mobArg)
-                    mobArg:setLocalVar("ws", 0)
                     mobArg:setMobAbilityEnabled(true)
                     mobArg:useMobAbility(move, mobArg:getTarget())
                 end)
             end
-        else
-            if mobAr:getLocalVar("Clone") == 0 then
-                mobAr:getZone():setLocalVar("DL_HP", mobAr:getHP())
-                mobAr:setMagicCastingEnabled(true)
-                mobAr:setMobAbilityEnabled(true)
-                mobAr:setAutoAttackEnabled(true)
-            end
+        elseif mobAr:getLocalVar("Clone") == 0 then
+            mobAr:getZone():setLocalVar("DL_HP", mobAr:getHP())
+            mobAr:setMagicCastingEnabled(true)
+            mobAr:setMobAbilityEnabled(true)
+            mobAr:setAutoAttackEnabled(true)
         end
 
         -- Handle JSAs
@@ -119,9 +117,9 @@ xi.dynamis.onSpawnDynaLord = function(mob)
         then
             for _, table in pairs(specials) do
                 if mobAr:getZone():getLocalVar(table[3]) ~= 1 and mob:getHPP() <= table[2] then
+                    mobAr:setLocalVar("readyForCloneWS", 0)
                     mobAr:queue(0, function(mobArg)
                         mobArg:useMobAbility(table[1])
-                        mobArg:setLocalVar("ws", 0)
                     end)
 
                     mobAr:getZone():setLocalVar(table[3], 1)
@@ -177,7 +175,7 @@ xi.dynamis.onEngagedDynaLord = function(mob, target)
         mob:setAutoAttackEnabled(false)
         mob:setMagicCastingEnabled(false)
         mob:setHP(zone:getLocalVar("DL_HP"))
-        mob:setLocalVar("ws", 1)
+        mob:setLocalVar("readyForCloneWS", 1)
     else
         mob:showText(mob, lordText + 8) -- Immortal Drakes, deafeated
         zone:setLocalVar("teraTime", os.time() + math.random(90, 120))
@@ -198,7 +196,7 @@ xi.dynamis.onFightDynaLord = function(mob, target)
         return
     end
 
-    if mob:getLocalVar("ws") == 0 then
+    if mob:getLocalVar("readyForCloneWS") == 0 then
         if
             os.time() > teraTime and
             mob:getLocalVar("cloneSpawn") <= os.time()
@@ -212,7 +210,7 @@ xi.dynamis.onFightDynaLord = function(mob, target)
                 spawnClones(mobArg, targetArg)
                 local cloneMoves = { 1131, 1133, 1134 }
                 zone:setLocalVar("CloneMove", cloneMoves[math.random(1, #cloneMoves)])
-                mobArg:setLocalVar("ws", 1)
+                mobArg:setLocalVar("readyForCloneWS", 1)
                 zone:setLocalVar("teraTime", os.time() + math.random(90, 120))
                 mobArg:entityAnimationPacket("shsm")
                 mobArg:setMobAbilityEnabled(true)
@@ -344,11 +342,25 @@ end
 xi.dynamis.onDeathDynaLord = function(mob, player, optParams)
     local zone = mob:getZone()
     xi.dynamis.megaBossOnDeath(mob, player, optParams)
-    if optParams.isKiller then
+
+    if
+        mob:getLocalVar("Clone") == 0 and
+        mob:getLocalVar("hasDespawnedAdds") == 0
+    then
         mob:showText(mob, lordText + 2)
         local dragons = { zone:getLocalVar("177"), zone:getLocalVar("178") }
         for _, dragon in pairs(dragons) do
             DespawnMob(dragon)
+        end
+
+        -- despawn clones if they happen to be alive
+        for _, mobInZone in pairs(zone:getMobs()) do
+            if
+                mobInZone:getLocalVar("Clone") == 1 and
+                mobInZone:isSpawned()
+            then
+                DespawnMob(mobInZone:getID())
+            end
         end
     end
 end
