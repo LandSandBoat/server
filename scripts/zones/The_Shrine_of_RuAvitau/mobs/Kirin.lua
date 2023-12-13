@@ -9,15 +9,12 @@ require("scripts/globals/mobs")
 -----------------------------------
 local entity = {}
 
-entity.onMobInitialize = function(mob)
+entity.onMobSpawn = function(mob)
     mob:setMobMod(xi.mobMod.IDLE_DESPAWN, 180)
     mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
     mob:addMod(xi.mod.DEF, 120)
-    mob:addMod(xi.mod.EVA, 100)
+    mob:setMod(xi.mod.EVA, 424)
     mob:setMod(xi.mod.REGAIN, 1000)
-end
-
-entity.onMobSpawn = function(mob)
     mob:setMod(xi.mod.WIND_MEVA, -64) -- Todo: Move to mob_resists.sql
     mob:setMod(xi.mod.SILENCERES, 35)
     mob:setMod(xi.mod.STUNRES, 35)

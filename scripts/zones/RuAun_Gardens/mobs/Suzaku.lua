@@ -8,17 +8,14 @@ require("scripts/globals/mobs")
 -----------------------------------
 local entity = {}
 
-entity.onMobInitialize = function(mob)
+entity.onMobSpawn = function(mob, target)
     mob:setMod(xi.mod.SILENCERES, 90)
     mob:addMod(xi.mod.ATT, 155)
     mob:addMod(xi.mod.DEF, 94)
-    mob:addMod(xi.mod.EVA, 104)
+    mob:setMod(xi.mod.EVA, 377)
     mob:addMod(xi.mod.VIT, 77)
     mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
     mob:setMobMod(xi.mobMod.MAGIC_COOL, 35)
-end
-
-entity.onMobSpawn = function(mob, target)
     GetNPCByID(ID.npc.PORTAL_TO_SUZAKU):setAnimation(xi.anim.CLOSE_DOOR)
     mob:setMagicCastingEnabled(false)
 end
