@@ -77,7 +77,7 @@ zones[xi.zone.QUICKSAND_CAVES] =
         ORNATE_DOOR_OFFSET     = GetFirstID('_5s0'),
         CHAINS_THAT_BIND_US_QM = GetFirstID('qm6'),
         TREASURE_COFFER        = GetFirstID('Treasure_Coffer'),
-        ANTICAN_TAG_QM         = GetFirstID('qm25'),
+        ANTICAN_TAG_QM         = 17629770,
     },
 }
 
