@@ -150,7 +150,15 @@ void CTransportHandler::InitializeTransport()
 
             zoneTown.npcDoor  = zoneutils::GetEntity(sql->GetUIntData(2), TYPE_NPC);
             zoneTown.ship.npc = zoneutils::GetEntity(sql->GetUIntData(1), TYPE_SHIP);
-            zoneTown.ship.npc->name.resize(8);
+            if (zoneTown.ship.npc)
+            {
+                zoneTown.ship.npc->name.resize(8);
+            }
+            else
+            {
+                ShowError("Transport <%u>: transport not found", (uint8)sql->GetIntData(0));
+                continue;
+            }
 
             zoneTown.ship.animationArrive = (uint8)sql->GetIntData(9);
             zoneTown.ship.animationDepart = (uint8)sql->GetIntData(10);
@@ -165,9 +173,9 @@ void CTransportHandler::InitializeTransport()
             zoneTown.ship.setVisible(false);
             zoneTown.closeDoor(false);
 
-            if (zoneTown.npcDoor == nullptr || zoneTown.ship.npc == nullptr)
+            if (zoneTown.npcDoor == nullptr)
             {
-                ShowError("Transport <%u>: transport or door not found", (uint8)sql->GetIntData(0));
+                ShowError("Transport <%u>: door not found", (uint8)sql->GetIntData(0));
                 continue;
             }
             if (zoneTown.ship.timeArriveDock < 10)
