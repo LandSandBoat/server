@@ -2613,6 +2613,13 @@ namespace charutils
                 PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, 0, 0, 0x200));
                 return;
             }
+
+            // Disallow everything but shields if you're using H2H
+            // Equipping a shield will unequip the H2H weapon and you will go barefisted with a shield
+            if (PMainItem && PMainItem->getSkillType() == SKILL_HAND_TO_HAND)
+            {
+                return;
+            }
         }
 
         if (slotID == 0)
