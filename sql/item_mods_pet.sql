@@ -850,6 +850,14 @@ INSERT INTO `item_mods_pet` VALUES (23233,26,52,1); -- Avatar: RACC: 52
 INSERT INTO `item_mods_pet` VALUES (23233,30,52,1); -- Avatar: MACC: 52
 INSERT INTO `item_mods_pet` VALUES (23233,126,8,1); -- Avatar: BP_DAMAGE: 8
 
+-- Karagoz Guanti +2
+INSERT INTO `item_mods_pet` VALUES (23236,8,21,3);  -- Automaton: STR: 21
+INSERT INTO `item_mods_pet` VALUES (23236,9,21,3);  -- Automaton: DEX: 21
+INSERT INTO `item_mods_pet` VALUES (23236,10,21,3); -- Automaton: AGI: 21
+INSERT INTO `item_mods_pet` VALUES (23236,25,52,3); -- Automaton: ACC: 52
+INSERT INTO `item_mods_pet` VALUES (23236,26,52,3); -- Automaton: RACC: 52
+INSERT INTO `item_mods_pet` VALUES (23236,30,52,3); -- Automaton: MACC: 52
+
 -- Vishap Brais +2
 INSERT INTO `item_mods_pet` VALUES (23254,3,25,2); -- Wyvern - HPP: 25
 

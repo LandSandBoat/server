@@ -2673,6 +2673,8 @@ INSERT INTO `item_latents` VALUES (23171,27,-26,13,402); -- Arbatel Gown +2: EFF
 
 INSERT INTO `item_latents` VALUES (23197,518,10,13,57);  -- Agoge Mufflers +2: EFFECT_DEFENDER: SHIELDBLOCKRATE: 10
 
+INSERT INTO `item_latents` VALUES (23238,175,12,13,470);  -- Arbatel Bracers +2: EFFECT_IMMANENCE: SKILLCHAINDMG: 12
+
 -- Hachiya Kyahan +2
 INSERT INTO `item_latents` VALUES (23320,76,25,26,2);   -- Dusk to dawn: MOVE_SPEED_GEAR_BONUS+25%
 
