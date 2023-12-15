@@ -23,7 +23,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #define _CMOBSKILL_TATE_H
 
 #include "mobskill.h"
-#include "state.h"
+#include "ai/state.h"
 
 class CBattleEntity;
 
@@ -31,6 +31,8 @@ class CMobSkillState : public CState
 {
 public:
     CMobSkillState(CBattleEntity* PEntity, uint16 targid, uint16 wsid);
+
+    auto Initialize() -> CState::StateResult override { return CState::StateResult(); }
 
     CMobSkill* GetSkill();
 

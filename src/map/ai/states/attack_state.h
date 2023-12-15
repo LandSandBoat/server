@@ -22,12 +22,14 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #ifndef _CATTACK_STATE_H
 #define _CATTACK_STATE_H
 
-#include "state.h"
+#include "ai/state.h"
 
 class CAttackState : public CState
 {
 public:
     CAttackState(CBattleEntity* PEntity, uint16 targid);
+
+    auto Initialize() -> CState::StateResult override { return CState::StateResult(); }
 
     // state logic done per tick - returns whether to exit the state or not
     virtual bool Update(time_point tick) override;

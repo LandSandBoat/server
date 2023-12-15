@@ -58,6 +58,7 @@ void CAIActionQueue::checkAction(time_point tick)
             break;
         }
     }
+
     while (!actionQueue.empty())
     {
         const auto& topaction = actionQueue.top();

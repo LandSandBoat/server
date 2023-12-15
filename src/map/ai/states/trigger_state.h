@@ -22,12 +22,15 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #ifndef _CTRIGGER_STATE_H
 #define _CTRIGGER_STATE_H
 
-#include "state.h"
+#include "ai/state.h"
 
 class CTriggerState : public CState
 {
 public:
     CTriggerState(CBaseEntity* PEntity, uint16 targid, bool door = false);
+
+    auto Initialize() -> CState::StateResult override { return CState::StateResult(); }
+
     virtual bool Update(time_point tick) override;
     virtual void Cleanup(time_point tick) override
     {

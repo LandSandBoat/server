@@ -30,6 +30,8 @@ CRespawnState::CRespawnState(CBaseEntity* _PEntity, duration spawnTime)
 {
 }
 
+
+
 bool CRespawnState::Update(time_point tick)
 {
     // make sure that the respawn time is up to date

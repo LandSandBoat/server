@@ -22,12 +22,14 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #ifndef _CINACTIVE_STATE_H
 #define _CINACTIVE_STATE_H
 
-#include "state.h"
+#include "ai/state.h"
 
 class CInactiveState : public CState
 {
 public:
     CInactiveState(CBaseEntity* PEntity, duration _duration, bool canChangeState, bool untargetable);
+
+    auto Initialize() -> CState::StateResult override { return CState::StateResult(); }
 
     bool GetUntargetable()
     {

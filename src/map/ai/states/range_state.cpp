@@ -38,18 +38,18 @@ CRangeState::CRangeState(CBattleEntity* PEntity, uint16 targid)
 
     if (!PTarget || m_errorMsg)
     {
-        throw CStateInitException(std::move(m_errorMsg));
+        // throw CStateInitException(std::move(m_errorMsg));
     }
 
     if (!CanUseRangedAttack(PTarget, false))
     {
-        throw CStateInitException(std::move(m_errorMsg));
+        // throw CStateInitException(std::move(m_errorMsg));
     }
 
     if (distance(m_PEntity->loc.p, PTarget->loc.p) > 25)
     {
         m_errorMsg = std::make_unique<CMessageBasicPacket>(m_PEntity, PTarget, 0, 0, MSGBASIC_TOO_FAR_AWAY);
-        throw CStateInitException(std::move(m_errorMsg));
+        // throw CStateInitException(std::move(m_errorMsg));
     }
 
     auto delay = m_PEntity->GetRangedWeaponDelay(false);

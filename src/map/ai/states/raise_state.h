@@ -22,12 +22,14 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #ifndef _CRAISE_STATE_H
 #define _CRAISE_STATE_H
 
-#include "state.h"
+#include "ai/state.h"
 
 class CRaiseState : public CState
 {
 public:
     CRaiseState(CBattleEntity* PEntity);
+
+    auto Initialize() -> CState::StateResult override { return CState::StateResult(); }
 
     // state logic done per tick - returns whether to exit the state or not
     virtual bool Update(time_point tick) override;

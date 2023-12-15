@@ -32,7 +32,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "helpers/pathfind.h"
 #include "helpers/targetfind.h"
 #include "packets/message_basic.h"
-#include "states/state.h"
+#include "state.h"
 
 class CBaseEntity;
 class CCharEntity;
@@ -141,6 +141,7 @@ protected:
     CBaseEntity* PEntity;
 
     void CheckCompletedStates();
+
     template <typename T, typename... Args>
     bool ChangeState(Args&&... args)
     {
@@ -152,19 +153,26 @@ protected:
 
         if (CanChangeState())
         {
-            try
+            CheckCompletedStates();
+
+            auto newStatePtr = std::make_unique<T>(std::forward<Args>(args)...);
+
+            CState::StateResult result = newStatePtr->Initialize();
+            if (result.has_value())
             {
-                CheckCompletedStates();
-                m_stateStack.emplace(std::make_unique<T>(std::forward<Args>(args)...));
+                m_stateStack.emplace(std::move(newStatePtr));
                 return true;
             }
-            catch (CStateInitException& e)
+            else if (result.error().has_value())
             {
-                PEntity->HandleErrorMessage(e.packet);
+                auto packet = std::move(result.error().value());
+                PEntity->HandleErrorMessage(packet);
+                // Fall through to returning false
             }
         }
         return false;
     }
+
     template <typename T, typename... Args>
     bool ForceChangeState(Args&&... args)
     {
@@ -174,15 +182,24 @@ protected:
             return false;
         }
 
-        try
+        if (CanChangeState())
         {
             CheckCompletedStates();
-            m_stateStack.emplace(std::make_unique<T>(std::forward<Args>(args)...));
-            return true;
-        }
-        catch (CStateInitException& e)
-        {
-            PEntity->HandleErrorMessage(e.packet);
+
+            auto newStatePtr = std::make_unique<T>(std::forward<Args>(args)...);
+
+            CState::StateResult result = newStatePtr->Initialize();
+            if (result.has_value())
+            {
+                m_stateStack.emplace(std::move(newStatePtr));
+                return true;
+            }
+            else if (result.error().has_value())
+            {
+                auto packet = std::move(result.error().value());
+                PEntity->HandleErrorMessage(packet);
+                // Fall through to returning false
+            }
         }
         return false;
     }

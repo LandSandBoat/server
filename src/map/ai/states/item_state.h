@@ -22,7 +22,7 @@
 #ifndef _CITEM_STATE_H
 #define _CITEM_STATE_H
 
-#include "state.h"
+#include "ai/state.h"
 
 class CBattleEntity;
 class CCharEntity;
@@ -34,6 +34,9 @@ class CItemState : public CState
 {
 public:
     CItemState(CCharEntity* PEntity, uint16 targid, uint8 loc, uint8 slotid);
+
+    auto Initialize() -> CState::StateResult override { return CState::StateResult(); }
+
     void UpdateTarget(CBaseEntity* target) override;
     void UpdateTarget(uint16 targid) override;
     bool Update(time_point tick) override;

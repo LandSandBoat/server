@@ -8,5 +8,7 @@ set(AI_SOURCES
     ${AI_STATE_SOURCES}
     ${CMAKE_CURRENT_SOURCE_DIR}/ai_container.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/ai_container.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/state.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/state.h
     PARENT_SCOPE
 )

@@ -37,19 +37,19 @@ CMobSkillState::CMobSkillState(CBattleEntity* PEntity, uint16 targid, uint16 wsi
     auto* skill = battleutils::GetMobSkill(wsid);
     if (!skill)
     {
-        throw CStateInitException(nullptr);
+        // throw CStateInitException(nullptr);
     }
 
     if (m_PEntity->StatusEffectContainer->HasStatusEffect({ EFFECT_AMNESIA, EFFECT_IMPAIRMENT }))
     {
-        throw CStateInitException(nullptr);
+        // throw CStateInitException(nullptr);
     }
 
     auto* PTarget = m_PEntity->IsValidTarget(m_targid, skill->getValidTargets(), m_errorMsg);
 
     if (!PTarget || m_errorMsg)
     {
-        throw CStateInitException(std::move(m_errorMsg));
+        // throw CStateInitException(std::move(m_errorMsg));
     }
 
     m_PSkill = std::make_unique<CMobSkill>(*skill);

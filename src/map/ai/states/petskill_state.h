@@ -23,7 +23,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #define _CPETSKILL_TATE_H
 
 #include "petskill.h"
-#include "state.h"
+#include "ai/state.h"
 
 class CPetEntity;
 
@@ -31,6 +31,8 @@ class CPetSkillState : public CState
 {
 public:
     CPetSkillState(CPetEntity* PEntity, uint16 targid, uint16 wsid);
+
+    auto Initialize() -> CState::StateResult override { return CState::StateResult(); }
 
     CPetSkill* GetPetSkill();
 

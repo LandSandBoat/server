@@ -26,14 +26,19 @@ void CAIEventHandler::addListener(std::string const& eventname, sol::function co
     TracyZoneScoped;
     TracyZoneString(eventname);
     TracyZoneString(identifier);
+
+    // clang-format off
     // Remove entries with same identifier (if they exist)
     eventListeners[eventname]
-        .erase(std::remove_if(eventListeners[eventname].begin(), eventListeners[eventname].end(),
-                              [&identifier](const ai_event_t& event)
-                              {
-                                  return identifier == event.identifier;
-                              }),
-               eventListeners[eventname].end());
+        .erase(std::remove_if(
+            eventListeners[eventname].begin(),
+            eventListeners[eventname].end(),
+            [&identifier](const ai_event_t& event)
+            {
+                return identifier == event.identifier;
+            }),
+            eventListeners[eventname].end());
+    // clang-format on
 
     eventListeners[eventname].emplace_back(identifier, lua_func);
 }
@@ -42,6 +47,7 @@ void CAIEventHandler::removeListener(std::string const& identifier)
 {
     TracyZoneScoped;
     TracyZoneString(identifier);
+
     for (auto&& eventListener : eventListeners)
     {
         auto remove = [&identifier](const ai_event_t& event)

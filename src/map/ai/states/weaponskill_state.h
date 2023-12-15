@@ -22,13 +22,15 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #ifndef _CWEAPONSKILL_STATE_H
 #define _CWEAPONSKILL_STATE_H
 
-#include "state.h"
+#include "ai/state.h"
 #include "weapon_skill.h"
 
 class CWeaponSkillState : public CState
 {
 public:
     CWeaponSkillState(CBattleEntity* PEntity, uint16 targid, uint16 wsid);
+
+    auto Initialize() -> CState::StateResult override { return CState::StateResult(); }
 
     CWeaponSkill* GetSkill();
 
