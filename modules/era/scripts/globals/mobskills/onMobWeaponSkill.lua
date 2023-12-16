@@ -4720,7 +4720,7 @@ end)
 m:addOverride("xi.globals.mobskills.eagle_eye_shot.onMobWeaponSkill", function(target, mob, skill)
     local numhits = 1
     local accmod = 2
-    local dmgmod = 1 + math.random()
+    local dmgmod = 9 + math.random()
 
     local info = xi.mobskills.mobRangedMove(mob, target, skill, numhits, accmod, dmgmod, xi.mobskills.magicalTpBonus.NO_EFFECT)
 
