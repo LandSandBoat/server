@@ -20,7 +20,7 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
     # workaround for broken clang on ubuntu runner until fixed: https://github.com/actions/runner-images/issues/8659
-    - uses: mjp41/workaround8649@7929373c0fe5caf844d8115adccef39e3b5362e7
+    - uses: claywar/workaround8649@b59699cec47ef4f0db8cf5564e0dc30a74cc8888
       with:
         os: ubuntu-22.04
     - uses: actions/checkout@v3
@@ -198,7 +198,7 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
     # workaround for broken clang on ubuntu runner until fixed: https://github.com/actions/runner-images/issues/8659
-    - uses: mjp41/workaround8649@7929373c0fe5caf844d8115adccef39e3b5362e7
+    - uses: claywar/workaround8649@b59699cec47ef4f0db8cf5564e0dc30a74cc8888
       with:
         os: ubuntu-22.04
     - uses: actions/checkout@v3
@@ -237,7 +237,7 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
     # workaround for broken clang on ubuntu runner until fixed: https://github.com/actions/runner-images/issues/8659
-    - uses: mjp41/workaround8649@7929373c0fe5caf844d8115adccef39e3b5362e7
+    - uses: claywar/workaround8649@b59699cec47ef4f0db8cf5564e0dc30a74cc8888
       with:
         os: ubuntu-22.04
     - uses: actions/checkout@v3
@@ -272,7 +272,7 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
     # workaround for broken clang on ubuntu runner until fixed: https://github.com/actions/runner-images/issues/8659
-    - uses: mjp41/workaround8649@7929373c0fe5caf844d8115adccef39e3b5362e7
+    - uses: claywar/workaround8649@b59699cec47ef4f0db8cf5564e0dc30a74cc8888
       with:
         os: ubuntu-22.04
     - uses: actions/checkout@v3
@@ -431,7 +431,7 @@ jobs:
         options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=10s --health-retries=10
     steps:
     # workaround for broken clang on ubuntu runner until fixed: https://github.com/actions/runner-images/issues/8659
-    - uses: mjp41/workaround8649@7929373c0fe5caf844d8115adccef39e3b5362e7
+    - uses: claywar/workaround8649@b59699cec47ef4f0db8cf5564e0dc30a74cc8888
       with:
         os: ubuntu-22.04
     - uses: actions/checkout@v3
@@ -612,7 +612,7 @@ jobs:
         options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=10s --health-retries=10
     steps:
     # workaround for broken clang on ubuntu runner until fixed: https://github.com/actions/runner-images/issues/8659
-    - uses: mjp41/workaround8649@7929373c0fe5caf844d8115adccef39e3b5362e7
+    - uses: claywar/workaround8649@b59699cec47ef4f0db8cf5564e0dc30a74cc8888
       with:
         os: ubuntu-22.04
     - uses: actions/checkout@v3
