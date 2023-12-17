@@ -40,6 +40,48 @@
 //     : storage in this unit to a member of Application.
 std::atomic<bool> gProcessLoaded = false;
 
+std::unique_ptr<sql::Connection> sql::getConnection()
+{
+    sql::Driver* driver = sql::mariadb::get_driver_instance();
+
+    try
+    {
+        auto login  = settings::get<std::string>("network.SQL_LOGIN");
+        auto passwd = settings::get<std::string>("network.SQL_PASSWORD");
+        auto host   = settings::get<std::string>("network.SQL_HOST");
+        auto port   = settings::get<uint16>("network.SQL_PORT");
+        auto schema = settings::get<std::string>("network.SQL_DATABASE");
+        auto url    = fmt::format("tcp://{}:{}", host, port);
+
+        std::unique_ptr<sql::Connection> conn(driver->connect(url.c_str(), login.c_str(), passwd.c_str()));
+
+        conn->setSchema(schema.c_str());
+
+        return conn;
+    }
+    catch (const std::exception& e)
+    {
+        ShowError(e.what());
+        return nullptr;
+    }
+}
+
+std::unique_ptr<sql::ResultSet> sql::query(std::string_view query)
+{
+    auto conn = getConnection();
+    auto stmt = conn->createStatement();
+    try
+    {
+        return std::unique_ptr<sql::ResultSet>(stmt->executeQuery(query.data()));
+    }
+    catch (const std::exception& e)
+    {
+        ShowError("Query Failed: %s", query.data());
+        ShowError(e.what());
+        return nullptr;
+    }
+}
+
 SqlConnection::SqlConnection()
 : SqlConnection(settings::get<std::string>("network.SQL_LOGIN").c_str(),
                 settings::get<std::string>("network.SQL_PASSWORD").c_str(),
