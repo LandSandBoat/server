@@ -21,9 +21,11 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 
 #include "daily_tally.h"
 
+#include "common/database.h"
+
 namespace dailytally
 {
-    void UpdateDailyTallyPoints(std::unique_ptr<SqlConnection> const& sql)
+    void UpdateDailyTallyPoints()
     {
         uint16 dailyTallyLimit  = settings::get<uint16>("main.DAILY_TALLY_LIMIT");
         uint16 dailyTallyAmount = settings::get<uint16>("main.DAILY_TALLY_AMOUNT");
@@ -32,9 +34,7 @@ namespace dailytally
             SET char_points.daily_tally = LEAST(%u, char_points.daily_tally + %u) \
             WHERE char_points.daily_tally > -1;";
 
-        int32 ret = sql->Query(fmtQuery, dailyTallyLimit, dailyTallyAmount);
-
-        if (ret == SQL_ERROR)
+        if (!db::query(fmt::sprintf(fmtQuery, dailyTallyLimit, dailyTallyAmount)))
         {
             ShowError("Failed to update daily tally points");
         }
@@ -43,9 +43,7 @@ namespace dailytally
             ShowDebug("Distributed daily tally points");
         }
 
-        fmtQuery = "DELETE FROM char_vars WHERE varname = 'gobbieBoxUsed';";
-
-        if (sql->Query(fmtQuery, dailyTallyAmount) == SQL_ERROR)
+        if (!db::query("DELETE FROM char_vars WHERE varname = 'gobbieBoxUsed';"))
         {
             ShowError("Failed to delete daily tally char_vars entries");
         }
