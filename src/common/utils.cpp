@@ -988,3 +988,20 @@ void crash()
     // cppcheck-suppress nullPointer
     *ptr = 0xDEAD;
 }
+
+std::unique_ptr<FILE> utils::openFile(std::string const& path, std::string const& mode)
+{
+    return std::unique_ptr<FILE>(fopen(path.c_str(), mode.c_str()));
+}
+
+std::string utils::toASCII(std::string const& target, char replacement)
+{
+    std::string out;
+    out.reserve(target.size());
+    for (auto ch : target)
+    {
+        bool isASCII = ch >= 0 && ch <= 127;
+        out += isASCII ? ch : replacement;
+    }
+    return out;
+}
