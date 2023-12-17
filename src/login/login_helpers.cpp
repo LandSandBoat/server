@@ -146,79 +146,79 @@ namespace loginHelpers
 
     int32 saveCharacter(uint32 accid, uint32 charid, char_mini* createchar)
     {
-        auto sql = std::make_unique<SqlConnection>();
+        auto _sql = std::make_unique<SqlConnection>();
 
-        if (sql->Query("INSERT INTO chars(charid,accid,charname,pos_zone,nation) VALUES(%u,%u,'%s',%u,%u);",
-                       charid, accid, str(createchar->m_name), createchar->m_zone, createchar->m_nation) == SQL_ERROR)
+        if (_sql->Query("INSERT INTO chars(charid,accid,charname,pos_zone,nation) VALUES(%u,%u,'%s',%u,%u);",
+                        charid, accid, str(createchar->m_name), createchar->m_zone, createchar->m_nation) == SQL_ERROR)
         {
             ShowDebug(fmt::format("lobby_ccsave: char<{}>, accid: {}, charid: {}", str(createchar->m_name), accid, charid));
             return -1;
         }
 
-        if (sql->Query("INSERT INTO char_look(charid,face,race,size) VALUES(%u,%u,%u,%u);",
-                       charid, createchar->m_look.face, createchar->m_look.race, createchar->m_look.size) == SQL_ERROR)
+        if (_sql->Query("INSERT INTO char_look(charid,face,race,size) VALUES(%u,%u,%u,%u);",
+                        charid, createchar->m_look.face, createchar->m_look.race, createchar->m_look.size) == SQL_ERROR)
         {
             ShowDebug(fmt::format("lobby_cLook: char<{}>, charid: {}", str(createchar->m_name), charid));
             return -1;
         }
 
-        if (sql->Query("INSERT INTO char_stats(charid,mjob) VALUES(%u,%u);",
-                       charid, createchar->m_mjob) == SQL_ERROR)
+        if (_sql->Query("INSERT INTO char_stats(charid,mjob) VALUES(%u,%u);",
+                        charid, createchar->m_mjob) == SQL_ERROR)
         {
             ShowDebug(fmt::format("lobby_cStats: charid: {}", charid));
             return -1;
         }
 
-        if (sql->Query("INSERT INTO char_exp(charid) VALUES(%u) ON DUPLICATE KEY UPDATE charid = charid;",
-                       charid, createchar->m_mjob) == SQL_ERROR)
+        if (_sql->Query("INSERT INTO char_exp(charid) VALUES(%u) ON DUPLICATE KEY UPDATE charid = charid;",
+                        charid, createchar->m_mjob) == SQL_ERROR)
         {
             return -1;
         }
 
-        if (sql->Query("INSERT INTO char_jobs(charid) VALUES(%u) ON DUPLICATE KEY UPDATE charid = charid;",
-                       charid, createchar->m_mjob) == SQL_ERROR)
+        if (_sql->Query("INSERT INTO char_jobs(charid) VALUES(%u) ON DUPLICATE KEY UPDATE charid = charid;",
+                        charid, createchar->m_mjob) == SQL_ERROR)
         {
             return -1;
         }
 
-        if (sql->Query("INSERT INTO char_points(charid) VALUES(%u) ON DUPLICATE KEY UPDATE charid = charid;",
-                       charid, createchar->m_mjob) == SQL_ERROR)
+        if (_sql->Query("INSERT INTO char_points(charid) VALUES(%u) ON DUPLICATE KEY UPDATE charid = charid;",
+                        charid, createchar->m_mjob) == SQL_ERROR)
         {
             return -1;
         }
 
-        if (sql->Query("INSERT INTO char_unlocks(charid) VALUES(%u) ON DUPLICATE KEY UPDATE charid = charid;",
-                       charid, createchar->m_mjob) == SQL_ERROR)
+        if (_sql->Query("INSERT INTO char_unlocks(charid) VALUES(%u) ON DUPLICATE KEY UPDATE charid = charid;",
+                        charid, createchar->m_mjob) == SQL_ERROR)
         {
             return -1;
         }
 
-        if (sql->Query("INSERT INTO char_profile(charid) VALUES(%u) ON DUPLICATE KEY UPDATE charid = charid;",
-                       charid, createchar->m_mjob) == SQL_ERROR)
+        if (_sql->Query("INSERT INTO char_profile(charid) VALUES(%u) ON DUPLICATE KEY UPDATE charid = charid;",
+                        charid, createchar->m_mjob) == SQL_ERROR)
         {
             return -1;
         }
 
-        if (sql->Query("INSERT INTO char_storage(charid) VALUES(%u) ON DUPLICATE KEY UPDATE charid = charid;",
-                       charid, createchar->m_mjob) == SQL_ERROR)
+        if (_sql->Query("INSERT INTO char_storage(charid) VALUES(%u) ON DUPLICATE KEY UPDATE charid = charid;",
+                        charid, createchar->m_mjob) == SQL_ERROR)
         {
             return -1;
         }
 
-        if (sql->Query("DELETE FROM char_inventory WHERE charid = %u", charid) == SQL_ERROR)
+        if (_sql->Query("DELETE FROM char_inventory WHERE charid = %u", charid) == SQL_ERROR)
         {
             return -1;
         }
 
-        if (sql->Query("INSERT INTO char_inventory(charid) VALUES(%u);", charid, createchar->m_mjob) == SQL_ERROR)
+        if (_sql->Query("INSERT INTO char_inventory(charid) VALUES(%u);", charid, createchar->m_mjob) == SQL_ERROR)
         {
             return -1;
         }
 
         if (settings::get<bool>("main.NEW_CHARACTER_CUTSCENE"))
         {
-            if (sql->Query("INSERT INTO char_vars(charid, varname, value) VALUES(%u, '%s', %u);",
-                           charid, "HQuest[newCharacterCS]notSeen", 1) == SQL_ERROR)
+            if (_sql->Query("INSERT INTO char_vars(charid, varname, value) VALUES(%u, '%s', %u);",
+                            charid, "HQuest[newCharacterCS]notSeen", 1) == SQL_ERROR)
             {
                 return -1;
             }
@@ -228,7 +228,7 @@ namespace loginHelpers
 
     int32 createCharacter(session_t& session, char* buf)
     {
-        auto      sql = std::make_unique<SqlConnection>();
+        auto      _sql = std::make_unique<SqlConnection>();
         char_mini createchar;
 
         std::memcpy(createchar.m_name, session.requestedNewCharacterName.c_str(), 16);
@@ -275,18 +275,18 @@ namespace loginHelpers
 
         const char* fmtQuery = "SELECT max(charid) FROM chars";
 
-        if (sql->Query(fmtQuery) == SQL_ERROR)
+        if (_sql->Query(fmtQuery) == SQL_ERROR)
         {
             return -1;
         }
 
         uint32 CharID = 0;
 
-        if (sql->NumRows() != 0)
+        if (_sql->NumRows() != 0)
         {
-            sql->NextRow();
+            _sql->NextRow();
 
-            CharID = sql->GetUIntData(0) + 1;
+            CharID = _sql->GetUIntData(0) + 1;
         }
 
         if (saveCharacter(session.accountID, CharID, &createchar) == -1)
