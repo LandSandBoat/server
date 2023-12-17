@@ -676,6 +676,7 @@ xi.effect =
     HYSTERIA                 = 804, -- Used for Hysteroanima to stop after readying a weaponskill with no msg.
     TOMAHAWK                 = 805, -- Silent status effect inflicted by a Warrior using the "Tomahawk" job ability
     NUKE_WALL                = 806, -- Custom effect for NM type mobs only.
+    BRAINJACK                = 807, -- Charm with a DoT
 
     -- 789
     -- 807-1022
