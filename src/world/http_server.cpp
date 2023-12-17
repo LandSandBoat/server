@@ -200,10 +200,10 @@ void HTTPServer::LockingUpdate()
         // Chars per zone
         {
             auto rset = db::query("SELECT chars.pos_zone, COUNT(*) AS `count` "
-                                   "FROM chars "
-                                   "LEFT JOIN accounts_sessions "
-                                   "ON chars.charid = accounts_sessions.charid "
-                                   "GROUP BY pos_zone;");
+                                  "FROM chars "
+                                  "LEFT JOIN accounts_sessions "
+                                  "ON chars.charid = accounts_sessions.charid "
+                                  "GROUP BY pos_zone;");
             if (rset && rset->rowsCount())
             {
                 while (rset->next())

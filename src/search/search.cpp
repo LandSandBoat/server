@@ -31,7 +31,6 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "common/mutex_guarded.h"
 #include "common/settings.h"
 #include "common/socket.h"
-#include "common/sql.h"
 #include "common/taskmgr.h"
 #include "common/timer.h"
 #include "common/utils.h"
@@ -834,8 +833,8 @@ search_req _HandleSearchRequest(CTCPRequestPacket& PTCPRequest)
     uint8 maxLvl = 0;
 
     uint8 jobid    = 0;
-    uint8 raceid   = 255; // 255 cause race 0 is an actual filter (hume)
-    uint8 nationid = 255; // 255 cause nation 0 is an actual filter (sandoria)
+    uint8 raceid   = 255; // 255 because race 0 is an actual filter (hume)
+    uint8 nationid = 255; // 255 because nation 0 is an actual filter (sandoria)
 
     uint8 minRank = 0;
     uint8 maxRank = 0;
@@ -1030,7 +1029,6 @@ search_req _HandleSearchRequest(CTCPRequestPacket& PTCPRequest)
             }
         }
     }
-    fmt::printf("\n");
 
     ShowInfo("Name: %s Job: %u Lvls: %u ~ %u ", (nameLen > 0 ? name : nullptr), jobid, minLvl, maxLvl);
 
