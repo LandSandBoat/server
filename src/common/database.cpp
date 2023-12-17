@@ -27,6 +27,7 @@
 
 std::unique_ptr<sql::Connection> db::getConnection()
 {
+    // NOTE: Driver is static, so it will only be initialized once.
     sql::Driver* driver = sql::mariadb::get_driver_instance();
 
     try
@@ -53,7 +54,9 @@ std::unique_ptr<sql::Connection> db::getConnection()
 
 std::unique_ptr<sql::ResultSet> db::query(std::string_view query)
 {
-    auto conn = getConnection();
+    // TODO: Check this is pooled. If not; make it pooled.
+    static thread_local auto conn = getConnection();
+
     auto stmt = conn->createStatement();
     try
     {
