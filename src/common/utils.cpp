@@ -995,14 +995,14 @@ std::unique_ptr<FILE> utils::openFile(std::string const& path, std::string const
     return std::unique_ptr<FILE>(fopen(path.c_str(), mode.c_str()));
 }
 
-std::string utils::toASCII(std::string const& target, char replacement)
+std::string utils::toASCII(std::string const& target, unsigned char replacement)
 {
     std::string out;
     out.reserve(target.size());
-    for (auto ch : target)
+    for (unsigned char ch : target)
     {
-        bool isASCII = ch >= 0 && ch <= 127;
-        out += isASCII ? ch : replacement;
+        bool isLetter = ch >= 0x20 && ch < 0x7F;
+        out += isLetter ? ch : replacement;
     }
     return out;
 }
