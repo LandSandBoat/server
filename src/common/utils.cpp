@@ -22,6 +22,7 @@
 #include "common/utils.h"
 #include "common/logging.h"
 #include "common/md52.h"
+#include "common/stdext.h"
 
 #include <algorithm>
 #include <cctype>

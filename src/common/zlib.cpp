@@ -1,5 +1,8 @@
 ﻿#include "common/zlib.h"
+
 #include "common/logging.h"
+#include "common/utils.h"
+
 #include <cassert>
 #include <cstring>
 #include <memory>
@@ -37,7 +40,7 @@
 #endif
 
 // Resolve the next address in jump table (0 == no jump, 1 == next address)
-#define JMPBIT(table, i) (((table)[(i) / 8] >> ((i)&7)) & 1)
+#define JMPBIT(table, i) (((table)[(i) / 8] >> ((i) & 7)) & 1)
 
 struct zlib_jump
 {
@@ -62,20 +65,12 @@ static void swap32_if_be(const uint32* v, const size_t memb)
 #endif
 }
 
-struct fclose_deleter
+static bool read_to_vector(std::string const& filename, std::vector<uint32>& vec)
 {
-    void operator()(FILE* f) const
-    {
-        fclose(f);
-    }
-};
-
-static bool read_to_vector(std::string const& file, std::vector<uint32>& vec)
-{
-    std::unique_ptr<FILE, fclose_deleter> fp(fopen(file.c_str(), "rb"));
+    auto fp = utils::openFile(filename, "rb");
     if (!fp)
     {
-        ShowCritical("zlib: can't open file <%s>", file.c_str());
+        ShowCritical("zlib: can't open file <%s>", filename.c_str());
         return false;
     }
 
@@ -86,7 +81,7 @@ static bool read_to_vector(std::string const& file, std::vector<uint32>& vec)
     vec.resize(size / sizeof(uint32));
     if (fread(vec.data(), sizeof(uint32), vec.size(), fp.get()) != vec.size())
     {
-        ShowCritical("zlib: can't read file <%s>: %s", file.c_str(), strerror(errno));
+        ShowCritical("zlib: can't read file <%s>: %s", filename.c_str(), strerror(errno));
         return false;
     }
 
