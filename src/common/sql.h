@@ -12,13 +12,14 @@
 
 #include <mysql.h>
 
-#include <conncpp.hpp>
-
 #ifdef WIN32
 #include <winsock2.h>
 #endif
 
 #include "logging.h"
+
+// NOTE: This is just a shim to allow easy adoption of database.h
+#include "database.h"
 
 // Return codes
 #define SQL_ERROR   -1
@@ -74,12 +75,6 @@ enum SqlDataType
     SQLDT_BLOB,
     SQLDT_LASTID
 };
-
-namespace sql
-{
-    auto getConnection() -> std::unique_ptr<sql::Connection>;
-    auto query(std::string_view query) -> std::unique_ptr<sql::ResultSet>;
-} // namespace sql
 
 class SqlConnection
 {

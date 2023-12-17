@@ -74,7 +74,7 @@ int32 time_server(time_point tick, CTaskMgr::CTask* PTask)
         {
             if (settings::get<bool>("main.ENABLE_DAILY_TALLY"))
             {
-                dailytally::UpdateDailyTallyPoints(worldServer->sql);
+                dailytally::UpdateDailyTallyPoints();
             }
 
             lastTickedJstMidnight = tick;

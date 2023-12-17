@@ -24,6 +24,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include <queue>
 #include <set>
 
+#include "common/database.h"
 #include "common/logging.h"
 #include "conquest_system.h"
 #include "message_server.h"
@@ -51,7 +52,6 @@ namespace
     moodycamel::ConcurrentQueue<chat_message_t>    outgoing_queue;
     moodycamel::ConcurrentQueue<HandleableMessage> external_processing_queue;
 
-    std::unique_ptr<SqlConnection>              sql;
     std::unordered_map<uint16, zone_settings_t> zoneSettingsMap;
     std::vector<uint64>                         mapEndpoints;
     std::vector<uint64>                         yellMapEndpoints;
@@ -118,7 +118,6 @@ std::string ipp_to_string(uint64 ipp)
 
 void message_server_parse(MSGSERVTYPE type, zmq::message_t* extra, zmq::message_t* packet, zmq::message_t* from)
 {
-    int     ret = SQL_ERROR;
     in_addr from_ip{};
     uint16  from_port = 0;
     char    from_address[INET_ADDRSTRLEN];
@@ -130,6 +129,31 @@ void message_server_parse(MSGSERVTYPE type, zmq::message_t* extra, zmq::message_
         inet_ntop(AF_INET, &from_ip, from_address, INET_ADDRSTRLEN);
     }
 
+    auto forward_message = [&](auto rset)
+    {
+        // This is only used for cases where SQL is used to get the IPs (not cached).
+        // E.g: When we get ips for a specific account_session.
+        // Consider moving this logic to a helper method and call it from each case instead.
+        if (!rset)
+        {
+            return;
+        }
+
+        ShowDebug(fmt::format("Message: Received message {} ({}) from {}:{}",
+                              msgTypeToStr(type), static_cast<uint8>(type), str(from_address), from_port));
+
+        while (rset->next())
+        {
+            uint64      ip       = rset->getUInt("server_addr");
+            uint64      port     = rset->getUInt("server_port");
+            uint64      ipp      = ip | (port << 32);
+            std::string ipString = ipp_to_string(ipp);
+
+            ShowDebug(fmt::format("Message: -> rerouting to {}", ipString));
+            message_server_send(ipp, type, extra, packet);
+        }
+    };
+
     switch (type)
     {
         case MSG_CHAT_TELL:
@@ -139,11 +163,11 @@ void message_server_parse(MSGSERVTYPE type, zmq::message_t* extra, zmq::message_
         {
             const char* query = "SELECT server_addr, server_port FROM accounts_sessions LEFT JOIN chars ON "
                                 "accounts_sessions.charid = chars.charid WHERE charname = '%s' LIMIT 1;";
-            ret               = sql->Query(query, str((int8*)extra->data() + 4));
-            if (sql->NumRows() == 0)
+            auto        rset  = db::query(fmt::sprintf(query, str((int8*)extra->data() + 4)));
+            if (!rset)
             {
                 query = "SELECT server_addr, server_port FROM accounts_sessions WHERE charid = %d LIMIT 1;";
-                ret   = sql->Query(query, ref<uint32>((uint8*)extra->data(), 0));
+                forward_message(db::query(fmt::sprintf(query, ref<uint32>((uint8*)extra->data(), 0))));
             }
             break;
         }
@@ -157,7 +181,7 @@ void message_server_parse(MSGSERVTYPE type, zmq::message_t* extra, zmq::message_
                                 "partyid = %d) GROUP BY server_addr, server_port;";
 
             uint32 partyid = ref<uint32>((uint8*)extra->data(), 0);
-            ret            = sql->Query(query, partyid, partyid);
+            forward_message(db::query(fmt::sprintf(query, partyid, partyid)));
             break;
         }
         case MSG_CHAT_ALLIANCE:
@@ -169,21 +193,21 @@ void message_server_parse(MSGSERVTYPE type, zmq::message_t* extra, zmq::message_
                                 "GROUP BY server_addr, server_port;";
 
             uint32 allianceid = ref<uint32>((uint8*)extra->data(), 0);
-            ret               = sql->Query(query, allianceid);
+            forward_message(db::query(fmt::sprintf(query, allianceid)));
             break;
         }
         case MSG_CHAT_LINKSHELL:
         {
             const char* query = "SELECT server_addr, server_port FROM accounts_sessions "
                                 "WHERE linkshellid1 = %d OR linkshellid2 = %d GROUP BY server_addr, server_port;";
-            ret               = sql->Query(query, ref<uint32>((uint8*)extra->data(), 0), ref<uint32>((uint8*)extra->data(), 0));
+            forward_message(db::query(fmt::sprintf(query, ref<uint32>((uint8*)extra->data(), 0), ref<uint32>((uint8*)extra->data(), 0))));
             break;
         }
         case MSG_CHAT_UNITY:
         {
             const char* query = "SELECT server_addr, server_port FROM accounts_sessions "
                                 "WHERE unitychat = %d GROUP BY server_addr, server_port;";
-            ret               = sql->Query(query, ref<uint32>((uint8*)extra->data(), 0), ref<uint32>((uint8*)extra->data(), 0));
+            forward_message(db::query(fmt::sprintf(query, ref<uint32>((uint8*)extra->data(), 0), ref<uint32>((uint8*)extra->data(), 0))));
             break;
         }
         case MSG_CHAT_YELL:
@@ -211,7 +235,7 @@ void message_server_parse(MSGSERVTYPE type, zmq::message_t* extra, zmq::message_
         case MSG_SEND_TO_ZONE:
         {
             const char* query = "SELECT server_addr, server_port FROM accounts_sessions WHERE charid = %d;";
-            ret               = sql->Query(query, ref<uint32>((uint8*)extra->data(), 0));
+            forward_message(db::query(fmt::sprintf(query, ref<uint32>((uint8*)extra->data(), 0))));
             break;
         }
         case MSG_SEND_TO_ENTITY:
@@ -254,26 +278,6 @@ void message_server_parse(MSGSERVTYPE type, zmq::message_t* extra, zmq::message_
             break;
         }
     }
-
-    // This is only used for cases where SQL is used to get the IPs (not cached).
-    // E.g: When we get ips for a specific account_session.
-    // Consider moving this logic to a helper method and call it from each case instead.
-    if (ret != SQL_ERROR)
-    {
-        ShowDebug(fmt::format("Message: Received message {} ({}) from {}:{}",
-                              msgTypeToStr(type), static_cast<uint8>(type), str(from_address), from_port));
-
-        while (sql->NextRow() == SQL_SUCCESS)
-        {
-            uint64      ip       = sql->GetUIntData(0);
-            uint64      port     = sql->GetUIntData(1);
-            uint64      ipp      = ip | (port << 32);
-            std::string ipString = ipp_to_string(ipp);
-
-            ShowDebug(fmt::format("Message: -> rerouting to {}", ipString));
-            message_server_send(ipp, type, extra, packet);
-        }
-    }
 }
 
 void message_server_listen(bool const& requestExit)
@@ -313,16 +317,15 @@ void message_server_listen(bool const& requestExit)
         // 3: zmq::message_t packet
         message_server_parse((MSGSERVTYPE)ref<uint8>((uint8*)msgs[1].data(), 0), &msgs[2], &msgs[3], &msgs[0]);
 
-        sql->TryPing();
+        // TODO: Is this still needed?
+        // sql_->TryPing();
     }
 }
 
 void cache_zone_settings()
 {
-    const char* query = "SELECT zoneid, zoneip, zoneport, misc FROM zone_settings;";
-    int         ret   = sql->Query(query);
-
-    if (ret == SQL_ERROR)
+    auto rset = db::query("SELECT zoneid, zoneip, zoneport, misc FROM zone_settings;");
+    if (!rset)
     {
         ShowCritical("Error loading zone settings from DB");
         throw std::runtime_error("Message Server: Failed to load zone settings from database");
@@ -331,20 +334,21 @@ void cache_zone_settings()
     // Keep track of the zones, as well as a list of unique ip / port combinations.
     std::set<uint64> mapEndpointSet;
     std::set<uint64> yellMapEndpointSet;
-    zoneSettingsMap = std::unordered_map<uint16, zone_settings_t>(sql->NumRows());
-    while (sql->NextRow() == SQL_SUCCESS)
+    zoneSettingsMap = std::unordered_map<uint16, zone_settings_t>();
+    while (rset->next())
     {
         uint64 ip = 0;
-        inet_pton(AF_INET, sql->GetStringData(1).c_str(), &ip);
-        uint64 port = sql->GetUIntData(2);
+        inet_pton(AF_INET, rset->getString("zoneip").c_str(), &ip);
+        uint64 port = rset->getUInt64("zoneport");
 
         zone_settings_t zone_settings{};
-        zone_settings.zoneid = sql->GetUInt64Data(0);
+        zone_settings.zoneid = rset->getUInt("zoneid");
         zone_settings.ipp    = ip | (port << 32);
-        zone_settings.misc   = sql->GetUIntData(3);
+        zone_settings.misc   = rset->getUInt("misc");
 
         mapEndpointSet.insert(zone_settings.ipp);
-        if (zone_settings.misc & 1024)
+
+        if (zone_settings.misc & ZONEMISC::MISC_YELL)
         {
             yellMapEndpointSet.insert(zone_settings.ipp);
         }
@@ -361,10 +365,6 @@ void message_server_init(bool const& requestExit)
 {
     TracySetThreadName("Message Server (ZMQ)");
 
-    // Setup SQL
-    sql = std::make_unique<SqlConnection>();
-
-    // Populate zoneSettingsCache with sql data
     cache_zone_settings();
 
     // Zmql

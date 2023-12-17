@@ -23,7 +23,6 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 
 #include "common/mmo.h"
 #include "common/socket.h"
-#include "common/sql.h"
 #include "conquest_system.h"
 #include "message_handler.h"
 
