@@ -27,8 +27,6 @@ set(COMMON_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/settings.h
     ${CMAKE_CURRENT_SOURCE_DIR}/socket.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/socket.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/sql_prepared_stmt.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/sql_prepared_stmt.h
     ${CMAKE_CURRENT_SOURCE_DIR}/sql.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/sql.h
     ${CMAKE_CURRENT_SOURCE_DIR}/string.h
