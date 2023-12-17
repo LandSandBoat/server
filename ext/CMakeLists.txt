@@ -1,5 +1,6 @@
 # add_subdirectory(lua) # Handled globally
-# add_subdirectory(mysql) # Handled globally
+# add_subdirectory(mariadb) # Handled globally
+# add_subdirectory(mariadbcpp) # Handled globally
 # add_subdirectory(zmq) # Handled globally
 # add_subdirectory(openssl) # Handled globally
 add_subdirectory(concurrentqueue)
@@ -236,6 +237,7 @@ set(EXTERNAL_LIBS
     spdlog
     concurrentqueue
     mariadbclient
+    mariadbcppclient
     RecastNavigation::Recast
     RecastNavigation::Detour
     fast_obj
