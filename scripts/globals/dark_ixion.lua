@@ -4,7 +4,7 @@
 -- https://ffxiclopedia.fandom.com/wiki/Dark_Ixion
 --[[
     Find DI by:
-    - checking the server's zone var: "!checkvar server DarkIxion_ZoneID"
+    - checking the server's zone var: '!checkvar server DarkIxion_ZoneID'
     - go to that zone: !zone <zoneID>
     - go to DI: !gotoname Dark_Ixion
 
@@ -267,6 +267,26 @@ xi.darkixion.setupEntity = function(entity)
     entity.onMobDisengage = function(mob)
         xi.darkixion.onMobDisengage(mob)
     end
+
+    entity.onCriticalHit = function(mob, attacker)
+        xi.darkixion.onCriticalHit(mob, attacker)
+    end
+
+    entity.onWeaponskillHit = function(mob, attacker, weaponskill)
+        xi.darkixion.onWeaponskillHit(mob, attacker, weaponskill)
+    end
+
+    entity.onMobWeaponSkillPrepare = function(mob, target)
+        xi.darkixion.onMobWeaponSkillPrepare(mob, target)
+    end
+
+    entity.onMobWeaponSkill = function(mob, target, skill)
+        xi.darkixion.onMobWeaponSkill(mob, target, skill)
+    end
+
+    entity.onMobFight = function(mob, target)
+        xi.darkixion.onMobFight(mob, target)
+    end
 end
 
 xi.darkixion.repop = function(mob)
@@ -309,8 +329,8 @@ xi.darkixion.roamingMods = function(mob)
     end
 
     mob:setMobSkillAttack(39)
-    mob:setLocalVar('charging', 0)
-    mob:setLocalVar('double', 0)
+    mob:setLocalVar('trampling', 0)
+    mob:setLocalVar('doubleUpWS', 0)
     mob:setLocalVar('lastHit', 0)
     mob:setBehaviour(0)
     mob:setAutoAttackEnabled(true)
@@ -370,11 +390,16 @@ xi.darkixion.zoneOnGameHour = function(zone)
     end
 end
 
-xi.darkixion.onMobDeath = function(mob, player, isKiller)
-    player:addTitle(xi.title.IXION_HORNBREAKER)
-    -- only reset hp after being killed
-    SetServerVariable('DarkIxion_HP', 0)
-    SetServerVariable('DarkIxion_HornStatus', 0)
+xi.darkixion.onMobDeath = function(mob, player, optParams)
+    if optParams.isKiller or optParams.noKiller then
+        -- only reset hp after being killed
+        SetServerVariable('DarkIxion_HP', 0)
+        SetServerVariable('DarkIxion_HornStatus', 0)
+    end
+
+    if player then
+        player:addTitle(xi.title.IXION_HORNBREAKER)
+    end
 end
 
 xi.darkixion.onMobDespawn = function(mob)
@@ -396,6 +421,103 @@ xi.darkixion.onMobSpawn = function(mob)
     mob:setAggressive(true)
 end
 
+xi.darkixion.onCriticalHit = function(mob, attacker)
+    local random = math.random(1, 100)
+
+    if
+        (mob:getAnimationSub() == 0 or mob:getAnimationSub() == 3) and
+        (attacker ~= nil and attacker:isInfront(mob)) and
+        random <= 5
+    then
+        mob:setAnimationSub(2)
+        mob:setLocalVar('doubleUpWS', 0)
+        mob:hideHP(false)
+    end
+end
+
+xi.darkixion.onWeaponskillHit = function(mob, attacker, weaponskill)
+    if
+        (mob:getAnimationSub() == 0 or mob:getAnimationSub() == 3) and
+        (attacker ~= nil and attacker:isInfront(mob)) and
+        math.random(1, 100) <= 5
+    then
+        mob:setAnimationSub(2)
+        mob:setLocalVar('doubleUpWS', 0)
+        mob:hideHP(false)
+    end
+
+    return 0
+end
+
+xi.darkixion.onMobWeaponSkillPrepare = function(mob, target)
+    -- skill unknown, tp not reset yet
+    -- preserve tp when doing melee swings, due to SetMobSkillAttack
+    local tpPerHit = 64 -- give tp for the auto attack (amount confirmed by not replacing autos with mobskill list)
+    mob:setLocalVar('tpBeforeWS', mob:getTP() + tpPerHit)
+end
+
+xi.darkixion.onMobWeaponSkill = function(target, mob, skill)
+    -- skill chosen, tp already wiped
+    local skillID = skill:getID()
+
+    -- these are the two melee attack mobskills, set TP (since the mobskill cleared it) and do logic for trample counter
+    if
+        skillID == 2341 or
+        skillID == 2342
+    then
+        -- restore tp to emulate tp gain from melee swings, from SetMobSkillAttack
+        mob:addTP(mob:getLocalVar('tpBeforeWS'))
+
+        -- determine if we want to run (trample) soon, do it randomly off autos, more frequent and more runs when low
+        if
+            os.time() >= mob:getLocalVar('timeSinceWS') + 2 and
+            mob:getAnimationSub() ~= 3
+        then
+            mob:setLocalVar('timeSinceRun', os.time() + 5)
+
+            local random = math.random(1, 100)
+            if random >= 70 and mob:getHPP() < 33 then
+                mob:setLocalVar('trampleCount', mob:getLocalVar('trampleCount') + math.random(1, 3))
+            elseif random >= 80 and mob:getHPP() < 50 then
+                mob:setLocalVar('trampleCount', mob:getLocalVar('trampleCount') + math.random(1, 2))
+            elseif random >= 90 then
+                mob:setLocalVar('trampleCount', mob:getLocalVar('trampleCount') + 1)
+            end
+        end
+
+        mob:setLocalVar('trampleCount', utils.clamp(mob:getLocalVar('trampleCount'), 0, 3)) -- Safety net for trample count
+    else
+        -- add slight delay to ws selection (if not an autoattack)
+        mob:setLocalVar('timeSinceWS', os.time())
+    end
+
+    -- don't reset behavior for di_trample
+    if skillID ~= 2339 then
+        mob:setBehaviour(0)
+    end
+
+    if skillID == 2337 then -- sometimes after healing, fix horn
+        if
+            mob:getAnimationSub() == 2 and
+            math.random(1, 100) <= 25
+        then
+            mob:setAnimationSub(3)
+            mob:hideHP(true)
+            mob:setLocalVar('doubleUpWS', 0)
+
+            -- reset phasechange timer
+            mob:setLocalVar('phaseChange', os.time() + math.random(60, 240))
+
+            -- If horn is restored by heal, we don't want to glow longterm, but animation sub cannot be changed back to back
+            mob:timer(2000, function(mobArg)
+                mobArg:setAnimationSub(0)
+            end)
+        end
+    end
+
+    mob:setLocalVar('tpBeforeWS', 0)
+end
+
 xi.darkixion.onMobRoam = function(mob)
     if
         mob:getLocalVar('RunAway') ~= 0 and
@@ -413,7 +535,7 @@ xi.darkixion.onMobRoam = function(mob)
     if not mob:isFollowingPath() then
         -- Ensures he always cleanly paths (doesn't clip through terrain)
         local pathList = xi.darkixion.zoneinfo[mob:getZoneID()].pathList
-        if not mob:atPoint(pathList[1].x, pathList[1].y, pathList[1].z) then
+        if mob:checkDistance(pathList[1].x, pathList[1].y, pathList[1].z) > 50 then
             mob:pathTo(pathList[1].x, pathList[1].y, pathList[1].z, xi.path.flag.RUN)
         else
             mob:pathThrough(pathList, xi.path.flag.RUN + xi.path.flag.PATROL)
@@ -434,8 +556,8 @@ xi.darkixion.onMobEngage = function(mob, target)
     mob:setMod(xi.mod.UDMGBREATH, 0)
     mob:setMod(xi.mod.UDMGMAGIC, 0)
 
-    mob:setLocalVar('run', 0)
-    mob:setLocalVar('PhaseChange', os.time() + math.random(60, 240))
+    mob:setLocalVar('trampleCount', 0)
+    mob:setLocalVar('phaseChange', os.time() + math.random(60, 240))
     mob:setSpeed(70) -- movement +75% = 40 * 1.75
 end
 
@@ -461,4 +583,293 @@ xi.darkixion.onMobDisengage = function(mob)
     -- no chance of him staying in this zone unless an ash is landed before he runs away and despawns
     mob:setAggressive(false)
     mob:setLocalVar('StygianLanded', 0)
+end
+
+-- Disable cyclomatic complexity check for this function:
+-- luacheck: ignore 561
+xi.darkixion.onMobFight = function(mob, target)
+    -- Since its autos are technically TP moves, lets emulate WS selection here
+    if
+        ((mob:getTP() >= 2900 and mob:getHPP() > 66) or
+        (mob:getTP() >= 1900 and mob:getHPP() > 33) or
+        (mob:getTP() >= 900 and mob:getHPP() > 0)) and     -- TP is adequate to use a move
+        mob:getLocalVar('timeSinceWS') < os.time() - 3 and -- hasn't used a mobskill recently
+        mob:getLocalVar('trampling') == 0 and              -- isn't currently trampling
+        mob:checkDistance(target) < 15 and                 -- don't use mobskills from far away
+        mob:actionQueueEmpty()                             -- not currently performing an action
+    then
+        -- ensure this block only runs once until after action sequences are complete
+        mob:setTP(0)
+        mob:setLocalVar('timeSinceWS', os.time())
+
+        local ws = math.random(1, 4)
+
+        if math.random(1, 10) == 1 then
+            mob:useMobAbility(2337) -- Damsel Memento
+        else
+            if ws == 1 then
+                mob:useMobAbility(2338) -- Rampant Stance
+                if mob:getLocalVar('doubleUpWS') == 1 then
+                    mob:timer(3500, function(mobArg)
+                        mobArg:useMobAbility(2338) -- Rampant Stance
+                    end)
+                end
+            elseif ws == 2 then
+                local acheronKick = function(mobArg)
+                    local mobTarget = mobArg:getTarget()
+                    mobArg:setBehaviour(xi.behavior.NO_TURN + xi.behavior.STANDBACK)
+                    local xM = mobArg:getXPos()
+                    local zM = mobArg:getZPos()
+                    local yM = mobArg:getYPos()
+                    local xT = mobTarget:getXPos()
+                    local zT = mobTarget:getZPos()
+                    local xD = xT - xM
+                    local zD = zT - zM
+                    local away = { x = xM - xD, y = yM, z = zM - zD }
+
+                    mobArg:lookAt(away)
+                    mobArg:useMobAbility(2336) -- Acheron Kick
+                    mobArg:timer(1500, function(mobArg2)
+                        mobArg2:setBehaviour(0) -- in case the move is out-ranged
+                    end)
+                end
+
+                acheronKick(mob)
+                if mob:getLocalVar('doubleUpWS') == 1 then
+                    -- since no_turn is enabled, no need to change position again, just do it back to back
+                    mob:timer(3500, function(mobArg)
+                        acheronKick(mobArg)
+                    end)
+                end
+            elseif ws >= 3 then
+                -- Below handles the charge > zap logic, including if DI is glowing
+                -- zap -> lightning spear
+                -- zap2 -> Wrath of Zeus
+                local hitCount = mob:getLocalVar('doubleUpWS') == 1 and 2 or 1
+                if ws == 3 then
+                    mob:setLocalVar('zapSpear', hitCount)
+                else
+                    mob:setLocalVar('zapWrath', hitCount)
+                end
+
+                mob:setLocalVar('zapTime', os.time() + 5)
+                mob:setLocalVar('timeSinceWS', os.time() + 4)
+                mob:useMobAbility(2343) -- activate the glow first, then real WS
+            end
+        end
+    else
+        -- This is called after charging to either perform WoZ (zap2) or LS (zap)
+        if
+            mob:getLocalVar('zapWrath') >= 1 and
+            mob:getLocalVar('timeSinceWS') < os.time() - 1 and
+            os.time() >= mob:getLocalVar('zapTime') and
+            mob:getAnimationSub() ~= 1
+        then
+            mob:setLocalVar('zapWrath', mob:getLocalVar('zapWrath') - 1)
+            mob:setTP(0)
+            mob:setBehaviour(xi.behavior.NO_TURN + xi.behavior.STANDBACK)
+            mob:useMobAbility(2334)
+            mob:setLocalVar('zapTime', os.time() + 7)
+        end
+
+        if
+            mob:getLocalVar('zapSpear') >= 1 and
+            mob:getLocalVar('timeSinceWS') < os.time() - 1 and
+            os.time() >= mob:getLocalVar('zapTime') and
+            mob:getAnimationSub() ~= 1
+        then
+            mob:setLocalVar('zapSpear', mob:getLocalVar('zapSpear') - 1)
+            mob:setTP(0)
+            mob:setBehaviour(xi.behavior.NO_TURN + xi.behavior.STANDBACK)
+
+            -- re-random lightning spear
+            local xM = mob:getXPos()
+            local zM = mob:getZPos()
+            local yM = mob:getYPos()
+            local xD = math.random(-4, 4)
+            local zD = math.random(-4, 4)
+            local away = { x = xM - xD, y = yM, z = zM - zD }
+
+            mob:lookAt(away)
+            mob:useMobAbility(2335)
+            mob:setLocalVar('zapTime', os.time() + 7)
+        end
+    end
+
+    -- This section deals with him glowing (double TP moves)
+    if
+        os.time() >= mob:getLocalVar('phaseChange') and
+        (mob:getAnimationSub() == 0 or
+        mob:getAnimationSub() == 3)
+    then
+        mob:setLocalVar('phaseChange', os.time() + math.random(60, 240))
+
+        if mob:getAnimationSub() == 0 then
+            mob:setLocalVar('doubleUpWS', 1)
+            mob:setAnimationSub(3)
+        else
+            mob:setLocalVar('doubleUpWS', 0)
+            mob:setAnimationSub(0)
+        end
+    end
+
+    -- Everything below deals with his charge attack (trample)
+    if
+        mob:getLocalVar('trampleCount') >= 1 and
+        os.time() >= mob:getLocalVar('timeSinceRun') and
+        mob:getLocalVar('trampling') == 0 and
+        mob:getAnimationSub() < 2  -- don't trample if horn is broken
+    then
+        xi.darkixion.itsStompinTime(mob, target)
+        mob:setTP(0)
+    end
+
+    if mob:getLocalVar('trampling') == 1 then
+        -- cleanly exit trample when reaching the point (TODO check explicitly for a scripted path?)
+        -- timestamp hard exit in case of navmesh abuse
+        if
+            mob:isFollowingPath() and
+            os.time() < mob:getLocalVar('runPathTime')
+        then
+            local nearbyPlayers = mob:getPlayersInRange(7)
+            if nearbyPlayers ~= nil then
+                for i = 1, #nearbyPlayers do -- look for players that are too close to ixion while he tramples, hit the ones in front
+                    local stomp = false
+
+                    local dork = nearbyPlayers[i]
+                    if dork:isAlive() then
+                        local nextHit = dork:getID()
+
+                        if #xi.darkixion.hitList == 0 then
+                            table.insert(xi.darkixion.hitList, nextHit)
+                            stomp = true
+                        else
+                            stomp = true
+                            for v = 1, #xi.darkixion.hitList do
+                                if xi.darkixion.hitList[v] == nextHit then
+                                    stomp = false
+                                end
+                            end
+
+                            if stomp then
+                                table.insert(xi.darkixion.hitList, nextHit)
+                                stomp = true
+                            end
+                        end
+
+                        -- if dork hasn't been trampled yet in this path
+                        -- or if dork is the original target of the trample (you better run away)
+                        if
+                            stomp and
+                            (dork:isInfront(mob, 30) or
+                            dork:getTargID() == mob:getLocalVar('trampleTargID'))
+                        then
+                            mob:useMobAbility(2339, dork) -- trample
+                        end
+                    end
+                end
+            end
+        else
+            xi.darkixion.endStomp(mob)
+        end
+    end
+end
+
+xi.darkixion.endStomp = function(mob)
+    mob:setLocalVar('trampling', 0)
+    mob:setAnimationSub(mob:getLocalVar('originalSub'))
+    mob:setSpeed(70)
+    mob:setAutoAttackEnabled(true)
+    mob:setMobAbilityEnabled(true)
+    mob:setLocalVar('lastHit', 0)
+    mob:setLocalVar('trampleCount', mob:getLocalVar('trampleCount') - 1)
+
+    -- Don't move around if doing multiple tramples
+    if mob:getLocalVar('trampleCount') > 0 then
+        mob:setLocalVar('timeSinceWS', os.time() + 2)
+    end
+
+    mob:timer(2000, function(mobArg)
+        if mobArg:getLocalVar('trampling') == 0 then
+            mobArg:setBehaviour(0)
+        end
+    end)
+
+    mob:setMobSkillAttack(39)
+
+    xi.darkixion.pos     = nil
+    xi.darkixion.hitList = nil
+end
+
+xi.darkixion.itsStompinTime = function(mob, target)
+    local targets = {}
+    -- hitList is a list of all players considered for this trample. If they get out of the way, they do not get hit
+    xi.darkixion.hitList = {}
+
+    mob:setLocalVar('trampling', 1)
+
+    -- remove bind
+    mob:delStatusEffect(xi.effect.BIND)
+    mob:delStatusEffect(xi.effect.WEIGHT)
+    mob:setSpeed(95)
+    mob:setAutoAttackEnabled(false)
+    mob:setMobAbilityEnabled(false)
+    mob:setMobSkillAttack(0)
+    mob:setBehaviour(xi.behavior.NO_TURN + xi.behavior.STANDBACK)
+
+    local nearbyPlayers = mob:getPlayersInRange(30)
+
+    if nearbyPlayers ~= nil then
+        for _, player in pairs(nearbyPlayers) do -- find eligible players to curb stomp
+            local posP = player:getPos()
+            local posM = mob:getPos()
+
+            if
+                math.abs(posP.y - posM.y) <= 15 and -- no cliff jumping?, may need to tune
+                player:isAlive() and
+                mob:checkDistance(player) > 5
+            then
+                table.insert(targets, player)
+            end
+        end
+    end
+
+    if
+        #targets > 0
+    then -- pick one and run to it
+        mob:setLocalVar('originalSub', mob:getAnimationSub())
+        mob:setAnimationSub(1)
+        local trampleTarget = targets[math.random(#targets)]
+        xi.darkixion.pos = trampleTarget:getPos()
+
+        if mob:checkDistance(trampleTarget) < 25 then
+            local xM  = mob:getXPos()
+            local zM  = mob:getZPos()
+            local yT  = trampleTarget:getYPos()
+            local xT  = trampleTarget:getXPos()
+            local zT  = trampleTarget:getZPos()
+            local xD  = xT - xM
+            local zD  = zT - zM
+            local rss = math.sqrt(xD * xD + zD * zD)
+            local xU  = xD / rss
+            local zU  = zD / rss
+            xi.darkixion.pos = { x  = xT + (xU * 7), y = yT, z = zT + (zU * 7) }
+            mob:setLocalVar('trampleTargID', trampleTarget:getTargID())
+        elseif mob:checkDistance(trampleTarget) < 5 then
+            mob:lookAt(xi.darkixion.pos)
+            xi.darkixion.pos = mob:getPos()
+        end
+
+        mob:lookAt(trampleTarget:getPos())
+        mob:setLocalVar('runPathTime', os.time() + 10) -- max time to let a single trample path to avoid navmesh abuse
+        mob:pathTo(xi.darkixion.pos.x, xi.darkixion.pos.y, xi.darkixion.pos.z, xi.path.flag.WALLHACK + xi.path.flag.RUN + xi.path.flag.SCRIPT + xi.path.flag.SLIDE)
+
+        -- if trample is going through tank, let tank get hit, otherwise push onto the hitList without trampling (to prevent being chosen later)
+        -- if all other players are behind DI then tank should never get hit with trample
+        if not target:isInfront(mob, 100) then
+            table.insert(xi.darkixion.hitList, target)
+        end
+    else
+        xi.darkixion.endStomp(mob)
+    end
 end
