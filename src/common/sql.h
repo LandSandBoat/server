@@ -6,10 +6,13 @@
 
 #include "cbasetypes.h"
 
+#include <string>
 #include <thread>
 #include <unordered_map>
 
 #include <mysql.h>
+
+#include <conncpp.hpp>
 
 #ifdef WIN32
 #include <winsock2.h>
@@ -71,6 +74,12 @@ enum SqlDataType
     SQLDT_BLOB,
     SQLDT_LASTID
 };
+
+namespace sql
+{
+    auto getConnection() -> std::unique_ptr<sql::Connection>;
+    auto query(std::string_view query) -> std::unique_ptr<sql::ResultSet>;
+} // namespace sql
 
 class SqlConnection
 {
@@ -229,7 +238,8 @@ public:
     void FinishProfiling();
 
 private:
-    Sql_t*      self;
+    Sql_t* self;
+
     const char* m_User;
     const char* m_Passwd;
     const char* m_Host;
