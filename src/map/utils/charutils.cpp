@@ -4138,7 +4138,11 @@ namespace charutils
                 {
                     if (settings::get<bool>("map.EXP_PARTY_GAP_PENALTIES"))
                     {
-                        if (maxlevel > 50 || maxlevel > (memberlevel + 7))
+                        if (settings::get<uint8>("map.EXP_PARTY_GAP_NO_EXP") > 0 && maxlevel >= (memberlevel + settings::get<uint8>("map.EXP_PARTY_GAP_NO_EXP")))
+                        {
+                            exp = 0;
+                        }                        
+                        else if (maxlevel > 50 || maxlevel > (memberlevel + 7))
                         {
                             exp *= memberlevel / (float)maxlevel;
                         }

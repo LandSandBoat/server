@@ -55,6 +55,8 @@ xi.settings.map =
     EXP_RATE                = 1.0,
     EXP_LOSS_RATE           = 1.0,
     EXP_PARTY_GAP_PENALTIES = true,
+    -- A party member's experience points are nullified if the level difference with the highest-level party member exceeds this value.
+    EXP_PARTY_GAP_NO_EXP    = 0,
 
     -- Capacity Point Settings
     CAPACITY_RATE = 1.0,
