@@ -114,6 +114,7 @@ public:
     bool  isNPC();
     bool  isMob();
     bool  isPet();
+    bool  isTrust();
     bool  isAlly();
 
     // AI and Control
