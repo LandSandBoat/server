@@ -22,6 +22,7 @@
 #include "common/utils.h"
 #include "common/logging.h"
 #include "common/md52.h"
+#include "common/stdext.h"
 
 #include <algorithm>
 #include <cctype>
@@ -987,4 +988,21 @@ void crash()
     int* volatile ptr = nullptr;
     // cppcheck-suppress nullPointer
     *ptr = 0xDEAD;
+}
+
+std::unique_ptr<FILE> utils::openFile(std::string const& path, std::string const& mode)
+{
+    return std::unique_ptr<FILE>(fopen(path.c_str(), mode.c_str()));
+}
+
+std::string utils::toASCII(std::string const& target, unsigned char replacement)
+{
+    std::string out;
+    out.reserve(target.size());
+    for (unsigned char ch : target)
+    {
+        bool isLetter = ch >= 0x20 && ch < 0x7F;
+        out += isLetter ? ch : replacement;
+    }
+    return out;
 }

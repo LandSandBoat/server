@@ -225,4 +225,12 @@ namespace settings
         //
         // lua.safe_script("require('settings/main'); require('settings/default/main'); print(xi.settings)");
     }
+
+    void visit(std::function<void(std::string, SettingsVariant_t)> visitor)
+    {
+        for (auto& [key, value] : settingsMap)
+        {
+            visitor(key, value);
+        }
+    }
 } // namespace settings

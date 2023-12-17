@@ -84,8 +84,6 @@ SqlConnection::SqlConnection(const char* user, const char* passwd, const char* h
     m_Port   = port;
     m_Db     = db;
 
-    InitPreparedStatements();
-
     // these members will be set up in SetupKeepalive(), they need to be init'd here to appease clang-tidy
     m_PingInterval = 0;
     m_LastPing     = 0;
@@ -251,7 +249,6 @@ int32 SqlConnection::TryPing()
                 if (startId != endId)
                 {
                     ShowWarning("DB thread ID has changed. You have been reconnected.");
-                    // TODO: Maybe we need to refresh the prepared statements now?
                 }
                 return SQL_SUCCESS;
             }
@@ -662,22 +659,4 @@ void SqlConnection::FinishProfiling()
 
     ShowCritical("Query: %s", self->buf);
     ShowCritical("FinishProfiling: SQL_ERROR: %s (%u)", mysql_error(&self->handle), mysql_errno(&self->handle));
-}
-
-void SqlConnection::InitPreparedStatements()
-{
-    TracyZoneScoped;
-    auto add = [&](std::string const& name, std::string const& query)
-    {
-        auto st                    = std::make_shared<SqlPreparedStatement>(&self->handle, query);
-        m_PreparedStatements[name] = st;
-    };
-
-    add("GET_CHAR_VAR", "SELECT value FROM char_vars WHERE charid = (?) AND varname = (?) LIMIT 1;");
-}
-
-std::shared_ptr<SqlPreparedStatement> SqlConnection::GetPreparedStatement(std::string const& name)
-{
-    TracyZoneScoped;
-    return m_PreparedStatements[name];
 }

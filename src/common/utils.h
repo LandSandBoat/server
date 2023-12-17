@@ -118,4 +118,10 @@ std::set<std::filesystem::path> sorted_directory_iterator(std::string path_name)
     return sorted_by_name;
 }
 
+namespace utils
+{
+    auto openFile(std::string const& path, std::string const& mode) -> std::unique_ptr<FILE>;
+    auto toASCII(std::string const& target, unsigned char replacement = '\0') -> std::string;
+} // namespace utils
+
 #endif
