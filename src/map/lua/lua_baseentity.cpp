@@ -1450,6 +1450,18 @@ bool CLuaBaseEntity::isPet()
 }
 
 /************************************************************************
+ *  Function: isTrust()
+ *  Purpose : Returns true if entity is of the Trust object type
+ *  Example : if caster:isTrust() then
+ *  Notes   :
+ ************************************************************************/
+
+bool CLuaBaseEntity::isTrust()
+{
+    return m_PBaseEntity->objtype == TYPE_TRUST;
+}
+
+/************************************************************************
  *  Function: isAlly()
  *  Purpose : Returns true if entity is an ally
  *  Example : if mob:isAlly() then table.insert(allies, mob) end
@@ -17140,6 +17152,7 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("isNPC", CLuaBaseEntity::isNPC);
     SOL_REGISTER("isMob", CLuaBaseEntity::isMob);
     SOL_REGISTER("isPet", CLuaBaseEntity::isPet);
+    SOL_REGISTER("isTrust", CLuaBaseEntity::isTrust);
     SOL_REGISTER("isAlly", CLuaBaseEntity::isAlly);
 
     // AI and Control
