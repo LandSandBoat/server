@@ -275,7 +275,9 @@ std::list<SearchEntity*> CDataLoader::GetPlayersList(search_req sr, int* count)
             PPlayer->mlvl     = (uint8)rset->getInt("mlvl");
             PPlayer->slvl     = (uint8)rset->getInt("slvl");
             PPlayer->race     = (uint8)rset->getInt("race");
-            PPlayer->rank     = (uint8)rset->getInt(5 + PPlayer->nation);
+
+            // TODO: This is quite fragile, replace this with a switch statement
+            PPlayer->rank = (uint8)rset->getInt(rset->findColumn("nation") + PPlayer->nation);
 
             PPlayer->zone        = (PPlayer->zone == 0 ? PPlayer->prevzone : PPlayer->zone);
             PPlayer->languages   = (uint8)rset->getUInt("languages");
@@ -476,16 +478,19 @@ std::list<SearchEntity*> CDataLoader::GetPartyList(uint32 PartyID, uint32 Allian
         {
             SearchEntity* PPlayer = new SearchEntity();
 
-            PPlayer->name        = rset->getString("charname");
-            PPlayer->id          = rset->getUInt("charid");
-            PPlayer->zone        = (uint16)rset->getInt("pos_zone");
-            PPlayer->nation      = (uint8)rset->getInt("nation");
-            PPlayer->mjob        = (uint8)rset->getInt("mjob");
-            PPlayer->sjob        = (uint8)rset->getInt("sjob");
-            PPlayer->mlvl        = (uint8)rset->getInt("mlvl");
-            PPlayer->slvl        = (uint8)rset->getInt("slvl");
-            PPlayer->race        = (uint8)rset->getInt("race");
-            PPlayer->rank        = (uint8)rset->getInt(5 + PPlayer->nation);
+            PPlayer->name   = rset->getString("charname");
+            PPlayer->id     = rset->getUInt("charid");
+            PPlayer->zone   = (uint16)rset->getInt("pos_zone");
+            PPlayer->nation = (uint8)rset->getInt("nation");
+            PPlayer->mjob   = (uint8)rset->getInt("mjob");
+            PPlayer->sjob   = (uint8)rset->getInt("sjob");
+            PPlayer->mlvl   = (uint8)rset->getInt("mlvl");
+            PPlayer->slvl   = (uint8)rset->getInt("slvl");
+            PPlayer->race   = (uint8)rset->getInt("race");
+
+            // TODO: This is quite fragile, replace this with a switch statement
+            PPlayer->rank = (uint8)rset->getInt(rset->findColumn("nation") + PPlayer->nation);
+
             PPlayer->languages   = (uint8)rset->getUInt("languages");
             PPlayer->mentor      = rset->getUInt("nnameflags") & NFLAG_MENTOR;
             PPlayer->seacom_type = (uint8)rset->getUInt("seacom_type");
@@ -562,16 +567,19 @@ std::list<SearchEntity*> CDataLoader::GetLinkshellList(uint32 LinkshellID)
         {
             SearchEntity* PPlayer = new SearchEntity();
 
-            PPlayer->name           = rset->getString("charname");
-            PPlayer->id             = rset->getUInt("charid");
-            PPlayer->zone           = (uint16)rset->getInt("pos_zone");
-            PPlayer->nation         = (uint8)rset->getInt("nation");
-            PPlayer->mjob           = (uint8)rset->getInt("mjob");
-            PPlayer->sjob           = (uint8)rset->getInt("sjob");
-            PPlayer->mlvl           = (uint8)rset->getInt("mlvl");
-            PPlayer->slvl           = (uint8)rset->getInt("slvl");
-            PPlayer->race           = (uint8)rset->getInt("race");
-            PPlayer->rank           = (uint8)rset->getInt(6 + PPlayer->nation);
+            PPlayer->name   = rset->getString("charname");
+            PPlayer->id     = rset->getUInt("charid");
+            PPlayer->zone   = (uint16)rset->getInt("pos_zone");
+            PPlayer->nation = (uint8)rset->getInt("nation");
+            PPlayer->mjob   = (uint8)rset->getInt("mjob");
+            PPlayer->sjob   = (uint8)rset->getInt("sjob");
+            PPlayer->mlvl   = (uint8)rset->getInt("mlvl");
+            PPlayer->slvl   = (uint8)rset->getInt("slvl");
+            PPlayer->race   = (uint8)rset->getInt("race");
+
+            // TODO: This is quite fragile, replace this with a switch statement
+            PPlayer->rank = (uint8)rset->getInt(rset->findColumn("nation") + PPlayer->nation);
+
             PPlayer->linkshellid1   = rset->getInt("linkshellid1");
             PPlayer->linkshellid2   = rset->getInt("linkshellid2");
             PPlayer->linkshellrank1 = rset->getInt("linkshellrank1");
