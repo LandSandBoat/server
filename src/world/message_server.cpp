@@ -129,7 +129,7 @@ void message_server_parse(MSGSERVTYPE type, zmq::message_t* extra, zmq::message_
         inet_ntop(AF_INET, &from_ip, from_address, INET_ADDRSTRLEN);
     }
 
-    auto forward_message = [&](auto rset)
+    auto forward_message = [&](auto&& rset)
     {
         // This is only used for cases where SQL is used to get the IPs (not cached).
         // E.g: When we get ips for a specific account_session.
@@ -164,7 +164,11 @@ void message_server_parse(MSGSERVTYPE type, zmq::message_t* extra, zmq::message_
             const char* query = "SELECT server_addr, server_port FROM accounts_sessions LEFT JOIN chars ON "
                                 "accounts_sessions.charid = chars.charid WHERE charname = '%s' LIMIT 1;";
             auto        rset  = db::query(fmt::sprintf(query, str((int8*)extra->data() + 4)));
-            if (!rset)
+            if (rset)
+            {
+                forward_message(std::move(rset));
+            }
+            else
             {
                 query = "SELECT server_addr, server_port FROM accounts_sessions WHERE charid = %d LIMIT 1;";
                 forward_message(db::query(fmt::sprintf(query, ref<uint32>((uint8*)extra->data(), 0))));
