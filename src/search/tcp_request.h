@@ -59,13 +59,14 @@ public:
     CTCPRequestPacket(SOCKET* socket);
     ~CTCPRequestPacket();
 
-    uint8* GetData();
-    int32  GetSize() const;
-    uint8  GetPacketType();
+    uint8* getData();
+    int32  getSize() const;
+    uint8  getPacketType();
 
-    int32 ReceiveFromSocket();
-    int32 SendToSocket(uint8* data, uint32 length);
-    int32 SendRawToSocket(uint8* data, uint32 length);
+    bool receiveFromSocket();
+
+    int32 sendToSocket(uint8* data, uint32 length);
+    int32 sendRawToSocket(uint8* data, uint32 length);
 
 private:
     uint8*  m_data;
@@ -76,8 +77,8 @@ private:
 
     int8 key[24]{};
 
-    int32 decipher();
-    int32 CheckPacketHash();
+    bool decipher();
+    bool packetHashIsValid();
 };
 
 #endif
