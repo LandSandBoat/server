@@ -237,7 +237,7 @@ set(EXTERNAL_LIBS
     spdlog
     concurrentqueue
     mariadbclient
-    mariadbclientcpp
+    mariadbcpp
     RecastNavigation::Recast
     RecastNavigation::Detour
     fast_obj
