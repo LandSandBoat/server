@@ -31,6 +31,11 @@ namespace
     std::unordered_map<PreparedStatement, std::pair<std::string, std::unique_ptr<sql::PreparedStatement>>> preparedStatements;
 } // namespace
 
+std::unordered_map<PreparedStatement, std::pair<std::string, std::unique_ptr<sql::PreparedStatement>>>& db::getPreparedStatements()
+{
+    return preparedStatements;
+}
+
 void db::populatePreparedStatements(std::unique_ptr<sql::Connection>& conn)
 {
     TracyZoneScoped;
@@ -90,34 +95,6 @@ std::unique_ptr<sql::ResultSet> db::query(std::string_view query)
     catch (const std::exception& e)
     {
         ShowError("Query Failed: %s", query.data());
-        ShowError(e.what());
-        return nullptr;
-    }
-}
-
-std::unique_ptr<sql::ResultSet> db::preparedStmt(PreparedStatement preparedStmt, uint32 id)
-{
-    TracyZoneScoped;
-
-    // TODO: Check this is pooled. If not; make it pooled.
-    static thread_local auto conn = getConnection();
-
-    if (preparedStatements.find(preparedStmt) == preparedStatements.end())
-    {
-        ShowError("Bad prepared stmt");
-        return nullptr;
-    }
-
-    auto& stmt = preparedStatements[preparedStmt].second;
-    try
-    {
-        // NOTE: 1-indexed!
-        stmt->setUInt(1, id);
-        return std::unique_ptr<sql::ResultSet>(stmt->executeQuery());
-    }
-    catch (const std::exception& e)
-    {
-        ShowError("Query Failed: %s", str(preparedStatements[preparedStmt].first.c_str()));
         ShowError(e.what());
         return nullptr;
     }
