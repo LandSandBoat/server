@@ -41,8 +41,11 @@ namespace db
     void populatePreparedStatements(std::unique_ptr<sql::Connection>& conn);
 
     auto getConnection() -> std::unique_ptr<sql::Connection>;
+
+    // WARNING: Everything in database-land is 1-indexed, not 0-indexed.
     auto query(std::string_view query) -> std::unique_ptr<sql::ResultSet>;
 
     // TODO: Template voodoo
+    // WARNING: Everything in database-land is 1-indexed, not 0-indexed.
     auto preparedStmt(PreparedStatement preparedStmt, uint32 id) -> std::unique_ptr<sql::ResultSet>;
 } // namespace db
