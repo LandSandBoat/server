@@ -28,7 +28,7 @@
 
 #include <conncpp.hpp>
 
-enum PreparedStatement
+enum class PreparedStatement
 {
     Search_GetSearchComment,
 };
