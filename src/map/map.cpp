@@ -348,10 +348,10 @@ int32 do_init(int32 argc, char** argv)
         // But we're not executing on the main thread, so we're doing it with
         // our own SQL connection.
         {
-            auto _sql  = std::make_unique<SqlConnection>();
-            auto query = "UPDATE %s SET %s %u WHERE charid = %u;";
-            _sql->Query(query, "chars", "gmlevel =", PChar->m_GMlevel, PChar->id);
-            _sql->Query(query, "char_stats", "nameflags =", PChar->nameflags.flags, PChar->id);
+            auto otherSql  = std::make_unique<SqlConnection>();
+            auto query     = "UPDATE %s SET %s %u WHERE charid = %u;";
+            otherSql->Query(query, "chars", "gmlevel =", PChar->m_GMlevel, PChar->id);
+            otherSql->Query(query, "char_stats", "nameflags =", PChar->nameflags.flags, PChar->id);
         }
 
         fmt::print("Promoting {} to GM level {}\n", PChar->name, level);
