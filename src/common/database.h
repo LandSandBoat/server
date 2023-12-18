@@ -38,6 +38,8 @@ enum class PreparedStatement
 // will be clearer if we use it too.
 namespace db
 {
+    std::unordered_map<PreparedStatement, std::pair<std::string, std::unique_ptr<sql::PreparedStatement>>>& getPreparedStatements();
+
     void populatePreparedStatements(std::unique_ptr<sql::Connection>& conn);
 
     auto getConnection() -> std::unique_ptr<sql::Connection>;
@@ -45,7 +47,85 @@ namespace db
     // WARNING: Everything in database-land is 1-indexed, not 0-indexed.
     auto query(std::string_view query) -> std::unique_ptr<sql::ResultSet>;
 
-    // TODO: Template voodoo
-    // WARNING: Everything in database-land is 1-indexed, not 0-indexed.
-    auto preparedStmt(PreparedStatement preparedStmt, uint32 id) -> std::unique_ptr<sql::ResultSet>;
+    // Base case
+    inline void binder(std::unique_ptr<sql::PreparedStatement>&, int&)
+    {
+    }
+
+    template <typename T, typename... Args>
+    void binder(std::unique_ptr<sql::PreparedStatement>& stmt, int& counter, const T& first, const Args&&... rest)
+    {
+        if constexpr (std::is_same_v<std::decay_t<T>, signed int>)
+        {
+            stmt->setInt(counter, first);
+        }
+        else if constexpr (std::is_same_v<std::decay_t<T>, unsigned int>)
+        {
+            stmt->setUInt(counter, first);
+        }
+        else if constexpr (std::is_same_v<std::decay_t<T>, signed short>)
+        {
+            stmt->setShort(counter, first);
+        }
+        else if constexpr (std::is_same_v<std::decay_t<T>, int8>)
+        {
+            stmt->setByte(counter, first);
+        }
+        else if constexpr (std::is_same_v<std::decay_t<T>, std::string>)
+        {
+            stmt->setString(counter, first);
+        }
+        else if constexpr (std::is_same_v<std::decay_t<T>, bool>)
+        {
+            stmt->setBoolean(counter, first);
+        }
+        else if constexpr (std::is_same_v<std::decay_t<T>, double>)
+        {
+            stmt->setDouble(counter, first);
+        }
+        else if constexpr (std::is_same_v<std::decay_t<T>, float>)
+        {
+            stmt->setFloat(counter, first);
+        }
+        else if constexpr (std::is_convertible_v<T, const char*>)
+        {
+            stmt->setString(counter, first);
+        }
+
+        ++counter;
+
+        binder(stmt, counter, rest...);
+    }
+
+    template <typename... Args>
+    std::unique_ptr<sql::ResultSet> preparedStmt(PreparedStatement preparedStmt, Args&&... args)
+    {
+        TracyZoneScoped;
+
+        // TODO: Check this is pooled. If not; make it pooled.
+        static thread_local auto conn = getConnection();
+
+        auto& preparedStatements = getPreparedStatements();
+
+        if (preparedStatements.find(preparedStmt) == preparedStatements.end())
+        {
+            ShowError("Bad prepared stmt");
+            return nullptr;
+        }
+
+        auto& stmt = preparedStatements[preparedStmt].second;
+        try
+        {
+            // NOTE: 1-indexed!
+            auto counter = 1;
+            binder(stmt, counter, std::forward<Args>(args)...);
+            return std::unique_ptr<sql::ResultSet>(stmt->executeQuery());
+        }
+        catch (const std::exception& e)
+        {
+            ShowError("Query Failed: %s", str(preparedStatements[preparedStmt].first.c_str()));
+            ShowError(e.what());
+            return nullptr;
+        }
+    }
 } // namespace db
