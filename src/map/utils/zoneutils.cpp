@@ -237,12 +237,12 @@ namespace zoneutils
 
         std::vector<uint16> zonesOnThisProcess;
 
-        int32 ret = sql->Query(zonesQuery.c_str());
-        if (ret != SQL_ERROR && sql->NumRows() != 0)
+        int32 ret = _sql->Query(zonesQuery.c_str());
+        if (ret != SQL_ERROR && _sql->NumRows() != 0)
         {
-            while (sql->NextRow() == SQL_SUCCESS)
+            while (_sql->NextRow() == SQL_SUCCESS)
             {
-                uint16 zoneId = static_cast<uint16>(sql->GetUIntData(0));
+                uint16 zoneId = static_cast<uint16>(_sql->GetUIntData(0));
                 zonesOnThisProcess.emplace_back(zoneId);
             }
         }
@@ -688,10 +688,10 @@ namespace zoneutils
         static const char* Query = "SELECT zonetype, restriction FROM zone_settings "
                                    "WHERE zoneid = %u LIMIT 1";
 
-        if (sql->Query(Query, ZoneID) != SQL_ERROR && sql->NumRows() != 0 && sql->NextRow() == SQL_SUCCESS)
+        if (_sql->Query(Query, ZoneID) != SQL_ERROR && _sql->NumRows() != 0 && _sql->NextRow() == SQL_SUCCESS)
         {
-            ZONE_TYPE zoneType    = static_cast<ZONE_TYPE>(sql->GetUIntData(0));
-            uint8     restriction = static_cast<uint8>(sql->GetUIntData(1));
+            ZONE_TYPE zoneType    = static_cast<ZONE_TYPE>(_sql->GetUIntData(0));
+            uint8     restriction = static_cast<uint8>(_sql->GetUIntData(1));
             if (zoneType & ZONE_TYPE::INSTANCED)
             {
                 return new CZoneInstance((ZONEID)ZoneID, GetCurrentRegion(ZoneID), GetCurrentContinent(ZoneID), restriction);
@@ -724,13 +724,13 @@ namespace zoneutils
 
         char address[INET_ADDRSTRLEN];
         inet_ntop(AF_INET, &map_ip, address, INET_ADDRSTRLEN);
-        int ret = sql->Query(query, map_ip.s_addr, address, map_port);
+        int ret = _sql->Query(query, map_ip.s_addr, address, map_port);
 
-        if (ret != SQL_ERROR && sql->NumRows() != 0)
+        if (ret != SQL_ERROR && _sql->NumRows() != 0)
         {
-            while (sql->NextRow() == SQL_SUCCESS)
+            while (_sql->NextRow() == SQL_SUCCESS)
             {
-                zones.emplace_back(static_cast<uint16>(sql->GetUIntData(0)));
+                zones.emplace_back(static_cast<uint16>(_sql->GetUIntData(0)));
             }
         }
         else
@@ -1174,12 +1174,12 @@ namespace zoneutils
         uint64      ipp   = 0;
         const char* query = "SELECT zoneip, zoneport FROM zone_settings WHERE zoneid = %u;";
 
-        int ret = sql->Query(query, zoneID);
+        int ret = _sql->Query(query, zoneID);
 
-        if (ret != SQL_ERROR && sql->NumRows() != 0 && sql->NextRow() == SQL_SUCCESS)
+        if (ret != SQL_ERROR && _sql->NumRows() != 0 && _sql->NextRow() == SQL_SUCCESS)
         {
-            inet_pton(AF_INET, (const char*)sql->GetData(0), &ipp);
-            uint64 port = sql->GetUIntData(1);
+            inet_pton(AF_INET, (const char*)_sql->GetData(0), &ipp);
+            uint64 port = _sql->GetUIntData(1);
             ipp |= (port << 32);
         }
         else

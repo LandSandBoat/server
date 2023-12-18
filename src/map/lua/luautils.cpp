@@ -851,11 +851,11 @@ namespace luautils
             auto query = fmt::sprintf("SELECT mobname, mobid FROM mob_spawn_points "
                                       "WHERE ((mobid >> 12) & 0xFFF) = %i;",
                                       zoneId);
-            auto ret   = sql->Query(query.c_str());
-            while (ret != SQL_ERROR && sql->NumRows() != 0 && sql->NextRow() == SQL_SUCCESS)
+            auto ret   = _sql->Query(query.c_str());
+            while (ret != SQL_ERROR && _sql->NumRows() != 0 && _sql->NextRow() == SQL_SUCCESS)
             {
-                auto name = sql->GetStringData(0);
-                auto id   = sql->GetUIntData(1);
+                auto name = _sql->GetStringData(0);
+                auto id   = _sql->GetUIntData(1);
 
                 lookup[name].emplace_back(id);
             }
@@ -866,11 +866,11 @@ namespace luautils
             auto query = fmt::sprintf("SELECT name, npcid FROM npc_list "
                                       "WHERE ((npcid >> 12) & 0xFFF) = %i;",
                                       zoneId);
-            auto ret   = sql->Query(query.c_str());
-            while (ret != SQL_ERROR && sql->NumRows() != 0 && sql->NextRow() == SQL_SUCCESS)
+            auto ret   = _sql->Query(query.c_str());
+            while (ret != SQL_ERROR && _sql->NumRows() != 0 && _sql->NextRow() == SQL_SUCCESS)
             {
-                auto name = sql->GetStringData(0);
-                auto id   = sql->GetUIntData(1);
+                auto name = _sql->GetStringData(0);
+                auto id   = _sql->GetUIntData(1);
 
                 lookup[name].emplace_back(id);
             }
@@ -985,10 +985,10 @@ namespace luautils
             uint16 zoneId = 0;
             {
                 auto query = fmt::sprintf("SELECT zoneid FROM zone_settings WHERE name = '%s'", zoneName.c_str());
-                auto ret = sql->Query(query.c_str());
-                if (ret != SQL_ERROR && sql->NumRows() != 0 && sql->NextRow() == SQL_SUCCESS)
+                auto ret = _sql->Query(query.c_str());
+                if (ret != SQL_ERROR && _sql->NumRows() != 0 && _sql->NextRow() == SQL_SUCCESS)
                 {
-                    zoneId = sql->GetUIntData(0);
+                    zoneId = _sql->GetUIntData(0);
                 }
             }
 
@@ -4989,10 +4989,10 @@ namespace luautils
         if (PMob != nullptr)
         {
             int32 r   = 0;
-            int32 ret = sql->Query("SELECT count(mobid) FROM `nm_spawn_points` where mobid=%u", mobid);
-            if (ret != SQL_ERROR && sql->NumRows() != 0 && sql->NextRow() == SQL_SUCCESS && sql->GetUIntData(0) > 0)
+            int32 ret = _sql->Query("SELECT count(mobid) FROM `nm_spawn_points` where mobid=%u", mobid);
+            if (ret != SQL_ERROR && _sql->NumRows() != 0 && _sql->NextRow() == SQL_SUCCESS && _sql->GetUIntData(0) > 0)
             {
-                r = xirand::GetRandomNumber(sql->GetUIntData(0));
+                r = xirand::GetRandomNumber(_sql->GetUIntData(0));
             }
             else
             {
@@ -5000,13 +5000,13 @@ namespace luautils
                 return;
             }
 
-            ret = sql->Query("SELECT pos_x, pos_y, pos_z FROM `nm_spawn_points` WHERE mobid=%u AND pos=%i", mobid, r);
-            if (ret != SQL_ERROR && sql->NumRows() != 0 && sql->NextRow() == SQL_SUCCESS)
+            ret = _sql->Query("SELECT pos_x, pos_y, pos_z FROM `nm_spawn_points` WHERE mobid=%u AND pos=%i", mobid, r);
+            if (ret != SQL_ERROR && _sql->NumRows() != 0 && _sql->NextRow() == SQL_SUCCESS)
             {
                 PMob->m_SpawnPoint.rotation = xirand::GetRandomNumber(256);
-                PMob->m_SpawnPoint.x        = sql->GetFloatData(0);
-                PMob->m_SpawnPoint.y        = sql->GetFloatData(1);
-                PMob->m_SpawnPoint.z        = sql->GetFloatData(2);
+                PMob->m_SpawnPoint.x        = _sql->GetFloatData(0);
+                PMob->m_SpawnPoint.y        = _sql->GetFloatData(1);
+                PMob->m_SpawnPoint.z        = _sql->GetFloatData(2);
                 // ShowDebug(CL_RED"UpdateNMSpawnPoint: After %i - %f, %f, %f, %i", r,
                 // PMob->m_SpawnPoint.x,PMob->m_SpawnPoint.y,PMob->m_SpawnPoint.z,PMob->m_SpawnPoint.rotation);
             }
@@ -5350,10 +5350,10 @@ namespace luautils
         TracyZoneScoped;
 
         uint16 effectId = 0;
-        int32  ret      = sql->Query("SELECT effectId FROM despoil_effects WHERE itemId = %u", itemId);
-        if (ret != SQL_ERROR && sql->NumRows() != 0 && sql->NextRow() == SQL_SUCCESS)
+        int32  ret      = _sql->Query("SELECT effectId FROM despoil_effects WHERE itemId = %u", itemId);
+        if (ret != SQL_ERROR && _sql->NumRows() != 0 && _sql->NextRow() == SQL_SUCCESS)
         {
-            effectId = (uint16)sql->GetUIntData(0);
+            effectId = (uint16)_sql->GetUIntData(0);
         }
 
         return effectId;
@@ -5585,19 +5585,19 @@ namespace luautils
     {
         uint16      id    = 0;
         const char* Query = "SELECT itemid FROM item_basic WHERE name LIKE '%s' OR sortname LIKE '%s';";
-        int32       ret   = sql->Query(Query, name, name);
+        int32       ret   = _sql->Query(Query, name, name);
 
-        if (ret != SQL_ERROR && sql->NumRows() == 1) // Found a single result
+        if (ret != SQL_ERROR && _sql->NumRows() == 1) // Found a single result
         {
-            while (sql->NextRow() == SQL_SUCCESS)
+            while (_sql->NextRow() == SQL_SUCCESS)
             {
-                id = sql->GetIntData(0);
+                id = _sql->GetIntData(0);
             }
         }
-        else if (ret != SQL_ERROR && sql->NumRows() > 1)
+        else if (ret != SQL_ERROR && _sql->NumRows() > 1)
         {
             // 0xFFFF is gil, so we will always return a value less than that as a warning
-            id = 0xFFFF - sql->NumRows() + 1;
+            id = 0xFFFF - _sql->NumRows() + 1;
         }
 
         return id;

@@ -1651,26 +1651,26 @@ namespace automaton
     {
         const char* Query = "SELECT spellid, skilllevel, heads, enfeeble, immunity, removes FROM automaton_spells;";
 
-        int32 ret = sql->Query(Query);
+        int32 ret = _sql->Query(Query);
 
-        if (ret != SQL_ERROR && sql->NumRows() != 0)
+        if (ret != SQL_ERROR && _sql->NumRows() != 0)
         {
-            while (sql->NextRow() == SQL_SUCCESS)
+            while (_sql->NextRow() == SQL_SUCCESS)
             {
-                SpellID id = (SpellID)sql->GetUIntData(0);
+                SpellID id = (SpellID)_sql->GetUIntData(0);
 
                 // clang-format off
                 AutomatonSpell PSpell
                 {
-                    (uint16)sql->GetUIntData(1),
-                    (uint8)sql->GetUIntData(2),
-                    (EFFECT)sql->GetUIntData(3),
-                    (IMMUNITY)sql->GetUIntData(4),
+                    (uint16)_sql->GetUIntData(1),
+                    (uint8)_sql->GetUIntData(2),
+                    (EFFECT)_sql->GetUIntData(3),
+                    (IMMUNITY)_sql->GetUIntData(4),
                     {} // Will handle in a moment
                 };
                 // clang-format on
 
-                uint32 removes = sql->GetUIntData(5);
+                uint32 removes = _sql->GetUIntData(5);
                 while (removes > 0)
                 {
                     PSpell.removes.emplace_back((EFFECT)(removes & 0xFF));
@@ -1726,18 +1726,18 @@ namespace automaton
     {
         const char* Query = "SELECT abilityid, abilityname, reqframe, skilllevel FROM automaton_abilities;";
 
-        int32 ret = sql->Query(Query);
+        int32 ret = _sql->Query(Query);
 
-        if (ret != SQL_ERROR && sql->NumRows() != 0)
+        if (ret != SQL_ERROR && _sql->NumRows() != 0)
         {
-            while (sql->NextRow() == SQL_SUCCESS)
+            while (_sql->NextRow() == SQL_SUCCESS)
             {
-                uint16           id = (uint16)sql->GetUIntData(0);
-                AutomatonAbility PAbility{ (uint8)sql->GetUIntData(2), (uint16)sql->GetUIntData(3) };
+                uint16           id = (uint16)_sql->GetUIntData(0);
+                AutomatonAbility PAbility{ (uint8)_sql->GetUIntData(2), (uint16)_sql->GetUIntData(3) };
 
                 autoAbilityList[id] = PAbility;
 
-                auto filename = fmt::format("./scripts/actions/abilities/pets/automaton/{}.lua", sql->GetStringData(1));
+                auto filename = fmt::format("./scripts/actions/abilities/pets/automaton/{}.lua", _sql->GetStringData(1));
                 luautils::CacheLuaObjectFromFile(filename);
             }
         }

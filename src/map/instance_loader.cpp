@@ -86,119 +86,119 @@ CInstance* CInstanceLoader::LoadInstance()
             INNER JOIN mob_family_system ON mob_pools.familyid = mob_family_system.familyID \
             WHERE instanceid = %u AND NOT (pos_x = 0 AND pos_y = 0 AND pos_z = 0);";
 
-    int32 ret = sql->Query(Query, instance->GetID());
+    int32 ret = _sql->Query(Query, instance->GetID());
 
     if (!instance->Failed() && ret != SQL_ERROR /*&& sql->NumRows() != 0*/)
     {
-        while (sql->NextRow() == SQL_SUCCESS)
+        while (_sql->NextRow() == SQL_SUCCESS)
         {
             CMobEntity* PMob = new CMobEntity;
 
-            PMob->name.insert(0, (const char*)sql->GetData(0));
-            PMob->id     = sql->GetUIntData(1);
+            PMob->name.insert(0, (const char*)_sql->GetData(0));
+            PMob->id     = _sql->GetUIntData(1);
             PMob->targid = (uint16)PMob->id & 0x0FFF;
 
-            PMob->m_SpawnPoint.rotation = (uint8)sql->GetIntData(2);
-            PMob->m_SpawnPoint.x        = sql->GetFloatData(3);
-            PMob->m_SpawnPoint.y        = sql->GetFloatData(4);
-            PMob->m_SpawnPoint.z        = sql->GetFloatData(5);
+            PMob->m_SpawnPoint.rotation = (uint8)_sql->GetIntData(2);
+            PMob->m_SpawnPoint.x        = _sql->GetFloatData(3);
+            PMob->m_SpawnPoint.y        = _sql->GetFloatData(4);
+            PMob->m_SpawnPoint.z        = _sql->GetFloatData(5);
 
-            PMob->m_RespawnTime = sql->GetUIntData(6) * 1000;
-            PMob->m_SpawnType   = (SPAWNTYPE)sql->GetUIntData(7);
-            PMob->m_DropID      = sql->GetUIntData(8);
+            PMob->m_RespawnTime = _sql->GetUIntData(6) * 1000;
+            PMob->m_SpawnType   = (SPAWNTYPE)_sql->GetUIntData(7);
+            PMob->m_DropID      = _sql->GetUIntData(8);
 
-            PMob->HPmodifier = (uint32)sql->GetIntData(9);
-            PMob->MPmodifier = (uint32)sql->GetIntData(10);
+            PMob->HPmodifier = (uint32)_sql->GetIntData(9);
+            PMob->MPmodifier = (uint32)_sql->GetIntData(10);
 
-            PMob->m_minLevel = (uint8)sql->GetIntData(11);
-            PMob->m_maxLevel = (uint8)sql->GetIntData(12);
+            PMob->m_minLevel = (uint8)_sql->GetIntData(11);
+            PMob->m_maxLevel = (uint8)_sql->GetIntData(12);
 
             uint16 sqlModelID[10];
-            memcpy(&sqlModelID, sql->GetData(13), 20);
+            memcpy(&sqlModelID, _sql->GetData(13), 20);
             PMob->look = look_t(sqlModelID);
 
-            PMob->SetMJob(sql->GetIntData(14));
-            PMob->SetSJob(sql->GetIntData(15));
+            PMob->SetMJob(_sql->GetIntData(14));
+            PMob->SetSJob(_sql->GetIntData(15));
 
             ((CItemWeapon*)PMob->m_Weapons[SLOT_MAIN])->setMaxHit(1);
-            ((CItemWeapon*)PMob->m_Weapons[SLOT_MAIN])->setSkillType(sql->GetIntData(16));
-            PMob->m_dmgMult = sql->GetUIntData(17);
-            ((CItemWeapon*)PMob->m_Weapons[SLOT_MAIN])->setDelay((sql->GetIntData(18) * 1000) / 60);
-            ((CItemWeapon*)PMob->m_Weapons[SLOT_MAIN])->setBaseDelay((sql->GetIntData(18) * 1000) / 60);
+            ((CItemWeapon*)PMob->m_Weapons[SLOT_MAIN])->setSkillType(_sql->GetIntData(16));
+            PMob->m_dmgMult = _sql->GetUIntData(17);
+            ((CItemWeapon*)PMob->m_Weapons[SLOT_MAIN])->setDelay((_sql->GetIntData(18) * 1000) / 60);
+            ((CItemWeapon*)PMob->m_Weapons[SLOT_MAIN])->setBaseDelay((_sql->GetIntData(18) * 1000) / 60);
 
-            PMob->m_Behaviour   = (uint16)sql->GetIntData(19);
-            PMob->m_Link        = (uint8)sql->GetIntData(20);
-            PMob->m_Type        = (uint8)sql->GetIntData(21);
-            PMob->m_Immunity    = (IMMUNITY)sql->GetIntData(22);
-            PMob->m_EcoSystem   = (ECOSYSTEM)sql->GetIntData(23);
-            PMob->m_ModelRadius = (float)sql->GetIntData(24);
+            PMob->m_Behaviour   = (uint16)_sql->GetIntData(19);
+            PMob->m_Link        = (uint8)_sql->GetIntData(20);
+            PMob->m_Type        = (uint8)_sql->GetIntData(21);
+            PMob->m_Immunity    = (IMMUNITY)_sql->GetIntData(22);
+            PMob->m_EcoSystem   = (ECOSYSTEM)_sql->GetIntData(23);
+            PMob->m_ModelRadius = (float)_sql->GetIntData(24);
 
-            PMob->speed    = (uint8)sql->GetIntData(25);
-            PMob->speedsub = (uint8)sql->GetIntData(25);
+            PMob->speed    = (uint8)_sql->GetIntData(25);
+            PMob->speedsub = (uint8)_sql->GetIntData(25);
 
-            PMob->strRank = (uint8)sql->GetIntData(26);
-            PMob->dexRank = (uint8)sql->GetIntData(27);
-            PMob->vitRank = (uint8)sql->GetIntData(28);
-            PMob->agiRank = (uint8)sql->GetIntData(29);
-            PMob->intRank = (uint8)sql->GetIntData(30);
-            PMob->mndRank = (uint8)sql->GetIntData(31);
-            PMob->chrRank = (uint8)sql->GetIntData(32);
-            PMob->evaRank = (uint8)sql->GetIntData(33);
-            PMob->defRank = (uint8)sql->GetIntData(34);
-            PMob->attRank = (uint8)sql->GetIntData(35);
-            PMob->accRank = (uint8)sql->GetIntData(36);
+            PMob->strRank = (uint8)_sql->GetIntData(26);
+            PMob->dexRank = (uint8)_sql->GetIntData(27);
+            PMob->vitRank = (uint8)_sql->GetIntData(28);
+            PMob->agiRank = (uint8)_sql->GetIntData(29);
+            PMob->intRank = (uint8)_sql->GetIntData(30);
+            PMob->mndRank = (uint8)_sql->GetIntData(31);
+            PMob->chrRank = (uint8)_sql->GetIntData(32);
+            PMob->evaRank = (uint8)_sql->GetIntData(33);
+            PMob->defRank = (uint8)_sql->GetIntData(34);
+            PMob->attRank = (uint8)_sql->GetIntData(35);
+            PMob->accRank = (uint8)_sql->GetIntData(36);
 
-            PMob->setModifier(Mod::SLASH_SDT, (uint16)(sql->GetFloatData(37) * 1000));
-            PMob->setModifier(Mod::PIERCE_SDT, (uint16)(sql->GetFloatData(38) * 1000));
-            PMob->setModifier(Mod::HTH_SDT, (uint16)(sql->GetFloatData(39) * 1000));
-            PMob->setModifier(Mod::IMPACT_SDT, (uint16)(sql->GetFloatData(40) * 1000));
+            PMob->setModifier(Mod::SLASH_SDT, (uint16)(_sql->GetFloatData(37) * 1000));
+            PMob->setModifier(Mod::PIERCE_SDT, (uint16)(_sql->GetFloatData(38) * 1000));
+            PMob->setModifier(Mod::HTH_SDT, (uint16)(_sql->GetFloatData(39) * 1000));
+            PMob->setModifier(Mod::IMPACT_SDT, (uint16)(_sql->GetFloatData(40) * 1000));
 
-            PMob->setModifier(Mod::UDMGMAGIC, (int16)sql->GetIntData(41)); // Modifier 389, base 10000 stored as signed integer. Positives signify less damage.
+            PMob->setModifier(Mod::UDMGMAGIC, (int16)_sql->GetIntData(41)); // Modifier 389, base 10000 stored as signed integer. Positives signify less damage.
 
-            PMob->setModifier(Mod::FIRE_SDT, (int16)sql->GetIntData(42));    // Modifier 54, base 10000 stored as signed integer. Positives signify less damage.
-            PMob->setModifier(Mod::ICE_SDT, (int16)sql->GetIntData(43));     // Modifier 55, base 10000 stored as signed integer. Positives signify less damage.
-            PMob->setModifier(Mod::WIND_SDT, (int16)sql->GetIntData(44));    // Modifier 56, base 10000 stored as signed integer. Positives signify less damage.
-            PMob->setModifier(Mod::EARTH_SDT, (int16)sql->GetIntData(45));   // Modifier 57, base 10000 stored as signed integer. Positives signify less damage.
-            PMob->setModifier(Mod::THUNDER_SDT, (int16)sql->GetIntData(46)); // Modifier 58, base 10000 stored as signed integer. Positives signify less damage.
-            PMob->setModifier(Mod::WATER_SDT, (int16)sql->GetIntData(47));   // Modifier 59, base 10000 stored as signed integer. Positives signify less damage.
-            PMob->setModifier(Mod::LIGHT_SDT, (int16)sql->GetIntData(48));   // Modifier 60, base 10000 stored as signed integer. Positives signify less damage.
-            PMob->setModifier(Mod::DARK_SDT, (int16)sql->GetIntData(49));    // Modifier 61, base 10000 stored as signed integer. Positives signify less damage.
+            PMob->setModifier(Mod::FIRE_SDT, (int16)_sql->GetIntData(42));    // Modifier 54, base 10000 stored as signed integer. Positives signify less damage.
+            PMob->setModifier(Mod::ICE_SDT, (int16)_sql->GetIntData(43));     // Modifier 55, base 10000 stored as signed integer. Positives signify less damage.
+            PMob->setModifier(Mod::WIND_SDT, (int16)_sql->GetIntData(44));    // Modifier 56, base 10000 stored as signed integer. Positives signify less damage.
+            PMob->setModifier(Mod::EARTH_SDT, (int16)_sql->GetIntData(45));   // Modifier 57, base 10000 stored as signed integer. Positives signify less damage.
+            PMob->setModifier(Mod::THUNDER_SDT, (int16)_sql->GetIntData(46)); // Modifier 58, base 10000 stored as signed integer. Positives signify less damage.
+            PMob->setModifier(Mod::WATER_SDT, (int16)_sql->GetIntData(47));   // Modifier 59, base 10000 stored as signed integer. Positives signify less damage.
+            PMob->setModifier(Mod::LIGHT_SDT, (int16)_sql->GetIntData(48));   // Modifier 60, base 10000 stored as signed integer. Positives signify less damage.
+            PMob->setModifier(Mod::DARK_SDT, (int16)_sql->GetIntData(49));    // Modifier 61, base 10000 stored as signed integer. Positives signify less damage.
 
-            PMob->setModifier(Mod::FIRE_RES_RANK, (int8)(sql->GetIntData(50)));
-            PMob->setModifier(Mod::ICE_RES_RANK, (int8)(sql->GetIntData(51)));
-            PMob->setModifier(Mod::WIND_RES_RANK, (int8)(sql->GetIntData(52)));
-            PMob->setModifier(Mod::EARTH_RES_RANK, (int8)(sql->GetIntData(53)));
-            PMob->setModifier(Mod::THUNDER_RES_RANK, (int8)(sql->GetIntData(54)));
-            PMob->setModifier(Mod::WATER_RES_RANK, (int8)(sql->GetIntData(55)));
-            PMob->setModifier(Mod::LIGHT_RES_RANK, (int8)(sql->GetIntData(56)));
-            PMob->setModifier(Mod::DARK_RES_RANK, (int8)(sql->GetIntData(57)));
+            PMob->setModifier(Mod::FIRE_RES_RANK, (int8)(_sql->GetIntData(50)));
+            PMob->setModifier(Mod::ICE_RES_RANK, (int8)(_sql->GetIntData(51)));
+            PMob->setModifier(Mod::WIND_RES_RANK, (int8)(_sql->GetIntData(52)));
+            PMob->setModifier(Mod::EARTH_RES_RANK, (int8)(_sql->GetIntData(53)));
+            PMob->setModifier(Mod::THUNDER_RES_RANK, (int8)(_sql->GetIntData(54)));
+            PMob->setModifier(Mod::WATER_RES_RANK, (int8)(_sql->GetIntData(55)));
+            PMob->setModifier(Mod::LIGHT_RES_RANK, (int8)(_sql->GetIntData(56)));
+            PMob->setModifier(Mod::DARK_RES_RANK, (int8)(_sql->GetIntData(57)));
 
-            PMob->m_Element     = (uint8)sql->GetIntData(58);
-            PMob->m_Family      = (uint16)sql->GetIntData(59);
-            PMob->m_name_prefix = (uint8)sql->GetIntData(60);
-            PMob->m_flags       = (uint32)sql->GetIntData(61);
+            PMob->m_Element     = (uint8)_sql->GetIntData(58);
+            PMob->m_Family      = (uint16)_sql->GetIntData(59);
+            PMob->m_name_prefix = (uint8)_sql->GetIntData(60);
+            PMob->m_flags       = (uint32)_sql->GetIntData(61);
 
             // Special sub animation for Mob (yovra, jailer of love, phuabo)
             // yovra 1: On top/in the sky, 2: , 3: On top/in the sky
             // phuabo 1: Underwater, 2: Out of the water, 3: Goes back underwater
-            PMob->animationsub = (uint32)sql->GetIntData(62);
+            PMob->animationsub = (uint32)_sql->GetIntData(62);
 
             // Setup HP / MP Stat Percentage Boost
-            PMob->HPscale = sql->GetFloatData(63);
-            PMob->MPscale = sql->GetFloatData(64);
+            PMob->HPscale = _sql->GetFloatData(63);
+            PMob->MPscale = _sql->GetFloatData(64);
 
             // TODO: Remove me
             // Check if we should be looking up scripts for this mob
             // PMob->m_HasSpellScript = (uint8)sql->GetIntData(65);
 
-            PMob->m_SpellListContainer = mobSpellList::GetMobSpellList(sql->GetIntData(66));
+            PMob->m_SpellListContainer = mobSpellList::GetMobSpellList(_sql->GetIntData(66));
 
-            PMob->m_Pool = sql->GetUIntData(67);
+            PMob->m_Pool = _sql->GetUIntData(67);
 
-            PMob->allegiance = static_cast<ALLEGIANCE_TYPE>(sql->GetUIntData(68));
-            PMob->namevis    = sql->GetUIntData(69);
+            PMob->allegiance = static_cast<ALLEGIANCE_TYPE>(_sql->GetUIntData(68));
+            PMob->namevis    = _sql->GetUIntData(69);
 
-            uint32 aggro  = sql->GetUIntData(70);
+            uint32 aggro  = _sql->GetUIntData(70);
             PMob->m_Aggro = aggro;
 
             // If a special instanced mob aggros, it should always aggro regardless of level.
@@ -207,11 +207,11 @@ CInstance* CInstanceLoader::LoadInstance()
                 PMob->setMobMod(MOBMOD_ALWAYS_AGGRO, aggro);
             }
 
-            PMob->m_MobSkillList  = sql->GetUIntData(71);
-            PMob->m_TrueDetection = sql->GetUIntData(72);
-            PMob->setMobMod(MOBMOD_DETECTION, sql->GetUIntData(73));
+            PMob->m_MobSkillList  = _sql->GetUIntData(71);
+            PMob->m_TrueDetection = _sql->GetUIntData(72);
+            PMob->setMobMod(MOBMOD_DETECTION, _sql->GetUIntData(73));
 
-            PMob->setMobMod(MOBMOD_CHARMABLE, sql->GetUIntData(74));
+            PMob->setMobMod(MOBMOD_CHARMABLE, _sql->GetUIntData(74));
 
             // Overwrite base family charmables depending on mob type. Disallowed mobs which should be charmable
             // can be set in mob_spawn_mods or in their onInitialize
@@ -237,41 +237,41 @@ CInstance* CInstanceLoader::LoadInstance()
         uint32 zoneMin = (zone->GetID() << 12) + 0x1000000;
         uint32 zoneMax = zoneMin + 1024;
 
-        ret = sql->Query(Query, instance->GetID(), zoneMin, zoneMax);
+        ret = _sql->Query(Query, instance->GetID(), zoneMin, zoneMax);
 
-        if (ret != SQL_ERROR && sql->NumRows() != 0)
+        if (ret != SQL_ERROR && _sql->NumRows() != 0)
         {
-            while (sql->NextRow() == SQL_SUCCESS)
+            while (_sql->NextRow() == SQL_SUCCESS)
             {
                 CNpcEntity* PNpc = new CNpcEntity;
-                PNpc->id         = sql->GetUIntData(0);
+                PNpc->id         = _sql->GetUIntData(0);
                 PNpc->targid     = PNpc->id & 0xFFF;
 
-                PNpc->name.insert(0, (const char*)sql->GetData(1));
+                PNpc->name.insert(0, (const char*)_sql->GetData(1));
 
-                PNpc->loc.p.rotation = (uint8)sql->GetIntData(2);
-                PNpc->loc.p.x        = sql->GetFloatData(3);
-                PNpc->loc.p.y        = sql->GetFloatData(4);
-                PNpc->loc.p.z        = sql->GetFloatData(5);
-                PNpc->loc.p.moving   = (uint16)sql->GetUIntData(6);
+                PNpc->loc.p.rotation = (uint8)_sql->GetIntData(2);
+                PNpc->loc.p.x        = _sql->GetFloatData(3);
+                PNpc->loc.p.y        = _sql->GetFloatData(4);
+                PNpc->loc.p.z        = _sql->GetFloatData(5);
+                PNpc->loc.p.moving   = (uint16)_sql->GetUIntData(6);
 
-                PNpc->m_TargID = sql->GetUIntData(6) >> 16; // "quite likely"
+                PNpc->m_TargID = _sql->GetUIntData(6) >> 16; // "quite likely"
 
-                PNpc->speed        = (uint8)sql->GetIntData(7);
-                PNpc->speedsub     = (uint8)sql->GetIntData(8);
-                PNpc->animation    = (uint8)sql->GetIntData(9);
-                PNpc->animationsub = (uint8)sql->GetIntData(10);
+                PNpc->speed        = (uint8)_sql->GetIntData(7);
+                PNpc->speedsub     = (uint8)_sql->GetIntData(8);
+                PNpc->animation    = (uint8)_sql->GetIntData(9);
+                PNpc->animationsub = (uint8)_sql->GetIntData(10);
 
-                PNpc->namevis = (uint8)sql->GetIntData(11);
-                PNpc->status  = static_cast<STATUS_TYPE>(sql->GetIntData(12));
-                PNpc->m_flags = sql->GetUIntData(13);
+                PNpc->namevis = (uint8)_sql->GetIntData(11);
+                PNpc->status  = static_cast<STATUS_TYPE>(_sql->GetIntData(12));
+                PNpc->m_flags = _sql->GetUIntData(13);
 
                 uint16 sqlModelID[10];
-                memcpy(&sqlModelID, sql->GetData(14), 20);
+                memcpy(&sqlModelID, _sql->GetData(14), 20);
                 PNpc->look = look_t(sqlModelID);
 
-                PNpc->name_prefix = (uint8)sql->GetIntData(15);
-                PNpc->widescan    = (uint8)sql->GetIntData(16);
+                PNpc->name_prefix = (uint8)_sql->GetIntData(15);
+                PNpc->widescan    = (uint8)_sql->GetIntData(16);
 
                 PNpc->PInstance = instance;
 

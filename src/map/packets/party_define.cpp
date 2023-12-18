@@ -46,22 +46,22 @@ CPartyDefinePacket::CPartyDefinePacket(CParty* PParty, bool loadTrust)
 
         uint8 i = 0;
 
-        int ret = sql->Query(partyQuery, allianceid, PParty->GetPartyID(), PARTY_SECOND | PARTY_THIRD);
+        int ret = _sql->Query(partyQuery, allianceid, PParty->GetPartyID(), PARTY_SECOND | PARTY_THIRD);
 
-        if (ret != SQL_ERROR && sql->NumRows() > 0)
+        if (ret != SQL_ERROR && _sql->NumRows() > 0)
         {
-            while (sql->NextRow() == SQL_SUCCESS)
+            while (_sql->NextRow() == SQL_SUCCESS)
             {
                 uint16       targid = 0;
-                CCharEntity* PChar  = zoneutils::GetChar(sql->GetUIntData(0));
+                CCharEntity* PChar  = zoneutils::GetChar(_sql->GetUIntData(0));
                 if (PChar)
                 {
                     targid = PChar->targid;
                 }
-                ref<uint32>(12 * i + 0x08) = sql->GetUIntData(0);
+                ref<uint32>(12 * i + 0x08) = _sql->GetUIntData(0);
                 ref<uint16>(12 * i + 0x0C) = targid;
-                ref<uint16>(12 * i + 0x0E) = sql->GetUIntData(1);
-                ref<uint16>(12 * i + 0x10) = sql->GetUIntData(2) ? sql->GetUIntData(2) : sql->GetUIntData(3);
+                ref<uint16>(12 * i + 0x0E) = _sql->GetUIntData(1);
+                ref<uint16>(12 * i + 0x10) = _sql->GetUIntData(2) ? _sql->GetUIntData(2) : _sql->GetUIntData(3);
                 i++;
             }
         }

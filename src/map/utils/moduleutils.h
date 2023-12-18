@@ -27,7 +27,7 @@
 
 #include <memory>
 
-extern std::unique_ptr<SqlConnection> sql;
+extern std::unique_ptr<SqlConnection> _sql;
 
 // Forward declare
 class CPPModule;
@@ -41,7 +41,7 @@ class CPPModule
 public:
     CPPModule()
     : lua(::lua)
-    , sql(::sql)
+    , sql(::_sql)
     {
         moduleutils::RegisterCPPModule(this);
     }
