@@ -38,21 +38,21 @@ namespace serverutils
 
     uint32 GetServerVar(std::string const& name)
     {
-        int32 ret = sql->Query("SELECT value, expiry FROM server_variables WHERE name = '%s' LIMIT 1;", name);
+        int32 ret = _sql->Query("SELECT value, expiry FROM server_variables WHERE name = '%s' LIMIT 1;", name);
 
         int32  value  = 0;
         uint32 expiry = 0;
-        if (ret != SQL_ERROR && sql->NumRows() != 0 && sql->NextRow() == SQL_SUCCESS)
+        if (ret != SQL_ERROR && _sql->NumRows() != 0 && _sql->NextRow() == SQL_SUCCESS)
         {
-            value  = sql->GetIntData(0);
-            expiry = sql->GetUIntData(1);
+            value  = _sql->GetIntData(0);
+            expiry = _sql->GetUIntData(1);
 
             uint32 currentTimestamp = CVanaTime::getInstance()->getSysTime();
 
             if (expiry > 0 && expiry <= currentTimestamp)
             {
                 value = 0;
-                sql->Query("DELETE FROM server_variables WHERE name = '%s';", name);
+                _sql->Query("DELETE FROM server_variables WHERE name = '%s';", name);
             }
         }
 
@@ -106,13 +106,13 @@ namespace serverutils
             {
                 // TODO: Re-enable async
                 // async_work::doQuery("DELETE FROM server_variables WHERE name = '%s' LIMIT 1;", varName);
-                sql->Query("DELETE FROM server_variables WHERE name = '%s' LIMIT 1;", name);
+                _sql->Query("DELETE FROM server_variables WHERE name = '%s' LIMIT 1;", name);
             }
             else
             {
                 // TODO: Re-enable async
                 // async_work::doQuery("INSERT INTO server_variables VALUES ('%s', %i) ON DUPLICATE KEY UPDATE value = %i;", varName, value, value);
-                sql->Query("INSERT INTO server_variables VALUES ('%s', %i, %d) ON DUPLICATE KEY UPDATE value = %i, expiry = %d;", name, value, varTimestamp, value, varTimestamp);
+                _sql->Query("INSERT INTO server_variables VALUES ('%s', %i, %d) ON DUPLICATE KEY UPDATE value = %i, expiry = %d;", name, value, varTimestamp, value, varTimestamp);
             }
         }
 
@@ -135,11 +135,11 @@ namespace serverutils
 
             if (value == 0)
             {
-                sql->Query("DELETE FROM server_variables WHERE name = '%s' LIMIT 1;", name);
+                _sql->Query("DELETE FROM server_variables WHERE name = '%s' LIMIT 1;", name);
             }
             else
             {
-                sql->Query("INSERT INTO server_variables VALUES ('%s', %i, %d) ON DUPLICATE KEY UPDATE value = %i, expiry = %d;", name, value, expiry, value, expiry);
+                _sql->Query("INSERT INTO server_variables VALUES ('%s', %i, %d) ON DUPLICATE KEY UPDATE value = %i, expiry = %d;", name, value, expiry, value, expiry);
             }
 
             if (setVarMaxRetry > 0)
@@ -150,14 +150,14 @@ namespace serverutils
                 // value that was written.  The access back to the DB is just a few milliseconds.  Down side is
                 // that we have to give up at some point.
                 // Also, don't use GetServerVariable, as that manipulates the Lua variable stack.
-                if (sql->Query("SELECT value FROM server_variables WHERE name = '%s' LIMIT 1;", name) != SQL_ERROR)
+                if (_sql->Query("SELECT value FROM server_variables WHERE name = '%s' LIMIT 1;", name) != SQL_ERROR)
                 {
-                    if (sql->NumRows() > 0)
+                    if (_sql->NumRows() > 0)
                     {
                         // Can get it, so let's make sure it matches.
-                        if (sql->NextRow() == SQL_SUCCESS)
+                        if (_sql->NextRow() == SQL_SUCCESS)
                         {
-                            verify = sql->GetIntData(0);
+                            verify = _sql->GetIntData(0);
                         }
                     }
                     else

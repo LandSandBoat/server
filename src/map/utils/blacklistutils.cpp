@@ -31,9 +31,9 @@ namespace blacklistutils
     bool IsBlacklisted(uint32 ownerId, uint32 targetId)
     {
         const char* query = "SELECT * FROM char_blacklist WHERE charid_owner = %u AND charid_target = %u;";
-        int32       ret   = sql->Query(query, ownerId, targetId);
+        int32       ret   = _sql->Query(query, ownerId, targetId);
 
-        return (ret != SQL_ERROR && sql->NumRows() == 1);
+        return (ret != SQL_ERROR && _sql->NumRows() == 1);
     }
 
     bool AddBlacklisted(uint32 ownerId, uint32 targetId)
@@ -44,7 +44,7 @@ namespace blacklistutils
         }
 
         const char* query = "INSERT INTO char_blacklist (charid_owner, charid_target) VALUES (%u, %u);";
-        return (sql->Query(query, ownerId, targetId) != SQL_ERROR && sql->AffectedRows() == 1);
+        return (_sql->Query(query, ownerId, targetId) != SQL_ERROR && _sql->AffectedRows() == 1);
     }
 
     bool DeleteBlacklisted(uint32 ownerId, uint32 targetId)
@@ -55,7 +55,7 @@ namespace blacklistutils
         }
 
         const char* query = "DELETE FROM char_blacklist WHERE charid_owner = %u AND charid_target = %u;";
-        return (sql->Query(query, ownerId, targetId) != SQL_ERROR && sql->AffectedRows() == 1);
+        return (_sql->Query(query, ownerId, targetId) != SQL_ERROR && _sql->AffectedRows() == 1);
     }
 
     void SendBlacklist(CCharEntity* PChar)
@@ -64,7 +64,7 @@ namespace blacklistutils
 
         // Obtain this users blacklist info..
         const char* query = "SELECT c.charid, c.charname FROM char_blacklist AS b INNER JOIN chars AS c ON b.charid_target = c.charid WHERE charid_owner = %u;";
-        if (sql->Query(query, PChar->id) == SQL_ERROR || sql->NumRows() == 0)
+        if (_sql->Query(query, PChar->id) == SQL_ERROR || _sql->NumRows() == 0)
         {
             PChar->pushPacket(new CStopDownloadingPacket(PChar, blacklist));
             return;
@@ -72,10 +72,10 @@ namespace blacklistutils
 
         // Loop and build blacklist
         int currentCount = 0;
-        while (sql->NextRow() == SQL_SUCCESS)
+        while (_sql->NextRow() == SQL_SUCCESS)
         {
-            uint32      accid_target = sql->GetUIntData(0);
-            std::string targetName   = sql->GetStringData(1);
+            uint32      accid_target = _sql->GetUIntData(0);
+            std::string targetName   = _sql->GetStringData(1);
 
             blacklist.emplace_back(accid_target, targetName);
             currentCount++;

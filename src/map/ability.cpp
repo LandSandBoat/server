@@ -365,41 +365,41 @@ namespace ability
                             "WHERE job < %u AND abilityId < %u "
                             "ORDER BY job, level ASC";
 
-        int32 ret = sql->Query(Query, MAX_JOBTYPE, MAX_ABILITY_ID);
+        int32 ret = _sql->Query(Query, MAX_JOBTYPE, MAX_ABILITY_ID);
 
-        if (ret != SQL_ERROR && sql->NumRows() != 0)
+        if (ret != SQL_ERROR && _sql->NumRows() != 0)
         {
-            while (sql->NextRow() == SQL_SUCCESS)
+            while (_sql->NextRow() == SQL_SUCCESS)
             {
                 char* contentTag = nullptr;
-                sql->GetData(20, &contentTag, nullptr);
+                _sql->GetData(20, &contentTag, nullptr);
 
                 if (!luautils::IsContentEnabled(contentTag))
                 {
                     continue;
                 }
 
-                CAbility* PAbility = new CAbility(sql->GetIntData(0));
+                CAbility* PAbility = new CAbility(_sql->GetIntData(0));
 
-                PAbility->setMobSkillID(sql->GetIntData(1));
-                PAbility->setName(sql->GetStringData(2));
-                PAbility->setJob((JOBTYPE)sql->GetIntData(3));
-                PAbility->setLevel(sql->GetIntData(4));
-                PAbility->setValidTarget(sql->GetIntData(5));
-                PAbility->setRecastTime(sql->GetIntData(6));
-                PAbility->setMessage(sql->GetIntData(7));
+                PAbility->setMobSkillID(_sql->GetIntData(1));
+                PAbility->setName(_sql->GetStringData(2));
+                PAbility->setJob((JOBTYPE)_sql->GetIntData(3));
+                PAbility->setLevel(_sql->GetIntData(4));
+                PAbility->setValidTarget(_sql->GetIntData(5));
+                PAbility->setRecastTime(_sql->GetIntData(6));
+                PAbility->setMessage(_sql->GetIntData(7));
                 // Unused - message2
-                PAbility->setAnimationID(sql->GetIntData(9));
-                PAbility->setAnimationTime(std::chrono::milliseconds(sql->GetIntData(10)));
-                PAbility->setCastTime(std::chrono::milliseconds(sql->GetIntData(11)));
-                PAbility->setActionType(static_cast<ACTIONTYPE>(sql->GetUIntData(12)));
-                PAbility->setRange(sql->GetFloatData(13));
-                PAbility->setAOE(sql->GetIntData(14));
-                PAbility->setRecastId(sql->GetIntData(15));
-                PAbility->setCE(sql->GetIntData(16));
-                PAbility->setVE(sql->GetIntData(17));
-                PAbility->setMeritModID(sql->GetIntData(18));
-                PAbility->setAddType(sql->GetUIntData(19));
+                PAbility->setAnimationID(_sql->GetIntData(9));
+                PAbility->setAnimationTime(std::chrono::milliseconds(_sql->GetIntData(10)));
+                PAbility->setCastTime(std::chrono::milliseconds(_sql->GetIntData(11)));
+                PAbility->setActionType(static_cast<ACTIONTYPE>(_sql->GetUIntData(12)));
+                PAbility->setRange(_sql->GetFloatData(13));
+                PAbility->setAOE(_sql->GetIntData(14));
+                PAbility->setRecastId(_sql->GetIntData(15));
+                PAbility->setCE(_sql->GetIntData(16));
+                PAbility->setVE(_sql->GetIntData(17));
+                PAbility->setMeritModID(_sql->GetIntData(18));
+                PAbility->setAddType(_sql->GetUIntData(19));
 
                 PAbilityList[PAbility->getID()] = PAbility;
                 PAbilitiesList[PAbility->getJob()].emplace_back(PAbility);
@@ -415,19 +415,19 @@ namespace ability
 
         const char* Query2 = "SELECT recastId, job, level, maxCharges, chargeTime, meritModId FROM abilities_charges ORDER BY job, level ASC;";
 
-        ret = sql->Query(Query2);
+        ret = _sql->Query(Query2);
 
-        if (ret != SQL_ERROR && sql->NumRows() != 0)
+        if (ret != SQL_ERROR && _sql->NumRows() != 0)
         {
-            while (sql->NextRow() == SQL_SUCCESS)
+            while (_sql->NextRow() == SQL_SUCCESS)
             {
                 Charge_t* PCharge   = new Charge_t;
-                PCharge->ID         = sql->GetUIntData(0);
-                PCharge->job        = (JOBTYPE)sql->GetUIntData(1);
-                PCharge->level      = sql->GetUIntData(2);
-                PCharge->maxCharges = sql->GetUIntData(3);
-                PCharge->chargeTime = sql->GetUIntData(4);
-                PCharge->merit      = sql->GetUIntData(5);
+                PCharge->ID         = _sql->GetUIntData(0);
+                PCharge->job        = (JOBTYPE)_sql->GetUIntData(1);
+                PCharge->level      = _sql->GetUIntData(2);
+                PCharge->maxCharges = _sql->GetUIntData(3);
+                PCharge->chargeTime = _sql->GetUIntData(4);
+                PCharge->merit      = _sql->GetUIntData(5);
 
                 PChargesList.emplace_back(PCharge);
             }

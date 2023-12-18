@@ -55,24 +55,24 @@ namespace gardenutils
 {
     void LoadResultList()
     {
-        int32 ret = sql->Query("SELECT resultId, seed, element1, element2, result, min_quantity, max_quantity, weight FROM gardening_results");
+        int32 ret = _sql->Query("SELECT resultId, seed, element1, element2, result, min_quantity, max_quantity, weight FROM gardening_results");
 
-        if (ret != SQL_ERROR && sql->NumRows() != 0)
+        if (ret != SQL_ERROR && _sql->NumRows() != 0)
         {
-            while (sql->NextRow() == SQL_SUCCESS)
+            while (_sql->NextRow() == SQL_SUCCESS)
             {
-                uint8 SeedID   = (uint8)sql->GetUIntData(1);
-                uint8 Element1 = (uint8)sql->GetUIntData(2);
-                uint8 Element2 = (uint8)sql->GetUIntData(3);
+                uint8 SeedID   = (uint8)_sql->GetUIntData(1);
+                uint8 Element1 = (uint8)_sql->GetUIntData(2);
+                uint8 Element2 = (uint8)_sql->GetUIntData(3);
 
                 uint32 uid = (SeedID << 8) + (Element1 << 4) + Element2;
 
                 GardenResultList_t& resultList = g_pGardenResultMap[uid];
 
-                uint16 ItemID      = (uint16)sql->GetIntData(4);
-                uint8  MinQuantity = (uint8)sql->GetIntData(5);
-                uint8  MaxQuantity = (uint8)sql->GetIntData(6);
-                uint8  Weight      = (uint8)sql->GetIntData(7);
+                uint16 ItemID      = (uint16)_sql->GetIntData(4);
+                uint8  MinQuantity = (uint8)_sql->GetIntData(5);
+                uint8  MaxQuantity = (uint8)_sql->GetIntData(6);
+                uint8  Weight      = (uint8)_sql->GetIntData(7);
                 resultList.emplace_back(ItemID, MinQuantity, MaxQuantity, Weight);
             }
         }
@@ -116,9 +116,9 @@ namespace gardenutils
                         PPotItem->clearExamined();
 
                         char extra[sizeof(PItem->m_extra) * 2 + 1];
-                        sql->EscapeStringLen(extra, (const char*)PItem->m_extra, sizeof(PItem->m_extra));
+                        _sql->EscapeStringLen(extra, (const char*)PItem->m_extra, sizeof(PItem->m_extra));
                         const char* Query = "UPDATE char_inventory SET extra = '%s' WHERE charid = %u AND location = %u AND slot = %u";
-                        sql->Query(Query, extra, PChar->id, containerID, slotID);
+                        _sql->Query(Query, extra, PChar->id, containerID, slotID);
 
                         if (sendPacket)
                         {

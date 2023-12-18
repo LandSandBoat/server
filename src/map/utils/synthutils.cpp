@@ -80,31 +80,31 @@ namespace synthutils
             AND Ingredient8 = %u \
         LIMIT 1";
 
-        int32 ret = sql->Query(fmtQuery, PChar->CraftContainer->getItemID(0), PChar->CraftContainer->getItemID(0),
-                               PChar->CraftContainer->getItemID(1), PChar->CraftContainer->getItemID(2), PChar->CraftContainer->getItemID(3),
-                               PChar->CraftContainer->getItemID(4), PChar->CraftContainer->getItemID(5), PChar->CraftContainer->getItemID(6),
-                               PChar->CraftContainer->getItemID(7), PChar->CraftContainer->getItemID(8));
+        int32 ret = _sql->Query(fmtQuery, PChar->CraftContainer->getItemID(0), PChar->CraftContainer->getItemID(0),
+                                PChar->CraftContainer->getItemID(1), PChar->CraftContainer->getItemID(2), PChar->CraftContainer->getItemID(3),
+                                PChar->CraftContainer->getItemID(4), PChar->CraftContainer->getItemID(5), PChar->CraftContainer->getItemID(6),
+                                PChar->CraftContainer->getItemID(7), PChar->CraftContainer->getItemID(8));
 
-        if (ret != SQL_ERROR && sql->NumRows() != 0 && sql->NextRow() == SQL_SUCCESS)
+        if (ret != SQL_ERROR && _sql->NumRows() != 0 && _sql->NextRow() == SQL_SUCCESS)
         {
-            uint16 KeyItemID = (uint16)sql->GetUIntData(1); // Check if recipe needs KI
+            uint16 KeyItemID = (uint16)_sql->GetUIntData(1); // Check if recipe needs KI
 
             if ((KeyItemID == 0) || (charutils::hasKeyItem(PChar, KeyItemID))) // If recipe doesn't need KI OR Player has the required KI
             {
                 // in the ninth cell write the id of the recipe
-                PChar->CraftContainer->setItem(9, sql->GetUIntData(0), 0xFF, 0);
-                PChar->CraftContainer->setItem(10 + 1, (uint16)sql->GetUIntData(10), (uint8)sql->GetUIntData(14), 0); // RESULT_SUCCESS
-                PChar->CraftContainer->setItem(10 + 2, (uint16)sql->GetUIntData(11), (uint8)sql->GetUIntData(15), 0); // RESULT_HQ
-                PChar->CraftContainer->setItem(10 + 3, (uint16)sql->GetUIntData(12), (uint8)sql->GetUIntData(16), 0); // RESULT_HQ2
-                PChar->CraftContainer->setItem(10 + 4, (uint16)sql->GetUIntData(13), (uint8)sql->GetUIntData(17), 0); // RESULT_HQ3
-                PChar->CraftContainer->setCraftType((uint8)sql->GetUIntData(18));                                     // Store synth type (regular, desynth or "no material loss")
+                PChar->CraftContainer->setItem(9, _sql->GetUIntData(0), 0xFF, 0);
+                PChar->CraftContainer->setItem(10 + 1, (uint16)_sql->GetUIntData(10), (uint8)_sql->GetUIntData(14), 0); // RESULT_SUCCESS
+                PChar->CraftContainer->setItem(10 + 2, (uint16)_sql->GetUIntData(11), (uint8)_sql->GetUIntData(15), 0); // RESULT_HQ
+                PChar->CraftContainer->setItem(10 + 3, (uint16)_sql->GetUIntData(12), (uint8)_sql->GetUIntData(16), 0); // RESULT_HQ2
+                PChar->CraftContainer->setItem(10 + 4, (uint16)_sql->GetUIntData(13), (uint8)_sql->GetUIntData(17), 0); // RESULT_HQ3
+                PChar->CraftContainer->setCraftType((uint8)_sql->GetUIntData(18));                                      // Store synth type (regular, desynth or "no material loss")
 
                 uint16 skillValue   = 0;
                 uint16 currentSkill = 0;
 
                 for (uint8 skillID = SKILL_WOODWORKING; skillID <= SKILL_COOKING; ++skillID) // range for all 8 synth skills
                 {
-                    skillValue   = (uint16)sql->GetUIntData((skillID - 49 + 2));
+                    skillValue   = (uint16)_sql->GetUIntData((skillID - 49 + 2));
                     currentSkill = PChar->RealSkills.skill[skillID];
 
                     // skill write in the quantity field of cells 9-16
@@ -984,11 +984,11 @@ namespace synthutils
                     PItem->setSignature(EncodeStringSignature(PChar->name.c_str(), encodedSignature));
 
                     char signature_esc[31]; // max charname: 15 chars * 2 + 1
-                    sql->EscapeStringLen(signature_esc, PChar->name.c_str(), strlen(PChar->name.c_str()));
+                    _sql->EscapeStringLen(signature_esc, PChar->name.c_str(), strlen(PChar->name.c_str()));
 
                     char fmtQuery[] = "UPDATE char_inventory SET signature = '%s' WHERE charid = %u AND location = 0 AND slot = %u;\0";
 
-                    sql->Query(fmtQuery, signature_esc, PChar->id, invSlotID);
+                    _sql->Query(fmtQuery, signature_esc, PChar->id, invSlotID);
                 }
                 PChar->pushPacket(new CInventoryItemPacket(PItem, LOC_INVENTORY, invSlotID));
             }

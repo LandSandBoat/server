@@ -24,23 +24,23 @@
 CMenuUnityPacket::CMenuUnityPacket(CCharEntity* PChar)
 {
     const char* Query = "SELECT leader, members_current, points_current, members_prev, points_prev FROM unity_system;";
-    int32       ret   = sql->Query(Query);
+    int32       ret   = _sql->Query(Query);
 
     std::pair<int32, double> unity_current[11];
     std::pair<int32, double> unity_previous[11];
 
-    if (ret != SQL_ERROR && sql->NumRows() != 0)
+    if (ret != SQL_ERROR && _sql->NumRows() != 0)
     {
-        while (sql->NextRow() == SQL_SUCCESS)
+        while (_sql->NextRow() == SQL_SUCCESS)
         {
-            int unity_leader = sql->GetIntData(0) - 1;
+            int unity_leader = _sql->GetIntData(0) - 1;
 
             if (unity_leader >= 0 && unity_leader < 11)
             {
-                unity_current[unity_leader].first   = sql->GetIntData(1);
-                unity_current[unity_leader].second  = sql->GetIntData(2);
-                unity_previous[unity_leader].first  = sql->GetIntData(3);
-                unity_previous[unity_leader].second = sql->GetIntData(4);
+                unity_current[unity_leader].first   = _sql->GetIntData(1);
+                unity_current[unity_leader].second  = _sql->GetIntData(2);
+                unity_previous[unity_leader].first  = _sql->GetIntData(3);
+                unity_previous[unity_leader].second = _sql->GetIntData(4);
             }
         }
     }

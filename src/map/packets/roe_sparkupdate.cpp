@@ -38,11 +38,11 @@ CRoeSparkUpdatePacket::CRoeSparkUpdatePacket(CCharEntity* PChar)
     uint32 daysSinceEpoch  = vanaTime / (60 * 60 * 24);
     uint32 weeksSinceEpoch = daysSinceEpoch / 7;
 
-    int ret = sql->Query(query, PChar->id);
-    if (ret != SQL_ERROR && sql->NextRow() == SQL_SUCCESS)
+    int ret = _sql->Query(query, PChar->id);
+    if (ret != SQL_ERROR && _sql->NextRow() == SQL_SUCCESS)
     {
-        ref<uint32>(0x04) = sql->GetIntData(0);
-        ref<uint8>(0x08)  = sql->GetIntData(1);
+        ref<uint32>(0x04) = _sql->GetIntData(0);
+        ref<uint8>(0x08)  = _sql->GetIntData(1);
 
         ref<uint8>(0x0A) = 0x00;
         ref<uint8>(0x0B) = 0x00;

@@ -133,9 +133,9 @@ uint8 CBattlefieldHandler::LoadBattlefield(CCharEntity* PChar, const Battlefield
                             FROM bcnm_info i\
                             WHERE bcnmId = %u";
 
-        auto ret = sql->Query(fmtQuery, registration.id);
+        auto ret = _sql->Query(fmtQuery, registration.id);
 
-        if (ret == SQL_ERROR || sql->NumRows() == 0 || sql->NextRow() != SQL_SUCCESS)
+        if (ret == SQL_ERROR || _sql->NumRows() == 0 || _sql->NextRow() != SQL_SUCCESS)
         {
             ShowError("Cannot load battlefield : %u ", registration.id);
             return BATTLEFIELD_RETURN_CODE_REQS_NOT_MET;
@@ -143,16 +143,16 @@ uint8 CBattlefieldHandler::LoadBattlefield(CCharEntity* PChar, const Battlefield
 
         auto* PBattlefield = new CBattlefield(registration.id, m_PZone, registration.area, PChar, false);
 
-        auto name                 = sql->GetStringData(0);
-        auto recordholder         = sql->GetStringData(1);
-        auto recordtime           = std::chrono::seconds(sql->GetUIntData(2));
-        auto recordPartySize      = sql->GetUIntData(3);
-        auto timelimit            = std::chrono::seconds(sql->GetUIntData(4));
-        auto levelcap             = sql->GetUIntData(5);
-        auto lootid               = sql->GetUIntData(6);
-        auto maxplayers           = sql->GetUIntData(7);
-        auto rulemask             = sql->GetUIntData(8);
-        PBattlefield->m_isMission = sql->GetUIntData(9);
+        auto name                 = _sql->GetStringData(0);
+        auto recordholder         = _sql->GetStringData(1);
+        auto recordtime           = std::chrono::seconds(_sql->GetUIntData(2));
+        auto recordPartySize      = _sql->GetUIntData(3);
+        auto timelimit            = std::chrono::seconds(_sql->GetUIntData(4));
+        auto levelcap             = _sql->GetUIntData(5);
+        auto lootid               = _sql->GetUIntData(6);
+        auto maxplayers           = _sql->GetUIntData(7);
+        auto rulemask             = _sql->GetUIntData(8);
+        PBattlefield->m_isMission = _sql->GetUIntData(9);
 
         PBattlefield->SetName(name);
         PBattlefield->SetRecord(recordholder, recordtime, recordPartySize);
@@ -197,18 +197,18 @@ uint8 CBattlefieldHandler::LoadBattlefield(CCharEntity* PChar, const Battlefield
                             FROM bcnm_info i\
                             WHERE bcnmId = %u";
 
-    auto ret = sql->Query(fmtQuery, registration.id);
+    auto ret = _sql->Query(fmtQuery, registration.id);
 
-    if (ret == SQL_ERROR || sql->NumRows() == 0 || sql->NextRow() != SQL_SUCCESS)
+    if (ret == SQL_ERROR || _sql->NumRows() == 0 || _sql->NextRow() != SQL_SUCCESS)
     {
         ShowError("Cannot load battlefield : %u ", registration.id);
         return BATTLEFIELD_RETURN_CODE_REQS_NOT_MET;
     }
 
-    auto name            = sql->GetStringData(0);
-    auto recordholder    = sql->GetStringData(1);
-    auto recordtime      = std::chrono::seconds(sql->GetUIntData(2));
-    auto recordPartySize = sql->GetUIntData(3);
+    auto name            = _sql->GetStringData(0);
+    auto recordholder    = _sql->GetStringData(1);
+    auto recordtime      = std::chrono::seconds(_sql->GetUIntData(2));
+    auto recordPartySize = _sql->GetUIntData(3);
 
     PBattlefield->SetName(name);
     PBattlefield->SetRecord(recordholder, recordtime, recordPartySize);
@@ -353,12 +353,12 @@ bool CBattlefieldHandler::ReachedMaxCapacity(int battlefieldId) const
     if (battlefieldId != -1)
     {
         std::string query("SELECT battlefieldNumber FROM bcnm_battlefield WHERE bcnmId = %i;");
-        auto        ret = sql->Query(query.c_str(), battlefieldId);
-        if (ret != SQL_ERROR && sql->NumRows() != 0)
+        auto        ret = _sql->Query(query.c_str(), battlefieldId);
+        if (ret != SQL_ERROR && _sql->NumRows() != 0)
         {
-            while (sql->NextRow() == SQL_SUCCESS)
+            while (_sql->NextRow() == SQL_SUCCESS)
             {
-                auto area = sql->GetUIntData(0);
+                auto area = _sql->GetUIntData(0);
                 if (m_Battlefields.find(area) == m_Battlefields.end())
                 {
                     return false; // this area hasnt been loaded in for this battlefield

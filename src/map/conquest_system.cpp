@@ -41,7 +41,7 @@ namespace conquest
     {
         if (conquestData == nullptr)
         {
-            conquestData = std::make_shared<ConquestData>(sql);
+            conquestData = std::make_shared<ConquestData>(_sql);
         }
 
         return conquestData;

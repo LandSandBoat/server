@@ -29,15 +29,15 @@ namespace campaign
     void LoadNations()
     {
         std::string query = "SELECT id, reconnaissance, morale, prosperity FROM campaign_nation ORDER BY id ASC;";
-        int         ret   = sql->Query(query.c_str());
-        if (ret != SQL_ERROR && sql->NumRows() != 0)
+        int         ret   = _sql->Query(query.c_str());
+        if (ret != SQL_ERROR && _sql->NumRows() != 0)
         {
-            while (sql->NextRow() == SQL_SUCCESS)
+            while (_sql->NextRow() == SQL_SUCCESS)
             {
                 CampaignNation nation;
-                nation.reconnaissance = (uint8)sql->GetUIntData(1);
-                nation.morale         = (uint8)sql->GetUIntData(2);
-                nation.prosperity     = (uint8)sql->GetUIntData(3);
+                nation.reconnaissance = (uint8)_sql->GetUIntData(1);
+                nation.morale         = (uint8)_sql->GetUIntData(2);
+                nation.prosperity     = (uint8)_sql->GetUIntData(3);
                 CState.nations.emplace_back(nation);
             }
         }
@@ -141,7 +141,7 @@ namespace campaign
         auto current = std::min(std::max((int32)amount, 0), 10);
 
         std::string query = "UPDATE `campaign_nation` SET `reconnaissance` = %d WHERE `id` = %d;";
-        int         ret   = sql->Query(query.c_str(), current, (int32)army);
+        int         ret   = _sql->Query(query.c_str(), current, (int32)army);
         if (ret == SQL_ERROR)
         {
             ShowError("Unable to update nation reconnaissance.\n");
@@ -155,7 +155,7 @@ namespace campaign
         auto current = std::min(std::max((int32)amount, 0), 100);
 
         std::string query = "UPDATE `campaign_nation` SET `morale` = %d WHERE `id` = %d;";
-        int         ret   = sql->Query(query.c_str(), current, (int32)army);
+        int         ret   = _sql->Query(query.c_str(), current, (int32)army);
         if (ret == SQL_ERROR)
         {
             ShowError("Unable to update nation morale.\n");
@@ -169,7 +169,7 @@ namespace campaign
         auto current = std::min(std::max((int32)amount, 0), 100);
 
         std::string query = "UPDATE `campaign_nation` SET `prosperity` = %d WHERE `id` = %d;";
-        int         ret   = sql->Query(query.c_str(), current, (int32)army);
+        int         ret   = _sql->Query(query.c_str(), current, (int32)army);
         if (ret == SQL_ERROR)
         {
             ShowError("Unable to update nation prosperity.\n");
