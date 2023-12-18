@@ -23,10 +23,32 @@
 
 #include "logging.h"
 #include "settings.h"
+#include "tracy.h"
 #include "utils.h"
+
+namespace
+{
+    std::unordered_map<PreparedStatement, std::pair<std::string, std::unique_ptr<sql::PreparedStatement>>> preparedStatements;
+} // namespace
+
+void db::populatePreparedStatements(std::unique_ptr<sql::Connection>& conn)
+{
+    TracyZoneScoped;
+
+    // clang-format off
+    auto prep = [&](PreparedStatement stmt, const char* query)
+    {
+        preparedStatements[stmt] = { query, std::unique_ptr<sql::PreparedStatement>(conn->prepareStatement(query)) };
+    };
+    // clang-format on
+
+    prep(PreparedStatement::Search_GetSearchComment, "SELECT seacom_message FROM accounts_sessions WHERE charid = (?)");
+}
 
 std::unique_ptr<sql::Connection> db::getConnection()
 {
+    TracyZoneScoped;
+
     // NOTE: Driver is static, so it will only be initialized once.
     sql::Driver* driver = sql::mariadb::get_driver_instance();
 
@@ -42,6 +64,7 @@ std::unique_ptr<sql::Connection> db::getConnection()
         std::unique_ptr<sql::Connection> conn(driver->connect(url.c_str(), login.c_str(), passwd.c_str()));
 
         conn->setSchema(schema.c_str());
+        populatePreparedStatements(conn);
 
         return conn;
     }
@@ -54,6 +77,8 @@ std::unique_ptr<sql::Connection> db::getConnection()
 
 std::unique_ptr<sql::ResultSet> db::query(std::string_view query)
 {
+    TracyZoneScoped;
+
     // TODO: Check this is pooled. If not; make it pooled.
     static thread_local auto conn = getConnection();
 
@@ -65,6 +90,34 @@ std::unique_ptr<sql::ResultSet> db::query(std::string_view query)
     catch (const std::exception& e)
     {
         ShowError("Query Failed: %s", query.data());
+        ShowError(e.what());
+        return nullptr;
+    }
+}
+
+std::unique_ptr<sql::ResultSet> db::preparedStmt(PreparedStatement preparedStmt, uint32 id)
+{
+    TracyZoneScoped;
+
+    // TODO: Check this is pooled. If not; make it pooled.
+    static thread_local auto conn = getConnection();
+
+    if (preparedStatements.find(preparedStmt) == preparedStatements.end())
+    {
+        ShowError("Bad prepared stmt");
+        return nullptr;
+    }
+
+    auto& stmt = preparedStatements[preparedStmt].second;
+    try
+    {
+        // NOTE: 1-indexed!
+        stmt->setUInt(1, id);
+        return std::unique_ptr<sql::ResultSet>(stmt->executeQuery());
+    }
+    catch (const std::exception& e)
+    {
+        ShowError("Query Failed: %s", str(preparedStatements[preparedStmt].first.c_str()));
         ShowError(e.what());
         return nullptr;
     }

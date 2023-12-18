@@ -21,16 +21,28 @@
 
 #pragma once
 
+#include "cbasetypes.h"
+
 #include <memory>
 #include <string>
 
 #include <conncpp.hpp>
+
+enum class PreparedStatement
+{
+    Search_GetSearchComment,
+};
 
 // TODO: Rename this namespace from db to sql when migration is complete.
 // mariadb-connector-cpp uses sql namespace for all of its classes, so it
 // will be clearer if we use it too.
 namespace db
 {
+    void populatePreparedStatements(std::unique_ptr<sql::Connection>& conn);
+
     auto getConnection() -> std::unique_ptr<sql::Connection>;
     auto query(std::string_view query) -> std::unique_ptr<sql::ResultSet>;
+
+    // TODO: Template voodoo
+    auto preparedStmt(PreparedStatement preparedStmt, uint32 id) -> std::unique_ptr<sql::ResultSet>;
 } // namespace db

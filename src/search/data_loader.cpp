@@ -616,11 +616,10 @@ std::list<SearchEntity*> CDataLoader::GetLinkshellList(uint32 LinkshellID)
 
 std::string CDataLoader::GetSearchComment(uint32 playerId)
 {
-    auto query = "SELECT seacom_message FROM accounts_sessions WHERE charid = %u";
-    auto rset  = db::query(fmt::sprintf(query, playerId));
+    auto rset = db::preparedStmt(PreparedStatement::Search_GetSearchComment, playerId);
     if (rset && rset->rowsCount() && rset->next())
     {
-        return rset->getString(0).c_str();
+        return rset->getString("seacom_message").c_str();
     }
     return std::string();
 }
