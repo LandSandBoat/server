@@ -85,7 +85,7 @@ endif()
 
 find_library(MARIADB_LIBRARY
     NAMES
-        libmariadb mariadb libmysql mysql libmariadb64 mariadb64 libmysql64 mysql64
+        libmariadb64 mariadb64 libmysql64 mysql64 libmariadb mariadb libmysql mysql
     PATHS
         ${PROJECT_SOURCE_DIR}/ext/mariadb/${lib_dir}/
         /usr/
