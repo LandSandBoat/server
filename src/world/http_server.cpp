@@ -190,10 +190,10 @@ void HTTPServer::LockingUpdate()
 
         // Total active sessions
         {
-            auto rset = db::query("SELECT COUNT(*) FROM accounts_sessions;");
+            auto rset = db::query("SELECT COUNT(*) AS `count` FROM accounts_sessions;");
             if (rset && rset->next())
             {
-                data.activeSessionCount = rset->getUInt(0);
+                data.activeSessionCount = rset->getUInt("count");
             }
         }
 
@@ -208,8 +208,8 @@ void HTTPServer::LockingUpdate()
             {
                 while (rset->next())
                 {
-                    auto zoneId = rset->getUInt(0);
-                    auto count  = rset->getUInt(1);
+                    auto zoneId = rset->getUInt("pos_zone");
+                    auto count  = rset->getUInt("count");
 
                     data.zonePlayerCounts[zoneId] = count;
                 }
