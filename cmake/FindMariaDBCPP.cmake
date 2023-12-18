@@ -3,7 +3,7 @@ if(NOT WIN32)
     CPMAddPackage(
         NAME mariadb-connector-cpp
         GITHUB_REPOSITORY zach2good/mariadb-connector-cpp
-        GIT_TAG 3cd3b18a6496c89ef0fbd183826744688a57fed1
+        GIT_TAG 1e4b414b49fc8e346fab4b1718aaaf2eadacde2e
         DOWNLOAD_ONLY YES
     )
     if(mariadb-connector-cpp_ADDED)
@@ -237,18 +237,18 @@ if(NOT WIN32)
                 ${mariadb-connector-cpp_SOURCE_DIR}/src/maconncpp.def
             )
         endif()
-        add_library(mariadbcpp STATIC ${MACPP_SOURCES})
-        target_include_directories(mariadbcpp
+        add_library(mariadbclientcpp STATIC ${MACPP_SOURCES})
+        target_include_directories(mariadbclientcpp
             PUBLIC
                 ${mariadb-connector-cpp_SOURCE_DIR}/include
             PRIVATE
                 ${mariadb-connector-cpp_SOURCE_DIR}/include/conncpp
                 ${mariadb-connector-cpp_SOURCE_DIR}/src/
         )
-        target_link_libraries(mariadbcpp PRIVATE mariadbclient)
+        target_link_libraries(mariadbclientcpp PRIVATE mariadbclient)
 
         set(MARIADBCPP_FOUND TRUE)
-        set(MARIADBCPP_LIBRARY mariadbcpp)
+        set(MARIADBCPP_LIBRARY mariadbclientcpp)
         set(MARIADBCPP_INCLUDE_DIR ${mariadb-connector-cpp_SOURCE_DIR}/include)
     endif()
 else() # WIN32
