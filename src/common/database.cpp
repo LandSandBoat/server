@@ -35,17 +35,17 @@ namespace
     std::unordered_map<std::string, std::unique_ptr<sql::PreparedStatement>>                               lazyPreparedStatements;
 } // namespace
 
-std::unordered_map<PreparedStatement, std::pair<std::string, std::unique_ptr<sql::PreparedStatement>>>& db::getPreparedStatements()
+std::unordered_map<PreparedStatement, std::pair<std::string, std::unique_ptr<sql::PreparedStatement>>>& db::detail::getPreparedStatements()
 {
     return preparedStatements;
 }
 
-std::unordered_map<std::string, std::unique_ptr<sql::PreparedStatement>>& db::getLazyPreparedStatements()
+std::unordered_map<std::string, std::unique_ptr<sql::PreparedStatement>>& db::detail::getLazyPreparedStatements()
 {
     return lazyPreparedStatements;
 }
 
-void db::populatePreparedStatements(std::shared_ptr<sql::Connection> conn)
+void db::detail::populatePreparedStatements(std::shared_ptr<sql::Connection> conn)
 {
     TracyZoneScoped;
 
@@ -59,7 +59,7 @@ void db::populatePreparedStatements(std::shared_ptr<sql::Connection> conn)
     prep(PreparedStatement::Search_GetSearchComment, "SELECT seacom_message FROM accounts_sessions WHERE charid = (?)");
 }
 
-std::shared_ptr<sql::Connection> db::getConnection()
+std::shared_ptr<sql::Connection> db::detail::getConnection()
 {
     TracyZoneScoped;
 
@@ -83,9 +83,9 @@ std::shared_ptr<sql::Connection> db::getConnection()
         auto url    = fmt::format("tcp://{}:{}", host, port);
 
         conn = std::shared_ptr<sql::Connection>(driver->connect(url.c_str(), login.c_str(), passwd.c_str()));
-
         conn->setSchema(schema.c_str());
-        populatePreparedStatements(conn);
+
+        db::detail::populatePreparedStatements(conn);
 
         return conn;
     }
@@ -101,7 +101,7 @@ std::unique_ptr<sql::ResultSet> db::query(std::string_view query)
     TracyZoneScoped;
 
     // TODO: Check this is pooled. If not; make it pooled.
-    static thread_local auto conn = getConnection();
+    static thread_local auto conn = db::detail::getConnection();
 
     auto stmt = conn->createStatement();
     try
