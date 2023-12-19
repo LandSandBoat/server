@@ -340,6 +340,8 @@ namespace charutils
 
     void LoadChar(CCharEntity* PChar)
     {
+        TracyZoneScoped;
+
         uint8  meritPoints = 0;
         uint16 limitPoints = 0;
         int32  HP          = 0;
@@ -957,37 +959,34 @@ namespace charutils
 
     void LoadInventory(CCharEntity* PChar)
     {
-        const char* Query = "SELECT "
-                            "itemid,"     // 0
-                            "location,"   // 1
-                            "slot,"       // 2
-                            "quantity,"   // 3
-                            "bazaar,"     // 4
-                            "signature, " // 5
-                            "extra "      // 6
+        TracyZoneScoped;
+
+        const char* query = "SELECT "
+                            "itemid, "
+                            "location, "
+                            "slot, "
+                            "quantity, "
+                            "bazaar, "
+                            "signature, "
+                            "extra "
                             "FROM char_inventory "
-                            "WHERE charid = %u "
-                            "ORDER BY FIELD(location,0,1,9,2,3,4,5,6,7,8,10,11,12)";
+                            "WHERE charid = (?) "
+                            "ORDER BY FIELD(location,0,1,9,2,3,4,5,6,7,8,10,11,12);";
 
-        int32 ret = _sql->Query(Query, PChar->id);
-
-        if (ret != SQL_ERROR && _sql->NumRows() != 0)
+        auto rset = db::lazyPreparedStmt(query, PChar->id);
+        if (rset && rset->rowsCount())
         {
-            while (_sql->NextRow() == SQL_SUCCESS)
+            while (rset->next())
             {
-                CItem* PItem = itemutils::GetItem(_sql->GetIntData(0));
-
+                CItem* PItem = itemutils::GetItem(rset->getInt("itemid"));
                 if (PItem != nullptr)
                 {
-                    PItem->setLocationID((uint8)_sql->GetUIntData(1));
-                    PItem->setSlotID(_sql->GetUIntData(2));
-                    PItem->setQuantity(_sql->GetUIntData(3));
-                    PItem->setCharPrice(_sql->GetUIntData(4));
+                    PItem->setLocationID((uint8)rset->getUInt("location"));
+                    PItem->setSlotID(rset->getUInt("slot"));
+                    PItem->setQuantity(rset->getUInt("quantity"));
+                    PItem->setCharPrice(rset->getUInt("bazaar"));
 
-                    size_t length = 0;
-                    char*  extra  = nullptr;
-                    _sql->GetData(6, &extra, &length);
-                    memcpy(PItem->m_extra, extra, (length > sizeof(PItem->m_extra) ? sizeof(PItem->m_extra) : length));
+                    db::extractBlob(rset, "extra", PItem->m_extra);
 
                     if (PItem->getCharPrice() != 0)
                     {
@@ -1001,13 +1000,13 @@ namespace charutils
                             static_cast<CItemLinkshell*>(PItem)->SetLSType((LSTYPE)(PItem->getID() - 0x200));
                         }
                         char EncodedString[LinkshellStringLength] = {};
-                        EncodeStringLinkshell(_sql->GetStringData(5).c_str(), EncodedString);
+                        EncodeStringLinkshell(rset->getString("signature").c_str(), EncodedString);
                         PItem->setSignature(EncodedString);
                     }
                     else if (PItem->getFlag() & (ITEM_FLAG_INSCRIBABLE))
                     {
                         char EncodedString[SignatureStringLength] = {};
-                        EncodeStringSignature(_sql->GetStringData(5).c_str(), EncodedString);
+                        EncodeStringSignature(rset->getString("signature").c_str(), EncodedString);
                         PItem->setSignature(EncodedString);
                     }
 

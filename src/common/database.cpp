@@ -29,11 +29,17 @@
 namespace
 {
     std::unordered_map<PreparedStatement, std::pair<std::string, std::unique_ptr<sql::PreparedStatement>>> preparedStatements;
+    std::unordered_map<std::string, std::unique_ptr<sql::PreparedStatement>>                               lazyPreparedStatements;
 } // namespace
 
 std::unordered_map<PreparedStatement, std::pair<std::string, std::unique_ptr<sql::PreparedStatement>>>& db::getPreparedStatements()
 {
     return preparedStatements;
+}
+
+std::unordered_map<std::string, std::unique_ptr<sql::PreparedStatement>>& db::getLazyPreparedStatements()
+{
+    return lazyPreparedStatements;
 }
 
 void db::populatePreparedStatements(std::unique_ptr<sql::Connection>& conn)

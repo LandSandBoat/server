@@ -39,6 +39,7 @@ enum class PreparedStatement
 namespace db
 {
     std::unordered_map<PreparedStatement, std::pair<std::string, std::unique_ptr<sql::PreparedStatement>>>& getPreparedStatements();
+    std::unordered_map<std::string, std::unique_ptr<sql::PreparedStatement>>&                               getLazyPreparedStatements();
 
     void populatePreparedStatements(std::unique_ptr<sql::Connection>& conn);
 
@@ -127,5 +128,60 @@ namespace db
             ShowError(e.what());
             return nullptr;
         }
+    }
+
+    template <typename... Args>
+    std::unique_ptr<sql::ResultSet> lazyPreparedStmt(std::string const& query, Args&&... args)
+    {
+        TracyZoneScoped;
+
+        // TODO: Check this is pooled. If not; make it pooled.
+        static thread_local auto conn = getConnection();
+
+        auto& lazyPreparedStatements = getLazyPreparedStatements();
+
+        // If we don't have it, lazily make it
+        if (lazyPreparedStatements.find(query) == lazyPreparedStatements.end())
+        {
+            try
+            {
+                lazyPreparedStatements[query] = std::unique_ptr<sql::PreparedStatement>(conn->prepareStatement(query.c_str()));
+            }
+            catch (const std::exception& e)
+            {
+                ShowError("Failed to lazy prepare query: %s", str(query.c_str()));
+                ShowError(e.what());
+                return nullptr;
+            }
+        }
+
+        auto& stmt = lazyPreparedStatements[query];
+        try
+        {
+            // NOTE: 1-indexed!
+            auto counter = 1;
+            binder(stmt, counter, std::forward<Args>(args)...);
+            return std::unique_ptr<sql::ResultSet>(stmt->executeQuery());
+        }
+        catch (const std::exception& e)
+        {
+            ShowError("Query Failed: %s", str(query.c_str()));
+            ShowError(e.what());
+            return nullptr;
+        }
+    }
+
+    template <typename T>
+    void extractBlob(std::unique_ptr<sql::ResultSet>& rset, std::string const& blobKey, T* destination)
+    {
+        std::unique_ptr<std::istream> inStr(rset->getBlob(blobKey.c_str()));
+
+        char buff[sizeof(T)];
+        while (!inStr->eof())
+        {
+            inStr->read(buff, sizeof(buff));
+        }
+
+        std::memcpy(destination, buff, sizeof(T));
     }
 } // namespace db
