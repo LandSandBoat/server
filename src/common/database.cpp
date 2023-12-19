@@ -28,6 +28,9 @@
 
 namespace
 {
+    // TODO: Have multiple pooled unique_ptr's to connections, which can be "checked out" by multiple callers.
+    std::shared_ptr<sql::Connection> conn;
+
     std::unordered_map<PreparedStatement, std::pair<std::string, std::unique_ptr<sql::PreparedStatement>>> preparedStatements;
     std::unordered_map<std::string, std::unique_ptr<sql::PreparedStatement>>                               lazyPreparedStatements;
 } // namespace
@@ -42,7 +45,7 @@ std::unordered_map<std::string, std::unique_ptr<sql::PreparedStatement>>& db::ge
     return lazyPreparedStatements;
 }
 
-void db::populatePreparedStatements(std::unique_ptr<sql::Connection>& conn)
+void db::populatePreparedStatements(std::shared_ptr<sql::Connection> conn)
 {
     TracyZoneScoped;
 
@@ -56,9 +59,16 @@ void db::populatePreparedStatements(std::unique_ptr<sql::Connection>& conn)
     prep(PreparedStatement::Search_GetSearchComment, "SELECT seacom_message FROM accounts_sessions WHERE charid = (?)");
 }
 
-std::unique_ptr<sql::Connection> db::getConnection()
+std::shared_ptr<sql::Connection> db::getConnection()
 {
     TracyZoneScoped;
+
+    // TODO: Manual pooling?
+    // TODO: Locking of individual connections?
+    if (conn)
+    {
+        return conn;
+    }
 
     // NOTE: Driver is static, so it will only be initialized once.
     sql::Driver* driver = sql::mariadb::get_driver_instance();
@@ -72,7 +82,7 @@ std::unique_ptr<sql::Connection> db::getConnection()
         auto schema = settings::get<std::string>("network.SQL_DATABASE");
         auto url    = fmt::format("tcp://{}:{}", host, port);
 
-        std::unique_ptr<sql::Connection> conn(driver->connect(url.c_str(), login.c_str(), passwd.c_str()));
+        conn = std::shared_ptr<sql::Connection>(driver->connect(url.c_str(), login.c_str(), passwd.c_str()));
 
         conn->setSchema(schema.c_str());
         populatePreparedStatements(conn);

@@ -41,9 +41,9 @@ namespace db
     std::unordered_map<PreparedStatement, std::pair<std::string, std::unique_ptr<sql::PreparedStatement>>>& getPreparedStatements();
     std::unordered_map<std::string, std::unique_ptr<sql::PreparedStatement>>&                               getLazyPreparedStatements();
 
-    void populatePreparedStatements(std::unique_ptr<sql::Connection>& conn);
+    void populatePreparedStatements(std::shared_ptr<sql::Connection> conn);
 
-    auto getConnection() -> std::unique_ptr<sql::Connection>;
+    auto getConnection() -> std::shared_ptr<sql::Connection>;
 
     // WARNING: Everything in database-land is 1-indexed, not 0-indexed.
     auto query(std::string_view query) -> std::unique_ptr<sql::ResultSet>;
@@ -98,6 +98,8 @@ namespace db
         binder(stmt, counter, rest...);
     }
 
+    // If called with a PreparedStatement enum the query was prepared ahead of time, so it
+    // will be looked up and executed.
     template <typename... Args>
     std::unique_ptr<sql::ResultSet> preparedStmt(PreparedStatement preparedStmt, Args&&... args)
     {
@@ -130,8 +132,9 @@ namespace db
         }
     }
 
+    // If called with a string query the query will be lazily prepared/looked up and executed.
     template <typename... Args>
-    std::unique_ptr<sql::ResultSet> lazyPreparedStmt(std::string const& query, Args&&... args)
+    std::unique_ptr<sql::ResultSet> preparedStmt(std::string const& query, Args&&... args)
     {
         TracyZoneScoped;
 

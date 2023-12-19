@@ -973,7 +973,7 @@ namespace charutils
                             "WHERE charid = (?) "
                             "ORDER BY FIELD(location,0,1,9,2,3,4,5,6,7,8,10,11,12);";
 
-        auto rset = db::lazyPreparedStmt(query, PChar->id);
+        auto rset = db::preparedStmt(query, PChar->id);
         if (rset && rset->rowsCount())
         {
             while (rset->next())
