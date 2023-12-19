@@ -36,8 +36,9 @@
 
 enum CRAFT_TYPE
 {
-    CRAFT_SYNTHESIS   = 0,
-    CRAFT_DESYNTHESIS = 1,
+    CRAFT_SYNTHESIS         = 0,
+    CRAFT_DESYNTHESIS       = 1,
+    CRAFT_SYNTHESIS_NO_LOSS = 2,
 };
 
 class CItem;

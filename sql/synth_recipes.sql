@@ -395,7 +395,7 @@ INSERT INTO `synth_recipes` VALUES (3045,0,0,69,0,0,0,0,0,0,0,4098,4240,711,719,
 INSERT INTO `synth_recipes` VALUES (3046,0,0,70,37,0,0,0,19,0,0,4098,4240,654,717,719,893,932,0,0,0,17220,17227,17227,17227,1,1,1,1,'Heavy Crossbow'); -- one source 32 WW, one ?? Bone, others agree 10/29/21
 INSERT INTO `synth_recipes` VALUES (3047,0,0,70,18,0,0,0,0,0,0,4099,4241,662,725,725,0,0,0,0,0,12359,12370,12370,12370,1,1,1,1,'Hickory Shield'); -- ??SM, 8 & 18 posted (typo?), used 18 (iron sheet caps 22)
 INSERT INTO `synth_recipes` VALUES (3048,0,0,70,0,0,0,0,45,0,0,4098,4240,720,830,2513,2747,2762,0,0,0,18736,18736,18736,18736,1,1,1,1,'Fay Gendawa'); -- ??BO, 45/53 srcs, old era talk crafted at 39 - used 45
-INSERT INTO `synth_recipes` VALUES (3049,0,0,70,0,0,0,0,0,0,0,4102,4244,489,0,0,0,0,0,0,0,17386,17386,17386,17386,1,1,1,1,'Lu Shang\'s Fishing Rod'); -- multiple source agree 10/29/21
+INSERT INTO `synth_recipes` VALUES (3049,2,0,70,0,0,0,0,0,0,0,4102,4244,489,0,0,0,0,0,0,0,17386,17386,17386,17386,1,1,1,1,'Lu Shang\'s Fishing Rod'); -- multiple source agree 10/29/21
 -- INSERT INTO `synth_recipes` VALUES (3050,0,0,70,0,255,0,0,0,0,0,4099,4241,711,711,711,711,717,717,745,0,444,444,444,444,1,1,1,1,'Luxurious Chest');
 INSERT INTO `synth_recipes` VALUES (3501,0,0,71,0,0,0,0,0,0,0,4099,4241,719,719,927,0,0,0,0,0,17357,17833,17848,17848,1,1,1,1,'Ebony Harp');
 INSERT INTO `synth_recipes` VALUES (3502,0,0,71,0,0,0,0,0,0,0,4099,4241,662,716,716,716,0,0,0,0,95,95,95,95,1,1,1,1,'Water Barrel');
@@ -4741,7 +4741,7 @@ INSERT INTO `synth_recipes` VALUES (75518,1,0,0,98,0,0,0,0,0,0,4100,4242,13941,0
 INSERT INTO `synth_recipes` VALUES (75519,1,0,0,91,0,0,0,0,0,0,4100,4242,18406,0,0,0,0,0,0,0,2302,2302,2302,2302,1,1,2,2,'Jadagna_+1_Desynth');
 INSERT INTO `synth_recipes` VALUES (75520,1,0,0,0,85,0,0,0,0,0,4100,4242,13414,0,0,0,0,0,0,0,813,813,746,746,1,1,1,2,'Heavens_Earring_Desynth');
 INSERT INTO `synth_recipes` VALUES (75521,1,0,0,0,85,0,0,0,0,0,4100,4242,14719,0,0,0,0,0,0,0,813,813,746,746,1,1,1,2,'Heavens_Earring_+1_Desynth');
-INSERT INTO `synth_recipes` VALUES (75522,0,0,70,0,0,0,0,0,0,0,4102,4244,9091,0,0,0,0,0,0,0,19320,19320,19320,19320,1,1,1,1,'Lu Shang\'s Fishing Rod +1'); -- BGWiki and JP Wiki
+INSERT INTO `synth_recipes` VALUES (75522,2,0,70,0,0,0,0,0,0,0,4102,4244,9091,0,0,0,0,0,0,0,19320,19320,19320,19320,1,1,1,1,'Lu Shang\'s Fishing Rod +1'); -- BGWiki and JP Wiki
 INSERT INTO `synth_recipes` VALUES (75523,1,0,0,0,92,0,0,0,0,0,4100,4242,13185,0,0,0,0,0,0,0,650,650,1117,745,1,1,1,1,'Muscle_Belt_Desynth'); -- ffxiclopedia
 INSERT INTO `synth_recipes` VALUES (75524,1,0,0,100,0,0,0,0,0,0,4100,4242,17252,0,0,0,0,0,0,0,1231,717,654,655,1,1,1,1,'Culverin (desynth)'); -- FFXIClopedia and JP Wiki
 INSERT INTO `synth_recipes` VALUES (75525,1,0,0,0,0,0,0,96,0,0,4100,4242,15813,0,0,0,0,0,0,0,5466,5466,5466,5466,1,1,1,1,'Trumpet ring (desynth)');

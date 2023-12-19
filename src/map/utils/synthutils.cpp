@@ -47,6 +47,7 @@
 
 #include "charutils.h"
 #include "itemutils.h"
+#include "zone.h"
 #include "zoneutils.h"
 
 namespace synthutils
@@ -96,7 +97,7 @@ namespace synthutils
                 PChar->CraftContainer->setItem(10 + 2, (uint16)sql->GetUIntData(11), (uint8)sql->GetUIntData(15), 0); // RESULT_HQ
                 PChar->CraftContainer->setItem(10 + 3, (uint16)sql->GetUIntData(12), (uint8)sql->GetUIntData(16), 0); // RESULT_HQ2
                 PChar->CraftContainer->setItem(10 + 4, (uint16)sql->GetUIntData(13), (uint8)sql->GetUIntData(17), 0); // RESULT_HQ3
-                PChar->CraftContainer->setCraftType((uint8)sql->GetUIntData(18));                                     // Store if it's a desynth
+                PChar->CraftContainer->setCraftType((uint8)sql->GetUIntData(18));                                     // Store synth type (regular, desynth or "no material loss")
 
                 uint16 skillValue   = 0;
                 uint16 currentSkill = 0;
@@ -362,7 +363,7 @@ namespace synthutils
 
             // HQ success rate modifier.
             // See: https://www.bluegartr.com/threads/130586-CraftyMath-v2-Post-September-2017-Update page 3.
-            chanceHQ = chanceHQ + PChar->getMod(Mod::SYNTH_HQ_RATE) / 512;
+            chanceHQ = chanceHQ + PChar->getMod(Mod::SYNTH_HQ_RATE) * 100 / 512;
 
             // limit max hq chance
             if (chanceHQ > maxChanceHQ)
@@ -659,77 +660,87 @@ namespace synthutils
 
     int32 doSynthFail(CCharEntity* PChar)
     {
-        uint8 currentCraft     = PChar->CraftContainer->getInvSlotID(0);
-        int16 synthDifficulty  = getSynthDifficulty(PChar, currentCraft);
-        int16 modSynthFailRate = PChar->getMod(Mod::SYNTH_FAIL_RATE);
-
-        // We are able to get the correct elemental mod here by adding the element to it since they are in the same order
-        double reduction = PChar->getMod((Mod)((int32)Mod::SYNTH_FAIL_RATE_FIRE + PChar->CraftContainer->getType()));
-
-        // Similarly we get the correct craft mod here by adding the current craft to it since they are in the same order
-        reduction += PChar->getMod((Mod)((int32)Mod::SYNTH_FAIL_RATE_WOOD + (currentCraft - SKILL_WOODWORKING)));
-        reduction /= 100.0;
-
-        uint8 invSlotID  = 0;
-        uint8 nextSlotID = 0;
-        uint8 lostCount  = 0;
-        uint8 totalCount = 0;
-
-        double random   = 0;
-        double lostItem = std::clamp(0.15 - reduction + (synthDifficulty > 0 ? synthDifficulty / 20 : 0), 0.0, 1.0);
-
-        // Translation of JP wiki for the "Synthesis failure rate" modifier is "Synthetic material loss rate"
-        // see: http://wiki.ffo.jp/html/18416.html
-        lostItem += (double)modSynthFailRate * 0.01;
-
-        invSlotID = PChar->CraftContainer->getInvSlotID(1);
-
-        for (uint8 slotID = 1; slotID <= 8; ++slotID)
+        // Break material calculations.
+        if (PChar->CraftContainer->getCraftType() != CRAFT_SYNTHESIS_NO_LOSS) // If it's a synth where no materials can be lost (Ex: Lu Shan), skip break calculations.
         {
-            if (slotID != 8)
+            uint8 currentCraft     = PChar->CraftContainer->getInvSlotID(0);
+            int16 synthDifficulty  = getSynthDifficulty(PChar, currentCraft);
+            int16 modSynthFailRate = PChar->getMod(Mod::SYNTH_FAIL_RATE);
+
+            // We are able to get the correct elemental mod here by adding the element to it since they are in the same order
+            double reduction = PChar->getMod((Mod)((int32)Mod::SYNTH_FAIL_RATE_FIRE + PChar->CraftContainer->getType()));
+
+            // Similarly we get the correct craft mod here by adding the current craft to it since they are in the same order
+            reduction += PChar->getMod((Mod)((int32)Mod::SYNTH_FAIL_RATE_WOOD + (currentCraft - SKILL_WOODWORKING)));
+            reduction /= 100.0;
+
+            uint8 invSlotID  = 0;
+            uint8 nextSlotID = 0;
+            uint8 lostCount  = 0;
+            uint8 totalCount = 0;
+
+            double random   = 0;
+            double lostItem = std::clamp(0.15 - reduction + (synthDifficulty > 0 ? synthDifficulty / 20 : 0), 0.0, 1.0);
+
+            // Translation of JP wiki for the "Synthesis failure rate" modifier is "Synthetic material loss rate"
+            // see: http://wiki.ffo.jp/html/18416.html
+            lostItem += (double)modSynthFailRate * 0.01;
+
+            invSlotID = PChar->CraftContainer->getInvSlotID(1);
+
+            for (uint8 slotID = 1; slotID <= 8; ++slotID)
             {
-                nextSlotID = PChar->CraftContainer->getInvSlotID(slotID + 1);
-            }
-
-            random = xirand::GetRandomNumber(1.);
-
-            if (random < lostItem)
-            {
-                PChar->CraftContainer->setQuantity(slotID, 0);
-                lostCount++;
-            }
-            totalCount++;
-
-            if (invSlotID != nextSlotID)
-            {
-                CItem* PItem = PChar->getStorage(LOC_INVENTORY)->GetItem(invSlotID);
-
-                if (PItem != nullptr)
+                if (slotID != 8)
                 {
-                    PItem->setSubType(ITEM_UNLOCKED);
-                    PItem->setReserve(PItem->getReserve() - totalCount);
-                    totalCount = 0;
-
-                    if (lostCount > 0)
-                    {
-                        charutils::UpdateItem(PChar, LOC_INVENTORY, invSlotID, -(int32)lostCount);
-                        lostCount = 0;
-                    }
-                    else
-                    {
-                        PChar->pushPacket(new CInventoryAssignPacket(PItem, INV_NORMAL));
-                    }
+                    nextSlotID = PChar->CraftContainer->getInvSlotID(slotID + 1);
                 }
-                invSlotID = nextSlotID;
-            }
-            nextSlotID = 0;
-            if (invSlotID == 0xFF)
-            {
-                break;
+
+                random = xirand::GetRandomNumber(1.);
+
+                if (random < lostItem)
+                {
+                    PChar->CraftContainer->setQuantity(slotID, 0);
+                    lostCount++;
+                }
+                totalCount++;
+
+                if (invSlotID != nextSlotID)
+                {
+                    CItem* PItem = PChar->getStorage(LOC_INVENTORY)->GetItem(invSlotID);
+
+                    if (PItem != nullptr)
+                    {
+                        PItem->setSubType(ITEM_UNLOCKED);
+                        PItem->setReserve(PItem->getReserve() - totalCount);
+                        totalCount = 0;
+
+                        if (lostCount > 0)
+                        {
+                            charutils::UpdateItem(PChar, LOC_INVENTORY, invSlotID, -(int32)lostCount);
+                            lostCount = 0;
+                        }
+                        else
+                        {
+                            PChar->pushPacket(new CInventoryAssignPacket(PItem, INV_NORMAL));
+                        }
+                    }
+                    invSlotID = nextSlotID;
+                }
+                nextSlotID = 0;
+                if (invSlotID == 0xFF)
+                {
+                    break;
+                }
             }
         }
 
-        if (PChar->loc.zone->GetID() != 255 && PChar->loc.zone->GetID() != 0)
+        // Push "Synthesis failed" messages.
+        uint16 currentZone = PChar->loc.zone->GetID();
+
+        if (currentZone &&
+            currentZone != ZONE_MONORAIL_PRE_RELEASE &&
+            currentZone != ZONE_49 &&
+            currentZone < MAX_ZONEID)
         {
             PChar->loc.zone->PushPacket(PChar, CHAR_INRANGE, new CSynthResultMessagePacket(PChar, SYNTH_FAIL));
         }
