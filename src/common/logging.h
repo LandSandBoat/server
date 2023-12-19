@@ -36,6 +36,7 @@
 // TODO: Remove this
 #define FMT_CONSTEVAL
 
+#include <fmt/args.h>
 #include <fmt/chrono.h>
 #include <fmt/core.h>
 #include <fmt/format.h>

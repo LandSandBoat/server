@@ -56,6 +56,9 @@ void lua_init()
     // Bind tostring(...) globally
     lua.set_function("tostring", &lua_to_string);
 
+    // Bind fmt(...) globally
+    lua.set_function("fmt", &lua_fmt);
+
     // Attempt to startup lldebugger
     auto result = lua["require"]("lldebugger");
     if (result.valid())
@@ -198,4 +201,43 @@ void lua_print(sol::variadic_args va)
     TracyZoneScoped;
 
     ShowLua(lua_to_string(va).c_str());
+}
+
+std::string lua_fmt(std::string fmtStr, sol::variadic_args va)
+{
+    fmt::dynamic_format_arg_store<fmt::format_context> store;
+    for (auto const& arg : va)
+    {
+        switch (arg.get_type())
+        {
+            case sol::type::none:
+                [[fallthrough]];
+            case sol::type::lua_nil:
+            {
+                store.push_back(nullptr);
+                break;
+            }
+            case sol::type::string:
+            {
+                store.push_back(arg.as<std::string>());
+                break;
+            }
+            case sol::type::number:
+            {
+                store.push_back(arg.as<double>());
+                break;
+            }
+            case sol::type::boolean:
+            {
+                store.push_back(arg.as<bool>());
+                break;
+            }
+            default:
+            {
+                store.push_back(lua_to_string_depth(arg, 0));
+                break;
+            }
+        }
+    }
+    return fmt::vformat(fmtStr, store);
 }
