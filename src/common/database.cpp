@@ -28,12 +28,19 @@
 
 namespace
 {
+    std::recursive_mutex bottleneck;
+
     // TODO: Have multiple pooled unique_ptr's to connections, which can be "checked out" by multiple callers.
     std::shared_ptr<sql::Connection> conn;
 
     std::unordered_map<PreparedStatement, std::pair<std::string, std::unique_ptr<sql::PreparedStatement>>> preparedStatements;
     std::unordered_map<std::string, std::unique_ptr<sql::PreparedStatement>>                               lazyPreparedStatements;
 } // namespace
+
+std::recursive_mutex& db::detail::getMutex()
+{
+    return bottleneck;
+}
 
 std::unordered_map<PreparedStatement, std::pair<std::string, std::unique_ptr<sql::PreparedStatement>>>& db::detail::getPreparedStatements()
 {
@@ -70,6 +77,8 @@ std::shared_ptr<sql::Connection> db::detail::getConnection()
         return conn;
     }
 
+    std::scoped_lock lock(db::detail::getMutex());
+
     // NOTE: Driver is static, so it will only be initialized once.
     sql::Driver* driver = sql::mariadb::get_driver_instance();
 
@@ -99,6 +108,8 @@ std::shared_ptr<sql::Connection> db::detail::getConnection()
 std::unique_ptr<sql::ResultSet> db::query(std::string_view query)
 {
     TracyZoneScoped;
+
+    std::scoped_lock lock(db::detail::getMutex());
 
     // TODO: Check this is pooled. If not; make it pooled.
     static thread_local auto conn = db::detail::getConnection();
