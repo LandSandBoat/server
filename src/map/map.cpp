@@ -180,6 +180,11 @@ map_session_data_t* mapsession_createsession(uint32 ip, uint16 port)
 int32 do_init(int32 argc, char** argv)
 {
     TracyZoneScoped;
+
+#ifdef TRACY_ENABLE
+    ShowInfo("*** TRACY IS ENABLED ***");
+#endif // TRACY_ENABLE
+
     ShowInfo("do_init: begin server initialization");
     map_ip.s_addr = 0;
 
