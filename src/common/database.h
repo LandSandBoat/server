@@ -24,6 +24,7 @@
 #include "cbasetypes.h"
 
 #include <memory>
+#include <mutex>
 #include <string>
 
 #include <conncpp.hpp>
@@ -40,6 +41,8 @@ namespace db
 {
     namespace detail
     {
+        std::recursive_mutex& getMutex();
+
         std::unordered_map<PreparedStatement, std::pair<std::string, std::unique_ptr<sql::PreparedStatement>>>& getPreparedStatements();
         std::unordered_map<std::string, std::unique_ptr<sql::PreparedStatement>>&                               getLazyPreparedStatements();
 
@@ -105,6 +108,8 @@ namespace db
     {
         TracyZoneScoped;
 
+        std::scoped_lock lock(db::detail::getMutex());
+
         // TODO: Check this is pooled. If not; make it pooled.
         static thread_local auto conn = db::detail::getConnection();
 
@@ -121,7 +126,7 @@ namespace db
         {
             // NOTE: 1-indexed!
             auto counter = 1;
-            binder(stmt, counter, std::forward<Args>(args)...);
+            db::detail::binder(stmt, counter, std::forward<Args>(args)...);
             return std::unique_ptr<sql::ResultSet>(stmt->executeQuery());
         }
         catch (const std::exception& e)
@@ -137,6 +142,8 @@ namespace db
     std::unique_ptr<sql::ResultSet> preparedStmt(std::string const& query, Args&&... args)
     {
         TracyZoneScoped;
+
+        std::scoped_lock lock(db::detail::getMutex());
 
         // TODO: Check this is pooled. If not; make it pooled.
         static thread_local auto conn = db::detail::getConnection();
@@ -178,14 +185,14 @@ namespace db
     }
 
     template <typename T>
-    void extractBlob(std::unique_ptr<sql::ResultSet>& rset, std::string const& blobKey, T* destination)
+    void extractBlob(std::unique_ptr<sql::ResultSet>& rset, std::string const& blobKey, T& destination)
     {
         TracyZoneScoped;
 
         std::unique_ptr<std::istream> inStr(rset->getBlob(blobKey.c_str()));
         if (!inStr)
         {
-            std::memset(destination, 0x00, sizeof(T));
+            std::memset(&destination, 0x00, sizeof(T));
             return;
         }
 
@@ -195,7 +202,7 @@ namespace db
             inStr->read(buff, sizeof(buff));
         }
 
-        std::memcpy(destination, buff, sizeof(T));
+        std::memcpy(&destination, buff, sizeof(T));
     }
 
     // WARNING: Everything in database-land is 1-indexed, not 0-indexed.
