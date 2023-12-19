@@ -31,5 +31,6 @@ void lua_init();
 auto lua_to_string_depth(sol::object const& obj, std::size_t depth) -> std::string;
 auto lua_to_string(sol::variadic_args va) -> std::string;
 void lua_print(sol::variadic_args va);
+auto lua_fmt(std::string fmtStr, sol::variadic_args va) -> std::string;
 
 #endif // _LUA_H
