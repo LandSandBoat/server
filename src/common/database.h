@@ -174,7 +174,14 @@ namespace db
     template <typename T>
     void extractBlob(std::unique_ptr<sql::ResultSet>& rset, std::string const& blobKey, T* destination)
     {
+        TracyZoneScoped;
+
         std::unique_ptr<std::istream> inStr(rset->getBlob(blobKey.c_str()));
+        if (!inStr)
+        {
+            std::memset(destination, 0x00, sizeof(T));
+            return;
+        }
 
         char buff[sizeof(T)];
         while (!inStr->eof())
