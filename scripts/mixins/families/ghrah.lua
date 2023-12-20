@@ -9,7 +9,8 @@ g_mixins.families.ghrah = function(ghrahMob)
         mob:setAnimationSub(0)
         mob:setAggressive(false)
         mob:setLocalVar("roamTime", os.time())
-        if mob:getXPos() > 0 then
+        local spawnPos = mob:getSpawnPos()
+        if spawnPos.x > 0 then
             mob:setLocalVar("form2", 2)
         else
             mob:setLocalVar("form2", 3)
@@ -88,16 +89,21 @@ g_mixins.families.ghrah = function(ghrahMob)
             mob:setAggressive(true)
 
             if mob:getAnimationSub() == 2 then
-                mob:addMod(xi.mod.ATTP, 50) -- spider form att+
+                --mob:addMod(xi.mod.ATTP, 50) -- spider form att+
+                mob:setMobMod(xi.mobMod.WEAPON_BONUS, mob:getWeaponDmg()) -- entering spider form base dmg+
             end
         elseif
             mob:getAnimationSub() == mob:getLocalVar("form2") and
             os.time() - roamTime > 60
         then
+            if mob:getAnimationSub() == 2 then
+                -- mob:delMod(xi.mod.ATTP, 50) -- coming out of spider form att-
+                mob:setMobMod(xi.mobMod.WEAPON_BONUS, 0) -- exiting spider form base dmg+
+            end
+
             mob:setAnimationSub(0)
             mob:setAggressive(false)
             mob:setLocalVar("roamTime", os.time())
-            mob:delMod(xi.mod.ATTP, 50)
         end
 
         -- TODO: Merge with Empty mixin
@@ -183,16 +189,21 @@ g_mixins.families.ghrah = function(ghrahMob)
             mob:setLocalVar("changeTime", mob:getBattleTime())
 
             if mob:getAnimationSub() == 2 then
-                mob:addMod(xi.mod.ATTP, 50) -- spider form att+
+                --mob:addMod(xi.mod.ATTP, 50) -- spider form att+
+                mob:setMobMod(xi.mobMod.WEAPON_BONUS, mob:getWeaponDmg()) -- entering spider form base dmg+
             end
         elseif
             mob:getAnimationSub() == mob:getLocalVar("form2") and
             mob:getBattleTime() - changeTime > 60
         then
+            if mob:getAnimationSub() == 2 then
+                --mob:delMod(xi.mod.ATTP, 50) -- coming out of spider form att-
+                mob:setMobMod(xi.mobMod.WEAPON_BONUS, 0) -- exiting spider form base dmg-
+            end
+
             mob:setAnimationSub(0)
             mob:setAggressive(false)
             mob:setLocalVar("changeTime", mob:getBattleTime())
-            mob:delMod(xi.mod.ATTP, 50)
         end
     end)
 end

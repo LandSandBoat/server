@@ -39,7 +39,16 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local accmod = 1
     local dmgmod = 1.25
     local info = xi.mobskills.mobPhysicalMove(mob, target, skill, numhits, accmod, dmgmod, xi.mobskills.physicalTpBonus.CRIT_VARIES, 1.1, 1.2, 1.3)
-    local dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.SLASHING, info.hitslanded)
+    local shadows = info.hitslanded
+
+    if
+        mob:getFamily() >= 122 and -- Ghrah
+        mob:getFamily() <= 124
+    then
+        shadows = xi.mobskills.shadowBehavior.IGNORE_SHADOWS
+    end
+
+    local dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.SLASHING, shadows)
 
     if not skill:hasMissMsg() then
         -- AA EV: Approx 900 damage to 75 DRG/35 THF.  400 to a NIN/WAR in Arhat, but took shadows.
