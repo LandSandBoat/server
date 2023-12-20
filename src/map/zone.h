@@ -42,8 +42,7 @@ enum ZONEID : uint16
 {
     // Note: "residential zones" aren't really zones of their own.
     // It's more of a sub zone - the dats for messages and entities will all be from the zone you entered from.
-    ZONE_RESIDENTIAL_AREA = 0, // Old Tech Demonstration zone from pre-release (aka "the monorail place")
-                               // The Above should NOT be labeled "RESIDENTIAL_AREA"
+    ZONE_MONORAIL_PRE_RELEASE           = 0, // Old Tech Demonstration zone from pre-release (aka "the monorail place")
     ZONE_PHANAUET_CHANNEL               = 1,
     ZONE_CARPENTERS_LANDING             = 2,
     ZONE_MANACLIPPER                    = 3,
