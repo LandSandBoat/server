@@ -658,80 +658,94 @@ namespace synthutils
      *                                                                         *
      **************************************************************************/
 
+    int32 handleMaterialLoss(CCharEntity* PChar)
+    {
+        uint8 currentCraft     = PChar->CraftContainer->getInvSlotID(0);
+        int16 synthDifficulty  = getSynthDifficulty(PChar, currentCraft);
+        int16 modSynthFailRate = PChar->getMod(Mod::SYNTH_FAIL_RATE);
+
+        // We are able to get the correct elemental mod here by adding the element to it since they are in the same order
+        double reduction = PChar->getMod((Mod)((int32)Mod::SYNTH_FAIL_RATE_FIRE + PChar->CraftContainer->getType()));
+
+        // Similarly we get the correct craft mod here by adding the current craft to it since they are in the same order
+        reduction += PChar->getMod((Mod)((int32)Mod::SYNTH_FAIL_RATE_WOOD + (currentCraft - SKILL_WOODWORKING)));
+        reduction /= 100.0;
+
+        uint8 invSlotID  = 0;
+        uint8 nextSlotID = 0;
+        uint8 lostCount  = 0;
+        uint8 totalCount = 0;
+
+        double random   = 0;
+        double lostItem = std::clamp(0.15 - reduction + (synthDifficulty > 0 ? synthDifficulty / 20 : 0), 0.0, 1.0);
+
+        // Translation of JP wiki for the "Synthesis failure rate" modifier is "Synthetic material loss rate"
+        // see: http://wiki.ffo.jp/html/18416.html
+        lostItem += (double)modSynthFailRate * 0.01;
+
+        invSlotID = PChar->CraftContainer->getInvSlotID(1);
+
+        for (uint8 slotID = 1; slotID <= 8; ++slotID)
+        {
+            if (slotID != 8)
+            {
+                nextSlotID = PChar->CraftContainer->getInvSlotID(slotID + 1);
+            }
+
+            random = xirand::GetRandomNumber(1.);
+
+            if (random < lostItem)
+            {
+                PChar->CraftContainer->setQuantity(slotID, 0);
+                lostCount++;
+            }
+            totalCount++;
+
+            if (invSlotID != nextSlotID)
+            {
+                CItem* PItem = PChar->getStorage(LOC_INVENTORY)->GetItem(invSlotID);
+
+                if (PItem != nullptr)
+                {
+                    PItem->setSubType(ITEM_UNLOCKED);
+                    PItem->setReserve(PItem->getReserve() - totalCount);
+                    totalCount = 0;
+
+                    if (lostCount > 0)
+                    {
+                        charutils::UpdateItem(PChar, LOC_INVENTORY, invSlotID, -(int32)lostCount);
+                        lostCount = 0;
+                    }
+                    else
+                    {
+                        PChar->pushPacket(new CInventoryAssignPacket(PItem, INV_NORMAL));
+                    }
+                }
+                invSlotID = nextSlotID;
+            }
+            nextSlotID = 0;
+            if (invSlotID == 0xFF)
+            {
+                break;
+            }
+        }
+
+        return 0;
+    }
+
+    /**************************************************************************
+     *                                                                         *
+     *  Synthesis failed.                                                      *
+     *  Sends messages to characters in range and to yourself.                 *
+     *                                                                         *
+     **************************************************************************/
+
     int32 doSynthFail(CCharEntity* PChar)
     {
         // Break material calculations.
-        if (PChar->CraftContainer->getCraftType() != CRAFT_SYNTHESIS_NO_LOSS) // If it's a synth where no materials can be lost (Ex: Lu Shan), skip break calculations.
+        if (PChar->CraftContainer->getCraftType() != CRAFT_SYNTHESIS_NO_LOSS) // If it's a synth where no materials can be lost, skip break calculations.
         {
-            uint8 currentCraft     = PChar->CraftContainer->getInvSlotID(0);
-            int16 synthDifficulty  = getSynthDifficulty(PChar, currentCraft);
-            int16 modSynthFailRate = PChar->getMod(Mod::SYNTH_FAIL_RATE);
-
-            // We are able to get the correct elemental mod here by adding the element to it since they are in the same order
-            double reduction = PChar->getMod((Mod)((int32)Mod::SYNTH_FAIL_RATE_FIRE + PChar->CraftContainer->getType()));
-
-            // Similarly we get the correct craft mod here by adding the current craft to it since they are in the same order
-            reduction += PChar->getMod((Mod)((int32)Mod::SYNTH_FAIL_RATE_WOOD + (currentCraft - SKILL_WOODWORKING)));
-            reduction /= 100.0;
-
-            uint8 invSlotID  = 0;
-            uint8 nextSlotID = 0;
-            uint8 lostCount  = 0;
-            uint8 totalCount = 0;
-
-            double random   = 0;
-            double lostItem = std::clamp(0.15 - reduction + (synthDifficulty > 0 ? synthDifficulty / 20 : 0), 0.0, 1.0);
-
-            // Translation of JP wiki for the "Synthesis failure rate" modifier is "Synthetic material loss rate"
-            // see: http://wiki.ffo.jp/html/18416.html
-            lostItem += (double)modSynthFailRate * 0.01;
-
-            invSlotID = PChar->CraftContainer->getInvSlotID(1);
-
-            for (uint8 slotID = 1; slotID <= 8; ++slotID)
-            {
-                if (slotID != 8)
-                {
-                    nextSlotID = PChar->CraftContainer->getInvSlotID(slotID + 1);
-                }
-
-                random = xirand::GetRandomNumber(1.);
-
-                if (random < lostItem)
-                {
-                    PChar->CraftContainer->setQuantity(slotID, 0);
-                    lostCount++;
-                }
-                totalCount++;
-
-                if (invSlotID != nextSlotID)
-                {
-                    CItem* PItem = PChar->getStorage(LOC_INVENTORY)->GetItem(invSlotID);
-
-                    if (PItem != nullptr)
-                    {
-                        PItem->setSubType(ITEM_UNLOCKED);
-                        PItem->setReserve(PItem->getReserve() - totalCount);
-                        totalCount = 0;
-
-                        if (lostCount > 0)
-                        {
-                            charutils::UpdateItem(PChar, LOC_INVENTORY, invSlotID, -(int32)lostCount);
-                            lostCount = 0;
-                        }
-                        else
-                        {
-                            PChar->pushPacket(new CInventoryAssignPacket(PItem, INV_NORMAL));
-                        }
-                    }
-                    invSlotID = nextSlotID;
-                }
-                nextSlotID = 0;
-                if (invSlotID == 0xFF)
-                {
-                    break;
-                }
-            }
+            handleMaterialLoss(PChar);
         }
 
         // Push "Synthesis failed" messages.
