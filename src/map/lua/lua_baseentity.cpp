@@ -2088,7 +2088,6 @@ void CLuaBaseEntity::setElevator(uint8 id, uint32 lowerDoor, uint32 upperDoor, u
 
     elevator.zoneID = m_PBaseEntity->loc.zone->GetID();
 
-    elevator.Elevator->name.resize(10);
     CTransportHandler::getInstance()->insertElevator(elevator);
 }
 
@@ -2706,9 +2705,7 @@ void CLuaBaseEntity::updateToEntireZone(uint8 statusID, uint8 animation, sol::ob
     // If this flag is high, update the NPC's name to match the current time
     if (updateForTime == true)
     {
-        PNpc->name.resize(10);
-        ref<uint32>(&PNpc->name[0], 4) = CVanaTime::getInstance()->getVanaTime();
-        PNpc->name[8]                  = 8;
+        PNpc->SetLocalVar("TransportTimestamp", CVanaTime::getInstance()->getVanaTime());
     }
 
     PNpc->loc.zone->UpdateEntityPacket(PNpc, ENTITY_UPDATE, UPDATE_COMBAT, true);

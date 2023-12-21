@@ -22,6 +22,7 @@
 #include "common/socket.h"
 #include "common/timer.h"
 #include "common/utils.h"
+#include "common/vana_time.h"
 
 #include <cstring>
 
@@ -33,6 +34,25 @@
 #include "entities/petentity.h"
 #include "entities/trustentity.h"
 #include "status_effect_container.h"
+
+std::string getTransportNPCName(CBaseEntity* PEntity)
+{
+    bool isElevator = PEntity->look.size == MODEL_ELEVATOR;
+    auto strSize    = isElevator ? 10 : 8;
+
+    std::string str(strSize, '\0');
+    std::memcpy(str.data() + 0, PEntity->name.data(), PEntity->name.size());
+
+    auto timestamp = PEntity->GetLocalVar("TransportTimestamp");
+    std::memcpy(str.data() + 4, &timestamp, 4);
+
+    if (isElevator)
+    {
+        std::memset(str.data() + 8, 8, 1);
+    }
+
+    return str;
+}
 
 CEntityUpdatePacket::CEntityUpdatePacket(CBaseEntity* PEntity, ENTITYUPDATE type, uint8 updatemask)
 {
@@ -139,9 +159,15 @@ void CEntityUpdatePacket::updateWith(CBaseEntity* PEntity, ENTITYUPDATE type, ui
             // TODO: Unify name logic
             if (updatemask & UPDATE_NAME)
             {
+                auto name = PNpc->getName();
+                if (PNpc->look.size == MODEL_ELEVATOR || PNpc->look.size == MODEL_SHIP)
+                {
+                    name = getTransportNPCName(PNpc);
+                }
+
                 // depending on size of name, this can be 0x20, 0x22, or 0x24
                 this->setSize(0x48);
-                std::memcpy(data + 0x34, PEntity->getName().c_str(), std::min<size_t>(PEntity->getName().size(), PacketNameLength));
+                std::memcpy(data + 0x34, name.c_str(), std::min<size_t>(name.size(), PacketNameLength));
             }
         }
         break;
@@ -222,12 +248,19 @@ void CEntityUpdatePacket::updateWith(CBaseEntity* PEntity, ENTITYUPDATE type, ui
         }
         break;
         case MODEL_DOOR:
-        case MODEL_ELEVATOR:
-        case MODEL_SHIP:
         {
             this->setSize(0x48);
             ref<uint16>(0x30) = PEntity->look.size;
             std::memcpy(data + 0x34, PEntity->getName().c_str(), (PEntity->getName().size() > 12 ? 12 : PEntity->getName().size()));
+        }
+        break;
+        case MODEL_SHIP:
+        case MODEL_ELEVATOR:
+        {
+            this->setSize(0x48);
+            ref<uint16>(0x30) = PEntity->look.size;
+            auto name         = getTransportNPCName(PEntity);
+            std::memcpy(data + 0x34, name.data(), name.size());
         }
         break;
     }
