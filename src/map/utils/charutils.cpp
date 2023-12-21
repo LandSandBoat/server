@@ -338,366 +338,346 @@ namespace charutils
      *                                                                       *
      ************************************************************************/
 
-    void LoadChar(CCharEntity* PChar)
+    CCharEntity* LoadChar(uint32 charId)
     {
         TracyZoneScoped;
+
+        CCharEntity* PChar = new CCharEntity();
+        PChar->id          = charId;
 
         uint8  meritPoints = 0;
         uint16 limitPoints = 0;
         int32  HP          = 0;
         int32  MP          = 0;
 
+        // TODO: extract into LoadFromCharsSQL
         const char* fmtQuery = "SELECT "
-                               "charname,"                     //  0
-                               "pos_zone,"                     //  1
-                               "pos_prevzone,"                 //  2
-                               "pos_rot,"                      //  3
-                               "pos_x,"                        //  4
-                               "pos_y,"                        //  5
-                               "pos_z,"                        //  6
-                               "moghouse,"                     //  7
-                               "boundary,"                     //  8
-                               "home_zone,"                    //  9
-                               "home_rot,"                     // 10
-                               "home_x,"                       // 11
-                               "home_y,"                       // 12
-                               "home_z,"                       // 13
-                               "nation,"                       // 14
-                               "quests,"                       // 15
-                               "keyitems,"                     // 16
-                               "abilities,"                    // 17
-                               "weaponskills,"                 // 18
-                               "titles,"                       // 19
-                               "zones,"                        // 20
-                               "missions,"                     // 21
-                               "assault,"                      // 22
-                               "campaign,"                     // 23
-                               "eminence,"                     // 24
-                               "playtime,"                     // 25
-                               "campaign_allegiance,"          // 26
-                               "isstylelocked,"                // 27
-                               "moghancement,"                 // 28
-                               "UNIX_TIMESTAMP(`lastupdate`)," // 29
-                               "languages,"                    // 30
-                               "chatfilters "                  // 31
+                               "charname, "
+                               "nation, "
+                               "pos_zone, "
+                               "pos_prevzone, "
+                               "pos_rot, "
+                               "pos_x, "
+                               "pos_y, "
+                               "pos_z, "
+                               "moghouse, "
+                               "boundary, "
+                               "home_zone, "
+                               "home_rot, "
+                               "home_x, "
+                               "home_y, "
+                               "home_z, "
+                               "missions, "
+                               "assault, "
+                               "campaign, "
+                               "eminence, "
+                               "quests, "
+                               "keyitems, "
+                               "abilities, "
+                               "weaponskills, "
+                               "titles, "
+                               "zones, "
+                               "playtime, "
+                               "gmlevel, "
+                               "languages, "
+                               "mentor, "
+                               "job_master, "
+                               "campaign_allegiance, "
+                               "isstylelocked, "
+                               "nnameflags, "
+                               "chatfilters, "
+                               "moghancement, "
+                               "UNIX_TIMESTAMP(`lastupdate`) AS lastonline "
                                "FROM chars "
-                               "WHERE charid = %u";
+                               "WHERE charid = (?)";
 
-        int32 ret = _sql->Query(fmtQuery, PChar->id);
-
-        if (ret != SQL_ERROR && _sql->NumRows() != 0 && _sql->NextRow() == SQL_SUCCESS)
+        auto rset = db::preparedStmt(fmtQuery, PChar->id);
+        if (rset && rset->rowsCount() && rset->next())
         {
             PChar->targid = 0x400;
-            PChar->SetName(_sql->GetStringData(0));
+            PChar->SetName(rset->getString("charname").c_str());
 
-            PChar->loc.destination = (uint16)_sql->GetIntData(1);
-            PChar->loc.prevzone    = (uint16)_sql->GetIntData(2);
-            PChar->loc.p.rotation  = (uint8)_sql->GetIntData(3);
-            PChar->loc.p.x         = _sql->GetFloatData(4);
-            PChar->loc.p.y         = _sql->GetFloatData(5);
-            PChar->loc.p.z         = _sql->GetFloatData(6);
-            PChar->m_moghouseID    = _sql->GetIntData(7);
-            PChar->loc.boundary    = (uint16)_sql->GetIntData(8);
+            PChar->loc.destination = (uint16)rset->getInt("pos_zone");
+            PChar->loc.prevzone    = (uint16)rset->getInt("pos_prevzone");
+            PChar->loc.p.rotation  = (uint8)rset->getInt("pos_rot");
+            PChar->loc.p.x         = rset->getFloat("pos_x");
+            PChar->loc.p.y         = rset->getFloat("pos_y");
+            PChar->loc.p.z         = rset->getFloat("pos_z");
+            PChar->m_moghouseID    = rset->getInt("moghouse");
+            PChar->loc.boundary    = (uint16)rset->getInt("boundary");
 
-            PChar->profile.home_point.destination = (uint16)_sql->GetIntData(9);
-            PChar->profile.home_point.p.rotation  = (uint8)_sql->GetIntData(10);
-            PChar->profile.home_point.p.x         = _sql->GetFloatData(11);
-            PChar->profile.home_point.p.y         = _sql->GetFloatData(12);
-            PChar->profile.home_point.p.z         = _sql->GetFloatData(13);
+            PChar->profile.home_point.destination = (uint16)rset->getInt("home_zone");
+            PChar->profile.home_point.p.rotation  = (uint8)rset->getInt("home_rot");
+            PChar->profile.home_point.p.x         = rset->getFloat("home_x");
+            PChar->profile.home_point.p.y         = rset->getFloat("home_y");
+            PChar->profile.home_point.p.z         = rset->getFloat("home_z");
 
-            PChar->profile.nation = (uint8)_sql->GetIntData(14);
+            PChar->profile.nation = (uint8)rset->getInt("nation");
 
-            size_t length = 0;
-            char*  quests = nullptr;
-            _sql->GetData(15, &quests, &length);
-            memcpy(PChar->m_questLog, quests, (length > sizeof(PChar->m_questLog) ? sizeof(PChar->m_questLog) : length));
+            db::extractBlob(rset, "quests", PChar->m_questLog);
+            db::extractBlob(rset, "keyitems", PChar->keys);
+            db::extractBlob(rset, "abilities", PChar->m_LearnedAbilities);
+            db::extractBlob(rset, "weaponskills", PChar->m_LearnedWeaponskills);
+            db::extractBlob(rset, "titles", PChar->m_TitleList);
+            db::extractBlob(rset, "zones", PChar->m_ZonesList);
+            db::extractBlob(rset, "missions", PChar->m_missionLog);
+            db::extractBlob(rset, "assault", PChar->m_assaultLog);
+            db::extractBlob(rset, "campaign", PChar->m_campaignLog);
+            db::extractBlob(rset, "eminence", PChar->m_eminenceLog);
 
-            length         = 0;
-            char* keyitems = nullptr;
-            _sql->GetData(16, &keyitems, &length);
-            memcpy((void*)&PChar->keys, keyitems, (length > sizeof(PChar->keys) ? sizeof(PChar->keys) : length));
+            PChar->SetPlayTime(rset->getUInt("playtime"));
+            PChar->profile.campaign_allegiance = (uint8)rset->getInt("campaign_allegiance");
+            PChar->setStyleLocked(rset->getInt("isstylelocked") == 1);
+            PChar->SetMoghancement(rset->getUInt("moghancement"));
+            PChar->lastOnline      = rset->getUInt("lastonline");
+            PChar->search.language = (uint8)rset->getUInt("languages");
+            PChar->chatFilterFlags = rset->getUInt64("chatfilters");
 
-            length          = 0;
-            char* abilities = nullptr;
-            _sql->GetData(17, &abilities, &length);
-            memcpy(PChar->m_LearnedAbilities, abilities, (length > sizeof(PChar->m_LearnedAbilities) ? sizeof(PChar->m_LearnedAbilities) : length));
-
-            length             = 0;
-            char* weaponskills = nullptr;
-            _sql->GetData(18, &weaponskills, &length);
-            memcpy(&PChar->m_LearnedWeaponskills, weaponskills,
-                   (length > sizeof(PChar->m_LearnedWeaponskills) ? sizeof(PChar->m_LearnedWeaponskills) : length));
-
-            length       = 0;
-            char* titles = nullptr;
-            _sql->GetData(19, &titles, &length);
-            memcpy(PChar->m_TitleList, titles, (length > sizeof(PChar->m_TitleList) ? sizeof(PChar->m_TitleList) : length));
-
-            length      = 0;
-            char* zones = nullptr;
-            _sql->GetData(20, &zones, &length);
-            memcpy(PChar->m_ZonesList, zones, (length > sizeof(PChar->m_ZonesList) ? sizeof(PChar->m_ZonesList) : length));
-
-            length         = 0;
-            char* missions = nullptr;
-            _sql->GetData(21, &missions, &length);
-            memcpy(PChar->m_missionLog, missions, (length > sizeof(PChar->m_missionLog) ? sizeof(PChar->m_missionLog) : length));
-
-            length        = 0;
-            char* assault = nullptr;
-            _sql->GetData(22, &assault, &length);
-            memcpy(&PChar->m_assaultLog, assault, (length > sizeof(PChar->m_assaultLog) ? sizeof(PChar->m_assaultLog) : length));
-
-            length         = 0;
-            char* campaign = nullptr;
-            _sql->GetData(23, &campaign, &length);
-            memcpy(&PChar->m_campaignLog, campaign, (length > sizeof(PChar->m_campaignLog) ? sizeof(PChar->m_campaignLog) : length));
-
-            length         = 0;
-            char* eminence = nullptr;
-            _sql->GetData(24, &eminence, &length);
-            memcpy(&PChar->m_eminenceLog, eminence, (length > sizeof(PChar->m_eminenceLog) ? sizeof(PChar->m_eminenceLog) : length));
-
-            PChar->SetPlayTime(_sql->GetUIntData(25));
-            PChar->profile.campaign_allegiance = (uint8)_sql->GetIntData(26);
-            PChar->setStyleLocked(_sql->GetIntData(27) == 1);
-            PChar->SetMoghancement(_sql->GetUIntData(28));
-            PChar->lastOnline      = _sql->GetUIntData(29);
-            PChar->search.language = (uint8)_sql->GetUIntData(30);
-            PChar->chatFilterFlags = _sql->GetUInt64Data(31);
+            PChar->m_GMlevel             = (uint8)rset->getUInt("gmlevel");
+            PChar->m_mentorUnlocked      = rset->getUInt("mentor") > 0;
+            PChar->m_jobMasterDisplay    = rset->getUInt("job_master") > 0;
+            PChar->menuConfigFlags.flags = rset->getUInt("nnameflags");
         }
 
+        // TODO: Rename LoadFromCharSpellsSQL
         LoadSpells(PChar);
 
+        // TODO: LoadFromCharProfileSQL
         fmtQuery = "SELECT "
-                   "rank_points,"          // 0
-                   "rank_sandoria,"        // 1
-                   "rank_bastok,"          // 2
-                   "rank_windurst,"        // 3
-                   "fame_sandoria,"        // 4
-                   "fame_bastok,"          // 5
-                   "fame_windurst,"        // 6
-                   "fame_norg, "           // 7
-                   "fame_jeuno, "          // 8
-                   "fame_aby_konschtat, "  // 9
-                   "fame_aby_tahrongi, "   // 10
-                   "fame_aby_latheine, "   // 11
-                   "fame_aby_misareaux, "  // 12
-                   "fame_aby_vunkerl, "    // 13
-                   "fame_aby_attohwa, "    // 14
-                   "fame_aby_altepa, "     // 15
-                   "fame_aby_grauberg, "   // 16
-                   "fame_aby_uleguerand, " // 17
-                   "fame_adoulin,"         // 18
-                   "unity_leader "         // 19
+                   "rank_points,"
+                   "rank_sandoria,"
+                   "rank_bastok,"
+                   "rank_windurst,"
+                   "fame_sandoria,"
+                   "fame_bastok,"
+                   "fame_windurst,"
+                   "fame_norg, "
+                   "fame_jeuno, "
+                   "fame_aby_konschtat, "
+                   "fame_aby_tahrongi, "
+                   "fame_aby_latheine, "
+                   "fame_aby_misareaux, "
+                   "fame_aby_vunkerl, "
+                   "fame_aby_attohwa, "
+                   "fame_aby_altepa, "
+                   "fame_aby_grauberg, "
+                   "fame_aby_uleguerand, "
+                   "fame_adoulin,"
+                   "unity_leader "
                    "FROM char_profile "
-                   "WHERE charid = %u;";
+                   "WHERE charid = (?);";
 
-        ret = _sql->Query(fmtQuery, PChar->id);
-
-        if (ret != SQL_ERROR && _sql->NumRows() != 0 && _sql->NextRow() == SQL_SUCCESS)
+        rset = db::preparedStmt(fmtQuery, PChar->id);
+        if (rset && rset->rowsCount() && rset->next())
         {
-            PChar->profile.rankpoints = _sql->GetUIntData(0);
+            PChar->profile.rankpoints = rset->getUInt("rank_points");
 
-            PChar->profile.rank[0] = (uint8)_sql->GetIntData(1);
-            PChar->profile.rank[1] = (uint8)_sql->GetIntData(2);
-            PChar->profile.rank[2] = (uint8)_sql->GetIntData(3);
+            PChar->profile.rank[0] = (uint8)rset->getInt("rank_points");
+            PChar->profile.rank[1] = (uint8)rset->getInt("rank_sandoria");
+            PChar->profile.rank[2] = (uint8)rset->getInt("rank_bastok");
 
-            PChar->profile.fame[0]      = (uint16)_sql->GetIntData(4);  // Sandoria
-            PChar->profile.fame[1]      = (uint16)_sql->GetIntData(5);  // Bastok
-            PChar->profile.fame[2]      = (uint16)_sql->GetIntData(6);  // Windurst
-            PChar->profile.fame[3]      = (uint16)_sql->GetIntData(7);  // Norg
-            PChar->profile.fame[4]      = (uint16)_sql->GetIntData(8);  // Jeuno
-            PChar->profile.fame[5]      = (uint16)_sql->GetIntData(9);  // AbysseaKonschtat
-            PChar->profile.fame[6]      = (uint16)_sql->GetIntData(10); // AbysseaTahrongi
-            PChar->profile.fame[7]      = (uint16)_sql->GetIntData(11); // AbysseaLaTheine
-            PChar->profile.fame[8]      = (uint16)_sql->GetIntData(12); // AbysseaMisareaux
-            PChar->profile.fame[9]      = (uint16)_sql->GetIntData(13); // AbysseaVunkerl
-            PChar->profile.fame[10]     = (uint16)_sql->GetIntData(14); // AbysseaAttohwa
-            PChar->profile.fame[11]     = (uint16)_sql->GetIntData(15); // AbysseaAltepa
-            PChar->profile.fame[12]     = (uint16)_sql->GetIntData(16); // AbysseaGrauberg
-            PChar->profile.fame[13]     = (uint16)_sql->GetIntData(17); // AbysseaUleguerand
-            PChar->profile.fame[14]     = (uint16)_sql->GetIntData(18); // Adoulin
-            PChar->profile.unity_leader = (uint8)_sql->GetUIntData(19);
+            PChar->profile.fame[0]      = (uint16)rset->getInt("fame_sandoria");
+            PChar->profile.fame[1]      = (uint16)rset->getInt("fame_bastok");
+            PChar->profile.fame[2]      = (uint16)rset->getInt("fame_windurst");
+            PChar->profile.fame[3]      = (uint16)rset->getInt("fame_norg");
+            PChar->profile.fame[4]      = (uint16)rset->getInt("fame_jeuno");
+            PChar->profile.fame[5]      = (uint16)rset->getInt("fame_aby_konschtat");
+            PChar->profile.fame[6]      = (uint16)rset->getInt("fame_aby_tahrongi");
+            PChar->profile.fame[7]      = (uint16)rset->getInt("fame_aby_latheine");
+            PChar->profile.fame[8]      = (uint16)rset->getInt("fame_aby_misareaux");
+            PChar->profile.fame[9]      = (uint16)rset->getInt("fame_aby_vunkerl");
+            PChar->profile.fame[10]     = (uint16)rset->getInt("fame_aby_attohwa");
+            PChar->profile.fame[11]     = (uint16)rset->getInt("fame_aby_altepa");
+            PChar->profile.fame[12]     = (uint16)rset->getInt("fame_aby_grauberg");
+            PChar->profile.fame[13]     = (uint16)rset->getInt("fame_aby_uleguerand");
+            PChar->profile.fame[14]     = (uint16)rset->getInt("fame_adoulin");
+            PChar->profile.unity_leader = (uint8)rset->getUInt("unity_leader");
         }
 
         roeutils::onCharLoad(PChar);
 
+        // TODO: LoadFromCharStorageSQL
         fmtQuery = "SELECT "
-                   "inventory," // 0
-                   "safe,"      // 1
-                   "locker,"    // 2
-                   "satchel,"   // 3
-                   "sack,"      // 4
-                   "`case`,"    // 5
-                   "wardrobe,"  // 6
-                   "wardrobe2," // 7
-                   "wardrobe3," // 8
-                   "wardrobe4," // 9
-                   "wardrobe5," // 10
-                   "wardrobe6," // 11
-                   "wardrobe7," // 12
-                   "wardrobe8 " // 13
+                   "inventory,"
+                   "safe,"
+                   "locker,"
+                   "satchel,"
+                   "sack,"
+                   "`case`,"
+                   "wardrobe,"
+                   "wardrobe2,"
+                   "wardrobe3,"
+                   "wardrobe4,"
+                   "wardrobe5,"
+                   "wardrobe6,"
+                   "wardrobe7,"
+                   "wardrobe8 "
                    "FROM char_storage "
-                   "WHERE charid = %u;";
+                   "WHERE charid = (?);";
 
-        ret = _sql->Query(fmtQuery, PChar->id);
-
-        if (ret != SQL_ERROR && _sql->NumRows() != 0 && _sql->NextRow() == SQL_SUCCESS)
+        rset = db::preparedStmt(fmtQuery, PChar->id);
+        if (rset && rset->rowsCount() && rset->next())
         {
-            PChar->getStorage(LOC_INVENTORY)->AddBuff((uint8)_sql->GetIntData(0));
-            PChar->getStorage(LOC_MOGSAFE)->AddBuff((uint8)_sql->GetIntData(1));
-            PChar->getStorage(LOC_MOGSAFE2)->AddBuff((uint8)_sql->GetIntData(1));
+            PChar->getStorage(LOC_INVENTORY)->AddBuff((uint8)rset->getInt("inventory"));
+            PChar->getStorage(LOC_MOGSAFE)->AddBuff((uint8)rset->getInt("safe"));
+            PChar->getStorage(LOC_MOGSAFE2)->AddBuff((uint8)rset->getInt("safe"));
             PChar->getStorage(LOC_TEMPITEMS)->AddBuff(50);
-            PChar->getStorage(LOC_MOGLOCKER)->AddBuff((uint8)_sql->GetIntData(2));
-            PChar->getStorage(LOC_MOGSATCHEL)->AddBuff((uint8)_sql->GetIntData(3));
-            PChar->getStorage(LOC_MOGSACK)->AddBuff((uint8)_sql->GetIntData(4));
-            PChar->getStorage(LOC_MOGCASE)->AddBuff((uint8)_sql->GetIntData(5));
+            PChar->getStorage(LOC_MOGLOCKER)->AddBuff((uint8)rset->getInt("locker"));
+            PChar->getStorage(LOC_MOGSATCHEL)->AddBuff((uint8)rset->getInt("satchel"));
+            PChar->getStorage(LOC_MOGSACK)->AddBuff((uint8)rset->getInt("sack"));
+            PChar->getStorage(LOC_MOGCASE)->AddBuff((uint8)rset->getInt("case"));
 
-            PChar->getStorage(LOC_WARDROBE)->AddBuff((uint8)_sql->GetIntData(6));
-            PChar->getStorage(LOC_WARDROBE2)->AddBuff((uint8)_sql->GetIntData(7));
-            PChar->getStorage(LOC_WARDROBE3)->AddBuff((uint8)_sql->GetIntData(8));
-            PChar->getStorage(LOC_WARDROBE4)->AddBuff((uint8)_sql->GetIntData(9));
+            PChar->getStorage(LOC_WARDROBE)->AddBuff((uint8)rset->getInt("wardrobe"));
+            PChar->getStorage(LOC_WARDROBE2)->AddBuff((uint8)rset->getInt("wardrobe2"));
+            PChar->getStorage(LOC_WARDROBE3)->AddBuff((uint8)rset->getInt("wardrobe3"));
+            PChar->getStorage(LOC_WARDROBE4)->AddBuff((uint8)rset->getInt("wardrobe4"));
 
-            PChar->getStorage(LOC_WARDROBE5)->AddBuff((uint8)_sql->GetIntData(10));
-            PChar->getStorage(LOC_WARDROBE6)->AddBuff((uint8)_sql->GetIntData(11));
-            PChar->getStorage(LOC_WARDROBE7)->AddBuff((uint8)_sql->GetIntData(12));
-            PChar->getStorage(LOC_WARDROBE8)->AddBuff((uint8)_sql->GetIntData(13));
+            PChar->getStorage(LOC_WARDROBE5)->AddBuff((uint8)rset->getInt("wardrobe5"));
+            PChar->getStorage(LOC_WARDROBE6)->AddBuff((uint8)rset->getInt("wardrobe6"));
+            PChar->getStorage(LOC_WARDROBE7)->AddBuff((uint8)rset->getInt("wardrobe7"));
+            PChar->getStorage(LOC_WARDROBE8)->AddBuff((uint8)rset->getInt("wardrobe8"));
 
             // NOTE: Not from the db, hard-coded to 10!
             PChar->getStorage(LOC_RECYCLEBIN)->AddBuff(10);
         }
 
+        // TODO: LoadFromCharLookSQL
         fmtQuery = "SELECT face, race, size, head, body, hands, legs, feet, main, sub, ranged "
                    "FROM char_look "
-                   "WHERE charid = %u;";
+                   "WHERE charid = (?);";
 
-        ret = _sql->Query(fmtQuery, PChar->id);
-
-        if (ret != SQL_ERROR && _sql->NumRows() != 0 && _sql->NextRow() == SQL_SUCCESS)
+        rset = db::preparedStmt(fmtQuery, PChar->id);
+        if (rset && rset->rowsCount() && rset->next())
         {
-            PChar->look.face = (uint8)_sql->GetIntData(0);
-            PChar->look.race = (uint8)_sql->GetIntData(1);
-            PChar->look.size = (uint8)_sql->GetIntData(2);
+            PChar->look.face = (uint8)rset->getInt("face");
+            PChar->look.race = (uint8)rset->getInt("race");
+            PChar->look.size = (uint8)rset->getInt("size");
 
-            PChar->look.head   = (uint16)_sql->GetIntData(3);
-            PChar->look.body   = (uint16)_sql->GetIntData(4);
-            PChar->look.hands  = (uint16)_sql->GetIntData(5);
-            PChar->look.legs   = (uint16)_sql->GetIntData(6);
-            PChar->look.feet   = (uint16)_sql->GetIntData(7);
-            PChar->look.main   = (uint16)_sql->GetIntData(8);
-            PChar->look.sub    = (uint16)_sql->GetIntData(9);
-            PChar->look.ranged = (uint16)_sql->GetIntData(10);
-            memcpy(&PChar->mainlook, &PChar->look, sizeof(PChar->look));
+            PChar->look.head   = (uint16)rset->getInt("head");
+            PChar->look.body   = (uint16)rset->getInt("body");
+            PChar->look.hands  = (uint16)rset->getInt("hands");
+            PChar->look.legs   = (uint16)rset->getInt("legs");
+            PChar->look.feet   = (uint16)rset->getInt("feet");
+            PChar->look.main   = (uint16)rset->getInt("main");
+            PChar->look.sub    = (uint16)rset->getInt("sub");
+            PChar->look.ranged = (uint16)rset->getInt("ranged");
+
+            std::memcpy(&PChar->mainlook, &PChar->look, sizeof(PChar->look));
         }
 
-        fmtQuery = "SELECT head, body, hands, legs, feet, main, sub, ranged FROM char_style WHERE charid = %u;";
-        ret      = _sql->Query(fmtQuery, PChar->id);
-
-        if (ret != SQL_ERROR && _sql->NumRows() != 0 && _sql->NextRow() == SQL_SUCCESS)
+        // LoadFromCharStyleSQL
+        fmtQuery = "SELECT head, body, hands, legs, feet, main, sub, ranged FROM char_style WHERE charid = (?);";
+        rset     = db::preparedStmt(fmtQuery, PChar->id);
+        if (rset && rset->rowsCount() && rset->next())
         {
-            PChar->styleItems[SLOT_HEAD]   = (uint16)_sql->GetIntData(0);
-            PChar->styleItems[SLOT_BODY]   = (uint16)_sql->GetIntData(1);
-            PChar->styleItems[SLOT_HANDS]  = (uint16)_sql->GetIntData(2);
-            PChar->styleItems[SLOT_LEGS]   = (uint16)_sql->GetIntData(3);
-            PChar->styleItems[SLOT_FEET]   = (uint16)_sql->GetIntData(4);
-            PChar->styleItems[SLOT_MAIN]   = (uint16)_sql->GetIntData(5);
-            PChar->styleItems[SLOT_SUB]    = (uint16)_sql->GetIntData(6);
-            PChar->styleItems[SLOT_RANGED] = (uint16)_sql->GetIntData(7);
+            PChar->styleItems[SLOT_HEAD]   = (uint16)rset->getInt("head");
+            PChar->styleItems[SLOT_BODY]   = (uint16)rset->getInt("body");
+            PChar->styleItems[SLOT_HANDS]  = (uint16)rset->getInt("hands");
+            PChar->styleItems[SLOT_LEGS]   = (uint16)rset->getInt("legs");
+            PChar->styleItems[SLOT_FEET]   = (uint16)rset->getInt("feet");
+            PChar->styleItems[SLOT_MAIN]   = (uint16)rset->getInt("main");
+            PChar->styleItems[SLOT_SUB]    = (uint16)rset->getInt("sub");
+            PChar->styleItems[SLOT_RANGED] = (uint16)rset->getInt("ranged");
         }
 
+        // LoadFromCharJobsSQL
         fmtQuery = "SELECT unlocked, genkai, war, mnk, whm, blm, rdm, thf, pld, drk, bst, brd, rng, sam, nin, drg, smn, blu, cor, pup, dnc, sch, geo, run "
                    "FROM char_jobs "
-                   "WHERE charid = %u;";
+                   "WHERE charid = (?);";
 
-        ret = _sql->Query(fmtQuery, PChar->id);
-
-        if (ret != SQL_ERROR && _sql->NumRows() != 0 && _sql->NextRow() == SQL_SUCCESS)
+        rset = db::preparedStmt(fmtQuery, PChar->id);
+        if (rset && rset->rowsCount() && rset->next())
         {
-            PChar->jobs.unlocked = _sql->GetUIntData(0);
-            PChar->jobs.genkai   = (uint8)_sql->GetUIntData(1);
+            PChar->jobs.unlocked = rset->getInt("unlocked");
+            PChar->jobs.genkai   = (uint8)rset->getUInt("genkai");
 
-            PChar->jobs.job[JOB_WAR] = (uint8)_sql->GetIntData(2);
-            PChar->jobs.job[JOB_MNK] = (uint8)_sql->GetIntData(3);
-            PChar->jobs.job[JOB_WHM] = (uint8)_sql->GetIntData(4);
-            PChar->jobs.job[JOB_BLM] = (uint8)_sql->GetIntData(5);
-            PChar->jobs.job[JOB_RDM] = (uint8)_sql->GetIntData(6);
-            PChar->jobs.job[JOB_THF] = (uint8)_sql->GetIntData(7);
-            PChar->jobs.job[JOB_PLD] = (uint8)_sql->GetIntData(8);
-            PChar->jobs.job[JOB_DRK] = (uint8)_sql->GetIntData(9);
-            PChar->jobs.job[JOB_BST] = (uint8)_sql->GetIntData(10);
-            PChar->jobs.job[JOB_BRD] = (uint8)_sql->GetIntData(11);
-            PChar->jobs.job[JOB_RNG] = (uint8)_sql->GetIntData(12);
-            PChar->jobs.job[JOB_SAM] = (uint8)_sql->GetIntData(13);
-            PChar->jobs.job[JOB_NIN] = (uint8)_sql->GetIntData(14);
-            PChar->jobs.job[JOB_DRG] = (uint8)_sql->GetIntData(15);
-            PChar->jobs.job[JOB_SMN] = (uint8)_sql->GetIntData(16);
-            PChar->jobs.job[JOB_BLU] = (uint8)_sql->GetIntData(17);
-            PChar->jobs.job[JOB_COR] = (uint8)_sql->GetIntData(18);
-            PChar->jobs.job[JOB_PUP] = (uint8)_sql->GetIntData(19);
-            PChar->jobs.job[JOB_DNC] = (uint8)_sql->GetIntData(20);
-            PChar->jobs.job[JOB_SCH] = (uint8)_sql->GetIntData(21);
-            PChar->jobs.job[JOB_GEO] = (uint8)_sql->GetIntData(22);
-            PChar->jobs.job[JOB_RUN] = (uint8)_sql->GetIntData(23);
+            PChar->jobs.job[JOB_WAR] = (uint8)rset->getInt("war");
+            PChar->jobs.job[JOB_MNK] = (uint8)rset->getInt("mnk");
+            PChar->jobs.job[JOB_WHM] = (uint8)rset->getInt("whm");
+            PChar->jobs.job[JOB_BLM] = (uint8)rset->getInt("blm");
+            PChar->jobs.job[JOB_RDM] = (uint8)rset->getInt("rdm");
+            PChar->jobs.job[JOB_THF] = (uint8)rset->getInt("thf");
+            PChar->jobs.job[JOB_PLD] = (uint8)rset->getInt("pld");
+            PChar->jobs.job[JOB_DRK] = (uint8)rset->getInt("drk");
+            PChar->jobs.job[JOB_BST] = (uint8)rset->getInt("bst");
+            PChar->jobs.job[JOB_BRD] = (uint8)rset->getInt("brd");
+            PChar->jobs.job[JOB_RNG] = (uint8)rset->getInt("rng");
+            PChar->jobs.job[JOB_SAM] = (uint8)rset->getInt("sam");
+            PChar->jobs.job[JOB_NIN] = (uint8)rset->getInt("nin");
+            PChar->jobs.job[JOB_DRG] = (uint8)rset->getInt("drg");
+            PChar->jobs.job[JOB_SMN] = (uint8)rset->getInt("smn");
+            PChar->jobs.job[JOB_BLU] = (uint8)rset->getInt("blu");
+            PChar->jobs.job[JOB_COR] = (uint8)rset->getInt("cor");
+            PChar->jobs.job[JOB_PUP] = (uint8)rset->getInt("pup");
+            PChar->jobs.job[JOB_DNC] = (uint8)rset->getInt("dnc");
+            PChar->jobs.job[JOB_SCH] = (uint8)rset->getInt("sch");
+            PChar->jobs.job[JOB_GEO] = (uint8)rset->getInt("geo");
+            PChar->jobs.job[JOB_RUN] = (uint8)rset->getInt("run");
         }
 
+        // LoadFromCharExpSQL
         fmtQuery = "SELECT mode, war, mnk, whm, blm, rdm, thf, pld, drk, bst, brd, rng, sam, nin, drg, smn, blu, cor, pup, dnc, sch, geo, run, merits, limits "
                    "FROM char_exp "
-                   "WHERE charid = %u;";
+                   "WHERE charid = (?);";
 
-        ret = _sql->Query(fmtQuery, PChar->id);
-
-        if (ret != SQL_ERROR && _sql->NumRows() != 0 && _sql->NextRow() == SQL_SUCCESS)
+        rset = db::preparedStmt(fmtQuery, PChar->id);
+        if (rset && rset->rowsCount() && rset->next())
         {
-            PChar->MeritMode         = (uint8)_sql->GetIntData(0);
-            PChar->jobs.exp[JOB_WAR] = (uint16)_sql->GetIntData(1);
-            PChar->jobs.exp[JOB_MNK] = (uint16)_sql->GetIntData(2);
-            PChar->jobs.exp[JOB_WHM] = (uint16)_sql->GetIntData(3);
-            PChar->jobs.exp[JOB_BLM] = (uint16)_sql->GetIntData(4);
-            PChar->jobs.exp[JOB_RDM] = (uint16)_sql->GetIntData(5);
-            PChar->jobs.exp[JOB_THF] = (uint16)_sql->GetIntData(6);
-            PChar->jobs.exp[JOB_PLD] = (uint16)_sql->GetIntData(7);
-            PChar->jobs.exp[JOB_DRK] = (uint16)_sql->GetIntData(8);
-            PChar->jobs.exp[JOB_BST] = (uint16)_sql->GetIntData(9);
-            PChar->jobs.exp[JOB_BRD] = (uint16)_sql->GetIntData(10);
-            PChar->jobs.exp[JOB_RNG] = (uint16)_sql->GetIntData(11);
-            PChar->jobs.exp[JOB_SAM] = (uint16)_sql->GetIntData(12);
-            PChar->jobs.exp[JOB_NIN] = (uint16)_sql->GetIntData(13);
-            PChar->jobs.exp[JOB_DRG] = (uint16)_sql->GetIntData(14);
-            PChar->jobs.exp[JOB_SMN] = (uint16)_sql->GetIntData(15);
-            PChar->jobs.exp[JOB_BLU] = (uint16)_sql->GetIntData(16);
-            PChar->jobs.exp[JOB_COR] = (uint16)_sql->GetIntData(17);
-            PChar->jobs.exp[JOB_PUP] = (uint16)_sql->GetIntData(18);
-            PChar->jobs.exp[JOB_DNC] = (uint16)_sql->GetIntData(19);
-            PChar->jobs.exp[JOB_SCH] = (uint16)_sql->GetIntData(20);
-            PChar->jobs.exp[JOB_GEO] = (uint16)_sql->GetIntData(21);
-            PChar->jobs.exp[JOB_RUN] = (uint16)_sql->GetIntData(22);
-            meritPoints              = (uint8)_sql->GetIntData(23);
-            limitPoints              = (uint16)_sql->GetIntData(24);
+            PChar->MeritMode = (uint8)rset->getInt("mode");
+
+            PChar->jobs.exp[JOB_WAR] = (uint16)rset->getInt("war");
+            PChar->jobs.exp[JOB_MNK] = (uint16)rset->getInt("mnk");
+            PChar->jobs.exp[JOB_WHM] = (uint16)rset->getInt("whm");
+            PChar->jobs.exp[JOB_BLM] = (uint16)rset->getInt("blm");
+            PChar->jobs.exp[JOB_RDM] = (uint16)rset->getInt("rdm");
+            PChar->jobs.exp[JOB_THF] = (uint16)rset->getInt("thf");
+            PChar->jobs.exp[JOB_PLD] = (uint16)rset->getInt("pld");
+            PChar->jobs.exp[JOB_DRK] = (uint16)rset->getInt("drk");
+            PChar->jobs.exp[JOB_BST] = (uint16)rset->getInt("bst");
+            PChar->jobs.exp[JOB_BRD] = (uint16)rset->getInt("brd");
+            PChar->jobs.exp[JOB_RNG] = (uint16)rset->getInt("rng");
+            PChar->jobs.exp[JOB_SAM] = (uint16)rset->getInt("sam");
+            PChar->jobs.exp[JOB_NIN] = (uint16)rset->getInt("nin");
+            PChar->jobs.exp[JOB_DRG] = (uint16)rset->getInt("drg");
+            PChar->jobs.exp[JOB_SMN] = (uint16)rset->getInt("smn");
+            PChar->jobs.exp[JOB_BLU] = (uint16)rset->getInt("blu");
+            PChar->jobs.exp[JOB_COR] = (uint16)rset->getInt("cor");
+            PChar->jobs.exp[JOB_PUP] = (uint16)rset->getInt("pup");
+            PChar->jobs.exp[JOB_DNC] = (uint16)rset->getInt("dnc");
+            PChar->jobs.exp[JOB_SCH] = (uint16)rset->getInt("sch");
+            PChar->jobs.exp[JOB_GEO] = (uint16)rset->getInt("geo");
+            PChar->jobs.exp[JOB_RUN] = (uint16)rset->getInt("run");
+
+            meritPoints = (uint8)rset->getInt("merits");
+            limitPoints = (uint16)rset->getInt("limits");
         }
 
+        // TODO: LoadFromCharStatsSQL
         fmtQuery = "SELECT nameflags, mjob, sjob, hp, mp, mhflag, title, bazaar_message, zoning, "
                    "pet_id, pet_type, pet_hp, pet_mp, pet_level "
-                   "FROM char_stats WHERE charid = %u;";
+                   "FROM char_stats WHERE charid = (?);";
 
-        ret          = _sql->Query(fmtQuery, PChar->id);
         uint8 zoning = 0;
-
-        if (ret != SQL_ERROR && _sql->NumRows() != 0 && _sql->NextRow() == SQL_SUCCESS)
+         rset   = db::preparedStmt(fmtQuery, PChar->id);
+        if (rset && rset->rowsCount() && rset->next())
         {
-            PChar->nameflags.flags = _sql->GetUIntData(0);
+            PChar->nameflags.flags =rset->getUInt("nameflags");
 
-            PChar->SetMJob(_sql->GetUIntData(1));
-            PChar->SetSJob(_sql->GetUIntData(2));
+            PChar->SetMJob(rset->getUInt("mjob"));
+            PChar->SetSJob(rset->getUInt("sjob"));
 
-            HP = _sql->GetIntData(3);
-            MP = _sql->GetIntData(4);
+            HP = rset->getInt("hp");
+            MP = rset->getInt("mp");
 
-            PChar->profile.mhflag = (uint16)_sql->GetIntData(5);
-            PChar->profile.title  = (uint16)_sql->GetIntData(6);
+            PChar->profile.mhflag = (uint16)rset->getInt("mhflag");
+            PChar->profile.title  = (uint16)rset->getInt("title");
 
-            int8* bazaarMessage = _sql->GetData(7);
-            if (bazaarMessage != nullptr)
+            // TODO:
+            /*
+            std::array<uint8, 512> bazaarMessageArray;
+            db::extractBlob(rset, "bazaar_message", bazaarMessageArray);
+            const char* bazaarMessageStr = reinterpret_cast<const char*>(bazaarMessageArray.data());
+            if (bazaarMessageStr != nullptr)
             {
                 PChar->bazaar.message.insert(0, (char*)_sql->GetData(7));
             }
@@ -705,18 +685,19 @@ namespace charutils
             {
                 PChar->bazaar.message = '\0';
             }
+            */
 
-            zoning = _sql->GetUIntData(8);
+            zoning = rset->getUInt("zoning");
 
             // Determine if the pet should be respawned.
-            int16 petHP = _sql->GetUIntData(11);
+            int16 petHP = rset->getUInt("pet_hp");
             if (petHP)
             {
                 PChar->petZoningInfo.petHP        = petHP;
-                PChar->petZoningInfo.petID        = _sql->GetUIntData(9);
-                PChar->petZoningInfo.petMP        = _sql->GetIntData(12);
-                PChar->petZoningInfo.petType      = static_cast<PET_TYPE>(_sql->GetUIntData(10));
-                PChar->petZoningInfo.petLevel     = _sql->GetUIntData(13);
+                PChar->petZoningInfo.petID        = rset->getUInt("pet_id");
+                PChar->petZoningInfo.petMP        = rset->getInt("pet_mp");
+                PChar->petZoningInfo.petType      = static_cast<PET_TYPE>(rset->getUInt("pet_type"));
+                PChar->petZoningInfo.petLevel     = rset->getUInt("pet_level");
                 PChar->petZoningInfo.respawnPet   = true;
                 PChar->petZoningInfo.jugSpawnTime = PChar->getCharVar("jugpet-spawn-time");
                 PChar->petZoningInfo.jugDuration  = PChar->getCharVar("jugpet-duration-seconds");
@@ -726,7 +707,7 @@ namespace charutils
             }
         }
 
-        _sql->Query("UPDATE char_stats SET zoning = 0 WHERE charid = %u", PChar->id);
+        db::query(fmt::format("UPDATE char_stats SET zoning = 0 WHERE charid = {}", PChar->id));
 
         if (zoning == 2)
         {
@@ -740,19 +721,20 @@ namespace charutils
         PChar->SetMLevel(PChar->jobs.job[PChar->GetMJob()]);
         PChar->SetSLevel(PChar->jobs.job[PChar->GetSJob()]);
 
-        fmtQuery = "SELECT id, time, recast FROM char_recast WHERE charid = %u;";
+        // TODO: LoadFromCharRecastSQL
+        fmtQuery = "SELECT id, time, recast FROM char_recast WHERE charid = (?);";
 
-        ret = _sql->Query(fmtQuery, PChar->id);
-        if (ret != SQL_ERROR && _sql->NumRows() != 0)
+        rset = db::preparedStmt(fmtQuery, PChar->id);
+        if (rset && rset->rowsCount())
         {
-            while (_sql->NextRow() == SQL_SUCCESS)
+            while (rset->next())
             {
-                uint32    cast_time  = _sql->GetUIntData(1);
-                uint32    recast     = _sql->GetUIntData(2);
+                uint32    cast_time  = rset->getUInt("time");
+                uint32    recast     = rset->getUInt("recast");
                 time_t    now        = time(nullptr);
                 uint32    chargeTime = 0;
                 uint8     maxCharges = 0;
-                Charge_t* charge     = ability::GetCharge(PChar, _sql->GetUIntData(0));
+                Charge_t* charge     = ability::GetCharge(PChar, rset->getUInt("id"));
                 if (charge != nullptr)
                 {
                     chargeTime = charge->chargeTime;
@@ -760,120 +742,71 @@ namespace charutils
                 }
                 if (now < cast_time + recast)
                 {
-                    PChar->PRecastContainer->Load(RECAST_ABILITY, _sql->GetUIntData(0), (cast_time + recast - (uint32)now), chargeTime, maxCharges);
+                    PChar->PRecastContainer->Load(RECAST_ABILITY, rset->getUInt("id"), (cast_time + recast - (uint32)now), chargeTime, maxCharges);
                 }
             }
         }
 
+        // TODO: LoadFromCharSkillsSQL
         fmtQuery = "SELECT skillid, value, rank "
                    "FROM char_skills "
-                   "WHERE charid = %u;";
+                   "WHERE charid = (?);";
 
-        ret = _sql->Query(fmtQuery, PChar->id);
-
-        if (ret != SQL_ERROR && _sql->NumRows() != 0)
+        rset = db::preparedStmt(fmtQuery, PChar->id);
+        if (rset && rset->rowsCount())
         {
-            while (_sql->NextRow() == SQL_SUCCESS)
+            while (rset->next())
             {
-                uint8 SkillID = (uint8)_sql->GetUIntData(0);
-
+                uint8 SkillID = (uint8)rset->getInt("skillid");
                 if (SkillID < MAX_SKILLTYPE)
                 {
-                    PChar->RealSkills.skill[SkillID] = (uint16)_sql->GetUIntData(1);
+                    PChar->RealSkills.skill[SkillID] = (uint16)rset->getInt("value");
                     if (SkillID >= SKILL_FISHING)
                     {
-                        PChar->RealSkills.rank[SkillID] = (uint8)_sql->GetUIntData(2);
+                        PChar->RealSkills.rank[SkillID] = (uint8)rset->getInt("rank");
                     }
                 }
             }
         }
 
+        // LoadFromCharUnlocksSQL
         fmtQuery = "SELECT outpost_sandy, outpost_bastok, outpost_windy, runic_portal, maw, "
                    "campaign_sandy, campaign_bastok, campaign_windy, homepoints, survivals, "
                    "abyssea_conflux, waypoints, eschan_portals, claimed_deeds, unique_event "
                    "FROM char_unlocks "
-                   "WHERE charid = %u;";
+                   "WHERE charid = (?);";
 
-        ret = _sql->Query(fmtQuery, PChar->id);
-
-        if (ret != SQL_ERROR && _sql->NumRows() != 0 && _sql->NextRow() == SQL_SUCCESS)
+        rset = db::preparedStmt(fmtQuery, PChar->id);
+        if (rset && rset->rowsCount() && rset->next())
         {
-            PChar->teleport.outpostSandy   = _sql->GetUIntData(0);
-            PChar->teleport.outpostBastok  = _sql->GetUIntData(1);
-            PChar->teleport.outpostWindy   = _sql->GetUIntData(2);
-            PChar->teleport.runicPortal    = _sql->GetUIntData(3);
-            PChar->teleport.pastMaw        = _sql->GetUIntData(4);
-            PChar->teleport.campaignSandy  = _sql->GetUIntData(5);
-            PChar->teleport.campaignBastok = _sql->GetUIntData(6);
-            PChar->teleport.campaignWindy  = _sql->GetUIntData(7);
+            PChar->teleport.outpostSandy   = rset->getUInt("outpost_sandy");
+            PChar->teleport.outpostBastok  = rset->getUInt("outpost_bastok");
+            PChar->teleport.outpostWindy   = rset->getUInt("outpost_windy");
+            PChar->teleport.runicPortal    = rset->getUInt("runic_portal");
+            PChar->teleport.pastMaw        = rset->getUInt("maw");
+            PChar->teleport.campaignSandy  = rset->getUInt("campaign_sandy");
+            PChar->teleport.campaignBastok = rset->getUInt("campaign_bastok");
+            PChar->teleport.campaignWindy  = rset->getUInt("campaign_windy");
 
-            size_t length = 0;
-            char*  buf    = nullptr;
-            _sql->GetData(8, &buf, &length);
-            memcpy(&PChar->teleport.homepoint, buf, (length > sizeof(PChar->teleport.homepoint) ? sizeof(PChar->teleport.homepoint) : length));
-
-            length = 0;
-            buf    = nullptr;
-            _sql->GetData(9, &buf, &length);
-            memcpy(&PChar->teleport.survival, buf, (length > sizeof(PChar->teleport.survival) ? sizeof(PChar->teleport.survival) : length));
-
-            length = 0;
-            buf    = nullptr;
-            _sql->GetData(10, &buf, &length);
-            memcpy(&PChar->teleport.abysseaConflux, buf, (length > sizeof(PChar->teleport.abysseaConflux) ? sizeof(PChar->teleport.abysseaConflux) : length));
-
-            length = 0;
-            buf    = nullptr;
-            _sql->GetData(11, &buf, &length);
-            memcpy(&PChar->teleport.waypoints, buf, (length > sizeof(PChar->teleport.waypoints) ? sizeof(PChar->teleport.waypoints) : length));
-
-            length = 0;
-            buf    = nullptr;
-            _sql->GetData(12, &buf, &length);
-            memcpy(&PChar->teleport.eschanPortal, buf, (length > sizeof(PChar->teleport.eschanPortal) ? sizeof(PChar->teleport.eschanPortal) : length));
-
-            length = 0;
-            buf    = nullptr;
-            _sql->GetData(13, &buf, &length);
-            memcpy(&PChar->m_claimedDeeds, buf, (length > sizeof(PChar->m_claimedDeeds) ? sizeof(PChar->m_claimedDeeds) : length));
-
-            length = 0;
-            buf    = nullptr;
-            _sql->GetData(14, &buf, &length);
-            memcpy(&PChar->m_uniqueEvents, buf, (length > sizeof(PChar->m_claimedDeeds) ? sizeof(PChar->m_claimedDeeds) : length));
+            db::extractBlob(rset, "homepoints", PChar->teleport.homepoint);
+            db::extractBlob(rset, "survivals", PChar->teleport.survival);
+            db::extractBlob(rset, "abyssea_conflux", PChar->teleport.abysseaConflux);
+            db::extractBlob(rset, "waypoints", PChar->teleport.waypoints);
+            db::extractBlob(rset, "eschan_portals", PChar->teleport.eschanPortal);
+            db::extractBlob(rset, "claimed_deeds", PChar->m_claimedDeeds);
+            db::extractBlob(rset, "unique_event", PChar->m_uniqueEvents);
         }
 
+        // TODO: Remove raw new's
         PChar->PMeritPoints = new CMeritPoints(PChar);
         PChar->PMeritPoints->SetMeritPoints(meritPoints);
         PChar->PMeritPoints->SetLimitPoints(limitPoints);
         PChar->PJobPoints = new CJobPoints(PChar);
 
-        // TODO: Roll this into the first query to chars
-        fmtQuery = "SELECT "
-                   "gmlevel, "    // 0
-                   "mentor, "     // 1
-                   "job_master, " // 2
-                   "nnameflags "  // 3
-                   "FROM chars "
-                   "WHERE charid = %u;";
-
-        ret = _sql->Query(fmtQuery, PChar->id);
-
-        if (ret != SQL_ERROR && _sql->NumRows() != 0 && _sql->NextRow() == SQL_SUCCESS)
+        rset = db::preparedStmt("SELECT field_chocobo FROM char_pet WHERE charid = (?);", PChar->id);
+        if (rset && rset->rowsCount() && rset->next())
         {
-            PChar->m_GMlevel             = (uint8)_sql->GetUIntData(0);
-            PChar->m_mentorUnlocked      = _sql->GetUIntData(1) > 0;
-            PChar->m_jobMasterDisplay    = _sql->GetUIntData(2) > 0;
-            PChar->menuConfigFlags.flags = _sql->GetUIntData(3);
-        }
-
-        ret = _sql->Query("SELECT field_chocobo FROM char_pet WHERE charid = %u;", PChar->id);
-
-        if (ret != SQL_ERROR &&
-            _sql->NumRows() != 0 &&
-            _sql->NextRow() == SQL_SUCCESS)
-        {
-            PChar->m_FieldChocobo = _sql->GetUIntData(0);
+            PChar->m_FieldChocobo = rset->getUInt("field_chocobo");
         }
 
         monstrosity::TryPopulateMonstrosityData(PChar);
@@ -906,10 +839,16 @@ namespace charutils
 
         luautils::OnZoneIn(PChar);
         luautils::OnGameIn(PChar, zoning == 1);
+
+        PChar->status = STATUS_TYPE::DISAPPEAR;
+
+        return PChar;
     }
 
     void LoadSpells(CCharEntity* PChar)
     {
+        TracyZoneScoped;
+
         // disable all spells
         PChar->m_SpellList.reset();
 
@@ -931,18 +870,17 @@ namespace charutils
                                "FROM char_spells "
                                "JOIN spell_list "
                                "ON spell_list.spellid = char_spells.spellid "
-                               "WHERE charid = %u AND "
-                               "(spell_list.content_tag IN (%s) OR "
+                               "WHERE charid = (?) AND "
+                               "(spell_list.content_tag IN (?) OR "
                                "spell_list.content_tag IS NULL);";
 
-        int32 ret = _sql->Query(fmtQuery, PChar->id, enabledContent.c_str());
-
-        if (ret != SQL_ERROR && _sql->NumRows() != 0)
+        // TODO: Fix db::detail::binder to allow std::strings
+        auto rset = db::preparedStmt(fmtQuery, PChar->id, enabledContent.c_str());
+        if (rset && rset->rowsCount())
         {
-            while (_sql->NextRow() == SQL_SUCCESS)
+            while (rset->next())
             {
-                uint16 spellId = _sql->GetUIntData(0);
-
+                uint16 spellId = rset->getUInt("spellid");
                 if (spell::GetSpell(static_cast<SpellID>(spellId)) != nullptr)
                 {
                     PChar->m_SpellList.set(spellId);
@@ -1055,25 +993,29 @@ namespace charutils
 
     void LoadEquip(CCharEntity* PChar)
     {
+        TracyZoneScoped;
+
         const char* Query = "SELECT "
                             "slotid,"
                             "equipslotid,"
                             "containerid "
                             "FROM char_equip "
-                            "WHERE charid = %u;";
+                            "WHERE charid = (?);";
 
-        int ret = _sql->Query(Query, PChar->id);
-
-        if (ret != SQL_ERROR)
+        auto rset = db::preparedStmt(Query, PChar->id);
+        if (rset && rset->rowsCount())
         {
             // equipSlotData[equipSlotId] = { slotId, containerId }
             std::unordered_map<uint8, std::pair<uint8, uint8>> equipSlotData;
 
             // NOTE: This data is stored in the above map since if the item has an augment, another db
             // query will occur, which will destroy the current query results.
-            while (_sql->NextRow() == SQL_SUCCESS)
+            while (rset->next())
             {
-                equipSlotData[_sql->GetUIntData(1)] = { static_cast<uint8>(_sql->GetUIntData(0)), static_cast<uint8>(_sql->GetUIntData(2)) };
+                auto  equipSlotId = rset->getUInt("equipslotid");
+                uint8 slotId      = rset->getUInt("slotid");
+                uint8 containerId = rset->getUInt("containerid");
+                equipSlotData[equipSlotId] = { slotId, containerId };
             }
 
             CItemLinkshell* PLinkshell1   = nullptr;
@@ -1120,32 +1062,33 @@ namespace charutils
 
             if (PLinkshell1)
             {
-                ret = _sql->Query("SELECT broken FROM linkshells WHERE linkshellid = %u LIMIT 1", PLinkshell1->GetLSID());
-                if (ret != SQL_ERROR && _sql->NumRows() != 0 && _sql->NextRow() == SQL_SUCCESS && _sql->GetUIntData(0) == 1)
+                rset = db::preparedStmt("SELECT broken FROM linkshells WHERE linkshellid = (?) LIMIT 1", PLinkshell1->GetLSID());
+                if (rset && rset->rowsCount() && rset->next() && rset->getUInt("broken") == 1)
                 { // if the linkshell has been broken, unequip
                     uint8 SlotID     = PLinkshell1->getSlotID();
                     uint8 LocationID = PLinkshell1->getLocationID();
                     PLinkshell1->setSubType(ITEM_UNLOCKED);
                     PChar->equip[SLOT_LINK1] = 0;
-                    _sql->Query("DELETE char_equip FROM char_equip WHERE charid = %u AND slotid = %u AND containerid = %u", PChar->id, SlotID,
-                                LocationID);
+                    db::query(fmt::format("DELETE char_equip FROM char_equip WHERE charid = {} AND slotid = {} AND containerid = {}",
+                        PChar->id, SlotID, LocationID));
                 }
                 else
                 {
                     linkshell::AddOnlineMember(PChar, PLinkshell1, 1);
                 }
             }
+
             if (PLinkshell2)
             {
-                ret = _sql->Query("SELECT broken FROM linkshells WHERE linkshellid = %u LIMIT 1", PLinkshell2->GetLSID());
-                if (ret != SQL_ERROR && _sql->NumRows() != 0 && _sql->NextRow() == SQL_SUCCESS && _sql->GetUIntData(0) == 1)
+                rset = db::preparedStmt("SELECT broken FROM linkshells WHERE linkshellid = (?) LIMIT 1", PLinkshell2->GetLSID());
+                if (rset && rset->rowsCount() && rset->next() && rset->getUInt("broken") == 1)
                 { // if the linkshell has been broken, unequip
                     uint8 SlotID     = PLinkshell2->getSlotID();
                     uint8 LocationID = PLinkshell2->getLocationID();
                     PLinkshell2->setSubType(ITEM_UNLOCKED);
                     PChar->equip[SLOT_LINK2] = 0;
-                    _sql->Query("DELETE char_equip FROM char_equip WHERE charid = %u AND slotid = %u AND containerid = %u", PChar->id, SlotID,
-                                LocationID);
+                    db::query(fmt::format("DELETE char_equip FROM char_equip WHERE charid = {} AND slotid = {} AND containerid = {}",
+                        PChar->id, SlotID, LocationID));
                 }
                 else
                 {
@@ -2488,6 +2431,8 @@ namespace charutils
 
     void EmptyRecycleBin(CCharEntity* PChar)
     {
+        TracyZoneScoped;
+
         CItemContainer* recycleBin = PChar->getStorage(LOC_RECYCLEBIN);
         const char*     Query      = "DELETE FROM char_inventory WHERE charid = %u AND location = 17;";
         if (_sql->Query(Query, PChar->id) != SQL_ERROR)

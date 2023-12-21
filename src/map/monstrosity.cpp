@@ -157,7 +157,7 @@ void monstrosity::ReadMonstrosityData(CCharEntity* PChar)
     auto data = std::make_unique<MonstrosityData_t>();
 
     // clang-format off
-    auto ret = _sql->Query("SELECT "
+    auto rset = db::preparedStmt("SELECT "
                           "charid, "
                           "current_monstrosity_id, "
                           "current_monstrosity_species, "
@@ -176,47 +176,43 @@ void monstrosity::ReadMonstrosityData(CCharEntity* PChar)
                           "entry_zone_id, "
                           "entry_mjob, "
                           "entry_sjob "
-                          "FROM char_monstrosity WHERE charid = %d LIMIT 1;",
+                          "FROM char_monstrosity WHERE charid = (?) LIMIT 1;",
                           PChar->id);
     // clang-format on
 
-    if (ret != SQL_ERROR && _sql->NumRows() != 0)
+    if (rset && rset->rowsCount() && rset->next())
     {
-        while (_sql->NextRow() == SQL_SUCCESS)
-        {
-            // charid: 0
-            data->MonstrosityId = static_cast<uint16>(_sql->GetUIntData(1));
-            data->Species       = static_cast<uint16>(_sql->GetUIntData(2));
-            data->Look          = gMonstrositySpeciesMap[data->Species].look;
+        data->MonstrosityId = static_cast<uint16>(rset->getUInt("current_monstrosity_id"));
+        data->Species       = static_cast<uint16>(rset->getUInt("current_monstrosity_species"));
+        data->Look          = gMonstrositySpeciesMap[data->Species].look;
 
-            data->NamePrefix1 = static_cast<uint8>(_sql->GetUIntData(3));
-            data->NamePrefix2 = static_cast<uint8>(_sql->GetUIntData(4));
-            data->CurrentExp  = static_cast<uint32>(_sql->GetUIntData(5));
+        data->NamePrefix1 = static_cast<uint8>(rset->getUInt("current_monstrosity_name_prefix_1"));
+        data->NamePrefix2 = static_cast<uint8>(rset->getUInt("current_monstrosity_name_prefix_2"));
+        data->CurrentExp  = static_cast<uint32>(rset->getUInt("current_exp"));
 
-            _sql->GetBlobData(6, &data->EquippedInstincts);
-            _sql->GetBlobData(7, &data->levels);
-            _sql->GetBlobData(8, &data->instincts);
-            _sql->GetBlobData(9, &data->variants);
+        db::extractBlob(rset, "equip", data->EquippedInstincts);
+        db::extractBlob(rset, "levels", data->levels);
+        db::extractBlob(rset, "instincts", data->instincts);
+        db::extractBlob(rset, "variants", data->variants);
 
-            data->Belligerency = static_cast<bool>(_sql->GetUIntData(10));
+        data->Belligerency = static_cast<bool>(rset->getUInt("belligerency"));
 
-            data->EntryPos.x        = _sql->GetFloatData(11);
-            data->EntryPos.y        = _sql->GetFloatData(12);
-            data->EntryPos.z        = _sql->GetFloatData(13);
-            data->EntryPos.rotation = static_cast<uint8>(_sql->GetUIntData(14));
-            data->EntryZoneId       = static_cast<uint16>(_sql->GetUIntData(15));
-            data->EntryMainJob      = static_cast<uint8>(_sql->GetUIntData(16));
-            data->EntrySubJob       = static_cast<uint8>(_sql->GetUIntData(17));
+        data->EntryPos.x        = rset->getFloat("entry_x");
+        data->EntryPos.y        = rset->getFloat("entry_y");
+        data->EntryPos.z        = rset->getFloat("entry_z");
+        data->EntryPos.rotation = static_cast<uint8>(rset->getUInt("entry_rot"));
+        data->EntryZoneId       = static_cast<uint16>(rset->getUInt("entry_zone_id"));
+        data->EntryMainJob      = static_cast<uint8>(rset->getUInt("entry_mjob"));
+        data->EntrySubJob       = static_cast<uint8>(rset->getUInt("entry_sjob"));
 
-            // Build additional data from lookups
-            data->MainJob = gMonstrositySpeciesMap[data->Species].mjob;
-            data->SubJob  = gMonstrositySpeciesMap[data->Species].sjob;
-            data->Size    = gMonstrositySpeciesMap[data->Species].size;
+        // Build additional data from lookups
+        data->MainJob = gMonstrositySpeciesMap[data->Species].mjob;
+        data->SubJob  = gMonstrositySpeciesMap[data->Species].sjob;
+        data->Size    = gMonstrositySpeciesMap[data->Species].size;
 
-            // TODO:
-            auto level  = data->levels[data->MonstrosityId];
-            std::ignore = level;
-        }
+        // TODO:
+        auto level  = data->levels[data->MonstrosityId];
+        std::ignore = level;
     }
 
     PChar->m_PMonstrosity = std::move(data);
@@ -277,6 +273,8 @@ void monstrosity::WriteMonstrosityData(CCharEntity* PChar)
 
 void monstrosity::TryPopulateMonstrosityData(CCharEntity* PChar)
 {
+    TracyZoneScoped;
+
     if (settings::get<bool>("main.ENABLE_MONSTROSITY") && PChar->GetMJob() == JOB_MON)
     {
         // Populates PChar->m_PMonstrosity

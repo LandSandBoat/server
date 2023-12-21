@@ -76,7 +76,7 @@ namespace db
             }
             else if constexpr (std::is_same_v<std::decay_t<T>, std::string>)
             {
-                stmt->setString(counter, first);
+                stmt->setString(counter, first.c_str());
             }
             else if constexpr (std::is_same_v<std::decay_t<T>, bool>)
             {

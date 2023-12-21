@@ -335,26 +335,24 @@ namespace blueutils
 
     void LoadSetSpells(CCharEntity* PChar)
     {
+        TracyZoneScoped;
+
         if (PChar->GetMJob() == JOB_BLU || PChar->GetSJob() == JOB_BLU)
         {
             const char* Query = "SELECT set_blue_spells FROM "
-                                "chars WHERE charid = %u;";
+                                "chars WHERE charid = (?);";
 
-            int32 ret = _sql->Query(Query, PChar->id);
-
-            if (ret != SQL_ERROR && _sql->NumRows() != 0 && _sql->NextRow() == SQL_SUCCESS)
+            auto rset = db::preparedStmt(Query, PChar->id);
+            if (rset && rset->rowsCount() && rset->next())
             {
-                size_t length      = 0;
-                char*  blue_spells = nullptr;
-                _sql->GetData(0, &blue_spells, &length);
-                memcpy(PChar->m_SetBlueSpells, blue_spells, (length > sizeof(PChar->m_SetBlueSpells) ? sizeof(PChar->m_SetBlueSpells) : length));
+                db::extractBlob(rset, "set_blue_spells", PChar->m_SetBlueSpells);
             }
+
             for (unsigned char& m_SetBlueSpell : PChar->m_SetBlueSpells)
             {
                 if (m_SetBlueSpell != 0)
                 {
                     CBlueSpell* PSpell = (CBlueSpell*)spell::GetSpell(static_cast<SpellID>(m_SetBlueSpell + 0x200));
-
                     if (PSpell == nullptr)
                     {
                         m_SetBlueSpell = 0;

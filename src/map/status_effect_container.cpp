@@ -1526,6 +1526,8 @@ void CStatusEffectContainer::SetEffectParams(CStatusEffect* StatusEffect)
 
 void CStatusEffectContainer::LoadStatusEffects()
 {
+    TracyZoneScoped;
+
     if (m_POwner->objtype != TYPE_PC)
     {
         ShowWarning("Non-PC calling function (%s).", m_POwner->getName());
@@ -1544,19 +1546,19 @@ void CStatusEffectContainer::LoadStatusEffects()
                         "flags, "
                         "timestamp "
                         "FROM char_effects "
-                        "WHERE charid = %u;";
+                        "WHERE charid = (?);";
 
-    int32 ret = _sql->Query(Query, m_POwner->id);
+    auto rset = db::preparedStmt(Query, m_POwner->id);
 
     std::vector<CStatusEffect*> PEffectList;
 
-    if (ret != SQL_ERROR && _sql->NumRows() != 0)
+    if (rset && rset->rowsCount())
     {
-        while (_sql->NextRow() == SQL_SUCCESS)
+        while (rset->next())
         {
-            auto flags    = _sql->GetUIntData(8);
-            auto duration = _sql->GetUIntData(4);
-            auto effectID = (EFFECT)_sql->GetUIntData(0);
+            auto flags    = rset->getUInt("flags");
+            auto duration = rset->getUInt("duration");
+            auto effectID = (EFFECT)rset->getUInt("effectid");
 
             if (flags & EFFECTFLAG_OFFLINE_TICK)
             {
@@ -1580,9 +1582,15 @@ void CStatusEffectContainer::LoadStatusEffects()
                 }
             }
             CStatusEffect* PStatusEffect =
-                new CStatusEffect(effectID, (uint16)_sql->GetUIntData(1), (uint16)_sql->GetUIntData(2),
-                                  _sql->GetUIntData(3), duration, _sql->GetUIntData(5), (uint16)_sql->GetUIntData(6),
-                                  (uint16)_sql->GetUIntData(7), flags);
+                new CStatusEffect(effectID,
+                                (uint16)rset->getUInt("icon"),
+                                (uint16)rset->getUInt("power"),
+                                (uint16)rset->getUInt("tick"),
+                                duration,
+                                (uint16)rset->getUInt("subid"),
+                                (uint16)rset->getUInt("subpower"),
+                                (uint16)rset->getUInt("tier"),
+                                flags);
 
             PEffectList.emplace_back(PStatusEffect);
 
