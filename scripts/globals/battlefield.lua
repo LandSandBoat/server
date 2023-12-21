@@ -1134,7 +1134,7 @@ function Battlefield:handleLootRolls(battlefield, lootTable, npc)
                     if type(entry) == 'table' then
                         current = current + entry.weight
 
-                        if current > roll then
+                        if current >= roll then
                             if entry.item == 0 then
                                 break
                             end
