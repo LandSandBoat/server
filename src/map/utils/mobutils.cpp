@@ -191,6 +191,210 @@ namespace mobutils
 
     /************************************************************************
      *                                                                       *
+     *  Calculation for subjob stats                                         *
+     *                                                                       *
+     ************************************************************************/
+    uint16 GetSubJobStats(uint8 rank, uint16 level, uint16 stat)
+    {
+        // These ranks A through G are used by all known JP sources. Please note this is equivalent to the US usage of A+ through F
+        // https://w.atwiki.jp/studiogobli/pages/27.html
+        float sJobStat = 0;
+
+        switch (rank)
+        {
+            case 1: // A
+                if (level <= 30)
+                    sJobStat = std::max((std::floor(stat / (4.0f - 0.225f * (level - 30)))), 2.0f);
+                else if (level <= 40)
+                    sJobStat = std::floor(stat / (3.25f - 0.073f * (level - 30)));
+                else if (level <= 46)
+                    sJobStat = std::floor(stat / (2.55f - 0.001f * (level - 41)));
+                else
+                    sJobStat = std::floor(stat / (2.7f - 0.001f * (level - 45)));
+                break;
+
+            case 2: // B
+                if (level <= 30)
+                    sJobStat = std::max((std::floor(stat / (3.1f - 0.075f * (level - 32)))), 2.0f);
+                else if (level <= 40)
+                    sJobStat = std::floor(stat / (3.1f - 0.075f * (level - 32)));
+                else if (level <= 45)
+                    sJobStat = std::floor(stat / (2.5f - 0.025f * (level - 40)));
+                else
+                    sJobStat = std::floor(stat / (2.35f - 0.04f * (level - 44)));
+                break;
+
+            case 3: // C
+                if (level <= 30)
+                    sJobStat = std::max((std::floor(stat / (4.5f - 0.15f * (level - 26)))), 2.0f);
+                else if (level <= 40)
+                    sJobStat = std::floor(stat / (3.28f - 0.001f * (level - 30)));
+                else if (level <= 45)
+                    sJobStat = std::floor(stat / (2.6f - 0.025f * (level - 40)));
+                else
+                    sJobStat = std::floor(stat / (2.1f - 0.2f * (level - 49)));
+                break;
+
+            case 4: // D
+                if (level <= 30)
+                    sJobStat = std::max((std::floor(stat / (5.0f - 0.05f * (level - 21)))), 1.0f);
+                else if (level <= 40)
+                    sJobStat = std::floor(stat / (3.2f - 0.001f * (level - 29)));
+                else if (level <= 45)
+                    sJobStat = std::floor(stat / (3.5f - 0.08f * (level - 32)));
+                else
+                    sJobStat = std::floor(stat / (3.25f - 0.045f * (level - 32)));
+                break;
+
+            case 5: // E
+                if (level <= 30)
+                    sJobStat = std::max((std::floor(stat / (3.8f - 0.1f * (level - 32)))), 1.0f);
+                else if (level <= 40)
+                    sJobStat = std::floor(stat / (3.8f - 0.15f * (level - 32)));
+                else if (level <= 45)
+                    sJobStat = std::floor(stat / (2.7f - 0.075f * (level - 40)));
+                else
+                    sJobStat = std::floor(stat / (2.7f - 0.05f * (level - 45)));
+                break;
+
+            case 6: // F
+                if (level <= 30)
+                    sJobStat = std::max((std::floor(stat / (4.0f - 0.15f * (level - 35)))), 1.0f);
+                else if (level <= 40)
+                    sJobStat = std::floor(stat / (4.0f - 0.15f * (level - 30)));
+                else if (level <= 46)
+                    sJobStat = std::floor(stat / (3.0f - 0.1125f * (level - 40)));
+                else
+                    sJobStat = std::floor(stat / (3.0f - 0.07f * (level - 40)));
+                break;
+
+            case 7: // G
+                if (level <= 30)
+                    sJobStat = std::max((std::floor(stat / (4.0f - 0.15f * (level - 35)))), 1.0f);
+                else if (level <= 40)
+                    sJobStat = std::floor(stat / (4.0f - 0.2f * (level - 31)));
+                else if (level <= 46)
+                    sJobStat = std::floor(stat / (2.5f - 0.09f * (level - 40)));
+                else
+                    sJobStat = std::floor(stat / 2);
+                break;
+            default:
+                sJobStat = stat / 2;
+                break;
+        }
+        return sJobStat;
+    }
+
+    /************************************************************************
+     *                                                                       *
+     *  Checks if the mob is in any Original/RoZ zone                        *
+     *                                                                       *
+     ************************************************************************/
+    bool CheckSubJobZone(CMobEntity* PMob)
+    {
+        auto zoneId = PMob->getZone();
+        if (zoneId != 0 && (zoneId == ZONE_WEST_RONFAURE ||
+                            zoneId == ZONE_EAST_RONFAURE ||
+                            zoneId == ZONE_LA_THEINE_PLATEAU ||
+                            zoneId == ZONE_VALKURM_DUNES ||
+                            zoneId == ZONE_JUGNER_FOREST ||
+                            zoneId == ZONE_BATALLIA_DOWNS ||
+                            zoneId == ZONE_NORTH_GUSTABERG ||
+                            zoneId == ZONE_SOUTH_GUSTABERG ||
+                            zoneId == ZONE_KONSCHTAT_HIGHLANDS ||
+                            zoneId == ZONE_PASHHOW_MARSHLANDS ||
+                            zoneId == ZONE_ROLANBERRY_FIELDS ||
+                            zoneId == ZONE_BEAUCEDINE_GLACIER ||
+                            zoneId == ZONE_XARCABARD ||
+                            zoneId == ZONE_CAPE_TERIGGAN ||
+                            zoneId == ZONE_EASTERN_ALTEPA_DESERT ||
+                            zoneId == ZONE_WEST_SARUTABARUTA ||
+                            zoneId == ZONE_EAST_SARUTABARUTA ||
+                            zoneId == ZONE_TAHRONGI_CANYON ||
+                            zoneId == ZONE_BUBURIMU_PENINSULA ||
+                            zoneId == ZONE_MERIPHATAUD_MOUNTAINS ||
+                            zoneId == ZONE_SAUROMUGUE_CHAMPAIGN ||
+                            zoneId == ZONE_THE_SANCTUARY_OF_ZITAH ||
+                            zoneId == ZONE_ROMAEVE ||
+                            zoneId == ZONE_YUHTUNGA_JUNGLE ||
+                            zoneId == ZONE_YHOATOR_JUNGLE ||
+                            zoneId == ZONE_WESTERN_ALTEPA_DESERT ||
+                            zoneId == ZONE_QUFIM_ISLAND ||
+                            zoneId == ZONE_BEHEMOTHS_DOMINION ||
+                            zoneId == ZONE_VALLEY_OF_SORROWS ||
+                            zoneId == ZONE_HORLAIS_PEAK ||
+                            zoneId == ZONE_GHELSBA_OUTPOST ||
+                            zoneId == ZONE_FORT_GHELSBA ||
+                            zoneId == ZONE_YUGHOTT_GROTTO ||
+                            zoneId == ZONE_PALBOROUGH_MINES ||
+                            zoneId == ZONE_WAUGHROON_SHRINE ||
+                            zoneId == ZONE_GIDDEUS ||
+                            zoneId == ZONE_BALGAS_DAIS ||
+                            zoneId == ZONE_BEADEAUX ||
+                            zoneId == ZONE_QULUN_DOME ||
+                            zoneId == ZONE_DAVOI ||
+                            zoneId == ZONE_MONASTIC_CAVERN ||
+                            zoneId == ZONE_CASTLE_OZTROJA ||
+                            zoneId == ZONE_ALTAR_ROOM ||
+                            zoneId == ZONE_THE_BOYAHDA_TREE ||
+                            zoneId == ZONE_DRAGONS_AERY ||
+                            zoneId == ZONE_MIDDLE_DELKFUTTS_TOWER ||
+                            zoneId == ZONE_UPPER_DELKFUTTS_TOWER ||
+                            zoneId == ZONE_TEMPLE_OF_UGGALEPIH ||
+                            zoneId == ZONE_DEN_OF_RANCOR ||
+                            zoneId == ZONE_CASTLE_ZVAHL_BAILEYS ||
+                            zoneId == ZONE_CASTLE_ZVAHL_KEEP ||
+                            zoneId == ZONE_SACRIFICIAL_CHAMBER ||
+                            zoneId == ZONE_THRONE_ROOM ||
+                            zoneId == ZONE_RANGUEMONT_PASS ||
+                            zoneId == ZONE_BOSTAUNIEUX_OUBLIETTE ||
+                            zoneId == ZONE_CHAMBER_OF_ORACLES ||
+                            zoneId == ZONE_TORAIMARAI_CANAL ||
+                            zoneId == ZONE_FULL_MOON_FOUNTAIN ||
+                            zoneId == ZONE_ZERUHN_MINES ||
+                            zoneId == ZONE_KORROLOKA_TUNNEL ||
+                            zoneId == ZONE_KUFTAL_TUNNEL ||
+                            zoneId == ZONE_SEA_SERPENT_GROTTO ||
+                            zoneId == ZONE_VELUGANNON_PALACE ||
+                            zoneId == ZONE_THE_SHRINE_OF_RUAVITAU ||
+                            zoneId == ZONE_STELLAR_FULCRUM ||
+                            zoneId == ZONE_LALOFF_AMPHITHEATER ||
+                            zoneId == ZONE_THE_CELESTIAL_NEXUS ||
+                            zoneId == ZONE_LOWER_DELKFUTTS_TOWER ||
+                            zoneId == ZONE_KING_RANPERRES_TOMB ||
+                            zoneId == ZONE_DANGRUF_WADI ||
+                            zoneId == ZONE_INNER_HORUTOTO_RUINS ||
+                            zoneId == ZONE_ORDELLES_CAVES ||
+                            zoneId == ZONE_OUTER_HORUTOTO_RUINS ||
+                            zoneId == ZONE_THE_ELDIEME_NECROPOLIS ||
+                            zoneId == ZONE_GUSGEN_MINES ||
+                            zoneId == ZONE_CRAWLERS_NEST ||
+                            zoneId == ZONE_MAZE_OF_SHAKHRAMI ||
+                            zoneId == ZONE_GARLAIGE_CITADEL ||
+                            zoneId == ZONE_CLOISTER_OF_GALES ||
+                            zoneId == ZONE_CLOISTER_OF_STORMS ||
+                            zoneId == ZONE_CLOISTER_OF_FROST ||
+                            zoneId == ZONE_FEIYIN ||
+                            zoneId == ZONE_IFRITS_CAULDRON ||
+                            zoneId == ZONE_QUBIA_ARENA ||
+                            zoneId == ZONE_CLOISTER_OF_FLAMES ||
+                            zoneId == ZONE_QUICKSAND_CAVES ||
+                            zoneId == ZONE_CLOISTER_OF_TREMORS ||
+                            zoneId == ZONE_CLOISTER_OF_TIDES ||
+                            zoneId == ZONE_GUSTAV_TUNNEL ||
+                            zoneId == ZONE_LABYRINTH_OF_ONZOZO ||
+                            zoneId == ZONE_SHIP_BOUND_FOR_SELBINA ||
+                            zoneId == ZONE_SHIP_BOUND_FOR_MHAURA ||
+                            zoneId == ZONE_SHIP_BOUND_FOR_SELBINA_PIRATES ||
+                            zoneId == ZONE_SHIP_BOUND_FOR_MHAURA_PIRATES))
+        {
+            return true;
+        }
+        return false;
+    }
+
+    /************************************************************************
+     *                                                                       *
      *  Calculate mob stats                                                  *
      *                                                                       *
      ************************************************************************/
@@ -425,10 +629,21 @@ namespace mobutils
         uint16 sMND = GetBaseToRank(grade::GetJobGrade(PMob->GetSJob(), 7), sLvl);
         uint16 sCHR = GetBaseToRank(grade::GetJobGrade(PMob->GetSJob(), 8), sLvl);
 
-        // As per conversation with Jimmayus, all mobs at any level get bonus stats from subjobs.
-        // From lvl 45 onwards, 1/2. Before lvl 30, 1/4. In between, the value gets progresively higher, from 1/4 at 30 to 1/2 at 44.
-        // Im leaving that range at 1/3, for now.
-        if (mLvl >= 45)
+        // Each subjob stat is determined by where the mob is located and what level the mob is.
+        // Each rank has their own formula as shown in GetSubJobStats
+        // Sub-level 50 monsters implemented in "Chains of Promathia" and onward (i.e. "Wings of the Goddess" as well) will use rank/2 at all levels.
+        // Note: Subjob Level will ALWAYS = Main Job Level but we use sLvl so it makes it easier to know what stat we are calculating
+        if (CheckSubJobZone(PMob) && (sLvl < 50))
+        {
+            sSTR = GetSubJobStats(grade::GetJobGrade(PMob->GetSJob(), 2), sLvl, sSTR);
+            sDEX = GetSubJobStats(grade::GetJobGrade(PMob->GetSJob(), 3), sLvl, sDEX);
+            sVIT = GetSubJobStats(grade::GetJobGrade(PMob->GetSJob(), 4), sLvl, sVIT);
+            sAGI = GetSubJobStats(grade::GetJobGrade(PMob->GetSJob(), 5), sLvl, sAGI);
+            sINT = GetSubJobStats(grade::GetJobGrade(PMob->GetSJob(), 6), sLvl, sINT);
+            sMND = GetSubJobStats(grade::GetJobGrade(PMob->GetSJob(), 7), sLvl, sMND);
+            sCHR = GetSubJobStats(grade::GetJobGrade(PMob->GetSJob(), 8), sLvl, sCHR);
+        }
+        else
         {
             sSTR /= 2;
             sDEX /= 2;
@@ -437,26 +652,6 @@ namespace mobutils
             sMND /= 2;
             sCHR /= 2;
             sVIT /= 2;
-        }
-        else if (mLvl > 30)
-        {
-            sSTR /= 3;
-            sDEX /= 3;
-            sAGI /= 3;
-            sINT /= 3;
-            sMND /= 3;
-            sCHR /= 3;
-            sVIT /= 3;
-        }
-        else
-        {
-            sSTR /= 4;
-            sDEX /= 4;
-            sAGI /= 4;
-            sINT /= 4;
-            sMND /= 4;
-            sCHR /= 4;
-            sVIT /= 4;
         }
 
         // [stat] = floor[family Stat] + floor[main job Stat] + floor[sub job Stat]
