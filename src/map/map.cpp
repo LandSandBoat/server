@@ -676,42 +676,24 @@ int32 recv_parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_da
 
             std::ignore = LangID;
 
-            const char* fmtQuery = "SELECT charid FROM chars WHERE charid = %u LIMIT 1;";
-
-            int32 ret = _sql->Query(fmtQuery, CharID);
-
-            if (ret == SQL_ERROR || _sql->NumRows() == 0 || _sql->NextRow() != SQL_SUCCESS)
+            auto rset = db::preparedStmt("SELECT charid FROM chars WHERE charid = (?) LIMIT 1;", CharID);
+            if (!rset || rset->rowsCount() == 0 || !rset->next())
             {
                 ShowError("recv_parse: Cannot load charid %u", CharID);
                 return -1;
             }
 
-            fmtQuery = "SELECT session_key FROM accounts_sessions WHERE charid = %u LIMIT 1;";
-
-            ret = _sql->Query(fmtQuery, CharID);
-
-            if (ret == SQL_ERROR || _sql->NumRows() == 0 || _sql->NextRow() != SQL_SUCCESS)
+            rset = db::preparedStmt("SELECT session_key FROM accounts_sessions WHERE charid = (?) LIMIT 1;", CharID);
+            if (!rset || rset->rowsCount() == 0 || !rset->next())
             {
                 ShowError("recv_parse: Cannot load session_key for charid %u", CharID);
             }
             else
             {
-                char* strSessionKey = nullptr;
-                _sql->GetData(0, &strSessionKey, nullptr);
-
-                memcpy(map_session_data->blowfish.key, strSessionKey, 20);
+                db::extractBlob(rset, "session_key", map_session_data->blowfish.key);
             }
 
-            // TODO: probably it is better to put the character creation into the charutils::LoadChar()
-            // method and put the inventory loading there too
-            CCharEntity* PChar = new CCharEntity();
-            PChar->id          = CharID;
-
-            charutils::LoadChar(PChar);
-
-            PChar->status = STATUS_TYPE::DISAPPEAR;
-
-            map_session_data->PChar = PChar;
+            map_session_data->PChar = charutils::LoadChar(CharID);
         }
         map_session_data->client_packet_id = 0;
         map_session_data->server_packet_id = 0;

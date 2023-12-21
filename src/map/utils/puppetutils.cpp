@@ -36,18 +36,16 @@ namespace puppetutils
 {
     void LoadAutomaton(CCharEntity* PChar)
     {
+        TracyZoneScoped;
+
         const char* Query = "SELECT unlocked_attachments, name, equipped_attachments FROM "
                             "char_pet LEFT JOIN pet_name ON automatonid = id "
-                            "WHERE charid = %u;";
+                            "WHERE charid = (?);";
 
-        int32 ret = _sql->Query(Query, PChar->id);
-
-        if (ret != SQL_ERROR && _sql->NumRows() != 0 && _sql->NextRow() == SQL_SUCCESS)
+        auto rset = db::preparedStmt(Query, PChar->id);
+        if (rset && rset->rowsCount() && rset->next())
         {
-            size_t length      = 0;
-            char*  attachments = nullptr;
-            _sql->GetData(0, &attachments, &length);
-            memcpy(&PChar->m_unlockedAttachments, attachments, (length > sizeof(PChar->m_unlockedAttachments) ? sizeof(PChar->m_unlockedAttachments) : length));
+            db::extractBlob(rset, "unlocked_attachments", PChar->m_unlockedAttachments);
 
             if (PChar->PAutomaton != nullptr)
             {
@@ -70,15 +68,15 @@ namespace puppetutils
                 PChar->PAutomaton = new CAutomatonEntity();
                 PChar->PAutomaton->saveModifiers();
 
-                PChar->PAutomaton->name.insert(0, (const char*)_sql->GetData(1));
+                PChar->PAutomaton->name = rset->getString("name");
                 automaton_equip_t tempEquip;
-                attachments = nullptr;
-                _sql->GetData(2, &attachments, &length);
-                memcpy(&tempEquip, attachments, (length > sizeof(tempEquip) ? sizeof(tempEquip) : length));
+                db::extractBlob(rset, "equipped_attachments", tempEquip);
 
                 // If any of this happens then the Automaton failed to load properly and should just reset (Should only occur with older characters or if DB is
                 // missing)
-                if (tempEquip.Head < HEAD_HARLEQUIN || tempEquip.Head > HEAD_SPIRITREAVER || tempEquip.Frame < FRAME_HARLEQUIN ||
+                if (tempEquip.Head < HEAD_HARLEQUIN ||
+                    tempEquip.Head > HEAD_SPIRITREAVER ||
+                    tempEquip.Frame < FRAME_HARLEQUIN ||
                     tempEquip.Frame > FRAME_STORMWAKER)
                 {
                     PChar->PAutomaton->setHead(HEAD_HARLEQUIN);
@@ -86,6 +84,7 @@ namespace puppetutils
                     PChar->PAutomaton->setFrame(FRAME_HARLEQUIN);
                     tempEquip.Frame = FRAME_HARLEQUIN;
                     for (int i = 0; i < 12; i++)
+
                     {
                         tempEquip.Attachments[i] = 0;
                     }
@@ -94,6 +93,7 @@ namespace puppetutils
                     {
                         PChar->PAutomaton->setElementMax(i, 5);
                     }
+
                     PChar->PAutomaton->setElementMax(6, 3);
                     PChar->PAutomaton->setElementMax(7, 3);
 
