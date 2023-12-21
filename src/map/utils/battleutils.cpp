@@ -5685,7 +5685,7 @@ namespace battleutils
         {
             if (PCaster->StatusEffectContainer->HasStatusEffect(EFFECT_ACCESSION) ||
                 (PCaster->objtype == TYPE_PC && charutils::hasTrait((CCharEntity*)PCaster, TRAIT_DIVINE_VEIL) && PSpell->isNa() &&
-                 (PCaster->StatusEffectContainer->HasStatusEffect(EFFECT_DIVINE_SEAL) || PCaster->getMod(Mod::AOE_NA) == 1)))
+                 (PCaster->StatusEffectContainer->HasStatusEffect(EFFECT_DIVINE_SEAL) || xirand::GetRandomNumber(100) < PCaster->getMod(Mod::AOE_NA))))
             {
                 return SPELLAOE_RADIAL;
             }

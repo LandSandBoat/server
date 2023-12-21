@@ -382,7 +382,7 @@ enum class Mod
     AFFLATUS_SOLACE  = 293, // Pool of HP accumulated during Afflatus Solace
     AFFLATUS_MISERY  = 294, // Pool of HP accumulated during Afflatus Misery
     AUSPICE_EFFECT   = 484, // Bonus to Auspice Subtle Blow Effect.
-    AOE_NA           = 524, // Set to 1 to make -na spells/erase always AoE w/ Divine Veil
+    AOE_NA           = 524, // % to make -na spells/erase always AoE w/ Divine Veil
     REGEN_MULTIPLIER = 838, // Multiplier to base regen rate
     CURE2MP_PERCENT  = 860, // Converts % of "Cure" amount to MP
     DIVINE_BENISON   = 910, // Adds fast cast and enmity reduction to -Na spells (includes Erase). Enmity reduction is half of the fast cast amount
