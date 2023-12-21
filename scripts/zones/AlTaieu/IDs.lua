@@ -20,7 +20,8 @@ zones[xi.zone.ALTAIEU] =
         LOGIN_NUMBER                  = 7003, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
         MEMBERS_LEVELS_ARE_RESTRICTED = 7023, -- Your party is unable to participate because certain members' levels are restricted.
         CONQUEST_BASE                 = 7160, -- Tallying conquest results...
-        QUASILUMIN_01                 = 7376, -- This is Al'Taieu. The celestial capital overflowing with the blessings of Altana.
+        QUASILUMIN_BASE_DIALOG        = 7376, -- I...don't know... I don't know anything...
+        QUASILUMIN_MAP_REWARD_DIALOG  = 7397,
         IMPERVIOUS_FIELD_BLOCKS       = 7457, -- An impervious field of energy blocks your path...
         NOTHING_OF_INTEREST           = 7486, -- There is nothing of interest here.
         OMINOUS_SHADOW                = 7487, -- An ominous shadow falls over you...
@@ -51,6 +52,7 @@ zones[xi.zone.ALTAIEU] =
         AURORAL_UPDRAFT_OFFSET    = 16912902,
         SWIRLING_VORTEX_OFFSET    = 16912908,
         DIMENSIONAL_PORTAL_OFFSET = 16912910,
+        QUASILUMIN_OFFSET         = 16912965,
     },
 }
 
