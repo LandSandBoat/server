@@ -1385,7 +1385,7 @@ namespace petutils
                 cost = 7;
             }
         }
-        else if (id == PETID_CARBUNCLE)
+        else if (id == PETID_CARBUNCLE || id == PETID_CAIT_SITH)
         {
             if (level < 10)
             {
