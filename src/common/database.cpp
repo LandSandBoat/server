@@ -108,6 +108,7 @@ std::shared_ptr<sql::Connection> db::detail::getConnection()
 std::unique_ptr<sql::ResultSet> db::query(std::string_view query)
 {
     TracyZoneScoped;
+    TracyZoneCString(query.data());
 
     std::scoped_lock lock(db::detail::getMutex());
 

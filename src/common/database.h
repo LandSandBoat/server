@@ -122,6 +122,7 @@ namespace db
         }
 
         auto& stmt = preparedStatements[preparedStmt].second;
+        TracyZoneString(preparedStatements[preparedStmt].first);
         try
         {
             // NOTE: 1-indexed!
@@ -142,6 +143,7 @@ namespace db
     std::unique_ptr<sql::ResultSet> preparedStmt(std::string const& query, Args&&... args)
     {
         TracyZoneScoped;
+        TracyZoneString(query);
 
         std::scoped_lock lock(db::detail::getMutex());
 
