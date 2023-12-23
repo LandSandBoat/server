@@ -6,6 +6,8 @@ return {
     ['Andrause']    = { event = 239 },
     ['Comitiolus']  = { event = 72 },
     ['Heillal']     = { event = 64 },
+    ['Heiji']       = { event = 122 },
+    ['Heizo']       = { event = 126 },
     ['Jaucribaix']  = { event = 71 },
     ['Kamui']       = { event = 61 },
     ['Keal']        = { event = 89 },
