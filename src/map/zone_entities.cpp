@@ -1423,7 +1423,7 @@ void CZoneEntities::ZoneServer(time_point tick)
                     PChar->currentEvent->targetEntity = nullptr;
                 }
 
-                if (distance(PChar->loc.p, PMob->loc.p) < 50)
+                if (PChar->SpawnMOBList.find(PMob->id) != PChar->SpawnMOBList.end())
                 {
                     PChar->SpawnMOBList.erase(PMob->id);
                 }
@@ -1476,7 +1476,7 @@ void CZoneEntities::ZoneServer(time_point tick)
             for (EntityList_t::const_iterator it = m_charList.begin(); it != m_charList.end(); ++it)
             {
                 CCharEntity* PChar = (CCharEntity*)it->second;
-                if (distance(PChar->loc.p, PNpc->loc.p) < 50)
+                if (PChar->SpawnNPCList.find(PNpc->id) != PChar->SpawnNPCList.end())
                 {
                     PChar->SpawnNPCList.erase(PNpc->id);
                 }
