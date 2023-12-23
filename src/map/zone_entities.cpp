@@ -712,7 +712,13 @@ void CZoneEntities::SpawnPCs(CCharEntity* PChar)
 
     for (auto mobEntry : PChar->SpawnMOBList)
     {
-        CState* state = mobEntry.second->PAI->GetCurrentState();
+        auto* PMob = mobEntry.second;
+        if (PMob == nullptr)
+        {
+            continue;
+        }
+
+        CState* state = PMob->PAI->GetCurrentState();
         if (!state)
         {
             continue;
