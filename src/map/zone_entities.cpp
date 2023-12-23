@@ -733,6 +733,12 @@ void CZoneEntities::SpawnPCs(CCharEntity* PChar)
         auto* PMob = mobEntry.second;
         if (PMob == nullptr)
         {
+            // clang-format off
+            auto targId       = mobEntry.first - 0x1000000 - (m_zone->GetID() << 12);
+            auto isDynamicStr = targId >= 0x700 ? "Dynamic" : "Static";
+            ShowError(fmt::format("Empty {} Mob entry (targId: {}) found in {}'s SpawnMOBList in {}! This indicates an improperly cleaned-up Mob object! This is dangerous!",
+                                  isDynamicStr, targId, PChar->name, m_zone->getName()).c_str());
+            // clang-format on
             continue;
         }
 
