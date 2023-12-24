@@ -103,6 +103,7 @@ namespace db
 
     // If called with a PreparedStatement enum the query was prepared ahead of time, so it
     // will be looked up and executed.
+    // TODO: This isn't thread-safe yet. Use db::query() instead.
     template <typename... Args>
     std::unique_ptr<sql::ResultSet> preparedStmt(PreparedStatement preparedStmt, Args&&... args)
     {
@@ -139,6 +140,7 @@ namespace db
     }
 
     // If called with a string query the query will be lazily prepared/looked up and executed.
+    // TODO: This isn't thread-safe yet. Use db::query() instead.
     template <typename... Args>
     std::unique_ptr<sql::ResultSet> preparedStmt(std::string const& query, Args&&... args)
     {
