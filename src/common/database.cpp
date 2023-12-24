@@ -31,6 +31,9 @@ namespace
     std::recursive_mutex bottleneck;
 
     // TODO: Have multiple pooled unique_ptr's to connections, which can be "checked out" by multiple callers.
+    // NOTE: These translation unit members are what is causing prepared statmements not to be thread-safe.
+    //       We need to maintain these listed per-connection, so one thread's connection can't access another thread's
+    //       prepared statement objects.
     std::shared_ptr<sql::Connection> conn;
 
     std::unordered_map<PreparedStatement, std::pair<std::string, std::unique_ptr<sql::PreparedStatement>>> preparedStatements;
