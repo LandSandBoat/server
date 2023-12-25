@@ -871,6 +871,13 @@ INSERT INTO `item_mods_pet` VALUES (23258,384,400,3);  -- Automaton - HASTE_GEAR
 INSERT INTO `item_mods_pet` VALUES (23272,73,4,0);    -- Pet: STORETP: 4
 INSERT INTO `item_mods_pet` VALUES (23272,384,500,0); -- Pet: HASTE_GEAR: 5%
 
+-- Pteroslaver brais +2
+INSERT INTO `item_mods_pet` VALUES (23277,161,-1000,2); -- Wyvern: DMGPHYS: -10%
+
+-- Pteroslaver brais +2
+INSERT INTO `item_mods_pet` VALUES (23278,28,44,1); -- Avatar: MATT: 44
+INSERT INTO `item_mods_pet` VALUES (23278,30,35,1); -- Avatar: MACC: 35
+
 -- Foire Babouches +2
 INSERT INTO `item_mods_pet` VALUES (23325,28,20,3);   -- Automaton - MATT: 20
 INSERT INTO `item_mods_pet` VALUES (23325,30,40,3);   -- Automaton - MACC: 40
