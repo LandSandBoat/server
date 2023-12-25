@@ -76,11 +76,13 @@ enum MSGBASIC_ID : uint16
     MSGBASIC_SPIKES_EFFECT_HEAL     = 383, /* <target>'s spikes restore <number> HP to <attacker> */
     MSGBASIC_SPIKES_EFFECT_HP_DRAIN = 132, /* <target>'s spikes drain <number> HP from the <attacker>. */
     /* Distance */
-    MSGBASIC_TARG_OUT_OF_RANGE  = 4,  /* <target> is out of range. */
-    MSGBASIC_UNABLE_TO_SEE_TARG = 5,  /* Unable to see <target>. */
-    MSGBASIC_LOSE_SIGHT         = 36, /* You lose sight of <target>. */
-    MSGBASIC_TOO_FAR_AWAY       = 78, /* <target> is too far away. */
-                                      /* Weaponskills */
+    MSGBASIC_TARG_OUT_OF_RANGE  = 4,   /* <target> is out of range. */
+    MSGBASIC_UNABLE_TO_SEE_TARG = 5,   /* Unable to see <target>. */
+    MSGBASIC_LOSE_SIGHT         = 36,  /* You lose sight of <target>. */
+    MSGBASIC_TOO_FAR_AWAY       = 78,  /* <target> is too far away. */
+    MSGBASIC_TOO_FAR_AWAY_RED   = 328, /* <target> is too far away. (but in the red color) */
+
+    /* Weaponskills */
     MSGBASIC_UNABLE_TO_USE_WS  = 89,  /* Unable to use weaponskill. */
     MSGBASIC_CANNOT_USE_WS     = 190, /* The <player> cannot use that weapon ability. */
     MSGBASIC_CANNOT_USE_ANY_WS = 191, /* The <player> is unable to use weapon skills. */

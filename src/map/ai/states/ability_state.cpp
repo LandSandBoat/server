@@ -112,6 +112,24 @@ bool CAbilityState::Update(time_point tick)
                 target->PAI->EventHandler.triggerListener("ABILITY_TAKE", CLuaBaseEntity(target), CLuaBaseEntity(m_PEntity), CLuaAbility(m_PAbility.get()), CLuaAction(&action));
             }
         }
+        else if (m_castTime > 0s) // Instant abilities do not need to be interrupted
+        {
+            CBaseEntity* PTarget = GetTarget();
+
+            action_t action;
+            action.id         = m_PEntity->id;
+            action.actiontype = ACTION_JOBABILITY_INTERRUPT;
+            action.actionid   = 28787;
+
+            actionList_t& actionList  = action.getNewActionList();
+            actionList.ActionTargetID = PTarget ? PTarget->id : m_PEntity->id;
+
+            actionTarget_t& actionTarget = actionList.getNewActionTarget();
+            actionTarget.animation       = 0x1FC;
+            actionTarget.reaction        = REACTION::MISS;
+
+            m_PEntity->loc.zone->PushPacket(m_PEntity, CHAR_INRANGE_SELF, new CActionPacket(action));
+        }
         Complete();
     }
 
@@ -131,10 +149,14 @@ bool CAbilityState::Update(time_point tick)
 
 bool CAbilityState::CanUseAbility()
 {
+    CAbility*    PAbility = GetAbility();
+    CBaseEntity* PTarget  = GetTarget();
+
+    std::unique_ptr<CBasicPacket> errMsg;
+
     if (m_PEntity->objtype == TYPE_PC)
     {
-        auto* PAbility = GetAbility();
-        auto* PChar    = static_cast<CCharEntity*>(m_PEntity);
+        auto* PChar = static_cast<CCharEntity*>(m_PEntity);
         if (PChar->PRecastContainer->HasRecast(RECAST_ABILITY, PAbility->getRecastId(), PAbility->getRecastTime()))
         {
             PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, 0, 0, MSGBASIC_WAIT_LONGER));
@@ -152,8 +174,6 @@ bool CAbilityState::CanUseAbility()
             return false;
         }
 
-        std::unique_ptr<CBasicPacket> errMsg;
-        auto*                         PTarget = GetTarget();
         if (PChar->IsValidTarget(PTarget->targid, PAbility->getValidTarget(), errMsg))
         {
             if (PChar != PTarget && distance(PChar->loc.p, PTarget->loc.p) > PAbility->getRange())
@@ -188,6 +208,48 @@ bool CAbilityState::CanUseAbility()
             return true;
         }
         return false;
+    }
+    else
+    {
+        bool   hasAmnesia      = m_PEntity->StatusEffectContainer->HasStatusEffect(EFFECT_AMNESIA);
+        bool   hasImpairment   = m_PEntity->StatusEffectContainer->HasStatusEffect(EFFECT_IMPAIRMENT);
+        uint16 impairmentPower = hasImpairment ? m_PEntity->StatusEffectContainer->GetStatusEffect(EFFECT_IMPAIRMENT)->GetPower() : 0;
+
+        if (hasAmnesia ||
+            (hasImpairment && (impairmentPower == 0x01 || impairmentPower == 0x03)))
+        {
+            return false;
+        }
+
+        if (m_PEntity->IsValidTarget(PTarget->targid, PAbility->getValidTarget(), errMsg))
+        {
+            if (m_PEntity != PTarget && distance(m_PEntity->loc.p, PTarget->loc.p) > PAbility->getRange())
+            {
+                // Create this action packet that also sort of looks like an animation cancel packet to emit a red "Target is too far away" message.
+                // Captured from a red "<target> is too far away" message from healing breath IV
+                action_t action;
+
+                action.id         = m_PEntity->id;
+                action.actiontype = ACTION_MAGIC_FINISH;
+                action.actionid   = 0;
+
+                actionList_t& actionList  = action.getNewActionList();
+                actionList.ActionTargetID = PTarget ? PTarget->id : m_PEntity->id;
+
+                actionTarget_t& actionTarget = actionList.getNewActionTarget();
+                actionTarget.animation       = 0x1FC;
+                actionTarget.reaction        = REACTION::MISS;
+                actionTarget.speceffect      = static_cast<SPECEFFECT>(0x24);
+                actionTarget.param           = 0; // Observed as 639 on retail, but I'm not sure that it actually does anything.
+                actionTarget.messageID       = MSGBASIC_TOO_FAR_AWAY_RED;
+
+                m_PEntity->loc.zone->PushPacket(m_PEntity, CHAR_INRANGE_SELF, new CActionPacket(action));
+
+                return false;
+            }
+        }
+
+        // TODO: should luautils::OnAbilityCheck go here too?
     }
     return true;
 }

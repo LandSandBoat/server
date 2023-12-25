@@ -73,6 +73,20 @@ CActionPacket::CActionPacket(action_t& action)
         {
         }
         break;
+        // Only currently used for Wyvern Breaths when going out of range and/or otherwise interrupted.
+        case ACTION_JOBABILITY_INTERRUPT:
+        {
+            // This block was observed on a "Too far away" wyvern healing breath.
+            // Is this different for different breaths -- remove/offensive breaths?
+            // Do Automatons use this?
+            ActionType = ACTION_WEAPONSKILL_START;
+
+            // Magic numbers?
+            packBitsBE(data, 28787, 86, 16);
+            ref<uint8>(0x0D) = 0x5D;
+            ref<uint8>(0x0E) = 0x19;
+        }
+        break;
         case ACTION_DANCE:
         case ACTION_JOBABILITY_FINISH:
         {
