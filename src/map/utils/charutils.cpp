@@ -3097,9 +3097,9 @@ namespace charutils
                 PChar->WorkingSkills.skill[i] = 0x8000;
                 continue;
             }
-            uint16 MaxMainSkill = battleutils::GetMaxSkill((SKILLTYPE)i, PChar->GetMJob(), PChar->GetMLevel());
-            uint16 MaxSubSkill  = battleutils::GetMaxSkill((SKILLTYPE)i, PChar->GetSJob(), PChar->GetSLevel());
-            uint16 skillBonus   = 0;
+            uint16 maxMainSkill = battleutils::GetMaxSkill((SKILLTYPE)i, PChar->GetMJob(), PChar->GetMLevel());
+            uint16 maxSubSkill  = battleutils::GetMaxSkill((SKILLTYPE)i, PChar->GetSJob(), PChar->GetSLevel());
+            int16  skillBonus   = 0;
 
             // apply arts bonuses
             if ((i >= SKILL_DIVINE_MAGIC && i <= SKILL_ENFEEBLING_MAGIC && PChar->StatusEffectContainer->HasStatusEffect({ EFFECT_LIGHT_ARTS, EFFECT_ADDENDUM_WHITE })) ||
@@ -3108,7 +3108,7 @@ namespace charutils
                 uint16 artsSkill    = battleutils::GetMaxSkill(SKILL_ENHANCING_MAGIC, JOB_RDM, PChar->GetMLevel());                  // B+ skill
                 uint16 skillCapD    = battleutils::GetMaxSkill((SKILLTYPE)i, JOB_SCH, PChar->GetMLevel());                           // D skill cap
                 uint16 skillCapE    = battleutils::GetMaxSkill(SKILL_DARK_MAGIC, JOB_RDM, PChar->GetMLevel());                       // E skill cap
-                auto   currentSkill = std::clamp<uint16>((PChar->RealSkills.skill[i] / 10), 0, std::max(MaxMainSkill, MaxSubSkill)); // working skill before bonuses
+                auto   currentSkill = std::clamp<uint16>((PChar->RealSkills.skill[i] / 10), 0, std::max(maxMainSkill, maxSubSkill)); // working skill before bonuses
                 uint16 artsBaseline = 0;                                                                                             // Level based baseline to which to raise skills
                 uint8  mLevel       = PChar->GetMLevel();
                 if (mLevel < 51)
@@ -3165,7 +3165,7 @@ namespace charutils
             {
                 if (PChar->PAutomaton)
                 {
-                    MaxMainSkill = battleutils::GetMaxSkill(1, PChar->GetMLevel()); // A+ capped down to the Automaton's rating
+                    maxMainSkill = battleutils::GetMaxSkill(1, PChar->GetMLevel()); // A+ capped down to the Automaton's rating
                 }
             }
 
@@ -3173,7 +3173,7 @@ namespace charutils
             meritIndex++;
 
             // Add 79 to get the modifier ID
-            skillBonus += PChar->getMod(static_cast<Mod>(i + 79));
+            skillBonus += PChar->getMod(static_cast<Mod>(i + 79)); // This can be a negative value. Example: Shiva's Shotel.
 
             uint8 mainSkillRank = battleutils::GetSkillRank((SKILLTYPE)i, PChar->GetMJob());
             uint8 subSkillRank  = battleutils::GetSkillRank((SKILLTYPE)i, PChar->GetSJob());
@@ -3189,31 +3189,60 @@ namespace charutils
                 PChar->RealSkills.rank[i] = subSkillRank;
             }
 
-            if (MaxMainSkill != 0)
-            {
-                auto cap{ PChar->RealSkills.skill[i] / 10 >= MaxMainSkill };
-                PChar->WorkingSkills.skill[i] = std::max(0, cap ? skillBonus + MaxMainSkill : skillBonus + PChar->RealSkills.skill[i] / 10);
+            uint16 currentSkill = PChar->RealSkills.skill[i] / 10;
 
-                // Blue text
-                if (cap)
+            // Main Job Skills.
+            if (maxMainSkill != 0)
+            {
+                if (currentSkill > maxMainSkill)
                 {
-                    PChar->WorkingSkills.skill[i] |= 0x8000;
+                    currentSkill = maxMainSkill;
+                }
+
+                int16 newSkillValue = currentSkill + skillBonus;
+                if (newSkillValue < 0)
+                {
+                    newSkillValue = 0;
+                }
+
+                PChar->WorkingSkills.skill[i] = static_cast<uint16>(newSkillValue);
+
+                if (currentSkill >= maxMainSkill)
+                {
+                    PChar->WorkingSkills.skill[i] |= 0x8000; // Blue text.
                 }
             }
-            else if (MaxSubSkill != 0)
-            {
-                auto cap{ PChar->RealSkills.skill[i] / 10 >= MaxSubSkill };
-                PChar->WorkingSkills.skill[i] = std::max(0, cap ? skillBonus + MaxSubSkill : skillBonus + PChar->RealSkills.skill[i] / 10);
 
-                // Blue text
-                if (cap)
+            // Sub Job Skills.
+            else if (maxSubSkill != 0)
+            {
+                if (currentSkill > maxSubSkill)
                 {
-                    PChar->WorkingSkills.skill[i] |= 0x8000;
+                    currentSkill = maxSubSkill;
+                }
+
+                int16 newSkillValue = currentSkill + skillBonus;
+                if (newSkillValue < 0)
+                {
+                    newSkillValue = 0;
+                }
+
+                PChar->WorkingSkills.skill[i] = static_cast<uint16>(newSkillValue);
+
+                if (currentSkill >= maxSubSkill)
+                {
+                    PChar->WorkingSkills.skill[i] |= 0x8000; // Blue text.
                 }
             }
+
+            // Job setup doesn't have this skill.
             else
             {
-                PChar->WorkingSkills.skill[i] = std::max<uint16>(0, skillBonus) | 0x8000;
+                if (skillBonus < 0)
+                {
+                    skillBonus = 0;
+                }
+                PChar->WorkingSkills.skill[i] = static_cast<uint16>(skillBonus) | 0x8000; // New value AND Blue text.
             }
         }
 
