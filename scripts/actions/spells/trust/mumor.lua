@@ -13,7 +13,7 @@ local healingJobs =
 }
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)
-    return xi.trust.canCast(caster, spell, 1015)
+    return xi.trust.canCast(caster, spell, xi.magic.spell.MUMOR_II)
 end
 
 spellObject.onSpellCast = function(caster, target, spell)

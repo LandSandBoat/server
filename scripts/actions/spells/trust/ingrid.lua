@@ -4,7 +4,7 @@
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)
-    return xi.trust.canCast(caster, spell, 1016)
+    return xi.trust.canCast(caster, spell, xi.magic.spell.INGRID_II)
 end
 
 spellObject.onSpellCast = function(caster, target, spell)
