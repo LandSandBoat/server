@@ -9,22 +9,6 @@ xi = xi or {}
 xi.escha = xi.escha or {}
 xi.escha.portals = xi.escha.portals or {}
 
-local costReduction = -- Based on Luck+ Vorseal power
-{-- Power, reduction (percentage based, will always be (100 minus reduction))
-    [ 0] = 100,
-    [ 1] =  95,
-    [ 2] =  90,
-    [ 3] =  85,
-    [ 4] =  80,
-    [ 5] =  75,
-    [ 6] =  70,
-    [ 7] =  65,
-    [ 8] =  60,
-    [ 9] =  55,
-    [10] =  50,
-    [11] =  45,
-}
-
 local portalOffsets =
 {
 --  [ZoneId] = { First Portal, Last Portal },
@@ -40,13 +24,13 @@ local portalOffsets =
 -- Vorseal status effect = 602
 -----------------------------------
 local function getPortalCost(player)
-    local cost             = 50
-    local luckVorsealPower = 0
-
     -- TODO: get Vorseal Luck+ power amount.
     -- Note: Rounded down. Base 50 with luck+ 3 (-15%) results in 42. (17/march/2023)
 
-    cost = math.floor(cost * costReduction[luckVorsealPower] / 100)
+    local cost                  = 50
+    local luckVorsealPower      = 0
+    local luckVorsealMultiplier = utils.clamp(100 - 5 * luckVorsealPower, 45, 100) / 100
+    cost                        = math.floor(cost * luckVorsealMultiplier)
 
     return cost
 end
@@ -84,7 +68,7 @@ xi.escha.portals.eschanPortalOnTrigger = function(player, npc, portalGlobalNumbe
         lockValue     = lockValue + 1 -- We set it to "Locked" even if we JUST unlocked it.
     end
 
-    -- Get Zone Portals and count how many we have unlocked.
+    -- Get zone portals and count how many we have unlocked.
     for v = portalOffsets[zoneId][1], portalOffsets[zoneId][2] do
         if utils.mask.getBit(portalBitMask, v) then
             zonePortalsUnlocked = zonePortalsUnlocked + 1
@@ -111,7 +95,7 @@ end
 xi.escha.portals.eschanPortalEventFinish = function(player, csid, option, npc)
     local portalCost = getPortalCost(player)
 
-    if option == 3 then-- Ethereal droplet usage.
+    if option == 3 then -- Ethereal droplet usage.
         local ID = zones[player:getZoneID()]
 
         player:delItem(xi.item.ETHEREAL_DROPLET, 1, xi.inv.TEMPITEMS)
