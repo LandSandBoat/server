@@ -61,6 +61,21 @@
             },
         },
         {
+            "name": "(Windows) xi_map_tracy",
+            "type": "cppvsdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/xi_map_tracy.exe",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            "console": "integratedTerminal",
+            "logging": {
+                "moduleLoad": false,
+                "exceptions": false,
+            },
+        },
+        {
             "name": "(Windows) xi_map Scripts",
             "type": "lua-local",
             "request": "launch",
