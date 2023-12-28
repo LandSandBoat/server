@@ -102,7 +102,7 @@ INSERT INTO `item_furnishing` VALUES (134,'copy_of_emeralda',1,530,5,9);
 INSERT INTO `item_furnishing` VALUES (135,'magic_tome_set',1,513,2,2);
 INSERT INTO `item_furnishing` VALUES (136,'set_of_kaiserin_cosmetics',1,513,2,1);
 INSERT INTO `item_furnishing` VALUES (137,'cordon_bleu_cooking_set',1,531,3,9);
-INSERT INTO `item_furnishing` VALUES (138,'jeunoan_tree',4,532,5,3);
+INSERT INTO `item_furnishing` VALUES (138,'jeunoan_tree',4,532,2,3);
 INSERT INTO `item_furnishing` VALUES (139,'star_globe',1,533,8,9);
 INSERT INTO `item_furnishing` VALUES (140,'dream_platter',2,522,5,3);
 INSERT INTO `item_furnishing` VALUES (141,'dream_coffer',2,522,5,3);
