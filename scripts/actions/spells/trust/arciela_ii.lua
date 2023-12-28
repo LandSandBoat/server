@@ -4,7 +4,7 @@
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)
-    return xi.trust.canCast(caster, spell, 965)
+    return xi.trust.canCast(caster, spell, xi.magic.spell.ARCIELA)
 end
 
 spellObject.onSpellCast = function(caster, target, spell)
