@@ -5126,7 +5126,11 @@ m:addOverride("xi.globals.mobskills.self-destruct.onMobSkillCheck", function(tar
 end)
 
 m:addOverride("xi.globals.mobskills.self-destruct_1.onMobSkillCheck", function(target, mob, skill)
-    if mob:getHPP() > 21 or mob:getAnimationSub() ~= 0  then
+    if
+        mob:getHPP() > 21 or
+        mob:getAnimationSub() ~= 0 or
+        mob:isMobType(xi.mobskills.mobType.NOTORIOUS)
+    then
         return 1
     end
 
@@ -5142,7 +5146,15 @@ m:addOverride("xi.globals.mobskills.self-destruct_2.onMobSkillCheck", function(t
 end)
 
 m:addOverride("xi.globals.mobskills.self-destruct_2death.onMobSkillCheck", function(target, mob, skill)
-    if (mob:getHPP() > 32 or mob:getAnimationSub() ~= 1) and math.random() < .2 then -- 20% chance for all bombs to explode
+    if
+        mob:getHPP() > 32 or
+        mob:getAnimationSub() ~= 1 or
+        mob:isMobType(xi.mobskills.mobType.NOTORIOUS)
+    then
+        return 1
+    end
+
+    if math.random() > .2 then -- 20% chance for all bombs to explode then
         return 1
     end
 
@@ -5162,7 +5174,15 @@ m:addOverride("xi.globals.mobskills.self-destruct_321.onMobSkillCheck", function
 end)
 
 m:addOverride("xi.globals.mobskills.self-destruct_3death.onMobSkillCheck", function(target, mob, skill)
-    if (mob:getHPP() > 66 or mob:getAnimationSub() ~= 2) and math.random() < .2 then -- 20% chance for all bombs to explode
+    if
+        mob:getHPP() > 66 or
+        mob:getAnimationSub() ~= 0 or
+        mob:isMobType(xi.mobskills.mobType.NOTORIOUS)
+    then
+        return 1
+    end
+
+    if math.random() > .2 then -- 20% chance for all bombs to explode then
         return 1
     end
 
