@@ -2009,7 +2009,7 @@ namespace luautils
                 ShowError("Invalid objtype for entity received.");
                 return -1;
         }
-        auto filename = fmt::format(pathFormat, zone, name);
+        auto filename = fmt::format(fmt::runtime(pathFormat), zone, name);
 
         PChar->eventPreparation->targetEntity = PNpc;
         PChar->eventPreparation->scriptFile   = filename;
