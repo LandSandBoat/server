@@ -193,7 +193,7 @@ ConsoleService::ConsoleService()
                         }
                         else
                         {
-                            fmt::print(fmt::format("> Unknown command: {}\n", inputs[0]));
+                            fmt::print(fmt::runtime("> Unknown command: {}\n"), inputs[0]);
                         }
                     }
 
