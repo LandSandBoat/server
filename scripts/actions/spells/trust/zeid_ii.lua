@@ -16,6 +16,13 @@ spellObject.onMobSpawn = function(mob)
         [xi.magic.spell.LION_II] = xi.trust.messageOffset.TEAMWORK_1,
     })
 
+    mob:addListener('WEAPONSKILL_USE', 'ZEID_II_WEAPONSKILL_USE', function(mobArg, target, wsid, tp, action)
+        if wsid == 56 then -- Ground Strike
+            -- Never again will I lose sight of who I am
+            xi.trust.message(mobArg, xi.trust.messageOffset.SPECIAL_MOVE_1)
+        end
+    end)
+
     -- Stun all the things!
     mob:addSimpleGambit(ai.t.TARGET, ai.c.READYING_WS, 0,
                         ai.r.MA, ai.s.SPECIFIC, xi.magic.spell.STUN)
