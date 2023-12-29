@@ -25,8 +25,10 @@
 
 #include "common/cbasetypes.h"
 #include "common/mmo.h"
+#include "common/stdext.h"
 
 #include <filesystem>
+#include <iostream>
 #include <math.h>
 #include <set>
 
