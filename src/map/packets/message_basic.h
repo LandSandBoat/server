@@ -60,6 +60,7 @@ enum MSGBASIC_ID : uint16
     MSGBASIC_SKILL_RECOVERS_HP     = 103, /* The <player> uses .. <target> recovers .. HP. */
     MSGBASIC_TIME_LEFT             = 202, /* Time left: (h:mm:ss) */
     MSGBASIC_IS_STATUS             = 203, /* <target> is <status>. */
+    MSGBASIC_MAGIC_STEAL           = 430, /* <caster> casts <spell>. <number> of <target>'s effects is drained. */
 
     MSGBASIC_USES_JA_TAKE_DAMAGE      = 317, /* The <player> uses .. <target> takes .. points of damage. */
     MSGBASIC_IS_INTIMIDATED           = 106, /* The <player> is intimidated by <target>'s presence. */
