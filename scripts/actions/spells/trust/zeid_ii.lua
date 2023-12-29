@@ -12,8 +12,6 @@ spellObject.onSpellCast = function(caster, target, spell)
 end
 
 spellObject.onMobSpawn = function(mob)
-    xi.trust.message(mob, xi.trust.messageOffset.SPAWN)
-
     xi.trust.teamworkMessage(mob, {
         [xi.magic.spell.LION_II] = xi.trust.messageOffset.TEAMWORK_1,
     })
