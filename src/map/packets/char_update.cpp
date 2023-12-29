@@ -68,7 +68,8 @@ CCharUpdatePacket::CCharUpdatePacket(CCharEntity* PChar)
         ref<uint8>(0x38) |= 0x08; // New player ?
     }
 
-    ref<uint8>(0x29) = PChar->GetGender() + (PChar->look.size > 0 ? PChar->look.size * 8 : 2); // + model sizing : 0x02 - 0; 0x08 - 1; 0x10 - 2;
+    ref<uint8>(0x29) = PChar->GetGender() + (PChar->look.size << 3);
+    // ref<uint8>(0x29) |= 0x02; // this will display the old-style zone-wide treasure pool. All claimed mobs will show red name regardless of which party has claim.
     ref<uint8>(0x2C) = PChar->GetSpeed();
     ref<uint16>(0x2E) |= PChar->speedsub << 1; // Not sure about this, it was a work around when we set speedsub incorrectly..
     ref<uint8>(0x30) = PChar->isInEvent() ? (uint8)ANIMATION_EVENT : PChar->animation;
