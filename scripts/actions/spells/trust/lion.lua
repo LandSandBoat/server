@@ -17,8 +17,6 @@ spellObject.onMobSpawn = function(mob)
 
     local kGrapeshot = 3198
 
-    xi.trust.message(mob, xi.trust.messageOffset.SPAWN)
-
     xi.trust.teamworkMessage(mob, {
         [xi.magic.spell.ZEID] = xi.trust.messageOffset.TEAMWORK_1,
         [xi.magic.spell.ALDO] = xi.trust.messageOffset.TEAMWORK_2,
