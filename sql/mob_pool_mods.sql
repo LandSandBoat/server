@@ -705,6 +705,12 @@ INSERT INTO `mob_pool_mods` VALUES (5922,6,150,0);      -- MPP: 150
 INSERT INTO `mob_pool_mods` VALUES (5944,3,-10,0);      -- HPP: -10
 INSERT INTO `mob_pool_mods` VALUES (5944,6,35,0);       -- MPP: 35
 
+-- Trust: Prishe II
+INSERT INTO `mob_pool_mods` VALUES (6011,3,10,0);       -- HPP: 10
+INSERT INTO `mob_pool_mods` VALUES (6011,6,10,0);       -- MPP: 15
+INSERT INTO `mob_pool_mods` VALUES (6011,165,25,0);     -- CRITHITRATE: 25
+INSERT INTO `mob_pool_mods` VALUES (6011,288,100,0);    -- DOUBLE_ATTACK: 100
+
 -- Trust: Shantotto II
 INSERT INTO `mob_pool_mods` VALUES (6019,3,-10,0);      -- HPP: -10
 
