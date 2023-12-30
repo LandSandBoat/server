@@ -1583,14 +1583,14 @@ void CStatusEffectContainer::LoadStatusEffects()
             }
             CStatusEffect* PStatusEffect =
                 new CStatusEffect(effectID,
-                                (uint16)rset->getUInt("icon"),
-                                (uint16)rset->getUInt("power"),
-                                (uint16)rset->getUInt("tick"),
-                                duration,
-                                (uint16)rset->getUInt("subid"),
-                                (uint16)rset->getUInt("subpower"),
-                                (uint16)rset->getUInt("tier"),
-                                flags);
+                                  (uint16)rset->getUInt("icon"),
+                                  (uint16)rset->getUInt("power"),
+                                  (uint16)rset->getUInt("tick"),
+                                  duration,
+                                  (uint16)rset->getUInt("subid"),
+                                  (uint16)rset->getUInt("subpower"),
+                                  (uint16)rset->getUInt("tier"),
+                                  flags);
 
             PEffectList.emplace_back(PStatusEffect);
 

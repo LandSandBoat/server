@@ -4663,7 +4663,7 @@ void SmallPacket0x071(map_session_data_t* const PSession, CCharEntity* const PCh
                         ret           = _sql->Query(
                                       "SELECT partyid FROM accounts_parties WHERE charid = %u AND allianceid = %u AND partyflag & %d",
                                       charid, PChar->PParty->m_PAlliance->m_AllianceID, PARTY_LEADER | PARTY_SECOND | PARTY_THIRD);
-                        if (ret != SQL_ERROR && sql->NumRows() == 1 && sql->NextRow() == SQL_SUCCESS)
+                        if (ret != SQL_ERROR && _sql->NumRows() == 1 && _sql->NextRow() == SQL_SUCCESS)
                         {
                             uint32 partyid = _sql->GetUIntData(0);
                             if (_sql->Query("UPDATE accounts_parties SET allianceid = 0, partyflag = partyflag & ~%d WHERE partyid = %u;",

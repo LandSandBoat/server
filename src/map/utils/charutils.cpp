@@ -658,10 +658,10 @@ namespace charutils
                    "FROM char_stats WHERE charid = (?);";
 
         uint8 zoning = 0;
-         rset   = db::preparedStmt(fmtQuery, PChar->id);
+        rset         = db::preparedStmt(fmtQuery, PChar->id);
         if (rset && rset->rowsCount() && rset->next())
         {
-            PChar->nameflags.flags =rset->getUInt("nameflags");
+            PChar->nameflags.flags = rset->getUInt("nameflags");
 
             PChar->SetMJob(rset->getUInt("mjob"));
             PChar->SetSJob(rset->getUInt("sjob"));
@@ -1012,9 +1012,9 @@ namespace charutils
             // query will occur, which will destroy the current query results.
             while (rset->next())
             {
-                auto  equipSlotId = rset->getUInt("equipslotid");
-                uint8 slotId      = rset->getUInt("slotid");
-                uint8 containerId = rset->getUInt("containerid");
+                auto  equipSlotId          = rset->getUInt("equipslotid");
+                uint8 slotId               = rset->getUInt("slotid");
+                uint8 containerId          = rset->getUInt("containerid");
                 equipSlotData[equipSlotId] = { slotId, containerId };
             }
 
@@ -1070,7 +1070,7 @@ namespace charutils
                     PLinkshell1->setSubType(ITEM_UNLOCKED);
                     PChar->equip[SLOT_LINK1] = 0;
                     db::query(fmt::format("DELETE char_equip FROM char_equip WHERE charid = {} AND slotid = {} AND containerid = {}",
-                        PChar->id, SlotID, LocationID));
+                                          PChar->id, SlotID, LocationID));
                 }
                 else
                 {
@@ -1088,7 +1088,7 @@ namespace charutils
                     PLinkshell2->setSubType(ITEM_UNLOCKED);
                     PChar->equip[SLOT_LINK2] = 0;
                     db::query(fmt::format("DELETE char_equip FROM char_equip WHERE charid = {} AND slotid = {} AND containerid = {}",
-                        PChar->id, SlotID, LocationID));
+                                          PChar->id, SlotID, LocationID));
                 }
                 else
                 {

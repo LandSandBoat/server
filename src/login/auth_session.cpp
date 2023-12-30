@@ -197,7 +197,7 @@ void auth_session::read_func()
                 // It's not a BCrypt hash, so we need to use Maria's PASSWORD() to check if the password is actually correct,
                 // and then update the password to a BCrypt hash.
                 auto ret = _sql->Query("SELECT PASSWORD('%s')", password);
-                if (ret != SQL_ERROR && sql->NumRows() != 0 && _sql->NextRow() == SQL_SUCCESS)
+                if (ret != SQL_ERROR && _sql->NumRows() != 0 && _sql->NextRow() == SQL_SUCCESS)
                 {
                     if (_sql->GetStringData(0) != passHash)
                     {
@@ -396,7 +396,7 @@ void auth_session::read_func()
             auto passHash = [&]() -> std::string
             {
                 auto ret = _sql->Query("SELECT accounts.password FROM accounts WHERE accounts.login = '%s'", username);
-                if (ret != SQL_ERROR && sql->NumRows() != 0 && _sql->NextRow() == SQL_SUCCESS)
+                if (ret != SQL_ERROR && _sql->NumRows() != 0 && _sql->NextRow() == SQL_SUCCESS)
                 {
                     return _sql->GetStringData(0);
                 }
@@ -502,30 +502,31 @@ void auth_session::read_func()
                     return;
                 }
             }
-            break;
-            default:
-            {
-                ShowError("Unhandled auth code: {} from {}", code, ipAddress);
-            }
-            break;
         }
+        break;
+        default:
+        {
+            ShowError("Unhandled auth code: {} from {}", code, ipAddress);
+        }
+        break;
     }
+}
 
-    void auth_session::do_write(std::size_t length)
-    {
-        auto self(shared_from_this());
-        // clang-format off
+void auth_session::do_write(std::size_t length)
+{
+    auto self(shared_from_this());
+    // clang-format off
     asio::async_write(socket_, asio::buffer(data_, length),
     [this, self](std::error_code ec, std::size_t /*length*/)
     {
-        if (!ec)
-        {
-            write_func();
-        }
-        else
-        {
-            ShowError(ec.message());
-        }
-    });
-        // clang-format on
+    if (!ec)
+    {
+        write_func();
     }
+    else
+    {
+        ShowError(ec.message());
+    }
+    });
+    // clang-format on
+}
