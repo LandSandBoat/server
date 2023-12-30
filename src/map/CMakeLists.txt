@@ -171,7 +171,16 @@ endforeach()
 
 add_executable(xi_map
     ${SOURCES}
-    ${resource})
+    ${resource}
+)
+
+set_target_properties(xi_map
+    PROPERTIES UNITY_BUILD_MODE GROUP
+)
+
+set_source_files_properties(${SOURCES}
+    PROPERTIES UNITY_GROUP "xi_map_src_bucket"
+)
 
 if(WIN32)
     set_target_properties(xi_map PROPERTIES OUTPUT_NAME xi_map)

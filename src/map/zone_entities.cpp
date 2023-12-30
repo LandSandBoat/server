@@ -33,6 +33,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 
 #include "ai/ai_container.h"
 #include "ai/controllers/mob_controller.h"
+#include "ai/states/state.h"
 
 #include "entities/mobentity.h"
 #include "entities/npcentity.h"
@@ -724,7 +725,7 @@ void CZoneEntities::SpawnPCs(CCharEntity* PChar)
             continue;
         }
 
-        CState* state = PMob->PAI->GetCurrentState();
+        auto* state = PMob->PAI->GetCurrentState();
         if (!state)
         {
             continue;

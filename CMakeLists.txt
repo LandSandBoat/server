@@ -11,6 +11,9 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 set(LINKER_LANGUAGE CXX)
 set(USE_FOLDERS ON)
 
+set(CMAKE_UNITY_BUILD ON)
+set(CMAKE_UNITY_BUILD_MODE GROUP)
+
 # Generate compile_commands.json to make it easier to work with clang based tools
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
