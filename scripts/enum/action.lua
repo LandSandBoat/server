@@ -43,6 +43,7 @@ xi.action =
     MOBABILITY_INTERRUPT  = 35,
     LEAVE                 = 36,
     RAISE_MENU_SELECTION  = 37,
+    JOBABILITY_INTERRUPT  = 38,
 }
 
 xi.act = xi.action
