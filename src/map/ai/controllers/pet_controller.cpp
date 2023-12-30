@@ -68,6 +68,14 @@ void CPetController::DoRoamTick(time_point tick)
     {
         return;
     }
+    else if (PPet->m_PetID <= PETID_DARKSPIRIT)
+    {
+        // this will respect the pet's mob casting cooldown properties via MOBMOD_MAGIC_COOL
+        if (CMobController::IsSpellReady(0) && CMobController::TryCastSpell())
+        {
+            return;
+        }
+    }
 
     float currentDistance = distance(PPet->loc.p, PPet->PMaster->loc.p);
 

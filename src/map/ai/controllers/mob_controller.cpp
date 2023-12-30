@@ -425,7 +425,7 @@ bool CMobController::TrySpecialSkill()
 bool CMobController::TryCastSpell()
 {
     TracyZoneScoped;
-    if (!PTarget || !CanCastSpells())
+    if (!CanCastSpells())
     {
         return false;
     }
@@ -446,7 +446,8 @@ bool CMobController::TryCastSpell()
     }
 
     // Try to get an override spell from the script (if available)
-    auto possibleOverriddenSpell = luautils::OnMobMagicPrepare(PMob, PTarget, chosenSpellId);
+    auto PSpellTarget            = PTarget ? PTarget : PMob;
+    auto possibleOverriddenSpell = luautils::OnMobMagicPrepare(PMob, PSpellTarget, chosenSpellId);
     if (possibleOverriddenSpell.has_value())
     {
         chosenSpellId = possibleOverriddenSpell;
