@@ -98,12 +98,12 @@ namespace moduleutils
         }
     }
 
-    void OnPushPacket(CBasicPacket* packet)
+    void OnPushPacket(CCharEntity* PChar, CBasicPacket* packet)
     {
         TracyZoneScoped;
         for (auto* module : cppModules())
         {
-            module->OnPushPacket(packet);
+            module->OnPushPacket(PChar, packet);
         }
     }
 
