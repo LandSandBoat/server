@@ -12,6 +12,7 @@ local buffModeVar          = 'AVATAR_BUFF_MODE_OFF'
 local lastCastTimeVar      = 'AVATAR_LAST_CASTINGTIME'
 local lastCastTimeStampVar = 'AVATAR_LAST_CAST_TIMESTAMP'
 local playerListenerVar    = 'SMN_SPIRIT_CAST_DELAY'
+local dummySpell           = xi.magic.spell.INDI_REGEN -- used to trigger a "valid" spell in TryCastSpell but not actually cast anything
 
 local printDebug = function(pet, textToPrint)
     -- prints to map server if pet has local var
@@ -130,26 +131,17 @@ xi.pets.avatar.onMobSpawn = function(pet)
 
         master:addListener('ABILITY_USE', playerListenerVar .. 'ABILITY', function(playerArg, target, ability, action)
             local petArg = playerArg:getPet()
-            local abilityName = string.lower(ability:getName())
+            local abilityID = ability:getID()
 
             if
                 petArg and
-                (abilityName == 'assault' or
-                abilityName == 'retreat')
+                (abilityID == xi.jobAbility.ASSAULT or
+                abilityID == xi.jobAbility.RETREAT)
             then
-                -- reset cast cooldown buffer and timer
-                local lastCastTime = pet:getLocalVar(lastCastTimeVar)
-                local lastCastTimeStamp = pet:getLocalVar(lastCastTimeStampVar)
-                if
-                    lastCastTimeStamp > 0
-                then
-                    lastCastTime = lastCastTime + os.time() - lastCastTimeStamp
-                end
-
-                pet:setLocalVar(lastCastTimeStampVar, 0)
-                pet:setLocalVar(lastCastTimeVar, lastCastTime)
-                pet:setLocalVar(buffModeVar, 1)
-                setMagicCastCooldown(petArg)
+                printDebug(petArg, 'resetting cast cooldown')
+                -- reset cast cooldown via same method as fresh spawn
+                petArg:setMobMod(xi.mobMod.MAGIC_COOL, 1)
+                petArg:setLocalVar(buffModeVar, 1)
             end
         end)
     end
@@ -166,10 +158,10 @@ end
 
 xi.pets.avatar.onMobMagicPrepare = function(pet)
     -- Note that:
-    -- returning -1 in this function forces TryCastSpell to exit without choosing/casting a spell, but
+    -- returning -1 (or a spell the spirit cannot cast) in this function forces TryCastSpell to exit without choosing/casting a spell, but
     -- will still set the m_LastMagicTime to ensure next call of this function is after the cast delay
     -- Also, if we return nothing (or zero) TryCastSpell will default to normal mob casting behavior (nukes from spell list, etc)
-    printDebug(pet, 'onMobMagicPrepare: ' .. pet:getMobMod(xi.mobMod.MAGIC_COOL)) -- for debugging magic cooldown
+    printDebug(pet, string.format('onMobMagicPrepare: %u', pet:getMobMod(xi.mobMod.MAGIC_COOL))) -- for debugging magic cooldown
     local master = pet:getMaster()
     if
         not master or
@@ -183,11 +175,11 @@ xi.pets.avatar.onMobMagicPrepare = function(pet)
     pet:setLocalVar(lastCastTimeStampVar, os.time())
     local spellID = 0
     local spellTarget = nil
-    -- early exit from casting a spell to prevent immediately casting a spell after summon
+    -- early exit from casting a spell to prevent immediately casting a spell after being summoned
     if pet:getMobMod(xi.mobMod.MAGIC_COOL) == 1 then
         setMagicCastCooldown(pet)
 
-        return -1
+        return dummySpell
     end
 
     -- ensures magic casting delay is no longer halved
@@ -204,11 +196,11 @@ xi.pets.avatar.onMobMagicPrepare = function(pet)
             pet:setLocalVar(buffModeVar, 0)
         end
 
-        printDebug(pet, spellTarget:getName() .. '->' .. spellID) -- for debugging spell selection
+        printDebug(pet, string.format('%s -> %s', spellTarget:getName(), spellID)) -- for debugging spell selection
         pet:castSpell(spellID, spellTarget or pet)
         setMagicCastCooldown(pet)
 
-        return -1
+        return dummySpell
     end
 
     return 0
@@ -362,7 +354,7 @@ xi.pets.avatar.getLightSpiritBuffs = function(pet)
     local buffs = {}
     for effect, buffData in pairs(xi.pets.avatar.lightSpiritBuffs) do
         -- loop over every spell for this effect and exit on the first that the pet can cast
-        for _, spellData in pairs(buffData) do
+        for _, spellData in ipairs(buffData) do
             if petLvl >= spellData.level then
                 table.insert(buffs, {
                     effect = effect,
@@ -388,7 +380,7 @@ xi.pets.avatar.getLightSpiritCure = function(pet)
         spellFamily = xi.magic.spellFamily.CURAGA
     end
 
-    for _, spellData in pairs(xi.pets.avatar.lightSpiritCures[spellFamily]) do
+    for _, spellData in ipairs(xi.pets.avatar.lightSpiritCures[spellFamily]) do
         if petLvl >= spellData.level then
             return spellData.spell
         end
@@ -420,26 +412,29 @@ xi.pets.avatar.getLightSpiritSpell = function(pet)
     end
 
     local distance  = pet:checkDistance(master) -- starts as distance to master, updated to be distance to the posTarget
-    local hpp       = 0
+    local hpp       = 100
     local alliance  = master:getAlliance()
     local party     = master:getParty()
 
     for _, member in pairs(alliance) do
-        -- tiered chance of healing based on how low they are
         local tempHPP = member:getHPP()
         if
             pet:checkDistance(member) < 20 and
-            (hpp == 0 or
-            tempHPP < hpp) and
-            ((tempHPP < 75 and
-            math.random(100) < 50) or
-            (tempHPP < 50 and
-            math.random(100) < 50) or
-            (tempHPP < 25 and
-            math.random(100) < 50))
+            tempHPP < hpp
         then
-            hpp = tempHPP
-            cureTarget = member
+            -- tiered chance of healing based on how low they are
+            -- flip a coin for every 25% hp the player has missing
+            for hpColor = 1, 3 do
+                if
+                    tempHPP < 25 * hpColor and
+                    math.random(100) < 50
+                then
+                    hpp = tempHPP
+                    cureTarget = member
+
+                    break
+                end
+            end
         end
     end
 
@@ -460,7 +455,7 @@ xi.pets.avatar.getLightSpiritSpell = function(pet)
                 -- Light Spirit will overwrite lower tiered Protect and Shell spells but will not overwrite Haste or Regen
                 local tempSpellID = 0
 
-                for _, spellData in pairs(lightSpiritBuffs) do
+                for _, spellData in ipairs(lightSpiritBuffs) do
                     if
                         not member:getStatusEffect(spellData.effect) or
                         member:getStatusEffect(spellData.effect):getPower() < spellData.power
