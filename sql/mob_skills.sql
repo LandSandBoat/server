@@ -3209,10 +3209,10 @@ INSERT INTO `mob_skills` VALUES (3194,670,'royal_savior',0,7.0,2000,1500,4,0,0,0
 INSERT INTO `mob_skills` VALUES (3195,671,'abyssal_drain',0,7.0,2000,1500,4,0,0,0,0,0,0); -- Zied
 INSERT INTO `mob_skills` VALUES (3196,672,'abyssal_strike',0,7.0,2000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (3197,684,'ground_strike',0,7.0,2000,1500,4,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (3198,2029,'grapeshot',0,7.0,2000,1500,4,0,0,0,0,0,0); -- Lion
-INSERT INTO `mob_skills` VALUES (3199,2030,'pirate_pummel',0,7.0,2000,1500,4,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (3200,2031,'powder_keg',0,7.0,2000,1500,4,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (3201,2032,'walk_the_plank',0,7.0,2000,1500,4,0,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (3198,2029,'grapeshot',4,7.0,2000,1500,4,0,0,0,3,2,0); -- Lion
+INSERT INTO `mob_skills` VALUES (3199,2030,'pirate_pummel',0,7.0,2000,1500,4,0,0,0,9,0,0);
+INSERT INTO `mob_skills` VALUES (3200,2031,'powder_keg',4,7.0,2000,1500,4,0,0,0,5,1,0);
+INSERT INTO `mob_skills` VALUES (3201,2032,'walk_the_plank',1,7.0,2000,1500,4,0,2,0,11,0,0);
 INSERT INTO `mob_skills` VALUES (3202,257,'uriel_blade',0,7.0,2000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (3203,1431,'scouring_bubbles',1,7.0,2000,1500,4,0,0,0,14,10,0);  -- Mihli
 INSERT INTO `mob_skills` VALUES (3204,1036,'amatsu_tsukikage',0,7.0,2000,1500,4,0,0,0,0,0,0);
