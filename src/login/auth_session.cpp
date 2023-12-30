@@ -422,10 +422,10 @@ void auth_session::read_func()
             {
                 // It's not a BCrypt hash, so we need to use Maria's PASSWORD() to check if the password is actually correct,
                 // and then update the password to a BCrypt hash.
-                auto ret = sql->Query("SELECT PASSWORD('%s')", password);
-                if (ret != SQL_ERROR && sql->NumRows() != 0 && sql->NextRow() == SQL_SUCCESS)
+                auto ret = _sql->Query("SELECT PASSWORD('%s')", password);
+                if (ret != SQL_ERROR && _sql->NumRows() != 0 && _sql->NextRow() == SQL_SUCCESS)
                 {
-                    if (sql->GetStringData(0) != passHash)
+                    if (_sql->GetStringData(0) != passHash)
                     {
                         ref<uint8>(data_, 0) = LOGIN_ERROR_CHANGE_PASSWORD;
                         do_write(1);
@@ -434,7 +434,7 @@ void auth_session::read_func()
                     else
                     {
                         passHash = BCrypt::generateHash(password);
-                        sql->Query("UPDATE accounts SET accounts.password = '%s' WHERE accounts.login = '%s';", passHash.c_str(), username);
+                        _sql->Query("UPDATE accounts SET accounts.password = '%s' WHERE accounts.login = '%s';", passHash.c_str(), username);
 
                         if (!BCrypt::validatePassword(password, passHash))
                         {
@@ -446,11 +446,11 @@ void auth_session::read_func()
                 }
             }
 
-            int32 ret = sql->Query("SELECT accounts.id, accounts.status \
+            int32 ret = _sql->Query("SELECT accounts.id, accounts.status \
                                     FROM accounts \
                                     WHERE accounts.login = '%s';",
-                                   username);
-            if (ret == SQL_ERROR || sql->NumRows() == 0)
+                                    username);
+            if (ret == SQL_ERROR || _sql->NumRows() == 0)
             {
                 ShowWarningFmt("login_parse: user <{}> could not be found using the provided information. Aborting.", username);
                 ref<uint8>(data_, 0) = LOGIN_ERROR;
