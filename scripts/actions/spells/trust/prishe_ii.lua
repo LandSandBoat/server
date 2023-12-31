@@ -30,21 +30,9 @@ spellObject.onMobSpawn = function(mob)
     mob:addSimpleGambit(ai.t.PARTY, ai.c.STATUS, xi.effect.SLEEP_I, ai.r.MA, ai.s.SPECIFIC, xi.magic.spell.CURAGA)
     mob:addSimpleGambit(ai.t.PARTY, ai.c.STATUS, xi.effect.SLEEP_II, ai.r.MA, ai.s.SPECIFIC, xi.magic.spell.CURAGA)
 
-    -- Trust Synergy: If Ulmia in the party, Prishe will cast Curaga when party members are in the yellow instead of red.
-    -- TODO: Prishe will use Cure spells exclusively on Ulmia (Only Cure I-IV)
+    -- TODO: Trust Synergy: If Ulmia in the party, Prishe will cast Curaga when party members are in the yellow instead of red.
+    -- Prishe will use Cure spells exclusively on Ulmia (Only Cure I-IV)
     -- https://ffxiclopedia.fandom.com/wiki/Trust:_Prishe_II
-    mob:addListener('COMBAT_TICK', 'PRISHE_CTICK', function(mobArg)
-        local party = mobArg:getMaster():getPartyWithTrusts()
-        for _, member in pairs(party) do
-            if member:getObjType() == xi.objType.TRUST then
-                if member:getTrustID() == xi.magic.spell.ULMIA then
-                    -- We replace our originally defined gambit if this condition is met
-                    mobArg:addSimpleGambit(ai.t.PARTY, ai.c.HPP_LT, 75, ai.r.MA, ai.s.HIGHEST, xi.magic.spellFamily.CURAGA)
-                    mobArg:removeSimpleGambit(healingGambit)
-                end
-            end
-        end
-    end)
 
     mob:addListener('WEAPONSKILL_USE', 'PRISHE_II_WEAPONSKILL_USE', function(mobArg, target, wsid, tp, action)
         if wsid == 3234 then -- Nullifying Dropkick
