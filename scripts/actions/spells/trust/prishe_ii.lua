@@ -15,10 +15,11 @@ spellObject.onMobSpawn = function(mob)
     local psychoAnima  = 3539
 
     xi.trust.teamworkMessage(mob, {
-        -- Offsets for Lion II and Iroha II messages appear to be incorrect.
+        [xi.magic.spell.TENZEN_II] = xi.trust.messageOffset.TEAMWORK_1,
         [xi.magic.spell.NASHMEIRA_II] = xi.trust.messageOffset.TEAMWORK_2,
         [xi.magic.spell.LILISETTE_II] = xi.trust.messageOffset.TEAMWORK_3,
         [xi.magic.spell.ARCIELA_II] = xi.trust.messageOffset.TEAMWORK_4,
+        [xi.magic.spell.IROHA_II] = xi.trust.messageOffset.TEAMWORK_5,
     })
 
     local itemOneGambit = mob:addSimpleGambit(ai.t.SELF, ai.c.HPP_LT, 35, ai.r.MS, ai.s.SPECIFIC, psychoAnima)
@@ -47,6 +48,7 @@ spellObject.onMobSpawn = function(mob)
 
     mob:addListener('WEAPONSKILL_USE', 'PRISHE_II_WEAPONSKILL_USE', function(mobArg, target, wsid, tp, action)
         if wsid == 3234 then -- Nullifying Dropkick
+            -- Welcome to Painville!
             xi.trust.message(mobArg, xi.trust.messageOffset.SPECIAL_MOVE_1)
         end
     end)
