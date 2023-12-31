@@ -13,7 +13,6 @@ end
 
 spellObject.onMobSpawn = function(mob)
     local psychoAnima  = 3539
-    local hysteroAnima = 3540
 
     xi.trust.teamworkMessage(mob, {
         -- Offsets for Lion II and Iroha II messages appear to be incorrect.
@@ -24,7 +23,7 @@ spellObject.onMobSpawn = function(mob)
 
     local itemOneGambit = mob:addSimpleGambit(ai.t.SELF, ai.c.HPP_LT, 35, ai.r.MS, ai.s.SPECIFIC, psychoAnima)
     -- TODO: Add additional logic for Hysteroanima
-    -- local itemTwoGambit = mob:addSimpleGambit(ai.t.TARGET, ai.c.CASTING_MA, 35, ai.r.MS, ai.s.SPECIFIC, hysteroAnima)
+    -- local itemTwoGambit = mob:addSimpleGambit(ai.t.TARGET, ai.c.CASTING_MA, 35, ai.r.MS, ai.s.SPECIFIC, 3540)
     local healingGambit = mob:addSimpleGambit(ai.t.PARTY, ai.c.HPP_LT, 25, ai.r.MA, ai.s.HIGHEST, xi.magic.spellFamily.CURAGA)
 
     mob:addSimpleGambit(ai.t.PARTY, ai.c.STATUS, xi.effect.SLEEP_I, ai.r.MA, ai.s.SPECIFIC, xi.magic.spell.CURAGA)
@@ -56,6 +55,7 @@ spellObject.onMobSpawn = function(mob)
         if wsid == psychoAnima then
             mobArg:removeSimpleGambit(itemOneGambit)
         end
+        
         --[[
         if wsid == hysteroAnima then
             mobArg:removeSimpleGambit(itemTwoGambit)
