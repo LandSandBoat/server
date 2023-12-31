@@ -55,7 +55,7 @@ spellObject.onMobSpawn = function(mob)
         if wsid == psychoAnima then
             mobArg:removeSimpleGambit(itemOneGambit)
         end
-        
+
         --[[
         if wsid == hysteroAnima then
             mobArg:removeSimpleGambit(itemTwoGambit)
