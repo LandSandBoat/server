@@ -883,6 +883,11 @@ INSERT INTO `item_mods_pet` VALUES (23281,28,44,3); -- Automaton: MATT: 44
 INSERT INTO `item_mods_pet` VALUES (23281,30,38,3); -- Automaton: MACC: 38
 INSERT INTO `item_mods_pet` VALUES (23281,170,9,3); -- Automaton: FASTCAST: 9
 
+-- Nukumi Quijotes +2
+INSERT INTO `item_mods_pet` VALUES (23294,25,53,0); -- Pet: ACC: 53
+INSERT INTO `item_mods_pet` VALUES (23294,26,53,0); -- Pet: RACC: 53
+INSERT INTO `item_mods_pet` VALUES (23294,30,53,0); -- Pet: MACC: 53
+
 -- Foire Babouches +2
 INSERT INTO `item_mods_pet` VALUES (23325,28,20,3);   -- Automaton - MATT: 20
 INSERT INTO `item_mods_pet` VALUES (23325,30,40,3);   -- Automaton - MACC: 40
