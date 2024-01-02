@@ -781,6 +781,22 @@ for bonusWord, rewardItem in pairs(settings.BONUS_WORDS) do
 end
 
 -----------------------------------
+-- HELM event handler
+-----------------------------------
+xi.events.eggHunt.helmResult = function(player, itemID)
+    if
+        xi.events.eggHunt.enabledCheck() and
+        player:getCharVar(settings.VAR.DAILY_HELM) < VanadielUniqueDay()
+    then
+        player:timer(3000, function(playerArg)
+            if npcUtil.giveItem(playerArg, math.random(xi.item.A_EGG, xi.item.Z_EGG)) then
+                playerArg:setCharVar(settings.VAR.DAILY_HELM, VanadielUniqueDay())
+            end
+        end)
+    end
+end
+
+-----------------------------------
 -- Moogle event handlers
 -----------------------------------
 
