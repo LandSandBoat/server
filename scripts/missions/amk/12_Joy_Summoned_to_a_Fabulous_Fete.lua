@@ -21,18 +21,18 @@ mission.sections =
             return currentMission == mission.missionId
         end,
 
-        [xi.zone.UPPER_JEUNO] =
+        [xi.zone.CASTLE_ZVAHL_BAILEYS] =
         {
-            ['Inconspicuous_Door'] =
+            onZoneIn =
             {
-                onTrigger = function(player, npc)
-                    return mission:progressEvent(10185)
-                end,
+                function(player, prevZone)
+                    return 88
+                end
             },
 
             onEventFinish =
             {
-                [10185] = function(player, csid, option, npc)
+                [88] = function(player, csid, option, npc)
                     mission:complete(player)
                 end,
             },
