@@ -67,6 +67,44 @@ xi.amk.helpers.helmTrade = function(player, helmType, broke)
     end
 end
 
+-- AMK 6 (index 5) - An Errand! The Professor's Price
+-- Cardian orb KI logic: All or nothing drop of the orb is handled by
+-- a local var that is set once by the first player is called by onMobDeath
+-- The rest of the players in alliance get the same outcome as the first
+xi.amk.helpers.cardianOrbDrop = function(mob, player, orb)
+    if
+        player == nil or
+        player:getCurrentMission(xi.mission.log_id.AMK) < xi.mission.id.amk.AN_ERRAND_THE_PROFESSORS_PRICE
+    then
+        return
+    end
+
+    -- Chance of drop increases both based on size of party and level of mob killed
+    if mob:getLocalVar('Mission[10][5]cardianOrbDrop') == 0 then
+        local partySize = 0
+        for _, member in pairs(player:getAlliance()) do
+            if member:getZoneID() == xi.zone.OUTER_HORUTOTO_RUINS then
+                partySize = partySize + 1
+            end
+        end
+
+        -- Chance ranges from 4% to 25.8% (based on max mob lvl of 44)
+        local dropChance = (3 * mob:getMainLvl()) + (30 * utils.clamp(partySize, 1, 6)) - 10
+        local roll = math.random(1000)
+
+        if roll < dropChance then
+            mob:setLocalVar('Mission[10][5]cardianOrbDrop', 1)
+        else
+            mob:setLocalVar('Mission[10][5]cardianOrbDrop', 2)
+        end
+    end
+
+    -- Give orb
+    if mob:getLocalVar('Mission[10][5]cardianOrbDrop') == 1 then
+        npcUtil.giveKeyItem(player, orb)
+    end
+end
+
 -- AMK 7 (index 6) - Select/lookup the digging zone
 local digZoneIds =
 {
