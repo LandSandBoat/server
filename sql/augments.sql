@@ -896,13 +896,13 @@ INSERT INTO `augments` VALUES (738,0,0,0,0,0);
 INSERT INTO `augments` VALUES (739,0,0,0,0,0);
 -- End unused block
 
-INSERT INTO `augments` VALUES (740,0,0,0,0,0); -- DMG:+1
+INSERT INTO `augments` VALUES (740,0,287,1,0,0); -- DMG:+1
 insert into `augments` values (741,0,0,0,0,0); -- Dmg:+33   Needs to work in either hand,whichever one the weapon is equipped in.
 insert into `augments` values (742,0,0,0,0,0); -- Dmg:+65   Ranged weapons use diff AugID (starts at 746) and diff ModID.
 insert into `augments` values (743,0,0,0,0,0); -- Dmg:+97    (melee,not ranged)
 insert into `augments` values (744,0,0,0,0,0); -- Dmg:-1    (melee,not ranged)
 insert into `augments` values (745,0,0,0,0,0); -- Dmg:-33    (melee,not ranged)
-insert into `augments` values (746,0,0,0,0,0); -- Dmg:+1    (ranged,not melee)
+insert into `augments` values (746,0,287,1,0,0); -- Dmg:+1    (ranged,not melee)
 insert into `augments` values (747,0,0,0,0,0); -- Dmg:+33    (ranged,not melee)
 insert into `augments` values (748,0,0,0,0,0); -- Dmg:+65    (ranged,not melee)
 insert into `augments` values (749,0,0,0,0,0); -- Dmg:+97    (ranged,not melee)
