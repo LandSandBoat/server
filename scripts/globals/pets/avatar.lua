@@ -38,19 +38,11 @@ local setMagicCastCooldown = function(pet)
         castingCooldown = castingCooldown - 5
     end
 
-    local masterLegs = master:getEquipID(xi.slot.LEGS)
-    if
-        masterLegs and
-        (masterLegs == xi.item.SUMMONERS_SPATS or
-        masterLegs == xi.item.SUMMONERS_SPATS_P1 or
-        masterLegs == xi.item.SUMMONERS_SPATS_P2)
-    then
-        castingCooldown = castingCooldown - 5
-    end
+    castingCooldown = castingCooldown - master:getMod(xi.mod.SPIRIT_CAST_REDUCTION)
 
     local petElement = master:getPetElement()
 
-    -- AFAIK unaffected by scholar storms on the player
+    -- AFAIK unaffected by scholar storms on the player, so we use weather of the pet
     local actorWeather = pet:getWeather()
     -- Strong weathers.
     if
@@ -99,7 +91,7 @@ local setMagicCastCooldown = function(pet)
         pet:setLocalVar(lastCastTimeVar, lastCastTime)
     end
 
-    pet:setMobMod(xi.mobMod.MAGIC_COOL, lastCastTime + castingCooldown)
+    pet:setMobMod(xi.mobMod.MAGIC_COOL, lastCastTime + math.max(castingCooldown, 0))
 end
 
 xi.pets.avatar.onMobSpawn = function(pet)
