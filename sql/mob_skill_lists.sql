@@ -3489,7 +3489,7 @@ INSERT INTO `mob_skill_lists` VALUES ('TRUST_Lehko_Habhoka',1037,3230); -- Inspi
 INSERT INTO `mob_skill_lists` VALUES ('TRUST_Lehko_Habhoka',1037,3231); -- Debonair Rush
 INSERT INTO `mob_skill_lists` VALUES ('TRUST_Lehko_Habhoka',1037,3232); -- Iridal Pierce
 INSERT INTO `mob_skill_lists` VALUES ('TRUST_Lehko_Habhoka',1037,3233); -- Lunar Revolution
--- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Nashmeira',1038,0);
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Nashmeira',1038,3243); -- Imperial Authority
 -- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Zazarg',1039,0);
 -- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Ovjang',1040,0);
 -- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Mnejing',1041,0);
@@ -3611,7 +3611,7 @@ INSERT INTO `mob_skill_lists` VALUES ('TRUST_Zied_II',1125,56); -- Ground Strike
 INSERT INTO `mob_skill_lists` VALUES ('TRUST_Prishe_II',1126,3234); -- Nullifying Dropkick
 INSERT INTO `mob_skill_lists` VALUES ('TRUST_Prishe_II',1126,3235); -- Auroral Uppercut
 INSERT INTO `mob_skill_lists` VALUES ('TRUST_Prishe_II',1126,3236); -- Knuckle Sandwich
--- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Nashmeira_II',1127,0);
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Nashmeira_II',1127,3243); -- Imperial Authority
 -- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Lilisette_II',1128,0);
 -- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Tenzen_II',1129,0);
 -- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Mumor_II',1130,0);
