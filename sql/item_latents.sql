@@ -2675,6 +2675,10 @@ INSERT INTO `item_latents` VALUES (23197,518,10,13,57);  -- Agoge Mufflers +2: E
 
 INSERT INTO `item_latents` VALUES (23238,175,12,13,470);  -- Arbatel Bracers +2: EFFECT_IMMANENCE: SKILLCHAINDMG: 12
 
+INSERT INTO `item_latents` VALUES (23297,384,300,13,353); -- Kasuga Haidate +2: EFFECT_HASSO: HASTE_GEAR: 3%
+
+INSERT INTO `item_latents` VALUES (23298,291,16,13,420); -- Hattori Hakama +2: EFFECT_YONIN: COUNTER: 16
+
 -- Hachiya Kyahan +2
 INSERT INTO `item_latents` VALUES (23320,76,25,26,2);   -- Dusk to dawn: MOVE_SPEED_GEAR_BONUS+25%
 
