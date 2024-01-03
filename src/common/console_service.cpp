@@ -199,7 +199,7 @@ ConsoleService::ConsoleService()
 
                     line = std::string();
                 }
-            };
+            }
             fmt::print("Console input thread exiting...\n");
         });
     }

@@ -20,6 +20,7 @@
 */
 
 #include "logging.h"
+
 #include "settings.h"
 #include "tracy.h"
 #include "utils.h"
@@ -179,15 +180,7 @@ namespace logging
         spdlog::set_formatter(std::move(formatter));
     }
 
-    void ClearSinks()
-    {
-        for (auto& name : logNames)
-        {
-            spdlog::get(name)->sinks().clear();
-        }
-    }
-
-    void AddBacktrace(std::string str)
+    void AddBacktrace(std::string const& str)
     {
         if (BacktraceBuffer.is_full())
         {

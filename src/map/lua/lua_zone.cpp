@@ -19,19 +19,17 @@
 ===========================================================================
 */
 
+#include "lua_zone.h"
+
 #include "common/logging.h"
 
-#include "campaign_system.h"
 #include "entities/charentity.h"
 #include "entities/npcentity.h"
-#include "mob_modifier.h"
+#include "lua_baseentity.h"
 #include "trigger_area.h"
 #include "utils/mobutils.h"
 #include "zone.h"
 #include "zone_entities.h"
-
-#include "lua_baseentity.h"
-#include "lua_zone.h"
 
 CLuaZone::CLuaZone(CZone* PZone)
 : m_pLuaZone(PZone)
@@ -216,7 +214,7 @@ bool CLuaZone::isNavigablePoint(const sol::table& point)
 
 std::optional<CLuaBaseEntity> CLuaZone::insertDynamicEntity(sol::table table)
 {
-    return luautils::GenerateDynamicEntity(m_pLuaZone, nullptr, table);
+    return luautils::GenerateDynamicEntity(m_pLuaZone, nullptr, std::move(table));
 }
 
 /************************************************************************

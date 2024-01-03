@@ -82,7 +82,7 @@ CParty::CParty(CBattleEntity* PEntity)
     }
     else
     {
-        ShowWarning("CParty::CParty() - PEntity was null, or party was not null.")
+        ShowWarning("CParty::CParty() - PEntity was null, or party was not null.");
     }
 }
 

@@ -36,4 +36,4 @@ void md5_starts(md5_context* ctx);
 void md5_update(md5_context* ctx, uint8* input, uint32 length);
 void md5_finish(md5_context* ctx, uint8 digest[16]);
 
-#endif /* md5.h */
+#endif // _MD52_H
