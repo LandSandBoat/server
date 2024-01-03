@@ -93,6 +93,7 @@ zones[xi.zone.ABYSSEA_ALTEPA] =
         CHICKCHARNEY                = 17670577,
         VADLEANY                    = 17670578,
         BUGUL_NOZ                   = 17670579,
+        CUIJATENDER                 = GetFirstID('Cuijatender'),
     },
     npc =
     {
