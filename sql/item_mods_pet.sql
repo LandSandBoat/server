@@ -888,6 +888,15 @@ INSERT INTO `item_mods_pet` VALUES (23294,25,53,0); -- Pet: ACC: 53
 INSERT INTO `item_mods_pet` VALUES (23294,26,53,0); -- Pet: RACC: 53
 INSERT INTO `item_mods_pet` VALUES (23294,30,53,0); -- Pet: MACC: 53
 
+-- Peltast's cuissots +2
+INSERT INTO `item_mods_pet` VALUES (23299,25,53,2); -- Wyvern: ACC: 53
+INSERT INTO `item_mods_pet` VALUES (23299,30,53,2); -- Wyvern: MACC: 53
+
+-- Beckoner's spats +2
+INSERT INTO `item_mods_pet` VALUES (23300,25,53,1); -- Avatar: ACC: 53
+INSERT INTO `item_mods_pet` VALUES (23300,26,53,1); -- Avatar: RACC: 53
+INSERT INTO `item_mods_pet` VALUES (23300,30,53,1); -- Avatar: MACC: 53
+
 -- Foire Babouches +2
 INSERT INTO `item_mods_pet` VALUES (23325,28,20,3);   -- Automaton - MATT: 20
 INSERT INTO `item_mods_pet` VALUES (23325,30,40,3);   -- Automaton - MACC: 40
