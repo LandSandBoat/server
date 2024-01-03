@@ -2527,7 +2527,21 @@ local gearSets =
         {
             { xi.mod.AUGMENT_BLU_MAGIC, 2, 3, 4, 5 },
         },
-    }
+    },
+
+    [133] = -- AF3 BLU 109/119 Set: Occasionally triples the WSC of Blue Magic Spells. Will stack with Chain Affinity.
+    {
+        items =
+        {
+            xi.item.VAMPIRIC_MITTS,
+            xi.item.VAMPIRIC_BOOTS,
+        },
+        minEquipped = 2,
+        mods =
+        {
+            { xi.mod.ENH_DRAIN_ASPIR, 5 },
+        },
+    },
 }
 
 -- Build Table to lookup Set ID based on Item ID.  This is cached in xi.gear_sets.itemToSetId table,
