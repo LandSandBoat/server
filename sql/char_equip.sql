@@ -16,4 +16,4 @@ CREATE TABLE IF NOT EXISTS `char_equip` (
   `equipslotid` tinyint(1) unsigned NOT NULL DEFAULT '0',
   `containerid` tinyint(1) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`charid`,`equipslotid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 AVG_ROW_LENGTH=41;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci AVG_ROW_LENGTH=41;

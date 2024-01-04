@@ -24,7 +24,7 @@ CREATE TABLE IF NOT EXISTS `auction_house` (
   PRIMARY KEY (`id`),
   KEY `itemid` (`itemid`),
   KEY `charid` (`seller`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci AUTO_INCREMENT=1 ;
 
 --
 -- Contenu de la table `auction_house`

@@ -9,7 +9,7 @@ CREATE TABLE `server_variables` (
   `value` int(11) NOT NULL,
   `expiry` int(11) NOT NULL DEFAULT 0,
   PRIMARY KEY (`name`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- ----------------------------
 -- Records of server_variables

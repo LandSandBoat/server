@@ -25,4 +25,4 @@ CREATE TABLE IF NOT EXISTS `delivery_box` (
   `received` tinyint(1) NOT NULL DEFAULT 0,
   `sent` tinyint(1) NOT NULL DEFAULT 0,
   PRIMARY KEY (`charid`,`box`,`slot`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;

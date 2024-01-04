@@ -15,4 +15,4 @@ CREATE TABLE `char_blacklist` (
   `charid_owner` int(10) unsigned NOT NULL,
   `charid_target` int(10) unsigned NOT NULL,
   PRIMARY KEY (`charid_target`,`charid_owner`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;

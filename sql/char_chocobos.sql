@@ -34,4 +34,4 @@ CREATE TABLE `char_chocobos` (
   `care_plan` int unsigned NOT NULL,
   `held_item` int unsigned NOT NULL,
   PRIMARY KEY (`charid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
