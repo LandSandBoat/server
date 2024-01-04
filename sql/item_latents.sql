@@ -2679,6 +2679,8 @@ INSERT INTO `item_latents` VALUES (23297,384,300,13,353); -- Kasuga Haidate +2: 
 
 INSERT INTO `item_latents` VALUES (23298,291,16,13,420); -- Hattori Hakama +2: EFFECT_YONIN: COUNTER: 16
 
+-- TODO: INSERT INTO `item_latents` VALUES (23301,??,750,13,457); -- Hashishin Tayt +2: EFFECT_EFFLUX: TP Bonus +750
+
 -- Hachiya Kyahan +2
 INSERT INTO `item_latents` VALUES (23320,76,25,26,2);   -- Dusk to dawn: MOVE_SPEED_GEAR_BONUS+25%
 
