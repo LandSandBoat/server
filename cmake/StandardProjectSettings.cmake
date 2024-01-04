@@ -60,6 +60,7 @@ if(MSVC)
         /Oy- # Frame-Pointer Omission
         /MP # Build with Multiple Processes
         /bigobj # Allow bigger .obj files, which we have from mainly the sol templating
+        /utf-8 # Treat source files as UTF-8. This is needed because of certain symbols inside fmtlib's code. u-second, etc.
     )
 
     if(CMAKE_BUILD_TYPE STREQUAL Debug)
