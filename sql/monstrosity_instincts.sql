@@ -4,7 +4,7 @@ CREATE TABLE `monstrosity_instincts` (
     `cost` smallint(30) unsigned NOT NULL,
     `name` varchar(60) DEFAULT NULL,
     PRIMARY KEY (`monstrosity_instinct_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=Aria DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 INSERT INTO `monstrosity_instincts` VALUES (3,2,'Rabbit instinct I');
 INSERT INTO `monstrosity_instincts` VALUES (4,4,'Rabbit instinct II');

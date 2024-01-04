@@ -29,7 +29,7 @@ CREATE TABLE IF NOT EXISTS `transport` (
   `time_anim_depart` tinyint(3) unsigned NOT NULL DEFAULT '0',
   `zone` tinyint(3) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=Aria DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Contenu de la table `transport`
