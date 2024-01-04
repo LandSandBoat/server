@@ -897,6 +897,11 @@ INSERT INTO `item_mods_pet` VALUES (23300,25,53,1); -- Avatar: ACC: 53
 INSERT INTO `item_mods_pet` VALUES (23300,26,53,1); -- Avatar: RACC: 53
 INSERT INTO `item_mods_pet` VALUES (23300,30,53,1); -- Avatar: MACC: 53
 
+-- Karagoz pantaloni +2
+INSERT INTO `item_mods_pet` VALUES (23303,25,53,3); -- Automaton: ACC: 53
+INSERT INTO `item_mods_pet` VALUES (23303,26,53,3); -- Automaton: RACC: 53
+INSERT INTO `item_mods_pet` VALUES (23303,30,53,3); -- Automaton: MACC: 53
+
 -- Foire Babouches +2
 INSERT INTO `item_mods_pet` VALUES (23325,28,20,3);   -- Automaton - MATT: 20
 INSERT INTO `item_mods_pet` VALUES (23325,30,40,3);   -- Automaton - MACC: 40
