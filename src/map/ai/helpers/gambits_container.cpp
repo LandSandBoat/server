@@ -169,12 +169,15 @@ namespace gambits
             else if (predicate.target == G_TARGET::RANGED)
             {
                 auto result = false;
+                // clang-format off
                 static_cast<CCharEntity*>(POwner->PMaster)->ForPartyWithTrusts([&](CBattleEntity* PMember)
-                                                                               {
+                {
                     if (isValidMember(PMember) && CheckTrigger(PMember, predicate) && (PMember->GetMJob() == JOB_RNG || PMember->GetMJob() == JOB_COR))
                     {
                         result = true;
-                    } });
+                    }
+                });
+                // clang-format off
                 return result;
             }
             else if (predicate.target == G_TARGET::CASTER)
