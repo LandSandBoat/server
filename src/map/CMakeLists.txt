@@ -216,3 +216,57 @@ if(TRACY_ENABLE)
     set_target_properties(xi_map PROPERTIES OUTPUT_NAME xi_map_tracy)
     message(STATUS "TRACY_ENABLE: xi_map will be output as xi_map_tracy")
 endif(TRACY_ENABLE)
+
+add_executable(xi_map_bench
+    ${CMAKE_SOURCE_DIR}/src/map/benchmark_main.cpp
+    ${SOURCES}
+    ${resource}
+)
+
+if(WIN32)
+    set_target_properties(xi_map_bench PROPERTIES OUTPUT_NAME xi_map_bench)
+endif()
+
+target_compile_definitions(
+    xi_map_bench
+    PUBLIC
+    dsUDPSERV
+    DEBUGLOGMAP
+    DEFINE_OWN_MAIN
+)
+
+CPMAddPackage(
+    NAME benchmark
+    GITHUB_REPOSITORY google/benchmark
+    GIT_TAG 344117638c8ff7e239044fd0fa7085839fc03021
+    OPTIONS
+        "BENCHMARK_ENABLE_TESTING OFF"
+)
+
+target_link_libraries(xi_map_bench
+    PUBLIC
+        ${EXTERNAL_LIBS}
+        project_options
+        benchmark::benchmark
+    PRIVATE
+        project_warnings
+)
+
+target_include_directories(xi_map_bench
+    PUBLIC
+        ${CMAKE_SOURCE_DIR}
+        ${CMAKE_SOURCE_DIR}/src
+        ${CMAKE_CURRENT_SOURCE_DIR}
+        ${module_include_dirs}
+)
+
+if(NOT ${ENABLE_CLANG_TIDY})
+    target_precompile_headers(xi_map_bench PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/pch.h)
+endif()
+
+if(APPLE)
+    disable_lto(xi_map_bench)
+endif()
+
+set_target_output_directory(xi_map_bench)
+set_property(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT xi_map_bench)

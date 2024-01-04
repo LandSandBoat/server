@@ -151,6 +151,7 @@ namespace logging
             sinks.emplace_back(std::make_shared<spdlog::sinks::basic_file_sink_mt>(logFile));
         }
 
+        spdlog::drop_all();
         for (auto& name : logNames)
         {
             auto logger = std::make_shared<spdlog::async_logger>(name, sinks.begin(), sinks.end(), spdlog::thread_pool());

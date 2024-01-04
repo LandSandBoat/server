@@ -46,10 +46,10 @@
             },
         },
         {
-            "name": "(Windows) xi_map",
+            "name": "(Windows) xi_map_bench",
             "type": "cppvsdbg",
             "request": "launch",
-            "program": "${workspaceFolder}/xi_map.exe",
+            "program": "${workspaceFolder}/xi_map_bench.exe",
             "args": [],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
