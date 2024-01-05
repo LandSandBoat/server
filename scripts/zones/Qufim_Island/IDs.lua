@@ -63,7 +63,7 @@ zones[xi.zone.QUFIM_ISLAND] =
             [17293535] = 17293537, -- -152.269 -20 243
             [17293536] = 17293537, -- -137.651 -23.507 231.528
         },
-        OPHIOTAURUS = 17293666
+        OPHIOTAURUS = GetFirstID('Ophiotaurus'),
     },
 
     npc =
