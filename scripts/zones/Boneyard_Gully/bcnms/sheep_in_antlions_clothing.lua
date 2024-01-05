@@ -26,6 +26,7 @@ battlefieldObject.onBattlefieldInitialise = function(battlefield)
     tuchulcha:setLocalVar('sand_pit1', pos[4])
     tuchulcha:setLocalVar('sand_pit2', pos[5])
     tuchulcha:setLocalVar('sand_pit3', pos[6])
+    tuchulcha:setPos(ID.sheepInAntlionsClothing[bfID].ant_positions[pos[7]]) -- set his initial position randomly
 end
 
 battlefieldObject.onBattlefieldTick = function(battlefield, tick)
