@@ -519,6 +519,9 @@ xi.weaponskills.calculateRawWSDmg = function(attacker, target, wsID, tp, action,
     -- Recalculate accuracy if it varies with TP, applied to all hits
     if wsParams.acc100 ~= 0 then
         calcParams.hitRate = accVariesWithTP(calcParams.hitRate, calcParams.accStat, tp, wsParams.acc100, wsParams.acc200, wsParams.acc300)
+    else
+        -- clamp hitRate now if accuracy doesn't vary with TP
+        calcParams.hitRate = utils.clamp(calcParams.hitRate, 0.2, 0.95)
     end
 
     -- Calculate alpha, WSC, and our modifiers for our base per-hit damage
@@ -588,8 +591,23 @@ xi.weaponskills.calculateRawWSDmg = function(attacker, target, wsID, tp, action,
     calcParams.offhandHitsLanded  = 0
 
     -- Calculate the damage from the first hit
+    if
+        not isJump and
+        calcParams.firstHitRate
+    then
+        calcParams.origHitRate = calcParams.hitRate
+        calcParams.hitRate = calcParams.firstHitRate
+    end
+
     local dmg = mainBase * ftp
     hitdmg, calcParams = getSingleHitDamage(attacker, target, dmg, wsParams, calcParams)
+
+    if
+        not isJump and
+        calcParams.origHitRate
+    then
+        calcParams.hitRate = calcParams.origHitRate
+    end
 
     if calcParams.melee then
         hitdmg = modifyMeleeHitDamage(attacker, target, calcParams.attackInfo, wsParams, hitdmg)
@@ -848,8 +866,9 @@ xi.weaponskills.doPhysicalWeaponskill = function(attacker, target, wsID, wsParam
         calcParams.bonusWSmods = wsParams.bonusWSmods or 0
     end
 
-    calcParams.hitRate   = xi.weaponskills.getHitRate(attacker, target, false, calcParams.bonusAcc)
-    calcParams.skillType = attack.weaponType
+    calcParams.firstHitRate = xi.weaponskills.getHitRate(attacker, target, true, calcParams.bonusAcc + 100)
+    calcParams.hitRate      = xi.weaponskills.getHitRate(attacker, target, false, calcParams.bonusAcc)
+    calcParams.skillType    = attack.weaponType
 
     -- Send our wsParams off to calculate our raw WS damage, hits landed, and shadows absorbed
     calcParams     = xi.weaponskills.calculateRawWSDmg(attacker, target, wsID, tp, action, wsParams, calcParams)
