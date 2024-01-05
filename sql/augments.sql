@@ -100,20 +100,20 @@ INSERT INTO `augments` VALUES (69,0,26,1,0,0); -- Rng.Acc. +1 Rng.Atk. +1
 INSERT INTO `augments` VALUES (69,0,24,1,0,0); -- Cont.
 INSERT INTO `augments` VALUES (70,0,30,33,0,0); -- Mag. Acc. +33 Mag.Atk.Bns +33
 INSERT INTO `augments` VALUES (70,0,28,33,0,0); -- Cont.
-INSERT INTO `augments` VALUES (71,0,160,-100,0,0); -- Damage Taken -1%
+INSERT INTO `augments` VALUES (71,100,160,-1,0,0); -- Damage Taken -1%
 INSERT INTO `augments` VALUES (72,0,0,1,0,0); -- Exp. Point +1%
 INSERT INTO `augments` VALUES (73,0,0,33,0,0); -- Exp. Point +33%
 INSERT INTO `augments` VALUES (74,0,915,1,0,0); -- Cap. Point +1%
 INSERT INTO `augments` VALUES (75,0,915,33,0,0); -- Cap. Point +33%
 INSERT INTO `augments` VALUES (76,0,0,0,0,0); -- DMG +33 Unsure if main hand or off hand so leaving values blank for now,goes up in increments of 1 after the initial 33.
 INSERT INTO `augments` VALUES (77,0,0,0,0,0); -- Delay -33% Unsure if main hand or off hand so leaving values blank for now,goes up in increments of 1 after the initial 33.
-INSERT INTO `augments` VALUES (78,0,2,2,0,0); -- HP +2 (count by 2)
-INSERT INTO `augments` VALUES (79,0,2,3,0,0); -- HP +3 (count by 3)
+INSERT INTO `augments` VALUES (78,2,2,1,0,0); -- HP +2 (count by 2)
+INSERT INTO `augments` VALUES (79,3,2,1,0,0); -- HP +3 (count by 3)
 INSERT INTO `augments` VALUES (80,0,30,1,0,0); -- Mag. Acc. +1/Mag. Dmg. +1
 INSERT INTO `augments` VALUES (80,0,311,1,0,0); -- Cont.
 INSERT INTO `augments` VALUES (81,0,0,0,0,0); -- Eva +1/Mag. Eva + d (corrupted)
-INSERT INTO `augments` VALUES (82,0,5,2,0,0); -- MP +2 (count by 2)
-INSERT INTO `augments` VALUES (83,0,5,3,0,0); -- MP +3 (count by 3)
+INSERT INTO `augments` VALUES (82,2,5,1,0,0); -- MP +2 (count by 2)
+INSERT INTO `augments` VALUES (83,3,5,1,0,0); -- MP +3 (count by 3)
 
 -- 84 to 95 currently unused. Leave at zero. Edit+move or remove this note as new augments get discovered.
 INSERT INTO `augments` VALUES (84,0,0,0,0,0);
@@ -151,8 +151,8 @@ INSERT INTO `augments` VALUES (108,0,28,1,1,0); -- Cont.
 INSERT INTO `augments` VALUES (109,0,288,1,1,0); -- Pet: Dbl.Atk.+1% Crit.hit rate+1
 INSERT INTO `augments` VALUES (109,0,165,1,1,0); -- Cont.
 INSERT INTO `augments` VALUES (110,0,370,1,1,0); -- Pet: Regen+1
-INSERT INTO `augments` VALUES (111,0,384,100,1,0); -- Pet: Haste+1
-INSERT INTO `augments` VALUES (112,0,160,-100,1,0); -- Pet: Damage taken -1%
+INSERT INTO `augments` VALUES (111,100,384,1,1,0); -- Pet: Haste+1
+INSERT INTO `augments` VALUES (112,100,160,-1,1,0); -- Pet: Damage taken -1%
 INSERT INTO `augments` VALUES (113,0,26,1,1,0); -- Pet: Rng.Acc.+1
 INSERT INTO `augments` VALUES (114,0,24,1,1,0); -- Pet: Rng.Atk.+1
 INSERT INTO `augments` VALUES (115,0,73,1,1,0); -- Pet: Store TP+1
@@ -319,7 +319,7 @@ INSERT INTO `augments` VALUES (249,0,0,0,0,0);
 INSERT INTO `augments` VALUES (250,0,0,0,0,0);
 -- End unused block
 
-INSERT INTO `augments` VALUES (251,1,911,0,0,0); -- Daken +1
+INSERT INTO `augments` VALUES (251,1,911,1,0,0); -- Daken +1
 
 -- 252 to 256 currently unused. Leave at zero. Edit+move or remove this note as new augments get discovered.
 INSERT INTO `augments` VALUES (252,0,0,0,0,0);
@@ -794,7 +794,7 @@ INSERT INTO `augments` VALUES (636,0,0,0,0,0);
 INSERT INTO `augments` VALUES (637,0,0,0,0,0);
 INSERT INTO `augments` VALUES (638,0,0,0,0,0);
 INSERT INTO `augments` VALUES (639,0,0,0,0,0);
-INSERT INTO `augments` VALUES (640,2,291,2,0,0); -- Counter +2 (increases by 2)
+INSERT INTO `augments` VALUES (640,2,291,1,0,0); -- Counter +2 (increases by 2)
 INSERT INTO `augments` VALUES (641,0,0,0,0,0);
 INSERT INTO `augments` VALUES (642,0,0,0,0,0);
 INSERT INTO `augments` VALUES (643,0,0,0,0,0);
@@ -1427,8 +1427,8 @@ INSERT INTO `augments` VALUES (1151,0,0,0,0,0);
 INSERT INTO `augments` VALUES (1152,0,1,10,0,0); -- DEF +10
 INSERT INTO `augments` VALUES (1153,0,68,3,0,0); -- Evasion +3
 INSERT INTO `augments` VALUES (1154,0,31,3,0,0); -- Mag. Evasion +3
-INSERT INTO `augments` VALUES (1155,100,161,-2,0,0); -- Physical Damage Taken -2%
-INSERT INTO `augments` VALUES (1156,100,163,-2,0,0); -- Magic Damage Taken -2%
+INSERT INTO `augments` VALUES (1155,200,161,-1,0,0); -- Physical Damage Taken -2%
+INSERT INTO `augments` VALUES (1156,200,163,-1,0,0); -- Magic Damage Taken -2%
 INSERT INTO `augments` VALUES (1157,0,168,2,0,0); -- Spell Interruption Rate Down 2%
 INSERT INTO `augments` VALUES (1158,0,958,2,0,0); -- Occ. Resistance to Status Ailments +2
 
@@ -1522,8 +1522,8 @@ INSERT INTO `augments` VALUES (1244,0,0,0,0,0);
 INSERT INTO `augments` VALUES (1245,0,0,0,0,0);
 -- End unused block
 
-INSERT INTO `augments` VALUES (1246,100,161,-2,1,0); -- Pet: Phy. Dmg. Taken -2%
-INSERT INTO `augments` VALUES (1247,100,163,-2,1,0); -- Pet: Magic Dmg. Taken -2%
+INSERT INTO `augments` VALUES (1246,200,161,-1,1,0); -- Pet: Phy. Dmg. Taken -2%
+INSERT INTO `augments` VALUES (1247,200,163,-1,1,0); -- Pet: Magic Dmg. Taken -2%
 INSERT INTO `augments` VALUES (1248,0,890,1,0,0); -- Enhancing Magic Effect Duration +1
 INSERT INTO `augments` VALUES (1249,0,477,1,0,0); -- Helix Effect Duration+1
 INSERT INTO `augments` VALUES (1250,0,960,1,0,0); -- Indi Effect Duration+1
