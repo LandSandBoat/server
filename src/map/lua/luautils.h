@@ -250,8 +250,6 @@ namespace luautils
     bool  OnTrustSpellCastCheckBattlefieldTrusts(CBattleEntity* PCaster); // Triggered if spell is a trust spell during onCast to determine to interrupt spell or not
 
     int32 OnMobInitialize(CBaseEntity* PMob);
-    int32 ApplyMixins(CBaseEntity* PMob);
-    int32 ApplyZoneMixins(CBaseEntity* PMob);
     int32 OnMobSpawn(CBaseEntity* PMob);
     int32 OnMobRoamAction(CBaseEntity* PMob); // triggers when event mob is ready for a custom roam action
     int32 OnMobRoam(CBaseEntity* PMob);

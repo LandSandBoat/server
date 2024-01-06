@@ -37,11 +37,6 @@ global_objects=(
     utils
     npcUtil
 
-    mixins
-    g_mixins
-    applyMixins
-    mixinOptions
-
     set
     printf
     switch
