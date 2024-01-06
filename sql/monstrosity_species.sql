@@ -8,7 +8,7 @@ CREATE TABLE `monstrosity_species` (
     `size` tinyint(3) unsigned NOT NULL, -- 0: small, 1: medium, 2: large
     `look` varbinary(4) NOT NULL,
     PRIMARY KEY (`monstrosity_id`, `monstrosity_species_code`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
+) ENGINE=Aria DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- TODO: Double check the mjob/sjob values for everything using both resources:
 -- https://ffxiclopedia.fandom.com/wiki/Category:Monipulators

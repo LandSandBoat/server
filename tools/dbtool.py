@@ -495,13 +495,12 @@ def connect():
             ):
                 result = subprocess.run(
                     [
-                        f"{mysql_bin}mysqladmin{exe}",
+                        f"{mysql_bin}mysql{exe}",
                         f"-h{host}",
                         f"-P{str(port)}",
                         f"-u{login}",
                         f"-p{password}",
-                        "CREATE",
-                        database,
+                        f"-e CREATE DATABASE {database} CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci",
                     ],
                     capture_output=True,
                     text=True,
@@ -1260,13 +1259,12 @@ def main():
                 if len(sys.argv) > 2 and str(sys.argv[2]) == database:
                     result = subprocess.run(
                         [
-                            f"{mysql_bin}mysqladmin{exe}",
+                            f"{mysql_bin}mysql{exe}",
                             f"-h{host}",
                             f"-P{str(port)}",
                             f"-u{login}",
                             f"-p{password}",
-                            "CREATE",
-                            database,
+                            f"-e CREATE DATABASE {database} CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci",
                         ],
                         capture_output=True,
                         text=True,

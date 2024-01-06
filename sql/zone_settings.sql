@@ -30,7 +30,7 @@ CREATE TABLE `zone_settings` (
   `tax` float(5,2) unsigned NOT NULL DEFAULT '0.00',
   `misc` smallint(5) unsigned NOT NULL DEFAULT '0', -- ZONEMISC in zone.h
   PRIMARY KEY (`zoneid`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 AVG_ROW_LENGTH=20 PACK_KEYS=1 CHECKSUM=1;
+) ENGINE=Aria DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci AVG_ROW_LENGTH=20 PACK_KEYS=1 CHECKSUM=1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --

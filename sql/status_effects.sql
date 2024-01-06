@@ -29,7 +29,7 @@ CREATE TABLE `status_effects` (
   `min_duration` smallint(5) unsigned NOT NULL DEFAULT 0,
   `sort_key` smallint(5) unsigned NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
+) ENGINE=Aria DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --

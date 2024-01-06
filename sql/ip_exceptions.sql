@@ -5,4 +5,4 @@ CREATE TABLE IF NOT EXISTS `ip_exceptions` (
     `comment` varchar(512) DEFAULT NULL,
     PRIMARY KEY (`accid`)
 )
-ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;

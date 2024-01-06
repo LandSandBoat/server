@@ -24,7 +24,7 @@ CREATE TABLE `campaign_map` (
   `max_fortifications` smallint(4) unsigned NOT NULL DEFAULT 0,
   `max_resources` smallint(4) unsigned NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `campaign_map`

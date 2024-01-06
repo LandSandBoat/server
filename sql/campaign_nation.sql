@@ -15,7 +15,7 @@ CREATE TABLE `campaign_nation` (
   `morale` tinyint(3) unsigned NOT NULL DEFAULT 0,
   `prosperity` tinyint(2) unsigned NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `campaign_nation`

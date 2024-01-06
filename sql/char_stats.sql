@@ -31,4 +31,4 @@ CREATE TABLE IF NOT EXISTS `char_stats` (
   `pet_hp` smallint(4) unsigned NOT NULL DEFAULT '0',
   `pet_mp` smallint(4) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`charid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;

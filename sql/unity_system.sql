@@ -13,7 +13,7 @@ CREATE TABLE `unity_system` (
   `members_prev` int(11) NOT NULL DEFAULT 0,
   `points_prev` double NOT NULL DEFAULT 0,
   PRIMARY KEY (`leader`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- Dumping data for table xidbw.unity_system: ~12 rows (approximately)
 /*!40000 ALTER TABLE `unity_system` DISABLE KEYS */;

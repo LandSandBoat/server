@@ -22,7 +22,7 @@ CREATE TABLE `automaton_abilities` (
   `reqframe` smallint(3) unsigned NOT NULL DEFAULT '0',
   `skilllevel` smallint(3) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`abilityid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 AVG_ROW_LENGTH=14;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci AVG_ROW_LENGTH=14;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
