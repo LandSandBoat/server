@@ -23,14 +23,14 @@ xi.weaponskills = xi.weaponskills or {}
 -- should be checking for xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES and
 -- overwriting the results of this function if the server has it set
 local function getAlpha(level)
-    local alpha = 1.00
+    local alpha = 1
 
-    if level > 5 and level <= 59 then
-        alpha = 1.00 - math.floor(level / 6) * 0.01
-    elseif level > 59 and level <= 75 then
-        alpha = 0.90 - math.floor((level - 60) / 2) * 0.01
-    elseif level > 75 then
+    if level > 75 then
         alpha = 0.85
+    elseif level > 59 then
+        alpha = 0.9 - math.floor((level - 60) / 2) / 100
+    elseif level > 5 then
+        alpha = 1 - math.floor(level / 6) / 100
     end
 
     return alpha
@@ -41,33 +41,34 @@ local function calculateRawFstr(dSTR, divisor)
     local fSTR = 0
 
     if dSTR >= 12 then
-        fSTR = (dSTR + 4) / divisor
+        fSTR = dSTR + 4
     elseif dSTR >= 6 then
-        fSTR = (dSTR + 6) / divisor
+        fSTR = dSTR + 6
     elseif dSTR >= 1 then
-        fSTR = (dSTR + 7) / divisor
+        fSTR = dSTR + 7
     elseif dSTR >= -2 then
-        fSTR = (dSTR + 8) / divisor
+        fSTR = dSTR + 8
     elseif dSTR >= -7 then
-        fSTR = (dSTR + 9) / divisor
+        fSTR = dSTR + 9
     elseif dSTR >= -15 then
-        fSTR = (dSTR + 10) / divisor
+        fSTR = dSTR + 10
     elseif dSTR >= -21 then
-        fSTR = (dSTR + 12) / divisor
+        fSTR = dSTR + 12
     else
-        fSTR = (dSTR + 13) / divisor
+        fSTR = dSTR + 13
     end
 
-    return fSTR
+    return fSTR / divisor
 end
 
 -- Given the attacker's str and the mob's vit, fSTR2 is calculated (for ranged WS)
 xi.weaponskills.fSTR2 = function(atkStr, defVit, weaponRank)
-    local dSTR = atkStr - defVit
+    local dSTR  = atkStr - defVit
     local fSTR2 = calculateRawFstr(dSTR, 2)
 
     -- Apply fSTR2 caps.
     local lowerCap = weaponRank * -2
+
     if weaponRank == 0 then
         lowerCap = -2
     elseif weaponRank == 1 then
@@ -84,8 +85,8 @@ end
 -- https://www.bg-wiki.com/ffxi/Agwu%27s_Scythe Souleater Effect that goes beyond established cap, Stalwart Soul bonus being additive to trait
 local function souleaterBonus(attacker, wsParams)
     if attacker:hasStatusEffect(xi.effect.SOULEATER) then
-        local souleaterEffect   = attacker:getMaxGearMod(xi.mod.SOULEATER_EFFECT) * 0.01
-        local souleaterEffectII = attacker:getMod(xi.mod.SOULEATER_EFFECT_II) * 0.01
+        local souleaterEffect   = attacker:getMaxGearMod(xi.mod.SOULEATER_EFFECT) / 100
+        local souleaterEffectII = attacker:getMod(xi.mod.SOULEATER_EFFECT_II) / 100
         local stalwartSoulBonus = 1 - attacker:getMod(xi.mod.STALWART_SOUL) / 100
         local bonusDamage       = math.floor(attacker:getHP() * (0.1 + souleaterEffect + souleaterEffectII))
 
@@ -143,32 +144,34 @@ local function fencerBonus(attacker)
 end
 
 local function shadowAbsorb(target)
-    local targShadows = target:getMod(xi.mod.UTSUSEMI)
-    local shadowType  = xi.mod.UTSUSEMI
+    local targetShadows = target:getMod(xi.mod.UTSUSEMI)
+    local shadowType    = xi.mod.UTSUSEMI
 
-    if targShadows == 0 then
-        if math.random() < 0.8 then
-            targShadows = target:getMod(xi.mod.BLINK)
-            shadowType = xi.mod.BLINK
+    if targetShadows == 0 then
+        if math.random(1, 100) <= 80 then
+            targetShadows = target:getMod(xi.mod.BLINK)
+            shadowType    = xi.mod.BLINK
         end
     end
 
-    if targShadows > 0 then
+    if targetShadows > 0 then
+        targetShadows = targetShadows - 1
+
         if shadowType == xi.mod.UTSUSEMI then
             local effect = target:getStatusEffect(xi.effect.COPY_IMAGE)
             if effect then
-                if targShadows - 1 == 1 then
+                if targetShadows == 1 then
                     effect:setIcon(xi.effect.COPY_IMAGE)
-                elseif targShadows - 1 == 2 then
+                elseif targetShadows == 2 then
                     effect:setIcon(xi.effect.COPY_IMAGE_2)
-                elseif targShadows - 1 == 3 then
+                elseif targetShadows == 3 then
                     effect:setIcon(xi.effect.COPY_IMAGE_3)
                 end
             end
         end
 
-        target:setMod(shadowType, targShadows - 1)
-        if targShadows - 1 == 0 then
+        target:setMod(shadowType, targetShadows)
+        if targetShadows == 0 then
             target:delStatusEffect(xi.effect.COPY_IMAGE)
             target:delStatusEffect(xi.effect.BLINK)
         end
@@ -179,22 +182,14 @@ local function shadowAbsorb(target)
     return false
 end
 
-local function accVariesWithTP(hitrate, acc, tp, a1, a2, a3)
-    -- sadly acc varies with tp ALL apply an acc PENALTY, the acc at various %s are given as a1 a2 a3
-    local accpct = xi.weaponskills.fTP(tp, a1, a2, a3)
-    local acclost = acc - (acc * accpct)
-    local hrate = hitrate - (0.005 * acclost)
+local function accVariesWithTP(baseHitRate, acc, tp, a1, a2, a3)
+    -- acc varies with tp ALL apply an acc PENALTY, the acc at various %s are given as a1 a2 a3
+    local accLost      = acc - acc * xi.weaponskills.fTP(tp, a1, a2, a3)
+    local finalHitRate = baseHitRate - accLost / 200
 
-    -- cap it
-    if hrate > 0.95 then
-        hrate = 0.95
-    end
+    finalHitRate = utils.clamp(finalHitRate, 0.2, 0.95)
 
-    if hrate < 0.2 then
-        hrate = 0.2
-    end
-
-    return hrate
+    return finalHitRate
 end
 
 local function getMultiAttacks(attacker, target, wsParams, firstHit, offHand)
@@ -247,19 +242,21 @@ local function getMultiAttacks(attacker, target, wsParams, firstHit, offHand)
 end
 
 local function cRangedRatio(attacker, defender, params, ignoredDef, tp)
-    local atkmulti = xi.weaponskills.fTP(tp, params.atk100, params.atk200, params.atk300)
-    local cratio = attacker:getRATT() / (defender:getStat(xi.mod.DEF) - ignoredDef)
-
+    local atkmulti        = xi.weaponskills.fTP(tp, params.atk100, params.atk200, params.atk300)
+    local cratio          = attacker:getRATT() / (defender:getStat(xi.mod.DEF) - ignoredDef)
     local levelCorrection = 0
+
     if attacker:getMainLvl() < defender:getMainLvl() then
-        levelCorrection = 0.025 * (defender:getMainLvl() - attacker:getMainLvl())
+        levelCorrection = (defender:getMainLvl() - attacker:getMainLvl()) / 40
     end
 
     cratio = cratio - levelCorrection
     cratio = cratio * atkmulti
+
     -- adding cap check base on weapon https://www.bg-wiki.com/ffxi/PDIF info
     local weaponType = attacker:getWeaponSkillType(xi.slot.RANGED)
-    local cRatioCap = 0
+    local cRatioCap  = 0
+
     if weaponType == xi.skill.MARKSMANSHIP then
         cRatioCap = 3.5
     else
@@ -276,7 +273,7 @@ local function cRangedRatio(attacker, defender, params, ignoredDef, tp)
     local pdifmax = 0
 
     if cratio < 0.9 then
-        pdifmax = cratio * (10 / 9)
+        pdifmax = cratio * 10 / 9
     elseif cratio < 1.1 then
         pdifmax = 1
     else
@@ -291,7 +288,7 @@ local function cRangedRatio(attacker, defender, params, ignoredDef, tp)
     elseif cratio < 1.1 then
         pdifmin = 1
     else
-        pdifmin = (cratio * (20 / 19)) - (3 / 19)
+        pdifmin = cratio * 20 / 19 - 3 / 19
     end
 
     local pdif = {}
@@ -331,10 +328,10 @@ local function getRangedHitRate(attacker, target, capHitRate, bonus)
 
     acc = acc + bonus
 
-    if attacker:getMainLvl() > target:getMainLvl() then -- acc bonus!
-        acc = acc + ((attacker:getMainLvl() - target:getMainLvl()) * 4)
-    elseif attacker:getMainLvl() < target:getMainLvl() then -- acc penalty :(
-        acc = acc - ((target:getMainLvl() - attacker:getMainLvl()) * 4)
+    if attacker:getMainLvl() > target:getMainLvl() then -- acc bonus
+        acc = acc + (attacker:getMainLvl() - target:getMainLvl()) * 4
+    elseif attacker:getMainLvl() < target:getMainLvl() then -- acc penalty
+        acc = acc - (target:getMainLvl() - attacker:getMainLvl()) * 4
     end
 
     local hitdiff = 0
@@ -362,7 +359,7 @@ end
 -- Function to calculate if a hit in a WS misses, criticals, and the respective damage done
 local function getSingleHitDamage(attacker, target, dmg, wsParams, calcParams)
     local criticalHit = false
-    local finaldmg = 0
+    local finaldmg    = 0
     -- local pdif = 0 Reminder for Future Implementation!
 
     local missChance = math.random()
@@ -469,18 +466,21 @@ local modParameters =
 }
 
 local function calculateWsMods(attacker, calcParams, wsParams)
-    local wsMods = calcParams.fSTR +
-        (attacker:getStat(xi.mod.STR) * wsParams.str_wsc + attacker:getStat(xi.mod.DEX) * wsParams.dex_wsc +
-        attacker:getStat(xi.mod.VIT) * wsParams.vit_wsc + attacker:getStat(xi.mod.AGI) * wsParams.agi_wsc +
-        attacker:getStat(xi.mod.INT) * wsParams.int_wsc + attacker:getStat(xi.mod.MND) * wsParams.mnd_wsc +
-        attacker:getStat(xi.mod.CHR) * wsParams.chr_wsc) * calcParams.alpha
+    local wsMods = calcParams.fSTR + calcParams.alpha *
+        (attacker:getStat(xi.mod.STR) * wsParams.str_wsc +
+        attacker:getStat(xi.mod.DEX) * wsParams.dex_wsc +
+        attacker:getStat(xi.mod.VIT) * wsParams.vit_wsc +
+        attacker:getStat(xi.mod.AGI) * wsParams.agi_wsc +
+        attacker:getStat(xi.mod.INT) * wsParams.int_wsc +
+        attacker:getStat(xi.mod.MND) * wsParams.mnd_wsc +
+        attacker:getStat(xi.mod.CHR) * wsParams.chr_wsc)
     return wsMods
 end
 
 local function calculateDEXvsAGICritRate(attacker, target)
     -- See reference at https://www.bg-wiki.com/ffxi/Critical_Hit_Rate
     local nativecrit = 0
-    local dexVsAgi = attacker:getStat(xi.mod.DEX) - target:getStat(xi.mod.AGI)
+    local dexVsAgi   = attacker:getStat(xi.mod.DEX) - target:getStat(xi.mod.AGI)
     if dexVsAgi < 7 then
         nativecrit = 0
     elseif dexVsAgi < 14 then
@@ -514,7 +514,7 @@ end
 -- luacheck: ignore 561
 xi.weaponskills.calculateRawWSDmg = function(attacker, target, wsID, tp, action, wsParams, calcParams)
     local targetLvl = target:getMainLvl()
-    local targetHp = target:getHP() + target:getMod(xi.mod.STONESKIN)
+    local targetHp  = target:getHP() + target:getMod(xi.mod.STONESKIN)
 
     -- Recalculate accuracy if it varies with TP, applied to all hits
     if wsParams.acc100 ~= 0 then
@@ -540,7 +540,7 @@ xi.weaponskills.calculateRawWSDmg = function(attacker, target, wsID, tp, action,
         end
     end
 
-    local wsMods = calculateWsMods(attacker, calcParams, wsParams)
+    local wsMods   = calculateWsMods(attacker, calcParams, wsParams)
     local mainBase = calcParams.weaponDamage[1] + wsMods + calcParams.bonusWSmods
 
     -- Calculate fTP multiplier
@@ -552,15 +552,14 @@ xi.weaponskills.calculateRawWSDmg = function(attacker, target, wsID, tp, action,
     -- TODO: calc per-hit with weapon crit+% on each hand (if dual wielding)
     if wsParams.canCrit then -- Work out critical hit ratios
         local nativecrit = 0
-        critrate = xi.weaponskills.fTP(tp, wsParams.crit100, wsParams.crit200, wsParams.crit300)
+        critrate         = xi.weaponskills.fTP(tp, wsParams.crit100, wsParams.crit200, wsParams.crit300)
 
         if calcParams.flourishEffect and calcParams.flourishEffect:getPower() >= 3 then  -- 3 Finishing Moves used.
             critrate = critrate + (10 + calcParams.flourishEffect:getSubPower()) / 100
         end
 
         local fencerBonusVal = calcParams.fencerBonus or 0
-        nativecrit = nativecrit + attacker:getMod(xi.mod.CRITHITRATE) / 100 + attacker:getMerit(xi.merit.CRIT_HIT_RATE) / 100
-                                + fencerBonusVal - target:getMerit(xi.merit.ENEMY_CRIT_RATE) / 100
+        nativecrit           = nativecrit + attacker:getMod(xi.mod.CRITHITRATE) / 100 + attacker:getMerit(xi.merit.CRIT_HIT_RATE) / 100 + fencerBonusVal - target:getMerit(xi.merit.ENEMY_CRIT_RATE) / 100
 
         -- Innin critical boost when attacker is behind target
         if
@@ -618,25 +617,21 @@ xi.weaponskills.calculateRawWSDmg = function(attacker, target, wsID, tp, action,
     if attacker:getMainJob() == xi.job.THF then
         -- Add DEX/AGI bonus to first hit if THF main and valid Sneak/Trick Attack
         if calcParams.sneakApplicable then
-            finaldmg = finaldmg +
-                        (attacker:getStat(xi.mod.DEX) * (1 + attacker:getMod(xi.mod.SNEAK_ATK_DEX) / 100) * calcParams.pdif) *
-                        ((100 + (attacker:getMod(xi.mod.AUGMENTS_SA))) / 100)
+            finaldmg = finaldmg + calcParams.pdif * attacker:getStat(xi.mod.DEX) * (1 + attacker:getMod(xi.mod.SNEAK_ATK_DEX) / 100) * (1 + attacker:getMod(xi.mod.AUGMENTS_SA) / 100)
         end
 
         if calcParams.trickApplicable then
-            finaldmg = finaldmg +
-                        (attacker:getStat(xi.mod.AGI) * (1 + attacker:getMod(xi.mod.TRICK_ATK_AGI) / 100) * calcParams.pdif) *
-                        ((100 + (attacker:getMod(xi.mod.AUGMENTS_TA))) / 100)
+            finaldmg = finaldmg + calcParams.pdif * attacker:getStat(xi.mod.AGI) * (1 + attacker:getMod(xi.mod.TRICK_ATK_AGI) / 100) * (1 + attacker:getMod(xi.mod.AUGMENTS_TA) / 100)
         end
     end
 
     -- We've now accounted for any crit from SA/TA, or damage bonus for a Hybrid WS, so nullify them
     calcParams.forcedFirstCrit = false
-    calcParams.hybridHit = false
+    calcParams.hybridHit       = false
 
     -- For items that apply bonus damage to the first hit of a weaponskill (but not later hits),
     -- store bonus damage for first hit, for use after other calculations are done
-    local firstHitBonus = (finaldmg * attacker:getMod(xi.mod.ALL_WSDMG_FIRST_HIT)) / 100
+    local firstHitBonus = finaldmg * attacker:getMod(xi.mod.ALL_WSDMG_FIRST_HIT) / 100
 
     -- Reset fTP if it's not supposed to carry over across all hits for this WS
     -- We'll recalculate our mainhand damage after doing offhand
@@ -674,7 +669,7 @@ xi.weaponskills.calculateRawWSDmg = function(attacker, target, wsID, tp, action,
         calcParams.offhandHitsLanded = calcParams.hitsLanded
 
         numOffhandMultis = getMultiAttacks(attacker, target, wsParams, false, true)
-        numMultiProcs = numOffhandMultis > 0 and numMultiProcs + 1 or numMultiProcs
+        numMultiProcs    = numOffhandMultis > 0 and numMultiProcs + 1 or numMultiProcs
     end
 
     calcParams.guaranteedHit = false -- Accuracy bonus from SA/TA applies only to first main and offhand hit
@@ -710,14 +705,14 @@ xi.weaponskills.calculateRawWSDmg = function(attacker, target, wsID, tp, action,
         -- Check each hit for multis, but stop after we get 2 multi procs
         if numMultiProcs < 2 then
             local extraMultis = getMultiAttacks(attacker, target, wsParams, false, false)
-
             numMainHandMultis = numMainHandMultis + extraMultis
-            numMultiProcs  = extraMultis > 0 and numMultiProcs + 1 or numMultiProcs
+            numMultiProcs     = extraMultis > 0 and numMultiProcs + 1 or numMultiProcs
         end
     end
 
     -- Proc any mainhand multi attacks.
     local mainhandMultiHitsDone = 0
+
     while hitsDone < 8 and mainhandMultiHitsDone < numMainHandMultis and finaldmg < targetHp do
         calcParams.hitsLanded = 0
         hitdmg, calcParams    = getSingleHitDamage(attacker, target, dmg, wsParams, calcParams)
@@ -787,7 +782,7 @@ xi.weaponskills.calculateRawWSDmg = function(attacker, target, wsID, tp, action,
             bonusdmg = bonusdmg + attacker:getMod(xi.mod.WEAPONSKILL_DAMAGE_BASE + wsID)
         end
 
-        finaldmg = finaldmg * ((100 + bonusdmg) / 100) -- Apply our "all hits" WS dmg bonuses
+        finaldmg = finaldmg * (100 + bonusdmg) / 100 -- Apply our "all hits" WS dmg bonuses
         finaldmg = finaldmg + firstHitBonus -- Finally add in our "first hit" WS dmg bonus from before
     end
 
@@ -813,54 +808,51 @@ xi.weaponskills.doPhysicalWeaponskill = function(attacker, target, wsID, wsParam
     local gorgetBeltFTP, gorgetBeltAcc = xi.weaponskills.handleWSGorgetBelt(attacker)
     local attack =
     {
-        ['type'] = xi.attackType.PHYSICAL,
-        ['slot'] = xi.slot.MAIN,
+        ['type']       = xi.attackType.PHYSICAL,
+        ['slot']       = xi.slot.MAIN,
         ['weaponType'] = attacker:getWeaponSkillType(xi.slot.MAIN),
         ['damageType'] = attacker:getWeaponDamageType(xi.slot.MAIN)
     }
 
     local calcParams = {}
-    calcParams.wsID = wsID
-    calcParams.attackInfo = attack
-    calcParams.weaponDamage = xi.weaponskills.getMeleeDmg(attacker, attack.weaponType, wsParams.kick)
-    calcParams.fSTR = xi.weaponskills.fSTR(attacker:getStat(xi.mod.STR), target:getStat(xi.mod.VIT), attacker:getWeaponDmgRank())
-    calcParams.cratio = cratio
-    calcParams.ccritratio = ccritratio
-    calcParams.accStat = attacker:getACC()
-    calcParams.melee = true
-    calcParams.mustMiss = target:hasStatusEffect(xi.effect.PERFECT_DODGE) or
-        (target:hasStatusEffect(xi.effect.ALL_MISS) and not wsParams.hitsHigh)
-    calcParams.sneakApplicable = attacker:hasStatusEffect(xi.effect.SNEAK_ATTACK) and
-        (attacker:isBehind(target) or attacker:hasStatusEffect(xi.effect.HIDE) or
-        target:hasStatusEffect(xi.effect.DOUBT))
-    calcParams.taChar = taChar
-    calcParams.trickApplicable = calcParams.taChar ~= nil
-    calcParams.assassinApplicable = calcParams.trickApplicable and attacker:hasTrait(68)
-    calcParams.guaranteedHit = calcParams.sneakApplicable or calcParams.trickApplicable
+    calcParams.wsID                    = wsID
+    calcParams.attackInfo              = attack
+    calcParams.weaponDamage            = xi.weaponskills.getMeleeDmg(attacker, attack.weaponType, wsParams.kick)
+    calcParams.fSTR                    = xi.weaponskills.fSTR(attacker:getStat(xi.mod.STR), target:getStat(xi.mod.VIT), attacker:getWeaponDmgRank())
+    calcParams.cratio                  = cratio
+    calcParams.ccritratio              = ccritratio
+    calcParams.accStat                 = attacker:getACC()
+    calcParams.melee                   = true
+    calcParams.mustMiss                = target:hasStatusEffect(xi.effect.PERFECT_DODGE) or (target:hasStatusEffect(xi.effect.ALL_MISS) and not wsParams.hitsHigh)
+    calcParams.sneakApplicable         = attacker:hasStatusEffect(xi.effect.SNEAK_ATTACK) and (attacker:isBehind(target) or attacker:hasStatusEffect(xi.effect.HIDE) or target:hasStatusEffect(xi.effect.DOUBT))
+    calcParams.taChar                  = taChar
+    calcParams.trickApplicable         = calcParams.taChar ~= nil
+    calcParams.assassinApplicable      = calcParams.trickApplicable and attacker:hasTrait(68)
+    calcParams.guaranteedHit           = calcParams.sneakApplicable or calcParams.trickApplicable
     calcParams.mightyStrikesApplicable = attacker:hasStatusEffect(xi.effect.MIGHTY_STRIKES)
-    calcParams.forcedFirstCrit = calcParams.sneakApplicable or calcParams.assassinApplicable
-    calcParams.extraOffhandHit = attacker:isDualWielding() or attack.weaponType == xi.skill.HAND_TO_HAND
-    calcParams.hybridHit = wsParams.hybridWS
-    calcParams.flourishEffect = attacker:getStatusEffect(xi.effect.BUILDING_FLOURISH)
-    calcParams.fencerBonus = fencerBonus(attacker)
-    calcParams.bonusTP = wsParams.bonusTP or 0
+    calcParams.forcedFirstCrit         = calcParams.sneakApplicable or calcParams.assassinApplicable
+    calcParams.extraOffhandHit         = attacker:isDualWielding() or attack.weaponType == xi.skill.HAND_TO_HAND
+    calcParams.hybridHit               = wsParams.hybridWS
+    calcParams.flourishEffect          = attacker:getStatusEffect(xi.effect.BUILDING_FLOURISH)
+    calcParams.fencerBonus             = fencerBonus(attacker)
+    calcParams.bonusTP                 = wsParams.bonusTP or 0
 
     local isJump = wsParams.isJump or false
     if isJump then
-        calcParams.bonusfTP = 0
-        calcParams.bonusAcc = attacker:getMod(xi.mod.JUMP_ACC_BONUS)
+        calcParams.bonusfTP    = 0
+        calcParams.bonusAcc    = attacker:getMod(xi.mod.JUMP_ACC_BONUS)
         calcParams.bonusWSmods = 0
     else
-        calcParams.bonusfTP = gorgetBeltFTP or 0
-        calcParams.bonusAcc = (gorgetBeltAcc or 0) + attacker:getMod(xi.mod.WSACC)
+        calcParams.bonusfTP    = gorgetBeltFTP or 0
+        calcParams.bonusAcc    = (gorgetBeltAcc or 0) + attacker:getMod(xi.mod.WSACC)
         calcParams.bonusWSmods = wsParams.bonusWSmods or 0
     end
 
-    calcParams.hitRate = xi.weaponskills.getHitRate(attacker, target, false, calcParams.bonusAcc)
+    calcParams.hitRate   = xi.weaponskills.getHitRate(attacker, target, false, calcParams.bonusAcc)
     calcParams.skillType = attack.weaponType
 
     -- Send our wsParams off to calculate our raw WS damage, hits landed, and shadows absorbed
-    calcParams = xi.weaponskills.calculateRawWSDmg(attacker, target, wsID, tp, action, wsParams, calcParams)
+    calcParams     = xi.weaponskills.calculateRawWSDmg(attacker, target, wsID, tp, action, wsParams, calcParams)
     local finaldmg = calcParams.finalDmg
 
     -- Delete statuses that may have been spent by the WS
@@ -868,9 +860,9 @@ xi.weaponskills.doPhysicalWeaponskill = function(attacker, target, wsID, wsParam
     attacker:delStatusEffect(xi.effect.SNEAK_ATTACK)
     attacker:delStatusEffectSilent(xi.effect.BUILDING_FLOURISH)
 
-    finaldmg = finaldmg * xi.settings.main.WEAPON_SKILL_POWER -- Add server bonus
+    finaldmg            = finaldmg * xi.settings.main.WEAPON_SKILL_POWER -- Add server bonus
     calcParams.finalDmg = finaldmg
-    finaldmg = xi.weaponskills.takeWeaponskillDamage(target, attacker, wsParams, primaryMsg, attack, calcParams, action)
+    finaldmg            = xi.weaponskills.takeWeaponskillDamage(target, attacker, wsParams, primaryMsg, attack, calcParams, action)
 
     return finaldmg, calcParams.criticalHit, calcParams.tpHitsLanded, calcParams.extraHitsLanded, calcParams.shadowsAbsorbed
 end
@@ -891,35 +883,35 @@ xi.weaponskills.doRangedWeaponskill = function(attacker, target, wsID, wsParams,
     local gorgetBeltFTP, gorgetBeltAcc = xi.weaponskills.handleWSGorgetBelt(attacker)
     local attack =
     {
-        ['type'] = xi.attackType.RANGED,
-        ['slot'] = xi.slot.RANGED,
+        ['type']       = xi.attackType.RANGED,
+        ['slot']       = xi.slot.RANGED,
         ['weaponType'] = attacker:getWeaponSkillType(xi.slot.RANGED),
         ['damageType'] = attacker:getWeaponDamageType(xi.slot.RANGED)
     }
 
     local calcParams =
     {
-        wsID = wsID,
-        weaponDamage = { attacker:getRangedDmg() },
-        skillType = attacker:getWeaponSkillType(xi.slot.RANGED),
-        fSTR = xi.weaponskills.fSTR2(attacker:getStat(xi.mod.STR), target:getStat(xi.mod.VIT), attacker:getRangedDmgRank()),
-        cratio = cratio,
-        ccritratio = ccritratio,
-        accStat = attacker:getRACC(),
-        melee = false,
-        mustMiss = false,
-        sneakApplicable = false,
-        trickApplicable = false,
-        assassinApplicable = false,
+        wsID                    = wsID,
+        weaponDamage            = { attacker:getRangedDmg() },
+        skillType               = attacker:getWeaponSkillType(xi.slot.RANGED),
+        fSTR                    = xi.weaponskills.fSTR2(attacker:getStat(xi.mod.STR), target:getStat(xi.mod.VIT), attacker:getRangedDmgRank()),
+        cratio                  = cratio,
+        ccritratio              = ccritratio,
+        accStat                 = attacker:getRACC(),
+        melee                   = false,
+        mustMiss                = false,
+        sneakApplicable         = false,
+        trickApplicable         = false,
+        assassinApplicable      = false,
         mightyStrikesApplicable = false,
-        forcedFirstCrit = false,
-        extraOffhandHit = false,
-        flourishEffect = false,
-        fencerBonus = fencerBonus(attacker),
-        bonusTP = wsParams.bonusTP or 0,
-        bonusfTP = gorgetBeltFTP or 0,
-        bonusAcc = (gorgetBeltAcc or 0) + attacker:getMod(xi.mod.WSACC),
-        bonusWSmods = wsParams.bonusWSmods or 0
+        forcedFirstCrit         = false,
+        extraOffhandHit         = false,
+        flourishEffect          = false,
+        fencerBonus             = fencerBonus(attacker),
+        bonusTP                 = wsParams.bonusTP or 0,
+        bonusfTP                = gorgetBeltFTP or 0,
+        bonusAcc                = (gorgetBeltAcc or 0) + attacker:getMod(xi.mod.WSACC),
+        bonusWSmods             = wsParams.bonusWSmods or 0
     }
     calcParams.hitRate = getRangedHitRate(attacker, target, false, calcParams.bonusAcc)
 
@@ -934,7 +926,7 @@ xi.weaponskills.doRangedWeaponskill = function(attacker, target, wsID, wsParams,
     finaldmg = target:rangedDmgTaken(finaldmg)
     finaldmg = finaldmg * target:getMod(xi.mod.PIERCE_SDT) / 1000
 
-    finaldmg = finaldmg * xi.settings.main.WEAPON_SKILL_POWER -- Add server bonus
+    finaldmg            = finaldmg * xi.settings.main.WEAPON_SKILL_POWER -- Add server bonus
     calcParams.finalDmg = finaldmg
 
     finaldmg = xi.weaponskills.takeWeaponskillDamage(target, attacker, wsParams, primaryMsg, attack, calcParams, action)
@@ -949,8 +941,8 @@ xi.weaponskills.doMagicWeaponskill = function(attacker, target, wsID, wsParams, 
     -- Set up conditions and wsParams used for calculating weaponskill damage
     local attack =
     {
-        ['type'] = xi.attackType.MAGICAL,
-        ['slot'] = xi.slot.MAIN,
+        ['type']       = xi.attackType.MAGICAL,
+        ['slot']       = xi.slot.MAIN,
         ['weaponType'] = attacker:getWeaponSkillType(xi.slot.MAIN),
         ['damageType'] = xi.damageType.ELEMENTAL + wsParams.ele
     }
@@ -965,10 +957,10 @@ xi.weaponskills.doMagicWeaponskill = function(attacker, target, wsID, wsParams, 
     }
 
     local bonusfTP, bonusacc = xi.weaponskills.handleWSGorgetBelt(attacker)
-    bonusacc = bonusacc + attacker:getMod(xi.mod.WSACC)
+    bonusacc                 = bonusacc + attacker:getMod(xi.mod.WSACC)
 
-    local fint = utils.clamp(8 + (attacker:getStat(xi.mod.INT) - target:getStat(xi.mod.INT)), -32, 32)
-    local dmg = 0
+    local fint = utils.clamp(8 + attacker:getStat(xi.mod.INT) - target:getStat(xi.mod.INT), -32, 32)
+    local dmg  = 0
 
     -- Magic-based WSes never miss, so we don't need to worry about calculating a miss, only if a shadow absorbed it.
     if not shadowAbsorb(target) then
@@ -979,14 +971,18 @@ xi.weaponskills.doMagicWeaponskill = function(attacker, target, wsID, wsParams, 
 
         for modId, parameterName in pairs(modParameters) do
             if attacker:getMod(modId) > 0 then
-                wsParams[parameterName] = wsParams[parameterName] + (attacker:getMod(modId) / 100)
+                wsParams[parameterName] = wsParams[parameterName] + attacker:getMod(modId) / 100
             end
         end
 
-        dmg = attacker:getMainLvl() + 2 + (attacker:getStat(xi.mod.STR) * wsParams.str_wsc + attacker:getStat(xi.mod.DEX) * wsParams.dex_wsc +
-            attacker:getStat(xi.mod.VIT) * wsParams.vit_wsc + attacker:getStat(xi.mod.AGI) * wsParams.agi_wsc +
-            attacker:getStat(xi.mod.INT) * wsParams.int_wsc + attacker:getStat(xi.mod.MND) * wsParams.mnd_wsc +
-            attacker:getStat(xi.mod.CHR) * wsParams.chr_wsc) + fint
+        dmg = attacker:getMainLvl() + 2 + fint +
+            attacker:getStat(xi.mod.STR) * wsParams.str_wsc +
+            attacker:getStat(xi.mod.DEX) * wsParams.dex_wsc +
+            attacker:getStat(xi.mod.VIT) * wsParams.vit_wsc +
+            attacker:getStat(xi.mod.AGI) * wsParams.agi_wsc +
+            attacker:getStat(xi.mod.INT) * wsParams.int_wsc +
+            attacker:getStat(xi.mod.MND) * wsParams.mnd_wsc +
+            attacker:getStat(xi.mod.CHR) * wsParams.chr_wsc
 
         -- Applying fTP multiplier
         local ftp = xi.weaponskills.fTP(tp, wsParams.ftp100, wsParams.ftp200, wsParams.ftp300) + bonusfTP
@@ -1008,8 +1004,8 @@ xi.weaponskills.doMagicWeaponskill = function(attacker, target, wsID, wsParams, 
         end
 
         -- Add in bonusdmg
-        dmg = dmg * ((100 + bonusdmg) / 100) -- Apply our "all hits" WS dmg bonuses
-        dmg = dmg + ((dmg * attacker:getMod(xi.mod.ALL_WSDMG_FIRST_HIT)) / 100) -- Add in our "first hit" WS dmg bonus
+        dmg = dmg * (100 + bonusdmg) / 100 -- Apply our "all hits" WS dmg bonuses
+        dmg = dmg + dmg * attacker:getMod(xi.mod.ALL_WSDMG_FIRST_HIT) / 100 -- Add in our "first hit" WS dmg bonus
 
         -- Calculate magical bonuses and reductions
         dmg = addBonusesAbility(attacker, wsParams.ele, target, dmg, wsParams)
@@ -1088,9 +1084,9 @@ xi.weaponskills.takeWeaponskillDamage = function(defender, attacker, wsParams, p
         action:reaction(defender:getID(), xi.reaction.EVADE)
     end
 
-    local targetTPMult = wsParams.targetTPMult or 1
+    local targetTPMult   = wsParams.targetTPMult or 1
     local attackerTPMult = wsParams.attackerTPMult or 1
-    local isJump = wsParams.isJump or false
+    local isJump         = wsParams.isJump or false
 
     -- DA/TA/QA/OaT/Oa2-3 etc give full TP return per hit on Jumps
     if isJump then
@@ -1100,6 +1096,7 @@ xi.weaponskills.takeWeaponskillDamage = function(defender, attacker, wsParams, p
     end
 
     finaldmg = defender:takeWeaponskillDamage(attacker, finaldmg, attack.type, attack.damageType, attack.slot, primaryMsg, wsResults.tpHitsLanded * attackerTPMult, (wsResults.extraHitsLanded * 10) + wsResults.bonusTP, targetTPMult)
+
     if wsResults.tpHitsLanded + wsResults.extraHitsLanded > 0 then
         if finaldmg >= 0 then
             action:param(defender:getID(), math.abs(finaldmg))
@@ -1127,7 +1124,7 @@ end
 -- Helper function to get Main damage depending on weapon type
 xi.weaponskills.getMeleeDmg = function(attacker, weaponType, kick)
     local mainhandDamage = attacker:getWeaponDmg()
-    local offhandDamage = attacker:getOffhandDmg()
+    local offhandDamage  = attacker:getOffhandDmg()
 
     if weaponType == xi.skill.HAND_TO_HAND or weaponType == xi.skill.NONE then
         local h2hSkill = attacker:getSkillLevel(xi.skill.HAND_TO_HAND) * 0.11 + 3
@@ -1137,7 +1134,7 @@ xi.weaponskills.getMeleeDmg = function(attacker, weaponType, kick)
         end
 
         mainhandDamage = mainhandDamage + h2hSkill
-        offhandDamage = mainhandDamage
+        offhandDamage  = mainhandDamage
     end
 
     return { mainhandDamage, offhandDamage }
@@ -1183,23 +1180,19 @@ xi.weaponskills.getHitRate = function(attacker, target, capHitRate, bonus)
 
     acc = acc + bonus
 
-    if attacker:getMainLvl() > target:getMainLvl() then              -- Accuracy Bonus
-        acc = acc + ((attacker:getMainLvl()-target:getMainLvl()) * 4)
-    elseif attacker:getMainLvl() < target:getMainLvl() then        -- Accuracy Penalty
-        acc = acc - ((target:getMainLvl()-attacker:getMainLvl()) * 4)
+    -- Accuracy Bonus
+    if attacker:getMainLvl() > target:getMainLvl() then
+        acc = acc + (attacker:getMainLvl() - target:getMainLvl()) * 4
+
+    -- Accuracy Penalty
+    elseif attacker:getMainLvl() < target:getMainLvl() then
+        acc = acc - (target:getMainLvl() - attacker:getMainLvl()) * 4
     end
 
     local hitdiff = 0
     local hitrate = 75
 
-    if acc > eva then
-        hitdiff = (acc - eva) / 2
-    end
-
-    if eva > acc then
-        hitdiff = ((-1) * (eva-acc)) / 2
-    end
-
+    hitdiff = (acc - eva) / 2
     hitrate = hitrate + hitdiff
     hitrate = hitrate / 100
 
@@ -1218,23 +1211,20 @@ xi.weaponskills.getHitRate = function(attacker, target, capHitRate, bonus)
 end
 
 xi.weaponskills.fTP = function(tp, ftp1, ftp2, ftp3)
-    if tp >= 1000 and tp < 2000 then
-        return ftp1 + (((ftp2 - ftp1) / 1000) * (tp - 1000))
-    elseif tp >= 2000 and tp <= 3000 then
-        -- generate a straight line between ftp2 and ftp3 and find point @ tp
-        return ftp2 + (((ftp3 - ftp2) / 1000) * (tp - 2000))
-    else
-        print('fTP error: TP value is not between 1000-3000!')
+    if tp >= 2000 then
+        return ftp2 + (tp - 2000) * (ftp3 - ftp2) / 1000
+    elseif tp >= 1000 then
+        return ftp1 + (tp - 1000) * (ftp2 - ftp1) / 1000
     end
 
     return 1 -- no ftp mod
 end
 
 xi.weaponskills.calculatedIgnoredDef = function(tp, def, ignore1, ignore2, ignore3)
-    if tp >= 1000 and tp < 2000 then
-        return (ignore1 + (((ignore2 - ignore1) / 1000) * (tp - 1000))) * def
-    elseif tp >= 2000 and tp <= 3000 then
-        return (ignore2 + (((ignore3 - ignore2) / 1000) * (tp - 2000))) * def
+    if tp >= 2000 then
+        return (ignore2 + (tp - 2000) * (ignore3 - ignore2) / 1000) * def
+    elseif tp >= 1000 then
+        return (ignore1 + (tp - 1000) * (ignore2 - ignore1) / 1000) * def
     end
 
     return 1 -- no def ignore mod
@@ -1249,7 +1239,7 @@ xi.weaponskills.cMeleeRatio = function(attacker, defender, params, ignoredDef, t
     end
 
     local atkmulti = xi.weaponskills.fTP(tp, params.atk100, params.atk200, params.atk300)
-    local cratio = (attacker:getStat(xi.mod.ATT) * atkmulti) / (defender:getStat(xi.mod.DEF) - ignoredDef)
+    local cratio   = attacker:getStat(xi.mod.ATT) * atkmulti / (defender:getStat(xi.mod.DEF) - ignoredDef)
 
     cratio = utils.clamp(cratio, 0, 2.25)
 
@@ -1296,12 +1286,12 @@ xi.weaponskills.cMeleeRatio = function(attacker, defender, params, ignoredDef, t
     end
 
     local pdif = {}
-    pdif[1] = pdifmin
-    pdif[2] = pdifmax
+    pdif[1]    = pdifmin
+    pdif[2]    = pdifmax
 
     local pdifcrit = {}
-    cratio = cratio + 1
-    cratio = utils.clamp(cratio, 0, 3)
+    cratio         = cratio + 1
+    cratio         = utils.clamp(cratio, 0, 3)
 
     if cratio < 0.5 then
         pdifmax = cratio + 0.5
@@ -1331,9 +1321,9 @@ xi.weaponskills.cMeleeRatio = function(attacker, defender, params, ignoredDef, t
     end
 
     local critbonus = attacker:getMod(xi.mod.CRIT_DMG_INCREASE) - defender:getMod(xi.mod.CRIT_DEF_BONUS)
-    critbonus = utils.clamp(critbonus, 0, 100)
-    pdifcrit[1] = pdifmin * (100 + critbonus) / 100
-    pdifcrit[2] = pdifmax * (100 + critbonus) / 100
+    critbonus       = utils.clamp(critbonus, 0, 100)
+    pdifcrit[1]     = pdifmin * (100 + critbonus) / 100
+    pdifcrit[2]     = pdifmax * (100 + critbonus) / 100
 
     return pdif, pdifcrit
 end
@@ -1393,8 +1383,8 @@ xi.weaponskills.handleWSGorgetBelt = function(attacker)
             xi.item.SHADOW_BELT
         }
 
-        local neck = attacker:getEquipID(xi.slot.NECK)
-        local belt = attacker:getEquipID(xi.slot.WAIST)
+        local neck                      = attacker:getEquipID(xi.slot.NECK)
+        local belt                      = attacker:getEquipID(xi.slot.WAIST)
         local scProp1, scProp2, scProp3 = attacker:getWSSkillchainProp()
 
         for i, v in ipairs(elementalGorget) do
