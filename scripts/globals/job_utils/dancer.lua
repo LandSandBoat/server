@@ -460,9 +460,8 @@ xi.job_utils.dancer.useWildFlourishAbility = function(player, target, ability, a
     return 0
 end
 
--- TODO: Implement Contradance status effect.
 xi.job_utils.dancer.useContradanceAbility = function(player, target, ability)
-    -- player:addStatusEffect(xi.effect.CONTRADANCE, 19, 1, 60)
+    player:addStatusEffect(xi.effect.CONTRADANCE, 19, 1, 60)
 end
 
 xi.job_utils.dancer.useWaltzAbility = function(player, target, ability, action)
@@ -493,6 +492,14 @@ xi.job_utils.dancer.useWaltzAbility = function(player, target, ability, action)
     amtCured = (target:getStat(xi.mod.VIT) + player:getStat(xi.mod.CHR)) * statMultiplier + waltzInfo[3]
     amtCured = math.floor(amtCured * (1.0 + (math.min(50, player:getMod(xi.mod.WALTZ_POTENCY)) / 100)))
     -- TODO: Account for Waltz Potency Received
+    if player:getStatusEffect(xi.effect.CONTRADANCE) then
+        amtCured = amtCured * 2
+        -- slight delay to allow the effect to apply to all targets of divine waltz
+        -- TODO: Remove this workaround via something in cpp core
+        player:timer(100, function(playerArg)
+            playerArg:delStatusEffect(xi.effect.CONTRADANCE)
+        end)
+    end
 
     amtCured = amtCured * xi.settings.main.CURE_POWER
     amtCured = math.min(amtCured, target:getMaxHP() - target:getHP())
