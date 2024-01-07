@@ -428,6 +428,46 @@ xi.combat.physical.calculateMeleePDIF = function(actor, target, weaponType, wsAt
     return pDif
 end
 
+-- calculates base melee critical rate
+xi.combat.physical.calculateMeleeCriticalRate = function(actor, target, unClamped)
+    -- See reference at https://www.bg-wiki.com/ffxi/Critical_Hit_Rate
+    local finalCriticalRate = 0
+    local baseCriticalRate  = 0.05
+    local dDex              = actor:getStat(xi.mod.DEX) - target:getStat(xi.mod.AGI)
+    local statBonus         = 0
+
+    if dDex > 50 then
+        statBonus = 0.15
+    elseif dDex >= 40 then
+        statBonus = (dDex - 35) / 100
+    elseif dDex >= 30 then
+        statBonus = 0.04
+    elseif dDex >= 20 then
+        statBonus = 0.03
+    elseif dDex >= 14 then
+        statBonus = 0.02
+    elseif dDex >= 7 then
+        statBonus = 0.01
+    end
+
+    finalCriticalRate = baseCriticalRate + statBonus
+
+    if unClamped then
+        return finalCriticalRate
+    end
+
+    return utils.clamp(finalCriticalRate, 0.05, 0.95)
+end
+
+-- returns the above + all mods that affect crit chance
+xi.combat.physical.calculateMeleeCriticalRateWithMods = function(actor, target)
+    local nativeCrit = xi.combat.physical.calculateMeleeCriticalRate(actor, target, true)
+    local extraCrit  = actor:getMod(xi.mod.CRITHITRATE) + actor:getMerit(xi.merit.CRIT_HIT_RATE) - target:getMerit(xi.merit.ENEMY_CRIT_RATE)
+    -- TODO: Innin critical boost when attacker is behind target
+
+    return utils.clamp(nativeCrit + extraCrit / 100, 0.05, 0.95)
+end
+
 xi.combat.physical.calculateRangedPDIF = function(actor, target, weaponType, wsAttackMod, isCritical, applyLevelCorrection, tpIgnoresDefense, tpFactor)
     local pDif = 0
 

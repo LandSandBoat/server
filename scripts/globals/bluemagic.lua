@@ -4,6 +4,7 @@
 -----------------------------------
 require('scripts/globals/magic')
 require('scripts/globals/mobskills')
+require('scripts/globals/combat/physical_utilities')
 -----------------------------------
 xi = xi or {}
 xi.spells = xi.spells or {}
@@ -125,8 +126,8 @@ local function calculatefSTR(dSTR)
 end
 
 -- Get hitrate
-local function calculateHitrate(attacker, target)
-    local acc = attacker:getACC() + attacker:getMerit(xi.merit.PHYSICAL_POTENCY)
+local function calculateHitrate(attacker, target, bonusacc)
+    local acc = attacker:getACC() + attacker:getMerit(xi.merit.PHYSICAL_POTENCY) * 2 + bonusacc
     local eva = target:getEVA()
     acc = acc + ((attacker:getMainLvl() - target:getMainLvl()) * 4)
 
@@ -171,7 +172,7 @@ xi.spells.blue.usePhysicalSpell = function(caster, target, spell, params)
     end
 
     -- Multiplier, bonus WSC
-    local multiplier = 1
+    local multiplier = params.multiplier or 1
     local bonusWSC = 0
 
     -- BLU AF3 bonus (triples the base WSC when it procs)
@@ -210,8 +211,16 @@ xi.spells.blue.usePhysicalSpell = function(caster, target, spell, params)
         params.offcratiomod = caster:getStat(xi.mod.ATT)
     end
 
+    -- https://ffxiclopedia.fandom.com/wiki/Talk:Physical_Potency need to go to talk page because the main page is saying only +accuracy and nobody ever fixed it
+    params.offcratiomod = params.offcratiomod * (caster:getMerit(xi.merit.PHYSICAL_POTENCY) + 100) / 100
+
+    params.bonusacc = params.bonusacc == nil and 0 or params.bonusacc
+    -- params.critchance will only be non-nil if base critchance is passed from spell lua
+    local nativecrit = xi.combat.physical.calculateMeleeCriticalRateWithMods(caster, target)
+    params.critchance = params.critchance == nil and 0 or utils.clamp(params.critchance / 100 + nativecrit, 0.05, 0.95)
+
     local cratio = calculatecRatio(params.offcratiomod / target:getStat(xi.mod.DEF), caster:getMainLvl(), target:getMainLvl())
-    local hitrate = calculateHitrate(caster, target)
+    local hitrate = calculateHitrate(caster, target, params.bonusacc)
 
     -------------------------
     -- Perform the attacks --
@@ -221,13 +230,13 @@ xi.spells.blue.usePhysicalSpell = function(caster, target, spell, params)
     local hitslanded = 0
     local finaldmg = 0
     local sneakIsApplicable = caster:hasStatusEffect(xi.effect.SNEAK_ATTACK) and
-                              spell:isAoE() == 0 and
-                              params.attackType ~= xi.attackType.RANGED and
-                              (caster:isBehind(target) or caster:hasStatusEffect(xi.effect.HIDE))
+                                spell:isAoE() == 0 and
+                                params.attackType ~= xi.attackType.RANGED and
+                                (caster:isBehind(target) or caster:hasStatusEffect(xi.effect.HIDE))
     local trickAttackTarget = (caster:hasStatusEffect(xi.effect.TRICK_ATTACK) and
-                              spell:isAoE() == 0 and
-                              params.attackType ~= xi.attackType.RANGED) and
-                              caster:getTrickAttackChar(target) or nil
+                                spell:isAoE() == 0 and
+                                params.attackType ~= xi.attackType.RANGED) and
+                                caster:getTrickAttackChar(target) or nil
 
     while hitsdone < params.numhits do
         local chance = math.random()
@@ -237,16 +246,15 @@ xi.spells.blue.usePhysicalSpell = function(caster, target, spell, params)
             -- Generate a random pDIF between min and max
             local pdif = math.random(cratio[1] * 1000, cratio[2] * 1000)
             pdif = pdif / 1000
+            if sneakIsApplicable or math.random() < params.critchance then
+                pdif = pdif + 0.7
+            end
 
             -- Add it to our final damage
             if hitsdone == 0 then -- first hit gets full multiplier
-                if sneakIsApplicable then
-                    finaldmg = finaldmg + (finalD * (multiplier + correlationMultiplier) * (pdif + 0.7))
-                else
-                    finaldmg = finaldmg + (finalD * (multiplier + correlationMultiplier) * pdif)
-                end
+                finaldmg = finaldmg + finalD * pdif * (multiplier + correlationMultiplier)
             else
-                finaldmg = finaldmg + (finalD * (1 + correlationMultiplier) * pdif)
+                finaldmg = finaldmg + finalD * pdif * (1 + correlationMultiplier)
             end
 
             sneakIsApplicable = false
@@ -431,6 +439,7 @@ xi.spells.blue.applySpellDamage = function(caster, target, spell, dmg, params, t
             target:updateEnmityFromDamage(caster, dmg)
         end
     end
+
     target:handleAfflatusMiseryDamage(dmg)
 
     return dmg
