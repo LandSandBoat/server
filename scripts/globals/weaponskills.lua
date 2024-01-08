@@ -502,7 +502,7 @@ xi.weaponskills.calculateRawWSDmg = function(attacker, target, wsID, tp, action,
 
     -- TODO: calc per-hit with weapon crit+% on each hand (if dual wielding)
     if wsParams.canCrit then -- Work out critical hit ratios
-        criticalRate = xi.combat.physical.calculateSwingCriticalRate(actor, target, true, wsParams.crit100, wsParams.crit200, wsParams.crit300)
+        criticalRate = xi.combat.physical.calculateSwingCriticalRate(attacker, target, true, wsParams.crit100, wsParams.crit200, wsParams.crit300)
     end
 
     calcParams.critRate = criticalRate

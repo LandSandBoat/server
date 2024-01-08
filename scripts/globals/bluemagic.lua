@@ -4,6 +4,7 @@
 -----------------------------------
 require('scripts/globals/magic')
 require('scripts/globals/mobskills')
+require('scripts/globals/combat/physical_utilities')
 -----------------------------------
 xi = xi or {}
 xi.spells = xi.spells or {}
@@ -127,8 +128,8 @@ local function calculatefSTR(dSTR)
 end
 
 -- Get hitrate
-local function calculateHitrate(attacker, target)
-    local acc     = attacker:getACC() + attacker:getMerit(xi.merit.PHYSICAL_POTENCY) + (attacker:getMainLvl() - target:getMainLvl()) * 4
+local function calculateHitrate(attacker, target, bonusacc)
+    local acc     = attacker:getACC() + attacker:getMerit(xi.merit.PHYSICAL_POTENCY) * 2 + (attacker:getMainLvl() - target:getMainLvl()) * 4 + bonusacc
     local eva     = target:getEVA()
     local hitrate = (75 + (acc - eva) / 2) / 100
 
@@ -171,7 +172,7 @@ xi.spells.blue.usePhysicalSpell = function(caster, target, spell, params)
     end
 
     -- Multiplier, bonus WSC
-    local multiplier = 1
+    local multiplier = params.multiplier or 1
     local bonusWSC   = 0
 
     -- BLU AF3 bonus (triples the base WSC when it procs)
@@ -210,8 +211,15 @@ xi.spells.blue.usePhysicalSpell = function(caster, target, spell, params)
         params.offcratiomod = caster:getStat(xi.mod.ATT)
     end
 
+    params.offcratiomod = params.offcratiomod * (caster:getMerit(xi.merit.PHYSICAL_POTENCY) + 100) / 100
+    params.bonusacc     = params.bonusacc == nil and 0 or params.bonusacc
+
+    -- params.critchance will only be non-nil if base critchance is passed from spell lua
+    local nativecrit  = xi.combat.physical.calculateSwingCriticalRate(caster, target, false, 0, 0, 0)
+    params.critchance = params.critchance == nil and 0 or utils.clamp(params.critchance / 100 + nativecrit, 0.05, 0.95)
+
     local cratio  = calculatecRatio(params.offcratiomod / target:getStat(xi.mod.DEF), caster:getMainLvl(), target:getMainLvl())
-    local hitrate = calculateHitrate(caster, target)
+    local hitrate = calculateHitrate(caster, target, params.bonusacc)
 
     -------------------------
     -- Perform the attacks --
@@ -220,15 +228,34 @@ xi.spells.blue.usePhysicalSpell = function(caster, target, spell, params)
     local hitsdone   = 0
     local hitslanded = 0
     local finaldmg   = 0
+    local sneakIsApplicable = caster:hasStatusEffect(xi.effect.SNEAK_ATTACK) and
+                                spell:isAoE() == 0 and
+                                params.attackType ~= xi.attackType.RANGED and
+                                (caster:isBehind(target) or caster:hasStatusEffect(xi.effect.HIDE))
+    local trickAttackTarget = (caster:hasStatusEffect(xi.effect.TRICK_ATTACK) and
+                                spell:isAoE() == 0 and
+                                params.attackType ~= xi.attackType.RANGED) and
+                                caster:getTrickAttackChar(target) or nil
 
     while hitsdone < params.numhits do
         local chance = math.random()
-        if chance <= hitrate then -- it hit
+
+        if
+            sneakIsApplicable or
+            chance <= hitrate
+        then
             -- TODO: Check for shadow absorbs. Right now the whole spell will be absorbed by one shadow before it even gets here.
 
             -- Generate a random pDIF between min and max
             local pdif = math.random(cratio[1] * 1000, cratio[2] * 1000)
             pdif       = pdif / 1000
+
+            if
+                sneakIsApplicable or
+                math.random() < params.critchance
+            then
+                pdif = pdif + 1
+            end
 
             -- Add it to our final damage
             if hitsdone == 0 then
@@ -237,7 +264,8 @@ xi.spells.blue.usePhysicalSpell = function(caster, target, spell, params)
                 finaldmg = finaldmg + finalD * (1 + correlationMultiplier) * pdif
             end
 
-            hitslanded = hitslanded + 1
+            hitslanded        = hitslanded + 1
+            sneakIsApplicable = false
 
             -- increment target's TP (100TP per hit landed)
             if finaldmg > 0 then
@@ -245,10 +273,15 @@ xi.spells.blue.usePhysicalSpell = function(caster, target, spell, params)
             end
         end
 
+        if params.attackType ~= xi.attackType.RANGED then
+            caster:delStatusEffect(xi.effect.SNEAK_ATTACK)
+            caster:delStatusEffect(xi.effect.TRICK_ATTACK)
+        end
+
         hitsdone = hitsdone + 1
     end
 
-    return xi.spells.blue.applySpellDamage(caster, target, spell, finaldmg, params)
+    return xi.spells.blue.applySpellDamage(caster, target, spell, finaldmg, params, trickAttackTarget)
 end
 
 -- Get the damage for a magical Blue Magic spell
@@ -293,7 +326,7 @@ xi.spells.blue.useMagicalSpell = function(caster, target, spell, params)
     -- MAB/MDB/weather/day/affinity/burst effect on damage
     finaldmg = math.floor(addBonuses(caster, spell, target, finaldmg))
 
-    return xi.spells.blue.applySpellDamage(caster, target, spell, finaldmg, params)
+    return xi.spells.blue.applySpellDamage(caster, target, spell, finaldmg, params, nil)
 end
 
 -- Perform a draining magical Blue Magic spell
@@ -320,7 +353,7 @@ xi.spells.blue.useDrainSpell = function(caster, target, spell, params, softCap, 
             caster:addMP(dmg)
         else
             dmg = utils.clamp(dmg, 0, target:getHP())
-            dmg = xi.spells.blue.applySpellDamage(caster, target, spell, dmg, params)
+            dmg = xi.spells.blue.applySpellDamage(caster, target, spell, dmg, params, nil)
             caster:addHP(dmg)
         end
     end
@@ -369,14 +402,14 @@ xi.spells.blue.useBreathSpell = function(caster, target, spell, params, isConal)
     -- Final damage
     dmg = target:breathDmgTaken(dmg)
 
-    results[1] = xi.spells.blue.applySpellDamage(caster, target, spell, dmg, params)
+    results[1] = xi.spells.blue.applySpellDamage(caster, target, spell, dmg, params, nil)
     results[2] = resistance
 
     return results
 end
 
 -- Apply spell damage
-xi.spells.blue.applySpellDamage = function(caster, target, spell, dmg, params)
+xi.spells.blue.applySpellDamage = function(caster, target, spell, dmg, params, trickAttackTarget)
     if dmg < 0 then
         dmg = 0
     end
@@ -408,7 +441,15 @@ xi.spells.blue.applySpellDamage = function(caster, target, spell, dmg, params)
     dmg = utils.stoneskin(target, dmg)
 
     target:takeSpellDamage(caster, spell, dmg, attackType, damageType)
-    target:updateEnmityFromDamage(caster, dmg)
+
+    if not target:isPC() then
+        if trickAttackTarget then
+            target:updateEnmityFromDamage(trickAttackTarget, dmg)
+        else
+            target:updateEnmityFromDamage(caster, dmg)
+        end
+    end
+
     target:handleAfflatusMiseryDamage(dmg)
 
     return dmg

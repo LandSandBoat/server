@@ -610,6 +610,7 @@ xi.combat.physical.calculateSwingCriticalRate = function(actor, target, isWeapon
     local buildingFlourishBonus = xi.combat.physical.criticalRateFromFlourish(actor)
     local modifierBonus         = actor:getMod(xi.mod.CRITHITRATE) / 100
     local meritBonus            = actor:getMerit(xi.merit.CRIT_HIT_RATE) / 100
+    local targetModifierBonus   = target:getMod(xi.mod.ENEMYCRITRATE) / 100
     local meritPenalty          = target:getMerit(xi.merit.ENEMY_CRIT_RATE) / 100
     local tpFactor              = 0
 
@@ -619,7 +620,7 @@ xi.combat.physical.calculateSwingCriticalRate = function(actor, target, isWeapon
     end
 
     -- Add all different bonuses and clamp.
-    finalCriticalRate = baseCriticalRate + statBonus + inninBonus + fencerBonus + buildingFlourishBonus + modifierBonus + meritBonus - meritPenalty + tpFactor
+    finalCriticalRate = baseCriticalRate + statBonus + inninBonus + fencerBonus + buildingFlourishBonus + modifierBonus + meritBonus + targetModifierBonus - meritPenalty + tpFactor
 
     return utils.clamp(finalCriticalRate, 0.05, 1) -- TODO: Need confirmation of no upper cap.
 end
