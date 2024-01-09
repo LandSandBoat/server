@@ -599,6 +599,7 @@ xi.weaponskills.calculateRawWSDmg = function(attacker, target, wsID, tp, action,
         finaldmg = finaldmg + hitdmg
         hitsDone = hitsDone + 1
 
+        calcParams.tpHitsLanded      = calcParams.tpHitsLanded + calcParams.hitsLanded
         calcParams.offhandHitsLanded = calcParams.hitsLanded
 
         numOffhandMultis = getMultiAttacks(attacker, target, wsParams, false, true)
@@ -693,7 +694,7 @@ xi.weaponskills.calculateRawWSDmg = function(attacker, target, wsID, tp, action,
         calcParams.offhandHitsLanded = calcParams.offhandHitsLanded + calcParams.hitsLanded
     end
 
-    calcParams.extraHitsLanded = calcParams.hitsLanded + calcParams.offhandHitsLanded
+    calcParams.extraHitsLanded = calcParams.mainHitsLanded + calcParams.offhandHitsLanded
 
     -- Remove the TP hit landed from the count if it did -- otherwise we would gain extra TP
     if calcParams.tpHitsLanded > 1 then
