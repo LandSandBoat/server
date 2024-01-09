@@ -2684,6 +2684,8 @@ INSERT INTO `item_latents` VALUES (23298,291,16,13,420); -- Hattori Hakama +2: E
 -- Hachiya Kyahan +2
 INSERT INTO `item_latents` VALUES (23320,76,25,26,2);   -- Dusk to dawn: MOVE_SPEED_GEAR_BONUS+25%
 
+INSERT INTO `item_latents` VALUES (23338,63,10,13,64);   -- Fallen's sollerets +2: STATUS_EFFECT_ACTIVE: EFFECT_LAST_RESORT: DEFP: 10
+
 INSERT INTO `item_latents` VALUES (23350,399,17,52,1);   -- Pedagogy Loafers+2: Weather: Enhances Celerity and Alacrity Effect +17% (FIRE)
 INSERT INTO `item_latents` VALUES (23350,399,17,52,2);   -- Pedagogy Loafers+2: Weather: Enhances Celerity and Alacrity Effect +17% (EARTH)
 INSERT INTO `item_latents` VALUES (23350,399,17,52,3);   -- Pedagogy Loafers+2: Weather: Enhances Celerity and Alacrity Effect +17% (WATER)

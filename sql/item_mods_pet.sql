@@ -917,6 +917,10 @@ INSERT INTO `item_mods_pet` VALUES (23325,28,20,3);   -- Automaton - MATT: 20
 INSERT INTO `item_mods_pet` VALUES (23325,30,40,3);   -- Automaton - MACC: 40
 INSERT INTO `item_mods_pet` VALUES (23325,384,400,3); -- Automaton - HASTE_GEAR: 400
 
+-- Ankusa Gaiters +2
+INSERT INTO `item_mods_pet` VALUES (23339,68,28,0);    -- Pet: EVA: 28
+INSERT INTO `item_mods_pet` VALUES (23339,161,-400,0); -- Pet: DMGPHYS: -4%
+
 -- Bagua Sandals +2
 INSERT INTO `item_mods_pet` VALUES (23351,370,4,8); -- Luopan - REGEN: 4
 
