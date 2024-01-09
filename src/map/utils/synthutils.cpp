@@ -226,7 +226,7 @@ namespace synthutils
         // Section 1: Variable definitions.
         //------------------------------
         uint8 synthResult = SYNTHESIS_SUCCESS; // We assume that we succeed.
-        float successRate = 95;                // We assume that success rate is maxed (95%).
+        uint8 successRate = 95;                // We assume that success rate is maxed (95%).
         uint8 finalHQTier = 4;                 // We assume that max HQ tier is available.
         bool  canHQ       = true;              // We assume that we can HQ.
 
@@ -312,7 +312,7 @@ namespace synthutils
                     successRate = successRate + 1; // The crafting rings that block HQ synthesis all also increase their respective craft's success rate by 1%
                 }
 
-                // Clamp success rate to 0.99
+                // Clamp success rate to 99%
                 // https://www.bluegartr.com/threads/120352-CraftyMath
                 // http://www.ffxiah.com/item/5781/kitron-macaron
                 if (successRate > 99)
@@ -320,7 +320,7 @@ namespace synthutils
                     successRate = 99;
                 }
 
-                if (randomRoll > successRate) // Synthesis broke
+                if (randomRoll > successRate) // Synthesis broke. This is not a mistake, the break check HAS to be done per craft skill involved.
                 {
                     // Keep the skill because of which the synthesis failed.
                     // Use the slotID of the crystal cell, because it was removed at the beginning of the synthesis.
@@ -358,12 +358,12 @@ namespace synthutils
 
             if (PChar->CraftContainer->getCraftType() == CRAFT_DESYNTHESIS) // if it's a desynth raise HQ chance
             {
-                chanceHQ = chanceHQ * 1.5;
+                chanceHQ = chanceHQ * 1.5f;
             }
 
             // HQ success rate modifier.
             // See: https://www.bluegartr.com/threads/130586-CraftyMath-v2-Post-September-2017-Update page 3.
-            chanceHQ = chanceHQ + PChar->getMod(Mod::SYNTH_HQ_RATE) * 100 / 512;
+            chanceHQ = chanceHQ + 100.0f * PChar->getMod(Mod::SYNTH_HQ_RATE) / 512.0f;
 
             // limit max hq chance
             if (chanceHQ > maxChanceHQ)
