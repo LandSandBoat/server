@@ -65,7 +65,7 @@ zones[xi.zone.YUHTUNGA_JUNGLE] =
         ROSE_GARDEN             = 17281357,
         VOLUPTUOUS_VILMA        = 17281358,
         NASUS_OFFSET            = 17281491,
-        SIREN                   = 17281547,
+        SIREN                   = GetFirstID('Siren'),
     },
     npc =
     {
