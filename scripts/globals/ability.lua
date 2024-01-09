@@ -16,7 +16,7 @@ xi.ability.adjustDamage = function(dmg, mob, skill, target, skilltype, skillpara
         return 0
     end
 
-    --handle pd
+    -- Handle pd.
     if
         (target:hasStatusEffect(xi.effect.PERFECT_DODGE) or
         target:hasStatusEffect(xi.effect.ALL_MISS)) and
@@ -30,7 +30,7 @@ xi.ability.adjustDamage = function(dmg, mob, skill, target, skilltype, skillpara
     -- this is for AoE because its only set once
     skill:setMsg(xi.msg.basic.USES_JA_TAKE_DAMAGE)
 
-    --Handle shadows depending on shadow behaviour / skilltype
+    -- Handle shadows depending on shadow behaviour / skilltype
     if
         shadowbehav ~= xi.mobskills.shadowBehavior.WIPE_SHADOWS and
         shadowbehav ~= xi.mobskills.shadowBehavior.IGNORE_SHADOWS
@@ -51,9 +51,14 @@ xi.ability.adjustDamage = function(dmg, mob, skill, target, skilltype, skillpara
         target:delStatusEffect(xi.effect.THIRD_EYE)
     end
 
-    --handle Third Eye using shadowbehav as a guide
-    if skilltype == xi.attackType.PHYSICAL and utils.thirdeye(target) then
+    -- Handle Third Eye using shadowbehav as a guide.
+    if
+        (skilltype == xi.attackType.PHYSICAL or
+        skilltype == xi.attackType.RANGED) and
+        utils.thirdeye(target)
+    then
         skill:setMsg(xi.msg.basic.ANTICIPATE)
+
         return 0
     end
 
