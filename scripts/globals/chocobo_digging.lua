@@ -1015,7 +1015,7 @@ local function getChocoboDiggingItem(player)
             local moonPhases =
             {
                 {  7,  9, 0.7 },
-                { 15, 21, 0.9 },
+                { 15, 20, 0.9 },
                 { 21, 24, 0.5 },
             }
 
@@ -1062,7 +1062,7 @@ local function getChocoboDiggingItem(player)
         local moonPhases =
         {
             {  7,  9, 0.7 },
-            { 15, 21, 0.9 },
+            { 15, 20, 0.9 },
             { 21, 24, 0.5 },
         }
 
