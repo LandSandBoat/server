@@ -259,8 +259,9 @@ xi.msg.basic =
     ADD_EFFECT_HP_HEAL     = 167, -- Additional effect: The <player> recovers <number> HP.
     ADD_EFFECT_DISPEL      = 168, -- Additional effect: <target>'s <Status Effect> effect disappears!
     ADD_EFFECT_WARP        = 169, -- Additional effect: Warp! (used by Halloween staves)
-    STATUS_SPIKES          = 374, -- Striking <Defender>'s armor causes <Attacker> to become <status effect>.
-    SPIKES_EFFECT_HEAL     = 383, -- <?>'s spikes restore <number> HP to the <?>.
+    SPIKES_EFFECT_RECOVER  = 373, -- <defender> recovers <number> hit points!
+    STATUS_SPIKES          = 374, -- Striking <defender>'s armor causes <attacker> to become <status effect>.
+    SPIKES_EFFECT_HEAL     = 383, -- <defenders>'s spikes restore <number> HP to the <attacker>.  (element absorbed)
     ADD_EFFECT_HEAL        = 384, -- Additional effect: <target> recovers <number> HP.
 
     -- Status
@@ -405,3 +406,4 @@ xi.msg.system =
     TRUST_NO_ENMITY              = 300, -- You cannot use Trust magic while having gained enmity.
     TRUST_SOLO_OR_LEADER         = 301, -- You cannot use Trust magic unless you are solo or the party leader.
 }
+return xi.msg

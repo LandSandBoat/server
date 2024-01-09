@@ -815,7 +815,6 @@ namespace battleutils
                 uint16 bonus       = dmg * (PDefender->getMod(Mod::RETALIATION) / 100);
                 dmg                = dmg + bonus;
 
-                // FINISH HIM! dun dun dun
                 // TP and stoneskin are handled inside TakePhysicalDamage
                 Action->spikesMessage = 536;
                 Action->spikesParam =
@@ -887,6 +886,7 @@ namespace battleutils
                                         PEffect->SetSubPower(remainingDrain - abs(damage));
                                     }
                                 }
+
                                 if (spikesDamage > 0) // do not add HP if spikes damage was absorbed.
                                 {
                                     Action->spikesMessage = MSGBASIC_SPIKES_EFFECT_HP_DRAIN;
@@ -902,7 +902,6 @@ namespace battleutils
                         {
                             PAttacker->takeDamage(spikesDamage, PDefender, ATTACK_TYPE::MAGICAL, DAMAGE_TYPE::LIGHT);
                         }
-
                         else
                         {
                             // only works on shield blocks
@@ -1014,12 +1013,19 @@ namespace battleutils
 
         if (xirand::GetRandomNumber(100) < chance + lvlDiff)
         {
-            // spikes landed
             if (spikesType == SUBEFFECT_CURSE_SPIKES)
             {
-                Action->spikesMessage = 0; // log says nothing? // TODO: find "Additional Effect: Curse" message
+                Action->spikesMessage = MSGBASIC_STATUS_SPIKES;
                 Action->spikesParam   = EFFECT_CURSE;
             }
+            /* Todo: wire this up fully.
+            else if (spikesType == SUBEFFECT_DEATH_SPIKES)
+            {
+                Action->spikesMessage = MSGBASIC_STATUS_SPIKES;
+                Action->spikesParam   = EFFECT_KO;
+                PDefender->setHP(0);
+            }
+            */
             else
             {
                 auto ratio = std::clamp<uint8>(damage / 4, 1, 255);
@@ -1032,8 +1038,7 @@ namespace battleutils
                     spikesDamage = HandleOneForAll(PAttacker, spikesDamage);
                     spikesDamage = HandleStoneskin(PAttacker, spikesDamage);
                 }
-
-                if (spikesDamage < 0) // fit healed spikes into uint16
+                else if (spikesDamage < 0) // fit healed spikes into uint16
                 {
                     Action->spikesParam = static_cast<uint16>(std::clamp(spikesDamage * -1, 0, PAttacker->GetMaxHP() - PAttacker->health.hp));
                 }
