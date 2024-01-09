@@ -1055,6 +1055,14 @@ namespace battleutils
 
             return true;
         }
+        else
+        {
+            // Technically, these should be the default values and then conditional branches change them
+            // However, it wasn't worth the effort when the whole thing is going to be eventually burned down to make way for fully scripted spikes
+            Action->spikesEffect  = SUBEFFECT_NONE;
+            Action->spikesParam   = 0;
+            Action->spikesMessage = 0;
+        }
 
         return false;
     }
