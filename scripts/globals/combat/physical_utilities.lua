@@ -522,6 +522,109 @@ xi.combat.physical.calculateRangedPDIF = function(actor, target, weaponType, wsA
     return pDif
 end
 
+-----------------------------------
+-- Critical hit rate operations
+-----------------------------------
+-- dStat: Critical hit rate bonus from DEX vs AGI difference.
+xi.combat.physical.criticalRateFromStatDiff = function(actor, target)
+    local statBonus = 0
+
+    local dDex = actor:getStat(xi.mod.DEX) - target:getStat(xi.mod.AGI)
+
+    if dDex > 50 then
+        statBonus = 0.15
+    elseif dDex >= 40 then
+        statBonus = (dDex - 35) / 100
+    elseif dDex >= 30 then
+        statBonus = 0.04
+    elseif dDex >= 20 then
+        statBonus = 0.03
+    elseif dDex >= 14 then
+        statBonus = 0.02
+    elseif dDex >= 7 then
+        statBonus = 0.01
+    end
+
+    return statBonus
+end
+
+-- Innin: Critical hit rate bonus when actor is behind target.
+xi.combat.physical.criticalRateFromInnin = function(actor, target)
+    local inninBonus = 0
+
+    if
+        actor:hasStatusEffect(xi.effect.INNIN) and
+        actor:isBehind(target, 23)
+    then
+        inninBonus = actor:getStatusEffect(xi.effect.INNIN):getPower()
+    end
+
+    return inninBonus
+end
+
+-- Fencer: Critical hit rate bonus when actor is only wielding with main hand.
+xi.combat.physical.criticalRateFromFencer = function(actor)
+    local fencerBonus = 0
+
+    local mainEquip = actor:getStorageItem(0, 0, xi.slot.MAIN)
+    local subEquip  = actor:getStorageItem(0, 0, xi.slot.SUB)
+
+    if
+        actor:getObjType() == xi.objType.PC and
+        mainEquip and
+        not mainEquip:isTwoHanded() and                                                      -- No 2 handed weapons.
+        not mainEquip:isHandToHand() and                                                     -- No 2 handed weapons.
+        (subEquip == nil or subEquip:getSkillType() == xi.skill.NONE or subEquip:isShield()) -- Only shields allowed in sub.
+    then
+        fencerBonus = actor:getMod(xi.mod.FENCER_CRITHITRATE) / 100
+    end
+
+    return fencerBonus
+end
+
+-- Critical rate from Building Flourish.
+-- TODO: Study case were if we can attach modifiers to the effect itself, both this and the effect may need refactoring.
+xi.combat.physical.criticalRateFromFlourish = function(actor)
+    local buildingFlourishBonus = 0
+
+    if actor:hasStatusEffect(xi.effect.BUILDING_FLOURISH) then
+        local effectPower    = actor:getStatusEffect(xi.effect.BUILDING_FLOURISH):getPower()
+        local effectSubPower = actor:getStatusEffect(xi.effect.BUILDING_FLOURISH):getSubPower()
+
+        if effectPower >= 3 then
+            buildingFlourishBonus = (10 + effectSubPower) / 100
+        end
+    end
+
+    return buildingFlourishBonus
+end
+
+-- Critical rate master function.
+xi.combat.physical.calculateSwingCriticalRate = function(actor, target, isWeaponskill, TP1000, TP2000, TP3000)
+    -- See reference at https://www.bg-wiki.com/ffxi/Critical_Hit_Rate
+    local finalCriticalRate     = 0
+    local baseCriticalRate      = 0.05
+    local statBonus             = xi.combat.physical.criticalRateFromStatDiff(actor, target)
+    local inninBonus            = xi.combat.physical.criticalRateFromInnin(actor, target)
+    local fencerBonus           = xi.combat.physical.criticalRateFromFencer(actor)
+    local buildingFlourishBonus = xi.combat.physical.criticalRateFromFlourish(actor)
+    local modifierBonus         = actor:getMod(xi.mod.CRITHITRATE) / 100
+    local meritBonus            = actor:getMerit(xi.merit.CRIT_HIT_RATE) / 100
+    local targetModifierBonus   = target:getMod(xi.mod.ENEMYCRITRATE) / 100
+    local meritPenalty          = target:getMerit(xi.merit.ENEMY_CRIT_RATE) / 100
+    local tpFactor              = 0
+
+    -- For weaponskills.
+    if isWeaponskill then
+        tpFactor = xi.combat.physical.calculateTPfactor(actor, TP1000, TP2000, TP3000)
+    end
+
+    -- Add all different bonuses and clamp.
+    finalCriticalRate = baseCriticalRate + statBonus + inninBonus + fencerBonus + buildingFlourishBonus + modifierBonus + meritBonus + targetModifierBonus - meritPenalty + tpFactor
+
+    return utils.clamp(finalCriticalRate, 0.05, 1) -- TODO: Need confirmation of no upper cap.
+end
+
 xi.combat.physical.calculateNumberOfHits = function(actor, additionalParamsHere)
 end
 

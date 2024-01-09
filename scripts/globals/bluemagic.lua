@@ -4,6 +4,7 @@
 -----------------------------------
 require('scripts/globals/magic')
 require('scripts/globals/mobskills')
+require('scripts/globals/combat/physical_utilities')
 -----------------------------------
 xi = xi or {}
 xi.spells = xi.spells or {}
@@ -11,11 +12,11 @@ xi.spells.blue = xi.spells.blue or {}
 -----------------------------------
 
 -- The TP modifier (currently unused)
-TPMOD_NONE = 0
+TPMOD_NONE     = 0
 TPMOD_CRITICAL = 1
-TPMOD_DAMAGE = 2
-TPMOD_ACC = 3
-TPMOD_ATTACK = 4
+TPMOD_DAMAGE   = 2
+TPMOD_ACC      = 3
+TPMOD_ATTACK   = 4
 TPMOD_DURATION = 5
 
 -----------------------------------
@@ -25,9 +26,9 @@ TPMOD_DURATION = 5
 -- Get alpha (level-dependent multiplier on WSC)
 local function calculateAlpha(level)
     if level < 61 then
-        return math.ceil(100 - (level / 6)) / 100
+        return math.ceil(100 - level / 6) / 100
     elseif level <= 75 then
-        return math.ceil(100 - (level - 40) / 2) / 100
+        return math.ceil(100 - level - 40 / 2) / 100
     elseif level <= 99 then
         return 0.83
     end
@@ -35,14 +36,15 @@ end
 
 -- Get WSC
 local function calculateWSC(attacker, params)
-    local wsc = calculateAlpha(attacker:getMainLvl()) * (
-    attacker:getStat(xi.mod.STR) * params.str_wsc +
+    local wsc = calculateAlpha(attacker:getMainLvl()) *
+    (attacker:getStat(xi.mod.STR) * params.str_wsc +
     attacker:getStat(xi.mod.DEX) * params.dex_wsc +
     attacker:getStat(xi.mod.VIT) * params.vit_wsc +
     attacker:getStat(xi.mod.AGI) * params.agi_wsc +
     attacker:getStat(xi.mod.INT) * params.int_wsc +
     attacker:getStat(xi.mod.MND) * params.mnd_wsc +
     attacker:getStat(xi.mod.CHR) * params.chr_wsc)
+
     return wsc
 end
 
@@ -85,53 +87,52 @@ local function calculatecRatio(ratio, atk_lvl, def_lvl)
 
     cratio[1] = cratiomin
     cratio[2] = cratiomax
+
     return cratio
 end
 
 -- Get the fTP multiplier (by applying 2 straight lines between ftp0-ftp1500 and ftp1500-ftp3000)
 local function calculatefTP(tp, ftp0, ftp1500, ftp3000)
     tp = utils.clamp(tp, 0, 3000)
-    if tp >= 0 and tp < 1500 then
-        return ftp0 + ((ftp1500 - ftp0) * (tp / 1500))
-    elseif tp >= 1500 then
-        return ftp1500 + ((ftp3000 - ftp1500) * ((tp - 1500) / 1500))
-    else -- unreachable
-        return 1
+
+    if tp >= 1500 then
+        return ftp1500 + (ftp3000 - ftp1500) * (tp - 1500) / 1500
+    else
+        return ftp0 + (ftp1500 - ftp0) * tp / 1500
     end
 end
 
 -- Get fSTR
 local function calculatefSTR(dSTR)
-    local fSTR2 = nil
+    local fSTR2 = 0
+
     if dSTR >= 12 then
-        fSTR2 = (dSTR + 4) / 2
+        fSTR2 = dSTR + 4
     elseif dSTR >= 6 then
-        fSTR2 = (dSTR + 6) / 2
+        fSTR2 = dSTR + 6
     elseif dSTR >= 1 then
-        fSTR2 = (dSTR + 7) / 2
+        fSTR2 = dSTR + 7
     elseif dSTR >= -2 then
-        fSTR2 = (dSTR + 8) / 2
+        fSTR2 = dSTR + 8
     elseif dSTR >= -7 then
-        fSTR2 = (dSTR + 9) / 2
+        fSTR2 = dSTR + 9
     elseif dSTR >= -15 then
-        fSTR2 = (dSTR + 10) / 2
+        fSTR2 = dSTR + 10
     elseif dSTR >= -21 then
-        fSTR2 = (dSTR + 12) / 2
+        fSTR2 = dSTR + 12
     else
-        fSTR2 = (dSTR + 13) / 2
+        fSTR2 = dSTR + 13
     end
 
-    return fSTR2
+    return fSTR2 / 2
 end
 
 -- Get hitrate
-local function calculateHitrate(attacker, target)
-    local acc = attacker:getACC() + attacker:getMerit(xi.merit.PHYSICAL_POTENCY)
-    local eva = target:getEVA()
-    acc = acc + ((attacker:getMainLvl() - target:getMainLvl()) * 4)
+local function calculateHitrate(attacker, target, bonusacc)
+    local acc     = attacker:getACC() + attacker:getMerit(xi.merit.PHYSICAL_POTENCY) * 2 + (attacker:getMainLvl() - target:getMainLvl()) * 4 + bonusacc
+    local eva     = target:getEVA()
+    local hitrate = (75 + (acc - eva) / 2) / 100
 
-    local hitrate = 75 + (acc - eva) / 2
-    hitrate = hitrate / 100
     hitrate = utils.clamp(hitrate, 0.2, 0.95)
 
     return hitrate
@@ -139,8 +140,8 @@ end
 
 -- Get the effect of ecosystem correlation
 local function calculateCorrelation(spellEcosystem, monsterEcosystem, merits)
-    local effect = utils.getEcosystemStrengthBonus(spellEcosystem, monsterEcosystem)
-    effect = effect * 0.25
+    local effect = utils.getEcosystemStrengthBonus(spellEcosystem, monsterEcosystem) * 0.25
+
     if effect > 0 then -- merits don't impose a penalty, only a benefit in case of strength
         effect = effect + 0.001 * merits
     end
@@ -160,7 +161,7 @@ xi.spells.blue.usePhysicalSpell = function(caster, target, spell, params)
 
     -- Initial D value
     local initialD = math.floor(caster:getSkillLevel(xi.skill.BLUE_MAGIC) * 0.11) * 2 + 3
-    initialD = utils.clamp(initialD, 0, params.duppercap)
+    initialD       = utils.clamp(initialD, 0, params.duppercap)
 
     -- fSTR
     local fStr = calculatefSTR(caster:getStat(xi.mod.STR) - target:getStat(xi.mod.VIT))
@@ -171,8 +172,8 @@ xi.spells.blue.usePhysicalSpell = function(caster, target, spell, params)
     end
 
     -- Multiplier, bonus WSC
-    local multiplier = 1
-    local bonusWSC = 0
+    local multiplier = params.multiplier or 1
+    local bonusWSC   = 0
 
     -- BLU AF3 bonus (triples the base WSC when it procs)
     if caster:getMod(xi.mod.AUGMENT_BLU_MAGIC) > math.random(0, 99) then
@@ -181,15 +182,15 @@ xi.spells.blue.usePhysicalSpell = function(caster, target, spell, params)
 
     -- Chain Affinity -- TODO: add 'Damage/Accuracy/Critical Hit Chance varies with TP'
     if caster:getStatusEffect(xi.effect.CHAIN_AFFINITY) then
-        local tp = caster:getTP() + caster:getMerit(xi.merit.ENCHAINMENT) -- Total TP available
-        tp = utils.clamp(tp, 0, 3000)
+        local tp   = caster:getTP() + caster:getMerit(xi.merit.ENCHAINMENT) -- Total TP available
+        tp         = utils.clamp(tp, 0, 3000)
         multiplier = calculatefTP(tp, params.multiplier, params.tp150, params.tp300)
-        bonusWSC = bonusWSC + 1 -- Chain Affinity doubles base WSC
+        bonusWSC   = bonusWSC + 1 -- Chain Affinity doubles base WSC
     end
 
     -- WSC
     local wsc = calculateWSC(caster, params)
-    wsc = wsc + (wsc * bonusWSC) -- Bonus WSC from AF3/CA
+    wsc       = wsc + wsc * bonusWSC -- Bonus WSC from AF3/CA
 
     -- Monster correlation
     local correlationMultiplier = calculateCorrelation(params.ecosystem, target:getEcosystem(), caster:getMerit(xi.merit.MONSTER_CORRELATION))
@@ -210,34 +211,61 @@ xi.spells.blue.usePhysicalSpell = function(caster, target, spell, params)
         params.offcratiomod = caster:getStat(xi.mod.ATT)
     end
 
-    local cratio = calculatecRatio(params.offcratiomod / target:getStat(xi.mod.DEF), caster:getMainLvl(), target:getMainLvl())
-    local hitrate = calculateHitrate(caster, target)
+    params.offcratiomod = params.offcratiomod * (caster:getMerit(xi.merit.PHYSICAL_POTENCY) + 100) / 100
+    params.bonusacc     = params.bonusacc == nil and 0 or params.bonusacc
+
+    -- params.critchance will only be non-nil if base critchance is passed from spell lua
+    local nativecrit  = xi.combat.physical.calculateSwingCriticalRate(caster, target, false, 0, 0, 0)
+    params.critchance = params.critchance == nil and 0 or utils.clamp(params.critchance / 100 + nativecrit, 0.05, 0.95)
+
+    local cratio  = calculatecRatio(params.offcratiomod / target:getStat(xi.mod.DEF), caster:getMainLvl(), target:getMainLvl())
+    local hitrate = calculateHitrate(caster, target, params.bonusacc)
 
     -------------------------
     -- Perform the attacks --
     -------------------------
 
-    local hitsdone = 0
+    local hitsdone   = 0
     local hitslanded = 0
-    local finaldmg = 0
+    local finaldmg   = 0
+    local sneakIsApplicable = caster:hasStatusEffect(xi.effect.SNEAK_ATTACK) and
+                                spell:isAoE() == 0 and
+                                params.attackType ~= xi.attackType.RANGED and
+                                (caster:isBehind(target) or caster:hasStatusEffect(xi.effect.HIDE))
+    local trickAttackTarget = (caster:hasStatusEffect(xi.effect.TRICK_ATTACK) and
+                                spell:isAoE() == 0 and
+                                params.attackType ~= xi.attackType.RANGED) and
+                                caster:getTrickAttackChar(target) or nil
 
     while hitsdone < params.numhits do
         local chance = math.random()
-        if chance <= hitrate then -- it hit
+
+        if
+            sneakIsApplicable or
+            chance <= hitrate
+        then
             -- TODO: Check for shadow absorbs. Right now the whole spell will be absorbed by one shadow before it even gets here.
 
             -- Generate a random pDIF between min and max
             local pdif = math.random(cratio[1] * 1000, cratio[2] * 1000)
-            pdif = pdif / 1000
+            pdif       = pdif / 1000
+
+            if
+                sneakIsApplicable or
+                math.random() < params.critchance
+            then
+                pdif = pdif + 1
+            end
 
             -- Add it to our final damage
             if hitsdone == 0 then
-                finaldmg = finaldmg + (finalD * (multiplier + correlationMultiplier) * pdif) -- first hit gets full multiplier
+                finaldmg = finaldmg + finalD * (multiplier + correlationMultiplier) * pdif -- first hit gets full multiplier
             else
-                finaldmg = finaldmg + (finalD * (1 + correlationMultiplier) * pdif)
+                finaldmg = finaldmg + finalD * (1 + correlationMultiplier) * pdif
             end
 
-            hitslanded = hitslanded + 1
+            hitslanded        = hitslanded + 1
+            sneakIsApplicable = false
 
             -- increment target's TP (100TP per hit landed)
             if finaldmg > 0 then
@@ -245,10 +273,15 @@ xi.spells.blue.usePhysicalSpell = function(caster, target, spell, params)
             end
         end
 
+        if params.attackType ~= xi.attackType.RANGED then
+            caster:delStatusEffect(xi.effect.SNEAK_ATTACK)
+            caster:delStatusEffect(xi.effect.TRICK_ATTACK)
+        end
+
         hitsdone = hitsdone + 1
     end
 
-    return xi.spells.blue.applySpellDamage(caster, target, spell, finaldmg, params)
+    return xi.spells.blue.applySpellDamage(caster, target, spell, finaldmg, params, trickAttackTarget)
 end
 
 -- Get the damage for a magical Blue Magic spell
@@ -259,7 +292,7 @@ xi.spells.blue.useMagicalSpell = function(caster, target, spell, params)
     -- Use params.addedEffect instead
 
     -- Initial values
-    local initialD = utils.clamp(caster:getMainLvl() + 2, 0, params.duppercap)
+    local initialD   = utils.clamp(caster:getMainLvl() + 2, 0, params.duppercap)
     params.skillType = xi.skill.BLUE_MAGIC
 
     -- WSC
@@ -269,7 +302,7 @@ xi.spells.blue.useMagicalSpell = function(caster, target, spell, params)
     end
 
     -- INT/MND/CHR dmg bonuses
-    params.diff = caster:getStat(params.attribute) - target:getStat(params.attribute)
+    params.diff     = caster:getStat(params.attribute) - target:getStat(params.attribute)
     local statBonus = params.diff * params.tMultiplier
 
     -- Azure Lore
@@ -282,7 +315,7 @@ xi.spells.blue.useMagicalSpell = function(caster, target, spell, params)
     local correlationMultiplier = calculateCorrelation(params.ecosystem, target:getEcosystem(), caster:getMerit(xi.merit.MONSTER_CORRELATION))
 
     -- Final D value
-    local finalD = ((initialD + wsc) * (params.multiplier + azureBonus + correlationMultiplier)) + statBonus
+    local finalD = (initialD + wsc) * (params.multiplier + azureBonus + correlationMultiplier) + statBonus
 
     -- Multitarget damage reduction
     local finaldmg = math.floor(finalD * xi.spells.damage.calculateMTDR(spell))
@@ -293,7 +326,7 @@ xi.spells.blue.useMagicalSpell = function(caster, target, spell, params)
     -- MAB/MDB/weather/day/affinity/burst effect on damage
     finaldmg = math.floor(addBonuses(caster, spell, target, finaldmg))
 
-    return xi.spells.blue.applySpellDamage(caster, target, spell, finaldmg, params)
+    return xi.spells.blue.applySpellDamage(caster, target, spell, finaldmg, params, nil)
 end
 
 -- Perform a draining magical Blue Magic spell
@@ -320,7 +353,7 @@ xi.spells.blue.useDrainSpell = function(caster, target, spell, params, softCap, 
             caster:addMP(dmg)
         else
             dmg = utils.clamp(dmg, 0, target:getHP())
-            dmg = xi.spells.blue.applySpellDamage(caster, target, spell, dmg, params)
+            dmg = xi.spells.blue.applySpellDamage(caster, target, spell, dmg, params, nil)
             caster:addHP(dmg)
         end
     end
@@ -369,25 +402,27 @@ xi.spells.blue.useBreathSpell = function(caster, target, spell, params, isConal)
     -- Final damage
     dmg = target:breathDmgTaken(dmg)
 
-    results[1] = xi.spells.blue.applySpellDamage(caster, target, spell, dmg, params)
+    results[1] = xi.spells.blue.applySpellDamage(caster, target, spell, dmg, params, nil)
     results[2] = resistance
+
     return results
 end
 
 -- Apply spell damage
-xi.spells.blue.applySpellDamage = function(caster, target, spell, dmg, params)
+xi.spells.blue.applySpellDamage = function(caster, target, spell, dmg, params, trickAttackTarget)
     if dmg < 0 then
         dmg = 0
     end
 
-    dmg = dmg * xi.settings.main.BLUE_POWER
+    dmg              = dmg * xi.settings.main.BLUE_POWER
     local attackType = params.attackType or xi.attackType.NONE
     local damageType = params.damageType or xi.damageType.NONE
 
     -- handle MDT, One For All, Liement
     if attackType == xi.attackType.MAGICAL then
         local targetMagicDamageAdjustment = xi.spells.damage.calculateTMDA(target, damageType) -- Apply checks for Liement, MDT/MDTII/DT
-        dmg = math.floor(dmg * targetMagicDamageAdjustment)
+        dmg                               = math.floor(dmg * targetMagicDamageAdjustment)
+
         if dmg < 0 then
             target:takeSpellDamage(caster, spell, dmg, attackType, damageType)
             -- TODO: verify Afflatus/enmity from absorb?
@@ -406,7 +441,15 @@ xi.spells.blue.applySpellDamage = function(caster, target, spell, dmg, params)
     dmg = utils.stoneskin(target, dmg)
 
     target:takeSpellDamage(caster, spell, dmg, attackType, damageType)
-    target:updateEnmityFromDamage(caster, dmg)
+
+    if not target:isPC() then
+        if trickAttackTarget then
+            target:updateEnmityFromDamage(trickAttackTarget, dmg)
+        else
+            target:updateEnmityFromDamage(caster, dmg)
+        end
+    end
+
     target:handleAfflatusMiseryDamage(dmg)
 
     return dmg
@@ -416,8 +459,9 @@ end
 xi.spells.blue.calculateDurationWithDiffusion = function(caster, duration)
     if caster:hasStatusEffect(xi.effect.DIFFUSION) then
         local merits = caster:getMerit(xi.merit.DIFFUSION)
+
         if merits > 0 then -- each merit after the first increases duration by 5%
-            duration = duration + (duration / 100) * (merits - 5)
+            duration = duration + (merits - 5) * duration / 100
         end
 
         caster:delStatusEffect(xi.effect.DIFFUSION)
@@ -429,9 +473,9 @@ end
 -- Perform an enfeebling Blue Magic spell
 xi.spells.blue.useEnfeeblingSpell = function(caster, target, spell, params, power, tick, duration, resistThreshold, isGaze, isConal)
     -- INT and Blue Magic skill are the default resistance modifiers
-    params.diff = caster:getStat(xi.mod.INT) - target:getStat(xi.mod.INT)
+    params.diff      = caster:getStat(xi.mod.INT) - target:getStat(xi.mod.INT)
     params.skillType = xi.skill.BLUE_MAGIC
-    local resist = applyResistanceEffect(caster, target, spell, params)
+    local resist     = applyResistanceEffect(caster, target, spell, params)
 
     -- If unresisted
     if resist >= resistThreshold then
@@ -464,22 +508,22 @@ end
 
 -- Perform a curative Blue Magic spell
 xi.spells.blue.useCuringSpell = function(caster, target, spell, params)
-    local power = getCurePowerOld(caster)
-    local divisor = params.divisor0
+    local power    = getCurePowerOld(caster)
+    local divisor  = params.divisor0
     local constant = params.constant0
 
     if power > params.powerThreshold2 then
-        divisor = params.divisor2
+        divisor  = params.divisor2
         constant = params.constant2
     elseif power > params.powerThreshold1 then
-        divisor = params.divisor1
+        divisor  = params.divisor1
         constant = params.constant1
     end
 
     local final = getCureFinal(caster, spell, getBaseCureOld(power, divisor, constant), params.minCure, true)
-    final = final + (final * (target:getMod(xi.mod.CURE_POTENCY_RCVD) / 100))
-    final = final * xi.settings.main.CURE_POWER
-    final = utils.clamp(final, 0, target:getMaxHP() - target:getHP())
+    final       = final + final * target:getMod(xi.mod.CURE_POTENCY_RCVD) / 100
+    final       = final * xi.settings.main.CURE_POWER
+    final       = utils.clamp(final, 0, target:getMaxHP() - target:getHP())
 
     target:addHP(final)
     target:wakeUp()
@@ -499,9 +543,10 @@ xi.spells.blue.usePhysicalSpellAddedEffect = function(caster, target, spell, par
     -- Physical spell needs to do damage before added effect can hit
     if damage > 0 then
         -- INT and Blue Magic skill are the default resistance modifiers
-        params.diff = caster:getStat(xi.mod.INT) - target:getStat(xi.mod.INT)
+        params.diff      = caster:getStat(xi.mod.INT) - target:getStat(xi.mod.INT)
         params.skillType = xi.skill.BLUE_MAGIC
-        local resist = applyResistanceEffect(caster, target, spell, params)
+        local resist     = applyResistanceEffect(caster, target, spell, params)
+
         if resist >= 0.5 then
             target:addStatusEffect(params.effect, power, tick, duration * resist)
         end
@@ -511,10 +556,11 @@ end
 -- Inflict an added enfeebling effect (after a magical spell)
 xi.spells.blue.useMagicalSpellAddedEffect = function(caster, target, spell, params, power, tick, duration)
     -- Blue Magic skill + whichever attribute the spell uses will be used as resistance modifiers
-    params.diff = caster:getStat(params.attribute) - target:getStat(params.attribute)
+    params.diff      = caster:getStat(params.attribute) - target:getStat(params.attribute)
     params.skillType = xi.skill.BLUE_MAGIC
-    params.effect = params.addedEffect -- renamed to avoid magical spells' dmg resistance check being influenced by this
-    local resist = applyResistanceEffect(caster, target, spell, params)
+    params.effect    = params.addedEffect -- renamed to avoid magical spells' dmg resistance check being influenced by this
+    local resist     = applyResistanceEffect(caster, target, spell, params)
+
     if resist >= 0.5 then
         target:addStatusEffect(params.effect, power, tick, duration * resist)
     end

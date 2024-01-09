@@ -1027,10 +1027,22 @@ bool CCharEntity::OnAttack(CAttackState& state, action_t& action)
 void CCharEntity::OnCastFinished(CMagicState& state, action_t& action)
 {
     TracyZoneScoped;
-    CBattleEntity::OnCastFinished(state, action);
 
     auto* PSpell  = state.GetSpell();
     auto* PTarget = static_cast<CBattleEntity*>(state.GetTarget());
+
+    // not ideal, since Trick Attack character (taChar) is also calculated on the lua side for the base spell.
+    // Only blue spells that act as a physical WS can TA.
+    CBattleEntity* taChar = nullptr;
+
+    if (StatusEffectContainer->HasStatusEffect(EFFECT_TRICK_ATTACK) &&
+        PSpell->getSpellGroup() == SPELLGROUP_BLUE &&
+        PSpell->dealsDamage())
+    {
+        taChar = battleutils::getAvailableTrickAttackChar(this, PTarget);
+    }
+
+    CBattleEntity::OnCastFinished(state, action);
 
     PRecastContainer->Add(RECAST_MAGIC, static_cast<uint16>(PSpell->getID()), action.recast);
 
@@ -1038,7 +1050,9 @@ void CCharEntity::OnCastFinished(CMagicState& state, action_t& action)
     {
         for (auto&& actionTarget : actionList.actionTargets)
         {
-            if (actionTarget.param > 0 && PSpell->dealsDamage() && PSpell->getSpellGroup() == SPELLGROUP_BLUE &&
+            if (actionTarget.param > 0 &&
+                PSpell->dealsDamage() &&
+                PSpell->getSpellGroup() == SPELLGROUP_BLUE &&
                 (StatusEffectContainer->HasStatusEffect(EFFECT_CHAIN_AFFINITY) || StatusEffectContainer->HasStatusEffect(EFFECT_AZURE_LORE)) &&
                 static_cast<CBlueSpell*>(PSpell)->getPrimarySkillchain() != 0)
             {
@@ -1046,7 +1060,7 @@ void CCharEntity::OnCastFinished(CMagicState& state, action_t& action)
                 SUBEFFECT effect     = battleutils::GetSkillChainEffect(PTarget, PBlueSpell->getPrimarySkillchain(), PBlueSpell->getSecondarySkillchain(), 0);
                 if (effect != SUBEFFECT_NONE)
                 {
-                    uint16 skillChainDamage = battleutils::TakeSkillchainDamage(static_cast<CBattleEntity*>(this), PTarget, actionTarget.param, nullptr);
+                    uint16 skillChainDamage = battleutils::TakeSkillchainDamage(static_cast<CBattleEntity*>(this), PTarget, actionTarget.param, taChar);
 
                     actionTarget.addEffectParam   = skillChainDamage;
                     actionTarget.addEffectMessage = 287 + effect;
