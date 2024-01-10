@@ -88,33 +88,37 @@ end
 -- For instance, if a player attacks a mob, the mob uses the mob formula when gaining TP from the returned hit.
 -- This appears to be a measure to not buff mobs when players were buffed with the new TP gain formula.
 xi.combat.tp.calculateTPReturn = function(gainee, delay)
+    local tpReturn = 0
+
     if gainee and gainee:getObjType() ~= xi.objType.MOB then -- Pets and PCs have been observed to use this formula
-        if delay <= 180 then
-            return math.floor(61 + ((delay - 180) * 63 / 360))
-        elseif delay >= 181 and delay <= 540 then
-            return math.floor(61 + ((delay - 180) * 88 / 360))
-        elseif delay >= 541 and delay <= 630 then
-            return math.floor(149 + ((delay - 540) * 20 / 360))
-        elseif delay >= 631 and delay <= 720 then
-            return math.floor(154 + ((delay - 630) * 28 / 360))
-        elseif delay >= 721 and delay <= 900 then
-            return math.floor(161 + ((delay - 720) * 24 / 360))
+        if delay > 900 then
+            tpReturn = 173 + (delay - 900) * 28 / 360
+        elseif delay > 720 then
+            tpReturn = 161 + (delay - 720) * 24 / 360
+        elseif delay > 630 then
+            tpReturn = 154 + (delay - 630) * 28 / 360
+        elseif delay > 540 then
+            tpReturn = 149 + (delay - 540) * 20 / 360
+        elseif delay > 180 then
+            tpReturn = 61 + (delay - 180) * 88 / 360
         else
-            return math.floor(173 + ((delay - 900) * 28 / 360))
+            tpReturn = 61 + (delay - 180) * 63 / 360
         end
     else -- mobs have been observed to use this formula -- http://wiki.ffo.jp/html/308.html
-        if delay <= 180 then
-            return math.floor(50 + ((delay - 180) * 15 / 180))
-        elseif delay >= 181 and delay <= 450 then
-            return math.floor(50 + ((delay - 180) * 65 / 270))
-        elseif delay >= 451 and delay <= 480 then
-            return math.floor(115 + ((delay - 450) * 15 / 30))
-        elseif delay >= 481 and delay <= 530 then
-            return math.floor(130 + ((delay - 480) * 15 / 30))
-        elseif delay >= 53 and delay <= 900 then
-            return math.floor(145 + ((delay - 530) * 35 / 470))
+        if delay > 530 then
+            tpReturn = 145 + (delay - 530) * 35 / 470
+        elseif delay > 480 then
+            tpReturn = 130 + (delay - 480) * 15 / 30
+        elseif delay > 450 then
+            tpReturn = 115 + (delay - 450) * 15 / 30
+        elseif delay > 180 then
+            tpReturn = 50 + (delay - 180) * 65 / 270
+        else
+            tpReturn = 50 + (delay - 180) * 15 / 180
         end
     end
+
+    return math.floor(tpReturn)
 end
 
 -- TODO: does Ikishoten factor into this as a bonus to baseTPGain if it procs on the hit? Needs verification.
