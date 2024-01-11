@@ -1,0 +1,140 @@
+Offset by 1536 from ROM\181\72.dat
+datIndex	traitID	namestring
+1537	1	Accuracy Bonus
+1538	2	Evasion Bonus
+1539	3	Attack Bonus
+1540	4	Defense Bonus
+1541	5	Magic Atk. Bonus
+1542	6	Magic Def. Bonus
+1543	7	Max HP Boost
+1544	8	Max MP Boost
+1545	9	Auto Regen
+1546	10	Auto Refresh
+1547	11	Rapid Shot
+1548	12	Fast Cast
+1549	13	Conserve MP
+1550	14	Store TP
+1551	15	Double Attack
+1552	16	Triple Attack
+1553	17	Counter
+1554	18	Dual Wield
+1555	19	Treasure Hunter
+1556	20	Gilfinder
+1557	21	Alertness
+1558	22	Stealth
+1559	23	Martial Arts
+1560	24	Clear Mind
+1561	25	Shield Mastery
+1562	26	.
+1563	27	.
+1564	28	.
+1565	29	.
+1566	30	.
+1567	31	.
+1568	32	Beast Killer
+1569	33	Plantoid Killer
+1570	34	Vermin Killer
+1571	35	Lizard Killer
+1572	36	Bird Killer
+1573	37	Amorph Killer
+1574	38	Aquan Killer
+1575	39	Undead Killer
+1576	40	.
+1577	41	Arcana Killer
+1578	42	Demon Killer
+1579	43	Dragon Killer
+1580	44	.
+1581	45	.
+1582	46	.
+1583	47	.
+1584	48	Resist Sleep
+1585	49	Resist Poison
+1586	50	Resist Paralyze
+1587	51	Resist Blind
+1588	52	Resist Silence
+1589	53	Resist Petrify
+1590	54	Resist Virus
+1591	55	Resist Curse
+1592	56	Resist Stun
+1593	57	Resist Bind
+1594	58	Resist Gravity
+1595	59	Resist Slow
+1596	60	Resist Charm
+1597	61	.
+1598	62	.
+1599	63	Resist Amnesia
+1600	64	Treasure Hunter II
+1601	65	Treas. Hunter III
+1602	66	Kick Attacks
+1603	67	Subtle Blow
+1604	68	Assassin
+1605	69	Divine Veil
+1606	70	Zanshin
+1607	71	Savagery
+1608	72	Aggressive Aim
+1609	73	Invigorate
+1610	74	Penance
+1611	75	Aura Steal
+1612	76	Ambush
+1613	77	Iron Will
+1614	78	Guardian
+1615	79	Muted Soul
+1616	80	Desperate Blows
+1617	81	Beast Affinity
+1618	82	Beast Healer
+1619	83	Snapshot
+1620	84	Recycle
+1621	85	Ikishoten
+1622	86	Overwhelm
+1623	87	Ninja Tool Expert.
+1624	88	Empathy
+1625	89	Strafe
+1626	90	Enchainment
+1627	91	Assimilation
+1628	92	Winning Streak
+1629	93	Loaded Deck
+1630	94	Fine-Tuning
+1631	95	Optimization
+1632	96	Closed Position
+1633	97	Stormsurge
+1634	98	Crit. Atk. Bonus
+1635	99	Crit. Def. Bonus
+1636	100	Tactical Parry
+1637	101	Tactical Guard
+1638	102	Shield Def. Bonus
+1639	103	Stout Servant
+1640	104	True Shot
+1641	105	Blood Boon
+1642	106	Skillchain Bonus
+1643	107	Fencer
+1644	108	Conserve TP
+1645	109	Occult Acumen
+1646	110	Mag. Burst Bonus
+1647	111	Divine Benison
+1648	112	Elemental Celerity
+1649	113	Dead Aim
+1650	114	Tranquil Heart
+1651	115	Stalwart Soul
+1652	116	Cardinal Chant
+1653	117	Tenacity
+1654	118	Inquartata
+1655	119	C. Recantation
+1656	120	Primeval Zeal
+1657	121	Inspiration
+1658	122	Sleight of Sword
+1659	123	Daken
+1660	124	Superior
+1661	125	Magic Acc. Bonus
+1662	126	Magic Eva. Bonus
+1663	127	Smite
+1664	128	.
+1665	129	Damage Limit+
+1666	130	Animus Solace
+1667	131	Animus Misery
+1668	132	Con Anima
+1669	133	Con Brio
+1670	134	WS Damage Boost
+1671	135	Max. HP Boost  II
+1672	136	Shield Barrier
+1673	137	Tandem Strike
+1674	138	Tandem Blow
