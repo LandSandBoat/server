@@ -21,9 +21,9 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 
 #include "view_session.h"
 
-#include <common/utils.h>
 #include <common/lua.h>
 #include <common/settings.h>
+#include <common/utils.h>
 
 #include "login_packets.h"
 

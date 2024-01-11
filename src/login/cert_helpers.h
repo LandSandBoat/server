@@ -139,4 +139,4 @@ namespace certificateHelpers
             EVP_PKEY_free(pkey);
         }
     }
-}
+} // namespace certificateHelpers
