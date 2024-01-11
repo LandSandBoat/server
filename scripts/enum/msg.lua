@@ -99,6 +99,7 @@ xi.msg.basic =
     MAGIC_TP_REDUCE        = 431, -- <caster> casts <spell>. <target>'s TP is reduced.
     MAGIC_ABSORB_TP        = 454, -- <caster> casts <spell>. <amount> TP drained from <target>.
     MAGIC_ABSORB_ACC       = 533, -- <caster> casts <spell>. <target>'s Accuracy is drained.
+    MAGIC_REMOVE_EFFECT_2  = 571, -- <number> of <target>'s status ailments disappear!
     MAGIC_ABSORB_AILMENT   = 572, -- <caster> casts <spell>. <caster> absorbs <number> of <target>'s status ailments.
     MAGIC_MUST_ASTRAL_FLOW = 581, -- Unable to cast <spell>. Astral Flow must be in effect to cast this spell.
 
@@ -119,6 +120,7 @@ xi.msg.basic =
     SKILL_ENFEEB           = 243, -- <user> uses <skill>. <target> receives the effect of <status>.
     SELF_HEAL_SECONDARY    = 263, -- <target> recovers <amount> HP.
     DAMAGE_SECONDARY       = 264, -- <target> takes <amount> points of damage.
+    SKILL_GAIN_EFFECT_2    = 319, -- <user> uses <skill>. <target> gains the effect of <status>.
     RANGED_ATTACK_HIT      = 352, -- <user> ranged attack hits <target> for <amount> points of damage.
     RANGED_ATTACK_MISS     = 354, -- <user> ranged attack misses.
     AOE_REGAIN_HP          = 357, -- <target> regains <amount> HP.
