@@ -272,7 +272,7 @@ enum class DAMAGE_TYPE : uint16
 DECLARE_FORMAT_AS_UNDERLYING(DAMAGE_TYPE);
 
 // This enum class is a set of bitfields that modify messages sent to the client.
-// There are helpers (PARRY/EVADE) because it is not inuitive
+// There are helpers (PARRY/EVADE) because it is not intuitive
 // These flag names may not match SE's intent perfectly, but seem to work well.
 
 // For example
