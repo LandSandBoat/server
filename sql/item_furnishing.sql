@@ -18,7 +18,7 @@ CREATE TABLE IF NOT EXISTS `item_furnishing` (
   `element` tinyint(3) unsigned NOT NULL DEFAULT '0',
   `aura` tinyint(3) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`itemid`)
-) ENGINE=Aria DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci AVG_ROW_LENGTH=25 PACK_KEYS=1 CHECKSUM=1;
+) ENGINE=Aria TRANSACTIONAL=0 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci AVG_ROW_LENGTH=25 PACK_KEYS=1 CHECKSUM=1;
 
 --
 -- Contenu de la table `item_furnishing`

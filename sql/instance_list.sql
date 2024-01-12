@@ -31,7 +31,7 @@ CREATE TABLE `instance_list` (
   `battlesolo` smallint(3) NOT NULL DEFAULT '-1',
   `battlemulti` smallint(3) NOT NULL DEFAULT '-1',
   PRIMARY KEY (`instanceid`)
-) ENGINE=Aria DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=Aria TRANSACTIONAL=0 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --

@@ -3,7 +3,7 @@ CREATE TABLE IF NOT EXISTS `monstrosity_exp_table` (
   `level` tinyint(2) NOT NULL,
   `amount` smallint(4) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`level`)
-) ENGINE=Aria DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=Aria TRANSACTIONAL=0 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- https://www.bg-wiki.com/ffxi/Category:Monstrosity
 INSERT INTO `monstrosity_exp_table` VALUES (1,300);

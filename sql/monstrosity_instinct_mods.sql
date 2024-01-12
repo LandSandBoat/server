@@ -4,7 +4,7 @@ CREATE TABLE `monstrosity_instinct_mods` (
   `modId` smallint(5) unsigned NOT NULL,
   `value` smallint(5) NOT NULL DEFAULT 0,
   PRIMARY KEY (`monstrosity_instinct_id`,`modId`)
-) ENGINE=Aria DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=Aria TRANSACTIONAL=0 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- Rabbit instinct I
 INSERT INTO `monstrosity_instinct_mods` VALUES (3,3,2);   -- HPP: 2

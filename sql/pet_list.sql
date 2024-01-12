@@ -19,7 +19,7 @@ CREATE TABLE IF NOT EXISTS `pet_list` (
   `time` int(10) unsigned NOT NULL DEFAULT '0',
   `element` tinyint(3) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`petid`)
-) ENGINE=Aria DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=Aria TRANSACTIONAL=0 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Contenu de la table `pet_list`
