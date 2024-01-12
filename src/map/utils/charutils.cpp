@@ -5900,8 +5900,8 @@ namespace charutils
 
         sql->Query("UPDATE chars SET playtime = '%u' WHERE charid = '%u' LIMIT 1;", playtime, PChar->id);
 
-        // Removes new player icon if played for more than 240 hours
-        if (PChar->isNewPlayer() && playtime >= 864000)
+        // Removes new player icon if played for more than 10 hours
+        if (PChar->isNewPlayer() && playtime >= 36000)
         {
             PChar->menuConfigFlags.flags &= ~NFLAG_NEWPLAYER;
             PChar->updatemask |= UPDATE_HP;
