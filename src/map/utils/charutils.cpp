@@ -2903,6 +2903,10 @@ namespace charutils
                         {
                             addPetAbility(PChar, PAbility->getID() - ABILITY_HEALING_RUBY);
                         }
+                        else if (PAbility->getID() == ABILITY_PACIFYING_RUBY)
+                        {
+                            addPetAbility(PChar, 261);
+                        }
                     }
                     else if (PetID >= PETID_FENRIR && PetID <= PETID_RAMUH)
                     {

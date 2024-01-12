@@ -1,5 +1,5 @@
 -----------------------------------
--- Meteorite
+-- Holy Mist
 -----------------------------------
 local abilityObject = {}
 
@@ -9,7 +9,7 @@ end
 
 abilityObject.onPetAbility = function(target, pet, petskill)
     local dint = pet:getStat(xi.mod.INT) - target:getStat(xi.mod.INT)
-    local dmg = 500 + dint * 1.5 + pet:getTP() / 20
+    local dmg = 600 + dint * 1.5 + pet:getTP() / 20
 
     xi.job_utils.summoner.onUseBloodPact(pet:getMaster(), pet, target, petskill)
 

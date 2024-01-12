@@ -211,12 +211,6 @@ uint16 CMobSkill::getPetAnimationID() const
         return m_AnimID - 479;
     }
 
-    // carbuncle
-    if (m_AnimID >= 605 && m_AnimID <= 611)
-    {
-        return m_AnimID - 605;
-    }
-
     // wyvern
     if (m_AnimID >= 621 && m_AnimID <= 632)
     {

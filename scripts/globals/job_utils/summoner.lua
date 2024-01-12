@@ -14,9 +14,19 @@ xi.job_utils.summoner = xi.job_utils.summoner or {}
 local function getBaseMPCost(player, ability)
     local baseMPCostMap =
     {
+        -- Carbuncle
+        [xi.jobAbility.HEALING_RUBY]     =   6,
+        [xi.jobAbility.POISON_NAILS]     =  11,
+        [xi.jobAbility.SHINING_RUBY]     =  44,
+        [xi.jobAbility.GLITTERING_RUBY]  =  62,
+        [xi.jobAbility.SOOTHING_RUBY]    =  74,
+        [xi.jobAbility.PACIFYING_RUBY]   =  83,
+        [xi.jobAbility.METEORITE]        = 108,
+        [xi.jobAbility.HEALING_RUBY_II]  = 124,
+        [xi.jobAbility.HOLY_MIST]        = 152,
         -- Siren
-        [xi.jobAbility.WELT]             = 9,
-        [xi.jobAbility.ROUNDHOUSE]       = 52,
+        [xi.jobAbility.WELT]             =   9,
+        [xi.jobAbility.ROUNDHOUSE]       =  52,
         [xi.jobAbility.SONIC_BUFFET]     = 164,
         [xi.jobAbility.TORNADO_II]       = 182,
         [xi.jobAbility.HYSTERIC_ASSAULT] = 222,
@@ -137,4 +147,53 @@ xi.job_utils.summoner.useManaCede = function(player, ability, action)
         avatar:setTP(avatarNewTP)
         player:delMP(100)
     end
+end
+
+xi.job_utils.summoner.useSoothingRuby = function(target, pet, petskill, summoner, action)
+    local targetEffectTable = target:getStatusEffects()
+
+    -- Generate table with erasable effects from target effect table.
+    local erasableEffectTable        = {}
+    local additionalRemovableEffects =
+    set{
+        xi.effect.POISON,
+        xi.effect.BLINDNESS,
+        xi.effect.PARALYSIS,
+        xi.effect.SILENCE,
+        xi.effect.CURSE_I,
+        xi.effect.PLAGUE,
+        xi.effect.DISEASE
+    }
+
+    for _, effect in pairs(targetEffectTable) do
+        local id = effect:getEffectType()
+        if
+            bit.band(effect:getEffectFlags(), xi.effectFlag.ERASABLE) == xi.effectFlag.ERASABLE or
+            additionalRemovableEffects[id]
+        then
+            table.insert(erasableEffectTable, id)
+        end
+    end
+
+    -- Calculate the ammount of effects this skill can potentialy erase.
+    local summoningSkillFactor = math.floor((summoner:getSkillLevel(xi.skill.SUMMONING_MAGIC) + 99) / 100)
+    local soothingRubyPower    = utils.clamp(summoningSkillFactor, 1, 6)
+
+    -- Erase effects.
+    local effectsErased = math.min(#erasableEffectTable, soothingRubyPower)
+    local index         = 0
+
+    if effectsErased > 0 then
+        for i = 1, effectsErased do
+            index = math.random(1, #erasableEffectTable)
+            target:delStatusEffect(erasableEffectTable[index])
+            table.remove(erasableEffectTable, index)
+        end
+
+        petskill:setMsg(xi.msg.basic.MAGIC_REMOVE_EFFECT_2)
+    else
+        petskill:setMsg(xi.msg.basic.JA_NO_EFFECT_2)
+    end
+
+    return effectsErased
 end

@@ -4,13 +4,16 @@
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)
-    return 0, 0
+    return xi.job_utils.summoner.canUseBloodPact(player, player:getPet(), target, ability)
 end
 
-abilityObject.onPetAbility = function(target, pet, skill)
+abilityObject.onPetAbility = function(target, pet, petskill, summoner, action)
     --randomly give str/dex/vit/agi/int/mnd/chr (+12)
     local effect = math.random()
     local effectid = xi.effect.CHR_BOOST
+
+    xi.job_utils.summoner.onUseBloodPact(pet:getMaster(), pet, target, petskill)
+
     if effect <= 0.14 then --STR
         effectid = xi.effect.STR_BOOST
     elseif effect <= 0.28 then --DEX
@@ -26,7 +29,13 @@ abilityObject.onPetAbility = function(target, pet, skill)
     end
 
     target:addStatusEffect(effectid, math.random(12, 14), 0, 90)
-    skill:setMsg(xi.msg.basic.SKILL_GAIN_EFFECT)
+
+    if target:getID() == action:getPrimaryTargetID() then
+        petskill:setMsg(xi.msg.basic.SKILL_GAIN_EFFECT_2)
+    else
+        petskill:setMsg(xi.msg.basic.JA_GAIN_EFFECT)
+    end
+
     return effectid
 end
 
