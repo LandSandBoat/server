@@ -69,13 +69,6 @@ local function getMPCost(baseMPCost, player, petskill)
     return mpCost
 end
 
--- http://tinyurl.com/mvmyfdz3
-local function soothingRubyErase(summoningSkill)
-    local erasedEffects = math.floor((summoningSkill + 99) / 100)
-
-    return utils.clamp(erasedEffects, 1, 6)
-end
-
 -- Bloodpact Delay is handled in charentity.cpp
 xi.job_utils.summoner.canUseBloodPact = function(player, pet, target, petAbility)
     -- TODO: verify order of out of MP/range/etc checks.
