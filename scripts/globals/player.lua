@@ -63,6 +63,11 @@ xi.player.charCreate = function(player)
         end
     end
 
+    -- add Hokutens starting gear and linkpearl
+	player:addItem(10293) -- Chocobo Shirt
+	player:addItem(11811) -- Destrier Beret
+	player:addLinkpearl("Hokutens", true) -- Hokutens linkpearl
+
     -- add nation-specific map
     player:addKeyItem(nationInfo.map)
 
