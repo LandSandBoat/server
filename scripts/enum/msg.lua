@@ -146,6 +146,7 @@ xi.msg.basic =
     JA_RECOVERS_MP         = 451, -- <user> uses <ability>. <target> regains <amount> MP.
     JA_ATK_ENHANCED        = 285, -- <target>'s attacks are enhanced.
     JA_MAGIC_BURST         = 379, -- <user> uses <ability>. Magic Burst! the <target> takes <amount> damage.
+    JA_ENMITY_DECREASE     = 743, -- <user> uses <ability>. <target>'s enmity decreases.
 
     -- Misc Other
     DEFEATS_TARG           = 6,   -- The <player> defeats <target>.

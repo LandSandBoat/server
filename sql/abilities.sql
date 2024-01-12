@@ -407,7 +407,7 @@ INSERT INTO `abilities` VALUES (516,'meteorite',15,55,4,60,173,0,0,94,2000,0,6,1
 INSERT INTO `abilities` VALUES (517,'healing_ruby_ii',15,65,1,60,174,0,0,94,2000,0,6,18.0,0,1,60,0,0,NULL);
 INSERT INTO `abilities` VALUES (518,'searing_light',15,1,4,60,173,0,0,94,2000,0,6,18.0,1,1,60,0,2,NULL);
 INSERT INTO `abilities` VALUES (519,'holy_mist',15,76,4,60,173,0,0,94,2000,0,6,18.0,0,1,60,0,0,NULL);
-INSERT INTO `abilities` VALUES (520,'soothing_ruby',15,94,1,1,174,0,0,94,2000,0,6,18.0,0,1,60,0,0,NULL);
+INSERT INTO `abilities` VALUES (520,'soothing_ruby',15,94,1,60,174,0,0,94,2000,0,6,18.0,0,1,60,0,0,NULL);
 INSERT INTO `abilities` VALUES (521,'regal_scratch',15,1,4,60,173,0,0,5,2000,0,6,18.0,0,1,60,0,0,NULL);
 INSERT INTO `abilities` VALUES (522,'mewing_lullaby',15,25,4,60,174,0,0,61,2000,0,6,18.0,0,1,60,0,0,NULL);
 INSERT INTO `abilities` VALUES (523,'eerie_eye',15,55,4,60,174,0,0,134,2000,0,6,18.0,0,1,60,0,0,NULL);
@@ -551,7 +551,7 @@ INSERT INTO `abilities` VALUES (695,'big_scissors',9,25,257,1,102,0,0,0,2000,0,6
 INSERT INTO `abilities` VALUES (696,'scissor_guard',9,25,257,2,102,0,0,0,2000,0,6,18.0,0,1,60,0,0,NULL);
 INSERT INTO `abilities` VALUES (697,'metallic_body',9,25,257,1,102,0,0,0,2000,0,6,18.0,0,1,60,0,0,NULL);
 INSERT INTO `abilities` VALUES (698,'needleshot',9,25,257,1,102,0,0,0,2000,0,6,18.0,0,1,60,0,0,NULL);
-INSERT INTO `abilities` VALUES (699,'questionmarks_needles',9,25,257,3,102,0,0,0,2000,0,6,18.0,0,1,60,0,0,NULL);
+INSERT INTO `abilities` VALUES (699,'qmqmqm_needles',9,25,257,3,102,0,0,0,2000,0,6,18.0,0,1,60,0,0,NULL);
 INSERT INTO `abilities` VALUES (700,'frogkick',9,25,257,1,102,0,0,0,2000,0,6,18.0,0,1,60,0,0,NULL);
 INSERT INTO `abilities` VALUES (701,'spore',9,25,257,1,102,0,0,0,2000,0,6,18.0,0,1,60,0,0,NULL);
 INSERT INTO `abilities` VALUES (702,'queasyshroom',9,25,257,1,102,0,0,0,2000,0,6,18.0,0,1,60,0,0,NULL);

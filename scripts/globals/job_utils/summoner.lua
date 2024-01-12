@@ -160,9 +160,7 @@ xi.job_utils.summoner.useSoothingRuby = function(target, pet, petskill, summoner
     local targetEffectTable = target:getStatusEffects()
 
     -- Generate table with erasable effects from target effect table.
-    local erasableEffectTable = {}
-
-    -- Generate table with additional removable effects.
+    local erasableEffectTable        = {}
     local additionalRemovableEffects =
     set{
         xi.effect.POISON,
@@ -189,18 +187,20 @@ xi.job_utils.summoner.useSoothingRuby = function(target, pet, petskill, summoner
     local soothingRubyPower    = utils.clamp(summoningSkillFactor, 1, 6)
 
     -- Erase effects.
-    local effectsDispelled = math.min(#erasableEffectTable, soothingRubyPower)
-    local index            = 0
+    local effectsErased = math.min(#erasableEffectTable, soothingRubyPower)
+    local index         = 0
 
-    if effectsDispelled > 0 then
-        for i = 1, effectsDispelled do
+    if effectsErased > 0 then
+        for i = 1, effectsErased do
             index = math.random(1, #erasableEffectTable)
             target:delStatusEffect(erasableEffectTable[index])
             table.remove(erasableEffectTable, index)
-            petskill:setMsg(xi.msg.basic.MAGIC_REMOVE_EFFECT_2)
-            return effectsDispelled
         end
+
+        petskill:setMsg(xi.msg.basic.MAGIC_REMOVE_EFFECT_2)
     else
         petskill:setMsg(xi.msg.basic.JA_NO_EFFECT_2)
     end
+
+    return effectsErased
 end
