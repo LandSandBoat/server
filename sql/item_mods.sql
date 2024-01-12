@@ -21,7 +21,7 @@ CREATE TABLE `item_mods` (
   `modId` smallint(5) unsigned NOT NULL,
   `value` smallint(5) NOT NULL DEFAULT 0,
   PRIMARY KEY (`itemId`,`modId`)
-) ENGINE=Aria DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci AVG_ROW_LENGTH=13 PACK_KEYS=1;
+) ENGINE=Aria TRANSACTIONAL=0 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci AVG_ROW_LENGTH=13 PACK_KEYS=1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --

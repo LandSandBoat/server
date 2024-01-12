@@ -11,7 +11,7 @@ CREATE TABLE `guild_item_points` (
   `max_points` smallint(5) unsigned NOT NULL DEFAULT '0',
   `pattern` tinyint(1) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`guildid`,`itemid`,`pattern`)
-) ENGINE=Aria DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=Aria TRANSACTIONAL=0 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- ----------------------------
 -- Records

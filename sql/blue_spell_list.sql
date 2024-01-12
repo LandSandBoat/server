@@ -13,7 +13,7 @@ CREATE TABLE `blue_spell_list` (
   `secondary_sc` smallint(2) NOT NULL,
   `tertiary_sc` smallint(2) NOT NULL,
   PRIMARY KEY (`spellid`,`mob_skill_id`)
-) ENGINE=Aria DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=Aria TRANSACTIONAL=0 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- ----------------------------
 -- Records

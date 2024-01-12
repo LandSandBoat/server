@@ -23,7 +23,7 @@ CREATE TABLE `nm_spawn_points` (
   `pos_y` float(7,3) NOT NULL DEFAULT '0.000',
   `pos_z` float(7,3) NOT NULL DEFAULT '0.000',
   PRIMARY KEY (`mobid`,`pos`)
-) ENGINE=Aria DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=Aria TRANSACTIONAL=0 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --

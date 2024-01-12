@@ -14,7 +14,7 @@ CREATE TABLE IF NOT EXISTS `guilds` (
   `id` tinyint(1) unsigned NOT NULL,
   `points_name` varchar(20) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=Aria DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci AVG_ROW_LENGTH=13 PACK_KEYS=1;
+) ENGINE=Aria TRANSACTIONAL=0 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci AVG_ROW_LENGTH=13 PACK_KEYS=1;
 
 LOCK TABLES `guilds` WRITE;
 

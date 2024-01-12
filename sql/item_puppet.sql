@@ -16,7 +16,7 @@ CREATE TABLE IF NOT EXISTS `item_puppet` (
   `slot` tinyint(2) unsigned NOT NULL DEFAULT '0',
   `element` int(10) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`itemid`)
-) ENGINE=Aria DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=Aria TRANSACTIONAL=0 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Contenu de la table `item_puppet`

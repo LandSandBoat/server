@@ -20,7 +20,7 @@ CREATE TABLE `despoil_effects` (
   `itemId` smallint(5) unsigned NOT NULL,
   `effectId` smallint(5) unsigned NOT NULL,
   PRIMARY KEY (`itemId`)
-) ENGINE=Aria DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=Aria TRANSACTIONAL=0 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
