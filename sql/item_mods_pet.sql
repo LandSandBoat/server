@@ -805,9 +805,10 @@ INSERT INTO `item_mods_pet` VALUES (23165,30,54,2); -- Wyvern: MACC: 54
 -- TODO: Wyvern: Grants food effect
 
 -- Beckoner's Doublet +2
-INSERT INTO `item_mods_pet` VALUES (23166,25,54,1); -- Avatar: ACC: 54
-INSERT INTO `item_mods_pet` VALUES (23166,26,54,1); -- Avatar: RACC: 54
-INSERT INTO `item_mods_pet` VALUES (23166,30,54,1); -- Avatar: MACC: 54
+INSERT INTO `item_mods_pet` VALUES (23166,25,54,1);  -- Avatar: ACC: 54
+INSERT INTO `item_mods_pet` VALUES (23166,26,54,1);  -- Avatar: RACC: 54
+INSERT INTO `item_mods_pet` VALUES (23166,30,54,1);  -- Avatar: MACC: 54
+INSERT INTO `item_mods_pet` VALUES (23166,126,12,1); -- Avatar: BP_DAMAGE: 12
 
 -- Karagoz Farsetto +2
 INSERT INTO `item_mods_pet` VALUES (23169,25,54,3);   -- Automaton: ACC: 54
@@ -920,6 +921,15 @@ INSERT INTO `item_mods_pet` VALUES (23325,384,400,3); -- Automaton - HASTE_GEAR:
 -- Ankusa Gaiters +2
 INSERT INTO `item_mods_pet` VALUES (23339,68,28,0);    -- Pet: EVA: 28
 INSERT INTO `item_mods_pet` VALUES (23339,161,-400,0); -- Pet: DMGPHYS: -4%
+
+-- Pteroslaver greaves +2
+INSERT INTO `item_mods_pet` VALUES (23344,2,260,2); -- Wyvern: HP: 260
+INSERT INTO `item_mods_pet` VALUES (23344,370,7,2); -- Wyvern: REGEN: 7
+
+-- Glyphic pigaches +2
+INSERT INTO `item_mods_pet` VALUES (23345,23,74,1);  -- Avatar: ATT: 74
+INSERT INTO `item_mods_pet` VALUES (23345,25,26,1);  -- Avatar: ACC: 26
+INSERT INTO `item_mods_pet` VALUES (23345,562,11,1); -- Avatar: MAGIC_CRITHITRATE: 11
 
 -- Bagua Sandals +2
 INSERT INTO `item_mods_pet` VALUES (23351,370,4,8); -- Luopan - REGEN: 4
