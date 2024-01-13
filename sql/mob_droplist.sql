@@ -23623,7 +23623,7 @@ INSERT INTO `mob_droplist` VALUES (2866,0,0,1000,4877,20);       -- Scroll Of Ab
 INSERT INTO `mob_droplist` VALUES (2866,0,0,1000,4878,20);       -- Scroll Of Absorb-Int (2.0%)
 INSERT INTO `mob_droplist` VALUES (2866,2,0,1000,880,0);         -- Bone Chip (Steal)
 
--- ZoneID: Unknown - Unknown
+-- ZoneID: 192 - Magicked Bones
 INSERT INTO `mob_droplist` VALUES (2867,0,0,1000,880,280);  -- Bone Chip (28.0%)
 INSERT INTO `mob_droplist` VALUES (2867,0,0,1000,16753,40); -- Ceremonial Dagger (4.0%)
 INSERT INTO `mob_droplist` VALUES (2867,2,0,1000,880,0);    -- Bone Chip (Steal)
@@ -26779,11 +26779,6 @@ INSERT INTO `mob_droplist` VALUES (3290,0,0,1000,11289,@COMMON);  -- Dark Ixion:
 INSERT INTO `mob_droplist` VALUES (3290,0,0,1000,16242,@VCOMMON); -- Dark Ixion: Ixion Cape
 INSERT INTO `mob_droplist` VALUES (3290,0,0,1000,2654,@ALWAYS);   -- Dark Ixion: Horn
 INSERT INTO `mob_droplist` VALUES (3290,0,0,1000,2655,@ALWAYS);   -- Dark Ixion: Tail
-
--- ZoneID: 192 - Magicked Bones
-INSERT INTO `mob_droplist` VALUES (3291,0,0,1000,880,@RARE); --Magicked Bones: Ceremonial Dagger
-INSERT INTO `mob_droplist` VALUES (3291,0,0,1000,16753,@VCOMMON); --Magicked Bones: Bone Chip
-INSERT INTO `mob_droplist` VALUES (3291,2,0,1000,880,0); --Magicked Bones: Steal Bone Chip
 
 /*!40000 ALTER TABLE `mob_droplist` ENABLE KEYS */;
 UNLOCK TABLES;

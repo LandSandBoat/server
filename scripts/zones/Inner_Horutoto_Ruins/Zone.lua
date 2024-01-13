@@ -129,20 +129,6 @@ zoneObject.onTriggerAreaLeave = function(player, triggerArea)
     end
 end
 
-zoneObject.onGameHour = function()
-    local totd = VanadielTOTD()
-    if totd == xi.time.NEW_DAY then
-        local bonesOne = GetMobByID(17563670)
-        local bonesTwo = GetMobByID(17563671)
-        if bonesOne then
-            DespawnMob(bonesOne:getID())
-        end
-        if bonesTwo then
-            DespawnMob(bonesTwo:getID())
-        end
-    end
-end
-
 zoneObject.onEventUpdate = function(player, csid, option, npc)
 end
 

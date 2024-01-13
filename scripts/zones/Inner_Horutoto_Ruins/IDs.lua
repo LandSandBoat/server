@@ -45,14 +45,8 @@ zones[xi.zone.INNER_HORUTOTO_RUINS] =
             [17563799] = 17563801, -- -237.426 0.5 -23.412
             [17563800] = 17563801, -- -230.732 -0.025 -52.324
         },
-        MAGICKED_BONES_PH_DAGGER =
-        {
-            [17563669] = 17563671,
-        },
-        MAGICKED_BONES_PH_CLUB =
-        {
-            [17563668] = 17563670,
-        },
+        MAGICKED_BONES_PH_CLUB = GetFirstID("Magicked_Bones") - 2,
+        MAGICKED_BONES_PH_DAGGER = GetFirstID("Magicked_Bones") - 1,
     },
     npc =
     {
