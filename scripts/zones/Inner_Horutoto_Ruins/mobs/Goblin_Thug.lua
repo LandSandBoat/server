@@ -1,4 +1,3 @@
-require("scripts/globals/utils")
 -----------------------------------
 -- Area: Inner Horutoto Ruins
 --  Mob: Goblin Thug

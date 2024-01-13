@@ -47,7 +47,7 @@ zones[xi.zone.INNER_HORUTOTO_RUINS] =
         },
         MAGICKED_BONES_PH_DAGGER =
         {
-            [17563669] = 1756371,
+            [17563669] = 17563671,
         },
         MAGICKED_BONES_PH_CLUB =
         {
