@@ -10,9 +10,7 @@ local function despawn_check(mob)
     local totd = VanadielTOTD()
     if totd ~= xi.time.NIGHT and totd ~= xi.time.MIDNIGHT then
         DespawnMob(mob:getID())
-        return true
     end
-    return false
 end
 
 entity.onMobInitialize = function(mob)
@@ -20,12 +18,6 @@ entity.onMobInitialize = function(mob)
         mob:setModelId(1096) -- Dagger Skeleton Model
     else
         mob:setModelId(573) -- Club Skeleton Model
-    end
-end
-
-entity.onMobSpawn = function(mob)
-    if despawn_check(mob) then
-        GetMobByID(mob:getID() - 2):spawn() -- Respawn the PH immediately if Bones were wrongly spawned outside of their window
     end
 end
 
