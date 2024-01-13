@@ -132,13 +132,13 @@ end
 zoneObject.onGameHour = function()
     local totd = VanadielTOTD()
     if totd == xi.time.NEW_DAY then
-        local bones_one = GetMobByID(17563670)
-        local bones_two = GetMobByID(17563671)
-        if bones_one then
-            DespawnMob(bones_one:getID())
+        local bonesOne = GetMobByID(17563670)
+        local bonesTwo = GetMobByID(17563671)
+        if bonesOne then
+            DespawnMob(bonesOne:getID())
         end
-        if bones_two then
-            DespawnMob(bones_two:getID())
+        if bonesTwo then
+            DespawnMob(bonesTwo:getID())
         end
     end
 end

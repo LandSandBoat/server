@@ -52,7 +52,7 @@ zones[xi.zone.INNER_HORUTOTO_RUINS] =
         MAGICKED_BONES_PH_CLUB =
         {
             [17563668] = 17563670,
-        }
+        },
     },
     npc =
     {
