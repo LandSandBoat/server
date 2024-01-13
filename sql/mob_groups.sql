@@ -12573,10 +12573,10 @@ INSERT INTO `mob_groups` VALUES (34,6890,191,'Celaeno',0,128,0,0,0,100,100,0);
 -- ------------------------------------------------------------
 
 INSERT INTO `mob_groups` VALUES (1,372,192,'Battue_Bats',480,0,244,0,0,1,5,0);
-INSERT INTO `mob_groups` VALUES (2,1737,192,'Goblin_Thug',900,0,1174,0,0,1,6,0);
+INSERT INTO `mob_groups` VALUES (2,1737,192,'Goblin_Thug',330,0,1174,0,0,1,6,0);
 INSERT INTO `mob_groups` VALUES (3,443,192,'Blade_Bat',480,0,19,0,0,4,6,0);
-INSERT INTO `mob_groups` VALUES (4,1744,192,'Goblin_Weaver',900,0,1187,0,0,1,7,0);
-INSERT INTO `mob_groups` VALUES (5,2475,192,'Magicked_Bones_war',480,0,0,0,0,3,8,0);
+INSERT INTO `mob_groups` VALUES (4,1744,192,'Goblin_Weaver',330,0,1187,0,0,1,7,0);
+INSERT INTO `mob_groups` VALUES (5,2475,192,'Magicked_Bones_war',0,128,3291,0,0,3,8,0);
 INSERT INTO `mob_groups` VALUES (6,4915,192,'Troika_Bats',330,0,244,0,0,78,82,0);
 INSERT INTO `mob_groups` VALUES (7,6077,192,'Deathwatch_Beetle',330,0,169,0,0,79,82,0);
 INSERT INTO `mob_groups` VALUES (8,6667,192,'Goblin_Flesher',330,0,0,0,0,79,82,0);

@@ -26780,6 +26780,11 @@ INSERT INTO `mob_droplist` VALUES (3290,0,0,1000,16242,@VCOMMON); -- Dark Ixion:
 INSERT INTO `mob_droplist` VALUES (3290,0,0,1000,2654,@ALWAYS);   -- Dark Ixion: Horn
 INSERT INTO `mob_droplist` VALUES (3290,0,0,1000,2655,@ALWAYS);   -- Dark Ixion: Tail
 
+-- ZoneID: 192 - Magicked Bones
+INSERT INTO `mob_droplist` VALUES (3291,0,0,1000,880,@RARE); --Magicked Bones: Ceremonial Dagger
+INSERT INTO `mob_droplist` VALUES (3291,0,0,1000,16753,@VCOMMON); --Magicked Bones: Bone Chip
+INSERT INTO `mob_droplist` VALUES (3291,2,0,1000,880,0); --Magicked Bones: Steal Bone Chip
+
 /*!40000 ALTER TABLE `mob_droplist` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
