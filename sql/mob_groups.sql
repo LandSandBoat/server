@@ -12576,7 +12576,7 @@ INSERT INTO `mob_groups` VALUES (1,372,192,'Battue_Bats',480,0,244,0,0,1,5,0);
 INSERT INTO `mob_groups` VALUES (2,1737,192,'Goblin_Thug',330,0,1174,0,0,1,6,0);
 INSERT INTO `mob_groups` VALUES (3,443,192,'Blade_Bat',480,0,19,0,0,4,6,0);
 INSERT INTO `mob_groups` VALUES (4,1744,192,'Goblin_Weaver',330,0,1187,0,0,1,7,0);
-INSERT INTO `mob_groups` VALUES (5,2475,192,'Magicked_Bones_war',0,128,2867,0,0,3,8,0);
+INSERT INTO `mob_groups` VALUES (5,2475,192,'Magicked_Bones_club',0,128,2867,0,0,3,8,0);
 INSERT INTO `mob_groups` VALUES (6,4915,192,'Troika_Bats',330,0,244,0,0,78,82,0);
 INSERT INTO `mob_groups` VALUES (7,6077,192,'Deathwatch_Beetle',330,0,169,0,0,79,82,0);
 INSERT INTO `mob_groups` VALUES (8,6667,192,'Goblin_Flesher',330,0,0,0,0,79,82,0);
@@ -12599,6 +12599,7 @@ INSERT INTO `mob_groups` VALUES (24,483,192,'Boggart',300,0,319,0,0,22,26,0);
 INSERT INTO `mob_groups` VALUES (25,4567,192,'Nocuous_Weapon',0,32,1497,550,0,25,27,0);
 INSERT INTO `mob_groups` VALUES (26,4319,192,'Wendigo_war',300,0,2638,0,0,25,28,0);
 INSERT INTO `mob_groups` VALUES (27,4320,192,'Wendigo_blm',300,0,2640,0,0,25,28,0);
+INSERT INTO `mob_groups` VALUES (28,7072,192,'Magicked_Bones_dagger',0,128,2867,0,0,3,8,0);
 
 -- ------------------------------------------------------------
 -- Ordelles_Caves (Zone 193)
