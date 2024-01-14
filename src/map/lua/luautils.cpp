@@ -1426,7 +1426,7 @@ namespace luautils
     /************************************************************************
      *                                                                       *
      * NextGameTime - Returns System Time for the next Vana'diel interval    *
-     * See: VTIME_x defintions, or xi.vanaType for the values to pass        *
+     * See: VTIME_x definitions, or xi.vanaTime for the values to pass       *
      *                                                                       *
      ************************************************************************/
     uint32 NextGameTime(uint32 intervalSeconds)
