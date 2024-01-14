@@ -208,19 +208,22 @@ local function getEffectPotency(player, effect)
     local divisor            = xi.job_utils.geomancer.potencyData[effect].divisor
     local minPotency         = xi.job_utils.geomancer.potencyData[effect].minPotency
     local maxPotency         = xi.job_utils.geomancer.potencyData[effect].maxPotency
-    local potency            = utils.clamp(combinedSkillLevel / divisor, minPotency, maxPotency)
+    local geoModMultiplier   = xi.job_utils.geomancer.potencyData[effect].geoModMultiplier
+    -- simple linear regression between min and max potency, utlizing the pre-defined divisor
+    local potency            = utils.clamp(minPotency + math.floor(combinedSkillLevel / divisor), minPotency, maxPotency)
 
     if geomancyMod > 0 and not player:hasStatusEffect(xi.effect.ENTRUST) then
         -- Geomancy bonus is a mod value * the multiplier then added to the final potency of the effect
-        potency = potency + (geomancyMod * xi.job_utils.geomancer.potencyData[effect].geoModMultiplier)
+        potency = potency + (geomancyMod * geoModMultiplier)
     end
 
     -- Boost potency calculations for Haste/Slow into the no-longer-human-readable-format
     if effect == xi.effect.GEO_HASTE or effect == xi.effect.GEO_SLOW then
-        potency = math.floor(potency * 100)
+        potency = potency * 100
     end
 
-    return potency
+    -- at this point, potency should be an integer mod value
+    return math.floor(potency)
 end
 
 -----------------------------------
