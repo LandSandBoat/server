@@ -24,6 +24,17 @@ local function getBaseMPCost(player, ability)
         [xi.jobAbility.METEORITE]        = 108,
         [xi.jobAbility.HEALING_RUBY_II]  = 124,
         [xi.jobAbility.HOLY_MIST]        = 152,
+        -- Leviathan
+        [xi.jobAbility.BARRACUDA_DIVE]   =   8,
+        [xi.jobAbility.WATER_II]         =  24,
+        [xi.jobAbility.SLOWGA]           =  48,
+        [xi.jobAbility.TAIL_WHIP]        =  49,
+        [xi.jobAbility.SOOTHING_CURRENT] =  95,
+        [xi.jobAbility.SPRING_WATER]     =  99,
+        [xi.jobAbility.WATER_IV]         = 118,
+        [xi.jobAbility.TIDAL_ROAR]       = 138,
+        [xi.jobAbility.SPINNING_DIVE]    = 164,
+        [xi.jobAbility.GRAND_FALL]       = 182,
         -- Siren
         [xi.jobAbility.WELT]             =   9,
         [xi.jobAbility.ROUNDHOUSE]       =  52,
