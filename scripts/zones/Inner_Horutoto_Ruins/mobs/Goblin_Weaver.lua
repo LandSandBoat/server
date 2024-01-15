@@ -11,7 +11,7 @@ entity.onMobDeath = function(mob, player, optParams)
 end
 
 entity.onMobDespawn = function(mob)
-    xi.mob.phOnDespawn(mob, {[ID.mob.MAGICKED_BONES - 1] = ID.mob.MAGICKED_BONES + 1}, 50, 1) -- {[Goblin Weaver] = Dagger_Magicked_Bones}
+    xi.mob.phOnDespawn(mob, { [ID.mob.MAGICKED_BONES - 1] = ID.mob.MAGICKED_BONES + 1 }, 50, 1) -- { [Goblin Weaver] = Dagger_Magicked_Bones }
 end
 
 return entity
