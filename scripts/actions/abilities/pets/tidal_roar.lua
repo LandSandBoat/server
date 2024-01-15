@@ -8,7 +8,6 @@ abilityObject.onAbilityCheck = function(player, target, ability)
 end
 
 abilityObject.onPetAbility = function(target, pet, petskill, summoner, action)
-
     xi.job_utils.summoner.onUseBloodPact(summoner, pet, target, petskill)
 
     local typeEffect = xi.effect.ATTACK_DOWN
