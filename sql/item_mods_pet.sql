@@ -931,6 +931,10 @@ INSERT INTO `item_mods_pet` VALUES (23345,23,74,1);  -- Avatar: ATT: 74
 INSERT INTO `item_mods_pet` VALUES (23345,25,26,1);  -- Avatar: ACC: 26
 INSERT INTO `item_mods_pet` VALUES (23345,562,11,1); -- Avatar: MAGIC_CRITHITRATE: 11
 
+-- Pitre Babouches +2
+INSERT INTO `item_mods_pet` VALUES (23348,28,50,3); -- Automaton: MATT: 50
+INSERT INTO `item_mods_pet` VALUES (23348,30,33,3); -- Automaton: MACC: 33
+
 -- Bagua Sandals +2
 INSERT INTO `item_mods_pet` VALUES (23351,370,4,8); -- Luopan - REGEN: 4
 
