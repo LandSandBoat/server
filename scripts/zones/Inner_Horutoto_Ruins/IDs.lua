@@ -45,6 +45,13 @@ zones[xi.zone.INNER_HORUTOTO_RUINS] =
             [17563799] = 17563801, -- -237.426 0.5 -23.412
             [17563800] = 17563801, -- -230.732 -0.025 -52.324
         },
+        MAGICKED_BONES = GetFirstID('Magicked_Bones'),
+        --[[
+            -2    Goblin Thug
+            -1    Goblin Weaver
+             0    Magicked Bones (with club)
+            +1    Magicked Bones (with knife)
+        ]]
     },
     npc =
     {
