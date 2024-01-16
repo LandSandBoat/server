@@ -25,11 +25,11 @@ TPMOD_DURATION = 5
 
 -- Get alpha (level-dependent multiplier on WSC)
 local function calculateAlpha(level)
-    if level < 61 then
+    if level <= 60 then
         return math.ceil(100 - level / 6) / 100
     elseif level <= 75 then
-        return math.ceil(100 - level - 40 / 2) / 100
-    elseif level <= 99 then
+        return math.ceil(100 - (level - 40) / 2) / 100
+    else
         return 0.83
     end
 end
