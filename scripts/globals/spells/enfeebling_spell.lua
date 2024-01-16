@@ -131,7 +131,7 @@ xi.spells.enfeebling.calculatePotency = function(caster, target, spellId, spellE
             statDiff = caster:getStat(statUsed) - target:getStat(xi.mod.MND)
 
             if spellId == xi.magic.spell.BLIND_II then
-                potency = utils.clamp(statDiff * 0.375 + 49, 15, 90) -- Values from JP wiki: http://wiki.ffo.jp/html/3449.html
+                potency = utils.clamp(statDiff * 0.375 + 49, 19, 94) -- Values from JP wiki: http://wiki.ffo.jp/html/3449.html
             else
                 potency = utils.clamp(statDiff * 0.225 + 23, 5, 50)  -- Values from JP wiki: http://wiki.ffo.jp/html/834.html
             end
