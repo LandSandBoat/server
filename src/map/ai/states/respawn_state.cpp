@@ -36,23 +36,18 @@ bool CRespawnState::Update(time_point tick)
     auto* PMob = dynamic_cast<CMobEntity*>(m_PEntity);
     if (PMob)
     {
-        if (!PMob->m_AllowRespawn)
+        if (std::chrono::milliseconds(PMob->m_RespawnTime) != m_spawnTime)
         {
-            if (m_spawnTime > 0s)
-            {
-                m_spawnTime = 0s;
-            }
-        }
-        else
-        {
-            if (std::chrono::milliseconds(PMob->m_RespawnTime) != m_spawnTime)
-            {
-                m_spawnTime = std::chrono::milliseconds(PMob->m_RespawnTime);
-            }
+            m_spawnTime = std::chrono::milliseconds(PMob->m_RespawnTime);
         }
     }
+
     if (m_spawnTime > 0s && tick > GetEntryTime() + m_spawnTime)
     {
+        if (PMob)
+        {
+            return PMob->TrySpawn();
+        }
         m_PEntity->Spawn();
         return true;
     }
