@@ -639,9 +639,8 @@ namespace zoneutils
         }
         // clang-format on
 
-        // Note any shared spawns
+        ShowInfo("Loading Mob spawn slots");
         std::unordered_map<uint32, SpawnSlot*> spawnSlots;
-
         const char* spawnSlotQuery = "SELECT mob_spawn_slots.spawnslotid, mob_spawn_slots.chance, mob_spawn_points.mobid \
                                       FROM mob_spawn_slots \
                                       LEFT JOIN mob_spawn_points ON mob_spawn_slots.spawnslotid = mob_spawn_points.spawnslotid \
@@ -656,10 +655,16 @@ namespace zoneutils
                 uint8  spawnChance = (uint8)sql->GetUIntData(1);
                 uint32 mobId       = (uint32)sql->GetUIntData(2);
 
-                auto spawnSlot = spawnSlots[slotId];
+                // Default: no slot
+                if (slotId == 0)
+                {
+                    continue;
+                }
+
+                auto& spawnSlot = spawnSlots[slotId];
                 if (!spawnSlot)
                 {
-                    spawnSlot = spawnSlots[slotId] = new SpawnSlot();
+                    spawnSlot = new SpawnSlot();
                 }
 
                 auto mob = static_cast<CMobEntity*>(GetEntity(mobId));
