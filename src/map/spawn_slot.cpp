@@ -23,11 +23,6 @@
 
 #include "entities/mobentity.h"
 
-SpawnSlot::SpawnSlot(uint8 maxSpawns)
-: m_maxSpawns(maxSpawns)
-{
-}
-
 void SpawnSlot::AddMob(CMobEntity* mob, uint8 spawnChance)
 {
     entries.push_back({ mob, spawnChance });

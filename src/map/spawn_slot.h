@@ -40,11 +40,7 @@ class SpawnSlot
 private:
     std::vector<SpawnSlotEntry> entries;
 
-    uint8 m_maxSpawns{};
-
 public:
-    SpawnSlot(uint8 maxSpawns);
-
     void AddMob(CMobEntity* mob, uint8 spawnChance);
     void RemoveMob(CMobEntity* mob);
     bool TrySpawn();
