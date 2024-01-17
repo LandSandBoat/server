@@ -15,5 +15,7 @@ LOCK TABLES `mob_spawn_slots` WRITE;
 
 -- Carpenter's Landing (Zone 2)
 INSERT INTO `mob_spawn_slots` VALUES (1,2,100);
+INSERT INTO `mob_spawn_slots` VALUES (2,2,100);
+INSERT INTO `mob_spawn_slots` VALUES (3,2,100);
 
 UNLOCK TABLES;
