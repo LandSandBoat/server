@@ -19,13 +19,17 @@ jobs:
   Sanity_Checks:
     runs-on: ubuntu-22.04
     steps:
-    # workaround for broken clang on ubuntu runner until fixed: https://github.com/actions/runner-images/issues/8659
-    - uses: claywar/workaround8649@b59699cec47ef4f0db8cf5564e0dc30a74cc8888
-      with:
-        os: ubuntu-22.04
     - uses: actions/checkout@v3
       with:
         fetch-depth: 0
+      # Workaround for incompatible clang and libstc++ versions, see
+      # <https://github.com/actions/runner-images/issues/8659> for more info.
+      # The basic idea here is to remove g++ 13 and its C++ standard library
+      # and replace that with a compatible version of libstdc++.
+    - name: Workaround for GHA runner images issue 8659
+      run: |
+        sudo apt-get purge -y g++-13 gcc-13 libstdc++-13-dev
+        sudo apt-get install -y --allow-downgrades libstdc++-12-dev libstdc++6=12.* libgcc-s1=12.*
     - name: Install Dependencies
       run: |
         # https://mariadb.com/docs/connect/programming-languages/c/install/#connector-c-install-repo-configure-cs
@@ -197,13 +201,17 @@ jobs:
     needs: Sanity_Checks
     runs-on: ubuntu-22.04
     steps:
-    # workaround for broken clang on ubuntu runner until fixed: https://github.com/actions/runner-images/issues/8659
-    - uses: claywar/workaround8649@b59699cec47ef4f0db8cf5564e0dc30a74cc8888
-      with:
-        os: ubuntu-22.04
     - uses: actions/checkout@v3
       with:
         fetch-depth: 1
+      # Workaround for incompatible clang and libstc++ versions, see
+      # <https://github.com/actions/runner-images/issues/8659> for more info.
+      # The basic idea here is to remove g++ 13 and its C++ standard library
+      # and replace that with a compatible version of libstdc++.
+    - name: Workaround for GHA runner images issue 8659
+      run: |
+        sudo apt-get purge -y g++-13 gcc-13 libstdc++-13-dev
+        sudo apt-get install -y --allow-downgrades libstdc++-12-dev libstdc++6=12.* libgcc-s1=12.*
     - name: Install Dependencies
       run: |
         sudo apt-get update
@@ -236,13 +244,17 @@ jobs:
     needs: Sanity_Checks
     runs-on: ubuntu-22.04
     steps:
-    # workaround for broken clang on ubuntu runner until fixed: https://github.com/actions/runner-images/issues/8659
-    - uses: claywar/workaround8649@b59699cec47ef4f0db8cf5564e0dc30a74cc8888
-      with:
-        os: ubuntu-22.04
     - uses: actions/checkout@v3
       with:
         fetch-depth: 1
+      # Workaround for incompatible clang and libstc++ versions, see
+      # <https://github.com/actions/runner-images/issues/8659> for more info.
+      # The basic idea here is to remove g++ 13 and its C++ standard library
+      # and replace that with a compatible version of libstdc++.
+    - name: Workaround for GHA runner images issue 8659
+      run: |
+        sudo apt-get purge -y g++-13 gcc-13 libstdc++-13-dev
+        sudo apt-get install -y --allow-downgrades libstdc++-12-dev libstdc++6=12.* libgcc-s1=12.*
     - name: Install Dependencies
       run: |
         sudo apt-get update
@@ -271,13 +283,17 @@ jobs:
     needs: Sanity_Checks
     runs-on: ubuntu-22.04
     steps:
-    # workaround for broken clang on ubuntu runner until fixed: https://github.com/actions/runner-images/issues/8659
-    - uses: claywar/workaround8649@b59699cec47ef4f0db8cf5564e0dc30a74cc8888
-      with:
-        os: ubuntu-22.04
     - uses: actions/checkout@v3
       with:
         fetch-depth: 1
+      # Workaround for incompatible clang and libstc++ versions, see
+      # <https://github.com/actions/runner-images/issues/8659> for more info.
+      # The basic idea here is to remove g++ 13 and its C++ standard library
+      # and replace that with a compatible version of libstdc++.
+    - name: Workaround for GHA runner images issue 8659
+      run: |
+        sudo apt-get purge -y g++-13 gcc-13 libstdc++-13-dev
+        sudo apt-get install -y --allow-downgrades libstdc++-12-dev libstdc++6=12.* libgcc-s1=12.*
     - name: Install Dependencies
       run: |
         sudo apt-get update
@@ -430,10 +446,6 @@ jobs:
           - 3306:3306
         options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=10s --health-retries=10
     steps:
-    # workaround for broken clang on ubuntu runner until fixed: https://github.com/actions/runner-images/issues/8659
-    - uses: claywar/workaround8649@b59699cec47ef4f0db8cf5564e0dc30a74cc8888
-      with:
-        os: ubuntu-22.04
     - uses: actions/checkout@v3
       with:
         fetch-depth: 1
