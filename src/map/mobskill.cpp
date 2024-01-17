@@ -169,12 +169,6 @@ uint16 CMobSkill::getAnimationID() const
 
 uint16 CMobSkill::getPetAnimationID() const
 {
-    // levi
-    if (m_AnimID >= 552 && m_AnimID <= 560)
-    {
-        return m_AnimID - 488;
-    }
-
     // garuda
     if (m_AnimID >= 565 && m_AnimID <= 573)
     {
@@ -209,12 +203,6 @@ uint16 CMobSkill::getPetAnimationID() const
     if (m_AnimID >= 591 && m_AnimID <= 599)
     {
         return m_AnimID - 479;
-    }
-
-    // carbuncle
-    if (m_AnimID >= 605 && m_AnimID <= 611)
-    {
-        return m_AnimID - 605;
     }
 
     // wyvern

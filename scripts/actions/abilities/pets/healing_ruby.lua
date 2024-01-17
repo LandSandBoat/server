@@ -4,11 +4,15 @@
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)
-    return 0, 0
+    return xi.job_utils.summoner.canUseBloodPact(player, player:getPet(), target, ability)
 end
 
-abilityObject.onPetAbility = function(target, pet, skill)
+abilityObject.onPetAbility = function(target, pet, petskill)
+    -- TODO: verify retail fomula
     local base = 14 + target:getMainLvl() + pet:getTP() / 12
+
+    xi.job_utils.summoner.onUseBloodPact(pet:getMaster(), pet, target, petskill)
+
     if pet:getMainLvl() > 30 then
         base = 44 + 3 * (pet:getMainLvl() - 30) + pet:getTP() / 12 * (pet:getMainLvl() * 0.075 - 1)
     end
@@ -17,7 +21,7 @@ abilityObject.onPetAbility = function(target, pet, skill)
         base = target:getMaxHP() - target:getHP() --cap it
     end
 
-    skill:setMsg(xi.msg.basic.SELF_HEAL)
+    petskill:setMsg(xi.msg.basic.JA_RECOVERS_HP_2)
     target:addHP(base)
     return base
 end

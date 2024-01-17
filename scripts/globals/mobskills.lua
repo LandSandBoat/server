@@ -557,14 +557,20 @@ xi.mobskills.mobFinalAdjustments = function(dmg, mob, skill, target, attackType,
         target:delStatusEffect(xi.effect.THIRD_EYE)
     end
 
-    if attackType == xi.attackType.PHYSICAL and not skill:isSingle() then
-        target:delStatusEffect(xi.effect.THIRD_EYE)
-    end
+    if
+        attackType == xi.attackType.PHYSICAL or
+        attackType == xi.attackType.RANGED
+    then
+        if not skill:isSingle() then
+            target:delStatusEffect(xi.effect.THIRD_EYE)
+        end
 
-    --handle Third Eye using shadowbehav as a guide
-    if attackType == xi.attackType.PHYSICAL and utils.thirdeye(target) then
-        skill:setMsg(xi.msg.basic.ANTICIPATE)
-        return 0
+        -- Handle Third Eye using shadowbehav as a guide.
+        if utils.thirdeye(target) then
+            skill:setMsg(xi.msg.basic.ANTICIPATE)
+
+            return 0
+        end
     end
 
     -- Handle Automaton Analyzer which decreases damage from successive special attacks

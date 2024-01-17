@@ -1,5 +1,5 @@
 -----------------------------------
--- Effect: GEO Aaccuracy Boost
+-- Effect: GEO Accuracy Boost
 -----------------------------------
 local effectObject = {}
 
