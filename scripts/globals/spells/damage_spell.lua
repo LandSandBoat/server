@@ -81,6 +81,7 @@ local pTable =
     [xi.magic.spell.FLOOD       ] = { xi.mod.INT,    0,  552,    2,  700, 657,   2,    2,    2,    2,    2,    2,    2 },
     [xi.magic.spell.FLOOD_II    ] = { xi.mod.INT,   10,  710,    2,  800, 780,   2,    2,    2,    2,    2,    2,    2 },
     [xi.magic.spell.COMET       ] = { xi.mod.INT,    0,  964,  2.3, 1000, 850,   4, 3.75,  3.5,    3,    2,    1,    1 }, -- I value unknown. Guesstimate used.
+    [xi.magic.spell.DEATH       ] = {          0,    0,   32,    0,   32,   0,   0,    0,    0,    0,    0,    0,    0 },
 
 -- Multiple target spells:
 --                                     1          2     3     4      5      6   7    8    9     10    11    12    13
@@ -288,6 +289,13 @@ xi.spells.damage.calculateBaseDamage = function(caster, target, spellId, skillTy
     -- No negative base damage value allowed.
     if spellDamage < 0 then
         spellDamage = 0
+    end
+
+    -----------------------------------
+    -- STEP 5: Exceptions
+    -----------------------------------
+    if spellId == xi.magic.spell.DEATH then
+        spellDamage = baseSpellDamage + caster:getMP() * 3
     end
 
     return spellDamage
