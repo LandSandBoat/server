@@ -35,9 +35,9 @@ end
 xi.mob.phOnDespawn = function(ph, phList, chance, cooldown, params)
     params = params or {}
     --[[
-        params = { immediate   = true }    pop NM without waiting for next PH pop time
-        params = { nightOnly   = true }    spawn NM only at night time
-        params = { noPosUpdate = true }    do not run UpdateNMSpawnPoint()
+        params.immediate   = true    pop NM without waiting for next PH pop time
+        params.nightOnly   = true    spawn NM only at night time
+        params.noPosUpdate = true    do not run UpdateNMSpawnPoint()
     ]]
 
     if type(params.immediate) ~= 'boolean' then
@@ -106,7 +106,11 @@ xi.mob.phOnDespawn = function(ph, phList, chance, cooldown, params)
                     DisallowRespawn(nmId, true)
                     DisallowRespawn(phId, false)
                     GetMobByID(phId):setRespawnTime(GetMobRespawnTime(phId))
-                    m:setLocalVar('pop', os.time() + cooldown)
+
+                    if m:getLocalVar('doNotInvokeCooldown') == 0 then
+                        m:setLocalVar('pop', os.time() + cooldown)
+                    end
+
                     m:removeListener('DESPAWN_' .. nmId)
                 end)
 
