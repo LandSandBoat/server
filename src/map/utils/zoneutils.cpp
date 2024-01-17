@@ -36,6 +36,7 @@
 #include "mob_spell_list.h"
 #include "mobutils.h"
 #include "packets/entity_update.h"
+#include "spawn_slot.h"
 #include "zone_instance.h"
 
 #include <algorithm>
@@ -388,6 +389,7 @@ namespace zoneutils
         ShowInfo("Loading Mobs");
 
         auto zonesOnThisProcess = GetZonesOnThisProcess();
+        auto zoneIdString       = fmt::format("{}", fmt::join(zonesOnThisProcess, ","));
 
         uint8 normalLevelRangeMin = settings::get<uint8>("main.NORMAL_MOB_MAX_LEVEL_RANGE_MIN");
         uint8 normalLevelRangeMax = settings::get<uint8>("main.NORMAL_MOB_MAX_LEVEL_RANGE_MAX");
@@ -637,6 +639,40 @@ namespace zoneutils
         }
         // clang-format on
 
+        // Note any shared spawns
+        std::unordered_map<uint32, SpawnSlot*> spawnSlots;
+
+        const char* spawnSlotQuery = "SELECT mob_spawn_slots.spawnslotid, mob_spawn_slots.chance, mob_spawn_slots.maxspawns, mob_spawn_points.mobid \
+                                      FROM mob_spawn_slots \
+                                      LEFT JOIN mob_spawn_points ON mob_spawn_slots.spawnslotid = mob_spawn_points.spawnslotid \
+                                      WHERE mob_spawn_slots.zoneid IN (%s);";
+
+        auto ret = sql->Query(spawnSlotQuery, zoneIdString.c_str());
+        if (ret != SQL_ERROR && sql->NumRows() != 0)
+        {
+            while (sql->NextRow() == SQL_SUCCESS)
+            {
+                uint32 slotId      = (uint32)sql->GetUIntData(0);
+                uint8  spawnChance = (uint8)sql->GetUIntData(1);
+                uint8  maxSpawns   = (uint8)sql->GetUIntData(2);
+                uint32 mobId       = (uint32)sql->GetUIntData(3);
+
+                auto spawnSlot = spawnSlots[slotId];
+                if (!spawnSlot)
+                {
+                    spawnSlot = spawnSlots[slotId] = new SpawnSlot(maxSpawns);
+                }
+
+                auto mob = static_cast<CMobEntity*>(GetEntity(mobId));
+                if (!mob)
+                {
+                    ShowError("Expected to have mob %u in spawn slot %u, but the mob was not found.", mobId, slotId);
+                    continue;
+                }
+                spawnSlot->AddMob(mob, spawnChance);
+            }
+        }
+
         ShowInfo("Loading Mob scripts");
         // handle mob initialise functions after they're all loaded
         // clang-format off
@@ -658,15 +694,26 @@ namespace zoneutils
 
                 PMob->saveModifiers();
                 PMob->saveMobModifiers();
+
+                PMob->m_AllowRespawn = !(PMob->m_SpawnType == SPAWNTYPE_LOTTERY ||
+                                         PMob->m_SpawnType == SPAWNTYPE_SCRIPTED ||
+                                         PMob->m_SpawnType == SPAWNTYPE_WINDOWED);
+
+                // Intialize monsters that do not require specific conditions to spawn initially. Monsters conditioned to
+                // spawn by time or weather will be allowed upon corresponding time/weather events.
+                PMob->m_CanSpawn = PMob->m_SpawnType == SPAWNTYPE_NORMAL ||
+                                   PMob->m_SpawnType == SPAWNTYPE_LOTTERY ||
+                                   PMob->m_SpawnType == SPAWNTYPE_SCRIPTED ||
+                                   PMob->m_SpawnType == SPAWNTYPE_WINDOWED;
             });
 
             // Spawn mobs after they've all been initialized. Spawning some mobs will spawn other mobs that may not yet be initialized.
             PZone->ForEachMob([](CMobEntity* PMob)
             {
                 PMob->m_AllowRespawn = PMob->m_SpawnType == SPAWNTYPE_NORMAL;
-                if (PMob->m_AllowRespawn)
+                if (PMob->m_CanSpawn && PMob->m_AllowRespawn)
                 {
-                    PMob->Spawn();
+                    PMob->TrySpawn();
                 }
                 else
                 {

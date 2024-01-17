@@ -43,6 +43,7 @@
 #include "packets/entity_update.h"
 #include "packets/pet_sync.h"
 #include "roe.h"
+#include "spawn_slot.h"
 #include "status_effect_container.h"
 #include "treasure_pool.h"
 #include "utils/battleutils.h"
@@ -138,6 +139,15 @@ CMobEntity::~CMobEntity()
 {
     destroy(PEnmityContainer);
     destroy(SpellContainer);
+
+    if (spawnSlot)
+    {
+        spawnSlot->RemoveMob(this);
+        if (spawnSlot->IsEmpty())
+        {
+            destroy(spawnSlot);
+        }
+    }
 }
 
 /************************************************************************
@@ -161,6 +171,35 @@ void CMobEntity::SetDespawnTime(duration _duration)
     {
         m_DespawnTimer = time_point::min();
     }
+}
+
+void CMobEntity::SetSpawnSlot(SpawnSlot* sharedSpawn)
+{
+    this->spawnSlot = sharedSpawn;
+}
+
+SpawnSlot* CMobEntity::GetSpawnSlot()
+{
+    return this->spawnSlot;
+}
+
+bool CMobEntity::TrySpawn()
+{
+    if (m_AllowRespawn && !PAI->IsSpawned())
+    {
+        if (spawnSlot)
+        {
+            spawnSlot->TrySpawn();
+            return false;
+        }
+
+        if (m_CanSpawn)
+        {
+            Spawn();
+            return true;
+        }
+    }
+    return false;
 }
 
 uint32 CMobEntity::GetRandomGil()
