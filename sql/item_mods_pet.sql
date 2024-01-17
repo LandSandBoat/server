@@ -938,6 +938,11 @@ INSERT INTO `item_mods_pet` VALUES (23348,30,33,3); -- Automaton: MACC: 33
 -- Bagua Sandals +2
 INSERT INTO `item_mods_pet` VALUES (23351,370,4,8); -- Luopan - REGEN: 4
 
+-- Nukumi Ocreae +2
+INSERT INTO `item_mods_pet` VALUES (23361,25,50,0); -- Pet: ACC: 50
+INSERT INTO `item_mods_pet` VALUES (23361,26,50,0); -- Pet: RACC: 50
+INSERT INTO `item_mods_pet` VALUES (23361,30,50,0); -- Pet: MACC: 50
+
 -- Foire Taj +3
 INSERT INTO `item_mods_pet` VALUES (23392,25,41,3);   -- Automaton - ACC: 41
 INSERT INTO `item_mods_pet` VALUES (23392,369,2,3);   -- Automaton - REFRESH: 2
