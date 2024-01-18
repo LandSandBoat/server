@@ -25205,7 +25205,7 @@ INSERT INTO `item_mods` VALUES (15082,1,24);  -- DEF: 24
 INSERT INTO `item_mods` VALUES (15082,2,15);  -- HP: 15
 INSERT INTO `item_mods` VALUES (15082,13,4);  -- MND: 4
 INSERT INTO `item_mods` VALUES (15082,27,-3); -- ENMITY: -3
-INSERT INTO `item_mods` VALUES (15082,305,5); -- RECYCLE: 5
+INSERT INTO `item_mods` VALUES (15082,305,25); -- RECYCLE: 25
 
 -- Saotome Kabuto
 INSERT INTO `item_mods` VALUES (15083,1,25);  -- DEF: 25
@@ -26287,7 +26287,7 @@ INSERT INTO `item_mods` VALUES (15255,1,25);  -- DEF: 25
 INSERT INTO `item_mods` VALUES (15255,2,15);  -- HP: 15
 INSERT INTO `item_mods` VALUES (15255,13,5);  -- MND: 5
 INSERT INTO `item_mods` VALUES (15255,27,-4); -- ENMITY: -4
-INSERT INTO `item_mods` VALUES (15255,305,5); -- RECYCLE: 5
+INSERT INTO `item_mods` VALUES (15255,305,25); -- RECYCLE: 25
 
 -- Saotome Kabuto +1
 INSERT INTO `item_mods` VALUES (15256,1,26);  -- DEF: 26
