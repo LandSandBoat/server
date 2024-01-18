@@ -1001,28 +1001,6 @@ function getElementalDamageReduction(target, element)
     return defense
 end
 
-function getHelixDuration(caster)
-    --Dark Arts will further increase Helix duration, but testing is ongoing.
-
-    local casterLevel = caster:getMainLvl()
-    local duration = 30 --fallthrough
-    if casterLevel <= 39 then
-        duration = 30
-    elseif casterLevel <= 59 then
-        duration = 60
-    elseif casterLevel <= 99 then
-        duration = 90
-    end
-
-    if caster:hasStatusEffect(xi.effect.DARK_ARTS) then
-        local jpValue = caster:getJobPointLevel(xi.jp.DARK_ARTS_EFFECT)
-
-        duration = duration + (3 * jpValue)
-    end
-
-    return duration
-end
-
 function handleThrenody(caster, target, spell, basePower, baseDuration, modifier)
     -- Process resitances
     local staff  = AffinityBonusAcc(caster, spell:getElement())

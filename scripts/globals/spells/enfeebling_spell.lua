@@ -257,30 +257,44 @@ xi.spells.enfeebling.calculateDuration = function(caster, target, spellId, spell
         spellEffect == xi.effect.SHOCK
     then
         duration = duration + caster:getMerit(xi.merit.ELEMENTAL_DEBUFF_DURATION) -- TODO: Add BLM Toban gear effect (duration) here.
-    end
 
-    if caster:hasStatusEffect(xi.effect.SABOTEUR) then
-        if target:isNM() then
-            duration = duration * 1.25
-        else
-            duration = duration * 2
+    elseif spellEffect == xi.effect.HELIX then
+        local casterLevel = caster:getMainLvl()
+
+        if casterLevel >= 60 then
+            duration = duration + 60
+        elseif casterLevel >= 40 then
+            duration = duration + 30
         end
+
+        if caster:hasStatusEffect(xi.effect.DARK_ARTS) then
+            duration = duration + 3 * caster:getJobPointLevel(xi.jp.DARK_ARTS_EFFECT)
+        end
+
+        duration = duration + caster:getMod(xi.mod.HELIX_DURATION)
     end
 
-    -- After Saboteur according to bg-wiki
-    if
-        caster:getMainJob() == xi.job.RDM and
-        skillType == xi.skill.ENFEEBLING_MAGIC
-    then
-        -- RDM Merit: Enfeebling Magic Duration
-        duration = duration + caster:getMerit(xi.merit.ENFEEBLING_MAGIC_DURATION)
+    if skillType == xi.skill.ENFEEBLING_MAGIC then
+        if caster:hasStatusEffect(xi.effect.SABOTEUR) then
+            if target:isNM() then
+                duration = duration * 1.25
+            else
+                duration = duration * 2
+            end
+        end
 
-        -- RDM Job Point: Enfeebling Magic Duration
-        duration = duration + caster:getJobPointLevel(xi.jp.ENFEEBLE_DURATION)
+        -- After Saboteur according to bg-wiki
+        if caster:getMainJob() == xi.job.RDM then
+            -- RDM Merit: Enfeebling Magic Duration
+            duration = duration + caster:getMerit(xi.merit.ENFEEBLING_MAGIC_DURATION)
 
-        -- RDM Job Point: Stymie effect
-        if caster:hasStatusEffect(xi.effect.STYMIE) then
-            duration = duration + caster:getJobPointLevel(xi.jp.STYMIE_EFFECT)
+            -- RDM Job Point: Enfeebling Magic Duration
+            duration = duration + caster:getJobPointLevel(xi.jp.ENFEEBLE_DURATION)
+
+            -- RDM Job Point: Stymie effect
+            if caster:hasStatusEffect(xi.effect.STYMIE) then
+                duration = duration + caster:getJobPointLevel(xi.jp.STYMIE_EFFECT)
+            end
         end
     end
 
