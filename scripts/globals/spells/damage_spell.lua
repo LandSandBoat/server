@@ -313,16 +313,33 @@ xi.spells.damage.calculateBaseDamage = function(caster, target, spellId, spellGr
     -----------------------------------
     spellDamage = baseSpellDamage + baseSpellDamageBonus + statDiffBonus
 
-    -- No negative base damage value allowed.
-    if spellDamage < 0 then
-        spellDamage = 0
-    end
-
     -----------------------------------
     -- STEP 5: Exceptions
     -----------------------------------
+    -- Death
     if spellId == xi.magic.spell.DEATH then
         spellDamage = baseSpellDamage + caster:getMP() * 3
+
+    -- Helix-spells
+    elseif
+        (spellId >= xi.magic.spell.GEOHELIX and spellId <= xi.magic.spell.LUMINOHELIX) or
+        (spellId >= xi.magic.spell.GEOHELIX_II and spellId <= xi.magic.spell.LUMINOHELIX_II)
+    then
+        spellDamage = spellDamage + caster:getMod(xi.mod.HELIX_EFFECT)
+
+    -- Kaustra
+    elseif spellId == xi.magic.spell.KAUSTRA then
+        baseSpellDamage = math.floor(caster:getMainLvl() * 0.67) / 10
+        statDiffBonus   = math.floor(statDiffBonus)
+
+        spellDamage = math.floor(baseSpellDamage * (baseSpellDamageBonus + statDiffBonus))
+    end
+
+    -----------------------------------
+    -- STEP 6: Clamp
+    -----------------------------------
+    if spellDamage < 0 then
+        spellDamage = 0
     end
 
     return spellDamage
@@ -758,6 +775,19 @@ xi.spells.damage.calculateScarletDeliriumMultiplier = function(caster)
     return scarletDeliriumMultiplier
 end
 
+xi.spells.damage.calculateHelixMeritMultiplier = function(caster, spellId)
+    local helixMeritMultiplier = 1
+
+    if
+        (spellId >= xi.magic.spell.GEOHELIX and spellId <= xi.magic.spell.LUMINOHELIX) or
+        (spellId >= xi.magic.spell.GEOHELIX_II and spellId <= xi.magic.spell.LUMINOHELIX_II)
+    then
+        helixMeritMultiplier = 1 + 2 * caster:getMerit(xi.merit.HELIX_MAGIC_ACC_ATT) / 100
+    end
+
+    return helixMeritMultiplier
+end
+
 xi.spells.damage.calculateNukeAbsorbOrNullify = function(target, spellElement)
     local nukeAbsorbOrNullify = 1
 
@@ -855,6 +885,7 @@ xi.spells.damage.useDamageSpell = function(caster, target, spell)
     local ninFutaeBonus               = xi.spells.damage.calculateNinFutaeBonus(caster, skillType)
     local undeadDivinePenalty         = xi.spells.damage.calculateUndeadDivinePenalty(target, skillType)
     local scarletDeliriumMultiplier   = xi.spells.damage.calculateScarletDeliriumMultiplier(caster)
+    local helixMeritMultiplier        = xi.spells.damage.calculateHelixMeritMultiplier(caster, spellId)
     local nukeAbsorbOrNullify         = xi.spells.damage.calculateNukeAbsorbOrNullify(target, spellElement)
 
     -- Calculate finalDamage. It MUST be floored after EACH multiplication.
@@ -875,6 +906,7 @@ xi.spells.damage.useDamageSpell = function(caster, target, spell)
     finalDamage = math.floor(finalDamage * ninFutaeBonus)
     finalDamage = math.floor(finalDamage * undeadDivinePenalty)
     finalDamage = math.floor(finalDamage * scarletDeliriumMultiplier)
+    finalDamage = math.floor(finalDamage * helixMeritMultiplier)
     finalDamage = math.floor(finalDamage * nukeAbsorbOrNullify)
 
     -- Handle "Nuke Wall". It must be handled after all previous calculations, but before clamp.
