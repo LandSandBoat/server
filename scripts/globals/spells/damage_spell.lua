@@ -100,7 +100,6 @@ local pTable =
     [xi.magic.spell.NOCTOHELIX_II ] = { xi.mod.INT,    0,   75,    2,   75, 100,    2,    1,    0,    0,    0,    0,    0 },
     [xi.magic.spell.LUMINOHELIX   ] = { xi.mod.INT,    0,   35,    1,   31, 100,    1,    1,  0.5,    0,    0,    0,    0 },
     [xi.magic.spell.LUMINOHELIX_II] = { xi.mod.INT,    0,   75,    2,   75, 100,    2,    1,    0,    0,    0,    0,    0 },
-    [xi.magic.spell.KAUSTRA       ] = { xi.mod.INT,    0,    0, 0.67,    0, 300, 0.67, 0.67, 0.67, 0.67,    0,    0,    0 },
 
 -- Multiple target spells:
 --                                       1          2     3     4      5      6    7    8    9     10    11    12    13
@@ -162,25 +161,25 @@ local pTable =
 
 -- Ninjutsu spells:
 --                                       1          2     3        4   5      6
--- Structure:             [spellId] = {  Stat used, mAcc, vNPC,    M,  vPC,   I }, -- Inflexion point unknown and not used ATM. Set to 100, 250 and 400, for now.
-    [xi.magic.spell.DOTON_ICHI    ] = { xi.mod.INT,    0,   28,  0.5,   28, 100 },
-    [xi.magic.spell.DOTON_NI      ] = { xi.mod.INT,    0,   68,    1,   68, 250 },
-    [xi.magic.spell.DOTON_SAN     ] = { xi.mod.INT,    0,  134,  1.5,  134, 400 },
-    [xi.magic.spell.HUTON_ICHI    ] = { xi.mod.INT,    0,   28,  0.5,   28, 100 },
-    [xi.magic.spell.HUTON_NI      ] = { xi.mod.INT,    0,   68,    1,   68, 250 },
-    [xi.magic.spell.HUTON_SAN     ] = { xi.mod.INT,    0,  134,  1.5,  134, 400 },
-    [xi.magic.spell.HYOTON_ICHI   ] = { xi.mod.INT,    0,   28,  0.5,   28, 100 },
-    [xi.magic.spell.HYOTON_NI     ] = { xi.mod.INT,    0,   68,    1,   68, 250 },
-    [xi.magic.spell.HYOTON_SAN    ] = { xi.mod.INT,    0,  134,  1.5,  134, 400 },
-    [xi.magic.spell.KATON_ICHI    ] = { xi.mod.INT,    0,   28,  0.5,   28, 100 },
-    [xi.magic.spell.KATON_NI      ] = { xi.mod.INT,    0,   68,    1,   68, 250 },
-    [xi.magic.spell.KATON_SAN     ] = { xi.mod.INT,    0,  134,  1.5,  134, 400 },
-    [xi.magic.spell.RAITON_ICHI   ] = { xi.mod.INT,    0,   28,  0.5,   28, 100 },
-    [xi.magic.spell.RAITON_NI     ] = { xi.mod.INT,    0,   68,    1,   68, 250 },
-    [xi.magic.spell.RAITON_SAN    ] = { xi.mod.INT,    0,  134,  1.5,  134, 400 },
-    [xi.magic.spell.SUITON_ICHI   ] = { xi.mod.INT,    0,   28,  0.5,   28, 100 },
-    [xi.magic.spell.SUITON_NI     ] = { xi.mod.INT,    0,   68,    1,   68, 250 },
-    [xi.magic.spell.SUITON_SAN    ] = { xi.mod.INT,    0,  134,  1.5,  134, 400 },
+-- Structure:             [spellId] = {  Stat used, mAcc, vNPC,    M,  vPC,   I }, -- Inflexion point unknown. Set to 50, 150 and 300, for now.
+    [xi.magic.spell.DOTON_ICHI    ] = { xi.mod.INT,    0,   28,  0.5,   28,  50 },
+    [xi.magic.spell.DOTON_NI      ] = { xi.mod.INT,    0,   68,    1,   68, 150 },
+    [xi.magic.spell.DOTON_SAN     ] = { xi.mod.INT,    0,  134,  1.5,  134, 300 },
+    [xi.magic.spell.HUTON_ICHI    ] = { xi.mod.INT,    0,   28,  0.5,   28,  50 },
+    [xi.magic.spell.HUTON_NI      ] = { xi.mod.INT,    0,   68,    1,   68, 150 },
+    [xi.magic.spell.HUTON_SAN     ] = { xi.mod.INT,    0,  134,  1.5,  134, 300 },
+    [xi.magic.spell.HYOTON_ICHI   ] = { xi.mod.INT,    0,   28,  0.5,   28,  50 },
+    [xi.magic.spell.HYOTON_NI     ] = { xi.mod.INT,    0,   68,    1,   68, 150 },
+    [xi.magic.spell.HYOTON_SAN    ] = { xi.mod.INT,    0,  134,  1.5,  134, 300 },
+    [xi.magic.spell.KATON_ICHI    ] = { xi.mod.INT,    0,   28,  0.5,   28,  50 },
+    [xi.magic.spell.KATON_NI      ] = { xi.mod.INT,    0,   68,    1,   68, 150 },
+    [xi.magic.spell.KATON_SAN     ] = { xi.mod.INT,    0,  134,  1.5,  134, 300 },
+    [xi.magic.spell.RAITON_ICHI   ] = { xi.mod.INT,    0,   28,  0.5,   28,  50 },
+    [xi.magic.spell.RAITON_NI     ] = { xi.mod.INT,    0,   68,    1,   68, 150 },
+    [xi.magic.spell.RAITON_SAN    ] = { xi.mod.INT,    0,  134,  1.5,  134, 300 },
+    [xi.magic.spell.SUITON_ICHI   ] = { xi.mod.INT,    0,   28,  0.5,   28,  50 },
+    [xi.magic.spell.SUITON_NI     ] = { xi.mod.INT,    0,   68,    1,   68, 150 },
+    [xi.magic.spell.SUITON_SAN    ] = { xi.mod.INT,    0,  134,  1.5,  134, 300 },
 
 -- Divine spells: https://nw6yx36onohv5j6wmzoba3nllq-ac4c6men2g7xr2a-wiki-ffo-jp.translate.goog/html/1963.html
 --                                       1          2     3        4   5      6
@@ -196,6 +195,11 @@ local pTable =
     [xi.magic.spell.HOLY          ] = { xi.mod.MND,    0,  125,    1,  125, 150 },
     [xi.magic.spell.HOLY_II       ] = { xi.mod.MND,    0,  250,    2,  250, 300 },
 
+-- Dark spells.
+--                                       1          2     3     4      5      6    7    8    9     10    11    12    13
+-- Structure:             [spellId] = {  Stat used, mAcc, vNPC, mNPC,  vPC,   I,   M0,  M50, M100, M200, M300, M400, M500 },
+    [xi.magic.spell.KAUSTRA       ] = { xi.mod.INT,    0,    0, 0.67,    0, 300, 0.67, 0.67, 0.67, 0.67,    0,    0,    0 },
+
 -- TODO: Healing Spells when used against undead/zombie
 }
 
@@ -203,35 +207,46 @@ local pTable =
 -- Basic Functions
 -----------------------------------
 xi.spells.damage.calculateBaseDamage = function(caster, target, spellId, spellGroup, skillType, statUsed)
-    local spellDamage          = 0 -- The variable we want to calculate
-    local baseSpellDamage      = 0 -- (V) In Wiki.
-    local baseSpellDamageBonus = 0 -- (mDMG) In Wiki. Get from equipment, status, etc
-    local statDiffBonus        = 0 -- statDiff x appropriate multipliers.
-    local statDiff             = caster:getStat(statUsed) - target:getStat(statUsed)
-
-    -- Spell Damage = baseSpellDamage + statDiffBonus + baseSpellDamageBonus
+    local spellDamage = 0 -- The variable we want to calculate
 
     -----------------------------------
     -- STEP 1: baseSpellDamage (V)
     -----------------------------------
+    local baseSpellDamage = pTable[spellId][vNPC] -- (V) In Wiki.
+
     if
         caster:isPC() and
         not xi.settings.main.USE_OLD_MAGIC_DAMAGE
     then
         baseSpellDamage = pTable[spellId][vPC] -- vPC
-    else
-        baseSpellDamage = pTable[spellId][vNPC] -- vNPC
     end
 
     -----------------------------------
     -- STEP 2: statDiffBonus (statDiff * M)
     -----------------------------------
-    -- New System: Player Elemental magic. Setting for old system must be false.
+    local statDiffBonus = 0 -- statDiff x appropriate multipliers.
+    local statDiff      = caster:getStat(statUsed) - target:getStat(statUsed)
+
+    -- Old system
     if
-        skillType == xi.skill.ELEMENTAL_MAGIC and
-        caster:isPC() and
-        not xi.settings.main.USE_OLD_MAGIC_DAMAGE
+        not caster:isPC() or                                             -- Mobs
+        (caster:isPC() and not xi.settings.main.USE_OLD_MAGIC_DAMAGE) or -- Players + Setting
+        skillType == xi.skill.DIVINE_MAGIC or
+        skillType == xi.skill.NINJUTSU
     then
+        local spellMultiplier = pTable[spellId][mNPC]            -- M
+        local inflexionPoint  = pTable[spellId][inflectionPoint] -- I
+
+        if statDiff <= 0 then
+            statDiffBonus = statDiff
+        elseif statDiff > 0 and statDiff <= inflexionPoint then
+            statDiffBonus = math.floor(statDiff * spellMultiplier)
+        else
+            statDiffBonus = math.floor(inflexionPoint * spellMultiplier) + math.floor((statDiff - inflexionPoint) * spellMultiplier / 2)
+        end
+
+    -- New System
+    else
         local mTable =
         {
             [1] = {   0,  50 },
@@ -246,34 +261,13 @@ xi.spells.damage.calculateBaseDamage = function(caster, target, spellId, spellGr
         for i = 1, 7 do
             statDiffBonus = statDiffBonus + math.floor(utils.clamp(statDiff - mTable[i][1], 0, mTable[i][2]) * pTable[spellId][6 + i])
         end
-
-    -- TODO: Investigate "inflection point" (I) and its relation with the terms "soft cap" and "hard cap"
-
-    -- Old System: Divine magic, Non-Player Elemental magic and Player elemental magic IF setting for old system is used.
-    elseif
-        skillType == xi.skill.DIVINE_MAGIC or
-        (skillType == xi.skill.ELEMENTAL_MAGIC and not caster:isPC()) or                                    -- Mobs always use old system
-        (skillType == xi.skill.ELEMENTAL_MAGIC and caster:isPC() and xi.settings.main.USE_OLD_MAGIC_DAMAGE) -- Players use old system only when setting is enabled.
-    then
-        local spellMultiplier = pTable[spellId][mNPC]            -- M
-        local inflexionPoint  = pTable[spellId][inflectionPoint] -- I
-
-        if statDiff <= 0 then
-            statDiffBonus = statDiff
-        elseif statDiff > 0 and statDiff <= inflexionPoint then
-            statDiffBonus = math.floor(statDiff * spellMultiplier)
-        else
-            statDiffBonus = math.floor(inflexionPoint * spellMultiplier) + math.floor((statDiff - inflexionPoint) * spellMultiplier / 2)
-        end
-
-    -- Old System: Ninjutsu. "I" (Infection point) isn't used due to lack of information. Values in table are currently made up and unused.
-    elseif skillType == xi.skill.NINJUTSU then
-        statDiffBonus = math.floor(statDiff * pTable[spellId][mNPC])
     end
 
     -----------------------------------
     -- STEP 3: baseSpellDamageBonus (mDMG)
     -----------------------------------
+    local baseSpellDamageBonus = 0 -- (mDMG) In Wiki. Get from equipment, status, etc
+
     if caster:isPC() then
         -- BLM Job Point: Manafont Elemental Magic Damage +3
         if caster:hasStatusEffect(xi.effect.MANAFONT) then
@@ -295,7 +289,7 @@ xi.spells.damage.calculateBaseDamage = function(caster, target, spellId, spellGr
         if skillType == xi.skill.NINJUTSU then
             baseSpellDamageBonus = baseSpellDamageBonus + caster:getJobPointLevel(xi.jp.ELEM_NINJITSU_EFFECT) * 2
         end
-        
+
         -- SCH Job Point: Stratagem Effect III
         if
             (spellGroup == xi.magic.spellGroup.WHITE and caster:hasStatusEffect(xi.effect.RAPTURE)) or
@@ -335,14 +329,7 @@ xi.spells.damage.calculateBaseDamage = function(caster, target, spellId, spellGr
         spellDamage = math.floor(baseSpellDamage * (baseSpellDamageBonus + statDiffBonus))
     end
 
-    -----------------------------------
-    -- STEP 6: Clamp
-    -----------------------------------
-    if spellDamage < 0 then
-        spellDamage = 0
-    end
-
-    return spellDamage
+    return utils.clamp(spellDamage, 0, 99999)
 end
 
 -- Calculate: Multiple Target Damage Reduction (MTDR)
