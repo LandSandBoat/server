@@ -183,7 +183,7 @@ local pTable =
 -----------------------------------
 -- Basic Functions
 -----------------------------------
-xi.spells.damage.calculateBaseDamage = function(caster, target, spellId, skillType, statUsed)
+xi.spells.damage.calculateBaseDamage = function(caster, target, spellId, spellGroup, skillType, statUsed)
     local spellDamage          = 0 -- The variable we want to calculate
     local baseSpellDamage      = 0 -- (V) In Wiki.
     local baseSpellDamageBonus = 0 -- (mDMG) In Wiki. Get from equipment, status, etc
@@ -275,6 +275,14 @@ xi.spells.damage.calculateBaseDamage = function(caster, target, spellId, skillTy
         -- NIN Job Point: Elemental Ninjutsu Effect
         if skillType == xi.skill.NINJUTSU then
             baseSpellDamageBonus = baseSpellDamageBonus + caster:getJobPointLevel(xi.jp.ELEM_NINJITSU_EFFECT) * 2
+        end
+        
+        -- SCH Job Point: Stratagem Effect III
+        if
+            (spellGroup == xi.magic.spellGroup.WHITE and caster:hasStatusEffect(xi.effect.RAPTURE)) or
+            (spellGroup == xi.magic.spellGroup.BLACK and caster:hasStatusEffect(xi.effect.EBULLIENCE))
+        then
+            baseSpellDamageBonus = baseSpellDamageBonus + caster:getJobPointLevel(xi.jp.STRATEGEM_EFFECT_III) * 2
         end
     end
 
@@ -810,7 +818,7 @@ xi.spells.damage.useDamageSpell = function(caster, target, spell)
     local bonusMacc    = pTable[spellId][bonusSpellMacc]
 
     -- Variables/steps to calculate finalDamage.
-    local spellDamage                 = xi.spells.damage.calculateBaseDamage(caster, target, spellId, skillType, statUsed)
+    local spellDamage                 = xi.spells.damage.calculateBaseDamage(caster, target, spellId, spellGroup, skillType, statUsed)
     local multipleTargetReduction     = xi.spells.damage.calculateMTDR(spell)
     local eleStaffBonus               = xi.spells.damage.calculateEleStaffBonus(caster, spellElement)
     local magianAffinity              = xi.spells.damage.calculateMagianAffinity()
