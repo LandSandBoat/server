@@ -11,7 +11,7 @@ abilityObject.onPetAbility = function(target, pet, petskill, summoner, action)
     local base = 47 + pet:getMainLvl() * 3
     local tp   = pet:getTP()
 
-    xi.job_utils.summoner.onUseBloodPact(pet:getMaster(), pet, target, petskill)
+    xi.job_utils.summoner.onUseBloodPact(target, petskill, summoner, action)
 
     if tp < 1000 then
         tp = 1000

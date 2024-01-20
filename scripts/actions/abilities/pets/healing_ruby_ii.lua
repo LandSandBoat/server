@@ -10,7 +10,7 @@ end
 abilityObject.onPetAbility = function(target, pet, petskill, summoner, action)
     local base = 28 + pet:getMainLvl() * 4
 
-    xi.job_utils.summoner.onUseBloodPact(pet:getMaster(), pet, target, petskill)
+    xi.job_utils.summoner.onUseBloodPact(target, petskill, summoner, action)
 
     if target:getHP() + base > target:getMaxHP() then
         base = target:getMaxHP() - target:getHP() --cap it

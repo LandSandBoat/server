@@ -12,7 +12,7 @@ abilityObject.onPetAbility = function(target, pet, petskill, summoner, action)
     local effect = math.random()
     local effectid = xi.effect.CHR_BOOST
 
-    xi.job_utils.summoner.onUseBloodPact(pet:getMaster(), pet, target, petskill)
+    xi.job_utils.summoner.onUseBloodPact(target, petskill, summoner, action)
 
     if effect <= 0.14 then --STR
         effectid = xi.effect.STR_BOOST
