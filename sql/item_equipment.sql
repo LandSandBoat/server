@@ -590,8 +590,8 @@ INSERT INTO `item_equipment` VALUES (10807,'mandraguard',1,0,4194303,62,1,0,2,0,
 INSERT INTO `item_equipment` VALUES (10808,'janus_guard',1,0,4194303,63,1,0,2,0,0);
 INSERT INTO `item_equipment` VALUES (10809,'moogle_guard',1,0,4194303,642,1,0,2,0,0);
 INSERT INTO `item_equipment` VALUES (10810,'moogle_guard_+1',1,0,4194303,642,1,0,2,0,0);
-INSERT INTO `item_equipment` VALUES (10811,'chocobo_shield',1,0,4194303,653,1,0,2,0,0);
-INSERT INTO `item_equipment` VALUES (10812,'choco._shield_+1',1,0,4194303,653,1,0,2,0,0);
+INSERT INTO `item_equipment` VALUES (10811,'chocobo_shield',1,0,4194303,643,1,0,2,0,0);
+INSERT INTO `item_equipment` VALUES (10812,'choco._shield_+1',1,0,4194303,643,1,0,2,0,0);
 INSERT INTO `item_equipment` VALUES (10814,'corvax_sash',92,0,3851870,0,0,0,1024,0,0);
 INSERT INTO `item_equipment` VALUES (10815,'phasmida_belt',95,0,2473969,0,0,0,1024,0,0);
 INSERT INTO `item_equipment` VALUES (10816,'glassblowers_belt',92,0,2473969,0,0,0,1024,0,0);
