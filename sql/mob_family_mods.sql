@@ -361,6 +361,9 @@ INSERT INTO `mob_family_mods` VALUES (110,51,3,1);    -- ROAM_TURNS: 3
 INSERT INTO `mob_family_mods` VALUES (110,52,30,1);   -- ROAM_RATE: 30
 INSERT INTO `mob_family_mods` VALUES (110,389,-13,0); -- UDMGMAGIC: -13
 
+-- Non-Beastmen regular frogs
+INSERT INTO `mob_family_mods` VALUES (111,62,1,1); -- NO_STANDBACK: 1
+
 -- Flan
 INSERT INTO `mob_family_mods` VALUES (112,51,2,1);   -- ROAM_TURNS: 2
 INSERT INTO `mob_family_mods` VALUES (112,52,30,1);  -- ROAM_RATE: 30

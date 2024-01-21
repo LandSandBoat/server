@@ -159,7 +159,7 @@ INSERT INTO `mob_family_system` VALUES (107,'Eruca',63,'Crawler',20,'Vermin',1.0
 INSERT INTO `mob_family_system` VALUES (108,'Eruca',63,'Crawler',20,'Vermin',1.00,40,92,120,1,3,4,3,3,6,5,1,5,1,3,1.0,258,1);
 INSERT INTO `mob_family_system` VALUES (109,'Euvhi',64,'Euvhi',15,'Luminian',0.00,40,100,140,1,3,4,4,1,5,4,1,3,1,3,0.0,2,0);
 INSERT INTO `mob_family_system` VALUES (110,'Evil_Weapon',6,'Evil_Weapon',3,'Arcana',0.00,40,105,120,1,3,4,3,3,3,4,1,5,1,3,3.0,34,0);
-
+INSERT INTO `mob_family_system` VALUES (111,'Toad',112,'frog-toad',2,'Aquan',0.00,40,70,140,5,5,5,1,1,6,3,1,3,1,3,6.0,2,0);
 INSERT INTO `mob_family_system` VALUES (112,'Flan',65,'Flan',1,'Amorph',1.00,40,70,140,5,4,4,4,3,5,3,1,3,1,3,6.0,129,0);
 INSERT INTO `mob_family_system` VALUES (113,'Fly',66,'Fly',20,'Vermin',0.00,40,92,90,5,4,4,3,4,4,4,1,3,1,3,3.0,2,1);
 INSERT INTO `mob_family_system` VALUES (114,'Flytrap',67,'Flytrap',17,'Plantoid',0.00,40,90,90,4,4,4,4,4,4,4,1,3,1,3,3.0,2,1);
@@ -248,7 +248,6 @@ INSERT INTO `mob_family_system` VALUES (193,'Wyvern-Pet',109,'Wyvern',10,'Dragon
 INSERT INTO `mob_family_system` VALUES (194,'Phuabo',110,'Phuabo',15,'Luminian',2.00,70,90,140,1,3,4,1,1,5,4,1,3,1,3,0.0,2,0);
 INSERT INTO `mob_family_system` VALUES (195,'Pixie',111,'Pixie',18,'Fairy',0.00,40,90,100,4,6,4,5,5,1,3,1,3,1,3,3.0,1,0);
 INSERT INTO `mob_family_system` VALUES (196,'Poroggo',112,'frog-toad',7,'Beastmen',0.00,40,70,140,5,5,5,1,1,6,3,1,3,1,3,6.0,2,0);
--- if needed for frogs: INSERT INTO `mob_family_system` VALUES (???,'Toad',112,'frog-toad',2,'Aquan',0.00,40,70,140,5,5,5,1,1,6,3,1,3,1,3,6,2,0);
 INSERT INTO `mob_family_system` VALUES (197,'Pugil',113,'Pugil',2,'Aquan',1.00,40,90,90,4,4,4,3,4,4,5,1,3,1,4,6.0,2,1);
 INSERT INTO `mob_family_system` VALUES (198,'Puk',114,'Puk',10,'Dragon',0.00,40,93,90,1,3,5,2,6,6,2,1,3,1,4,3.0,3,1);
 INSERT INTO `mob_family_system` VALUES (199,'Qiqirn',115,'Qiqirn',7,'Beastmen',0.00,40,88,140,4,5,3,1,1,4,4,1,3,1,3,4.0,257,0);
@@ -534,7 +533,7 @@ INSERT INTO `mob_family_system` VALUES (507,'Quasilumin',15,'Luminian',0,'Unclas
 
 INSERT INTO `mob_family_system` VALUES (411,'Pet-Siren',16,'Siren',5,'Avatar',0.00,40,100,120,3,3,3,3,3,3,3,1,3,1,3,0.0,41,0);
 
--- Family IDs 10,22,50,96,111,317-318,405,412-434,439-443 available for use
+-- Family IDs 10,22,50,96,317-318,405,412-434,439-443 available for use
 
 /*!40000 ALTER TABLE `mob_family_system` ENABLE KEYS */;
 UNLOCK TABLES;
