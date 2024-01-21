@@ -128,6 +128,9 @@ INSERT INTO `mob_pool_mods` VALUES (770,4,4,1); -- SIGHT_RANGE: 4
 -- Coveter
 INSERT INTO `mob_pool_mods` VALUES (820,368,10,0); -- REGAIN: 10
 
+-- Crapaudy
+INSERT INTO `mob_pool_mods` VALUES (828,62,1,1); -- NO_STANDBACK: 1
+
 -- Darksteel Golem
 INSERT INTO `mob_pool_mods` VALUES (906,4,4,1); -- SIGHT_RANGE: 4
 
@@ -400,6 +403,9 @@ INSERT INTO `mob_pool_mods` VALUES (3667,28,-100,1); -- EXP_BONUS: -100
 -- Snoll Tzar
 INSERT INTO `mob_pool_mods` VALUES (3684,3,30,1); -- MP_BASE: 30
 
+-- Squib
+INSERT INTO `mob_pool_mods` VALUES (3748,62,1,1); -- NO_STANDBACK: 1
+
 -- Statue Prototype
 INSERT INTO `mob_pool_mods` VALUES (3759,163,-100,0); -- DMGMAGIC: -100
 
@@ -426,6 +432,9 @@ INSERT INTO `mob_pool_mods` VALUES (3853,28,23,1); -- EXP_BONUS: 23
 INSERT INTO `mob_pool_mods` VALUES (3916,29,50,0);   -- MDEF: 50
 INSERT INTO `mob_pool_mods` VALUES (3916,164,-50,0); -- DMGRANGE: -50
 INSERT INTO `mob_pool_mods` VALUES (3916,370,25,0);  -- REGEN: 25
+
+-- Toad
+INSERT INTO `mob_pool_mods` VALUES (3934, 62, 1, 1); -- NO_STANDBACK: 1
 
 -- Tombstone Prototype
 INSERT INTO `mob_pool_mods` VALUES (3941,163,-100,0); -- DMGMAGIC: -100
@@ -676,6 +685,18 @@ INSERT INTO `mob_pool_mods` VALUES (4837,62,1,1); -- NO_STANDBACK: 1
 INSERT INTO `mob_pool_mods` VALUES (4932,30,1017,1); -- SPECIAL_SKILL: 1017
 INSERT INTO `mob_pool_mods` VALUES (4932,33,50,1);   -- SPECIAL_COOL: 50
 
+-- Cliffclinger Toad
+INSERT INTO `mob_pool_mods` VALUES (4989,62,1,1); -- NO_STANDBACK: 1
+
+-- Spoutdrenched Toad
+INSERT INTO `mob_pool_mods` VALUES (5037,62,1,1); -- NO_STANDBACK: 1
+
+-- Rustwater Toad
+INSERT INTO `mob_pool_mods` VALUES (5038,62,1,1); -- NO_STANDBACK: 1
+
+-- Riverwashed Toad
+INSERT INTO `mob_pool_mods` VALUES (5093,62,1,1); -- NO_STANDBACK: 1
+
 -- Promathia
 INSERT INTO `mob_pool_mods` VALUES (5106,1,250,0);  -- DEF: 250
 INSERT INTO `mob_pool_mods` VALUES (5106,29,30,0);  -- MDEF: 30
@@ -689,6 +710,9 @@ INSERT INTO `mob_pool_mods` VALUES (5403,62,1,1); -- NO_STANDBACK: 1
 INSERT INTO `mob_pool_mods` VALUES (5408,30,1036,1); -- SPECIAL_SKILL: 1036
 INSERT INTO `mob_pool_mods` VALUES (5408,33,50,1);   -- SPECIAL_COOL: 50
 INSERT INTO `mob_pool_mods` VALUES (5408,58,40,1);   -- SPECIAL_DELAY: 40
+
+-- Apex Toad
+INSERT INTO `mob_pool_mods` VALUES (5399,62,1,1); -- NO_STANDBACK: 1
 
 -- Maat Drk
 INSERT INTO `mob_pool_mods` VALUES (5409,30,1036,1); -- SPECIAL_SKILL: 1036
@@ -710,6 +734,9 @@ INSERT INTO `mob_pool_mods` VALUES (6011,165,25,0);     -- CRITHITRATE: 25
 
 -- Trust: Shantotto II
 INSERT INTO `mob_pool_mods` VALUES (6019,3,-10,0);      -- HPP: -10
+
+-- Flume Toad
+INSERT INTO `mob_pool_mods` VALUES (6378,62,1,1); -- NO_STANDBACK: 1
 
 -- Ixzdei Rdm
 INSERT INTO `mob_pool_mods` VALUES (7039,34,60,1); -- MAGIC_COOL: 60
