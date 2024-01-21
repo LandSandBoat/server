@@ -1938,7 +1938,6 @@ REPLACE INTO `mob_droplist` VALUES (1786,1,1,@UNCOMMON,2104,67);  -- SMN -1 Body
 REPLACE INTO `mob_droplist` VALUES (1786,0,0,1000,1452,@COMMON); -- Bronzepiece
 REPLACE INTO `mob_droplist` VALUES (1786,0,0,1000,1452,@UNCOMMON); -- Bronzepiece
 REPLACE INTO `mob_droplist` VALUES (1786,2,0,1000,1452,0); -- Bronzepiece
-REPLACE INTO `mob_droplist` VALUES (1786,2,0,1000,1453,@SRARE); -- Montiont Silverpiece
 
 DELETE FROM `mob_droplist` WHERE dropid = "1796"; -- Nightmare Leech
 REPLACE INTO `mob_droplist` VALUES (1796,1,1,@UNCOMMON,2034,66); -- WAR -1 Body
@@ -1964,7 +1963,6 @@ REPLACE INTO `mob_droplist` VALUES (1796,1,1,@UNCOMMON,2104,67); -- SMN -1 Body
 REPLACE INTO `mob_droplist` VALUES (1796,0,0,1000,1449,@COMMON); -- Whiteshell
 REPLACE INTO `mob_droplist` VALUES (1796,0,0,1000,1449,@UNCOMMON); -- Whiteshell
 REPLACE INTO `mob_droplist` VALUES (1796,2,0,1000,1449,0); -- Whiteshell
-REPLACE INTO `mob_droplist` VALUES (1796,2,0,1000,1450,@SRARE); -- Jadeshell
 
 DELETE FROM `mob_droplist` WHERE dropid = "1795"; -- Nightmare Bugard/Hornet
 REPLACE INTO `mob_droplist` VALUES (1795,1,1,@UNCOMMON,2036,66); -- WAR -1 Legs
@@ -1990,7 +1988,6 @@ REPLACE INTO `mob_droplist` VALUES (1795,1,1,@UNCOMMON,2106,67); -- SMN -1 Legs
 REPLACE INTO `mob_droplist` VALUES (1795,0,0,1000,1455,@COMMON); -- One Byne Bill
 REPLACE INTO `mob_droplist` VALUES (1795,0,0,1000,1455,@UNCOMMON); -- One Byne Bill
 REPLACE INTO `mob_droplist` VALUES (1795,2,0,1000,1455,0); -- One Byne Bill
-REPLACE INTO `mob_droplist` VALUES (1795,2,0,1000,1456,@SRARE); -- One Hundred Byne Bill
 
 DELETE FROM `mob_droplist` WHERE dropid = "1797"; -- Nightmare Makara
 REPLACE INTO `mob_droplist` VALUES (1797,1,1,@UNCOMMON,2036,66); -- WAR -1 Legs
@@ -2016,7 +2013,6 @@ REPLACE INTO `mob_droplist` VALUES (1797,1,1,@UNCOMMON,2106,67); -- SMN -1 Legs
 REPLACE INTO `mob_droplist` VALUES (1797,0,0,1000,1452,@COMMON); -- Bronzepiece
 REPLACE INTO `mob_droplist` VALUES (1797,0,0,1000,1452,@UNCOMMON); -- Bronzepiece
 REPLACE INTO `mob_droplist` VALUES (1797,2,0,1000,1452,0); -- Bronzepiece
-REPLACE INTO `mob_droplist` VALUES (1797,0,0,1000,1453,@SRARE); -- Montiont Silverpiece
 
 DELETE FROM `mob_droplist` WHERE dropid = "1807"; -- Nightmare Worm
 REPLACE INTO `mob_droplist` VALUES (1807,1,1,@UNCOMMON,2036,66); -- WAR -1 Legs
@@ -2042,7 +2038,6 @@ REPLACE INTO `mob_droplist` VALUES (1807,1,1,@UNCOMMON,2106,67); -- SMN -1 Legs
 REPLACE INTO `mob_droplist` VALUES (1807,0,0,1000,1449,@COMMON); -- Whiteshell
 REPLACE INTO `mob_droplist` VALUES (1807,0,0,1000,1449,@UNCOMMON); -- Whiteshell
 REPLACE INTO `mob_droplist` VALUES (1807,2,0,1000,1449,0); -- Whiteshell
-REPLACE INTO `mob_droplist` VALUES (1807,0,0,1000,1450,@SRARE); -- Jadeshell
 
 DELETE FROM `mob_droplist` WHERE dropid = "2854"; -- Nightmare Taurus
 REPLACE INTO `mob_droplist` VALUES (2854,1,1,@RARE,14515,250); -- Hydra Doublet
