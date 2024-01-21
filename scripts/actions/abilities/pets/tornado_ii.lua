@@ -8,16 +8,15 @@ abilityObject.onAbilityCheck = function(player, target, ability)
 end
 
 -- Modeling this on the known formula for magical Merit BPs of the same level with a merit level of 0
-abilityObject.onPetAbility = function(target, pet, petskill)
+abilityObject.onPetAbility = function(target, pet, petskill, summoner, action)
     local dINT   = math.floor(pet:getStat(xi.mod.INT) - target:getStat(xi.mod.INT))
     local tp     = pet:getTP() / 10
-    local master = pet:getMaster()
 
     if tp > 300 then
         tp = 300
     end
 
-    xi.job_utils.summoner.onUseBloodPact(master, pet, target, petskill)
+    xi.job_utils.summoner.onUseBloodPact(target, petskill, summoner, action)
 
     --note: this formula is only accurate for level 75 - 76+ may have a different intercept and/or slope
     local damage = math.floor(512 + 1.72 * (tp + 1))

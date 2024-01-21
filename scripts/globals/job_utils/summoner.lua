@@ -121,17 +121,19 @@ xi.job_utils.summoner.canUseBloodPact = function(player, pet, target, petAbility
     return xi.msg.basic.UNABLE_TO_USE_JA2, 0 -- TODO: verify exact message in packet.
 end
 
-xi.job_utils.summoner.onUseBloodPact = function(player, pet, target, petskill)
+xi.job_utils.summoner.onUseBloodPact = function(target, petskill, summoner, action)
     local bloodPactAbility = GetAbility(petskill:getID()) -- Player abilities and Avatar abilities are mapped 1:1
-    local baseMPCost       = getBaseMPCost(player, bloodPactAbility)
-    local mpCost           = getMPCost(baseMPCost, player, bloodPactAbility)
+    local baseMPCost       = getBaseMPCost(summoner, bloodPactAbility)
+    local mpCost           = getMPCost(baseMPCost, summoner, bloodPactAbility)
 
-    if player:hasStatusEffect(xi.effect.APOGEE) then
-        player:resetRecast(xi.recast.ABILITY, bloodPactAbility:getRecastID())
-        player:delStatusEffect(xi.effect.APOGEE)
+    if summoner:hasStatusEffect(xi.effect.APOGEE) then
+        summoner:resetRecast(xi.recast.ABILITY, bloodPactAbility:getRecastID())
+        summoner:delStatusEffect(xi.effect.APOGEE)
     end
 
-    player:delMP(mpCost)
+    if target:getID() == action:getPrimaryTargetID() then
+        summoner:delMP(mpCost)
+    end
 end
 
 -- to be removed once damage is overhauled

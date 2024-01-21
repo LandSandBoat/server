@@ -7,10 +7,10 @@ abilityObject.onAbilityCheck = function(player, target, ability)
     return xi.job_utils.summoner.canUseBloodPact(player, player:getPet(), target, ability)
 end
 
-abilityObject.onPetAbility = function(target, pet, petskill, master)
+abilityObject.onPetAbility = function(target, pet, petskill, summoner, action)
     local dINT = math.floor(pet:getStat(xi.mod.INT) - target:getStat(xi.mod.INT))
 
-    xi.job_utils.summoner.onUseBloodPact(master, pet, target, petskill)
+    xi.job_utils.summoner.onUseBloodPact(target, petskill, summoner, action)
 
     local level = pet:getMainLvl()
     local damage = 48 + (level * 8)
@@ -19,7 +19,7 @@ abilityObject.onPetAbility = function(target, pet, petskill, master)
     damage = xi.mobskills.mobAddBonuses(pet, target, damage.dmg, xi.element.WATER)
     damage = xi.summon.avatarFinalAdjustments(damage, pet, petskill, target, xi.attackType.MAGICAL, xi.damageType.WATER, 1)
 
-    master:setMP(0)
+    summoner:setMP(0)
     target:takeDamage(damage, pet, xi.attackType.MAGICAL, xi.damageType.WATER)
     target:updateEnmityFromDamage(pet, damage)
 

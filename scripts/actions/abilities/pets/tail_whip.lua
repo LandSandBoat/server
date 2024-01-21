@@ -7,12 +7,12 @@ abilityObject.onAbilityCheck = function(player, target, ability)
     return xi.job_utils.summoner.canUseBloodPact(player, player:getPet(), target, ability)
 end
 
-abilityObject.onPetAbility = function(target, pet, petskill)
+abilityObject.onPetAbility = function(target, pet, petskill, summoner, action)
     local numhits = 1
     local accmod = 1
     local dmgmod = 5
 
-    xi.job_utils.summoner.onUseBloodPact(pet:getMaster(), pet, target, petskill)
+    xi.job_utils.summoner.onUseBloodPact(target, petskill, summoner, action)
 
     local damage = xi.summon.avatarPhysicalMove(pet, target, petskill, numhits, accmod, dmgmod, 0, xi.mobskills.magicalTpBonus.NO_EFFECT, 1, 2, 3)
     local totaldamage = xi.summon.avatarFinalAdjustments(damage.dmg, pet, petskill, target, xi.attackType.PHYSICAL, xi.damageType.PIERCING, numhits)

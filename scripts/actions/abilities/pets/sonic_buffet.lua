@@ -8,11 +8,11 @@ abilityObject.onAbilityCheck = function(player, target, ability)
 end
 
 -- http://wiki.ffo.jp/html/37931.html
-abilityObject.onPetAbility = function(target, pet, petskill)
+abilityObject.onPetAbility = function(target, pet, petskill, summoner, action)
     local dINT = math.floor(pet:getStat(xi.mod.INT) - target:getStat(xi.mod.INT))
     local tp   = pet:getTP()
 
-    xi.job_utils.summoner.onUseBloodPact(pet:getMaster(), pet, target, petskill)
+    xi.job_utils.summoner.onUseBloodPact(target, petskill, summoner, action)
 
     -- TODO: upon smn BP damage rewrite, the base damage & mods etc need to be re-evaluated. These are eyeballed and guesstimated to fit what damage looks like on retail.
     local damage = math.floor(37.5 * (2.0 + 0.1 * tp / 150)) -- fTP starts at 2.0 and scales every 150 tp by .1 for a range of 2.0 to 4.0. Base value ballparked from retail.

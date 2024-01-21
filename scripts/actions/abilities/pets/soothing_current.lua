@@ -8,7 +8,7 @@ abilityObject.onAbilityCheck = function(player, target, ability)
 end
 
 abilityObject.onPetAbility = function(target, pet, petskill, summoner, action)
-    xi.job_utils.summoner.onUseBloodPact(summoner, pet, target, petskill)
+    xi.job_utils.summoner.onUseBloodPact(target, petskill, summoner, action)
 
     local typeEffect = xi.effect.CURING_CONDUIT
     if target:addStatusEffect(typeEffect, 15, 0, 180) then

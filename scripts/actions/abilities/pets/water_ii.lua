@@ -7,11 +7,11 @@ abilityObject.onAbilityCheck = function(player, target, ability)
     return xi.job_utils.summoner.canUseBloodPact(player, player:getPet(), target, ability)
 end
 
-abilityObject.onPetAbility = function(target, pet, petskill)
+abilityObject.onPetAbility = function(target, pet, petskill, summoner, action)
     local dINT = math.floor(pet:getStat(xi.mod.INT) - target:getStat(xi.mod.INT))
     local tp   = pet:getTP()
 
-    xi.job_utils.summoner.onUseBloodPact(pet:getMaster(), pet, target, petskill)
+    xi.job_utils.summoner.onUseBloodPact(target, petskill, summoner, action)
 
     local damage = math.floor(45 + 0.025 * tp)
     damage = damage + (dINT * 1.5)

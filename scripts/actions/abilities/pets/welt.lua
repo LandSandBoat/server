@@ -8,12 +8,12 @@ abilityObject.onAbilityCheck = function(player, target, ability)
 end
 
 -- http://wiki.ffo.jp/html/37926.html
-abilityObject.onPetAbility = function(target, pet, petskill)
+abilityObject.onPetAbility = function(target, pet, petskill, summoner, action)
     local numhits = 1
     local accmod = 1
     local dmgmod = 3.0
 
-    xi.job_utils.summoner.onUseBloodPact(pet:getMaster(), pet, target, petskill)
+    xi.job_utils.summoner.onUseBloodPact(target, petskill, summoner, action)
 
     local damage = xi.summon.avatarPhysicalMove(pet, target, petskill, numhits, accmod, dmgmod, 0, xi.mobskills.physicalTpBonus.CRIT_VARIES, 1, 1, 1)
     local totaldamage = xi.summon.avatarFinalAdjustments(damage.dmg, pet, petskill, target, xi.attackType.PHYSICAL, xi.damageType.SLASHING, numhits)
