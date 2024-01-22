@@ -1029,12 +1029,6 @@ function handleThrenody(caster, target, spell, basePower, baseDuration, modifier
     return xi.effect.THRENODY
 end
 
-function handleNinjutsuDebuff(caster, target, spell, basePower, baseDuration, modifier)
-    -- Add new
-    target:addStatusEffectEx(xi.effect.NINJUTSU_ELE_DEBUFF, 0, basePower, 0, baseDuration, 0, modifier, 0)
-    return xi.effect.NINJUTSU_ELE_DEBUFF
-end
-
 -- Returns true if you can overwrite the effect
 -- Example: canOverwrite(target, xi.effect.SLOW, 25)
 function canOverwrite(target, effect, power, mod)
