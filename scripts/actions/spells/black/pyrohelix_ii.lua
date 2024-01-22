@@ -1,6 +1,6 @@
 -----------------------------------
--- Spell: Ionohelix
--- Deals lightning damage that gradually reduces a target's HP.
+-- Spell: Pyrohelix II
+-- Deals fire damage that gradually reduces a target's HP.
 -----------------------------------
 local spellObject = {}
 
@@ -16,7 +16,7 @@ spellObject.onSpellCast = function(caster, target, spell)
         local power    = utils.clamp(damage, 0, 9999)
         local duration = xi.spells.enfeebling.calculateDuration(caster, target, spell:getID(), xi.effect.HELIX, xi.skill.ELEMENTAL_MAGIC)
 
-        target:addStatusEffect(xi.effect.HELIX, power, 10, duration, 1)
+        target:addStatusEffect(xi.effect.HELIX, power, 10, duration, 2)
     end
 
     return damage
