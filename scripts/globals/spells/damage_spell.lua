@@ -237,9 +237,15 @@ xi.spells.damage.calculateBaseDamage = function(caster, target, spellId, spellGr
         local spellMultiplier = pTable[spellId][mNPC]            -- M
         local inflexionPoint  = pTable[spellId][inflectionPoint] -- I
 
+        -- Cap stat difference. In the old system, in 99% of cases, the stat difference capped at 3 times the infexion point, from which point, stat would stop taking effect.
+        local statCap = 3 * inflexionPoint
+
+        statDiff = math.min(statDiff, statCap)
+
+        -- Operations.
         if statDiff <= 0 then
             statDiffBonus = statDiff
-        elseif statDiff > 0 and statDiff <= inflexionPoint then
+        elseif statDiff <= inflexionPoint then
             statDiffBonus = math.floor(statDiff * spellMultiplier)
         else
             statDiffBonus = math.floor(inflexionPoint * spellMultiplier) + math.floor((statDiff - inflexionPoint) * spellMultiplier / 2)
