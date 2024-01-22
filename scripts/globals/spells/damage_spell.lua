@@ -160,47 +160,47 @@ local pTable =
     [xi.magic.spell.WATERJA       ] = { xi.mod.INT,    0,  782,  2.3,  800, 900,  5.6, 4.75, 3.95,    3,    2,    1,    0 }, -- Some values not found. Used guesstimates for M200 and M300.
 
 -- Ninjutsu spells:
---                                       1          2     3        4   5      6
--- Structure:             [spellId] = {  Stat used, mAcc, vNPC,    M,  vPC,   I }, -- Inflexion point unknown. Set to 50, 150 and 300, for now.
-    [xi.magic.spell.DOTON_ICHI    ] = { xi.mod.INT,    0,   28,  0.5,   28,  50 },
-    [xi.magic.spell.DOTON_NI      ] = { xi.mod.INT,    0,   68,    1,   68, 150 },
-    [xi.magic.spell.DOTON_SAN     ] = { xi.mod.INT,    0,  134,  1.5,  134, 300 },
-    [xi.magic.spell.HUTON_ICHI    ] = { xi.mod.INT,    0,   28,  0.5,   28,  50 },
-    [xi.magic.spell.HUTON_NI      ] = { xi.mod.INT,    0,   68,    1,   68, 150 },
-    [xi.magic.spell.HUTON_SAN     ] = { xi.mod.INT,    0,  134,  1.5,  134, 300 },
-    [xi.magic.spell.HYOTON_ICHI   ] = { xi.mod.INT,    0,   28,  0.5,   28,  50 },
-    [xi.magic.spell.HYOTON_NI     ] = { xi.mod.INT,    0,   68,    1,   68, 150 },
-    [xi.magic.spell.HYOTON_SAN    ] = { xi.mod.INT,    0,  134,  1.5,  134, 300 },
-    [xi.magic.spell.KATON_ICHI    ] = { xi.mod.INT,    0,   28,  0.5,   28,  50 },
-    [xi.magic.spell.KATON_NI      ] = { xi.mod.INT,    0,   68,    1,   68, 150 },
-    [xi.magic.spell.KATON_SAN     ] = { xi.mod.INT,    0,  134,  1.5,  134, 300 },
-    [xi.magic.spell.RAITON_ICHI   ] = { xi.mod.INT,    0,   28,  0.5,   28,  50 },
-    [xi.magic.spell.RAITON_NI     ] = { xi.mod.INT,    0,   68,    1,   68, 150 },
-    [xi.magic.spell.RAITON_SAN    ] = { xi.mod.INT,    0,  134,  1.5,  134, 300 },
-    [xi.magic.spell.SUITON_ICHI   ] = { xi.mod.INT,    0,   28,  0.5,   28,  50 },
-    [xi.magic.spell.SUITON_NI     ] = { xi.mod.INT,    0,   68,    1,   68, 150 },
-    [xi.magic.spell.SUITON_SAN    ] = { xi.mod.INT,    0,  134,  1.5,  134, 300 },
+--                                       1          2     3        4   5      6  7
+-- Structure:             [spellId] = {  Stat used, mAcc, vNPC,    M,  vPC,   I, M0 }, -- Inflexion point unknown. Set to 50, 150 and 300, for now.
+    [xi.magic.spell.DOTON_ICHI    ] = { xi.mod.INT,    0,   28,  0.5,   28,  50, 0 },
+    [xi.magic.spell.DOTON_NI      ] = { xi.mod.INT,    0,   68,    1,   68, 150, 0 },
+    [xi.magic.spell.DOTON_SAN     ] = { xi.mod.INT,    0,  134,  1.5,  134, 300, 0 },
+    [xi.magic.spell.HUTON_ICHI    ] = { xi.mod.INT,    0,   28,  0.5,   28,  50, 0 },
+    [xi.magic.spell.HUTON_NI      ] = { xi.mod.INT,    0,   68,    1,   68, 150, 0 },
+    [xi.magic.spell.HUTON_SAN     ] = { xi.mod.INT,    0,  134,  1.5,  134, 300, 0 },
+    [xi.magic.spell.HYOTON_ICHI   ] = { xi.mod.INT,    0,   28,  0.5,   28,  50, 0 },
+    [xi.magic.spell.HYOTON_NI     ] = { xi.mod.INT,    0,   68,    1,   68, 150, 0 },
+    [xi.magic.spell.HYOTON_SAN    ] = { xi.mod.INT,    0,  134,  1.5,  134, 300, 0 },
+    [xi.magic.spell.KATON_ICHI    ] = { xi.mod.INT,    0,   28,  0.5,   28,  50, 0 },
+    [xi.magic.spell.KATON_NI      ] = { xi.mod.INT,    0,   68,    1,   68, 150, 0 },
+    [xi.magic.spell.KATON_SAN     ] = { xi.mod.INT,    0,  134,  1.5,  134, 300, 0 },
+    [xi.magic.spell.RAITON_ICHI   ] = { xi.mod.INT,    0,   28,  0.5,   28,  50, 0 },
+    [xi.magic.spell.RAITON_NI     ] = { xi.mod.INT,    0,   68,    1,   68, 150, 0 },
+    [xi.magic.spell.RAITON_SAN    ] = { xi.mod.INT,    0,  134,  1.5,  134, 300, 0 },
+    [xi.magic.spell.SUITON_ICHI   ] = { xi.mod.INT,    0,   28,  0.5,   28,  50, 0 },
+    [xi.magic.spell.SUITON_NI     ] = { xi.mod.INT,    0,   68,    1,   68, 150, 0 },
+    [xi.magic.spell.SUITON_SAN    ] = { xi.mod.INT,    0,  134,  1.5,  134, 300, 0 },
 
 -- Divine spells: https://nw6yx36onohv5j6wmzoba3nllq-ac4c6men2g7xr2a-wiki-ffo-jp.translate.goog/html/1963.html
---                                       1          2     3        4   5      6
--- Structure:             [spellId] = {  Stat used, mAcc, vNPC,    M,  vPC,   I },
-    [xi.magic.spell.BANISH        ] = { xi.mod.MND,    0,   14,    1,   14,  25 },
-    [xi.magic.spell.BANISH_II     ] = { xi.mod.MND,    0,   85,    1,   85, 113 },
-    [xi.magic.spell.BANISH_III    ] = { xi.mod.MND,    0,  198,  1.5,  198, 250 },
-    [xi.magic.spell.BANISH_IV     ] = { xi.mod.MND,    0,  420,  1.5,  420, 400 }, -- Enemy only. Stats unknown/unchecked.
-    [xi.magic.spell.BANISHGA      ] = { xi.mod.MND,    0,   50,    1,   50,  46 },
-    [xi.magic.spell.BANISHGA_II   ] = { xi.mod.MND,    0,  180,    1,  180, 133 },
-    [xi.magic.spell.BANISHGA_III  ] = { xi.mod.MND,    0,  480,  1.5,  480, 450 }, -- Enemy only. Stats unknown.
-    [xi.magic.spell.BANISHGA_IV   ] = { xi.mod.MND,    0,  600,  1.5,  600, 600 }, -- Enemy only. Stats unknown.
-    [xi.magic.spell.HOLY          ] = { xi.mod.MND,    0,  125,    1,  125, 150 },
-    [xi.magic.spell.HOLY_II       ] = { xi.mod.MND,    0,  250,    2,  250, 300 },
+--                                       1          2     3        4   5      6  7
+-- Structure:             [spellId] = {  Stat used, mAcc, vNPC,    M,  vPC,   I, M0 },
+    [xi.magic.spell.BANISH        ] = { xi.mod.MND,    0,   14,    1,   14,  25, 0 },
+    [xi.magic.spell.BANISH_II     ] = { xi.mod.MND,    0,   85,    1,   85, 113, 0 },
+    [xi.magic.spell.BANISH_III    ] = { xi.mod.MND,    0,  198,  1.5,  198, 250, 0 },
+    [xi.magic.spell.BANISH_IV     ] = { xi.mod.MND,    0,  420,  1.5,  420, 400, 0 }, -- Enemy only. Stats unknown/unchecked.
+    [xi.magic.spell.BANISHGA      ] = { xi.mod.MND,    0,   50,    1,   50,  46, 0 },
+    [xi.magic.spell.BANISHGA_II   ] = { xi.mod.MND,    0,  180,    1,  180, 133, 0 },
+    [xi.magic.spell.BANISHGA_III  ] = { xi.mod.MND,    0,  480,  1.5,  480, 450, 0 }, -- Enemy only. Stats unknown.
+    [xi.magic.spell.BANISHGA_IV   ] = { xi.mod.MND,    0,  600,  1.5,  600, 600, 0 }, -- Enemy only. Stats unknown.
+    [xi.magic.spell.HOLY          ] = { xi.mod.MND,    0,  125,    1,  125, 150, 0 },
+    [xi.magic.spell.HOLY_II       ] = { xi.mod.MND,    0,  250,    2,  250, 300, 0 },
 
 -- Dark spells.
 --                                       1          2     3     4      5      6    7    8    9     10    11    12    13
 -- Structure:             [spellId] = {  Stat used, mAcc, vNPC, mNPC,  vPC,   I,   M0,  M50, M100, M200, M300, M400, M500 },
     [xi.magic.spell.KAUSTRA       ] = { xi.mod.INT,    0,    0, 0.67,    0, 300, 0.67, 0.67, 0.67, 0.67,    0,    0,    0 },
 
--- TODO: Healing Spells when used against undead/zombie
+-- Healing Spells when used against undead/zombie
 }
 
 -----------------------------------
@@ -226,14 +226,36 @@ xi.spells.damage.calculateBaseDamage = function(caster, target, spellId, spellGr
     -----------------------------------
     local statDiffBonus = 0 -- statDiff x appropriate multipliers.
     local statDiff      = caster:getStat(statUsed) - target:getStat(statUsed)
+    local useNewSystem  = false -- Default to old.
+
+    -- Choose system to use.
+    if
+        pTable[spellId][7] > 0 and                -- We actually have new system values.
+        caster:isPC() and                         -- Only players use new system.
+        not xi.settings.main.USE_OLD_MAGIC_DAMAGE -- New system is allowed in settings.
+    then
+        useNewSystem = true -- Use new system.
+    end
+
+    -- New System
+    if useNewSystem then
+        local mTable =
+        {
+            [1] = {   0,  50 },
+            [2] = {  50,  50 },
+            [3] = { 100, 100 },
+            [4] = { 200, 100 },
+            [5] = { 300, 100 },
+            [6] = { 400, 100 },
+            [7] = { 500, 100 },
+        }
+
+        for i = 1, 7 do
+            statDiffBonus = statDiffBonus + math.floor(utils.clamp(statDiff - mTable[i][1], 0, mTable[i][2]) * pTable[spellId][6 + i])
+        end
 
     -- Old system
-    if
-        not caster:isPC() or                                             -- Mobs
-        (caster:isPC() and not xi.settings.main.USE_OLD_MAGIC_DAMAGE) or -- Players + Setting
-        skillType == xi.skill.DIVINE_MAGIC or
-        skillType == xi.skill.NINJUTSU
-    then
+    else
         local spellMultiplier = pTable[spellId][mNPC]            -- M
         local inflexionPoint  = pTable[spellId][inflectionPoint] -- I
 
@@ -251,22 +273,6 @@ xi.spells.damage.calculateBaseDamage = function(caster, target, spellId, spellGr
             statDiffBonus = math.floor(inflexionPoint * spellMultiplier) + math.floor((statDiff - inflexionPoint) * spellMultiplier / 2)
         end
 
-    -- New System
-    else
-        local mTable =
-        {
-            [1] = {   0,  50 },
-            [2] = {  50,  50 },
-            [3] = { 100, 100 },
-            [4] = { 200, 100 },
-            [5] = { 300, 100 },
-            [6] = { 400, 100 },
-            [7] = { 500, 100 },
-        }
-
-        for i = 1, 7 do
-            statDiffBonus = statDiffBonus + math.floor(utils.clamp(statDiff - mTable[i][1], 0, mTable[i][2]) * pTable[spellId][6 + i])
-        end
     end
 
     -----------------------------------
