@@ -678,11 +678,14 @@ xi.spells.damage.calculateTMDA = function(target, spellElement)
     return targetMagicDamageAdjustment
 end
 
--- Divine Emblem applies its own damage multiplier.
-xi.spells.damage.calculateDivineEmblemMultiplier = function(caster)
+-- Divine Emblem applies its own damage multiplier to divine spells.
+xi.spells.damage.calculateDivineEmblemMultiplier = function(caster, skillType)
     local divineEmblemMultiplier = 1
 
-    if caster:hasStatusEffect(xi.effect.DIVINE_EMBLEM) then
+    if
+        caster:hasStatusEffect(xi.effect.DIVINE_EMBLEM) and
+        skillType == xi.skill.DIVINE_MAGIC
+    then
         divineEmblemMultiplier = 1 + caster:getSkillLevel(xi.skill.DIVINE_MAGIC) / 100
         caster:delStatusEffect(xi.effect.DIVINE_EMBLEM)
     end
@@ -877,7 +880,7 @@ xi.spells.damage.useDamageSpell = function(caster, target, spell)
     local dayAndWeather               = xi.spells.damage.calculateDayAndWeather(caster, spellId, spellElement)
     local magicBonusDiff              = xi.spells.damage.calculateMagicBonusDiff(caster, target, spellId, skillType, spellElement)
     local targetMagicDamageAdjustment = xi.spells.damage.calculateTMDA(target, spellElement)
-    local divineEmblemMultiplier      = xi.spells.damage.calculateDivineEmblemMultiplier(caster)
+    local divineEmblemMultiplier      = xi.spells.damage.calculateDivineEmblemMultiplier(caster, skillType)
     local ebullienceMultiplier        = xi.spells.damage.calculateEbullienceMultiplier(caster)
     local skillTypeMultiplier         = xi.spells.damage.calculateSkillTypeMultiplier(skillType)
     local ninSkillBonus               = xi.spells.damage.calculateNinSkillBonus(caster, spellId, skillType)
