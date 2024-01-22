@@ -503,8 +503,8 @@ xi.spells.damage.calculateDayAndWeather = function(caster, spellId, spellElement
 
     -- See if its a Helix type spell
     if
-        spellId >= xi.magic.spell.GEOHELIX and
-        spellId <= xi.magic.spell.LUMINOHELIX
+        (spellId >= xi.magic.spell.GEOHELIX and spellId <= xi.magic.spell.LUMINOHELIX) or
+        (spellId >= xi.magic.spell.GEOHELIX_II and spellId <= xi.magic.spell.LUMINOHELIX_II)
     then
         isHelixSpell = true
     end
