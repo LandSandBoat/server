@@ -693,11 +693,14 @@ xi.spells.damage.calculateDivineEmblemMultiplier = function(caster, skillType)
     return divineEmblemMultiplier
 end
 
--- Ebullience applies an entirely separate multiplier.
-xi.spells.damage.calculateEbullienceMultiplier = function(caster)
+-- Ebullience applies an entirely separate multiplier to Black Magic.
+xi.spells.damage.calculateEbullienceMultiplier = function(caster, spellGroup)
     local ebullienceMultiplier = 1
 
-    if caster:hasStatusEffect(xi.effect.EBULLIENCE) then
+    if
+        caster:hasStatusEffect(xi.effect.EBULLIENCE) and
+        spellGroup == xi.magic.spellGroup.BLACK
+    then
         ebullienceMultiplier = 1.2 + caster:getMod(xi.mod.EBULLIENCE_AMOUNT) / 100
         caster:delStatusEffectSilent(xi.effect.EBULLIENCE)
     end
@@ -881,7 +884,7 @@ xi.spells.damage.useDamageSpell = function(caster, target, spell)
     local magicBonusDiff              = xi.spells.damage.calculateMagicBonusDiff(caster, target, spellId, skillType, spellElement)
     local targetMagicDamageAdjustment = xi.spells.damage.calculateTMDA(target, spellElement)
     local divineEmblemMultiplier      = xi.spells.damage.calculateDivineEmblemMultiplier(caster, skillType)
-    local ebullienceMultiplier        = xi.spells.damage.calculateEbullienceMultiplier(caster)
+    local ebullienceMultiplier        = xi.spells.damage.calculateEbullienceMultiplier(caster, spellGroup)
     local skillTypeMultiplier         = xi.spells.damage.calculateSkillTypeMultiplier(skillType)
     local ninSkillBonus               = xi.spells.damage.calculateNinSkillBonus(caster, spellId, skillType)
     local ninFutaeBonus               = xi.spells.damage.calculateNinFutaeBonus(caster, skillType)
