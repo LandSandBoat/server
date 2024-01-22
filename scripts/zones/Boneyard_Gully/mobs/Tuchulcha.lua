@@ -12,6 +12,11 @@ entity.onMobSpawn = function(mob)
     -- Aggros via ambush, not superlinking
     mob:setMobMod(xi.mobMod.SUPERLINK, 0)
     mob:setMobMod(xi.mobMod.NO_REST, 1)
+    mob:addImmunity(xi.immunity.SLEEP)
+    mob:addImmunity(xi.immunity.GRAVITY)
+    mob:addImmunity(xi.immunity.BIND)
+    mob:addImmunity(xi.immunity.STUN)
+    mob:addImmunity(xi.immunity.PARALYZE)
 
     -- Used with HPP to keep track of the number of Sandpits
     mob:setLocalVar("Sandpits", 0)
