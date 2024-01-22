@@ -2066,7 +2066,7 @@ REPLACE INTO `mob_droplist` VALUES (2854,1,6,@COMMON,1452,334); -- Bronzepiece
 REPLACE INTO `mob_droplist` VALUES (2854,2,0,1000,1455,0); -- Byne Bill (Steal)
 REPLACE INTO `mob_droplist` VALUES (2854,2,0,1000,1449,0); -- Whiteshell (Steal)
 REPLACE INTO `mob_droplist` VALUES (2854,2,0,1000,1452,0); -- Bronzepiece (Steal)
-REPLACE INTO `mob_droplist` VALUES (2854,0,0,1000,1450,@SRARE); -- Jadeshell
+
 --             Regular           --
 DELETE FROM `mob_droplist` WHERE dropid = "1342"; -- Hydra ** NOTE THESE ARE THE SAME DROP RATES AT Dynamis-Beac **
 REPLACE INTO `mob_droplist` VALUES (1342,1,1,@RARE,15117,66); -- WAR Legs
