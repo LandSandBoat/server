@@ -11,7 +11,10 @@ entity.onMobDeath = function(mob, player, optParams)
 end
 
 entity.onMobDespawn = function(mob)
-    xi.mob.phOnDespawn(mob, { [ID.mob.MAGICKED_BONES - 2] = ID.mob.MAGICKED_BONES }, 50, 1) -- { [Goblin Thug] = Club_Magicked_Bones }
+    -- This is a work around until "spawn slots" are a thing
+    local params = {}
+    params.nightOnly = true
+    xi.mob.phOnDespawn(mob, { [ID.mob.MAGICKED_BONES - 2] = ID.mob.MAGICKED_BONES }, 50, 1, params) -- { [Goblin Thug] = Club_Magicked_Bones }
 end
 
 return entity

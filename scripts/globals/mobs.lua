@@ -32,9 +32,24 @@ local function lotteryPrimed(phList)
 end
 
 -- potential lottery placeholder was killed
-xi.mob.phOnDespawn = function(ph, phList, chance, cooldown, immediate)
-    if type(immediate) ~= 'boolean' then
-        immediate = false
+xi.mob.phOnDespawn = function(ph, phList, chance, cooldown, params)
+    params = params or {}
+    --[[
+        params.immediate   = true    pop NM without waiting for next PH pop time
+        params.nightOnly   = true    spawn NM only at night time
+        params.noPosUpdate = true    do not run UpdateNMSpawnPoint()
+    ]]
+
+    if type(params.immediate) ~= 'boolean' then
+        params.immediate = false
+    end
+
+    if type(params.nightOnly) ~= 'boolean' then
+        params.nightOnly = false
+    end
+
+    if type(params.noPosUpdate) ~= 'boolean' then
+        params.noPosUpdate = false
     end
 
     if xi.settings.main.NM_LOTTERY_CHANCE then
@@ -54,24 +69,48 @@ xi.mob.phOnDespawn = function(ph, phList, chance, cooldown, immediate)
             local pop = nm:getLocalVar('pop')
 
             chance = math.ceil(chance * 10) -- chance / 1000.
+
             if
                 os.time() > pop and
                 not lotteryPrimed(phList) and
                 math.random(1, 1000) <= chance
             then
+                local nextRepopTime = os.time() + GetMobRespawnTime(phId)
+                -- That's earth time, subtract SE epoch to get Vanatime
+                nextRepopTime = nextRepopTime - 1009810800
+                -- The enum bakes in a multiplication of 2.4, gotta reverse that to get accurate hour
+                local nextRepopDate = (nextRepopTime / 60 * 25) + 886 * (xi.vanaTime.YEAR / 2.4)
+                local nextRepopHour = (nextRepopDate % (xi.vanaTime.DAY / 2.4)) / (xi.vanaTime.HOUR / 2.4)
+                -- If the NM is night only and spawn would happen during the day, bail out
+                if
+                    params.nightOnly and
+                    nextRepopHour >= 4 and
+                    nextRepopHour < 20
+                then
+                    return false
+                end
 
                 -- on PH death, replace PH repop with NM repop
                 DisallowRespawn(phId, true)
                 DisallowRespawn(nmId, false)
-                UpdateNMSpawnPoint(nmId)
-                nm:setRespawnTime(immediate and 1 or GetMobRespawnTime(phId)) -- if immediate is true, spawn the nm immediately (1ms) else use placeholder's timer
+
+                if not params.noPosUpdate then
+                    UpdateNMSpawnPoint(nmId)
+                end
+
+                -- if params.immediate is true, spawn the nm params.immediately (1ms) else use placeholder's timer
+                nm:setRespawnTime(params.immediate and 1 or GetMobRespawnTime(phId))
 
                 nm:addListener('DESPAWN', 'DESPAWN_' .. nmId, function(m)
                     -- on NM death, replace NM repop with PH repop
                     DisallowRespawn(nmId, true)
                     DisallowRespawn(phId, false)
                     GetMobByID(phId):setRespawnTime(GetMobRespawnTime(phId))
-                    m:setLocalVar('pop', os.time() + cooldown)
+
+                    if m:getLocalVar('doNotInvokeCooldown') == 0 then
+                        m:setLocalVar('pop', os.time() + cooldown)
+                    end
+
                     m:removeListener('DESPAWN_' .. nmId)
                 end)
 

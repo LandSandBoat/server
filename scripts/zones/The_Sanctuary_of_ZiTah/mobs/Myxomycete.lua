@@ -11,7 +11,9 @@ entity.onMobRoam = function(mob)
     local weather = mob:getWeather()
 
     if weather == xi.weather.RAIN or weather == xi.weather.SQUALL then
-        if xi.mob.phOnDespawn(mob, ID.mob.NOBLE_MOLD_PH, 100, math.random(43200, 57600), true) then -- 12 to 16 hours
+        local params = {}
+        params.immediate = true
+        if xi.mob.phOnDespawn(mob, ID.mob.NOBLE_MOLD_PH, 100, math.random(43200, 57600), params) then -- 12 to 16 hours
             local p = mob:getPos()
             GetMobByID(ID.mob.NOBLE_MOLD):setSpawn(p.x, p.y, p.z, p.rot)
             DespawnMob(mob:getID())
