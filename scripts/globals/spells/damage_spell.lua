@@ -279,7 +279,6 @@ xi.spells.damage.calculateBaseDamage = function(caster, target, spellId, spellGr
         else
             statDiffBonus = math.floor(inflexionPoint * spellMultiplier) + math.floor((statDiff - inflexionPoint) * spellMultiplier / 2)
         end
-
     end
 
     -----------------------------------
