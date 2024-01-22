@@ -200,7 +200,14 @@ local pTable =
 -- Structure:             [spellId] = {  Stat used, mAcc, vNPC, mNPC,  vPC,   I,   M0,  M50, M100, M200, M300, M400, M500 },
     [xi.magic.spell.KAUSTRA       ] = { xi.mod.INT,    0,    0, 0.67,    0, 300, 0.67, 0.67, 0.67, 0.67,    0,    0,    0 },
 
--- Healing Spells when used against undead/zombie
+-- Healing Spells when used against undead/zombie: https://wiki.ffo.jp/html/336.html
+-- Structure:             [spellId] = {  Stat used, mAcc, vNPC,    M,  vPC,   I, M0 },
+    [xi.magic.spell.CURE          ] = { xi.mod.MND,    0,    7,    1,    7,  16, 0 },
+    [xi.magic.spell.CURE_II       ] = { xi.mod.MND,    0,   35,    1,   35,  60, 0 },
+    [xi.magic.spell.CURE_III      ] = { xi.mod.MND,    0,   70,    1,   70, 133, 0 },
+    [xi.magic.spell.CURE_IV       ] = { xi.mod.MND,    0,  140,  1.5,  140, 104, 0 }, -- Not a typo. Both Inflexion point and upper cap by extension are lower than Cure III.
+    [xi.magic.spell.CURE_V        ] = { xi.mod.MND,    0,  210,  1.5,  210, 159, 0 },
+    [xi.magic.spell.CURE_VI       ] = { xi.mod.MND,    0,  295,    2,  295, 212, 0 },
 }
 
 -----------------------------------
@@ -678,6 +685,22 @@ xi.spells.damage.calculateTMDA = function(target, spellElement)
     return targetMagicDamageAdjustment
 end
 
+-- Divine seal applies its own multiplier to healing spells when used against undead.
+-- NOTE: If we have reached this far with a heling spell, the target is confirmed to be undead.
+xi.spells.damage.calculateDivineSealMultiplier = function(caster, skillType)
+    local divineSealMultiplier = 1
+
+    if
+        caster:hasStatusEffect(xi.effect.DIVINE_SEAL) and
+        skillType == xi.skill.HEALING
+    then
+        divineSealMultiplier = 2
+        caster:delStatusEffect(xi.effect.DIVINE_SEAL)
+    end
+
+    return divineSealMultiplier
+end
+
 -- Divine Emblem applies its own damage multiplier to divine spells.
 xi.spells.damage.calculateDivineEmblemMultiplier = function(caster, skillType)
     local divineEmblemMultiplier = 1
@@ -883,6 +906,7 @@ xi.spells.damage.useDamageSpell = function(caster, target, spell)
     local dayAndWeather               = xi.spells.damage.calculateDayAndWeather(caster, spellId, spellElement)
     local magicBonusDiff              = xi.spells.damage.calculateMagicBonusDiff(caster, target, spellId, skillType, spellElement)
     local targetMagicDamageAdjustment = xi.spells.damage.calculateTMDA(target, spellElement)
+    local divineSealMultiplier        = xi.spells.damage.calculateDivineSealMultiplier(caster, skillType)
     local divineEmblemMultiplier      = xi.spells.damage.calculateDivineEmblemMultiplier(caster, skillType)
     local ebullienceMultiplier        = xi.spells.damage.calculateEbullienceMultiplier(caster, spellGroup)
     local skillTypeMultiplier         = xi.spells.damage.calculateSkillTypeMultiplier(skillType)
@@ -904,6 +928,7 @@ xi.spells.damage.useDamageSpell = function(caster, target, spell)
     finalDamage = math.floor(finalDamage * dayAndWeather)
     finalDamage = math.floor(finalDamage * magicBonusDiff)
     finalDamage = math.floor(finalDamage * targetMagicDamageAdjustment)
+    finalDamage = math.floor(finalDamage * divineSealMultiplier)
     finalDamage = math.floor(finalDamage * divineEmblemMultiplier)
     finalDamage = math.floor(finalDamage * ebullienceMultiplier)
     finalDamage = math.floor(finalDamage * skillTypeMultiplier)
