@@ -1067,7 +1067,7 @@ namespace battleutils
             // spikes landed
             if (spikesType == SUBEFFECT_CURSE_SPIKES)
             {
-                Action->spikesMessage = 0; // log says nothing? // TODO: find "Additional Effect: Curse" message
+                Action->spikesMessage = MSGBASIC_SPIKES_ARMOR_SUBEFFECT;
                 Action->spikesParam   = EFFECT_CURSE;
             }
             else

@@ -75,6 +75,7 @@ enum MSGBASIC_ID : uint16
     MSGBASIC_SPIKES_EFFECT_DMG      = 44,  /* <target>'s spikes deal <number> damage to <attacker> */
     MSGBASIC_SPIKES_EFFECT_HEAL     = 383, /* <target>'s spikes restore <number> HP to <attacker> */
     MSGBASIC_SPIKES_EFFECT_HP_DRAIN = 132, /* <target>'s spikes drain <number> HP from the <attacker>. */
+    MSGBASIC_SPIKES_ARMOR_SUBEFFECT = 374, /* Striking <target>'s armor causes <attacker> to become <status>. */
     /* Distance */
     MSGBASIC_TARG_OUT_OF_RANGE  = 4,  /* <target> is out of range. */
     MSGBASIC_UNABLE_TO_SEE_TARG = 5,  /* Unable to see <target>. */
