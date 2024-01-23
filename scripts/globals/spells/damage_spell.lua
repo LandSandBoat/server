@@ -214,26 +214,8 @@ local pTable =
 -- Basic Functions
 -----------------------------------
 xi.spells.damage.calculateBaseDamage = function(caster, target, spellId, spellGroup, skillType, statUsed)
-    local spellDamage = 0 -- The variable we want to calculate
-
-    -----------------------------------
-    -- STEP 1: baseSpellDamage (V)
-    -----------------------------------
-    local baseSpellDamage = pTable[spellId][vNPC] -- (V) In Wiki.
-
-    if
-        caster:isPC() and
-        not xi.settings.main.USE_OLD_MAGIC_DAMAGE
-    then
-        baseSpellDamage = pTable[spellId][vPC] -- vPC
-    end
-
-    -----------------------------------
-    -- STEP 2: statDiffBonus (statDiff * M)
-    -----------------------------------
-    local statDiffBonus = 0 -- statDiff x appropriate multipliers.
-    local statDiff      = caster:getStat(statUsed) - target:getStat(statUsed)
-    local useNewSystem  = false -- Default to old.
+    local spellDamage     = 0 -- The variable we want to calculate
+    local useNewSystem    = false -- Default to old.
 
     -- Choose system to use.
     if
@@ -243,6 +225,21 @@ xi.spells.damage.calculateBaseDamage = function(caster, target, spellId, spellGr
     then
         useNewSystem = true -- Use new system.
     end
+
+    -----------------------------------
+    -- STEP 1: baseSpellDamage (V)
+    -----------------------------------
+    local baseSpellDamage = pTable[spellId][vNPC] -- (V) In Wiki.
+
+    if useNewSystem then
+        baseSpellDamage = pTable[spellId][vPC] -- vPC
+    end
+
+    -----------------------------------
+    -- STEP 2: statDiffBonus (statDiff * M)
+    -----------------------------------
+    local statDiffBonus = 0 -- statDiff x appropriate multipliers.
+    local statDiff      = caster:getStat(statUsed) - target:getStat(statUsed)
 
     -- New System
     if useNewSystem then
