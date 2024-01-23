@@ -87,9 +87,6 @@ INSERT INTO `mob_pool_mods` VALUES (387,59,37,1); -- WEAPON_BONUS: 37
 -- Biast
 INSERT INTO `mob_pool_mods` VALUES (410,236,20,0); -- HUMANOID_KILLER: 20
 
--- Bladmall
-INSERT INTO `mob_pool_mods` VALUES (444,23,23,1); -- IMMUNITY: 23
-
 -- Bloodlapper
 INSERT INTO `mob_pool_mods` VALUES (459,23,50,0);  -- ATT: 50
 INSERT INTO `mob_pool_mods` VALUES (459,73,25,0);  -- STORETP: 25
@@ -385,9 +382,6 @@ INSERT INTO `mob_pool_mods` VALUES (2973,59,10,1); -- WEAPON_BONUS: 10 ( base da
 -- Ore Golem
 INSERT INTO `mob_pool_mods` VALUES (3051,4,4,1); -- SIGHT_RANGE: 4
 
--- Parata
-INSERT INTO `mob_pool_mods` VALUES (3099,23,23,1); -- IMMUNITY: 23
-
 -- Pey
 INSERT INTO `mob_pool_mods` VALUES (3124,48,307,1); -- SHARE_TARGET: 307
 INSERT INTO `mob_pool_mods` VALUES (3124,1152,100,0); -- LULLABYRESBUILD: 100
@@ -506,9 +500,6 @@ INSERT INTO `mob_pool_mods` VALUES (3916,254,100,0); -- LULLABYRES: 100
 
 -- Tombstone Prototype
 INSERT INTO `mob_pool_mods` VALUES (3941,163,-100,0); -- DMGMAGIC: -100
-
--- Tuchulcha
-INSERT INTO `mob_pool_mods` VALUES (4046,23,6191,1); -- IMMUNITY: 6191
 
 -- Ullikummi
 INSERT INTO `mob_pool_mods` VALUES (4082,4,4,1); -- SIGHT_RANGE: 4
