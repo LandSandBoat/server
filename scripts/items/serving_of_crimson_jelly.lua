@@ -6,7 +6,7 @@
 -- Magic % 12
 -- Magic Cap 85
 -- Intelligence 6
--- Magic Regen While Healing 1
+-- Magic Regen While Healing 2
 -----------------------------------
 local itemObject = {}
 
@@ -22,14 +22,14 @@ itemObject.onEffectGain = function(target, effect)
     target:addMod(xi.mod.FOOD_MPP, 12)
     target:addMod(xi.mod.FOOD_MP_CAP, 85)
     target:addMod(xi.mod.INT, 6)
-    target:addMod(xi.mod.MPHEAL, 1)
+    target:addMod(xi.mod.MPHEAL, 2)
 end
 
 itemObject.onEffectLose = function(target, effect)
     target:delMod(xi.mod.FOOD_MPP, 12)
     target:delMod(xi.mod.FOOD_MP_CAP, 85)
     target:delMod(xi.mod.INT, 6)
-    target:delMod(xi.mod.MPHEAL, 1)
+    target:delMod(xi.mod.MPHEAL, 2)
 end
 
 return itemObject
