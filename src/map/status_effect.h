@@ -38,6 +38,7 @@ enum class EFFECTOVERWRITE : uint8
     IGNORE_DUPLICATE = 4, // ignore dupes
     TIER_HIGHER      = 5  // only overwrite if tier is higher (regardless of power)
 };
+DECLARE_FORMAT_AS_UNDERLYING(EFFECTOVERWRITE);
 
 enum EFFECTFLAG
 {
@@ -72,6 +73,7 @@ enum EFFECTFLAG
     EFFECTFLAG_HIDE_TIMER      = 0x08000000, // Sends "Always" in the packet, even though timer is tracked
     EFFECTFLAG_ON_ZONE_PATHOS  = 0x10000000, // removes the effect zoning into a non instanced zone
 };
+DECLARE_FORMAT_AS_UNDERLYING(EFFECTFLAG);
 
 enum EFFECT
 {
@@ -756,8 +758,8 @@ enum EFFECT
     // 806-1022
     // EFFECT_PLACEHOLDER           = 1023 // The client dat file seems to have only this many "slots", results of exceeding that are untested.
 };
-
 #define MAX_EFFECTID 1023 // 768 real + 232 custom
+DECLARE_FORMAT_AS_UNDERLYING(EFFECT);
 
 /************************************************************************
  *                                                                       *

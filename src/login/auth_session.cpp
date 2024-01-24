@@ -130,7 +130,7 @@ void auth_session::read_func()
             DebugSockets(fmt::format("LOGIN_ATTEMPT from {}", ipAddress));
 
             int32 ret = sql->Query("SELECT accounts.id,accounts.status FROM accounts WHERE accounts.login = '%s' AND accounts.password = PASSWORD('%s')",
-                                    escaped_name, escaped_pass);
+                                   escaped_name, escaped_pass);
 
             if (ret != SQL_ERROR && sql->NumRows() != 0)
             {
@@ -147,7 +147,7 @@ void auth_session::read_func()
                                         FROM accounts_sessions JOIN accounts \
                                         ON accounts_sessions.accid = accounts.id \
                                         WHERE accounts.id = %d;",
-                                        accountID);
+                                     accountID);
 
                     if (ret != SQL_ERROR && sql->NumRows() == 1)
                     {
@@ -233,7 +233,7 @@ void auth_session::read_func()
             if (!settings::get<bool>("login.ACCOUNT_CREATION"))
             {
                 ShowWarning(fmt::format("login_parse: New account attempt <{}> but is disabled in settings.",
-                                        escaped_name));
+                                        str(escaped_name)));
                 ref<uint8>(data_, 0) = LOGIN_ERROR_CREATE_DISABLED;
                 do_write(1);
                 return;
@@ -279,7 +279,7 @@ void auth_session::read_func()
 
                 if (sql->Query("INSERT INTO accounts(id,login,password,timecreate,timelastmodify,status,priv) \
                                 VALUES(%d,'%s',PASSWORD('%s'),'%s',NULL,%d,%d);",
-                                accid, escaped_name, escaped_pass, strtimecreate, ACCOUNT_STATUS_CODE::NORMAL, ACCOUNT_PRIVILEGE_CODE::USER) == SQL_ERROR)
+                               accid, escaped_name, escaped_pass, strtimecreate, ACCOUNT_STATUS_CODE::NORMAL, ACCOUNT_PRIVILEGE_CODE::USER) == SQL_ERROR)
                 {
                     ref<uint8>(data_, 0) = LOGIN_ERROR_CREATE;
                     do_write(1);
@@ -303,10 +303,10 @@ void auth_session::read_func()
             int32 ret = sql->Query("SELECT accounts.id,accounts.status \
                                     FROM accounts \
                                     WHERE accounts.login = '%s' AND accounts.password = PASSWORD('%s')",
-                                    escaped_name, escaped_pass);
+                                   escaped_name, escaped_pass);
             if (ret == SQL_ERROR || sql->NumRows() == 0)
             {
-                ShowWarning(fmt::format("login_parse: user <{}> could not be found using the provided information. Aborting.", escaped_name));
+                ShowWarning(fmt::format("login_parse: user <{}> could not be found using the provided information. Aborting.", str(escaped_name)));
                 ref<uint8>(data_, 0) = LOGIN_ERROR;
                 do_write(1);
                 return;
@@ -319,7 +319,7 @@ void auth_session::read_func()
 
             if (status & ACCOUNT_STATUS_CODE::BANNED)
             {
-                ShowInfo(fmt::format("login_parse: banned user <{}> detected. Aborting.", escaped_name));
+                ShowInfo(fmt::format("login_parse: banned user <{}> detected. Aborting.", str(escaped_name)));
                 ref<uint8>(data_, 0) = LOGIN_ERROR_CHANGE_PASSWORD;
                 do_write(1);
             }
@@ -331,7 +331,7 @@ void auth_session::read_func()
 
                 if (updated_password == "")
                 {
-                    ShowWarning(fmt::format("login_parse: Empty password; Could not update password for user <{}>.", escaped_name));
+                    ShowWarning(fmt::format("login_parse: Empty password; Could not update password for user <{}>.", str(escaped_name)));
                     ref<uint8>(data_, 0) = LOGIN_ERROR_CHANGE_PASSWORD;
                     do_write(1);
                     return;
@@ -343,10 +343,10 @@ void auth_session::read_func()
                 sql->Query("UPDATE accounts SET accounts.timelastmodify = NULL WHERE accounts.id = %d", accid);
 
                 ret = sql->Query("UPDATE accounts SET accounts.password = PASSWORD('%s') WHERE accounts.id = %d",
-                                    escaped_updated_password, accid);
+                                 escaped_updated_password, accid);
                 if (ret == SQL_ERROR)
                 {
-                    ShowWarning(fmt::format("login_parse: Error trying to update password in database for user <{}>.", escaped_name));
+                    ShowWarning(fmt::format("login_parse: Error trying to update password in database for user <{}>.", str(escaped_name)));
                     ref<uint8>(data_, 0) = LOGIN_ERROR_CHANGE_PASSWORD;
                     do_write(1);
                     return;

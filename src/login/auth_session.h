@@ -21,9 +21,9 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 
 #pragma once
 
+#include <asio/ssl.hpp>
 #include <asio/ts/buffer.hpp>
 #include <asio/ts/internet.hpp>
-#include <asio/ssl.hpp>
 
 #include "handler_session.h"
 #include "login_helpers.h"
@@ -51,7 +51,6 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 
 #define SUPPORTED_XILOADER_VERSION "1.0.0"
 
-
 // NOTE: This collection of flags is 64-bits wide!
 enum AUTH_COMPONENTS
 {
@@ -77,6 +76,7 @@ enum ACCOUNT_STATUS_CODE : uint8
     NORMAL = 0x01,
     BANNED = 0x02,
 };
+DECLARE_FORMAT_AS_UNDERLYING(ACCOUNT_STATUS_CODE);
 
 enum ACCOUNT_PRIVILEGE_CODE : uint8
 {
@@ -84,6 +84,7 @@ enum ACCOUNT_PRIVILEGE_CODE : uint8
     ADMIN = 0x02,
     ROOT  = 0x04,
 };
+DECLARE_FORMAT_AS_UNDERLYING(ACCOUNT_PRIVILEGE_CODE);
 
 // Interaction with xiloader, port 54231
 class auth_session : public handler_session

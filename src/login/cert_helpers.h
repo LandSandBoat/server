@@ -54,7 +54,7 @@ namespace certificateHelpers
 
                     X509_NAME_oneline(X509_get_subject_name(cert), cn, size);
                     X509_NAME_oneline(X509_get_issuer_name(cert), cn, size);
-                    ShowInfo(fmt::format("Found existing login.cert", cn));
+                    ShowInfo(fmt::format("Found existing login.cert: {}", str(cn)));
 
                     // if current time not within the bounds of valid date, note it's expired
                     if (X509_cmp_time(X509_get_notAfter(cert), NULL) != 1 || X509_cmp_time(X509_get_notBefore(cert), NULL) != -1)
@@ -139,4 +139,4 @@ namespace certificateHelpers
             EVP_PKEY_free(pkey);
         }
     }
-}
+} // namespace certificateHelpers

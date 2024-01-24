@@ -25,19 +25,22 @@
 #include "cbasetypes.h"
 
 #include <string>
+#include <string_view>
 
 // Set this higher to strip out lower messages at compile time
 // NOTE: We don't strip anything by default, as we use all the logger
 //     : levels for different things.
 #define SPDLOG_ACTIVE_LEVEL SPDLOG_LEVEL_TRACE
 
-#include "spdlog/spdlog.h"
+// TODO: Remove this
+#define FMT_CONSTEVAL
 
-#include "spdlog/fmt/bundled/chrono.h"
-#include "spdlog/fmt/bundled/core.h"
-#include "spdlog/fmt/bundled/format.h"
-#include "spdlog/fmt/bundled/printf.h"
-#include "spdlog/fmt/fmt.h"
+#include <fmt/chrono.h>
+#include <fmt/core.h>
+#include <fmt/format.h>
+#include <fmt/printf.h>
+
+#include "spdlog/spdlog.h"
 
 // Forward declaration
 namespace settings
@@ -87,6 +90,25 @@ namespace logging
 
 #define LOGGER_ENABLE(SettingsString, ...) \
     if (settings::get<bool>(SettingsString)) { __VA_ARGS__ }
+
+// Helper to allow pointers to numeric types to be formatted
+// as strings.
+// TODO: All need for this should eventually be removed!
+// TODO: Any place we use this it is indicating some smelly and unsafe code.
+//     : When replacing, the surrounding code should be audited!
+template <typename T>
+std::string str(T v)
+{
+    return std::string(reinterpret_cast<const char*>(v));
+}
+
+// Helper for allowing `enum` and `enum class` types to be formatted
+// as their underlying numeric type.
+#define DECLARE_FORMAT_AS_UNDERLYING(type) \
+inline auto format_as(type v) \
+{ \
+    return fmt::underlying(v); \
+}
 
 // Regular Loggers
 // NOTE 1: Trace is not for logging to screen or file; it's for filling the crash backtrace buffer and reporting to Tracy.
