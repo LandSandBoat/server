@@ -2484,6 +2484,15 @@ INSERT INTO `item_latents` VALUES (20540,23,10,6,1000);      -- Att+10 TP<1000
 INSERT INTO `item_latents` VALUES (20540,25,15,6,1000);      -- Acc+39 (24 normal, +15 more) TP<1000
 INSERT INTO `item_latents` VALUES (20540,287,4,6,1000);      -- Dmg+4  TP<1000
 
+-- Eminent Dagger
+INSERT INTO `item_latents` VALUES (20624,23,10,6,1000);  -- TP_UNDER: 1000 - ATT: 10
+INSERT INTO `item_latents` VALUES (20624,25,39,6,1000);  -- TP_UNDER: 1000 - ACC: 39
+INSERT INTO `item_latents` VALUES (20624,287,89,6,1000); -- TP_UNDER: 1000 - DMG_RATING: 89
+
+-- Surcoufs Jambiya +1
+INSERT INTO `item_latents` VALUES (20628,287,85,56,0);  -- WEAPON_DRAWN_MP_OVER: 0 - DMG_RATING: 85
+INSERT INTO `item_latents` VALUES (20628,369,-10,56,0); -- WEAPON_DRAWN_MP_OVER: 0 - REFRESH: -10
+
 -- Eminent Scimitar
 INSERT INTO `item_latents` VALUES (20726,23,10,6,1000);      -- Att+10 TP>1000
 INSERT INTO `item_latents` VALUES (20726,25,15,6,1000);      -- Acc+15 TP>1000
