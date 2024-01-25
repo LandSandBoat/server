@@ -3564,6 +3564,7 @@ xi.items =
     FOREST_SASH                     = 13262,
     STEPPE_SASH                     = 13263,
     JUNGLE_SASH                     = 13264,
+    DESERT_SASH                     = 13265,
     CORSETTE                        = 13271,
     TWINTHREAD_OBI                  = 13273,
     ARACHNE_OBI                     = 13275,
