@@ -13,7 +13,7 @@ entity.onMobSpawn = function(mob)
     mob:setMobMod(xi.mobMod.IDLE_DESPAWN, 180)
     mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
     mob:addMod(xi.mod.DEF, 120)
-    mob:setMod(xi.mod.EVA, 424)
+    mob:setMod(xi.mod.EVA, 373)
     mob:setMod(xi.mod.REGAIN, 1000)
     mob:setMod(xi.mod.WIND_MEVA, -64) -- Todo: Move to mob_resists.sql
     mob:setMod(xi.mod.SILENCERES, 35)

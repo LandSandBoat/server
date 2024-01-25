@@ -310,7 +310,9 @@ function xi.events.starlightCelebration.tokenMoogleOnFinish(player, id, csid, op
                 count = 0
                 npcUtil.giveItem(player, reward)
             else
-                if picked > 178 and picked < 10382 then -- checks if reward is a food item
+                local pickedItem = GetReadOnlyItem(picked)
+                local isNotRare = bit.band(pickedItem:getFlag(), xi.itemFlag.RARE) == 0
+                if isNotRare then -- checks if reward is rare and thus should not attempt to give
                     reward = picked
                     count = 0
                     npcUtil.giveItem(player, reward)
