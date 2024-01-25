@@ -209,6 +209,7 @@ xi.msg.basic =
     STATUS_INCREASED       = 562, -- The status parameters of <target> have increased.
     PET_CANNOT_DO_ACTION   = 574, -- <player>'s pet is currently unable to perform that action.
     PET_NOT_ENOUGH_TP      = 575, -- <player>'s pet does not have enough TP to perform that action.
+    PET_MAGIC_BURST        = 747, -- <user> uses <skill>. Magic Burst! <target> takes <number> point(s) of damage.
     SPIRIT_BOND            = 800, -- Spirit Bond Activates. <Player> takes <number> points of damage. -- Wyvern Spirit bond
 
     -- Food
