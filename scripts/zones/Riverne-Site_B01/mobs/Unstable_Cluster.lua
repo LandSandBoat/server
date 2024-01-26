@@ -16,18 +16,21 @@ end
 
 entity.onMobFight = function(mob)
     if
-        mob:getAnimationSub() == 4 and
+        (mob:getAnimationSub() == 4 or
+        mob:getAnimationSub() == 0) and
         mob:getMod(xi.mod.TRIPLE_ATTACK) == 0
     then
         mob:setMod(xi.mod.TRIPLE_ATTACK, 100)
     elseif
-        mob:getAnimationSub() == 5 and
+        (mob:getAnimationSub() == 5 or
+        mob:getAnimationSub() == 1) and
         mob:getMod(xi.mod.TRIPLE_ATTACK) > 0
     then
         mob:setMod(xi.mod.TRIPLE_ATTACK, 0)
         mob:setMod(xi.mod.DOUBLE_ATTACK, 100)
     elseif
-        mob:getAnimationSub() == 6 and
+        (mob:getAnimationSub() == 6 or
+        mob:getAnimationSub() == 2) and
         mob:getMod(xi.mod.DOUBLE_ATTACK) > 0
     then
         mob:setMod(xi.mod.DOUBLE_ATTACK, 0)
