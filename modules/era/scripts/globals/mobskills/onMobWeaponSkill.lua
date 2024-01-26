@@ -3175,9 +3175,10 @@ end)
 
 m:addOverride("xi.globals.mobskills.core_meltdown.onMobWeaponSkill", function(target, mob, skill)
     local dmgmod = 1
+    local damage = skill:getMobHP() / 2
 
-    -- TODO: The damage type should be based off of the Ghrah's element
-    local info = xi.mobskills.mobMagicalMove(mob, target, skill, mob:getWeaponDmg() * math.random(7, 15), xi.magic.ele.NONE, dmgmod, xi.mobskills.magicalTpBonus.NO_EFFECT)
+    -- TODO: The damage type should be based off of the Ghrah's element <-- needs verification
+    local info = xi.mobskills.mobMagicalMove(mob, target, skill, damage, xi.magic.ele.NONE, dmgmod, xi.mobskills.magicalTpBonus.NO_EFFECT)
     local dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.ELEMENTAL, xi.mobskills.shadowBehavior.IGNORE_SHADOWS)
     mob:setHP(0)
     target:takeDamage(dmg, mob, xi.attackType.MAGICAL, xi.damageType.ELEMENTAL)
@@ -13056,7 +13057,16 @@ m:addOverride("xi.globals.mobskills.sickle_slash.onMobWeaponSkill", function(tar
     local crit = 0.4
     local attmod = 1.5
     local info = xi.mobskills.mobPhysicalMove(mob, target, skill, numhits, accmod, 1, xi.mobskills.physicalTpBonus.CRIT_VARIES, 1, 1.5, 2, crit, attmod)
-    local dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.SLASHING, info.hitslanded)
+    local shadows = info.hitslanded
+
+    if
+        mob:getFamily() >= 122 and -- Ghrah
+        mob:getFamily() <= 124
+    then
+        shadows = xi.mobskills.shadowBehavior.IGNORE_SHADOWS
+    end
+
+    local dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.SLASHING, shadows)
 
     if not skill:hasMissMsg() then
         target:takeDamage(dmg, mob, xi.attackType.PHYSICAL, xi.damageType.SLASHING)
@@ -16222,7 +16232,16 @@ m:addOverride("xi.globals.mobskills.vorpal_blade.onMobWeaponSkill", function(tar
     local accmod = 1
     local dmgmod = 1.25
     local info = xi.mobskills.mobPhysicalMove(mob, target, skill, numhits, accmod, dmgmod, xi.mobskills.physicalTpBonus.CRIT_VARIES, 1.1, 1.2, 1.3)
-    local dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.SLASHING, info.hitslanded)
+    local shadows = info.hitslanded
+
+    if
+        mob:getFamily() >= 122 and -- Ghrah
+        mob:getFamily() <= 124
+    then
+        shadows = xi.mobskills.shadowBehavior.IGNORE_SHADOWS
+    end
+
+    local dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.SLASHING, shadows)
 
     if not skill:hasMissMsg() then
         -- AA EV: Approx 900 damage to 75 DRG/35 THF.  400 to a NIN/WAR in Arhat, but took shadows.

@@ -28,7 +28,16 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local crit = 0.4
     local attmod = 1.5
     local info = xi.mobskills.mobPhysicalMove(mob, target, skill, numhits, accmod, 1, xi.mobskills.physicalTpBonus.CRIT_VARIES, 1, 1.5, 2, crit, attmod)
-    local dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.SLASHING, info.hitslanded)
+    local shadows = info.hitslanded
+
+    if
+        mob:getFamily() >= 122 and -- Ghrah
+        mob:getFamily() <= 124
+    then
+        shadows = xi.mobskills.shadowBehavior.IGNORE_SHADOWS
+    end
+
+    local dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.SLASHING, shadows)
 
     if not skill:hasMissMsg() then
         target:takeDamage(dmg, mob, xi.attackType.PHYSICAL, xi.damageType.SLASHING)
