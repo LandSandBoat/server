@@ -11,6 +11,10 @@ entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.SOUND_RANGE, 32)
 end
 
+entity.onMobEngaged = function(mob, target)
+    mob:setLocalVar("RepopWarriors", 0)
+end
+
 entity.onMobFight = function(mob, target)
     local battleTime = mob:getBattleTime()
 

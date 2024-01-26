@@ -87,6 +87,11 @@ entity.onAdditionalEffect = function(mob, target, damage)
     return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.ENSTONE)
 end
 
+-- Prevents any stuck logic due to wipes
+entity.onMobDisengage = function(mob)
+    mob:setLocalVar("changeTime", 0)
+end
+
 entity.onMobDeath = function(mob, player, optParams)
     player:addTitle(xi.title.MIST_MELTER)
 end

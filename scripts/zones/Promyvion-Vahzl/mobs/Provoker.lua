@@ -13,6 +13,10 @@ entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
 end
 
+entity.onMobEngaged = function(mob, target)
+    mob:setLocalVar("changeTime", 0)
+end
+
 entity.onMobFight = function(mob, target)
     local changeTime = mob:getLocalVar("changeTime")
     local element = mob:getLocalVar("element")

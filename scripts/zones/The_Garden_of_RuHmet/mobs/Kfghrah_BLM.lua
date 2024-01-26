@@ -17,6 +17,10 @@ entity.onMobSpawn = function(mob)
     mob:addMod(xi.mod.DARK_MEVA, 100)
 end
 
+entity.onMobEngaged = function(mob, target)
+    mob:setLocalVar("changeTime", 0)
+end
+
 entity.onMobRoam = function(mob)
     local roamTime = mob:getLocalVar("roamTime")
     local roamForm

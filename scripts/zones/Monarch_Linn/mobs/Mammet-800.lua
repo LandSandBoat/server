@@ -30,6 +30,7 @@ local changeForm = function(mob)
         mob:setDelay(4000)
         mob:setDamage(90)
     end
+
     mob:setAnimationSub(newform)
     mob:setLocalVar('changeTime', mob:getBattleTime())
 end
@@ -43,8 +44,12 @@ entity.onMobFight = function(mob, target)
     -- Added a random chance to change forms every 3 seconds if 60 seconds have passed, just to make things less formulaic.
         -- May be able to change forms more often.  Witnessed one at ~50 seconds, most were 60-80.
         -- Believe it or not, these changes may be too slow @ 50% chance.  Probability is a pain.
-    if mob:getBattleTime() > mob:getLocalVar('changeTime') + 60 or mob:getLocalVar('changeTime') == 0 and
-       math.random(0, 1) == 1 and not mob:hasStatusEffect(xi.effect.FOOD) then
+    if
+        mob:getBattleTime() > mob:getLocalVar('changeTime') + 60 or
+        mob:getLocalVar('changeTime') == 0 and
+        math.random(0, 1) == 1 and
+        not mob:hasStatusEffect(xi.effect.FOOD)
+    then
         changeForm(mob)
     end
 end
@@ -60,11 +65,14 @@ entity.onMobEngaged = function(mob, target)
                 if i == 19 then
                     break
                 end
+
                 mobID = mobID + 1
                 SpawnMob(mobID):updateEnmity(target)
             end
         end
     end
+
+    mob:setLocalVar('changeTime', 0)
 end
 
 return entity
