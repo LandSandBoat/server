@@ -644,11 +644,11 @@ xi.spells.damage.calculateMagicBonusDiff = function(caster, target, spellId, ski
         mab = mab + caster:getMerit(xi.merit.ANCIENT_MAGIC_ATK_BONUS)
     end
 
-    magicBonusDiff = (100 + mab) / (100 + target:getMod(xi.mod.MDEF) + mDefBarBonus)
+    -- Final operations
+    local finalCasterMAB = (100 + mab) * (1 + caster:getMod(xi.mod.AUTO_MAB_COEFFICIENT) / 100)
+    local finalTargetMDB = 100 + target:getMod(xi.mod.MDEF) + mDefBarBonus
 
-    if magicBonusDiff < 0 then
-        magicBonusDiff = 0
-    end
+    magicBonusDiff = utils.clamp(finalCasterMAB / finalTargetMDB, 0, 10)
 
     return magicBonusDiff
 end
