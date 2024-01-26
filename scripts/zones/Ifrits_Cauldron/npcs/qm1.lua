@@ -12,7 +12,7 @@ local entity = {}
 entity.onTrade = function(player, npc, trade)
     if
         npcUtil.tradeHas(trade, xi.items.RATTLING_EGG) and
-        npcUtil.popFromQM(player, npc, ID.mob.TARASQUE, { claim = false, look = true })
+        npcUtil.popFromQM(player, npc, ID.mob.TARASQUE, { claim = true, look = true })
     then
         player:confirmTrade()
     end

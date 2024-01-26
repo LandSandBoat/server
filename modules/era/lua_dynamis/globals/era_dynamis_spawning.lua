@@ -421,6 +421,15 @@ xi.dynamis.normalDynamicSpawn = function(oMob, oMobIndex, target)
                 groupZoneId = nameObj[job][3],
                 onMobSpawn = function(mobArg)
                     xi.dynamis.setMobStats(mobArg)
+
+                    -- Hydra mobs in Dynamis Beaucedine are immune to sleep
+                    if
+                        mobArg:getFamily() == 359 and
+                        mobArg:getZoneID() == xi.zone.DYNAMIS_BEAUCEDINE
+                    then
+                        mobArg:addImmunity(xi.immunity.SLEEP)
+                    end
+
                     -- set all dyna mobs to same sublink so for example statues link when seeing normal mobs
                     mobArg:setMobMod(xi.mobMod.SUBLINK, xi.dynamis.SUBLINK_ID)
                 end,
@@ -2135,7 +2144,6 @@ xi.dynamis.nmDynamicSpawn = function(mobIndex, oMobIndex, forceLink, zoneID, tar
             end },
 
             ["onMobWeaponSkill"] = { function(mobTarget, mob, skill)
-                xi.dynamis.onMobWeaponSkillDiabolosShard(mobTarget, mob, skill)
             end },
 
             ["onMobDeath"] = { function(mob, player, optParams)
@@ -2724,7 +2732,7 @@ xi.dynamis.setMobStats = function(mob)
 
         mob:setTrueDetection(true)
 
-        if     mob:getFamily() == 359 then -- If Hydra
+        if mob:getFamily() == 359 then -- If Hydra
             mob:setMobLevel(math.random(80, 82))
         elseif mob:getFamily() == 358 then -- If Kindred
             mob:setMobLevel(math.random(77, 80))
@@ -2732,7 +2740,7 @@ xi.dynamis.setMobStats = function(mob)
             mob:setMobLevel(math.random(77, 78))
         end
 
-        if     job == xi.job.WAR then
+        if job == xi.job.WAR then
             local params = {  }
             params.specials = {  }
             params.specials.skill = {  }

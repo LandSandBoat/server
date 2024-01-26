@@ -20,7 +20,7 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    target:addStatusEffect(xi.effect.LEATHERCRAFT_IMAGERY, 3, 0, 120)
+    target:addStatusEffect(xi.effect.LEATHERCRAFT_IMAGERY, 3, 0, 480)
 end
 
 itemObject.onEffectGain = function(target, effect)

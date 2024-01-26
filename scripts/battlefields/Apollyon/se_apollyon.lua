@@ -269,6 +269,7 @@ content.groups =
         mods =
         {
             [xi.mod.UDMGPHYS] = -8000,
+            [xi.mod.UDMGRANGE] = -8000,
             [xi.mod.MAGIC_NULL] = 100,
         },
 
@@ -296,6 +297,7 @@ content.groups =
         death = function(battlefield, mob, count)
             local boss = mob:getZone():queryEntitiesByName("Evil_Armory")[1]
             boss:setMod(xi.mod.UDMGPHYS, (8 - count) * -1000)
+            boss:setMod(xi.mod.UDMGRANGE, (8 - count) * -1000)
             if count == 1 then
                 -- Make the boss become targetable after the first kill
                 boss:setBattleID(0)

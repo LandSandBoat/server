@@ -669,12 +669,13 @@ enum class Mod
     LIFE_CYCLE_EFFECT    = 1029, // Adds bonus HP% returned to the luopan when using Life Cycle
     AURA_SIZE            = 1030, // Used to extend aura size, the formula is 6.25 + (PEntity->getMod(Mod::AURA_SIZE) / 100) so adding 100 will make this 7.25
 
-    ENSPELL           = 341, // stores the type of enspell active (0 if nothing)
-    ENSPELL_DMG       = 343, // stores the base damage of the enspell before reductions
-    ENSPELL_DMG_BONUS = 432, //
-    ENSPELL_CHANCE    = 856, // Chance of enspell activating (0 = 100%, 10 = 10%, 30 = 30%, ...)
-    SPIKES            = 342, // store the type of spike spell active (0 if nothing)
-    SPIKES_DMG        = 344, // stores the base damage of the spikes before reductions
+    ENSPELL           = 341,  // stores the type of enspell active (0 if nothing)
+    ENSPELL_DMG       = 343,  // stores the base damage of the enspell before reductions
+    ENSPELL_DMG_BONUS = 432,  //
+    ENSPELL_CHANCE    = 856,  // Chance of enspell activating (0 = 100%, 10 = 10%, 30 = 30%, ...)
+    SPIKES            = 342,  // store the type of spike spell active (0 if nothing)
+    SPIKES_DMG        = 344,  // stores the base damage of the spikes before reductions
+    SPIKES_DMG_BONUS  = 1079, // Increases Blaze/Ice/Shock spikes damage by percentage (e.g. mod value 50 = +50% spikes damage)
 
     TP_BONUS    = 345, //
     SAVETP      = 880, // SAVETP Effect for Miser's Roll / ATMA / Hagakure.
@@ -1028,7 +1029,7 @@ enum class Mod
     // 217 to 223
     // 271 to 280
     //
-    // 1079 and onward are RESERVED for LSB/core values
+    // SPARE = 1080 and onward
     //
     // ANY ASB ADDITIONS SHOULD BE 2002++
 };

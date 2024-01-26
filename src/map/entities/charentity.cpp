@@ -324,7 +324,7 @@ void CCharEntity::pushPacket(CBasicPacket* packet)
     TracyZoneString(GetName());
     TracyZoneHex16(packet->getType());
 
-    moduleutils::OnPushPacket(packet);
+    moduleutils::OnPushPacket(this, packet);
 
     if (packet->getType() == 0x5B)
     {

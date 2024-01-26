@@ -2765,9 +2765,9 @@ INSERT INTO `mob_droplist` VALUES (281,0,0,1000,4822,@RARE);      -- Scroll Of F
 INSERT INTO `mob_droplist` VALUES (281,0,0,1000,1162,@COMMON);    -- Tonberry Lantern (Common, 10%)
 
 -- ZoneID: 227 - Blackbeard
-INSERT INTO `mob_droplist` VALUES (282,0,0,1000,880,280);   -- Bone Chip (28.0%)
-INSERT INTO `mob_droplist` VALUES (282,0,0,1000,18396,200); -- Sea Robber Cudgel (20.0%)
-INSERT INTO `mob_droplist` VALUES (282,2,0,1000,880,0);     -- Bone Chip (Steal)
+INSERT INTO `mob_droplist` VALUES (282,0,0,1000,880,@VCOMMON);   -- Bone Chip (Very Common, 24%)
+INSERT INTO `mob_droplist` VALUES (282,0,0,1000,18396,@VCOMMON); -- Sea Robber Cudgel (Very Common, 24%)
+INSERT INTO `mob_droplist` VALUES (282,2,0,1000,880,0);          -- Bone Chip (Steal)
 
 -- ZoneID:   2 - Orcish Fighter
 -- ZoneID:   2 - Orcish Cursemaker
@@ -15096,7 +15096,7 @@ INSERT INTO `mob_droplist` VALUES (1871,2,0,1000,751,0);   -- Platinum Beastcoin
 INSERT INTO `mob_droplist` VALUES (1872,0,0,1000,12342,@RARE); -- Lantern Shield (Rare, 5%)
 
 -- ZoneID: 105 - Orcish Beastrider
--- INSERT INTO `mob_droplist` VALUES (1873,0,0,1000,1706,@RARE);   -- Nyumomo Doll (Rare, 5%) WOTG item
+INSERT INTO `mob_droplist` VALUES (1873,0,0,1000,1706,@RARE);   -- Nyumomo Doll (Rare, 5%)
 INSERT INTO `mob_droplist` VALUES (1873,2,0,1000,750,0);        -- Silver Beastcoin (Steal)
 
 -- ZoneID: 149 - Orcish Beastrider
@@ -15143,7 +15143,7 @@ INSERT INTO `mob_droplist` VALUES (1878,2,0,1000,748,0); -- Gold Beastcoin (Stea
 
 -- ZoneID: 105 - Orcish Brawler
 -- ZoneID: 105 - Orcish Impaler
--- INSERT INTO `mob_droplist` VALUES (1879,0,0,1000,1706,@RARE);   -- Nyumomo Doll (Rare, 5%) WOTG item
+INSERT INTO `mob_droplist` VALUES (1879,0,0,1000,1706,@RARE);   -- Nyumomo Doll (Rare, 5%)
 INSERT INTO `mob_droplist` VALUES (1879,2,0,1000,750,0);        -- Silver Beastcoin (Steal)
 INSERT INTO `mob_droplist` VALUES (1879,4,0,1000,4376,0);       -- Strip Of Meat Jerky (Despoil)
 
@@ -15530,7 +15530,7 @@ INSERT INTO `mob_droplist` VALUES (1929,0,0,1000,12944,@VRARE); -- Scale Greaves
 INSERT INTO `mob_droplist` VALUES (1929,2,0,1000,656,0);        -- Beastcoin (Steal)
 
 -- ZoneID: 105 - Orcish Nightraider
--- INSERT INTO `mob_droplist` VALUES (1930,0,0,1000,1706,@RARE);   -- Nyumomo Doll (Rare, 5%) WOTG item
+INSERT INTO `mob_droplist` VALUES (1930,0,0,1000,1706,@RARE);   -- Nyumomo Doll (Rare, 5%)
 INSERT INTO `mob_droplist` VALUES (1930,2,0,1000,750,0);        -- Silver Beastcoin (Steal)
 
 -- ZoneID: 149 - Orcish Nightraider
@@ -17802,9 +17802,9 @@ INSERT INTO `mob_droplist` VALUES (2248,0,0,1000,4526,@ALWAYS); -- Silkworm Egg 
 INSERT INTO `mob_droplist` VALUES (2248,0,0,1000,816,@COMMON); -- Spool Of Silk Thread (Common, 15%)
 
 -- ZoneID: 228 - Silverhook
-INSERT INTO `mob_droplist` VALUES (2249,0,0,1000,18395,320); -- Seawolf Cudgel (32.0%)
-INSERT INTO `mob_droplist` VALUES (2249,0,0,1000,880,200);   -- Bone Chip (20.0%)
-INSERT INTO `mob_droplist` VALUES (2249,2,0,1000,880,0);     -- Bone Chip (Steal)
+INSERT INTO `mob_droplist` VALUES (2249,0,0,1000,18395,@VCOMMON); -- Seawolf Cudgel (Very Common, 24%)
+INSERT INTO `mob_droplist` VALUES (2249,0,0,1000,880,@VCOMMON);   -- Bone Chip (Very Common, 24%)
+INSERT INTO `mob_droplist` VALUES (2249,2,0,1000,880,0);          -- Bone Chip (Steal)
 
 -- ZoneID:  89 - Silver Quadav
 INSERT INTO `mob_droplist` VALUES (2250,0,0,1000,2531,@UNCOMMON); -- Shard Of Obsidian (Uncommon, 10%)

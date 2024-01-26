@@ -158,15 +158,16 @@ void CTransportHandler::InitializeTransport()
 
             zoneTown.npcDoor  = zoneutils::GetEntity(sql->GetUIntData(2), TYPE_NPC);
             zoneTown.ship.npc = zoneutils::GetEntity(sql->GetUIntData(1), TYPE_SHIP);
-
-            // Moved here, you can't access the npcDoor or .ship.npc if they're nullptr, so the following lines cause a read access error
-            if (zoneTown.npcDoor == nullptr || zoneTown.ship.npc == nullptr)
+            if (zoneTown.ship.npc)
             {
-                ShowError("Transport <%u>: transport or door not found", (uint8)sql->GetIntData(0));
+                zoneTown.ship.npc->name.resize(8);
+            }
+            else
+            {
+                ShowError("Transport <%u>: transport not found", (uint8)sql->GetIntData(0));
                 continue;
             }
 
-            zoneTown.ship.npc->name.resize(8);
             zoneTown.ship.npc->manualConfig = true;
 
             zoneTown.ship.animationArrive = (uint8)sql->GetIntData(9);
@@ -185,6 +186,11 @@ void CTransportHandler::InitializeTransport()
             zoneTown.ship.setVisible(false);
             zoneTown.closeDoor(false);
 
+            if (zoneTown.npcDoor == nullptr)
+            {
+                ShowError("Transport <%u>: door not found", (uint8)sql->GetIntData(0));
+                continue;
+            }
             if (zoneTown.ship.timeArriveDock < 10)
             {
                 ShowError("Transport <%u>: time_anim_arrive must be > 10", (uint8)sql->GetIntData(0));

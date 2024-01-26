@@ -33,6 +33,7 @@ zones[xi.zone.PORT_JEUNO] =
         COUNTER_NPC                   = 7077, -- I think the airships are a subtle form of pressure on the other three nations. That way, Jeuno can maintain the current balance of power.
         DEPARTURE_NPC                 = 7086, -- Have a safe flight!
         ARRIVAL_NPC                   = 7087, -- Enjoy your stay in Jeuno!
+        CUSTOMS_CAUGHT                = 7079, -- Hey, Stop right there!
         DAPOL_DIALOG                  = 7100, -- Welcome to Port Jeuno, the busiest airship hub anywhere! You can't miss the awe-inspiring view of airships in flight!
         SECURITY_DIALOG               = 7103, -- Port Jeuno must remain secure. After all, if anything happened to the archduke, it would change the world!
         MOGHOUSE_EXIT                 = 7184, -- You have learned your way through the back alleys of Jeuno! Now you can exit to any area from your residence.

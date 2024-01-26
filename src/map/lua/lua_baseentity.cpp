@@ -10379,6 +10379,28 @@ void CLuaBaseEntity::sendTractor(float xPos, float yPos, float zPos, uint8 rotat
 }
 
 /************************************************************************
+ *  Function: allowSendRaisePrompt()
+ *  Purpose : Allows the raise prompt to be sent again to client
+ *            if for example player was moved while dead (thus removing the prompt)
+ *  Example : player:allowSendRaisePrompt()
+ ************************************************************************/
+
+void CLuaBaseEntity::allowSendRaisePrompt()
+{
+    if (m_PBaseEntity == nullptr || m_PBaseEntity->objtype != TYPE_PC)
+    {
+        ShowError("m_PBaseEntity is null or not a Player.");
+        return;
+    }
+
+    if (m_PBaseEntity->PAI->IsCurrentState<CDeathState>())
+    {
+        auto deathState = static_cast<CDeathState*>(m_PBaseEntity->PAI->GetCurrentState());
+        deathState->allowSendRaise();
+    }
+}
+
+/************************************************************************
  *  Function: countdown()
  *  Purpose : Starts or clears a visible countdown bar for player
  *  Example : player:countdown(60)
@@ -17226,6 +17248,7 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("sendRaise", CLuaBaseEntity::sendRaise);
     SOL_REGISTER("sendReraise", CLuaBaseEntity::sendReraise);
     SOL_REGISTER("sendTractor", CLuaBaseEntity::sendTractor);
+    SOL_REGISTER("allowSendRaisePrompt", CLuaBaseEntity::allowSendRaisePrompt);
 
     SOL_REGISTER("countdown", CLuaBaseEntity::countdown);
     SOL_REGISTER("enableEntities", CLuaBaseEntity::enableEntities);

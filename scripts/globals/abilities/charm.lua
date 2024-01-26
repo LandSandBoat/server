@@ -29,8 +29,22 @@ end
 
 abilityObject.onUseAbility = function(player, target, ability)
     if target:getMobMod(xi.mobMod.CHARMABLE) == 0 then
-        ability:setMsg(xi.msg.basic.JA_NO_EFFECT)
-        return
+        if not target:hasImmunity(xi.immunity.BIND) then
+            ability:setMsg(xi.msg.basic.JA_ENFEEB_IS)
+            local bindDuration = math.random(2, 8)
+
+            -- based on rumors on forums
+            -- needs capture for NM, Bind Immune, Bind Res Build, Ice Resist, etc
+            if target:isNM() then
+                bindDuration = bindDuration / 2
+            end
+
+            target:addStatusEffect(xi.effect.BIND, 1, 0, bindDuration, 0, 0)
+            return xi.effect.BIND
+        else
+            ability:setMsg(xi.msg.basic.JA_NO_EFFECT)
+            return
+        end
     end
 
     if target:isPC() then

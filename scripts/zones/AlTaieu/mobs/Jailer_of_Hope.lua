@@ -20,7 +20,7 @@ entity.onMobSpawn = function(mob)
     mob:setMod(xi.mod.ATT, 540)
     mob:setMod(xi.mod.DEF, 520)
     mob:setMod(xi.mod.EVA, 323)
-
+    mob:setMobMod(xi.mobMod.NO_AGGRO, 1)
     xi.mix.jobSpecial.config(mob, {
         specials =
         {
@@ -34,6 +34,7 @@ entity.onMobEngaged = function(mob, target) -- Coming out of water animation
     mob:setUntargetable(false)
     mob:setAnimationSub(6)
     mob:setLocalVar("spellTime", 0)
+    mob:setMobMod(xi.mobMod.NO_AGGRO, 0)
 end
 
 entity.onSpellPrecast = function(mob, spell)

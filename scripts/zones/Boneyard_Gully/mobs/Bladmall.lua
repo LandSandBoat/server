@@ -12,6 +12,10 @@ local entity = {}
 entity.onMobSpawn = function(mob)
     mob:setMobMod(xi.mobMod.HP_STANDBACK, 1)
     mob:setMod(xi.mod.MDEF, 50)
+    mob:addImmunity(xi.immunity.BIND)
+    mob:addImmunity(xi.immunity.SLEEP)
+    mob:addImmunity(xi.immunity.SILENCE)
+    mob:addImmunity(xi.immunity.GRAVITY)
 end
 
 entity.onMobFight = function(mob, target)
@@ -50,7 +54,8 @@ end
 
 entity.onMobDeath = function(mob, player, optParams)
     -- Adds die with parent
-    if optParams.isKiller then
+    if mob:getLocalVar("despawnedAdds") == 0 then
+        mob:setLocalVar("despawnedAdds", 1)
         local bfID = mob:getBattlefield():getArea()
         for _, petId in ipairs(ID.shellWeDance[bfID].BLADMALL_PET_IDS) do
             local pet = GetMobByID(petId)

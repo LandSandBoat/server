@@ -407,7 +407,7 @@ xi.crafting.unionRepresentativeTriggerRenounceCheck = function(player, eventId, 
 
         for craftID = xi.skill.WOODWORKING, xi.skill.COOKING do
             local rank = player:getSkillRank(craftID)
-            if rank < 7 then
+            if rank < 6 then
                 bitmask = bit.bor(bitmask, bit.lshift(1, craftID - 48))
             else
                 count = count + 1

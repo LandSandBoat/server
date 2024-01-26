@@ -8,17 +8,15 @@ require("scripts/globals/mobs")
 -----------------------------------
 local entity = {}
 
-entity.onMobInitialize = function(mob)
+entity.onMobSpawn = function(mob, target)
     mob:setMod(xi.mod.SILENCERES, 90)
     mob:setMod(xi.mod.ATT, 391)
     mob:setMod(xi.mod.DEF, 345)
     mob:addMod(xi.mod.VIT, 43)
     mob:addMod(xi.mod.DOUBLE_ATTACK, 10)
+    mob:setMod(xi.mod.EVA, 397)
     mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
     mob:setMobMod(xi.mobMod.MAGIC_COOL, 35)
-end
-
-entity.onMobSpawn = function(mob, target)
     GetNPCByID(ID.npc.PORTAL_TO_BYAKKO):setAnimation(xi.anim.CLOSE_DOOR)
     mob:setMagicCastingEnabled(false)
 end

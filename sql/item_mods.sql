@@ -2873,6 +2873,7 @@ INSERT INTO `item_mods` VALUES (10714,9,8);    -- DEX: 8
 INSERT INTO `item_mods` VALUES (10714,12,8);   -- INT: 8
 INSERT INTO `item_mods` VALUES (10714,115,15); -- ELEM: 15
 INSERT INTO `item_mods` VALUES (10714,500,5);  -- ITEM_ADDEFFECT_DMG: 5
+INSERT INTO `item_mods` VALUES (10714,1079,30); -- Enhances effect of "Spikes" spells
 
 -- Assassins Culottes +2
 INSERT INTO `item_mods` VALUES (10715,1,44);  -- DEF: 44
@@ -25568,6 +25569,7 @@ INSERT INTO `item_mods` VALUES (15121,1,33);   -- DEF: 33
 INSERT INTO `item_mods` VALUES (15121,5,16);   -- MP: 16
 INSERT INTO `item_mods` VALUES (15121,9,5);    -- DEX: 5
 INSERT INTO `item_mods` VALUES (15121,115,10); -- ELEM: 10
+INSERT INTO `item_mods` VALUES (15121,1079,20); -- Enhances effect of "Spikes" spells
 
 -- Assassins Culottes
 INSERT INTO `item_mods` VALUES (15122,1,34);  -- DEF: 34
@@ -27870,6 +27872,7 @@ INSERT INTO `item_mods` VALUES (15584,1,34);   -- DEF: 34
 INSERT INTO `item_mods` VALUES (15584,5,16);   -- MP: 16
 INSERT INTO `item_mods` VALUES (15584,9,6);    -- DEX: 6
 INSERT INTO `item_mods` VALUES (15584,115,12); -- ELEM: 12
+INSERT INTO `item_mods` VALUES (15584,1079,20); -- Enhances effect of "Spikes" spells
 
 -- Assassins Culottes +1
 INSERT INTO `item_mods` VALUES (15585,1,35);  -- DEF: 35

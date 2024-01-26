@@ -36,6 +36,12 @@ local function returnToAirship(player)
     elseif instance == 3 then
         player:setPos(499.969, 56.652, -806.132, 193)
     end
+
+    -- allow resending raise/reraise prompt since we moved player
+    -- which removes the prompt from player screen
+    if player:isDead() then
+        player:allowSendRaisePrompt()
+    end
 end
 
 -----------------------------------

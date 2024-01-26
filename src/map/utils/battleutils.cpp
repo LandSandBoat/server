@@ -106,6 +106,9 @@ namespace battleutils
      *                                                                       *
      ************************************************************************/
 
+    const float worldAngleMinDistance = 0.5f;
+    const uint8 worldAngleMaxDeviance = 4;
+
     void LoadSkillTable()
     {
         const char* fmtQuery = "SELECT r0,r1,r2,r3,r4,r5,r6,r7,r8,r9,r10,r11,r12,r13 \
@@ -787,6 +790,11 @@ namespace battleutils
         ELEMENT spikeElement = (ELEMENT)((uint8)GetSpikesDamageType(Action->spikesEffect) - (uint8)DAMAGE_TYPE::ELEMENTAL);
         int32   damage       = Action->spikesParam;
 
+        if (PDefender->getMod(Mod::SPIKES_DMG_BONUS) > 0)
+        {
+            damage *= 1 + (PDefender->getMod(Mod::SPIKES_DMG_BONUS) / 100.f);
+        }
+
         if (static_cast<SPIKES>(Action->spikesEffect) == SPIKES::SPIKE_DREAD)
         {
             // drain same as damage taken
@@ -1062,7 +1070,7 @@ namespace battleutils
             // spikes landed
             if (spikesType == SUBEFFECT_CURSE_SPIKES)
             {
-                Action->spikesMessage = 0; // log says nothing? // TODO: find "Additional Effect: Curse" message
+                Action->spikesMessage = MSGBASIC_SPIKES_ARMOR_SUBEFFECT;
                 Action->spikesParam   = EFFECT_CURSE;
             }
             else
@@ -4528,168 +4536,119 @@ namespace battleutils
     }
 
     /*
-     * Find if any party members are in position for trick attack.  Do this by making a narrow triangle:
-     *  one endpoint at the mob, and the other two endpoints being equidistant from the TA user, perpendicular to
-     *  the line between the mob and the TA user.  Find the slope of the line between the TA user and the mob, and
-     *  decide whether to use x or z as the dependent variable (to avoid big numbers and divide by 0 errors on
-     *  vertical slopes).  Using this slope, we can find the angle of the perpendicular line to the x or z line
-     *  (depending on what the dependent var is), and using that angle, the disassembled x and z components to that
-     *  line.  Divide those by 2 for a half yalm length line for each side of the base of the triangle, and we get
-     *  the min and max values for x/z around the TA user.  Now it's simply a matter of first: making sure the
-     *  TA target is closer than the TA user, and that the TA targets x and z coordinates fall within the triangle
-     *  we made.  Using the min/max points and the mobs coordinate, we can construct min and max slopes, check that
-     *  the x or z coordinates are between the mob and player, and finally calculate where the z coordinate should
-     *  be based on the users x coordinate (or the other way around in a z dependent scenario) and check if the
-     *  actual z coordinate is between those two values.
+        pass result of worldAngle(anchorEntity, firstEntity) instead of calculating everytime to allow TA to be more efficient
+        Note the order of worldAngle calls, the anchor must be first in all comparisons
+        Calculates world angle between other entity and anchor entity,
+        then determines if the difference of those angles is within acceptable range for moves that require the three to be "in a straight line"
+        Used for Trick Attack and Cover: separate checks for distance/party membership must be done to confirm eligability
+    */
+    inline bool areInLine(uint8 firstEntityWorldAngle, CBattleEntity* anchorEntity, CBattleEntity* otherEntity)
+    {
+        // X-degree angle threshold, centered on the firstPlayer's world angle
+        // X = 10 => 10/2 * 255 / 360 ~ 3.5 rotation diff, rounded to 4 which really gives X~11.3
+        int16 angleDiff = angleDifference(firstEntityWorldAngle, worldAngle(anchorEntity->loc.p, otherEntity->loc.p));
+
+        // Useful for debugging if trick attack/cover aren't reliably calculating eligability, but chatty otherwise
+        // ShowDebug("InLine check angleDiff: %d\n", angleDiff);
+
+        return std::abs(angleDiff) <= worldAngleMaxDeviance;
+    }
+
+    /*
+     *  Find if any party members are in position for trick attack.  Do this by comparing the world angle between:
+     *  1. the TA user and the TA target
+     *  2. the TA user and the Mob
+     *  First, build a list of players that are closer to the mob than the TA user,
+     *   then sort by distance and choose the first that succeeds in meeting the criteria of areInline function
      */
 
     CBattleEntity* getAvailableTrickAttackChar(CBattleEntity* taUser, CBattleEntity* PMob)
     {
+        TracyZoneScoped;
         if (!taUser->StatusEffectContainer->HasStatusEffect(EFFECT_TRICK_ATTACK))
         {
             return nullptr;
         }
 
-        float taUserX = taUser->loc.p.x;
-        float taUserZ = taUser->loc.p.z;
-        float mobX    = PMob->loc.p.x;
-        float mobZ    = PMob->loc.p.z;
-
-        float xdif       = taUserX - mobX;
-        float zdif       = taUserZ - mobZ;
-        float slope      = 0;
-        float maxSlope   = 0;
-        float minSlope   = 0;
-        bool  zDependent = true; // using a slope where z is dependent var
-
-        if (abs(xdif) <= abs(zdif))
-        {
-            slope = xdif / zdif;
-
-            float angle = (float)atan((double)1) * 2 - atan(slope);
-
-            float zoffset   = cos(angle) / 2;
-            float xoffset   = sin(angle) / 2;
-            float maxXpoint = taUserX + xoffset;
-            float maxZpoint = taUserZ - zoffset;
-            float minXpoint = taUserX - xoffset;
-            float minZpoint = taUserZ + zoffset;
-            maxSlope        = ((maxXpoint - mobX) / (maxZpoint - mobZ));
-            minSlope        = ((minXpoint - mobX) / (minZpoint - mobZ));
-            zDependent      = false;
-        }
-        else
-        {
-            slope = zdif / xdif;
-
-            float angle = (float)atan((double)1) * 2 - atan(slope);
-
-            float xoffset   = cos(angle) / 2;
-            float zoffset   = sin(angle) / 2;
-            float maxXpoint = taUserX - xoffset;
-            float maxZpoint = taUserZ + zoffset;
-            float minXpoint = taUserX + xoffset;
-            float minZpoint = taUserZ - zoffset;
-            maxSlope        = (maxZpoint - mobZ) / (maxXpoint - mobX);
-            minSlope        = (minZpoint - mobZ) / (minXpoint - mobX);
-        }
-
-        // Determines if a given party/alliance member is a valid candidate for Trick Attack
-        auto isValidTrickAttackHelper = [&](CBattleEntity* PEntity) -> bool
-        {
-            // Dead PEntity should not be TA-able
-            if (PEntity->isDead())
-            {
-                return false;
-            }
-            if (taUser->id != PEntity->id && distance(PEntity->loc.p, PMob->loc.p) <= distance(taUser->loc.p, PMob->loc.p))
-            {
-                float memberXdif = PEntity->loc.p.x - mobX;
-                float memberZdif = PEntity->loc.p.z - mobZ;
-                if (zDependent)
-                {
-                    if ((memberZdif <= memberXdif * maxSlope) && (memberZdif >= memberXdif * minSlope))
-                    {
-                        // finally found a TA partner
-                        return true;
-                    }
-                }
-                else
-                {
-                    if ((memberXdif <= memberZdif * maxSlope) && (memberXdif >= memberZdif * minSlope))
-                    {
-                        // finally found a TA partner
-                        return true;
-                    }
-                }
-            }
-
-            return false;
-        };
-
-        auto checkTrusts = [&](CBattleEntity* PEntity) -> CBattleEntity*
-        {
-            if (auto* PChar = dynamic_cast<CCharEntity*>(PEntity))
-            {
-                for (auto* PTrust : PChar->PTrusts)
-                {
-                    if (isValidTrickAttackHelper(PTrust))
-                    {
-                        return PTrust;
-                    }
-                }
-            }
-
-            return nullptr;
-        };
+        // angle and distance between mob and TA user
+        uint8                                         angleTAmob = worldAngle(PMob->loc.p, taUser->loc.p);
+        auto                                          distTAmob  = distance(taUser->loc.p, PMob->loc.p);
+        std::vector<std::pair<float, CBattleEntity*>> taTargetList;
 
         if (taUser->PParty != nullptr)
         {
+            std::vector<CParty*> taPartyList;
             if (taUser->PParty->m_PAlliance != nullptr)
             {
-                for (auto& a : taUser->PParty->m_PAlliance->partyList)
-                {
-                    for (std::size_t i = 0; i < a->members.size(); ++i)
-                    {
-                        CBattleEntity* member = a->members.at(i);
-                        if (isValidTrickAttackHelper(member))
-                        {
-                            return member;
-                        }
-
-                        if (auto* potentialTrust = checkTrusts(member))
-                        {
-                            return potentialTrust;
-                        }
-                    }
-                }
+                taPartyList = taUser->PParty->m_PAlliance->partyList;
             }
             else
-            { // No alliance
-                for (auto member : taUser->PParty->members)
+            {
+                taPartyList.emplace_back(taUser->PParty);
+            }
+
+            // Collect all potential TA targets who are closer to the mob than the TA user
+            for (auto&& party : taPartyList)
+            {
+                for (auto&& member : party->members)
                 {
-                    if (isValidTrickAttackHelper(member))
+                    float distTAtarget = distance(member->loc.p, PMob->loc.p);
+                    // require closer target not be closer than .5 yalms (.5*.5=.25 distsquared) to mob
+                    if (distTAtarget >= worldAngleMinDistance && distTAtarget < distTAmob)
                     {
-                        return member;
+                        taTargetList.emplace_back(distTAtarget, member);
                     }
 
-                    if (auto* potentialTrust = checkTrusts(member))
+                    if (auto* PChar = dynamic_cast<CCharEntity*>(member))
                     {
-                        return potentialTrust;
+                        for (auto* PTrust : PChar->PTrusts)
+                        {
+                            float distTAtarget = distance(PTrust->loc.p, PMob->loc.p);
+                            // require closer target not be closer than .5 yalms (.5*.5=.25 distsquared) to mob
+                            if (distTAtarget >= worldAngleMinDistance && distTAtarget < distTAmob)
+                            {
+                                taTargetList.emplace_back(distTAtarget, PTrust);
+                            }
+                        }
                     }
                 }
             }
         }
 
-        // Check fellow for TA target
+        // Check TA user's fellow
+        /*
         if (auto* PChar = dynamic_cast<CCharEntity*>(taUser))
         {
-            if (PChar->m_PFellow)
+            if (PChar->PFellow)
             {
-                if (auto* fellow = dynamic_cast<CBattleEntity*>(PChar->m_PFellow))
+                if (auto* fellow = dynamic_cast<CBattleEntity*>(PChar->PFellow))
                 {
-                    if (isValidTrickAttackHelper(fellow))
-                        return fellow;
+                    float distTAtarget = distance(fellow->loc.p, PMob->loc.p);
+                    // require closer target not be closer than .5 yalms (.5*.5=.25 distsquared) to mob
+                    if (distTAtarget >= worldAngleMinDistance && distTAtarget < distTAmob)
+                    {
+                        taTargetList.emplace_back(distTAtarget, fellow);
+                    }
+                }
+            }
+        }
+        */
+
+        if (!taTargetList.empty())
+        {
+            // sorts by distance then by pointer id (only if floats are equal)
+            std::sort(taTargetList.begin(), taTargetList.end());
+            for (auto const& [dist, potentialTAtarget] : taTargetList)
+            {
+                if (taUser->id == potentialTAtarget->id || // can't TA self
+                    potentialTAtarget->isDead())           // Dead entity should not be TA-able
+                {
+                    continue;
+                }
+
+                if (areInLine(angleTAmob, PMob, potentialTAtarget))
+                {
+                    return potentialTAtarget;
                 }
             }
         }
@@ -7275,73 +7234,17 @@ namespace battleutils
 
             if (PCoverAbilityUser != nullptr)
             {
-                float coverAbilityTargetX = PCoverAbilityTarget->loc.p.x;
-                float coverAbilityTargetZ = PCoverAbilityTarget->loc.p.z;
-                float mobX                = PMob->loc.p.x;
-                float mobZ                = PMob->loc.p.z;
+                // using same variable names as trick attack function, for consistent understanding
+                uint8 angleTAmob = worldAngle(PMob->loc.p, PCoverAbilityUser->loc.p);
+                float distTAmob  = distance(PCoverAbilityUser->loc.p, PMob->loc.p);
 
-                float xdif       = coverAbilityTargetX - mobX;
-                float zdif       = coverAbilityTargetZ - mobZ;
-                float slope      = 0;
-                float maxSlope   = 0;
-                float minSlope   = 0;
-                bool  zDependent = true; // using a slope where z is dependent var
-
-                if (abs(xdif) <= abs(zdif))
+                // check if cover user is within melee range and that cover target is in-line behind
+                if (distTAmob <= static_cast<float>(PMob->GetMeleeRange()) &&        // make sure cover user is within melee range
+                    distTAmob >= worldAngleMinDistance &&                            // require closer target not be closer than .5 yalms (.5*.5=.25 distsquared) to mob
+                    distTAmob < distance(PCoverAbilityTarget->loc.p, PMob->loc.p) && // make sure cover user is closer to the mob than cover target
+                    areInLine(angleTAmob, PMob, PCoverAbilityTarget))
                 {
-                    slope = xdif / zdif;
-
-                    float angle = (float)atan((double)1) * 2 - atan(slope);
-
-                    float zoffset   = cos(angle) / 2;
-                    float xoffset   = sin(angle) / 2;
-                    float maxXpoint = mobX + xoffset;
-                    float maxZpoint = mobZ - zoffset;
-                    float minXpoint = mobX - xoffset;
-                    float minZpoint = mobZ + zoffset;
-
-                    maxSlope = ((maxXpoint - coverAbilityTargetX) / (maxZpoint - coverAbilityTargetZ));
-                    minSlope = ((minXpoint - coverAbilityTargetX) / (minZpoint - coverAbilityTargetZ));
-
-                    zDependent = false;
-                }
-                else
-                {
-                    slope = zdif / xdif;
-
-                    float angle = (float)atan((double)1) * 2 - atan(slope);
-
-                    float xoffset   = cos(angle) / 2;
-                    float zoffset   = sin(angle) / 2;
-                    float maxXpoint = mobX - xoffset;
-                    float maxZpoint = mobZ + zoffset;
-                    float minXpoint = mobX + xoffset;
-                    float minZpoint = mobZ - zoffset;
-
-                    maxSlope = (maxZpoint - coverAbilityTargetZ) / (maxXpoint - coverAbilityTargetX);
-                    minSlope = (minZpoint - coverAbilityTargetZ) / (minXpoint - coverAbilityTargetX);
-                }
-
-                if (distance(PCoverAbilityUser->loc.p, PMob->loc.p) <= (float)PMob->GetMeleeRange() && // make sure cover user is within melee range
-                    distance(PCoverAbilityUser->loc.p, PMob->loc.p) <=
-                        distance(PCoverAbilityTarget->loc.p, PMob->loc.p)) // make sure cover user is closer to the mob than cover target
-                {
-                    float coverAbilityUserXdif = PCoverAbilityUser->loc.p.x - coverAbilityTargetX;
-                    float coverAbilityUserZdif = PCoverAbilityUser->loc.p.z - coverAbilityTargetZ;
-                    if (zDependent)
-                    {
-                        if ((coverAbilityUserZdif <= coverAbilityUserXdif * maxSlope) && (coverAbilityUserZdif >= coverAbilityUserXdif * minSlope))
-                        {
-                            return PCoverAbilityUser;
-                        }
-                    }
-                    else
-                    {
-                        if ((coverAbilityUserXdif <= coverAbilityUserZdif * maxSlope) && (coverAbilityUserXdif >= coverAbilityUserZdif * minSlope))
-                        {
-                            return PCoverAbilityUser;
-                        }
-                    }
+                    return PCoverAbilityUser;
                 }
             }
         }

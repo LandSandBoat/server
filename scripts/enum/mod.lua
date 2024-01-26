@@ -376,6 +376,7 @@ xi.mod =
     ENSPELL_CHANCE                  = 856,
     SPIKES_DMG                      = 344,
     TP_BONUS                        = 345,
+    SPIKES_DMG_BONUS                = 1079, -- Increases Blaze/Ice/Shock spikes damage by percentage (e.g. mod value 50 = +50% spikes damage)
 
     -- Warrior
     BERSERK_POTENCY                 = 948,  -- Augments "Berserk"/Enhances "Berserk" effect (Conqueror)

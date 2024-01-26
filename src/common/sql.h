@@ -143,6 +143,18 @@ public:
         return QueryStr(query_v.c_str());
     }
 
+    /// Executes a query.
+    /// Any previous result is freed.
+    /// The query is constructed as if it was fmtlib.
+    ///
+    /// @return SQL_SUCCESS or SQL_ERROR
+    template <typename... Args>
+    int32 QueryFmt(const char* query, Args... args)
+    {
+        std::string query_v = fmt::format(query, args...);
+        return QueryStr(query_v.c_str());
+    }
+
     uint64 AffectedRows();
 
     /// Returns the number of the AUTO_INCREMENT column of the last INSERT/UPDATE query.

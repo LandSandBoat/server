@@ -21,12 +21,12 @@ entity.onMobDisengage = function(mob)
         DespawnMob(mob:getID())
     end
 
-    DisallowRespawn(ID.mob.CITIPATI, true)
+    DisallowRespawn(mob:getID(), true)
 end
 
 entity.onMobDeath = function(mob, player, optParams)
     xi.hunts.checkHunt(mob, player, 278)
-    DisallowRespawn(ID.mob.CITIPATI, true)
+    DisallowRespawn(mob:getID(), true)
 end
 
 entity.onMobDespawn = function(mob, player)

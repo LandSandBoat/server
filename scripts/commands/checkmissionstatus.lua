@@ -1,5 +1,5 @@
 -----------------------------------
--- func: checkmissionstatus <Log ID> <Player>
+-- func: checkmissionstatus (player) (log ID) (index)
 -- desc: Prints current missionStatus for the given LogID and target Player to the in game chatlog
 -----------------------------------
 require("scripts/globals/missions")

@@ -457,7 +457,7 @@ REPLACE INTO `mob_spawn_points` (`mobid`, `spawnset`, `mobname`, `polutils_name`
     (16912835, 0,  'Ruaern',                   'Ru\'aern',                 48,  679.019,   -4.256,    -220.189,  29        ),
     (16912836, 0,  'Ruaern',                   'Ru\'aern',                 47,  681.873,   -4.506,    -218.466,  94        ),
     (16912837, 0,  'Ruaern',                   'Ru\'aern',                 46,  679.534,   -4.173,    -223.813,  180       ),
-    (16912838, 0,  'Jailer_of_Hope',           'Jailer of Hope',           49,  -688.591,  -0.5,      -69.345,   159       ),
+    (16912838, 0,  'Jailer_of_Hope',           'Jailer of Hope',           49,  -680.969,  -0.5,      -75.444,   157       ),
     (16912839, 0,  'Jailer_of_Justice',        'Jailer of Justice',        50,  -279.194,  -0.5,      -465.362,  246       ),
     (16912840, 0,  'Qnxzomit',                 'Qn\'xzomit',               51,  -286,      -0.5,      -465,      0         ),
     (16912841, 0,  'Qnxzomit',                 'Qn\'xzomit',               51,  -295.663,  -0.06,     -448.272,  149       ),
