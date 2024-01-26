@@ -36,6 +36,10 @@ entity.onMobSpawn = function(mob)
     mob:setMagicCastingEnabled(false)
 end
 
+entity.onMobEngaged = function(mob, target)
+    mob:setLocalVar("formTimeTracker", 0)
+end
+
 entity.onMobFight = function(mob, target)
     -- Chages forms after 30-60 seconds randomly
     local timeTracker = mob:getLocalVar("formTimeTracker")

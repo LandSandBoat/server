@@ -122,6 +122,7 @@ end
 -- Prevents any stuck logic due to wipes
 entity.onMobDisengage = function(mob)
     mob:setLocalVar("changeTime", 0)
+    mob:setLocalVar("twoHour", 0)
 end
 
 entity.onAdditionalEffect = function(mob, target, damage)
