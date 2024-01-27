@@ -160,64 +160,78 @@ local pTable =
     [xi.magic.spell.WATERJA       ] = { xi.mod.INT,    0,  782,  2.3,  800, 900,  5.6, 4.75, 3.95,    3,    2,    1,    0 }, -- Some values not found. Used guesstimates for M200 and M300.
 
 -- Ninjutsu spells:
---                                       1          2     3        4   5      6
--- Structure:             [spellId] = {  Stat used, mAcc, vNPC,    M,  vPC,   I }, -- Inflexion point unknown. Set to 50, 150 and 300, for now.
-    [xi.magic.spell.DOTON_ICHI    ] = { xi.mod.INT,    0,   28,  0.5,   28,  50 },
-    [xi.magic.spell.DOTON_NI      ] = { xi.mod.INT,    0,   68,    1,   68, 150 },
-    [xi.magic.spell.DOTON_SAN     ] = { xi.mod.INT,    0,  134,  1.5,  134, 300 },
-    [xi.magic.spell.HUTON_ICHI    ] = { xi.mod.INT,    0,   28,  0.5,   28,  50 },
-    [xi.magic.spell.HUTON_NI      ] = { xi.mod.INT,    0,   68,    1,   68, 150 },
-    [xi.magic.spell.HUTON_SAN     ] = { xi.mod.INT,    0,  134,  1.5,  134, 300 },
-    [xi.magic.spell.HYOTON_ICHI   ] = { xi.mod.INT,    0,   28,  0.5,   28,  50 },
-    [xi.magic.spell.HYOTON_NI     ] = { xi.mod.INT,    0,   68,    1,   68, 150 },
-    [xi.magic.spell.HYOTON_SAN    ] = { xi.mod.INT,    0,  134,  1.5,  134, 300 },
-    [xi.magic.spell.KATON_ICHI    ] = { xi.mod.INT,    0,   28,  0.5,   28,  50 },
-    [xi.magic.spell.KATON_NI      ] = { xi.mod.INT,    0,   68,    1,   68, 150 },
-    [xi.magic.spell.KATON_SAN     ] = { xi.mod.INT,    0,  134,  1.5,  134, 300 },
-    [xi.magic.spell.RAITON_ICHI   ] = { xi.mod.INT,    0,   28,  0.5,   28,  50 },
-    [xi.magic.spell.RAITON_NI     ] = { xi.mod.INT,    0,   68,    1,   68, 150 },
-    [xi.magic.spell.RAITON_SAN    ] = { xi.mod.INT,    0,  134,  1.5,  134, 300 },
-    [xi.magic.spell.SUITON_ICHI   ] = { xi.mod.INT,    0,   28,  0.5,   28,  50 },
-    [xi.magic.spell.SUITON_NI     ] = { xi.mod.INT,    0,   68,    1,   68, 150 },
-    [xi.magic.spell.SUITON_SAN    ] = { xi.mod.INT,    0,  134,  1.5,  134, 300 },
+--                                       1          2     3        4   5      6  7
+-- Structure:             [spellId] = {  Stat used, mAcc, vNPC,    M,  vPC,   I, M0 }, -- Inflexion point unknown. Set to 50, 150 and 300, for now.
+    [xi.magic.spell.DOTON_ICHI    ] = { xi.mod.INT,    0,   28,  0.5,   28,  50, 0 },
+    [xi.magic.spell.DOTON_NI      ] = { xi.mod.INT,    0,   68,    1,   68, 150, 0 },
+    [xi.magic.spell.DOTON_SAN     ] = { xi.mod.INT,    0,  134,  1.5,  134, 300, 0 },
+    [xi.magic.spell.HUTON_ICHI    ] = { xi.mod.INT,    0,   28,  0.5,   28,  50, 0 },
+    [xi.magic.spell.HUTON_NI      ] = { xi.mod.INT,    0,   68,    1,   68, 150, 0 },
+    [xi.magic.spell.HUTON_SAN     ] = { xi.mod.INT,    0,  134,  1.5,  134, 300, 0 },
+    [xi.magic.spell.HYOTON_ICHI   ] = { xi.mod.INT,    0,   28,  0.5,   28,  50, 0 },
+    [xi.magic.spell.HYOTON_NI     ] = { xi.mod.INT,    0,   68,    1,   68, 150, 0 },
+    [xi.magic.spell.HYOTON_SAN    ] = { xi.mod.INT,    0,  134,  1.5,  134, 300, 0 },
+    [xi.magic.spell.KATON_ICHI    ] = { xi.mod.INT,    0,   28,  0.5,   28,  50, 0 },
+    [xi.magic.spell.KATON_NI      ] = { xi.mod.INT,    0,   68,    1,   68, 150, 0 },
+    [xi.magic.spell.KATON_SAN     ] = { xi.mod.INT,    0,  134,  1.5,  134, 300, 0 },
+    [xi.magic.spell.RAITON_ICHI   ] = { xi.mod.INT,    0,   28,  0.5,   28,  50, 0 },
+    [xi.magic.spell.RAITON_NI     ] = { xi.mod.INT,    0,   68,    1,   68, 150, 0 },
+    [xi.magic.spell.RAITON_SAN    ] = { xi.mod.INT,    0,  134,  1.5,  134, 300, 0 },
+    [xi.magic.spell.SUITON_ICHI   ] = { xi.mod.INT,    0,   28,  0.5,   28,  50, 0 },
+    [xi.magic.spell.SUITON_NI     ] = { xi.mod.INT,    0,   68,    1,   68, 150, 0 },
+    [xi.magic.spell.SUITON_SAN    ] = { xi.mod.INT,    0,  134,  1.5,  134, 300, 0 },
 
 -- Divine spells: https://nw6yx36onohv5j6wmzoba3nllq-ac4c6men2g7xr2a-wiki-ffo-jp.translate.goog/html/1963.html
---                                       1          2     3        4   5      6
--- Structure:             [spellId] = {  Stat used, mAcc, vNPC,    M,  vPC,   I },
-    [xi.magic.spell.BANISH        ] = { xi.mod.MND,    0,   14,    1,   14,  25 },
-    [xi.magic.spell.BANISH_II     ] = { xi.mod.MND,    0,   85,    1,   85, 113 },
-    [xi.magic.spell.BANISH_III    ] = { xi.mod.MND,    0,  198,  1.5,  198, 250 },
-    [xi.magic.spell.BANISH_IV     ] = { xi.mod.MND,    0,  420,  1.5,  420, 400 }, -- Enemy only. Stats unknown/unchecked.
-    [xi.magic.spell.BANISHGA      ] = { xi.mod.MND,    0,   50,    1,   50,  46 },
-    [xi.magic.spell.BANISHGA_II   ] = { xi.mod.MND,    0,  180,    1,  180, 133 },
-    [xi.magic.spell.BANISHGA_III  ] = { xi.mod.MND,    0,  480,  1.5,  480, 450 }, -- Enemy only. Stats unknown.
-    [xi.magic.spell.BANISHGA_IV   ] = { xi.mod.MND,    0,  600,  1.5,  600, 600 }, -- Enemy only. Stats unknown.
-    [xi.magic.spell.HOLY          ] = { xi.mod.MND,    0,  125,    1,  125, 150 },
-    [xi.magic.spell.HOLY_II       ] = { xi.mod.MND,    0,  250,    2,  250, 300 },
+--                                       1          2     3        4   5      6  7
+-- Structure:             [spellId] = {  Stat used, mAcc, vNPC,    M,  vPC,   I, M0 },
+    [xi.magic.spell.BANISH        ] = { xi.mod.MND,    0,   14,    1,   14,  25, 0 },
+    [xi.magic.spell.BANISH_II     ] = { xi.mod.MND,    0,   85,    1,   85, 113, 0 },
+    [xi.magic.spell.BANISH_III    ] = { xi.mod.MND,    0,  198,  1.5,  198, 250, 0 },
+    [xi.magic.spell.BANISH_IV     ] = { xi.mod.MND,    0,  420,  1.5,  420, 400, 0 }, -- Enemy only. Stats unknown/unchecked.
+    [xi.magic.spell.BANISHGA      ] = { xi.mod.MND,    0,   50,    1,   50,  46, 0 },
+    [xi.magic.spell.BANISHGA_II   ] = { xi.mod.MND,    0,  180,    1,  180, 133, 0 },
+    [xi.magic.spell.BANISHGA_III  ] = { xi.mod.MND,    0,  480,  1.5,  480, 450, 0 }, -- Enemy only. Stats unknown.
+    [xi.magic.spell.BANISHGA_IV   ] = { xi.mod.MND,    0,  600,  1.5,  600, 600, 0 }, -- Enemy only. Stats unknown.
+    [xi.magic.spell.HOLY          ] = { xi.mod.MND,    0,  125,    1,  125, 150, 0 },
+    [xi.magic.spell.HOLY_II       ] = { xi.mod.MND,    0,  250,    2,  250, 300, 0 },
 
 -- Dark spells.
 --                                       1          2     3     4      5      6    7    8    9     10    11    12    13
 -- Structure:             [spellId] = {  Stat used, mAcc, vNPC, mNPC,  vPC,   I,   M0,  M50, M100, M200, M300, M400, M500 },
     [xi.magic.spell.KAUSTRA       ] = { xi.mod.INT,    0,    0, 0.67,    0, 300, 0.67, 0.67, 0.67, 0.67,    0,    0,    0 },
 
--- TODO: Healing Spells when used against undead/zombie
+-- Healing Spells when used against undead/zombie: https://wiki.ffo.jp/html/336.html
+-- Structure:             [spellId] = {  Stat used, mAcc, vNPC,    M,  vPC,   I, M0 },
+    [xi.magic.spell.CURE          ] = { xi.mod.MND,    0,    7,    1,    7,  16, 0 },
+    [xi.magic.spell.CURE_II       ] = { xi.mod.MND,    0,   35,    1,   35,  60, 0 },
+    [xi.magic.spell.CURE_III      ] = { xi.mod.MND,    0,   70,    1,   70, 133, 0 },
+    [xi.magic.spell.CURE_IV       ] = { xi.mod.MND,    0,  140,  1.5,  140, 104, 0 }, -- Not a typo. Both Inflexion point and upper cap by extension are lower than Cure III.
+    [xi.magic.spell.CURE_V        ] = { xi.mod.MND,    0,  210,  1.5,  210, 159, 0 },
+    [xi.magic.spell.CURE_VI       ] = { xi.mod.MND,    0,  295,    2,  295, 212, 0 },
 }
 
 -----------------------------------
 -- Basic Functions
 -----------------------------------
 xi.spells.damage.calculateBaseDamage = function(caster, target, spellId, spellGroup, skillType, statUsed)
-    local spellDamage = 0 -- The variable we want to calculate
+    local spellDamage     = 0 -- The variable we want to calculate
+    local useNewSystem    = false -- Default to old.
+
+    -- Choose system to use.
+    if
+        pTable[spellId][7] > 0 and                -- We actually have new system values.
+        caster:isPC() and                         -- Only players use new system.
+        not xi.settings.main.USE_OLD_MAGIC_DAMAGE -- New system is allowed in settings.
+    then
+        useNewSystem = true -- Use new system.
+    end
 
     -----------------------------------
     -- STEP 1: baseSpellDamage (V)
     -----------------------------------
     local baseSpellDamage = pTable[spellId][vNPC] -- (V) In Wiki.
 
-    if
-        caster:isPC() and
-        not xi.settings.main.USE_OLD_MAGIC_DAMAGE
-    then
+    if useNewSystem then
         baseSpellDamage = pTable[spellId][vPC] -- vPC
     end
 
@@ -227,26 +241,8 @@ xi.spells.damage.calculateBaseDamage = function(caster, target, spellId, spellGr
     local statDiffBonus = 0 -- statDiff x appropriate multipliers.
     local statDiff      = caster:getStat(statUsed) - target:getStat(statUsed)
 
-    -- Old system
-    if
-        not caster:isPC() or                                             -- Mobs
-        (caster:isPC() and not xi.settings.main.USE_OLD_MAGIC_DAMAGE) or -- Players + Setting
-        skillType == xi.skill.DIVINE_MAGIC or
-        skillType == xi.skill.NINJUTSU
-    then
-        local spellMultiplier = pTable[spellId][mNPC]            -- M
-        local inflexionPoint  = pTable[spellId][inflectionPoint] -- I
-
-        if statDiff <= 0 then
-            statDiffBonus = statDiff
-        elseif statDiff > 0 and statDiff <= inflexionPoint then
-            statDiffBonus = math.floor(statDiff * spellMultiplier)
-        else
-            statDiffBonus = math.floor(inflexionPoint * spellMultiplier) + math.floor((statDiff - inflexionPoint) * spellMultiplier / 2)
-        end
-
     -- New System
-    else
+    if useNewSystem then
         local mTable =
         {
             [1] = {   0,  50 },
@@ -260,6 +256,25 @@ xi.spells.damage.calculateBaseDamage = function(caster, target, spellId, spellGr
 
         for i = 1, 7 do
             statDiffBonus = statDiffBonus + math.floor(utils.clamp(statDiff - mTable[i][1], 0, mTable[i][2]) * pTable[spellId][6 + i])
+        end
+
+    -- Old system
+    else
+        local spellMultiplier = pTable[spellId][mNPC]            -- M
+        local inflexionPoint  = pTable[spellId][inflectionPoint] -- I
+
+        -- Cap stat difference. In the old system, in 99% of cases, the stat difference capped at 3 times the infexion point, from which point, stat would stop taking effect.
+        local statCap = 3 * inflexionPoint
+
+        statDiff = math.min(statDiff, statCap)
+
+        -- Operations.
+        if statDiff <= 0 then
+            statDiffBonus = statDiff
+        elseif statDiff <= inflexionPoint then
+            statDiffBonus = math.floor(statDiff * spellMultiplier)
+        else
+            statDiffBonus = math.floor(inflexionPoint * spellMultiplier) + math.floor((statDiff - inflexionPoint) * spellMultiplier / 2)
         end
     end
 
@@ -503,8 +518,8 @@ xi.spells.damage.calculateDayAndWeather = function(caster, spellId, spellElement
 
     -- See if its a Helix type spell
     if
-        spellId >= xi.magic.spell.GEOHELIX and
-        spellId <= xi.magic.spell.LUMINOHELIX
+        (spellId >= xi.magic.spell.GEOHELIX and spellId <= xi.magic.spell.LUMINOHELIX) or
+        (spellId >= xi.magic.spell.GEOHELIX_II and spellId <= xi.magic.spell.LUMINOHELIX_II)
     then
         isHelixSpell = true
     end
@@ -629,11 +644,11 @@ xi.spells.damage.calculateMagicBonusDiff = function(caster, target, spellId, ski
         mab = mab + caster:getMerit(xi.merit.ANCIENT_MAGIC_ATK_BONUS)
     end
 
-    magicBonusDiff = (100 + mab) / (100 + target:getMod(xi.mod.MDEF) + mDefBarBonus)
+    -- Final operations
+    local finalCasterMAB = (100 + mab) * (1 + caster:getMod(xi.mod.AUTO_MAB_COEFFICIENT) / 100)
+    local finalTargetMDB = 100 + target:getMod(xi.mod.MDEF) + mDefBarBonus
 
-    if magicBonusDiff < 0 then
-        magicBonusDiff = 0
-    end
+    magicBonusDiff = utils.clamp(finalCasterMAB / finalTargetMDB, 0, 10)
 
     return magicBonusDiff
 end
@@ -666,11 +681,30 @@ xi.spells.damage.calculateTMDA = function(target, spellElement)
     return targetMagicDamageAdjustment
 end
 
--- Divine Emblem applies its own damage multiplier.
-xi.spells.damage.calculateDivineEmblemMultiplier = function(caster)
+-- Divine seal applies its own multiplier to healing spells when used against undead.
+-- NOTE: If we have reached this far with a heling spell, the target is confirmed to be undead.
+xi.spells.damage.calculateDivineSealMultiplier = function(caster, skillType)
+    local divineSealMultiplier = 1
+
+    if
+        caster:hasStatusEffect(xi.effect.DIVINE_SEAL) and
+        skillType == xi.skill.HEALING
+    then
+        divineSealMultiplier = 2
+        caster:delStatusEffect(xi.effect.DIVINE_SEAL)
+    end
+
+    return divineSealMultiplier
+end
+
+-- Divine Emblem applies its own damage multiplier to divine spells.
+xi.spells.damage.calculateDivineEmblemMultiplier = function(caster, skillType)
     local divineEmblemMultiplier = 1
 
-    if caster:hasStatusEffect(xi.effect.DIVINE_EMBLEM) then
+    if
+        caster:hasStatusEffect(xi.effect.DIVINE_EMBLEM) and
+        skillType == xi.skill.DIVINE_MAGIC
+    then
         divineEmblemMultiplier = 1 + caster:getSkillLevel(xi.skill.DIVINE_MAGIC) / 100
         caster:delStatusEffect(xi.effect.DIVINE_EMBLEM)
     end
@@ -678,11 +712,14 @@ xi.spells.damage.calculateDivineEmblemMultiplier = function(caster)
     return divineEmblemMultiplier
 end
 
--- Ebullience applies an entirely separate multiplier.
-xi.spells.damage.calculateEbullienceMultiplier = function(caster)
+-- Ebullience applies an entirely separate multiplier to Black Magic.
+xi.spells.damage.calculateEbullienceMultiplier = function(caster, spellGroup)
     local ebullienceMultiplier = 1
 
-    if caster:hasStatusEffect(xi.effect.EBULLIENCE) then
+    if
+        caster:hasStatusEffect(xi.effect.EBULLIENCE) and
+        spellGroup == xi.magic.spellGroup.BLACK
+    then
         ebullienceMultiplier = 1.2 + caster:getMod(xi.mod.EBULLIENCE_AMOUNT) / 100
         caster:delStatusEffectSilent(xi.effect.EBULLIENCE)
     end
@@ -865,8 +902,9 @@ xi.spells.damage.useDamageSpell = function(caster, target, spell)
     local dayAndWeather               = xi.spells.damage.calculateDayAndWeather(caster, spellId, spellElement)
     local magicBonusDiff              = xi.spells.damage.calculateMagicBonusDiff(caster, target, spellId, skillType, spellElement)
     local targetMagicDamageAdjustment = xi.spells.damage.calculateTMDA(target, spellElement)
-    local divineEmblemMultiplier      = xi.spells.damage.calculateDivineEmblemMultiplier(caster)
-    local ebullienceMultiplier        = xi.spells.damage.calculateEbullienceMultiplier(caster)
+    local divineSealMultiplier        = xi.spells.damage.calculateDivineSealMultiplier(caster, skillType)
+    local divineEmblemMultiplier      = xi.spells.damage.calculateDivineEmblemMultiplier(caster, skillType)
+    local ebullienceMultiplier        = xi.spells.damage.calculateEbullienceMultiplier(caster, spellGroup)
     local skillTypeMultiplier         = xi.spells.damage.calculateSkillTypeMultiplier(skillType)
     local ninSkillBonus               = xi.spells.damage.calculateNinSkillBonus(caster, spellId, skillType)
     local ninFutaeBonus               = xi.spells.damage.calculateNinFutaeBonus(caster, skillType)
@@ -886,6 +924,7 @@ xi.spells.damage.useDamageSpell = function(caster, target, spell)
     finalDamage = math.floor(finalDamage * dayAndWeather)
     finalDamage = math.floor(finalDamage * magicBonusDiff)
     finalDamage = math.floor(finalDamage * targetMagicDamageAdjustment)
+    finalDamage = math.floor(finalDamage * divineSealMultiplier)
     finalDamage = math.floor(finalDamage * divineEmblemMultiplier)
     finalDamage = math.floor(finalDamage * ebullienceMultiplier)
     finalDamage = math.floor(finalDamage * skillTypeMultiplier)

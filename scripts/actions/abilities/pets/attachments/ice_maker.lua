@@ -9,41 +9,33 @@ attachmentObject.onEquip = function(automaton)
             return
         end
 
-        local master = pet:getMaster()
-        local maneuvers = master:countEffect(xi.effect.ICE_MANEUVER)
-        local amount = 100 + pet:getMod(xi.mod.MATT)
-        if maneuvers == 1 then
-            amount = amount * 0.2
-            pet:setLocalVar('icemakermaneuvers', 1)
-        elseif maneuvers == 2 then
-            amount = amount * 0.4
-            pet:setLocalVar('icemakermaneuvers', 2)
-        elseif maneuvers == 3 then
-            amount = amount * 0.6
-            pet:setLocalVar('icemakermaneuvers', 3)
-        else
-            return
+        local master    = pet:getMaster()
+        local maneuvers = utils.clamp(master:countEffect(xi.effect.ICE_MANEUVER), 0, 3)
+        local amount    = 0
+
+        -- Values updated in https://wiki.ffo.jp/html/34039.html version update.
+        if maneuvers > 0 then
+            amount = 25 + 25 * maneuvers
         end
 
-        amount = math.floor(amount)
-        pet:addMod(xi.mod.MATT, amount)
-        pet:setLocalVar('icemaker', amount)
+        pet:setMod(xi.mod.AUTO_MAB_COEFFICIENT, amount)
+        pet:setLocalVar('iceMakerManeuvers', maneuvers)
     end)
 
     automaton:addListener('MAGIC_STATE_EXIT', 'AUTO_ICE_MAKER_END', function(pet, spell)
-        local master = pet:getMaster()
-        local toremove = pet:getLocalVar('icemakermaneuvers')
-        if toremove == 0 then
+        local master   = pet:getMaster()
+        local toRemove = pet:getLocalVar('iceMakerManeuvers')
+
+        if toRemove == 0 then
             return
         end
 
-        for i = 1, toremove do
+        for i = 1, toRemove do
             master:delStatusEffectSilent(xi.effect.ICE_MANEUVER)
         end
 
-        pet:delMod(xi.mod.MATT, pet:getLocalVar('icemaker'))
-        pet:setLocalVar('icemaker', 0)
-        pet:setLocalVar('icemakermaneuvers', 0)
+        pet:setMod(xi.mod.AUTO_MAB_COEFFICIENT, 0)
+        pet:setLocalVar('iceMakerManeuvers', 0)
     end)
 end
 

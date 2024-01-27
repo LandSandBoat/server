@@ -755,6 +755,7 @@ xi.mod =
     QUICK_MAGIC                     = 909, -- Percent chance spells cast instantly (also reduces recast to 0, similar to Chainspell)
 
     -- Automaton mods
+    AUTO_MAB_COEFFICIENT            = 157, -- Applies a MAB multiplier to automatons. This value is the bonus %.
     AUTO_DECISION_DELAY             = 842, -- Reduces the Automaton's global decision delay
     AUTO_SHIELD_BASH_DELAY          = 843, -- Reduces the Automaton's global shield bash delay
     AUTO_MAGIC_DELAY                = 844, -- Reduces the Automaton's global magic delay

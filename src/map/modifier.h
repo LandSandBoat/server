@@ -1,4 +1,4 @@
-﻿/*
+/*
 ===========================================================================
   Copyright (c) 2010-2015 Darkstar Dev Teams
   This program is free software: you can redistribute it and/or modify
@@ -606,6 +606,7 @@ enum class Mod
     PHANTOM_RECAST         = 1076, // Phantom Roll Recast -.
 
     // Puppetmaster
+    AUTO_MAB_COEFFICIENT        = 157,  // Applies a MAB multiplier to automatons. This value is the bonus %.
     MANEUVER_BONUS              = 504,  // Maneuver Stat Bonus
     OVERLOAD_THRESH             = 505,  // Overload Threshold Bonus
     AUTO_DECISION_DELAY         = 842,  // Reduces the Automaton's global decision delay
@@ -996,7 +997,7 @@ enum class Mod
     //
     // SPARE IDs:
     // 141 to 143
-    // 157 to 159
+    // 158, 159
     // 217 to 223
     // 271 to 280
     //

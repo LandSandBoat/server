@@ -232,17 +232,6 @@ local function calculateMagicHitRate(magicacc, magiceva, percentBonus, casterLvl
     return utils.clamp(p, 5, 95)
 end
 
-local function isHelixSpell(spell)
-    --Dark Arts will further increase Helix duration, but testing is ongoing.
-
-    local id = spell:getID()
-    if id >= 278 and id <= 285 then
-        return true
-    end
-
-    return false
-end
-
 local function calculateMagicBurst(caster, spell, target, params)
     local burst = 1.0
     local skillchainburst = 1.0
@@ -822,7 +811,7 @@ function addBonuses(caster, spell, target, dmg, params)
     dmg = math.floor(dmg * affinityBonus)
     dmg = math.floor(dmg * magicDefense)
 
-    local dayWeatherBonusCheck = math.random() < 0.33 or caster:getMod(elementalObi[ele]) >= 1 or isHelixSpell(spell)
+    local dayWeatherBonusCheck = math.random() < 0.33 or caster:getMod(elementalObi[ele]) >= 1
 
     if dayWeatherBonusCheck then
         if weather == xi.magic.singleWeatherStrong[ele] then
@@ -1038,12 +1027,6 @@ function handleThrenody(caster, target, spell, basePower, baseDuration, modifier
     target:addStatusEffect(xi.effect.THRENODY, -power, 0, duration, 0, modifier, 0)
 
     return xi.effect.THRENODY
-end
-
-function handleNinjutsuDebuff(caster, target, spell, basePower, baseDuration, modifier)
-    -- Add new
-    target:addStatusEffectEx(xi.effect.NINJUTSU_ELE_DEBUFF, 0, basePower, 0, baseDuration, 0, modifier, 0)
-    return xi.effect.NINJUTSU_ELE_DEBUFF
 end
 
 -- Returns true if you can overwrite the effect
