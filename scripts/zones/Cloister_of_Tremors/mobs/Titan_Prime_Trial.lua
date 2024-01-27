@@ -3,7 +3,7 @@
 --  Mob: Titan Prime
 -- Involved in Quest: Trial by Earth, Trial Size Trial by Earth
 -----------------------------------
-mixins = { require("scripts/mixins/job_special") }
+mixins = { require('scripts/mixins/job_special') }
 -----------------------------------
 local entity = {}
 

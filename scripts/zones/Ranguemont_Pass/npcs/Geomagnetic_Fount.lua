@@ -3,9 +3,6 @@
 --  NPC: Geomagnetic Fount
 -- !pos 166.183 25.221 -191.464
 -----------------------------------
-local ID = require("scripts/zones/Ranguemont_Pass/IDs")
-require("scripts/globals/geomagnetic_fount")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

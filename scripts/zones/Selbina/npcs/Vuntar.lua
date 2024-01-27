@@ -4,20 +4,16 @@
 -- Starts and Finishes Quest: Cargo (R)
 -- !pos 7 -2 -15 248
 -----------------------------------
-local ID = require("scripts/zones/Selbina/IDs")
-require("scripts/globals/npc_util")
-require("scripts/globals/quests")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     if player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.CARGO) ~= QUEST_AVAILABLE then
-        if os.time() > player:getCharVar("VuntarCanBuyItem_date") then
-            if npcUtil.tradeHas(trade, xi.items.ROLANBERRY_881_CE) then
+        if os.time() > player:getCharVar('VuntarCanBuyItem_date') then
+            if npcUtil.tradeHas(trade, xi.item.ROLANBERRY_881_CE) then
                 player:startEvent(52, 1) -- Can Buy rolanberry (881 ce)
-            elseif npcUtil.tradeHas(trade, xi.items.ROLANBERRY_874_CE) then
+            elseif npcUtil.tradeHas(trade, xi.item.ROLANBERRY_874_CE) then
                 player:startEvent(52, 2) -- Can Buy rolanberry (874 ce)
-            elseif npcUtil.tradeHas(trade, xi.items.ROLANBERRY_864_CE) then
+            elseif npcUtil.tradeHas(trade, xi.item.ROLANBERRY_864_CE) then
                 player:startEvent(52, 3) -- Can Buy rolanberry (864 ce)
             end
         else
@@ -46,7 +42,7 @@ entity.onEventFinish = function(player, csid, option, npc)
     if csid == 50 then
         player:addQuest(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.CARGO)
     elseif csid == 52 then
-        player:setCharVar("VuntarCanBuyItem_date", getMidnight())
+        player:setCharVar('VuntarCanBuyItem_date', getMidnight())
 
         if player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.CARGO) == QUEST_ACCEPTED then
             player:completeQuest(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.CARGO)

@@ -3,11 +3,6 @@
 --
 -- Kohlo-Lakolo, !pos -26.8 -6 190 240
 -----------------------------------
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
-require('scripts/globals/titles')
-require('scripts/globals/interaction/quest')
------------------------------------
 
 local quest = Quest:new(xi.quest.log_id.WINDURST, xi.quest.id.windurst.ONION_RINGS)
 

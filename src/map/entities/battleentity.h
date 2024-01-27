@@ -33,7 +33,7 @@
 #include "party.h"
 #include "trait.h"
 
-enum DEATH_TYPE
+enum class DEATH_TYPE : uint8
 {
     NONE        = 0,
     PHYSICAL    = 1,
@@ -41,6 +41,7 @@ enum DEATH_TYPE
     WS_PHYSICAL = 3,
     WS_MAGICAL  = 4,
 };
+DECLARE_FORMAT_AS_UNDERLYING(DEATH_TYPE);
 
 enum class ECOSYSTEM : uint8
 {
@@ -67,6 +68,7 @@ enum class ECOSYSTEM : uint8
     VERMIN         = 20,
     VORAGEAN       = 21
 };
+DECLARE_FORMAT_AS_UNDERLYING(ECOSYSTEM);
 
 enum JOBTYPE
 {
@@ -92,10 +94,11 @@ enum JOBTYPE
     JOB_DNC = 19,
     JOB_SCH = 20,
     JOB_GEO = 21,
-    JOB_RUN = 22
+    JOB_RUN = 22,
+    JOB_MON = 23, // NOTE: MON is not a full job
 };
-
-#define MAX_JOBTYPE 23
+#define MAX_JOBTYPE 24
+DECLARE_FORMAT_AS_UNDERLYING(JOBTYPE);
 
 enum SKILLTYPE
 {
@@ -151,8 +154,8 @@ enum SKILLTYPE
     SKILL_RID          = 58,
     SKILL_DIG          = 59
 };
-
 #define MAX_SKILLTYPE 64
+DECLARE_FORMAT_AS_UNDERLYING(SKILLTYPE);
 
 enum SUBSKILLTYPE
 {
@@ -212,8 +215,7 @@ enum SUBSKILLTYPE
     SUBSKILL_SILAS      = 67,
     SUBSKILL_TOLOI      = 68
 };
-
-// ячейки экипировки. монстры используют лишь первые четыре, персонаж использует все
+DECLARE_FORMAT_AS_UNDERLYING(SUBSKILLTYPE);
 
 enum SLOTTYPE
 {
@@ -236,12 +238,8 @@ enum SLOTTYPE
     SLOT_LINK1  = 0x10,
     SLOT_LINK2  = 0x11,
 };
-
 #define MAX_SLOTTYPE 18
-
-// CROSSBOW и GUN - это Piercing, разделение сделано из-за одинакового skilltype
-// для возможности различить эти орудия при экипировке и избавиться от ошибки
-// использования пуль с арбалетом и арбалетных стрел с огнестрельным оружием (только персонажи)
+DECLARE_FORMAT_AS_UNDERLYING(SLOTTYPE);
 
 enum class ATTACK_TYPE
 {
@@ -252,6 +250,7 @@ enum class ATTACK_TYPE
     SPECIAL  = 4,
     BREATH   = 5
 };
+DECLARE_FORMAT_AS_UNDERLYING(ATTACK_TYPE);
 
 enum class DAMAGE_TYPE : uint16
 {
@@ -270,9 +269,10 @@ enum class DAMAGE_TYPE : uint16
     LIGHT     = 12,
     DARK      = 13
 };
+DECLARE_FORMAT_AS_UNDERLYING(DAMAGE_TYPE);
 
 // This enum class is a set of bitfields that modify messages sent to the client.
-// There are helpers (PARRY/EVADE) because it is not inuitive
+// There are helpers (PARRY/EVADE) because it is not intuitive
 // These flag names may not match SE's intent perfectly, but seem to work well.
 
 // For example
@@ -292,6 +292,7 @@ enum class REACTION : uint8
     EVADE   = 0x09, // Evasion (MISS + HIT)
     ABILITY = 0x10, // Observed on JA and WS
 };
+DECLARE_FORMAT_AS_UNDERLYING(REACTION);
 
 // These operators are used to combine bits that may not have a discrete value upon combining.
 inline REACTION operator|(REACTION a, REACTION b)
@@ -320,6 +321,7 @@ enum class SPECEFFECT
     RECOIL       = 0x20,
     CRITICAL_HIT = 0x22
 };
+DECLARE_FORMAT_AS_UNDERLYING(SPECEFFECT);
 
 enum class MODIFIER
 {
@@ -329,6 +331,7 @@ enum class MODIFIER
     MAGIC_BURST = 0x04, // Currently known to be used for Swipe/Lunge only
     IMMUNOBREAK = 0x08,
 };
+DECLARE_FORMAT_AS_UNDERLYING(MODIFIER);
 
 enum SUBEFFECT
 {
@@ -406,6 +409,7 @@ enum SUBEFFECT
     SUBEFFECT_WEIGHT,
     SUBEFFECT_AUSPICE
 };
+DECLARE_FORMAT_AS_UNDERLYING(SUBEFFECT);
 
 enum TARGETTYPE
 {
@@ -415,12 +419,13 @@ enum TARGETTYPE
     TARGET_PLAYER_ALLIANCE         = 0x08,
     TARGET_PLAYER                  = 0x10,
     TARGET_PLAYER_DEAD             = 0x20,
-    TARGET_NPC                     = 0x40, // скорее всего подразумевается mob, выглядящий как npc и воюющий на стороне персонажа
+    TARGET_NPC                     = 0x40, // an npc is a mob that looks like an npc and fights on the side of the character
     TARGET_PLAYER_PARTY_PIANISSIMO = 0x80,
     TARGET_PET                     = 0x100,
     TARGET_PLAYER_PARTY_ENTRUST    = 0x200,
     TARGET_IGNORE_BATTLEID         = 0x400, // Can hit targets that do not have the same battle ID
 };
+DECLARE_FORMAT_AS_UNDERLYING(TARGETTYPE);
 
 enum SKILLCHAIN_ELEMENT
 {
@@ -445,9 +450,9 @@ enum SKILLCHAIN_ELEMENT
     SC_LIGHT_II    = 15, // Lv4 Light
     SC_DARKNESS_II = 16, // Lv4 Darkness
 };
-
 #define MAX_SKILLCHAIN_LEVEL (4)
 #define MAX_SKILLCHAIN_COUNT (5)
+DECLARE_FORMAT_AS_UNDERLYING(SKILLCHAIN_ELEMENT);
 
 enum IMMUNITY : uint16
 {
@@ -469,6 +474,7 @@ enum IMMUNITY : uint16
     IMMUNITY_TERROR      = 0x4000, // 16384
     IMMUNITY_DISPEL      = 0x8000, // 32768
 };
+DECLARE_FORMAT_AS_UNDERLYING(IMMUNITY);
 
 struct apAction_t
 {
@@ -487,35 +493,29 @@ struct apAction_t
     uint16         spikesMessage;    // 10 bits
 
     apAction_t()
-    : reaction(REACTION::NONE)
+    : ActionTarget(nullptr)
+    , reaction(REACTION::NONE)
+    , animation(0)
     , speceffect(SPECEFFECT::NONE)
+    , knockback(0)
+    , param(0)
+    , messageID(0)
     , additionalEffect(SUBEFFECT_NONE)
+    , addEffectParam(0)
+    , addEffectMessage(0)
     , spikesEffect(SUBEFFECT_NONE)
+    , spikesParam(0)
+    , spikesMessage(0)
     {
-        ActionTarget     = nullptr;
-        animation        = 0;
-        param            = 0;
-        messageID        = 0;
-        addEffectParam   = 0;
-        addEffectMessage = 0;
-        spikesParam      = 0;
-        spikesMessage    = 0;
-        knockback        = 0;
     }
 };
 
-/************************************************************************
- *                                                                      *
- *  TP хранится то пому же принципу, что и skill, т.е. 6,4% = 64        *
- *                                                                      *
- ************************************************************************/
-
 struct health_t
 {
-    int16 tp;           // текущее значение
-    int32 hp, mp;       // текущие значения
-    int32 maxhp, maxmp; // максимальные значения
-    int32 modhp, modmp; // модифицированные максимальные значения
+    int16 tp;
+    int32 hp, mp;
+    int32 maxhp, maxmp;
+    int32 modhp, modmp; // modified maximum values
 };
 
 struct battlehistory_t
@@ -532,6 +532,7 @@ class CSpell;
 class CItemEquipment;
 class CAbilityState;
 class CAttackState;
+class CMobSkillState;
 class CWeaponSkillState;
 class CMagicState;
 class CDespawnState;
@@ -543,8 +544,8 @@ struct action_t;
 class CBattleEntity : public CBaseEntity
 {
 public:
-    CBattleEntity();          // конструктор
-    virtual ~CBattleEntity(); // деструктор
+    CBattleEntity();
+    virtual ~CBattleEntity();
 
     uint16 STR();
     uint16 DEX();
@@ -562,7 +563,7 @@ public:
 
     uint8 GetSpeed();
 
-    bool isDead(); // проверяем, мертва ли сущность
+    bool isDead();
     bool isAlive();
     bool isInAssault();
     bool isInDynamis();
@@ -571,24 +572,24 @@ public:
     bool isMounted();
     bool isSitting();
 
-    JOBTYPE GetMJob();         // главная профессия
-    JOBTYPE GetSJob();         // дополнительная профессия
-    uint8   GetMLevel() const; // уровень главной профессии
-    uint8   GetSLevel() const; // уровень дополнительной профессии
+    JOBTYPE GetMJob();
+    JOBTYPE GetSJob();
+    uint8   GetMLevel() const;
+    uint8   GetSLevel() const;
 
-    void SetMJob(uint8 mjob);   // главная профессия
-    void SetSJob(uint8 sjob);   // дополнительная профессия
-    void SetMLevel(uint8 mlvl); // уровень главной профессии
-    void SetSLevel(uint8 slvl); // уровень дополнительной профессии
+    void SetMJob(uint8 mjob);
+    void SetSJob(uint8 sjob);
+    void SetMLevel(uint8 mlvl);
+    void SetSLevel(uint8 slvl);
 
     void  SetDeathType(uint8 type);
     uint8 GetDeathType();
 
-    uint8 GetHPP() const;   // количество hp в процентах
-    int32 GetMaxHP() const; // максимальное количество hp
-    uint8 GetMPP() const;   // количество mp в процентах
-    int32 GetMaxMP() const; // максимальное количество mp
-    void  UpdateHealth();   // пересчет максимального количества hp и mp, а так же корректировка их текущих значений
+    uint8 GetHPP() const;
+    int32 GetMaxHP() const;
+    uint8 GetMPP() const;
+    int32 GetMaxMP() const;
+    void  UpdateHealth(); // recalculation of the maximum amount of hp and mp, as well as adjusting their current values
 
     int16  GetWeaponDelay(bool tp);       // returns delay of combined weapons
     float  GetMeleeRange() const;         // returns the distance considered to be within melee range of the entity
@@ -601,17 +602,18 @@ public:
     uint16 GetSubWeaponRank();            // returns total sub weapon DMG Rank
     uint16 GetRangedWeaponRank();         // returns total ranged weapon DMG Rank
 
-    uint16 GetSkill(uint16 SkillID); // текущая величина умения (не максимальная, а ограниченная уровнем)
+    uint16 GetSkill(uint16 SkillID); // the current value of the skill (not the maximum, but limited by the level)
 
-    virtual int16 addTP(int16 tp); // увеличиваем/уменьшаем количество tp
-    virtual int32 addHP(int32 hp); // увеличиваем/уменьшаем количество hp
-    virtual int32 addMP(int32 mp); // увеличиваем/уменьшаем количество mp
+    virtual int16 addTP(int16 tp); // increase/decrease the amount of tp
+    virtual int32 addHP(int32 hp); // increase/decrease the amount of hp
+    virtual int32 addMP(int32 mp); // increase/decrease the amount of mp
 
     // Deals damage and updates the last attacker which is used when sending a player death message
     virtual int32 takeDamage(int32 amount, CBattleEntity* attacker = nullptr, ATTACK_TYPE attackType = ATTACK_TYPE::NONE,
-                             DAMAGE_TYPE damageType = DAMAGE_TYPE::NONE);
+                             DAMAGE_TYPE damageType = DAMAGE_TYPE::NONE, bool isSkillchainDamage = false);
 
-    int16 getMod(Mod modID); // величина модификатора
+    int16 getMod(Mod modID);
+    int16 getMaxGearMod(Mod modID);
 
     bool CanRest();        // checks if able to heal
     bool Rest(float rate); // heal an amount of hp / mp
@@ -712,6 +714,7 @@ public:
     virtual void OnCastInterrupted(CMagicState&, action_t&, MSGBASIC_ID msg, bool blockedCast);
     /* Weaponskill */
     virtual void OnWeaponSkillFinished(CWeaponSkillState& state, action_t& action);
+    virtual void OnMobSkillFinished(CMobSkillState& state, action_t& action);
     virtual void OnChangeTarget(CBattleEntity* PTarget);
 
     // Used to set an action to an "interrupted" state
@@ -739,12 +742,12 @@ public:
     virtual void Tick(time_point) override;
     virtual void PostTick() override;
 
-    health_t health{};        // hp,mp,tp
-    stats_t  stats{};         // атрибуты STR,DEX,VIT,AGI,INT,MND,CHR
-    skills_t WorkingSkills{}; // структура всех доступных сущности умений, ограниченных уровнем
-    uint16   m_Immunity;      // Mob immunity
-    uint16   m_magicEvasion;  // store this so it can be removed easily
-    bool     m_unkillable;    // entity is not able to die (probably until some action removes this flag)
+    health_t health{}; // hp,mp,tp
+    stats_t  stats{};
+    skills_t WorkingSkills{};
+    uint16   m_Immunity;     // Mob immunity
+    uint16   m_magicEvasion; // store this so it can be removed easily
+    bool     m_unkillable;   // entity is not able to die (probably until some action removes this flag)
 
     time_point charmTime; // to hold the time entity is charmed
     bool       isCharmed; // is the battle entity charmed?
@@ -755,16 +758,15 @@ public:
     bool            m_dualWield;    // True/false depending on if the entity is using two weapons
     DEATH_TYPE      m_DeathType;
 
-    TraitList_t TraitList; // список постянно активных способностей в виде указателей
+    TraitList_t TraitList;
 
-    EntityID_t m_OwnerID{}; // ID атакующей сущности (после смерти будет хранить ID сущности, нанесщей последний удар)
+    EntityID_t m_OwnerID{}; // ID of the attacking entity (after death will store the ID of the entity that dealt the final blow)
 
-    ActionList_t m_ActionList{}; // список совершенных действий за одну атаку (нужно будет написать структуру, включающую ActionList в которой будут категории
-                                 // анимации и т.д.)
+    ActionList_t m_ActionList{}; // List of actions performed in one attack (you will need to write a structure that includes an ActionList in which there will be categories, animations, etc.)
 
-    CParty*         PParty;  // описание группы, в которой состоит сущность
-    CBattleEntity*  PPet;    // питомец сущности
-    CBattleEntity*  PMaster; // владелец/хозяин сущности (распространяется на все боевые сущности)
+    CParty*         PParty;
+    CBattleEntity*  PPet;
+    CBattleEntity*  PMaster; // Owner/owner of the entity (applies to all combat entities)
     CBattleEntity*  PLastAttacker;
     time_point      LastAttacked;
     battlehistory_t BattleHistory{}; // Stores info related to most recent combat actions taken towards this entity.
@@ -774,15 +776,15 @@ public:
     std::unique_ptr<CNotorietyContainer>    PNotorietyContainer;
 
 private:
-    JOBTYPE    m_mjob; // главная профессия
-    JOBTYPE    m_sjob; // дополнительная профессия
-    uint8      m_mlvl; // ТЕКУЩИЙ уровень главной профессии
-    uint8      m_slvl; // ТЕКУЩИЙ уровень дополнительной профессии
+    JOBTYPE    m_mjob;
+    JOBTYPE    m_sjob;
+    uint8      m_mlvl; // CURRENT level of the main job
+    uint8      m_slvl; // CURRENT level of the sub job
     uint16     m_battleTarget{ 0 };
     time_point m_battleStartTime;
     uint16     m_battleID = 0; // Current battle the entity is participating in. Battle ID must match in order for entities to interact with each other.
 
-    std::unordered_map<Mod, int16, EnumClassHash>                                                m_modStat;     // массив модификаторов
+    std::unordered_map<Mod, int16, EnumClassHash>                                                m_modStat;     // array of modifiers
     std::unordered_map<Mod, int16, EnumClassHash>                                                m_modStatSave; // saved state
     std::unordered_map<PetModType, std::unordered_map<Mod, int16, EnumClassHash>, EnumClassHash> m_petMod;
 };

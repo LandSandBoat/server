@@ -1,4 +1,4 @@
-local ID = require('scripts/zones/East_Ronfaure_[S]/IDs')
+local ID = zones[xi.zone.EAST_RONFAURE_S]
 
 return {
     ['qm3']        = { event = 4 },

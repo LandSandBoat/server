@@ -2,11 +2,7 @@
 -- Area: Lower Jeuno
 --  NPC: Zalsuhm
 -----------------------------------
-local ID = require("scripts/zones/Lower_Jeuno/IDs")
-require("scripts/globals/equipment")
-require("scripts/globals/npc_util")
-require("scripts/globals/quests")
-require("scripts/globals/weaponskillids")
+local ID = zones[xi.zone.LOWER_JEUNO]
 -----------------------------------
 local entity = {}
 
@@ -43,11 +39,11 @@ entity.onTrigger = function(player, npc)
     local nyzulWeaponRanged = xi.equip.isBaseNyzulWeapon(player:getEquipID(xi.slot.RANGED))
 
     if unlockingAMyth == QUEST_AVAILABLE then
-        if player:needToZone() and player:getCharVar("Upset_Zalsuhm") > 0 then
+        if player:needToZone() and player:getCharVar('Upset_Zalsuhm') > 0 then
             player:startEvent(10090)
         else
-            if player:getCharVar("Upset_Zalsuhm") > 0 then
-                player:setCharVar("Upset_Zalsuhm", 0)
+            if player:getCharVar('Upset_Zalsuhm') > 0 then
+                player:setCharVar('Upset_Zalsuhm', 0)
             end
 
             if nyzulWeaponMain or nyzulWeaponRanged then
@@ -70,7 +66,7 @@ entity.onEventFinish = function(player, csid, option, npc)
     local questId = getQuestId(option)
     if csid == 10086 then
         if option == 53 then
-            player:setCharVar("Upset_Zalsuhm", 1)
+            player:setCharVar('Upset_Zalsuhm', 1)
             player:needToZone(true)
         elseif option <= xi.job.SCH then
             player:addQuest(xi.quest.log_id.JEUNO, questId)
@@ -78,26 +74,26 @@ entity.onEventFinish = function(player, csid, option, npc)
     elseif csid == 10088 and option <= xi.job.SCH then
         local jobs =
         {
-            [xi.job.WAR] = xi.ws_unlock.KINGS_JUSTICE,
-            [xi.job.MNK] = xi.ws_unlock.ASCETICS_FURY,
-            [xi.job.WHM] = xi.ws_unlock.MYSTIC_BOON,
-            [xi.job.BLM] = xi.ws_unlock.VIDOHUNIR,
-            [xi.job.RDM] = xi.ws_unlock.DEATH_BLOSSOM,
-            [xi.job.THF] = xi.ws_unlock.MANDALIC_STAB,
-            [xi.job.PLD] = xi.ws_unlock.ATONEMENT,
-            [xi.job.DRK] = xi.ws_unlock.INSURGENCY,
-            [xi.job.BST] = xi.ws_unlock.PRIMAL_REND,
-            [xi.job.BRD] = xi.ws_unlock.MORDANT_RIME,
-            [xi.job.RNG] = xi.ws_unlock.TRUEFLIGHT,
-            [xi.job.SAM] = xi.ws_unlock.TACHI_RANA,
-            [xi.job.NIN] = xi.ws_unlock.BLADE_KAMU,
-            [xi.job.DRG] = xi.ws_unlock.DRAKESBANE,
-            [xi.job.SMN] = xi.ws_unlock.GARLAND_OF_BLISS,
-            [xi.job.BLU] = xi.ws_unlock.EXPIACION,
-            [xi.job.COR] = xi.ws_unlock.LEADEN_SALUTE,
-            [xi.job.PUP] = xi.ws_unlock.STRINGING_PUMMEL,
-            [xi.job.DNC] = xi.ws_unlock.PYRRHIC_KLEOS,
-            [xi.job.SCH] = xi.ws_unlock.OMNISCIENCE,
+            [xi.job.WAR] = xi.wsUnlock.KINGS_JUSTICE,
+            [xi.job.MNK] = xi.wsUnlock.ASCETICS_FURY,
+            [xi.job.WHM] = xi.wsUnlock.MYSTIC_BOON,
+            [xi.job.BLM] = xi.wsUnlock.VIDOHUNIR,
+            [xi.job.RDM] = xi.wsUnlock.DEATH_BLOSSOM,
+            [xi.job.THF] = xi.wsUnlock.MANDALIC_STAB,
+            [xi.job.PLD] = xi.wsUnlock.ATONEMENT,
+            [xi.job.DRK] = xi.wsUnlock.INSURGENCY,
+            [xi.job.BST] = xi.wsUnlock.PRIMAL_REND,
+            [xi.job.BRD] = xi.wsUnlock.MORDANT_RIME,
+            [xi.job.RNG] = xi.wsUnlock.TRUEFLIGHT,
+            [xi.job.SAM] = xi.wsUnlock.TACHI_RANA,
+            [xi.job.NIN] = xi.wsUnlock.BLADE_KAMU,
+            [xi.job.DRG] = xi.wsUnlock.DRAKESBANE,
+            [xi.job.SMN] = xi.wsUnlock.GARLAND_OF_BLISS,
+            [xi.job.BLU] = xi.wsUnlock.EXPIACION,
+            [xi.job.COR] = xi.wsUnlock.LEADEN_SALUTE,
+            [xi.job.PUP] = xi.wsUnlock.STRINGING_PUMMEL,
+            [xi.job.DNC] = xi.wsUnlock.PYRRHIC_KLEOS,
+            [xi.job.SCH] = xi.wsUnlock.OMNISCIENCE,
         }
         local skill = jobs[option]
 

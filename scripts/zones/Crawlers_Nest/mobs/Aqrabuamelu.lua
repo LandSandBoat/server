@@ -2,15 +2,12 @@
 -- Area: Crawlers' Nest
 --   NM: Aqrabuamelu
 -----------------------------------
-require("scripts/globals/hunts")
-require("scripts/globals/magic")
------------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.AUTO_SPIKES, 1)
     mob:addStatusEffect(xi.effect.ICE_SPIKES, 45, 0, 0)
-    mob:getStatusEffect(xi.effect.ICE_SPIKES):setFlag(xi.effectFlag.DEATH)
+    mob:getStatusEffect(xi.effect.ICE_SPIKES):setEffectFlags(xi.effectFlag.DEATH)
 end
 
 entity.onSpikesDamage = function(mob, target, damage)
@@ -24,10 +21,10 @@ entity.onSpikesDamage = function(mob, target, damage)
     local params = {}
     params.bonusmab = 0
     params.includemab = false
-    dmg = addBonusesAbility(mob, xi.magic.ele.ICE, target, dmg, params)
-    dmg = dmg * applyResistanceAddEffect(mob, target, xi.magic.ele.ICE, 0)
-    dmg = adjustForTarget(target, dmg, xi.magic.ele.ICE)
-    dmg = finalMagicNonSpellAdjustments(mob, target, xi.magic.ele.ICE, dmg)
+    dmg = addBonusesAbility(mob, xi.element.ICE, target, dmg, params)
+    dmg = dmg * applyResistanceAddEffect(mob, target, xi.element.ICE, 0)
+    dmg = adjustForTarget(target, dmg, xi.element.ICE)
+    dmg = finalMagicNonSpellAdjustments(mob, target, xi.element.ICE, dmg)
 
     if dmg < 0 then
         dmg = 0

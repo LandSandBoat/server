@@ -1,8 +1,7 @@
 -- Zone: Den of Rancor (160)
 -- Desc: this file contains functions that are shared by multiple luas in this zone's directory
 -----------------------------------
-local ID = require("scripts/zones/Den_of_Rancor/IDs")
-require("scripts/globals/npc_util")
+local ID = zones[xi.zone.DEN_OF_RANCOR]
 -----------------------------------
 
 local denOfRancorGlobal =
@@ -11,12 +10,15 @@ local denOfRancorGlobal =
         trade to lanterns next to Sacrificial Chamber (Rancor Flame)
         ..............................................................................................]]
     onTradeLanternChamber = function(player, npc, trade)
-        if npcUtil.tradeHas(trade, xi.items.RANCOR_FLAME) then -- Rancor Flame
-            if npc:getAnimation() == xi.anim.OPEN_DOOR then
-                player:messageSpecial(ID.text.LANTERN_OFFSET + 7) -- already lit
-            else
+        if
+            trade:getItemQty(xi.item.RANCOR_FLAME) > 0 and
+            npc:getAnimation() == xi.anim.OPEN_DOOR
+        then
+            player:messageSpecial(ID.text.LANTERN_OFFSET + 7) -- already lit
+        else
+            if npcUtil.tradeHas(trade, xi.item.RANCOR_FLAME) then -- Rancor Flame
                 player:confirmTrade()
-                player:addItem(xi.items.UNLIT_LANTERN) -- return unlit lantern
+                player:addItem(xi.item.UNLIT_LANTERN) -- return unlit lantern
 
                 npc:openDoor(xi.settings.main.LANTERNS_STAY_LIT) -- light lantern
 
@@ -44,12 +46,15 @@ local denOfRancorGlobal =
         trade to lanterns next to Hakutaku (Rancor Flame)
         ..............................................................................................]]
     onTradeLanternHaku = function(player, npc, trade)
-        if npcUtil.tradeHas(trade, xi.items.RANCOR_FLAME) then -- Rancor Flame
-            if npc:getAnimation() == xi.anim.OPEN_DOOR then
-                player:messageSpecial(ID.text.LANTERN_OFFSET + 7) -- already lit
-            else
+        if
+            trade:getItemQty(xi.item.RANCOR_FLAME) > 0 and
+            npc:getAnimation() == xi.anim.OPEN_DOOR
+        then
+            player:messageSpecial(ID.text.LANTERN_OFFSET + 7) -- already lit
+        else
+            if npcUtil.tradeHas(trade, xi.item.RANCOR_FLAME) then -- Rancor Flame
                 player:confirmTrade()
-                player:addItem(xi.items.UNLIT_LANTERN) -- return unlit lantern
+                player:addItem(xi.item.UNLIT_LANTERN) -- return unlit lantern
 
                 npc:openDoor(xi.settings.main.LANTERNS_STAY_LIT) -- light lantern
 
@@ -78,12 +83,15 @@ local denOfRancorGlobal =
     onTradeLanternBoss = function(player, npc, trade)
         local itemId = 1131 + npc:getID() - ID.npc.LANTERN_OFFSET
 
-        if npcUtil.tradeHas(trade, itemId) then -- Flame of Crimson or Blue Rancor
-            if npc:getAnimation() == xi.anim.OPEN_DOOR then
-                player:messageSpecial(ID.text.LANTERN_OFFSET + 7) -- already lit
-            else
+        if
+            trade:getItemQty(itemId) > 0 and  -- Flame of Crimson or Blue Rancor
+            npc:getAnimation() == xi.anim.OPEN_DOOR
+        then
+            player:messageSpecial(ID.text.LANTERN_OFFSET + 7) -- already lit
+        else
+            if npcUtil.tradeHas(trade, itemId) then -- Flame of Crimson or Blue Rancor
                 player:confirmTrade()
-                player:addItem(xi.items.UNLIT_LANTERN) -- return unlit lantern
+                player:addItem(xi.item.UNLIT_LANTERN) -- return unlit lantern
 
                 npc:openDoor(xi.settings.main.LANTERNS_STAY_LIT) -- light lantern
 

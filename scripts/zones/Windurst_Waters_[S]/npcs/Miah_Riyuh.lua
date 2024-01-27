@@ -3,11 +3,7 @@
 --  NPC: Miah Riyuh
 -- !pos 5.323 -2 37.462 94
 -----------------------------------
-local ID = require("scripts/zones/Windurst_Waters_[S]/IDs")
-require("scripts/globals/missions")
-require("scripts/globals/quests")
-require("scripts/globals/titles")
-require("scripts/globals/utils")
+local ID = zones[xi.zone.WINDURST_WATERS_S]
 -----------------------------------
 local entity = {}
 
@@ -29,12 +25,12 @@ entity.onTrigger = function(player, npc)
         player:startEvent(103)
     elseif
         snakeOnThePlains == QUEST_AVAILABLE and
-        player:getCharVar("GREEN_R_LETTER_USED") == 1
+        player:getCharVar('GREEN_R_LETTER_USED') == 1
     then
         player:startEvent(105)
     elseif
         snakeOnThePlains == QUEST_ACCEPTED and
-        utils.mask.isFull(player:getCharVar("SEALED_DOORS"), 3)
+        utils.mask.isFull(player:getCharVar('SEALED_DOORS'), 3)
     then
         player:startEvent(106)
     elseif
@@ -43,15 +39,15 @@ entity.onTrigger = function(player, npc)
     then
         local puttyUsed = 0
 
-        if utils.mask.getBit(player:getCharVar("SEALED_DOORS"), 0) then
+        if utils.mask.getBit(player:getCharVar('SEALED_DOORS'), 0) then
             puttyUsed = puttyUsed + 1
         end
 
-        if utils.mask.getBit(player:getCharVar("SEALED_DOORS"), 1) then
+        if utils.mask.getBit(player:getCharVar('SEALED_DOORS'), 1) then
             puttyUsed = puttyUsed + 1
         end
 
-        if utils.mask.getBit(player:getCharVar("SEALED_DOORS"), 2) then
+        if utils.mask.getBit(player:getCharVar('SEALED_DOORS'), 2) then
             puttyUsed = puttyUsed + 1
         end
 
@@ -70,44 +66,44 @@ entity.onEventFinish = function(player, csid, option, npc)
     if csid == 103 and option == 0 then
         player:addQuest(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.SNAKE_ON_THE_PLAINS)
         player:addKeyItem(xi.ki.ZONPA_ZIPPAS_ALL_PURPOSE_PUTTY)
-        player:setCharVar("GREEN_R_LETTER_USED", 1)
+        player:setCharVar('GREEN_R_LETTER_USED', 1)
         player:delKeyItem(xi.ki.GREEN_RECOMMENDATION_LETTER)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.ZONPA_ZIPPAS_ALL_PURPOSE_PUTTY)
     elseif csid == 103 and option == 1 then
-        player:setCharVar("GREEN_R_LETTER_USED", 1)
+        player:setCharVar('GREEN_R_LETTER_USED', 1)
         player:delKeyItem(xi.ki.GREEN_RECOMMENDATION_LETTER)
     elseif csid == 104 and option == 1 then
         player:delQuest(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.SNAKE_ON_THE_PLAINS)
         player:delKeyItem(xi.ki.ZONPA_ZIPPAS_ALL_PURPOSE_PUTTY)
-        player:setCharVar("SEALED_DOORS", 0)
+        player:setCharVar('SEALED_DOORS', 0)
     elseif csid == 105 and option == 0 then
         player:addQuest(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.SNAKE_ON_THE_PLAINS)
         player:addKeyItem(xi.ki.ZONPA_ZIPPAS_ALL_PURPOSE_PUTTY)
-        player:setCharVar("GREEN_R_LETTER_USED", 1)
+        player:setCharVar('GREEN_R_LETTER_USED', 1)
         player:delKeyItem(xi.ki.GREEN_RECOMMENDATION_LETTER)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.ZONPA_ZIPPAS_ALL_PURPOSE_PUTTY)
     elseif csid == 106 and option == 0 then
         -- Is first join, so add Sprinter's Shoes and bronze medal
-        if player:getCharVar("Campaign_Nation") == 0 then
+        if player:getCharVar('Campaign_Nation') == 0 then
             if player:getFreeSlotsCount() >= 1 then
                 player:setCampaignAllegiance(3)
-                player:setCharVar("GREEN_R_LETTER_USED", 0)
+                player:setCharVar('GREEN_R_LETTER_USED', 0)
                 player:addTitle(xi.title.COBRA_UNIT_MERCENARY)
                 player:addKeyItem(xi.ki.BRONZE_RIBBON_OF_SERVICE)
-                player:addItem(xi.items.SPRINTERS_SHOES)
+                player:addItem(xi.item.SPRINTERS_SHOES)
                 player:completeQuest(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.SNAKE_ON_THE_PLAINS)
-                player:setCharVar("SEALED_DOORS", 0)
+                player:setCharVar('SEALED_DOORS', 0)
                 player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.BRONZE_RIBBON_OF_SERVICE)
-                player:messageSpecial(ID.text.ITEM_OBTAINED, xi.items.SPRINTERS_SHOES)
+                player:messageSpecial(ID.text.ITEM_OBTAINED, xi.item.SPRINTERS_SHOES)
             else
-                player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.items.SPRINTERS_SHOES)
+                player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.item.SPRINTERS_SHOES)
             end
         else
             player:setCampaignAllegiance(3)
-            player:setCharVar("GREEN_R_LETTER_USED", 0)
+            player:setCharVar('GREEN_R_LETTER_USED', 0)
             player:addTitle(xi.title.COBRA_UNIT_MERCENARY)
             player:completeQuest(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.SNAKE_ON_THE_PLAINS)
-            player:setCharVar("SEALED_DOORS", 0)
+            player:setCharVar('SEALED_DOORS', 0)
         end
     end
 end

@@ -4,11 +4,7 @@
 -- Log ID: 3, Quest ID: 43
 -- Zona Shodhun : !pos -175 -5 -4 246
 -----------------------------------
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
-require('scripts/globals/interaction/quest')
------------------------------------
-local portJeunoID = require('scripts/zones/Port_Jeuno/IDs')
+local portJeunoID = zones[xi.zone.PORT_JEUNO]
 -----------------------------------
 
 local quest = Quest:new(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.PRETTY_LITTLE_THINGS)
@@ -21,37 +17,37 @@ quest.reward =
 
 local invalidRocks =
 {
-    xi.items.RED_ROCK,
-    xi.items.BLUE_ROCK,
-    xi.items.GREEN_ROCK,
-    xi.items.TRANSLUCENT_ROCK,
-    xi.items.PURPLE_ROCK,
-    xi.items.BLACK_ROCK,
-    xi.items.WHITE_ROCK,
+    xi.item.RED_ROCK,
+    xi.item.BLUE_ROCK,
+    xi.item.GREEN_ROCK,
+    xi.item.TRANSLUCENT_ROCK,
+    xi.item.PURPLE_ROCK,
+    xi.item.BLACK_ROCK,
+    xi.item.WHITE_ROCK,
 }
 
 local flowerItems =
 {
-    xi.items.AMARYLLIS,
-    xi.items.ASPHODEL,
-    xi.items.CARNATION,
-    xi.items.CASABLANCA,
-    xi.items.CATTLEYA,
-    xi.items.CHAMOMILE,
-    xi.items.DAHLIA,
-    xi.items.FLAX_FLOWER,
-    xi.items.LILAC,
-    xi.items.LYCOPODIUM_FLOWER,
-    xi.items.MARGUERITE,
-    xi.items.OLIVE_FLOWER,
-    xi.items.PAPAKA_GRASS,
-    xi.items.PHALAENOPSIS,
-    xi.items.RAIN_LILY,
-    xi.items.RED_ROSE,
-    xi.items.SNOW_LILY,
-    xi.items.SWEET_WILLIAM,
-    xi.items.TAHRONGI_CACTUS,
-    xi.items.WATER_LILY,
+    xi.item.AMARYLLIS,
+    xi.item.ASPHODEL,
+    xi.item.CARNATION,
+    xi.item.CASABLANCA,
+    xi.item.CATTLEYA,
+    xi.item.CHAMOMILE,
+    xi.item.DAHLIA,
+    xi.item.FLAX_FLOWER,
+    xi.item.LILAC,
+    xi.item.LYCOPODIUM_FLOWER,
+    xi.item.MARGUERITE,
+    xi.item.OLIVE_FLOWER,
+    xi.item.PAPAKA_GRASS,
+    xi.item.PHALAENOPSIS,
+    xi.item.RAIN_LILY,
+    xi.item.RED_ROSE,
+    xi.item.SNOW_LILY,
+    xi.item.SWEET_WILLIAM,
+    xi.item.TAHRONGI_CACTUS,
+    xi.item.WATER_LILY,
 }
 
 local function isTradeInTable(trade, itemTable)
@@ -79,7 +75,7 @@ quest.sections =
             ['Zona_Shodhun'] =
             {
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, xi.items.YELLOW_ROCK) then
+                    if npcUtil.tradeHasExactly(trade, xi.item.YELLOW_ROCK) then
                         return quest:progressEvent(10023, 1, 246, 2, 1, 0, 1, 5, 1)
                     elseif isTradeInTable(trade, invalidRocks) then
                         return quest:progressEvent(10023, 0, 246, 1, 1, 0, 1, 7, 1)
@@ -128,7 +124,7 @@ quest.sections =
             {
                 -- NOTE: No items are consumed after quest complete.
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, xi.items.YELLOW_ROCK) then
+                    if npcUtil.tradeHasExactly(trade, xi.item.YELLOW_ROCK) then
                         return quest:progressEvent(10023, 0, 246, 4, 1, 0, 1, 7, 0)
                     elseif isTradeInTable(trade, invalidRocks) then
                         return quest:progressEvent(10023, 0, 246, 5, 1, 0, 1, 7, 0)

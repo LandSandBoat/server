@@ -3,13 +3,10 @@
 -- Promathia 1-1
 -----------------------------------
 -- NOTE: xi.mission.id.cop.THE_RITES_OF_LIFE is set when zoning into Lower Delkfutt's Tower from Qufim
---       ENABLE_COP must be set to 1 in scripts/globals/settings.lua
+--       ENABLE_COP must be set to 1 in settings/main.lua
 -- 1. Enter Lower Delkfutt: !pos -286 -20 320 126
 -- 2. Enter Upper Jeuno:    !pos 2.2 -3.2 58.4 245
 -- 3. Talk to Monberaux:    !pos -43 0 -1 244
------------------------------------
-require('scripts/globals/interaction/mission')
-require('scripts/globals/missions')
 -----------------------------------
 
 local mission = Mission:new(xi.mission.log_id.COP, xi.mission.id.cop.THE_RITES_OF_LIFE)

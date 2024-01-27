@@ -3,9 +3,7 @@
 --  NPC: Boytz
 -- Standard Merchant NPC
 -----------------------------------
-local ID = require("scripts/zones/Bastok_Mines/IDs")
-require("scripts/globals/conquest")
-require("scripts/globals/shop")
+local ID = zones[xi.zone.BASTOK_MINES]
 -----------------------------------
 local entity = {}
 
@@ -15,28 +13,29 @@ end
 entity.onTrigger = function(player, npc)
     local stock =
     {
-        4128, 4445, 1, -- Ether
-        4151,  736, 2, -- Echo Drops
-        4112,  837, 2, -- Potion
-        17318,   3, 2, -- Wooden Arrow
-        217,   900, 3, -- Brass Flowerpot
-        605,   180, 3, -- Pickaxe
-        4150, 2387, 3, -- Eye Drops
-        4148,  290, 3, -- Antidote
-        17320,   7, 3, -- Iron Arrow
-        17336,   5, 3, -- Crossbow Bolt
+        xi.item.BRASS_FLOWERPOT,      1040, 3,
+        xi.item.PICKAXE,               208, 3,
+        xi.item.FLASK_OF_EYE_DROPS,   2698, 3,
+        xi.item.ANTIDOTE,              328, 3,
+        xi.item.FLASK_OF_ECHO_DROPS,   832, 2,
+        xi.item.POTION,                946, 2,
+        xi.item.ETHER,                5025, 1,
+        xi.item.WOODEN_ARROW,            4, 2,
+        xi.item.IRON_ARROW,              8, 3,
+        xi.item.CROSSBOW_BOLT,           6, 3,
+        xi.item.REPUBLIC_WAYSTONE,   10400, 3,
     }
 
     local rank = GetNationRank(xi.nation.BASTOK)
 
-    if rank ~= 1 then
-        table.insert(stock, 1022) -- Thief's Tools
+    if rank >= 2 then
+        table.insert(stock, xi.item.SET_OF_THIEFS_TOOLS)
         table.insert(stock, 3643)
         table.insert(stock, 3)
     end
 
-    if rank == 3 then
-        table.insert(stock, 1023) -- Living Key
+    if rank >= 3 then
+        table.insert(stock, xi.item.LIVING_KEY)
         table.insert(stock, 5520)
         table.insert(stock, 3)
     end

@@ -2,11 +2,6 @@
 -- Fear of the Dark 2
 -- Suldiran !pos 42 -7 -43 48
 -----------------------------------
-require('scripts/globals/quests')
-require('scripts/globals/npc_util')
-require('scripts/globals/interaction/quest')
-require('scripts/globals/titles')
------------------------------------
 
 local quest = Quest:new(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.FEAR_OF_THE_DARK_II)
 
@@ -59,7 +54,7 @@ quest.sections =
                 end,
 
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, { { xi.items.IMP_WING, 2 } }) then
+                    if npcUtil.tradeHasExactly(trade, { { xi.item.IMP_WING, 2 } }) then
                         return quest:progressEvent(16)
                     end
                 end,
@@ -91,7 +86,7 @@ quest.sections =
                 end,
 
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, { { xi.items.IMP_WING, 2 } }) then
+                    if npcUtil.tradeHasExactly(trade, { { xi.item.IMP_WING, 2 } }) then
                         return quest:progressEvent(18)
                     end
                 end,
@@ -101,7 +96,7 @@ quest.sections =
             {
                 [18] = function(player, csid, option, npc)
                     player:confirmTrade()
-                    npcUtil.giveCurrency(player, "gil", 200)
+                    npcUtil.giveCurrency(player, 'gil', 200)
                 end,
             },
         },

@@ -3,17 +3,23 @@
 -- desc: Summon a fightable Fafnir (no loot)
 -- note:
 -----------------------------------
+local commandObj = {}
 
-cmdprops =
+commandObj.cmdprops =
 {
     permission = 5,
-    parameters = ""
+    parameters = ''
 }
 
-function onTrigger(player)
-    local zone = player:getZone()
+commandObj.onTrigger = function(player)
+    local zoneOrInstanceObj = player:getZone()
 
-    local mob = zone:insertDynamicEntity({
+    local instance = player:getInstance()
+    if instance then
+        zoneOrInstanceObj = instance
+    end
+
+    local mob = zoneOrInstanceObj:insertDynamicEntity({
         -- NPC or MOB
         objtype = xi.objType.MOB,
 
@@ -22,11 +28,11 @@ function onTrigger(player)
         --     : So populate it with something unique-ish even if you aren't going to use it.
         --     : You can then hide the name with entity:hideName(true)
         -- NOTE: This name CAN include spaces and underscores.
-        name = "Fafnir",
+        name = 'Fafnir',
 
         -- Optional: Define a different name that is visible to players.
-        -- "Fafnir" (DE_Fafnir) will still be used internally for lookups.
-        -- packetName = "Fake Fafnir",
+        -- 'Fafnir' (DE_Fafnir) will still be used internally for lookups.
+        -- packetName = 'Fake Fafnir',
 
         -- Set the position using in-game x, y and z
         x = player:getXPos(),
@@ -53,11 +59,11 @@ function onTrigger(player)
         -- You can apply mixins like you would with regular mobs. mixinOptions aren't supported yet.
         mixins =
         {
-            require("scripts/mixins/rage"),
-            require("scripts/mixins/job_special"),
+            require('scripts/mixins/rage'),
+            require('scripts/mixins/job_special'),
         },
 
-        -- The "whooshy" special animation that plays when Trusts or Dynamis mobs spawn
+        -- The 'whooshy' special animation that plays when Trusts or Dynamis mobs spawn
         specialSpawnAnimation = true,
     })
 
@@ -70,5 +76,7 @@ function onTrigger(player)
 
     mob:spawn()
 
-    player:PrintToPlayer(string.format("Spawning Fafnir (Lv: %i, HP: %i)\n%s", mob:getMainLvl(), mob:getMaxHP(), mob))
+    player:printToPlayer(string.format('Spawning Fafnir (Lv: %i, HP: %i)\n%s', mob:getMainLvl(), mob:getMaxHP(), mob))
 end
+
+return commandObj

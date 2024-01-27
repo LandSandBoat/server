@@ -115,12 +115,6 @@ static constexpr int32                               ExpTableRowCount = 60;
 std::array<std::array<uint16, 20>, ExpTableRowCount> g_ExpTable;
 std::array<uint16, 100>                              g_ExpPerLevel;
 
-/************************************************************************
- *                                                                       *
- *                                                                       *
- *                                                                       *
- ************************************************************************/
-
 namespace charutils
 {
     /************************************************************************
@@ -151,6 +145,23 @@ namespace charutils
         JOBTYPE    mjob        = PChar->GetMJob();
         JOBTYPE    sjob        = PChar->GetSJob();
         MERIT_TYPE statMerit[] = { MERIT_STR, MERIT_DEX, MERIT_VIT, MERIT_AGI, MERIT_INT, MERIT_MND, MERIT_CHR };
+
+        // We have to make sure we don't leave the job as JOB_MON - we CANNOT generate stats for it.
+        if (mjob == JOB_MON || sjob == JOB_MON)
+        {
+            mjob = JOB_WAR;
+            sjob = JOB_WAR;
+        }
+
+        // NOTE: Monstrosity (MON) is treated as its own job, but each species is it's own
+        //     : combination of main/sub job for stats, traits and abilities.
+        if (PChar->m_PMonstrosity != nullptr)
+        {
+            mjob = PChar->m_PMonstrosity->MainJob;
+            sjob = PChar->m_PMonstrosity->SubJob;
+            mlvl = PChar->m_PMonstrosity->levels[PChar->m_PMonstrosity->MonstrosityId];
+            slvl = mlvl;
+        }
 
         uint8 race = 0; // Hume
 
@@ -190,7 +201,7 @@ namespace charutils
         int32 subLevelOver10 = std::clamp(slvl - 10, 0, 20); // + 1HP for each level after 10 (/ 2)
         int32 subLevelOver30 = (slvl < 30 ? 0 : slvl - 30);  // + 1HP for each level after 30
 
-        // Расчет Racestat Jobstat Bonusstat Sjobstat
+        // Calculate Racestat Jobstat Bonusstat Sjobstat
         // Calculation of race
 
         grade = grade::GetRaceGrades(race, 0);
@@ -862,6 +873,8 @@ namespace charutils
             PChar->m_FieldChocobo = sql->GetUIntData(0);
         }
 
+        monstrosity::TryPopulateMonstrosityData(PChar);
+
         charutils::LoadInventory(PChar);
 
         CalculateStats(PChar);
@@ -998,7 +1011,7 @@ namespace charutils
 
                     if (PItem->isType(ITEM_FURNISHING) && (PItem->getLocationID() == LOC_MOGSAFE || PItem->getLocationID() == LOC_MOGSAFE2))
                     {
-                        if (((CItemFurnishing*)PItem)->isInstalled()) // способ узнать, что предмет действительно установлен
+                        if (((CItemFurnishing*)PItem)->isInstalled()) // Check if furniture (furnishing) item is actually installed
                         {
                             PChar->getStorage(LOC_STORAGE)->AddBuff(((CItemFurnishing*)PItem)->getStorage());
                         }
@@ -1052,38 +1065,45 @@ namespace charutils
 
         if (ret != SQL_ERROR)
         {
+            // equipSlotData[equipSlotId] = { slotId, containerId }
+            std::unordered_map<uint8, std::pair<uint8, uint8>> equipSlotData;
+
+            // NOTE: This data is stored in the above map since if the item has an augment, another db
+            // query will occur, which will destroy the current query results.
+            while (sql->NextRow() == SQL_SUCCESS)
+            {
+                equipSlotData[sql->GetUIntData(1)] = { static_cast<uint8>(sql->GetUIntData(0)), static_cast<uint8>(sql->GetUIntData(2)) };
+            }
+
             CItemLinkshell* PLinkshell1   = nullptr;
             CItemLinkshell* PLinkshell2   = nullptr;
             bool            hasMainWeapon = false;
 
-            while (sql->NextRow() == SQL_SUCCESS)
+            for (auto const& [equipSlotId, inventoryLoc] : equipSlotData)
             {
-                if (sql->GetUIntData(1) < 16)
+                if (equipSlotId < 16)
                 {
-                    if (sql->GetUIntData(1) == SLOT_MAIN)
+                    if (equipSlotId == SLOT_MAIN)
                     {
                         hasMainWeapon = true;
                     }
 
-                    EquipItem(PChar, sql->GetUIntData(0), sql->GetUIntData(1), sql->GetUIntData(2));
+                    EquipItem(PChar, inventoryLoc.first, equipSlotId, inventoryLoc.second);
                 }
                 else
                 {
-                    uint8  SlotID     = sql->GetUIntData(0);
-                    uint8  equipSlot  = sql->GetUIntData(1);
-                    uint8  LocationID = sql->GetUIntData(2);
-                    CItem* PItem      = PChar->getStorage(LocationID)->GetItem(SlotID);
+                    CItem* PItem = PChar->getStorage(inventoryLoc.second)->GetItem(inventoryLoc.first);
 
                     if ((PItem != nullptr) && PItem->isType(ITEM_LINKSHELL))
                     {
                         PItem->setSubType(ITEM_LOCKED);
-                        PChar->equip[equipSlot]    = SlotID;
-                        PChar->equipLoc[equipSlot] = LocationID;
-                        if (equipSlot == SLOT_LINK1)
+                        PChar->equip[equipSlotId]    = inventoryLoc.first;
+                        PChar->equipLoc[equipSlotId] = inventoryLoc.second;
+                        if (equipSlotId == SLOT_LINK1)
                         {
                             PLinkshell1 = (CItemLinkshell*)PItem;
                         }
-                        else if (equipSlot == SLOT_LINK2)
+                        else if (equipSlotId == SLOT_LINK2)
                         {
                             PLinkshell2 = (CItemLinkshell*)PItem;
                         }
@@ -1140,7 +1160,7 @@ namespace charutils
 
     /************************************************************************
      *                                                                       *
-     *  We send a list of current / completed quests and missions.           *
+     *  Send lists of current / completed quests and missions.               *
      *                                                                       *
      ************************************************************************/
 
@@ -1193,7 +1213,7 @@ namespace charutils
 
     /************************************************************************
      *                                                                       *
-     *  We send the character all its inventory                              *
+     *  Send the character all its inventory                                 *
      *                                                                       *
      ************************************************************************/
 
@@ -1510,7 +1530,7 @@ namespace charutils
 
         if ((int32)(PItem->getQuantity() - PItem->getReserve() + quantity) < 0)
         {
-            ShowDebug("UpdateItem: %s trying to move invalid quantity %u of itemID %u", PChar->GetName(), quantity, ItemID);
+            ShowDebug("UpdateItem: %s trying to move invalid quantity %u of itemID %u", PChar->getName(), quantity, ItemID);
             return 0;
         }
 
@@ -1596,7 +1616,7 @@ namespace charutils
     {
         if (charutils::UpdateItem(PChar, container, slotID, -quantity) != 0)
         {
-            ShowInfo("Player %s DROPPING itemID: %s (%u) quantity: %u", PChar->GetName(), itemutils::GetItemPointer(ItemID)->getName(), ItemID, quantity);
+            ShowInfo("Player %s DROPPING itemID: %s (%u) quantity: %u", PChar->getName(), itemutils::GetItemPointer(ItemID)->getName(), ItemID, quantity);
             PChar->pushPacket(new CMessageStandardPacket(nullptr, ItemID, quantity, MsgStd::ThrowAway));
             PChar->pushPacket(new CInventoryFinishPacket());
         }
@@ -1604,17 +1624,23 @@ namespace charutils
 
     /************************************************************************
      *                                                                       *
-     *  Check the possibility of trade between the characters                *
+     *  Check the possibility of trade between characters                    *
      *                                                                       *
      ************************************************************************/
 
     bool CanTrade(CCharEntity* PChar, CCharEntity* PTarget)
     {
-        if (PTarget->getStorage(LOC_INVENTORY)->GetFreeSlotsCount() < PChar->UContainer->GetItemsCount())
+        if (PChar->m_PMonstrosity != nullptr || PTarget->m_PMonstrosity != nullptr)
         {
-            ShowDebug("Unable to trade, %s doesn't have enough inventory space", PTarget->GetName());
             return false;
         }
+
+        if (PTarget->getStorage(LOC_INVENTORY)->GetFreeSlotsCount() < PChar->UContainer->GetItemsCount())
+        {
+            ShowDebug("Unable to trade, %s doesn't have enough inventory space", PTarget->getName());
+            return false;
+        }
+
         for (uint8 slotid = 0; slotid <= 8; ++slotid)
         {
             CItem* PItem = PChar->UContainer->GetItem(slotid);
@@ -1623,11 +1649,12 @@ namespace charutils
             {
                 if (HasItem(PTarget, PItem->getID()))
                 {
-                    ShowDebug("Unable to trade, %s has the rare item already (%s)", PTarget->GetName(), PItem->getName());
+                    ShowDebug("Unable to trade, %s has the rare item already (%s)", PTarget->getName(), PItem->getName());
                     return false;
                 }
             }
         }
+
         return true;
     }
 
@@ -1639,7 +1666,7 @@ namespace charutils
 
     void DoTrade(CCharEntity* PChar, CCharEntity* PTarget)
     {
-        ShowDebug("%s->%s trade item movement started", PChar->GetName(), PTarget->GetName());
+        ShowDebug("%s->%s trade item movement started", PChar->getName(), PTarget->getName());
         for (uint8 slotid = 0; slotid <= 8; ++slotid)
         {
             CItem* PItem = PChar->UContainer->GetItem(slotid);
@@ -1649,16 +1676,16 @@ namespace charutils
                 if (PItem->getStackSize() == 1 && PItem->getReserve() == 1)
                 {
                     CItem* PNewItem = itemutils::GetItem(PItem);
-                    ShowDebug("Adding %s to %s inventory stacksize 1", PNewItem->getName(), PTarget->GetName());
+                    ShowDebug("Adding %s to %s inventory stacksize 1", PNewItem->getName(), PTarget->getName());
                     PNewItem->setReserve(0);
                     AddItem(PTarget, LOC_INVENTORY, PNewItem);
                 }
                 else
                 {
-                    ShowDebug("Adding %s to %s inventory", PItem->getName(), PTarget->GetName());
+                    ShowDebug("Adding %s to %s inventory", PItem->getName(), PTarget->getName());
                     AddItem(PTarget, LOC_INVENTORY, PItem->getID(), PItem->getReserve());
                 }
-                ShowDebug("Removing %s from %s's inventory", PItem->getName(), PChar->GetName());
+                ShowDebug("Removing %s from %s's inventory", PItem->getName(), PChar->getName());
                 auto amount = PItem->getReserve();
                 PItem->setReserve(0);
                 UpdateItem(PChar, LOC_INVENTORY, PItem->getSlotID(), (int32)(0 - amount));
@@ -1669,8 +1696,8 @@ namespace charutils
 
     /************************************************************************
      *                                                                       *
-     * Remove from the character equipped item without updating the external *
-     * species. Used as an auxiliary function in a bundle with others        *
+     *  Remove equipped item from character without updating the external    *
+     *  species (used as an auxiliary function in a bundle with others)      *
      *                                                                       *
      ************************************************************************/
 
@@ -1805,8 +1832,8 @@ namespace charutils
                     if (((CItemWeapon*)PItem)->getSkillType() != SKILL_STRING_INSTRUMENT && ((CItemWeapon*)PItem)->getSkillType() != SKILL_WIND_INSTRUMENT)
                     {
                         PChar->health.tp = 0;
+                        PChar->StatusEffectContainer->DelStatusEffect(EFFECT_AFTERMATH);
                     }
-                    PChar->StatusEffectContainer->DelStatusEffect(EFFECT_AFTERMATH);
                     BuildingCharWeaponSkills(PChar);
                     UpdateWeaponStyle(PChar, equipSlotID, nullptr);
                 }
@@ -1868,7 +1895,7 @@ namespace charutils
 
     /************************************************************************
      *                                                                       *
-     * We are trying to equip the subject in compliance with all conditions  *
+     *  Try to equip the subject in compliance with all conditions           *
      *                                                                       *
      ************************************************************************/
 
@@ -2426,7 +2453,7 @@ namespace charutils
                 // Update db
                 if (sql->Query(Query, LOC_RECYCLEBIN, i - 1, PChar->id, LOC_RECYCLEBIN, i) == SQL_ERROR || sql->AffectedRows() == 0)
                 {
-                    ShowError("Problem moving Recycle Bin items! (%s - %s)", PChar->GetName(), PItem->getName());
+                    ShowError("Problem moving Recycle Bin items! (%s - %s)", PChar->getName(), PItem->getName());
                 }
             }
 
@@ -2435,7 +2462,7 @@ namespace charutils
             RecycleBin->InsertItem(PItem, 10);
             if (sql->Query(Query, LOC_RECYCLEBIN, 10, PChar->id, container, slotID) == SQL_ERROR || sql->AffectedRows() == 0)
             {
-                ShowError("Problem moving Recycle Bin items! (%s - %s)", PChar->GetName(), PItem->getName());
+                ShowError("Problem moving Recycle Bin items! (%s - %s)", PChar->getName(), PItem->getName());
             }
 
             // Send update packets
@@ -2586,6 +2613,13 @@ namespace charutils
                 PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, 0, 0, 0x200));
                 return;
             }
+
+            // Disallow everything but shields if you're using H2H
+            // Equipping a shield will unequip the H2H weapon and you will go barefisted with a shield
+            if (PMainItem && PMainItem->getSkillType() == SKILL_HAND_TO_HAND)
+            {
+                return;
+            }
         }
 
         if (slotID == 0)
@@ -2651,6 +2685,7 @@ namespace charutils
             {
                 // If the weapon ISN'T a wind based instrument or a string based instrument
                 PChar->health.tp = 0;
+                PChar->StatusEffectContainer->DelStatusEffect(EFFECT_AFTERMATH);
             }
 
             if (!PChar->getEquip(SLOT_MAIN) || !PChar->getEquip(SLOT_MAIN)->isType(ITEM_EQUIPMENT) ||
@@ -2659,7 +2694,6 @@ namespace charutils
                 CheckUnarmedWeapon(PChar);
             }
 
-            PChar->StatusEffectContainer->DelStatusEffect(EFFECT_AFTERMATH);
             BuildingCharWeaponSkills(PChar);
             PChar->pushPacket(new CCharAbilitiesPacket(PChar));
         }
@@ -2678,7 +2712,7 @@ namespace charutils
 
     /************************************************************************
      *                                                                       *
-     * Check the feature of the character wearing the items equipped on it   *
+     *  Check the feature of the character wearing the items equipped on it  *
      *                                                                       *
      ************************************************************************/
 
@@ -2726,8 +2760,7 @@ namespace charutils
         PChar->pushPacket(new CCharAppearancePacket(PChar));
 
         BuildingCharWeaponSkills(PChar);
-        SaveCharEquip(PChar);
-        SaveCharLook(PChar);
+        PChar->RequestPersist(CHAR_PERSIST::EQUIP);
     }
 
     void RemoveAllEquipment(CCharEntity* PChar)
@@ -2747,8 +2780,7 @@ namespace charutils
         CheckUnarmedWeapon(PChar);
 
         BuildingCharWeaponSkills(PChar);
-        SaveCharEquip(PChar);
-        SaveCharLook(PChar);
+        PChar->RequestPersist(CHAR_PERSIST::EQUIP);
     }
 
     /************************************************************************
@@ -2871,6 +2903,10 @@ namespace charutils
                         {
                             addPetAbility(PChar, PAbility->getID() - ABILITY_HEALING_RUBY);
                         }
+                        else if (PAbility->getID() == ABILITY_PACIFYING_RUBY)
+                        {
+                            addPetAbility(PChar, 261);
+                        }
                     }
                     else if (PetID >= PETID_FENRIR && PetID <= PETID_RAMUH)
                     {
@@ -2888,7 +2924,7 @@ namespace charutils
                     }
                     else if (PetID == PETID_CAIT_SITH)
                     {
-                        if (PAbility->getID() > ABILITY_SOOTHING_RUBY && PAbility->getID() <= ABILITY_MOONLIT_CHARGE)
+                        if (PAbility->getID() > ABILITY_SOOTHING_RUBY && PAbility->getID() < ABILITY_MOONLIT_CHARGE)
                         {
                             addPetAbility(PChar, PAbility->getID() - ABILITY_HEALING_RUBY);
                         }
@@ -2919,25 +2955,21 @@ namespace charutils
     /************************************************************************
      *                                                                       *
      *  Collect the work table of the character's abilities.With zero level  *
-     *  There must be 2H abilities.On this condition, sift them for SJOB     *
+     *  There must be 2H abilities .On this condition, sift them for SJOB    *
      *                                                                       *
      ************************************************************************/
 
     void BuildingCharAbilityTable(CCharEntity* PChar)
     {
-        std::vector<CAbility*> AbilitiesList;
-
         if (PChar == nullptr)
         {
             ShowWarning("charutils::BuildingCharAbilityTable() - PChar was null.");
             return;
         }
 
-        memset(&PChar->m_Abilities, 0, sizeof(PChar->m_Abilities));
+        std::memset(&PChar->m_Abilities, 0, sizeof(PChar->m_Abilities));
 
-        AbilitiesList = ability::GetAbilities(PChar->GetMJob());
-
-        for (auto PAbility : AbilitiesList)
+        for (auto PAbility : ability::GetAbilities(PChar->GetMJob()))
         {
             if (PAbility == nullptr)
             {
@@ -2975,9 +3007,7 @@ namespace charutils
             return;
         }
 
-        AbilitiesList = ability::GetAbilities(PChar->GetSJob());
-
-        for (auto PAbility : AbilitiesList)
+        for (auto PAbility : ability::GetAbilities(PChar->GetSJob()))
         {
             if (PChar->GetSLevel() >= PAbility->getLevel())
             {
@@ -3016,7 +3046,7 @@ namespace charutils
     /************************************************************************
      *                                                                       *
      *  Collect the work table of the character skills based on real.        *
-     *  Add restrictions, note the skills of the main profession (rank! = 0) *
+     *  Add restrictions, note the skills of the main job (rank! = 0)        *
      *                                                                       *
      ************************************************************************/
 
@@ -3213,23 +3243,38 @@ namespace charutils
         PChar->TraitList.clear();
         memset(&PChar->m_TraitList, 0, sizeof(PChar->m_TraitList));
 
-        battleutils::AddTraits(PChar, traits::GetTraits(PChar->GetMJob()), PChar->GetMLevel());
-        battleutils::AddTraits(PChar, traits::GetTraits(PChar->GetSJob()), PChar->GetSLevel());
+        auto mjob = PChar->GetMJob();
+        auto sjob = PChar->GetSJob();
+        auto mlvl = PChar->GetMLevel();
+        auto slvl = PChar->GetSLevel();
 
-        if (PChar->GetMJob() == JOB_BLU || PChar->GetSJob() == JOB_BLU)
+        // NOTE: Monstrosity (MON) is treated as its own job, but each species is it's own
+        //     : combination of main/sub job for stats, traits and abilities.
+        if (PChar->m_PMonstrosity != nullptr)
+        {
+            mjob = PChar->m_PMonstrosity->MainJob;
+            sjob = PChar->m_PMonstrosity->SubJob;
+            mlvl = PChar->m_PMonstrosity->levels[PChar->m_PMonstrosity->MonstrosityId];
+            slvl = mlvl;
+        }
+
+        battleutils::AddTraits(PChar, traits::GetTraits(mjob), mlvl);
+        battleutils::AddTraits(PChar, traits::GetTraits(sjob), slvl);
+
+        if (mjob == JOB_BLU || sjob == JOB_BLU)
         {
             blueutils::CalculateTraits(PChar);
         }
 
         PChar->delModifier(Mod::MEVA, PChar->m_magicEvasion);
 
-        PChar->m_magicEvasion = battleutils::GetMaxSkill(12, PChar->GetMLevel()); // Player MEVA is Rank G
+        PChar->m_magicEvasion = battleutils::GetMaxSkill(12, mlvl); // Player MEVA is Rank G
         PChar->addModifier(Mod::MEVA, PChar->m_magicEvasion);
     }
 
     /************************************************************************
      *                                                                       *
-     *  Пытаемся увеличить значение умения                                   *
+     *  Try to increase the value of the skill                               *
      *                                                                       *
      ************************************************************************/
 
@@ -3304,7 +3349,7 @@ namespace charutils
                 uint8  SkillAmount = 1;
                 uint8  tier        = std::min(1 + (Diff / 5), 5);
 
-                for (uint8 i = 0; i < 4; ++i) // 1 + 4 возможных дополнительных (максимум 5)
+                for (uint8 i = 0; i < 4; ++i) // 1 + 4 possible additional ones (maximum 5)
                 {
                     random = xirand::GetRandomNumber(1.);
 
@@ -3505,7 +3550,7 @@ namespace charutils
 
     /************************************************************************
      *                                                                       *
-     *  Методы для работы с заклинаниями                                     *
+     *  Methods for working with spells                                      *
      *                                                                       *
      ************************************************************************/
 
@@ -3645,7 +3690,7 @@ namespace charutils
 
     /************************************************************************
      *                                                                       *
-     *  Методы для работы с основными способностями                          *
+     *  Methods for working with basic abilities                             *
      *                                                                       *
      ************************************************************************/
 
@@ -3722,10 +3767,11 @@ namespace charutils
     }
 
     /************************************************************************
-     *
-     *       Pet Command Functions
-     *
-     *************************************************************************/
+     *                                                                       *
+     *  Pet Command Functions                                                *
+     *                                                                       *
+     ************************************************************************/
+
     int32 hasPetAbility(CCharEntity* PChar, uint16 AbilityID)
     {
         return hasBit(AbilityID, PChar->m_PetCommands, sizeof(PChar->m_PetCommands));
@@ -3743,7 +3789,7 @@ namespace charutils
 
     /************************************************************************
      *                                                                       *
-     *  Инициализируем таблицу опыта                                         *
+     *  Initialize the experience (exp) table                                *
      *                                                                       *
      ************************************************************************/
 
@@ -3787,9 +3833,10 @@ namespace charutils
 
     /************************************************************************
      *                                                                       *
-     *  Returns mob difficulty according to level difference                 *
+     *  Return mob difficulty according to level difference                  *
      *                                                                       *
      ************************************************************************/
+
     EMobDifficulty CheckMob(uint8 charlvl, uint8 moblvl)
     {
         uint32 baseExp = GetBaseExp(charlvl, moblvl);
@@ -3846,7 +3893,7 @@ namespace charutils
 
     /************************************************************************
      *                                                                       *
-     *  Узнаем количество опыта, необходимое для получения следующего уровня *
+     *  Calculate the amount of experience required to get the next level    *
      *                                                                       *
      ************************************************************************/
 
@@ -4095,7 +4142,13 @@ namespace charutils
                 {
                     if (settings::get<bool>("map.EXP_PARTY_GAP_PENALTIES"))
                     {
-                        if (maxlevel > 50 || maxlevel > (memberlevel + 7))
+                        uint8 partyGapNoExp = settings::get<uint8>("map.EXP_PARTY_GAP_NO_EXP");
+
+                        if (partyGapNoExp > 0 && maxlevel >= (memberlevel + partyGapNoExp))
+                        {
+                            exp = 0;
+                        }
+                        else if (maxlevel > 50 || maxlevel > (memberlevel + 7))
                         {
                             exp *= memberlevel / (float)maxlevel;
                         }
@@ -4596,6 +4649,7 @@ namespace charutils
      *  1 means no exp loss. A value of 0 means full exp loss.               *
      *                                                                       *
      ************************************************************************/
+
     void DelExperiencePoints(CCharEntity* PChar, float retainPercent, uint16 forcedXpLoss)
     {
         TracyZoneScoped;
@@ -4613,6 +4667,12 @@ namespace charutils
         }
 
         if (PChar->GetMLevel() < settings::get<uint8>("map.EXP_LOSS_LEVEL") && forcedXpLoss == 0)
+        {
+            return;
+        }
+
+        // MONs don't lose exp on death
+        if (PChar->m_PMonstrosity != nullptr)
         {
             return;
         }
@@ -4707,7 +4767,7 @@ namespace charutils
 
     /************************************************************************
      *                                                                       *
-     *  Добавляем очки опытка указанному персонажу                           *
+     *  Add experience points to the specified character                     *
      *                                                                       *
      ************************************************************************/
 
@@ -4836,7 +4896,7 @@ namespace charutils
             }
         }
 
-        PChar->PAI->EventHandler.triggerListener("EXPERIENCE_POINTS", CLuaBaseEntity(PChar), exp);
+        PChar->PAI->EventHandler.triggerListener("EXPERIENCE_POINTS", CLuaBaseEntity(PChar), CLuaBaseEntity(PMob), exp);
 
         // Player levels up
         if ((currentExp + exp) >= GetExpNEXTLevel(PChar->jobs.job[PChar->GetMJob()]) && !onLimitMode)
@@ -4936,7 +4996,7 @@ namespace charutils
 
     /************************************************************************
      *                                                                       *
-     *  Establish a restriction of character level                          *
+     *  Establish a restriction of character level                           *
      *                                                                       *
      ************************************************************************/
 
@@ -5125,7 +5185,7 @@ namespace charutils
 
     /************************************************************************
      *                                                                       *
-     *  Cохраняем список колючевых предметов                                 *
+     *  Save list of key items                                               *
      *                                                                       *
      ************************************************************************/
 
@@ -5354,7 +5414,7 @@ namespace charutils
 
     /************************************************************************
      *                                                                       *
-     *  Saves character nation changes                                       *
+     *  Save character's nation changes                                      *
      *                                                                       *
      ************************************************************************/
 
@@ -5371,7 +5431,7 @@ namespace charutils
 
     /************************************************************************
      *                                                                       *
-     *  Saves characters current campaign allegiance                         *
+     *  Save character's current campaign allegiance                         *
      *                                                                       *
      ************************************************************************/
 
@@ -5388,7 +5448,7 @@ namespace charutils
 
     /************************************************************************
      *                                                                       *
-     *  Saves character's current moghancement
+     *  Saves character's current moghancement                               *
      *                                                                       *
      ************************************************************************/
 
@@ -5405,7 +5465,7 @@ namespace charutils
 
     /************************************************************************
      *                                                                       *
-     *  Сохраняем текущие уровни профессий персонажа                         *
+     *  Save the current levels of the character's jobs                      *
      *                                                                       *
      ************************************************************************/
 
@@ -5416,6 +5476,12 @@ namespace charutils
         if (job == JOB_NON || job >= MAX_JOBTYPE)
         {
             ShowWarning("Attempt to save Invalid Job with JOBTYPE %d.", job);
+            return;
+        }
+
+        // Monstrosity job and level data is handled elsewhere, bail out now
+        if (job == JOB_MON)
+        {
             return;
         }
 
@@ -5503,6 +5569,12 @@ namespace charutils
         if (job == JOB_NON || job >= MAX_JOBTYPE)
         {
             ShowWarning("Attempt to save Char XP with invalid JOBTYPE %d.", job);
+            return;
+        }
+
+        // Monstrosity exp data is handled elsewhere, bail out now
+        if (job == JOB_MON)
+        {
             return;
         }
 
@@ -5607,7 +5679,7 @@ namespace charutils
 
     /************************************************************************
      *                                                                       *
-     *  Save Teleports - Homepoints, outposts, maws, etc                     *
+     *  Save Teleports - (homepoints, outposts, maws, etc)                   *
      *                                                                       *
      ************************************************************************/
 
@@ -6348,6 +6420,23 @@ namespace charutils
         PChar->pushPacket(new CServerIPPacket(PChar, type, ipp));
     }
 
+    void ForceLogout(CCharEntity* PChar)
+    {
+        PChar->status = STATUS_TYPE::SHUTDOWN;
+        charutils::SendToZone(PChar, 1, 0);
+    }
+
+    void ForceRezone(CCharEntity* PChar)
+    {
+        PChar->loc.destination = PChar->getZone();
+        PChar->status          = STATUS_TYPE::DISAPPEAR;
+        PChar->loc.boundary    = 0;
+
+        PChar->clearPacketList();
+
+        SendToZone(PChar, 2, zoneutils::GetZoneIPP(PChar->loc.destination));
+    }
+
     void HomePoint(CCharEntity* PChar)
     {
         TracyZoneScoped;
@@ -6407,26 +6496,26 @@ namespace charutils
         return PChar->getCharVar(var);
     }
 
-    void SetCharVar(uint32 charId, std::string const& var, int32 value)
+    void SetCharVar(uint32 charId, std::string const& var, int32 value, uint32 expiry /* = 0 */)
     {
         if (auto player = zoneutils::GetChar(charId))
         {
-            player->setCharVar(var, value);
+            player->setCharVar(var, value, expiry);
             return;
         }
 
-        PersistCharVar(charId, var, value);
-        message::send_charvar_update(charId, var, value);
+        PersistCharVar(charId, var, value, expiry);
+        message::send_charvar_update(charId, var, value, expiry);
     }
 
-    void SetCharVar(CCharEntity* PChar, std::string const& var, int32 value)
+    void SetCharVar(CCharEntity* PChar, std::string const& var, int32 value, uint32 expiry /* = 0 */)
     {
         if (PChar == nullptr)
         {
             return;
         }
 
-        return PChar->setCharVar(var, value);
+        return PChar->setCharVar(var, value, expiry);
     }
 
     int32 ClearCharVarsWithPrefix(CCharEntity* PChar, std::string const& prefix)
@@ -6483,22 +6572,32 @@ namespace charutils
         PChar->removeFromCharVarCache(var);
     }
 
-    int32 FetchCharVar(uint32 charId, std::string const& varName)
+    auto FetchCharVar(uint32 charId, std::string const& varName) -> std::pair<int32, uint32>
     {
-        const char* fmtQuery = "SELECT value FROM char_vars WHERE charid = %u AND varname = '%s' LIMIT 1;";
+        const char* fmtQuery = "SELECT value, expiry FROM char_vars WHERE charid = %u AND varname = '%s' LIMIT 1;";
 
         int32 ret = sql->Query(fmtQuery, charId, varName);
 
-        int32 value = 0;
+        int32  value  = 0;
+        uint32 expiry = 0;
         if (ret != SQL_ERROR && sql->NumRows() != 0 && sql->NextRow() == SQL_SUCCESS)
         {
-            value = sql->GetIntData(0);
+            value  = sql->GetIntData(0);
+            expiry = sql->GetUIntData(1);
+
+            uint32 currentTimestamp = CVanaTime::getInstance()->getSysTime();
+
+            if (expiry > 0 && expiry <= currentTimestamp)
+            {
+                value = 0;
+                sql->Query("DELETE FROM char_vars WHERE charid = %u AND varname = '%s';", charId, varName);
+            }
         }
 
-        return value;
+        return { value, expiry };
     }
 
-    void PersistCharVar(uint32 charId, std::string const& var, int32 value)
+    void PersistCharVar(uint32 charId, std::string const& var, int32 value, uint32 expiry /* = 0 */)
     {
         if (value == 0)
         {
@@ -6506,7 +6605,7 @@ namespace charutils
         }
         else
         {
-            sql->Query("INSERT INTO char_vars SET charid = %u, varname = '%s', value = %i ON DUPLICATE KEY UPDATE value = %i;", charId, var, value, value);
+            sql->Query("INSERT INTO char_vars SET charid = %u, varname = '%s', value = %i, expiry = %d ON DUPLICATE KEY UPDATE value = %i, expiry = %i;", charId, var, value, expiry, value, expiry);
         }
     }
 

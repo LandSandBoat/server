@@ -36,7 +36,7 @@ enum ITEM_TYPE
     ITEM_WEAPON     = 0x10,
     ITEM_CURRENCY   = 0x20,
     ITEM_FURNISHING = 0x40,
-    ITEM_LINKSHELL  = 0x80
+    ITEM_LINKSHELL  = 0x80,
 };
 
 // Additional type of object m_subtype
@@ -46,7 +46,7 @@ enum ITEM_SUBTYPE
     ITEM_LOCKED    = 0x01,
     ITEM_CHARGED   = 0x02,
     ITEM_AUGMENTED = 0x04,
-    ITEM_UNLOCKED  = 0xFE
+    ITEM_UNLOCKED  = 0xFE,
 };
 
 // Flags of objects
@@ -67,7 +67,7 @@ enum ITEM_FLAG
     ITEM_FLAG_NOSALE       = 0x1000,
     ITEM_FLAG_NODELIVERY   = 0x2000,
     ITEM_FLAG_EX           = 0x4000, // NoTradePC Polutils Value
-    ITEM_FLAG_RARE         = 0x8000
+    ITEM_FLAG_RARE         = 0x8000,
 };
 
 class CItem

@@ -3,7 +3,7 @@
 --   NM: Triarius IV-XIV
 -- Pops in Bastok mission 8-1 "The Chains that Bind Us"
 -----------------------------------
-mixins = { require("scripts/mixins/job_special") }
+mixins = { require('scripts/mixins/job_special') }
 -----------------------------------
 local entity = {}
 

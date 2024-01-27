@@ -1,8 +1,6 @@
 -----------------------------------
 -- Zone: Abdhaljs_Isle-Purgonorgo
 -----------------------------------
-local ID = require('scripts/zones/Abdhaljs_Isle-Purgonorgo/IDs')
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

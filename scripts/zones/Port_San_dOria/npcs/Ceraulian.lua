@@ -4,17 +4,16 @@
 -- Involved in Quest: The Holy Crest
 -- !pos 0 -8 -122 232
 -----------------------------------
-require("scripts/globals/quests")
-local ID = require("scripts/zones/Port_San_dOria/IDs")
+local ID = zones[xi.zone.PORT_SAN_DORIA]
 -----------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     if
         player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.CHASING_QUOTAS) == QUEST_ACCEPTED and
-        player:getCharVar("ChasingQuotas_Progress") == 0 and
+        player:getCharVar('ChasingQuotas_Progress') == 0 and
         trade:getItemCount() == 1 and
-        trade:hasItemQty(xi.items.GOLD_HAIRPIN, 1) and
+        trade:hasItemQty(xi.item.GOLD_HAIRPIN, 1) and
         trade:getGil() == 0
     then -- Trading gold hairpin only
             player:tradeComplete()
@@ -24,10 +23,10 @@ end
 
 entity.onTrigger = function(player, npc)
     local quotasStatus    = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.CHASING_QUOTAS)
-    local quotasProgress  = player:getCharVar("ChasingQuotas_Progress")
-    local quotasNo        = player:getCharVar("ChasingQuotas_No")
+    local quotasProgress  = player:getCharVar('ChasingQuotas_Progress')
+    local quotasNo        = player:getCharVar('ChasingQuotas_No')
     local stalkerStatus   = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.KNIGHT_STALKER)
-    local stalkerProgress = player:getCharVar("KnightStalker_Progress")
+    local stalkerProgress = player:getCharVar('KnightStalker_Progress')
 
     if
         player:getMainLvl() >= xi.settings.main.ADVANCED_JOB_LEVEL and
@@ -48,7 +47,7 @@ entity.onTrigger = function(player, npc)
     elseif quotasStatus == QUEST_ACCEPTED and quotasProgress == 0 then
         player:startEvent(13) -- Reminder to bring Gold Hairpin
     elseif quotasProgress == 1 then
-        if player:getCharVar("ChasingQuotas_date") > os.time() then
+        if player:getCharVar('ChasingQuotas_date') > os.time() then
             player:startEvent(3) -- Fluff cutscene because you haven't waited a day
         else
             player:startEvent(7) -- Boss got mugged
@@ -74,7 +73,7 @@ entity.onTrigger = function(player, npc)
         else
             player:startEvent(20) -- Response if you try to turn in the challenge to Ceraulian
         end
-    elseif player:getCharVar("KnightStalker_Option1") == 1 then
+    elseif player:getCharVar('KnightStalker_Option1') == 1 then
         player:startEvent(22)
     elseif stalkerStatus == QUEST_COMPLETED then
         player:startEvent(21)
@@ -89,41 +88,41 @@ end
 
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 24 then
-        player:setCharVar("TheHolyCrest_Event", 1)
+        player:setCharVar('TheHolyCrest_Event', 1)
 
     -- Chasing Quotas (DRG AF2)
     elseif csid == 18 then
         if option == 0 then
-            player:setCharVar("ChasingQuotas_No", 1)
+            player:setCharVar('ChasingQuotas_No', 1)
         else
             player:addQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.CHASING_QUOTAS)
         end
     elseif csid == 14 and option == 1 then
-        player:setCharVar("ChasingQuotas_No", 0)
+        player:setCharVar('ChasingQuotas_No', 0)
         player:addQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.CHASING_QUOTAS)
     elseif csid == 17 then
-        player:setCharVar("ChasingQuotas_Progress", 1)
-        player:setCharVar("ChasingQuotas_date", os.time() + 60)
+        player:setCharVar('ChasingQuotas_Progress', 1)
+        player:setCharVar('ChasingQuotas_date', os.time() + 60)
     elseif csid == 7 then
-        player:setCharVar("ChasingQuotas_Progress", 2)
-        player:setCharVar("ChasingQuotas_date", 0)
+        player:setCharVar('ChasingQuotas_Progress', 2)
+        player:setCharVar('ChasingQuotas_date', 0)
     elseif csid == 15 then
         if player:getFreeSlotsCount() < 1 then
-            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.items.DRACHEN_BRAIS)
+            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.item.DRACHEN_BRAIS)
         else
             player:delKeyItem(xi.ki.RANCHURIOMES_LEGACY)
-            player:addItem(xi.items.DRACHEN_BRAIS)
-            player:messageSpecial(ID.text.ITEM_OBTAINED, xi.items.DRACHEN_BRAIS) -- Drachen Brais
+            player:addItem(xi.item.DRACHEN_BRAIS)
+            player:messageSpecial(ID.text.ITEM_OBTAINED, xi.item.DRACHEN_BRAIS) -- Drachen Brais
             player:addFame(xi.quest.fame_area.SANDORIA, 40)
             player:completeQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.CHASING_QUOTAS)
-            player:setCharVar("ChasingQuotas_Progress", 0)
+            player:setCharVar('ChasingQuotas_Progress', 0)
         end
 
         -- Knight Stalker (DRG AF3)
     elseif csid == 19 then
-        player:setCharVar("KnightStalker_Progress", 1)
+        player:setCharVar('KnightStalker_Progress', 1)
     elseif csid == 22 then
-        player:setCharVar("KnightStalker_Option1", 0)
+        player:setCharVar('KnightStalker_Option1', 0)
     end
 end
 

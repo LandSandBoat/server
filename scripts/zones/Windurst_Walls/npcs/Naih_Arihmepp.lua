@@ -1,11 +1,7 @@
 -----------------------------------
 -- Area: Windurst Walls
 --  NPC: Naih Arihmepp
--- Type: Standard NPC
 -- !pos -64.578 -13.465 202.147 239
------------------------------------
-require("scripts/globals/quests")
-require("scripts/globals/utils")
 -----------------------------------
 local entity = {}
 
@@ -27,7 +23,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local wildcatWindurst = player:getCharVar("WildcatWindurst")
+    local wildcatWindurst = player:getCharVar('WildcatWindurst')
 
     if
         player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and
@@ -44,7 +40,7 @@ end
 
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 500 then
-        player:setCharVar("WildcatWindurst", utils.mask.setBit(player:getCharVar("WildcatWindurst"), 9, true))
+        player:setCharVar('WildcatWindurst', utils.mask.setBit(player:getCharVar('WildcatWindurst'), 9, true))
     end
 end
 

@@ -2,8 +2,7 @@
 -- Area: Nyzul Isle (Path of Darkness)
 --  Mob: Naja Salaheem
 -----------------------------------
-local ID = require("scripts/zones/Nyzul_Isle/IDs")
-require("scripts/globals/allyassist")
+local ID = zones[xi.zone.NYZUL_ISLE]
 -----------------------------------
 local entity = {}
 
@@ -25,7 +24,7 @@ local stage3Position =
 }
 
 entity.onMobSpawn = function(mob)
-    mob:addListener("WEAPONSKILL_STATE_ENTER", "WS_START_MSG", function(m, skillID)
+    mob:addListener('WEAPONSKILL_STATE_ENTER', 'WS_START_MSG', function(m, skillID)
         if skillID == 165 then
             m:showText(m, ID.text.CHA_CHING)
         elseif skillID == 168 then
@@ -38,23 +37,23 @@ end
 
 entity.onMobEngaged = function(mob, target)
     -- localVar because we don't want it to repeat she engages a new target.
-    if mob:getLocalVar("started") == 0 then
+    if mob:getLocalVar('started') == 0 then
         mob:showText(mob, ID.text.ALRRRIGHTY)
-        mob:setLocalVar("started", 1)
+        mob:setLocalVar('started', 1)
     end
 end
 
 entity.onMobFight = function(mob, target)
-    if mob:getHPP() <= 50 and mob:getLocalVar("lowHPmsg") == 0 then
+    if mob:getHPP() <= 50 and mob:getLocalVar('lowHPmsg') == 0 then
         mob:showText(mob, ID.text.OW)
-        mob:setLocalVar("lowHPmsg", 1)
-    elseif mob:getHPP() > 50 and mob:getLocalVar("lowHPmsg") == 1 then
-        mob:setLocalVar("lowHPmsg", 0)
+        mob:setLocalVar('lowHPmsg', 1)
+    elseif mob:getHPP() > 50 and mob:getLocalVar('lowHPmsg') == 1 then
+        mob:setLocalVar('lowHPmsg', 0)
     end
 end
 
 entity.onMobDisengage = function(mob, target)
-    local ready = mob:getLocalVar("ready")
+    local ready = mob:getLocalVar('ready')
 
     if ready == 1 then
         xi.ally.startAssist(mob, xi.ally.ASSIST_RANDOM)
@@ -63,23 +62,23 @@ end
 
 entity.onMobRoam = function(mob)
     -- Advance to Stage 2 area
-    if mob:getLocalVar("Stage") == 2 then
+    if mob:getLocalVar('Stage') == 2 then
         mob:showText(mob, ID.text.OH_ARE_WE_DONE)
         mob:pathThrough(stage2Position, xi.pathflag.SCRIPT)
         mob:setMobMod(xi.mobMod.NO_MOVE, 1)
     -- Advance to Stage 3 area
-    elseif mob:getLocalVar("Stage") == 3 then
+    elseif mob:getLocalVar('Stage') == 3 then
         mob:showText(mob, ID.text.NOW_WERE_TALKIN)
         mob:pathThrough(stage3Position, xi.pathflag.SCRIPT)
         mob:setMobMod(xi.mobMod.NO_MOVE, 1)
     end
 
     -- Ally Assist Check
-    local ready = mob:getLocalVar("ready")
+    local ready = mob:getLocalVar('ready')
 
     -- Only start the path once
     if mob:isFollowingPath() then
-        mob:setLocalVar("Stage", 0)
+        mob:setLocalVar('Stage', 0)
     -- Path must finish before Ally Asisst (no wallhacking!)
     elseif ready == 1 then
         mob:setMobMod(xi.mobMod.NO_MOVE, 0)

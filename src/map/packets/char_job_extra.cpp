@@ -29,6 +29,7 @@
 #include "entities/automatonentity.h"
 #include "entities/charentity.h"
 #include "merit.h"
+#include "monstrosity.h"
 
 CCharJobExtraPacket::CCharJobExtraPacket(CCharEntity* PChar, bool mjob)
 {
@@ -44,6 +45,11 @@ CCharJobExtraPacket::CCharJobExtraPacket(CCharEntity* PChar, bool mjob)
     else
     {
         job = PChar->GetSJob();
+    }
+
+    if (PChar->m_PMonstrosity != nullptr)
+    {
+        job = JOB_MON;
     }
 
     ref<uint8>(0x04) = job;
@@ -86,7 +92,7 @@ CCharJobExtraPacket::CCharJobExtraPacket(CCharEntity* PChar, bool mjob)
         ref<uint32>(0x50) = PChar->m_unlockedAttachments.attachments[6];
         ref<uint32>(0x54) = PChar->m_unlockedAttachments.attachments[7];
 
-        memcpy(data + (0x58), PChar->PAutomaton->GetName().c_str(), PChar->PAutomaton->GetName().size());
+        memcpy(data + (0x58), PChar->PAutomaton->getName().c_str(), PChar->PAutomaton->getName().size());
 
         ref<uint16>(0x68) = PChar->PAutomaton->health.hp == 0 ? PChar->PAutomaton->GetMaxHP() : PChar->PAutomaton->health.hp;
         ref<uint16>(0x6A) = PChar->PAutomaton->GetMaxHP();
@@ -126,5 +132,14 @@ CCharJobExtraPacket::CCharJobExtraPacket(CCharEntity* PChar, bool mjob)
         ref<uint16>(0x9A) = PChar->PAutomaton->getMod(Mod::CHR);
 
         ref<uint8>(0x9C) = PChar->getMod(Mod::AUTO_ELEM_CAPACITY);
+    }
+    else if (PChar->m_PMonstrosity != nullptr)
+    {
+        ref<uint16>(0x08) = PChar->m_PMonstrosity->Species;
+
+        for (std::size_t idx = 0; idx < 12; ++idx)
+        {
+            ref<uint16>(0x0C + (idx * 2)) = PChar->m_PMonstrosity->EquippedInstincts[idx];
+        }
     }
 }

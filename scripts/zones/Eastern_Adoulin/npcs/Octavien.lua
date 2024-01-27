@@ -5,14 +5,12 @@
 -- Starts Children of the Rune
 -- !pos 100.580 -40.150 -63.830
 -----------------------------------
-require("scripts/globals/npc_util")
-require("scripts/globals/quests")
-local ID = require("scripts/zones/Eastern_Adoulin/IDs")
+local ID = zones[xi.zone.EASTERN_ADOULIN]
 -----------------------------------
 local entity = {}
 
 -- Various quest states for Children Of The Rune (COTR).
--- Corresponds to possible values for the char var "RUN_COTR".
+-- Corresponds to possible values for the char var 'RUN_COTR'.
 local cotrStates =
 {
     -- Player triggered the quest but declined to accept the quest in the
@@ -36,9 +34,9 @@ entity.onTrigger = function(player, npc)
     -- for natural fallthrough, to avoid needing `not` statements in them.
     if cotrQuestStatus == QUEST_COMPLETED then
         player:startEvent(28)
-    elseif player:getCharVar("RUN_COTR") == cotrStates.REWARD_PENDING then
+    elseif player:getCharVar('RUN_COTR') == cotrStates.REWARD_PENDING then
         player:startEvent(29)
-    elseif player:getCharVar("RUN_COTR") == cotrStates.RUNE_ENHANCEMENT then
+    elseif player:getCharVar('RUN_COTR') == cotrStates.RUNE_ENHANCEMENT then
         player:startEvent(26, 1)
     elseif
         cotrQuestStatus == QUEST_ACCEPTED and
@@ -47,7 +45,7 @@ entity.onTrigger = function(player, npc)
         player:startEvent(26)
     elseif cotrQuestStatus == QUEST_ACCEPTED then
         player:startEvent(25)
-    elseif player:getCharVar("RUN_COTR") == cotrStates.TRIGGERED then
+    elseif player:getCharVar('RUN_COTR') == cotrStates.TRIGGERED then
         player:startEvent(24)
     elseif
         cotrQuestStatus == QUEST_AVAILABLE and
@@ -81,25 +79,25 @@ entity.onEventFinish = function(player, csid, option, npc)
     -- CHILDREN OF THE RUNE
     if csid == 23 or csid == 24 then
         if option == 0 then
-            player:setCharVar("RUN_COTR", cotrStates.TRIGGERED)
+            player:setCharVar('RUN_COTR', cotrStates.TRIGGERED)
         elseif option == 1 then
             player:addQuest(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.CHILDREN_OF_THE_RUNE)
         end
     elseif csid == 26 then
         if option == 0 then
-            player:setCharVar("RUN_COTR", cotrStates.RUNE_ENHANCEMENT)
+            player:setCharVar('RUN_COTR', cotrStates.RUNE_ENHANCEMENT)
         elseif option == 1 then
-            player:setCharVar("RUN_COTR", cotrStates.REWARD_PENDING)
+            player:setCharVar('RUN_COTR', cotrStates.REWARD_PENDING)
         end
     end
 
     -- Attempt to issue the Children of the Rune reward if the player has space.
-    if player:getCharVar("RUN_COTR") == cotrStates.REWARD_PENDING then
-        if npcUtil.giveItem(player, xi.items.SOWILO_CLAYMORE) then  -- Sowilo Claymore
+    if player:getCharVar('RUN_COTR') == cotrStates.REWARD_PENDING then
+        if npcUtil.giveItem(player, xi.item.SOWILO_CLAYMORE) then  -- Sowilo Claymore
             player:unlockJob(xi.job.RUN)
             player:messageSpecial(ID.text.YOU_CAN_NOW_BECOME, 1)  -- You can now become a rune fencer!
             npcUtil.giveKeyItem(player, xi.ki.JOB_GESTURE_RUNE_FENCER)
-            player:setCharVar("RUN_COTR", 0)
+            player:setCharVar('RUN_COTR', 0)
             player:delKeyItem(xi.ki.YAHSE_WILDFLOWER_PETAL)
             player:completeQuest(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.CHILDREN_OF_THE_RUNE)
         end

@@ -1,4 +1,4 @@
-local ID = require('scripts/zones/Jugner_Forest_[S]/IDs')
+local ID = zones[xi.zone.JUGNER_FOREST_S]
 
 return {
     ['qm6']                = { messageSpecial = ID.text.YOU_FIND_NOTHING_ORDINARY },

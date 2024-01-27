@@ -2,7 +2,7 @@
 -- Area: Al'Taieu
 --  Mob: Om'hpemde
 -----------------------------------
-mixins = { require("scripts/mixins/families/hpemde") }
+mixins = { require('scripts/mixins/families/hpemde') }
 -----------------------------------
 local entity = {}
 

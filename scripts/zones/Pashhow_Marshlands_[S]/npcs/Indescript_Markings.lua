@@ -3,9 +3,7 @@
 --  NPC: Indescript Markings
 -- NOTE: There are 3 Indescript Markings
 -----------------------------------
-local ID = require("scripts/zones/Pashhow_Marshlands_[S]/IDs")
-require("scripts/globals/npc_util")
-require("scripts/globals/quests")
+local ID = zones[xi.zone.PASHHOW_MARSHLANDS_S]
 -----------------------------------
 local entity = {}
 
@@ -14,28 +12,18 @@ end
 
 entity.onTrigger = function(player, npc)
     local offset                = npc:getID() - ID.npc.INDESCRIPT_MARKINGS_OFFSET
-    local onSabbatical          = player:getQuestStatus(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.ON_SABBATICAL)
-    local onSabbaticalProgress  = player:getCharVar("OnSabbatical")
-    local pantsQuestProgress    = player:getCharVar("AF_SCH_PANTS")
-    local gownQuestProgress     = player:getCharVar("AF_SCH_BODY")
-
-    -- ON SABBATICAL
-    if
-        offset == 0 and
-        onSabbatical == QUEST_ACCEPTED and
-        onSabbaticalProgress == 2
-    then
-        player:startEvent(2)
+    local pantsQuestProgress    = player:getCharVar('AF_SCH_PANTS')
+    local gownQuestProgress     = player:getCharVar('AF_SCH_BODY')
 
     -- SCH AF SIDEQUEST: PANTS
-    elseif
+    if
         offset == 1 and
         pantsQuestProgress > 0 and
         pantsQuestProgress < 3 and
         not player:hasKeyItem(xi.ki.SLUG_MUCUS)
     then
         npcUtil.giveKeyItem(player, xi.ki.SLUG_MUCUS)
-        player:setCharVar("AF_SCH_PANTS", pantsQuestProgress + 1)
+        player:setCharVar('AF_SCH_PANTS', pantsQuestProgress + 1)
 
         local positions =
         {
@@ -61,7 +49,7 @@ entity.onTrigger = function(player, npc)
         not player:hasKeyItem(xi.ki.PEISTE_DUNG)
     then
         npcUtil.giveKeyItem(player, xi.ki.PEISTE_DUNG)
-        player:setCharVar("AF_SCH_BODY", gownQuestProgress + 1)
+        player:setCharVar('AF_SCH_BODY', gownQuestProgress + 1)
 
         local positions =
         {
@@ -88,12 +76,7 @@ end
 entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option, npc)
-    -- ON SABBATICAL
-    if csid == 2 then
-        npcUtil.giveKeyItem(player, xi.ki.SCHULTZS_SEALED_LETTER)
-        player:setCharVar("OnSabbatical", 3)
-    end
+entity.onEventFinish = function(player, csid, option)
 end
 
 return entity

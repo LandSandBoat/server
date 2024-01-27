@@ -2,9 +2,6 @@
 -- Area: Navukgo Execution Chamber
 -- BCNM: Omens
 -----------------------------------
-require("scripts/globals/battlefield")
-local ID = require("scripts/zones/Navukgo_Execution_Chamber/IDs")
------------------------------------
 local battlefieldObject = {}
 
 battlefieldObject.onBattlefieldInitialise = function(battlefield)
@@ -32,7 +29,7 @@ battlefieldObject.onBattlefieldLeave = function(player, battlefield, leavecode)
 
         player:setLocalVar('battlefieldWin', battlefield:getID())
 
-        player:startEvent(32001, battlefield:getArea(), clearTime, partySize, battlefield:getTimeInside(), 1, battlefield:getLocalVar("[cs]bit"), 0)
+        player:startEvent(32001, battlefield:getArea(), clearTime, partySize, battlefield:getTimeInside(), 1, battlefield:getLocalVar('[cs]bit'), 0)
     elseif leavecode == xi.battlefield.leaveCode.LOST then
         player:startEvent(32002)
     end

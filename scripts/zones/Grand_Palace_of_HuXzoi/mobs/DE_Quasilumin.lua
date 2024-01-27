@@ -4,8 +4,7 @@
 -- Note: Escort Quest / Map Quest
 --   DE: Dynamic Entity created by Cermet Alcoves
 -----------------------------------
-local ID = require("scripts/zones/Grand_Palace_of_HuXzoi/IDs")
-require("scripts/globals/pathfind")
+local ID = zones[xi.zone.GRAND_PALACE_OF_HUXZOI]
 -----------------------------------
 
 local escorts =
@@ -186,11 +185,11 @@ entity.shouldMove = function(mob, progress)
 end
 
 entity.closeDoor = function(mob)
-    local openedDoor = mob:getLocalVar("opened_door")
+    local openedDoor = mob:getLocalVar('opened_door')
     if openedDoor ~= 0 then
         local npc = GetNPCByID(openedDoor)
         npc:setAnimation(xi.animation.CLOSE_DOOR)
-        mob:setLocalVar("opened_door", 0)
+        mob:setLocalVar('opened_door', 0)
     end
 end
 
@@ -203,17 +202,17 @@ end
 
 entity.onMobRoam = function(mob)
     mob:setStatus(xi.status.NORMAL)
-    local progress = mob:getLocalVar("progress")
-    local escort = escorts[mob:getLocalVar("escort")]
+    local progress = mob:getLocalVar('progress')
+    local escort = escorts[mob:getLocalVar('escort')]
     if progress == escortProgress.NONE then
-        mob:setLocalVar("progress", escortProgress.ENROUTE)
+        mob:setLocalVar('progress', escortProgress.ENROUTE)
         local point = 1
-        mob:setLocalVar("point", point)
+        mob:setLocalVar('point', point)
         mob:pathThrough(escort.path[point], xi.path.flag.WALK)
     end
 
     local now = os.time()
-    local expire = mob:getLocalVar("expire")
+    local expire = mob:getLocalVar('expire')
     if expire ~= 0 and expire <= now then
         if progress ~= escortProgress.COMPLETE then
             mob:showText(mob, ID.text.TIME_EXCEEDED)
@@ -225,12 +224,12 @@ entity.onMobRoam = function(mob)
         return
     end
 
-    local openedDoor = mob:getLocalVar("opened_door")
+    local openedDoor = mob:getLocalVar('opened_door')
     if openedDoor ~= 0 then
         local npc = GetNPCByID(openedDoor)
         if mob:checkDistance(npc) > 15 then
             npc:setAnimation(xi.animation.CLOSE_DOOR)
-            mob:setLocalVar("opened_door", 0)
+            mob:setLocalVar('opened_door', 0)
         elseif npc:getAnimation() ~= xi.animation.OPEN_DOOR then
             npc:setAnimation(xi.animation.OPEN_DOOR)
         end
@@ -238,46 +237,46 @@ entity.onMobRoam = function(mob)
 
     for _, doorID in ipairs(escort.doors) do
         local npc = GetNPCByID(doorID)
-        if doorID ~= openedDoor and  mob:checkDistance(npc) <= 8 then
+        if doorID ~= openedDoor and mob:checkDistance(npc) <= 8 then
             npc:setAnimation(xi.animation.OPEN_DOOR)
-            mob:setLocalVar("opened_door", doorID)
+            mob:setLocalVar('opened_door', doorID)
         end
     end
 end
 
 entity.onPath = function(mob)
-    local progress = mob:getLocalVar("progress")
-    local escort = mob:getLocalVar("escort")
+    local progress = mob:getLocalVar('progress')
+    local escort = mob:getLocalVar('escort')
     local data = escorts[escort]
 
     if data ~= nil and entity.shouldMove(mob, progress) then
-        local point = mob:getLocalVar("point")
+        local point = mob:getLocalVar('point')
         if point == #data.path then
             mob:showText(mob, ID.text.PATROL_COMPLETED)
-            mob:setLocalVar("progress", escortProgress.COMPLETE)
-            mob:setLocalVar("expire", os.time() + 60)
+            mob:setLocalVar('progress', escortProgress.COMPLETE)
+            mob:setLocalVar('expire', os.time() + 60)
         elseif progress ~= escortProgress.COMPLETE then
             point = point + 1
-            mob:setLocalVar("point", point)
+            mob:setLocalVar('point', point)
             mob:pathThrough(data.path[point], xi.path.flag.WALK)
         end
     end
 end
 
 entity.onTrigger = function(player, mob)
-    local progress = mob:getLocalVar("progress")
-    local point = mob:getLocalVar("point")
-    local escort = mob:getLocalVar("escort")
+    local progress = mob:getLocalVar('progress')
+    local point = mob:getLocalVar('point')
+    local escort = mob:getLocalVar('escort')
     local data = escorts[escort]
 
     if data ~= nil then
         if progress == escortProgress.ENROUTE then
             mob:pathThrough(mob:getPos(), xi.path.flag.NONE)
             mob:showText(mob, ID.text.PATROL_SUSPENDED)
-            mob:setLocalVar("progress", escortProgress.PAUSED)
+            mob:setLocalVar('progress', escortProgress.PAUSED)
         elseif progress == escortProgress.PAUSED then
             mob:showText(mob, ID.text.RECOMMENCING_PATROL)
-            mob:setLocalVar("progress", escortProgress.ENROUTE)
+            mob:setLocalVar('progress', escortProgress.ENROUTE)
             mob:pathThrough(data.path[point], xi.path.flag.WALK)
         elseif progress == escortProgress.COMPLETE then
             mob:showText(mob, ID.text.DUTY_COMPLETE)
@@ -294,7 +293,7 @@ entity.onTrigger = function(player, mob)
 end
 
 entity.onMobEngaged = function(mob, target)
-    mob:setLocalVar("progress", escortProgress.PAUSED)
+    mob:setLocalVar('progress', escortProgress.PAUSED)
     mob:disengage()
 end
 

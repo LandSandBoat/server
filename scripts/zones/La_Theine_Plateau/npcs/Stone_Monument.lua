@@ -4,7 +4,7 @@
 --  Involved in quest "An Explorer's Footsteps"
 -- !pos 334.133 50.623 141.163 102
 -----------------------------------
-local ID = require("scripts/zones/La_Theine_Plateau/IDs")
+local ID = zones[xi.zone.LA_THEINE_PLATEAU]
 -----------------------------------
 local entity = {}
 
@@ -15,12 +15,12 @@ end
 entity.onTrade = function(player, npc, trade)
     if
         trade:getItemCount() == 1 and
-        trade:hasItemQty(xi.items.LUMP_OF_SELBINA_CLAY, 1)
+        trade:hasItemQty(xi.item.LUMP_OF_SELBINA_CLAY, 1)
     then
         player:tradeComplete()
-        player:addItem(xi.items.CLAY_TABLET)
-        player:messageSpecial(ID.text.ITEM_OBTAINED, xi.items.CLAY_TABLET)
-        player:setCharVar("anExplorer-CurrentTablet", 0x00004)
+        player:addItem(xi.item.CLAY_TABLET)
+        player:messageSpecial(ID.text.ITEM_OBTAINED, xi.item.CLAY_TABLET)
+        player:setCharVar('anExplorer-CurrentTablet', 0x00004)
     end
 end
 

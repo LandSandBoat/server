@@ -2,8 +2,8 @@
 -- Area: Arrapago Remnants
 --  Mob: Archaic Rampart
 -----------------------------------
-mixins = { require("scripts/mixins/families/rampart") }
-local ID = require("scripts/zones/Arrapago_Remnants/IDs")
+mixins = { require('scripts/mixins/families/rampart') }
+local ID = zones[xi.zone.ARRAPAGO_REMNANTS]
 -----------------------------------
 local entity = {}
 
@@ -12,7 +12,7 @@ end
 
 entity.onMobFight = function(mob, target)
     local instance  = mob:getInstance()
-    local popTime   = mob:getLocalVar("lastPetPop")
+    local popTime   = mob:getLocalVar('lastPetPop')
     local mobPos    = mob:getPos()
     local firstPet  = GetMobByID((mob:getID() + 1), instance)
     local secondPet = GetMobByID((mob:getID() + 2), instance)
@@ -21,14 +21,14 @@ entity.onMobFight = function(mob, target)
         if not firstPet:isSpawned() then
             firstPet:setSpawn(mobPos.x, mobPos.y, mobPos.z, mobPos.rot)
             mob:useMobAbility(2034)
-            mob:setLocalVar("lastPetPop", os.time())
+            mob:setLocalVar('lastPetPop', os.time())
             mob:timer(2500, function(m)
                 SpawnMob((m:getID() + 1), instance)
             end)
         elseif not secondPet:isSpawned() then
             secondPet:setSpawn(mobPos.x, mobPos.y, mobPos.z, mobPos.rot)
             mob:useMobAbility(2034)
-            mob:setLocalVar("lastPetPop", os.time())
+            mob:setLocalVar('lastPetPop', os.time())
             mob:timer(2500, function(m)
                 SpawnMob((m:getID() + 2), instance)
             end)

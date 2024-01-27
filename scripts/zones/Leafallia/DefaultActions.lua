@@ -1,4 +1,4 @@
-local ID = require('scripts/zones/Leafallia/IDs')
+local ID = zones[xi.zone.LEAFALLIA]
 
 return {
     ['Aged_Stump']       = { messageSpecial = ID.text.RINGS_TOO_NUMEROUS },

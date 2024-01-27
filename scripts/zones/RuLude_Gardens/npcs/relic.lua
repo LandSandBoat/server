@@ -3,17 +3,16 @@
 --  NPC: <this space intentionally left blank>
 -- !pos 0 8 -40 243
 -----------------------------------
-local ID = require("scripts/zones/RuLude_Gardens/IDs")
-require("scripts/globals/npc_util")
+local ID = zones[xi.zone.RULUDE_GARDENS]
 -----------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     if
-        player:getCharVar("RELIC_IN_PROGRESS") == xi.items.ABADDON_KILLER and
-        npcUtil.tradeHas(trade, { xi.items.TEN_THOUSAND_BYNE_BILL, xi.items.SERAPHIC_FRAGMENT, xi.items.SHARD_OF_NECROPSYCHE, xi.items.ABADDON_KILLER })
+        player:getCharVar('RELIC_IN_PROGRESS') == xi.item.ABADDON_KILLER and
+        npcUtil.tradeHas(trade, { xi.item.TEN_THOUSAND_BYNE_BILL, xi.item.SERAPHIC_FRAGMENT, xi.item.SHARD_OF_NECROPSYCHE, xi.item.ABADDON_KILLER })
     then -- currency, shard, necropsyche, stage 4
-        player:startEvent(10035, xi.items.BRAVURA)
+        player:startEvent(10035, xi.item.BRAVURA)
     end
 end
 
@@ -27,10 +26,10 @@ end
 entity.onEventFinish = function(player, csid, option, npc)
     if
         csid == 10035 and
-        npcUtil.giveItem(player, { xi.items.BRAVURA, { xi.items.ONE_HUNDRED_BYNE_BILL, 30 } })
+        npcUtil.giveItem(player, { xi.item.BRAVURA, { xi.item.ONE_HUNDRED_BYNE_BILL, 30 } })
     then
         player:confirmTrade()
-        player:setCharVar("RELIC_IN_PROGRESS", 0)
+        player:setCharVar('RELIC_IN_PROGRESS', 0)
     end
 end
 

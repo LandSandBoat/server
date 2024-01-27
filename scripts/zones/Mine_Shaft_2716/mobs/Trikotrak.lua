@@ -3,8 +3,8 @@
 -- CoP Mission 5-3 (A Century of Hardship)
 -- NM: Trikotrak
 -----------------------------------
-mixins = { require("scripts/mixins/job_special") }
----------------------------------
+mixins = { require('scripts/mixins/job_special') }
+-----------------------------------
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

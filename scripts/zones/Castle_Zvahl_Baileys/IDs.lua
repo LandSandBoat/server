@@ -19,8 +19,8 @@ zones[xi.zone.CASTLE_ZVAHL_BAILEYS] =
         LOGIN_CAMPAIGN_UNDERWAY       = 7161, -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!
         LOGIN_NUMBER                  = 7162, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
         MEMBERS_LEVELS_ARE_RESTRICTED = 7182, -- Your party is unable to participate because certain members' levels are restricted.
-        CHEST_UNLOCKED                = 7234, -- You unlock the chest!
-        COMMON_SENSE_SURVIVAL         = 7609, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
+        CHEST_UNLOCKED                = 7235, -- You unlock the chest!
+        COMMON_SENSE_SURVIVAL         = 7610, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
     mob =
     {

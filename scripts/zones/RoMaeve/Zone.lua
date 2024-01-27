@@ -1,10 +1,7 @@
 -----------------------------------
 -- Zone: RoMaeve (122)
 -----------------------------------
-local ID = require('scripts/zones/RoMaeve/IDs')
-require('scripts/globals/conquest')
-require('scripts/globals/missions')
-require('scripts/globals/npc_util')
+local ID = zones[xi.zone.ROMAEVE]
 -----------------------------------
 local zoneObject = {}
 
@@ -42,7 +39,7 @@ zoneObject.onGameHour = function(zone)
         local moongate1 = GetNPCByID(ID.npc.MOONGATE_OFFSET)
         local moongate2 = GetNPCByID(ID.npc.MOONGATE_OFFSET + 1)
 
-        if moongate1:getLocalVar("romaeveActive") == 0 then
+        if moongate1:getLocalVar('romaeveActive') == 0 then
             -- Loop over the affected NPCs: Moongates, bridges and fountain
             for i = ID.npc.MOONGATE_OFFSET, ID.npc.MOONGATE_OFFSET + 7 do
                 GetNPCByID(i):setAnimation(xi.anim.OPEN_DOOR) -- Open them
@@ -50,7 +47,7 @@ zoneObject.onGameHour = function(zone)
 
             moongate2:setUntargetable(true)
             moongate1:setUntargetable(true)
-            moongate1:setLocalVar("romaeveActive", 1) -- Make this loop unavailable after firing
+            moongate1:setLocalVar('romaeveActive', 1) -- Make this loop unavailable after firing
         end
 
     -- Clean up at 6am
@@ -58,14 +55,14 @@ zoneObject.onGameHour = function(zone)
         local moongate1 = GetNPCByID(ID.npc.MOONGATE_OFFSET)
         local moongate2 = GetNPCByID(ID.npc.MOONGATE_OFFSET + 1)
 
-        if moongate1:getLocalVar("romaeveActive") == 1 then
+        if moongate1:getLocalVar('romaeveActive') == 1 then
             for i = ID.npc.MOONGATE_OFFSET, ID.npc.MOONGATE_OFFSET + 7 do
                 GetNPCByID(i):setAnimation(xi.anim.CLOSE_DOOR)
             end
 
             moongate2:setUntargetable(false)
             moongate1:setUntargetable(false)
-            moongate1:setLocalVar("romaeveActive", 0) -- Make loop available again
+            moongate1:setLocalVar('romaeveActive', 0) -- Make loop available again
         end
     end
 end

@@ -3,8 +3,6 @@
 --  NPC: ??? (qm0)
 -- Note: Spawns Tzee Xicu Idol / Arch Tzee Xicu Idol
 -----------------------------------
-require("scripts/globals/dynamis")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

@@ -3,9 +3,7 @@
 --  Mob: Goobbue Gardener
 -- Note: PH for Keeper of Halidom
 -----------------------------------
-local ID = require("scripts/zones/The_Sanctuary_of_ZiTah/IDs")
-require("scripts/globals/regimes")
-require("scripts/globals/mobs")
+local ID = zones[xi.zone.THE_SANCTUARY_OF_ZITAH]
 -----------------------------------
 local entity = {}
 

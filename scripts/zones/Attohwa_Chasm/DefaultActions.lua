@@ -1,4 +1,4 @@
-local ID = require('scripts/zones/Attohwa_Chasm/IDs')
+local ID = zones[xi.zone.ATTOHWA_CHASM]
 
 return {
     ['Cradle_of_Rebirth'] = { messageSpecial = ID.text.NOTHING_OUT_OF_ORDINARY },

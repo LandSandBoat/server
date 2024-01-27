@@ -3,8 +3,8 @@
 --  Mob: Tuchulcha
 --  ENM: Sheep in Antlion's Clothing
 -----------------------------------
-mixins = { require("scripts/mixins/families/antlion_ambush") }
-local ID = require("scripts/zones/Boneyard_Gully/IDs")
+mixins = { require('scripts/mixins/families/antlion_ambush') }
+local ID = zones[xi.zone.BONEYARD_GULLY]
 -----------------------------------
 local entity = {}
 
@@ -13,7 +13,7 @@ entity.onMobSpawn = function(mob)
     mob:setMobMod(xi.mobMod.SUPERLINK, 0)
 
     -- Used with HPP to keep track of the number of Sandpits
-    mob:setLocalVar("Sandpits", 0)
+    mob:setLocalVar('Sandpits', 0)
 end
 
 -- Reset restHP when re-engaging after a sandpit
@@ -38,7 +38,7 @@ entity.onMobFight = function(mob, target)
             tuchulcha:disengage()
             tuchulcha:setMobMod(xi.mobMod.NO_MOVE, 1)
             tuchulcha:setMobMod(xi.mobMod.NO_REST, 1)
-            local posIndex = tuchulcha:getLocalVar("sand_pit" .. tuchulcha:getLocalVar('Sandpits'))
+            local posIndex = tuchulcha:getLocalVar('sand_pit' .. tuchulcha:getLocalVar('Sandpits'))
             local coords   = ID.sheepInAntlionsClothing[tuchulcha:getBattlefield():getArea()].ant_positions[posIndex]
 
             tuchulcha:setPos(coords)

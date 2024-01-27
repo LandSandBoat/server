@@ -2,7 +2,7 @@
 -- Area: Halvung
 --  Mob: Farlarder the Shrewd
 -----------------------------------
-mixins = { require("scripts/mixins/job_special") }
+mixins = { require('scripts/mixins/job_special') }
 -----------------------------------
 local entity = {}
 

@@ -13,13 +13,10 @@
 -- Tosuka-Porika    : !pos -26 -6 103 238
 -- Kupipi           : !pos 2 0.1 30 242
 -- Shantotto        : !pos 122 -2 112 239
--- _5e5 (Cr. Wall)  : !pos -424.255 -1.909 619.995 194
+-- _5e5 (Cr. Wall)  : !pos -423 0 619.75 194
 -- _5cb (Gate. Drk) : !pos -228 0 99 192
-require('scripts/globals/interaction/mission')
-require('scripts/globals/missions')
-require('scripts/globals/npc_util')
 -----------------------------------
-local outerHorutotoID = require("scripts/zones/Outer_Horutoto_Ruins/IDs")
+local outerHorutotoID = zones[xi.zone.OUTER_HORUTOTO_RUINS]
 -----------------------------------
 
 local mission = Mission:new(xi.mission.log_id.WINDURST, xi.mission.id.windurst.THE_JESTER_WHOD_BE_KING)
@@ -340,7 +337,7 @@ mission.sections =
 
         [xi.zone.WINDURST_WALLS] =
         {
-            ['Shantotto'] = mission:progressEvent(399, 0, 0, 282),
+            ['Shantotto'] = mission:progressEvent(399, 0, 0, 0, xi.ki.GLOVE_OF_PERPETUAL_TWILIGHT),
 
             onEventFinish =
             {

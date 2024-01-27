@@ -2,8 +2,6 @@
 -- Area: Eastern Altepa Desert
 --  Mob: Antican Speculator
 -----------------------------------
-require("scripts/globals/regimes")
------------------------------------
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

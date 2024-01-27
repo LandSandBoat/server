@@ -1,8 +1,8 @@
 {
     "C_Cpp.default.cppStandard": "c++17",
     "C_Cpp.default.browse.limitSymbolsToIncludedHeaders": true,
-    "C_Cpp.intelliSenseEngine": "Default",
-    "C_Cpp.intelliSenseEngineFallback": "Enabled",
+    "C_Cpp.intelliSenseEngine": "default",
+    "C_Cpp.intelliSenseEngineFallback": "enabled",
 
     "editor.bracketPairColorization.enabled": true,
     "editor.inlayHints.enabled": "offUnlessPressed",
@@ -450,15 +450,31 @@
         "BuildString",
         "SendLuaFuncStringToZone",
         "GetFirstID",
+        "GetTableOfIDs",
+        "NextConquestTally",
+        "NextJstDay",
+        "GetEntityByID",
+        "GetItemByID",
+        "GetItemIDByName",
+        "GetContainerFilenamesList",
+        "GetElevatorState",
     ],
     "Lua.diagnostics.disable": [
         "lowercase-global"
     ],
+    "Lua.diagnostics.ignoredFiles": "Disable",
     "Lua.hint.enable": true,
     "Lua.hint.setType": true,
     "Lua.runtime.version": "LuaJIT",
     "Lua.workspace.preloadFileSize": 10000,
-    "python.formatting.provider": "black",
+    "Lua.workspace.ignoreDir": [
+        ".vscode",
+        "tools/ci/tests/stylecheck.lua"
+    ],
+    "[python]": {
+        "editor.defaultFormatter": "ms-python.black-formatter",
+        "editor.formatOnSave": true
+    },
     "files.associations": {
         "algorithm": "cpp",
         "any": "cpp",
@@ -558,6 +574,7 @@
         "source_location": "cpp",
         "*.ipp": "cpp",
         "ranges": "cpp",
-        "span": "cpp"
+        "span": "cpp",
+        "expected": "cpp"
     },
 }

@@ -3,8 +3,7 @@
 --  Mob: Gold Quadav
 -- Note: PH for Da'Dha Hundredmask
 -----------------------------------
-local ID = require("scripts/zones/Beadeaux_[S]/IDs")
-require("scripts/globals/mobs")
+local ID = zones[xi.zone.BEADEAUX_S]
 -----------------------------------
 local entity = {}
 

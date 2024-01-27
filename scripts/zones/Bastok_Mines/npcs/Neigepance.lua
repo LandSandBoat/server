@@ -3,8 +3,7 @@
 --  NPC: Neigepance
 -- Standard Merchant NPC
 -----------------------------------
-local ID = require("scripts/zones/Bastok_Mines/IDs")
-require("scripts/globals/shop")
+local ID = zones[xi.zone.BASTOK_MINES]
 -----------------------------------
 local entity = {}
 
@@ -14,17 +13,17 @@ end
 entity.onTrigger = function(player, npc)
     local stock =
     {
-        17307,    9, 1,    --Dart
-        845,   1150, 1,    --Black Chocobo Feather
-        4545,    62, 3,    --Gysahl Greens
-        840,      7, 3,    --Chocobo Feather
-        17016,   11, 3,    --Pet Food Alpha Biscuit
-        17017,   82, 3,    --Pet Food Beta Biscuit
-        17860,   82, 3,    --Carrot Broth
-        17862,  695, 3,    --Bug Broth
-        17864,  126, 3,    --Herbal Broth
-        17866,  695, 3,    --Carrion Broth
-        5073, 50784, 3,    --Scroll of Chocobo Mazurka
+        xi.item.BUNCH_OF_GYSAHL_GREENS,       70, 3,
+        xi.item.CHOCOBO_FEATHER,               8, 3,
+        xi.item.DART,                         10, 1,
+        xi.item.BLACK_CHOCOBO_FEATHER,      1300, 1,
+        xi.item.PET_FOOD_ALPHA_BISCUIT,       12, 3,
+        xi.item.PET_FOOD_BETA_BISCUIT,        93, 3,
+        xi.item.JUG_OF_CARROT_BROTH,          62, 3,
+        xi.item.JUG_OF_BUG_BROTH,            101, 3,
+        xi.item.JUG_OF_HERBAL_BROTH,         112, 3,
+        xi.item.JUG_OF_CARRION_BROTH,        313, 3,
+        xi.item.SCROLL_OF_CHOCOBO_MAZURKA, 57408, 3,
     }
 
     player:showText(npc, ID.text.NEIGEPANCE_SHOP_DIALOG)

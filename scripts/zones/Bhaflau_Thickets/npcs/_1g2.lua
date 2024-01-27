@@ -3,9 +3,7 @@
 -- Door: Runic Seal
 -- !pos -180 -6.8 -833 52
 -----------------------------------
-local ID = require("scripts/zones/Bhaflau_Thickets/IDs")
-require("scripts/globals/assault")
-require("scripts/globals/instance")
+local ID = zones[xi.zone.BHAFLAU_THICKETS]
 -----------------------------------
 local entity = {}
 

@@ -2,8 +2,6 @@
 -- Area: Aht Urhgan Whitegate
 --  NPC: Hashayra
 -----------------------------------
-require("scripts/globals/pathfind")
------------------------------------
 local entity = {}
 
 local pathNodes =

@@ -2,7 +2,7 @@
 -- Area: Port San d'Oria
 --  NPC: Answald
 -----------------------------------
-require("scripts/quests/flyers_for_regine")
+require('scripts/quests/flyers_for_regine')
 -----------------------------------
 local entity = {}
 

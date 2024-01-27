@@ -3,8 +3,6 @@
 --  NPC: ??? (qm0)
 -- Note: Spawns Diabolos [Spade|Heart|Diamond|Club] / Diabolos [Somnus|Nox|Umbra|Letum]
 -----------------------------------
-require("scripts/globals/dynamis")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

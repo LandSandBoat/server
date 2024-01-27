@@ -23,6 +23,7 @@
 #define _CTRANSPORT_H
 
 #include "common/cbasetypes.h"
+#include "common/singleton.h"
 #include "entities/npcentity.h"
 #include <vector>
 
@@ -73,7 +74,6 @@ struct Transport_Ship : Transport_Time
     void setVisible(bool) const;
     void animateSetup(uint8, uint32) const;
     void spawn() const;
-    void setName(uint32) const;
 };
 
 struct TransportZone_Town
@@ -117,12 +117,9 @@ struct Elevator_t
     void openDoor(CNpcEntity*) const;
 };
 
-class CTransportHandler
+class CTransportHandler : public Singleton<CTransportHandler>
 {
 public:
-    virtual ~CTransportHandler() = default;
-    static CTransportHandler* getInstance();
-
     void startElevator(int32 elevatorID);
     void TransportTimer();
     void insertElevator(Elevator_t elevator);
@@ -131,11 +128,10 @@ public:
 
     void InitializeTransport();
 
-private:
-    static std::unique_ptr<CTransportHandler> _instance;
-
+protected:
     CTransportHandler() = default;
 
+private:
     void startElevator(Elevator_t*);
     void arriveElevator(Elevator_t*);
 

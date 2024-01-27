@@ -2,7 +2,7 @@
 -- Area: Rolanberry Fields
 --  NPC: Signpost
 -----------------------------------
-local ID = require("scripts/zones/Rolanberry_Fields/IDs")
+local ID = zones[xi.zone.ROLANBERRY_FIELDS]
 -----------------------------------
 local entity = {}
 

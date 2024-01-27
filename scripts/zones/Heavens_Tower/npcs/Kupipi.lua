@@ -5,11 +5,7 @@
 -- Involved in Quest: Riding on the Clouds
 -- !pos 2 0.1 30 242
 -----------------------------------
-local ID = require("scripts/zones/Heavens_Tower/IDs")
-require("scripts/globals/missions")
-require("scripts/globals/npc_util")
-require("scripts/globals/quests")
-require("scripts/globals/titles")
+local ID = zones[xi.zone.HEAVENS_TOWER]
 -----------------------------------
 local entity = {}
 
@@ -36,8 +32,8 @@ entity.onTrigger = function(player, npc)
     local trustSandoria = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.TRUST_SANDORIA)
     local trustBastok   = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.TRUST_BASTOK)
     local trustWindurst = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.TRUST_WINDURST)
-    local windurstFirstTrust = player:getCharVar("WindurstFirstTrust")
-    local kupipiTrustChatFlag = player:getLocalVar("KupipiTrustChatFlag")
+    local windurstFirstTrust = player:getCharVar('WindurstFirstTrust')
+    local kupipiTrustChatFlag = player:getLocalVar('KupipiTrustChatFlag')
     local rank3 = player:getRank(player:getNation()) >= 3 and 1 or 0
 
     if
@@ -53,7 +49,7 @@ entity.onTrigger = function(player, npc)
         kupipiTrustChatFlag == 0
     then
         player:startEvent(436)
-        player:setLocalVar("KupipiTrustChatFlag", 1)
+        player:setLocalVar('KupipiTrustChatFlag', 1)
     elseif trustWindurst == QUEST_ACCEPTED and windurstFirstTrust == 2 then
         player:startEvent(437)
     elseif
@@ -62,7 +58,7 @@ entity.onTrigger = function(player, npc)
         kupipiTrustChatFlag == 0
     then
         player:startEvent(438)
-        player:setLocalVar("KupipiTrustChatFlag", 1)
+        player:setLocalVar('KupipiTrustChatFlag', 1)
     elseif player:getNation() == xi.nation.WINDURST then
         if player:getRank(player:getNation()) == 10 then
             player:startEvent(408) -- After achieving Windurst Rank 10, Kupipi has more to say
@@ -82,14 +78,14 @@ entity.onEventFinish = function(player, csid, option, npc)
     if csid == 435 then
         player:addSpell(xi.magic.spell.KUPIPI, true, true)
         player:messageSpecial(ID.text.YOU_LEARNED_TRUST, 0, xi.magic.spell.KUPIPI)
-        player:setCharVar("WindurstFirstTrust", 1)
+        player:setCharVar('WindurstFirstTrust', 1)
     elseif csid == 437 then
         player:delKeyItem(xi.ki.GREEN_INSTITUTE_CARD)
         player:messageSpecial(ID.text.KEYITEM_LOST, xi.ki.GREEN_INSTITUTE_CARD)
         npcUtil.completeQuest(player, xi.quest.log_id.WINDURST, xi.quest.id.windurst.TRUST_WINDURST, {
             ki = xi.ki.WINDURST_TRUST_PERMIT,
             title = xi.title.THE_TRUSTWORTHY,
-            var = "WindurstFirstTrust" })
+            var = 'WindurstFirstTrust' })
         player:messageSpecial(ID.text.CALL_MULTIPLE_ALTER_EGO)
     elseif csid == 439 then
         player:addSpell(xi.magic.spell.KUPIPI, true, true)

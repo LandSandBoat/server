@@ -46,9 +46,9 @@ struct LotInfo
     CCharEntity* member;
 
     LotInfo()
+    : lot(0)
+    , member(nullptr)
     {
-        lot    = 0;
-        member = nullptr;
     }
 };
 
@@ -61,9 +61,9 @@ struct TreasurePoolItem
     std::vector<LotInfo> Lotters;
 
     TreasurePoolItem()
+    : ID(0)
+    , SlotID(0)
     {
-        ID     = 0;
-        SlotID = 0;
     }
 };
 

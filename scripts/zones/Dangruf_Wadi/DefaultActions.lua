@@ -1,4 +1,4 @@
-local ID = require("scripts/zones/Dangruf_Wadi/IDs")
+local ID = zones[xi.zone.DANGRUF_WADI]
 
 return {
     ['qm3'] = { messageSpecial = ID.text.CRYSTALLINE_DUST },

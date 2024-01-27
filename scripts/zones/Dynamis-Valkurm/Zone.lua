@@ -1,10 +1,6 @@
 -----------------------------------
 -- Zone: Dynamis-Valkurm
 -----------------------------------
-local ID = require('scripts/zones/Dynamis-Valkurm/IDs')
-require('scripts/globals/conquest')
-require('scripts/globals/dynamis')
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

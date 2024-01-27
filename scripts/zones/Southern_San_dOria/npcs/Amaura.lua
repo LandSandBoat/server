@@ -4,9 +4,7 @@
 -- Involved in Quest: The Medicine Woman, To Cure a Cough
 -- !pos -85 -6 89 230
 -----------------------------------
-require("scripts/globals/titles")
-require("scripts/globals/quests")
-local ID = require("scripts/zones/Southern_San_dOria/IDs")
+local ID = zones[xi.zone.SOUTHERN_SAN_DORIA]
 -----------------------------------
 local entity = {}
 
@@ -16,7 +14,7 @@ end
 entity.onTrigger = function(player, npc)
     local toCureaCough = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.TO_CURE_A_COUGH)
 
-    if player:getCharVar("DiaryPage") == 3 or toCureaCough == QUEST_ACCEPTED then
+    if player:getCharVar('DiaryPage') == 3 or toCureaCough == QUEST_ACCEPTED then
         if
             not player:hasKeyItem(xi.ki.THYME_MOSS) and
             not player:hasKeyItem(xi.ki.COUGH_MEDICINE)

@@ -1,11 +1,8 @@
 -----------------------------------
 -- Zone: Davoi (149)
 -----------------------------------
-local ID = require("scripts/zones/Davoi/IDs")
-require("scripts/globals/conquest")
-require("scripts/globals/npc_util")
-require("scripts/globals/treasure")
-require("scripts/quests/otherAreas/helpers")
+local ID = zones[xi.zone.DAVOI]
+require('scripts/quests/otherAreas/helpers')
 -----------------------------------
 local zoneObject = {}
 
@@ -59,7 +56,7 @@ zoneObject.onGameDay = function()
 end
 
 zoneObject.onGameHour = function(zone)
-    local jarMoveTime = GetServerVariable("Davoi_Jar_Move_Time")
+    local jarMoveTime = GetServerVariable('Davoi_Jar_Move_Time')
 
     if os.time() >= jarMoveTime then
         local npc = GetNPCByID(ID.npc.JAR)

@@ -5,9 +5,6 @@
 -- NOTE: xi.mission.id.toau.LAND_OF_SACRED_SERPENTS is set on character creation
 -- !addmission 4 0
 -----------------------------------
-require('scripts/globals/missions')
-require('scripts/globals/interaction/mission')
------------------------------------
 
 local mission = Mission:new(xi.mission.log_id.TOAU, xi.mission.id.toau.LAND_OF_SACRED_SERPENTS)
 

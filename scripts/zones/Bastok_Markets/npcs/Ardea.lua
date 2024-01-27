@@ -4,8 +4,6 @@
 -- !pos -198 -6 -69 235
 -- Involved in quests: Chasing Quotas, Rock Racketeer
 -----------------------------------
-require("scripts/globals/quests")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
@@ -13,7 +11,7 @@ end
 
 entity.onTrigger = function(player, npc)
     local rockRacketeer = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.ROCK_RACKETEER)
-    local chasingQuotasStatus = player:getCharVar("ChasingQuotas_Progress")
+    local chasingQuotasStatus = player:getCharVar('ChasingQuotas_Progress')
 
     -- Rock Racketeer
     if
@@ -37,11 +35,11 @@ entity.onEventFinish = function(player, csid, option, npc)
     if csid == 261 and option ~= 1 then
         player:delKeyItem(xi.ki.SHARP_GRAY_STONE)
         player:addGil(xi.settings.main.GIL_RATE * 10)
-        player:setCharVar("rockracketeer_sold", 1)
+        player:setCharVar('rockracketeer_sold', 1)
     elseif csid == 261 and option ~= 2 then
-        player:setCharVar("rockracketeer_sold", 2)
+        player:setCharVar('rockracketeer_sold', 2)
     elseif csid == 264 then
-        player:setCharVar("ChasingQuotas_Progress", 4)
+        player:setCharVar('ChasingQuotas_Progress', 4)
     end
 end
 

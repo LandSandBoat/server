@@ -3,8 +3,7 @@
 --  NPC: qm1 (???)
 -- Involved in Quest "The Siren's Tear"
 -----------------------------------
-local ID = require("scripts/zones/North_Gustaberg/IDs")
-require("scripts/globals/quests")
+local ID = zones[xi.zone.NORTH_GUSTABERG]
 -----------------------------------
 local entity = {}
 
@@ -20,7 +19,7 @@ local positions =
 -- send the QM to one of the two northern starting locations
 -- if it's already at one, send it to the other one
 local function resetSirenTear(npc)
-    local currentPos = npc:getLocalVar("pos")
+    local currentPos = npc:getLocalVar('pos')
     local nextPos
 
     if currentPos == 0 then
@@ -31,19 +30,19 @@ local function resetSirenTear(npc)
         nextPos = math.random(0, 1)
     end
 
-    npc:setLocalVar("pos", nextPos)
+    npc:setLocalVar('pos', nextPos)
     npc:setPos(unpack(positions[nextPos]))
 end
 
 -- move the QM downstream (south)
 -- if it's at the southern end, reset it to one of the two starting positions
 local function moveSirenTear(npc)
-    local currentPos = npc:getLocalVar("pos")
+    local currentPos = npc:getLocalVar('pos')
     if currentPos == 4 then
         resetSirenTear(npc)
     else
         local nextPos = (currentPos == 0) and 2 or (currentPos + 1)
-        npc:setLocalVar("pos", nextPos)
+        npc:setLocalVar('pos', nextPos)
         npc:setPos(unpack(positions[nextPos]))
     end
 end
@@ -64,9 +63,9 @@ entity.onEventFinish = function(player, csid, option, npc)
             player:getEquipID(xi.slot.MAIN) == 0 and
             player:getEquipID(xi.slot.SUB) == 0
         then
-            if player:hasItem(xi.items.SIRENS_TEAR) then
-                player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED_TWICE, xi.items.SIRENS_TEAR)
-            elseif npcUtil.giveItem(player, xi.items.SIRENS_TEAR) then
+            if player:hasItem(xi.item.SIRENS_TEAR) then
+                player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED_TWICE, xi.item.SIRENS_TEAR)
+            elseif npcUtil.giveItem(player, xi.item.SIRENS_TEAR) then
                 resetSirenTear(npc)
             end
         else

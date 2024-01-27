@@ -2,7 +2,7 @@
 -- Area: Wajaom Woodlands
 --  Mob: Carmine Eruca
 -----------------------------------
-mixins = { require("scripts/mixins/families/eruca") }
+mixins = { require('scripts/mixins/families/eruca') }
 -----------------------------------
 local entity = {}
 

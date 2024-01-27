@@ -4,7 +4,7 @@
 -- Notes: Opens door _471 near password #3
 -- !pos -45.230 -17.832 17.668 151
 -----------------------------------
-local ID = require("scripts/zones/Castle_Oztroja/IDs")
+local ID = zones[xi.zone.CASTLE_OZTROJA]
 -----------------------------------
 local entity = {}
 

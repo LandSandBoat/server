@@ -28,7 +28,7 @@ CREATE TABLE `item_usable` (
   `reuseDelay` int(10) unsigned NOT NULL DEFAULT '0',
   `aoe` tinyint(1) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`itemid`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 PACK_KEYS=1 CHECKSUM=1;
+) ENGINE=Aria TRANSACTIONAL=0 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci PACK_KEYS=1 CHECKSUM=1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -788,6 +788,7 @@ INSERT INTO `item_usable` VALUES (4883,'scroll_of_absorb-tp',1,1,12,5,0,0,0,0);
 INSERT INTO `item_usable` VALUES (4884,'scroll_of_blind_ii',1,1,12,5,0,0,0,0);
 INSERT INTO `item_usable` VALUES (4885,'scroll_of_dread_spikes',1,1,12,5,0,0,0,0);
 INSERT INTO `item_usable` VALUES (4886,'scroll_of_absorb-acc',1,1,12,5,0,0,0,0);
+INSERT INTO `item_usable` VALUES (4887,'scroll_of_absorb-attri',1,1,12,5,0,0,0,0);
 INSERT INTO `item_usable` VALUES (4889,'scroll_of_breakga',1,1,12,5,0,0,0,0);
 INSERT INTO `item_usable` VALUES (4890,'scroll_of_firaja',1,1,12,5,0,0,0,0);
 INSERT INTO `item_usable` VALUES (4891,'scroll_of_blizzaja',1,1,12,5,0,0,0,0);
@@ -1859,6 +1860,9 @@ INSERT INTO `item_usable` VALUES (6177,'copy_of_life-form_study',1,1,117,0,0,0,0
 INSERT INTO `item_usable` VALUES (6178,'copy_of_hrohjs_record',1,1,117,0,0,0,0,0);
 INSERT INTO `item_usable` VALUES (6179,'copy_of_the_bell_tolls',1,1,117,0,0,0,0,0);
 INSERT INTO `item_usable` VALUES (6181,'beitetsu_parcel',1,1,24,0,0,0,0,0);
+INSERT INTO `item_usable` VALUES (6183,'pluton_box',1,1,24,0,0,0,0,0);
+INSERT INTO `item_usable` VALUES (6184,'beitetsu_box',1,1,24,0,0,0,0,0);
+INSERT INTO `item_usable` VALUES (6185,'boulder_box',1,1,24,0,0,0,0,0);
 INSERT INTO `item_usable` VALUES (6186,'slime_rocket',1,1,115,0,0,0,0,0);
 INSERT INTO `item_usable` VALUES (6190,'spriggan_spark',1,1,114,0,0,0,0,0);
 INSERT INTO `item_usable` VALUES (6211,'slice_of_marinara_pizza',1,1,28,0,0,0,0,0);
@@ -1872,6 +1876,8 @@ INSERT INTO `item_usable` VALUES (6218,'slice_of_anchovy_pizza_+1',1,1,28,0,0,0,
 INSERT INTO `item_usable` VALUES (6223,'cehuetzi_snow_cone',1,1,26,0,0,0,0,0);
 INSERT INTO `item_usable` VALUES (6224,'apingaut_snow_cone',1,1,26,0,0,0,0,0);
 INSERT INTO `item_usable` VALUES (6225,'cyclical_coalescence',1,1,26,0,0,0,0,0);
+INSERT INTO `item_usable` VALUES (6258,'piece_of_shiromochi',1,1,28,0,0,0,0,0);
+INSERT INTO `item_usable` VALUES (6259,'piece_of_shiromochi_+1',1,1,28,0,0,0,0,0);
 INSERT INTO `item_usable` VALUES (6260,'piece_of_akamochi',1,1,28,0,0,0,0,0);
 INSERT INTO `item_usable` VALUES (6261,'piece_of_akamochi_+1',1,1,28,0,0,0,0,0);
 INSERT INTO `item_usable` VALUES (6262,'piece_of_kusamochi',1,1,28,0,0,0,0,0);
@@ -2327,8 +2333,10 @@ INSERT INTO `item_usable` VALUES (18945,'jet_sickle',1,3,0,0,100,30,600,0);
 INSERT INTO `item_usable` VALUES (19181,'moogles_largesse',1,12,0,0,9,10,259200,0);
 INSERT INTO `item_usable` VALUES (19204,'fiendtrapper',20,0,0,0,12,10,30,0);
 INSERT INTO `item_usable` VALUES (19246,'moggiebag',1,3,0,0,8,10,259200,0);
+INSERT INTO `item_usable` VALUES (21074,'kupo_rod',1,3,55,0,1,30,72000,0);
 -- INSERT INTO `item_usable` VALUES (20533,'worm_feelers_+1',1,1,55,0,1,30,86400,0); -- item's lua still needs made
 -- INSERT INTO `item_usable` VALUES (20568,'wind_knife_+1',4,1,0,0,1,30,600,0); -- untested
+INSERT INTO `item_usable` VALUES (20953,'escritorio',1,1,55,0,1,30,86400,0); -- Dispenses: Cone Calamary
 INSERT INTO `item_usable` VALUES (21266,'gastraphetes',1,1,55,0,1,10,3600,0);
 INSERT INTO `item_usable` VALUES (21267,'annihilator',1,1,55,0,1,10,3600,0);
 INSERT INTO `item_usable` VALUES (21268,'death_penalty',1,1,55,0,1,10,3600,0);

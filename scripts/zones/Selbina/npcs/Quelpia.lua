@@ -3,8 +3,7 @@
 --  NPC: Quelpia
 -- Standard Merchant NPC
 -----------------------------------
-local ID = require("scripts/zones/Selbina/IDs")
-require("scripts/globals/shop")
+local ID = zones[xi.zone.SELBINA]
 -----------------------------------
 local entity = {}
 

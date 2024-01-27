@@ -1,7 +1,7 @@
 -----------------------------------
 -- Zone: Yahse Hunting Grounds
 -----------------------------------
-local ID = require('scripts/zones/Yahse_Hunting_Grounds/IDs')
+local ID = zones[xi.zone.YAHSE_HUNTING_GROUNDS]
 -----------------------------------
 local zoneObject = {}
 
@@ -29,10 +29,10 @@ local function triggerUncannySensationMessage(player)
     if player:getQuestStatus(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.DANCES_WITH_LUOPANS) == QUEST_ACCEPTED then
         if
             player:hasKeyItem(xi.ki.LUOPAN) and
-            player:getCharVar("GEO_DWL_Luopan") == 0
+            player:getCharVar('GEO_DWL_Luopan') == 0
         then
             player:messageSpecial(ID.text.UNCANNY_SENSATION)
-            player:setLocalVar("GEO_DWL_Locus_Area", 1)
+            player:setLocalVar('GEO_DWL_Locus_Area', 1)
         end
     end
 end
@@ -47,7 +47,7 @@ zoneObject.onTriggerAreaEnter = function(player, triggerArea)
 end
 
 zoneObject.onTriggerAreaLeave = function(player, triggerArea)
-    player:setLocalVar("GEO_DWL_Locus_Area", 0)
+    player:setLocalVar('GEO_DWL_Locus_Area', 0)
 end
 
 zoneObject.onEventUpdate = function(player, csid, option, npc)

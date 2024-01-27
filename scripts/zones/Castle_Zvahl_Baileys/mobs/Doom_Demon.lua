@@ -3,8 +3,7 @@
 --  Mob: Doom Demon
 -- Note: PH for Marquis Sabnock
 -----------------------------------
-local ID = require("scripts/zones/Castle_Zvahl_Baileys/IDs")
-require("scripts/globals/mobs")
+local ID = zones[xi.zone.CASTLE_ZVAHL_BAILEYS]
 -----------------------------------
 local entity = {}
 

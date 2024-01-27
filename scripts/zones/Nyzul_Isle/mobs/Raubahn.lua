@@ -2,12 +2,12 @@
 -- Area: Nyzul Isle (Nashmeira's Plea)
 --  Mob: Raubahn
 -----------------------------------
-local ID = require('scripts/zones/Nyzul_Isle/IDs')
+local ID = zones[xi.zone.NYZUL_ISLE]
 -----------------------------------
 local entity = {}
 
 entity.onMobSpawn = function(mob)
-    mob:addListener("WEAPONSKILL_STATE_ENTER", "WS_START_MSG", function(mobArg, skillID)
+    mob:addListener('WEAPONSKILL_STATE_ENTER', 'WS_START_MSG', function(mobArg, skillID)
         mob:showText(mobArg, ID.text.CARVE)
     end)
 
@@ -18,11 +18,11 @@ entity.onMobSpawn = function(mob)
         4. Find out why sometimes showText() is firing multiple times and sometimes not at all..
     ]]
 
-    mob:addListener("DEATH", "RAUBAHN_DEATH", function(mobArg)
+    mob:addListener('DEATH', 'RAUBAHN_DEATH', function(mobArg)
         local instance = mobArg:getInstance()
         instance:setProgress(instance:getProgress() + 1)
 
-        local reraises = mobArg:getLocalVar("RERAISES")
+        local reraises = mobArg:getLocalVar('RERAISES')
 
         if reraises < 2 then
             local target   = mobArg:getTarget()
@@ -44,7 +44,7 @@ entity.onMobSpawn = function(mob)
                     mobTimerArg:updateEnmity(newTarget)
                 end
 
-                mobTimerArg:setLocalVar("RERAISES", reraises + 1)
+                mobTimerArg:setLocalVar('RERAISES', reraises + 1)
             end)
 
             -- AFAICT we lack the damage tracking for his immunity based on accumulated damage type
@@ -103,21 +103,21 @@ end
 
 entity.onMobEngaged = function(mob, target)
     -- localVar because we don't want it to repeat every reraise.
-    if mob:getLocalVar("started") == 0 then
+    if mob:getLocalVar('started') == 0 then
         mob:showText(mob, ID.text.PRAY)
-        mob:setLocalVar("started", 1)
+        mob:setLocalVar('started', 1)
     end
 end
 
 entity.onMobFight = function(mob, target)
     --[[ Mob version of Azure Lore needs scripted, then we can remove this block commenting.
-    -- On his 2nd and 3rd "lives" Raubahn will use Azure Lore at low health.
-    local hpTrigger = mob:getLocalVar("AzureLoreHP")
-    if (hpTrigger > 0) then -- It'll be zero on his first "life"
-        local usedAzure = mob:getLocalVar("usedAzureLore")
+    -- On his 2nd and 3rd 'lives' Raubahn will use Azure Lore at low health.
+    local hpTrigger = mob:getLocalVar('AzureLoreHP')
+    if (hpTrigger > 0) then -- It'll be zero on his first 'life'
+        local usedAzure = mob:getLocalVar('usedAzureLore')
         if mob:getHPP() <= hpTrigger and usedAzure == 0 then
-            mob:setLocalVar("usedAzureLore", 1)
-            mob:setLocalVar("AzureLoreHP", math.random(20, 50) -- Re-rolling the % for next "life"
+            mob:setLocalVar('usedAzureLore', 1)
+            mob:setLocalVar('AzureLoreHP', math.random(20, 50) -- Re-rolling the % for next 'life'
             mob:useMobAbility(xi.jsa.AZURE_LORE)
         end
     end

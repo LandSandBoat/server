@@ -1,11 +1,11 @@
 -----------------------------------
 -- Unlock Mog Wardrobe slots as you complete missions
 -----------------------------------
-require("modules/module_utils")
-require("scripts/globals/missions")
-require("scripts/globals/utils")
+require('modules/module_utils')
+require('scripts/globals/missions')
+require('scripts/globals/utils')
 -----------------------------------
-local m = Module:new("mission_wardrobe_unlocks")
+local m = Module:new('mission_wardrobe_unlocks')
 
 local unlocks =
 {
@@ -17,27 +17,27 @@ local unlocks =
 
 local bagNames =
 {
-    [xi.inv.INVENTORY]  = "Inventory",
-    [xi.inv.MOGSAFE]    = "Mog Safe",
-    [xi.inv.STORAGE]    = "Storage",
-    [xi.inv.TEMPITEMS]  = "Temp. Items",
-    [xi.inv.MOGLOCKER]  = "Mog Locker",
-    [xi.inv.MOGSATCHEL] = "Mog Satchel",
-    [xi.inv.MOGSACK]    = "Mog Sack",
-    [xi.inv.MOGCASE]    = "Mog Case",
-    [xi.inv.WARDROBE]   = "Mog Wardrobe 1",
-    [xi.inv.MOGSAFE2]   = "Mog Safe 2",
-    [xi.inv.WARDROBE2]  = "Mog Wardrobe 2",
-    [xi.inv.WARDROBE3]  = "Mog Wardrobe 3",
-    [xi.inv.WARDROBE4]  = "Mog Wardrobe 4",
-    [xi.inv.WARDROBE5]  = "Mog Wardrobe 5",
-    [xi.inv.WARDROBE6]  = "Mog Wardrobe 6",
-    [xi.inv.WARDROBE7]  = "Mog Wardrobe 7",
-    [xi.inv.WARDROBE8]  = "Mog Wardrobe 8",
-    [xi.inv.RECYCLEBIN] = "Recycle Bin",
+    [xi.inv.INVENTORY]  = 'Inventory',
+    [xi.inv.MOGSAFE]    = 'Mog Safe',
+    [xi.inv.STORAGE]    = 'Storage',
+    [xi.inv.TEMPITEMS]  = 'Temp. Items',
+    [xi.inv.MOGLOCKER]  = 'Mog Locker',
+    [xi.inv.MOGSATCHEL] = 'Mog Satchel',
+    [xi.inv.MOGSACK]    = 'Mog Sack',
+    [xi.inv.MOGCASE]    = 'Mog Case',
+    [xi.inv.WARDROBE]   = 'Mog Wardrobe 1',
+    [xi.inv.MOGSAFE2]   = 'Mog Safe 2',
+    [xi.inv.WARDROBE2]  = 'Mog Wardrobe 2',
+    [xi.inv.WARDROBE3]  = 'Mog Wardrobe 3',
+    [xi.inv.WARDROBE4]  = 'Mog Wardrobe 4',
+    [xi.inv.WARDROBE5]  = 'Mog Wardrobe 5',
+    [xi.inv.WARDROBE6]  = 'Mog Wardrobe 6',
+    [xi.inv.WARDROBE7]  = 'Mog Wardrobe 7',
+    [xi.inv.WARDROBE8]  = 'Mog Wardrobe 8',
+    [xi.inv.RECYCLEBIN] = 'Recycle Bin',
 }
 
-m:addOverride("xi.player.charCreate", function(player)
+m:addOverride('xi.player.charCreate', function(player)
     super(player)
 
     -- NOTE: These will all be clamped between 0-80,
@@ -52,7 +52,7 @@ m:addOverride("xi.player.charCreate", function(player)
     player:changeContainerSize(xi.inv.WARDROBE8, -80)
 end)
 
-m:addOverride("npcUtil.completeMission", function(player, logId, missionId, params)
+m:addOverride('npcUtil.completeMission', function(player, logId, missionId, params)
     local result = super(player, logId, missionId, params)
 
     if result and unlocks[logId] and unlocks[logId][missionId] then
@@ -66,10 +66,10 @@ m:addOverride("npcUtil.completeMission", function(player, logId, missionId, para
         local newSize = player:getContainerSize(bag)
 
         local str = string.format(
-            "%s capacity has been increased by %i from %i to %i",
+            '%s capacity has been increased by %i from %i to %i',
             bagName, bagIncrease, oldSize, newSize)
 
-        player:PrintToPlayer(str, xi.msg.channel.SYSTEM_3, "")
+        player:PrintToPlayer(str, xi.msg.channel.SYSTEM_3, '')
     end
 
     return result

@@ -1,8 +1,6 @@
 -----------------------------------
 -- Zone: Dynamis-Jeuno [D]
 -----------------------------------
-local ID = require('scripts/zones/Dynamis-Jeuno_[D]/IDs')
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

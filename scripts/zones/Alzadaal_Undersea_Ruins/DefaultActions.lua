@@ -1,4 +1,4 @@
-local ID = require("scripts/zones/Alzadaal_Undersea_Ruins/IDs")
+local ID = zones[xi.zone.ALZADAAL_UNDERSEA_RUINS]
 
 return {
     ['blank_lamp']            = { messageSpecial = ID.text.DEVICE_MALFUNCTIONING },

@@ -4,8 +4,7 @@
 -- Spawns Amphitrite
 -- !pos -136 -31 -231 254
 -----------------------------------
-local ID = require('scripts/zones/Abyssea-Grauberg/IDs')
-require('scripts/globals/abyssea')
+local ID = zones[xi.zone.ABYSSEA_GRAUBERG]
 -----------------------------------
 local entity = {}
 

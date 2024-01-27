@@ -4,9 +4,7 @@
 -- Involved in quest: Operation Teatime
 -- !pos 473 -31 75 79
 -----------------------------------
-local ID = require("scripts/zones/Caedarva_Mire/IDs")
-require("scripts/globals/npc_util")
-require("scripts/globals/quests")
+local ID = zones[xi.zone.CAEDARVA_MIRE]
 -----------------------------------
 local entity = {}
 
@@ -15,7 +13,7 @@ end
 
 entity.onTrigger = function(player, npc)
     local operationTeatime = player:getQuestStatus(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.OPERATION_TEATIME)
-    local operationTeatimeProgress = player:getCharVar("OperationTeatimeProgress")
+    local operationTeatimeProgress = player:getCharVar('OperationTeatimeProgress')
 
     if operationTeatime == QUEST_ACCEPTED and operationTeatimeProgress == 3 then
         player:startEvent(15)
@@ -29,7 +27,7 @@ end
 
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 15 then
-        npcUtil.completeQuest(player, xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.OPERATION_TEATIME, { item = 15602, var = "OperationTeatimeProgress" })
+        npcUtil.completeQuest(player, xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.OPERATION_TEATIME, { item = 15602, var = 'OperationTeatimeProgress' })
     end
 end
 

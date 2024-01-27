@@ -2,17 +2,17 @@
 -- Area: Grand Palace of HuXzoi
 --  Mob: Ix'aern MNK
 -----------------------------------
-local ID = require("scripts/zones/Grand_Palace_of_HuXzoi/IDs")
+local ID = zones[xi.zone.GRAND_PALACE_OF_HUXZOI]
 -----------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)
-    mob:addListener("ITEM_DROPS", "ITEM_DROPS_IXAERN_MNK", function(mobArg, loot)
-        local rate = mob:getLocalVar("[SEA]IxAern_DropRate")
+    mob:addListener('ITEM_DROPS', 'ITEM_DROPS_IXAERN_MNK', function(mobArg, loot)
+        local rate = mob:getLocalVar('[SEA]IxAern_DropRate')
         loot:addGroupFixed(rate,
         {
-            { item = xi.items.DEED_OF_PLACIDITY, weight = 750 },
-            { item = xi.items.VICE_OF_ANTIPATHY, weight = 250 },
+            { item = xi.item.DEED_OF_PLACIDITY, weight = 750 },
+            { item = xi.item.VICE_OF_ANTIPATHY, weight = 250 },
         })
     end)
 end
@@ -24,10 +24,10 @@ end
 entity.onMobFight = function(mob, target)
     -- The mob gains a huge boost when it 2hours to attack speed and attack.
     -- It forces the minions to 2hour as well. Wiki says 50% but all videos show 60%.
-    if mob:getLocalVar("BracerMode") == 0 then
+    if mob:getLocalVar('BracerMode') == 0 then
         if mob:getHPP() < math.random(50, 60) then
             -- Go into bracer mode
-            mob:setLocalVar("BracerMode", 1)
+            mob:setLocalVar('BracerMode', 1)
             mob:setAnimationSub(2)
             mob:addMod(xi.mod.ATT, 200)
             mob:addMod(xi.mod.HASTE_ABILITY, 1500)

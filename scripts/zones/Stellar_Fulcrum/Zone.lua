@@ -1,9 +1,6 @@
 -----------------------------------
 -- Zone: Stellar_Fulcrum
 -----------------------------------
-local ID = require('scripts/zones/Stellar_Fulcrum/IDs')
-require('scripts/globals/conquest')
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

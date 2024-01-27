@@ -3,8 +3,6 @@
 --  Mob: Tartarus Eft
 -- Note: PH for Splacknuck
 -----------------------------------
-require('scripts/globals/mobs')
------------------------------------
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

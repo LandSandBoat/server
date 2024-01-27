@@ -4,10 +4,7 @@
 -- Starts and Finishes Quest: To Cure a Cough
 -- !pos -114 -6 102 230
 -----------------------------------
-require("scripts/globals/titles")
-require("scripts/globals/shop")
-require("scripts/globals/quests")
-local ID = require("scripts/zones/Southern_San_dOria/IDs")
+local ID = zones[xi.zone.SOUTHERN_SAN_DORIA]
 -----------------------------------
 local entity = {}
 
@@ -20,7 +17,7 @@ entity.onTrigger = function(player, npc)
 
     if
         toCureaCough == QUEST_AVAILABLE and
-        player:getCharVar("toCureaCough") == 0 and
+        player:getCharVar('toCureaCough') == 0 and
         medicineWoman == QUEST_COMPLETED
     then
         player:startEvent(538)
@@ -36,10 +33,10 @@ end
 
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 538 then
-        player:setCharVar("toCureaCough", 1)
+        player:setCharVar('toCureaCough', 1)
     elseif csid == 647 then
         player:addTitle(xi.title.A_MOSS_KIND_PERSON)
-        player:setCharVar("toCureaCough", 0)
+        player:setCharVar('toCureaCough', 0)
         player:delKeyItem(xi.ki.COUGH_MEDICINE)
         player:addKeyItem(xi.ki.SCROLL_OF_TREASURE)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.SCROLL_OF_TREASURE)

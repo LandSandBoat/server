@@ -3,8 +3,6 @@
 --  NPC: ??? (qm0)
 -- Note: Spawns Dynamis Lord / Arch Dynamis Lord
 -----------------------------------
-require("scripts/globals/dynamis")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

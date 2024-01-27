@@ -7,10 +7,6 @@
 -- UMBRIL_OOZE : !additem 3935
 -- Pudith      : !pos -109.533 -0.150 56.939 257
 -----------------------------------
-require('scripts/globals/quests')
-require('scripts/globals/interaction/quest')
-require('scripts/globals/npc_util')
------------------------------------
 
 local quest = Quest:new(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.A_SHOT_IN_THE_DARK)
 
@@ -60,7 +56,7 @@ quest.sections =
             return player:hasCompletedQuest(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.IT_SETS_MY_HEART_AFLUTTER) and
                 player:hasCompletedQuest(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.A_GOOD_PAIR_OF_CROCS) and
                 player:hasCompletedQuest(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.A_SHOT_IN_THE_DARK) and
-                player:getCharVar("ADOULIN_FAME_QUEST_TRACKER") == 2
+                player:getCharVar('ADOULIN_FAME_QUEST_TRACKER') == 2
         end,
 
         [xi.zone.EASTERN_ADOULIN] =
@@ -97,7 +93,7 @@ quest.sections =
                 end,
 
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, xi.items.UMBRIL_OOZE) then
+                    if npcUtil.tradeHasExactly(trade, xi.item.UMBRIL_OOZE) then
                         return quest:progressEvent(3012)
                     end
                 end,
@@ -108,7 +104,7 @@ quest.sections =
                 [3012] = function(player, csid, option, npc)
                     if quest:complete(player) then
                         player:confirmTrade()
-                        player:setCharVar("ADOULIN_FAME_QUEST_TRACKER", 0)
+                        player:setCharVar('ADOULIN_FAME_QUEST_TRACKER', 0)
                     end
                 end,
             },

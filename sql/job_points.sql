@@ -11,7 +11,7 @@ CREATE TABLE IF NOT EXISTS `job_points` (
   `upgrade` tinyint(3) unsigned NOT NULL DEFAULT 0,
   `jobs` int(10) unsigned NOT NULL DEFAULT 0,
   PRIMARY KEY (`job_pointid`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
+) ENGINE=Aria TRANSACTIONAL=0 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 /*!40000 ALTER TABLE `job_points` DISABLE KEYS */;
 INSERT INTO `job_points` (`job_pointid`, `name`, `upgrade`, `jobs`) VALUES (32, 'mighty_strikes_effect', 2, 1);

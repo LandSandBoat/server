@@ -13,4 +13,4 @@ CREATE TABLE `char_inventory` (
   `signature` varchar(20) NOT NULL DEFAULT '',
   `extra` blob(24) DEFAULT NULL,
   PRIMARY KEY (`charid`,`location`,`slot`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 AVG_ROW_LENGTH=28;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci AVG_ROW_LENGTH=28;

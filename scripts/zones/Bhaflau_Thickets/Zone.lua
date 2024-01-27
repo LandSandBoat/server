@@ -1,9 +1,7 @@
 -----------------------------------
 -- Zone: Bhaflau_Thickets (52)
 -----------------------------------
-local ID = require('scripts/zones/Bhaflau_Thickets/IDs')
-require('scripts/globals/chocobo_digging')
-require('scripts/globals/helm')
+local ID = zones[xi.zone.BHAFLAU_THICKETS]
 -----------------------------------
 local zoneObject = {}
 
@@ -37,8 +35,8 @@ zoneObject.onZoneIn = function(player, prevZone)
 end
 
 zoneObject.afterZoneIn = function(player)
-    player:entityVisualPacket("1pb1")
-    player:entityVisualPacket("2pb1")
+    player:entityVisualPacket('1pb1')
+    player:entityVisualPacket('2pb1')
 end
 
 zoneObject.onTriggerAreaEnter = function(player, triggerArea)

@@ -3,9 +3,8 @@
 --  NPC: Boncort
 -- Standard Merchant NPC
 -----------------------------------
-local ID = require("scripts/zones/Northern_San_dOria/IDs")
-require("scripts/quests/flyers_for_regine")
-require("scripts/globals/shop")
+local ID = zones[xi.zone.NORTHERN_SAN_DORIA]
+require('scripts/quests/flyers_for_regine')
 -----------------------------------
 local entity = {}
 
@@ -16,14 +15,14 @@ end
 entity.onTrigger = function(player, npc)
     local stock =
     {
-        xi.items.LOAF_OF_BLACK_BREAD,      124, 3,
-        xi.items.LOAF_OF_WHITE_BREAD,      208, 2,
-        xi.items.STRIP_OF_MEAT_JERKY,      124, 3,
-        xi.items.SMOKED_SALMON,            228, 2,
-        xi.items.FLASK_OF_DISTILLED_WATER,  12, 3,
-        xi.items.BOTTLE_OF_GRAPE_JUICE,    967, 1,
-        xi.items.BOTTLE_OF_APPLE_JUICE,    312, 2,
-        xi.items.SCROLL_OF_SWORD_MADRIGAL, 189, 3,
+        xi.item.LOAF_OF_BLACK_BREAD,      124, 3,
+        xi.item.LOAF_OF_WHITE_BREAD,      208, 2,
+        xi.item.STRIP_OF_MEAT_JERKY,      124, 3,
+        xi.item.SMOKED_SALMON,            228, 2,
+        xi.item.FLASK_OF_DISTILLED_WATER,  12, 3,
+        xi.item.BOTTLE_OF_GRAPE_JUICE,    967, 1,
+        xi.item.BOTTLE_OF_APPLE_JUICE,    312, 2,
+        xi.item.SCROLL_OF_SWORD_MADRIGAL, 189, 3,
     }
 
     player:showText(npc, ID.text.BONCORT_SHOP_DIALOG)

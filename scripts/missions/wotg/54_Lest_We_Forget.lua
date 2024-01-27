@@ -5,10 +5,7 @@
 -- !addmission 5 53
 -- Veridical Conflux : !pos -142.279 -6.749 585.239 89
 -----------------------------------
-require('scripts/globals/missions')
-require('scripts/globals/interaction/mission')
------------------------------------
-local graubergID = require('scripts/zones/Grauberg_[S]/IDs')
+local graubergID = zones[xi.zone.GRAUBERG_S]
 -----------------------------------
 
 local mission = Mission:new(xi.mission.log_id.WOTG, xi.mission.id.wotg.LEST_WE_FORGET)
@@ -75,7 +72,7 @@ mission.sections =
             {
                 function(player)
                     if
-                        not player:hasItem(xi.items.MOONSHADE_EARRING) and
+                        not player:hasItem(xi.item.MOONSHADE_EARRING) and
                         mission:getVar(player, 'Status') == 0
                     then
                         mission:setLocalVar(player, 'Option', 1)
@@ -101,7 +98,7 @@ mission.sections =
             onEventFinish =
             {
                 [39] = function(player, csid, option, npc)
-                    if option ~= 1073741824 then
+                    if option ~= utils.EVENT_CANCELLED_OPTION then
                         local ID           = zones[player:getZoneID()]
                         local firstAugSel  = bit.band(bit.rshift(option, 1), 0xF)
                         local secondAugSel = bit.band(bit.rshift(option, 17), 0xF)
@@ -109,14 +106,14 @@ mission.sections =
                         if player:getFreeSlotsCount() < 1 then
                             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED)
                         else
-                            player:addItem(xi.items.MOONSHADE_EARRING, 1,
+                            player:addItem(xi.item.MOONSHADE_EARRING, 1,
                                 firstAugInfo[firstAugSel][1],
                                 firstAugInfo[firstAugSel][2],
                                 secondAugInfo[secondAugSel][1],
                                 secondAugInfo[secondAugSel][2]
                             )
 
-                            player:messageSpecial(ID.text.ITEM_OBTAINED, xi.items.MOONSHADE_EARRING)
+                            player:messageSpecial(ID.text.ITEM_OBTAINED, xi.item.MOONSHADE_EARRING)
 
                             mission:setVar(player, 'Status', 0)
                         end

@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Heavens Tower
 --  NPC: Utsuitsui
--- Type: Standard NPC
 -- !pos 6.379 -26.5 -4.043 242
 -----------------------------------
 local entity = {}

@@ -1,8 +1,8 @@
 -----------------------------------
 -- Abyssea Atma Global
 -----------------------------------
-require("scripts/globals/abyssea")
-require("scripts/globals/utils")
+require('scripts/globals/abyssea')
+require('scripts/globals/utils')
 -----------------------------------
 xi = xi or {}
 xi.atma = xi.atma or {}
@@ -259,7 +259,7 @@ local function getAtmasFromMask(mask)
 end
 
 local function updateReinfusedMask(player, atmaSlot, atmaValue)
-    local baseMask = player:getCharVar("ABYSSEA_LAST_ATMA_INFUSED")
+    local baseMask = player:getCharVar('ABYSSEA_LAST_ATMA_INFUSED')
     local atmas = getAtmasFromMask(baseMask)
     local newMask = 0
     atmas[atmaSlot] = getIdByKeyItemId(atmaValue)
@@ -278,16 +278,16 @@ local function updateReinfusedMask(player, atmaSlot, atmaValue)
         end
     end
 
-    player:setCharVar("ABYSSEA_LAST_ATMA_INFUSED", newMask)
+    player:setCharVar('ABYSSEA_LAST_ATMA_INFUSED', newMask)
 end
 
 local function getHistoryAtmaArray(player)
     local atmaHistory = {}
     local atmasSaved =
     {
-        [1] = getAtmasFromMask(player:getCharVar("ABYSSEA_HISTORY_ATMA1")),
-        [2] = getAtmasFromMask(player:getCharVar("ABYSSEA_HISTORY_ATMA2")),
-        [3] = getAtmasFromMask(player:getCharVar("ABYSSEA_HISTORY_ATMA3"))
+        [1] = getAtmasFromMask(player:getCharVar('ABYSSEA_HISTORY_ATMA1')),
+        [2] = getAtmasFromMask(player:getCharVar('ABYSSEA_HISTORY_ATMA2')),
+        [3] = getAtmasFromMask(player:getCharVar('ABYSSEA_HISTORY_ATMA3'))
     }
     for i = 1, 3 do
         for _, value in pairs(atmasSaved[i]) do
@@ -324,7 +324,7 @@ local function updateHistoryMask(player, atmaValue)
             maskAtma = maskAtma + histo[indexHisto]
         end
 
-        player:setCharVar("ABYSSEA_HISTORY_ATMA"..index, maskAtma)
+        player:setCharVar('ABYSSEA_HISTORY_ATMA'..index, maskAtma)
         index = index + 1
     end
 end
@@ -376,11 +376,11 @@ local function addAtma(player, selectedAtma)
         player:addStatusEffectEx(xi.effect.ATMA, xi.effect.ATMA, atmaValue, 0, 0, availableAtmaSlot)
 
         local atmaEffect = player:getStatusEffect(xi.effect.ATMA, availableAtmaSlot)
-        atmaEffect:setFlag(xi.effectFlag.ON_ZONE)
-        atmaEffect:setFlag(xi.effectFlag.INFLUENCE)
+        atmaEffect:addEffectFlag(xi.effectFlag.ON_ZONE)
+        atmaEffect:addEffectFlag(xi.effectFlag.INFLUENCE)
         updateReinfusedMask(player, availableAtmaSlot, atmaValue)
         updateHistoryMask(player, atmaValue)
-        player:delCurrency("cruor", atmaPrice)
+        player:delCurrency('cruor', atmaPrice)
     end
 end
 
@@ -414,7 +414,7 @@ end
 xi.atma.onTrigger = function(player, npc)
     local atmaMask   = getAtmaMask(player)
     local activeAtmaMask = getLunarAbyssiteMask(player)
-    local playerCruor = player:getCurrency("cruor")
+    local playerCruor = player:getCurrency('cruor')
 
     for atmaSlot = 3, 1, -1 do
         activeAtmaMask = bit.lshift(activeAtmaMask, 8)
@@ -434,16 +434,16 @@ xi.atma.onEventUpdate = function(player, csid, option, npc)
     local reinfuseAtma = 0
     local histo =
     {
-        [1] = player:getCharVar("ABYSSEA_HISTORY_ATMA1"),
-        [2] = player:getCharVar("ABYSSEA_HISTORY_ATMA2"),
-        [3] = player:getCharVar("ABYSSEA_HISTORY_ATMA3")
+        [1] = player:getCharVar('ABYSSEA_HISTORY_ATMA1'),
+        [2] = player:getCharVar('ABYSSEA_HISTORY_ATMA2'),
+        [3] = player:getCharVar('ABYSSEA_HISTORY_ATMA3')
     }
 
     if
-        player:getCharVar("ABYSSEA_LAST_ATMA_INFUSED") ~= 0 and
+        player:getCharVar('ABYSSEA_LAST_ATMA_INFUSED') ~= 0 and
         not player:hasStatusEffect(xi.effect.ATMA)
     then
-        reinfuseAtma = player:getCharVar("ABYSSEA_LAST_ATMA_INFUSED")
+        reinfuseAtma = player:getCharVar('ABYSSEA_LAST_ATMA_INFUSED')
     end
 
     player:updateEvent(reinfuseAtma, histo[1], histo[2], histo[3], 0, 0, 0, 0)
@@ -472,9 +472,9 @@ xi.atma.onEventFinish = function(player, csid, option, npc)
         end
     elseif
         optionSelected == 3 and
-        player:getCharVar("ABYSSEA_LAST_ATMA_INFUSED")
+        player:getCharVar('ABYSSEA_LAST_ATMA_INFUSED')
     then -- Reinfuse Atma
-        local atmaReinfused = getAtmasFromMask(player:getCharVar("ABYSSEA_LAST_ATMA_INFUSED"))
+        local atmaReinfused = getAtmasFromMask(player:getCharVar('ABYSSEA_LAST_ATMA_INFUSED'))
         local numAtma = 0
         for i = 1, 3 do
             if atmaReinfused[i] ~= 0 then

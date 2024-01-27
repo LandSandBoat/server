@@ -3,8 +3,8 @@
 --  NPC: FallenEgg
 -- Spawns NM Nihniknoovi
 -----------------------------------
-local laTheineGlobal = require("scripts/zones/La_Theine_Plateau/globals")
-local ID = require("scripts/zones/La_Theine_Plateau/IDs")
+local laTheineGlobal = require('scripts/zones/La_Theine_Plateau/globals')
+local ID = zones[xi.zone.LA_THEINE_PLATEAU]
 -----------------------------------
 local entity = {}
 
@@ -22,7 +22,7 @@ entity.onTrigger = function(player, npc)
         player:messageSpecial(ID.text.BROKEN_EGG)
         laTheineGlobal.moveFallenEgg(300)
     elseif random > 61 then
-        npcUtil.giveItem(player, xi.items.BIRD_EGG)         -- bird egg
+        npcUtil.giveItem(player, xi.item.BIRD_EGG)         -- bird egg
         laTheineGlobal.moveFallenEgg(300)   -- moved whether the item is obtained or not, to counter abuse with a full inv
     end
 end

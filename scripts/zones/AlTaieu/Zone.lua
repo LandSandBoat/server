@@ -1,8 +1,7 @@
 -----------------------------------
 -- Zone: AlTaieu (33)
 -----------------------------------
-local ID = require('scripts/zones/AlTaieu/IDs')
-require('scripts/globals/missions')
+local ID = zones[xi.zone.ALTAIEU]
 -----------------------------------
 local zoneObject = {}
 
@@ -26,7 +25,7 @@ zoneObject.onZoneIn = function(player, prevZone)
 
     if
         player:getCurrentMission(xi.mission.log_id.COP) == xi.mission.id.cop.DAWN and
-        player:getCharVar("PromathiaStatus") == 0
+        player:getCharVar('PromathiaStatus') == 0
     then
         cs = 167
     end
@@ -42,14 +41,14 @@ end
 
 zoneObject.onEventFinish = function(player, csid, option, npc)
     if csid == 167 then
-        player:setCharVar("PromathiaStatus", 1)
+        player:setCharVar('PromathiaStatus', 1)
         player:delKeyItem(xi.ki.MYSTERIOUS_AMULET_PRISHE)
         player:messageSpecial(ID.text.RETURN_AMULET_TO_PRISHE, xi.ki.MYSTERIOUS_AMULET)
     end
 end
 
 zoneObject.afterZoneIn = function(player)
-    player:entityVisualPacket("on00", player) -- Fog effect on zone in
+    player:entityVisualPacket('on00', player) -- Fog effect on zone in
 end
 
 return zoneObject

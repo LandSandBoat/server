@@ -1,9 +1,6 @@
 -----------------------------------
 -- Zone: Escha - Zi'Tah (288)
 -----------------------------------
-local ID = require('scripts/zones/Escha_ZiTah/IDs')
-require('scripts/globals/missions')
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

@@ -27,16 +27,13 @@
 #include "utils/itemutils.h"
 
 CItemContainer::CItemContainer(uint16 LocationID)
+: SortingPacket(0)
+, LastSortingTime(0)
+, m_id(LocationID)
+, m_buff(0)
+, m_size(0)
+, m_count(0)
 {
-    m_id = LocationID;
-
-    SortingPacket   = 0;
-    LastSortingTime = 0;
-
-    m_buff  = 0;
-    m_size  = 0;
-    m_count = 0;
-
     memset(m_ItemList, 0, sizeof(m_ItemList));
 }
 
@@ -104,11 +101,9 @@ uint8 CItemContainer::SetSize(uint8 size)
 
 /************************************************************************
  *                                                                       *
- *  Увеличиваем/уменьшаем размер контейнера                              *
+ *  Increase/decrease container size                                     *
  *                                                                       *
  ************************************************************************/
-
-// контейнер не несет ответственности за то, что предметы могут остаться за пределами размера
 
 uint8 CItemContainer::AddSize(int8 size)
 {
@@ -125,12 +120,6 @@ uint8 CItemContainer::AddSize(int8 size)
     ShowDebug("ItemContainer <%u>: Bad new container size %u", m_id, newsize);
     return -1;
 }
-
-/************************************************************************
- *                                                                       *
- *                                                                       *
- *                                                                       *
- ************************************************************************/
 
 uint8 CItemContainer::InsertItem(CItem* PItem)
 {
@@ -160,9 +149,9 @@ uint8 CItemContainer::InsertItem(CItem* PItem)
 }
 
 /************************************************************************
- *                                                                        *
- *  Добавляем предмет в указанную ячейку. nullptr удаляет предмет            *
- *                                                                        *
+ *                                                                       *
+ *  Add an item to the specified cell. nullptr removes an item           *
+ *                                                                       *
  ************************************************************************/
 
 uint8 CItemContainer::InsertItem(CItem* PItem, uint8 SlotID)
@@ -193,12 +182,6 @@ uint8 CItemContainer::InsertItem(CItem* PItem, uint8 SlotID)
     return ERROR_SLOTID;
 }
 
-/************************************************************************
- *                                                                       *
- *                                                                       *
- *                                                                       *
- ************************************************************************/
-
 CItem* CItemContainer::GetItem(uint8 SlotID)
 {
     if (SlotID <= m_size)
@@ -207,12 +190,6 @@ CItem* CItemContainer::GetItem(uint8 SlotID)
     }
     return nullptr;
 }
-
-/************************************************************************
- *                                                                       *
- *                                                                       *
- *                                                                       *
- ************************************************************************/
 
 uint8 CItemContainer::SearchItem(uint16 ItemID)
 {
@@ -226,12 +203,6 @@ uint8 CItemContainer::SearchItem(uint16 ItemID)
     return ERROR_SLOTID;
 }
 
-/************************************************************************
- *                                                                       *
- *                                                                       *
- *                                                                       *
- ************************************************************************/
-
 uint8 CItemContainer::SearchItemWithSpace(uint16 ItemID, uint32 quantity)
 {
     for (uint8 SlotID = 0; SlotID <= m_size; ++SlotID)
@@ -244,12 +215,6 @@ uint8 CItemContainer::SearchItemWithSpace(uint16 ItemID, uint32 quantity)
     }
     return ERROR_SLOTID;
 }
-
-/************************************************************************
- *                                                                       *
- *                                                                       *
- *                                                                       *
- ************************************************************************/
 
 void CItemContainer::Clear()
 {

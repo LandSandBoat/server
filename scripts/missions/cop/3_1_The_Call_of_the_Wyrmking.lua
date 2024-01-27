@@ -6,10 +6,6 @@
 -- Port Bastok HP : !pos -126 -6 10 236
 -- Cid            : !pos -12 -12 1 237
 -----------------------------------
-require('scripts/globals/interaction/mission')
-require('scripts/globals/missions')
-require('scripts/globals/npc_util')
------------------------------------
 
 local mission = Mission:new(xi.mission.log_id.COP, xi.mission.id.cop.THE_CALL_OF_THE_WYRMKING)
 

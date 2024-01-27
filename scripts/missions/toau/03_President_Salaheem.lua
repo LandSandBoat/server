@@ -4,10 +4,6 @@
 -----------------------------------
 -- !addmission 4 2
 -- Naja Salaheem : !pos 22.700 -8.804 -45.591 50
-require("scripts/globals/besieged")
-require('scripts/globals/missions')
-require('scripts/globals/npc_util')
-require('scripts/globals/interaction/mission')
 -----------------------------------
 
 local mission = Mission:new(xi.mission.log_id.TOAU, xi.mission.id.toau.PRESIDENT_SALAHEEM)
@@ -60,12 +56,12 @@ mission.sections =
                 [269] = function(player, csid, option, npc)
                     player:setMissionStatus(mission.areaId, 1)
                     -- Temporal fix until rytaal npc script gets an audit.
-                    player:setVar("ToAU3Progress", 1)
+                    player:setVar('ToAU3Progress', 1)
                 end,
 
                 [3020] = function(player, csid, option, npc)
                     mission:complete(player)
-                    player:setVar("ToAU3Progress", 0)
+                    player:setVar('ToAU3Progress', 0)
                 end,
             },
         },

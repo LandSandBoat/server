@@ -4,10 +4,7 @@
 -- Starts and Finishes Quest: Trial by Lightning
 -- !pos 29 -15 55 249
 -----------------------------------
-require("scripts/globals/titles")
-require("scripts/globals/shop")
-require("scripts/globals/quests")
-local ID = require("scripts/zones/Mhaura/IDs")
+local ID = zones[xi.zone.MHAURA]
 -----------------------------------
 local entity = {}
 
@@ -18,7 +15,7 @@ entity.onTrigger = function(player, npc)
     local trialByLightning = player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.TRIAL_BY_LIGHTNING)
     local hasWhisperOfStorms = player:hasKeyItem(xi.ki.WHISPER_OF_STORMS)
     local carbuncleDebacle = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CARBUNCLE_DEBACLE)
-    local carbuncleDebacleProgress = player:getCharVar("CarbuncleDebacleProgress")
+    local carbuncleDebacleProgress = player:getCharVar('CarbuncleDebacleProgress')
 
     -----------------------------------
     -- Carbunlce Debacle
@@ -27,14 +24,14 @@ entity.onTrigger = function(player, npc)
     elseif
         carbuncleDebacle == QUEST_ACCEPTED and
         carbuncleDebacleProgress == 3 and
-        not player:hasItem(xi.items.LIGHTNING_PENDULUM)
+        not player:hasItem(xi.item.LIGHTNING_PENDULUM)
     then
-        player:startEvent(10023, 0, xi.items.LIGHTNING_PENDULUM, 0, 0, 0, 0, 0, 0) -- "lost the pendulum?"
+        player:startEvent(10023, 0, xi.item.LIGHTNING_PENDULUM, 0, 0, 0, 0, 0, 0) -- "lost the pendulum?"
     -----------------------------------
     -- Trial by Lightning
     elseif
         (trialByLightning == QUEST_AVAILABLE and player:getFameLevel(xi.quest.fame_area.WINDURST) >= 6) or
-        (trialByLightning == QUEST_COMPLETED and os.time() > player:getCharVar("TrialByLightning_date"))
+        (trialByLightning == QUEST_COMPLETED and os.time() > player:getCharVar('TrialByLightning_date'))
     then
         player:startEvent(10016, 0, xi.ki.TUNING_FORK_OF_LIGHTNING) -- Start and restart quest "Trial by Lightning"
     elseif
@@ -48,19 +45,19 @@ entity.onTrigger = function(player, npc)
     elseif trialByLightning == QUEST_ACCEPTED and hasWhisperOfStorms then
         local numitem = 0
 
-        if player:hasItem(xi.items.RAMUHS_STAFF) then
+        if player:hasItem(xi.item.RAMUHS_STAFF) then
             numitem = numitem + 1
         end
 
-        if player:hasItem(xi.items.LIGHTNING_BELT) then
+        if player:hasItem(xi.item.LIGHTNING_BELT) then
             numitem = numitem + 2
         end
 
-        if player:hasItem(xi.items.LIGHTNING_RING) then
+        if player:hasItem(xi.item.LIGHTNING_RING) then
             numitem = numitem + 4
         end
 
-        if player:hasItem(xi.items.ELDER_BRANCH) then
+        if player:hasItem(xi.item.ELDER_BRANCH) then
             numitem = numitem + 8
         end
 
@@ -84,7 +81,7 @@ entity.onEventFinish = function(player, csid, option, npc)
         end
 
         player:addQuest(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.TRIAL_BY_LIGHTNING)
-        player:setCharVar("TrialByLightning_date", 0)
+        player:setCharVar('TrialByLightning_date', 0)
         player:addKeyItem(xi.ki.TUNING_FORK_OF_LIGHTNING)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.TUNING_FORK_OF_LIGHTNING)
     elseif csid == 10024 then
@@ -93,13 +90,13 @@ entity.onEventFinish = function(player, csid, option, npc)
     elseif csid == 10019 then
         local item = 0
         if option == 1 then
-            item = xi.items.RAMUHS_STAFF
+            item = xi.item.RAMUHS_STAFF
         elseif option == 2 then
-            item = xi.items.LIGHTNING_BELT
+            item = xi.item.LIGHTNING_BELT
         elseif option == 3 then
-            item = xi.items.LIGHTNING_RING
+            item = xi.item.LIGHTNING_RING
         elseif option == 4 then
-            item = xi.items.ELDER_BRANCH
+            item = xi.item.ELDER_BRANCH
         end
 
         if player:getFreeSlotsCount() == 0 and (option ~= 5 or option ~= 6) then
@@ -117,17 +114,17 @@ entity.onEventFinish = function(player, csid, option, npc)
 
             player:addTitle(xi.title.HEIR_OF_THE_GREAT_LIGHTNING)
             player:delKeyItem(xi.ki.WHISPER_OF_STORMS) --Whisper of Storms, as a trade for the above rewards
-            player:setCharVar("TrialByLightning_date", getMidnight())
+            player:setCharVar('TrialByLightning_date', getMidnight())
             player:addFame(xi.quest.fame_area.WINDURST, 30)
             player:completeQuest(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.TRIAL_BY_LIGHTNING)
         end
     elseif csid == 10022 or csid == 10023 then
         if player:getFreeSlotsCount() ~= 0 then
-            player:addItem(xi.items.LIGHTNING_PENDULUM)
-            player:messageSpecial(ID.text.ITEM_OBTAINED, xi.items.LIGHTNING_PENDULUM)
-            player:setCharVar("CarbuncleDebacleProgress", 3)
+            player:addItem(xi.item.LIGHTNING_PENDULUM)
+            player:messageSpecial(ID.text.ITEM_OBTAINED, xi.item.LIGHTNING_PENDULUM)
+            player:setCharVar('CarbuncleDebacleProgress', 3)
         else
-            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.items.LIGHTNING_PENDULUM)
+            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.item.LIGHTNING_PENDULUM)
         end
     end
 end

@@ -4,8 +4,6 @@
 -- Dynamis Valkurm_Dunes Enter
 -- !pos 117 -10 133 103
 -----------------------------------
-require("scripts/globals/dynamis")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

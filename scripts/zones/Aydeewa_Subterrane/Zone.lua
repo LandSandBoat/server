@@ -1,8 +1,6 @@
 -----------------------------------
 -- Zone: Aydeewa_Subterrane (68)
 -----------------------------------
-local ID = require('scripts/zones/Aydeewa_Subterrane/IDs')
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

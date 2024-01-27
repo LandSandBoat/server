@@ -4,9 +4,7 @@
 -- Type: Assault Mission Giver
 -- !pos 134.096 0.161 -30.401 50
 -----------------------------------
-local ID = require("scripts/zones/Aht_Urhgan_Whitegate/IDs")
-require("scripts/globals/besieged")
-require("scripts/globals/missions")
+local ID = zones[xi.zone.AHT_URHGAN_WHITEGATE]
 -----------------------------------
 local entity = {}
 

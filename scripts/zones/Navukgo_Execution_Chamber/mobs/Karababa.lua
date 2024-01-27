@@ -2,36 +2,36 @@
 -- Area: Navukgo Execution Chamber
 --  Mob: Karababa
 -----------------------------------
-local ID = require("scripts/zones/Navukgo_Execution_Chamber/IDs")
+local ID = zones[xi.zone.NAVUKGO_EXECUTION_CHAMBER]
 -----------------------------------
 local entity = {}
 
 entity.onMobFight = function(mob, target)
-    local warp = mob:getLocalVar("warp")
-    local wait = mob:getLocalVar("wait")
-    if mob:getLocalVar("warp") == 2 and wait < os.time() then
+    local warp = mob:getLocalVar('warp')
+    local wait = mob:getLocalVar('wait')
+    if mob:getLocalVar('warp') == 2 and wait < os.time() then
         mob:getBattlefield():lose()
     end
 
-    if mob:getHPP() <= 50 and mob:getLocalVar("powerup") == 0 then
+    if mob:getHPP() <= 50 and mob:getLocalVar('powerup') == 0 then
         target:showText(mob, ID.text.KARABABA_ENOUGH)
         target:showText(mob, ID.text.KARABABA_ROUGH)
         mob:addStatusEffect(xi.effect.MAGIC_ATK_BOOST, 15, 0, 1800)
-        mob:setLocalVar("powerup", 1)
+        mob:setLocalVar('powerup', 1)
     elseif mob:getHPP() <= 20 and warp == 0 then
-        mob:setLocalVar("warp", 1)
+        mob:setLocalVar('warp', 1)
     end
 end
 
 entity.onMobMagicPrepare = function(mob, target, spellId)
-    local powerup = mob:getLocalVar("powerup")
+    local powerup = mob:getLocalVar('powerup')
     local rnd = math.random(1, 6)
-    local warp = mob:getLocalVar("warp")
+    local warp = mob:getLocalVar('warp')
 
     if warp == 1 then
         mob:showText(mob, ID.text.KARABABA_QUIT)
-        mob:setLocalVar("warp", 2)
-        mob:setLocalVar("wait", os.time() + 8)
+        mob:setLocalVar('warp', 2)
+        mob:setLocalVar('wait', os.time() + 8)
         return 261
     elseif rnd == 1 then
         mob:showText(mob, ID.text.KARABARA_FIRE)

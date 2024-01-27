@@ -3,9 +3,6 @@
 --  NPC: Geomagnetic Fount
 -- !pos -156.374 0.000 237.283
 -----------------------------------
-local ID = require("scripts/zones/Garlaige_Citadel/IDs")
-require("scripts/globals/geomagnetic_fount")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

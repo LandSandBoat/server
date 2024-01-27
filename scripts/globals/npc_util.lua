@@ -41,21 +41,21 @@ function npcUtil.popFromQM(player, qm, mobId, params)
         params = {}
     end
 
-    if params.claim == nil or type(params.claim) ~= "boolean" then
+    if params.claim == nil or type(params.claim) ~= 'boolean' then
         params.claim = true
     end
 
-    if params.hide == nil or type(params.hide) ~= "number" then
+    if params.hide == nil or type(params.hide) ~= 'number' then
         params.hide = xi.settings.main.FORCE_SPAWN_QM_RESET_TIME
     end
 
     -- get list of mobs to pop
     local mobs = {}
-    if type(mobId) == "number" then
+    if type(mobId) == 'number' then
         table.insert(mobs, mobId)
-    elseif type(mobId) == "table" then
+    elseif type(mobId) == 'table' then
         for _, v in pairs(mobId) do
-            if type(v) == "number" then
+            if type(v) == 'number' then
                 table.insert(mobs, v)
             end
         end
@@ -79,7 +79,7 @@ function npcUtil.popFromQM(player, qm, mobId, params)
     -- spawn mobs and give each a listener that will show QM after they are all dead
     for _, mob in pairs(mobs) do
         -- choose random position uniformly from within radius
-        if params.radius and type(params.radius) == "number" then
+        if params.radius and type(params.radius) == 'number' then
             local r = params.radius * math.sqrt(math.random())
             local theta = math.random() * 2 * math.pi
             local x = r * math.cos(theta)
@@ -103,9 +103,9 @@ function npcUtil.popFromQM(player, qm, mobId, params)
         -- reappear the QM when all spawned mobs are dead, plus params.hide seconds
         if params.hide > 0 then
             local myId = mob:getID()
-            mob:setLocalVar("qm", qmId)
-            mob:addListener("DESPAWN", "QM_"..myId, function(m)
-                m:removeListener("QM_"..myId)
+            mob:setLocalVar('qm', qmId)
+            mob:addListener('DESPAWN', 'QM_'..myId, function(m)
+                m:removeListener('QM_'..myId)
 
                 for _, v in pairs(mobs) do
                     if v:isAlive() then
@@ -113,7 +113,7 @@ function npcUtil.popFromQM(player, qm, mobId, params)
                     end
                 end
 
-                GetNPCByID(m:getLocalVar("qm")):updateNPCHideTime(params.hide)
+                GetNPCByID(m:getLocalVar('qm')):updateNPCHideTime(params.hide)
             end)
         end
 
@@ -166,9 +166,9 @@ end
 -- RETURN: table index
 function npcUtil.pickNewPosition(npcID, positionTable, allowCurrentPosition)
     local npc = GetNPCByID(npcID)
-    local positionIndex = 1 -- Default to position one in the table if it can't be found.
-    local tableSize = 0
-    local newPosition = 0
+    local positionIndex  = 1 -- Default to position one in the table if it can't be found.
+    local tableSize      = 0
+    local newPosition    = math.random(1, tableSize)
     allowCurrentPosition = allowCurrentPosition or false
 
     for i, v in ipairs(positionTable) do   -- Looking for the current position
@@ -192,11 +192,9 @@ function npcUtil.pickNewPosition(npcID, positionTable, allowCurrentPosition)
         repeat
             newPosition = math.random(1, tableSize)
         until (newPosition ~= positionIndex)
-    else
-        newPosition = math.random(1, tableSize)
     end
 
-    return { ["x"] = positionTable[newPosition][1], ["y"] = positionTable[newPosition][2], ["z"] = positionTable[newPosition][3] }
+    return { ['x'] = positionTable[newPosition][1], ['y'] = positionTable[newPosition][2], ['z'] = positionTable[newPosition][3] }
 end
 
 --[[
@@ -226,21 +224,21 @@ function npcUtil.giveItem(player, items, params)
 
     -- create table of items, with key/val of itemId/itemQty
     local givenItems = {}
-    if type(items) == "number" then
+    if type(items) == 'number' then
         table.insert(givenItems, { items, 1 })
-    elseif type(items) == "table" then
+    elseif type(items) == 'table' then
         for _, v in pairs(items) do
-            if type(v) == "number" then
+            if type(v) == 'number' then
                 table.insert(givenItems, { v, 1 })
             elseif
-                type(v) == "table" and
+                type(v) == 'table' and
                 #v == 2 and
-                type(v[1]) == "number" and
-                type(v[2]) == "number"
+                type(v[1]) == 'number' and
+                type(v[2]) == 'number'
             then
                 table.insert(givenItems, { v[1], v[2] })
             else
-                print(string.format("ERROR: invalid items parameter given to npcUtil.giveItem in zone %s.", player:getZoneName()))
+                print(string.format('ERROR: invalid items parameter given to npcUtil.giveItem in zone %s.', player:getZoneName()))
                 return false
             end
         end
@@ -308,21 +306,21 @@ function npcUtil.giveTempItem(player, items, params)
 
     -- create table of items, with key/val of itemId/itemQty
     local givenItems = {}
-    if type(items) == "number" then
+    if type(items) == 'number' then
         table.insert(givenItems, { items, 1 })
-    elseif type(items) == "table" then
+    elseif type(items) == 'table' then
         for _, v in pairs(items) do
-            if type(v) == "number" then
+            if type(v) == 'number' then
                 table.insert(givenItems, { v, 1 })
             elseif
-                type(v) == "table" and
+                type(v) == 'table' and
                 #v == 2 and
-                type(v[1]) == "number" and
-                type(v[2]) == "number"
+                type(v[1]) == 'number' and
+                type(v[2]) == 'number'
             then
                 table.insert(givenItems, { v[1], v[2] })
             else
-                print(string.format("ERROR: invalid items parameter given to npcUtil.giveTempItem in zone %s.", player:getZoneName()))
+                print(string.format('ERROR: invalid items parameter given to npcUtil.giveTempItem in zone %s.', player:getZoneName()))
                 return false
             end
         end
@@ -364,8 +362,8 @@ end
 function npcUtil.giveCurrency(player, currency, amount)
     local ID = zones[player:getZoneID()]
 
-    if (not type(currency) == "string") or (not type(amount) == "number") then
-        print(string.format("ERROR: invalid parameter given to npcUtil.giveCurrency in zone %s.", player:getZoneName()))
+    if type(currency) ~= 'string' or type(amount) ~= 'number' then
+        print(string.format('ERROR: invalid parameter given to npcUtil.giveCurrency in zone %s.', player:getZoneName()))
         return false
     end
 
@@ -373,26 +371,26 @@ function npcUtil.giveCurrency(player, currency, amount)
 
     local currencyTypes =
     {
-        ["gil"]   = { "GIL_OBTAINED", xi.settings.main.GIL_RATE },
-        ["bayld"] = { "BAYLD_OBTAINED", xi.settings.main.BAYLD_RATE }
+        ['gil']   = { 'GIL_OBTAINED', xi.settings.main.GIL_RATE },
+        ['bayld'] = { 'BAYLD_OBTAINED', xi.settings.main.BAYLD_RATE }
     }
 
     local currencyType = currencyTypes[currency]
 
     if not currencyType then
-        print(string.format("ERROR: invalid currency '%s' given to npcUtil.giveCurrency in zone %s.", currency, player:getZoneName()))
+        print(string.format('ERROR: invalid currency \'%s\' given to npcUtil.giveCurrency in zone %s.', currency, player:getZoneName()))
         return false
     end
 
     local messageId = ID.text[currencyType[1]]
     if not messageId then
-        print(string.format("ERROR: no message ID defined for currency '%s' given to npcUtil.giveCurrency in zone %s.", currency, player:getZoneName()))
+        print(string.format('ERROR: no message ID defined for currency \'%s\' given to npcUtil.giveCurrency in zone %s.', currency, player:getZoneName()))
         return false
     end
 
     amount = amount * currencyType[2]
 
-    if currency == "gil" then
+    if currency == 'gil' then
         player:addGil(amount)
     else
         player:addCurrency(currency, amount)
@@ -416,13 +414,11 @@ function npcUtil.giveKeyItem(player, keyitems, msgId)
     local ID = zones[player:getZoneID()]
 
     -- create table of keyitems
-    local givenKeyItems = {}
-    if type(keyitems) == "number" then
-        givenKeyItems = { keyitems }
-    elseif type(keyitems) == "table" then
+    local givenKeyItems = { keyitems }
+    if type(keyitems) == 'table' then
         givenKeyItems = keyitems
-    else
-        print(string.format("ERROR: invalid keyitems parameter given to npcUtil.giveKeyItem in zone %s.", player:getZoneName()))
+    elseif type(keyitems) ~= 'number' then
+        print(string.format('ERROR: invalid keyitems parameter given to npcUtil.giveKeyItem in zone %s.', player:getZoneName()))
         return false
     end
 
@@ -460,7 +456,7 @@ end
             gil = 200,
             xp = 1000,
             title = xi.title.ENTRANCE_DENIED,
-            var = { "foo1", "foo2" }      -- variable(s) to set to 0. string or table
+            var = { 'foo1', 'foo2' }      -- variable(s) to set to 0. string or table
         })
 --]]
 function npcUtil.giveReward(player, params)
@@ -470,55 +466,55 @@ function npcUtil.giveReward(player, params)
     local ID = zones[player:getZoneID()]
 
     -- item(s) plus message. return false if player lacks inventory space.
-    if params["item"] ~= nil then
-        if not npcUtil.giveItem(player, params["item"], params["itemParams"]) then
+    if params['item'] ~= nil then
+        if not npcUtil.giveItem(player, params['item'], params['itemParams']) then
             return false
         end
     end
 
     -- key item(s), fame, gil, bayld, xp, and title
-    if params["ki"] ~= nil then
-        npcUtil.giveKeyItem(player, params["ki"])
-    elseif params["keyItem"] ~= nil then
-        npcUtil.giveKeyItem(player, params["keyItem"])
+    if params['ki'] ~= nil then
+        npcUtil.giveKeyItem(player, params['ki'])
+    elseif params['keyItem'] ~= nil then
+        npcUtil.giveKeyItem(player, params['keyItem'])
     end
 
-    if params["fame"] == nil then
-        params["fame"] = 30
+    if params['fame'] == nil then
+        params['fame'] = 30
     end
 
     if
-        params["fameArea"] ~= nil and
-        params["fameArea"]["fame_area"] ~= nil and
-        type(params["fame"]) == "number"
+        params['fameArea'] ~= nil and
+        params['fameArea']['fame_area'] ~= nil and
+        type(params['fame']) == 'number'
     then
-        player:addFame(params["fameArea"], params["fame"])
+        player:addFame(params['fameArea'], params['fame'])
     end
 
-    if params["gil"] ~= nil and type(params["gil"]) == "number" then
-        player:addGil(params["gil"] * xi.settings.main.GIL_RATE)
-        player:messageSpecial(ID.text.GIL_OBTAINED, params["gil"] * xi.settings.main.GIL_RATE)
+    if params['gil'] ~= nil and type(params['gil']) == 'number' then
+        player:addGil(params['gil'] * xi.settings.main.GIL_RATE)
+        player:messageSpecial(ID.text.GIL_OBTAINED, params['gil'] * xi.settings.main.GIL_RATE)
     end
 
-    if params["bayld"] ~= nil and type(params["bayld"]) == "number" then
-        player:addCurrency('bayld', params["bayld"] * xi.settings.main.BAYLD_RATE)
-        player:messageSpecial(ID.text.BAYLD_OBTAINED, params["bayld"] * xi.settings.main.BAYLD_RATE)
+    if params['bayld'] ~= nil and type(params['bayld']) == 'number' then
+        player:addCurrency('bayld', params['bayld'] * xi.settings.main.BAYLD_RATE)
+        player:messageSpecial(ID.text.BAYLD_OBTAINED, params['bayld'] * xi.settings.main.BAYLD_RATE)
     end
 
-    if params["xp"] ~= nil and type(params["xp"]) == "number" then
-        player:addExp(params["xp"] * xi.settings.main.EXP_RATE)
+    if params['xp'] ~= nil and type(params['xp']) == 'number' then
+        player:addExp(params['xp'] * xi.settings.main.EXP_RATE)
     end
 
-    if params["title"] ~= nil then
-        player:addTitle(params["title"])
+    if params['title'] ~= nil then
+        player:addTitle(params['title'])
     end
 
-    if params["var"] ~= nil then
+    if params['var'] ~= nil then
         local playerVarsToZero = {}
-        if type(params["var"]) == "table" then
-            playerVarsToZero = params["var"]
-        elseif type(params["var"]) == "string" then
-            table.insert(playerVarsToZero, params["var"])
+        if type(params['var']) == 'table' then
+            playerVarsToZero = params['var']
+        elseif type(params['var']) == 'string' then
+            table.insert(playerVarsToZero, params['var'])
         end
 
         for _, v in pairs(playerVarsToZero) do
@@ -547,7 +543,7 @@ end
             gil = 200,
             xp = 1000,
             title = xi.title.ENTRANCE_DENIED,
-            var = { "foo1", "foo2" }      -- variable(s) to set to 0. string or table
+            var = { 'foo1', 'foo2' }      -- variable(s) to set to 0. string or table
         })
 --]]
 function npcUtil.completeQuest(player, area, quest, params)
@@ -557,57 +553,57 @@ function npcUtil.completeQuest(player, area, quest, params)
     local ID = zones[player:getZoneID()]
 
     -- item(s) plus message. return false if player lacks inventory space.
-    if params["item"] ~= nil then
-        if not npcUtil.giveItem(player, params["item"], params["itemParams"]) then
+    if params['item'] ~= nil then
+        if not npcUtil.giveItem(player, params['item'], params['itemParams']) then
             return false
         end
     end
 
     -- key item(s), fame, gil, bayld, xp, and title
-    if params["ki"] ~= nil then
-        npcUtil.giveKeyItem(player, params["ki"])
-    elseif params["keyItem"] ~= nil then
-        npcUtil.giveKeyItem(player, params["keyItem"])
+    if params['ki'] ~= nil then
+        npcUtil.giveKeyItem(player, params['ki'])
+    elseif params['keyItem'] ~= nil then
+        npcUtil.giveKeyItem(player, params['keyItem'])
     end
 
     -- Note: fameArea is a required numeric parameter in order for fame to be applied.  Fame areas
     -- are not a one to one mapping of log ids, and it should not be used as a fallback.
-    if params["fameArea"] ~= nil and type(params["fameArea"]) == "number" then
-        if params["fame"] == nil then
-            params["fame"] = 30
+    if params['fameArea'] ~= nil and type(params['fameArea']) == 'number' then
+        if params['fame'] == nil then
+            params['fame'] = 30
         end
 
-        player:addFame(params["fameArea"], params["fame"])
+        player:addFame(params['fameArea'], params['fame'])
     end
 
-    if params["gil"] ~= nil and type(params["gil"]) == "number" then
-        player:addGil(params["gil"] * xi.settings.main.GIL_RATE)
-        player:messageSpecial(ID.text.GIL_OBTAINED, params["gil"] * xi.settings.main.GIL_RATE)
+    if params['gil'] ~= nil and type(params['gil']) == 'number' then
+        player:addGil(params['gil'] * xi.settings.main.GIL_RATE)
+        player:messageSpecial(ID.text.GIL_OBTAINED, params['gil'] * xi.settings.main.GIL_RATE)
     end
 
-    if params["bayld"] ~= nil and type(params["bayld"]) == "number" then
-        player:addCurrency('bayld', params["bayld"] * xi.settings.main.BAYLD_RATE)
-        player:messageSpecial(ID.text.BAYLD_OBTAINED, params["bayld"] * xi.settings.main.BAYLD_RATE)
+    if params['bayld'] ~= nil and type(params['bayld']) == 'number' then
+        player:addCurrency('bayld', params['bayld'] * xi.settings.main.BAYLD_RATE)
+        player:messageSpecial(ID.text.BAYLD_OBTAINED, params['bayld'] * xi.settings.main.BAYLD_RATE)
     end
 
     -- TODO: Find a more elegant way to handle this, but allow for xp vs exp keys.  This should
     -- be one or the other, not both.
-    if params["exp"] ~= nil and type(params["exp"]) == "number" then
-        player:addExp(params["exp"] * xi.settings.main.EXP_RATE)
-    elseif params["xp"] ~= nil and type(params["xp"]) == "number" then
-        player:addExp(params["xp"] * xi.settings.main.EXP_RATE)
+    if params['exp'] ~= nil and type(params['exp']) == 'number' then
+        player:addExp(params['exp'] * xi.settings.main.EXP_RATE)
+    elseif params['xp'] ~= nil and type(params['xp']) == 'number' then
+        player:addExp(params['xp'] * xi.settings.main.EXP_RATE)
     end
 
-    if params["title"] ~= nil then
-        player:addTitle(params["title"])
+    if params['title'] ~= nil then
+        player:addTitle(params['title'])
     end
 
-    if params["var"] ~= nil then
+    if params['var'] ~= nil then
         local playerVarsToZero = {}
-        if type(params["var"]) == "table" then
-            playerVarsToZero = params["var"]
-        elseif type(params["var"]) == "string" then
-            table.insert(playerVarsToZero, params["var"])
+        if type(params['var']) == 'table' then
+            playerVarsToZero = params['var']
+        elseif type(params['var']) == 'string' then
+            table.insert(playerVarsToZero, params['var'])
         end
 
         for _, v in pairs(playerVarsToZero) do
@@ -616,17 +612,17 @@ function npcUtil.completeQuest(player, area, quest, params)
     end
 
     local logId
-    if type(area) == "number" then
+    if type(area) == 'number' then
         logId = area
-    elseif area["quest_log"] then
-        logId = area["quest_log"]
+    elseif area['quest_log'] then
+        logId = area['quest_log']
     end
 
     -- successfully complete the quest
     if logId then
         player:completeQuest(logId, quest)
     else
-        print("ERROR: invalid logId encountered in npcUtil.completeQuest")
+        print('ERROR: invalid logId encountered in npcUtil.completeQuest')
     end
 
     return true
@@ -657,72 +653,72 @@ function npcUtil.completeMission(player, logId, missionId, params)
     local ID = zones[player:getZoneID()]
 
     -- item(s) plus message. return false if player lacks inventory space.
-    if params["item"] ~= nil then
-        if not npcUtil.giveItem(player, params["item"], params["itemParams"]) then
+    if params['item'] ~= nil then
+        if not npcUtil.giveItem(player, params['item'], params['itemParams']) then
             return false
         end
     end
 
     -- key item(s), fame, gil, bayld, xp, and title
-    if params["ki"] ~= nil then
-        npcUtil.giveKeyItem(player, params["ki"])
-    elseif params["keyItem"] ~= nil then
-        npcUtil.giveKeyItem(player, params["keyItem"])
+    if params['ki'] ~= nil then
+        npcUtil.giveKeyItem(player, params['ki'])
+    elseif params['keyItem'] ~= nil then
+        npcUtil.giveKeyItem(player, params['keyItem'])
     end
 
-    if params["gil"] ~= nil and type(params["gil"]) == "number" then
-        player:addGil(params["gil"] * xi.settings.main.GIL_RATE)
-        player:messageSpecial(ID.text.GIL_OBTAINED, params["gil"] * xi.settings.main.GIL_RATE)
+    if params['gil'] ~= nil and type(params['gil']) == 'number' then
+        player:addGil(params['gil'] * xi.settings.main.GIL_RATE)
+        player:messageSpecial(ID.text.GIL_OBTAINED, params['gil'] * xi.settings.main.GIL_RATE)
     end
 
-    if params["bayld"] ~= nil and type(params["bayld"]) == "number" then
-        player:addCurrency('bayld', params["bayld"] * xi.settings.main.BAYLD_RATE)
-        player:messageSpecial(ID.text.BAYLD_OBTAINED, params["bayld"] * xi.settings.main.BAYLD_RATE)
+    if params['bayld'] ~= nil and type(params['bayld']) == 'number' then
+        player:addCurrency('bayld', params['bayld'] * xi.settings.main.BAYLD_RATE)
+        player:messageSpecial(ID.text.BAYLD_OBTAINED, params['bayld'] * xi.settings.main.BAYLD_RATE)
     end
 
     -- TODO: Find a more elegant way to handle this, but allow for xp vs exp keys.  This should
     -- be one or the other, not both.
-    if params["exp"] ~= nil and type(params["exp"]) == "number" then
-        player:addExp(params["exp"] * xi.settings.main.EXP_RATE)
-    elseif params["xp"] ~= nil and type(params["xp"]) == "number" then
-        player:addExp(params["xp"] * xi.settings.main.EXP_RATE)
+    if params['exp'] ~= nil and type(params['exp']) == 'number' then
+        player:addExp(params['exp'] * xi.settings.main.EXP_RATE)
+    elseif params['xp'] ~= nil and type(params['xp']) == 'number' then
+        player:addExp(params['xp'] * xi.settings.main.EXP_RATE)
     end
 
-    if params["title"] ~= nil then
-        player:addTitle(params["title"])
+    if params['title'] ~= nil then
+        player:addTitle(params['title'])
     end
 
     -- successfully complete the mission
     if logId then
         player:completeMission(logId, missionId)
     else
-        print("ERROR: Invalid logId encountered in npcUtil.completeMission")
+        print('ERROR: Invalid logId encountered in npcUtil.completeMission')
     end
 
     -- Set Rank points before potentially increasing rank; Allows for repeatable missions
     -- that provide rank up on the first completion to not interfere.
-    if params["rankPoints"] ~= nil and type(params["rankPoints"]) == "number" then
+    if params['rankPoints'] ~= nil and type(params['rankPoints']) == 'number' then
         -- TODO: Verify 4000 cap, this was taken from missions.lua
-        player:setRankPoints(math.min(player:getRankPoints() + params["rankPoints"], 4000))
+        player:setRankPoints(math.min(player:getRankPoints() + params['rankPoints'], 4000))
     end
 
     -- Add some safety for rank, and only set rank if it increases
     if
-        params["rank"] ~= nil and
-        type(params["rank"]) == "number" and
-        player:getRank(player:getNation()) < params["rank"]
+        params['rank'] ~= nil and
+        type(params['rank']) == 'number' and
+        player:getRank(player:getNation()) < params['rank']
     then
-        player:setRank(params["rank"])
+        player:setRank(params['rank'])
         player:setRankPoints(0)
     end
 
     -- TODO: Do we need to support multiple missions being set?
     if
-        params["nextMission"] ~= nil and
-        type(params["nextMission"][1]) == "number" and
-        type(params["nextMission"][2]) == "number"
+        params['nextMission'] ~= nil and
+        type(params['nextMission'][1]) == 'number' and
+        type(params['nextMission'][2]) == 'number'
     then
-        player:addMission(params["nextMission"][1], params["nextMission"][2])
+        player:addMission(params['nextMission'][1], params['nextMission'][2])
     end
 
     return true
@@ -739,10 +735,10 @@ end
         { 640, 640 }            -- copper ore x2
         { { 640, 2 } }          -- copper ore x2
         { { 640, 2 }, 641 }     -- copper ore x2, tin ore x1
-        { 640, { "gil", 200 } } -- copper ore x1, gil x200
+        { 640, { 'gil', 200 } } -- copper ore x1, gil x200
 --]]
 function npcUtil.tradeHas(trade, items, exact)
-    if type(exact) ~= "boolean" then
+    if type(exact) ~= 'boolean' then
         exact = false
     end
 
@@ -758,34 +754,34 @@ function npcUtil.tradeHas(trade, items, exact)
 
     -- create table of needed items, with key/val of itemId/itemQty
     local neededItems = {}
-    if type(items) == "number" then
+    if type(items) == 'number' then
         neededItems[items] = 1
-    elseif type(items) == "table" then
+    elseif type(items) == 'table' then
         local itemIdNeeded
         local itemQtyNeeded
         for _, v in pairs(items) do
-            if type(v) == "number" then
+            if type(v) == 'number' then
                 itemIdNeeded = v
                 itemQtyNeeded = 1
             elseif
-                type(v) == "table" and
+                type(v) == 'table' and
                 #v == 2 and
-                type(v[1]) == "number" and
-                type(v[2]) == "number"
+                type(v[1]) == 'number' and
+                type(v[2]) == 'number'
             then
                 itemIdNeeded = v[1]
                 itemQtyNeeded = v[2]
             elseif
-                type(v) == "table" and
+                type(v) == 'table' and
                 #v == 2 and
-                type(v[1]) == "string" and
-                type(v[2]) == "number" and
-                string.lower(v[1]) == "gil"
+                type(v[1]) == 'string' and
+                type(v[2]) == 'number' and
+                string.lower(v[1]) == 'gil'
             then
                 itemIdNeeded = 65535
                 itemQtyNeeded = v[2]
             else
-                print("ERROR: invalid value contained within items parameter given to npcUtil.tradeHas.")
+                print('ERROR: invalid value contained within items parameter given to npcUtil.tradeHas.')
                 itemIdNeeded = nil
             end
 
@@ -794,7 +790,7 @@ function npcUtil.tradeHas(trade, items, exact)
             end
         end
     else
-        print("ERROR: invalid items parameter given to npcUtil.tradeHas.")
+        print('ERROR: invalid items parameter given to npcUtil.tradeHas.')
         return false
     end
 
@@ -836,7 +832,7 @@ end
         { 640, 640 }            -- copper ore x2
         { { 640, 2 } }          -- copper ore x2
         { { 640, 2 }, 641 }     -- copper ore x2, tin ore x1
-        { 640, { "gil", 200 } } -- copper ore x1, gil x200
+        { 640, { 'gil', 200 } } -- copper ore x1, gil x200
 --]]
 function npcUtil.tradeHasExactly(trade, items)
     return npcUtil.tradeHas(trade, items, true)
@@ -870,7 +866,7 @@ function npcUtil.UpdateNPCSpawnPoint(id, minTime, maxTime, posTable, serverVar)
 
     if serverVar then
         if GetServerVariable(serverVar) <= os.time() then
-            npc:hideNPC(1) -- hide so the NPC is not "moving" through the zone
+            npc:hideNPC(1) -- hide so the NPC is not 'moving' through the zone
             npc:setPos(newPosition.x, newPosition.y, newPosition.z)
         end
     end
@@ -945,8 +941,8 @@ function npcUtil.castingAnimation(npc, magicType, phaseDuration, func)
     npc:timer(phaseDuration * 1000, function(npcArg)
         local anims =
         {
-            [xi.magic.spellGroup.BLACK] = { start = "cabk", duration = 2000, stop = "shbk" },
-            [xi.magic.spellGroup.WHITE] = { start = "cawh", duration = 1800, stop = "shwh" },
+            [xi.magic.spellGroup.BLACK] = { start = 'cabk', duration = 2000, stop = 'shbk' },
+            [xi.magic.spellGroup.WHITE] = { start = 'cawh', duration = 1800, stop = 'shwh' },
         }
         npcArg:entityAnimationPacket(anims[magicType].start)
         npcArg:timer(anims[magicType].duration, function(npcTimerArg)
@@ -965,7 +961,7 @@ end
 
 function npcUtil.disappearCrate(crate)
     if crate:isNPC() then
-        crate:entityAnimationPacket("kesu")
+        crate:entityAnimationPacket('kesu')
         crate:timer(3000, function(npc)
             npc:setUntargetable(true)
             npc:setStatus(xi.status.DISAPPEAR)
@@ -980,10 +976,10 @@ end
 --  - crate: The npc crate to open
 --  - callback: The callback function to call if crate is successfully opened. Return true to leave crate open.
 function npcUtil.openCrate(crate, callback)
-    if crate:getLocalVar("opened") == 0 then
-        crate:setLocalVar("opened", 1)
+    if crate:getLocalVar('opened') == 0 then
+        crate:setLocalVar('opened', 1)
         local shouldDisappear = not callback()
-        crate:entityAnimationPacket("openH")
+        crate:entityAnimationPacket('openH')
 
         if shouldDisappear then
             crate:timer(7000, function(npc)

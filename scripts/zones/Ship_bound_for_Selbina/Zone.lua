@@ -1,7 +1,7 @@
 -----------------------------------
 -- Zone: Ship_bound_for_Selbina (220)
 -----------------------------------
-local ID = require('scripts/zones/Ship_bound_for_Selbina/IDs')
+local ID = zones[xi.zone.SHIP_BOUND_FOR_SELBINA]
 -----------------------------------
 local zoneObject = {}
 
@@ -22,7 +22,7 @@ zoneObject.onZoneIn = function(player, prevZone)
 
     if
         player:hasKeyItem(xi.ki.SEANCE_STAFF) and
-        player:getCharVar("Enagakure_Killed") == 0 and
+        player:getCharVar('Enagakure_Killed') == 0 and
         not GetMobByID(ID.mob.ENAGAKURE):isSpawned()
     then
         SpawnMob(ID.mob.ENAGAKURE)

@@ -3,8 +3,7 @@
 --  Mob: Birdtrap
 -- Note: Placeholder Orctrap
 -----------------------------------
-local ID = require("scripts/zones/Carpenters_Landing/IDs")
-require("scripts/globals/mobs")
+local ID = zones[xi.zone.CARPENTERS_LANDING]
 -----------------------------------
 local entity = {}
 

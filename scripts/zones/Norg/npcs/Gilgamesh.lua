@@ -3,11 +3,6 @@
 --  NPC: Gilgamesh
 -- !pos 122.452 -9.009 -12.052 252
 -----------------------------------
-local ID = require("scripts/zones/Norg/IDs")
-require("scripts/globals/missions")
-require("scripts/globals/npc_util")
-require("scripts/globals/quests")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
@@ -36,7 +31,7 @@ end
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 232 or csid == 234 then
         if csid == 232 then
-            player:setCharVar("Apoc_Nigh_RewardCS1", 1)
+            player:setCharVar('Apoc_Nigh_RewardCS1', 1)
         end
 
         local reward = 0
@@ -54,12 +49,12 @@ entity.onEventFinish = function(player, csid, option, npc)
             if
                 npcUtil.completeQuest(player, xi.quest.log_id.JEUNO, xi.quest.id.jeuno.APOCALYPSE_NIGH, {
                     item = reward,
-                    var = { "ApocalypseNigh", "Apoc_Nigh_Reward", "Apoc_Nigh_RewardCS1" }
+                    var = { 'ApocalypseNigh', 'Apoc_Nigh_Reward', 'Apoc_Nigh_RewardCS1' }
                 })
             then
                 player:completeMission(xi.mission.log_id.COP, xi.mission.id.cop.DAWN)
                 player:addMission(xi.mission.log_id.COP, xi.mission.id.cop.THE_LAST_VERSE)
-                player:setCharVar("PromathiaStatus", 0)
+                player:setCharVar('PromathiaStatus', 0)
                 player:completeMission(xi.mission.log_id.ZILART, xi.mission.id.cop.AWAKENING)
                 player:addMission(xi.mission.log_id.ZILART, xi.mission.id.zilart.THE_LAST_VERSE)
                 player:setMissionStatus(xi.mission.log_id.ZILART, 0)

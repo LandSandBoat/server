@@ -2,8 +2,6 @@
 -- Area: Gusgen Mines
 --  Mob: Mauthe Doog
 -----------------------------------
-require("scripts/globals/regimes")
------------------------------------
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

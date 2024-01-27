@@ -2,8 +2,6 @@
 -- Area: The Boyahda Tree
 --   NM: Leshonki
 -----------------------------------
-require("scripts/globals/hunts")
------------------------------------
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

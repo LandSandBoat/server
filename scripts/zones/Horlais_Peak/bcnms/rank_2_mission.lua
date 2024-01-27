@@ -2,10 +2,6 @@
 -- Rank 2 Final Mission
 -- Horlais Peak mission battlefield
 -----------------------------------
-require("scripts/globals/battlefield")
-require("scripts/globals/missions")
-require("scripts/globals/npc_util")
------------------------------------
 local battlefieldObject = {}
 
 battlefieldObject.onBattlefieldTick = function(battlefield, tick)
@@ -28,11 +24,11 @@ battlefieldObject.onBattlefieldLeave = function(player, battlefield, leavecode)
         then
             -- Note: This BCNM has an ID of 0; Setting the local var to some arbitrary non-zero value to ensure that it
             -- applies to the mission script as opposed to the BCNM ID.
-            player:setLocalVar("battlefieldWin", 999)
+            player:setLocalVar('battlefieldWin', 999)
         end
 
         local arg8 = player:hasCompletedMission(player:getNation(), 5) and 1 or 0
-        player:startEvent(32001, battlefield:getArea(), clearTime, partySize, battlefield:getTimeInside(), 1, battlefield:getLocalVar("[cs]bit"), arg8)
+        player:startEvent(32001, battlefield:getArea(), clearTime, partySize, battlefield:getTimeInside(), 1, battlefield:getLocalVar('[cs]bit'), arg8)
     elseif leavecode == xi.battlefield.leaveCode.LOST then
         player:startEvent(32002)
     end

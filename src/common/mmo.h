@@ -56,6 +56,7 @@ enum FLAGTYPE : uint32
     FLAG_GM_PRODUCER = 0x07000000,
     FLAG_BAZAAR      = 0x80000000,
 };
+DECLARE_FORMAT_AS_UNDERLYING(FLAGTYPE);
 
 enum NFLAGTYPE : uint32
 {
@@ -71,6 +72,7 @@ enum NFLAGTYPE : uint32
     NFLAG_DISPLAY_HEAD    = 0x08000000,
     NFLAG_RECRUIT         = 0x20000000,
 };
+DECLARE_FORMAT_AS_UNDERLYING(NFLAGTYPE);
 
 enum CHATFILTERTYPE : uint64
 {
@@ -126,12 +128,14 @@ enum CHATFILTERTYPE : uint64
     // NFLAG_SYSTEM_FILTER_H
     // Filter level is 0-3
 };
+DECLARE_FORMAT_AS_UNDERLYING(CHATFILTERTYPE);
 
 enum MSGSERVTYPE : uint8
 {
     MSG_LOGIN,
     MSG_CHAT_TELL,
     MSG_CHAT_PARTY,
+    MSG_CHAT_ALLIANCE,
     MSG_CHAT_LINKSHELL,
     MSG_CHAT_UNITY,
     MSG_CHAT_YELL,
@@ -140,6 +144,9 @@ enum MSGSERVTYPE : uint8
     MSG_PT_INV_RES,
     MSG_PT_RELOAD,
     MSG_PT_DISBAND,
+    MSG_ALLIANCE_RELOAD,
+    MSG_ALLIANCE_DISSOLVE,
+    MSG_PLAYER_KICK,
     MSG_DIRECT,
     MSG_LINKSHELL_RANK_CHANGE,
     MSG_LINKSHELL_REMOVE,
@@ -158,6 +165,7 @@ enum MSGSERVTYPE : uint8
     MSG_RPC_SEND, // sent by sender -> reciever
     MSG_RPC_RECV, // sent by reciever -> sender
 };
+DECLARE_FORMAT_AS_UNDERLYING(MSGSERVTYPE);
 
 enum REGIONALMSGTYPE : uint8
 {
@@ -166,6 +174,7 @@ enum REGIONALMSGTYPE : uint8
     REGIONAL_EVT_MSG_CAMPAIGN,
     REGIONAL_EVT_MSG_COLONIZATION,
 };
+DECLARE_FORMAT_AS_UNDERLYING(REGIONALMSGTYPE);
 
 enum CONQUESTMSGTYPE : uint8
 {
@@ -194,6 +203,7 @@ enum CONQUESTMSGTYPE : uint8
     // Influence point update from any zone to world.
     CONQUEST_MAP2WORLD_ADD_INFLUENCE_POINTS,
 };
+DECLARE_FORMAT_AS_UNDERLYING(CONQUESTMSGTYPE);
 
 constexpr auto msgTypeToStr = [](uint8 msgtype)
 {
@@ -205,6 +215,8 @@ constexpr auto msgTypeToStr = [](uint8 msgtype)
             return "MSG_CHAT_TELL";
         case MSG_CHAT_PARTY:
             return "MSG_CHAT_PARTY";
+        case MSG_CHAT_ALLIANCE:
+            return "MSG_CHAT_ALLIANCE";
         case MSG_CHAT_LINKSHELL:
             return "MSG_CHAT_LINKSHELL";
         case MSG_CHAT_UNITY:
@@ -221,6 +233,12 @@ constexpr auto msgTypeToStr = [](uint8 msgtype)
             return "MSG_PT_RELOAD";
         case MSG_PT_DISBAND:
             return "MSG_PT_DISBAND";
+        case MSG_ALLIANCE_RELOAD:
+            return "MSG_ALLIANCE_RELOAD";
+        case MSG_ALLIANCE_DISSOLVE:
+            return "MSG_ALLIANCE_DISSOLVE";
+        case MSG_PLAYER_KICK:
+            return "MSG_PLAYER_KICK";
         case MSG_DIRECT:
             return "MSG_DIRECT";
         case MSG_LINKSHELL_RANK_CHANGE:

@@ -3,9 +3,7 @@
 --  NPC: The ??? on the Ink Well in 2nd Flr of Vemalpeau's house.
 -- General Info NPC
 -----------------------------------
-require("scripts/globals/missions")
-require("scripts/globals/quests")
-local ID = require("scripts/zones/Southern_San_dOria/IDs")
+local ID = zones[xi.zone.SOUTHERN_SAN_DORIA]
 -----------------------------------
 local entity = {}
 

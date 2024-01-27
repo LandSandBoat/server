@@ -2,8 +2,8 @@
 -- Area: Temenos
 --  Mob: Orichalcum Quadav
 -----------------------------------
-mixins = { require("scripts/mixins/job_special") }
-local ID = require("scripts/zones/Temenos/IDs")
+mixins = { require('scripts/mixins/job_special') }
+local ID = zones[xi.zone.TEMENOS]
 -----------------------------------
 local entity = {}
 

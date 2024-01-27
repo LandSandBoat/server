@@ -3,9 +3,7 @@
 --  NPC: Isakoth
 -- Records of Eminence NPC
 -----------------------------------
-local ID = require("scripts/zones/Bastok_Markets/IDs")
-require("scripts/globals/sparkshop")
-require("scripts/globals/roe")
+local ID = zones[xi.zone.BASTOK_MARKETS]
 -----------------------------------
 local entity = {}
 
@@ -19,7 +17,7 @@ entity.onTrigger = function(player, npc)
     elseif not player:hasKeyItem(xi.ki.MEMORANDOLL) then
         player:startEvent(25)
     else
-        player:triggerRoeEvent(xi.roe.triggers.talkToRoeNpc)
+        player:triggerRoeEvent(xi.roeTrigger.TRIGGER_NPC)
         player:messageSpecial(ID.text.TURNING_IN_SPARKS)
         xi.sparkshop.onTrigger(player, npc, 26)
     end

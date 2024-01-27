@@ -5,10 +5,6 @@
 -- Cid   : !pos -12 -12 1 237
 -- Hilda : !pos -163 -8 13 236
 -----------------------------------
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
-require('scripts/globals/interaction/quest')
------------------------------------
 
 local quest = Quest:new(xi.quest.log_id.BASTOK, xi.quest.id.bastok.CIDS_SECRET)
 
@@ -16,7 +12,7 @@ quest.reward =
 {
     fame     = 30,
     fameArea = xi.quest.fame_area.BASTOK,
-    item     = xi.items.RAM_MANTLE,
+    item     = xi.item.RAM_MANTLE,
 }
 
 quest.sections =
@@ -76,7 +72,7 @@ quest.sections =
             {
                 onTrade = function(player, npc, trade)
                     if
-                        npcUtil.tradeHasExactly(trade, xi.items.ROLANBERRY_874_CE) and
+                        npcUtil.tradeHasExactly(trade, xi.item.ROLANBERRY_874_CE) and
                         quest:getVar(player, 'Prog') == 1
                     then
                         return quest:progressEvent(133)

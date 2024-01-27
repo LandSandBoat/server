@@ -4,9 +4,7 @@
 -- Type: Goldsmithing Guild Master
 -- !pos -190.605 -7.814 -59.432 235
 -----------------------------------
-local ID = require("scripts/zones/Bastok_Markets/IDs")
-require("scripts/globals/crafting")
-require("scripts/globals/roe")
+local ID = zones[xi.zone.BASTOK_MARKETS]
 -----------------------------------
 local entity = {}
 
@@ -16,21 +14,21 @@ entity.onTrade = function(player, npc, trade)
 
     if
         newRank > 9 and
-        player:getCharVar("GoldsmithingExpertQuest") == 1 and
+        player:getCharVar('GoldsmithingExpertQuest') == 1 and
         player:hasKeyItem(xi.keyItem.WAY_OF_THE_GOLDSMITH)
     then
         if signed ~= 0 then
             player:setSkillRank(xi.skill.GOLDSMITHING, newRank)
             player:startEvent(301, 0, 0, 0, 0, newRank, 1)
-            player:setCharVar("GoldsmithingExpertQuest", 0)
-            player:setLocalVar("GoldsmithingTraded", 1)
+            player:setCharVar('GoldsmithingExpertQuest', 0)
+            player:setLocalVar('GoldsmithingTraded', 1)
         else
             player:startEvent(301, 0, 0, 0, 0, newRank, 0)
         end
     elseif newRank ~= 0 and newRank <= 9 then
         player:setSkillRank(xi.skill.GOLDSMITHING, newRank)
         player:startEvent(301, 0, 0, 0, 0, newRank)
-        player:setLocalVar("GoldsmithingTraded", 1)
+        player:setLocalVar('GoldsmithingTraded', 1)
     end
 end
 
@@ -47,7 +45,7 @@ entity.onTrigger = function(player, npc)
         return
     end
 
-    if player:getCharVar("GoldsmithingExpertQuest") == 1 then
+    if player:getCharVar('GoldsmithingExpertQuest') == 1 then
         if player:hasKeyItem(xi.keyItem.WAY_OF_THE_GOLDSMITH) then
             expertQuestStatus = 600
         else
@@ -71,7 +69,7 @@ end
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 300 and option == 2 then
         if xi.crafting.hasJoinedGuild(player, xi.crafting.guild.GOLDSMITHING) then
-            player:setCharVar("GoldsmithingExpertQuest", 1)
+            player:setCharVar('GoldsmithingExpertQuest', 1)
         end
     elseif csid == 300 and option == 1 then
         local crystal = 4096 -- fire crystal
@@ -83,9 +81,9 @@ entity.onEventFinish = function(player, csid, option, npc)
             xi.crafting.signupGuild(player, xi.crafting.guild.GOLDSMITHING)
         end
     else
-        if player:getLocalVar("GoldsmithingTraded") == 1 then
+        if player:getLocalVar('GoldsmithingTraded') == 1 then
             player:tradeComplete()
-            player:setLocalVar("GoldsmithingTraded", 0)
+            player:setLocalVar('GoldsmithingTraded', 0)
         end
     end
 

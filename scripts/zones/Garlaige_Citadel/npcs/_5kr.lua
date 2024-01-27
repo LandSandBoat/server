@@ -4,15 +4,13 @@
 -- Type: Door
 -- !pos 139 -6 127 200
 -----------------------------------
-require("scripts/globals/titles")
-require("scripts/globals/quests")
-local ID = require("scripts/zones/Garlaige_Citadel/IDs")
+local ID = zones[xi.zone.GARLAIGE_CITADEL]
 -----------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     if
-        trade:hasItemQty(xi.items.GARLAIGE_KEY, 1) and
+        trade:hasItemQty(xi.item.GARLAIGE_KEY, 1) and
         trade:getItemCount() == 1
     then
         player:startEvent(4) -- Open the door

@@ -1,4 +1,4 @@
-local ID = require("scripts/zones/Kazham/IDs")
+-- local ID = zones[xi.zone.KAZHAM]
 
 return {
     ['Dodmos']           = { event = 275 },

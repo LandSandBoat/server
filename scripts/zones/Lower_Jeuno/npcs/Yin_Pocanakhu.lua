@@ -10,7 +10,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if player:getCharVar("BorghertzHandsFirstTime") == 2 then
+    if player:getCharVar('BorghertzHandsFirstTime') == 2 then
         player:startEvent(220)
     elseif
         player:getCurrentMission(player:getNation()) == xi.mission.id.nation.MAGICITE and
@@ -24,16 +24,16 @@ end
 
 entity.onEventUpdate = function(player, csid, option, npc)
     if csid == 220 and player:delGil(1000) then
-        player:setLocalVar("paidYin", 1)
+        player:setLocalVar('paidYin', 1)
         player:updateEvent(1)
     end
 end
 
 entity.onEventFinish = function(player, csid, option, npc)
-    if csid == 220 and player:getLocalVar("paidYin") == 1 then
-        player:setLocalVar("paidYin", 0)
-        player:setCharVar("BorghertzHandsFirstTime", 0)
-        player:setCharVar("BorghertzCS", 1)
+    if csid == 220 and player:getLocalVar('paidYin') == 1 then
+        player:setLocalVar('paidYin', 0)
+        player:setCharVar('BorghertzHandsFirstTime', 0)
+        player:setCharVar('BorghertzCS', 1)
     end
 end
 

@@ -4,8 +4,8 @@
 -- Note: PH for Overlord Bakgodek
 -- TODO: messages should be zone-wide
 -----------------------------------
-local ID = require("scripts/zones/Monastic_Cavern/IDs")
-mixins = { require("scripts/mixins/job_special") }
+local ID = zones[xi.zone.MONASTIC_CAVERN]
+mixins = { require('scripts/mixins/job_special') }
 -----------------------------------
 local entity = {}
 
@@ -36,8 +36,8 @@ entity.onMobDespawn = function(mob)
     -- the quest version of this NM doesn't respawn or count toward hq nm
     if nqId == ID.mob.ORCISH_OVERLORD then
         local hqId        = mob:getID() + 1
-        local timeOfDeath = GetServerVariable("[POP]Overlord_Bakgodek")
-        local kills       = GetServerVariable("[PH]Overlord_Bakgodek")
+        local timeOfDeath = GetServerVariable('[POP]Overlord_Bakgodek')
+        local kills       = GetServerVariable('[PH]Overlord_Bakgodek')
         local popNow      = math.random(1, 5) == 3 or kills > 6
 
         if os.time() > timeOfDeath and popNow then
@@ -48,7 +48,7 @@ entity.onMobDespawn = function(mob)
         else
             UpdateNMSpawnPoint(nqId)
             mob:setRespawnTime(math.random(75600, 86400))
-            SetServerVariable("[PH]Overlord_Bakgodek", kills + 1)
+            SetServerVariable('[PH]Overlord_Bakgodek', kills + 1)
         end
     end
 end

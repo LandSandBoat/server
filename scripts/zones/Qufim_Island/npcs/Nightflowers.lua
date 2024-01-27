@@ -3,9 +3,7 @@
 --  NPC: Nightflowers
 -- !pos -264.775 -3.718 28.767 126
 -----------------------------------
-require('scripts/globals/utils')
------------------------------------
-local ID = require('scripts/zones/Qufim_Island/IDs')
+local ID = zones[xi.zone.QUFIM_ISLAND]
 -----------------------------------
 local entity = {}
 

@@ -5,12 +5,7 @@
 -- Thunder Hawk : !pos -58 -10 6 248
 -- Jail Door    : !pos 56 0.1 -23 147
 -----------------------------------
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
-require('scripts/globals/titles')
-require('scripts/globals/interaction/quest')
------------------------------------
-local beadeauxID = require("scripts/zones/Beadeaux/IDs")
+local beadeauxID = zones[xi.zone.BEADEAUX]
 -----------------------------------
 
 local quest = Quest:new(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.THE_RESCUE)
@@ -82,7 +77,7 @@ quest.sections =
                 onTrade = function(player, npc, trade)
                     if
                         not player:hasKeyItem(xi.ki.TRADERS_SACK) and
-                        npcUtil.tradeHasExactly(trade, xi.items.QUADAV_CHARM)
+                        npcUtil.tradeHasExactly(trade, xi.item.QUADAV_CHARM)
                     then
                         return quest:progressEvent(1000)
                     end

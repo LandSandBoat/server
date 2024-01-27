@@ -82,7 +82,7 @@ namespace mobutils
     }
 
     // Gest base skill rankings for ACC/ATT/EVA/MEVA
-    uint16 GetBase(CMobEntity* PMob, uint8 rank)
+    uint16 GetBaseSkill(CMobEntity* PMob, uint8 rank)
     {
         int8 mlvl = PMob->GetMLevel();
 
@@ -100,25 +100,28 @@ namespace mobutils
                 return battleutils::GetMaxSkill(SKILL_THROWING, JOB_MNK, mlvl); // E Skill (5)
         }
 
-        ShowError("Mobutils::GetBase rank (%d) is out of bounds for mob (%u) ", rank, PMob->id);
+        ShowError("mobutils::GetBaseSkill rank (%d) is out of bounds for mob (%u) ", rank, PMob->id);
         return 0;
     }
 
     uint16 GetMagicEvasion(CMobEntity* PMob)
     {
         uint8 mEvaRank = PMob->evaRank;
-        return GetBase(PMob, mEvaRank);
+        return GetBaseSkill(PMob, mEvaRank);
     }
 
     /************************************************************************
      *                                                                       *
-     *  Base value for defense                       *
+     *  Base value for defense and evasion                                   *
      *                                                                       *
      ************************************************************************/
 
-    uint16 GetDefense(CMobEntity* PMob, uint8 rank)
+    uint16 GetBaseDefEva(CMobEntity* PMob, uint8 rank)
     {
-        // family defense = [floor(defRank) + 8 + vit / 2 + job traits] * family multiplier
+        // See: https://w.atwiki.jp/studiogobli/pages/25.html
+        // Enemy defense = [f(Lv, racial defense rank) + 8 + [VIT/2] + job characteristics] x racial characteristics
+        // Enemy evasion = f(Lv, main job evasion skill rank) + [AGI/2] + job characteristics
+        // The funcion f is below
         uint8 lvl = PMob->GetMLevel();
 
         if (lvl > 50)
@@ -188,6 +191,210 @@ namespace mobutils
 
     /************************************************************************
      *                                                                       *
+     *  Calculation for subjob stats                                         *
+     *                                                                       *
+     ************************************************************************/
+    uint16 GetSubJobStats(uint8 rank, uint16 level, uint16 stat)
+    {
+        // These ranks A through G are used by all known JP sources. Please note this is equivalent to the US usage of A+ through F
+        // https://w.atwiki.jp/studiogobli/pages/27.html
+        float sJobStat = 0;
+
+        switch (rank)
+        {
+            case 1: // A
+                if (level <= 30)
+                    sJobStat = std::max((std::floor(stat / (4.0f - 0.225f * (level - 30)))), 2.0f);
+                else if (level <= 40)
+                    sJobStat = std::floor(stat / (3.25f - 0.073f * (level - 30)));
+                else if (level <= 46)
+                    sJobStat = std::floor(stat / (2.55f - 0.001f * (level - 41)));
+                else
+                    sJobStat = std::floor(stat / (2.7f - 0.001f * (level - 45)));
+                break;
+
+            case 2: // B
+                if (level <= 30)
+                    sJobStat = std::max((std::floor(stat / (3.1f - 0.075f * (level - 32)))), 2.0f);
+                else if (level <= 40)
+                    sJobStat = std::floor(stat / (3.1f - 0.075f * (level - 32)));
+                else if (level <= 45)
+                    sJobStat = std::floor(stat / (2.5f - 0.025f * (level - 40)));
+                else
+                    sJobStat = std::floor(stat / (2.35f - 0.04f * (level - 44)));
+                break;
+
+            case 3: // C
+                if (level <= 30)
+                    sJobStat = std::max((std::floor(stat / (4.5f - 0.15f * (level - 26)))), 2.0f);
+                else if (level <= 40)
+                    sJobStat = std::floor(stat / (3.28f - 0.001f * (level - 30)));
+                else if (level <= 45)
+                    sJobStat = std::floor(stat / (2.6f - 0.025f * (level - 40)));
+                else
+                    sJobStat = std::floor(stat / (2.1f - 0.2f * (level - 49)));
+                break;
+
+            case 4: // D
+                if (level <= 30)
+                    sJobStat = std::max((std::floor(stat / (5.0f - 0.05f * (level - 21)))), 1.0f);
+                else if (level <= 40)
+                    sJobStat = std::floor(stat / (3.2f - 0.001f * (level - 29)));
+                else if (level <= 45)
+                    sJobStat = std::floor(stat / (3.5f - 0.08f * (level - 32)));
+                else
+                    sJobStat = std::floor(stat / (3.25f - 0.045f * (level - 32)));
+                break;
+
+            case 5: // E
+                if (level <= 30)
+                    sJobStat = std::max((std::floor(stat / (3.8f - 0.1f * (level - 32)))), 1.0f);
+                else if (level <= 40)
+                    sJobStat = std::floor(stat / (3.8f - 0.15f * (level - 32)));
+                else if (level <= 45)
+                    sJobStat = std::floor(stat / (2.7f - 0.075f * (level - 40)));
+                else
+                    sJobStat = std::floor(stat / (2.7f - 0.05f * (level - 45)));
+                break;
+
+            case 6: // F
+                if (level <= 30)
+                    sJobStat = std::max((std::floor(stat / (4.0f - 0.15f * (level - 35)))), 1.0f);
+                else if (level <= 40)
+                    sJobStat = std::floor(stat / (4.0f - 0.15f * (level - 30)));
+                else if (level <= 46)
+                    sJobStat = std::floor(stat / (3.0f - 0.1125f * (level - 40)));
+                else
+                    sJobStat = std::floor(stat / (3.0f - 0.07f * (level - 40)));
+                break;
+
+            case 7: // G
+                if (level <= 30)
+                    sJobStat = std::max((std::floor(stat / (4.0f - 0.15f * (level - 35)))), 1.0f);
+                else if (level <= 40)
+                    sJobStat = std::floor(stat / (4.0f - 0.2f * (level - 31)));
+                else if (level <= 46)
+                    sJobStat = std::floor(stat / (2.5f - 0.09f * (level - 40)));
+                else
+                    sJobStat = std::floor(stat / 2);
+                break;
+            default:
+                sJobStat = stat / 2;
+                break;
+        }
+        return sJobStat;
+    }
+
+    /************************************************************************
+     *                                                                       *
+     *  Checks if the mob is in any Original/RoZ zone                        *
+     *                                                                       *
+     ************************************************************************/
+    bool CheckSubJobZone(CMobEntity* PMob)
+    {
+        auto zoneId = PMob->getZone();
+        if (zoneId != 0 && (zoneId == ZONE_WEST_RONFAURE ||
+                            zoneId == ZONE_EAST_RONFAURE ||
+                            zoneId == ZONE_LA_THEINE_PLATEAU ||
+                            zoneId == ZONE_VALKURM_DUNES ||
+                            zoneId == ZONE_JUGNER_FOREST ||
+                            zoneId == ZONE_BATALLIA_DOWNS ||
+                            zoneId == ZONE_NORTH_GUSTABERG ||
+                            zoneId == ZONE_SOUTH_GUSTABERG ||
+                            zoneId == ZONE_KONSCHTAT_HIGHLANDS ||
+                            zoneId == ZONE_PASHHOW_MARSHLANDS ||
+                            zoneId == ZONE_ROLANBERRY_FIELDS ||
+                            zoneId == ZONE_BEAUCEDINE_GLACIER ||
+                            zoneId == ZONE_XARCABARD ||
+                            zoneId == ZONE_CAPE_TERIGGAN ||
+                            zoneId == ZONE_EASTERN_ALTEPA_DESERT ||
+                            zoneId == ZONE_WEST_SARUTABARUTA ||
+                            zoneId == ZONE_EAST_SARUTABARUTA ||
+                            zoneId == ZONE_TAHRONGI_CANYON ||
+                            zoneId == ZONE_BUBURIMU_PENINSULA ||
+                            zoneId == ZONE_MERIPHATAUD_MOUNTAINS ||
+                            zoneId == ZONE_SAUROMUGUE_CHAMPAIGN ||
+                            zoneId == ZONE_THE_SANCTUARY_OF_ZITAH ||
+                            zoneId == ZONE_ROMAEVE ||
+                            zoneId == ZONE_YUHTUNGA_JUNGLE ||
+                            zoneId == ZONE_YHOATOR_JUNGLE ||
+                            zoneId == ZONE_WESTERN_ALTEPA_DESERT ||
+                            zoneId == ZONE_QUFIM_ISLAND ||
+                            zoneId == ZONE_BEHEMOTHS_DOMINION ||
+                            zoneId == ZONE_VALLEY_OF_SORROWS ||
+                            zoneId == ZONE_HORLAIS_PEAK ||
+                            zoneId == ZONE_GHELSBA_OUTPOST ||
+                            zoneId == ZONE_FORT_GHELSBA ||
+                            zoneId == ZONE_YUGHOTT_GROTTO ||
+                            zoneId == ZONE_PALBOROUGH_MINES ||
+                            zoneId == ZONE_WAUGHROON_SHRINE ||
+                            zoneId == ZONE_GIDDEUS ||
+                            zoneId == ZONE_BALGAS_DAIS ||
+                            zoneId == ZONE_BEADEAUX ||
+                            zoneId == ZONE_QULUN_DOME ||
+                            zoneId == ZONE_DAVOI ||
+                            zoneId == ZONE_MONASTIC_CAVERN ||
+                            zoneId == ZONE_CASTLE_OZTROJA ||
+                            zoneId == ZONE_ALTAR_ROOM ||
+                            zoneId == ZONE_THE_BOYAHDA_TREE ||
+                            zoneId == ZONE_DRAGONS_AERY ||
+                            zoneId == ZONE_MIDDLE_DELKFUTTS_TOWER ||
+                            zoneId == ZONE_UPPER_DELKFUTTS_TOWER ||
+                            zoneId == ZONE_TEMPLE_OF_UGGALEPIH ||
+                            zoneId == ZONE_DEN_OF_RANCOR ||
+                            zoneId == ZONE_CASTLE_ZVAHL_BAILEYS ||
+                            zoneId == ZONE_CASTLE_ZVAHL_KEEP ||
+                            zoneId == ZONE_SACRIFICIAL_CHAMBER ||
+                            zoneId == ZONE_THRONE_ROOM ||
+                            zoneId == ZONE_RANGUEMONT_PASS ||
+                            zoneId == ZONE_BOSTAUNIEUX_OUBLIETTE ||
+                            zoneId == ZONE_CHAMBER_OF_ORACLES ||
+                            zoneId == ZONE_TORAIMARAI_CANAL ||
+                            zoneId == ZONE_FULL_MOON_FOUNTAIN ||
+                            zoneId == ZONE_ZERUHN_MINES ||
+                            zoneId == ZONE_KORROLOKA_TUNNEL ||
+                            zoneId == ZONE_KUFTAL_TUNNEL ||
+                            zoneId == ZONE_SEA_SERPENT_GROTTO ||
+                            zoneId == ZONE_VELUGANNON_PALACE ||
+                            zoneId == ZONE_THE_SHRINE_OF_RUAVITAU ||
+                            zoneId == ZONE_STELLAR_FULCRUM ||
+                            zoneId == ZONE_LALOFF_AMPHITHEATER ||
+                            zoneId == ZONE_THE_CELESTIAL_NEXUS ||
+                            zoneId == ZONE_LOWER_DELKFUTTS_TOWER ||
+                            zoneId == ZONE_KING_RANPERRES_TOMB ||
+                            zoneId == ZONE_DANGRUF_WADI ||
+                            zoneId == ZONE_INNER_HORUTOTO_RUINS ||
+                            zoneId == ZONE_ORDELLES_CAVES ||
+                            zoneId == ZONE_OUTER_HORUTOTO_RUINS ||
+                            zoneId == ZONE_THE_ELDIEME_NECROPOLIS ||
+                            zoneId == ZONE_GUSGEN_MINES ||
+                            zoneId == ZONE_CRAWLERS_NEST ||
+                            zoneId == ZONE_MAZE_OF_SHAKHRAMI ||
+                            zoneId == ZONE_GARLAIGE_CITADEL ||
+                            zoneId == ZONE_CLOISTER_OF_GALES ||
+                            zoneId == ZONE_CLOISTER_OF_STORMS ||
+                            zoneId == ZONE_CLOISTER_OF_FROST ||
+                            zoneId == ZONE_FEIYIN ||
+                            zoneId == ZONE_IFRITS_CAULDRON ||
+                            zoneId == ZONE_QUBIA_ARENA ||
+                            zoneId == ZONE_CLOISTER_OF_FLAMES ||
+                            zoneId == ZONE_QUICKSAND_CAVES ||
+                            zoneId == ZONE_CLOISTER_OF_TREMORS ||
+                            zoneId == ZONE_CLOISTER_OF_TIDES ||
+                            zoneId == ZONE_GUSTAV_TUNNEL ||
+                            zoneId == ZONE_LABYRINTH_OF_ONZOZO ||
+                            zoneId == ZONE_SHIP_BOUND_FOR_SELBINA ||
+                            zoneId == ZONE_SHIP_BOUND_FOR_MHAURA ||
+                            zoneId == ZONE_SHIP_BOUND_FOR_SELBINA_PIRATES ||
+                            zoneId == ZONE_SHIP_BOUND_FOR_MHAURA_PIRATES))
+        {
+            return true;
+        }
+        return false;
+    }
+
+    /************************************************************************
+     *                                                                       *
      *  Calculate mob stats                                                  *
      *                                                                       *
      ************************************************************************/
@@ -204,7 +411,7 @@ namespace mobutils
         JOBTYPE   sJob     = PMob->GetSJob();
         uint8     mLvl     = PMob->GetMLevel();
         uint8     sLvl     = PMob->GetSLevel();
-        ZONE_TYPE zoneType = PMob->loc.zone->GetType();
+        ZONE_TYPE zoneType = PMob->loc.zone->GetTypeMask();
 
         uint8 mJobGrade = 0; // main jobs grade
         uint8 sJobGrade = 0; // subjobs grade
@@ -422,10 +629,21 @@ namespace mobutils
         uint16 sMND = GetBaseToRank(grade::GetJobGrade(PMob->GetSJob(), 7), sLvl);
         uint16 sCHR = GetBaseToRank(grade::GetJobGrade(PMob->GetSJob(), 8), sLvl);
 
-        // As per conversation with Jimmayus, all mobs at any level get bonus stats from subjobs.
-        // From lvl 45 onwards, 1/2. Before lvl 30, 1/4. In between, the value gets progresively higher, from 1/4 at 30 to 1/2 at 44.
-        // Im leaving that range at 1/3, for now.
-        if (mLvl >= 45)
+        // Each subjob stat is determined by where the mob is located and what level the mob is.
+        // Each rank has their own formula as shown in GetSubJobStats
+        // Sub-level 50 monsters implemented in "Chains of Promathia" and onward (i.e. "Wings of the Goddess" as well) will use rank/2 at all levels.
+        // Note: Subjob Level will ALWAYS = Main Job Level but we use sLvl so it makes it easier to know what stat we are calculating
+        if (CheckSubJobZone(PMob) && (sLvl < 50))
+        {
+            sSTR = GetSubJobStats(grade::GetJobGrade(PMob->GetSJob(), 2), sLvl, sSTR);
+            sDEX = GetSubJobStats(grade::GetJobGrade(PMob->GetSJob(), 3), sLvl, sDEX);
+            sVIT = GetSubJobStats(grade::GetJobGrade(PMob->GetSJob(), 4), sLvl, sVIT);
+            sAGI = GetSubJobStats(grade::GetJobGrade(PMob->GetSJob(), 5), sLvl, sAGI);
+            sINT = GetSubJobStats(grade::GetJobGrade(PMob->GetSJob(), 6), sLvl, sINT);
+            sMND = GetSubJobStats(grade::GetJobGrade(PMob->GetSJob(), 7), sLvl, sMND);
+            sCHR = GetSubJobStats(grade::GetJobGrade(PMob->GetSJob(), 8), sLvl, sCHR);
+        }
+        else
         {
             sSTR /= 2;
             sDEX /= 2;
@@ -434,26 +652,6 @@ namespace mobutils
             sMND /= 2;
             sCHR /= 2;
             sVIT /= 2;
-        }
-        else if (mLvl > 30)
-        {
-            sSTR /= 3;
-            sDEX /= 3;
-            sAGI /= 3;
-            sINT /= 3;
-            sMND /= 3;
-            sCHR /= 3;
-            sVIT /= 3;
-        }
-        else
-        {
-            sSTR /= 4;
-            sDEX /= 4;
-            sAGI /= 4;
-            sINT /= 4;
-            sMND /= 4;
-            sCHR /= 4;
-            sVIT /= 4;
         }
 
         // [stat] = floor[family Stat] + floor[main job Stat] + floor[sub job Stat]
@@ -517,12 +715,12 @@ namespace mobutils
             }
         }
 
-        PMob->addModifier(Mod::DEF, GetDefense(PMob, PMob->defRank));
-        PMob->addModifier(Mod::EVA, GetBase(PMob, PMob->evaRank));  // Base Evasion for all mobs
-        PMob->addModifier(Mod::ATT, GetBase(PMob, PMob->attRank));  // Base Attack for all mobs is Rank A+ but pull from DB for specific cases
-        PMob->addModifier(Mod::ACC, GetBase(PMob, PMob->accRank));  // Base Accuracy for all mobs is Rank A+ but pull from DB for specific cases
-        PMob->addModifier(Mod::RATT, GetBase(PMob, PMob->attRank)); // Base Ranged Attack for all mobs is Rank A+ but pull from DB for specific cases
-        PMob->addModifier(Mod::RACC, GetBase(PMob, PMob->accRank)); // Base Ranged Accuracy for all mobs is Rank A+ but pull from DB for specific cases
+        PMob->addModifier(Mod::DEF, GetBaseDefEva(PMob, PMob->defRank)); // Base Defense for all mobs
+        PMob->addModifier(Mod::EVA, GetBaseDefEva(PMob, PMob->evaRank)); // Base Evasion for all mobs
+        PMob->addModifier(Mod::ATT, GetBaseSkill(PMob, PMob->attRank));  // Base Attack for all mobs is Rank A+ but pull from DB for specific cases
+        PMob->addModifier(Mod::ACC, GetBaseSkill(PMob, PMob->accRank));  // Base Accuracy for all mobs is Rank A+ but pull from DB for specific cases
+        PMob->addModifier(Mod::RATT, GetBaseSkill(PMob, PMob->attRank)); // Base Ranged Attack for all mobs is Rank A+ but pull from DB for specific cases
+        PMob->addModifier(Mod::RACC, GetBaseSkill(PMob, PMob->accRank)); // Base Ranged Accuracy for all mobs is Rank A+ but pull from DB for specific cases
 
         // Note: Known Base Parry for all mobs is Rank C
         // MOBMOD_CAN_PARRY uses the mod value as the rank. It is unknown if mobs in current retail or somewhere else have a different parry rank
@@ -532,7 +730,7 @@ namespace mobutils
         // 3) ???
         if (PMob->getMobMod(MOBMOD_CAN_PARRY) > 0)
         {
-            PMob->addModifier(Mod::PARRY, GetBase(PMob, PMob->getMobMod(MOBMOD_CAN_PARRY)));
+            PMob->addModifier(Mod::PARRY, GetBaseSkill(PMob, PMob->getMobMod(MOBMOD_CAN_PARRY)));
         }
 
         // natural magic evasion
@@ -564,7 +762,7 @@ namespace mobutils
 
         PMob->m_Behaviour |= PMob->getMobMod(MOBMOD_BEHAVIOR);
 
-        if (zoneType == ZONE_TYPE::DUNGEON)
+        if (zoneType & ZONE_TYPE::DUNGEON)
         {
             SetupDungeonMob(PMob);
         }
@@ -572,7 +770,7 @@ namespace mobutils
         {
             SetupBattlefieldMob(PMob);
         }
-        else if (zoneType == ZONE_TYPE::DYNAMIS)
+        else if (zoneType & ZONE_TYPE::DYNAMIS)
         {
             SetupDynamisMob(PMob);
         }
@@ -595,17 +793,17 @@ namespace mobutils
         // Check for possible miss-setups
         if (PMob->getMobMod(MOBMOD_SPECIAL_SKILL) != 0 && PMob->getMobMod(MOBMOD_SPECIAL_COOL) == 0)
         {
-            ShowError("Mobutils::CalculateMobStats Mob (%s, %d) with special skill but no cool down set!", PMob->GetName(), PMob->id);
+            ShowError("mobutils::CalculateMobStats Mob (%s, %d) with special skill but no cool down set!", PMob->getName(), PMob->id);
         }
 
         if (PMob->SpellContainer->HasSpells() && PMob->getMobMod(MOBMOD_MAGIC_COOL) == 0)
         {
-            ShowError("Mobutils::CalculateMobStats Mob (%s, %d) with magic but no cool down set!", PMob->GetName(), PMob->id);
+            ShowError("mobutils::CalculateMobStats Mob (%s, %d) with magic but no cool down set!", PMob->getName(), PMob->id);
         }
 
         if (PMob->getMobMod(MOBMOD_DETECTION) == 0)
         {
-            ShowError("Mobutils::CalculateMobStats Mob (%s, %d, %d) has no detection methods!", PMob->GetName(), PMob->id, PMob->m_Family);
+            ShowError("mobutils::CalculateMobStats Mob (%s, %d, %d) has no detection methods!", PMob->getName(), PMob->id, PMob->m_Family);
         }
     }
 
@@ -878,7 +1076,7 @@ namespace mobutils
 
     void SetupEventMob(CMobEntity* PMob)
     {
-        // event mob types will always have custom roaming
+        // event mob types will always have scripted roaming (any mob can have it scripted, but these ALWAYS do)
         PMob->m_roamFlags |= ROAMFLAG_SCRIPTED;
         PMob->setMobMod(MOBMOD_ROAM_RESET_FACING, 1);
         PMob->m_maxRoamDistance = 0.5f; // always go back to spawn
@@ -1026,22 +1224,21 @@ namespace mobutils
         {
             if (PMob->getZone() >= 1 && PMob->getZone() <= 252)
             {
-                ShowError("Mob %s level is 0! zoneid %d, poolid %d", PMob->GetName(), PMob->getZone(), PMob->m_Pool);
+                ShowError("Mob %s level is 0! zoneid %d, poolid %d", PMob->getName(), PMob->getZone(), PMob->m_Pool);
             }
         }
     }
 
     /*
-Loads up custom mob mods from mob_pool_mods and mob_family_mods table. This will allow you to customize
-a mobs regen rate, magic defense, triple attack rate from a table instead of hardcoding it.
+    Loads up mob mods from mob_pool_mods and mob_family_mods table. This will allow you to change
+    a mobs regen rate, magic defense, triple attack rate from a table instead of hardcoding it.
 
-Usage:
+    Usage:
 
-    Evil weapons have a magic defense boost. So pop that into mob_family_mods table.
-    Goblin Diggers have a vermin killer trait, so find its poolid and put it in mod_pool_mods table.
-
-*/
-    void LoadCustomMods()
+        Evil weapons have a magic defense boost. So pop that into mob_family_mods table.
+        Goblin Diggers have a vermin killer trait, so find its poolid and put it in mod_pool_mods table.
+    */
+    void LoadSqlModifiers()
     {
         // load family mods
         const char QueryFamilyMods[] = "SELECT familyid, modid, value, is_mob_mod FROM mob_family_mods;";
@@ -1188,9 +1385,9 @@ Usage:
         return nullptr;
     }
 
-    void AddCustomMods(CMobEntity* PMob)
+    void AddSqlModifiers(CMobEntity* PMob)
     {
-        // find my families custom mods
+        // find my families mods
         ModsList_t* PFamilyMods = GetMobFamilyMods(PMob->m_Family);
 
         if (PFamilyMods != nullptr)
@@ -1207,7 +1404,7 @@ Usage:
             }
         }
 
-        // find my pools custom mods
+        // find my pools mods
         ModsList_t* PPoolMods = GetMobPoolMods(PMob->m_Pool);
 
         if (PPoolMods != nullptr)
@@ -1224,7 +1421,7 @@ Usage:
             }
         }
 
-        // find my pools custom mods
+        // find my IDs mods
         ModsList_t* PSpawnMods = GetMobSpawnMods(PMob->id);
 
         if (PSpawnMods != nullptr)
@@ -1374,15 +1571,21 @@ Usage:
                 PMob->setMobMod(MOBMOD_DETECTION, sql->GetUIntData(70));
 
                 CZone* newZone = zoneutils::GetZone(zoneID);
+                if (newZone)
+                {
+                    // Get dynamic targid
+                    newZone->GetZoneEntities()->AssignDynamicTargIDandLongID(PMob);
 
-                // Get dynamic targid
-                newZone->GetZoneEntities()->AssignDynamicTargIDandLongID(PMob);
+                    // Insert ally into zone's mob list. TODO: Do we need to assign party for allies?
+                    newZone->GetZoneEntities()->m_mobList[PMob->targid] = PMob;
+                }
+                else
+                {
+                    ShowError("Mobutils::InstantiateAlly failed to get zone from zoneutils::GetZone(zoneID)");
+                }
 
                 // Ensure dynamic targid is released on death
                 PMob->m_bReleaseTargIDOnDisappear = true;
-
-                // Insert ally into zone's mob list. TODO: Do we need to assign party for allies?
-                newZone->GetZoneEntities()->m_mobList[PMob->targid] = PMob;
 
                 // must be here first to define mobmods
                 mobutils::InitializeMob(PMob);
@@ -1525,8 +1728,10 @@ Usage:
                 PMob->setMobMod(MOBMOD_DETECTION, sql->GetUIntData(70));
 
                 mobutils::InitializeMob(PMob);
+                mobutils::AddSqlModifiers(PMob);
             }
         }
+
         return PMob;
     }
 

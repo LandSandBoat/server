@@ -2,8 +2,6 @@
 -- Area: King Ranperres Tomb
 --  Mob: Spartoi Warrior
 -----------------------------------
-require("scripts/globals/regimes")
------------------------------------
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

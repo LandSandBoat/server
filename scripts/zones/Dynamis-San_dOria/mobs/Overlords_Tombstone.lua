@@ -3,8 +3,6 @@
 --  Mob: Overlord's Tombstone
 -- Note: Mega Boss
 -----------------------------------
-require("scripts/globals/dynamis")
------------------------------------
 local entity = {}
 
 entity.onMobEngaged = function(mob, target)
@@ -27,6 +25,8 @@ entity.onMobDeath = function(mob, player, optParams)
             end
         end
     end
+
+    xi.magian.onMobDeath(mob, player, optParams, set{ 4402 })
 end
 
 return entity

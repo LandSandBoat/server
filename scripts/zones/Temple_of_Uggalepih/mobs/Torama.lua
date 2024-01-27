@@ -3,8 +3,7 @@
 --  Mob: Torama
 -- Note: PH for Flauros
 -----------------------------------
-local ID = require("scripts/zones/Temple_of_Uggalepih/IDs")
-require("scripts/globals/mobs")
+local ID = zones[xi.zone.TEMPLE_OF_UGGALEPIH]
 -----------------------------------
 local entity = {}
 

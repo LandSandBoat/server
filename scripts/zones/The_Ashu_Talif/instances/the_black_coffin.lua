@@ -2,8 +2,7 @@
 -- TOAU-15: The Black Coffin
 -- !instance 6000
 -----------------------------------
-require("scripts/globals/instance")
-local ID = require("scripts/zones/The_Ashu_Talif/IDs")
+local ID = zones[xi.zone.THE_ASHU_TALIF]
 -----------------------------------
 local instanceObject = {}
 
@@ -56,7 +55,7 @@ instanceObject.onInstanceProgressUpdate = function(instance, progress)
     elseif progress >= 10 and not instance:completed() then
         local ally = GetMobByID(ID.mob.GESSHO, instance)
         if ally:isAlive() then
-            ally:setLocalVar("ready", 2)
+            ally:setLocalVar('ready', 2)
         end
 
         instance:complete()

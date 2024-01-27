@@ -2,7 +2,7 @@
 -- Area: La Vaule [S]
 --   NM: Shatterskull Mippdapp
 -----------------------------------
-mixins = { require("scripts/mixins/families/gnole") }
+mixins = { require('scripts/mixins/families/gnole') }
 -----------------------------------
 local entity = {}
 

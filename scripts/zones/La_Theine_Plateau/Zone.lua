@@ -1,15 +1,9 @@
 -----------------------------------
 -- Zone: La_Theine_Plateau (102)
 -----------------------------------
-local ID = require('scripts/zones/La_Theine_Plateau/IDs')
+local ID = zones[xi.zone.LA_THEINE_PLATEAU]
 local laTheineGlobal = require('scripts/zones/La_Theine_Plateau/globals')
 require('scripts/quests/i_can_hear_a_rainbow')
-require('scripts/globals/chocobo_digging')
-require('scripts/globals/conquest')
-require('scripts/globals/missions')
-require('scripts/globals/npc_util')
-require('scripts/globals/chocobo')
-require('scripts/globals/quests')
 -----------------------------------
 local zoneObject = {}
 
@@ -60,7 +54,7 @@ end
 zoneObject.onZoneWeatherChange = function(weather)
     local rainbow = GetNPCByID(ID.npc.RAINBOW)
     local timeOfTheDay = VanadielTOTD()
-    local setRainbow = rainbow:getLocalVar("setRainbow")
+    local setRainbow = rainbow:getLocalVar('setRainbow')
 
     if
         setRainbow == 1 and
@@ -82,7 +76,7 @@ end
 
 zoneObject.onTOTDChange = function(timeOfTheDay)
     local rainbow = GetNPCByID(ID.npc.RAINBOW)
-    local setRainbow = rainbow:getLocalVar("setRainbow")
+    local setRainbow = rainbow:getLocalVar('setRainbow')
 
     if
         setRainbow == 1 and

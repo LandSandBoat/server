@@ -2,15 +2,12 @@
 -- Area: Meriphataud Mountains [S]
 --   NM: Centipedal Centruroides
 -----------------------------------
-require("scripts/globals/hunts")
-require("scripts/globals/mobs")
------------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
     mob:setMod(xi.mod.DOUBLE_ATTACK, 100)
-    mob:setMod(xi.mod.MOVE, 13)
+    mob:setMod(xi.mod.MOVE_SPEED_STACKABLE, 13)
 end
 
 entity.onAdditionalEffect = function(mob, target, damage)

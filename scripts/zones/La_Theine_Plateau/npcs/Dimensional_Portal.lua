@@ -2,8 +2,7 @@
 -- Area: La Theine Plateau
 --  NPC: Dimensional Portal
 -----------------------------------
-local ID = require("scripts/zones/La_Theine_Plateau/IDs")
-require("scripts/globals/missions")
+local ID = zones[xi.zone.LA_THEINE_PLATEAU]
 -----------------------------------
 local entity = {}
 

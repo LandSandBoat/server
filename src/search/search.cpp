@@ -89,7 +89,7 @@ struct SearchCommInfo
     uint16 port;
 };
 
-void TaskManagerThread(const bool& requestExit);
+void TaskManagerThread(bool const& requestExit);
 
 int32 ah_cleanup(time_point tick, CTaskMgr::CTask* PTask);
 
@@ -617,7 +617,7 @@ void HandleAuctionHouseRequest(CTCPRequestPacket& PTCPRequest)
     // 9 - name
     std::string OrderByString = "ORDER BY";
     uint8       paramCount    = ref<uint8>(data, 0x12);
-    for (uint8 i = 0; i < paramCount; ++i) // параметры сортировки предметов
+    for (uint8 i = 0; i < paramCount; ++i) // Item sort options
     {
         uint8 param = ref<uint32>(data, 0x18 + 8 * i);
         ShowInfo(" Param%u: %u", i, param);
@@ -639,7 +639,7 @@ void HandleAuctionHouseRequest(CTCPRequestPacket& PTCPRequest)
     }
 
     OrderByString.append(" item_basic.itemid");
-    int8* OrderByArray = (int8*)OrderByString.data();
+    const char* OrderByArray = OrderByString.data();
 
     CDataLoader          PDataLoader;
     std::vector<ahItem*> ItemList = PDataLoader.GetAHItemsToCategory(AHCatID, OrderByArray);
@@ -669,7 +669,7 @@ void HandleAuctionHouseHistory(CTCPRequestPacket& PTCPRequest)
     uint8  stack  = ref<uint8>(data, 0x15);
 
     CDataLoader             PDataLoader;
-    std::vector<ahHistory*> HistoryList = PDataLoader.GetAHItemHystory(ItemID, stack != 0);
+    std::vector<ahHistory*> HistoryList = PDataLoader.GetAHItemHistory(ItemID, stack != 0);
     ahItem                  item        = PDataLoader.GetAHItemFromItemID(ItemID);
 
     CAHHistoryPacket PAHPacket = CAHHistoryPacket(item, stack);
@@ -684,7 +684,7 @@ void HandleAuctionHouseHistory(CTCPRequestPacket& PTCPRequest)
 
 search_req _HandleSearchRequest(CTCPRequestPacket& PTCPRequest)
 {
-    // This function constructs a `search_req` based on which query should be send to the database.
+    // This function constructs a `search_req` based on which query should be sent to the database.
     // The results from the database will eventually be sent to the client.
 
     uint32 bitOffset = 0;
@@ -730,7 +730,7 @@ search_req _HandleSearchRequest(CTCPRequestPacket& PTCPRequest)
 
         if ((EntryType != SEARCH_FRIEND) && (EntryType != SEARCH_LINKSHELL) && (EntryType != SEARCH_COMMENT) && (EntryType != SEARCH_FLAGS2))
         {
-            if ((bitOffset + 3) >= workloadBits) // so 0000000 at the end does not get interpret as name entry
+            if ((bitOffset + 3) >= workloadBits) // so 0000000 at the end does not get interpreted as name entry
             {
                 bitOffset = workloadBits;
                 break;
@@ -920,7 +920,7 @@ search_req _HandleSearchRequest(CTCPRequestPacket& PTCPRequest)
     }
 
     return sr;
-    // не обрабатываем последние биты, что мешает в одну кучу
+    // Do not process the last bits, which can interfere with other operations
     // For example: "/blacklist delete Name" and "/sea all Name"
 }
 
@@ -930,7 +930,7 @@ search_req _HandleSearchRequest(CTCPRequestPacket& PTCPRequest)
  *                                                                       *
  ************************************************************************/
 
-void TaskManagerThread(const bool& requestExit)
+void TaskManagerThread(bool const& requestExit)
 {
     duration next;
     while (!requestExit)

@@ -4,16 +4,14 @@
 -- Involved In Quest: Enveloped in Darkness
 -- !zone 231
 -----------------------------------
-require("scripts/globals/titles")
-require("scripts/globals/quests")
-local ID = require("scripts/zones/Northern_San_dOria/IDs")
+local ID = zones[xi.zone.NORTHERN_SAN_DORIA]
 -----------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     if player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.UNDYING_FLAMES) == QUEST_ACCEPTED then
         if
-            trade:hasItemQty(xi.items.LUMP_OF_BEESWAX, 2) and
+            trade:hasItemQty(xi.item.LUMP_OF_BEESWAX, 2) and
             trade:getItemCount() == 2
         then
             player:startEvent(563)
@@ -44,12 +42,12 @@ entity.onEventFinish = function(player, csid, option, npc)
         player:addQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.UNDYING_FLAMES)
     elseif csid == 563 then
         if player:getFreeSlotsCount() == 0 then
-            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.items.FRIARS_ROPE)
+            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.item.FRIARS_ROPE)
         else
             player:tradeComplete()
             player:addTitle(xi.title.FAITH_LIKE_A_CANDLE)
-            player:addItem(xi.items.FRIARS_ROPE)
-            player:messageSpecial(ID.text.ITEM_OBTAINED, xi.items.FRIARS_ROPE)
+            player:addItem(xi.item.FRIARS_ROPE)
+            player:messageSpecial(ID.text.ITEM_OBTAINED, xi.item.FRIARS_ROPE)
             player:addFame(xi.quest.fame_area.SANDORIA, 30)
             player:completeQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.UNDYING_FLAMES)
         end

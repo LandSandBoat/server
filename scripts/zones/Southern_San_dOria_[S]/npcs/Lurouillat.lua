@@ -4,7 +4,7 @@
 -- !pos 44 2 -35 80
 -- Sealed Container NPC
 -----------------------------------
-local ID = require("scripts/zones/Southern_San_dOria_[S]/IDs")
+local ID = zones[xi.zone.SOUTHERN_SAN_DORIA_S]
 -----------------------------------
 local entity = {}
 
@@ -12,14 +12,14 @@ entity.onTrade = function(player, npc, trade)
     local itemID = trade:getItemId()
     local itemKeyItemMapping =
     {
-        [xi.items.MAPLE_STRONGBOX] = xi.ki.IMPERIAL_LINEAGE_CHAPTER_I,
-        [xi.items.MAGNOLIA_STRONGBOX] = xi.ki.IMPERIAL_LINEAGE_CHAPTER_II,
-        [xi.items.BEECH_STRONGBOX] = xi.ki.IMPERIAL_LINEAGE_CHAPTER_III,
-        [xi.items.EVERGREEN_STRONGBOX] = xi.ki.IMPERIAL_LINEAGE_CHAPTER_IV,
-        [xi.items.HOLLY_STRONGBOX] = xi.ki.IMPERIAL_LINEAGE_CHAPTER_V,
-        [xi.items.OAK_STRONGBOX] = xi.ki.IMPERIAL_LINEAGE_CHAPTER_VI,
-        [xi.items.ELM_STRONGBOX] = xi.ki.IMPERIAL_LINEAGE_CHAPTER_VII,
-        [xi.items.WILLOW_STRONGBOX] = xi.ki.IMPERIAL_LINEAGE_CHAPTER_VIII
+        [xi.item.MAPLE_STRONGBOX] = xi.ki.IMPERIAL_LINEAGE_CHAPTER_I,
+        [xi.item.MAGNOLIA_STRONGBOX] = xi.ki.IMPERIAL_LINEAGE_CHAPTER_II,
+        [xi.item.BEECH_STRONGBOX] = xi.ki.IMPERIAL_LINEAGE_CHAPTER_III,
+        [xi.item.EVERGREEN_STRONGBOX] = xi.ki.IMPERIAL_LINEAGE_CHAPTER_IV,
+        [xi.item.HOLLY_STRONGBOX] = xi.ki.IMPERIAL_LINEAGE_CHAPTER_V,
+        [xi.item.OAK_STRONGBOX] = xi.ki.IMPERIAL_LINEAGE_CHAPTER_VI,
+        [xi.item.ELM_STRONGBOX] = xi.ki.IMPERIAL_LINEAGE_CHAPTER_VII,
+        [xi.item.WILLOW_STRONGBOX] = xi.ki.IMPERIAL_LINEAGE_CHAPTER_VIII
     }
     -- Make sure we're only trading 1 Basket at a time.
     if

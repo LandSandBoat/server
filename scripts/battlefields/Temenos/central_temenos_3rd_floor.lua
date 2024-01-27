@@ -6,9 +6,7 @@
 -- !additem ivory_chip
 -- !pos 580.000 -2.375 104.000 37
 -----------------------------------
-local ID = require("scripts/zones/Temenos/IDs")
-require("scripts/globals/battlefield")
-require("scripts/globals/limbus")
+local ID = zones[xi.zone.TEMENOS]
 -----------------------------------
 
 local content = Limbus:new({
@@ -20,8 +18,8 @@ local content = Limbus:new({
     area             = 5,
     entryNpc         = 'Matter_Diffusion_Module',
     requiredKeyItems = { xi.ki.COSMO_CLEANSE, xi.ki.WHITE_CARD, message = ID.text.YOU_INSERT_THE_CARD_POLISHED },
-    requiredItems    = { xi.items.IVORY_CHIP },
-    name             = "CENTRAL_TEMENOS_3RD_FLOOR",
+    requiredItems    = { xi.item.IVORY_CHIP },
+    name             = 'CENTRAL_TEMENOS_3RD_FLOOR',
 })
 
 function content:handleWeakenBoss(name, battlefield, mob)
@@ -30,7 +28,7 @@ function content:handleWeakenBoss(name, battlefield, mob)
 end
 
 function content:handleStrengthenBosses(bonusMod, amount, battlefield, mob, count)
-    local bosses = { "Abyssdweller_Jhabdebb", "Orichalcum_Quadav", "Pee_Qoho_the_Python" }
+    local bosses = { 'Abyssdweller_Jhabdebb', 'Orichalcum_Quadav', 'Pee_Qoho_the_Python' }
 
     for _, name in ipairs(bosses) do
         local boss = mob:getZone():queryEntitiesByName(name)[1]
@@ -47,44 +45,44 @@ content.groups =
     {
         mobs =
         {
-            "Abyssdweller_Jhabdebb",
-            "Orichalcum_Quadav",
-            "Pee_Qoho_the_Python",
-            "Grognard_Mesmerizer",
-            "Grognard_Footsoldier",
-            "Grognard_Predator",
-            "Grognard_Neckchopper",
-            "Grognard_Grappler",
-            "Grognard_Impaler",
-            "Star_Ruby_Quadav",
-            "Fossil_Quadav",
-            "Whitegold_Quadav",
-            "Wootz_Quadav",
-            "Star_Sapphire_Quadav",
-            "Lightsteel_Quadav",
-            "Yagudo_Archpriest",
-            "Yagudo_Disciplinant",
-            "Yagudo_Kapellmeister",
-            "Yagudo_Knight_Templar",
-            "Yagudo_Prelatess",
-            "Yagudo_Eradicator",
+            'Abyssdweller_Jhabdebb',
+            'Orichalcum_Quadav',
+            'Pee_Qoho_the_Python',
+            'Grognard_Mesmerizer',
+            'Grognard_Footsoldier',
+            'Grognard_Predator',
+            'Grognard_Neckchopper',
+            'Grognard_Grappler',
+            'Grognard_Impaler',
+            'Star_Ruby_Quadav',
+            'Fossil_Quadav',
+            'Whitegold_Quadav',
+            'Wootz_Quadav',
+            'Star_Sapphire_Quadav',
+            'Lightsteel_Quadav',
+            'Yagudo_Archpriest',
+            'Yagudo_Disciplinant',
+            'Yagudo_Kapellmeister',
+            'Yagudo_Knight_Templar',
+            'Yagudo_Prelatess',
+            'Yagudo_Eradicator',
         },
 
-        mixins = { require("scripts/mixins/job_special") }
+        mixins = { require('scripts/mixins/job_special') }
     },
 
     {
-        mobs    = { "Yagudos_Avatar" },
-        mixins  = { require("scripts/mixins/families/avatar") },
+        mobs    = { 'Yagudos_Avatar' },
+        mixins  = { require('scripts/mixins/families/avatar') },
         spawned = false,
     },
 
     {
         mobs =
         {
-            "Yagudos_Elemental",
-            "Yagudos_Avatar",
-            "Orcs_Wyvern",
+            'Yagudos_Elemental',
+            'Yagudos_Avatar',
+            'Orcs_Wyvern',
         },
         spawned = false,
     },
@@ -92,66 +90,66 @@ content.groups =
     {
         mobs =
         {
-            "Grognard_Mesmerizer",
-            "Grognard_Footsoldier",
-            "Grognard_Predator",
-            "Grognard_Neckchopper",
-            "Grognard_Grappler",
-            "Grognard_Impaler",
+            'Grognard_Mesmerizer',
+            'Grognard_Footsoldier',
+            'Grognard_Predator',
+            'Grognard_Neckchopper',
+            'Grognard_Grappler',
+            'Grognard_Impaler',
         },
 
-        allDeath = utils.bind(content.handleWeakenBoss, content, "Abyssdweller_Jhabdebb"),
+        allDeath = utils.bind(content.handleWeakenBoss, content, 'Abyssdweller_Jhabdebb'),
     },
 
     {
         mobs =
         {
-            "Star_Ruby_Quadav",
-            "Fossil_Quadav",
-            "Whitegold_Quadav",
-            "Wootz_Quadav",
-            "Star_Sapphire_Quadav",
-            "Lightsteel_Quadav",
+            'Star_Ruby_Quadav',
+            'Fossil_Quadav',
+            'Whitegold_Quadav',
+            'Wootz_Quadav',
+            'Star_Sapphire_Quadav',
+            'Lightsteel_Quadav',
         },
 
-        allDeath = utils.bind(content.handleWeakenBoss, content, "Orichalcum_Quadav"),
+        allDeath = utils.bind(content.handleWeakenBoss, content, 'Orichalcum_Quadav'),
     },
 
     {
         mobs =
         {
-            "Yagudo_Archpriest",
-            "Yagudo_Disciplinant",
-            "Yagudo_Kapellmeister",
-            "Yagudo_Knight_Templar",
-            "Yagudo_Prelatess",
-            "Yagudo_Eradicator",
+            'Yagudo_Archpriest',
+            'Yagudo_Disciplinant',
+            'Yagudo_Kapellmeister',
+            'Yagudo_Knight_Templar',
+            'Yagudo_Prelatess',
+            'Yagudo_Eradicator',
         },
 
-        allDeath = utils.bind(content.handleWeakenBoss, content, "Pee_Qoho_the_Python"),
+        allDeath = utils.bind(content.handleWeakenBoss, content, 'Pee_Qoho_the_Python'),
     },
 
     {
-        mobs  = { "Abyssdweller_Jhabdebb" },
+        mobs  = { 'Abyssdweller_Jhabdebb' },
         death = utils.bind(content.handleStrengthenBosses, content, xi.mod.ATTP, 50),
     },
 
     {
-        mobs  = { "Orichalcum_Quadav" },
+        mobs  = { 'Orichalcum_Quadav' },
         death = utils.bind(content.handleStrengthenBosses, content, xi.mod.UDMGPHYS, 5000),
     },
 
     {
-        mobs  = { "Pee_Qoho_the_Python" },
+        mobs  = { 'Pee_Qoho_the_Python' },
         death = utils.bind(content.handleStrengthenBosses, content, xi.mod.UDMGMAGIC, 5000),
     },
 
     {
         mobs =
         {
-            "Abyssdweller_Jhabdebb",
-            "Orichalcum_Quadav",
-            "Pee_Qoho_the_Python",
+            'Abyssdweller_Jhabdebb',
+            'Orichalcum_Quadav',
+            'Pee_Qoho_the_Python',
         },
 
         mods =
@@ -174,47 +172,47 @@ content.loot =
     {
         {
             quantity = 4,
-            { item = xi.items.ANCIENT_BEASTCOIN, weight = xi.loot.weight.NORMAL },
+            { item = xi.item.ANCIENT_BEASTCOIN, weight = xi.loot.weight.NORMAL },
         },
 
         {
-            { item = xi.items.UTOPIAN_GOLD_THREAD,      weight = xi.loot.weight.NORMAL },
-            { item = xi.items.CHUNK_OF_SNOWY_CERMET,    weight = xi.loot.weight.NORMAL },
-            { item = xi.items.SPOOL_OF_SCARLET_ODOSHI,  weight = xi.loot.weight.NORMAL },
-            { item = xi.items.SPOOL_OF_SILKWORM_THREAD, weight = xi.loot.weight.NORMAL },
+            { item = xi.item.UTOPIAN_GOLD_THREAD,      weight = xi.loot.weight.NORMAL },
+            { item = xi.item.CHUNK_OF_SNOWY_CERMET,    weight = xi.loot.weight.NORMAL },
+            { item = xi.item.SPOOL_OF_SCARLET_ODOSHI,  weight = xi.loot.weight.NORMAL },
+            { item = xi.item.SPOOL_OF_SILKWORM_THREAD, weight = xi.loot.weight.NORMAL },
         },
 
         {
-            { item = xi.items.NONE,                      weight = xi.loot.weight.VERY_HIGH },
-            { item = xi.items.SQUARE_OF_BENEDICT_SILK,   weight = xi.loot.weight.LOW       },
-            { item = xi.items.SQUARE_OF_DIABOLIC_SILK,   weight = xi.loot.weight.LOW       },
-            { item = xi.items.SPOOL_OF_RUBY_SILK_THREAD, weight = xi.loot.weight.LOW       },
-            { item = xi.items.SQUARE_OF_BRILLIANTINE,    weight = xi.loot.weight.LOW       },
+            { item = xi.item.NONE,                      weight = xi.loot.weight.VERY_HIGH },
+            { item = xi.item.SQUARE_OF_BENEDICT_SILK,   weight = xi.loot.weight.LOW       },
+            { item = xi.item.SQUARE_OF_DIABOLIC_SILK,   weight = xi.loot.weight.LOW       },
+            { item = xi.item.SPOOL_OF_RUBY_SILK_THREAD, weight = xi.loot.weight.LOW       },
+            { item = xi.item.SQUARE_OF_BRILLIANTINE,    weight = xi.loot.weight.LOW       },
         },
 
         {
-            { item = xi.items.NONE,                     weight = xi.loot.weight.VERY_HIGH },
-            { item = xi.items.SPOOL_OF_COILED_YARN,     weight = xi.loot.weight.LOW       },
-            { item = xi.items.SPOOL_OF_CHAMELEON_YARN,  weight = xi.loot.weight.LOW       },
-            { item = xi.items.PLAITED_CORD,             weight = xi.loot.weight.LOW       },
-            { item = xi.items.SPOOL_OF_LUMINIAN_THREAD, weight = xi.loot.weight.LOW       },
+            { item = xi.item.NONE,                     weight = xi.loot.weight.VERY_HIGH },
+            { item = xi.item.SPOOL_OF_COILED_YARN,     weight = xi.loot.weight.LOW       },
+            { item = xi.item.SPOOL_OF_CHAMELEON_YARN,  weight = xi.loot.weight.LOW       },
+            { item = xi.item.PLAITED_CORD,             weight = xi.loot.weight.LOW       },
+            { item = xi.item.SPOOL_OF_LUMINIAN_THREAD, weight = xi.loot.weight.LOW       },
         },
 
         {
-            { item = xi.items.NONE,                     weight = xi.loot.weight.VERY_HIGH },
-            { item = xi.items.DARK_ORICHALCUM_INGOT,    weight = xi.loot.weight.LOW       },
-            { item = xi.items.SPOOL_OF_GLITTERING_YARN, weight = xi.loot.weight.LOW       },
-            { item = xi.items.SHEET_OF_COBALT_MYTHRIL,  weight = xi.loot.weight.LOW       },
-            { item = xi.items.PANTIN_WIRE,              weight = xi.loot.weight.LOW       },
+            { item = xi.item.NONE,                     weight = xi.loot.weight.VERY_HIGH },
+            { item = xi.item.DARK_ORICHALCUM_INGOT,    weight = xi.loot.weight.LOW       },
+            { item = xi.item.SPOOL_OF_GLITTERING_YARN, weight = xi.loot.weight.LOW       },
+            { item = xi.item.SHEET_OF_COBALT_MYTHRIL,  weight = xi.loot.weight.LOW       },
+            { item = xi.item.PANTIN_WIRE,              weight = xi.loot.weight.LOW       },
         },
 
         {
-            { item = xi.items.SILVER_CHIP, weight = xi.loot.weight.NORMAL },
+            { item = xi.item.SILVER_CHIP, weight = xi.loot.weight.NORMAL },
         },
 
         {
-            { item = xi.items.NONE,       weight = xi.loot.weight.VERY_HIGH },
-            { item = xi.items.METAL_CHIP, weight = xi.loot.weight.VERY_LOW  },
+            { item = xi.item.NONE,       weight = xi.loot.weight.VERY_HIGH },
+            { item = xi.item.METAL_CHIP, weight = xi.loot.weight.VERY_LOW  },
         },
     }
 }

@@ -2,7 +2,7 @@
 -- Area: Temple of Uggalepih
 --  Mob: Temple Guardian
 -----------------------------------
-local ID = require("scripts/zones/Temple_of_Uggalepih/IDs")
+local ID = zones[xi.zone.TEMPLE_OF_UGGALEPIH]
 -----------------------------------
 local entity = {}
 

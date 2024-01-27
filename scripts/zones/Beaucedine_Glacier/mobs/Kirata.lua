@@ -2,9 +2,6 @@
 -- Area: Beaucedine Glacier (111)
 --   NM: Kirata
 -----------------------------------
-require("scripts/globals/mobs")
-require("scripts/globals/hunts")
------------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)
@@ -17,6 +14,7 @@ end
 
 entity.onMobDeath = function(mob, player, optParams)
     xi.hunts.checkHunt(mob, player, 311)
+    xi.magian.onMobDeath(mob, player, optParams, set{ 432 })
 end
 
 return entity

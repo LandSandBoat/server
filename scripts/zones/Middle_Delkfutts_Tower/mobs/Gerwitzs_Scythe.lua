@@ -3,8 +3,7 @@
 --   NM: Gerwitz's Scythe
 -- Involved In Quest: Blade of Evil
 -----------------------------------
-mixins = { require("scripts/mixins/job_special") }
-require("scripts/globals/mobs")
+mixins = { require('scripts/mixins/job_special') }
 -----------------------------------
 local entity = {}
 

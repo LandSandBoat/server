@@ -4,11 +4,6 @@
 -- Log ID: 1, Quest ID: 39
 -- Gerbaum : !pos -119.899 -3.492 -74.651 234
 -----------------------------------
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
-require('scripts/globals/titles')
-require('scripts/globals/interaction/quest')
------------------------------------
 
 local quest = Quest:new(xi.quest.log_id.BASTOK, xi.quest.id.bastok.MINESWEEPER)
 
@@ -50,7 +45,7 @@ quest.sections =
             ['Gerbaum'] =
             {
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, { { xi.items.PINCH_OF_ZERUHN_SOOT, 3 } }) then
+                    if npcUtil.tradeHasExactly(trade, { { xi.item.PINCH_OF_ZERUHN_SOOT, 3 } }) then
                         return quest:progressEvent(109)
                     end
                 end,

@@ -1,4 +1,4 @@
-﻿/*
+/*
 ===========================================================================
   Copyright (c) 2010-2015 Darkstar Dev Teams
   This program is free software: you can redistribute it and/or modify
@@ -234,11 +234,19 @@ enum class Mod
     TACTICAL_GUARD = 899, // Tp increase when guarding
     GUARD_PERCENT  = 976, // Guard Percent
 
-    HASTE_MAGIC             = 167, // Haste (and Slow) from magic - 10000 base, 375 = 3.75%
-    HASTE_ABILITY           = 383, // Haste (and Slow) from abilities - 10000 base, 375 = 3.75%
-    HASTE_GEAR              = 384, // Haste (and Slow) from equipment - 10000 base, 375 = 3.75%
-    SPELLINTERRUPT          = 168, // % Spell Interruption Rate
-    MOVE                    = 169, // % Movement Speed
+    HASTE_MAGIC    = 167, // Haste (and Slow) from magic - 10000 base, 375 = 3.75%
+    HASTE_ABILITY  = 383, // Haste (and Slow) from abilities - 10000 base, 375 = 3.75%
+    HASTE_GEAR     = 384, // Haste (and Slow) from equipment - 10000 base, 375 = 3.75%
+    SPELLINTERRUPT = 168, // % Spell Interruption Rate
+
+    // New movement speed modifiers.
+    MOVE_SPEED_OVERIDE        = 169, // Modifier used to overide regular speed caps. (GM speed and Feast of Swords)
+    MOVE_SPEED_STACKABLE      = 75,  // Gear movement speed penalties, flee bonus, etc.
+    MOVE_SPEED_GEAR_BONUS     = 76,  // Gear movement speed bonuses. DOES NOT STACK with each other, only highest applies.
+    MOVE_SPEED_WEIGHT_PENALTY = 77,  // For Gravity and curse.
+    MOVE_SPEED_QUICKENING     = 78,  // Jig, spreinter shoes, etc. Only highest of Mazurka OR quickening will take effect.
+    MOVE_SPEED_MAZURKA        = 79,  // Song movement speed. Only highest of Mazurka OR quickening will take effect.
+
     MOUNT_MOVE              = 972, // % Mount Movement Speed
     FASTCAST                = 170, // Increases Spell Cast Time (TRAIT)
     UFASTCAST               = 407, // uncapped fast cast
@@ -374,7 +382,7 @@ enum class Mod
     AFFLATUS_SOLACE  = 293, // Pool of HP accumulated during Afflatus Solace
     AFFLATUS_MISERY  = 294, // Pool of HP accumulated during Afflatus Misery
     AUSPICE_EFFECT   = 484, // Bonus to Auspice Subtle Blow Effect.
-    AOE_NA           = 524, // Set to 1 to make -na spells/erase always AoE w/ Divine Veil
+    AOE_NA           = 524, // % to make -na spells/erase always AoE w/ Divine Veil
     REGEN_MULTIPLIER = 838, // Multiplier to base regen rate
     CURE2MP_PERCENT  = 860, // Converts % of "Cure" amount to MP
     DIVINE_BENISON   = 910, // Adds fast cast and enmity reduction to -Na spells (includes Erase). Enmity reduction is half of the fast cast amount
@@ -447,7 +455,8 @@ enum class Mod
     CHARM_CHANCE        = 391,  // extra chance to charm (light+apollo staff ect)
     FERAL_HOWL_DURATION = 503,  // +20% duration per merit when wearing augmented Monster Jackcoat +2
     JUG_LEVEL_RANGE     = 564,  // Decreases the level range of spawned jug pets. Maxes out at 2.
-    SIC_READY_RECAST    = 1052, // TODO: SIC/Ready recast reduction (seconds)
+    CALL_BEAST_DELAY    = 572,  // Lowers Call Beast recast
+    SIC_READY_RECAST    = 1052, // SIC/Ready recast reduction (seconds)
 
     // Bard
     MINNE_EFFECT           = 433,  //
@@ -483,6 +492,7 @@ enum class Mod
     RAPID_SHOT              = 359,  // Percent chance to proc rapid shot
     WIDESCAN                = 340,  //
     BARRAGE_ACC             = 420,  // Barrage accuracy
+    BARRAGE_COUNT           = 138,  // Increases Barrage shots by 1
     DOUBLE_SHOT_RATE        = 422,  // The rate that double shot can proc. Without this, the default is 40%.
     VELOCITY_SNAPSHOT_BONUS = 423,  // Increases Snapshot whilst Velocity Shot is up.
     VELOCITY_RATT_BONUS     = 424,  // Increases Ranged Attack whilst Velocity Shot is up.
@@ -544,6 +554,8 @@ enum class Mod
     CARBUNCLE_LVL_BONUS       = 1041, // Carbuncle: Lv.+ (Increases Carbuncle's base level above 99)
     CAIT_SITH_LVL_BONUS       = 1042, // Cait Sith: Lv.+ (Increases Cait Sith's base level above 99)
     ENHANCES_MANA_CEDE        = 74,   // Bonus % to Mana Cede effect, +1 = 1%
+    SUMMONING_MAGIC_CAST      = 1078, // Summoning magic casting time reduction in seconds
+    SPIRIT_CAST_REDUCTION     = 140,  // Spirit Pact casting time reduction in seconds
 
     // Blue Mage
     BLUE_POINTS          = 309,  // Tracks extra blue points
@@ -556,43 +568,45 @@ enum class Mod
     ROLL_RANGE        = 528,  // Additional range for COR roll abilities.
     JOB_BONUS_CHANCE  = 542,  // Chance to apply job bonus to COR roll without having the job in the party.
     TRIPLE_SHOT_RATE  = 999,  // Percent increase to Triple Shot Rate
-    QUICK_DRAW_RECAST = 1060, // TODO: Quick Draw Charge Reduction (seconds)
+    QUICK_DRAW_RECAST = 1060, // Quick Draw Charge Reduction (seconds)
 
-    DMG_REFLECT            = 316, // Tracks totals
-    ROLL_ROGUES            = 317, // Tracks totals
-    ROLL_GALLANTS          = 318, // Tracks totals
-    ROLL_CHAOS             = 319, // Tracks totals
-    ROLL_BEAST             = 320, // Tracks totals
-    ROLL_CHORAL            = 321, // Tracks totals
-    ROLL_HUNTERS           = 322, // Tracks totals
-    ROLL_SAMURAI           = 323, // Tracks totals
-    ROLL_NINJA             = 324, // Tracks totals
-    ROLL_DRACHEN           = 325, // Tracks totals
-    ROLL_EVOKERS           = 326, // Tracks totals
-    ROLL_MAGUS             = 327, // Tracks totals
-    ROLL_CORSAIRS          = 328, // Tracks totals
-    ROLL_PUPPET            = 329, // Tracks totals
-    ROLL_DANCERS           = 330, // Tracks totals
-    ROLL_SCHOLARS          = 331, // Tracks totals
-    ROLL_BOLTERS           = 869, // Tracks totals
-    ROLL_CASTERS           = 870, // Tracks totals
-    ROLL_COURSERS          = 871, // Tracks totals
-    ROLL_BLITZERS          = 872, // Tracks totals
-    ROLL_TACTICIANS        = 873, // Tracks totals
-    ROLL_ALLIES            = 874, // Tracks totals
-    ROLL_MISERS            = 875, // Tracks totals
-    ROLL_COMPANIONS        = 876, // Tracks totals
-    ROLL_AVENGERS          = 877, // Tracks totals
-    ROLL_NATURALISTS       = 878, // Tracks totals
-    ROLL_RUNEISTS          = 879, // Tracks totals
-    BUST                   = 332, // # of busts
-    QUICK_DRAW_DMG         = 411, // Flat damage increase to base QD damage
-    QUICK_DRAW_DMG_PERCENT = 834, // Percentage increase to QD damage
-    QUICK_DRAW_MACC        = 191, // Quick draw magic accuracy
-    PHANTOM_ROLL           = 881, // Phantom Roll+ Effect from SOA Rings.
-    PHANTOM_DURATION       = 882, // Phantom Roll Duration +.
+    DMG_REFLECT            = 316,  // Tracks totals
+    ROLL_ROGUES            = 317,  // Tracks totals
+    ROLL_GALLANTS          = 318,  // Tracks totals
+    ROLL_CHAOS             = 319,  // Tracks totals
+    ROLL_BEAST             = 320,  // Tracks totals
+    ROLL_CHORAL            = 321,  // Tracks totals
+    ROLL_HUNTERS           = 322,  // Tracks totals
+    ROLL_SAMURAI           = 323,  // Tracks totals
+    ROLL_NINJA             = 324,  // Tracks totals
+    ROLL_DRACHEN           = 325,  // Tracks totals
+    ROLL_EVOKERS           = 326,  // Tracks totals
+    ROLL_MAGUS             = 327,  // Tracks totals
+    ROLL_CORSAIRS          = 328,  // Tracks totals
+    ROLL_PUPPET            = 329,  // Tracks totals
+    ROLL_DANCERS           = 330,  // Tracks totals
+    ROLL_SCHOLARS          = 331,  // Tracks totals
+    ROLL_BOLTERS           = 869,  // Tracks totals
+    ROLL_CASTERS           = 870,  // Tracks totals
+    ROLL_COURSERS          = 871,  // Tracks totals
+    ROLL_BLITZERS          = 872,  // Tracks totals
+    ROLL_TACTICIANS        = 873,  // Tracks totals
+    ROLL_ALLIES            = 874,  // Tracks totals
+    ROLL_MISERS            = 875,  // Tracks totals
+    ROLL_COMPANIONS        = 876,  // Tracks totals
+    ROLL_AVENGERS          = 877,  // Tracks totals
+    ROLL_NATURALISTS       = 878,  // Tracks totals
+    ROLL_RUNEISTS          = 879,  // Tracks totals
+    BUST                   = 332,  // # of busts
+    QUICK_DRAW_DMG         = 411,  // Flat damage increase to base QD damage
+    QUICK_DRAW_DMG_PERCENT = 834,  // Percentage increase to QD damage
+    QUICK_DRAW_MACC        = 191,  // Quick draw magic accuracy
+    PHANTOM_ROLL           = 881,  // Phantom Roll+ Effect from SOA Rings.
+    PHANTOM_DURATION       = 882,  // Phantom Roll Duration +.
+    PHANTOM_RECAST         = 1076, // Phantom Roll Recast -.
 
     // Puppetmaster
+    AUTO_MAB_COEFFICIENT        = 157,  // Applies a MAB multiplier to automatons. This value is the bonus %.
     MANEUVER_BONUS              = 504,  // Maneuver Stat Bonus
     OVERLOAD_THRESH             = 505,  // Overload Threshold Bonus
     AUTO_DECISION_DELAY         = 842,  // Reduces the Automaton's global decision delay
@@ -620,17 +634,19 @@ enum class Mod
     AUTOMATON_LVL_BONUS         = 1044, // Automaton: Lv. (Increases automaton's base level above 99)
 
     // Dancer
-    FINISHING_MOVES          = 333, // Tracks # of finishing moves
-    SAMBA_DURATION           = 490, // Samba duration bonus
-    WALTZ_POTENCY            = 491, // Waltz Potency Bonus
-    JIG_DURATION             = 492, // Jig duration bonus in percents
-    VFLOURISH_MACC           = 493, // Violent Flourish accuracy bonus
-    STEP_FINISH              = 494, // Bonus finishing moves from steps
-    STEP_ACCURACY            = 403, // Bonus accuracy for Dancer's steps
-    WALTZ_DELAY              = 497, // Waltz Ability Delay modifier (-1 mod is -1 second)
-    SAMBA_PDURATION          = 498, // Samba percent duration bonus
-    REVERSE_FLOURISH_EFFECT  = 836, // Reverse Flourish effect in tenths of squared term multiplier
-    MAX_FINISHING_MOVE_BONUS = 988, // Increases the maximum number of finishing moves that may be stored
+    FINISHING_MOVES          = 333,  // Tracks # of finishing moves
+    SAMBA_DURATION           = 490,  // Samba duration bonus
+    WALTZ_POTENCY            = 491,  // Waltz Potency Bonus
+    JIG_DURATION             = 492,  // Jig duration bonus in percents
+    VFLOURISH_MACC           = 493,  // Violent Flourish accuracy bonus
+    STEP_FINISH              = 494,  // Bonus finishing moves from steps
+    STEP_ACCURACY            = 403,  // Bonus accuracy for Dancer's steps
+    WALTZ_DELAY              = 497,  // Waltz Ability Delay modifier (-1 mod is -1 second)
+    SAMBA_PDURATION          = 498,  // Samba percent duration bonus
+    REVERSE_FLOURISH_EFFECT  = 836,  // Reverse Flourish effect in tenths of squared term multiplier
+    MAX_FINISHING_MOVE_BONUS = 988,  // Increases the maximum number of finishing moves that may be stored
+    WALTZ_COST               = 139,  // Reduce Waltz cost by 5tp (50 post 1000tp scale)
+    STEP_TP_CONSUMED         = 1077, // Modifies the amount of TP consumed when using steps
 
     // Scholar
     BLACK_MAGIC_COST         = 393, // MP cost for black magic (light/dark arts)
@@ -666,12 +682,13 @@ enum class Mod
     LIFE_CYCLE_EFFECT    = 1029, // Adds bonus HP% returned to the luopan when using Life Cycle
     AURA_SIZE            = 1030, // Used to extend aura size, the formula is 6.25 + (PEntity->getMod(Mod::AURA_SIZE) / 100) so adding 100 will make this 7.25
 
-    ENSPELL           = 341, // stores the type of enspell active (0 if nothing)
-    ENSPELL_DMG       = 343, // stores the base damage of the enspell before reductions
-    ENSPELL_DMG_BONUS = 432, //
-    ENSPELL_CHANCE    = 856, // Chance of enspell activating (0 = 100%, 10 = 10%, 30 = 30%, ...)
-    SPIKES            = 342, // store the type of spike spell active (0 if nothing)
-    SPIKES_DMG        = 344, // stores the base damage of the spikes before reductions
+    ENSPELL           = 341,  // stores the type of enspell active (0 if nothing)
+    ENSPELL_DMG       = 343,  // stores the base damage of the enspell before reductions
+    ENSPELL_DMG_BONUS = 432,  //
+    ENSPELL_CHANCE    = 856,  // Chance of enspell activating (0 = 100%, 10 = 10%, 30 = 30%, ...)
+    SPIKES            = 342,  // store the type of spike spell active (0 if nothing)
+    SPIKES_DMG        = 344,  // stores the base damage of the spikes before reductions
+    SPIKES_DMG_BONUS  = 1079, // Increases Blaze/Ice/Shock spikes damage by percentage (e.g. mod value 50 = +50% spikes damage)
 
     TP_BONUS    = 345, //
     SAVETP      = 880, // SAVETP Effect for Miser's Roll / ATMA / Hagakure.
@@ -835,8 +852,10 @@ enum class Mod
     MYTHIC_OCC_ATT_TWICE  = 865, // Proc rate for "Occasionally attacks twice"
     MYTHIC_OCC_ATT_THRICE = 866, // Proc rate for "Occasionally attacks thrice"
 
-    EAT_RAW_FISH = 412, //
-    EAT_RAW_MEAT = 413, //
+    APPRECIATE_GYSAHL_GREENS = 156, // Enhances food effect of Gysahl Greens
+
+    EAT_RAW_FISH = 412, // Without this, only Mithra can eat raw fish.
+    EAT_RAW_MEAT = 413, // Without this, only Galka can eat raw meat.
 
     ENHANCES_CURSNA_RCVD     = 67,   // Potency of "Cursna" effects received
     ENHANCES_CURSNA          = 310,  // Used by gear with the "Enhances Cursna" or "Cursna+" attribute
@@ -977,13 +996,12 @@ enum class Mod
     // 570 through 825 used by WS DMG mods these are not spares.
     //
     // SPARE IDs:
-    // 75 to 79
-    // 138 to 143
-    // 156 to 159
+    // 141 to 143
+    // 158, 159
     // 217 to 223
     // 271 to 280
     //
-    // SPARE = 1076 and onward
+    // SPARE = 1080 and onward
 };
 
 // temporary workaround for using enum class as unordered_map key until compilers support it

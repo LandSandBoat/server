@@ -3,8 +3,7 @@
 --  Mob: Orcish Grunt
 -- Note: PH for Supplespine Mujwuj
 -----------------------------------
-local ID = require("scripts/zones/Jugner_Forest/IDs")
-require("scripts/globals/mobs")
+local ID = zones[xi.zone.JUGNER_FOREST]
 -----------------------------------
 local entity = {}
 

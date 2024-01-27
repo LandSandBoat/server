@@ -3,14 +3,13 @@
 --  NPC: ??? (Spawn Tyger(ZNM T4))
 -- !pos -766 -12 632 79
 -----------------------------------
-local ID = require("scripts/zones/Caedarva_Mire/IDs")
-require("scripts/globals/npc_util")
+local ID = zones[xi.zone.CAEDARVA_MIRE]
 -----------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     if
-        npcUtil.tradeHas(trade, xi.items.CHUNK_OF_SINGED_BUFFALO) and
+        npcUtil.tradeHas(trade, xi.item.CHUNK_OF_SINGED_BUFFALO) and
         npcUtil.popFromQM(player, npc, ID.mob.TYGER)
     then
         player:confirmTrade()

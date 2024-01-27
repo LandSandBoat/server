@@ -27,7 +27,7 @@ CREATE TABLE `traits` (
   `content_tag` varchar(7) DEFAULT NULL,
   `meritid` smallint(5) NOT NULL DEFAULT 0,
   PRIMARY KEY (`traitid`,`job`,`level`,`rank`,`modifier`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
+) ENGINE=Aria TRANSACTIONAL=0 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --

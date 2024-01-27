@@ -4,9 +4,6 @@
 -- QM8, Wajaom Woodlands, !pos 416 -24 220 51
 -- QM4, Mamook, !pos 347 -12 -256 65
 -----------------------------------
-require('scripts/globals/quests')
-require('scripts/globals/interaction/quest')
-require('scripts/globals/npc_util')
 -- require('cripts/globals/weather')
 -----------------------------------
 
@@ -14,7 +11,7 @@ local quest = Quest:new(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.GIVE_P
 
 quest.reward =
 {
-    item = xi.items.IMPERIAL_SILVER_PIECE,
+    item = xi.item.IMPERIAL_SILVER_PIECE,
 }
 
 quest.sections =
@@ -75,7 +72,7 @@ quest.sections =
                 [576] = function(player, csid, option, npc)
                     if quest:complete(player) then
                         player:needToZone(true)
-                        player:setVar("Quest[6][30]Stage", getMidnight())
+                        player:setVar('Quest[6][30]Stage', getMidnight())
                     end
                 end,
             },

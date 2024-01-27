@@ -1,13 +1,8 @@
 -----------------------------------
 -- Area: Windurst Walls
 -- Door: House of the Hero
--- Involved in Mission 2-1
 -- Involved In Quest: Know One's Onions, Onion Rings, The Puppet Master, Class Reunion
 -- !pos -26 -13 260 239
------------------------------------
-local ID = require("scripts/zones/Windurst_Walls/IDs")
-require("scripts/globals/missions")
-require("scripts/globals/quests")
 -----------------------------------
 local entity = {}
 
@@ -24,11 +19,11 @@ entity.onTrigger = function(player, npc)
     if
         iCanHearARainbow == QUEST_AVAILABLE and
         player:getMainLvl() >= 30 and
-        player:hasItem(xi.items.CARBUNCLES_RUBY)
+        player:hasItem(xi.item.CARBUNCLES_RUBY)
     then
-        player:startEvent(384, xi.items.CARBUNCLES_RUBY, xi.items.CARBUNCLES_RUBY, xi.items.CARBUNCLES_RUBY, xi.items.CARBUNCLES_RUBY, xi.items.CARBUNCLES_RUBY, xi.items.CARBUNCLES_RUBY, xi.items.CARBUNCLES_RUBY, xi.items.CARBUNCLES_RUBY)
+        player:startEvent(384, xi.item.CARBUNCLES_RUBY, xi.item.CARBUNCLES_RUBY, xi.item.CARBUNCLES_RUBY, xi.item.CARBUNCLES_RUBY, xi.item.CARBUNCLES_RUBY, xi.item.CARBUNCLES_RUBY, xi.item.CARBUNCLES_RUBY, xi.item.CARBUNCLES_RUBY)
     elseif iCanHearARainbow == QUEST_ACCEPTED then
-        player:startEvent(385, xi.items.CARBUNCLES_RUBY, xi.items.CARBUNCLES_RUBY, xi.items.CARBUNCLES_RUBY, xi.items.CARBUNCLES_RUBY, xi.items.CARBUNCLES_RUBY, xi.items.CARBUNCLES_RUBY, xi.items.CARBUNCLES_RUBY, xi.items.CARBUNCLES_RUBY)
+        player:startEvent(385, xi.item.CARBUNCLES_RUBY, xi.item.CARBUNCLES_RUBY, xi.item.CARBUNCLES_RUBY, xi.item.CARBUNCLES_RUBY, xi.item.CARBUNCLES_RUBY, xi.item.CARBUNCLES_RUBY, xi.item.CARBUNCLES_RUBY, xi.item.CARBUNCLES_RUBY)
 
     -- CLASS REUNION
     elseif
@@ -65,12 +60,12 @@ entity.onEventFinish = function(player, csid, option, npc)
     elseif csid == 413 then
         player:addQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CLASS_REUNION)
         npcUtil.giveKeyItem(player, xi.ki.CARBUNCLES_TEAR)
-        player:setCharVar("ClassReunionProgress", 1)
+        player:setCharVar('ClassReunionProgress', 1)
 
     -- CARBUNCLE DEBACLE
     elseif csid == 415 then
         player:addQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CARBUNCLE_DEBACLE)
-        player:setCharVar("CarbuncleDebacleProgress", 1)
+        player:setCharVar('CarbuncleDebacleProgress', 1)
     end
 end
 

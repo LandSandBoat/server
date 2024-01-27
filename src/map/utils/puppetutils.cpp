@@ -127,6 +127,9 @@ namespace puppetutils
                     }
                 }
 
+                // After the Automaton has all attachments set, make sure we update for Optic Fiber
+                puppetutils::UpdateAttachments(PChar);
+
                 // Set burden based on JP
                 PChar->PAutomaton->setAllBurden(30 - PChar->PJobPoints->GetJobPointValue(JP_ACTIVATE_EFFECT));
 
@@ -567,7 +570,7 @@ namespace puppetutils
         {
             default: // case FRAME_HARLEQUIN:
                 ShowWarning("puppetutils::LoadAutomatonStats Invalid frame detected for '%s', used Harlequin instead! (%u)",
-                            PChar->GetName(), (uint16)PChar->PAutomaton->getFrame());
+                            PChar->getName(), (uint16)PChar->PAutomaton->getFrame());
             case FRAME_HARLEQUIN:
                 petutils::LoadPet(PChar, PETID_HARLEQUINFRAME, false);
                 break;
@@ -616,7 +619,7 @@ namespace puppetutils
                 uint8  SkillAmount = 1;
                 uint8  tier        = std::min(1 + (Diff / 5), 5);
 
-                for (uint8 i = 0; i < 4; ++i) // 1 + 4 возможных дополнительных (максимум 5)
+                for (uint8 i = 0; i < 4; ++i) // 1 + 4 possible additional ones (maximum 5)
                 {
                     random = xirand::GetRandomNumber(1.);
 
@@ -714,9 +717,7 @@ namespace puppetutils
                         }
                         else
                         {
-                            // Note: This is called before the new maneuver count is known.  Send GetStatusEffectsCount - 1 to reflect
-                            // the new value.
-                            luautils::OnManeuverLose(PAutomaton, PAttachment, PChar->StatusEffectContainer->GetEffectsCount(maneuver) - 1);
+                            luautils::OnManeuverLose(PAutomaton, PAttachment, PChar->StatusEffectContainer->GetEffectsCount(maneuver));
                         }
                     }
                 }

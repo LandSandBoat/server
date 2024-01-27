@@ -6,15 +6,13 @@
 -- !pos -560 5.00 239 35
 -- !pos -600 5.00 440 35
 -----------------------------------
-local ID = require("scripts/zones/The_Garden_of_RuHmet/IDs")
-mixins = { require("scripts/mixins/job_special") }
-require("scripts/globals/mobskills")
+mixins = { require('scripts/mixins/job_special') }
 -----------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(IxAernDrkMob)
-    IxAernDrkMob:addListener("DEATH", "AERN_DEATH", function(mob, killer)
-        local timesReraised = mob:getLocalVar("AERN_RERAISES")
+    IxAernDrkMob:addListener('DEATH', 'AERN_DEATH', function(mob, killer)
+        local timesReraised = mob:getLocalVar('AERN_RERAISES')
         if math.random (1, 10) < 10 then
             -- reraise
             local target = mob:getTarget()
@@ -57,7 +55,7 @@ entity.onMobInitialize = function(IxAernDrkMob)
                     end
                 end
 
-                mobArg:triggerListener("AERN_RERAISE", mobArg, timesReraised)
+                mobArg:triggerListener('AERN_RERAISE', mobArg, timesReraised)
             end)
         else
             -- death
@@ -67,8 +65,8 @@ entity.onMobInitialize = function(IxAernDrkMob)
         end
     end)
 
-    IxAernDrkMob:addListener("AERN_RERAISE", "IX_DRK_RERAISE", function(mob, timesReraised)
-        mob:setLocalVar("AERN_RERAISES", timesReraised + 1)
+    IxAernDrkMob:addListener('AERN_RERAISE', 'IX_DRK_RERAISE', function(mob, timesReraised)
+        mob:setLocalVar('AERN_RERAISES', timesReraised + 1)
         mob:timer(5000, function(mobArg)
             mobArg:setAnimationSub(1)
         end)
@@ -100,7 +98,7 @@ entity.onMobDeath = function(mob, player, optParams)
 end
 
 entity.onMobDespawn = function(mob)
-    mob:setLocalVar("AERN_RERAISES", 0)
+    mob:setLocalVar('AERN_RERAISES', 0)
 end
 
 return entity

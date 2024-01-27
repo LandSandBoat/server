@@ -3,8 +3,7 @@
 --  Mob: Ornery Sheep
 -- Note: PH for Carnero
 -----------------------------------
-local ID = require("scripts/zones/South_Gustaberg/IDs")
-require("scripts/globals/mobs")
+local ID = zones[xi.zone.SOUTH_GUSTABERG]
 -----------------------------------
 local entity = {}
 

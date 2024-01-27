@@ -1,9 +1,6 @@
 -----------------------------------
 -- Zone: Abyssea - La_Theine
 -----------------------------------
-local ID = require('scripts/zones/Abyssea-La_Theine/IDs')
-require('scripts/globals/abyssea')
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

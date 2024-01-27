@@ -9,11 +9,6 @@
 -- Harvesting Point : !pos 196.000 0.001 289.500 260
 -- Sickle           : !additem 1020
 -----------------------------------
-require('scripts/globals/quests')
-require('scripts/globals/helm')
-require('scripts/globals/interaction/quest')
-require('scripts/globals/npc_util')
------------------------------------
 
 local quest = Quest:new(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.FLAVORS_OF_OUR_LIVES)
 
@@ -37,7 +32,7 @@ quest.sections =
             ['Berghent'] =
             {
                 onTrigger = function(player, npc)
-                    if player:getLocalVar("Flavors_of_Our_Lives_Refused") == 1 then
+                    if player:getLocalVar('Flavors_of_Our_Lives_Refused') == 1 then
                         return quest:progressEvent(81)
                     else
                         return quest:progressEvent(80)
@@ -51,7 +46,7 @@ quest.sections =
                     if option == 1 then
                         quest:begin(player)
                     else -- Refused
-                        player:setLocalVar("Flavors_of_Our_Lives_Refused", 1)
+                        player:setLocalVar('Flavors_of_Our_Lives_Refused', 1)
                     end
                 end,
 

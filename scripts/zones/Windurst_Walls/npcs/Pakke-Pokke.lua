@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Windurst Walls
 --  NPC: Pakke-Pokke
--- Type: Standard NPC
 -- !pos -3.464 -17.25 125.635 239
 -----------------------------------
 local entity = {}

@@ -594,6 +594,7 @@
     SAVETP                       = 880, // SAVETP Effect for Miser's Roll / ATMA / Hagakure.
     PHANTOM_ROLL                 = 881, // Phantom Roll+ Effect from SOA Rings.
     PHANTOM_DURATION             = 882, // Phantom Roll Duration +.
+    PHANTOM_RECAST               = 1076, // Phantom Roll Recast -.
     PERFECT_DODGE                = 883, // Increases Perfect Dodge duration in seconds
     ACC_COLLAB_EFFECT            = 884, // Increases amount of enmity transferred for Accomplice/Collaborator
     HIDE_DURATION                = 885, // Hide duration increase (percentage based)
@@ -769,5 +770,5 @@
     // The following modifier should not ever be set, but %damage modifiers to weaponskills use the next 255 IDs (this modifier + the WSID)
     // For example, +10% damage to Chant du Cygne would be ID 570 + 225 (795)
 
-    // SPARE = 1047,
+    // SPARE = 1077,
 

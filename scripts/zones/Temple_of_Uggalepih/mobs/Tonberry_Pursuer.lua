@@ -2,8 +2,7 @@
 -- Area: Temple of Uggalepih
 --  Mob: Tonberry Pursuer
 -----------------------------------
-mixins = { require("scripts/mixins/families/tonberry") }
-require("scripts/globals/regimes")
+mixins = { require('scripts/mixins/families/tonberry') }
 -----------------------------------
 local entity = {}
 

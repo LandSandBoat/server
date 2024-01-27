@@ -81,7 +81,15 @@ CMessageStandardPacket::CMessageStandardPacket(CCharEntity* PChar, uint32 param0
 
             ref<uint8>(0x0C) = 0x10;
 
-            snprintf((char*)data + (0x0D), 24, "string2 %s", PChar->GetName().c_str());
+            snprintf((char*)data + (0x0D), 24, "string2 %s", PChar->getName().c_str());
+        }
+        else if (MessageID == MsgStd::MonstrosityCheckIn || MessageID == MsgStd::MonstrosityCheckOut)
+        {
+            this->setSize(0x20);
+
+            ref<uint16>(0x0A) = static_cast<uint16>(MessageID);
+
+            snprintf((char*)data + (0x0D), 24, "string2 %s", PChar->getName().c_str());
         }
     }
     else
@@ -110,7 +118,7 @@ CMessageStandardPacket::CMessageStandardPacket(CCharEntity* PChar, uint32 param0
 
     ref<uint16>(0x0A) = static_cast<uint16>(MessageID);
 
-    snprintf((char*)data + (0x0D), 40, "string2 %s string3 %u", PChar->GetName().c_str(), param0);
+    snprintf((char*)data + (0x0D), 40, "string2 %s string3 %u", PChar->getName().c_str(), param0);
 
     // ref<uint8>(data,(0x2F)) = 0x02;
 }

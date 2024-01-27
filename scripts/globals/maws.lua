@@ -1,10 +1,9 @@
 -----------------------------------
 -- Cavernous Maw global functions
 -----------------------------------
-require("scripts/globals/missions")
-require("scripts/globals/quests")
-require("scripts/globals/teleports")
-require("scripts/globals/titles")
+require('scripts/globals/missions')
+require('scripts/globals/quests')
+require('scripts/globals/teleports')
 -----------------------------------
 xi = xi or {}
 xi.maws = xi.maws or {}

@@ -1,4 +1,4 @@
-------------------------------------------------------------------------------
+-----------------------------------
 -- This global is intended to handle additional effects from item sources of:
 -- melee attacks, ranged attacks, auto-spikes
 -- Notes:
@@ -10,11 +10,11 @@
 -- In testing my fire sword had the same damage ranges no matter my level vs same mob.
 -- Weakness/resistance to element would swing damage range a lot
 -- For status effects is it possible to land on highly resistant mobs because of flooring.
-------------------------------------------------------------------------------
-require("scripts/globals/teleports") -- For warp weapon proc.
-require("scripts/globals/magic") -- For resist functions
-require("scripts/globals/utils") -- For clamping function
---------------------------------------
+-----------------------------------
+require('scripts/globals/teleports') -- For warp weapon proc.
+require('scripts/globals/magic') -- For resist functions
+require('scripts/globals/utils') -- For clamping function
+-----------------------------------
 xi = xi or {}
 xi.additionalEffect = xi.additionalEffect or {}
 
@@ -27,7 +27,7 @@ xi.additionalEffect.calcRangeBonus = function(attacker, defender, element, damag
     -- Copied from existing scripts. Todo: rework into additional modifier for dStat?
     local bonus = 0
 
-    if element == xi.magic.ele.LIGHT then
+    if element == xi.element.LIGHT then
         bonus = attacker:getStat(xi.mod.MND) - defender:getStat(xi.mod.MND)
         if bonus > 40 then
             bonus = bonus + (bonus - 40) / 2
@@ -247,11 +247,7 @@ xi.additionalEffect.attack = function(attacker, defender, baseAttackDamage, item
         end
 
     elseif addType == procType.SELF_BUFF then
-        if addStatus == xi.effect.TELEPORT then -- WARP
-            attacker:addStatusEffectEx(xi.effect.TELEPORT, 0, xi.teleport.id.WARP, 0, 1)
-            msgID    = xi.msg.basic.ADD_EFFECT_WARP
-            msgParam = 0
-        elseif addStatus == xi.effect.BLINK then -- BLINK http://www.ffxiah.com/item/18830/gusterion
+        if addStatus == xi.effect.BLINK then -- BLINK http://www.ffxiah.com/item/18830/gusterion
             -- Does not stack with or replace other shadows
             if
                 attacker:hasStatusEffect(xi.effect.BLINK) or
@@ -269,7 +265,7 @@ xi.additionalEffect.attack = function(attacker, defender, baseAttackDamage, item
             msgID    = xi.msg.basic.ADD_EFFECT_SELFBUFF
             msgParam = xi.effect.HASTE
         else
-            print("scripts/globals/additional_effects.lua : unhandled additional effect selfbuff! Effect ID: "..addStatus)
+            print('scripts/globals/additional_effects.lua : unhandled additional effect selfbuff! Effect ID: '..addStatus)
         end
 
     elseif addType == procType.DEATH then
@@ -289,11 +285,11 @@ xi.additionalEffect.attack = function(attacker, defender, baseAttackDamage, item
 
     --[[
     if msgID == nil then
-        print("Additional effect has a nil msgID !!")
+        print('Additional effect has a nil msgID !!')
     elseif msgParam == nil then
-        print("Additional effect has a nil msgParam !!")
+        print('Additional effect has a nil msgParam !!')
     end
-    print("subEffect: "..subEffect.." msgID: "..msgID.." msgParam: "..msgParam)
+    print('subEffect: '..subEffect..' msgID: '..msgID..' msgParam: '..msgParam)
     ]]
     return subEffect, msgID, msgParam
 end

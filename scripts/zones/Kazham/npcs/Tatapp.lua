@@ -3,8 +3,6 @@
 --  NPC: Tatapp
 -- Standard Merchant NPC
 -----------------------------------
-require("scripts/globals/pathfind")
------------------------------------
 local entity = {}
 
 local pathNodes =
@@ -99,18 +97,18 @@ entity.onTrade = function(player, npc, trade)
     -- 1147      Ancient Salt
     -- 4600      Lucky Egg
     local opoOpoAndIStatus = player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.THE_OPO_OPO_AND_I)
-    local progress = player:getCharVar("OPO_OPO_PROGRESS")
-    local failed = player:getCharVar("OPO_OPO_FAILED")
-    local goodtrade = trade:hasItemQty(xi.items.BLACKENED_TOAD, 1)
-    local badtrade = trade:hasItemQty(xi.items.BROKEN_MITHRAN_FISHING_ROD, 1) or
-        trade:hasItemQty(xi.items.WORKBENCH, 1) or
-        trade:hasItemQty(xi.items.HANDFUL_OF_THE_SANDS_OF_SILENCE, 1) or
-        trade:hasItemQty(xi.items.WANDERING_BULB, 1) or
-        trade:hasItemQty(xi.items.SET_OF_GIANT_FISH_BONES, 1) or
-        trade:hasItemQty(xi.items.TEN_OF_COINS_CARD, 1) or
-        trade:hasItemQty(xi.items.WYVERN_SKULL, 1) or
-        trade:hasItemQty(xi.items.ROCK_OF_ANCIENT_SALT, 1) or
-        trade:hasItemQty(xi.items.LUCKY_EGG, 1)
+    local progress = player:getCharVar('OPO_OPO_PROGRESS')
+    local failed = player:getCharVar('OPO_OPO_FAILED')
+    local goodtrade = trade:hasItemQty(xi.item.BLACKENED_TOAD, 1)
+    local badtrade = trade:hasItemQty(xi.item.BROKEN_MITHRAN_FISHING_ROD, 1) or
+        trade:hasItemQty(xi.item.WORKBENCH, 1) or
+        trade:hasItemQty(xi.item.HANDFUL_OF_THE_SANDS_OF_SILENCE, 1) or
+        trade:hasItemQty(xi.item.WANDERING_BULB, 1) or
+        trade:hasItemQty(xi.item.SET_OF_GIANT_FISH_BONES, 1) or
+        trade:hasItemQty(xi.item.TEN_OF_COINS_CARD, 1) or
+        trade:hasItemQty(xi.item.WYVERN_SKULL, 1) or
+        trade:hasItemQty(xi.item.ROCK_OF_ANCIENT_SALT, 1) or
+        trade:hasItemQty(xi.item.LUCKY_EGG, 1)
 
     if opoOpoAndIStatus == QUEST_ACCEPTED then
         if progress == 6 or failed == 7 then
@@ -125,9 +123,9 @@ end
 
 entity.onTrigger = function(player, npc)
     local opoOpoAndIStatus = player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.THE_OPO_OPO_AND_I)
-    local progress = player:getCharVar("OPO_OPO_PROGRESS")
-    local failed = player:getCharVar("OPO_OPO_FAILED")
-    local retry = player:getCharVar("OPO_OPO_RETRY")
+    local progress = player:getCharVar('OPO_OPO_PROGRESS')
+    local failed = player:getCharVar('OPO_OPO_FAILED')
+    local retry = player:getCharVar('OPO_OPO_RETRY')
 
     if opoOpoAndIStatus == QUEST_ACCEPTED then
         if retry >= 1 then                          -- has failed on future npc so disregard previous successful trade
@@ -147,16 +145,16 @@ end
 
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 225 then    -- correct trade, onto next opo
-        if player:getCharVar("OPO_OPO_PROGRESS") == 6 then
+        if player:getCharVar('OPO_OPO_PROGRESS') == 6 then
             player:tradeComplete()
-            player:setCharVar("OPO_OPO_PROGRESS", 7)
-            player:setCharVar("OPO_OPO_FAILED", 0)
+            player:setCharVar('OPO_OPO_PROGRESS', 7)
+            player:setCharVar('OPO_OPO_FAILED', 0)
         else
-            player:setCharVar("OPO_OPO_FAILED", 8)
+            player:setCharVar('OPO_OPO_FAILED', 8)
         end
     elseif csid == 235 then              -- wrong trade, restart at first opo
-        player:setCharVar("OPO_OPO_FAILED", 1)
-        player:setCharVar("OPO_OPO_RETRY", 7)
+        player:setCharVar('OPO_OPO_FAILED', 1)
+        player:setCharVar('OPO_OPO_RETRY', 7)
     end
 end
 

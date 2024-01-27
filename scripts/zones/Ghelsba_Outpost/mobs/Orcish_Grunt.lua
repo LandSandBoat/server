@@ -3,8 +3,7 @@
 --  Mob: Orcish Grunt
 -- Note: PH for Thousandarm Deshglesh
 -----------------------------------
-local ID = require("scripts/zones/Ghelsba_Outpost/IDs")
-require("scripts/globals/mobs")
+local ID = zones[xi.zone.GHELSBA_OUTPOST]
 -----------------------------------
 local entity = {}
 

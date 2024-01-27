@@ -59,10 +59,10 @@ namespace
 CTrustController::CTrustController(CCharEntity* PChar, CTrustEntity* PTrust)
 : CMobController(PTrust)
 , m_GambitsContainer(std::make_unique<gambits::CGambitsContainer>(PTrust))
+, m_LastTopEnmity(nullptr)
+, m_failedRepositionAttempts(0)
 , m_InTransit(false)
 {
-    m_LastTopEnmity            = nullptr;
-    m_failedRepositionAttempts = 0;
 }
 
 CTrustController::~CTrustController()
@@ -87,7 +87,7 @@ void CTrustController::Despawn()
 void CTrustController::Tick(time_point tick)
 {
     TracyZoneScoped;
-    TracyZoneString(POwner->GetName());
+    TracyZoneString(POwner->getName());
 
     m_Tick = tick;
 

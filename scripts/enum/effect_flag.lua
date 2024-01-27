@@ -35,4 +35,5 @@ xi.effectFlag =
     AURA            = 0x04000000,
     HIDE_TIMER      = 0x08000000,
     ON_ZONE_PATHOS  = 0x10000000,
+    ALWAYS_EXPIRING = 0x20000000,
 }

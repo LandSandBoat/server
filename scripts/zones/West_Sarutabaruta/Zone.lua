@@ -1,12 +1,7 @@
 -----------------------------------
 -- Zone: West_Sarutabaruta (115)
 -----------------------------------
-local ID = require('scripts/zones/West_Sarutabaruta/IDs')
 require('scripts/quests/i_can_hear_a_rainbow')
-require('scripts/globals/chocobo_digging')
-require('scripts/globals/conquest')
-require('scripts/globals/missions')
-require('scripts/globals/helm')
 -----------------------------------
 local zoneObject = {}
 
@@ -60,7 +55,7 @@ zoneObject.onEventUpdate = function(player, csid, option, npc)
     if csid == 48 then
         quests.rainbow.onEventUpdate(player)
     elseif csid == 62 or csid == 63 then
-        player:setCharVar("ASA_Status", option)
+        player:setCharVar('ASA_Status', option)
     end
 end
 

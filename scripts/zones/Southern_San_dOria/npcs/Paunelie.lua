@@ -4,8 +4,7 @@
 --  Linkshell Merchant
 -- !pos -142 -1 -25 236
 -----------------------------------
-local ID = require("scripts/zones/Southern_San_dOria/IDs")
-require("scripts/globals/shop")
+local ID = zones[xi.zone.SOUTHERN_SAN_DORIA]
 -----------------------------------
 local entity = {}
 

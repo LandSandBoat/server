@@ -3,8 +3,7 @@
 --  Mob: Witch Hazel
 -- Note: PH for Morille Mortelle
 -----------------------------------
-local ID = require("scripts/zones/Crawlers_Nest_[S]/IDs")
-require("scripts/globals/mobs")
+local ID = zones[xi.zone.CRAWLERS_NEST_S]
 -----------------------------------
 local entity = {}
 

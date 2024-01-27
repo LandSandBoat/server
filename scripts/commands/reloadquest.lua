@@ -1,48 +1,47 @@
----------------------------------------------------------------------------------------------------
+-----------------------------------
 -- func: reloadquest
 -- desc: Attempt to reload specified quest lua without a restart.
----------------------------------------------------------------------------------------------------
-require("scripts/globals/utils")
-require("scripts/globals/interaction/interaction_global")
+-----------------------------------
+local commandObj = {}
 
-cmdprops =
+commandObj.cmdprops =
 {
     permission = 5,
-    parameters = "s"
+    parameters = 's'
 }
 
-function error(player, msg)
-    player:PrintToPlayer(msg)
-    player:PrintToPlayer("!reloadquest <lua-file-name>")
+local function error(player, msg)
+    player:printToPlayer(msg)
+    player:printToPlayer('!reloadquest <lua-file-name>')
 end
 
-function fileExists(path)
-    local f = io.open(path, "r")
+local function fileExists(path)
+    local f = io.open(path, 'r')
     return f ~= nil and io.close(f)
 end
 
 local folders =
 {
-    "sandoria",
-    "bastok",
-    "windurst",
-    "jeuno",
-    "otherAreas",
-    "outlands",
-    "ahtUrhgan",
-    "hiddenQuests",
-    "abyssea",
-    "adoulin",
+    'sandoria',
+    'bastok',
+    'windurst',
+    'jeuno',
+    'otherAreas',
+    'outlands',
+    'ahtUrhgan',
+    'hiddenQuests',
+    'abyssea',
+    'adoulin',
 }
 
-function onTrigger(player, questName)
+commandObj.onTrigger = function(player, questName)
     if questName == nil then
-        error(player, "Unable to reload quest.")
+        error(player, 'Unable to reload quest.')
     end
 
     for _, area in ipairs(folders) do
-        local filename = table.concat({ "scripts/quests/", area, "/", questName })
-        if fileExists(filename .. ".lua") then
+        local filename = table.concat({ 'scripts/quests/', area, '/', questName })
+        if fileExists(filename .. '.lua') then
             if package.loaded[filename] then
                 local old = package.loaded[filename]
                 package.loaded[filename] = nil
@@ -54,12 +53,14 @@ function onTrigger(player, questName)
             local res = utils.prequire(filename)
             if InteractionGlobal and res then
                 InteractionGlobal.lookup:addContainer(res)
-                player:PrintToPlayer(string.format("Quest '%s' at '%s' has been reloaded.", questName, filename))
+                player:printToPlayer(string.format('Quest \'%s\' at \'%s\' has been reloaded.', questName, filename))
             end
 
             return
         end
     end
 
-    error(player, string.format("Unable to find quest '%s' to reload.", questName))
+    error(player, string.format('Unable to find quest \'%s\' to reload.', questName))
 end
+
+return commandObj

@@ -3,7 +3,7 @@
 --  Mob: Ramuh Prime
 -- Involved in Quest: Trial by Lightning, Trial Size Trial by Lightning
 -----------------------------------
-mixins = { require("scripts/mixins/job_special") }
+mixins = { require('scripts/mixins/job_special') }
 -----------------------------------
 local entity = {}
 

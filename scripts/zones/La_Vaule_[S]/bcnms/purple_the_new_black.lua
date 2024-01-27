@@ -3,10 +3,6 @@
 -- BCNM: Purple, The New Black (WOTG07)
 --  Mob: Galarhigg (17125681 or 17125682 or 17125683)
 -----------------------------------
-require("scripts/globals/battlefield")
-require("scripts/globals/missions")
-require("scripts/globals/utils")
------------------------------------
 local battlefieldObject = {}
 
 battlefieldObject.onBattlefieldTick = function(battlefield, tick)
@@ -24,9 +20,9 @@ battlefieldObject.onBattlefieldLeave = function(player, battlefield, leavecode)
         local _, clearTime, partySize = battlefield:getRecord()
         local arg8 = player:hasCompletedMission(xi.mission.log_id.WOTG, xi.mission.id.wotg.PURPLE_THE_NEW_BLACK) and 1 or 0
 
-        player:setLocalVar("battlefieldWin", battlefield:getID())
+        player:setLocalVar('battlefieldWin', battlefield:getID())
 
-        player:startEvent(32001, battlefield:getArea(), clearTime, partySize, battlefield:getTimeInside(), 1, battlefield:getLocalVar("[cs]bit"), arg8)
+        player:startEvent(32001, battlefield:getArea(), clearTime, partySize, battlefield:getTimeInside(), 1, battlefield:getLocalVar('[cs]bit'), arg8)
     elseif leavecode == xi.battlefield.leaveCode.LOST then
         player:startEvent(32002)
     end

@@ -1,8 +1,6 @@
 -----------------------------------
 -- Zone: The_Colosseum
 -----------------------------------
-local ID = require('scripts/zones/The_Colosseum/IDs')
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

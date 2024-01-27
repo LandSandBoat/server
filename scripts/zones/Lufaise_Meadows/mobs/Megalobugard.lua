@@ -2,8 +2,6 @@
 -- Area: Lufaise Meadows
 --   NM: Megalobugard
 -----------------------------------
-require("scripts/globals/hunts")
------------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)
@@ -12,6 +10,7 @@ end
 
 entity.onMobDeath = function(mob, player, optParams)
     xi.hunts.checkHunt(mob, player, 439)
+    xi.magian.onMobDeath(mob, player, optParams, set{ 154, 368, 582 })
 end
 
 return entity

@@ -2,7 +2,7 @@
 -- Area: Dynamis - Xarcabard
 --  Mob: Animated Knuckles
 -----------------------------------
-local ID = require("scripts/zones/Dynamis-Xarcabard/IDs")
+local ID = zones[xi.zone.DYNAMIS_XARCABARD]
 -----------------------------------
 local entity = {}
 
@@ -20,6 +20,7 @@ end
 
 entity.onMobDeath = function(mob, player, optParams)
     player:showText(mob, ID.text.ANIMATED_KNUCKLES_DIALOG + 1)
+    xi.magian.onMobDeath(mob, player, optParams, set{ 3097 })
 end
 
 return entity

@@ -4,8 +4,6 @@
 -- Spawns Dvalinn
 -- !pos -634 -48 -476 217
 -----------------------------------
-require("scripts/globals/abyssea")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

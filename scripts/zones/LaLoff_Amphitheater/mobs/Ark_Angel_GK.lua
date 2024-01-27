@@ -2,7 +2,7 @@
 -- Area: LaLoff Amphitheater
 --  Mob: Ark Angel GK
 -----------------------------------
-mixins = { require("scripts/mixins/job_special") }
+mixins = { require('scripts/mixins/job_special') }
 -----------------------------------
 local entity = {}
 
@@ -47,17 +47,17 @@ end
 
 entity.onMobFight = function(mob, target)
     if mob:hasStatusEffect(xi.effect.MEIKYO_SHISUI) then
-        if mob:getLocalVar("order") == 0 then
+        if mob:getLocalVar('order') == 0 then
             mob:useMobAbility(946) -- Tachi - Yukikaze
-            mob:setLocalVar("order", 1)
+            mob:setLocalVar('order', 1)
             mob:setTP(2000)
-        elseif mob:getLocalVar("order") == 1 then
+        elseif mob:getLocalVar('order') == 1 then
             mob:useMobAbility(947) -- Tachi - Gekko
-            mob:setLocalVar("order", 2)
+            mob:setLocalVar('order', 2)
             mob:setTP(1000)
-        elseif mob:getLocalVar("order") == 2 then
+        elseif mob:getLocalVar('order') == 2 then
             mob:useMobAbility(948) -- Tachi - Kasha
-            mob:setLocalVar("order", 3)
+            mob:setLocalVar('order', 3)
             mob:setTP(0)
         end
     end

@@ -1,9 +1,7 @@
 -----------------------------------
 -- Zone: Inner Horutoto Ruins (192)
 -----------------------------------
-local ID = require('scripts/zones/Inner_Horutoto_Ruins/IDs')
-require('scripts/globals/conquest')
-require('scripts/globals/treasure')
+local ID = zones[xi.zone.INNER_HORUTOTO_RUINS]
 -----------------------------------
 local zoneObject = {}
 
@@ -50,7 +48,7 @@ zoneObject.onTriggerAreaEnter = function(player, triggerArea)
         [1] = function()  -- Red Circle
             if player:getMainJob() == xi.job.RDM and triggerArea:AddCount(1) == 1 then
                 red:setAnimation(xi.anim.OPEN_DOOR)
-                red:entityAnimationPacket("smin")
+                red:entityAnimationPacket('smin')
                 if
                     white:getAnimation() == xi.anim.OPEN_DOOR and
                     black:getAnimation() == xi.anim.OPEN_DOOR
@@ -64,7 +62,7 @@ zoneObject.onTriggerAreaEnter = function(player, triggerArea)
         [2] = function()  -- White Circle
             if player:getMainJob() == xi.job.WHM and triggerArea:AddCount(1) == 1 then
                 white:setAnimation(xi.anim.OPEN_DOOR)
-                white:entityAnimationPacket("smin")
+                white:entityAnimationPacket('smin')
                 if
                     red:getAnimation() == xi.anim.OPEN_DOOR and
                     black:getAnimation() == xi.anim.OPEN_DOOR
@@ -78,7 +76,7 @@ zoneObject.onTriggerAreaEnter = function(player, triggerArea)
         [3] = function()  -- Black Circle
             if player:getMainJob() == xi.job.BLM and triggerArea:AddCount(1) == 1 then
                 black:setAnimation(xi.anim.OPEN_DOOR)
-                black:entityAnimationPacket("smin")
+                black:entityAnimationPacket('smin')
                 if
                     red:getAnimation() == xi.anim.OPEN_DOOR and
                     white:getAnimation() == xi.anim.OPEN_DOOR
@@ -106,21 +104,21 @@ zoneObject.onTriggerAreaLeave = function(player, triggerArea)
         [1] = function()  -- Red Circle
             if player:getMainJob() == xi.job.RDM and triggerArea:DelCount(1) == 0 then
                 red:setAnimation(xi.anim.CLOSE_DOOR)
-                red:entityAnimationPacket("kmin")
+                red:entityAnimationPacket('kmin')
             end
         end,
 
         [2] = function()  -- White Circle
             if player:getMainJob() == xi.job.WHM and triggerArea:DelCount(1) == 0 then
                 white:setAnimation(xi.anim.CLOSE_DOOR)
-                white:entityAnimationPacket("kmin")
+                white:entityAnimationPacket('kmin')
             end
         end,
 
         [3] = function()  -- Black Circle
             if player:getMainJob() == xi.job.BLM and triggerArea:DelCount(1) == 0 then
                 black:setAnimation(xi.anim.CLOSE_DOOR)
-                black:entityAnimationPacket("kmin")
+                black:entityAnimationPacket('kmin')
             end
         end,
     }

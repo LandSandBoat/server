@@ -5,16 +5,12 @@
 -- !addmission 4 31
 -- Naja Salaheem : !pos 22.700 -8.804 -45.591 50
 -----------------------------------
-require('scripts/globals/missions')
-require('scripts/globals/npc_util')
-require('scripts/globals/interaction/mission')
------------------------------------
 
 local mission = Mission:new(xi.mission.log_id.TOAU, xi.mission.id.toau.IN_THE_BLOOD)
 
 mission.reward =
 {
-    item        = xi.items.IMPERIAL_GOLD_PIECE,
+    item        = xi.item.IMPERIAL_GOLD_PIECE,
     nextMission = { xi.mission.log_id.TOAU, xi.mission.id.toau.SENTINELS_HONOR },
 }
 

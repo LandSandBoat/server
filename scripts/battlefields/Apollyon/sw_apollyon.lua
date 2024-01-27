@@ -5,9 +5,7 @@
 -- !addkeyitem cosmo_cleanse
 -- !pos -600 -0.5 -600 38
 -----------------------------------
-local ID = require("scripts/zones/Apollyon/IDs")
-require("scripts/globals/battlefield")
-require("scripts/globals/limbus")
+local ID = zones[xi.zone.APOLLYON]
 -----------------------------------
 
 local content = Limbus:new({
@@ -19,7 +17,7 @@ local content = Limbus:new({
     area             = 1,
     entryNpc         = '_127',
     requiredKeyItems = { xi.ki.COSMO_CLEANSE, xi.ki.RED_CARD, message = ID.text.YOU_INSERT_THE_CARD_POLISHED },
-    name             = "SW_APOLLYON",
+    name             = 'SW_APOLLYON',
     timeExtension    = 10,
 })
 
@@ -37,7 +35,7 @@ function content:onBattlefieldRegister(player, battlefield)
         race = xi.race.TARU_M
     end
 
-    battlefield:setLocalVar("initiatorRace", race)
+    battlefield:setLocalVar('initiatorRace', race)
 end
 
 content.sections =
@@ -50,8 +48,8 @@ content.sections =
                 [207] = function(player, csid, option, npc)
                     local battlefield = player:getBattlefield()
 
-                    if battlefield:getLocalVar("weather") == 0 then
-                        battlefield:setLocalVar("weather", VanadielDayElement())
+                    if battlefield:getLocalVar('weather') == 0 then
+                        battlefield:setLocalVar('weather', VanadielDayElement())
                     end
                 end
             }
@@ -60,7 +58,7 @@ content.sections =
 }
 
 local checkRaceVortex = function(mobRace, battlefield, mob)
-    local race = battlefield:getLocalVar("initiatorRace")
+    local race = battlefield:getLocalVar('initiatorRace')
 
     if race == mobRace then
         content:openDoor(mob:getBattlefield(), 1)
@@ -68,7 +66,7 @@ local checkRaceVortex = function(mobRace, battlefield, mob)
 end
 
 local checkRaceCrates = function(mobRace, battlefield, mob)
-    local race = battlefield:getLocalVar("initiatorRace")
+    local race = battlefield:getLocalVar('initiatorRace')
 
     if race == mobRace then
         npcUtil.showCrate(GetNPCByID(ID.SW_APOLLYON.npc.ITEM_CRATES[1]))
@@ -78,7 +76,7 @@ local checkRaceCrates = function(mobRace, battlefield, mob)
 end
 
 local checkElementalCrate = function(mobElement, battlefield, mob)
-    local weatherElement = battlefield:getLocalVar("weather")
+    local weatherElement = battlefield:getLocalVar('weather')
 
     if weatherElement == mobElement then
         npcUtil.showCrate(GetNPCByID(ID.SW_APOLLYON.npc.LOOT_CRATE))
@@ -236,35 +234,35 @@ content.groups =
 {
     -- Floor 1
     {
-        mobs        = { "Fir_Bholg_THF" },
+        mobs        = { 'Fir_Bholg_THF' },
         stationary  = false,
         randomDeath = utils.bind(checkRaceVortex, xi.race.ELVAAN_M),
         allDeath    = utils.bind(checkRaceCrates, xi.race.ELVAAN_M),
     },
 
     {
-        mobs        = { "Fir_Bholg_PLD" },
+        mobs        = { 'Fir_Bholg_PLD' },
         stationary  = false,
         randomDeath = utils.bind(checkRaceVortex, xi.race.GALKA),
         allDeath    = utils.bind(checkRaceCrates, xi.race.GALKA),
     },
 
     {
-        mobs        = { "Fir_Bholg_SAM" },
+        mobs        = { 'Fir_Bholg_SAM' },
         stationary  = false,
         randomDeath = utils.bind(checkRaceVortex, xi.race.HUME_M),
         allDeath    = utils.bind(checkRaceCrates, xi.race.HUME_M),
     },
 
     {
-        mobs        = { "Fir_Bholg_RDM" },
+        mobs        = { 'Fir_Bholg_RDM' },
         stationary  = false,
         randomDeath = utils.bind(checkRaceVortex, xi.race.MITHRA),
         allDeath    = utils.bind(checkRaceCrates, xi.race.MITHRA),
     },
 
     {
-        mobs        = { "Fir_Bholg_BLM" },
+        mobs        = { 'Fir_Bholg_BLM' },
         stationary  = false,
         randomDeath = utils.bind(checkRaceVortex, xi.race.TARU_M),
         allDeath    = utils.bind(checkRaceCrates, xi.race.TARU_M),
@@ -272,7 +270,7 @@ content.groups =
 
     -- Floor 2
     {
-        mobs    = { "Jidra_Boss" },
+        mobs    = { 'Jidra_Boss' },
         mobMods = { [xi.mobMod.DONT_ROAM_HOME] = 1 },
         death   = function(battlefield, mob, count)
             content:openDoor(battlefield, 2)
@@ -280,7 +278,7 @@ content.groups =
     },
 
     {
-        mobs    = { "Jidra" },
+        mobs    = { 'Jidra' },
         mobMods = { [xi.mobMod.DONT_ROAM_HOME] = 1 },
         setup   = function(battlefield, mobs)
             local positions =
@@ -314,7 +312,7 @@ content.groups =
             SpawnMob(addID)
 
             local enmityList = mob:getEnmityList()
-            local target     = utils.randomEntry(enmityList)["entity"]
+            local target     = utils.randomEntry(enmityList)['entity']
 
             if target ~= nil then
                 add:updateEnmity(target)
@@ -326,13 +324,13 @@ content.groups =
         -- Jidra (Adds)
         mobs =
         {
-            "Arboricole_Hornet",
-            "Arboricole_Raven",
-            "Arboricole_Opo-opo",
-            "Arboricole_Spider",
-            "Arboricole_Beetle",
-            "Arboricole_Crawler",
-            "Apollyon_Sapling",
+            'Arboricole_Hornet',
+            'Arboricole_Raven',
+            'Arboricole_Opo-opo',
+            'Arboricole_Spider',
+            'Arboricole_Beetle',
+            'Arboricole_Crawler',
+            'Apollyon_Sapling',
         },
 
         spawned  = false,
@@ -345,7 +343,7 @@ content.groups =
 
     -- Floor 3
     {
-        mobs    = { "Armoury_Crate_Mimic" },
+        mobs    = { 'Armoury_Crate_Mimic' },
         mobMods =
         {
             [xi.mobMod.DRAW_IN   ] = 1,
@@ -356,10 +354,10 @@ content.groups =
 
         setup = function(battlefield, mobs)
             local shuffled = utils.shuffle(mobs)
-            shuffled[1]:setLocalVar("time", 1)
-            shuffled[2]:setLocalVar("item", 1)
-            shuffled[3]:setLocalVar("recover", 1)
-            shuffled[4]:setLocalVar("vortex", 1)
+            shuffled[1]:setLocalVar('time', 1)
+            shuffled[2]:setLocalVar('item', 1)
+            shuffled[3]:setLocalVar('recover', 1)
+            shuffled[4]:setLocalVar('vortex', 1)
 
             for _, mob in ipairs(mobs) do
                 mob:hideName(true)
@@ -370,19 +368,19 @@ content.groups =
 
                 local swapWithCrate = function(crate)
                     crate:setPos(mob:getXPos(), mob:getYPos(), mob:getZPos(), mob:getRotPos())
-                    crate:entityAnimationPacket("deru")
+                    crate:entityAnimationPacket('deru')
                     crate:setModelId(961)
                     crate:setAnimationSub(8)
                     npcUtil.showCrate(crate)
                     npcUtil.disappearCrate(mob)
                 end
 
-                mob:addListener("ON_TRIGGER", "TRIGGER_RECOVER_CRATE", function(player, npc)
-                    if mob:getLocalVar("time") == 1 then
+                mob:addListener('ON_TRIGGER', 'TRIGGER_RECOVER_CRATE', function(player, npc)
+                    if mob:getLocalVar('time') == 1 then
                         swapWithCrate(GetNPCByID(ID.SW_APOLLYON.npc.TIME_CRATES[3]))
-                    elseif mob:getLocalVar("item") == 1 then
+                    elseif mob:getLocalVar('item') == 1 then
                         swapWithCrate(GetNPCByID(ID.SW_APOLLYON.npc.ITEM_CRATES[3]))
-                    elseif mob:getLocalVar("recover") == 1 then
+                    elseif mob:getLocalVar('recover') == 1 then
                         swapWithCrate(GetMobByID(ID.SW_APOLLYON.npc.RECOVER_CRATES[3]))
                     else
                         mob:hideName(false)
@@ -396,7 +394,7 @@ content.groups =
         end,
 
         death = function(battlefield, mob)
-            if mob:getLocalVar("vortex") == 1 then
+            if mob:getLocalVar('vortex') == 1 then
                 content:openDoor(mob:getBattlefield(), 3)
             end
         end
@@ -404,59 +402,59 @@ content.groups =
 
     -- Floor 4
     {
-        mobs      = { "Air_Elemental" },
+        mobs      = { 'Air_Elemental' },
         isParty   = true,
         superlink = true,
-        allDeath  = utils.bind(checkElementalCrate, xi.magic.element.WIND),
+        allDeath  = utils.bind(checkElementalCrate, xi.element.WIND),
     },
 
     {
-        mobs      = { "Dark_Elemental" },
+        mobs      = { 'Dark_Elemental' },
         isParty   = true,
         superlink = true,
-        allDeath  = utils.bind(checkElementalCrate,  xi.magic.element.DARK),
+        allDeath  = utils.bind(checkElementalCrate,  xi.element.DARK),
     },
 
     {
-        mobs      = { "Earth_Elemental" },
+        mobs      = { 'Earth_Elemental' },
         isParty   = true,
         superlink = true,
-        allDeath  = utils.bind(checkElementalCrate,  xi.magic.element.EARTH),
+        allDeath  = utils.bind(checkElementalCrate,  xi.element.EARTH),
     },
 
     {
-        mobs      = { "Fire_Elemental" },
+        mobs      = { 'Fire_Elemental' },
         isParty   = true,
         superlink = true,
-        allDeath  = utils.bind(checkElementalCrate,  xi.magic.element.FIRE),
+        allDeath  = utils.bind(checkElementalCrate,  xi.element.FIRE),
     },
 
     {
-        mobs      = { "Ice_Elemental" },
+        mobs      = { 'Ice_Elemental' },
         isParty   = true,
         superlink = true,
-        allDeath  = utils.bind(checkElementalCrate,  xi.magic.element.ICE),
+        allDeath  = utils.bind(checkElementalCrate,  xi.element.ICE),
     },
 
     {
-        mobs      = { "Light_Elemental" },
+        mobs      = { 'Light_Elemental' },
         isParty   = true,
         superlink = true,
-        allDeath  = utils.bind(checkElementalCrate,  xi.magic.element.LIGHT),
+        allDeath  = utils.bind(checkElementalCrate,  xi.element.LIGHT),
     },
 
     {
-        mobs      = { "Water_Elemental" },
+        mobs      = { 'Water_Elemental' },
         isParty   = true,
         superlink = true,
-        allDeath  = utils.bind(checkElementalCrate,  xi.magic.element.WATER),
+        allDeath  = utils.bind(checkElementalCrate,  xi.element.WATER),
     },
 
     {
-        mobs      = { "Thunder_Elemental" },
+        mobs      = { 'Thunder_Elemental' },
         isParty   = true,
         superlink = true,
-        allDeath  = utils.bind(checkElementalCrate,  xi.magic.element.THUNDER),
+        allDeath  = utils.bind(checkElementalCrate,  xi.element.THUNDER),
     },
 }
 
@@ -466,27 +464,27 @@ content.loot =
     {
         {
             quantity = 5,
-            { item = xi.items.ANCIENT_BEASTCOIN, weight = xi.loot.weight.NORMAL },
+            { item = xi.item.ANCIENT_BEASTCOIN, weight = xi.loot.weight.NORMAL },
         },
 
         {
-            { item = xi.items.NONE,              weight = xi.loot.weight.NORMAL },
-            { item = xi.items.ANCIENT_BEASTCOIN, weight = xi.loot.weight.NORMAL },
+            { item = xi.item.NONE,              weight = xi.loot.weight.NORMAL },
+            { item = xi.item.ANCIENT_BEASTCOIN, weight = xi.loot.weight.NORMAL },
         },
 
         {
-            { item = xi.items.ANCIENT_BRASS_INGOT,    weight = xi.loot.weight.NORMAL },
-            { item = xi.items.SPOOL_OF_DIABOLIC_YARN, weight = xi.loot.weight.NORMAL },
-            { item = xi.items.FETID_LANOLIN_CUBE,     weight = xi.loot.weight.NORMAL },
-            { item = xi.items.GOLD_STUD,              weight = xi.loot.weight.NORMAL },
+            { item = xi.item.ANCIENT_BRASS_INGOT,    weight = xi.loot.weight.NORMAL },
+            { item = xi.item.SPOOL_OF_DIABOLIC_YARN, weight = xi.loot.weight.NORMAL },
+            { item = xi.item.FETID_LANOLIN_CUBE,     weight = xi.loot.weight.NORMAL },
+            { item = xi.item.GOLD_STUD,              weight = xi.loot.weight.NORMAL },
         },
 
         {
-            { item = xi.items.NONE,                      weight = xi.loot.weight.VERY_HIGH },
-            { item = xi.items.ARGYRO_RIVET,              weight = xi.loot.weight.LOW       },
-            { item = xi.items.SPOOL_OF_LIGHT_FILAMENT,   weight = xi.loot.weight.LOW       },
-            { item = xi.items.SQUARE_OF_CHARCOAL_COTTON, weight = xi.loot.weight.LOW       },
-            { item = xi.items.SQUARE_OF_CORDUROY_CLOTH,  weight = xi.loot.weight.LOW       },
+            { item = xi.item.NONE,                      weight = xi.loot.weight.VERY_HIGH },
+            { item = xi.item.ARGYRO_RIVET,              weight = xi.loot.weight.LOW       },
+            { item = xi.item.SPOOL_OF_LIGHT_FILAMENT,   weight = xi.loot.weight.LOW       },
+            { item = xi.item.SQUARE_OF_CHARCOAL_COTTON, weight = xi.loot.weight.LOW       },
+            { item = xi.item.SQUARE_OF_CORDUROY_CLOTH,  weight = xi.loot.weight.LOW       },
         },
     },
 
@@ -494,27 +492,27 @@ content.loot =
     {
         {
             quantity = 5,
-            { item = xi.items.ANCIENT_BEASTCOIN, weight = xi.loot.weight.NORMAL },
+            { item = xi.item.ANCIENT_BEASTCOIN, weight = xi.loot.weight.NORMAL },
         },
 
         {
-            { item = xi.items.NONE,              weight = xi.loot.weight.NORMAL },
-            { item = xi.items.ANCIENT_BEASTCOIN, weight = xi.loot.weight.NORMAL },
+            { item = xi.item.NONE,              weight = xi.loot.weight.NORMAL },
+            { item = xi.item.ANCIENT_BEASTCOIN, weight = xi.loot.weight.NORMAL },
         },
 
         {
-            { item = xi.items.SPOOL_OF_LIGHT_FILAMENT, weight = xi.loot.weight.NORMAL },
-            { item = xi.items.BLACK_RIVET,             weight = xi.loot.weight.NORMAL },
-            { item = xi.items.BLUE_RIVET,              weight = xi.loot.weight.NORMAL },
-            { item = xi.items.ELECTRUM_STUD,           weight = xi.loot.weight.NORMAL },
+            { item = xi.item.SPOOL_OF_LIGHT_FILAMENT, weight = xi.loot.weight.NORMAL },
+            { item = xi.item.BLACK_RIVET,             weight = xi.loot.weight.NORMAL },
+            { item = xi.item.BLUE_RIVET,              weight = xi.loot.weight.NORMAL },
+            { item = xi.item.ELECTRUM_STUD,           weight = xi.loot.weight.NORMAL },
         },
 
         {
-            { item = xi.items.NONE,                     weight = xi.loot.weight.VERY_HIGH },
-            { item = xi.items.SPOOL_OF_DIABOLIC_YARN,   weight = xi.loot.weight.LOW       },
-            { item = xi.items.FETID_LANOLIN_CUBE,       weight = xi.loot.weight.LOW       },
-            { item = xi.items.SQUARE_OF_ASTRAL_LEATHER, weight = xi.loot.weight.LOW       },
-            { item = xi.items.SQUARE_OF_CANVAS_TOILE,   weight = xi.loot.weight.LOW       },
+            { item = xi.item.NONE,                     weight = xi.loot.weight.VERY_HIGH },
+            { item = xi.item.SPOOL_OF_DIABOLIC_YARN,   weight = xi.loot.weight.LOW       },
+            { item = xi.item.FETID_LANOLIN_CUBE,       weight = xi.loot.weight.LOW       },
+            { item = xi.item.SQUARE_OF_ASTRAL_LEATHER, weight = xi.loot.weight.LOW       },
+            { item = xi.item.SQUARE_OF_CANVAS_TOILE,   weight = xi.loot.weight.LOW       },
         },
     },
 
@@ -522,49 +520,49 @@ content.loot =
     {
         {
             quantity = 5,
-            { item = xi.items.ANCIENT_BEASTCOIN, weight = xi.loot.weight.NORMAL },
+            { item = xi.item.ANCIENT_BEASTCOIN, weight = xi.loot.weight.NORMAL },
         },
 
         {
             quantity = 2,
-            { item = xi.items.NONE,              weight = xi.loot.weight.NORMAL },
-            { item = xi.items.ANCIENT_BEASTCOIN, weight = xi.loot.weight.NORMAL },
+            { item = xi.item.NONE,              weight = xi.loot.weight.NORMAL },
+            { item = xi.item.ANCIENT_BEASTCOIN, weight = xi.loot.weight.NORMAL },
         },
 
         {
-            { item = xi.items.SQUARE_OF_CARDINAL_CLOTH, weight = xi.loot.weight.NORMAL },
-            { item = xi.items.WHITE_RIVET,              weight = xi.loot.weight.NORMAL },
-            { item = xi.items.SQUARE_OF_BROWN_DOESKIN,  weight = xi.loot.weight.NORMAL },
-            { item = xi.items.SQUARE_OF_CANVAS_TOILE,   weight = xi.loot.weight.NORMAL },
+            { item = xi.item.SQUARE_OF_CARDINAL_CLOTH, weight = xi.loot.weight.NORMAL },
+            { item = xi.item.WHITE_RIVET,              weight = xi.loot.weight.NORMAL },
+            { item = xi.item.SQUARE_OF_BROWN_DOESKIN,  weight = xi.loot.weight.NORMAL },
+            { item = xi.item.SQUARE_OF_CANVAS_TOILE,   weight = xi.loot.weight.NORMAL },
         },
 
         {
-            { item = xi.items.NONE,                      weight = xi.loot.weight.VERY_HIGH },
-            { item = xi.items.ANCIENT_BRASS_INGOT,       weight = xi.loot.weight.LOW       },
-            { item = xi.items.SPOOL_OF_BENEDICT_YARN,    weight = xi.loot.weight.LOW       },
-            { item = xi.items.POT_OF_EBONY_LACQUER,      weight = xi.loot.weight.LOW       },
-            { item = xi.items.SQUARE_OF_FLAMESHUN_CLOTH, weight = xi.loot.weight.LOW       },
+            { item = xi.item.NONE,                      weight = xi.loot.weight.VERY_HIGH },
+            { item = xi.item.ANCIENT_BRASS_INGOT,       weight = xi.loot.weight.LOW       },
+            { item = xi.item.SPOOL_OF_BENEDICT_YARN,    weight = xi.loot.weight.LOW       },
+            { item = xi.item.POT_OF_EBONY_LACQUER,      weight = xi.loot.weight.LOW       },
+            { item = xi.item.SQUARE_OF_FLAMESHUN_CLOTH, weight = xi.loot.weight.LOW       },
         },
 
         {
-            { item = xi.items.NONE,              weight = xi.loot.weight.VERY_HIGH },
-            { item = xi.items.BLACK_RIVET,       weight = xi.loot.weight.LOW       },
-            { item = xi.items.SHEET_OF_KUROGANE, weight = xi.loot.weight.LOW       },
-            { item = xi.items.BLUE_RIVET,        weight = xi.loot.weight.LOW       },
-            { item = xi.items.GOLD_STUD,         weight = xi.loot.weight.LOW       },
+            { item = xi.item.NONE,              weight = xi.loot.weight.VERY_HIGH },
+            { item = xi.item.BLACK_RIVET,       weight = xi.loot.weight.LOW       },
+            { item = xi.item.SHEET_OF_KUROGANE, weight = xi.loot.weight.LOW       },
+            { item = xi.item.BLUE_RIVET,        weight = xi.loot.weight.LOW       },
+            { item = xi.item.GOLD_STUD,         weight = xi.loot.weight.LOW       },
         },
 
         {
             quantity = 2,
-            { item = xi.items.NONE,                    weight = xi.loot.weight.VERY_HIGH },
-            { item = xi.items.CHUNK_OF_ADAMAN_ORE,     weight = xi.loot.weight.VERY_LOW  },
-            { item = xi.items.HANDFUL_OF_CLOT_PLASMA,  weight = xi.loot.weight.VERY_LOW  },
-            { item = xi.items.DARKSTEEL_SHEET,         weight = xi.loot.weight.VERY_LOW  },
-            { item = xi.items.CHUNK_OF_DARKSTEEL_ORE,  weight = xi.loot.weight.VERY_LOW  },
-            { item = xi.items.PIECE_OF_OXBLOOD,        weight = xi.loot.weight.VERY_LOW  },
-            { item = xi.items.LIGHT_STEEL_INGOT,       weight = xi.loot.weight.VERY_LOW  },
-            { item = xi.items.SPOOL_OF_RAINBOW_THREAD, weight = xi.loot.weight.VERY_LOW  },
-            { item = xi.items.PONZE_OF_SHELL_POWDER,   weight = xi.loot.weight.VERY_LOW  },
+            { item = xi.item.NONE,                    weight = xi.loot.weight.VERY_HIGH },
+            { item = xi.item.CHUNK_OF_ADAMAN_ORE,     weight = xi.loot.weight.VERY_LOW  },
+            { item = xi.item.HANDFUL_OF_CLOT_PLASMA,  weight = xi.loot.weight.VERY_LOW  },
+            { item = xi.item.DARKSTEEL_SHEET,         weight = xi.loot.weight.VERY_LOW  },
+            { item = xi.item.CHUNK_OF_DARKSTEEL_ORE,  weight = xi.loot.weight.VERY_LOW  },
+            { item = xi.item.PIECE_OF_OXBLOOD,        weight = xi.loot.weight.VERY_LOW  },
+            { item = xi.item.LIGHT_STEEL_INGOT,       weight = xi.loot.weight.VERY_LOW  },
+            { item = xi.item.SPOOL_OF_RAINBOW_THREAD, weight = xi.loot.weight.VERY_LOW  },
+            { item = xi.item.PONZE_OF_SHELL_POWDER,   weight = xi.loot.weight.VERY_LOW  },
         },
     },
 
@@ -572,38 +570,38 @@ content.loot =
     {
         {
             quantity = 5,
-            { item = xi.items.ANCIENT_BEASTCOIN, weight = xi.loot.weight.NORMAL },
+            { item = xi.item.ANCIENT_BEASTCOIN, weight = xi.loot.weight.NORMAL },
         },
 
         {
-            { item = xi.items.ARGYRO_RIVET,              weight = xi.loot.weight.NORMAL },
-            { item = xi.items.SPOOL_OF_BENEDICT_YARN,    weight = xi.loot.weight.NORMAL },
-            { item = xi.items.SQUARE_OF_ASTRAL_LEATHER,  weight = xi.loot.weight.NORMAL },
-            { item = xi.items.SQUARE_OF_FLAMESHUN_CLOTH, weight = xi.loot.weight.NORMAL },
+            { item = xi.item.ARGYRO_RIVET,              weight = xi.loot.weight.NORMAL },
+            { item = xi.item.SPOOL_OF_BENEDICT_YARN,    weight = xi.loot.weight.NORMAL },
+            { item = xi.item.SQUARE_OF_ASTRAL_LEATHER,  weight = xi.loot.weight.NORMAL },
+            { item = xi.item.SQUARE_OF_FLAMESHUN_CLOTH, weight = xi.loot.weight.NORMAL },
         },
 
         {
-            { item = xi.items.SQUARE_OF_CHARCOAL_COTTON, weight = xi.loot.weight.NORMAL },
-            { item = xi.items.SHEET_OF_KUROGANE,         weight = xi.loot.weight.NORMAL },
-            { item = xi.items.POT_OF_EBONY_LACQUER,      weight = xi.loot.weight.NORMAL },
-            { item = xi.items.SQUARE_OF_CORDUROY_CLOTH,  weight = xi.loot.weight.NORMAL },
+            { item = xi.item.SQUARE_OF_CHARCOAL_COTTON, weight = xi.loot.weight.NORMAL },
+            { item = xi.item.SHEET_OF_KUROGANE,         weight = xi.loot.weight.NORMAL },
+            { item = xi.item.POT_OF_EBONY_LACQUER,      weight = xi.loot.weight.NORMAL },
+            { item = xi.item.SQUARE_OF_CORDUROY_CLOTH,  weight = xi.loot.weight.NORMAL },
         },
 
         {
-            { item = xi.items.NONE,                     weight = xi.loot.weight.VERY_HIGH },
-            { item = xi.items.SQUARE_OF_CARDINAL_CLOTH, weight = xi.loot.weight.LOW       },
-            { item = xi.items.WHITE_RIVET,              weight = xi.loot.weight.LOW       },
-            { item = xi.items.SQUARE_OF_BROWN_DOESKIN,  weight = xi.loot.weight.LOW       },
-            { item = xi.items.ELECTRUM_STUD,            weight = xi.loot.weight.LOW       },
+            { item = xi.item.NONE,                     weight = xi.loot.weight.VERY_HIGH },
+            { item = xi.item.SQUARE_OF_CARDINAL_CLOTH, weight = xi.loot.weight.LOW       },
+            { item = xi.item.WHITE_RIVET,              weight = xi.loot.weight.LOW       },
+            { item = xi.item.SQUARE_OF_BROWN_DOESKIN,  weight = xi.loot.weight.LOW       },
+            { item = xi.item.ELECTRUM_STUD,            weight = xi.loot.weight.LOW       },
         },
 
         {
-            { item = xi.items.CHARCOAL_CHIP, weight = xi.loot.weight.NORMAL },
+            { item = xi.item.CHARCOAL_CHIP, weight = xi.loot.weight.NORMAL },
         },
 
         {
-            { item = xi.items.NONE,       weight = xi.loot.weight.VERY_HIGH },
-            { item = xi.items.METAL_CHIP, weight = xi.loot.weight.VERY_LOW  },
+            { item = xi.item.NONE,       weight = xi.loot.weight.VERY_HIGH },
+            { item = xi.item.METAL_CHIP, weight = xi.loot.weight.VERY_LOW  },
         },
     },
 }

@@ -4,8 +4,6 @@
 -- Spawns Blanga
 -- !pos -615.221 -39.768 -16.079 253
 -----------------------------------
-require("scripts/globals/abyssea")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

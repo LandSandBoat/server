@@ -2,8 +2,7 @@
 -- Area: Ruhotz Silvermines
 --  Mob: Sapphire Quadav
 -----------------------------------
-require("scripts/globals/pathfind")
-mixins = { require("scripts/mixins/job_special") }
+mixins = { require('scripts/mixins/job_special') }
 -----------------------------------
 local entity = {}
 

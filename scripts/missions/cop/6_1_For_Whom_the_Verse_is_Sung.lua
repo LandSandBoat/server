@@ -6,12 +6,6 @@
 -- Pherimociel   : !pos -31.627 1.002 67.956 243
 -- Marble Bridge : !pos -96.6 -0.2 92.3 244
 -----------------------------------
-require('scripts/globals/interaction/mission')
-require('scripts/globals/missions')
-require('scripts/globals/npc_util')
-require('scripts/globals/titles')
-require('scripts/globals/utils')
------------------------------------
 
 local mission = Mission:new(xi.mission.log_id.COP, xi.mission.id.cop.FOR_WHOM_THE_VERSE_IS_SUNG)
 

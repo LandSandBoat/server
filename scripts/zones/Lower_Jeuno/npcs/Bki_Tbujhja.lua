@@ -5,8 +5,7 @@
 -- Starts and Finishes Quests: Path of the Bard (just start), The Requiem (BARD AF2)
 -- !pos -22 0 -60 245
 -----------------------------------
-local ID = require("scripts/zones/Lower_Jeuno/IDs")
-require("scripts/globals/quests")
+local ID = zones[xi.zone.LOWER_JEUNO]
 -----------------------------------
 local entity = {}
 
@@ -14,8 +13,8 @@ entity.onTrade = function(player, npc, trade)
     -- THE REQUIEM (holy water)
     if
         player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_REQUIEM) == QUEST_ACCEPTED and
-        player:getCharVar("TheRequiemCS") == 2 and
-        trade:hasItemQty(xi.items.FLASK_OF_HOLY_WATER, 1) and
+        player:getCharVar('TheRequiemCS') == 2 and
+        trade:hasItemQty(xi.item.FLASK_OF_HOLY_WATER, 1) and
         trade:getItemCount() == 1
     then
         player:startEvent(151)
@@ -28,7 +27,7 @@ entity.onTrigger = function(player, npc)
     -- PATH OF THE BARD (Bard Flag)
     if
         player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.A_MINSTREL_IN_DESPAIR) == QUEST_COMPLETED and
-        player:getCharVar("PathOfTheBard_Event") == 0
+        player:getCharVar('PathOfTheBard_Event') == 0
     then
         player:startEvent(182) -- mentions song runes in Valkurm
 
@@ -39,7 +38,7 @@ entity.onTrigger = function(player, npc)
         player:getMainJob() == xi.job.BRD and
         player:getMainLvl() >= xi.settings.main.AF2_QUEST_LEVEL
     then
-        if player:getCharVar("TheRequiemCS") == 0 then
+        if player:getCharVar('TheRequiemCS') == 0 then
             player:startEvent(145) -- Long dialog & Start Quest "The Requiem"
         else
             player:startEvent(148) -- Shot dialog & Start Quest "The Requiem"
@@ -47,13 +46,13 @@ entity.onTrigger = function(player, npc)
 
     elseif
         theRequiem == QUEST_ACCEPTED and
-        player:getCharVar("TheRequiemCS") == 2
+        player:getCharVar('TheRequiemCS') == 2
     then
         player:startEvent(146) -- During Quest "The Requiem" (before trading Holy Water)
 
     elseif
         theRequiem == QUEST_ACCEPTED and
-        player:getCharVar("TheRequiemCS") == 3 and
+        player:getCharVar('TheRequiemCS') == 3 and
         not player:hasKeyItem(xi.ki.STAR_RING1)
     then
         if math.random(1, 2) == 1 then
@@ -83,29 +82,29 @@ end
 entity.onEventFinish = function(player, csid, option, npc)
     -- PATH OF THE BARD
     if csid == 182 then
-        player:setCharVar("PathOfTheBard_Event", 1)
+        player:setCharVar('PathOfTheBard_Event', 1)
 
     -- THE REQUIEM
     elseif csid == 145 and option == 0 then
-        player:setCharVar("TheRequiemCS", 1) -- player declines quest
+        player:setCharVar('TheRequiemCS', 1) -- player declines quest
     elseif
         (csid == 145 or csid == 148) and
         option == 1
     then
         player:addQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_REQUIEM)
-        player:setCharVar("TheRequiemCS", 2)
+        player:setCharVar('TheRequiemCS', 2)
 
     elseif csid == 151 then
-        player:setCharVar("TheRequiemCS", 3)
-        player:messageSpecial(ID.text.ITEM_OBTAINED, xi.items.FLASK_OF_HOLY_WATER) -- Holy Water (just message)
-        player:setCharVar("TheRequiemRandom", math.random(1, 5)) -- pick a random sarcophagus
+        player:setCharVar('TheRequiemCS', 3)
+        player:messageSpecial(ID.text.ITEM_OBTAINED, xi.item.FLASK_OF_HOLY_WATER) -- Holy Water (just message)
+        player:setCharVar('TheRequiemRandom', math.random(1, 5)) -- pick a random sarcophagus
 
     elseif csid == 150 then
         if player:getFreeSlotsCount() == 0 then
-            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.items.CHORAL_SLIPPERS)
+            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.item.CHORAL_SLIPPERS)
         else
-            player:addItem(xi.items.CHORAL_SLIPPERS)
-            player:messageSpecial(ID.text.ITEM_OBTAINED, xi.items.CHORAL_SLIPPERS)
+            player:addItem(xi.item.CHORAL_SLIPPERS)
+            player:messageSpecial(ID.text.ITEM_OBTAINED, xi.item.CHORAL_SLIPPERS)
             player:addFame(xi.quest.fame_area.JEUNO, 30)
             player:completeQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_REQUIEM)
         end

@@ -2,7 +2,7 @@
 -- Area: Apollyon CS
 --  Mob: Grognard Neckchopper
 -----------------------------------
-mixins = { require("scripts/mixins/job_special") }
+mixins = { require('scripts/mixins/job_special') }
 -----------------------------------
 local entity = {}
 

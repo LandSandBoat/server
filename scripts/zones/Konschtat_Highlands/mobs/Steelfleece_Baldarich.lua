@@ -2,9 +2,8 @@
 -- Area: Konschtat Highlands
 --   NM: Steelfleece Baldarich
 -----------------------------------
-mixins = { require("scripts/mixins/job_special") }
-require("scripts/globals/titles")
-require("scripts/quests/tutorial")
+mixins = { require('scripts/mixins/job_special') }
+require('scripts/quests/tutorial')
 -----------------------------------
 local entity = {}
 

@@ -3,7 +3,7 @@
 --  NPC: Drop Gate (by Sacrificial Chamber)
 -- !pos -60 46 32 160
 -----------------------------------
-local ID = require("scripts/zones/Den_of_Rancor/IDs")
+local ID = zones[xi.zone.DEN_OF_RANCOR]
 -----------------------------------
 local entity = {}
 

@@ -2,7 +2,7 @@
 -- Area: Windurst-Jeuno Airship
 --  NPC: Gabriele
 -----------------------------------
-local ID = require("scripts/zones/Windurst-Jeuno_Airship/IDs")
+local ID = zones[xi.zone.WINDURST_JEUNO_AIRSHIP]
 -----------------------------------
 local entity = {}
 
@@ -45,12 +45,10 @@ entity.onTrigger = function(player, npc)
         vHour = 1
     end
 
-    local vMinutes = 0
+    local vMinutes = (vHour * 60) + 40 - vMin
 
     if message == ID.text.WILL_REACH_JEUNO then
         vMinutes = (vHour * 60) + 47 - vMin
-    else -- ID.text.WILL_REACH_WINDURST
-        vMinutes = (vHour * 60) + 40 - vMin
     end
 
     if vMinutes <= 30 then
@@ -59,8 +57,6 @@ entity.onTrigger = function(player, npc)
         else -- ID.text.WILL_REACH_JEUNO
             message = ID.text.IN_JEUNO_MOMENTARILY
         end
-    elseif vMinutes < 60 then
-        vHour = 0
     end
 
     player:messageSpecial(message, math.floor((2.4 * vMinutes) / 60), math.floor(vMinutes / 60 + 0.5))

@@ -4,8 +4,7 @@
 -- Spawns Itzpapalotl
 -- !pos 439.939 19.820 -194.226 215
 -----------------------------------
-local ID = require('scripts/zones/Abyssea-Attohwa/IDs')
-require('scripts/globals/abyssea')
+local ID = zones[xi.zone.ABYSSEA_ATTOHWA]
 -----------------------------------
 local entity = {}
 

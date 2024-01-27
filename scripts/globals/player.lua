@@ -1,40 +1,39 @@
 require('scripts/globals/abyssea')
-require("scripts/globals/gear_sets")
-require("scripts/globals/quests")
-require("scripts/globals/teleports")
-require("scripts/globals/titles")
-require("scripts/globals/events/login_campaign")
+require('scripts/globals/gear_sets')
+require('scripts/globals/quests')
+require('scripts/globals/teleports')
+require('scripts/events/login_campaign')
 -----------------------------------
-require("scripts/quests/full_speed_ahead")
+require('scripts/quests/full_speed_ahead')
 -----------------------------------
 
 local startingRaceInfo =
 {
-    [xi.race.HUME_M]   = { gear = { body = 12631, hand = 12754, leg = 12883, feet = 13005 }, homeNation = xi.nation.BASTOK },
-    [xi.race.HUME_F]   = { gear = { body = 12632, hand = 12760, leg = 12884, feet = 13010 }, homeNation = xi.nation.BASTOK },
-    [xi.race.ELVAAN_M] = { gear = { body = 12633, hand = 12755, leg = 12885, feet = 13006 }, homeNation = xi.nation.SANDORIA },
-    [xi.race.ELVAAN_F] = { gear = { body = 12634, hand = 12759, leg = 12889, feet = 13011 }, homeNation = xi.nation.SANDORIA },
-    [xi.race.TARU_M]   = { gear = { body = 12635, hand = 12756, leg = 12886, feet = 13007 }, homeNation = xi.nation.WINDURST },
-    [xi.race.TARU_F]   = { gear = { body = 12635, hand = 12756, leg = 12886, feet = 13007 }, homeNation = xi.nation.WINDURST },
-    [xi.race.MITHRA]   = { gear = { body = 12636, hand = 12757, leg = 12887, feet = 13008 }, homeNation = xi.nation.WINDURST },
-    [xi.race.GALKA]    = { gear = { body = 12637, hand = 12758, leg = 12888, feet = 13009 }, homeNation = xi.nation.BASTOK },
+    [xi.race.HUME_M  ] = { gear = { body = xi.item.HUME_TUNIC,        hand = xi.item.HUME_M_GLOVES,     leg = xi.item.HUME_SLACKS,       feet = xi.item.HUME_M_BOOTS       }, homeNation = xi.nation.BASTOK   },
+    [xi.race.HUME_F  ] = { gear = { body = xi.item.HUME_VEST,         hand = xi.item.HUME_F_GLOVES,     leg = xi.item.HUME_PANTS,        feet = xi.item.HUME_F_BOOTS       }, homeNation = xi.nation.BASTOK   },
+    [xi.race.ELVAAN_M] = { gear = { body = xi.item.ELVAAN_JERKIN,     hand = xi.item.ELVAAN_GLOVES,     leg = xi.item.ELVAAN_M_CHAUSSES, feet = xi.item.ELVAAN_M_LEDELSENS }, homeNation = xi.nation.SANDORIA },
+    [xi.race.ELVAAN_F] = { gear = { body = xi.item.ELVAAN_BODICE,     hand = xi.item.ELVAAN_GAUNTLETS,  leg = xi.item.ELVAAN_F_CHAUSSES, feet = xi.item.ELVAAN_F_LEDELSENS }, homeNation = xi.nation.SANDORIA },
+    [xi.race.TARU_M  ] = { gear = { body = xi.item.TARUTARU_KAFTAN,   hand = xi.item.TARUTARU_MITTS,    leg = xi.item.TARUTARU_BRACCAE,  feet = xi.item.TARUTARU_CLOMPS    }, homeNation = xi.nation.WINDURST },
+    [xi.race.TARU_F  ] = { gear = { body = xi.item.TARUTARU_KAFTAN,   hand = xi.item.TARUTARU_MITTS,    leg = xi.item.TARUTARU_BRACCAE,  feet = xi.item.TARUTARU_CLOMPS    }, homeNation = xi.nation.WINDURST },
+    [xi.race.MITHRA  ] = { gear = { body = xi.item.MITHRAN_SEPARATES, hand = xi.item.MITHRAN_GAUNTLETS, leg = xi.item.MITHRAN_LOINCLOTH, feet = xi.item.MITHRAN_GAITERS    }, homeNation = xi.nation.WINDURST },
+    [xi.race.GALKA   ] = { gear = { body = xi.item.GALKAN_SURCOAT,    hand = xi.item.GALKAN_BRACERS,    leg = xi.item.GALKAN_BRAGUETTE,  feet = xi.item.GALKAN_SANDALS     }, homeNation = xi.nation.BASTOK   },
 }
 
 local startingNationInfo =
 {
-    [xi.nation.SANDORIA] = { ring = 13495, map = xi.ki.MAP_OF_THE_SAN_DORIA_AREA },
-    [xi.nation.BASTOK]   = { ring = 13497, map = xi.ki.MAP_OF_THE_BASTOK_AREA },
-    [xi.nation.WINDURST] = { ring = 13496, map = xi.ki.MAP_OF_THE_WINDURST_AREA },
+    [xi.nation.SANDORIA] = { ring = xi.item.SAN_DORIAN_RING,  map = xi.ki.MAP_OF_THE_SAN_DORIA_AREA },
+    [xi.nation.BASTOK  ] = { ring = xi.item.BASTOKAN_RING,    map = xi.ki.MAP_OF_THE_BASTOK_AREA    },
+    [xi.nation.WINDURST] = { ring = xi.item.WINDURSTIAN_RING, map = xi.ki.MAP_OF_THE_WINDURST_AREA  },
 }
 
 local startingJobGear =
 {
-    [xi.job.WAR] = { 16534 },       -- onion sword
-    [xi.job.MNK] = { 13184 },       -- white belt
-    [xi.job.WHM] = { 17068, 4608 }, -- onion rod, scroll of cure
-    [xi.job.BLM] = { 17104, 4607 }, -- onion staff, scroll of stone
-    [xi.job.RDM] = { 16482, 4606 }, -- onion dagger, scroll of dia
-    [xi.job.THF] = { 16483 },       -- onion knife
+    [xi.job.WAR] = { xi.item.ONION_SWORD                               },
+    [xi.job.MNK] = { xi.item.WHITE_BELT                                },
+    [xi.job.WHM] = { xi.item.ONION_ROD,    xi.item.SCROLL_OF_CURE_EX  },
+    [xi.job.BLM] = { xi.item.ONION_STAFF,  xi.item.SCROLL_OF_STONE_EX },
+    [xi.job.RDM] = { xi.item.ONION_DAGGER, xi.item.SCROLL_OF_DIA_EX   },
+    [xi.job.THF] = { xi.item.ONION_KNIFE                               },
 }
 
 -----------------------------------
@@ -44,9 +43,9 @@ xi = xi or {}
 xi.player = {}
 
 xi.player.charCreate = function(player)
-    local race = player:getRace()
-    local raceInfo = startingRaceInfo[race]
-    local nation = player:getNation()
+    local race       = player:getRace()
+    local raceInfo   = startingRaceInfo[race]
+    local nation     = player:getNation()
     local nationInfo = startingNationInfo[nation]
 
     -- add race-specific starting gear
@@ -135,16 +134,16 @@ xi.player.charCreate = function(player)
     end
 
     if xi.settings.main.NEW_CHARACTER_CUTSCENE == 0 then -- Do things that would normally be done in opening cutscene.
-        player:addItem(xi.items.ADVENTURER_COUPON)
+        player:addItem(xi.item.ADVENTURER_COUPON)
         player:setHomePoint()
     end
 
     player:addTitle(xi.title.NEW_ADVENTURER)
-    player:setCharVar("HQuest[moghouseExpo]notSeen", 1) -- needs Moghouse intro
-    player:setCharVar("spokeKindlix", 1)                -- Kindlix introduction
-    player:setCharVar("spokePyropox", 1)                -- Pyropox introduction
-    player:setCharVar("TutorialProgress", 1)            -- Has not started tutorial
-    player:setCharVar("EinherjarIntro", 1)              -- Has not seen Einherjar intro
+    player:setCharVar('HQuest[moghouseExpo]notSeen', 1) -- needs Moghouse intro
+    player:setCharVar('spokeKindlix', 1)                -- Kindlix introduction
+    player:setCharVar('spokePyropox', 1)                -- Pyropox introduction
+    player:setCharVar('TutorialProgress', 1)            -- Has not started tutorial
+    player:setCharVar('EinherjarIntro', 1)              -- Has not seen Einherjar intro
     player:setNewPlayer(true)                           -- apply new player flag
 end
 
@@ -192,7 +191,7 @@ xi.player.onGameIn = function(player, firstLogin, zoning)
     xi.gear_sets.checkForGearSet(player)
 
     -- god mode
-    if player:getCharVar("GodMode") == 1 then
+    if player:getCharVar('GodMode') == 1 then
         player:addStatusEffect(xi.effect.MAX_HP_BOOST, 1000, 0, 0)
         player:addStatusEffect(xi.effect.MAX_MP_BOOST, 1000, 0, 0)
         player:addStatusEffect(xi.effect.MIGHTY_STRIKES, 1, 0, 0)
@@ -219,17 +218,17 @@ xi.player.onGameIn = function(player, firstLogin, zoning)
     end
 
     -- !immortal
-    if player:getCharVar("Immortal") == 1 then
+    if player:getCharVar('Immortal') == 1 then
         player:setUnkillable(true)
     end
 
     -- !hide
-    if player:getCharVar("GMHidden") == 1 then
+    if player:getCharVar('GMHidden') == 1 then
         player:setGMHidden(true)
     end
 
     -- remember time player zoned in (e.g., to support zone-in delays)
-    player:setLocalVar("ZoneInTime", os.time())
+    player:setLocalVar('ZoneInTime', os.time())
 
     -- Slight delay to ensure player is fully logged in
     player:timer(2500, function(playerArg)

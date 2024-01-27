@@ -2,8 +2,6 @@
 -- Area: Gusgen Mines
 --  Mob: Ore Eater
 -----------------------------------
-require("scripts/globals/regimes")
------------------------------------
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

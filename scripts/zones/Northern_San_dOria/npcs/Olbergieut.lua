@@ -5,9 +5,7 @@
 -- !pos 91 0 121 231
 -- Starts and Finishes Quest: Gates of Paradise
 -----------------------------------
-require("scripts/globals/titles")
-require("scripts/globals/quests")
-local ID = require("scripts/zones/Northern_San_dOria/IDs")
+local ID = zones[xi.zone.NORTHERN_SAN_DORIA]
 -----------------------------------
 local entity = {}
 
@@ -41,14 +39,14 @@ entity.onEventFinish = function(player, csid, option, npc)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.SCRIPTURE_OF_WIND)
     elseif csid == 620 then
         if player:getFreeSlotsCount() == 0 then
-            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.items.COTTON_CAPE)
+            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.item.COTTON_CAPE)
         else
             player:completeQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.GATES_TO_PARADISE)
             player:addFame(xi.quest.fame_area.SANDORIA, 30)
             player:addTitle(xi.title.THE_PIOUS_ONE)
             player:delKeyItem(xi.ki.SCRIPTURE_OF_WATER)
-            player:addItem(xi.items.COTTON_CAPE, 1)
-            player:messageSpecial(ID.text.ITEM_OBTAINED, xi.items.COTTON_CAPE)
+            player:addItem(xi.item.COTTON_CAPE, 1)
+            player:messageSpecial(ID.text.ITEM_OBTAINED, xi.item.COTTON_CAPE)
         end
     end
 end

@@ -1,8 +1,8 @@
 -----------------------------------
 -- Veridical Conflux Global
 -----------------------------------
-require("scripts/globals/teleports")
-require("scripts/globals/utils")
+require('scripts/globals/teleports')
+require('scripts/globals/utils')
 -----------------------------------
 xi = xi or {}
 xi.conflux = {}
@@ -188,7 +188,7 @@ end
 
 xi.conflux.confluxOnTrigger = function(player, npc)
     local npcName = npc:getName()
-    local cruor = player:getCurrency("cruor")
+    local cruor = player:getCurrency('cruor')
     local maskOffset = zoneMaskID[player:getZoneID()]
     local activatedMask = player:getTeleport(xi.teleport.type.ABYSSEA_CONFLUX, maskOffset)
     local confluxInfo = updateCruorCosts(player, confluxData[player:getZoneID()][npcName])
@@ -222,15 +222,15 @@ xi.conflux.confluxEventFinish = function(player, csid, option, npc)
     if
         option ~= 0 and
         option ~= 9 and -- Conflux 0 option, always free
-        option ~= 1073741824 and
+        option ~= utils.EVENT_CANCELLED_OPTION and
         utils.mask.getBit(activatedMask, confluxInfo[1])
     then
-        player:delCurrency("cruor", confluxInfo[3][option])
+        player:delCurrency('cruor', confluxInfo[3][option])
     elseif
         option == 1 and
         confluxInfo[1] ~= 8
     then
-        player:delCurrency("cruor", confluxInfo[3][confluxInfo[1] + 1])
+        player:delCurrency('cruor', confluxInfo[3][confluxInfo[1] + 1])
         player:addTeleport(xi.teleport.type.ABYSSEA_CONFLUX, confluxInfo[1], zoneMaskID[player:getZoneID()])
     end
 end

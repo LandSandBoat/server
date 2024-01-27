@@ -1,10 +1,6 @@
 -----------------------------------
 -- Zone: PsoXja (9)
 -----------------------------------
-local ID = require('scripts/zones/PsoXja/IDs')
-require('scripts/globals/conquest')
-require('scripts/globals/treasure')
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
@@ -37,27 +33,27 @@ zoneObject.onZoneIn = function(player, prevZone)
 end
 
 zoneObject.afterZoneIn = function(player)
-    player:entityVisualPacket("brmp")
-    player:entityVisualPacket("lirp")
-    player:entityVisualPacket("kil1")
-    player:entityVisualPacket("kil2")
-    player:entityVisualPacket("kil3")
-    player:entityVisualPacket("saa1")
-    player:entityVisualPacket("saa2")
-    player:entityVisualPacket("saa3")
-    player:entityVisualPacket("byc1")
-    player:entityVisualPacket("byc2")
-    player:entityVisualPacket("byc3")
-    player:entityVisualPacket("byc4")
-    player:entityVisualPacket("byc5")
-    player:entityVisualPacket("byc6")
-    player:entityVisualPacket("byc7")
-    player:entityVisualPacket("byc8")
-    player:entityVisualPacket("s123")
+    player:entityVisualPacket('brmp')
+    player:entityVisualPacket('lirp')
+    player:entityVisualPacket('kil1')
+    player:entityVisualPacket('kil2')
+    player:entityVisualPacket('kil3')
+    player:entityVisualPacket('saa1')
+    player:entityVisualPacket('saa2')
+    player:entityVisualPacket('saa3')
+    player:entityVisualPacket('byc1')
+    player:entityVisualPacket('byc2')
+    player:entityVisualPacket('byc3')
+    player:entityVisualPacket('byc4')
+    player:entityVisualPacket('byc5')
+    player:entityVisualPacket('byc6')
+    player:entityVisualPacket('byc7')
+    player:entityVisualPacket('byc8')
+    player:entityVisualPacket('s123')
 
     -- ZONE WIDE LEVEL RESTRICTION
     if xi.settings.main.ENABLE_COP_ZONE_CAP == 1 then
-        local lvlCap = player:getCharVar("PSOXJA_RESTRICTION_LVL")
+        local lvlCap = player:getCharVar('PSOXJA_RESTRICTION_LVL')
 
         if lvlCap > 0 then -- LV cap depends on entrance
             player:addStatusEffect(xi.effect.LEVEL_RESTRICTION, lvlCap, 0, 0)

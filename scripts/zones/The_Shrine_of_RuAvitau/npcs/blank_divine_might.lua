@@ -3,10 +3,7 @@
 --  NPC: ??? divine might mission
 -- !pos -40 0 -151 178
 -----------------------------------
-local ID = require("scripts/zones/The_Shrine_of_RuAvitau/IDs")
-require("scripts/globals/missions")
-require("scripts/globals/quests")
-require("scripts/globals/titles")
+local ID = zones[xi.zone.THE_SHRINE_OF_RUAVITAU]
 -----------------------------------
 local entity = {}
 
@@ -20,7 +17,7 @@ entity.onTrigger = function(player, npc)
     local dmRepeat     = player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.DIVINE_MIGHT_REPEAT)
     local aaKeyitems   = 0
     local dmEarrings   = 0
-    local divineStatus = player:getCharVar("DivineMight")
+    local divineStatus = player:getCharVar('DivineMight')
     local hasMoonOre   = player:hasKeyItem(xi.ki.MOONLIGHT_ORE)
 
     -- Count keyitems
@@ -31,7 +28,7 @@ entity.onTrigger = function(player, npc)
     end
 
     -- Count Earrings
-    for i = xi.items.SUPPANOMIMI, xi.items.BUSHINOMIMI do
+    for i = xi.item.SUPPANOMIMI, xi.item.BUSHINOMIMI do
         if player:hasItem(i) then
             dmEarrings = dmEarrings + 1
         end
@@ -43,7 +40,7 @@ entity.onTrigger = function(player, npc)
         zmProgress == 1 and
         divineStatus < 2
     then
-        player:startEvent(54, xi.items.SHEET_OF_PARCHMENT, xi.items.BOTTLE_OF_ILLUMININK, xi.items.ARK_PENTASPHERE)
+        player:startEvent(54, xi.item.SHEET_OF_PARCHMENT, xi.item.BOTTLE_OF_ILLUMININK, xi.item.ARK_PENTASPHERE)
 
     -- Alternative cutscene for those that have done one or more AA fight
     elseif
@@ -51,14 +48,14 @@ entity.onTrigger = function(player, npc)
         dmStatus == QUEST_AVAILABLE and
         aaKeyitems > 0
     then
-        player:startEvent(56, xi.items.SHEET_OF_PARCHMENT, xi.items.BOTTLE_OF_ILLUMININK, xi.items.ARK_PENTASPHERE)
+        player:startEvent(56, xi.item.SHEET_OF_PARCHMENT, xi.item.BOTTLE_OF_ILLUMININK, xi.item.ARK_PENTASPHERE)
 
     -- CS when player has completed Divine might, award earring
     elseif
         dmStatus == QUEST_ACCEPTED and
         divineStatus >= 2
     then
-        player:startEvent(55, xi.items.SUPPANOMIMI, xi.items.KNIGHTS_EARRING, xi.items.ABYSSAL_EARRING, xi.items.BEASTLY_EARRING, xi.items.BUSHINOMIMI)
+        player:startEvent(55, xi.item.SUPPANOMIMI, xi.item.KNIGHTS_EARRING, xi.item.ABYSSAL_EARRING, xi.item.BEASTLY_EARRING, xi.item.BUSHINOMIMI)
 
     -- You threw away old Earring, start the repeat quest
     elseif
@@ -66,7 +63,7 @@ entity.onTrigger = function(player, npc)
         dmEarrings < xi.settings.main.NUMBER_OF_DM_EARRINGS and
         dmRepeat ~= QUEST_ACCEPTED
     then
-        player:startEvent(57, player:getCharVar("DM_Earring"))
+        player:startEvent(57, player:getCharVar('DM_Earring'))
 
     -- Moonlight Ore/Ark Pentasphere reminders
     elseif
@@ -76,7 +73,7 @@ entity.onTrigger = function(player, npc)
         if not hasMoonOre then
             player:startEvent(58) -- Reminder for Moonlight Ore
         else
-            player:startEvent(56, xi.items.SHEET_OF_PARCHMENT, xi.items.BOTTLE_OF_ILLUMININK, xi.items.ARK_PENTASPHERE) -- Reminder for Ark Pentasphere
+            player:startEvent(56, xi.item.SHEET_OF_PARCHMENT, xi.item.BOTTLE_OF_ILLUMININK, xi.item.ARK_PENTASPHERE) -- Reminder for Ark Pentasphere
         end
 
     -- Repeat turn in
@@ -97,7 +94,7 @@ entity.onEventUpdate = function(player, csid, option, npc)
         (csid == 55 or csid == 59) and
         option == 2
     then
-        player:updateEvent(xi.items.SUPPANOMIMI, xi.items.KNIGHTS_EARRING, xi.items.ABYSSAL_EARRING, xi.items.BEASTLY_EARRING, xi.items.BUSHINOMIMI)
+        player:updateEvent(xi.item.SUPPANOMIMI, xi.item.KNIGHTS_EARRING, xi.item.ABYSSAL_EARRING, xi.item.BEASTLY_EARRING, xi.item.BUSHINOMIMI)
     end
 end
 
@@ -122,15 +119,15 @@ entity.onEventFinish = function(player, csid, option, npc)
         local reward = 0
 
         if option == 1 then
-            reward = xi.items.SUPPANOMIMI
+            reward = xi.item.SUPPANOMIMI
         elseif option == 2 then
-            reward = xi.items.KNIGHTS_EARRING
+            reward = xi.item.KNIGHTS_EARRING
         elseif option == 3 then
-            reward = xi.items.ABYSSAL_EARRING
+            reward = xi.item.ABYSSAL_EARRING
         elseif option == 4 then
-            reward = xi.items.BEASTLY_EARRING
+            reward = xi.item.BEASTLY_EARRING
         elseif option == 5 then
-            reward = xi.items.BUSHINOMIMI
+            reward = xi.item.BUSHINOMIMI
         end
 
         if reward ~= 0 then
@@ -148,8 +145,8 @@ entity.onEventFinish = function(player, csid, option, npc)
                     player:delKeyItem(xi.ki.MOONLIGHT_ORE)
                 end
 
-                player:setCharVar("DivineMight", 0)
-                player:setCharVar("DM_Earring", reward)
+                player:setCharVar('DivineMight', 0)
+                player:setCharVar('DM_Earring', reward)
                 player:addTitle(xi.title.PENTACIDE_PERPETRATOR)
             else
                 player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, reward)

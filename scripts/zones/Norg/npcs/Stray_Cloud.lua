@@ -4,9 +4,6 @@
 -- Starts and Ends Quest: An Undying Pledge
 -- !pos-20.617, 1.097, -29.165, 133
 -----------------------------------
-require("scripts/globals/quests")
-require("scripts/globals/npc_util")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
@@ -27,12 +24,12 @@ entity.onTrigger = function(player, npc)
         player:startEvent(227) -- Quest Finish
     elseif
         anUndyingPledge == QUEST_ACCEPTED and
-        player:getCharVar("anUndyingPledgeCS") == 1
+        player:getCharVar('anUndyingPledgeCS') == 1
     then
         player:startEvent(228) -- Extra Dialogue
     elseif
         anUndyingPledge == QUEST_ACCEPTED and
-        player:getCharVar("anUndyingPledgeCS") == 2
+        player:getCharVar('anUndyingPledgeCS') == 2
     then
         player:startEvent(229) -- Extra Dialogue
     elseif anUndyingPledge == QUEST_COMPLETED then
@@ -48,14 +45,14 @@ end
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 225 then
         player:addQuest(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.AN_UNDYING_PLEDGE)
-        player:setCharVar("anUndyingPledgeCS", 1)
+        player:setCharVar('anUndyingPledgeCS', 1)
     elseif
         csid == 227 and
         npcUtil.completeQuest(player, xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.AN_UNDYING_PLEDGE, {
             item = 12375,
             fameArea = xi.quest.fame_area.NORG,
             fame = 50,
-            var = "anUndyingPledgeCS",
+            var = 'anUndyingPledgeCS',
         })
     then
         player:delKeyItem(xi.ki.CALIGINOUS_BLADE)

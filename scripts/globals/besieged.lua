@@ -69,7 +69,7 @@ local function getISPItem(i)
         [45057] = { id = 3309, price = 5000 }, -- barrage turbine
         [53249] = { id = 3311, price = 5000 }, -- galvanizer
         [57345] = { id = 6409, price = 50000 },
-        [69633] = { id = xi.items.CIPHER_OF_MIHLIS_ALTER_EGO, price = 5000 }, -- mihli
+        [69633] = { id = xi.item.CIPHER_OF_MIHLIS_ALTER_EGO, price = 5000 }, -- mihli
         -- Private Second Class
         -- Map Key Items (handled separately)
         -- Private First Class
@@ -147,7 +147,7 @@ xi.besieged.onTrigger = function(player, npc, eventBase)
         player:startEvent(eventBase + 1, npc)
     else
         local maps = getMapBitmask(player)
-        player:startEvent(eventBase, player:getCurrency("imperial_standing"), (maps + xi.besieged.cipherValue()), mercRank, 0, unpack(getImperialDefenseStats()))
+        player:startEvent(eventBase, player:getCurrency('imperial_standing'), (maps + xi.besieged.cipherValue()), mercRank, 0, unpack(getImperialDefenseStats()))
     end
 end
 
@@ -155,7 +155,7 @@ xi.besieged.onEventUpdate = function(player, csid, option, npc)
     local itemId = getISPItem(option)
     if itemId and option < 0x40000000 then
         local maps = getMapBitmask(player)
-        player:updateEvent(player:getCurrency("imperial_standing"), (maps + xi.besieged.cipherValue()), xi.besieged.getMercenaryRank(player), player:canEquipItem(itemId) and 2 or 1, unpack(getImperialDefenseStats()))
+        player:updateEvent(player:getCurrency('imperial_standing'), (maps + xi.besieged.cipherValue()), xi.besieged.getMercenaryRank(player), player:canEquipItem(itemId) and 2 or 1, unpack(getImperialDefenseStats()))
     end
 end
 
@@ -164,7 +164,7 @@ xi.besieged.onEventFinish = function(player, csid, option, npc)
     if option == 0 or option == 16 or option == 32 or option == 48 then
         -- Sanction
         if option ~= 0 then
-            player:delCurrency("imperial_standing", 100)
+            player:delCurrency('imperial_standing', 100)
         end
 
         player:delStatusEffectsByFlag(xi.effectFlag.INFLUENCE, true)
@@ -176,13 +176,13 @@ xi.besieged.onEventFinish = function(player, csid, option, npc)
         -- Player bought a map
         local ki = xi.ki.MAP_OF_MAMOOK + bit.rshift(option, 8)
         npcUtil.giveKeyItem(player, ki)
-        player:delCurrency("imperial_standing", 1000)
+        player:delCurrency('imperial_standing', 1000)
     elseif option < 0x40000000 then
         -- Player bought an item
         local item, price = getISPItem(option)
         if item then
             if npcUtil.giveItem(player, item) then
-                player:delCurrency("imperial_standing", price)
+                player:delCurrency('imperial_standing', price)
             end
         end
     end

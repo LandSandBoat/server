@@ -2,8 +2,7 @@
 -- Area: The Boyahda Tree
 --   NM: Voluptuous Vivian
 -----------------------------------
-mixins = { require("scripts/mixins/job_special") }
-require("scripts/globals/titles")
+mixins = { require('scripts/mixins/job_special') }
 -----------------------------------
 local entity = {}
 

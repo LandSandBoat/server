@@ -4,7 +4,7 @@
 -- Getting "Old Rusty Key (keyitem)"
 -- !pos 59 0 19 159
 -----------------------------------
-local ID = require("scripts/zones/Temple_of_Uggalepih/IDs")
+local ID = zones[xi.zone.TEMPLE_OF_UGGALEPIH]
 -----------------------------------
 local entity = {}
 
@@ -27,33 +27,33 @@ entity.onEventUpdate = function(player, csid, option, npc)
 end
 
 entity.onEventFinish = function(player, csid, option, npc)
-    local book = player:getCharVar("paintbrushOfSouls_book")
+    local book = player:getCharVar('paintbrushOfSouls_book')
 
     if
         csid == 61 and
         option == 1 and
         (book == 0 or book == 2 or book == 4 or book == 6)
     then
-        player:setCharVar("paintbrushOfSouls_book", book + 1)
+        player:setCharVar('paintbrushOfSouls_book', book + 1)
     elseif
         csid == 62 and
         option == 1 and
         (book == 0 or book == 1 or book == 4 or book == 5)
     then
-        player:setCharVar("paintbrushOfSouls_book", book + 2)
+        player:setCharVar('paintbrushOfSouls_book', book + 2)
     elseif
         csid == 63 and
         option == 1 and
         (book == 0 or book == 1 or book == 2 or book == 3)
     then
-        player:setCharVar("paintbrushOfSouls_book", book + 4)
+        player:setCharVar('paintbrushOfSouls_book', book + 4)
     end
 
-    if player:getCharVar("paintbrushOfSouls_book") == 7 then
+    if player:getCharVar('paintbrushOfSouls_book') == 7 then
         player:messageSpecial(ID.text.FALLS_FROM_THE_BOOK, xi.ki.OLD_RUSTY_KEY)
         player:addKeyItem(xi.ki.OLD_RUSTY_KEY)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.OLD_RUSTY_KEY)
-        player:setCharVar("paintbrushOfSouls_book", 0)
+        player:setCharVar('paintbrushOfSouls_book', 0)
     end
 end
 

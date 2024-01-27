@@ -3,7 +3,7 @@
 --  Mob: Fe'e
 -- BCNM: Up In Arms
 -----------------------------------
-local ID = require("scripts/zones/Waughroon_Shrine/IDs")
+local ID = zones[xi.zone.WAUGHROON_SHRINE]
 -----------------------------------
 local entity = {}
 
@@ -17,7 +17,7 @@ entity.onMobInitialize = function(mob)
 end
 
 entity.onMobSpawn = function(mob)
-    mob:setLocalVar("tentacles", 6)
+    mob:setLocalVar('tentacles', 6)
     mob:setMobSkillAttack(0)
 end
 
@@ -45,7 +45,7 @@ local function removeTentacle(mob, tentacles)
 end
 
 entity.onMobFight = function(mob, target)
-    local tentacles = mob:getLocalVar("tentacles")
+    local tentacles = mob:getLocalVar('tentacles')
 
     if tentacles > 0 then
         local hpp = mob:getHPP()
@@ -55,7 +55,7 @@ entity.onMobFight = function(mob, target)
             removeTentacle(mob, tentacles)
         end
 
-        mob:setLocalVar("tentacles", tentacles)
+        mob:setLocalVar('tentacles', tentacles)
     end
 end
 

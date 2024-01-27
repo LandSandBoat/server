@@ -2,8 +2,8 @@
 -- Abyssea Sturdy Pyxis Spawn
 -- Spawn conditions type and size.
 -----------------------------------
-require("scripts/globals/abyssea")
-require("scripts/globals/abyssea/sturdypyxis/chest")
+require('scripts/globals/abyssea')
+require('scripts/globals/abyssea/sturdypyxis/chest')
 -----------------------------------
 xi = xi or {}
 xi.pyxis = xi.pyxis or {}
@@ -141,23 +141,23 @@ xi.pyxis.spawn.lightsMessage =
     [xi.abyssea.lightType.AMBER  ] = { 21, 21, 25, 29, 35 },
 }
 
----------------------------------------------------------------------------------------------
+-----------------------------------
 -- Desc: Check for time elapsed since last spawned
 -- NOTE: will NOT allow a spawn if time since last spanwed is under 5 mins.
----------------------------------------------------------------------------------------------
+-----------------------------------
 local function timeElapsedCheck(npc, player)
     local spawnTime = os.time() + 180000 -- default time in case no var set.
 
-    if npc:getLocalVar("[pyxis]SPAWNTIME") > 0 then
-        spawnTime = npc:getLocalVar("[pyxis]SPAWNTIME")
+    if npc:getLocalVar('[pyxis]SPAWNTIME') > 0 then
+        spawnTime = npc:getLocalVar('[pyxis]SPAWNTIME')
     end
 
     return os.time() - spawnTime <= 0
 end
 
----------------------------------------------------------------------------------------------
+-----------------------------------
 -- Desc: This method allow you to get next chest available
----------------------------------------------------------------------------------------------
+-----------------------------------
 local function GetPyxisID(player)
     local zone        = player:getZone()
     local pyxii       = zone:queryEntitiesByName('Sturdy_Pyxis') -- Get the ID of the first entry and use that as our base ID to offset against
@@ -182,7 +182,7 @@ local function GetPyxisID(player)
             if npc:getStatus() == xi.status.CUTSCENE_ONLY then
                 npc:setStatus(xi.status.DISAPPEAR)
             elseif npc:getStatus() == xi.status.DISAPPEAR then
-                npc:setLocalVar("[pyxis]SPAWNTIME", (os.time() + 180000))
+                npc:setLocalVar('[pyxis]SPAWNTIME', (os.time() + 180000))
             end
         end
     end
@@ -194,18 +194,18 @@ local function GetPyxisID(player)
     return chestId
 end
 
----------------------------------------------------------------------------------------------
+-----------------------------------
 -- Desc: This method allow you to check if you can spawn pyxies with lights
----------------------------------------------------------------------------------------------
+-----------------------------------
 local function CanSpawnPyxis(player)
     local lightValues = xi.abyssea.getLightsTable(player)
     local dropchance = math.random(1 + lightValues[xi.abyssea.lightType.PEARL], 500)
     return dropchance >= 250
 end
 
----------------------------------------------------------------------------------------------
+-----------------------------------
 -- Desc: This method allow you to determine chest type
----------------------------------------------------------------------------------------------
+-----------------------------------
 local function determineChestType(lightValues)
     local redLight = lightValues[xi.abyssea.lightType.RUBY]
     local blueLight = lightValues[xi.abyssea.lightType.AZURE]
@@ -443,9 +443,9 @@ local function GetGoldChestInfos(player, lightValues)
     return chestSize, maxUnlockNumber, chestTier, chestModel, droptype, nbItem, message
 end
 
----------------------------------------------------------------------------------------------
+-----------------------------------
 -- Desc: This method allow you to set local var for blue red and gold chest
----------------------------------------------------------------------------------------------
+-----------------------------------
 local function SetPyxisData(npc, mob, player)
     local ID                = zones[player:getZoneID()]
     local lightValues       = xi.abyssea.getLightsTable(player)
@@ -516,28 +516,28 @@ local function SetPyxisData(npc, mob, player)
         -------------------------------------
         -- Chest data
         -------------------------------------
-        npc:setLocalVar("PLAYERID", player:getID())
-        npc:setLocalVar("PARTYLEADERID", partyLeaderId)
-        npc:setLocalVar("TIER", chestTier)
-        npc:setLocalVar("SIZE", sizeflag)
-        npc:setLocalVar("CHESTTYPE", chestType)
-        npc:setLocalVar("[pyxis]SPAWNTIME", os.time())
-        npc:setLocalVar("RAND_NUM", randnum)
-        npc:setLocalVar("REQUIRED", required)
-        npc:setLocalVar("MAX_UNLOCK_NUMBER", maxUnlockNumber)
-        npc:setLocalVar("NB_ITEM", nbItem)
-        npc:setLocalVar("MESSAGE", message)
-        npc:setLocalVar("DROPTYPE", dropType)
-        npc:setLocalVar("LIGHT", light)
-        npc:setLocalVar("CRUOR", 250 * chestTier)
-        npc:setLocalVar("EXP", 250 * chestTier)
-        npc:setLocalVar("RESTORE", restore)
-        npc:setLocalVar("LIGHT_VALUE", chestLightValue)
-        npc:setLocalVar("SPAWNSTATUS", 1)
-        npc:setLocalVar("CHESTID", npc:getID())
+        npc:setLocalVar('PLAYERID', player:getID())
+        npc:setLocalVar('PARTYLEADERID', partyLeaderId)
+        npc:setLocalVar('TIER', chestTier)
+        npc:setLocalVar('SIZE', sizeflag)
+        npc:setLocalVar('CHESTTYPE', chestType)
+        npc:setLocalVar('[pyxis]SPAWNTIME', os.time())
+        npc:setLocalVar('RAND_NUM', randnum)
+        npc:setLocalVar('REQUIRED', required)
+        npc:setLocalVar('MAX_UNLOCK_NUMBER', maxUnlockNumber)
+        npc:setLocalVar('NB_ITEM', nbItem)
+        npc:setLocalVar('MESSAGE', message)
+        npc:setLocalVar('DROPTYPE', dropType)
+        npc:setLocalVar('LIGHT', light)
+        npc:setLocalVar('CRUOR', 250 * chestTier)
+        npc:setLocalVar('EXP', 250 * chestTier)
+        npc:setLocalVar('RESTORE', restore)
+        npc:setLocalVar('LIGHT_VALUE', chestLightValue)
+        npc:setLocalVar('SPAWNSTATUS', 1)
+        npc:setLocalVar('CHESTID', npc:getID())
         npc:setPos(mobPos.x, mobPos.y, mobPos.z, mobPos.rot)
         npc:setStatus(xi.status.NORMAL)
-        npc:entityAnimationPacket("deru")
+        npc:entityAnimationPacket('deru')
         npc:setAnimationSub(12)
         xi.pyxis.messageChest(player, ID.text.MONSTER_CONCEALED_CHEST, 0, 0, 0, 0)
         npc:setModelId(chestModel)
@@ -548,7 +548,7 @@ local function SetPyxisData(npc, mob, player)
             end
         end)
     else
-        print("ERROR: Trying to spawn chest that is already spawned!")
+        print('ERROR: Trying to spawn chest that is already spawned!')
     end
 end
 

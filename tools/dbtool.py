@@ -9,6 +9,7 @@ import shutil
 import importlib
 import pathlib
 
+
 # Pre-flight sanity checks
 def preflight_exit():
     # If double clicked on Windows: pause with an input so the user can read the error...
@@ -97,6 +98,7 @@ def populate_migrations():
 # Migrations are automatically scraped from the migrations folder
 migrations = populate_migrations()
 
+
 # NOTE: Everything is returned as a dict of dicts of strings. If you are looking for bools or values
 #     : you'll need to convert them yourself.
 def populate_settings():
@@ -135,15 +137,15 @@ def populate_settings():
                             val = val.rsplit("--")[0].strip()
 
                             # pop off leading quote
-                            if val.startswith('\"'):
+                            if val.startswith('"'):
                                 val = val[1:]
 
                             # pop off trailing comma
-                            if val.endswith(','):
+                            if val.endswith(","):
                                 val = val[:-1]
 
                             # pop off trailing quote
-                            if val.endswith('\"'):
+                            if val.endswith('"'):
                                 val = val[:-1]
 
                             current_settings[key] = val
@@ -180,6 +182,7 @@ settings, default_settings = populate_settings()
 player_data = [
     "accounts.sql",
     "accounts_banned.sql",
+    "auction_house_items.sql",
     "auction_house.sql",
     "char_blacklist.sql",
     "char_chocobos.sql",
@@ -193,6 +196,7 @@ player_data = [
     "char_job_points.sql",
     "char_look.sql",
     "char_merit.sql",
+    "char_monstrosity.sql",
     "char_pet.sql",
     "char_points.sql",
     "char_profile.sql",
@@ -271,11 +275,15 @@ def db_query(query):
 
 def fetch_credentials():
     global settings, database, host, port, login, password
-    database = os.getenv("XI_NETWORK_SQL_DATABASE") or settings["network"]["SQL_DATABASE"]
+    database = (
+        os.getenv("XI_NETWORK_SQL_DATABASE") or settings["network"]["SQL_DATABASE"]
+    )
     host = os.getenv("XI_NETWORK_SQL_HOST") or settings["network"]["SQL_HOST"]
     port = os.getenv("XI_NETWORK_SQL_PORT") or int(settings["network"]["SQL_PORT"])
     login = os.getenv("XI_NETWORK_SQL_LOGIN") or settings["network"]["SQL_LOGIN"]
-    password = os.getenv("XI_NETWORK_SQL_PASSWORD") or settings["network"]["SQL_PASSWORD"]
+    password = (
+        os.getenv("XI_NETWORK_SQL_PASSWORD") or settings["network"]["SQL_PASSWORD"]
+    )
 
 
 def fetch_versions():
@@ -399,17 +407,17 @@ def fetch_files(express=False):
             print_red("Error checking diffs.\nCheck that hash is valid in config.yaml.")
             print(e)
     else:
-        for (_, _, filenames) in os.walk(from_server_path("sql/")):
+        for _, _, filenames in os.walk(from_server_path("sql/")):
             for filename in sorted(filenames):
-                if filename.endswith('.sql'):
+                if filename.endswith(".sql"):
                     import_files.append(from_server_path("sql/" + filename))
             break
     check_protected()
     backups.clear()
-    for (_, _, filenames) in os.walk(from_server_path("sql/backups/")):
+    for _, _, filenames in os.walk(from_server_path("sql/backups/")):
         for file in sorted(filenames):
             if not ".gitignore" in file:
-                if file.endswith('.sql'):
+                if file.endswith(".sql"):
                     backups.append(from_server_path("sql/backups/" + file))
         break
     backups.sort()
@@ -487,13 +495,12 @@ def connect():
             ):
                 result = subprocess.run(
                     [
-                        f"{mysql_bin}mysqladmin{exe}",
+                        f"{mysql_bin}mysql{exe}",
                         f"-h{host}",
                         f"-P{str(port)}",
                         f"-u{login}",
                         f"-p{password}",
-                        "CREATE",
-                        database,
+                        f"-e CREATE DATABASE {database} CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci",
                     ],
                     capture_output=True,
                     text=True,
@@ -985,18 +992,18 @@ def present_menu(title, contents):
 # fmt: on
 
 
-def configure_and_launch_multi_process_by_zonetype():
-    db_query(
-        f"""
-        UPDATE xidb.zone_settings SET zoneport = 54230 WHERE zonetype = 0;
-        UPDATE xidb.zone_settings SET zoneport = 54231 WHERE zonetype = 1;
-        UPDATE xidb.zone_settings SET zoneport = 54232 WHERE zonetype = 2;
-        UPDATE xidb.zone_settings SET zoneport = 54233 WHERE zonetype = 3;
-        UPDATE xidb.zone_settings SET zoneport = 54234 WHERE zonetype = 4;
-        UPDATE xidb.zone_settings SET zoneport = 54235 WHERE zonetype = 5;
-        UPDATE xidb.zone_settings SET zoneport = 54236 WHERE zonetype = 6;
-        """
-    )
+def configure_and_launch_multi_process_by_modulus(mod):
+    # Build query string based on mod
+    query = ""
+    for idx in range(0, mod):
+        query += f"UPDATE xidb.zone_settings SET zoneport = 54230 + {idx} WHERE zoneid % {mod} = {idx};\n"
+
+    print(query)
+    db_query(query)
+
+    result = db_query("SELECT DISTINCT zoneip FROM xidb.zone_settings;")
+
+    zoneip = result.stdout.split("\n")[1]
 
     result = db_query(
         f"""
@@ -1008,11 +1015,13 @@ def configure_and_launch_multi_process_by_zonetype():
 
     executable = from_server_path(f"xi_map{exe}")
 
+    print(f"ZoneIP: {zoneip}, Ports: {ports}\n")
+
     # fmt: off
     for port in ports:
-        print(f"Launching {executable} --log log/map-server-{port}.log --ip 127.0.0.1 --port {port}")
+        print(f"Launching {executable} --log log/map-server-{port}.log --ip {zoneip} --port {port}")
         subprocess.Popen(
-            [executable, "--log", f"log/map-server-{port}.log", "--ip", "127.0.0.1", "--port", port],
+            [executable, "--log", f"log/map-server-{port}.log", "--ip", zoneip, "--port", port],
             shell=True,
             creationflags=subprocess.DETACHED_PROCESS | subprocess.CREATE_NEW_PROCESS_GROUP,
             cwd=server_dir_path,
@@ -1022,12 +1031,158 @@ def configure_and_launch_multi_process_by_zonetype():
     # fmt: on
 
 
+def configure_and_launch_multi_process_by_modulus_3():
+    configure_and_launch_multi_process_by_modulus(3)
+
+
+def configure_and_launch_multi_process_by_modulus_7():
+    configure_and_launch_multi_process_by_modulus(7)
+
+
 def update_submodules():
     # fmt: off
     result = subprocess.run(
         ["git", "submodule", "update", "--init", "--recursive", "--progress"], capture_output=True, text=True).stdout
     print(result)
     # fmt: on
+
+
+def update_sql_from_db(table_name):
+    try:
+        # Fetch all rows from the specified table
+        cur.execute(f"SELECT * FROM {table_name};")
+        rows = cur.fetchall()
+
+        # Read the SQL file
+        with open(
+            from_server_path(f"sql/{table_name}.sql"), "r", encoding="utf-8"
+        ) as file:
+            sql_lines = file.readlines()
+
+        sql_variables = {}
+        updated_lines = []
+        row_index = 0
+
+        # Iterate over the lines in the file
+        for line in sql_lines:
+            # Scan for variables
+            if line.strip().startswith("SET @"):
+                parts = line.strip().split("=")
+                var_name = parts[0].split()[1]
+                var_value = parts[1].replace(";", "").split("--")[0].strip()
+                sql_variables[var_value] = var_name
+            # Scan for INSERT
+            lowercase_line = line.strip().lower()
+            insert_start = re.match(
+                rf"insert into `{table_name}` values \(", lowercase_line
+            )
+            if insert_start:
+                # Build a string using the values pulled from the database
+                values = rows[row_index]
+                updated_values = []
+                for i, value in enumerate(values):
+                    # NULL
+                    if value is None:
+                        updated_values.append("NULL")
+                    # Binary
+                    elif isinstance(value, bytes):
+                        if len(value) == 0:
+                            updated_values.append(f"''")
+                        # npc_list name field is binary but should be decoded for the sql files
+                        elif table_name == "npc_list" and i == 1:
+                            text = True
+                            for j in value:
+                                if j < 32 or j > 126:  # ascii printable characters
+                                    text = False
+                                    break
+                            if text:
+                                updated_values.append(f"'{value.decode('latin_1')}'")
+                            # If the value contains non-printable characters, use hex instead
+                            else:
+                                hex_value = value.hex().upper()
+                                updated_values.append(f"0x{hex_value}")
+                        # Otherwise print binary in 0x hex form
+                        else:
+                            hex_value = value.hex().upper()
+                            updated_values.append(f"0x{hex_value}")
+                    # String
+                    elif isinstance(value, str):
+                        escaped_value = value.replace("'", "\\'")
+                        updated_values.append(f"'{escaped_value}'")
+                    # Number
+                    else:
+                        # mob_droplist and pet_skills use variables for certain fields
+                        if (
+                            table_name == "mob_droplist"
+                            and i == 5
+                            and str(value) in sql_variables
+                        ):
+                            updated_values.append(sql_variables[str(value)])
+                        elif table_name == "pet_skills" and i == 9:
+                            var_list = []
+                            for var in sql_variables.keys():
+                                if value & int(var):
+                                    var_list.append(sql_variables[var])
+                            updated_values.append(" | ".join(var_list))
+                        else:
+                            # Get float formatting from the cursor description.
+                            # https://github.com/mariadb-corporation/mariadb-connector-python/blob/67d3062ad597cca8d5419b2af2ad8b62528204e5/mariadb/mariadb_cursor.c#L777-L787
+                            if (
+                                cur.description[i][1]
+                                == mariadb.constants.FIELD_TYPE.FLOAT
+                                and cur.description[i][5] > 0
+                            ):
+                                updated_values.append(
+                                    f"{value:.{cur.description[i][5]}f}"
+                                )
+                            else:
+                                updated_values.append(str(value))
+                values = ",".join(updated_values)
+                # Replace the values in the current line with the values pulled from the database
+                updated_line = line[: insert_start.end()] + f"{values});"
+                # Append any comments, preserving whitespace
+                if "--" in line:
+                    insert_end = line.index(");") + 2
+                    before_comment = line[insert_end:].split("--")[0]
+                    updated_line = f"{updated_line}{before_comment}{line[insert_end + len(before_comment):]}"
+                else:
+                    updated_line = f"{updated_line}\n"
+                updated_lines.append(updated_line)
+                row_index += 1
+            # Otherwise just save the line as-is
+            else:
+                updated_lines.append(line)
+
+        # Write the updated content back to the file
+        with open(
+            from_server_path(f"sql/{table_name}.sql"), "w", encoding="utf-8"
+        ) as file:
+            file.writelines(updated_lines)
+
+    except Exception as e:
+        print_red(f"Error: {e}")
+
+
+def dump_table(table_name=None, silent=False):
+    if not silent:
+        table_name = input("Which table would you like to dump?\n> ")
+    update_sql_from_db(table_name)
+    print_green(f"Replaced values in {table_name}.sql with data from the database.")
+
+
+def dump_all_tables(silent=False):
+    if silent or input("Dump all database tables to .sql files? [y/N] ").lower() == "y":
+        dump_tables = []
+        for _, _, filenames in os.walk(from_server_path("sql/")):
+            for filename in sorted(filenames):
+                if filename.endswith(".sql"):
+                    dump_tables.append(filename)
+            break
+        dump_tables.remove("triggers.sql")
+        for table in dump_tables:
+            if table not in player_data:
+                update_sql_from_db(table[:-4])
+        print_green(f"Replaced values in all .sql files with data from the database.")
 
 
 def tasks_menu():
@@ -1042,10 +1197,16 @@ def tasks_menu():
             #     "Offload historical auction data to auction_house_history",
             #     offload_to_auction_house_history,
             # ],
-            "c": [
-                "Configure and launch multi-process server (by zonetype, 7 processes)",
-                configure_and_launch_multi_process_by_zonetype,
+            "b": [
+                "Configure and launch multi-process server (3 processes)",
+                configure_and_launch_multi_process_by_modulus_3,
             ],
+            "c": [
+                "Configure and launch multi-process server (7 processes)",
+                configure_and_launch_multi_process_by_modulus_7,
+            ],
+            "d": ["Dump Table", dump_table],
+            "a": ["Dump All Tables", dump_all_tables],
             "q": ["Quit to main menu", NOOP],
         },
     )
@@ -1098,19 +1259,24 @@ def main():
                 if len(sys.argv) > 2 and str(sys.argv[2]) == database:
                     result = subprocess.run(
                         [
-                            f"{mysql_bin}mysqladmin{exe}",
+                            f"{mysql_bin}mysql{exe}",
                             f"-h{host}",
                             f"-P{str(port)}",
                             f"-u{login}",
                             f"-p{password}",
-                            "CREATE",
-                            database,
+                            f"-e CREATE DATABASE {database} CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci",
                         ],
                         capture_output=True,
                         text=True,
                     )
                     fetch_errors(result)
                     setup_db()
+                return
+            elif "dump" == arg1:
+                if len(sys.argv) > 2:
+                    dump_table(str(sys.argv[2]), True)
+                else:
+                    dump_all_tables(True)
                 return
         # Main loop
         print(colorama.ansi.clear_screen())

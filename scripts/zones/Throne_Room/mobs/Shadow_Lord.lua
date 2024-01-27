@@ -3,8 +3,7 @@
 --  Mob: Shadow Lord
 -- Mission 5-2 BCNM Fight
 -----------------------------------
-local ID = require("scripts/zones/Throne_Room/IDs")
-require("scripts/globals/titles")
+local ID = zones[xi.zone.THRONE_ROOM]
 -----------------------------------
 local entity = {}
 
@@ -19,8 +18,8 @@ entity.onMobFight = function(mob, target)
         if mob:getHP() / mob:getMaxHP() <= 0.5 then
 
             -- have to keep track of both the last time he changed immunity and the HP he changed at
-            local changeTime = mob:getLocalVar("changeTime")
-            local changeHP = mob:getLocalVar("changeHP")
+            local changeTime = mob:getLocalVar('changeTime')
+            local changeHP = mob:getLocalVar('changeHP')
 
             -- subanimation 0 is first phase subanim, so just go straight to magic mode
             if mob:getAnimationSub() == 0 then
@@ -31,8 +30,8 @@ entity.onMobFight = function(mob, target)
                 mob:setMagicCastingEnabled(true)
                 mob:setMobMod(xi.mobMod.MAGIC_COOL, 2)
                 --and record the time and HP this immunity was started
-                mob:setLocalVar("changeTime", mob:getBattleTime())
-                mob:setLocalVar("changeHP", mob:getHP())
+                mob:setLocalVar('changeTime', mob:getBattleTime())
+                mob:setLocalVar('changeHP', mob:getHP())
             -- subanimation 2 is physical mode, so check if he should change into magic mode
             elseif
                 mob:getAnimationSub() == 2 and
@@ -45,8 +44,8 @@ entity.onMobFight = function(mob, target)
                 mob:setAutoAttackEnabled(false)
                 mob:setMagicCastingEnabled(true)
                 mob:setMobMod(xi.mobMod.MAGIC_COOL, 2)
-                mob:setLocalVar("changeTime", mob:getBattleTime())
-                mob:setLocalVar("changeHP", mob:getHP())
+                mob:setLocalVar('changeTime', mob:getBattleTime())
+                mob:setLocalVar('changeHP', mob:getHP())
             -- subanimation 1 is magic mode, so check if he should change into physical mode
             elseif
                 mob:getAnimationSub() == 1 and
@@ -61,16 +60,16 @@ entity.onMobFight = function(mob, target)
                 mob:setAutoAttackEnabled(true)
                 mob:setMagicCastingEnabled(false)
                 mob:setMobMod(xi.mobMod.MAGIC_COOL, 10)
-                mob:setLocalVar("changeTime", mob:getBattleTime())
-                mob:setLocalVar("changeHP", mob:getHP())
+                mob:setLocalVar('changeTime', mob:getBattleTime())
+                mob:setLocalVar('changeHP', mob:getHP())
             end
         end
     else
         -- second phase AI: Implode every 9 seconds
-        local lastImplodeTime = mob:getLocalVar("lastImplodeTime")
+        local lastImplodeTime = mob:getLocalVar('lastImplodeTime')
         if mob:getBattleTime() - lastImplodeTime > 9 then
             mob:useMobAbility(669)
-            mob:setLocalVar("lastImplodeTime", mob:getBattleTime())
+            mob:setLocalVar('lastImplodeTime', mob:getBattleTime())
         end
     end
 end

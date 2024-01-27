@@ -3,13 +3,7 @@
 -----------------------------------
 -- Taillegeas : !pos 31.000 1.995 57.971 243
 -----------------------------------
-require('scripts/globals/magic')
-require('scripts/globals/trust')
-require('scripts/globals/quests')
-require('scripts/globals/npc_util')
-require('scripts/globals/interaction/hidden_quest')
------------------------------------
-local ruludeID = require('scripts/zones/RuLude_Gardens/IDs')
+local ruludeID = zones[xi.zone.RULUDE_GARDENS]
 -----------------------------------
 
 local quest = HiddenQuest:new('TrustCherukiki')
@@ -35,7 +29,7 @@ quest.sections =
                 or
                 -- On Dawn, but past "the boss"
                 (player:getCurrentMission(xi.mission.log_id.COP) > xi.mission.id.cop.DAWN and
-                player:getCharVar("PromathiaStatus") >= 3)
+                player:getCharVar('PromathiaStatus') >= 3)
                 or
                 -- Past Dawn
                 player:getCurrentMission(xi.mission.log_id.COP) > xi.mission.id.cop.DAWN

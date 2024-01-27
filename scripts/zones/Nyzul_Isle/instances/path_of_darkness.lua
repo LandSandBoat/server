@@ -2,9 +2,7 @@
 -- TOAU-42: Path of Darkness
 -- !instance 7700
 -----------------------------------
-local ID = require("scripts/zones/Nyzul_Isle/IDs")
-require("scripts/globals/instance")
-require("scripts/globals/missions")
+local ID = zones[xi.zone.NYZUL_ISLE]
 -----------------------------------
 local instanceObject = {}
 
@@ -51,7 +49,7 @@ instanceObject.afterInstanceRegister = function(player)
         player:messageSpecial(ID.text.FADES_INTO_NOTHINGNESS, xi.ki.NYZUL_ISLE_ROUTE)
     end
 
-    player:addTempItem(xi.items.UNDERSEA_RUINS_FIREFLIES)
+    player:addTempItem(xi.item.UNDERSEA_RUINS_FIREFLIES)
 end
 
 -- Instance "tick"
@@ -75,8 +73,8 @@ instanceObject.onInstanceProgressUpdate = function(instance, progress)
         DespawnMob(ID.mob[58].AMNAF_BLU, instance)
     elseif progress == 24 then
         local v = GetMobByID(ID.mob[58].NAJA, instance)
-        v:setLocalVar("ready", 0)
-        v:setLocalVar("Stage", 2)
+        v:setLocalVar('ready', 0)
+        v:setLocalVar('Stage', 2)
 
         SpawnMob(ID.mob[58].AMNAF_BLU, instance)
     elseif progress >= 30 and progress < 40 then
@@ -85,8 +83,8 @@ instanceObject.onInstanceProgressUpdate = function(instance, progress)
         SpawnMob(ID.mob[58].AMNAF_PSYCHEFLAYER, instance)
 
         local v = GetMobByID(ID.mob[58].NAJA, instance)
-        v:setLocalVar("ready", 0)
-        v:setLocalVar("Stage", 3)
+        v:setLocalVar('ready', 0)
+        v:setLocalVar('Stage', 3)
 
         local npcs = instance:getNpcs()
 

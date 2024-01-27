@@ -3,8 +3,7 @@
 --  Mob: Orcish Grunt
 -- Note: PH for Ashmaker Gotblut
 -----------------------------------
-local ID = require("scripts/zones/Yughott_Grotto/IDs")
-require("scripts/globals/mobs")
+local ID = zones[xi.zone.YUGHOTT_GROTTO]
 -----------------------------------
 local entity = {}
 

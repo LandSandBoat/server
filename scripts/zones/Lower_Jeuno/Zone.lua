@@ -1,12 +1,8 @@
 -----------------------------------
 -- Zone: Lower_Jeuno (245)
 -----------------------------------
-local ID = require('scripts/zones/Lower_Jeuno/IDs')
+local ID = zones[xi.zone.LOWER_JEUNO]
 local lowerJeunoGlobal = require('scripts/zones/Lower_Jeuno/globals')
-require('scripts/globals/conquest')
-require('scripts/globals/missions')
-require('scripts/globals/pathfind')
-require('scripts/globals/chocobo')
 -----------------------------------
 local zoneObject = {}
 
@@ -18,8 +14,8 @@ end
 zoneObject.onZoneIn = function(player, prevZone)
     local cs = -1
 
-    local month = tonumber(os.date("%m"))
-    local day = tonumber(os.date("%d"))
+    local month = tonumber(os.date('%m'))
+    local day = tonumber(os.date('%d'))
 
     -- Retail start/end dates vary, I am going with Dec 5th through Jan 5th.
     if
@@ -52,7 +48,7 @@ end
 
 zoneObject.onGameHour = function(zone)
     local vanadielHour = VanadielHour()
-    local playerOnQuestId = GetServerVariable("[JEUNO]CommService")
+    local playerOnQuestId = GetServerVariable('[JEUNO]CommService')
 
     -- Community Service Quest
     -- 7AM: it's daytime. turn off all the lights
@@ -65,7 +61,7 @@ zoneObject.onGameHour = function(zone)
     -- 8PM: make quest available
     -- notify anyone in zone with membership card that zauko is recruiting
     elseif vanadielHour == 18 then
-        SetServerVariable("[JEUNO]CommService", 0)
+        SetServerVariable('[JEUNO]CommService', 0)
         local players = zone:getPlayers()
         for name, player in pairs(players) do
             if player:hasKeyItem(xi.ki.LAMP_LIGHTERS_MEMBERSHIP_CARD) then
@@ -75,7 +71,7 @@ zoneObject.onGameHour = function(zone)
 
     -- 9PM: notify the person on the quest that they can begin lighting lamps
     elseif vanadielHour == 21 then
-        local playerOnQuest = GetPlayerByID(GetServerVariable("[JEUNO]CommService"))
+        local playerOnQuest = GetPlayerByID(GetServerVariable('[JEUNO]CommService'))
         if playerOnQuest then
             playerOnQuest:startEvent(114)
         end

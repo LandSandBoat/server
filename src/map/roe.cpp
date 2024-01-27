@@ -97,14 +97,6 @@ void call_onRecordTrigger(CCharEntity* PChar, uint16 recordID, const RoeDatagram
 
 namespace roeutils
 {
-    void init()
-    {
-        TracyZoneScoped;
-        lua["RoeParseRecords"] = &roeutils::ParseRecords;
-        lua["RoeParseTimed"]   = &roeutils::ParseTimedSchedule;
-        RoeHandlers.fill(RoeCheckHandler());
-    }
-
     void ParseRecords(sol::table const& records_table)
     {
         TracyZoneScoped;

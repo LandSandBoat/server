@@ -3,9 +3,7 @@
 -- Name: Bastok Mission 9-2
 -- !pos -111 -6 0 165
 -----------------------------------
-local ID = require("scripts/zones/Throne_Room/IDs")
-require("scripts/globals/battlefield")
-require("scripts/globals/missions")
+local ID = zones[xi.zone.THRONE_ROOM]
 -----------------------------------
 
 local content = BattlefieldMission:new({
@@ -15,8 +13,8 @@ local content = BattlefieldMission:new({
     levelCap      = 75,
     timeLimit     = utils.minutes(30),
     index         = 1,
-    entryNpc      = "_4l1",
-    exitNpcs      = { "_4l2", "_4l3", "_4l4" },
+    entryNpc      = '_4l1',
+    exitNpcs      = { '_4l2', '_4l3', '_4l4' },
 
     missionArea           = xi.mission.log_id.BASTOK,
     mission               = xi.mission.id.bastok.WHERE_TWO_PATHS_CONVERGE,
@@ -59,16 +57,16 @@ content.groups =
 {
     -- Phase 1
     {
-        mobs  = { "Zeid" },
+        mobs  = { 'Zeid' },
         setup = function(battlefield, mobs)
             for _, mob in ipairs(mobs) do
                 mob:setUntargetable(false)
                 mob:setUnkillable(true)
-                mob:removeListener("ZEID_COMBAT_TICK")
+                mob:removeListener('ZEID_COMBAT_TICK')
 
-                mob:addListener("COMBAT_TICK", "ZEID_COMBAT_TICK", function(zeid)
-                    if zeid:getHPP() < 70 and zeid:getLocalVar("ChangingPhase") == 0 then
-                        zeid:setLocalVar("ChangingPhase", 1)
+                mob:addListener('COMBAT_TICK', 'ZEID_COMBAT_TICK', function(zeid)
+                    if zeid:getHPP() < 70 and zeid:getLocalVar('ChangingPhase') == 0 then
+                        zeid:setLocalVar('ChangingPhase', 1)
 
                         local players = zeid:getBattlefield():getPlayers()
 
@@ -85,7 +83,7 @@ content.groups =
 
     -- Phase 2
     {
-        mobs    = { "Zeid_2" },
+        mobs    = { 'Zeid_2' },
         spawned = false,
         death   = function(battlefield, mob)
             battlefield:setStatus(xi.battlefield.status.WON)
@@ -93,7 +91,7 @@ content.groups =
     },
 
     {
-        mobs    = { "Shadow_of_Rage" },
+        mobs    = { 'Shadow_of_Rage' },
         spawned = false,
     }
 }

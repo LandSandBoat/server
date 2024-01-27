@@ -2,23 +2,26 @@
 -- func: checkinstance
 -- desc: Displays Progress and Stage inside instance
 -----------------------------------
+local commandObj = {}
 
-cmdprops =
+commandObj.cmdprops =
 {
     permission = 1,
-    parameters = ""
+    parameters = ''
 }
 
-function onTrigger(player)
+commandObj.onTrigger = function(player)
     local zone = player:getZone()
 
-    if zone:getType() == xi.zoneType.INSTANCED then
+    if zone:getTypeMask() == xi.zoneType.INSTANCED then
         local instance = player:getInstance()
         local progress = instance:getProgress()
         local stage = instance:getStage()
 
-        player:PrintToPlayer(string.format("Progress: %i Stage: %i", progress, stage))
+        player:printToPlayer(string.format('Progress: %i Stage: %i', progress, stage))
     else
-        player:PrintToPlayer("Must be in an Instanced zone")
+        player:printToPlayer('Must be in an Instanced zone')
     end
 end
+
+return commandObj

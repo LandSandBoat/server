@@ -9,7 +9,7 @@
 -- !pos 207.000 -16.000 479.000 25
 -- !pos 253.000 -16.000 411.500 25
 -----------------------------------
-local misareauxGlobal = require("scripts/zones/Misareaux_Coast/globals")
+local misareauxGlobal = require('scripts/zones/Misareaux_Coast/globals')
 -----------------------------------
 local entity = {}
 

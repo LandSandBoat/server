@@ -5,13 +5,8 @@
 -- Abioleget : !pos 128.771 0 118.538 231
 -- Andelain  : !pos 664.231 -12.849 -539.413 101
 -----------------------------------
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
-require('scripts/globals/titles')
-require('scripts/globals/interaction/quest')
------------------------------------
-local eastRonfaureID     = require('scripts/zones/East_Ronfaure/IDs')
-local northernSandoriaID = require('scripts/zones/Northern_San_dOria/IDs')
+local eastRonfaureID     = zones[xi.zone.EAST_RONFAURE]
+local northernSandoriaID = zones[xi.zone.NORTHERN_SAN_DORIA]
 -----------------------------------
 
 local quest = Quest:new(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_VICASQUES_SERMON)
@@ -20,7 +15,7 @@ quest.reward =
 {
     fame     = 30,
     fameArea = xi.quest.fame_area.SANDORIA,
-    item     = xi.items.BRASS_RING,
+    item     = xi.item.BRASS_RING,
     title    = xi.title.THE_BENEVOLENT_ONE,
 }
 
@@ -64,7 +59,7 @@ quest.sections =
                     if quest:getVar(player, 'Prog') == 1 then
                         return quest:progressEvent(600)
                     else
-                        return quest:messageName(northernSandoriaID.text.WILL_PROVIDE_PITTANCE, xi.items.POD_OF_BLUE_PEAS, 70)
+                        return quest:messageName(northernSandoriaID.text.WILL_PROVIDE_PITTANCE, xi.item.POD_OF_BLUE_PEAS, 70)
                     end
                 end,
             },
@@ -72,7 +67,7 @@ quest.sections =
             onEventFinish =
             {
                 [591] = function(player, csid, option, npc)
-                    if npcUtil.giveItem(player, xi.items.POD_OF_BLUE_PEAS) then
+                    if npcUtil.giveItem(player, xi.item.POD_OF_BLUE_PEAS) then
                         player:confirmTrade()
                     end
                 end,
@@ -88,9 +83,9 @@ quest.sections =
             ['Andelain'] =
             {
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHas(trade, xi.items.POD_OF_BLUE_PEAS) then
+                    if npcUtil.tradeHas(trade, xi.item.POD_OF_BLUE_PEAS) then
                         if quest:getVar(player, 'Prog') == 1 then
-                            return quest:messageName(eastRonfaureID.text.APPRECIATE_OFFER_DECLINE, xi.items.POD_OF_BLUE_PEAS)
+                            return quest:messageName(eastRonfaureID.text.APPRECIATE_OFFER_DECLINE, xi.item.POD_OF_BLUE_PEAS)
                         else
                             player:messageSpecial(eastRonfaureID.text.THANKS_TO_GODDESS)
                             return quest:progressEvent(19)
@@ -104,7 +99,7 @@ quest.sections =
                     if quest:getVar(player, 'Prog') == 1 then
                         return quest:progressEvent(19)
                     else
-                        return quest:messageName(eastRonfaureID.text.MAY_ONLY_EAT, xi.items.POD_OF_BLUE_PEAS)
+                        return quest:messageName(eastRonfaureID.text.MAY_ONLY_EAT, xi.item.POD_OF_BLUE_PEAS)
                     end
                 end,
             },

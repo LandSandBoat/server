@@ -2,8 +2,7 @@
 -- Area: Riverne - Site A01
 --  Mob: Flamedrake PH
 -----------------------------------
-local ID = require("scripts/zones/Riverne-Site_A01/IDs")
-require("scripts/globals/mobs")
+local ID = zones[xi.zone.RIVERNE_SITE_A01]
 -----------------------------------
 local entity = {}
 

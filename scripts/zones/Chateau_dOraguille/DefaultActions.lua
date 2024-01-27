@@ -1,4 +1,4 @@
-local ID = require("scripts/zones/Chateau_dOraguille/IDs")
+local ID = zones[xi.zone.CHATEAU_DORAGUILLE]
 
 return {
     ['_6h0']        = { text = ID.text.ITS_LOCKED },

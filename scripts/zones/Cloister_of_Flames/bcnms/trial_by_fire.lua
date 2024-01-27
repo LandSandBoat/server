@@ -2,10 +2,7 @@
 -- Area: Cloister of Flames
 -- BCNM: Trial by Fire
 -----------------------------------
-local ID = require("scripts/zones/Cloister_of_Flames/IDs")
-require("scripts/globals/battlefield")
-require("scripts/globals/quests")
-require("scripts/globals/titles")
+local ID = zones[xi.zone.CLOISTER_OF_FLAMES]
 -----------------------------------
 local battlefieldObject = {}
 
@@ -23,7 +20,7 @@ battlefieldObject.onBattlefieldLeave = function(player, battlefield, leavecode)
     if leavecode == xi.battlefield.leaveCode.WON then
         local _, clearTime, partySize = battlefield:getRecord()
         local arg8 = (player:hasCompletedQuest(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.TRIAL_BY_FIRE)) and 1 or 0
-        player:startEvent(32001, battlefield:getArea(), clearTime, partySize, battlefield:getTimeInside(), 1, battlefield:getLocalVar("[cs]bit"), arg8)
+        player:startEvent(32001, battlefield:getArea(), clearTime, partySize, battlefield:getTimeInside(), 1, battlefield:getLocalVar('[cs]bit'), arg8)
     elseif leavecode == xi.battlefield.leaveCode.LOST then
         player:startEvent(32002)
     end

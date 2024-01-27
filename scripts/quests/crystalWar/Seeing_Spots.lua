@@ -4,11 +4,6 @@
 -- Wyatt: !pos 124 0 84 80
 -- LADYBUG_WING: !additem 2506
 -----------------------------------
-require('scripts/globals/interaction/quest')
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
-require('scripts/globals/titles')
------------------------------------
 
 local quest = Quest:new(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.SEEING_SPOTS)
 
@@ -60,7 +55,7 @@ quest.sections =
                 end,
 
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, { { xi.items.LADYBUG_WING, 4 } }) then
+                    if npcUtil.tradeHasExactly(trade, { { xi.item.LADYBUG_WING, 4 } }) then
                         return quest:progressEvent(4)
                     end
                 end,

@@ -42,6 +42,7 @@ public:
     friend std::ostream& operator<<(std::ostream& out, const CLuaAction& action);
 
     void   ID(uint32 actionTargetID, uint32 newActionTargetID);
+    uint32 getPrimaryTargetID();
     void   setRecast(uint16 recast);
     uint16 getRecast();
     void   actionID(uint16 actionid);
@@ -59,6 +60,11 @@ public:
     void   addEffectParam(uint32 actionTargetID, int32 addEffectParam);
     void   addEffectMessage(uint32 actionTargetID, uint16 addEffectMessage);
     bool   addAdditionalTarget(uint32 actionTargetID);
+
+    bool operator==(const CLuaAction& other) const
+    {
+        return this->m_PLuaAction == other.m_PLuaAction;
+    }
 
     static void Register();
 };

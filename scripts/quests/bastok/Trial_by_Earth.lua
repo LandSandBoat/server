@@ -4,12 +4,7 @@
 -- Log ID: 1, Quest ID: 61
 -- Juroro : !pos 32 7 -41 236
 -----------------------------------
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
-require('scripts/globals/utils')
-require('scripts/globals/interaction/quest')
------------------------------------
-local portBastokID = require('scripts/zones/Port_Bastok/IDs')
+local portBastokID = zones[xi.zone.PORT_BASTOK]
 -----------------------------------
 
 local quest = Quest:new(xi.quest.log_id.BASTOK, xi.quest.id.bastok.TRIAL_BY_EARTH)
@@ -22,10 +17,10 @@ quest.reward =
 
 local rewardItems =
 {
-    [0] = xi.items.TITANS_CUDGEL,
-    [1] = xi.items.EARTH_BELT,
-    [2] = xi.items.EARTH_RING,
-    [3] = xi.items.DOSE_OF_DESERT_LIGHT,
+    [0] = xi.item.TITANS_CUDGEL,
+    [1] = xi.item.EARTH_BELT,
+    [2] = xi.item.EARTH_RING,
+    [3] = xi.item.DOSE_OF_DESERT_LIGHT,
 }
 
 local function getRewardMask(player)
@@ -112,12 +107,8 @@ quest.sections =
                 [252] = function(player, csid, option, npc)
                     if giveQuestReward(player, option) then
                         quest:complete(player)
-
                         player:delKeyItem(xi.ki.WHISPER_OF_TREMORS)
-
-                        -- TODO: This is currently a potential forever var.  Implement a system to remove
-                        -- a defined list of vars in OnJstMidnight.
-                        quest:setVar(player, 'Timer', JstMidnight())
+                        quest:setTimedVar(player, 'Timer', NextJstDay())
                     end
                 end,
 
@@ -144,7 +135,7 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == QUEST_COMPLETED and
-                os.time() > quest:getVar(player, 'Timer')
+                quest:getVar(player, 'Timer') == 0
         end,
 
         [xi.zone.PORT_BASTOK] =
@@ -159,7 +150,6 @@ quest.sections =
 
                         npcUtil.giveKeyItem(player, xi.ki.TUNING_FORK_OF_EARTH)
 
-                        quest:setVar(player, 'Timer', 0)
                         quest:begin(player)
                     end
                 end,

@@ -4,7 +4,7 @@
 -- Involved in Quest: Mhaura Fortune
 -- !pos -54.755 7.647 -379.945 117
 -----------------------------------
-local ID = require("scripts/zones/Tahrongi_Canyon/IDs")
+local ID = zones[xi.zone.TAHRONGI_CANYON]
 -----------------------------------
 local entity = {}
 

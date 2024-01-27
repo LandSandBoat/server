@@ -4,7 +4,7 @@
 -- Type: Travelling Merchant NPC / NPC Quiver Maker / San d'Oria 1st Place
 -- !pos 23 2 -13 230
 -----------------------------------
-local ID = require("scripts/zones/Southern_San_dOria/IDs")
+local ID = zones[xi.zone.SOUTHERN_SAN_DORIA]
 -----------------------------------
 local entity = {}
 
@@ -122,7 +122,7 @@ entity.onTrade = function(player, npc, trade)
     -- check for correct number of carnations
     if
         carnationsNeeded == 0 or
-        trade:getItemQty(xi.items.CARNATION) ~= carnationsNeeded
+        trade:getItemQty(xi.item.CARNATION) ~= carnationsNeeded
     then
         player:messageSpecial(ID.text.NOKKHI_BAD_COUNT)
         return

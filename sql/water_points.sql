@@ -19,10 +19,10 @@ CREATE TABLE IF NOT EXISTS `water_points` (
   `pos_y` float(7,2) NOT NULL DEFAULT '0.00',
   `pos_z` float(7,2) NOT NULL DEFAULT '0.00',
   PRIMARY KEY (`waterid`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8mb4;
+) ENGINE=Aria TRANSACTIONAL=0  DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Contenu de la table `water_points`
 --
 
-INSERT INTO `water_points` VALUES (1, 100, 0, 0, 0.00, 0.00, 0.00);
+INSERT INTO `water_points` VALUES (1,100,0,0,0.00,0.00,0.00);

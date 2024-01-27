@@ -1,12 +1,17 @@
 -----------------------------------
 -- Zone: Rolanberry_Fields_[S] (91)
 -----------------------------------
-local ID = require('scripts/zones/Rolanberry_Fields_[S]/IDs')
+require('scripts/globals/dark_ixion')
 -----------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
     xi.voidwalker.zoneOnInit(zone)
+    xi.darkixion.zoneOnInit(zone)
+end
+
+zoneObject.onGameHour = function(zone)
+    xi.darkixion.zoneOnGameHour(zone)
 end
 
 zoneObject.onZoneIn = function(player, prevZone)

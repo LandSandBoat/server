@@ -9,14 +9,9 @@
 -- Cid            : !pos -12 -12 1 237
 -- Sueleen        : !pos 612 132 774 32
 -----------------------------------
-require('scripts/globals/interaction/mission')
-require('scripts/globals/missions')
-require('scripts/globals/npc_util')
-require('scripts/globals/utils')
------------------------------------
-local carpentersID = require("scripts/zones/Carpenters_Landing/IDs")
-local bibikiBayID  = require("scripts/zones/Bibiki_Bay/IDs")
-local misareauxID  = require("scripts/zones/Misareaux_Coast/IDs")
+local carpentersID = zones[xi.zone.CARPENTERS_LANDING]
+local bibikiBayID  = zones[xi.zone.BIBIKI_BAY]
+local misareauxID  = zones[xi.zone.MISAREAUX_COAST]
 -----------------------------------
 
 local mission = Mission:new(xi.mission.log_id.COP, xi.mission.id.cop.CALM_BEFORE_THE_STORM)
@@ -149,7 +144,7 @@ mission.sections =
                 onTrigger = function(player, npc)
                     if not getMissionStatusBit(player, 0) then
                         if mission:getLocalVar(player, 'nmMisareaux') == 1 then
-                            return mission:progressEvent(13, { [1] = xi.items.DUCAL_GUARDS_RING })
+                            return mission:progressEvent(13, { [1] = xi.item.DUCAL_GUARDS_RING })
                         elseif not GetMobByID(misareauxID.mob.BOGGELMANN):isSpawned() then
                             SpawnMob(misareauxID.mob.BOGGELMANN):updateClaim(player)
 

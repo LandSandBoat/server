@@ -1,12 +1,8 @@
 -----------------------------------
 -- Zone: Konschtat_Highlands (108)
 -----------------------------------
-local ID = require('scripts/zones/Konschtat_Highlands/IDs')
+local ID = zones[xi.zone.KONSCHTAT_HIGHLANDS]
 require('scripts/quests/i_can_hear_a_rainbow')
-require('scripts/globals/chocobo_digging')
-require('scripts/globals/conquest')
-require('scripts/globals/missions')
-require('scripts/globals/chocobo')
 require('scripts/missions/amk/helpers')
 -----------------------------------
 local zoneObject = {}
@@ -71,13 +67,13 @@ zoneObject.onGameHour = function(zone)
         if
             phase >= 90 and
             not haty:isSpawned() and
-            time > haty:getLocalVar("cooldown")
+            time > haty:getLocalVar('cooldown')
         then
             SpawnMob(ID.mob.HATY)
         elseif
             phase <= 10 and
             not vran:isSpawned() and
-            time > vran:getLocalVar("cooldown")
+            time > vran:getLocalVar('cooldown')
         then
             SpawnMob(ID.mob.BENDIGEIT_VRAN)
         end

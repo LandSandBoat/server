@@ -1,13 +1,9 @@
 -----------------------------------
 -- Area: Aht Urhgan Whitegate
 --  NPC: Rytaal
--- Type: Standard NPC
 -- !pos 112.002 -1.338 -45.038 50
 -----------------------------------
-local ID = require("scripts/zones/Aht_Urhgan_Whitegate/IDs")
-require("scripts/globals/assault")
-require("scripts/globals/missions")
-require("scripts/globals/npc_util")
+local ID = zones[xi.zone.AHT_URHGAN_WHITEGATE]
 -----------------------------------
 local entity = {}
 
@@ -22,8 +18,8 @@ entity.onTrigger = function(player, npc)
         player:getMainLvl() <= 49
     then
         player:startEvent(270)
-    elseif currentAssault ~= 0 and player:getCharVar("assaultEntered") ~= 0 then
-        if player:getCharVar("AssaultComplete") == 1 then
+    elseif currentAssault ~= 0 and player:getCharVar('assaultEntered') ~= 0 then
+        if player:getCharVar('AssaultComplete') == 1 then
             player:messageText(player, ID.text.ASSAULT_COMPLETE)
             player:completeAssault(currentAssault)
         elseif currentAssault == 51 then
@@ -35,9 +31,9 @@ entity.onTrigger = function(player, npc)
             player:delAssault(currentAssault)
         end
 
-        player:setCharVar("AssaultComplete", 0)
-        player:setCharVar("assaultEntered", 0)
-        player:setCharVar("Assault_Armband", 0)
+        player:setCharVar('AssaultComplete', 0)
+        player:setCharVar('assaultEntered', 0)
+        player:setCharVar('Assault_Armband', 0)
 
         for _, orders in pairs(xi.assault.assaultOrders) do
             if player:hasKeyItem(orders) then
@@ -53,10 +49,10 @@ entity.onTrigger = function(player, npc)
     elseif
         player:getCurrentMission(xi.mission.log_id.TOAU) > xi.mission.id.toau.PRESIDENT_SALAHEEM or
         (player:getCurrentMission(xi.mission.log_id.TOAU) == xi.mission.id.toau.PRESIDENT_SALAHEEM and
-        player:getVar("ToAU3Progress") >= 1)
+        player:getCharVar('ToAU3Progress') >= 1)
     then
         local currentTime = os.time()
-        local refreshTime = player:getVar("nextTagTime")
+        local refreshTime = player:getCharVar('nextTagTime')
         local idTagPeriod = 86400
 
         if player:hasKeyItem(xi.ki.RHAPSODY_IN_AZURE) then
@@ -64,7 +60,7 @@ entity.onTrigger = function(player, npc)
         end
 
         local diffPeriod =  math.floor((currentTime - refreshTime) / idTagPeriod)
-        local tagStock = player:getCurrency("id_tags")
+        local tagStock = player:getCurrency('id_tags')
         local allTagsTimeCS = (refreshTime - 1009897200) + (diffPeriod * idTagPeriod)
         local haveimperialIDtag = 0
         local tagsAvail = 0
@@ -74,8 +70,8 @@ entity.onTrigger = function(player, npc)
             tagStock = tagStock + 1
         end
 
-        player:setCurrency("id_tags", tagStock)
-        player:setCharVar("nextTagTime", refreshTime)
+        player:setCurrency('id_tags', tagStock)
+        player:setCharVar('nextTagTime', refreshTime)
 
         if player:hasKeyItem(xi.ki.IMPERIAL_ARMY_ID_TAG) then
             haveimperialIDtag = 1
@@ -88,9 +84,9 @@ entity.onTrigger = function(player, npc)
         player:startEvent(268, 2, tagStock, currentAssault, haveimperialIDtag, allTagsTimeCS, tagsAvail)
     else
         -- Something went worng, clear all data
-        player:setCharVar("AssaultComplete", 0)
-        player:setCharVar("assaultEntered", 0)
-        player:setCharVar("Assault_Armband", 0)
+        player:setCharVar('AssaultComplete', 0)
+        player:setCharVar('assaultEntered', 0)
+        player:setCharVar('Assault_Armband', 0)
         player:delAssault(currentAssault)
         for _, orders in pairs(xi.assault.assaultOrders) do
             if player:hasKeyItem(orders) then
@@ -104,7 +100,7 @@ entity.onEventUpdate = function(player, csid, option, npc)
 end
 
 entity.onEventFinish = function(player, csid, option, npc)
-    local tagStock = player:getCurrency("id_tags")
+    local tagStock = player:getCurrency('id_tags')
 
     if
         csid == 268 and
@@ -126,10 +122,10 @@ entity.onEventFinish = function(player, csid, option, npc)
         end
 
         if tagStock >= 3 then
-            player:setVar("nextTagTime", os.time() + idTagPeriod)
+            player:setCharVar('nextTagTime', os.time() + idTagPeriod)
         end
 
-        player:setCurrency("id_tags", tagStock - 1)
+        player:setCurrency('id_tags', tagStock - 1)
     elseif
         csid == 268 and
         option == 2 and

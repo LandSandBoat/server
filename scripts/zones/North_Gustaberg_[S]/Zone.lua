@@ -1,13 +1,15 @@
 -----------------------------------
 -- Zone: North_Gustaberg_[S] (88)
 -----------------------------------
-local ID = require('scripts/zones/North_Gustaberg_[S]/IDs')
-require('scripts/globals/quests')
-require('scripts/globals/helm')
+local ID = zones[xi.zone.NORTH_GUSTABERG_S]
 -----------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
+    local olgoikhorkhoi = zone:queryEntitiesByName('Olgoi-Khorkhoi')[1]
+    -- UpdatSpawnPoint(OLGOI_KHORKHOI:getID()) TODO: need rows in nm_spawn_points.sql
+    olgoikhorkhoi:setRespawnTime(math.random(3600, 5400))
+
     xi.helm.initZone(zone, xi.helm.type.MINING)
     xi.voidwalker.zoneOnInit(zone)
 end

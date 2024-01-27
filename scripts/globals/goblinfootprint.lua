@@ -1,9 +1,9 @@
 -----------------------------------
 -- Goblin Footprint NPCs
 -----------------------------------
-require("scripts/globals/quests")
-require("scripts/globals/missions")
-require("scripts/globals/utils")
+require('scripts/globals/quests')
+require('scripts/globals/missions')
+require('scripts/globals/utils')
 -----------------------------------
 xi = xi or {}
 xi.goblinfootprint = xi.goblinfootprint or {}
@@ -144,16 +144,16 @@ local csReq = -- add checks to this table
         [3] = function(player)
             -- RELIC: Apocalypse
             -- TODO: Table items and iterate over table for this check
-            return player:hasItem(xi.items.APOCALYPSE) or
-                player:hasItem(xi.items.APOCALYPSE_80) or
-                player:hasItem(xi.items.APOCALYPSE_85) or
-                player:hasItem(xi.items.APOCALYPSE_90) or
-                player:hasItem(xi.items.APOCALYPSE_95) or
-                player:hasItem(xi.items.APOCALYPSE_99) or
-                player:hasItem(xi.items.APOCALYPSE_99_II) or
-                player:hasItem(xi.items.APOCALYPSE_119) or
-                player:hasItem(xi.items.APOCALYPSE_119_II) or
-                player:hasItem(xi.items.APOCALYPSE_119_III)
+            return player:hasItem(xi.item.APOCALYPSE) or
+                player:hasItem(xi.item.APOCALYPSE_80) or
+                player:hasItem(xi.item.APOCALYPSE_85) or
+                player:hasItem(xi.item.APOCALYPSE_90) or
+                player:hasItem(xi.item.APOCALYPSE_95) or
+                player:hasItem(xi.item.APOCALYPSE_99) or
+                player:hasItem(xi.item.APOCALYPSE_99_II) or
+                player:hasItem(xi.item.APOCALYPSE_119) or
+                player:hasItem(xi.item.APOCALYPSE_119_II) or
+                player:hasItem(xi.item.APOCALYPSE_119_III)
         end,
 
         [4] = function(player)

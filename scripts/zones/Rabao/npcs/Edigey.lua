@@ -3,9 +3,7 @@
 --  NPC: Edigey
 -- Starts and Ends Quest: Don't Forget the Antidote
 -----------------------------------
-require("scripts/globals/titles")
-require("scripts/globals/quests")
-local ID = require("scripts/zones/Rabao/IDs")
+local ID = zones[xi.zone.RABAO]
 -----------------------------------
 local entity = {}
 
@@ -14,10 +12,10 @@ entity.onTrade = function(player, npc, trade)
 
     if
         (forgetTheAntidote == QUEST_ACCEPTED or forgetTheAntidote == QUEST_COMPLETED) and
-        trade:hasItemQty(xi.items.VIAL_OF_DESERT_VENOM, 1) and
+        trade:hasItemQty(xi.item.VIAL_OF_DESERT_VENOM, 1) and
         trade:getItemCount() == 1
     then
-        player:startEvent(4, 0, xi.items.VIAL_OF_DESERT_VENOM)
+        player:startEvent(4, 0, xi.item.VIAL_OF_DESERT_VENOM)
     end
 end
 
@@ -28,11 +26,11 @@ entity.onTrigger = function(player, npc)
         forgetTheAntidote == QUEST_AVAILABLE and
         player:getFameLevel(xi.quest.fame_area.SELBINA_RABAO) >= 4
     then
-        player:startEvent(2, 0, xi.items.VIAL_OF_DESERT_VENOM)
+        player:startEvent(2, 0, xi.item.VIAL_OF_DESERT_VENOM)
     elseif forgetTheAntidote == QUEST_ACCEPTED then
-        player:startEvent(3, 0, xi.items.VIAL_OF_DESERT_VENOM)
+        player:startEvent(3, 0, xi.item.VIAL_OF_DESERT_VENOM)
     elseif forgetTheAntidote == QUEST_COMPLETED then
-        player:startEvent(5, 0, xi.items.VIAL_OF_DESERT_VENOM)
+        player:startEvent(5, 0, xi.item.VIAL_OF_DESERT_VENOM)
     else
         player:startEvent(50)
     end
@@ -44,13 +42,13 @@ end
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 2 and option == 1 then
         player:addQuest(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.DONT_FORGET_THE_ANTIDOTE)
-        player:setCharVar("DontForgetAntidoteVar", 1)
-    elseif csid == 4 and player:getCharVar("DontForgetAntidoteVar") == 1 then --If completing for the first time
-        player:setCharVar("DontForgetAntidoteVar", 0)
+        player:setCharVar('DontForgetAntidoteVar', 1)
+    elseif csid == 4 and player:getCharVar('DontForgetAntidoteVar') == 1 then --If completing for the first time
+        player:setCharVar('DontForgetAntidoteVar', 0)
         player:tradeComplete()
         player:addTitle(xi.title.DESERT_HUNTER)
-        player:addItem(xi.items.DOTANUKI) -- Dotanuki
-        player:messageSpecial(ID.text.ITEM_OBTAINED, xi.items.DOTANUKI)
+        player:addItem(xi.item.DOTANUKI) -- Dotanuki
+        player:messageSpecial(ID.text.ITEM_OBTAINED, xi.item.DOTANUKI)
         player:completeQuest(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.DONT_FORGET_THE_ANTIDOTE)
         player:addFame(xi.quest.fame_area.SELBINA_RABAO, 60)
     elseif csid == 4 then --Subsequent completions

@@ -3,8 +3,7 @@
 --  Mob: Lynx
 -- Note: PH for Balam-Quitz
 -----------------------------------
-local ID = require("scripts/zones/Sauromugue_Champaign_[S]/IDs")
-require("scripts/globals/mobs")
+local ID = zones[xi.zone.SAUROMUGUE_CHAMPAIGN_S]
 -----------------------------------
 local entity = {}
 

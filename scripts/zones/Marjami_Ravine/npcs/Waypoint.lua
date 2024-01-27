@@ -8,8 +8,6 @@
 -- Bivouac #3       : !pos -318.708 -20 -127.275 266
 -- Bivouac #4       : !pos -326.022 -40.023 201.096 266
 -----------------------------------
-require('scripts/globals/waypoint')
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

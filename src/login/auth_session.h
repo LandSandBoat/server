@@ -76,6 +76,7 @@ enum ACCOUNT_STATUS_CODE : uint8
     NORMAL = 0x01,
     BANNED = 0x02,
 };
+DECLARE_FORMAT_AS_UNDERLYING(ACCOUNT_STATUS_CODE);
 
 enum ACCOUNT_PRIVILEGE_CODE : uint8
 {
@@ -83,6 +84,7 @@ enum ACCOUNT_PRIVILEGE_CODE : uint8
     ADMIN = 0x02,
     ROOT  = 0x04,
 };
+DECLARE_FORMAT_AS_UNDERLYING(ACCOUNT_PRIVILEGE_CODE);
 
 // Interaction with xiloader, port 54231
 class auth_session : public handler_session

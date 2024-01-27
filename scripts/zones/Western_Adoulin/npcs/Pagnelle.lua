@@ -1,12 +1,9 @@
 -----------------------------------
 -- Area: Western Adoulin
 --  NPC: Pagnelle
--- Type: Standard NPC and Quest NPC
--- Starts, Involved with, and Finishes Quest: 'Raptor Rapture'
 -- !pos -8 0 -100 256
 -----------------------------------
-require("scripts/globals/quests")
-local ID = require("scripts/zones/Western_Adoulin/IDs")
+local ID = zones[xi.zone.WESTERN_ADOULIN]
 -----------------------------------
 local entity = {}
 
@@ -15,13 +12,13 @@ end
 
 entity.onTrigger = function(player, npc)
     local raptorRapture = player:getQuestStatus(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.RAPTOR_RAPTURE)
-    local raptorRaptureStatus = player:getCharVar("Raptor_Rapture_Status")
+    local raptorRaptureStatus = player:getCharVar('Raptor_Rapture_Status')
 
     if raptorRapture == QUEST_AVAILABLE then
         if raptorRaptureStatus < 3 then
             -- Starts chain of events for the introduction CS for Quest: 'Raptor Rapture'.
             -- If player somehow doesn't finish the chain of events, they can just talk to Pagnelle again to retry.
-            player:setCharVar("Raptor_Rapture_Status", 1)
+            player:setCharVar('Raptor_Rapture_Status', 1)
             player:startEvent(5032)
         else
             -- Player has finished introductory CS event chain, but didn't accept the quest.
@@ -72,19 +69,19 @@ entity.onEventFinish = function(player, csid, option, npc)
     elseif csid == 5061 and option == 1 then
         -- Starts Quest: 'Raptor Rapture'
         player:addQuest(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.RAPTOR_RAPTURE)
-        player:setCharVar("Raptor_Rapture_Status", 4)
+        player:setCharVar('Raptor_Rapture_Status', 4)
     elseif csid == 5035 then
         -- Progresses Quest: 'Raptor Rapture', spoke to Ilney, now need rockberries.
-        player:setCharVar("Raptor_Rapture_Status", 6)
+        player:setCharVar('Raptor_Rapture_Status', 6)
     elseif csid == 5037 then
         -- Progresses Quest: 'Raptor Rapture', brought rockberries, now need to go to Rala.
         player:delKeyItem(xi.ki.ROCKBERRY1)
         player:delKeyItem(xi.ki.ROCKBERRY2)
         player:delKeyItem(xi.ki.ROCKBERRY3)
-        player:setCharVar("Raptor_Rapture_Status", 7)
+        player:setCharVar('Raptor_Rapture_Status', 7)
     elseif csid == 5039 then
         -- Finishing Quest: 'Raptor Rapture'
-        player:setCharVar("Raptor_Rapture_Status", 0)
+        player:setCharVar('Raptor_Rapture_Status', 0)
         player:completeQuest(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.RAPTOR_RAPTURE)
         player:addCurrency('bayld', 1000 * xi.settings.main.BAYLD_RATE)
         player:messageSpecial(ID.text.BAYLD_OBTAINED, 1000 * xi.settings.main.BAYLD_RATE)

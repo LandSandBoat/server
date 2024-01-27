@@ -3,8 +3,7 @@
 --  NPC: Galvin
 -- Standard Merchant NPC
 -----------------------------------
-local ID = require("scripts/zones/Port_Bastok/IDs")
-require("scripts/globals/shop")
+local ID = zones[xi.zone.PORT_BASTOK]
 -----------------------------------
 local entity = {}
 
@@ -14,14 +13,14 @@ end
 entity.onTrigger = function(player, npc)
     local stock =
     {
-        4128, 4445, 1,    -- Ether
-        4151,  736, 2,    -- Echo Drops
-        4112,  837, 2,    -- Potion
-        17318,   3, 2,    -- Wooden Arrow
-        4150, 2387, 3,    -- Eye Drops
-        4148,  290, 3,    -- Antidote
-        17320,   7, 3,    -- Iron Arrow
-        17336,   5, 3,    -- Crossbow Bolt
+        xi.item.FLASK_OF_EYE_DROPS,  2698, 3,
+        xi.item.ANTIDOTE,             328, 3,
+        xi.item.FLASK_OF_ECHO_DROPS,  832, 2,
+        xi.item.POTION,               946, 2,
+        xi.item.ETHER,               5025, 1,
+        xi.item.WOODEN_ARROW,           4, 2,
+        xi.item.IRON_ARROW,             8, 3,
+        xi.item.CROSSBOW_BOLT,          6, 3,
     }
 
     player:showText(npc, ID.text.GALVIN_SHOP_DIALOG)

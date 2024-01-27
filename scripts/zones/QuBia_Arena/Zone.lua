@@ -1,9 +1,6 @@
 -----------------------------------
 -- Zone: Qu'Bia Arena (206)
 -----------------------------------
-local ID = require('scripts/zones/QuBia_Arena/IDs')
-require('scripts/globals/conquest')
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

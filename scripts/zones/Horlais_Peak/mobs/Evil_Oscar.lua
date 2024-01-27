@@ -4,25 +4,25 @@
 -- KSNM30
 --
 -- DONE: If you are out of range of EBB, the move will be lost
--- TODO: There should be a "No targets within range" message
+-- TODO: There should be a 'No targets within range' message
 --
 -- ['Evil Oscar-17346750'] =
 -- {
 --     [4] =
 --     {
 --         -- NOTE: This looks to be the no target message
---         [0]    = { ['name']="",                     ['category']=4,  ['id']=0,    ['animation']=508,  ['message']=76,  },
+--         [0]    = { ['name']='',                     ['category']=4,  ['id']=0,    ['animation']=508,  ['message']=76,  },
 --     },
 --
 --     [11] =
 --     {
---         [317]  = { ['name']="Vampiric Lash",        ['category']=11, ['id']=317,  ['animation']=61,   ['message']=31,  },
---         [320]  = { ['name']="Sweet Breath",         ['category']=11, ['id']=320,  ['animation']=64,   ['message']=185, },
---         [1332] = { ['name']="Extremely Bad Breath", ['category']=11, ['id']=1332, ['animation']=63,   ['message']=406, },
+--         [317]  = { ['name']='Vampiric Lash',        ['category']=11, ['id']=317,  ['animation']=61,   ['message']=31,  },
+--         [320]  = { ['name']='Sweet Breath',         ['category']=11, ['id']=320,  ['animation']=64,   ['message']=185, },
+--         [1332] = { ['name']='Extremely Bad Breath', ['category']=11, ['id']=1332, ['animation']=63,   ['message']=406, },
 --     },
 -- },
 -----------------------------------
-local ID = require("scripts/zones/Horlais_Peak/IDs")
+local ID = zones[xi.zone.HORLAIS_PEAK]
 -----------------------------------
 local entity = {}
 
@@ -51,13 +51,13 @@ evilOscarFillsHisLungs = function(mob)
     end
 
     if someoneIsAlive then
-        local ebbBreathCounter = mob:getLocalVar("EBB_BREATH_COUNTER")
+        local ebbBreathCounter = mob:getLocalVar('EBB_BREATH_COUNTER')
         if ebbBreathCounter < 2 then -- Charge two breaths
             sendMessage(players)
-            mob:setLocalVar("EBB_BREATH_COUNTER", ebbBreathCounter + 1)
+            mob:setLocalVar('EBB_BREATH_COUNTER', ebbBreathCounter + 1)
         else -- On the third breath, fire straight away!
             sendMessage(players)
-            mob:setLocalVar("EBB_BREATH_COUNTER", 0)
+            mob:setLocalVar('EBB_BREATH_COUNTER', 0)
             mob:useMobAbility(extremelyBadBreathID)
         end
 

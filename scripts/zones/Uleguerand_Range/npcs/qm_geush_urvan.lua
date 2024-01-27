@@ -2,14 +2,13 @@
 -- Area: Uleguerand_Range
 --  NPC: ??? (Spawns Geush Urvan)
 -----------------------------------
-local ID = require("scripts/zones/Uleguerand_Range/IDs")
-require("scripts/globals/npc_util")
+local ID = zones[xi.zone.ULEGUERAND_RANGE]
 -----------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     if
-        npcUtil.tradeHas(trade, xi.items.HAUNTED_MULETA) and
+        npcUtil.tradeHas(trade, xi.item.HAUNTED_MULETA) and
         npcUtil.popFromQM(player, npc, ID.mob.GEUSH_URVAN)
     then
         player:confirmTrade()

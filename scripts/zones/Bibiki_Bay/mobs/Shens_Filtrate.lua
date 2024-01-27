@@ -9,8 +9,8 @@ entity.onMobSpawn = function(mob)
 end
 
 entity.onMobDeath = function(mob, player, optParams)
-    local shen = mob:getZone():queryEntitiesByName("Shen")[1]
-    shen:setLocalVar("filtrateDeath", 1)
+    local shen = mob:getZone():queryEntitiesByName('Shen')[1]
+    shen:setLocalVar('filtrateDeath', 1)
 end
 
 return entity

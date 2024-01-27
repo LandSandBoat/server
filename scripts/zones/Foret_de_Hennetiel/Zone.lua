@@ -1,8 +1,6 @@
 -----------------------------------
 -- Zone: Foret de Hennetiel
 -----------------------------------
-local ID = require('scripts/zones/Foret_de_Hennetiel/IDs')
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

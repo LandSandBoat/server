@@ -4,16 +4,13 @@
 -- Involved in Quest: Lure of the Wildcat (San d'Oria)
 -- !pos -98 -2 31 230
 -----------------------------------
-require("scripts/globals/quests")
-require("scripts/globals/utils")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local wildcatSandy = player:getCharVar("WildcatSandy")
+    local wildcatSandy = player:getCharVar('WildcatSandy')
 
     if
         player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and
@@ -30,7 +27,7 @@ end
 
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 811 then
-        player:setCharVar("WildcatSandy", utils.mask.setBit(player:getCharVar("WildcatSandy"), 4, true))
+        player:setCharVar('WildcatSandy', utils.mask.setBit(player:getCharVar('WildcatSandy'), 4, true))
     end
 end
 

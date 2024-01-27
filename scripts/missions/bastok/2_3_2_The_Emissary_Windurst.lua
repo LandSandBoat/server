@@ -7,11 +7,7 @@
 -- Melek     : !pos -80 -5 158 240
 -- Uu Zhoumo : !pos -179 16 155 145
 -----------------------------------
-require('scripts/globals/missions')
-require('scripts/globals/npc_util')
-require('scripts/globals/interaction/mission')
------------------------------------
-local northSandoriaID = require('scripts/zones/Northern_San_dOria/IDs')
+local northSandoriaID = zones[xi.zone.NORTHERN_SAN_DORIA]
 -----------------------------------
 
 local mission = Mission:new(xi.mission.log_id.BASTOK, xi.mission.id.bastok.THE_EMISSARY_WINDURST)
@@ -30,7 +26,7 @@ mission.sections =
             ['Uu_Zhoumo'] =
             {
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, xi.items.ASPIR_KNIFE) then
+                    if npcUtil.tradeHasExactly(trade, xi.item.ASPIR_KNIFE) then
                         return mission:progressEvent(41)
                     end
                 end,
@@ -70,7 +66,7 @@ mission.sections =
                     local missionStatus = player:getMissionStatus(mission.areaId)
 
                     if missionStatus == 3 then
-                        local needsSemihTrust = (not player:hasSpell(xi.magic.spell.SEMIH_LAFIHNA) and not player:hasItem(xi.items.CIPHER_OF_SEMIHS_ALTER_EGO)) and 1 or 0
+                        local needsSemihTrust = (not player:hasSpell(xi.magic.spell.SEMIH_LAFIHNA) and not player:hasItem(xi.item.CIPHER_OF_SEMIHS_ALTER_EGO)) and 1 or 0
                         local hasTrustQuest =
                         (
                             player:hasKeyItem(xi.ki.SAN_DORIA_TRUST_PERMIT) or
@@ -117,9 +113,9 @@ mission.sections =
 
                     if
                         not player:hasSpell(xi.magic.spell.SEMIH_LAFIHNA) and
-                        not player:hasItem(xi.items.CIPHER_OF_SEMIHS_ALTER_EGO)
+                        not player:hasItem(xi.item.CIPHER_OF_SEMIHS_ALTER_EGO)
                     then
-                        npcUtil.giveItem(player, xi.items.CIPHER_OF_SEMIHS_ALTER_EGO)
+                        npcUtil.giveItem(player, xi.item.CIPHER_OF_SEMIHS_ALTER_EGO)
                     end
                 end,
             },

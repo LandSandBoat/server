@@ -14,6 +14,7 @@
 
 #include "cbasetypes.h"
 #include "logging.h"
+#include "utils.h"
 #include "version.h"
 
 #ifdef __clang__
@@ -44,14 +45,39 @@ inline LPTSTR ErrorMessage(DWORD dw)
                             (LPTSTR) &lpMsgBuf,
                             0, nullptr);
     if (formatResult != 0)
+    {
         return (LPTSTR)lpMsgBuf;
+    }
     else
     {
         LPTSTR msgBuf = (LPTSTR)LocalAlloc(LPTR, 30);
         sprintf(msgBuf, "Unknown error: %u", dw);
         return msgBuf;
     }
+}
 
+std::string wstrtostr(const std::wstring &wstr)
+{
+    // Convert a Unicode string to an ASCII string
+    std::string strTo;
+    char *szTo = new char[wstr.length() + 1];
+    szTo[wstr.size()] = '\0';
+    WideCharToMultiByte(CP_ACP, 0, wstr.c_str(), -1, szTo, (int)wstr.length(), NULL, NULL);
+    strTo = szTo;
+    destroy_arr(szTo);
+    return strTo;
+}
+
+std::wstring strtowstr(const std::string &str)
+{
+    // Convert an ASCII string to a Unicode String
+    std::wstring wstrTo;
+    wchar_t *wszTo = new wchar_t[str.length() + 1];
+    wszTo[str.size()] = L'\0';
+    MultiByteToWideChar(CP_ACP, 0, str.c_str(), -1, wszTo, (int)str.length());
+    wstrTo = wszTo;
+    destroy_arr(wszTo);
+    return wstrTo;
 }
 
 //============================== Global Variables =============================
@@ -80,6 +106,7 @@ time_point gStartUpTime = server_clock::now();
 std::string gUptimeString;
 std::string gCrashDateString;
 std::string gMemoryUsageString;
+std::string gCommandLineArgString;
 bool gLogToConsole = true;
 
 #pragma warning(pop)
@@ -146,6 +173,22 @@ const char* GetMemoryUsageString()
         gMemoryUsageString = fmt::format("{}MiB / {}MiB", PMC.WorkingSetSize / 1024 / 1024, TotalMemoryInKilobytes / 1024);
     }
     return gMemoryUsageString.c_str();
+}
+
+const char* GetCommandLineArgsString()
+{
+    int     argc;
+    LPWSTR* argv = CommandLineToArgvW(GetCommandLineW(), &argc);
+
+    std::vector<std::string> strvec;
+    for (int i = 0; i < argc; ++i)
+    {
+        strvec.emplace_back(wstrtostr(argv[i]));
+    }
+
+    gCommandLineArgString = fmt::format("{}", fmt::join(strvec, " "));
+
+    return gCommandLineArgString.c_str();
 }
 
 //===========================================================
@@ -306,7 +349,7 @@ LONG WINAPI WheatyExceptionReport::WheatyUnhandledExceptionFilter(
             section, offset);
 #endif
 
-        Log(_T("Process Name: %s"), szFaultingModule);
+        Log(_T("Process Name: %s"), GetCommandLineArgsString());
         Log(_T("Full crash report: %s"), m_szLogFileName);
         Log(_T("Memory dump: %s"), m_szDumpFileName);
         std::time_t t = std::time(nullptr);
@@ -320,18 +363,24 @@ LONG WINAPI WheatyExceptionReport::WheatyUnhandledExceptionFilter(
         Log(_T("Git Date: %s"), version::GetGitDate());
         Log(_T("====================================================="));
 
-        DumpBacktrace();
+        Log(_T("=== Backtrace ==="));
+        for (auto& line : logging::GetBacktrace())
+        {
+            Log(_T("%s"), line.c_str());
+        }
 
         Log(_T("====================================================="));
 
         GenerateExceptionReport(pExceptionInfo);
-
     }
 
     Log(_T(fmt::format("WheatyUnhandledExceptionFilter Exit").c_str()));
 
     fclose(m_hReportFile);
     m_hReportFile = nullptr;
+
+    // Pause for a moment to give spdlog a chance to flush
+    std::this_thread::sleep_for(std::chrono::milliseconds(200));
 
     TerminateProcess(GetCurrentProcess(), 1);
     return EXCEPTION_EXECUTE_HANDLER; // Unreacheable code
@@ -1603,15 +1652,6 @@ DWORD_PTR WheatyExceptionReport::DereferenceUnsafePointer(DWORD_PTR address)
     {
         return DWORD_PTR(-1);
     }
-}
-
-// trim from end (in place)
-static inline void rtrim(std::string &s)
-{
-    s.erase(std::find_if(s.rbegin(), s.rend(), [](unsigned char ch)
-    {
-        return !std::isspace(ch) && ch != '\n';
-    }).base(), s.end());
 }
 
 //============================================================================

@@ -1,11 +1,11 @@
 -----------------------------------
 -- Rune Fencer Job Utilities
 -----------------------------------
-require("scripts/globals/ability")
-require("scripts/globals/weaponskills")
-require("scripts/globals/jobpoints")
-require("scripts/globals/spells/damage_spell")
-require("scripts/globals/utils")
+require('scripts/globals/ability')
+require('scripts/globals/weaponskills')
+require('scripts/globals/jobpoints')
+require('scripts/globals/spells/damage_spell')
+require('scripts/globals/utils')
 -----------------------------------
 xi = xi or {}
 xi.job_utils = xi.job_utils or {}
@@ -26,7 +26,7 @@ local function applyRuneEnhancement(effectType, player)
     local jobPointBonus = player:getJobPointLevel(xi.jp.RUNE_ENCHANTMENT_EFFECT) -- 1 more elemental resistance per level for a maximum total of 20
 
     -- see https://www.bg-wiki.com/ffxi/Category:Rune
-    local power = math.floor((49 * runLevel / 99) + 5.5) + meritBonus  + jobPointBonus
+    local power = math.floor((49 * runLevel / 99) + 5.5) + meritBonus + jobPointBonus
     player:addStatusEffect(effectType, power, 0, 300)
 end
 
@@ -90,7 +90,7 @@ local function calculateVivaciousPulseHealing(target)
 
     local effects = target:getStatusEffects()
     for _, effect in ipairs(effects) do
-        local type = effect:getType()
+        local type = effect:getEffectType()
 
         hpHealAmount = hpHealAmount + getRuneHealAmount(type, target) -- type checked internally
 
@@ -222,14 +222,14 @@ end
 local function getSwipeLungeElement(type)
     local runeElementEffectMap =
     {
-        [xi.effect.IGNIS]    = xi.magic.ele.FIRE,
-        [xi.effect.GELUS]    = xi.magic.ele.ICE,
-        [xi.effect.FLABRA]   = xi.magic.ele.WIND,
-        [xi.effect.TELLUS]   = xi.magic.ele.EARTH,
-        [xi.effect.SULPOR]   = xi.magic.ele.THUNDER,
-        [xi.effect.UNDA]     = xi.magic.ele.WATER,
-        [xi.effect.LUX]      = xi.magic.ele.LIGHT,
-        [xi.effect.TENEBRAE] = xi.magic.ele.DARK,
+        [xi.effect.IGNIS]    = xi.element.FIRE,
+        [xi.effect.GELUS]    = xi.element.ICE,
+        [xi.effect.FLABRA]   = xi.element.WIND,
+        [xi.effect.TELLUS]   = xi.element.EARTH,
+        [xi.effect.SULPOR]   = xi.element.THUNDER,
+        [xi.effect.UNDA]     = xi.element.WATER,
+        [xi.effect.LUX]      = xi.element.LIGHT,
+        [xi.effect.TENEBRAE] = xi.element.DARK,
     }
 
     return runeElementEffectMap[type]
@@ -457,7 +457,7 @@ end
 -- see https://www.bg-wiki.com/ffxi/Battuta
 xi.job_utils.rune_fencer.useBattuta = function(player, target, ability, action)
     local meritPower      = player:getMerit(xi.merit.MERIT_BATTUTA) -- power is 4
-    local modBonus        = (100 + (player:getMod(xi.mod.ENHANCES_BATTUTA) *  meritPower / 4)) / 100
+    local modBonus        = (100 + (player:getMod(xi.mod.ENHANCES_BATTUTA) * meritPower / 4)) / 100
     local inquartataPower = 36 + meritPower -- base 36% + merit power of 4% each = max of 56%
     local spikesPower     = 6 + meritPower  -- damage is static 26 per rune barring SDT/MDT at 5/5 Battuta merits. 6 + 4*5 = 26.
     local runeCount       = target:getActiveRuneCount()
@@ -505,7 +505,7 @@ local function getSwipeLungeDamageMultipliers(player, target, element, bonusMacc
 end
 
 local function calculateSwipeLungeDamage(player, target, skillModifier, gearBonus, numHits, multipliers)
-    local damage = math.floor(skillModifier *  (0.50 + 0.25 * numHits  + (gearBonus / 100)))
+    local damage = math.floor(skillModifier * (0.50 + 0.25 * numHits + (gearBonus / 100)))
 
     damage = damage + player:getMod(xi.mod.MAGIC_DAMAGE) -- add mdamage to base damage
 
@@ -771,7 +771,7 @@ local function applyLiementEffect(target, absorbTypes, absorbPower, duration)
     end
 
     if i * 4 > 16 then -- This will trip if a custom module overrides current retail behavior and give RUN 5 runes or more.
-        print("ERROR: applyLiementEffect trying to pack more than 16 bits into 16 bit datatype! Does Rune Fencer have 5 or more runes enabled?")
+        print('ERROR: applyLiementEffect trying to pack more than 16 bits into 16 bit datatype! Does Rune Fencer have 5 or more runes enabled?')
     end
 
     target:delStatusEffectSilent(xi.effect.VALLATION) -- Liement overwrites Vallation

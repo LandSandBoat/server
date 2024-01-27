@@ -2,8 +2,6 @@
 -- Area: Port Windurst
 --  NPC: Milma-Hapilma, W.W.
 -----------------------------------
-require("scripts/globals/conquest")
------------------------------------
 local entity = {}
 
 local guardNation = xi.nation.WINDURST

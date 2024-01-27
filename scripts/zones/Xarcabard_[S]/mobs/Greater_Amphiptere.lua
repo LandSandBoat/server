@@ -2,7 +2,7 @@
 -- Area: Xarcabard [S]
 --  Mob: Greater Amphiptere
 -----------------------------------
-mixins = { require("scripts/mixins/families/amphiptere") }
+mixins = { require('scripts/mixins/families/amphiptere') }
 -----------------------------------
 local entity = {}
 

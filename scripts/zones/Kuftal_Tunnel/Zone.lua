@@ -1,9 +1,7 @@
 -----------------------------------
 -- Zone: Kuftal_Tunnel (174)
 -----------------------------------
-local ID = require('scripts/zones/Kuftal_Tunnel/IDs')
-require('scripts/globals/conquest')
-require('scripts/globals/treasure')
+local ID = zones[xi.zone.KUFTAL_TUNNEL]
 -----------------------------------
 local zoneObject = {}
 

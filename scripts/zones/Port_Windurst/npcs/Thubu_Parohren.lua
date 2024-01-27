@@ -4,8 +4,7 @@
 -- Type: Fishing Guild Master
 -- !pos -182.230 -3.835 61.373 240
 -----------------------------------
-local ID = require("scripts/zones/Port_Windurst/IDs")
-require("scripts/globals/crafting")
+local ID = zones[xi.zone.PORT_WINDURST]
 -----------------------------------
 local entity = {}
 
@@ -14,17 +13,17 @@ entity.onTrade = function(player, npc, trade)
 
     if
         newRank > 9 and
-        player:getCharVar("FishingExpertQuest") == 1 and
+        player:getCharVar('FishingExpertQuest') == 1 and
         player:hasKeyItem(xi.keyItem.ANGLERS_ALMANAC)
     then
         player:setSkillRank(xi.skill.FISHING, newRank)
         player:startEvent(10010, 0, 0, 0, 0, newRank)
-        player:setCharVar("FishingExpertQuest", 0)
-        player:setLocalVar("FishingTraded", 1)
+        player:setCharVar('FishingExpertQuest', 0)
+        player:setLocalVar('FishingTraded', 1)
     elseif newRank ~= 0 and newRank <= 9 then
         player:setSkillRank(xi.skill.FISHING, newRank)
         player:startEvent(10010, 0, 0, 0, 0, newRank)
-        player:setLocalVar("FishingTraded", 1)
+        player:setLocalVar('FishingTraded', 1)
     end
 end
 
@@ -37,7 +36,7 @@ entity.onTrigger = function(player, npc)
     local rank = player:getSkillRank(xi.skill.FISHING)
     local realSkill = (craftSkill - rank) / 32
 
-    if player:getCharVar("FishingExpertQuest") == 1 then
+    if player:getCharVar('FishingExpertQuest') == 1 then
         if player:hasKeyItem(xi.keyItem.ANGLERS_ALMANAC) then
             expertQuestStatus = 550
         else
@@ -67,7 +66,7 @@ end
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 10009 and option == 2 then
         if xi.crafting.hasJoinedGuild(player, xi.crafting.guild.FISHING) then
-            player:setCharVar("FishingExpertQuest", 1)
+            player:setCharVar('FishingExpertQuest', 1)
         end
     elseif csid == 10009 and option == 1 then
         local crystal = 4101 -- water crystal
@@ -80,9 +79,9 @@ entity.onEventFinish = function(player, csid, option, npc)
             xi.crafting.signupGuild(player, xi.crafting.guild.FISHING)
         end
     else
-        if player:getLocalVar("FishingTraded") == 1 then
+        if player:getLocalVar('FishingTraded') == 1 then
             player:tradeComplete()
-            player:setLocalVar("FishingTraded", 0)
+            player:setLocalVar('FishingTraded', 0)
         end
     end
 end

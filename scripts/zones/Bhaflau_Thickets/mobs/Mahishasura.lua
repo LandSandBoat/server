@@ -3,9 +3,6 @@
 --   NM: Mahishasura
 -- !pos 206.510 -16.320 357.724 52
 -----------------------------------
-require("scripts/globals/hunts")
-require("scripts/globals/mobs")
------------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)

@@ -2,9 +2,8 @@
 -- Area: Grand Palace of Hu'Xzoi
 --   NM: Jailer of Temperance
 -----------------------------------
-local huxzoiGlobal = require("scripts/zones/Grand_Palace_of_HuXzoi/globals")
-mixins = { require("scripts/mixins/job_special") }
-require("scripts/globals/magic")
+local huxzoiGlobal = require('scripts/zones/Grand_Palace_of_HuXzoi/globals')
+mixins = { require('scripts/mixins/job_special') }
 -----------------------------------
 local entity = {}
 
@@ -32,7 +31,7 @@ end
 entity.onMobFight = function(mob)
     -- Forms: 0 = Pot  1 = Pot  2 = Poles  3 = Rings
     local randomTime = math.random(30, 180)
-    local changeTime = mob:getLocalVar("changeTime")
+    local changeTime = mob:getLocalVar('changeTime')
 
     -- If we're in a pot form, but going to change to either Rings/Poles
     if
@@ -48,13 +47,13 @@ entity.onMobFight = function(mob)
             mob:setMod(xi.mod.SLASH_SDT, 0)
             mob:setMod(xi.mod.PIERCE_SDT, 1000)
             mob:setMod(xi.mod.IMPACT_SDT, 0)
-            mob:setLocalVar("changeTime", mob:getBattleTime())
+            mob:setLocalVar('changeTime', mob:getBattleTime())
         else -- We changed to Rings. Make it only take slashing.
             mob:setMod(xi.mod.HTH_SDT, 0)
             mob:setMod(xi.mod.SLASH_SDT, 1000)
             mob:setMod(xi.mod.PIERCE_SDT, 0)
             mob:setMod(xi.mod.IMPACT_SDT, 0)
-            mob:setLocalVar("changeTime", mob:getBattleTime())
+            mob:setLocalVar('changeTime', mob:getBattleTime())
         end
     -- We're in poles, but changing
     elseif
@@ -70,14 +69,14 @@ entity.onMobFight = function(mob)
             mob:setMod(xi.mod.SLASH_SDT, 0)
             mob:setMod(xi.mod.PIERCE_SDT, 0)
             mob:setMod(xi.mod.IMPACT_SDT, 1000)
-            mob:setLocalVar("changeTime", mob:getBattleTime())
+            mob:setLocalVar('changeTime', mob:getBattleTime())
         else -- Going to Rings, only take slashing
             mob:setAnimationSub(3)
             mob:setMod(xi.mod.HTH_SDT, 0)
             mob:setMod(xi.mod.SLASH_SDT, 1000)
             mob:setMod(xi.mod.PIERCE_SDT, 0)
             mob:setMod(xi.mod.IMPACT_SDT, 0)
-            mob:setLocalVar("changeTime", mob:getBattleTime())
+            mob:setLocalVar('changeTime', mob:getBattleTime())
         end
     -- We're in rings, but going to change to pot or poles
     elseif
@@ -93,13 +92,13 @@ entity.onMobFight = function(mob)
             mob:setMod(xi.mod.SLASH_SDT, 0)
             mob:setMod(xi.mod.PIERCE_SDT, 0)
             mob:setMod(xi.mod.IMPACT_SDT, 1000)
-            mob:setLocalVar("changeTime", mob:getBattleTime())
+            mob:setLocalVar('changeTime', mob:getBattleTime())
         else -- Changing to poles, only take piercing
             mob:setMod(xi.mod.HTH_SDT, 0)
             mob:setMod(xi.mod.SLASH_SDT, 0)
             mob:setMod(xi.mod.PIERCE_SDT, 1000)
             mob:setMod(xi.mod.IMPACT_SDT, 0)
-            mob:setLocalVar("changeTime", mob:getBattleTime())
+            mob:setLocalVar('changeTime', mob:getBattleTime())
         end
     end
 end
@@ -108,11 +107,11 @@ entity.onMobDeath = function(mob, player, optParams)
 end
 
 entity.onMobDespawn = function(mob)
-    local ph = mob:getLocalVar("ph")
+    local ph = mob:getLocalVar('ph')
     DisallowRespawn(mob:getID(), true)
     DisallowRespawn(ph, false)
     GetMobByID(ph):setRespawnTime(GetMobRespawnTime(ph))
-    mob:setLocalVar("pop", os.time() + 900) -- 15 mins
+    mob:setLocalVar('pop', os.time() + 900) -- 15 mins
     huxzoiGlobal.pickTemperancePH()
 end
 

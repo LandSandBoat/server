@@ -2,9 +2,6 @@
 -- Area: Bostaunieux Oubliette (167)
 --   NM: Arioch
 -----------------------------------
-require("scripts/globals/hunts")
-require("scripts/globals/mobs")
------------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)

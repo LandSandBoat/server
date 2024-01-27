@@ -2,8 +2,7 @@
 -- Area: Sealions Den
 --  Mob: Omega
 -----------------------------------
-local oneToBeFeared = require("scripts/zones/Sealions_Den/bcnms/one_to_be_feared_helper")
-require("scripts/globals/mobs")
+local oneToBeFeared = require('scripts/zones/Sealions_Den/bcnms/one_to_be_feared_helper')
 -----------------------------------
 local entity = {}
 
@@ -21,17 +20,17 @@ end
 
 entity.onMobFight = function(mob)
     -- Gains regain at under 25% HP
-    local stage = mob:getLocalVar("stage")
+    local stage = mob:getLocalVar('stage')
 
     if mob:getHPP() < 60 and stage == 0 then
         mob:setDelay(3000)
         mob:setMod(xi.mod.REGAIN, 150)
-        mob:setLocalVar("stage", 1)
+        mob:setLocalVar('stage', 1)
     elseif mob:getHPP() < 25 and stage < 2 then
         mob:setDelay(2500)
         mob:setMod(xi.mod.REGAIN, 200)
         mob:setMobMod(xi.mobMod.SKILL_LIST, 1187)
-        mob:setLocalVar("stage", 2)
+        mob:setLocalVar('stage', 2)
     end
 end
 

@@ -3,8 +3,6 @@
 --  NPC: The Afflictor
 -- !zone 147
 -----------------------------------
-require("scripts/globals/quests")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

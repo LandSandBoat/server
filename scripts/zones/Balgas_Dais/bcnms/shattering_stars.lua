@@ -3,12 +3,6 @@
 -- Name: Shattering stars - Maat Fight
 -- !pos 299 -123 345 146
 -----------------------------------
-require("scripts/globals/battlefield")
-require("scripts/globals/npc_util")
-require("scripts/globals/quests")
-require("scripts/globals/titles")
-require("scripts/globals/utils")
------------------------------------
 local battlefieldObject = {}
 
 battlefieldObject.onBattlefieldTick = function(battlefield, tick)
@@ -24,7 +18,7 @@ end
 battlefieldObject.onBattlefieldLeave = function(player, battlefield, leavecode)
     if leavecode == xi.battlefield.leaveCode.WON then
         local _, clearTime, partySize = battlefield:getRecord()
-        player:startEvent(32001, battlefield:getArea(), clearTime, partySize, battlefield:getTimeInside(), 1, battlefield:getLocalVar("[cs]bit"), 0)
+        player:startEvent(32001, battlefield:getArea(), clearTime, partySize, battlefield:getTimeInside(), 1, battlefield:getLocalVar('[cs]bit'), 0)
     elseif leavecode == xi.battlefield.leaveCode.LOST then
         player:startEvent(32002)
     end
@@ -36,15 +30,15 @@ end
 battlefieldObject.onEventFinish = function(player, csid, option, npc)
     if csid == 32001 then
         local pjob = player:getMainJob()
-        local maatsCap = player:getCharVar("maatsCap")
+        local maatsCap = player:getCharVar('maatsCap')
 
         if player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.SHATTERING_STARS) == QUEST_ACCEPTED then
-            npcUtil.giveItem(player, xi.items.SCROLL_OF_INSTANT_WARP)
-            player:setCharVar("Quest[3][132]Prog", pjob)
+            npcUtil.giveItem(player, xi.item.SCROLL_OF_INSTANT_WARP)
+            player:setCharVar('Quest[3][132]Prog', pjob)
         end
 
         if not utils.mask.getBit(maatsCap, pjob - 1) then
-            player:setCharVar("maatsCap", utils.mask.setBit(maatsCap, pjob - 1, true))
+            player:setCharVar('maatsCap', utils.mask.setBit(maatsCap, pjob - 1, true))
         end
 
         player:addTitle(xi.title.MAAT_MASHER)

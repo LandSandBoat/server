@@ -2,8 +2,7 @@
 -- Area: La Theine Plateau
 --  Mob: Nihniknoovi
 -----------------------------------
-require("scripts/globals/hunts")
-require("scripts/quests/tutorial")
+require('scripts/quests/tutorial')
 -----------------------------------
 local entity = {}
 

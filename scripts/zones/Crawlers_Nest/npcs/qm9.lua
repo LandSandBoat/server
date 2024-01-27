@@ -4,9 +4,7 @@
 -- Used In Quest: A Boy's Dream
 -- !pos -18 -8 124 197
 -----------------------------------
-local ID = require("scripts/zones/Crawlers_Nest/IDs")
-require("scripts/globals/npc_util")
-require("scripts/globals/quests")
+local ID = zones[xi.zone.CRAWLERS_NEST]
 -----------------------------------
 local entity = {}
 
@@ -16,15 +14,15 @@ end
 entity.onTrigger = function(player, npc)
     if
         player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.A_BOY_S_DREAM) == QUEST_ACCEPTED and
-        VanadielDayOfTheYear() ~= player:getCharVar("DreadbugNM_Day")
+        VanadielDayOfTheYear() ~= player:getCharVar('DreadbugNM_Day')
     then
         if
-            os.time() > player:getCharVar("DreadbugNM_Timer") + 30 and
+            os.time() > player:getCharVar('DreadbugNM_Timer') + 30 and
             npcUtil.popFromQM(player, npc, ID.mob.DREADBUG, { claim = true, hide = 0 })
         then
             player:messageSpecial(ID.text.SENSE_OF_FOREBODING)
-            player:setCharVar("DreadbugNM_Timer", os.time() + 180)
-            player:setCharVar("DreadbugNM_Day", VanadielDayOfTheYear())
+            player:setCharVar('DreadbugNM_Timer', os.time() + 180)
+            player:setCharVar('DreadbugNM_Day', VanadielDayOfTheYear())
         else
             player:messageSpecial(ID.text.NOTHING_SEEMS_TO_HAPPEN)
         end

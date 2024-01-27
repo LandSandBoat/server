@@ -1,8 +1,6 @@
 -----------------------------------
 -- Zone: Beadeaux_[S] (92)
 -----------------------------------
-local ID = require('scripts/zones/Beadeaux_[S]/IDs')
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

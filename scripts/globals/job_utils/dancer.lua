@@ -43,6 +43,20 @@ local animationTable =
     [12] = { 23, 33 },
 }
 
+local terpsichoreTable =
+set{
+    xi.item.TERPSICHORE_75,
+    xi.item.TERPSICHORE_80,
+    xi.item.TERPSICHORE_85,
+    xi.item.TERPSICHORE_90,
+    xi.item.TERPSICHORE_95,
+    xi.item.TERPSICHORE_99,
+    xi.item.TERPSICHORE_99_II,
+    xi.item.TERPSICHORE_119,
+    xi.item.TERPSICHORE_119_II,
+    xi.item.TERPSICHORE_119_III
+}
+
 -----------------------------------
 -- Local functions.
 -----------------------------------
@@ -60,6 +74,13 @@ local function getStepFinishingMovesBase(player)
         numAwardedMoves = 5
     elseif player:getMainJob() == xi.job.DNC then
         numAwardedMoves = 2
+    end
+
+    -- Terpsichore FM bonus. (Confirmed main-hand only)
+    local mainHandWeapon = player:getEquipID(xi.slot.MAIN)
+
+    if terpsichoreTable[mainHandWeapon] then
+        numAwardedMoves = numAwardedMoves + player:getMod(xi.mod.STEP_FINISH)
     end
 
     return numAwardedMoves
@@ -126,6 +147,7 @@ xi.job_utils.dancer.checkStepAbility = function(player, target, ability)
         if player:hasStatusEffect(xi.effect.TRANCE) then
             return 0, 0
         elseif player:getTP() < 100 then
+            -- TODO: Does Step TP Consumed modifier adjust this check?
             return xi.msg.basic.NOT_ENOUGH_TP, 0
         else
             return 0, 0
@@ -167,6 +189,7 @@ end
 
 xi.job_utils.dancer.checkWaltzAbility = function(player, target, ability)
     local waltzInfo = waltzAbilities[ability:getID()]
+    local waltzCost = waltzInfo[1] - player:getMod(xi.mod.WALTZ_COST) * 10
 
     if target:getHP() == 0 then
         return xi.msg.basic.CANNOT_ON_THAT_TARG, 0
@@ -176,7 +199,7 @@ xi.job_utils.dancer.checkWaltzAbility = function(player, target, ability)
         ability:setRecast(math.min(ability:getRecast(), 6))
 
         return 0, 0
-    elseif player:getTP() < waltzInfo[1] then
+    elseif player:getTP() < waltzCost then
         return xi.msg.basic.NOT_ENOUGH_TP, 0
     else
         local newRecast = ability:getRecast()
@@ -188,7 +211,7 @@ xi.job_utils.dancer.checkWaltzAbility = function(player, target, ability)
             newRecast = newRecast + recastMod
         end
 
-        -- Apply "Fan Dance" Waltz recast reduction.  All tiers above 1 grant 5%
+        -- Apply 'Fan Dance' Waltz recast reduction.  All tiers above 1 grant 5%
         -- recast reduction each.
         local fanDanceMeritValue = player:getMerit(xi.merit.FAN_DANCE) -- Get's merit number * merit value (5 in db).
 
@@ -216,10 +239,10 @@ xi.job_utils.dancer.useStepAbility = function(player, target, ability, action, s
 
     -- Only remove TP if the player doesn't have Trance.
     if not player:hasStatusEffect(xi.effect.TRANCE) then
-        player:delTP(100)
+        player:delTP(100 + player:getMod(xi.mod.STEP_TP_CONSUMED))
     end
 
-    if math.random() <= getHitRate(player, target, true, player:getMod(xi.mod.STEP_ACCURACY)) then
+    if math.random() <= xi.weaponskills.getHitRate(player, target, true, player:getMod(xi.mod.STEP_ACCURACY)) then
         local debuffEffect = target:getStatusEffect(stepEffect)
         hitType            = hitId
 
@@ -262,9 +285,9 @@ xi.job_utils.dancer.useStepAbility = function(player, target, ability, action, s
         -- embedding a weapon type to the trust object?
 
         local name = string.lower(player:getName())
-        if name == "uka_totlihn" or name == "mumor" or name == "mumor_ii" then
+        if name == 'uka_totlihn' or name == 'mumor' or name == 'mumor_ii' then
             action:setAnimation(target:getID(), getStepAnimation(xi.skill.CLUB))
-        elseif name == "mayakov" then
+        elseif name == 'mayakov' then
             action:setAnimation(target:getID(), getStepAnimation(xi.skill.SWORD))
         end
     end
@@ -324,7 +347,7 @@ xi.job_utils.dancer.useDesperateFlourishAbility = function(player, target, abili
     setFinishingMoves(player, numMoves - 1)
 
     if
-        math.random() <= getHitRate(player, target, true, player:getJobPointLevel(xi.jp.FLOURISH_I_EFFECT)) or
+        math.random() <= xi.weaponskills.getHitRate(player, target, true, player:getJobPointLevel(xi.jp.FLOURISH_I_EFFECT)) or
         (player:hasStatusEffect(xi.effect.SNEAK_ATTACK) and player:isBehind(target))
     then
         local spell  = GetSpell(xi.magic.spell.GRAVITY)
@@ -361,7 +384,7 @@ xi.job_utils.dancer.useViolentFlourishAbility = function(player, target, ability
     setFinishingMoves(player, numMoves - 1)
 
     if
-        math.random() <= getHitRate(player, target, true, 100) or
+        math.random() <= xi.weaponskills.getHitRate(player, target, true, 100) or
         (player:hasStatusEffect(xi.effect.SNEAK_ATTACK) and player:isBehind(target))
     then
         local hitType = 3
@@ -384,9 +407,9 @@ xi.job_utils.dancer.useViolentFlourishAbility = function(player, target, ability
             weaponDamage = weaponDamage - 3 + h2hSkill
         end
 
-        local baseDmg   = weaponDamage + fSTR(player:getStat(xi.mod.STR), target:getStat(xi.mod.VIT), player:getWeaponDmgRank())
-        local cRatio, _ = cMeleeRatio(player, target, params, 0, 1000)
-        local dmg       = baseDmg * generatePdif(cRatio[1], cRatio[2], true)
+        local baseDmg   = weaponDamage + xi.weaponskills.fSTR(player:getStat(xi.mod.STR), target:getStat(xi.mod.VIT), player:getWeaponDmgRank())
+        local cRatio, _ = xi.weaponskills.cMeleeRatio(player, target, params, 0, 1000)
+        local dmg       = baseDmg * xi.weaponskills.generatePdif(cRatio[1], cRatio[2], true)
 
         if applyResistance(player, target, spell, params) > 0.25 then
             target:addStatusEffect(xi.effect.STUN, 1, 0, 2)
@@ -445,6 +468,7 @@ end
 xi.job_utils.dancer.useWaltzAbility = function(player, target, ability, action)
     local abilityId      = ability:getID()
     local waltzInfo      = waltzAbilities[abilityId]
+    local waltzCost      = waltzInfo[1] - player:getMod(xi.mod.WALTZ_COST) * 10
     local statMultiplier = waltzInfo[2]
     local amtCured       = 0
 
@@ -455,10 +479,10 @@ xi.job_utils.dancer.useWaltzAbility = function(player, target, ability, action)
             abilityId == xi.jobAbility.DIVINE_WALTZ_II
         then
             if player:getID() == target:getID() then
-                player:delTP(waltzInfo[1])
+                player:delTP(waltzCost)
             end
         else
-            player:delTP(waltzInfo[1])
+            player:delTP(waltzCost)
         end
     end
 

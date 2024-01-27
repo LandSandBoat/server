@@ -2,24 +2,27 @@
 -- func: setProgress
 -- desc: changes progress inside an instance
 -----------------------------------
+local commandObj = {}
 
-cmdprops =
+commandObj.cmdprops =
 {
     permission = 1,
-    parameters = "i"
+    parameters = 'i'
 }
 
-function onTrigger(player, progress)
+commandObj.onTrigger = function(player, progress)
     local zone = player:getZone()
 
-    if zone:getType() == xi.zoneType.INSTANCED then
+    if zone:getTypeMask() == xi.zoneType.INSTANCED then
         local instance = player:getInstance()
         local startProgress = instance:getProgress()
 
         instance:setProgress(progress)
 
-        player:PrintToPlayer(string.format("Progress changed from %i to %i", startProgress, progress))
+        player:printToPlayer(string.format('Progress changed from %i to %i', startProgress, progress))
     else
-        player:PrintToPlayer("Must be in an Instanced zone")
+        player:printToPlayer('Must be in an Instanced zone')
     end
 end
+
+return commandObj

@@ -3,16 +3,10 @@
 -----------------------------------
 -- Perih Vashai !gotoid 17764470 / !pos 117.5 -3.7 90.453 241
 -----------------------------------
-require('scripts/globals/magic')
-require('scripts/globals/trust')
-require('scripts/globals/quests')
-require('scripts/globals/missions')
-require('scripts/globals/interaction/hidden_quest')
------------------------------------
-local woodsID = require('scripts/zones/Windurst_Woods/IDs')
+local woodsID = zones[xi.zone.WINDURST_WOODS]
 -----------------------------------
 
-local quest = HiddenQuest:new("TrustShikareeZ")
+local quest = HiddenQuest:new('TrustShikareeZ')
 
 quest.sections =
 {

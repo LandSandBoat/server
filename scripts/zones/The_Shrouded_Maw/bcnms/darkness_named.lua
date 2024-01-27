@@ -2,10 +2,7 @@
 -- Darkness Named
 -- The Shrouded Maw mission battlefield
 -----------------------------------
-local ID = require("scripts/zones/The_Shrouded_Maw/IDs")
-require("scripts/globals/battlefield")
-require("scripts/globals/missions")
-require("scripts/globals/titles")
+local ID = zones[xi.zone.THE_SHROUDED_MAW]
 -----------------------------------
 local battlefieldObject = {}
 
@@ -29,7 +26,7 @@ battlefieldObject.onBattlefieldLeave = function(player, battlefield, leavecode)
         local _, clearTime, partySize = battlefield:getRecord()
 
         player:setLocalVar('battlefieldWin', battlefield:getID())
-        player:startEvent(32001, battlefield:getArea(), clearTime, partySize, battlefield:getTimeInside(), 1, battlefield:getLocalVar("[cs]bit"), 0)
+        player:startEvent(32001, battlefield:getArea(), clearTime, partySize, battlefield:getTimeInside(), 1, battlefield:getLocalVar('[cs]bit'), 0)
     elseif leavecode == xi.battlefield.leaveCode.LOST then
         player:startEvent(32002)
     end

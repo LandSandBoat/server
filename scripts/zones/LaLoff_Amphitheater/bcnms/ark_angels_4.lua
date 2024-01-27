@@ -2,10 +2,6 @@
 -- Area: LaLoff Amphitheater
 -- Name: Ark Angels 4 (Elvaan)
 -----------------------------------
-local ID = require("scripts/zones/LaLoff_Amphitheater/IDs")
-require("scripts/globals/battlefield")
-require("scripts/globals/missions")
------------------------------------
 local battlefieldObject = {}
 
 battlefieldObject.onBattlefieldTick = function(battlefield, tick)
@@ -23,11 +19,11 @@ battlefieldObject.onBattlefieldLeave = function(player, battlefield, leavecode)
         local _, clearTime, partySize = battlefield:getRecord()
 
         if player:getCurrentMission(xi.mission.log_id.ZILART) == xi.mission.id.zilart.ARK_ANGELS then
-            player:setLocalVar("battlefieldWin", battlefield:getID())
+            player:setLocalVar('battlefieldWin', battlefield:getID())
         end
 
         local arg8 = (player:hasCompletedMission(xi.mission.log_id.ZILART, xi.mission.id.zilart.ARK_ANGELS)) and 1 or 0
-        player:startEvent(32001, battlefield:getArea(), clearTime, partySize, battlefield:getTimeInside(), 180, battlefield:getLocalVar("[cs]bit"), arg8)
+        player:startEvent(32001, battlefield:getArea(), clearTime, partySize, battlefield:getTimeInside(), 180, battlefield:getLocalVar('[cs]bit'), arg8)
     elseif leavecode == xi.battlefield.leaveCode.LOST then
         player:startEvent(32002, 0, 0, 0, 0, 0, battlefield:getArea(), 180)
     end

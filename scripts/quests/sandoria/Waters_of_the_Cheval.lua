@@ -4,12 +4,8 @@
 -- Nouveil !pos 123 0 106 231
 -- Cheval_River !pos 223 -58 426 101
 -----------------------------------
-require('scripts/globals/quests')
-require('scripts/globals/interaction/quest')
-require('scripts/globals/npc_util')
------------------------------------
-local eastRonfaureID     = require('scripts/zones/East_Ronfaure/IDs')
-local northernSandoriaID = require('scripts/zones/Northern_San_dOria/IDs')
+local eastRonfaureID     = zones[xi.zone.EAST_RONFAURE]
+local northernSandoriaID = zones[xi.zone.NORTHERN_SAN_DORIA]
 -----------------------------------
 
 local quest = Quest:new(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.WATERS_OF_THE_CHEVAL)
@@ -18,7 +14,7 @@ quest.reward =
 {
     fame       = 30,
     fameArea   = xi.quest.fame_area.SANDORIA,
-    item       = xi.items.WING_PENDANT,
+    item       = xi.item.WING_PENDANT,
     itemParams = { fromTrade = true },
     title      = xi.title.THE_PURE_ONE,
 }
@@ -62,13 +58,13 @@ quest.sections =
             ['Miageau'] =
             {
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHas(trade, xi.items.SKIN_OF_CHEVAL_RIVER_WATER) then
+                    if npcUtil.tradeHas(trade, xi.item.SKIN_OF_CHEVAL_RIVER_WATER) then
                         return quest:progressEvent(515)
                     end
                 end,
 
                 onTrigger = function(player, npc)
-                    if player:hasItem(xi.items.BLESSED_WATERSKIN) then
+                    if player:hasItem(xi.item.BLESSED_WATERSKIN) then
                         return quest:event(512)
                     else
                         return quest:event(519)
@@ -79,16 +75,16 @@ quest.sections =
             ['Nouveil'] =
             {
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHas(trade, { { "gil", 10 } }) then
+                    if npcUtil.tradeHas(trade, { { 'gil', 10 } }) then
                         player:messageSpecial(northernSandoriaID.text.YOU_DONATE_GIL)
                         return quest:progressEvent(571)
                     end
                 end,
 
                 onTrigger = function(player, npc)
-                    if player:hasItem(xi.items.SKIN_OF_CHEVAL_RIVER_WATER) then
+                    if player:hasItem(xi.item.SKIN_OF_CHEVAL_RIVER_WATER) then
                         return quest:event(573)
-                    elseif player:hasItem(xi.items.BLESSED_WATERSKIN) then
+                    elseif player:hasItem(xi.item.BLESSED_WATERSKIN) then
                         return quest:event(572)
                     else
                         return quest:event(575)
@@ -105,7 +101,7 @@ quest.sections =
                 end,
 
                 [571] = function(player, csid, option, npc)
-                    if npcUtil.giveItem(player, xi.items.BLESSED_WATERSKIN, { fromTrade = true }) then
+                    if npcUtil.giveItem(player, xi.item.BLESSED_WATERSKIN, { fromTrade = true }) then
                         player:confirmTrade()
                     end
                 end,
@@ -118,11 +114,11 @@ quest.sections =
             {
                 onTrade = function(player, npc, trade)
                     if
-                        npcUtil.tradeHas(trade, xi.items.BLESSED_WATERSKIN) and
-                        npcUtil.giveItem(player, xi.items.SKIN_OF_CHEVAL_RIVER_WATER, { silent = true, fromTrade = true })
+                        npcUtil.tradeHas(trade, xi.item.BLESSED_WATERSKIN) and
+                        npcUtil.giveItem(player, xi.item.SKIN_OF_CHEVAL_RIVER_WATER, { silent = true, fromTrade = true })
                     then
                         player:confirmTrade()
-                        return quest:messageSpecial(eastRonfaureID.text.CHEVAL_RIVER_WATER, xi.items.SKIN_OF_CHEVAL_RIVER_WATER)
+                        return quest:messageSpecial(eastRonfaureID.text.CHEVAL_RIVER_WATER, xi.item.SKIN_OF_CHEVAL_RIVER_WATER)
                     end
                 end,
 

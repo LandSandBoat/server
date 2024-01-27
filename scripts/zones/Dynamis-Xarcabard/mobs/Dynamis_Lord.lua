@@ -4,9 +4,8 @@
 -- Note: Mega Boss
 -- Spawned by trading a Shrouded Bijou to the ??? in front of Castle Zvahl.
 -----------------------------------
-local ID = require("scripts/zones/Dynamis-Xarcabard/IDs")
-mixins = { require("scripts/mixins/job_special") }
-require("scripts/globals/titles")
+local ID = zones[xi.zone.DYNAMIS_XARCABARD]
+mixins = { require('scripts/mixins/job_special') }
 -----------------------------------
 local entity = {}
 

@@ -2,8 +2,7 @@
 -- Area: Ghelsba Outpost (140)
 --   NM: Thousandarm Deshglesh
 -----------------------------------
-require("scripts/globals/hunts")
-mixins = { require("scripts/mixins/job_special") }
+mixins = { require('scripts/mixins/job_special') }
 -----------------------------------
 local entity = {}
 

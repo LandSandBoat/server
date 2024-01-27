@@ -1,4 +1,4 @@
-local ID = require("scripts/zones/Castle_Oztroja/IDs")
+local ID = zones[xi.zone.CASTLE_OZTROJA]
 
 return {
     ['Kaa_Toru_the_Just'] = { event = 46 },

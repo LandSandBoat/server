@@ -1,4 +1,4 @@
-local ID = require("scripts/zones/Rabao/IDs")
+-- local ID = zones[xi.zone.RABAO]
 
 return {
     ['Alfesar']       = { event = 52 },

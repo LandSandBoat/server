@@ -1,9 +1,6 @@
 -----------------------------------
 -- Zone: Cloister_of_Tides (211)
 -----------------------------------
-local ID = require('scripts/zones/Cloister_of_Tides/IDs')
-require('scripts/globals/conquest')
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

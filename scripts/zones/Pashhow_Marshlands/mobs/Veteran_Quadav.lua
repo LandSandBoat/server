@@ -3,9 +3,7 @@
 --  Mob: Veteran Quadav
 -- Note: PH for Ni'Zho Bladebender
 -----------------------------------
-local ID = require("scripts/zones/Pashhow_Marshlands/IDs")
-require("scripts/globals/regimes")
-require("scripts/globals/mobs")
+local ID = zones[xi.zone.PASHHOW_MARSHLANDS]
 -----------------------------------
 local entity = {}
 

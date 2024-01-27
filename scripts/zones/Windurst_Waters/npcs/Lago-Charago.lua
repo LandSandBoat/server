@@ -4,16 +4,13 @@
 -- Type: Adventurer's Assistant
 -- !pos -57.271 -11.75 92.503 238
 -----------------------------------
-require("scripts/globals/quests")
-require("scripts/globals/utils")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local wildcatWindurst = player:getCharVar("WildcatWindurst")
+    local wildcatWindurst = player:getCharVar('WildcatWindurst')
 
     if
         player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and
@@ -30,7 +27,7 @@ end
 
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 940 then
-        player:setCharVar("WildcatWindurst", utils.mask.setBit(player:getCharVar("WildcatWindurst"), 11, true))
+        player:setCharVar('WildcatWindurst', utils.mask.setBit(player:getCharVar('WildcatWindurst'), 11, true))
     end
 end
 

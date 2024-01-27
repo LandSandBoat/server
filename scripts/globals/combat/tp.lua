@@ -1,4 +1,4 @@
-require("scripts/globals/utils")
+require('scripts/globals/utils')
 -----------------------------------
 xi = xi or {}
 xi.combat = xi.combat or {}
@@ -22,12 +22,28 @@ xi.combat.tp.getSingleMeleeHitTPReturn = function(actor, target, isZanshin)
     return math.floor(tpReturn * storeTPModifier)
 end
 
+-- returns a PC weapon slot's TP return for a single hit
+xi.combat.tp.getSingleWeaponTPReturn = function(actor, slot)
+    -- TODO: implement Zanshin check optionally?
+    if actor:isPC() then
+        local delay           = actor:getBaseWeaponDelay(slot)
+        local attackOutput    = xi.combat.tp.getModifiedDelayAndCanZanshin(actor, delay)
+        local tpReturn        = xi.combat.tp.calculateTPReturn(actor, attackOutput.modifiedDelay)
+        local storeTPModifier = (100 + actor:getMod(xi.mod.STORETP)) / 100
+
+        return math.floor(tpReturn * storeTPModifier)
+    end
+
+    -- TODO: print error message for non-PC?
+    return 0
+end
+
 xi.combat.tp.getModifiedDelayAndCanZanshin = function(actor, delay)
     local modifiedDelay = delay
     local canZanshin    = false
 
     -- DW/H2H delay is halved for the purposes of a single hit's TP return when applicable, see https://www.bg-wiki.com/ffxi/Tactical_Points
-    if actor:isDualWielding() then -- NOTE: this "isDualWielding" may trip on non-PCs even if they are "using h2h". If this is rectified in core in the future this should fall through correctly.
+    if actor:isDualWielding() then -- NOTE: this 'isDualWielding' may trip on non-PCs even if they are 'using h2h'. If this is rectified in core in the future this should fall through correctly.
         modifiedDelay = (delay * (100 - actor:getMod(xi.mod.DUAL_WIELD)) / 100) / 2
     elseif actor:isUsingH2H() then
         if actor:getObjType() == xi.objType.PC then            -- handle h2h with > 1 swing only on PC
@@ -36,12 +52,12 @@ xi.combat.tp.getModifiedDelayAndCanZanshin = function(actor, delay)
                 actor:getSkillRank(xi.skill.HAND_TO_HAND) == 0 -- zero h2h rank skill = one swing
             then
                 modifiedDelay = math.max((delay - actor:getMod(xi.mod.MARTIAL_ARTS)), 96) -- min delay of 96 total, https://www.bg-wiki.com/ffxi/Attack_Speed
-                canZanshin    = true -- Zanshin can proc on an "unarmed" swing               -- https://www.bg-wiki.com/ffxi/Zanshin
+                canZanshin    = true -- Zanshin can proc on an 'unarmed' swing               -- https://www.bg-wiki.com/ffxi/Zanshin
             else
                 modifiedDelay = math.max((delay - actor:getMod(xi.mod.MARTIAL_ARTS)) / 2, 48) -- min delay of 96 total so 96/2 per fist, https://www.bg-wiki.com/ffxi/Attack_Speed
             end
         else
-            -- TODO: handle the corner case where a PC-like entity is using h2h but is only hitting with one "fist". Perhaps they have a shield with no main weapon.
+            -- TODO: handle the corner case where a PC-like entity is using h2h but is only hitting with one 'fist'. Perhaps they have a shield with no main weapon.
             -- elseif actor:getAutoAttackHits() > 1
             modifiedDelay = math.max((delay - actor:getMod(xi.mod.MARTIAL_ARTS)) / 2, 48)
         end
@@ -72,33 +88,37 @@ end
 -- For instance, if a player attacks a mob, the mob uses the mob formula when gaining TP from the returned hit.
 -- This appears to be a measure to not buff mobs when players were buffed with the new TP gain formula.
 xi.combat.tp.calculateTPReturn = function(gainee, delay)
+    local tpReturn = 0
+
     if gainee and gainee:getObjType() ~= xi.objType.MOB then -- Pets and PCs have been observed to use this formula
-        if delay <= 180 then
-            return math.floor(61 + ((delay - 180) * 63 / 360))
-        elseif delay >= 181 and delay <= 540 then
-            return math.floor(61 + ((delay - 180) * 88 / 360))
-        elseif delay >= 541 and delay <= 630 then
-            return math.floor(149 + ((delay - 540) * 20 / 360))
-        elseif delay >= 631 and delay <= 720 then
-            return math.floor(154 + ((delay - 630) * 28 / 360))
-        elseif delay >= 721 and delay <= 900 then
-            return math.floor(161 + ((delay - 720) * 24 / 360))
+        if delay > 900 then
+            tpReturn = 173 + (delay - 900) * 28 / 360
+        elseif delay > 720 then
+            tpReturn = 161 + (delay - 720) * 24 / 360
+        elseif delay > 630 then
+            tpReturn = 154 + (delay - 630) * 28 / 360
+        elseif delay > 540 then
+            tpReturn = 149 + (delay - 540) * 20 / 360
+        elseif delay > 180 then
+            tpReturn = 61 + (delay - 180) * 88 / 360
         else
-            return math.floor(173 + ((delay - 900) * 28 / 360))
+            tpReturn = 61 + (delay - 180) * 63 / 360
         end
     else -- mobs have been observed to use this formula -- http://wiki.ffo.jp/html/308.html
-        if delay <= 180 then
-            return math.floor(50 + ((delay - 180) * 15 / 180))
-        elseif delay >= 181 and delay <= 450 then
-            return math.floor(50 + ((delay - 180) * 65 / 270))
-        elseif delay >= 451 and delay <= 480 then
-            return math.floor(115 + ((delay - 450) * 15 / 30))
-        elseif delay >= 481 and delay <= 530 then
-            return math.floor(130 + ((delay - 480) * 15 / 30))
-        elseif delay >= 53 and delay <= 900 then
-            return math.floor(145 + ((delay - 530) * 35 / 470))
+        if delay > 530 then
+            tpReturn = 145 + (delay - 530) * 35 / 470
+        elseif delay > 480 then
+            tpReturn = 130 + (delay - 480) * 15 / 30
+        elseif delay > 450 then
+            tpReturn = 115 + (delay - 450) * 15 / 30
+        elseif delay > 180 then
+            tpReturn = 50 + (delay - 180) * 65 / 270
+        else
+            tpReturn = 50 + (delay - 180) * 15 / 180
         end
     end
+
+    return math.floor(tpReturn)
 end
 
 -- TODO: does Ikishoten factor into this as a bonus to baseTPGain if it procs on the hit? Needs verification.
@@ -119,7 +139,7 @@ xi.combat.tp.calculateTPGainOnPhysicalDamage = function(totalDamage, delay, acto
         -- TODO: unknown if player pets (automaton/wyvern/avatars) are affected by dAGI
 
         -- mob vs mob (via charm) is observed to use the (base * 1/3) formula instead of (base + 30)
-        -- (base + 30) formula appears to be intentional by SE to make mobs "more dangerous" when hit by players/pets
+        -- (base + 30) formula appears to be intentional by SE to make mobs 'more dangerous' when hit by players/pets
         if
             target:getObjType() == xi.objType.MOB and
             actor:getObjType() ~= xi.objType.MOB

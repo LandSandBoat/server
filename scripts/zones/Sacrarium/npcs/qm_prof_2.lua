@@ -4,7 +4,7 @@
 -- Notes: Used to spawn Old Prof. Mariselle
 -- !pos 22.669 -3.111 127.279 28
 -----------------------------------
-local ID = require('scripts/zones/Sacrarium/IDs')
+local ID = zones[xi.zone.SACRARIUM]
 -----------------------------------
 local entity = {}
 

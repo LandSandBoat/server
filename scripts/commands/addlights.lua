@@ -1,15 +1,15 @@
----------------------------------------------------------------------------------------------------
+-----------------------------------
 -- func: addlights <light type> <amount> <target player>
 -- desc: Adds the amount of specified light to the player
----------------------------------------------------------------------------------------------------
+-----------------------------------
 -- lights: 1: pearl, 2: azure, 3: ruby, 4: amber, 5: gold, 6: silver, 7: ebon
----------------------------------------------------------------------------------------------------
-require("scripts/globals/abyssea")
+-----------------------------------
+local commandObj = {}
 
-cmdprops =
+commandObj.cmdprops =
 {
     permission = 1,
-    parameters = "sis"
+    parameters = 'sis'
 }
 
 local lightType =
@@ -23,12 +23,12 @@ local lightType =
     amber  = 7,
 }
 
-function error(player, msg)
-    player:PrintToPlayer(msg)
-    player:PrintToPlayer("!addlights <light type> <amount> (player)")
+local function error(player, msg)
+    player:printToPlayer(msg)
+    player:printToPlayer('!addlights <light type> <amount> (player)')
 end
 
-function onTrigger(player, light, amount, target)
+commandObj.onTrigger = function(player, light, amount, target)
     -- validate target
     local targ
     if target == nil then
@@ -36,15 +36,15 @@ function onTrigger(player, light, amount, target)
     else
         targ = GetPlayerByName(target)
         if targ == nil then
-            error(player, string.format("Player named '%s' not found!", target))
+            error(player, string.format('Player named "%s" not found!', target))
             return
         end
     end
 
     local selectedLight = tostring(light)
 
-    if lightType[selectedLight] == nil  or selectedLight == nil then
-        error(player, "Invalid light type.\nValid light types: pearl, azure, ruby, amber, gold, silver, ebon")
+    if lightType[selectedLight] == nil or selectedLight == nil then
+        error(player, 'Invalid light type.\nValid light types: pearl, azure, ruby, amber, gold, silver, ebon')
         return
     end
 
@@ -56,11 +56,13 @@ function onTrigger(player, light, amount, target)
 
     -- validate amount
     if amount == nil or amount < 1 then
-        error(player, "Invalid amount.")
+        error(player, 'Invalid amount.')
         return
     end
 
     xi.abyssea.addPlayerLights(targ, setLight, amount)
-    local newAmount = targ:getCharVar(light.."Light")
-    player:PrintToPlayer(string.format("%s was given %i %s light, for a total of %i.", targ:getName(), amount, light, newAmount))
+    local newAmount = targ:getCharVar(light..'Light')
+    player:printToPlayer(string.format('%s was given %i %s light, for a total of %i.', targ:getName(), amount, light, newAmount))
 end
+
+return commandObj

@@ -4,10 +4,6 @@
 -- Involved in quests: Omens
 -- !pos -95.081 -6.000 31.638 50
 -----------------------------------
-require("scripts/globals/npc_util")
-require("scripts/globals/quests")
-require("scripts/globals/utils")
------------------------------------
 local entity = {}
 
 local craftingItems =
@@ -38,13 +34,13 @@ local craftingItems =
 }
 
 entity.onTrade = function(player, npc, trade)
-    local remainingBLUAF = player:getCharVar("[BLUAF]Remaining") -- Bitmask of AF the player has NOT crafted
+    local remainingBLUAF = player:getCharVar('[BLUAF]Remaining') -- Bitmask of AF the player has NOT crafted
     if remainingBLUAF >= 1 then
-        local craftingStage = player:getCharVar("[BLUAF]CraftingStage")
+        local craftingStage = player:getCharVar('[BLUAF]CraftingStage')
         local totalCraftedPieces = 3 - utils.mask.countBits(remainingBLUAF, 3)
         local artifactOffset = 8 * totalCraftedPieces
 
-        local item = craftingItems[player:getCharVar("[BLUAF]Current")]
+        local item = craftingItems[player:getCharVar('[BLUAF]Current')]
         if item then
             if
                 craftingStage == 0 and
@@ -66,14 +62,14 @@ entity.onTrigger = function(player, npc)
 
     -- CRAFTING OTHER 3 BLUE MAGE ARMOR PIECES
     if transformations >= QUEST_ACCEPTED then
-        local remainingBLUAF = player:getCharVar("[BLUAF]Remaining") -- Bitmask of AF the player has NOT crafted
+        local remainingBLUAF = player:getCharVar('[BLUAF]Remaining') -- Bitmask of AF the player has NOT crafted
         local totalCraftedPieces = 3 - utils.mask.countBits(remainingBLUAF, 3)
-        local currentTask = player:getCharVar("[BLUAF]Current")
-        local craftingStage = player:getCharVar("[BLUAF]CraftingStage")
+        local currentTask = player:getCharVar('[BLUAF]Current')
+        local craftingStage = player:getCharVar('[BLUAF]CraftingStage')
         local artifactOffset = 8 * totalCraftedPieces
 
         if currentTask == 0 and totalCraftedPieces ~= 3 then
-            if VanadielUniqueDay() > player:getCharVar("[BLUAF]RestingDay") then
+            if VanadielUniqueDay() > player:getCharVar('[BLUAF]RestingDay') then
                 if totalCraftedPieces == 2 then
                     currentTask = math.floor(remainingBLUAF / 2) + 1
                     player:startEvent(746, 0, 0, 0, 0, 0, 0, 0, currentTask)
@@ -85,7 +81,7 @@ entity.onTrigger = function(player, npc)
                 player:startEvent(737 + (artifactOffset - 8)) -- Asleep message, wait until 1 day passes
             end
         elseif currentTask > 0 then
-            local pickupReady = VanadielUniqueDay() > player:getCharVar("[BLUAF]PaymentDay")
+            local pickupReady = VanadielUniqueDay() > player:getCharVar('[BLUAF]PaymentDay')
             local item = craftingItems[currentTask]
             if craftingStage == 0 then
                 player:startEvent(731 + artifactOffset, 0, item.currency, item.currencyAmt)
@@ -103,20 +99,20 @@ entity.onTrigger = function(player, npc)
 end
 
 entity.onEventUpdate = function(player, csid, option, npc)
-    local remainingBLUAF = player:getCharVar("[BLUAF]Remaining") -- Bitmask of AF the player has NOT crafted
+    local remainingBLUAF = player:getCharVar('[BLUAF]Remaining') -- Bitmask of AF the player has NOT crafted
     local totalCraftedPieces = 3 - utils.mask.countBits(remainingBLUAF, 3)
     local artifactOffset = 8 * totalCraftedPieces
 
     if csid == 730 + artifactOffset then
         if option >= 2 and option <= 9 then
-            local currentTask = player:getCharVar("[BLUAF]Current")
+            local currentTask = player:getCharVar('[BLUAF]Current')
             local updateType = option % 3
             if updateType == 2 then
                 -- Choosing a piece
                 local piece = math.floor(option / 4) + 1
                 -- Make sure the player isn't trying to cheat somehow
                 if utils.mask.getBit(remainingBLUAF, piece - 1) then
-                    player:setCharVar("[BLUAF]Current", piece)
+                    player:setCharVar('[BLUAF]Current', piece)
                     local item = craftingItems[piece]
                     player:updateEvent(0, unpack(item.materials))
                 end
@@ -130,32 +126,32 @@ entity.onEventUpdate = function(player, csid, option, npc)
 end
 
 entity.onEventFinish = function(player, csid, option, npc)
-    local remainingBLUAF = player:getCharVar("[BLUAF]Remaining") -- Bitmask of AF the player has NOT crafted
+    local remainingBLUAF = player:getCharVar('[BLUAF]Remaining') -- Bitmask of AF the player has NOT crafted
     local totalCraftedPieces = 3 - utils.mask.countBits(remainingBLUAF, 3)
-    local currentTask = player:getCharVar("[BLUAF]Current")
+    local currentTask = player:getCharVar('[BLUAF]Current')
     local artifactOffset = 8 * totalCraftedPieces
 
     -- BLU AF CRAFTING
     if csid == 732 + artifactOffset then
-        player:setCharVar("[BLUAF]CraftingStage", 1)
+        player:setCharVar('[BLUAF]CraftingStage', 1)
         player:confirmTrade()
     elseif csid == 734 + artifactOffset then
         player:confirmTrade()
-        player:setCharVar("[BLUAF]CraftingStage", 2)
-        player:setCharVar("[BLUAF]PaymentDay", VanadielUniqueDay())
+        player:setCharVar('[BLUAF]CraftingStage', 2)
+        player:setCharVar('[BLUAF]PaymentDay', VanadielUniqueDay())
         npcUtil.giveKeyItem(player, xi.ki.MAGUS_ORDER_SLIP)
     elseif csid == 736 + artifactOffset and currentTask > 0 then
         if npcUtil.giveItem(player, craftingItems[currentTask].result) then
-            player:setCharVar("[BLUAF]Remaining", utils.mask.setBit(remainingBLUAF, currentTask - 1, false))
-            player:setCharVar("[BLUAF]PaymentDay", 0)
-            player:setCharVar("[BLUAF]CraftingStage", 0)
-            player:setCharVar("[BLUAF]Current", 0)
+            player:setCharVar('[BLUAF]Remaining', utils.mask.setBit(remainingBLUAF, currentTask - 1, false))
+            player:setCharVar('[BLUAF]PaymentDay', 0)
+            player:setCharVar('[BLUAF]CraftingStage', 0)
+            player:setCharVar('[BLUAF]Current', 0)
 
-            if player:getCharVar("[BLUAF]Remaining") == 0 then
+            if player:getCharVar('[BLUAF]Remaining') == 0 then
                 -- Player is finished with Lathuya
-                player:setCharVar("[BLUAF]RestingDay", 0)
+                player:setCharVar('[BLUAF]RestingDay', 0)
             else
-                player:setCharVar("[BLUAF]RestingDay", VanadielUniqueDay())
+                player:setCharVar('[BLUAF]RestingDay', VanadielUniqueDay())
             end
 
             player:delKeyItem(xi.ki.MAGUS_ORDER_SLIP)

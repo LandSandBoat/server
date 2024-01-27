@@ -40,6 +40,7 @@
 #include "linkshell.h"
 #include "map.h"
 #include "message.h"
+#include "monstrosity.h"
 #include "notoriety_container.h"
 #include "party.h"
 #include "spell.h"
@@ -101,18 +102,13 @@ int32 zone_update_weather(time_point tick, CTaskMgr::CTask* PTask)
     return 0;
 }
 
-/************************************************************************
- *                                                                       *
- *  Class CZone                                                          *
- *                                                                       *
- ************************************************************************/
-
 CZone::CZone(ZONEID ZoneID, REGION_TYPE RegionID, CONTINENT_TYPE ContinentID, uint8 levelRestriction)
 : m_zoneID(ZoneID)
-, m_zoneType(ZONE_TYPE::NONE)
+, m_zoneType(ZONE_TYPE::UNKNOWN)
 , m_regionID(RegionID)
 , m_continentID(ContinentID)
 , m_levelRestriction(levelRestriction)
+, m_WeatherChangeTime(0)
 {
     TracyZoneScoped;
 
@@ -125,7 +121,6 @@ CZone::CZone(ZONEID ZoneID, REGION_TYPE RegionID, CONTINENT_TYPE ContinentID, ui
     m_TreasurePool       = nullptr;
     m_BattlefieldHandler = nullptr;
     m_Weather            = WEATHER_NONE;
-    m_WeatherChangeTime  = 0;
     m_navMesh            = nullptr;
     m_zoneEntities       = new CZoneEntities(this);
     m_CampaignHandler    = new CCampaignHandler(this);
@@ -151,7 +146,7 @@ ZONEID CZone::GetID()
     return m_zoneID;
 }
 
-ZONE_TYPE CZone::GetType()
+ZONE_TYPE CZone::GetTypeMask()
 {
     return m_zoneType;
 }
@@ -196,7 +191,7 @@ uint32 CZone::GetWeatherChangeTime() const
     return m_WeatherChangeTime;
 }
 
-const std::string& CZone::GetName()
+const std::string& CZone::getName()
 {
     return m_zoneName;
 }
@@ -265,7 +260,7 @@ QueryByNameResult_t const& CZone::queryEntitiesByName(std::string const& pattern
     // clang-format off
     ForEachNpc([&](CNpcEntity* PNpc)
     {
-        if (matches(PNpc->GetName(), pattern))
+        if (matches(PNpc->getName(), pattern))
         {
             entities.emplace_back(PNpc);
         }
@@ -273,7 +268,7 @@ QueryByNameResult_t const& CZone::queryEntitiesByName(std::string const& pattern
 
     ForEachMob([&](CMobEntity* PMob)
     {
-        if (matches(PMob->GetName(), pattern))
+        if (matches(PMob->getName(), pattern))
         {
             entities.emplace_back(PMob);
         }
@@ -423,7 +418,7 @@ void CZone::LoadZoneSettings()
 
         m_zoneType = static_cast<ZONE_TYPE>(sql->GetUIntData(9));
 
-        if (sql->GetData(10) != nullptr) // сейчас нельзя использовать bcnmid, т.к. они начинаются с нуля
+        if (sql->GetData(10) != nullptr) // bcnmid cannot be used now, because they start from scratch
         {
             m_BattlefieldHandler = new CBattlefieldHandler(this);
         }
@@ -452,7 +447,7 @@ void CZone::LoadNavMesh()
 
     char file[255];
     memset(file, 0, sizeof(file));
-    snprintf(file, sizeof(file), "navmeshes/%s.nav", GetName().c_str());
+    snprintf(file, sizeof(file), "navmeshes/%s.nav", getName().c_str());
 
     if (!m_navMesh->load(file))
     {
@@ -463,7 +458,7 @@ void CZone::LoadNavMesh()
 
 void CZone::LoadZoneLos()
 {
-    if (GetType() == ZONE_TYPE::CITY || (m_miscMask & MISC_LOS_OFF))
+    if (GetTypeMask() & ZONE_TYPE::CITY || (m_miscMask & MISC_LOS_OFF))
     {
         // Skip cities and zones with line of sight turned off
         return;
@@ -475,12 +470,12 @@ void CZone::LoadZoneLos()
         destroy(lineOfSight);
     }
 
-    lineOfSight = ZoneLos::Load((uint16)GetID(), fmt::sprintf("losmeshes/%s.obj", GetName()));
+    lineOfSight = ZoneLos::Load((uint16)GetID(), fmt::sprintf("losmeshes/%s.obj", getName()));
 }
 
 /************************************************************************
  *                                                                       *
- *  Добавляем в зону MOB                                                 *
+ *  Add a MOB to the zone                                                *
  *                                                                       *
  ************************************************************************/
 
@@ -491,7 +486,7 @@ void CZone::InsertMOB(CBaseEntity* PMob)
 
 /************************************************************************
  *                                                                       *
- *  Добавляем в зону NPC                                                 *
+ *  Add an NPC to the zone                                               *
  *                                                                       *
  ************************************************************************/
 
@@ -507,7 +502,7 @@ void CZone::DeletePET(CBaseEntity* PPet)
 
 /************************************************************************
  *                                                                       *
- *  Добавляем в зону PET (свободные targid 0x700-0x7FF)                  *
+ *  Add a PET to the zone (free targid 0x700-0x7FF)                      *
  *                                                                       *
  ************************************************************************/
 
@@ -548,8 +543,8 @@ void CZone::InsertTriggerArea(CTriggerArea* triggerArea)
 
 /************************************************************************
  *                                                                       *
- *  Ищем группу для монстра. Для монстров, объединенных в группу         *
- *  работает система взаимопомощи (link)                                 *
+ *  We are looking for a monster for a party. For monsters grouped       *
+ *  together, mutual aid (link) system is used                           *
  *                                                                       *
  ************************************************************************/
 
@@ -561,7 +556,7 @@ void CZone::FindPartyForMob(CBaseEntity* PEntity)
 
 /************************************************************************
  *                                                                       *
- *  Транспотр отправляется, необходимо собрать пассажиров                *
+ *  The ship/boat is leaving, necessary to collect passengers            *
  *                                                                       *
  ************************************************************************/
 
@@ -667,8 +662,12 @@ void CZone::UpdateWeather()
         Weather = weatherType.normal;
     }
 
-    // Fog in the morning between the hours of 2 and 7 if there is not a specific elemental weather to override it
-    if ((CurrentVanaDate >= StartFogVanaDate) && (CurrentVanaDate < EndFogVanaDate) && (Weather < WEATHER_HOT_SPELL) && (GetType() > ZONE_TYPE::CITY))
+    // This check is incorrect, fog is not simply a time of day, though it may consistently happen in SOME zones
+    // (Al'Taieu likely has it every morning, while Atohwa Chasm can have it at random any time of day)
+    if ((CurrentVanaDate >= StartFogVanaDate) &&
+        (CurrentVanaDate < EndFogVanaDate) &&
+        (Weather < WEATHER_HOT_SPELL) &&
+        !(GetTypeMask() & ZONE_TYPE::CITY))
     {
         Weather = WEATHER_FOG;
         // Force the weather to change by 7 am
@@ -685,8 +684,8 @@ void CZone::UpdateWeather()
 
 /************************************************************************
  *                                                                       *
- *  Удаляем персонажа из зоны. Если запущен ZoneServer и персонажей      *
- *  в зоне больше не осталось, то останавливаем ZoneServer               *
+ *  Remove a character from the zone. If ZoneServer and character are    *
+ *  online, and there is no more left in the zone, then stop zone        *
  *                                                                       *
  ************************************************************************/
 
@@ -709,9 +708,9 @@ void CZone::DecreaseZoneCounter(CCharEntity* PChar)
 
 /************************************************************************
  *                                                                       *
- *  Добавляем персонажа в зону. Если ZoneServer не запущен то запускам.  *
- *  Обязательно проверяем количество персонажей в зоне.                  *
- *  Максимальное число персонажей в одной зоне - 768                     *
+ *  Add a character to the zone. If zone isn't running, then load zone.  *
+ *  Be sure to check the number of characters in the zone.               *
+ *  The maximum number of characters in one zone is 768                  *
  *                                                                       *
  ************************************************************************/
 
@@ -747,10 +746,10 @@ void CZone::IncreaseZoneCounter(CCharEntity* PChar)
 
 /************************************************************************
  *                                                                       *
- *  Проверка видимости монстров персонажем. Дистанцию лучше вынести в    *
- *  глобальную переменную (настройки сервера)                            *
- *  Именно в этой функции будем проверять агрессию мостров, чтобы не     *
- *  вычислять distance несколько раз (например в ZoneServer)             *
+ *  Check the visibility of monsters by a character. It is better to     *
+ *  keep the distance in global variable (server settings). It is in     *
+ *  this function that the aggression of monsters is checked so that     *
+ *  distance is not calculated several times (e.g. in ZoneServer)        *
  *                                                                       *
  ************************************************************************/
 
@@ -761,8 +760,8 @@ void CZone::SpawnMOBs(CCharEntity* PChar)
 
 /************************************************************************
  *                                                                       *
- *  Проверка видимости питомцев персонажем. Для появления питомцев       *
- *  используем UPDATE вместо SPAWN. SPAWN используется лишь при вызове   *
+ *  Check the visibility of pets by a character. For the adding of pets  *
+ *  use UPDATE instead of SPAWN. SPAWN is only used when calling.        *
  *                                                                       *
  ************************************************************************/
 
@@ -778,7 +777,7 @@ void CZone::SpawnTRUSTs(CCharEntity* PChar)
 
 /************************************************************************
  *                                                                       *
- *  Проверка видимости NPCs персонажем.                                  *
+ *  Check the visibility of NPCs by a character.                         *
  *                                                                       *
  ************************************************************************/
 
@@ -789,10 +788,10 @@ void CZone::SpawnNPCs(CCharEntity* PChar)
 
 /************************************************************************
  *                                                                       *
- *  Проверка видимости персонажей. Смысл действий в том, что персонажи   *
- *  сами себя обновляют и добавляются в списки других персонажей.        *
- *  В оригинальной версии размер списка ограничен и изменяется в         *
- *  пределах 25-50 видимых персонажей.                                   *
+ *  Check the visibility of other characters by a character. The point   *
+ *  of this action is that the characters update themselves and are      *
+ *  added to the lists of other characters. Originally, the list size    *
+ *  was limited to/changed to within 25-50 visible characters.           *
  *                                                                       *
  ************************************************************************/
 
@@ -803,7 +802,7 @@ void CZone::SpawnPCs(CCharEntity* PChar)
 
 /************************************************************************
  *                                                                       *
- *  Отображаем Moogle в MogHouse                                         *
+ *  Displaying Moogle in MogHouse                                        *
  *                                                                       *
  ************************************************************************/
 
@@ -814,7 +813,7 @@ void CZone::SpawnMoogle(CCharEntity* PChar)
 
 /************************************************************************
  *                                                                       *
- *  Отображаем транспотр в зоне (не хранится в основном списке)          *
+ *  Displaying ships/boats in the zone (not stored in the main list).    *
  *                                                                       *
  ************************************************************************/
 
@@ -823,12 +822,6 @@ void CZone::SpawnTransport(CCharEntity* PChar)
     m_zoneEntities->SpawnTransport(PChar);
 }
 
-/************************************************************************
- *                                                                       *
- *  Получаем указатель на любую сущность в зоне по ее targid             *
- *                                                                       *
- ************************************************************************/
-
 CBaseEntity* CZone::GetEntity(uint16 targid, uint8 filter)
 {
     return m_zoneEntities->GetEntity(targid, filter);
@@ -836,7 +829,7 @@ CBaseEntity* CZone::GetEntity(uint16 targid, uint8 filter)
 
 /************************************************************************
  *                                                                       *
- *  Oбработка реакции мира на смену времени суток                        *
+ *  Process the world's adjustments to time of day changing              *
  *                                                                       *
  ************************************************************************/
 
@@ -863,12 +856,6 @@ CCharEntity* CZone::GetCharByID(uint32 id)
     return m_zoneEntities->GetCharByID(id);
 }
 
-/************************************************************************
- *                                                                       *
- *  Отправляем глобальные пакеты                                         *
- *                                                                       *
- ************************************************************************/
-
 void CZone::PushPacket(CBaseEntity* PEntity, GLOBAL_MESSAGE_TYPE message_type, CBasicPacket* packet)
 {
     TracyZoneScoped;
@@ -887,12 +874,6 @@ void CZone::UpdateEntityPacket(CBaseEntity* PEntity, ENTITYUPDATE type, uint8 up
     m_zoneEntities->UpdateEntityPacket(PEntity, type, updatemask, alwaysInclude);
 }
 
-/************************************************************************
- *                                                                       *
- *  Wide Scan                                                            *
- *                                                                       *
- ************************************************************************/
-
 void CZone::WideScan(CCharEntity* PChar, uint16 radius)
 {
     TracyZoneScoped;
@@ -901,8 +882,8 @@ void CZone::WideScan(CCharEntity* PChar, uint16 radius)
 
 /************************************************************************
  *                                                                       *
- *  Cервер для обработки активности и статус-эффектов сущностей в зоне.  *
- *  При любом раскладе последними должны обрабатываться персонажи        *
+ *  Characters should be processed last when processing activity and     *
+ *  status effects of entities in the zone.                              *
  *                                                                       *
  ************************************************************************/
 
@@ -1006,7 +987,6 @@ void CZone::createZoneTimers()
 void CZone::CharZoneIn(CCharEntity* PChar)
 {
     TracyZoneScoped;
-    // ищем свободный targid для входящего в зону персонажа
 
     PChar->loc.zone              = this;
     PChar->loc.zoning            = false;
@@ -1045,7 +1025,7 @@ void CZone::CharZoneIn(CCharEntity* PChar)
         PChar->PTreasurePool->AddMember(PChar);
     }
 
-    if (m_zoneType != ZONE_TYPE::DUNGEON_INSTANCED)
+    if (!(m_zoneType & ZONE_TYPE::INSTANCED))
     {
         charutils::ClearTempItems(PChar);
         PChar->PInstance = nullptr;
@@ -1088,6 +1068,8 @@ void CZone::CharZoneIn(CCharEntity* PChar)
             PChar->PPet->StatusEffectContainer->DelStatusEffectsByFlag(EFFECTFLAG_CONFRONTATION, true);
         }
     }
+
+    monstrosity::HandleZoneIn(PChar);
 
     PChar->PLatentEffectContainer->CheckLatentsZone();
 
@@ -1154,7 +1136,7 @@ void CZone::CharZoneOut(CCharEntity* PChar)
         PChar->PUnityChat->DelMember(PChar);
     }
 
-    if (PChar->PTreasurePool != nullptr) // TODO: условие для устранения проблем с MobHouse, надо блин решить ее раз и навсегда
+    if (PChar->PTreasurePool != nullptr) // TODO: Condition for eliminating problems with MobHouse, we need to solve it once and for all!
     {
         PChar->PTreasurePool->DelMember(PChar);
     }
@@ -1186,8 +1168,17 @@ void CZone::CharZoneOut(CCharEntity* PChar)
     if (PChar->PParty && PChar->loc.destination != 0 && PChar->m_moghouseID == 0)
     {
         uint8 data[4]{};
-        ref<uint32>(data, 0) = PChar->PParty->GetPartyID();
-        message::send(MSG_PT_RELOAD, data, sizeof data, nullptr);
+
+        if (PChar->PParty->m_PAlliance)
+        {
+            ref<uint32>(data, 0) = PChar->PParty->m_PAlliance->m_AllianceID;
+            message::send(MSG_ALLIANCE_RELOAD, data, sizeof data, nullptr);
+        }
+        else
+        {
+            ref<uint32>(data, 0) = PChar->PParty->GetPartyID();
+            message::send(MSG_PT_RELOAD, data, sizeof data, nullptr);
+        }
     }
 
     if (PChar->PParty)
@@ -1217,6 +1208,7 @@ CZoneEntities* CZone::GetZoneEntities()
 void CZone::CheckTriggerAreas()
 {
     TracyZoneScoped;
+
     for (auto const& [targid, PEntity] : m_zoneEntities->m_charList)
     {
         auto* PChar = static_cast<CCharEntity*>(PEntity);

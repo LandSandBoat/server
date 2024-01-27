@@ -5,9 +5,6 @@
 -- !addmission 5 12
 -- Bulwark_Gate : !pos -447.174 -1.831 342.417 98
 -----------------------------------
-require('scripts/globals/missions')
-require('scripts/globals/interaction/mission')
------------------------------------
 
 local mission = Mission:new(xi.mission.log_id.WOTG, xi.mission.id.wotg.BORNE_BY_THE_WIND)
 

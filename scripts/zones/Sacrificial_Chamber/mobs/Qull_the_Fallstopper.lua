@@ -3,7 +3,7 @@
 --  Mob: Qull the Fallstopper
 -- BCNM: Amphibian Assault
 -----------------------------------
-mixins = { require("scripts/mixins/job_special") }
+mixins = { require('scripts/mixins/job_special') }
 -----------------------------------
 local entity = {}
 

@@ -7,9 +7,6 @@
 -- Ploh Trishbahk : !pos 100.580 -40.150 -63.830 257
 -- Chalvava       : !pos -318.000 -1.000 -318.000 258
 -----------------------------------
-require('scripts/globals/missions')
-require('scripts/globals/interaction/mission')
------------------------------------
 
 local mission = Mission:new(xi.mission.log_id.SOA, xi.mission.id.soa.THE_TOMATOES_OF_WRATH)
 

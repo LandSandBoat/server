@@ -2,11 +2,6 @@
 -- Area: Lebros Cavern
 -- Ancient Lockbox
 -----------------------------------
-local ID = require("scripts/zones/Lebros_Cavern/IDs")
-require("scripts/globals/appraisal")
-require("scripts/globals/assault")
------------------------------------
-
 local entity = {}
 
 entity.onTrigger = function(player, npc)
@@ -15,26 +10,26 @@ entity.onTrigger = function(player, npc)
         [xi.assault.mission.EXCAVATION_DUTY] =
         {
             {
-                { itemid = xi.items.APPRAISAL_BOX,     droprate = 300 },
-                { itemid = xi.items.APPRAISAL_EARRING, droprate = 700 },
+                { itemid = xi.item.APPRAISAL_BOX,     droprate = 300 },
+                { itemid = xi.item.APPRAISAL_EARRING, droprate = 700 },
             },
         },
 
         [xi.assault.mission.LEBROS_SUPPLIES] =
         {
             {
-                { itemid = xi.items.APPRAISAL_BOX,  droprate = 300 },
-                { itemid = xi.items.APPRAISAL_CAPE, droprate = 700 },
+                { itemid = xi.item.APPRAISAL_BOX,  droprate = 300 },
+                { itemid = xi.item.APPRAISAL_CAPE, droprate = 700 },
             },
         },
 
         [xi.assault.mission.TROLL_FUGITIVES] =
         {
             {
-                { itemid = xi.items.APPRAISAL_AXE,       droprate = 300 },
-                { itemid = xi.items.APPRAISAL_POLEARM,   droprate = 200 },
-                { itemid = xi.items.APPRAISAL_HEADPIECE, droprate = 100 },
-                { itemid = xi.items.APPRAISAL_BOX,       droprate = 400 },
+                { itemid = xi.item.APPRAISAL_AXE,       droprate = 300 },
+                { itemid = xi.item.APPRAISAL_POLEARM,   droprate = 200 },
+                { itemid = xi.item.APPRAISAL_HEADPIECE, droprate = 100 },
+                { itemid = xi.item.APPRAISAL_BOX,       droprate = 400 },
             },
         },
     }
@@ -44,22 +39,22 @@ entity.onTrigger = function(player, npc)
         [xi.assault.mission.EXCAVATION_DUTY] =
         {
             {
-                { itemid = xi.items.REMEDY, droprate = 900 },
+                { itemid = xi.item.REMEDY, droprate = 900 },
                 { itemid = 0,               droprate = 100 },
             },
 
             {
-                { itemid = xi.items.REMEDY, droprate = 200 },
+                { itemid = xi.item.REMEDY, droprate = 200 },
                 { itemid = 0,               droprate = 800 },
             },
 
             {
-                { itemid = xi.items.HI_POTION_III, droprate = 400 },
-                { itemid = 0,                      droprate = 600 },
+                { itemid = xi.item.HI_POTION_P3, droprate = 400 },
+                { itemid = 0,                    droprate = 600 },
             },
 
             {
-                { itemid = xi.items.HI_POTION_III, droprate = 200 },
+                { itemid = xi.item.HI_POTION_P3, droprate = 200 },
                 { itemid = 0,                      droprate = 800 },
             },
         },
@@ -67,17 +62,17 @@ entity.onTrigger = function(player, npc)
         [xi.assault.mission.LEBROS_SUPPLIES] =
         {
             {
-                { itemid = xi.items.REMEDY, droprate = 800 },
+                { itemid = xi.item.REMEDY, droprate = 800 },
                 { itemid = 0,               droprate = 200 },
             },
 
             {
-                { itemid = xi.items.RERAISER, droprate = 200 },
+                { itemid = xi.item.RERAISER, droprate = 200 },
                 { itemid = 0,                 droprate = 800 },
             },
 
             {
-                { itemid = xi.items.HI_POTION_TANK, droprate = 100 },
+                { itemid = xi.item.HI_POTION_TANK, droprate = 100 },
                 { itemid = 0,                       droprate = 900 },
             },
         },
@@ -85,22 +80,22 @@ entity.onTrigger = function(player, npc)
         [xi.assault.mission.TROLL_FUGITIVES] =
         {
             {
-                { itemid = xi.items.HI_POTION_III, droprate = 800 },
+                { itemid = xi.item.HI_POTION_P3, droprate = 800 },
                 { itemid = 0,                      droprate = 200 },
             },
 
             {
-                { itemid = xi.items.RERAISER, droprate = 200 },
+                { itemid = xi.item.RERAISER, droprate = 200 },
                 { itemid = 0,                 droprate = 800 },
             },
 
             {
-                { itemid = xi.items.HI_POTION_TANK, droprate = 100 },
+                { itemid = xi.item.HI_POTION_TANK, droprate = 100 },
                 { itemid = 0,                       droprate = 900 },
             },
 
             {
-                { itemid = xi.items.HI_ETHER_TANK, droprate = 100 },
+                { itemid = xi.item.HI_ETHER_TANK, droprate = 100 },
                 { itemid = 0,                      droprate = 900 },
             },
         },

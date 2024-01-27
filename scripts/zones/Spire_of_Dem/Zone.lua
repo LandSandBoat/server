@@ -1,8 +1,6 @@
 -----------------------------------
 -- Zone: Spire_of_Dem (19)
 -----------------------------------
-local ID = require('scripts/zones/Spire_of_Dem/IDs')
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

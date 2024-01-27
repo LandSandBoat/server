@@ -4,7 +4,6 @@
 -- Info: Floor 60 80 and 100 Boss
 -----------------------------------
 mixins = { require('scripts/mixins/nyzul_boss_drops') }
-require('scripts/globals/nyzul')
 -----------------------------------
 local entity = {}
 
@@ -39,12 +38,12 @@ end
 
 entity.onMobFight = function(mob, target)
     local battletime = os.time()
-    local headgrow   = mob:getLocalVar("headgrow")
+    local headgrow   = mob:getLocalVar('headgrow')
     local broken     = mob:getAnimationSub()
 
     if headgrow < battletime and broken > 0 then
         mob:setAnimationSub(broken - 1)
-        mob:setLocalVar("headgrow", battletime + 300)
+        mob:setLocalVar('headgrow', battletime + 300)
         mob:setTP(3000)
         handleRegen(mob, broken - 1)
     end
@@ -56,7 +55,7 @@ entity.onCriticalHit = function(mob)
 
     if rand <= 15 and broken < 2 then
         mob:setAnimationSub(broken + 1)
-        mob:setLocalVar("headgrow", os.time() + math.random(120, 240))
+        mob:setLocalVar('headgrow', os.time() + math.random(120, 240))
         handleRegen(mob, broken + 1)
     end
 end

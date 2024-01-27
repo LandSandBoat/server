@@ -26,8 +26,8 @@ class AHPaginationModule : public CPPModule
         auto ITEMS_PER_PAGE = 6U;
         auto TOTAL_PAGES    = 6;
 
-        ShowInfo("[AH PAGES] Setting AH_LIST_LIMIT to %i.", ITEMS_PER_PAGE * TOTAL_PAGES)
-            lua["xi"]["settings"]["search"]["AH_LIST_LIMIT"] = ITEMS_PER_PAGE * TOTAL_PAGES;
+        ShowInfo("[AH PAGES] Setting AH_LIST_LIMIT to %i.", ITEMS_PER_PAGE * TOTAL_PAGES);
+        lua["xi"]["settings"]["search"]["AH_LIST_LIMIT"] = ITEMS_PER_PAGE * TOTAL_PAGES;
 
         auto originalHandler = PacketParser[0x04E];
 
@@ -37,7 +37,7 @@ class AHPaginationModule : public CPPModule
 
             if (PChar->m_GMlevel == 0 && !PChar->loc.zone->CanUseMisc(MISC_AH))
             {
-                ShowWarning("%s is trying to use the auction house in a disallowed zone [%s]", PChar->GetName(), PChar->loc.zone->GetName());
+                ShowWarning("%s is trying to use the auction house in a disallowed zone [%s]", PChar->getName(), PChar->loc.zone->getName());
                 return;
             }
 

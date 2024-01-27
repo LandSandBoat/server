@@ -48,7 +48,7 @@ CInstanceLoader::CInstanceLoader(uint16 instanceid, CCharEntity* PRequester)
     auto   instanceData = instanceutils::GetInstanceData(instanceid);
     CZone* PZone        = zoneutils::GetZone(instanceData.instance_zone);
 
-    if (!PZone || PZone->GetType() != ZONE_TYPE::DUNGEON_INSTANCED)
+    if (!PZone || !(PZone->GetTypeMask() & ZONE_TYPE::INSTANCED))
     {
         ShowError("Invalid zone for instanceid: %d", instanceid);
         return;
@@ -290,8 +290,8 @@ CInstance* CInstanceLoader::LoadInstance()
             // Add to cache
             luautils::CacheLuaObjectFromFile(
                 fmt::format("./scripts/zones/{}/mobs/{}.lua",
-                            PMob.second->loc.zone->GetName(),
-                            PMob.second->GetName()));
+                            PMob.second->loc.zone->getName(),
+                            PMob.second->getName()));
         }
 
         // Finish setting up NPCs
@@ -302,8 +302,8 @@ CInstance* CInstanceLoader::LoadInstance()
             // Add to cache
             luautils::CacheLuaObjectFromFile(
                 fmt::format("./scripts/zones/{}/npcs/{}.lua",
-                            PNpc.second->loc.zone->GetName(),
-                            PNpc.second->GetName()));
+                            PNpc.second->loc.zone->getName(),
+                            PNpc.second->getName()));
         }
 
         // Cache Instance script (TODO: This will be done multiple times, don't do that)

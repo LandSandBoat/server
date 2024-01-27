@@ -8,11 +8,7 @@
 -- Quu Bokye      : !pos -159 16 181 145
 -- qm1            : !pos -58 0 -449 145
 -----------------------------------
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
-require('scripts/globals/interaction/quest')
------------------------------------
-local giddeusID = require('scripts/zones/Giddeus/IDs')
+local giddeusID = zones[xi.zone.GIDDEUS]
 -----------------------------------
 
 local quest = Quest:new(xi.quest.log_id.BASTOK, xi.quest.id.bastok.DARK_LEGACY)
@@ -21,7 +17,7 @@ quest.reward =
 {
     fame     = 20,
     fameArea = xi.quest.fame_area.BASTOK,
-    item     = xi.items.RAVEN_SCYTHE,
+    item     = xi.item.RAVEN_SCYTHE,
 }
 
 quest.sections =
@@ -120,7 +116,7 @@ quest.sections =
             {
                 onTrade = function(player, npc, trade)
                     if
-                        npcUtil.tradeHasExactly(trade, xi.items.YAGUDO_CHERRY) and
+                        npcUtil.tradeHasExactly(trade, xi.item.YAGUDO_CHERRY) and
                         not GetMobByID(giddeusID.mob.VAA_HUJA_THE_ERUDITE):isSpawned() and
                         quest:getVar(player, 'Prog') == 2
                     then
@@ -145,7 +141,7 @@ quest.sections =
             {
                 onTrade = function(player, npc, trade)
                     if
-                        npcUtil.tradeHasExactly(trade, xi.items.YAGUDO_CHERRY) and
+                        npcUtil.tradeHasExactly(trade, xi.item.YAGUDO_CHERRY) and
                         quest:getVar(player, 'Prog') == 2 and
                         quest:getVar(player, 'Option') == 0
                     then

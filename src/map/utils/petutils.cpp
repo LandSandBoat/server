@@ -62,11 +62,6 @@ std::vector<Pet_t*> g_PPetList;
 
 namespace petutils
 {
-    /************************************************************************
-     *                                                                      *
-     *  Загружаем список прототипов питомцев                                    *
-     *                                                                      *
-     ************************************************************************/
 
     void LoadPetList()
     {
@@ -186,12 +181,6 @@ namespace petutils
             }
         }
     }
-
-    /************************************************************************
-     *                                                                      *
-     *  Освобождаем список прототипов питомцев                              *
-     *                                                                      *
-     ************************************************************************/
 
     void FreePetList()
     {
@@ -652,7 +641,7 @@ namespace petutils
                   (grade::GetHPScale(grade, scaleOver30Column) * mainLevelOver30) + (grade::GetHPScale(grade, scaleOver60Column) * mainLevelOver60To75) +
                   (grade::GetHPScale(grade, scaleOver75Column) * mainLevelOver75);
 
-        // Расчет бонусных HP
+        // Bonus HP calculation
         bonusStat = (mainLevelOver10 + mainLevelOver50andUnder60) * 2;
         if (PPet->m_PetID == PETID_ODIN || PPet->m_PetID == PETID_ALEXANDER)
         {
@@ -751,11 +740,19 @@ namespace petutils
         uint32 petID = PPet->m_PetID;
 
         // clang-format off
-        Pet_t* PPetData = *std::find_if(g_PPetList.begin(), g_PPetList.end(), [petID](Pet_t* t)
+        auto maybePetData = std::find_if(g_PPetList.begin(), g_PPetList.end(), [petID](Pet_t* t)
         {
             return t->PetID == petID;
         });
         // clang-format on
+
+        if (maybePetData == g_PPetList.end())
+        {
+            ShowError(fmt::format("Could not look up pet data for id: {}", petID));
+            return;
+        }
+
+        auto* PPetData = *maybePetData;
 
         uint8 mLvl = PMaster->GetMLevel();
 
@@ -779,7 +776,7 @@ namespace petutils
         }
         else
         { // should never happen
-            ShowDebug("%s summoned an avatar but is not SMN main or SMN sub! Please report. ", PMaster->GetName());
+            ShowDebug("%s summoned an avatar but is not SMN main or SMN sub! Please report. ", PMaster->getName());
             PPet->SetMLevel(1);
         }
 
@@ -931,11 +928,19 @@ namespace petutils
         uint32 petID = PPet->m_PetID;
 
         // clang-format off
-        Pet_t* PPetData = *std::find_if(g_PPetList.begin(), g_PPetList.end(), [petID](Pet_t* t)
+        auto maybePetData = std::find_if(g_PPetList.begin(), g_PPetList.end(), [petID](Pet_t* t)
         {
             return t->PetID == petID;
         });
         // clang-format on
+
+        if (maybePetData == g_PPetList.end())
+        {
+            ShowError(fmt::format("Could not look up pet data for id: {}", petID));
+            return;
+        }
+
+        auto* PPetData = *maybePetData;
 
         static_cast<CItemWeapon*>(PPet->m_Weapons[SLOT_MAIN])->setDelay((uint16)(floor(1000.0f * (240.0f / 60.0f))));
         static_cast<CItemWeapon*>(PPet->m_Weapons[SLOT_MAIN])->setBaseDelay((uint16)(floor(1000.0f * (240.0f / 60.0f))));
@@ -1094,17 +1099,11 @@ namespace petutils
         }
     }
 
-    /************************************************************************
-     *                                                                      *
-     *                                                                      *
-     *                                                                      *
-     ************************************************************************/
-
     void SpawnPet(CBattleEntity* PMaster, uint32 PetID, bool spawningFromZone)
     {
         if (PMaster->PPet != nullptr)
         {
-            ShowWarning("Pet was not null for %s.", PMaster->GetName());
+            ShowWarning("Pet was not null for %s.", PMaster->getName());
             return;
         }
 
@@ -1235,13 +1234,13 @@ namespace petutils
 
         if (PMaster->PPet == nullptr)
         {
-            ShowWarning("Pet is null for %s.", PMaster->GetName());
+            ShowWarning("Pet is null for %s.", PMaster->getName());
             return;
         }
 
         if (PMaster->objtype != TYPE_PC)
         {
-            ShowWarning("Non-PC passed into function (%s)", PMaster->GetName());
+            ShowWarning("Non-PC passed into function (%s)", PMaster->getName());
             return;
         }
 
@@ -1333,12 +1332,6 @@ namespace petutils
         PChar->pushPacket(new CPetSyncPacket(PChar));
     }
 
-    /************************************************************************
-     *                                                                      *
-     *                                                                      *
-     *                                                                      *
-     ************************************************************************/
-
     void DespawnPet(CBattleEntity* PMaster)
     {
         if (PMaster == nullptr)
@@ -1349,7 +1342,7 @@ namespace petutils
 
         if (PMaster->PPet == nullptr)
         {
-            ShowWarning("Pet is null for %s.", PMaster->GetName());
+            ShowWarning("Pet is null for %s.", PMaster->getName());
             return;
         }
 
@@ -1392,7 +1385,7 @@ namespace petutils
                 cost = 7;
             }
         }
-        else if (id == PETID_CARBUNCLE)
+        else if (id == PETID_CARBUNCLE || id == PETID_CAIT_SITH)
         {
             if (level < 10)
             {
@@ -1604,11 +1597,19 @@ namespace petutils
         }
 
         // clang-format off
-        Pet_t* PPetData = *std::find_if(g_PPetList.begin(), g_PPetList.end(), [PetID](Pet_t* t)
+        auto maybePetData = std::find_if(g_PPetList.begin(), g_PPetList.end(), [PetID](Pet_t* t)
         {
             return t->PetID == PetID;
         });
         // clang-format on
+
+        if (maybePetData == g_PPetList.end())
+        {
+            ShowError(fmt::format("Could not look up pet data for id: {}", PetID));
+            return;
+        }
+
+        auto* PPetData = *maybePetData;
 
         if (PMaster->GetMJob() != JOB_DRG && PetID == PETID_WYVERN)
         {

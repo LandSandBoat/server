@@ -4,9 +4,7 @@
 -- Note: Spawns Necroplasm for Eco-Warrior (San d'Oria)
 -- !pos -116 30 50 193
 -----------------------------------
-local ID = require("scripts/zones/Ordelles_Caves/IDs")
-require("scripts/globals/npc_util")
-require("scripts/globals/quests")
+local ID = zones[xi.zone.ORDELLES_CAVES]
 -----------------------------------
 local entity = {}
 
@@ -15,12 +13,12 @@ end
 
 entity.onTrigger = function(player, npc)
     if
-        player:getCharVar("EcoStatus") == 1 and
+        player:getCharVar('EcoStatus') == 1 and
         player:hasStatusEffect(xi.effect.LEVEL_RESTRICTION)
     then
         npcUtil.popFromQM(player, npc, ID.mob.NECROPLASM, { claim = true, look = true, hide = 0 })
     elseif
-        player:getCharVar("EcoStatus") == 2 and
+        player:getCharVar('EcoStatus') == 2 and
         not player:hasKeyItem(xi.ki.INDIGESTED_STALAGMITE)
     then
         npcUtil.giveKeyItem(player, xi.ki.INDIGESTED_STALAGMITE)

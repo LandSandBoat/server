@@ -1,11 +1,8 @@
 -----------------------------------
 -- Zone: Jugner_Forest (104)
 -----------------------------------
-local ID = require('scripts/zones/Jugner_Forest/IDs')
+local ID = zones[xi.zone.JUGNER_FOREST]
 require('scripts/quests/i_can_hear_a_rainbow')
-require('scripts/globals/chocobo_digging')
-require('scripts/globals/conquest')
-require('scripts/globals/helm')
 require('scripts/missions/amk/helpers')
 -----------------------------------
 local zoneObject = {}
@@ -62,7 +59,7 @@ end
 zoneObject.onTriggerAreaEnter = function(player, triggerArea)
     if
         triggerArea:GetTriggerAreaID() == 1 and
-        player:getCharVar("UnderOathCS") == 7
+        player:getCharVar('UnderOathCS') == 7
     then
         -- Quest: Under Oath - PLD AF3
         player:startEvent(14)
@@ -77,7 +74,7 @@ end
 
 zoneObject.onEventFinish = function(player, csid, option, npc)
     if csid == 14 then
-        player:setCharVar("UnderOathCS", 8) -- Quest: Under Oath - PLD AF3
+        player:setCharVar('UnderOathCS', 8) -- Quest: Under Oath - PLD AF3
     end
 end
 

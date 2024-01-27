@@ -25,8 +25,10 @@
 
 #include "common/cbasetypes.h"
 #include "common/mmo.h"
+#include "common/stdext.h"
 
 #include <filesystem>
+#include <iostream>
 #include <math.h>
 #include <set>
 
@@ -91,6 +93,7 @@ auto split(std::string const& s, std::string const& delimiter = " ") -> std::vec
 auto to_lower(std::string const& s) -> std::string;
 auto to_upper(std::string const& s) -> std::string;
 auto trim(const std::string& str, const std::string& whitespace = " \t") -> std::string;
+void rtrim(std::string& s);
 bool matches(std::string const& target, std::string const& pattern, std::string const& wildcard = "%");
 bool starts_with(std::string const& target, std::string const& pattern);
 auto replace(std::string const& target, std::string const& search, std::string const& replace) -> std::string;
@@ -117,21 +120,10 @@ std::set<std::filesystem::path> sorted_directory_iterator(std::string path_name)
     return sorted_by_name;
 }
 
-class ScopeGuard
+namespace utils
 {
-public:
-    ScopeGuard(std::function<void()> func)
-    : func(func)
-    {
-    }
-
-    ~ScopeGuard()
-    {
-        func();
-    }
-
-private:
-    std::function<void()> func;
-};
+    auto openFile(std::string const& path, std::string const& mode) -> std::unique_ptr<FILE>;
+    auto toASCII(std::string const& target, unsigned char replacement = '\0') -> std::string;
+} // namespace utils
 
 #endif

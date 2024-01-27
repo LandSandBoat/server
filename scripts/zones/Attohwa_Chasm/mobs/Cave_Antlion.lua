@@ -2,7 +2,7 @@
 -- Area: Attohwa Chasm
 --  Mob: Cave Antlion
 -----------------------------------
-mixins = { require("scripts/mixins/families/antlion_ambush") }
+mixins = { require('scripts/mixins/families/antlion_ambush') }
 -----------------------------------
 local entity = {}
 

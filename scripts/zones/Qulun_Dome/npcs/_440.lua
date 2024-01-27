@@ -4,7 +4,7 @@
 -- Involved in Mission: Magicite
 -- !pos 60 24 -2 148
 -----------------------------------
-local ID = require("scripts/zones/Qulun_Dome/IDs")
+local ID = zones[xi.zone.QULUN_DOME]
 -----------------------------------
 local entity = {}
 

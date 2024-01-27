@@ -90,7 +90,7 @@ class AHAnnouncementModule : public CPPModule
                                 ORDER BY price
                                 LIMIT 1;
                                 )",
-                                PChar->GetName(), price, (uint32)time(nullptr), itemid, quantity == 0, price).c_str());
+                                PChar->getName(), price, (uint32)time(nullptr), itemid, quantity == 0, price).c_str());
                             // clang-format on
 
                             if (ret != SQL_ERROR && sql->AffectedRows() != 0)
@@ -125,7 +125,7 @@ class AHAnnouncementModule : public CPPModule
                                         auto        parts = split(name, "_");
                                         name              = "";
                                         name += std::accumulate(std::begin(parts), std::end(parts), std::string(),
-                                        [](std::string& ss, std::string& s)
+                                        [](std::string const& ss, std::string const& s)
                                         {
                                             return ss.empty() ? s : ss + " " + s;
                                         });

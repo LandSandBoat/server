@@ -3,8 +3,7 @@
 --  NPC: Brave Wolf
 -- Standard Merchant NPC
 -----------------------------------
-local ID = require("scripts/zones/Rabao/IDs")
-require("scripts/globals/shop")
+local ID = zones[xi.zone.RABAO]
 -----------------------------------
 local entity = {}
 

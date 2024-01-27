@@ -2,8 +2,6 @@
 -- Area: The Boyahda Tree
 --   NM: Unut
 -----------------------------------
-require("scripts/globals/hunts")
------------------------------------
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

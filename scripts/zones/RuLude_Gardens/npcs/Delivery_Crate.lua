@@ -4,8 +4,6 @@
 -- NPC used in magian trials
 -- !pos -11.844 3.099 120.421 243
 -----------------------------------
-require("scripts/globals/magiantrials")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
@@ -13,7 +11,6 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    xi.magian.deliveryCrateOnTrigger(player, npc)
 end
 
 entity.onEventUpdate = function(player, csid, option, npc)

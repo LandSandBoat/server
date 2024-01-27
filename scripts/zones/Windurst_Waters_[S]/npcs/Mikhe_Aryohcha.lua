@@ -1,10 +1,9 @@
 -----------------------------------
 -- Area: Windurst Waters (S)
 --  NPC: Mikhe Aryohcha
--- Type: Standard NPC
 -- !pos -56.645 -4.5 13.014 94
 -----------------------------------
-local ID = require("scripts/zones/Windurst_Waters_[S]/IDs")
+local ID = zones[xi.zone.WINDURST_WATERS_S]
 -----------------------------------
 local entity = {}
 

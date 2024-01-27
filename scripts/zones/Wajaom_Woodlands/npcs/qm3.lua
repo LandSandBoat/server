@@ -3,14 +3,13 @@
 --  NPC: ??? (Spawn Gotoh Zha the Redolent(ZNM T3))
 -- !pos -337 -31 676 51
 -----------------------------------
-local ID = require("scripts/zones/Wajaom_Woodlands/IDs")
-require("scripts/globals/npc_util")
+local ID = zones[xi.zone.WAJAOM_WOODLANDS]
 -----------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     if
-        npcUtil.tradeHas(trade, xi.items.BAGGED_SHEEP_BOTFLY) and
+        npcUtil.tradeHas(trade, xi.item.BAGGED_SHEEP_BOTFLY) and
         npcUtil.popFromQM(player, npc, ID.mob.GOTOH_ZHA_THE_REDOLENT)
     then
         -- Trade Sheep Botfly

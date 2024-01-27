@@ -3,9 +3,7 @@
 --  NPC: Somn-Paemn
 -- Sarutabaruta Regional Goods
 -----------------------------------
-local ID = require("scripts/zones/Bastok_Markets/IDs")
-require("scripts/globals/conquest")
-require("scripts/globals/shop")
+local ID = zones[xi.zone.BASTOK_MARKETS]
 -----------------------------------
 local entity = {}
 
@@ -18,11 +16,11 @@ entity.onTrigger = function(player, npc)
     else
         local stock =
         {
-            689,  33,    --Lauan Log
-            619,  43,    --Popoto
-            4444, 22,    --Rarab Tail
-            4392, 29,    --Saruta Orange
-            635,  18,     --Windurstian Tea Leaves
+            xi.item.RARAB_TAIL,                      24,
+            xi.item.LAUAN_LOG,                       37,
+            xi.item.POPOTO,                          49,
+            xi.item.SARUTA_ORANGE,                   33,
+            xi.item.CLUMP_OF_WINDURSTIAN_TEA_LEAVES, 20,
         }
 
         player:showText(npc, ID.text.SOMNPAEMN_OPEN_DIALOG)

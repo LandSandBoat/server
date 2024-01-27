@@ -2,8 +2,6 @@
 -- Area: Cloister of Gales
 -- BCNM: Carbuncle Debacle
 -----------------------------------
-require("scripts/globals/battlefield")
------------------------------------
 local battlefieldObject = {}
 
 battlefieldObject.onBattlefieldTick = function(battlefield, tick)
@@ -19,7 +17,7 @@ end
 battlefieldObject.onBattlefieldLeave = function(player, battlefield, leavecode)
     if leavecode == xi.battlefield.leaveCode.WON then
         local _, clearTime, partySize = battlefield:getRecord()
-        player:startEvent(32001, battlefield:getArea(), clearTime, partySize, battlefield:getTimeInside(), 1, battlefield:getLocalVar("[cs]bit"), 0)
+        player:startEvent(32001, battlefield:getArea(), clearTime, partySize, battlefield:getTimeInside(), 1, battlefield:getLocalVar('[cs]bit'), 0)
     elseif leavecode == xi.battlefield.leaveCode.LOST then
         player:startEvent(32002)
     end
@@ -30,7 +28,7 @@ end
 
 battlefieldObject.onEventFinish = function(player, csid, option, npc)
     if csid == 32001 then
-        player:setCharVar("CarbuncleDebacleProgress", 7)
+        player:setCharVar('CarbuncleDebacleProgress', 7)
         player:delKeyItem(xi.ki.DAZE_BREAKER_CHARM)
     end
 end

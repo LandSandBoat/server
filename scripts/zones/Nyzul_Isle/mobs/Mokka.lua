@@ -3,12 +3,10 @@
 -- Area: Nyzul Isle
 -- Info: Enemy Leader, Only uses Deafening Tantara
 -----------------------------------
-require('scripts/globals/nyzul')
------------------------------------
 local entity = {}
 
 entity.onMobSpawn = function(mob)
-    mob:addListener("CRITICAL_TAKE", "IMP_CRITICAL_TAKE", function(impMob)
+    mob:addListener('CRITICAL_TAKE', 'IMP_CRITICAL_TAKE', function(impMob)
         if math.random(100) <= 20 and impMob:getAnimationSub() == 4 then
             impMob:setAnimationSub(5)
             -- Reacquire horn after 5 to 60 seconds
@@ -20,7 +18,7 @@ entity.onMobSpawn = function(mob)
         end
     end)
 
-    mob:setMod(xi.mod.MOVE, 64)
+    mob:setMod(xi.mod.MOVE_SPEED_STACKABLE, 64)
     mob:setAnimationSub(4)
 end
 

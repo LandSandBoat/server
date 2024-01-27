@@ -1,4 +1,4 @@
-local ID = require("scripts/zones/Zeruhn_Mines/IDs")
+-- local ID = zones[xi.zone.ZERUHN_MINES]
 
 return {
     ['Drake_Fang'] = { event = 108 },

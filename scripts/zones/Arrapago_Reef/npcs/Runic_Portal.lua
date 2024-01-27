@@ -4,11 +4,7 @@
 -- Arrapago Reef Teleporter Back to Aht Urhgan Whitegate
 -- !pos 15 -7 627 54
 -----------------------------------
-local ID = require("scripts/zones/Arrapago_Reef/IDs")
------------------------------------
-require("scripts/globals/besieged")
-require("scripts/globals/missions")
-require("scripts/globals/teleports")
+local ID = zones[xi.zone.ARRAPAGO_REEF]
 -----------------------------------
 local entity = {}
 

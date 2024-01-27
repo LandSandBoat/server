@@ -3,8 +3,6 @@
 --  NPC: ??? (qm8)
 -- Note: Spawns Animated Claymore
 -----------------------------------
-require("scripts/globals/dynamis")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

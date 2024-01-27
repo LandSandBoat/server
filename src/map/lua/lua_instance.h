@@ -76,6 +76,12 @@ public:
     bool completed();
 
     auto insertAlly(uint32 groupid) -> std::optional<CLuaBaseEntity>;
+    auto insertDynamicEntity(sol::table table) -> std::optional<CLuaBaseEntity>;
+
+    bool operator==(const CLuaInstance& other) const
+    {
+        return this->m_PLuaInstance == other.m_PLuaInstance;
+    }
 
     static void Register();
 };

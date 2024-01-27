@@ -2,8 +2,6 @@
 -- Area: West Sarutabaruta [S]
 --   NM: Tiffenotte
 -----------------------------------
-require("scripts/globals/hunts")
------------------------------------
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

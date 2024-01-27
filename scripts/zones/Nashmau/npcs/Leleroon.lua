@@ -4,31 +4,30 @@
 -- Corsair AF2 and AF3 quests
 -- !pos -14.687 0.000 25.114 53
 -----------------------------------
-local ID = require("scripts/zones/Nashmau/IDs")
-require("scripts/globals/quests")
+local ID = zones[xi.zone.NASHMAU]
 -----------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     if
         player:getQuestStatus(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.NAVIGATING_THE_UNFRIENDLY_SEAS) == QUEST_ACCEPTED and
-        player:getCharVar("NavigatingtheUnfriendlySeas") <= 2
+        player:getCharVar('NavigatingtheUnfriendlySeas') <= 2
     then
         if
-            trade:hasItemQty(xi.items.HYDROGAUGE, 1) and
+            trade:hasItemQty(xi.item.HYDROGAUGE, 1) and
             trade:getItemCount() == 1
         then
             player:startEvent(283)
-            player:setCharVar("NavigatingtheUnfriendlySeas", 2)
+            player:setCharVar('NavigatingtheUnfriendlySeas', 2)
         end
     end
 end
 
 entity.onTrigger = function(player, npc)
     if player:getQuestStatus(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.AGAINST_ALL_ODDS) >= QUEST_ACCEPTED then
-        local letterGreen = player:getCharVar("LeleroonsLetterGreen")
-        local letterBlue = player:getCharVar("LeleroonsLetterBlue")
-        local letterRed = player:getCharVar("LeleroonsLetterRed")
+        local letterGreen = player:getCharVar('LeleroonsLetterGreen')
+        local letterBlue = player:getCharVar('LeleroonsLetterBlue')
+        local letterRed = player:getCharVar('LeleroonsLetterRed')
 
         if letterGreen >= 1 and letterGreen < 5 then
             player:startEvent(285) -- player is on green letter route
@@ -67,15 +66,15 @@ entity.onEventFinish = function(player, csid, option, npc)
         if option == 1 then
             player:addKeyItem(xi.ki.LELEROONS_LETTER_GREEN)
             player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.LELEROONS_LETTER_GREEN)
-            player:setCharVar("LeleroonsLetterGreen", 1)
+            player:setCharVar('LeleroonsLetterGreen', 1)
         elseif option == 2 then
             player:addKeyItem(xi.ki.LELEROONS_LETTER_BLUE)
             player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.LELEROONS_LETTER_BLUE)
-            player:setCharVar("LeleroonsLetterBlue", 1)
+            player:setCharVar('LeleroonsLetterBlue', 1)
         elseif option == 3 then
             player:addKeyItem(xi.ki.LELEROONS_LETTER_RED)
             player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.LELEROONS_LETTER_RED)
-            player:setCharVar("LeleroonsLetterRed", 1)
+            player:setCharVar('LeleroonsLetterRed', 1)
         end
     end
 end

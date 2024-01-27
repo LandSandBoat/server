@@ -1,12 +1,7 @@
 -----------------------------------
 -- Area: Mhaura
 --  NPC: Wilhelm
--- Type: Standard NPC
 -- !pos -22.746 -5 17.157 249
------------------------------------
-local ID = require("scripts/zones/Mhaura/IDs")
-require("scripts/globals/missions")
-require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}
 
@@ -27,7 +22,7 @@ local limbusArmor =
 entity.onTrade = function(player, npc, trade)
     for k, v in pairs(limbusArmor) do
         if npcUtil.tradeHasExactly(trade, k) then
-            player:setLocalVar("wilhelmTrade", k)
+            player:setLocalVar('wilhelmTrade', k)
             player:startEvent(v.csid, v.reward)
             break
         end
@@ -48,8 +43,8 @@ end
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 328 or csid == 330 then
         -- cheat prevention
-        local info = limbusArmor[player:getLocalVar("wilhelmTrade")]
-        player:setLocalVar("wilhelmTrade", 0)
+        local info = limbusArmor[player:getLocalVar('wilhelmTrade')]
+        player:setLocalVar('wilhelmTrade', 0)
 
         if
             info and

@@ -1,10 +1,7 @@
 -----------------------------------
 -- Area: Ordelle's Caves
 --  NPC: Rojaireaut
--- Type: Standard NPC
 -- !pos -91.781 -0.545 587.944 193
------------------------------------
-require("scripts/globals/quests")
 -----------------------------------
 local entity = {}
 
@@ -12,7 +9,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if player:getCharVar("EcoStatus") == 1 then
+    if player:getCharVar('EcoStatus') == 1 then
         if not player:hasStatusEffect(xi.effect.LEVEL_RESTRICTION) then
             player:startEvent(51) -- Apply ointment option
         else
@@ -33,7 +30,7 @@ entity.onEventFinish = function(player, csid, option, npc)
         player:addStatusEffect(xi.effect.LEVEL_RESTRICTION, 25, 0, 0)
     elseif csid == 54 then
         player:delStatusEffect(xi.effect.LEVEL_RESTRICTION)
-        player:setCharVar("EcoStatus", 3)
+        player:setCharVar('EcoStatus', 3)
     elseif csid == 53 and option == 0 then
         player:delStatusEffect(xi.effect.LEVEL_RESTRICTION)
     end

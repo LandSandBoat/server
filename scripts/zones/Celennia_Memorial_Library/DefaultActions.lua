@@ -1,4 +1,4 @@
-local ID = require('scripts/zones/Celennia_Memorial_Library/IDs')
+-- local ID = zones[xi.zone.CELENNIA_MEMORIAL_LIBRARY]
 
 return {
     ['Andreine']     = { event = 27 },

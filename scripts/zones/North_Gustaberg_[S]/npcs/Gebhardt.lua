@@ -3,8 +3,6 @@
 --  NPC: Gebhardt
 -- Involved in Quests: The Fighting Fourth
 -----------------------------------
-require("scripts/globals/quests")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
@@ -27,7 +25,7 @@ end
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 102 then
         player:delKeyItem(xi.ki.BATTLE_RATIONS)
-        player:setCharVar("THE_FIGHTING_FOURTH", 1)
+        player:setCharVar('THE_FIGHTING_FOURTH', 1)
     end
 end
 

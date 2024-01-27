@@ -6,10 +6,6 @@
 -- Elki        : !pos -17.087 -0.05 52.745 234
 -- Old Toolbox : !pos 113.649 -32.8 79.617 143
 -----------------------------------
-require('scripts/globals/quests')
-require('scripts/globals/titles')
-require('scripts/globals/interaction/quest')
------------------------------------
 
 local quest = Quest:new(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_ELEVENTHS_HOUR)
 
@@ -17,7 +13,7 @@ quest.reward =
 {
     fame     = 30,
     fameArea = xi.quest.fame_area.BASTOK,
-    item     = xi.items.SMALL_SWORD,
+    item     = xi.item.SMALL_SWORD,
     title    = xi.title.PURSUER_OF_THE_TRUTH,
 }
 
@@ -111,7 +107,7 @@ quest.sections =
             {
                 [23] = function(player, csid, option, npc)
                     if option == 0 then
-                        npcUtil.giveKeyItem(player, xi.ki.OLD_TOOLBOX)
+                        player:addKeyItem(xi.ki.OLD_TOOLBOX)
                     end
                 end
             },

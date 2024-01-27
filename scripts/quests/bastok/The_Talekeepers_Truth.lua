@@ -6,12 +6,7 @@
 -- Deidogg       : !pos -13 7 29 234
 -- qm_talekeeper : !pos 15 -31 -94 143
 -----------------------------------
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
-require('scripts/globals/utils')
-require('scripts/globals/interaction/quest')
------------------------------------
-local palboroughMinesID = require('scripts/zones/Palborough_Mines/IDs')
+local palboroughMinesID = zones[xi.zone.PALBOROUGH_MINES]
 -----------------------------------
 
 local quest = Quest:new(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_TALEKEEPERS_TRUTH)
@@ -20,7 +15,7 @@ quest.reward =
 {
     fame     = 40,
     fameArea = xi.quest.fame_area.BASTOK,
-    item     = xi.items.FIGHTERS_CALLIGAE,
+    item     = xi.item.FIGHTERS_CALLIGAE,
 }
 
 quest.sections =
@@ -84,12 +79,12 @@ quest.sections =
 
                     if
                         questProgress == 0 and
-                        npcUtil.tradeHasExactly(trade, xi.items.MOTTLED_QUADAV_EGG)
+                        npcUtil.tradeHasExactly(trade, xi.item.MOTTLED_QUADAV_EGG)
                     then
                         return quest:progressEvent(162)
                     elseif
                         questProgress == 1 and
-                        npcUtil.tradeHasExactly(trade, xi.items.PARASITE_SKIN)
+                        npcUtil.tradeHasExactly(trade, xi.item.PARASITE_SKIN)
                     then
                         return quest:progressEvent(164)
                     end

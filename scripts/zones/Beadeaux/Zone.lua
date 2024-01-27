@@ -1,12 +1,7 @@
 -----------------------------------
 -- Zone: Beadeaux (147)
 -----------------------------------
-local ID = require('scripts/zones/Beadeaux/IDs')
-require('scripts/globals/conquest')
-require('scripts/globals/npc_util')
-require('scripts/globals/treasure')
-require('scripts/globals/quests')
-require('scripts/globals/titles')
+local ID = zones[xi.zone.BEADEAUX]
 -----------------------------------
 local zoneObject = {}
 
@@ -55,7 +50,7 @@ zoneObject.onTriggerAreaEnter = function(player, triggerArea)
     -- TODO:
     -- Packet not implemented correctly. This should be able to have the npc use an animation onto the player itself but current cannot.
     -- 0x0C target ID 0x12 target index with packet updated to allow target such as:
-    -- npc:entityAnimationPacket("main")
+    -- npc:entityAnimationPacket('main')
 
     -- Afflictors Region of effect
     if
@@ -66,20 +61,20 @@ zoneObject.onTriggerAreaEnter = function(player, triggerArea)
     then
         if not player:hasStatusEffect(xi.effect.CURSE_I) then
             if not player:hasStatusEffect(xi.effect.SILENCE) then
-                GetNPCByID(ID.npc.AFFLICTOR_BASE + (triggerArea:GetTriggerAreaID() -1)):entityAnimationPacket("main", player)
-                player:setLocalVar("inRegion", time + 11) -- Start timer. We set it here to prevent double message.
+                GetNPCByID(ID.npc.AFFLICTOR_BASE + (triggerArea:GetTriggerAreaID() -1)):entityAnimationPacket('main', player)
+                player:setLocalVar('inRegion', time + 11) -- Start timer. We set it here to prevent double message.
                 player:addStatusEffect(xi.effect.CURSE_I, 75, 0, 120)
                 player:messageSpecial(ID.text.FEEL_NUMB)
-            elseif player:getLocalVar("inRegion1") <= time then
+            elseif player:getLocalVar('inRegion1') <= time then
                 player:messageSpecial(ID.text.LIGHT_HEADED)
-                player:setLocalVar("inRegion1", time + 11) -- Display message and set timer.
+                player:setLocalVar('inRegion1', time + 11) -- Display message and set timer.
             end
         elseif
             player:hasStatusEffect(xi.effect.CURSE_I) and
-            player:getLocalVar("inRegion") <= time
+            player:getLocalVar('inRegion') <= time
         then
             player:messageSpecial(ID.text.TOO_HEAVY)
-            player:setLocalVar("inRegion", time + 11) -- Display message and set timer.
+            player:setLocalVar('inRegion', time + 11) -- Display message and set timer.
         end
 
     -- Afflictor warning message
@@ -89,9 +84,9 @@ zoneObject.onTriggerAreaEnter = function(player, triggerArea)
         ((triggerAreaID == 9 or triggerAreaID == 11 or triggerAreaID == 12) and yPos > 20) or
         (triggerAreaID == 10 and yPos > 35)
     then
-        if player:getLocalVar("inRegion2") <= time then
+        if player:getLocalVar('inRegion2') <= time then
             player:messageSpecial(ID.text.FEEL_COLD)
-            player:setLocalVar("inRegion2", time + 11) -- Display message and set timer.
+            player:setLocalVar('inRegion2', time + 11) -- Display message and set timer.
         end
     end
 end

@@ -3,8 +3,7 @@
 --  NPC: Stinknix
 -- Standard Merchant NPC
 -----------------------------------
-local ID = require("scripts/zones/Lower_Jeuno/IDs")
-require("scripts/globals/shop")
+local ID = zones[xi.zone.LOWER_JEUNO]
 -----------------------------------
 local entity = {}
 

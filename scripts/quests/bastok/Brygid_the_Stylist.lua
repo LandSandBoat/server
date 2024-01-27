@@ -4,11 +4,6 @@
 -- Log ID: 1, Quest ID: 44
 -- Brygid : !pos -90 -4 -108 235
 -----------------------------------
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
-require('scripts/globals/titles')
-require('scripts/globals/interaction/quest')
------------------------------------
 
 local quest = Quest:new(xi.quest.log_id.BASTOK, xi.quest.id.bastok.BRYGID_THE_STYLIST)
 
@@ -16,7 +11,7 @@ quest.reward =
 {
     fame     = 30,
     fameArea = xi.quest.fame_area.BASTOK,
-    item     = xi.items.GLOVES,
+    item     = xi.item.GLOVES,
     title    = xi.title.BRYGID_APPROVED,
 }
 
@@ -51,8 +46,8 @@ quest.sections =
             {
                 onTrigger = function(player, npc)
                     if
-                        player:getEquipID(xi.slot.BODY) == xi.items.ROBE and
-                        player:getEquipID(xi.slot.LEGS) == xi.items.BRONZE_SUBLIGAR
+                        player:getEquipID(xi.slot.BODY) == xi.item.ROBE and
+                        player:getEquipID(xi.slot.LEGS) == xi.item.BRONZE_SUBLIGAR
                     then
                         return quest:progressEvent(311)
                     else

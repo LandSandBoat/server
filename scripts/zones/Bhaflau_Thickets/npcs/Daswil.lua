@@ -4,9 +4,7 @@
 -- Type: Assault
 -- !pos -208.720 -12.889 -779.713 52
 -----------------------------------
-require("scripts/globals/missions")
-require("scripts/globals/quests")
-local ID = require("scripts/zones/Bhaflau_Thickets/IDs")
+local ID = zones[xi.zone.BHAFLAU_THICKETS]
 -----------------------------------
 local entity = {}
 
@@ -18,7 +16,7 @@ entity.onTrigger = function(player, npc)
 
     -- ASSAULT
     if toauMission >= xi.mission.id.toau.PRESIDENT_SALAHEEM then
-        local IPpoint = player:getCurrency("imperial_standing")
+        local IPpoint = player:getCurrency('imperial_standing')
         if
             player:hasKeyItem(xi.ki.MAMOOL_JA_ASSAULT_ORDERS) and
             not player:hasKeyItem(xi.ki.ASSAULT_ARMBAND)
@@ -41,7 +39,7 @@ end
 entity.onEventFinish = function(player, csid, option, npc)
     -- ASSAULT
     if csid == 512 and option == 1 then
-        player:delCurrency("imperial_standing", 50)
+        player:delCurrency('imperial_standing', 50)
         player:addKeyItem(xi.ki.ASSAULT_ARMBAND)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.ASSAULT_ARMBAND)
     end

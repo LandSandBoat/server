@@ -1,8 +1,8 @@
 -----------------------------------
 -- Thief Job Utilities
 -----------------------------------
-require("scripts/globals/quests")
-require("scripts/globals/utils")
+require('scripts/globals/quests')
+require('scripts/globals/utils')
 -----------------------------------
 xi = xi or {}
 xi.job_utils = xi.job_utils or {}
@@ -91,13 +91,16 @@ xi.job_utils.thief.checkCollaborator = function(player, target, ability)
 end
 
 xi.job_utils.thief.checkDespoil = function(player, target, ability)
-    if player:getFreeSlotsCount() == 0 then
-        return xi.msg.basic.FULL_INVENTORY, 0
-    end
-
-    if player:getObjType() == xi.objType.TRUST then
-        if player:getMaster():getFreeSlotsCount() == 0 then
+    if player:getObjType() == xi.objType.TRUST then -- Trust
+        if
+            player:getMaster():getFreeSlotsCount() == 0 or
+            not target:getDespoilItem()
+        then
             return 1, 0
+        end
+    else -- Player
+        if player:getFreeSlotsCount() == 0 then
+            return xi.msg.basic.FULL_INVENTORY, 0
         end
     end
 
@@ -212,7 +215,11 @@ xi.job_utils.thief.useDespoil = function(player, target, ability, action)
 
     local stolen = target:getDespoilItem()
 
-    if target:isMob() and math.random(100) < despoilChance and stolen then
+    if
+        target:isMob() and
+        math.random(1, 100) <= despoilChance and
+        stolen
+    then
         if player:getObjType() == xi.objType.TRUST then
             player:getMaster():addItem(stolen)
         else
@@ -289,7 +296,7 @@ xi.job_utils.thief.useLarceny = function(player, target, ability, action)
         end
     -- Copy an SP Ability if found
     else
-        local newID       = effectStolen:getType()
+        local newID       = effectStolen:getEffectType()
         local newIcon     = effectStolen:getIcon()
         local newPower    = effectStolen:getPower()
         local newTick     = effectStolen:getTick()
@@ -394,7 +401,7 @@ xi.job_utils.thief.useSteal = function(player, target, ability, action)
         player:addItem(stolen)
         target:itemStolen()
         ability:setMsg(xi.msg.basic.STEAL_SUCCESS) -- Item stolen successfully
-        target:triggerListener("ITEM_STOLEN", target, player, stolen)
+        target:triggerListener('ITEM_STOLEN', target, player, stolen)
         -- Aura Steal does not trigger on successful item steal
         return stolen
     else
@@ -405,7 +412,7 @@ xi.job_utils.thief.useSteal = function(player, target, ability, action)
     -- Attempt Aura steal
     -- local effect = xi.effect.NONE
     if stolen == 0 and player:hasTrait(75) then
-        local resist = applyResistanceAbility(player, target, xi.magic.ele.NONE, 0, 0)
+        local resist = applyResistanceAbility(player, target, xi.element.NONE, 0, 0)
         -- local effectStealSuccess = false
         if resist > 0.0625 then
             local auraStealChance = math.min(player:getMerit(xi.merit.AURA_STEAL), 95)

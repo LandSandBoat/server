@@ -6,10 +6,6 @@
 -- Note: Animation for his "Cure" is not functioning. Unable to capture option 1, so if the user says no, he heals them anyways.
 -- !pos -108 -5 94 240
 -----------------------------------
-local ID = require("scripts/zones/Port_Windurst/IDs")
-require("scripts/globals/quests")
-require("scripts/globals/titles")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
@@ -22,13 +18,13 @@ entity.onTrigger = function(player, npc)
     if wonderWands == QUEST_ACCEPTED then
         player:startEvent(258, 0, 17053)
     elseif catch == 0 then
-        local prog = player:getCharVar("QuestCatchItIfYouCan_var")
+        local prog = player:getCharVar('QuestCatchItIfYouCan_var')
         if prog == 0 then
             player:startEvent(230) -- CATCH IT IF YOU CAN: Before Quest 1
-            player:setCharVar("QuestCatchItIfYouCan_var", 1)
+            player:setCharVar('QuestCatchItIfYouCan_var', 1)
         elseif prog == 1 then
             player:startEvent(253) -- CATCH IT IF YOU CAN: Before Start
-            player:setCharVar("QuestCatchItIfYouCan_var", 2)
+            player:setCharVar('QuestCatchItIfYouCan_var', 2)
         elseif prog == 2 then
             player:startEvent(231) -- CATCH IT IF YOU CAN: Before Quest 2
         end
@@ -82,7 +78,7 @@ entity.onEventFinish = function(player, csid, option, npc)
             npcUtil.giveCurrency(player, 'gil', 1500)
         end
 
-        player:setCharVar("QuestCatchItIfYouCan_var", 0)
+        player:setCharVar('QuestCatchItIfYouCan_var', 0)
 
         if player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CATCH_IT_IF_YOU_CAN) == QUEST_ACCEPTED then
             player:completeQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CATCH_IT_IF_YOU_CAN)

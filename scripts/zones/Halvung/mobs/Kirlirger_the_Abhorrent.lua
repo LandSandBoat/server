@@ -2,7 +2,7 @@
 -- Area: Halvung
 --  Mob: Kirlirger the Abhorrent
 -----------------------------------
-mixins = { require("scripts/mixins/job_special") }
+mixins = { require('scripts/mixins/job_special') }
 -----------------------------------
 local entity = {}
 

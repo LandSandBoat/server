@@ -1,9 +1,6 @@
 -----------------------------------
 --  Mob: Eorthe
 -----------------------------------
-require("scripts/globals/voidwalker")
------------------------------------
-
 local entity = {}
 
 entity.onMobInitialize = function(mob)

@@ -46,15 +46,9 @@ enum CONTAINER_ID
     LOC_RECYCLEBIN   = 17,
     MAX_CONTAINER_ID = 18,
 };
-
 #define MAX_CONTAINER_SIZE 120
 #define ERROR_SLOTID       255
-
-/************************************************************************
- *                                                                        *
- *                                                                        *
- *                                                                        *
- ************************************************************************/
+DECLARE_FORMAT_AS_UNDERLYING(CONTAINER_ID);
 
 class CItem;
 
@@ -65,23 +59,23 @@ public:
     ~CItemContainer();
 
     uint16 GetID() const;
-    uint16 GetBuff() const; // планируемый размер хранилища (размер без ограничений)
-    uint8  GetSize() const;
-    uint8  GetFreeSlotsCount() const; // количество свободных ячеек в хранилище
-    uint8  AddBuff(int8 buff);        // планируемый размер хранилища (размер без ограничений)
-    uint8  AddSize(int8 size);        // увеличиваем/уменьшаем размер контейнера
+    uint16 GetBuff() const; // get storage size (unlimited size)
+    uint8  GetSize() const; // get container size
+    uint8  GetFreeSlotsCount() const;
+    uint8  AddBuff(int8 buff); // increase/decrease storage size
+    uint8  AddSize(int8 size); // increase/decrease container size
     uint8  SetSize(uint8 size);
-    uint8  SearchItem(uint16 ItemID);                           // поиск предмета в хранилище
+    uint8  SearchItem(uint16 ItemID);
     uint8  SearchItemWithSpace(uint16 ItemID, uint32 quantity); // search for item that has space to accomodate x items added
 
-    uint8 InsertItem(CItem* PItem);               // добавляем заранее созданный предмет в свободную ячейку
-    uint8 InsertItem(CItem* PItem, uint8 slotID); // добавляем заранее созданный предмет в выбранную ячейку
+    uint8 InsertItem(CItem* PItem);               // add a pre-created item to a free cell
+    uint8 InsertItem(CItem* PItem, uint8 slotID); // add a pre-created item to the selected cell
 
-    uint32 SortingPacket;   // количество запросов на сортировку за такт
-    uint32 LastSortingTime; // время последней сортировки контейнера
+    uint32 SortingPacket; // number of sort requests per clock
+    uint32 LastSortingTime;
 
-    CItem* GetItem(uint8 slotID); // получаем указатель на предмет, находящийся в указанной ячейка.
-    void   Clear();               // Remove all items from container
+    CItem* GetItem(uint8 slotID); // get a pointer to the object located in the specified cell.
+    void   Clear();               // remove all items from container
 
     template <typename F, typename... Args>
     void ForEachItem(F func, Args&&... args)

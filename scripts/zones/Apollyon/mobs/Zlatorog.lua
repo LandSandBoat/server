@@ -2,7 +2,7 @@
 -- Area: Apollyon NW, Floor 2
 --  Mob: Zlatorog
 -----------------------------------
-mixins = { require("scripts/mixins/job_special") }
+mixins = { require('scripts/mixins/job_special') }
 -----------------------------------
 local entity = {}
 

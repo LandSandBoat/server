@@ -15,18 +15,14 @@
 -- qm2 (La Theine) : !pos -72.99 54.599 -443.126 102
 -- NOTE: Garlaige QM order is based on quest progression
 -----------------------------------
-require('scripts/globals/interaction/quest')
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
------------------------------------
-local garlaigeID = require("scripts/zones/Garlaige_Citadel/IDs")
+local garlaigeID = zones[xi.zone.GARLAIGE_CITADEL]
 -----------------------------------
 
 local quest = Quest:new(xi.quest.log_id.WINDURST, xi.quest.id.windurst.HITTING_THE_MARQUISATE)
 
 quest.reward =
 {
-    item  = xi.items.ROGUES_POULAINES,
+    item  = xi.item.ROGUES_POULAINES,
     title = xi.title.PARAGON_OF_THIEF_EXCELLENCE,
 }
 
@@ -133,7 +129,7 @@ quest.sections =
 
                     if hagainProgress == 7 then
                         if
-                            os.time() <= GetNPCByID(garlaigeID.npc.CHANDELIER_QM):getLocalVar("chandelierCooldown")
+                            os.time() <= GetNPCByID(garlaigeID.npc.CHANDELIER_QM):getLocalVar('chandelierCooldown')
                         then
                             return quest:messageSpecial(garlaigeID.text.THE_PRESENCE_MOVES + 7)
                         elseif
@@ -173,10 +169,10 @@ quest.sections =
             {
                 onTrade = function(player, npc, trade)
                     if
-                        npcUtil.tradeHasExactly(trade, xi.items.PICKAXE) and
+                        npcUtil.tradeHasExactly(trade, xi.item.PICKAXE) and
                         quest:getVar(player, 'nanaaProg') == 1
                     then
-                        return quest:progressEvent(119, 0, xi.items.ROGUES_POULAINES, 0, xi.items.PICKAXE)
+                        return quest:progressEvent(119, 0, xi.item.ROGUES_POULAINES, 0, xi.item.PICKAXE)
                     end
                 end,
             },
@@ -198,7 +194,7 @@ quest.sections =
             {
                 onTrade = function(player, npc, trade)
                     if
-                        npcUtil.tradeHasExactly(trade, { { xi.items.QUAKE_GRENADE, 4 } })
+                        npcUtil.tradeHasExactly(trade, { { xi.item.QUAKE_GRENADE, 4 } })
                     then
                         return quest:progressEvent(10031)
                     end
@@ -208,9 +204,9 @@ quest.sections =
                     local yatnielProgress = quest:getVar(player, 'yatnielProg')
 
                     if yatnielProgress == 0 then
-                        return quest:progressEvent(10029, 0, xi.items.QUAKE_GRENADE)
+                        return quest:progressEvent(10029, 0, xi.item.QUAKE_GRENADE)
                     elseif yatnielProgress == 1 then
-                        return quest:progressEvent(10030, 0, xi.items.QUAKE_GRENADE)
+                        return quest:progressEvent(10030, 0, xi.item.QUAKE_GRENADE)
                     elseif yatnielProgress == 2 then
                         return quest:progressEvent(10032)
                     end
@@ -235,7 +231,7 @@ quest.sections =
             ['Hagain'] =
             {
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, xi.items.LUMP_OF_CHANDELIER_COAL) then
+                    if npcUtil.tradeHasExactly(trade, xi.item.LUMP_OF_CHANDELIER_COAL) then
                         return quest:progressEvent(10005)
                     end
                 end,
@@ -244,11 +240,11 @@ quest.sections =
                     local hagainProgress = quest:getVar(player, 'hagainProg')
 
                     if hagainProgress == 0 then
-                        return quest:progressEvent(10003, 0, xi.ki.BOMB_INCENSE, xi.items.LUMP_OF_CHANDELIER_COAL)
+                        return quest:progressEvent(10003, 0, xi.ki.BOMB_INCENSE, xi.item.LUMP_OF_CHANDELIER_COAL)
                     elseif hagainProgress == 8 then
                         return quest:progressEvent(10006)
                     else
-                        return quest:progressEvent(10004, 0, xi.ki.BOMB_INCENSE, xi.items.LUMP_OF_CHANDELIER_COAL)
+                        return quest:progressEvent(10004, 0, xi.ki.BOMB_INCENSE, xi.item.LUMP_OF_CHANDELIER_COAL)
                     end
                 end,
             },

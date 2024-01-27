@@ -2,8 +2,7 @@
 -- Area: Bostaunieux Oubliette (167)
 --   NM: Phanduron the Condemned
 -----------------------------------
-mixins = { require("scripts/mixins/job_special") }
-require("scripts/globals/mobs")
+mixins = { require('scripts/mixins/job_special') }
 -----------------------------------
 local entity = {}
 

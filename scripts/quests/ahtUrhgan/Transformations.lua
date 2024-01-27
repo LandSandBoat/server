@@ -6,19 +6,15 @@
 -- Imperial Whitegate : !pos 152 -2 0 50
 -- Alzadaal (Blank)   : !pos -529.704 0 649.682 72
 -----------------------------------
-require('scripts/globals/interaction/quest')
-require('scripts/globals/quests')
-require('scripts/globals/npc_util')
------------------------------------
-local alzadaalID  = require("scripts/zones/Alzadaal_Undersea_Ruins/IDs")
-local whitegateID = require("scripts/zones/Aht_Urhgan_Whitegate/IDs")
+local alzadaalID  = zones[xi.zone.ALZADAAL_UNDERSEA_RUINS]
+local whitegateID = zones[xi.zone.AHT_URHGAN_WHITEGATE]
 -----------------------------------
 
 local quest = Quest:new(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.TRANSFORMATIONS)
 
 quest.reward =
 {
-    item  = xi.items.MAGUS_KEFFIYEH,
+    item  = xi.item.MAGUS_KEFFIYEH,
     title = xi.title.PARAGON_OF_BLUE_MAGE_EXCELLENCE,
 }
 
@@ -90,7 +86,7 @@ quest.sections =
 
                 [722] = function(player, csid, option, npc)
                     quest:begin(player)
-                    player:setCharVar("[BLUAF]Remaining", 7) -- Player can now craft BLU armor
+                    player:setCharVar('[BLUAF]Remaining', 7) -- Player can now craft BLU armor
                 end,
             },
         },

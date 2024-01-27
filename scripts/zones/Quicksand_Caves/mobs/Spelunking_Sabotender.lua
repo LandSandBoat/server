@@ -2,9 +2,7 @@
 -- Area: Quicksand Caves
 --  Mob: Spelunking Sabotender
 -----------------------------------
-local ID = require("scripts/zones/Quicksand_Caves/IDs")
-require("scripts/globals/regimes")
-require("scripts/globals/mobs")
+local ID = zones[xi.zone.QUICKSAND_CAVES]
 -----------------------------------
 local entity = {}
 

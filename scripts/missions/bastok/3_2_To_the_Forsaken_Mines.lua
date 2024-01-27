@@ -10,11 +10,7 @@
 -- Davyad       : !pos 83 0 30 234
 -- qm2 (Gusgen) : !pos 206 -60 -101 196
 -----------------------------------
-require('scripts/globals/missions')
-require('scripts/globals/npc_util')
-require('scripts/globals/interaction/mission')
------------------------------------
-local gusgenID        = require('scripts/zones/Gusgen_Mines/IDs')
+local gusgenID = zones[xi.zone.GUSGEN_MINES]
 -----------------------------------
 
 local mission = Mission:new(xi.mission.log_id.BASTOK, xi.mission.id.bastok.TO_THE_FORSAKEN_MINES)
@@ -32,7 +28,7 @@ local handleAcceptMission = function(player, csid, option, npc)
 end
 
 local handleMissionTrade = function(player, npc, trade)
-    if npcUtil.tradeHasExactly(trade, xi.items.GLOCOLITE) then
+    if npcUtil.tradeHasExactly(trade, xi.item.GLOCOLITE) then
         if player:hasCompletedMission(mission.areaId, mission.missionId) then
             return mission:progressEvent(1006)
         else
@@ -130,12 +126,12 @@ mission.sections =
             {
                 onTrade = function(player, npc, trade)
                     if
-                        npcUtil.tradeHasExactly(trade, xi.items.SLICE_OF_HARE_MEAT) and
-                        not player:findItem(xi.items.GLOCOLITE) and
+                        npcUtil.tradeHasExactly(trade, xi.item.SLICE_OF_HARE_MEAT) and
+                        not player:findItem(xi.item.GLOCOLITE) and
                         npcUtil.popFromQM(player, npc, gusgenID.mob.BLIND_MOBY, { hide = 180 })
                     then
                         player:confirmTrade()
-                        return mission:messageSpecial(gusgenID.text.YOU_PUT_ITEM_DOWN, xi.items.SLICE_OF_HARE_MEAT)
+                        return mission:messageSpecial(gusgenID.text.YOU_PUT_ITEM_DOWN, xi.item.SLICE_OF_HARE_MEAT)
                     else
                         return mission:messageSpecial(gusgenID.text.NOTHING_SEEMS_HAPPENING)
                     end

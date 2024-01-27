@@ -4,14 +4,9 @@
 -- Altiret !pos 21 -4 -65 232
 -- Esca !pos -624 -51 278 100
 -----------------------------------
-require('scripts/globals/interaction/quest')
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
-require('scripts/globals/titles')
------------------------------------
-local portSandOriaID = require('scripts/zones/Port_San_dOria/IDs')
-local northernSandOriaID = require('scripts/zones/Northern_San_dOria/IDs')
-local westRonfaureID = require('scripts/zones/West_Ronfaure/IDs')
+local portSandOriaID     = zones[xi.zone.PORT_SAN_DORIA]
+local northernSandOriaID = zones[xi.zone.NORTHERN_SAN_DORIA]
+local westRonfaureID     = zones[xi.zone.WEST_RONFAURE]
 -----------------------------------
 
 local quest = Quest:new(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_PICKPOCKET)
@@ -20,7 +15,7 @@ quest.reward =
 {
     fame = 30,
     fameArea = xi.quest.fame_area.SANDORIA,
-    item = xi.items.LIGHT_AXE,
+    item = xi.item.LIGHT_AXE,
     itemParams = { fromTrade = true },
     title = xi.title.PICKPOCKET_PINCHER,
 }
@@ -51,7 +46,7 @@ quest.sections =
         check = function(player, status, vars)
             return
                 (status == QUEST_AVAILABLE and vars.Prog == 1) or
-                (status == QUEST_ACCEPTED and not player:hasItem(xi.items.GILT_GLASSES))
+                (status == QUEST_ACCEPTED and not player:hasItem(xi.item.GILT_GLASSES))
         end,
 
         [xi.zone.PORT_SAN_DORIA] =
@@ -140,7 +135,7 @@ quest.sections =
                 onTrigger = quest:event(547),
 
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHas(trade, xi.items.GILT_GLASSES) then
+                    if npcUtil.tradeHas(trade, xi.item.GILT_GLASSES) then
                         return quest:progressEvent(550)
                     else
                         return quest:event(551)
@@ -162,8 +157,8 @@ quest.sections =
                     else
                         if
                             player:getFreeSlotsCount() > 0 and
-                            not player:hasItem(xi.items.EAGLE_BUTTON) and
-                            not player:hasItem(xi.items.GILT_GLASSES)
+                            not player:hasItem(xi.item.EAGLE_BUTTON) and
+                            not player:hasItem(xi.item.GILT_GLASSES)
                         then
                             -- Reaquire the button
                             return quest:progressEvent(611)
@@ -175,13 +170,13 @@ quest.sections =
             onEventFinish =
             {
                 [549] = function(player, csid, option, npc)
-                    if npcUtil.giveItem(player, xi.items.EAGLE_BUTTON) then
+                    if npcUtil.giveItem(player, xi.item.EAGLE_BUTTON) then
                         quest:setVar(player, 'Stage', 1)
                     end
                 end,
 
                 [611] = function(player, csid, option, npc)
-                    npcUtil.giveItem(player, xi.items.EAGLE_BUTTON)
+                    npcUtil.giveItem(player, xi.item.EAGLE_BUTTON)
                 end,
 
                 [550] = function(player, csid, option, npc)
@@ -197,7 +192,7 @@ quest.sections =
             ['Esca'] =
             {
                 onTrigger = function(player, npc, trade)
-                    if player:hasItem(xi.items.GILT_GLASSES) then
+                    if player:hasItem(xi.item.GILT_GLASSES) then
                         return quest:event(123)
                     else
                         return quest:event(120)
@@ -205,7 +200,7 @@ quest.sections =
                 end,
 
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHas(trade, xi.items.EAGLE_BUTTON) then
+                    if npcUtil.tradeHas(trade, xi.item.EAGLE_BUTTON) then
                         return quest:progressEvent(121)
                     end
                 end,
@@ -214,7 +209,7 @@ quest.sections =
             onEventFinish =
             {
                 [121] = function(player, csid, option, npc)
-                    if npcUtil.giveItem(player, xi.items.GILT_GLASSES, { fromTrade = true }) then
+                    if npcUtil.giveItem(player, xi.item.GILT_GLASSES, { fromTrade = true }) then
                         player:confirmTrade()
                     end
                 end,

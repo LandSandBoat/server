@@ -2,8 +2,7 @@
 -- Area: Sauromugue Champaign (120)
 --  HNM: Roc
 -----------------------------------
-mixins = { require("scripts/mixins/rage") }
-require("scripts/globals/titles")
+mixins = { require('scripts/mixins/rage') }
 -----------------------------------
 local entity = {}
 

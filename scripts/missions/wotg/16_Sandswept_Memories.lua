@@ -5,9 +5,6 @@
 -- !addmission 5 15
 -- Lion Springs Door : !pos 96 0 106 80
 -----------------------------------
-require('scripts/globals/missions')
-require('scripts/globals/interaction/mission')
------------------------------------
 
 local mission = Mission:new(xi.mission.log_id.WOTG, xi.mission.id.wotg.SANDSWEPT_MEMORIES)
 

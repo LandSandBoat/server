@@ -4,8 +4,6 @@
 -- Spawns Anemic Aloysius
 -- !pos 440 -51 142 253
 -----------------------------------
-require("scripts/globals/abyssea")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

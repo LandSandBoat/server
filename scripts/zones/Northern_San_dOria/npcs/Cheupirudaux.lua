@@ -5,9 +5,7 @@
 -- Involved in Quest: It's Raining Mannequins!
 -- !pos -138 12 250 231
 -----------------------------------
-local ID = require("scripts/zones/Northern_San_dOria/IDs")
-require("scripts/globals/crafting")
-require("scripts/globals/roe")
+local ID = zones[xi.zone.NORTHERN_SAN_DORIA]
 -----------------------------------
 local entity = {}
 
@@ -17,21 +15,21 @@ entity.onTrade = function(player, npc, trade)
 
     if
         newRank > 9 and
-        player:getCharVar("WoodworkingExpertQuest") == 1 and
+        player:getCharVar('WoodworkingExpertQuest') == 1 and
         player:hasKeyItem(xi.keyItem.WAY_OF_THE_CARPENTER)
     then
         if signed ~= 0 then
             player:setSkillRank(xi.skill.WOODWORKING, newRank)
             player:startEvent(622, 0, 0, 0, 0, newRank, 1)
-            player:setCharVar("WoodworkingExpertQuest", 0)
-            player:setLocalVar("WoodworkingTraded", 1)
+            player:setCharVar('WoodworkingExpertQuest', 0)
+            player:setLocalVar('WoodworkingTraded', 1)
         else
             player:startEvent(622, 0, 0, 0, 0, newRank, 0)
         end
     elseif newRank ~= 0 and newRank <= 9 then
         player:setSkillRank(xi.skill.WOODWORKING, newRank)
         player:startEvent(622, 0, 0, 0, 0, newRank)
-        player:setLocalVar("WoodworkingTraded", 1)
+        player:setLocalVar('WoodworkingTraded', 1)
     end
 end
 
@@ -48,7 +46,7 @@ entity.onTrigger = function(player, npc)
         return
     end
 
-    if player:getCharVar("WoodworkingExpertQuest") == 1 then
+    if player:getCharVar('WoodworkingExpertQuest') == 1 then
         if player:hasKeyItem(xi.keyItem.WAY_OF_THE_CARPENTER) then
             expertQuestStatus = 550
         else
@@ -73,20 +71,20 @@ end
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 621 and option == 2 then
         if xi.crafting.hasJoinedGuild(player, xi.crafting.guild.WOODWORKING) then
-            player:setCharVar("WoodworkingExpertQuest", 1)
+            player:setCharVar('WoodworkingExpertQuest', 1)
         end
     elseif csid == 621 and option == 1 then
         if player:getFreeSlotsCount() == 0 then
-            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.items.WIND_CRYSTAL)
+            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.item.WIND_CRYSTAL)
         else
-            player:addItem(xi.items.WIND_CRYSTAL)
-            player:messageSpecial(ID.text.ITEM_OBTAINED, xi.items.WIND_CRYSTAL) -- Wind Crystal
+            player:addItem(xi.item.WIND_CRYSTAL)
+            player:messageSpecial(ID.text.ITEM_OBTAINED, xi.item.WIND_CRYSTAL) -- Wind Crystal
             xi.crafting.signupGuild(player, xi.crafting.guild.WOODWORKING)
         end
     else
-        if player:getLocalVar("WoodworkingTraded") == 1 then
+        if player:getLocalVar('WoodworkingTraded') == 1 then
             player:tradeComplete()
-            player:setLocalVar("WoodworkingTraded", 0)
+            player:setLocalVar('WoodworkingTraded', 0)
         end
     end
 

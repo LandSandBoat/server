@@ -3,8 +3,8 @@
 --  Mob: Marid
 -- Note: Place holder Mahishasura
 -----------------------------------
-local ID = require("scripts/zones/Bhaflau_Thickets/IDs")
-require("scripts/globals/mobs")
+mixins = { require('scripts/mixins/families/chigoe_pet') }
+local ID = zones[xi.zone.BHAFLAU_THICKETS]
 -----------------------------------
 local entity = {}
 

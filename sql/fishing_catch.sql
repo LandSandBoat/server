@@ -27,7 +27,7 @@ CREATE TABLE `fishing_catch` (
   `areaid` tinyint(3) unsigned NOT NULL,
   `groupid` smallint(5) unsigned NOT NULL,
   PRIMARY KEY (`zoneid`,`areaid`,`groupid`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 AVG_ROW_LENGTH=27;
+) ENGINE=Aria TRANSACTIONAL=0 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci AVG_ROW_LENGTH=27;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --

@@ -6,15 +6,9 @@
 -- Fyi_Chalmwoh    : !pos -39.273 -16.000 70.126 249
 -- Mire Incense KI : 709
 -----------------------------------
-require('scripts/globals/mannequins')
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
-require('scripts/globals/titles')
-require('scripts/globals/interaction/quest')
------------------------------------
-local mhauraID = require('scripts/zones/Mhaura/IDs')
-local phomiunaID = require('scripts/zones/Phomiuna_Aqueducts/IDs')
-local misareauxID = require('scripts/zones/Misareaux_Coast/IDs')
+local mhauraID    = zones[xi.zone.MHAURA]
+local phomiunaID  = zones[xi.zone.PHOMIUNA_AQUEDUCTS]
+local misareauxID = zones[xi.zone.MISAREAUX_COAST]
 -----------------------------------
 
 local quest = Quest:new(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.KNOCKING_ON_FORBIDDEN_DOORS)
@@ -144,7 +138,7 @@ quest.sections =
                 [557] = function(player, csid, option, npc)
                     if
                         quest:getVar(player, 'Prog') == 3 and
-                        npcUtil.popFromQM(player, npc, ID.mob.ALSHA, { claim = true, hide = 0 })
+                        npcUtil.popFromQM(player, npc, misareauxID.mob.ALSHA, { claim = true, hide = 0 })
                     then
                         return quest:messageSpecial(misareauxID.text.FOUL_STENCH)
                     end
@@ -208,7 +202,7 @@ quest.sections =
                     -- Trade exactly one mannequin without gil.  Gil taken separately.
                     local tradedMannequin = 0
 
-                    for itemId = xi.items.HUME_M_MANNEQUIN, xi.items.GALKA_MANNEQUIN do
+                    for itemId = xi.item.HUME_M_MANNEQUIN, xi.item.GALKA_MANNEQUIN do
                         if npcUtil.tradeHasExactly(trade, itemId) then
                             tradedMannequin = itemId
                         end
@@ -264,7 +258,7 @@ quest.sections =
                         player:delGil(xi.mannequin.cost.TRADE)
                     then
                         player:confirmTrade()
-                        npcUtil.giveItem(player, xi.items.HUME_M_MANNEQUIN + option - 1)
+                        npcUtil.giveItem(player, xi.item.HUME_M_MANNEQUIN + option - 1)
                     end
                 end,
 
@@ -276,8 +270,8 @@ quest.sections =
                         option <= 8 and
                         player:delGil(xi.mannequin.cost.PURCHASE)
                     then
-                        player:messageSpecial(mhauraID.text.ITEM_OBTAINED, xi.items.HUME_M_MANNEQUIN + option - 1)
-                        player:addItem(xi.items.HUME_M_MANNEQUIN + option - 1)
+                        player:messageSpecial(mhauraID.text.ITEM_OBTAINED, xi.item.HUME_M_MANNEQUIN + option - 1)
+                        player:addItem(xi.item.HUME_M_MANNEQUIN + option - 1)
                     elseif
                         option >= 10 and
                         player:delGil(xi.mannequin.cost.POSE)

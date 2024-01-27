@@ -1,4 +1,4 @@
-local ID = require("scripts/zones/Windurst_Woods/IDs")
+-- local ID = zones[xi.zone.WINDURST_WOODS]
 
 return {
     ['An_Polaali']   = { event = 44 },

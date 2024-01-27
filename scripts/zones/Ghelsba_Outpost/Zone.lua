@@ -1,10 +1,6 @@
 -----------------------------------
 -- Zone: Ghelsba_Outpost (140)
 -----------------------------------
-local ID = require('scripts/zones/Ghelsba_Outpost/IDs')
-require('scripts/globals/conquest')
-require('scripts/globals/helm')
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

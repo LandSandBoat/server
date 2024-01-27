@@ -4,9 +4,6 @@
 -- Type: Storage Moogle
 -- !zone 94
 -----------------------------------
-local ID = require("scripts/zones/Windurst_Waters_[S]/IDs")
-require("scripts/globals/porter_moogle")
------------------------------------
 local entity = {}
 
 local e =

@@ -1,10 +1,6 @@
 -----------------------------------
 -- Zone: Den_of_Rancor (160)
 -----------------------------------
-local ID = require('scripts/zones/Den_of_Rancor/IDs')
-require('scripts/globals/conquest')
-require('scripts/globals/treasure')
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

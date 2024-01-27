@@ -2,8 +2,6 @@
 -- Area: Monastic Cavern
 --   NM: Bugaboo
 -----------------------------------
-require("scripts/globals/mobs")
------------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)
@@ -16,7 +14,7 @@ entity.onAdditionalEffect = function(mob, target, damage)
 end
 
 entity.onMobDeath = function(mob, player, optParams)
-    player:setCharVar("circleTime", 8) -- Set flag so that final CS will show when you interact with alter again
+    player:setCharVar('circleTime', 8) -- Set flag so that final CS will show when you interact with alter again
 end
 
 return entity

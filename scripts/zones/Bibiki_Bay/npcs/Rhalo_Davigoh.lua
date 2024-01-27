@@ -3,8 +3,6 @@
 --  NPC: Rhalo Davigoh
 -- !pos -407 -3 -419 4
 -----------------------------------
-require("scripts/globals/shop")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

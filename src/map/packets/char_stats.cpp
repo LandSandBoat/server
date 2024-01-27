@@ -47,7 +47,7 @@ CCharStatsPacket::CCharStatsPacket(CCharEntity* PChar)
     ref<uint16>(0x10) = PChar->jobs.exp[PChar->GetMJob()];
     ref<uint16>(0x12) = charutils::GetExpNEXTLevel(PChar->jobs.job[PChar->GetMJob()]);
 
-    memcpy(data + (0x14), &PChar->stats, 14); // TODO: с merits это не прокатит
+    memcpy(data + (0x14), &PChar->stats, 14); // TODO: it won't work with merits
 
     ref<uint16>(0x22) = std::clamp<int16>(PChar->getMod(Mod::STR), -999 + PChar->stats.STR, 999 - PChar->stats.STR);
     ref<uint16>(0x24) = std::clamp<int16>(PChar->getMod(Mod::DEX), -999 + PChar->stats.DEX, 999 - PChar->stats.DEX);

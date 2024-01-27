@@ -4,8 +4,6 @@
 -- Starts Quest: Borghertz's Hands (AF Hands, Many job)
 -- !pos -5 1 48 244
 -----------------------------------
-require("scripts/globals/quests")
------------------------------------
 local entity = {}
 
 local prerequisites =
@@ -48,26 +46,26 @@ entity.onTrigger = function(player, npc)
     if
         prereq and
         player:getMainLvl() >= 50 and
-        player:getCharVar("BorghertzAlreadyActiveWithJob") == 0 and
+        player:getCharVar('BorghertzAlreadyActiveWithJob') == 0 and
         player:getQuestStatus(prereq.log, prereq.quest) ~= QUEST_AVAILABLE and
         player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.BORGHERTZ_S_WARRING_HANDS + mJob - 1) == QUEST_AVAILABLE
     then
         player:startEvent(155)
     elseif
-        player:getCharVar("BorghertzAlreadyActiveWithJob") >= 1 and
+        player:getCharVar('BorghertzAlreadyActiveWithJob') >= 1 and
         not player:hasKeyItem(xi.ki.OLD_GAUNTLETS)
     then
         player:startEvent(43)
     elseif player:hasKeyItem(xi.ki.OLD_GAUNTLETS) then
         player:startEvent(26)
 
-        if player:getCharVar("BorghertzCS") == 0 then
+        if player:getCharVar('BorghertzCS') == 0 then
             if isFirstHandsQuest(player) then
-                if player:getCharVar("BorghertzHandsFirstTime") == 0 then
-                    player:setCharVar("BorghertzHandsFirstTime", 1)
+                if player:getCharVar('BorghertzHandsFirstTime') == 0 then
+                    player:setCharVar('BorghertzHandsFirstTime', 1)
                 end
             else
-                player:setCharVar("BorghertzCS", 1)
+                player:setCharVar('BorghertzCS', 1)
             end
         end
 
@@ -85,7 +83,7 @@ entity.onEventFinish = function(player, csid, option, npc)
         local mJob = player:getMainJob()
 
         player:addQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.BORGHERTZ_S_WARRING_HANDS + mJob - 1)
-        player:setCharVar("BorghertzAlreadyActiveWithJob", mJob)
+        player:setCharVar('BorghertzAlreadyActiveWithJob', mJob)
     end
 end
 

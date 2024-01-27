@@ -2,7 +2,7 @@
 -- Area: Castle Zvahl Baileys (161)
 --   NM: Grand Duke Batym
 -----------------------------------
-mixins = { require("scripts/mixins/job_special") }
+mixins = { require('scripts/mixins/job_special') }
 -----------------------------------
 local entity = {}
 

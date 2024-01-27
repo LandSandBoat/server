@@ -2,7 +2,7 @@
 -- Area: Misareaux Coast
 --  Mob: Fomor Ninja
 -----------------------------------
-mixins = { require("scripts/mixins/fomor_hate") }
+mixins = { require('scripts/mixins/fomor_hate') }
 -----------------------------------
 local entity = {}
 

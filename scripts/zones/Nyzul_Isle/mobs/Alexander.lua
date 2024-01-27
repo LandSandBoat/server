@@ -2,16 +2,16 @@
 -- Area: Nyzul Isle (Nashmeira's Plea)
 --  Mob: Alexander
 -----------------------------------
-local ID = require('scripts/zones/Nyzul_Isle/IDs')
+local ID = zones[xi.zone.NYZUL_ISLE]
 -----------------------------------
 local entity = {}
 
 entity.onMobSpawn = function(mob)
     mob:setMobMod(xi.mobMod.NO_MOVE, 1)
-    -- "Draw in" should only trigger when target is beyond 20' (out of Radiant_Sacrament range)
+    -- 'Draw in' should only trigger when target is beyond 20' (out of Radiant_Sacrament range)
     mob:setMobMod(xi.mobMod.DRAW_IN, 1)
 
-    mob:addListener("WEAPONSKILL_STATE_ENTER", "WS_START_MSG", function(mobArg, skillID)
+    mob:addListener('WEAPONSKILL_STATE_ENTER', 'WS_START_MSG', function(mobArg, skillID)
         -- Radiant Sacrament
         if skillID == 2141 then
             mobArg:showText(mobArg, ID.text.OFFER_THY_WORSHIP)
@@ -43,18 +43,18 @@ entity.onMobEngaged = function(mob, target)
 end
 
 entity.onMobFight = function(mob, target)
-    -- BG Wiki: "He will use this ability at 50% of his HP and several times again as his health decreases."
-    -- ffxiclopedia: "Alexander will use this ability as his next TP move once its HP falls below 50%."
+    -- BG Wiki: 'He will use this ability at 50% of his HP and several times again as his health decreases.'
+    -- ffxiclopedia: 'Alexander will use this ability as his next TP move once its HP falls below 50%.'
     if
         mob:getHPP() <= 50 and
         mob:getTP() >= 1000 and
-        mob:getLocalVar("DivineJudgement") == 0
+        mob:getLocalVar('DivineJudgement') == 0
     then
-        mob:setLocalVar("DivineJudgement", 1)
+        mob:setLocalVar('DivineJudgement', 1)
         mob:useMobAbility(2147)
     end
 
-    -- ffxiclopedia: "In addition to this, it's possible he'll use it several times again at low (5%?) HP."
+    -- ffxiclopedia: 'In addition to this, it's possible he'll use it several times again at low (5%?) HP.'
     -- Per same wiki, may use Perfect Defense as a regular skill at 10%..Assuming same % for both skills.
     local skillList = mob:getMobMod(xi.mobMod.SKILL_LIST)
     if mob:getHPP() <= 10 and skillList == 784 then

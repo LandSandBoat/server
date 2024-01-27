@@ -2,14 +2,13 @@
 -- Area: Valley of Sorrows
 --  HNM: Aspidochelone
 -----------------------------------
-local ID = require("scripts/zones/Valley_of_Sorrows/IDs")
-mixins = { require("scripts/mixins/rage") }
-require("scripts/globals/titles")
+local ID = zones[xi.zone.VALLEY_OF_SORROWS]
+mixins = { require('scripts/mixins/rage') }
 -----------------------------------
 local entity = {}
 
 entity.onMobSpawn = function(mob)
-    mob:setLocalVar("[rage]timer", 3600) -- 60 minutes
+    mob:setLocalVar('[rage]timer', 3600) -- 60 minutes
 
     -- Despawn the ???
     GetNPCByID(ID.npc.ADAMANTOISE_QM):setStatus(xi.status.DISAPPEAR)

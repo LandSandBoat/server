@@ -2,8 +2,6 @@
 -- Area: Yhoator Jungle
 --   NM: Edacious Opo-opo
 -----------------------------------
-require("scripts/globals/hunts")
------------------------------------
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

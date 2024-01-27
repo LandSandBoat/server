@@ -59,6 +59,11 @@ public:
     void   setVE(uint16 ve);
     void   setRange(float range);
 
+    bool operator==(const CLuaAbility& other) const
+    {
+        return this->m_PLuaAbility == other.m_PLuaAbility;
+    }
+
     static void Register();
 };
 

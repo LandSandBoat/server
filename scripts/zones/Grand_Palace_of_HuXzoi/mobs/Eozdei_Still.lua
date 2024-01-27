@@ -2,8 +2,8 @@
 -- Area: Grand Palace of Hu'Xzoi
 --  Mob: Eo'zdei
 -----------------------------------
-local ID = require("scripts/zones/Grand_Palace_of_HuXzoi/IDs")
-mixins = { require("scripts/mixins/families/zdei") }
+local ID = zones[xi.zone.GRAND_PALACE_OF_HUXZOI]
+mixins = { require('scripts/mixins/families/zdei') }
 -----------------------------------
 local entity = {}
 
@@ -20,13 +20,13 @@ entity.onMobDeath = function(mob, player, optParams)
     if optParams.isKiller then
         local mobId = mob:getID()
         local nm    = GetMobByID(ID.mob.JAILER_OF_TEMPERANCE)
-        local ph    = nm:getLocalVar("ph")
+        local ph    = nm:getLocalVar('ph')
 
-        if ph == mobId and os.time() > nm:getLocalVar("pop") then
+        if ph == mobId and os.time() > nm:getLocalVar('pop') then
             local pos = mob:getSpawnPos()
             nm:setSpawn(pos.x, pos.y, pos.z)
             SpawnMob(ID.mob.JAILER_OF_TEMPERANCE):updateClaim(player)
-            nm:setLocalVar("ph", ph)
+            nm:setLocalVar('ph', ph)
             DisallowRespawn(mobId, true)
         end
     end

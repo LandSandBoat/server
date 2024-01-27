@@ -3,8 +3,7 @@
 --  Mob: Lesser Colibri
 -- Note: Place holder Zoraal Ja's Pkuucha
 -----------------------------------
-local ID = require("scripts/zones/Wajaom_Woodlands/IDs")
-require("scripts/globals/mobs")
+local ID = zones[xi.zone.WAJAOM_WOODLANDS]
 -----------------------------------
 local entity = {}
 

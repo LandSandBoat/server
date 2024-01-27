@@ -1,8 +1,6 @@
 -----------------------------------
 -- Zone: Castle_Zvahl_Keep_[S] (155)
 -----------------------------------
-local ID = require('scripts/zones/Castle_Zvahl_Keep_[S]/IDs')
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

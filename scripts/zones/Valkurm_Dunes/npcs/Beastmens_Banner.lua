@@ -3,7 +3,7 @@
 --  NPC: Beastmen_s_Banner
 -- !pos -116.204 4.000 -113.608 104
 -----------------------------------
-local ID = require("scripts/zones/Valkurm_Dunes/IDs")
+local ID = zones[xi.zone.VALKURM_DUNES]
 -----------------------------------
 local entity = {}
 

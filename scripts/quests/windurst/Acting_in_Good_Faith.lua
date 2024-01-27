@@ -6,11 +6,7 @@
 -- qm1       : !pos -17 0 59 195 (I-10)
 -- Eperdur   : !pos 129 -6 96 231
 -----------------------------------
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
-require('scripts/globals/interaction/quest')
------------------------------------
-local eldiemeID = require('scripts/zones/The_Eldieme_Necropolis/IDs')
+local eldiemeID = zones[xi.zone.THE_ELDIEME_NECROPOLIS]
 -----------------------------------
 
 local quest = Quest:new(xi.quest.log_id.WINDURST, xi.quest.id.windurst.ACTING_IN_GOOD_FAITH)
@@ -19,7 +15,7 @@ quest.reward =
 {
     fame     = 30,
     fameArea = xi.quest.fame_area.WINDURST,
-    item     = xi.items.SCROLL_OF_TELEPORT_MEA,
+    item     = xi.item.SCROLL_OF_TELEPORT_MEA,
     title    = xi.title.PILGRIM_TO_MEA,
 }
 
@@ -40,7 +36,7 @@ quest.sections =
             {
                 [10019] = function(player, csid, option, npc)
                     if option == 0 then
-                        npcUtil.giveKeyItem(xi.ki.SPIRIT_INCENSE)
+                        npcUtil.giveKeyItem(player, xi.ki.SPIRIT_INCENSE)
                         quest:begin(player)
                     end
                 end,

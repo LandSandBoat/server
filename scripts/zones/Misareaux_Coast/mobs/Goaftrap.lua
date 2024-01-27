@@ -2,8 +2,6 @@
 -- Area: Misareaux Coast
 --   NM: Goaftrap
 -----------------------------------
-require("scripts/globals/hunts")
------------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)

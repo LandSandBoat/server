@@ -3,8 +3,7 @@
 --  Mob: Stink Bats
 -- Note: PH for Desmodont
 -----------------------------------
-local ID = require("scripts/zones/Outer_Horutoto_Ruins/IDs")
-require("scripts/globals/mobs")
+local ID = zones[xi.zone.OUTER_HORUTOTO_RUINS]
 -----------------------------------
 local entity = {}
 

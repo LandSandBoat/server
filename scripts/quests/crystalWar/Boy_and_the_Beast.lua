@@ -6,16 +6,12 @@
 -- qm7         : !pos -26 -31 364
 -- Leafy Patch : !pos -418 -33 576
 -----------------------------------
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
-require('scripts/globals/interaction/quest')
------------------------------------
 
 local quest = Quest:new(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.BOY_AND_THE_BEAST)
 
 quest.reward =
 {
-    item = xi.items.CARBON_FISHING_ROD,
+    item = xi.item.CARBON_FISHING_ROD,
 }
 
 quest.sections =

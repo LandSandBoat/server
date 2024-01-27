@@ -2,8 +2,6 @@
 -- Area: Quicksand Caves
 --  Mob: Antican Quaestor
 -----------------------------------
-require("scripts/globals/regimes")
------------------------------------
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

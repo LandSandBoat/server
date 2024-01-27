@@ -3,8 +3,6 @@
 --  NPC: Karine
 -- Map Seller NPC
 -----------------------------------
-require("scripts/globals/maps")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

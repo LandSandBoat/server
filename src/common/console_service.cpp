@@ -143,6 +143,12 @@ ConsoleService::ConsoleService()
         }
     });
 
+    RegisterCommand("crash", "Crash the process",
+    [](std::vector<std::string>& inputs)
+    {
+        crash();
+    });
+
     bool attached = isatty(0);
     if (attached)
     {
@@ -187,13 +193,13 @@ ConsoleService::ConsoleService()
                         }
                         else
                         {
-                            fmt::print(fmt::format("> Unknown command: {}\n", inputs[0]));
+                            fmt::print(fmt::runtime("> Unknown command: {}\n"), inputs[0]);
                         }
                     }
 
                     line = std::string();
                 }
-            };
+            }
             fmt::print("Console input thread exiting...\n");
         });
     }

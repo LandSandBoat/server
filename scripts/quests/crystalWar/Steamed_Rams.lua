@@ -8,12 +8,7 @@
 -- qm4         : !pos 541.425 -49.83 178.563
 -- qm5         : !pos 380.015 -26.5 -22.525
 -----------------------------------
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
-require('scripts/globals/titles')
-require('scripts/globals/interaction/quest')
------------------------------------
-local southernSandoriaSID = require('scripts/zones/Southern_San_dOria_[S]/IDs')
+local southernSandoriaSID = zones[xi.zone.SOUTHERN_SAN_DORIA_S]
 -----------------------------------
 
 local quest = Quest:new(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.STEAMED_RAMS)
@@ -156,7 +151,7 @@ quest.sections =
                         player:delKeyItem(xi.ki.OXIDIZED_PLATE)
                         player:delKeyItem(xi.ki.PIECE_OF_SHATTERED_LUMBER)
 
-                        npcUtil.giveItem(player, xi.items.SPRINTERS_SHOES)
+                        npcUtil.giveItem(player, xi.item.SPRINTERS_SHOES)
 
                         player:messageSpecial(southernSandoriaSID.text.NOW_ALLIED_WITH, 1)
                     end

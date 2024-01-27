@@ -4,8 +4,6 @@
 -- Outpost Conquest Guards
 -- !pos -242.487 -1 -402.772 123
 -----------------------------------
-require("scripts/globals/conquest")
------------------------------------
 local entity = {}
 
 local guardNation = xi.nation.BASTOK

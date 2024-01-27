@@ -1,14 +1,9 @@
 -----------------------------------
 -- Area: Windurst Woods
 --  NPC: Kopuro-Popuro
--- Type: Standard NPC
 -- !pos -0.037 -4.749 -22.589 241
 -- Starts Quests: The All-New C-2000, Legendary Plan B, The All-New C-3000
 -- Involved in quests: Lost Chick
------------------------------------
-require("scripts/globals/npc_util")
-require("scripts/globals/quests")
-require("scripts/globals/titles")
 -----------------------------------
 local entity = {}
 
@@ -46,7 +41,7 @@ end
 entity.onTrigger = function(player, npc)
     local allNewC2000 = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_ALL_NEW_C_2000)
     local aGreetingCardian = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.A_GREETING_CARDIAN)
-    local aGreetingCardianCS = player:getCharVar("AGreetingCardian_Event")
+    local aGreetingCardianCS = player:getCharVar('AGreetingCardian_Event')
     local legendaryPlanB = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.LEGENDARY_PLAN_B)
     local allNewC3000 = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_ALL_NEW_C_3000)
 

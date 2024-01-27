@@ -16,21 +16,21 @@ entity.onMobSpawn = function(mob)
 end
 
 entity.onMobFight = function(mob, target)
-    local shifts = mob:getLocalVar("shifts")
-    local shiftTime = mob:getLocalVar("shiftTime")
+    local shifts = mob:getLocalVar('shifts')
+    local shiftTime = mob:getLocalVar('shiftTime')
 
     if mob:getAnimationSub() == 0 and shifts == 0 and mob:getHPP() <= 67 then
         mob:useMobAbility(993)
-        mob:setLocalVar("shifts", shifts + 1)
-        mob:setLocalVar("shiftTime", mob:getBattleTime() + 5)
+        mob:setLocalVar('shifts', shifts + 1)
+        mob:setLocalVar('shiftTime', mob:getBattleTime() + 5)
     elseif mob:getAnimationSub() == 1 and shifts <= 1 and mob:getHPP() <= 33 then
         mob:useMobAbility(997)
-        mob:setLocalVar("shifts", shifts + 1)
-        mob:setLocalVar("shiftTime", mob:getBattleTime() + 5)
+        mob:setLocalVar('shifts', shifts + 1)
+        mob:setLocalVar('shiftTime', mob:getBattleTime() + 5)
     elseif mob:getAnimationSub() == 2 and shifts <= 2 and mob:getHPP() <= 2 then
         mob:useMobAbility(1001)
-        mob:setLocalVar("shifts", shifts + 1)
-        mob:setLocalVar("shiftTime", mob:getBattleTime() + 5)
+        mob:setLocalVar('shifts', shifts + 1)
+        mob:setLocalVar('shiftTime', mob:getBattleTime() + 5)
     elseif
         mob:getHPP() <= 67 and
         mob:getAnimationSub() == 0 and

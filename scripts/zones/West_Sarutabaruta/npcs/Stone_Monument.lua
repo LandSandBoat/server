@@ -4,9 +4,6 @@
 -- Note: Involved in quest "An Explorer's Footsteps"
 -- !pos -205.593 -23.210 -119.670 115
 -----------------------------------
-local ID = require("scripts/zones/West_Sarutabaruta/IDs")
-require("scripts/globals/npc_util")
------------------------------------
 local entity = {}
 
 entity.onTrigger = function(player, npc)
@@ -15,11 +12,11 @@ end
 
 entity.onTrade = function(player, npc, trade)
     if
-        npcUtil.tradeHas(trade, xi.items.LUMP_OF_SELBINA_CLAY) and
-        npcUtil.giveItem(player, xi.items.CLAY_TABLET)
+        npcUtil.tradeHas(trade, xi.item.LUMP_OF_SELBINA_CLAY) and
+        npcUtil.giveItem(player, xi.item.CLAY_TABLET)
     then
         player:confirmTrade()
-        player:setCharVar("anExplorer-CurrentTablet", 0x00400)
+        player:setCharVar('anExplorer-CurrentTablet', 0x00400)
     end
 end
 

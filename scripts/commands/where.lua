@@ -2,13 +2,16 @@
 -- func: where
 -- desc: Tells the player about their current position.
 -----------------------------------
+local commandObj = {}
 
-cmdprops =
+commandObj.cmdprops =
 {
     permission = 1,
-    parameters = ""
+    parameters = ''
 }
 
-function onTrigger(player)
+commandObj.onTrigger = function(player)
     player:showPosition()
 end
+
+return commandObj

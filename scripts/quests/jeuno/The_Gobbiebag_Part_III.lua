@@ -6,7 +6,7 @@
 -----------------------------------
 require('scripts/quests/jeuno/helpers')
 -----------------------------------
-local lowerJeunoID = require('scripts/zones/Lower_Jeuno/IDs')
+local lowerJeunoID = zones[xi.zone.LOWER_JEUNO]
 -----------------------------------
 
 local params =
@@ -16,14 +16,14 @@ local params =
     message            = lowerJeunoID.text.INVENTORY_INCREASED,
     startInventorySize = 40,
     fame               = 1,
-    tradeStew          = xi.items.BOWL_OF_GOBLIN_STEW_880,
+    tradeStew          = xi.item.BOWL_OF_GOBLIN_STEW_880,
 
     tradeItems =
     {
-        xi.items.SQUARE_OF_BLACK_TIGER_LEATHER,
-        xi.items.GOLD_INGOT,
-        xi.items.SQUARE_OF_VELVET_CLOTH,
-        xi.items.PAINITE,
+        xi.item.SQUARE_OF_BLACK_TIGER_LEATHER,
+        xi.item.GOLD_INGOT,
+        xi.item.SQUARE_OF_VELVET_CLOTH,
+        xi.item.PAINITE,
     },
 
     reward =

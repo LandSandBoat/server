@@ -23,6 +23,7 @@
 #define _CTIMETRIGGERS_H
 
 #include "common/cbasetypes.h"
+#include "common/singleton.h"
 #include "entities/npcentity.h"
 #include <vector>
 
@@ -38,20 +39,16 @@ struct Trigger_t
     uint32 lastTrigger; // Used to store the last firing of the trigger
 };
 
-class CTriggerHandler
+class CTriggerHandler : public Singleton<CTriggerHandler>
 {
 public:
-    virtual ~CTriggerHandler() = default;
-    static CTriggerHandler* getInstance();
-
     void insertTrigger(Trigger_t);
     void triggerTimer();
 
-private:
-    static std::unique_ptr<CTriggerHandler> _instance;
-
+protected:
     CTriggerHandler() = default;
 
+private:
     std::vector<Trigger_t> triggerList;
 };
 #endif

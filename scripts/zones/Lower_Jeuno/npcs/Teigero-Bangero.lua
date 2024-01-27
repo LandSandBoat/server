@@ -4,8 +4,6 @@
 -- Involved in Quests: The Lost Cardian
 -- !pos -58 0 -143 245
 -----------------------------------
-require("scripts/globals/quests")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
@@ -24,7 +22,7 @@ entity.onTrigger = function(player, npc)
             player:startEvent(32) -- Same
         end
     elseif player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_LOST_CARDIAN) == QUEST_AVAILABLE then
-        if player:getCharVar("theLostCardianVar") == 0 then
+        if player:getCharVar('theLostCardianVar') == 0 then
             player:startEvent(29) -- First dialog for "The lost cardian" quest
         else
             player:startEvent(66)
@@ -41,7 +39,7 @@ end
 
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 29 then
-        player:setCharVar("theLostCardianVar", 1)
+        player:setCharVar('theLostCardianVar', 1)
     end
 end
 

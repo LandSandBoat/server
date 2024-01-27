@@ -3,8 +3,7 @@
 --  Mob: Bladmall
 --  ENM: Shell We Dance?
 -----------------------------------
-local ID = require("scripts/zones/Boneyard_Gully/IDs")
-require("scripts/globals/titles")
+local ID = zones[xi.zone.BONEYARD_GULLY]
 -----------------------------------
 local entity = {}
 
@@ -14,7 +13,7 @@ end
 entity.onMobFight = function(mob, target)
     local hpp   = mob:getHPP()
     local bfID  = mob:getBattlefield():getArea()
-    local adds  = mob:getLocalVar("adds")
+    local adds  = mob:getLocalVar('adds')
     local petID = 0
 
     -- Pet #1 spawn at 95% hp or less

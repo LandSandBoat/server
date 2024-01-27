@@ -38,7 +38,7 @@ CPetController::CPetController(CPetEntity* _PPet)
 void CPetController::Tick(time_point tick)
 {
     TracyZoneScoped;
-    TracyZoneString(PPet->GetName());
+    TracyZoneString(PPet->getName());
 
     if (PPet->shouldDespawn(tick))
     {
@@ -67,6 +67,14 @@ void CPetController::DoRoamTick(time_point tick)
     else if (PPet->isBstPet() && PPet->StatusEffectContainer->GetStatusEffect(EFFECT_HEALING))
     {
         return;
+    }
+    else if (PPet->m_PetID <= PETID_DARKSPIRIT)
+    {
+        // this will respect the pet's mob casting cooldown properties via MOBMOD_MAGIC_COOL
+        if (CMobController::IsSpellReady(0) && CMobController::TryCastSpell())
+        {
+            return;
+        }
     }
 
     float currentDistance = distance(PPet->loc.p, PPet->PMaster->loc.p);

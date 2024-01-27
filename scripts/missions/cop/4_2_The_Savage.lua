@@ -6,10 +6,6 @@
 -- Dilapidated Gate : !pos -259 -30 276 25
 -- Justinius        : !pos 76 -34 68 26
 -----------------------------------
-require('scripts/globals/interaction/mission')
-require('scripts/globals/missions')
-require('scripts/globals/titles')
------------------------------------
 
 local mission = Mission:new(xi.mission.log_id.COP, xi.mission.id.cop.THE_SAVAGE)
 

@@ -3,8 +3,8 @@
 --   NM: Cryptonberry Executor
 -- !pos 120.615 -5.457 -390.133 2
 -----------------------------------
-local ID = require("scripts/zones/Carpenters_Landing/IDs")
-mixins = { require("scripts/mixins/job_special") }
+local ID = zones[xi.zone.CARPENTERS_LANDING]
+mixins = { require('scripts/mixins/job_special') }
 -----------------------------------
 local entity = {}
 
@@ -30,8 +30,8 @@ end
 
 entity.onMobFight = function(mob, target)
     -- spawn Assassins when enmity is gained against Executor
-    if mob:getLocalVar("spawnedAssassins") == 0 and mob:getCE(target) > 0 then
-        mob:setLocalVar("spawnedAssassins", 1)
+    if mob:getLocalVar('spawnedAssassins') == 0 and mob:getCE(target) > 0 then
+        mob:setLocalVar('spawnedAssassins', 1)
 
         for i = 1, 3 do
             SpawnMob(ID.mob.CRYPTONBERRY_EXECUTOR + i)

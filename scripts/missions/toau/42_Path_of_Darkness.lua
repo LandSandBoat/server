@@ -7,12 +7,6 @@
 -- blank_lamp    : !pos 206.55 -1.5 20.05 72
 -- _1e1 (Door)   : !pos 23 -6 -63 50
 -----------------------------------
-require('scripts/globals/instance')
-require('scripts/globals/missions')
-require('scripts/globals/npc_util')
-require('scripts/globals/interaction/mission')
-require('scripts/globals/titles')
------------------------------------
 
 local mission = Mission:new(xi.mission.log_id.TOAU, xi.mission.id.toau.PATH_OF_DARKNESS)
 
@@ -108,7 +102,7 @@ mission.sections =
                 [116] = function(player, csid, option, npc)
                     if
                         option == 1 and
-                        player:getLocalVar("INSTANCE_ID") == 7700
+                        player:getLocalVar('INSTANCE_ID') == 7700
                     then
                         xi.instance.onEventFinish(player, csid, option, npc)
                     end

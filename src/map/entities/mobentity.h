@@ -103,12 +103,6 @@ enum BEHAVIOUR : uint16
 
 class CMobSkillState;
 
-/************************************************************************
- *                                                                       *
- *                                                                       *
- *                                                                       *
- ************************************************************************/
-
 class CMobEntity : public CBattleEntity
 {
 public:
@@ -164,7 +158,7 @@ public:
     virtual void Die() override;
 
     virtual void OnWeaponSkillFinished(CWeaponSkillState&, action_t&) override;
-    virtual void OnMobSkillFinished(CMobSkillState&, action_t&);
+    virtual void OnMobSkillFinished(CMobSkillState&, action_t&) override;
     virtual void OnEngage(CAttackState&) override;
 
     virtual bool OnAttack(CAttackState&, action_t&) override;
@@ -254,9 +248,9 @@ public:
 
     bool m_CallForHelpBlocked;
 
-    CEnmityContainer* PEnmityContainer; // система ненависти монстров
+    CEnmityContainer* PEnmityContainer;
 
-    CMobSpellContainer* SpellContainer; // retrieves spells for the mob
+    CMobSpellContainer* SpellContainer;
 
     bool m_IsClaimable;
 

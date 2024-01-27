@@ -3,8 +3,7 @@
 --  Mob: Mountain Scolopendrid
 -- Note: PH for Centipedal Centruroides
 -----------------------------------
-local ID = require("scripts/zones/Meriphataud_Mountains_[S]/IDs")
-require("scripts/globals/mobs")
+local ID = zones[xi.zone.MERIPHATAUD_MOUNTAINS_S]
 -----------------------------------
 local entity = {}
 

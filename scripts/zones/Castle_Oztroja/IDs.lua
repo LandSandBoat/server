@@ -30,15 +30,15 @@ zones[xi.zone.CASTLE_OZTROJA] =
         LOGIN_CAMPAIGN_UNDERWAY            = 7187, -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!
         LOGIN_NUMBER                       = 7188, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
         MEMBERS_LEVELS_ARE_RESTRICTED      = 7208, -- Your party is unable to participate because certain members' levels are restricted.
-        FISHING_MESSAGE_OFFSET             = 7264, -- You can't fish here.
-        CHEST_UNLOCKED                     = 7435, -- You unlock the chest!
-        YAGUDO_AVATAR_ENGAGE               = 7456, -- Kahk-ka-ka... You filthy, dim-witted heretics! You have damned yourselves by coming here.
-        YAGUDO_AVATAR_DEATH                = 7457, -- Our lord, Tzee Xicu the Manifest!  Even should our bodies be crushed and broken, may our souls endure into eternity...
-        YAGUDO_KING_ENGAGE                 = 7458, -- You are not here as sacrifices, are you? Could you possibly be committing this affront in the face of a deity?  Very well, I will personally mete out your divine punishment, kyah!
-        YAGUDO_KING_DEATH                  = 7459, -- You have...bested me... However, I...am...a god... I will never die...never rot...never fade...never...
-        LEARNS_SPELL                       = 8298, -- <name> learns <spell>!
-        UNCANNY_SENSATION                  = 8300, -- You are assaulted by an uncanny sensation.
-        COMMON_SENSE_SURVIVAL              = 8307, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
+        FISHING_MESSAGE_OFFSET             = 7265, -- You can't fish here.
+        CHEST_UNLOCKED                     = 7436, -- You unlock the chest!
+        YAGUDO_AVATAR_ENGAGE               = 7457, -- Kahk-ka-ka... You filthy, dim-witted heretics! You have damned yourselves by coming here.
+        YAGUDO_AVATAR_DEATH                = 7458, -- Our lord, Tzee Xicu the Manifest!  Even should our bodies be crushed and broken, may our souls endure into eternity...
+        YAGUDO_KING_ENGAGE                 = 7459, -- You are not here as sacrifices, are you? Could you possibly be committing this affront in the face of a deity?  Very well, I will personally mete out your divine punishment, kyah!
+        YAGUDO_KING_DEATH                  = 7460, -- You have...bested me... However, I...am...a god... I will never die...never rot...never fade...never...
+        LEARNS_SPELL                       = 8299, -- <name> learns <spell>!
+        UNCANNY_SENSATION                  = 8301, -- You are assaulted by an uncanny sensation.
+        COMMON_SENSE_SURVIVAL              = 8308, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
     mob =
     {

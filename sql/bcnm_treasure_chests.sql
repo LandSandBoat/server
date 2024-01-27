@@ -8,7 +8,7 @@ CREATE TABLE `bcnm_treasure_chests` (
   `bcnmId` smallint(5) unsigned NOT NULL,
   `battlefieldNumber` tinyint(3),
   `npcId` int(10) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 AVG_ROW_LENGTH=56;
+) ENGINE=Aria TRANSACTIONAL=0 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci AVG_ROW_LENGTH=56;
 
 -- ----------------------------
 -- Records of instance

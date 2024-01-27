@@ -4,8 +4,7 @@
 -- Type: Quest
 -- !pos -63 -75 4 96
 -----------------------------------
-local ID = require("scripts/zones/Fort_Karugo-Narugo_[S]/IDs")
-require("scripts/globals/npc_util")
+local ID = zones[xi.zone.FORT_KARUGO_NARUGO_S]
 -----------------------------------
 local entity = {}
 
@@ -13,7 +12,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local loafersQuestProgress = player:getCharVar("AF_SCH_BOOTS")
+    local loafersQuestProgress = player:getCharVar('AF_SCH_BOOTS')
 
     player:delStatusEffect(xi.effect.SNEAK)
 
@@ -26,7 +25,7 @@ entity.onTrigger = function(player, npc)
 
         player:addKeyItem(xi.ki.RAFFLESIA_DREAMSPIT)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.RAFFLESIA_DREAMSPIT)
-        player:setCharVar("AF_SCH_BOOTS", loafersQuestProgress + 1)
+        player:setCharVar('AF_SCH_BOOTS', loafersQuestProgress + 1)
 
         -- Move the markings around
         local positions =
@@ -43,7 +42,7 @@ entity.onTrigger = function(player, npc)
         local newPosition = npcUtil.pickNewPosition(npc:getID(), positions)
 
         npc:setPos(newPosition.x, newPosition.y, newPosition.z)
-        -- player:PrintToPlayer("Markings moved to position index " .. newPosition)
+        -- player:printToPlayer('Markings moved to position index ' .. newPosition)
     else
         player:messageSpecial(ID.text.NOTHING_OUT_OF_ORDINARY)
     end

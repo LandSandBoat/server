@@ -7,7 +7,7 @@ local entity = {}
 entity.onMobSpawn = function(mob)
     -- Set core Skin and mob elemental bonus
     mob:setAnimationSub(0)
-    mob:setLocalVar("roamTime", os.time())
+    mob:setLocalVar('roamTime', os.time())
     mob:setModelId(1167) -- light
 
     -- Todo: confirm this is legit and move to mob_reistances table if so
@@ -16,7 +16,7 @@ entity.onMobSpawn = function(mob)
 end
 
 entity.onMobRoam = function(mob)
-    local roamTime = mob:getLocalVar("roamTime")
+    local roamTime = mob:getLocalVar('roamTime')
     local roamForm
     if os.time() - roamTime > 60 then
         roamForm = math.random(1, 3) -- forms 2 and 3 are spider and bird; can change forms at will
@@ -25,12 +25,12 @@ entity.onMobRoam = function(mob)
         end
 
         mob:setAnimationSub(roamForm)
-        mob:setLocalVar("roamTime", os.time())
+        mob:setLocalVar('roamTime', os.time())
     end
 end
 
 entity.onMobFight = function(mob, target)
-    local changeTime = mob:getLocalVar("changeTime")
+    local changeTime = mob:getLocalVar('changeTime')
     local battleForm
 
     if mob:getBattleTime() - changeTime > 60 then
@@ -40,7 +40,7 @@ entity.onMobFight = function(mob, target)
         end
 
         mob:setAnimationSub(battleForm)
-        mob:setLocalVar("changeTime", mob:getBattleTime())
+        mob:setLocalVar('changeTime', mob:getBattleTime())
     end
 end
 

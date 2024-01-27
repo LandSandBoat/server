@@ -1,9 +1,9 @@
 -----------------------------------
--- Module to make "Mom the Adventurer?" quest missable.
+-- Module to make 'Mom the Adventurer?' quest missable.
 -----------------------------------
-require("modules/module_utils")
+require('modules/module_utils')
 -----------------------------------
-local m = Module:new("missable_mom_the_adventurer")
+local m = Module:new('missable_mom_the_adventurer')
 
 m:addOverride('xi.server.onServerStart', function()
     super()

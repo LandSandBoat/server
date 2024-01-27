@@ -3,7 +3,7 @@
 --  NPC: Beastmen_s_Banner
 -- !pos -172.764 25.119 93.640 109
 -----------------------------------
-local ID = require("scripts/zones/Pashhow_Marshlands/IDs")
+local ID = zones[xi.zone.PASHHOW_MARSHLANDS]
 -----------------------------------
 local entity = {}
 

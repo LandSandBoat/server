@@ -2,8 +2,6 @@
 -- Area: Gustav Tunnel
 --  Mob: Pygmytoise
 -----------------------------------
-require("scripts/globals/regimes")
------------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)

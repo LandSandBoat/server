@@ -3,9 +3,7 @@
 --  Mob: Desert Dhalmel
 -- Note: Place holder for Celphie
 -----------------------------------
-local ID = require("scripts/zones/Western_Altepa_Desert/IDs")
-require("scripts/globals/regimes")
-require("scripts/globals/mobs")
+local ID = zones[xi.zone.WESTERN_ALTEPA_DESERT]
 -----------------------------------
 local entity = {}
 

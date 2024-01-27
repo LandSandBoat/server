@@ -4,10 +4,7 @@
 -- Type: Leathercraft Guild Master
 -- !pos -178.882 -2 9.891 230
 -----------------------------------
-local ID = require("scripts/zones/Southern_San_dOria/IDs")
-require("scripts/globals/crafting")
-require("scripts/globals/missions")
-require("scripts/globals/roe")
+local ID = zones[xi.zone.SOUTHERN_SAN_DORIA]
 -----------------------------------
 local entity = {}
 
@@ -17,21 +14,21 @@ entity.onTrade = function(player, npc, trade)
 
     if
         newRank > 9 and
-        player:getCharVar("LeathercraftExpertQuest") == 1 and
+        player:getCharVar('LeathercraftExpertQuest') == 1 and
         player:hasKeyItem(xi.keyItem.WAY_OF_THE_TANNER)
     then
         if signed ~= 0 then
             player:setSkillRank(xi.skill.LEATHERCRAFT, newRank)
             player:startEvent(649, 0, 0, 0, 0, newRank, 1)
-            player:setCharVar("LeathercraftExpertQuest", 0)
-            player:setLocalVar("LeathercraftTraded", 1)
+            player:setCharVar('LeathercraftExpertQuest', 0)
+            player:setLocalVar('LeathercraftTraded', 1)
         else
             player:startEvent(649, 0, 0, 0, 0, newRank, 0)
         end
     elseif newRank ~= 0 and newRank <= 9 then
         player:setSkillRank(xi.skill.LEATHERCRAFT, newRank)
         player:startEvent(649, 0, 0, 0, 0, newRank)
-        player:setLocalVar("LeathercraftTraded", 1)
+        player:setLocalVar('LeathercraftTraded', 1)
     end
 end
 
@@ -49,7 +46,7 @@ entity.onTrigger = function(player, npc)
         return
     end
 
-    if player:getCharVar("LeathercraftExpertQuest") == 1 then
+    if player:getCharVar('LeathercraftExpertQuest') == 1 then
         if player:hasKeyItem(xi.keyItem.WAY_OF_THE_TANNER) then
             expertQuestStatus = 550
         else
@@ -63,13 +60,13 @@ entity.onTrigger = function(player, npc)
         canRankUp >= 3
     then
         local item = 0
-        local asaStatus = player:getCharVar("ASA_Status")
+        local asaStatus = player:getCharVar('ASA_Status')
 
         -- TODO: Other Enfeebling Kits
         if asaStatus == 0 then
             item = 2779
         else
-            printf("Error: Unknown ASA Status Encountered <%u>", asaStatus)
+            printf('Error: Unknown ASA Status Encountered <%u>', asaStatus)
         end
 
         -- The Parameters are Item IDs for the Recipe
@@ -93,7 +90,7 @@ end
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 648 and option == 2 then
         if xi.crafting.hasJoinedGuild(player, xi.crafting.guild.LEATHERCRAFT) then
-            player:setCharVar("LeathercraftExpertQuest", 1)
+            player:setCharVar('LeathercraftExpertQuest', 1)
         end
     elseif csid == 648 and option == 1 then
         local crystal = 4103 -- dark crystal
@@ -105,9 +102,9 @@ entity.onEventFinish = function(player, csid, option, npc)
             xi.crafting.signupGuild(player, xi.crafting.guild.LEATHERCRAFT)
         end
     else
-        if player:getLocalVar("LeathercraftTraded") == 1 then
+        if player:getLocalVar('LeathercraftTraded') == 1 then
             player:tradeComplete()
-            player:setLocalVar("LeathercraftTraded", 0)
+            player:setLocalVar('LeathercraftTraded', 0)
         end
     end
 

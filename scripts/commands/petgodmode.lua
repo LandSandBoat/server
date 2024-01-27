@@ -2,18 +2,19 @@
 -- func: petgodmode
 -- desc: Toggles god mode on the player's pet, granting them several special abilities.
 -----------------------------------
+local commandObj = {}
 
-cmdprops =
+commandObj.cmdprops =
 {
     permission = 1,
-    parameters = ""
+    parameters = ''
 }
 
-function onTrigger(player)
+commandObj.onTrigger = function(player)
     local pet = player:getPet()
-    if pet and pet:getLocalVar("GodMode") == 0 then
+    if pet and pet:getLocalVar('GodMode') == 0 then
         -- Toggle GodMode on..
-        pet:setLocalVar("GodMode", 1)
+        pet:setLocalVar('GodMode', 1)
 
         -- Add bonus effects to the pet..
         pet:addStatusEffect(xi.effect.MAX_HP_BOOST, 1000, 0, 0)
@@ -45,7 +46,7 @@ function onTrigger(player)
         pet:setMP(50000)
     else
         -- Toggle GodMode off..
-        pet:setLocalVar("GodMode", 0)
+        pet:setLocalVar('GodMode', 0)
 
         -- Remove bonus effects..
         pet:delStatusEffect(xi.effect.MAX_HP_BOOST)
@@ -73,3 +74,5 @@ function onTrigger(player)
         pet:delMod(xi.mod.MDEF, 2500)
     end
 end
+
+return commandObj

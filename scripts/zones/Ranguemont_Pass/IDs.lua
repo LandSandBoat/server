@@ -19,15 +19,15 @@ zones[xi.zone.RANGUEMONT_PASS] =
         LOGIN_NUMBER                  = 7003,  -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
         GEOMAGNETRON_ATTUNED          = 7012,  -- Your <keyitem> has been attuned to a geomagnetic fount in the corresponding locale.
         MEMBERS_LEVELS_ARE_RESTRICTED = 7023,  -- Your party is unable to participate because certain members' levels are restricted.
-        CONQUEST_BASE                 = 7060,  -- Tallying conquest results...
-        FISHING_MESSAGE_OFFSET        = 7219,  -- You can't fish here.
-        REGIME_REGISTERED             = 9529,  -- New training regime registered!
-        PLAYER_OBTAINS_ITEM           = 10581, -- <name> obtains <item>!
-        UNABLE_TO_OBTAIN_ITEM         = 10582, -- You were unable to obtain the item.
-        PLAYER_OBTAINS_TEMP_ITEM      = 10583, -- <name> obtains the temporary item: <item>!
-        ALREADY_POSSESS_TEMP          = 10584, -- You already possess that temporary item.
-        NO_COMBINATION                = 10589, -- You were unable to enter a combination.
-        COMMON_SENSE_SURVIVAL         = 10680, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
+        CONQUEST_BASE                 = 7061,  -- Tallying conquest results...
+        FISHING_MESSAGE_OFFSET        = 7220,  -- You can't fish here.
+        REGIME_REGISTERED             = 9530,  -- New training regime registered!
+        PLAYER_OBTAINS_ITEM           = 10582, -- <name> obtains <item>!
+        UNABLE_TO_OBTAIN_ITEM         = 10583, -- You were unable to obtain the item.
+        PLAYER_OBTAINS_TEMP_ITEM      = 10584, -- <name> obtains the temporary item: <item>!
+        ALREADY_POSSESS_TEMP          = 10585, -- You already possess that temporary item.
+        NO_COMBINATION                = 10590, -- You were unable to enter a combination.
+        COMMON_SENSE_SURVIVAL         = 10681, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
     mob =
     {

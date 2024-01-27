@@ -1,8 +1,6 @@
 -----------------------------------
 -- Zone: Diorama_Abdhaljs-Ghelsba
 -----------------------------------
-local ID = require('scripts/zones/Diorama_Abdhaljs-Ghelsba/IDs')
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

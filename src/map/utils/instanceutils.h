@@ -47,19 +47,19 @@ struct InstanceData_t
     std::string filename;
 
     InstanceData_t()
+    : id(0)
+    , instance_zone(0)
+    , entrance_zone(0)
+    , time_limit(0)
+    , start_x(0.f)
+    , start_y(0.f)
+    , start_z(0.f)
+    , start_rot(0)
+    , music_day(0)
+    , music_night(0)
+    , battlesolo(0)
+    , battlemulti(0)
     {
-        id            = 0;
-        instance_zone = 0;
-        entrance_zone = 0;
-        time_limit    = 0;
-        start_x       = 0.f;
-        start_y       = 0.f;
-        start_z       = 0.f;
-        start_rot     = 0;
-        music_day     = 0;
-        music_night   = 0;
-        battlesolo    = 0;
-        battlemulti   = 0;
     }
 };
 

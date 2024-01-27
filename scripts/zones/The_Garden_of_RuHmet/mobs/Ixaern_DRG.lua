@@ -2,7 +2,7 @@
 -- Area: The Garden of Ru'Hmet
 --  Mob: Ix'aern DRG
 -----------------------------------
-local ID = require("scripts/zones/The_Garden_of_RuHmet/IDs")
+local ID = zones[xi.zone.THE_GARDEN_OF_RUHMET]
 -----------------------------------
 local entity = {}
 
@@ -17,7 +17,7 @@ entity.onMobFight = function(mob, target)
     for i = mobId + 1, mobId + 3 do
         local wynav = GetMobByID(i)
         if not wynav:isSpawned() then
-            local repopWynavs = wynav:getLocalVar("repop") -- see Wynav script
+            local repopWynavs = wynav:getLocalVar('repop') -- see Wynav script
             if mob:getBattleTime() - repopWynavs > 10 then
                 wynav:setSpawn(x + math.random(1, 5), y, z + math.random(1, 5))
                 wynav:spawn()
@@ -48,7 +48,7 @@ entity.onMobDespawn = function(mob)
 
     -- Pick a new PH for Ix'Aern (DRG)
     local groups = ID.mob.AWAERN_DRG_GROUPS
-    SetServerVariable("[SEA]IxAernDRG_PH", groups[math.random(1, #groups)] + math.random(0, 2))
+    SetServerVariable('[SEA]IxAernDRG_PH', groups[math.random(1, #groups)] + math.random(0, 2))
 end
 
 return entity

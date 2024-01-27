@@ -3,20 +3,19 @@
 --  NPC: <this space intentionally left blank>
 -- !pos -18 0 55 121
 -----------------------------------
-local ID = require("scripts/zones/The_Sanctuary_of_ZiTah/IDs")
-require("scripts/globals/npc_util")
+local ID = zones[xi.zone.THE_SANCTUARY_OF_ZITAH]
 -----------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    local currentRelic = player:getCharVar("RELIC_IN_PROGRESS")
+    local currentRelic = player:getCharVar('RELIC_IN_PROGRESS')
 
     if
-        currentRelic == xi.items.GULLINTANI and
-        npcUtil.tradeHas(trade, { xi.items.RANPERRE_GOLDPIECE, xi.items.HEAVENLY_FRAGMENT, xi.items.SHARD_OF_NECROPSYCHE, xi.items.GULLINTANI })
+        currentRelic == xi.item.GULLINTANI and
+        npcUtil.tradeHas(trade, { xi.item.RANPERRE_GOLDPIECE, xi.item.HEAVENLY_FRAGMENT, xi.item.SHARD_OF_NECROPSYCHE, xi.item.GULLINTANI })
     then
         -- currency, shard, necropsyche, stage 4
-        player:startEvent(216, xi.items.MJOLLNIR)
+        player:startEvent(216, xi.item.MJOLLNIR)
     end
 end
 
@@ -30,10 +29,10 @@ end
 entity.onEventFinish = function(player, csid, option, npc)
     if
         csid == 216 and
-        npcUtil.giveItem(player, { xi.items.MJOLLNIR, { xi.items.MONTIONT_SILVERPIECE, 30 } })
+        npcUtil.giveItem(player, { xi.item.MJOLLNIR, { xi.item.MONTIONT_SILVERPIECE, 30 } })
     then
         player:confirmTrade()
-        player:setCharVar("RELIC_IN_PROGRESS", 0)
+        player:setCharVar('RELIC_IN_PROGRESS', 0)
     end
 end
 

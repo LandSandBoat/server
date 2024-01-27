@@ -3,18 +3,17 @@
 --  NPC: <this space intentionally left blank>
 -- !pos -89 0 -374 111
 -----------------------------------
-local ID = require("scripts/zones/Beaucedine_Glacier/IDs")
-require("scripts/globals/npc_util")
+local ID = zones[xi.zone.BEAUCEDINE_GLACIER]
 -----------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     if
-        player:getCharVar("RELIC_IN_PROGRESS") == xi.items.VALHALLA and
-        npcUtil.tradeHas(trade, { xi.items.RANPERRE_GOLDPIECE, xi.items.INTRICATE_FRAGMENT, xi.items.SHARD_OF_NECROPSYCHE, xi.items.VALHALLA })
+        player:getCharVar('RELIC_IN_PROGRESS') == xi.item.VALHALLA and
+        npcUtil.tradeHas(trade, { xi.item.RANPERRE_GOLDPIECE, xi.item.INTRICATE_FRAGMENT, xi.item.SHARD_OF_NECROPSYCHE, xi.item.VALHALLA })
     then
         -- currency, shard, necropsyche, stage 4
-        player:startEvent(139, xi.items.RAGNAROK)
+        player:startEvent(139, xi.item.RAGNAROK)
     end
 end
 
@@ -28,10 +27,10 @@ end
 entity.onEventFinish = function(player, csid, option, npc)
     if
         csid == 139 and
-        npcUtil.giveItem(player, { xi.items.RAGNAROK, { xi.items.MONTIONT_SILVERPIECE, 30 } })
+        npcUtil.giveItem(player, { xi.item.RAGNAROK, { xi.item.MONTIONT_SILVERPIECE, 30 } })
     then
         player:confirmTrade()
-        player:setCharVar("RELIC_IN_PROGRESS", 0)
+        player:setCharVar('RELIC_IN_PROGRESS', 0)
     end
 end
 

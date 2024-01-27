@@ -3,8 +3,7 @@
 --  Mob: Battrap
 -- Note: PH for Goblintrap
 -----------------------------------
-local ID = require("scripts/zones/East_Ronfaure_[S]/IDs")
-require("scripts/globals/mobs")
+local ID = zones[xi.zone.EAST_RONFAURE_S]
 -----------------------------------
 local entity = {}
 

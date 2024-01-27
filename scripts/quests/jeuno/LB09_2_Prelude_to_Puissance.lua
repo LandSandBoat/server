@@ -3,9 +3,6 @@
 -----------------------------------
 -- Log ID: 3, Quest ID: 170
 -- Nomad Moogle : !pos 10.012 1.453 121.883 243
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
-require('scripts/globals/interaction/quest')
 -----------------------------------
 
 local quest = Quest:new(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.PRELUDE_TO_PUISSANCE)
@@ -71,7 +68,7 @@ quest.sections =
                 onTrade = function(player, npc, trade)
                     if
                         quest:getVar(player, 'tradeCompleted') == 0 and
-                        npcUtil.tradeHasExactly(trade, xi.items.SEASONING_STONE)
+                        npcUtil.tradeHasExactly(trade, xi.item.SEASONING_STONE)
                     then
                         return quest:progressEvent(10045, 0, 1, 5)
                     end
@@ -100,8 +97,8 @@ quest.sections =
                         if quest:complete(player) then
                             -- This options immediately start next quest. (All except 0 and 15).
                             if
-                                not option == 0 or
-                                not option == 15
+                                option ~= 0 and
+                                option ~= 15
                             then
                                 player:addQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.BEYOND_INFINITY)
                             end

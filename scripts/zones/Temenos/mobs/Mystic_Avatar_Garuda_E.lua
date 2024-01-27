@@ -2,7 +2,7 @@
 -- Area: Temenos Eastern Tower
 --  Mob: Mystic Avatar (Garuda)
 -----------------------------------
-mixins = { require("scripts/mixins/job_special") }
+mixins = { require('scripts/mixins/job_special') }
 -----------------------------------
 local entity = {}
 

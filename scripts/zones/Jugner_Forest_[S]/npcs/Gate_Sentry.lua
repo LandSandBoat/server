@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Jugner Forest (S)
 --  NPC: Gate Sentry
--- Type: Standard NPC
 -- !pos -265.235 -2.399 405.246 82
 -----------------------------------
 local entity = {}

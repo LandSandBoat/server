@@ -4,12 +4,7 @@
 -- Log ID: 1, Quest ID: 84
 -- Alib-Mufalib : !pos 116.08 7.372 -31.82 236
 -----------------------------------
-require('scripts/globals/quests')
-require('scripts/globals/npc_util')
-require('scripts/globals/utils')
-require('scripts/globals/interaction/quest')
------------------------------------
-local portBastokID = require('scripts/zones/Port_Bastok/IDs')
+local portBastokID = zones[xi.zone.PORT_BASTOK]
 -----------------------------------
 
 local quest = Quest:new(xi.quest.log_id.BASTOK, xi.quest.id.bastok.LURE_OF_THE_WILDCAT)

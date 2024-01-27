@@ -5,8 +5,8 @@
 -----------------------------------
 mixins =
     {
-        require("scripts/mixins/job_special"),
-        require("scripts/mixins/weapon_break")
+        require('scripts/mixins/job_special'),
+        require('scripts/mixins/weapon_break')
     }
 -----------------------------------
 local entity = {}

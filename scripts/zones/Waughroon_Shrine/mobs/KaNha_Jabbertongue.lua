@@ -3,7 +3,7 @@
 --  Mob: Ka'Nha Jabbertongue
 -- BCNM: Grimshell Shocktroopers
 -----------------------------------
-mixins = { require("scripts/mixins/job_special") }
+mixins = { require('scripts/mixins/job_special') }
 -----------------------------------
 local entity = {}
 

@@ -3,10 +3,8 @@
 --  Mob: Wild Dhalmel
 -- Note: PH for Serpopard Ishtar
 -----------------------------------
-local ID = require("scripts/zones/Tahrongi_Canyon/IDs")
-require("scripts/globals/regimes")
-require("scripts/globals/mobs")
-require("scripts/quests/tutorial")
+local ID = zones[xi.zone.TAHRONGI_CANYON]
+require('scripts/quests/tutorial')
 -----------------------------------
 local entity = {}
 

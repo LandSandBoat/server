@@ -3,7 +3,7 @@
 --  NPC: Gavin
 -- !pos -15 8 44 246
 -----------------------------------
-local ID = require("scripts/zones/Port_Jeuno/IDs")
+local ID = zones[xi.zone.PORT_JEUNO]
 -----------------------------------
 local entity = {}
 

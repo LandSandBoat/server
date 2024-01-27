@@ -1,4 +1,4 @@
-local ID = require("scripts/zones/Heavens_Tower/IDs")
+-- local ID = zones[xi.zone.HEAVENS_TOWER]
 
 return {
     ['_6q2']           = { event = 154 },

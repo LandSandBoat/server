@@ -4,8 +4,7 @@
 -- Involved in Quest: Greetings to the Guardian
 -- !pos 16 .1 -58 205
 -----------------------------------
-local ID = require("scripts/zones/Ifrits_Cauldron/IDs")
-require("scripts/globals/quests")
+local ID = zones[xi.zone.IFRITS_CAULDRON]
 -----------------------------------
 local entity = {}
 
@@ -14,17 +13,17 @@ entity.onTrade = function(player, npc, trade)
 
     if
         guardian == QUEST_ACCEPTED and
-        trade:hasItemQty(xi.items.BUNCH_OF_WILD_PAMAMAS, 1)
+        trade:hasItemQty(xi.item.BUNCH_OF_WILD_PAMAMAS, 1)
     then
-        player:messageSpecial(ID.text.ALTAR_OFFERING, 0, xi.items.BUNCH_OF_WILD_PAMAMAS)
-        player:setCharVar("PamamaVar", 1) -- Set variable to reflect first completion of quest
+        player:messageSpecial(ID.text.ALTAR_OFFERING, 0, xi.item.BUNCH_OF_WILD_PAMAMAS)
+        player:setCharVar('PamamaVar', 1) -- Set variable to reflect first completion of quest
         player:tradeComplete()
     elseif
         guardian == QUEST_COMPLETED and
-        trade:hasItemQty(xi.items.BUNCH_OF_WILD_PAMAMAS, 1)
+        trade:hasItemQty(xi.item.BUNCH_OF_WILD_PAMAMAS, 1)
     then
-        player:messageSpecial(ID.text.ALTAR_OFFERING, 0, xi.items.BUNCH_OF_WILD_PAMAMAS)
-        player:setCharVar("PamamaVar", 2) -- Set variable to reflect repeat of quest, not first time
+        player:messageSpecial(ID.text.ALTAR_OFFERING, 0, xi.item.BUNCH_OF_WILD_PAMAMAS)
+        player:setCharVar('PamamaVar', 2) -- Set variable to reflect repeat of quest, not first time
         player:tradeComplete()
     end
 end
@@ -34,10 +33,10 @@ entity.onTrigger = function(player, npc)
 
     if
         guardian == QUEST_ACCEPTED and
-        (player:getCharVar("PamamaVar") == 1 or player:getCharVar("PamamaVar") == 2)
+        (player:getCharVar('PamamaVar') == 1 or player:getCharVar('PamamaVar') == 2)
     then
         player:messageSpecial(ID.text.ALTAR_COMPLETED)
-    elseif guardian == QUEST_ACCEPTED and player:getCharVar("PamamaVar") == 0 then
+    elseif guardian == QUEST_ACCEPTED and player:getCharVar('PamamaVar') == 0 then
         player:messageSpecial(ID.text.ALTAR_INSPECT)
     else
         player:messageSpecial(ID.text.ALTAR_STANDARD)

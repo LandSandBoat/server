@@ -6,16 +6,12 @@
 -- HEAVY_QUADAV_BACKPLATE: !additem 2505
 -- TRAINEE_HAMMER: !additem 18855
 -----------------------------------
-require('scripts/globals/interaction/quest')
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
------------------------------------
 
 local quest = Quest:new(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.HAMMERING_HEARTS)
 
 quest.reward =
 {
-    item = xi.items.TRAINEE_HAMMER,
+    item = xi.item.TRAINEE_HAMMER,
 }
 
 quest.sections =
@@ -62,7 +58,7 @@ quest.sections =
                 end,
 
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, { xi.items.HEAVY_QUADAV_CHESTPLATE, xi.items.HEAVY_QUADAV_BACKPLATE }) then
+                    if npcUtil.tradeHasExactly(trade, { xi.item.HEAVY_QUADAV_CHESTPLATE, xi.item.HEAVY_QUADAV_BACKPLATE }) then
                         return quest:progressEvent(41)
                     end
                 end,
@@ -73,7 +69,7 @@ quest.sections =
                 [41] = function(player, csid, option, npc)
                     player:confirmTrade()
                     quest:setVar(player, 'Prog', 1)
-                    player:setLocalVar("Quest[7][14]NeedToZone", 1)
+                    player:setLocalVar('Quest[7][14]NeedToZone', 1)
                 end,
             },
         },
@@ -90,7 +86,7 @@ quest.sections =
             ['Scarred_Shark'] =
             {
                 onTrigger = function(player, npc)
-                    if player:getLocalVar("Quest[7][14]NeedToZone") == 1 then
+                    if player:getLocalVar('Quest[7][14]NeedToZone') == 1 then
                         return quest:progressEvent(44)
                     else
                         return quest:progressEvent(42)

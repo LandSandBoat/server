@@ -157,6 +157,8 @@ namespace settings
         ShowError(fmt::format("Settings: Failed to look up key: {}, using default value: \"{}\"", name, out));
         return T();
     }
+
+    void visit(std::function<void(std::string, SettingsVariant_t)> visitor);
 } // namespace settings
 
 #endif // _SETTINGS_H

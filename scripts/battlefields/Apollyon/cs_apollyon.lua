@@ -6,9 +6,7 @@
 -- !additem 2127
 -- !pos 600 -0.5 -600 38
 -----------------------------------
-local ID = require("scripts/zones/Apollyon/IDs")
-require("scripts/globals/battlefield")
-require("scripts/globals/limbus")
+local ID = zones[xi.zone.APOLLYON]
 -----------------------------------
 
 local content = Limbus:new({
@@ -20,8 +18,8 @@ local content = Limbus:new({
     area             = 6,
     entryNpc         = '_12i',
     requiredKeyItems = { xi.ki.COSMO_CLEANSE, { xi.ki.RED_CARD, xi.ki.BLACK_CARD }, message = ID.text.YOU_INSERT_THE_CARD_POLISHED },
-    requiredItems    = { xi.items.METAL_CHIP },
-    name             = "CS_APOLLYON",
+    requiredItems    = { xi.item.METAL_CHIP },
+    name             = 'CS_APOLLYON',
     timeExtension    = 5,
 })
 
@@ -51,14 +49,14 @@ function content:onBattlefieldTick(battlefield, tick)
 
     -- Do nothing if aggroTime hasn't been set or aggroTime hasn't been reached yet
     local now       = os.time()
-    local aggroTime = battlefield:getLocalVar("AutoAggroTime")
+    local aggroTime = battlefield:getLocalVar('AutoAggroTime')
 
     if aggroTime == 0 or aggroTime > now then
         return
     end
 
     -- Get which player is going to be aggrod
-    local player = GetPlayerByID(battlefield:getLocalVar("AutoAggroTarget"))
+    local player = GetPlayerByID(battlefield:getLocalVar('AutoAggroTarget'))
 
     if player:isDead() then
         -- Need to find a new target
@@ -73,7 +71,7 @@ function content:onBattlefieldTick(battlefield, tick)
     end
 
     -- Determine which boss should aggro next
-    local previousBoss = battlefield:getLocalVar("AutoAggro")
+    local previousBoss = battlefield:getLocalVar('AutoAggro')
     local nextBoss     = 0
 
     if previousBoss == ID.CS_APOLLYON.mob.CARNAGECHIEF_JACKBODOKK then
@@ -86,9 +84,9 @@ function content:onBattlefieldTick(battlefield, tick)
 
     local boss = GetMobByID(nextBoss)
 
-    battlefield:setLocalVar("AutoAggro", boss:getID())
-    battlefield:setLocalVar("AutoAggroTime", os.time() + utils.minutes(7))
-    battlefield:setLocalVar("AutoAggroTarget", player:getID())
+    battlefield:setLocalVar('AutoAggro', boss:getID())
+    battlefield:setLocalVar('AutoAggroTime', os.time() + utils.minutes(7))
+    battlefield:setLocalVar('AutoAggroTarget', player:getID())
 
     if boss:isAlive() then
         boss:updateEnmity(player)
@@ -97,13 +95,13 @@ end
 
 function content:onBattlefieldWipe(battlefield, players)
     Battlefield.onBattlefieldWipe(self, battlefield, players)
-    battlefield:setLocalVar("AutoAggro", 0)
-    battlefield:setLocalVar("AutoAggroTime", 0)
-    battlefield:setLocalVar("AutoAggroTarget", 0)
+    battlefield:setLocalVar('AutoAggro', 0)
+    battlefield:setLocalVar('AutoAggroTime', 0)
+    battlefield:setLocalVar('AutoAggroTarget', 0)
 end
 
 function content.handleBossCombatTick(boss, supportOffsets, otherSupportOffsets)
-    local group   = boss:getLocalVar("supportGroup")
+    local group   = boss:getLocalVar('supportGroup')
     local offsets = group == 1 and supportOffsets or otherSupportOffsets
     local bossID  = boss:getID()
 
@@ -128,19 +126,19 @@ function content.handleBossCombatTick(boss, supportOffsets, otherSupportOffsets)
     end
 
     -- Alternate which support group to spawn
-    boss:setLocalVar("supportGroup", (group + 1) % 2)
+    boss:setLocalVar('supportGroup', (group + 1) % 2)
 end
 
 function content.handleBossAutoAggro(mob, target)
     local mobBattlefield = mob:getBattlefield()
     -- Do nothing if auto-aggro is already setup
-    if mobBattlefield:getLocalVar("AutoAggro") ~= 0 then
+    if mobBattlefield:getLocalVar('AutoAggro') ~= 0 then
         return
     end
 
-    mobBattlefield:setLocalVar("AutoAggro", mob:getID())
-    mobBattlefield:setLocalVar("AutoAggroTime", os.time() + utils.minutes(7))
-    mobBattlefield:setLocalVar("AutoAggroTarget", target:getID())
+    mobBattlefield:setLocalVar('AutoAggro', mob:getID())
+    mobBattlefield:setLocalVar('AutoAggroTime', os.time() + utils.minutes(7))
+    mobBattlefield:setLocalVar('AutoAggroTarget', target:getID())
 end
 
 local setupSharedHate = function(bossID, battlefield, mobs)
@@ -156,20 +154,20 @@ end
 content.groups =
 {
     {
-        mobs = { "Carnagechief_Jackbodokk" },
+        mobs = { 'Carnagechief_Jackbodokk' },
     },
 
     {
         mobs =
         {
-            "Carnagechief_Jackbodokk",
-            "Grognard_Mesmerizer",
-            "Grognard_Neckchopper",
-            "Grognard_Footsoldier",
-            "Grognard_Grappler",
-            "Grognard_Predator",
-            "Grognard_Impaler",
-            "Orcs_Wyvern",
+            'Carnagechief_Jackbodokk',
+            'Grognard_Mesmerizer',
+            'Grognard_Neckchopper',
+            'Grognard_Footsoldier',
+            'Grognard_Grappler',
+            'Grognard_Predator',
+            'Grognard_Impaler',
+            'Orcs_Wyvern',
         },
 
         mods =
@@ -188,19 +186,19 @@ content.groups =
     },
 
     {
-        mobs = { "NaQba_Chirurgeon" },
+        mobs = { 'NaQba_Chirurgeon' },
     },
 
     {
         mobs =
         {
-            "NaQba_Chirurgeon",
-            "Star_Ruby_Quadav",
-            "Wootz_Quadav",
-            "Fossil_Quadav",
-            "Star_Sapphire_Quadav",
-            "Whitegold_Quadav",
-            "Lightsteel_Quadav",
+            'NaQba_Chirurgeon',
+            'Star_Ruby_Quadav',
+            'Wootz_Quadav',
+            'Fossil_Quadav',
+            'Star_Sapphire_Quadav',
+            'Whitegold_Quadav',
+            'Lightsteel_Quadav',
         },
 
         mods =
@@ -219,21 +217,21 @@ content.groups =
     },
 
     {
-        mobs = { "Dee_Wapa_the_Desolator" },
+        mobs = { 'Dee_Wapa_the_Desolator' },
     },
 
     {
         mobs =
         {
-            "Dee_Wapa_the_Desolator",
-            "Yagudos_Avatar",
-            "Yagudo_Archpriest",
-            "Yagudo_Knight_Templar",
-            "Yagudo_Disciplinant",
-            "Yagudo_Prelatess",
-            "Yagudo_Kapellmeister",
-            "Yagudo_Eradicator",
-            "Yagudos_Elemental",
+            'Dee_Wapa_the_Desolator',
+            'Yagudos_Avatar',
+            'Yagudo_Archpriest',
+            'Yagudo_Knight_Templar',
+            'Yagudo_Disciplinant',
+            'Yagudo_Prelatess',
+            'Yagudo_Kapellmeister',
+            'Yagudo_Eradicator',
+            'Yagudos_Elemental',
         },
 
         mods =
@@ -252,9 +250,9 @@ content.groups =
     {
         mobs =
         {
-            "Carnagechief_Jackbodokk",
-            "NaQba_Chirurgeon",
-            "Dee_Wapa_the_Desolator",
+            'Carnagechief_Jackbodokk',
+            'NaQba_Chirurgeon',
+            'Dee_Wapa_the_Desolator',
         },
 
         mobMods =
@@ -281,18 +279,18 @@ content.loot =
     {
         {
             quantity = 5,
-            { item = xi.items.ANCIENT_BEASTCOIN, weight = xi.loot.weight.NORMAL },
+            { item = xi.item.ANCIENT_BEASTCOIN, weight = xi.loot.weight.NORMAL },
         },
 
         {
             quantity = 2,
-            { item = xi.items.NONE,              weight = xi.loot.weight.NORMAL },
-            { item = xi.items.ANCIENT_BEASTCOIN, weight = xi.loot.weight.NORMAL },
+            { item = xi.item.NONE,              weight = xi.loot.weight.NORMAL },
+            { item = xi.item.ANCIENT_BEASTCOIN, weight = xi.loot.weight.NORMAL },
         },
 
         {
-            { item = xi.items.NONE,       weight = xi.loot.weight.VERY_HIGH },
-            { item = xi.items.METAL_CHIP, weight = xi.loot.weight.VERY_LOW  },
+            { item = xi.item.NONE,       weight = xi.loot.weight.VERY_HIGH },
+            { item = xi.item.METAL_CHIP, weight = xi.loot.weight.VERY_LOW  },
         },
     },
 }

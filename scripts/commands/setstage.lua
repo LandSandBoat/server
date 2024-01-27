@@ -2,24 +2,27 @@
 -- func: setStage
 -- desc: changes stage inside an instance
 -----------------------------------
+local commandObj = {}
 
-cmdprops =
+commandObj.cmdprops =
 {
     permission = 1,
-    parameters = "i"
+    parameters = 'i'
 }
 
-function onTrigger(player, stage)
+commandObj.onTrigger = function(player, stage)
     local zone = player:getZone()
 
-    if zone:getType() == xi.zoneType.INSTANCED then
+    if zone:getTypeMask() == xi.zoneType.INSTANCED then
         local instance = player:getInstance()
         local startStage = instance:getStage()
 
         instance:setStage(stage)
 
-        player:PrintToPlayer(string.format("Stage changed from %i to %i", startStage, stage))
+        player:printToPlayer(string.format('Stage changed from %i to %i', startStage, stage))
     else
-        player:PrintToPlayer("Must be in an Instanced zone")
+        player:printToPlayer('Must be in an Instanced zone')
     end
 end
+
+return commandObj

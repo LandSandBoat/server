@@ -3,8 +3,6 @@
 --  NPC: Sharzalion
 -- !pos 95 0 111 230
 -----------------------------------
-require("scripts/globals/quests")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
@@ -13,7 +11,7 @@ end
 entity.onTrigger = function(player, npc)
     local envelopedInDarkness = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.ENVELOPED_IN_DARKNESS)
     local peaceForTheSpirit   = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.PEACE_FOR_THE_SPIRIT)
-    local peaceForTheSpiritCS = player:getCharVar("peaceForTheSpiritCS")
+    local peaceForTheSpiritCS = player:getCharVar('peaceForTheSpiritCS')
 
     if
         envelopedInDarkness == QUEST_COMPLETED and
@@ -39,9 +37,9 @@ end
 
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 64 then
-        player:setCharVar("peaceForTheSpiritCS", 1)
+        player:setCharVar('peaceForTheSpiritCS', 1)
     elseif csid == 66 then
-        player:setCharVar("peaceForTheSpiritCS", 3)
+        player:setCharVar('peaceForTheSpiritCS', 3)
     end
 end
 

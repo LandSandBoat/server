@@ -4,9 +4,8 @@
 -- !pos -458 -20 458
 -- TODO: resists, attack/def boosts
 -----------------------------------
-local ID = require("scripts/zones/Arrapago_Reef/IDs")
-mixins = { require("scripts/mixins/job_special") }
-require("scripts/globals/titles")
+local ID = zones[xi.zone.ARRAPAGO_REEF]
+mixins = { require('scripts/mixins/job_special') }
 -----------------------------------
 local entity = {}
 

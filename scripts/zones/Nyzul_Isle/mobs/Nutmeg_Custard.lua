@@ -4,7 +4,6 @@
 -- Info: Enemy Leader, Absorbs earth elemental damage
 -----------------------------------
 mixins = { require('scripts/mixins/families/flan') }
-require('scripts/globals/nyzul')
 -----------------------------------
 local entity = {}
 

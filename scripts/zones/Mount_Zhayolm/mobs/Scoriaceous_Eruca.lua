@@ -2,7 +2,7 @@
 -- Area: Mount Zhayolm
 --  Mob: Scoriaceous Eruca
 -----------------------------------
-mixins = { require("scripts/mixins/families/eruca") }
+mixins = { require('scripts/mixins/families/eruca') }
 -----------------------------------
 local entity = {}
 

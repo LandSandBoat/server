@@ -8,18 +8,12 @@
 -- Mihli Aliapoh: !pos -22.615 -7 78.907 48
 -- qm10         : !pos 352 2 376 68
 -----------------------------------
-require('scripts/globals/besieged')
-require('scripts/globals/interaction/quest')
-require('scripts/globals/quests')
-require('scripts/globals/npc_util')
-require('scripts/globals/titles')
------------------------------------
 
 local quest = Quest:new(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.SOOTHING_WATERS)
 
 quest.reward =
 {
-    item = xi.items.IMPERIAL_GOLD_PIECE,
+    item = xi.item.IMPERIAL_GOLD_PIECE,
     title = xi.title.SPRINGSERPENT_SENTRY
 }
 
@@ -122,7 +116,7 @@ quest.sections =
             ['qm10'] =
             {
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, xi.items.TUFT_OF_COLORFUL_HAIR) then
+                    if npcUtil.tradeHasExactly(trade, xi.item.TUFT_OF_COLORFUL_HAIR) then
                         return quest:progressCutscene(34)
                     end
                 end,
@@ -150,7 +144,7 @@ quest.sections =
             {
                 [897] = function(player, csid, option, npc)
                     if quest:complete(player) then
-                        player:addCurrency("imperial_standing", 500)
+                        player:addCurrency('imperial_standing', 500)
                         player:messageSpecial(zones[player:getZoneID()].text.BESIEGED_OFFSET)
                     end
                 end,

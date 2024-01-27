@@ -4,8 +4,7 @@
 -- Involved in Quest: Searching for the Right Words
 -- !pos 34.651 -20.183 -61.647 153
 -----------------------------------
-local ID = require("scripts/zones/The_Boyahda_Tree/IDs")
-require("scripts/globals/quests")
+local ID = zones[xi.zone.THE_BOYAHDA_TREE]
 -----------------------------------
 local entity = {}
 
@@ -29,7 +28,7 @@ entity.onTrigger = function(player, npc)
             if IsMoonNew() or not correctTime then
                 player:messageSpecial(ID.text.CANNOT_SEE_MOON)
 
-            elseif player:getCharVar("Searching_AgasKilled") == 1 then
+            elseif player:getCharVar('Searching_AgasKilled') == 1 then
                 player:startEvent(14)
 
             else
@@ -50,7 +49,7 @@ entity.onEventFinish = function(player, csid, option, npc)
     if csid == 14 then
         player:addKeyItem(xi.ki.MOONDROP)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.MOONDROP)
-        player:setCharVar("Searching_AgasKilled", 0)
+        player:setCharVar('Searching_AgasKilled', 0)
     end
 end
 

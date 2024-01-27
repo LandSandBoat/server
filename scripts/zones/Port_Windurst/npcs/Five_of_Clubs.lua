@@ -2,8 +2,6 @@
 -- Area: Port Windurst
 --  NPC: Five of Clubs
 -----------------------------------
-require("scripts/globals/quests")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

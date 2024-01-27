@@ -5,10 +5,6 @@
 -- Wazyih:   !pos -94 -6 -93 50
 -- Saliyahf: !pos -60 0 65 50
 -----------------------------------
-require("scripts/globals/quests")
-require("scripts/globals/npc_util")
-require('scripts/globals/interaction/quest')
------------------------------------
 
 local quest = Quest:new(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.STRIKING_A_BALANCE)
 
@@ -25,7 +21,7 @@ local positionTable =
 
 quest.reward =
 {
-    item = { { xi.items.IMPERIAL_BRONZE_PIECE, 3 } },
+    item = { { xi.item.IMPERIAL_BRONZE_PIECE, 3 } },
 }
 
 quest.sections =

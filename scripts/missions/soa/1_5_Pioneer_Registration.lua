@@ -5,9 +5,6 @@
 -- !addmission 12 6
 -- Brenton : !pos -86.036 3.349 18.121 256
 -----------------------------------
-require('scripts/globals/missions')
-require('scripts/globals/interaction/mission')
------------------------------------
 
 local mission = Mission:new(xi.mission.log_id.SOA, xi.mission.id.soa.PIONEER_REGISTRATION)
 

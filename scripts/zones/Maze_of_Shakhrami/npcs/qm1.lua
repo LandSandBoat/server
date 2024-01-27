@@ -3,8 +3,7 @@
 --  NPC: ???
 -- Spawns Aroma Crawler - RSE Satchets
 -----------------------------------
-local ID = require("scripts/zones/Maze_of_Shakhrami/IDs")
-require("scripts/globals/npc_util")
+local ID = zones[xi.zone.MAZE_OF_SHAKHRAMI]
 -----------------------------------
 local entity = {}
 
@@ -27,7 +26,7 @@ entity.onTrigger = function(player, npc)
         npcUtil.popFromQM(player, npc, ID.mob.AROMA_CRAWLER, { claim = true, hide = math.random(600, 1800), look = true, radius = 1 })  -- ??? despawns and respawns 10-30 minutes after NM dies
 
         local item = 18246 + playerRace - raceOffset
-        GetMobByID(ID.mob.AROMA_CRAWLER):addListener("ITEM_DROPS", "ITEM_DROPS_RSE", function(mob, loot)
+        GetMobByID(ID.mob.AROMA_CRAWLER):addListener('ITEM_DROPS', 'ITEM_DROPS_RSE', function(mob, loot)
             loot:addItemFixed(item, xi.drop_rate.UNCOMMON)
         end)
 

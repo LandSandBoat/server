@@ -4,8 +4,6 @@
 -- Outpost Teleporter NPC
 -- !pos 94.457 -0.375 -66.161 234
 -----------------------------------
-require("scripts/globals/conquest")
------------------------------------
 local entity = {}
 
 local teleporterNation = xi.nation.BASTOK

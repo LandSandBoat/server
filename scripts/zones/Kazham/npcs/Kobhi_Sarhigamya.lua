@@ -4,7 +4,7 @@
 -- Type: Item Deliverer
 -- !pos -115.29 -11 -22.609 250
 -----------------------------------
-local ID = require("scripts/zones/Kazham/IDs")
+local ID = zones[xi.zone.KAZHAM]
 -----------------------------------
 local entity = {}
 

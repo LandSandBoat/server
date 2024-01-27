@@ -5,12 +5,7 @@
 -- Involved in Quest: Lure of the Wildcat (San d'Oria)
 -- !pos 2 0.1 0.1 233
 -----------------------------------
-local ID = require("scripts/zones/Chateau_dOraguille/IDs")
-require("scripts/globals/missions")
-require("scripts/globals/npc_util")
-require("scripts/globals/quests")
-require("scripts/globals/titles")
-require("scripts/globals/utils")
+local ID = zones[xi.zone.CHATEAU_DORAGUILLE]
 -----------------------------------
 local entity = {}
 
@@ -19,7 +14,7 @@ end
 
 entity.onTrigger = function(player, npc)
     local pNation = player:getNation()
-    local wildcatSandy = player:getCharVar("WildcatSandy")
+    local wildcatSandy = player:getCharVar('WildcatSandy')
 
     -- Lure of the Wildcat San d'Oria
     if
@@ -33,7 +28,7 @@ entity.onTrigger = function(player, npc)
         player:hasKeyItem(xi.ki.SUSPICIOUS_ENVELOPE)
     then
         player:startEvent(549)
-        player:setCharVar("BlackMailQuest", 1)
+        player:setCharVar('BlackMailQuest', 1)
         player:delKeyItem(xi.ki.SUSPICIOUS_ENVELOPE)
     elseif pNation == xi.nation.SANDORIA then
         -- Rank 10 default dialogue
@@ -53,7 +48,7 @@ end
 
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 558 then
-        player:setCharVar("WildcatSandy", utils.mask.setBit(player:getCharVar("WildcatSandy"), 16, true))
+        player:setCharVar('WildcatSandy', utils.mask.setBit(player:getCharVar('WildcatSandy'), 16, true))
     end
 end
 

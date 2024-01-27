@@ -4,9 +4,9 @@
 -- Ambuscade_Tome : !pos -28.030 -15.500 52.279 249
 -- Gorpa-Masorpa  : !pos -27.584 -15.990 52.565 249
 -----------------------------------
-require("scripts/globals/utils")
--- local mhauraID = require("scripts/zones/Mhaura/IDs")
--- local maquetteID = require("scripts/zones/Maquette_Abdhaljs-Legion_B/IDs")
+require('scripts/globals/utils')
+-- local mhauraID = require('scripts/zones/Mhaura/IDs')
+-- local maquetteID = zones[xi.zone.MAQUETTE_ABDHALJS_LEGION_B]
 -----------------------------------
 xi = xi or {}
 xi.ambuscade = {}
@@ -39,9 +39,9 @@ xi.ambuscade.onTriggerGorpaMasorpa = function(player, npc)
         -- local hideNothingInParticular  = 4
         local mainMenuOptions = 0 -- Made up of above options
 
-        local currentHallmarks = player:getCurrency("current_hallmarks")
-        local totalHallmarks = player:getCurrency("total_hallmarks")
-        local gallantry = player:getCurrency("gallantry")
+        local currentHallmarks = player:getCurrency('current_hallmarks')
+        local totalHallmarks = player:getCurrency('total_hallmarks')
+        local gallantry = player:getCurrency('gallantry')
 
         -- Regular menu
         player:startEvent(386, mainMenuOptions, currentHallmarks, totalHallmarks, 0, 8, gallantry, 0, 0)
@@ -155,15 +155,15 @@ xi.ambuscade.onInstanceComplete = function(instance)
     for _, player in pairs(chars) do
         -- Hallmarks -- TODO: Message
         local hallmarksEarned = intenseHallmarks[difficulty] * numChars
-        player:addCurrency("current_hallmarks", hallmarksEarned)
+        player:addCurrency('current_hallmarks', hallmarksEarned)
 
         -- Total Hallmarks -- TODO: Message
-        player:addCurrency("total_hallmarks", hallmarksEarned)
+        player:addCurrency('total_hallmarks', hallmarksEarned)
 
         -- Gallantry -- TODO: Message
         if numChars > 1 then
             local multiplier = numChars - 1
-            player:addCurrency("gallantry", intenseGallantry[difficulty] * multiplier)
+            player:addCurrency('gallantry', intenseGallantry[difficulty] * multiplier)
         end
 
         -- Remove KI

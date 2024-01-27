@@ -3,8 +3,7 @@
 --  Mob: Rallbrog of Clan Death
 -- Mission 9-2 San d'Oria
 -----------------------------------
-local global = require("scripts/zones/QuBia_Arena/Globals")
-local ID = require("scripts/zones/QuBia_Arena/IDs")
+local global = require('scripts/zones/QuBia_Arena/Globals')
 -----------------------------------
 local entity = {}
 

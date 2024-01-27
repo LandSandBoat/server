@@ -3,8 +3,7 @@
 --  NPC: Warmachine
 -- !pos -345.236 -3.188 -976.563 4
 -----------------------------------
-local ID = require("scripts/zones/Bibiki_Bay/IDs")
-require("scripts/globals/missions")
+local ID = zones[xi.zone.BIBIKI_BAY]
 -----------------------------------
 local entity = {}
 
@@ -17,12 +16,12 @@ entity.onTrigger = function(player, npc)
     -- COP mission
     if
         player:getCurrentMission(xi.mission.log_id.COP) == xi.mission.id.cop.DAWN and
-        player:getCharVar("COP_3-taru_story") == 1
+        player:getCharVar('COP_3-taru_story') == 1
     then
         if player:getFreeSlotsCount() == 0 then
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, coloredDrop)
         else
-            player:setCharVar("ColoredDrop", coloredDrop)
+            player:setCharVar('ColoredDrop', coloredDrop)
             player:startEvent(43)
         end
     end
@@ -33,14 +32,14 @@ end
 
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 43 then
-        local coloredDropID = player:getCharVar("ColoredDrop")
+        local coloredDropID = player:getCharVar('ColoredDrop')
         if player:getFreeSlotsCount() == 0 then
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, coloredDropID)
         else
             player:addItem(coloredDropID)
             player:messageSpecial(ID.text.ITEM_OBTAINED, coloredDropID)
-            player:setCharVar("COP_3-taru_story", 2)
-            player:setCharVar("ColoredDrop", 0)
+            player:setCharVar('COP_3-taru_story', 2)
+            player:setCharVar('ColoredDrop', 0)
         end
     end
 end

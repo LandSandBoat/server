@@ -8,15 +8,10 @@
 -- Wailing Pond      : !pos 380 0.1 -181 149
 -- Screaming Pond    : !pos -219 0.1 -101 149
 -----------------------------------
-require('scripts/globals/quests')
-require('scripts/globals/npc_util')
-require('scripts/globals/utils')
-require('scripts/globals/interaction/hidden_quest')
------------------------------------
-local davoiID = require("scripts/zones/Davoi/IDs")
+local davoiID = zones[xi.zone.DAVOI]
 -----------------------------------
 
-local quest = HiddenQuest:new("CrimsonOrb")
+local quest = HiddenQuest:new('CrimsonOrb')
 
 quest.reward =
 {

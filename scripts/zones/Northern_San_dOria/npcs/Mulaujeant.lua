@@ -4,8 +4,7 @@
 -- Involved in Quests: Missionary Man
 -- !pos -175 0 181 231
 -----------------------------------
-require("scripts/globals/quests")
-local ID = require("scripts/zones/Northern_San_dOria/IDs")
+local ID = zones[xi.zone.NORTHERN_SAN_DORIA]
 -----------------------------------
 local entity = {}
 
@@ -13,8 +12,8 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local finishtime = player:getCharVar("MissionaryMan_date")
-    local missionaryManVar = player:getCharVar("MissionaryManVar")
+    local finishtime = player:getCharVar('MissionaryMan_date')
+    local missionaryManVar = player:getCharVar('MissionaryManVar')
 
     if missionaryManVar == 2 then
         player:startEvent(698, 0, 1146) -- Start statue creation
@@ -34,14 +33,14 @@ end
 
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 698 then
-        player:setCharVar("MissionaryManVar", 3)
-        player:setCharVar("MissionaryMan_date", os.time() + 60)
+        player:setCharVar('MissionaryManVar', 3)
+        player:setCharVar('MissionaryMan_date', os.time() + 60)
         player:delKeyItem(xi.ki.RAUTEINOTS_PARCEL)
         player:needToZone(true)
 
     elseif csid == 700 then
-        player:setCharVar("MissionaryManVar", 4)
-        player:setCharVar("MissionaryMan_date", 0)
+        player:setCharVar('MissionaryManVar', 4)
+        player:setCharVar('MissionaryMan_date', 0)
         player:addKeyItem(xi.ki.SUBLIME_STATUE_OF_THE_GODDESS)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.SUBLIME_STATUE_OF_THE_GODDESS)
     end

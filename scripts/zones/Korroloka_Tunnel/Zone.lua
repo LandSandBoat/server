@@ -1,9 +1,7 @@
 -----------------------------------
 -- Zone: Korroloka Tunnel (173)
 -----------------------------------
-local ID = require('scripts/zones/Korroloka_Tunnel/IDs')
-require('scripts/globals/conquest')
-require('scripts/globals/helm')
+local ID = zones[xi.zone.KORROLOKA_TUNNEL]
 -----------------------------------
 local zoneObject = {}
 
@@ -35,22 +33,22 @@ zoneObject.onConquestUpdate = function(zone, updatetype, influence, owner, ranki
 end
 
 zoneObject.onTriggerAreaEnter = function(player, triggerArea)
-    if player:getCharVar("BathedInScent") == 1 then  -- pollen scent from touching all 3 Blue Rafflesias in Yuhtunga
+    if player:getCharVar('BathedInScent') == 1 then  -- pollen scent from touching all 3 Blue Rafflesias in Yuhtunga
         switch (triggerArea:GetTriggerAreaID()): caseof
         {
             [1] = function()  -- Left Pool
                 player:messageSpecial(ID.text.ENTERED_SPRING)
-                player:setLocalVar("POOL_TIME", os.time())
+                player:setLocalVar('POOL_TIME', os.time())
             end,
 
             [2] = function()  -- Center Pool
                 player:messageSpecial(ID.text.ENTERED_SPRING)
-                player:setLocalVar("POOL_TIME", os.time())
+                player:setLocalVar('POOL_TIME', os.time())
             end,
 
             [3] = function()  -- Right pool
                 player:messageSpecial(ID.text.ENTERED_SPRING)
-                player:setLocalVar("POOL_TIME", os.time())
+                player:setLocalVar('POOL_TIME', os.time())
             end,
         }
     end
@@ -58,16 +56,16 @@ end
 
 zoneObject.onTriggerAreaLeave = function(player, triggerArea)
     local triggerAreaID = triggerArea:GetTriggerAreaID()
-    local pooltime = os.time() - player:getLocalVar("POOL_TIME")
+    local pooltime = os.time() - player:getLocalVar('POOL_TIME')
 
-    if triggerAreaID <= 3 and player:getCharVar("BathedInScent") == 1 then
+    if triggerAreaID <= 3 and player:getCharVar('BathedInScent') == 1 then
         if pooltime >= 300 then
             player:messageSpecial(ID.text.LEFT_SPRING_CLEAN)
-            player:setLocalVar("POOL_TIME", 0)
-            player:setCharVar("BathedInScent", 0)
+            player:setLocalVar('POOL_TIME', 0)
+            player:setCharVar('BathedInScent', 0)
         else
             player:messageSpecial(ID.text.LEFT_SPRING_EARLY)
-            player:setLocalVar("POOL_TIME", 0)
+            player:setLocalVar('POOL_TIME', 0)
         end
     end
 end

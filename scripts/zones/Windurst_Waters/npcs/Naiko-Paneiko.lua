@@ -4,12 +4,6 @@
 -- Involved In Quest: Making Headlines, Riding on the Clouds
 -- !pos -246 -5 -308 238
 -----------------------------------
-local ID = require("scripts/zones/Windurst_Waters/IDs")
-require("scripts/globals/npc_util")
-require("scripts/globals/titles")
-require("scripts/globals/quests")
-require("scripts/globals/utils")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
@@ -22,7 +16,7 @@ entity.onTrigger = function(player, npc)
         player:startEvent(665)
     elseif makingHeadlines == QUEST_ACCEPTED then
         -- bitmask of progress: 0 = Kyume-Romeh, 1 = Yuyuju, 2 = Hiwom-Gomoi, 3 = Umumu, 4 = Mahogany Door
-        local prog = player:getCharVar("QuestMakingHeadlines_var")
+        local prog = player:getCharVar('QuestMakingHeadlines_var')
 
         if not utils.mask.isFull(prog, 4) then
             if math.random(1, 2) == 1 then
@@ -54,7 +48,7 @@ entity.onEventFinish = function(player, csid, option, npc)
         npcUtil.completeQuest(player, xi.quest.log_id.WINDURST, xi.quest.id.windurst.MAKING_HEADLINES, {
             title = xi.title.EDITORS_HATCHET_MAN,
             gil = 560,
-            var = "QuestMakingHeadlines_var",
+            var = 'QuestMakingHeadlines_var',
         })
         player:delKeyItem(xi.ki.WINDURST_WOODS_SCOOP)
         player:delKeyItem(xi.ki.WINDURST_WALLS_SCOOP)

@@ -2,8 +2,7 @@
 -- Area: Attohwa Chasm
 --  Mob: Lioumere
 -----------------------------------
-mixins = { require("scripts/mixins/families/antlion_ambush") }
-require("scripts/globals/missions")
+mixins = { require('scripts/mixins/families/antlion_ambush') }
 -----------------------------------
 local entity = {}
 

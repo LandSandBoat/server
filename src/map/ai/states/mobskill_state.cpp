@@ -22,13 +22,14 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "mobskill_state.h"
 #include "ai/ai_container.h"
 #include "enmity_container.h"
+#include "entities/battleentity.h"
 #include "entities/mobentity.h"
 #include "mobskill.h"
 #include "packets/action.h"
 #include "status_effect_container.h"
 #include "utils/battleutils.h"
 
-CMobSkillState::CMobSkillState(CMobEntity* PEntity, uint16 targid, uint16 wsid)
+CMobSkillState::CMobSkillState(CBattleEntity* PEntity, uint16 targid, uint16 wsid)
 : CState(PEntity, targid)
 , m_PEntity(PEntity)
 , m_spentTP(0)
@@ -71,7 +72,7 @@ CMobSkillState::CMobSkillState(CMobEntity* PEntity, uint16 targid, uint16 wsid)
         actionTarget.animation  = 0;
         actionTarget.param      = m_PSkill->getID();
         actionTarget.messageID  = 43;
-        m_PEntity->loc.zone->PushPacket(m_PEntity, CHAR_INRANGE, new CActionPacket(action));
+        m_PEntity->loc.zone->PushPacket(m_PEntity, CHAR_INRANGE_SELF, new CActionPacket(action));
     }
     m_PEntity->PAI->EventHandler.triggerListener("WEAPONSKILL_STATE_ENTER", CLuaBaseEntity(m_PEntity), m_PSkill->getID());
     SpendCost();
@@ -101,7 +102,7 @@ void CMobSkillState::SpendCost()
 
 bool CMobSkillState::Update(time_point tick)
 {
-    if (tick > GetEntryTime() + m_castTime && !IsCompleted())
+    if (m_PEntity && m_PEntity->isAlive() && (tick > GetEntryTime() + m_castTime && !IsCompleted()))
     {
         action_t action;
         m_PEntity->OnMobSkillFinished(*this, action);
@@ -138,7 +139,7 @@ bool CMobSkillState::Update(time_point tick)
 
 void CMobSkillState::Cleanup(time_point tick)
 {
-    if (!IsCompleted())
+    if (m_PEntity && m_PEntity->isAlive() && !IsCompleted())
     {
         action_t action;
         action.id         = m_PEntity->id;
@@ -152,7 +153,7 @@ void CMobSkillState::Cleanup(time_point tick)
         actionTarget.animation       = 0x1FC; // Not perfectly accurate, this animation ID can change from time to time for unknown reasons.
         actionTarget.reaction        = REACTION::HIT;
 
-        m_PEntity->loc.zone->PushPacket(m_PEntity, CHAR_INRANGE, new CActionPacket(action));
+        m_PEntity->loc.zone->PushPacket(m_PEntity, CHAR_INRANGE_SELF, new CActionPacket(action));
 
         // On retail testing, mobs lose 33% of their TP at 2900 or higher TP
         // But lose 25% at < 2900 TP.

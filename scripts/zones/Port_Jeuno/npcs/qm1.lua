@@ -4,16 +4,13 @@
 -- Finish Quest: Borghertz's Hands (AF Hands, Many jobs)
 -- !pos -51 8 -4 246
 -----------------------------------
-require("scripts/globals/npc_util")
-require("scripts/globals/quests")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local borghertzCS = player:getCharVar("BorghertzCS")
+    local borghertzCS = player:getCharVar('BorghertzCS')
 
     if player:hasKeyItem(xi.ki.OLD_GAUNTLETS) then
         if not player:hasKeyItem(xi.ki.SHADOW_FLAMES) then
@@ -33,16 +30,16 @@ end
 
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 20 and option == 1 then
-        player:setCharVar("BorghertzCS", 2)
+        player:setCharVar('BorghertzCS', 2)
     elseif csid == 48 then
-        local questJob = player:getCharVar("BorghertzAlreadyActiveWithJob")
+        local questJob = player:getCharVar('BorghertzAlreadyActiveWithJob')
         local quest = xi.quest.id.jeuno.BORGHERTZ_S_WARRING_HANDS + questJob - 1
         local reward = 13960 + questJob
 
         if
             npcUtil.completeQuest(player, xi.quest.log_id.JEUNO, quest, {
                 item = reward,
-                var = { "BorghertzCS", "BorghertzAlreadyActiveWithJob" },
+                var = { 'BorghertzCS', 'BorghertzAlreadyActiveWithJob' },
             })
         then
             player:delKeyItem(xi.ki.OLD_GAUNTLETS)

@@ -80,7 +80,7 @@ namespace instanceutils
                 data.battlemulti   = static_cast<uint16>(sql->GetIntData(12));
 
                 // Meta data
-                data.instance_zone_name = zoneutils::GetZone(data.instance_zone)->GetName();
+                data.instance_zone_name = zoneutils::GetZone(data.instance_zone)->getName();
                 data.entrance_zone_name = sql->GetStringData(13);
                 data.filename           = fmt::format("./scripts/zones/{}/instances/{}.lua", data.instance_zone_name, data.instance_name);
 

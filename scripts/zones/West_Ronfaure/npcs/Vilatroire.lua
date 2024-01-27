@@ -5,11 +5,6 @@
 -- "Advanced Teamwork"
 -- !pos -260.361 -70.999 423.420 100
 -----------------------------------
-local ID = require("scripts/zones/West_Ronfaure/IDs")
-require("scripts/globals/quests")
-require("scripts/globals/titles")
-require("scripts/globals/npc_util")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
@@ -130,14 +125,14 @@ entity.onEventUpdate = function(player, csid, option, npc)
 
             if questIntroToTeamwork == QUEST_ACCEPTED then
                 if partySameNationCount == partySizeRequirement then
-                    player:setLocalVar("introToTmwrk_pass", 1) -- nation requirements met
+                    player:setLocalVar('introToTmwrk_pass', 1) -- nation requirements met
                     player:updateEvent(15, 1)
                 else
                     player:updateEvent(3) -- not the same nation
                 end
             elseif questIntermediateTeamwork == QUEST_ACCEPTED then
                 if partySameRaceCount == partySizeRequirement then
-                    player:setLocalVar("intermedTmwrk_pass", 1)
+                    player:setLocalVar('intermedTmwrk_pass', 1)
                     player:updateEvent(15, 2) -- race requirements met
                 else
 
@@ -145,7 +140,7 @@ entity.onEventUpdate = function(player, csid, option, npc)
                 end
             elseif questAdvancedTeamwork == QUEST_ACCEPTED then
                 if partySameJobCount == partySizeRequirement then
-                    player:setLocalVar("advTmwrk_pass", 1)
+                    player:setLocalVar('advTmwrk_pass', 1)
                     player:updateEvent(15, 3) -- job requirements met
                 else
                     player:updateEvent(5) -- not the same job
@@ -166,7 +161,7 @@ entity.onEventFinish = function(player, csid, option, npc)
 
         if
             questIntroToTeamwork == QUEST_ACCEPTED and
-            player:getLocalVar("introToTmwrk_pass") == 1
+            player:getLocalVar('introToTmwrk_pass') == 1
         then
             npcUtil.completeQuest(player, xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.INTRODUCTION_TO_TEAMWORK, {
                 item = 13442,
@@ -175,7 +170,7 @@ entity.onEventFinish = function(player, csid, option, npc)
             })
         elseif
             questIntermediateTeamwork == QUEST_ACCEPTED and
-            player:getLocalVar("intermedTmwrk_pass") == 1
+            player:getLocalVar('intermedTmwrk_pass') == 1
         then
             npcUtil.completeQuest(player, xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.INTERMEDIATE_TEAMWORK, {
                 item = 4994,
@@ -184,7 +179,7 @@ entity.onEventFinish = function(player, csid, option, npc)
             })
         elseif
             questAdvancedTeamwork == QUEST_ACCEPTED and
-            player:getLocalVar("advTmwrk_pass") == 1
+            player:getLocalVar('advTmwrk_pass') == 1
         then
             npcUtil.completeQuest(player, xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.ADVANCED_TEAMWORK, {
                 item = 13459,

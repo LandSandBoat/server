@@ -3,8 +3,7 @@
 --   NM: Zikko
 -- !pos -608.5 11.3 -186.5 79
 -----------------------------------
-require("scripts/globals/hunts")
-mixins = { require("scripts/mixins/families/imp") }
+mixins = { require('scripts/mixins/families/imp') }
 -----------------------------------
 local entity = {}
 

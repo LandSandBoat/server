@@ -2,8 +2,7 @@
 -- Zone: Misareaux_Coast (25)
 -- Desc: this file contains functions that are shared by multiple luas in this zone's directory
 -----------------------------------
-local ID = require("scripts/zones/Misareaux_Coast/IDs")
-require("scripts/globals/npc_util")
+local ID = zones[xi.zone.MISAREAUX_COAST]
 -----------------------------------
 
 local misareauxGlobal =
@@ -21,7 +20,7 @@ local misareauxGlobal =
         elseif vHour >= 22 or vHour < 4 then -- Spawn traps for Ziphius
             local random = GetNPCByID(ID.npc.ZIPHIUS_QM_BASE + math.random(0, 5))
             if random:getStatus() == xi.status.DISAPPEAR then
-                random:setLocalVar("[Ziphius]Spawn", 1)
+                random:setLocalVar('[Ziphius]Spawn', 1)
             end
 
             for i = ID.npc.ZIPHIUS_QM_BASE, ID.npc.ZIPHIUS_QM_BASE + 5 do
@@ -29,7 +28,7 @@ local misareauxGlobal =
             end
         elseif vHour == 4 then -- Despawn non-baited traps
             for i = ID.npc.ZIPHIUS_QM_BASE, ID.npc.ZIPHIUS_QM_BASE + 5 do
-                if GetNPCByID(i):getLocalVar("[Ziphius]Baited") == 0 then
+                if GetNPCByID(i):getLocalVar('[Ziphius]Baited') == 0 then
                     GetNPCByID(i):setStatus(xi.status.DISAPPEAR)
                 end
             end
@@ -40,12 +39,12 @@ local misareauxGlobal =
     -- Trade function for Ziphius NM QMs
     -----------------------------------
     ziphiusOnTrade = function(player, npc, trade)
-        local baited = npc:getLocalVar("[Ziphius]Baited") == 1
-        if not baited and npcUtil.tradeHas(trade, xi.items.SLICE_OF_MOAT_CARP) then
-            npc:setLocalVar("[Ziphius]Bait"..player:getName(), 1)
-            npc:setLocalVar("[Ziphius]Baited", 1)
+        local baited = npc:getLocalVar('[Ziphius]Baited') == 1
+        if not baited and npcUtil.tradeHas(trade, xi.item.SLICE_OF_MOAT_CARP) then
+            npc:setLocalVar('[Ziphius]Bait'..player:getName(), 1)
+            npc:setLocalVar('[Ziphius]Baited', 1)
             player:confirmTrade()
-            player:messageSpecial(ID.text.PUT_IN_TRAP, xi.items.SLICE_OF_MOAT_CARP)
+            player:messageSpecial(ID.text.PUT_IN_TRAP, xi.item.SLICE_OF_MOAT_CARP)
         end
     end,
 
@@ -53,8 +52,8 @@ local misareauxGlobal =
     -- Spawn function for Ziphius NM QMs
     -----------------------------------
     ziphiusOnTrigger = function(player, npc)
-        local baited = npc:getLocalVar("[Ziphius]Baited") == 1
-        local baitedByPlayer = npc:getLocalVar("[Ziphius]Bait"..player:getName()) == 1
+        local baited = npc:getLocalVar('[Ziphius]Baited') == 1
+        local baitedByPlayer = npc:getLocalVar('[Ziphius]Bait'..player:getName()) == 1
         local vHour = VanadielHour()
         if vHour >= 22 or vHour < 4 then
             if not baited then
@@ -66,7 +65,7 @@ local misareauxGlobal =
             end
         elseif vHour >= 4 and vHour < 7 then
             if baitedByPlayer then
-                if npc:getLocalVar("[Ziphius]Spawn") == 1 then
+                if npc:getLocalVar('[Ziphius]Spawn') == 1 then
                     npc:resetLocalVars()
                     npc:setStatus(xi.status.DISAPPEAR)
                     SpawnMob(ID.mob.ZIPHIUS):updateClaim(player)

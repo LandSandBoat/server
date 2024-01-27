@@ -2,9 +2,7 @@
 -- Area: Empyreal_Paradox
 --  NPC: ??? (qm1)
 -----------------------------------
-local ID = require("scripts/zones/Empyreal_Paradox/IDs")
-require("scripts/globals/missions")
-require("scripts/globals/quests")
+local ID = zones[xi.zone.EMPYREAL_PARADOX]
 -----------------------------------
 local entity = {}
 
@@ -15,10 +13,10 @@ entity.onTrigger = function(player, npc)
     -- TODO: Use xi.items enum and table items.
     if
         player:hasCompletedQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.APOCALYPSE_NIGH) and
-        not player:hasItem(xi.items.STATIC_EARRING) and
-        not player:hasItem(xi.items.MAGNETIC_EARRING) and
-        not player:hasItem(xi.items.HOLLOW_EARRING) and
-        not player:hasItem(xi.items.ETHEREAL_EARRING)
+        not player:hasItem(xi.item.STATIC_EARRING) and
+        not player:hasItem(xi.item.MAGNETIC_EARRING) and
+        not player:hasItem(xi.item.HOLLOW_EARRING) and
+        not player:hasItem(xi.item.ETHEREAL_EARRING)
     then
         player:startEvent(5)
     else
@@ -36,7 +34,7 @@ entity.onEventFinish = function(player, csid, option, npc)
         player:addMission(xi.mission.log_id.COP, xi.mission.id.cop.DAWN)
         player:addMission(xi.mission.log_id.ZILART, xi.mission.id.zilart.AWAKENING)
         player:setMissionStatus(xi.mission.log_id.ZILART, 3)
-        player:setCharVar("PromathiaStatus", 7)
+        player:setCharVar('PromathiaStatus', 7)
         player:delQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.SHADOWS_OF_THE_DEPARTED)
         player:delQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.APOCALYPSE_NIGH)
     end

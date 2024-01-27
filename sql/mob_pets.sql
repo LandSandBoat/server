@@ -23,7 +23,7 @@ CREATE TABLE `mob_pets` (
   `mobname` varchar(24) DEFAULT NULL,
   `petname` varchar(24) DEFAULT NULL,
   PRIMARY KEY (`mob_mobid`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
+) ENGINE=Aria TRANSACTIONAL=0 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --

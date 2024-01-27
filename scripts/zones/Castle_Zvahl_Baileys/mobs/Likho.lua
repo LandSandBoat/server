@@ -2,8 +2,6 @@
 -- Area: Castle Zvahl Baileys (161)
 --   NM: Likho
 -----------------------------------
-require("scripts/globals/hunts")
------------------------------------
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

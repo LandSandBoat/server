@@ -6,12 +6,6 @@
 -- Lion Springs Door : !pos 96 0 106 80
 -- Turlough          : !pos -58.697 0.000 103.553 244
 -----------------------------------
-require('scripts/globals/maws')
-require('scripts/globals/missions')
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
-require('scripts/globals/titles')
-require('scripts/globals/interaction/mission')
 require('scripts/missions/wotg/helpers')
 -----------------------------------
 
@@ -27,8 +21,8 @@ mission.sections =
     -- 0: Try to enter without a ticket
     {
         check = function(player, currentMission, missionStatus, vars)
-            return currentMission == mission.missionId and missionStatus == 0
-            and xi.wotg.helpers.meetsMission4Reqs(player)
+            return currentMission == mission.missionId and missionStatus == 0 and
+                xi.wotg.helpers.meetsMission4Reqs(player)
         end,
 
         [xi.zone.SOUTHERN_SAN_DORIA_S] =

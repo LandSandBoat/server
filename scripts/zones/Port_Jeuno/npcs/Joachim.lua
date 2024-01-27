@@ -12,8 +12,6 @@
 -- 331 = CS after "Dawn of Death" completed.
 -- 332 = ???
 -----------------------------------
-require("scripts/globals/abyssea")
-----------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

@@ -45,7 +45,7 @@ CPetSyncPacket::CPetSyncPacket(CCharEntity* PChar)
     if (PChar->PPet != nullptr)
     {
         this->setSize(0x2C);
-        packBitsBE(data + 0x04, 0x18 + PChar->PPet->GetName().size(), 0, 6, 10); // Message Size
+        packBitsBE(data + 0x04, 0x18 + PChar->PPet->getName().size(), 0, 6, 10); // Message Size
         ref<uint16>(0x0C) = PChar->PPet->targid;
         ref<uint8>(0x0E)  = PChar->PPet->GetHPP();
         ref<uint8>(0x0F)  = PChar->PPet->GetMPP();
@@ -55,6 +55,6 @@ CPetSyncPacket::CPetSyncPacket(CCharEntity* PChar)
             ref<uint32>(0x14) = PChar->PPet->GetBattleTarget()->id;
         }
 
-        memcpy(data + (0x18), PChar->PPet->GetName().c_str(), PChar->PPet->GetName().size());
+        memcpy(data + (0x18), PChar->PPet->getName().c_str(), PChar->PPet->getName().size());
     }
 }

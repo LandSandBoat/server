@@ -1,8 +1,6 @@
 -----------------------------------
 -- Zone: Ship_bound_for_Mhaura_Pirates (228)
 -----------------------------------
-local ID = require('scripts/zones/Ship_bound_for_Mhaura_Pirates/IDs')
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

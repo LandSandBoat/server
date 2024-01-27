@@ -38,4 +38,4 @@ CREATE TABLE IF NOT EXISTS `char_exp` (
   `merits` tinyint(2) unsigned NOT NULL DEFAULT '0',
   `limits` smallint(5) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`charid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 AVG_ROW_LENGTH=85;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci AVG_ROW_LENGTH=85;

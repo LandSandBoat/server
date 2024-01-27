@@ -2,8 +2,6 @@
 -- Area: Tahrongi Canyon
 --   NM: Herbage Hunter
 -----------------------------------
-require("scripts/globals/hunts")
------------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)
@@ -12,6 +10,7 @@ end
 
 entity.onMobDeath = function(mob, player, optParams)
     xi.hunts.checkHunt(mob, player, 259)
+    xi.magian.onMobDeath(mob, player, optParams, set{ 431 })
 end
 
 return entity

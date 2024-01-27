@@ -2,8 +2,6 @@
 -- Area: Sauromugue Champaign
 -- Field Manual
 -----------------------------------
-require("scripts/globals/regimes")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

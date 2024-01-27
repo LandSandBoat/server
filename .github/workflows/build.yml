@@ -24,14 +24,6 @@ jobs:
         fetch-depth: 0
     - name: Install Dependencies
       run: |
-        # https://mariadb.com/docs/connect/programming-languages/c/install/#connector-c-install-repo-configure-cs
-        # Ubuntu is using an old libmariadb but python3 pip expects it to be newer. Use the mariadb provided deb packages.
-        wget -P /tmp/ https://downloads.mariadb.com/MariaDB/mariadb_repo_setup
-        # Note: there is a sha256sum command here according to the above link, but I am unsure if this file may change with time
-        chmod +x /tmp/mariadb_repo_setup
-        sudo /tmp/mariadb_repo_setup --mariadb-server-version="mariadb-10.6"
-        # Remove the above when it's no longer necessary
-
         sudo apt-get update
         sudo apt-get install -y software-properties-common cppcheck luajit-5.1-dev luarocks mariadb-server-10.6 mariadb-client-10.6 libmariadb-dev-compat binutils-dev
         pip install -r tools/requirements.txt
@@ -96,15 +88,15 @@ jobs:
           exit 1
         fi
         exit 0
-    - name: CPP Formatting Checks
+    - name: CPP Formatting Checks (clang-format-15)
       if: always()
       run: |
-        clang-format-14 -version
+        clang-format-15 -version
         touch cpp_formatting_checks.txt
         for changed_file in ${{ steps.changed-files.outputs.all }}; do
           if [[ -f $changed_file ]]; then
             if [[ $changed_file == *.cpp || $changed_file == *.h ]]; then
-              clang-format-14 -style=file -i ${changed_file}
+              clang-format-15 -style=file -i ${changed_file}
             fi
           fi
         done
@@ -162,6 +154,9 @@ jobs:
             fi
           fi
         done
+
+        python3 tools/price_checker.py >> sql_checks.txt
+
         cat sql_checks.txt
         if [ -s sql_checks.txt ]
         then
@@ -186,7 +181,7 @@ jobs:
         fi
         exit 0
 
-  Linux_Clang14_64bit:
+  Linux_Clang15_64bit:
     needs: Sanity_Checks
     runs-on: ubuntu-22.04
     steps:
@@ -204,8 +199,8 @@ jobs:
     #    key: ${{ runner.os }}-clang
     - name: Configure CMake
       run: |
-        export CC=/usr/bin/clang-14
-        export CXX=/usr/bin/clang++-14
+        export CC=/usr/bin/clang-15
+        export CXX=/usr/bin/clang++-15
         mkdir -p build
         cmake -S . -B build
     - name: Build
@@ -221,10 +216,14 @@ jobs:
           xi_search
           xi_world
 
-  Linux_ClangTidy14_64bit:
+  Linux_ClangTidy15_64bit:
     needs: Sanity_Checks
     runs-on: ubuntu-22.04
     steps:
+    # workaround for broken clang on ubuntu runner until fixed: https://github.com/actions/runner-images/issues/8659
+    - uses: claywar/workaround8649@4892524a133793c85e25513fae79fc968e63877c
+      with:
+        os: ubuntu-22.04
     - uses: actions/checkout@v3
       with:
         fetch-depth: 1
@@ -239,8 +238,8 @@ jobs:
     #    key: ${{ runner.os }}-clang
     - name: Configure CMake
       run: |
-        export CC=/usr/bin/clang-14
-        export CXX=/usr/bin/clang++-14
+        export CC=/usr/bin/clang-15
+        export CXX=/usr/bin/clang++-15
         mkdir -p build
         cmake -S . -B build -DENABLE_CLANG_TIDY=ON
     - name: Build
@@ -252,7 +251,7 @@ jobs:
             exit 1
         fi
 
-  Linux_GCC11_64bit:
+  Linux_GCC13_64bit:
     needs: Sanity_Checks
     runs-on: ubuntu-22.04
     steps:
@@ -270,8 +269,8 @@ jobs:
     #    key: ${{ runner.os }}-gcc
     - name: Configure CMake
       run: |
-        export CC=/usr/bin/gcc-11
-        export CXX=/usr/bin/g++-11
+        export CC=/usr/bin/gcc-13
+        export CXX=/usr/bin/g++-13
         mkdir -p build
         CFLAGS=-m64 CXXFLAGS=-m64 LDFLAGS=-m64 cmake -S . -B build
     - name: Build
@@ -400,7 +399,7 @@ jobs:
 
   Full_Startup_Checks_Linux:
     runs-on: ubuntu-22.04
-    needs: Linux_Clang14_64bit
+    needs: Linux_Clang15_64bit
     services:
       mysql:
         image: mariadb:10.6
@@ -421,7 +420,7 @@ jobs:
     - name: Install Dependencies
       run: |
         sudo apt-get update
-        sudo apt-get install -y software-properties-common cmake mariadb-server-10.6 mariadb-client-10.6 libmariadb-dev-compat libluajit-5.1-dev libzmq3-dev zlib1g-dev libssl-dev luarocks binutils-dev
+        sudo apt-get install -y software-properties-common cmake mariadb-client-10.6 libmariadb-dev-compat libluajit-5.1-dev libzmq3-dev zlib1g-dev libssl-dev luarocks binutils-dev
     - name: Verify MySQL connection from container
       run: |
         mysql -h 127.0.0.1 -uroot -proot -e "SHOW DATABASES"
@@ -577,7 +576,7 @@ jobs:
 
   MultiInstance_Startup_Checks_Linux:
     runs-on: ubuntu-22.04
-    needs: Linux_Clang14_64bit
+    needs: Linux_Clang15_64bit
     services:
       mysql:
         image: mariadb:10.6
@@ -598,7 +597,7 @@ jobs:
     - name: Install Dependencies
       run: |
         sudo apt-get update
-        sudo apt-get install -y software-properties-common cmake mariadb-server-10.6 mariadb-client-10.6 libmariadb-dev-compat libluajit-5.1-dev libzmq3-dev zlib1g-dev libssl-dev luarocks binutils-dev
+        sudo apt-get install -y software-properties-common cmake mariadb-client-10.6 libmariadb-dev-compat libluajit-5.1-dev libzmq3-dev zlib1g-dev libssl-dev luarocks binutils-dev
     - name: Verify MySQL connection from container
       run: |
         mysql -h 127.0.0.1 -uroot -proot -e "SHOW DATABASES"

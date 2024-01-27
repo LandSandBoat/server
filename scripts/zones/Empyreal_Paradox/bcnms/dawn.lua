@@ -5,16 +5,13 @@
 -- instance 2 Promathia !pos 521 -0.500 517
 -- instance 3 Promathia !pos -519 120 -520
 -----------------------------------
-local ID = require("scripts/zones/Empyreal_Paradox/IDs")
-require("scripts/globals/battlefield")
-require("scripts/globals/missions")
-require("scripts/globals/titles")
+local ID = zones[xi.zone.EMPYREAL_PARADOX]
 -----------------------------------
 local battlefieldObject = {}
 
 battlefieldObject.onBattlefieldInitialise = function(battlefield)
-    battlefield:setLocalVar("phaseChange", 1)
-    battlefield:setLocalVar("instantKick", 1)
+    battlefield:setLocalVar('phaseChange', 1)
+    battlefield:setLocalVar('instantKick', 1)
     local baseID = ID.mob.PROMATHIA_OFFSET + (battlefield:getArea() - 1) * 2
     local pos = GetMobByID(baseID):getSpawnPos()
 
@@ -59,12 +56,12 @@ battlefieldObject.onEventFinish = function(player, csid, option, npc)
         player:startEvent(3)
         if
             player:getCurrentMission(xi.mission.log_id.COP) == xi.mission.id.cop.DAWN and
-            player:getCharVar("PromathiaStatus") == 2
+            player:getCharVar('PromathiaStatus') == 2
         then
             player:addKeyItem(xi.ki.TEAR_OF_ALTANA)
             player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.TEAR_OF_ALTANA)
-            player:setCharVar("Promathia_kill_day", getMidnight())
-            player:setCharVar("PromathiaStatus", 3)
+            player:setCharVar('Promathia_kill_day', getMidnight())
+            player:setCharVar('PromathiaStatus', 3)
         end
     end
 end

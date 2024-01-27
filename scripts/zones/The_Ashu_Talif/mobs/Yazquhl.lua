@@ -2,15 +2,15 @@
 -- Area: The Ashu Talif (Against All Odds)
 --  Mob: Yazquhl
 -----------------------------------
-local ID = require("scripts/zones/The_Ashu_Talif/IDs")
-mixins = { require("scripts/mixins/job_special") }
+local ID = zones[xi.zone.THE_ASHU_TALIF]
+mixins = { require('scripts/mixins/job_special') }
 -----------------------------------
 local entity = {}
 
 entity.onMobSpawn = function(mob)
     mob:addMod(xi.mod.SLEEP_MEVA, 150)
     mob:addMod(xi.mod.SILENCE_MEVA, 150)
-    mob:addListener("WEAPONSKILL_STATE_ENTER", "WS_START_MSG", function(mobArg, skillId)
+    mob:addListener('WEAPONSKILL_STATE_ENTER', 'WS_START_MSG', function(mobArg, skillId)
         -- Vorpal Blade
         if skillId == 40 then
             mobArg:showText(mobArg, ID.text.TAKE_THIS)

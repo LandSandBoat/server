@@ -4,7 +4,7 @@
 -- Notes: Tells ship ETA time
 -- !pos 0.278 -14.707 -1.411 220
 -----------------------------------
-local ID = require("scripts/zones/Ship_bound_for_Selbina_Pirates/IDs")
+local ID = zones[xi.zone.SHIP_BOUND_FOR_SELBINA_PIRATES]
 -----------------------------------
 local entity = {}
 

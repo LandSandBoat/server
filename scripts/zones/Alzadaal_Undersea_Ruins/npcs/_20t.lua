@@ -3,9 +3,7 @@
 -- Door: Gilded Gateway (Arrapago)
 -- !pos -580 0 -159 72
 -----------------------------------
-require("scripts/globals/missions")
-require("scripts/globals/besieged")
-local ID = require("scripts/zones/Alzadaal_Undersea_Ruins/IDs")
+local ID = zones[xi.zone.ALZADAAL_UNDERSEA_RUINS]
 -----------------------------------
 local entity = {}
 
@@ -76,7 +74,7 @@ entity.onInstanceCreated = function(player, target, instance)
                     v:setInstance(instance)
                     v:startEvent(116, 2)
                     v:delKeyItem(xi.ki.REMNANTS_PERMIT)
-                    v:setLocalVar("SalvageSilverSea", 1)
+                    v:setLocalVar('SalvageSilverSea', 1)
                 end
             end
         end

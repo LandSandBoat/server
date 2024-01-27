@@ -75,9 +75,9 @@ typedef std::pair<float, CCharEntity*> CharScorePair;
 CZoneEntities::CZoneEntities(CZone* zone)
 : m_zone(zone)
 , m_Transport(nullptr)
+, lastCharComputeTargId(0)
 , lastCharPersistTargId(0)
 {
-    lastCharComputeTargId = 0;
 }
 
 CZoneEntities::~CZoneEntities() = default;
@@ -100,7 +100,7 @@ void CZoneEntities::InsertPC(CCharEntity* PChar)
     PChar->loc.zone = m_zone;
     charTargIds.insert(PChar->targid);
     m_charList[PChar->targid] = PChar;
-    ShowDebug("CZone:: %s IncreaseZoneCounter <%u> %s", m_zone->GetName(), m_charList.size(), PChar->GetName());
+    ShowDebug("CZone:: %s IncreaseZoneCounter <%u> %s", m_zone->getName(), m_charList.size(), PChar->getName());
 }
 
 void CZoneEntities::InsertAlly(CBaseEntity* PMob)
@@ -223,15 +223,15 @@ void CZoneEntities::FindPartyForMob(CBaseEntity* PEntity)
 
     if (PEntity->objtype != TYPE_MOB)
     {
-        ShowWarning("Non-MOB was passed into function (%s).", PEntity->GetName());
+        ShowWarning("Non-MOB was passed into function (%s).", PEntity->getName());
         return;
     }
 
     CMobEntity* PMob = (CMobEntity*)PEntity;
 
     // force all mobs in a burning circle to link
-    ZONE_TYPE zonetype  = m_zone->GetType();
-    bool      forceLink = zonetype == ZONE_TYPE::DYNAMIS || PMob->getMobMod(MOBMOD_SUPERLINK);
+    ZONE_TYPE zonetype  = m_zone->GetTypeMask();
+    bool      forceLink = zonetype & ZONE_TYPE::DYNAMIS || PMob->getMobMod(MOBMOD_SUPERLINK);
 
     if ((forceLink || PMob->m_Link || PMob->m_Type & MOBTYPE_BATTLEFIELD) && PMob->PParty == nullptr)
     {
@@ -367,7 +367,7 @@ void CZoneEntities::DecreaseZoneCounter(CCharEntity* PChar)
 
     if (PChar->loc.zone != m_zone)
     {
-        ShowWarning("Zone mismatch for %s.", PChar->GetName());
+        ShowWarning("Zone mismatch for %s.", PChar->getName());
         return;
     }
 
@@ -451,12 +451,12 @@ void CZoneEntities::DecreaseZoneCounter(CCharEntity* PChar)
         synthutils::sendSynthDone(PChar);
     }
 
-    // TODO: могут возникать проблемы с переходом между одной и той же зоной (zone == prevzone)
+    // TODO: There may be problems transitioning between the same zone (zone == prevzone)
 
     m_charList.erase(PChar->targid);
     charTargIds.erase(PChar->targid);
 
-    ShowDebug("CZone:: %s DecreaseZoneCounter <%u> %s", m_zone->GetName(), m_charList.size(), PChar->GetName());
+    ShowDebug("CZone:: %s DecreaseZoneCounter <%u> %s", m_zone->getName(), m_charList.size(), PChar->getName());
 }
 
 uint16 CZoneEntities::GetNewCharTargID()
@@ -712,7 +712,19 @@ void CZoneEntities::SpawnPCs(CCharEntity* PChar)
 
     for (auto mobEntry : PChar->SpawnMOBList)
     {
-        CState* state = mobEntry.second->PAI->GetCurrentState();
+        auto* PMob = mobEntry.second;
+        if (PMob == nullptr)
+        {
+            // clang-format off
+            auto targId       = mobEntry.first - 0x1000000 - (m_zone->GetID() << 12);
+            auto isDynamicStr = targId >= 0x700 ? "Dynamic" : "Static";
+            ShowError(fmt::format("Empty {} Mob entry (targId: {}) found in {}'s SpawnMOBList in {}! This indicates an improperly cleaned-up Mob object! This is dangerous!",
+                                  isDynamicStr, targId, PChar->name, m_zone->getName()).c_str());
+            // clang-format on
+            continue;
+        }
+
+        CState* state = PMob->PAI->GetCurrentState();
         if (!state)
         {
             continue;
@@ -735,6 +747,19 @@ void CZoneEntities::SpawnPCs(CCharEntity* PChar)
 
         // Despawn character if it's a hidden GM, is in a different mog house, or if player is in a conflict while other is not, or too far up/down
         if (pc->m_isGMHidden || PChar->m_moghouseID != pc->m_moghouseID)
+        {
+            toRemove.emplace_back(pc);
+            continue;
+        }
+
+        // TODO: This is a temporary fix so that Feretory _seems_ like a solo zone.
+        // We need a better solution for this that properly supports:
+        // - Shared moghouse (both floors)
+        // - Mog Garden
+        // - Feretory
+        // and the NPCs that exist per-player in those zones (Garden, Music Items in MH, etc.)
+        // Despawn character if it's a hidden GM, is in a different mog house, or if player is in a conflict while other is not, or too far up/down
+        if (PChar->loc.zone->GetID() == ZONE_FERETORY)
         {
             toRemove.emplace_back(pc);
             continue;
@@ -1109,7 +1134,7 @@ CCharEntity* CZoneEntities::GetCharByName(const std::string& name)
         {
             CCharEntity* PCurrentChar = (CCharEntity*)it->second;
 
-            if (strcmpi(PCurrentChar->GetName().c_str(), name.c_str()) == 0)
+            if (strcmpi(PCurrentChar->getName().c_str(), name.c_str()) == 0)
             {
                 return PCurrentChar;
             }
@@ -1196,7 +1221,7 @@ void CZoneEntities::PushPacket(CBaseEntity* PEntity, GLOBAL_MESSAGE_TYPE message
         // clang-format off
         switch (message_type)
         {
-            case CHAR_INRANGE_SELF:
+            case CHAR_INRANGE_SELF: // NOTE!!!: This falls through to CHAR_INRANGE so both self and the local area get the packet
             {
                 TracyZoneCString("CHAR_INRANGE_SELF");
                 if (PEntity->objtype == TYPE_PC)
@@ -1340,7 +1365,7 @@ void CZoneEntities::WideScan(CCharEntity* PChar, uint16 radius)
 void CZoneEntities::ZoneServer(time_point tick)
 {
     TracyZoneScoped;
-    TracyZoneString(m_zone->GetName());
+    TracyZoneString(m_zone->getName());
 
     luautils::OnZoneTick(this->m_zone);
 
@@ -1354,6 +1379,8 @@ void CZoneEntities::ZoneServer(time_point tick)
             it++;
             continue;
         }
+
+        ShowTrace(fmt::format("CZoneEntities::ZoneServer: Mob: {} ({})", PMob->getName(), PMob->id).c_str());
 
         if (PMob->PBattlefield && PMob->PBattlefield->CanCleanup())
         {
@@ -1373,9 +1400,19 @@ void CZoneEntities::ZoneServer(time_point tick)
 
         if (PMob->status == STATUS_TYPE::DISAPPEAR && PMob->m_bReleaseTargIDOnDisappear)
         {
+            if (PMob->PPet != nullptr)
+            {
+                PMob->PPet->PMaster = nullptr;
+            }
+
+            if (PMob->PMaster != nullptr)
+            {
+                PMob->PMaster->PPet = nullptr;
+            }
+
             for (auto PMobIt : m_mobList)
             {
-                CMobEntity* PCurrentMob = (CMobEntity*)PMobIt.second;
+                CMobEntity* PCurrentMob = static_cast<CMobEntity*>(PMobIt.second);
                 PCurrentMob->PEnmityContainer->Clear(PMob->id);
             }
 
@@ -1386,8 +1423,19 @@ void CZoneEntities::ZoneServer(time_point tick)
 
             for (EntityList_t::const_iterator it = m_charList.begin(); it != m_charList.end(); ++it)
             {
-                CCharEntity* PChar = (CCharEntity*)it->second;
-                if (distance(PChar->loc.p, PMob->loc.p) < 50)
+                CCharEntity* PChar = static_cast<CCharEntity*>(it->second);
+
+                if (PChar->PClaimedMob == PMob)
+                {
+                    PChar->PClaimedMob = nullptr;
+                }
+
+                if (PChar->currentEvent && PChar->currentEvent->targetEntity == PMob)
+                {
+                    PChar->currentEvent->targetEntity = nullptr;
+                }
+
+                if (PChar->SpawnMOBList.find(PMob->id) != PChar->SpawnMOBList.end())
                 {
                     PChar->SpawnMOBList.erase(PMob->id);
                 }
@@ -1429,6 +1477,9 @@ void CZoneEntities::ZoneServer(time_point tick)
     while (it != m_npcList.end())
     {
         CNpcEntity* PNpc = (CNpcEntity*)it->second;
+
+        ShowTrace(fmt::format("CZoneEntities::ZoneServer: NPC: {} ({})", PNpc->getName(), PNpc->id).c_str());
+
         PNpc->PAI->Tick(tick);
 
         // This is only valid for dynamic entities
@@ -1437,7 +1488,7 @@ void CZoneEntities::ZoneServer(time_point tick)
             for (EntityList_t::const_iterator it = m_charList.begin(); it != m_charList.end(); ++it)
             {
                 CCharEntity* PChar = (CCharEntity*)it->second;
-                if (distance(PChar->loc.p, PNpc->loc.p) < 50)
+                if (PChar->SpawnNPCList.find(PNpc->id) != PChar->SpawnNPCList.end())
                 {
                     PChar->SpawnNPCList.erase(PNpc->id);
                 }
@@ -1459,6 +1510,8 @@ void CZoneEntities::ZoneServer(time_point tick)
         //     : this way, but we need to do this to keep allies working (for now).
         if (auto* PPet = static_cast<CPetEntity*>(it->second))
         {
+            ShowTrace(fmt::format("CZoneEntities::ZoneServer: Pet: {} ({})", PPet->getName(), PPet->id).c_str());
+
             /*
              * Pets specifically need to be removed prior to evaluating their AI Tick
              * to prevent a number of issues which can result as a Pet having a
@@ -1500,6 +1553,8 @@ void CZoneEntities::ZoneServer(time_point tick)
     {
         if (CTrustEntity* PTrust = dynamic_cast<CTrustEntity*>(it->second))
         {
+            ShowTrace(fmt::format("CZoneEntities::ZoneServer: Trust: {} ({})", PTrust->getName(), PTrust->id).c_str());
+
             PTrust->PRecastContainer->Check();
             PTrust->StatusEffectContainer->CheckEffectsExpiry(tick);
             if (tick > m_EffectCheckTime)
@@ -1543,6 +1598,8 @@ void CZoneEntities::ZoneServer(time_point tick)
     for (EntityList_t::const_iterator it = m_charList.begin(); it != m_charList.end(); ++it)
     {
         CCharEntity* PChar = (CCharEntity*)it->second;
+
+        ShowTrace(fmt::format("CZoneEntities::ZoneServer: Char: {} ({})", PChar->getName(), PChar->id).c_str());
 
         if (PChar->status != STATUS_TYPE::SHUTDOWN)
         {

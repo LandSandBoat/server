@@ -3,8 +3,6 @@
 --  NPC: Emitt
 -- !pos -95 0 160 244
 -----------------------------------
-require("scripts/globals/conquest")
------------------------------------
 local entity = {}
 
 local guardNation = xi.nation.OTHER

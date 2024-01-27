@@ -19,10 +19,9 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 ===========================================================================
 */
 
-#include "common/logging.h"
-#include "common/timer.h"
-
 #include "lua_instance.h"
+
+#include "common/logging.h"
 
 #include "instance.h"
 #include "lua_baseentity.h"
@@ -251,6 +250,11 @@ std::optional<CLuaBaseEntity> CLuaInstance::insertAlly(uint32 groupid)
     return std::nullopt;
 }
 
+auto CLuaInstance::insertDynamicEntity(sol::table table) -> std::optional<CLuaBaseEntity>
+{
+    return luautils::GenerateDynamicEntity(m_PLuaInstance->GetZone(), m_PLuaInstance, std::move(table));
+}
+
 //==========================================================//
 
 void CLuaInstance::Register()
@@ -284,6 +288,7 @@ void CLuaInstance::Register()
     SOL_REGISTER("complete", CLuaInstance::complete);
     SOL_REGISTER("completed", CLuaInstance::completed);
     SOL_REGISTER("insertAlly", CLuaInstance::insertAlly);
+    SOL_REGISTER("insertDynamicEntity", CLuaInstance::insertDynamicEntity);
     SOL_REGISTER("getLocalVar", CLuaInstance::getLocalVar);
     SOL_REGISTER("setLocalVar", CLuaInstance::setLocalVar);
 }

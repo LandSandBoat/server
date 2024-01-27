@@ -2,13 +2,11 @@
 -- Area: Wajaom Woodlands
 --   NM: Gharial
 -----------------------------------
-require("scripts/globals/hunts")
------------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)
     mob:setMod(xi.mod.DOUBLE_ATTACK, 50)
-    mob:setMod(xi.mod.MOVE, 12)
+    mob:setMod(xi.mod.MOVE_SPEED_STACKABLE, 12)
 end
 
 entity.onMobDeath = function(mob, player, optParams)

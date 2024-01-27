@@ -4,11 +4,7 @@
 -- Caedarva Mire (Azouph) Teleporter Back to Aht Urhgan Whitegate
 -- !pos 524 -28 -503 79
 -----------------------------------
-local ID = require("scripts/zones/Caedarva_Mire/IDs")
------------------------------------
-require("scripts/globals/besieged")
-require("scripts/globals/missions")
-require("scripts/globals/teleports")
+local ID = zones[xi.zone.CAEDARVA_MIRE]
 -----------------------------------
 local entity = {}
 

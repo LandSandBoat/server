@@ -2,8 +2,8 @@
 -- Area: QuBia_Arena
 --  Mob: Death Clan Destroyer
 -----------------------------------
-local global = require("scripts/zones/QuBia_Arena/Globals")
-local ID = require("scripts/zones/QuBia_Arena/IDs")
+local global = require('scripts/zones/QuBia_Arena/Globals')
+local ID = zones[xi.zone.QUBIA_ARENA]
 -----------------------------------
 local entity = {}
 
@@ -24,18 +24,18 @@ entity.onMobFight = function(mob, target)
     for i = instOffset + 3, instOffset + 12 do
         if GetMobByID(i):getCurrentAction() == xi.act.SLEEP then
             if mob:actionQueueEmpty() then
-                if mob:getLocalVar("cooldown") == 0 then
+                if mob:getLocalVar('cooldown') == 0 then
                     mob:castSpell(8, GetMobByID(i))
-                    mob:setLocalVar("cooldown", 20)
+                    mob:setLocalVar('cooldown', 20)
                 end
             else
-                mob:setLocalVar("cooldown", 20)
+                mob:setLocalVar('cooldown', 20)
             end
         end
     end
 
-    if mob:getLocalVar("cooldown") > 0 then
-        mob:setLocalVar("cooldown", mob:getLocalVar("cooldown") - 1)
+    if mob:getLocalVar('cooldown') > 0 then
+        mob:setLocalVar('cooldown', mob:getLocalVar('cooldown') - 1)
     end
 end
 

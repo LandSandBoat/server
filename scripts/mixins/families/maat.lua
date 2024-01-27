@@ -1,41 +1,41 @@
-require("scripts/globals/mixins")
+require('scripts/globals/mixins')
 
 g_mixins = g_mixins or {}
 
 g_mixins.maat = function(maatMob)
-    maatMob:addListener("SPAWN", "JOB_SPECIAL_SPAWN", function(mob)
+    maatMob:addListener('SPAWN', 'JOB_SPECIAL_SPAWN', function(mob)
         if mob:getMainJob() == xi.job.NIN then
-            mob:setLocalVar("specialThreshold", 40)
+            mob:setLocalVar('specialThreshold', 40)
         elseif mob:getMainJob() == xi.job.DRG then
-            mob:setLocalVar("specialThreshold", 75)
+            mob:setLocalVar('specialThreshold', 75)
         else
-            mob:setLocalVar("specialThreshold", math.random(50, 60))
+            mob:setLocalVar('specialThreshold', math.random(50, 60))
         end
     end)
 
-    maatMob:addListener("ROAM_TICK", "MAAT_RTICK", function(mob)
-        if mob:getLocalVar("engaged") == 0 then
+    maatMob:addListener('ROAM_TICK', 'MAAT_RTICK', function(mob)
+        if mob:getLocalVar('engaged') == 0 then
             local players = mob:getZone():getPlayers()
             for _, player in pairs(players) do
                 if player:checkDistance(mob) < 8 then
                     local ID = zones[mob:getZoneID()]
                     mob:messageText(mob, ID.text.YOU_DECIDED_TO_SHOW_UP)
-                    mob:setLocalVar("engaged", player:getID())
+                    mob:setLocalVar('engaged', player:getID())
                 end
             end
         end
     end)
 
-    maatMob:addListener("ENGAGE", "MAAT_ENGAGE", function(mob, target)
-        if mob:getLocalVar("engaged") == 0 then
+    maatMob:addListener('ENGAGE', 'MAAT_ENGAGE', function(mob, target)
+        if mob:getLocalVar('engaged') == 0 then
             local ID = zones[mob:getZoneID()]
             mob:messageText(mob, ID.text.YOU_DECIDED_TO_SHOW_UP)
-            mob:setLocalVar("engaged", target:getID())
+            mob:setLocalVar('engaged', target:getID())
         end
     end)
 
-    maatMob:addListener("DISENGAGE", "MAAT_DISENGAGE", function(mob)
-        local engagedID = mob:getLocalVar("engaged")
+    maatMob:addListener('DISENGAGE', 'MAAT_DISENGAGE', function(mob)
+        local engagedID = mob:getLocalVar('engaged')
         if engagedID ~= 0 then
             local player = GetPlayerByID(engagedID)
             if player:getHP() == 0 then
@@ -45,7 +45,7 @@ g_mixins.maat = function(maatMob)
         end
     end)
 
-    maatMob:addListener("COMBAT_TICK", "MAAT_CTICK", function(mob)
+    maatMob:addListener('COMBAT_TICK', 'MAAT_CTICK', function(mob)
         local defaultAbility =
         {
             [xi.job.WAR] = xi.jsa.MIGHTY_STRIKES_MAAT,
@@ -65,11 +65,11 @@ g_mixins.maat = function(maatMob)
             [xi.job.SMN] = xi.jsa.ASTRAL_FLOW_MAAT,
         }
 
-        if mob:getHPP() < mob:getLocalVar("specialThreshold") then
+        if mob:getHPP() < mob:getLocalVar('specialThreshold') then
             local ID = zones[mob:getZoneID()]
             mob:messageText(mob, ID.text.NOW_THAT_IM_WARMED_UP)
             mob:useMobAbility(defaultAbility[mob:getMainJob()])
-            mob:setLocalVar("specialThreshold", 0)
+            mob:setLocalVar('specialThreshold', 0)
         end
 
         if
@@ -82,7 +82,7 @@ g_mixins.maat = function(maatMob)
         end
     end)
 
-    maatMob:addListener("ITEM_STOLEN", "MAAT_ITEM_STOLEN", function(mob, player, itemId)
+    maatMob:addListener('ITEM_STOLEN', 'MAAT_ITEM_STOLEN', function(mob, player, itemId)
         if mob:getMainJob() == xi.job.THF then
             local ID = zones[mob:getZoneID()]
             mob:messageText(mob, ID.text.YOUVE_COME_A_LONG_WAY)
@@ -90,17 +90,17 @@ g_mixins.maat = function(maatMob)
         end
     end)
 
-    maatMob:addListener("DEATH", "MAAT_DEATH", function(mob, killer)
+    maatMob:addListener('DEATH', 'MAAT_DEATH', function(mob, killer)
         local ID = zones[mob:getZoneID()]
         mob:messageText(mob, ID.text.YOUVE_COME_A_LONG_WAY)
     end)
 
-    maatMob:addListener("WEAPONSKILL_TAKE", "MAAT_WEAPONSKILL_TAKE", function(target, user, wsid, tp, action)
+    maatMob:addListener('WEAPONSKILL_TAKE', 'MAAT_WEAPONSKILL_TAKE', function(target, user, wsid, tp, action)
         local ID = zones[target:getZoneID()]
         target:messageText(target, ID.text.THAT_LL_HURT_IN_THE_MORNING)
     end)
 
-    maatMob:addListener("WEAPONSKILL_USE", "MAAT_WEAPONSKILL_USE", function(mob, target, wsid, tp, action)
+    maatMob:addListener('WEAPONSKILL_USE', 'MAAT_WEAPONSKILL_USE', function(mob, target, wsid, tp, action)
         local ID = zones[mob:getZoneID()]
         if wsid == 1028 then -- Tackle
             mob:messageText(mob, ID.text.TAKE_THAT_YOU_WHIPPERSNAPPER)

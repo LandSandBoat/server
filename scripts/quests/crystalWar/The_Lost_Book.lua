@@ -10,16 +10,12 @@
 -- Optistery Door        - !pos -57 -5.0 89 94
 -- qm0                   - !pos -141 1 -9 99
 -----------------------------------
-require('scripts/globals/interaction/quest')
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
------------------------------------
 
 local quest = Quest:new(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.THE_LOST_BOOK)
 
 quest.reward =
 {
-    item = xi.items.SCROLL_OF_RETRACE,
+    item = xi.item.SCROLL_OF_RETRACE,
 }
 
 quest.sections =
@@ -62,7 +58,7 @@ quest.sections =
             ['Quu_Bokye'] =
             {
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, xi.items.MYTHRIL_BEASTCOIN) then
+                    if npcUtil.tradeHasExactly(trade, xi.item.MYTHRIL_BEASTCOIN) then
                         return quest:progressEvent(65)
                     end
                 end,
@@ -153,7 +149,7 @@ quest.sections =
             ['Door_Optistery'] =
             {
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, xi.items.SHEET_OF_VELLUM) then
+                    if npcUtil.tradeHasExactly(trade, xi.item.SHEET_OF_VELLUM) then
                         return quest:progressEvent(146)
                     end
                 end,
@@ -165,7 +161,7 @@ quest.sections =
                     player:confirmTrade()
                     player:delKeyItem(xi.ki.LYNX_PELT)
                     quest:setVar(player, 'Prog', 5)
-                    quest:setVar(player, "Timer", VanadielUniqueDay() + 1)
+                    quest:setVar(player, 'Timer', VanadielUniqueDay() + 1)
                 end,
             },
         },
@@ -175,7 +171,7 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == QUEST_ACCEPTED and vars.Prog == 5 and
-                quest:getVar(player, "Timer") <= VanadielUniqueDay()
+                quest:getVar(player, 'Timer') <= VanadielUniqueDay()
         end,
 
         [xi.zone.WINDURST_WATERS_S] =

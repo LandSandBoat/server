@@ -1,4 +1,4 @@
-local ID = require('scripts/zones/Southern_San_dOria_[S]/IDs')
+local ID = zones[xi.zone.SOUTHERN_SAN_DORIA_S]
 
 return {
     ['_6eo']                     = { text = ID.text.GATE_IS_LOCKED }, -- Yes, even though it's a door.
@@ -54,7 +54,7 @@ return {
     ['Rongelouts_N_Distaud']     = { event = 604 },
     ['Sabiliont']                = { event = 608 },
     ['Saphiriance_TK']           = { event = 450 },
-    ['Scarlette_CA']             = { event = 489 },
+    ['Scarlette_CA']             = { event = 459 },
     ['Suspicious_Object']        = { text = ID.text.NOTHING_OUT_OF_ORDINARY },
     ['Thierride']                = { event = 333 },
     ['Touttaures']               = { event = 603 },

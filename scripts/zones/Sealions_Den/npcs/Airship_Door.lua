@@ -2,7 +2,7 @@
 -- Area: Sealion's Den
 --  NPC: Airship_Door
 -----------------------------------
-local oneToBeFeared = require("scripts/zones/Sealions_Den/bcnms/one_to_be_feared_helper")
+local oneToBeFeared = require('scripts/zones/Sealions_Den/bcnms/one_to_be_feared_helper')
 -----------------------------------
 local entity = {}
 

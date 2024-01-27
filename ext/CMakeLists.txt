@@ -17,7 +17,7 @@ message(STATUS "TRACY_ENABLE: ${TRACY_ENABLE}")
 # CPM Modules
 if(TRACY_ENABLE)
     # Tracy version tag, without the leading 'v'
-    set(TRACY_VERSION 0.9.1)
+    set(TRACY_VERSION 0.10)
 
     # Download client library
     CPMAddPackage(
@@ -59,21 +59,25 @@ if(TRACY_ENABLE)
     endif()
 endif(TRACY_ENABLE)
 
-# NOTE: We are not using the latest versions of spdlog, since the
-#     : version of fmt it is bundled with deprecated some arg mapping
-#     : that we use in a lot of places (formatting enums as ints and
-#     : formatting non-void pointers).
+CPMAddPackage(
+    NAME fmt
+    GITHUB_REPOSITORY fmtlib/fmt
+    GIT_TAG 10.1.1
+) # defines: fmt::fmt
+
 CPMAddPackage(
     NAME spdlog
     GITHUB_REPOSITORY gabime/spdlog
-    GIT_TAG v1.9.2
+    GIT_TAG v1.12.0
+    OPTIONS
+        "SPDLOG_ENABLE_PCH ON"
+        "SPDLOG_FMT_EXTERNAL ON"
 ) # defines: spdlog
 
-# NOTE: Using the 'release-2.0' branch
 CPMAddPackage(
     NAME recastnavigation
     GITHUB_REPOSITORY recastnavigation/recastnavigation
-    GIT_TAG 67c36bda750f36b2b4152db57a23170ed7a0683c
+    GIT_TAG cd898904b72a300011fbb24d578620bafa08ef2c
     OPTIONS
         "RECASTNAVIGATION_DEMO OFF"
         "RECASTNAVIGATION_TESTS OFF"
@@ -122,6 +126,13 @@ CPMAddPackage(
     GIT_TAG 5332bbd46dcba5f028a844795cc0931e9f2ffdf4
 ) # defines: jthread-lite
 
+# TODO: std::expected lands in C++23. Remove this once all compilers for all platforms implement.
+CPMAddPackage(
+    NAME expected-lite
+    GITHUB_REPOSITORY martinmoene/expected-lite
+    GIT_TAG 45a54fac224e5aae5f8e70bb1c2423181ae554da
+) # defines: expected-lite
+
 CPMAddPackage(
     NAME cpp-httplib
     GITHUB_REPOSITORY yhirose/cpp-httplib
@@ -131,7 +142,7 @@ CPMAddPackage(
 CPMAddPackage(
     NAME json
     GITHUB_REPOSITORY nlohmann/json
-    GIT_TAG v3.11.2
+    GIT_TAG 254395e5f7731b5595e7c11ac4b929c923582114
 ) # defines: nlohmann_json::nlohmann_json
 
 CPMAddPackage(
@@ -201,6 +212,7 @@ if(asio_ADDED)
 endif()
 
 set(EXTERNAL_LIBS
+    fmt::fmt
     spdlog
     concurrentqueue
     mariadbclient
@@ -212,6 +224,7 @@ set(EXTERNAL_LIBS
     task_system
     efsw
     jthread-lite
+    expected-lite
     httplib::httplib
     nlohmann_json::nlohmann_json
     pcg-cpp

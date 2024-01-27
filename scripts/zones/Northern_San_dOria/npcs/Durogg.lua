@@ -4,8 +4,6 @@
 -- Type: Past Event Watcher
 -- !pos 15 0 -18 231
 -----------------------------------
-require("scripts/globals/quests")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
@@ -32,8 +30,8 @@ entity.onTrigger = function(player, npc)
     -- Determine if any cutscenes are available for the player.
     local gil = player:getGil()
     if
-        addonScenarios    == 0xFFFFFFFE and
-        seekersOfAdoulin  == 0xFFFFFFFE
+        addonScenarios == 0xFFFFFFFE and
+        seekersOfAdoulin == 0xFFFFFFFE
     then -- Player has no cutscenes available to be viewed.
         gil = 0 -- Setting gil to a value less than 10(cost) will trigger the appropriate response from this npc.
     end
@@ -43,15 +41,15 @@ end
 
 entity.onEventUpdate = function(player, csid, option, npc)
     if not player:delGil(10) then
-        player:setLocalVar("Durogg_PlayCutscene", 2)  -- Cancel the cutscene.
+        player:setLocalVar('Durogg_PlayCutscene', 2)  -- Cancel the cutscene.
         player:updateEvent(0)
     else
-        player:setLocalVar("Durogg_PlayCutscene", 1)
+        player:setLocalVar('Durogg_PlayCutscene', 1)
     end
 end
 
 entity.onEventFinish = function(player, csid, option, npc)
-    if player:getLocalVar("Durogg_PlayCutscene") < 2 then
+    if player:getLocalVar('Durogg_PlayCutscene') < 2 then
         if option == 1 then        -- Drenched! It Began with a Raindrop
             player:startEvent(30025, 0, 0, 0, 0, 0, 0, 231)
 --        elseif option == 2 then        -- Hasten! In a Jam in Jeuno?
@@ -61,7 +59,7 @@ entity.onEventFinish = function(player, csid, option, npc)
         end
     end
 
-    player:setLocalVar("Durogg_PlayCutscene", 0)
+    player:setLocalVar('Durogg_PlayCutscene', 0)
 end
 
 return entity

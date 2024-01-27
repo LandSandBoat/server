@@ -3,16 +3,15 @@
 --   NM: Jailer of Prudence
 -- AnimationSubs: 0 - Normal, 3 - Mouth Open
 -----------------------------------
-local ID = require("scripts/zones/AlTaieu/IDs")
-mixins = { require("scripts/mixins/job_special") }
-require("scripts/globals/roe")
+local ID = zones[xi.zone.ALTAIEU]
+mixins = { require('scripts/mixins/job_special') }
 -----------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.NO_DROPS, 1)
 
-    mob:addListener("WEAPONSKILL_BEFORE_USE", "JOP_WS_MIRROR", function(mobArg, skillid)
+    mob:addListener('WEAPONSKILL_BEFORE_USE', 'JOP_WS_MIRROR', function(mobArg, skillid)
         if mobArg:getLocalVar('mirrored_ws') == 1 then
             mobArg:setLocalVar('mirrored_ws', 0)
             return
@@ -61,15 +60,15 @@ end
 entity.onMobDeath = function(mob, player, optParams)
     local firstPrudence  = GetMobByID(ID.mob.JAILER_OF_PRUDENCE_1)
     local secondPrudence = GetMobByID(ID.mob.JAILER_OF_PRUDENCE_2)
-    local count          = player:getLocalVar("prudenceCount")
+    local count          = player:getLocalVar('prudenceCount')
 
     if firstPrudence or secondPrudence then
-        player:setLocalVar("prudenceCount", count + 1)
+        player:setLocalVar('prudenceCount', count + 1)
     end
 
     if count >= 2 and player:hasEminenceRecord(770) then
         xi.roe.onRecordTrigger(player, 770)
-        player:setLocalVar("prudenceCount", 0)
+        player:setLocalVar('prudenceCount', 0)
     end
 end
 

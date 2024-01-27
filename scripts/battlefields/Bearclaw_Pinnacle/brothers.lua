@@ -4,8 +4,7 @@
 -- !addkeyitem ZEPHYR_FAN
 -- !pos 121 -171 758 6
 -----------------------------------
-local ID = require("scripts/zones/Bearclaw_Pinnacle/IDs")
-require("scripts/globals/battlefield")
+local ID = zones[xi.zone.BEARCLAW_PINNACLE]
 -----------------------------------
 
 local content = Battlefield:new({
@@ -15,8 +14,8 @@ local content = Battlefield:new({
     levelCap         = 75,
     timeLimit        = utils.minutes(30),
     index            = 3,
-    entryNpc         = "Wind_Pillar_4",
-    exitNpc          = "Wind_Pillar_Exit",
+    entryNpc         = 'Wind_Pillar_4',
+    exitNpc          = 'Wind_Pillar_Exit',
     requiredKeyItems = { xi.ki.ZEPHYR_FAN, message = ID.text.ZEPHYR_RIPS },
     grantXP          = 3500,
 })
@@ -24,7 +23,7 @@ local content = Battlefield:new({
 content.groups =
 {
     {
-        mobs = { "Eldertaur" },
+        mobs = { 'Eldertaur' },
         mods =
         {
             [xi.mod.DMGMAGIC  ] = -1000,
@@ -37,7 +36,7 @@ content.groups =
         },
     },
     {
-        mobs = { "Mindertaur" },
+        mobs = { 'Mindertaur' },
         mods =
         {
             [xi.mod.DMGMAGIC    ] = -1000,
@@ -52,30 +51,30 @@ content.groups =
     },
 }
 
-content:addEssentialMobs({ "Eldertaur", "Mindertaur" })
+content:addEssentialMobs({ 'Eldertaur', 'Mindertaur' })
 
 content.loot =
 {
     {
-        { item = xi.items.NONE,                     weight = xi.loot.weight.VERY_LOW },
-        { item = xi.items.SQUARE_OF_ELTORO_LEATHER, weight = xi.loot.weight.NORMAL   },
-        { item = xi.items.PIECE_OF_CASSIA_LUMBER,   weight = xi.loot.weight.NORMAL   },
-        { item = xi.items.DRAGON_BONE,              weight = xi.loot.weight.NORMAL   },
+        { item = xi.item.NONE,                     weight = xi.loot.weight.VERY_LOW },
+        { item = xi.item.SQUARE_OF_ELTORO_LEATHER, weight = xi.loot.weight.NORMAL   },
+        { item = xi.item.PIECE_OF_CASSIA_LUMBER,   weight = xi.loot.weight.NORMAL   },
+        { item = xi.item.DRAGON_BONE,              weight = xi.loot.weight.NORMAL   },
     },
 
     {
-        { item = xi.items.NONE,         weight = xi.loot.weight.EXTREMELY_HIGH },
-        { item = xi.items.CLOUD_EVOKER, weight = xi.loot.weight.LOW            },
+        { item = xi.item.NONE,         weight = xi.loot.weight.EXTREMELY_HIGH },
+        { item = xi.item.CLOUD_EVOKER, weight = xi.loot.weight.LOW            },
     },
 
     {
         quantity = 2,
-        { item = xi.items.NONE,                weight = xi.loot.weight.HIGH },
-        { item = xi.items.SCOUTERS_ROPE,       weight = xi.loot.weight.LOW  },
-        { item = xi.items.HEDGEHOG_BOMB,       weight = xi.loot.weight.LOW  },
-        { item = xi.items.MARTIAL_ANELACE,     weight = xi.loot.weight.LOW  },
-        { item = xi.items.MARTIAL_LANCE,       weight = xi.loot.weight.LOW  },
-        { item = xi.items.SCROLL_OF_RAISE_III, weight = xi.loot.weight.HIGH },
+        { item = xi.item.NONE,                weight = xi.loot.weight.HIGH },
+        { item = xi.item.SCOUTERS_ROPE,       weight = xi.loot.weight.LOW  },
+        { item = xi.item.HEDGEHOG_BOMB,       weight = xi.loot.weight.LOW  },
+        { item = xi.item.MARTIAL_ANELACE,     weight = xi.loot.weight.LOW  },
+        { item = xi.item.MARTIAL_LANCE,       weight = xi.loot.weight.LOW  },
+        { item = xi.item.SCROLL_OF_RAISE_III, weight = xi.loot.weight.HIGH },
     },
 }
 

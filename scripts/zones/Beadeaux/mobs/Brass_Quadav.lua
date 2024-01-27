@@ -3,8 +3,7 @@
 --  Mob: Brass Quadav
 -- Note: PH for Bi'Gho Headtaker
 -----------------------------------
-local ID = require("scripts/zones/Beadeaux/IDs")
-require("scripts/globals/mobs")
+local ID = zones[xi.zone.BEADEAUX]
 -----------------------------------
 local entity = {}
 

@@ -4,9 +4,7 @@
 -- Involved in Quests: Hat in Hand
 -- !pos -66 -3 -148 238
 -----------------------------------
-local ID = require("scripts/zones/Windurst_Waters/IDs")
-require("scripts/globals/quests")
-require("scripts/globals/utils")
+local ID = zones[xi.zone.WINDURST_WATERS]
 -----------------------------------
 local entity = {}
 
@@ -14,7 +12,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local hatMask = player:getCharVar("QuestHatInHand_var")
+    local hatMask = player:getCharVar('QuestHatInHand_var')
 
     if
         player:hasKeyItem(xi.ki.NEW_MODEL_HAT) and
@@ -37,8 +35,8 @@ end
 
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 61 then
-        player:setCharVar("QuestHatInHand_var", utils.mask.setBit(player:getCharVar("QuestHatInHand_var"), 7, true))
-        player:incrementCharVar("QuestHatInHand_count", 1)
+        player:setCharVar('QuestHatInHand_var', utils.mask.setBit(player:getCharVar('QuestHatInHand_var'), 7, true))
+        player:incrementCharVar('QuestHatInHand_count', 1)
     end
 end
 

@@ -15,20 +15,16 @@
 -- qm5 (Eggblix)  : !pos -462.436 2.456 -141.171 191
 -- qm2 (???)      : !pos -232.924 99.107 442.990 106
 -----------------------------------
-require('scripts/globals/interaction/quest')
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
------------------------------------
-local dangrufID        = require("scripts/zones/Dangruf_Wadi/IDs")
-local northGustabergID = require("scripts/zones/North_Gustaberg/IDs")
-local sauromugueID     = require("scripts/zones/Sauromugue_Champaign/IDs")
+local dangrufID        = zones[xi.zone.DANGRUF_WADI]
+local northGustabergID = zones[xi.zone.NORTH_GUSTABERG]
+local sauromugueID     = zones[xi.zone.SAUROMUGUE_CHAMPAIGN]
 -----------------------------------
 
 local quest = Quest:new(xi.quest.log_id.WINDURST, xi.quest.id.windurst.AS_THICK_AS_THIEVES)
 
 quest.reward =
 {
-    item = xi.items.ROGUES_BONNET,
+    item = xi.item.ROGUES_BONNET,
 }
 
 local function isNaked(player)
@@ -42,8 +38,8 @@ local function isNaked(player)
 end
 
 local towerIncorrectTrade = function(player, npc, trade)
-    if npcUtil.tradeHasExactly(trade, xi.items.GRAPNEL) then
-        return quest:messageSpecial(sauromugueID.text.THF_AF_WALL_OFFSET + 3, 0, xi.items.GRAPNEL)
+    if npcUtil.tradeHasExactly(trade, xi.item.GRAPNEL) then
+        return quest:messageSpecial(sauromugueID.text.THF_AF_WALL_OFFSET + 3, 0, xi.item.GRAPNEL)
     end
 end
 
@@ -51,7 +47,7 @@ local towerOnTrigger = function(player, npc)
     if not player:hasKeyItem(xi.ki.FIRST_SIGNED_FORGED_ENVELOPE) then
         if
             quest:getLocalVar(npc, 'Option') == 1 and
-            not player:findItem(xi.items.GRAPNEL) and
+            not player:findItem(xi.item.GRAPNEL) and
             npcUtil.popFromQM(player, npc, sauromugueID.mob.CLIMBPIX_HIGHRISE, { radius = 1, hide = 0 })
         then
             return quest:messageSpecial(sauromugueID.text.THF_AF_MOB)
@@ -71,7 +67,7 @@ local function handleDangrufMinigame(player, winEventId, loseEventId, itemPlaced
 
     if rand1 > rand2 then
         player:messageSpecial(dangrufID.text.YOU_PLACE_ITEM, 0, itemPlaced)
-        return quest:progressEvent(winEventId, xi.items.REGAL_DIE, 0, rand1, rand2)
+        return quest:progressEvent(winEventId, xi.item.REGAL_DIE, 0, rand1, rand2)
     else
         player:messageSpecial(dangrufID.text.YOU_PLACE_ITEM, 0, itemPlaced)
         return quest:progressEvent(loseEventId, 0, 0, rand1, rand2)
@@ -148,12 +144,12 @@ quest.sections =
             ['qm3'] =
             {
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, xi.items.CHUNK_OF_ROCK_SALT) then
+                    if npcUtil.tradeHasExactly(trade, xi.item.CHUNK_OF_ROCK_SALT) then
                         local questProgress = quest:getVar(player, 'Prog')
                         local eventOffset   = quest:getVar(player, 'failedGame') == 0 and 136 or 142
 
                         if questProgress == 1 then
-                            return handleDangrufMinigame(player, eventOffset, eventOffset + 3, xi.items.CHUNK_OF_ROCK_SALT)
+                            return handleDangrufMinigame(player, eventOffset, eventOffset + 3, xi.item.CHUNK_OF_ROCK_SALT)
                         elseif questProgress > 1 then
                             player:messageSpecial(dangrufID.text.BEAT_SALTVIX)
                         end
@@ -164,11 +160,11 @@ quest.sections =
             ['qm4'] =
             {
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, xi.items.CLUMP_OF_GAUSEBIT_WILDGRASS) then
+                    if npcUtil.tradeHasExactly(trade, xi.item.CLUMP_OF_GAUSEBIT_WILDGRASS) then
                         local questProgress = quest:getVar(player, 'Prog')
 
                         if questProgress == 2 then
-                            return handleDangrufMinigame(player, 137, 140, xi.items.CLUMP_OF_GAUSEBIT_WILDGRASS)
+                            return handleDangrufMinigame(player, 137, 140, xi.item.CLUMP_OF_GAUSEBIT_WILDGRASS)
                         elseif questProgress < 2 then
                             return quest:messageSpecial(dangrufID.text.DONT_WASTE_TIME)
                         elseif questProgress > 2 then
@@ -181,11 +177,11 @@ quest.sections =
             ['qm5'] =
             {
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, xi.items.LIZARD_EGG) then
+                    if npcUtil.tradeHasExactly(trade, xi.item.LIZARD_EGG) then
                         local questProgress = quest:getVar(player, 'Prog')
 
                         if questProgress == 3 then
-                            return handleDangrufMinigame(player, 138, 141, xi.items.LIZARD_EGG)
+                            return handleDangrufMinigame(player, 138, 141, xi.item.LIZARD_EGG)
                         elseif questProgress < 3 then
                             return quest:messageSpecial(dangrufID.text.JUST_WONT_DO)
                         elseif questProgress > 3 then
@@ -214,10 +210,10 @@ quest.sections =
             {
                 onTrade = function(player, npc, trade)
                     if
-                        npcUtil.tradeHasExactly(trade, xi.items.REGAL_DIE) and
+                        npcUtil.tradeHasExactly(trade, xi.item.REGAL_DIE) and
                         quest:getVar(player, 'Prog') == 6
                     then
-                        return quest:progressEvent(10026, 0, xi.items.REGAL_DIE, math.random(1, 700))
+                        return quest:progressEvent(10026, 0, xi.item.REGAL_DIE, math.random(1, 700))
                     end
                 end,
 
@@ -229,12 +225,12 @@ quest.sections =
                     local rand2 = math.random(1, 999)
 
                     if questProgress == 0 then
-                        return quest:progressEvent(10024, 0, xi.items.REGAL_DIE, rand1, rand2)
+                        return quest:progressEvent(10024, 0, xi.item.REGAL_DIE, rand1, rand2)
                     elseif
                         questProgress >= 1 and
                         questProgress <= 5
                     then
-                        return quest:progressEvent(10025, 0, xi.items.REGAL_DIE, rand1, rand2)
+                        return quest:progressEvent(10025, 0, xi.item.REGAL_DIE, rand1, rand2)
                     else
                         return quest:progressEvent(10023)
                     end
@@ -278,7 +274,7 @@ quest.sections =
                         npcUtil.popFromQM(player, npc, northGustabergID.mob.GAMBILOX_WANDERLING, { hide = 0 })
                         return quest:messageSpecial(northGustabergID.text.SENSE_EVIL_PRESENCE)
                     elseif questProgress == 5 then
-                        return quest:progressEvent(200, xi.items.REGAL_DIE)
+                        return quest:progressEvent(200, xi.item.REGAL_DIE)
                     end
                 end,
             },
@@ -286,7 +282,7 @@ quest.sections =
             onEventFinish =
             {
                 [200] = function(player, csid, option, npc)
-                    if npcUtil.giveItem(player, xi.items.REGAL_DIE) then
+                    if npcUtil.giveItem(player, xi.item.REGAL_DIE) then
                         quest:setVar(player, 'Prog', 6)
                     end
                 end,
@@ -300,12 +296,12 @@ quest.sections =
                 onTrade = function(player, npc, trade)
                     if
                         not player:hasKeyItem(xi.ki.FIRST_SIGNED_FORGED_ENVELOPE) and
-                        npcUtil.tradeHasExactly(trade, xi.items.GRAPNEL)
+                        npcUtil.tradeHasExactly(trade, xi.item.GRAPNEL)
                     then
                         if isNaked(player) then
-                            return quest:progressEvent(2, 0, xi.items.GRAPNEL)
+                            return quest:progressEvent(2, 0, xi.item.GRAPNEL)
                         else
-                            player:messageSpecial(sauromugueID.text.THF_AF_WALL_OFFSET + 2, 0, xi.items.GRAPNEL)
+                            player:messageSpecial(sauromugueID.text.THF_AF_WALL_OFFSET + 2, 0, xi.item.GRAPNEL)
                         end
                     end
                 end,
@@ -356,7 +352,7 @@ quest.sections =
         [xi.zone.WINDURST_WOODS] =
         {
             ['Bopa_Greso']  = quest:progressEvent(506),
-            ['Cha_Lebagta'] = quest:progressEvent(507, 0, xi.items.GRAPNEL),
+            ['Cha_Lebagta'] = quest:progressEvent(507, 0, xi.item.GRAPNEL),
 
             ['Nanaa_Mihgo'] =
             {

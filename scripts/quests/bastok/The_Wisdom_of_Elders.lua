@@ -5,10 +5,6 @@
 -- Benita : !pos 49.692 -4.771 36.189 236
 -- Tete   : !pos 15.249 -2.097 43.012 236
 -----------------------------------
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
-require('scripts/globals/interaction/quest')
------------------------------------
 
 local quest = Quest:new(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_WISDOM_OF_ELDERS)
 
@@ -16,7 +12,7 @@ quest.reward =
 {
     fame     = 120,
     fameArea = xi.quest.fame_area.BASTOK,
-    item     = xi.items.TRAVELERS_HAT,
+    item     = xi.item.TRAVELERS_HAT,
 }
 
 quest.sections =
@@ -49,7 +45,7 @@ quest.sections =
             ['Benita'] =
             {
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, xi.items.PINCH_OF_BOMB_ASH) then
+                    if npcUtil.tradeHasExactly(trade, xi.item.PINCH_OF_BOMB_ASH) then
                         return quest:progressEvent(176)
                     end
                 end,

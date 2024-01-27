@@ -2,9 +2,7 @@
 -- behind_the_sluices
 -- !instance 25900
 -----------------------------------
-require('scripts/globals/instance')
-require('scripts/globals/allyassist')
-local ID = require('scripts/zones/Rala_Waterways_U/IDs')
+local ID = zones[xi.zone.RALA_WATERWAYS_U]
 -----------------------------------
 local instanceObject = {}
 
@@ -125,7 +123,7 @@ instanceObject.onInstanceTimeUpdate = function(instance, elapsed)
                 end,
             }
         else -- Arciela
-            if instance:getLocalVar("FIGHT_STARTED") == 1 then
+            if instance:getLocalVar('FIGHT_STARTED') == 1 then
                 xi.ally.startAssist(mob, xi.ally.ASSIST_RANDOM)
             end
         end

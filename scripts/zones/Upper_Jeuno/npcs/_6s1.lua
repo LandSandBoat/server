@@ -3,8 +3,7 @@
 --  NPC: Marble Bridge Eatery (Door)
 -- !pos -96.6 -0.2 92.3 244
 -----------------------------------
-local ID = require("scripts/zones/Upper_Jeuno/IDs")
-require("scripts/globals/missions")
+local ID = zones[xi.zone.UPPER_JEUNO]
 -----------------------------------
 local entity = {}
 
@@ -19,7 +18,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local status = player:getCharVar("PromathiaStatus")
+    local status = player:getCharVar('PromathiaStatus')
     local mission = player:getCurrentMission(xi.mission.log_id.COP)
 
     if
@@ -41,9 +40,9 @@ entity.onTrigger = function(player, npc)
         end
 
         if not hasRing then
-            local currentDay = tonumber(os.date("%j"))
-            local ringsTaken = player:getCharVar("COP-ringsTakenbr")
-            local dateObtained = player:getCharVar("COP-lastRingday")
+            local currentDay = tonumber(os.date('%j'))
+            local ringsTaken = player:getCharVar('COP-ringsTakenbr')
+            local dateObtained = player:getCharVar('COP-lastRingday')
 
             if ringsTaken == 0 then
                 player:startEvent(84, ring[1], ring[2], ring[3])
@@ -74,19 +73,19 @@ end
 
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 129 then
-        player:setCharVar("PromathiaStatus", 5)
+        player:setCharVar('PromathiaStatus', 5)
     elseif
         (csid == 84 or csid == 204) and
         option >= 5 and
         option <= 7
     then
         if player:getFreeSlotsCount() ~= 0 then
-            local currentDay = tonumber(os.date("%j"))
-            local ringsTaken = player:getCharVar("COP-ringsTakenbr")
+            local currentDay = tonumber(os.date('%j'))
+            local ringsTaken = player:getCharVar('COP-ringsTakenbr')
             player:addItem(ring[option - 4])
             player:messageSpecial(ID.text.ITEM_OBTAINED, ring[option - 4])
-            player:setCharVar("COP-ringsTakenbr", ringsTaken + 1)
-            player:setCharVar("COP-lastRingday", currentDay)
+            player:setCharVar('COP-ringsTakenbr', ringsTaken + 1)
+            player:setCharVar('COP-lastRingday', currentDay)
         else
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, ring[option - 4])
         end

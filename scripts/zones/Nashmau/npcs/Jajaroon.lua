@@ -3,8 +3,7 @@
 --  NPC: Jajaroon
 -- Standard Merchant NPC
 -----------------------------------
-local ID = require("scripts/zones/Nashmau/IDs")
-require("scripts/globals/shop")
+local ID = zones[xi.zone.NASHMAU]
 -----------------------------------
 local entity = {}
 

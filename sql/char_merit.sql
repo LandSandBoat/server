@@ -9,4 +9,4 @@ CREATE TABLE `char_merit` (
   `upgrades` smallint(5) unsigned NOT NULL,
   INDEX `char_merits_charid_index` (`charid`),
   UNIQUE KEY `idx_char_merit_meritid_charid` (`meritid`,`charid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;

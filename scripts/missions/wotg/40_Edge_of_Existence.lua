@@ -11,10 +11,6 @@
 -- Rolanberry Fields [S]    : !pos -198 8 360 91
 -- Sauromugue Champaign [S] : !pos 369 8 -227 98
 -----------------------------------
-require('scripts/globals/maws')
-require('scripts/globals/missions')
-require('scripts/globals/interaction/mission')
------------------------------------
 
 local mission = Mission:new(xi.mission.log_id.WOTG, xi.mission.id.wotg.EDGE_OF_EXISTENCE)
 

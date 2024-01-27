@@ -20,7 +20,7 @@ CREATE TABLE `instance_entities` (
   `instanceid` smallint(3) unsigned NOT NULL DEFAULT '0',
   `id` int(10) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`instanceid`, `id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
+) ENGINE=Aria TRANSACTIONAL=0 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -201,6 +201,8 @@ INSERT INTO `instance_entities` VALUES (5602,17006881);
 INSERT INTO `instance_entities` VALUES (5602,17006882);
 INSERT INTO `instance_entities` VALUES (5602,17006892);
 -- The Black Coffin
+-- npcs
+INSERT INTO `instance_entities` VALUES (6000,17022979);
 -- mobs
 INSERT INTO `instance_entities` VALUES (6000,17022980);
 INSERT INTO `instance_entities` VALUES (6000,17022981);
@@ -212,8 +214,6 @@ INSERT INTO `instance_entities` VALUES (6000,17022986);
 INSERT INTO `instance_entities` VALUES (6000,17022987);
 INSERT INTO `instance_entities` VALUES (6000,17022988);
 INSERT INTO `instance_entities` VALUES (6000,17022989);
--- npcs
-INSERT INTO `instance_entities` VALUES (6000,17022979);
 
 -- Against All Odds COR AF2
 INSERT INTO `instance_entities` VALUES (6001,17022977);
@@ -340,76 +340,76 @@ INSERT INTO `instance_entities` VALUES (6306,17035546);
 
 -- Imperial Agent Rescue
 -- mobs
-INSERT INTO `instance_entities` VALUES (6600, 17047553);
-INSERT INTO `instance_entities` VALUES (6600, 17047554);
-INSERT INTO `instance_entities` VALUES (6600, 17047555);
-INSERT INTO `instance_entities` VALUES (6600, 17047556);
-INSERT INTO `instance_entities` VALUES (6600, 17047557);
-INSERT INTO `instance_entities` VALUES (6600, 17047558);
-INSERT INTO `instance_entities` VALUES (6600, 17047559);
-INSERT INTO `instance_entities` VALUES (6600, 17047560);
-INSERT INTO `instance_entities` VALUES (6600, 17047561);
-INSERT INTO `instance_entities` VALUES (6600, 17047562);
-INSERT INTO `instance_entities` VALUES (6600, 17047563);
-INSERT INTO `instance_entities` VALUES (6600, 17047564);
-INSERT INTO `instance_entities` VALUES (6600, 17047565);
-INSERT INTO `instance_entities` VALUES (6600, 17047566);
-INSERT INTO `instance_entities` VALUES (6600, 17047567);
-INSERT INTO `instance_entities` VALUES (6600, 17047568);
-INSERT INTO `instance_entities` VALUES (6600, 17047569);
+INSERT INTO `instance_entities` VALUES (6600,17047553);
+INSERT INTO `instance_entities` VALUES (6600,17047554);
+INSERT INTO `instance_entities` VALUES (6600,17047555);
+INSERT INTO `instance_entities` VALUES (6600,17047556);
+INSERT INTO `instance_entities` VALUES (6600,17047557);
+INSERT INTO `instance_entities` VALUES (6600,17047558);
+INSERT INTO `instance_entities` VALUES (6600,17047559);
+INSERT INTO `instance_entities` VALUES (6600,17047560);
+INSERT INTO `instance_entities` VALUES (6600,17047561);
+INSERT INTO `instance_entities` VALUES (6600,17047562);
+INSERT INTO `instance_entities` VALUES (6600,17047563);
+INSERT INTO `instance_entities` VALUES (6600,17047564);
+INSERT INTO `instance_entities` VALUES (6600,17047565);
+INSERT INTO `instance_entities` VALUES (6600,17047566);
+INSERT INTO `instance_entities` VALUES (6600,17047567);
+INSERT INTO `instance_entities` VALUES (6600,17047568);
+INSERT INTO `instance_entities` VALUES (6600,17047569);
 -- npcs
-INSERT INTO `instance_entities` VALUES (6600, 17047808);
-INSERT INTO `instance_entities` VALUES (6600, 17047809);
-INSERT INTO `instance_entities` VALUES (6600, 17047810);
-INSERT INTO `instance_entities` VALUES (6600, 17047815);
-INSERT INTO `instance_entities` VALUES (6600, 17047832);
-INSERT INTO `instance_entities` VALUES (6600, 17047863);
-INSERT INTO `instance_entities` VALUES (6600, 17047864);
-INSERT INTO `instance_entities` VALUES (6600, 17047865);
-INSERT INTO `instance_entities` VALUES (6600, 17047866);
-INSERT INTO `instance_entities` VALUES (6600, 17047895);
-INSERT INTO `instance_entities` VALUES (6600, 17047896);
-INSERT INTO `instance_entities` VALUES (6600, 17047897);
-INSERT INTO `instance_entities` VALUES (6600, 17047898);
-INSERT INTO `instance_entities` VALUES (6600, 17047899);
-INSERT INTO `instance_entities` VALUES (6600, 17047900);
-INSERT INTO `instance_entities` VALUES (6600, 17047901);
-INSERT INTO `instance_entities` VALUES (6600, 17047902);
-INSERT INTO `instance_entities` VALUES (6600, 17047916);
-INSERT INTO `instance_entities` VALUES (6600, 17047917);
-INSERT INTO `instance_entities` VALUES (6600, 17047918);
+INSERT INTO `instance_entities` VALUES (6600,17047808);
+INSERT INTO `instance_entities` VALUES (6600,17047809);
+INSERT INTO `instance_entities` VALUES (6600,17047810);
+INSERT INTO `instance_entities` VALUES (6600,17047815);
+INSERT INTO `instance_entities` VALUES (6600,17047832);
+INSERT INTO `instance_entities` VALUES (6600,17047863);
+INSERT INTO `instance_entities` VALUES (6600,17047864);
+INSERT INTO `instance_entities` VALUES (6600,17047865);
+INSERT INTO `instance_entities` VALUES (6600,17047866);
+INSERT INTO `instance_entities` VALUES (6600,17047895);
+INSERT INTO `instance_entities` VALUES (6600,17047896);
+INSERT INTO `instance_entities` VALUES (6600,17047897);
+INSERT INTO `instance_entities` VALUES (6600,17047898);
+INSERT INTO `instance_entities` VALUES (6600,17047899);
+INSERT INTO `instance_entities` VALUES (6600,17047900);
+INSERT INTO `instance_entities` VALUES (6600,17047901);
+INSERT INTO `instance_entities` VALUES (6600,17047902);
+INSERT INTO `instance_entities` VALUES (6600,17047916);
+INSERT INTO `instance_entities` VALUES (6600,17047917);
+INSERT INTO `instance_entities` VALUES (6600,17047918);
 
 -- Preemtive Strike
 -- mobs
-INSERT INTO `instance_entities` VALUES (6601, 17047570);
-INSERT INTO `instance_entities` VALUES (6601, 17047571);
-INSERT INTO `instance_entities` VALUES (6601, 17047572);
-INSERT INTO `instance_entities` VALUES (6601, 17047573);
-INSERT INTO `instance_entities` VALUES (6601, 17047574);
-INSERT INTO `instance_entities` VALUES (6601, 17047575);
-INSERT INTO `instance_entities` VALUES (6601, 17047576);
-INSERT INTO `instance_entities` VALUES (6601, 17047577);
-INSERT INTO `instance_entities` VALUES (6601, 17047578);
-INSERT INTO `instance_entities` VALUES (6601, 17047579);
-INSERT INTO `instance_entities` VALUES (6601, 17047580);
-INSERT INTO `instance_entities` VALUES (6601, 17047581);
-INSERT INTO `instance_entities` VALUES (6601, 17047582);
-INSERT INTO `instance_entities` VALUES (6601, 17047583);
-INSERT INTO `instance_entities` VALUES (6601, 17047584);
-INSERT INTO `instance_entities` VALUES (6601, 17047585);
-INSERT INTO `instance_entities` VALUES (6601, 17047586);
-INSERT INTO `instance_entities` VALUES (6601, 17047587);
-INSERT INTO `instance_entities` VALUES (6601, 17047588);
-INSERT INTO `instance_entities` VALUES (6601, 17047589);
+INSERT INTO `instance_entities` VALUES (6601,17047570);
+INSERT INTO `instance_entities` VALUES (6601,17047571);
+INSERT INTO `instance_entities` VALUES (6601,17047572);
+INSERT INTO `instance_entities` VALUES (6601,17047573);
+INSERT INTO `instance_entities` VALUES (6601,17047574);
+INSERT INTO `instance_entities` VALUES (6601,17047575);
+INSERT INTO `instance_entities` VALUES (6601,17047576);
+INSERT INTO `instance_entities` VALUES (6601,17047577);
+INSERT INTO `instance_entities` VALUES (6601,17047578);
+INSERT INTO `instance_entities` VALUES (6601,17047579);
+INSERT INTO `instance_entities` VALUES (6601,17047580);
+INSERT INTO `instance_entities` VALUES (6601,17047581);
+INSERT INTO `instance_entities` VALUES (6601,17047582);
+INSERT INTO `instance_entities` VALUES (6601,17047583);
+INSERT INTO `instance_entities` VALUES (6601,17047584);
+INSERT INTO `instance_entities` VALUES (6601,17047585);
+INSERT INTO `instance_entities` VALUES (6601,17047586);
+INSERT INTO `instance_entities` VALUES (6601,17047587);
+INSERT INTO `instance_entities` VALUES (6601,17047588);
+INSERT INTO `instance_entities` VALUES (6601,17047589);
 -- npcs
-INSERT INTO `instance_entities` VALUES (6601, 17047808);
-INSERT INTO `instance_entities` VALUES (6601, 17047809);
-INSERT INTO `instance_entities` VALUES (6601, 17047836);
-INSERT INTO `instance_entities` VALUES (6601, 17047868);
-INSERT INTO `instance_entities` VALUES (6601, 17047869);
-INSERT INTO `instance_entities` VALUES (6601, 17047870);
-INSERT INTO `instance_entities` VALUES (6601, 17047874);
-INSERT INTO `instance_entities` VALUES (6601, 17047875);
+INSERT INTO `instance_entities` VALUES (6601,17047808);
+INSERT INTO `instance_entities` VALUES (6601,17047809);
+INSERT INTO `instance_entities` VALUES (6601,17047836);
+INSERT INTO `instance_entities` VALUES (6601,17047868);
+INSERT INTO `instance_entities` VALUES (6601,17047869);
+INSERT INTO `instance_entities` VALUES (6601,17047870);
+INSERT INTO `instance_entities` VALUES (6601,17047874);
+INSERT INTO `instance_entities` VALUES (6601,17047875);
 
 -- Leujaoam Cleansing
 -- mobs
@@ -813,17 +813,6 @@ INSERT INTO `instance_entities` VALUES (7704,17092617);
 INSERT INTO `instance_entities` VALUES (7704,17092618);
 INSERT INTO `instance_entities` VALUES (7704,17092619);
 INSERT INTO `instance_entities` VALUES (7704,17092620);
-INSERT INTO `instance_entities` VALUES (7704,17093330); -- Rune of Transfer
-INSERT INTO `instance_entities` VALUES (7704,17093331); -- Rune of Transfer
-INSERT INTO `instance_entities` VALUES (7704,17093332); -- Runic Lamp 1
-INSERT INTO `instance_entities` VALUES (7704,17093333); -- Runic Lamp 2
-INSERT INTO `instance_entities` VALUES (7704,17093334); -- Runic Lamp 3
-INSERT INTO `instance_entities` VALUES (7704,17093335); -- Runic Lamp 4
-INSERT INTO `instance_entities` VALUES (7704,17093336); -- Runic Lamp 5
-INSERT INTO `instance_entities` VALUES (7704,17093353);
-INSERT INTO `instance_entities` VALUES (7704,17093354);
-INSERT INTO `instance_entities` VALUES (7704,17093429); -- Rune of Transfer
-INSERT INTO `instance_entities` VALUES (7704,17093430); -- Vending box
 -- mobs
 INSERT INTO `instance_entities` VALUES (7704,17092629);
 INSERT INTO `instance_entities` VALUES (7704,17092630);
@@ -1299,6 +1288,18 @@ INSERT INTO `instance_entities` VALUES (7704,17093101);
 INSERT INTO `instance_entities` VALUES (7704,17093102);
 INSERT INTO `instance_entities` VALUES (7704,17093103);
 INSERT INTO `instance_entities` VALUES (7704,17093104);
+-- more npcs
+INSERT INTO `instance_entities` VALUES (7704,17093330); -- Rune of Transfer
+INSERT INTO `instance_entities` VALUES (7704,17093331); -- Rune of Transfer
+INSERT INTO `instance_entities` VALUES (7704,17093332); -- Runic Lamp 1
+INSERT INTO `instance_entities` VALUES (7704,17093333); -- Runic Lamp 2
+INSERT INTO `instance_entities` VALUES (7704,17093334); -- Runic Lamp 3
+INSERT INTO `instance_entities` VALUES (7704,17093335); -- Runic Lamp 4
+INSERT INTO `instance_entities` VALUES (7704,17093336); -- Runic Lamp 5
+INSERT INTO `instance_entities` VALUES (7704,17093353);
+INSERT INTO `instance_entities` VALUES (7704,17093354);
+INSERT INTO `instance_entities` VALUES (7704,17093429); -- Rune of Transfer
+INSERT INTO `instance_entities` VALUES (7704,17093430); -- Vending box
 
 -- Light in the Darkness (9300)
 -- mobs
@@ -1326,11 +1327,11 @@ INSERT INTO `instance_entities` VALUES (9300,17158396); -- csnpc
 INSERT INTO `instance_entities` VALUES (9300,17158397); -- csnpc
 
 -- Behind the Sluices (25900)
-INSERT INTO `instance_entities` VALUES (25900, 17838146); -- Arciela
-INSERT INTO `instance_entities` VALUES (25900, 17838147); -- The Keeper
-INSERT INTO `instance_entities` VALUES (25900, 17838148); -- Mistdagger
-INSERT INTO `instance_entities` VALUES (25900, 17838149); -- The Briars (elv)
-INSERT INTO `instance_entities` VALUES (25900, 17838150); -- The Briars (gal)
+INSERT INTO `instance_entities` VALUES (25900,17838146); -- Arciela
+INSERT INTO `instance_entities` VALUES (25900,17838147); -- The Keeper
+INSERT INTO `instance_entities` VALUES (25900,17838148); -- Mistdagger
+INSERT INTO `instance_entities` VALUES (25900,17838149); -- The Briars (elv)
+INSERT INTO `instance_entities` VALUES (25900,17838150); -- The Briars (gal)
 
 -- Ambuscade
 -- mobs

@@ -4,17 +4,14 @@
 -- Type: Salvage Key Item giver
 -- !pos 101.468 -1 -20.088 50
 -----------------------------------
-require("scripts/globals/assault")
-require("scripts/globals/missions")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    -- local currentday = tonumber(os.date("%j"))
-    -- local lastPermit = player:getCharVar("LAST_PERMIT")
+    -- local currentday = tonumber(os.date('%j'))
+    -- local lastPermit = player:getCharVar('LAST_PERMIT')
     -- local diffday = currentday - lastPermit
     -- local a1 = player:getAssaultPoint(LEUJAOAM_ASSAULT_POINT)
     -- local a2 = player:getAssaultPoint(MAMOOL_ASSAULT_POINT)
@@ -41,57 +38,57 @@ entity.onEventUpdate = function(player, csid, option, npc)
         option == 10 and
         player:getAssaultPoint(xi.assault.assaultArea.LEUJAOAM_SANCTUM) >= 500
     then
-        player:setLocalVar("SalvageValid", 1)
+        player:setLocalVar('SalvageValid', 1)
     elseif
         (csid == 818 or csid == 820) and
         option == 11 and
         player:getAssaultPoint(xi.assault.assaultArea.MAMOOL_JA_TRAINING_GROUNDS) >= 500
     then
-        player:setLocalVar("SalvageValid", 2)
+        player:setLocalVar('SalvageValid', 2)
     elseif
         (csid == 818 or csid == 820) and
         option == 12 and
         player:getAssaultPoint(xi.assault.assaultArea.LEBROS_CAVERN) >= 500
     then
-        player:setLocalVar("SalvageValid", 3)
+        player:setLocalVar('SalvageValid', 3)
     elseif
         (csid == 818 or csid == 820) and
         option == 13 and
         player:getAssaultPoint(xi.assault.assaultArea.PERIQIA) >= 500
     then
-        player:setLocalVar("SalvageValid", 4)
+        player:setLocalVar('SalvageValid', 4)
     elseif
         (csid == 818 or csid == 820) and
         option == 14 and
         player:getAssaultPoint(xi.assault.assaultArea.ILRUSI_ATOLL) >= 500
     then
-        player:setLocalVar("SalvageValid", 5)
+        player:setLocalVar('SalvageValid', 5)
     end
 end
 
 entity.onEventFinish = function(player, csid, option, npc)
-    local currentday = tonumber(os.date("%j"))
+    local currentday = tonumber(os.date('%j'))
 
     if (csid == 818 or csid == 820) and option == 100 then
-        if player:getLocalVar("SalvageValid") == 1 then
+        if player:getLocalVar('SalvageValid') == 1 then
             player:addKeyItem(xi.ki.REMNANTS_PERMIT)
-            player:delCurrency("LEUJAOAM_ASSAULT_POINT", 500)
-        elseif player:getLocalVar("SalvageValid") == 2 then
-            player:delCurrency("MAMOOL_ASSAULT_POINT", 500)
+            player:delCurrency('LEUJAOAM_ASSAULT_POINT', 500)
+        elseif player:getLocalVar('SalvageValid') == 2 then
+            player:delCurrency('MAMOOL_ASSAULT_POINT', 500)
             player:addKeyItem(xi.ki.REMNANTS_PERMIT)
-        elseif player:getLocalVar("SalvageValid") == 3 then
-            player:delCurrency("LEBROS_ASSAULT_POINT", 500)
+        elseif player:getLocalVar('SalvageValid') == 3 then
+            player:delCurrency('LEBROS_ASSAULT_POINT', 500)
             player:addKeyItem(xi.ki.REMNANTS_PERMIT)
-        elseif player:getLocalVar("SalvageValid") == 4 then
-            player:delCurrency("PERIQIA_ASSAULT_POINT", 500)
+        elseif player:getLocalVar('SalvageValid') == 4 then
+            player:delCurrency('PERIQIA_ASSAULT_POINT', 500)
             player:addKeyItem(xi.ki.REMNANTS_PERMIT)
-        elseif player:getLocalVar("SalvageValid") == 5 then
-            player:delCurrency("ILRUSI_ASSAULT_POINT", 500)
+        elseif player:getLocalVar('SalvageValid') == 5 then
+            player:delCurrency('ILRUSI_ASSAULT_POINT', 500)
             player:addKeyItem(xi.ki.REMNANTS_PERMIT)
         end
 
-        player:setLocalVar("SalvageValid", 0)
-        player:setCharVar("LAST_PERMIT", currentday)
+        player:setLocalVar('SalvageValid', 0)
+        player:setCharVar('LAST_PERMIT', currentday)
     end
 end
 

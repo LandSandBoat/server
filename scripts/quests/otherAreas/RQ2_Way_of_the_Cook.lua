@@ -5,11 +5,6 @@
 -- ZONE,   NPC,      POS
 -- Mhaura, Rycharde, !pos 17.451 -16.000 88.815 249
 -----------------------------------
-require('scripts/globals/quests')
-require('scripts/globals/titles')
-require('scripts/globals/npc_util')
-require('scripts/globals/interaction/quest')
------------------------------------
 
 local quest          = Quest:new(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.WAY_OF_THE_COOK)
 local daysPassed     = 0
@@ -37,10 +32,10 @@ quest.sections =
             {
                 onTrigger = function(player, npc)
                     if
-                        player:getCharVar("Quest[4][0]DayCompleted") + 7 < VanadielUniqueDay() and
+                        player:getCharVar('Quest[4][0]DayCompleted') + 7 < VanadielUniqueDay() and
                         player:getFameLevel(xi.quest.fame_area.WINDURST) > 2
                     then
-                        return quest:progressEvent(76, xi.items.BEEHIVE_CHIP, xi.items.DHALMEL_MEAT) -- Way of the Cook starting event.
+                        return quest:progressEvent(76, xi.item.BEEHIVE_CHIP, xi.item.SLICE_OF_DHALMEL_MEAT) -- Way of the Cook starting event.
                     else
                         return quest:event(75) -- Default dialog after completing previous quest.
                     end
@@ -53,7 +48,7 @@ quest.sections =
             {
                 [76] = function(player, csid, option, npc)
                     if option == 74 then -- Accept quest option.
-                        player:setCharVar("Quest[4][0]DayCompleted", 0)            -- Delete previous quest (Rycharde the Chef) variables
+                        player:setCharVar('Quest[4][0]DayCompleted', 0)            -- Delete previous quest (Rycharde the Chef) variables
                         quest:setVar(player, 'HourStarted', VanadielHour())        -- Set current quest started variables
                         quest:setVar(player, 'DayStarted', VanadielDayOfTheYear()) -- Set current quest started variables
                         quest:begin(player)
@@ -74,8 +69,8 @@ quest.sections =
             ['Rycharde'] =
             {
                 onTrigger = function(player, npc)
-                    daysPassed     = VanadielDayOfTheYear() - quest:getVar(player, "DayStarted")
-                    totalHoursLeft = 72 - (VanadielHour() + daysPassed * 24) + quest:getVar(player, "HourStarted")
+                    daysPassed     = VanadielDayOfTheYear() - quest:getVar(player, 'DayStarted')
+                    totalHoursLeft = 72 - (VanadielHour() + daysPassed * 24) + quest:getVar(player, 'HourStarted')
 
                     if totalHoursLeft > 0 then
                         return quest:event(78, totalHoursLeft) -- You have x hours left.
@@ -85,9 +80,9 @@ quest.sections =
                 end,
 
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, { xi.items.DHALMEL_MEAT, xi.items.BEEHIVE_CHIP }) then
-                        daysPassed     = VanadielDayOfTheYear() - quest:getVar(player, "DayStarted")
-                        totalHoursLeft = 72 - (VanadielHour() + daysPassed * 24) + quest:getVar(player, "HourStarted")
+                    if npcUtil.tradeHasExactly(trade, { xi.item.SLICE_OF_DHALMEL_MEAT, xi.item.BEEHIVE_CHIP }) then
+                        daysPassed     = VanadielDayOfTheYear() - quest:getVar(player, 'DayStarted')
+                        totalHoursLeft = 72 - (VanadielHour() + daysPassed * 24) + quest:getVar(player, 'HourStarted')
 
                         if totalHoursLeft > 0 then
                             return quest:progressEvent(80) -- Quest completed in time.
@@ -95,8 +90,8 @@ quest.sections =
                             return quest:progressEvent(81) -- Quest completed late.
                         end
                     elseif
-                        npcUtil.tradeHasExactly(trade, { xi.items.DHALMEL_MEAT }) or
-                        npcUtil.tradeHasExactly(trade, { xi.items.BEEHIVE_CHIP })
+                        npcUtil.tradeHasExactly(trade, { xi.item.SLICE_OF_DHALMEL_MEAT }) or
+                        npcUtil.tradeHasExactly(trade, { xi.item.BEEHIVE_CHIP })
                     then
                         return quest:event(73) -- Incomplete trade.
                     end

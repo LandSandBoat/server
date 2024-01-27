@@ -3,8 +3,7 @@
 --  NPC: Telepoint
 -- !pos 150.258 -21.047 -37.256 112
 -----------------------------------
-local ID = require("scripts/zones/Xarcabard/IDs")
-require("scripts/globals/npc_util")
+local ID = zones[xi.zone.XARCABARD]
 -----------------------------------
 local entity = {}
 
@@ -13,9 +12,9 @@ entity.onTrade = function(player, npc, trade)
     local item = trade:getItemId()
     if
         trade:getItemCount() == 1 and
-        item >= xi.items.FIRE_CRYSTAL and
-        item <= xi.items.DARK_CRYSTAL and
-        npcUtil.giveItem(player, xi.items.FADED_CRYSTAL)
+        item >= xi.item.FIRE_CRYSTAL and
+        item <= xi.item.DARK_CRYSTAL and
+        npcUtil.giveItem(player, xi.item.FADED_CRYSTAL)
     then
         player:tradeComplete()
     end

@@ -10,12 +10,9 @@
 -- Apururu           : !pos -11 -2 13 241
 -- Yoran-Oran        : !pos -109.987 -14 203.338 239
 -- Mandragora Warden : !pos 81.981 7.593 139.556 153
-require('scripts/globals/interaction/mission')
-require('scripts/globals/missions')
-require('scripts/globals/npc_util')
 -----------------------------------
-local boyahdaTreeID   = require("scripts/zones/The_Boyahda_Tree/IDs")
-local windurstWoodsID = require("scripts/zones/Windurst_Woods/IDs")
+local boyahdaTreeID   = zones[xi.zone.THE_BOYAHDA_TREE]
+local windurstWoodsID = zones[xi.zone.WINDURST_WOODS]
 -----------------------------------
 
 local mission = Mission:new(xi.mission.log_id.WINDURST, xi.mission.id.windurst.DOLL_OF_THE_DEAD)
@@ -140,7 +137,7 @@ mission.sections =
 
                     if
                         (missionStatus == 4 or missionStatus == 5) and
-                        npcUtil.tradeHasExactly(trade, xi.items.CLUMP_OF_GOOBBUE_HUMUS)
+                        npcUtil.tradeHasExactly(trade, xi.item.CLUMP_OF_GOOBBUE_HUMUS)
                     then
                         return mission:progressEvent(13)
                     end
@@ -171,7 +168,7 @@ mission.sections =
             {
                 onTrigger = function(player, npc)
                     if player:getMissionStatus(mission.areaId) == 4 then
-                        return mission:progressEvent(439, 0, xi.items.JUG_OF_HUMUS, xi.items.CLUMP_OF_GOOBBUE_HUMUS)
+                        return mission:progressEvent(439, 0, xi.item.JUG_OF_HUMUS, xi.item.CLUMP_OF_GOOBBUE_HUMUS)
                     end
                 end,
             },

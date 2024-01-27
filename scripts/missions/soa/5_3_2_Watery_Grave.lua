@@ -4,10 +4,7 @@
 -----------------------------------
 -- !addmission 12 118
 -----------------------------------
-require('scripts/globals/missions')
-require('scripts/globals/interaction/mission')
------------------------------------
-local ralaID = require('scripts/zones/Rala_Waterways/IDs')
+local ralaID = zones[xi.zone.RALA_WATERWAYS]
 -----------------------------------
 
 local mission = Mission:new(xi.mission.log_id.SOA, xi.mission.id.soa.WATERY_GRAVE)

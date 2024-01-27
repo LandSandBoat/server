@@ -3,8 +3,7 @@
 --  Mob: Yagudo Conquistador
 -- Note: PH for Yaa Haqa the Profane
 -----------------------------------
-local ID = require("scripts/zones/Castle_Oztroja/IDs")
-require("scripts/globals/mobs")
+local ID = zones[xi.zone.CASTLE_OZTROJA]
 -----------------------------------
 local entity = {}
 

@@ -1,8 +1,6 @@
 -----------------------------------
 -- Zone: Escha_RuAun (289)
 -----------------------------------
-local ID = require('scripts/zones/Escha_RuAun/IDs')
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

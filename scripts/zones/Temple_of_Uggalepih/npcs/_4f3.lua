@@ -4,7 +4,7 @@
 -- Notes: Tonberry Priest Room (Offers Tonberry Hate Reset)
 -- !pos 60.001 -1.653 -147.755 159
 -----------------------------------
-local ID = require("scripts/zones/Temple_of_Uggalepih/IDs")
+local ID = zones[xi.zone.TEMPLE_OF_UGGALEPIH]
 -----------------------------------
 local entity = {}
 
@@ -12,7 +12,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local killCount = player:getCharVar("EVERYONES_GRUDGE_KILLS")
+    local killCount = player:getCharVar('EVERYONES_GRUDGE_KILLS')
 
     if player:hasKeyItem(xi.ki.TONBERRY_PRIEST_KEY) then
         if killCount >= 1 then
@@ -31,8 +31,8 @@ end
 
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 66 and option == 1 then
-        if player:delGil(250 * (player:getCharVar("EVERYONES_GRUDGE_KILLS") / 20 + 1)) then
-            player:setCharVar("EVERYONES_GRUDGE_KILLS", 0)
+        if player:delGil(250 * (player:getCharVar('EVERYONES_GRUDGE_KILLS') / 20 + 1)) then
+            player:setCharVar('EVERYONES_GRUDGE_KILLS', 0)
             player:messageSpecial(ID.text.HATE_RESET)
 
             --[[
@@ -43,7 +43,7 @@ entity.onEventFinish = function(player, csid, option, npc)
             if mob ~= nil then
                 mob:injectActionPacket(43, 43)
             else
-                printf("MOB IS NULL! %d", ID.npc.PLONGEUR_MONBERRY)
+                printf('MOB IS NULL! %d', ID.npc.PLONGEUR_MONBERRY)
             end
             --]]
         end

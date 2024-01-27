@@ -4,10 +4,6 @@
 -- Log ID: 1, Quest ID: 63
 -- Carmelo : !pos -146.476 -7.48 -10.889 236
 -----------------------------------
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
-require('scripts/globals/interaction/quest')
------------------------------------
 
 local quest = Quest:new(xi.quest.log_id.BASTOK, xi.quest.id.bastok.LOVERS_IN_THE_DUSK)
 
@@ -15,7 +11,7 @@ quest.reward =
 {
     fame     = 120,
     fameArea = xi.quest.fame_area.BASTOK,
-    item     = xi.items.SIREN_FLUTE,
+    item     = xi.item.SIREN_FLUTE,
 }
 
 quest.sections =

@@ -6,12 +6,7 @@
 -- Detzo         : !pos 5.365 6.999 9.891 234
 -- qm_talekeeper : !pos 211 4 -79 127
 -----------------------------------
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
-require('scripts/globals/titles')
-require('scripts/globals/interaction/quest')
------------------------------------
-local behemothsDominionID = require('scripts/zones/Behemoths_Dominion/IDs')
+local behemothsDominionID = zones[xi.zone.BEHEMOTHS_DOMINION]
 -----------------------------------
 
 local quest = Quest:new(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_TALEKEEPERS_GIFT)
@@ -20,7 +15,7 @@ quest.reward =
 {
     fame     = 60,
     fameArea = xi.quest.fame_area.BASTOK,
-    item     = xi.items.FIGHTERS_LORICA,
+    item     = xi.item.FIGHTERS_LORICA,
     title    = xi.title.PARAGON_OF_WARRIOR_EXCELLENCE,
 }
 
@@ -42,7 +37,7 @@ quest.sections =
                 onTrade = function(player, npc, trade)
                     if
                         quest:getVar(player, 'Prog') == 2 and
-                        npcUtil.tradeHasExactly(trade, xi.items.GINGER_COOKIE)
+                        npcUtil.tradeHasExactly(trade, xi.item.GINGER_COOKIE)
                     then
                         return quest:progressEvent(172)
                     end

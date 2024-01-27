@@ -3,9 +3,8 @@
 --  Mob: Mad Sheep
 -- Note: Place holder Stray Mary
 -----------------------------------
-local ID = require("scripts/zones/Konschtat_Highlands/IDs")
-require("scripts/globals/mobs")
-require("scripts/quests/tutorial")
+local ID = zones[xi.zone.KONSCHTAT_HIGHLANDS]
+require('scripts/quests/tutorial')
 -----------------------------------
 local entity = {}
 

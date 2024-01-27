@@ -5,9 +5,7 @@
 --  Note: EventID for Twinkle Tree is unknown. Quest funtions but the full event is not played.
 -- !pos 156.003 -40.753 333.742 115
 -----------------------------------
-local ID = require("scripts/zones/West_Sarutabaruta/IDs")
-require("scripts/globals/npc_util")
-require("scripts/globals/quests")
+local ID = zones[xi.zone.WEST_SARUTABARUTA]
 -----------------------------------
 local entity = {}
 
@@ -17,14 +15,14 @@ entity.onTrade = function(player, npc, trade)
         VanadielHour() <= 3
     then
         if
-            npcUtil.tradeHas(trade, xi.items.HANDFUL_OF_PUGIL_SCALES) and
-            player:getCharVar("QuestCatchAFallingStar_prog") == 0
+            npcUtil.tradeHas(trade, xi.item.HANDFUL_OF_PUGIL_SCALES) and
+            player:getCharVar('QuestCatchAFallingStar_prog') == 0
         then
             player:messageSpecial(ID.text.FROST_DEPOSIT_TWINKLES)
             player:messageSpecial(ID.text.MELT_BARE_HANDS)
-            if npcUtil.giveItem(player, xi.items.STARFALL_TEAR) then
+            if npcUtil.giveItem(player, xi.item.STARFALL_TEAR) then
                 player:confirmTrade()
-                player:setCharVar("QuestCatchAFallingStar_prog", 1)
+                player:setCharVar('QuestCatchAFallingStar_prog', 1)
             end
         end
     end
@@ -33,7 +31,7 @@ end
 entity.onTrigger = function(player, npc)
     if
         VanadielHour() <= 3 and
-        player:getCharVar("QuestCatchAFallingStar_prog") == 0
+        player:getCharVar('QuestCatchAFallingStar_prog') == 0
     then
         player:messageSpecial(ID.text.FROST_DEPOSIT_TWINKLES)
         player:messageSpecial(ID.text.MELT_BARE_HANDS)

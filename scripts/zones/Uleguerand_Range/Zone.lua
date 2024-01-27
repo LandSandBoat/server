@@ -1,9 +1,7 @@
 -----------------------------------
 -- Zone: Uleguerand_Range (5)
 -----------------------------------
-local ID = require('scripts/zones/Uleguerand_Range/IDs')
-require('scripts/globals/conquest')
-require('scripts/globals/missions')
+local ID = zones[xi.zone.ULEGUERAND_RANGE]
 -----------------------------------
 local zoneObject = {}
 
@@ -35,7 +33,7 @@ zoneObject.onZoneIn = function(player, prevZone)
 
     if
         player:getCurrentMission(xi.mission.log_id.COP) == xi.mission.id.cop.DAWN and
-        player:getCharVar("COP_louverance_story") == 1
+        player:getCharVar('COP_louverance_story') == 1
     then
         cs = 17
     end
@@ -51,7 +49,7 @@ end
 
 zoneObject.onEventFinish = function(player, csid, option, npc)
     if csid == 17 then
-        player:setCharVar("COP_louverance_story", 2)
+        player:setCharVar('COP_louverance_story', 2)
     end
 end
 

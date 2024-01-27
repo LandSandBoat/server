@@ -4,8 +4,6 @@
 -- Spawns Audumbla
 -- !pos 337 20 -277 253
 -----------------------------------
-require("scripts/globals/abyssea")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

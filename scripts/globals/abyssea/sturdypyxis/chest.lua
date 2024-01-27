@@ -1,17 +1,17 @@
 -----------------------------------
 -- Abyssea Sturdy Pyxis Chest
 -----------------------------------
-require("scripts/globals/abyssea")
-require("scripts/globals/abyssea/sturdypyxis/augmented_item")
-require("scripts/globals/abyssea/sturdypyxis/temporary_item")
-require("scripts/globals/abyssea/sturdypyxis/keyitem")
-require("scripts/globals/abyssea/sturdypyxis/item")
-require("scripts/globals/abyssea/sturdypyxis/popitem")
-require("scripts/globals/abyssea/sturdypyxis/cruor")
-require("scripts/globals/abyssea/sturdypyxis/light")
-require("scripts/globals/abyssea/sturdypyxis/experience")
-require("scripts/globals/abyssea/sturdypyxis/time")
-require("scripts/globals/abyssea/sturdypyxis/restore")
+require('scripts/globals/abyssea')
+require('scripts/globals/abyssea/sturdypyxis/augmented_item')
+require('scripts/globals/abyssea/sturdypyxis/temporary_item')
+require('scripts/globals/abyssea/sturdypyxis/keyitem')
+require('scripts/globals/abyssea/sturdypyxis/item')
+require('scripts/globals/abyssea/sturdypyxis/popitem')
+require('scripts/globals/abyssea/sturdypyxis/cruor')
+require('scripts/globals/abyssea/sturdypyxis/light')
+require('scripts/globals/abyssea/sturdypyxis/experience')
+require('scripts/globals/abyssea/sturdypyxis/time')
+require('scripts/globals/abyssea/sturdypyxis/restore')
 -----------------------------------
 xi = xi or {}
 xi.pyxis = xi.pyxis or {}
@@ -38,11 +38,11 @@ xi.pyxis.chestDropType =
     NUMEROUS_TEMPITEMS  = 11
 }
 
-----------------------------------------------------------------------
+-----------------------------------
 -- Desc: Messages sent to all players in a party in the zone
-----------------------------------------------------------------------
+-----------------------------------
 xi.pyxis.canOpenChest = function(player, npc)
-    local playerOwner = GetPlayerByID(npc:getLocalVar("PLAYERID"))
+    local playerOwner = GetPlayerByID(npc:getLocalVar('PLAYERID'))
 
     local ally = player:getAlliance()
 
@@ -66,10 +66,10 @@ xi.pyxis.canOpenChest = function(player, npc)
     return canOpen
 end
 
-----------------------------------------------------------------------
+-----------------------------------
 -- Desc: Messages sent to all players in a party in the zone
-----------------------------------------------------------------------
-xi.pyxis.messageChest = function(player, messageid, param1, param2, param3, param4)
+-----------------------------------
+xi.pyxis.messageChest = function(player, messageid, param1, param2, param3, param4, npc)
     local alliance = player:getAlliance()
 
     for _, member in ipairs(alliance) do
@@ -91,10 +91,10 @@ end
 
 xi.pyxis.removeChest = function(player, npc, addcruor, delay)
     local ID = zones[player:getZoneID()]
-    local amount = npc:getLocalVar("TIER") * 10
+    local amount = npc:getLocalVar('TIER') * 10
 
     if addcruor ~= 0 then
-        player:addCurrency("cruor", amount)
+        player:addCurrency('cruor', amount)
         player:messageSpecial(ID.text.CRUOR_OBTAINED, amount, 0, 0, 0)
     end
 
@@ -102,15 +102,15 @@ xi.pyxis.removeChest = function(player, npc, addcruor, delay)
     npc:timer(delay * 1000, function(npcArg)
         npcArg:setAnimationSub(16)
         npcArg:setNpcFlags(3203)
-        npcArg:setLocalVar("SPAWNSTATUS", 0)
+        npcArg:setLocalVar('SPAWNSTATUS', 0)
         npcArg:setStatus(xi.status.DISAPPEAR)
-        npcArg:entityAnimationPacket("kesu")
+        npcArg:entityAnimationPacket('kesu')
         npc:setUntargetable(false)
     end)
 end
 
 xi.pyxis.getDrops = function(npc, dropType, tier)
-    if npc:getLocalVar("ITEMS_SET") == 1 then -- sets this to 1 so can get items once when triggered
+    if npc:getLocalVar('ITEMS_SET') == 1 then -- sets this to 1 so can get items once when triggered
         return
     end
 
@@ -118,34 +118,33 @@ xi.pyxis.getDrops = function(npc, dropType, tier)
     {
         [xi.pyxis.chestDropType.TEMPORARY_ITEM] = function(x)
             xi.pyxis.tempItem.setTempItems(npc, tier)
-            npc:setLocalVar("ITEMS_SET", 1)
+            npc:setLocalVar('ITEMS_SET', 1)
         end,
 
         [xi.pyxis.chestDropType.KEY_ITEM] = function(x)
             xi.pyxis.ki.setKeyItems(npc)
-            npc:setLocalVar("ITEMS_SET", 1)
+            npc:setLocalVar('ITEMS_SET', 1)
         end,
 
         [xi.pyxis.chestDropType.AUGMENTED_ITEM] = function(x)
             xi.pyxis.augItem.setAugmentItems(npc, tier)
-            npc:setLocalVar("ITEMS_SET", 1)
+            npc:setLocalVar('ITEMS_SET', 1)
         end,
 
         [xi.pyxis.chestDropType.ITEM] = function(x)
             xi.pyxis.item.setItems(npc, tier)
-            npc:setLocalVar("ITEMS_SET", 1)
+            npc:setLocalVar('ITEMS_SET', 1)
         end,
 
         [xi.pyxis.chestDropType.POPITEM] = function(x)
             xi.pyxis.popitem.setPopItems(npc)
-            npc:setLocalVar("ITEMS_SET", 1)
+            npc:setLocalVar('ITEMS_SET', 1)
         end
     }
 end
 
 xi.pyxis.openChest = function(player, npc)
-    local ID       = zones[player:getZoneID()]
-    local dropType = npc:getLocalVar("DROPTYPE")
+    local dropType = npc:getLocalVar('DROPTYPE')
 
     npc:setAnimationSub(13)
 

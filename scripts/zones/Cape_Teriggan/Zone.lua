@@ -1,19 +1,20 @@
 -----------------------------------
 -- Zone: Cape_Teriggan (113)
 -----------------------------------
-local ID = require('scripts/zones/Cape_Teriggan/IDs')
+local ID = zones[xi.zone.CAPE_TERIGGAN]
 -----------------------------------
 require('scripts/quests/i_can_hear_a_rainbow')
-require('scripts/globals/conquest')
 -----------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
-    local kreutzet = GetMobByID(ID.mob.KREUTZET)
+    local kreutzet     = GetMobByID(ID.mob.KREUTZET)
+    local zmeyGorynych = GetMobByID(ID.mob.ZMEY_GORYNYCH)
 
     UpdateNMSpawnPoint(ID.mob.KREUTZET)
+    zmeyGorynych:setRespawnTime(3600, 7200) -- 1 to 2 hours
     kreutzet:setRespawnTime(math.random(32400, 43200)) -- 9 to 12 hours
-    kreutzet:setLocalVar("cooldown", os.time() + kreutzet:getRespawnTime() / 1000)
+    kreutzet:setLocalVar('cooldown', os.time() + kreutzet:getRespawnTime() / 1000)
     DisallowRespawn(kreutzet:getID(), true) -- prevents accidental 'pop' during no wind weather and immediate despawn
 
     xi.conq.setRegionalConquestOverseers(zone:getRegionID())
@@ -58,7 +59,7 @@ zoneObject.onZoneWeatherChange = function(weather)
 
     if
         not kreutzet:isSpawned() and
-        os.time() > kreutzet:getLocalVar("cooldown") and
+        os.time() > kreutzet:getLocalVar('cooldown') and
         (weather == xi.weather.WIND or weather == xi.weather.GALES)
     then
         DisallowRespawn(kreutzet:getID(), false)

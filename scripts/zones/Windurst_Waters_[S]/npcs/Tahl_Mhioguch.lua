@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Windurst Waters (S)
 --  NPC: Tahl Mhioguch
--- Type: Standard NPC
 -- !pos -64.907 -5.947 81.391 94
 -----------------------------------
 local entity = {}

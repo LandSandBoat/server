@@ -3,9 +3,8 @@
 --  Mob: Magmatic Eruca
 -- Note: Place Holder Energetic Eruca
 -----------------------------------
-local ID = require("scripts/zones/Mount_Zhayolm/IDs")
-mixins = { require("scripts/mixins/families/eruca") }
-require("scripts/globals/mobs")
+local ID = zones[xi.zone.MOUNT_ZHAYOLM]
+mixins = { require('scripts/mixins/families/eruca') }
 -----------------------------------
 local entity = {}
 

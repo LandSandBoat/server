@@ -1,11 +1,7 @@
 -----------------------------------
 -- Zone: Xarcabard (112)
 -----------------------------------
-local ID = require('scripts/zones/Xarcabard/IDs')
 require('scripts/quests/i_can_hear_a_rainbow')
-require('scripts/globals/conquest')
-require('scripts/globals/teleports')
-require('scripts/globals/utils')
 -----------------------------------
 local zoneObject = {}
 
@@ -16,9 +12,9 @@ end
 
 zoneObject.onZoneIn = function(player, prevZone)
     local cs = -1
-    local dynamisMask = player:getCharVar("Dynamis_Status")
+    local dynamisMask = player:getCharVar('Dynamis_Status')
 
-    local unbridledPassionCS = player:getCharVar("unbridledPassion")
+    local unbridledPassionCS = player:getCharVar('unbridledPassion')
     local pos = player:getPos()
 
     if prevZone == xi.zone.DYNAMIS_XARCABARD then -- warp player to a correct position after dynamis
@@ -70,9 +66,9 @@ end
 
 zoneObject.onEventFinish = function(player, csid, option, npc)
     if csid == 4 then
-        player:setCharVar("unbridledPassion", 4)
+        player:setCharVar('unbridledPassion', 4)
     elseif csid == 13 then
-        player:setCharVar("Dynamis_Status", utils.mask.setBit(player:getCharVar("Dynamis_Status"), 0, true))
+        player:setCharVar('Dynamis_Status', utils.mask.setBit(player:getCharVar('Dynamis_Status'), 0, true))
     end
 end
 

@@ -2,7 +2,7 @@
 -- Zone: The Eldieme Necropolis (195)
 -- Desc: this file contains functions that are shared by multiple luas in this zone's directory
 -----------------------------------
-local ID = require("scripts/zones/The_Eldieme_Necropolis/IDs")
+local ID = zones[xi.zone.THE_ELDIEME_NECROPOLIS]
 -----------------------------------
 
 local eldiemeGlobal =
@@ -50,14 +50,14 @@ local eldiemeGlobal =
             ID.text.SKULL_SPAWN,
         }
 
-        local tradeCount = GetNPCByID(ID.npc.CANDLE_OFFSET):getLocalVar("SkullTradeCount") -- Track how many candles have been lit
-        local tradeWindow = GetNPCByID(ID.npc.CANDLE_OFFSET):getLocalVar("SkullTradeTimer") -- Track how much time before candles reset
-        local active = npc:getLocalVar("candleActive") -- Track if current candle has already been lit
+        local tradeCount = GetNPCByID(ID.npc.CANDLE_OFFSET):getLocalVar('SkullTradeCount') -- Track how many candles have been lit
+        local tradeWindow = GetNPCByID(ID.npc.CANDLE_OFFSET):getLocalVar('SkullTradeTimer') -- Track how much time before candles reset
+        local active = npc:getLocalVar('candleActive') -- Track if current candle has already been lit
 
         for i = 1, 5 do
             if tradeCount == 6 and os.time() < tradeWindow and os.time() > active then -- Final candle, spawn Skulls
-                GetNPCByID(ID.npc.CANDLE_OFFSET):setLocalVar("SkullTradeCount", 0)
-                GetNPCByID(ID.npc.CANDLE_OFFSET):setLocalVar("SkullRespawn", os.time() + 3600) -- 1 hour cooldown to respawn skulls
+                GetNPCByID(ID.npc.CANDLE_OFFSET):setLocalVar('SkullTradeCount', 0)
+                GetNPCByID(ID.npc.CANDLE_OFFSET):setLocalVar('SkullRespawn', os.time() + 3600) -- 1 hour cooldown to respawn skulls
                 player:messageSpecial(ID.text.SKULL_SPAWN)
                 player:confirmTrade()
 
@@ -68,16 +68,16 @@ local eldiemeGlobal =
 
                 break
             elseif tradeCount == i and os.time() < tradeWindow and os.time() > active then -- Candle trades 2 through 6
-                GetNPCByID(ID.npc.CANDLE_OFFSET):setLocalVar("SkullTradeCount", i + 1)
-                npc:setLocalVar("candleActive", os.time() + 10)
+                GetNPCByID(ID.npc.CANDLE_OFFSET):setLocalVar('SkullTradeCount', i + 1)
+                npc:setLocalVar('candleActive', os.time() + 10)
                 player:messageSpecial(ID.text.THE_BRAZIER_IS_LIT)
                 player:messageSpecial(candleCount[i])
                 player:confirmTrade()
                 break
             elseif os.time() > tradeWindow and os.time() > active then -- First candle trade to start timer
-                GetNPCByID(ID.npc.CANDLE_OFFSET):setLocalVar("SkullTradeCount", 1)
-                GetNPCByID(ID.npc.CANDLE_OFFSET):setLocalVar("SkullTradeTimer", os.time() + 40)
-                npc:setLocalVar("candleActive", os.time() + 10)
+                GetNPCByID(ID.npc.CANDLE_OFFSET):setLocalVar('SkullTradeCount', 1)
+                GetNPCByID(ID.npc.CANDLE_OFFSET):setLocalVar('SkullTradeTimer', os.time() + 40)
+                npc:setLocalVar('candleActive', os.time() + 10)
                 player:messageSpecial(ID.text.THE_BRAZIER_IS_LIT)
                 player:messageSpecial(ID.text.SKULL_SIX_REMAIN)
                 player:confirmTrade()

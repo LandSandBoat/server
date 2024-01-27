@@ -2,8 +2,6 @@
 -- Area: East Sarutabaruta
 --  Mob: Tiny Mandragora
 -----------------------------------
-require("scripts/globals/regimes")
------------------------------------
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

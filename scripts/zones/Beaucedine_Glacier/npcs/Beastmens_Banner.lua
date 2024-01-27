@@ -3,7 +3,7 @@
 --  NPC: Beastmen_s_Banner
 -- !pos 20.169 -80.078 180.063 111
 -----------------------------------
-local ID = require("scripts/zones/Beaucedine_Glacier/IDs")
+local ID = zones[xi.zone.BEAUCEDINE_GLACIER]
 -----------------------------------
 local entity = {}
 

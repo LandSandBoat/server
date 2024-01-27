@@ -2,9 +2,8 @@
 -- Area: Mamool Ja Training Grounds (Preemptive Strike)
 --  Mob: Puk Executioner
 -----------------------------------
-mixins = { require("scripts/mixins/families/puk") }
+mixins = { require('scripts/mixins/families/puk') }
 -----------------------------------
-
 local entity = {}
 
 entity.onMobInitialize = function(mob)

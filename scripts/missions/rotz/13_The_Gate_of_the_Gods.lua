@@ -6,10 +6,6 @@
 -- Shimmering_Circle : !pos 0 -20 147 251
 -- RuAun_Gardens     : !zone 130
 -----------------------------------
-require('scripts/globals/interaction/mission')
-require('scripts/globals/missions')
-require('scripts/globals/titles')
------------------------------------
 
 local mission = Mission:new(xi.mission.log_id.ZILART, xi.mission.id.zilart.THE_GATE_OF_THE_GODS)
 

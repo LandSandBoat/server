@@ -3,14 +3,13 @@
 --  NPC: ??? (Spawn Pandemonium Warden)
 -- !pos 200 33 -140 68
 -----------------------------------
-local ID = require("scripts/zones/Aydeewa_Subterrane/IDs")
-require("scripts/globals/npc_util")
+local ID = zones[xi.zone.AYDEEWA_SUBTERRANE]
 -----------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     if
-        npcUtil.tradeHas(trade, xi.items.PANDEMONIUM_KEY) and
+        npcUtil.tradeHas(trade, xi.item.PANDEMONIUM_KEY) and
         npcUtil.popFromQM(player, npc, ID.mob.PANDEMONIUM_WARDEN)
     then
         -- Trade Pandemonium Key

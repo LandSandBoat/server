@@ -1,4 +1,4 @@
-local ID = require('scripts/zones/Garlaige_Citadel_[S]/IDs')
+-- local ID = zones[xi.zone.GARLAIGE_CITADEL_S]
 
 return {
     ['Diordinne'] = { event = 14 },

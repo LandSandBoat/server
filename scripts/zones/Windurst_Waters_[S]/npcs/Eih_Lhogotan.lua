@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Windurst Waters (S)
 --  NPC: Eih Lhogotan
--- Type: Standard NPC
 -- !pos -29.887 -5.999 91.042 94
 -----------------------------------
 local entity = {}

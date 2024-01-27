@@ -3,17 +3,16 @@
 --  NPC: <this space intentionally left blank>
 -- !pos -152 -16 20 125
 -----------------------------------
-local ID = require("scripts/zones/Western_Altepa_Desert/IDs")
-require("scripts/globals/npc_util")
+local ID = zones[xi.zone.WESTERN_ALTEPA_DESERT]
 -----------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     if
-        player:getCharVar("RELIC_IN_PROGRESS") == xi.items.OGRE_KILLER and
-        npcUtil.tradeHas(trade, { xi.items.RIMILALA_STRIPESHELL, xi.items.RUNAEIC_FRAGMENT, xi.items.SHARD_OF_NECROPSYCHE, xi.items.OGRE_KILLER })
+        player:getCharVar('RELIC_IN_PROGRESS') == xi.item.OGRE_KILLER and
+        npcUtil.tradeHas(trade, { xi.item.RIMILALA_STRIPESHELL, xi.item.RUNAEIC_FRAGMENT, xi.item.SHARD_OF_NECROPSYCHE, xi.item.OGRE_KILLER })
     then
-        player:startEvent(205, xi.items.GUTTLER)
+        player:startEvent(205, xi.item.GUTTLER)
     end
 end
 
@@ -27,10 +26,10 @@ end
 entity.onEventFinish = function(player, csid, option, npc)
     if
         csid == 205 and
-        npcUtil.giveItem(player, { xi.items.GUTTLER, { xi.items.LUNGO_NANGO_JADESHELL, 30 } })
+        npcUtil.giveItem(player, { xi.item.GUTTLER, { xi.item.LUNGO_NANGO_JADESHELL, 30 } })
     then
         player:confirmTrade()
-        player:setCharVar("RELIC_IN_PROGRESS", 0)
+        player:setCharVar('RELIC_IN_PROGRESS', 0)
     end
 end
 

@@ -3,8 +3,7 @@
 --  Mob: Brittle Rock
 -- Immune to sleep (light, dark), poison, cannot regain HP on deaggro
 -----------------------------------
-local ID = require("scripts/zones/Lebros_Cavern/IDs")
-require("scripts/globals/assault")
+local ID = zones[xi.zone.LEBROS_CAVERN]
 -----------------------------------
 local entity = {}
 
@@ -21,7 +20,7 @@ entity.onMobSpawn = function(mob)
     mob:setMod(xi.mod.CURSE_MEVA, 9999)
     mob:setMod(xi.mod.EVA, 0)
     mob:setMobMod(xi.mobMod.NO_DROPS, 1)
-    mob:addListener("WEAPONSKILL_TAKE", "BRITTLE_ROCK_WEAPONSKILL_TAKE", function(mobArg, user, wsid)
+    mob:addListener('WEAPONSKILL_TAKE', 'BRITTLE_ROCK_WEAPONSKILL_TAKE', function(mobArg, user, wsid)
         if wsid == 1838 then
             mobArg:setHP(0)
         end
@@ -29,8 +28,8 @@ entity.onMobSpawn = function(mob)
 end
 
 entity.onMobDeath = function(mob, player, optParams)
-    if mob:getLocalVar("dead") == 0 then
-        mob:setLocalVar("dead", 1)
+    if mob:getLocalVar('dead') == 0 then
+        mob:setLocalVar('dead', 1)
         local mobID = mob:getID()
         local instance = mob:getInstance()
 

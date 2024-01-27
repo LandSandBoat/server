@@ -1,8 +1,6 @@
 -----------------------------------
 -- Aftermath handling
 -----------------------------------
-require("scripts/globals/weaponskillids")
-
 xi = xi or {}
 
 xi.aftermath = {}
@@ -15,7 +13,7 @@ xi.aftermath.type =
 } -- TODO: Add Aeonic
 
 -----------------------------------
--- HELPERS : For aftermath eyes onry
+-- HELPERS : For aftermath eyes only
 -----------------------------------
 local getTier1RelicDuration = function(tp)
     return math.floor(tp * 0.02)
@@ -605,14 +603,14 @@ xi.aftermath.addStatusEffect = function(player, tp, weaponSlot, aftermathType)
         -- Mythic
         [2] = function(x)
             local tier = math.floor(tp / 1000)
-            local icon = xi.effect["AFTERMATH_LV"..tier]
+            local icon = xi.effect['AFTERMATH_LV'..tier]
             player:addStatusEffectEx(xi.effect.AFTERMATH, icon, id, 0, aftermath.duration[tier], 0, tp, aftermathType)
         end,
 
         -- Empyrean
         [3] = function(x)
             local tier = math.floor(tp / 1000)
-            local icon = xi.effect["AFTERMATH_LV"..tier]
+            local icon = xi.effect['AFTERMATH_LV'..tier]
             player:addStatusEffectEx(xi.effect.AFTERMATH, icon, id, 0, aftermath.duration[tier], 0, tp, aftermathType)
         end
     }

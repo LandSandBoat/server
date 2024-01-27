@@ -1,7 +1,7 @@
 -----------------------------------
 --    Functions for Shop system
 -----------------------------------
-require("scripts/globals/conquest")
+require('scripts/globals/conquest')
 -----------------------------------
 
 -----------------------------------
@@ -10,12 +10,12 @@ require("scripts/globals/conquest")
 
 local curio =
 {
-    ["medicine"]        = 1,
-    ["ammunition"]      = 2,
-    ["ninjutsuTools"]   = 3,
-    ["foodStuffs"]      = 4,
-    ["scrolls"]         = 5,
-    ["keys"]            = 6,
+    ['medicine']        = 1,
+    ['ammunition']      = 2,
+    ['ninjutsuTools']   = 3,
+    ['foodStuffs']      = 4,
+    ['scrolls']         = 5,
+    ['keys']            = 6,
     -- keyitems not implemented yet
 }
 

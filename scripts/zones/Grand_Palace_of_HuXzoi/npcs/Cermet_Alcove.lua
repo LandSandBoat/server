@@ -3,8 +3,7 @@
 --  NPC: Cermet Alcove
 -- Note: Escort Quest
 -----------------------------------
-local ID = require("scripts/zones/Grand_Palace_of_HuXzoi/IDs")
-require("scripts/globals/pathfind")
+local ID = zones[xi.zone.GRAND_PALACE_OF_HUXZOI]
 -----------------------------------
 
 local escorts =
@@ -42,7 +41,7 @@ entity.onTrigger = function(player, npc)
         return
     end
 
-    local lastId = npc:getLocalVar("QuasiluminId")
+    local lastId = npc:getLocalVar('QuasiluminId')
     if lastId ~= 0 and GetMobByID(lastId) ~= nil then
         -- Last one for this alcove is still alive
         player:messageSpecial(ID.text.RECENTLY_ACTIVATED)
@@ -52,7 +51,7 @@ entity.onTrigger = function(player, npc)
     -- Create a dynamic entity for the Quasilumin that the player has to escort
     local quasilumin = npc:getZone():insertDynamicEntity({
         objtype = xi.objType.MOB,
-        name = "Quasilumin",
+        name = 'Quasilumin',
         groupId = 27,
         groupZoneId = 34,
         x = data.spawn.x,
@@ -69,16 +68,16 @@ entity.onTrigger = function(player, npc)
         return
     end
 
-    npc:setLocalVar("QuasiluminId", quasilumin:getID())
+    npc:setLocalVar('QuasiluminId', quasilumin:getID())
 
     quasilumin:setSpawn(data.spawn.x, data.spawn.y, data.spawn.z, data.spawn.rotation)
     quasilumin:spawn()
     quasilumin:setStatus(xi.status.NORMAL)
 
     player:messageSpecial(ID.text.TIME_RESTRICTION, data.limit)
-    quasilumin:setLocalVar("escort", npc:getID())
-    quasilumin:setLocalVar("progress", 0)
-    quasilumin:setLocalVar("expire", os.time() + utils.minutes(data.limit))
+    quasilumin:setLocalVar('escort', npc:getID())
+    quasilumin:setLocalVar('progress', 0)
+    quasilumin:setLocalVar('expire', os.time() + utils.minutes(data.limit))
     quasilumin:showText(quasilumin, ID.text.REQUEST_CONFIRMED)
 end
 

@@ -2,9 +2,6 @@
 -- Area: Apollyon
 -- Name:
 -----------------------------------
-require("scripts/globals/limbus")
-require("scripts/globals/battlefield")
------------------------------------
 local battlefieldObject = {}
 
 -- After registering the BCNM via bcnmRegister(bcnmid)
@@ -30,7 +27,7 @@ battlefieldObject.onBattlefieldLeave = function(player, battlefield, leavecode)
     end
 
     if leavecode == xi.battlefield.leaveCode.LOST then
-        -- SetServerVariable("[]UniqueID", 0)
+        -- SetServerVariable('[]UniqueID', 0)
     end
 end
 

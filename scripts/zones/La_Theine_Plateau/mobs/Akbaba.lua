@@ -2,8 +2,7 @@
 -- Area: La Theine Plateau
 --  Mob: Akbaba
 -----------------------------------
-require("scripts/globals/regimes")
-require("scripts/quests/tutorial")
+require('scripts/quests/tutorial')
 -----------------------------------
 local entity = {}
 

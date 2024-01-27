@@ -4,10 +4,6 @@
 -- Type: ZNM assistant
 -- !pos -127.086 0.999 22.693 50
 -----------------------------------
-require("scripts/globals/besieged")
-require("scripts/globals/znm")
-local ID = require("scripts/zones/Aht_Urhgan_Whitegate/IDs")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

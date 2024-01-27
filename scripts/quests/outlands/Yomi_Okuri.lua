@@ -7,13 +7,8 @@
 -- qm2 (Onzozo)    : !pos -176 10 -60 213
 -- qm3 (Valkurm)   : !pos -767 -4 192 103
 -----------------------------------
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
-require('scripts/globals/titles')
-require('scripts/globals/interaction/quest')
------------------------------------
-local onzozoID  = require('scripts/zones/Labyrinth_of_Onzozo/IDs')
-local valkurmID = require('scripts/zones/Valkurm_Dunes/IDs')
+local onzozoID  = zones[xi.zone.LABYRINTH_OF_ONZOZO]
+local valkurmID = zones[xi.zone.VALKURM_DUNES]
 -----------------------------------
 
 local quest = Quest:new(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.YOMI_OKURI)
@@ -22,7 +17,7 @@ quest.reward =
 {
     fame = 40,
     fameArea = xi.quest.fame_area.NORG,
-    item = xi.items.MYOCHIN_SUNE_ATE,
+    item = xi.item.MYOCHIN_SUNE_ATE,
 }
 
 quest.sections =
@@ -87,7 +82,7 @@ quest.sections =
                         quest:getVar(player, 'Stage') == 0 and
                         not player:hasKeyItem(xi.ki.WASHUS_TASTY_WURST) and
                         not player:hasKeyItem(xi.ki.YOMOTSU_FEATHER) and
-                        npcUtil.tradeHasExactly(trade, { xi.items.HECTEYES_EYE, xi.items.BASTORE_SARDINE, xi.items.SLICE_OF_GIANT_SHEEP_MEAT, xi.items.FROST_TURNIP })
+                        npcUtil.tradeHasExactly(trade, { xi.item.HECTEYES_EYE, xi.item.BASTORE_SARDINE, xi.item.SLICE_OF_GIANT_SHEEP_MEAT, xi.item.FROST_TURNIP })
                     then
                         return quest:progressEvent(150)
                     end

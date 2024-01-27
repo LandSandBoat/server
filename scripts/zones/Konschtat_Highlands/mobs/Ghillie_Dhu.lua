@@ -2,11 +2,7 @@
 -- Area: Konschtat Highlands
 --   NM: Ghillie Dhu
 -----------------------------------
-require("scripts/globals/hunts")
-require("scripts/globals/regimes")
-require("scripts/globals/utils")
-require("scripts/globals/mobs")
-require("scripts/quests/tutorial")
+require('scripts/quests/tutorial')
 -----------------------------------
 local entity = {}
 

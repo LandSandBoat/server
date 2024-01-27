@@ -4,8 +4,7 @@
 -- Type: Goldsmithing Synthesis Image Support
 -- !pos -211.937 -7.814 -56.292 235
 -----------------------------------
-local ID = require("scripts/zones/Bastok_Markets/IDs")
-require("scripts/globals/crafting")
+local ID = zones[xi.zone.BASTOK_MARKETS]
 -----------------------------------
 local entity = {}
 

@@ -3,10 +3,8 @@
 --  Mob: Tonberry Creeper
 -- Note: PH for Hoar-knuckled Rimberry
 -----------------------------------
-local ID = require("scripts/zones/Yhoator_Jungle/IDs")
-mixins = { require("scripts/mixins/families/tonberry") }
-require("scripts/globals/regimes")
-require("scripts/globals/mobs")
+local ID = zones[xi.zone.YHOATOR_JUNGLE]
+mixins = { require('scripts/mixins/families/tonberry') }
 -----------------------------------
 local entity = {}
 

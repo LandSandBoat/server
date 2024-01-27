@@ -3,8 +3,6 @@
 --  NPC: Cruor Prospector
 -- Type: Cruor NPC
 -----------------------------------
-require("scripts/globals/abyssea")
------------------------------------
 local entity = {}
 
 local itemType =
@@ -20,39 +18,39 @@ local prospectorItems =
     [itemType.ITEM] =
     {
     --  Sel      Item                         Cost
-        [ 1] = { xi.items.UNKAI_KABUTO,       5000 },
-        [ 2] = { xi.items.IGA_ZUKIN,          5000 },
-        [ 3] = { xi.items.LANCERS_MEZAIL,     5000 },
-        [ 4] = { xi.items.CALLERS_HORN,       5000 },
-        [ 5] = { xi.items.MAVI_KAVUK,         5000 },
-        [ 6] = { xi.items.NAVARCHS_TRICORNE,  5000 },
-        [ 7] = { xi.items.CIRQUE_CAPPELLO,    5000 },
-        [ 8] = { xi.items.CHARIS_TIARA,       5000 },
-        [ 9] = { xi.items.SAVANTS_BONNET,     5000 },
-        [10] = { xi.items.FORBIDDEN_KEY,       500 },
-        [11] = { xi.items.SHADOW_THRONE,   2000000 },
+        [ 1] = { xi.item.UNKAI_KABUTO,       5000 },
+        [ 2] = { xi.item.IGA_ZUKIN,          5000 },
+        [ 3] = { xi.item.LANCERS_MEZAIL,     5000 },
+        [ 4] = { xi.item.CALLERS_HORN,       5000 },
+        [ 5] = { xi.item.MAVI_KAVUK,         5000 },
+        [ 6] = { xi.item.NAVARCHS_TRICORNE,  5000 },
+        [ 7] = { xi.item.CIRQUE_CAPPELLO,    5000 },
+        [ 8] = { xi.item.CHARIS_TIARA,       5000 },
+        [ 9] = { xi.item.SAVANTS_BONNET,     5000 },
+        [10] = { xi.item.FORBIDDEN_KEY,       500 },
+        [11] = { xi.item.SHADOW_THRONE,   2000000 },
     },
 
     [itemType.TEMP] =
     {
     --  Sel      Item                               Cost
-        [ 1] = { xi.items.LUCID_POTION_I,             80 },
-        [ 2] = { xi.items.LUCID_ETHER_I,              80 },
-        [ 3] = { xi.items.BOTTLE_OF_CATHOLICON,       80 },
-        [ 4] = { xi.items.DUSTY_ELIXIR,              120 },
-        [ 5] = { xi.items.TUBE_OF_CLEAR_SALVE_I,     120 },
-        [ 6] = { xi.items.BOTTLE_OF_STALWARTS_TONIC, 150 },
-        [ 7] = { xi.items.BOTTLE_OF_ASCETICS_TONIC,  150 },
-        [ 8] = { xi.items.BOTTLE_OF_CHAMPIONS_TONIC, 150 },
-        [ 9] = { xi.items.LUCID_POTION_II,           200 },
-        [10] = { xi.items.LUCID_ETHER_II,            200 },
-        [11] = { xi.items.LUCID_ELIXIR_I,            300 },
-        [12] = { xi.items.FLASK_OF_HEALING_POWDER,   300 },
-        [13] = { xi.items.PINCH_OF_MANA_POWDER,      300 },
-        [14] = { xi.items.TUBE_OF_HEALING_SALVE_I,   300 },
-        [15] = { xi.items.BOTTLE_OF_VICARS_DRINK,    300 },
-        [16] = { xi.items.TUBE_OF_CLEAR_SALVE_II,    300 },
-        [17] = { xi.items.PRIMEVAL_BREW,         2000000 },
+        [ 1] = { xi.item.LUCID_POTION_I,             80 },
+        [ 2] = { xi.item.LUCID_ETHER_I,              80 },
+        [ 3] = { xi.item.BOTTLE_OF_CATHOLICON,       80 },
+        [ 4] = { xi.item.DUSTY_ELIXIR,              120 },
+        [ 5] = { xi.item.TUBE_OF_CLEAR_SALVE_I,     120 },
+        [ 6] = { xi.item.BOTTLE_OF_STALWARTS_TONIC, 150 },
+        [ 7] = { xi.item.BOTTLE_OF_ASCETICS_TONIC,  150 },
+        [ 8] = { xi.item.BOTTLE_OF_CHAMPIONS_TONIC, 150 },
+        [ 9] = { xi.item.LUCID_POTION_II,           200 },
+        [10] = { xi.item.LUCID_ETHER_II,            200 },
+        [11] = { xi.item.LUCID_ELIXIR_I,            300 },
+        [12] = { xi.item.FLASK_OF_HEALING_POWDER,   300 },
+        [13] = { xi.item.PINCH_OF_MANA_POWDER,      300 },
+        [14] = { xi.item.TUBE_OF_HEALING_SALVE_I,   300 },
+        [15] = { xi.item.BOTTLE_OF_VICARS_DRINK,    300 },
+        [16] = { xi.item.TUBE_OF_CLEAR_SALVE_II,    300 },
+        [17] = { xi.item.PRIMEVAL_BREW,         2000000 },
     },
 
     [itemType.KEYITEM] =
@@ -141,7 +139,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local cruor = player:getCurrency("cruor")
+    local cruor = player:getCurrency('cruor')
     local demilune = xi.abyssea.getDemiluneAbyssite(player)
 
     player:startEvent(2002, cruor, demilune)
@@ -153,18 +151,18 @@ end
 entity.onEventFinish = function(player, csid, option, npc)
     local itemCategory = bit.band(option, 0x07)
     local itemSelected = bit.band(bit.rshift(option, 16), 0x1F)
-    local cruorTotal = player:getCurrency("cruor")
+    local cruorTotal = player:getCurrency('cruor')
 
     if itemCategory == itemType.ITEM then
         local itemData = prospectorItems[itemCategory][itemSelected]
-        local itemQty = itemData[1] ~= xi.items.FORBIDDEN_KEY and 1 or bit.rshift(option, 24)
+        local itemQty = itemData[1] ~= xi.item.FORBIDDEN_KEY and 1 or bit.rshift(option, 24)
         local itemCost = itemData[2] * itemQty
 
         if
             itemCost <= cruorTotal and
             npcUtil.giveItem(player, { { itemData[1], itemQty } })
         then
-            player:delCurrency("cruor", itemCost)
+            player:delCurrency('cruor', itemCost)
         end
     elseif itemCategory == itemType.TEMP then
         local itemData = prospectorItems[itemCategory][itemSelected]
@@ -174,7 +172,7 @@ entity.onEventFinish = function(player, csid, option, npc)
             itemCost <= cruorTotal and
             npcUtil.giveTempItem(player, { { itemData[1], 1 } })
         then
-            player:delCurrency("cruor", itemCost)
+            player:delCurrency('cruor', itemCost)
         end
     elseif itemCategory == itemType.KEYITEM then
         local itemData = prospectorItems[itemCategory][itemSelected]
@@ -183,7 +181,7 @@ entity.onEventFinish = function(player, csid, option, npc)
             itemData[2] <= cruorTotal and
             npcUtil.giveKeyItem(player, itemData[1])
         then
-            player:delCurrency("cruor", itemData[2])
+            player:delCurrency('cruor', itemData[2])
         end
     elseif itemCategory == itemType.ENHANCEMENT then
         local enhanceData = prospectorItems[itemCategory][itemSelected]
@@ -199,7 +197,7 @@ entity.onEventFinish = function(player, csid, option, npc)
                 end
             end
 
-            player:delCurrency("cruor", enhanceData[2])
+            player:delCurrency('cruor', enhanceData[2])
         end
     end
 end

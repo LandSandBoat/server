@@ -5,13 +5,8 @@
 -- Abeaule : !pos -136 -2 56 231
 -- Amaura  : !pos -85 -6 89 230
 -----------------------------------
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
-require('scripts/globals/titles')
-require('scripts/globals/interaction/quest')
------------------------------------
-local northernSandoriaID = require("scripts/zones/Northern_San_dOria/IDs")
-local southernSandoriaID = require("scripts/zones/Southern_San_dOria/IDs")
+local northernSandoriaID = zones[xi.zone.NORTHERN_SAN_DORIA]
+local southernSandoriaID = zones[xi.zone.SOUTHERN_SAN_DORIA]
 -----------------------------------
 
 local quest = Quest:new(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_MEDICINE_WOMAN)
@@ -103,7 +98,7 @@ quest.sections =
                 onTrade = function(player, npc, trade)
                     if
                         player:hasKeyItem(xi.ki.AMAURAS_FORMULA) and
-                        npcUtil.tradeHasExactly(trade, { xi.items.MALBORO_VINE, xi.items.CHUNK_OF_ZINC_ORE, xi.items.INSECT_WING })
+                        npcUtil.tradeHasExactly(trade, { xi.item.MALBORO_VINE, xi.item.CHUNK_OF_ZINC_ORE, xi.item.INSECT_WING })
                     then
                         return quest:progressEvent(637)
                     end

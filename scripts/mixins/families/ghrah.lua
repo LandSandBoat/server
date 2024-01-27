@@ -1,14 +1,14 @@
-require("scripts/globals/mixins")
+require('scripts/globals/mixins')
 -----------------------------------
 
 g_mixins = g_mixins or {}
 
 g_mixins.families.ghrah = function(ghrahMob)
-    ghrahMob:addListener("SPAWN", "GHRAH_SPAWN", function(mob)
+    ghrahMob:addListener('SPAWN', 'GHRAH_SPAWN', function(mob)
         mob:setAnimationSub(0)
         mob:setAggressive(false)
-        mob:setLocalVar("roamTime", os.time())
-        mob:setLocalVar("form2", math.random(1, 3))
+        mob:setLocalVar('roamTime', os.time())
+        mob:setLocalVar('form2', math.random(1, 3))
         local skin = math.random(1161, 1168)
         mob:setModelId(skin)
 
@@ -69,57 +69,57 @@ g_mixins.families.ghrah = function(ghrahMob)
         end
     end)
 
-    ghrahMob:addListener("ROAM_TICK", "GHRAH_TICK", function(mob)
-        local roamTime = mob:getLocalVar("roamTime")
+    ghrahMob:addListener('ROAM_TICK', 'GHRAH_TICK', function(mob)
+        local roamTime = mob:getLocalVar('roamTime')
         if
             mob:getAnimationSub() == 0 and
             os.time() - roamTime > 60
         then
-            mob:setAnimationSub(mob:getLocalVar("form2"))
-            mob:setLocalVar("roamTime", os.time())
+            mob:setAnimationSub(mob:getLocalVar('form2'))
+            mob:setLocalVar('roamTime', os.time())
             mob:setAggressive(true)
 
             if mob:getAnimationSub() == 2 then
                 mob:addMod(xi.mod.ATTP, 50) -- spider form att+
             end
         elseif
-            mob:getAnimationSub() == mob:getLocalVar("form2") and
+            mob:getAnimationSub() == mob:getLocalVar('form2') and
             os.time() - roamTime > 60
         then
             mob:setAnimationSub(0)
             mob:setAggressive(false)
-            mob:setLocalVar("roamTime", os.time())
+            mob:setLocalVar('roamTime', os.time())
             mob:delMod(xi.mod.ATTP, 50)
         end
     end)
 
-    ghrahMob:addListener("COMBAT_TICK", "GHRAH_COMBAT", function(mob)
-        local changeTime = mob:getLocalVar("changeTime")
+    ghrahMob:addListener('COMBAT_TICK', 'GHRAH_COMBAT', function(mob)
+        local changeTime = mob:getLocalVar('changeTime')
 
         if mob:getXPos() > 0 then
-            mob:setLocalVar("form2", 2)
+            mob:setLocalVar('form2', 2)
         else
-            mob:setLocalVar("form2", 3)
+            mob:setLocalVar('form2', 3)
         end
 
         if
             mob:getAnimationSub() == 0 and
             mob:getBattleTime() - changeTime > 60
         then
-            mob:setAnimationSub(mob:getLocalVar("form2"))
+            mob:setAnimationSub(mob:getLocalVar('form2'))
             mob:setAggressive(true)
-            mob:setLocalVar("changeTime", mob:getBattleTime())
+            mob:setLocalVar('changeTime', mob:getBattleTime())
 
             if mob:getAnimationSub() == 2 then
                 mob:addMod(xi.mod.ATTP, 50) -- spider form att+
             end
         elseif
-            mob:getAnimationSub() == mob:getLocalVar("form2") and
+            mob:getAnimationSub() == mob:getLocalVar('form2') and
             mob:getBattleTime() - changeTime > 60
         then
             mob:setAnimationSub(0)
             mob:setAggressive(false)
-            mob:setLocalVar("changeTime", mob:getBattleTime())
+            mob:setLocalVar('changeTime', mob:getBattleTime())
             mob:delMod(xi.mod.ATTP, 50)
         end
     end)

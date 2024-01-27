@@ -9,11 +9,8 @@
 -- Cid          : !pos -12 -12 1 237
 -- Iron Grate   : !pos -340 -93 156.7 111
 -----------------------------------
-require('scripts/globals/interaction/mission')
-require('scripts/globals/missions')
------------------------------------
-local promyvionVahzlID = require("scripts/zones/Promyvion-Vahzl/IDs")
-local psoXjaID         = require("scripts/zones/PsoXja/IDs")
+local promyvionVahzlID = zones[xi.zone.PROMYVION_VAHZL]
+local psoXjaID         = zones[xi.zone.PSOXJA]
 -----------------------------------
 
 local mission = Mission:new(xi.mission.log_id.COP, xi.mission.id.cop.THE_ENDURING_TUMULT_OF_WAR)

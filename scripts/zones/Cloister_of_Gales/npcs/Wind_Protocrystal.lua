@@ -4,9 +4,7 @@
 -- Involved in Quests: Trial by Wind, Trial Size Trial By Wind
 -- !pos -361 1 -381 201
 -----------------------------------
-require("scripts/globals/missions")
-require("scripts/globals/bcnm")
-local ID = require("scripts/zones/Cloister_of_Gales/IDs")
+local ID = zones[xi.zone.CLOISTER_OF_GALES]
 -----------------------------------
 local entity = {}
 
@@ -17,7 +15,7 @@ end
 entity.onTrigger = function(player, npc)
     if
         player:getCurrentMission(xi.mission.log_id.ASA) == xi.mission.id.asa.SUGAR_COATED_DIRECTIVE and
-        player:getCharVar("ASA4_Emerald") == 1
+        player:getCharVar('ASA4_Emerald') == 1
     then
         player:startEvent(2)
     elseif not xi.bcnm.onTrigger(player, npc) then
@@ -34,7 +32,7 @@ entity.onEventFinish = function(player, csid, option, npc)
         player:delKeyItem(xi.ki.DOMINAS_EMERALD_SEAL)
         player:addKeyItem(xi.ki.EMERALD_COUNTERSEAL)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.EMERALD_COUNTERSEAL)
-        player:setCharVar("ASA4_Emerald", "2")
+        player:setCharVar('ASA4_Emerald', 2)
     else
         xi.bcnm.onEventFinish(player, csid, option, npc)
     end

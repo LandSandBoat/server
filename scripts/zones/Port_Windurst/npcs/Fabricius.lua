@@ -3,8 +3,7 @@
 --  NPC: Fabricius
 -- Type: Abyssea Service NPC
 -----------------------------------
-require("scripts/globals/abyssea")
-----------------------------------
+-----------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

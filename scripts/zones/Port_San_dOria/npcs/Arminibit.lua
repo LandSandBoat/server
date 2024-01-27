@@ -2,8 +2,6 @@
 -- Area: Port San d'Oria
 --  NPC: Arminibit
 -----------------------------------
-require("scripts/globals/quests")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
@@ -25,7 +23,7 @@ end
 
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 24 then
-        player:setCharVar("TheHolyCrest_Event", 1)
+        player:setCharVar('TheHolyCrest_Event', 1)
     end
 end
 

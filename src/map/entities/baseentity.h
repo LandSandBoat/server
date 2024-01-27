@@ -41,6 +41,7 @@ enum ENTITYTYPE : uint8
     TYPE_TRUST  = 0x20,
     TYPE_FELLOW = 0x40,
 };
+DECLARE_FORMAT_AS_UNDERLYING(ENTITYTYPE);
 
 enum class STATUS_TYPE : uint8
 {
@@ -53,6 +54,7 @@ enum class STATUS_TYPE : uint8
     STATUS_18     = 18,
     SHUTDOWN      = 20,
 };
+DECLARE_FORMAT_AS_UNDERLYING(STATUS_TYPE);
 
 enum ANIMATIONTYPE : uint8
 {
@@ -257,8 +259,8 @@ public:
     virtual void Spawn();
     virtual void FadeOut();
 
-    virtual const std::string& GetName();       // Internal name of entity
-    virtual const std::string& GetPacketName(); // Name of entity sent to the client
+    virtual const std::string& getName();       // Internal name of entity
+    virtual const std::string& getPacketName(); // Name of entity sent to the client
 
     uint16 getZone() const; // Current zone
     float  GetXPos() const; // Position of co-ordinate X
@@ -328,4 +330,4 @@ protected:
     std::map<std::string, uint32> m_localVars;
 };
 
-#endif
+#endif // _BASEENTITY_H

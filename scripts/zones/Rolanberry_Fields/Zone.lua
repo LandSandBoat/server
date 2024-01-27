@@ -1,11 +1,8 @@
 -----------------------------------
 -- Zone: Rolanberry_Fields (110)
 -----------------------------------
-local ID = require('scripts/zones/Rolanberry_Fields/IDs')
+local ID = zones[xi.zone.ROLANBERRY_FIELDS]
 require('scripts/quests/i_can_hear_a_rainbow')
-require('scripts/globals/chocobo_digging')
-require('scripts/globals/conquest')
-require('scripts/globals/missions')
 -----------------------------------
 local zoneObject = {}
 

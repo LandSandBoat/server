@@ -1,4 +1,4 @@
-local ID = require("scripts/zones/La_Theine_Plateau/IDs")
+local ID = zones[xi.zone.LA_THEINE_PLATEAU]
 
 return {
     ['Augevinne']           = { text = ID.text.RESCUE_DRILL + 33 },

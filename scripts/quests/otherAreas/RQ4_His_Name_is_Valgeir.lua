@@ -6,12 +6,6 @@
 -- Mhaura,  Rycharde, !pos 17.451 -16.000 88.815 249
 -- Selbina, Valgeir,  !pos 57.496 -15.273 20.229 248
 -----------------------------------
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
-require('scripts/globals/titles')
-require('scripts/globals/utils')
-require('scripts/globals/interaction/quest')
------------------------------------
 
 local quest = Quest:new(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.HIS_NAME_IS_VALGEIR)
 
@@ -38,7 +32,7 @@ quest.sections =
             {
                 onTrigger = function(player, npc)
                     if
-                        player:getCharVar("Quest[4][2]DayCompleted") + 2 < VanadielUniqueDay() and
+                        player:getCharVar('Quest[4][2]DayCompleted') + 2 < VanadielUniqueDay() and
                         player:getFameLevel(xi.quest.fame_area.WINDURST) > 2
                     then
                         return quest:progressEvent(86) -- His Name is Valgeir starting event.
@@ -54,7 +48,7 @@ quest.sections =
             {
                 [86] = function(player, csid, option, npc)
                     if option == 80 or option == 81 then -- Accept quest option.
-                        player:setCharVar("Quest[4][2]DayCompleted", 0)   -- Delete previous quest (Unending Chase) variables
+                        player:setCharVar('Quest[4][2]DayCompleted', 0)   -- Delete previous quest (Unending Chase) variables
                         npcUtil.giveKeyItem(player, xi.ki.ARAGONEU_PIZZA) -- Give pizza to player
                         quest:begin(player)
                     end

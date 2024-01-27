@@ -36,6 +36,7 @@
 #define JST_OFFSET 32400 // JST +offset from UTC
 
 #include "cbasetypes.h"
+#include "singleton.h"
 
 enum DAYTYPE : uint8
 {
@@ -61,12 +62,9 @@ enum TIMETYPE : uint8
     TIME_NIGHT    = 7
 };
 
-class CVanaTime
+class CVanaTime : public Singleton<CVanaTime>
 {
 public:
-    static CVanaTime* getInstance();
-    static void       delInstance();
-
     TIMETYPE SyncTime();
     TIMETYPE GetCurrentTOTD();
 
@@ -81,6 +79,7 @@ public:
     uint8  getMoonDirection() const;
     uint8  getRSERace() const;
     uint8  getRSELocation() const;
+    uint32 getSysTime();
     uint32 getSysHour();
     uint32 getSysMinute();
     uint32 getSysSecond();
@@ -95,15 +94,15 @@ public:
     uint32 getJstMidnight(); // Upcoming JST midnight in unix timestamp
 
     uint32 getVanaTime() const;
-    int32  getCustomEpoch() const;
+    uint32 getEpoch() const;
+    uint32 getCustomEpoch() const;
 
     void setCustomEpoch(int32 epoch);
 
-private:
-    static CVanaTime* _instance;
-
+protected:
     CVanaTime();
 
+private:
     uint32 m_vYear{};    // Vanadiel Year
     uint32 m_vMon{};     // Vanadiel Month
     uint32 m_vDate{};    // Vanadiel Date (day of the month)

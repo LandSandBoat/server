@@ -5,9 +5,7 @@
 --                        'The Curious Case of Melvien'
 -- !pos -9 0 67 256
 -----------------------------------
-local ID = require("scripts/zones/Western_Adoulin/IDs")
-require("scripts/globals/quests")
-require("scripts/globals/utils")
+local ID = zones[xi.zone.WESTERN_ADOULIN]
 -----------------------------------
 local entity = {}
 
@@ -18,7 +16,7 @@ entity.onTrigger = function(player, npc)
     local tccom = player:getQuestStatus(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.THE_CURIOUS_CASE_OF_MELVIEN)
     local tccomNeedKI = player:hasKeyItem(xi.ki.MELVIENS_TURN) and not player:hasKeyItem(xi.ki.MELVIENS_DEATH)
     local orderUp = player:getQuestStatus(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.ORDER_UP)
-    local orderMastan = utils.mask.getBit(player:getCharVar("Order_Up_NPCs"), 11)
+    local orderMastan = utils.mask.getBit(player:getCharVar('Order_Up_NPCs'), 11)
 
     if orderUp == QUEST_ACCEPTED and not orderMastan then
         -- Progresses Quest: 'Order Up'
@@ -35,7 +33,7 @@ end
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 70 then
         -- Progresses Quest: 'Order Up'
-        player:setCharVar("Order_Up_NPCs", utils.mask.setBit(player:getCharVar("Order_Up_NPCs"), 11, true))
+        player:setCharVar('Order_Up_NPCs', utils.mask.setBit(player:getCharVar('Order_Up_NPCs'), 11, true))
     elseif csid == 184 and option == 1 then
         -- Progresses Quest: 'The Curious Case of Melvien'
         player:addKeyItem(xi.ki.MELVIENS_DEATH)

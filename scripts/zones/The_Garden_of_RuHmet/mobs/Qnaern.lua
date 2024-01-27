@@ -4,7 +4,7 @@
 -- Note: The RNG versions in Garden assist Ix'Aern (DRK)
 --       All Qn'aerns can use their respective two-hour abilities multiple times (guessing 2-minute timers)
 -----------------------------------
-mixins = { require("scripts/mixins/job_special") }
+mixins = { require('scripts/mixins/job_special') }
 -----------------------------------
 local entity = {}
 

@@ -3,9 +3,7 @@
 --  NPC: Blockaded Path
 -- !pos -222.779 40.597 -410.526 267
 -----------------------------------
-require('scripts/globals/missions')
------------------------------------
-local kamihrID = require('scripts/zones/Kamihr_Drifts/IDs')
+local kamihrID = zones[xi.zone.KAMIHR_DRIFTS]
 -----------------------------------
 local entity = {}
 

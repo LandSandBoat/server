@@ -3,8 +3,6 @@
 --  NPC: ??? (qm8)
 -- Note: Spawns Velosareon
 -----------------------------------
-require("scripts/globals/dynamis")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

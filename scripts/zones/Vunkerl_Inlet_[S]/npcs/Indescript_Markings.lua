@@ -4,7 +4,7 @@
 -- Type: Quest
 -- !pos -629.179 -49.002 -429.104 1 83
 -----------------------------------
-local ID = require("scripts/zones/Vunkerl_Inlet_[S]/IDs")
+local ID = zones[xi.zone.VUNKERL_INLET_S]
 -----------------------------------
 local entity = {}
 
@@ -12,7 +12,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local pantsQuestProgress = player:getCharVar("AF_SCH_PANTS")
+    local pantsQuestProgress = player:getCharVar('AF_SCH_PANTS')
 
     player:delStatusEffect(xi.effect.SNEAK)
 
@@ -24,7 +24,7 @@ entity.onTrigger = function(player, npc)
     then
         player:addKeyItem(xi.ki.DJINN_EMBER)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.DJINN_EMBER)
-        player:setCharVar("AF_SCH_PANTS", pantsQuestProgress + 1)
+        player:setCharVar('AF_SCH_PANTS', pantsQuestProgress + 1)
         npc:hideNPC(60)
 
     else

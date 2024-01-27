@@ -1,4 +1,4 @@
-local ID = require('scripts/zones/Kamihr_Drifts/IDs')
+local ID = zones[xi.zone.KAMIHR_DRIFTS]
 
 return {
     ['Alpine_Trail']  = { messageSpecial = ID.text.PATH_SEEMS_TO_LEAD },

@@ -1,8 +1,6 @@
 -----------------------------------
 -- Zone: Outer Ra’Kanzar [U1] (275)
 -----------------------------------
-local ID = require('scripts/zones/Outer_RaKaznar_[U1]/IDs')
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

@@ -2,9 +2,8 @@
 -- Area: Apollyon SW
 --  NPC: Fir Bholg (RDM)
 -----------------------------------
-mixins = { require("scripts/mixins/job_special") }
+mixins = { require('scripts/mixins/job_special') }
 -----------------------------------
-
 local entity = {}
 
 entity.onMobSpawn = function(mob)

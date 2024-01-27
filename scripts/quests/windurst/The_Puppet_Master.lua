@@ -6,10 +6,6 @@
 -- Juroro                   : !pos 32 7 -41 236
 -- Koru-Moru                : !pos -120 -6 124 239
 -----------------------------------
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
-require('scripts/globals/interaction/quest')
------------------------------------
 
 local quest = Quest:new(xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_PUPPET_MASTER)
 
@@ -17,7 +13,7 @@ quest.reward =
 {
     fame     = 20,
     fameArea = xi.quest.fame_area.WINDURST,
-    item     = xi.items.KUKULCANS_STAFF,
+    item     = xi.item.KUKULCANS_STAFF,
 }
 
 quest.sections =
@@ -86,12 +82,12 @@ quest.sections =
                     local questProgress = quest:getVar(player, 'Prog')
 
                     if questProgress == 0 then
-                        return quest:progressEvent(256, 0, 329, 0, xi.items.EARTH_PENDULUM)
+                        return quest:progressEvent(256, 0, 329, 0, xi.item.EARTH_PENDULUM)
                     elseif
                         questProgress == 1 and
-                        not player:hasItem(xi.items.EARTH_PENDULUM)
+                        not player:hasItem(xi.item.EARTH_PENDULUM)
                     then
-                        return quest:progressEvent(257, 0, xi.items.EARTH_PENDULUM)
+                        return quest:progressEvent(257, 0, xi.item.EARTH_PENDULUM)
                     elseif questProgress == 2 then
                         return quest:progressEvent(258)
                     end
@@ -101,13 +97,13 @@ quest.sections =
             onEventFinish =
             {
                 [256] = function(player, csid, option, npc)
-                    if npcUtil.giveItem(player, xi.items.EARTH_PENDULUM) then
+                    if npcUtil.giveItem(player, xi.item.EARTH_PENDULUM) then
                         quest:setVar(player, 'Prog', 1)
                     end
                 end,
 
                 [257] = function(player, csid, option, npc)
-                    npcUtil.giveItem(player, xi.items.EARTH_PENDULUM)
+                    npcUtil.giveItem(player, xi.item.EARTH_PENDULUM)
                 end,
 
                 [258] = function(player, csid, option, npc)

@@ -34,12 +34,14 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 void queue_message(uint64 ipp, MSGSERVTYPE type, zmq::message_t* extra, zmq::message_t* packet = nullptr);
 void queue_message_broadcast(MSGSERVTYPE type, zmq::message_t* extra, zmq::message_t* packet = nullptr);
 
-void message_server_init(const bool& requestExit);
+auto pop_external_processing_message() -> std::optional<HandleableMessage>;
+
+void message_server_init(bool const& requestExit);
 void message_server_close();
 
 struct message_server_wrapper_t
 {
-    message_server_wrapper_t(const std::atomic_bool& requestExit)
+    message_server_wrapper_t(std::atomic_bool const& requestExit)
     : m_thread(std::make_unique<nonstd::jthread>(std::bind(message_server_init, std::ref(requestExit))))
     {
     }

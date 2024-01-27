@@ -4,9 +4,6 @@
 -- Log ID: 1, Quest ID: 4
 -- Corann : !pos 90.935 -8.772 32.564 236
 -----------------------------------
-require('scripts/globals/quests')
-require('scripts/globals/interaction/quest')
------------------------------------
 
 local quest = Quest:new(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_QUADAVS_CURSE)
 
@@ -14,7 +11,7 @@ quest.reward =
 {
     fame     = 120,
     fameArea = xi.quest.fame_area.BASTOK,
-    item     = xi.items.BRONZE_SUBLIGAR,
+    item     = xi.item.BRONZE_SUBLIGAR,
 }
 
 quest.sections =
@@ -47,7 +44,7 @@ quest.sections =
             ['Corann'] =
             {
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, xi.items.QUADAV_BACKPLATE) then
+                    if npcUtil.tradeHasExactly(trade, xi.item.QUADAV_BACKPLATE) then
                         return quest:progressEvent(81)
                     end
                 end,

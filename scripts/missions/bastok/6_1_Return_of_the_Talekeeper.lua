@@ -12,15 +12,11 @@
 -- qm2 (W.Altepa) : !pos -325 0 -111 125
 -- Tall Mountain  : !pos 71 7 -7 234
 -----------------------------------
-require('scripts/globals/missions')
-require('scripts/globals/npc_util')
-require('scripts/globals/interaction/mission')
------------------------------------
-local bastokMarketsID = require('scripts/zones/Bastok_Markets/IDs')
-local bastokMinesID   = require('scripts/zones/Bastok_Mines/IDs')
-local metalworksID    = require('scripts/zones/Metalworks/IDs')
-local portBastokID    = require('scripts/zones/Port_Bastok/IDs')
-local westernAltepaID = require('scripts/zones/Western_Altepa_Desert/IDs')
+local bastokMarketsID = zones[xi.zone.BASTOK_MARKETS]
+local bastokMinesID   = zones[xi.zone.BASTOK_MINES]
+local metalworksID    = zones[xi.zone.METALWORKS]
+local portBastokID    = zones[xi.zone.PORT_BASTOK]
+local westernAltepaID = zones[xi.zone.WESTERN_ALTEPA_DESERT]
 -----------------------------------
 
 local mission = Mission:new(xi.mission.log_id.BASTOK, xi.mission.id.bastok.RETURN_OF_THE_TALEKEEPER)

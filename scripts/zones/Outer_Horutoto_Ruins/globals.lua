@@ -1,8 +1,7 @@
 -- Zone: Outer Horutoto Ruins (194)
 -- Desc: this file contains functions that are shared by multiple luas in this zone's directory
 -----------------------------------
-local ID = require("scripts/zones/Outer_Horutoto_Ruins/IDs")
-require("scripts/globals/missions")
+local ID = zones[xi.zone.OUTER_HORUTOTO_RUINS]
 -----------------------------------
 
 -----------------------------------
@@ -13,7 +12,7 @@ local function setTrioCooldown()
     local pop = os.time() + math.random(2700, 3600) -- 45 to 60 minutes
 
     for i = ID.mob.BALLOON_NM_OFFSET + 1, ID.mob.BALLOON_NM_OFFSET + 3 do
-        GetMobByID(i):setLocalVar("pop", pop)
+        GetMobByID(i):setLocalVar('pop', pop)
     end
 end
 
@@ -49,7 +48,7 @@ local outerHorutotoGlobal =
         then
             local nmId = ID.mob.BALLOON_NM_OFFSET + math.random(1, 3)
             local nm   = GetMobByID(nmId)
-            local pop  = nm:getLocalVar("pop")
+            local pop  = nm:getLocalVar('pop')
 
             if os.time() > pop then
                 DisallowRespawn(phId, true)
@@ -57,11 +56,11 @@ local outerHorutotoGlobal =
                 UpdateNMSpawnPoint(nmId)
                 nm:setRespawnTime(GetMobRespawnTime(phId))
 
-                nm:addListener("DESPAWN", "DESPAWN_"..nmId, function(m)
+                nm:addListener('DESPAWN', 'DESPAWN_'..nmId, function(m)
                     DisallowRespawn(nmId, true)
                     DisallowRespawn(phId, false)
                     GetMobByID(phId):setRespawnTime(GetMobRespawnTime(phId))
-                    m:removeListener("DESPAWN_"..nmId)
+                    m:removeListener('DESPAWN_'..nmId)
                     setTrioCooldown()
                 end)
             end

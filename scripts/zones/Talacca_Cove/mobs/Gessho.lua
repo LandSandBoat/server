@@ -2,7 +2,7 @@
 -- Area: Talacca Cove
 --  Mob: Gessho
 -----------------------------------
-local ID = require("scripts/zones/Talacca_Cove/IDs")
+local ID = zones[xi.zone.TALACCA_COVE]
 -----------------------------------
 local entity = {}
 
@@ -21,8 +21,8 @@ entity.onMobFight = function(mob, target)
             mob:getBattlefield():win()
         end
     else
-        local count = mob:getLocalVar("DespawnCount")
-        mob:setLocalVar("DespawnCount", count + 1)
+        local count = mob:getLocalVar('DespawnCount')
+        mob:setLocalVar('DespawnCount', count + 1)
 
         if count == 100 then
             DespawnMob(mob:getID())

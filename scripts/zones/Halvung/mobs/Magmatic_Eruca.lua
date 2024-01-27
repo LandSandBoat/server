@@ -2,7 +2,7 @@
 -- Area: Halvung
 --  Mob: Magmatic Eruca
 -----------------------------------
-mixins = { require("scripts/mixins/families/eruca") }
+mixins = { require('scripts/mixins/families/eruca') }
 -----------------------------------
 local entity = {}
 

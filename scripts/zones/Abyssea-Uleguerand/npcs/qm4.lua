@@ -4,8 +4,6 @@
 -- Spawns Yaguarogui
 -- !pos 432 .001 -424 253
 -----------------------------------
-require("scripts/globals/abyssea")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

@@ -2,8 +2,7 @@
 -- Area: Attohwa Chasm
 --   NM: Alastor Antlion
 -----------------------------------
-mixins = { require("scripts/mixins/families/antlion_ambush_noaggro") }
-require("scripts/globals/mobs")
+mixins = { require('scripts/mixins/families/antlion_ambush_noaggro') }
 -----------------------------------
 local entity = {}
 

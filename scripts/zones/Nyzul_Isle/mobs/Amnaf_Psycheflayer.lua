@@ -2,7 +2,7 @@
 -- Area: Nyzul Isle (Path of Darkness)
 --  Mob: Amnaf Psycheflayer
 -----------------------------------
-local ID = require('scripts/zones/Nyzul_Isle/IDs')
+local ID = zones[xi.zone.NYZUL_ISLE]
 -----------------------------------
 local entity = {}
 
@@ -11,14 +11,14 @@ entity.onMobInitialize = function(mob)
 end
 
 entity.onMobSpawn = function(mob)
-    mob:addListener("WEAPONSKILL_STATE_ENTER", "WS_START_MSG", function(mobArg, skillID)
+    mob:addListener('WEAPONSKILL_STATE_ENTER', 'WS_START_MSG', function(mobArg, skillID)
         mobArg:showText(mobArg, ID.text.WHEEZE)
     end)
 end
 
 entity.onMobEngaged = function(mob, target)
     local naja = GetMobByID(ID.mob[58].NAJA, mob:getInstance())
-    naja:setLocalVar("ready", 1)
+    naja:setLocalVar('ready', 1)
     mob:showText(mob, ID.text.CANNOT_LET_YOU_PASS)
 end
 

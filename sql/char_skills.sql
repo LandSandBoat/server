@@ -16,4 +16,4 @@ CREATE TABLE IF NOT EXISTS `char_skills` (
   `value` smallint(4) unsigned NOT NULL DEFAULT '0',
   `rank` tinyint(2) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`charid`,`skillid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 AVG_ROW_LENGTH=10;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci AVG_ROW_LENGTH=10;

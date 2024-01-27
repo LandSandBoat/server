@@ -3,8 +3,7 @@
 --  Mob: Orcish Firebelcher
 -- Note: PH for Poisonhand Gnadgad
 -----------------------------------
-local ID = require("scripts/zones/Davoi/IDs")
-require("scripts/globals/mobs")
+local ID = zones[xi.zone.DAVOI]
 -----------------------------------
 local entity = {}
 

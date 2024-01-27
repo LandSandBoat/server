@@ -2,8 +2,7 @@
 -- Ambuscade
 -- !instance 30000
 -----------------------------------
-local ID = require("scripts/zones/Maquette_Abdhaljs-Legion_B/IDs")
-require("scripts/globals/instance")
+local ID = zones[xi.zone.MAQUETTE_ABDHALJS_LEGION_B]
 -----------------------------------
 local instanceObject = {}
 
@@ -28,7 +27,7 @@ instanceObject.afterInstanceRegister = function(player)
     player:countdown(instance:getTimeLimit() * 60)
 end
 
--- Instance "tick"
+-- Instance 'tick'
 instanceObject.onInstanceTimeUpdate = function(instance, elapsed)
     --xi.instance.updateInstanceTime(instance, elapsed, ID.text)
 

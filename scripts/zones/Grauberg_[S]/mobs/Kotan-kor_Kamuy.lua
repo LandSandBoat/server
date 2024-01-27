@@ -2,9 +2,6 @@
 -- Area: Grauberg [S]
 --   NM: Kotan-kor Kamuy
 -----------------------------------
-require("scripts/globals/hunts")
-require("scripts/globals/mobs")
------------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)

@@ -1,5 +1,8 @@
 ﻿#include "common/zlib.h"
+
 #include "common/logging.h"
+#include "common/utils.h"
+
 #include <cassert>
 #include <cstring>
 #include <memory>
@@ -62,12 +65,12 @@ static void swap32_if_be(const uint32* v, const size_t memb)
 #endif
 }
 
-static bool read_to_vector(std::string const& file, std::vector<uint32>& vec)
+static bool read_to_vector(std::string const& filename, std::vector<uint32>& vec)
 {
-    std::unique_ptr<FILE, decltype(&fclose)> fp(fopen(file.c_str(), "rb"), &fclose);
+    auto fp = utils::openFile(filename, "rb");
     if (!fp)
     {
-        ShowCritical("zlib: can't open file <%s>", file.c_str());
+        ShowCritical("zlib: can't open file <%s>", filename.c_str());
         return false;
     }
 
@@ -78,7 +81,7 @@ static bool read_to_vector(std::string const& file, std::vector<uint32>& vec)
     vec.resize(size / sizeof(uint32));
     if (fread(vec.data(), sizeof(uint32), vec.size(), fp.get()) != vec.size())
     {
-        ShowCritical("zlib: can't read file <%s>: %s", file.c_str(), strerror(errno));
+        ShowCritical("zlib: can't read file <%s>: %s", filename.c_str(), strerror(errno));
         return false;
     }
 

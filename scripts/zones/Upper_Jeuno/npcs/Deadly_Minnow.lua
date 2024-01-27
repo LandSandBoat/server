@@ -5,8 +5,7 @@
 -- Involved in Quest: Borghertz's Hands (1st quest only)
 -- !pos -5 1 48 244
 -----------------------------------
-local ID = require("scripts/zones/Upper_Jeuno/IDs")
-require("scripts/globals/shop")
+local ID = zones[xi.zone.UPPER_JEUNO]
 -----------------------------------
 local entity = {}
 
@@ -14,7 +13,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if player:getCharVar("BorghertzHandsFirstTime") == 1 then
+    if player:getCharVar('BorghertzHandsFirstTime') == 1 then
         player:startEvent(24)
     else
         local stock =
@@ -41,7 +40,7 @@ end
 
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 24 then
-        player:setCharVar("BorghertzHandsFirstTime", 2)
+        player:setCharVar('BorghertzHandsFirstTime', 2)
     end
 end
 

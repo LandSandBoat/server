@@ -4,8 +4,7 @@
 -- Type: Patrol NPC
 -- !pos -436.356 -15.851 -258.168 100
 -----------------------------------
-local ID = require("scripts/zones/West_Ronfaure/IDs")
-require("scripts/globals/pathfind")
+local ID = zones[xi.zone.WEST_RONFAURE]
 -----------------------------------
 local entity = {}
 
@@ -938,13 +937,13 @@ end
 
 entity.onPath = function(npc)
     if
-        npc:getLocalVar("reported") ~= 1 and
+        npc:getLocalVar('reported') ~= 1 and
         npc:atPoint(xi.path.get(pathNodes, 288))
     then
         GetNPCByID(npc:getID() + 4):showText(npc, ID.text.ZOVRIACE_REPORT)
-        npc:setLocalVar("reported", 1)
+        npc:setLocalVar('reported', 1)
     elseif npc:atPoint(xi.path.last(pathNodes)) then
-        npc:setLocalVar("reported", 0)
+        npc:setLocalVar('reported', 0)
     end
 end
 

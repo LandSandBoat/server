@@ -4,8 +4,6 @@
 -- Involved In Quest: Wings of Gold
 -- !zone 157
 -----------------------------------
-require("scripts/globals/treasure")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

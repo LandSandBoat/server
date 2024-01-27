@@ -23,9 +23,9 @@ xi.artisan.moogleOnTrigger = function(player, npc)
     local csid = event[player:getZoneID()]
     local menuMask = 0
     local sackSize = player:getContainerSize(xi.inv.MOGSACK)
-    local mogVisited = (sackSize > 0 or player:getCharVar("[artisan]visited") > 0) and 1 or 0
+    local mogVisited = (sackSize > 0 or player:getCharVar('[artisan]visited') > 0) and 1 or 0
     if mogVisited == 0 then
-        player:setCharVar("[artisan]visited", 1)
+        player:setCharVar('[artisan]visited', 1)
     end
 
     if sackSize > 0 then
@@ -42,7 +42,7 @@ xi.artisan.moogleOnUpdate = function(player, csid, option, npc)
         if player:getGil() >= 9980 and player:getContainerSize(xi.inv.MOGSACK) == 0 then
             player:delGil(9980)
             player:changeContainerSize(xi.inv.MOGSACK, 30)
-            player:setCharVar("[artisan]visited", 0)
+            player:setCharVar('[artisan]visited', 0)
             player:updateEvent(0, 0, 0, 30 + 1, 0, 0, 0, 2)
         end
 
@@ -58,7 +58,7 @@ xi.artisan.moogleOnUpdate = function(player, csid, option, npc)
         end
 
     elseif option == 3 then -- Client requests sack + scroll status
-        local scrollAvail = player:getCharVar("[artisan]nextScroll") < getMidnight() and 1 or 0
+        local scrollAvail = player:getCharVar('[artisan]nextScroll') < getMidnight() and 1 or 0
         local sackSize = player:getContainerSize(xi.inv.MOGSACK)
         if sackSize > 0 then
             sackSize = sackSize + 1
@@ -67,7 +67,7 @@ xi.artisan.moogleOnUpdate = function(player, csid, option, npc)
         player:updateEvent(0, 0, 0, sackSize, 0, 0, 0, scrollAvail)
 
     elseif option == 4 then -- Main dialogue
-        local scrollAvail = player:getCharVar("[artisan]nextScroll") < getMidnight() and 1 or 0
+        local scrollAvail = player:getCharVar('[artisan]nextScroll') < getMidnight() and 1 or 0
         local sackSize = player:getContainerSize(xi.inv.MOGSACK)
         if sackSize > 0 then
             sackSize = sackSize + 1
@@ -79,9 +79,9 @@ end
 
 xi.artisan.moogleOnFinish = function(player, csid, option, npc)
     if option == 99 then -- Get Scroll
-        if player:getCharVar("[artisan]nextScroll") < getMidnight() then
-            if npcUtil.giveItem(player, xi.items.SCROLL_OF_INSTANT_WARP) then
-                player:setCharVar("[artisan]nextScroll", getMidnight())
+        if player:getCharVar('[artisan]nextScroll') < getMidnight() then
+            if npcUtil.giveItem(player, xi.item.SCROLL_OF_INSTANT_WARP) then
+                player:setCharVar('[artisan]nextScroll', getMidnight())
             end
         end
     end

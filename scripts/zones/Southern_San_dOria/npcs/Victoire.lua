@@ -3,8 +3,7 @@
 --  NPC: Victoire
 -- Standard Merchant NPC
 -----------------------------------
-local ID = require("scripts/zones/Southern_San_dOria/IDs")
-require("scripts/globals/shop")
+local ID = zones[xi.zone.SOUTHERN_SAN_DORIA]
 -----------------------------------
 local entity = {}
 

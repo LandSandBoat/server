@@ -3,9 +3,7 @@
 -- Door: Runic Seal
 -- !pos 36 -10 620 54
 -----------------------------------
-local ID = require("scripts/zones/Arrapago_Reef/IDs")
-require("scripts/globals/besieged")
-require("scripts/globals/missions")
+local ID = zones[xi.zone.ARRAPAGO_REEF]
 -----------------------------------
 local entity = {}
 
@@ -44,7 +42,7 @@ entity.onEventUpdate = function(player, csid, option, npc)
         cap = 50
     end
 
-    player:setCharVar("AssaultCap", cap)
+    player:setCharVar('AssaultCap', cap)
 
     local party = player:getParty()
 
@@ -76,8 +74,8 @@ end
 
 entity.onInstanceCreated = function(player, target, instance)
     if instance then
-        instance:setLevelCap(player:getCharVar("AssaultCap"))
-        player:setCharVar("AssaultCap", 0)
+        instance:setLevelCap(player:getCharVar('AssaultCap'))
+        player:setCharVar('AssaultCap', 0)
         player:setInstance(instance)
         player:instanceEntry(target, 4)
         player:delKeyItem(xi.ki.ILRUSI_ASSAULT_ORDERS)

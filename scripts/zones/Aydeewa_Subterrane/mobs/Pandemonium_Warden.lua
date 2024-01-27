@@ -2,9 +2,7 @@
 -- Area: Aydeewa Subterrane
 --  ZNM: Pandemonium Warden
 -----------------------------------
-require("scripts/globals/titles")
-require("scripts/globals/magic")
-local ID = require("scripts/zones/Aydeewa_Subterrane/IDs")
+local ID = zones[xi.zone.AYDEEWA_SUBTERRANE]
 -----------------------------------
 local entity = {}
 
@@ -36,9 +34,9 @@ entity.onMobSpawn = function(mob)
     mob:hideHP(true)
 
     -- Two hours to forced depop
-    mob:setLocalVar("PWDespawnTime", os.time() + 7200)
-    mob:setLocalVar("phase", 1)
-    mob:setLocalVar("astralFlow", 1)
+    mob:setLocalVar('PWDespawnTime', os.time() + 7200)
+    mob:setLocalVar('phase', 1)
+    mob:setLocalVar('astralFlow', 1)
 end
 
 entity.onMobDisengage = function(mob)
@@ -51,8 +49,8 @@ entity.onMobDisengage = function(mob)
     mob:hideHP(true)
 
     -- Reset phases (but not despawn timer)
-    mob:setLocalVar("phase", 1)
-    mob:setLocalVar("astralFlow", 1)
+    mob:setLocalVar('phase', 1)
+    mob:setLocalVar('astralFlow', 1)
 
     -- Despawn pets
     for i = 0, 1 do
@@ -88,9 +86,9 @@ end
 entity.onMobFight = function(mob, target)
     -- Init Vars
     local mobHPP = mob:getHPP()
-    local depopTime = mob:getLocalVar("PWDespawnTime")
-    local phase = mob:getLocalVar("phase")
-    local astral = mob:getLocalVar("astralFlow")
+    local depopTime = mob:getLocalVar('PWDespawnTime')
+    local phase = mob:getLocalVar('phase')
+    local astral = mob:getLocalVar('astralFlow')
     local pets = {}
     for i = 0, 1 do
         pets[i] = {}
@@ -122,7 +120,7 @@ entity.onMobFight = function(mob, target)
         end
 
         -- Increment phase
-        mob:setLocalVar("phase", phase + 1)
+        mob:setLocalVar('phase', phase + 1)
 
     -- Or, check for Astral Flow
     elseif phase == 21 and astral < 9 and mobHPP <= (100 - 25 * astral) then
@@ -140,7 +138,7 @@ entity.onMobFight = function(mob, target)
         end
 
         -- Increment astral
-        mob:setLocalVar("astralFlow", astral + 1)
+        mob:setLocalVar('astralFlow', astral + 1)
 
     -- Or, at least make sure pets weren't drug off
     else

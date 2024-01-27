@@ -6,10 +6,10 @@ xi.pyxis = xi.pyxis or {}
 
 xi.pyxis.ki = {}
 
----------------------------------
+-----------------------------------
 -- drop id's for keyitems
 -- use zone id as the key
----------------------------------
+-----------------------------------
 local drops =
 {
     [xi.zone.ABYSSEA_KONSCHTAT]  =
@@ -90,15 +90,15 @@ xi.pyxis.ki.setKeyItems = function(npc)
     local zoneId = npc:getZoneID()
     local ki = drops[zoneId][math.random(1, #drops[zoneId])]
 
-    npc:setLocalVar("KI", ki)
+    npc:setLocalVar('KI', ki)
 end
 
 xi.pyxis.ki.updateEvent = function(player, npc)
-    player:updateEvent(npc:getLocalVar("KI"), 0, 0, 0, 0, 0, 0, 0)
+    player:updateEvent(npc:getLocalVar('KI'), 0, 0, 0, 0, 0, 0, 0)
 end
 
 xi.pyxis.ki.giveKeyItem = function(player, npc)
-    local keyItem = npc:getLocalVar("KI")
+    local keyItem = npc:getLocalVar('KI')
     local zoneId = player:getZoneID()
 
     if keyItem == 0 then
@@ -110,10 +110,10 @@ xi.pyxis.ki.giveKeyItem = function(player, npc)
     else
         player:addKeyItem(keyItem)
         xi.pyxis.messageChest(player, zones[zoneId].text.OBTAINS_KEYITEM, keyItem, 0, 0, 0)
-        npc:setLocalVar("KI", 0)
+        npc:setLocalVar('KI', 0)
     end
 
-    if npc:getLocalVar("KI") == 0 then
+    if npc:getLocalVar('KI') == 0 then
         xi.pyxis.removeChest(player, npc, 0, 3)
     end
 end

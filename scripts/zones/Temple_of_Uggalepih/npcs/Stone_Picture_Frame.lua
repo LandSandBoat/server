@@ -4,7 +4,7 @@
 -- Notes: Opens door to Den of Rancor using Painbrush of Souls
 -- !pos -52.239 -2.089 10.000 159
 -----------------------------------
-local ID = require("scripts/zones/Temple_of_Uggalepih/IDs")
+local ID = zones[xi.zone.TEMPLE_OF_UGGALEPIH]
 -----------------------------------
 local entity = {}
 
@@ -41,7 +41,7 @@ entity.onTrigger = function(player, npc)
             then
                 -- has paintbrush of souls + close enough
                 player:messageSpecial(ID.text.PAINTBRUSH_OFFSET + 17, xi.ki.PAINTBRUSH_OF_SOULS)
-                player:setCharVar("started_painting", os.time())
+                player:setCharVar('started_painting', os.time())
                 player:startEvent(60, xi.ki.PAINTBRUSH_OF_SOULS)
             elseif player:hasKeyItem(xi.ki.PAINTBRUSH_OF_SOULS) then
                 player:messageSpecial(ID.text.PAINTBRUSH_OFFSET + 15, xi.ki.PAINTBRUSH_OF_SOULS)
@@ -61,7 +61,7 @@ entity.onEventFinish = function(player, csid, option, npc)
     if csid == 50 then
         -- Soon !
     elseif csid == 60 then
-        local timeElapsed = os.time() - player:getCharVar("started_painting")
+        local timeElapsed = os.time() - player:getCharVar('started_painting')
         if timeElapsed >= 30 then
             player:messageSpecial(ID.text.PAINTBRUSH_OFFSET + 22) -- You succeeded in projecting the image in your soul to the blank canvas. The door to the Rancor Den has opened!<Prompt>
             GetNPCByID(ID.npc.DOOR_TO_RANCOR):openDoor(45) -- Open the door to Den of Rancor for 45 sec
@@ -69,7 +69,7 @@ entity.onEventFinish = function(player, csid, option, npc)
             player:messageSpecial(ID.text.PAINTBRUSH_OFFSET + 21) -- You were unable to fill the canvas with an image from your soul.
         end
 
-        player:setCharVar("started_painting", 0)
+        player:setCharVar('started_painting', 0)
     end
 end
 

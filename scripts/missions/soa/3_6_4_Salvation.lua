@@ -5,10 +5,7 @@
 -- !addmission 12 69
 -- Crawling Cave : !pos -349.302 40.339 -379.79 267
 -----------------------------------
-require('scripts/globals/missions')
-require('scripts/globals/interaction/mission')
------------------------------------
-local kamihrID = require('scripts/zones/Kamihr_Drifts/IDs')
+local kamihrID = zones[xi.zone.KAMIHR_DRIFTS]
 -----------------------------------
 
 local mission = Mission:new(xi.mission.log_id.SOA, xi.mission.id.soa.SALVATION)

@@ -198,7 +198,12 @@ xi.mod =
     MAGIC_CRIT_DMG_INCREASE         = 563,
     HASTE_MAGIC                     = 167,
     SPELLINTERRUPT                  = 168,
-    MOVE                            = 169, -- % Movement Speed
+    MOVE_SPEED_OVERIDE              = 169, -- Modifier used to overide regular speed caps. (GM speed and Feast of Swords)
+    MOVE_SPEED_STACKABLE            =  75, -- Gear movement speed penalties, flee bonus, etc.
+    MOVE_SPEED_GEAR_BONUS           =  76, -- Gear movement speed bonuses. DOES NOT STACK with each other, only highest applies.
+    MOVE_SPEED_WEIGHT_PENALTY       =  77, -- For Gravity and curse.
+    MOVE_SPEED_QUICKENING           =  78, -- Jig, spreinter shoes, etc. Only highest of Mazurka OR quickening will take effect.
+    MOVE_SPEED_MAZURKA              =  79, -- Song movement speed. Only highest of Mazurka OR quickening will take effect.
     MOUNT_MOVE                      = 972, -- % Mount Movement Speed
     FASTCAST                        = 170,
     UFASTCAST                       = 407,
@@ -367,8 +372,10 @@ xi.mod =
     STEP_ACCURACY                   = 403, -- Accuracy bonus for steps
     WALTZ_DELAY                     = 497, -- Waltz Ability Delay modifier (-1 mod is -1 second)
     SAMBA_PDURATION                 = 498, -- Samba percent duration bonus
+    WALTZ_COST                      = 139, -- Reduce Waltz cost by 5tp (50 post 1000tp scale)
     WIDESCAN                        = 340,
     BARRAGE_ACC                     = 420,
+    BARRAGE_COUNT                   = 138, -- Increases Barrage shots by 1
     ENSPELL                         = 341,
     SPIKES                          = 342,
     ENSPELL_DMG                     = 343,
@@ -376,6 +383,7 @@ xi.mod =
     SPIKES_DMG                      = 344,
     TP_BONUS                        = 345,
     PERPETUATION_REDUCTION          = 346,
+    SPIKES_DMG_BONUS                = 1079, -- Increases Blaze/Ice/Shock spikes damage by percentage (e.g. mod value 50 = +50% spikes damage)
 
     -- Warrior
     BERSERK_POTENCY                 = 948,  -- Augments "Berserk"/Enhances "Berserk" effect (Conqueror)
@@ -410,6 +418,8 @@ xi.mod =
     CARBUNCLE_LVL_BONUS             = 1041, -- Carbuncle: Lv.+ (Increases Carbuncle's base level above 99)
     CAIT_SITH_LVL_BONUS             = 1042, -- Cait Sith: Lv.+ (Increases Cait Sith's base level above 99)
     ENHANCES_MANA_CEDE              = 74,   -- Bonus % to Mana Cede effect, +1 = 1%
+    SUMMONING_MAGIC_CAST            = 1078, -- Summoning magic casting time reduction in seconds
+    SPIRIT_CAST_REDUCTION           = 140,  -- Spirit Pact casting time reduction in seconds
 
     -- Puppetmaster
     AUTOMATON_LVL_BONUS             = 1044, -- Automaton: Lv. (Increases automaton's base level above 99)
@@ -671,8 +681,10 @@ xi.mod =
     MYTHIC_OCC_ATT_TWICE            = 865, -- Proc rate for "Occasionally attacks twice"
     MYTHIC_OCC_ATT_THRICE           = 866, -- Proc rate for "Occasionally attacks thrice"
 
-    EAT_RAW_FISH                    = 412, --
-    EAT_RAW_MEAT                    = 413, --
+    APPRECIATE_GYSAHL_GREENS        = 156, -- Enhances food effect of Gysahl Greens
+
+    EAT_RAW_FISH                    = 412, -- Without this, only Mithra can eat raw fish.
+    EAT_RAW_MEAT                    = 413, -- Without this, only Galka can eat raw meat.
 
     ENHANCES_CURSNA_RCVD            = 67,   -- Potency of "Cursna" effects received
     ENHANCES_CURSNA                 = 310,  -- Raises success rate of Cursna when removing effect (like Doom) that are not 100% chance to remove
@@ -706,6 +718,7 @@ xi.mod =
     ROLL_RANGE                      = 528, -- Additional range for COR roll abilities.
     PHANTOM_ROLL                    = 881, -- Phantom Roll+ Effect from SOA Rings.
     PHANTOM_DURATION                = 882, -- Phantom Roll Duration +.
+    PHANTOM_RECAST                  = 1076, -- Phantom Roll Recast -.
 
     ENHANCES_REFRESH                = 529, -- "Enhances Refresh" adds +1 per modifier to spell's tick result.
     NO_SPELL_MP_DEPLETION           = 530, -- % to not deplete MP on spellcast.
@@ -742,6 +755,7 @@ xi.mod =
     QUICK_MAGIC                     = 909, -- Percent chance spells cast instantly (also reduces recast to 0, similar to Chainspell)
 
     -- Automaton mods
+    AUTO_MAB_COEFFICIENT            = 157, -- Applies a MAB multiplier to automatons. This value is the bonus %.
     AUTO_DECISION_DELAY             = 842, -- Reduces the Automaton's global decision delay
     AUTO_SHIELD_BASH_DELAY          = 843, -- Reduces the Automaton's global shield bash delay
     AUTO_MAGIC_DELAY                = 844, -- Reduces the Automaton's global magic delay
@@ -849,6 +863,7 @@ xi.mod =
     COVER_DURATION                  = 967, -- Increases Cover Duration
     WYVERN_SUBJOB_TRAITS            = 974, -- Adds subjob traits to wyvern
     GARDENING_WILT_BONUS            = 975, -- Increases the number of Vanadays a plant can survive before it wilts
+    CALL_BEAST_DELAY                = 572, -- Lowers Call Beast recast
 
     WYVERN_BREATH_MACC              = 986,
     REGEN_BONUS                     = 989,
@@ -889,7 +904,7 @@ xi.mod =
     GEOMANCY_MP_NO_DEPLETE = 1037, -- Percent chance for Geomancy to cost 0 MP (GEO AF3 Sets)
 
     -- Job Point Gifts
-    SIC_READY_RECAST        = 1052, -- TODO: SIC/Ready recast reduction (seconds)
+    SIC_READY_RECAST        = 1052, -- SIC/Ready recast reduction (seconds)
     TRUE_SHOT_EFFECT        = 1053, -- TODO: True Shot Ranged Damage increase (percent)
     DEAD_AIM_EFFECT         = 1054, -- TODO: Dead Aim Critical Damage increase (percent)
     THIRD_EYE_BONUS         = 1055, -- TODO: Bonus Third Eye Evasions (count)
@@ -897,10 +912,12 @@ xi.mod =
     DRAGOON_BREATH_RECAST   = 1057, -- Restoring/Smithing Breath Recast Reduction (seconds)
     BLUE_JOB_TRAIT_BONUS    = 1058, -- TODO: Increases job traits gained from equipped blue magic (percent)
     BLUE_MAGIC_EFFECT       = 1059, -- TODO: Bonus to Attribute Value of spell (percent)
-    QUICK_DRAW_RECAST       = 1060, -- TODO: Quick Draw Charge Reduction (seconds)
+    QUICK_DRAW_RECAST       = 1060, -- Quick Draw Charge Reduction (seconds)
 
     DIG_BYPASS_FATIGUE      = 1074, -- Chocobo digging modifier found in "Blue Race Silks". Modifier works as a direct percent.
     BREATH_DMG_DEALT        = 1075, -- Breath damage dealt
+
+    STEP_TP_CONSUMED        = 1077, -- Modifies the amount of TP consumed by dancer steps
 
     -- IF YOU ADD ANY NEW MODIFIER HERE, ADD IT IN src/map/modifier.h ASWELL!
 

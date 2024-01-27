@@ -6,9 +6,9 @@
 local entity = {}
 
 local function canUse_KaduruHaiduru_Service(player)
-    local caughtUsingShihuDanhuDate = player:getCharVar("Kaduru_ShihuDanhu_date")
-    local shihuDanhuEncounters = player:getCharVar("ShihuDanhu_Encounters")
-    local shihuDanhuDate = player:getCharVar("ShihuDanhu_TP_date")
+    local caughtUsingShihuDanhuDate = player:getCharVar('Kaduru_ShihuDanhu_date')
+    local shihuDanhuEncounters = player:getCharVar('ShihuDanhu_Encounters')
+    local shihuDanhuDate = player:getCharVar('ShihuDanhu_TP_date')
 
     -- Kaduru-Haiduru can be used unless the following are true.
     if
@@ -22,15 +22,15 @@ local function canUse_KaduruHaiduru_Service(player)
 end
 
 entity.onTrigger = function(player, npc)
-    local caughtUsingShihuDanhuDate = player:getCharVar("Kaduru_ShihuDanhu_date")
-    local timesUsed = player:getCharVar("Kaduru_TimesUsed")
+    local caughtUsingShihuDanhuDate = player:getCharVar('Kaduru_ShihuDanhu_date')
+    local timesUsed = player:getCharVar('Kaduru_TimesUsed')
 
     if canUse_KaduruHaiduru_Service(player) then
         player:startEvent(151, 0, 0, timesUsed, 0, 0, 0, 0, 0, 0)
     else
         if caughtUsingShihuDanhuDate == 0 then
-            player:setCharVar("Kaduru_ShihuDanhu_date", getVanaMidnight())
-            player:setCharVar("Kaduru_TimesUsed", 0)
+            player:setCharVar('Kaduru_ShihuDanhu_date', getVanaMidnight())
+            player:setCharVar('Kaduru_TimesUsed', 0)
         end
 
         player:startEvent(153, 0, 0, 0, 0, 0, 0, 0, 0, 0)
@@ -38,29 +38,29 @@ entity.onTrigger = function(player, npc)
 end
 
 entity.onTrade = function(player, npc, trade)
-    local caughtUsingShihuDanhuDate = player:getCharVar("Kaduru_ShihuDanhu_date")
-    local timesUsed = player:getCharVar("Kaduru_TimesUsed")
+    local caughtUsingShihuDanhuDate = player:getCharVar('Kaduru_ShihuDanhu_date')
+    local timesUsed = player:getCharVar('Kaduru_TimesUsed')
 
     if canUse_KaduruHaiduru_Service(player) and timesUsed == 3 then
         if trade:getItemCount() == 1 then
-            if trade:hasItemQty(xi.items.IMPERIAL_SILVER_PIECE, 1) then
+            if trade:hasItemQty(xi.item.IMPERIAL_SILVER_PIECE, 1) then
                 player:startEvent(154, 0, player:getNation(), 0, 0, 0, 0, 0, 0, 0)
-                player:setCharVar("ShihuDanhu_TP_date", 0)
-                player:setCharVar("Kaduru_ShihuDanhu_date", 0)
+                player:setCharVar('ShihuDanhu_TP_date', 0)
+                player:setCharVar('Kaduru_ShihuDanhu_date', 0)
             end
         end
     elseif canUse_KaduruHaiduru_Service(player) and timesUsed < 3 then
         if trade:getItemCount() == 1 then
-            if trade:hasItemQty(xi.items.IMPERIAL_SILVER_PIECE, 1) then
+            if trade:hasItemQty(xi.item.IMPERIAL_SILVER_PIECE, 1) then
                 player:startEvent(152, 0, 0, 0, 0, 0, 0, 0, 0, 0)
-                player:setCharVar("ShihuDanhu_TP_date", 0)
-                player:setCharVar("Kaduru_ShihuDanhu_date", 0)
+                player:setCharVar('ShihuDanhu_TP_date', 0)
+                player:setCharVar('Kaduru_ShihuDanhu_date', 0)
             end
         end
     else
         if caughtUsingShihuDanhuDate == 0 then
-            player:setCharVar("Kaduru_ShihuDanhu_date", getVanaMidnight())
-            player:setCharVar("Kaduru_TimesUsed", 0)
+            player:setCharVar('Kaduru_ShihuDanhu_date', getVanaMidnight())
+            player:setCharVar('Kaduru_TimesUsed', 0)
         end
 
         player:startEvent(155, 0, 0, 0, 0, 0, 0, 0, 0, 0)
@@ -71,7 +71,7 @@ entity.onEventUpdate = function(player, csid, option, npc)
 end
 
 entity.onEventFinish = function(player, csid, option, npc)
-    local timesUsed = player:getCharVar("Kaduru_TimesUsed")
+    local timesUsed = player:getCharVar('Kaduru_TimesUsed')
     if csid == 154 then        -- At this point we should already have used Kaduru-Haiduru 3 times.
         if option == 1 then       -- Duchy of Jeuno
             player:setPos(0, 3, -6, 190, 243)
@@ -90,7 +90,7 @@ entity.onEventFinish = function(player, csid, option, npc)
         -- We have either not used Kaduru-Haiduru enough, or we were reset after using Shihu-Danhu.
         player:setPos(0, 3, -6, 190, 243)
         if timesUsed < 3 then
-            player:setCharVar("Kaduru_TimesUsed", (timesUsed + 1))
+            player:setCharVar('Kaduru_TimesUsed', (timesUsed + 1))
         end
 
         player:tradeComplete()

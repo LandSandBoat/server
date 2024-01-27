@@ -5,8 +5,6 @@
 -- !addmission 12 7
 -- Brenton : !pos -86.036 3.349 18.121 256
 -----------------------------------
-require('scripts/globals/missions')
-require('scripts/globals/interaction/mission')
 require('scripts/missions/soa/helpers')
 -----------------------------------
 

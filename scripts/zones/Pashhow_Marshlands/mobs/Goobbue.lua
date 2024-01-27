@@ -3,9 +3,7 @@
 --  Mob: Goobbue
 -- Note: PH for Jolly Green
 -----------------------------------
-local ID = require("scripts/zones/Pashhow_Marshlands/IDs")
-require("scripts/globals/regimes")
-require("scripts/globals/mobs")
+local ID = zones[xi.zone.PASHHOW_MARSHLANDS]
 -----------------------------------
 local entity = {}
 

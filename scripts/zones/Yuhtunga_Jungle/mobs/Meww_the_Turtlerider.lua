@@ -2,8 +2,7 @@
 -- Area: Yuhtunga Jungle
 --  Mob: Meww the Turtlerider
 -----------------------------------
-mixins = { require("scripts/mixins/job_special") }
-require("scripts/globals/regimes")
+mixins = { require('scripts/mixins/job_special') }
 -----------------------------------
 local entity = {}
 

@@ -12,12 +12,7 @@
 -- Embassy Door     : !pos 31 9 -22 243
 -- Cermet Door      : !pos 636 16 59 184
 -----------------------------------
-require('scripts/globals/interaction/mission')
-require('scripts/globals/missions')
-require('scripts/globals/npc_util')
-require('scripts/globals/titles')
------------------------------------
-local lowerDelkfuttID = require("scripts/zones/Lower_Delkfutts_Tower/IDs")
+local lowerDelkfuttID = zones[xi.zone.LOWER_DELKFUTTS_TOWER]
 -----------------------------------
 
 local mission = Mission:new(xi.mission.log_id.WINDURST, xi.mission.id.windurst.A_NEW_JOURNEY)
@@ -89,7 +84,7 @@ mission.sections =
                 onTrade = function(player, npc, trade)
                     if
                         player:getMissionStatus(mission.areaId) == 2 and
-                        npcUtil.tradeHasExactly(trade, xi.items.DELKFUTT_KEY)
+                        npcUtil.tradeHasExactly(trade, xi.item.DELKFUTT_KEY)
                     then
                         return mission:progressEvent(2)
                     end

@@ -2,7 +2,7 @@
 -- Area: Cape Teriggan
 --   NM: Axesarion the Wanderer
 -----------------------------------
-local ID = require("scripts/zones/Cape_Teriggan/IDs")
+local ID = zones[xi.zone.CAPE_TERIGGAN]
 -----------------------------------
 local entity = {}
 
@@ -12,7 +12,7 @@ end
 
 entity.onMobDeath = function(mob, player, optParams)
     if optParams.isKiller then
-        GetNPCByID(ID.npc.CERMET_HEADSTONE):setLocalVar("cooldown", os.time() + 900)
+        GetNPCByID(ID.npc.CERMET_HEADSTONE):setLocalVar('cooldown', os.time() + 900)
     end
 end
 

@@ -7,8 +7,8 @@
 -- add add random elemental magic absorb to elements its casting
 mixins =
 {
-    require("scripts/mixins/job_special"),
-    require("scripts/mixins/families/gears")
+    require('scripts/mixins/job_special'),
+    require('scripts/mixins/families/gears')
 }
 -----------------------------------
 local entity = {}

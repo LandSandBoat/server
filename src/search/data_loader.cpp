@@ -30,6 +30,11 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "data_loader.h"
 #include "search.h"
 
+namespace
+{
+    uint8 JOB_MON = 23;
+} // namespace
+
 CDataLoader::CDataLoader()
 : sql(std::make_unique<SqlConnection>())
 {
@@ -45,7 +50,7 @@ CDataLoader::~CDataLoader()
  *                                                                       *
  ************************************************************************/
 
-std::vector<ahHistory*> CDataLoader::GetAHItemHystory(uint16 ItemID, bool stack)
+std::vector<ahHistory*> CDataLoader::GetAHItemHistory(uint16 ItemID, bool stack)
 {
     std::vector<ahHistory*> HistoryList;
 
@@ -82,23 +87,31 @@ std::vector<ahHistory*> CDataLoader::GetAHItemHystory(uint16 ItemID, bool stack)
  *                                                                       *
  ************************************************************************/
 
-std::vector<ahItem*> CDataLoader::GetAHItemsToCategory(uint8 AHCategoryID, int8* OrderByString)
+std::vector<ahItem*> CDataLoader::GetAHItemsToCategory(uint8 AHCategoryID, const char* OrderByString)
 {
     ShowDebug("try find category %u", AHCategoryID);
 
     std::vector<ahItem*> ItemList;
+    const char*          selectFrom = "item_basic";
+    if (settings::get<bool>("search.OMIT_NO_HISTORY"))
+    {
+        // Get items that have been listed before
+        selectFrom = "(SELECT item_basic.* "
+                     "FROM item_basic "
+                     "INNER JOIN auction_house_items ON item_basic.itemid = auction_house_items.itemid"
+                     ") AS item_basic";
+    }
 
     const char* fmtQuery = "SELECT item_basic.itemid, item_basic.stackSize, COUNT(*)-SUM(stack), SUM(stack) "
-                           "FROM item_basic "
+                           "FROM %s "
                            "LEFT JOIN auction_house ON item_basic.itemId = auction_house.itemid AND auction_house.buyer_name IS NULL "
                            "LEFT JOIN item_equipment ON item_basic.itemid = item_equipment.itemid "
                            "LEFT JOIN item_weapon ON item_basic.itemid = item_weapon.itemid "
-                           "WHERE aH = %u AND auction_house.itemid IS NOT NULL "
+                           "WHERE aH = %u "
                            "GROUP BY item_basic.itemid "
                            "%s";
 
-    int32 ret = sql->Query(fmtQuery, AHCategoryID, OrderByString);
-
+    int32 ret = sql->Query(fmtQuery, selectFrom, AHCategoryID, OrderByString);
     if (ret != SQL_ERROR && sql->NumRows() != 0)
     {
         while (sql->NextRow() == SQL_SUCCESS)
@@ -117,49 +130,6 @@ std::vector<ahItem*> CDataLoader::GetAHItemsToCategory(uint8 AHCategoryID, int8*
             }
 
             ItemList.emplace_back(PAHItem);
-        }
-    }
-
-    if (settings::get<bool>("search.OMIT_NO_HISTORY"))
-    {
-        const char* noQtyQuery = "SELECT item_basic.itemid, item_basic.stackSize "
-                                 "FROM item_basic "
-                                 "LEFT JOIN auction_house ON item_basic.itemId = auction_house.itemid "
-                                 "LEFT JOIN item_equipment ON item_basic.itemid = item_equipment.itemid "
-                                 "LEFT JOIN item_weapon ON item_basic.itemid = item_weapon.itemid "
-                                 "WHERE aH = %u AND auction_house.itemid IS NOT NULL "
-                                 "GROUP BY item_basic.itemid "
-                                 "%s";
-
-        int32 noQtyRet = sql->Query(noQtyQuery, AHCategoryID, OrderByString);
-        if (noQtyRet != SQL_ERROR && sql->NumRows() != 0)
-        {
-            while (sql->NextRow() == SQL_SUCCESS)
-            {
-                uint16 CurrItemID = sql->GetUIntData(0);
-                bool   itemFound  = false;
-                for (ahItem* PAHItem : ItemList)
-                {
-                    if (PAHItem->ItemID == CurrItemID)
-                    {
-                        itemFound = true;
-                        break;
-                    }
-                }
-
-                if (!itemFound)
-                {
-                    ahItem* PAHItem       = new ahItem;
-                    PAHItem->ItemID       = CurrItemID;
-                    PAHItem->SingleAmount = 0;
-                    PAHItem->StackAmount  = 0;
-                    if (sql->GetIntData(1) == 1)
-                    {
-                        PAHItem->StackAmount = -1;
-                    }
-                    ItemList.emplace_back(PAHItem);
-                }
-            }
         }
     }
 
@@ -322,36 +292,49 @@ std::list<SearchEntity*> CDataLoader::GetPlayersList(search_req sr, int* count)
             {
                 PPlayer->flags1 |= 0x0001;
             }
+
             if (partyid == PPlayer->id)
             {
                 PPlayer->flags1 |= 0x0008;
             }
+
             if (PPlayer->seacom_type)
             {
                 PPlayer->flags1 |= 0x0010;
             }
+
             if (nameflag & FLAG_AWAY)
             {
                 PPlayer->flags1 |= 0x0100;
             }
+
             if (nameflag & FLAG_DC)
             {
                 PPlayer->flags1 |= 0x0800;
             }
+
             if (partyid != 0)
             {
                 PPlayer->flags1 |= 0x2000;
             }
+
             if (nameflag & FLAG_ANON)
             {
                 PPlayer->flags1 |= 0x4000;
             }
+
             if (nameflag & FLAG_INVITE)
             {
                 PPlayer->flags1 |= 0x8000;
             }
 
             PPlayer->flags2 = PPlayer->flags1;
+
+            if (PPlayer->mjob == JOB_MON || PPlayer->sjob == JOB_MON)
+            {
+                PPlayer->mjob = 0;
+                PPlayer->sjob = 0;
+            }
 
             // filter by job
             if (sr.jobid > 0 && sr.jobid != PPlayer->mjob)

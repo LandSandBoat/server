@@ -1,14 +1,11 @@
 -----------------------------------
 -- Area: Windurst Woods
 --  NPC: Kororo
--- Type: Standard NPC
 -- !pos -11.883 -3.75 5.508 241
 -- Starts quest: A Greeting Cardian
 -- Involved in quests: Lost Chick
 -----------------------------------
-local ID = require("scripts/zones/Windurst_Woods/IDs")
-require("scripts/globals/quests")
-require("scripts/globals/titles")
+local ID = zones[xi.zone.WINDURST_WOODS]
 -----------------------------------
 local entity = {}
 
@@ -19,8 +16,8 @@ entity.onTrigger = function(player, npc)
     local c2000 = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_ALL_NEW_C_2000) -- previous quest in line
     local aGreetingCardian = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.A_GREETING_CARDIAN)
     local lpb = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.LEGENDARY_PLAN_B)
-    local agccs = player:getCharVar("AGreetingCardian_Event")
-    local agcTime = player:getCharVar("AGreetingCardian_timer")
+    local agccs = player:getCharVar('AGreetingCardian_Event')
+    local agcTime = player:getCharVar('AGreetingCardian_timer')
 
     if c2000 == QUEST_ACCEPTED then
         player:startEvent(291)
@@ -58,22 +55,22 @@ entity.onEventFinish = function(player, csid, option, npc)
     -- A Greeting Cardian
     if csid == 296 then
         player:addQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.A_GREETING_CARDIAN)
-        player:setCharVar("AGreetingCardian_Event", 2)
-        player:setCharVar("AGreetingCardian_timer", os.time() + 60)
+        player:setCharVar('AGreetingCardian_Event', 2)
+        player:setCharVar('AGreetingCardian_timer', os.time() + 60)
         player:needToZone(true) -- wait one minute and zone after this step
     elseif csid == 298 then
-        player:setCharVar("AGreetingCardian_Event", 4)
+        player:setCharVar('AGreetingCardian_Event', 4)
     elseif csid == 303 then
         if player:getFreeSlotsCount() == 0 then
-            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.items.TOURMALINE_EARRING) -- Tourmaline Earring
+            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.item.TOURMALINE_EARRING) -- Tourmaline Earring
         else
-            player:addItem(xi.items.TOURMALINE_EARRING)
-            player:messageSpecial(ID.text.ITEM_OBTAINED, xi.items.TOURMALINE_EARRING) -- Tourmaline Earring
+            player:addItem(xi.item.TOURMALINE_EARRING)
+            player:messageSpecial(ID.text.ITEM_OBTAINED, xi.item.TOURMALINE_EARRING) -- Tourmaline Earring
             player:addFame(xi.quest.fame_area.WINDURST, 30)
             player:completeQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.A_GREETING_CARDIAN)
             player:needToZone(true) -- zone before starting Legendary Plan B
-            player:setCharVar("AGreetingCardian_timer", 0)
-            player:setCharVar("AGreetingCardian_Event", 0) -- finish cleanup of A Greeting Cardian variables
+            player:setCharVar('AGreetingCardian_timer', 0)
+            player:setCharVar('AGreetingCardian_Event', 0) -- finish cleanup of A Greeting Cardian variables
         end
     end
 end

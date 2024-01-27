@@ -2,8 +2,7 @@
 -- Area: Quicksand Caves
 --   NM: Tribunus VII-I
 -----------------------------------
-require("scripts/globals/hunts")
-mixins = { require("scripts/mixins/job_special") }
+mixins = { require('scripts/mixins/job_special') }
 -----------------------------------
 local entity = {}
 

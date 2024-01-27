@@ -4,10 +4,6 @@
 --  Involved In Quest: Making Headlines
 -- !pos 32.575 -5.250 141.372 241
 -----------------------------------
-require("scripts/globals/npc_util")
-require("scripts/globals/quests")
-require("scripts/globals/utils")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
@@ -16,7 +12,7 @@ end
 entity.onTrigger = function(player, npc)
     local makingHeadlines = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.MAKING_HEADLINES)
     local lureOfTheWildcat = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.LURE_OF_THE_WILDCAT)
-    local wildcatWindurst = player:getCharVar("WildcatWindurst")
+    local wildcatWindurst = player:getCharVar('WildcatWindurst')
 
     if
         lureOfTheWildcat == QUEST_ACCEPTED and
@@ -25,7 +21,7 @@ entity.onTrigger = function(player, npc)
         player:startEvent(731)
     elseif makingHeadlines == QUEST_ACCEPTED then
         -- bitmask of progress: 0 = Kyume-Romeh, 1 = Yuyuju, 2 = Hiwom-Gomoi, 3 = Umumu, 4 = Mahogany Door
-        local prog = player:getCharVar("QuestMakingHeadlines_var")
+        local prog = player:getCharVar('QuestMakingHeadlines_var')
 
         if utils.mask.getBit(prog, 4) then
             player:startEvent(383) -- Advised to go to Naiko
@@ -55,9 +51,9 @@ end
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 381 then
         npcUtil.giveKeyItem(player, xi.ki.WINDURST_WOODS_SCOOP)
-        player:setCharVar("QuestMakingHeadlines_var", utils.mask.setBit(player:getCharVar("QuestMakingHeadlines_var"), 3, true))
+        player:setCharVar('QuestMakingHeadlines_var', utils.mask.setBit(player:getCharVar('QuestMakingHeadlines_var'), 3, true))
     elseif csid == 731 then
-        player:setCharVar("WildcatWindurst", utils.mask.setBit(player:getCharVar("WildcatWindurst"), 3, true))
+        player:setCharVar('WildcatWindurst', utils.mask.setBit(player:getCharVar('WildcatWindurst'), 3, true))
     end
 end
 

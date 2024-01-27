@@ -1,11 +1,7 @@
 -----------------------------------
 -- Zone: FeiYin (204)
 -----------------------------------
-local ID = require('scripts/zones/FeiYin/IDs')
-require('scripts/globals/conquest')
-require('scripts/globals/missions')
-require('scripts/globals/treasure')
-require('scripts/globals/quests')
+local ID = zones[xi.zone.FEIYIN]
 -----------------------------------
 local zoneObject = {}
 
@@ -28,8 +24,8 @@ zoneObject.onZoneIn = function(player, prevZone)
     end
 
     if
-        player:getCharVar("peaceForTheSpiritCS") == 1 and
-        not player:hasItem(xi.items.ANTIQUE_COIN) -- Antique Coin
+        player:getCharVar('peaceForTheSpiritCS') == 1 and
+        not player:hasItem(xi.item.ANTIQUE_COIN) -- Antique Coin
     then
         SpawnMob(ID.mob.MISER_MURPHY) -- RDM AF
     end
@@ -39,7 +35,7 @@ zoneObject.onZoneIn = function(player, prevZone)
     elseif
         prevZone == xi.zone.BEAUCEDINE_GLACIER and
         player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.PIEUJE_S_DECISION) == QUEST_ACCEPTED and
-        player:getCharVar("pieujesDecisionCS") == 0
+        player:getCharVar('pieujesDecisionCS') == 0
     then
         cs = 19 -- WHM AF
     end
@@ -59,7 +55,7 @@ end
 
 zoneObject.onEventFinish = function(player, csid, option, npc)
     if csid == 19 then
-        player:setCharVar("pieujesDecisionCS", 1)
+        player:setCharVar('pieujesDecisionCS', 1)
     elseif csid == 29 then
         player:completeMission(xi.mission.log_id.ACP, xi.mission.id.acp.THOSE_WHO_LURK_IN_SHADOWS_I)
         player:addMission(xi.mission.log_id.ACP, xi.mission.id.acp.THOSE_WHO_LURK_IN_SHADOWS_II)

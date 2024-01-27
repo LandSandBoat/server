@@ -24,7 +24,7 @@ CREATE TABLE `mob_droplist` (
   `itemId` smallint(5) unsigned NOT NULL DEFAULT '0',
   `itemRate` smallint(4) unsigned NOT NULL DEFAULT '0',
   KEY `dropId` (`dropId`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 AVG_ROW_LENGTH=9;
+) ENGINE=Aria TRANSACTIONAL=0 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci AVG_ROW_LENGTH=9;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 -- Variables
@@ -7706,6 +7706,7 @@ INSERT INTO `mob_droplist` VALUES (941,0,0,1000,1061,30); -- Sacrarium Chest Key
 -- ZoneID: 195 - Gazer
 INSERT INTO `mob_droplist` VALUES (942,0,0,1000,914,770); -- Vial Of Mercury (77.0%)
 INSERT INTO `mob_droplist` VALUES (942,0,0,1000,939,660); -- Hecteyes Eye (66.0%)
+INSERT INTO `mob_droplist` VALUES (942,0,0,1000,1289,70); -- Burning Hakutaku Eye (7.0%)
 
 -- ZoneID: 149 - Geezard
 INSERT INTO `mob_droplist` VALUES (943,0,0,1000,926,@ALWAYS); -- Lizard Tail (Always, 100%)
@@ -11004,10 +11005,7 @@ INSERT INTO `mob_droplist` VALUES (1347,0,0,1000,4105,@COMMON); -- Ice Cluster (
 INSERT INTO `mob_droplist` VALUES (1348,0,0,1000,16511,@ALWAYS); -- Burnite Shell Stone (Always, 100%)
 INSERT INTO `mob_droplist` VALUES (1348,0,0,1000,637,@UNCOMMON); -- Vial Of Slime Oil (Uncommon, 10%)
 
--- ZoneID: 138 - Star Ruby Quadav
-INSERT INTO `mob_droplist` VALUES (1349,0,0,1000,1470,80); -- Sparkling Stone (8.0%)
-INSERT INTO `mob_droplist` VALUES (1349,0,0,1000,1474,80); -- Infinity Core (8.0%)
-INSERT INTO `mob_droplist` VALUES (1349,0,0,1000,4248,80); -- Copy Of Ginuvas Battle Theory (8.0%)
+-- 1349: Free to use
 
 -- ZoneID:  16 - Idle Wanderer
 -- ZoneID:  20 - Idle Wanderer
@@ -11765,21 +11763,7 @@ INSERT INTO `mob_droplist` VALUES (1441,2,0,1000,1455,0);       -- One Byne Bill
 -- ZoneID: 135 - Kindred Warrior
 -- ZoneID: 135 - Kindred Monk
 -- ZoneID: 135 - Kindred Thief
--- ZoneID: 135 - Kindred Warrior
--- ZoneID: 135 - Kindred White Mage
--- ZoneID: 135 - Kindred Red Mage
--- ZoneID: 135 - Kindred Monk
--- ZoneID: 135 - Kindred Black Mage
--- ZoneID: 135 - Kindred Thief
--- ZoneID: 135 - Kindred Paladin
--- ZoneID: 135 - Kindred Dark Knight
--- ZoneID: 135 - Kindred Beastmaster
--- ZoneID: 135 - Kindred Bard
--- ZoneID: 135 - Kindred Ranger
--- ZoneID: 135 - Kindred Samurai
--- ZoneID: 135 - Kindred Ninja
--- ZoneID: 135 - Kindred Dragoon
--- ZoneID: 135 - Kindred Summoner
+INSERT INTO `mob_droplist` VALUES (1442,0,0,1000,3494,@RARE);   -- Forgotten Hope (Rare, 5%)
 INSERT INTO `mob_droplist` VALUES (1442,0,0,1000,11305,@VRARE); -- Etoile Casaque (Very Rare, 1%)
 INSERT INTO `mob_droplist` VALUES (1442,0,0,1000,11465,@VRARE); -- Mirage Keffiyeh (Very Rare, 1%)
 INSERT INTO `mob_droplist` VALUES (1442,0,0,1000,11468,@VRARE); -- Commodore Tricorne (Very Rare, 1%)
@@ -14975,7 +14959,6 @@ INSERT INTO `mob_droplist` VALUES (1852,0,0,1000,3253,@UNCOMMON); -- High-Qualit
 -- ZoneID:  33 - Omaern Rng
 -- ZoneID:  33 - Omaern Rdm
 -- ZoneID:  33 - Omaern Thf
--- ZoneID:  65 - Firedance Magmaal Ja
 INSERT INTO `mob_droplist` VALUES (1853,0,0,1000,1786,90); -- Aern Organ (9.0%)
 INSERT INTO `mob_droplist` VALUES (1853,0,0,1000,1783,80); -- Sample Of Luminian Tissue (8.0%)
 INSERT INTO `mob_droplist` VALUES (1853,0,0,1000,4104,60); -- Fire Cluster (6.0%)
@@ -15898,12 +15881,12 @@ INSERT INTO `mob_droplist` VALUES (1969,2,0,1000,4400,0);  -- Slice Of Land Crab
 INSERT INTO `mob_droplist` VALUES (1970,0,0,1000,11734,@ALWAYS);  -- Shaolin Belt (Always, 100%)
 INSERT INTO `mob_droplist` VALUES (1970,0,0,1000,14365,@VCOMMON); -- Augurs Jaseran (Very Common, 24%)
 INSERT INTO `mob_droplist` VALUES (1970,0,0,1000,3226,@VCOMMON);  -- Stone Of Voyage (Very Common, 24%)
-INSERT INTO `mob_droplist` VALUES (1970,0,0,1000,3229, @VCOMMON); -- Card Of Voyage (Very Common, 24%)
+INSERT INTO `mob_droplist` VALUES (1970,0,0,1000,3229,@VCOMMON); -- Card Of Voyage (Very Common, 24%)
 INSERT INTO `mob_droplist` VALUES (1970,0,0,1000,11728,@RARE);    -- Bullwhip Belt (Rare, 5%)
 
 -- ZoneID:  45 - Pachypodium
 INSERT INTO `mob_droplist` VALUES (1971,0,0,1000,17868,260); -- Jug Of Humus (26.0%)
-INSERT INTO `mob_droplist` VALUES (1971,0,0,1000,2920, @UNCOMMON);  -- Clump Of Alkaline Humus (Uncommon, 10%)
+INSERT INTO `mob_droplist` VALUES (1971,0,0,1000,2920,@UNCOMMON);  -- Clump Of Alkaline Humus (Uncommon, 10%)
 INSERT INTO `mob_droplist` VALUES (1971,4,0,1000,834,0);     -- Ball Of Saruta Cotton (Despoil)
 INSERT INTO `mob_droplist` VALUES (1971,4,0,1000,4368,0);    -- Two-Leaf Mandragora Bud (Despoil)
 
@@ -19838,14 +19821,14 @@ INSERT INTO `mob_droplist` VALUES (2516,2,0,1000,1783,0);   -- Sample Of Luminia
 INSERT INTO `mob_droplist` VALUES (2517,0,0,1000,1785,@ALWAYS);   -- Xzomit Organ (Always, 100%)
 INSERT INTO `mob_droplist` VALUES (2517,0,0,1000,1855,@COMMON);   -- High-Quality Xzomit Organ (Common, 30%)
 INSERT INTO `mob_droplist` VALUES (2517,0,0,1000,1783,@UNCOMMON); -- Luminian Tissue (Uncommon, 10%)
-INSERT INTO `mob_droplist` VALUES (2517,1,1,@UNCOMMON,4104,125); -- Fire Cluster (Group 1 - Uncommon, 10% * 12.5%)
-INSERT INTO `mob_droplist` VALUES (2517,1,1,@UNCOMMON,4105,125); -- Ice Cluster (Group 1 - Uncommon, 10% * 12.5%)
-INSERT INTO `mob_droplist` VALUES (2517,1,1,@UNCOMMON,4106,125); -- Wind Cluster (Group 1 - Uncommon, 10% * 12.5%)
-INSERT INTO `mob_droplist` VALUES (2517,1,1,@UNCOMMON,4107,125); -- Earth Cluster (Group 1 - Uncommon, 10% * 12.5%)
-INSERT INTO `mob_droplist` VALUES (2517,1,1,@UNCOMMON,4108,125); -- Lightning Cluster (Group 1 - Uncommon, 10% * 12.5%)
-INSERT INTO `mob_droplist` VALUES (2517,1,1,@UNCOMMON,4109,125); -- Water Cluster (Group 1 - Uncommon, 10% * 12.5%)
-INSERT INTO `mob_droplist` VALUES (2517,1,1,@UNCOMMON,4110,125); -- Light Cluster (Group 1 - Uncommon, 10% * 12.5%)
-INSERT INTO `mob_droplist` VALUES (2517,1,1,@UNCOMMON,4111,125); -- Dark Cluster (Group 1 - Uncommon, 10% * 12.5%)
+INSERT INTO `mob_droplist` VALUES (2517,1,1,100,4104,125); -- Fire Cluster (Group 1 - Uncommon, 10% * 12.5%)
+INSERT INTO `mob_droplist` VALUES (2517,1,1,100,4105,125); -- Ice Cluster (Group 1 - Uncommon, 10% * 12.5%)
+INSERT INTO `mob_droplist` VALUES (2517,1,1,100,4106,125); -- Wind Cluster (Group 1 - Uncommon, 10% * 12.5%)
+INSERT INTO `mob_droplist` VALUES (2517,1,1,100,4107,125); -- Earth Cluster (Group 1 - Uncommon, 10% * 12.5%)
+INSERT INTO `mob_droplist` VALUES (2517,1,1,100,4108,125); -- Lightning Cluster (Group 1 - Uncommon, 10% * 12.5%)
+INSERT INTO `mob_droplist` VALUES (2517,1,1,100,4109,125); -- Water Cluster (Group 1 - Uncommon, 10% * 12.5%)
+INSERT INTO `mob_droplist` VALUES (2517,1,1,100,4110,125); -- Light Cluster (Group 1 - Uncommon, 10% * 12.5%)
+INSERT INTO `mob_droplist` VALUES (2517,1,1,100,4111,125); -- Dark Cluster (Group 1 - Uncommon, 10% * 12.5%)
 
 -- ZoneID:  33 - Ulyovra
 INSERT INTO `mob_droplist` VALUES (2518,0,0,1000,1788,410);   -- Yovra Organ (41.0%)
@@ -23640,7 +23623,7 @@ INSERT INTO `mob_droplist` VALUES (2866,0,0,1000,4877,20);       -- Scroll Of Ab
 INSERT INTO `mob_droplist` VALUES (2866,0,0,1000,4878,20);       -- Scroll Of Absorb-Int (2.0%)
 INSERT INTO `mob_droplist` VALUES (2866,2,0,1000,880,0);         -- Bone Chip (Steal)
 
--- ZoneID: Unknown - Unknown
+-- ZoneID: 192 - Magicked Bones
 INSERT INTO `mob_droplist` VALUES (2867,0,0,1000,880,280);  -- Bone Chip (28.0%)
 INSERT INTO `mob_droplist` VALUES (2867,0,0,1000,16753,40); -- Ceremonial Dagger (4.0%)
 INSERT INTO `mob_droplist` VALUES (2867,2,0,1000,880,0);    -- Bone Chip (Steal)
@@ -26465,14 +26448,14 @@ INSERT INTO `mob_droplist` VALUES (3230,0,0,1000,574,@VRARE);     -- Fruit seeds
 INSERT INTO `mob_droplist` VALUES (3231,0,0,1000,1785,@VRARE); -- Xzomit Organ (Very Rare, 1%)
 INSERT INTO `mob_droplist` VALUES (3231,0,0,1000,1855,@VRARE); -- High-Quality Xzomit Organ (Very Rare, 1%)
 INSERT INTO `mob_droplist` VALUES (3231,0,0,1000,1783,@VRARE); -- Luminian Tissue (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3231,1,1,@VRARE,4104,125);  -- Fire Cluster (Group 1 - Very Rare, 1% * 12.5%)
-INSERT INTO `mob_droplist` VALUES (3231,1,1,@VRARE,4105,125);  -- Ice Cluster (Group 1 - Very Rare, 1% * 12.5%)
-INSERT INTO `mob_droplist` VALUES (3231,1,1,@VRARE,4106,125);  -- Wind Cluster (Group 1 - Very Rare, 1% * 12.5%)
-INSERT INTO `mob_droplist` VALUES (3231,1,1,@VRARE,4107,125);  -- Earth Cluster (Group 1 - Very Rare, 1% * 12.5%)
-INSERT INTO `mob_droplist` VALUES (3231,1,1,@VRARE,4108,125);  -- Lightning Cluster (Group 1 - Very Rare, 1% * 12.5%)
-INSERT INTO `mob_droplist` VALUES (3231,1,1,@VRARE,4109,125);  -- Water Cluster (Group 1 - Very Rare, 1% * 12.5%)
-INSERT INTO `mob_droplist` VALUES (3231,1,1,@VRARE,4110,125);  -- Light Cluster (Group 1 - Very Rare, 1% * 12.5%)
-INSERT INTO `mob_droplist` VALUES (3231,1,1,@VRARE,4111,125);  -- Dark Cluster (Group 1 - Very Rare, 1% * 12.5%)
+INSERT INTO `mob_droplist` VALUES (3231,1,1,10,4104,125);  -- Fire Cluster (Group 1 - Very Rare, 1% * 12.5%)
+INSERT INTO `mob_droplist` VALUES (3231,1,1,10,4105,125);  -- Ice Cluster (Group 1 - Very Rare, 1% * 12.5%)
+INSERT INTO `mob_droplist` VALUES (3231,1,1,10,4106,125);  -- Wind Cluster (Group 1 - Very Rare, 1% * 12.5%)
+INSERT INTO `mob_droplist` VALUES (3231,1,1,10,4107,125);  -- Earth Cluster (Group 1 - Very Rare, 1% * 12.5%)
+INSERT INTO `mob_droplist` VALUES (3231,1,1,10,4108,125);  -- Lightning Cluster (Group 1 - Very Rare, 1% * 12.5%)
+INSERT INTO `mob_droplist` VALUES (3231,1,1,10,4109,125);  -- Water Cluster (Group 1 - Very Rare, 1% * 12.5%)
+INSERT INTO `mob_droplist` VALUES (3231,1,1,10,4110,125);  -- Light Cluster (Group 1 - Very Rare, 1% * 12.5%)
+INSERT INTO `mob_droplist` VALUES (3231,1,1,10,4111,125);  -- Dark Cluster (Group 1 - Very Rare, 1% * 12.5%)
 
 -- ZoneID:  38 - Carnagechief Jackbodokk
 -- ZoneID:  38 - Grognard Mesmerizer
@@ -26776,6 +26759,26 @@ INSERT INTO `mob_droplist` VALUES (3284,0,0,1000,19120,@UNCOMMON); -- Avis (Unco
 
 -- ZoneID:  88 - Olgoi-Khorkhoi
 INSERT INTO `mob_droplist` VALUES (3285,0,0,1000,18768,@COMMON); -- Poppet Katars (Uncommon, 15%)
+
+-- ZoneID:  65 - Firedance Magmaal Ja
+INSERT INTO `mob_droplist` VALUES (3286,0,0,1000,19234,@VCOMMON); -- Lyft Hexagun (Very common, 24%)
+
+-- ZoneID:  61 - Chary Apkallu
+INSERT INTO `mob_droplist` VALUES (3287,0,0,1000,2815,@UNCOMMON); -- Aptant of arkhe (Uncommon, 10%)
+INSERT INTO `mob_droplist` VALUES (3287,0,0,1000,2818,@COMMON);   -- Aptant of ishis (Common, 15%)
+
+-- ZoneID: 24 - Flockbock
+INSERT INTO `mob_droplist` VALUES (3288,0,0,1000,2836,@UNCOMMON); -- Woolly Pelage (Uncommon, 10%)
+
+-- ZoneID: 113 - Zmey Gorynych
+INSERT INTO `mob_droplist` VALUES (3289,0,0,1000,2811,@COMMON); -- Aptant of primus (Common, 15%)
+INSERT INTO `mob_droplist` VALUES (3289,0,0,1000,2813,@COMMON); -- Aptant of durus (Common, 15%)
+
+INSERT INTO `mob_droplist` VALUES (3290,0,0,1000,19107,@VCOMMON); -- Dark Ixion: Azoth
+INSERT INTO `mob_droplist` VALUES (3290,0,0,1000,11289,@COMMON);  -- Dark Ixion: Ixion Cloak
+INSERT INTO `mob_droplist` VALUES (3290,0,0,1000,16242,@VCOMMON); -- Dark Ixion: Ixion Cape
+INSERT INTO `mob_droplist` VALUES (3290,0,0,1000,2654,@ALWAYS);   -- Dark Ixion: Horn
+INSERT INTO `mob_droplist` VALUES (3290,0,0,1000,2655,@ALWAYS);   -- Dark Ixion: Tail
 
 /*!40000 ALTER TABLE `mob_droplist` ENABLE KEYS */;
 UNLOCK TABLES;

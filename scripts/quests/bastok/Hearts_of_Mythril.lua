@@ -5,10 +5,6 @@
 -- Elki     : !pos -17.087 -0.05 52.745 234
 -- Monument : !pos 300 -62.803 498.2 106
 -----------------------------------
-require('scripts/globals/quests')
-require('scripts/globals/titles')
-require('scripts/globals/interaction/quest')
------------------------------------
 
 local quest = Quest:new(xi.quest.log_id.BASTOK, xi.quest.id.bastok.HEARTS_OF_MYTHRIL)
 
@@ -16,7 +12,7 @@ quest.reward =
 {
     fame     = 80,
     fameArea = xi.quest.fame_area.BASTOK,
-    item     = xi.items.SITABAKI,
+    item     = xi.item.SITABAKI,
     title    = xi.title.PURSUER_OF_THE_PAST,
 }
 

@@ -4,9 +4,7 @@
 -- The ship for The Black Coffin Battle (TOAU-15)
 -- !pos -462 -2 -394 54
 -----------------------------------
-local ID = require("scripts/zones/Arrapago_Reef/IDs")
-require("scripts/globals/instance")
-require("scripts/globals/missions")
+local ID = zones[xi.zone.ARRAPAGO_REEF]
 -----------------------------------
 local entity = {}
 

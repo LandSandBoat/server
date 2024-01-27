@@ -3,8 +3,6 @@
 -- NPC: A.M.A.N Validator
 -- !pos -338.18 -10 -180.19 235
 -----------------------------------
-require('scripts/globals/deeds')
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

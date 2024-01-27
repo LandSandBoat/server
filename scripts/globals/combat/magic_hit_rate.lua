@@ -1,16 +1,16 @@
 -----------------------------------
 -- Global file for magic based skills magic hit rate.
 -----------------------------------
-require("scripts/globals/combat/element_tables")
-require("scripts/globals/combat/level_correction")
+require('scripts/globals/combat/element_tables')
+require('scripts/globals/combat/level_correction')
 -----------------------------------
 xi = xi or {}
 xi.combat = xi.combat or {}
 xi.combat.magicHitRate = xi.combat.magicHitRate or {}
 
----------------------------------------------------------------------------
+-----------------------------------
 -- Calculate Actor Magic Accuracy
----------------------------------------------------------------------------
+-----------------------------------
 
 -- Magic Accuracy from spell's skill.
 local function magicAccuracyFromSkill(actor, skillType)
@@ -30,7 +30,7 @@ end
 local function magicAccuracyFromElement(actor, spellElement)
     local magicAcc = 0
 
-    if spellElement ~= xi.magic.ele.NONE then
+    if spellElement ~= xi.element.NONE then
         magicAcc = actor:getMod(xi.combat.element.elementalMagicAcc[spellElement]) + actor:getMod(xi.combat.element.strongAffinityAcc[spellElement]) * 10
     end
 
@@ -134,8 +134,8 @@ local function magicAccuracyFromMerits(actor, skillType, spellElement)
         [xi.job.RDM] = function()
             -- Category 1
             if
-                spellElement >= xi.magic.element.FIRE and
-                spellElement <= xi.magic.element.WATER
+                spellElement >= xi.element.FIRE and
+                spellElement <= xi.element.WATER
             then
                 magicAcc = actor:getMerit(xi.combat.element.rdmMerit[spellElement])
             end
@@ -210,7 +210,7 @@ end
 -- Magic Accuracy from Magic Burst.
 local function magicAccuracyFromMagicBurst(target, spellElement)
     local magicAcc           = 0
-    local _, skillchainCount = FormMagicBurst(spellElement, target)
+    local _, skillchainCount = xi.magicburst.formMagicBurst(spellElement, target)
 
     if skillchainCount > 0 then
         magicAcc = 100
@@ -224,7 +224,7 @@ local function magicAccuracyFromDayElement(actor, spellElement)
     local magicAcc = 0
 
     if
-        spellElement ~= xi.magic.ele.NONE and
+        spellElement ~= xi.element.NONE and
         (math.random(1, 100) <= 33 or actor:getMod(xi.combat.element.elementalObi[spellElement]) >= 1)
     then
         local dayElement = VanadielDayElement()
@@ -248,7 +248,7 @@ local function magicAccuracyFromWeatherElement(actor, spellElement)
 
     -- Calculate if weather bonus triggers.
     if
-        spellElement ~= xi.magic.ele.NONE and
+        spellElement ~= xi.element.NONE and
         (math.random(1, 100) <= 33 or actor:getMod(xi.combat.element.elementalObi[spellElement]) >= 1)
     then
         local actorWeather = actor:getWeather()
@@ -309,9 +309,9 @@ xi.combat.magicHitRate.calculateActorMagicAccuracy = function(actor, target, spe
     return finalMagicAcc
 end
 
----------------------------------------------------------------------------
+-----------------------------------
 -- Calculate Target Magic Evasion
----------------------------------------------------------------------------
+-----------------------------------
 local resistRankMultiplier =
 {
 -- [Rank] = Magic Evasion multiplier.
@@ -328,8 +328,8 @@ local resistRankMultiplier =
     [ 7] = 1.70065,
     [ 8] = 2.141,
     [ 9] = 2.2,
-    [10] = 2.275, -- Impossible to test since "Magic Hit Rate" is floored to 5% at this point.
-    [11] = 2.35,  -- Impossible to test since "Magic Hit Rate" is floored to 5% at this point.
+    [10] = 2.275, -- Impossible to test since 'Magic Hit Rate' is floored to 5% at this point.
+    [11] = 2.35,  -- Impossible to test since 'Magic Hit Rate' is floored to 5% at this point.
 }
 
 xi.combat.magicHitRate.calculateTargetMagicEvasion = function(actor, target, spellElement, isEnfeeble, mEvaMod, rankModifier)
@@ -339,7 +339,7 @@ xi.combat.magicHitRate.calculateTargetMagicEvasion = function(actor, target, spe
     local levelDiff  = target:getMainLvl() - actor:getMainLvl()
 
     -- Elemental magic evasion.
-    if spellElement ~= xi.magic.ele.NONE then
+    if spellElement ~= xi.element.NONE then
         -- Mod set in database for mobs. Base 0 means not resistant nor weak. Bar-element spells included here.
         resMod     = target:getMod(xi.combat.element.elementalMagicEva[spellElement])
         resistRank = utils.clamp(target:getMod(xi.combat.element.resistRankMod[spellElement]), -3, 11)
@@ -368,9 +368,9 @@ xi.combat.magicHitRate.calculateTargetMagicEvasion = function(actor, target, spe
     return magicEva
 end
 
----------------------------------------------------------------------------
+-----------------------------------
 -- Magic Hit Rate. The function gets fed the result of both functions above.
----------------------------------------------------------------------------
+-----------------------------------
 
 xi.combat.magicHitRate.calculateMagicHitRate = function(magicAcc, magicEva)
     local magicAccDiff = magicAcc - magicEva
@@ -384,16 +384,16 @@ xi.combat.magicHitRate.calculateMagicHitRate = function(magicAcc, magicEva)
     return magicHitRate
 end
 
----------------------------------------------------------------------------
+-----------------------------------
 -- Calculate resist tier.
----------------------------------------------------------------------------
+-----------------------------------
 
 xi.combat.magicHitRate.calculateResistRate = function(actor, target, skillType, spellElement, magicHitRate, rankModifier)
     local targetResistRate = 0 -- The variable we return.
     local targetResistRank = target:getMod(xi.combat.element.resistRankMod[spellElement])
 
     ----------------------------------------
-    -- Handle "Magic Shield" status effect.
+    -- Handle 'Magic Shield' status effect.
     ----------------------------------------
     if target:hasStatusEffect(xi.effect.MAGIC_SHIELD, 0) then
         return targetResistRate
@@ -403,14 +403,14 @@ xi.combat.magicHitRate.calculateResistRate = function(actor, target, skillType, 
     -- Handle target resistance rank.
     ----------------------------------------
     -- Elemental resistance rank.
-    if spellElement ~= xi.magic.ele.NONE then
+    if spellElement ~= xi.element.NONE then
         if targetResistRank > 4 then
             targetResistRank = utils.clamp(targetResistRank - rankModifier, 4, 11)
         end
     end
 
     -- Skillchains lowers target resistance rank by 1.
-    local _, skillchainCount = FormMagicBurst(spellElement, target)
+    local _, skillchainCount = xi.magicburst.formMagicBurst(spellElement, target)
 
     if skillchainCount > 0 then
         targetResistRank = targetResistRank - 1
@@ -431,7 +431,7 @@ xi.combat.magicHitRate.calculateResistRate = function(actor, target, skillType, 
     local resistTier = 0
     local randomVar  = math.random()
 
-    -- NOTE: Elemental magic evasion "Boons".
+    -- NOTE: Elemental magic evasion 'Boons'.
     -- According to wiki, 1 positive point in the spell element MEVA allows for an additional tier. This would be tier 3, not the resistance rank tier.
     -- However, it also states that a negative value will also prevent full resists, which is redundant. We already wouldnt be eligible for it.
 

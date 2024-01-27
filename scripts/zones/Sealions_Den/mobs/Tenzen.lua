@@ -2,8 +2,8 @@
 -- Area: Sealion's Den
 --  Mob: Tenzen
 -----------------------------------
-local ID = require("scripts/zones/Sealions_Den/IDs")
-local tenzenFunctions = require("scripts/zones/Sealions_Den/helpers/TenzenFunctions")
+local ID = zones[xi.zone.SEALIONS_DEN]
+local tenzenFunctions = require('scripts/zones/Sealions_Den/helpers/TenzenFunctions')
 -----------------------------------
 local entity = {}
 
@@ -19,8 +19,8 @@ entity.onMobSpawn = function(mob)
     mob:setMobAbilityEnabled(true)
     mob:setAutoAttackEnabled(true)
     mob:setUnkillable(true)
-    mob:setLocalVar("skillchain", math.random(1, 100)) -- set chance that Tenzen will use Cosmic Elucidation
-    mob:setLocalVar("twohourthreshold", math.random(75, 80)) -- set HP threshold for Meikyo Shisui usage
+    mob:setLocalVar('skillchain', math.random(1, 100)) -- set chance that Tenzen will use Cosmic Elucidation
+    mob:setLocalVar('twohourthreshold', math.random(75, 80)) -- set HP threshold for Meikyo Shisui usage
 end
 
 entity.onMobEngaged = function(mob, target)
@@ -42,8 +42,8 @@ end
 
 entity.onMobFight = function(mob, target)
     -- Uses Meikyo Shisui around 75-80% Hanaikusa > Torimai > Kazakiri > Tsukikage > Cosmic Elucidation
-    local twohourtrigger   = mob:getLocalVar("twohourtrigger")
-    local twohourthreshold = mob:getLocalVar("twohourthreshold")
+    local twohourtrigger   = mob:getLocalVar('twohourtrigger')
+    local twohourthreshold = mob:getLocalVar('twohourthreshold')
 
     if
         mob:getHPP() < twohourthreshold and

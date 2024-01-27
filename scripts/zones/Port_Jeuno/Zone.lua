@@ -1,11 +1,6 @@
 -----------------------------------
 -- Zone: Port_Jeuno (246)
 -----------------------------------
-local ID = require('scripts/zones/Port_Jeuno/IDs')
-require('scripts/globals/conquest')
-require('scripts/globals/chocobo')
-require('scripts/globals/quests')
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
@@ -14,8 +9,8 @@ end
 
 zoneObject.onZoneIn = function(player, prevZone)
     local cs = -1
-    local month = tonumber(os.date("%m"))
-    local day = tonumber(os.date("%d"))
+    local month = tonumber(os.date('%m'))
+    local day = tonumber(os.date('%d'))
 
     -- Retail start/end dates vary, set to Dec 5th through Jan 5th.
     if

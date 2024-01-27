@@ -4,8 +4,6 @@
 -- Involved in Quest: Class Reunion
 -- !pos 161 -2 161 238
 -----------------------------------
-require("scripts/globals/quests")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
@@ -17,8 +15,8 @@ entity.onTrigger = function(player, npc)
     -- CLASS REUNION
     if
         classReunion == QUEST_ACCEPTED and
-        player:getCharVar("ClassReunionProgress") >= 3 and
-        player:getCharVar("ClassReunion_TalkedToFupepe") ~= 1
+        player:getCharVar('ClassReunionProgress') >= 3 and
+        player:getCharVar('ClassReunion_TalkedToFupepe') ~= 1
     then
         player:startEvent(817) -- he tells you about Uran-Mafran
     end
@@ -29,7 +27,7 @@ end
 
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 817 then
-        player:setCharVar("ClassReunion_TalkedToFupepe", 1)
+        player:setCharVar('ClassReunion_TalkedToFupepe', 1)
     end
 end
 

@@ -7,11 +7,7 @@
 -- Mourices  : !pos -50.646 -0.501 -27.642 241
 -- Uu Zhoumo : !pos -179 16 155 145
 -----------------------------------
-require('scripts/globals/missions')
-require('scripts/globals/npc_util')
-require('scripts/globals/interaction/mission')
------------------------------------
-local giddeusID = require("scripts/zones/Giddeus/IDs")
+local giddeusID = zones[xi.zone.GIDDEUS]
 -----------------------------------
 
 local mission = Mission:new(xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.JOURNEY_TO_WINDURST)
@@ -54,7 +50,7 @@ mission.sections =
                     local missionStatus = player:getMissionStatus(mission.areaId)
 
                     if missionStatus == 4 then
-                        local needsSemihTrust = (not player:hasSpell(xi.magic.spell.SEMIH_LAFIHNA) and not player:findItem(xi.items.CIPHER_OF_SEMIHS_ALTER_EGO)) and 1 or 0
+                        local needsSemihTrust = (not player:hasSpell(xi.magic.spell.SEMIH_LAFIHNA) and not player:findItem(xi.item.CIPHER_OF_SEMIHS_ALTER_EGO)) and 1 or 0
 
                         return mission:progressEvent(238, 1, 1, 1, 1, xi.nation.SANDORIA, 0, 0, needsSemihTrust)
                     elseif missionStatus == 5 then
@@ -95,9 +91,9 @@ mission.sections =
 
                     if
                         not player:hasSpell(xi.magic.spell.SEMIH_LAFIHNA) and
-                        not player:findItem(xi.items.CIPHER_OF_SEMIHS_ALTER_EGO)
+                        not player:findItem(xi.item.CIPHER_OF_SEMIHS_ALTER_EGO)
                     then
-                        npcUtil.giveItem(player, xi.items.CIPHER_OF_SEMIHS_ALTER_EGO)
+                        npcUtil.giveItem(player, xi.item.CIPHER_OF_SEMIHS_ALTER_EGO)
                     end
                 end,
             },
@@ -136,7 +132,7 @@ mission.sections =
             {
                 onTrade = function(player, npc, trade)
                     if
-                        npcUtil.tradeHasExactly(trade, { { xi.items.PARANA_SHIELD, 2 } }) and
+                        npcUtil.tradeHasExactly(trade, { { xi.item.PARANA_SHIELD, 2 } }) and
                         player:getMissionStatus(mission.areaId) == 6
                     then
                         return mission:progressEvent(457) -- Has delivered shield

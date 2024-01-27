@@ -114,8 +114,8 @@ struct BattlefieldInitiator_t
     uint32      id;
 
     BattlefieldInitiator_t()
+    : id(0)
     {
-        id = 0;
     }
 };
 
@@ -238,7 +238,7 @@ private:
     uint8                  m_LevelCap;
     // Entity id of the Armoury Crate that appears upon victory
     uint32     m_armouryCrate = 0;
-    const bool m_isInteraction;
+    bool const m_isInteraction;
 
     time_point m_cleanupTime{};
     bool       m_cleanedPlayers = false;

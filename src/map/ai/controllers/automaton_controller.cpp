@@ -721,7 +721,7 @@ bool CAutomatonController::TryEnfeeble(const CurrentManeuvers& maneuvers)
             {
                 if (!dispel && PStatus->GetDuration() > 0)
                 {
-                    if (PStatus->GetFlag() & EFFECTFLAG_DISPELABLE)
+                    if (PStatus->HasEffectFlag(EFFECTFLAG_DISPELABLE))
                     {
                         dispel = true;
                         return;
@@ -1711,7 +1711,7 @@ namespace automaton
             }
         }
 
-        if (PStatus->GetFlag() & EFFECTFLAG_ERASABLE)
+        if (PStatus->HasEffectFlag(EFFECTFLAG_ERASABLE))
         {
             return SpellID::Erase;
         }
@@ -1737,7 +1737,7 @@ namespace automaton
 
                 autoAbilityList[id] = PAbility;
 
-                auto filename = fmt::format("./scripts/globals/abilities/pets/automaton/{}.lua", sql->GetStringData(1));
+                auto filename = fmt::format("./scripts/actions/abilities/pets/automaton/{}.lua", sql->GetStringData(1));
                 luautils::CacheLuaObjectFromFile(filename);
             }
         }

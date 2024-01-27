@@ -3,8 +3,7 @@
 --  Mob: Demon Pawn
 -- Note: PH for Baronet Romwe
 -----------------------------------
-local ID = require("scripts/zones/Castle_Zvahl_Keep/IDs")
-require("scripts/globals/mobs")
+local ID = zones[xi.zone.CASTLE_ZVAHL_KEEP]
 -----------------------------------
 local entity = {}
 

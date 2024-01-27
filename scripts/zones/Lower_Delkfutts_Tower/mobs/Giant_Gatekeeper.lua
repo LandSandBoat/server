@@ -3,9 +3,7 @@
 --  Mob: Giant Gatekeeper
 -- Note: PH for Epialtes and Hippolytos
 -----------------------------------
-local ID = require("scripts/zones/Lower_Delkfutts_Tower/IDs")
-require("scripts/globals/regimes")
-require("scripts/globals/mobs")
+local ID = zones[xi.zone.LOWER_DELKFUTTS_TOWER]
 -----------------------------------
 local entity = {}
 

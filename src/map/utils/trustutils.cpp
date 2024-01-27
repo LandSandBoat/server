@@ -109,66 +109,57 @@ struct Trust_t
     int8 dark_res_rank;
 
     Trust_t()
-    : EcoSystem(ECOSYSTEM::ECO_ERROR)
+    : trustID(0)
+    , pool(0)
+    , EcoSystem(ECOSYSTEM::ECO_ERROR)
+    , name_prefix(0)
+    , radius(0)
+    , m_Family(0)
+    , mJob(0)
+    , sJob(0)
+    , HPscale(0.f)
+    , MPscale(0.f)
+    , cmbSkill(0)
+    , cmbDmgMult(0)
+    , cmbDelay(0)
+    , speed(0)
+    , subSpeed(0)
+    , strRank(0)
+    , dexRank(0)
+    , vitRank(0)
+    , agiRank(0)
+    , intRank(0)
+    , mndRank(0)
+    , chrRank(0)
+    , attRank(0)
+    , defRank(0)
+    , evaRank(0)
+    , accRank(0)
+    , m_MobSkillList(0)
+    , hasSpellScript(false)
+    , spellList(0)
+    , slash_sdt(0)
+    , pierce_sdt(0)
+    , hth_sdt(0)
+    , impact_sdt(0)
+    , magical_sdt(0)
+    , fire_sdt(0)
+    , ice_sdt(0)
+    , wind_sdt(0)
+    , earth_sdt(0)
+    , thunder_sdt(0)
+    , water_sdt(0)
+    , light_sdt(0)
+    , dark_sdt(0)
+    , fire_res_rank(0)
+    , ice_res_rank(0)
+    , wind_res_rank(0)
+    , earth_res_rank(0)
+    , thunder_res_rank(0)
+    , water_res_rank(0)
+    , light_res_rank(0)
+    , dark_res_rank(0)
     {
-        trustID = 0;
-        pool    = 0;
-
-        name_prefix = 0;
-        radius      = 0;
-        m_Family    = 0;
-
-        mJob    = 0;
-        sJob    = 0;
-        HPscale = 0.f;
-        MPscale = 0.f;
-
-        cmbSkill   = 0;
-        cmbDmgMult = 0;
-        cmbDelay   = 0;
-        speed      = 0;
-        subSpeed   = 0;
-
-        strRank = 0;
-        dexRank = 0;
-        vitRank = 0;
-        agiRank = 0;
-        intRank = 0;
-        mndRank = 0;
-        chrRank = 0;
-        attRank = 0;
-        defRank = 0;
-        evaRank = 0;
-        accRank = 0;
-
-        m_MobSkillList = 0;
-
-        hasSpellScript = false;
-        spellList      = 0;
-
-        slash_sdt  = 0;
-        pierce_sdt = 0;
-        hth_sdt    = 0;
-        impact_sdt = 0;
-
-        magical_sdt = 0;
-        fire_sdt    = 0;
-        ice_sdt     = 0;
-        wind_sdt    = 0;
-        earth_sdt   = 0;
-        thunder_sdt = 0;
-        water_sdt   = 0;
-        light_sdt   = 0;
-        dark_sdt    = 0;
-
-        fire_res_rank    = 0;
-        ice_res_rank     = 0;
-        wind_res_rank    = 0;
-        earth_res_rank   = 0;
-        thunder_res_rank = 0;
-        water_res_rank   = 0;
-        light_res_rank   = 0;
-        dark_res_rank    = 0;
     }
 };
 
@@ -350,12 +341,17 @@ namespace trustutils
 
     CTrustEntity* SpawnTrust(CCharEntity* PMaster, uint32 TrustID)
     {
+        CTrustEntity* PTrust = LoadTrust(PMaster, TrustID);
+        if (PTrust == nullptr)
+        {
+            return nullptr;
+        }
+
         if (PMaster->PParty == nullptr)
         {
             PMaster->PParty = new CParty(PMaster);
         }
 
-        CTrustEntity* PTrust = LoadTrust(PMaster, TrustID);
         PMaster->PTrusts.insert(PMaster->PTrusts.end(), PTrust);
         PMaster->StatusEffectContainer->CopyConfrontationEffect(PTrust);
         PTrust->setBattleID(PMaster->getBattleID());
@@ -383,11 +379,19 @@ namespace trustutils
         auto* PTrust = new CTrustEntity(PMaster);
 
         // clang-format off
-        auto* trustData = *std::find_if(g_PTrustList.begin(), g_PTrustList.end(), [TrustID](Trust_t* t)
+        auto maybeTrustData = std::find_if(g_PTrustList.begin(), g_PTrustList.end(), [TrustID](Trust_t* t)
         {
             return t->trustID == TrustID;
         });
         // clang-format on
+
+        if (maybeTrustData == g_PTrustList.end())
+        {
+            ShowError(fmt::format("Could not look up trust data for id: {}", TrustID));
+            return PTrust;
+        }
+
+        auto* trustData = *maybeTrustData;
 
         PTrust->loc              = PMaster->loc;
         PTrust->m_OwnerID.id     = PMaster->id;
@@ -488,7 +492,7 @@ namespace trustutils
         }
 
         // add mob pool mods ahead of applying stats
-        mobutils::AddCustomMods(PTrust);
+        mobutils::AddSqlModifiers(PTrust);
 
         JOBTYPE mJob = PTrust->GetMJob();
         JOBTYPE sJob = PTrust->GetSJob();
@@ -700,13 +704,13 @@ namespace trustutils
             }
         }
 
-        PTrust->addModifier(Mod::DEF, mobutils::GetBase(PTrust, PTrust->defRank));
-        PTrust->addModifier(Mod::EVA, mobutils::GetBase(PTrust, PTrust->evaRank));
-        PTrust->addModifier(Mod::ATT, mobutils::GetBase(PTrust, PTrust->attRank));
-        PTrust->addModifier(Mod::ACC, mobutils::GetBase(PTrust, PTrust->accRank));
+        PTrust->addModifier(Mod::DEF, mobutils::GetBaseSkill(PTrust, PTrust->defRank));
+        PTrust->addModifier(Mod::EVA, mobutils::GetBaseSkill(PTrust, PTrust->evaRank));
+        PTrust->addModifier(Mod::ATT, mobutils::GetBaseSkill(PTrust, PTrust->attRank));
+        PTrust->addModifier(Mod::ACC, mobutils::GetBaseSkill(PTrust, PTrust->accRank));
 
-        PTrust->addModifier(Mod::RATT, mobutils::GetBase(PTrust, PTrust->attRank));
-        PTrust->addModifier(Mod::RACC, mobutils::GetBase(PTrust, PTrust->accRank));
+        PTrust->addModifier(Mod::RATT, mobutils::GetBaseSkill(PTrust, PTrust->attRank));
+        PTrust->addModifier(Mod::RACC, mobutils::GetBaseSkill(PTrust, PTrust->accRank));
 
         // Natural magic evasion
         PTrust->addModifier(Mod::MEVA, mobutils::GetMagicEvasion(PTrust));

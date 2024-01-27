@@ -1,9 +1,6 @@
 -----------------------------------
 -- Zone: Riverne-Site_A01
 -----------------------------------
-local ID = require('scripts/zones/Riverne-Site_A01/IDs')
-require('scripts/globals/conquest')
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

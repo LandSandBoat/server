@@ -2,9 +2,6 @@
 -- Area: Apollyon NW
 --  NPC: Armoury Crate (Recovery)
 -----------------------------------
-require("scripts/globals/npc_util")
------------------------------------
-
 local entity = {}
 
 entity.onMobInitialize = function(mob)

@@ -3,16 +3,10 @@
 -----------------------------------
 -- Dilapidated Gate : !pos 260.000 7.319 -440.001 25
 -----------------------------------
-require('scripts/globals/magic')
-require('scripts/globals/trust')
-require('scripts/globals/quests')
-require('scripts/globals/npc_util')
-require('scripts/globals/interaction/hidden_quest')
------------------------------------
-local misareauxID = require("scripts/zones/Misareaux_Coast/IDs")
+local misareauxID = zones[xi.zone.MISAREAUX_COAST]
 -----------------------------------
 
-local quest = HiddenQuest:new("TrustUlmia")
+local quest = HiddenQuest:new('TrustUlmia')
 
 local trustMemory = function(player)
     local memories = 0
@@ -35,7 +29,7 @@ quest.sections =
             not player:hasSpell(xi.magic.spell.ULMIA) and
             -- On Dawn, but past "the boss"
             (player:getCurrentMission(xi.mission.log_id.COP) > xi.mission.id.cop.DAWN and
-            player:getCharVar("PromathiaStatus") == 3)
+            player:getCharVar('PromathiaStatus') == 3)
             -- TODO: Additional conditions
         end,
 

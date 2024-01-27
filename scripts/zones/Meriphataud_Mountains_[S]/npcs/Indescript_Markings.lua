@@ -4,7 +4,7 @@
 -- Type: Quest
 -- !pos -389 -9 92 97
 -----------------------------------
-local ID = require("scripts/zones/Meriphataud_Mountains_[S]/IDs")
+local ID = zones[xi.zone.MERIPHATAUD_MOUNTAINS_S]
 -----------------------------------
 local entity = {}
 
@@ -12,7 +12,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local loafersQuestProgress = player:getCharVar("AF_SCH_BOOTS")
+    local loafersQuestProgress = player:getCharVar('AF_SCH_BOOTS')
 
     player:delStatusEffect(xi.effect.SNEAK)
 
@@ -24,7 +24,7 @@ entity.onTrigger = function(player, npc)
     then
         player:addKeyItem(xi.ki.DROGAROGAN_BONEMEAL)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.DROGAROGAN_BONEMEAL)
-        player:setCharVar("AF_SCH_BOOTS", loafersQuestProgress + 1)
+        player:setCharVar('AF_SCH_BOOTS', loafersQuestProgress + 1)
     else
         player:messageSpecial(ID.text.NOTHING_OUT_OF_ORDINARY)
     end

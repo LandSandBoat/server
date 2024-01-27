@@ -102,8 +102,8 @@ namespace gambits
         uint32      condition_arg;
 
         Predicate_t()
+        : condition_arg(0)
         {
-            condition_arg = 0;
         }
 
         Predicate_t(G_TARGET _target, G_CONDITION _condition, uint32 _condition_arg)
@@ -174,8 +174,8 @@ namespace gambits
         std::string              identifier;
 
         Gambit_t()
+        : retry_delay(0)
         {
-            retry_delay = 0;
         }
     };
 
@@ -200,11 +200,11 @@ namespace gambits
         TARGETTYPE valid_targets;
 
         TrustSkill_t()
+        : skill_id(0)
+        , primary(0)
+        , secondary(0)
+        , tertiary(0)
         {
-            skill_id  = 0;
-            primary   = 0;
-            secondary = 0;
-            tertiary  = 0;
         }
 
         TrustSkill_t(G_REACTION _skill_type, uint32 _skill_id, uint8 _primary, uint8 _secondary, uint8 _tertiary, TARGETTYPE _valid_targets)

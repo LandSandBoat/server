@@ -3,9 +3,7 @@
 --  Mob: Carrion Worm
 -- Note: PH for Bigmouth Billy
 -----------------------------------
-local ID = require("scripts/zones/East_Ronfaure/IDs")
-require("scripts/globals/regimes")
-require("scripts/globals/mobs")
+local ID = zones[xi.zone.EAST_RONFAURE]
 -----------------------------------
 local entity = {}
 

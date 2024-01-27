@@ -25,28 +25,9 @@
 
 #include "vana_time.h"
 
-CVanaTime* CVanaTime::_instance = nullptr;
-
 CVanaTime::CVanaTime()
 {
     setCustomEpoch(0);
-}
-
-CVanaTime* CVanaTime::getInstance()
-{
-    if (_instance == nullptr)
-    {
-        _instance = new CVanaTime();
-    }
-    return _instance;
-}
-
-void CVanaTime::delInstance()
-{
-    if (_instance)
-    {
-        destroy(_instance);
-    }
 }
 
 uint32 CVanaTime::getDate() const
@@ -82,6 +63,11 @@ uint32 CVanaTime::getMinute() const
 uint32 CVanaTime::getWeekday() const
 {
     return m_vDay;
+}
+
+uint32 CVanaTime::getSysTime()
+{
+    return static_cast<uint32>(time(nullptr));
 }
 
 uint32 CVanaTime::getSysHour()
@@ -214,7 +200,12 @@ uint32 CVanaTime::getVanaTime() const
     return (uint32)time(nullptr) - (m_customEpoch ? m_customEpoch : VTIME_BASEDATE);
 }
 
-int32 CVanaTime::getCustomEpoch() const
+uint32 CVanaTime::getEpoch() const
+{
+    return m_customEpoch ? m_customEpoch : VTIME_BASEDATE;
+}
+
+uint32 CVanaTime::getCustomEpoch() const
 {
     return m_customEpoch;
 }

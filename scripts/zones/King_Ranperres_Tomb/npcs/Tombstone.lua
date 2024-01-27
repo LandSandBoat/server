@@ -4,17 +4,12 @@
 -- Involved in Quest: Grave Concerns
 -- !pos 1 0.1 -101 190
 -----------------------------------
-local ID = require("scripts/zones/King_Ranperres_Tomb/IDs")
-require("scripts/globals/missions")
-require("scripts/globals/npc_util")
-require("scripts/globals/quests")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     if
         player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.GRAVE_CONCERNS) == QUEST_ACCEPTED and
-        npcUtil.tradeHas(trade, xi.items.SKIN_OF_WELL_WATER) -- Well Water
+        npcUtil.tradeHas(trade, xi.item.SKIN_OF_WELL_WATER) -- Well Water
     then
         player:startEvent(3)
     end
@@ -36,14 +31,14 @@ entity.onEventFinish = function(player, csid, option, npc)
     if
         csid == 2 and
         player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.GRAVE_CONCERNS) == QUEST_ACCEPTED and
-        not player:hasItem(xi.items.TOMB_GUARDS_WATERSKIN) and
-        not player:hasItem(xi.items.SKIN_OF_WELL_WATER) and
-        npcUtil.giveItem(player, xi.items.TOMB_GUARDS_WATERSKIN) -- Tomb Waterskin
+        not player:hasItem(xi.item.TOMB_GUARDS_WATERSKIN) and
+        not player:hasItem(xi.item.SKIN_OF_WELL_WATER) and
+        npcUtil.giveItem(player, xi.item.TOMB_GUARDS_WATERSKIN) -- Tomb Waterskin
     then
         -- no further action needed
-    elseif csid == 3 and npcUtil.giveItem(player, xi.items.TOMB_GUARDS_WATERSKIN) then
+    elseif csid == 3 and npcUtil.giveItem(player, xi.item.TOMB_GUARDS_WATERSKIN) then
         player:confirmTrade()
-        player:setCharVar("OfferingWaterOK", 1)
+        player:setCharVar('OfferingWaterOK', 1)
     end
 end
 

@@ -407,6 +407,11 @@ void CPetEntity::OnPetSkillFinished(CPetSkillState& state, action_t& action)
         findFlags |= FINDFLAGS_IGNORE_BATTLEID;
     }
 
+    if ((PSkill->getValidTargets() & TARGET_PLAYER_DEAD) == TARGET_PLAYER_DEAD)
+    {
+        findFlags |= FINDFLAGS_DEAD;
+    }
+
     action.id         = id;
     action.actiontype = (ACTIONTYPE)PSkill->getSkillFinishCategory();
     action.actionid   = PSkill->getID();

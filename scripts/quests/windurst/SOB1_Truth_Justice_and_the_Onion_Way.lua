@@ -3,11 +3,6 @@
 --
 -- Kohlo-Lakolo, !pos -26.8 -6 190 240
 -----------------------------------
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
-require('scripts/globals/titles')
-require('scripts/globals/interaction/quest')
------------------------------------
 
 local quest = Quest:new(xi.quest.log_id.WINDURST, xi.quest.id.windurst.TRUTH_JUSTICE_AND_THE_ONION_WAY)
 
@@ -15,7 +10,7 @@ quest.reward =
 {
     fame     = 10,
     fameArea = xi.quest.fame_area.WINDURST,
-    item     = xi.items.JUSTICE_BADGE,
+    item     = xi.item.JUSTICE_BADGE,
     title    = xi.title.STAR_ONION_BRIGADE_MEMBER,
 }
 
@@ -58,8 +53,8 @@ quest.sections =
                 end,
 
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, xi.items.RARAB_TAIL) then
-                        return quest:progressEvent(378, 0, xi.items.RARAB_TAIL, xi.items.JUSTICE_BADGE)
+                    if npcUtil.tradeHasExactly(trade, xi.item.RARAB_TAIL) then
+                        return quest:progressEvent(378, 0, xi.item.RARAB_TAIL, xi.item.JUSTICE_BADGE)
                     end
                 end,
             },

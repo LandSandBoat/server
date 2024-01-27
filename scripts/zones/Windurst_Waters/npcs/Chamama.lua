@@ -4,9 +4,7 @@
 -- Involved In Quest: Inspector's Gadget
 -- Starts Quest: In a Pickle
 -----------------------------------
-local ID = require("scripts/zones/Windurst_Waters/IDs")
-require("scripts/globals/quests")
-require("scripts/globals/titles")
+local ID = zones[xi.zone.WINDURST_WATERS]
 -----------------------------------
 local entity = {}
 
@@ -15,7 +13,7 @@ entity.onTrade = function(player, npc, trade)
 
     if
         (inAPickle == QUEST_ACCEPTED or inAPickle == QUEST_COMPLETED) and
-        trade:hasItemQty(xi.items.SMOOTH_STONE, 1) and
+        trade:hasItemQty(xi.item.SMOOTH_STONE, 1) and
         trade:getItemCount() == 1 and
         trade:getGil() == 0
     then
@@ -43,21 +41,21 @@ entity.onTrigger = function(player, npc)
     if inAPickle == QUEST_AVAILABLE and not needToZone then
         local rand = math.random(1, 2)
         if rand == 1 then
-            player:startEvent(654, 0, xi.items.RARAB_TAIL) -- IN A PICKLE + RARAB TAIL: Quest Begin
+            player:startEvent(654, 0, xi.item.RARAB_TAIL) -- IN A PICKLE + RARAB TAIL: Quest Begin
         else
             player:startEvent(651) -- Standard Conversation
         end
     elseif
         inAPickle == QUEST_ACCEPTED or
-        player:getCharVar("QuestInAPickle_var") == 1
+        player:getCharVar('QuestInAPickle_var') == 1
     then
-        player:startEvent(655, 0, xi.items.RARAB_TAIL) -- IN A PICKLE + RARAB TAIL: Quest Objective Reminder
+        player:startEvent(655, 0, xi.item.RARAB_TAIL) -- IN A PICKLE + RARAB TAIL: Quest Objective Reminder
     elseif inAPickle == QUEST_COMPLETED and needToZone then
         player:startEvent(660) -- IN A PICKLE: After Quest
     elseif
         inAPickle == QUEST_COMPLETED and
         not needToZone and
-        player:getCharVar("QuestInAPickle_var") ~= 1
+        player:getCharVar('QuestInAPickle_var') ~= 1
     then
         local rand = math.random(1, 2)
         if rand == 1 then
@@ -80,18 +78,18 @@ entity.onEventFinish = function(player, csid, option, npc)
         player:tradeComplete()
         player:completeQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.IN_A_PICKLE)
         player:needToZone(true)
-        player:addItem(xi.items.BONE_HAIRPIN)
-        player:messageSpecial(ID.text.ITEM_OBTAINED, xi.items.BONE_HAIRPIN)
+        player:addItem(xi.item.BONE_HAIRPIN)
+        player:messageSpecial(ID.text.ITEM_OBTAINED, xi.item.BONE_HAIRPIN)
         npcUtil.giveCurrency(player, 'gil', 200)
         player:addFame(xi.quest.fame_area.WINDURST, 75)
     elseif csid == 661 and option == 1 then
-        player:setCharVar("QuestInAPickle_var", 1)
+        player:setCharVar('QuestInAPickle_var', 1)
     elseif csid == 662 then -- IN A PICKLE + 200 GIL: Repeatable Quest Turn In
         player:tradeComplete()
         player:needToZone(true)
         player:addGil(xi.settings.main.GIL_RATE * 200)
         player:addFame(xi.quest.fame_area.WINDURST, 8)
-        player:setCharVar("QuestInAPickle_var", 0)
+        player:setCharVar('QuestInAPickle_var', 0)
     end
 end
 

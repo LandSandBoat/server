@@ -3,15 +3,12 @@
 --  NPC: Faustin
 -- Ronfaure Regional Merchant
 -----------------------------------
-local ID = require("scripts/zones/Bastok_Mines/IDs")
-require("scripts/globals/events/harvest_festivals")
-require("scripts/globals/conquest")
-require("scripts/globals/shop")
+local ID = zones[xi.zone.BASTOK_MINES]
 -----------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    onHalloweenTrade(player, trade, npc)
+    xi.events.harvestFestival.onHalloweenTrade(player, trade, npc)
 end
 
 entity.onTrigger = function(player, npc)
@@ -20,10 +17,10 @@ entity.onTrigger = function(player, npc)
     else
         local stock =
         {
-            639, 110,    -- Chestnut
-            4389, 29,    -- San d'Orian Carrot
-            610,  55,    -- San d'Orian Flour
-            4431, 69,     -- San d'Orian Grape
+            xi.item.SAN_DORIAN_CARROT,           33,
+            xi.item.BUNCH_OF_SAN_DORIAN_GRAPES,  79,
+            xi.item.RONFAURE_CHESTNUT,          124,
+            xi.item.BAG_OF_SAN_DORIAN_FLOUR,     62,
         }
 
         player:showText(npc, ID.text.FAUSTIN_OPEN_DIALOG)

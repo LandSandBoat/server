@@ -4,17 +4,14 @@
 -- Starts and Ends Quest: Like a Shining Subligar
 -- !pos -1 -5 25 252
 -----------------------------------
-require("scripts/globals/titles")
-require("scripts/globals/shop")
-require("scripts/globals/quests")
-local ID = require("scripts/zones/Norg/IDs")
+local ID = zones[xi.zone.NORG]
 -----------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     local shiningSubligar = player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.LIKE_A_SHINING_SUBLIGAR)
-    local subligar = trade:getItemQty(xi.items.RUSTY_SUBLIGAR)
-    local turnedInVar = player:getCharVar("shiningSubligar_nb")
+    local subligar = trade:getItemQty(xi.item.RUSTY_SUBLIGAR)
+    local turnedInVar = player:getCharVar('shiningSubligar_nb')
     local totalSubligar = subligar + turnedInVar
 
     if subligar > 0 and subligar == trade:getItemCount() then
@@ -22,7 +19,7 @@ entity.onTrade = function(player, npc, trade)
             player:startEvent(125)
         elseif shiningSubligar == QUEST_ACCEPTED and turnedInVar <= 9 then -- turning in less than the amount needed to finish the quest
             player:tradeComplete()
-            player:setCharVar("shiningSubligar_nb", totalSubligar)
+            player:setCharVar('shiningSubligar_nb', totalSubligar)
             player:startEvent(124, totalSubligar) -- Update player on number of subligar turned in
         end
     else
@@ -43,7 +40,7 @@ entity.onTrigger = function(player, npc)
     then
         player:startEvent(123) -- Start Like a Shining Subligar
     elseif shiningSubligar == QUEST_ACCEPTED then
-        player:startEvent(124, player:getCharVar("shiningSubligar_nb")) -- Update player on number of subligar turned in
+        player:startEvent(124, player:getCharVar('shiningSubligar_nb')) -- Update player on number of subligar turned in
     else
         player:startEvent(122) -- Standard Conversation
     end
@@ -58,9 +55,9 @@ entity.onEventFinish = function(player, csid, option, npc)
     elseif csid == 125 then
         player:tradeComplete()
         player:addTitle(xi.title.LOOKS_SUBLIME_IN_A_SUBLIGAR)
-        player:addItem(xi.items.SCROLL_OF_KURAYAMI_ICHI)
-        player:messageSpecial(ID.text.ITEM_OBTAINED, xi.items.SCROLL_OF_KURAYAMI_ICHI)
-        player:setCharVar("shiningSubligar_nb", 0)
+        player:addItem(xi.item.SCROLL_OF_KURAYAMI_ICHI)
+        player:messageSpecial(ID.text.ITEM_OBTAINED, xi.item.SCROLL_OF_KURAYAMI_ICHI)
+        player:setCharVar('shiningSubligar_nb', 0)
         player:addFame(xi.quest.fame_area.NORG, 100)
         player:completeQuest(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.LIKE_A_SHINING_SUBLIGAR)
     end

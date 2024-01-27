@@ -3,9 +3,7 @@
 --  Mob: Giant Guard
 -- Note: PH for Rhoitos and Polybotes
 -----------------------------------
-local ID = require("scripts/zones/Middle_Delkfutts_Tower/IDs")
-require("scripts/globals/regimes")
-require("scripts/globals/mobs")
+local ID = zones[xi.zone.MIDDLE_DELKFUTTS_TOWER]
 -----------------------------------
 local entity = {}
 

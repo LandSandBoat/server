@@ -1,9 +1,6 @@
 -----------------------------------
 -- I Can Hear a Rainbow
 -----------------------------------
-require('scripts/globals/quests')
-require('scripts/globals/utils')
------------------------------------
 
 quests = quests or {}
 quests.i_can_hear_a_rainbow = quests.i_can_hear_a_rainbow or {}
@@ -110,7 +107,7 @@ local rubyData =
 quests.i_can_hear_a_rainbow.onZoneIn = function(player)
     if
         player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.I_CAN_HEAR_A_RAINBOW) == QUEST_ACCEPTED and
-        player:hasItem(xi.items.CARBUNCLES_RUBY, 0)
+        player:hasItem(xi.item.CARBUNCLES_RUBY, 0)
     then
         local trigger = false
 
@@ -151,7 +148,7 @@ quests.i_can_hear_a_rainbow.onEventUpdate = function(player)
         weather = xi.weather.NONE
     end
 
-    if utils.mask.isFull(player:getCharVar("I_CAN_HEAR_A_RAINBOW"), 7) then -- has collected all 7 colors?
+    if utils.mask.isFull(player:getCharVar('I_CAN_HEAR_A_RAINBOW'), 7) then -- has collected all 7 colors?
         player:updateEvent(0, 0, weather, 6)
     else
         player:updateEvent(0, 0, weather)

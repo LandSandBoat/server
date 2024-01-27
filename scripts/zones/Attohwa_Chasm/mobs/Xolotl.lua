@@ -2,8 +2,6 @@
 -- Area: Attohwa Chasm
 --  Mob: Xolotl
 -----------------------------------
-require("scripts/globals/titles")
------------------------------------
 local entity = {}
 
 entity.onMobSpawn = function(mob)

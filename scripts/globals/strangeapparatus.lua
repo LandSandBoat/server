@@ -27,8 +27,8 @@ local strAppData =
     {
         suffix  = 'DW',
         uid     = 0,
-        chip    = xi.items.RED_CHIP,
-        cluster = xi.items.FIRE_CLUSTER,
+        chip    = xi.item.RED_CHIP,
+        cluster = xi.item.FIRE_CLUSTER,
         drop    =
         {
             17093, 0.0400, 1, -- rune_staff
@@ -50,8 +50,8 @@ local strAppData =
     {
         suffix  = 'OC',
         uid     = 3,
-        chip    = xi.items.GREEN_CHIP,
-        cluster = xi.items.WIND_CLUSTER,
+        chip    = xi.item.GREEN_CHIP,
+        cluster = xi.item.WIND_CLUSTER,
         drop    =
         {
             17093, 0.0400, 1, -- rune_staff
@@ -73,8 +73,8 @@ local strAppData =
     {
         suffix  = 'HR',
         uid     = 5,
-        chip    = xi.items.PURPLE_CHIP,
-        cluster = xi.items.LIGHTNING_CLUSTER,
+        chip    = xi.item.PURPLE_CHIP,
+        cluster = xi.item.LIGHTNING_CLUSTER,
         drop    =
         {
             17093, 0.0400, 1, -- rune_staff
@@ -96,8 +96,8 @@ local strAppData =
     {
         suffix  = 'EN',
         uid     = 4,
-        chip    = xi.items.CLEAR_CHIP,
-        cluster = xi.items.ICE_CLUSTER,
+        chip    = xi.item.CLEAR_CHIP,
+        cluster = xi.item.ICE_CLUSTER,
         drop    =
         {
             17093, 0.0400, 1, -- rune_staff
@@ -119,8 +119,8 @@ local strAppData =
     {
         suffix  = 'GM',
         uid     = 1,
-        chip    = xi.items.YELLOW_CHIP,
-        cluster = xi.items.EARTH_CLUSTER,
+        chip    = xi.item.YELLOW_CHIP,
+        cluster = xi.item.EARTH_CLUSTER,
         drop    =
         {
             17093, 0.0400, 1, -- rune_staff
@@ -142,8 +142,8 @@ local strAppData =
     {
         suffix  = 'CN',
         uid     = 2,
-        chip    = xi.items.BLUE_CHIP,
-        cluster = xi.items.WATER_CLUSTER,
+        chip    = xi.item.BLUE_CHIP,
+        cluster = xi.item.WATER_CLUSTER,
         drop    =
         {
             17093, 0.0400, 1, -- rune_staff
@@ -165,8 +165,8 @@ local strAppData =
     {
         suffix  = 'MS',
         uid     = 7,
-        chip    = xi.items.BLACK_CHIP,
-        cluster = xi.items.DARK_CLUSTER,
+        chip    = xi.item.BLACK_CHIP,
+        cluster = xi.item.DARK_CLUSTER,
         drop    =
         {
             17093, 0.0400, 1, -- rune_staff
@@ -188,8 +188,8 @@ local strAppData =
     {
         suffix  = 'GC',
         uid     = 6,
-        chip    = xi.items.WHITE_CHIP,
-        cluster = xi.items.LIGHT_CLUSTER,
+        chip    = xi.item.WHITE_CHIP,
+        cluster = xi.item.LIGHT_CLUSTER,
         drop    =
         {
             17093, 0.0400, 1, -- rune_staff
@@ -215,23 +215,23 @@ local strAppData =
 
 local function addDoctorStatus(player)
     local data = strAppData[player:getZoneID()]
-    player:setCharVar("StrangeApparatusDoctorStatus" .. data.suffix, os.time() + 172800) -- 2 days
+    player:setCharVar('StrangeApparatusDoctorStatus' .. data.suffix, os.time() + 172800) -- 2 days
 end
 
 local function delDoctorStatus(player)
     local data = strAppData[player:getZoneID()]
-    player:setCharVar("StrangeApparatusDoctorStatus" .. data.suffix, 0)
+    player:setCharVar('StrangeApparatusDoctorStatus' .. data.suffix, 0)
 end
 
 local function hasDoctorStatus(player)
     local data = strAppData[player:getZoneID()]
-    local docStatusExpires = player:getCharVar("StrangeApparatusDoctorStatus" .. data.suffix)
+    local docStatusExpires = player:getCharVar('StrangeApparatusDoctorStatus' .. data.suffix)
 
     if docStatusExpires ~= 0 then
         if os.time() <= docStatusExpires then
             return true
         else
-            player:setCharVar("StrangeApparatusDoctorStatus" .. data.suffix, 0)
+            player:setCharVar('StrangeApparatusDoctorStatus' .. data.suffix, 0)
         end
     end
 
@@ -244,7 +244,7 @@ end
 
 local function ltrVal(letter)
     for x = 1, 26 do
-        if letter == string.sub("abcdefghijklmnopqrstuvwxyz", x, x) then
+        if letter == string.sub('abcdefghijklmnopqrstuvwxyz', x, x) then
             return x - 1
         end
     end
@@ -254,7 +254,7 @@ local function generatePassword(player)
     local data = strAppData[player:getZoneID()]
     local name = string.lower(player:getName())
     return string.format(
-        "%02d%02d%02d%02d",
+        '%02d%02d%02d%02d',
         ltrVal(string.sub(name, 1, 1)) + data.uid,
         ltrVal(string.sub(name, 2, 2)) + data.uid,
         ltrVal(string.sub(name, 3, 3)) + data.uid,
@@ -275,8 +275,8 @@ xi.strangeApparatus =
         local drops = data.drop
         local foundChip = false
 
-        for chipTraded = xi.items.RED_CHIP, xi.items.BLACK_CHIP do
-            if npcUtil.tradeHasExactly(trade, { xi.items.INFINITY_CORE, chipTraded }) then
+        for chipTraded = xi.item.RED_CHIP, xi.item.BLACK_CHIP do
+            if npcUtil.tradeHasExactly(trade, { xi.item.INFINITY_CORE, chipTraded }) then
                 player:confirmTrade()
                 foundChip = true
 
@@ -301,16 +301,16 @@ xi.strangeApparatus =
                         qty  = 2
                     end
 
-                    player:setLocalVar("strAppDrop", item)
-                    player:setLocalVar("strAppDropQty", qty)
+                    player:setLocalVar('strAppDrop', item)
+                    player:setLocalVar('strAppDropQty', qty)
 
                     -- start event
                     local doctorStatus = hasDoctorStatus(player) and 1 or 0
-                    player:startEvent(eventId, item, qty, xi.items.INFINITY_CORE, 0, 0, 0, doctorStatus, 0)
+                    player:startEvent(eventId, item, qty, xi.item.INFINITY_CORE, 0, 0, 0, doctorStatus, 0)
 
                 -- player traded a chip that does not match this zone. spawn elemental that matches apparatus.
                 else
-                    player:addItem(xi.items.INFINITY_CORE, 1)
+                    player:addItem(xi.item.INFINITY_CORE, 1)
                     player:messageSpecial(ID.text.SYS_OVERLOAD)
                     player:messageSpecial(ID.text.YOU_LOST_THE, chipTraded)
                     delDoctorStatus(player)
@@ -335,10 +335,10 @@ xi.strangeApparatus =
         if hasDoctorStatus(player) then
             doctorStatus = 1
         else
-            player:setLocalVar("strAppPass", 1)
+            player:setLocalVar('strAppPass', 1)
         end
 
-        player:startEvent(eventId, doctorStatus, 0, xi.items.INFINITY_CORE, 0, 0, 0, 0, player:getZoneID())
+        player:startEvent(eventId, doctorStatus, 0, xi.item.INFINITY_CORE, 0, 0, 0, 0, player:getZoneID())
     end,
 
     -----------------------------------
@@ -351,15 +351,15 @@ xi.strangeApparatus =
                 addDoctorStatus(player)
             end
 
-            player:updateEvent(doctorStatus, 0, xi.items.INFINITY_CORE, 0, 0, 0, 0, 0)
+            player:updateEvent(doctorStatus, 0, xi.item.INFINITY_CORE, 0, 0, 0, 0, 0)
         end
     end,
 
     -----------------------------------
 
     onEventFinish = function(player)
-        local item = player:getLocalVar("strAppDrop")
-        local qty = player:getLocalVar("strAppDropQty")
+        local item = player:getLocalVar('strAppDrop')
+        local qty = player:getLocalVar('strAppDropQty')
 
         if item ~= 0 then
             if qty == 0 then
@@ -367,8 +367,8 @@ xi.strangeApparatus =
             end
 
             if npcUtil.giveItem(player, { { item, qty } }) then
-                player:setLocalVar("strAppDrop", 0)
-                player:setLocalVar("strAppDropQty", 0)
+                player:setLocalVar('strAppDrop', 0)
+                player:setLocalVar('strAppDropQty', 0)
             end
         end
     end,

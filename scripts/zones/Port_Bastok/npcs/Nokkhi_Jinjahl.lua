@@ -4,7 +4,7 @@
 -- Type: Travelling Merchant NPC / NPC Quiver Maker / Bastok 1st Place
 -- !pos 111 8 -47 236
 -----------------------------------
-local ID = require("scripts/zones/Port_Bastok/IDs")
+local ID = zones[xi.zone.PORT_BASTOK]
 -----------------------------------
 local entity = {}
 
@@ -122,7 +122,7 @@ entity.onTrade = function(player, npc, trade)
     -- check for correct number of carnations
     if
         carnationsNeeded == 0 or
-        trade:getItemQty(xi.items.CARNATION) ~= carnationsNeeded
+        trade:getItemQty(xi.item.CARNATION) ~= carnationsNeeded
     then
         player:messageSpecial(ID.text.NOKKHI_BAD_COUNT)
         return

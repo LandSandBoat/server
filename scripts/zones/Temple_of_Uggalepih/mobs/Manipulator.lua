@@ -3,8 +3,6 @@
 --   NM: Manipulator
 -- Note: Paths around the 2 staircases
 -----------------------------------
-require("scripts/globals/hunts")
------------------------------------
 local entity = {}
 
 local pathNodes =

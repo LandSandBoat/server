@@ -34,7 +34,7 @@ CREATE TABLE `fishing_area` (
   `center_y` float(7,3) NOT NULL DEFAULT '0.000',
   `center_z` float(7,3) NOT NULL DEFAULT '0.000',
   PRIMARY KEY (`zoneid`,`areaid`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
+) ENGINE=Aria TRANSACTIONAL=0 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --

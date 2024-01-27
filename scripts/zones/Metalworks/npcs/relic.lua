@@ -3,18 +3,17 @@
 --  NPC: <this space intentionally left blank>
 -- !pos -20 -11 33 237
 -----------------------------------
-local ID = require("scripts/zones/Metalworks/IDs")
-require("scripts/globals/npc_util")
+local ID = zones[xi.zone.METALWORKS]
 -----------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     if
-        player:getCharVar("RELIC_IN_PROGRESS") == xi.items.FERDINAND and
-        npcUtil.tradeHas(trade, { xi.items.TEN_THOUSAND_BYNE_BILL, xi.items.ETHEREAL_FRAGMENT, xi.items.SHARD_OF_NECROPSYCHE, xi.items.FERDINAND })
+        player:getCharVar('RELIC_IN_PROGRESS') == xi.item.FERDINAND and
+        npcUtil.tradeHas(trade, { xi.item.TEN_THOUSAND_BYNE_BILL, xi.item.ETHEREAL_FRAGMENT, xi.item.SHARD_OF_NECROPSYCHE, xi.item.FERDINAND })
     then
         -- currency, shard, necropsyche, stage 4
-        player:startEvent(843, xi.items.ANNIHILATOR)
+        player:startEvent(843, xi.item.ANNIHILATOR)
     end
 end
 
@@ -28,10 +27,10 @@ end
 entity.onEventFinish = function(player, csid, option, npc)
     if
         csid == 843 and
-        npcUtil.giveItem(player, { xi.items.ANNIHILATOR, { xi.items.ONE_HUNDRED_BYNE_BILL, 30 } })
+        npcUtil.giveItem(player, { xi.item.ANNIHILATOR, { xi.item.ONE_HUNDRED_BYNE_BILL, 30 } })
     then
         player:confirmTrade()
-        player:setCharVar("RELIC_IN_PROGRESS", 0)
+        player:setCharVar('RELIC_IN_PROGRESS', 0)
     end
 end
 

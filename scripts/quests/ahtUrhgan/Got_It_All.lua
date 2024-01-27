@@ -4,16 +4,12 @@
 -- Ekhu Pesshyadha !pos -13.043 0.999 103.423 50
 -- Zabahf !pos -90.070 -1 10.140 50
 -----------------------------------
-require('scripts/globals/quests')
-require('scripts/globals/interaction/quest')
-require('scripts/globals/npc_util')
------------------------------------
 
 local quest = Quest:new(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.GOT_IT_ALL)
 
 quest.reward =
 {
-    item = xi.items.BIBIKI_SEASHELL,
+    item = xi.item.BIBIKI_SEASHELL,
 }
 
 quest.sections =

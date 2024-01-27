@@ -1,8 +1,6 @@
 -----------------------------------
 -- Zone: Provenance (222)
 -----------------------------------
-local ID = require('scripts/zones/Provenance/IDs')
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

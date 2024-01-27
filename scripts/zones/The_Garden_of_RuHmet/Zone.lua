@@ -1,9 +1,7 @@
 -----------------------------------
 -- Zone: The_Garden_of_RuHmet (35)
 -----------------------------------
-local ID = require('scripts/zones/The_Garden_of_RuHmet/IDs')
-require('scripts/globals/conquest')
-require('scripts/globals/missions')
+local ID = zones[xi.zone.THE_GARDEN_OF_RUHMET]
 -----------------------------------
 local zoneObject = {}
 
@@ -54,9 +52,9 @@ zoneObject.onInitialize = function(zone)
     -- Give the Ix'Aern DRK ??? a random spawn
     local qmDrk = GetNPCByID(ID.npc.QM_IXAERN_DRK)
     local qmDrkPos = math.random(1, 4)
-    qmDrk:setLocalVar("position", qmDrkPos)
+    qmDrk:setLocalVar('position', qmDrkPos)
     qmDrk:setPos(unpack(ID.npc.QM_IXAERN_DRK_POS[qmDrkPos]))
-    qmDrk:setLocalVar("hatedPlayer", 0)
+    qmDrk:setLocalVar('hatedPlayer', 0)
 
     -- Give the Faith ??? a random spawn
     local qmFaith = GetNPCByID(ID.npc.QM_JAILER_OF_FAITH)
@@ -64,22 +62,22 @@ zoneObject.onInitialize = function(zone)
 
     -- Give Ix'DRG a random placeholder by picking one of the four groups at random, then adding a random number of 0-2 for the specific mob.
     local groups = ID.mob.AWAERN_DRG_GROUPS
-    SetServerVariable("[SEA]IxAernDRG_PH", groups[math.random(1, #groups)] + math.random(0, 2))
+    SetServerVariable('[SEA]IxAernDRG_PH', groups[math.random(1, #groups)] + math.random(0, 2))
 end
 
 zoneObject.afterZoneIn = function(player)
-    player:entityVisualPacket("door")
-    player:entityVisualPacket("lst1")
-    player:entityVisualPacket("lst2")
-    player:entityVisualPacket("lst3")
-    player:entityVisualPacket("lop1")
-    player:entityVisualPacket("lop2")
-    player:entityVisualPacket("lop3")
-    player:entityVisualPacket("lpmy")
-    player:entityVisualPacket("clop")
-    player:entityVisualPacket("slp1")
-    player:entityVisualPacket("slp2")
-    player:entityVisualPacket("slp3")
+    player:entityVisualPacket('door')
+    player:entityVisualPacket('lst1')
+    player:entityVisualPacket('lst2')
+    player:entityVisualPacket('lst3')
+    player:entityVisualPacket('lop1')
+    player:entityVisualPacket('lop2')
+    player:entityVisualPacket('lop3')
+    player:entityVisualPacket('lpmy')
+    player:entityVisualPacket('clop')
+    player:entityVisualPacket('slp1')
+    player:entityVisualPacket('slp2')
+    player:entityVisualPacket('slp3')
 end
 
 zoneObject.onGameHour = function(zone)
@@ -98,7 +96,7 @@ zoneObject.onGameHour = function(zone)
     if vanadielHour % 12 == 0 and qmDrk:getStatus() ~= xi.status.DISAPPEAR then -- Change ??? position every 12 hours Vana'diel time (30 mins)
         qmDrk:hideNPC(30)
         local qmDrkPos = math.random(1, 4)
-        qmDrk:setLocalVar("position", qmDrkPos)
+        qmDrk:setLocalVar('position', qmDrkPos)
         qmDrk:setPos(unpack(ID.npc.QM_IXAERN_DRK_POS[qmDrkPos]))
     end
 end
@@ -120,12 +118,12 @@ zoneObject.onZoneIn = function(player, prevZone)
 
     if
         player:getCurrentMission(xi.mission.log_id.COP) == xi.mission.id.cop.WHEN_ANGELS_FALL and
-        player:getCharVar("PromathiaStatus") == 0
+        player:getCharVar('PromathiaStatus') == 0
     then
         cs = 201
     end
 
-    player:setCharVar("Ru-Hmet-TP", 0)
+    player:setCharVar('Ru-Hmet-TP', 0)
     return cs
 end
 
@@ -165,7 +163,7 @@ local teleportEventsByArea =
 }
 
 zoneObject.onTriggerAreaEnter = function(player, triggerArea)
-    if player:getCharVar("Ru-Hmet-TP") == 0 and player:getAnimation() == 0 then
+    if player:getCharVar('Ru-Hmet-TP') == 0 and player:getAnimation() == 0 then
         local areaId = triggerArea:GetTriggerAreaID()
 
         if areaId == 1 then
@@ -204,18 +202,18 @@ zoneObject.onEventUpdate = function(player, csid, option, npc)
         csid == 103 or
         csid == 101
     then
-        player:setCharVar("Ru-Hmet-TP", 1)
+        player:setCharVar('Ru-Hmet-TP', 1)
     end
 end
 
 zoneObject.onEventFinish = function(player, csid, option, npc)
     if csid == 101 and option == 1 then
         player:setPos(540, -1, -499.900, 62, 36)
-        player:setCharVar("Ru-Hmet-TP", 0)
+        player:setCharVar('Ru-Hmet-TP', 0)
     elseif (csid > 149 and csid < 184) or csid == 102 or csid == 103 or csid == 101 then
-        player:setCharVar("Ru-Hmet-TP", 0)
+        player:setCharVar('Ru-Hmet-TP', 0)
     elseif csid == 201 then
-        player:setCharVar("PromathiaStatus", 1)
+        player:setCharVar('PromathiaStatus', 1)
         player:addKeyItem(xi.ki.MYSTERIOUS_AMULET_PRISHE)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.MYSTERIOUS_AMULET)
     elseif csid == 32000 and option == 1 then

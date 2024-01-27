@@ -4,8 +4,7 @@
 -- Involved in Quests: The Circle of Time
 -- !pos 108 -2 -144 150
 -----------------------------------
-local ID = require("scripts/zones/Monastic_Cavern/IDs")
-require("scripts/globals/quests")
+local ID = zones[xi.zone.MONASTIC_CAVERN]
 -----------------------------------
 local entity = {}
 
@@ -21,11 +20,11 @@ entity.onTrigger = function(player, npc)
         player:hasKeyItem(xi.ki.MOON_RING)
     then
         if
-            player:getCharVar("circleTime") == 7 and
+            player:getCharVar('circleTime') == 7 and
             npcUtil.popFromQM(player, npc, ID.mob.BUGABOO, { hide = 0 })
         then
             -- no further action needed
-        elseif player:getCharVar("circleTime") == 8 then
+        elseif player:getCharVar('circleTime') == 8 then
             player:startEvent(3)
         else
             player:messageSpecial(ID.text.ALTAR)
@@ -40,7 +39,7 @@ end
 
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 3 then
-        player:setCharVar("circleTime", 9)
+        player:setCharVar('circleTime', 9)
         player:delKeyItem(xi.ki.MOON_RING)
         player:delKeyItem(xi.ki.STAR_RING1)
     end

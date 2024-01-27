@@ -3,9 +3,6 @@
 --  NPC: Iron Gate
 -- !pos 612 132 774 32
 -----------------------------------
-require("scripts/globals/bcnm")
-local ID = require("scripts/zones/Sealions_Den/IDs")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

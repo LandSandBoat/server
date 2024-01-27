@@ -3,8 +3,7 @@
 --  Mob: Ajido-Marujido
 -- Ally during Windurst Mission 9-2
 -----------------------------------
-local ID = require("scripts/zones/Full_Moon_Fountain/IDs")
-require("scripts/globals/magic")
+local ID = zones[xi.zone.FULL_MOON_FOUNTAIN]
 -----------------------------------
 local entity = {}
 
@@ -35,7 +34,7 @@ entity.onMobInitialize = function(mob)
 end
 
 entity.onMobSpawn = function(ajidoMob)
-    ajidoMob:addListener("MAGIC_START", "MAGIC_MSG", function(mob, spell, action)
+    ajidoMob:addListener('MAGIC_START', 'MAGIC_MSG', function(mob, spell, action)
         -- Burst
         if spell:getID() == 212 then
             mob:showText(mob, ID.text.PLAY_TIME_IS_OVER)
@@ -59,9 +58,9 @@ entity.onMobEngaged = function(mob, target)
 end
 
 entity.onMobFight = function(mob, target)
-    if mob:getHPP() < 50 and mob:getLocalVar("saidMessage") == 0 then
+    if mob:getHPP() < 50 and mob:getLocalVar('saidMessage') == 0 then
         mob:showText(mob, ID.text.DONT_GIVE_UP)
-        mob:setLocalVar("saidMessage", 1)
+        mob:setLocalVar('saidMessage', 1)
     end
 
     if target:isEngaged() then

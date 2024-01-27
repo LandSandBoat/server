@@ -1,10 +1,9 @@
 -----------------------------------
 -- Area: Castle Zvahl Baileys
 --  NPC: Switchstix
--- Type: Standard NPC
 -- !pos 386.091 -13 -17.399 161
 -----------------------------------
-local ID = require("scripts/zones/Castle_Zvahl_Baileys/IDs")
+local ID = zones[xi.zone.CASTLE_ZVAHL_BAILEYS]
 -----------------------------------
 local entity = {}
 
@@ -185,16 +184,16 @@ end
 
 entity.onTrade = function(player, npc, trade)
     local relicId = hasRelic(trade, true)
-    local currentRelic = player:getCharVar("RELIC_IN_PROGRESS")
+    local currentRelic = player:getCharVar('RELIC_IN_PROGRESS')
     local gil = trade:getGil()
 
     if gil ~= 0 then
         return
     elseif relicId ~= nil then
         local relic = relics[relicId]
-        local relicDupe = player:getCharVar("RELIC_MAKE_ANOTHER")
+        local relicDupe = player:getCharVar('RELIC_MAKE_ANOTHER')
 
-        if player:hasItem(relicId + 1) and not relicDupe == 1 then
+        if player:hasItem(relicId + 1) and relicDupe ~= 1 then
             player:startEvent(20, relicId)
         elseif currentRelic == 0 then
             if
@@ -204,7 +203,7 @@ entity.onTrade = function(player, npc, trade)
                 local requiredItem1 = relic[requiredItems][1] ~= nil and relic[requiredItems][1] or 0
                 local requiredItem2 = relic[requiredItems][2] ~= nil and relic[requiredItems][2] or 0
                 local requiredItem3 = relic[requiredItems][3] ~= nil and relic[requiredItems][3] or 0
-                player:setCharVar("RELIC_IN_PROGRESS", relicId)
+                player:setCharVar('RELIC_IN_PROGRESS', relicId)
                 player:tradeComplete()
                 player:startEvent(11, relicId, requiredItem1, requiredItem2, requiredItem3, relic[currencyType], relic[currencyAmount], 0, relic[csParam])
             end
@@ -217,11 +216,11 @@ entity.onTrade = function(player, npc, trade)
 
         if currentStage ~= 4 and tradeHasRequiredCurrency(trade, currentRelic) then
             if currentStage == 1 then
-                player:setCharVar("RELIC_DUE_AT", getVanaMidnight())
+                player:setCharVar('RELIC_DUE_AT', getVanaMidnight())
             elseif currentStage == 2 then
-                player:setCharVar("RELIC_DUE_AT", os.time() + xi.settings.main.RELIC_2ND_UPGRADE_WAIT_TIME)
+                player:setCharVar('RELIC_DUE_AT', os.time() + xi.settings.main.RELIC_2ND_UPGRADE_WAIT_TIME)
             elseif currentStage == 3 then
-                player:setCharVar("RELIC_DUE_AT", os.time() + xi.settings.main.RELIC_3RD_UPGRADE_WAIT_TIME)
+                player:setCharVar('RELIC_DUE_AT', os.time() + xi.settings.main.RELIC_3RD_UPGRADE_WAIT_TIME)
             end
 
             player:tradeComplete()
@@ -232,9 +231,9 @@ end
 
 entity.onTrigger = function(player, npc)
     local relicId = hasRelic(player, false)
-    local currentRelic = player:getCharVar("RELIC_IN_PROGRESS")
-    local relicWait = player:getCharVar("RELIC_DUE_AT")
-    local relicConquest = player:getCharVar("RELIC_CONQUEST_WAIT")
+    local currentRelic = player:getCharVar('RELIC_IN_PROGRESS')
+    local relicWait = player:getCharVar('RELIC_DUE_AT')
+    local relicConquest = player:getCharVar('RELIC_CONQUEST_WAIT')
 
     if
         currentRelic ~= 0 and
@@ -331,18 +330,18 @@ entity.onEventUpdate = function(player, csid, option, npc)
 end
 
 entity.onEventFinish = function(player, csid, option, npc)
-    local reward = player:getCharVar("RELIC_IN_PROGRESS")
+    local reward = player:getCharVar('RELIC_IN_PROGRESS')
 
     -- User is cancelling a relic.  Null everything out, it never happened.
     if csid == 87 and option == 666 then
-        player:setCharVar("RELIC_IN_PROGRESS", 0)
-        player:setCharVar("RELIC_DUE_AT", 0)
-        player:setCharVar("RELIC_MAKE_ANOTHER", 0)
-        player:setCharVar("RELIC_CONQUEST_WAIT", 0)
+        player:setCharVar('RELIC_IN_PROGRESS', 0)
+        player:setCharVar('RELIC_DUE_AT', 0)
+        player:setCharVar('RELIC_MAKE_ANOTHER', 0)
+        player:setCharVar('RELIC_CONQUEST_WAIT', 0)
 
         -- User is okay with making a relic they cannot possibly accept
     elseif csid == 20 and option == 1 then
-        player:setCharVar("RELIC_MAKE_ANOTHER", 1)
+        player:setCharVar('RELIC_MAKE_ANOTHER', 1)
 
         -- Picking up a finished relic stage 1>2 and 2>3.
     elseif (csid == 16 or csid == 19) and reward ~= 0 then
@@ -351,10 +350,10 @@ entity.onEventFinish = function(player, csid, option, npc)
         else
             player:addItem(reward + 1)
             player:messageSpecial(ID.text.ITEM_OBTAINED, reward + 1)
-            player:setCharVar("RELIC_IN_PROGRESS", 0)
-            player:setCharVar("RELIC_DUE_AT", 0)
-            player:setCharVar("RELIC_MAKE_ANOTHER", 0)
-            player:setCharVar("RELIC_CONQUEST_WAIT", getConquestTally())
+            player:setCharVar('RELIC_IN_PROGRESS', 0)
+            player:setCharVar('RELIC_DUE_AT', 0)
+            player:setCharVar('RELIC_MAKE_ANOTHER', 0)
+            player:setCharVar('RELIC_CONQUEST_WAIT', NextConquestTally())
         end
 
         -- Picking up a finished relic stage 3>4.
@@ -364,10 +363,10 @@ entity.onEventFinish = function(player, csid, option, npc)
         else
             player:addItem(reward + 1)
             player:messageSpecial(ID.text.ITEM_OBTAINED, reward + 1)
-            player:setCharVar("RELIC_IN_PROGRESS", 0)
-            player:setCharVar("RELIC_DUE_AT", 0)
-            player:setCharVar("RELIC_MAKE_ANOTHER", 0)
-            player:setCharVar("RELIC_CONQUEST_WAIT", 0)
+            player:setCharVar('RELIC_IN_PROGRESS', 0)
+            player:setCharVar('RELIC_DUE_AT', 0)
+            player:setCharVar('RELIC_MAKE_ANOTHER', 0)
+            player:setCharVar('RELIC_CONQUEST_WAIT', 0)
         end
 
         -- Stage 4 cutscenes
@@ -393,8 +392,8 @@ entity.onEventFinish = function(player, csid, option, npc)
                 [86] = 15069, -- Aegis
         }
 
-        player:setCharVar("RELIC_CONQUEST_WAIT", 0)
-        player:setCharVar("RELIC_IN_PROGRESS", eventToItemId[csid])
+        player:setCharVar('RELIC_CONQUEST_WAIT', 0)
+        player:setCharVar('RELIC_IN_PROGRESS', eventToItemId[csid])
     end
 end
 

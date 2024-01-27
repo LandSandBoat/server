@@ -3,9 +3,7 @@
 --  Mob: Goblin Alchemist
 -- Note: Place holder Soulstealer Skullnix
 -----------------------------------
-local ID = require("scripts/zones/Labyrinth_of_Onzozo/IDs")
-require("scripts/globals/regimes")
-require("scripts/globals/mobs")
+local ID = zones[xi.zone.LABYRINTH_OF_ONZOZO]
 -----------------------------------
 local entity = {}
 

@@ -12,10 +12,7 @@
 -- !pos -50.000 0.114 32.000 204        White
 -- Todo: NPC moving. In retail these move around with 3-5+ pos EACH
 -----------------------------------
-local ID = require("scripts/zones/FeiYin/IDs")
-require("scripts/globals/missions")
-require("scripts/globals/npc_util")
-require("scripts/globals/utils")
+local ID = zones[xi.zone.FEIYIN]
 -----------------------------------
 local entity = {}
 
@@ -26,15 +23,15 @@ entity.onTrigger = function(player, npc)
     local offset               = npc:getID() - ID.npc.AFTERGRLOW_OFFSET
     local aCrystallineProphecy = player:getCurrentMission(xi.mission.log_id.ACP)
     local needToZone           = player:needToZone()
-    local progressMask         = player:getCharVar("SEED_AFTERGLOW_MASK")
-    local intensity            = player:getCharVar("SEED_AFTERGLOW_INTENSITY")
+    local progressMask         = player:getCharVar('SEED_AFTERGLOW_MASK')
+    local intensity            = player:getCharVar('SEED_AFTERGLOW_INTENSITY')
 
     if
         player:hasKeyItem(xi.ki.MARK_OF_SEED) or
         player:hasKeyItem(xi.ki.AZURE_KEY) or
         player:hasKeyItem(xi.ki.IVORY_KEY) or
-        os.time() < player:getCharVar("LastAzureKey") or
-        os.time() < player:getCharVar("LastIvoryKey") or
+        os.time() < player:getCharVar('LastAzureKey') or
+        os.time() < player:getCharVar('LastIvoryKey') or
         aCrystallineProphecy < xi.mission.id.acp.THOSE_WHO_LURK_IN_SHADOWS_II
     then
         player:messageSpecial(ID.text.SOFTLY_SHIMMERING_LIGHT)
@@ -45,18 +42,18 @@ entity.onTrigger = function(player, npc)
         aCrystallineProphecy >= xi.mission.id.acp.THOSE_WHO_LURK_IN_SHADOWS_II and
         not utils.mask.getBit(progressMask, offset)
     then
-        player:setCharVar("SEED_AFTERGLOW_MASK", utils.mask.setBit(progressMask, offset, true))
+        player:setCharVar('SEED_AFTERGLOW_MASK', utils.mask.setBit(progressMask, offset, true))
         intensity = intensity + 1
         if intensity == 9 then
             player:startEvent(28)
         elseif not needToZone and not player:hasStatusEffect(xi.effect.MARK_OF_SEED) then
-            player:setCharVar("SEED_AFTERGLOW_INTENSITY", intensity)
+            player:setCharVar('SEED_AFTERGLOW_INTENSITY', intensity)
             player:messageSpecial(ID.text.YOU_REACH_OUT_TO_THE_LIGHT, 0)
             player:addStatusEffectEx(xi.effect.MARK_OF_SEED, 0, 0, 30, 1800)
             player:needToZone(true)
             player:messageSpecial(ID.text.THE_LIGHT_DWINDLES, 0)
         else
-            player:setCharVar("SEED_AFTERGLOW_INTENSITY", intensity)
+            player:setCharVar('SEED_AFTERGLOW_INTENSITY', intensity)
             player:messageSpecial(ID.text.EVEN_GREATER_INTENSITY, offset)
         end
 

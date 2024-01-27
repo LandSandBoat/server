@@ -5,15 +5,12 @@
 -- !addmission 11 3
 -- Trodden Snow  : !pos -19.7 -17.3 104.4 126
 -----------------------------------
-require('scripts/globals/missions')
-require('scripts/globals/interaction/mission')
------------------------------------
-local flamesID  = require("scripts/zones/Cloister_of_Flames/IDs")
-local frostID   = require("scripts/zones/Cloister_of_Frost/IDs")
-local galesID   = require("scripts/zones/Cloister_of_Gales/IDs")
-local stormsID  = require("scripts/zones/Cloister_of_Storms/IDs")
-local tidesID   = require("scripts/zones/Cloister_of_Tides/IDs")
-local tremorsID = require("scripts/zones/Cloister_of_Tremors/IDs")
+local flamesID  = zones[xi.zone.CLOISTER_OF_FLAMES]
+local frostID   = zones[xi.zone.CLOISTER_OF_FROST]
+local galesID   = zones[xi.zone.CLOISTER_OF_GALES]
+local stormsID  = zones[xi.zone.CLOISTER_OF_STORMS]
+local tidesID   = zones[xi.zone.CLOISTER_OF_TIDES]
+local tremorsID = zones[xi.zone.CLOISTER_OF_TREMORS]
 -----------------------------------
 
 local mission = Mission:new(xi.mission.log_id.ASA, xi.mission.id.asa.SUGAR_COATED_DIRECTIVE)

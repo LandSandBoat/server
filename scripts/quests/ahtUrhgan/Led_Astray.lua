@@ -9,17 +9,12 @@
 -- Whitegate Region !pos 12.5 -94 2 50
 -- Tataroon:        !pos -25.189 0 -39.022 53
 -----------------------------------
-require('scripts/globals/quests')
-require('scripts/globals/npc_util')
-require('scripts/globals/interaction/quest')
-require('scripts/globals/titles')
------------------------------------
 
 local quest = Quest:new(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.LED_ASTRAY)
 
 quest.reward =
 {
-    item = xi.items.IMPERIAL_SILVER_PIECE,
+    item = xi.item.IMPERIAL_SILVER_PIECE,
 }
 
 quest.sections =

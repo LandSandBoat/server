@@ -4,8 +4,7 @@
 -- Standard Merchant NPC
 -- !pos -17.580 4.000 24.600 246
 -----------------------------------
-local ID = require("scripts/zones/Port_Jeuno/IDs")
-require("scripts/globals/shop")
+local ID = zones[xi.zone.PORT_JEUNO]
 -----------------------------------
 local entity = {}
 
@@ -31,7 +30,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if player:getCharVar("spokePyropox") == 1 then
+    if player:getCharVar('spokePyropox') == 1 then
         player:startEvent(349)
     else
         player:showText(npc, ID.text.PYROPOX_SHOP_DIALOG)
@@ -45,7 +44,7 @@ end
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 349 and option == 0 then
         xi.shop.general(player, stock)
-        player:setCharVar("spokePyropox", 0)
+        player:setCharVar('spokePyropox', 0)
     end
 end
 

@@ -1,5 +1,5 @@
 -----------------------------------
-require("scripts/globals/utils")
+require('scripts/globals/utils')
 -----------------------------------
 xi = xi or {}
 xi.gobbieMysteryBox = xi.gobbieMysteryBox or {}
@@ -29,177 +29,177 @@ local keyToDial =
 
 local abjurationItems =
 {
-    xi.items.DRYADIC_ABJURATION_HEAD,
-    xi.items.DRYADIC_ABJURATION_BODY,
-    xi.items.DRYADIC_ABJURATION_HANDS,
-    xi.items.DRYADIC_ABJURATION_LEGS,
-    xi.items.DRYADIC_ABJURATION_FEET,
-    xi.items.EARTHEN_ABJURATION_HEAD,
-    xi.items.EARTHEN_ABJURATION_BODY,
-    xi.items.EARTHEN_ABJURATION_HANDS,
-    xi.items.EARTHEN_ABJURATION_LEGS,
-    xi.items.EARTHEN_ABJURATION_FEET,
-    xi.items.AQUARIAN_ABJURATION_HEAD,
-    xi.items.AQUARIAN_ABJURATION_BODY,
-    xi.items.AQUARIAN_ABJURATION_HANDS,
-    xi.items.AQUARIAN_ABJURATION_LEGS,
-    xi.items.AQUARIAN_ABJURATION_FEET,
-    xi.items.MARTIAL_ABJURATION_HEAD,
-    xi.items.MARTIAL_ABJURATION_BODY,
-    xi.items.MARTIAL_ABJURATION_HANDS,
-    xi.items.MARTIAL_ABJURATION_LEGS,
-    xi.items.MARTIAL_ABJURATION_FEET,
-    xi.items.WYRMAL_ABJURATION_HEAD,
-    xi.items.WYRMAL_ABJURATION_BODY,
-    xi.items.WYRMAL_ABJURATION_HANDS,
-    xi.items.WYRMAL_ABJURATION_LEGS,
-    xi.items.WYRMAL_ABJURATION_FEET,
-    xi.items.NEPTUNAL_ABJURATION_HEAD,
-    xi.items.NEPTUNAL_ABJURATION_BODY,
-    xi.items.NEPTUNAL_ABJURATION_HANDS,
-    xi.items.NEPTUNAL_ABJURATION_LEGS,
-    xi.items.NEPTUNAL_ABJURATION_FEET,
-    xi.items.LIBATION_ABJURATION,
-    xi.items.OBLATION_ABJURATION,
-    xi.items.PHANTASMAL_ABJURATION_HEAD,
-    xi.items.PHANTASMAL_ABJURATION_BODY,
-    xi.items.PHANTASMAL_ABJURATION_HANDS,
-    xi.items.PHANTASMAL_ABJURATION_LEGS,
-    xi.items.PHANTASMAL_ABJURATION_FEET,
-    xi.items.HADEAN_ABJURATION_HEAD,
-    xi.items.HADEAN_ABJURATION_BODY,
-    xi.items.HADEAN_ABJURATION_HANDS,
-    xi.items.HADEAN_ABJURATION_LEGS,
-    xi.items.HADEAN_ABJURATION_FEET,
-    xi.items.CORVINE_ABJURATION_HEAD,
-    xi.items.CORVINE_ABJURATION_BODY,
-    xi.items.CORVINE_ABJURATION_HANDS,
-    xi.items.CORVINE_ABJURATION_LEGS,
-    xi.items.CORVINE_ABJURATION_FEET,
-    xi.items.SUPERNAL_ABJURATION_HEAD,
-    xi.items.SUPERNAL_ABJURATION_BODY,
-    xi.items.SUPERNAL_ABJURATION_HANDS,
-    xi.items.SUPERNAL_ABJURATION_LEGS,
-    xi.items.SUPERNAL_ABJURATION_FEET,
-    xi.items.TRANSITORY_ABJURATION_HEAD,
-    xi.items.TRANSITORY_ABJURATION_BODY,
-    xi.items.TRANSITORY_ABJURATION_HANDS,
-    xi.items.TRANSITORY_ABJURATION_LEGS,
-    xi.items.TRANSITORY_ABJURATION_FEET,
-    xi.items.FOREBODING_ABJURATION_HEAD,
-    xi.items.FOREBODING_ABJURATION_BODY,
-    xi.items.FOREBODING_ABJURATION_HANDS,
-    xi.items.FOREBODING_ABJURATION_LEGS,
-    xi.items.FOREBODING_ABJURATION_FEET,
-    xi.items.LENITIVE_ABJURATION_HEAD,
-    xi.items.LENITIVE_ABJURATION_BODY,
-    xi.items.LENITIVE_ABJURATION_HANDS,
-    xi.items.LENITIVE_ABJURATION_LEGS,
-    xi.items.LENITIVE_ABJURATION_FEET,
-    xi.items.BUSHIN_ABJURATION_HEAD,
-    xi.items.BUSHIN_ABJURATION_BODY,
-    xi.items.BUSHIN_ABJURATION_HANDS,
-    xi.items.BUSHIN_ABJURATION_LEGS,
-    xi.items.BUSHIN_ABJURATION_FEET,
-    xi.items.VALE_ABJURATION_HEAD,
-    xi.items.VALE_ABJURATION_BODY,
-    xi.items.VALE_ABJURATION_HANDS,
-    xi.items.VALE_ABJURATION_LEGS,
-    xi.items.VALE_ABJURATION_FEET,
-    xi.items.GROVE_ABJURATION_HEAD,
-    xi.items.GROVE_ABJURATION_BODY,
-    xi.items.GROVE_ABJURATION_HANDS,
-    xi.items.GROVE_ABJURATION_LEGS,
-    xi.items.GROVE_ABJURATION_FEET,
-    xi.items.TRITON_ABJURATION_HEAD,
-    xi.items.TRITON_ABJURATION_BODY,
-    xi.items.TRITON_ABJURATION_HANDS,
-    xi.items.TRITON_ABJURATION_LEGS,
-    xi.items.TRITON_ABJURATION_FEET,
-    xi.items.SHINRYU_ABJURATION_HEAD,
-    xi.items.SHINRYU_ABJURATION_BODY,
-    xi.items.SHINRYU_ABJURATION_HANDS,
-    xi.items.SHINRYU_ABJURATION_LEGS,
-    xi.items.SHINRYU_ABJURATION_FEET,
-    xi.items.ABYSSAL_ABJURATION_HEAD,
-    xi.items.ABYSSAL_ABJURATION_BODY,
-    xi.items.ABYSSAL_ABJURATION_HANDS,
-    xi.items.ABYSSAL_ABJURATION_LEGS,
-    xi.items.ABYSSAL_ABJURATION_FEET,
-    xi.items.CRONIAN_ABJURATION_HEAD,
-    xi.items.CRONIAN_ABJURATION_BODY,
-    xi.items.CRONIAN_ABJURATION_HANDS,
-    xi.items.CRONIAN_ABJURATION_LEGS,
-    xi.items.CRONIAN_ABJURATION_FEET,
-    xi.items.AREAN_ABJURATION_HEAD,
-    xi.items.AREAN_ABJURATION_BODY,
-    xi.items.AREAN_ABJURATION_HANDS,
-    xi.items.AREAN_ABJURATION_LEGS,
-    xi.items.AREAN_ABJURATION_FEET,
-    xi.items.JOVIAN_ABJURATION_HEAD,
-    xi.items.JOVIAN_ABJURATION_BODY,
-    xi.items.JOVIAN_ABJURATION_HANDS,
-    xi.items.JOVIAN_ABJURATION_LEGS,
-    xi.items.JOVIAN_ABJURATION_FEET,
-    xi.items.VENERIAN_ABJURATION_HEAD,
-    xi.items.VENERIAN_ABJURATION_BODY,
-    xi.items.VENERIAN_ABJURATION_HANDS,
-    xi.items.VENERIAN_ABJURATION_LEGS,
-    xi.items.VENERIAN_ABJURATION_FEET,
-    xi.items.CYLLENIAN_ABJURATION_HEAD,
-    xi.items.CYLLENIAN_ABJURATION_BODY,
-    xi.items.CYLLENIAN_ABJURATION_HANDS,
-    xi.items.CYLLENIAN_ABJURATION_LEGS,
-    xi.items.CYLLENIAN_ABJURATION_FEET,
+    xi.item.DRYADIC_ABJURATION_HEAD,
+    xi.item.DRYADIC_ABJURATION_BODY,
+    xi.item.DRYADIC_ABJURATION_HANDS,
+    xi.item.DRYADIC_ABJURATION_LEGS,
+    xi.item.DRYADIC_ABJURATION_FEET,
+    xi.item.EARTHEN_ABJURATION_HEAD,
+    xi.item.EARTHEN_ABJURATION_BODY,
+    xi.item.EARTHEN_ABJURATION_HANDS,
+    xi.item.EARTHEN_ABJURATION_LEGS,
+    xi.item.EARTHEN_ABJURATION_FEET,
+    xi.item.AQUARIAN_ABJURATION_HEAD,
+    xi.item.AQUARIAN_ABJURATION_BODY,
+    xi.item.AQUARIAN_ABJURATION_HANDS,
+    xi.item.AQUARIAN_ABJURATION_LEGS,
+    xi.item.AQUARIAN_ABJURATION_FEET,
+    xi.item.MARTIAL_ABJURATION_HEAD,
+    xi.item.MARTIAL_ABJURATION_BODY,
+    xi.item.MARTIAL_ABJURATION_HANDS,
+    xi.item.MARTIAL_ABJURATION_LEGS,
+    xi.item.MARTIAL_ABJURATION_FEET,
+    xi.item.WYRMAL_ABJURATION_HEAD,
+    xi.item.WYRMAL_ABJURATION_BODY,
+    xi.item.WYRMAL_ABJURATION_HANDS,
+    xi.item.WYRMAL_ABJURATION_LEGS,
+    xi.item.WYRMAL_ABJURATION_FEET,
+    xi.item.NEPTUNAL_ABJURATION_HEAD,
+    xi.item.NEPTUNAL_ABJURATION_BODY,
+    xi.item.NEPTUNAL_ABJURATION_HANDS,
+    xi.item.NEPTUNAL_ABJURATION_LEGS,
+    xi.item.NEPTUNAL_ABJURATION_FEET,
+    xi.item.LIBATION_ABJURATION,
+    xi.item.OBLATION_ABJURATION,
+    xi.item.PHANTASMAL_ABJURATION_HEAD,
+    xi.item.PHANTASMAL_ABJURATION_BODY,
+    xi.item.PHANTASMAL_ABJURATION_HANDS,
+    xi.item.PHANTASMAL_ABJURATION_LEGS,
+    xi.item.PHANTASMAL_ABJURATION_FEET,
+    xi.item.HADEAN_ABJURATION_HEAD,
+    xi.item.HADEAN_ABJURATION_BODY,
+    xi.item.HADEAN_ABJURATION_HANDS,
+    xi.item.HADEAN_ABJURATION_LEGS,
+    xi.item.HADEAN_ABJURATION_FEET,
+    xi.item.CORVINE_ABJURATION_HEAD,
+    xi.item.CORVINE_ABJURATION_BODY,
+    xi.item.CORVINE_ABJURATION_HANDS,
+    xi.item.CORVINE_ABJURATION_LEGS,
+    xi.item.CORVINE_ABJURATION_FEET,
+    xi.item.SUPERNAL_ABJURATION_HEAD,
+    xi.item.SUPERNAL_ABJURATION_BODY,
+    xi.item.SUPERNAL_ABJURATION_HANDS,
+    xi.item.SUPERNAL_ABJURATION_LEGS,
+    xi.item.SUPERNAL_ABJURATION_FEET,
+    xi.item.TRANSITORY_ABJURATION_HEAD,
+    xi.item.TRANSITORY_ABJURATION_BODY,
+    xi.item.TRANSITORY_ABJURATION_HANDS,
+    xi.item.TRANSITORY_ABJURATION_LEGS,
+    xi.item.TRANSITORY_ABJURATION_FEET,
+    xi.item.FOREBODING_ABJURATION_HEAD,
+    xi.item.FOREBODING_ABJURATION_BODY,
+    xi.item.FOREBODING_ABJURATION_HANDS,
+    xi.item.FOREBODING_ABJURATION_LEGS,
+    xi.item.FOREBODING_ABJURATION_FEET,
+    xi.item.LENITIVE_ABJURATION_HEAD,
+    xi.item.LENITIVE_ABJURATION_BODY,
+    xi.item.LENITIVE_ABJURATION_HANDS,
+    xi.item.LENITIVE_ABJURATION_LEGS,
+    xi.item.LENITIVE_ABJURATION_FEET,
+    xi.item.BUSHIN_ABJURATION_HEAD,
+    xi.item.BUSHIN_ABJURATION_BODY,
+    xi.item.BUSHIN_ABJURATION_HANDS,
+    xi.item.BUSHIN_ABJURATION_LEGS,
+    xi.item.BUSHIN_ABJURATION_FEET,
+    xi.item.VALE_ABJURATION_HEAD,
+    xi.item.VALE_ABJURATION_BODY,
+    xi.item.VALE_ABJURATION_HANDS,
+    xi.item.VALE_ABJURATION_LEGS,
+    xi.item.VALE_ABJURATION_FEET,
+    xi.item.GROVE_ABJURATION_HEAD,
+    xi.item.GROVE_ABJURATION_BODY,
+    xi.item.GROVE_ABJURATION_HANDS,
+    xi.item.GROVE_ABJURATION_LEGS,
+    xi.item.GROVE_ABJURATION_FEET,
+    xi.item.TRITON_ABJURATION_HEAD,
+    xi.item.TRITON_ABJURATION_BODY,
+    xi.item.TRITON_ABJURATION_HANDS,
+    xi.item.TRITON_ABJURATION_LEGS,
+    xi.item.TRITON_ABJURATION_FEET,
+    xi.item.SHINRYU_ABJURATION_HEAD,
+    xi.item.SHINRYU_ABJURATION_BODY,
+    xi.item.SHINRYU_ABJURATION_HANDS,
+    xi.item.SHINRYU_ABJURATION_LEGS,
+    xi.item.SHINRYU_ABJURATION_FEET,
+    xi.item.ABYSSAL_ABJURATION_HEAD,
+    xi.item.ABYSSAL_ABJURATION_BODY,
+    xi.item.ABYSSAL_ABJURATION_HANDS,
+    xi.item.ABYSSAL_ABJURATION_LEGS,
+    xi.item.ABYSSAL_ABJURATION_FEET,
+    xi.item.CRONIAN_ABJURATION_HEAD,
+    xi.item.CRONIAN_ABJURATION_BODY,
+    xi.item.CRONIAN_ABJURATION_HANDS,
+    xi.item.CRONIAN_ABJURATION_LEGS,
+    xi.item.CRONIAN_ABJURATION_FEET,
+    xi.item.AREAN_ABJURATION_HEAD,
+    xi.item.AREAN_ABJURATION_BODY,
+    xi.item.AREAN_ABJURATION_HANDS,
+    xi.item.AREAN_ABJURATION_LEGS,
+    xi.item.AREAN_ABJURATION_FEET,
+    xi.item.JOVIAN_ABJURATION_HEAD,
+    xi.item.JOVIAN_ABJURATION_BODY,
+    xi.item.JOVIAN_ABJURATION_HANDS,
+    xi.item.JOVIAN_ABJURATION_LEGS,
+    xi.item.JOVIAN_ABJURATION_FEET,
+    xi.item.VENERIAN_ABJURATION_HEAD,
+    xi.item.VENERIAN_ABJURATION_BODY,
+    xi.item.VENERIAN_ABJURATION_HANDS,
+    xi.item.VENERIAN_ABJURATION_LEGS,
+    xi.item.VENERIAN_ABJURATION_FEET,
+    xi.item.CYLLENIAN_ABJURATION_HEAD,
+    xi.item.CYLLENIAN_ABJURATION_BODY,
+    xi.item.CYLLENIAN_ABJURATION_HANDS,
+    xi.item.CYLLENIAN_ABJURATION_LEGS,
+    xi.item.CYLLENIAN_ABJURATION_FEET,
 }
 
 local fortuneItems =
 {
-    xi.items.FRAYED_POUCH_OF_BIRTH,
-    xi.items.FRAYED_POUCH_OF_ADVANCEMENT,
-    xi.items.FRAYED_POUCH_OF_GLORY,
-    xi.items.FRAYED_POUCH_OF_DECAY,
-    xi.items.FRAYED_POUCH_OF_RUIN,
-    xi.items.FRAYED_SACK_OF_ABUNDANCE_P1,
-    xi.items.FRAYED_SACK_OF_ABUNDANCE_P2,
-    xi.items.FRAYED_SACK_OF_MORTALITY_P1,
-    xi.items.FRAYED_SACK_OF_MORTALITY_P2,
-    xi.items.FRAYED_SACK_OF_DEVIOUSNESS,
-    xi.items.FRAYED_SACK_OF_LIMINALITY,
-    xi.items.COTTON_COIN_PURSE,
-    xi.items.LINEN_COIN_PURSE,
-    xi.items.PLUTON_CASE,
-    xi.items.BEITETSU_PARCEL,
-    xi.items.BOULDER_CASE,
-    xi.items.PLUTON_BOX,
-    xi.items.BEITETSU_BOX,
-    xi.items.BOULDER_BOX,
-    xi.items.FRAYED_SACK_OF_HORROR_P1,
-    xi.items.FRAYED_SACK_OF_HORROR_P2,
-    xi.items.FRAYED_SACK_OF_BEAUTY,
-    xi.items.FRAYED_SACK_OF_SPLENDOR,
-    xi.items.FRAYED_SACK_OF_FECUNDITY,
-    xi.items.FRAYED_SACK_OF_PLENTY,
-    xi.items.FRAYED_SACK_OF_OPULENCE,
-    xi.items.AGED_BOX_BAYLD,
-    xi.items.HEAVY_METAL_POUCH,
+    xi.item.FRAYED_POUCH_OF_BIRTH,
+    xi.item.FRAYED_POUCH_OF_ADVANCEMENT,
+    xi.item.FRAYED_POUCH_OF_GLORY,
+    xi.item.FRAYED_POUCH_OF_DECAY,
+    xi.item.FRAYED_POUCH_OF_RUIN,
+    xi.item.FRAYED_SACK_OF_ABUNDANCE_P1,
+    xi.item.FRAYED_SACK_OF_ABUNDANCE_P2,
+    xi.item.FRAYED_SACK_OF_MORTALITY_P1,
+    xi.item.FRAYED_SACK_OF_MORTALITY_P2,
+    xi.item.FRAYED_SACK_OF_DEVIOUSNESS,
+    xi.item.FRAYED_SACK_OF_LIMINALITY,
+    xi.item.COTTON_COIN_PURSE,
+    xi.item.LINEN_COIN_PURSE,
+    xi.item.PLUTON_CASE,
+    xi.item.BEITETSU_PARCEL,
+    xi.item.BOULDER_CASE,
+    xi.item.PLUTON_BOX,
+    xi.item.BEITETSU_BOX,
+    xi.item.BOULDER_BOX,
+    xi.item.FRAYED_SACK_OF_HORROR_P1,
+    xi.item.FRAYED_SACK_OF_HORROR_P2,
+    xi.item.FRAYED_SACK_OF_BEAUTY,
+    xi.item.FRAYED_SACK_OF_SPLENDOR,
+    xi.item.FRAYED_SACK_OF_FECUNDITY,
+    xi.item.FRAYED_SACK_OF_PLENTY,
+    xi.item.FRAYED_SACK_OF_OPULENCE,
+    xi.item.AGED_BOX_BAYLD,
+    xi.item.HEAVY_METAL_POUCH,
 }
 local anniversaryItems =
 {
     -- TODO: The anniversary item table needs to be populated
-    xi.items.DIAL_KEY_ANV, -- just give them back their key until this table can be populated
+    xi.item.DIAL_KEY_ANV, -- just give them back their key until this table can be populated
 }
 
 local gobbieJunk =
 {
-    xi.items.GOBLIN_MESS_TIN,
-    xi.items.GOBLIN_WEEL,
-    xi.items.CHUNK_OF_HOBGOBLIN_CHOCOLATE,
-    xi.items.HOBGOBLIN_PIE,
-    xi.items.LOAF_OF_HOBGOBLIN_BREAD,
-    xi.items.LOAF_OF_GOBLIN_BREAD,
-    xi.items.CHUNK_OF_GOBLIN_CHOCOLATE,
-    xi.items.GOBLIN_PIE,
+    xi.item.GOBLIN_MESS_TIN,
+    xi.item.GOBLIN_WEEL,
+    xi.item.CHUNK_OF_HOBGOBLIN_CHOCOLATE,
+    xi.item.HOBGOBLIN_PIE,
+    xi.item.LOAF_OF_HOBGOBLIN_BREAD,
+    xi.item.LOAF_OF_GOBLIN_BREAD,
+    xi.item.CHUNK_OF_GOBLIN_CHOCOLATE,
+    xi.item.GOBLIN_PIE,
 }
 
 xi.gobbieMysteryBox.onTrade = function(player, npc, trade, events)
@@ -212,7 +212,7 @@ xi.gobbieMysteryBox.onTrade = function(player, npc, trade, events)
                 return false
             end
 
-            player:setLocalVar("gobbieBoxKey", tradeID)
+            player:setLocalVar('gobbieBoxKey', tradeID)
             player:startEvent(events.KEY_TRADE, tradeID, keyToDial[tradeID])
         else -- trade for points
             -- TODO: Point system needs to be defined
@@ -226,14 +226,14 @@ end
 xi.gobbieMysteryBox.onTrigger = function(player, npc, events)
     local event = events
     local playerAgeDays = (os.time() - player:getTimeCreated()) / 86400
-    local dailyTallyPoints = player:getCurrency("daily_tally")
+    local dailyTallyPoints = player:getCurrency('daily_tally')
     local firstVisit = dailyTallyPoints == -1
-    local gobbieBoxUsed = player:getCharVar("gobbieBoxUsed")
+    local gobbieBoxUsed = player:getCharVar('gobbieBoxUsed')
     local specialDialUsed = utils.mask.getBit(gobbieBoxUsed, 0) and 1 or 0
     local adoulinDialUsed = utils.mask.getBit(gobbieBoxUsed, 1) and 1 or 0
     local pictlogicaDialUsed = utils.mask.getBit(gobbieBoxUsed, 2) and 1 or 0
     local wantedDialUsed = utils.mask.getBit(gobbieBoxUsed, 3) and 1 or 0
-    local holdingItem = player:getCharVar("gobbieBoxHoldingItem")
+    local holdingItem = player:getCharVar('gobbieBoxHoldingItem')
 
     if playerAgeDays >= xi.settings.main.GOBBIE_BOX_MIN_AGE and firstVisit then
         player:startEvent(event.INTRO)
@@ -250,9 +250,9 @@ end
 
 xi.gobbieMysteryBox.onEventUpdate = function(player, csid, option, events)
     local event = events
-    local dailyTallyPoints = player:getCurrency("daily_tally")
-    local holdingItem = player:getCharVar("gobbieBoxHoldingItem")
-    local gobbieBoxUsed = player:getCharVar("gobbieBoxUsed")
+    local dailyTallyPoints = player:getCurrency('daily_tally')
+    local holdingItem = player:getCharVar('gobbieBoxHoldingItem')
+    local gobbieBoxUsed = player:getCharVar('gobbieBoxUsed')
     local specialDialUsed = utils.mask.getBit(gobbieBoxUsed, 0) and 1 or 0
     local adoulinDialUsed = utils.mask.getBit(gobbieBoxUsed, 1) and 1 or 0
     local pictlogicaDialUsed = utils.mask.getBit(gobbieBoxUsed, 2) and 1 or 0
@@ -261,8 +261,8 @@ xi.gobbieMysteryBox.onEventUpdate = function(player, csid, option, events)
 
     if csid == event.KEY_TRADE then
         if option == 1 then
-            local keyID = player:getLocalVar("gobbieBoxKey")
-            player:setLocalVar("gobbieBoxKey", 0)
+            local keyID = player:getLocalVar('gobbieBoxKey')
+            player:setLocalVar('gobbieBoxKey', 0)
             switch (keyToDial[keyID]): caseof
             {
                 [6] = function()
@@ -291,12 +291,12 @@ xi.gobbieMysteryBox.onEventUpdate = function(player, csid, option, events)
                 end
             }
 
-            player:setCharVar("gobbieBoxHoldingItem", itemID)
+            player:setCharVar('gobbieBoxHoldingItem', itemID)
             player:tradeComplete()
             player:updateEvent(itemID, keyToDial[keyID], 3)
         elseif option == 2 then
             if holdingItem > 0 and npcUtil.giveItem(player, holdingItem) then
-                player:setCharVar("gobbieBoxHoldingItem", 0)
+                player:setCharVar('gobbieBoxHoldingItem', 0)
             end
 
             player:updateEvent(itemID, 0)
@@ -323,10 +323,10 @@ xi.gobbieMysteryBox.onEventUpdate = function(player, csid, option, events)
                         player:updateEvent(1, dial, 2) -- already used this dial
                     elseif dailyTallyPoints >= dialCost then
                         itemID = SelectDailyItem(player, dial)
-                        player:setCharVar("gobbieBoxHoldingItem", itemID)
-                        player:setCurrency("daily_tally", dailyTallyPoints - dialCost)
+                        player:setCharVar('gobbieBoxHoldingItem', itemID)
+                        player:setCurrency('daily_tally', dailyTallyPoints - dialCost)
                         if dialMask then
-                            player:setCharVar("gobbieBoxUsed", utils.mask.setBit(gobbieBoxUsed, dialMask, true))
+                            player:setCharVar('gobbieBoxUsed', utils.mask.setBit(gobbieBoxUsed, dialMask, true))
                         end
 
                         player:updateEvent(itemID, dial, 0)
@@ -338,13 +338,13 @@ xi.gobbieMysteryBox.onEventUpdate = function(player, csid, option, events)
                 [2] = function()
                     if player:getFreeSlotsCount() == 0 then
                         player:updateEvent(holdingItem, 0, 0, 1) -- inventory full, exit event
-                        player:messageSpecial(zones[player:getZoneID()].text.ITEM_CANNOT_BE_OBTAINED + 2) -- generic "Cannot obtain the item."
+                        player:messageSpecial(zones[player:getZoneID()].text.ITEM_CANNOT_BE_OBTAINED + 2) -- generic 'Cannot obtain the item.'
                     end
                 end,
 
                 [5] = function()
                     if holdingItem > 0 and npcUtil.giveItem(player, holdingItem) then
-                        player:setCharVar("gobbieBoxHoldingItem", 0)
+                        player:setCharVar('gobbieBoxHoldingItem', 0)
                     end
 
                     player:updateEvent(specialDialUsed, adoulinDialUsed, pictlogicaDialUsed, wantedDialUsed, 0, 0, hideOptionFlags, dailyTallyPoints)
@@ -357,12 +357,12 @@ end
 xi.gobbieMysteryBox.onEventFinish = function(player, csid, option, events)
     local event = events
     if csid == event.INTRO then
-        player:setCurrency("daily_tally", 50)
+        player:setCurrency('daily_tally', 50)
     elseif csid == event.HOLDING_ITEM then
         if player:getFreeSlotsCount() == 0 then
-            player:messageSpecial(zones[player:getZoneID()].text.ITEM_CANNOT_BE_OBTAINED + 2) -- generic "Cannot obtain the item."
-        elseif npcUtil.giveItem(player, player:getCharVar("gobbieBoxHoldingItem")) then
-            player:setCharVar("gobbieBoxHoldingItem", 0)
+            player:messageSpecial(zones[player:getZoneID()].text.ITEM_CANNOT_BE_OBTAINED + 2) -- generic 'Cannot obtain the item.'
+        elseif npcUtil.giveItem(player, player:getCharVar('gobbieBoxHoldingItem')) then
+            player:setCharVar('gobbieBoxHoldingItem', 0)
         end
     end
 end

@@ -2,7 +2,7 @@
 -- Area: Arrapago Remnants
 --  Mob: Vile Wahzil
 -----------------------------------
-local ID = require("scripts/zones/Arrapago_Remnants/IDs")
+local ID = zones[xi.zone.ARRAPAGO_REMNANTS]
 -----------------------------------
 local entity = {}
 
@@ -12,8 +12,8 @@ entity.onMobSpawn = function(mob)
 end
 
 entity.onMobDeath = function(mob, player, optParams)
-    local cellType = mob:getLocalVar("Cell")
-    local numCells = mob:getLocalVar("Qnt") * 2
+    local cellType = mob:getLocalVar('Cell')
+    local numCells = mob:getLocalVar('Qnt') * 2
 
     while numCells > 0 do
         player:addTreasure(cellType)

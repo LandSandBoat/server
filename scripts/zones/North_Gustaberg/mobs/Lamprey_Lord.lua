@@ -1,10 +1,6 @@
 -----------------------------------
 --  Mob: Lamprey Lord
 -----------------------------------
-require("scripts/globals/voidwalker")
-require("scripts/globals/hunts")
------------------------------------
-
 local entity = {}
 
 entity.onMobInitialize = function(mob)
@@ -30,6 +26,7 @@ end
 entity.onMobDeath = function(mob, player, optParams)
     xi.voidwalker.onMobDeath(mob, player, optParams, xi.keyItem.ORANGE_ABYSSITE)
     xi.hunts.checkHunt(mob, player, 549)
+    xi.magian.onMobDeath(mob, player, optParams, set{ 223, 651, 717, 948 })
 end
 
 return entity

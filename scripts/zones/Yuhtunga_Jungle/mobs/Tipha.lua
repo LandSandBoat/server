@@ -2,7 +2,7 @@
 -- Area: Yuhtunga Jungle
 --  Mob: Tipha
 -----------------------------------
-local ID = require("scripts/zones/Yuhtunga_Jungle/IDs")
+local ID = zones[xi.zone.YUHTUNGA_JUNGLE]
 -----------------------------------
 local entity = {}
 
@@ -12,7 +12,7 @@ end
 
 entity.onMobDeath = function(mob, player, optParams)
     if optParams.isKiller and GetMobByID(ID.mob.CARTHI):isDead() then
-        GetNPCByID(ID.npc.CERMET_HEADSTONE):setLocalVar("cooldown", os.time() + 900)
+        GetNPCByID(ID.npc.CERMET_HEADSTONE):setLocalVar('cooldown', os.time() + 900)
     end
 end
 

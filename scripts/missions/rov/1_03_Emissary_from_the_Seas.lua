@@ -6,9 +6,6 @@
 -- Naillina     : !pos -66.8 -11.3 -0.8 248
 -- Numi Adaligo : !pos -80.3 -24 34.8 249
 -----------------------------------
-require('scripts/globals/missions')
-require('scripts/globals/interaction/mission')
------------------------------------
 
 local mission = Mission:new(xi.mission.log_id.ROV, xi.mission.id.rov.EMISSARY_FROM_THE_SEAS)
 

@@ -4,7 +4,7 @@
 -- Type: Item Deliverer
 -- !pos -34.555 7.999 90.702 244
 -----------------------------------
-local ID = require("scripts/zones/Upper_Jeuno/IDs")
+local ID = zones[xi.zone.UPPER_JEUNO]
 -----------------------------------
 local entity = {}
 

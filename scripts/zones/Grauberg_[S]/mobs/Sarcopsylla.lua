@@ -2,9 +2,7 @@
 -- Area: Grauberg [S]
 --   NM: Sarcopsylla
 -----------------------------------
-require("scripts/globals/hunts")
-mixins = { require("scripts/mixins/families/chigoe") }
-require("scripts/globals/mobs")
+mixins = { require('scripts/mixins/families/chigoe') }
 -----------------------------------
 local entity = {}
 

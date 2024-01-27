@@ -1,9 +1,7 @@
 -----------------------------------
 -- Zone: Ceizak Battlegrounds (261)
 -----------------------------------
-require('scripts/globals/quests')
-require('scripts/globals/colonization_reives')
-local ID = require('scripts/zones/Ceizak_Battlegrounds/IDs')
+local ID = zones[xi.zone.CEIZAK_BATTLEGROUNDS]
 -----------------------------------
 local zoneObject = {}
 
@@ -35,10 +33,10 @@ local function triggerUncannySensationMessage(player)
     if
         player:getQuestStatus(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.DANCES_WITH_LUOPANS) == QUEST_ACCEPTED and
         player:hasKeyItem(xi.ki.LUOPAN) and
-        player:getCharVar("GEO_DWL_Luopan") == 0
+        player:getCharVar('GEO_DWL_Luopan') == 0
     then
         player:messageSpecial(ID.text.UNCANNY_SENSATION)
-        player:setLocalVar("GEO_DWL_Locus_Area", 1)
+        player:setLocalVar('GEO_DWL_Locus_Area', 1)
     end
 end
 
@@ -56,7 +54,7 @@ zoneObject.onTriggerAreaEnter = function(player, triggerArea)
 end
 
 zoneObject.onTriggerAreaLeave = function(player, triggerArea)
-    player:setLocalVar("GEO_DWL_Locus_Area", 0)
+    player:setLocalVar('GEO_DWL_Locus_Area', 0)
 end
 
 zoneObject.onEventUpdate = function(player, csid, option, npc)

@@ -6,12 +6,7 @@
 -- Mhaura,  Rycharde, !pos 17.451 -16.000 88.815 249
 -- Selbina, Valgeir,  !pos 57.496 -15.273 20.229 248
 -----------------------------------
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
-require('scripts/globals/titles')
-require('scripts/globals/interaction/quest')
------------------------------------
-local selbinaID = require('scripts/zones/Selbina/IDs')
+local selbinaID = zones[xi.zone.SELBINA]
 -----------------------------------
 
 local quest = Quest:new(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.THE_BASICS)
@@ -20,7 +15,7 @@ quest.reward =
 {
     fame     = 120,
     fameArea = xi.quest.fame_area.WINDURST,
-    item     = xi.items.TEA_SET,
+    item     = xi.item.TEA_SET,
     title    = xi.title.FIVE_STAR_PURVEYOR,
 }
 
@@ -38,7 +33,7 @@ quest.sections =
             ['Rycharde'] =
             {
                 onTrigger = function(player, npc)
-                    if player:getCharVar("Quest[4][5]DayCompleted") + 7 < VanadielUniqueDay() then
+                    if player:getCharVar('Quest[4][5]DayCompleted') + 7 < VanadielUniqueDay() then
                         return quest:progressEvent(94) -- Quest starting event.
                     end
                 end,
@@ -55,7 +50,7 @@ quest.sections =
             {
                 [94] = function(player, csid, option, npc)
                     if option == 85 then -- Accept quest option.
-                        player:setCharVar("Quest[4][5]DayCompleted", 0)  -- Delete previous quest (The clue) variables.
+                        player:setCharVar('Quest[4][5]DayCompleted', 0)  -- Delete previous quest (The clue) variables.
                         npcUtil.giveKeyItem(player, xi.ki.MHAURAN_COUSCOUS) -- Give Key Item to player.
                         quest:begin(player)
                     end
@@ -89,7 +84,7 @@ quest.sections =
             {
                 onTrade = function(player, npc, trade)
                     if
-                        npcUtil.tradeHasExactly(trade, { xi.items.BAKED_POPOTO }) and
+                        npcUtil.tradeHasExactly(trade, { xi.item.BAKED_POPOTO }) and
                         quest:getVar(player, 'Prog') == 1
                     then
                         return quest:progressEvent(96) -- Quest completed.
@@ -130,7 +125,7 @@ quest.sections =
             onEventFinish =
             {
                 [106] = function(player, csid, option, npc)
-                    npcUtil.giveItem(player, xi.items.BAKED_POPOTO)
+                    npcUtil.giveItem(player, xi.item.BAKED_POPOTO)
                     player:delKeyItem(xi.ki.MHAURAN_COUSCOUS)
                     player:messageSpecial(selbinaID.text.KEYITEM_OBTAINED + 1, xi.ki.MHAURAN_COUSCOUS)
                     quest:setVar(player, 'Prog', 1)

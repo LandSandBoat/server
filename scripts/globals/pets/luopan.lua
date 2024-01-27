@@ -1,16 +1,16 @@
 -----------------------------------
 -- PET: Luopan
 -----------------------------------
-local entity = {}
+xi = xi or {}
+xi.pets = xi.pets or {}
+xi.pets.luopan = {}
 
-entity.onMobSpawn = function(mob)
+xi.pets.luopan.onMobSpawn = function(mob)
     -- BGWIKI: "Regardless of perpetuation cost reduction, Luopans have a maximum duration of 10 minutes."
     mob:timer(600000, function(mobArg)
         mobArg:setHP(0)
     end)
 end
 
-entity.onMobDeath = function(mob)
+xi.pets.luopan.onMobDeath = function(mob)
 end
-
-return entity

@@ -5,9 +5,6 @@
 -- !addmission 5 24
 -- Raustigne : !pos 3.979 -1.999 44.456 80
 -----------------------------------
-require('scripts/globals/missions')
-require('scripts/globals/interaction/mission')
------------------------------------
 
 local mission = Mission:new(xi.mission.log_id.WOTG, xi.mission.id.wotg.THE_WILL_OF_THE_WORLD)
 

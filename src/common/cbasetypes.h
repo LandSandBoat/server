@@ -6,6 +6,7 @@
 #include <climits>
 #include <cstddef>
 #include <cstdint>
+#include <utility>
 
 #include "logging.h"
 
@@ -34,11 +35,8 @@
 #endif
 
 // define a break macro for debugging
-#define XI_DEBUG_BREAK_IF(_CONDITION_)                               \
-    if (_CONDITION_)                                                 \
-    {                                                                \
-        ShowCritical("HIT DEBUG BREAK CONDITION: %s", #_CONDITION_); \
-    }
+#define XI_DEBUG_BREAK_IF(_CONDITION_) \
+    static_assert(false, "Use of XI_DEBUG_BREAK_IF is deprecated. Check your conditions and log appropriately instead.")
 
 // typedef/using
 using int8  = std::int8_t;
@@ -112,6 +110,18 @@ struct PtrGreater
 
 template <class T>
 using MinHeapPtr = std::priority_queue<T, std::vector<T>, PtrGreater<T>>;
+
+#define DISALLOW_COPY(TypeName)                    \
+    TypeName(const TypeName&)            = delete; \
+    TypeName& operator=(const TypeName&) = delete;
+
+#define DISALLOW_MOVE(TypeName)               \
+    TypeName(TypeName&&)            = delete; \
+    TypeName& operator=(TypeName&&) = delete;
+
+#define DISALLOW_COPY_AND_MOVE(TypeName) \
+    DISALLOW_COPY(TypeName)              \
+    DISALLOW_MOVE(TypeName)
 
 #include "tracy.h"
 

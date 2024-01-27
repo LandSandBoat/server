@@ -6,10 +6,7 @@
 -- Levil             : !pos -87.204 3.350 12.655 256
 -- Heroic Footprints : !pos -19.381 -0.403 17.465 281
 -----------------------------------
-require('scripts/globals/missions')
-require('scripts/globals/interaction/mission')
------------------------------------
-local leafalliaID = require('scripts/zones/Leafallia/IDs')
+local leafalliaID = zones[xi.zone.LEAFALLIA]
 -----------------------------------
 
 local mission = Mission:new(xi.mission.log_id.SOA, xi.mission.id.soa.ROSULATIAS_PROMISE)

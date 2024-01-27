@@ -13,11 +13,6 @@
 -- Magicite (Opistone)   : !pos -160 -8 8 150
 -- Magicite (Aurastone)  : !pos 11 25 -81 148
 -----------------------------------
-require('scripts/globals/missions')
-require('scripts/globals/npc_util')
-require('scripts/globals/titles')
-require('scripts/globals/interaction/mission')
------------------------------------
 
 local mission = Mission:new(xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.MAGICITE)
 

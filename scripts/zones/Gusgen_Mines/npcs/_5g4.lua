@@ -3,7 +3,7 @@
 --  NPC: _5g4 (Door E)
 -- !pos 19.998 -22.4 174.506 196
 -----------------------------------
-local ID = require("scripts/zones/Gusgen_Mines/IDs")
+local ID = zones[xi.zone.GUSGEN_MINES]
 -----------------------------------
 local entity = {}
 

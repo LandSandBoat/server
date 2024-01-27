@@ -2,14 +2,13 @@
 -- COR AF2: Against All Odds
 -- !instance 6001
 -----------------------------------
-require("scripts/globals/instance")
-local ID = require("scripts/zones/The_Ashu_Talif/IDs")
+local ID = zones[xi.zone.THE_ASHU_TALIF]
 -----------------------------------
 local instanceObject = {}
 
 instanceObject.registryRequirements = function(player)
     return player:hasKeyItem(xi.ki.LIFE_FLOAT) and
-        player:getCharVar("AgainstAllOdds") == 2
+        player:getCharVar('AgainstAllOdds') == 2
 end
 
 instanceObject.entryRequirements = function(player)
@@ -54,9 +53,9 @@ end
 instanceObject.onInstanceComplete = function(instance)
     local chars = instance:getChars()
     for i, v in pairs(chars) do
-        if v:getCharVar("AgainstAllOdds") == 2 then
-            v:setCharVar("AgainstAllOdds", 3)
-            v:setCharVar("AgainstAllOddsTimer", 0)
+        if v:getCharVar('AgainstAllOdds') == 2 then
+            v:setCharVar('AgainstAllOdds', 3)
+            v:setCharVar('AgainstAllOddsTimer', 0)
         end
 
         v:startEvent(102)

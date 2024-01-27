@@ -2,7 +2,7 @@
 -- Area: The Sanctuary of Zi'Tah
 --   NM: Doomed Pilgrims
 -----------------------------------
-local ID = require("scripts/zones/The_Sanctuary_of_ZiTah/IDs")
+local ID = zones[xi.zone.THE_SANCTUARY_OF_ZITAH]
 -----------------------------------
 local entity = {}
 
@@ -12,7 +12,7 @@ end
 
 entity.onMobDeath = function(mob, player, optParams)
     if optParams.isKiller then
-        GetNPCByID(ID.npc.CERMET_HEADSTONE):setLocalVar("cooldown", os.time() + 900)
+        GetNPCByID(ID.npc.CERMET_HEADSTONE):setLocalVar('cooldown', os.time() + 900)
     end
 end
 

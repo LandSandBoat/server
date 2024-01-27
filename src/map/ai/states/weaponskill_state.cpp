@@ -108,7 +108,7 @@ void CWeaponSkillState::SpendCost()
 
 bool CWeaponSkillState::Update(time_point tick)
 {
-    if (!IsCompleted())
+    if (m_PEntity && m_PEntity->isAlive() && !IsCompleted())
     {
         CBattleEntity* PTarget = dynamic_cast<CBattleEntity*>(GetTarget());
         action_t       action;
@@ -132,7 +132,10 @@ bool CWeaponSkillState::Update(time_point tick)
             if (action.actiontype == ACTION_WEAPONSKILL_FINISH) // category changes upon being out of range. This does not count for RoE and delay is not increased beyond the normal delay.
             {
                 // only send lua the WS events if we are in range
-                m_PEntity->PAI->EventHandler.triggerListener("WEAPONSKILL_USE", CLuaBaseEntity(m_PEntity), CLuaBaseEntity(PTarget), m_PSkill->getID(), m_spent, CLuaAction(&action));
+                uint32 weaponskillVar    = PTarget->GetLocalVar("weaponskillHit");
+                uint32 weaponskillDamage = weaponskillVar & 0xFFFFFF;
+
+                m_PEntity->PAI->EventHandler.triggerListener("WEAPONSKILL_USE", CLuaBaseEntity(m_PEntity), CLuaBaseEntity(PTarget), m_PSkill->getID(), m_spent, CLuaAction(&action), weaponskillDamage);
                 PTarget->PAI->EventHandler.triggerListener("WEAPONSKILL_TAKE", CLuaBaseEntity(PTarget), CLuaBaseEntity(m_PEntity), m_PSkill->getID(), m_spent, CLuaAction(&action));
 
                 if (m_PEntity->objtype == TYPE_PC)

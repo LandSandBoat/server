@@ -2,9 +2,7 @@
 -- TOAU-31: Shades of Vengeance
 -- !instance 5600
 -----------------------------------
-require("scripts/globals/instance")
-require("scripts/globals/missions")
-local ID = require("scripts/zones/Periqia/IDs")
+local ID = zones[xi.zone.PERIQIA]
 -----------------------------------
 local instanceObject = {}
 
@@ -26,7 +24,7 @@ instanceObject.afterInstanceRegister = function(player)
         player:delKeyItem(xi.ki.PERIQIA_ASSAULT_AREA_ENTRY_PERMIT)
     end
 
-    player:addTempItem(xi.items.CAGE_OF_DVUCCA_FIREFLIES)
+    player:addTempItem(xi.item.CAGE_OF_DVUCCA_FIREFLIES)
     player:messageSpecial(ID.text.TIME_TO_COMPLETE, instance:getTimeLimit())
 end
 

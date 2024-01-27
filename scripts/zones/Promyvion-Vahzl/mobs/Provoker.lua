@@ -2,8 +2,6 @@
 -- Area: Promyvion - Vahzl
 --   NM: Provoker
 -----------------------------------
-require("scripts/globals/magic")
------------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)
@@ -13,11 +11,11 @@ entity.onMobInitialize = function(mob)
 end
 
 entity.onMobFight = function(mob, target)
-    local changeTime = mob:getLocalVar("changeTime")
-    local element = mob:getLocalVar("element")
+    local changeTime = mob:getLocalVar('changeTime')
+    local element = mob:getLocalVar('element')
 
     if changeTime == 0 then
-        mob:setLocalVar("changeTime", math.random(2, 3) * 15)
+        mob:setLocalVar('changeTime', math.random(2, 3) * 15)
         return
     end
 
@@ -33,13 +31,13 @@ entity.onMobFight = function(mob, target)
 
         mob:useMobAbility(624)
         mob:addMod(xi.magic.absorbMod[newElement], 100)
-        mob:setLocalVar("changeTime", mob:getBattleTime() + math.random(2, 3) * 15)
-        mob:setLocalVar("element", newElement)
+        mob:setLocalVar('changeTime', mob:getBattleTime() + math.random(2, 3) * 15)
+        mob:setLocalVar('element', newElement)
     end
 end
 
 entity.onAdditionalEffect = function(mob, target, damage)
-    local element = mob:getLocalVar("element")
+    local element = mob:getLocalVar('element')
     if element > 0 then
         return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.ENFIRE + element - 1, { chance = 1000 })
     else

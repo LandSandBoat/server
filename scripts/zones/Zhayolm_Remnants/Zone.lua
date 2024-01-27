@@ -1,8 +1,6 @@
 -----------------------------------
 -- Zone: Zhayolm_Remnants
 -----------------------------------
-local ID = require('scripts/zones/Zhayolm_Remnants/IDs')
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

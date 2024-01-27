@@ -1,8 +1,6 @@
 -----------------------------------
 -- Zone: Reisenjima (291)
 -----------------------------------
-local ID = require('scripts/zones/Reisenjima/IDs')
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

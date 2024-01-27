@@ -2,8 +2,7 @@
 -- Area: Aht Urhgan Whitegate
 --  NPC: Abda Lurabda
 -----------------------------------
-local ID = require("scripts/zones/Aht_Urhgan_Whitegate/IDs")
-require("scripts/globals/pets")
+local ID = zones[xi.zone.AHT_URHGAN_WHITEGATE]
 -----------------------------------
 local entity = {}
 
@@ -26,7 +25,7 @@ entity.onEventFinish = function(player, csid, option, npc)
         player:delGil(9800)
         local page = bit.band(option, 0xF)
         local val = bit.rshift(bit.band(option, 0xFFFFF0), 4)
-        player:setPetName(xi.pet.type.AUTOMATON, 86 + val + page * 32)
+        player:setPetName(xi.petType.AUTOMATON, 86 + val + page * 32)
         player:messageSpecial(ID.text.AUTOMATON_RENAME)
     end
 end

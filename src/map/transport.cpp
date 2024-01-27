@@ -33,18 +33,6 @@
 #include "utils/zoneutils.h"
 #include "zone.h"
 
-std::unique_ptr<CTransportHandler> CTransportHandler::_instance;
-
-CTransportHandler* CTransportHandler::getInstance()
-{
-    if (!_instance)
-    {
-        _instance.reset(new CTransportHandler);
-    }
-
-    return _instance.get();
-}
-
 void Transport_Ship::setVisible(bool visible) const
 {
     if (visible)
@@ -65,18 +53,13 @@ void Transport_Ship::setVisible(bool visible) const
 void Transport_Ship::animateSetup(uint8 animationID, uint32 horizonTime) const
 {
     this->npc->animation = animationID;
-    this->setName(horizonTime);
+    this->npc->SetLocalVar("TransportTimestamp", horizonTime);
 }
 
 void Transport_Ship::spawn() const
 {
     this->npc->loc = this->dock;
     this->setVisible(true);
-}
-
-void Transport_Ship::setName(uint32 value) const
-{
-    ref<uint32>(&this->npc->name[0], 4) = value;
 }
 
 void TransportZone_Town::updateShip() const
@@ -162,7 +145,11 @@ void CTransportHandler::InitializeTransport()
 
             zoneTown.npcDoor  = zoneutils::GetEntity(sql->GetUIntData(2), TYPE_NPC);
             zoneTown.ship.npc = zoneutils::GetEntity(sql->GetUIntData(1), TYPE_SHIP);
-            zoneTown.ship.npc->name.resize(8);
+            if (!zoneTown.ship.npc)
+            {
+                ShowError("Transport <%u>: transport not found", (uint8)sql->GetIntData(0));
+                continue;
+            }
 
             zoneTown.ship.animationArrive = (uint8)sql->GetIntData(9);
             zoneTown.ship.animationDepart = (uint8)sql->GetIntData(10);
@@ -177,9 +164,9 @@ void CTransportHandler::InitializeTransport()
             zoneTown.ship.setVisible(false);
             zoneTown.closeDoor(false);
 
-            if (zoneTown.npcDoor == nullptr || zoneTown.ship.npc == nullptr)
+            if (zoneTown.npcDoor == nullptr)
             {
-                ShowError("Transport <%u>: transport or door not found", (uint8)sql->GetIntData(0));
+                ShowError("Transport <%u>: door not found", (uint8)sql->GetIntData(0));
                 continue;
             }
             if (zoneTown.ship.timeArriveDock < 10)
@@ -440,7 +427,7 @@ void CTransportHandler::insertElevator(Elevator_t elevator)
     {
         Elevator_t* PElevator = &i;
 
-        if (PElevator->Elevator->GetName() == elevator.Elevator->GetName() && PElevator->zoneID == elevator.zoneID)
+        if (PElevator->Elevator->getName() == elevator.Elevator->getName() && PElevator->zoneID == elevator.zoneID)
         {
             ShowError("Elevator already exists.");
             return;
@@ -455,9 +442,8 @@ void CTransportHandler::insertElevator(Elevator_t elevator)
     }
 
     // Have permanent elevators wait until their next cycle to begin moving
-    uint32 VanaTime            = CVanaTime::getInstance()->getDate();
-    elevator.lastTrigger       = VanaTime - (VanaTime % elevator.interval) + elevator.interval;
-    elevator.Elevator->name[8] = 8;
+    uint32 VanaTime      = CVanaTime::getInstance()->getDate();
+    elevator.lastTrigger = VanaTime - (VanaTime % elevator.interval) + elevator.interval;
 
     // Initialize the elevator into the correct state based on
     // its animation value in the database.
@@ -548,7 +534,7 @@ void CTransportHandler::startElevator(Elevator_t* elevator)
         elevator->lastTrigger = VanaTime - VanaTime % elevator->interval; // Keep the elevators synced to Vanadiel time
     }
 
-    ref<uint32>(&elevator->Elevator->name[0], 4) = CVanaTime::getInstance()->getVanaTime();
+    elevator->Elevator->SetLocalVar("TransportTimestamp", CVanaTime::getInstance()->getVanaTime());
 
     zoneutils::GetZone(elevator->zoneID)->UpdateEntityPacket(elevator->Elevator, ENTITY_UPDATE, UPDATE_COMBAT, true);
 }

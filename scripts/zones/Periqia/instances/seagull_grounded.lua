@@ -1,18 +1,14 @@
 -----------------------------------
 -- Assault: Seagull Grounded
 -----------------------------------
-local ID = require("scripts/zones/Periqia/IDs")
-require("scripts/globals/assault")
-require("scripts/globals/instance")
-require("scripts/globals/pathfind")
-require("scripts/globals/utils")
+local ID = zones[xi.zone.PERIQIA]
 -----------------------------------
 local instanceObject = {}
 
 instanceObject.registryRequirements = function(player)
     return player:hasKeyItem(xi.ki.PERIQIA_ASSAULT_ORDERS) and
         player:getCurrentAssault() == xi.assault.mission.SEAGULL_GROUNDED and
-        player:getCharVar("assaultEntered") == 0 and
+        player:getCharVar('assaultEntered') == 0 and
         player:hasKeyItem(xi.ki.ASSAULT_ARMBAND) and
         player:getMainLvl() > 50
 end
@@ -20,7 +16,7 @@ end
 instanceObject.entryRequirements = function(player)
     return player:hasKeyItem(xi.ki.PERIQIA_ASSAULT_ORDERS) and
         player:getCurrentAssault() == xi.assault.mission.SEAGULL_GROUNDED and
-        player:getCharVar("assaultEntered") == 0 and
+        player:getCharVar('assaultEntered') == 0 and
         player:getMainLvl() > 50
 end
 
@@ -35,7 +31,7 @@ end
 instanceObject.afterInstanceRegister = function(player)
     local instance = player:getInstance()
 
-    xi.assault.afterInstanceRegister(player, xi.items.CAGE_OF_REEF_FIREFLIES)
+    xi.assault.afterInstanceRegister(player, xi.item.CAGE_OF_REEF_FIREFLIES)
     GetNPCByID(ID.npc.RUNE_OF_RELEASE, instance):setPos(-495.000, -9.695, -72.000, 0)
     GetNPCByID(ID.npc.ANCIENT_LOCKBOX, instance):setPos(-490.000, -9.900, -72.000, 0)
 end
@@ -324,31 +320,31 @@ instanceObject.onTrack = function(instance)
     local mob = GetMobByID(ID.mob[xi.assault.mission.SEAGULL_GROUNDED].MOBS_START.EXCALIAC, instance)
     local chars = instance:getChars()
     local mobs = instance:getMobs()
-    local missionActive = mob:getLocalVar("missionActive")
-    local pathLeg = mob:getLocalVar("pathLeg")
-    local pathPoint = mob:getLocalVar("pathPoint")
+    local missionActive = mob:getLocalVar('missionActive')
+    local pathLeg = mob:getLocalVar('pathLeg')
+    local pathPoint = mob:getLocalVar('pathPoint')
     pathPoint = utils.clamp(pathPoint, 1, #pathNodes[pathLeg]) -- pathPoint cannot be 0
-    local pathProgressMask = mob:getLocalVar("pathProgressMask")
+    local pathProgressMask = mob:getLocalVar('pathProgressMask')
         -- 0 = Incomplete  1 = Complete
         -- bit 0: Mission Start [1]
         -- bit 1: Top Rooms Option Completed [2]
         -- bit 2: Middle Rooms Option Completed [4]
         -- bit 3: Bottom Rooms Option Completed [8]
         -- bit 4: Lower Fork Option Completed (Mission PASS) [16] **Currently NOT Used**
-    local topRoomsOption = mob:getLocalVar("topRoomsOption")
-    local middleRoomsOption = mob:getLocalVar("middleRoomsOption")
-    local bottomRoomsOption = mob:getLocalVar("bottomRoomsOption")
-    local lowerForkOption = mob:getLocalVar("lowerForkOption")
-    local chatMessage = mob:getLocalVar("chatMessage") -- 0 = No Msg Sent, 1 = Msg Sent
-    local mobChatMessage = mob:getLocalVar("mobChatMessage") -- 0 = No Msg Sent, 1 = Msg Sent
-    local moveStatus = mob:getLocalVar("moveStatus") -- 0 = Walking Forward, 1 = Running Back
-    local runTimeCheck = mob:getLocalVar("runTimeCheck")
-    local moveLock = mob:getLocalVar("moveLock") -- 0 = mob canNOT move, 1 = mob can move
-    local lockToggle = mob:getLocalVar("lockToggle")
-    local stopTimer = mob:getLocalVar("stopTimer") -- resets while moving, counts while stopped
-    local runTimer = mob:getLocalVar("runTimer")
-    local runStart = mob:getLocalVar("runStart")
-    local constantMove = mob:getLocalVar("constantMove") -- 0 = mob canNOT move, 1 = mob can move
+    local topRoomsOption = mob:getLocalVar('topRoomsOption')
+    local middleRoomsOption = mob:getLocalVar('middleRoomsOption')
+    local bottomRoomsOption = mob:getLocalVar('bottomRoomsOption')
+    local lowerForkOption = mob:getLocalVar('lowerForkOption')
+    local chatMessage = mob:getLocalVar('chatMessage') -- 0 = No Msg Sent, 1 = Msg Sent
+    local mobChatMessage = mob:getLocalVar('mobChatMessage') -- 0 = No Msg Sent, 1 = Msg Sent
+    local moveStatus = mob:getLocalVar('moveStatus') -- 0 = Walking Forward, 1 = Running Back
+    local runTimeCheck = mob:getLocalVar('runTimeCheck')
+    local moveLock = mob:getLocalVar('moveLock') -- 0 = mob canNOT move, 1 = mob can move
+    local lockToggle = mob:getLocalVar('lockToggle')
+    local stopTimer = mob:getLocalVar('stopTimer') -- resets while moving, counts while stopped
+    local runTimer = mob:getLocalVar('runTimer')
+    local runStart = mob:getLocalVar('runStart')
+    local constantMove = mob:getLocalVar('constantMove') -- 0 = mob canNOT move, 1 = mob can move
     local rangeClose = false
     local rangeStop = false
     local rangeFollow = false
@@ -362,24 +358,24 @@ instanceObject.onTrack = function(instance)
                 enemys:isSpawned()
             then
                 if mobChatMessage == 0 then
-                    mob:setLocalVar("runTimer", os.time() + math.random(20, 40))
-                    mob:setLocalVar("mobChatMessage", 1)
-                    mob:setLocalVar("moveStatus", 1)
-                    mob:setLocalVar("runStart", 1)
+                    mob:setLocalVar('runTimer', os.time() + math.random(20, 40))
+                    mob:setLocalVar('mobChatMessage', 1)
+                    mob:setLocalVar('moveStatus', 1)
+                    mob:setLocalVar('runStart', 1)
                     if enemys:isEngaged() then
                         mob:showText(mob, ID.text.EXCALIACE_CRAB2)
                         break
                     else
                         if enemys:getFamily() == 1011 then -- crab
                             if pathProgressMask == 7 then
-                                mob:setLocalVar("pathPoint", 38)
+                                mob:setLocalVar('pathPoint', 38)
                             elseif pathProgressMask == 3 then
-                                mob:setLocalVar("pathPoint", 34)
+                                mob:setLocalVar('pathPoint', 34)
                             elseif pathProgressMask == 1 then
-                                mob:setLocalVar("pathPoint", 30)
+                                mob:setLocalVar('pathPoint', 30)
                             end
 
-                            mob:setLocalVar("pathLeg", 1)
+                            mob:setLocalVar('pathLeg', 1)
                             mob:showText(mob, ID.text.EXCALIACE_CRAB1)
                             mob:setSpeed(60)
                             break
@@ -415,48 +411,48 @@ instanceObject.onTrack = function(instance)
             end
 
             if stopTimer + 5 <= os.time() then
-                mob:setLocalVar("stopTimer", os.time())
+                mob:setLocalVar('stopTimer', os.time())
                 if rangeStop then
-                    mob:setLocalVar("constantMove", 0)
-                    mob:setLocalVar("moveStatus", 0)
+                    mob:setLocalVar('constantMove', 0)
+                    mob:setLocalVar('moveStatus', 0)
                     if chatMessage == 0 then
                         if runStart == 1 then
                             mob:showText(mob, ID.text.EXCALIACE_CAUGHT)
-                            mob:setLocalVar("runStart", 0)
-                            mob:setLocalVar("chatMessage", 1)
-                            mob:setLocalVar("mobChatMessage", 0)
+                            mob:setLocalVar('runStart', 0)
+                            mob:setLocalVar('chatMessage', 1)
+                            mob:setLocalVar('mobChatMessage', 0)
                             mob:setSpeed(40)
                             break
                         else
                             mob:showText(mob, ID.text.EXCALIACE_TOO_CLOSE)
-                            mob:setLocalVar("chatMessage", 1)
-                            mob:setLocalVar("mobChatMessage", 0)
+                            mob:setLocalVar('chatMessage', 1)
+                            mob:setLocalVar('mobChatMessage', 0)
                             mob:setSpeed(40)
                             break
                         end
                     end
                 elseif rangeClose then
                     if runStart == 0 then
-                        mob:setLocalVar("constantMove", 0)
-                        mob:setLocalVar("moveStatus", 0)
+                        mob:setLocalVar('constantMove', 0)
+                        mob:setLocalVar('moveStatus', 0)
                         if chatMessage == 0 then
                             mob:showText(mob, ID.text.EXCALIACE_TOO_CLOSE)
                             mob:setSpeed(40)
-                            mob:setLocalVar("chatMessage", 1)
-                            mob:setLocalVar("mobChatMessage", 0)
+                            mob:setLocalVar('chatMessage', 1)
+                            mob:setLocalVar('mobChatMessage', 0)
                             break
                         end
                     end
                 else
-                    mob:setLocalVar("chatMessage", 0)
-                    mob:setLocalVar("constantMove", 1)
+                    mob:setLocalVar('chatMessage', 0)
+                    mob:setLocalVar('constantMove', 1)
                 end
             end
 
             if rangeFollow then
-                mob:setLocalVar("runTimeCheck", os.time() + 10) --  wont run off if closer than 10 yalms
+                mob:setLocalVar('runTimeCheck', os.time() + 10) --  wont run off if closer than 10 yalms
             elseif runTimeCheck <= os.time() then
-                mob:setLocalVar("moveStatus", 1)
+                mob:setLocalVar('moveStatus', 1)
             end
         end
     end
@@ -466,13 +462,13 @@ instanceObject.onTrack = function(instance)
         for _, players in pairs(chars) do
             if mob:checkDistance(players) < 10 then
                 mob:showText(mob, ID.text.EXCALIACE_START)
-                mob:setLocalVar("missionActive", 1)
-                mob:setLocalVar("moveLock", 1)
-                mob:setLocalVar("constantMove", 1)
-                print("Pathing active, top option: "..mob:getLocalVar("topRoomsOption"))
-                print("Pathing active, middle option: "..mob:getLocalVar("middleRoomsOption"))
-                print("Pathing active, bottom option: "..mob:getLocalVar("bottomRoomsOption"))
-                print("Pathing active, fork option: "..mob:getLocalVar("lowerForkOption"))
+                mob:setLocalVar('missionActive', 1)
+                mob:setLocalVar('moveLock', 1)
+                mob:setLocalVar('constantMove', 1)
+                print('Pathing active, top option: '..mob:getLocalVar('topRoomsOption'))
+                print('Pathing active, middle option: '..mob:getLocalVar('middleRoomsOption'))
+                print('Pathing active, bottom option: '..mob:getLocalVar('bottomRoomsOption'))
+                print('Pathing active, fork option: '..mob:getLocalVar('lowerForkOption'))
                 break
             end
         end
@@ -481,27 +477,27 @@ instanceObject.onTrack = function(instance)
     if moveLock == 1 and constantMove == 1 then
         if mob:atPoint(pathNodes[pathLeg][pathPoint]) then
             if moveStatus == 0 then
-                mob:setLocalVar("pathPoint", pathPoint + 1)
+                mob:setLocalVar('pathPoint', pathPoint + 1)
             else
                 if runTimer >= os.time() then
-                    mob:setLocalVar("pathPoint", pathPoint - 1)
+                    mob:setLocalVar('pathPoint', pathPoint - 1)
                 else
                     if runStart == 1 then
-                        mob:setLocalVar("moveLock", 0)
+                        mob:setLocalVar('moveLock', 0)
                         if lockToggle == 0 then
                             mob:showText(mob, ID.text.EXCALIACE_TIRED)
                             mob:timer(15000, function(mobArg)
-                                mobArg:setLocalVar("runTimer", os.time() + math.random(20, 40))
-                                mobArg:setLocalVar("moveLock", 1)
-                                mobArg:setLocalVar("lockToggle", 0)
+                                mobArg:setLocalVar('runTimer', os.time() + math.random(20, 40))
+                                mobArg:setLocalVar('moveLock', 1)
+                                mobArg:setLocalVar('lockToggle', 0)
                             end)
 
-                            mob:setLocalVar("lockToggle", 1)
+                            mob:setLocalVar('lockToggle', 1)
                         end
                     else
-                        mob:setLocalVar("runTimer", os.time() + math.random(30, 40))
+                        mob:setLocalVar('runTimer', os.time() + math.random(30, 40))
                         mob:showText(mob, ID.text.EXCALIACE_RUN)
-                        mob:setLocalVar("runStart", 1)
+                        mob:setLocalVar('runStart', 1)
                         mob:setSpeed(100)
                     end
                 end
@@ -512,116 +508,116 @@ instanceObject.onTrack = function(instance)
                     mob:atPoint(pathNodes[0][#pathNodes[0]]) and
                     bit.band(pathProgressMask, bit.lshift(1, 0)) == 0
                 then
-                    mob:setLocalVar("pathLeg", 1)
-                    mob:setLocalVar("pathPoint", 19)
-                    mob:setLocalVar("pathProgressMask", 1)
+                    mob:setLocalVar('pathLeg', 1)
+                    mob:setLocalVar('pathPoint', 19)
+                    mob:setLocalVar('pathProgressMask', 1)
 -- Top Room Option Conditions
                 elseif
                     mob:atPoint(pathNodes[1][30]) and
                     bit.band(pathProgressMask, bit.lshift(1, 1)) == 0
                 then
-                    mob:setLocalVar("moveLock", 0)
+                    mob:setLocalVar('moveLock', 0)
                     if lockToggle == 0 then
                         mob:timer(10000, function(mobArg)
-                            mobArg:setLocalVar("pathLeg", topRoomsOption)
-                            mobArg:setLocalVar("pathPoint", 1)
-                            mobArg:setLocalVar("moveLock", 1)
-                            mobArg:setLocalVar("lockToggle", 0)
+                            mobArg:setLocalVar('pathLeg', topRoomsOption)
+                            mobArg:setLocalVar('pathPoint', 1)
+                            mobArg:setLocalVar('moveLock', 1)
+                            mobArg:setLocalVar('lockToggle', 0)
                         end)
 
-                        mob:setLocalVar("lockToggle", 1)
+                        mob:setLocalVar('lockToggle', 1)
                     end
                 elseif
                     mob:atPoint(pathNodes[topRoomsOption][7]) and
                     bit.band(pathProgressMask, bit.lshift(1, 1)) == 0
                 then
-                    mob:setLocalVar("moveLock", 0)
+                    mob:setLocalVar('moveLock', 0)
                     if lockToggle == 0 then
                         mob:timer(10000, function(mobArg)
-                            mobArg:setLocalVar("pathLeg", 1)
-                            mobArg:setLocalVar("pathPoint", 30)
-                            mobArg:setLocalVar("pathProgressMask", pathProgressMask + 2)
-                            mobArg:setLocalVar("moveLock", 1)
-                            mobArg:setLocalVar("lockToggle", 0)
+                            mobArg:setLocalVar('pathLeg', 1)
+                            mobArg:setLocalVar('pathPoint', 30)
+                            mobArg:setLocalVar('pathProgressMask', pathProgressMask + 2)
+                            mobArg:setLocalVar('moveLock', 1)
+                            mobArg:setLocalVar('lockToggle', 0)
                         end)
 
-                        mob:setLocalVar("lockToggle", 1)
+                        mob:setLocalVar('lockToggle', 1)
                     end
 -- Middle Room Option Conditions
                 elseif
                     mob:atPoint(pathNodes[1][34]) and
                     bit.band(pathProgressMask, bit.lshift(1, 2)) == 0
                 then
-                    mob:setLocalVar("moveLock", 0)
+                    mob:setLocalVar('moveLock', 0)
                     if lockToggle == 0 then
                         mob:timer(10000, function(mobArg)
-                            mobArg:setLocalVar("pathLeg", middleRoomsOption)
-                            mobArg:setLocalVar("pathPoint", 1)
-                            mobArg:setLocalVar("moveLock", 1)
-                            mobArg:setLocalVar("lockToggle", 0)
+                            mobArg:setLocalVar('pathLeg', middleRoomsOption)
+                            mobArg:setLocalVar('pathPoint', 1)
+                            mobArg:setLocalVar('moveLock', 1)
+                            mobArg:setLocalVar('lockToggle', 0)
                         end)
 
-                        mob:setLocalVar("lockToggle", 1)
+                        mob:setLocalVar('lockToggle', 1)
                     end
                 elseif
                     mob:atPoint(pathNodes[middleRoomsOption][7]) and
                     bit.band(pathProgressMask, bit.lshift(1, 2)) == 0
                 then
-                    mob:setLocalVar("moveLock", 0)
+                    mob:setLocalVar('moveLock', 0)
                     if lockToggle == 0 then
                         mob:timer(10000, function(mobArg)
-                            mobArg:setLocalVar("pathLeg", 1)
-                            mobArg:setLocalVar("pathPoint", 34)
-                            mobArg:setLocalVar("pathProgressMask", pathProgressMask + 4)
-                            mobArg:setLocalVar("moveLock", 1)
-                            mobArg:setLocalVar("lockToggle", 0)
+                            mobArg:setLocalVar('pathLeg', 1)
+                            mobArg:setLocalVar('pathPoint', 34)
+                            mobArg:setLocalVar('pathProgressMask', pathProgressMask + 4)
+                            mobArg:setLocalVar('moveLock', 1)
+                            mobArg:setLocalVar('lockToggle', 0)
                         end)
 
-                        mob:setLocalVar("lockToggle", 1)
+                        mob:setLocalVar('lockToggle', 1)
                     end
 -- Bottom Room Option Conditions
                 elseif
                     mob:atPoint(pathNodes[1][38]) and
                     bit.band(pathProgressMask, bit.lshift(1, 3)) == 0
                 then
-                    mob:setLocalVar("moveLock", 0)
+                    mob:setLocalVar('moveLock', 0)
                     if lockToggle == 0 then
                         mob:timer(10000, function(mobArg)
-                            mobArg:setLocalVar("pathLeg", bottomRoomsOption)
-                            mobArg:setLocalVar("pathPoint", 1)
-                            mobArg:setLocalVar("moveLock", 1)
-                            mobArg:setLocalVar("lockToggle", 0)
+                            mobArg:setLocalVar('pathLeg', bottomRoomsOption)
+                            mobArg:setLocalVar('pathPoint', 1)
+                            mobArg:setLocalVar('moveLock', 1)
+                            mobArg:setLocalVar('lockToggle', 0)
                         end)
 
-                        mob:setLocalVar("lockToggle", 1)
+                        mob:setLocalVar('lockToggle', 1)
                     end
                 elseif
                     mob:atPoint(pathNodes[bottomRoomsOption][7]) and
                     bit.band(pathProgressMask, bit.lshift(1, 3)) == 0
                 then
-                    mob:setLocalVar("moveLock", 0)
+                    mob:setLocalVar('moveLock', 0)
                     if lockToggle == 0 then
                         mob:timer(10000, function(mobArg)
-                            mobArg:setLocalVar("pathLeg", 1)
-                            mobArg:setLocalVar("pathPoint", 38)
-                            mobArg:setLocalVar("pathProgressMask", pathProgressMask + 8)
-                            mobArg:setLocalVar("moveLock", 1)
-                            mobArg:setLocalVar("lockToggle", 0)
+                            mobArg:setLocalVar('pathLeg', 1)
+                            mobArg:setLocalVar('pathPoint', 38)
+                            mobArg:setLocalVar('pathProgressMask', pathProgressMask + 8)
+                            mobArg:setLocalVar('moveLock', 1)
+                            mobArg:setLocalVar('lockToggle', 0)
                         end)
 
-                        mob:setLocalVar("lockToggle", 1)
+                        mob:setLocalVar('lockToggle', 1)
                     end
 -- Lower Fork Option Conditions
                 elseif mob:atPoint(pathNodes[1][#pathNodes[1]]) then
-                    mob:setLocalVar("pathLeg", lowerForkOption)
-                    mob:setLocalVar("pathPoint", 1)
+                    mob:setLocalVar('pathLeg', lowerForkOption)
+                    mob:setLocalVar('pathPoint', 1)
 -- Mission Complete Conditions
                 elseif mob:atPoint(pathNodes[lowerForkOption][#pathNodes[lowerForkOption]]) then
                 -- mob reached the escort point - PASS mission
                     mob:showText(mob, ID.text.EXCALIACE_END1)
                     mob:showText(mob, ID.text.EXCALIACE_END2)
-                    mob:setLocalVar("missionActive", 3) -- End Mission
-                    mob:setLocalVar("moveLock", 0) -- stop Movement and condition checks
+                    mob:setLocalVar('missionActive', 3) -- End Mission
+                    mob:setLocalVar('moveLock', 0) -- stop Movement and condition checks
                     instance:setProgress(1)
                 end
 -- else moveStatus == 1 (Running)
@@ -629,21 +625,21 @@ instanceObject.onTrack = function(instance)
                 if mob:atPoint(pathNodes[1][1]) then
                 -- mob reached the escape point - FAIL mission
                     mob:showText(mob, ID.text.EXCALIACE_ESCAPE)
-                    mob:setLocalVar("missionActive", 3) -- End Mission
-                    mob:setLocalVar("moveLock", 0) -- stop Movement and condition checks
+                    mob:setLocalVar('missionActive', 3) -- End Mission
+                    mob:setLocalVar('moveLock', 0) -- stop Movement and condition checks
                     instance:fail()
                 elseif mob:atPoint(pathNodes[topRoomsOption][1]) then
-                    mob:setLocalVar("pathLeg", 1)
-                    mob:setLocalVar("pathPoint", 30)
+                    mob:setLocalVar('pathLeg', 1)
+                    mob:setLocalVar('pathPoint', 30)
                 elseif mob:atPoint(pathNodes[middleRoomsOption][1]) then
-                    mob:setLocalVar("pathLeg", 1)
-                    mob:setLocalVar("pathPoint", 34)
+                    mob:setLocalVar('pathLeg', 1)
+                    mob:setLocalVar('pathPoint', 34)
                 elseif mob:atPoint(pathNodes[bottomRoomsOption][1]) then
-                    mob:setLocalVar("pathLeg", 1)
-                    mob:setLocalVar("pathPoint", 38)
+                    mob:setLocalVar('pathLeg', 1)
+                    mob:setLocalVar('pathPoint', 38)
                 elseif mob:atPoint(pathNodes[lowerForkOption][1]) then
-                    mob:setLocalVar("pathLeg", 1)
-                    mob:setLocalVar("pathPoint", #pathNodes[1])
+                    mob:setLocalVar('pathLeg', 1)
+                    mob:setLocalVar('pathPoint', #pathNodes[1])
                 end
             end
 -- mob not at assigned point yet so move there

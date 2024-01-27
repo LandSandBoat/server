@@ -10,34 +10,34 @@ xi.porter_moogle = xi.porter_moogle or {}
 -- Item IDs for all of the slips.
 local slipIds =
 {
-    xi.items.MOOGLE_STORAGE_SLIP_01,
-    xi.items.MOOGLE_STORAGE_SLIP_02,
-    xi.items.MOOGLE_STORAGE_SLIP_03,
-    xi.items.MOOGLE_STORAGE_SLIP_04,
-    xi.items.MOOGLE_STORAGE_SLIP_05,
-    xi.items.MOOGLE_STORAGE_SLIP_06,
-    xi.items.MOOGLE_STORAGE_SLIP_07,
-    xi.items.MOOGLE_STORAGE_SLIP_08,
-    xi.items.MOOGLE_STORAGE_SLIP_09,
-    xi.items.MOOGLE_STORAGE_SLIP_10,
-    xi.items.MOOGLE_STORAGE_SLIP_11,
-    xi.items.MOOGLE_STORAGE_SLIP_12,
-    xi.items.MOOGLE_STORAGE_SLIP_13,
-    xi.items.MOOGLE_STORAGE_SLIP_14,
-    xi.items.MOOGLE_STORAGE_SLIP_15,
-    xi.items.MOOGLE_STORAGE_SLIP_16,
-    xi.items.MOOGLE_STORAGE_SLIP_17,
-    xi.items.MOOGLE_STORAGE_SLIP_18,
-    xi.items.MOOGLE_STORAGE_SLIP_19,
-    xi.items.MOOGLE_STORAGE_SLIP_20,
-    xi.items.MOOGLE_STORAGE_SLIP_21,
-    xi.items.MOOGLE_STORAGE_SLIP_22,
-    xi.items.MOOGLE_STORAGE_SLIP_23,
-    xi.items.MOOGLE_STORAGE_SLIP_24,
-    xi.items.MOOGLE_STORAGE_SLIP_25,
-    xi.items.MOOGLE_STORAGE_SLIP_26,
-    xi.items.MOOGLE_STORAGE_SLIP_27,
-    xi.items.MOOGLE_STORAGE_SLIP_28,
+    xi.item.MOOGLE_STORAGE_SLIP_01,
+    xi.item.MOOGLE_STORAGE_SLIP_02,
+    xi.item.MOOGLE_STORAGE_SLIP_03,
+    xi.item.MOOGLE_STORAGE_SLIP_04,
+    xi.item.MOOGLE_STORAGE_SLIP_05,
+    xi.item.MOOGLE_STORAGE_SLIP_06,
+    xi.item.MOOGLE_STORAGE_SLIP_07,
+    xi.item.MOOGLE_STORAGE_SLIP_08,
+    xi.item.MOOGLE_STORAGE_SLIP_09,
+    xi.item.MOOGLE_STORAGE_SLIP_10,
+    xi.item.MOOGLE_STORAGE_SLIP_11,
+    xi.item.MOOGLE_STORAGE_SLIP_12,
+    xi.item.MOOGLE_STORAGE_SLIP_13,
+    xi.item.MOOGLE_STORAGE_SLIP_14,
+    xi.item.MOOGLE_STORAGE_SLIP_15,
+    xi.item.MOOGLE_STORAGE_SLIP_16,
+    xi.item.MOOGLE_STORAGE_SLIP_17,
+    xi.item.MOOGLE_STORAGE_SLIP_18,
+    xi.item.MOOGLE_STORAGE_SLIP_19,
+    xi.item.MOOGLE_STORAGE_SLIP_20,
+    xi.item.MOOGLE_STORAGE_SLIP_21,
+    xi.item.MOOGLE_STORAGE_SLIP_22,
+    xi.item.MOOGLE_STORAGE_SLIP_23,
+    xi.item.MOOGLE_STORAGE_SLIP_24,
+    xi.item.MOOGLE_STORAGE_SLIP_25,
+    xi.item.MOOGLE_STORAGE_SLIP_26,
+    xi.item.MOOGLE_STORAGE_SLIP_27,
+    xi.item.MOOGLE_STORAGE_SLIP_28,
 }
 
 -----------------------------------
@@ -175,15 +175,12 @@ end
 -----------------------------------
 local function storeItems(player, storableItemIds, slipId, eventTable)
     if #storableItemIds > 0 then
-        local param0 = 0
-        local param1 = 0
+        local param0 = #storableItemIds
+        local param1 = 1
 
         if #storableItemIds == 1 then
             param0 = storableItemIds[1]
             param1 = 0
-        else
-            param0 = #storableItemIds
-            param1 = 1
         end
 
         local extra = { }

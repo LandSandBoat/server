@@ -6,11 +6,7 @@
 -- Pherimociel      : !pos -31.627 1.002 67.956 243
 -- Dilapidated Gate : !pos 260 9 -435 25
 -----------------------------------
-require('scripts/globals/interaction/mission')
-require('scripts/globals/missions')
-require('scripts/globals/utils')
------------------------------------
-local misareauxID = require("scripts/zones/Misareaux_Coast/IDs")
+local misareauxID = zones[xi.zone.MISAREAUX_COAST]
 -----------------------------------
 
 local mission = Mission:new(xi.mission.log_id.COP, xi.mission.id.cop.A_PLACE_TO_RETURN)

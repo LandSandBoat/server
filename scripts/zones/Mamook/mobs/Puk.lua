@@ -2,9 +2,8 @@
 -- Area: Mamook
 --  Mob: Puk
 -----------------------------------
-mixins = { require("scripts/mixins/families/puk") }
+mixins = { require('scripts/mixins/families/puk') }
 -----------------------------------
-
 local entity = {}
 
 entity.onMobInitialize = function(mob)

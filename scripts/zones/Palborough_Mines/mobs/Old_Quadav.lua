@@ -3,8 +3,7 @@
 --  Mob: Old Quadav
 -- Note: PH for Be'Hya Hundredwall
 -----------------------------------
-local ID = require("scripts/zones/Palborough_Mines/IDs")
-require("scripts/globals/mobs")
+local ID = zones[xi.zone.PALBOROUGH_MINES]
 -----------------------------------
 local entity = {}
 

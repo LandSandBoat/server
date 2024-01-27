@@ -4,16 +4,12 @@
 -- !addquest 7 61
 -- Metallic Hodgepodge : !pos -285.493 -7.819 -163.707 104
 -----------------------------------
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
-require('scripts/globals/interaction/quest')
------------------------------------
 
 local quest = Quest:new(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.FACE_OF_THE_FUTURE)
 
 quest.reward =
 {
-    item  = xi.items.GRIFFON_RING,
+    item  = xi.item.GRIFFON_RING,
     title = xi.title.FANGMONGER_FORESTALLER,
 }
 

@@ -4,8 +4,7 @@
 -- Type: Quest Giver
 -- !pos -169.127 2.999 158.677 231
 -----------------------------------
-local ID = require("scripts/zones/Northern_San_dOria/IDs")
-require("scripts/globals/quests")
+local ID = zones[xi.zone.NORTHERN_SAN_DORIA]
 -----------------------------------
 local entity = {}
 
@@ -14,14 +13,14 @@ end
 
 entity.onTrigger = function(player, npc)
     local aCraftsmansWork = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.A_CRAFTSMAN_S_WORK)
-    local quotasStatus    = player:getCharVar("ChasingQuotas_Progress")
+    local quotasStatus    = player:getCharVar('ChasingQuotas_Progress')
 
     if
         player:getMainJob() == xi.job.DRG and
         player:getMainLvl() >= xi.settings.main.AF1_QUEST_LEVEL and
         aCraftsmansWork == QUEST_AVAILABLE
     then
-        if player:getCharVar("has_seen_drgaf1_quest_already") == 0 then
+        if player:getCharVar('has_seen_drgaf1_quest_already') == 0 then
             player:startEvent(73)
         else -- If player has seen the big cut scene, give them a smaller one.
             player:startEvent(71)
@@ -49,26 +48,26 @@ end
 
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 73 and option == 0 then -- first part of long CS -- declines questgiver
-        player:setCharVar("has_seen_drgaf1_quest_already", 1)
+        player:setCharVar('has_seen_drgaf1_quest_already', 1)
     elseif (csid == 73 or csid == 71) and option == 1 then
         player:addQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.A_CRAFTSMAN_S_WORK)
-        player:setCharVar("has_seen_drgaf1_quest_already", 0)
-        player:setCharVar("aCraftsmanWork", 1)
+        player:setCharVar('has_seen_drgaf1_quest_already', 0)
+        player:setCharVar('aCraftsmanWork', 1)
     elseif csid == 70 then -- This is only if player has Altepa Polishing Stone
         if player:getFreeSlotsCount() == 0 then
-            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.items.PEREGRINE)-- Peregrine (DRG AF1)
+            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.item.PEREGRINE)-- Peregrine (DRG AF1)
         else
-            player:setCharVar("aCraftsmanWork", 0)
+            player:setCharVar('aCraftsmanWork', 0)
             player:delKeyItem(xi.ki.ALTEPA_POLISHING_STONE)
-            player:addItem(xi.items.PEREGRINE)
-            player:messageSpecial(ID.text.ITEM_OBTAINED, xi.items.PEREGRINE) -- Peregrine (DRG AF1)
+            player:addItem(xi.item.PEREGRINE)
+            player:messageSpecial(ID.text.ITEM_OBTAINED, xi.item.PEREGRINE) -- Peregrine (DRG AF1)
             player:addFame(xi.quest.fame_area.SANDORIA, 20)
             player:completeQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.A_CRAFTSMAN_S_WORK)
         end
     elseif csid == 67 then
         player:addKeyItem(xi.ki.SHINY_EARRING)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.SHINY_EARRING)
-        player:setCharVar("ChasingQuotas_Progress", 3)
+        player:setCharVar('ChasingQuotas_Progress', 3)
     end
 end
 

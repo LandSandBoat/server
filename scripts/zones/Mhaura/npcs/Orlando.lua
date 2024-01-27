@@ -3,9 +3,6 @@
 --  NPC: Orlando
 -- !pos -37.268 -9 58.047 249
 -----------------------------------
-local ID = require("scripts/zones/Mhaura/IDs")
-require("scripts/globals/quests")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
@@ -29,12 +26,12 @@ entity.onTrade = function(player, npc, trade)
     for x, item in pairs(itemList) do
         if
             questStatus == QUEST_ACCEPTED or
-            player:getLocalVar("OrlandoRepeat") == 1
+            player:getLocalVar('OrlandoRepeat') == 1
         then
             if item[1] == itemID then
                 if trade:hasItemQty(itemID, 8) and trade:getItemCount() == 8 then
                     -- Correct amount, valid item.
-                    player:setCharVar("ANTIQUE_PAYOUT", xi.settings.main.GIL_RATE * item[2])
+                    player:setCharVar('ANTIQUE_PAYOUT', xi.settings.main.GIL_RATE * item[2])
                     player:startEvent(102, xi.settings.main.GIL_RATE * item[2], itemID)
                 elseif trade:getItemCount() < 8 then
                     -- Wrong amount, but valid item.
@@ -68,7 +65,7 @@ end
 
 entity.onEventFinish = function(player, csid, option, npc)
     local questStatus = player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.ORLANDO_S_ANTIQUES)
-    local payout = player:getCharVar("ANTIQUE_PAYOUT")
+    local payout = player:getCharVar('ANTIQUE_PAYOUT')
 
     if csid == 101 then
         player:addQuest(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.ORLANDO_S_ANTIQUES)
@@ -77,11 +74,11 @@ entity.onEventFinish = function(player, csid, option, npc)
         player:addFame(xi.quest.fame_area.WINDURST, 10)
         npcUtil.giveCurrency(player, 'gil', payout)
         player:completeQuest(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.ORLANDO_S_ANTIQUES)
-        player:setCharVar("ANTIQUE_PAYOUT", 0)
-        player:setLocalVar("OrlandoRepeat", 0)
+        player:setCharVar('ANTIQUE_PAYOUT', 0)
+        player:setLocalVar('OrlandoRepeat', 0)
     elseif csid == 103 then
         if questStatus == QUEST_COMPLETED then
-            player:setLocalVar("OrlandoRepeat", 1)
+            player:setLocalVar('OrlandoRepeat', 1)
         end
     end
 end

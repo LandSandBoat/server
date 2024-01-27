@@ -14,17 +14,13 @@
 -- Additional Dialogue:
 -- Gilgamesh                         - !pos 122.452 -9.009 -12.052 252
 -----------------------------------
-require('scripts/globals/interaction/mission')
-require('scripts/globals/missions')
-require('scripts/globals/titles')
------------------------------------
-local behemothsDominionID = require('scripts/zones/Behemoths_Dominion/IDs')
-local capeTerigganID      = require('scripts/zones/Cape_Teriggan/IDs')
-local cloisterOfFrostID   = require('scripts/zones/Cloister_of_Frost/IDs')
-local laTheinePlateauID   = require('scripts/zones/La_Theine_Plateau/IDs')
-local westernAltepaID     = require('scripts/zones/Western_Altepa_Desert/IDs')
-local yuhtungaJungleID    = require('scripts/zones/Yuhtunga_Jungle/IDs')
-local sanctuaryOfZitahID  = require('scripts/zones/The_Sanctuary_of_ZiTah/IDs')
+local behemothsDominionID = zones[xi.zone.BEHEMOTHS_DOMINION]
+local capeTerigganID      = zones[xi.zone.CAPE_TERIGGAN]
+local cloisterOfFrostID   = zones[xi.zone.CLOISTER_OF_FROST]
+local laTheinePlateauID   = zones[xi.zone.LA_THEINE_PLATEAU]
+local westernAltepaID     = zones[xi.zone.WESTERN_ALTEPA_DESERT]
+local yuhtungaJungleID    = zones[xi.zone.YUHTUNGA_JUNGLE]
+local sanctuaryOfZitahID  = zones[xi.zone.THE_SANCTUARY_OF_ZITAH]
 -----------------------------------
 
 local mission = Mission:new(xi.mission.log_id.ZILART, xi.mission.id.zilart.HEADSTONE_PILGRIMAGE)

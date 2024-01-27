@@ -4,11 +4,6 @@
 -- Monberaux !pos -42 0 -2 244
 -- Giant Footprint !pos -501 -11 354 126
 -----------------------------------
--- require("scripts/globals/pets/fellow")
-require('scripts/globals/quests')
-require('scripts/globals/interaction/quest')
-require('scripts/globals/npc_util')
------------------------------------
 
 local quest = Quest:new(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.REGAINING_TRUST)
 
@@ -36,8 +31,8 @@ quest.sections = {
         check = function(player, status, vars)
             return status == QUEST_AVAILABLE
                 and player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, PICTURE_PERFECT) == QUEST_COMPLETED
-                and player:getFellowValue("level") >= 51
-                and player:getFellowValue("bond") >= 55
+                and player:getFellowValue('level') >= 51
+                and player:getFellowValue('bond') >= 55
         end,
 
         [xi.zone.UPPER_JEUNO] = {
@@ -66,9 +61,9 @@ quest.sections = {
             ['Monberaux'] = {
                 onTrigger = function(player, npc)
                     local fellowParam = getFellowParam(player)
-                    if quest:getVar(player, "Prog") == 0 then
+                    if quest:getVar(player, 'Prog') == 0 then
                         return quest:progressEvent(10059, {[7] = fellowParam})
-                    elseif quest:getVar(player, "Prog") == 5 then
+                    elseif quest:getVar(player, 'Prog') == 5 then
                         return quest:progressEvent(10062, {[7] = fellowParam})
                     end
                 end,
@@ -77,9 +72,9 @@ quest.sections = {
             ['Luto_Mewrilah'] = {
                 onTrigger = function(player, npc)
                     local fellowParam = getFellowParam(player)
-                    if quest:getVar(player, "Prog") == 1 then
+                    if quest:getVar(player, 'Prog') == 1 then
                         return quest:progressEvent(10060, {[7] = fellowParam})
-                    elseif quest:getVar(player, "Prog") == 4 then
+                    elseif quest:getVar(player, 'Prog') == 4 then
                         return quest:progressEvent(10061, {[7] = fellowParam})
                     end
                 end,
@@ -120,7 +115,7 @@ quest.sections = {
                 end,
 
                 [10207] = function(player, csid, option, npc)
-                    player:setFellowValue("lvlcap", 60)
+                    player:setFellowValue('lvlcap', 60)
                     quest:complete(player)
                 end,
             },
@@ -129,13 +124,13 @@ quest.sections = {
         [xi.zone.QUFIM_ISLAND] = {
             ['Giant_Footprint'] = {
                 onTrigger = function(player, npc)
-                    if quest:getVar(player, "Prog") == 2 and player:getLocalVar("Initiate") == 0 and not GetMobByID(zones[player:getZoneID()].mob.INGAEVON):isSpawned() then
+                    if quest:getVar(player, 'Prog') == 2 and player:getLocalVar('Initiate') == 0 and not GetMobByID(zones[player:getZoneID()].mob.INGAEVON):isSpawned() then
                         local fellowParam = getFellowParam(player)
                         return quest:progressEvent(10000, {[7] = fellowParam})
-                    elseif quest:getVar(player, "Prog") == 3 then
+                    elseif quest:getVar(player, 'Prog') == 3 then
                         local personality = checkPersonality(player)
                         if personality > 5 then personality = personality - 1 end
-                        quest:setVar(player, "Prog", 4)
+                        quest:setVar(player, 'Prog', 4)
                         return quest:messageSpecial(zones[player:getZoneID()].text.GIGANTIC_FOOTPRINT + 1 + personality)
                     else
                         return quest:messageSpecial(zones[player:getZoneID()].text.GIGANTIC_FOOTPRINT)
@@ -147,8 +142,8 @@ quest.sections = {
                 onMobDeath = function(mob, player, optParams)
                     local fellow = player:getFellow()
 
-                    if fellow ~= nil and quest:getVar(player, "Prog") == 2 then
-                        player:setLocalVar("triggerFellow", 1) -- must talk to fellow(alive) after fight to proceed
+                    if fellow ~= nil and quest:getVar(player, 'Prog') == 2 then
+                        player:setLocalVar('triggerFellow', 1) -- must talk to fellow(alive) after fight to proceed
                         player:timer(30000, function(player) player:despawnFellow() end) -- 30 sec to talk to fellow
                         player:showText(player:getFellow(), zones[player:getZoneID()].text.WHY_COME)
                     end
@@ -158,13 +153,13 @@ quest.sections = {
             onEventFinish = {
                 [10000] = function(player, csid, option, npc)
                     SpawnMob(zones[player:getZoneID()].mob.INGAEVON):updateClaim(player)
-                    player:setLocalVar("FellowSpawn", 1) -- no timer set
-                    player:setLocalVar("FellowAttack", 1) -- fellow cannot sync attack
-                    player:setLocalVar("FellowDisengage", 1) -- fellow cannot sync disengage
-                    player:spawnFellow(player:getFellowValue("fellowid"))
+                    player:setLocalVar('FellowSpawn', 1) -- no timer set
+                    player:setLocalVar('FellowAttack', 1) -- fellow cannot sync attack
+                    player:setLocalVar('FellowDisengage', 1) -- fellow cannot sync disengage
+                    player:spawnFellow(player:getFellowValue('fellowid'))
                     player:getFellow():setPos(-504, -11, 362, 47)
                     player:fellowAttack(GetMobByID(zones[player:getZoneID()].mob.INGAEVON))
-                    player:setLocalVar("Initiate", 1)
+                    player:setLocalVar('Initiate', 1)
                 end,
             },
         },

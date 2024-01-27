@@ -109,7 +109,7 @@ void CLinkshell::AddMember(CCharEntity* PChar, int8 type, uint8 lsNum)
 
     if (std::find(members.begin(), members.end(), PChar) != members.end())
     {
-        ShowWarning("CLinkshell::AddMember attempted to add member '%s' who is already in the online member list.", PChar->GetName());
+        ShowWarning("CLinkshell::AddMember attempted to add member '%s' who is already in the online member list.", PChar->getName());
         return;
     }
 
@@ -162,7 +162,7 @@ void CLinkshell::ChangeMemberRank(const std::string& MemberName, uint8 toSack)
     {
         for (auto& member : members)
         {
-            if (strcmpi(MemberName.c_str(), member->GetName().c_str()) == 0)
+            if (strcmpi(MemberName.c_str(), member->getName().c_str()) == 0)
             {
                 CCharEntity* PMember = member;
 
@@ -232,7 +232,7 @@ void CLinkshell::RemoveMemberByName(const std::string& MemberName, uint8 kickerR
     uint32 lsid = m_id;
     for (auto& member : members)
     {
-        if (strcmpi(MemberName.c_str(), member->GetName().c_str()) == 0)
+        if (strcmpi(MemberName.c_str(), member->getName().c_str()) == 0)
         {
             CCharEntity* PMember = member;
 
@@ -315,7 +315,7 @@ void CLinkshell::BreakLinkshell()
     // break logged in and equipped members
     while (!members.empty())
     {
-        RemoveMemberByName(members.at(0)->GetName(), LSTYPE_LINKSHELL, true);
+        RemoveMemberByName(members.at(0)->getName(), LSTYPE_LINKSHELL, true);
     }
     // set the linkshell as broken
     sql->Query("UPDATE linkshells SET broken = 1 WHERE linkshellid = %u LIMIT 1", lsid);

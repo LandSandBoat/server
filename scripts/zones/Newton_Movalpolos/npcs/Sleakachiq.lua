@@ -3,7 +3,7 @@
 --  NPC: Sleakachiq
 -- !pos 162.504 14.999 136.901 12
 -----------------------------------
-local ID = require("scripts/zones/Newton_Movalpolos/IDs")
+local ID = zones[xi.zone.NEWTON_MOVALPOLOS]
 -----------------------------------
 local entity = {}
 
@@ -11,7 +11,7 @@ entity.onTrade = function(player, npc, trade)
     local yPos = player:getYPos()
 
     if yPos <= 16.5 then
-        if npcUtil.tradeHas(trade, { { "gil", 800 } }) then
+        if npcUtil.tradeHas(trade, { { 'gil', 800 } }) then
             player:startEvent(28)
         end
     elseif yPos >= 19.5 then

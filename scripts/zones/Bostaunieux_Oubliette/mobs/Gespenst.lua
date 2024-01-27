@@ -3,8 +3,7 @@
 --  Mob: Gespenst
 -- Note: PH for Manes
 -----------------------------------
-local ID = require("scripts/zones/Bostaunieux_Oubliette/IDs")
-require("scripts/globals/mobs")
+local ID = zones[xi.zone.BOSTAUNIEUX_OUBLIETTE]
 -----------------------------------
 local entity = {}
 

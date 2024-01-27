@@ -1,8 +1,6 @@
 -----------------------------------
 -- Zone: Mamool_Ja_Training_Grounds
 -----------------------------------
-local ID = require('scripts/zones/Mamool_Ja_Training_Grounds/IDs')
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

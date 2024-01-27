@@ -4,12 +4,11 @@
 -- Type: Alter Ego Extravaganza
 -- !gotoid 17105699
 -----------------------------------
-require('scripts/globals/extravaganza')
 
 local entity = {}
 
 entity.onTrigger = function(player, npc)
-    local notes = player:getCurrency("allied_notes")
+    local notes = player:getCurrency('allied_notes')
 
     xi.extravaganza.shadowEraTrigger(player, npc, notes)
 end

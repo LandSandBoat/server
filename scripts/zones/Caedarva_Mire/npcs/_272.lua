@@ -3,9 +3,7 @@
 -- Door: Runic Seal
 -- !pos 486 -23 -500 79
 -----------------------------------
-local ID = require("scripts/zones/Caedarva_Mire/IDs")
-require("scripts/globals/assault")
-require("scripts/globals/instance")
+local ID = zones[xi.zone.CAEDARVA_MIRE]
 -----------------------------------
 local entity = {}
 

@@ -2,8 +2,7 @@
 -- Area: Riverne - Site B01 (BCNM)
 --   NM: Bahamut
 -----------------------------------
-local ID = require("scripts/zones/Riverne-Site_B01/IDs")
-require("scripts/globals/quests")
+local ID = zones[xi.zone.RIVERNE_SITE_B01]
 -----------------------------------
 local entity = {}
 
@@ -24,12 +23,12 @@ local megaflareHPP =
 }
 
 entity.onMobFight = function(mob, target)
-    local megaFlareQueue = mob:getLocalVar("MegaFlareQueue")
-    local megaFlareTrigger = mob:getLocalVar("MegaFlareTrigger")
-    -- local megaFlareUses = mob:getLocalVar("MegaFlareUses")
-    local flareWait = mob:getLocalVar("FlareWait")
-    local gigaFlare = mob:getLocalVar("GigaFlare")
-    local tauntShown = mob:getLocalVar("tauntShown")
+    local megaFlareQueue = mob:getLocalVar('MegaFlareQueue')
+    local megaFlareTrigger = mob:getLocalVar('MegaFlareTrigger')
+    -- local megaFlareUses = mob:getLocalVar('MegaFlareUses')
+    local flareWait = mob:getLocalVar('FlareWait')
+    local gigaFlare = mob:getLocalVar('GigaFlare')
+    local tauntShown = mob:getLocalVar('tauntShown')
     local mobHPP = mob:getHPP()
     local isBusy = false
     local act = mob:getCurrentAction()
@@ -48,8 +47,8 @@ entity.onMobFight = function(mob, target)
     -- if Megaflare hasn't been set to be used this many times, increase the queue of Megaflares. This will allow it to use multiple Megaflares in a row if the HP is decreased quickly enough.
     for trigger, hpp in ipairs(megaflareHPP) do
         if mobHPP < hpp and megaFlareTrigger < trigger then
-            mob:setLocalVar("MegaFlareTrigger", trigger)
-            mob:setLocalVar("MegaFlareQueue", megaFlareQueue + 1)
+            mob:setLocalVar('MegaFlareTrigger', trigger)
+            mob:setLocalVar('MegaFlareQueue', megaFlareQueue + 1)
             break
         end
     end
@@ -62,11 +61,11 @@ entity.onMobFight = function(mob, target)
 
             if flareWait == 0 and tauntShown == 0 then -- if there is a queued Megaflare and the last Megaflare has been used successfully or if the first one hasn't been used yet.
                 target:showText(mob, ID.text.BAHAMUT_TAUNT)
-                mob:setLocalVar("FlareWait", mob:getBattleTime() + 2) -- second taunt happens two seconds after the first.
-                mob:setLocalVar("tauntShown", 1)
+                mob:setLocalVar('FlareWait', mob:getBattleTime() + 2) -- second taunt happens two seconds after the first.
+                mob:setLocalVar('tauntShown', 1)
             elseif flareWait < mob:getBattleTime() and flareWait ~= 0 and tauntShown >= 0 then -- the wait time between the first and second taunt as passed. Checks for wait to be not 0 because it's set to 0 on successful use.
                 if tauntShown == 1 then
-                    mob:setLocalVar("tauntShown", 2) -- if Megaflare gets stunned it won't show the text again, until successful use.
+                    mob:setLocalVar('tauntShown', 2) -- if Megaflare gets stunned it won't show the text again, until successful use.
                     target:showText(mob, ID.text.BAHAMUT_TAUNT + 1)
                 end
 
@@ -87,7 +86,7 @@ entity.onMobFight = function(mob, target)
             -- All of the scripted Megaflares are to happen before Gigaflare.
             if tauntShown == 0 then
                 target:showText(mob, ID.text.BAHAMUT_TAUNT + 2)
-                mob:setLocalVar("tauntShown", 3) -- again, taunt won't show again until the move is successfully used.
+                mob:setLocalVar('tauntShown', 3) -- again, taunt won't show again until the move is successfully used.
             end
 
             if bit.band(mob:getBehaviour(), xi.behavior.NO_TURN) > 0 then -- default behaviour

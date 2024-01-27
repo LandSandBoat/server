@@ -2,8 +2,6 @@
 -- Area: Temenos
 -- Name:
 -----------------------------------
-require("scripts/globals/battlefield")
------------------------------------
 local battlefieldObject = {}
 
 battlefieldObject.onBattlefieldTick = function(battlefield, tick)
@@ -29,7 +27,7 @@ battlefieldObject.onBattlefieldLeave = function(player, battlefield, leavecode)
     end
 
     if leavecode == xi.battlefield.leaveCode.LOST then
-        --SetServerVariable("[]UniqueID", 0)
+        --SetServerVariable('[]UniqueID', 0)
     end
 end
 

@@ -3,8 +3,7 @@
 --  NPC: Indescript Markings
 -- Type: Quest
 -----------------------------------
-local ID = require("scripts/zones/Grauberg_[S]/IDs")
-require("scripts/globals/npc_util")
+local ID = zones[xi.zone.GRAUBERG_S]
 -----------------------------------
 local entity = {}
 
@@ -12,7 +11,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local gownQuestProgress = player:getCharVar("AF_SCH_BODY")
+    local gownQuestProgress = player:getCharVar('AF_SCH_BODY')
 
     player:delStatusEffect(xi.effect.SNEAK)
 
@@ -23,7 +22,7 @@ entity.onTrigger = function(player, npc)
         not player:hasKeyItem(xi.ki.SAMPLE_OF_GRAUBERG_CHERT)
     then
         npcUtil.giveKeyItem(player, xi.ki.SAMPLE_OF_GRAUBERG_CHERT)
-        player:setCharVar("AF_SCH_BODY", gownQuestProgress + 1)
+        player:setCharVar('AF_SCH_BODY', gownQuestProgress + 1)
 
         -- Move the markings around
         local positions =

@@ -2,8 +2,7 @@
 -- Area: The Eldieme Necropolis
 --   NM: Cwn Cyrff
 -----------------------------------
-require("scripts/globals/hunts")
-mixins = { require("scripts/mixins/job_special") }
+mixins = { require('scripts/mixins/job_special') }
 -----------------------------------
 local entity = {}
 

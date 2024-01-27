@@ -2,9 +2,7 @@
 -- Area: Temenos
 --  Mob: Proto-Ultima
 -----------------------------------
-require("scripts/globals/titles")
-require("scripts/globals/limbus")
-local ID = require("scripts/zones/Temenos/IDs")
+local ID = zones[xi.zone.TEMENOS]
 -----------------------------------
 local entity = {}
 
@@ -21,7 +19,7 @@ entity.onMobFight = function(mob, target)
         return
     end
 
-    local phase = mob:getLocalVar("phase")
+    local phase = mob:getLocalVar('phase')
     if mob:getHPP() < (5 - (phase + 1)) * 20 then
         mob:useMobAbility(1524) -- use Dissipation on phase change
         phase = phase + 1
@@ -39,11 +37,11 @@ entity.onMobFight = function(mob, target)
         elseif phase == 4 then
             mob:setMobMod(xi.mobMod.SKILL_LIST, 1196)
             mob:setMod(xi.mod.REGAIN, 100)
-            mob:setLocalVar("citadelBusterTime", os.time() + math.random(20, 30))
+            mob:setLocalVar('citadelBusterTime', os.time() + math.random(20, 30))
         end
 
-        mob:setLocalVar("phase", phase)
-    elseif phase == 4 and os.time() >= mob:getLocalVar("citadelBusterTime") then
+        mob:setLocalVar('phase', phase)
+    elseif phase == 4 and os.time() >= mob:getLocalVar('citadelBusterTime') then
         mob:setMobAbilityEnabled(false)
         mob:setMagicCastingEnabled(false)
         mob:setAutoAttackEnabled(false)
@@ -93,7 +91,7 @@ entity.executeCitadelBusterState = function(mob)
         return
     end
 
-    local state = mob:getLocalVar("citadelBusterState")
+    local state = mob:getLocalVar('citadelBusterState')
     local battlefield = mob:getBattlefield()
     local players = battlefield:getPlayers()
 
@@ -103,18 +101,18 @@ entity.executeCitadelBusterState = function(mob)
     elseif state == 8 then
         mob:useMobAbility(1540)
     else
-        mob:setLocalVar("citadelBusterState", 0)
+        mob:setLocalVar('citadelBusterState', 0)
         mob:setMagicCastingEnabled(true)
         mob:setAutoAttackEnabled(true)
         mob:setMobAbilityEnabled(true)
         mob:setMobMod(xi.mobMod.DRAW_IN, 0)
         -- Use Citadel Buster at a regular interval
-        mob:setLocalVar("citadelBusterTime", os.time() + math.random(90, 100))
+        mob:setLocalVar('citadelBusterTime', os.time() + math.random(90, 100))
         return
     end
 
     state = state + 1
-    mob:setLocalVar("citadelBusterState", state)
+    mob:setLocalVar('citadelBusterState', state)
     mob:timer(citadelBusterTimers[state], function(mobArg)
         entity.executeCitadelBusterState(mobArg)
     end)

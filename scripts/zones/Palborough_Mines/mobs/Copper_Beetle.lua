@@ -3,8 +3,7 @@
 --  Mob: Copper Beetle
 -- Note: PH for Bu'Ghi Howlblade
 -----------------------------------
-local ID = require("scripts/zones/Palborough_Mines/IDs")
-require("scripts/globals/mobs")
+local ID = zones[xi.zone.PALBOROUGH_MINES]
 -----------------------------------
 local entity = {}
 

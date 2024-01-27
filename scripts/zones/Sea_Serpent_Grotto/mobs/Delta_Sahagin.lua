@@ -3,9 +3,7 @@
 --  Mob: Delta Sahagin
 -- Note: PH for Zuug the Shoreleaper
 -----------------------------------
-local ID = require("scripts/zones/Sea_Serpent_Grotto/IDs")
-require("scripts/globals/regimes")
-require("scripts/globals/mobs")
+local ID = zones[xi.zone.SEA_SERPENT_GROTTO]
 -----------------------------------
 local entity = {}
 

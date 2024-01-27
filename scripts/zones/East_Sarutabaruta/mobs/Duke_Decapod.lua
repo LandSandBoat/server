@@ -2,8 +2,6 @@
 -- Area: East Sarutabaruta (116)
 --   NM: Duke Decapod
 -----------------------------------
-require("scripts/globals/hunts")
------------------------------------
 local entity = {}
 
 entity.onMobSpawn = function(mob)
@@ -11,11 +9,11 @@ entity.onMobSpawn = function(mob)
 end
 
 entity.onMobFight = function(mob, target)
-    local castTime = mob:getLocalVar("dukeWater")
+    local castTime = mob:getLocalVar('dukeWater')
 
     if os.time() > castTime then
         mob:castSpell(169, target)
-        mob:setLocalVar("dukeWater", os.time() + 10)
+        mob:setLocalVar('dukeWater', os.time() + 10)
     end
 end
 

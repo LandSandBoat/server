@@ -5,12 +5,7 @@
 -- Clarion Star : !pos 81.478 7.500 -24.169 236
 -- Naji         : !pos 64 -14 -4 237
 -----------------------------------
-require('scripts/globals/interaction/quest')
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
-require('scripts/globals/titles')
------------------------------------
-local metalworksID = require('scripts/zones/Metalworks/IDs')
+local metalworksID = zones[xi.zone.METALWORKS]
 -----------------------------------
 
 local quest = Quest:new(xi.quest.log_id.BASTOK, xi.quest.id.bastok.TRUST_BASTOK)

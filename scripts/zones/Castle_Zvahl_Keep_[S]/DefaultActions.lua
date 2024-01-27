@@ -1,4 +1,4 @@
-local ID = require("scripts/zones/Castle_Zvahl_Keep_[S]/IDs")
+-- local ID = zones[xi.zone.CASTLE_ZVAHL_KEEP_S]
 
 return {
     ['Rakke'] = { event = 29 },

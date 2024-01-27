@@ -1,9 +1,6 @@
 -----------------------------------
 -- Zone: Full_Moon_Fountain (170)
 -----------------------------------
-local ID = require('scripts/zones/Full_Moon_Fountain/IDs')
-require('scripts/globals/conquest')
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
@@ -24,9 +21,9 @@ zoneObject.onZoneIn = function(player, prevZone)
 end
 
 zoneObject.afterZoneIn = function(player)
-    player:entityVisualPacket("kilk")
-    player:entityVisualPacket("izum")
-    player:entityVisualPacket("hast")
+    player:entityVisualPacket('kilk')
+    player:entityVisualPacket('izum')
+    player:entityVisualPacket('hast')
 end
 
 zoneObject.onConquestUpdate = function(zone, updatetype, influence, owner, ranking, isConquestAlliance)

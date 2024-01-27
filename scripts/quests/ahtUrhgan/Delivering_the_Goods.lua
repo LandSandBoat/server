@@ -4,16 +4,12 @@
 -- Qutiba, Whitegate, !pos 92 -7.5 -130 50
 -- Ulamaal, Whitegate, !pos 93 -7.5 -128 50
 -----------------------------------
-require('scripts/globals/quests')
-require('scripts/globals/npc_util')
-require('scripts/globals/interaction/quest')
------------------------------------
 
 local quest = Quest:new(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.DELIVERING_THE_GOODS)
 
 quest.reward =
 {
-    item = { { xi.items.IMPERIAL_BRONZE_PIECE, 3 } }
+    item = { { xi.item.IMPERIAL_BRONZE_PIECE, 3 } }
 }
 
 quest.sections =
@@ -115,7 +111,7 @@ quest.sections =
             {
                 [41] = function(player, csid, option, npc)
                     if quest:complete(player) then
-                        player:setVar("Quest[6][62]Stage", getMidnight())
+                        player:setVar('Quest[6][62]Stage', getMidnight())
 
                         -- Player must zone before being able to flag the next quest
                         player:setLocalVar('Quest[6][62]mustZone', 1)

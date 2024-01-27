@@ -3,9 +3,7 @@
 --  Mob: Mandragora
 -- Note: PH for Tom Tit Tat
 -----------------------------------
-local ID = require("scripts/zones/West_Sarutabaruta/IDs")
-require("scripts/globals/regimes")
-require("scripts/globals/mobs")
+local ID = zones[xi.zone.WEST_SARUTABARUTA]
 -----------------------------------
 local entity = {}
 

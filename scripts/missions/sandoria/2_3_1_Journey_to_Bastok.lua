@@ -7,11 +7,6 @@
 -- Pius            : !pos 99 -21 -12 237
 -- Savae E Paleade : !pos 23.724 -17.39 -43.360 237
 -----------------------------------
-require('scripts/globals/missions')
-require('scripts/globals/npc_util')
-require('scripts/globals/interaction/mission')
-require('scripts/globals/titles')
------------------------------------
 
 local mission = Mission:new(xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.JOURNEY_TO_BASTOK)
 
@@ -35,7 +30,7 @@ mission.sections =
                         return mission:progressEvent(425)
                     elseif missionStatus == 4 then
                         return mission:progressEvent(423)
-                    elseif missionStatus == 5 and not player:hasItem(xi.items.ONZ_OF_MYTHRIL_SAND) then
+                    elseif missionStatus == 5 and not player:hasItem(xi.item.ONZ_OF_MYTHRIL_SAND) then
                         return mission:progressEvent(424)
                     else
                         return mission:progressEvent(422)
@@ -61,7 +56,7 @@ mission.sections =
                 onTrade = function(player, npc, trade)
                     if
                         player:getMissionStatus(mission.areaId) == 5 and
-                        npcUtil.tradeHasExactly(trade, xi.items.ONZ_OF_MYTHRIL_SAND)
+                        npcUtil.tradeHasExactly(trade, xi.item.ONZ_OF_MYTHRIL_SAND)
                     then
                         return mission:progressEvent(205)
                     end
@@ -83,7 +78,7 @@ mission.sections =
                 end,
 
                 [423] = function(player, csid, option, npc)
-                    if not npcUtil.giveItem(player, { { xi.items.PICKAXE, 5 } }) then
+                    if not npcUtil.giveItem(player, { { xi.item.PICKAXE, 5 } }) then
                         mission:setVar(player, 'Option', 1)
                     else
                         player:setMissionStatus(mission.areaId, 5)
@@ -91,7 +86,7 @@ mission.sections =
                 end,
 
                 [425] = function(player, csid, option, npc)
-                    if npcUtil.giveItem(player, { { xi.items.PICKAXE, 5 } }) then
+                    if npcUtil.giveItem(player, { { xi.item.PICKAXE, 5 } }) then
                         player:setMissionStatus(mission.areaId, 5)
                         mission:setVar(player, 'Option', 0)
                     end

@@ -4,9 +4,7 @@
 -- Type: Cooking Guild Master
 -- !pos -124.012 -2.999 59.998 238
 -----------------------------------
-local ID = require("scripts/zones/Windurst_Waters/IDs")
-require("scripts/globals/crafting")
-require("scripts/globals/roe")
+local ID = zones[xi.zone.WINDURST_WATERS]
 -----------------------------------
 local entity = {}
 
@@ -16,21 +14,21 @@ entity.onTrade = function(player, npc, trade)
 
     if
         newRank > 9 and
-        player:getCharVar("CookingExpertQuest") == 1 and
+        player:getCharVar('CookingExpertQuest') == 1 and
         player:hasKeyItem(xi.keyItem.WAY_OF_THE_CULINARIAN)
     then
         if signed ~= 0 then
             player:setSkillRank(xi.skill.COOKING, newRank)
             player:startEvent(10014, 0, 0, 0, 0, newRank, 1)
-            player:setCharVar("CookingExpertQuest", 0)
-            player:setLocalVar("CookingTraded", 1)
+            player:setCharVar('CookingExpertQuest', 0)
+            player:setLocalVar('CookingTraded', 1)
         else
             player:startEvent(10014, 0, 0, 0, 0, newRank, 0)
         end
     elseif newRank ~= 0 and newRank <= 9 then
         player:setSkillRank(xi.skill.COOKING, newRank)
         player:startEvent(10014, 0, 0, 0, 0, newRank)
-        player:setLocalVar("CookingTraded", 1)
+        player:setLocalVar('CookingTraded', 1)
     end
 end
 
@@ -47,7 +45,7 @@ entity.onTrigger = function(player, npc)
         return
     end
 
-    if player:getCharVar("CookingExpertQuest") == 1 then
+    if player:getCharVar('CookingExpertQuest') == 1 then
         if player:hasKeyItem(xi.keyItem.WAY_OF_THE_CULINARIAN) then
             expertQuestStatus = 768
         else
@@ -72,7 +70,7 @@ end
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 10013 and option == 2 then
         if xi.crafting.hasJoinedGuild(player, xi.crafting.guild.COOKING) then
-            player:setCharVar("CookingExpertQuest", 1)
+            player:setCharVar('CookingExpertQuest', 1)
         end
     elseif csid == 10013 and option == 1 then
         local crystal = 4096 -- fire crystal
@@ -84,9 +82,9 @@ entity.onEventFinish = function(player, csid, option, npc)
             xi.crafting.signupGuild(player, xi.crafting.guild.COOKING)
         end
     else
-        if player:getLocalVar("CookingTraded") == 1 then
+        if player:getLocalVar('CookingTraded') == 1 then
             player:tradeComplete()
-            player:setLocalVar("CookingTraded", 0)
+            player:setLocalVar('CookingTraded', 0)
         end
     end
 

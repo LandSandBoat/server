@@ -6,12 +6,7 @@
 -- Velkk Cache     : !pos 278.126 -0.378 -80.672 266
 -- Scalable Area 2 : !pos 271.483 -59.917 92.095 266
 -----------------------------------
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
-require('scripts/globals/titles')
-require('scripts/globals/interaction/quest')
------------------------------------
-local marjamiID = require("scripts/zones/Marjami_Ravine/IDs")
+local marjamiID = zones[xi.zone.MARJAMI_RAVINE]
 -----------------------------------
 
 local quest = Quest:new(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.HIDE_AND_GO_PEAK)

@@ -1,14 +1,9 @@
 -----------------------------------
 -- Area: Western Adoulin
 --  NPC: Westerly Breeze
--- Type: Standard NPC and Quest Giver
--- Starts, Involved with, and Finishes Quests: 'Hunger Strikes'
---                                             'The Starving'
---                                             'Always More, Quoth the Ravenous'
 -- !pos 62 32 123 256
 -----------------------------------
-require("scripts/globals/quests")
-local ID = require("scripts/zones/Western_Adoulin/IDs")
+local ID = zones[xi.zone.WESTERN_ADOULIN]
 -----------------------------------
 local entity = {}
 
@@ -23,7 +18,7 @@ entity.onTrade = function(player, npc, trade)
         if ahCategory >= 52 and ahCategory <= 57 then
             -- We traded him a food item
             if
-                player:getCharVar("ATWTTB_Can_Trade_Gruel") == 1 and
+                player:getCharVar('ATWTTB_Can_Trade_Gruel') == 1 and
                 (itemId == 4489 or itemId == 4534)
             then
                 if itemId == 4489 then
@@ -60,7 +55,7 @@ entity.onTrigger = function(player, npc)
 
     if
         player:getFameLevel(xi.quest.fame_area.ADOULIN) >= 2 and
-        not player:needToZone() and VanadielUniqueDay() > player:getCharVar("Westerly_Breeze_Wait")
+        not player:needToZone() and VanadielUniqueDay() > player:getCharVar('Westerly_Breeze_Wait')
     then
         if
             amqtr ~= QUEST_COMPLETED and
@@ -92,22 +87,20 @@ entity.onEventFinish = function(player, csid, option, npc)
         player:addCurrency('bayld', 1000 * xi.settings.main.BAYLD_RATE)
         player:messageSpecial(ID.text.BAYLD_OBTAINED, 1000 * xi.settings.main.BAYLD_RATE)
         player:addFame(xi.quest.fame_area.ADOULIN)
-        player:setCharVar("Westerly_Breeze_Wait", 0)
+        player:setCharVar('Westerly_Breeze_Wait', 0)
     elseif csid == 3014 then
         -- Consuming wrong food item given to him during his quests
         player:tradeComplete()
     elseif csid == 5068 then
         -- Trading him gruel after Quest: 'All The Way To The Bank'
         player:tradeComplete()
-        local gilObtained = 0
+        local gilObtained = 19716
         if option == 1 then
             gilObtained = 39432
-        else
-            gilObtained = 19716
         end
 
         npcUtil.giveCurrency(player, 'gil', gilObtained)
-        player:setCharVar("ATWTTB_Can_Trade_Gruel", 0)
+        player:setCharVar('ATWTTB_Can_Trade_Gruel', 0)
     end
 end
 

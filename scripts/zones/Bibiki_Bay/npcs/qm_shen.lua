@@ -4,14 +4,14 @@
 -- Note: Used to spawn Shen
 -- !pos -115.108 0.300 -724.664 4
 -----------------------------------
-require('scripts/globals/npc_util')
+local ID = zones[xi.zone.BIBIKI_BAY]
 -----------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    local shenId = player:getZone():queryEntitiesByName("Shen")[1]:getID()
+    local shenId = player:getZone():queryEntitiesByName('Shen')[1]:getID()
     if
-        npcUtil.tradeHasExactly(trade, xi.items.SHRIMP_LANTERN) and
+        npcUtil.tradeHasExactly(trade, xi.item.SHRIMP_LANTERN) and
         npcUtil.popFromQM(player, npc, shenId)
     then
         player:confirmTrade()

@@ -22,10 +22,6 @@
 -- 602 = Expansion increased
 -- 4th arg = new size of locker
 -----------------------------------
-require("scripts/globals/quests")
-require("scripts/globals/missions")
-require("scripts/globals/moghouse")
------------------------------------
 local entity = {}
 
 local function getNumberOfCoinsToUpgradeSize(size)
@@ -45,9 +41,9 @@ local function getNumberOfCoinsToUpgradeSize(size)
 end
 
 entity.onTrade = function(player, npc, trade)
-    local numBronze = trade:getItemQty(xi.items.IMPERIAL_BRONZE_PIECE)
-    local numMythril = trade:getItemQty(xi.items.IMPERIAL_MYTHRIL_PIECE)
-    local numGold = trade:getItemQty(xi.items.IMPERIAL_GOLD_PIECE)
+    local numBronze = trade:getItemQty(xi.item.IMPERIAL_BRONZE_PIECE)
+    local numMythril = trade:getItemQty(xi.item.IMPERIAL_MYTHRIL_PIECE)
+    local numGold = trade:getItemQty(xi.item.IMPERIAL_GOLD_PIECE)
     if player:getCurrentMission(xi.mission.log_id.TOAU) >= xi.mission.id.toau.PRESIDENT_SALAHEEM then
         if numBronze > 0 and numMythril == 0 and numGold == 0 then
             if xi.moghouse.addMogLockerExpiryTime(player, numBronze) then
@@ -119,7 +115,7 @@ entity.onEventFinish = function(player, csid, option, npc)
             -- they want to expand their access to all areas.
             xi.moghouse.setMogLockerAccessType(player, xi.moghouse.lockerAccessType.ALLAREAS)
         else
-            print("Unknown mog locker access type: "..accessType)
+            print('Unknown mog locker access type: '..accessType)
         end
     end
 end

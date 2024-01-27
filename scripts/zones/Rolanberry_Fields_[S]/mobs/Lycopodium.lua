@@ -2,9 +2,8 @@
 -- Area: Rolanberry Fields [S]
 --  Mob: Lycopodium
 -----------------------------------
-mixins = { require("scripts/mixins/families/lycopodium") }
+mixins = { require('scripts/mixins/families/lycopodium') }
 -----------------------------------
-
 local entity = {}
 
 entity.onMobInitialize = function(mob)

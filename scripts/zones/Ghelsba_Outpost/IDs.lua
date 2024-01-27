@@ -12,20 +12,20 @@ zones[xi.zone.GHELSBA_OUTPOST] =
         UNABLE_TO_PROTECT                = 218,  -- You were unable to protect the special character. Now leaving the battlefield.
         PARTY_MEMBERS_HAVE_FALLEN        = 509,  -- All party members have fallen in battle. Now leaving the battlefield.
         THE_PARTY_WILL_BE_REMOVED        = 516,  -- If all party members' HP are still zero after # minute[/s], the party will be removed from the battlefield.
-        ITEM_CANNOT_BE_OBTAINED          = 6914, -- You cannot obtain the <item>. Come back after sorting your inventory.
-        ITEM_OBTAINED                    = 6920, -- Obtained: <item>.
-        GIL_OBTAINED                     = 6921, -- Obtained <number> gil.
-        KEYITEM_OBTAINED                 = 6923, -- Obtained key item: <keyitem>.
-        NOTHING_OUT_OF_ORDINARY          = 6934, -- There is nothing out of the ordinary here.
-        FELLOW_MESSAGE_OFFSET            = 6949, -- I'm ready. I suppose.
-        CARRIED_OVER_POINTS              = 7531, -- You have carried over <number> login point[/s].
-        LOGIN_CAMPAIGN_UNDERWAY          = 7532, -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!
-        LOGIN_NUMBER                     = 7533, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
-        MEMBERS_LEVELS_ARE_RESTRICTED    = 7553, -- Your party is unable to participate because certain members' levels are restricted.
-        FISHING_MESSAGE_OFFSET           = 7590, -- You can't fish here.
-        HUT_DOOR                         = 7724, -- This looks like an Orcish dwelling. The door is firmly shut.
-        LOGGING_IS_POSSIBLE_HERE         = 7751, -- Logging is possible here if you have <item>.
-        YOU_CAN_NOW_BECOME_A_DRAGOON     = 7791, -- You can now become a dragoon!
+        ITEM_CANNOT_BE_OBTAINED          = 6916, -- You cannot obtain the <item>. Come back after sorting your inventory.
+        ITEM_OBTAINED                    = 6922, -- Obtained: <item>.
+        GIL_OBTAINED                     = 6923, -- Obtained <number> gil.
+        KEYITEM_OBTAINED                 = 6925, -- Obtained key item: <keyitem>.
+        NOTHING_OUT_OF_ORDINARY          = 6936, -- There is nothing out of the ordinary here.
+        FELLOW_MESSAGE_OFFSET            = 6951, -- I'm ready. I suppose.
+        CARRIED_OVER_POINTS              = 7533, -- You have carried over <number> login point[/s].
+        LOGIN_CAMPAIGN_UNDERWAY          = 7534, -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!
+        LOGIN_NUMBER                     = 7535, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
+        MEMBERS_LEVELS_ARE_RESTRICTED    = 7555, -- Your party is unable to participate because certain members' levels are restricted.
+        FISHING_MESSAGE_OFFSET           = 7593, -- You can't fish here.
+        HUT_DOOR                         = 7727, -- This looks like an Orcish dwelling. The door is firmly shut.
+        LOGGING_IS_POSSIBLE_HERE         = 7754, -- Logging is possible here if you have <item>.
+        YOU_CAN_NOW_BECOME_A_DRAGOON     = 7794, -- You can now become a dragoon!
     },
     mob =
     {
@@ -44,13 +44,7 @@ zones[xi.zone.GHELSBA_OUTPOST] =
     },
     npc =
     {
-        LOGGING =
-        {
-            17350974,
-            17350975,
-            17350976,
-            17350977,
-        },
+        LOGGING = GetTableOfIDs('Logging_Point'),
     },
 }
 

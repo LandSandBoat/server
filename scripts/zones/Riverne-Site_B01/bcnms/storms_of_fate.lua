@@ -3,10 +3,7 @@
 -- Name: Storms of Fate
 -- !pos 299 -123 345 146
 -----------------------------------
-local ID = require("scripts/zones/Riverne-Site_B01/IDs")
-require("scripts/globals/battlefield")
-require("scripts/globals/quests")
-require("scripts/globals/titles")
+local ID = zones[xi.zone.RIVERNE_SITE_B01]
 -----------------------------------
 local battlefieldObject = {}
 
@@ -24,7 +21,7 @@ battlefieldObject.onBattlefieldLeave = function(player, battlefield, leavecode)
     if leavecode == xi.battlefield.leaveCode.WON then
         local _, clearTime, partySize = battlefield:getRecord()
         local arg8 = (player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.STORMS_OF_FATE) == QUEST_COMPLETED) and 1 or 0
-        player:startEvent(32001, battlefield:getArea(), clearTime, partySize, battlefield:getTimeInside(), 1, battlefield:getLocalVar("[cs]bit"), arg8)
+        player:startEvent(32001, battlefield:getArea(), clearTime, partySize, battlefield:getTimeInside(), 1, battlefield:getLocalVar('[cs]bit'), arg8)
     elseif leavecode == xi.battlefield.leaveCode.LOST then
         player:startEvent(32002)
     end

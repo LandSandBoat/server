@@ -3,18 +3,14 @@
 -----------------------------------
 -- Log ID: 3, Quest ID: 131
 -- Maat : !pos 8 3 118 243
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
-require('scripts/globals/titles')
-require('scripts/globals/interaction/quest')
 -----------------------------------
-local ruludeID = require('scripts/zones/RuLude_Gardens/IDs')
+local ruludeID = zones[xi.zone.RULUDE_GARDENS]
 -----------------------------------
 
 local quest = Quest:new(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.RIDING_ON_THE_CLOUDS)
 
 local function handleSandoriaTrade(player, npc, trade)
-    if npcUtil.tradeHasExactly(trade, xi.items.KINDREDS_SEAL) then
+    if npcUtil.tradeHasExactly(trade, xi.item.KINDREDS_SEAL) then
         quest:setVar(player, 'npcSandoria', 8)
         player:confirmTrade()
         npcUtil.giveKeyItem(player, xi.ki.SCOWLING_STONE)
@@ -22,7 +18,7 @@ local function handleSandoriaTrade(player, npc, trade)
 end
 
 local function handleBastokTrade(player, npc, trade)
-    if npcUtil.tradeHasExactly(trade, xi.items.KINDREDS_SEAL) then
+    if npcUtil.tradeHasExactly(trade, xi.item.KINDREDS_SEAL) then
         quest:setVar(player, 'npcBastok', 8)
         player:confirmTrade()
         npcUtil.giveKeyItem(player, xi.ki.SMILING_STONE)
@@ -30,7 +26,7 @@ local function handleBastokTrade(player, npc, trade)
 end
 
 local function handleWindurstTrade(player, npc, trade)
-    if npcUtil.tradeHasExactly(trade, xi.items.KINDREDS_SEAL) then
+    if npcUtil.tradeHasExactly(trade, xi.item.KINDREDS_SEAL) then
         quest:setVar(player, 'npcWindurst', 8)
         player:confirmTrade()
         npcUtil.giveKeyItem(player, xi.ki.SPIRITED_STONE)
@@ -38,7 +34,7 @@ local function handleWindurstTrade(player, npc, trade)
 end
 
 local function handleOtherlandsTrade(player, npc, trade)
-    if npcUtil.tradeHasExactly(trade, xi.items.KINDREDS_SEAL) then
+    if npcUtil.tradeHasExactly(trade, xi.item.KINDREDS_SEAL) then
         quest:setVar(player, 'npcOtherlands', 8)
         player:confirmTrade()
         npcUtil.giveKeyItem(player, xi.ki.SOMBER_STONE)

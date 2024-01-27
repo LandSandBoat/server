@@ -1,10 +1,7 @@
 -----------------------------------
 -- Zone: Quicksand_Caves (208)
 -----------------------------------
-local ID = require('scripts/zones/Quicksand_Caves/IDs')
-require('scripts/globals/conquest')
-require('scripts/globals/npc_util')
-require('scripts/globals/treasure')
+local ID = zones[xi.zone.QUICKSAND_CAVES]
 -----------------------------------
 local zoneObject = {}
 
@@ -33,7 +30,7 @@ zoneObject.onInitialize = function(zone)
 
     xi.treasure.initZone(zone)
 
-    npcUtil.UpdateNPCSpawnPoint(ID.npc.ANTICAN_TAG_QM, 60, 120, ID.npc.ANTICAN_TAG_POSITIONS, "[POP]Antican_Tag")
+    npcUtil.UpdateNPCSpawnPoint(ID.npc.ANTICAN_TAG_QM, 60, 120, ID.npc.ANTICAN_TAG_POSITIONS, '[POP]Antican_Tag')
 end
 
 zoneObject.onConquestUpdate = function(zone, updatetype, influence, owner, ranking, isConquestAlliance)
@@ -99,19 +96,19 @@ zoneObject.onTriggerAreaEnter = function(player, triggerArea)
         local door = GetNPCByID(ID.npc.ORNATE_DOOR_OFFSET + triggerAreaID - 1)
         local plate = GetNPCByID(ID.npc.ORNATE_DOOR_OFFSET + triggerAreaID)
 
-        local totalWeight = plate:getLocalVar("weight")
+        local totalWeight = plate:getLocalVar('weight')
         if player then
             totalWeight = totalWeight + getWeight(player)
-            plate:setLocalVar("weight", totalWeight)
+            plate:setLocalVar('weight', totalWeight)
         end
 
         if
             totalWeight >= 3 and
-            plate:getLocalVar("opening") == 0 and
+            plate:getLocalVar('opening') == 0 and
             door:getAnimation() == xi.anim.CLOSE_DOOR
         then
-            SendEntityVisualPacket(plate:getID(), "unlc") -- Play the light animation
-            plate:setLocalVar("opening", 1)
+            SendEntityVisualPacket(plate:getID(), 'unlc') -- Play the light animation
+            plate:setLocalVar('opening', 1)
 
             -- wait 5 seconds to open the door
             door:timer(5000, function(doorArg)
@@ -120,10 +117,10 @@ zoneObject.onTriggerAreaEnter = function(player, triggerArea)
 
             -- allow door to retrigger 17 seconds from now
             plate:timer(17000, function(plateArg)
-                plateArg:setLocalVar("opening", 0)
+                plateArg:setLocalVar('opening', 0)
 
                 -- retrigger if weight is still enough to do so
-                if plateArg:getLocalVar("weight") >= 3 then
+                if plateArg:getLocalVar('weight') >= 3 then
                     -- retrigger, with nil as player arg, player is not necessary to re-open the door if weight is >= 3.
                     zoneObject.onTriggerAreaEnter(nil, triggerArea)
                 end
@@ -138,9 +135,9 @@ zoneObject.onTriggerAreaLeave = function(player, triggerArea)
     if triggerAreaID < 30 then
         local plate = GetNPCByID(ID.npc.ORNATE_DOOR_OFFSET + triggerAreaID)
 
-        local totalWeight = plate:getLocalVar("weight")
+        local totalWeight = plate:getLocalVar('weight')
         totalWeight = totalWeight - getWeight(player)
-        plate:setLocalVar("weight", totalWeight)
+        plate:setLocalVar('weight', totalWeight)
     end
 end
 

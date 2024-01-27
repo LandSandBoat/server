@@ -1,8 +1,7 @@
 -----------------------------------
 -- Zone: Ranguemont Pass (166)
 -----------------------------------
-local ID = require('scripts/zones/Ranguemont_Pass/IDs')
-require('scripts/globals/conquest')
+local ID = zones[xi.zone.RANGUEMONT_PASS]
 -----------------------------------
 local zoneObject = {}
 
@@ -11,8 +10,8 @@ zoneObject.onInitialize = function(zone)
     local phIndex = math.random(1, 3)
     local ph = GetMobByID(ID.mob.TAISAIJIN_PH[phIndex])
 
-    ph:setLocalVar("timeToGrow", os.time() + math.random(86400, 259200)) -- 1 to 3 days
-    ph:setLocalVar("phIndex", phIndex)
+    ph:setLocalVar('timeToGrow', os.time() + math.random(86400, 259200)) -- 1 to 3 days
+    ph:setLocalVar('phIndex', phIndex)
 end
 
 zoneObject.onConquestUpdate = function(zone, updatetype, influence, owner, ranking, isConquestAlliance)

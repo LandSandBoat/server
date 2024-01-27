@@ -3,9 +3,8 @@
 --  Mob: Sea Puk
 -- Note: Place holder Nis Puk
 -----------------------------------
-local ID = require("scripts/zones/Bhaflau_Thickets/IDs")
-mixins = { require("scripts/mixins/families/puk") }
-require("scripts/globals/mobs")
+local ID = zones[xi.zone.BHAFLAU_THICKETS]
+mixins = { require('scripts/mixins/families/puk') }
 -----------------------------------
 local entity = {}
 

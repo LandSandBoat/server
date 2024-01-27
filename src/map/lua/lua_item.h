@@ -51,12 +51,15 @@ public:
     uint8  getLocationID(); // get the location id (container id)
     uint8  getSlotID();     // get the slot id
     uint16 getTrialNumber();
-    auto   getMatchingTrials() -> sol::table; // returns a table of trial #'s which match this item precisely
-    uint8  getWornUses();                     // check if the item has been used
-    uint32 getBasePrice();                    // get the base sell price
+    uint8  getWornUses();  // check if the item has been used
+    uint32 getBasePrice(); // get the base sell price
 
-    bool isType(uint8 type);       // check the item type
-    bool isSubType(uint8 subtype); // check the item's sub type
+    bool isType(uint8 type);        // check the item type
+    void setSubType(uint8 subtype); // set the item's sub type
+    bool isSubType(uint8 subtype);  // check the item's sub type
+
+    void  setReservedValue(uint8 reserved); // set the item's reserved value
+    uint8 getReservedValue();               // get the item's reserved value
 
     auto   getName() -> std::string; // get the item's name
     uint16 getILvl();                // get the item's ilvl
@@ -66,7 +69,7 @@ public:
     void  addMod(uint16 modID, int16 power); // add mod to item (or add to a mod already applied on item)
     void  delMod(uint16 modID, int16 power); // remove power from mod
 
-    auto getAugment(uint8 slot) -> std::tuple<uint16, uint8>; // get the augment id and power in slot
+    auto getAugment(uint8 slot) -> sol::table; // get the augment id and power in slot
     // int32 setAugment(lua_State*);           // set the augment id and power in slot
 
     uint8  getSkillType();         // get skill type
@@ -88,6 +91,11 @@ public:
 
     auto getExData() -> sol::table;            // NOTE: This is 0-indexed, to be in line with the underlying C++ data
     void setExData(sol::table const& newData); // NOTE: This is 0-indexed, to be in line with the underlying C++ data
+
+    bool operator==(const CLuaItem& other) const
+    {
+        return this->m_PLuaItem == other.m_PLuaItem;
+    }
 
     static void Register();
 };

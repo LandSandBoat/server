@@ -2,8 +2,7 @@
 -- Area: Fei'Yin
 --   NM: Capricious Cassie
 -----------------------------------
-mixins = { require("scripts/mixins/rage") }
-require("scripts/globals/titles")
+mixins = { require('scripts/mixins/rage') }
 -----------------------------------
 local entity = {}
 

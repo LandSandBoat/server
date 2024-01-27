@@ -5,11 +5,7 @@
 -- Oggbi : !pos -159 -7 5 236
 -- qm4   : !pos -174 0 369 196
 -----------------------------------
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
-require('scripts/globals/interaction/quest')
------------------------------------
-local gusgenMinesID = require('scripts/zones/Gusgen_Mines/IDs')
+local gusgenMinesID = zones[xi.zone.GUSGEN_MINES]
 -----------------------------------
 
 local quest = Quest:new(xi.quest.log_id.BASTOK, xi.quest.id.bastok.GHOSTS_OF_THE_PAST)
@@ -18,7 +14,7 @@ quest.reward =
 {
     fame     = 20,
     fameArea = xi.quest.fame_area.BASTOK,
-    item     = xi.items.BEAT_CESTI,
+    item     = xi.item.BEAT_CESTI,
 }
 
 quest.sections =
@@ -54,8 +50,8 @@ quest.sections =
             {
                 onTrade = function(player, npc, trade)
                     if
-                        npcUtil.tradeHasExactly(trade, xi.items.PICKAXE) and
-                        not player:hasItem(xi.items.MINERS_PENDANT) and
+                        npcUtil.tradeHasExactly(trade, xi.item.PICKAXE) and
+                        not player:hasItem(xi.item.MINERS_PENDANT) and
                         not GetMobByID(gusgenMinesID.mob.WANDERING_GHOST):isSpawned()
                     then
                         player:confirmTrade()
@@ -73,7 +69,7 @@ quest.sections =
             ['Oggbi'] =
             {
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, xi.items.MINERS_PENDANT) then
+                    if npcUtil.tradeHasExactly(trade, xi.item.MINERS_PENDANT) then
                         return quest:progressEvent(232)
                     end
                 end,

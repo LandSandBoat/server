@@ -1,11 +1,7 @@
 -----------------------------------
 -- Area: Western Adoulin
 --  NPC: Bilp
--- Type: Standard NPC and Quest NPC
--- Starts and Involved with Quest: 'Scaredy-Cats'
 -- !pos -91 3 0 256
------------------------------------
-require("scripts/globals/quests")
 -----------------------------------
 local entity = {}
 
@@ -14,7 +10,7 @@ end
 
 entity.onTrigger = function(player, npc)
     local scaredyCats       = player:getQuestStatus(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.SCAREDYCATS)
-    local scaredyCatsStatus = player:getCharVar("Scaredycats_Status")
+    local scaredyCatsStatus = player:getCharVar('Scaredycats_Status')
 
     if scaredyCatsStatus < 1 and scaredyCats == QUEST_AVAILABLE then
         -- Dialogue before seeing the initial walk-in CS with Bilp, Eamonn, and Lhe.
@@ -42,7 +38,7 @@ end
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 5024 and option == 1 then
         -- Starts Quest: 'Scaredy-Cats', after first refusal.
-        player:setCharVar("Scaredycats_Status", 2)
+        player:setCharVar('Scaredycats_Status', 2)
         player:addQuest(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.SCAREDYCATS)
     end
 end

@@ -3,8 +3,6 @@
 --  NPC: Arpevion, T.K.
 -- !pos 105.163 0.000 -52.980 230
 -----------------------------------
-require("scripts/globals/conquest")
------------------------------------
 local entity = {}
 
 local guardNation = xi.nation.SANDORIA

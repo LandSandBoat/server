@@ -47,6 +47,7 @@
 
 #include "charutils.h"
 #include "itemutils.h"
+#include "zone.h"
 #include "zoneutils.h"
 
 namespace synthutils
@@ -96,7 +97,7 @@ namespace synthutils
                 PChar->CraftContainer->setItem(10 + 2, (uint16)sql->GetUIntData(11), (uint8)sql->GetUIntData(15), 0); // RESULT_HQ
                 PChar->CraftContainer->setItem(10 + 3, (uint16)sql->GetUIntData(12), (uint8)sql->GetUIntData(16), 0); // RESULT_HQ2
                 PChar->CraftContainer->setItem(10 + 4, (uint16)sql->GetUIntData(13), (uint8)sql->GetUIntData(17), 0); // RESULT_HQ3
-                PChar->CraftContainer->setCraftType((uint8)sql->GetUIntData(18));                                     // Store if it's a desynth
+                PChar->CraftContainer->setCraftType((uint8)sql->GetUIntData(18));                                     // Store synth type (regular, desynth or "no material loss")
 
                 uint16 skillValue   = 0;
                 uint16 currentSkill = 0;
@@ -225,7 +226,7 @@ namespace synthutils
         // Section 1: Variable definitions.
         //------------------------------
         uint8 synthResult = SYNTHESIS_SUCCESS; // We assume that we succeed.
-        float successRate = 95;                // We assume that success rate is maxed (95%).
+        uint8 successRate = 95;                // We assume that success rate is maxed (95%).
         uint8 finalHQTier = 4;                 // We assume that max HQ tier is available.
         bool  canHQ       = true;              // We assume that we can HQ.
 
@@ -311,7 +312,7 @@ namespace synthutils
                     successRate = successRate + 1; // The crafting rings that block HQ synthesis all also increase their respective craft's success rate by 1%
                 }
 
-                // Clamp success rate to 0.99
+                // Clamp success rate to 99%
                 // https://www.bluegartr.com/threads/120352-CraftyMath
                 // http://www.ffxiah.com/item/5781/kitron-macaron
                 if (successRate > 99)
@@ -319,7 +320,7 @@ namespace synthutils
                     successRate = 99;
                 }
 
-                if (randomRoll > successRate) // Synthesis broke
+                if (randomRoll > successRate) // Synthesis broke. This is not a mistake, the break check HAS to be done per craft skill involved.
                 {
                     // Keep the skill because of which the synthesis failed.
                     // Use the slotID of the crystal cell, because it was removed at the beginning of the synthesis.
@@ -357,12 +358,12 @@ namespace synthutils
 
             if (PChar->CraftContainer->getCraftType() == CRAFT_DESYNTHESIS) // if it's a desynth raise HQ chance
             {
-                chanceHQ = chanceHQ * 1.5;
+                chanceHQ = chanceHQ * 1.5f;
             }
 
             // HQ success rate modifier.
             // See: https://www.bluegartr.com/threads/130586-CraftyMath-v2-Post-September-2017-Update page 3.
-            chanceHQ = chanceHQ + PChar->getMod(Mod::SYNTH_HQ_RATE) / 512;
+            chanceHQ = chanceHQ + 100.0f * PChar->getMod(Mod::SYNTH_HQ_RATE) / 512.0f;
 
             // limit max hq chance
             if (chanceHQ > maxChanceHQ)
@@ -657,7 +658,7 @@ namespace synthutils
      *                                                                         *
      **************************************************************************/
 
-    int32 doSynthFail(CCharEntity* PChar)
+    int32 handleMaterialLoss(CCharEntity* PChar)
     {
         uint8 currentCraft     = PChar->CraftContainer->getInvSlotID(0);
         int16 synthDifficulty  = getSynthDifficulty(PChar, currentCraft);
@@ -729,7 +730,31 @@ namespace synthutils
             }
         }
 
-        if (PChar->loc.zone->GetID() != 255 && PChar->loc.zone->GetID() != 0)
+        return 0;
+    }
+
+    /**************************************************************************
+     *                                                                         *
+     *  Synthesis failed.                                                      *
+     *  Sends messages to characters in range and to yourself.                 *
+     *                                                                         *
+     **************************************************************************/
+
+    int32 doSynthFail(CCharEntity* PChar)
+    {
+        // Break material calculations.
+        if (PChar->CraftContainer->getCraftType() != CRAFT_SYNTHESIS_NO_LOSS) // If it's a synth where no materials can be lost, skip break calculations.
+        {
+            handleMaterialLoss(PChar);
+        }
+
+        // Push "Synthesis failed" messages.
+        uint16 currentZone = PChar->loc.zone->GetID();
+
+        if (currentZone &&
+            currentZone != ZONE_MONORAIL_PRE_RELEASE &&
+            currentZone != ZONE_49 &&
+            currentZone < MAX_ZONEID)
         {
             PChar->loc.zone->PushPacket(PChar, CHAR_INRANGE, new CSynthResultMessagePacket(PChar, SYNTH_FAIL));
         }

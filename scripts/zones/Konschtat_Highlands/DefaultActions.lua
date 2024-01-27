@@ -1,4 +1,4 @@
-local ID = require("scripts/zones/Konschtat_Highlands/IDs")
+local ID = zones[xi.zone.KONSCHTAT_HIGHLANDS]
 
 return {
     ['qm1']                 = { messageSpecial = ID.text.FIND_NOTHING },

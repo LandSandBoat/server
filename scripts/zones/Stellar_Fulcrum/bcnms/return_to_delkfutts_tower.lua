@@ -3,9 +3,6 @@
 -- Name: ZM8 Return to Delkfutt's Tower
 -- !pos -520 -4 17 179
 -----------------------------------
-require("scripts/globals/battlefield")
-require("scripts/globals/missions")
------------------------------------
 local battlefieldObject = {}
 
 battlefieldObject.onBattlefieldTick = function(battlefield, tick)
@@ -23,11 +20,11 @@ battlefieldObject.onBattlefieldLeave = function(player, battlefield, leavecode)
         local _, clearTime, partySize = battlefield:getRecord()
 
         if player:getCurrentMission(xi.mission.log_id.ZILART) == xi.mission.id.zilart.RETURN_TO_DELKFUTTS_TOWER then
-            player:setLocalVar("battlefieldWin", battlefield:getID())
+            player:setLocalVar('battlefieldWin', battlefield:getID())
         end
 
         local arg8 = (player:hasCompletedMission(xi.mission.log_id.ZILART, xi.mission.id.zilart.RETURN_TO_DELKFUTTS_TOWER)) and 1 or 0
-        player:startEvent(32001, battlefield:getArea(), clearTime, partySize, battlefield:getTimeInside(), 1, battlefield:getLocalVar("[cs]bit"), arg8)
+        player:startEvent(32001, battlefield:getArea(), clearTime, partySize, battlefield:getTimeInside(), 1, battlefield:getLocalVar('[cs]bit'), arg8)
     elseif leavecode == xi.battlefield.leaveCode.LOST then
         player:startEvent(32002)
     end

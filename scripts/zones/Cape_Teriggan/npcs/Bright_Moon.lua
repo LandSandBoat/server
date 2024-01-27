@@ -4,9 +4,6 @@
 -- Type: Outpost Vendor
 -- !pos -185 7 -63 113
 -----------------------------------
-require("scripts/globals/conquest")
-require("scripts/globals/shop")
------------------------------------
 local entity = {}
 
 local vendorRegion  = xi.region.VOLLBOW

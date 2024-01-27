@@ -3,14 +3,13 @@
 --  NPC: ??? (Sacrificial Goblet NM)
 -- !pos 300 1 255 159
 -----------------------------------
-local ID = require("scripts/zones/Temple_of_Uggalepih/IDs")
-require("scripts/globals/npc_util")
+local ID = zones[xi.zone.TEMPLE_OF_UGGALEPIH]
 -----------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     if
-        npcUtil.tradeHas(trade, xi.items.UGGALEPIH_WHISTLE) and
+        npcUtil.tradeHas(trade, xi.item.UGGALEPIH_WHISTLE) and
         npcUtil.popFromQM(player, npc, ID.mob.SACRIFICIAL_GOBLET, { hide = 0 })
     then
         player:confirmTrade()

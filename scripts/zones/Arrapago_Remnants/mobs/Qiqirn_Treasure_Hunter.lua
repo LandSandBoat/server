@@ -2,9 +2,7 @@
 -- Area: Arrapago Remnants
 --  Mob: Qiqirn Treasure Hunter
 -----------------------------------
-require("scripts/globals/mobskills")
-require("scripts/globals/pathfind")
-local ID = require("scripts/zones/Arrapago_Remnants/IDs")
+local ID = zones[xi.zone.ARRAPAGO_REMNANTS]
 -----------------------------------
 local entity = {}
 
@@ -21,7 +19,7 @@ end
 
 entity.onMobEngaged = function(mob, target)
     if target:isPC() or target:isPet() then
-        mob:setLocalVar("runTime", os.time())
+        mob:setLocalVar('runTime', os.time())
     end
 end
 
@@ -31,8 +29,8 @@ entity.onMobFight = function(mob, target)
     local instance = mob:getInstance()
     -- local stage = instance:getStage()
     -- local prog = instance:getProgress()
-    local runTime = mob:getLocalVar("runTime")
-    local popTime = mob:getLocalVar("popTime")
+    local runTime = mob:getLocalVar('runTime')
+    local popTime = mob:getLocalVar('popTime')
     local mobPos  = mob:getPos()
     local mobPet  = GetMobByID((mob:getID() + 1), instance)
 
@@ -41,13 +39,13 @@ entity.onMobFight = function(mob, target)
     -- end
 
     if not mob:isFollowingPath() and (os.time() - runTime > 20) then
-        mob:setLocalVar("runTime", os.time())
+        mob:setLocalVar('runTime', os.time())
         entity.onMobRoamAction(mob)
     elseif mob:isFollowingPath() then
         if os.time() - popTime > 7 then
             mobPet:updateEnmity(target)
             mobPet:setPos(mobPos.x, mobPos.y, mobPos.z, mobPos.rot)
-            mob:setLocalVar("popTime", os.time())
+            mob:setLocalVar('popTime', os.time())
             mobPet:setStatus(xi.status.UPDATE)
             mobPet:timer(1000, function(mobArg)
                 mobArg:useMobAbility(1838)
@@ -66,7 +64,7 @@ entity.onMobDeath = function(mob, player, optParams)
 end
 
 entity.onMobDespawn = function(mob)
-    mob:setLocalVar("runTime", 0)
+    mob:setLocalVar('runTime', 0)
 end
 
 return entity

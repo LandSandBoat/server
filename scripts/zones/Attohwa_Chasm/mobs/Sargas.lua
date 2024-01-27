@@ -2,16 +2,13 @@
 -- Area: Attohwa Chasm
 --   NM: Sargas
 -----------------------------------
-require("scripts/globals/hunts")
-require("scripts/globals/mobs")
------------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
     mob:setMobMod(xi.mobMod.AUTO_SPIKES, 1)
     mob:addStatusEffect(xi.effect.SHOCK_SPIKES, 50, 0, 0)
-    mob:getStatusEffect(xi.effect.SHOCK_SPIKES):setFlag(xi.effectFlag.DEATH)
+    mob:getStatusEffect(xi.effect.SHOCK_SPIKES):setEffectFlags(xi.effectFlag.DEATH)
 end
 
 entity.onAdditionalEffect = function(mob, target, damage)
@@ -29,10 +26,10 @@ entity.onSpikesDamage = function(mob, target, damage)
     local params = {}
     params.bonusmab = 0
     params.includemab = false
-    dmg = addBonusesAbility(mob, xi.magic.ele.THUNDER, target, dmg, params)
-    dmg = dmg * applyResistanceAddEffect(mob, target, xi.magic.ele.THUNDER, 0)
-    dmg = adjustForTarget(target, dmg, xi.magic.ele.THUNDER)
-    dmg = finalMagicNonSpellAdjustments(mob, target, xi.magic.ele.THUNDER, dmg)
+    dmg = addBonusesAbility(mob, xi.element.THUNDER, target, dmg, params)
+    dmg = dmg * applyResistanceAddEffect(mob, target, xi.element.THUNDER, 0)
+    dmg = adjustForTarget(target, dmg, xi.element.THUNDER)
+    dmg = finalMagicNonSpellAdjustments(mob, target, xi.element.THUNDER, dmg)
 
     if dmg < 0 then
         dmg = 0

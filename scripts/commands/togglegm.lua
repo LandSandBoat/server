@@ -2,14 +2,15 @@
 -- func: togglegm
 -- desc: Toggles a GMs nameflags/icon.
 -----------------------------------
+local commandObj = {}
 
-cmdprops =
+commandObj.cmdprops =
 {
     permission = 1,
-    parameters = ""
+    parameters = ''
 }
 
-function onTrigger(player)
+commandObj.onTrigger = function(player)
     -- GM Flag Definitions
     local gmFlags =
     {
@@ -24,7 +25,7 @@ function onTrigger(player)
     -- Configurable Options
     local minLevels =
     {
-        GM          = 1, -- For "whitelisting" players to have some commands, but not GM tier commands.
+        GM          = 1, -- For 'whitelisting' players to have some commands, but not GM tier commands.
         GM_SENIOR   = 2, -- These are configurable so that commands may be restricted
         GM_LEAD     = 3, -- between different levels of GM's with the same icon.
         GM_PRODUCER = 4,
@@ -56,3 +57,5 @@ function onTrigger(player)
         end
     end
 end
+
+return commandObj

@@ -5,10 +5,6 @@
 -- Starts Quest: Exit the Gambler
 -- !pos -156.253 11.999 253.691 231
 -----------------------------------
-require("scripts/globals/npc_util")
-require("scripts/globals/quests")
-require("scripts/globals/titles")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
@@ -16,7 +12,7 @@ end
 
 entity.onTrigger = function(player, npc)
     local exitTheGambler = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.EXIT_THE_GAMBLER)
-    local exitTheGamblerStat = player:getCharVar("exitTheGamblerStat")
+    local exitTheGamblerStat = player:getCharVar('exitTheGamblerStat')
 
     if exitTheGambler < QUEST_COMPLETED and exitTheGamblerStat == 0 then
         player:startEvent(521)

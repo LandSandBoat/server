@@ -3,9 +3,7 @@
 --  NPC: Rolandienne
 -- Records of Eminence NPC
 -----------------------------------
-local ID = require("scripts/zones/Southern_San_dOria/IDs")
-require("scripts/globals/sparkshop")
-require("scripts/globals/roe")
+local ID = zones[xi.zone.SOUTHERN_SAN_DORIA]
 -----------------------------------
 local entity = {}
 
@@ -19,7 +17,7 @@ entity.onTrigger = function(player, npc)
     elseif not player:hasKeyItem(xi.ki.MEMORANDOLL) then
         player:startEvent(994)
     else
-        player:triggerRoeEvent(xi.roe.triggers.talkToRoeNpc)
+        player:triggerRoeEvent(xi.roeTrigger.TRIGGER_NPC)
         player:messageSpecial(ID.text.YOU_WISH_TO_EXCHANGE_SPARKS)
         xi.sparkshop.onTrigger(player, npc, 995)
     end

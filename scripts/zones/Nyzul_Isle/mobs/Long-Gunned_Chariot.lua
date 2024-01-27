@@ -4,7 +4,6 @@
 -- Info: Enemy Leader, Uses Homing Missile
 -----------------------------------
 mixins = { require('scripts/mixins/families/chariot') }
-require('scripts/globals/nyzul')
 -----------------------------------
 local entity = {}
 
@@ -12,9 +11,9 @@ entity.onMobSpawn = function(mob)
     -- local data = mob:getData('homing')
     -- sets homing missile variant
     -- data.HM = 1
-    mob:addListener("WEAPONSKILL_STATE_EXIT", "HOMING_MISSILE_WEAPONSKILL_STATE_EXIT", function(chariotMob, skillid)
+    mob:addListener('WEAPONSKILL_STATE_EXIT', 'HOMING_MISSILE_WEAPONSKILL_STATE_EXIT', function(chariotMob, skillid)
         if skillid == 2058 then
-            chariotMob:setLocalVar("firstHit", 0)
+            chariotMob:setLocalVar('firstHit', 0)
         end
     end)
 end

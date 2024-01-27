@@ -4,7 +4,7 @@
 -- Notes: Tells ship ETA time
 -- !pos 0.340 -12.232 -4.120 46
 -----------------------------------
-local ID = require("scripts/zones/Open_sea_route_to_Al_Zahbi/IDs")
+local ID = zones[xi.zone.OPEN_SEA_ROUTE_TO_AL_ZAHBI]
 -----------------------------------
 local entity = {}
 

@@ -4,9 +4,7 @@
 -- Involved in Quests: Trial by Lightning
 -- !pos 534.5 -13 492 202
 -----------------------------------
-require("scripts/globals/missions")
-require("scripts/globals/bcnm")
-local ID = require("scripts/zones/Cloister_of_Storms/IDs")
+local ID = zones[xi.zone.CLOISTER_OF_STORMS]
 -----------------------------------
 local entity = {}
 
@@ -17,7 +15,7 @@ end
 entity.onTrigger = function(player, npc)
     if
         player:getCurrentMission(xi.mission.log_id.ASA) == xi.mission.id.asa.SUGAR_COATED_DIRECTIVE and
-        player:getCharVar("ASA4_Violet") == 1
+        player:getCharVar('ASA4_Violet') == 1
     then
         player:startEvent(2)
     elseif not xi.bcnm.onTrigger(player, npc) then
@@ -34,7 +32,7 @@ entity.onEventFinish = function(player, csid, option, npc)
         player:delKeyItem(xi.ki.DOMINAS_VIOLET_SEAL)
         player:addKeyItem(xi.ki.VIOLET_COUNTERSEAL)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.VIOLET_COUNTERSEAL)
-        player:setCharVar("ASA4_Violet", "2")
+        player:setCharVar('ASA4_Violet', 2)
     else
         xi.bcnm.onEventFinish(player, csid, option, npc)
     end

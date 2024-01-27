@@ -23,23 +23,22 @@
 #include "lua/luautils.h"
 
 CAbility::CAbility(uint16 id)
+: m_ID(id)
+, m_Job(JOB_NON)
+, m_level(0)
+, m_animationID(0)
+, m_range(0)
+, m_aoe(0)
+, m_validTarget(0)
+, m_addType(0)
+, m_message(0)
+, m_recastTime(0)
+, m_recastId(0)
+, m_CE(0)
+, m_VE(0)
+, m_meritModID(0)
+, m_mobskillId(0)
 {
-    m_Job         = JOB_NON;
-    m_level       = 0;
-    m_animationID = 0;
-    m_range       = 0;
-    m_validTarget = 0;
-    m_addType     = 0;
-    m_message     = 0;
-    m_recastTime  = 0;
-    m_recastId    = 0;
-    m_recastId    = 0;
-    m_CE          = 0;
-    m_VE          = 0;
-    m_aoe         = 0;
-    m_meritModID  = 0;
-    m_mobskillId  = 0;
-    m_ID          = id;
 }
 
 bool CAbility::isPetAbility() const
@@ -240,7 +239,7 @@ uint16 CAbility::getVE() const
 
 /************************************************************************
  *                                                                       *
- *  Получаем/Устанавливаем message способности                         *
+ *  Get/Set message abilities                                            *
  *                                                                       *
  ************************************************************************/
 
@@ -316,7 +315,7 @@ uint16 CAbility::getAoEMsg() const
 
 /************************************************************************
  *                                                                       *
- *  Реализация namespase для работы со способностями                     *
+ *  Namespace implementation for working with abilities                  *
  *                                                                       *
  ************************************************************************/
 
@@ -334,7 +333,7 @@ namespace ability
 
     void LoadAbilitiesList()
     {
-        // TODO: добавить поле message в таблицу
+        // TODO: Add message field to table
 
         memset(PAbilityList, 0, sizeof(PAbilityList));
 
@@ -405,10 +404,10 @@ namespace ability
                 PAbilityList[PAbility->getID()] = PAbility;
                 PAbilitiesList[PAbility->getJob()].emplace_back(PAbility);
 
-                auto filename = fmt::format("./scripts/globals/abilities/{}.lua", PAbility->getName());
+                auto filename = fmt::format("./scripts/actions/abilities/{}.lua", PAbility->getName());
                 if (PAbility->isPetAbility())
                 {
-                    filename = fmt::format("./scripts/globals/abilities/pets/{}.lua", PAbility->getName());
+                    filename = fmt::format("./scripts/actions/abilities/pets/{}.lua", PAbility->getName());
                 }
                 luautils::CacheLuaObjectFromFile(filename);
             }
@@ -453,7 +452,7 @@ namespace ability
 
     /************************************************************************
      *                                                                       *
-     *  Получаем основную способность профессии                              *
+     *  Get the initial (SP) ability of a job                                *
      *                                                                       *
      ************************************************************************/
 

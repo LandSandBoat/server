@@ -118,7 +118,7 @@ void CInstance::LoadInstance()
 
         // Add to Lua cache
         // TODO: This will happen more often than needed, but not so often that it's a performance concern
-        auto zone     = m_zone->GetName();
+        auto zone     = m_zone->getName();
         auto name     = m_instanceName;
         auto filename = fmt::format("./scripts/zones/{}/instances/{}.lua", zone, name);
         luautils::CacheLuaObjectFromFile(filename);

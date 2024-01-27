@@ -3,8 +3,6 @@
 --  NPC: Imasuke
 -- !pos -165 11 94 246
 -----------------------------------
-require("scripts/globals/quests")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
@@ -12,7 +10,7 @@ end
 
 entity.onTrigger = function(player, npc)
     local circleOfTime   = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_CIRCLE_OF_TIME)
-    local circleProgress = player:getCharVar("circleTime")
+    local circleProgress = player:getCharVar('circleTime')
 
     -- CIRCLE OF TIME
     if circleOfTime == QUEST_ACCEPTED then
@@ -36,13 +34,13 @@ end
 entity.onEventFinish = function(player, csid, option, npc)
     -- CIRCLE OF TIME
     if csid == 29 and option == 1 then
-        player:setCharVar("circleTime", 3)
+        player:setCharVar('circleTime', 3)
     elseif csid == 30 and option == 1 then
-        player:setCharVar("circleTime", 3)
+        player:setCharVar('circleTime', 3)
     elseif csid == 30 and option == 0 then
-        player:setCharVar("circleTime", 2)
+        player:setCharVar('circleTime', 2)
     elseif csid == 33 then
-        player:setCharVar("circleTime", 5)
+        player:setCharVar('circleTime', 5)
     end
 end
 

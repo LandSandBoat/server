@@ -2,7 +2,7 @@
 -- Zone Utilities
 -- random globals that may be used per zone
 -----------------------------------
-local ID = require("scripts/zones/Mamool_Ja_Training_Grounds/IDs")
+local ID = zones[xi.zone.MAMOOL_JA_TRAINING_GROUNDS]
 -----------------------------------
 xi = xi or {}
 xi.zoneUtil = xi.zoneUtil or {}
@@ -20,7 +20,7 @@ xi.zoneUtil.ImperialAgent_PotHatch = function(player, npc, posX, posZ, posR)
         npc:timer(2000, function(npcArg)
             ally:setPos(posX, -1, posZ, posR)
             ally:setStatus(xi.status.NORMAL)
-            ally:entityAnimationPacket("deru")
+            ally:entityAnimationPacket('deru')
         end)
 
         npc:timer(4000, function(npcArg)
@@ -52,15 +52,15 @@ xi.zoneUtil.ImperialAgent_PotHatch = function(player, npc, posX, posZ, posR)
         end)
 
         npc:timer(20000, function(npcArg)
-            ally:entityAnimationPacket("cabk")
+            ally:entityAnimationPacket('cabk')
         end)
 
         npc:timer(22000, function(npcArg)
-            ally:entityAnimationPacket("shbk")
+            ally:entityAnimationPacket('shbk')
         end)
 
         npc:timer(23000, function(npcArg)
-            ally:entityAnimationPacket("kesu")
+            ally:entityAnimationPacket('kesu')
         end)
 
         npc:timer(24500, function(npcArg)

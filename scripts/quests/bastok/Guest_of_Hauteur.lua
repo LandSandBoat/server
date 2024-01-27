@@ -5,9 +5,6 @@
 -- Powhatan    : !pos -152.135 -7.48 19.014 236
 -- Steel Bones : !pos -185.766 1.999 -57.631 236
 -----------------------------------
-require('scripts/globals/quests')
-require('scripts/globals/interaction/quest')
------------------------------------
 
 local quest = Quest:new(xi.quest.log_id.BASTOK, xi.quest.id.bastok.GUEST_OF_HAUTEUR)
 
@@ -15,7 +12,7 @@ quest.reward =
 {
     fame     = 80,
     fameArea = xi.quest.fame_area.BASTOK,
-    item     = xi.items.TARGE,
+    item     = xi.item.TARGE,
 }
 
 quest.sections =
@@ -68,8 +65,8 @@ quest.sections =
 
                     if
                         not player:hasKeyItem(xi.ki.LETTER_FROM_DOMIEN) and
-                        (mainSlot == xi.items.MAUL or
-                        mainSlot == xi.items.REPLICA_MAUL)
+                        (mainSlot == xi.item.MAUL or
+                        mainSlot == xi.item.REPLICA_MAUL)
                     then
                         return quest:progressEvent(57)
                     end

@@ -1,8 +1,6 @@
 -----------------------------------
 -- Zone: Garlaige_Citadel_[S] (164)
 -----------------------------------
-local ID = require('scripts/zones/Garlaige_Citadel_[S]/IDs')
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

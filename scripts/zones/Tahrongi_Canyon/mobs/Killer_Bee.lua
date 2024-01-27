@@ -2,8 +2,7 @@
 -- Area: Tahrongi Canyon
 --  Mob: Killer Bee
 -----------------------------------
-require("scripts/globals/regimes")
-require("scripts/quests/tutorial")
+require('scripts/quests/tutorial')
 -----------------------------------
 local entity = {}
 

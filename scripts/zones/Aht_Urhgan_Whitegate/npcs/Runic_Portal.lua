@@ -3,11 +3,7 @@
 --  NPC: Runic Portal
 -- Aht Urhgan Teleporter to Other Areas
 -----------------------------------
-local ID = require("scripts/zones/Aht_Urhgan_Whitegate/IDs")
------------------------------------
-require("scripts/globals/besieged")
-require("scripts/globals/teleports")
-require("scripts/globals/assault")
+local ID = zones[xi.zone.AHT_URHGAN_WHITEGATE]
 -----------------------------------
 local entity = {}
 
@@ -16,7 +12,6 @@ end
 
 entity.onTrigger = function(player, npc)
     local runicPortals  = player:getTeleport(xi.teleport.type.RUNIC_PORTAL)
-    local validTeleport = 0
     local assaultOrders =
     {
         [0] = { KI = xi.ki.LEUJAOAM_ASSAULT_ORDERS,   tele = 0x02, valid = 2,  event = 120 },
@@ -30,7 +25,7 @@ entity.onTrigger = function(player, npc)
     if xi.assault.hasOrders(player) then
         for k, v in pairs(assaultOrders) do
             if player:hasKeyItem(v.KI) then
-                validTeleport = bit.band(runicPortals, v.tele)
+                local validTeleport = bit.band(runicPortals, v.tele)
                 player:messageSpecial(ID.text.CONFIRMING, v.KI)
 
                 if validTeleport == v.valid then
@@ -45,7 +40,7 @@ entity.onTrigger = function(player, npc)
     else
         local hasPermit = player:hasKeyItem(xi.ki.RUNIC_PORTAL_USE_PERMIT)
         local mercRank  = xi.besieged.getMercenaryRank(player)
-        local points    = player:getCurrency("imperial_standing")
+        local points    = player:getCurrency('imperial_standing')
         local hasAstral = xi.besieged.getAstralCandescence()
 
         player:startEvent(101, hasPermit and xi.ki.RUNIC_PORTAL_USE_PERMIT or 0, runicPortals, mercRank, points, 0, hasAstral, hasPermit and 1 or 0)
@@ -83,8 +78,8 @@ entity.onEventFinish = function(player, csid, option, npc)
             player:delKeyItem(xi.ki.RUNIC_PORTAL_USE_PERMIT)
             xi.teleport.to(player, portalPick[option])
         elseif option >= 1001 and option <= 1006 then
-            if player:getCurrency("imperial_standing") >= 200 then
-                player:delCurrency("imperial_standing", 200)
+            if player:getCurrency('imperial_standing') >= 200 then
+                player:delCurrency('imperial_standing', 200)
                 xi.teleport.to(player, portalPick[option])
             else
                 player:messageSpecial(ID.text.SUFFICIENT_IMPERIAL_STANDING)

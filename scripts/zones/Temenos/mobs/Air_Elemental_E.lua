@@ -2,8 +2,6 @@
 -- Area: Temenos Eastern Tower
 --  Mob: Air Elemental
 -----------------------------------
-require("scripts/globals/mobs")
------------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)

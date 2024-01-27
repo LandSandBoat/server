@@ -1,9 +1,7 @@
 -- Zone: Al'Taieu (33)
 -- Desc: this file contains functions that are shared by multiple luas in this zone's directory
 -----------------------------------
-local ID = require("scripts/zones/AlTaieu/IDs")
-require("scripts/globals/missions")
-require("scripts/globals/npc_util")
+local ID = zones[xi.zone.ALTAIEU]
 -----------------------------------
 
 local antiquityVars =
@@ -27,7 +25,7 @@ return {
         local crystalOffset = npcId - ID.npc.RUBIOUS_CRYSTAL_BASE
         local ruaernOffset = ID.mob.RUAERN_BASE + crystalOffset * 3
         local cop = player:getCurrentMission(xi.mission.log_id.COP)
-        local copStat = player:getCharVar("PromathiaStatus")
+        local copStat = player:getCharVar('PromathiaStatus')
         local cVar = antiquityVars[crystalOffset]
         local thisFightDone = player:getCharVar(cVar[1]) == 1
         local thisCsAcquired = player:getCharVar(cVar[2]) == 1

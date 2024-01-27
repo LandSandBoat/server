@@ -3,7 +3,7 @@
 --  Mob: Gii Jaha the Raucous
 -- BCNM: Divine Punishers
 -----------------------------------
-mixins = { require("scripts/mixins/job_special") }
+mixins = { require('scripts/mixins/job_special') }
 -----------------------------------
 local entity = {}
 

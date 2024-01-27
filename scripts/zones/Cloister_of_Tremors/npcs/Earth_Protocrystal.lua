@@ -4,8 +4,7 @@
 -- Involved in Quest: Trial by Earth
 -- !pos -539 1 -493 209
 -----------------------------------
-local ID = require("scripts/zones/Cloister_of_Tremors/IDs")
-require("scripts/globals/bcnm")
+local ID = zones[xi.zone.CLOISTER_OF_TREMORS]
 -----------------------------------
 local entity = {}
 
@@ -16,7 +15,7 @@ end
 entity.onTrigger = function(player, npc)
     if
         player:getCurrentMission(xi.mission.log_id.ASA) == xi.mission.id.asa.SUGAR_COATED_DIRECTIVE and
-        player:getCharVar("ASA4_Amber") == 1
+        player:getCharVar('ASA4_Amber') == 1
     then
         player:startEvent(2)
     elseif not xi.bcnm.onTrigger(player, npc) then
@@ -33,7 +32,7 @@ entity.onEventFinish = function(player, csid, option, npc)
         player:delKeyItem(xi.ki.DOMINAS_AMBER_SEAL)
         player:addKeyItem(xi.ki.AMBER_COUNTERSEAL)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.AMBER_COUNTERSEAL)
-        player:setCharVar("ASA4_Amber", "2")
+        player:setCharVar('ASA4_Amber', 2)
     else
         xi.bcnm.onEventFinish(player, csid, option, npc)
     end

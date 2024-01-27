@@ -5,11 +5,6 @@
 -- Collet : !pos -44 0 107 244
 -- _6s2   : !pos -80 0 104 244
 -----------------------------------
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
-require('scripts/globals/titles')
-require('scripts/globals/interaction/quest')
------------------------------------
 
 local quest = Quest:new(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.A_CLOCK_MOST_DELICATE)
 
@@ -18,7 +13,7 @@ quest.reward =
     fame     = 30,
     fameArea = xi.quest.fame_area.JEUNO,
     gil      = 1200,
-    item     = xi.items.ENGINEERS_GLOVES,
+    item     = xi.item.ENGINEERS_GLOVES,
     title    = xi.title.PROFESSIONAL_LOAFER,
 }
 

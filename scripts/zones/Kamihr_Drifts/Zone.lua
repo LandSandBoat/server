@@ -1,8 +1,6 @@
 -----------------------------------
 -- Zone: Kamihr Drifts
 -----------------------------------
-local ID = require('scripts/zones/Kamihr_Drifts/IDs')
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

@@ -2,8 +2,6 @@
 -- Area: Rolanberry Fields [S]
 --   NM: Dyinyinga
 -----------------------------------
-require("scripts/globals/hunts")
------------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)

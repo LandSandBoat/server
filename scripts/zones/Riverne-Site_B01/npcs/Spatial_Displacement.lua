@@ -2,7 +2,7 @@
 -- Area: Riverne Site #B01
 --  NPC: Spacial Displacement
 -----------------------------------
-local ID = require("scripts/zones/Riverne-Site_B01/IDs")
+local ID = zones[xi.zone.RIVERNE_SITE_B01]
 -----------------------------------
 local entity = {}
 

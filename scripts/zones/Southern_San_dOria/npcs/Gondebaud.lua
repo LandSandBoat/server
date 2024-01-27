@@ -4,10 +4,7 @@
 -- Trust NPC
 -- !pos 123.754 0.000 92.125 230
 -----------------------------------
-local ID = require("scripts/zones/Southern_San_dOria/IDs")
-require("scripts/globals/npc_util")
-require("scripts/globals/quests")
-require("scripts/globals/trust")
+local ID = zones[xi.zone.SOUTHERN_SAN_DORIA]
 -----------------------------------
 local entity = {}
 
@@ -47,8 +44,8 @@ entity.onEventFinish = function(player, csid, option, npc)
         player:addQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.TRUST_SANDORIA)
         npcUtil.giveKeyItem(player, xi.ki.RED_INSTITUTE_CARD)
     elseif csid == 3503 or csid == 3553 then
-        local spellID = player:getLocalVar("TradingTrustCipher")
-        player:setLocalVar("TradingTrustCipher", 0)
+        local spellID = player:getLocalVar('TradingTrustCipher')
+        player:setLocalVar('TradingTrustCipher', 0)
         player:addSpell(spellID, true, true)
         player:messageSpecial(ID.text.YOU_LEARNED_TRUST, 0, spellID)
         player:tradeComplete()

@@ -3,7 +3,7 @@
 -- Door: Bastokan Emb.
 -- Bastok Missions 3.3 "Jeuno" and 4.1 "Magicite"
 -----------------------------------
-local ID = require("scripts/zones/RuLude_Gardens/IDs")
+local ID = zones[xi.zone.RULUDE_GARDENS]
 -----------------------------------
 local entity = {}
 

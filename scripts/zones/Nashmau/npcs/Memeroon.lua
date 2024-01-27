@@ -4,9 +4,6 @@
 -- Type: Appraiser
 -- !pos -26 0 -40 53
 -----------------------------------
-require("scripts/globals/appraisal")
------------------------------------
-
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

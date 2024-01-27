@@ -27,7 +27,7 @@ CREATE TABLE `fishing_bait_affinity` (
   `fishid` smallint(5) unsigned NOT NULL DEFAULT '0',
   `power` smallint(5) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`baitid`,`fishid`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 AVG_ROW_LENGTH=28;
+) ENGINE=Aria TRANSACTIONAL=0 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci AVG_ROW_LENGTH=28;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --

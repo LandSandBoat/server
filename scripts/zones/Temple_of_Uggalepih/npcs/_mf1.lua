@@ -4,7 +4,7 @@
 -- Notes: Door blocked by Temple Guardian
 -- !pos -62 0 -99 159
 -----------------------------------
-local ID = require("scripts/zones/Temple_of_Uggalepih/IDs")
+local ID = zones[xi.zone.TEMPLE_OF_UGGALEPIH]
 -----------------------------------
 local entity = {}
 

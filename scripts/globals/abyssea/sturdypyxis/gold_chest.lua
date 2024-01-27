@@ -15,9 +15,9 @@ local function isEven(number)
 end
 
 xi.pyxis.goldChest.startEvent = function(player, npc, event, contentMessage, timeleft)
-    local targetnumber    = npc:getLocalVar("RAND_NUM")
-    local maxUnlockNumber = npc:getLocalVar("MAX_UNLOCK_NUMBER")
-    local currentAttempts = npc:getLocalVar("CURRENT_ATTEMPTS")
+    local targetnumber    = npc:getLocalVar('RAND_NUM')
+    local maxUnlockNumber = npc:getLocalVar('MAX_UNLOCK_NUMBER')
+    local currentAttempts = npc:getLocalVar('CURRENT_ATTEMPTS')
     local minNumber = 11
     local attemptsallowed = 5
 
@@ -26,20 +26,20 @@ end
 
 xi.pyxis.goldChest.unlock = function(player, csid, option, npc)
     local ID              = zones[player:getZoneID()]
-    local currentAttempts = npc:getLocalVar("CURRENT_ATTEMPTS")
+    local currentAttempts = npc:getLocalVar('CURRENT_ATTEMPTS')
     local attemptsallowed = 5
     local inputnumber     = bit.band(option, 0xFF)
-    local targetnumber    = npc:getLocalVar("RAND_NUM")
+    local targetnumber    = npc:getLocalVar('RAND_NUM')
 
     if inputnumber > 10 and inputnumber < 100 then
         local splitnumbers = {}
 
-        for digit in string.gmatch(tostring(targetnumber), "%d") do
+        for digit in string.gmatch(tostring(targetnumber), '%d') do
             table.insert(splitnumbers, digit)
         end
 
         currentAttempts = currentAttempts + 1
-        npc:setLocalVar("CURRENT_ATTEMPTS", currentAttempts)
+        npc:setLocalVar('CURRENT_ATTEMPTS', currentAttempts)
 
         if inputnumber == targetnumber then
             xi.pyxis.messageChest(player, ID.text.INPUT_SUCCESS_FAIL_GUESS, inputnumber, 1, 0, 0, npc) -- unlocking chest

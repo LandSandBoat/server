@@ -2,8 +2,7 @@
 -- Area: Sea Serpent Grotto
 --   NM: Fyuu the Seabellow
 -----------------------------------
-require("scripts/globals/hunts")
-mixins = { require("scripts/mixins/job_special") }
+mixins = { require('scripts/mixins/job_special') }
 -----------------------------------
 local entity = {}
 

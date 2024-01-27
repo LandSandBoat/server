@@ -1,10 +1,7 @@
 -----------------------------------
 -- Zone: Caedarva_Mire (79)
 -----------------------------------
-local ID = require('scripts/zones/Caedarva_Mire/IDs')
-require('scripts/globals/missions')
-require('scripts/globals/titles')
-require('scripts/globals/helm')
+local ID = zones[xi.zone.CAEDARVA_MIRE]
 -----------------------------------
 local zoneObject = {}
 
@@ -39,10 +36,10 @@ zoneObject.onZoneIn = function(player, prevZone)
 end
 
 zoneObject.afterZoneIn = function(player)
-    player:entityVisualPacket("1pb1")
-    player:entityVisualPacket("2pb1")
-    player:entityVisualPacket("1pd1")
-    player:entityVisualPacket("2pc1")
+    player:entityVisualPacket('1pb1')
+    player:entityVisualPacket('2pb1')
+    player:entityVisualPacket('1pd1')
+    player:entityVisualPacket('2pc1')
 end
 
 zoneObject.onTriggerAreaEnter = function(player, triggerArea)

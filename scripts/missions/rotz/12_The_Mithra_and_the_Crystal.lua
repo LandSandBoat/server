@@ -8,11 +8,7 @@
 -- qm7             : !pos -504 20 -419 208
 -- _6z0            : !pos 0 -12 48 251
 -----------------------------------
-require('scripts/globals/interaction/mission')
-require('scripts/globals/missions')
-require('scripts/globals/titles')
------------------------------------
-local quicksandCavesID = require('scripts/zones/Quicksand_Caves/IDs')
+local quicksandCavesID = zones[xi.zone.QUICKSAND_CAVES]
 -----------------------------------
 
 local mission = Mission:new(xi.mission.log_id.ZILART, xi.mission.id.zilart.THE_MITHRA_AND_THE_CRYSTAL)

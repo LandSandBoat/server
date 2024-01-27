@@ -1,8 +1,6 @@
 -----------------------------------
 -- Zone: Leafallia
 -----------------------------------
-local ID = require('scripts/zones/Leafallia/IDs')
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

@@ -4,26 +4,25 @@
 -- Standard Merchant NPC
 -- !pos -288.669 -10.319 -135.064 235
 -----------------------------------
-local ID = require("scripts/zones/Bastok_Markets/IDs")
-require("scripts/globals/shop")
+local ID = zones[xi.zone.BASTOK_MARKETS]
 -----------------------------------
 local entity = {}
 
 entity.onTrigger = function(player, npc)
     local stock =
     {
-        16537, 31648, 1, -- Mythril Sword
-        16545, 21535, 1, -- Broadsword
-        16513, 11845, 1, -- Tuck
-        16558, 62560, 1, -- Falchion
-        16536,  7286, 2, -- Iron Sword
-        16552,  4163, 2, -- Scimitar
-        16535,   246, 3, -- Bronze Sword
-        16517,  9406, 3, -- Degen
-        16551,   713, 3, -- Sapara
-        16530,   618, 3, -- Xiphos
-        16565,  1711, 3, -- Spatha
-        16512,  3215, 3, -- Bilbo
+        xi.item.BRONZE_SWORD,    278, 3,
+        xi.item.IRON_SWORD,     8236, 2,
+        xi.item.MYTHRIL_SWORD, 35776, 1,
+        xi.item.BROADSWORD,    24344, 1,
+        xi.item.DEGEN,         10632, 3,
+        xi.item.TUCK,          13391, 1,
+        xi.item.SAPARA,          807, 3,
+        xi.item.SCIMITAR,       4706, 2,
+        xi.item.FALCHION,      70720, 1,
+        xi.item.XIPHOS,          698, 3,
+        xi.item.SPATHA,         1934, 3,
+        xi.item.BILBO,          3634, 3,
     }
 
     player:showText(npc, ID.text.ZHIKKOM_SHOP_DIALOG)

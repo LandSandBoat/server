@@ -3,9 +3,7 @@
 --  Mob: Goblin Reaper
 -- Note: Place holder Goblinsavior Heronox
 -----------------------------------
-local ID = require("scripts/zones/Gustav_Tunnel/IDs")
-require("scripts/globals/regimes")
-require("scripts/globals/mobs")
+local ID = zones[xi.zone.GUSTAV_TUNNEL]
 -----------------------------------
 local entity = {}
 

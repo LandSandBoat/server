@@ -4,9 +4,6 @@
 --  Involved With Quest: 'Order Up'
 -- !pos 127 4 -81 256
 -----------------------------------
-require("scripts/globals/quests")
-require("scripts/globals/utils")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
@@ -14,7 +11,7 @@ end
 
 entity.onTrigger = function(player, npc)
     local orderUp = player:getQuestStatus(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.ORDER_UP)
-    local orderTerwok = utils.mask.getBit(player:getCharVar("Order_Up_NPCs"), 7)
+    local orderTerwok = utils.mask.getBit(player:getCharVar('Order_Up_NPCs'), 7)
 
     if orderUp == QUEST_ACCEPTED and not orderTerwok then
         -- Progresses Quest: 'Order Up'
@@ -28,7 +25,7 @@ end
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 67 then
         -- Progresses Quest: 'Order Up'
-        player:setCharVar("Order_Up_NPCs", utils.mask.setBit(player:getCharVar("Order_Up_NPCs"), 7, true))
+        player:setCharVar('Order_Up_NPCs', utils.mask.setBit(player:getCharVar('Order_Up_NPCs'), 7, true))
     end
 end
 

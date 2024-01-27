@@ -1,10 +1,7 @@
 -----------------------------------
 -- Area: Kazham
 --  NPC: Lulupp
--- Type: Standard NPC
 -- !pos -26.567 -3.5 -3.544 250
------------------------------------
-require("scripts/globals/pathfind")
 -----------------------------------
 local entity = {}
 
@@ -49,23 +46,23 @@ entity.onTrade = function(player, npc, trade)
     -- 1147      Ancient Salt
     -- 4600      Lucky Egg
     local opoOpoAndIStatus = player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.THE_OPO_OPO_AND_I)
-    local progress = player:getCharVar("OPO_OPO_PROGRESS")
-    local failed = player:getCharVar("OPO_OPO_FAILED")
+    local progress = player:getCharVar('OPO_OPO_PROGRESS')
+    local failed = player:getCharVar('OPO_OPO_FAILED')
 
     if opoOpoAndIStatus == QUEST_ACCEPTED then
         if progress == 0 or failed == 1 then
-            if trade:hasItemQty(xi.items.BROKEN_MITHRAN_FISHING_ROD, 1) then -- first or second time trading correctly
+            if trade:hasItemQty(xi.item.BROKEN_MITHRAN_FISHING_ROD, 1) then -- first or second time trading correctly
                 player:startEvent(219)
             elseif
-                trade:hasItemQty(xi.items.WORKBENCH, 1) or
-                trade:hasItemQty(xi.items.TEN_OF_COINS_CARD, 1) or
-                trade:hasItemQty(xi.items.HANDFUL_OF_THE_SANDS_OF_SILENCE, 1) or
-                trade:hasItemQty(xi.items.WANDERING_BULB, 1) or
-                trade:hasItemQty(xi.items.SET_OF_GIANT_FISH_BONES, 1) or
-                trade:hasItemQty(xi.items.BLACKENED_TOAD, 1) or
-                trade:hasItemQty(xi.items.WYVERN_SKULL, 1) or
-                trade:hasItemQty(xi.items.ROCK_OF_ANCIENT_SALT, 1) or
-                trade:hasItemQty(xi.items.LUCKY_EGG, 1)
+                trade:hasItemQty(xi.item.WORKBENCH, 1) or
+                trade:hasItemQty(xi.item.TEN_OF_COINS_CARD, 1) or
+                trade:hasItemQty(xi.item.HANDFUL_OF_THE_SANDS_OF_SILENCE, 1) or
+                trade:hasItemQty(xi.item.WANDERING_BULB, 1) or
+                trade:hasItemQty(xi.item.SET_OF_GIANT_FISH_BONES, 1) or
+                trade:hasItemQty(xi.item.BLACKENED_TOAD, 1) or
+                trade:hasItemQty(xi.item.WYVERN_SKULL, 1) or
+                trade:hasItemQty(xi.item.ROCK_OF_ANCIENT_SALT, 1) or
+                trade:hasItemQty(xi.item.LUCKY_EGG, 1)
             then
                 player:startEvent(229)
             end
@@ -75,12 +72,12 @@ end
 
 entity.onTrigger = function(player, npc)
     local opoOpoAndIStatus = player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.THE_OPO_OPO_AND_I)
-    local progress = player:getCharVar("OPO_OPO_PROGRESS")
-    local failed = player:getCharVar("OPO_OPO_FAILED")
-    local retry = player:getCharVar("OPO_OPO_RETRY")
+    local progress = player:getCharVar('OPO_OPO_PROGRESS')
+    local failed = player:getCharVar('OPO_OPO_FAILED')
+    local retry = player:getCharVar('OPO_OPO_RETRY')
 
     if
-        player:getCharVar("BathedInScent") == 1 and
+        player:getCharVar('BathedInScent') == 1 and
         opoOpoAndIStatus == QUEST_AVAILABLE
     then
         player:startEvent(217, 0, 483)  -- 483 broken mithran fishing rod
@@ -122,17 +119,17 @@ entity.onEventFinish = function(player, csid, option, npc)
     if csid == 217 and option == 1  then                   -- Opo Opo and I quest start CS
         player:addQuest(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.THE_OPO_OPO_AND_I)
     elseif csid == 219 then
-        if player:getCharVar("OPO_OPO_PROGRESS") == 0 then
+        if player:getCharVar('OPO_OPO_PROGRESS') == 0 then
             player:tradeComplete()
-            player:setCharVar("OPO_OPO_PROGRESS", 1)
+            player:setCharVar('OPO_OPO_PROGRESS', 1)
         else
-            player:setCharVar("OPO_OPO_FAILED", 2)
+            player:setCharVar('OPO_OPO_FAILED', 2)
         end
     elseif csid == 229 then                                -- Traded wrong item, saving current progress to not take item up to this point
-        player:setCharVar("OPO_OPO_RETRY", 1)
+        player:setCharVar('OPO_OPO_RETRY', 1)
     elseif csid == 239 and option == 1 then                -- Traded wrong to another NPC, give a clue
-        player:setCharVar("OPO_OPO_RETRY", 0)
-        player:setCharVar("OPO_OPO_FAILED", 1)
+        player:setCharVar('OPO_OPO_RETRY', 0)
+        player:setCharVar('OPO_OPO_FAILED', 1)
     end
 end
 
