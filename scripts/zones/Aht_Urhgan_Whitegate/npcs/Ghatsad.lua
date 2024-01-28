@@ -389,10 +389,10 @@ entity.onEventFinish = function(player, csid, option, npc)
             player:unlockAttachment(xi.item.SPIRITREAVER_HEAD)
             player:messageSpecial(ID.text.AUTOMATON_SPIRITREAVER_UNLOCK)
         elseif attachmentStatus == 14 and unlockedAttachments == 30 then
-            player:unlockAttachment(xi.items.SPIRITREAVER_HEAD)
+            player:unlockAttachment(xi.item.SPIRITREAVER_HEAD)
             player:messageSpecial(ID.text.AUTOMATON_SPIRITREAVER_UNLOCK)
         elseif attachmentStatus == 14 and unlockedAttachments == 46 then
-            player:unlockAttachment(xi.items.SOULSOOTHER_HEAD)
+            player:unlockAttachment(xi.item.SOULSOOTHER_HEAD)
             player:messageSpecial(ID.text.AUTOMATON_SOULSOOTHER_UNLOCK)
         end
 
