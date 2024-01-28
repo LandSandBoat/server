@@ -4255,9 +4255,9 @@ INSERT INTO `mob_spell_lists` VALUES ('TRUST_Ygnas',411,143,32,255); -- erase (3
 INSERT INTO `mob_spell_lists` VALUES ('TRUST_Lion_II',418,338,12,255); -- utsusemi_ichi (12~255)
 INSERT INTO `mob_spell_lists` VALUES ('TRUST_Lion_II',418,339,37,255); -- utsusemi_ni (37~255)
 
--- TRUST_Zied_II (419)
-INSERT INTO `mob_spell_lists` VALUES ('TRUST_Zied_II',419,243,91,255); -- absorb-attri (91~255)
-INSERT INTO `mob_spell_lists` VALUES ('TRUST_Zied_II',419,252,37,255); -- stun (37~255)
+-- TRUST_Zeid_II (419)
+INSERT INTO `mob_spell_lists` VALUES ('TRUST_Zeid_II',419,243,91,255); -- absorb-attri (91~255)
+INSERT INTO `mob_spell_lists` VALUES ('TRUST_Zeid_II',419,252,37,255); -- stun (37~255)
 
 -- TRUST_Prishe_II (420)
 INSERT INTO `mob_spell_lists` VALUES ('TRUST_Prishe_II',420,7,16,255);  -- curaga (16~255)
