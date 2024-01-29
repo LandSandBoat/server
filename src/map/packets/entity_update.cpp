@@ -191,6 +191,16 @@ void CEntityUpdatePacket::updateWith(CBaseEntity* PEntity, ENTITYUPDATE type, ui
                     ref<uint8>(0x27) |= 0x08;
                 }
                 ref<uint8>(0x28) |= PMob->StatusEffectContainer->HasStatusEffect(EFFECT_TERROR) ? 0x10 : 0x00;
+
+                // Giga hack -- mobs in Pso'Xja for some reason are less "visible"
+                // Set CliPriorityFlag to force them to render on the client if they receive 0x00Es
+                // TODO: make this a MOBMOD or some other way to set this flag without hardcoding.
+                if (PMob->getZone() == ZONEID::ZONE_PSOXJA)
+                {
+                    // Enable CliPriorityFlag, see https://github.com/atom0s/XiPackets/tree/main/world/server/0x0037 (documentation for 0x00E is not on the repo yet)
+                    ref<uint8>(0x28) |= 0x20;
+                }
+
                 ref<uint8>(0x28) |= PMob->health.hp > 0 && PMob->animation == ANIMATION_DEATH ? 0x08 : 0;
                 ref<uint8>(0x28) |= PMob->status == STATUS_TYPE::NORMAL && PMob->objtype == TYPE_MOB ? 0x40 : 0; // Make the entity triggerable if a mob and normal status
                 ref<uint8>(0x29) = static_cast<uint8>(PEntity->allegiance);
