@@ -14,7 +14,8 @@ entity.onTrade = function(player, npc, trade)
     then
         -- Trade Pandemonium Key
         player:confirmTrade()
-        player:messageSpecial(ID.text.DRAWS_NEAR)
+        local mob = GetMobByID(ID.mob.PANDEMONIUM_WARDEN)
+        mob:showText(mob, ID.text.PW_WHO_DARES)
     end
 end
 

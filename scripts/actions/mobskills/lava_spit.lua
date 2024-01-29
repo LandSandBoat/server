@@ -5,16 +5,6 @@
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
-    if mob:getFamily() == 316 then
-        local mobSkin = mob:getModelId()
-
-        if mobSkin == 1793 then
-            return 0
-        else
-            return 1
-        end
-    end
-
     if target:isBehind(mob, 48) then
         return 1
     else

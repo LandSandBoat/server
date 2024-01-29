@@ -9,16 +9,6 @@
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
-    if mob:getFamily() == 316 then
-        local mobSkin = mob:getModelId()
-
-        if mobSkin == 1805 then
-            return 0
-        else
-            return 1
-        end
-    end
-
     local family = mob:getFamily()
     local mobhp = mob:getHPP()
     local result = 1
@@ -26,6 +16,8 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
     if family == 168 and mobhp <= 35 then -- Khimaira < 35%
         result = 0
     elseif family == 315 and mobhp <= 50 then -- Tyger < 50%
+        result = 0
+    elseif family == 316 then
         result = 0
     end
 
