@@ -211,6 +211,7 @@ enum class Mod
     DMGMAGIC    = 163, // Magic Damage Taken %
     DMGMAGIC_II = 831, // Magic Damage Taken II % (Aegis)
     DMGRANGE    = 164, // Range Damage Taken %
+    DMG_AOE     = 158, // Damage Taken % when not main target of an AoE action. (Ex: Locus Mobs)
 
     // Uncapped damage - 10000 base, 375 = 3.75%
     UDMGPHYS   = 387, // Uncapped Damage Multipliers
@@ -997,7 +998,7 @@ enum class Mod
     //
     // SPARE IDs:
     // 141 to 143
-    // 158, 159
+    // 159
     // 217 to 223
     // 271 to 280
     //

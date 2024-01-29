@@ -812,6 +812,16 @@ xi.spells.damage.calculateHelixMeritMultiplier = function(caster, spellId)
     return helixMeritMultiplier
 end
 
+xi.spells.damage.calculateAreaOfEffectResistance = function(target, spell)
+    local areaOfEffectMultiplier = 1
+
+    if target:getID() ~= spell:getPrimaryTargetID() then
+        areaOfEffectMultiplier = utils.clamp(areaOfEffectMultiplier + target:getMod(xi.mod.DMG_AOE) / 10000, 0, 2)
+    end
+
+    return areaOfEffectMultiplier
+end
+
 xi.spells.damage.calculateNukeAbsorbOrNullify = function(target, spellElement)
     local nukeAbsorbOrNullify = 1
 
@@ -911,6 +921,7 @@ xi.spells.damage.useDamageSpell = function(caster, target, spell)
     local undeadDivinePenalty         = xi.spells.damage.calculateUndeadDivinePenalty(target, skillType)
     local scarletDeliriumMultiplier   = xi.spells.damage.calculateScarletDeliriumMultiplier(caster)
     local helixMeritMultiplier        = xi.spells.damage.calculateHelixMeritMultiplier(caster, spellId)
+    local areaOfEffectResistance      = xi.spells.damage.calculateAreaOfEffectResistance(target, spell)
     local nukeAbsorbOrNullify         = xi.spells.damage.calculateNukeAbsorbOrNullify(target, spellElement)
 
     -- Calculate finalDamage. It MUST be floored after EACH multiplication.
@@ -933,6 +944,7 @@ xi.spells.damage.useDamageSpell = function(caster, target, spell)
     finalDamage = math.floor(finalDamage * undeadDivinePenalty)
     finalDamage = math.floor(finalDamage * scarletDeliriumMultiplier)
     finalDamage = math.floor(finalDamage * helixMeritMultiplier)
+    finalDamage = math.floor(finalDamage * areaOfEffectResistance)
     finalDamage = math.floor(finalDamage * nukeAbsorbOrNullify)
 
     -- Handle "Nuke Wall". It must be handled after all previous calculations, but before clamp.

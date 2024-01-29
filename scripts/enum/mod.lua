@@ -185,6 +185,7 @@ xi.mod =
     DMGMAGIC                        = 163,
     DMGMAGIC_II                     = 831, -- Magic Damage Taken II % (Aegis)
     DMGRANGE                        = 164,
+    DMG_AOE                         = 158, -- Damage Taken % when not main target of an AoE action. (Ex: Locus Mobs)
     UDMGPHYS                        = 387,
     UDMGBREATH                      = 388,
     UDMGMAGIC                       = 389,
