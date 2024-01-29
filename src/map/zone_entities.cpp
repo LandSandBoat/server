@@ -1245,14 +1245,38 @@ void CZoneEntities::PushPacket(CBaseEntity* PEntity, GLOBAL_MESSAGE_TYPE message
                         if (distanceSquared(PEntity->loc.p, PCurrentChar->loc.p) < checkDistanceSq &&
                             ((PEntity->objtype != TYPE_PC) || (((CCharEntity*)PEntity)->m_moghouseID == PCurrentChar->m_moghouseID)))
                         {
-                            if (packet->getType() == 0x00E && (packet->ref<uint8>(0x0A) != 0x20 || packet->ref<uint8>(0x0A) != 0x0F))
+                            uint16 packetType = packet->getType();
+                            if
+                                ((packetType == 0x00E && // Entity Update
+                                (packet->ref<uint8>(0x0A) != 0x20 ||
+                                packet->ref<uint8>(0x0A) != 0x0F)) ||
+                                packetType == 0x028) // Action packet
                             {
-                                uint32 id     = packet->ref<uint32>(0x04);
-                                uint16 targid = packet->ref<uint16>(0x08);
+                                uint32 id           = 0;
+                                uint16 targid       = 0;
+                                CBaseEntity* entity = nullptr;
 
-                                CBaseEntity* entity = GetEntity(targid);
+                                if (packetType == 0x00E) // Entity update
+                                {
+                                    id     = packet->ref<uint32>(0x04);
+                                    targid = packet->ref<uint16>(0x08);
+                                    entity = GetEntity(targid);
+                                }
+                                else if (packetType == 0x028) // Action packet
+                                {
+                                    id     = packet->ref<uint32>(0x05);
+                                    // Try char
+                                    entity = GetCharByID(id);
 
-                                SpawnIDList_t spawnlist;
+                                    // Try everything else
+                                    if (!entity)
+                                    {
+                                        entity = zoneutils::GetEntity(id);
+                                    }
+                                }
+
+                                // No real reason to pick SpawnMOBList, just need a reference here initially.
+                                SpawnIDList_t& spawnlist = PCurrentChar->SpawnMOBList;
 
                                 if (entity)
                                 {
@@ -1272,6 +1296,10 @@ void CZoneEntities::PushPacket(CBaseEntity* PEntity, GLOBAL_MESSAGE_TYPE message
                                     {
                                         spawnlist = PCurrentChar->SpawnTRUSTList;
                                     }
+                                    else if (entity->objtype == TYPE_PC)
+                                    {
+                                        spawnlist = PCurrentChar->SpawnPCList;
+                                    }
                                     else
                                     {
                                         entity = nullptr;
@@ -1279,8 +1307,7 @@ void CZoneEntities::PushPacket(CBaseEntity* PEntity, GLOBAL_MESSAGE_TYPE message
                                 }
                                 if (!entity)
                                 {
-                                    // got a char or nothing as the target of this entity update (which really shouldn't happen ever)
-                                    // so we're just going to skip this packet
+                                    // No target entity in spawnlists found, so we're just going to skip this packet
                                     break;
                                 }
                                 SpawnIDList_t::iterator iter = spawnlist.lower_bound(id);
