@@ -94,14 +94,10 @@ global_objects=(
     getCureFinal
     getBaseCureOld
     getElementalDamageReduction
-    getElementalDebuffDOT
-    getHelixDuration
     getMagicHitRate
     getMagicResist
     getStepAnimation
-    getElementalDebuffStatDownFromDOT
     handleAfflatusMisery
-    handleNinjutsuDebuff
     handleThrenody
     isValidHealTarget
 
