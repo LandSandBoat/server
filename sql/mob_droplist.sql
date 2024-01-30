@@ -6263,7 +6263,7 @@ INSERT INTO `mob_droplist` VALUES (756,2,0,1000,4373,0);  -- Woozyshroom (Steal)
 
 -- ZoneID:  28 - Elel
 INSERT INTO `mob_droplist` VALUES (757,0,0,1000,1614,@ALWAYS);    -- Corse Bracelet (Always, 100%)
-INSERT INTO `mob_droplist` VALUES (757,0,0,1000,14867,400);       -- Magical Mitts (40.0%)
+INSERT INTO `mob_droplist` VALUES (757,0,0,1000,14867,@UNCOMMON); -- Magical Mitts (Uncommon, 10%)
 INSERT INTO `mob_droplist` VALUES (757,0,0,1000,1639,@VCOMMON);   -- Corse Robe (Very Common, 24%)
 INSERT INTO `mob_droplist` VALUES (757,0,0,1000,15174,@UNCOMMON); -- Frenzy Sallet (Uncommon, 10%)
 

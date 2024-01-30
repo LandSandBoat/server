@@ -62,4 +62,16 @@ end
 zoneObject.onEventFinish = function(player, csid, option, npc)
 end
 
+zone_object.onZoneWeatherChange = function(weather)
+    local elel = GetMobByID(ID.mob.ELEL)
+    if
+        not elel:isSpawned() and os.time() > elel:getLocalVar("cooldown") and
+        (weather == xi.weather.GLOOM or weather == xi.weather.DARKNESS) and
+        (VanadielHour() < 4 or VanadielHour() >= 20)
+    then
+        DisallowRespawn(elel:getID(), false)
+        elel:setRespawnTime(math.random(30, 150)) -- pop 30-150 sec after dark weather starts
+    end
+end
+
 return zoneObject
