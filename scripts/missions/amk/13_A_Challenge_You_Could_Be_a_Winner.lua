@@ -2,7 +2,13 @@
 -- A Challenge! You Could Be a Winner
 -- A Moogle Kupo d'Etat M13
 -- !addmission 10 12
--- Inconspicuous Door : !pos -15 1.300 68 244
+-- Shadowy Pillar : !pos 374 -12 -15
+-- Lonely Evergreen : !pos -162 -80 178
+-- Goblin Grenadier : !pos -26 -59 -76
+-----------------------------------
+-- This mission can be repeated by losing the bncm battle in the subsequent mission
+-- Therefore to remove possible conflicts, the mission progress will be handled
+-- using a variable stored as a CharVar
 -----------------------------------
 require('scripts/globals/missions')
 require('scripts/globals/interaction/mission')
@@ -26,7 +32,7 @@ mission.sections =
 
         [xi.zone.CASTLE_ZVAHL_BAILEYS] =
         {
-            ["Shadowy_Pillar"] =
+            ['Shadowy_Pillar'] =
             {
                 onTrigger = function(player, npc)
                     return mission:progressEvent(100, 3)
@@ -42,7 +48,7 @@ mission.sections =
         },
     },
 
-    -- Part 2-a: Beaucidine Glacier
+    -- Part 2-a: Beaucedine Glacier
     {
         check = function(player, currentMission, missionStatus, vars)
             return currentMission >= mission.missionId and
@@ -56,9 +62,9 @@ mission.sections =
         {
             ['Lonely_Evergreen'] =
             {
-            onTrigger = function(player, npc)
-                return mission:progressEvent(504)
-            end,
+                onTrigger = function(player, npc)
+                    return mission:progressEvent(504)
+                end,
             },
 
             onEventFinish =
@@ -72,7 +78,7 @@ mission.sections =
         },
     },
 
-    -- Part 2-b: Beaucidine Glacier
+    -- Part 2-b: Beaucedine Glacier
     {
         check = function(player, currentMission, missionStatus, vars)
             return currentMission >= mission.missionId and
@@ -90,14 +96,14 @@ mission.sections =
                     return mission:progressEvent(503)
                 end,
             },
--- !reloadglobal scripts/missions/amk/13_A_Challenge_You_Could_Be_a_Winner I_am_sure
+
             ['Goblin_Grenadier'] =
             {
                 onTrigger = function(player, npc)
                     local answer = player:getLocalVar('Mission[10][12]pipSet') - 1
 
                     if answer < 0 then
-                        return mission:progressEvent(508)
+                        return mission:progressEvent(508, xi.ki.MAP_OF_THE_NORTHLANDS_AREA)
                     else
                         local today = VanadielDayOfTheWeek()
                         local tomorrow = (today + 1) % 8
@@ -110,7 +116,8 @@ mission.sections =
                             hintsUsed + 2,
                             answer,
                             xi.ki.MAP_OF_THE_NORTHLANDS_AREA,
-                            xi.ki.POCKET_MOGBOMB
+                            xi.ki.POCKET_MOGBOMB,
+                            xi.ki.MAP_OF_THE_NORTHLANDS_AREA
                         )
                     end
                 end,
@@ -142,7 +149,7 @@ mission.sections =
                     local element = xi.amk.helpers.pipSets[pipSet][2]
 
                     return mission:progressEvent(
-                        510,
+                        511,
                         pos.x * 1000,
                         pos.z * 1000,
                         pos.y * 1000,
@@ -160,7 +167,7 @@ mission.sections =
                     local element = xi.amk.helpers.pipSets[pipSet][3]
 
                     return mission:progressEvent(
-                        510,
+                        512,
                         pos.x * 1000,
                         pos.z * 1000,
                         pos.y * 1000,
@@ -178,7 +185,7 @@ mission.sections =
                     local element = xi.amk.helpers.pipSets[pipSet][4]
 
                     return mission:progressEvent(
-                        510,
+                        513,
                         pos.x * 1000,
                         pos.z * 1000,
                         pos.y * 1000,
@@ -196,7 +203,7 @@ mission.sections =
                     local element = xi.amk.helpers.pipSets[pipSet][5]
 
                     return mission:progressEvent(
-                        510,
+                        514,
                         pos.x * 1000,
                         pos.z * 1000,
                         pos.y * 1000,
@@ -214,7 +221,7 @@ mission.sections =
                     local element = xi.amk.helpers.pipSets[pipSet][6]
 
                     return mission:progressEvent(
-                        510,
+                        515,
                         pos.x * 1000,
                         pos.z * 1000,
                         pos.y * 1000,
@@ -224,11 +231,20 @@ mission.sections =
                 end,
             },
 
+            onEventUpdate =
+            {
+                [507] = function(player, csid, option, npc)
+                    -- This updateEvent updates the markers on the map to track which pips have already been found,
+                    -- and can alter what the map shows when a pip is checked.  If not called here, the args
+                    -- for hints used and answer get input as markers and erroneously show incorrect pips
+                    -- All zeros = only show what have been found so far
+                    player:updateEvent(0, 0, 0, 0, 0, 0)
+                end,
+            },
+
             onEventFinish =
             {
                 [507] = function(player, csid, option, npc)
-                    -- option = 4 when the player chooses to exit the chat, or tries to get a third hint,
-                    -- which doesn't exist.  Two hints max
                     if
                         option == 1 or -- Used first hint
                         option == 2    -- Used second hint
@@ -238,6 +254,9 @@ mission.sections =
                     elseif option == 3 then
                         -- wrong answer, reset puzzle
                         player:needToZone(false)
+                    -- elseif option == 4 then
+                        -- Player chooses to exit the chat, or tries to get a third hint,
+                        -- which doesn't exist.  Two hints max
                     elseif
                         option == 5 or -- Correct answer, no hints used
                         option == 6 or -- Correct answer, one hint used
@@ -247,7 +266,12 @@ mission.sections =
                         npcUtil.giveKeyItem(player, xi.ki.POCKET_MOGBOMB)
 
                         -- Add flee affect, base 5 minutes for no hints used, 3 for 1 hint, no flee for 2 hints
-                        local fleeDuration = { [5] = 300, [6] = 180 }
+                        local fleeDuration =
+                        {
+                            [5] = 300,
+                            [6] = 180,
+                        }
+
                         if option == 5 or option == 6 then
                             player:addStatusEffect(xi.effect.FLEE, 100, 0, fleeDuration[option])
                         end
@@ -256,13 +280,13 @@ mission.sections =
 
                 [508] = function(player, csid, option, npc)
                     -- Pipset offset by 1 to account for saving 0 as a variable.  When retrieving, subtract 1
-                    player:setCharVar('Mission[10][12]pipSet', math.random(1, 10))
+                    player:setLocalVar('Mission[10][12]pipSet', math.random(1, 10)) -- range: 0 - 9
                 end,
             },
         },
     },
 
-    -- Part 2-c: Beaucidine Glacier
+    -- Part 2-c: Beaucedine Glacier
     {
         check = function(player, currentMission, missionStatus, vars)
             return currentMission >= mission.missionId and

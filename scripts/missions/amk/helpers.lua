@@ -418,7 +418,8 @@ end
 
 -- Mission 13 (index 12) - Puzzles!!!
 -- Puzzle 1
-xi.amk.helpers.pipSets = {
+xi.amk.helpers.pipSets =
+{
     -- [Answer]: 0-9 {
     --     [1] = NW, [4] = NE,
     --     [2] = W,  [5] = E,
@@ -494,20 +495,3 @@ xi.amk.helpers.pipSets = {
         [3] = 1, [6] = 3,
     },
 }
-
--- Pips have the following order: NW, W, SW, NE, E, SE
--- note that the [AMK]12_puzzle_1_pipSet variable is offset by 1 to avoid index 0
-xi.amk.helpers.pipTrigger = function(player, npc, mission, pipOffset)
-    local pipSet = player:getCharVar('Mission[10][12]pipSet') - 1
-    local pos = npc:getPos()
-    local element = xi.amk.helpers.pipSets[pipSet][pipOffset]
-    print('got here in pipTrigger')
-    return mission:progressEvent(
-        510,
-        pos.x * 1000,
-        pos.z * 1000,
-        pos.y * 1000,
-        element,
-        xi.ki.MAP_OF_THE_NORTHLANDS_AREA
-    )
-end
