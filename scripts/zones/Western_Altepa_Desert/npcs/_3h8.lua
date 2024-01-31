@@ -13,8 +13,11 @@ end
 
 entity.onTrigger = function(player, npc)
     if npc:getAnimation() ~= xi.anim.OPEN_DOOR then
-        npc:setAnimation(xi.anim.OPEN_DOOR)
-        GetNPCByID(npc:getID() - 4):setAnimation(xi.anim.OPEN_DOOR)
+        npc:updateToEntireZone(xi.status.NORMAL, xi.anim.OPEN_DOOR)
+        local column = GetNPCByID(npc:getID() - 4)
+        if column then
+            column:updateToEntireZone(xi.status.NORMAL, xi.anim.OPEN_DOOR)
+        end
     else
         player:messageSpecial(ID.text.DOES_NOT_RESPOND)
     end
@@ -25,9 +28,19 @@ entity.onTrigger = function(player, npc)
         GetNPCByID(ID.npc.ALTEPA_GATE + 7):getAnimation() == xi.anim.OPEN_DOOR and
         GetNPCByID(ID.npc.ALTEPA_GATE + 8):getAnimation() == xi.anim.OPEN_DOOR
     then
-        local openTime = math.random(15, 30) * 60
+        local openTime = math.random(15, 30) * 1000 * 60
+
         for i = ID.npc.ALTEPA_GATE, ID.npc.ALTEPA_GATE + 8 do
-            GetNPCByID(i):openDoor(openTime)
+            local door = GetNPCByID(i)
+
+            -- openDoor used to (read: a decade ish ago before Sol) allow calls to doors already open and set a timer to close them
+            -- This snippet reproduces this behavor AND updates everyone in the zone on the status of the doors.
+            if door then
+                door:updateToEntireZone(xi.status.NORMAL, xi.anim.OPEN_DOOR)
+                door:timer(openTime, function(doorArg)
+                    doorArg:updateToEntireZone(xi.status.NORMAL, xi.anim.CLOSE_DOOR)
+                end)
+            end
         end
     end
 end

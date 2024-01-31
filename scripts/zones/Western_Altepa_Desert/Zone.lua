@@ -78,4 +78,13 @@ zoneObject.onZoneWeatherChange = function(weather)
     end
 end
 
+zoneObject.afterZoneIn = function(player)
+    -- Send players who zone in an update for the Altepa Gate "doors" so you can see the state from further away
+    -- TODO: these NPCs should be "permanently" in the NPC spawn list for all players -- there's a bug if you get too close and move away they revert to the "needs to be opened" state.
+    -- This currently acts as a small QoL from a long distance, better than nothing, but closer to retail.
+    for i = ID.npc.ALTEPA_GATE, ID.npc.ALTEPA_GATE + 8 do
+        player:sendEntityUpdateToPlayer(GetNPCByID(i), xi.entityUpdate.ENTITY_UPDATE, xi.updateType.UPDATE_COMBAT)
+    end
+end
+
 return zoneObject
