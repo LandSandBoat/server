@@ -16,7 +16,7 @@ spellObject.onSpellCast = function(caster, target, spell)
         local power    = utils.clamp(damage, 0, 9999)
         local duration = xi.spells.enfeebling.calculateDuration(caster, target, spell:getID(), xi.effect.HELIX, xi.skill.ELEMENTAL_MAGIC)
 
-        target:addStatusEffect(xi.effect.HELIX, power, 10, duration, 2)
+        target:addStatusEffect(xi.effect.HELIX, power, 10, duration, 0, 0, 2)
     end
 
     return damage
