@@ -84,7 +84,12 @@ CMagicState::CMagicState(CBattleEntity* PEntity, uint16 targid, SpellID spellid,
     actionTarget.speceffect = SPECEFFECT::NONE;
     actionTarget.animation  = 0;
     actionTarget.param      = static_cast<uint16>(m_PSpell->getID());
-    actionTarget.messageID  = 327; // starts casting
+    actionTarget.messageID  = 327; // <caster> starts casting <spell> on <target>.
+
+    if (PEntity->objtype != TYPE_PC)
+    {
+        actionTarget.messageID = 3; // <caster> starts casting <spell>.
+    }
 
     // TODO: weaponskill lua object
     m_PEntity->PAI->EventHandler.triggerListener("MAGIC_START", CLuaBaseEntity(m_PEntity), CLuaSpell(m_PSpell.get()), CLuaAction(&action));
