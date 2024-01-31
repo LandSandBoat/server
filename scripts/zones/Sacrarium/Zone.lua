@@ -62,4 +62,47 @@ end
 zoneObject.onEventFinish = function(player, csid, option, npc)
 end
 
+zoneObject.onZoneWeatherChange = function(weather)
+    local elel = GetMobByID(ID.mob.ELEL)
+    local vanadielHour = VanadielHour()
+
+    if
+        elel and
+        elel:getZone():getLocalVar('elelQueued') == 0 and -- Why doesn't onZoneWeatherChange contain the zone object...?
+        not elel:isSpawned() and os.time() > elel:getLocalVar('cooldown') and
+        (weather == xi.weather.GLOOM or weather == xi.weather.DARKNESS) and
+        (vanadielHour < 4 or vanadielHour >= 20)
+    then
+        DisallowRespawn(elel:getID(), false)
+        elel:setRespawnTime(math.random(30, 150)) -- pop 30-150 sec after dark weather starts
+        -- Attempting to spawn Elel -- gate it so we don't continually reset it's spawn time.
+        elel:getZone():setLocalVar('elelQueued', 1)
+    end
+end
+
+zoneObject.onZoneTick = function(zone)
+    -- Check for Elel to spawn
+    local vanadielHour = VanadielHour()
+
+    if vanadielHour < 4 or vanadielHour >= 20 then
+        local weather = zone:getWeather()
+
+        if weather == xi.weather.GLOOM or weather == xi.weather.DARKNESS then
+            local elel = GetMobByID(ID.mob.ELEL)
+            if
+                elel and
+                zone:getLocalVar('elelQueued') == 0 and
+                not elel:isSpawned() and os.time() > elel:getLocalVar('cooldown')
+            then
+                DisallowRespawn(elel:getID(), false)
+                elel:setRespawnTime(math.random(30, 150)) -- pop 30-150 sec after dark weather starts
+                -- Attempting to spawn Elel -- gate it so we don't continually reset it's spawn time.
+                zone:setLocalVar('elelQueued', 1)
+            end
+        end
+    else -- ungate Elel to spawn
+        zone:setLocalVar('elelQueued', 0)
+    end
+end
+
 return zoneObject

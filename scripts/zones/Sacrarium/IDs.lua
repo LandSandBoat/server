@@ -46,6 +46,7 @@ zones[xi.zone.SACRARIUM] =
             { 16892074, { [xi.race.GALKA]    = true } },                            -- Indich (galka)
         },
         OLD_PROFESSOR_MARISELLE = 16891970,
+        ELEL                    = GetFirstID('Elel'),
     },
     npc =
     {
