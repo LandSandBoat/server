@@ -100,6 +100,9 @@ INSERT INTO `item_latents` VALUES (11474,163,-300,26,1);   -- Nighttime: Magic d
 -- Diana Corona
 INSERT INTO `item_latents` VALUES (11486,28,4,37,4);     -- Full moon magic attack bonus +4
 
+-- Trainee's Spectacles
+INSERT INTO `item_latents` VALUES (11499,127,1,24,48); -- SYNTH_TRAINEE: SKILL_FISHING - FISH: 1
+
 -- Aesir Mantle
 INSERT INTO `item_latents` VALUES (11546,288,1,32,0);    -- Double Attack +2% On Darksdays
 
@@ -2245,7 +2248,7 @@ INSERT INTO `item_latents` VALUES (18758,8,3,37,4);      -- Full moon STR+3
 INSERT INTO `item_latents` VALUES (18758,9,3,37,4);      -- Full moon DEX+3
 
 -- Trainee Scissors
-INSERT INTO `item_latents` VALUES (18763,131,1,24,40);   -- Clothcraft +1 under skill 40
+INSERT INTO `item_latents` VALUES (18763,131,1,24,52); -- SYNTH_TRAINEE: SKILL_CLOTHCRAFT - CLOTH: 1
 
 INSERT INTO `item_latents` VALUES (18767,25,3,59,8);     -- Birdbanes - Vs. birds: Accuracy+3
 

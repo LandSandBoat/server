@@ -826,8 +826,19 @@ bool CLatentEffectContainer::ProcessLatentEffect(CLatentEffect& latentEffect)
             expression = latentEffect.GetConditionsValue() == m_POwner->getZone();
             break;
         case LATENT::SYNTH_TRAINEE:
-            // todo: figure this out
+        {
+            expression = (uint16)m_POwner->RealSkills.skill[latentEffect.GetConditionsValue()] / 10 < 40 &&
+                         !m_POwner->StatusEffectContainer->HasStatusEffect(EFFECT_FISHING_IMAGERY) &&
+                         !m_POwner->StatusEffectContainer->HasStatusEffect(EFFECT_WOODWORKING_IMAGERY) &&
+                         !m_POwner->StatusEffectContainer->HasStatusEffect(EFFECT_SMITHING_IMAGERY) &&
+                         !m_POwner->StatusEffectContainer->HasStatusEffect(EFFECT_GOLDSMITHING_IMAGERY) &&
+                         !m_POwner->StatusEffectContainer->HasStatusEffect(EFFECT_CLOTHCRAFT_IMAGERY) &&
+                         !m_POwner->StatusEffectContainer->HasStatusEffect(EFFECT_LEATHERCRAFT_IMAGERY) &&
+                         !m_POwner->StatusEffectContainer->HasStatusEffect(EFFECT_BONECRAFT_IMAGERY) &&
+                         !m_POwner->StatusEffectContainer->HasStatusEffect(EFFECT_ALCHEMY_IMAGERY) &&
+                         !m_POwner->StatusEffectContainer->HasStatusEffect(EFFECT_COOKING_IMAGERY);
             break;
+        }
         case LATENT::SONG_ROLL_ACTIVE:
             expression = m_POwner->StatusEffectContainer->HasStatusEffectByFlag(EFFECTFLAG_ROLL | EFFECTFLAG_SONG);
             break;

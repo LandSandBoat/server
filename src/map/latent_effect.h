@@ -54,7 +54,7 @@ enum class LATENT : uint16
     AVATAR_IN_PARTY        = 21, // party has a specific avatar - PARAM: same as globals/pets.lua (21 for any avatar)
     JOB_IN_PARTY           = 22, // party has job - PARAM: JOBTYPE
     ZONE                   = 23, // in zone - PARAM: zoneid
-    SYNTH_TRAINEE          = 24, // synth skill under 40 + no support
+    SYNTH_TRAINEE          = 24, // synth skill under 40 + no support: PARAM: 48: FISH, 49: WOOD, 50: SMITH, 51: GOLDSMITH, 52: CLOTH, 53: LEATHER, 54: BONE, 55: ALCHEMY, 56: COOKING
     SONG_ROLL_ACTIVE       = 25, // any song or roll active
     TIME_OF_DAY            = 26, // PARAM: 0: DAYTIME 1: NIGHTTIME 2: DUSK-DAWN
     HOUR_OF_DAY            = 27, // PARAM: 1: NEW DAY, 2: DAWN, 3: DAY, 4: DUSK, 5: EVENING, 6: DEAD OF NIGHT
