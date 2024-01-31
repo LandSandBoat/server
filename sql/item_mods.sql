@@ -57094,6 +57094,12 @@ INSERT INTO `item_mods` VALUES (23795,1,1); -- DEF: 1
 -- Ziamet Nails
 INSERT INTO `item_mods` VALUES (23796,1,1); -- DEF: 1
 
+-- Poroggo Cassock
+INSERT INTO `item_mods` VALUES (23803,1,1); -- DEF: 1
+
+-- Poroggo Cassock +1
+INSERT INTO `item_mods` VALUES (23804,1,1); -- DEF: 1
+
 -- Republic Platinum Medal
 INSERT INTO `item_mods` VALUES (25415,8,10);  -- STR: 10
 INSERT INTO `item_mods` VALUES (25415,23,30); -- ATT: 30

@@ -2716,6 +2716,15 @@ INSERT INTO `item_latents` VALUES (23685,399,18,52,5);   -- Pedagogy Loafers+3: 
 INSERT INTO `item_latents` VALUES (23685,399,18,52,6);   -- Pedagogy Loafers+3: Weather: Enhances Celerity and Alacrity Effect +18% (THUNDER)
 INSERT INTO `item_latents` VALUES (23685,399,18,52,7);   -- Pedagogy Loafers+3: Weather: Enhances Celerity and Alacrity Effect +18% (LIGHT)
 INSERT INTO `item_latents` VALUES (23685,399,18,52,8);   -- Pedagogy Loafers+3: Weather: Enhances Celerity and Alacrity Effect +18% (DARK)
+
+-- Poroggo Cassock +1
+INSERT INTO `item_latents` VALUES (23804,239,5,30,0);    -- Watersday: NULL_RANGED_DAMAGE 5% chance
+INSERT INTO `item_latents` VALUES (23804,384,2500,30,0); -- Watersday: HASTE_GEAR +25%
+INSERT INTO `item_latents` VALUES (23804,416,5,30,0);    -- Watersday: NULL_PHYSICAL_DAMAGE 5% chance
+INSERT INTO `item_latents` VALUES (23804,476,5,30,0);    -- Watersday: MAGIC_NULL 5% chance
+INSERT INTO `item_latents` VALUES (23804,958,25,30,0);   -- Watersday: STATUSRES +20
+-- TODO: "Occasionaly null breath dmg" OR "Occasionally null all damage"
+
 INSERT INTO `item_latents` VALUES (27342,63,10,13,64);   -- Fallen's Sollerets,"Last Resort"+1
 INSERT INTO `item_latents` VALUES (27343,63,10,13,64);   -- Fallen's Sollerets +1,"Last Resort"+1
 INSERT INTO `item_latents` VALUES (27366,399,15,52,1);   -- Pedagogy Loafers: Weather: Enhances Celerity and Alacrity Effect +15% (FIRE)
