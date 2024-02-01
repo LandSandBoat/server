@@ -2540,7 +2540,18 @@ void SmallPacket0x04D(map_session_data_t* const PSession, CCharEntity* const PCh
 
             CItem* PItem = PChar->getStorage(LOC_INVENTORY)->GetItem(invslot);
 
-            if (quantity > 0 && PItem && PItem->getQuantity() >= quantity && PChar->UContainer->IsSlotEmpty(slotID))
+            if (quantity == 0 || !PItem)
+            {
+                return;
+            }
+
+            if (PItem->getQuantity() < quantity || PItem->getReserve() > 0)
+            {
+                ShowWarning("Delivery Box: %s attempted to send insufficient/reserved %u %s (%u).", PChar->getName(), quantity, PItem->getName(), PItem->getID());
+                return;
+            }
+
+            if (PChar->UContainer->IsSlotEmpty(slotID))
             {
                 int32 ret = sql->Query("SELECT charid, accid FROM chars WHERE charname = '%s' LIMIT 1;", str(data[0x10]));
                 if (ret != SQL_ERROR && sql->NumRows() > 0 && sql->NextRow() == SQL_SUCCESS)
@@ -2697,8 +2708,8 @@ void SmallPacket0x04D(map_session_data_t* const PSession, CCharEntity* const PCh
                     {
                         uint32 charid = sql->GetUIntData(0);
                         ret           = sql->Query(
-                                      "UPDATE delivery_box SET sent = 0 WHERE charid = %u AND box = 2 AND slot = %u AND sent = 1 AND received = 0 LIMIT 1;",
-                                      PChar->id, slotID);
+                            "UPDATE delivery_box SET sent = 0 WHERE charid = %u AND box = 2 AND slot = %u AND sent = 1 AND received = 0 LIMIT 1;",
+                            PChar->id, slotID);
 
                         if (ret != SQL_ERROR && sql->AffectedRows() == 1)
                         {
@@ -3263,7 +3274,7 @@ void SmallPacket0x04E(map_session_data_t* const PSession, CCharEntity* const PCh
         {
             CItem* PItem = PChar->getStorage(LOC_INVENTORY)->GetItem(slot);
 
-            if ((PItem != nullptr) && !(PItem->isSubType(ITEM_LOCKED)) && !(PItem->getFlag() & ITEM_FLAG_NOAUCTION) && PItem->getQuantity() >= quantity)
+            if ((PItem != nullptr) && !(PItem->isSubType(ITEM_LOCKED)) && PItem->getReserve() == 0 && !(PItem->getFlag() & ITEM_FLAG_NOAUCTION) && PItem->getQuantity() >= quantity)
             {
                 if (PItem->isSubType(ITEM_CHARGED) && ((CItemUsable*)PItem)->getCurrentCharges() < ((CItemUsable*)PItem)->getMaxCharges())
                 {
@@ -3289,7 +3300,8 @@ void SmallPacket0x04E(map_session_data_t* const PSession, CCharEntity* const PCh
 
                 auctionFee = std::clamp<uint32>(auctionFee, 0, settings::get<uint32>("map.AH_MAX_FEE"));
 
-                if (PChar->getStorage(LOC_INVENTORY)->GetItem(0)->getQuantity() < auctionFee)
+                auto PGil = PChar->getStorage(LOC_INVENTORY)->GetItem(0);
+                if (PGil->getQuantity() < auctionFee || PGil->getReserve() > 0)
                 {
                     PChar->pushPacket(new CAuctionHousePacket(action, 197, 0, 0, 0, 0)); // Not enough gil to pay fee
                     return;
@@ -3356,7 +3368,7 @@ void SmallPacket0x04E(map_session_data_t* const PSession, CCharEntity* const PCh
                     }
                     CItem* gil = PChar->getStorage(LOC_INVENTORY)->GetItem(0);
 
-                    if (gil != nullptr && gil->isType(ITEM_CURRENCY) && gil->getQuantity() >= price)
+                    if (gil != nullptr && gil->isType(ITEM_CURRENCY) && gil->getQuantity() >= price && gil->getReserve() == 0)
                     {
                         const char* fmtQuery = "UPDATE auction_house SET buyer_name = '%s', sale = %u, sell_date = %u WHERE itemid = %u AND buyer_name IS NULL "
                                                "AND stack = %u AND price <= %u ORDER BY price LIMIT 1";
@@ -4648,8 +4660,8 @@ void SmallPacket0x071(map_session_data_t* const PSession, CCharEntity* const PCh
                     {
                         uint32 charid = sql->GetUIntData(0);
                         ret           = sql->Query(
-                                      "SELECT partyid FROM accounts_parties WHERE charid = %u AND allianceid = %u AND partyflag & %d",
-                                      charid, PChar->PParty->m_PAlliance->m_AllianceID, PARTY_LEADER | PARTY_SECOND | PARTY_THIRD);
+                            "SELECT partyid FROM accounts_parties WHERE charid = %u AND allianceid = %u AND partyflag & %d",
+                            charid, PChar->PParty->m_PAlliance->m_AllianceID, PARTY_LEADER | PARTY_SECOND | PARTY_THIRD);
                         if (ret != SQL_ERROR && sql->NumRows() == 1 && sql->NextRow() == SQL_SUCCESS)
                         {
                             uint32 partyid = sql->GetUIntData(0);
@@ -4939,7 +4951,7 @@ void SmallPacket0x083(map_session_data_t* const PSession, CCharEntity* const PCh
 
     if ((gil != nullptr) && gil->isType(ITEM_CURRENCY))
     {
-        if (gil->getQuantity() >= (price * quantity))
+        if (gil->getQuantity() >= (price * quantity) && gil->getReserve() == 0)
         {
             uint8 SlotID = charutils::AddItem(PChar, LOC_INVENTORY, itemID, quantity);
 
@@ -5326,7 +5338,7 @@ void SmallPacket0x0AA(map_session_data_t* const PSession, CCharEntity* const PCh
         quantity = PItem->getStackSize();
     }
 
-    if (((gil != nullptr) && gil->isType(ITEM_CURRENCY)) && item != nullptr && item->getQuantity() >= quantity)
+    if (((gil != nullptr) && gil->isType(ITEM_CURRENCY)) && gil->getReserve() == 0 && item != nullptr && item->getQuantity() >= quantity)
     {
         if (gil->getQuantity() > (item->getBasePrice() * quantity))
         {
@@ -7787,14 +7799,14 @@ void SmallPacket0x106(map_session_data_t* const PSession, CCharEntity* const PCh
     }
 
     CItem* PBazaarItem = PBazaar->GetItem(SlotID);
-    if (PBazaarItem == nullptr)
+    if (PBazaarItem == nullptr || PBazaarItem->getReserve() > 0)
     {
         return;
     }
 
     // Obtain the players gil
     CItem* PCharGil = PBuyerInventory->GetItem(0);
-    if (PCharGil == nullptr || !PCharGil->isType(ITEM_CURRENCY))
+    if (PCharGil == nullptr || !PCharGil->isType(ITEM_CURRENCY) || PCharGil->getReserve() > 0)
     {
         // Player has no gil
         PChar->pushPacket(new CBazaarPurchasePacket(PTarget, false));
