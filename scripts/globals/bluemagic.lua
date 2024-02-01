@@ -12,12 +12,16 @@ xi.spells.blue = xi.spells.blue or {}
 -----------------------------------
 
 -- The TP modifier (currently unused)
-TPMOD_NONE     = 0
-TPMOD_CRITICAL = 1
-TPMOD_DAMAGE   = 2
-TPMOD_ACC      = 3
-TPMOD_ATTACK   = 4
-TPMOD_DURATION = 5
+xi.spells.blue.tpMod =
+{
+    NONE          = 0,
+    CRITICAL      = 1,
+    DAMAGE        = 2,
+    ACC           = 3,
+    ATTACK        = 4,
+    DURATION      = 5,
+    EFFECT_CHANCE = 6,
+}
 
 -----------------------------------
 -- Local functions
