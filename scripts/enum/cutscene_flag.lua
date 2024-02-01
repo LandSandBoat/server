@@ -1,9 +1,10 @@
-xi = xi or {}
-xi.cutscenes = {}
-
+-----------------------------------
 -- Flags during events
+-----------------------------------
+xi = xi or {}
+
 -- Note: events have opcodes that can set flags internally, these can be ignored or set for each unique cutscene.
-xi.cutscenes.params =
+xi.cutsceneFlag =
 {
     UNKNOWN_1       = 0x01, -- Commonly set, effect unknown
     NO_PCS          = 0x02, -- Do not display other Player Characters
