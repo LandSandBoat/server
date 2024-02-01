@@ -2079,6 +2079,14 @@ void CCharEntity::OnItemFinish(CItemState& state, action_t& action)
     auto* PTarget = static_cast<CBattleEntity*>(state.GetTarget());
     auto* PItem   = state.GetItem();
 
+    if (!PItem->isType(ITEM_EQUIPMENT) && (PItem->getQuantity() < 1 || PItem->getReserve() > 0))
+    {
+        ShowWarning("OnItemFinish: %s attempted to use reserved/insufficient %s (%u).", this->getName(), PItem->getName(), PItem->getID());
+        this->pushPacket(new CMessageBasicPacket(this, this, PItem->getID(), 0, MSGBASIC_ITEM_FAILS_TO_ACTIVATE));
+
+        return;
+    }
+
     // TODO: I'm sure this is supposed to be in the action packet... (animation, message)
     if (PItem->getAoE())
     {
