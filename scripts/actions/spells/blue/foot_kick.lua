@@ -21,7 +21,7 @@ end
 spellObject.onSpellCast = function(caster, target, spell)
     local params = {}
     params.ecosystem = xi.ecosystem.BEAST
-    params.tpmod = TPMOD_CRITICAL
+    params.tpmod = xi.spells.blue.tpMod.CRITICAL
     params.critchance = 0
     if caster:hasStatusEffect(xi.effect.AZURE_LORE) then
         params.critchance = 55

@@ -21,7 +21,7 @@ end
 spellObject.onSpellCast = function(caster, target, spell)
     local params = {}
     params.ecosystem = xi.ecosystem.BIRD
-    params.tpmod = TPMOD_ACC
+    params.tpmod = xi.spells.blue.tpMod.ACC
     params.bonusacc = 0
     if caster:hasStatusEffect(xi.effect.AZURE_LORE) then
         params.bonusacc = 70

@@ -21,7 +21,7 @@ end
 spellObject.onSpellCast = function(caster, target, spell)
     local params = {}
     params.ecosystem = xi.ecosystem.LUMINIAN
-    params.tpmod = TPMOD_ATTACK
+    params.tpmod = xi.spells.blue.tpMod.ATTACK
     params.attackType = xi.attackType.PHYSICAL
     params.damageType = xi.damageType.SLASHING
     params.scattr = xi.skillchainType.GRAVITATION

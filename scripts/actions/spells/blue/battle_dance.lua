@@ -21,7 +21,7 @@ end
 spellObject.onSpellCast = function(caster, target, spell)
     local params = {}
     params.ecosystem = xi.ecosystem.BEASTMEN
-    params.tpmod = TPMOD_DURATION
+    params.tpmod = xi.spells.blue.tpMod.DURATION
     params.attackType = xi.attackType.PHYSICAL
     params.damageType = xi.damageType.SLASHING
     params.scattr = xi.skillchainType.IMPACTION

@@ -21,7 +21,7 @@ end
 spellObject.onSpellCast = function(caster, target, spell)
     local params = {}
     params.ecosystem = xi.ecosystem.PLANTOID
-    params.tpmod = TPMOD_DURATION
+    params.tpmod = xi.spells.blue.tpMod.DURATION
     params.attackType = xi.attackType.PHYSICAL
     params.damageType = xi.damageType.BLUNT
     params.scattr = xi.skillchainType.REVERBERATION

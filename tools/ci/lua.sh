@@ -101,14 +101,6 @@ global_objects=(
     handleThrenody
     isValidHealTarget
 
-    TPMOD_NONE
-    TPMOD_CHANCE
-    TPMOD_CRITICAL
-    TPMOD_DAMAGE
-    TPMOD_ACC
-    TPMOD_ATTACK
-    TPMOD_DURATION
-
     ForceCrash
     BuildString
 
