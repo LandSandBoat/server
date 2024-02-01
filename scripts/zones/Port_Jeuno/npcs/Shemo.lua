@@ -15,8 +15,8 @@ local sacredKindredCrest = 4
 local isTradeNum2 = 0
 
 entity.onTrigger = function(player, npc)
-    local csid = 352
-    local sealShift = {}
+    local csid        = 352
+    local sealShift   = {}
     local hideOptions = 0
 
     sealShift[1] = player:getSeals(beastmanSeal)

@@ -8,7 +8,7 @@ local entity = {}
 
 local shamiSealItems =
 {
---  Trade Item                     Seal ID, Retrieve Option,
+    -- Trade Item ID              Seal ID, Retrieve Option
     [xi.item.BEASTMENS_SEAL       ] = { 0, 2 },
     [xi.item.KINDREDS_SEAL        ] = { 1, 1 },
     [xi.item.KINDREDS_CREST       ] = { 2, 3 },
@@ -18,22 +18,22 @@ local shamiSealItems =
 
 local shamiOrbItems =
 {
---  Item ID                        CS, PO, SealID, Cost,
-    [xi.item.CLOUDY_ORB     ] = {  5,  1,      0,   20, },
-    [xi.item.SKY_ORB        ] = {  9,  2,      0,   30, },
-    [xi.item.STAR_ORB       ] = {  9,  3,      0,   40, },
-    [xi.item.COMET_ORB      ] = {  9,  4,      0,   50, },
-    [xi.item.MOON_ORB       ] = {  9,  5,      0,   60, },
-    [xi.item.CLOTHO_ORB     ] = {  9,  6,      1,   30, },
-    [xi.item.LACHESIS_ORB   ] = {  9,  7,      1,   30, },
-    [xi.item.ATROPOS_ORB    ] = {  9,  8,      1,   30, },
-    [xi.item.THEMIS_ORB     ] = { 11,  9,      1,   99, },
-    [xi.item.PHOBOS_ORB     ] = { 11, 10,      2,   30, },
-    [xi.item.DEIMOS_ORB     ] = { 11, 11,      2,   50, },
-    [xi.item.ZELOS_ORB      ] = { 11, 12,      3,   30, },
-    [xi.item.BIA_ORB        ] = { 11, 13,      3,   50, },
-    [xi.item.MICROCOSMIC_ORB] = { 11, 14,      4,   10, },
-    [xi.item.MACROCOSMIC_ORB] = { 11, 15,      4,   20, },
+    -- Item ID                    CS, PO, SealID, Cost
+    [xi.item.CLOUDY_ORB     ] = {  5,  1,      0,   20 },
+    [xi.item.SKY_ORB        ] = {  9,  2,      0,   30 },
+    [xi.item.STAR_ORB       ] = {  9,  3,      0,   40 },
+    [xi.item.COMET_ORB      ] = {  9,  4,      0,   50 },
+    [xi.item.MOON_ORB       ] = {  9,  5,      0,   60 },
+    [xi.item.CLOTHO_ORB     ] = {  9,  6,      1,   30 },
+    [xi.item.LACHESIS_ORB   ] = {  9,  7,      1,   30 },
+    [xi.item.ATROPOS_ORB    ] = {  9,  8,      1,   30 },
+    [xi.item.THEMIS_ORB     ] = { 11,  9,      1,   99 },
+    [xi.item.PHOBOS_ORB     ] = { 11, 10,      2,   30 },
+    [xi.item.DEIMOS_ORB     ] = { 11, 11,      2,   50 },
+    [xi.item.ZELOS_ORB      ] = { 11, 12,      3,   30 },
+    [xi.item.BIA_ORB        ] = { 11, 13,      3,   50 },
+    [xi.item.MICROCOSMIC_ORB] = { 11, 14,      4,   10 },
+    [xi.item.MACROCOSMIC_ORB] = { 11, 15,      4,   20 },
 }
 
 local function getSealTradeOption(trade)
@@ -50,6 +50,7 @@ local function convertSealRetrieveOption(option)
     for itemID, sealData in pairs(shamiSealItems) do
         if (option + sealData[2]) % 256 == 0 then
             local sealCount = (option + sealData[2]) / 256 - 1
+
             return itemID, sealData[1], sealCount
         end
     end
@@ -86,15 +87,17 @@ end
 entity.onTrade = function(player, npc, trade)
     -- Trading Seals/Crests
     local sealOption = getSealTradeOption(trade)
+
     if sealOption ~= nil then
         local eventParams = { 321, 0, 0, 0, 0, 0 }
         local storedSeals = player:getSeals(sealOption)
-        local itemCount = trade:getItemCount()
+        local itemCount   = trade:getItemCount()
 
         eventParams[sealOption + 2] = bit.lshift(storedSeals + itemCount, 16)
         player:startEvent(unpack(eventParams))
         player:addSeals(itemCount, sealOption)
         player:confirmTrade()
+
         return
     end
 
@@ -106,10 +109,10 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local beastmensSeal = player:getSeals(0)
-    local kindredsSeal = player:getSeals(1)
-    local kindredsCrest = player:getSeals(2)
-    local highKindredsCrest = player:getSeals(3)
+    local beastmensSeal       = player:getSeals(0)
+    local kindredsSeal        = player:getSeals(1)
+    local kindredsCrest       = player:getSeals(2)
+    local highKindredsCrest   = player:getSeals(3)
     local sacredKindredsCrest = player:getSeals(4)
 
     -- TODO: player:startEvent(322, 0, 0, 0, 0, 1, 0, 1) -- First time talking to him WITH beastmen seal in inventory
@@ -135,8 +138,19 @@ entity.onEventFinish = function(player, csid, option, npc)
     then
         local itemID, sealID, retrievedSealCount = convertSealRetrieveOption(option)
 
-        if npcUtil.giveItem(player, { { itemID, retrievedSealCount } }) then
-            player:delSeals(retrievedSealCount, sealID)
+        if
+            itemID and
+            sealID and
+            retrievedSealCount
+        then
+            local availableSeals = player:getSeals(sealID)
+
+            if
+                availableSeals >= retrievedSealCount and
+                npcUtil.giveItem(player, { { itemID, retrievedSealCount } })
+            then
+                player:delSeals(retrievedSealCount, sealID)
+            end
         end
 
     -- Purchasing a BCNM Orb

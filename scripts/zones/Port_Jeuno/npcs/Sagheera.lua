@@ -361,8 +361,9 @@ entity.onTrigger = function(player, npc)
     else
         -- event parameters
 
-        local storedABCs = player:getCurrency('ancient_beastcoin')
+        local storedABCs     = player:getCurrency('ancient_beastcoin')
         local playerSagheera = player:getCharVar('SagheeraInteractions')
+
         -- bitfield of menu options
         local menu = 0
         -- bit 0 - has boughten a cosmo cleanse before
@@ -401,10 +402,10 @@ entity.onTrigger = function(player, npc)
             menu = utils.mask.setBit(menu, 13, true)
         end
 
-        local arg3 = 0
-        local arg4 = 0
-        local afUpgrade = player:getCharVar('AFupgrade')
-        local gil = player:getGil()
+        local arg3            = 0
+        local arg4            = 0
+        local afUpgrade       = player:getCharVar('AFupgrade')
+        local gil             = player:getGil()
         local hasCosmoCleanse = 0
 
         -- if player is waiting for an upgraded af or relic
@@ -431,14 +432,16 @@ end
 entity.onEventUpdate = function(player, csid, option, npc)
     -- info about af armor upgrades
     if csid == 310 and afArmorPlusOne[option] then
-        local info = afArmorPlusOne[option]
+        local info  = afArmorPlusOne[option]
         local trade = info.trade
+
         player:updateEvent(info.reward, trade[1], trade[2], trade[3], trade[4], 0, 0, info.abc)
 
     -- info about relic armor upgrades
     elseif csid == 310 and relicArmorPlusOne[option] then
-        local info = relicArmorPlusOne[option]
+        local info  = relicArmorPlusOne[option]
         local trade = info.trade
+
         player:updateEvent(info.reward, trade[1], trade[2], trade[3], trade[4][1], trade[4][2], 0, 0)
     end
 end
@@ -451,7 +454,8 @@ local handleMainEvent = function(player, option, coinAmount)
     -- purchase COSMO_CLEANSE
     elseif option == 3 then
         local cosmoTime = getCosmoCleanseTime(player)
-        local cost = player:hasKeyItem(xi.ki.RHAPSODY_IN_MAUVE) and 1000 or xi.settings.main.COSMO_CLEANSE_BASE_COST
+        local cost      = player:hasKeyItem(xi.ki.RHAPSODY_IN_MAUVE) and 1000 or xi.settings.main.COSMO_CLEANSE_BASE_COST
+
         if cosmoTime == cosmoReady and player:delGil(cost) then
             player:setCharVar('SagheeraInteractions', utils.mask.setBit(player:getCharVar('SagheeraInteractions'), 0, false))
             npcUtil.giveKeyItem(player, xi.ki.COSMO_CLEANSE)
@@ -484,7 +488,8 @@ local handleMainEvent = function(player, option, coinAmount)
     -- get upgrade
     elseif option == 100 then
         local afUpgrade = player:getCharVar('AFupgrade')
-        local info = afArmorPlusOne[afUpgrade]
+        local info      = afArmorPlusOne[afUpgrade]
+
         if info == nil then
             info = relicArmorPlusOne[afUpgrade]
         end
@@ -499,6 +504,7 @@ end
 
 local handleTradeChipEvent = function(player, option)
     local trade = player:getTrade()
+
     if
         npcUtil.tradeSetInList(trade, tier1Chips) and
         npcUtil.giveItem(player, { { xi.item.ANCIENT_BEASTCOIN, tier1ChipValue } })
