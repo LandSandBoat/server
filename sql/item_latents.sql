@@ -25,6 +25,9 @@ INSERT INTO `item_latents` VALUES (10293,26,50,50,31);   -- Under Lv.31 : Rng. A
 INSERT INTO `item_latents` VALUES (10293,30,50,50,31);   -- Under Lv.31 : Mag. Acc.+50
 -- INSERT INTO `item_latents` VALUES (10293,??,-1,50,31); -- Initiate and below: Likelihood of synthesis material loss -1%
 
+-- Pyracmon Cap (10447)
+-- TODO: Full Moon + Darksday + Nighttime: REFRESH: 2
+
 INSERT INTO `item_latents` VALUES (10670,68,10,13,58);  -- WAR AF2 +2 Body Reduces evasion penalty by 10 if Aggressor Active
 
 INSERT INTO `item_latents` VALUES (10679,8,10,10,0);
@@ -41,9 +44,9 @@ INSERT INTO `item_latents` VALUES (10730,63,15,13,56);  -- WAR AF2 +2 Feet Reduc
 -- Abyss Sollerets +2
 INSERT INTO `item_latents` VALUES (10737,63,10,13,64);   -- +2: Enhances "Last Resort" effect
 
--- Lunette ring
-INSERT INTO `item_latents` VALUES (10766,29,5,10,0);     -- MDEF+7
-INSERT INTO `item_latents` VALUES (10766,369,-2,10,0);   -- Latent is active when engaged and drains 2mp/tick.
+-- Lunette Ring
+INSERT INTO `item_latents` VALUES (10766,29,7,56,0);   -- WEAPON_DRAWN_MP_OVER: 0 - MDEF: 7
+INSERT INTO `item_latents` VALUES (10766,369,-2,56,0); -- WEAPON_DRAWN_MP_OVER: 0 - REFRESH: -2
 
 -- Mandraguard
 INSERT INTO `item_latents` VALUES (10807,370,1,26,0);    -- Regen 1/tick during Daytime
@@ -123,9 +126,29 @@ INSERT INTO `item_latents` VALUES (11589,116,3,32,0);    -- Dark magic skill +7 
 INSERT INTO `item_latents` VALUES (11590,112,3,36,0);    -- Healing magic skill +10 On Lightsdays
 INSERT INTO `item_latents` VALUES (11590,113,3,36,0);    -- Enhancing magic skill +10 On Lightsdays
 
+-- Artemis's Medal
+INSERT INTO `item_latents` VALUES (11607,30,10,37,0); -- MOON_PHASE: New Moon: 0 - MACC: 10
+INSERT INTO `item_latents` VALUES (11607,28,1,37,1);  -- MOON_PHASE: Waxing Crescent: 1 - MATT: 1
+INSERT INTO `item_latents` VALUES (11607,30,8,37,1);  -- MOON_PHASE: Waxing Crescent: 1 - MACC: 8
+INSERT INTO `item_latents` VALUES (11607,28,5,37,2);  -- MOON_PHASE: First Quarter:   2 - MATT: 5
+INSERT INTO `item_latents` VALUES (11607,30,5,37,2);  -- MOON_PHASE: First Quarter:   2 - MACC: 5
+INSERT INTO `item_latents` VALUES (11607,28,6,37,3);  -- MOON_PHASE: Waxing Gibbous:  3 - MATT: 6
+INSERT INTO `item_latents` VALUES (11607,30,3,37,3);  -- MOON_PHASE: Waxing Gibbous:  3 - MACC: 3
+INSERT INTO `item_latents` VALUES (11607,28,10,37,4); -- MOON_PHASE: Full Moon: 4 - MATT: 10
+INSERT INTO `item_latents` VALUES (11607,28,8,37,5);  -- MOON_PHASE: Waning Gibbous:  5 - MATT: 8
+INSERT INTO `item_latents` VALUES (11607,30,1,37,5);  -- MOON_PHASE: Waning Gibbous:  5 - MACC: 1
+INSERT INTO `item_latents` VALUES (11607,28,5,37,6);  -- MOON_PHASE: Last Quarter:    6 - MATT: 5
+INSERT INTO `item_latents` VALUES (11607,30,5,37,6);  -- MOON_PHASE: Last Quarter:    6 - MACC: 5
+INSERT INTO `item_latents` VALUES (11607,28,3,37,7);  -- MOON_PHASE: Waning Crescent: 7 - MATT: 3
+INSERT INTO `item_latents` VALUES (11607,30,6,37,7);  -- MOON_PHASE: Waning Crescent: 7 - MACC: 6
+
 -- Chrys. Torque
 INSERT INTO `item_latents` VALUES (11621,368,-1,7,0);    -- Drains 1 TP/tick and gives 1 MP/tick
 INSERT INTO `item_latents` VALUES (11621,369,1,7,0);     -- Latent Effect is active when you have TP.
+
+-- Miseria Ring
+INSERT INTO `item_latents` VALUES (11652,13,6,4,51); -- MP_UNDER_PERCENT: 51 - MND:  6
+INSERT INTO `item_latents` VALUES (11652,30,3,4,51); -- MP_UNDER_PERCENT: 51 - MACC: 3
 
 -- Rollers Ring
 INSERT INTO `item_latents` VALUES (11667,368,10,57,0);   -- Rollers Ring Regain +10 with Eleven COR Roll
@@ -920,6 +943,10 @@ INSERT INTO `item_latents` VALUES (14509,11,8,10,0);
 -- Shadow Ring
 INSERT INTO `item_latents` VALUES (14646,29,10,32,0);    -- Darksday: MDB+10
 
+-- Atlaua's Ring
+INSERT INTO `item_latents` VALUES (14658,304,4,59,1); -- VS_ECOSYSTEM: AMORPH - TAME: 4
+INSERT INTO `item_latents` VALUES (14658,304,4,59,2); -- VS_ECOSYSTEM: AQUAN  - TAME: 4
+
 -- Hercules' Ring
 INSERT INTO `item_latents` VALUES (14659,369,1,0,50);    -- Refresh+1 when HP <=50%
 INSERT INTO `item_latents` VALUES (14659,370,3,0,50);    -- Regen+3 when HP <=50%
@@ -1019,6 +1046,9 @@ INSERT INTO `item_latents` VALUES (14953,384,100,14,0);  -- Haste+1%
 INSERT INTO `item_latents` VALUES (14954,5,35,14,0);
 INSERT INTO `item_latents` VALUES (14954,71,1,14,0);
 INSERT INTO `item_latents` VALUES (14954,168,-5,14,0);
+
+-- Trainee Gloves
+INSERT INTO `item_latents` VALUES (15008,133,1,24,54); -- SYNTH_TRAINEE: BONE - BONE: 1
 
 -- Serpentes Cuffs
 INSERT INTO `item_latents` VALUES (15019,369,1,26,1);    -- Nighttime: Adds "Regen" effect
@@ -1204,6 +1234,14 @@ INSERT INTO `item_latents` VALUES (15516,26,-16,52,8);   -- cumulative ranged ac
 INSERT INTO `item_latents` VALUES (15519,370,1,58,0);    -- storm muffler regen +1
 INSERT INTO `item_latents` VALUES (15520,68,7,58,0);     -- storm torque eva +7
 
+-- Sacrifice Torque
+INSERT INTO `item_latents` VALUES (15528,369,-3,21,21); -- AVATAR_IN_PARTY: 21 - REFRESH: -3
+INSERT INTO `item_latents` VALUES (15528,370,-8,21,21); -- AVATAR_IN_PARTY: 21 - REGEN:   -8
+-- TODO: INSERT INTO `item_latents` VALUES (15528,??,3,21,21); -- AVATAR_IN_PARTY: 21 - Avatar ATT: 3
+
+-- Ace's Locket
+INSERT INTO `item_latents` VALUES (15529,291,5,0,25); -- HP_UNDER_PERCENT: 25 - COUNTER: 5
+
 -- Berserker's Torque
 INSERT INTO `item_latents` VALUES (15530,368,10,10,0);   -- HP-50/Tick of TP while weapon drawn
 INSERT INTO `item_latents` VALUES (15530,404,50,10,0);
@@ -1269,6 +1307,9 @@ INSERT INTO `item_latents` VALUES (15692,76,12,58,0);   -- storm crackows MOVE_S
 -- Marabout Sandals
 INSERT INTO `item_latents` VALUES (15760,5,15,28,0);     -- Firesday: MP +15
 INSERT INTO `item_latents` VALUES (15760,28,4,28,0);     -- Firesday: MATT +4
+
+-- Imperial Ring
+INSERT INTO `item_latents` VALUES (15773,384,400,58,0); -- IN_ASSAULT - HASTE_GEAR: 4%
 
 INSERT INTO `item_latents` VALUES (15774,25,10,58,0);    -- Storm ring
 
