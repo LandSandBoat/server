@@ -2,9 +2,16 @@
 -- A Challenge! You Could Be a Winner
 -- A Moogle Kupo d'Etat M13
 -- !addmission 10 12
--- Shadowy Pillar : !pos 374 -12 -15
+-----------------------------------
+-- Puzzle 1 - Beaucedine
+-- Shadowy Pillar   : !pos 374 -12 -15
 -- Lonely Evergreen : !pos -162 -80 178
 -- Goblin Grenadier : !pos -26 -59 -76
+-----------------------------------
+-- Puzzle 2 - Xarcabard
+-- Option_One   : !pos 126 -24 -118
+-- Option_One   : !pos 66 -24 -191 112
+-- Option_Three : !pos 1 -23 -103 112
 -----------------------------------
 -- This mission can be repeated by losing the bncm battle in the subsequent mission
 -- Therefore to remove possible conflicts, the mission progress will be handled
@@ -74,7 +81,7 @@ mission.sections =
                         player:needToZone(true)
                     end
                 end,
-            }
+            },
         },
     },
 
@@ -100,14 +107,14 @@ mission.sections =
             ['Goblin_Grenadier'] =
             {
                 onTrigger = function(player, npc)
-                    local answer = player:getLocalVar('Mission[10][12]pipSet') - 1
+                    local answer = player:getLocalVar('Mission[10][12][p1]pipSet') - 1
 
                     if answer < 0 then
                         return mission:progressEvent(508, xi.ki.MAP_OF_THE_NORTHLANDS_AREA)
                     else
                         local today = VanadielDayOfTheWeek()
                         local tomorrow = (today + 1) % 8
-                        local hintsUsed = player:getLocalVar('Mission[10][12]hintsUsed')
+                        local hintsUsed = player:getLocalVar('Mission[10][12][p1]hintsUsed')
 
                         player:messageSpecial(zones[player:getZoneID()].text.GRENADIER_DAY_HINT, today, tomorrow)
 
@@ -126,108 +133,42 @@ mission.sections =
             ['Northwestern_Pip'] =
             {
                 onTrigger = function(player, npc)
-                    local pipSet = player:getLocalVar('Mission[10][12]pipSet') - 1
-                    local pos = npc:getPos()
-                    local element = xi.amk.helpers.pipSets[pipSet][1]
-
-                    return mission:progressEvent(
-                        510,
-                        pos.x * 1000,
-                        pos.z * 1000,
-                        pos.y * 1000,
-                        element,
-                        xi.ki.MAP_OF_THE_NORTHLANDS_AREA
-                    )
+                    return xi.amk.helpers.puzzleOneOnTrigger(player, npc, mission, 1)
                 end,
             },
 
             ['Western_Pip'] =
             {
                 onTrigger = function(player, npc)
-                    local pipSet = player:getLocalVar('Mission[10][12]pipSet') - 1
-                    local pos = npc:getPos()
-                    local element = xi.amk.helpers.pipSets[pipSet][2]
-
-                    return mission:progressEvent(
-                        511,
-                        pos.x * 1000,
-                        pos.z * 1000,
-                        pos.y * 1000,
-                        element,
-                        xi.ki.MAP_OF_THE_NORTHLANDS_AREA
-                    )
+                    return xi.amk.helpers.puzzleOneOnTrigger(player, npc, mission, 2)
                 end,
             },
 
             ['Southwestern_Pip'] =
             {
                 onTrigger = function(player, npc)
-                    local pipSet = player:getLocalVar('Mission[10][12]pipSet') - 1
-                    local pos = npc:getPos()
-                    local element = xi.amk.helpers.pipSets[pipSet][3]
-
-                    return mission:progressEvent(
-                        512,
-                        pos.x * 1000,
-                        pos.z * 1000,
-                        pos.y * 1000,
-                        element,
-                        xi.ki.MAP_OF_THE_NORTHLANDS_AREA
-                    )
+                    return xi.amk.helpers.puzzleOneOnTrigger(player, npc, mission, 3)
                 end,
             },
 
             ['Northeastern_Pip'] =
             {
                 onTrigger = function(player, npc)
-                    local pipSet = player:getLocalVar('Mission[10][12]pipSet') - 1
-                    local pos = npc:getPos()
-                    local element = xi.amk.helpers.pipSets[pipSet][4]
-
-                    return mission:progressEvent(
-                        513,
-                        pos.x * 1000,
-                        pos.z * 1000,
-                        pos.y * 1000,
-                        element,
-                        xi.ki.MAP_OF_THE_NORTHLANDS_AREA
-                    )
+                    return xi.amk.helpers.puzzleOneOnTrigger(player, npc, mission, 4)
                 end,
             },
 
             ['Eastern_Pip'] =
             {
                 onTrigger = function(player, npc)
-                    local pipSet = player:getLocalVar('Mission[10][12]pipSet') - 1
-                    local pos = npc:getPos()
-                    local element = xi.amk.helpers.pipSets[pipSet][5]
-
-                    return mission:progressEvent(
-                        514,
-                        pos.x * 1000,
-                        pos.z * 1000,
-                        pos.y * 1000,
-                        element,
-                        xi.ki.MAP_OF_THE_NORTHLANDS_AREA
-                    )
+                    return xi.amk.helpers.puzzleOneOnTrigger(player, npc, mission, 5)
                 end,
             },
 
             ['Southeastern_Pip'] =
             {
                 onTrigger = function(player, npc)
-                    local pipSet = player:getLocalVar('Mission[10][12]pipSet') - 1
-                    local pos = npc:getPos()
-                    local element = xi.amk.helpers.pipSets[pipSet][6]
-
-                    return mission:progressEvent(
-                        515,
-                        pos.x * 1000,
-                        pos.z * 1000,
-                        pos.y * 1000,
-                        element,
-                        xi.ki.MAP_OF_THE_NORTHLANDS_AREA
-                    )
+                    return xi.amk.helpers.puzzleOneOnTrigger(player, npc, mission, 6)
                 end,
             },
 
@@ -249,8 +190,8 @@ mission.sections =
                         option == 1 or -- Used first hint
                         option == 2    -- Used second hint
                     then
-                        local hintsUsed = player:getLocalVar('Mission[10][12]hintsUsed')
-                        player:setLocalVar('Mission[10][12]hintsUsed', hintsUsed + 1)
+                        local hintsUsed = player:getLocalVar('Mission[10][12][p1]hintsUsed')
+                        player:setLocalVar('Mission[10][12][p1]hintsUsed', hintsUsed + 1)
                     elseif option == 3 then
                         -- wrong answer, reset puzzle
                         player:needToZone(false)
@@ -280,7 +221,7 @@ mission.sections =
 
                 [508] = function(player, csid, option, npc)
                     -- Pipset offset by 1 to account for saving 0 as a variable.  When retrieving, subtract 1
-                    player:setLocalVar('Mission[10][12]pipSet', math.random(1, 10)) -- range: 0 - 9
+                    player:setLocalVar('Mission[10][12][p1]pipSet', math.random(1, 10)) -- range: 0 - 9
                 end,
             },
         },
@@ -325,7 +266,7 @@ mission.sections =
     -- Part 3: Xarcabard
     {
         check = function(player, currentMission, missionStatus, vars)
-            return currentMission == mission.missionId and
+            return currentMission >= mission.missionId and
             player:getCharVar('Mission[10][12]progress') == 2 and
             player:hasKeyItem(xi.ki.TRIVIA_CHALLENGE_KUPON)
         end,
@@ -343,15 +284,73 @@ mission.sections =
 
         [xi.zone.XARCABARD] =
         {
+            ['Option_One'] =
+            {
+                onTrigger = function(player, npc)
+                    return xi.amk.helpers.puzzleTwoOnTrigger(player, npc, mission)
+                end,
+            },
 
+            ['Option_Two'] =
+            {
+                onTrigger = function(player, npc)
+                    return xi.amk.helpers.puzzleTwoOnTrigger(player, npc, mission)
+                end,
+            },
+
+            ['Option_Three'] =
+            {
+                onTrigger = function(player, npc)
+                    return xi.amk.helpers.puzzleTwoOnTrigger(player, npc, mission)
+                end,
+            },
+
+            onEventUpdate =
+            {
+                [200] = function(player, csid, option, npc)
+                    xi.amk.helpers.puzzleTwoOnEventUpdate(player, csid, option, npc, mission)
+                end,
+            },
+
+            onEventFinish =
+            {
+                [200] = function(player, csid, option, npc)
+                    xi.amk.helpers.puzzleTwoOnEventFinish(player, csid, option, npc, mission)
+                end
+            },
         },
     },
 
     -- Part 4: Castle Zvahl Baileys
     {
         check = function(player, currentMission, missionStatus, vars)
-            return currentMission == mission.missionId
+            return currentMission >= mission.missionId and
+            player:getCharVar('Mission[10][12]progress') == 3
         end,
+
+        [xi.zone.XARCABARD] =
+        {
+            ['Option_One'] =
+            {
+                onTrigger = function(player, npc)
+                    return xi.amk.helpers.puzzleTwoOnTrigger(player, npc, mission)
+                end,
+            },
+
+            ['Option_Two'] =
+            {
+                onTrigger = function(player, npc)
+                    return xi.amk.helpers.puzzleTwoOnTrigger(player, npc, mission)
+                end,
+            },
+
+            ['Option_Three'] =
+            {
+                onTrigger = function(player, npc)
+                    return xi.amk.helpers.puzzleTwoOnTrigger(player, npc, mission)
+                end,
+            },
+        },
 
         [xi.zone.CASTLE_ZVAHL_BAILEYS] =
         {

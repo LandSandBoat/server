@@ -1,6 +1,7 @@
 -----------------------------------
 -- A Moogle Kupo d'Etat Helpers
 -----------------------------------
+
 xi = xi or {}
 xi.amk = xi.amk or {}
 xi.amk.helpers = xi.amk.helpers or {}
@@ -417,10 +418,13 @@ xi.amk.helpers.chocoboDig = function(player, zoneId, text)
 end
 
 -- Mission 13 (index 12) - Puzzles!!!
--- Puzzle 1
+-----------------------------------
+-- Puzzle 1 - Elemental Numbers!
+-----------------------------------
 xi.amk.helpers.pipSets =
 {
-    -- [Answer]: 0-9 {
+    -- [Answer]: 0-9
+    -- {
     --     [1] = NW, [4] = NE,
     --     [2] = W,  [5] = E,
     --     [3] = SW, [6] = SE,
@@ -495,3 +499,333 @@ xi.amk.helpers.pipSets =
         [3] = 1, [6] = 3,
     },
 }
+
+xi.amk.helpers.puzzleOneOnTrigger = function(player, npc, mission, offset)
+    local pipSet = player:getLocalVar('Mission[10][12][p1]pipSet') - 1
+    local pos = npc:getPos()
+    local element = xi.amk.helpers.pipSets[pipSet][offset]
+
+    return mission:progressEvent(509 + offset,
+        pos.x * 1000,
+        pos.z * 1000,
+        pos.y * 1000,
+        element,
+        xi.ki.MAP_OF_THE_NORTHLANDS_AREA
+    )
+end
+
+-----------------------------------
+-- Puzzle 2 - Trivia!
+-- CSID 200 trigger params: question number, correct answer (stoogeNum), previous stooge, stooge location, time limit, current time, player ID?
+-- CSID 200 update params:  answer 1, location 1, answer 2, location 2, cs moogle location, time limit, current time, player id?
+-- trivia locations: 0 = option one, 1 = option two, 2 = option three
+-- Stooge CS locations: 1 = option one, 2 = option two, 3 = option three
+-- Variables are named as 'option' if 0-indexed, as 'stooge' if 1-indexed
+-----------------------------------
+local xarc = zones[xi.zone.XARCABARD]
+
+local randomSign = function()
+    -- returns -1 or 1 to offset the wrong answer randomly
+    return math.random(1, 2) == 1 and 1 or -1
+end
+
+-- Structured list of the trivia questions
+xi.amk.helpers.triviaQuestions =
+{
+    -- 0 : Add your current hit points to your current magic points, and you get…?
+    [0] = function(player)
+        local right = player:getHP() + player:getMP()
+        local wrong = right + (randomSign() * math.floor(right / 2))
+
+        if wrong == right then
+            -- player has 1 hp 0 mp
+            wrong = 2
+        end
+
+        return { right, wrong }
+    end,
+
+    -- 1 : The sum total of each and every one of your job levels is?
+    [1] = function(player)
+        local jobTotal = 0
+        for i = xi.job.WAR, xi.job.RUN do
+            jobTotal = jobTotal + player:getJobLevel(i)
+        end
+
+        local right = jobTotal -- minimum 15
+        local wrong = right + (randomSign() * math.floor(right / 2))
+        return { right, wrong }
+    end,
+
+    -- 2 : The sum total of each of your crafting skill levels is?
+    [2] = function(player)
+        local craftTotal = 0
+        for craft = xi.skill.FISHING, xi.skill.SYNERGY do
+            craftTotal = craftTotal + math.floor(player:getCharSkillLevel(craft) / 10)
+        end
+
+        local right = craftTotal
+        local wrong = right + (randomSign() * math.floor(right / 2))
+
+        if wrong == right then
+            -- right is 0 or 1
+            if wrong == 0 then
+                wrong = 1
+            elseif wrong == 1 then
+                wrong = wrong + randomSign()
+            end
+        end
+
+        return { right, wrong }
+    end,
+
+    -- 3 : The sum total of each one of your current elemental resistance levels is?
+    [3] = function(player)
+        local elementTotal = 0
+        for mod = xi.mod.FIRE_MEVA, xi.mod.DARK_MEVA do
+            elementTotal = elementTotal + player:getMod(mod)
+        end
+
+        local right = elementTotal
+        local wrong = right + (randomSign() * math.floor(right / 2))
+
+        if wrong == right then
+            -- right is 0 or 1
+            wrong = wrong + randomSign()
+        end
+
+        return { right, wrong }
+    end,
+
+    -- 4 : The total number of foes you’ve felled is?
+    [4] = function(player)
+        local right = player:getHistory(xi.history.ENEMIES_DEFEATED)
+        local wrong = right + (randomSign() * math.floor(right / 2))
+
+        if wrong == right then
+            -- right is 0 or 1
+            wrong = right + 1
+        end
+
+        return { right, wrong }
+    end,
+
+    -- 5 : Multiply your current attack and defense, and what do you get!?
+    [5] = function(player)
+        local right = player:getStat(xi.mod.ATT) * player:getStat(xi.mod.DEF)
+        local wrong = right + (randomSign() * math.floor(right / 2))
+
+        if wrong == right then
+            -- right is 0 or 1
+            if wrong == 0 then
+                wrong = 1
+            elseif wrong == 1 then
+                wrong = wrong + randomSign()
+            end
+        end
+
+        return { right, wrong }
+    end,
+
+    -- 6 : The total number of times you’ve strolled through the doors of your Mog House is?
+    [6] = function(player)
+        local right = player:getHistory(xi.history.MH_ENTRANCES)
+        local wrong = right + (randomSign() * math.floor(right / 2))
+
+        return { right, wrong }
+    end,
+
+    -- 7 : The total number of times you’ve been incapacitated by your enemies is?
+    [7] = function(player)
+        local right = player:getHistory(xi.history.TIMES_KNOCKED_OUT)
+        local wrong = right + (randomSign() * math.floor(right / 2))
+
+        if wrong == right then
+            -- right is 0 or 1
+            if wrong == 0 then
+                wrong = 1
+            elseif wrong == 1 then
+                wrong = wrong + randomSign()
+            end
+        end
+
+        return { right, wrong }
+    end,
+
+    -- 8 : The total number of times you’ve participated in a party is?
+    [8] = function(player)
+        local right = player:getHistory(xi.history.JOINED_PARTIES)
+        local wrong = right + (randomSign() * math.floor(right / 2))
+
+        if wrong == right then
+            -- right is 0 or 1
+            if wrong == 0 then
+                wrong = 1
+            elseif wrong == 1 then
+                wrong = wrong + randomSign()
+            end
+        end
+
+        return { right, wrong }
+    end,
+
+    -- 9 : The total number of times you’ve affiliated yourself with an alliance is?
+    [9] = function(player)
+        local right = player:getHistory(xi.history.JOINED_ALLIANCES)
+        local wrong = right + (randomSign() * math.floor(right / 2))
+
+        if wrong == right then
+            -- right is 0 or 1
+            if wrong == 0 then
+                wrong = 1
+            elseif wrong == 1 then
+                wrong = wrong + randomSign()
+            end
+        end
+
+        return { right, wrong }
+    end,
+}
+
+local assignRandomTriviaQuestions = function(player)
+    local questions = {}
+    for i, _ in pairs(xi.amk.helpers.triviaQuestions) do
+        table.insert(questions, i)
+    end
+
+    for i = 1, 3 do
+        local index = math.random(1, #questions)
+        player:setLocalVar('Mission[10][12][p2]question' .. i, questions[index])
+        table.remove(questions, index)
+    end
+end
+
+local resetPuzzleVars = function(player)
+    player:setLocalVar('Mission[10][12][p2]progress', 0)
+    player:setLocalVar('Mission[10][12][p2]timeLimit', 0)
+    player:setLocalVar('Mission[10][12][p2]question1', 0)
+    player:setLocalVar('Mission[10][12][p2]question2', 0)
+    player:setLocalVar('Mission[10][12][p2]question3', 0)
+    player:setLocalVar('Mission[10][12][p2]correctStooge', 0)
+    player:setLocalVar('Mission[10][12][p2]previousStooge', 0)
+end
+
+local stooges =
+{
+    -- Answer numbers are 0-indexed references to Option_[One/two/three].
+    -- AnswerOne/Two are used in onEventUpdate to determine which Option
+    -- to point to for wrong and right answers. ie: answerOne = 0 points to Option_One
+    -- StoogeNum is used in onEventTrigger to determine which npc visual
+    -- to show
+    [xarc.npc.OPTION_ONE]   = { stoogeNum = 1, answerOne = 1, answerTwo = 2 },
+    [xarc.npc.OPTION_TWO]   = { stoogeNum = 2, answerOne = 0, answerTwo = 2 },
+    [xarc.npc.OPTION_THREE] = { stoogeNum = 3, answerOne = 0, answerTwo = 1 },
+}
+
+xi.amk.helpers.puzzleTwoOnTrigger = function(player, npc, mission)
+    local p2Progress = player:getLocalVar('Mission[10][12][p2]progress')
+
+    -- Starting puzzle, assign questions
+    if p2Progress == 0 then
+        p2Progress = 1
+        player:setLocalVar('Mission[10][12][p2]progress', p2Progress)
+        assignRandomTriviaQuestions(player)
+    end
+
+    -- Puzzle already beaten, show flavor text
+    if
+        player:hasKeyItem(xi.ki.GAUNTLET_CHALLENGE_KUPON) or
+        player:getCharVar('Mission[10][12]progress') == 3
+    then
+        p2Progress = 10
+    end
+
+    local currentQuestion = player:getLocalVar('Mission[10][12][p2]question' .. p2Progress)
+    local correctStooge = player:getLocalVar('Mission[10][12][p2]correctStooge')
+    local previousStooge = player:getLocalVar('Mission[10][12][p2]previousStooge')
+    local stoogeNum = stooges[npc:getID()].stoogeNum
+    local timeLimit = player:getLocalVar('Mission[10][12][p2]timeLimit')
+
+    -- DEBUG
+    -- player:PrintToPlayer(string.format("p2Progress: %s, time_limit: %s, currentQuestion: %s, correctStooge: %s, previousStooge: %s, stoogeNum: %s",
+    --                                     p2Progress,     timeLimit,      currentQuestion,     correctStooge,       previousStooge,    stoogeNum))
+
+    if previousStooge ~= stoogeNum then
+        return mission:progressEvent(
+            200,
+            p2Progress,
+            currentQuestion,
+            correctStooge,
+            previousStooge,
+            stoogeNum,
+            timeLimit,
+            os.time()
+        )
+    end
+end
+
+xi.amk.helpers.puzzleTwoOnEventUpdate = function(player, csid, option, npc, mission)
+    if option >= 1 and option <= 3 then
+        local stooge = stooges[npc:getID()]
+        local timeLimit = os.time() + 180 -- Three minutes
+        local p2Progress = player:getLocalVar('Mission[10][12][p2]progress')
+        local currentQuestion = player:getLocalVar('Mission[10][12][p2]question' .. p2Progress)
+        local answers = xi.amk.helpers.triviaQuestions[currentQuestion](player)
+
+        -- Right and wrong answer/stooge has to be randomized in terms of order given to updateEvent
+        -- Randomize which of the two other options is correct.  Set vars to a default choice, then swap only when answerOne is 2
+        local answerOne = math.random(1, 2)
+
+        -- Default: answerOne == 1
+        local correctOption = stooge.answerOne
+        local answerTwo = 2
+
+        if answerOne == 2 then
+            correctOption = stooge.answerTwo
+            answerTwo = 1
+        end
+
+        -- Store important information for next CS parameters
+        player:setLocalVar('Mission[10][12][p2]correctStooge', correctOption + 1) -- Stooge num is always 1 more than the option
+        player:setLocalVar('Mission[10][12][p2]timeLimit', timeLimit) -- Time limit - > 3 minutes fails
+        player:setLocalVar('Mission[10][12][p2]previousStooge', stooge.stoogeNum) -- this tells the stooge that he is or isn't supposed to talk
+
+        player:updateEvent(
+            answers[answerOne],
+            stooge.answerOne,
+            answers[answerTwo],
+            stooge.answerTwo,
+            currentQuestion,
+            timeLimit,
+            os.time()
+        )
+    elseif option == 11 then
+        -- Incorrect Answer
+        local randomFlavorText = math.random(1, 2)
+        if randomFlavorText == 1 then
+            player:messageSpecial(xarc.text.INCORRECT_NO_GIFTS)
+        else
+            player:messageSpecial(xarc.text.EXACTLY_WRONG)
+        end
+    end
+end
+
+xi.amk.helpers.puzzleTwoOnEventFinish = function(player, csid, option, npc, mission)
+    local p2Progress = player:getLocalVar('Mission[10][12][p2]progress')
+    if csid == 200 then
+        if option == 0 then
+            -- lost the game, via time or wrong answer - reset vars
+            resetPuzzleVars(player)
+        elseif option == 1 then
+            player:setLocalVar('Mission[10][12][p2]progress', p2Progress + 1)
+        elseif option == 2 and p2Progress == 4 then
+            -- Won game, reset all vars
+            resetPuzzleVars(player)
+            npcUtil.giveKeyItem(player, xi.ki.GAUNTLET_CHALLENGE_KUPON)
+
+            -- Advance to puzzle 3
+            player:setCharVar('Mission[10][12]progress', 3)
+            player:setCharVar('Mission[10][12][p3]stoogeArg', 1)
+        end
+    end
+end
