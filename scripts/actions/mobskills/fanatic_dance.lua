@@ -10,7 +10,7 @@
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
-    if mob:isInDynamis() and mob:isMobType(xi.mobskills.mobType.NOTORIOUS) then
+    if mob:isInDynamis() and mob:isMobType(xi.mobType.NOTORIOUS) then
         return 0
     end
 

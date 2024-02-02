@@ -9,7 +9,7 @@ local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
     if
-        mob:isMobType(xi.mobskills.mobType.NOTORIOUS) or
+        mob:isMobType(xi.mobType.NOTORIOUS) or
         target:hasStatusEffect(xi.effect.BATTLEFIELD)
     then
         return 0

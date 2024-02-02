@@ -4,7 +4,7 @@
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
-    if mob:isMobType(xi.mobskills.mobType.NOTORIOUS) or mob:getHPP() > 75 then
+    if mob:isMobType(xi.mobType.NOTORIOUS) or mob:getHPP() > 75 then
         return 1
     end
 
