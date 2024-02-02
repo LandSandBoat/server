@@ -31,6 +31,8 @@ zones[xi.zone.XARCABARD] =
         PLAYERS_HAVE_NOT_REACHED_LEVEL = 7857,  -- Players who have not reached level <number> are prohibited from entering Dynamis.
         DYNA_NPC_DEFAULT_MESSAGE       = 7894,  -- There is a symbol carved into the rock here.
         GARRISON_BASE                  = 8049,  -- Hm? What is this? %? How do I know this is not some [San d'Orian/Bastokan/Windurstian] trick?
+        INCORRECT_NO_GIFTS             = 8153,  -- <Bzzzzzzt!> Ohhhhhh, I'm sorry, that's incorrect. But don't worry, we have some lovely parting gifts for-- What's that? We don't?
+        EXACTLY_WRONG                  = 8154,  -- Why that's exactly rrr-wrong! I'm soooooo sorry, but it looks like you'll have to start all over again! But you'll get 'em next time. Right, kupo?
         PLAYER_OBTAINS_ITEM            = 8172,  -- <name> obtains <item>!
         UNABLE_TO_OBTAIN_ITEM          = 8173,  -- You were unable to obtain the item.
         PLAYER_OBTAINS_TEMP_ITEM       = 8174,  -- <name> obtains the temporary item: <item>!
@@ -112,10 +114,13 @@ zones[xi.zone.XARCABARD] =
     },
     npc =
     {
-        OVERSEER_BASE      = GetFirstID('Jeantelas_RK'),
-        BOREAL_TIGER_QM    = GetFirstID('qm_boreal_tiger'),
-        BOREAL_COEURL_QM   = GetFirstID('qm_boreal_coeurl'),
-        BOREAL_HOUND_QM    = GetFirstID('qm_boreal_hound'),
+        OVERSEER_BASE    = GetFirstID('Jeantelas_RK'),
+        BOREAL_TIGER_QM  = GetFirstID('qm_boreal_tiger'),
+        BOREAL_COEURL_QM = GetFirstID('qm_boreal_coeurl'),
+        BOREAL_HOUND_QM  = GetFirstID('qm_boreal_hound'),
+        OPTION_ONE       = GetFirstID('Option_One'),
+        OPTION_TWO       = GetFirstID('Option_Two'),
+        OPTION_THREE     = GetFirstID('Option_Three'),
     },
 }
 
