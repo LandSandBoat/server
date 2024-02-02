@@ -1275,46 +1275,34 @@ void CZoneEntities::PushPacket(CBaseEntity* PEntity, GLOBAL_MESSAGE_TYPE message
                                     }
                                 }
 
-                                // No real reason to pick SpawnMOBList, just need a reference here initially.
-                                SpawnIDList_t& spawnlist = PCurrentChar->SpawnMOBList;
+                                auto pushPacketIfInSpawnList = [&](CCharEntity* PChar, SpawnIDList_t const& spawnlist)
+                                {
+                                    SpawnIDList_t::const_iterator iter = spawnlist.lower_bound(id);
+                                    if (!(iter == spawnlist.end() || spawnlist.key_comp()(id, iter->first)))
+                                    {
+                                        PCurrentChar->pushPacket(new CBasicPacket(*packet));
+                                    }
+                                };
 
-                                if (entity)
+                                switch(entity->objtype)
                                 {
-                                    if (entity->objtype == TYPE_MOB)
-                                    {
-                                        spawnlist = PCurrentChar->SpawnMOBList;
-                                    }
-                                    else if (entity->objtype == TYPE_NPC)
-                                    {
-                                        spawnlist = PCurrentChar->SpawnNPCList;
-                                    }
-                                    else if (entity->objtype == TYPE_PET)
-                                    {
-                                        spawnlist = PCurrentChar->SpawnPETList;
-                                    }
-                                    else if (entity->objtype == TYPE_TRUST)
-                                    {
-                                        spawnlist = PCurrentChar->SpawnTRUSTList;
-                                    }
-                                    else if (entity->objtype == TYPE_PC)
-                                    {
-                                        spawnlist = PCurrentChar->SpawnPCList;
-                                    }
-                                    else
-                                    {
-                                        entity = nullptr;
-                                    }
-                                }
-                                if (!entity)
-                                {
-                                    // No target entity in spawnlists found, so we're just going to skip this packet
-                                    break;
-                                }
-                                SpawnIDList_t::iterator iter = spawnlist.lower_bound(id);
-
-                                if (!(iter == spawnlist.end() || spawnlist.key_comp()(id, iter->first)))
-                                {
-                                    PCurrentChar->pushPacket(new CBasicPacket(*packet));
+                                    case TYPE_MOB:
+                                        pushPacketIfInSpawnList(PCurrentChar, PCurrentChar->SpawnMOBList);
+                                        break;
+                                    case TYPE_NPC:
+                                        pushPacketIfInSpawnList(PCurrentChar, PCurrentChar->SpawnNPCList);
+                                        break;
+                                    case TYPE_PET:
+                                        pushPacketIfInSpawnList(PCurrentChar, PCurrentChar->SpawnPETList);
+                                        break;
+                                    case TYPE_TRUST:
+                                        pushPacketIfInSpawnList(PCurrentChar, PCurrentChar->SpawnTRUSTList);
+                                        break;
+                                    case TYPE_PC:
+                                        pushPacketIfInSpawnList(PCurrentChar, PCurrentChar->SpawnPCList);
+                                        break;
+                                    default:
+                                        break;
                                 }
                             }
                             else
