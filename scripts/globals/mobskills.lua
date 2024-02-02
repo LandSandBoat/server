@@ -57,28 +57,25 @@ local function MobTPMod(tp)
     return 1
 end
 
+local burstMultipliersByTier =
+{
+    [0] = 1.0,
+    [1] = 1.3,
+    [2] = 1.35,
+    [3] = 1.40,
+    [4] = 1.45,
+    [5] = 1.5,
+}
+
 local function calculateMobMagicBurst(caster, ele, target)
-    local burst = 1.0
+    local burstMultiplier = 1.0
     local skillchainTier, skillchainCount = xi.magicburst.formMagicBurst(ele, target)
 
     if skillchainTier > 0 then
-        if skillchainCount == 1 then
-            burst = 1.3
-        elseif skillchainCount == 2 then
-            burst = 1.35
-        elseif skillchainCount == 3 then
-            burst = 1.40
-        elseif skillchainCount == 4 then
-            burst = 1.45
-        elseif skillchainCount == 5 then
-            burst = 1.50
-        else
-            -- Something strange is going on if this occurs.
-            burst = 1.0
-        end
+        burstMultiplier = burstMultipliersByTier[skillchainCount]
     end
 
-    return burst
+    return burstMultiplier
 end
 
 local function MobTakeAoEShadow(mob, target, max)
@@ -669,38 +666,31 @@ xi.mobskills.mobPhysicalDrainMove = function(mob, target, skill, drainType, drai
     return xi.msg.basic.SKILL_MISS
 end
 
+local drainEffectCorrelation =
+{
+    [xi.effect.STR_DOWN] = xi.effect.STR_BOOST,
+    [xi.effect.DEX_DOWN] = xi.effect.DEX_BOOST,
+    [xi.effect.AGI_DOWN] = xi.effect.AGI_BOOST,
+    [xi.effect.VIT_DOWN] = xi.effect.VIT_BOOST,
+    [xi.effect.MND_DOWN] = xi.effect.MND_BOOST,
+    [xi.effect.INT_DOWN] = xi.effect.INT_BOOST,
+    [xi.effect.CHR_DOWN] = xi.effect.CHR_BOOST,
+}
+
 xi.mobskills.mobDrainAttribute = function(mob, target, typeEffect, power, tick, duration)
-    local positive = nil
-
-    if typeEffect == xi.effect.STR_DOWN then
-        positive = xi.effect.STR_BOOST
-    elseif typeEffect == xi.effect.DEX_DOWN then
-        positive = xi.effect.DEX_BOOST
-    elseif typeEffect == xi.effect.AGI_DOWN then
-        positive = xi.effect.AGI_BOOST
-    elseif typeEffect == xi.effect.VIT_DOWN then
-        positive = xi.effect.VIT_BOOST
-    elseif typeEffect == xi.effect.MND_DOWN then
-        positive = xi.effect.MND_BOOST
-    elseif typeEffect == xi.effect.INT_DOWN then
-        positive = xi.effect.INT_BOOST
-    elseif typeEffect == xi.effect.CHR_DOWN then
-        positive = xi.effect.CHR_BOOST
+    if not drainEffectCorrelation[typeEffect] then
+        return xi.msg.basic.SKILL_NO_EFFECT
     end
 
-    if positive ~= nil then
-        local results = xi.mobskills.mobStatusEffectMove(mob, target, typeEffect, power, tick, duration)
+    local results = xi.mobskills.mobStatusEffectMove(mob, target, typeEffect, power, tick, duration)
 
-        if results == xi.msg.basic.SKILL_ENFEEB_IS then
-            mob:addStatusEffect(positive, power, tick, duration)
+    if results == xi.msg.basic.SKILL_ENFEEB_IS then
+        mob:addStatusEffect(drainEffectCorrelation[typeEffect], power, tick, duration)
 
-            return xi.msg.basic.ATTR_DRAINED
-        end
-
-        return xi.msg.basic.SKILL_MISS
+        return xi.msg.basic.ATTR_DRAINED
     end
 
-    return xi.msg.basic.SKILL_NO_EFFECT
+    return xi.msg.basic.SKILL_MISS
 end
 
 xi.mobskills.mobDrainStatusEffectMove = function(mob, target)
