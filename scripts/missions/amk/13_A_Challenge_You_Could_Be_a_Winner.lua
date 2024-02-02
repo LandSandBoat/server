@@ -2,9 +2,16 @@
 -- A Challenge! You Could Be a Winner
 -- A Moogle Kupo d'Etat M13
 -- !addmission 10 12
--- Shadowy Pillar : !pos 374 -12 -15
+-----------------------------------
+-- Puzzle 1 - Beaucedine
+-- Shadowy Pillar   : !pos 374 -12 -15
 -- Lonely Evergreen : !pos -162 -80 178
 -- Goblin Grenadier : !pos -26 -59 -76
+-----------------------------------
+-- Puzzle 2 - Xarcabard
+-- Option_One   : !pos 126 -24 -118
+-- Option_One   : !pos 66 -24 -191 112
+-- Option_Three : !pos 1 -23 -103 112
 -----------------------------------
 -- This mission can be repeated by losing the bncm battle in the subsequent mission
 -- Therefore to remove possible conflicts, the mission progress will be handled
@@ -317,8 +324,33 @@ mission.sections =
     -- Part 4: Castle Zvahl Baileys
     {
         check = function(player, currentMission, missionStatus, vars)
-            return currentMission == mission.missionId
+            return currentMission >= mission.missionId and
+            player:getCharVar('Mission[10][12]progress') == 3
         end,
+
+        [xi.zone.XARCABARD] =
+        {
+            ['Option_One'] =
+            {
+                onTrigger = function(player, npc)
+                    return xi.amk.helpers.puzzleTwoOnTrigger(player, npc, mission)
+                end,
+            },
+
+            ['Option_Two'] =
+            {
+                onTrigger = function(player, npc)
+                    return xi.amk.helpers.puzzleTwoOnTrigger(player, npc, mission)
+                end,
+            },
+
+            ['Option_Three'] =
+            {
+                onTrigger = function(player, npc)
+                    return xi.amk.helpers.puzzleTwoOnTrigger(player, npc, mission)
+                end,
+            },
+        },
 
         [xi.zone.CASTLE_ZVAHL_BAILEYS] =
         {
