@@ -19,7 +19,7 @@ itemObject.onItemUse = function(target)
         if target:hasStatusEffect(xi.effect.REFRESH) then
             target:messageBasic(xi.msg.basic.NO_EFFECT)
         else
-            target:addStatusEffect(xi.effect.REFRESH, 4, 3, 180, 0, 0, 0, xi.items.HYDRA_DOUBLET)
+            target:addStatusEffect(xi.effect.REFRESH, 3, 3, 180, 0, 0, 0, xi.items.HYDRA_DOUBLET)
         end
     end
 end
