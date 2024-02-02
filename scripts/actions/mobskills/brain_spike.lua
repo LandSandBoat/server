@@ -5,7 +5,7 @@
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
-    if mob:isMobType(xi.mobskills.mobType.NOTORIOUS) then
+    if mob:isMobType(xi.mobType.NOTORIOUS) then
         return 1
     end
 

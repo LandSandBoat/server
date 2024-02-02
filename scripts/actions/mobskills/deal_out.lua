@@ -19,7 +19,7 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local info = xi.mobskills.mobPhysicalMove(mob, target, skill, numhits, accmod, dmgmod, xi.mobskills.magicalTpBonus.NO_EFFECT)
     local dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.SLASHING, xi.mobskills.shadowBehavior.NUMSHADOWS_3)
 
-    if mob:isMobType(xi.mobskills.mobType.NOTORIOUS) then
+    if mob:isMobType(xi.mobType.NOTORIOUS) then
         mob:resetEnmity(target)
     end
 

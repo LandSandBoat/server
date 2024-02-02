@@ -11,19 +11,6 @@ require('scripts/globals/utils')
 xi = xi or {}
 xi.mobskills = xi.mobskills or {}
 
--- mob types
--- used in mob:isMobType()
-xi.mobskills.mobType =
-{
-    NORMAL      = 0x00,
-    UNUSED      = 0x01,
-    NOTORIOUS   = 0x02,
-    FISHED      = 0x04,
-    CALLED      = 0x08,
-    BATTLEFIELD = 0x10,
-    EVENT       = 0x20,
-}
-
 xi.mobskills.drainType =
 {
     HP = 0,

@@ -14,7 +14,7 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local accmod  = 1
     local dmgmod  = 2.3
 
-    if mob:isMobType(xi.mobskills.mobType.NOTORIOUS) then
+    if mob:isMobType(xi.mobType.NOTORIOUS) then
         dmgmod = dmgmod + math.random()
     end
 

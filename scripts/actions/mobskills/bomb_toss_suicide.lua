@@ -6,7 +6,7 @@ local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
     -- notorious monsters shouldn't explode, nor dynamis
-    if mob:isMobType(xi.mobskills.mobType.NOTORIOUS) or mob:isInDynamis() then
+    if mob:isMobType(xi.mobType.NOTORIOUS) or mob:isInDynamis() then
         return 1
     end
 
