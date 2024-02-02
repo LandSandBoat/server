@@ -95,9 +95,7 @@ local function MobTakeAoEShadow(mob, target, max)
 end
 
 local function fTP(tp, ftp1, ftp2, ftp3)
-    if tp < 1000 then
-        tp = 1000
-    end
+    tp = math.max(tp, 1000)
 
     if tp >= 1000 and tp < 1500 then
         return ftp1 + (((ftp2 - ftp1) / 500) * (tp - 1000))
@@ -133,13 +131,7 @@ xi.mobskills.mobPhysicalMove = function(mob, target, skill, numberofhits, accmod
 
     --get dstr (bias to monsters, so no fSTR)
     local dstr = mob:getStat(xi.mod.STR) - target:getStat(xi.mod.VIT)
-    if dstr < -10 then
-        dstr = -10
-    end
-
-    if dstr > 10 then
-        dstr = 10
-    end
+    dstr = utils.clamp(dstr, -10, 10)
 
     local lvluser = mob:getMainLvl()
     local lvltarget = target:getMainLvl()
@@ -152,23 +144,19 @@ xi.mobskills.mobPhysicalMove = function(mob, target, skill, numberofhits, accmod
 
     --apply WSC
     local base = mob:getWeaponDmg() + dstr --todo: change to include WSC
-    if base < 1 then
-        base = 1
-    end
+    base = math.max(1, base)
 
     --work out and cap ratio
-    if offcratiomod == nil then -- default to attack. Pretty much every physical mobskill will use this, Cannonball being the exception.
+    if not offcratiomod then -- default to attack. Pretty much every physical mobskill will use this, Cannonball being the exception.
         offcratiomod = mob:getStat(xi.mod.ATT)
     end
 
     local ratio = offcratiomod / target:getStat(xi.mod.DEF)
     local lvldiff = lvluser - lvltarget
-    if lvldiff < 0 then
-        lvldiff = 0
-    end
 
-    ratio = ratio + lvldiff * 0.05
-    ratio = utils.clamp(ratio, 0, 4)
+    lvldiff = math.max(0, lvldiff)
+    ratio   = ratio + lvldiff * 0.05
+    ratio   = utils.clamp(ratio, 0, 4)
 
     --work out hit rate for mobs
     local hitrate = ((acc * accmod) - eva) / 2 + (lvldiff * 2) + 75
@@ -176,12 +164,7 @@ xi.mobskills.mobPhysicalMove = function(mob, target, skill, numberofhits, accmod
     hitrate = utils.clamp(hitrate, 20, 95)
 
     --work out the base damage for a single hit
-    local hitdamage = base + lvldiff
-    if hitdamage < 1 then
-        hitdamage = 1
-    end
-
-    hitdamage = hitdamage * dmgmod
+    local hitdamage = math.max(1, base + lvldiff) * dmgmod
 
     if tpeffect == xi.mobskills.physicalTpBonus.DMG_VARIES then
         hitdamage = hitdamage * MobTPMod(skill:getTP() / 10)
@@ -311,14 +294,7 @@ xi.mobskills.mobMagicalMove = function(mob, target, skill, damage, element, dmgm
 
     -- plus 100 forces it to be a number
     local mab = (100 + mob:getMod(xi.mod.MATT)) / (100 + target:getMod(xi.mod.MDEF) + mdefBarBonus)
-
-    if mab > 1.3 then
-        mab = 1.3
-    end
-
-    if mab < 0.7 then
-        mab = 0.7
-    end
+    mab = utils.clamp(mab, 0.7, 1.3)
 
     if tpeffect == xi.mobskills.magicalTpBonus.DMG_BONUS then
         damage = damage * (((skill:getTP() / 10) * tpvalue) / 100)
@@ -405,9 +381,7 @@ xi.mobskills.mobAddBonuses = function(caster, target, dmg, ele) -- used for SMN 
         end
     end
 
-    if dayWeatherBonus > 1.35 then
-        dayWeatherBonus = 1.35
-    end
+    dayWeatherBonus = math.min(1.35, dayWeatherBonus)
 
     dmg = math.floor(dmg * dayWeatherBonus)
 
@@ -793,12 +767,7 @@ xi.mobskills.mobBuffMove = function(mob, typeEffect, power, tick, duration)
 end
 
 xi.mobskills.mobHealMove = function(target, healAmount)
-    local mobHP = target:getHP()
-    local mobMaxHP = target:getMaxHP()
-
-    if (mobHP + healAmount) > mobMaxHP then
-        healAmount = mobMaxHP - mobHP
-    end
+    healAmount = math.min(healAmount, target:getMaxHP() - target:getHP())
 
     target:wakeUp()
     target:addHP(healAmount)
