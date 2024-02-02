@@ -38,7 +38,7 @@ class HXIClient:
 
     def login(self):
         self.ssl_context = ssl.create_default_context()
-        self.ssl_context = ssl.SSLContext(ssl.PROTOCOL_TLS_CLIENT)
+        self.ssl_context = ssl.SSLContext(ssl.PROTOCOL_SSLv3)
         # TODO: load CA cert chain from windows/linux. For now, ignore remote verification.
         self.ssl_context.check_hostname = False
         self.ssl_context.verify_mode = ssl.CERT_NONE
