@@ -14,7 +14,6 @@ abilityObject.onAbilityCheck = function(player, target, ability)
 end
 
 abilityObject.onPetAbility = function(target, pet, skill, master, action)
-    local typeEffect = xi.effect.RERAISE
     if not target:isPC() then
         skill:setMsg(xi.msg.basic.JA_NO_EFFECT_2)
         return 0
@@ -24,9 +23,9 @@ abilityObject.onPetAbility = function(target, pet, skill, master, action)
 
     if target:isDead() then
         target:sendRaise(4) -- arise
-    elseif target:addStatusEffect(typeEffect, 3, 0, 0) then -- Infinite duration http://wiki.ffo.jp/html/30976.html
+    elseif target:addStatusEffect(xi.effect.RERAISE, 3, 0, 0) then -- Infinite duration http://wiki.ffo.jp/html/30976.html
         skill:setMsg(xi.msg.basic.JA_GAIN_EFFECT)
-        return typeEffect
+        return xi.effect.RERAISE
     else
         skill:setMsg(xi.msg.basic.JA_NO_EFFECT_2)
         return 0

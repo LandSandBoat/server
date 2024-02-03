@@ -21,8 +21,7 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
 
     target:takeDamage(dmg, mob, xi.attackType.PHYSICAL, xi.damageType.PIERCING)
 
-    local typeEffect = xi.effect.PARALYSIS
-    xi.mobskills.mobPhysicalStatusEffectMove(mob, target, skill, typeEffect, 30, 0, 180)
+    xi.mobskills.mobPhysicalStatusEffectMove(mob, target, skill, xi.effect.PARALYSIS, 30, 0, 180)
 
     return dmg
 end

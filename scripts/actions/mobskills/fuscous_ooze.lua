@@ -14,10 +14,7 @@ end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     -- TODO: Encumberance seems to do nothing?
-    local typeEffect = xi.effect.WEIGHT
-    local duration = 45
-
-    xi.mobskills.mobStatusEffectMove(mob, target, typeEffect, 50, 0, duration)
+    xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.WEIGHT, 50, 0, 45)
 
     local dmgmod = 1
     local baseDamage = mob:getWeaponDmg() * 3.7

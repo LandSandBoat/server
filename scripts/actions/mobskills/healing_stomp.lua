@@ -14,13 +14,9 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    local power = 25
-    local duration = 180
+    skill:setMsg(xi.mobskills.mobBuffMove(mob, xi.effect.REGEN, 25, 3, 180))
 
-    local typeEffect = xi.effect.REGEN
-
-    skill:setMsg(xi.mobskills.mobBuffMove(mob, typeEffect, power, 3, duration))
-    return typeEffect
+    return xi.effect.REGEN
 end
 
 return mobskillObject

@@ -21,9 +21,7 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.BLUNT, xi.mobskills.shadowBehavior.WIPE_SHADOWS)
     target:takeDamage(dmg, mob, xi.attackType.PHYSICAL, xi.damageType.BLUNT)
 
-    local typeEffect = xi.effect.MUTE
-
-    xi.mobskills.mobStatusEffectMove(mob, target, typeEffect, 1, 0, 60)
+    xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.MUTE, 1, 0, 60)
 
     return dmg
 end

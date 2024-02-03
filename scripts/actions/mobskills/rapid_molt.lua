@@ -21,10 +21,10 @@ end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     mob:eraseAllStatusEffect()
-    local typeEffect = xi.effect.REGEN
 
-    skill:setMsg(xi.mobskills.mobBuffMove(mob, typeEffect, 10, 3, 180))
-    return typeEffect
+    skill:setMsg(xi.mobskills.mobBuffMove(mob, xi.effect.REGEN, 10, 3, 180))
+
+    return xi.effect.REGEN
 end
 
 return mobskillObject

@@ -12,11 +12,10 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    local typeEffect = xi.effect.AMNESIA
     -- SubPower is resistance chance vs removal by Ecphoria Ring
-    skill:setMsg(xi.mobskills.mobStatusEffectMove(mob, target, typeEffect, 35, 0, 60, 80))
+    skill:setMsg(xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.AMNESIA, 35, 0, 60, 80))
 
-    return typeEffect
+    return xi.effect.AMNESIA
 end
 
 return mobskillObject

@@ -9,10 +9,9 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    local typeEffect = xi.effect.STONESKIN
     local base = mob:getMainLvl() * 2 + 50
 
-    skill:setMsg(xi.mobskills.mobBuffMove(mob, typeEffect, base, 0, 180))
+    skill:setMsg(xi.mobskills.mobBuffMove(mob, xi.effect.STONESKIN, base, 0, 180))
 
     return xi.effect.STONESKIN
 end

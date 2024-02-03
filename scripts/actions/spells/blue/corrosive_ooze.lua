@@ -36,12 +36,6 @@ spellObject.onSpellCast = function(caster, target, spell)
     params.mnd_wsc = 0.0
     params.chr_wsc = 0.0
 
-    local typeEffectOne = xi.effect.DEFENSE_DOWN
-    local typeEffectTwo = xi.effect.ATTACK_DOWN
-    local power = 5
-    local tick = 0
-    local duration = 90
-
     local damage = xi.spells.blue.useMagicalSpell(caster, target, spell, params)
 
     params.attribute = xi.mod.INT
@@ -49,8 +43,8 @@ spellObject.onSpellCast = function(caster, target, spell)
     local resist = applyResistanceEffect(caster, target, spell, params)
 
     if resist >= 0.5 then
-        target:addStatusEffect(typeEffectOne, power, tick, duration * resist)
-        target:addStatusEffect(typeEffectTwo, power, tick, duration * resist)
+        target:addStatusEffect(xi.effect.DEFENSE_DOWN, 5, 0, 90 * resist)
+        target:addStatusEffect(xi.effect.ATTACK_DOWN, 5, 0, 90 * resist)
     end
 
     return damage

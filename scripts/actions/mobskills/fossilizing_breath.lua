@@ -22,14 +22,9 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    local typeEffect = xi.effect.PETRIFICATION
-    local power = 1
+    skill:setMsg(xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.PETRIFICATION, 1, 0, 60))
 
-    local duration = 60
-
-    skill:setMsg(xi.mobskills.mobStatusEffectMove(mob, target, typeEffect, power, 0, duration))
-
-    return typeEffect
+    return xi.effect.PETRIFICATION
 end
 
 return mobskillObject

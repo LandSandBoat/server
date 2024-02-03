@@ -16,15 +16,14 @@ end
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     -- local power = 10
     -- local duration = 60
-    local typeEffect = xi.effect.COUNTERSTANCE
 
     -- if Conquerer Bakgodek then
         -- power = 50? He's not implemented yet anyway :P
     -- end
 
-    skill:setMsg(xi.mobskills.mobBuffMove(mob, typeEffect, 10, 0, 60))
+    skill:setMsg(xi.mobskills.mobBuffMove(mob, xi.effect.COUNTERSTANCE, 10, 0, 60))
 
-    return typeEffect
+    return xi.effect.COUNTERSTANCE
 end
 
 return mobskillObject

@@ -13,13 +13,12 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    local typeEffect = xi.effect.BLINDNESS
     local power = 25
     local duration = 90
 
-    skill:setMsg(xi.mobskills.mobStatusEffectMove(mob, target, typeEffect, power, 0, duration))
+    skill:setMsg(xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.BLINDNESS, power, 0, duration))
 
-    return typeEffect
+    return xi.effect.BLINDNESS
 end
 
 return mobskillObject

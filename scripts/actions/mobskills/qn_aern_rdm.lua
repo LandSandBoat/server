@@ -13,11 +13,10 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    local typeEffect = xi.effect.CHAINSPELL
-    xi.mobskills.mobBuffMove(mob, typeEffect, 1, 0, 60)
+    xi.mobskills.mobBuffMove(mob, xi.effect.CHAINSPELL, 1, 0, 60)
 
     skill:setMsg(xi.msg.basic.USES)
-    return typeEffect
+    return xi.effect.CHAINSPELL
 end
 
 return mobskillObject

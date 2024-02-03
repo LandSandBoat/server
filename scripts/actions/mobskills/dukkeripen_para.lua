@@ -14,15 +14,13 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    local typeEffect = xi.effect.PARALYSIS
-
-    if xi.mobskills.mobStatusEffectMove(mob, target, typeEffect, 20, 0, 120) then
+    if xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.PARALYSIS, 20, 0, 120) then
         skill:setMsg(xi.msg.basic.SKILL_ENFEEB_IS)
     else
         skill:setMsg(xi.msg.basic.SKILL_MISS)
     end
 
-    return typeEffect
+    return xi.effect.PARALYSIS
 end
 
 return mobskillObject

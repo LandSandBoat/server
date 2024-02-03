@@ -16,21 +16,19 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    local typeEffect = xi.effect.CHARM_I
-
     if not target:isPC() then
         skill:setMsg(xi.msg.basic.SKILL_MISS)
-        return typeEffect
+        return xi.effect.CHARM_I
     end
 
-    local msg = xi.mobskills.mobStatusEffectMove(mob, target, typeEffect, 0, 3, 150)
+    local msg = xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.CHARM_I, 0, 3, 150)
     if msg == xi.msg.basic.SKILL_ENFEEB_IS then
         mob:charm(target)
     end
 
     skill:setMsg(msg)
 
-    return typeEffect
+    return xi.effect.CHARM_I
 end
 
 return mobskillObject

@@ -8,13 +8,9 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    local power = 25
-    local duration = 180
+    skill:setMsg(xi.mobskills.mobBuffMove(mob, xi.effect.WARCRY, 25, 0, 180))
 
-    local typeEffect = xi.effect.WARCRY
-    skill:setMsg(xi.mobskills.mobBuffMove(mob, typeEffect, power, 0, duration))
-
-    return typeEffect
+    return xi.effect.WARCRY
 end
 
 return mobskillObject

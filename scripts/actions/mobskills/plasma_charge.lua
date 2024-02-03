@@ -9,11 +9,9 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    local typeEffect = xi.effect.SHOCK_SPIKES
-    local randy = math.random(15, 30)
-    skill:setMsg(xi.mobskills.mobBuffMove(mob, typeEffect, randy, 0, 180))
+    skill:setMsg(xi.mobskills.mobBuffMove(mob, xi.effect.SHOCK_SPIKES, math.random(15, 30), 0, 180))
 
-    return typeEffect
+    return xi.effect.SHOCK_SPIKES
 end
 
 return mobskillObject

@@ -20,16 +20,15 @@ spellObject.onMagicCastingCheck = function(caster, target, spell)
 end
 
 spellObject.onSpellCast = function(caster, target, spell)
-    local typeEffect = xi.effect.MAGIC_DEF_BOOST
     local power = 50
     local tick = 4 -- decay by 1 every 4 seconds
     local duration = xi.spells.blue.calculateDurationWithDiffusion(caster, 180)
 
-    if not target:addStatusEffect(typeEffect, power, tick, duration) then
+    if not target:addStatusEffect(xi.effect.MAGIC_DEF_BOOST, power, tick, duration) then
         spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
     end
 
-    return typeEffect
+    return xi.effect.MAGIC_DEF_BOOST
 end
 
 return spellObject

@@ -14,15 +14,13 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    local typeEffect = xi.effect.BIO
-
     local cTime = VanadielHour()
     local power = 8
     if 12 <= cTime then
         power = power + (cTime - 11)
     end
 
-    xi.mobskills.mobStatusEffectMove(mob, target, typeEffect, power, 3, 60)
+    xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.BIO, power, 3, 60)
 
     local dmgmod = 1
     local info = xi.mobskills.mobMagicalMove(mob, target, skill, mob:getWeaponDmg() * 5, xi.element.DARK, dmgmod, xi.mobskills.magicalTpBonus.NO_EFFECT)

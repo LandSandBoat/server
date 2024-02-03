@@ -12,9 +12,9 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    local typeEffect = xi.effect.PETRIFICATION
-    skill:setMsg(xi.mobskills.mobGazeMove(mob, target, typeEffect, 1, 0, 25))
-    return typeEffect
+    skill:setMsg(xi.mobskills.mobGazeMove(mob, target, xi.effect.PETRIFICATION, 1, 0, 25))
+
+    return xi.effect.PETRIFICATION
 end
 
 return mobskillObject

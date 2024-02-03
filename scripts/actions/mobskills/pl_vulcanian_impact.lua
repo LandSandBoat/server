@@ -17,9 +17,8 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local targetcurrentHP = target:getHP()
     local targetmaxHP = target:getMaxHP()
     local hpset = targetmaxHP * 0.10
-    local typeEffect = xi.effect.BIND
     local dmg = 0
-    xi.mobskills.mobStatusEffectMove(mob, target, typeEffect, 1, 0, 30)
+    xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.BIND, 1, 0, 30)
 
     if targetcurrentHP > hpset then
         dmg = targetcurrentHP - hpset

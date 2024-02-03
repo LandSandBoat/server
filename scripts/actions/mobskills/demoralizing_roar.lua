@@ -11,11 +11,10 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    local typeEffect = xi.effect.ATTACK_DOWN
     local power = 500
     local duration = 60
 
-    xi.mobskills.mobStatusEffectMove(mob, target, typeEffect, power, 0, duration)
+    xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.ATTACK_DOWN, power, 0, duration)
 end
 
 return mobskillObject

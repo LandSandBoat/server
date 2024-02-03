@@ -10,8 +10,7 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    local typeEffect = xi.effect.DEFENSE_BOOST
-    skill:setMsg(xi.mobskills.mobBuffMove(mob, typeEffect, 15, 0, 300))
+    skill:setMsg(xi.mobskills.mobBuffMove(mob, xi.effect.DEFENSE_BOOST, 15, 0, 300))
 
     -- Extra stuff for Trust: Gessho
     if mob:getObjType() == xi.objType.TRUST then
@@ -19,7 +18,7 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
         mob:addStatusEffect(xi.effect.STONESKIN, 300, 0, 300)
     end
 
-    return typeEffect
+    return xi.effect.DEFENSE_BOOST
 end
 
 return mobskillObject

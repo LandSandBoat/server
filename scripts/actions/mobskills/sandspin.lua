@@ -12,9 +12,7 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    local typeEffect = xi.effect.ACCURACY_DOWN
-
-    xi.mobskills.mobStatusEffectMove(mob, target, typeEffect, 50, 0, 120)
+    xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.ACCURACY_DOWN, 50, 0, 120)
 
     local dmgmod = 1
     local info = xi.mobskills.mobMagicalMove(mob, target, skill, mob:getWeaponDmg() * 2.3, xi.element.EARTH, dmgmod, xi.mobskills.magicalTpBonus.MAB_BONUS, 1)

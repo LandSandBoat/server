@@ -8,11 +8,9 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    local typeEffect = xi.effect.MUTE
+    skill:setMsg(xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.MUTE, 1, 0, 60))
 
-    skill:setMsg(xi.mobskills.mobStatusEffectMove(mob, target, typeEffect, 1, 0, 60))
-
-    return typeEffect
+    return xi.effect.MUTE
 end
 
 return mobskillObject

@@ -16,9 +16,8 @@ end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local dmgmod = 1.5
-    local typeEffect = xi.effect.PARALYSIS
 
-    xi.mobskills.mobStatusEffectMove(mob, target, typeEffect, 20, 0, 120)
+    xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.PARALYSIS, 20, 0, 120)
     local info = xi.mobskills.mobMagicalMove(mob, target, skill, mob:getWeaponDmg() * 3, xi.element.THUNDER, dmgmod, xi.mobskills.magicalTpBonus.MAB_BONUS, 1)
     local dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.DARK, xi.mobskills.shadowBehavior.IGNORE_SHADOWS)
 
