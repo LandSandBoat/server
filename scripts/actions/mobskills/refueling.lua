@@ -9,9 +9,9 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    local typeEffect = xi.effect.HASTE
-    skill:setMsg(xi.mobskills.mobBuffMove(mob, typeEffect, 1000, 0, 300))
-    return typeEffect
+    skill:setMsg(xi.mobskills.mobBuffMove(mob, xi.effect.HASTE, 1000, 0, 300))
+
+    return xi.effect.HASTE
 end
 
 return mobskillObject

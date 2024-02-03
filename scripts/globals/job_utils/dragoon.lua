@@ -521,17 +521,16 @@ end
 
 -- https://www.bg-wiki.com/ffxi/Angon
 xi.job_utils.dragoon.useAngon = function(player, target, ability)
-    local typeEffect = xi.effect.DEFENSE_DOWN
     local duration   = 15 + player:getMerit(xi.merit.ANGON) -- This will return 30 sec at one investment because merit power is 15.
 
-    if not target:addStatusEffect(typeEffect, 20, 0, duration) then
+    if not target:addStatusEffect(xi.effect.DEFENSE_DOWN, 20, 0, duration) then
         ability:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
     end
 
     target:updateClaim(player)
     player:removeAmmo()
 
-    return typeEffect
+    return xi.effect.DEFENSE_DOWN
 end
 
 xi.job_utils.dragoon.useDeepBreathing = function(player, target, ability)

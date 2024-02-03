@@ -13,17 +13,14 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    local typeEffect  = xi.effect.ICE_SPIKES
-    local typeEffect2 = xi.effect.DEFENSE_BOOST
-
-    skill:setMsg(xi.mobskills.MobBuffMove(mob, typeEffect, math.random(15, 30), 0, 60))
+    skill:setMsg(xi.mobskills.MobBuffMove(mob, xi.effect.ICE_SPIKES, math.random(15, 30), 0, 60))
     local effect1 = mob:getStatusEffect(xi.effect.ICE_SPIKES)
     effect1:delEffectFlag(xi.effectFlag.DISPELABLE)
-    xi.mobskills.mobBuffMove(mob, typeEffect2, 26, 0, 60)
+    xi.mobskills.mobBuffMove(mob, xi.effect.DEFENSE_BOOST, 26, 0, 60)
     local effect2 = mob:getStatusEffect(xi.effect.DEFENSE_BOOST)
     effect2:delEffectFlag(xi.effectFlag.DISPELABLE)
 
-    return typeEffect
+    return xi.effect.ICE_SPIKES
 end
 
 return mobskillObject

@@ -8,10 +8,9 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    local typeEffect = xi.effect.POISON
+    skill:setMsg(xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.POISON, math.random(20, 30), 3, 60))
 
-    skill:setMsg(xi.mobskills.mobStatusEffectMove(mob, target, typeEffect, math.random(20, 30), 3, 60))
-    return typeEffect
+    return xi.effect.POISON
 end
 
 return mobskillObject

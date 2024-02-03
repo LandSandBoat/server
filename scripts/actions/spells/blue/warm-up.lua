@@ -20,21 +20,18 @@ spellObject.onMagicCastingCheck = function(caster, target, spell)
 end
 
 spellObject.onSpellCast = function(caster, target, spell)
-    local typeEffectOne = xi.effect.ACCURACY_BOOST
-    local typeEffectTwo = xi.effect.EVASION_BOOST
-    local power = 10
     local duration = xi.spells.blue.calculateDurationWithDiffusion(caster, 180)
-    local returnEffect = typeEffectOne
+    local returnEffect = xi.effect.ACCURACY_BOOST
 
-    local actionOne = target:addStatusEffect(typeEffectOne, power, 0, duration)
-    local actionTwo = target:addStatusEffect(typeEffectTwo, power, 0, duration)
+    local actionOne = target:addStatusEffect(xi.effect.ACCURACY_BOOST, 10, 0, duration)
+    local actionTwo = target:addStatusEffect(xi.effect.EVASION_BOOST, 10, 0, duration)
 
     if not actionOne and not actionTwo then -- both statuses fail to apply
         spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
     elseif not actionOne and actionTwo then -- the first status fails to apply
-        returnEffect = typeEffectTwo
+        returnEffect = xi.effect.EVASION_BOOST
     elseif actionOne and not actionTwo then -- the second status fails to apply
-        returnEffect = typeEffectOne
+        returnEffect = xi.effect.ACCURACY_BOOST
     end
 
     return returnEffect

@@ -12,9 +12,7 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    local typeEffect = xi.effect.BIND
-
-    xi.mobskills.mobStatusEffectMove(mob, target, typeEffect, 1, 0, 120)
+    xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.BIND, 1, 0, 120)
 
     local numhits = 1
     local accmod = 4

@@ -9,8 +9,7 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    local typeEffect = xi.effect.WEIGHT
-    xi.mobskills.mobStatusEffectMove(mob, target, typeEffect, 50, 0, 120)
+    xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.WEIGHT, 50, 0, 120)
 
     local dmgmod = xi.mobskills.mobBreathMove(mob, target, 0.167, 1.875, xi.element.EARTH, 509)
 

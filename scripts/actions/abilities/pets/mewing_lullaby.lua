@@ -9,7 +9,6 @@ abilityObject.onAbilityCheck = function(player, target, ability)
 end
 
 abilityObject.onPetAbility = function(target, pet, skill, master, action)
-    local typeEffect = xi.effect.SLEEP_I
     local duration = 90
     local dINT = pet:getStat(xi.mod.CHR) - target:getStat(xi.mod.CHR)
     local bonus = xi.summon.getSummoningSkillOverCap(pet)
@@ -17,7 +16,7 @@ abilityObject.onPetAbility = function(target, pet, skill, master, action)
     target:setTP(0) -- "The TP lowering seems to be a total reset of TP on the mob, and even if the sleep misses, the TP reset cannot miss."
     if resm < 0.5 then
         skill:setMsg(xi.msg.basic.JA_MISS_2) -- resist message
-        return typeEffect
+        return xi.effect.SLEEP_I
     end
 
     duration = duration * resm
@@ -32,7 +31,7 @@ abilityObject.onPetAbility = function(target, pet, skill, master, action)
     else
         skill:setMsg(xi.msg.basic.JA_GAIN_EFFECT)
 
-        target:addStatusEffect(typeEffect, 1, 0, duration)
+        target:addStatusEffect(xi.effect.SLEEP_I, 1, 0, duration)
     end
 
     return xi.effect.LULLABY

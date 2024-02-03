@@ -10,12 +10,11 @@ end
 abilityObject.onPetAbility = function(target, pet, petskill, summoner, action)
     xi.job_utils.summoner.onUseBloodPact(target, petskill, summoner, action)
 
-    local typeEffect = xi.effect.ATTACK_DOWN
-    if not target:getStatusEffect(typeEffect) then
-        target:addStatusEffect(typeEffect, 25, 0, 60)
+    if not target:getStatusEffect(xi.effect.ATTACK_DOWN) then
+        target:addStatusEffect(xi.effect.ATTACK_DOWN, 25, 0, 60)
 
         -- The status effect requires the NO_LOSS_MESSAGE flag to be set
-        local statusEffect = target:getStatusEffect(typeEffect)
+        local statusEffect = target:getStatusEffect(xi.effect.ATTACK_DOWN)
         statusEffect:addEffectFlag(xi.effectFlag.NO_LOSS_MESSAGE)
 
         -- TODO: Verify enmity gain total
@@ -32,7 +31,7 @@ abilityObject.onPetAbility = function(target, pet, petskill, summoner, action)
         return
     end
 
-    return typeEffect
+    return xi.effect.ATTACK_DOWN
 end
 
 return abilityObject

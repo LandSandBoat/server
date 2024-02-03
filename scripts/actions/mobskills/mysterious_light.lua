@@ -10,9 +10,7 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    local typeEffect = xi.effect.WEIGHT
-
-    xi.mobskills.mobStatusEffectMove(mob, target, typeEffect, 50, 0, 60)
+    xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.WEIGHT, 50, 0, 60)
 
     local dmgmod = 1
     local info = xi.mobskills.mobMagicalMove(mob, target, skill, mob:getWeaponDmg() * 3.5, xi.element.WIND, dmgmod, xi.mobskills.magicalTpBonus.NO_EFFECT)

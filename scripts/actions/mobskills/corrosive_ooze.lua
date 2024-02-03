@@ -14,12 +14,8 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    local typeEffectOne = xi.effect.ATTACK_DOWN
-    local typeEffectTwo = xi.effect.DEFENSE_DOWN
-    local duration = 120
-
-    xi.mobskills.mobStatusEffectMove(mob, target, typeEffectOne, 15, 0, duration)
-    xi.mobskills.mobStatusEffectMove(mob, target, typeEffectTwo, 15, 0, duration)
+    xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.ATTACK_DOWN, 15, 0, 120)
+    xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.DEFENSE_DOWN, 15, 0, 120)
 
     local dmgmod = 1
     local baseDamage = mob:getWeaponDmg() * 4.2

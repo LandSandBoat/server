@@ -19,22 +19,20 @@ spellObject.onMagicCastingCheck = function(caster, target, spell)
 end
 
 spellObject.onSpellCast = function(caster, target, spell)
-    local typeEffectOne = xi.effect.DEFENSE_DOWN
-    local typeEffectTwo = xi.effect.MAGIC_DEF_DOWN
     local params = {}
     params.ecosystem = xi.ecosystem.BEASTMEN
-    params.effect = typeEffectOne
+    params.effect = xi.effect.DEFENSE_DOWN
     params.attribute = xi.mod.INT
     params.skillType = xi.skill.BLUE_MAGIC
     local duration = 30
     local resistThreshold = 0.5
-    local returnEffect = typeEffectOne
+    local returnEffect = xi.effect.DEFENSE_DOWN
 
     local resist = applyResistance(caster, target, spell, params)
     if resist >= resistThreshold then
 
-        local actionOne = target:addStatusEffect(typeEffectOne, 10, 0, duration * resist)
-        local actionTwo = target:addStatusEffect(typeEffectTwo, 8, 0, duration * resist)
+        local actionOne = target:addStatusEffect(xi.effect.DEFENSE_DOWN, 10, 0, duration * resist)
+        local actionTwo = target:addStatusEffect(xi.effect.MAGIC_DEF_DOWN, 8, 0, duration * resist)
 
         -- If at least one of effects got applied, set the message type
         if actionOne or actionTwo then
@@ -43,7 +41,7 @@ spellObject.onSpellCast = function(caster, target, spell)
 
         -- Set the returnEffect to effectTwo if the first one failed
         if not actionOne and actionTwo then
-            returnEffect = typeEffectTwo
+            returnEffect = xi.effect.MAGIC_DEF_DOWN
         end
 
     else

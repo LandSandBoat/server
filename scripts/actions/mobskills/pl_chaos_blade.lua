@@ -24,8 +24,7 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     target:takeDamage(dmg, mob, xi.attackType.MAGICAL, xi.damageType.DARK)
 
     -- curse LAST so you don't die
-    local typeEffect = xi.effect.CURSE_I
-    xi.mobskills.mobStatusEffectMove(mob, target, typeEffect, 25, 0, 60)
+    xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.CURSE_I, 25, 0, 60)
 
     return dmg
 end

@@ -12,9 +12,7 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    local typeEffect = xi.effect.BLINDNESS
-
-    xi.mobskills.mobStatusEffectMove(mob, target, typeEffect, 15, 0, 120)
+    xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.BLINDNESS, 15, 0, 120)
 
     local dmgmod = 1
     local info = xi.mobskills.mobMagicalMove(mob, target, skill, mob:getWeaponDmg() * 4, xi.element.EARTH, dmgmod, xi.mobskills.magicalTpBonus.NO_EFFECT)
