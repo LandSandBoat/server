@@ -657,31 +657,6 @@ xi.magic.getEffectResistance = function(target, effectId)
     return statusResistance
 end
 
-function handleAfflatusMisery(caster, spell, dmg)
-    if caster:hasStatusEffect(xi.effect.AFFLATUS_MISERY) then
-        local misery = caster:getMod(xi.mod.AFFLATUS_MISERY)
-        -- According to BGWiki Caps at 300 magic damage.
-        local miseryMax = 300
-
-        miseryMax = miseryMax * (1 - caster:getMerit(xi.merit.ANIMUS_MISERY) / 100)
-
-        -- BGwiki puts the boost capping at 200% bonus at 1/4th max HP.
-        if misery > miseryMax then
-            misery = miseryMax
-        end
-
-        -- Damage is 2x at boost cap.
-        local boost = 1 + (misery / miseryMax)
-
-        dmg = math.floor(dmg * boost)
-
-        --Afflatus Mod is Used Up
-        caster:setMod(xi.mod.AFFLATUS_MISERY, 0)
-    end
-
-    return dmg
-end
-
 function finalMagicAdjustments(caster, target, spell, dmg)
     --Handles target's HP adjustment and returns UNSIGNED dmg (absorb message is set in this function)
 
