@@ -2,12 +2,10 @@
 require('scripts/globals/caskets')
 require('scripts/globals/mixins')
 
-g_mixins = g_mixins or {}
-
 -----------------------------------
 -- Casket zone check
 -----------------------------------
-g_mixins.spawn_casket = function(casketMob)
+local spawn_casket = function(casketMob)
     casketMob:addListener('DEATH', 'DEATH_SPAWN_CASKET', function(mob, player, isKiller)
         local mobPos = mob:getPos()
 
@@ -24,4 +22,4 @@ g_mixins.spawn_casket = function(casketMob)
     end)
 end
 
-return g_mixins.spawn_casket
+return spawn_casket

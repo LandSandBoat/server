@@ -1593,8 +1593,6 @@ namespace mobutils
                 luautils::OnEntityLoad(PMob);
 
                 luautils::OnMobInitialize(PMob);
-                luautils::ApplyMixins(PMob);
-                luautils::ApplyZoneMixins(PMob);
 
                 PMob->saveModifiers();
                 PMob->saveMobModifiers();

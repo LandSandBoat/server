@@ -653,8 +653,6 @@ namespace zoneutils
                 mobutils::AddSqlModifiers(PMob);
 
                 luautils::OnMobInitialize(PMob);
-                luautils::ApplyMixins(PMob);
-                luautils::ApplyZoneMixins(PMob);
 
                 PMob->saveModifiers();
                 PMob->saveMobModifiers();

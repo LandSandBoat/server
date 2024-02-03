@@ -126,4 +126,21 @@ namespace utils
     auto toASCII(std::string const& target, unsigned char replacement = '\0') -> std::string;
 } // namespace utils
 
+class ScopeGuard
+{
+public:
+    ScopeGuard(std::function<void()> func)
+    : func(func)
+    {
+    }
+
+    ~ScopeGuard()
+    {
+        func();
+    }
+
+private:
+    std::function<void()> func;
+};
+
 #endif

@@ -305,9 +305,6 @@ void CLuaBattlefield::lose()
 
 void CLuaBattlefield::addGroups(sol::table const& groups, bool hasMultipleArenas)
 {
-    // get the global function "applyMixins"
-    sol::function applyMixins = lua["applyMixins"];
-
     // Ensure that each area has its own super linking
     int16 superlinkId = 1000 * m_PLuaBattlefield->GetArea();
     // The lowest entity ID allowed within the battlefield. Used for battlefields with multiple areas.
@@ -580,23 +577,6 @@ void CLuaBattlefield::addGroups(sol::table const& groups, bool hasMultipleArenas
                     PMob->setMobMod(modifier.first.as<uint16>(), modifier.second.as<uint16>());
                 }
                 PMob->saveMobModifiers();
-            }
-        }
-
-        auto mixins = groupData["mixins"];
-        if (mixins.valid() && applyMixins.valid())
-        {
-            // get the parameter "mixinOptions" (optional)
-            auto mixinOptions = groupData["mixinOptions"];
-
-            for (CBaseEntity* entity : groupEntities)
-            {
-                auto result = applyMixins(CLuaBaseEntity(entity), mixins, mixinOptions);
-                if (!result.valid())
-                {
-                    sol::error err = result;
-                    ShowError("luautils::applyMixins: %s", err.what());
-                }
             }
         }
 

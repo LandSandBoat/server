@@ -11394,8 +11394,8 @@ void CLuaBaseEntity::resetRecasts()
  *  Function: addListener()
  *  Purpose : Instructs the Event Handler to monitor for an Event, then
  *            execute a prepared Lua function once the Event has occurred
- *  Example : See: scripts/mixins/families/chigoe.lua
- *  Notes   : Function along with statements must be passed in L3
+ *  Example : avatarMob:addListener('SPAWN', 'AVATAR_SPAWN', function(mob) print('Hello!') end)
+ *  Notes   :
  ************************************************************************/
 
 void CLuaBaseEntity::addListener(std::string const& eventName, std::string const& identifier, sol::function const& func)

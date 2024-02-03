@@ -911,11 +911,11 @@ void CMobController::DoRoamTick(time_point tick)
             }
             else
             {
-                // No longer including conditional for ROAMFLAG_AMBUSH now that using mixin to handle mob hiding
                 if (PMob->getMobMod(MOBMOD_SPECIAL_SKILL) != 0 &&
                     m_Tick >= m_LastSpecialTime + std::chrono::milliseconds(PMob->getBigMobMod(MOBMOD_SPECIAL_COOL)) && TrySpecialSkill())
                 {
                     // I spawned a pet
+                    // NOTE: TrySpecialSkill() is doing things!
                 }
                 else if (PMob->GetMJob() == JOB_SMN && CanCastSpells() && PMob->SpellContainer->HasBuffSpells() &&
                          m_Tick >= m_LastMagicTime + std::chrono::milliseconds(PMob->getBigMobMod(MOBMOD_MAGIC_COOL)))
