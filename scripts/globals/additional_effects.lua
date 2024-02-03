@@ -47,7 +47,7 @@ end
 xi.additionalEffect.levelCorrection = function(dLV, aLV, chance)
     -- Level correction of proc chance (copied from existing bolt/arrow scripts, looks wrong..)
     if dLV > aLV then
-        chance = utils.clamp(chance - 5 * (dLV - aLV), 5, 95)
+        chance = math.clamp(chance - 5 * (dLV - aLV), 5, 95)
     end
 
     return chance

@@ -21,7 +21,7 @@ spellObject.onSpellCast = function(caster, target, spell)
     -- Calculate raw damage
     local dmg = basedmg
     -- Softcaps at 8, should always do at least 1
-    dmg = utils.clamp(dmg, 1, 8)
+    dmg = math.clamp(dmg, 1, 8)
     -- Get resist multiplier (1x if no resist)
     local resist = applyResistance(caster, target, spell, params)
     -- Get the resisted damage

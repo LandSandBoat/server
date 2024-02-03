@@ -225,11 +225,11 @@ end
 
 local function calculateMagicHitRate(magicacc, magiceva, percentBonus, casterLvl, targetLvl)
     --add a scaling bonus or penalty based on difference of targets level from caster
-    local levelDiff = utils.clamp(casterLvl - targetLvl, -5, 5)
+    local levelDiff = math.clamp(casterLvl - targetLvl, -5, 5)
 
     local p = 70 - 0.5 * (magiceva - magicacc) + levelDiff * 3 + percentBonus
 
-    return utils.clamp(p, 5, 95)
+    return math.clamp(p, 5, 95)
 end
 
 local function calculateMagicBurst(caster, spell, target, params)
@@ -590,7 +590,7 @@ function getMagicHitRate(caster, target, skillType, element, percentBonus, bonus
 
     -- Add macc% from food
     local maccFood = magicacc * (caster:getMod(xi.mod.FOOD_MACCP) / 100)
-    magicacc = magicacc + utils.clamp(maccFood, 0, caster:getMod(xi.mod.FOOD_MACC_CAP))
+    magicacc = magicacc + math.clamp(maccFood, 0, caster:getMod(xi.mod.FOOD_MACC_CAP))
 
     return calculateMagicHitRate(magicacc, magiceva, percentBonus, caster:getMainLvl(), target:getMainLvl())
 end
@@ -725,7 +725,7 @@ function finalMagicAdjustments(caster, target, spell, dmg)
 
     if dmg > 0 then
         dmg = dmg - target:getMod(xi.mod.PHALANX)
-        dmg = utils.clamp(dmg, 0, 99999)
+        dmg = math.clamp(dmg, 0, 99999)
     end
 
     -- handle one for all
@@ -733,7 +733,7 @@ function finalMagicAdjustments(caster, target, spell, dmg)
 
     --handling stoneskin
     dmg = utils.stoneskin(target, dmg)
-    dmg = utils.clamp(dmg, -99999, 99999)
+    dmg = math.clamp(dmg, -99999, 99999)
 
     if dmg < 0 then
         dmg = target:addHP(-dmg)
@@ -758,7 +758,7 @@ function finalMagicNonSpellAdjustments(caster, target, ele, dmg)
 
     if dmg > 0 then
         dmg = dmg - target:getMod(xi.mod.PHALANX)
-        dmg = utils.clamp(dmg, 0, 99999)
+        dmg = math.clamp(dmg, 0, 99999)
     end
 
     -- handle one for all
@@ -767,7 +767,7 @@ function finalMagicNonSpellAdjustments(caster, target, ele, dmg)
     -- handling stoneskin
     dmg = utils.stoneskin(target, dmg)
 
-    dmg = utils.clamp(dmg, -99999, 99999)
+    dmg = math.clamp(dmg, -99999, 99999)
 
     if dmg < 0 then
         dmg = -(target:addHP(-dmg))
@@ -984,7 +984,7 @@ function getElementalDamageReduction(target, element)
     local defense = 1
     if element > 0 then
         defense = 1 - (target:getMod(xi.magic.specificDmgTakenMod[element]) / 10000)
-        return utils.clamp(defense, 0.0, 2.0)
+        return math.clamp(defense, 0.0, 2.0)
     end
 
     return defense

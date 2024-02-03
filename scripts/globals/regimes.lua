@@ -1462,7 +1462,7 @@ xi.regime.checkRegime = function(player, mob, regimeId, index, regimeType)
             local baseReward = reward
 
             reward = reward * (100 + (govClears * 4)) / 100
-            reward = utils.clamp(reward, 0, baseReward * 2)
+            reward = math.clamp(reward, 0, baseReward * 2)
 
             -- increment clears
             player:delStatusEffectSilent(xi.effect.PROWESS)
@@ -1486,7 +1486,7 @@ xi.regime.checkRegime = function(player, mob, regimeId, index, regimeType)
 
         -- tabs
         local tabs = math.floor(reward / 10) * xi.settings.main.TABS_RATE
-        tabs       = utils.clamp(tabs, 0, 50000 - player:getCurrency('valor_point')) -- Retail caps players at 50000 tabs
+        tabs       = math.clamp(tabs, 0, 50000 - player:getCurrency('valor_point')) -- Retail caps players at 50000 tabs
 
         player:addCurrency('valor_point', tabs)
         player:messageBasic(xi.msg.basic.FOV_OBTAINS_TABS, tabs, player:getCurrency('valor_point'))

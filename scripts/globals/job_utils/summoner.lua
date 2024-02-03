@@ -154,7 +154,7 @@ xi.job_utils.summoner.useManaCede = function(player, ability, action)
         local avatarTP = avatar:getTP()
         local bonusTP = 1000 + player:getJobPointLevel(xi.jp.MANA_CEDE_EFFECT) * 50
         local manaCedeBonus = (100 + player:getMod(xi.mod.ENHANCES_MANA_CEDE)) / 100
-        local avatarNewTP = utils.clamp(avatarTP + bonusTP * manaCedeBonus, 1000, 3000)
+        local avatarNewTP = math.clamp(avatarTP + bonusTP * manaCedeBonus, 1000, 3000)
 
         action:ID(player:getID(), avatar:getID())
         avatar:setTP(avatarNewTP)
@@ -190,7 +190,7 @@ xi.job_utils.summoner.useSoothingRuby = function(target, pet, petskill, summoner
 
     -- Calculate the ammount of effects this skill can potentialy erase.
     local summoningSkillFactor = math.floor((summoner:getSkillLevel(xi.skill.SUMMONING_MAGIC) + 99) / 100)
-    local soothingRubyPower    = utils.clamp(summoningSkillFactor, 1, 6)
+    local soothingRubyPower    = math.clamp(summoningSkillFactor, 1, 6)
 
     -- Erase effects.
     local effectsErased = math.min(#erasableEffectTable, soothingRubyPower)

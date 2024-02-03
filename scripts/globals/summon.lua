@@ -145,8 +145,8 @@ xi.summon.avatarPhysicalMove = function(avatar, target, skill, numberofhits, acc
     local hitrateFirst      = hitrateSubsequent + 50 -- First hit gets a +100 ACC bonus which translates to +50 hit
     hitrateSubsequent = hitrateSubsequent / 100
     hitrateFirst      = hitrateFirst / 100
-    hitrateSubsequent = utils.clamp(hitrateSubsequent, minHitRate, maxHitRate)
-    hitrateFirst      = utils.clamp(hitrateFirst, minHitRate, maxHitRate)
+    hitrateSubsequent = math.clamp(hitrateSubsequent, minHitRate, maxHitRate)
+    hitrateFirst      = math.clamp(hitrateFirst, minHitRate, maxHitRate)
 
     -- Compute hits first so we can exit early
     local firstHitLanded   = false
@@ -181,7 +181,7 @@ xi.summon.avatarPhysicalMove = function(avatar, target, skill, numberofhits, acc
         local critRate     = baseCritRate + getDexCritRate(avatar, target) + avatar:getMod(xi.mod.CRITHITRATE)
 
         critRate = critRate / 100
-        critRate = utils.clamp(critRate, minCritRate, maxCritRate)
+        critRate = math.clamp(critRate, minCritRate, maxCritRate)
 
         local weaponDmg = avatar:getWeaponDmg()
         local fSTR      = xi.combat.physical.calculateMeleeStatFactor(avatar, target)
@@ -349,7 +349,7 @@ xi.summon.avatarFinalAdjustments = function(dmg, mob, skill, target, skilltype, 
 
     -- Handle Phalanx
     if dmg > 0 then
-        dmg = utils.clamp(dmg - target:getMod(xi.mod.PHALANX), 0, 99999)
+        dmg = math.clamp(dmg - target:getMod(xi.mod.PHALANX), 0, 99999)
     end
 
     if skilltype == xi.attackType.MAGICAL then

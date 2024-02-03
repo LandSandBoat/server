@@ -78,7 +78,7 @@ xi.ability.adjustDamage = function(dmg, mob, skill, target, skilltype, skillpara
 
     -- Handle Phalanx
     if dmg > 0 then
-        dmg = utils.clamp(dmg - target:getMod(xi.mod.PHALANX), 0, 99999)
+        dmg = math.clamp(dmg - target:getMod(xi.mod.PHALANX), 0, 99999)
     end
 
     if skilltype == xi.attackType.MAGICAL then

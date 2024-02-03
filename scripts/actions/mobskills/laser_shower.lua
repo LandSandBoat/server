@@ -20,7 +20,7 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local dis = ((mob:checkDistance(target) * 2) / 20)
 
     dmgmod = dmgmod * dis
-    dmgmod = utils.clamp(dmgmod, 50, 1600)
+    dmgmod = math.clamp(dmgmod, 50, 1600)
 
     local dmg = xi.mobskills.mobFinalAdjustments(dmgmod, mob, skill, target, xi.attackType.BREATH, xi.damageType.LIGHT, xi.mobskills.shadowBehavior.IGNORE_SHADOWS)
 

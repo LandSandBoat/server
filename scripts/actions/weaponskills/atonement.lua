@@ -67,16 +67,16 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
             dmg = (target:getCE(player) + target:getVE(player)) / 6
             -- tp affects enmity multiplier, 1.0 at 1k, 1.5 at 2k, 2.0 at 3k. Gorget/Belt adds 100 tp each.
             params.enmityMult = params.enmityMult + (tp + xi.weaponskills.handleWSGorgetBelt(player) * 1000 - 1000) / 2000
-            params.enmityMult = utils.clamp(params.enmityMult, 1, 2) -- necessary because of Gorget/Belt bonus
+            params.enmityMult = math.clamp(params.enmityMult, 1, 2) -- necessary because of Gorget/Belt bonus
         else
             local effectiveTP = tp + xi.weaponskills.handleWSGorgetBelt(player) * 1000
-            effectiveTP = utils.clamp(effectiveTP, 0, 3000) -- necessary because of Gorget/Belt bonus
+            effectiveTP = math.clamp(effectiveTP, 0, 3000) -- necessary because of Gorget/Belt bonus
             local ceMod = xi.weaponskills.fTP(effectiveTP, 0.09, 0.11, 0.20) -- CE portion of Atonement
             local veMod = xi.weaponskills.fTP(effectiveTP, 0.11, 0.14, 0.25) -- VE portion of Atonement
             dmg = math.floor(target:getCE(player) * ceMod) + math.floor(target:getVE(player) * veMod)
         end
 
-        dmg = utils.clamp(dmg, 0, player:getMainLvl() * 10) -- Damage is capped to player's level * 10, before WS damage mods
+        dmg = math.clamp(dmg, 0, player:getMainLvl() * 10) -- Damage is capped to player's level * 10, before WS damage mods
         damage = target:breathDmgTaken(dmg)
         if player:getMod(xi.mod.WEAPONSKILL_DAMAGE_BASE + wsID) > 0 then
             damage = damage * (100 + player:getMod(xi.mod.WEAPONSKILL_DAMAGE_BASE + wsID)) / 100

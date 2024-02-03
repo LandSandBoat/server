@@ -149,37 +149,37 @@ xi.spells.enfeebling.calculatePotency = function(caster, target, spellId, spellE
             statDiff = caster:getStat(statUsed) - target:getStat(xi.mod.MND)
 
             if spellId == xi.magic.spell.BLIND_II then
-                potency = utils.clamp(statDiff * 0.375 + 49, 19, 94) -- Values from JP wiki: http://wiki.ffo.jp/html/3449.html
+                potency = math.clamp(statDiff * 0.375 + 49, 19, 94) -- Values from JP wiki: http://wiki.ffo.jp/html/3449.html
             else
-                potency = utils.clamp(statDiff * 0.225 + 23, 5, 50)  -- Values from JP wiki: http://wiki.ffo.jp/html/834.html
+                potency = math.clamp(statDiff * 0.225 + 23, 5, 50)  -- Values from JP wiki: http://wiki.ffo.jp/html/834.html
             end
         end,
 
         [xi.effect.EVASION_DOWN] = function()
             if spellId == xi.magic.spell.DISTRACT then
-                potency = utils.clamp(skillLevel / 5, 0, 25) + utils.clamp(statDiff / 5, 0, 10)
+                potency = math.clamp(skillLevel / 5, 0, 25) + math.clamp(statDiff / 5, 0, 10)
             elseif spellId == xi.magic.spell.DISTRACT_II then
-                potency = utils.clamp(skillLevel * 4 / 35, 0, 40) + utils.clamp(statDiff / 5, 0, 10)
+                potency = math.clamp(skillLevel * 4 / 35, 0, 40) + math.clamp(statDiff / 5, 0, 10)
             else
-                potency = utils.clamp(skillLevel / 5, 0, 120) + utils.clamp(statDiff / 5, 0, 10)
+                potency = math.clamp(skillLevel / 5, 0, 120) + math.clamp(statDiff / 5, 0, 10)
             end
         end,
 
         [xi.effect.MAGIC_EVASION_DOWN] = function()
             if spellId == xi.magic.spell.FRAZZLE then
-                potency = utils.clamp(skillLevel / 5, 0, 25) + utils.clamp(statDiff / 5, 0, 10)
+                potency = math.clamp(skillLevel / 5, 0, 25) + math.clamp(statDiff / 5, 0, 10)
             elseif spellId == xi.magic.spell.FRAZZLE_II then
-                potency = utils.clamp(skillLevel * 4 / 35, 0, 40) + utils.clamp(statDiff / 5, 0, 10)
+                potency = math.clamp(skillLevel * 4 / 35, 0, 40) + math.clamp(statDiff / 5, 0, 10)
             else
-                potency = utils.clamp(skillLevel / 5, 0, 120) + utils.clamp(statDiff / 5, 0, 10)
+                potency = math.clamp(skillLevel / 5, 0, 120) + math.clamp(statDiff / 5, 0, 10)
             end
         end,
 
         [xi.effect.PARALYSIS] = function()
             if spellId == xi.magic.spell.PARALYZE_II then
-                potency = utils.clamp(statDiff / 4 + 20, 10, 30)
+                potency = math.clamp(statDiff / 4 + 20, 10, 30)
             else
-                potency = utils.clamp(statDiff / 4 + 15, 5, 25)
+                potency = math.clamp(statDiff / 4 + 15, 5, 25)
             end
         end,
 
@@ -207,9 +207,9 @@ xi.spells.enfeebling.calculatePotency = function(caster, target, spellId, spellE
 
         [xi.effect.SLOW] = function()
             if spellId == xi.magic.spell.SLOW_II then
-                potency = utils.clamp(statDiff * 226 / 15 + 2380, 1250, 3510)
+                potency = math.clamp(statDiff * 226 / 15 + 2380, 1250, 3510)
             else
-                potency = utils.clamp(statDiff * 73 / 5 + 1825, 730, 2920)
+                potency = math.clamp(statDiff * 73 / 5 + 1825, 730, 2920)
             end
         end,
 
@@ -491,7 +491,7 @@ xi.spells.enfeebling.useEnfeeblingSpell = function(caster, target, spell)
 
     -- Addle: Has sub-effect.
     elseif spellEffect == xi.effect.ADDLE then
-        subpotency = 20 + utils.clamp(math.floor((caster:getStat(statUsed) - target:getStat(statUsed)) / 5), 0, 20)
+        subpotency = 20 + math.clamp(math.floor((caster:getStat(statUsed) - target:getStat(statUsed)) / 5), 0, 20)
 
     -- Dispel: It's special in that it has no real effect.
     elseif spellEffect == xi.effect.NONE then

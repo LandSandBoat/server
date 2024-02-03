@@ -23,7 +23,7 @@ abilityObject.onPetAbility = function(target, pet, skill)
         end
     end
 
-    hpRestore = utils.clamp(hpRestore, 0, target:getMaxHP())
+    hpRestore = math.clamp(hpRestore, 0, target:getMaxHP())
 
     target:wakeUp()
 

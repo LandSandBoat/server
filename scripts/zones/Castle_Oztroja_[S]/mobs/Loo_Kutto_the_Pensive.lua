@@ -16,7 +16,7 @@ entity.onMobFight = function(mob, target)
         50% HP, 140 storeTP
         25% HP, 200 storeTP (caps here - this is about 50% TP per greatsword swing)
     --]]
-    local power = 20 + math.floor(utils.clamp(100 - mob:getHPP(), 0, 75) * 2.4)
+    local power = 20 + math.floor(math.clamp(100 - mob:getHPP(), 0, 75) * 2.4)
     mob:setMod(xi.mod.STORETP, power)
 end
 

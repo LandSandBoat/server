@@ -61,7 +61,7 @@ local function calculatecRatio(ratio, atk_lvl, def_lvl)
     end
 
     ratio = ratio - levelcor
-    ratio = utils.clamp(ratio, 0, 2)
+    ratio = math.clamp(ratio, 0, 2)
 
     -- Get cRatiomin
     local cratiomin = 0
@@ -97,7 +97,7 @@ end
 
 -- Get the fTP multiplier (by applying 2 straight lines between ftp0-ftp1500 and ftp1500-ftp3000)
 local function calculatefTP(tp, ftp0, ftp1500, ftp3000)
-    tp = utils.clamp(tp, 0, 3000)
+    tp = math.clamp(tp, 0, 3000)
 
     if tp >= 1500 then
         return ftp1500 + (ftp3000 - ftp1500) * (tp - 1500) / 1500
@@ -137,7 +137,7 @@ local function calculateHitrate(attacker, target, bonusacc)
     local eva     = target:getEVA()
     local hitrate = (75 + (acc - eva) / 2) / 100
 
-    hitrate = utils.clamp(hitrate, 0.2, 0.95)
+    hitrate = math.clamp(hitrate, 0.2, 0.95)
 
     return hitrate
 end
@@ -165,7 +165,7 @@ xi.spells.blue.usePhysicalSpell = function(caster, target, spell, params)
 
     -- Initial D value
     local initialD = math.floor(caster:getSkillLevel(xi.skill.BLUE_MAGIC) * 0.11) * 2 + 3
-    initialD       = utils.clamp(initialD, 0, params.duppercap)
+    initialD       = math.clamp(initialD, 0, params.duppercap)
 
     -- fSTR
     local fStr = calculatefSTR(caster:getStat(xi.mod.STR) - target:getStat(xi.mod.VIT))
@@ -187,7 +187,7 @@ xi.spells.blue.usePhysicalSpell = function(caster, target, spell, params)
     -- Chain Affinity -- TODO: add 'Damage/Accuracy/Critical Hit Chance varies with TP'
     if caster:getStatusEffect(xi.effect.CHAIN_AFFINITY) then
         local tp   = caster:getTP() + caster:getMerit(xi.merit.ENCHAINMENT) -- Total TP available
-        tp         = utils.clamp(tp, 0, 3000)
+        tp         = math.clamp(tp, 0, 3000)
         multiplier = calculatefTP(tp, params.multiplier, params.tp150, params.tp300)
         bonusWSC   = bonusWSC + 1 -- Chain Affinity doubles base WSC
     end
@@ -220,7 +220,7 @@ xi.spells.blue.usePhysicalSpell = function(caster, target, spell, params)
 
     -- params.critchance will only be non-nil if base critchance is passed from spell lua
     local nativecrit  = xi.combat.physical.calculateSwingCriticalRate(caster, target, false, 0, 0, 0)
-    params.critchance = params.critchance == nil and 0 or utils.clamp(params.critchance / 100 + nativecrit, 0.05, 0.95)
+    params.critchance = params.critchance == nil and 0 or math.clamp(params.critchance / 100 + nativecrit, 0.05, 0.95)
 
     local cratio  = calculatecRatio(params.offcratiomod / target:getStat(xi.mod.DEF), caster:getMainLvl(), target:getMainLvl())
     local hitrate = calculateHitrate(caster, target, params.bonusacc)
@@ -296,7 +296,7 @@ xi.spells.blue.useMagicalSpell = function(caster, target, spell, params)
     -- Use params.addedEffect instead
 
     -- Initial values
-    local initialD   = utils.clamp(caster:getMainLvl() + 2, 0, params.duppercap)
+    local initialD   = math.clamp(caster:getMainLvl() + 2, 0, params.duppercap)
     params.skillType = xi.skill.BLUE_MAGIC
 
     -- WSC
@@ -338,7 +338,7 @@ xi.spells.blue.useDrainSpell = function(caster, target, spell, params, softCap, 
     -- determine base damage
     local dmg = params.dmgMultiplier * math.floor(caster:getSkillLevel(xi.skill.BLUE_MAGIC) * 0.11)
     if softCap > 0 then
-        dmg = utils.clamp(dmg, 0, softCap)
+        dmg = math.clamp(dmg, 0, softCap)
     end
 
     dmg = dmg * applyResistance(caster, target, spell, params)
@@ -352,11 +352,11 @@ xi.spells.blue.useDrainSpell = function(caster, target, spell, params, softCap, 
         -- only drain what the mob has
         if mpDrain then
             dmg = dmg * xi.settings.main.BLUE_POWER
-            dmg = utils.clamp(dmg, 0, target:getMP())
+            dmg = math.clamp(dmg, 0, target:getMP())
             target:delMP(dmg)
             caster:addMP(dmg)
         else
-            dmg = utils.clamp(dmg, 0, target:getHP())
+            dmg = math.clamp(dmg, 0, target:getHP())
             dmg = xi.spells.blue.applySpellDamage(caster, target, spell, dmg, params, nil)
             caster:addHP(dmg)
         end
@@ -438,7 +438,7 @@ xi.spells.blue.applySpellDamage = function(caster, target, spell, dmg, params, t
 
     -- handle Phalanx
     if dmg > 0 then
-        dmg = utils.clamp(dmg - target:getMod(xi.mod.PHALANX), 0, 99999)
+        dmg = math.clamp(dmg - target:getMod(xi.mod.PHALANX), 0, 99999)
     end
 
     -- handle stoneskin
@@ -527,7 +527,7 @@ xi.spells.blue.useCuringSpell = function(caster, target, spell, params)
     local final = getCureFinal(caster, spell, getBaseCureOld(power, divisor, constant), params.minCure, true)
     final       = final + final * target:getMod(xi.mod.CURE_POTENCY_RCVD) / 100
     final       = final * xi.settings.main.CURE_POWER
-    final       = utils.clamp(final, 0, target:getMaxHP() - target:getHP())
+    final       = math.clamp(final, 0, target:getMaxHP() - target:getHP())
 
     target:addHP(final)
     target:wakeUp()

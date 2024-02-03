@@ -129,7 +129,7 @@ xi.combat.tp.calculateTPGainOnPhysicalDamage = function(totalDamage, delay, acto
         local baseTPGain         = xi.combat.tp.calculateTPReturn(target, attackOutput.modifiedDelay)
         local dAGI               = actor:getMod(xi.mod.AGI) - target:getMod(xi.mod.AGI)
         local inhibitTPModifier  = (100 - target:getMod(xi.mod.INHIBIT_TP)) / 100         -- no known cap: https://www.bg-wiki.com/ffxi/Monster_TP_gain#Inhibit_TP
-        local dAGIModifier       = utils.clamp(200 - (dAGI + 30) / 200, 1.0, 0.5)           -- 50% reduction at +70 dAGI: https://www.bg-wiki.com/ffxi/Monster_TP_gain
+        local dAGIModifier       = math.clamp(200 - (dAGI + 30) / 200, 1.0, 0.5)           -- 50% reduction at +70 dAGI: https://www.bg-wiki.com/ffxi/Monster_TP_gain
         local subtleBlowI        = math.min(actor:getMod(xi.mod.SUBTLE_BLOW), 50)        -- cap of 50% https://www.bg-wiki.com/ffxi/Subtle_Blow
         local subtleBlowII       = actor:getMod(xi.mod.SUBTLE_BLOW_II)                   -- no known cap
         local subtleBlowModifier = math.max((100 - subtleBlowI + subtleBlowII) / 100, 0.25) -- combined cap of 75% reduction: https://www.bg-wiki.com/ffxi/Subtle_Blow
@@ -160,7 +160,7 @@ xi.combat.tp.calculateTPGainOnMagicalDamage = function(totalDamage, actor, targe
     if totalDamage > 0 and target and actor then
         local dAGI               = actor:getMod(xi.mod.AGI) - target:getMod(xi.mod.AGI)
         local inhibitTPModifier  = (100 - target:getMod(xi.mod.INHIBIT_TP)) / 100         -- no known cap: https://www.bg-wiki.com/ffxi/Monster_TP_gain#Inhibit_TP
-        local dAGIModifier       = utils.clamp(200 - (dAGI + 30) / 200, 1.0, 0.5)           -- 50% reduction at +70 dAGI: https://www.bg-wiki.com/ffxi/Monster_TP_gain
+        local dAGIModifier       = math.clamp(200 - (dAGI + 30) / 200, 1.0, 0.5)           -- 50% reduction at +70 dAGI: https://www.bg-wiki.com/ffxi/Monster_TP_gain
         local subtleBlowI        = math.min(actor:getMod(xi.mod.SUBTLE_BLOW), 50)        -- cap of 50% https://www.bg-wiki.com/ffxi/Subtle_Blow
         local subtleBlowII       = actor:getMod(xi.mod.SUBTLE_BLOW_II)                   -- no known cap
         local subtleBlowModifier = math.max((100 - subtleBlowI + subtleBlowII) / 100, 0.25) -- combined cap of 75% reduction: https://www.bg-wiki.com/ffxi/Subtle_Blow

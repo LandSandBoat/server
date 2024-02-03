@@ -1113,7 +1113,7 @@ xi.abyssea.addPlayerLights = function(player, light, amount)
     end
 
     local lightTable = xi.abyssea.getLightsTable(player)
-    lightTable[light] = utils.clamp(lightTable[light] + lightAmount, 0, lightData[light][1])
+    lightTable[light] = math.clamp(lightTable[light] + lightAmount, 0, lightData[light][1])
     player:messageSpecial(ID.text.BODY_EMITS_OFFSET + (light - 1), tierMsg)
     setLightsFromTable(player, lightTable)
 end

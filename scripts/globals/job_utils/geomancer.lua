@@ -204,11 +204,11 @@ local function getEffectPotency(player, effect)
         handbellSkill = 0
     end
 
-    local combinedSkillLevel = utils.clamp(handbellSkill + geoSkill, 0, 900)
+    local combinedSkillLevel = math.clamp(handbellSkill + geoSkill, 0, 900)
     local divisor            = potencyData[effect].divisor
     local minPotency         = potencyData[effect].minPotency
     local maxPotency         = potencyData[effect].maxPotency
-    local potency            = utils.clamp(combinedSkillLevel / divisor, minPotency, maxPotency)
+    local potency            = math.clamp(combinedSkillLevel / divisor, minPotency, maxPotency)
 
     if geomancyMod > 0 and not player:hasStatusEffect(xi.effect.ENTRUST) then
         -- Geomancy bonus is a mod value * the multiplier then added to the final potency of the effect

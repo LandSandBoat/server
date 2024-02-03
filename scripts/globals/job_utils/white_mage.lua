@@ -113,7 +113,7 @@ xi.job_utils.white_mage.useDevotion = function(player, target, ability)
     damageHP = utils.stoneskin(player, damageHP)
 
     local healMP = player:getHP() * mpPercent
-    healMP = utils.clamp(healMP, 0, target:getMaxMP() - target:getMP())
+    healMP = math.clamp(healMP, 0, target:getMaxMP() - target:getMP())
 
     damageHP = utils.stoneskin(player, damageHP)
     player:delHP(damageHP)
@@ -140,7 +140,7 @@ xi.job_utils.white_mage.useMartyr = function(player, target, ability)
 
     --We need to capture this here because the base damage is the basis for the heal
     local healHP = damageHP * hpPercent
-    healHP = utils.clamp(healHP, 0, target:getMaxHP() - target:getHP())
+    healHP = math.clamp(healHP, 0, target:getMaxHP() - target:getHP())
 
     -- If stoneskin is present, it should absorb damage
     damageHP = utils.stoneskin(player, damageHP)

@@ -106,7 +106,7 @@ xi.combat.physical.calculateMeleeStatFactor = function(actor, target)
     local statLowerCap = (7 + weaponRank * 2) * -2
     local statUpperCap = (14 + weaponRank * 2) * 2
 
-    statDiff = utils.clamp(statDiff, statLowerCap, statUpperCap)
+    statDiff = math.clamp(statDiff, statLowerCap, statUpperCap)
 
     -- Calculate fSTR based on stat difference.
     if statDiff >= 12 then
@@ -135,7 +135,7 @@ xi.combat.physical.calculateMeleeStatFactor = function(actor, target)
         fSTRlowerCap = -1
     end
 
-    fSTR = utils.clamp(fSTR / 4, fSTRlowerCap, fSTRupperCap)
+    fSTR = math.clamp(fSTR / 4, fSTRlowerCap, fSTRupperCap)
 
     return fSTR
 end
@@ -152,7 +152,7 @@ xi.combat.physical.calculateRangedStatFactor = function(actor, target)
     local statLowerCap = (7 + weaponRank * 2) * -2
     local statUpperCap = (14 + weaponRank * 2) * 2
 
-    statDiff = utils.clamp(statDiff, statLowerCap, statUpperCap)
+    statDiff = math.clamp(statDiff, statLowerCap, statUpperCap)
 
     -- Calculate fSTR based on stat difference.
     if statDiff >= 12 then
@@ -183,7 +183,7 @@ xi.combat.physical.calculateRangedStatFactor = function(actor, target)
         fSTRlowerCap = -3
     end
 
-    fSTR = utils.clamp(fSTR / 2, fSTRlowerCap, fSTRupperCap)
+    fSTR = math.clamp(fSTR / 2, fSTRlowerCap, fSTRupperCap)
 
     return fSTR
 end
@@ -355,7 +355,7 @@ xi.combat.physical.calculateMeleePDIF = function(actor, target, weaponType, wsAt
     baseRatio = actorAttack / targetDefense
 
     -- Apply cap to baseRatio.
-    baseRatio = utils.clamp(baseRatio, 0, 10) -- Can't be negative.
+    baseRatio = math.clamp(baseRatio, 0, 10) -- Can't be negative.
 
     ----------------------------------------
     -- Step 2: cRatio (Level correction, corrected ratio) Zone based!
@@ -374,7 +374,7 @@ xi.combat.physical.calculateMeleePDIF = function(actor, target, weaponType, wsAt
         levelDifFactor = 0
     end
 
-    local cRatio = utils.clamp(baseRatio - levelDifFactor, 0, 10) -- Clamp for the lower limit, mainly.
+    local cRatio = math.clamp(baseRatio - levelDifFactor, 0, 10) -- Clamp for the lower limit, mainly.
 
     ----------------------------------------
     -- Step 3: wRatio and pDif Caps (Melee)
@@ -393,7 +393,7 @@ xi.combat.physical.calculateMeleePDIF = function(actor, target, weaponType, wsAt
     elseif wRatio < 1.5 then
         pDifUpperCap = wRatio + wRatio * 0.25
     else
-        pDifUpperCap = utils.clamp(wRatio + 0.375, 1, 3)
+        pDifUpperCap = math.clamp(wRatio + 0.375, 1, 3)
     end
 
     -- pDIF lower cap.
@@ -416,7 +416,7 @@ xi.combat.physical.calculateMeleePDIF = function(actor, target, weaponType, wsAt
     ----------------------------------------
     local pDifFinalCap = pDifWeaponCapTable[weaponType][1] + isCritical -- TODO: Add 'Damage Limit +' Trait here.
 
-    pDif = utils.clamp(pDif, 0, pDifFinalCap)
+    pDif = math.clamp(pDif, 0, pDifFinalCap)
 
     ----------------------------------------
     -- Step 5: Melee random factor.
@@ -459,7 +459,7 @@ xi.combat.physical.calculateRangedPDIF = function(actor, target, weaponType, wsA
     baseRatio = actorAttack / targetDefense
 
     -- Apply cap to baseRatio.
-    baseRatio = utils.clamp(baseRatio, 0, 10) -- Can't be negative.
+    baseRatio = math.clamp(baseRatio, 0, 10) -- Can't be negative.
 
     ----------------------------------------
     -- Step 2: cRatio (Level correction, corrected ratio) Zone based!
@@ -478,7 +478,7 @@ xi.combat.physical.calculateRangedPDIF = function(actor, target, weaponType, wsA
         levelDifFactor = 0
     end
 
-    local cRatio = utils.clamp(baseRatio - levelDifFactor, 0, 10) -- Clamp for the lower limit, mainly.
+    local cRatio = math.clamp(baseRatio - levelDifFactor, 0, 10) -- Clamp for the lower limit, mainly.
 
     -- TODO: Presumably, pets get a Cap here if the target checks as 'Too Weak'. More info needed.
 
@@ -507,7 +507,7 @@ xi.combat.physical.calculateRangedPDIF = function(actor, target, weaponType, wsA
     ----------------------------------------
     local pDifFinalCap = pDifWeaponCapTable[weaponType][1] + isCritical -- TODO: Add 'Damage Limit +' Trait here.
 
-    pDif = utils.clamp(pDif, 0, pDifFinalCap)
+    pDif = math.clamp(pDif, 0, pDifFinalCap)
 
     ----------------------------------------
     -- Step 5: Ranged critical factor. Bypasses caps.
@@ -622,7 +622,7 @@ xi.combat.physical.calculateSwingCriticalRate = function(actor, target, isWeapon
     -- Add all different bonuses and clamp.
     finalCriticalRate = baseCriticalRate + statBonus + inninBonus + fencerBonus + buildingFlourishBonus + modifierBonus + meritBonus + targetModifierBonus - meritPenalty + tpFactor
 
-    return utils.clamp(finalCriticalRate, 0.05, 1) -- TODO: Need confirmation of no upper cap.
+    return math.clamp(finalCriticalRate, 0.05, 1) -- TODO: Need confirmation of no upper cap.
 end
 
 xi.combat.physical.calculateNumberOfHits = function(actor, additionalParamsHere)

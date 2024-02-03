@@ -26,7 +26,7 @@ spellObject.onSpellCast = function(caster, target, spell)
         then
             local magicAcc     = xi.combat.magicHitRate.calculateActorMagicAccuracy(caster, target, xi.magic.spellGroup.BLACK, xi.skill.DARK_MAGIC, xi.element.DARK, 0, 0)
             local magicEva     = xi.combat.magicHitRate.calculateTargetMagicEvasion(caster, target, xi.element.DARK, true, 0, 0)
-            local magicHitRate = utils.clamp(xi.combat.magicHitRate.calculateMagicHitRate(magicAcc, magicEva), 5, 30) -- Sources suggest a 30% max rate for players.
+            local magicHitRate = math.clamp(xi.combat.magicHitRate.calculateMagicHitRate(magicAcc, magicEva), 5, 30) -- Sources suggest a 30% max rate for players.
             local resistRate   = xi.combat.magicHitRate.calculateResistRate(caster, target, xi.skill.DARK_MAGIC, xi.element.DARK, magicHitRate, 0)
 
             if resistRate == 1 then

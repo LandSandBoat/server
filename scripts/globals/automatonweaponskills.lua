@@ -22,7 +22,7 @@ local function getAutoHitRate(attacker, defender, capHitRate, bonus, melee)
 
     -- Applying hitrate caps
     if capHitRate then -- this isn't capped for when acc varies with tp, as more penalties are due
-        hitrate = utils.clamp(hitrate, 0.2, 0.95)
+        hitrate = math.clamp(hitrate, 0.2, 0.95)
     end
 
     return hitrate
@@ -38,7 +38,7 @@ local function getRangedCRatio(attacker, defender, params, ignoredDef)
     end
 
     cratio = cratio + levelbonus
-    cratio = utils.clamp(cratio, 0, 3.0)
+    cratio = math.clamp(cratio, 0, 3.0)
 
     local pdif = {}
     local pdifcrit = {}
@@ -70,7 +70,7 @@ local function getRangedCRatio(attacker, defender, params, ignoredDef)
     pdifmax = pdifmax * 1.25
 
     local critbonus = attacker:getMod(xi.mod.CRIT_DMG_INCREASE) - defender:getMod(xi.mod.CRIT_DEF_BONUS)
-    critbonus = utils.clamp(critbonus, 0, 100)
+    critbonus = math.clamp(critbonus, 0, 100)
     pdifcrit[1] = pdifmin * (100 + critbonus) / 100
     pdifcrit[2] = pdifmax * (100 + critbonus) / 100
 
@@ -87,7 +87,7 @@ local function getMeleeCRatio(attacker, defender, params, ignoredDef)
     end
 
     cratio = cratio + levelbonus
-    cratio = utils.clamp(cratio, 0, 4.0)
+    cratio = math.clamp(cratio, 0, 4.0)
 
     local pdif = {}
     local pdifcrit = {}
@@ -127,7 +127,7 @@ local function getMeleeCRatio(attacker, defender, params, ignoredDef)
     pdif[2] = pdifmax
 
     cratio = cratio + 1
-    cratio = utils.clamp(cratio, 0, 4.0)
+    cratio = math.clamp(cratio, 0, 4.0)
 
     if cratio < 0.5 then
         pdifmax = cratio + 0.5
@@ -158,7 +158,7 @@ local function getMeleeCRatio(attacker, defender, params, ignoredDef)
     end
 
     local critbonus = attacker:getMod(xi.mod.CRIT_DMG_INCREASE) - defender:getMod(xi.mod.CRIT_DEF_BONUS)
-    critbonus = utils.clamp(critbonus, 0, 100)
+    critbonus = math.clamp(critbonus, 0, 100)
     pdifcrit[1] = pdifmin * (100 + critbonus) / 100
     pdifcrit[2] = pdifmax * (100 + critbonus) / 100
 
@@ -193,7 +193,7 @@ xi.autows.doAutoPhysicalWeaponskill = function(attacker, target, wsID, tp, prima
     calcParams.wsID = wsID
     calcParams.weaponDamage = xi.weaponskills.getMeleeDmg(attacker, attack.weaponType, wsParams.kick)
     calcParams.attackInfo = attack
-    calcParams.fSTR = utils.clamp(attacker:getStat(xi.mod.STR) - target:getStat(xi.mod.VIT), -10, 10)
+    calcParams.fSTR = math.clamp(attacker:getStat(xi.mod.STR) - target:getStat(xi.mod.VIT), -10, 10)
     calcParams.cratio = cratio
     calcParams.ccritratio = ccritratio
     calcParams.accStat = attacker:getACC()
@@ -286,7 +286,7 @@ xi.autows.doAutoRangedWeaponskill = function(attacker, target, wsID, wsParams, t
         wsID = wsID,
         weaponDamage = { wsParams.weaponDamage or rangedDamage },
         attackInfo = attack,
-        fSTR = utils.clamp(attacker:getStat(xi.mod.STR) - target:getStat(xi.mod.VIT), -10, 10),
+        fSTR = math.clamp(attacker:getStat(xi.mod.STR) - target:getStat(xi.mod.VIT), -10, 10),
         cratio = cratio,
         ccritratio = ccritratio,
         accStat = attacker:getRACC(),

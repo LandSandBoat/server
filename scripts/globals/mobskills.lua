@@ -116,7 +116,7 @@ end
 -----------------------------------
 xi.mobskills.mobPhysicalMove = function(mob, target, skill, numHits, accMod, dmgMod, tpEffect, mtp000, mtp150, mtp300, offcratiomod)
     local returninfo    = {}
-    local dSTR          = utils.clamp(mob:getStat(xi.mod.STR) - target:getStat(xi.mod.VIT), -10, 10)
+    local dSTR          = math.clamp(mob:getStat(xi.mod.STR) - target:getStat(xi.mod.VIT), -10, 10)
     local targetEvasion = target:getEVA() + target:getMod(xi.mod.SPECIAL_ATTACK_EVASION)
 
     if
@@ -139,12 +139,12 @@ xi.mobskills.mobPhysicalMove = function(mob, target, skill, numHits, accMod, dmg
     local lvldiff = math.max(0, mob:getMainLvl() - target:getMainLvl())
 
     ratio = ratio + lvldiff * 0.05
-    ratio = utils.clamp(ratio, 0, 4)
+    ratio = math.clamp(ratio, 0, 4)
 
     --work out hit rate for mobs
     local hitrate = ((mob:getACC() * accMod) - targetEvasion) / 2 + (lvldiff * 2) + 75
 
-    hitrate = utils.clamp(hitrate, 20, 95)
+    hitrate = math.clamp(hitrate, 20, 95)
 
     --work out the base damage for a single hit
     local hitdamage = math.max(1, base + lvldiff) * dmgMod
@@ -198,7 +198,7 @@ xi.mobskills.mobPhysicalMove = function(mob, target, skill, numHits, accMod, dmg
         firstHitChance = hitrate * 1.2
     end
 
-    firstHitChance = utils.clamp(firstHitChance, 35, 95)
+    firstHitChance = math.clamp(firstHitChance, 35, 95)
 
     --Applying pDIF
     local pdif
@@ -273,7 +273,7 @@ xi.mobskills.mobMagicalMove = function(mob, target, skill, damage, element, dmgm
 
     -- plus 100 forces it to be a number
     local mab = (100 + mob:getMod(xi.mod.MATT)) / (100 + target:getMod(xi.mod.MDEF) + mdefBarBonus)
-    mab = utils.clamp(mab, 0.7, 1.3)
+    mab = math.clamp(mab, 0.7, 1.3)
 
     if tpeffect == xi.mobskills.magicalTpBonus.DMG_BONUS then
         damage = damage * (((skill:getTP() / 10) * tpvalue) / 100)
@@ -287,7 +287,7 @@ xi.mobskills.mobMagicalMove = function(mob, target, skill, damage, element, dmgm
     if mob:isPet() and mob:getMaster() ~= nil then
         local master = mob:getMaster()
         if mob:isAvatar() then
-            avatarAccBonus = utils.clamp(master:getSkillLevel(xi.skill.SUMMONING_MAGIC) - master:getMaxSkillLevel(mob:getMainLvl(), xi.job.SMN, xi.skill.SUMMONING_MAGIC), 0, 200)
+            avatarAccBonus = math.clamp(master:getSkillLevel(xi.skill.SUMMONING_MAGIC) - master:getMaxSkillLevel(mob:getMainLvl(), xi.job.SMN, xi.skill.SUMMONING_MAGIC), 0, 200)
         end
     end
 
@@ -413,7 +413,7 @@ xi.mobskills.mobBreathMove = function(mob, target, percent, base, element, cap)
         damage = damage * resist * defense
     end
 
-    damage = utils.clamp(damage, 1, cap)
+    damage = math.clamp(damage, 1, cap)
 
     local liement = target:checkLiementAbsorb(xi.damageType.ELEMENTAL + element) -- check for Liement.
     if liement < 0 then -- skip BDT/DT etc for Liement if we absorb.
@@ -427,18 +427,18 @@ xi.mobskills.mobBreathMove = function(mob, target, percent, base, element, cap)
 
     local globalDamageTaken   = target:getMod(xi.mod.DMG) / 10000          -- Mod is base 10000
     local breathDamageTaken   = target:getMod(xi.mod.DMGBREATH) / 10000    -- Mod is base 10000
-    local combinedDamageTaken = 1.0 + utils.clamp(breathDamageTaken + globalDamageTaken, -0.5, 0.5) -- The combination of regular "Damage Taken" and "Breath Damage Taken" caps at 50%. There is no BDTII known as of yet.
+    local combinedDamageTaken = 1.0 + math.clamp(breathDamageTaken + globalDamageTaken, -0.5, 0.5) -- The combination of regular "Damage Taken" and "Breath Damage Taken" caps at 50%. There is no BDTII known as of yet.
 
     damage = math.floor(damage * combinedDamageTaken)
 
     -- Handle Phalanx
     if damage > 0 then
-        damage = utils.clamp(damage - target:getMod(xi.mod.PHALANX), 0, 99999)
+        damage = math.clamp(damage - target:getMod(xi.mod.PHALANX), 0, 99999)
     end
 
     -- Handle Stoneskin
     if damage > 0 then
-        damage = utils.clamp(utils.stoneskin(target, damage), -99999, 99999)
+        damage = math.clamp(utils.stoneskin(target, damage), -99999, 99999)
     end
 
     return damage
@@ -545,7 +545,7 @@ xi.mobskills.mobFinalAdjustments = function(dmg, mob, skill, target, attackType,
 
     -- Handle Phalanx
     if dmg > 0 then
-        dmg = utils.clamp(dmg - target:getMod(xi.mod.PHALANX), 0, 99999)
+        dmg = math.clamp(dmg - target:getMod(xi.mod.PHALANX), 0, 99999)
     end
 
     if attackType == xi.attackType.MAGICAL then
@@ -671,7 +671,7 @@ xi.mobskills.mobStatusEffectMove = function(mob, target, typeEffect, power, tick
         local resist  = xi.mobskills.applyPlayerResistance(mob, typeEffect, target, mob:getStat(statmod)-target:getStat(statmod), 0, element)
 
         if resist >= 0.25 then
-            local totalDuration = utils.clamp(duration * resist, 1)
+            local totalDuration = math.clamp(duration * resist, 1)
             target:addStatusEffect(typeEffect, power, tick, totalDuration)
 
             return xi.msg.basic.SKILL_ENFEEB_IS

@@ -54,7 +54,7 @@ local function magicAccuracyFromStatDifference(actor, target, statUsed)
         magicAcc = 10 + (statDiff - 10) / 2
     end
 
-    return utils.clamp(magicAcc, -30, 30)
+    return math.clamp(magicAcc, -30, 30)
 end
 
 -- Magic Accuracy from Status Effects.
@@ -278,7 +278,7 @@ local function magicAccuracyFromFood(actor, magicAccPreFood)
     magicAcc = magicAccPreFood * (actor:getMod(xi.mod.FOOD_MACCP) / 100)
 
     if foodCap > 0 then
-        magicAcc = utils.clamp(magicAcc, 0, foodCap)
+        magicAcc = math.clamp(magicAcc, 0, foodCap)
     end
 
     return magicAcc
@@ -342,10 +342,10 @@ xi.combat.magicHitRate.calculateTargetMagicEvasion = function(actor, target, spe
     if spellElement ~= xi.element.NONE then
         -- Mod set in database for mobs. Base 0 means not resistant nor weak. Bar-element spells included here.
         resMod     = target:getMod(xi.combat.element.elementalMagicEva[spellElement])
-        resistRank = utils.clamp(target:getMod(xi.combat.element.resistRankMod[spellElement]), -3, 11)
+        resistRank = math.clamp(target:getMod(xi.combat.element.resistRankMod[spellElement]), -3, 11)
 
         if resistRank > 4 then
-            resistRank = utils.clamp(resistRank - rankModifier, 4, 11)
+            resistRank = math.clamp(resistRank - rankModifier, 4, 11)
         end
 
         magicEva = math.floor(magicEva * resistRankMultiplier[resistRank]) + resMod
@@ -379,7 +379,7 @@ xi.combat.magicHitRate.calculateMagicHitRate = function(magicAcc, magicEva)
         magicAccDiff = math.floor(magicAccDiff / 2)
     end
 
-    local magicHitRate = utils.clamp(50 + magicAccDiff, 5, 95)
+    local magicHitRate = math.clamp(50 + magicAccDiff, 5, 95)
 
     return magicHitRate
 end
@@ -405,7 +405,7 @@ xi.combat.magicHitRate.calculateResistRate = function(actor, target, skillType, 
     -- Elemental resistance rank.
     if spellElement ~= xi.element.NONE then
         if targetResistRank > 4 then
-            targetResistRank = utils.clamp(targetResistRank - rankModifier, 4, 11)
+            targetResistRank = math.clamp(targetResistRank - rankModifier, 4, 11)
         end
     end
 
@@ -453,7 +453,7 @@ xi.combat.magicHitRate.calculateResistRate = function(actor, target, skillType, 
 
     -- Force just 1/2 resist tier max if target resistance rank is -3 (150% EEM).
     if targetResistRank <= -3 then -- Very weak.
-        targetResistRate = utils.clamp(targetResistRate, 0.5, 1)
+        targetResistRate = math.clamp(targetResistRate, 0.5, 1)
     end
 
     ----------------------------------------

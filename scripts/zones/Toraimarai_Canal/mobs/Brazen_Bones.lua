@@ -43,8 +43,8 @@ end
 entity.onMobFight = function(mob, target)
     -- Double Attack rate increases as HP decreases
     local doubleAttack = (100 - mob:getHPP()) * 0.5
-    if mob:getMod(xi.mod.DOUBLE_ATTACK) ~= utils.clamp(doubleAttack, 1, 100) then
-        mob:setMod(xi.mod.DOUBLE_ATTACK, utils.clamp(doubleAttack, 1, 100))
+    if mob:getMod(xi.mod.DOUBLE_ATTACK) ~= math.clamp(doubleAttack, 1, 100) then
+        mob:setMod(xi.mod.DOUBLE_ATTACK, math.clamp(doubleAttack, 1, 100))
     end
 end
 

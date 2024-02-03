@@ -478,7 +478,7 @@ xi.mob.onAddEffect = function(mob, target, damage, effect, params)
 
         if dLevel > 0 then
             chance = chance - 5 * dLevel
-            chance = utils.clamp(chance, 5, 95)
+            chance = math.clamp(chance, 5, 95)
         end
 
         -- target:printToPlayer(string.format('Chance: %i', chance)) -- DEBUG
@@ -497,7 +497,7 @@ xi.mob.onAddEffect = function(mob, target, damage, effect, params)
                     local tick     = ae.tick or 0
                     local duration = params.duration or ae.duration
 
-                    duration = utils.clamp(duration, ae.minDuration, ae.maxDuration) * resist
+                    duration = math.clamp(duration, ae.minDuration, ae.maxDuration) * resist
 
                     target:addStatusEffect(ae.eff, power, tick, duration)
 

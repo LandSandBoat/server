@@ -76,7 +76,7 @@ xi.weaponskills.fSTR2 = function(atkStr, defVit, weaponRank)
         lowerCap = -3
     end
 
-    fSTR2 = utils.clamp(fSTR2, lowerCap, (weaponRank + 8) * 2)
+    fSTR2 = math.clamp(fSTR2, lowerCap, (weaponRank + 8) * 2)
 
     return fSTR2
 end
@@ -161,7 +161,7 @@ local function accVariesWithTP(baseHitRate, acc, tp, a1, a2, a3)
     local accLost      = acc - acc * xi.weaponskills.fTP(tp, a1, a2, a3)
     local finalHitRate = baseHitRate - accLost / 200
 
-    finalHitRate = utils.clamp(finalHitRate, 0.2, 0.95)
+    finalHitRate = math.clamp(finalHitRate, 0.2, 0.95)
 
     return finalHitRate
 end
@@ -237,7 +237,7 @@ local function cRangedRatio(attacker, defender, params, ignoredDef, tp)
         cRatioCap = 3.25
     end
 
-    cratio = utils.clamp(cratio, 0, cRatioCap)
+    cratio = math.clamp(cratio, 0, cRatioCap)
 
     -- max
     local pdifmax = 0
@@ -368,7 +368,7 @@ local function getSingleHitDamage(attacker, target, dmg, wsParams, calcParams)
 
                 if magicdmg > 0 then                                           -- handle nonzero damage if previous function does not absorb or nullify
                     magicdmg = magicdmg - target:getMod(xi.mod.PHALANX)
-                    magicdmg = utils.clamp(magicdmg, 0, 99999)
+                    magicdmg = math.clamp(magicdmg, 0, 99999)
                     magicdmg = utils.oneforall(target, magicdmg)
                     magicdmg = utils.stoneskin(target, magicdmg)
                 end
@@ -416,7 +416,7 @@ local function modifyMeleeHitDamage(attacker, target, attackTbl, wsParams, rawDa
 
     if adjustedDamage > 0 then
         adjustedDamage = adjustedDamage - target:getMod(xi.mod.PHALANX)
-        adjustedDamage = utils.clamp(adjustedDamage, 0, 99999)
+        adjustedDamage = math.clamp(adjustedDamage, 0, 99999)
     end
 
     adjustedDamage = utils.stoneskin(target, adjustedDamage)
@@ -468,7 +468,7 @@ xi.weaponskills.calculateRawWSDmg = function(attacker, target, wsID, tp, action,
         calcParams.hitRate = accVariesWithTP(calcParams.hitRate, calcParams.accStat, tp, wsParams.acc100, wsParams.acc200, wsParams.acc300)
     else
         -- clamp hitRate now if accuracy doesn't vary with TP
-        calcParams.hitRate = utils.clamp(calcParams.hitRate, 0.2, 0.95)
+        calcParams.hitRate = math.clamp(calcParams.hitRate, 0.2, 0.95)
     end
 
     -- Calculate alpha, WSC, and our modifiers for our base per-hit damage
@@ -906,7 +906,7 @@ xi.weaponskills.doMagicWeaponskill = function(attacker, target, wsID, wsParams, 
     local bonusfTP, bonusacc = xi.weaponskills.handleWSGorgetBelt(attacker)
     bonusacc                 = bonusacc + attacker:getMod(xi.mod.WSACC)
 
-    local fint = utils.clamp(8 + attacker:getStat(xi.mod.INT) - target:getStat(xi.mod.INT), -32, 32)
+    local fint = math.clamp(8 + attacker:getStat(xi.mod.INT) - target:getStat(xi.mod.INT), -32, 32)
     local dmg  = 0
 
     -- Magic-based WSes never miss, so we don't need to worry about calculating a miss, only if a shadow absorbed it.
@@ -970,7 +970,7 @@ xi.weaponskills.doMagicWeaponskill = function(attacker, target, wsID, wsParams, 
 
         if dmg > 0 then
             dmg = dmg - target:getMod(xi.mod.PHALANX)
-            dmg = utils.clamp(dmg, 0, 99999)
+            dmg = math.clamp(dmg, 0, 99999)
         end
 
         dmg = utils.oneforall(target, dmg)
@@ -1188,7 +1188,7 @@ xi.weaponskills.cMeleeRatio = function(attacker, defender, params, ignoredDef, t
     local atkmulti = xi.weaponskills.fTP(tp, params.atk100, params.atk200, params.atk300)
     local cratio   = attacker:getStat(xi.mod.ATT) * atkmulti / (defender:getStat(xi.mod.DEF) - ignoredDef)
 
-    cratio = utils.clamp(cratio, 0, 2.25)
+    cratio = math.clamp(cratio, 0, 2.25)
 
     if flourishEffect ~= nil and flourishEffect:getPower() >= 2 then -- 2 or more Finishing Moves used.
         attacker:delMod(xi.mod.ATTP, 25 + flourishEffect:getSubPower())
@@ -1234,7 +1234,7 @@ xi.weaponskills.cMeleeRatio = function(attacker, defender, params, ignoredDef, t
 
     local pdifcrit = {}
     cratio         = cratio + 1
-    cratio         = utils.clamp(cratio, 0, 3)
+    cratio         = math.clamp(cratio, 0, 3)
 
     if cratio < 0.5 then
         pdifmax = cratio + 0.5
@@ -1264,7 +1264,7 @@ xi.weaponskills.cMeleeRatio = function(attacker, defender, params, ignoredDef, t
     end
 
     local critbonus = attacker:getMod(xi.mod.CRIT_DMG_INCREASE) - defender:getMod(xi.mod.CRIT_DEF_BONUS)
-    critbonus       = utils.clamp(critbonus, 0, 100)
+    critbonus       = math.clamp(critbonus, 0, 100)
     pdifcrit[1]     = pdifmin * (100 + critbonus) / 100
     pdifcrit[2]     = pdifmax * (100 + critbonus) / 100
 
@@ -1279,7 +1279,7 @@ xi.weaponskills.fSTR = function(atkStr, defVit, weaponRank)
     -- Apply fSTR caps.
     local lowerCap = math.min(-1, weaponRank * -1)
 
-    fSTR = utils.clamp(fSTR, lowerCap, weaponRank + 8)
+    fSTR = math.clamp(fSTR, lowerCap, weaponRank + 8)
 
     return fSTR
 end

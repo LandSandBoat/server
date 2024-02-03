@@ -43,7 +43,7 @@ spellObject.onSpellCast = function(caster, target, spell)
         end
 
         -- Ensure the reduction is capped at 50%
-        power = utils.clamp(power, 0, 5000)
+        power = math.clamp(power, 0, 5000)
 
         -- Try to overwrite weaker elegy
         if target:addStatusEffect(xi.effect.ELEGY, power, 0, duration) then

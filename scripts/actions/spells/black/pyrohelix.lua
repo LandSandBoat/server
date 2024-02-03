@@ -13,7 +13,7 @@ spellObject.onSpellCast = function(caster, target, spell)
 
     -- Can't apply if absorbed or nullified.
     if damage > 0 then
-        local power    = utils.clamp(damage, 0, 9999)
+        local power    = math.clamp(damage, 0, 9999)
         local duration = xi.spells.enfeebling.calculateDuration(caster, target, spell:getID(), xi.effect.HELIX, xi.skill.ELEMENTAL_MAGIC)
 
         target:addStatusEffect(xi.effect.HELIX, power, 10, duration, 0, 0, 1)

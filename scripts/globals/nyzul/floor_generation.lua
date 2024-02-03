@@ -1128,7 +1128,7 @@ local pTableFloorRandomEntities =
 local function lampsActivate(instance)
     local floorLayout      = instance:getLocalVar('Nyzul_Isle_FloorLayout')
     local lampsObjective   = instance:getLocalVar('[Lamps]Objective')
-    local partySize        = utils.clamp(instance:getLocalVar('partySize'), 3, 5)
+    local partySize        = math.clamp(instance:getLocalVar('partySize'), 3, 5)
     local dTableLampPoints = {}
 
     for i = 1, #lampSpawnPoints[floorLayout] do

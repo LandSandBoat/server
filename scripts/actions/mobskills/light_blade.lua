@@ -23,7 +23,7 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     -- ~750 for a DRG/BLU w/o Cocoon up at melee range.
     -- Wiki says 1k, videos were actually less, so trusting videos.
     local distance = mob:checkDistance(target)
-    distance = utils.clamp(distance, 0, 40)
+    distance = math.clamp(distance, 0, 40)
     dmg = dmg * ((50 - distance) / 50)
 
     target:takeDamage(dmg, mob, xi.attackType.RANGED, xi.damageType.SLASHING)

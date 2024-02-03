@@ -100,7 +100,7 @@ xi.full_speed_ahead.onTriggerAreaEnter = function(player, index)
         player:setLocalVar('FSA_FoodCount', foodCount + 1)
 
         local newFoodCount  = player:getLocalVar('FSA_FoodCount')
-        local newMotivation = utils.clamp(motivation + xi.full_speed_ahead.motivation_food_bonus, 0, 100)
+        local newMotivation = math.clamp(motivation + xi.full_speed_ahead.motivation_food_bonus, 0, 100)
         player:setLocalVar('FSA_Motivation', newMotivation)
 
         -- Hearts
@@ -119,7 +119,7 @@ xi.full_speed_ahead.onCheer = function(player)
     local motivation = player:getLocalVar('FSA_Motivation')
     local pep        = player:getLocalVar('FSA_Pep')
 
-    local newMotivation = utils.clamp(motivation + (pep / 2), 0, 100)
+    local newMotivation = math.clamp(motivation + (pep / 2), 0, 100)
 
     player:setLocalVar('FSA_Motivation', newMotivation)
     player:setLocalVar('FSA_Pep', 0)

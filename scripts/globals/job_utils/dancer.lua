@@ -222,7 +222,7 @@ xi.job_utils.dancer.checkWaltzAbility = function(player, target, ability)
             newRecast = newRecast * (105 - fanDanceMeritValue) / 100
         end
 
-        ability:setRecast(utils.clamp(newRecast, 0, newRecast))
+        ability:setRecast(math.clamp(newRecast, 0, newRecast))
 
         return 0, 0
     end
@@ -435,7 +435,7 @@ xi.job_utils.dancer.useBuildingFlourishAbility = function(player, target, abilit
     local flourishMerits = player:getMerit(xi.merit.BUILDING_FLOURISH_EFFECT)
     local availableMoves = player:getStatusEffect(xi.effect.FINISHING_MOVE_1):getPower()
 
-    local power = utils.clamp(availableMoves, 0, 3)
+    local power = math.clamp(availableMoves, 0, 3)
 
     player:addStatusEffect(xi.effect.BUILDING_FLOURISH, power, 0, 60, 0, flourishMerits)
     setFinishingMoves(player, availableMoves - power)

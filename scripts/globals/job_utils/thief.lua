@@ -65,7 +65,7 @@ local function processDebuff(player, target, ability, debuff)
             power = dMND + 1500
         end
 
-        power = utils.clamp(power, 750, 3000)
+        power = math.clamp(power, 750, 3000)
     end
 
     return power

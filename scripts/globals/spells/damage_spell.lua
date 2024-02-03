@@ -255,7 +255,7 @@ xi.spells.damage.calculateBaseDamage = function(caster, target, spellId, spellGr
         }
 
         for i = 1, 7 do
-            statDiffBonus = statDiffBonus + math.floor(utils.clamp(statDiff - mTable[i][1], 0, mTable[i][2]) * pTable[spellId][6 + i])
+            statDiffBonus = statDiffBonus + math.floor(math.clamp(statDiff - mTable[i][1], 0, mTable[i][2]) * pTable[spellId][6 + i])
         end
 
     -- Old system
@@ -344,7 +344,7 @@ xi.spells.damage.calculateBaseDamage = function(caster, target, spellId, spellGr
         spellDamage = math.floor(baseSpellDamage * (baseSpellDamageBonus + statDiffBonus))
     end
 
-    return utils.clamp(spellDamage, 0, 99999)
+    return math.clamp(spellDamage, 0, 99999)
 end
 
 -- Calculate: Multiple Target Damage Reduction (MTDR)
@@ -561,7 +561,7 @@ xi.spells.damage.calculateDayAndWeather = function(caster, spellId, spellElement
     end
 
     -- Cap bonuses from both day and weather
-    dayAndWeather = utils.clamp(dayAndWeather, 0.6, 1.4)
+    dayAndWeather = math.clamp(dayAndWeather, 0.6, 1.4)
 
     return dayAndWeather
 end
@@ -648,7 +648,7 @@ xi.spells.damage.calculateMagicBonusDiff = function(caster, target, spellId, ski
     local finalCasterMAB = (100 + mab) * (1 + caster:getMod(xi.mod.AUTO_MAB_COEFFICIENT) / 100)
     local finalTargetMDB = 100 + target:getMod(xi.mod.MDEF) + mDefBarBonus
 
-    magicBonusDiff = utils.clamp(finalCasterMAB / finalTargetMDB, 0, 10)
+    magicBonusDiff = math.clamp(finalCasterMAB / finalTargetMDB, 0, 10)
 
     return magicBonusDiff
 end
@@ -673,10 +673,10 @@ xi.spells.damage.calculateTMDA = function(target, spellElement)
     local magicDamageTaken    = target:getMod(xi.mod.DMGMAGIC) / 10000    -- Mod is base 10000
     local magicDamageTakenII  = target:getMod(xi.mod.DMGMAGIC_II) / 10000 -- Mod is base 10000
     local uMagicDamageTaken   = target:getMod(xi.mod.UDMGMAGIC) / 10000   -- Mod is base 10000.
-    local combinedDamageTaken = utils.clamp(magicDamageTaken + globalDamageTaken, -0.5, 0.5) -- The combination of regular "Damage Taken" and "Magic Damage Taken" caps at 50% both ways.
+    local combinedDamageTaken = math.clamp(magicDamageTaken + globalDamageTaken, -0.5, 0.5) -- The combination of regular "Damage Taken" and "Magic Damage Taken" caps at 50% both ways.
 
-    targetMagicDamageAdjustment = utils.clamp(targetMagicDamageAdjustment + combinedDamageTaken + magicDamageTakenII, 0.125, 1.875) -- "Magic Damage Taken II" bypasses the regular cap, but combined cap is 87.5% both ways.
-    targetMagicDamageAdjustment = utils.clamp(targetMagicDamageAdjustment + uMagicDamageTaken, 0, 2) -- Uncapped magic damage modifier. Cap is 100% both ways.
+    targetMagicDamageAdjustment = math.clamp(targetMagicDamageAdjustment + combinedDamageTaken + magicDamageTakenII, 0.125, 1.875) -- "Magic Damage Taken II" bypasses the regular cap, but combined cap is 87.5% both ways.
+    targetMagicDamageAdjustment = math.clamp(targetMagicDamageAdjustment + uMagicDamageTaken, 0, 2) -- Uncapped magic damage modifier. Cap is 100% both ways.
 
     return targetMagicDamageAdjustment
 end
@@ -756,7 +756,7 @@ xi.spells.damage.calculateNinSkillBonus = function(caster, spellId, skillType)
             ninSkillBonus = 100 + math.floor((caster:getSkillLevel(xi.skill.NINJUTSU) - 275) / 2)
         end
 
-        ninSkillBonus = utils.clamp(ninSkillBonus / 100, 1, 2) -- bonus caps at +100%, and does not go negative
+        ninSkillBonus = math.clamp(ninSkillBonus / 100, 1, 2) -- bonus caps at +100%, and does not go negative
     end
 
     return ninSkillBonus
@@ -816,7 +816,7 @@ xi.spells.damage.calculateAreaOfEffectResistance = function(target, spell)
     local areaOfEffectMultiplier = 1
 
     if target:getID() ~= spell:getPrimaryTargetID() then
-        areaOfEffectMultiplier = utils.clamp(areaOfEffectMultiplier + target:getMod(xi.mod.DMG_AOE) / 10000, 0, 2)
+        areaOfEffectMultiplier = math.clamp(areaOfEffectMultiplier + target:getMod(xi.mod.DMG_AOE) / 10000, 0, 2)
     end
 
     return areaOfEffectMultiplier
@@ -866,7 +866,7 @@ xi.spells.damage.calculateNukeWallFactor = function(target, spellElement, finalD
 
             -- Effect potency is reduced by 20% after 1 second and remains stable for the remaining time, unless refreshed.
             if effect:getTimeRemaining() <= 4000 then
-                potency = utils.clamp(potency - 2000, 0, 4000) -- Potency is reduced by 2000 after first second has happened. Can't go below 0.
+                potency = math.clamp(potency - 2000, 0, 4000) -- Potency is reduced by 2000 after first second has happened. Can't go below 0.
             end
         end
     end
@@ -877,7 +877,7 @@ xi.spells.damage.calculateNukeWallFactor = function(target, spellElement, finalD
     local damageCap = target:getMainLvl() * 21 + 500
 
     -- Calculate final effect potency, dependant on damage dealt.
-    local finalPotency = utils.clamp(math.floor(4000 * finalDamage / damageCap) + potency, 0, 4000)
+    local finalPotency = math.clamp(math.floor(4000 * finalDamage / damageCap) + potency, 0, 4000)
 
     -- Renew status effect.
     target:delStatusEffectSilent(xi.effect.NUKE_WALL)
@@ -954,17 +954,17 @@ xi.spells.damage.useDamageSpell = function(caster, target, spell)
 
     -- Handle Phalanx
     if finalDamage > 0 then
-        finalDamage = utils.clamp(finalDamage - target:getMod(xi.mod.PHALANX), 0, 99999)
+        finalDamage = math.clamp(finalDamage - target:getMod(xi.mod.PHALANX), 0, 99999)
     end
 
     -- Handle One For All
     if finalDamage > 0 then
-        finalDamage = utils.clamp(utils.oneforall(target, finalDamage), 0, 99999)
+        finalDamage = math.clamp(utils.oneforall(target, finalDamage), 0, 99999)
     end
 
     -- Handle Stoneskin
     if finalDamage > 0 then
-        finalDamage = utils.clamp(utils.stoneskin(target, finalDamage), -99999, 99999)
+        finalDamage = math.clamp(utils.stoneskin(target, finalDamage), -99999, 99999)
     end
 
     -- Handle Magic Absorb

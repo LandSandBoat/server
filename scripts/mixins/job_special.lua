@@ -177,15 +177,15 @@ local effectByAbility =
 
 xi.mix.jobSpecial.config = function(mob, params)
     if params.between and type(params.between) == 'number' then
-        mob:setLocalVar('[jobSpecial]between', utils.clamp(params.between, 0))
+        mob:setLocalVar('[jobSpecial]between', math.clamp(params.between, 0))
     end
 
     if params.chance and type(params.chance) == 'number' then
-        mob:setLocalVar('[jobSpecial]chance', utils.clamp(params.chance, 0, 100))
+        mob:setLocalVar('[jobSpecial]chance', math.clamp(params.chance, 0, 100))
     end
 
     if params.delay and type(params.delay) == 'number' then
-        mob:setLocalVar('[jobSpecial]delayInitial', utils.clamp(params.delay, 2))
+        mob:setLocalVar('[jobSpecial]delayInitial', math.clamp(params.delay, 2))
     end
 
     if params.specials and type(params.specials) == 'table' then
@@ -198,17 +198,17 @@ xi.mix.jobSpecial.config = function(mob, params)
                 mob:setLocalVar('[jobSpecial]ability_' .. i, v.id)
 
                 if v.cooldown and type(v.cooldown) == 'number' then
-                    mob:setLocalVar('[jobSpecial]between_' .. i, utils.clamp(v.cooldown, 0))
+                    mob:setLocalVar('[jobSpecial]between_' .. i, math.clamp(v.cooldown, 0))
                 else
                     mob:setLocalVar('[jobSpecial]between_' .. i, 7200)
                 end
 
                 if v.duration and type(v.duration) == 'number' then
-                    mob:setLocalVar('[jobSpecial]duration_' .. i, utils.clamp(v.duration, 1))
+                    mob:setLocalVar('[jobSpecial]duration_' .. i, math.clamp(v.duration, 1))
                 end
 
                 if v.hpp and type(v.hpp) == 'number' then
-                    mob:setLocalVar('[jobSpecial]hpp_' .. i, utils.clamp(v.hpp, 0, 100))
+                    mob:setLocalVar('[jobSpecial]hpp_' .. i, math.clamp(v.hpp, 0, 100))
                 else
                     mob:setLocalVar('[jobSpecial]hpp_' .. i, math.random(40, 60))
                 end

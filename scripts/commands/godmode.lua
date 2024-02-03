@@ -94,7 +94,7 @@ local godModeTierOneOff = function(player)
 end
 
 commandObj.onTrigger = function(player, tier)
-    local mode = utils.clamp(tier or 0, 0, 2)
+    local mode = math.clamp(tier or 0, 0, 2)
     local state = player:getCharVar('GodMode')
 
     if mode == 0 and state == 0 then

@@ -10,7 +10,7 @@ attachmentObject.onEquip = function(automaton)
         end
 
         local master    = pet:getMaster()
-        local maneuvers = utils.clamp(master:countEffect(xi.effect.ICE_MANEUVER), 0, 3)
+        local maneuvers = math.clamp(master:countEffect(xi.effect.ICE_MANEUVER), 0, 3)
         local amount    = 0
 
         -- Values updated in https://wiki.ffo.jp/html/34039.html version update.

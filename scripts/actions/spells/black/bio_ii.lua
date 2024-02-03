@@ -23,7 +23,7 @@ spellObject.onSpellCast = function(caster, target, spell)
     -- Calculate raw damage
     local dmg = calculateMagicDamage(caster, target, spell, params)
     -- Softcaps at 30, should always do at least 1
-    dmg = utils.clamp(dmg, 1, 30)
+    dmg = math.clamp(dmg, 1, 30)
     -- Get resist multiplier (1x if no resist)
     local resist = applyResistance(caster, target, spell, params)
     -- Get the resisted damage
@@ -45,7 +45,7 @@ spellObject.onSpellCast = function(caster, target, spell)
     -- http://wiki.ffo.jp/html/1954.html
     -- This formula gives correct values for every breakpoint listed on that site
     local dotdmg = math.floor((skillLvl + 29) / 40)
-    dotdmg = utils.clamp(dotdmg, 3, 8)
+    dotdmg = math.clamp(dotdmg, 3, 8)
 
     -- Do it!
     target:addStatusEffect(xi.effect.BIO, dotdmg, 3, duration, 0, 15, 2)

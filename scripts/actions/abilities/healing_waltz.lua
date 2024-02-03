@@ -23,7 +23,7 @@ abilityObject.onAbilityCheck = function(player, target, ability)
         local recastMod = player:getMod(xi.mod.WALTZ_DELAY)
         if recastMod ~= 0 then
             local newRecast = ability:getRecast() + recastMod
-            ability:setRecast(utils.clamp(newRecast, 0, newRecast))
+            ability:setRecast(math.clamp(newRecast, 0, newRecast))
         end
 
         -- Apply "Fan Dance" Waltz recast reduction

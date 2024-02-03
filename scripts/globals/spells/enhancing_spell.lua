@@ -200,14 +200,14 @@ xi.spells.enhancing.calculateEnhancingBasePower = function(caster, target, spell
             basePower = 40 + math.floor(skillLevel / 5) -- 100 at 300
         end
 
-        basePower = utils.clamp(basePower, 40, 150) -- Max is 150 and min is 40 at skill 0.
+        basePower = math.clamp(basePower, 40, 150) -- Max is 150 and min is 40 at skill 0.
 
     -- Boost-Stat / Gain-Stat
     elseif
         spellEffect >= xi.effect.STR_BOOST and
         spellEffect <= xi.effect.CHR_BOOST
     then
-        basePower = basePower + utils.clamp(math.floor((skillLevel - 300) / 10), 0, 20)
+        basePower = basePower + math.clamp(math.floor((skillLevel - 300) / 10), 0, 20)
 
     -- Embrava
     elseif spellEffect == xi.effect.EMBRAVA then
@@ -232,25 +232,25 @@ xi.spells.enhancing.calculateEnhancingBasePower = function(caster, target, spell
     -- Phalanx
     elseif spellEffect == xi.effect.PHALANX then
         if skillLevel > 300 then -- Phalanx I and II over 300 skill
-            basePower = utils.clamp(math.floor((skillLevel - 300.5) / 28.5) + 28, 28, 35)
+            basePower = math.clamp(math.floor((skillLevel - 300.5) / 28.5) + 28, 28, 35)
         else
             if spellId == xi.magic.spell.PHALANX then -- Phalanx
-                basePower = utils.clamp(math.floor(skillLevel / 10) - 2, 0, 35)
+                basePower = math.clamp(math.floor(skillLevel / 10) - 2, 0, 35)
             else -- Phalanx II
-                basePower = utils.clamp(math.floor(skillLevel / 25) + 16, 16, 35)
+                basePower = math.clamp(math.floor(skillLevel / 25) + 16, 16, 35)
             end
         end
 
     -- Blaze Spikes (Info from from BG-Wiki)
     elseif spellEffect == xi.effect.BLAZE_SPIKES then
-        basePower = utils.clamp(math.floor(math.floor((caster:getStat(xi.mod.INT) + 50) / 12) * (1 + caster:getMod(xi.mod.MATT) / 100)), 1, 25)
+        basePower = math.clamp(math.floor(math.floor((caster:getStat(xi.mod.INT) + 50) / 12) * (1 + caster:getMod(xi.mod.MATT) / 100)), 1, 25)
 
     -- Ice Spikes, Shock Spikes (Info from from BG-Wiki)
     elseif
         spellEffect == xi.effect.ICE_SPIKES or
         spellEffect == xi.effect.SHOCK_SPIKES
     then
-        basePower = utils.clamp(math.floor(math.floor((caster:getStat(xi.mod.INT) + 50) / 20) * (1 + caster:getMod(xi.mod.MATT) / 100)), 1, 15)
+        basePower = math.clamp(math.floor(math.floor((caster:getStat(xi.mod.INT) + 50) / 20) * (1 + caster:getMod(xi.mod.MATT) / 100)), 1, 15)
 
     -- Stoneskin
     elseif spellEffect == xi.effect.STONESKIN then
@@ -264,7 +264,7 @@ xi.spells.enhancing.calculateEnhancingBasePower = function(caster, target, spell
             basePower = 3 * threshold - 190
         end
 
-        basePower = utils.clamp(math.floor(basePower), 1, xi.settings.main.STONESKIN_CAP)
+        basePower = math.clamp(math.floor(basePower), 1, xi.settings.main.STONESKIN_CAP)
 
     -- Temper
     elseif spellEffect == xi.effect.MULTI_STRIKES then
@@ -338,7 +338,7 @@ xi.spells.enhancing.calculateEnhancingFinalPower = function(caster, target, spel
     -- Stoneskin
     elseif spellEffect == xi.effect.STONESKIN then
         if caster == target then
-            finalPower = utils.clamp(finalPower + caster:getMod(xi.mod.STONESKIN_BONUS_HP), 1, xi.settings.main.STONESKIN_CAP * 1.5)
+            finalPower = math.clamp(finalPower + caster:getMod(xi.mod.STONESKIN_BONUS_HP), 1, xi.settings.main.STONESKIN_CAP * 1.5)
         end
 
     -- -storm

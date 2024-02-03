@@ -522,17 +522,17 @@ local function calculateSwipeLungeDamage(player, target, skillModifier, gearBonu
 
     -- Handle Phalanx
     if damage > 0 then
-        damage = utils.clamp(damage - target:getMod(xi.mod.PHALANX), 0, 99999)
+        damage = math.clamp(damage - target:getMod(xi.mod.PHALANX), 0, 99999)
     end
 
     -- Handle One For All
     if damage > 0 then
-        damage = utils.clamp(utils.oneforall(target, damage), 0, 99999)
+        damage = math.clamp(utils.oneforall(target, damage), 0, 99999)
     end
 
     -- Handle Stoneskin
     if damage > 0 then
-        damage = utils.clamp(utils.stoneskin(target, damage), -99999, 99999)
+        damage = math.clamp(utils.stoneskin(target, damage), -99999, 99999)
     end
 
     return damage

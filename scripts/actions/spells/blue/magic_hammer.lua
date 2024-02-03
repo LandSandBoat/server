@@ -49,7 +49,7 @@ spellObject.onSpellCast = function(caster, target, spell)
     else
         damage = xi.spells.blue.useMagicalSpell(caster, target, spell, params)
 
-        local mpDrained = utils.clamp(damage, 0, target:getMP())
+        local mpDrained = math.clamp(damage, 0, target:getMP())
         if mpDrained == 0 then
             spell:setMsg(xi.msg.basic.MAGIC_DMG)
         else

@@ -29,7 +29,7 @@ local function getPortalCost(player)
 
     local cost                  = 50
     local luckVorsealPower      = 0
-    local luckVorsealMultiplier = utils.clamp(100 - 5 * luckVorsealPower, 45, 100) / 100
+    local luckVorsealMultiplier = math.clamp(100 - 5 * luckVorsealPower, 45, 100) / 100
     cost                        = math.floor(cost * luckVorsealMultiplier)
 
     return cost

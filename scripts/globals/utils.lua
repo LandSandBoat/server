@@ -231,6 +231,8 @@ function utils.clamp(input, min_val, max_val)
     return input
 end
 
+math.clamp = utils.clamp
+
 --  Returns a table containing all the elements in the specified range.
 --  Source: https://github.com/mebens/range
 function utils.range(from, to, step)

@@ -18,7 +18,7 @@ spellObject.onSpellCast = function(caster, target, spell)
 
     -- Can't apply if absorbed, nullified or 0 power.
     if damage >= 4 then
-        local casterSkill = utils.clamp(caster:getSkillLevel(xi.skill.DARK_MAGIC), 0, 500)
+        local casterSkill = math.clamp(caster:getSkillLevel(xi.skill.DARK_MAGIC), 0, 500)
         local power       = math.floor(damage / 4)
         local duration    = math.floor(3 * (1 + casterSkill / 11))
 

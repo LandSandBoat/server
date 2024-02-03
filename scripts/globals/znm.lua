@@ -78,7 +78,7 @@ xi.znm.soultrapper.getZeniValue = function(target, user, item)
     end
 
     -- Distance Component
-    zeni = zeni * utils.clamp((1 / distance) * 2, 1, 2)
+    zeni = zeni * math.clamp((1 / distance) * 2, 1, 2)
 
     -- Angle/Facing Component
     if isFacing then
@@ -95,7 +95,7 @@ xi.znm.soultrapper.getZeniValue = function(target, user, item)
 
     -- Sanitize Zeni
     zeni = math.floor(zeni) -- Remove any floating point information
-    zeni = utils.clamp(zeni, 1, 100)
+    zeni = math.clamp(zeni, 1, 100)
 
     return zeni
 end

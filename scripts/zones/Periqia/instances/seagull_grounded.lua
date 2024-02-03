@@ -323,7 +323,7 @@ instanceObject.onTrack = function(instance)
     local missionActive = mob:getLocalVar('missionActive')
     local pathLeg = mob:getLocalVar('pathLeg')
     local pathPoint = mob:getLocalVar('pathPoint')
-    pathPoint = utils.clamp(pathPoint, 1, #pathNodes[pathLeg]) -- pathPoint cannot be 0
+    pathPoint = math.clamp(pathPoint, 1, #pathNodes[pathLeg]) -- pathPoint cannot be 0
     local pathProgressMask = mob:getLocalVar('pathProgressMask')
         -- 0 = Incomplete  1 = Complete
         -- bit 0: Mission Start [1]

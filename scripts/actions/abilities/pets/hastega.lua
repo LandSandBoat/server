@@ -8,7 +8,7 @@ abilityObject.onAbilityCheck = function(player, target, ability)
 end
 
 abilityObject.onPetAbility = function(target, pet, skill, summoner)
-    local bonusTime = utils.clamp(summoner:getSkillLevel(xi.skill.SUMMONING_MAGIC) - 300, 0, 200)
+    local bonusTime = math.clamp(summoner:getSkillLevel(xi.skill.SUMMONING_MAGIC) - 300, 0, 200)
     local duration = 180 + bonusTime
     -- Garuda's Hastega is a weird exception and uses 153/1024 instead of 150/1024 like Haste spell
     -- That's why it overwrites some things regular haste won't.

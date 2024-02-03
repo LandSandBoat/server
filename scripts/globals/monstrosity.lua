@@ -1132,7 +1132,7 @@ xi.monstrosity.relinquishSteps =
 xi.monstrosity.relinquishFuncBody = function(player)
     -- TODO: Make this countdown interruptable
     player:timer(1000, function(playerArg)
-        local step = utils.clamp(playerArg:getLocalVar('RELINQUISH_COUNTDOWN'), 0, 4)
+        local step = math.clamp(playerArg:getLocalVar('RELINQUISH_COUNTDOWN'), 0, 4)
         xi.monstrosity.relinquishSteps[step](playerArg)
         playerArg:setLocalVar('RELINQUISH_COUNTDOWN', step + 1)
         xi.monstrosity.relinquishFuncBody(playerArg)

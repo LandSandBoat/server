@@ -20,7 +20,7 @@ abilityObject.onPetAbility = function(target, pet, skill)
         end
     end
 
-    mpRestore = utils.clamp(mpRestore, 0, target:getMaxMP())
+    mpRestore = math.clamp(mpRestore, 0, target:getMaxMP())
 
     skill:setMsg(xi.msg.basic.SKILL_RECOVERS_MP)
 

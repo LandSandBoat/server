@@ -151,8 +151,8 @@ xi.chocoboRaising.getPlayerRidingSpeedAndTime = function(player)
     local strRank = numberToRank(chocoState.strength)
     local endRank = numberToRank(chocoState.endurance)
 
-    local outSpeed = utils.clamp(baseSpeed + (strRank * xi.chocoboRaising.ridingSpeedPerRank), 0, xi.chocoboRaising.ridingSpeedCap)
-    local outTime  = utils.clamp(baseTime + (endRank * xi.chocoboRaising.ridingTimePerRank), 0, xi.chocoboRaising.ridingTimeCap)
+    local outSpeed = math.clamp(baseSpeed + (strRank * xi.chocoboRaising.ridingSpeedPerRank), 0, xi.chocoboRaising.ridingSpeedCap)
+    local outTime  = math.clamp(baseTime + (endRank * xi.chocoboRaising.ridingTimePerRank), 0, xi.chocoboRaising.ridingTimeCap)
 
     return outSpeed, outTime
 end
@@ -287,7 +287,7 @@ local handleStatChange = function(stat, change, max)
     -- TODO: Handle Green Racing Silks here for energy?
     -- https://ffxiclopedia.fandom.com/wiki/Green_Race_Silks
 
-    stat = utils.clamp(stat + change, 0, max)
+    stat = math.clamp(stat + change, 0, max)
 
     return stat
 end
@@ -1628,8 +1628,8 @@ xi.chocoboRaising.onEventUpdateVCSTrainer = function(player, csid, option, npc)
 
                     local reaction = 1
 
-                    chocoState.hunger = utils.clamp(chocoState.hunger + hungerAmount, 0, 255)
-                    chocoState.energy = utils.clamp(chocoState.energy + energyAmount, 0, 100)
+                    chocoState.hunger = math.clamp(chocoState.hunger + hungerAmount, 0, 255)
+                    chocoState.energy = math.clamp(chocoState.energy + energyAmount, 0, 100)
 
                     -- If multiple items, glow is always green
                     if #chocoState.foodGiven > 1 then

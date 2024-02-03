@@ -40,8 +40,8 @@ spellObject.onSpellCast = function(caster, target, spell)
             target:delStatusEffect(xi.effect.CHOKE)
         end
 
-        local agiDown = utils.clamp(caster:getMainLvl() / 2, 0, 49)
-        local dot = utils.clamp(math.floor((agiDown - 3) / 2), 0, 23)
+        local agiDown = math.clamp(caster:getMainLvl() / 2, 0, 49)
+        local dot = math.clamp(math.floor((agiDown - 3) / 2), 0, 23)
         spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
 
         if target:addStatusEffect(params.effect, dot, tick, duration * resist) then

@@ -14,7 +14,7 @@ end
 
 abilityObject.onUseAbility = function(player, target, ability)
     local baseDuration       = 180 + player:getJobPointLevel(xi.jp.JIG_DURATION)
-    local durationMultiplier = 1.0 + utils.clamp(player:getMod(xi.mod.JIG_DURATION), 0, 50) / 100
+    local durationMultiplier = 1.0 + math.clamp(player:getMod(xi.mod.JIG_DURATION), 0, 50) / 100
     local finalDuration      = math.floor(baseDuration * durationMultiplier * xi.settings.main.SNEAK_INVIS_DURATION_MULTIPLIER)
 
     if not player:hasStatusEffect(xi.effect.SNEAK) then

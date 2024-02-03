@@ -62,8 +62,8 @@ abilityObject.onUseAbility = function(player, target, ability)
     end
 
     local power  = math.floor(basePower * weatherDayBonus)
-    power        = utils.clamp(power, 0, spirit:getMP()) -- cap MP drained at spirit's MP
-    power        = utils.clamp(power, 0, player:getMaxMP() - player:getMP()) -- cap MP drained at the max MP - current MP
+    power        = math.clamp(power, 0, spirit:getMP()) -- cap MP drained at spirit's MP
+    power        = math.clamp(power, 0, player:getMaxMP() - player:getMP()) -- cap MP drained at the max MP - current MP
 
     spirit:delMP(power)
 
