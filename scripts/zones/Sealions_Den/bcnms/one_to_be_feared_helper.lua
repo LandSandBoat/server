@@ -10,9 +10,18 @@ local oneToBeFeared = {}
 -- Not to be confused with an actual instance.
 
 local function healCharacter(player)
-    player:setHP(player:getMaxHP())
-    player:setMP(player:getMaxMP())
-    player:setTP(0)
+    -- only heal players if alive otherwise bugs out player
+    if player:isAlive() then
+        player:setHP(player:getMaxHP())
+        player:setMP(player:getMaxMP())
+        player:setTP(0)
+        if player:getPet() ~= nil then
+            local pet = player:getPet()
+            pet:setHP(pet:getMaxHP())
+            pet:setMP(pet:getMaxMP())
+            pet:setTP(0)
+        end
+    end
 end
 
 local function returnToAirship(player)
@@ -25,6 +34,12 @@ local function returnToAirship(player)
         player:setPos(-140.029, -23.348, -446.376, 193)
     elseif instance == 3 then
         player:setPos(499.969, 56.652, -806.132, 193)
+    end
+
+    -- allow resending raise/reraise prompt since we moved player
+    -- which removes the prompt from player screen
+    if player:isDead() then
+        player:allowSendRaisePrompt()
     end
 end
 
