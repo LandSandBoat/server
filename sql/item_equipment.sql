@@ -11141,7 +11141,7 @@ INSERT INTO `item_equipment` VALUES (22278,'staunch_tathlum',99,0,4194303,0,0,0,
 INSERT INTO `item_equipment` VALUES (22279,'staunch_tathlum_+1',99,0,4194303,0,0,0,8,0,0);
 INSERT INTO `item_equipment` VALUES (22280,'yamarang',99,0,2363424,0,0,0,8,0,0);
 INSERT INTO `item_equipment` VALUES (22281,'knobkierrie',99,0,2107523,0,0,0,8,0,0);
-INSERT INTO `item_equipment` VALUES (22282,'grudge',1,0,4194303,28,0,0,4,8,0); -- TODO: capture model from retail (using Rogetsurin model)
+INSERT INTO `item_equipment` VALUES (22282,'grudge',1,0,4194303,137,0,0,4,8,0);
 INSERT INTO `item_equipment` VALUES (22283,'marvelous_cheer',1,0,4194303,136,0,0,4,0,0);
 INSERT INTO `item_equipment` VALUES (22284,'abdhaljs_tome',99,0,4194303,0,0,0,8,0,0);
 INSERT INTO `item_equipment` VALUES (22285,'beryllium_bolt',99,119,1185,0,0,0,8,0,2);
