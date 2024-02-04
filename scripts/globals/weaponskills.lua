@@ -426,25 +426,25 @@ end
 
 local modParameters =
 {
-    [xi.mod.WS_STR_BONUS] = 'str_wsc',
-    [xi.mod.WS_DEX_BONUS] = 'dex_wsc',
-    [xi.mod.WS_VIT_BONUS] = 'vit_wsc',
-    [xi.mod.WS_AGI_BONUS] = 'agi_wsc',
-    [xi.mod.WS_INT_BONUS] = 'int_wsc',
-    [xi.mod.WS_MND_BONUS] = 'mnd_wsc',
-    [xi.mod.WS_CHR_BONUS] = 'chr_wsc',
+    ['str_wsc'] = { xi.mod.STR, xi.mod.WS_STR_BONUS },
+    ['dex_wsc'] = { xi.mod.DEX, xi.mod.WS_DEX_BONUS },
+    ['vit_wsc'] = { xi.mod.VIT, xi.mod.WS_VIT_BONUS },
+    ['agi_wsc'] = { xi.mod.AGI, xi.mod.WS_AGI_BONUS },
+    ['int_wsc'] = { xi.mod.INT, xi.mod.WS_INT_BONUS },
+    ['mnd_wsc'] = { xi.mod.MND, xi.mod.WS_MND_BONUS },
+    ['chr_wsc'] = { xi.mod.CHR, xi.mod.WS_CHR_BONUS },
 }
 
 local function calculateWsMods(attacker, calcParams, wsParams)
-    local wsMods = calcParams.fSTR + calcParams.alpha *
-        (attacker:getStat(xi.mod.STR) * wsParams.str_wsc +
-        attacker:getStat(xi.mod.DEX) * wsParams.dex_wsc +
-        attacker:getStat(xi.mod.VIT) * wsParams.vit_wsc +
-        attacker:getStat(xi.mod.AGI) * wsParams.agi_wsc +
-        attacker:getStat(xi.mod.INT) * wsParams.int_wsc +
-        attacker:getStat(xi.mod.MND) * wsParams.mnd_wsc +
-        attacker:getStat(xi.mod.CHR) * wsParams.chr_wsc)
-    return wsMods
+    local wsMods = 0
+
+    for parameterName, modList in pairs(modParameters) do
+        local paramValue = calcParams[parameterName] and calcParams[parameterName] or 0
+
+        wsMods = wsMods + attacker:getStat(modList[1]) * paramValue
+    end
+
+    return wsMods * calcParams.alpha + calcParams.fSTR
 end
 
 -- Calculates the raw damage for a weaponskill, used by both xi.weaponskills.doPhysicalWeaponskill and xi.weaponskills.doRangedWeaponskill.
@@ -484,9 +484,9 @@ xi.weaponskills.calculateRawWSDmg = function(attacker, target, wsID, tp, action,
     -- https://www.bg-wiki.com/bg/Utu_Grip
     -- https://www.bluegartr.com/threads/108199-Random-Facts-Thread-Other?p=6826618&viewfull=1#post6826618
 
-    for modId, parameterName in pairs(modParameters) do
-        if attacker:getMod(modId) > 0 then
-            wsParams[parameterName] = wsParams[parameterName] + (attacker:getMod(modId) / 100)
+    for parameterName, modList in pairs(modParameters) do
+        if attacker:getMod(modList[2]) > 0 then
+            wsParams[parameterName] = wsParams[parameterName] + (attacker:getMod(modList[2]) / 100)
         end
     end
 
@@ -916,20 +916,19 @@ xi.weaponskills.doMagicWeaponskill = function(attacker, target, wsID, wsParams, 
         -- https://www.bg-wiki.com/bg/Utu_Grip
         -- https://www.bluegartr.com/threads/108199-Random-Facts-Thread-Other?p=6826618&viewfull=1#post6826618
 
-        for modId, parameterName in pairs(modParameters) do
-            if attacker:getMod(modId) > 0 then
-                wsParams[parameterName] = wsParams[parameterName] + attacker:getMod(modId) / 100
+        for parameterName, modList in pairs(modParameters) do
+            if attacker:getMod(modList[2]) > 0 then
+                wsParams[parameterName] = wsParams[parameterName] + (attacker:getMod(modList[2]) / 100)
             end
         end
 
-        dmg = attacker:getMainLvl() + 2 + fint +
-            attacker:getStat(xi.mod.STR) * wsParams.str_wsc +
-            attacker:getStat(xi.mod.DEX) * wsParams.dex_wsc +
-            attacker:getStat(xi.mod.VIT) * wsParams.vit_wsc +
-            attacker:getStat(xi.mod.AGI) * wsParams.agi_wsc +
-            attacker:getStat(xi.mod.INT) * wsParams.int_wsc +
-            attacker:getStat(xi.mod.MND) * wsParams.mnd_wsc +
-            attacker:getStat(xi.mod.CHR) * wsParams.chr_wsc
+        for parameterName, modList in pairs(modParameters) do
+            local paramValue = calcParams[parameterName] and calcParams[parameterName] or 0
+
+            dmg = dmg + attacker:getStat(modList[1]) * paramValue
+        end
+
+        dmg = dmg + attacker:getMainLvl() + 2 + fint
 
         -- Applying fTP multiplier
         local ftp = xi.weaponskills.fTP(tp, wsParams.ftp100, wsParams.ftp200, wsParams.ftp300) + bonusfTP
