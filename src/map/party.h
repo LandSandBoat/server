@@ -61,6 +61,7 @@ class CParty
 public:
     CParty(CBattleEntity* PEntity);
     CParty(uint32 id);
+    ~CParty();
 
     uint32 GetPartyID() const;
     uint16 GetMemberFlags(CBattleEntity* PEntity);
