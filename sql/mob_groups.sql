@@ -3045,7 +3045,7 @@ INSERT INTO `mob_groups` VALUES (14,1160,62,'Earth_Elemental',960,4,0,0,0,74,75,
 INSERT INTO `mob_groups` VALUES (15,437,62,'Black_Pudding',960,0,0,0,0,72,74,0);
 INSERT INTO `mob_groups` VALUES (16,4281,62,'Wamouracampa',960,0,2609,0,0,72,76,0);
 INSERT INTO `mob_groups` VALUES (17,2485,62,'Magmatic_Eruca',960,0,419,0,0,71,75,0);
-INSERT INTO `mob_groups` VALUES (18,5209,62,'Copper_Borer',0,128,0,22500,0,82,82,0);
+INSERT INTO `mob_groups` VALUES (18,5209,62,'Copper_Borer',0,128,3291,22500,0,82,82,0);
 INSERT INTO `mob_groups` VALUES (19,2686,62,'Moblin_Billionaire',960,0,1704,0,0,74,76,0);
 INSERT INTO `mob_groups` VALUES (20,1341,62,'Fire_Elemental',960,4,831,0,0,74,75,0);
 INSERT INTO `mob_groups` VALUES (21,1426,62,'Friars_Lantern',960,0,908,0,0,72,76,0);

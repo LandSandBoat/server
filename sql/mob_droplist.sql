@@ -26780,6 +26780,9 @@ INSERT INTO `mob_droplist` VALUES (3290,0,0,1000,16242,@VCOMMON); -- Dark Ixion:
 INSERT INTO `mob_droplist` VALUES (3290,0,0,1000,2654,@ALWAYS);   -- Dark Ixion: Horn
 INSERT INTO `mob_droplist` VALUES (3290,0,0,1000,2655,@ALWAYS);   -- Dark Ixion: Tail
 
+-- ZoneID: 62 - Copper Borer
+INSERT INTO `mob_droplist` VALUES (3291,0,0,1000,11536,@UNCOMMON); -- Copper Borer: Wayang Kulit Mantle (Uncommon, 10%)
+
 /*!40000 ALTER TABLE `mob_droplist` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;

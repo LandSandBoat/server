@@ -3844,7 +3844,9 @@ INSERT INTO `mob_skill_lists` VALUES ('Flockbock',2000,269); -- petribreath
 
 INSERT INTO `mob_skill_lists` VALUES ('Zmey_Gorynych',2001,380); -- scythe_tail
 
--- Next available ID: 2002
+INSERT INTO `mob_skill_lists` VALUES ('Copper_Borer',2002,1817); -- thermal_pulse
+
+-- Next available ID: 2003
 
 -- ------------------------------------------------------------
 -- Start of Ambuscade section
