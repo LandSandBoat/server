@@ -1207,7 +1207,7 @@ namespace battleutils
 
             uint8 enspell = (uint8)PAttacker->getMod(Mod::ENSPELL);
 
-            if (enspell == ENSPELL_BLOOD_WEAPON)
+            if (enspell == ENSPELL_BLOOD_WEAPON && PDefender->m_EcoSystem != ECOSYSTEM::UNDEAD)
             {
                 Action->additionalEffect = SUBEFFECT_HP_DRAIN;
                 Action->addEffectMessage = 161;
