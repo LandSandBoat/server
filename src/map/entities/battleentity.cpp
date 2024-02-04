@@ -1381,6 +1381,19 @@ void CBattleEntity::delTrait(CTrait* PTrait)
     TraitList.erase(std::remove(TraitList.begin(), TraitList.end(), PTrait), TraitList.end());
 }
 
+bool CBattleEntity::hasTrait(uint16 traitID)
+{
+    for (CTrait* Trait : TraitList)
+    {
+        if (Trait->getID() == traitID)
+        {
+            return true;
+        }
+    }
+
+    return false;
+}
+
 bool CBattleEntity::ValidTarget(CBattleEntity* PInitiator, uint16 targetFlags)
 {
     TracyZoneScoped;
@@ -2359,7 +2372,7 @@ void CBattleEntity::OnDespawn(CDespawnState& /*unused*/)
 {
     TracyZoneScoped;
     FadeOut();
-    //#event despawn
+    // #event despawn
     PAI->EventHandler.triggerListener("DESPAWN", CLuaBaseEntity(this));
     PAI->Internal_Respawn(0s);
 }
