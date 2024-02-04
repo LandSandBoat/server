@@ -15496,19 +15496,20 @@ void CLuaBaseEntity::instantiateMob(uint32 groupID)
 
 /************************************************************************
  *  Function: hasTrait()
- *  Purpose : Returns true if a Mob has an active trait
+ *  Purpose : Returns true if a battle entity has an active trait
  *  Example : if target:hasTrait(15) then -- Double Attack
  *  Notes   :
  ************************************************************************/
 
 bool CLuaBaseEntity::hasTrait(uint16 traitID)
 {
-    if (m_PBaseEntity->objtype != TYPE_PC)
+    CBattleEntity* PBattleEntity = dynamic_cast<CBattleEntity*>(m_PBaseEntity);
+    if (PBattleEntity)
     {
-        return false;
+        return PBattleEntity->hasTrait(traitID);
     }
 
-    return charutils::hasTrait(static_cast<CCharEntity*>(m_PBaseEntity), traitID);
+    return false;
 }
 
 /************************************************************************

@@ -1383,7 +1383,7 @@ void CBattleEntity::delTrait(CTrait* PTrait)
 
 bool CBattleEntity::hasTrait(uint16 traitID)
 {
-    for (CTrait* Trait: TraitList)
+    for (CTrait* Trait : TraitList)
     {
         if (Trait->getID() == traitID)
         {
@@ -2372,7 +2372,7 @@ void CBattleEntity::OnDespawn(CDespawnState& /*unused*/)
 {
     TracyZoneScoped;
     FadeOut();
-    //#event despawn
+    // #event despawn
     PAI->EventHandler.triggerListener("DESPAWN", CLuaBaseEntity(this));
     PAI->Internal_Respawn(0s);
 }
