@@ -61,17 +61,19 @@ xi.furnitureQuests.onFurniturePlaced = function(player, item)
 
     -- Dont allow more than one reward from an item per player if not repeatable
     if
-        not itemLookup.repeatable and
-        player:getCharVar(string.format("[%s]%s", itemLookup.itemName, "received")) == 0
+        itemLookup.repeatable and
+        player:getCharVar(string.format("[%s]%s", itemLookup.itemName, "received")) ~= 0
     then
-        -- All furniture quests captured so far require zoning
-        player:setLocalVar(string.format("[%s]%s", itemLookup.itemName, "mustZone"), 1)
-        -- waitTime of -1 = conquestTally, otherwise its in seconds
-        if itemLookup.waitTime > 0 then
-            player:setCharVar(string.format("[%s]%s", itemLookup.itemName, "rewardTime"), VanadielTime() + itemLookup.waitTime)
-        else
-            player:setCharVar(string.format("[%s]%s", itemLookup.itemName, "rewardTime"), getConquestTally())
-        end
+        return
+    end
+
+    -- All furniture quests captured so far require zoning
+    player:setLocalVar(string.format("[%s]%s", itemLookup.itemName, "mustZone"), 1)
+    -- waitTime of -1 = conquestTally, otherwise its in seconds
+    if itemLookup.waitTime > 0 then
+        player:setCharVar(string.format("[%s]%s", itemLookup.itemName, "rewardTime"), os.time() + itemLookup.waitTime)
+    else
+        player:setCharVar(string.format("[%s]%s", itemLookup.itemName, "rewardTime"), getConquestTally())
     end
 end
 
@@ -99,7 +101,7 @@ xi.furnitureQuests.checkForFurnitureQuest = function(player)
         if
             rewardTime > 0 and -- player waiting to get reward
             player:getLocalVar(string.format("[%s]%s", fqInfo.itemName, "mustZone")) == 0 and -- player already zoned
-            rewardTime < VanadielTime() and -- reward is due
+            rewardTime < os.time() and -- reward is due
             player:getFameLevel(player:getNation()) >= fqInfo.fameReq -- meets fame required
         then
             triggeredQuestItem = itemID
