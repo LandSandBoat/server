@@ -12574,6 +12574,7 @@ INSERT INTO `item_equipment` VALUES (26541,'baayami_robe',99,119,16384,115,0,0,3
 INSERT INTO `item_equipment` VALUES (26542,'baayami_robe_+1',99,119,16384,115,0,0,32,0,3);
 INSERT INTO `item_equipment` VALUES (26543,'turms_harness',99,119,2359328,148,0,0,32,0,3);
 INSERT INTO `item_equipment` VALUES (26544,'tu._harness_+1',99,119,2359328,148,0,0,32,0,0);
+INSERT INTO `item_equipment` VALUES (26545,'mithkabob_shirt',1,0,4194303,8782,0,0,32,0,0);
 INSERT INTO `item_equipment` VALUES (26624,'agoge_mask',99,109,1,65,0,0,16,0,0);
 INSERT INTO `item_equipment` VALUES (26625,'agoge_mask_+1',99,119,1,65,0,0,16,0,0);
 INSERT INTO `item_equipment` VALUES (26626,'hes._crown',99,109,2,67,0,0,16,0,0);
