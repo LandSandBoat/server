@@ -16,19 +16,10 @@
 local weaponskillObject = {}
 
 weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary, action, taChar)
-    local drain = 0
-
-    if tp >= 1000 and tp <= 1999 then
-        drain = 50
-    elseif tp >= 2000 and tp <= 2999 then
-        drain = 75
-    elseif tp == 3000 then
-        drain = 100
-    end
-
+    local drain = 25 + math.floor(tp / 3) * 25
     local params = {}
     params.ftp100 = 2.75 params.ftp200 = 2.75 params.ftp300 = 2.75
-    params.str_wsc = 0.3 params.dex_wsc = 0.0 params.vit_wsc = 0.0 params.agi_wsc = 0.0 params.int_wsc = 0.0 params.mnd_wsc = 0.5 params.chr_wsc = 0.0
+    params.str_wsc = 0.3 params.mnd_wsc = 0.5
     params.ele = xi.element.DARK
     params.skill = xi.skill.SWORD
     params.includemab = true

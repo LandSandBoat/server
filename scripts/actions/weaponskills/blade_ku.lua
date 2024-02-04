@@ -22,9 +22,7 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
     local params = {}
     params.numHits = 5
     params.ftp100 = 1.0 params.ftp200 = 1.0 params.ftp300 = 1.0
-    params.str_wsc = 0.1 params.dex_wsc = 0.1 params.vit_wsc = 0.0
-    params.agi_wsc = 0.0 params.int_wsc = 0.0 params.mnd_wsc = 0.0
-    params.chr_wsc = 0.0
+    params.str_wsc = 0.1 params.dex_wsc = 0.1
     params.crit100 = 0.0 params.crit200 = 0.0 params.crit300 = 0.0
     params.canCrit = false
     -- Sufficient data for ACC bonus/penalty does not exist; assuming no penalty and 10% increase per 1000 TP

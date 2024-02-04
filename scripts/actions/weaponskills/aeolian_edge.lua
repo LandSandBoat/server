@@ -15,7 +15,7 @@ local weaponskillObject = {}
 weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary, action, taChar)
     local params = {}
     params.ftp100 = 2.75 params.ftp200 = 3.50 params.ftp300 = 4
-    params.str_wsc = 0.0 params.dex_wsc = 0.28 params.vit_wsc = 0.0 params.agi_wsc = 0.0 params.int_wsc = 0.28 params.mnd_wsc = 0.0 params.chr_wsc = 0.0
+    params.dex_wsc = 0.28 params.int_wsc = 0.28
     params.ele = xi.element.WIND
     params.skill = xi.skill.DAGGER
     params.includemab = true
