@@ -45,7 +45,7 @@ abilityObject.onUseAbility = function(player, target, ability, action)
 
     -- TP params.
     params.ftp100  = 5 params.ftp200  = 5 params.ftp300  = 5
-    params.crit100 = 0 params.crit200 = 0 params.crit300 = 0
+    params.critVaries = { 0.0, 0.0, 0.0 }
     params.acc100  = 0 params.acc200  = 0 params.acc300  = 0
     params.atk100  = 1 params.atk200  = 1 params.atk300  = 1
 
@@ -58,7 +58,6 @@ abilityObject.onUseAbility = function(player, target, ability, action)
     params.mnd_wsc = 0
     params.chr_wsc = 0
 
-    params.canCrit    = true
     params.enmityMult = 0.5
 
     -- Job Point Bonus Damage

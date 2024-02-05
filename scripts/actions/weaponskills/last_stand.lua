@@ -22,8 +22,6 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
     params.numHits = 2
     params.ftp100 = 2 params.ftp200 = 2.125 params.ftp300 = 2.25
     params.agi_wsc = player:getMerit(xi.merit.LAST_STAND) * 0.17
-    params.crit100 = 0.0 params.crit200 = 0.0 params.crit300 = 0.0
-    params.canCrit = false
     params.acc100 = 0.0 params.acc200 = 0.0 params.acc300 = 0.0
     params.atk100 = 1 params.atk200 = 1 params.atk300 = 1
     params.multiHitfTP = true

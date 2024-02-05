@@ -20,9 +20,7 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
     local params = {}
     params.numHits = 5
     params.ftp100 = 0.6875 params.ftp200 = 0.6875 params.ftp300 = 0.6875
-    params.dex_wsc = player:getMerit(xi.merit.BLADE_SHUN) * 0.17 -- TODO: base should be 73%
-    params.crit100 = 0.0 params.crit200 = 0.0 params.crit300 = 0.0
-    params.canCrit = false
+    params.dex_wsc = player:getMerit(xi.merit.BLADE_SHUN) * 0.17
     params.acc100 = 0.0 params.acc200 = 0.0 params.acc300 = 0.0
     params.atk100 = 1.0 params.atk200 = 1.0 params.atk300 = 1.0
 

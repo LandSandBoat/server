@@ -18,8 +18,6 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
     params.numHits = 5
     params.ftp100 = 1.0625 params.ftp200 = 1.0625 params.ftp300 = 1.0625
     params.dex_wsc = player:getMerit(xi.merit.SHIJIN_SPIRAL) * 0.17
-    params.crit100 = 0.0 params.crit200 = 0.0 params.crit300 = 0.0
-    params.canCrit = false
     params.acc100 = 0.0 params.acc200 = 0.0 params.acc300 = 0.0
     params.atk100 = 1.05 params.atk200 = 1.05 params.atk300 = 1.05
     local damage, criticalHit, tpHits, extraHits = xi.weaponskills.doPhysicalWeaponskill(player, target, wsID, params, tp, action, primary, taChar)

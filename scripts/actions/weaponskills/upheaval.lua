@@ -18,8 +18,6 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
     params.numHits = 4
     params.ftp100 = 1.0 params.ftp200 = 3.5 params.ftp300 = 6.5
     params.vit_wsc = player:getMerit(xi.merit.UPHEAVAL) * 0.17
-    params.crit100 = 0.0 params.crit200 = 0.0 params.crit300 = 0.0
-    params.canCrit = true
     params.acc100 = 0.0 params.acc200 = 0.0 params.acc300 = 0.0
     params.atk100 = 1 params.atk200 = 1 params.atk300 = 1
 

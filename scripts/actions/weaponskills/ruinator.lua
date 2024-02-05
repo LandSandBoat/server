@@ -19,8 +19,6 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
     params.numHits = 4
     params.ftp100 = 1.08 params.ftp200 = 1.08 params.ftp300 = 1.08
     params.str_wsc = player:getMerit(xi.merit.RUINATOR) * 0.17
-    params.crit100 = 0.0 params.crit200 = 0.0 params.crit300 = 0.0
-    params.canCrit = false
     params.acc100 = 0.8 params.acc200 = 0.9 params.acc300 = 1.0 -- TODO: verify -- "Accuracy varies with TP" in retail. All current evidence points to that this modifier is static values, not percentages.
     params.atk100 = 1.1 params.atk200 = 1.1 params.atk300 = 1.1
 

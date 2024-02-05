@@ -20,17 +20,8 @@ abilityObject.onAutomatonAbility = function(target, automaton, skill, master, ac
         acc100 = 0.0,
         acc200 = 0.0,
         acc300 = 0.0,
-        canCrit = true,
-        crit100 = 0.2,
-        crit200 = 0.4,
-        crit300 = 0.7,
-        str_wsc = 0.0,
-        dex_wsc = 0.0,
+        critVaries = { 0.2, 0.4, 0.7 },
         vit_wsc = 0.5,
-        agi_wsc = 0.0,
-        int_wsc = 0.0,
-        mnd_wsc = 0.0,
-        chr_wsc = 0.0
     }
 
     local damage = xi.autows.doAutoPhysicalWeaponskill(automaton, target, 0, skill:getTP(), true, action, false, params, skill)

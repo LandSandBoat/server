@@ -341,7 +341,7 @@ local function getSingleHitDamage(attacker, target, dmg, wsParams, calcParams)
     then
         if not shadowAbsorb(target) then
             local critChance = math.random() -- See if we land a critical hit
-            criticalHit = (wsParams.critMod and critChance <= calcParams.critRate) or
+            criticalHit = (wsParams.critVaries and critChance <= calcParams.critRate) or
                 calcParams.forcedFirstCrit or
                 calcParams.mightyStrikesApplicable
 
@@ -451,7 +451,7 @@ end
 -- Behavior of damage calculations can vary based on the passed in calcParams, which are determined by the calling function
 -- depending on the type of weaponskill being done, and any special cases for that weaponskill
 --
--- wsParams can contain: ftp100, ftp200, ftp300, str_wsc, dex_wsc, vit_wsc, int_wsc, mnd_wsc, canCrit, crit100, crit200, crit300,
+-- wsParams can contain: ftp100, ftp200, ftp300, str_wsc, dex_wsc, vit_wsc, int_wsc, mnd_wsc, critVaries,
 -- acc100, acc200, acc300, ignoresDef, ignore100, ignore200, ignore300, atk100, atk200, atk300, kick, hybridWS, hitsHigh, formless
 --
 -- See xi.weaponskills.doPhysicalWeaponskill or xi.weaponskills.doRangedWeaponskill for how calcParams are determined.
@@ -499,8 +499,8 @@ xi.weaponskills.calculateRawWSDmg = function(attacker, target, wsID, tp, action,
     -- Calculate critrates
     -- TODO: calc per-hit with weapon crit+% on each hand (if dual wielding)
     calcParams.critRate = 0
-    if wsParams.critMod then -- Work out critical hit ratios
-        calcParams.critRate = xi.combat.physical.calculateSwingCriticalRate(attacker, target, wsParams.critMod)
+    if wsParams.critVaries then -- Work out critical hit ratios
+        calcParams.critRate = xi.combat.physical.calculateSwingCriticalRate(attacker, target, wsParams.critVaries)
     end
 
     -- Start the WS
