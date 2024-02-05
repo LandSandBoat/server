@@ -516,7 +516,7 @@ xi.amk.helpers.pipSets =
 }
 
 xi.amk.helpers.puzzleOneOnTrigger = function(player, npc, mission, offset)
-    local pipSet = player:getLocalVar('Mission[10][12][p1]pipSet') - 1
+    local pipSet = mission:getLocalVar(player, '[p1]pipSet') - 1
     local pos = npc:getPos()
     local element = xi.amk.helpers.pipSets[pipSet][offset]
 
@@ -539,8 +539,8 @@ end
 -----------------------------------
 local xarc = zones[xi.zone.XARCABARD]
 
+-- returns -1 or 1 to offset the wrong answer randomly
 local randomSign = function()
-    -- returns -1 or 1 to offset the wrong answer randomly
     return math.random(1, 2) == 1 and 1 or -1
 end
 
@@ -702,7 +702,7 @@ xi.amk.helpers.triviaQuestions =
     end,
 }
 
-local assignRandomTriviaQuestions = function(player)
+local assignRandomTriviaQuestions = function(player, mission)
     local questions = {}
     for i, _ in pairs(xi.amk.helpers.triviaQuestions) do
         table.insert(questions, i)
@@ -710,19 +710,19 @@ local assignRandomTriviaQuestions = function(player)
 
     for i = 1, 3 do
         local index = math.random(1, #questions)
-        player:setLocalVar('Mission[10][12][p2]question' .. i, questions[index])
+        mission:setLocalVar(player, '[p2]question' .. i, questions[index])
         table.remove(questions, index)
     end
 end
 
-local resetPuzzleVars = function(player)
-    player:setLocalVar('Mission[10][12][p2]progress', 0)
-    player:setLocalVar('Mission[10][12][p2]timeLimit', 0)
-    player:setLocalVar('Mission[10][12][p2]question1', 0)
-    player:setLocalVar('Mission[10][12][p2]question2', 0)
-    player:setLocalVar('Mission[10][12][p2]question3', 0)
-    player:setLocalVar('Mission[10][12][p2]correctStooge', 0)
-    player:setLocalVar('Mission[10][12][p2]previousStooge', 0)
+local resetPuzzleVars = function(player, mission)
+    mission:setLocalVar(player, '[p2]progress', 0)
+    mission:setLocalVar(player, '[p2]timeLimit', 0)
+    mission:setLocalVar(player, '[p2]question1', 0)
+    mission:setLocalVar(player, '[p2]question2', 0)
+    mission:setLocalVar(player, '[p2]question3', 0)
+    mission:setLocalVar(player, '[p2]correctStooge', 0)
+    mission:setLocalVar(player, '[p2]previousStooge', 0)
 end
 
 local stooges =
@@ -738,13 +738,13 @@ local stooges =
 }
 
 xi.amk.helpers.puzzleTwoOnTrigger = function(player, npc, mission)
-    local p2Progress = player:getLocalVar('Mission[10][12][p2]progress')
+    local p2Progress = mission:getLocalVar(player, '[p2]progress')
 
     -- Starting puzzle, assign questions
     if p2Progress == 0 then
         p2Progress = 1
-        player:setLocalVar('Mission[10][12][p2]progress', p2Progress)
-        assignRandomTriviaQuestions(player)
+        mission:setLocalVar(player, '[p2]progress', p2Progress)
+        assignRandomTriviaQuestions(player, mission)
     end
 
     -- Puzzle already beaten, show flavor text
@@ -755,11 +755,11 @@ xi.amk.helpers.puzzleTwoOnTrigger = function(player, npc, mission)
         p2Progress = 10
     end
 
-    local currentQuestion = player:getLocalVar('Mission[10][12][p2]question' .. p2Progress)
-    local correctStooge = player:getLocalVar('Mission[10][12][p2]correctStooge')
-    local previousStooge = player:getLocalVar('Mission[10][12][p2]previousStooge')
+    local currentQuestion = mission:getLocalVar(player, '[p2]question' .. p2Progress)
+    local correctStooge = mission:getLocalVar(player, '[p2]correctStooge')
+    local previousStooge = mission:getLocalVar(player, '[p2]previousStooge')
     local stoogeNum = stooges[npc:getID()].stoogeNum
-    local timeLimit = player:getLocalVar('Mission[10][12][p2]timeLimit')
+    local timeLimit = mission:getLocalVar(player, '[p2]timeLimit')
 
     -- DEBUG
     -- player:PrintToPlayer(string.format("p2Progress: %s, time_limit: %s, currentQuestion: %s, correctStooge: %s, previousStooge: %s, stoogeNum: %s",
@@ -783,8 +783,8 @@ xi.amk.helpers.puzzleTwoOnEventUpdate = function(player, csid, option, npc, miss
     if option >= 1 and option <= 3 then
         local stooge = stooges[npc:getID()]
         local timeLimit = os.time() + 180 -- Three minutes
-        local p2Progress = player:getLocalVar('Mission[10][12][p2]progress')
-        local currentQuestion = player:getLocalVar('Mission[10][12][p2]question' .. p2Progress)
+        local p2Progress = mission:getLocalVar(player, '[p2]progress')
+        local currentQuestion = mission:getLocalVar(player, '[p2]question' .. p2Progress)
         local answers = xi.amk.helpers.triviaQuestions[currentQuestion](player)
 
         -- Right and wrong answer/stooge has to be randomized in terms of order given to updateEvent
@@ -801,9 +801,9 @@ xi.amk.helpers.puzzleTwoOnEventUpdate = function(player, csid, option, npc, miss
         end
 
         -- Store important information for next CS parameters
-        player:setLocalVar('Mission[10][12][p2]correctStooge', correctOption + 1) -- Stooge num is always 1 more than the option
-        player:setLocalVar('Mission[10][12][p2]timeLimit', timeLimit) -- Time limit - > 3 minutes fails
-        player:setLocalVar('Mission[10][12][p2]previousStooge', stooge.stoogeNum) -- this tells the stooge that he is or isn't supposed to talk
+        mission:setLocalVar(player, '[p2]correctStooge', correctOption + 1) -- Stooge num is always 1 more than the option
+        mission:setLocalVar(player, '[p2]timeLimit', timeLimit) -- Time limit - > 3 minutes fails
+        mission:setLocalVar(player, '[p2]previousStooge', stooge.stoogeNum) -- this tells the stooge that he is or isn't supposed to talk
 
         player:updateEvent(
             answers[answerOne],
@@ -826,21 +826,20 @@ xi.amk.helpers.puzzleTwoOnEventUpdate = function(player, csid, option, npc, miss
 end
 
 xi.amk.helpers.puzzleTwoOnEventFinish = function(player, csid, option, npc, mission)
-    local p2Progress = player:getLocalVar('Mission[10][12][p2]progress')
+    local p2Progress = mission:getLocalVar(player, '[p2]progress')
     if csid == 200 then
         if option == 0 then
             -- lost the game, via time or wrong answer - reset vars
-            resetPuzzleVars(player)
+            resetPuzzleVars(player, mission)
         elseif option == 1 then
-            player:setLocalVar('Mission[10][12][p2]progress', p2Progress + 1)
+            mission:setLocalVar(player, '[p2]progress', p2Progress + 1)
         elseif option == 2 and p2Progress == 4 then
             -- Won game, reset all vars
-            resetPuzzleVars(player)
+            resetPuzzleVars(player, mission)
             npcUtil.giveKeyItem(player, xi.ki.GAUNTLET_CHALLENGE_KUPON)
 
             -- Advance to puzzle 3
-            player:setCharVar('Mission[10][12]progress', 3)
-            player:setCharVar('Mission[10][12][p3]stoogeArg', 1)
+            mission:setVar(player, 'progress', 3)
         end
     end
 end
