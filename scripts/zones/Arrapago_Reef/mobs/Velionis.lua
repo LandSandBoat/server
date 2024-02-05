@@ -5,11 +5,10 @@
 mixins = { require('scripts/mixins/rage') }
 -----------------------------------
 local entity = {}
--- Todo: blaze spikes effect only activates while not in casting animation
 
 entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.AUTO_SPIKES, 1)
-    mob:addStatusEffect(xi.effect.BLAZE_SPIKES, 250, 0, 0)
+    mob:addStatusEffect(xi.effect.BLAZE_SPIKES, 200, 0, 0) -- Wiki says "180-230" and we have NO DATA! We don't know what the players conditions/gear was.
     mob:getStatusEffect(xi.effect.BLAZE_SPIKES):setEffectFlags(xi.effectFlag.DEATH)
     mob:setMobMod(xi.mobMod.IDLE_DESPAWN, 300)
 end
@@ -33,26 +32,28 @@ entity.onMobFight = function(mob, target)
 end
 
 entity.onSpikesDamage = function(mob, target, damage)
-    local intDiff = mob:getStat(xi.mod.INT) - target:getStat(xi.mod.INT)
+    -- we don't have an "isCasting()" so use getCurrentAction() instead
+    if mob:getCurrentAction() == xi.action.MAGIC_CASTING then
+        -- No spikes when mid-cast.
+        return 0, 0, 0
+    else
+        -- Again per the note above, we have no data for what the actual damage should be.
+        local intDiff = mob:getStat(xi.mod.INT) - target:getStat(xi.mod.INT)
+        local dmg = damage + intDiff
+        local params = {}
+        params.bonusmab = 0
+        params.includemab = false
+        dmg = addBonusesAbility(mob, xi.element.FIRE, target, dmg, params)
+        dmg = dmg * applyResistanceAddEffect(mob, target, xi.element.FIRE, 0)
+        dmg = adjustForTarget(target, dmg, xi.element.FIRE)
+        dmg = finalMagicNonSpellAdjustments(mob, target, xi.element.FIRE, dmg)
 
-    if intDiff > 20 then
-        intDiff = 20 + (intDiff - 20) * 0.5 -- INT above 20 is half as effective.
+        if dmg < 0 then
+            dmg = 0
+        end
+
+        return xi.subEffect.BLAZE_SPIKES, xi.msg.basic.SPIKES_EFFECT_DMG, dmg
     end
-
-    local dmg = (damage + intDiff) * 0.5 -- INT adjustment and base damage averaged together.
-    local params = {}
-    params.bonusmab = 0
-    params.includemab = false
-    dmg = addBonusesAbility(mob, xi.element.FIRE, target, dmg, params)
-    dmg = dmg * applyResistanceAddEffect(mob, target, xi.element.FIRE, 0)
-    dmg = adjustForTarget(target, dmg, xi.element.FIRE)
-    dmg = finalMagicNonSpellAdjustments(mob, target, xi.element.FIRE, dmg)
-
-    if dmg < 0 then
-        dmg = 0
-    end
-
-    return xi.subEffect.BLAZE_SPIKES, xi.msg.basic.SPIKES_EFFECT_DMG, dmg
 end
 
 entity.onMobDeath = function(mob, player, optParams)

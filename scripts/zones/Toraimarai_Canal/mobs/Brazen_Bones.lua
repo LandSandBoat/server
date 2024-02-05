@@ -6,35 +6,30 @@ local entity = {}
 
 entity.onMobSpawn = function(mob)
     mob:setMobMod(xi.mobMod.AUTO_SPIKES, 1)
-    mob:addStatusEffect(xi.effect.ICE_SPIKES, 45, 0, 0)
+    mob:addStatusEffect(xi.effect.ICE_SPIKES, 50, 0, 0)
     mob:getStatusEffect(xi.effect.ICE_SPIKES):setEffectFlags(xi.effectFlag.DEATH)
     mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
     mob:setMod(xi.mod.ICE_MEVA, 100)
 end
 
--- TODO: Fix onSpikesDamage bug causing spikes to apply damage twice. Commented out until it is resolved.
--- entity.onSpikesDamage = function(mob, target, damage)
---     local intDiff = mob:getStat(xi.mod.INT) - target:getStat(xi.mod.INT)
+entity.onSpikesDamage = function(mob, target, damage)
+    -- "damage" is the power of the status effect up in onMobinitialize.
+    local intDiff = mob:getStat(xi.mod.INT) - target:getStat(xi.mod.INT)
+    local dmg = damage + intDiff
+    local params = {}
+    params.bonusmab = 0
+    params.includemab = false
+    dmg = addBonusesAbility(mob, xi.element.ICE, target, dmg, params)
+    dmg = dmg * applyResistanceAddEffect(mob, target, xi.element.ICE, 0)
+    dmg = adjustForTarget(target, dmg, xi.element.ICE)
+    dmg = finalMagicNonSpellAdjustments(mob, target, xi.element.ICE, dmg)
 
---     if intDiff > 20 then
---         intDiff = 20 + (intDiff - 20) * 0.5 -- INT above 20 is half as effective.
---     end
+    if dmg < 0 then
+        dmg = 0
+    end
 
---     local dmg = (damage + intDiff) * 1.3 -- INT adjustment and base damage averaged together.
---     local params = {}
---     params.bonusmab = 0
---     params.includemab = false
---     dmg = addBonusesAbility(mob, xi.element.ICE, target, dmg, params)
---     dmg = dmg * applyResistanceAddEffect(mob, target, xi.element.ICE, 0)
---     dmg = adjustForTarget(target, dmg, xi.element.ICE)
---     dmg = finalMagicNonSpellAdjustments(mob, target, xi.element.ICE, dmg)
-
---     if dmg < 0 then
---         dmg = 0
---     end
-
---     return xi.subEffect.ICE_SPIKES, xi.msg.basic.SPIKES_EFFECT_DMG, dmg
--- end
+    return xi.subEffect.ICE_SPIKES, xi.msg.basic.SPIKES_EFFECT_DMG, dmg
+end
 
 entity.onAdditionalEffect = function(mob, target, damage)
     return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.ENBLIZZARD)
