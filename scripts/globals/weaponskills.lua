@@ -341,7 +341,7 @@ local function getSingleHitDamage(attacker, target, dmg, wsParams, calcParams)
     then
         if not shadowAbsorb(target) then
             local critChance = math.random() -- See if we land a critical hit
-            criticalHit = (wsParams.canCrit and critChance <= calcParams.critRate) or
+            criticalHit = (wsParams.critMod and critChance <= calcParams.critRate) or
                 calcParams.forcedFirstCrit or
                 calcParams.mightyStrikesApplicable
 
@@ -497,14 +497,11 @@ xi.weaponskills.calculateRawWSDmg = function(attacker, target, wsID, tp, action,
     local ftp = xi.weaponskills.fTP(tp, wsParams.ftp100, wsParams.ftp200, wsParams.ftp300) + calcParams.bonusfTP
 
     -- Calculate critrates
-    local criticalRate = 0
-
     -- TODO: calc per-hit with weapon crit+% on each hand (if dual wielding)
-    if wsParams.canCrit then -- Work out critical hit ratios
-        criticalRate = xi.combat.physical.calculateSwingCriticalRate(attacker, target, true, wsParams.crit100, wsParams.crit200, wsParams.crit300)
+    calcParams.critRate = 0
+    if wsParams.critMod then -- Work out critical hit ratios
+        calcParams.critRate = xi.combat.physical.calculateSwingCriticalRate(attacker, target, wsParams.critMod)
     end
-
-    calcParams.critRate = criticalRate
 
     -- Start the WS
     local hitsDone                = 1
