@@ -18,10 +18,9 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
     params.numHits = 1
     params.ftp100 = 1 params.ftp200 = 1 params.ftp300 = 1
     params.str_wsc = 0.2 params.dex_wsc = 0.2
-    params.crit100 = 0.3 params.crit200 = 0.6 params.crit300 = 0.9
-    -- to do critical hit rate of this ws is base on amount of tp alone, does not consider Critical Hit Rate from dDEX, equipment, or likely merits/base
+    -- TODO: critical hit rate of this ws is base on amount of tp alone, does not consider Critical Hit Rate from dDEX, equipment, or likely merits/base
     -- https://www.bg-wiki.com/ffxi/Blade:_Rin
-    params.canCrit = true
+    params.critVaries = { 0.3, 0.6, 0.9 }
     params.acc100 = 0.0 params.acc200 = 0.0 params.acc300 = 0.0
     params.atk100 = 1 params.atk200 = 1 params.atk300 = 1
 

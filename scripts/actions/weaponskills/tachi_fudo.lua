@@ -18,8 +18,6 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
     params.numHits = 1
     params.ftp100 = 3.75 params.ftp200 = 4.75 params.ftp300 = 5.75
     params.str_wsc = 0.60
-    params.crit100 = 0.0 params.crit200 = 0.0 params.crit300 = 0.0
-    params.canCrit = false
     params.acc100 = 0.0 params.acc200 = 0.0 params.acc300 = 0.0
     params.atk100 = 2 params.atk200 = 2 params.atk300 = 2
 

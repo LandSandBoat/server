@@ -207,14 +207,14 @@ xi.combat.physical.calculateWSC = function(actor, wsSTRmod, wsDEXmod, wsVITmod, 
 end
 
 -- TP factor equation. Used to determine TP modifer across all cases of 'X varies with TP'
-xi.combat.physical.calculateTPfactor = function(actor, TP1000, TP2000, TP3000)
+xi.combat.physical.calculateTPfactor = function(actor, tpModifierTable)
     local tpFactor = 1
     local actorTP  = actor:getTP()
 
     if actorTP >= 2000 then
-        tpFactor = TP2000 + (actorTP - 2000) * (TP3000 - TP2000) / 1000
+        tpFactor = tpModifierTable[2] + (actorTP - 2000) * (tpModifierTable[3] - tpModifierTable[2]) / 1000
     elseif actorTP >= 1000 then
-        tpFactor = TP1000 + (actorTP - 1000) * (TP2000 - TP1000) / 1000
+        tpFactor = tpModifierTable[1] + (actorTP - 1000) * (tpModifierTable[2] - tpModifierTable[1]) / 1000
     end
 
     return tpFactor
@@ -600,7 +600,7 @@ xi.combat.physical.criticalRateFromFlourish = function(actor)
 end
 
 -- Critical rate master function.
-xi.combat.physical.calculateSwingCriticalRate = function(actor, target, isWeaponskill, TP1000, TP2000, TP3000)
+xi.combat.physical.calculateSwingCriticalRate = function(actor, target, optCritModTable)
     -- See reference at https://www.bg-wiki.com/ffxi/Critical_Hit_Rate
     local finalCriticalRate     = 0
     local baseCriticalRate      = 0.05
@@ -615,8 +615,8 @@ xi.combat.physical.calculateSwingCriticalRate = function(actor, target, isWeapon
     local tpFactor              = 0
 
     -- For weaponskills.
-    if isWeaponskill then
-        tpFactor = xi.combat.physical.calculateTPfactor(actor, TP1000, TP2000, TP3000)
+    if optCritModTable then
+        tpFactor = xi.combat.physical.calculateTPfactor(actor, optCritModTable)
     end
 
     -- Add all different bonuses and clamp.

@@ -219,7 +219,7 @@ xi.spells.blue.usePhysicalSpell = function(caster, target, spell, params)
     params.bonusacc     = params.bonusacc == nil and 0 or params.bonusacc
 
     -- params.critchance will only be non-nil if base critchance is passed from spell lua
-    local nativecrit  = xi.combat.physical.calculateSwingCriticalRate(caster, target, false, 0, 0, 0)
+    local nativecrit  = xi.combat.physical.calculateSwingCriticalRate(caster, target)
     params.critchance = params.critchance == nil and 0 or utils.clamp(params.critchance / 100 + nativecrit, 0.05, 0.95)
 
     local cratio  = calculatecRatio(params.offcratiomod / target:getStat(xi.mod.DEF), caster:getMainLvl(), target:getMainLvl())

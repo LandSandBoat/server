@@ -16,9 +16,7 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
     params.ftp100 = 1 params.ftp200 = 1 params.ftp300 = 1
     -- wscs are in % so 0.2=20%
     params.str_wsc = 0.2 params.vit_wsc = 0.2
-    -- critical mods, again in % (ONLY USE FOR CRITICAL HIT VARIES WITH TP)
-    params.crit100 = 0.2 params.crit200 = 0.4 params.crit300 = 0.6
-    params.canCrit = true
+    params.critVaries = { 0.2, 0.4, 0.6 }
     -- accuracy mods (ONLY USE FOR ACCURACY VARIES WITH TP) , should be the acc at those %s NOT the penalty values. Leave 0 if acc doesnt vary with tp.
     params.acc100 = 0 params.acc200 = 0 params.acc300 = 0
     -- attack multiplier (only some WSes use this, this varies the actual ratio value, see Tachi: Kasha) 1 is default.

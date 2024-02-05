@@ -20,18 +20,8 @@ local function getJumpWSParams(player, atkMultiplier, tpMultiplier, forceCrit)
         ftp200  = 1,
         ftp300  = 1,
 
-        str_wsc = 0.0,
-        dex_wsc = 0.0,
-        vit_wsc = 0.0,
-        agi_wsc = 0.0,
-        int_wsc = 0.0,
-        mnd_wsc = 0.0,
-        chr_wsc = 0.0,
-
-        crit100 = 0.0,
-        crit200 = 0.0,
-        crit300 = 0.0,
-        canCrit = true,
+        -- NOTE: critVaries exists without values since while no modifier, it can crit.
+        critVaries = { 0.0, 0.0, 0.0 },
 
         acc100 = 0.0,
         acc200 = 0.0,
@@ -49,9 +39,7 @@ local function getJumpWSParams(player, atkMultiplier, tpMultiplier, forceCrit)
     }
 
     if player:getMod(xi.mod.FORCE_JUMP_CRIT) > 0 or forceCrit then
-        params.crit100 = 1.0
-        params.crit200 = 1.0
-        params.crit300 = 1.0
+        params.critVaries = { 1.0, 1.0, 1.0 }
     end
 
     return params
