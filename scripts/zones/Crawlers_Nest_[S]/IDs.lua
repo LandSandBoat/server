@@ -7,6 +7,7 @@ zones[xi.zone.CRAWLERS_NEST_S] =
 {
     text =
     {
+        CAMPAIGN_RESULTS_TALLIED      = 437,  -- Campaign results tallied.
         ITEM_CANNOT_BE_OBTAINED       = 6906, -- You cannot obtain the <item>. Come back after sorting your inventory.
         ITEM_OBTAINED                 = 6912, -- Obtained: <item>.
         GIL_OBTAINED                  = 6913, -- Obtained <number> gil.
@@ -27,6 +28,7 @@ zones[xi.zone.CRAWLERS_NEST_S] =
     },
     npc =
     {
+        CAMPAIGN_NPC_OFFSET = GetFirstID('Chefroucauld_TK') -- San, Bas, Win, Flag +4, CA
     },
 }
 

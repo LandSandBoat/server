@@ -27,6 +27,7 @@ zones[xi.zone.BASTOK_MARKETS_S] =
         HOMEPOINT_SET                 = 10844, -- Home point set!
         KARLOTTE_DELIVERY_DIALOG      = 10878, -- I am here to help with all your parcel delivery needs.
         WELDON_DELIVERY_DIALOG        = 10879, -- Do you have something you wish to send?
+        CAMPAIGN_RESULTS_TALLIED      = 11763, -- Campaign results tallied.
         ALLIED_SIGIL                  = 12367, -- You have received the Allied Sigil!
         SILKE_SHOP_DIALOG             = 12819, -- You wouldn't happen to be a fellow scholar, by any chance? The contents of these pages are beyond me, but perhaps you might glean something from them. They could be yours...for a nominal fee.
         KEVAN_TURN_IN                 = 13566, -- Just as we suspected. This contains a great deal of information that will prove vital to our cause. Hm, what's this? Not sure what to make of this... Doesn't seem to be terribly important. Here, why don't you hang onto it? See if you can't get some use out of it down the road.
@@ -39,7 +40,8 @@ zones[xi.zone.BASTOK_MARKETS_S] =
     },
     npc =
     {
-        SHENNI = 17134281,
+        CAMPAIGN_NPC_OFFSET = GetFirstID('Hostarfaux_TK'), -- San, Bas, Win, Flag +4, CA
+        SHENNI              = 17134281,
     },
 }
 

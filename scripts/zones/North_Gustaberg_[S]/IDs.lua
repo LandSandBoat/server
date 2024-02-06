@@ -16,6 +16,7 @@ zones[xi.zone.NORTH_GUSTABERG_S] =
         LOGIN_NUMBER                  = 7003, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
         MEMBERS_LEVELS_ARE_RESTRICTED = 7023, -- Your party is unable to participate because certain members' levels are restricted.
         LYCOPODIUM_ENTRANCED          = 7068, -- The lycopodium is entranced by a sparkling light...
+        CAMPAIGN_RESULTS_TALLIED      = 7282, -- Campaign results tallied.
         FISHING_MESSAGE_OFFSET        = 7367, -- You can't fish here.
         MINING_IS_POSSIBLE_HERE       = 7556, -- Mining is possible here if you have <item>.
         VOIDWALKER_DESPAWN            = 8141, -- The monster fades before your eyes, a look of disappointment on its face.
@@ -89,7 +90,8 @@ zones[xi.zone.NORTH_GUSTABERG_S] =
 
     npc =
     {
-        MINING = GetTableOfIDs('Mining_Point'),
+        CAMPAIGN_NPC_OFFSET = GetFirstID('Estineau_RK'), -- San, Bas, Win, Flag +4, CA
+        MINING              = GetTableOfIDs('Mining_Point'),
     },
 }
 

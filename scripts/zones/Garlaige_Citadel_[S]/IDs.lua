@@ -16,6 +16,7 @@ zones[xi.zone.GARLAIGE_CITADEL_S] =
         LOGIN_NUMBER                  = 7003, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
         MEMBERS_LEVELS_ARE_RESTRICTED = 7023, -- Your party is unable to participate because certain members' levels are restricted.
         LYCOPODIUM_ENTRANCED          = 7068, -- The lycopodium is entranced by a sparkling light...
+        CAMPAIGN_RESULTS_TALLIED      = 7530, -- Campaign results tallied.
         COMMON_SENSE_SURVIVAL         = 8891, -- It appears that you have arrived at a new survival guide provided by the Servicemen's Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
     mob =
@@ -23,6 +24,7 @@ zones[xi.zone.GARLAIGE_CITADEL_S] =
     },
     npc =
     {
+        CAMPAIGN_NPC_OFFSET = GetFirstID('Lidaise_TK'), -- San, Bas, Win, Flag +4, CA
     },
 }
 
