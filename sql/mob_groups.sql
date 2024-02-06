@@ -5963,7 +5963,7 @@ INSERT INTO `mob_groups` VALUES (14,703,92,'Chatoyant_Quadav',960,0,459,0,0,80,8
 INSERT INTO `mob_groups` VALUES (15,2644,92,'Meteor_Quadav',960,0,1665,0,0,80,83,0);
 INSERT INTO `mob_groups` VALUES (16,6234,92,'Platinum_Quadav',960,0,2005,0,0,80,83,0);
 INSERT INTO `mob_groups` VALUES (17,6248,92,'Steel_Quadav',960,0,2331,0,0,80,83,0);
-INSERT INTO `mob_groups` VALUES (18,1325,92,'Ferroalloy_Quadav',960,0,826,0,0,80,83,0);
+INSERT INTO `mob_groups` VALUES (18,1325,92,'Ferroalloy_Quadav',960,0,3292,0,0,80,83,0);
 INSERT INTO `mob_groups` VALUES (19,324,92,'Baetyl_Quadav',960,0,212,0,0,80,83,0);
 INSERT INTO `mob_groups` VALUES (20,377,92,'BaTho_Mercifulheart',0,32,3030,0,0,80,81,0);
 INSERT INTO `mob_groups` VALUES (21,928,92,'DaDha_Hundredmask',0,32,3031,0,0,80,81,0);
