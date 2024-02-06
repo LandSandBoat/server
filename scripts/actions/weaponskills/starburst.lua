@@ -14,7 +14,7 @@ local weaponskillObject = {}
 
 weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary, action, taChar)
     local params = {}
-    params.ftp100 = 1 params.ftp200 = 2 params.ftp300 = 2.5
+    params.ftpMod = { 1.0, 2.0, 2.5 }
     params.skill = xi.skill.STAFF
     params.includemab = true
     -- 50/50 shot of being light or dark

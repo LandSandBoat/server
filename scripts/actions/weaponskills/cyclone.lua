@@ -16,15 +16,16 @@ local weaponskillObject = {}
 
 weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary, action, taChar)
     local params = {}
-    params.ftp100 = 1 params.ftp200 = 2.375 params.ftp300 = 2.875
+    params.ftpMod = { 1.0, 2.375, 2.875 }
     params.dex_wsc = 0.3 params.int_wsc = 0.25
     params.ele = xi.element.WIND
     params.skill = xi.skill.DAGGER
     params.includemab = true
 
     if xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES then
+        -- http://wiki.ffo.jp/html/685.html
         params.dex_wsc = 0.4 params.int_wsc = 0.4
-        params.ftp300 = 3.75 -- http://wiki.ffo.jp/html/685.html
+        params.ftpMod = { 1.0, 2.375, 3.75 }
     end
 
     local damage, criticalHit, tpHits, extraHits = xi.weaponskills.doMagicWeaponskill(player, target, wsID, params, tp, action, primary)

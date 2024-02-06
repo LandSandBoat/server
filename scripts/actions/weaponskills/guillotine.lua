@@ -12,8 +12,7 @@ local weaponskillObject = {}
 weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary, action, taChar)
     local params = {}
     params.numHits = 4
-    -- ftp damage mods (for Damage Varies with TP lines are calculated in the function
-    params.ftp100 = 0.875 params.ftp200 = 0.875 params.ftp300 = 0.875
+    params.ftpMod = { 0.875, 0.875, 0.875 }
     -- wscs are in % so 0.2=20%
     params.str_wsc = 0.25 params.mnd_wsc = 0.25
     -- accuracy mods (ONLY USE FOR accURACY VARIES WITH TP) , should be the params.acc at those %s NOT the penalty values. Leave 0 if acc doesnt vary with tp.

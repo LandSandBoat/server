@@ -14,14 +14,14 @@ local weaponskillObject = {}
 weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary, action, taChar)
     local params = {}
     params.numHits = 3
-    params.ftp100 = 2.25 params.ftp200 = 2.25 params.ftp300 = 2.25
+    params.ftpMod = { 2.25, 2.25, 2.25 }
     params.dex_wsc = 0.6
     params.critVaries = { 0.15, 0.25, 0.4 }
     params.acc100 = 0.0 params.acc200 = 0.0 params.acc300 = 0.0
     params.atk100 = 1.0 params.atk200 = 1.0 params.atk300 = 1.0
 
     if xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES then
-        params.ftp100 = 1.6328 params.ftp200 = 1.6328 params.ftp300 = 1.6328
+        params.ftpMod = { 1.6328125, 1.6328125, 1.6328125 }
         params.dex_wsc = 0.8
         params.multiHitfTP = true -- https://www.bg-wiki.com/ffxi/Chant_du_Cygne
     end

@@ -16,7 +16,7 @@ local weaponskillObject = {}
 weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary, action, taChar)
     local params = {}
     params.numHits = 7
-    params.ftp100 = 0.88 params.ftp200 = 0.88 params.ftp300 = 0.88
+    params.ftpMod = { 0.88, 0.88, 0.88 }
     params.mnd_wsc = player:getMerit(xi.merit.REALMRAZER) * 0.17
     params.acc100 = 0.8 params.acc200 = 0.9 params.acc300 = 1.0 -- TODO: verify -- "Accuracy varies with TP" in retail. All current evidence points to that this modifier is static values, not percentages.
     params.atk100 = 1.0 params.atk200 = 1.0 params.atk300 = 1.0

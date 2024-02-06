@@ -16,7 +16,7 @@ local weaponskillObject = {}
 weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary, action, taChar)
     local params = {}
     params.numHits = 5
-    params.ftp100 = 1.0625 params.ftp200 = 1.0625 params.ftp300 = 1.0625
+    params.ftpMod = { 1.0625, 1.0625, 1.0625 }
     params.dex_wsc = player:getMerit(xi.merit.SHIJIN_SPIRAL) * 0.17
     params.acc100 = 0.0 params.acc200 = 0.0 params.acc300 = 0.0
     params.atk100 = 1.05 params.atk200 = 1.05 params.atk300 = 1.05
@@ -24,7 +24,7 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
 
     if xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES then
         params.multiHitfTP = true -- http://wiki.ffo.jp/html/25607.html
-        params.ftp100 = 1.5 params.ftp200 = 1.5 params.ftp300 = 1.5
+        params.ftpMod = { 1.5, 1.5, 1.5 }
         params.dex_wsc = 0.7 + (player:getMerit(xi.merit.SHIJIN_SPIRAL) * 0.03)
     end
 

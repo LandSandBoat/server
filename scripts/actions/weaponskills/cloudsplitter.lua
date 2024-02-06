@@ -14,14 +14,14 @@ local weaponskillObject = {}
 
 weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary, action, taChar)
     local params = {}
-    params.ftp100 = 3.75 params.ftp200 = 5.0 params.ftp300 = 6.0
+    params.ftpMod = { 3.75, 5.0, 6.0 }
     params.str_wsc = 0.4 params.mnd_wsc = 0.4
     params.ele = xi.element.THUNDER
     params.skill = xi.skill.AXE
     params.includemab = true
 
     if xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES then
-        params.ftp200 = 6.7 params.ftp300 = 8.5
+        params.ftpMod = { 3.75, 6.7, 8.5 }
     end
 
     -- Apply aftermath

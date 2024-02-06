@@ -16,7 +16,7 @@ local weaponskillObject = {}
 weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary, action, taChar)
     local params = {}
     params.numHits = 1
-    params.ftp100 = 1 params.ftp200 = 1 params.ftp300 = 1
+    params.ftpMod = { 1.0, 1.0, 1.0 }
     params.str_wsc = 0.2 params.dex_wsc = 0.2
     -- TODO: critical hit rate of this ws is base on amount of tp alone, does not consider Critical Hit Rate from dDEX, equipment, or likely merits/base
     -- https://www.bg-wiki.com/ffxi/Blade:_Rin

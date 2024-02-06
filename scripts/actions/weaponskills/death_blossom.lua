@@ -17,8 +17,7 @@ local weaponskillObject = {}
 weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary, action, taChar)
     local params = {}
     params.numHits = 3
-    -- ftp damage mods (for Damage Varies with TP lines are calculated in the function
-    params.ftp100 = 1.125 params.ftp200 = 1.125 params.ftp300 = 1.125
+    params.ftpMod = { 1.125, 1.125, 1.125 }
     -- wscs are in % so 0.2=20%
     params.str_wsc = 0.3
     params.mnd_wsc = 0.5
@@ -28,7 +27,7 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
     params.atk100 = 1 params.atk200 = 1 params.atk300 = 1
 
     if xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES then
-        params.ftp100 = 4.0 params.ftp200 = 4.0 params.ftp300 = 4.0
+        params.ftpMod = { 4.0, 4.0, 4.0 }
     end
 
     -- Apply aftermath

@@ -13,7 +13,7 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
     local params = {}
     params.numHits = 1
     -- ftp damage mods (for Damage Varies with TP lines are calculated in the function
-    params.ftp100 = 1 params.ftp200 = 1 params.ftp300 = 1
+    params.ftpMod = { 1.0, 1.0, 1.0 }
     -- wscs are in % so 0.2=20%
     params.str_wsc = 0.2 params.vit_wsc = 0.2
     params.critVaries = { 0.2, 0.4, 0.6 }

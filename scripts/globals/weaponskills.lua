@@ -878,7 +878,7 @@ xi.weaponskills.doRangedWeaponskill = function(attacker, target, wsID, wsParams,
     return finaldmg, calcParams.criticalHit, calcParams.tpHitsLanded, calcParams.extraHitsLanded, calcParams.shadowsAbsorbed
 end
 
--- params: ftp100, ftp200, ftp300, wsc_str, wsc_dex, wsc_vit, wsc_agi, wsc_int, wsc_mnd, wsc_chr,
+-- params: ftpMod, wsc_str, wsc_dex, wsc_vit, wsc_agi, wsc_int, wsc_mnd, wsc_chr,
 --         ele (xi.element.FIRE), skill (xi.skill.STAFF)
 
 xi.weaponskills.doMagicWeaponskill = function(attacker, target, wsID, wsParams, tp, action, primaryMsg)

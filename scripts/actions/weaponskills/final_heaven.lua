@@ -16,8 +16,7 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
     params.numHits = 2
     -- stat-modifiers (0.0 = 0%, 0.2 = 20%, 0.5 = 50%..etc)
     params.vit_wsc = 0.6
-    -- ftp damage mods (for Damage Varies with TP lines are calculated in the function params.ftp)
-    params.ftp100 = 3.0 params.ftp200 = 3.0 params.ftp300 = 3.0
+    params.ftpMod = { 3.0, 3.0, 3.0 }
     -- accuracy modifiers (0.0 = 0%, 0.2 = 20%, 0.5 = 50%..etc) Keep 0 if ws doesn't have accuracy modification.
     params.acc100 = 0.0 params.acc200 = 0.0 params.acc300 = 0.0
     -- attack multiplier (only some WSes use this, this varies the actual ratio value, see Tachi: Kasha) 1 is default.
@@ -32,7 +31,6 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
     -- Apply aftermath
     xi.aftermath.addStatusEffect(player, tp, xi.slot.MAIN, xi.aftermath.type.RELIC)
 
-    -- damage = damage * ftp(tp, ftp100, ftp200, ftp300)
     local damage, criticalHit, tpHits, extraHits = xi.weaponskills.doPhysicalWeaponskill(player, target, wsID, params, tp, action, primary, taChar)
 
     return tpHits, extraHits, criticalHit, damage

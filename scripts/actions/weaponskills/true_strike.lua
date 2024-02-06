@@ -17,7 +17,7 @@ local weaponskillObject = {}
 weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary, action, taChar)
     local params = {}
     params.numHits = 1
-    params.ftp100 = 1 params.ftp200 = 1 params.ftp300 = 1
+    params.ftpMod = { 1.0, 1.0, 1.0 }
     params.str_wsc = 0.5
     params.critVaries = { 1.0, 1.0, 1.0 }
     params.acc100 = 0.5 params.acc200 = 0.7 params.acc300 = 1 -- TODO: verify -- "Accuracy varies with TP" in retail. All current evidence points to that this modifier is static values, not percentages.

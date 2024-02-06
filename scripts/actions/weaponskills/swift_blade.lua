@@ -16,7 +16,7 @@ local weaponskillObject = {}
 weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary, action, taChar)
     local params = {}
     params.numHits = 3
-    params.ftp100 = 1.5 params.ftp200 = 1.5 params.ftp300 = 1.5
+    params.ftpMod = { 1.5, 1.5, 1.5 }
     params.str_wsc = 0.3
     params.mnd_wsc = 0.3
     -- Sufficient data for ACC bonus/penalty does not exist; assuming no penalty and 10% increase per 1000 TP

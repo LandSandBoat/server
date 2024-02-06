@@ -21,7 +21,7 @@ local weaponskillObject = {}
 weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary, action, taChar)
     local params = {}
     params.numHits = 5
-    params.ftp100 = 1.0 params.ftp200 = 1.0 params.ftp300 = 1.0
+    params.ftpMod = { 1.0, 1.0, 1.0 }
     params.str_wsc = 0.1 params.dex_wsc = 0.1
     -- Sufficient data for ACC bonus/penalty does not exist; assuming no penalty and 10% increase per 1000 TP
     -- http://wiki.ffo.jp/html/732.html does not list ACC Bonus
@@ -30,7 +30,7 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
     params.atk100 = 1.0 params.atk200 = 1.0 params.atk300 = 1.0
 
     if xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES then
-        params.ftp100 = 1.25 params.ftp200 = 1.25 params.ftp300 = 1.25
+        params.ftpMod = { 1.25, 1.25, 1.25 }
         params.str_wsc = 0.3 params.dex_wsc = 0.3
         params.multiHitfTP = true
     end
