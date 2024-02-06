@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
   Copyright (c) 2010-2015 Darkstar Dev Teams
   This program is free software: you can redistribute it and/or modify
@@ -317,6 +317,23 @@ enum class Mod
     LULLABYRES  = 254, // Enhances "Resist Lullaby" effect
     DEATHRES    = 255, // Used by gear and ATMA that give resistance to instance KO
     STATUSRES   = 958, // "Resistance to All Status Ailments"
+
+    SLEEPRESBUILD    = 1080, // Used to create a resbuild for the appropriate effect. Will decrease overall duration of effect. (seconds)
+    POISONRESBUILD   = 1081, // Used to create a resbuild for the appropriate effect. Will decrease overall duration of effect. (seconds)
+    PARALYZERESBUILD = 1082, // Used to create a resbuild for the appropriate effect. Will decrease overall duration of effect. (seconds)
+    BLINDRESBUILD    = 1083, // Used to create a resbuild for the appropriate effect. Will decrease overall duration of effect. (seconds)
+    SILENCERESBUILD  = 1084, // Used to create a resbuild for the appropriate effect. Will decrease overall duration of effect. (seconds)
+    VIRUSRESBUILD    = 1085, // Used to create a resbuild for the appropriate effect. Will decrease overall duration of effect. (seconds)
+    PETRIFYRESBUILD  = 1086, // Used to create a resbuild for the appropriate effect. Will decrease overall duration of effect. (seconds)
+    BINDRESBUILD     = 1087, // Used to create a resbuild for the appropriate effect. Will decrease overall duration of effect. (seconds)
+    CURSERESBUILD    = 1088, // Used to create a resbuild for the appropriate effect. Will decrease overall duration of effect. (seconds)
+    GRAVITYRESBUILD  = 1089, // Used to create a resbuild for the appropriate effect. Will decrease overall duration of effect. (seconds)
+    SLOWRESBUILD     = 1090, // Used to create a resbuild for the appropriate effect. Will decrease overall duration of effect. (seconds)
+    STUNRESBUILD     = 1091, // Used to create a resbuild for the appropriate effect. Will decrease overall duration of effect. (seconds)
+    CHARMRESBUILD    = 1092, // Used to create a resbuild for the appropriate effect. Will decrease overall duration of effect. (seconds)
+    AMNESIARESBUILD  = 1093, // Used to create a resbuild for the appropriate effect. Will decrease overall duration of effect. (seconds)
+    LULLABYRESBUILD  = 1094, // Used to create a resbuild for the appropriate effect. Will decrease overall duration of effect. (seconds)
+    DEATHRESBUILD    = 1095, // Used to create a resbuild for the appropriate effect. Will decrease overall duration of effect. (seconds)
 
     // MEVA bonus to enfeebles (Bar-Effect, for example. And modifiers in mobs)
     SLEEP_MEVA    = 200,
@@ -1004,7 +1021,7 @@ enum class Mod
     // 217 to 223
     // 273 to 280
     //
-    // SPARE = 1080 and onward
+    // SPARE = 1096 and onward
 };
 
 // temporary workaround for using enum class as unordered_map key until compilers support it
