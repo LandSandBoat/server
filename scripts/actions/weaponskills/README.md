@@ -6,6 +6,10 @@
 Example: `ftpMod = { 1.0, 2.0, 5.0 }`
 
 NOTE: The below modifiers should _ONLY_ be set if applicable to the WS.
+----------------------------
+`accVaries`  : Table of 3 floating point elements to represent points on the piecemeal function for modifiers (points at 1000, 2000, and 3000 TP).
+
+Example: `accVaries = { 0.8, 0.9, 1.0 }`
 
 `critVaries` : Table of 3 floating point elements to represent points on the piecemeal function for modifiers (points at 1000, 2000, and 3000 TP).
 

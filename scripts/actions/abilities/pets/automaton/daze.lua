@@ -15,9 +15,6 @@ abilityObject.onAutomatonAbility = function(target, automaton, skill, master, ac
         atkmulti = 1,
         accBonus = 150,
         ftpMod = { 5.0, 5.5, 6.0 },
-        acc100 = 0.0,
-        acc200 = 0.0,
-        acc300 = 0.0,
     }
 
     if xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES then

@@ -15,9 +15,6 @@ abilityObject.onAutomatonAbility = function(target, automaton, skill, master, ac
         atkmulti = 2.25,
         accBonus = 50,
         ftpMod = { 6.0, 6.0, 6.0 },
-        acc100 = 0.0,
-        acc200 = 0.0,
-        acc300 = 0.0,
         dex_wsc = 0.5,
     }
 

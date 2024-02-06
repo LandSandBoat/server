@@ -19,7 +19,6 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
     params.ftpMod = { 2.75, 2.75, 2.75 }
     params.str_wsc = 0.4
     params.agi_wsc = 0.4
-    params.acc100 = 0.0 params.acc200 = 0.0 params.acc300 = 0.0
     params.atk100 = 1 params.atk200 = 1 params.atk300 = 1
     params.overrideCE = 160
     params.overrideVE = 480

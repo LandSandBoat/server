@@ -17,8 +17,6 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
     -- stat-modifiers (0.0 = 0%, 0.2 = 20%, 0.5 = 50%..etc)
     params.vit_wsc = 0.6
     params.ftpMod = { 3.0, 3.0, 3.0 }
-    -- accuracy modifiers (0.0 = 0%, 0.2 = 20%, 0.5 = 50%..etc) Keep 0 if ws doesn't have accuracy modification.
-    params.acc100 = 0.0 params.acc200 = 0.0 params.acc300 = 0.0
     -- attack multiplier (only some WSes use this, this varies the actual ratio value, see Tachi: Kasha) 1 is default.
     params.atk100 = 1 params.atk200 = 1 params.atk300 = 1
 

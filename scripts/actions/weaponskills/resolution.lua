@@ -20,7 +20,6 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
     params.numHits = 5
     params.ftpMod = { 0.71875, 0.84375, 0.96875 }
     params.str_wsc = player:getMerit(xi.merit.RESOLUTION) * 0.17
-    params.acc100 = 0.0 params.acc200 = 0.0 params.acc300 = 0.0
     params.atk100 = 0.85 params.atk200 = 0.85 params.atk300 = 0.85
     params.multiHitfTP = true
 

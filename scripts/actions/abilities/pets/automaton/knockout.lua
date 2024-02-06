@@ -16,9 +16,6 @@ abilityObject.onAutomatonAbility = function(target, automaton, skill, master, ac
         accBonus = 50,
         weaponType = xi.skill.CLUB,
         ftpMod = { 4.0, 5.0, 5.5 },
-        acc100 = 0.0,
-        acc200 = 0.0,
-        acc300 = 0.0,
     }
 
     if xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES then

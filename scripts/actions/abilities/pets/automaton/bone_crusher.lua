@@ -15,9 +15,6 @@ abilityObject.onAutomatonAbility = function(target, automaton, skill, master, ac
         atkmulti = 1,
         weaponType = xi.skill.CLUB,
         ftpMod = { 1.5, 1.5, 1.5 },
-        acc100 = 0.0,
-        acc200 = 0.0,
-        acc300 = 0.0,
         vit_wsc = 0.6,
     }
 

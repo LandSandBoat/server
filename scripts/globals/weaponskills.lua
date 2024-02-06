@@ -309,19 +309,14 @@ local function getRangedHitRate(attacker, target, capHitRate, bonus)
 
     hitdiff = (acc - eva) / 2 -- no need to check if eva is hier or lower than acc it will be negative if eva is higher and positive if acc is higher
 
-    hitrate = hitrate + hitdiff
-    hitrate = hitrate / 100
+    hitrate = (hitrate + hitdiff) / 100
 
     -- Applying hitrate caps
     if capHitRate then -- this isn't capped for when acc varies with tp, as more penalties are due
-        if hitrate > 0.95 then
-            hitrate = 0.95
-        end
+        hitrate = math.min(capHitRate, 0.95)
     end
 
-    if hitrate < 0.2 then
-        hitrate = 0.2
-    end
+    hitrate = math.max(hitrate, 0.2)
 
     return hitrate
 end

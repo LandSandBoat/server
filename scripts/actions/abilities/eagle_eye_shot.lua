@@ -46,7 +46,6 @@ abilityObject.onUseAbility = function(player, target, ability, action)
     -- TP params.
     params.ftpMod     = { 5.0, 5.0, 5.0 }
     params.critVaries = { 0.0, 0.0, 0.0 }
-    params.acc100  = 0 params.acc200  = 0 params.acc300  = 0
     params.atk100  = 1 params.atk200  = 1 params.atk300  = 1
 
     -- Stat params.
