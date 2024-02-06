@@ -158,7 +158,7 @@ end
 
 local function accVariesWithTP(baseHitRate, acc, tp, a1, a2, a3)
     -- acc varies with tp ALL apply an acc PENALTY, the acc at various %s are given as a1 a2 a3
-    local accLost      = acc - acc * xi.weaponskills.fTP(tp, a1, a2, a3)
+    local accLost      = acc - acc * xi.weaponskills.fTP(tp, { a1, a2, a3 })
     local finalHitRate = baseHitRate - accLost / 200
 
     finalHitRate = utils.clamp(finalHitRate, 0.2, 0.95)
@@ -216,7 +216,7 @@ local function getMultiAttacks(attacker, target, wsParams, firstHit, offHand)
 end
 
 local function cRangedRatio(attacker, defender, params, ignoredDef, tp)
-    local atkmulti        = xi.weaponskills.fTP(tp, params.atk100, params.atk200, params.atk300)
+    local atkmulti        = xi.weaponskills.fTP(tp, { params.atk100, params.atk200, params.atk300 })
     local cratio          = attacker:getRATT() / (defender:getStat(xi.mod.DEF) - ignoredDef)
     local levelCorrection = 0
 
@@ -451,7 +451,7 @@ end
 -- Behavior of damage calculations can vary based on the passed in calcParams, which are determined by the calling function
 -- depending on the type of weaponskill being done, and any special cases for that weaponskill
 --
--- wsParams can contain: ftp100, ftp200, ftp300, str_wsc, dex_wsc, vit_wsc, int_wsc, mnd_wsc, critVaries,
+-- wsParams can contain: ftpMod, str_wsc, dex_wsc, vit_wsc, int_wsc, mnd_wsc, critVaries,
 -- acc100, acc200, acc300, ignoresDef, ignore100, ignore200, ignore300, atk100, atk200, atk300, kick, hybridWS, hitsHigh, formless
 --
 -- See xi.weaponskills.doPhysicalWeaponskill or xi.weaponskills.doRangedWeaponskill for how calcParams are determined.
@@ -494,7 +494,7 @@ xi.weaponskills.calculateRawWSDmg = function(attacker, target, wsID, tp, action,
     local mainBase = calcParams.weaponDamage[1] + wsMods + calcParams.bonusWSmods
 
     -- Calculate fTP multiplier
-    local ftp = xi.weaponskills.fTP(tp, wsParams.ftp100, wsParams.ftp200, wsParams.ftp300) + calcParams.bonusfTP
+    local ftp = xi.weaponskills.fTP(tp, wsParams.ftpMod) + calcParams.bonusfTP
 
     -- Calculate critrates
     -- TODO: calc per-hit with weapon crit+% on each hand (if dual wielding)
@@ -928,7 +928,7 @@ xi.weaponskills.doMagicWeaponskill = function(attacker, target, wsID, wsParams, 
         dmg = dmg + attacker:getMainLvl() + 2 + fint
 
         -- Applying fTP multiplier
-        local ftp = xi.weaponskills.fTP(tp, wsParams.ftp100, wsParams.ftp200, wsParams.ftp300) + bonusfTP
+        local ftp = xi.weaponskills.fTP(tp, wsParams.ftpMod) + bonusfTP
 
         dmg = dmg * ftp
 
@@ -1153,11 +1153,12 @@ xi.weaponskills.getHitRate = function(attacker, target, capHitRate, bonus)
     return hitrate
 end
 
-xi.weaponskills.fTP = function(tp, ftp1, ftp2, ftp3)
+-- TODO: Use a common function with optional multiplier on return, or multiply outside of this.
+xi.weaponskills.fTP = function(tp, ftpTable)
     if tp >= 2000 then
-        return ftp2 + (tp - 2000) * (ftp3 - ftp2) / 1000
+        return ftpTable[2] + (tp - 2000) * (ftpTable[3] - ftpTable[2]) / 1000
     elseif tp >= 1000 then
-        return ftp1 + (tp - 1000) * (ftp2 - ftp1) / 1000
+        return ftpTable[1] + (tp - 1000) * (ftpTable[2] - ftpTable[1]) / 1000
     end
 
     return 1 -- no ftp mod
@@ -1181,7 +1182,7 @@ xi.weaponskills.cMeleeRatio = function(attacker, defender, params, ignoredDef, t
         attacker:addMod(xi.mod.ATTP, 25 + flourishEffect:getSubPower())
     end
 
-    local atkmulti = xi.weaponskills.fTP(tp, params.atk100, params.atk200, params.atk300)
+    local atkmulti = xi.weaponskills.fTP(tp, { params.atk100, params.atk200, params.atk300 })
     local cratio   = attacker:getStat(xi.mod.ATT) * atkmulti / (defender:getStat(xi.mod.DEF) - ignoredDef)
 
     cratio = utils.clamp(cratio, 0, 2.25)
