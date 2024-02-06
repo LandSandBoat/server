@@ -216,7 +216,7 @@ local function getMultiAttacks(attacker, target, wsParams, firstHit, offHand)
 end
 
 local function cRangedRatio(attacker, defender, params, ignoredDef, tp)
-    local atkmulti        = xi.weaponskills.fTP(tp, { params.atk100, params.atk200, params.atk300 })
+    local atkMultiplier   = xi.weaponskills.fTP(tp, params.atkVaries)
     local cratio          = attacker:getRATT() / (defender:getStat(xi.mod.DEF) - ignoredDef)
     local levelCorrection = 0
 
@@ -225,7 +225,7 @@ local function cRangedRatio(attacker, defender, params, ignoredDef, tp)
     end
 
     cratio = cratio - levelCorrection
-    cratio = cratio * atkmulti
+    cratio = cratio * atkMultiplier
 
     -- adding cap check base on weapon https://www.bg-wiki.com/ffxi/PDIF info
     local weaponType = attacker:getWeaponSkillType(xi.slot.RANGED)
@@ -447,7 +447,7 @@ end
 -- depending on the type of weaponskill being done, and any special cases for that weaponskill
 --
 -- wsParams can contain: ftpMod, str_wsc, dex_wsc, vit_wsc, int_wsc, mnd_wsc, critVaries,
--- accVaries, ignoresDef, ignore100, ignore200, ignore300, atk100, atk200, atk300, kick, hybridWS, hitsHigh, formless
+-- accVaries, ignoresDef, ignore100, ignore200, ignore300, atkVaries, kick, hybridWS, hitsHigh, formless
 --
 -- See xi.weaponskills.doPhysicalWeaponskill or xi.weaponskills.doRangedWeaponskill for how calcParams are determined.
 
@@ -1131,32 +1131,33 @@ xi.weaponskills.getHitRate = function(attacker, target, capHitRate, bonus)
     local hitrate = 75
 
     hitdiff = (acc - eva) / 2
-    hitrate = hitrate + hitdiff
-    hitrate = hitrate / 100
+    hitrate = (hitrate + hitdiff) / 100
 
     -- Applying hitrate caps
     if capHitRate then -- this isn't capped for when acc varies with tp, as more penalties are due
-        if hitrate > 0.95 then
-            hitrate = 0.95
-        end
+        hitrate = math.min(hitrate, 0.95)
     end
 
-    if hitrate < 0.2 then
-        hitrate = 0.2
-    end
+    hitrate = math.max(hitrate, 0.2)
 
     return hitrate
 end
 
 -- TODO: Use a common function with optional multiplier on return, or multiply outside of this.
 xi.weaponskills.fTP = function(tp, ftpTable)
+    if
+        not ftpTable or
+        tp < 1000
+    then
+        -- No multiplier if points are not provided, or TP is not at minimum required
+        return 1
+    end
+
     if tp >= 2000 then
         return ftpTable[2] + (tp - 2000) * (ftpTable[3] - ftpTable[2]) / 1000
     elseif tp >= 1000 then
         return ftpTable[1] + (tp - 1000) * (ftpTable[2] - ftpTable[1]) / 1000
     end
-
-    return 1 -- no ftp mod
 end
 
 xi.weaponskills.calculatedIgnoredDef = function(tp, def, ignore1, ignore2, ignore3)
@@ -1177,8 +1178,8 @@ xi.weaponskills.cMeleeRatio = function(attacker, defender, params, ignoredDef, t
         attacker:addMod(xi.mod.ATTP, 25 + flourishEffect:getSubPower())
     end
 
-    local atkmulti = xi.weaponskills.fTP(tp, { params.atk100, params.atk200, params.atk300 })
-    local cratio   = attacker:getStat(xi.mod.ATT) * atkmulti / (defender:getStat(xi.mod.DEF) - ignoredDef)
+    local atkMultiplier = xi.weaponskills.fTP(tp, params.atkVaries)
+    local cratio        = attacker:getStat(xi.mod.ATT) * atkMultiplier / (defender:getStat(xi.mod.DEF) - ignoredDef)
 
     cratio = utils.clamp(cratio, 0, 2.25)
 
