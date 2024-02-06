@@ -156,9 +156,9 @@ local function shadowAbsorb(target)
     return false
 end
 
-local function accVariesWithTP(baseHitRate, acc, tp, a1, a2, a3)
+local function accVariesWithTP(baseHitRate, acc, tp, accuracyVariesTable)
     -- acc varies with tp ALL apply an acc PENALTY, the acc at various %s are given as a1 a2 a3
-    local accLost      = acc - acc * xi.weaponskills.fTP(tp, { a1, a2, a3 })
+    local accLost      = acc - acc * xi.weaponskills.fTP(tp, accuracyVariesTable)
     local finalHitRate = baseHitRate - accLost / 200
 
     finalHitRate = utils.clamp(finalHitRate, 0.2, 0.95)
@@ -452,7 +452,7 @@ end
 -- depending on the type of weaponskill being done, and any special cases for that weaponskill
 --
 -- wsParams can contain: ftpMod, str_wsc, dex_wsc, vit_wsc, int_wsc, mnd_wsc, critVaries,
--- acc100, acc200, acc300, ignoresDef, ignore100, ignore200, ignore300, atk100, atk200, atk300, kick, hybridWS, hitsHigh, formless
+-- accVaries, ignoresDef, ignore100, ignore200, ignore300, atk100, atk200, atk300, kick, hybridWS, hitsHigh, formless
 --
 -- See xi.weaponskills.doPhysicalWeaponskill or xi.weaponskills.doRangedWeaponskill for how calcParams are determined.
 
@@ -464,8 +464,8 @@ xi.weaponskills.calculateRawWSDmg = function(attacker, target, wsID, tp, action,
     local targetHp  = target:getHP() + target:getMod(xi.mod.STONESKIN)
 
     -- Recalculate accuracy if it varies with TP, applied to all hits
-    if wsParams.acc100 ~= 0 then
-        calcParams.hitRate = accVariesWithTP(calcParams.hitRate, calcParams.accStat, tp, wsParams.acc100, wsParams.acc200, wsParams.acc300)
+    if wsParams.accVaries then
+        calcParams.hitRate = accVariesWithTP(calcParams.hitRate, calcParams.accStat, tp, wsParams.accVaries)
     else
         -- clamp hitRate now if accuracy doesn't vary with TP
         calcParams.hitRate = utils.clamp(calcParams.hitRate, 0.2, 0.95)
