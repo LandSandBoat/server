@@ -2342,8 +2342,6 @@ INSERT INTO `mob_droplist` VALUES (236,0,0,1000,859,200);     -- Ram Skin (20.0%
 INSERT INTO `mob_droplist` VALUES (236,0,0,1000,859,170);     -- Ram Skin (17.0%)
 INSERT INTO `mob_droplist` VALUES (236,2,0,1000,832,0);       -- Clump Of Sheep Wool (Steal)
 
--- ZoneID: 185 - Battlechoir Gitchfotch
--- ZoneID: 185 - Soulsender Fugbrag
 -- ZoneID: 185 - Wyrmgnasher Bjakdek
 INSERT INTO `mob_droplist` VALUES (237,0,0,1000,1452,@COMMON); -- Ordelle Bronzepiece (Common, 15%)
 INSERT INTO `mob_droplist` VALUES (237,0,0,1000,1452,@COMMON); -- Ordelle Bronzepiece (Common, 15%)
@@ -12573,8 +12571,6 @@ INSERT INTO `mob_droplist` VALUES (1559,0,0,1000,18802,@UNCOMMON); -- Vallus Gri
 INSERT INTO `mob_droplist` VALUES (1559,0,0,1000,746,80);          -- Platinum Ingot (8.0%)
 INSERT INTO `mob_droplist` VALUES (1559,0,0,1000,4272,30);         -- Slice Of Dragon Meat (3.0%)
 
--- ZoneID: 187 - Maa Febi The Steadfast
--- ZoneID: 187 - Muu Febi The Steadfast
 -- ZoneID: 187 - Xoo Kaza The Solemn
 INSERT INTO `mob_droplist` VALUES (1560,0,0,1000,3355,@VCOMMON); -- Divine Bijou (Very Common, 24%)
 INSERT INTO `mob_droplist` VALUES (1560,0,0,1000,1449,@COMMON);  -- Tukuku Whiteshell (Common, 15%)
