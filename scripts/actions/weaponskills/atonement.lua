@@ -26,7 +26,6 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
     params.numHits = 2
     params.ftpMod = { 1, 1.25, 1.5 }
     params.str_wsc = 0.4 params.vit_wsc = 0.5
-    params.atk100 = 1 params.atk200 = 1 params.atk300 = 1
     params.enmityMult = 1
 
     -- Apply aftermath

@@ -17,8 +17,6 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
     -- stat-modifiers (0.0 = 0%, 0.2 = 20%, 0.5 = 50%..etc)
     params.vit_wsc = 0.6
     params.ftpMod = { 3.0, 3.0, 3.0 }
-    -- attack multiplier (only some WSes use this, this varies the actual ratio value, see Tachi: Kasha) 1 is default.
-    params.atk100 = 1 params.atk200 = 1 params.atk300 = 1
 
     if xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES then
         params.vit_wsc = 0.8

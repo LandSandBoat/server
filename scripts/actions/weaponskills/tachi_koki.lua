@@ -18,7 +18,6 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
     params.numHits = 1
     params.ftpMod = { 0.5, 0.75, 1.0 }
     params.str_wsc = 0.5 params.mnd_wsc = 0.3
-    params.atk100 = 1 params.atk200 = 1 params.atk300 = 1
     params.hybridWS = true
     params.ele = xi.element.LIGHT
     params.skill = xi.skill.GREAT_KATANA

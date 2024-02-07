@@ -16,7 +16,6 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
     params.numHits = 4
     params.ftpMod = { 0.75, 1.25, 1.75 }
     params.str_wsc = player:getMerit(xi.merit.STARDIVER) * 0.17
-    params.atk100 = 1.0 params.atk200 = 1.0 params.atk300 = 1.0
 
     -- https://www.bluegartr.com/threads/106679-Test-Server-Findings?p=4920448&viewfull=1#post4920448
     params.multiHitfTP = true

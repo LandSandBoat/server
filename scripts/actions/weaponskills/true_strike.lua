@@ -20,8 +20,8 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
     params.ftpMod = { 1.0, 1.0, 1.0 }
     params.str_wsc = 0.5
     params.critVaries = { 1.0, 1.0, 1.0 }
-    params.accVaries = { 0.5, 0.7, 1.0 } -- TODO: verify -- "Accuracy varies with TP" in retail. All current evidence points to that this modifier is static values, not percentages.
-    params.atk100 = 2 params.atk200 = 2 params.atk300 = 2
+    params.accVaries  = { 0.5, 0.7, 1.0 } -- TODO: verify -- "Accuracy varies with TP" in retail. All current evidence points to that this modifier is static values, not percentages.
+    params.atkVaries  = { 2.0, 2.0, 2.0 }
 
     if xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES then
         params.str_wsc = 1.0

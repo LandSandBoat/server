@@ -18,7 +18,6 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
     params.numHits = 1
     params.ftpMod = { 1.0, 1.5, 2.0 }
     params.int_wsc = 0.5 params.mnd_wsc = 0.5
-    params.atk100 = 1 params.atk200 = 1 params.atk300 = 1
     local damage, criticalHit, tpHits, extraHits = xi.weaponskills.doPhysicalWeaponskill(player, target, wsID, params, tp, action, primary, taChar)
     player:addMP(damage)
     return tpHits, extraHits, criticalHit, damage

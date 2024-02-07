@@ -23,7 +23,6 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
     -- http://wiki.ffo.jp/html/382.html does not list ACC Bonus
     -- https://www.bg-wiki.com/ffxi/Swift_Blade does not list ACC Bonus
     params.accVaries = { 1.0, 1.1, 1.2 } -- TODO: verify -- "Accuracy varies with TP" in retail. All current evidence points to that this modifier is static values, not percentages.
-    params.atk100 = 1.0 params.atk200 = 1.0 params.atk300 = 1.0
 
     if xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES then
         params.str_wsc = 0.5 params.mnd_wsc = 0.5

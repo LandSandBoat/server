@@ -21,7 +21,6 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
     -- TODO: critical hit rate of this ws is base on amount of tp alone, does not consider Critical Hit Rate from dDEX, equipment, or likely merits/base
     -- https://www.bg-wiki.com/ffxi/Blade:_Rin
     params.critVaries = { 0.3, 0.6, 0.9 }
-    params.atk100 = 1 params.atk200 = 1 params.atk300 = 1
 
     if xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES then
         params.str_wsc = 0.6 params.dex_wsc = 0.6

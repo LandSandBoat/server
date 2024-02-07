@@ -18,7 +18,6 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
     params.numHits = 1
     params.ftpMod = { 1.0, 1.0, 1.0 }
     params.vit_wsc = 0.4
-    params.atk100 = 1 params.atk200 = 1 params.atk300 = 1
     -- Defense ignored is 0%, 30%, 50% as per http://www.bg-wiki.com/bg/One_Inch_Punch
     params.ignoresDef = true
     params.ignored100 = 0

@@ -17,7 +17,6 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
     params.numHits = 1
     params.ftpMod = { 0.5, 0.75, 1.0 }
     params.str_wsc = 0.2 params.int_wsc = 0.2
-    params.atk100 = 1 params.atk200 = 1 params.atk300 = 1
     params.hybridWS = true
     params.ele = xi.element.WATER
     params.skill = xi.skill.KATANA

@@ -20,7 +20,7 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
     params.numHits = 5
     params.ftpMod = { 0.71875, 0.84375, 0.96875 }
     params.str_wsc = player:getMerit(xi.merit.RESOLUTION) * 0.17
-    params.atk100 = 0.85 params.atk200 = 0.85 params.atk300 = 0.85
+    params.atkVaries = { 0.85, 0.85, 0.85 }
     params.multiHitfTP = true
 
     if xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES then
