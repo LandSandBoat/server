@@ -565,18 +565,19 @@ end
 -- Fencer: Critical hit rate bonus when actor is only wielding with main hand.
 xi.combat.physical.criticalRateFromFencer = function(actor)
     local fencerBonus = 0
+    -- TODO: do any Trusts or mobs ever get Fencer bonuses?
 
-    local mainEquip = actor:getStorageItem(0, 0, xi.slot.MAIN)
-    local subEquip  = actor:getStorageItem(0, 0, xi.slot.SUB)
-
-    if
-        actor:getObjType() == xi.objType.PC and
-        mainEquip and
-        not mainEquip:isTwoHanded() and                                                      -- No 2 handed weapons.
-        not mainEquip:isHandToHand() and                                                     -- No 2 handed weapons.
-        (subEquip == nil or subEquip:getSkillType() == xi.skill.NONE or subEquip:isShield()) -- Only shields allowed in sub.
-    then
-        fencerBonus = actor:getMod(xi.mod.FENCER_CRITHITRATE) / 100
+    if actor:getObjType() == xi.objType.PC then
+        local mainEquip = actor:getStorageItem(0, 0, xi.slot.MAIN)
+        local subEquip  = actor:getStorageItem(0, 0, xi.slot.SUB)
+        if
+            mainEquip and
+            not mainEquip:isTwoHanded() and                                                      -- No 2 handed weapons.
+            not mainEquip:isHandToHand() and                                                     -- No 2 handed weapons.
+            (subEquip == nil or subEquip:getSkillType() == xi.skill.NONE or subEquip:isShield()) -- Only shields allowed in sub.
+        then
+            fencerBonus = actor:getMod(xi.mod.FENCER_CRITHITRATE) / 100
+        end
     end
 
     return fencerBonus
