@@ -24,10 +24,7 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
     end
 
     -- Defense ignored is 0%, 35%, 50% as per wiki.bluegartr.com
-    params.ignoresDef = true
-    params.ignored100 = 0
-    params.ignored200 = 0.35
-    params.ignored300 = 0.5
+    params.ignoredDefense = { 0.0, 0.35, 0.5 }
 
     local damage, criticalHit, tpHits, extraHits = xi.weaponskills.doRangedWeaponskill(player, target, wsID, params, tp, action, primary)
     return tpHits, extraHits, criticalHit, damage

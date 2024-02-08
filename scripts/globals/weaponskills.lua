@@ -447,7 +447,7 @@ end
 -- depending on the type of weaponskill being done, and any special cases for that weaponskill
 --
 -- wsParams can contain: ftpMod, str_wsc, dex_wsc, vit_wsc, int_wsc, mnd_wsc, critVaries,
--- accVaries, ignoresDef, ignore100, ignore200, ignore300, atkVaries, kick, hybridWS, hitsHigh, formless
+-- accVaries, ignoredDefense, atkVaries, kick, hybridWS, hitsHigh, formless
 --
 -- See xi.weaponskills.doPhysicalWeaponskill or xi.weaponskills.doRangedWeaponskill for how calcParams are determined.
 
@@ -736,12 +736,7 @@ end
 -- damage is returned, handles reductions based on target resistances and passes off to xi.weaponskills.takeWeaponskillDamage.
 xi.weaponskills.doPhysicalWeaponskill = function(attacker, target, wsID, wsParams, tp, action, primaryMsg, taChar)
     -- Determine cratio and ccritratio
-    local ignoredDef = 0
-
-    if wsParams.ignoresDef then
-        ignoredDef = xi.weaponskills.calculatedIgnoredDef(tp, target:getStat(xi.mod.DEF), wsParams.ignored100, wsParams.ignored200, wsParams.ignored300)
-    end
-
+    local ignoredDef         = xi.weaponskills.calculatedIgnoredDef(tp, target:getStat(xi.mod.DEF), wsParams.ignoredDefense)
     local cratio, ccritratio = xi.weaponskills.cMeleeRatio(attacker, target, wsParams, ignoredDef, tp)
 
     -- Set up conditions and wsParams used for calculating weaponskill damage
@@ -811,12 +806,7 @@ end
 -- damage is returned, handles reductions based on target resistances and passes off to xi.weaponskills.takeWeaponskillDamage.
 xi.weaponskills.doRangedWeaponskill = function(attacker, target, wsID, wsParams, tp, action, primaryMsg)
     -- Determine cratio and ccritratio
-    local ignoredDef = 0
-
-    if wsParams.ignoresDef then
-        ignoredDef = xi.weaponskills.calculatedIgnoredDef(tp, target:getStat(xi.mod.DEF), wsParams.ignored100, wsParams.ignored200, wsParams.ignored300)
-    end
-
+    local ignoredDef         = xi.weaponskills.calculatedIgnoredDef(tp, target:getStat(xi.mod.DEF), wsParams.ignoredDefense)
     local cratio, ccritratio = cRangedRatio(attacker, target, wsParams, ignoredDef, tp)
 
     -- Set up conditions and params used for calculating weaponskill damage
@@ -1160,14 +1150,19 @@ xi.weaponskills.fTP = function(tp, ftpTable)
     end
 end
 
-xi.weaponskills.calculatedIgnoredDef = function(tp, def, ignore1, ignore2, ignore3)
-    if tp >= 2000 then
-        return (ignore2 + (tp - 2000) * (ignore3 - ignore2) / 1000) * def
-    elseif tp >= 1000 then
-        return (ignore1 + (tp - 1000) * (ignore2 - ignore1) / 1000) * def
+xi.weaponskills.calculatedIgnoredDef = function(tp, def, ignoredDefenseTable)
+    if
+        not ignoredDefenseTable or
+        tp < 1000
+    then
+        return 1
     end
 
-    return 1 -- no def ignore mod
+    if tp >= 2000 then
+        return (ignoredDefenseTable[2] + (tp - 2000) * (ignoredDefenseTable[3] - ignoredDefenseTable[2]) / 1000) * def
+    elseif tp >= 1000 then
+        return (ignoredDefenseTable[1] + (tp - 1000) * (ignoredDefenseTable[2] - ignoredDefenseTable[1]) / 1000) * def
+    end
 end
 
 -- Given the raw ratio value (atk/def) and levels, returns the cRatio (min then max)

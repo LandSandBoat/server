@@ -20,7 +20,7 @@ local function getJumpWSParams(player, atkMultiplier, tpMultiplier, forceCrit)
 
         -- NOTE: critVaries exists without values since while no modifier, it can crit.
         critVaries = { 0.0, 0.0, 0.0 },
-        atkVaries  = { atkMultiplier, atkMultiplier, atkMultiplier }
+        atkVaries  = { atkMultiplier, atkMultiplier, atkMultiplier },
 
         bonusTP        = 0,
         targetTPMult   = 0,

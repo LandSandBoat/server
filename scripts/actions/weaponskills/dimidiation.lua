@@ -19,10 +19,6 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
     params.ftpMod = { 2.25, 4.5, 6.75 }
     params.dex_wsc = 0.8
     params.atkVaries = { 1.25, 1.25, 1.25 }
-    params.ignoresDef = false
-    params.ignored100 = 0
-    params.ignored200 = 0
-    params.ignored300 = 0
 
     -- Apply aftermath
     xi.aftermath.addStatusEffect(player, tp, xi.slot.MAIN, xi.aftermath.type.MYTHIC)

@@ -17,10 +17,7 @@ abilityObject.onAutomatonAbility = function(target, automaton, skill, master, ac
         weaponDamage = automaton:getSkillLevel(xi.skill.AUTOMATON_MELEE),
         weaponType = xi.skill.SWORD,
         ftpMod = { 0.25, 0.4, 0.6 },
-        ignoresDef = true,
-        ignored100 = 0.5,
-        ignored200 = 0.5,
-        ignored300 = 0.5,
+        ignoredDefense = { 0.5, 0.5, 0.5 },
     }
 
     if xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES then

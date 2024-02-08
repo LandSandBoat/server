@@ -23,10 +23,7 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
 
     if xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES then
         params.str_wsc = 0.6 params.int_wsc = 0.6
-        params.ignoresDef = true
-        params.ignored100 = 0.25
-        params.ignored200 = 0.25
-        params.ignored300 = 0.25
+        params.ignoredDefense = { 0.25, 0.25, 0.25 }
         params.atkVaries = { 2.25, 2.25, 2.25 } -- http://wiki.ffo.jp/html/15893.html
     end
 

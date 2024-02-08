@@ -18,10 +18,7 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
     params.numHits = 1
     params.ftpMod = { 3, 3, 3 }
     params.agi_wsc = player:getMerit(xi.merit.APEX_ARROW) * 0.17
-    params.ignoresDef = true
-    params.ignored100 = 0.15
-    params.ignored200 = 0.35
-    params.ignored300 = 0.5
+    params.ignoredDefense = { 0.15, 0.35, 0.5 }
 
     if xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES then
         params.agi_wsc = 0.7 + (player:getMerit(xi.merit.APEX_ARROW) * 0.03)
