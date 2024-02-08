@@ -20,14 +20,15 @@ local weaponskillObject = {}
 weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary, action, taChar)
     local params = {}
     params.numHits = 1
-    params.ftp100 = 1 params.ftp200 = 1 params.ftp300 = 1
+    params.ftpMod = { 1.0, 1.0, 1.0 }
     params.str_wsc = 0.5 params.vit_wsc = 0.5
-    params.acc100 = 0.0 params.acc200 = 0.0 params.acc300 = 0.0
-    params.atk100 = 1 params.atk200 = 1 params.atk300 = 1
     local damage, criticalHit, tpHits, extraHits = xi.weaponskills.doPhysicalWeaponskill(player, target, wsID, params, tp, action, primary, taChar)
 
     if damage > 0 then
         local duration = (tp / 1000 * 30) + 60
+
+        -- TODO: Table effects, value, and element and loop
+
         if not target:hasStatusEffect(xi.effect.DEFENSE_DOWN) then
             target:addStatusEffect(xi.effect.DEFENSE_DOWN, 12.5, 0, duration * applyResistanceAddEffect(player, target, xi.element.WIND, 0))
         end

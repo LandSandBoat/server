@@ -18,14 +18,13 @@ local weaponskillObject = {}
 weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary, action, taChar)
     local params = {}
     params.numHits = 5
-    params.ftp100 = 0.71875 params.ftp200 = 0.84375 params.ftp300 = 0.96875
+    params.ftpMod = { 0.71875, 0.84375, 0.96875 }
     params.str_wsc = player:getMerit(xi.merit.RESOLUTION) * 0.17
-    params.acc100 = 0.0 params.acc200 = 0.0 params.acc300 = 0.0
-    params.atk100 = 0.85 params.atk200 = 0.85 params.atk300 = 0.85
+    params.atkVaries = { 0.85, 0.85, 0.85 }
     params.multiHitfTP = true
 
     if xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES then
-        params.ftp100 = 0.71875 params.ftp200 = 1.5 params.ftp300 = 2.25
+        params.ftpMod = { 0.71875, 1.5, 2.25 }
         params.str_wsc = 0.7 + (player:getMerit(xi.merit.RESOLUTION) * 0.03)
     end
 

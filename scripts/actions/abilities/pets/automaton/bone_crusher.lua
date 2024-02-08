@@ -14,36 +14,19 @@ abilityObject.onAutomatonAbility = function(target, automaton, skill, master, ac
         numHits = 3,
         atkmulti = 1,
         weaponType = xi.skill.CLUB,
-        ftp100 = 1.5,
-        ftp200 = 1.5,
-        ftp300 = 1.5,
-        acc100 = 0.0,
-        acc200 = 0.0,
-        acc300 = 0.0,
-        str_wsc = 0.0,
-        dex_wsc = 0.0,
+        ftpMod = { 1.5, 1.5, 1.5 },
         vit_wsc = 0.6,
-        agi_wsc = 0.0,
-        int_wsc = 0.0,
-        mnd_wsc = 0.0,
-        chr_wsc = 0.0
     }
 
     if xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES then
-        params.ftp100 = 2.66
-        params.ftp200 = 2.66
-        params.ftp300 = 2.66
+        params.ftpMod = { 2.66, 2.66, 2.66 }
 
         if target:isUndead() then
-            params.ftp100 = 3.66
-            params.ftp200 = 3.66
-            params.ftp300 = 3.66
+            params.ftpMod = { 3.66, 3.66, 3.66 }
         end
     else
         if target:isUndead() then
-            params.ftp100 = 2.0
-            params.ftp200 = 2.0
-            params.ftp300 = 2.0
+            params.ftpMod = { 2.0, 2.0, 2.0 }
         end
     end
 

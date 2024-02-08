@@ -19,10 +19,8 @@ end
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local params = {}
     params.numHits = 1
-    params.ftp100 = 1 params.ftp200 = 1.5 params.ftp300 = 3
+    params.ftpMod = { 1.0, 1.5, 3.0 }
     params.str_wsc = 0.3 params.int_wsc = 0.2
-    params.acc100 = 0.0 params.acc200 = 0.0 params.acc300 = 0.0
-    params.atk100 = 1 params.atk200 = 1 params.atk300 = 1
     local damage, _, _, _ = xi.weaponskills.doPhysicalWeaponskill(mob, target, 0, params, 0, nil, true, nil)
 
     target:takeDamage(damage, mob, xi.attackType.MAGICAL, xi.damageType.ICE)

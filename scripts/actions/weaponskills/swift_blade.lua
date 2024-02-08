@@ -16,14 +16,13 @@ local weaponskillObject = {}
 weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary, action, taChar)
     local params = {}
     params.numHits = 3
-    params.ftp100 = 1.5 params.ftp200 = 1.5 params.ftp300 = 1.5
+    params.ftpMod = { 1.5, 1.5, 1.5 }
     params.str_wsc = 0.3
     params.mnd_wsc = 0.3
     -- Sufficient data for ACC bonus/penalty does not exist; assuming no penalty and 10% increase per 1000 TP
     -- http://wiki.ffo.jp/html/382.html does not list ACC Bonus
     -- https://www.bg-wiki.com/ffxi/Swift_Blade does not list ACC Bonus
-    params.acc100 = 1.0 params.acc200 = 1.1 params.acc300 = 1.2 -- TODO: verify -- "Accuracy varies with TP" in retail. All current evidence points to that this modifier is static values, not percentages.
-    params.atk100 = 1.0 params.atk200 = 1.0 params.atk300 = 1.0
+    params.accVaries = { 1.0, 1.1, 1.2 } -- TODO: verify -- "Accuracy varies with TP" in retail. All current evidence points to that this modifier is static values, not percentages.
 
     if xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES then
         params.str_wsc = 0.5 params.mnd_wsc = 0.5

@@ -391,9 +391,6 @@ xi.job_utils.dancer.useViolentFlourishAbility = function(player, target, ability
         local spell   = GetSpell(xi.magic.spell.STUN)
         local params  =
         {
-            atk100    = 1,
-            atk200    = 1,
-            atk300    = 1,
             diff      = 0,
             skillType = player:getWeaponSkillType(xi.slot.MAIN),
             bonus     = 50 - target:getMod(xi.mod.STUNRES) + player:getMod(xi.mod.VFLOURISH_MACC) + player:getJobPointLevel(xi.jp.FLOURISH_I_EFFECT),

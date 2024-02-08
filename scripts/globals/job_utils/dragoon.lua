@@ -16,20 +16,11 @@ local function getJumpWSParams(player, atkMultiplier, tpMultiplier, forceCrit)
     local params =
     {
         numHits = 1,
-        ftp100  = 1,
-        ftp200  = 1,
-        ftp300  = 1,
+        ftpMod  = { 1.0, 1.0, 1.0 },
 
         -- NOTE: critVaries exists without values since while no modifier, it can crit.
         critVaries = { 0.0, 0.0, 0.0 },
-
-        acc100 = 0.0,
-        acc200 = 0.0,
-        acc300 = 0.0,
-
-        atk100 = atkMultiplier,
-        atk200 = atkMultiplier,
-        atk300 = atkMultiplier,
+        atkVaries  = { atkMultiplier, atkMultiplier, atkMultiplier },
 
         bonusTP        = 0,
         targetTPMult   = 0,
@@ -248,9 +239,7 @@ xi.job_utils.dragoon.useJump = function(player, target, ability, action)
 
     -- Only 'Jump' and not others get the fTP VIT bonus
     local ftp = 1 + (player:getStat(xi.mod.VIT) / 256)
-    params.ftp100 = ftp
-    params.ftp200 = ftp
-    params.ftp300 = ftp
+    params.ftpMod = { ftp, ftp, ftp }
 
     local damage, totalHits = performWSJump(player, target, action, params, ability:getID())
 

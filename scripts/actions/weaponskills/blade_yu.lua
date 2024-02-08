@@ -14,7 +14,7 @@ local weaponskillObject = {}
 
 weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary, action, taChar)
     local params = {}
-    params.ftp100 = 2.25 params.ftp200 = 2.25 params.ftp300 = 2.25
+    params.ftpMod = { 2.25, 2.25, 2.25 }
     params.dex_wsc = 0.28 params.int_wsc = 0.28
     -- http://wiki.ffo.jp/html/20351.html
     params.ele = xi.element.WATER
@@ -22,7 +22,7 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
     params.includemab = true
 
     if xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES then
-        params.ftp100 = 3 params.ftp200 = 3 params.ftp300 = 3
+        params.ftpMod = { 3.0, 3.0, 3.0 }
         params.dex_wsc = 0.4 params.int_wsc = 0.4
     end
 

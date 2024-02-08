@@ -14,14 +14,15 @@ local weaponskillObject = {}
 
 weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary, action, taChar)
     local params = {}
-    params.ftp100 = 2.75 params.ftp200 = 3.50 params.ftp300 = 4
+    params.ftpMod = { 2.75, 3.5, 4 }
     params.dex_wsc = 0.28 params.int_wsc = 0.28
     params.ele = xi.element.WIND
     params.skill = xi.skill.DAGGER
     params.includemab = true
 
     if xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES then
-        params.ftp100 = 2 params.ftp200 = 3 params.ftp300 = 4.5 -- https://www.bg-wiki.com/bg/Aeolian_Edge
+        -- https://www.bg-wiki.com/bg/Aeolian_Edge
+        params.ftpMod = { 2, 3, 4.5 }
         params.dex_wsc = 0.4 params.int_wsc = 0.4
     end
 

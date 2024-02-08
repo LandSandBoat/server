@@ -24,10 +24,8 @@ local weaponskillObject = {}
 weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary, action, taChar)
     local params = {}
     params.numHits = 2
-    params.ftp100 = 1 params.ftp200 = 1.25 params.ftp300 = 1.5
+    params.ftpMod = { 1, 1.25, 1.5 }
     params.str_wsc = 0.4 params.vit_wsc = 0.5
-    params.acc100 = 0.0 params.acc200 = 0.0 params.acc300 = 0.0
-    params.atk100 = 1 params.atk200 = 1 params.atk300 = 1
     params.enmityMult = 1
 
     -- Apply aftermath
@@ -54,7 +52,7 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
 
     if target:getObjType() ~= xi.objType.MOB then -- this isn't correct but might as well use what was originally here if someone uses this on a non-mob
         if xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES then
-            params.ftp100 = 1 params.ftp200 = 1.5 params.ftp300 = 2.0
+            params.ftpMod = { 1, 1.5, 2 }
         end
 
         damage, calcParams.criticalHit, calcParams.tpHitsLanded, calcParams.extraHitsLanded = xi.weaponskills.doPhysicalWeaponskill(player, target, wsID, params, tp, action, primary, taChar)
@@ -68,8 +66,8 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
         else
             local effectiveTP = tp + xi.weaponskills.handleWSGorgetBelt(player) * 1000
             effectiveTP = utils.clamp(effectiveTP, 0, 3000) -- necessary because of Gorget/Belt bonus
-            local ceMod = xi.weaponskills.fTP(effectiveTP, 0.09, 0.11, 0.20) -- CE portion of Atonement
-            local veMod = xi.weaponskills.fTP(effectiveTP, 0.11, 0.14, 0.25) -- VE portion of Atonement
+            local ceMod = xi.weaponskills.fTP(effectiveTP, { 0.09, 0.11, 0.20 }) -- CE portion of Atonement
+            local veMod = xi.weaponskills.fTP(effectiveTP, { 0.11, 0.14, 0.25 }) -- VE portion of Atonement
             dmg = math.floor(target:getCE(player) * ceMod) + math.floor(target:getVE(player) * veMod)
         end
 

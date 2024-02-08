@@ -15,7 +15,7 @@ local weaponskillObject = {}
 
 weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary, action, taChar)
     local params = {}
-    params.ftp100 = 3.5 params.ftp200 = 3.5 params.ftp300 = 3.5
+    params.ftpMod = { 3.5, 3.5, 3.5 }
     params.vit_wsc = 0.6
     params.ele = xi.element.ICE
     params.skill = xi.skill.GREAT_SWORD

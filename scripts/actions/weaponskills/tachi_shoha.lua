@@ -17,10 +17,9 @@ local weaponskillObject = {}
 weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary, action, taChar)
     local params = {}
     params.numHits = 2
-    params.ftp100 = 1.375 params.ftp200 = 2.1875 params.ftp300 = 2.6875
+    params.ftpMod = { 1.375, 2.1875, 2.6875 }
     params.str_wsc = player:getMerit(xi.merit.TACHI_SHOHA) * 0.17
-    params.acc100 = 0.0 params.acc200 = 0.0 params.acc300 = 0.0
-    params.atk100 = 1.375 params.atk200 = 1.375 params.atk300 = 1.375
+    params.atkVaries = { 1.375, 1.375, 1.375 }
 
     if xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES then
         params.str_wsc = 0.7 + (player:getMerit(xi.merit.TACHI_SHOHA) * 0.03)

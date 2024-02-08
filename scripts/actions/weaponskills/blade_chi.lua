@@ -15,17 +15,16 @@ local weaponskillObject = {}
 weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary, action, taChar)
     local params = {}
     params.numHits = 2
-    params.ftp100 = 0.5 params.ftp200 = 0.75 params.ftp300 = 1
+    params.ftpMod = { 0.5, 0.75, 1.0 }
     params.str_wsc = 0.2 params.int_wsc = 0.2
-    params.acc100 = 0.0 params.acc200 = 0.0 params.acc300 = 0.0
-    params.atk100 = 1 params.atk200 = 1 params.atk300 = 1
     params.hybridWS = true
     params.ele = xi.element.EARTH
     params.skill = xi.skill.KATANA
     params.includemab = true
 
     if xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES then
-        params.ftp200 = 1.375 params.ftp300 = 2.25 -- http://wiki.ffo.jp/html/720.html
+        -- http://wiki.ffo.jp/html/720.html
+        params.ftpMod = { 0.5, 1.375, 2.25 }
         params.str_wsc = 0.3 params.int_wsc = 0.3
     end
 

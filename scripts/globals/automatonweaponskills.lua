@@ -165,14 +165,10 @@ local function getMeleeCRatio(attacker, defender, params, ignoredDef)
     return pdif, pdifcrit
 end
 
--- params contains: ftp100, ftp200, ftp300, str_wsc, dex_wsc, vit_wsc, int_wsc, mnd_wsc, critVaries, acc100, acc200, acc300, ignoresDef, ignore100, ignore200, ignore300, atkmulti, kick, accBonus, weaponType, weaponDamage
+-- params contains: ftpMod, str_wsc, dex_wsc, vit_wsc, int_wsc, mnd_wsc, critVaries, accVaries, ignoredDefense, atkmulti, kick, accBonus, weaponType, weaponDamage
 xi.autows.doAutoPhysicalWeaponskill = function(attacker, target, wsID, tp, primaryMsg, action, taChar, wsParams, skill)
     -- Determine cratio and ccritratio
-    local ignoredDef = 0
-    if wsParams.ignoresDef then
-        ignoredDef = xi.weaponskills.calculatedIgnoredDef(tp, target:getStat(xi.mod.DEF), wsParams.ignored100, wsParams.ignored200, wsParams.ignored300)
-    end
-
+    local ignoredDef         = xi.weaponskills.calculatedIgnoredDef(tp, target:getStat(xi.mod.DEF), wsParams.ignoredDefense)
     local cratio, ccritratio = getMeleeCRatio(attacker, target, wsParams, ignoredDef)
 
     -- Set up conditions and wsParams used for calculating weaponskill damage
@@ -255,14 +251,10 @@ xi.autows.doAutoPhysicalWeaponskill = function(attacker, target, wsID, tp, prima
     return finaldmg, calcParams.criticalHit, calcParams.tpHitsLanded, calcParams.extraHitsLanded, calcParams.shadowsAbsorbed
 end
 
--- params contains: ftp100, ftp200, ftp300, str_wsc, dex_wsc, vit_wsc, int_wsc, mnd_wsc, critVaries, acc100, acc200, acc300, ignoresDef, ignore100, ignore200, ignore300, atkmulti, accBonus, weaponDamage
+-- params contains: ftpMod, str_wsc, dex_wsc, vit_wsc, int_wsc, mnd_wsc, critVaries, accVaries, ignoredDefense, atkmulti, accBonus, weaponDamage
 xi.autows.doAutoRangedWeaponskill = function(attacker, target, wsID, wsParams, tp, primaryMsg, skill, action)
     -- Determine cratio and ccritratio
-    local ignoredDef = 0
-    if wsParams.ignoresDef then
-        ignoredDef = xi.weaponskills.calculatedIgnoredDef(tp, target:getStat(xi.mod.DEF), wsParams.ignored100, wsParams.ignored200, wsParams.ignored300)
-    end
-
+    local ignoredDef         = xi.weaponskills.calculatedIgnoredDef(tp, target:getStat(xi.mod.DEF), wsParams.ignoredDefense)
     local cratio, ccritratio = getRangedCRatio(attacker, target, wsParams, ignoredDef)
 
     -- Set up conditions and wsParams used for calculating weaponskill damage

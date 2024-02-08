@@ -16,9 +16,9 @@
 local weaponskillObject = {}
 
 weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary, action, taChar)
-    local drain = 25 + math.floor(tp / 3) * 25
+    local drain = 25 + math.floor(tp / 1000) * 25
     local params = {}
-    params.ftp100 = 2.75 params.ftp200 = 2.75 params.ftp300 = 2.75
+    params.ftpMod = { 2.75, 2.75, 2.75 }
     params.str_wsc = 0.3 params.mnd_wsc = 0.5
     params.ele = xi.element.DARK
     params.skill = xi.skill.SWORD

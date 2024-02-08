@@ -14,14 +14,14 @@ local weaponskillObject = {}
 
 weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary, action, taChar)
     local params = {}
-    params.ftp100 = 1 params.ftp200 = 2 params.ftp300 = 3
+    params.ftpMod = { 1.0, 2.0, 3.0 }
     params.str_wsc = 0.3 params.mnd_wsc = 0.3
     params.ele = xi.element.LIGHT
     params.skill = xi.skill.CLUB
     params.includemab = true
 
     if xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES then
-        params.ftp100 = 2.125 params.ftp200 = 3.675 params.ftp300 = 6.125
+        params.ftpMod = { 2.125, 3.675, 6.125 }
         params.str_wsc = 0.4 params.mnd_wsc = 0.4
     end
 

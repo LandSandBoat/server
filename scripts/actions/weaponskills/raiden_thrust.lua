@@ -14,7 +14,7 @@ local weaponskillObject = {}
 
 weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary, action, taChar)
     local params = {}
-    params.ftp100 = 1 params.ftp200 = 2 params.ftp300 = 3
+    params.ftpMod = { 1.0, 2.0, 3.0 }
     params.str_wsc = 0.3 params.int_wsc = 0.3
     params.ele = xi.element.THUNDER
     params.skill = xi.skill.POLEARM
