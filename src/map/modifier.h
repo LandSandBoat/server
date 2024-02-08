@@ -836,7 +836,7 @@ enum class Mod
     ITEM_ADDEFFECT_CHANCE   = 501, // Chance of an items Additional Effect or Spikes
     ITEM_ADDEFFECT_ELEMENT  = 950, // Element of the Additional Effect or Spikes, for resist purposes
     ITEM_ADDEFFECT_STATUS   = 951, // Status Effect ID to try to apply via Additional Effect or Spikes
-    ITEM_ADDEFFECT_POWER    = 952, // Base Power for effect in MOD_ITEM_ADDEFFECT_STATUS
+    ITEM_ADDEFFECT_POWER    = 952, // Base Power for effect in MOD_ITEM_ADDEFFECT_STATUS. Must be used for debuffs/buffs.
     ITEM_ADDEFFECT_DURATION = 953, // Base Duration for effect in MOD_ITEM_ADDEFFECT_STATUS
 
     GOV_CLEARS = 496, // 4% bonus per Grounds of Valor Page clear
@@ -857,8 +857,9 @@ enum class Mod
 
     APPRECIATE_GYSAHL_GREENS = 156, // Enhances food effect of Gysahl Greens
 
-    EAT_RAW_FISH = 412, // Without this, only Mithra can eat raw fish.
-    EAT_RAW_MEAT = 413, // Without this, only Galka can eat raw meat.
+    EAT_RAW_FISH    = 412, // Without this, only Mithra can eat raw fish (item cannot be used)
+    EAT_RAW_MEAT    = 413, // Without this, only Galka can eat raw meat (item cannot be used)
+    DRINK_DISTILLED = 159, // Without this, Distilled Water cannot be consumed (item can still be used)
 
     ENHANCES_CURSNA_RCVD     = 67,   // Potency of "Cursna" effects received
     ENHANCES_CURSNA          = 310,  // Used by gear with the "Enhances Cursna" or "Cursna+" attribute
@@ -1000,7 +1001,6 @@ enum class Mod
     //
     // SPARE IDs:
     // 141 to 143
-    // 159
     // 217 to 223
     // 273 to 280
     //

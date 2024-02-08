@@ -20,7 +20,6 @@ spellObject.onMagicCastingCheck = function(caster, target, spell)
 end
 
 spellObject.onSpellCast = function(caster, target, spell)
-    local typeEffect = xi.effect.REGEN
     local power = 25
     local duration = 90
 
@@ -41,11 +40,11 @@ spellObject.onSpellCast = function(caster, target, spell)
         target:delStatusEffect(xi.effect.REGEN)
     end
 
-    if not target:addStatusEffect(typeEffect, power, 3, duration, 0, 0, 0) then
+    if not target:addStatusEffect(xi.effect.REGEN, power, 3, duration, 0, 0, 0) then
         spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
     end
 
-    return typeEffect
+    return xi.effect.REGEN
 end
 
 return spellObject

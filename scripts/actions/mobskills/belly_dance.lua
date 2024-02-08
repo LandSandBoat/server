@@ -20,14 +20,13 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     duration = 60
 
     isEnfeeble = true
-    typeEffect = xi.effect.CHARM_I
     statmod = xi.mod.INT
 
-    resist = xi.mobskills.applyPlayerResistance(mob, typeEffect, target, isEnfeeble, typeEffect, statmod)
+    resist = xi.mobskills.applyPlayerResistance(mob, xi.effect.CHARM_I, target, isEnfeeble, xi.effect.CHARM_I, statmod)
     if resist > 0.2 then
-        if target:getStatusEffect(typeEffect) == nil then
+        if target:getStatusEffect(xi.effect.CHARM_I) == nil then
             skill:setMsg(xi.msg.basic.SKILL_ENFEEB_IS)
-            target:addStatusEffect(typeEffect, power, tic, duration)
+            target:addStatusEffect(xi.effect.CHARM_I, power, tic, duration)
         else
             skill:setMsg(xi.msg.basic.SKILL_NO_EFFECT)
         end
@@ -35,7 +34,7 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
         skill:setMsg(xi.msg.basic.SKILL_MISS)
     end
 
-    return typeEffect
+    return xi.effect.CHARM_I
     ]]
 end
 

@@ -63,7 +63,10 @@ typedef u_int SOCKET;
 #include <cstdio>
 #include <cstdlib>
 #include <cstring>
+#include <ctime>
 #include <sstream>
+#include <unordered_set>
+#include <vector>
 
 #include "data_loader.h"
 #include "search.h"
@@ -75,6 +78,8 @@ typedef u_int SOCKET;
 #include "packets/party_list.h"
 #include "packets/search_comment.h"
 #include "packets/search_list.h"
+
+#include <task_system.hpp>
 
 #define DEFAULT_BUFLEN 1024
 #define CODE_LVL       17
@@ -103,6 +108,50 @@ extern void       HandleAuctionHouseRequest(CTCPRequestPacket& PTCPRequest);
 extern search_req _HandleSearchRequest(CTCPRequestPacket& PTCPRequest);
 
 extern std::unique_ptr<ConsoleService> gConsoleService;
+
+// A single IP should only have one request in flight at a time, so we are going to
+// be tracking the IP addresses of incoming requests and if we haven't cleared the
+// record for it - we drop the request.
+std::mutex                      gIPAddressesInUseMutex;
+std::unordered_set<std::string> gIPAddressesInUse;
+
+// Implement using getsockname and inet_ntop
+std::string socketToString(SOCKET socket)
+{
+    sockaddr_storage addr;
+    socklen_t        len = sizeof(addr);
+    getsockname(socket, (sockaddr*)&addr, &len);
+
+    char         ipstr[INET6_ADDRSTRLEN];
+    sockaddr_in* s = (sockaddr_in*)&addr;
+    inet_ntop(AF_INET, &s->sin_addr, ipstr, sizeof(ipstr));
+
+    return std::string(ipstr);
+}
+
+bool isSocketInUse(std::string const& ipAddressStr)
+{
+    std::lock_guard<std::mutex> lock(gIPAddressesInUseMutex);
+
+    // ShowInfo(fmt::format("Checking if IP is in use: {}", ipAddressStr).c_str());
+    return gIPAddressesInUse.find(ipAddressStr) != gIPAddressesInUse.end();
+}
+
+void removeSocketFromSet(std::string const& ipAddressStr)
+{
+    std::lock_guard<std::mutex> lock(gIPAddressesInUseMutex);
+
+    // ShowInfo(fmt::format("Removing IP from set: {}", ipAddressStr).c_str());
+    gIPAddressesInUse.erase(ipAddressStr);
+}
+
+void addSocketToSet(std::string const& ipAddressStr)
+{
+    std::lock_guard<std::mutex> lock(gIPAddressesInUseMutex);
+
+    // ShowInfo(fmt::format("Adding IP to set: {}", ipAddressStr).c_str());
+    gIPAddressesInUse.insert(ipAddressStr);
+}
 
 /************************************************************************
  *                                                                       *
@@ -283,6 +332,8 @@ int32 main(int32 argc, char** argv)
 
     std::thread taskManagerThread(TaskManagerThread, std::ref(requestExit));
 
+    auto taskSystem = ts::task_system(4);
+
     // clang-format off
     gConsoleService = std::make_unique<ConsoleService>();
     gConsoleService->RegisterCommand(
@@ -340,7 +391,21 @@ int32 main(int32 argc, char** argv)
             continue;
         }
 
-        std::thread(TCPComm, ClientSocket).detach();
+        auto ipAddressStr = socketToString(ClientSocket);
+        if (isSocketInUse(ipAddressStr))
+        {
+            ShowError(fmt::format("IP already being served, dropping connection from: {}", ipAddressStr).c_str());
+            continue;
+        }
+
+        // clang-format off
+        taskSystem.schedule([ClientSocket, ipAddressStr]() // Take by value, not by reference
+        {
+            addSocketToSet(ipAddressStr);
+            TCPComm(ClientSocket);
+            removeSocketFromSet(ipAddressStr);
+        });
+        // clang-format on
     }
 
     gConsoleService = nullptr;
@@ -390,7 +455,21 @@ int32 main(int32 argc, char** argv)
                 continue;
             }
 
-            std::thread(TCPComm, ClientSocket).detach();
+            auto ipAddressStr = socketToString(ClientSocket);
+            if (isSocketInUse(ipAddressStr))
+            {
+                ShowError(fmt::format("IP already being served, dropping connection from: {}", ipAddressStr).c_str());
+                continue;
+            }
+
+            // clang-format off
+            taskSystem.schedule([ClientSocket, ipAddressStr]() // Take by value, not by reference
+            {
+                addSocketToSet(ipAddressStr);
+                TCPComm(ClientSocket);
+                removeSocketFromSet(ipAddressStr);
+            });
+            // clang-format on
         }
     }
 #endif

@@ -14,12 +14,9 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    local power = 60
-    local duration = 300
-    local typeEffect = xi.effect.PROTECT
+    skill:setMsg(xi.mobskills.mobBuffMove(mob, xi.effect.PROTECT, 60, 0, 300))
 
-    skill:setMsg(xi.mobskills.mobBuffMove(mob, typeEffect, power, 0, duration))
-    return typeEffect
+    return xi.effect.PROTECT
 end
 
 return mobskillObject

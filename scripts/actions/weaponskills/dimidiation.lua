@@ -6,7 +6,7 @@
 -- Will stack with Sneak Attack.
 -- Element: None
 -- Skillchain Elements: Light/Fragmentation (Fire, Thunder, Wind, Light gorget/belt aligned)
--- Modifiers: VIT:80% DEX
+-- Modifiers: DEX:80%
 -- 1000 TP   2000 TP   3000 TP
 -- 2.25      4.5       6.75
 -----------------------------------
@@ -17,9 +17,7 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
     local params = {}
     params.numHits = 2
     params.ftp100 = 2.25 params.ftp200 = 4.5 params.ftp300 = 6.75
-    params.str_wsc = 0.0 params.dex_wsc = 0.8 params.vit_wsc = 0.0 params.agi_wsc = 0.0 params.int_wsc = 0.0 params.mnd_wsc = 0.0 params.chr_wsc = 0.0
-    params.crit100 = 0.0 params.crit200 = 0.0 params.crit300 = 0.0
-    params.canCrit = false
+    params.dex_wsc = 0.8
     params.acc100 = 0.0 params.acc200 = 0.0 params.acc300 = 0.0
     params.atk100 = 1.25 params.atk200 = 1.25 params.atk300 = 1.25
     params.ignoresDef = false

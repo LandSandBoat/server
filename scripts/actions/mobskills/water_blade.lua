@@ -11,9 +11,9 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    local typeEffect = xi.effect.ENWATER
-    skill:setMsg(xi.mobskills.mobBuffMove(mob, typeEffect, 65, 0, 60))
-    return typeEffect
+    skill:setMsg(xi.mobskills.mobBuffMove(mob, xi.effect.ENWATER, 65, 0, 60))
+
+    return xi.effect.ENWATER
 end
 
 return mobskillObject

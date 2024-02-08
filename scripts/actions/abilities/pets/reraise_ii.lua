@@ -12,14 +12,16 @@ abilityObject.onAbilityCheck = function(player, target, ability)
 end
 
 abilityObject.onPetAbility = function(target, pet, skill, master, action)
-    local typeEffect = xi.effect.RERAISE
-    if not target:isPC() or not target:addStatusEffect(typeEffect, 2, 0, 3600) then
+    if
+        not target:isPC() or
+        not target:addStatusEffect(xi.effect.RERAISE, 2, 0, 3600)
+    then
         skill:setMsg(xi.msg.basic.NO_EFFECT)
         return 0
     end
 
     skill:setMsg(xi.msg.basic.JA_GAIN_EFFECT)
-    return typeEffect
+    return xi.effect.RERAISE
 end
 
 return abilityObject

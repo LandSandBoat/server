@@ -9,14 +9,11 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    local typeEffectOne = xi.effect.ELEGY
-    local typeEffectTwo = xi.effect.SLOW
-
-    skill:setMsg(xi.mobskills.mobStatusEffectMove(mob, target, typeEffectOne, 5000, 0, 120))
-    skill:setMsg(xi.mobskills.mobStatusEffectMove(mob, target, typeEffectTwo, 5000, 0, 120))
+    skill:setMsg(xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.ELEGY, 5000, 0, 120))
+    skill:setMsg(xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.SLOW, 5000, 0, 120))
 
     -- This likely doesn't behave like retail.
-    return typeEffectTwo
+    return xi.effect.SLOW
 end
 
 return mobskillObject

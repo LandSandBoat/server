@@ -24,21 +24,17 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    local typeEffect = xi.effect.TERROR
-    local power = 30
-    local duration = 30
-
     if
         target:isPC() and
         target:getRace() == xi.race.GALKA and
         not target:hasKeyItem(xi.ki.LIGHT_OF_ALTAIEU)
     then
-        skill:setMsg(xi.mobskills.mobStatusEffectMove(mob, target, typeEffect, power, 0, duration))
+        skill:setMsg(xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.TERROR, 30, 0, 30))
     else
         skill:setMsg(xi.msg.basic.SKILL_NO_EFFECT)
     end
 
-    return typeEffect
+    return xi.effect.TERROR
 end
 
 return mobskillObject

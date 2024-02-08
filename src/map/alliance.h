@@ -38,6 +38,7 @@ class CAlliance
 public:
     CAlliance(CBattleEntity* PEntity);
     CAlliance(uint32 id);
+    ~CAlliance();
 
     uint32  m_AllianceID;
     CParty* getMainParty();

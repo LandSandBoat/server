@@ -14,11 +14,9 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    local duration = 60
+    skill:setMsg(xi.mobskills.mobBuffMove(mob, xi.effect.BERSERK, 1, 0, 60))
 
-    local typeEffect = xi.effect.BERSERK
-    skill:setMsg(xi.mobskills.mobBuffMove(mob, typeEffect, 1, 0, duration))
-    return typeEffect
+    return xi.effect.BERSERK
 end
 
 return mobskillObject

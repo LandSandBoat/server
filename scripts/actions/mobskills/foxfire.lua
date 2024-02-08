@@ -7,20 +7,19 @@
 -----------------------------------
 local mobskillObject = {}
 
-mobskillObject.onMobSkillCheck = function(target, mob, skill)
-    local job = mob:getMainJob()
+local validJobs = set{
+    xi.job.RDM,
+    xi.job.THF,
+    xi.job.PLD,
+    xi.job.BST,
+    xi.job.RNG,
+    xi.job.BRD,
+    xi.job.NIN,
+    xi.job.COR,
+}
 
-    -- TODO: Table this
-    if
-        job == xi.job.RDM or
-        job == xi.job.THF or
-        job == xi.job.PLD or
-        job == xi.job.BST or
-        job == xi.job.RNG or
-        job == xi.job.BRD or
-        job == xi.job.NIN or
-        job == xi.job.COR
-    then
+mobskillObject.onMobSkillCheck = function(target, mob, skill)
+    if validJobs[mob:getMainJob()] then
         return 0
     end
 
@@ -34,9 +33,7 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local info = xi.mobskills.mobPhysicalMove(mob, target, skill, numhits, accmod, dmgmod, xi.mobskills.physicalTpBonus.DMG_VARIES, 1, 2, 3)
     local dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.BLUNT, info.hitslanded)
 
-    local typeEffect = xi.effect.STUN
-
-    xi.mobskills.mobPhysicalStatusEffectMove(mob, target, skill, typeEffect, 1, 0, 6)
+    xi.mobskills.mobPhysicalStatusEffectMove(mob, target, skill, xi.effect.STUN, 1, 0, 6)
 
     target:takeDamage(dmg, mob, xi.attackType.PHYSICAL, xi.damageType.BLUNT)
     return dmg

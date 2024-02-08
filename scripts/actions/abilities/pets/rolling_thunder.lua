@@ -1,5 +1,5 @@
 -----------------------------------
---
+-- Rolling Thunder
 -----------------------------------
 local abilityObject = {}
 
@@ -18,11 +18,9 @@ abilityObject.onPetAbility = function(target, pet, skill, summoner)
         potency = 5 + ((5 * magicskill) / 100)
     end
 
-    local typeEffect = xi.effect.ENTHUNDER
+    skill:setMsg(xi.mobskills.mobBuffMove(target, xi.effect.ENTHUNDER, potency, 0, duration))
 
-    skill:setMsg(xi.mobskills.mobBuffMove(target, typeEffect, potency, 0, duration))
-
-    return typeEffect
+    return xi.effect.ENTHUNDER
 end
 
 return abilityObject

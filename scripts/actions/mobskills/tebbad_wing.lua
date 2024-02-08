@@ -22,9 +22,7 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    local typeEffect = xi.effect.PLAGUE
-
-    xi.mobskills.mobStatusEffectMove(mob, target, typeEffect, 10, 0, 120)
+    xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.PLAGUE, 10, 0, 120)
 
     local dmgmod = 1
     local info = xi.mobskills.mobMagicalMove(mob, target, skill, mob:getWeaponDmg() * 5, xi.element.FIRE, dmgmod, xi.mobskills.magicalTpBonus.NO_EFFECT)

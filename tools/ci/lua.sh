@@ -96,8 +96,6 @@ global_objects=(
     getElementalDamageReduction
     getMagicHitRate
     getMagicResist
-    getStepAnimation
-    handleAfflatusMisery
     handleThrenody
     isValidHealTarget
 

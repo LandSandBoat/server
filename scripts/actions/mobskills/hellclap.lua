@@ -34,9 +34,8 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local dmgmod = 4.0
     local info = xi.mobskills.mobPhysicalMove(mob, target, skill, numhits, accmod, dmgmod, xi.mobskills.magicalTpBonus.NO_EFFECT)
     local dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.SLASHING, info.hitslanded * math.random(2, 3))
-    local typeEffect = xi.effect.WEIGHT
 
-    xi.mobskills.mobStatusEffectMove(mob, target, typeEffect, 40, 0, 60)
+    xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.WEIGHT, 40, 0, 60)
 
     target:takeDamage(dmg, mob, xi.attackType.PHYSICAL, xi.damageType.SLASHING)
     return dmg

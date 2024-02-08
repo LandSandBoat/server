@@ -14,13 +14,10 @@ end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     -- TODO: Enfire power, Blaze Spikes reduced power in Salvage zones
-    local typeEffectOne = xi.effect.BLAZE_SPIKES
-    -- local typeEffectTwo = xi.effect.ENFIRE
-    local randy = math.random(50, 67)
-    skill:setMsg(xi.mobskills.mobBuffMove(mob, typeEffectOne, randy, 0, 180))
-    -- xi.mobskills.mobBuffMove(mob, typeEffectTwo, ???, 0, 180)
+    skill:setMsg(xi.mobskills.mobBuffMove(mob, xi.effect.BLAZE_SPIKES, math.random(50, 67), 0, 180))
+    -- xi.mobskills.mobBuffMove(mob, xi.effect.ENFIRE, ???, 0, 180)
 
-    return typeEffectOne
+    return xi.effect.BLAZE_SPIKES
 end
 
 return mobskillObject

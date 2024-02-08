@@ -19,9 +19,8 @@ spellObject.onMagicCastingCheck = function(caster, target, spell)
 end
 
 spellObject.onSpellCast = function(caster, target, spell)
-    local typeEffect = xi.effect.BLINK
-    local skill = caster:getSkillLevel(xi.skill.BLUE_MAGIC)
-    local power = skill / 50
+    local skill    = caster:getSkillLevel(xi.skill.BLUE_MAGIC)
+    local power    = skill / 50
     local duration = 300
 
     -- 400 skill = 8 shadows, 450 = 9 shadows, so I am assuming every 50 skill is a shadow.
@@ -41,11 +40,11 @@ spellObject.onSpellCast = function(caster, target, spell)
         caster:delStatusEffect(xi.effect.DIFFUSION)
     end
 
-    if not target:addStatusEffect(typeEffect, power, 0, duration) then
+    if not target:addStatusEffect(xi.effect.BLINK, power, 0, duration) then
         spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
     end
 
-    return typeEffect
+    return xi.effect.BLINK
 end
 
 return spellObject

@@ -11,23 +11,23 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    local typeEffect1 = xi.effect.MAGIC_ATK_BOOST
-    local typeEffect2 = xi.effect.MAGIC_DEF_BOOST
     local mabTotal = 10
     local mdbTotal = 10
 
-    if mob:getStatusEffect(xi.effect.MAGIC_ATK_BOOST) ~= nil then
-        mabTotal = mabTotal:getPower() + 10
+    local mabEffect = mob:getStatusEffect(xi.effect.MAGIC_ATK_BOOST)
+    if mabEffect then
+        mabTotal = mabEffect:getPower() + 10
     end
 
-    if mob:getStatusEffect(xi.effect.MAGIC_DEF_BOOST) ~= nil then
-        mabTotal = mabTotal:getPower() + 10
+    local mdbEffect = mob:getStatusEffect(xi.effect.MAGIC_DEF_BOOST)
+    if mdbEffect then
+        mdbTotal = mdbEffect:getPower() + 10
     end
 
-    skill:setMsg(xi.mobskills.mobBuffMove(mob, typeEffect1, mabTotal, 0, 180))
-    xi.mobskills.mobBuffMove(mob, typeEffect2, mdbTotal, 0, 180)
+    skill:setMsg(xi.mobskills.mobBuffMove(mob, xi.effect.MAGIC_ATK_BOOST, mabTotal, 0, 180))
+    xi.mobskills.mobBuffMove(mob, xi.effect.MAGIC_DEF_BOOST, mdbTotal, 0, 180)
 
-    return typeEffect1
+    return xi.effect.MAGIC_ATK_BOOST
 end
 
 return mobskillObject

@@ -14,11 +14,7 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
     local params = {}
     params.numHits = 5
     params.ftp100 = 1.0 params.ftp200 = 1.0 params.ftp300 = 1.0
-    params.str_wsc = 0.0 params.dex_wsc = 0.0 params.vit_wsc = 0.0
-    params.agi_wsc = 0.0 params.int_wsc = 0.0 params.mnd_wsc = player:getMerit(xi.merit.REQUIESCAT) * 0.17
-    params.chr_wsc = 0.0
-    params.crit100 = 0.0 params.crit200 = 0.0 params.crit300 = 0.0
-    params.canCrit = false
+    params.mnd_wsc = player:getMerit(xi.merit.REQUIESCAT) * 0.17
     params.acc100 = 0.0 params.acc200 = 0.0 params.acc300 = 0.0
     params.atk100 = 0.8 params.atk200 = 0.9 params.atk300 = 1.0
     -- TODO: Verify the params.formless check

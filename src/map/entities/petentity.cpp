@@ -317,7 +317,7 @@ void CPetEntity::OnAbility(CAbilityState& state, action_t& action)
     auto* PTarget  = static_cast<CBattleEntity*>(state.GetTarget());
 
     std::unique_ptr<CBasicPacket> errMsg;
-    if (IsValidTarget(PTarget->targid, PAbility->getValidTarget(), errMsg))
+    if (PTarget && IsValidTarget(PTarget->targid, PAbility->getValidTarget(), errMsg))
     {
         if (this != PTarget && distance(this->loc.p, PTarget->loc.p) > PAbility->getRange())
         {
@@ -360,6 +360,18 @@ void CPetEntity::OnAbility(CAbilityState& state, action_t& action)
             actionTarget.messageID = ability::GetAbsorbMessage(actionTarget.messageID);
             actionTarget.param     = -value;
         }
+    }
+    else // Can't target anything, just cancel the animation.
+    {
+        action.actiontype         = ACTION_MOBABILITY_INTERRUPT;
+        action.actionid           = 28787; // Some hardcoded magic for interrupts
+        actionList_t& actionList  = action.getNewActionList();
+        actionList.ActionTargetID = id;
+
+        actionTarget_t& actionTarget = actionList.getNewActionTarget();
+        actionTarget.animation       = 0x1FC;
+        actionTarget.messageID       = 0;
+        actionTarget.reaction        = REACTION::ABILITY | REACTION::HIT;
     }
 }
 

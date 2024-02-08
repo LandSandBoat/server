@@ -66,6 +66,13 @@ CAlliance::CAlliance(uint32 id)
 {
 }
 
+// Dirty, ugly hack to prevent bad refs keeping garbage pointers in memory pointing to things that _could_ still be valid, causing mayhem
+CAlliance::~CAlliance()
+{
+    m_AllianceID = 0;
+    aLeader      = nullptr;
+}
+
 void CAlliance::dissolveAlliance(bool playerInitiated)
 {
     if (playerInitiated)

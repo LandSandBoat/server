@@ -12,13 +12,9 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    local typeEffect = xi.effect.CURSE_I
+    skill:setMsg(xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.CURSE_I, 25, 0, 300))
 
-    local msg = xi.mobskills.mobStatusEffectMove(mob, target, typeEffect, 25, 0, 300)
-
-    skill:setMsg(msg)
-
-    return typeEffect
+    return xi.effect.CURSE_I
 end
 
 return mobskillObject

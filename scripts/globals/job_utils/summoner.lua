@@ -194,11 +194,11 @@ xi.job_utils.summoner.useSoothingRuby = function(target, pet, petskill, summoner
 
     -- Erase effects.
     local effectsErased = math.min(#erasableEffectTable, soothingRubyPower)
-    local index         = 0
 
     if effectsErased > 0 then
         for i = 1, effectsErased do
-            index = math.random(1, #erasableEffectTable)
+            local index = math.random(1, #erasableEffectTable)
+
             target:delStatusEffect(erasableEffectTable[index])
             table.remove(erasableEffectTable, index)
         end

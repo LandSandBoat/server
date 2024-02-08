@@ -35,9 +35,7 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
 
     -- king vinegrroon
     if mob:getPool() == 2262 then
-        local typeEffect = xi.effect.POISON
-        local power = 25
-        xi.mobskills.mobPhysicalStatusEffectMove(mob, target, skill, typeEffect, power, 3, 60)
+        xi.mobskills.mobPhysicalStatusEffectMove(mob, target, skill, xi.effect.POISON, 25, 3, 60)
     end
 
     target:takeDamage(dmg, mob, xi.attackType.PHYSICAL, xi.damageType.SLASHING)

@@ -10,15 +10,12 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    local typeEffectOne = xi.effect.STONESKIN
-    local typeEffectTwo = xi.effect.BLAZE_SPIKES
-    local randy = math.random(20, 30)
-    skill:setMsg(xi.mobskills.mobBuffMove(mob, typeEffectOne, 1000, 0, 300))
-    xi.mobskills.mobBuffMove(mob, typeEffectTwo, randy, 0, 180)
-    local effect1 = mob:getStatusEffect(typeEffectOne)
+    skill:setMsg(xi.mobskills.mobBuffMove(mob, xi.effect.STONESKIN, 1000, 0, 300))
+    xi.mobskills.mobBuffMove(mob, xi.effect.BLAZE_SPIKES, math.random(20, 30), 0, 180)
+    local effect1 = mob:getStatusEffect(xi.effect.STONESKIN)
     effect1:delEffectFlag(xi.effectFlag.DISPELABLE)
 
-    return typeEffectOne
+    return xi.effect.STONESKIN
 end
 
 return mobskillObject

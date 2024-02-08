@@ -11141,7 +11141,7 @@ INSERT INTO `item_equipment` VALUES (22278,'staunch_tathlum',99,0,4194303,0,0,0,
 INSERT INTO `item_equipment` VALUES (22279,'staunch_tathlum_+1',99,0,4194303,0,0,0,8,0,0);
 INSERT INTO `item_equipment` VALUES (22280,'yamarang',99,0,2363424,0,0,0,8,0,0);
 INSERT INTO `item_equipment` VALUES (22281,'knobkierrie',99,0,2107523,0,0,0,8,0,0);
-INSERT INTO `item_equipment` VALUES (22282,'grudge',1,0,4194303,28,0,0,4,8,0); -- TODO: capture model from retail (using Rogetsurin model)
+INSERT INTO `item_equipment` VALUES (22282,'grudge',1,0,4194303,137,0,0,4,8,0);
 INSERT INTO `item_equipment` VALUES (22283,'marvelous_cheer',1,0,4194303,136,0,0,4,0,0);
 INSERT INTO `item_equipment` VALUES (22284,'abdhaljs_tome',99,0,4194303,0,0,0,8,0,0);
 INSERT INTO `item_equipment` VALUES (22285,'beryllium_bolt',99,119,1185,0,0,0,8,0,2);
@@ -12574,6 +12574,7 @@ INSERT INTO `item_equipment` VALUES (26541,'baayami_robe',99,119,16384,115,0,0,3
 INSERT INTO `item_equipment` VALUES (26542,'baayami_robe_+1',99,119,16384,115,0,0,32,0,3);
 INSERT INTO `item_equipment` VALUES (26543,'turms_harness',99,119,2359328,148,0,0,32,0,3);
 INSERT INTO `item_equipment` VALUES (26544,'tu._harness_+1',99,119,2359328,148,0,0,32,0,0);
+INSERT INTO `item_equipment` VALUES (26545,'mithkabob_shirt',1,0,4194303,8782,0,0,32,0,0);
 INSERT INTO `item_equipment` VALUES (26624,'agoge_mask',99,109,1,65,0,0,16,0,0);
 INSERT INTO `item_equipment` VALUES (26625,'agoge_mask_+1',99,119,1,65,0,0,16,0,0);
 INSERT INTO `item_equipment` VALUES (26626,'hes._crown',99,109,2,67,0,0,16,0,0);

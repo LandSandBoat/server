@@ -34,9 +34,7 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    local typeEffect = xi.effect.TERROR
-
-    xi.mobskills.mobStatusEffectMove(mob, target, typeEffect, 1, 0, 15)
+    xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.TERROR, 1, 0, 15)
 
     local dmgmod = 1
     local info = xi.mobskills.mobMagicalMove(mob, target, skill, mob:getWeaponDmg() * 5, xi.element.THUNDER, dmgmod, xi.mobskills.magicalTpBonus.NO_EFFECT)

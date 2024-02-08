@@ -14,11 +14,10 @@ end
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local power = 50
     local duration = 180
-    local typeEffect = xi.effect.BLAZE_SPIKES
 
-    skill:setMsg(xi.mobskills.mobBuffMove(mob, typeEffect, power, 0, duration))
+    skill:setMsg(xi.mobskills.mobBuffMove(mob, xi.effect.BLAZE_SPIKES, power, 0, duration))
 
-    return typeEffect
+    return xi.effect.BLAZE_SPIKES
 end
 
 return mobskillObject

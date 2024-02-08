@@ -8,13 +8,9 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    local power = 10
-    local duration = 180
-    local typeEffect = xi.effect.ICE_SPIKES
+    skill:setMsg(xi.mobskills.mobBuffMove(mob, xi.effect.ICE_SPIKES, 10, 0, 180))
 
-    skill:setMsg(xi.mobskills.mobBuffMove(mob, typeEffect, power, 0, duration))
-
-    return typeEffect
+    return xi.effect.ICE_SPIKES
 end
 
 return mobskillObject
