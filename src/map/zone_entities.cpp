@@ -1275,6 +1275,13 @@ void CZoneEntities::PushPacket(CBaseEntity* PEntity, GLOBAL_MESSAGE_TYPE message
                                     }
                                 }
 
+                                // If everything else failed
+                                if (!entity)
+                                {
+                                    // No target entity in spawnlists found, so we're just going to skip this packet
+                                    break;
+                                }
+
                                 auto pushPacketIfInSpawnList = [&](CCharEntity* PChar, SpawnIDList_t const& spawnlist)
                                 {
                                     SpawnIDList_t::const_iterator iter = spawnlist.lower_bound(id);
