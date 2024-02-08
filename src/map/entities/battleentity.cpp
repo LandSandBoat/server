@@ -285,20 +285,26 @@ bool CBattleEntity::CanRest()
 
 bool CBattleEntity::Rest(float rate)
 {
+    bool didRest = false;
+
     if (health.hp != health.maxhp || health.mp != health.maxmp)
     {
-        // recover 20% HP
+        // recover some HP and MP
         uint32 recoverHP = (uint32)(health.maxhp * rate);
         uint32 recoverMP = (uint32)(health.maxmp * rate);
         addHP(recoverHP);
         addMP(recoverMP);
-
-        // lower TP
-        addTP((int16)(rate * -500));
-        return true;
+        didRest = true;
     }
 
-    return false;
+    if (health.tp > 0)
+    {
+        // lower TP
+        addTP((int16)(rate * -500));
+        didRest = true;
+    }
+
+    return didRest;
 }
 
 int16 CBattleEntity::GetWeaponDelay(bool tp)
