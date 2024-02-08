@@ -857,8 +857,9 @@ enum class Mod
 
     APPRECIATE_GYSAHL_GREENS = 156, // Enhances food effect of Gysahl Greens
 
-    EAT_RAW_FISH = 412, // Without this, only Mithra can eat raw fish.
-    EAT_RAW_MEAT = 413, // Without this, only Galka can eat raw meat.
+    EAT_RAW_FISH    = 412, // Without this, only Mithra can eat raw fish (item cannot be used)
+    EAT_RAW_MEAT    = 413, // Without this, only Galka can eat raw meat (item cannot be used)
+    DRINK_DISTILLED = 159, // Without this, Distilled Water cannot be consumed (item can still be used)
 
     ENHANCES_CURSNA_RCVD     = 67,   // Potency of "Cursna" effects received
     ENHANCES_CURSNA          = 310,  // Used by gear with the "Enhances Cursna" or "Cursna+" attribute
@@ -1000,7 +1001,6 @@ enum class Mod
     //
     // SPARE IDs:
     // 141 to 143
-    // 159
     // 217 to 223
     // 273 to 280
     //

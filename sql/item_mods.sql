@@ -32486,12 +32486,14 @@ INSERT INTO `item_mods` VALUES (16873,11,5); -- AGI: 5
 INSERT INTO `item_mods` VALUES (16879,25,3); -- ACC: 3
 
 -- Calamar
-INSERT INTO `item_mods` VALUES (16882,11,2); -- AGI: 2
-INSERT INTO `item_mods` VALUES (16882,13,2); -- MND: 2
+INSERT INTO `item_mods` VALUES (16882,11,2);  -- AGI: 2
+INSERT INTO `item_mods` VALUES (16882,13,2);  -- MND: 2
+INSERT INTO `item_mods` VALUES (16882,412,1); -- EAT_RAW_FISH: 1
 
 -- Narval
 INSERT INTO `item_mods` VALUES (16884,2,15);   -- HP: 15
 INSERT INTO `item_mods` VALUES (16884,112,10); -- HEALING: 10
+INSERT INTO `item_mods` VALUES (16884,412,1);  -- EAT_RAW_FISH: 1
 
 -- Gae Bolg
 INSERT INTO `item_mods` VALUES (16885,2,10); -- HP: 10
@@ -33897,11 +33899,13 @@ INSERT INTO `item_mods` VALUES (17502,23,10); -- ATT: 10
 INSERT INTO `item_mods` VALUES (17503,9,1);  -- DEX: 1
 INSERT INTO `item_mods` VALUES (17503,11,1); -- AGI: 1
 INSERT INTO `item_mods` VALUES (17503,20,9); -- WATER_RES: 9
+INSERT INTO `item_mods` VALUES (17503,412,1); -- EAT_RAW_FISH: 1
 
 -- Pagures
 INSERT INTO `item_mods` VALUES (17504,10,3);  -- VIT: 3
 INSERT INTO `item_mods` VALUES (17504,20,11); -- WATER_RES: 11
 INSERT INTO `item_mods` VALUES (17504,25,2);  -- ACC: 2
+INSERT INTO `item_mods` VALUES (17504,412,1); -- EAT_RAW_FISH: 1
 
 -- Narasimhas Cesti
 INSERT INTO `item_mods` VALUES (17505,8,1);   -- STR: 1
@@ -35473,8 +35477,10 @@ INSERT INTO `item_mods` VALUES (18027,24,5);  -- RATT: 5
 INSERT INTO `item_mods` VALUES (18027,110,5); -- PARRY: 5
 INSERT INTO `item_mods` VALUES (18027,291,1); -- COUNTER: 1
 
--- Matrons Knife
-INSERT INTO `item_mods` VALUES (18028,9,4); -- DEX: 4
+-- Matron's Knife
+INSERT INTO `item_mods` VALUES (18028,9,4);   -- DEX: 4
+INSERT INTO `item_mods` VALUES (18028,412,1); -- EAT_RAW_FISH: 1
+INSERT INTO `item_mods` VALUES (18028,413,1); -- EAT_RAW_MEAT: 1
 
 -- Khimaira Jambiya
 INSERT INTO `item_mods` VALUES (18030,2,15); -- HP: 15
@@ -44881,6 +44887,9 @@ INSERT INTO `item_mods` VALUES (21866,9,17);     -- DEX: 17
 INSERT INTO `item_mods` VALUES (21866,10,17);    -- VIT: 17
 INSERT INTO `item_mods` VALUES (21866,23,20);    -- ATT: 20
 INSERT INTO `item_mods` VALUES (21866,163,-800); -- DMGMAGIC: -800
+
+-- Sha Wujing's lance +1
+INSERT INTO `item_mods` VALUES (21868,159,1);    -- DRINK_DISTILLED: 1
 
 -- Exalted Spear
 INSERT INTO `item_mods` VALUES (21869,8,15);    -- STR: 15
@@ -65545,6 +65554,7 @@ INSERT INTO `item_mods` VALUES (26963,160,-1000); -- DMG: -1000
 INSERT INTO `item_mods` VALUES (26963,251,90);    -- STUNRES: 90
 INSERT INTO `item_mods` VALUES (26963,288,10);    -- DOUBLE_ATTACK: 10
 INSERT INTO `item_mods` VALUES (26963,384,1600);  -- HASTE_GEAR: 1600
+INSERT INTO `item_mods` VALUES (26963,413,1);     -- EAT_RAW_MEAT: 1
 
 -- Vrikodara Jupon
 INSERT INTO `item_mods` VALUES (26969,1,135);   -- DEF: 135

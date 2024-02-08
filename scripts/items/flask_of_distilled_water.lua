@@ -11,14 +11,13 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    local mainWeapon = target:getEquipID(xi.slot.MAIN)
-
     if
-        mainWeapon == xi.item.SHA_WUJINGS_LANCE_P1 and
+        target:getMod(xi.mod.DRINK_DISTILLED) == 1 and
         not target:hasStatusEffect(xi.effect.REGEN)
     then
         target:addStatusEffect(xi.effect.REGEN, 1, 1, 300)
     else
+        -- Retail will consume the item while doing nothing but telling you there was no effect.
         target:messageBasic(xi.msg.basic.NO_EFFECT)
     end
 end
