@@ -55,7 +55,7 @@ public:
     void          AddBaseEnmity(CBattleEntity* PEntity);
     void          UpdateEnmity(CBattleEntity* PEntity, int32 CE, int32 VE, bool withMaster = false, bool tameable = false, bool directAction = true);
     void          UpdateEnmityFromDamage(CBattleEntity* PEntity, int32 Damage);
-    void          UpdateEnmityFromCure(CBattleEntity* PEntity, uint8 level, int32 CureAmount, bool isCureV);
+    void          UpdateEnmityFromCure(CBattleEntity* PEntity, uint8 level, int32 CureAmount, int32 fixedCE = 0, int32 fixedVE = 0);
     void          UpdateEnmityFromAttack(CBattleEntity* PEntity, int32 Damage);
     bool          HasID(uint32 ID);                                                                         // true if ID is in the container with non-zero enmity level
     void          LowerEnmityByPercent(CBattleEntity* PEntity, uint8 percent, CBattleEntity* HateReceiver); // lower % of hate or transfer it
