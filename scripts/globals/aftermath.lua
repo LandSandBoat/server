@@ -552,6 +552,11 @@ xi.aftermath.effects =
 }
 
 xi.aftermath.addStatusEffect = function(player, tp, weaponSlot, aftermathType)
+    -- Players only!
+    if player:getObjType() ~= xi.objType.PC then
+        return
+    end
+
     local weapon = player:getStorageItem(0, 0, weaponSlot)
     if not weapon then
         return
