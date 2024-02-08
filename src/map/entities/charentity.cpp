@@ -1812,10 +1812,12 @@ void CCharEntity::OnRangedAttack(CRangeState& state, action_t& action)
                 {
                     charutils::TrySkillUP(this, (SKILLTYPE)PAmmo->getSkillType(), PTarget->GetMLevel());
                 }
+                totalDamage += damage;
             }
         }
         else // miss
         {
+            damage                  = 0;
             actionTarget.reaction   = REACTION::EVADE;
             actionTarget.speceffect = SPECEFFECT::NONE;
             actionTarget.messageID  = 354;
@@ -1851,7 +1853,6 @@ void CCharEntity::OnRangedAttack(CRangeState& state, action_t& action)
                 hitCount = i;
             }
         }
-        totalDamage += damage;
     }
 
     // if a hit did occur (even without barrage)
@@ -1867,12 +1868,6 @@ void CCharEntity::OnRangedAttack(CRangeState& state, action_t& action)
 
         actionTarget.param =
             battleutils::TakePhysicalDamage(this, PTarget, PHYSICAL_ATTACK_TYPE::RANGED, totalDamage, false, slot, realHits, nullptr, true, true);
-
-        // lower damage based on shadows taken
-        if (shadowsTaken)
-        {
-            actionTarget.param = (int32)(actionTarget.param * (1 - ((float)shadowsTaken / realHits)));
-        }
 
         // absorb message
         if (actionTarget.param < 0)
