@@ -20,18 +20,18 @@ xi = xi or {}
 xi.weaponskills = xi.weaponskills or {}
 
 -- Obtains alpha, used for working out WSC on legacy servers
--- Retail has no alpha anymore as of 2014. Weaponskill functions
--- should be checking for xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES and
--- overwriting the results of this function if the server has it set
+-- Retail has no alpha anymore as of 2014 Weaponskill functions
 local function getAlpha(level)
     local alpha = 1
 
-    if level > 75 then
-        alpha = 0.85
-    elseif level > 59 then
-        alpha = 0.9 - math.floor((level - 60) / 2) / 100
-    elseif level > 5 then
-        alpha = 1 - math.floor(level / 6) / 100
+    if not xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES then
+        if level > 75 then
+            alpha = 0.85
+        elseif level > 59 then
+            alpha = 0.9 - math.floor((level - 60) / 2) / 100
+        elseif level > 5 then
+            alpha = 1 - math.floor(level / 6) / 100
+        end
     end
 
     return alpha
@@ -156,16 +156,6 @@ local function shadowAbsorb(target)
     return false
 end
 
-local function accVariesWithTP(baseHitRate, acc, tp, accuracyVariesTable)
-    -- acc varies with tp ALL apply an acc PENALTY, the acc at various %s are given as a1 a2 a3
-    local accLost      = acc - acc * xi.weaponskills.fTP(tp, accuracyVariesTable)
-    local finalHitRate = baseHitRate - accLost / 200
-
-    finalHitRate = utils.clamp(finalHitRate, 0.2, 0.95)
-
-    return finalHitRate
-end
-
 local function getMultiAttacks(attacker, target, wsParams, firstHit, offHand)
     local numHits      = 0
     local bonusHits    = 0
@@ -224,30 +214,25 @@ local function cRangedRatio(attacker, defender, params, ignoredDef, tp)
         levelCorrection = (defender:getMainLvl() - attacker:getMainLvl()) / 40
     end
 
-    cratio = cratio - levelCorrection
-    cratio = cratio * atkMultiplier
+    cratio = (cratio - levelCorrection) * atkMultiplier
 
     -- adding cap check base on weapon https://www.bg-wiki.com/ffxi/PDIF info
     local weaponType = attacker:getWeaponSkillType(xi.slot.RANGED)
-    local cRatioCap  = 0
+    local cRatioCap  = 3.25 -- Archery
 
     if weaponType == xi.skill.MARKSMANSHIP then
         cRatioCap = 3.5
-    else
-        cRatioCap = 3.25
     end
 
     cratio = utils.clamp(cratio, 0, cRatioCap)
 
     -- max
-    local pdifmax = 0
+    local pdifmax = cratio
 
     if cratio < 0.9 then
         pdifmax = cratio * 10 / 9
     elseif cratio < 1.1 then
         pdifmax = 1
-    else
-        pdifmax = cratio
     end
 
     -- min
@@ -261,17 +246,8 @@ local function cRangedRatio(attacker, defender, params, ignoredDef, tp)
         pdifmin = cratio * 20 / 19 - 3 / 19
     end
 
-    local pdif = {}
-    pdif[1] = pdifmin
-    pdif[2] = pdifmax
-
-    local pdifcrit = {}
-
-    pdifmin = pdifmin * 1.25
-    pdifmax = pdifmax * 1.25
-
-    pdifcrit[1] = pdifmin
-    pdifcrit[2] = pdifmax
+    local pdif     = { pdifmin, pdifmax }
+    local pdifcrit = { pdifmin * 1.25, pdifmax * 1.25 }
 
     return pdif, pdifcrit
 end
@@ -304,12 +280,8 @@ local function getRangedHitRate(attacker, target, capHitRate, bonus)
         acc = acc - (target:getMainLvl() - attacker:getMainLvl()) * 4
     end
 
-    local hitdiff = 0
-    local hitrate = 75
-
-    hitdiff = (acc - eva) / 2 -- no need to check if eva is hier or lower than acc it will be negative if eva is higher and positive if acc is higher
-
-    hitrate = (hitrate + hitdiff) / 100
+    local hitdiff = (acc - eva) / 2 -- no need to check if eva is hier or lower than acc it will be negative if eva is higher and positive if acc is higher
+    local hitrate = (75 + hitdiff) / 100
 
     -- Applying hitrate caps
     if capHitRate then -- this isn't capped for when acc varies with tp, as more penalties are due
@@ -458,22 +430,16 @@ xi.weaponskills.calculateRawWSDmg = function(attacker, target, wsID, tp, action,
     local targetLvl = target:getMainLvl()
     local targetHp  = target:getHP() + target:getMod(xi.mod.STONESKIN)
 
-    -- Recalculate accuracy if it varies with TP, applied to all hits
+    -- Recalculate accuracy if it varies with TP, applied to all hits (This is a penalty!)
     if wsParams.accVaries then
-        calcParams.hitRate = accVariesWithTP(calcParams.hitRate, calcParams.accStat, tp, wsParams.accVaries)
-    else
-        -- clamp hitRate now if accuracy doesn't vary with TP
-        calcParams.hitRate = utils.clamp(calcParams.hitRate, 0.2, 0.95)
+        local accLost      = calcParams.accStat - calcParams.accStat * xi.weaponskills.fTP(tp, wsParams.accVaries)
+        calcParams.hitRate = calcParams.hitRate - accLost / 200
     end
 
+    calcParams.hitRate = utils.clamp(calcParams.hitRate, 0.2, 0.95)
+
     -- Calculate alpha, WSC, and our modifiers for our base per-hit damage
-    if not calcParams.alpha then
-        if xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES then
-            calcParams.alpha = 1
-        else
-            calcParams.alpha = getAlpha(attacker:getMainLvl())
-        end
-    end
+    calcParams.alpha = getAlpha(attacker:getMainLvl())
 
     -- Begin Checks for bonus wsc bonuses. See the following for details:
     -- https://www.bg-wiki.com/bg/Utu_Grip
@@ -1117,11 +1083,8 @@ xi.weaponskills.getHitRate = function(attacker, target, capHitRate, bonus)
         acc = acc - (target:getMainLvl() - attacker:getMainLvl()) * 4
     end
 
-    local hitdiff = 0
-    local hitrate = 75
-
-    hitdiff = (acc - eva) / 2
-    hitrate = (hitrate + hitdiff) / 100
+    local hitdiff = (acc - eva) / 2
+    local hitrate = (75 + hitdiff) / 100
 
     -- Applying hitrate caps
     if capHitRate then -- this isn't capped for when acc varies with tp, as more penalties are due
@@ -1151,18 +1114,41 @@ xi.weaponskills.fTP = function(tp, ftpTable)
 end
 
 xi.weaponskills.calculatedIgnoredDef = function(tp, def, ignoredDefenseTable)
-    if
-        not ignoredDefenseTable or
-        tp < 1000
-    then
-        return 1
+    if ignoredDefenseTable then
+        return xi.weaponskills.fTP(tp, ignoredDefenseTable) * def
     end
 
-    if tp >= 2000 then
-        return (ignoredDefenseTable[2] + (tp - 2000) * (ignoredDefenseTable[3] - ignoredDefenseTable[2]) / 1000) * def
-    elseif tp >= 1000 then
-        return (ignoredDefenseTable[1] + (tp - 1000) * (ignoredDefenseTable[2] - ignoredDefenseTable[1]) / 1000) * def
+    return 0
+end
+
+local function getMeleePDifRange(correctedRatio)
+    -- pDifMax
+    local pDifMax = 3
+    if correctedRatio < 0.5 then
+        pDifMax = correctedRatio + 0.5
+    elseif correctedRatio < 0.7 then
+        pDifMax = 1
+    elseif correctedRatio < 1.2 then
+        pDifMax = correctedRatio + 0.3
+    elseif correctedRatio < 1.5 then
+        pDifMax = correctedRatio * 0.25 + correctedRatio
+    elseif correctedRatio < 2.625 then
+        pDifMax = correctedRatio + 0.375
     end
+
+    -- pDifMin
+    local pDifMin = correctedRatio - 0.375
+    if correctedRatio < 0.38 then
+        pDifMin = 0
+    elseif correctedRatio < 1.25 then
+        pDifMin = correctedRatio * 1176 / 1024 - 448 / 1024
+    elseif correctedRatio < 1.51 then
+        pDifMin = 1
+    elseif correctedRatio < 2.44 then
+        pDifMin = correctedRatio * 1176 / 1024 - 775 / 1024
+    end
+
+    return { pDifMin, pDifMax }
 end
 
 -- Given the raw ratio value (atk/def) and levels, returns the cRatio (min then max)
@@ -1183,78 +1169,19 @@ xi.weaponskills.cMeleeRatio = function(attacker, defender, params, ignoredDef, t
     end
 
     local levelCorrection = 0
-
     if attacker:getMainLvl() < defender:getMainLvl() then
         levelCorrection = 0.05 * (defender:getMainLvl() - attacker:getMainLvl())
     end
 
-    cratio = math.max(0, cratio - levelCorrection)
+    cratio     = math.max(0, cratio - levelCorrection)
+    local pdif = getMeleePDifRange(cratio)
 
-    -- max
-    local pdifmax = 3
-    if cratio < 0.5 then
-        pdifmax = cratio + 0.5
-    elseif cratio < 0.7 then
-        pdifmax = 1
-    elseif cratio < 1.2 then
-        pdifmax = cratio + 0.3
-    elseif cratio < 1.5 then
-        pdifmax = cratio * 0.25 + cratio
-    elseif cratio < 2.625 then
-        pdifmax = cratio + 0.375
-    end
+    cratio                   = cratio + 1
+    cratio                   = utils.clamp(cratio, 0, 3)
+    local unadjustedPDifCrit = getMeleePDifRange(cratio)
 
-    -- min
-    local pdifmin = cratio - 0.375
-    if cratio < 0.38 then
-        pdifmin = 0
-    elseif cratio < 1.25 then
-        pdifmin = cratio * 1176 / 1024 - 448 / 1024
-    elseif cratio < 1.51 then
-        pdifmin = 1
-    elseif cratio < 2.44 then
-        pdifmin = cratio * 1176 / 1024 - 775 / 1024
-    end
-
-    local pdif = {}
-    pdif[1]    = pdifmin
-    pdif[2]    = pdifmax
-
-    local pdifcrit = {}
-    cratio         = cratio + 1
-    cratio         = utils.clamp(cratio, 0, 3)
-
-    if cratio < 0.5 then
-        pdifmax = cratio + 0.5
-    elseif cratio < 0.7 then
-        pdifmax = 1
-    elseif cratio < 1.2 then
-        pdifmax = cratio + 0.3
-    elseif cratio < 1.5 then
-        pdifmax = cratio * 0.25 + cratio
-    elseif cratio < 2.625 then
-        pdifmax = cratio + 0.375
-    else
-        pdifmax = 3
-    end
-
-    -- min
-    if cratio < 0.38 then
-        pdifmin = 0
-    elseif cratio < 1.25 then
-        pdifmin = cratio * 1176 / 1024 - 448 / 1024
-    elseif cratio < 1.51 then
-        pdifmin = 1
-    elseif cratio < 2.44 then
-        pdifmin = cratio * 1176 / 1024 - 775 / 1024
-    else
-        pdifmin = cratio - 0.375
-    end
-
-    local critbonus = attacker:getMod(xi.mod.CRIT_DMG_INCREASE) - defender:getMod(xi.mod.CRIT_DEF_BONUS)
-    critbonus       = utils.clamp(critbonus, 0, 100)
-    pdifcrit[1]     = pdifmin * (100 + critbonus) / 100
-    pdifcrit[2]     = pdifmax * (100 + critbonus) / 100
+    local critbonus = utils.clamp(attacker:getMod(xi.mod.CRIT_DMG_INCREASE) - defender:getMod(xi.mod.CRIT_DEF_BONUS), 0, 100)
+    local pdifcrit  = { unadjustedPDifCrit[1] * (100 + critbonus) / 100, unadjustedPDifCrit[2] * (100 + critbonus) / 100 }
 
     return pdif, pdifcrit
 end
