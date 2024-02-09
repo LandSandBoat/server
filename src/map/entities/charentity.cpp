@@ -2718,6 +2718,15 @@ void CCharEntity::endCurrentEvent()
 
 void CCharEntity::queueEvent(EventInfo* eventToQueue)
 {
+    for (auto& eventElement : eventQueue)
+    {
+        if (eventElement->eventId == eventToQueue->eventId)
+        {
+            ShowError("CCharEntity::queueEvent: Character attempted to start multiple of the same event.");
+            return;
+        }
+    }
+
     eventQueue.emplace_back(eventToQueue);
     tryStartNextEvent();
 }
