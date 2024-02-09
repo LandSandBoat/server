@@ -1,14 +1,10 @@
 -----------------------------------
 -- Zone: Halvung (62)
 -----------------------------------
-local ID = zones[xi.zone.HALVUNG]
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
     xi.helm.initZone(zone, xi.helm.type.MINING)
-
-    GetMobByID(ID.mob.COPPER_BORER):setRespawnTime(7200) -- 2 hours
 end
 
 zoneObject.onZoneIn = function(player, prevZone)
