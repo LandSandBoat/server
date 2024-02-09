@@ -204,6 +204,7 @@ void CEnmityContainer::UpdateEnmity(CBattleEntity* PEntity, int32 CE, int32 VE, 
         if (initial)
         {
             CE += 200;
+            VE += 900;
         }
 
         float bonus = CalculateEnmityBonus(PEntity);
