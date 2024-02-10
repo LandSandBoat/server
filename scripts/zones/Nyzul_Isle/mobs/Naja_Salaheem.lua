@@ -52,7 +52,7 @@ entity.onMobFight = function(mob, target)
     end
 end
 
-entity.onMobDisengage = function(mob, target)
+entity.onMobDisengage = function(mob)
     local ready = mob:getLocalVar('ready')
 
     if ready == 1 then

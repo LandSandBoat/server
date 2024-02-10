@@ -9,7 +9,7 @@ mixins = { require('scripts/mixins/job_special') }
 -----------------------------------
 local entity = {}
 
-entity.onMobRoam = function(mob, target)
+entity.onMobRoam = function(mob)
     local mobId = mob:getID()
     local hpp = mob:getHPP()
 
