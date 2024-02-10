@@ -41,7 +41,8 @@ along with this program.  If not, see http://www.gnu.org/licenses/
  ************************************************************************/
 
 CEnmityContainer::CEnmityContainer(CMobEntity* holder)
-: m_EnmityHolder(holder)
+: EnmityCap{ settings::get<int32>("map.ENMITY_CAP") }
+, m_EnmityHolder(holder)
 {
 }
 
