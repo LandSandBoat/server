@@ -51,6 +51,12 @@ xi.settings.map =
     -- If this is the case, consider using the ah_pagination module
     AH_LIST_LIMIT = 7,
 
+    -- The total enmity cap for a given entity on the enmity table.
+    -- 30,000 is believed to be approximately current retail cap.
+    -- This directly affects a tank's ability to hold enmity over time.
+    -- The lower the value, the faster damage dealers will reach the cap and the mob will bounce.
+    ENMITY_CAP = 30000,
+
     -- Misc EXP related settings
     EXP_RATE                = 1.0,
     EXP_LOSS_RATE           = 1.0,
