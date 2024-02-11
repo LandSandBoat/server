@@ -1178,6 +1178,23 @@ bool CLuaBaseEntity::isInEvent()
 }
 
 /************************************************************************
+ *  Function: isInOptionalEvent()
+ *  Purpose : Returns true if the player is in an optional event
+ *  Example : if player:isInOptionalEvent() then
+ *  Notes   : Primarily used to "event skip" a player.
+ ************************************************************************/
+
+bool CLuaBaseEntity::isInOptionalEvent()
+{
+    if (auto player = dynamic_cast<CCharEntity*>(m_PBaseEntity))
+    {
+        return player->isInEvent() && player->currentEvent->type == EVENT_TYPE::OPTIONAL_CUTSCENE;
+    }
+
+    return false;
+}
+
+/************************************************************************
  *  Function: release()
  *  Purpose : Ends an event for a PC; releases from cutscene
  *  Example : player:release()
@@ -17152,6 +17169,7 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("updateEventString", CLuaBaseEntity::updateEventString);
     SOL_REGISTER("getEventTarget", CLuaBaseEntity::getEventTarget);
     SOL_REGISTER("isInEvent", CLuaBaseEntity::isInEvent);
+    SOL_REGISTER("isInOptionalEvent", CLuaBaseEntity::isInOptionalEvent);
     SOL_REGISTER("release", CLuaBaseEntity::release);
     SOL_REGISTER("startSequence", CLuaBaseEntity::startSequence);
     SOL_REGISTER("didGetMessage", CLuaBaseEntity::didGetMessage);

@@ -1175,7 +1175,7 @@ xi.conquest.overseerOnTrigger = function(player, npc, guardNation, guardType, gu
         local a6 = getArg6(player)
         local a7 = player:getCP()
 
-        player:startEvent(guardEvent, a1, 0, a3, 0, 0, a6, a7, 0)
+        player:startOptionalCutscene(guardEvent, a1, 0, a3, 0, 0, a6, a7, 0)
 
     -- CITY AND FOREIGN OVERSEERS
     elseif guardType <= xi.conquest.guard.FOREIGN then
@@ -1188,15 +1188,15 @@ xi.conquest.overseerOnTrigger = function(player, npc, guardNation, guardType, gu
         local a7 = player:getCP()
         local a8 = getExForceReward(player, guardNation)
 
-        player:startEvent(guardEvent, a1, a2, a3, a4, a5, a6, a7, a8)
+        player:startOptionalCutscene(guardEvent, a1, a2, a3, a4, a5, a6, a7, a8)
 
     -- OUTPOST AND BORDER OVERSEERS
     elseif guardType >= xi.conquest.guard.OUTPOST then
         local a1 = getArg1(player, guardNation, guardType)
         if a1 == 1808 then -- non-allied nation
-            player:startEvent(guardEvent, a1, 0, 0, 0, 0, player:getRank(player:getNation()), 0, 0)
+            player:startOptionalCutscene(guardEvent, a1, 0, 0, 0, 0, player:getRank(player:getNation()), 0, 0)
         else
-            player:startEvent(guardEvent, a1, 0, 0x3F0000, 0, 0, getArg6(player), 0, 0)
+            player:startOptionalCutscene(guardEvent, a1, 0, 0x3F0000, 0, 0, getArg6(player), 0, 0)
         end
     end
 end
@@ -1430,7 +1430,7 @@ xi.conquest.vendorOnTrigger = function(player, vendorRegion, vendorEvent)
         nation = 2
     end
 
-    player:startEvent(vendorEvent, nation, fee, 0, fee, player:getCP(), 0, 0, 0)
+    player:startOptionalCutscene(vendorEvent, nation, fee, 0, fee, player:getCP(), 0, 0, 0)
 end
 
 xi.conquest.vendorOnEventUpdate = function(player, vendorRegion)

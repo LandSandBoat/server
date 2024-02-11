@@ -54,7 +54,7 @@ zoneObject.onTriggerAreaEnter = function(player, triggerArea)
 
     if p['green'] ~= nil then -- green portal
         if player:getCharVar('skyShortcut') == 1 then
-            player:startEvent(42)
+            player:startOptionalCutscene(42)
         else
             local title = player:getTitle()
 

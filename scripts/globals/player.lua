@@ -235,6 +235,11 @@ xi.player.onGameIn = function(player, firstLogin, zoning)
         -- Login Campaign rewards points once daily
         xi.events.loginCampaign.onGameIn(playerArg)
     end)
+
+    -- Register listeners for event skips
+    player:addListener('ATTACKED', 'ATTACKED_EVENT_SKIP', xi.player.onTakeAction)
+    player:addListener('ABILITY_TAKE', 'ABILITY_TAKE_EVENT_SKIP', xi.player.onTakeAction)
+    player:addListener('MAGIC_TAKE', 'MAGIC_TAKE_EVENT_SKIP', xi.player.onTakeAction)
 end
 
 xi.player.onPlayerDeath = function(player)
@@ -268,6 +273,12 @@ xi.player.onPlayerEmote = function(player, emoteId)
 end
 
 xi.player.onPlayerVolunteer = function(player, text)
+end
+
+xi.player.onTakeAction = function(player)
+    if player:isInOptionalEvent() then
+        player:release()
+    end
 end
 
 return xi.player

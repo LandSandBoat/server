@@ -86,7 +86,7 @@ xi.escha.portals.eschanPortalOnTrigger = function(player, npc, portalGlobalNumbe
         end
     end
 
-    player:startEvent(9100, 0, portalBitMask, zoneId, portalGlobalNumber, lockValue, player:getCurrency('escha_silt'), getPortalCost(player), 0)
+    player:startOptionalCutscene(9100, 0, portalBitMask, zoneId, portalGlobalNumber, lockValue, player:getCurrency('escha_silt'), getPortalCost(player), 0)
 end
 
 xi.escha.portals.eschanPortalEventUpdate = function(player, csid, option, npc)
