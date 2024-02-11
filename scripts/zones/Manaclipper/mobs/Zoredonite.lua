@@ -10,7 +10,7 @@ mixins =
 -----------------------------------
 local entity = {}
 
-entity.onMobEngaged = function(mob, player)
+entity.onMobEngage = function(mob, player)
     mob:setLocalVar('[uragnite]inShellRegen', 100)
 end
 

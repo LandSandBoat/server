@@ -35,7 +35,7 @@ entity.onMobRoam = function(mob)
     end
 end
 
-entity.onMobEngaged = function(mob, target)
+entity.onMobEngage = function(mob, target)
     mob:useMobAbility(1487)
     mob:addStatusEffectEx(xi.effect.SILENCE, 0, 0, 0, 5)
 end

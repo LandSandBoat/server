@@ -7,7 +7,7 @@ local ID = zones[xi.zone.TEMENOS]
 -----------------------------------
 local entity = {}
 
-entity.onMobEngaged = function(mob, target)
+entity.onMobEngage = function(mob, target)
     if
         GetMobByID(ID.mob.TEMENOS_C_MOB[3] + 12):isDead() and GetMobByID(ID.mob.TEMENOS_C_MOB[3] + 13):isDead() and
         GetMobByID(ID.mob.TEMENOS_C_MOB[3] + 14):isDead() and GetMobByID(ID.mob.TEMENOS_C_MOB[3] + 15):isDead() and

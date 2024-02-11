@@ -31,7 +31,7 @@ end
 -- TODO: Mob's movement speed is increased while chasing target.
 -- It's tricky to emulate this exact mechanic, because on retail 'chase'
 -- is triggered not only while the mob engaged, but also when target is out of range.
-entity.onMobEngaged = function(mob)
+entity.onMobEngage = function(mob)
     mob:setSpeed(100)
 end
 

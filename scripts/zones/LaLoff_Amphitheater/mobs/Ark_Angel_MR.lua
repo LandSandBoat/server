@@ -17,7 +17,7 @@ entity.onMobSpawn = function(mob)
     })
 end
 
-entity.onMobEngaged = function(mob, target)
+entity.onMobEngage = function(mob, target)
     --[[ TODO:
         Summons pet when party is engaged.  Randomly chosen between Tiger and Mandragora.
         Current victory system doesn't readily support a random choice of pet while having

@@ -11,7 +11,7 @@ entity.onMobSpawn = function(mob)
     mob:setMagicCastingEnabled(false) -- does not cast spells while idle
 end
 
-entity.onMobEngaged = function(mob, target)
+entity.onMobEngage = function(mob, target)
     mob:setMagicCastingEnabled(true)
 end
 

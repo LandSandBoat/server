@@ -6,7 +6,7 @@ local ID = zones[xi.zone.DYNAMIS_XARCABARD]
 -----------------------------------
 local entity = {}
 
-entity.onMobEngaged = function(mob, target)
+entity.onMobEngage = function(mob, target)
     target:showText(mob, ID.text.ANIMATED_TABAR_DIALOG)
 end
 

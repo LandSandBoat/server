@@ -53,7 +53,7 @@ end
 entity.onMobRoam = function(mob)
 end
 
-entity.onMobEngaged = function(mob, target)
+entity.onMobEngage = function(mob, target)
     mob:setMobMod(xi.mobMod.TELEPORT_TYPE, 0)
 end
 

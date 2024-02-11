@@ -32,7 +32,7 @@ entity.onMobSpawn = function(mob)
     mob:setMobMod(xi.mobMod.ROAM_DISTANCE, 15)
 end
 
-entity.onMobEngaged = function(mob)
+entity.onMobEngage = function(mob)
     handleRegen(mob, mob:getAnimationSub())
 end
 

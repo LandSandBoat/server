@@ -6,7 +6,7 @@ local entity = {}
 
 local offsets = { 1, 3, 5, 2, 4, 6 }
 
-entity.onMobEngaged = function(mob, target)
+entity.onMobEngage = function(mob, target)
     mob:resetLocalVars()
 end
 

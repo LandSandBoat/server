@@ -62,7 +62,7 @@ entity.onMobDisengage = function(mob)
     end
 end
 
-entity.onMobEngaged = function(mob, target)
+entity.onMobEngage = function(mob, target)
     -- pop pets
     for i = 1, 8 do
         local pet = GetMobByID(petIDs[1][i])

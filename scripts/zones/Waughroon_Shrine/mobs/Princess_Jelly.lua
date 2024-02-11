@@ -146,7 +146,7 @@ entity.onMobFight = function(mob, target)
     end
 end
 
-entity.onMobEngaged = function(mob, target)
+entity.onMobEngage = function(mob, target)
     local bfNum = mob:getBattlefield():getArea()
 
     for i = 1, 8 do

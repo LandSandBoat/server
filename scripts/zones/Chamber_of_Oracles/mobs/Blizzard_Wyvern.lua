@@ -9,7 +9,7 @@ entity.onMobSpawn = function(mob)
     mob:setMobMod(xi.mobMod.SIGHT_RANGE, 17)
 end
 
-entity.onMobEngaged = function(mob, target)
+entity.onMobEngage = function(mob, target)
     mob:useMobAbility(815)
     mob:setMod(xi.mod.REGAIN, 100)
 end

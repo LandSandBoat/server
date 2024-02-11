@@ -53,7 +53,7 @@ entity.onMobSpawn = function(mob)
     })
 end
 
-entity.onMobEngaged = function(mob, target)
+entity.onMobEngage = function(mob, target)
     -- After 30s, start warbling
     mob:timer(30000, function(mobArg)
         doWarble(mobArg)

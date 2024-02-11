@@ -260,8 +260,8 @@ xi.darkixion.setupEntity = function(entity)
         xi.darkixion.onMobRoam(mob)
     end
 
-    entity.onMobEngaged = function(mob, target)
-        xi.darkixion.onMobEngaged(mob, target)
+    entity.onMobEngage = function(mob, target)
+        xi.darkixion.onMobEngage(mob, target)
     end
 
     entity.onMobDisengage = function(mob)
@@ -421,7 +421,7 @@ xi.darkixion.onMobRoam = function(mob)
     end
 end
 
-xi.darkixion.onMobEngaged = function(mob, target)
+xi.darkixion.onMobEngage = function(mob, target)
     mob:setMod(xi.mod.REGAIN, 20) -- 'has tp regen': https://www.bluegartr.com/threads/59044-Ixion-discussion-thread/page8
     xi.darkixion.roamingMods(mob)
     -- if stygian ash missed or aggro via any other means, immediately disengage (even if hearing aggro 'If you get too close, DI runs away')

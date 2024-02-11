@@ -10,7 +10,7 @@ entity.onMobSpawn = function(mob)
     mob:setAnimationSub(4) -- starting animationSub
 end
 
-entity.onMobEngaged = function(mob, target)
+entity.onMobEngage = function(mob, target)
 end
 
 entity.onMobFight = function(mob, player, target)

@@ -16,7 +16,7 @@ entity.onMobInitialize = function(mob)
     end
 end
 
-entity.onMobEngaged = function(mob, target)
+entity.onMobEngage = function(mob, target)
     mob:showText(mob, ID.text.DIAMOND_QUADAV_ENGAGE)
 end
 

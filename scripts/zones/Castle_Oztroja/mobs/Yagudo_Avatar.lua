@@ -9,7 +9,7 @@ local ID = zones[xi.zone.CASTLE_OZTROJA]
 -----------------------------------
 local entity = {}
 
-entity.onMobEngaged = function(mob, target)
+entity.onMobEngage = function(mob, target)
     mob:showText(mob, ID.text.YAGUDO_AVATAR_ENGAGE)
 end
 

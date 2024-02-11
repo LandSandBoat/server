@@ -43,7 +43,7 @@ entity.onMobSpawn = function(mob)
     end)
 end
 
-entity.onMobEngaged = function(mob, target)
+entity.onMobEngage = function(mob, target)
     mob:castSpell(xi.magic.spell.UTSUSEMI_SAN, mob)
 end
 

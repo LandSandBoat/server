@@ -6,7 +6,7 @@ local ID = zones[xi.zone.TEMENOS]
 -----------------------------------
 local entity = {}
 
-entity.onMobEngaged = function(mob, target)
+entity.onMobEngage = function(mob, target)
     local mobID = mob:getID()
     if mobID == ID.mob.TEMENOS_C_MOB[2] + 1 then
         GetMobByID(ID.mob.TEMENOS_C_MOB[2] + 2):updateEnmity(target)

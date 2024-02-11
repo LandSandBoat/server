@@ -12,7 +12,7 @@ entity.onMobSpawn = function(mob)
     mob:setMobMod(xi.mobMod.SUPERLINK, 1)
 end
 
-entity.onMobEngaged = function(mob, target)
+entity.onMobEngage = function(mob, target)
     mob:setMobMod(xi.mobMod.NO_MOVE, 0) -- unlock from moving
     mob:useMobAbility(373) -- use secretion
 end

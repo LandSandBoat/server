@@ -22,7 +22,7 @@ entity.onMobSpawn = function(mob)
     end
 end
 
-entity.onMobEngaged = function(mob, target)
+entity.onMobEngage = function(mob, target)
     local mobId = mob:getID()
     for i = 1, 2 do
         local guardID = GetMobByID(mobId + i)

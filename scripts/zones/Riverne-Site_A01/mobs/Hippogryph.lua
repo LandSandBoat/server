@@ -18,7 +18,7 @@ entity.onMobSpawn = function(mob)
     disturbMob(mob)
 end
 
-entity.onMobEngaged = function(mob, target)
+entity.onMobEngage = function(mob, target)
     disturbMob(mob)
 end
 

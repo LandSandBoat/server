@@ -20,7 +20,7 @@ entity.onMobSpawn = function(mob)
     end
 end
 
-entity.onMobEngaged = function(mob, target)
+entity.onMobEngage = function(mob, target)
     local bcnmAllies = mob:getBattlefield():getAllies()
     for i, v in pairs(bcnmAllies) do
         if v:getName() == 'Prishe' then
