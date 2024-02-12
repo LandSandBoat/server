@@ -3185,7 +3185,7 @@ namespace luautils
         return 0;
     }
 
-    int32 OnMobEngaged(CBaseEntity* PMob, CBaseEntity* PTarget)
+    int32 OnMobEngage(CBaseEntity* PMob, CBaseEntity* PTarget)
     {
         TracyZoneScoped;
 
