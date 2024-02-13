@@ -1,54 +1,61 @@
 ﻿#include "common/socket.h"
 
-#include "timer_bar_util.h"
+#include "objective_utility.h"
 
 #include "entities/charentity.h"
 
-CTimerBarUtilPacket::CTimerBarUtilPacket()
+CObjectiveUtilityPacket::CObjectiveUtilityPacket()
 {
     this->setType(0x75);
     this->setSize(0xAC);
+
+    // ref<uint8>(0x25) = ; // Flags value with multiple usages.
 }
 
-void CTimerBarUtilPacket::addCountdown(uint32 seconds)
+void CObjectiveUtilityPacket::addCountdown(uint32 duration, uint32 warning /* = 0 */)
 {
-    // Non-zero shows timer, zero hides it
-    ref<uint16>(0x04) = 0xFFFF;
-
+    ref<uint32>(0x04) |= 0x01;
     ref<uint32>(0x08) = CVanaTime::getInstance()->getVanaTime();
-    ref<uint32>(0x0C) = seconds;
-
-    // Static data ("_unknown1" in Windower fields)
-    ref<uint8>(0x10) = 0x3C;
-    ref<uint8>(0x24) = 0x03;
+    ref<uint32>(0x0C) = duration;
+    ref<uint32>(0x10) = warning; // If 0, defaults to 60.
+    ref<uint8>(0x24) |= OBJECTIVEUTILITY_COUNTDOWN;
 }
 
-void CTimerBarUtilPacket::addBar1(std::string const& name, uint8 value)
+void CObjectiveUtilityPacket::addBars(std::vector<std::pair<std::string, uint32>>&& bars)
 {
-    ref<uint8>(0x28) = value;
+    ref<uint32>(0x04) |= 0xFFFF;
+    ref<uint8>(0x24) |= OBJECTIVEUTILITY_PROGRESS;
 
-    for (size_t i = 0; i < name.size(); ++i)
+    uint8 pos = 0x28;
+    for (auto bar = bars.begin(); pos < 0x8C && bar != bars.end(); ++bar)
     {
-        ref<char>(0x2C + i) = name.at(i);
+        ref<uint32>(pos) = bar->second;
+
+        for (size_t i = 0; i < bar->first.size(); ++i)
+        {
+            ref<char>(pos + 0x04 + i) = bar->first.at(i);
+        }
+        pos += 0x14;
     }
 }
 
-void CTimerBarUtilPacket::addBar2(std::string const& name, uint8 value)
+void CObjectiveUtilityPacket::addFence(float x, float y, float radius, float render)
 {
-    ref<uint8>(0x3C) = value;
-
-    for (size_t i = 0; i < name.size(); ++i)
-    {
-        ref<char>(0x40 + i) = name.at(i);
-    }
+    ref<int32>(0x14)  = static_cast<int32>(x * 1000);
+    ref<int32>(0x18)  = static_cast<int32>(y * 1000);
+    ref<uint32>(0x1C) = static_cast<uint32>(radius * 1000);
+    ref<uint32>(0x20) = static_cast<uint32>(render * 1000);
+    ref<uint8>(0x24) |= OBJECTIVEUTILITY_FENCE;
+    // ref<uint8>(0x26) = ; // Flags value with multiple usages.
 }
 
-void CTimerBarUtilPacket::addBattlefieldRadius(uint32 distance)
+void CObjectiveUtilityPacket::addHelpText(uint16 title, uint16 description)
 {
-    ref<uint8>(0x1C) = distance;
-}
+    ref<uint8>(0x24) |= OBJECTIVEUTILITY_HELP;
 
-void CTimerBarUtilPacket::addRenderRadius(uint32 distance)
-{
-    ref<uint8>(0x20) = distance;
+    // These translate to a real table index of 0x1A, which is the mini-game string DAT file.
+    //  JP: 55559 - ROM\333\15.DAT
+    //  NA: 55679 - ROM\333\16.DAT
+    ref<uint16>(0xA8) = title;                                   // String index. (String table 26.)
+    ref<uint16>(0xAA) = description > 18 ? description - 19 : 0; // Same as 0xA8. Client adds 19 to this value.
 }

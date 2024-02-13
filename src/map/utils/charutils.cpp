@@ -66,10 +66,10 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "packets/message_standard.h"
 #include "packets/monipulator1.h"
 #include "packets/monipulator2.h"
+#include "packets/objective_utility.h"
 #include "packets/quest_mission_log.h"
 #include "packets/roe_sparkupdate.h"
 #include "packets/server_ip.h"
-#include "packets/timer_bar_util.h"
 
 #include "ability.h"
 #include "alliance.h"
@@ -6685,7 +6685,7 @@ namespace charutils
 
     void SendTimerPacket(CCharEntity* PChar, uint32 seconds)
     {
-        auto* timerPacket = new CTimerBarUtilPacket();
+        auto* timerPacket = new CObjectiveUtilityPacket();
         timerPacket->addCountdown(seconds);
         PChar->pushPacket(timerPacket);
     }
@@ -6698,7 +6698,7 @@ namespace charutils
 
     void SendClearTimerPacket(CCharEntity* PChar)
     {
-        auto* timerPacket = new CTimerBarUtilPacket();
+        auto* timerPacket = new CObjectiveUtilityPacket();
         PChar->pushPacket(timerPacket);
     }
 

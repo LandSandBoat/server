@@ -559,8 +559,6 @@ public:
     bool  isInDynamis();
     void  setEnteredBattlefield(bool entered);
     bool  hasEnteredBattlefield();
-    void  sendTimerPacket(uint32 seconds);
-    void  sendClearTimerPacket();
 
     // Battle Utilities
     bool isAlive();
@@ -572,9 +570,8 @@ public:
     void sendTractor(float xPos, float yPos, float zPos, uint8 rotation);
     void allowSendRaisePrompt();
 
-    void countdown(sol::object const& secondsObj,
-                   sol::object const& bar1NameObj, sol::object const& bar1ValObj,
-                   sol::object const& bar2NameObj, sol::object const& bar2ValObj);
+    void countdown(sol::object const& secondsObj);
+    void objectiveUtility(sol::object const& obj);
     void enableEntities(sol::object const& obj);
     void independentAnimation(CLuaBaseEntity* PTarget, uint16 animId, uint8 mode);
 

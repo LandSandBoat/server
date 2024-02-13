@@ -142,6 +142,7 @@
 #include "packets/message_text.h"
 #include "packets/monipulator1.h"
 #include "packets/monipulator2.h"
+#include "packets/objective_utility.h"
 #include "packets/position.h"
 #include "packets/quest_mission_log.h"
 #include "packets/release.h"
@@ -149,7 +150,6 @@
 #include "packets/server_ip.h"
 #include "packets/shop_items.h"
 #include "packets/shop_menu.h"
-#include "packets/timer_bar_util.h"
 #include "packets/weather.h"
 
 #include "utils/battleutils.h"
@@ -10991,39 +10991,6 @@ bool CLuaBaseEntity::hasEnteredBattlefield()
 }
 
 /************************************************************************
- *  Function: sendTimerPacket()
- *  Purpose : sends the packet to enable a timer with durations in seconds
- *  Example : player:sendTimerPacket(60 * 15)
- *  Notes   :
- ************************************************************************/
-
-void CLuaBaseEntity::sendTimerPacket(uint32 seconds)
-{
-    if (m_PBaseEntity->objtype != TYPE_PC)
-    {
-        ShowWarning("CLuaBaseEntity::sendTimerPacket() was called on non CCharEntity!");
-        return;
-    }
-    charutils::SendTimerPacket(static_cast<CCharEntity*>(m_PBaseEntity), seconds);
-}
-
-/************************************************************************
- *  Function: sendClearTimerPacket()
- *  Purpose : sends the packet to clear an existing timer
- *  Example : player:sendClearTimerPacket()
- *  Notes   :
- ************************************************************************/
-void CLuaBaseEntity::sendClearTimerPacket()
-{
-    if (m_PBaseEntity->objtype != TYPE_PC)
-    {
-        ShowWarning("CLuaBaseEntity::sendClearTimerPacket() was called on non CCharEntity!");
-        return;
-    }
-    charutils::SendClearTimerPacket(static_cast<CCharEntity*>(m_PBaseEntity));
-}
-
-/************************************************************************
  *  Function: isAlive()
  *  Purpose : Returns true if an Entity is alive
  *  Example : if mob:isAlive() then
@@ -11184,9 +11151,7 @@ void CLuaBaseEntity::allowSendRaisePrompt()
  *  Example : player:countdown(60)
  *  Notes   : Using 0 or no argument removes the countdown bar from the player
  ************************************************************************/
-void CLuaBaseEntity::countdown(sol::object const& secondsObj,
-                               sol::object const& bar1NameObj, sol::object const& bar1ValObj,
-                               sol::object const& bar2NameObj, sol::object const& bar2ValObj)
+void CLuaBaseEntity::countdown(sol::object const& secondsObj)
 {
     if (m_PBaseEntity->objtype != TYPE_PC)
     {
@@ -11195,21 +11160,121 @@ void CLuaBaseEntity::countdown(sol::object const& secondsObj,
     }
 
     CCharEntity* PChar  = (CCharEntity*)m_PBaseEntity;
-    auto*        packet = new CTimerBarUtilPacket();
+    auto*        packet = new CObjectiveUtilityPacket();
 
     if (secondsObj.is<uint32>())
     {
         packet->addCountdown(secondsObj.as<uint32>());
     }
 
-    if (bar1NameObj.is<std::string>() && bar1ValObj.is<uint8>())
+    PChar->pushPacket(packet);
+}
+
+/************************************************************************
+ *  Function: objectiveUtility()
+ *  Purpose : Manages countdown, progress bars, battle fence, help text
+ *  Example :
+        local objective = {
+            -- countdown = 1800, -- countdown duration with default warning (60s)
+            countdown = {
+                duration = 3600, -- countdown length in seconds
+                warning = 300 -- remaining duration after which the timer starts flashing red
+            },
+            bars = {
+                [1] = {
+                    title = "Izzat", -- bar title, empty string hides bar
+                    value = 100 -- % bar progress
+                },
+            },
+            fence = {
+                pos = {x = 0.000, y = 0.000}, -- center of fence
+                radius = 25.00, -- radius from pos in yalms
+                render = 25.00 -- distance from fence it becomes visible
+            },
+            help = {
+                title = 1, -- string index from ROM\333\16.DAT
+                description = 62 -- same as above, must be 19 or higher
+            }
+        }
+        player:objectiveUtility(objective)
+ *  Notes   : Can have up to 5 bars. Many of these items are optional.
+        Calling without arguments will clear everything.
+ ************************************************************************/
+void CLuaBaseEntity::objectiveUtility(sol::object const& obj)
+{
+    if (m_PBaseEntity->objtype != TYPE_PC)
     {
-        packet->addBar1(bar1NameObj.as<std::string>(), bar1ValObj.as<uint8>());
+        ShowWarning("Invalid entity type calling function (%s).", m_PBaseEntity->getName());
+        return;
     }
 
-    if (bar2NameObj.is<std::string>() && bar2ValObj.is<uint8>())
+    CCharEntity* PChar  = (CCharEntity*)m_PBaseEntity;
+    auto*        packet = new CObjectiveUtilityPacket();
+
+    if (obj.is<sol::table>())
     {
-        packet->addBar2(bar2NameObj.as<std::string>(), bar2ValObj.as<uint8>());
+        sol::object countdownObj = obj.as<sol::table>()["countdown"];
+        if (countdownObj.valid())
+        {
+            if (countdownObj.is<sol::table>())
+            {
+                sol::object duration = countdownObj.as<sol::table>()["duration"];
+                uint32      warning  = countdownObj.as<sol::table>().get_or<uint32>("warning", 0);
+                packet->addCountdown(duration.as<uint32>(), warning);
+            }
+            else if (countdownObj.is<uint32>())
+            {
+                packet->addCountdown(countdownObj.as<uint32>());
+            }
+        }
+
+        sol::object barsObj = obj.as<sol::table>()["bars"];
+        if (barsObj.valid() && barsObj.is<sol::table>())
+        {
+            std::vector<std::pair<std::string, uint32>> bars;
+            for (uint8 i = 1; i <= 5; ++i)
+            {
+                sol::object barObj = barsObj.as<sol::table>()[i];
+                if (barObj.valid() && barObj.is<sol::table>())
+                {
+                    sol::object barTitle = barObj.as<sol::table>()["title"];
+                    sol::object barValue = barObj.as<sol::table>()["value"];
+                    if (barTitle.valid() && barTitle.is<std::string>() && barValue.valid() && barValue.is<uint32>())
+                    {
+                        bars.push_back(std::make_pair(barTitle.as<std::string>(), barValue.as<uint32>()));
+                    }
+                }
+                else
+                {
+                    bars.push_back(std::make_pair("", 0x7FFFFFFF));
+                }
+            }
+            if (!bars.empty())
+            {
+                packet->addBars(std::move(bars));
+            }
+        }
+
+        sol::object fenceObj = obj.as<sol::table>()["fence"];
+        if (fenceObj.valid() && fenceObj.is<sol::table>())
+        {
+            sol::object fencePosObj = fenceObj.as<sol::table>()["pos"];
+
+            float posX   = fencePosObj.as<sol::table>().get_or<float>("x", 0.000);
+            float posY   = fencePosObj.as<sol::table>().get_or<float>("y", 0.000);
+            float radius = fenceObj.as<sol::table>().get_or<float>("radius", 0.00);
+            float render = fenceObj.as<sol::table>().get_or<float>("render", 25.00);
+
+            packet->addFence(posX, posY, radius, render);
+        }
+
+        sol::object helpObj = obj.as<sol::table>()["help"];
+        if (helpObj.valid() && helpObj.is<sol::table>())
+        {
+            sol::object title       = helpObj.as<sol::table>()["title"];
+            sol::object description = helpObj.as<sol::table>()["description"];
+            packet->addHelpText(title.as<uint16>(), description.as<uint16>());
+        }
     }
 
     PChar->pushPacket(packet);
@@ -17597,8 +17662,6 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("isInDynamis", CLuaBaseEntity::isInDynamis);
     SOL_REGISTER("setEnteredBattlefield", CLuaBaseEntity::setEnteredBattlefield);
     SOL_REGISTER("hasEnteredBattlefield", CLuaBaseEntity::hasEnteredBattlefield);
-    SOL_REGISTER("sendTimerPacket", CLuaBaseEntity::sendTimerPacket);
-    SOL_REGISTER("sendClearTimerPacket", CLuaBaseEntity::sendClearTimerPacket);
 
     // Battle Utilities
     SOL_REGISTER("isAlive", CLuaBaseEntity::isAlive);
@@ -17611,6 +17674,7 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("allowSendRaisePrompt", CLuaBaseEntity::allowSendRaisePrompt);
 
     SOL_REGISTER("countdown", CLuaBaseEntity::countdown);
+    SOL_REGISTER("objectiveUtility", CLuaBaseEntity::objectiveUtility);
     SOL_REGISTER("enableEntities", CLuaBaseEntity::enableEntities);
     SOL_REGISTER("independentAnimation", CLuaBaseEntity::independentAnimation);
 
