@@ -8,6 +8,12 @@
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)
+    if player:getStatusEffect(xi.effect.CONTRADANCE) then
+        ability:setAOE(1)
+        ability:setRange(10)
+        player:delStatusEffect(xi.effect.CONTRADANCE)
+    end
+
     local waltzCost = 200 - player:getMod(xi.mod.WALTZ_COST) * 10
     if target:getHP() == 0 then
         return xi.msg.basic.CANNOT_ON_THAT_TARG, 0
@@ -39,10 +45,13 @@ abilityObject.onAbilityCheck = function(player, target, ability)
     end
 end
 
-abilityObject.onUseAbility = function(player, target, ability)
+abilityObject.onUseAbility = function(player, target, ability, action)
     local waltzCost = 200 - player:getMod(xi.mod.WALTZ_COST) * 10
     -- Only remove TP if the player doesn't have Trance.
-    if not player:hasStatusEffect(xi.effect.TRANCE) then
+    if
+        not player:hasStatusEffect(xi.effect.TRANCE) and
+        action:getPrimaryTargetID() == target:getID()
+    then
         player:delTP(waltzCost)
     end
 
