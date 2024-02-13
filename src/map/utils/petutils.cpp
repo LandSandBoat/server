@@ -1259,6 +1259,8 @@ namespace petutils
                 if (PMob->PEnmityContainer->IsWithinEnmityRange(PMob->PMaster))
                 {
                     PMob->PEnmityContainer->UpdateEnmity(PChar, 0, 0);
+                    // need to set battle target to prevent mob enmity clear if in attack state when uncharming
+                    PMob->SetBattleTargetID(PChar->targid);
                 }
                 else
                 {
