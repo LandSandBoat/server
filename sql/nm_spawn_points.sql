@@ -6977,6 +6977,13 @@ INSERT INTO `nm_spawn_points` VALUES (17469747,0,169.270,8.028,-110.580);
 INSERT INTO `nm_spawn_points` VALUES (17469747,1,155.792,8.334,-124.494);
 INSERT INTO `nm_spawn_points` VALUES (17469747,2,169.525,11.964,-128.288);
 
+-- Atkorkamuy
+INSERT INTO `nm_spawn_points` VALUES (17293485,0,-341.691,-21.0,39.305);
+INSERT INTO `nm_spawn_points` VALUES (17293485,1,-338.898,-21.028,45.62);
+INSERT INTO `nm_spawn_points` VALUES (17293485,2,-286.022,-21.102,75.4);
+INSERT INTO `nm_spawn_points` VALUES (17293485,3,-226.756,-20.846,32.378);
+INSERT INTO `nm_spawn_points` VALUES (17293485,4,-202.11,-20.31,-10.47); -- This is the spot Atkorkamuy always spawns on server reboot even if this isn't in the db 
+
 /*!40000 ALTER TABLE `nm_spawn_points` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
