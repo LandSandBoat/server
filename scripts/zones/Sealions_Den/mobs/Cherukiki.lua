@@ -61,7 +61,7 @@ entity.onMobFight = function(mob, target)
     end
 end
 
-entity.onMobDisengage = function(mob, target)
+entity.onMobDisengage = function(mob)
     mob:setAnimationSub(2) -- laughing pose
 end
 
