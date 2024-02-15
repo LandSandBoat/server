@@ -4,14 +4,18 @@
 -- !addmission 10 12
 -----------------------------------
 -- Puzzle 1 - Beaucedine
--- Shadowy Pillar   : !pos 374 -12 -15
--- Lonely Evergreen : !pos -162 -80 178
--- Goblin Grenadier : !pos -26 -59 -76
+-- Shadowy Pillar   : !pos 374 -12 -15 161
+-- Lonely Evergreen : !pos -162 -80 178 111
+-- Goblin Grenadier : !pos -26 -59 -76 111
 -----------------------------------
 -- Puzzle 2 - Xarcabard
--- Option_One   : !pos 126 -24 -118
+-- Option_One   : !pos 126 -24 -118 112
 -- Option_One   : !pos 66 -24 -191 112
 -- Option_Three : !pos 1 -23 -103 112
+-----------------------------------
+-- Puzzle 3 - Castle Zvahl Baileys
+-- Shadowy Pillar : !pos 374 -12 -15 161
+-- Flame Of Fate  : !pos -155 -24 17 161
 -----------------------------------
 -- This mission can be repeated by losing the bncm battle in the subsequent mission
 -- Therefore to remove possible conflicts, the mission progress will be handled
@@ -49,7 +53,7 @@ mission.sections =
             onEventFinish =
             {
                 [100] = function(player, csid, option, npc)
-                    player:setCharVar('Mission[10][12]progress', 1)
+                    mission:setVar(player, 'progress', 1)
                 end,
             },
         },
@@ -59,7 +63,7 @@ mission.sections =
     {
         check = function(player, currentMission, missionStatus, vars)
             return currentMission >= mission.missionId and
-            player:getCharVar('Mission[10][12]progress') == 1 and
+            mission:getVar(player, 'progress') == 1 and
             not player:hasKeyItem(xi.ki.POCKET_MOGBOMB) and
             not player:hasKeyItem(xi.ki.TRIVIA_CHALLENGE_KUPON) and
             player:needToZone() == false
@@ -89,7 +93,7 @@ mission.sections =
     {
         check = function(player, currentMission, missionStatus, vars)
             return currentMission >= mission.missionId and
-            player:getCharVar('Mission[10][12]progress') == 1 and
+            mission:getVar(player, 'progress') == 1 and
             not player:hasKeyItem(xi.ki.POCKET_MOGBOMB) and
             not player:hasKeyItem(xi.ki.TRIVIA_CHALLENGE_KUPON) and
             player:needToZone() == true
@@ -107,14 +111,14 @@ mission.sections =
             ['Goblin_Grenadier'] =
             {
                 onTrigger = function(player, npc)
-                    local answer = player:getLocalVar('Mission[10][12][p1]pipSet') - 1
+                    local answer = mission:getLocalVar(player, '[p1]pipSet') - 1
 
                     if answer < 0 then
                         return mission:progressEvent(508, xi.ki.MAP_OF_THE_NORTHLANDS_AREA)
                     else
                         local today = VanadielDayOfTheWeek()
                         local tomorrow = (today + 1) % 8
-                        local hintsUsed = player:getLocalVar('Mission[10][12][p1]hintsUsed')
+                        local hintsUsed = mission:getLocalVar(player, '[p1]hintsUsed')
 
                         player:messageSpecial(zones[player:getZoneID()].text.GRENADIER_DAY_HINT, today, tomorrow)
 
@@ -190,8 +194,8 @@ mission.sections =
                         option == 1 or -- Used first hint
                         option == 2    -- Used second hint
                     then
-                        local hintsUsed = player:getLocalVar('Mission[10][12][p1]hintsUsed')
-                        player:setLocalVar('Mission[10][12][p1]hintsUsed', hintsUsed + 1)
+                        local hintsUsed = mission:getLocalVar(player, '[p1]hintsUsed')
+                        mission:setLocalVar(player, '[p1]hintsUsed', hintsUsed + 1)
                     elseif option == 3 then
                         -- wrong answer, reset puzzle
                         player:needToZone(false)
@@ -221,7 +225,7 @@ mission.sections =
 
                 [508] = function(player, csid, option, npc)
                     -- Pipset offset by 1 to account for saving 0 as a variable.  When retrieving, subtract 1
-                    player:setLocalVar('Mission[10][12][p1]pipSet', math.random(1, 10)) -- range: 0 - 9
+                    mission:setLocalVar(player, '[p1]pipSet', math.random(1, 10)) -- range: 0 - 9
                 end,
             },
         },
@@ -231,7 +235,7 @@ mission.sections =
     {
         check = function(player, currentMission, missionStatus, vars)
             return currentMission >= mission.missionId and
-            player:getCharVar('Mission[10][12]progress') == 1 and
+            mission:getVar(player, 'progress') == 1 and
             player:hasKeyItem(xi.ki.POCKET_MOGBOMB)
         end,
 
@@ -257,7 +261,7 @@ mission.sections =
                 [502] = function(player, csid, option, npc)
                     player:delKeyItem(xi.ki.POCKET_MOGBOMB)
                     npcUtil.giveKeyItem(player, xi.ki.TRIVIA_CHALLENGE_KUPON)
-                    player:setCharVar('Mission[10][12]progress', 2)
+                    mission:setVar(player, 'progress', 2)
                 end,
             },
         },
@@ -267,7 +271,7 @@ mission.sections =
     {
         check = function(player, currentMission, missionStatus, vars)
             return currentMission >= mission.missionId and
-            player:getCharVar('Mission[10][12]progress') == 2 and
+            mission:getVar(player, 'progress') == 2 and
             player:hasKeyItem(xi.ki.TRIVIA_CHALLENGE_KUPON)
         end,
 
@@ -325,7 +329,8 @@ mission.sections =
     {
         check = function(player, currentMission, missionStatus, vars)
             return currentMission >= mission.missionId and
-            player:getCharVar('Mission[10][12]progress') == 3
+            mission:getVar(player, 'progress') == 3 and
+            player:hasKeyItem(xi.ki.GAUNTLET_CHALLENGE_KUPON)
         end,
 
         [xi.zone.XARCABARD] =
@@ -354,15 +359,90 @@ mission.sections =
 
         [xi.zone.CASTLE_ZVAHL_BAILEYS] =
         {
+            ['Shadowy_Pillar'] =
+            {
+                onTrigger = function(player, npc)
+                    if not player:needToZone() then
+                        return mission:progressEvent(100, 1)
+                    else
+                        return mission:progressEvent(100, 2)
+                    end
+                end,
+            },
 
+            ['Flame_of_Fate'] =
+            {
+                onTrigger = function(player, npc)
+                    player:delStatusEffect(xi.effect.LEVEL_RESTRICTION)
+
+                    if not player:needToZone() then
+                        return mission:progressEvent(101, 4)
+                    elseif mission:getLocalVar(player, '[p3]timeLimit') < os.time() then
+                        return mission:progressEvent(101, 1)
+                    else
+                        return mission:progressEvent(101, 2)
+                    end
+                end,
+            },
+
+            onEventFinish =
+            {
+                [100] = function(player, csid, option, npc)
+                    if option == 1 then
+                        -- Start run
+                        player:needToZone(true)
+                        mission:setLocalVar(player, '[p3]timeLimit', os.time() + utils.minutes(8))
+                        player:addStatusEffect(xi.effect.LEVEL_RESTRICTION, 1, 0, 0)
+
+                        -- https://www.bg-wiki.com/ffxi/Kupo_Mission_13 : "The effect durations are random. They can be 3-7 minutes long. "
+                        local buffDuration = math.floor(utils.minutes(math.random(3, 7)) * xi.settings.main.SNEAK_INVIS_DURATION_MULTIPLIER)
+                        player:addStatusEffect(xi.effect.INVISIBLE, 1, 10, buffDuration)
+                        player:addStatusEffect(xi.effect.DEODORIZE, 1, 10, buffDuration)
+                        player:addStatusEffect(xi.effect.SNEAK, 1, 10, buffDuration)
+                    elseif option == 2 then
+                        -- Player came back to refresh buffs
+                        local buffDuration = math.floor(utils.minutes(math.random(3, 7)) * xi.settings.main.SNEAK_INVIS_DURATION_MULTIPLIER)
+                        player:addStatusEffect(xi.effect.INVISIBLE, 1, 10, buffDuration)
+                        player:addStatusEffect(xi.effect.DEODORIZE, 1, 10, buffDuration)
+                        player:addStatusEffect(xi.effect.SNEAK, 1, 10, buffDuration)
+                    end
+                end,
+
+                [101] = function(player, csid, option, npc)
+                    if option == 1 then
+                        -- Won the game!
+                        npcUtil.giveKeyItem(player, xi.ki.FESTIVAL_SOUVENIR_KUPON)
+                        mission:setVar(player, 'progress', 4)
+                    end
+
+                    if mission:getLocalVar(player, '[p3]timeLimit') > 0 then
+                        player:setMP(player:getMaxMP())
+                        player:setHP(player:getMaxHP())
+                        mission:setLocalVar(player, '[p3]timeLimit', 0)
+                    end
+                end,
+            },
         },
     },
 
     -- Part 5: Castle Zvahl Keep
     {
         check = function(player, currentMission, missionStatus, vars)
-            return currentMission == mission.missionId
+            return currentMission == mission.missionId and
+            mission:getVar(player, 'progress') == 4 and
+            player:hasKeyItem(xi.ki.FESTIVAL_SOUVENIR_KUPON)
         end,
+
+        [xi.zone.CASTLE_ZVAHL_BAILEYS] =
+        {
+            ['Flame_of_Fate'] =
+            {
+                onTrigger = function(player, npc)
+                    -- Reminder text
+                    return mission:progressEvent(101, 3)
+                end,
+            },
+        },
 
         [xi.zone.CASTLE_ZVAHL_KEEP] =
         {
