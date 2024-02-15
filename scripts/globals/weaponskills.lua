@@ -406,7 +406,7 @@ local function calculateWsMods(attacker, calcParams, wsParams)
     local wsMods = 0
 
     for parameterName, modList in pairs(modParameters) do
-        local paramValue = calcParams[parameterName] and calcParams[parameterName] or 0
+        local paramValue = wsParams[parameterName] and wsParams[parameterName] or 0
 
         wsMods = wsMods + attacker:getStat(modList[1]) * paramValue
     end
@@ -871,7 +871,7 @@ xi.weaponskills.doMagicWeaponskill = function(attacker, target, wsID, wsParams, 
         end
 
         for parameterName, modList in pairs(modParameters) do
-            local paramValue = calcParams[parameterName] and calcParams[parameterName] or 0
+            local paramValue = wsParams[parameterName] and wsParams[parameterName] or 0
 
             dmg = dmg + attacker:getStat(modList[1]) * paramValue
         end

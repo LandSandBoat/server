@@ -456,6 +456,12 @@ void CZoneEntities::DecreaseZoneCounter(CCharEntity* PChar)
     m_charList.erase(PChar->targid);
     charTargIds.erase(PChar->targid);
 
+    // Need to interupt fishing on zone out otherwise fished up mobs get stuck in hooked state
+    if (PChar->hookedFish && PChar->hookedFish->hooked == true)
+    {
+        fishingutils::InterruptFishing(PChar);
+    }
+
     ShowDebug("CZone:: %s DecreaseZoneCounter <%u> %s", m_zone->getName(), m_charList.size(), PChar->getName());
 }
 

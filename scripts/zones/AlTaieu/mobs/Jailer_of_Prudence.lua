@@ -54,7 +54,7 @@ entity.onMobSpawn = function(mob)
     mob:addMod(xi.mod.LULLABY_MEVA, 30)
 end
 
-entity.onMobDisengage = function(mob, target)
+entity.onMobDisengage = function(mob)
 end
 
 entity.onMobDeath = function(mob, player, optParams)

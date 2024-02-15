@@ -256,6 +256,7 @@ INSERT INTO `item_latents` VALUES (13142,1,7,53,1);      -- DEF +7 in areas outs
 INSERT INTO `item_latents` VALUES (13142,2,15,53,1);     -- HP +15 in areas outside own nation's control
 INSERT INTO `item_latents` VALUES (13142,68,7,53,1);     -- EVA +7 in areas outside own nation's control
 
+-- Opo-opo Necklace
 INSERT INTO `item_latents` VALUES (13143,368,25,13,2);
 INSERT INTO `item_latents` VALUES (13143,368,25,13,19);
 INSERT INTO `item_latents` VALUES (13143,368,25,13,193);
@@ -2791,3 +2792,11 @@ INSERT INTO `item_latents` VALUES (28235,76,25,26,2);   -- Hachiya Kyahan: Dusk 
 INSERT INTO `item_latents` VALUES (28256,76,25,26,2);   -- Hachiya Kyahan +1: Dusk to dawn: MOVE_SPEED_GEAR_BONUS+25%
 INSERT INTO `item_latents` VALUES (28445,23,10,14,0);   -- Shetal Stone ATT +10 No Food Active
 INSERT INTO `item_latents` VALUES (28445,68,10,14,0);   -- Shetal Stone EVA +10 No Food Active
+
+-- Nesanica ring
+INSERT INTO `item_latents` VALUES (28567,368,10,13,2);    -- While Sleeping: REGAIN +10
+INSERT INTO `item_latents` VALUES (28567,368,10,13,19);   -- While Sleeping: REGAIN +10
+INSERT INTO `item_latents` VALUES (28567,368,10,13,193);  -- While Sleeping: REGAIN +10
+INSERT INTO `item_latents` VALUES (28567,370,1,13,2);     -- While Sleeping: REGEN +1
+INSERT INTO `item_latents` VALUES (28567,370,1,13,19);    -- While Sleeping: REGEN +1
+INSERT INTO `item_latents` VALUES (28567,370,1,13,193);   -- While Sleeping: REGEN +1

@@ -35,7 +35,7 @@ entity.onMobEngage = function(mob)
     mob:setSpeed(100)
 end
 
-entity.onMobDisengage = function(mob, target)
+entity.onMobDisengage = function(mob)
     mob:setSpeed(40)
 end
 

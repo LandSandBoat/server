@@ -82,7 +82,20 @@ xi.full_speed_ahead.tick = function(player, effect)
     then
         player:delStatusEffectSilent(xi.effect.FULL_SPEED_AHEAD)
     else
-        player:countdown(timeLeft, 'Motivation', motivation, 'Pep', pep)
+        local objective = {
+            countdown = timeLeft,
+            bars = {
+                [1] = {
+                    title = 'Motivation',
+                    value = motivation
+                },
+                [2] = {
+                    title = 'Pep',
+                    value = pep
+                }
+            }
+        }
+        player:objectiveUtility(objective)
         player:enableEntities(foodData)
     end
 end
@@ -121,6 +134,20 @@ xi.full_speed_ahead.onCheer = function(player)
 
     local newMotivation = utils.clamp(motivation + (pep / 2), 0, 100)
 
+    local objective = {
+        countdown = timeLeft,
+        bars = {
+            [1] = {
+                title = 'Motivation',
+                value = newMotivation
+            },
+            [2] = {
+                title = 'Pep',
+                value = 0
+            }
+        }
+    }
+
     player:setLocalVar('FSA_Motivation', newMotivation)
     player:setLocalVar('FSA_Pep', 0)
 
@@ -129,7 +156,7 @@ xi.full_speed_ahead.onCheer = function(player)
     -- Music Notes
     player:independentAnimation(player, 252, 4)
 
-    player:countdown(timeLeft, 'Motivation', newMotivation, 'Pep', 0)
+    player:objectiveUtility(objective)
 end
 
 xi.full_speed_ahead.completeGame = function(player)

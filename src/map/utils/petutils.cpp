@@ -98,7 +98,7 @@ namespace petutils
                 slash_sdt, pierce_sdt, h2h_sdt, impact_sdt, \
                 magical_sdt, fire_sdt, ice_sdt, wind_sdt, earth_sdt, lightning_sdt, water_sdt, light_sdt, dark_sdt, \
                 fire_res_rank, ice_res_rank, wind_res_rank, earth_res_rank, lightning_res_rank, water_res_rank, light_res_rank, dark_res_rank, \
-                cmbDelay, name_prefix, mob_pools.skill_list_id \
+                cmbDelay, name_prefix, mob_pools.skill_list_id, damageType \
                 FROM pet_list, mob_pools, mob_resistances, mob_family_system \
                 WHERE pet_list.poolid = mob_pools.poolid AND mob_resistances.resist_id = mob_pools.resist_id AND mob_pools.familyid = mob_family_system.familyID";
 
@@ -176,6 +176,7 @@ namespace petutils
                 Pet->cmbDelay       = (uint16)sql->GetIntData(49);
                 Pet->name_prefix    = (uint8)sql->GetUIntData(50);
                 Pet->m_MobSkillList = (uint16)sql->GetUIntData(51);
+                Pet->m_dmgType      = (DAMAGE_TYPE)sql->GetUIntData(52);
 
                 g_PPetList.emplace_back(Pet);
             }
@@ -549,6 +550,7 @@ namespace petutils
 
         static_cast<CItemWeapon*>(PPet->m_Weapons[SLOT_RANGED])->setSkillType(SKILL_AUTOMATON_RANGED);
         static_cast<CItemWeapon*>(PPet->m_Weapons[SLOT_RANGED])->setDamage((PPet->GetSkill(SKILL_AUTOMATON_RANGED) / 9) * 2 + 3);
+        static_cast<CItemWeapon*>(PPet->m_Weapons[SLOT_RANGED])->setDmgType(DAMAGE_TYPE::PIERCING);
 
         CAutomatonEntity* PAutomaton = static_cast<CAutomatonEntity*>(PPet);
 
@@ -1787,6 +1789,8 @@ namespace petutils
         PPet->status        = STATUS_TYPE::NORMAL;
         PPet->m_ModelRadius = PPetData->radius;
         PPet->m_EcoSystem   = PPetData->EcoSystem;
+        // set the damage type of the pet
+        static_cast<CItemWeapon*>(PPet->m_Weapons[SLOT_MAIN])->setDmgType(PPetData->m_dmgType);
 
         PMaster->PPet = PPet;
     }
