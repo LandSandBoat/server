@@ -2063,13 +2063,17 @@ namespace charutils
                             case SKILL_KATANA:
                             case SKILL_CLUB:
                             {
-                                if (PItem->isType(ITEM_WEAPON) &&
-                                    (!charutils::hasTrait(PChar, TRAIT_DUAL_WIELD) || ((CItemWeapon*)PItem)->getSkillType() == SKILL_NONE))
+                                bool isWeapon = PItem->isType(ITEM_WEAPON);
+                                if (isWeapon && (!charutils::hasTrait(PChar, TRAIT_DUAL_WIELD) || ((CItemWeapon*)PItem)->getSkillType() == SKILL_NONE))
                                 {
                                     return false;
                                 }
                                 PChar->m_Weapons[SLOT_SUB] = (CItemWeapon*)PItem;
-                                PChar->m_dualWield         = true;
+                                // only set m_dualWield if equipping a weapon (not for example a shield)
+                                if (isWeapon)
+                                {
+                                    PChar->m_dualWield = true;
+                                }
                             }
                             break;
                             default:
