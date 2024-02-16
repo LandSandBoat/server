@@ -11189,7 +11189,8 @@ void CLuaBaseEntity::countdown(sol::object const& secondsObj)
             fence = {
                 pos = {x = 0.000, y = 0.000}, -- center of fence
                 radius = 25.00, -- radius from pos in yalms
-                render = 25.00 -- distance from fence it becomes visible
+                render = 25.00, -- distance from fence it becomes visible
+                blue = true -- optional, turns default red fence bars blue
             },
             help = {
                 title = 1, -- string index from ROM\333\16.DAT
@@ -11259,13 +11260,19 @@ void CLuaBaseEntity::objectiveUtility(sol::object const& obj)
         if (fenceObj.valid() && fenceObj.is<sol::table>())
         {
             sol::object fencePosObj = fenceObj.as<sol::table>()["pos"];
+            float       posX        = 0.000;
+            float       posY        = 0.000;
+            if (fencePosObj.valid() && fencePosObj.is<sol::table>())
+            {
+                posX = fencePosObj.as<sol::table>().get<float>("x");
+                posY = fencePosObj.as<sol::table>().get<float>("y");
+            }
 
-            float posX   = fencePosObj.as<sol::table>().get_or<float>("x", 0.000);
-            float posY   = fencePosObj.as<sol::table>().get_or<float>("y", 0.000);
             float radius = fenceObj.as<sol::table>().get_or<float>("radius", 0.00);
             float render = fenceObj.as<sol::table>().get_or<float>("render", 25.00);
+            bool  blue   = fenceObj.as<sol::table>()["blue"].valid() ? fenceObj.as<sol::table>()["blue"].get<bool>() : false;
 
-            packet->addFence(posX, posY, radius, render);
+            packet->addFence(posX, posY, radius, render, blue);
         }
 
         sol::object helpObj = obj.as<sol::table>()["help"];
