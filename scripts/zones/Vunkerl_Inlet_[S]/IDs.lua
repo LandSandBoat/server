@@ -27,6 +27,13 @@ zones[xi.zone.VUNKERL_INLET_S] =
             [17117347] = 17117349,
             [17117348] = 17117349,
         },
+        PALLAS      = GetFirstID('Pallas'),
+        PALLAS_S_PH =
+        {
+            [17117241] = GetFirstID('Pallas'),
+            [17117246] = GetFirstID('Pallas'),
+        },
+        PALLASS_TIGER = GetTableOfIDs('Pallass_Tiger'),
     },
     npc =
     {
