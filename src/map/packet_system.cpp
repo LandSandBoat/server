@@ -302,9 +302,10 @@ void SmallPacket0x00A(map_session_data_t* const PSession, CCharEntity* const PCh
         if (destination >= MAX_ZONEID || destZone == nullptr)
         {
             // TODO: work out how to drop player in moghouse that exits them to the zone they were in before this happened, like we used to.
-            ShowWarning("packet_system::SmallPacket0x00A player tried to enter zone out of range: %d", destination);
+            ShowWarning("packet_system::SmallPacket0x00A player tried to enter zone that was invalid or out of range");
             ShowWarning("packet_system::SmallPacket0x00A dumping player `%s` to homepoint!", PChar->getName());
             charutils::HomePoint(PChar);
+            return;
         }
 
         destZone->IncreaseZoneCounter(PChar);
