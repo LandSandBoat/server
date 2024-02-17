@@ -10,6 +10,10 @@
 -- In testing my fire sword had the same damage ranges no matter my level vs same mob.
 -- Weakness/resistance to element would swing damage range a lot
 -- For status effects is it possible to land on highly resistant mobs because of flooring.
+-- Ranged throwing items have weird cases that don't fully fit in the above,
+-- and a handfull of weapons have seem to scale up the more magic accuracy you have
+-- Yes accuracy, not attack. More research needed. Not adding them till we know how they work.
+-- (And then these comments get cleaned up)
 -----------------------------------
 require('scripts/globals/teleports') -- For warp weapon proc.
 require('scripts/globals/magic') -- For resist functions
@@ -18,25 +22,33 @@ require('scripts/globals/utils') -- For clamping function
 xi = xi or {}
 xi.additionalEffect = xi.additionalEffect or {}
 
-xi.additionalEffect.isRanged = function(item)
-    -- Archery/Marksmanship/Throwing
-    return math.abs(item:getSkillType() - xi.skill.MARKSMANSHIP) < 2
-end
+xi.additionalEffect.dStatBonus = function(attacker, defender, dStat, damage)
+    local statTable =
+    {
+        -- [attacker stat] = {counter stat, softcap},
+        [xi.mod.MND] = { cStat = xi.mod.MND, softcap = 40 },
+        [xi.mod.INT] = { cStat = xi.mod.INT, softcap = 20 },
+        -- Can use pretty much any modifier and the pairs don't have to math (in case of SE shenanigans..)
+    }
 
-xi.additionalEffect.calcRangeBonus = function(attacker, defender, element, damage)
-    -- Copied from existing scripts. Todo: rework into additional modifier for dStat?
+    local tableRow = statTable[dStat]
+    local sCap = tableRow.softcap
     local bonus = 0
 
-    if element == xi.element.LIGHT then
-        bonus = attacker:getStat(xi.mod.MND) - defender:getStat(xi.mod.MND)
-        if bonus > 40 then
-            bonus = bonus + (bonus - 40) / 2
-            damage = damage + bonus
-        end
+    -- Check if this is base stat or other modifier
+    if dStat >= xi.mod.STR and dStat <= xi.mod.CHR then
+        bonus = attacker:getStat(dStat) - defender:getStat(tableRow.cStat)
     else
-        bonus = attacker:getStat(xi.mod.INT) - defender:getStat(xi.mod.INT)
-        if bonus > 20 then
-            bonus = bonus + (bonus -20) / 2
+        -- See table note above
+        bonus = attacker:getMod(dStat) - defender:getMod(tableRow.cStat)
+    end
+
+    if bonus then
+        if sCap > 0 and bonus > sCap then
+            bonus = bonus + (bonus - sCap) / 2
+        end
+
+        if bonus > 0 then
             damage = damage + bonus
         end
     end
@@ -44,10 +56,12 @@ xi.additionalEffect.calcRangeBonus = function(attacker, defender, element, damag
     return damage
 end
 
-xi.additionalEffect.levelCorrection = function(dLV, aLV, chance)
-    -- Level correction of proc chance (copied from existing bolt/arrow scripts, looks wrong..)
-    if dLV > aLV then
-        chance = utils.clamp(chance - 5 * (dLV - aLV), 5, 95)
+xi.additionalEffect.levelCorrectRates = function(dLV, aLV, chance, lvCorrect)
+    -- Do not alter 100% proc rates
+    if chance < 100 then
+        if dLV > aLV then
+            chance = utils.clamp(chance - lvCorrect * (dLV - aLV), 1, 99)
+        end
     end
 
     return chance
@@ -75,19 +89,21 @@ xi.additionalEffect.statusAttack = function(addStatus, defender)
     return 0
 end
 
+-- Todo: swap from using element to damageType enum, so Excalibur etc. can happen.
 xi.additionalEffect.calcDamage = function(attacker, element, defender, damage)
     local params = {}
 
     params.bonusmab   = 0
-    params.includemab = false
+    params.includemab = false -- May possibly need to include mab on case by case basis, further tests needed
     damage            = addBonusesAbility(attacker, element, defender, damage, params)
     damage            = damage * applyResistanceAddEffect(attacker, defender, element, 0)
     damage            = adjustForTarget(defender, damage, element)
+    -- Todo: make sure day/weather/affinity bonuses tie in right here
     damage            = finalMagicNonSpellAdjustments(attacker, defender, element, damage)
 
     --[[
     This should rightly be modified by resistance checks, and while those DO they are presently not perfect.
-    If you want to force some randomness, un-comment the line below to artificially force 20% variance.
+    If you want to force some extra randomness, un-comment the line below to artificially force 20% variance.
     ]]
     -- damage = damage * (math.random(90, 110) / 100)
 
@@ -102,6 +118,8 @@ end
 --   e.g. [procType.DAMAGE] = { code }
 -- - replace each handler (elseif addType == procType.DEBUFF then) with a function
 xi.additionalEffect.attack = function(attacker, defender, baseAttackDamage, item)
+    local lvCorrect = item:getMod(xi.mod.ITEM_ADDEFFECT_LVADJUST)
+    local dStat     = item:getMod(xi.mod.ITEM_ADDEFFECT_DSTAT)
     local addType   = item:getMod(xi.mod.ITEM_ADDEFFECT_TYPE)
     local subEffect = item:getMod(xi.mod.ITEM_SUBEFFECT)
     local damage    = item:getMod(xi.mod.ITEM_ADDEFFECT_DMG)
@@ -137,18 +155,19 @@ xi.additionalEffect.attack = function(attacker, defender, baseAttackDamage, item
         return 0, 0, 0
     end
 
+    -- Ranged attack items use this, most other items -usually- do not (See notes at top of script).
+    if lvCorrect > 0 then
+        chance = xi.additionalEffect.levelCorrectRates(defender:getMainLvl(), attacker:getMainLvl(), chance, lvCorrect)
+    end
+
     -- If we're not going to proc, lets not execute all those checks!
     if math.random(1, 100) > chance then
         return 0, 0, 0
     end
 
-    -- Modifications for proc's sourced from ranged attacks. See notes at top of script.
-    if xi.additionalEffect.isRanged(item) then
-        if element then
-            damage = xi.additionalEffect.calcRangeBonus(attacker, defender, element, damage)
-        end
-
-        chance = xi.additionalEffect.levelCorrection(defender:getMainLvl(), attacker:getMainLvl(), chance)
+    -- Archery/marksmanship use this, most other items -usually- do not (See notes at top of script).
+    if dStat > 0 then
+        damage = xi.additionalEffect.dStatBonus(attacker, defender, dStat, damage)
     end
 
     if addType == procType.DAMAGE then
