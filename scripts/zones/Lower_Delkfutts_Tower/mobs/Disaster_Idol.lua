@@ -4,7 +4,7 @@
 -----------------------------------
 local entity = {}
 
-entity.onMobEngaged = function(mob, target)
+entity.onMobEngage = function(mob, target)
     local DayOfTheWeek = VanadielDayOfTheWeek()
 
     mob:setSpellList(118 + DayOfTheWeek)

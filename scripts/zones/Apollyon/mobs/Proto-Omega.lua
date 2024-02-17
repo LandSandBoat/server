@@ -48,7 +48,7 @@ entity.onMobSpawn = function(mob)
     quadrupedForm(mob)
 end
 
-entity.onMobEngaged = function(mob, target)
+entity.onMobEngage = function(mob, target)
     mob:setLocalVar('formTime', os.time() + 120)
 end
 

@@ -101,7 +101,7 @@ entity.onMobSpawn = function(mob)
     mob:setMobMod(xi.mobMod.BEHAVIOR, 5)
 end
 
-entity.onMobEngaged = function(mob, target)
+entity.onMobEngage = function(mob, target)
     -- localVar because we don't want it to repeat every reraise.
     if mob:getLocalVar('started') == 0 then
         mob:showText(mob, ID.text.PRAY)

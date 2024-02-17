@@ -17,7 +17,7 @@ entity.onMobInitialize = function(mob)
     mob:setMod(xi.mod.EVA, 50)
 end
 
-entity.onMobEngaged = function(mob, target)
+entity.onMobEngage = function(mob, target)
     local mobId = mob:getID()
 
     if mob:getLocalVar('engaged') == 0 then

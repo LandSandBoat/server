@@ -35,7 +35,7 @@ entity.onMobSpawn = function(mob)
     end)
 end
 
-entity.onMobEngaged = function(mob, target)
+entity.onMobEngage = function(mob, target)
     -- localVar because we don't want it to repeat she engages a new target.
     if mob:getLocalVar('started') == 0 then
         mob:showText(mob, ID.text.ALRRRIGHTY)

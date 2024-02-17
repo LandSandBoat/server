@@ -123,7 +123,7 @@ entity.onMobDisengage = function(mob)
     mob:setAnimationSub(5)
 end
 
-entity.onMobEngaged = function(mob, target)
+entity.onMobEngage = function(mob, target)
     mob:setAnimationSub(0)
 end
 

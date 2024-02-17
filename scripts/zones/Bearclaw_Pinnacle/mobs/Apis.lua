@@ -15,7 +15,7 @@ entity.onMobSpawn = function(mob)
     mob:setMobMod(xi.mobMod.SIGHT_RANGE, 35)
 end
 
-entity.onMobEngaged = function(mob, target)
+entity.onMobEngage = function(mob, target)
     mob:setLocalVar('colorChange', os.time() + 60)
     mob:setLocalVar('currentColor', math.random(1, 3))
 end

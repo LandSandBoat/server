@@ -11,7 +11,7 @@ entity.onMobSpawn = function(mob)
     GetMobByID(ID.mob.CHANDELIER):setRespawnTime(0)
 end
 
-entity.onMobEngaged = function(mob, target)
+entity.onMobEngage = function(mob, target)
     local ce = mob:getCE(target)
     local ve = mob:getVE(target)
     if ce == 0 and ve == 0 then

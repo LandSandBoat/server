@@ -17,7 +17,7 @@ entity.onMobRoamAction = function(mob)
     end
 end
 
-entity.onMobEngaged = function(mob, target)
+entity.onMobEngage = function(mob, target)
     if target:isPC() or target:isPet() then
         mob:setLocalVar('runTime', os.time())
     end

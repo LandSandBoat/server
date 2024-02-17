@@ -20,7 +20,7 @@ entity.onMobSpawn = function(mob)
     })
 end
 
-entity.onMobEngaged = function(mob, target)
+entity.onMobEngage = function(mob, target)
     local mobid = mob:getID()
 
     for member = mobid-4, mobid + 3 do

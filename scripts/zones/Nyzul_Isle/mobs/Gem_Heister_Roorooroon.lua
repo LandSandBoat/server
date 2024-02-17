@@ -67,7 +67,7 @@ entity.onMobSpawn = function(mob)
     SpawnMob(mob:getID() + 1, instance)
 end
 
-entity.onMobEngaged = function(mob, target)
+entity.onMobEngage = function(mob, target)
     mob:setLocalVar('runTime', math.random(10, 25))
 end
 

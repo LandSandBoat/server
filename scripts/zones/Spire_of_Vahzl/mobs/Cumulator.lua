@@ -11,7 +11,7 @@ end
 entity.onMobSpawn = function(mob)
 end
 
-entity.onMobEngaged = function(mob, target)
+entity.onMobEngage = function(mob, target)
 end
 
 entity.onMobWeaponSkill = function(target, mob, skill)

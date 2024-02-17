@@ -23,7 +23,7 @@ entity.onMobSpawn = function(mob)
     mob:setLocalVar('twohourthreshold', math.random(75, 80)) -- set HP threshold for Meikyo Shisui usage
 end
 
-entity.onMobEngaged = function(mob, target)
+entity.onMobEngage = function(mob, target)
     mob:showText(mob, ID.text.TENZEN_MSG_OFFSET + 1)
     mob:setMobMod(xi.mobMod.NO_MOVE, 0)
     -- three tarus fight with tenzen

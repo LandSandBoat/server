@@ -7,7 +7,7 @@ local entity = {}
 -- TODO: Determine spell list and behavior.  Potentially includes Breakga and Bindga, unless they're TP moves.
 -- TODO: Implement shared spawn and victory conditions with Ark Angel's Tiger.
 
-entity.onMobEngaged = function(mob, target)
+entity.onMobEngage = function(mob, target)
     local mobid = mob:getID()
 
     for member = mobid-3, mobid + 4 do

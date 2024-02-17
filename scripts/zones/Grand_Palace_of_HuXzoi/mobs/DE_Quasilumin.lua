@@ -292,7 +292,7 @@ entity.onTrigger = function(player, mob)
     end
 end
 
-entity.onMobEngaged = function(mob, target)
+entity.onMobEngage = function(mob, target)
     mob:setLocalVar('progress', escortProgress.PAUSED)
     mob:disengage()
 end

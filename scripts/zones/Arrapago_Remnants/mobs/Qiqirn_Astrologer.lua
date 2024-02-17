@@ -37,7 +37,7 @@ entity.onMobDisengage = function(mob)
     end
 end
 
-entity.onMobEngaged = function(mob)
+entity.onMobEngage = function(mob)
     mob:setLocalVar('runTime', os.time())
 end
 

@@ -6,7 +6,7 @@ mixins = { require('scripts/mixins/families/gears') }
 -----------------------------------
 local entity = {}
 
-entity.onMobEngaged = function(mob, target)
+entity.onMobEngage = function(mob, target)
     xi.nyzul.onGearEngage(mob, target)
 end
 

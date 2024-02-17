@@ -19,7 +19,7 @@ entity.onMobSpawn = function(mob)
     })
 end
 
-entity.onMobEngaged = function(mob, target)
+entity.onMobEngage = function(mob, target)
     target:showText(mob, ID.text.MEDUSA_ENGAGE)
     for i = ID.mob.MEDUSA + 1, ID.mob.MEDUSA + 4 do
         SpawnMob(i):updateEnmity(target)

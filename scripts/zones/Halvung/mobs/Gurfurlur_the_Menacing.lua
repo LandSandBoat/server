@@ -8,7 +8,7 @@ local ID = zones[xi.zone.HALVUNG]
 -----------------------------------
 local entity = {}
 
-entity.onMobEngaged = function(mob, target)
+entity.onMobEngage = function(mob, target)
     for i = ID.mob.GURFURLUR_THE_MENACING + 1, ID.mob.GURFURLUR_THE_MENACING + 4 do
         SpawnMob(i):updateEnmity(target)
     end

@@ -4,7 +4,7 @@
 -----------------------------------
 local entity = {}
 
-entity.onMobEngaged = function(mob, target)
+entity.onMobEngage = function(mob, target)
     local allies = mob:getInstance():getAllies()
     for i, v in pairs(allies) do
         if v:isAlive() then

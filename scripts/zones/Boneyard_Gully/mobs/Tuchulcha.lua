@@ -17,7 +17,7 @@ entity.onMobSpawn = function(mob)
 end
 
 -- Reset restHP when re-engaging after a sandpit
-entity.onMobEngaged = function(mob, target)
+entity.onMobEngage = function(mob, target)
     if mob:getMobMod(xi.mobMod.NO_REST) == 1 then
         mob:setMobMod(xi.mobMod.NO_MOVE, 0)
         mob:setMobMod(xi.mobMod.NO_REST, 0)

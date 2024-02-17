@@ -3185,7 +3185,7 @@ namespace luautils
         return 0;
     }
 
-    int32 OnMobEngaged(CBaseEntity* PMob, CBaseEntity* PTarget)
+    int32 OnMobEngage(CBaseEntity* PMob, CBaseEntity* PTarget)
     {
         TracyZoneScoped;
 
@@ -3210,17 +3210,17 @@ namespace luautils
             ((CCharEntity*)PTarget)->eventPreparation->scriptFile   = filename;
         }
 
-        sol::function onMobEngaged = getEntityCachedFunction(PMob, "onMobEngaged");
-        if (!onMobEngaged.valid())
+        sol::function onMobEngage = getEntityCachedFunction(PMob, "onMobEngage");
+        if (!onMobEngage.valid())
         {
             return -1;
         }
 
-        auto result = onMobEngaged(CLuaBaseEntity(PMob), CLuaBaseEntity(PTarget));
+        auto result = onMobEngage(CLuaBaseEntity(PMob), CLuaBaseEntity(PTarget));
         if (!result.valid())
         {
             sol::error err = result;
-            ShowError("luautils::onMobEngaged: %s", err.what());
+            ShowError("luautils::onMobEngage: %s", err.what());
             return -1;
         }
 

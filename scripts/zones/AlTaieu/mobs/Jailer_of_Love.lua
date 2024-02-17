@@ -19,7 +19,7 @@ local minionGroup =
     [7] = 25, -- Qnhpemde
 }
 
-entity.onMobEngaged = function(mob, target)
+entity.onMobEngage = function(mob, target)
     mob:hideName(false)
     mob:setUntargetable(false)
     mob:setAnimationSub(2)

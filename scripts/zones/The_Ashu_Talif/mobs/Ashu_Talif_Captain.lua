@@ -32,7 +32,7 @@ entity.onMobSpawn = function(mob)
     mob:setUnkillable(true)
 end
 
-entity.onMobEngaged = function(mob)
+entity.onMobEngage = function(mob, target)
     captainEngageSequence(mob)
 end
 

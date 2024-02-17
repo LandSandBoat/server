@@ -12,7 +12,7 @@ entity.onMobSpawn = function(mob)
     mob:setLocalVar('maxBabies', 4)
 end
 
-entity.onMobEngaged = function(mob, target)
+entity.onMobEngage = function(mob, target)
 end
 
 entity.onMobWeaponSkill = function(target, mob, skill)

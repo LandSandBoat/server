@@ -255,7 +255,7 @@ namespace luautils
     int32 OnMobSpawn(CBaseEntity* PMob);
     int32 OnMobRoamAction(CBaseEntity* PMob); // triggers when event mob is ready for a custom roam action
     int32 OnMobRoam(CBaseEntity* PMob);
-    int32 OnMobEngaged(CBaseEntity* PMob, CBaseEntity* PTarget);
+    int32 OnMobEngage(CBaseEntity* PMob, CBaseEntity* PTarget);
     int32 OnMobDisengage(CBaseEntity* PMob);
     int32 OnMobDrawIn(CBaseEntity* PMob, CBaseEntity* PTarget);
     int32 OnMobFight(CBaseEntity* PMob, CBaseEntity* PTarget);

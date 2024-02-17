@@ -6,7 +6,7 @@ mixins = { require('scripts/mixins/weapon_break') }
 -----------------------------------
 local entity = {}
 
-entity.onMobEngaged = function(mob, target)
+entity.onMobEngage = function(mob, target)
     local mobId = mob:getID()
     SpawnMob(mobId + 1):updateEnmity(target)
     SpawnMob(mobId + 2):updateEnmity(target)
