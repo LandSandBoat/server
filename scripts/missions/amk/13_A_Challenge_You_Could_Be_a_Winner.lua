@@ -17,9 +17,12 @@
 -- Shadowy Pillar : !pos 374 -12 -15 161
 -- Flame Of Fate  : !pos -155 -24 17 161
 -----------------------------------
--- This mission can be repeated by losing the bncm battle in the subsequent mission
--- Therefore to remove possible conflicts, the mission progress will be handled
--- using a variable stored as a CharVar
+-- Puzzle 4 - Castle Zvahl Keep
+-- Ominous Pillar  : !pos -7 -1.5 -23.6 162
+-- Craggy Pillar 1 : !pos -208 -52.5 -87.5 162
+-- Craggy Pillar 2 : !pos -448 -68 -11.5 162
+-- Craggy Pillar 3 : !pos -368 -52.5 -127.5 162
+-- Craggy Pillar 4 : !pos -236 -52 103 162
 -----------------------------------
 require('scripts/globals/missions')
 require('scripts/globals/interaction/mission')
@@ -53,7 +56,9 @@ mission.sections =
             onEventFinish =
             {
                 [100] = function(player, csid, option, npc)
-                    mission:setVar(player, 'progress', 1)
+                    if mission:getVar(player, 'progress') == 0 then
+                        mission:setVar(player, 'progress', 1)
+                    end
                 end,
             },
         },
@@ -63,7 +68,8 @@ mission.sections =
     {
         check = function(player, currentMission, missionStatus, vars)
             return currentMission >= mission.missionId and
-            mission:getVar(player, 'progress') == 1 and
+            (mission:getVar(player, 'progress') == 1 or
+            currentMission > mission.missionId) and
             not player:hasKeyItem(xi.ki.POCKET_MOGBOMB) and
             not player:hasKeyItem(xi.ki.TRIVIA_CHALLENGE_KUPON) and
             player:needToZone() == false
@@ -81,6 +87,10 @@ mission.sections =
             onEventFinish =
             {
                 [504] = function(player, csid, option, npc)
+                    if mission:getVar(player, 'progress') == 0 then
+                        mission:setVar(player, 'progress', 1)
+                    end
+
                     if option == 1 then
                         player:needToZone(true)
                     end
@@ -89,7 +99,7 @@ mission.sections =
         },
     },
 
-    -- Part 2-b: Beaucedine Glacier
+    -- Part 2-b: Beaucedine Glacier - Puzzle 1
     {
         check = function(player, currentMission, missionStatus, vars)
             return currentMission >= mission.missionId and
@@ -111,6 +121,10 @@ mission.sections =
             ['Goblin_Grenadier'] =
             {
                 onTrigger = function(player, npc)
+                    if not player:hasKeyItem(xi.ki.MAP_OF_THE_NORTHLANDS_AREA) then
+                        return mission:event(509)
+                    end
+
                     local answer = mission:getLocalVar(player, '[p1]pipSet') - 1
 
                     if answer < 0 then
@@ -198,6 +212,8 @@ mission.sections =
                         mission:setLocalVar(player, '[p1]hintsUsed', hintsUsed + 1)
                     elseif option == 3 then
                         -- wrong answer, reset puzzle
+                        mission:setLocalVar(player, '[p1]pipSet', 0)
+                        mission:setLocalVar(player, '[p1]hintsUsed', 0)
                         player:needToZone(false)
                     -- elseif option == 4 then
                         -- Player chooses to exit the chat, or tries to get a third hint,
@@ -267,7 +283,7 @@ mission.sections =
         },
     },
 
-    -- Part 3: Xarcabard
+    -- Part 3: Xarcabard - Puzzle 2
     {
         check = function(player, currentMission, missionStatus, vars)
             return currentMission >= mission.missionId and
@@ -325,7 +341,7 @@ mission.sections =
         },
     },
 
-    -- Part 4: Castle Zvahl Baileys
+    -- Part 4: Castle Zvahl Baileys - Puzzle 3
     {
         check = function(player, currentMission, missionStatus, vars)
             return currentMission >= mission.missionId and
@@ -412,6 +428,9 @@ mission.sections =
                     if option == 1 then
                         -- Won the game!
                         npcUtil.giveKeyItem(player, xi.ki.FESTIVAL_SOUVENIR_KUPON)
+                        player:delKeyItem(xi.ki.GAUNTLET_CHALLENGE_KUPON)
+
+                        -- Advance to puzzle 4
                         mission:setVar(player, 'progress', 4)
                     end
 
@@ -425,10 +444,10 @@ mission.sections =
         },
     },
 
-    -- Part 5: Castle Zvahl Keep
+    -- Part 5: Castle Zvahl Keep - Puzzle 4
     {
         check = function(player, currentMission, missionStatus, vars)
-            return currentMission == mission.missionId and
+            return currentMission >= mission.missionId and
             mission:getVar(player, 'progress') == 4 and
             player:hasKeyItem(xi.ki.FESTIVAL_SOUVENIR_KUPON)
         end,
@@ -446,7 +465,100 @@ mission.sections =
 
         [xi.zone.CASTLE_ZVAHL_KEEP] =
         {
+            ['Ominous_Pillar'] =
+            {
+                onTrigger = function(player, npc)
+                    local correctCohortIdx = mission:getVar(player, 'cohortIdx')
+                    local eventArg = 2
 
+                    if correctCohortIdx == 0 then
+                        correctCohortIdx = math.random(1, 4)
+                        -- Save cohort temporarily
+                        npc:setLocalVar('cohortIdx', correctCohortIdx)
+                        eventArg = 1
+                    end
+
+                    return mission:progressEvent(100, eventArg, correctCohortIdx - 1)
+                end,
+            },
+
+            ['Craggy_Pillar'] =
+            {
+                onTrigger = function(player, npc)
+                    local craggyPillars = zones[player:getZoneID()].npc.CRAGGY_PILLAR
+                    local cohorts =
+                    {
+                        [craggyPillars[1]] = { eventID = 101, cohortIdx = 1, location = 0 }, -- Kupignol
+                        [craggyPillars[2]] = { eventID = 102, cohortIdx = 3, location = 1 }, -- Kupert
+                        [craggyPillars[3]] = { eventID = 103, cohortIdx = 2, location = 2 }, -- Kupuckl
+                        [craggyPillars[4]] = { eventID = 104, cohortIdx = 0, location = 3 }, -- Kupatete
+                    }
+                    local correctCohortIdx = mission:getVar(player, 'cohortIdx') - 1
+                    local result = 2 -- Wrong answer
+                    local crag = cohorts[npc:getID()]
+
+                    if crag.cohortIdx == correctCohortIdx then
+                        result = 1 -- Correct answer
+                    end
+
+                    if correctCohortIdx >= 0 then
+                        return mission:progressEvent(crag.eventID, result, crag.cohortIdx, 1, crag.location, correctCohortIdx)
+                    else
+                        return mission:messageSpecial(zones[player:getZoneID()].text.NOTHING_OUT_OF_ORDINARY)
+                    end
+                end,
+            },
+
+            onEventFinish =
+            {
+                [100] = function(player, csid, option, npc)
+                    if option ~= 0 then
+                        mission:setVar(player, 'cohortIdx', npc:getLocalVar('cohortIdx'))
+                    end
+                end,
+
+                [101] = function(player, csid, option, npc)
+                    xi.amk.helpers.puzzleFourOnEventFinish(player, csid, option, npc, mission)
+                end,
+
+                [102] = function(player, csid, option, npc)
+                    xi.amk.helpers.puzzleFourOnEventFinish(player, csid, option, npc, mission)
+                end,
+
+                [103] = function(player, csid, option, npc)
+                    xi.amk.helpers.puzzleFourOnEventFinish(player, csid, option, npc, mission)
+                end,
+
+                [104] = function(player, csid, option, npc)
+                    xi.amk.helpers.puzzleFourOnEventFinish(player, csid, option, npc, mission)
+                end,
+            },
+        },
+    },
+
+    -- Part 6: Throne Room - Cutscene
+    {
+        check = function(player, currentMission, missionStatus, vars)
+            return currentMission == mission.missionId and
+            mission:getVar(player, 'progress') == 5 and
+            player:hasKeyItem(xi.ki.MEGA_BONANZA_KUPON)
+        end,
+
+        [xi.zone.THRONE_ROOM] =
+        {
+            ['_4l1'] =
+            {
+                onTrigger = function(player, npc)
+                    return mission:progressEvent(4, 165)
+                end,
+            },
+
+            onEventFinish =
+            {
+                [4] = function(player, csid, option, npc)
+                    mission:complete(player)
+                end,
+            },
         },
     },
 }
