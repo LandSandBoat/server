@@ -47,6 +47,7 @@ zones[xi.zone.CASTLE_ZVAHL_KEEP] =
     npc =
     {
         TREASURE_CHEST = 17441088,
+        CRAGGY_PILLAR = GetTableOfIDs('Craggy_Pillar'),
     },
 }
 

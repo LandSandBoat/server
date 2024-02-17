@@ -822,9 +822,21 @@ xi.amk.helpers.puzzleTwoOnEventFinish = function(player, csid, option, npc, miss
             -- Won game, reset all vars
             resetPuzzleVars(player, mission)
             npcUtil.giveKeyItem(player, xi.ki.GAUNTLET_CHALLENGE_KUPON)
+            player:delKeyItem(xi.ki.TRIVIA_CHALLENGE_KUPON)
 
             -- Advance to puzzle 3
             mission:setVar(player, 'progress', 3)
         end
+    end
+end
+
+xi.amk.helpers.puzzleFourOnEventFinish = function(player, csid, option, npc, mission)
+    if option == 1 then
+        mission:setVar(player, 'cohortIdx', 0)
+        npcUtil.giveKeyItem(player, xi.ki.MEGA_BONANZA_KUPON)
+        player:delKeyItem(xi.ki.FESTIVAL_SOUVENIR_KUPON)
+
+        -- Advance to final fight
+        mission:setVar(player, 'progress', 5)
     end
 end
