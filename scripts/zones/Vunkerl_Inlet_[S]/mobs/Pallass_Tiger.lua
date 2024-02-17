@@ -7,7 +7,6 @@ local ID = zones[xi.zone.VUNKERL_INLET_S]
 local entity = {}
 
 entity.onMobSpawn = function(mob)
-    mob:setMod(xi.mod.LULLABYRES, 100)
     mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
 end
 
