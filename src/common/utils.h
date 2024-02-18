@@ -140,10 +140,10 @@ static mutex_guarded<std::unordered_map<std::string, time_point>> lastExecutionT
         {                                                                             \
             lastExecutionTimes[key] = currentTime;                                    \
             {                                                                         \
-                code;                                                                 \
+                code;                                                                  \
             }                                                                         \
         }                                                                             \
-    })                                                                                \
+    });                                                                               \
 }
 // clang-format on
 
