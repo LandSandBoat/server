@@ -829,61 +829,10 @@ void rtrim(std::string& s)
     // clang-format on
 }
 
-// Returns true if the given str matches the given pattern.
-// Wildcards can be used in the pattern to match "any character"
-// e.g: %anto% matches Shantotto or Canto-Ranto
-// Modification of https://www.geeksforgeeks.org/wildcard-character-matching/
-bool matches(std::string const& target, std::string const& pattern, std::string const& wildcard)
+// Returns true if the given str matches the given pattern using standard regex
+bool matches(std::string const& target, std::string const& pattern)
 {
-    auto matchesRecur = [&](const char* target, const char* pattern, const char* wildcard, auto&& matchesRecur)
-    {
-        // This should never happen as we call this lambda from std::strings converted to const char*,
-        // but good to be safe.
-        if (pattern == nullptr || target == nullptr)
-        {
-            return false;
-        }
-
-        // If we reach at the end of both strings, we are done
-        if (*pattern == '\0' && *target == '\0')
-        {
-            return true;
-        }
-
-        // Make sure to eliminate consecutive '*'
-        if (*pattern == *wildcard)
-        {
-            while (*(pattern + 1) == '*')
-            {
-                pattern++;
-            }
-        }
-
-        // Make sure that the characters after '*' are present
-        // in target string.
-        if (*pattern == *wildcard && *(pattern + 1) != '\0' && *target == '\0')
-        {
-            return false;
-        }
-
-        // If the current characters of both strings match
-        if (*pattern == *target)
-        {
-            return matchesRecur(target + 1, pattern + 1, wildcard, matchesRecur);
-        }
-
-        // If there is *, then there are two possibilities
-        // a) We consider current character of target string
-        // b) We ignore current character of target string.
-        if (*pattern == *wildcard)
-        {
-            return matchesRecur(target + 1, pattern, wildcard, matchesRecur) || matchesRecur(target, pattern + 1, wildcard, matchesRecur);
-        }
-
-        return false;
-    };
-
-    return matchesRecur(target.c_str(), pattern.c_str(), wildcard.c_str(), matchesRecur);
+    return std::regex_match(target, std::regex(pattern));
 }
 
 bool starts_with(std::string const& target, std::string const& pattern)
