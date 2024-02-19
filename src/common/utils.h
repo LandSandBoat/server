@@ -25,6 +25,7 @@
 
 #include "common/cbasetypes.h"
 #include "common/mmo.h"
+#include "common/mutex_guarded.h"
 #include "common/stdext.h"
 
 #include <filesystem>
@@ -125,5 +126,25 @@ namespace utils
     auto openFile(std::string const& path, std::string const& mode) -> std::unique_ptr<FILE>;
     auto toASCII(std::string const& target, unsigned char replacement = '\0') -> std::string;
 } // namespace utils
+
+// clang-format off
+static mutex_guarded<std::unordered_map<std::string, time_point>> lastExecutionTimes;
+#define RATE_LIMIT(duration, code)                                                    \
+{                                                                                     \
+    auto        currentTime = server_clock::now();                                    \
+    std::string key         = std::string(__FILE__) + ":" + std::to_string(__LINE__); \
+    lastExecutionTimes.write([&](auto& lastExecutionTimes)                            \
+    {                                                                                 \
+        if (lastExecutionTimes.find(key) == lastExecutionTimes.end() ||               \
+            currentTime - lastExecutionTimes[key] > std::chrono::seconds(duration))   \
+        {                                                                             \
+            lastExecutionTimes[key] = currentTime;                                    \
+            {                                                                         \
+                code;                                                                  \
+            }                                                                         \
+        }                                                                             \
+    });                                                                               \
+}
+// clang-format on
 
 #endif

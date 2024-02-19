@@ -6899,9 +6899,9 @@ void SmallPacket0x0F6(map_session_data_t* const PSession, CCharEntity* const PCh
 void SmallPacket0x0FA(map_session_data_t* const PSession, CCharEntity* const PChar, CBasicPacket& data)
 {
     TracyZoneScoped;
-    uint16 ItemID = data.ref<uint16>(0x04);
 
-    if (ItemID == 0)
+    uint16 itemID = data.ref<uint16>(0x04);
+    if (itemID == 0)
     {
         // No item sent means the client has finished placing furniture
         PChar->UpdateMoghancement();
@@ -6916,22 +6916,82 @@ void SmallPacket0x0FA(map_session_data_t* const PSession, CCharEntity* const PCh
     uint8 row         = data.ref<uint8>(0x0B);
     uint8 rotation    = data.ref<uint8>(0x0C);
 
+    // TODO: Should we be responding with inventory update/finish if we reject the client's request?
+
     if (containerID != LOC_MOGSAFE && containerID != LOC_MOGSAFE2)
     {
+        RATE_LIMIT(30s, ShowErrorFmt("Invalid container requested: {}", PChar->getName()));
         return;
     }
 
-    CItemFurnishing* PItem = (CItemFurnishing*)PChar->getStorage(containerID)->GetItem(slotID);
+    auto* PContainer = PChar->getStorage(containerID);
+    if (PContainer == nullptr)
+    {
+        RATE_LIMIT(30s, ShowErrorFmt("Invalid storage requested: {}", PChar->getName()));
+        return;
+    }
+
+    if (slotID > PContainer->GetSize()) // TODO: Is this off-by-one?
+    {
+        RATE_LIMIT(30s, ShowErrorFmt("Invalid slot requested: {}", PChar->getName()));
+        return;
+    }
+
+    if (on2ndFloor > 0x01)
+    {
+        RATE_LIMIT(30s, ShowErrorFmt("Invalid floor requested: {}", PChar->getName()));
+        return;
+    }
+
+    if (rotation > 0x03)
+    {
+        RATE_LIMIT(30s, ShowErrorFmt("Invalid rotation requested: {}", PChar->getName()));
+        return;
+    }
+
+    if (level > 0x15)
+    {
+        RATE_LIMIT(30s, ShowErrorFmt("Invalid level requested: {}", PChar->getName()));
+        return;
+    }
+
+    // NOTE: Items hanging on walls count as their own row/column entries, rather than level changes.
+    //     : The multiple options on MH2F mean the col limit is higher.
+
+    // NOTE: These are all unsigned, so <0 is handled
+    bool lowerArea0 = row <= 23 && col <= 5;
+    bool lowerArea1 = row >= 18 && row <= 23 && col >= 6 && col <= 13;
+    bool lowerArea2 = row <= 23 && col >= 14 && col <= 19;
+    bool upperArea0 = row <= 25 && col <= 91;
+
+    if (on2ndFloor && !upperArea0)
+    {
+        RATE_LIMIT(30s, ShowErrorFmt("Invalid row/col requested: {}", PChar->getName()));
+        return;
+    }
+    else if (!on2ndFloor && !lowerArea0 && !lowerArea1 && !lowerArea2)
+    {
+        RATE_LIMIT(30s, ShowErrorFmt("Invalid row/col requested: {}", PChar->getName()));
+        return;
+    }
+
+    // Get item
+    auto* PItem = dynamic_cast<CItemFurnishing*>(PContainer->GetItem(slotID));
+    if (PItem == nullptr)
+    {
+        return;
+    }
 
     // Try to catch packet abuse, leading to gardening pots being placed on 2nd floor.
-    if (PItem->getOn2ndFloor() && PItem->isGardeningPot())
+    if (on2ndFloor && PItem->isGardeningPot())
     {
-        ShowWarning(fmt::format("{} has tried to gardening pot {} ({}) on 2nd floor",
-                                PChar->getName(), PItem->getID(), PItem->getName()));
+        RATE_LIMIT(30s, ShowErrorFmt("{} has tried to gardening pot {} ({}) on 2nd floor",
+                                     PChar->getName(), PItem->getID(), PItem->getName()));
         return;
     }
 
-    if (PItem != nullptr && PItem->getID() == ItemID && PItem->isType(ITEM_FURNISHING))
+    // Continue with regular usage
+    if (PItem->getID() == itemID && PItem->isType(ITEM_FURNISHING))
     {
         if (PItem->getFlag() & ITEM_FLAG_WALLHANGING)
         {
@@ -6946,9 +7006,11 @@ void SmallPacket0x0FA(map_session_data_t* const PSession, CCharEntity* const PCh
         PItem->setLevel(level);
         PItem->setRotation(rotation);
 
+        constexpr auto maxContainerSize = MAX_CONTAINER_SIZE * 2;
+
         // Update installed furniture placement orders
         // First we place the furniture into placed items using the order number as the index
-        std::array<CItemFurnishing*, MAX_CONTAINER_SIZE* 2> placedItems = { nullptr };
+        std::array<CItemFurnishing*, maxContainerSize> placedItems = { nullptr };
         for (auto safeContainerId : { LOC_MOGSAFE, LOC_MOGSAFE2 })
         {
             CItemContainer* PContainer = PChar->getStorage(safeContainerId);
