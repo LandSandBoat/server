@@ -1946,6 +1946,7 @@ INSERT INTO `mob_droplist` VALUES (197,0,0,1000,4508,@ALWAYS); -- Serving Of Roy
 INSERT INTO `mob_droplist` VALUES (197,0,0,1000,816,340);      -- Spool Of Silk Thread (34.0%)
 INSERT INTO `mob_droplist` VALUES (197,0,0,1000,4357,120);     -- Crawler Egg (12.0%)
 INSERT INTO `mob_droplist` VALUES (197,2,0,1000,816,0);        -- Spool Of Silk Thread (Steal)
+INSERT INTO `mob_droplist` VALUES (197,0,0,1000,6603,@ALWAYS); -- Rolanberry 854 (Always, 100%)
 
 -- ZoneID:  35 - Awaern Mnk
 INSERT INTO `mob_droplist` VALUES (198,0,0,1000,1786,120);   -- Aern Organ (12.0%)
