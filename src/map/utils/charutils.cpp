@@ -37,6 +37,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "ai/ai_container.h"
 #include "ai/states/attack_state.h"
 #include "ai/states/item_state.h"
+#include "ai/states/range_state.h"
 
 #include "packets/char_abilities.h"
 #include "packets/char_appearance.h"
@@ -2607,6 +2608,16 @@ namespace charutils
         if (PItem && PItem == PChar->getEquip((SLOTTYPE)equipSlotID))
         {
             return;
+        }
+
+        // if player attempts to change thier ranged weapon during a ranged state then prevent equip
+        // this prevents players from starting a RA with short delay x-bow and ending with high dmg longbow
+        if (equipSlotID == SLOT_RANGED || (equipSlotID == SLOT_AMMO && !PChar->getEquip(SLOT_RANGED)))
+        {
+            if (PChar->PAI && PChar->PAI->IsCurrentState<CRangeState>())
+            {
+                return;
+            }
         }
 
         if (equipSlotID == SLOT_SUB && PItem && !PItem->IsShield())
