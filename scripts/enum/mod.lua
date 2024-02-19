@@ -194,7 +194,9 @@ xi.mod =
     UDMGRANGE                       = 390, -- Uncaped.
 
     -- Occasionally annuls damage taken. Modifier value = chance in %
+    NULL_DAMAGE                     = 141, -- Occasionally annuls all/any damage.
     NULL_PHYSICAL_DAMAGE            = 416, -- Occasionally annuls physical damage.
+    NULL_BREATH_DAMAGE              = 142, -- Occasionally annuls breath damage.
     NULL_MAGICAL_DAMAGE             = 476, -- Occasionally annuls magical damage.
     NULL_RANGED_DAMAGE              = 239, -- Occasionally annuls ranged damage.
     FIRE_NULL                       = 467, -- Occasionally annuls fire elemental damage.
@@ -208,7 +210,7 @@ xi.mod =
 
     -- Occasionally absorbs damage taken. Modifier value = chance in %
     ABSORB_DMG_CHANCE               = 480, -- Occasionally absorbs all/any damage.
-    PHYS_ABSORB                     = 512, -- Occasionally absorbs physical damage.
+    PHYS_ABSORB                     = 512, -- Occasionally absorbs physical damage. USED FOR RANGED ASWELL.
     MAGIC_ABSORB                    = 475, -- Occasionally absorbs magical damage.
     FIRE_ABSORB                     = 459, -- Occasionally absorbs fire elemental damage.
     ICE_ABSORB                      = 460, -- Occasionally absorbs ice elemental damage.
