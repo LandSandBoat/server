@@ -829,14 +829,10 @@ void rtrim(std::string& s)
     // clang-format on
 }
 
-// Returns true if the given str matches the given pattern.
+// Returns true if the given str matches the given pattern using standard regex
 bool matches(std::string const& target, std::string const& pattern)
 {
-    if (std::regex_match(target, std::regex(pattern)))
-    {
-        return true;
-    }
-    return false;
+    return std::regex_match(target, std::regex(pattern));
 }
 
 bool starts_with(std::string const& target, std::string const& pattern)
