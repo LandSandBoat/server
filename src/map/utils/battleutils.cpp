@@ -5336,7 +5336,7 @@ namespace battleutils
             damage = -damage;
         }
         else if ((element && xirand::GetRandomNumber(100) < PDefender->getMod(nullarray[element - 1])) ||
-                 xirand::GetRandomNumber(100) < PDefender->getMod(Mod::MAGIC_NULL))
+                 xirand::GetRandomNumber(100) < PDefender->getMod(Mod::NULL_MAGICAL_DAMAGE))
         {
             damage = 0;
         }

@@ -834,7 +834,7 @@ xi.spells.damage.calculateNukeAbsorbOrNullify = function(target, spellElement)
     local nullifyChance = math.random(1, 100)
     if
         nullifyChance <= target:getMod(xi.combat.element.nullMod[spellElement]) or
-        nullifyChance <= target:getMod(xi.mod.MAGIC_NULL)
+        nullifyChance <= target:getMod(xi.mod.NULL_MAGICAL_DAMAGE)
     then
         nukeAbsorbOrNullify = 0
     end

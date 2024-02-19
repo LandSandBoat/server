@@ -195,7 +195,7 @@ xi.mod =
 
     -- Occasionally annuls damage taken. Modifier value = chance in %
     NULL_PHYSICAL_DAMAGE            = 416, -- Occasionally annuls physical damage.
-    MAGIC_NULL                      = 476, -- Occasionally annuls magical damage.
+    NULL_MAGICAL_DAMAGE             = 476, -- Occasionally annuls magical damage.
     NULL_RANGED_DAMAGE              = 239, -- Occasionally annuls ranged damage.
     FIRE_NULL                       = 467, -- Occasionally annuls fire elemental damage.
     ICE_NULL                        = 468, -- Occasionally annuls ice elemental damage.
