@@ -178,18 +178,47 @@ xi.mod =
     ANTIHQ_BONE                     = 149,
     ANTIHQ_ALCHEMY                  = 150,
     ANTIHQ_COOK                     = 151,
-    DMG                             = 160, -- All damage modifiers are base 10000, so 375 = 3.75% YES WE KNOW retail is using base 256.
-    DMGPHYS                         = 161, -- We're using a % with extra decimal places. We don't need you to do converting in script.
-    DMGPHYS_II                      = 190, -- Physical Damage Taken II % (Burtgang)
-    DMGBREATH                       = 162,
-    DMGMAGIC                        = 163,
-    DMGMAGIC_II                     = 831, -- Magic Damage Taken II % (Aegis)
-    DMGRANGE                        = 164,
-    DMG_AOE                         = 158, -- Damage Taken % when not main target of an AoE action. (Ex: Locus Mobs)
-    UDMGPHYS                        = 387,
-    UDMGBREATH                      = 388,
-    UDMGMAGIC                       = 389,
-    UDMGRANGE                       = 390,
+
+    -- Damage taken modifiers. All damage modifiers are base 10000, so 375 = 3.75% YES WE KNOW retail is using base 256.
+    DMG                             = 160, -- Modifies all/any damage taken.
+    DMGPHYS                         = 161, -- Modifies physical damage taken. Caps at 50%
+    DMGPHYS_II                      = 190, -- Physical Damage Taken II % (Burtgang). Bypasses previous cap.
+    DMGBREATH                       = 162, -- Modifies breath damage taken. Caps at 50%
+    DMGMAGIC                        = 163, -- Modifies magical damage taken. Caps at 50%
+    DMGMAGIC_II                     = 831, -- Magic Damage Taken II % (Aegis). Bypasses previous cap.
+    DMGRANGE                        = 164, -- Modifies ranged damage taken. Caps at 50%
+    DMG_AOE                         = 158, -- Mob only. Damage Taken % when not main target of an AoE action. (Ex: Locus Mobs). Uncaped.
+    UDMGPHYS                        = 387, -- Uncaped.
+    UDMGBREATH                      = 388, -- Uncaped.
+    UDMGMAGIC                       = 389, -- Uncaped.
+    UDMGRANGE                       = 390, -- Uncaped.
+
+    -- Occasionally annuls damage taken. Modifier value = chance in %
+    NULL_PHYSICAL_DAMAGE            = 416, -- Occasionally annuls physical damage.
+    MAGIC_NULL                      = 476, -- Occasionally annuls magical damage.
+    NULL_RANGED_DAMAGE              = 239, -- Occasionally annuls ranged damage.
+    FIRE_NULL                       = 467, -- Occasionally annuls fire elemental damage.
+    ICE_NULL                        = 468, -- Occasionally annuls ice elemental damage.
+    WIND_NULL                       = 469, -- Occasionally annuls wind elemental damage.
+    EARTH_NULL                      = 470, -- Occasionally annuls earth elemental damage.
+    LTNG_NULL                       = 471, -- Occasionally annuls thunder elemental damage.
+    WATER_NULL                      = 472, -- Occasionally annuls water elemental damage.
+    LIGHT_NULL                      = 473, -- Occasionally annuls light elemental damage.
+    DARK_NULL                       = 474, -- Occasionally annuls dark elemental damage.
+
+    -- Occasionally absorbs damage taken. Modifier value = chance in %
+    ABSORB_DMG_CHANCE               = 480, -- Occasionally absorbs all/any damage.
+    PHYS_ABSORB                     = 512, -- Occasionally absorbs physical damage.
+    MAGIC_ABSORB                    = 475, -- Occasionally absorbs magical damage.
+    FIRE_ABSORB                     = 459, -- Occasionally absorbs fire elemental damage.
+    ICE_ABSORB                      = 460, -- Occasionally absorbs ice elemental damage.
+    WIND_ABSORB                     = 461, -- Occasionally absorbs wind elemental damage.
+    EARTH_ABSORB                    = 462, -- Occasionally absorbs earth elemental damage.
+    LTNG_ABSORB                     = 463, -- Occasionally absorbs thunder elemental damage.
+    WATER_ABSORB                    = 464, -- Occasionally absorbs water elemental damage.
+    LIGHT_ABSORB                    = 465, -- Occasionally absorbs light elemental damage.
+    DARK_ABSORB                     = 466, -- Occasionally absorbs dark elemental damage.
+
     CRITHITRATE                     = 165,
     CRIT_DMG_INCREASE               = 421,
     RANGED_CRIT_DMG_INCREASE        = 964, -- Increases ranged critical damage by a percent
@@ -560,11 +589,9 @@ xi.mod =
     TA_TRIPLE_DMG_RATE              = 409,  -- Triple attack's triple damage chance %.
     ZANSHIN_DOUBLE_DAMAGE           = 410,  -- Zanshin's double damage chance %.
     RAPID_SHOT_DOUBLE_DAMAGE        = 479,  -- Rapid shot's double damage chance %.
-    ABSORB_DMG_CHANCE               = 480,  -- Chance to absorb damage %
     EXTRA_DUAL_WIELD_ATTACK         = 481,  -- Chance to land an extra attack when dual wielding
     EXTRA_KICK_ATTACK               = 482,  -- Occasionally allows a second Kick Attack during an attack round without the use of Footwork.
     SAMBA_DOUBLE_DAMAGE             = 415,  -- Double damage chance when samba is up.
-    NULL_PHYSICAL_DAMAGE            = 416,  -- Occasionally annuls damage from physical attacks, in percents
     QUICK_DRAW_TRIPLE_DAMAGE        = 417,  -- Chance to do triple damage with quick draw.
     BAR_ELEMENT_NULL_CHANCE         = 418,  -- Bar Elemental spells will occasionally nullify damage of the same element.
     GRIMOIRE_INSTANT_CAST           = 419,  -- Spells that match your current Arts will occasionally cast instantly, without recast.
@@ -621,28 +648,6 @@ xi.mod =
 
     ENSPELL_DMG_BONUS               = 432,
 
-    FIRE_ABSORB                     = 459, -- Occasionally absorbs fire elemental damage, in percents
-    ICE_ABSORB                      = 460, -- Occasionally absorbs ice elemental damage, in percents
-    WIND_ABSORB                     = 461, -- Occasionally absorbs wind elemental damage, in percents
-    EARTH_ABSORB                    = 462, -- Occasionally absorbs earth elemental damage, in percents
-    LTNG_ABSORB                     = 463, -- Occasionally absorbs thunder elemental damage, in percents
-    WATER_ABSORB                    = 464, -- Occasionally absorbs water elemental damage, in percents
-    LIGHT_ABSORB                    = 465, -- Occasionally absorbs light elemental damage, in percents
-    DARK_ABSORB                     = 466, -- Occasionally absorbs dark elemental damage, in percents
-
-    FIRE_NULL                       = 467, --
-    ICE_NULL                        = 468, --
-    WIND_NULL                       = 469, --
-    EARTH_NULL                      = 470, --
-    LTNG_NULL                       = 471, --
-    WATER_NULL                      = 472, --
-    LIGHT_NULL                      = 473, --
-    DARK_NULL                       = 474, --
-
-    MAGIC_ABSORB                    = 475, -- Occasionally absorbs magic damage taken, in percents
-    MAGIC_NULL                      = 476, -- Occasionally annuls magic damage taken, in percents
-    NULL_RANGED_DAMAGE              = 239, -- Occasionally annuls ranged damage taken, in percents
-    PHYS_ABSORB                     = 512, -- Occasionally absorbs physical damage taken, in percents
     ABSORB_DMG_TO_MP                = 516, -- Unlike PLD gear mod, works on all damage types (Ethereal Earring)
 
     WARCRY_DURATION                 = 483, -- Warcy duration bonus from gear
