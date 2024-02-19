@@ -96,25 +96,6 @@ enum class Mod
 
     WSACC = 48, // Weaponskill Accuracy
 
-    // Specific Damage Taken vs physical damage type
-    // Value is stored as a percentage of damage reduction (to within 1000)
-    // Example: 1000 = 100%, 875= 87.5%
-    SLASH_SDT  = 49, // Slash Damage Taken
-    PIERCE_SDT = 50, // Piercing Damage Taken
-    IMPACT_SDT = 51, // Impact Damage Taken
-    HTH_SDT    = 52, // Hand-To-Hand Damage Taken
-
-    // Elemental SDT
-    // This has been repeatedly mixed up with RESISTANCE - be careful!
-    FIRE_SDT    = 54, // Fire Damage Taken
-    ICE_SDT     = 55, // Ice Damage Taken
-    WIND_SDT    = 56, // Wind Damage Taken
-    EARTH_SDT   = 57, // Earth Damage Taken
-    THUNDER_SDT = 58, // Thunder Damage Taken
-    WATER_SDT   = 59, // Water Damage Taken
-    LIGHT_SDT   = 60, // Light Damage Taken
-    DARK_SDT    = 61, // Dark Damage Taken
-
     ATTP = 62, // % Attack
     DEFP = 63, // % Defense
 
@@ -207,22 +188,38 @@ enum class Mod
     DMG         = 160, // Damage Taken %
     DMGPHYS     = 161, // Physical Damage Taken %
     DMGPHYS_II  = 190, // Physical Damage Taken II % (Burtgang)
+    UDMGPHYS    = 387, // Uncapped Damage Multipliers
     DMGBREATH   = 162, // Breath Damage Taken %
+    UDMGBREATH  = 388, // Used in sentinel, invincible, physical shield etc
     DMGMAGIC    = 163, // Magic Damage Taken %
     DMGMAGIC_II = 831, // Magic Damage Taken II % (Aegis)
+    UDMGMAGIC   = 389,
     DMGRANGE    = 164, // Range Damage Taken %
+    UDMGRANGE   = 390,
     DMG_AOE     = 158, // Damage Taken % when not main target of an AoE action. (Ex: Locus Mobs)
 
-    // Uncapped damage - 10000 base, 375 = 3.75%
-    UDMGPHYS   = 387, // Uncapped Damage Multipliers
-    UDMGBREATH = 388, // Used in sentinel, invincible, physical shield etc
-    UDMGMAGIC  = 389,
-    UDMGRANGE  = 390,
+    // Specific Damage Taken vs physical damage type
+    // Value is stored as a percentage of damage reduction (to within 1000)
+    // Example: 1000 = 100%, 875= 87.5%
+    SLASH_SDT  = 49, // Slash Damage Taken
+    PIERCE_SDT = 50, // Piercing Damage Taken
+    IMPACT_SDT = 51, // Impact Damage Taken
+    HTH_SDT    = 52, // Hand-To-Hand Damage Taken
+
+    // Elemental SDT. BASE 10000. This has been repeatedly mixed up with RESISTANCE - be careful!
+    FIRE_SDT    = 54, // Fire Damage Taken
+    ICE_SDT     = 55, // Ice Damage Taken
+    WIND_SDT    = 56, // Wind Damage Taken
+    EARTH_SDT   = 57, // Earth Damage Taken
+    THUNDER_SDT = 58, // Thunder Damage Taken
+    WATER_SDT   = 59, // Water Damage Taken
+    LIGHT_SDT   = 60, // Light Damage Taken
+    DARK_SDT    = 61, // Dark Damage Taken
 
     // Occasionally annuls damage taken. Modifier value = chance in %
-    NULL_DAMAGE          = 141, // Occasionally annuls all/any damage.
+    NULL_DAMAGE          = 142, // Occasionally annuls all/any damage.
     NULL_PHYSICAL_DAMAGE = 416, // Occasionally annuls physical damage.
-    NULL_BREATH_DAMAGE   = 142, // Occasionally annuls breath damage.
+    NULL_BREATH_DAMAGE   = 143, // Occasionally annuls breath damage.
     NULL_MAGICAL_DAMAGE  = 476, // Occasionally annuls magical damage.
     NULL_RANGED_DAMAGE   = 239, // Occasionally annuls ranged damage.
     FIRE_NULL            = 467, // Occasionally annuls fire elemental damage.
@@ -1002,7 +999,7 @@ enum class Mod
     // 570 through 825 used by WS DMG mods these are not spares.
     //
     // SPARE IDs:
-    // 143
+    // 141
     // 217 to 223
     // 273 to 280
     //
