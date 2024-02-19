@@ -26776,12 +26776,15 @@ INSERT INTO `mob_droplist` VALUES (3290,0,0,1000,16242,@VCOMMON); -- Dark Ixion:
 INSERT INTO `mob_droplist` VALUES (3290,0,0,1000,2654,@ALWAYS);   -- Dark Ixion: Horn
 INSERT INTO `mob_droplist` VALUES (3290,0,0,1000,2655,@ALWAYS);   -- Dark Ixion: Tail
 
+-- ZoneID: 62 - Copper Borer
+INSERT INTO `mob_droplist` VALUES (3291,0,0,1000,11536,@UNCOMMON); -- Copper Borer: Wayang Kulit Mantle (Uncommon, 10%)
+
 -- ZoneID: 92 - Ferroalloy Quadav
 INSERT INTO `mob_droplist` VALUES (3292,0,0,1000,2504,@COMMON);   -- Heavy Quadav Chestplate (Common, 15%)
 INSERT INTO `mob_droplist` VALUES (3292,0,0,1000,2505,@UNCOMMON); -- Heavy Quadav Backplate (Uncommon, 10%)
 
--- ZoneID: 62 - Copper Borer
-INSERT INTO `mob_droplist` VALUES (3291,0,0,1000,11536,@UNCOMMON); -- Copper Borer: Wayang Kulit Mantle (Uncommon, 10%)
+-- ZoneID: 121 - Bastet
+INSERT INTO `mob_droplist` VALUES (3293,0,0,1000,2830,@VCOMMON); -- Bastet Fang (Very Common, 24%)
 
 /*!40000 ALTER TABLE `mob_droplist` ENABLE KEYS */;
 UNLOCK TABLES;

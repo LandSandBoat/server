@@ -5000,7 +5000,15 @@ INSERT INTO `mob_spell_lists` VALUES ('Silverhook',492,252,1,255); -- stun (1~25
 INSERT INTO `mob_spell_lists` VALUES ('Silverhook',492,253,1,255); -- sleep (1~255)
 INSERT INTO `mob_spell_lists` VALUES ('Silverhook',492,274,1,255); -- sleepga ii (1~255)
 
--- IDs 493-496 free for use
+-- Bastet (493)
+INSERT INTO `mob_spell_lists` VALUES ('Bastet',493,165,1,255); -- Thunder II (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Bastet',493,195,1,255); -- Thundaga II (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Bastet',493,212,1,255); -- Burst (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Bastet',493,239,1,255); -- Shock (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Bastet',493,251,1,255); -- Shock Spikes (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Bastet',493,252,1,255); -- Stun (1~255)
+
+-- IDs 494-496 free for use
 
 -- Cemetery Cherry
 INSERT INTO `mob_spell_lists` VALUES ('Cemetery_Cherry',497,274,1,255); -- Sleepga II
