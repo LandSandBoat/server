@@ -3502,10 +3502,10 @@ INSERT INTO `mob_skills` VALUES (3487,2477,'sidewinder',0,16.0,2000,1500,4,0,0,0
 INSERT INTO `mob_skills` VALUES (3488,2476,'arching_arrow',0,16.0,2000,1500,4,0,0,0,11,0,0);
 INSERT INTO `mob_skills` VALUES (3489,2478,'stellar_arrow',1,16.0,2000,1500,4,0,0,0,14,9,0);
 INSERT INTO `mob_skills` VALUES (3490,2479,'lux_arrow',0,16.0,2000,1500,4,0,0,0,12,10,0);
-INSERT INTO `mob_skills` VALUES (3491,2029,'grapeshot',0,7.0,2000,1500,4,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (3492,2030,'pirate_pummel',0,7.0,2000,1500,4,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (3493,2031,'powder_keg',0,7.0,2000,1500,4,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (3494,2032,'walk_the_plank',0,7.0,2000,1500,4,0,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (3491,2029,'grapeshot',0,7.0,2000,1500,4,0,0,0,3,2,0);
+INSERT INTO `mob_skills` VALUES (3492,2030,'pirate_pummel',0,7.0,2000,1500,4,0,0,0,9,0,0);
+INSERT INTO `mob_skills` VALUES (3493,2031,'powder_keg',0,7.0,2000,1500,4,0,0,0,5,1,0);
+INSERT INTO `mob_skills` VALUES (3494,2032,'walk_the_plank',0,7.0,2000,1500,4,0,2,0,11,0,0);
 INSERT INTO `mob_skills` VALUES (3495,684,'ground_strike',0,7.0,2000,1500,4,0,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (3496,457,'hollow_smite',0,7.0,2000,1500,4,0,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (3497,3241,'sarva's_storm',0,7.0,2000,1500,4,0,0,0,0,0,0);
