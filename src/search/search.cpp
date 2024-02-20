@@ -28,6 +28,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "common/lua.h"
 #include "common/md52.h"
 #include "common/mmo.h"
+#include "common/mutex_guarded.h"
 #include "common/settings.h"
 #include "common/socket.h"
 #include "common/sql.h"
@@ -112,8 +113,10 @@ extern std::unique_ptr<ConsoleService> gConsoleService;
 // A single IP should only have one request in flight at a time, so we are going to
 // be tracking the IP addresses of incoming requests and if we haven't cleared the
 // record for it - we drop the request.
-std::mutex                      gIPAddressesInUseMutex;
-std::unordered_set<std::string> gIPAddressesInUse;
+shared_guarded<std::unordered_set<std::string>> gIPAddressesInUse;
+
+// NOTE: We're only using the read-lock for this
+shared_guarded<std::unordered_set<std::string>> gIPAddressWhitelist;
 
 // Implement using getsockname and inet_ntop
 std::string socketToString(SOCKET socket)
@@ -131,26 +134,65 @@ std::string socketToString(SOCKET socket)
 
 bool isSocketInUse(std::string const& ipAddressStr)
 {
-    std::lock_guard<std::mutex> lock(gIPAddressesInUseMutex);
+    // clang-format off
+    if (gIPAddressWhitelist.read([ipAddressStr](auto const& ipWhitelist)
+    {
+        return ipWhitelist.find(ipAddressStr) != ipWhitelist.end();
+    }))
+    {
+        return false;
+    }
+    // clang-format on
 
     // ShowInfo(fmt::format("Checking if IP is in use: {}", ipAddressStr).c_str());
-    return gIPAddressesInUse.find(ipAddressStr) != gIPAddressesInUse.end();
+    // clang-format off
+    return gIPAddressesInUse.read([ipAddressStr](auto const& ipAddrsInUse)
+    {
+        return ipAddrsInUse.find(ipAddressStr) != ipAddrsInUse.end();
+    });
+    // clang-format on
 }
 
 void removeSocketFromSet(std::string const& ipAddressStr)
 {
-    std::lock_guard<std::mutex> lock(gIPAddressesInUseMutex);
+    // clang-format off
+    if (gIPAddressWhitelist.read([ipAddressStr](auto const& ipWhitelist)
+    {
+        return ipWhitelist.find(ipAddressStr) != ipWhitelist.end();
+    }))
+    {
+        return;
+    }
+    // clang-format on
 
     // ShowInfo(fmt::format("Removing IP from set: {}", ipAddressStr).c_str());
-    gIPAddressesInUse.erase(ipAddressStr);
+    // clang-format off
+    gIPAddressesInUse.write([ipAddressStr](auto& ipAddrsInUse)
+    {
+        ipAddrsInUse.erase(ipAddressStr);
+    });
+    // clang-format on
 }
 
 void addSocketToSet(std::string const& ipAddressStr)
 {
-    std::lock_guard<std::mutex> lock(gIPAddressesInUseMutex);
+    // clang-format off
+    if (gIPAddressWhitelist.read([ipAddressStr](auto const& ipWhitelist)
+    {
+        return ipWhitelist.find(ipAddressStr) != ipWhitelist.end();
+    }))
+    {
+        return;
+    }
+    // clang-format on
 
     // ShowInfo(fmt::format("Adding IP to set: {}", ipAddressStr).c_str());
-    gIPAddressesInUse.insert(ipAddressStr);
+    // clang-format off
+    gIPAddressesInUse.write([ipAddressStr](auto& ipAddrsInUse)
+    {
+        ipAddrsInUse.insert(ipAddressStr);
+    });
+    // clang-format on
 }
 
 /************************************************************************
@@ -328,6 +370,18 @@ int32 main(int32 argc, char** argv)
         ShowInfo("AH task to return items older than %u days is running", expireDays);
         CTaskMgr::getInstance()->AddTask("ah_cleanup", server_clock::now(), nullptr, CTaskMgr::TASK_INTERVAL, ah_cleanup,
                                          std::chrono::seconds(settings::get<uint32>("search.EXPIRE_INTERVAL")));
+    }
+
+    sol::table accessWhitelist = lua["xi"]["settings"]["search"]["ACCESS_WHITELIST"].get_or_create<sol::table>();
+    for (auto const& [_, value] : accessWhitelist)
+    {
+        // clang-format off
+        auto str = value.as<std::string>();
+        gIPAddressWhitelist.write([str](auto& ipWhitelist)
+        {
+            ipWhitelist.insert(str);
+        });
+        // clang-format on
     }
 
     std::thread taskManagerThread(TaskManagerThread, std::ref(requestExit));
