@@ -355,8 +355,8 @@ int32 do_init(int32 argc, char** argv)
         }
 
         fmt::print("Promoting {} to GM level {}\n", PChar->name, level);
-        PChar->pushPacket(new CChatMessagePacket(PChar, MESSAGE_SYSTEM_3,
-            fmt::format("You have been set to GM level {}.", level), ""));
+        PChar->pushPacket<CChatMessagePacket>(PChar, MESSAGE_SYSTEM_3,
+            fmt::format("You have been set to GM level {}.", level), "");
     });
 
     gConsoleService->RegisterCommand("reload_settings", "Reload settings files.",
@@ -882,7 +882,7 @@ int32 send_parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_da
     CCharEntity* PChar = map_session_data->PChar;
     TracyZoneString(PChar->name);
 
-    CBasicPacket* PSmallPacket = nullptr;
+    CBasicPacketPtr PSmallPacket = nullptr;
 
     uint32 PacketSize  = UINT32_MAX;
     size_t PacketCount = std::clamp<size_t>(PChar->getPacketCount(), 0, MAX_PACKETS_PER_COMPRESSION);
@@ -904,7 +904,7 @@ int32 send_parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_da
 
             while (!packetList.empty() && *buffsize + packetList.front()->getSize() < MAX_BUFFER_SIZE && static_cast<size_t>(packets) < PacketCount)
             {
-                PSmallPacket = packetList.front();
+                PSmallPacket = std::move(packetList.front()); // TODO: What does this leave in the list?
                 packetList.pop_front();
 
                 PSmallPacket->setSequence(map_session_data->server_packet_id);

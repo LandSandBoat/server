@@ -25,10 +25,14 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "common/cbasetypes.h"
 #include "common/socket.h"
 
+#include <memory>
 #include <stdio.h>
 #include <string.h>
 
 #define PACKET_SIZE 0x104
+
+class CBasicPacket;
+typedef std::unique_ptr<CBasicPacket> CBasicPacketPtr;
 
 enum ENTITYUPDATE
 {

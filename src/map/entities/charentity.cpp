@@ -302,12 +302,11 @@ void CCharEntity::clearPacketList()
 {
     while (!PacketList.empty())
     {
-        auto* packet = popPacket();
-        destroy(packet);
+        popPacket();
     }
 }
 
-void CCharEntity::pushPacket(CBasicPacket* packet)
+void CCharEntity::pushPacket(CBasicPacketPtr&& packet)
 {
     TracyZoneScoped;
     TracyZoneString(getName());
@@ -320,7 +319,6 @@ void CCharEntity::pushPacket(CBasicPacket* packet)
         if (PendingPositionPacket)
         {
             PendingPositionPacket->copy(packet);
-            destroy(packet);
         }
         else
         {
@@ -332,11 +330,6 @@ void CCharEntity::pushPacket(CBasicPacket* packet)
     {
         PacketList.emplace_back(packet);
     }
-}
-
-void CCharEntity::pushPacket(std::unique_ptr<CBasicPacket> packet)
-{
-    pushPacket(packet.release());
 }
 
 void CCharEntity::updateCharPacket(CCharEntity* PChar, ENTITYUPDATE type, uint8 updatemask)
@@ -804,7 +797,7 @@ void CCharEntity::PostTick()
     {
         updatemask |= UPDATE_HP;
         m_EquipSwap = false;
-        pushPacket(new CCharAppearancePacket(this));
+        pushPacket<CCharAppearancePacket>(this);
     }
 
     if (ReloadParty())
@@ -814,11 +807,11 @@ void CCharEntity::PostTick()
 
     if (m_EffectsChanged)
     {
-        pushPacket(new CCharUpdatePacket(this));
-        pushPacket(new CCharSyncPacket(this));
-        pushPacket(new CCharJobExtraPacket(this, true));
-        pushPacket(new CCharJobExtraPacket(this, false));
-        pushPacket(new CStatusEffectPacket(this));
+        pushPacket<CCharUpdatePacket>(this);
+        pushPacket<CCharSyncPacket>(this);
+        pushPacket<CCharJobExtraPacket>(this, true);
+        pushPacket<CCharJobExtraPacket>(this, false);
+        pushPacket<CStatusEffectPacket>(this);
         if (PParty)
         {
             PParty->PushEffectsPacket();
@@ -847,14 +840,14 @@ void CCharEntity::PostTick()
             // clang-format off
             ForAlliance([&](auto PEntity)
             {
-                static_cast<CCharEntity*>(PEntity)->pushPacket(new CCharHealthPacket(this));
+                static_cast<CCharEntity*>(PEntity)->pushPacket<CCharHealthPacket>(this);
             });
             // clang-format on
         }
         // Do not send an update packet when only the position has change
         if (updatemask ^ UPDATE_POS)
         {
-            pushPacket(new CCharUpdatePacket(this));
+            pushPacket<CCharUpdatePacket>(this);
         }
         updatemask = 0;
     }
@@ -953,7 +946,7 @@ void CCharEntity::OnChangeTarget(CBattleEntity* PNewTarget)
 {
     TracyZoneScoped;
     battleutils::RelinquishClaim(this);
-    pushPacket(new CLockOnPacket(this, PNewTarget));
+    pushPacket<CLockOnPacket>(this, PNewTarget);
     PLatentEffectContainer->CheckLatentsTargetChange();
 }
 
@@ -1313,12 +1306,12 @@ void CCharEntity::OnAbility(CAbilityState& state, action_t& action)
     auto* PAbility = state.GetAbility();
     if (this->PRecastContainer->HasRecast(RECAST_ABILITY, PAbility->getRecastId(), PAbility->getRecastTime()))
     {
-        pushPacket(new CMessageBasicPacket(this, this, 0, 0, MSGBASIC_WAIT_LONGER));
+        pushPacket<CMessageBasicPacket>(this, this, 0, 0, MSGBASIC_WAIT_LONGER);
         return;
     }
     if (this->StatusEffectContainer->HasStatusEffect(EFFECT_AMNESIA))
     {
-        pushPacket(new CMessageBasicPacket(this, this, 0, 0, MSGBASIC_UNABLE_TO_USE_JA2));
+        pushPacket<CMessageBasicPacket>(this, this, 0, 0, MSGBASIC_UNABLE_TO_USE_JA2);
         return;
     }
 
@@ -1344,7 +1337,7 @@ void CCharEntity::OnAbility(CAbilityState& state, action_t& action)
     {
         if (this != PTarget && distance(this->loc.p, PTarget->loc.p) > PAbility->getRange())
         {
-            pushPacket(new CMessageBasicPacket(this, PTarget, 0, 0, MSGBASIC_TOO_FAR_AWAY));
+            pushPacket<CMessageBasicPacket>(this, PTarget, 0, 0, MSGBASIC_TOO_FAR_AWAY);
             return;
         }
         if (PAbility->getID() >= ABILITY_HEALING_RUBY && PAbility->getID() <= ABILITY_PERFECT_DEFENSE)
@@ -1358,7 +1351,7 @@ void CCharEntity::OnAbility(CAbilityState& state, action_t& action)
 
             if (this->health.mp < mpCost)
             {
-                pushPacket(new CMessageBasicPacket(this, PTarget, 0, 0, MSGBASIC_UNABLE_TO_USE_JA));
+                pushPacket<CMessageBasicPacket>(this, PTarget, 0, 0, MSGBASIC_UNABLE_TO_USE_JA);
                 return;
             }
         }
@@ -1652,7 +1645,7 @@ void CCharEntity::OnAbility(CAbilityState& state, action_t& action)
             PRecastContainer->Add(RECAST_ABILITY, (recastID == 173 ? 174 : 173), action.recast);
         }
 
-        pushPacket(new CCharRecastPacket(this));
+        pushPacket<CCharRecastPacket>(this);
 
         // #TODO: refactor
         //  if (this->getMijinGakure())
@@ -2077,7 +2070,7 @@ void CCharEntity::OnItemFinish(CItemState& state, action_t& action)
     if (!PItem->isType(ITEM_EQUIPMENT) && (PItem->getQuantity() < 1 || PItem->getReserve() > 0))
     {
         ShowWarning("OnItemFinish: %s attempted to use reserved/insufficient %s (%u).", this->getName(), PItem->getName(), PItem->getID());
-        this->pushPacket(new CMessageBasicPacket(this, this, PItem->getID(), 0, MSGBASIC_ITEM_FAILS_TO_ACTIVATE));
+        this->pushPacket<CMessageBasicPacket>(this, this, PItem->getID(), 0, MSGBASIC_ITEM_FAILS_TO_ACTIVATE);
 
         return;
     }
@@ -2152,7 +2145,7 @@ CBattleEntity* CCharEntity::IsValidTarget(uint16 targid, uint16 validTargetFlags
             // Target is blocking assistance
             errMsg = std::make_unique<CMessageSystemPacket>(0, 0, 225);
             // Interaction was blocked
-            static_cast<CCharEntity*>(PTarget)->pushPacket(new CMessageSystemPacket(0, 0, 226));
+            static_cast<CCharEntity*>(PTarget)->pushPacket<CMessageSystemPacket>(0, 0, 226);
         }
         else if (IsMobOwner(PTarget))
         {
@@ -2385,7 +2378,7 @@ void CCharEntity::UpdateMoghancement()
     // Always show which moghancement the player has if they have one at all
     if (newMoghancementID != 0)
     {
-        pushPacket(new CMessageSpecialPacket(this, luautils::GetTextIDVariable(getZone(), "KEYITEM_OBTAINED"), newMoghancementID, 0, 0, 0, false));
+        pushPacket<CMessageSpecialPacket>(this, luautils::GetTextIDVariable(getZone(), "KEYITEM_OBTAINED"), newMoghancementID, 0, 0, 0, false);
     }
 
     if (newMoghancementID != m_moghancementID)
@@ -2407,17 +2400,17 @@ void CCharEntity::UpdateMoghancement()
         uint8 currentTable = m_moghancementID >> 9;
         if (newTable == currentTable)
         {
-            pushPacket(new CKeyItemsPacket(this, (KEYS_TABLE)newTable));
+            pushPacket<CKeyItemsPacket>(this, (KEYS_TABLE)newTable);
         }
         else
         {
             if (newTable != 0)
             {
-                pushPacket(new CKeyItemsPacket(this, (KEYS_TABLE)newTable));
+                pushPacket<CKeyItemsPacket>(this, (KEYS_TABLE)newTable);
             }
             if (currentTable != 0)
             {
-                pushPacket(new CKeyItemsPacket(this, (KEYS_TABLE)currentTable));
+                pushPacket<CKeyItemsPacket>(this, (KEYS_TABLE)currentTable);
             }
         }
         charutils::SaveKeyItems(this);
@@ -2757,11 +2750,11 @@ void CCharEntity::tryStartNextEvent()
 
     if (currentEvent->strings.empty())
     {
-        pushPacket(new CEventPacket(this, currentEvent));
+        pushPacket<CEventPacket>(this, currentEvent);
     }
     else
     {
-        pushPacket(new CEventStringPacket(this, currentEvent));
+        pushPacket<CEventStringPacket>(this, currentEvent);
     }
 }
 
@@ -2770,13 +2763,13 @@ void CCharEntity::skipEvent()
     TracyZoneScoped;
     if (!m_Locked && !isInEvent() && (!currentEvent->cutsceneOptions.empty() || currentEvent->interruptText != 0))
     {
-        pushPacket(new CMessageSystemPacket(0, 0, 117));
-        pushPacket(new CReleasePacket(this, RELEASE_TYPE::SKIPPING));
+        pushPacket<CMessageSystemPacket>(0, 0, 117);
+        pushPacket<CReleasePacket>(this, RELEASE_TYPE::SKIPPING);
         m_Substate = CHAR_SUBSTATE::SUBSTATE_NONE;
 
         if (currentEvent->interruptText != 0)
         {
-            pushPacket(new CMessageTextPacket(currentEvent->targetEntity, currentEvent->interruptText, false));
+            pushPacket<CMessageTextPacket>(currentEvent->targetEntity, currentEvent->interruptText, false);
         }
 
         endCurrentEvent();
