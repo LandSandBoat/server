@@ -495,7 +495,7 @@ void CLuaBaseEntity::messageSpecial(uint16 messageID, sol::variadic_args va)
  *  Notes   :
  ************************************************************************/
 
-void CLuaBaseEntity::messageSystem(uint16 messageID, sol::object const& p0, sol::object const& p1)
+void CLuaBaseEntity::messageSystem(MSGSYSTEM messageID, sol::object const& p0, sol::object const& p1)
 {
     if (m_PBaseEntity->objtype != TYPE_PC)
     {
@@ -1200,7 +1200,7 @@ void CLuaBaseEntity::release()
     {
         // Message: Event skipped
         releaseType = RELEASE_TYPE::SKIPPING;
-        PChar->pushPacket(new CMessageSystemPacket(0, 0, 117));
+        PChar->pushPacket(new CMessageSystemPacket(0, 0, MSGSYSTEM::EVENT_SKIPPED));
     }
 
     PChar->inSequence = false;
@@ -2921,7 +2921,7 @@ void CLuaBaseEntity::setPos(sol::variadic_args va)
             if (ipp == 0)
             {
                 ShowWarning(fmt::format("Char {} requested zone ({}) returned IPP of 0", PChar->name, zoneid));
-                PChar->pushPacket(new CMessageSystemPacket(0, 0, 2)); // You could not enter the next area.
+                PChar->pushPacket(new CMessageSystemPacket(0, 0, MSGSYSTEM::COULD_NOT_ENTER)); // You could not enter the next area.
                 return;
             }
 
