@@ -108,7 +108,7 @@ bool CMobController::CanPursueTarget(CBattleEntity* PTarget)
         if (!PMob->PAI->PathFind->InWater() && PTarget && !PTarget->StatusEffectContainer->HasStatusEffect(EFFECT_DEODORIZE))
         {
             // certain weather / deodorize will turn on time deaggro
-            return PMob->m_disableScent;
+            return !PMob->m_disableScent;
         }
     }
     return false;
@@ -119,7 +119,7 @@ bool CMobController::CheckHide(CBattleEntity* PTarget)
     TracyZoneScoped;
     if (PTarget && PTarget->GetMJob() == JOB_THF && PTarget->StatusEffectContainer->HasStatusEffect(EFFECT_HIDE))
     {
-        return !CanPursueTarget(PTarget) && !PMob->m_TrueDetection;
+        return !CanPursueTarget(PTarget) && !PMob->m_TrueDetection && !(PMob->getMobMod(MOBMOD_DETECTION) & DETECT_HEARING);
     }
     return false;
 }
@@ -211,7 +211,7 @@ void CMobController::TryLink()
                 if (PPartyMember->m_roamFlags & ROAMFLAG_IGNORE)
                 {
                     // force into attack action
-                    //#TODO
+                    // #TODO
                     PPartyMember->PAI->Engage(PTarget->targid);
                 }
             }
@@ -831,7 +831,7 @@ void CMobController::DoRoamTick(time_point tick)
 
         return;
     }
-    //#TODO
+    // #TODO
     else if (PMob->GetDespawnTime() > time_point::min() && PMob->GetDespawnTime() < m_Tick)
     {
         Despawn();
@@ -946,7 +946,7 @@ void CMobController::DoRoamTick(time_point tick)
                 else if (PMob->CanRoam() && PMob->PAI->PathFind->RoamAround(PMob->m_SpawnPoint, PMob->GetRoamDistance(),
                                                                             (uint8)PMob->getMobMod(MOBMOD_ROAM_TURNS), PMob->m_roamFlags))
                 {
-                    //#TODO: #AIToScript (event probably)
+                    // #TODO: #AIToScript (event probably)
                     if (PMob->m_roamFlags & ROAMFLAG_WORM)
                     {
                         // move down
