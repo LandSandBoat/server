@@ -26788,11 +26788,11 @@ INSERT INTO `mob_droplist` VALUES (3292,0,0,1000,2505,@UNCOMMON); -- Heavy Quada
 INSERT INTO `mob_droplist` VALUES (3293,0,0,1000,2830,@VCOMMON); -- Bastet Fang (Very Common, 24%)
 
 -- ZoneID: 137 - Zirnitra
-INSERT INTO `mob_droplist` VALUES (3293,0,0,1000,2823,@ALWAYS);   -- Iridium ingot (Always, 100%)
-INSERT INTO `mob_droplist` VALUES (3293,0,0,1000,2750,@ALWAYS);   -- Amphiptere hide (Always, 100%)
-INSERT INTO `mob_droplist` VALUES (3293,0,0,1000,2810,@ALWAYS);   -- Vial of ebur pigment (Always, 100%)
-INSERT INTO `mob_droplist` VALUES (3293,0,0,1000,647,@ALWAYS);    -- Chunk of molybdenum ore (Always, 100%)
-INSERT INTO `mob_droplist` VALUES (3293,0,0,1000,19236,@VCOMMON); -- Hightail bullet (Very common, 24%)
+INSERT INTO `mob_droplist` VALUES (3294,0,0,1000,2823,@ALWAYS);   -- Iridium ingot (Always, 100%)
+INSERT INTO `mob_droplist` VALUES (3294,0,0,1000,2750,@ALWAYS);   -- Amphiptere hide (Always, 100%)
+INSERT INTO `mob_droplist` VALUES (3294,0,0,1000,2810,@ALWAYS);   -- Vial of ebur pigment (Always, 100%)
+INSERT INTO `mob_droplist` VALUES (3294,0,0,1000,647,@ALWAYS);    -- Chunk of molybdenum ore (Always, 100%)
+INSERT INTO `mob_droplist` VALUES (3294,0,0,1000,19236,@VCOMMON); -- Hightail bullet (Very common, 24%)
 
 /*!40000 ALTER TABLE `mob_droplist` ENABLE KEYS */;
 UNLOCK TABLES;
