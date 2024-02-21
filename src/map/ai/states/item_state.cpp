@@ -130,8 +130,8 @@ CItemState::CItemState(CCharEntity* PEntity, uint16 targid, uint8 loc, uint8 slo
 
     m_PItem->setSubType(ITEM_LOCKED);
 
-    m_PEntity->pushPacket(new CInventoryAssignPacket(m_PItem, INV_NOSELECT));
-    m_PEntity->pushPacket(new CInventoryFinishPacket());
+    m_PEntity->pushPacket<CInventoryAssignPacket>(m_PItem, INV_NOSELECT);
+    m_PEntity->pushPacket<CInventoryFinishPacket>();
 }
 
 void CItemState::UpdateTarget(CBaseEntity* target)
@@ -211,15 +211,15 @@ void CItemState::Cleanup(time_point tick)
 
     if (PItem && PItem == m_PItem)
     {
-        m_PEntity->pushPacket(new CInventoryAssignPacket(m_PItem, INV_NORMAL));
+        m_PEntity->pushPacket<CInventoryAssignPacket>(m_PItem, INV_NORMAL);
     }
     else
     {
         m_PItem = nullptr;
     }
 
-    m_PEntity->pushPacket(new CInventoryItemPacket(m_PItem, m_location, m_slot));
-    m_PEntity->pushPacket(new CInventoryFinishPacket());
+    m_PEntity->pushPacket<CInventoryItemPacket>(m_PItem, m_location, m_slot);
+    m_PEntity->pushPacket<CInventoryFinishPacket>();
 }
 
 bool CItemState::CanChangeState()
@@ -294,7 +294,7 @@ void CItemState::InterruptItem(action_t& action)
         actionTarget.messageID  = 0;
         actionTarget.knockback  = 0;
 
-        m_PEntity->pushPacket(m_errorMsg.release());
+        m_PEntity->pushPacket(std::move(m_errorMsg));
     }
 }
 

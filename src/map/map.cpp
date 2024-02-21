@@ -355,8 +355,8 @@ int32 do_init(int32 argc, char** argv)
         }
 
         fmt::print("Promoting {} to GM level {}\n", PChar->name, level);
-        PChar->pushPacket(new CChatMessagePacket(PChar, MESSAGE_SYSTEM_3,
-            fmt::format("You have been set to GM level {}.", level), ""));
+        PChar->pushPacket<CChatMessagePacket>(PChar, MESSAGE_SYSTEM_3,
+            fmt::format("You have been set to GM level {}.", level), "");
     });
 
     gConsoleService->RegisterCommand("reload_settings", "Reload settings files.",

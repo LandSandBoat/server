@@ -468,7 +468,7 @@ namespace jobpointutils
 
         if (sendUpdate)
         {
-            PChar->pushPacket(new CCharSpellsPacket(PChar));
+            PChar->pushPacket<CCharSpellsPacket>(PChar);
         }
     }
 } // namespace jobpointutils

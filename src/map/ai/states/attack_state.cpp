@@ -74,7 +74,7 @@ bool CAttackState::Update(time_point tick)
         }
         else if (m_PEntity->OnAttackError(*this))
         {
-            m_PEntity->HandleErrorMessage(m_errorMsg);
+            m_PEntity->HandleErrorMessage(std::move(m_errorMsg));
         }
         if (m_PEntity->GetBattleTargetID() == 0)
         {
@@ -132,7 +132,7 @@ void CAttackState::UpdateTarget(uint16 targid)
                         if (PChar->IsValidTarget(PPotentialTarget.second->targid, TARGET_ENEMY, errMsg))
                         {
                             newTargid = PPotentialTarget.second->targid;
-                            PChar->pushPacket(new CLockOnPacket(PChar, static_cast<CBattleEntity*>(PPotentialTarget.second)));
+                            PChar->pushPacket<CLockOnPacket>(PChar, static_cast<CBattleEntity*>(PPotentialTarget.second));
                             break;
                         }
                     }

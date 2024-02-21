@@ -65,7 +65,7 @@ bool CDeathState::Update(time_point tick)
         auto* PChar = static_cast<CCharEntity*>(m_PEntity);
         if (PChar->m_hasRaise)
         {
-            PChar->pushPacket(new CRaiseTractorMenuPacket(PChar, TYPE_RAISE));
+            PChar->pushPacket<CRaiseTractorMenuPacket>(PChar, TYPE_RAISE);
             m_raiseSent = true;
         }
     }

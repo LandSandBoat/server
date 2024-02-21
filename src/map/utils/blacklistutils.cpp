@@ -66,7 +66,7 @@ namespace blacklistutils
         const char* query = "SELECT c.charid, c.charname FROM char_blacklist AS b INNER JOIN chars AS c ON b.charid_target = c.charid WHERE charid_owner = %u;";
         if (sql->Query(query, PChar->id) == SQL_ERROR || sql->NumRows() == 0)
         {
-            PChar->pushPacket(new CStopDownloadingPacket(PChar, blacklist));
+            PChar->pushPacket<CStopDownloadingPacket>(PChar, blacklist);
             return;
         }
 
@@ -82,7 +82,7 @@ namespace blacklistutils
 
             if (currentCount >= 12)
             {
-                PChar->pushPacket(new CStopDownloadingPacket(PChar, blacklist));
+                PChar->pushPacket<CStopDownloadingPacket>(PChar, blacklist);
                 blacklist.clear();
                 currentCount = 0;
             }
@@ -91,7 +91,7 @@ namespace blacklistutils
         // Push remaining entries..
         if (!blacklist.empty())
         {
-            PChar->pushPacket(new CStopDownloadingPacket(PChar, blacklist));
+            PChar->pushPacket<CStopDownloadingPacket>(PChar, blacklist);
         }
     }
 

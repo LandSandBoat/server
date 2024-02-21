@@ -77,9 +77,9 @@ bool CState::HasErrorMsg() const
     return m_errorMsg != nullptr;
 }
 
-CBasicPacket* CState::GetErrorMsg()
+CBasicPacketPtr CState::GetErrorMsg()
 {
-    return m_errorMsg.release();
+    return std::move(m_errorMsg);
 }
 
 bool CState::DoUpdate(time_point tick)

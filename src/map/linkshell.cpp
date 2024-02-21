@@ -209,16 +209,16 @@ void CLinkshell::ChangeMemberRank(const std::string& MemberName, uint8 toSack)
                                    static_cast<uint8>(PItemLinkshell->GetLSType()), PMember->id);
                     }
 
-                    PMember->pushPacket(new CInventoryAssignPacket(PItemLinkshell, INV_NORMAL));
-                    PMember->pushPacket(new CLinkshellEquipPacket(PMember, lsID));
-                    PMember->pushPacket(new CInventoryItemPacket(PItemLinkshell, LocationID, SlotID));
+                    PMember->pushPacket<CInventoryAssignPacket>(PItemLinkshell, INV_NORMAL);
+                    PMember->pushPacket<CLinkshellEquipPacket>(PMember, lsID);
+                    PMember->pushPacket<CInventoryItemPacket>(PItemLinkshell, LocationID, SlotID);
                 }
 
                 charutils::SaveCharStats(PMember);
                 charutils::SaveCharEquip(PMember);
 
-                PMember->pushPacket(new CInventoryFinishPacket());
-                PMember->pushPacket(new CCharUpdatePacket(PMember));
+                PMember->pushPacket<CInventoryFinishPacket>();
+                PMember->pushPacket<CCharUpdatePacket>(PMember);
                 return;
             }
         }
@@ -260,8 +260,8 @@ void CLinkshell::RemoveMemberByName(const std::string& MemberName, uint8 kickerR
                     PMember->updatemask |= UPDATE_HP;
                 }
 
-                PMember->pushPacket(new CInventoryAssignPacket(PItemLinkshell, INV_NORMAL));
-                PMember->pushPacket(new CLinkshellEquipPacket(PMember, lsNum));
+                PMember->pushPacket<CInventoryAssignPacket>(PItemLinkshell, INV_NORMAL);
+                PMember->pushPacket<CLinkshellEquipPacket>(PMember, lsNum);
             }
 
             for (uint8 LocationID = 0; LocationID < CONTAINER_ID::MAX_CONTAINER_ID; ++LocationID)
@@ -281,7 +281,7 @@ void CLinkshell::RemoveMemberByName(const std::string& MemberName, uint8 kickerR
                                 sql->EscapeStringLen(extra, (const char*)newPItemLinkshell->m_extra, sizeof(newPItemLinkshell->m_extra));
                                 const char* Query = "UPDATE char_inventory SET extra = '%s' WHERE charid = %u AND location = %u AND slot = %u LIMIT 1";
                                 sql->Query(Query, extra, PMember->id, LocationID, SlotID);
-                                PMember->pushPacket(new CInventoryItemPacket(newPItemLinkshell, LocationID, SlotID));
+                                PMember->pushPacket<CInventoryItemPacket>(newPItemLinkshell, LocationID, SlotID);
                             }
                         }
                     }
@@ -291,15 +291,15 @@ void CLinkshell::RemoveMemberByName(const std::string& MemberName, uint8 kickerR
             charutils::SaveCharStats(PMember);
             charutils::SaveCharEquip(PMember);
 
-            PMember->pushPacket(new CInventoryFinishPacket());
-            PMember->pushPacket(new CCharUpdatePacket(PMember));
+            PMember->pushPacket<CInventoryFinishPacket>();
+            PMember->pushPacket<CCharUpdatePacket>(PMember);
             if (breakLinkshell)
             {
-                PMember->pushPacket(new CMessageStandardPacket(MsgStd::LinkshellNoLongerExists));
+                PMember->pushPacket<CMessageStandardPacket>(MsgStd::LinkshellNoLongerExists);
             }
             else
             {
-                PMember->pushPacket(new CMessageStandardPacket(MsgStd::LinkshellKicked));
+                PMember->pushPacket<CMessageStandardPacket>(MsgStd::LinkshellKicked);
             }
 
             return;

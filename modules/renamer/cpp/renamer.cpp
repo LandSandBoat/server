@@ -15,7 +15,7 @@ class RenamerModule : public CPPModule
             return;
         }
 
-        auto* customPacket = new CBasicPacket();
+        auto customPacket = std::make_unique<CBasicPacket>();
         customPacket->setType(0x1FF);
         customPacket->setSize(0x100);
         for (std::size_t i = 0; i < data.size(); ++i)

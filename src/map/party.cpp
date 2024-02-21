@@ -135,7 +135,7 @@ void CParty::DisbandParty(bool playerInitiated)
             PChar->PLatentEffectContainer->CheckLatentsPartyJobs();
             PChar->PLatentEffectContainer->CheckLatentsPartyMembers(members.size());
             PChar->PLatentEffectContainer->CheckLatentsPartyAvatar();
-            PChar->pushPacket(new CPartyMemberUpdatePacket(PChar, 0, 0, PChar->getZone()));
+            PChar->pushPacket<CPartyMemberUpdatePacket>(PChar, 0, 0, PChar->getZone());
 
             // TODO: TreasurePool should stay with the last character, but now it is not critical
 
@@ -149,7 +149,7 @@ void CParty::DisbandParty(bool playerInitiated)
             CStatusEffect* sync = PChar->StatusEffectContainer->GetStatusEffect(EFFECT_LEVEL_SYNC);
             if (sync && sync->GetDuration() == 0)
             {
-                PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, 0, 30, 553));
+                PChar->pushPacket<CMessageBasicPacket>(PChar, PChar, 0, 30, 553);
                 sync->SetStartTime(server_clock::now());
                 sync->SetDuration(30000);
             }
@@ -316,7 +316,7 @@ void CParty::RemoveMember(CBattleEntity* PEntity)
                     CStatusEffect* sync = PChar->StatusEffectContainer->GetStatusEffect(EFFECT_LEVEL_SYNC);
                     if (sync && sync->GetDuration() == 0)
                     {
-                        PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, 0, 30, 553));
+                        PChar->pushPacket<CMessageBasicPacket>(PChar, PChar, 0, 30, 553);
                         sync->SetStartTime(server_clock::now());
                         sync->SetDuration(30000);
                     }
@@ -329,7 +329,7 @@ void CParty::RemoveMember(CBattleEntity* PEntity)
                         CStatusEffect* sync = PChar->StatusEffectContainer->GetStatusEffect(EFFECT_LEVEL_SYNC);
                         if (sync && sync->GetDuration() == 0)
                         {
-                            PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, 0, 30, 553));
+                            PChar->pushPacket<CMessageBasicPacket>(PChar, PChar, 0, 30, 553);
                             sync->SetStartTime(server_clock::now());
                             sync->SetDuration(30000);
                         }
@@ -337,9 +337,9 @@ void CParty::RemoveMember(CBattleEntity* PEntity)
                 }
                 PChar->PLatentEffectContainer->CheckLatentsPartyMembers(members.size());
 
-                PChar->pushPacket(new CPartyDefinePacket(nullptr));
-                PChar->pushPacket(new CPartyMemberUpdatePacket(PChar, 0, 0, PChar->getZone()));
-                PChar->pushPacket(new CCharUpdatePacket(PChar));
+                PChar->pushPacket<CPartyDefinePacket>(nullptr);
+                PChar->pushPacket<CPartyMemberUpdatePacket>(PChar, 0, 0, PChar->getZone());
+                PChar->pushPacket<CCharUpdatePacket>(PChar);
                 PChar->PParty = nullptr;
 
                 sql->Query("DELETE FROM accounts_parties WHERE charid = %u;", PChar->id);
@@ -404,7 +404,7 @@ void CParty::DelMember(CBattleEntity* PEntity)
                     CStatusEffect* sync = PChar->StatusEffectContainer->GetStatusEffect(EFFECT_LEVEL_SYNC);
                     if (sync && sync->GetDuration() == 0)
                     {
-                        PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, 0, 30, 553));
+                        PChar->pushPacket<CMessageBasicPacket>(PChar, PChar, 0, 30, 553);
                         sync->SetStartTime(server_clock::now());
                         sync->SetDuration(30000);
                     }
@@ -417,7 +417,7 @@ void CParty::DelMember(CBattleEntity* PEntity)
                         CStatusEffect* sync = PChar->StatusEffectContainer->GetStatusEffect(EFFECT_LEVEL_SYNC);
                         if (sync && sync->GetDuration() == 0)
                         {
-                            PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, 0, 30, 553));
+                            PChar->pushPacket<CMessageBasicPacket>(PChar, PChar, 0, 30, 553);
                             sync->SetStartTime(server_clock::now());
                             sync->SetDuration(30000);
                         }
@@ -425,9 +425,9 @@ void CParty::DelMember(CBattleEntity* PEntity)
                 }
                 PChar->PLatentEffectContainer->CheckLatentsPartyMembers(members.size());
 
-                PChar->pushPacket(new CPartyDefinePacket(nullptr));
-                PChar->pushPacket(new CPartyMemberUpdatePacket(PChar, 0, 0, PChar->getZone()));
-                PChar->pushPacket(new CCharUpdatePacket(PChar));
+                PChar->pushPacket<CPartyDefinePacket>(nullptr);
+                PChar->pushPacket<CPartyMemberUpdatePacket>(PChar, 0, 0, PChar->getZone());
+                PChar->pushPacket<CCharUpdatePacket>(PChar);
                 PChar->PParty = nullptr;
 
                 if (PChar->PTreasurePool != nullptr && PChar->PTreasurePool->GetPoolType() != TREASUREPOOL_ZONE)
@@ -619,9 +619,9 @@ void CParty::AddMember(CBattleEntity* PEntity)
 
             charutils::SaveCharStats(PChar);
 
-            PChar->pushPacket(new CMenuConfigPacket(PChar));
-            PChar->pushPacket(new CCharUpdatePacket(PChar));
-            PChar->pushPacket(new CCharSyncPacket(PChar));
+            PChar->pushPacket<CMenuConfigPacket>(PChar);
+            PChar->pushPacket<CCharUpdatePacket>(PChar);
+            PChar->pushPacket<CCharSyncPacket>(PChar);
         }
         PChar->PTreasurePool->UpdatePool(PChar);
 
@@ -630,7 +630,7 @@ void CParty::AddMember(CBattleEntity* PEntity)
         {
             if (PChar->getZone() == m_PSyncTarget->getZone())
             {
-                PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, 0, m_PSyncTarget->GetMLevel(), 540));
+                PChar->pushPacket<CMessageBasicPacket>(PChar, PChar, 0, m_PSyncTarget->GetMLevel(), 540);
                 PChar->StatusEffectContainer->AddStatusEffect(new CStatusEffect(EFFECT_LEVEL_SYNC, EFFECT_LEVEL_SYNC, m_PSyncTarget->GetMLevel(), 0, 0), true);
                 PChar->StatusEffectContainer->DelStatusEffectsByFlag(EFFECTFLAG_DISPELABLE | EFFECTFLAG_ON_ZONE);
                 PChar->loc.zone->PushPacket(PChar, CHAR_INRANGE, new CCharSyncPacket(PChar));
@@ -690,9 +690,9 @@ void CParty::AddMember(uint32 id)
             charutils::SaveCharStats(PChar);
 
             PChar->status = STATUS_UPDATE;
-            PChar->pushPacket(new CMenuConfigPacket(PChar));
-            PChar->pushPacket(new CCharUpdatePacket(PChar));
-            PChar->pushPacket(new CCharSyncPacket(PChar));
+            PChar->pushPacket<CMenuConfigPacket>(PChar);
+            PChar->pushPacket<CCharUpdatePacket>(PChar);
+            PChar->pushPacket<CCharSyncPacket>(PChar);
         }
         PChar->PTreasurePool->UpdatePool(PChar);*/
     }
@@ -822,7 +822,7 @@ void CParty::ReloadParty()
                 CCharEntity* PChar = (CCharEntity*)member;
                 PChar->ReloadPartyDec();
                 uint16 alliance = 0;
-                PChar->pushPacket(new CPartyDefinePacket(party));
+                PChar->pushPacket<CPartyDefinePacket>(party);
                 // auto effects = std::make_unique<CPartyEffectsPacket>();
                 uint8 j = 0;
                 for (auto&& memberinfo : info)
@@ -835,14 +835,14 @@ void CParty::ReloadParty()
                     auto* PPartyMember = zoneutils::GetChar(memberinfo.id);
                     if (PPartyMember)
                     {
-                        PChar->pushPacket(new CPartyMemberUpdatePacket(PPartyMember, j, memberinfo.flags, PChar->getZone()));
+                        PChar->pushPacket<CPartyMemberUpdatePacket>(PPartyMember, j, memberinfo.flags, PChar->getZone());
                         // if (memberinfo.partyid == party->GetPartyID() && PPartyMember != PChar)
                         //    effects->AddMemberEffects(PChar);
                     }
                     else
                     {
                         uint16 zoneid = memberinfo.zone == 0 ? memberinfo.prev_zone : memberinfo.zone;
-                        PChar->pushPacket(new CPartyMemberUpdatePacket(memberinfo.id, memberinfo.name, memberinfo.flags, j, zoneid));
+                        PChar->pushPacket<CPartyMemberUpdatePacket>(memberinfo.id, memberinfo.name, memberinfo.flags, j, zoneid);
                     }
                     j++;
                 }
@@ -863,7 +863,7 @@ void CParty::ReloadParty()
             PChar->PLatentEffectContainer->CheckLatentsPartyMembers(members.size());
             PChar->PLatentEffectContainer->CheckLatentsPartyAvatar();
             PChar->ReloadPartyDec();
-            PChar->pushPacket(new CPartyDefinePacket(this, PLeader && PChar->getZone() == PLeader->getZone()));
+            PChar->pushPacket<CPartyDefinePacket>(this, PLeader && PChar->getZone() == PLeader->getZone());
             // auto effects = std::make_unique<CPartyEffectsPacket>();
             uint8 j = 0;
             for (auto&& memberinfo : info)
@@ -871,7 +871,7 @@ void CParty::ReloadParty()
                 auto* PPartyMember = zoneutils::GetChar(memberinfo.id);
                 if (PPartyMember)
                 {
-                    PChar->pushPacket(new CPartyMemberUpdatePacket(PPartyMember, j, memberinfo.flags, PChar->getZone()));
+                    PChar->pushPacket<CPartyMemberUpdatePacket>(PPartyMember, j, memberinfo.flags, PChar->getZone());
                     // if (PPartyMember != PChar)
                     //    effects->AddMemberEffects(PChar);
 
@@ -883,14 +883,14 @@ void CParty::ReloadParty()
                         {
                             j++;
                             // trusts don't persist over zonelines, so we know their zone has be the same as the leader.
-                            PChar->pushPacket(new CPartyMemberUpdatePacket(PTrust, j));
+                            PChar->pushPacket<CPartyMemberUpdatePacket>(PTrust, j);
                         }
                     }
                 }
                 else
                 {
                     uint16 zoneid = memberinfo.zone == 0 ? memberinfo.prev_zone : memberinfo.zone;
-                    PChar->pushPacket(new CPartyMemberUpdatePacket(memberinfo.id, memberinfo.name, memberinfo.flags, j, zoneid));
+                    PChar->pushPacket<CPartyMemberUpdatePacket>(memberinfo.id, memberinfo.name, memberinfo.flags, j, zoneid);
                 }
                 j++;
             }
@@ -902,7 +902,7 @@ void CParty::ReloadParty()
 void CParty::ReloadPartyMembers(CCharEntity* PChar)
 {
     PChar->ReloadPartyDec();
-    PChar->pushPacket(new CPartyDefinePacket(this));
+    PChar->pushPacket<CPartyDefinePacket>(this);
 
     int alliance = 0;
 
@@ -919,12 +919,12 @@ void CParty::ReloadPartyMembers(CCharEntity* PChar)
         CCharEntity* PPartyMember = zoneutils::GetChar(memberinfo.id);
         if (PPartyMember)
         {
-            PChar->pushPacket(new CPartyMemberUpdatePacket(PPartyMember, j, memberinfo.flags, PChar->getZone()));
+            PChar->pushPacket<CPartyMemberUpdatePacket>(PPartyMember, j, memberinfo.flags, PChar->getZone());
         }
         else
         {
             uint16 zoneid = memberinfo.zone == 0 ? memberinfo.prev_zone : memberinfo.zone;
-            PChar->pushPacket(new CPartyMemberUpdatePacket(memberinfo.id, memberinfo.name, memberinfo.flags, j, zoneid));
+            PChar->pushPacket<CPartyMemberUpdatePacket>(memberinfo.id, memberinfo.name, memberinfo.flags, j, zoneid);
         }
         j++;
     }
@@ -1055,12 +1055,12 @@ void CParty::SetSyncTarget(const std::string& MemberName, uint16 message)
             // enable level sync
             if (PChar->GetMLevel() < 10)
             {
-                ((CCharEntity*)GetLeader())->pushPacket(new CMessageBasicPacket((CCharEntity*)GetLeader(), (CCharEntity*)GetLeader(), 0, 10, 541));
+                ((CCharEntity*)GetLeader())->pushPacket<CMessageBasicPacket>((CCharEntity*)GetLeader(), (CCharEntity*)GetLeader(), 0, 10, 541);
                 return;
             }
             else if (PChar->getZone() != GetLeader()->getZone())
             {
-                ((CCharEntity*)GetLeader())->pushPacket(new CMessageBasicPacket((CCharEntity*)GetLeader(), (CCharEntity*)GetLeader(), 0, 0, 542));
+                ((CCharEntity*)GetLeader())->pushPacket<CMessageBasicPacket>((CCharEntity*)GetLeader(), (CCharEntity*)GetLeader(), 0, 0, 542);
                 return;
             }
             else
@@ -1069,7 +1069,7 @@ void CParty::SetSyncTarget(const std::string& MemberName, uint16 message)
                 {
                     if (member->StatusEffectContainer->HasStatusEffect({ EFFECT_LEVEL_RESTRICTION, EFFECT_LEVEL_SYNC, EFFECT_SJ_RESTRICTION, EFFECT_CONFRONTATION, EFFECT_BATTLEFIELD }))
                     {
-                        ((CCharEntity*)GetLeader())->pushPacket(new CMessageBasicPacket((CCharEntity*)GetLeader(), (CCharEntity*)GetLeader(), 0, 0, 543));
+                        ((CCharEntity*)GetLeader())->pushPacket<CMessageBasicPacket>((CCharEntity*)GetLeader(), (CCharEntity*)GetLeader(), 0, 0, 543);
                         return;
                     }
                 }
@@ -1085,7 +1085,7 @@ void CParty::SetSyncTarget(const std::string& MemberName, uint16 message)
 
                     if (member->status != STATUS_TYPE::DISAPPEAR && member->getZone() == PChar->getZone())
                     {
-                        member->pushPacket(new CMessageStandardPacket(PChar->GetMLevel(), 0, 0, 0, static_cast<MsgStd>(message)));
+                        member->pushPacket<CMessageStandardPacket>(PChar->GetMLevel(), 0, 0, 0, static_cast<MsgStd>(message));
                         member->StatusEffectContainer->AddStatusEffect(new CStatusEffect(EFFECT_LEVEL_SYNC, EFFECT_LEVEL_SYNC, PChar->GetMLevel(), 0, 0), true);
                         member->StatusEffectContainer->DelStatusEffectsByFlag(EFFECTFLAG_DISPELABLE | EFFECTFLAG_ON_ZONE);
                         member->loc.zone->PushPacket(member, CHAR_INRANGE, new CCharSyncPacket(member));
@@ -1116,7 +1116,7 @@ void CParty::SetSyncTarget(const std::string& MemberName, uint16 message)
                         CStatusEffect* sync = member->StatusEffectContainer->GetStatusEffect(EFFECT_LEVEL_SYNC);
                         if (sync && sync->GetDuration() == 0)
                         {
-                            member->pushPacket(new CMessageBasicPacket(member, member, 10, 30, message));
+                            member->pushPacket<CMessageBasicPacket>(member, member, 10, 30, message);
                             sync->SetStartTime(server_clock::now());
                             sync->SetDuration(30000);
                         }
@@ -1161,7 +1161,7 @@ void CParty::PushPacket(uint32 senderID, uint16 ZoneID, CBasicPacket* packet)
         {
             if (ZoneID == 0 || member->getZone() == ZoneID)
             {
-                member->pushPacket(new CBasicPacket(*packet));
+                member->pushPacket<CBasicPacket>(*packet);
             }
         }
     }
@@ -1249,9 +1249,9 @@ void CParty::RefreshSync()
             charutils::BuildingCharAbilityTable(member);
             charutils::BuildingCharWeaponSkills(member);
             charutils::CheckValidEquipment(member);
-            member->pushPacket(new CCharAbilitiesPacket(member));
+            member->pushPacket<CCharAbilitiesPacket>(member);
         }
-        member->pushPacket(new CMessageBasicPacket(member, member, 0, syncLevel, 540));
+        member->pushPacket<CMessageBasicPacket>(member, member, 0, syncLevel, 540);
     }
     m_PSyncTarget = sync;
 }

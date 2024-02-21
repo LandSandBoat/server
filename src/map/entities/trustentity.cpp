@@ -74,7 +74,7 @@ void CTrustEntity::PostTick()
             // clang-format off
             PMaster->ForParty([this](auto PMember)
             {
-                static_cast<CCharEntity*>(PMember)->pushPacket(new CCharHealthPacket(this));
+                static_cast<CCharEntity*>(PMember)->pushPacket<CCharHealthPacket>(this);
             });
             // clang-format on
         }
@@ -110,7 +110,7 @@ void CTrustEntity::Spawn()
     // we need to skip CMobEntity's spawn because it calculates stats (and our stats are already calculated)
     CBattleEntity::Spawn();
     luautils::OnMobSpawn(this);
-    ((CCharEntity*)PMaster)->pushPacket(new CEntitySetNamePacket(this));
+    ((CCharEntity*)PMaster)->pushPacket<CEntitySetNamePacket>(this);
 }
 
 void CTrustEntity::OnAbility(CAbilityState& state, action_t& action)

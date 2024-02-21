@@ -84,7 +84,7 @@ CCheckPacket::CCheckPacket(CCharEntity* PChar, CCharEntity* PTarget)
             {
                 ref<uint8>(0x0B) = count;
 
-                PChar->pushPacket(new CBasicPacket(*this));
+                PChar->pushPacket<CBasicPacket>(*this);
 
                 this->setSize(0x0C);
                 memset(data + (0x0B), 0, PACKET_SIZE - 11);
@@ -95,12 +95,12 @@ CCheckPacket::CCheckPacket(CCharEntity* PChar, CCharEntity* PTarget)
     if (count == 0)
     {
         this->setSize(0x28);
-        PChar->pushPacket(new CBasicPacket(*this));
+        PChar->pushPacket<CBasicPacket>(*this);
     }
     else if (count != 8)
     {
         ref<uint8>(0x0B) = (count > 8 ? count - 8 : count);
-        PChar->pushPacket(new CBasicPacket(*this));
+        PChar->pushPacket<CBasicPacket>(*this);
     }
 
     this->setSize(0x54);

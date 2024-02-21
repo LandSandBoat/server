@@ -124,7 +124,7 @@ bool CRangeState::Update(time_point tick)
 
             if (auto* PChar = dynamic_cast<CCharEntity*>(m_PEntity))
             {
-                PChar->pushPacket(m_errorMsg.release());
+                PChar->pushPacket(std::move(m_errorMsg));
             }
             // reset aim time so interrupted players only have to wait the correct 2.7s until next shot
             m_aimTime = std::chrono::seconds(0);

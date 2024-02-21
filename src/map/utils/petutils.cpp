@@ -1075,8 +1075,8 @@ namespace petutils
 
         charutils::BuildingCharAbilityTable(static_cast<CCharEntity*>(PMaster));
         charutils::BuildingCharPetAbilityTable(static_cast<CCharEntity*>(PMaster), PPet, PPet->m_PetID);
-        static_cast<CCharEntity*>(PMaster)->pushPacket(new CCharUpdatePacket(static_cast<CCharEntity*>(PMaster)));
-        static_cast<CCharEntity*>(PMaster)->pushPacket(new CPetSyncPacket(static_cast<CCharEntity*>(PMaster)));
+        static_cast<CCharEntity*>(PMaster)->pushPacket<CCharUpdatePacket>(static_cast<CCharEntity*>(PMaster));
+        static_cast<CCharEntity*>(PMaster)->pushPacket<CPetSyncPacket>(static_cast<CCharEntity*>(PMaster));
 
         // check latents affected by pets
         static_cast<CCharEntity*>(PMaster)->PLatentEffectContainer->CheckLatentsPetType();
@@ -1331,9 +1331,9 @@ namespace petutils
 
         charutils::BuildingCharAbilityTable(PChar);
         PChar->PPet = nullptr;
-        PChar->pushPacket(new CCharUpdatePacket(PChar));
-        PChar->pushPacket(new CCharAbilitiesPacket(PChar));
-        PChar->pushPacket(new CPetSyncPacket(PChar));
+        PChar->pushPacket<CCharUpdatePacket>(PChar);
+        PChar->pushPacket<CCharAbilitiesPacket>(PChar);
+        PChar->pushPacket<CPetSyncPacket>(PChar);
     }
 
     void DespawnPet(CBattleEntity* PMaster)

@@ -51,8 +51,9 @@ public:
     void         SetTarget(uint16 targid);
 
     bool HasErrorMsg() const;
+
     /* Releases ownership to the caller */
-    CBasicPacket* GetErrorMsg();
+    CBasicPacketPtr GetErrorMsg();
 
     bool DoUpdate(time_point tick);
     // try interrupt (on hit)
@@ -80,7 +81,7 @@ protected:
     void       Complete();
     time_point GetEntryTime() const;
 
-    std::unique_ptr<CBasicPacket> m_errorMsg;
+    CBasicPacketPtr m_errorMsg;
 
     CBaseEntity* const m_PEntity;
     uint16             m_targid{ 0 };

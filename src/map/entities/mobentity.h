@@ -152,7 +152,7 @@ public:
     float        GetRoamRate();
     virtual bool ValidTarget(CBattleEntity* PInitiator, uint16 targetFlags) override;
 
-    virtual void HandleErrorMessage(std::unique_ptr<CBasicPacket>&) override
+    virtual void HandleErrorMessage(std::unique_ptr<CBasicPacket>&&) override
     {
     }
     virtual void Die() override;

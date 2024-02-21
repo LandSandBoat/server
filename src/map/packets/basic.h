@@ -30,6 +30,10 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 
 #define PACKET_SIZE 0x104
 
+class CBasicPacket;
+
+typedef std::unique_ptr<CBasicPacket> CBasicPacketPtr;
+
 enum ENTITYUPDATE
 {
     ENTITY_SPAWN,
@@ -117,7 +121,12 @@ public:
     /// <param name="other"></param>
     void copy(CBasicPacket* other)
     {
-        memcpy(data, other->data, PACKET_SIZE);
+        std::memcpy(data, other->data, PACKET_SIZE);
+    }
+
+    void copy(CBasicPacketPtr& other)
+    {
+        std::memcpy(data, other->data, PACKET_SIZE);
     }
 
     /* Getters for the header */

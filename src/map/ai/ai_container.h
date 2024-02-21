@@ -158,9 +158,9 @@ protected:
                 m_stateStack.emplace(std::make_unique<T>(std::forward<Args>(args)...));
                 return true;
             }
-            catch (CStateInitException& e)
+            catch (CStateInitException&)
             {
-                PEntity->HandleErrorMessage(e.packet);
+                // PEntity->HandleErrorMessage(e.packet);
             }
         }
         return false;
@@ -180,9 +180,9 @@ protected:
             m_stateStack.emplace(std::make_unique<T>(std::forward<Args>(args)...));
             return true;
         }
-        catch (CStateInitException& e)
+        catch (CStateInitException&)
         {
-            PEntity->HandleErrorMessage(e.packet);
+            // PEntity->HandleErrorMessage(e.packet);
         }
         return false;
     }

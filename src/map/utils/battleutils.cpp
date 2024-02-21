@@ -4244,7 +4244,7 @@ namespace battleutils
             {
                 // Futae Takes 2 of Your Tools
                 charutils::UpdateItem(PChar, LOC_INVENTORY, SlotID, -2);
-                PChar->pushPacket(new CInventoryFinishPacket());
+                PChar->pushPacket<CInventoryFinishPacket>();
             }
             else
             {
@@ -4260,7 +4260,7 @@ namespace battleutils
                 if (ConsumeTool && xirand::GetRandomNumber(100) > chance)
                 {
                     charutils::UpdateItem(PChar, LOC_INVENTORY, SlotID, -1);
-                    PChar->pushPacket(new CInventoryFinishPacket());
+                    PChar->pushPacket<CInventoryFinishPacket>();
                 }
             }
         }
@@ -4933,8 +4933,8 @@ namespace battleutils
 
             charutils::BuildingCharAbilityTable((CCharEntity*)PCharmer);
             charutils::BuildingCharPetAbilityTable((CCharEntity*)PCharmer, (CPetEntity*)PVictim, PVictim->id);
-            ((CCharEntity*)PCharmer)->pushPacket(new CCharUpdatePacket((CCharEntity*)PCharmer));
-            ((CCharEntity*)PCharmer)->pushPacket(new CPetSyncPacket((CCharEntity*)PCharmer));
+            ((CCharEntity*)PCharmer)->pushPacket<CCharUpdatePacket>((CCharEntity*)PCharmer);
+            ((CCharEntity*)PCharmer)->pushPacket<CPetSyncPacket>((CCharEntity*)PCharmer);
             PCharmer->ForAlliance([&PVictim](CBattleEntity* PMember)
                                   {
                 if (static_cast<CCharEntity*>(PMember)->PClaimedMob == PVictim)
@@ -5699,13 +5699,13 @@ namespace battleutils
                 if (EntityToLockon != nullptr)
                 {
                     // lock on to the new target!
-                    PChar->pushPacket(new CLockOnPacket(PChar, EntityToLockon));
+                    PChar->pushPacket<CLockOnPacket>(PChar, EntityToLockon);
                 }
             }
             else if (EntityToAssist->GetBattleTargetID() != 0)
             {
                 // lock on to the new target!
-                PChar->pushPacket(new CLockOnPacket(PChar, EntityToAssist->GetBattleTarget()));
+                PChar->pushPacket<CLockOnPacket>(PChar, EntityToAssist->GetBattleTarget());
             }
         }
     }
@@ -6025,7 +6025,7 @@ namespace battleutils
                     if (PMember->objtype == TYPE_PC)
                     {
                         CCharEntity* PChar = static_cast<CCharEntity*>(PMember);
-                        PChar->pushPacket(new CPositionPacket(PChar));
+                        PChar->pushPacket<CPositionPacket>(PChar);
                     }
                     else
                     {
@@ -6810,13 +6810,13 @@ namespace battleutils
                 charutils::UnequipItem(PChar, SLOT_AMMO);
                 PChar->RequestPersist(CHAR_PERSIST::EQUIP);
                 charutils::UpdateItem(PChar, loc, slot, -quantity);
-                PChar->pushPacket(new CInventoryFinishPacket());
+                PChar->pushPacket<CInventoryFinishPacket>();
                 return true;
             }
             else
             {
                 charutils::UpdateItem(PChar, PChar->equipLoc[SLOT_AMMO], PChar->equip[SLOT_AMMO], -quantity);
-                PChar->pushPacket(new CInventoryFinishPacket());
+                PChar->pushPacket<CInventoryFinishPacket>();
                 return false;
             }
         }

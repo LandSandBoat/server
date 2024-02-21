@@ -258,7 +258,7 @@ namespace roeutils
 
         for (int i = 0; i < 4; i++)
         {
-            PChar->pushPacket(new CRoeQuestLogPacket(PChar, i));
+            PChar->pushPacket<CRoeQuestLogPacket>(PChar, i);
         }
 
         charutils::SaveEminenceData(PChar);
@@ -304,7 +304,7 @@ namespace roeutils
         if (!roeutils::RoeSystem.ImplementedRecords.test(recordID))
         {
             std::string message = "The record #" + std::to_string(recordID) + " is not implemented at this time.";
-            PChar->pushPacket(new CChatMessagePacket(PChar, MESSAGE_NS_SAY, message, "RoE System"));
+            PChar->pushPacket<CChatMessagePacket>(PChar, MESSAGE_NS_SAY, message, "RoE System");
             return false;
         }
 
@@ -327,8 +327,8 @@ namespace roeutils
                 PChar->m_eminenceLog.active[i] = recordID;
                 PChar->m_eminenceCache.activemap.set(recordID);
 
-                PChar->pushPacket(new CRoeUpdatePacket(PChar));
-                PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, recordID, 0, MSGBASIC_ROE_START));
+                PChar->pushPacket<CRoeUpdatePacket>(PChar);
+                PChar->pushPacket<CMessageBasicPacket>(PChar, PChar, recordID, 0, MSGBASIC_ROE_START);
                 charutils::SaveEminenceData(PChar);
                 return true;
             }
@@ -356,7 +356,7 @@ namespace roeutils
                     std::swap(PChar->m_eminenceLog.active[j], PChar->m_eminenceLog.active[j + 1]);
                     std::swap(PChar->m_eminenceLog.progress[j], PChar->m_eminenceLog.progress[j + 1]);
                 }
-                PChar->pushPacket(new CRoeUpdatePacket(PChar));
+                PChar->pushPacket<CRoeUpdatePacket>(PChar);
                 charutils::SaveEminenceData(PChar);
                 return true;
             }
@@ -396,7 +396,7 @@ namespace roeutils
                 }
 
                 PChar->m_eminenceLog.progress[i] = progress;
-                PChar->pushPacket(new CRoeUpdatePacket(PChar));
+                PChar->pushPacket<CRoeUpdatePacket>(PChar);
                 SaveEminenceDataNice(PChar);
                 return true;
             }
@@ -427,7 +427,7 @@ namespace roeutils
 
         if (sendUpdate)
         {
-            PChar->pushPacket(new CCharSpellsPacket(PChar));
+            PChar->pushPacket<CCharSpellsPacket>(PChar);
         }
     }
 
@@ -531,11 +531,11 @@ namespace roeutils
         auto timedRecordID              = GetActiveTimedRecord();
         PChar->m_eminenceLog.active[30] = timedRecordID;
         PChar->m_eminenceCache.activemap.set(timedRecordID);
-        PChar->pushPacket(new CRoeUpdatePacket(PChar));
+        PChar->pushPacket<CRoeUpdatePacket>(PChar);
 
         if (timedRecordID)
         {
-            PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, timedRecordID, 0, MSGBASIC_ROE_TIMED));
+            PChar->pushPacket<CMessageBasicPacket>(PChar, PChar, timedRecordID, 0, MSGBASIC_ROE_TIMED);
             SetEminenceRecordCompletion(PChar, timedRecordID, false);
         }
     }
@@ -551,7 +551,7 @@ namespace roeutils
                 PChar->m_eminenceLog.progress[i] = 0;
             }
         }
-        PChar->pushPacket(new CRoeUpdatePacket(PChar));
+        PChar->pushPacket<CRoeUpdatePacket>(PChar);
 
         // Set completion for daily records to 0
         for (auto record : RoeSystem.DailyRecordIDs)
@@ -573,7 +573,7 @@ namespace roeutils
 
         for (int i = 0; i < 4; i++)
         {
-            PChar->pushPacket(new CRoeQuestLogPacket(PChar, i));
+            PChar->pushPacket<CRoeQuestLogPacket>(PChar, i);
         }
     }
 
@@ -629,7 +629,7 @@ namespace roeutils
                 PChar->m_eminenceLog.progress[i] = 0;
             }
         }
-        PChar->pushPacket(new CRoeUpdatePacket(PChar));
+        PChar->pushPacket<CRoeUpdatePacket>(PChar);
 
         // Set completion for daily records to 0
         for (auto record : RoeSystem.WeeklyRecordIDs)
@@ -652,7 +652,7 @@ namespace roeutils
 
         for (int i = 0; i < 4; i++)
         {
-            PChar->pushPacket(new CRoeQuestLogPacket(PChar, i));
+            PChar->pushPacket<CRoeQuestLogPacket>(PChar, i);
         }
     }
 

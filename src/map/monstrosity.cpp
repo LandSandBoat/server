@@ -380,14 +380,14 @@ void monstrosity::SendFullMonstrosityUpdate(CCharEntity* PChar)
 
     luautils::OnMonstrosityUpdate(PChar);
 
-    PChar->pushPacket(new CMonipulatorPacket1(PChar));
-    PChar->pushPacket(new CMonipulatorPacket2(PChar));
-    PChar->pushPacket(new CCharJobsPacket(PChar));
-    PChar->pushPacket(new CCharJobExtraPacket(PChar, true));
-    PChar->pushPacket(new CCharJobExtraPacket(PChar, false));
-    PChar->pushPacket(new CCharAppearancePacket(PChar));
-    PChar->pushPacket(new CCharStatsPacket(PChar));
-    PChar->pushPacket(new CCharAbilitiesPacket(PChar));
+    PChar->pushPacket<CMonipulatorPacket1>(PChar);
+    PChar->pushPacket<CMonipulatorPacket2>(PChar);
+    PChar->pushPacket<CCharJobsPacket>(PChar);
+    PChar->pushPacket<CCharJobExtraPacket>(PChar, true);
+    PChar->pushPacket<CCharJobExtraPacket>(PChar, false);
+    PChar->pushPacket<CCharAppearancePacket>(PChar);
+    PChar->pushPacket<CCharStatsPacket>(PChar);
+    PChar->pushPacket<CCharAbilitiesPacket>(PChar);
 
     PChar->updatemask |= UPDATE_LOOK;
 }

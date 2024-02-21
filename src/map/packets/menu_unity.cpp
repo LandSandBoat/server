@@ -53,7 +53,7 @@ CMenuUnityPacket::CMenuUnityPacket(CCharEntity* PChar)
     ref<uint8>(0x08) = 0x00;
     ref<uint8>(0x09) = 0x00; // Type 0
 
-    PChar->pushPacket(new CBasicPacket(*this));
+    PChar->pushPacket<CBasicPacket>(*this);
 
     // CMenuUnityPacket: Update Type 0x0001
     // Full Unity Results: Total contributing members in Unity
@@ -69,7 +69,7 @@ CMenuUnityPacket::CMenuUnityPacket(CCharEntity* PChar)
         ref<uint32>(i * 4 + 0x10) = unity_previous[i].first;
     }
 
-    PChar->pushPacket(new CBasicPacket(*this));
+    PChar->pushPacket<CBasicPacket>(*this);
 
     // CMenuUnityPacket: Update Type 0x0002
     // Full Unity Results: Total Points gained this week per unity
@@ -85,7 +85,7 @@ CMenuUnityPacket::CMenuUnityPacket(CCharEntity* PChar)
         ref<uint32>(i * 4 + 0x10) = unity_previous[i].second;
     }
 
-    PChar->pushPacket(new CBasicPacket(*this));
+    PChar->pushPacket<CBasicPacket>(*this);
 
     for (int i = 3; i < 32; i++)
     {
@@ -96,7 +96,7 @@ CMenuUnityPacket::CMenuUnityPacket(CCharEntity* PChar)
         ref<uint8>(0x06) = 0x88; // Variable Data Size
         ref<uint8>(0x09) = i;    // Type 3
 
-        PChar->pushPacket(new CBasicPacket(*this));
+        PChar->pushPacket<CBasicPacket>(*this);
     }
 
     // CMenuUnityPacket: Update Type 0x0100
@@ -108,7 +108,7 @@ CMenuUnityPacket::CMenuUnityPacket(CCharEntity* PChar)
     ref<uint8>(0x08) = 0x01;
     ref<uint8>(0x09) = 0x00; // Type 0100
 
-    PChar->pushPacket(new CBasicPacket(*this));
+    PChar->pushPacket<CBasicPacket>(*this);
 
     // CMenuUnityPacket: Update Type 0x0101
     // Partial Unity Ranking: Total Members in Unity
@@ -125,7 +125,7 @@ CMenuUnityPacket::CMenuUnityPacket(CCharEntity* PChar)
         ref<uint32>(i * 4 + 0x10) = unity_current[i].first;
     }
 
-    PChar->pushPacket(new CBasicPacket(*this));
+    PChar->pushPacket<CBasicPacket>(*this);
 
     // CMenuUnityPacket: Update Type 0x0102
     // Partial Unity Ranking: Total Points this week in Unity
@@ -142,7 +142,7 @@ CMenuUnityPacket::CMenuUnityPacket(CCharEntity* PChar)
         ref<uint32>(i * 4 + 0x10) = unity_current[i].second;
     }
 
-    PChar->pushPacket(new CBasicPacket(*this));
+    PChar->pushPacket<CBasicPacket>(*this);
 
     for (int i = 3; i < 32; i++)
     {
@@ -154,6 +154,6 @@ CMenuUnityPacket::CMenuUnityPacket(CCharEntity* PChar)
         ref<uint8>(0x08) = 0x01;
         ref<uint8>(0x09) = i; // Type 0103
 
-        PChar->pushPacket(new CBasicPacket(*this));
+        PChar->pushPacket<CBasicPacket>(*this);
     }
 }

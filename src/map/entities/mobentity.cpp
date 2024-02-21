@@ -474,7 +474,7 @@ void CMobEntity::PostTick()
         // If this mob is charmed, it should sync with its master
         if (PMaster && PMaster->PPet == this && PMaster->objtype == TYPE_PC)
         {
-            ((CCharEntity*)PMaster)->pushPacket(new CPetSyncPacket((CCharEntity*)PMaster));
+            ((CCharEntity*)PMaster)->pushPacket<CPetSyncPacket>((CCharEntity*)PMaster);
         }
 
         updatemask = 0;
