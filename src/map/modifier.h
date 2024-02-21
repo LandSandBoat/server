@@ -829,6 +829,9 @@ enum class Mod
 
     ABSORB_DMG_TO_MP = 516, // Unlike PLD gear mod, works on all damage types (Ethereal Earring)
 
+    ITEM_ADDEFFECT_LVADJUST = 278, // level correction factor to use, if any
+    ITEM_ADDEFFECT_PLACEHLD = 279, // placeholder, want to keep these together and 99% sure we'll use this
+    ITEM_ADDEFFECT_DSTAT    = 280, // value = attacker modifier to use as bonus dmg (mnd, int, etc)
     ITEM_ADDEFFECT_TYPE     = 431, // see procType table in scripts\globals\additional_effects.lua
     ITEM_SUBEFFECT          = 499, // Animation ID of Spikes and Additional Effects
     ITEM_ADDEFFECT_DMG      = 500, // Damage of an items Additional Effect or Spikes
@@ -1001,7 +1004,7 @@ enum class Mod
     // SPARE IDs:
     // 141
     // 217 to 223
-    // 273 to 280
+    // 273 to 277
     //
     // SPARE = 1080 and onward
 };
