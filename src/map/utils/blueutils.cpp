@@ -150,8 +150,7 @@ namespace blueutils
                     {
                         if (charutils::addSpell(PBlueMage, static_cast<uint16>(PSpell->getID())))
                         {
-                            PBlueMage->pushPacket(
-                                new CMessageBasicPacket(PBlueMage, PBlueMage, static_cast<uint16>(PSpell->getID()), 0, MSGBASIC_LEARNS_SPELL));
+                            PBlueMage->pushPacket<CMessageBasicPacket>(PBlueMage, PBlueMage, static_cast<uint16>(PSpell->getID()), 0, MSGBASIC_LEARNS_SPELL);
                             charutils::SaveSpell(PBlueMage, static_cast<uint16>(PSpell->getID()));
                             PBlueMage->pushPacket<CCharSpellsPacket>(PBlueMage);
                         }

@@ -25,6 +25,8 @@
 #include "common/cbasetypes.h"
 #include "common/mmo.h"
 
+#include "packets/basic.h"
+
 #include <vector>
 
 class CBasicPacket;
@@ -54,7 +56,7 @@ public:
     void RemoveMemberByName(const std::string& MemberName, uint8 kickerRank, bool breakLinkshell = false);
     void ChangeMemberRank(const std::string& MemberName, uint8 toSack);
 
-    void PushPacket(uint32 senderID, CBasicPacket* packet);
+    void PushPacket(uint32 senderID, CBasicPacketPtr&& packet);
     void PushLinkshellMessage(CCharEntity* PChar, bool ls1);
 
     std::vector<CCharEntity*> members;

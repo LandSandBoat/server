@@ -124,7 +124,8 @@ void CParty::DisbandParty(bool playerInitiated)
 
     if (m_PartyType == PARTY_PCS)
     {
-        PushPacket(0, 0, new CPartyDefinePacket(nullptr));
+        auto packet = std::make_unique<CPartyDefinePacket>(nullptr);
+        PushPacket(0, 0, std::move(packet));
 
         for (auto& member : members)
         {
@@ -1146,7 +1147,7 @@ void CParty::SetQuarterMaster(const std::string& MemberName)
 // Send a packet to all members of the group if the zone is specified as 0
 // or to the party members in the specified zone.
 // Packet for PPartyMember is not sent in both cases
-void CParty::PushPacket(uint32 senderID, uint16 ZoneID, CBasicPacket* packet)
+void CParty::PushPacket(uint32 senderID, uint16 ZoneID, CBasicPacketPtr&& packet)
 {
     for (auto& i : members)
     {
@@ -1161,11 +1162,12 @@ void CParty::PushPacket(uint32 senderID, uint16 ZoneID, CBasicPacket* packet)
         {
             if (ZoneID == 0 || member->getZone() == ZoneID)
             {
-                member->pushPacket<CBasicPacket>(*packet);
+                auto newPacket = std::make_unique<CBasicPacket>();
+                newPacket->copy(packet);
+                member->pushPacket(std::move(newPacket));
             }
         }
     }
-    destroy(packet);
 }
 
 void CParty::PushEffectsPacket()
@@ -1189,7 +1191,7 @@ void CParty::PushEffectsPacket()
                     }
                 }
             }
-            PMemberChar->pushPacket(effects.release());
+            PMemberChar->pushPacket(std::move(effects));
         }
         m_EffectsChanged = false;
     }

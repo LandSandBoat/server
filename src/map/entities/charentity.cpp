@@ -302,8 +302,7 @@ void CCharEntity::clearPacketList()
 {
     while (!PacketList.empty())
     {
-        auto* packet = popPacket();
-        destroy(packet);
+        popPacket();
     }
 }
 
@@ -369,9 +368,10 @@ void CCharEntity::updateEntityPacket(CBaseEntity* PEntity, ENTITYUPDATE type, ui
     }
 }
 
-CBasicPacket* CCharEntity::popPacket()
+CBasicPacketPtr CCharEntity::popPacket()
 {
-    CBasicPacket* PPacket = PacketList.front();
+    auto PPacket = std::move(PacketList.front());
+    PacketList.pop_front();
 
     // Clean up pending maps
     switch (PPacket->getType())
@@ -389,11 +389,10 @@ CBasicPacket* CCharEntity::popPacket()
             break;
     }
 
-    PacketList.pop_front();
     return PPacket;
 }
 
-PacketList_t CCharEntity::getPacketList()
+PacketList_t& CCharEntity::getPacketList()
 {
     return PacketList;
 }
@@ -407,8 +406,7 @@ void CCharEntity::erasePackets(uint8 num)
 {
     for (auto i = 0; i < num; i++)
     {
-        auto* packet = popPacket();
-        destroy(packet);
+        popPacket();
     }
 }
 

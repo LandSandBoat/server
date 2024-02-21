@@ -25,6 +25,8 @@
 #include "common/cbasetypes.h"
 #include "map.h"
 
+#include "packets/basic.h"
+
 #include <vector>
 
 class CBasicPacket;
@@ -98,7 +100,7 @@ public:
 
     std::size_t GetMemberCountAcrossAllProcesses();
 
-    void PushPacket(uint32 senderID, uint16 ZoneID, CBasicPacket* packet); // Send a packet to all group members, with the exception of PPartyMember
+    void PushPacket(uint32 senderID, uint16 ZoneID, CBasicPacketPtr&& packet); // Send a packet to all group members, with the exception of PPartyMember
     void PushEffectsPacket();
     void EffectsChanged();
 

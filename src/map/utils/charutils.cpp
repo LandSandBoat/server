@@ -6711,9 +6711,9 @@ namespace charutils
 
     void SendTimerPacket(CCharEntity* PChar, uint32 seconds)
     {
-        auto* timerPacket = new CObjectiveUtilityPacket();
+        auto timerPacket = std::make_unique<CObjectiveUtilityPacket>();
         timerPacket->addCountdown(seconds);
-        PChar->pushPacket(timerPacket);
+        PChar->pushPacket(std::move(timerPacket));
     }
 
     void SendTimerPacket(CCharEntity* PChar, duration dur)
@@ -6724,8 +6724,7 @@ namespace charutils
 
     void SendClearTimerPacket(CCharEntity* PChar)
     {
-        auto* timerPacket = new CObjectiveUtilityPacket();
-        PChar->pushPacket(timerPacket);
+        PChar->pushPacket<CObjectiveUtilityPacket>();
     }
 
     time_t getTraverserEpoch(CCharEntity* PChar)
