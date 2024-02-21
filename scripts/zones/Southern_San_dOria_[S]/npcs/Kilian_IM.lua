@@ -1,8 +1,7 @@
 -----------------------------------
--- Area: Southern SandOria [S]
---  NPC: Scarlette C.A
--- !pos -27 2 -29 80
--- Campaign Teleporter
+-- Type: Campaign Arbiter
+-- https://ffxiclopedia.fandom.com/wiki/Campaign_Arbiter
+-- !pos 113 1 -40 80
 -----------------------------------
 require('scripts/globals/teleports/campaign_teleports')
 -----------------------------------
@@ -12,15 +11,15 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    xi.campaign.teleports.teleporterOnTrigger(player, npc)
+    xi.campaign.teleports.campaignArbiterOnTrigger(player, npc)
 end
 
 entity.onEventUpdate = function(player, csid, option, npc)
-    xi.campaign.teleports.teleporterOnEventUpdate(player, csid, option)
+    xi.campaign.teleports.campaignArbiterOnEventUpdate(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option, npc)
-    xi.campaign.teleports.teleporterOnEventFinish(player, csid, option)
+    xi.campaign.teleports.campaignArbiterOnEventFinish(player, csid, option)
 end
 
 return entity
