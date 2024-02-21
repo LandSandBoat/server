@@ -25,7 +25,7 @@ entity.onMobRoam = function(mob)
     -- TODO: Message below should not originate from Zirnitra herself
     if mob:getLocalVar('hasEngaged') == 1 then
         mob:setLocalVar('hasEngaged', 0)
-        mob:showText(mob, ID.text.THE_MONSTER_FADES)
+        mob:showText(mob, ID.text.VOIDWALKER_DESPAWN)
         DespawnMob(mob:getID())
     end
 end

@@ -33,7 +33,6 @@ zones[xi.zone.XARCABARD_S] =
         VOIDWALKER_UPGRADE_KI_2       = 8586, -- The <keyitem> takes on a deeper, richer hue and becomes <keyitem>!
         VOIDWALKER_BREAK_KI           = 8587, -- The <keyitem> shatters into tiny fragments.
         VOIDWALKER_OBTAIN_KI          = 8588, -- Obtained key item: <keyitem>!
-        THE_MONSTER_FADES             = 8589, -- The monster fades before your eyes, a look of disappointment on its face.
         GATHERED_DAWNDROPS_LIGHT      = 8755, -- The gathered dawndrops unleash a brilliant light, melding together to form <keyitem>!
         RETRACED_ALL_JUNCTIONS        = 8756, -- You have retraced all junctions of eventualities. Hasten back to where Cait Sith and Lilisette await.
         HOMEPOINT_SET                 = 8760, -- Home point set!
