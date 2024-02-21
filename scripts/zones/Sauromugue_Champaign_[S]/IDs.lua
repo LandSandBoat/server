@@ -17,6 +17,7 @@ zones[xi.zone.SAUROMUGUE_CHAMPAIGN_S] =
         LOGIN_NUMBER                  = 7003,  -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
         MEMBERS_LEVELS_ARE_RESTRICTED = 7023,  -- Your party is unable to participate because certain members' levels are restricted.
         UNABLE_TO_PROGRESS            = 7047,  -- ou are unable to make further progress in Rhapsodies of Vana'diel due to an event occurring in the [Chains of Promathia/Treasures of Aht Urhgan/Wings of the Goddess/Seekers of Adoulin/Rise of the Zilart] missions.
+        CAMPAIGN_RESULTS_TALLIED      = 7518,  -- Campaign results tallied.
         DOOR_FIRMLY_SEALED            = 7727,  -- The door is firmly sealed.
         SURRENDER_CEREMONY_HASTE      = 8475,  -- The surrender ceremony is about to commence underground. Make haste before all is lost!
         VOIDWALKER_DESPAWN            = 8487,  -- The monster fades before your eyes, a look of disappointment on its face.
@@ -73,6 +74,7 @@ zones[xi.zone.SAUROMUGUE_CHAMPAIGN_S] =
 
     npc =
     {
+        CAMPAIGN_NPC_OFFSET = GetFirstID('Alreage_RK'), -- San, Bas, Win, Flag +4, CA
     },
 }
 

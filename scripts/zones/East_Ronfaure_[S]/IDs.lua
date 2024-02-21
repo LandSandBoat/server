@@ -17,6 +17,7 @@ zones[xi.zone.EAST_RONFAURE_S] =
         LOGIN_NUMBER                  = 7003, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
         MEMBERS_LEVELS_ARE_RESTRICTED = 7023, -- Your party is unable to participate because certain members' levels are restricted.
         LOGGING_IS_POSSIBLE_HERE      = 7158, -- Logging is possible here if you have <item>.
+        CAMPAIGN_RESULTS_TALLIED      = 7366, -- Campaign results tallied.
         FISHING_MESSAGE_OFFSET        = 7742, -- You can't fish here.
         VOIDWALKER_DESPAWN            = 8004, -- The monster fades before your eyes, a look of disappointment on its face.
         VOIDWALKER_NO_MOB             = 8051, -- The <keyitem> quivers ever so slightly, but emits no light. There seem to be no monsters in the area.
@@ -81,7 +82,8 @@ zones[xi.zone.EAST_RONFAURE_S] =
 
     npc =
     {
-        LOGGING = GetTableOfIDs('Logging_Point'),
+        CAMPAIGN_NPC_OFFSET = GetFirstID('Arlayse_RK'), -- San, Bas, Win, Flag +4, CA
+        LOGGING             = GetTableOfIDs('Logging_Point'),
     },
 }
 

@@ -17,6 +17,7 @@ zones[xi.zone.PASHHOW_MARSHLANDS_S] =
         LOGIN_NUMBER                  = 7003, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
         MEMBERS_LEVELS_ARE_RESTRICTED = 7023, -- Your party is unable to participate because certain members' levels are restricted.
         FISHING_MESSAGE_OFFSET        = 7158, -- You can't fish here.
+        CAMPAIGN_RESULTS_TALLIED      = 7618, -- Campaign results tallied.
         ALREADY_OBTAINED_TELE         = 7703, -- You already possess the gate crystal for this telepoint.
         VOIDWALKER_DESPAWN            = 7999, -- The monster fades before your eyes, a look of disappointment on its face.
         VOIDWALKER_NO_MOB             = 8046, -- The <keyitem> quivers ever so slightly, but emits no light. There seem to be no monsters in the area.
@@ -96,6 +97,7 @@ zones[xi.zone.PASHHOW_MARSHLANDS_S] =
 
     npc =
     {
+        CAMPAIGN_NPC_OFFSET        = GetFirstID('Yuvalbaux_RK'), -- San, Bas, Win, Flag +4, CA
         INDESCRIPT_MARKINGS_OFFSET = 17146626,
     },
 }

@@ -18,6 +18,7 @@ zones[xi.zone.WEST_SARUTABARUTA_S] =
         HARVESTING_IS_POSSIBLE_HERE   = 7081, -- Harvesting is possible here if you have <item>.
         FISHING_MESSAGE_OFFSET        = 7088, -- You can't fish here.
         DOOR_OFFSET                   = 7446, -- The door is sealed shut...
+        CAMPAIGN_RESULTS_TALLIED      = 7788, -- Campaign results tallied.
         VOIDWALKER_DESPAWN            = 7972, -- The monster fades before your eyes, a look of disappointment on its face.
         VOIDWALKER_NO_MOB             = 8370, -- The <keyitem> quivers ever so slightly, but emits no light. There seem to be no monsters in the area.
         VOIDWALKER_MOB_TOO_FAR        = 8371, -- The <keyitem> quivers ever so slightly and emits a faint light. There seem to be no monsters in the immediate vicinity.
@@ -76,7 +77,8 @@ zones[xi.zone.WEST_SARUTABARUTA_S] =
 
     npc =
     {
-        HARVESTING = GetTableOfIDs('Harvesting_Point'),
+        CAMPAIGN_NPC_OFFSET = GetFirstID('Madelleon_RK'), -- San, Bas, Win, Flag +4 (NOT_CAPTURED), CA
+        HARVESTING          = GetTableOfIDs('Harvesting_Point'),
     },
 }
 
