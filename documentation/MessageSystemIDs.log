@@ -1,3 +1,6 @@
+These are typically used with messageBasic. Other message types may possibly use the same index.
+Found in ROM/27/76.dat
+
 0 - You could not enter the next area.
 1 - You could not enter the next area.
 2 - You could not enter the next area.
@@ -239,3 +242,94 @@
 238 - The partyPlayer Name's level has been restricted to 0. Straying too far from the Level Sync designee will result in an inability to receive experience points. Equipment affected by the level restriction will be adjusted accordingly.
 239 - The compass reads: X:0 Y:0 Z:0 (0).
 240 - Your message has been blocked by the spam filter.
+241 - Volker : I have not been hiding away from my troubles!
+242 - Volker : Feel my twenty years of pain!
+243 - Volker : Is that your answer!?
+244 - Volker : Return with your soul to the darkness you came from!
+245 - Volker : You--a man who has never lived bound by the chains of his country--how can you understand my pain!?
+246 - Volker : Let my blade be the answer!
+247 - Trion : I am Trion, of San d'Oria!
+248 - Trion : Feel the fire of my forefathers!
+249 - Trion : The darkness before me that shrouds the light of good...
+250 - Trion : ...Return to the hell you crawled out from!
+251 - Trion : The anger, the pain, and the will to survive... Let the spirit of San d'Oria converge within this blade.
+252 - Trion : And with this blade I will return the glory to my kingdom's people!
+253 - Ajido-Marujido : Play time is over!
+Powers of dark mana, answer my call!
+254 - Ajido-Marujido : You should be thankful.
+I'll give you a shortaru trip back to the hell you came from!
+255 - Ajido-Marujido : Don't give up, adventurer!
+You are Windurst's guiding star, our beacon of hope!
+256 - You cannot use that command in this area.
+257 - That command is not supported by the free trial version.
+258 - Congratulations! You have reached the maximum level attainable in the free trial version.
+Purchase the full version of the game to continue your adventures!
+259 - Initiating tells is not supported by the free trial version.
+To respond to a tell that has been sent to you, press Ctrl+R to select the player's name.
+260 - Your headgear is now visible.
+261 - Your headgear is now hidden.
+262 - sysmes262
+263 - This monster is currently possessed by <Player>
+264 - <Unknown Parameter> stares at you intently, evidently aware that you have discovered its true form.
+265 - You are unable to join a party whose leader currently has an alter ego present.
+266 - You are unable to join an alliance whose leader currently has an alter ego present.
+267 - Style lock mode enabled.
+268 - Style lock mode disabled.
+269 - Style lock mode is enabled.
+270 - Style lock mode is disabled.
+271 - Last item made: ?Possible Special Code: 01??Possible Special Code: 05?#?BAD CHAR: 8280??BAD CHAR: 80??BAD CHAR: 80?.
+272 - ?Unknown Parameter (Type: 80) 1??Possible Special Code: 01??Possible Special Code: 05?#?BAD CHAR: 8280??BAD CHAR: 80??BAD CHAR: 80?.
+273 - ?Numeric Parameter 1? ?Possible Special Code: 01??Speaker Name?)a?BAD CHAR: 80??BAD CHAR: 80??BAD CHAR: 8280??BAD CHAR: 80??BAD CHAR: 80?.
+274 - Failed to equip the ?Possible Special Code: 01??Possible Special Code: 05?#?BAD CHAR: 8280??BAD CHAR: 80??BAD CHAR: 80?.
+275 - Unable to find the ?Possible Special Code: 01??Possible Special Code: 05?#?BAD CHAR: 8280??BAD CHAR: 80??BAD CHAR: 80?.
+276 - Inventory
+277 - Mog Safe
+278 - Storage
+279 - Mog Locker
+280 - Mog Satchel
+281 - Mog Sack
+282 - Mog Case
+283 - Mog Wardrobe
+284 - Instances of ?Possible Special Code: 01??Possible Special Code: 05?%?BAD CHAR: 8280??BAD CHAR: 80??BAD CHAR: 80? were found in the following systems:
+285 - No instances of that item were found.
+286 - You are not participating in Unity chat.
+287 - The maximum number of people are already participating in Unity chat. Please try again later.
+288 - There are no applicable characters within range.
+289 - <Unknown Parameter>'s proposal to the linkshell group (cast vote with command: "/vote ?"):
+290 - <Unknown Parameter>'s proposal - Current poll results:
+291 - <Unknown Parameter>'s proposal - Final poll results:
+292 - Mog Safe 2.
+293 - Your second floor has been successfully remodeled.
+294 - The apperance of your ?Possible Special Code: 01??Possible Special Code: 05?#?BAD CHAR: 8280??BAD CHAR: 80??BAD CHAR: 80? was unable to be locked.
+295 - Your appearance settings have been updated.
+296 - You cannot use Trust magic while seeking a party.
+297 - While inviting a party member, you must wait a while before using Trust magic.
+298 - You have called forth your maximum number of alter egos.
+299 - That alter ego has already been called forth.
+300 - You cannot use Trust magic while having gained enmity.
+301 - You cannot use Trust magic unless you are solo or the party leader.
+302 - Your request did not go through.
+303 - Mog Wardrobe 2
+304 - Mog Wardrobe 3
+305 - Mog Wardrobe 4
+306 - You have given a thumbs up to <Unknown Parameter>'s message.
+307 - You have given a warning to <Unknown Parameter>'s message.
+308 - An error has occurred.
+309 - You have reached the maximum number of thumbs up that can be issued.
+310 - You have reached the maximum number of warnings that can be issued.
+311 - <Unknown Parameter> to the Mute list.
+312 - That individual is already on the Mute list.
+313 - <Unknown Parameter> has removed <Unknown Parameter> from the Mute list.
+314 - You have received a thumbs up for your message.
+315 - Someone has issued you a warning for your message.
+316 - Only mentors may chat in this channel.
+317 - You will no longer be able to chat in this channel in <Numeric Parameter>[hour/minute]<Singular/Plural>[/s].
+318 - You are no longer able to chat in the Assist channel. We recommend that you visit a linkshell concierge to find more friends to adventure with. Linkshell concierges can be found in the following areas: 
+319 - Mog Wardrobe 5
+320 - Mog Wardrobe 6
+321 - Mog Wardrobe 7
+322 - Mog Wardrobe 8
+323 - Recycle Bin
+324 - The party's master level has been restricted to <number>.
+Straying too far from the Level Sync designee will result in an inability to receive experience points.
+325 - You are unable to throw away the <item>

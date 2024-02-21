@@ -1137,7 +1137,7 @@ void SmallPacket0x01A(map_session_data_t* const PSession, CCharEntity* const PCh
             else
             {
                 // You don't have any gysahl greens
-                PChar->pushPacket(new CMessageSystemPacket(4545, 0, 39));
+                PChar->pushPacket(new CMessageSystemPacket(4545, 0, MSGSYSTEM::YOU_DONT_HAVE_ANY));
             }
         }
         break;
@@ -1199,24 +1199,24 @@ void SmallPacket0x01A(map_session_data_t* const PSession, CCharEntity* const PCh
                 if (type == 0x00 && PChar->getBlockingAid()) // /blockaid off
                 {
                     // Blockaid canceled
-                    PChar->pushPacket(new CMessageSystemPacket(0, 0, 222));
+                    PChar->pushPacket(new CMessageSystemPacket(0, 0, MSGSYSTEM::BLOCKAID_CANCELED));
                     PChar->setBlockingAid(false);
                 }
                 else if (type == 0x01 && !PChar->getBlockingAid()) // /blockaid on
                 {
                     // Blockaid activated
-                    PChar->pushPacket(new CMessageSystemPacket(0, 0, 221));
+                    PChar->pushPacket(new CMessageSystemPacket(0, 0, MSGSYSTEM::BLOCKAID_ACTIVATED));
                     PChar->setBlockingAid(true);
                 }
                 else if (type == 0x02) // /blockaid
                 {
                     // Blockaid is currently active/inactive
-                    PChar->pushPacket(new CMessageSystemPacket(0, 0, PChar->getBlockingAid() ? 223 : 224));
+                    PChar->pushPacket(new CMessageSystemPacket(0, 0, PChar->getBlockingAid() ? MSGSYSTEM::BLOCKAID_CURRENTLY_ACTIVE : MSGSYSTEM::BLOCKAID_CURRENTLY_INACTIVE));
                 }
             }
             else
             {
-                PChar->pushPacket(new CMessageSystemPacket(0, 0, 142));
+                PChar->pushPacket(new CMessageSystemPacket(0, 0, MSGSYSTEM::CANNOT_USE_COMMAND_AT_THE_MOMENT));
             }
         }
         break;
@@ -1235,7 +1235,7 @@ void SmallPacket0x01A(map_session_data_t* const PSession, CCharEntity* const PCh
             }
             else if (!PChar->loc.zone->CanUseMisc(MISC_MOUNT))
             {
-                PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, 0, 0, 316));
+                PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, 0, 0, MSGBASIC_CANNOT_USE_IN_AREA));
             }
             else if (PChar->GetMLevel() < 20)
             {
@@ -1254,7 +1254,7 @@ void SmallPacket0x01A(map_session_data_t* const PSession, CCharEntity* const PCh
 
                 if (PChar->PNotorietyContainer->hasEnmity())
                 {
-                    PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, 0, 0, 339));
+                    PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, 0, 0, MSGBASIC_YOUR_MOUNT_REFUSES));
                     return;
                 }
 
@@ -1592,9 +1592,9 @@ void SmallPacket0x032(map_session_data_t* const PSession, CCharEntity* const PCh
         {
             ShowDebug("%s is blocking trades", PTarget->getName());
             // Target is blocking assistance
-            PChar->pushPacket(new CMessageSystemPacket(0, 0, 225));
+            PChar->pushPacket(new CMessageSystemPacket(0, 0, MSGSYSTEM::TARGET_IS_CURRENTLY_BLOCKING));
             // Interaction was blocked
-            PTarget->pushPacket(new CMessageSystemPacket(0, 0, 226));
+            PTarget->pushPacket(new CMessageSystemPacket(0, 0, MSGSYSTEM::BLOCKED_BY_BLOCKAID));
             PChar->pushPacket(new CTradeActionPacket(PTarget, 0x07));
             return;
         }
@@ -1874,7 +1874,7 @@ void SmallPacket0x036(map_session_data_t* const PSession, CCharEntity* const PCh
     if (PChar->StatusEffectContainer->HasStatusEffectByFlag(EFFECTFLAG_INVISIBLE))
     {
         // "You cannot use that command while invisible."
-        PChar->pushPacket(new CMessageSystemPacket(0, 0, 172));
+        PChar->pushPacket(new CMessageSystemPacket(0, 0, MSGSYSTEM::CANNOT_WHILE_INVISIBLE));
         return;
     }
 
@@ -3836,7 +3836,7 @@ void SmallPacket0x05D(map_session_data_t* const PSession, CCharEntity* const PCh
     TracyZoneScoped;
     if (jailutils::InPrison(PChar))
     {
-        PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, 0, 0, 316));
+        PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, 0, 0, MSGBASIC_CANNOT_USE_IN_AREA));
         return;
     }
 
@@ -4036,7 +4036,7 @@ void SmallPacket0x05E(map_session_data_t* const PSession, CCharEntity* const PCh
 
                 PChar->loc.p.rotation += 128;
 
-                PChar->pushPacket(new CMessageSystemPacket(0, 0, 2)); // You could not enter the next area.
+                PChar->pushPacket(new CMessageSystemPacket(0, 0, MSGSYSTEM::COULD_NOT_ENTER)); // You could not enter the next area.
                 PChar->pushPacket(new CCSPositionPacket(PChar));
 
                 PChar->status = STATUS_TYPE::NORMAL;
@@ -4046,7 +4046,7 @@ void SmallPacket0x05E(map_session_data_t* const PSession, CCharEntity* const PCh
             {
                 PChar->loc.p.rotation += 128;
 
-                PChar->pushPacket(new CMessageSystemPacket(0, 0, 2)); // You could not enter the next area.
+                PChar->pushPacket(new CMessageSystemPacket(0, 0, MSGSYSTEM::COULD_NOT_ENTER)); // You could not enter the next area.
                 PChar->pushPacket(new CCSPositionPacket(PChar));
 
                 PChar->status = STATUS_TYPE::NORMAL;
@@ -4062,7 +4062,7 @@ void SmallPacket0x05E(map_session_data_t* const PSession, CCharEntity* const PCh
 
                     PChar->loc.p.rotation += 128;
 
-                    PChar->pushPacket(new CMessageSystemPacket(0, 0, 2)); // You could not enter the next area.
+                    PChar->pushPacket(new CMessageSystemPacket(0, 0, MSGSYSTEM::COULD_NOT_ENTER)); // You could not enter the next area.
                     PChar->pushPacket(new CCSPositionPacket(PChar));
 
                     PChar->status = STATUS_TYPE::NORMAL;
@@ -4104,7 +4104,7 @@ void SmallPacket0x05E(map_session_data_t* const PSession, CCharEntity* const PCh
 
         PChar->loc.p.rotation += 128;
 
-        PChar->pushPacket(new CMessageSystemPacket(0, 0, 2)); // You could not enter the next area.
+        PChar->pushPacket(new CMessageSystemPacket(0, 0, MSGSYSTEM::COULD_NOT_ENTER)); // You could not enter the next area.
         PChar->pushPacket(new CCSPositionPacket(PChar));
 
         PChar->status = STATUS_TYPE::NORMAL;
@@ -4249,7 +4249,7 @@ void SmallPacket0x06E(map_session_data_t* const PSession, CCharEntity* const PCh
     if (jailutils::InPrison(PChar))
     {
         // Initiator is in prison.  Send error message.
-        PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, 0, 0, 316));
+        PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, 0, 0, MSGBASIC_CANNOT_USE_IN_AREA));
         return;
     }
 
@@ -4291,11 +4291,11 @@ void SmallPacket0x06E(map_session_data_t* const PSession, CCharEntity* const PCh
                     {
                         ShowDebug("%s is blocking party invites", PInvitee->getName());
                         // Target is blocking assistance
-                        PChar->pushPacket(new CMessageSystemPacket(0, 0, 225));
+                        PChar->pushPacket(new CMessageSystemPacket(0, 0, MSGSYSTEM::TARGET_IS_CURRENTLY_BLOCKING));
                         // Interaction was blocked
-                        PInvitee->pushPacket(new CMessageSystemPacket(0, 0, 226));
+                        PInvitee->pushPacket(new CMessageSystemPacket(0, 0, MSGSYSTEM::BLOCKED_BY_BLOCKAID));
                         // You cannot invite that person at this time.
-                        PChar->pushPacket(new CMessageSystemPacket(0, 0, 23));
+                        PChar->pushPacket(new CMessageSystemPacket(0, 0, MSGSYSTEM::YOU_CANNOT_INVITE_THAT_PERSON));
                         break;
                     }
                     if (PInvitee->StatusEffectContainer->HasStatusEffect(EFFECT_LEVEL_SYNC))
@@ -4362,11 +4362,11 @@ void SmallPacket0x06E(map_session_data_t* const PSession, CCharEntity* const PCh
                     {
                         ShowDebug("%s is blocking alliance invites", PInvitee->getName());
                         // Target is blocking assistance
-                        PChar->pushPacket(new CMessageSystemPacket(0, 0, 225));
+                        PChar->pushPacket(new CMessageSystemPacket(0, 0, MSGSYSTEM::TARGET_IS_CURRENTLY_BLOCKING));
                         // Interaction was blocked
-                        PInvitee->pushPacket(new CMessageSystemPacket(0, 0, 226));
+                        PInvitee->pushPacket(new CMessageSystemPacket(0, 0, MSGSYSTEM::BLOCKED_BY_BLOCKAID));
                         // You cannot invite that person at this time.
-                        PChar->pushPacket(new CMessageSystemPacket(0, 0, 23));
+                        PChar->pushPacket(new CMessageSystemPacket(0, 0, MSGSYSTEM::YOU_CANNOT_INVITE_THAT_PERSON));
                         break;
                     }
                     // make sure intvitee isn't dead or in jail, they are an unallied party leader and don't already have an invite pending
@@ -5056,7 +5056,7 @@ void SmallPacket0x096(map_session_data_t* const PSession, CCharEntity* const PCh
     if (jailutils::InPrison(PChar))
     {
         // Prevent crafting in prison
-        PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, 0, 0, 316));
+        PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, 0, 0, MSGBASIC_CANNOT_USE_IN_AREA));
         return;
     }
 
@@ -5119,7 +5119,7 @@ void SmallPacket0x096(map_session_data_t* const PSession, CCharEntity* const PCh
     {
         // Detect invalid crystal usage
         // Prevent crafting exploit to crash on container size > 8
-        PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, 0, 0, 316));
+        PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, 0, 0, MSGBASIC_CANNOT_USE_IN_AREA));
         return;
     }
 
@@ -5492,7 +5492,7 @@ void SmallPacket0x0B5(map_session_data_t* const PSession, CCharEntity* const PCh
             }
             else
             {
-                PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, 0, 0, MSGBASIC_CANT_BE_USED_IN_AREA));
+                PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, 0, 0, MSGBASIC_CANNOT_IN_THIS_AREA));
             }
         }
         else
@@ -5712,7 +5712,7 @@ void SmallPacket0x0B6(map_session_data_t* const PSession, CCharEntity* const PCh
 
     if (jailutils::InPrison(PChar))
     {
-        PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, 0, 0, 316));
+        PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, 0, 0, MSGBASIC_CANNOT_USE_IN_AREA));
         return;
     }
 
@@ -6250,7 +6250,7 @@ void SmallPacket0x0DC(map_session_data_t* const PSession, CCharEntity* const PCh
             }
             if (flags != PChar->nameflags.flags)
             {
-                PChar->pushPacket(new CMessageSystemPacket(0, 0, param == 1 ? 175 : 176));
+                PChar->pushPacket(new CMessageSystemPacket(0, 0, param == 1 ? MSGSYSTEM::CHARACTER_INFO_HIDDEN : MSGSYSTEM::CHARACTER_INFO_SHOWN));
             }
             break;
         }
@@ -6433,7 +6433,7 @@ void SmallPacket0x0DD(map_session_data_t* const PSession, CCharEntity* const PCh
     {
         if (jailutils::InPrison(PChar))
         {
-            PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, 0, 0, 316));
+            PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, 0, 0, MSGBASIC_CANNOT_USE_IN_AREA));
             return;
         }
 
@@ -8312,7 +8312,7 @@ void SmallPacket0x11D(map_session_data_t* const PSession, CCharEntity* const PCh
     TracyZoneScoped;
     if (jailutils::InPrison(PChar))
     {
-        PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, 0, 0, 316));
+        PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, 0, 0, MSGBASIC_CANNOT_USE_IN_AREA));
         return;
     }
 

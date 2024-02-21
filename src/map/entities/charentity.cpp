@@ -2150,9 +2150,9 @@ CBattleEntity* CCharEntity::IsValidTarget(uint16 targid, uint16 validTargetFlags
         if (PTarget->objtype == TYPE_PC && charutils::IsAidBlocked(this, static_cast<CCharEntity*>(PTarget)))
         {
             // Target is blocking assistance
-            errMsg = std::make_unique<CMessageSystemPacket>(0, 0, 225);
+            errMsg = std::make_unique<CMessageSystemPacket>(0, 0, MSGSYSTEM::TARGET_IS_CURRENTLY_BLOCKING);
             // Interaction was blocked
-            static_cast<CCharEntity*>(PTarget)->pushPacket(new CMessageSystemPacket(0, 0, 226));
+            static_cast<CCharEntity*>(PTarget)->pushPacket(new CMessageSystemPacket(0, 0, MSGSYSTEM::BLOCKED_BY_BLOCKAID));
         }
         else if (IsMobOwner(PTarget))
         {
@@ -2770,7 +2770,7 @@ void CCharEntity::skipEvent()
     TracyZoneScoped;
     if (!m_Locked && !isInEvent() && (!currentEvent->cutsceneOptions.empty() || currentEvent->interruptText != 0))
     {
-        pushPacket(new CMessageSystemPacket(0, 0, 117));
+        pushPacket(new CMessageSystemPacket(0, 0, MSGSYSTEM::EVENT_SKIPPED));
         pushPacket(new CReleasePacket(this, RELEASE_TYPE::SKIPPING));
         m_Substate = CHAR_SUBSTATE::SUBSTATE_NONE;
 
