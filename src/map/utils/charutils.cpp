@@ -3957,12 +3957,23 @@ namespace charutils
             // all members might not be in range
             if (!members.empty())
             {
-                // distribute gil
-                int32 gilPerPerson = static_cast<int32>(gil / members.size());
-                for (auto* PMember : members)
+                // Check for highest gilfinder tier
+                uint16 gilFinderActive = 0;
+
+                for (auto PMember : members)
                 {
-                    // Check for gilfinder
-                    gilPerPerson += gilPerPerson * PMember->getMod(Mod::GILFINDER) / 100;
+                    if (PMember->getMod(Mod::GILFINDER) > gilFinderActive)
+                    {
+                        gilFinderActive = PMember->getMod(Mod::GILFINDER);
+                    }
+                }
+
+                // Calculate gil for each party member.
+                uint32 gilPerPerson = static_cast<uint32>(gil / members.size());
+                gilPerPerson        = gilPerPerson * (100 + gilFinderActive) / 100;
+
+                for (auto PMember : members)
+                {
                     UpdateItem(PMember, LOC_INVENTORY, 0, gilPerPerson);
                     PMember->pushPacket(new CMessageBasicPacket(PMember, PMember, gilPerPerson, 0, 565));
                 }
