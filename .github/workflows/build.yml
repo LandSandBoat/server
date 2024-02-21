@@ -421,6 +421,7 @@ jobs:
       run: |
         sudo apt-get update
         sudo apt-get install -y software-properties-common cmake mariadb-client-10.6 libmariadb-dev-compat libluajit-5.1-dev libzmq3-dev zlib1g-dev libssl-dev luarocks binutils-dev
+        pip install bcrypt
     - name: Verify MySQL connection from container
       run: |
         mysql -h 127.0.0.1 -uroot -proot -e "SHOW DATABASES"
@@ -489,8 +490,9 @@ jobs:
           mysqlcmd "DELETE FROM char_unlocks;"
 
           # Create an account
+          PASSWORD_HASH=\$2a\$12\$piFoDKvu80KK68xLgQFpt.ZCqVPTjPmhSUfA31.Yw9n404dTsrR6q
           mysqlcmd "INSERT INTO accounts (id, login, password, timecreate, timelastmodify, status, priv)
-          VALUES(1000, 'admin', PASSWORD('admin'), NOW(), NOW(), 1, 1);
+          VALUES(1000, 'admin1', '$PASSWORD_HASH', NOW(), NOW(), 1, 1);
           SELECT id, login, content_ids FROM accounts;"
 
           # Create a character
@@ -529,7 +531,7 @@ jobs:
           import time
           try:
               from tools.headlessxi.hxiclient import HXIClient
-              hxi_client = HXIClient('admin', 'admin', 'localhost')
+              hxi_client = HXIClient('admin1', 'admin1', 'localhost')
               hxi_client.login()
               print('Sleeping 60s')
               time.sleep(60)

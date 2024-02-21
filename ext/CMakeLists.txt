@@ -150,9 +150,7 @@ CPMAddPackage(
     GITHUB_REPOSITORY imneme/pcg-cpp
     GIT_TAG 428802d1a5634f96bcd0705fab379ff0113bcf13
 ) # defines: pcg-cpp
-
-# pcg-cpp does not include cmake
-if(pcg-cpp_ADDED)
+if(pcg-cpp_ADDED) # pcg-cpp does not include cmake
     add_library(pcg-cpp INTERFACE)
     target_include_directories(pcg-cpp SYSTEM INTERFACE ${pcg-cpp_SOURCE_DIR}/include/)
 endif()
@@ -211,6 +209,28 @@ if(asio_ADDED)
     endif()
 endif()
 
+CPMAddPackage(
+    NAME bcrypt
+    GITHUB_REPOSITORY zach2good/libbcrypt
+    GIT_TAG fb50b847ae760f16ab84a367452027b246df13e1
+    DOWNLOAD_ONLY ON
+) # defines: bcrypt
+if(bcrypt_ADDED) # bcrypt's cmake isn't suitable for us
+    add_library(bcrypt
+        STATIC
+            ${bcrypt_SOURCE_DIR}/src/bcrypt.c
+            ${bcrypt_SOURCE_DIR}/src/crypt_blowfish.c
+            ${bcrypt_SOURCE_DIR}/src/crypt_gensalt.c
+            ${bcrypt_SOURCE_DIR}/src/wrapper.c
+            ${bcrypt_SOURCE_DIR}/src/x86.S
+    )
+    target_include_directories(bcrypt
+        SYSTEM INTERFACE
+            ${bcrypt_SOURCE_DIR}/include/
+            $<$<PLATFORM_ID:Linux>:${bcrypt_SOURCE_DIR}/include/bcrypt/>
+    )
+endif()
+
 set(EXTERNAL_LIBS
     fmt::fmt
     spdlog
@@ -229,6 +249,7 @@ set(EXTERNAL_LIBS
     nlohmann_json::nlohmann_json
     pcg-cpp
     asio
+    bcrypt
 )
 
 if(WIN32)
