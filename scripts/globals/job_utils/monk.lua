@@ -130,12 +130,15 @@ xi.job_utils.monk.useInnerStrength = function(player, target, ability)
 end
 
 xi.job_utils.monk.useMantra = function(player, target, ability)
-    local merits = player:getMerit(xi.merit.MANTRA)
+    local hpBoost = player:getMerit(xi.merit.MANTRA) -- TODO: Add augment boost here aswell
 
-    player:delStatusEffect(xi.effect.MAX_HP_BOOST)
-    target:addStatusEffect(xi.effect.MAX_HP_BOOST, merits, 0, 180)
+    if not target:hasStatusEffect(xi.effect.MAX_HP_BOOST) then
+        target:addStatusEffect(xi.effect.MAX_HP_BOOST, hpBoost, 0, 180)
 
-    return xi.effect.MANTRA -- TODO: implement xi.effect.MANTRA
+        return xi.effect.MANTRA
+    else
+        return target:messageBasic(xi.msg.basic.NO_EFFECT)
+    end
 end
 
 xi.job_utils.monk.usePerfectCounter = function(player, target, ability)
