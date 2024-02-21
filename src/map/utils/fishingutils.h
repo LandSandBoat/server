@@ -867,7 +867,9 @@ enum FISHINGGEAR : uint32
     // feet
     FISHERMANS_BOOTS = 14171,
     ANGLERS_BOOTS    = 14172,
-    WADERS           = 14195
+    WADERS           = 14195,
+    // ring
+    NODDY_RING = 11655
 };
 
 enum LIVEFISHINGBAIT : uint32
