@@ -6451,12 +6451,21 @@ namespace battleutils
         }
         else if (PSpell->getSpellGroup() == SPELLGROUP_SUMMONING)
         {
-            cast -= 1000 * PEntity->getMod(Mod::SUMMONING_MAGIC_CAST);
+            int32 amount = 1000 * PEntity->getMod(Mod::SUMMONING_MAGIC_CAST);
 
             if (PEntity->objtype == TYPE_PC)
             {
                 auto* PChar = static_cast<CCharEntity*>(PEntity);
-                cast -= base * 0.01 * PChar->PMeritPoints->GetMeritValue(MERIT_SUMMONING_MAGIC_CAST_TIME, PChar);
+                amount += static_cast<int32>(base * 0.01 * PChar->PMeritPoints->GetMeritValue(MERIT_SUMMONING_MAGIC_CAST_TIME, PChar));
+            }
+
+            if (static_cast<int32>(cast) > amount)
+            {
+                cast -= static_cast<uint32>(std::max(amount, 0));
+            }
+            else
+            {
+                cast = 0;
             }
         }
         else if (PSpell->getSpellGroup() == SPELLGROUP_SONG)
