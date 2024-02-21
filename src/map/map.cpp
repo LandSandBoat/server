@@ -966,7 +966,6 @@ int32 send_parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_da
             }
         }
     } while (PacketSize == static_cast<uint32>(-1));
-    PChar->erasePackets(packets);
     TotalPacketsSentPerTick += packets;
     TracyZoneString(fmt::format("Sending {} packets", packets));
 

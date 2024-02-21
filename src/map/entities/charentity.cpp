@@ -340,9 +340,8 @@ void CCharEntity::updateCharPacket(CCharEntity* PChar, ENTITYUPDATE type, uint8 
     if (existing == PendingCharPackets.end())
     {
         // No existing packet update for the given char, so we push new packet
-        CCharPacket* packet = new CCharPacket(PChar, type, updatemask);
-        PacketList.emplace_back(packet);
-        PendingCharPackets.emplace(PChar->id, packet);
+        PacketList.emplace_back(std::make_unique<CCharPacket>(PChar, type, updatemask));
+        PendingCharPackets.emplace(PChar->id, std::make_unique<CCharPacket>(PChar, type, updatemask));
     }
     else
     {
@@ -357,9 +356,8 @@ void CCharEntity::updateEntityPacket(CBaseEntity* PEntity, ENTITYUPDATE type, ui
     if (existing == PendingEntityPackets.end())
     {
         // No existing packet update for the given entity, so we push new packet
-        CEntityUpdatePacket* packet = new CEntityUpdatePacket(PEntity, type, updatemask);
-        PacketList.emplace_back(packet);
-        PendingEntityPackets.emplace(PEntity->id, packet);
+        PacketList.emplace_back(std::make_unique<CEntityUpdatePacket>(PEntity, type, updatemask));
+        PendingEntityPackets.emplace(PEntity->id, std::make_unique<CEntityUpdatePacket>(PEntity, type, updatemask));
     }
     else
     {
