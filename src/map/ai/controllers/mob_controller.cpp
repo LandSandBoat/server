@@ -183,7 +183,18 @@ void CMobController::TryLink()
     {
         if (PTarget->PPet->objtype == TYPE_PET && ((CPetEntity*)PTarget->PPet)->getPetType() == PET_TYPE::AVATAR)
         {
-            petutils::AttackTarget(PTarget, PMob);
+            if (PTarget->objtype == TYPE_PC)
+            {
+                std::unique_ptr<CBasicPacket> errMsg;
+                if (PTarget->PPet->CanAttack(PMob, errMsg))
+                {
+                    petutils::AttackTarget(PTarget, PMob);
+                }
+            }
+            else
+            {
+                petutils::AttackTarget(PTarget, PMob);
+            }
         }
     }
 
@@ -211,7 +222,7 @@ void CMobController::TryLink()
                 if (PPartyMember->m_roamFlags & ROAMFLAG_IGNORE)
                 {
                     // force into attack action
-                    //#TODO
+                    // #TODO
                     PPartyMember->PAI->Engage(PTarget->targid);
                 }
             }
@@ -831,7 +842,7 @@ void CMobController::DoRoamTick(time_point tick)
 
         return;
     }
-    //#TODO
+    // #TODO
     else if (PMob->GetDespawnTime() > time_point::min() && PMob->GetDespawnTime() < m_Tick)
     {
         Despawn();
@@ -946,7 +957,7 @@ void CMobController::DoRoamTick(time_point tick)
                 else if (PMob->CanRoam() && PMob->PAI->PathFind->RoamAround(PMob->m_SpawnPoint, PMob->GetRoamDistance(),
                                                                             (uint8)PMob->getMobMod(MOBMOD_ROAM_TURNS), PMob->m_roamFlags))
                 {
-                    //#TODO: #AIToScript (event probably)
+                    // #TODO: #AIToScript (event probably)
                     if (PMob->m_roamFlags & ROAMFLAG_WORM)
                     {
                         // move down
