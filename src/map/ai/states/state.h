@@ -29,17 +29,6 @@
 
 class CBattleEntity;
 
-class CStateInitException : public std::exception
-{
-public:
-    explicit CStateInitException(std::unique_ptr<CBasicPacket> _msg)
-    : std::exception()
-    , packet(std::move(_msg))
-    {
-    }
-    std::unique_ptr<CBasicPacket> packet;
-};
-
 class CState
 {
 public:
@@ -49,11 +38,6 @@ public:
 
     CBaseEntity* GetTarget() const;
     void         SetTarget(uint16 targid);
-
-    bool HasErrorMsg() const;
-
-    /* Releases ownership to the caller */
-    CBasicPacketPtr GetErrorMsg();
 
     bool DoUpdate(time_point tick);
     // try interrupt (on hit)
@@ -80,8 +64,6 @@ protected:
     uint16     GetTargetID() const;
     void       Complete();
     time_point GetEntryTime() const;
-
-    CBasicPacketPtr m_errorMsg;
 
     CBaseEntity* const m_PEntity;
     uint16             m_targid{ 0 };
