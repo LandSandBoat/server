@@ -26794,6 +26794,10 @@ INSERT INTO `mob_droplist` VALUES (3294,0,0,1000,2810,@ALWAYS);   -- Vial of ebu
 INSERT INTO `mob_droplist` VALUES (3294,0,0,1000,647,@ALWAYS);    -- Chunk of molybdenum ore (Always, 100%)
 INSERT INTO `mob_droplist` VALUES (3294,0,0,1000,19236,@VCOMMON); -- Hightail bullet (Very common, 24%)
 
+-- ZoneID 126 - Atkorkamuy
+INSERT INTO `mob_droplist` VALUES (3295,0,0,1000,2813,@COMMON);   -- Aptant: Durus 
+INSERT INTO `mob_droplist` VALUES (3295,0,0,1000,2816,@COMMON);   -- Aptant: Tachus
+
 /*!40000 ALTER TABLE `mob_droplist` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
