@@ -109,7 +109,8 @@ spellObject.onSpellCast = function(caster, target, spell)
 
     target:wakeUp()
 
-    --Enmity for Cura is fixed, so its CE/VE is set in the SQL and not calculated with updateEnmityFromCure
+    -- pass in fixed enmity values of 75 CE and 75 VE
+    caster:updateEnmityFromCure(target, final, 75, 75)
 
     if target:getID() == spell:getPrimaryTargetID() then
         spell:setMsg(xi.msg.basic.MAGIC_RECOVERS_HP)

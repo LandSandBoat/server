@@ -12115,8 +12115,11 @@ void CLuaBaseEntity::updateEnmityFromDamage(CLuaBaseEntity* PEntity, int32 damag
  *  Notes   : Used in nearly all Cure scripts and abilities which heal
  ************************************************************************/
 
-void CLuaBaseEntity::updateEnmityFromCure(CLuaBaseEntity* PEntity, int32 amount)
+void CLuaBaseEntity::updateEnmityFromCure(CLuaBaseEntity* PEntity, int32 amount, sol::object const& optionalFixedCE, sol::object const& optionalFixedVE)
 {
+    int32 fixedCE = optionalFixedCE.is<int32>() ? optionalFixedCE.as<int32>() : 0;
+    int32 fixedVE = optionalFixedVE.is<int32>() ? optionalFixedVE.as<int32>() : 0;
+
     if (amount < 0)
     {
         ShowWarning("Received negative cure amount.");
@@ -12144,7 +12147,7 @@ void CLuaBaseEntity::updateEnmityFromCure(CLuaBaseEntity* PEntity, int32 amount)
 
     if (PEntity != nullptr && PCurer)
     {
-        battleutils::GenerateCureEnmity(PCurer, static_cast<CBattleEntity*>(PEntity->GetBaseEntity()), amount);
+        battleutils::GenerateCureEnmity(PCurer, static_cast<CBattleEntity*>(PEntity->GetBaseEntity()), amount, fixedCE, fixedVE);
     }
 }
 
