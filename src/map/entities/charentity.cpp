@@ -1077,6 +1077,90 @@ void CCharEntity::OnCastFinished(CMagicState& state, action_t& action)
 
                 StatusEffectContainer->DelStatusEffectSilent(EFFECT_CHAIN_AFFINITY);
             }
+
+            if (actionTarget.param > 0 &&
+                PSpell->dealsDamage() &&
+                PSpell->getSpellGroup() == SPELLGROUP_BLACK &&
+                (StatusEffectContainer->HasStatusEffect(EFFECT_IMMANENCE)))
+            {
+                SUBEFFECT effect = SUBEFFECT_NONE;
+                switch (PSpell->getSpellFamily())
+                {
+                    case SPELLFAMILY_STONE:
+                        effect = battleutils::GetSkillChainEffect(PTarget, 4, 0, 0);
+                        break;
+                    case SPELLFAMILY_GEOHELIX:
+                        effect = battleutils::GetSkillChainEffect(PTarget, 4, 0, 0);
+                        break;
+                    case SPELLFAMILY_WATER:
+                        effect = battleutils::GetSkillChainEffect(PTarget, 5, 0, 0);
+                        break;
+                    case SPELLFAMILY_HYDROHELIX:
+                        effect = battleutils::GetSkillChainEffect(PTarget, 5, 0, 0);
+                        break;
+                    case SPELLFAMILY_AERO:
+                        effect = battleutils::GetSkillChainEffect(PTarget, 6, 0, 0);
+                        break;
+                    case SPELLFAMILY_ANEMOHELIX:
+                        effect = battleutils::GetSkillChainEffect(PTarget, 6, 0, 0);
+                        break;
+                    case SPELLFAMILY_FIRE:
+                        effect = battleutils::GetSkillChainEffect(PTarget, 3, 0, 0);
+                        break;
+                    case SPELLFAMILY_PYROHELIX:
+                        effect = battleutils::GetSkillChainEffect(PTarget, 3, 0, 0);
+                        break;
+                    case SPELLFAMILY_BLIZZARD:
+                        effect = battleutils::GetSkillChainEffect(PTarget, 7, 0, 0);
+                        break;
+                    case SPELLFAMILY_CRYOHELIX:
+                        effect = battleutils::GetSkillChainEffect(PTarget, 7, 0, 0);
+                        break;
+                    case SPELLFAMILY_THUNDER:
+                        effect = battleutils::GetSkillChainEffect(PTarget, 8, 0, 0);
+                        break;
+                    case SPELLFAMILY_IONOHELIX:
+                        effect = battleutils::GetSkillChainEffect(PTarget, 8, 0, 0);
+                        break;
+                    case SPELLFAMILY_LUMINOHELIX:
+                        effect = battleutils::GetSkillChainEffect(PTarget, 1, 0, 0);
+                        break;
+                    case SPELLFAMILY_NOCTOHELIX:
+                        effect = battleutils::GetSkillChainEffect(PTarget, 2, 0, 0);
+                        break;
+                    default:
+                        break;
+                }
+
+                if (PSpell->getSpellFamily() >= SPELLFAMILY_FIRE &&
+                    PSpell->getSpellFamily() <= SPELLFAMILY_WATER)
+                {
+                    StatusEffectContainer->DelStatusEffectSilent(EFFECT_IMMANENCE);
+                }
+
+                if (PSpell->getSpellFamily() >= SPELLFAMILY_GEOHELIX &&
+                    PSpell->getSpellFamily() <= SPELLFAMILY_LUMINOHELIX)
+                {
+                    StatusEffectContainer->DelStatusEffectSilent(EFFECT_IMMANENCE);
+                }
+
+                if (effect != SUBEFFECT_NONE)
+                {
+                    int32 skillChainDamage = battleutils::TakeSkillchainDamage(static_cast<CBattleEntity*>(this), PTarget, actionTarget.param, nullptr);
+
+                    if (skillChainDamage < 0)
+                    {
+                        actionTarget.addEffectParam   = -skillChainDamage;
+                        actionTarget.addEffectMessage = 384 + effect;
+                    }
+                    else
+                    {
+                        actionTarget.addEffectParam   = skillChainDamage;
+                        actionTarget.addEffectMessage = 287 + effect;
+                    }
+                    actionTarget.additionalEffect = effect;
+                }
+            }
         }
     }
     charutils::RemoveStratagems(this, PSpell);
