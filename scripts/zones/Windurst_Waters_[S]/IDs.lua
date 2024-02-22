@@ -34,6 +34,7 @@ zones[xi.zone.WINDURST_WATERS_S] =
         DOOR_ACOLYTE_HOSTEL_LOCKED    = 11341, -- The door appears to be locked...
         MIKHE_ARYOHCHA_DIALOG         = 12478, -- Do you like the headpiece? I made it from my firrrst victim. I wear it to let everrryone know what happens when they cross Mikhe Aryohcha!
         LUTETE_DIALOG                 = 12480, -- <Yaaawn>... Mastering these Near Eastern magics can be quite taxing. If I had a choice, I'd rather be back in bed, relaxing...
+        CAMPAIGN_RESULTS_TALLIED      = 12566, -- Campaign results tallied.
         ALLIED_SIGIL                  = 12924, -- You have received the Allied Sigil!
         POGIGI_TURN_IN                = 13418, -- Just as we suspected. This contains a great deal of information that will prove vital to our cause. Hm, what's this? Not sure what to make of this... Doesn't seem to be terribly important. Here, why don't you hang onto it? See if you can't get some use out of it down the road.
         RETRIEVE_DIALOG_ID            = 14995, -- You retrieve <item> from the porter moogle's care.
@@ -45,7 +46,8 @@ zones[xi.zone.WINDURST_WATERS_S] =
     },
     npc =
     {
-        SHUVO = 17163023,
+        CAMPAIGN_NPC_OFFSET = GetFirstID('Dynause_TK'), -- San, Bas, Win, Flag +4, CA
+        SHUVO               = 17163023,
     },
 }
 

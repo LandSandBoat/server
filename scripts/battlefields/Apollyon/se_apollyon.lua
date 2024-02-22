@@ -266,8 +266,8 @@ content.groups =
         stationary = true,
         mods =
         {
-            [xi.mod.UDMGPHYS  ] = -8000,
-            [xi.mod.MAGIC_NULL] = 100,
+            [xi.mod.UDMGPHYS           ] = -8000,
+            [xi.mod.NULL_MAGICAL_DAMAGE] = 100,
         },
 
         setup = function(battlefield, mobs)
@@ -288,7 +288,7 @@ content.groups =
         mobs = { 'Flying_Spear' },
         mods =
         {
-            [xi.mod.MAGIC_NULL] = 100,
+            [xi.mod.NULL_MAGICAL_DAMAGE] = 100,
         },
 
         death = function(battlefield, mob, count)
@@ -306,7 +306,7 @@ content.groups =
 
         allDeath = function(battlefield, mob)
             local boss = mob:getZone():queryEntitiesByName('Evil_Armory')[1]
-            boss:setMod(xi.mod.MAGIC_NULL, 0)
+            boss:setMod(xi.mod.NULL_MAGICAL_DAMAGE, 0)
         end,
     },
 }

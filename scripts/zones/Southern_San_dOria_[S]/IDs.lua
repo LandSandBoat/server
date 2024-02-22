@@ -42,6 +42,7 @@ zones[xi.zone.SOUTHERN_SAN_DORIA_S] =
         YEARS_OF_TRAINING             = 11817, -- After years of training in the Far East, I return only to find my nation burning at the hands of the infernal beastman hordes. The heathens shall pay dearly... My work has only just begun.
         FINE_WARRIOR                  = 11818, -- You have the look of a fine warrior. It is a pity you are not one of my Crimson Wolves.
         EYES_OF_THE_GODDESS           = 11819, -- The eyes of the Goddess are ever upon us. We must remain steadfast against the evils from without, as well as those from within.
+        CAMPAIGN_RESULTS_TALLIED      = 11925, -- Campaign results tallied.
         NOW_ALLIED_WITH               = 12153, -- You are now a member of the [/Knights of the Iron Ram/Republican Legion's Fourth Division/Cobra Unit]!
         ALLIED_SIGIL                  = 12928, -- You have received the Allied Sigil!
         DOOR_IS_FIRMLY_LOCKED         = 13554, -- The door is firmly locked...
@@ -61,7 +62,8 @@ zones[xi.zone.SOUTHERN_SAN_DORIA_S] =
     },
     npc =
     {
-        SHIXO = 17105699,
+        CAMPAIGN_NPC_OFFSET = GetFirstID('Saphiriance_TK'), -- San, Bas, Win, Flag +4, CA
+        SHIXO               = 17105699,
     },
 }
 

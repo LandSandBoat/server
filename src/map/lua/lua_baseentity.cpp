@@ -495,7 +495,7 @@ void CLuaBaseEntity::messageSpecial(uint16 messageID, sol::variadic_args va)
  *  Notes   :
  ************************************************************************/
 
-void CLuaBaseEntity::messageSystem(uint16 messageID, sol::object const& p0, sol::object const& p1)
+void CLuaBaseEntity::messageSystem(MSGSYSTEM messageID, sol::object const& p0, sol::object const& p1)
 {
     if (m_PBaseEntity->objtype != TYPE_PC)
     {
@@ -1200,7 +1200,7 @@ void CLuaBaseEntity::release()
     {
         // Message: Event skipped
         releaseType = RELEASE_TYPE::SKIPPING;
-        PChar->pushPacket(new CMessageSystemPacket(0, 0, 117));
+        PChar->pushPacket(new CMessageSystemPacket(0, 0, MSGSYSTEM::EVENT_SKIPPED));
     }
 
     PChar->inSequence = false;
@@ -2921,7 +2921,7 @@ void CLuaBaseEntity::setPos(sol::variadic_args va)
             if (ipp == 0)
             {
                 ShowWarning(fmt::format("Char {} requested zone ({}) returned IPP of 0", PChar->name, zoneid));
-                PChar->pushPacket(new CMessageSystemPacket(0, 0, 2)); // You could not enter the next area.
+                PChar->pushPacket(new CMessageSystemPacket(0, 0, MSGSYSTEM::COULD_NOT_ENTER)); // You could not enter the next area.
                 return;
             }
 
@@ -12115,8 +12115,11 @@ void CLuaBaseEntity::updateEnmityFromDamage(CLuaBaseEntity* PEntity, int32 damag
  *  Notes   : Used in nearly all Cure scripts and abilities which heal
  ************************************************************************/
 
-void CLuaBaseEntity::updateEnmityFromCure(CLuaBaseEntity* PEntity, int32 amount)
+void CLuaBaseEntity::updateEnmityFromCure(CLuaBaseEntity* PEntity, int32 amount, sol::object const& optionalFixedCE, sol::object const& optionalFixedVE)
 {
+    int32 fixedCE = optionalFixedCE.is<int32>() ? optionalFixedCE.as<int32>() : 0;
+    int32 fixedVE = optionalFixedVE.is<int32>() ? optionalFixedVE.as<int32>() : 0;
+
     if (amount < 0)
     {
         ShowWarning("Received negative cure amount.");
@@ -12144,7 +12147,7 @@ void CLuaBaseEntity::updateEnmityFromCure(CLuaBaseEntity* PEntity, int32 amount)
 
     if (PEntity != nullptr && PCurer)
     {
-        battleutils::GenerateCureEnmity(PCurer, static_cast<CBattleEntity*>(PEntity->GetBaseEntity()), amount);
+        battleutils::GenerateCureEnmity(PCurer, static_cast<CBattleEntity*>(PEntity->GetBaseEntity()), amount, fixedCE, fixedVE);
     }
 }
 

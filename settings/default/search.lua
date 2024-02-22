@@ -22,4 +22,11 @@ xi.settings.search =
 
     -- Interval is in seconds, default is one hour
     EXPIRE_INTERVAL = 3600,
+
+    -- IP address strings in this list won't be subject to 'IPAddressesInUse' rate limiting
+    ACCESS_WHITELIST =
+    {
+        "127.0.0.1",   -- Example, not actually needed
+        "192.168.0.1", -- Example, not actually needed
+    },
 }

@@ -241,7 +241,7 @@ content.groups =
 
     {
         mobs = { 'Hyperion' },
-        mods = { [xi.mod.MAGIC_NULL] = 100 },
+        mods = { [xi.mod.NULL_MAGICAL_DAMAGE] = 100 },
     },
 
     {

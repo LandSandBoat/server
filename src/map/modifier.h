@@ -96,25 +96,6 @@ enum class Mod
 
     WSACC = 48, // Weaponskill Accuracy
 
-    // Specific Damage Taken vs physical damage type
-    // Value is stored as a percentage of damage reduction (to within 1000)
-    // Example: 1000 = 100%, 875= 87.5%
-    SLASH_SDT  = 49, // Slash Damage Taken
-    PIERCE_SDT = 50, // Piercing Damage Taken
-    IMPACT_SDT = 51, // Impact Damage Taken
-    HTH_SDT    = 52, // Hand-To-Hand Damage Taken
-
-    // Elemental SDT
-    // This has been repeatedly mixed up with RESISTANCE - be careful!
-    FIRE_SDT    = 54, // Fire Damage Taken
-    ICE_SDT     = 55, // Ice Damage Taken
-    WIND_SDT    = 56, // Wind Damage Taken
-    EARTH_SDT   = 57, // Earth Damage Taken
-    THUNDER_SDT = 58, // Thunder Damage Taken
-    WATER_SDT   = 59, // Water Damage Taken
-    LIGHT_SDT   = 60, // Light Damage Taken
-    DARK_SDT    = 61, // Dark Damage Taken
-
     ATTP = 62, // % Attack
     DEFP = 63, // % Defense
 
@@ -207,17 +188,61 @@ enum class Mod
     DMG         = 160, // Damage Taken %
     DMGPHYS     = 161, // Physical Damage Taken %
     DMGPHYS_II  = 190, // Physical Damage Taken II % (Burtgang)
+    UDMGPHYS    = 387, // Uncapped Damage Multipliers
     DMGBREATH   = 162, // Breath Damage Taken %
+    UDMGBREATH  = 388, // Used in sentinel, invincible, physical shield etc
     DMGMAGIC    = 163, // Magic Damage Taken %
     DMGMAGIC_II = 831, // Magic Damage Taken II % (Aegis)
+    UDMGMAGIC   = 389,
     DMGRANGE    = 164, // Range Damage Taken %
+    UDMGRANGE   = 390,
     DMG_AOE     = 158, // Damage Taken % when not main target of an AoE action. (Ex: Locus Mobs)
 
-    // Uncapped damage - 10000 base, 375 = 3.75%
-    UDMGPHYS   = 387, // Uncapped Damage Multipliers
-    UDMGBREATH = 388, // Used in sentinel, invincible, physical shield etc
-    UDMGMAGIC  = 389, //
-    UDMGRANGE  = 390, //
+    // Specific Damage Taken vs physical damage type
+    // Value is stored as a percentage of damage reduction (to within 1000)
+    // Example: 1000 = 100%, 875= 87.5%
+    SLASH_SDT  = 49, // Slash Damage Taken
+    PIERCE_SDT = 50, // Piercing Damage Taken
+    IMPACT_SDT = 51, // Impact Damage Taken
+    HTH_SDT    = 52, // Hand-To-Hand Damage Taken
+
+    // Elemental SDT. BASE 10000. This has been repeatedly mixed up with RESISTANCE - be careful!
+    FIRE_SDT    = 54, // Fire Damage Taken
+    ICE_SDT     = 55, // Ice Damage Taken
+    WIND_SDT    = 56, // Wind Damage Taken
+    EARTH_SDT   = 57, // Earth Damage Taken
+    THUNDER_SDT = 58, // Thunder Damage Taken
+    WATER_SDT   = 59, // Water Damage Taken
+    LIGHT_SDT   = 60, // Light Damage Taken
+    DARK_SDT    = 61, // Dark Damage Taken
+
+    // Occasionally annuls damage taken. Modifier value = chance in %
+    NULL_DAMAGE          = 142, // Occasionally annuls all/any damage.
+    NULL_PHYSICAL_DAMAGE = 416, // Occasionally annuls physical damage.
+    NULL_BREATH_DAMAGE   = 143, // Occasionally annuls breath damage.
+    NULL_MAGICAL_DAMAGE  = 476, // Occasionally annuls magical damage.
+    NULL_RANGED_DAMAGE   = 239, // Occasionally annuls ranged damage.
+    FIRE_NULL            = 467, // Occasionally annuls fire elemental damage.
+    ICE_NULL             = 468, // Occasionally annuls ice elemental damage.
+    WIND_NULL            = 469, // Occasionally annuls wind elemental damage.
+    EARTH_NULL           = 470, // Occasionally annuls earth elemental damage.
+    LTNG_NULL            = 471, // Occasionally annuls thunder elemental damage.
+    WATER_NULL           = 472, // Occasionally annuls water elemental damage.
+    LIGHT_NULL           = 473, // Occasionally annuls light elemental damage.
+    DARK_NULL            = 474, // Occasionally annuls dark elemental damage.
+
+    // Occasionally absorbs damage taken. Modifier value = chance in %
+    ABSORB_DMG_CHANCE = 480, // Occasionally absorbs all/any damage.
+    PHYS_ABSORB       = 512, // Occasionally absorbs physical damage. USED FOR RANGED ASWELL.
+    MAGIC_ABSORB      = 475, // Occasionally absorbs magical damage.
+    FIRE_ABSORB       = 459, // Occasionally absorbs fire elemental damage.
+    ICE_ABSORB        = 460, // Occasionally absorbs ice elemental damage.
+    WIND_ABSORB       = 461, // Occasionally absorbs wind elemental damage.
+    EARTH_ABSORB      = 462, // Occasionally absorbs earth elemental damage.
+    LTNG_ABSORB       = 463, // Occasionally absorbs thunder elemental damage.
+    WATER_ABSORB      = 464, // Occasionally absorbs water elemental damage.
+    LIGHT_ABSORB      = 465, // Occasionally absorbs light elemental damage.
+    DARK_ABSORB       = 466, // Occasionally absorbs dark elemental damage.
 
     // Crit Damage / Delay
     CRITHITRATE              = 165, // Raises chance to crit
@@ -789,11 +814,9 @@ enum class Mod
     TA_TRIPLE_DMG_RATE       = 409, // Triple attack's triple damage chance %.
     ZANSHIN_DOUBLE_DAMAGE    = 410, // Zanshin's double damage chance %.
     RAPID_SHOT_DOUBLE_DAMAGE = 479, // Rapid shot's double damage chance %.
-    ABSORB_DMG_CHANCE        = 480, // Chance to absorb damage %
     EXTRA_DUAL_WIELD_ATTACK  = 481, // Chance to land an extra attack when dual wielding
     EXTRA_KICK_ATTACK        = 482, // Occasionally allows a second Kick Attack during an attack round without the use of Footwork.
     SAMBA_DOUBLE_DAMAGE      = 415, // Double damage chance when samba is up.
-    NULL_PHYSICAL_DAMAGE     = 416, // Occasionally annuls damage from physical attacks, in percents
     QUICK_DRAW_TRIPLE_DAMAGE = 417, // Chance to do triple damage with quick draw.
     BAR_ELEMENT_NULL_CHANCE  = 418, // Bar Elemental spells will occasionally NULLify damage of the same element.
     GRIMOIRE_INSTANT_CAST    = 419, // Spells that match your current Arts will occasionally cast instantly, without recast.
@@ -804,32 +827,11 @@ enum class Mod
     RERAISE_II  = 457, // Reraise II.
     RERAISE_III = 458, // Reraise III.
 
-    // Elemental Absorb Chance
-    FIRE_ABSORB  = 459, // Occasionally absorbs fire elemental damage, in percents
-    ICE_ABSORB   = 460, // Occasionally absorbs ice elemental damage, in percents
-    WIND_ABSORB  = 461, // Occasionally absorbs wind elemental damage, in percents
-    EARTH_ABSORB = 462, // Occasionally absorbs earth elemental damage, in percents
-    LTNG_ABSORB  = 463, // Occasionally absorbs thunder elemental damage, in percents
-    WATER_ABSORB = 464, // Occasionally absorbs water elemental damage, in percents
-    LIGHT_ABSORB = 465, // Occasionally absorbs light elemental damage, in percents
-    DARK_ABSORB  = 466, // Occasionally absorbs dark elemental damage, in percents
+    ABSORB_DMG_TO_MP = 516, // Unlike PLD gear mod, works on all damage types (Ethereal Earring)
 
-    // Elemental Null Chance
-    FIRE_NULL  = 467, //
-    ICE_NULL   = 468, //
-    WIND_NULL  = 469, //
-    EARTH_NULL = 470, //
-    LTNG_NULL  = 471, //
-    WATER_NULL = 472, //
-    LIGHT_NULL = 473, //
-    DARK_NULL  = 474, //
-
-    MAGIC_ABSORB       = 475, // Occasionally absorbs magic damage taken, in percents
-    MAGIC_NULL         = 476, // Occasionally annuls magic damage taken, in percents
-    NULL_RANGED_DAMAGE = 239, // Occasionally annuls ranged damage taken, in percents
-    PHYS_ABSORB        = 512, // Occasionally absorbs physical damage taken, in percents
-    ABSORB_DMG_TO_MP   = 516, // Unlike PLD gear mod, works on all damage types (Ethereal Earring)
-
+    ITEM_ADDEFFECT_LVADJUST = 278, // level correction factor to use, if any
+    ITEM_ADDEFFECT_PLACEHLD = 279, // placeholder, want to keep these together and 99% sure we'll use this
+    ITEM_ADDEFFECT_DSTAT    = 280, // value = attacker modifier to use as bonus dmg (mnd, int, etc)
     ITEM_ADDEFFECT_TYPE     = 431, // see procType table in scripts\globals\additional_effects.lua
     ITEM_SUBEFFECT          = 499, // Animation ID of Spikes and Additional Effects
     ITEM_ADDEFFECT_DMG      = 500, // Damage of an items Additional Effect or Spikes
@@ -1000,9 +1002,9 @@ enum class Mod
     // 570 through 825 used by WS DMG mods these are not spares.
     //
     // SPARE IDs:
-    // 141 to 143
+    // 141
     // 217 to 223
-    // 273 to 280
+    // 273 to 277
     //
     // SPARE = 1080 and onward
 };

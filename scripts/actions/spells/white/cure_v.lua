@@ -102,7 +102,10 @@ spellObject.onSpellCast = function(caster, target, spell)
         target:addHP(final)
 
         target:wakeUp()
-        caster:updateEnmityFromCure(target, 65535)
+
+        -- pass in fixed enmity values of 300 CE and 600 VE
+        caster:updateEnmityFromCure(target, final, 300, 600)
+
     else
         if target:isUndead() then -- e.g. PCs healing skeles for damage (?)
             spell:setMsg(xi.msg.basic.MAGIC_DMG)

@@ -20,6 +20,7 @@ zones[xi.zone.GRAUBERG_S] =
         FISHING_MESSAGE_OFFSET        = 7061, -- You can't fish here.
         A_SHIVER_RUNS_DOWN            = 7431, -- A shiver runs down your spine...
         ATTEND_TO_MORE_PRESSING       = 7432, -- Perhaps you should first attend to more pressing matters...
+        CAMPAIGN_RESULTS_TALLIED      = 7598, -- Campaign results tallied.
         HARVESTING_IS_POSSIBLE_HERE   = 7699, -- Harvesting is possible here if you have <item>.
         SUITABLE_PLACE_TO_SOAK        = 8271, -- This seems to be a suitable place to soak <item>.
         MYSTERIOUS_COLUMN_ROTATES     = 8374, -- A mysterious column of floating stones rotates hypnotically before you.
@@ -50,6 +51,7 @@ zones[xi.zone.GRAUBERG_S] =
     },
     npc =
     {
+        CAMPAIGN_NPC_OFFSET = GetFirstID('Ulaciont_RK'), -- San, Bas, Win, Flag +4, CA
         HARVESTING          = GetTableOfIDs('Harvesting_Point'),
         INDESCRIPT_MARKINGS = 17142586,
     },

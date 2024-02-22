@@ -16,6 +16,7 @@ zones[xi.zone.THE_ELDIEME_NECROPOLIS_S] =
         LOGIN_NUMBER                  = 7003, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
         MEMBERS_LEVELS_ARE_RESTRICTED = 7023, -- Your party is unable to participate because certain members' levels are restricted.
         LAYTON_SHOP_DIALOG            = 7115, -- Might you be a student of the same field as I? If that is the case, I might be able to provide you with the proper grimoires...at a price, of course.
+        CAMPAIGN_RESULTS_TALLIED      = 7510, -- Campaign results tallied.
         SARCOPHAGUS_SEALED            = 7609, -- It is a stone sarcophagus with the lid sealed tight. It cannot be opened.
         NAMES_CARVED_ON_STONE         = 7610, -- The names of the deceased in this area are carved upon the stone.
         YOU_CAN_NOW_BECOME_A_SCHOLAR  = 7724, -- You can now become a scholar!
@@ -28,6 +29,7 @@ zones[xi.zone.THE_ELDIEME_NECROPOLIS_S] =
     },
     npc =
     {
+        CAMPAIGN_NPC_OFFSET = GetFirstID('Renvriche_TK'), -- San, Bas, Win, Flag +4, CA
     },
 }
 

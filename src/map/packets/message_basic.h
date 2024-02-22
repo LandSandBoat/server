@@ -46,8 +46,8 @@ enum MSGBASIC_ID : uint16
     MSGBASIC_SHADOW_ABSORB         = 31,  // .. of <target>'s shadows absorb the damage and disappear.
     MSGBASIC_NOT_ENOUGH_MP         = 34,  // The <player> does not have enough MP to cast (nullptr).
     MSGBASIC_NO_NINJA_TOOLS        = 35,  // The <player> lacks the ninja tools to cast (nullptr).
-    MSGBASIC_CANNOT_CAST_SPELL     = 47,  // >player> cannot cast <spell>.
-    MSGBASIC_CANNOT_USE_IN_AREA    = 40,  // cannot use in this area
+    MSGBASIC_CANNOT_CAST_SPELL     = 47,  // <player> cannot cast <spell>.
+    MSGBASIC_CANNOT_IN_THIS_AREA   = 40,  // cannot use in this area
     MSGBASIC_UNABLE_TO_CAST_SPELLS = 49,  // The <player> is unable to cast spells.
     MSGBASIC_MAGIC_NO_EFFECT       = 75,  // <caster>'s <spell> has no effect on <target>.
     MSGBASIC_IS_PARALYZED_2        = 84,  // <target> is paralyzed.
@@ -70,7 +70,6 @@ enum MSGBASIC_ID : uint16
     MSGBASIC_CANNOT_ATTACK_TARGET     = 446, // You cannot attack that target
     MSGBASIC_NEEDS_2H_WEAPON          = 307, // That action requires a two-handed weapon.
     MSGBASIC_USES_BUT_MISSES          = 324, // The <player> uses .. but misses <target>.
-    MSGBASIC_CANT_BE_USED_IN_AREA     = 316, // That action cannot be used in this area.
     MSGBASIC_REQUIRES_SHIELD          = 199, // That action requires a shield.
 
     // Spikes
@@ -124,6 +123,10 @@ enum MSGBASIC_ID : uint16
     MSGBASIC_DIFFICULT_TO_CHARM   = 212, // It would be difficult for the <player> to charm <target>.
     MSGBASIC_MIGHT_BE_ABLE_CHARM  = 213, // The <player> might be able to charm <target>.
     MSGBASIC_SHOULD_BE_ABLE_CHARM = 214, // The <player> should be able to charm <target>.
+
+    // Misc "you can't do that" TODO: sort this whole enum, these arbitrary groups are painful
+    MSGBASIC_CANNOT_USE_IN_AREA = 316, // That action cannot be used in this area.
+    MSGBASIC_YOUR_MOUNT_REFUSES = 339, // Your mount senses a hostile presence and refuses to come to your side.
 
     // Checkparam
     MSGBASIC_CHECKPARAM_NAME      = 733,

@@ -249,7 +249,7 @@ bool CEnmityContainer::HasID(uint32 TargetID)
  *                                                                       *
  ************************************************************************/
 
-void CEnmityContainer::UpdateEnmityFromCure(CBattleEntity* PEntity, uint8 level, int32 CureAmount, bool isCureV)
+void CEnmityContainer::UpdateEnmityFromCure(CBattleEntity* PEntity, uint8 level, int32 CureAmount, int32 fixedCE, int32 fixedVE)
 {
     TracyZoneScoped;
     if (!IsWithinEnmityRange(PEntity))
@@ -262,10 +262,10 @@ void CEnmityContainer::UpdateEnmityFromCure(CBattleEntity* PEntity, uint8 level,
     float bonus                  = CalculateEnmityBonus(PEntity);
     float tranquilHeartReduction = 1.f - battleutils::HandleTranquilHeart(PEntity);
 
-    if (isCureV)
+    if (fixedCE > 0 || fixedVE > 0)
     {
-        CE = (int32)(300.f * bonus * tranquilHeartReduction);
-        VE = (int32)(600.f * bonus * tranquilHeartReduction);
+        CE = (int32)(fixedCE * bonus * tranquilHeartReduction);
+        VE = (int32)(fixedVE * bonus * tranquilHeartReduction);
     }
     else
     {
@@ -439,6 +439,14 @@ CBattleEntity* CEnmityContainer::GetHighestEnmity()
             auto* POwner = PEnmityObject.PEnmityOwner;
             if (!POwner || (POwner->allegiance != m_EnmityHolder->allegiance))
             {
+                // Deal with ties by preferring current battle target
+                // Check if there is a tie, the current highest entity is valid, the mob has a battle target,
+                if (Enmity == HighestEnmity && highest != m_EnmityList.end() && m_EnmityHolder->GetBattleTargetID() != 0 &&
+                    // the current highest entity is the current battle target
+                    highest->second.PEnmityOwner && highest->second.PEnmityOwner->targid == m_EnmityHolder->GetBattleTargetID())
+                {
+                    continue;
+                }
                 active        = PEnmityObject.active;
                 HighestEnmity = Enmity;
                 highest       = it;

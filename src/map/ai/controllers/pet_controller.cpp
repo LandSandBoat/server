@@ -31,7 +31,7 @@ CPetController::CPetController(CPetEntity* _PPet)
 : CMobController(_PPet)
 , PPet(_PPet)
 {
-    //#TODO: this probably will have to depend on pet type (automaton does WS on its own..)
+    // #TODO: this probably will have to depend on pet type (automaton does WS on its own..)
     SetWeaponSkillEnabled(false);
 }
 
@@ -50,9 +50,15 @@ void CPetController::Tick(time_point tick)
 
 void CPetController::DoRoamTick(time_point tick)
 {
-    if ((PPet->PMaster == nullptr || PPet->PMaster->isDead()) && PPet->isAlive())
+    if ((PPet->PMaster == nullptr || PPet->PMaster->isDead()) && PPet->isAlive() && PPet->objtype != TYPE_MOB)
     {
         PPet->Die();
+        return;
+    }
+
+    // if pet cannot change state (for example because pet is asleep) then just return
+    if (!PPet->PAI->CanChangeState())
+    {
         return;
     }
 

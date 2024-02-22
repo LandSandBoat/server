@@ -3849,9 +3849,11 @@ INSERT INTO `mob_skill_lists` VALUES ('Zmey_Gorynych',2001,380); -- scythe_tail
 
 INSERT INTO `mob_skill_lists` VALUES ('Copper_Borer',2002,1817); -- thermal_pulse
 
-INSERT INTO `mob_skill_lists` VALUES ('Gharial',2003,2101); -- demoralizing_roar
+INSERT INTO `mob_skill_lists` VALUES ('Atkorkamuy',2003,463); -- whirlwind
 
--- Next available ID: 2004
+INSERT INTO `mob_skill_lists` VALUES ('Gharial',2004,2101); -- demoralizing_roar
+
+-- Next available ID: 2005
 
 -- ------------------------------------------------------------
 -- Start of Ambuscade section

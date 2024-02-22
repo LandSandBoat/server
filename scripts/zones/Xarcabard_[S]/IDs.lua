@@ -72,7 +72,8 @@ zones[xi.zone.XARCABARD_S] =
             {
                 17338596, -- Yilbegan
             }
-        }
+        },
+        ZIRNITRA = GetFirstID('Zirnitra'),
     },
 
     npc =

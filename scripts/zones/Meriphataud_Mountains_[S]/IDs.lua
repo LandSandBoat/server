@@ -16,6 +16,7 @@ zones[xi.zone.MERIPHATAUD_MOUNTAINS_S] =
         LOGIN_CAMPAIGN_UNDERWAY       = 7002, -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!
         LOGIN_NUMBER                  = 7003, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
         MEMBERS_LEVELS_ARE_RESTRICTED = 7023, -- Your party is unable to participate because certain members' levels are restricted.
+        CAMPAIGN_RESULTS_TALLIED      = 7518, -- Campaign results tallied.
         ALREADY_OBTAINED_TELE         = 7603, -- You already possess the gate crystal for this telepoint.
         VOIDWALKER_DESPAWN            = 7872, -- The monster fades before your eyes, a look of disappointment on its face.
         VOIDWALKER_NO_MOB             = 7919, -- The <keyitem> quivers ever so slightly, but emits no light. There seem to be no monsters in the area.
@@ -72,6 +73,7 @@ zones[xi.zone.MERIPHATAUD_MOUNTAINS_S] =
 
     npc =
     {
+        CAMPAIGN_NPC_OFFSET = GetFirstID('Raurart_RK'), -- San, Bas, Win, Flag +4, CA
         INDESCRIPT_MARKINGS = 17175342,
     },
 }

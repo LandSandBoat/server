@@ -1,4 +1,7 @@
-000 - Display nothing
+These are typically used with messageBasic. Other message types may possibly use the same index.
+Found in ROM/27/76.dat
+
+000 - dummy (internally used to display nothing)
 001 - <actor> hits <target> for <amount> points of damage.
 002 - <caster> casts <spell>. <target> takes <amount> damage.
 003 - <caster> starts casting <spell>.

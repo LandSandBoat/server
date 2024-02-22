@@ -17,6 +17,7 @@ zones[xi.zone.LA_VAULE_S] =
         MEMBERS_LEVELS_ARE_RESTRICTED = 7023, -- Your party is unable to participate because certain members' levels are restricted.
         FISHING_MESSAGE_OFFSET        = 7061, -- You can't fish here.
         GATE_IS_LOCKED                = 7207, -- The gate is locked.
+        CAMPAIGN_RESULTS_TALLIED      = 7598, -- Campaign results tallied.
         DOOR_IS_LOCKED                = 7728, -- The door is locked.
         PARTY_MEMBERS_HAVE_FALLEN     = 8033, -- All party members have fallen in battle. Now leaving the battlefield.
         THE_PARTY_WILL_BE_REMOVED     = 8040, -- If all party members' HP are still zero after # minute[/s], the party will be removed from the battlefield.
@@ -29,6 +30,7 @@ zones[xi.zone.LA_VAULE_S] =
         {
             [17125431] = 17125433, -- 375.737 0.272 -174.487
         },
+
         ASHMAKER_GOTBLUT_PH =
         {
             [17125450] = 17125452, -- 234.481 3.424 -241.751
@@ -36,6 +38,7 @@ zones[xi.zone.LA_VAULE_S] =
     },
     npc =
     {
+        CAMPAIGN_NPC_OFFSET = GetFirstID('Framaraix_TK'), -- San, Bas, Win, Flag +4, CA
     },
 }
 
