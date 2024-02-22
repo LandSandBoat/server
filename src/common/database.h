@@ -51,12 +51,12 @@ namespace db
         auto getConnection() -> std::shared_ptr<sql::Connection>;
 
         // Base case
-        inline void binder(std::unique_ptr<sql::PreparedStatement>&, int&)
+        inline void binder(std::unique_ptr<sql::PreparedStatement>& stmt, int& counter)
         {
         }
 
         template <typename T, typename... Args>
-        void binder(std::unique_ptr<sql::PreparedStatement>& stmt, int& counter, const T& first, const Args&&... rest)
+        void binder(std::unique_ptr<sql::PreparedStatement>& stmt, int& counter, T&& first, Args&&... rest)
         {
             if constexpr (std::is_same_v<std::decay_t<T>, signed int>)
             {
@@ -74,10 +74,6 @@ namespace db
             {
                 stmt->setByte(counter, first);
             }
-            else if constexpr (std::is_same_v<std::decay_t<T>, std::string>)
-            {
-                stmt->setString(counter, first.c_str());
-            }
             else if constexpr (std::is_same_v<std::decay_t<T>, bool>)
             {
                 stmt->setBoolean(counter, first);
@@ -89,6 +85,10 @@ namespace db
             else if constexpr (std::is_same_v<std::decay_t<T>, float>)
             {
                 stmt->setFloat(counter, first);
+            }
+            else if constexpr (std::is_same_v<std::decay_t<T>, std::string>)
+            {
+                stmt->setString(counter, first.c_str());
             }
             else if constexpr (std::is_convertible_v<T, const char*>)
             {

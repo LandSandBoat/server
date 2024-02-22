@@ -21,6 +21,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 
 #include "common/async.h"
 #include "common/blowfish.h"
+#include "common/database.h"
 #include "common/logging.h"
 #include "common/md52.h"
 #include "common/mmo.h"
@@ -2554,10 +2555,13 @@ void SmallPacket0x04D(map_session_data_t* const PSession, CCharEntity* const PCh
 
             if (PChar->UContainer->IsSlotEmpty(slotID))
             {
-                int32 ret = _sql->Query("SELECT charid, accid FROM chars WHERE charname = '%s' LIMIT 1;", str(data[0x10]));
-                if (ret != SQL_ERROR && _sql->NumRows() > 0 && _sql->NextRow() == SQL_SUCCESS)
+                // TODO: Validate me
+                auto senderName = str(data[0x10]);
+
+                auto rset = db::preparedStmt("SELECT charid, accid FROM chars WHERE charname = '?' LIMIT 1;", senderName);
+                if (rset && rset->rowsCount() && rset->next())
                 {
-                    uint32 charid = _sql->GetUIntData(0);
+                    uint32 charid = rset->getUInt("charid");
 
                     if (PItem->getFlag() & ITEM_FLAG_NODELIVERY)
                     {
@@ -2566,13 +2570,19 @@ void SmallPacket0x04D(map_session_data_t* const PSession, CCharEntity* const PCh
                             return;
                         }
 
-                        uint32 accid = _sql->GetUIntData(1);
+                        uint32 accid = rset->getUInt("accid");
 
-                        ret = _sql->Query("SELECT COUNT(*) FROM chars WHERE charid = '%u' AND accid = '%u' LIMIT 1;", PChar->id, accid);
-                        if (ret == SQL_ERROR || _sql->NextRow() != SQL_SUCCESS || _sql->GetUIntData(0) == 0)
+                        // clang-format off
+                        auto exists = [&]() -> bool
+                        {
+                            auto rset2 = db::query(fmt::format("SELECT COUNT(*) FROM chars WHERE charid = '{}' AND accid = '{}' LIMIT 1;", PChar->id, accid));
+                            return rset2 && rset2->next() && rset2->getUInt("COUNT(*)") > 0;
+                        }();
+                        if (!exists)
                         {
                             return;
                         }
+                        // clang-format on
                     }
 
                     CItem* PUBoxItem = itemutils::GetItem(PItem->getID());
@@ -2594,12 +2604,11 @@ void SmallPacket0x04D(map_session_data_t* const PSession, CCharEntity* const PCh
                     char extra[sizeof(PItem->m_extra) * 2 + 1];
                     _sql->EscapeStringLen(extra, (const char*)PItem->m_extra, sizeof(PItem->m_extra));
 
-                    ret = _sql->Query(
-                        "INSERT INTO delivery_box(charid, charname, box, slot, itemid, itemsubid, quantity, extra, senderid, sender) VALUES(%u, "
-                        "'%s', 2, %u, %u, %u, %u, '%s', %u, '%s'); ",
-                        PChar->id, PChar->getName(), slotID, PItem->getID(), PItem->getSubID(), quantity, extra, charid, str(data[0x10]));
+                    auto rset3 = db::preparedStmt(
+                        "INSERT INTO delivery_box(charid, charname, box, slot, itemid, itemsubid, quantity, extra, senderid, sender) VALUES(?, ?, 2, ?, ?, ?, ?, ?, ?, ?);",
+                        PChar->id, PChar->getName(), slotID, PItem->getID(), PItem->getSubID(), quantity, extra, charid, senderName);
 
-                    if (ret != SQL_ERROR && _sql->AffectedRows() == 1 && charutils::UpdateItem(PChar, LOC_INVENTORY, invslot, -(int32)quantity))
+                    if (rset3 && rset3->rowInserted() == 1 && charutils::UpdateItem(PChar, LOC_INVENTORY, invslot, -(int32)quantity))
                     {
                         PChar->UContainer->SetItem(slotID, PUBoxItem);
                         PChar->pushPacket(new CDeliveryBoxPacket(action, boxtype, PUBoxItem, slotID, PChar->UContainer->GetItemsCount(), 1));
