@@ -18,12 +18,14 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
     params.numHits = 1
     params.ftpMod = { 1, 1, 1 }
     params.str_wsc = 0.5 params.vit_wsc = 0.5
-    params.critVaries = { 0.1, 0.2, 0.4 }
+    params.multiHitfTP = true -- http://wiki.ffo.jp/html/15880.html
+    params.critVaries = { 0.2, 0.3, 0.5 }
+    params.atkVaries  = { 2.5, 2.5, 2.5 }
 
-    if xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES then
-        params.multiHitfTP = true -- http://wiki.ffo.jp/html/15880.html
-        params.critVaries = { 0.2, 0.3, 0.5 }
-        params.atkVaries  = { 2.5, 2.5, 2.5 }
+    if not xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES then
+        params.multiHitfTP = nil
+        params.critVaries  = { 0.1, 0.2, 0.4 }
+        params.atkVaries   = nil
     end
 
     -- Apply aftermath
