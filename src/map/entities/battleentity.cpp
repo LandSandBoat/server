@@ -2178,9 +2178,9 @@ bool CBattleEntity::OnAttack(CAttackState& state, action_t& action)
                     }
                     else
                     {
-                        int16 naturalh2hDMG = 0;
-                        auto* targ_weapon   = dynamic_cast<CItemWeapon*>(PTarget->m_Weapons[SLOT_MAIN]);
-                        SKILLTYPE skilltype = SKILLTYPE::SKILL_NONE;
+                        int16     naturalh2hDMG = 0;
+                        auto*     targ_weapon   = dynamic_cast<CItemWeapon*>(PTarget->m_Weapons[SLOT_MAIN]);
+                        SKILLTYPE skilltype     = SKILLTYPE::SKILL_NONE;
 
                         if (PTarget->objtype == TYPE_PC)
                         {

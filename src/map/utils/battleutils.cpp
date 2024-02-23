@@ -814,7 +814,7 @@ namespace battleutils
                 bool crit = battleutils::GetCritHitRate(PDefender, PAttacker, true) > xirand::GetRandomNumber(100);
 
                 // Dmg math.
-                float  DamageRatio = GetDamageRatio(PDefender, PAttacker, crit, 0.f, skilltype);
+                float  DamageRatio = GetDamageRatio(PDefender, PAttacker, crit, 1.f, skilltype);
                 uint16 dmg         = (uint32)((PDefender->GetMainWeaponDmg() + battleutils::GetFSTR(PDefender, PAttacker, SLOT_MAIN)) * DamageRatio);
                 dmg                = attackutils::CheckForDamageMultiplier(((CCharEntity*)PDefender), dynamic_cast<CItemWeapon*>(PDefender->m_Weapons[SLOT_MAIN]), dmg,
                                                                            PHYSICAL_ATTACK_TYPE::NORMAL, SLOT_MAIN);
@@ -2899,8 +2899,8 @@ namespace battleutils
         float pDIF = 1.0f;
 
         auto levelCorrectionFunc = lua["xi"]["combat"]["levelCorrection"]["isLevelCorrectedZone"];
-        auto meleePDIFFunc = lua["xi"]["combat"]["physical"]["calculateMeleePDIF"];
-        auto luaAttackerEntity = CLuaBaseEntity(PAttacker);
+        auto meleePDIFFunc       = lua["xi"]["combat"]["physical"]["calculateMeleePDIF"];
+        auto luaAttackerEntity   = CLuaBaseEntity(PAttacker);
 
         if (meleePDIFFunc.valid() && levelCorrectionFunc.valid())
         {
