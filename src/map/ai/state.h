@@ -25,27 +25,23 @@
 
 #include "common/mmo.h"
 #include "packets/message_basic.h"
+
 #include <memory>
+#include <nonstd/expected.hpp>
+#include <optional>
 
 class CBattleEntity;
-
-class CStateInitException : public std::exception
-{
-public:
-    explicit CStateInitException(std::unique_ptr<CBasicPacket> _msg)
-    : std::exception()
-    , packet(std::move(_msg))
-    {
-    }
-    std::unique_ptr<CBasicPacket> packet;
-};
 
 class CState
 {
 public:
+    typedef nonstd::expected<void, std::optional<std::unique_ptr<CBasicPacket>>> StateResult;
+
     CState(CBaseEntity* PEntity, uint16 _targid);
 
     virtual ~CState() = default;
+
+    virtual StateResult Initialize() = 0;
 
     CBaseEntity* GetTarget() const;
     void         SetTarget(uint16 targid);

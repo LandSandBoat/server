@@ -23,31 +23,35 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #define _CABILITY_STATE_H
 
 #include "ability.h"
-#include "state.h"
+#include "ai/state.h"
 
 class CCharEntity;
 
-class CAbilityState : public CState
+class CAbilityState final : public CState
 {
 public:
     CAbilityState(CBattleEntity* PEntity, uint16 targid, uint16 abilityid);
+
+    auto Initialize() -> CState::StateResult override;
 
     CAbility* GetAbility();
 
     void ApplyEnmity();
 
 protected:
-    virtual bool CanChangeState() override;
-    virtual bool CanFollowPath() override
+    bool CanChangeState() override;
+    bool CanFollowPath() override
     {
         return true;
     }
-    virtual bool CanInterrupt() override
+
+    bool CanInterrupt() override
     {
         return true;
     }
-    virtual bool Update(time_point tick) override;
-    virtual void Cleanup(time_point tick) override
+
+    bool Update(time_point tick) override;
+    void Cleanup(time_point tick) override
     {
     }
 
@@ -55,7 +59,8 @@ protected:
 
 private:
     duration                  m_castTime{ 0s };
-    CBattleEntity* const      m_PEntity;
+    CBattleEntity* const      m_PBattleEntity;
+    uint16                    m_abilityId;
     std::unique_ptr<CAbility> m_PAbility;
 };
 

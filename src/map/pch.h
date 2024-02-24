@@ -100,6 +100,8 @@
 #include <fmt/format.h>
 #include <fmt/printf.h>
 
+#include <nonstd/expected.hpp>
+
 #include <spdlog/common.h>
 #include <spdlog/spdlog.h>
 

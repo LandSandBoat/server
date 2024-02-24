@@ -22,12 +22,15 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #ifndef _CSPAWN_STATE_H
 #define _CSPAWN_STATE_H
 
-#include "state.h"
+#include "ai/state.h"
 
 class CDespawnState : public CState
 {
 public:
     CDespawnState(CBaseEntity* PEntity, bool instantDespawn);
+
+    auto Initialize() -> CState::StateResult override { return CState::StateResult(); }
+
     virtual bool Update(time_point tick) override;
     virtual void Cleanup(time_point tick) override;
     virtual bool CanChangeState() override;

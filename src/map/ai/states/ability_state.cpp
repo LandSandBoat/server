@@ -35,27 +35,33 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 
 CAbilityState::CAbilityState(CBattleEntity* PEntity, uint16 targid, uint16 abilityid)
 : CState(PEntity, targid)
-, m_PEntity(PEntity)
+, m_PBattleEntity(PEntity)
+, m_abilityId(abilityid)
 {
-    CAbility* PAbility = ability::GetAbility(abilityid);
+}
 
+CState::StateResult CAbilityState::Initialize()
+{
+    CAbility* PAbility = ability::GetAbility(m_abilityId);
     if (!PAbility)
     {
-        throw CStateInitException(std::make_unique<CMessageBasicPacket>(m_PEntity, m_PEntity, 0, 0, MSGBASIC_UNABLE_TO_USE_JA));
+        return nonstd::make_unexpected(std::make_unique<CMessageBasicPacket>(m_PBattleEntity, m_PBattleEntity, 0, 0, MSGBASIC_UNABLE_TO_USE_JA));
     }
-    auto* PTarget = m_PEntity->IsValidTarget(m_targid, PAbility->getValidTarget(), m_errorMsg);
 
+    auto* PTarget = m_PBattleEntity->IsValidTarget(m_targid, PAbility->getValidTarget(), m_errorMsg);
     if (!PTarget || m_errorMsg)
     {
-        throw CStateInitException(std::move(m_errorMsg));
+        return nonstd::make_unexpected(std::move(m_errorMsg));
     }
+
     SetTarget(PTarget->targid);
+
     m_PAbility = std::make_unique<CAbility>(*PAbility);
     m_castTime = PAbility->getCastTime();
     if (m_castTime > 0s)
     {
         action_t action;
-        action.id              = PEntity->id;
+        action.id              = m_PEntity->id;
         action.actiontype      = ACTION_WEAPONSKILL_START;
         auto& list             = action.getNewActionList();
         list.ActionTargetID    = PTarget->id;
@@ -64,9 +70,11 @@ CAbilityState::CAbilityState(CBattleEntity* PEntity, uint16 targid, uint16 abili
         actionTarget.animation = 121;
         actionTarget.messageID = 326;
         actionTarget.param     = PAbility->getID();
-        PEntity->loc.zone->PushPacket(PEntity, CHAR_INRANGE_SELF, new CActionPacket(action));
+        m_PEntity->loc.zone->PushPacket(m_PEntity, CHAR_INRANGE_SELF, new CActionPacket(action));
     }
     m_PEntity->PAI->EventHandler.triggerListener("ABILITY_START", CLuaBaseEntity(m_PEntity), CLuaAbility(PAbility));
+
+    return CState::StateResult();
 }
 
 CAbility* CAbilityState::GetAbility()
@@ -82,13 +90,13 @@ void CAbilityState::ApplyEnmity()
         if (PTarget->objtype == TYPE_MOB && !(m_PAbility->getCE() == 0 && m_PAbility->getVE() == 0))
         {
             CMobEntity* mob = (CMobEntity*)PTarget;
-            mob->PEnmityContainer->UpdateEnmity(m_PEntity, m_PAbility->getCE(), m_PAbility->getVE(), false, m_PAbility->getID() == ABILITY_CHARM);
-            battleutils::ClaimMob(mob, m_PEntity);
+            mob->PEnmityContainer->UpdateEnmity(m_PBattleEntity, m_PAbility->getCE(), m_PAbility->getVE(), false, m_PAbility->getID() == ABILITY_CHARM);
+            battleutils::ClaimMob(mob, m_PBattleEntity);
         }
     }
     else if (PTarget->allegiance == m_PEntity->allegiance)
     {
-        battleutils::GenerateInRangeEnmity(m_PEntity, m_PAbility->getCE(), m_PAbility->getVE());
+        battleutils::GenerateInRangeEnmity(m_PBattleEntity, m_PAbility->getCE(), m_PAbility->getVE());
     }
 }
 
@@ -104,9 +112,9 @@ bool CAbilityState::Update(time_point tick)
         if (CanUseAbility())
         {
             action_t action;
-            m_PEntity->OnAbility(*this, action);
-            m_PEntity->PAI->EventHandler.triggerListener("ABILITY_USE", CLuaBaseEntity(m_PEntity), CLuaBaseEntity(GetTarget()), CLuaAbility(m_PAbility.get()), CLuaAction(&action));
-            m_PEntity->loc.zone->PushPacket(m_PEntity, CHAR_INRANGE_SELF, new CActionPacket(action));
+            m_PBattleEntity->OnAbility(*this, action);
+            m_PBattleEntity->PAI->EventHandler.triggerListener("ABILITY_USE", CLuaBaseEntity(m_PEntity), CLuaBaseEntity(GetTarget()), CLuaAbility(m_PAbility.get()), CLuaAction(&action));
+            m_PBattleEntity->loc.zone->PushPacket(m_PEntity, CHAR_INRANGE_SELF, new CActionPacket(action));
             if (auto* target = GetTarget())
             {
                 target->PAI->EventHandler.triggerListener("ABILITY_TAKE", CLuaBaseEntity(target), CLuaBaseEntity(m_PEntity), CLuaAbility(m_PAbility.get()), CLuaAction(&action));

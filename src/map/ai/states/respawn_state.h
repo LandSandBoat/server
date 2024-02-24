@@ -22,20 +22,25 @@
 #ifndef _CRESPAWN_STATE_H
 #define _CRESPAWN_STATE_H
 
-#include "state.h"
+#include "ai/state.h"
 
 class CRespawnState : public CState
 {
 public:
     CRespawnState(CBaseEntity* PEntity, duration spawnTime);
-    virtual bool Update(time_point tick) override;
-    virtual void Cleanup(time_point tick) override;
-    virtual bool CanChangeState() override;
-    virtual bool CanFollowPath() override
+
+    auto Initialize() -> CState::StateResult override { return CState::StateResult(); }
+
+    bool Update(time_point tick) override;
+    void Cleanup(time_point tick) override;
+    bool CanChangeState() override;
+
+    bool CanFollowPath() override
     {
         return false;
     }
-    virtual bool CanInterrupt() override
+
+    bool CanInterrupt() override
     {
         return false;
     }

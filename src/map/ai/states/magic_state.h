@@ -23,7 +23,7 @@
 #define _CMAGIC_STATE_H
 
 #include "spell.h"
-#include "state.h"
+#include "ai/state.h"
 
 struct action_t;
 
@@ -38,6 +38,9 @@ class CMagicState : public CState
 {
 public:
     CMagicState(CBattleEntity* PEntity, uint16 targid, SpellID spellid, uint8 flags = 0);
+
+    auto Initialize() -> CState::StateResult override { return CState::StateResult(); }
+
     virtual bool Update(time_point tick) override;
     virtual void Cleanup(time_point tick) override;
     virtual bool CanChangeState() override;

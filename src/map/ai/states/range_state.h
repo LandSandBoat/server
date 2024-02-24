@@ -22,13 +22,15 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #ifndef _CRANGE_STATE_H
 #define _CRANGE_STATE_H
 
-#include "state.h"
+#include "ai/state.h"
 class CCharEntity;
 
 class CRangeState : public CState
 {
 public:
     CRangeState(CBattleEntity* PEntity, uint16 targid);
+
+    auto Initialize() -> CState::StateResult override { return CState::StateResult(); }
 
     void SpendCost();
     bool IsRapidShot()
