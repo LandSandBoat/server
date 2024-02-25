@@ -121,7 +121,7 @@ void CCharPacket::updateWith(CCharEntity* PChar, ENTITYUPDATE type, uint8 update
                 ref<uint8>(0x29) = static_cast<uint8>(PChar->allegiance);
 
                 // Mentor flag..
-                if (PChar->menuConfigFlags.flags & NFLAG_MENTOR)
+                if (PChar->isMentor)
                 {
                     ref<uint8>(0x2B) = 0x01;
                 }

@@ -573,6 +573,31 @@ int8 CCharEntity::getShieldSize()
     return PItem->getShieldSize();
 }
 
+bool CCharEntity::hasBazaar()
+{
+    if (isSettingBazaarPrices)
+    {
+        return false;
+    }
+
+    CItemContainer* playerInventory = getStorage(LOC_INVENTORY);
+
+    if (playerInventory)
+    {
+        for (uint8 slotID = 1; slotID <= playerInventory->GetSize(); ++slotID)
+        {
+            CItem* PItem = playerInventory->GetItem(slotID);
+
+            if ((PItem != nullptr) && (PItem->getCharPrice() != 0))
+            {
+                return true;
+                break;
+            }
+        }
+    }
+    return false;
+}
+
 void CCharEntity::SetName(const std::string& name)
 {
     this->name = name;

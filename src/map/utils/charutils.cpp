@@ -1269,14 +1269,9 @@ namespace charutils
         {
             PItem->setSubType(ITEM_LOCKED);
 
-            PChar->nameflags.flags |= FLAG_LINKSHELL;
             PChar->pushPacket(new CInventoryItemPacket(PItem, PChar->equipLoc[SLOT_LINK1], PChar->equip[SLOT_LINK1]));
             PChar->pushPacket(new CInventoryAssignPacket(PItem, INV_LINKSHELL));
             PChar->pushPacket(new CLinkshellEquipPacket(PChar, 1));
-        }
-        else
-        {
-            PChar->nameflags.flags &= ~FLAG_LINKSHELL;
         }
 
         PItem = PChar->getEquip(SLOT_LINK2);

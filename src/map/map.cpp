@@ -1092,10 +1092,12 @@ int32 map_cleanup(time_point tick, CTaskMgr::CTask* PTask)
 
         if ((time(nullptr) - map_session_data->last_update) > 5)
         {
-            if (PChar != nullptr && !(PChar->nameflags.flags & FLAG_DC))
+            if (PChar != nullptr && !PChar->isLinkDead)
             {
-                PChar->nameflags.flags |= FLAG_DC;
+                PChar->isLinkDead = true;
                 PChar->updatemask |= UPDATE_HP;
+
+                // Is this unintentionally sending extra packets when a player is disconnecting?
                 if (PChar->status == STATUS_TYPE::NORMAL)
                 {
                     PChar->loc.zone->SpawnPCs(PChar);
@@ -1224,9 +1226,9 @@ int32 map_cleanup(time_point tick, CTaskMgr::CTask* PTask)
                 }
             }
         }
-        else if (PChar != nullptr && (PChar->nameflags.flags & FLAG_DC))
+        else if (PChar != nullptr && PChar->isLinkDead)
         {
-            PChar->nameflags.flags &= ~FLAG_DC;
+            PChar->isLinkDead = false;
             PChar->updatemask |= UPDATE_HP;
 
             if (PChar->status == STATUS_TYPE::NORMAL)

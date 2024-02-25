@@ -306,6 +306,15 @@ public:
 
     skills_t RealSkills; // The structure of all the real skills of the character, with an accuracy of 0.1 and not limited by the level
 
+    bool  isSeekingParty;        // is seeking party or not
+    bool  isAnon;                // is /anon
+    bool  isAway;                // is /away (tells will not go through)
+    bool  isLinkDead;            // Player is d/cing
+    uint8 visibleGmLevel;        // See GmLevel of flags0_t
+    bool  wallhackEnabled;       // GM walk through walls
+    bool  isSettingBazaarPrices; // Is setting bazaar prices (temporarily hide bazaar)
+    bool  isMentor;              // If player is a mentor or not.
+
     nameflags_t nameflags;
     nameflags_t menuConfigFlags;     // These flags are used for MenuConfig packets. Some nameflags values are duplicated.
     uint64      chatFilterFlags;     // Chat filter flags, raw object bytes from incoming packet
@@ -486,6 +495,7 @@ public:
     CharHistory_t m_charHistory;
 
     int8 getShieldSize();
+    bool hasBazaar();
 
     bool getStyleLocked() const;
     void setStyleLocked(bool isStyleLocked);
@@ -521,7 +531,7 @@ public:
     uint32          nextFishTime; // When char is allowed to fish again
     uint32          lastCastTime; // When char last cast their rod
     uint32          fishingToken; // To track fishing process
-    uint16          hookDelay;    // How long it takes to hook a fish
+    uint8           hookDelay;    // How long it takes to hook a fish
 
     void ReloadPartyInc();
     void ReloadPartyDec();

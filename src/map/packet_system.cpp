@@ -1265,7 +1265,7 @@ void SmallPacket0x01A(map_session_data_t* const PSession, CCharEntity* const PCh
                                                                   0,
                                                                   1800,
                                                                   0,
-                                                                  FLAG_CHOCOBO),
+                                                                  0x40), // previously known as nameflag "FLAG_CHOCOBO"
                                                               true);
 
                 PChar->PRecastContainer->Add(RECAST_ABILITY, 256, 60);
@@ -5994,7 +5994,6 @@ void SmallPacket0x0C4(map_session_data_t* const PSession, CCharEntity* const PCh
                     PChar->equipLoc[slot] = 0;
                     if (lsNum == 1)
                     {
-                        PChar->nameflags.flags &= ~FLAG_LINKSHELL;
                         PChar->updatemask |= UPDATE_HP;
                     }
 
@@ -6041,7 +6040,6 @@ void SmallPacket0x0C4(map_session_data_t* const PSession, CCharEntity* const PCh
                     PChar->equipLoc[slot] = LocationID;
                     if (lsNum == 1)
                     {
-                        PChar->nameflags.flags |= FLAG_LINKSHELL;
                         PChar->updatemask |= UPDATE_HP;
                     }
 
@@ -6215,22 +6213,22 @@ void SmallPacket0x0DC(map_session_data_t* const PSession, CCharEntity* const PCh
             if (PChar->PParty)
             {
                 // Can't put flag up while in a party
-                PChar->nameflags.flags &= ~FLAG_INVITE;
+                PChar->isSeekingParty = false;
             }
             else
             {
-                PChar->nameflags.flags ^= FLAG_INVITE;
+                PChar->isSeekingParty = !PChar->isSeekingParty;
             }
             break;
         case NFLAG_AWAY:
             // /away | /online
             if (data.ref<uint8>(0x10) == 1)
             {
-                PChar->nameflags.flags |= FLAG_AWAY;
+                PChar->isAway = true;
             }
             if (data.ref<uint8>(0x10) == 2)
             {
-                PChar->nameflags.flags &= ~FLAG_AWAY;
+                PChar->isAway = false;
             }
             break;
         case NFLAG_ANON:
@@ -6240,12 +6238,12 @@ void SmallPacket0x0DC(map_session_data_t* const PSession, CCharEntity* const PCh
             auto param = data.ref<uint8>(0x10);
             if (param == 1)
             {
-                PChar->nameflags.flags |= FLAG_ANON;
+                PChar->isAnon = true;
                 PChar->menuConfigFlags.flags |= NFLAG_ANON;
             }
             else if (param == 2)
             {
-                PChar->nameflags.flags &= ~FLAG_ANON;
+                PChar->isAnon = false;
                 PChar->menuConfigFlags.flags &= ~NFLAG_ANON;
             }
             if (flags != PChar->nameflags.flags)
@@ -6280,11 +6278,11 @@ void SmallPacket0x0DC(map_session_data_t* const PSession, CCharEntity* const PCh
             // /mentor [on|off]
             if (data.ref<uint8>(0x10) == 1)
             {
-                PChar->menuConfigFlags.flags |= NFLAG_MENTOR;
+                PChar->isMentor = true;
             }
             else if (data.ref<uint8>(0x10) == 2)
             {
-                PChar->menuConfigFlags.flags &= ~NFLAG_MENTOR;
+                PChar->isMentor = false;
             }
             break;
         case NFLAG_NEWPLAYER:
@@ -6664,7 +6662,8 @@ void SmallPacket0x0E7(map_session_data_t* const PSession, CCharEntity* const PCh
         return;
     }
 
-    if (PChar->m_moghouseID || PChar->nameflags.flags & FLAG_GM || PChar->m_GMlevel > 0)
+    // FIXME: Two GM level checks? visibleGmLevel is the GM level visible to other players, and m_GMLevel is the alway-invisible GM level.
+    if (PChar->m_moghouseID || PChar->visibleGmLevel >= 3 || PChar->m_GMlevel > 0)
     {
         charutils::ForceLogout(PChar);
     }
@@ -7797,7 +7796,7 @@ void SmallPacket0x105(map_session_data_t* const PSession, CCharEntity* const PCh
 
     CCharEntity* PTarget = charid != 0 ? PChar->loc.zone->GetCharByID(charid) : (CCharEntity*)PChar->GetEntity(PChar->m_TargID, TYPE_PC);
 
-    if (PTarget != nullptr && PTarget->id == charid && (PTarget->nameflags.flags & FLAG_BAZAAR))
+    if (PTarget != nullptr && PTarget->id == charid && PTarget->hasBazaar())
     {
         PChar->BazaarID.id     = PTarget->id;
         PChar->BazaarID.targid = PTarget->targid;
@@ -7946,7 +7945,6 @@ void SmallPacket0x106(map_session_data_t* const PSession, CCharEntity* const PCh
         if (BazaarIsEmpty)
         {
             PTarget->updatemask |= UPDATE_HP;
-            PTarget->nameflags.flags &= ~FLAG_BAZAAR;
         }
         return;
     }
@@ -7962,22 +7960,11 @@ void SmallPacket0x106(map_session_data_t* const PSession, CCharEntity* const PCh
 void SmallPacket0x109(map_session_data_t* const PSession, CCharEntity* const PChar, CBasicPacket& data)
 {
     TracyZoneScoped;
-    CItemContainer* PStorage = PChar->getStorage(LOC_INVENTORY);
-    if (PStorage == nullptr)
-    {
-        return;
-    }
 
-    for (uint8 slotID = 1; slotID <= PStorage->GetSize(); ++slotID)
+    if (PChar->isSettingBazaarPrices)
     {
-        CItem* PItem = PStorage->GetItem(slotID);
-
-        if ((PItem != nullptr) && (PItem->getCharPrice() != 0))
-        {
-            PChar->nameflags.flags |= FLAG_BAZAAR;
-            PChar->updatemask |= UPDATE_HP;
-            return;
-        }
+        PChar->isSettingBazaarPrices = false;
+        PChar->updatemask |= UPDATE_HP;
     }
 }
 
@@ -8044,7 +8031,7 @@ void SmallPacket0x10B(map_session_data_t* const PSession, CCharEntity* const PCh
     }
     PChar->BazaarCustomers.clear();
 
-    PChar->nameflags.flags &= ~FLAG_BAZAAR;
+    PChar->isSettingBazaarPrices = true;
     PChar->updatemask |= UPDATE_HP;
 }
 
