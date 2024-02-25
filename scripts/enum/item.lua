@@ -4980,6 +4980,7 @@ xi.item =
     PINEAL_HAT                          = 15181,
     WALKURE_MASK                        = 15185,
     MAATS_CAP                           = 15194,
+    ELEGANT_RIBBON                      = 15196,
     YAGUDO_HEADGEAR                     = 15202,
     TSOO_HAJAS_HEADGEAR                 = 15216,
     ENTRANCING_RIBBON                   = 15218,
