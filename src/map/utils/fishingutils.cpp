@@ -36,6 +36,7 @@
 #include "packets/inventory_finish.h"
 #include "packets/inventory_item.h"
 #include "packets/message_special.h"
+#include "packets/message_standard.h"
 #include "packets/message_system.h"
 #include "packets/message_text.h"
 #include "packets/release.h"
@@ -1972,7 +1973,7 @@ namespace fishingutils
             if (PChar->animation != ANIMATION_NONE)
             {
                 PChar->pushPacket(new CMessageTextPacket(PChar, MessageOffset + FISHMESSAGEOFFSET_CANNOTFISH_MOMENT));
-                PChar->pushPacket(new CMessageSystemPacket(0, 0, MSGSYSTEM::CANNOT_USE_COMMAND_AT_THE_MOMENT));
+                PChar->pushPacket(new CMessageSystemPacket(0, 0, MsgStd::CannotUseCommandAtTheMoment));
                 PChar->pushPacket(new CReleasePacket(PChar, RELEASE_TYPE::FISHING));
 
                 return;
@@ -2010,13 +2011,13 @@ namespace fishingutils
             }
             else
             {
-                PChar->pushPacket(new CMessageSystemPacket(0, 0, MSGSYSTEM::CANNOT_USE_COMMAND_AT_THE_MOMENT));
+                PChar->pushPacket(new CMessageSystemPacket(0, 0, MsgStd::CannotUseCommandAtTheMoment));
                 PChar->pushPacket(new CReleasePacket(PChar, RELEASE_TYPE::FISHING));
             }
         }
         else
         {
-            PChar->pushPacket(new CMessageSystemPacket(0, 0, MSGSYSTEM::CANNOT_USE_COMMAND_AT_THE_MOMENT));
+            PChar->pushPacket(new CMessageSystemPacket(0, 0, MsgStd::CannotUseCommandAtTheMoment));
             PChar->pushPacket(new CReleasePacket(PChar, RELEASE_TYPE::FISHING));
 
             return;

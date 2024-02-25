@@ -1137,7 +1137,7 @@ void SmallPacket0x01A(map_session_data_t* const PSession, CCharEntity* const PCh
             else
             {
                 // You don't have any gysahl greens
-                PChar->pushPacket(new CMessageSystemPacket(4545, 0, MSGSYSTEM::YOU_DONT_HAVE_ANY));
+                PChar->pushPacket(new CMessageSystemPacket(4545, 0, MsgStd::YouDontHaveAny));
             }
         }
         break;
@@ -1199,24 +1199,24 @@ void SmallPacket0x01A(map_session_data_t* const PSession, CCharEntity* const PCh
                 if (type == 0x00 && PChar->getBlockingAid()) // /blockaid off
                 {
                     // Blockaid canceled
-                    PChar->pushPacket(new CMessageSystemPacket(0, 0, MSGSYSTEM::BLOCKAID_CANCELED));
+                    PChar->pushPacket(new CMessageSystemPacket(0, 0, MsgStd::BlockaidCanceled));
                     PChar->setBlockingAid(false);
                 }
                 else if (type == 0x01 && !PChar->getBlockingAid()) // /blockaid on
                 {
                     // Blockaid activated
-                    PChar->pushPacket(new CMessageSystemPacket(0, 0, MSGSYSTEM::BLOCKAID_ACTIVATED));
+                    PChar->pushPacket(new CMessageSystemPacket(0, 0, MsgStd::BlockaidActivated));
                     PChar->setBlockingAid(true);
                 }
                 else if (type == 0x02) // /blockaid
                 {
                     // Blockaid is currently active/inactive
-                    PChar->pushPacket(new CMessageSystemPacket(0, 0, PChar->getBlockingAid() ? MSGSYSTEM::BLOCKAID_CURRENTLY_ACTIVE : MSGSYSTEM::BLOCKAID_CURRENTLY_INACTIVE));
+                    PChar->pushPacket(new CMessageSystemPacket(0, 0, PChar->getBlockingAid() ? MsgStd::BlockaidCurrentlyActive : MsgStd::BlockaidCurrentlyInactive));
                 }
             }
             else
             {
-                PChar->pushPacket(new CMessageSystemPacket(0, 0, MSGSYSTEM::CANNOT_USE_COMMAND_AT_THE_MOMENT));
+                PChar->pushPacket(new CMessageSystemPacket(0, 0, MsgStd::CannotUseCommandAtTheMoment));
             }
         }
         break;
@@ -1592,9 +1592,9 @@ void SmallPacket0x032(map_session_data_t* const PSession, CCharEntity* const PCh
         {
             ShowDebug("%s is blocking trades", PTarget->getName());
             // Target is blocking assistance
-            PChar->pushPacket(new CMessageSystemPacket(0, 0, MSGSYSTEM::TARGET_IS_CURRENTLY_BLOCKING));
+            PChar->pushPacket(new CMessageSystemPacket(0, 0, MsgStd::TargetIsCurrentlyBlocking));
             // Interaction was blocked
-            PTarget->pushPacket(new CMessageSystemPacket(0, 0, MSGSYSTEM::BLOCKED_BY_BLOCKAID));
+            PTarget->pushPacket(new CMessageSystemPacket(0, 0, MsgStd::BlockedByBlockaid));
             PChar->pushPacket(new CTradeActionPacket(PTarget, 0x07));
             return;
         }
@@ -1874,7 +1874,7 @@ void SmallPacket0x036(map_session_data_t* const PSession, CCharEntity* const PCh
     if (PChar->StatusEffectContainer->HasStatusEffectByFlag(EFFECTFLAG_INVISIBLE))
     {
         // "You cannot use that command while invisible."
-        PChar->pushPacket(new CMessageSystemPacket(0, 0, MSGSYSTEM::CANNOT_WHILE_INVISIBLE));
+        PChar->pushPacket(new CMessageSystemPacket(0, 0, MsgStd::CannotWhileInvisible));
         return;
     }
 
@@ -4036,7 +4036,7 @@ void SmallPacket0x05E(map_session_data_t* const PSession, CCharEntity* const PCh
 
                 PChar->loc.p.rotation += 128;
 
-                PChar->pushPacket(new CMessageSystemPacket(0, 0, MSGSYSTEM::COULD_NOT_ENTER)); // You could not enter the next area.
+                PChar->pushPacket(new CMessageSystemPacket(0, 0, MsgStd::CouldNotEnter)); // You could not enter the next area.
                 PChar->pushPacket(new CCSPositionPacket(PChar));
 
                 PChar->status = STATUS_TYPE::NORMAL;
@@ -4046,7 +4046,7 @@ void SmallPacket0x05E(map_session_data_t* const PSession, CCharEntity* const PCh
             {
                 PChar->loc.p.rotation += 128;
 
-                PChar->pushPacket(new CMessageSystemPacket(0, 0, MSGSYSTEM::COULD_NOT_ENTER)); // You could not enter the next area.
+                PChar->pushPacket(new CMessageSystemPacket(0, 0, MsgStd::CouldNotEnter)); // You could not enter the next area.
                 PChar->pushPacket(new CCSPositionPacket(PChar));
 
                 PChar->status = STATUS_TYPE::NORMAL;
@@ -4062,7 +4062,7 @@ void SmallPacket0x05E(map_session_data_t* const PSession, CCharEntity* const PCh
 
                     PChar->loc.p.rotation += 128;
 
-                    PChar->pushPacket(new CMessageSystemPacket(0, 0, MSGSYSTEM::COULD_NOT_ENTER)); // You could not enter the next area.
+                    PChar->pushPacket(new CMessageSystemPacket(0, 0, MsgStd::CouldNotEnter)); // You could not enter the next area.
                     PChar->pushPacket(new CCSPositionPacket(PChar));
 
                     PChar->status = STATUS_TYPE::NORMAL;
@@ -4104,7 +4104,7 @@ void SmallPacket0x05E(map_session_data_t* const PSession, CCharEntity* const PCh
 
         PChar->loc.p.rotation += 128;
 
-        PChar->pushPacket(new CMessageSystemPacket(0, 0, MSGSYSTEM::COULD_NOT_ENTER)); // You could not enter the next area.
+        PChar->pushPacket(new CMessageSystemPacket(0, 0, MsgStd::CouldNotEnter)); // You could not enter the next area.
         PChar->pushPacket(new CCSPositionPacket(PChar));
 
         PChar->status = STATUS_TYPE::NORMAL;
@@ -4291,11 +4291,11 @@ void SmallPacket0x06E(map_session_data_t* const PSession, CCharEntity* const PCh
                     {
                         ShowDebug("%s is blocking party invites", PInvitee->getName());
                         // Target is blocking assistance
-                        PChar->pushPacket(new CMessageSystemPacket(0, 0, MSGSYSTEM::TARGET_IS_CURRENTLY_BLOCKING));
+                        PChar->pushPacket(new CMessageSystemPacket(0, 0, MsgStd::TargetIsCurrentlyBlocking));
                         // Interaction was blocked
-                        PInvitee->pushPacket(new CMessageSystemPacket(0, 0, MSGSYSTEM::BLOCKED_BY_BLOCKAID));
+                        PInvitee->pushPacket(new CMessageSystemPacket(0, 0, MsgStd::BlockedByBlockaid));
                         // You cannot invite that person at this time.
-                        PChar->pushPacket(new CMessageSystemPacket(0, 0, MSGSYSTEM::YOU_CANNOT_INVITE_THAT_PERSON));
+                        PChar->pushPacket(new CMessageSystemPacket(0, 0, MsgStd::CannotInvite));
                         break;
                     }
                     if (PInvitee->StatusEffectContainer->HasStatusEffect(EFFECT_LEVEL_SYNC))
@@ -4362,11 +4362,11 @@ void SmallPacket0x06E(map_session_data_t* const PSession, CCharEntity* const PCh
                     {
                         ShowDebug("%s is blocking alliance invites", PInvitee->getName());
                         // Target is blocking assistance
-                        PChar->pushPacket(new CMessageSystemPacket(0, 0, MSGSYSTEM::TARGET_IS_CURRENTLY_BLOCKING));
+                        PChar->pushPacket(new CMessageSystemPacket(0, 0, MsgStd::TargetIsCurrentlyBlocking));
                         // Interaction was blocked
-                        PInvitee->pushPacket(new CMessageSystemPacket(0, 0, MSGSYSTEM::BLOCKED_BY_BLOCKAID));
+                        PInvitee->pushPacket(new CMessageSystemPacket(0, 0, MsgStd::BlockedByBlockaid));
                         // You cannot invite that person at this time.
-                        PChar->pushPacket(new CMessageSystemPacket(0, 0, MSGSYSTEM::YOU_CANNOT_INVITE_THAT_PERSON));
+                        PChar->pushPacket(new CMessageSystemPacket(0, 0, MsgStd::CannotInvite));
                         break;
                     }
                     // make sure intvitee isn't dead or in jail, they are an unallied party leader and don't already have an invite pending
@@ -6250,7 +6250,7 @@ void SmallPacket0x0DC(map_session_data_t* const PSession, CCharEntity* const PCh
             }
             if (flags != PChar->nameflags.flags)
             {
-                PChar->pushPacket(new CMessageSystemPacket(0, 0, param == 1 ? MSGSYSTEM::CHARACTER_INFO_HIDDEN : MSGSYSTEM::CHARACTER_INFO_SHOWN));
+                PChar->pushPacket(new CMessageSystemPacket(0, 0, param == 1 ? MsgStd::CharacterInfoHidden : MsgStd::CharacterInfoShown));
             }
             break;
         }
