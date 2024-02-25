@@ -933,7 +933,7 @@ namespace fishingutils
     // Calculations
     uint32              GetSundayMidnightTimestamp();
     uint8               GetMoonPhase();
-    uint16              GetHookTime(CCharEntity* PChar);
+    uint8               GetHookTime(CCharEntity* PChar);
     float               GetMonthlyTidalInfluence(fish_t* fish);
     float               GetHourlyModifier(fish_t* fish);
     float               GetMoonModifier(fish_t* fish);

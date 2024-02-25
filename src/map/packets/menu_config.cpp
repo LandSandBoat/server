@@ -25,32 +25,30 @@
 
 #include "entities/charentity.h"
 
+struct GP_SERV_CONFIG
+{
+    uint16_t    id : 9;
+    uint16_t    size : 7;
+    uint16_t    sync;
+    SAVE_CONF   ConfData;       // PS2: ConfData
+    uint8_t     unknown00;      // PS2: GmLevel
+    languages_t PartyLanguages; // PS2: (New; did not exist.)
+    uint8_t     unknown01[3];   // PS2: (New; did not exist.)
+};
+
+// https://github.com/atom0s/XiPackets/tree/main/world/server/0x00B4
 CMenuConfigPacket::CMenuConfigPacket(CCharEntity* PChar)
 {
     this->setType(0xB4);
     this->setSize(0x18);
 
-    // Invite, Online/Away, and Anon are handled in the first byte.
-    // Due to the way invites are cleared from nameflags when and handled in
-    // other parts of the codebase, this
-    ref<uint8>(0x04) = 0x18 | PChar->menuConfigFlags.byte1 | (PChar->nameflags.flags & static_cast<uint32>(FLAG_INVITE) ? static_cast<uint8>(NFLAG_INVITE) : 0);
-    ref<uint8>(0x05) = PChar->menuConfigFlags.byte2 | (PChar->m_hasAutoTarget ? 0 : static_cast<uint8>(NFLAG_AUTOTARGET >> 8));
-    ref<uint8>(0x06) = PChar->menuConfigFlags.byte3;
-    ref<uint8>(0x07) = PChar->menuConfigFlags.byte4;
+    GP_SERV_CONFIG packet = {};
 
-    ref<uint64>(0x08) = PChar->chatFilterFlags;
+    packet.id       = 0xB4;
+    packet.size     = roundUpToNearestFour(sizeof(GP_SERV_CONFIG)) / 4;
+    packet.ConfData = PChar->playerConfig;
 
-    ref<uint8>(0x12) = 0x02; // Have seen this as 0x01 on retail
-    ref<uint8>(0x14) = 0x02;
+    std::memcpy(&packet.PartyLanguages, &PChar->search.language, sizeof(packet.PartyLanguages));
+
+    std::memcpy(data, &packet, sizeof(GP_SERV_CONFIG));
 }
-
-// Active fields data[0x07]
-//
-// 0 - cancel new adventurer status
-// 1 - enable mentor, cancel new
-// 2 - cancel new
-// 3 - disable, cancel new
-// 4 - No active
-// 5 - enable mentor status
-// 6 - No active
-// 7 - disable mentor status

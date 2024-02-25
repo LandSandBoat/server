@@ -357,9 +357,8 @@ int32 do_init(int32 argc, char** argv)
         // our own SQL connection.
         {
             auto otherSql  = std::make_unique<SqlConnection>();
-            auto query     = "UPDATE %s SET %s %u WHERE charid = %u";
+            auto query = "UPDATE %s SET %s %u WHERE charid = %u;";
             otherSql->Query(query, "chars", "gmlevel =", PChar->m_GMlevel, PChar->id);
-            otherSql->Query(query, "char_stats", "nameflags =", PChar->nameflags.flags, PChar->id);
         }
 
         fmt::print("Promoting {} to GM level {}\n", PChar->name, level);
@@ -1080,10 +1079,12 @@ int32 map_cleanup(time_point tick, CTaskMgr::CTask* PTask)
 
         if ((time(nullptr) - map_session_data->last_update) > 5)
         {
-            if (PChar != nullptr && !(PChar->nameflags.flags & FLAG_DC))
+            if (PChar != nullptr && !PChar->isLinkDead)
             {
-                PChar->nameflags.flags |= FLAG_DC;
+                PChar->isLinkDead = true;
                 PChar->updatemask |= UPDATE_HP;
+
+                // Is this unintentionally sending extra packets when a player is disconnecting?
                 if (PChar->status == STATUS_TYPE::NORMAL)
                 {
                     PChar->loc.zone->SpawnPCs(PChar);
@@ -1212,9 +1213,9 @@ int32 map_cleanup(time_point tick, CTaskMgr::CTask* PTask)
                 }
             }
         }
-        else if (PChar != nullptr && (PChar->nameflags.flags & FLAG_DC))
+        else if (PChar != nullptr && PChar->isLinkDead)
         {
-            PChar->nameflags.flags &= ~FLAG_DC;
+            PChar->isLinkDead = false;
             PChar->updatemask |= UPDATE_HP;
 
             if (PChar->status == STATUS_TYPE::NORMAL)
