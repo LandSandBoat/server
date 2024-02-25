@@ -247,11 +247,16 @@ QueryByNameResult_t const& CZone::queryEntitiesByName(std::string const& pattern
 {
     TracyZoneScoped;
 
-    // Use memoization since lookups are typically for the same mob names
-    auto result = m_queryByNameResults.find(pattern);
-    if (result != m_queryByNameResults.end())
+    // Always ignore cache for queries explicitly looking for dynamic entities
+    // TODO: make this memoization work for dynamic entities somehow?
+    if (pattern.rfind("DE_", 0) != 0)
     {
-        return result->second;
+        // Use memoization since lookups are typically for the same mob names
+        auto result = m_queryByNameResults.find(pattern);
+        if (result != m_queryByNameResults.end())
+        {
+            return result->second;
+        }
     }
 
     std::vector<CBaseEntity*> entities;
