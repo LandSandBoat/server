@@ -211,7 +211,7 @@ void CMobController::TryLink()
                 if (PPartyMember->m_roamFlags & ROAMFLAG_IGNORE)
                 {
                     // force into attack action
-                    //#TODO
+                    // #TODO
                     PPartyMember->PAI->Engage(PTarget->targid);
                 }
             }
@@ -831,7 +831,7 @@ void CMobController::DoRoamTick(time_point tick)
 
         return;
     }
-    //#TODO
+    // #TODO
     else if (PMob->GetDespawnTime() > time_point::min() && PMob->GetDespawnTime() < m_Tick)
     {
         Despawn();
@@ -842,6 +842,26 @@ void CMobController::DoRoamTick(time_point tick)
     {
         // don't claim me if I ignore
         PMob->m_OwnerID.clean();
+    }
+
+    if (m_Tick >= m_mobHealTime + 10s && PMob->getMobMod(MOBMOD_NO_REST) == 0 && PMob->CanRest())
+    {
+        // recover 10% health and lose tp
+        if (PMob->Rest(0.1f))
+        {
+            // health updated
+            PMob->updatemask |= UPDATE_HP;
+        }
+
+        if (PMob->GetHPP() == 100)
+        {
+            // at max health undirty exp
+            PMob->m_HiPCLvl     = 0;
+            PMob->m_HiPartySize = 0;
+            PMob->m_giveExp     = true;
+            PMob->m_UsedSkillIds.clear();
+        }
+        m_mobHealTime = m_Tick;
     }
 
     // skip roaming if waiting
@@ -865,26 +885,6 @@ void CMobController::DoRoamTick(time_point tick)
             if (PMob->GetCallForHelpFlag())
             {
                 PMob->SetCallForHelpFlag(false);
-            }
-
-            // can't rest with poison or disease
-            if (PMob->CanRest() && PMob->getMobMod(MOBMOD_NO_REST) == 0)
-            {
-                // recover 10% health
-                if (PMob->Rest(0.1f))
-                {
-                    // health updated
-                    PMob->updatemask |= UPDATE_HP;
-                }
-
-                if (PMob->GetHPP() == 100)
-                {
-                    // at max health undirty exp
-                    PMob->m_HiPCLvl     = 0;
-                    PMob->m_HiPartySize = 0;
-                    PMob->m_giveExp     = true;
-                    PMob->m_UsedSkillIds.clear();
-                }
             }
 
             // if I just disengaged check if I should despawn
@@ -946,7 +946,7 @@ void CMobController::DoRoamTick(time_point tick)
                 else if (PMob->CanRoam() && PMob->PAI->PathFind->RoamAround(PMob->m_SpawnPoint, PMob->GetRoamDistance(),
                                                                             (uint8)PMob->getMobMod(MOBMOD_ROAM_TURNS), PMob->m_roamFlags))
                 {
-                    //#TODO: #AIToScript (event probably)
+                    // #TODO: #AIToScript (event probably)
                     if (PMob->m_roamFlags & ROAMFLAG_WORM)
                     {
                         // move down
@@ -1100,7 +1100,7 @@ bool CMobController::Disengage()
     PMob->animation = ANIMATION_NONE;
     // https://www.bluegartr.com/threads/108198-Random-Facts-Thread-Traits-and-Stats-(Player-and-Monster)?p=5670209&viewfull=1#post5670209
     PMob->m_THLvl = 0;
-
+    m_mobHealTime = m_Tick;
     return CController::Disengage();
 }
 
