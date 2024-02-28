@@ -30,6 +30,8 @@ xi.mod =
     MND                             = 13,
     CHR                             = 14,
 
+    TWOHAND_STR                     = 218, -- Same as STR, but only active when using a two handed weapon (e.g. Hasso)
+
     -- Magic Evasion versus elements
     -- This has been repeatedly mixed up with SDT - be careful!
     FIRE_MEVA                       = 15,
@@ -55,6 +57,7 @@ xi.mod =
     RATT                            = 24,
     ACC                             = 25,
     RACC                            = 26,
+    TWOHAND_ACC                     = 219, -- Same as ACC, but only active when using a two handed weapon (e.g. Hasso)
     ENMITY                          = 27,
     ENMITY_LOSS_REDUCTION           = 427,
     MATT                            = 28,
@@ -557,6 +560,7 @@ xi.mod =
     EXP_BONUS                       = 382,
     HASTE_ABILITY                   = 383,
     HASTE_GEAR                      = 384,
+    TWOHAND_HASTE_ABILITY           = 217, -- Only applies to auto attacks when using two handed weapons, additive to HASTE_ABILITY
     SHIELD_BASH                     = 385,
     KICK_DMG                        = 386,
     CHARM_CHANCE                    = 391,
