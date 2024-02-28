@@ -2718,7 +2718,7 @@ namespace battleutils
      *                                                                       *
      ************************************************************************/
 
-    uint8 GetCritHitRate(CBattleEntity* PAttacker, CBattleEntity* PDefender, bool ignoreSneakTrickAttack)
+    uint8 GetCritHitRate(CBattleEntity* PAttacker, CBattleEntity* PDefender, bool ignoreSneakTrickAttack, SLOTTYPE weaponSlot)
     {
         int32 critHitRate = 5;
         if (PAttacker->StatusEffectContainer->HasStatusEffect(EFFECT_MIGHTY_STRIKES, 0) ||
@@ -2781,6 +2781,17 @@ namespace battleutils
             critHitRate += GetDexCritBonus(PAttacker, PDefender);
             critHitRate += PAttacker->getMod(Mod::CRITHITRATE);
             critHitRate += PDefender->getMod(Mod::ENEMYCRITRATE);
+
+            // need to check for mods that only impact attacks with a specific weapon (like Senjuinrikio)
+            if (auto* player = dynamic_cast<CCharEntity*>(PAttacker))
+            {
+                auto* weapon = dynamic_cast<CItemWeapon*>(player->getEquip(weaponSlot));
+                if (weapon && weapon->getModifier(Mod::CRITHITRATE_ONLY_WEP) > 0)
+                {
+                    critHitRate += weapon->getModifier(Mod::CRITHITRATE_ONLY_WEP);
+                }
+            }
+
             critHitRate = std::clamp(critHitRate, 0, 100);
         }
         return (uint8)critHitRate;
