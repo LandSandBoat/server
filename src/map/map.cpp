@@ -79,27 +79,6 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include <io.h>
 #endif
 
-#ifdef TRACY_ENABLE
-void* operator new(std::size_t count)
-{
-    auto ptr = malloc(count);
-    TracyAlloc(ptr, count);
-    return ptr;
-}
-
-void operator delete(void* ptr) noexcept
-{
-    TracyFree(ptr);
-    free(ptr);
-}
-
-void operator delete(void* ptr, std::size_t count)
-{
-    TracyFree(ptr);
-    free(ptr);
-}
-#endif // TRACY_ENABLE
-
 const char* MAP_CONF_FILENAME = nullptr;
 
 int8* g_PBuff   = nullptr; // Global packet clipboard
