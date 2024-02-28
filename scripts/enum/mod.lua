@@ -935,6 +935,24 @@ xi.mod =
 
     STEP_TP_CONSUMED        = 1077, -- Modifies the amount of TP consumed by dancer steps
 
+    -- Permanent Resistance Build Modifiers
+    SLEEPRESBUILD    = 1080, -- Used to create a resbuild for the appropriate effect. Will decrease overall duration of effect. (seconds)
+    POISONRESBUILD   = 1081, -- Used to create a resbuild for the appropriate effect. Will decrease overall duration of effect. (seconds)
+    PARALYZERESBUILD = 1082, -- Used to create a resbuild for the appropriate effect. Will decrease overall duration of effect. (seconds)
+    BLINDRESBUILD    = 1083, -- Used to create a resbuild for the appropriate effect. Will decrease overall duration of effect. (seconds)
+    SILENCERESBUILD  = 1084, -- Used to create a resbuild for the appropriate effect. Will decrease overall duration of effect. (seconds)
+    VIRUSRESBUILD    = 1085, -- Used to create a resbuild for the appropriate effect. Will decrease overall duration of effect. (seconds)
+    PETRIFYRESBUILD  = 1086, -- Used to create a resbuild for the appropriate effect. Will decrease overall duration of effect. (seconds)
+    BINDRESBUILD     = 1087, -- Used to create a resbuild for the appropriate effect. Will decrease overall duration of effect. (seconds)
+    CURSERESBUILD    = 1088, -- Used to create a resbuild for the appropriate effect. Will decrease overall duration of effect. (seconds)
+    GRAVITYRESBUILD  = 1089, -- Used to create a resbuild for the appropriate effect. Will decrease overall duration of effect. (seconds)
+    SLOWRESBUILD     = 1090, -- Used to create a resbuild for the appropriate effect. Will decrease overall duration of effect. (seconds)
+    STUNRESBUILD     = 1091, -- Used to create a resbuild for the appropriate effect. Will decrease overall duration of effect. (seconds)
+    CHARMRESBUILD    = 1092, -- Used to create a resbuild for the appropriate effect. Will decrease overall duration of effect. (seconds)
+    AMNESIARESBUILD  = 1093, -- Used to create a resbuild for the appropriate effect. Will decrease overall duration of effect. (seconds)
+    LULLABYRESBUILD  = 1094, -- Used to create a resbuild for the appropriate effect. Will decrease overall duration of effect. (seconds)
+    DEATHRESBUILD    = 1095, -- Used to create a resbuild for the appropriate effect. Will decrease overall duration of effect. (seconds)
+
     -- IF YOU ADD ANY NEW MODIFIER HERE, ADD IT IN src/map/modifier.h ASWELL!
 
     -- The spares take care of finding the next ID to use so long as we don't forget to list IDs that have been freed up by refactoring.
