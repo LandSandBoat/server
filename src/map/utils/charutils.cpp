@@ -2028,8 +2028,7 @@ namespace charutils
 
                         if (!((CItemWeapon*)PChar->m_Weapons[SLOT_MAIN])->isTwoHanded())
                         {
-                            PChar->StatusEffectContainer->DelStatusEffect(EFFECT_HASSO);
-                            PChar->StatusEffectContainer->DelStatusEffect(EFFECT_SEIGAN);
+                            PChar->StatusEffectContainer->DelStatusEffect(EFFECT_SEIGAN); // TODO: make seigan-specific effects not function without a 2H weapon so it doesn't have to be deleted if a weapon is removed
                         }
                     }
                     PChar->look.main = PItem->getModelId();
