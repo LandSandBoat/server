@@ -225,27 +225,6 @@ local sigilNpcInfo =
     [xi.zone.WINDURST_WATERS_S   ] = {  13, 3 }, -- !pos -31.869 -6.009 226.793 94
 }
 
--- There appears to be no mathematical correlation between combination of effects and their
--- cost.  Each index in the table represents the bitmask value, and corresponding cost.
-local bonusEffectCosts =
-{
-    [ 1] = 50,
-    [ 2] = 50,
-    [ 3] = 100,
-    [ 4] = 50,
-    [ 5] = 100,
-    [ 6] = 100,
-    [ 7] = 150,
-    [ 8] = 100,
-    [ 9] = 150,
-    [10] = 150,
-    [11] = 150,
-    [12] = 100,
-    [13] = 150,
-    [14] = 150,
-    [15] = 200,
-}
-
 -- Returns the Vanadiel time in which Sigil will expire or 0
 local function getSigilTimeStamp(player)
     local sigilTimestamp = VanadielTime()
@@ -379,8 +358,14 @@ xi.campaign.sigilOnEventFinish = function(player, csid, option, npc)
         local optionType = bit.band(option, 0xF)
 
         if optionType == 1 then
-            local selectedEffects = bit.rshift(option, 16)
-            local bonusCost       = bonusEffectCosts[selectedEffects] and bonusEffectCosts[selectedEffects] or 0
+            local selectedEffects = bit.rshift(option, 11) -- selections are shifted by 11: 1, 4097, 8193, etc
+            local bonusCost = 0 -- base cost of zero, +50 for additional options chosen
+            for i = 1, 4 do
+                if utils.mask.getBit(selectedEffects, i) then
+                    bonusCost = bonusCost + 50
+                end
+            end
+
             local duration        = 10800 + ((15 * xi.campaign.getMedalRank(player)) * 60) -- 3hrs +15 min per medal (minimum 3hr 15 min with 1st medal)
             local subPower        = 35 -- Sets % trigger for regen/refresh. Static at minimum value (35%) for now.
             -- Selected Effect Mask:
