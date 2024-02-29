@@ -27,6 +27,7 @@
 #include "char_stats.h"
 
 #include "entities/charentity.h"
+#include "items/item_weapon.h"
 #include "modifier.h"
 #include "roe.h"
 #include "utils/charutils.h"
@@ -49,7 +50,15 @@ CCharStatsPacket::CCharStatsPacket(CCharEntity* PChar)
 
     memcpy(data + (0x14), &PChar->stats, 14); // TODO: it won't work with merits
 
-    ref<uint16>(0x22) = std::clamp<int16>(PChar->getMod(Mod::STR), -999 + PChar->stats.STR, 999 - PChar->stats.STR);
+    // Hasso gives STR only if main weapon is two handed
+    if (auto* weapon = dynamic_cast<CItemWeapon*>(PChar->m_Weapons[SLOT_MAIN]); weapon->isTwoHanded())
+    {
+        ref<uint16>(0x22) = std::clamp<int16>(PChar->getMod(Mod::STR) + PChar->getMod(Mod::TWOHAND_STR), -999 + PChar->stats.STR, 999 - PChar->stats.STR);
+    }
+    else
+    {
+        ref<uint16>(0x22) = std::clamp<int16>(PChar->getMod(Mod::STR), -999 + PChar->stats.STR, 999 - PChar->stats.STR);
+    }
     ref<uint16>(0x24) = std::clamp<int16>(PChar->getMod(Mod::DEX), -999 + PChar->stats.DEX, 999 - PChar->stats.DEX);
     ref<uint16>(0x26) = std::clamp<int16>(PChar->getMod(Mod::VIT), -999 + PChar->stats.VIT, 999 - PChar->stats.VIT);
     ref<uint16>(0x28) = std::clamp<int16>(PChar->getMod(Mod::AGI), -999 + PChar->stats.AGI, 999 - PChar->stats.AGI);
