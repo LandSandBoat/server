@@ -486,7 +486,7 @@ xi.spells.damage.calculateIfMagicBurstBonus = function(caster, target, spellId, 
     -- Obtain multiplier from gear, atma and job traits -- Job traits should be done separately
     modBurst = modBurst + (caster:getMod(xi.mod.MAG_BURST_BONUS) / 100) + ancientMagicBurstBonus
 
-    -- Apply Innin bonus
+    -- Apply Innin Magic Burst bonus
     if caster:isBehind(target) and caster:hasStatusEffect(xi.effect.INNIN) then
         modBurst = modBurst + (caster:getMerit(xi.merit.INNIN_EFFECT) / 100)
     end
@@ -776,6 +776,25 @@ xi.spells.damage.calculateNinFutaeBonus = function(caster, skillType)
     return ninFutaeBonus
 end
 
+xi.spells.damage.calculateNinjutsuMultiplier = function(caster, target, skillType)
+    local ninjutsuMultiplier = 1
+
+    if skillType == xi.skill.NINJUTSU then
+        -- Ninjutsu damage multiplier from gear.
+        ninjutsuMultiplier = ninjutsuMultiplier + caster:getMod(xi.mod.NIN_NUKE_BONUS_GEAR) / 100
+
+        -- Ninjutsu damage multiplier from Innin.
+        if
+            caster:hasStatusEffect(xi.effect.INNIN) and
+            caster:isBehind(target)
+        then
+            ninjutsuMultiplier = ninjutsuMultiplier + caster:getMod(xi.mod.NIN_NUKE_BONUS_INNIN) / 100
+        end
+    end
+
+    return ninjutsuMultiplier
+end
+
 xi.spells.damage.calculateUndeadDivinePenalty = function(target, skillType)
     local undeadDivinePenalty = 1
 
@@ -924,6 +943,7 @@ xi.spells.damage.useDamageSpell = function(caster, target, spell)
     local skillTypeMultiplier         = xi.spells.damage.calculateSkillTypeMultiplier(skillType)
     local ninSkillBonus               = xi.spells.damage.calculateNinSkillBonus(caster, spellId, skillType)
     local ninFutaeBonus               = xi.spells.damage.calculateNinFutaeBonus(caster, skillType)
+    local ninjutsuMultiplier          = xi.spells.damage.calculateNinjutsuMultiplier(caster, target, skillType)
     local undeadDivinePenalty         = xi.spells.damage.calculateUndeadDivinePenalty(target, skillType)
     local scarletDeliriumMultiplier   = xi.spells.damage.calculateScarletDeliriumMultiplier(caster)
     local helixMeritMultiplier        = xi.spells.damage.calculateHelixMeritMultiplier(caster, spellId)
@@ -947,6 +967,7 @@ xi.spells.damage.useDamageSpell = function(caster, target, spell)
     finalDamage = math.floor(finalDamage * skillTypeMultiplier)
     finalDamage = math.floor(finalDamage * ninSkillBonus)
     finalDamage = math.floor(finalDamage * ninFutaeBonus)
+    finalDamage = math.floor(finalDamage * ninjutsuMultiplier)
     finalDamage = math.floor(finalDamage * undeadDivinePenalty)
     finalDamage = math.floor(finalDamage * scarletDeliriumMultiplier)
     finalDamage = math.floor(finalDamage * helixMeritMultiplier)
