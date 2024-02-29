@@ -40,6 +40,7 @@
 #include "packets/lock_on.h"
 #include "packets/menu_raisetractor.h"
 #include "packets/message_special.h"
+#include "packets/message_standard.h"
 #include "packets/message_system.h"
 #include "packets/message_text.h"
 #include "packets/release.h"
@@ -2150,9 +2151,9 @@ CBattleEntity* CCharEntity::IsValidTarget(uint16 targid, uint16 validTargetFlags
         if (PTarget->objtype == TYPE_PC && charutils::IsAidBlocked(this, static_cast<CCharEntity*>(PTarget)))
         {
             // Target is blocking assistance
-            errMsg = std::make_unique<CMessageSystemPacket>(0, 0, MSGSYSTEM::TARGET_IS_CURRENTLY_BLOCKING);
+            errMsg = std::make_unique<CMessageSystemPacket>(0, 0, MsgStd::TargetIsCurrentlyBlocking);
             // Interaction was blocked
-            static_cast<CCharEntity*>(PTarget)->pushPacket(new CMessageSystemPacket(0, 0, MSGSYSTEM::BLOCKED_BY_BLOCKAID));
+            static_cast<CCharEntity*>(PTarget)->pushPacket(new CMessageSystemPacket(0, 0, MsgStd::BlockedByBlockaid));
         }
         else if (IsMobOwner(PTarget))
         {
@@ -2770,7 +2771,7 @@ void CCharEntity::skipEvent()
     TracyZoneScoped;
     if (!m_Locked && !isInEvent() && (!currentEvent->cutsceneOptions.empty() || currentEvent->interruptText != 0))
     {
-        pushPacket(new CMessageSystemPacket(0, 0, MSGSYSTEM::EVENT_SKIPPED));
+        pushPacket(new CMessageSystemPacket(0, 0, MsgStd::EventSkipped));
         pushPacket(new CReleasePacket(this, RELEASE_TYPE::SKIPPING));
         m_Substate = CHAR_SUBSTATE::SUBSTATE_NONE;
 

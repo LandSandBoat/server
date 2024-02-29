@@ -24,7 +24,7 @@
 
 #include "common/cbasetypes.h"
 #include "luautils.h"
-#include "packets/message_system.h"
+#include "packets/message_standard.h"
 
 class CBaseEntity;
 class CCharEntity;
@@ -60,7 +60,7 @@ public:
                      sol::object const& p2, sol::object const& p3, sol::object const& chat);
     void messagePublic(uint16 messageID, CLuaBaseEntity const* PEntity, sol::object const& arg2, sol::object const& arg3);
     void messageSpecial(uint16 messageID, sol::variadic_args va);
-    void messageSystem(MSGSYSTEM messageID, sol::object const& p0, sol::object const& p1);
+    void messageSystem(MsgStd messageID, sol::object const& p0, sol::object const& p1);
     void messageCombat(sol::object const& speaker, int32 p0, int32 p1, int16 message);
     void messageStandard(uint16 messageID);
 
