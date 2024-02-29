@@ -1611,7 +1611,7 @@ void CBattleEntity::OnCastFinished(CMagicState& state, action_t& action)
 
         // TODO: this is really hacky and should eventually be moved into lua, and spellFlags should probably be in the spells table..
         // Also need to have IsAbsorbByShadow last in conditional because that has side effects including removing a shadow
-        if (PSpell->canHitShadow() && aoeType == SPELLAOE_NONE && !(PSpell->getFlag() & SPELLFLAG_IGNORE_SHADOWS) && battleutils::IsAbsorbByShadow(PTarget))
+        if (PSpell->canHitShadow() && aoeType == SPELLAOE_NONE && !(PSpell->getFlag() & SPELLFLAG_IGNORE_SHADOWS) && battleutils::IsAbsorbByShadow(PTarget, this))
         {
             // take shadow
             msg                = MSGBASIC_SHADOW_ABSORB;
@@ -2135,8 +2135,8 @@ bool CBattleEntity::OnAttack(CAttackState& state, action_t& action)
                 battleutils::HandleTacticalParry(PTarget);
                 battleutils::HandleIssekiganEnmityBonus(PTarget, this);
             }
-            // Try to be absorbed by shadow unless it is a SATA attack round.
-            else if (!(attackRound.GetSATAOccured()) && battleutils::IsAbsorbByShadow(PTarget))
+            // attack hit, try to be absorbed by shadow unless it is a SATA attack round
+            else if (!(attackRound.GetSATAOccured()) && battleutils::IsAbsorbByShadow(PTarget, this))
             {
                 actionTarget.messageID = MSGBASIC_SHADOW_ABSORB;
                 actionTarget.param     = 1;
@@ -2158,7 +2158,7 @@ bool CBattleEntity::OnAttack(CAttackState& state, action_t& action)
                     actionTarget.param        = 0;
                     actionTarget.messageID    = 0;
                     actionTarget.spikesEffect = SUBEFFECT_COUNTER;
-                    if (battleutils::IsAbsorbByShadow(this))
+                    if (battleutils::IsAbsorbByShadow(this, PTarget))
                     {
                         actionTarget.spikesParam   = 1;
                         actionTarget.spikesMessage = MSGBASIC_COUNTER_ABS_BY_SHADOW;

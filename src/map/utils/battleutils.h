@@ -136,7 +136,7 @@ namespace battleutils
     std::vector<ELEMENT> GetSkillchainMagicElement(SKILLCHAIN_ELEMENT skillchain);
 
     bool IsParalyzed(CBattleEntity* PAttacker);
-    bool IsAbsorbByShadow(CBattleEntity* PDefender);
+    bool IsAbsorbByShadow(CBattleEntity* PDefender, CBattleEntity* PAttacker);
     bool IsIntimidated(CBattleEntity* PAttacker, CBattleEntity* PDefender);
 
     int32 GetFSTR(CBattleEntity* PAttacker, CBattleEntity* PDefender, uint8 SlotID);
