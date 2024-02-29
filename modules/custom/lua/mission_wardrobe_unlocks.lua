@@ -69,7 +69,7 @@ m:addOverride('npcUtil.completeMission', function(player, logId, missionId, para
             '%s capacity has been increased by %i from %i to %i',
             bagName, bagIncrease, oldSize, newSize)
 
-        player:PrintToPlayer(str, xi.msg.channel.SYSTEM_3, '')
+        player:printToPlayer(str, xi.msg.channel.SYSTEM_3, '')
     end
 
     return result

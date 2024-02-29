@@ -121,7 +121,7 @@ local timerFunc = function(mob)
                 str = string.format('You have won the lottery for %s! (out of %i players)', mob:getPacketName(), numEntries)
             end
 
-            member:PrintToPlayer(str, xi.msg.channel.SYSTEM_3, '')
+            member:printToPlayer(str, xi.msg.channel.SYSTEM_3, '')
 
             -- Remove from entries table
             local pos = tableFindPosByID(entries, member)
@@ -138,7 +138,7 @@ local timerFunc = function(mob)
                 str = string.format('Your were not successful in the lottery for %s. (out of %i players)', mob:getPacketName(), numEntries)
             end
 
-            member:PrintToPlayer(str, xi.msg.channel.SYSTEM_3, '')
+            member:printToPlayer(str, xi.msg.channel.SYSTEM_3, '')
             mob:clearEnmityForEntity(member)
         end
     end
