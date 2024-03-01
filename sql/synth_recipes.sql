@@ -4220,6 +4220,8 @@ INSERT INTO `synth_recipes` VALUES (69920,1,0,0,0,0,0,0,0,86,0,4100,4242,16858,0
 INSERT INTO `synth_recipes` VALUES (69921,1,0,0,0,0,0,0,0,83,0,4100,4242,16860,0,0,0,0,0,0,0,4154,715,1226,1226,1,2,10,10,'Holy Lance (desynth)');
 INSERT INTO `synth_recipes` VALUES (69922,1,0,0,0,0,0,0,0,55,0,4100,4242,17041,0,0,0,0,0,0,0,4154,716,1226,653,1,1,10,2,'Holy Mace (desynth)');
 INSERT INTO `synth_recipes` VALUES (69923,1,0,0,0,0,0,0,0,78,0,4100,4242,12434,0,0,0,0,0,0,0,850,850,850,850,1,1,1,1,'Genbu\'s Kabuto (desynth)');  -- possible HQ1=ram leather x1 HQ2=cermet chip x1.  Only JP site showed level.
+INSERT INTO `synth_recipes` VALUES (69924,1,0,8,47,0,0,0,0,0,0,4100,4242,16651,0,0,0,0,0,0,0,707,707,1226,1226,1,1,4,6,'Mythril Pick (desynth)');
+INSERT INTO `synth_recipes` VALUES (69925,1,0,8,47,0,0,0,0,0,0,4100,4242,16670,0,0,0,0,0,0,0,707,707,1226,1226,1,1,4,6,'Mythril Pick +1 (desynth)');
 INSERT INTO `synth_recipes` VALUES (70001,0,0,0,0,0,0,0,0,0,1,4101,4243,2203,2203,2343,4362,4509,0,0,0,2209,2209,2209,2209,2,4,6,8,'Worm Paste');
 INSERT INTO `synth_recipes` VALUES (70002,0,0,0,0,0,0,0,0,0,1,4103,4245,727,4378,0,0,0,0,0,0,5575,5575,5575,5575,4,6,9,12,'Yogurt');
 INSERT INTO `synth_recipes` VALUES (70003,0,0,0,0,0,0,0,0,0,2,4101,4243,5465,0,0,0,0,0,0,0,2397,2397,2397,2397,1,1,1,1,'Foulweather Frog');
