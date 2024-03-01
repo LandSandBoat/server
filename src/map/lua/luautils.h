@@ -326,6 +326,8 @@ namespace luautils
     int32 additionalEffectAttack(CBattleEntity* PAttacker, CBattleEntity* PDefender, CItemWeapon* PItem, actionTarget_t* Action, int32 baseAttackDamage);    // for items with additional effects
     int32 additionalEffectSpikes(CBattleEntity* PDefender, CBattleEntity* PAttacker, CItemEquipment* PItem, actionTarget_t* Action, int32 baseAttackDamage); // for armor with spikes
 
+    float GetRangedDistanceCorrection(CBattleEntity* PBattleEntity, float distance);
+
     auto NearLocation(sol::table const& table, float radius, float theta) -> sol::table;
     auto GetFurthestValidPosition(CLuaBaseEntity* fromTarget, float distance, float theta) -> sol::table;
 

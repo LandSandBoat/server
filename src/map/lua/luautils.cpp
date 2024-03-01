@@ -2342,6 +2342,29 @@ namespace luautils
         return 0;
     }
 
+    float GetRangedDistanceCorrection(CBattleEntity* PBattleEntity, float distance)
+    {
+        TracyZoneScoped;
+
+        auto distanceCorrectionGetValue = lua["xi"]["combat"]["distanceCorrection"]["getValue"];
+        if (!distanceCorrectionGetValue.valid())
+        {
+            sol::error err = distanceCorrectionGetValue;
+            ShowError("battleutils::GetRangedDistanceCorrection: %s", err.what());
+            return 1.00f;
+        }
+
+        auto result = distanceCorrectionGetValue(CLuaBaseEntity(PBattleEntity), distance);
+        if (!result.valid())
+        {
+            sol::error err = result;
+            ShowError("battleutils::GetRangedDistanceCorrection: %s", err.what());
+            return 1.00f;
+        }
+
+        return result.get_type() == sol::type::number ? result.get<float>() : 1.0f;
+    }
+
     int32 OnEffectGain(CBattleEntity* PEntity, CStatusEffect* PStatusEffect)
     {
         TracyZoneScoped;

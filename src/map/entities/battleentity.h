@@ -159,10 +159,11 @@ DECLARE_FORMAT_AS_UNDERLYING(SKILLTYPE);
 
 enum SUBSKILLTYPE
 {
-    SUBSKILL_XBO      = 0,
-    SUBSKILL_GUN      = 1,
-    SUBSKILL_CNN      = 2,
-    SUBSKILL_SHURIKEN = 3,
+    SUBSKILL_XBOW_SHORTBOW = 0,
+    SUBSKILL_GUN           = 1,
+    SUBSKILL_CANNON        = 2,
+    SUBSKILL_SHURIKEN      = 3,
+    SUBSKILL_LONGBOW       = 4,
 
     SUBSKILL_ANIMATOR    = 10,
     SUBSKILL_ANIMATOR_II = 11,
@@ -558,8 +559,8 @@ public:
     uint16 ATT();
     uint16 ACC(uint8 attackNumber, uint8 offsetAccuracy);
     uint16 EVA();
-    uint16 RATT(uint8 skill, uint16 bonusSkill = 0);
-    uint16 RACC(uint8 skill, uint16 bonusSkill = 0);
+    uint16 RATT(uint8 skill, float distance, uint16 bonusSkill = 0, bool withDistanceCorrection = true);
+    uint16 RACC(uint8 skill, float distance, uint16 bonusSkill = 0, bool withDistanceCorrection = true);
 
     uint8 GetSpeed();
 
