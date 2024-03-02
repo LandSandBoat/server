@@ -583,7 +583,7 @@ xi.spells.damage.calculateMagicBonusDiff = function(caster, target, spellId, ski
         if
             spellId >= xi.magic.spell.KATON_ICHI and
             spellId <= xi.magic.spell.KATON_SAN
-        then -- Katon series.
+        then
             mab = mab + caster:getMerit(xi.merit.KATON_EFFECT)
         elseif
             spellId >= xi.magic.spell.HYOTON_ICHI and
@@ -611,6 +611,9 @@ xi.spells.damage.calculateMagicBonusDiff = function(caster, target, spellId, ski
         then
             mab = mab + caster:getMerit(xi.merit.SUITON_EFFECT)
         end
+
+        -- "Enhances ninjutsu damage" ("Koga Hatsuburi" type gear)
+        mab = mab + caster:getMod(xi.mod.NIN_NUKE_BONUS_INNIN)
     end
 
     if math.random(1, 100) <= mabCrit then
@@ -747,16 +750,27 @@ end
 xi.spells.damage.calculateNinSkillBonus = function(caster, spellId, skillType)
     local ninSkillBonus = 1
 
+    local skillCaps =
+    {
+    -- Tier = { Min skill, Max skill}
+        [1] = {  50, 250 },
+        [2] = { 125, 350 },
+        [3] = { 275, 500 },
+    }
+
     if skillType == xi.skill.NINJUTSU and caster:getMainJob() == xi.job.NIN then
+        -- Get spell tier.
+        local spellTier = 3
+
         if spellId % 3 == 2 then     -- Ichi nuke spell ids are 320, 323, 326, 329, 332, and 335
-            ninSkillBonus = 100 + math.floor((caster:getSkillLevel(xi.skill.NINJUTSU) - 50) / 2)
+            spellTier = 1
         elseif spellId % 3 == 0 then -- Ni nuke spell ids are 1 more than their corresponding Ichi spell
-            ninSkillBonus = 100 + math.floor((caster:getSkillLevel(xi.skill.NINJUTSU) - 125) / 2)
-        else                         -- San nuke spell, also has ids 1 more than their corresponding Ni spell
-            ninSkillBonus = 100 + math.floor((caster:getSkillLevel(xi.skill.NINJUTSU) - 275) / 2)
+            spellTier = 2
         end
 
-        ninSkillBonus = utils.clamp(ninSkillBonus / 100, 1, 2) -- bonus caps at +100%, and does not go negative
+        -- Get skill bonus.
+        local skillLevel = utils.clamp(caster:getSkillLevel(xi.skill.NINJUTSU), skillCaps[spellTier][1], skillCaps[spellTier][2])
+        ninSkillBonus    = 1 + (skillLevel - skillCaps[spellTier][1]) / 200
     end
 
     return ninSkillBonus
@@ -779,17 +793,13 @@ end
 xi.spells.damage.calculateNinjutsuMultiplier = function(caster, target, skillType)
     local ninjutsuMultiplier = 1
 
-    if skillType == xi.skill.NINJUTSU then
-        -- Ninjutsu damage multiplier from gear.
-        ninjutsuMultiplier = ninjutsuMultiplier + caster:getMod(xi.mod.NIN_NUKE_BONUS_GEAR) / 100
-
-        -- Ninjutsu damage multiplier from Innin.
-        if
-            caster:hasStatusEffect(xi.effect.INNIN) and
-            caster:isBehind(target)
-        then
-            ninjutsuMultiplier = ninjutsuMultiplier + caster:getMod(xi.mod.NIN_NUKE_BONUS_INNIN) / 100
-        end
+    -- Ninjutsu damage multiplier from Innin.
+    if
+        skillType == xi.skill.NINJUTSU and
+        caster:hasStatusEffect(xi.effect.INNIN) and
+        caster:isBehind(target)
+    then
+        ninjutsuMultiplier = 1 + caster:getMod(xi.mod.NIN_NUKE_BONUS_INNIN) / 100
     end
 
     return ninjutsuMultiplier
