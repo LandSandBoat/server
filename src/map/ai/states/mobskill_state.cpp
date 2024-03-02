@@ -29,10 +29,11 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "status_effect_container.h"
 #include "utils/battleutils.h"
 
-CMobSkillState::CMobSkillState(CBattleEntity* PEntity, uint16 targid, uint16 wsid)
+CMobSkillState::CMobSkillState(CBattleEntity* PEntity, uint16 targid, uint16 wsid, uint16 manualTPCost)
 : CState(PEntity, targid)
 , m_PEntity(PEntity)
 , m_spentTP(0)
+, m_manualTPCost(manualTPCost)
 {
     auto* skill = battleutils::GetMobSkill(wsid);
     if (!skill)
@@ -92,10 +93,13 @@ void CMobSkillState::SpendCost()
             m_spentTP = m_PEntity->addTP(-1000);
             m_PEntity->StatusEffectContainer->DelStatusEffect(EFFECT_SEKKANOKI);
         }
+        else if (m_manualTPCost > 0)
+        {
+            m_spentTP = m_PEntity->addTP(-m_manualTPCost);
+        }
         else
         {
-            m_spentTP            = m_PEntity->health.tp;
-            m_PEntity->health.tp = 0;
+            m_spentTP = m_PEntity->addTP(-m_PEntity->health.tp);
         }
     }
 }
@@ -111,6 +115,7 @@ bool CMobSkillState::Update(time_point tick)
         m_finishTime = tick + delay;
         Complete();
     }
+
     if (IsCompleted() && tick > m_finishTime)
     {
         auto* PTarget = GetTarget();
