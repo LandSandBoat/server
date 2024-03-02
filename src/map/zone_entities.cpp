@@ -521,13 +521,7 @@ void CZoneEntities::AssignDynamicTargIDandLongID(CBaseEntity* PEntity)
 
     lastDynamicTargID = targid;
 
-    auto id = 0x1000000 + (m_zone->GetID() << 12) + targid;
-
-    // Add 0x100 if targid is >= 0x800 -- observed on retail.
-    if (targid >= 0x800)
-    {
-        id += 0x100;
-    }
+    auto id = 0x01000000 | (m_zone->GetID() << 0x0C) | (targid + 0x0100);
 
     dynamicTargIds.insert(targid);
 
