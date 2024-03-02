@@ -89,7 +89,7 @@ public:
     EntityList_t m_npcList;
     EntityList_t m_charList;
 
-    uint16           lastDynamicTargID; // The last dynamic targ ID chosen -- SE rotates them forwards and skips entries that already exist.
+    uint16           nextDynamicTargID; // The next dynamic targ ID to chosen -- SE rotates them forwards and skips entries that already exist.
     std::set<uint16> charTargIds;       // sorted set of targids for characters
     std::set<uint16> dynamicTargIds;    // sorted set of targids for dynamic entities
 

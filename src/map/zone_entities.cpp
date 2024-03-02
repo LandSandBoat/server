@@ -73,7 +73,7 @@ namespace
 typedef std::pair<float, CCharEntity*> CharScorePair;
 
 CZoneEntities::CZoneEntities(CZone* zone)
-: lastDynamicTargID(0x6FF) // Start at 0x6FF so the first one used is 0x700. See AssignDynamicTargIDandLongID
+: nextDynamicTargID(0x700) // Start of dynamic entity range // TODO: Make this into a constexpr somewhere.
 , m_zone(zone)
 , m_Transport(nullptr)
 , lastCharComputeTargId(0)
@@ -490,7 +490,7 @@ void CZoneEntities::AssignDynamicTargIDandLongID(CBaseEntity* PEntity)
 {
     // NOTE: 0x0E (entity_update) entity updates are valid for 0 to 1023 and 1792 to 2303
     // Step targid up linearly from 0x700 one by one to 0x8FF unless that ID is already occupied.
-    uint16 targid = lastDynamicTargID + 1;
+    uint16 targid = nextDynamicTargID;
 
     // Wrap around 0x8FF to 0x700
     if (targid > 0x8FF)
@@ -519,7 +519,8 @@ void CZoneEntities::AssignDynamicTargIDandLongID(CBaseEntity* PEntity)
         counter++;
     }
 
-    lastDynamicTargID = targid;
+    // We found our targid, the next dynamic entity will want to start searching at +1 of this.
+    nextDynamicTargID = targid + 1;
 
     auto id = 0x01000000 | (m_zone->GetID() << 0x0C) | (targid + 0x0100);
 
