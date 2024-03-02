@@ -73,7 +73,8 @@ namespace
 typedef std::pair<float, CCharEntity*> CharScorePair;
 
 CZoneEntities::CZoneEntities(CZone* zone)
-: m_zone(zone)
+: nextDynamicTargID(0x700) // Start of dynamic entity range // TODO: Make this into a constexpr somewhere.
+, m_zone(zone)
 , m_Transport(nullptr)
 , lastCharComputeTargId(0)
 , lastCharPersistTargId(0)
@@ -488,23 +489,40 @@ uint16 CZoneEntities::GetNewCharTargID()
 void CZoneEntities::AssignDynamicTargIDandLongID(CBaseEntity* PEntity)
 {
     // NOTE: 0x0E (entity_update) entity updates are valid for 0 to 1023 and 1792 to 2303
-    uint16 targid = 0x700;
-    for (auto it : dynamicTargIds)
+    // Step targid up linearly from 0x700 one by one to 0x8FF unless that ID is already occupied.
+    uint16 targid = nextDynamicTargID;
+
+    // Wrap around 0x8FF to 0x700
+    if (targid > 0x8FF)
     {
-        if (targid != it)
+        targid = 0x700;
+    }
+
+    uint16 counter = 0;
+
+    // Find next available targid, starting with the computed one above.
+    while (std::find(dynamicTargIds.begin(), dynamicTargIds.end(), targid) != dynamicTargIds.end())
+    {
+        targid++;
+        // Wrap around 0x8FF to 0x700
+        if (targid > 0x8FF)
         {
+            targid = 0x700;
+        }
+
+        if (counter > 0x1FF)
+        {
+            ShowError(fmt::format("dynamicTargIds list full in zone {}!", m_zone->getName()));
+            targid = 0x900;
             break;
         }
-        targid++;
+        counter++;
     }
 
-    auto id = 0x1000000 + (m_zone->GetID() << 12) + targid;
+    // We found our targid, the next dynamic entity will want to start searching at +1 of this.
+    nextDynamicTargID = targid + 1;
 
-    // Add 0x100 if targid is >= 0x800 -- observed on retail.
-    if (targid >= 0x800)
-    {
-        id += 0x100;
-    }
+    auto id = 0x01000000 | (m_zone->GetID() << 0x0C) | (targid + 0x0100);
 
     dynamicTargIds.insert(targid);
 

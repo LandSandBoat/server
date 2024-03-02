@@ -89,8 +89,9 @@ public:
     EntityList_t m_npcList;
     EntityList_t m_charList;
 
-    std::set<uint16> charTargIds;    // sorted set of targids for characters
-    std::set<uint16> dynamicTargIds; // sorted set of targids for dynamic entities
+    uint16           nextDynamicTargID; // The next dynamic targ ID to chosen -- SE rotates them forwards and skips entries that already exist.
+    std::set<uint16> charTargIds;       // sorted set of targids for characters
+    std::set<uint16> dynamicTargIds;    // sorted set of targids for dynamic entities
 
     std::vector<std::pair<uint16, time_point>> dynamicTargIdsToDelete; // list of targids pending deletion at a later date
 
