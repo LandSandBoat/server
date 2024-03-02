@@ -747,7 +747,7 @@ uint16 CBattleEntity::ATT()
     return std::max(1, ATT + (ATT * ATTP / 100) + std::min<int16>((ATT * m_modStat[Mod::FOOD_ATTP] / 100), m_modStat[Mod::FOOD_ATT_CAP]));
 }
 
-uint16 CBattleEntity::RATT(uint8 skill, uint16 bonusSkill)
+uint16 CBattleEntity::RATT(uint8 skill, float distance, uint16 bonusSkill, bool withDistanceCorrection)
 {
     auto* PWeakness = StatusEffectContainer->GetStatusEffect(EFFECT_WEAKNESS);
     if (PWeakness && PWeakness->GetPower() >= 2)
@@ -758,11 +758,17 @@ uint16 CBattleEntity::RATT(uint8 skill, uint16 bonusSkill)
     // make sure to not use fishing skill
     uint16 baseSkill = skill == SKILL_FISHING ? 0 : GetSkill(skill);
     int32  RATT      = 8 + baseSkill + bonusSkill + m_modStat[Mod::RATT] + battleutils::GetRangedAttackBonuses(this) + (STR() * 3) / 4;
+
+    if (withDistanceCorrection && settings::get<bool>("map.RANGED_DISTANCE_CORRECTION"))
+    {
+        RATT = int32((float)RATT * luautils::GetRangedDistanceCorrection(this, distance));
+    }
+
     // use max to prevent any underflow
     return std::max(0, RATT + (RATT * m_modStat[Mod::RATTP] / 100) + std::min<int16>((RATT * m_modStat[Mod::FOOD_RATTP] / 100), m_modStat[Mod::FOOD_RATT_CAP]));
 }
 
-uint16 CBattleEntity::RACC(uint8 skill, uint16 bonusSkill)
+uint16 CBattleEntity::RACC(uint8 skill, float distance, uint16 bonusSkill, bool withDistanceCorrection)
 {
     TracyZoneScoped;
     auto* PWeakness = StatusEffectContainer->GetStatusEffect(EFFECT_WEAKNESS);
@@ -782,6 +788,13 @@ uint16 CBattleEntity::RACC(uint8 skill, uint16 bonusSkill)
     RACC += getMod(Mod::RACC);
     RACC += battleutils::GetRangedAccuracyBonuses(this);
     RACC += (AGI() * 3) / 4;
+
+    if (withDistanceCorrection && settings::get<bool>("map.RANGED_DISTANCE_CORRECTION") &&
+        !this->StatusEffectContainer->HasStatusEffect(EFFECT_SHARPSHOT))
+    {
+        RACC = int16((float)RACC * luautils::GetRangedDistanceCorrection(this, distance));
+    }
+
     // use max to prevent underflow
     return std::max(0, RACC + std::min<int16>(((100 + getMod(Mod::FOOD_RACCP) * RACC) / 100), getMod(Mod::FOOD_RACC_CAP)));
 }

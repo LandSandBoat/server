@@ -297,8 +297,8 @@ end
 
 local function hasAnimatorEquipped(player)
     if
-        player:getWeaponSubSkillType(xi.slot.RANGED) == 10 or
-        player:getWeaponSubSkillType(xi.slot.RANGED) == 11
+        player:getWeaponSubSkillType(xi.slot.RANGED) == xi.subskill.ANIMATOR or
+        player:getWeaponSubSkillType(xi.slot.RANGED) == xi.subskill.ANIMATOR_II
     then
         return true
     end

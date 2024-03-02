@@ -2098,40 +2098,52 @@ namespace charutils
                 {
                     if (PItem->isType(ITEM_WEAPON))
                     {
-                        CItemWeapon* weapon = (CItemWeapon*)PChar->getEquip(SLOT_AMMO);
-                        if ((weapon != nullptr) && weapon->isType(ITEM_WEAPON))
+                        CItemWeapon*    rangedWeapon = static_cast<CItemWeapon*>(PItem);
+                        CItemEquipment* equippedAmmo = PChar->getEquip(SLOT_AMMO);
+                        if (equippedAmmo && equippedAmmo->isType(ITEM_WEAPON))
                         {
-                            if (((CItemWeapon*)PItem)->getSkillType() != weapon->getSkillType() ||
-                                ((CItemWeapon*)PItem)->getSubSkillType() != weapon->getSubSkillType())
+                            CItemWeapon* equippedAmmoWeapon = static_cast<CItemWeapon*>(equippedAmmo);
+                            // as longbows have different sub skill types than xbows and short bows make an exception to unequipping ammo
+                            bool longBowException = rangedWeapon->getSkillType() == SKILL_ARCHERY && rangedWeapon->getSubSkillType() == SUBSKILL_LONGBOW &&
+                                                    equippedAmmoWeapon->getSubSkillType() == SUBSKILL_XBOW_SHORTBOW;
+
+                            if (rangedWeapon->getSkillType() != equippedAmmoWeapon->getSkillType() ||
+                                (rangedWeapon->getSubSkillType() != equippedAmmoWeapon->getSubSkillType() && !longBowException))
                             {
                                 UnequipItem(PChar, SLOT_AMMO, false);
                             }
                         }
-                        PChar->m_Weapons[SLOT_RANGED] = (CItemWeapon*)PItem;
+                        PChar->look.ranged            = rangedWeapon->getModelId();
+                        PChar->m_Weapons[SLOT_RANGED] = rangedWeapon;
+                        UpdateWeaponStyle(PChar, equipSlotID, rangedWeapon);
                     }
-                    PChar->look.ranged = PItem->getModelId();
-                    UpdateWeaponStyle(PChar, equipSlotID, (CItemWeapon*)PItem);
                 }
                 break;
                 case SLOT_AMMO:
                 {
                     if (PItem->isType(ITEM_WEAPON))
                     {
-                        CItemWeapon* weapon = (CItemWeapon*)PChar->getEquip(SLOT_RANGED);
-                        if ((weapon != nullptr) && weapon->isType(ITEM_WEAPON))
+                        CItemWeapon*    ammoWeapon     = static_cast<CItemWeapon*>(PItem);
+                        CItemEquipment* equippedRanged = PChar->getEquip(SLOT_RANGED);
+                        if (equippedRanged && equippedRanged->isType(ITEM_WEAPON))
                         {
-                            if (((CItemWeapon*)PItem)->getSkillType() != weapon->getSkillType() ||
-                                ((CItemWeapon*)PItem)->getSubSkillType() != weapon->getSubSkillType())
+                            CItemWeapon* equippedRangedWeapon = static_cast<CItemWeapon*>(equippedRanged);
+                            // as longbows have different sub skill types than xbows and short bows make an exception to unequipping ranged weapon
+                            bool longBowException = equippedRangedWeapon->getSkillType() == SKILL_ARCHERY && equippedRangedWeapon->getSubSkillType() == SUBSKILL_LONGBOW &&
+                                                    ammoWeapon->getSubSkillType() == SUBSKILL_XBOW_SHORTBOW;
+
+                            if (ammoWeapon->getSkillType() != equippedRangedWeapon->getSkillType() ||
+                                (ammoWeapon->getSubSkillType() != equippedRangedWeapon->getSubSkillType() && !longBowException))
                             {
                                 UnequipItem(PChar, SLOT_RANGED, false);
                             }
                         }
                         if (PChar->equip[SLOT_RANGED] == 0)
                         {
-                            PChar->look.ranged = PItem->getModelId();
+                            PChar->look.ranged = ammoWeapon->getModelId();
                         }
-                        PChar->m_Weapons[SLOT_AMMO] = (CItemWeapon*)PItem;
-                        UpdateWeaponStyle(PChar, equipSlotID, (CItemWeapon*)PItem);
+                        PChar->m_Weapons[SLOT_AMMO] = ammoWeapon;
+                        UpdateWeaponStyle(PChar, equipSlotID, ammoWeapon);
                     }
                 }
                 break;

@@ -277,4 +277,7 @@ xi.settings.map =
     -- The max GM level is 5, so setting this to 6 disables it
     -- for everone. Setting it to 0 enables for everyone.
     REPORT_LUA_ERRORS_TO_PLAYER_LEVEL = 6,
+
+    -- Enable/disable distance correction to ranged attack and accuracy
+    RANGED_DISTANCE_CORRECTION = true,
 }
