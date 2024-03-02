@@ -159,27 +159,27 @@ local pTable =
     [xi.magic.spell.WATERA_III    ] = { xi.mod.INT,    0,  660,  1.5,  660, 700,  4.7,  3.9, 2.95, 1.99,    1,    0,    0 }, -- No info found. Since Watera I and II N Values coincided with Waterga 1 and II, used Values of Waterga III.
     [xi.magic.spell.WATERJA       ] = { xi.mod.INT,    0,  782,  2.3,  800, 900,  5.6, 4.75, 3.95,    3,    2,    1,    0 }, -- Some values not found. Used guesstimates for M200 and M300.
 
--- Ninjutsu spells:
+-- Ninjutsu spells: https://www.ffxiah.com/forum/topic/56749/updated-ninjutsu-damage-formulae/
 --                                       1          2     3        4   5      6  7
--- Structure:             [spellId] = {  Stat used, mAcc, vNPC,    M,  vPC,   I, M0 }, -- Inflexion point unknown. Set to 50, 150 and 300, for now.
-    [xi.magic.spell.DOTON_ICHI    ] = { xi.mod.INT,    0,   28,  0.5,   28,  50, 0 },
-    [xi.magic.spell.DOTON_NI      ] = { xi.mod.INT,    0,   68,    1,   68, 150, 0 },
-    [xi.magic.spell.DOTON_SAN     ] = { xi.mod.INT,    0,  134,  1.5,  134, 300, 0 },
-    [xi.magic.spell.HUTON_ICHI    ] = { xi.mod.INT,    0,   28,  0.5,   28,  50, 0 },
-    [xi.magic.spell.HUTON_NI      ] = { xi.mod.INT,    0,   68,    1,   68, 150, 0 },
-    [xi.magic.spell.HUTON_SAN     ] = { xi.mod.INT,    0,  134,  1.5,  134, 300, 0 },
-    [xi.magic.spell.HYOTON_ICHI   ] = { xi.mod.INT,    0,   28,  0.5,   28,  50, 0 },
-    [xi.magic.spell.HYOTON_NI     ] = { xi.mod.INT,    0,   68,    1,   68, 150, 0 },
-    [xi.magic.spell.HYOTON_SAN    ] = { xi.mod.INT,    0,  134,  1.5,  134, 300, 0 },
-    [xi.magic.spell.KATON_ICHI    ] = { xi.mod.INT,    0,   28,  0.5,   28,  50, 0 },
-    [xi.magic.spell.KATON_NI      ] = { xi.mod.INT,    0,   68,    1,   68, 150, 0 },
-    [xi.magic.spell.KATON_SAN     ] = { xi.mod.INT,    0,  134,  1.5,  134, 300, 0 },
-    [xi.magic.spell.RAITON_ICHI   ] = { xi.mod.INT,    0,   28,  0.5,   28,  50, 0 },
-    [xi.magic.spell.RAITON_NI     ] = { xi.mod.INT,    0,   68,    1,   68, 150, 0 },
-    [xi.magic.spell.RAITON_SAN    ] = { xi.mod.INT,    0,  134,  1.5,  134, 300, 0 },
-    [xi.magic.spell.SUITON_ICHI   ] = { xi.mod.INT,    0,   28,  0.5,   28,  50, 0 },
-    [xi.magic.spell.SUITON_NI     ] = { xi.mod.INT,    0,   68,    1,   68, 150, 0 },
-    [xi.magic.spell.SUITON_SAN    ] = { xi.mod.INT,    0,  134,  1.5,  134, 300, 0 },
+-- Structure:             [spellId] = {  Stat used, mAcc, vNPC,    M,  vPC,   I, M0 },
+    [xi.magic.spell.DOTON_ICHI    ] = { xi.mod.INT,    0,   16,    1,   16,  25, 0 },
+    [xi.magic.spell.DOTON_NI      ] = { xi.mod.INT,    0,   69,    1,   69, 113, 0 },
+    [xi.magic.spell.DOTON_SAN     ] = { xi.mod.INT,    0,  134,    2,  134, 118, 0 },
+    [xi.magic.spell.HUTON_ICHI    ] = { xi.mod.INT,    0,   16,    1,   16,  25, 0 },
+    [xi.magic.spell.HUTON_NI      ] = { xi.mod.INT,    0,   69,    1,   69, 113, 0 },
+    [xi.magic.spell.HUTON_SAN     ] = { xi.mod.INT,    0,  134,    2,  134, 118, 0 },
+    [xi.magic.spell.HYOTON_ICHI   ] = { xi.mod.INT,    0,   16,    1,   16,  25, 0 },
+    [xi.magic.spell.HYOTON_NI     ] = { xi.mod.INT,    0,   69,    1,   69, 113, 0 },
+    [xi.magic.spell.HYOTON_SAN    ] = { xi.mod.INT,    0,  134,    2,  134, 118, 0 },
+    [xi.magic.spell.KATON_ICHI    ] = { xi.mod.INT,    0,   16,    1,   16,  25, 0 },
+    [xi.magic.spell.KATON_NI      ] = { xi.mod.INT,    0,   69,    1,   69, 113, 0 },
+    [xi.magic.spell.KATON_SAN     ] = { xi.mod.INT,    0,  134,    2,  134, 118, 0 },
+    [xi.magic.spell.RAITON_ICHI   ] = { xi.mod.INT,    0,   16,    1,   16,  25, 0 },
+    [xi.magic.spell.RAITON_NI     ] = { xi.mod.INT,    0,   69,    1,   69, 113, 0 },
+    [xi.magic.spell.RAITON_SAN    ] = { xi.mod.INT,    0,  134,    2,  134, 118, 0 },
+    [xi.magic.spell.SUITON_ICHI   ] = { xi.mod.INT,    0,   16,    1,   16,  25, 0 },
+    [xi.magic.spell.SUITON_NI     ] = { xi.mod.INT,    0,   69,    1,   69, 113, 0 },
+    [xi.magic.spell.SUITON_SAN    ] = { xi.mod.INT,    0,  134,    2,  134, 118, 0 },
 
 -- Divine spells: https://nw6yx36onohv5j6wmzoba3nllq-ac4c6men2g7xr2a-wiki-ffo-jp.translate.goog/html/1963.html
 --                                       1          2     3        4   5      6  7
