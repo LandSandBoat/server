@@ -337,7 +337,7 @@ xi.job_utils.rune_fencer.onSwordplayEffectTick = function(target, effect)
 
         if tickPower > 0 then
             target:addMod(xi.mod.ACC, tickPower)
-            target:addMod(xi.mod.EVASION, tickPower)
+            target:addMod(xi.mod.EVA, tickPower)
         end
 
         power = math.min(power + tickPower, maxPower)
@@ -350,7 +350,7 @@ xi.job_utils.rune_fencer.onSwordplayEffectLose = function(target, effect)
     local subPower = effect:getSubPower()
 
     target:delMod(xi.mod.ACC, power)
-    target:delMod(xi.mod.EVASION, power)
+    target:delMod(xi.mod.EVA, power)
 
     if subPower > 0 then
         target:delMod(xi.mod.SUBTLE_BLOW, subPower)
