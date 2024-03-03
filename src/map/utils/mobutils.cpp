@@ -1322,6 +1322,65 @@ namespace mobutils
         }
     }
 
+    void Cleanup()
+    {
+        // Manually delete and clean up pointers
+        for (auto spawnMod : mobSpawnModsList)
+        {
+            if (spawnMod.second)
+            {
+                for (auto mobMods : spawnMod.second->mobMods)
+                {
+                    destroy(mobMods);
+                }
+
+                for (auto mods : spawnMod.second->mods)
+                {
+                    destroy(mods);
+                }
+                destroy(spawnMod.second);
+            }
+        }
+        mobSpawnModsList.clear();
+
+        for (auto mobFamilyMods : mobFamilyModsList)
+        {
+            if (mobFamilyMods.second)
+            {
+                for (auto mobMods : mobFamilyMods.second->mobMods)
+                {
+                    destroy(mobMods);
+                }
+
+                for (auto mods : mobFamilyMods.second->mods)
+                {
+                    destroy(mods);
+                }
+
+                destroy(mobFamilyMods.second);
+            }
+        }
+        mobFamilyModsList.clear();
+
+        for (auto mobPoolMods : mobPoolModsList)
+        {
+            if (mobPoolMods.second)
+            {
+                for (auto mobMods : mobPoolMods.second->mobMods)
+                {
+                    destroy(mobMods);
+                }
+
+                for (auto mods : mobPoolMods.second->mods)
+                {
+                    destroy(mods);
+                }
+                destroy(mobPoolMods.second);
+            }
+        }
+        mobPoolModsList.clear();
+    }
+
     ModsList_t* GetMobFamilyMods(uint16 familyId, bool create)
     {
         if (mobFamilyModsList[familyId])

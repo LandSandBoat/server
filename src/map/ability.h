@@ -773,6 +773,7 @@ private:
 namespace ability
 {
     void LoadAbilitiesList();
+    void CleanupAbilitiesList();
 
     CAbility* GetAbility(uint16 AbilityID);
 

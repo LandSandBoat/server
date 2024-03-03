@@ -3283,4 +3283,53 @@ namespace fishingutils
         LoadFishingCatchLists();
         CreateFishingPools();
     }
+
+    void CleanupFishing()
+    {
+        for (auto fish : FishList)
+        {
+            destroy(fish.second->reqFish);
+            destroy(fish.second);
+        }
+        FishList.clear();
+
+        for (auto rod : FishingRods)
+        {
+            destroy(rod.second);
+        }
+        FishingRods.clear();
+
+        for (auto bait : FishingBaits)
+        {
+            destroy(bait.second);
+        }
+        FishingBaits.clear();
+
+        for (auto fishmoblist : FishZoneMobList)
+        {
+            for (auto fishmob : fishmoblist.second)
+            {
+                destroy(fishmob.second);
+            }
+            fishmoblist.second.clear();
+        }
+        FishZoneMobList.clear();
+
+        for (auto fishArealist : FishingAreaList)
+        {
+            for (auto fishArea : fishArealist.second)
+            {
+                destroy_arr(fishArea.second->areaBounds);
+                destroy(fishArea.second);
+            }
+            fishArealist.second.clear();
+        }
+        FishingAreaList.clear();
+
+        for (auto fish : FishList)
+        {
+            destroy(fish.second);
+        }
+        FishList.clear();
+    };
 } // namespace fishingutils

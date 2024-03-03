@@ -87,6 +87,7 @@ public:
     EntityList_t m_petList;
     EntityList_t m_trustList;
     EntityList_t m_npcList;
+    EntityList_t m_TransportList;
     EntityList_t m_charList;
 
     uint16           nextDynamicTargID; // The next dynamic targ ID to chosen -- SE rotates them forwards and skips entries that already exist.
@@ -99,9 +100,8 @@ public:
     ~CZoneEntities();
 
 private:
-    CZone*       m_zone;
-    CBaseEntity* m_Transport; // Transport indicator in the zone
-    time_point   m_EffectCheckTime{ server_clock::now() };
+    CZone*     m_zone;
+    time_point m_EffectCheckTime{ server_clock::now() };
 
     time_point computeTime{ server_clock::now() };
     uint16     lastCharComputeTargId;

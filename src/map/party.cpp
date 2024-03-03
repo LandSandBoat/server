@@ -117,13 +117,12 @@ void CParty::DisbandParty(bool playerInitiated)
         m_PAlliance->removeParty(this);
     }
     m_PSyncTarget = nullptr;
-    SetQuarterMaster("");
-
-    m_PLeader   = nullptr;
-    m_PAlliance = nullptr;
+    m_PLeader     = nullptr;
+    m_PAlliance   = nullptr;
 
     if (m_PartyType == PARTY_PCS)
     {
+        SetQuarterMaster("");
         PushPacket(0, 0, new CPartyDefinePacket(nullptr));
 
         for (auto& member : members)
@@ -1130,6 +1129,7 @@ void CParty::SetSyncTarget(const std::string& MemberName, uint16 message)
     }
 }
 
+// FIXME: add case for "" membername
 void CParty::SetQuarterMaster(const std::string& MemberName)
 {
     CBattleEntity* PEntity = GetMemberByName(MemberName);

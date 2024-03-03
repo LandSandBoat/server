@@ -62,10 +62,10 @@ CBattleEntity::CBattleEntity()
 
     m_magicEvasion = 0;
 
-    m_Weapons[SLOT_MAIN]   = new CItemWeapon(0);
-    m_Weapons[SLOT_SUB]    = new CItemWeapon(0);
-    m_Weapons[SLOT_RANGED] = new CItemWeapon(0);
-    m_Weapons[SLOT_AMMO]   = new CItemWeapon(0);
+    m_Weapons[SLOT_MAIN]   = nullptr;
+    m_Weapons[SLOT_SUB]    = nullptr;
+    m_Weapons[SLOT_RANGED] = nullptr;
+    m_Weapons[SLOT_AMMO]   = nullptr;
     m_dualWield            = false;
 
     memset(&health, 0, sizeof(health));
@@ -381,8 +381,8 @@ float CBattleEntity::GetMeleeRange() const
 
 int16 CBattleEntity::GetRangedWeaponDelay(bool tp)
 {
-    CItemWeapon* PRange = (CItemWeapon*)m_Weapons[SLOT_RANGED];
-    CItemWeapon* PAmmo  = (CItemWeapon*)m_Weapons[SLOT_AMMO];
+    CItemWeapon* PRange = dynamic_cast<CItemWeapon*>(m_Weapons[SLOT_RANGED]);
+    CItemWeapon* PAmmo  = dynamic_cast<CItemWeapon*>(m_Weapons[SLOT_AMMO]);
 
     // base delay
     int16 delay = 0;
@@ -408,7 +408,7 @@ int16 CBattleEntity::GetRangedWeaponDelay(bool tp)
 
 int16 CBattleEntity::GetAmmoDelay()
 {
-    CItemWeapon* PAmmo = (CItemWeapon*)m_Weapons[SLOT_AMMO];
+    CItemWeapon* PAmmo = dynamic_cast<CItemWeapon*>(m_Weapons[SLOT_AMMO]);
 
     int delay = 0;
     if (PAmmo != nullptr && PAmmo->getDamage() != 0)

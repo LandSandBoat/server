@@ -275,6 +275,7 @@ CCharEntity::~CCharEntity()
     destroy(CraftContainer);
     destroy(PMeritPoints);
     destroy(PJobPoints);
+    destroy(PLatentEffectContainer);
 
     PGuildShop = nullptr;
 
