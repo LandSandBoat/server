@@ -1607,7 +1607,24 @@ namespace battleutils
         // get ratio (not capped for RAs)
         float ratio = (float)rAttack / (float)PDefender->DEF();
 
-        ratio = std::clamp<float>(ratio, 0, 3);
+        // Ranged damage limit caluclations
+
+        // get weapon cap
+        auto* targ_weapon = dynamic_cast<CItemWeapon*>(PAttacker->m_Weapons[SLOT_RANGED]);
+        float maxRatio    = 3.25f;
+
+        // If null ignore the checks and fallback to 1H values
+        if (targ_weapon->getSkillType() == SKILL_MARKSMANSHIP)
+        {
+            maxRatio = 3.5f;
+        }
+
+        // Apply damage limit modifier
+        float damageLimitPlus = PAttacker->getMod(Mod::DAMAGE_LIMIT) / 100.0f;
+        float damageLimitPerc = (100.0f + PAttacker->getMod(Mod::DAMAGE_LIMITP)) / 100.0f;
+        maxRatio              = (maxRatio + damageLimitPlus) * damageLimitPerc;
+
+        ratio = std::clamp<float>(ratio, 0, maxRatio);
 
         // level correct (0.025 not 0.05 like for melee)
         if (PDefender->GetMLevel() > PAttacker->GetMLevel())
@@ -1635,8 +1652,8 @@ namespace battleutils
             maxPdif = ratio;
         }
 
-        minPdif = std::clamp<float>(minPdif, 0, 3);
-        maxPdif = std::clamp<float>(maxPdif, 0, 3);
+        minPdif = std::clamp<float>(minPdif, 0, maxRatio);
+        maxPdif = std::clamp<float>(maxPdif, 0, maxRatio);
 
         // return random number between the two
         float pdif = xirand::GetRandomNumber(minPdif, maxPdif);
@@ -3011,6 +3028,11 @@ namespace battleutils
                 }
             }
             // Skipping Ranged since that is handled in a separate function
+
+            // Apply damage limit modifier
+            float damageLimitPlus = PAttacker->getMod(Mod::DAMAGE_LIMIT) / 100.0f;
+            float damageLimitPerc = (100.0f + PAttacker->getMod(Mod::DAMAGE_LIMITP)) / 100.0f;
+            maxRatio              = (maxRatio + damageLimitPlus) * damageLimitPerc;
 
             // Default to 1H and check for +1 to max from crit
             if (isCritical)
