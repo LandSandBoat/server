@@ -396,10 +396,15 @@ void do_final(int code)
     destroy_arr(g_PBuff);
     destroy_arr(PTempBuff);
 
+    ability::CleanupAbilitiesList();
     itemutils::FreeItemList();
     battleutils::FreeWeaponSkillsList();
     battleutils::FreeMobSkillList();
     battleutils::FreePetSkillList();
+    fishingutils::CleanupFishing();
+    guildutils::Cleanup();
+    mobutils::Cleanup();
+    traits::ClearTraitsList();
 
     petutils::FreePetList();
     trustutils::FreeTrustList();
@@ -417,6 +422,13 @@ void do_final(int code)
 
     timer_final();
     socket_final();
+
+    for (auto session : map_session_list)
+    {
+        destroy_arr(session.second->server_packet_data);
+        destroy(session.second);
+    }
+
     luautils::cleanup();
     logging::ShutDown();
 

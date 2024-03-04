@@ -222,6 +222,7 @@ typedef std::vector<CTrait*> TraitList_t;
 namespace traits
 {
     void LoadTraitsList();
+    void ClearTraitsList();
 
     TraitList_t* GetTraits(uint8 JobID);
 }; // namespace traits

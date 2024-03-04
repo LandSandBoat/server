@@ -15805,7 +15805,10 @@ void CLuaBaseEntity::setDelay(uint16 delay)
     }
 
     auto* PMobEntity = static_cast<CMobEntity*>(m_PBaseEntity);
-    static_cast<CItemWeapon*>(PMobEntity->m_Weapons[SLOT_MAIN])->setDelay(delay);
+    if (auto* PItemWeapon = dynamic_cast<CItemWeapon*>(PMobEntity->m_Weapons[SLOT_MAIN]))
+    {
+        PItemWeapon->setDelay(delay);
+    }
 }
 
 /************************************************************************
@@ -15823,7 +15826,10 @@ void CLuaBaseEntity::setDamage(uint16 damage)
     }
 
     auto* PMobEntity = static_cast<CMobEntity*>(m_PBaseEntity);
-    static_cast<CItemWeapon*>(PMobEntity->m_Weapons[SLOT_MAIN])->setDamage(damage);
+    if (auto* PItemWeapon = dynamic_cast<CItemWeapon*>(PMobEntity->m_Weapons[SLOT_MAIN]))
+    {
+        PItemWeapon->setDamage(damage);
+    }
 }
 
 /************************************************************************

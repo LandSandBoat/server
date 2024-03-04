@@ -281,8 +281,8 @@ public:
     void         SendZoneUpdate();
 
     void   ResetLocalVars();
-    uint32 GetLocalVar(const char* var);
-    void   SetLocalVar(const char* var, uint32 val);
+    uint32 GetLocalVar(std::string var);
+    void   SetLocalVar(std::string var, uint32 val);
 
     // pre-tick update
     virtual void Tick(time_point) = 0;
