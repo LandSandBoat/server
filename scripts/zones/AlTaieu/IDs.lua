@@ -33,12 +33,12 @@ zones[xi.zone.ALTAIEU] =
         EUVHIS_RED           = 16912817,
         EUVHIS_BLACK         = 16912823,
         RUAERN_BASE          = 16912829,
-        JAILER_OF_HOPE       = 16912838,
-        JAILER_OF_JUSTICE    = 16912839,
-        JAILER_OF_PRUDENCE_1 = 16912846,
-        JAILER_OF_PRUDENCE_2 = 16912847,
-        JAILER_OF_LOVE       = 16912848,
-        ABSOLUTE_VIRTUE      = 16912876,
+        JAILER_OF_HOPE       = GetFirstID('Jailer_of_Hope'),
+        JAILER_OF_JUSTICE    = GetFirstID('Jailer_of_Justice'),
+        JAILER_OF_PRUDENCE_1 = GetFirstID('Jailer_of_Prudence'),
+        JAILER_OF_PRUDENCE_2 = GetFirstID('Jailer_of_Prudence') + 1,
+        JAILER_OF_LOVE       = GetFirstID('Jailer_of_Love'),
+        ABSOLUTE_VIRTUE      = GetFirstID('Absolute_Virtue'),
     },
     npc =
     {

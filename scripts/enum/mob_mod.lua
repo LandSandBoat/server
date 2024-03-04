@@ -85,4 +85,5 @@ xi.mobMod =
     CAN_PARRY              = 75, -- Check if a mob is allowed to have parry rank (Rank Value 1-5)
     NO_WIDESCAN            = 76, -- Disables widescan for a specific mob
     TRUST_DISTANCE         = 77, -- TRUSTS ONLY: Set movement type/distance. See trust.lua for details.
+    ABILITY_RESPONSE       = 78, -- Mob can respond to player ability use with onPlayerAbilityUse()
 }
