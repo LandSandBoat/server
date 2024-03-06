@@ -74,6 +74,8 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "utils/trustutils.h"
 #include "utils/zoneutils.h"
 
+#include <nonstd/jthread.hpp>
+
 #ifdef WIN32
 #include <io.h>
 #endif
@@ -91,7 +93,7 @@ uint16  map_port = 0;
 
 map_session_list_t map_session_list = {};
 
-std::thread messageThread;
+nonstd::jthread messageThread;
 
 std::unique_ptr<SqlConnection> sql;
 
@@ -225,7 +227,7 @@ int32 do_init(int32 argc, char** argv)
 
     ShowInfo("do_init: starting ZMQ thread");
     message::init();
-    messageThread = std::thread(message::listen);
+    messageThread = nonstd::jthread(message::listen);
 
     ShowInfo("do_init: loading items");
     itemutils::Initialize();
@@ -411,10 +413,7 @@ void do_final(int code)
     zoneutils::FreeZoneList();
 
     message::close();
-    if (messageThread.joinable())
-    {
-        messageThread.join();
-    }
+    messageThread.join();
 
     CTaskMgr::delInstance();
     CVanaTime::delInstance();
