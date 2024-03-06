@@ -382,6 +382,12 @@ uint16 CMobEntity::TPUseChance()
         return 10000;
     }
 
+    // mobs use three mob skills in a row under Meikyo Shisui
+    if (StatusEffectContainer->HasStatusEffect(EFFECT_MEIKYO_SHISUI) && GetLocalVar("[MeikyoShisui]MobSkillCount") > 0)
+    {
+        return 10000;
+    }
+
     return (uint16)getMobMod(MOBMOD_TP_USE_CHANCE);
 }
 
