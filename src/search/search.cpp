@@ -80,6 +80,7 @@ typedef u_int SOCKET;
 #include "packets/search_comment.h"
 #include "packets/search_list.h"
 
+#include <nonstd/jthread.hpp>
 #include <task_system.hpp>
 
 #define DEFAULT_BUFLEN 1024
@@ -384,7 +385,7 @@ int32 main(int32 argc, char** argv)
         // clang-format on
     }
 
-    std::thread taskManagerThread(TaskManagerThread, std::ref(requestExit));
+    nonstd::jthread taskManagerThread(TaskManagerThread, std::ref(requestExit));
 
     auto taskSystem = ts::task_system(4);
 
