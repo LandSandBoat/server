@@ -271,7 +271,7 @@ local function setCasketData(player, x, y, z, r, npc, partyID, mobLvl)
         npc:setLocalVar('[caskets]SPAWNTIME', os.time())
         npc:setPos(x, y, z, r)
         npc:setStatus(xi.status.NORMAL)
-        npc:entityAnimationPacket('deru')
+        npc:entityAnimationPacket(xi.animationString.STATUS_VISIBLE)
         npc:setModelId(chestStyle)
         sendChestDropMessage(player)
         -----------------------------------
