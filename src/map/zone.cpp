@@ -137,8 +137,36 @@ CZone::CZone(ZONEID ZoneID, REGION_TYPE RegionID, CONTINENT_TYPE ContinentID, ui
 CZone::~CZone()
 {
     destroy(m_TreasurePool);
-    destroy(m_CampaignHandler);
     destroy(m_zoneEntities);
+    destroy(m_BattlefieldHandler);
+
+    if (m_CampaignHandler)
+    {
+        destroy(m_CampaignHandler);
+    }
+
+    if (m_navMesh)
+    {
+        destroy(m_navMesh);
+    }
+
+    if (lineOfSight)
+    {
+        destroy(lineOfSight);
+    }
+
+    // Manually delete and clear m_triggerAreaList
+    for (auto triggerArea : m_triggerAreaList)
+    {
+        destroy(triggerArea);
+    }
+    m_triggerAreaList.clear();
+
+    for (auto zoneLine : m_zoneLineList)
+    {
+        destroy(zoneLine);
+    }
+    m_zoneLineList.clear();
 }
 
 ZONEID CZone::GetID()
@@ -426,9 +454,9 @@ void CZone::LoadZoneSettings()
         {
             m_TreasurePool = new CTreasurePool(TREASUREPOOL_ZONE);
         }
-        if (m_CampaignHandler->m_PZone == nullptr)
+        if (m_CampaignHandler && m_CampaignHandler->m_PZone == nullptr)
         {
-            m_CampaignHandler = nullptr;
+            destroy(m_CampaignHandler);
         }
     }
     else

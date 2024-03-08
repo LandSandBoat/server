@@ -1017,6 +1017,7 @@ namespace fishingutils
     void LoadFishGroups();
     void LoadFishingCatchLists();
     void InitializeFishingSystem();
+    void CleanupFishing();
 }; // namespace fishingutils
 
 #endif // _FISHINGUTILS_H

@@ -491,6 +491,7 @@ xi.mod =
     PARRY_SPIKES                = 1022, -- Battuta parry spikes rate
     PARRY_SPIKES_DMG            = 1023, -- Battuta parry spikes damage
     SPECIAL_ATTACK_EVASION      = 1024, -- Foil "Special Attack" evasion
+    AUGMENTS_SLEIGHT_OF_SWORD   = 277,  -- Enhances bonus "Subtle Blow" per merit.
 
     FIRE_AFFINITY_DMG               = 347,
     ICE_AFFINITY_DMG                = 348,

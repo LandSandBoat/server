@@ -336,6 +336,16 @@ namespace trustutils
 
     void FreeTrustList()
     {
+        for (auto trust : g_PTrustList)
+        {
+            destroy(trust);
+        }
+        g_PTrustList.clear();
+
+        for (auto trustID : g_PTrustIDList)
+        {
+            destroy(trustID);
+        }
         g_PTrustIDList.clear();
     }
 

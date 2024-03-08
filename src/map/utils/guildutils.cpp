@@ -112,6 +112,22 @@ namespace guildutils
         UpdateGuildPointsPattern();
     }
 
+    void Cleanup()
+    {
+        // Delete pointers and cleanup vectors manually
+        for (auto guild : g_PGuildList)
+        {
+            destroy(guild);
+        }
+        g_PGuildList.clear();
+
+        for (auto itemContainer : g_PGuildShopList)
+        {
+            destroy(itemContainer);
+        }
+        g_PGuildList.clear();
+    }
+
     void UpdateGuildsStock()
     {
         for (auto* PGuildShop : g_PGuildShopList)

@@ -73,6 +73,7 @@ namespace mobutils
     void   GetAvailableSpells(CMobEntity* PMob);
     void   InitializeMob(CMobEntity* PMob);
     void   LoadSqlModifiers();
+    void   Cleanup();
 
     // get modifiers for pool / family / spawn
     ModsList_t* GetMobFamilyMods(uint16 familyId, bool create = false);
