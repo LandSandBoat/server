@@ -377,7 +377,9 @@ namespace charutils
                                "moghancement,"                 // 28
                                "UNIX_TIMESTAMP(`lastupdate`)," // 29
                                "languages,"                    // 30
-                               "chatfilters "                  // 31
+                               "settings,"                     // 31
+                               "chatfilters_1,"                // 32
+                               "chatfilters_2 "                // 33
                                "FROM chars "
                                "WHERE charid = %u";
 
@@ -462,7 +464,13 @@ namespace charutils
             PChar->SetMoghancement(sql->GetUIntData(28));
             PChar->lastOnline      = sql->GetUIntData(29);
             PChar->search.language = (uint8)sql->GetUIntData(30);
-            PChar->chatFilterFlags = sql->GetUInt64Data(31);
+            uint32_t playerSettings = sql->GetUIntData(31);
+            uint32_t MassageFilter = sql->GetUIntData(32);
+            uint32_t MassageFilter2 = sql->GetUIntData(33);
+
+            std::memcpy(&PChar->playerConfig, &playerSettings, sizeof(uint32_t));
+            std::memcpy(&PChar->playerConfig.MassageFilter, &MassageFilter, sizeof(uint32_t));
+            std::memcpy(&PChar->playerConfig.MassageFilter2, &MassageFilter2, sizeof(uint32_t));
         }
 
         LoadSpells(PChar);
@@ -674,7 +682,7 @@ namespace charutils
             limitPoints              = (uint16)sql->GetIntData(24);
         }
 
-        fmtQuery = "SELECT nameflags, mjob, sjob, hp, mp, mhflag, title, bazaar_message, zoning, "
+        fmtQuery = "SELECT mjob, sjob, hp, mp, mhflag, title, bazaar_message, zoning, "
                    "pet_id, pet_type, pet_hp, pet_mp, pet_level "
                    "FROM char_stats WHERE charid = %u;";
 
@@ -683,38 +691,29 @@ namespace charutils
 
         if (ret != SQL_ERROR && sql->NumRows() != 0 && sql->NextRow() == SQL_SUCCESS)
         {
-            PChar->nameflags.flags = sql->GetUIntData(0);
+            PChar->SetMJob(sql->GetUIntData(0));
+            PChar->SetSJob(sql->GetUIntData(1));
 
-            PChar->SetMJob(sql->GetUIntData(1));
-            PChar->SetSJob(sql->GetUIntData(2));
+            HP = sql->GetIntData(2);
+            MP = sql->GetIntData(3);
 
-            HP = sql->GetIntData(3);
-            MP = sql->GetIntData(4);
+            PChar->profile.mhflag = (uint16)sql->GetIntData(4);
+            PChar->profile.title  = (uint16)sql->GetIntData(5);
 
-            PChar->profile.mhflag = (uint16)sql->GetIntData(5);
-            PChar->profile.title  = (uint16)sql->GetIntData(6);
+            std::string bazaarMessage = sql->GetStringData(6);
+            PChar->bazaar.message = bazaarMessage.c_str(); // c_str call guarantees a null terminator, which the client probably needs
 
-            int8* bazaarMessage = sql->GetData(7);
-            if (bazaarMessage != nullptr)
-            {
-                PChar->bazaar.message.insert(0, (char*)sql->GetData(7));
-            }
-            else
-            {
-                PChar->bazaar.message = '\0';
-            }
-
-            zoning = sql->GetUIntData(8);
+            zoning = sql->GetUIntData(7);
 
             // Determine if the pet should be respawned.
-            int16 petHP = sql->GetUIntData(11);
+            int16 petHP = sql->GetUIntData(10);
             if (petHP)
             {
                 PChar->petZoningInfo.petHP        = petHP;
-                PChar->petZoningInfo.petID        = sql->GetUIntData(9);
-                PChar->petZoningInfo.petMP        = sql->GetIntData(12);
-                PChar->petZoningInfo.petType      = static_cast<PET_TYPE>(sql->GetUIntData(10));
-                PChar->petZoningInfo.petLevel     = sql->GetUIntData(13);
+                PChar->petZoningInfo.petID        = sql->GetUIntData(8);
+                PChar->petZoningInfo.petMP        = sql->GetIntData(11);
+                PChar->petZoningInfo.petType      = static_cast<PET_TYPE>(sql->GetUIntData(9));
+                PChar->petZoningInfo.petLevel     = sql->GetUIntData(12);
                 PChar->petZoningInfo.respawnPet   = true;
                 PChar->petZoningInfo.jugSpawnTime = PChar->getCharVar("jugpet-spawn-time");
                 PChar->petZoningInfo.jugDuration  = PChar->getCharVar("jugpet-duration-seconds");
@@ -850,8 +849,7 @@ namespace charutils
         fmtQuery = "SELECT "
                    "gmlevel, "    // 0
                    "mentor, "     // 1
-                   "job_master, " // 2
-                   "nnameflags "  // 3
+                   "job_master "  // 2
                    "FROM chars "
                    "WHERE charid = %u;";
 
@@ -862,7 +860,6 @@ namespace charutils
             PChar->m_GMlevel             = (uint8)sql->GetUIntData(0);
             PChar->m_mentorUnlocked      = sql->GetUIntData(1) > 0;
             PChar->m_jobMasterDisplay    = sql->GetUIntData(2) > 0;
-            PChar->menuConfigFlags.flags = sql->GetUIntData(3);
         }
 
         ret = sql->Query("SELECT field_chocobo FROM char_pet WHERE charid = %u;", PChar->id);
@@ -5383,11 +5380,11 @@ namespace charutils
         TracyZoneScoped;
 
         const char* Query = "UPDATE char_stats "
-                            "SET hp = %u, mp = %u, nameflags = %u, mhflag = %u, mjob = %u, sjob = %u, "
+                            "SET hp = %u, mp = %u, mhflag = %u, mjob = %u, sjob = %u, "
                             "pet_id = %u, pet_type = %u, pet_hp = %u, pet_mp = %u, pet_level = %u "
                             "WHERE charid = %u;";
 
-        sql->Query(Query, PChar->health.hp, PChar->health.mp, PChar->nameflags.flags, PChar->profile.mhflag, PChar->GetMJob(), PChar->GetSJob(),
+        sql->Query(Query, PChar->health.hp, PChar->health.mp, PChar->profile.mhflag, PChar->GetMJob(), PChar->GetSJob(),
                    PChar->petZoningInfo.petID, static_cast<uint8>(PChar->petZoningInfo.petType), PChar->petZoningInfo.petHP, PChar->petZoningInfo.petMP, PChar->petZoningInfo.petLevel, PChar->id);
 
         // These two are jug only variables. We should probably move pet char stats into its own table, but in the meantime
@@ -5409,7 +5406,6 @@ namespace charutils
         const char* Query = "UPDATE %s SET %s %u WHERE charid = %u;";
 
         sql->Query(Query, "chars", "gmlevel =", PChar->m_GMlevel, PChar->id);
-        sql->Query(Query, "char_stats", "nameflags =", PChar->nameflags.flags, PChar->id);
     }
 
     void SaveMentorFlag(CCharEntity* PChar)
@@ -5421,6 +5417,17 @@ namespace charutils
         sql->Query(Query, "chars", "mentor =", PChar->m_mentorUnlocked, PChar->id);
     }
 
+    void SavePlayerSettings(CCharEntity* PChar)
+    {
+        TracyZoneScoped;
+
+        const char* Query = "UPDATE %s SET %s %llu WHERE charid = %u;";
+
+        uint32_t playerSettings = {};
+
+        std::memcpy(&playerSettings, &PChar->playerConfig, sizeof(uint32_t));
+        sql->Query(Query, "chars", "settings =", playerSettings, PChar->id);
+    }
     void SaveJobMasterDisplay(CCharEntity* PChar)
     {
         TracyZoneScoped;
@@ -5432,20 +5439,6 @@ namespace charutils
 
     /************************************************************************
      *                                                                       *
-     *  Save the char's menu config flags                                    *
-     *                                                                       *
-     ************************************************************************/
-    void SaveMenuConfigFlags(CCharEntity* PChar)
-    {
-        TracyZoneScoped;
-
-        const char* Query = "UPDATE %s SET %s %u WHERE charid = %u;";
-
-        sql->Query(Query, "chars", "nnameflags =", PChar->menuConfigFlags.flags, PChar->id);
-    }
-
-    /************************************************************************
-     *                                                                       *
      *  Save the char's chat filter flags                                    *
      *                                                                       *
      ************************************************************************/
@@ -5453,10 +5446,17 @@ namespace charutils
     void SaveChatFilterFlags(CCharEntity* PChar)
     {
         TracyZoneScoped;
+        uint32_t filters  = {};
+        const char* Query = "UPDATE chars SET chatfilters_1 = %llu WHERE charid = %u;";
 
-        const char* Query = "UPDATE chars SET chatfilters = %llu WHERE charid = %u;";
+        std::memcpy(&filters, &PChar->playerConfig.MassageFilter, sizeof(uint32_t));
 
-        sql->Query(Query, PChar->chatFilterFlags, PChar->id);
+        sql->Query(Query, filters, PChar->id);
+        Query = "UPDATE chars SET chatfilters_2 = %llu WHERE charid = %u;";
+
+        std::memcpy(&filters, &PChar->playerConfig.MassageFilter2, sizeof(uint32_t));
+        sql->Query(Query, filters, PChar->id);
+
     }
 
     /************************************************************************
@@ -5969,10 +5969,10 @@ namespace charutils
         // Removes new player icon if played for more than 240 hours
         if (PChar->isNewPlayer() && playtime >= 864000)
         {
-            PChar->menuConfigFlags.flags &= ~NFLAG_NEWPLAYER;
+            PChar->playerConfig.NewAdventurerOffFlg = true;
             PChar->updatemask |= UPDATE_HP;
 
-            SaveMenuConfigFlags(PChar);
+            SavePlayerSettings(PChar);
         }
     }
 

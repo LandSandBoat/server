@@ -274,7 +274,7 @@ xi.trust.canCast = function(caster, spell, notAllowedTrustIds)
     end
 
     -- GMs can do what they want (as long as ENABLE_TRUST_CASTING is enabled)
-    if caster:getGMLevel() > 0 and caster:checkNameFlags(0x04000000) then
+    if caster:getGMLevel() > 0 and caster:getVisibleGMLevel() >= 3 then
         return 0
     end
 

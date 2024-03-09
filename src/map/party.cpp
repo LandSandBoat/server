@@ -611,9 +611,9 @@ void CParty::AddMember(CBattleEntity* PEntity)
 
         ReloadTreasurePool(PChar);
 
-        if (PChar->isSeekingParty)
+        if (PChar->isSeekingParty())
         {
-            PChar->isSeekingParty = false;
+            PChar->playerConfig.InviteFlg = false;
             PChar->updatemask |= UPDATE_HP;
 
             charutils::SaveCharStats(PChar);

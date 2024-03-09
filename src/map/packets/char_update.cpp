@@ -146,10 +146,10 @@ CCharUpdatePacket::CCharUpdatePacket(CCharEntity* PChar)
     flags0.SleepFlag       = false; // Hides the player, probably also used for Live Vanadiel
     flags0.GroundFlag      = false; // Do not ignore collision
     flags0.CliPosInitFlag  = false; // Ready to render?
-    flags0.LfgFlag         = PChar->isSeekingParty;
+    flags0.LfgFlag         = PChar->isSeekingParty();
     flags0.CfhFlag         = false; // Orange name for CFH, players don't currently use this?
-    flags0.AwayFlag        = PChar->isAway;
-    flags0.AnonymousFlag   = PChar->isAnon;
+    flags0.AwayFlag        = PChar->isAway();
+    flags0.AnonymousFlag   = PChar->isAnon();
     flags0.Gender          = PChar->GetGender();
     flags0.unknown_1_9     = 0; // If this flag is set, it will cause the entities ZoneNo field to be set with the current pGlobalNowZone->ZoneNo value.
     flags0.unknown_1_10    = 0; // This value is used with the main GC_ZONE object. (It is assumed that this is the new MonStat value that was used in this packet previously.)
@@ -223,7 +223,7 @@ CCharUpdatePacket::CCharUpdatePacket(CCharEntity* PChar)
     flags3.TrialFlag        = false; // Trial account icon flag
     flags3.unknown_0_2      = 0;     // Unknown.
     flags3.NewCharacterFlag = PChar->isNewPlayer();
-    flags3.MentorFlag       = PChar->isMentor;
+    flags3.MentorFlag       = PChar->isMentor();
     flags3.unknown_0_5      = 0; // unknown
     flags3.unknown_0_6      = 0; // unknown
     flags3.unknown_0_7      = 0;

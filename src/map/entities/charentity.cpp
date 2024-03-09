@@ -182,7 +182,6 @@ CCharEntity::CCharEntity()
     m_hasRaise            = 0;
     m_weaknessLvl         = 0;
     m_hasArise            = false;
-    m_hasAutoTarget       = 1;
     m_InsideTriggerAreaID = 0;
     m_LevelRestriction    = 0;
     m_lastBcnmTimePrompt  = 0;
@@ -235,7 +234,7 @@ CCharEntity::CCharEntity()
 
     m_Substate = CHAR_SUBSTATE::SUBSTATE_NONE;
 
-    chatFilterFlags = 0;
+    playerConfig = {};
 
     PAI = std::make_unique<CAIContainer>(this, nullptr, std::make_unique<CPlayerController>(this), std::make_unique<CTargetFind>(this));
 
@@ -420,7 +419,32 @@ void CCharEntity::erasePackets(uint8 num)
 
 bool CCharEntity::isNewPlayer() const
 {
-    return menuConfigFlags.flags & NFLAG_NEWPLAYER;
+    return !playerConfig.NewAdventurerOffFlg;
+}
+
+bool CCharEntity::isSeekingParty() const
+{
+    return playerConfig.InviteFlg;
+}
+
+bool CCharEntity::isAnon() const
+{
+    return playerConfig.AnonymityFlg;
+}
+
+bool CCharEntity::isAway() const
+{
+    return playerConfig.AwayFlg;
+}
+
+bool CCharEntity::isMentor() const
+{
+    return playerConfig.MentorFlg;
+}
+
+bool CCharEntity::hasAutoTargetEnabled() const
+{
+    return !playerConfig.AutoTargetOffFlg;
 }
 
 void CCharEntity::setPetZoningInfo()
