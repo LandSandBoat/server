@@ -1836,7 +1836,7 @@ void CBattleEntity::OnMobSkillFinished(CMobSkillState& state, action_t& action)
         else if (PSkill->isConal())
         {
             float angle = 45.0f;
-            PAI->TargetFind->findWithinCone(PTarget, distance, angle, findFlags);
+            PAI->TargetFind->findWithinCone(PTarget, distance, angle, findFlags, PSkill->getAoe());
         }
         else
         {
@@ -1974,7 +1974,15 @@ void CBattleEntity::OnMobSkillFinished(CMobSkillState& state, action_t& action)
         if (target.speceffect == SPECEFFECT::HIT) // Formerly bitwise and, though nothing in this function adds additional bits to the field
         {
             target.speceffect = SPECEFFECT::RECOIL;
-            target.knockback  = PSkill->getKnockback();
+            if (target.reaction == REACTION::HIT)
+            {
+                target.knockback = PSkill->getKnockback();
+            }
+            else
+            {
+                target.knockback = 0;
+            }
+
             if (first && (PSkill->getPrimarySkillchain() != 0))
             {
                 SUBEFFECT effect = battleutils::GetSkillChainEffect(PTargetFound, PSkill->getPrimarySkillchain(), PSkill->getSecondarySkillchain(),

@@ -106,6 +106,19 @@ void CLuaAction::messageID(uint32 actionTargetID, uint16 messageID)
     }
 }
 
+std::optional<uint16> CLuaAction::getMsg(uint32 actionTargetID)
+{
+    for (auto&& actionList : m_PLuaAction->actionLists)
+    {
+        if (actionList.ActionTargetID == actionTargetID)
+        {
+            return actionList.actionTargets[0].messageID;
+        }
+    }
+
+    return std::nullopt;
+}
+
 std::optional<uint16> CLuaAction::getAnimation(uint32 actionTargetID)
 {
     for (auto&& actionList : m_PLuaAction->actionLists)
@@ -243,6 +256,7 @@ void CLuaAction::Register()
     SOL_REGISTER("getParam", CLuaAction::getParam);
     SOL_REGISTER("param", CLuaAction::param);
     SOL_REGISTER("messageID", CLuaAction::messageID);
+    SOL_REGISTER("getMsg", CLuaAction::getMsg);
     SOL_REGISTER("getAnimation", CLuaAction::getAnimation);
     SOL_REGISTER("setAnimation", CLuaAction::setAnimation);
     SOL_REGISTER("getCategory", CLuaAction::getCategory);

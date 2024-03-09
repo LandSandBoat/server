@@ -101,7 +101,7 @@ public:
     // Main methods for finding targets
     void findSingleTarget(CBattleEntity* PTarget, uint8 flags = FINDFLAGS_NONE);
     void findWithinArea(CBattleEntity* PTarget, AOE_RADIUS radiusType, float radius, uint8 flags = FINDFLAGS_NONE);
-    void findWithinCone(CBattleEntity* PTarget, float distance, float angle, uint8 flags = FINDFLAGS_NONE);
+    void findWithinCone(CBattleEntity* PTarget, float distance, float angle, uint8 flags = FINDFLAGS_NONE, uint8 aoeType = 4);
 
     // add all targets in contexts
     void addAllInZone(CBattleEntity* PTarget, bool withPet);
