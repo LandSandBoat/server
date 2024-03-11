@@ -11,7 +11,7 @@ zoneObject.onInitialize = function(zone)
     zone:registerTriggerArea(2, -101, 7, -114, 0, 0, 0) -- Center Pool
     zone:registerTriggerArea(3, -112, 3, -103, 0, 0, 0) -- Right Pool
 
-    xi.helm.initZone(zone, xi.helm.type.EXCAVATION)
+    xi.helm.initZone(zone, xi.helmType.EXCAVATION)
 end
 
 zoneObject.onZoneIn = function(player, prevZone)

@@ -31,7 +31,7 @@ mission.sections =
             -- {
             --     onTrade = function(player, npc, trade)
             --         -- TODO: CSID for YORCIA_WEALD
-            --         xi.helm.onTrade(player, npc, trade, xi.helm.type.HARVESTING, nil, nil)
+            --         xi.helm.onTrade(player, npc, trade, xi.helmType.HARVESTING, nil, nil)
             --         return mission:keyItem(xi.ki.YORCIAS_TEAR)
             --     end,
             -- },

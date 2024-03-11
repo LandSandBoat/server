@@ -1153,6 +1153,17 @@ bool CMobController::CanAggroTarget(CBattleEntity* PTarget)
             return false;
         }
 
+        // Do not aggro if a normal CoP Fomor and the player has low enough fomor hate
+        if (PMob->m_Family == 115 && !(PMob->m_Type & MOBTYPE_NOTORIOUS) &&
+            (PMob->getZone() >= ZONE_LUFAISE_MEADOWS && PMob->getZone() <= ZONE_SACRARIUM) &&
+            PTarget->objtype == TYPE_PC)
+        {
+            if (static_cast<CCharEntity*>(PTarget)->getCharVar("FOMOR_HATE") < 8)
+            {
+                return false;
+            }
+        }
+
         // Don't aggro I'm an underground worm
         if ((PMob->m_roamFlags & ROAMFLAG_WORM) && PMob->IsNameHidden())
         {

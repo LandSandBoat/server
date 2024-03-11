@@ -6,7 +6,7 @@ local zoneObject = {}
 zoneObject.onInitialize = function(zone)
     xi.conq.setRegionalConquestOverseers(zone:getRegionID())
     xi.treasure.initZone(zone)
-    xi.helm.initZone(zone, xi.helm.type.MINING)
+    xi.helm.initZone(zone, xi.helmType.MINING)
 end
 
 zoneObject.onConquestUpdate = function(zone, updatetype, influence, owner, ranking, isConquestAlliance)

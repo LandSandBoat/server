@@ -7,7 +7,7 @@ local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
     xi.treasure.initZone(zone)
-    xi.helm.initZone(zone, xi.helm.type.MINING)
+    xi.helm.initZone(zone, xi.helmType.MINING)
 end
 
 zoneObject.onZoneIn = function(player, prevZone)

@@ -83,7 +83,7 @@ xi.wotg.helpers.helmTrade = function(player, helmType, broke)
     local zoneId = player:getZoneID()
 
     if
-        helmType == xi.helm.type.LOGGING and
+        helmType == xi.helmType.LOGGING and
         broke ~= 1 and
         math.random(1, 100) < wotgChance
     then
