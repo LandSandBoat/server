@@ -254,7 +254,7 @@ xi.job_utils.corsair.useDoubleUp = function(caster, target, ability, action)
         caster:setLocalVar('corsairActiveRoll', duEffect:getSubType())
         local snakeEye = caster:getStatusEffect(xi.effect.SNAKE_EYE)
         if snakeEye then
-            if prevRoll:getPower() >= 5 and math.random(100) < snakeEye:getPower() then
+            if roll >= 5 and math.random(100) < snakeEye:getPower() then
                 roll = 11
             else
                 roll = roll + 1
