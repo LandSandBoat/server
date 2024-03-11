@@ -15,14 +15,6 @@ require('scripts/missions/wotg/helpers')
 xi = xi or {}
 xi.helm = xi.helm or {}
 
-xi.helm.type =
-{
-    HARVESTING = 1,
-    EXCAVATION = 2,
-    LOGGING    = 3,
-    MINING     = 4,
-}
-
 -----------------------------------
 -- drops are { weight, itemId }
 -- (R) for retail-verified coordinates
@@ -30,7 +22,7 @@ xi.helm.type =
 
 local helmInfo =
 {
-    [xi.helm.type.HARVESTING] =
+    [xi.helmType.HARVESTING] =
     {
         id           = 'HARVESTING',
         animation    = xi.emote.HARVESTING,
@@ -344,7 +336,7 @@ local helmInfo =
 
     -----------------------------------
 
-    [xi.helm.type.EXCAVATION] =
+    [xi.helmType.EXCAVATION] =
     {
         id           = 'EXCAVATION',
         animation    = xi.emote.EXCAVATION,
@@ -486,7 +478,7 @@ local helmInfo =
 
     -----------------------------------
 
-    [xi.helm.type.LOGGING] =
+    [xi.helmType.LOGGING] =
     {
         id = 'LOGGING',
         animation    = xi.emote.LOGGING,
@@ -941,7 +933,7 @@ local helmInfo =
 
     -----------------------------------
 
-    [xi.helm.type.MINING] =
+    [xi.helmType.MINING] =
     {
         id           = 'MINING',
         animation    = xi.emote.EXCAVATION,
@@ -1501,7 +1493,7 @@ xi.helm.result = function(player, helmType, broke, itemID)
 
     -- Quest: Vanishing Act
     if
-        helmType == xi.helm.type.HARVESTING and
+        helmType == xi.helmType.HARVESTING and
         player:getQuestStatus(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.VANISHING_ACT) == QUEST_ACCEPTED and
         not player:hasKeyItem(xi.ki.RAINBOW_BERRY) and
         broke ~= 1 and

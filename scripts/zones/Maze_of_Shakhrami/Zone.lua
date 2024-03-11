@@ -19,7 +19,7 @@ zoneObject.onInitialize = function(zone)
     end
 
     xi.treasure.initZone(zone)
-    xi.helm.initZone(zone, xi.helm.type.EXCAVATION)
+    xi.helm.initZone(zone, xi.helmType.EXCAVATION)
 end
 
 zoneObject.onZoneIn = function(player, prevZone)

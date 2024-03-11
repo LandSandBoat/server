@@ -17,7 +17,7 @@ zoneObject.onInitialize = function(zone)
 
     GetMobByID(ID.mob.FLOCKBOCK):setRespawnTime(math.random(3600, 7200))
 
-    xi.helm.initZone(zone, xi.helm.type.LOGGING)
+    xi.helm.initZone(zone, xi.helmType.LOGGING)
 end
 
 zoneObject.onConquestUpdate = function(zone, updatetype, influence, owner, ranking, isConquestAlliance)

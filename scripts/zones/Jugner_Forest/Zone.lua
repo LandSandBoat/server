@@ -19,7 +19,7 @@ zoneObject.onInitialize = function(zone)
 
     xi.conq.setRegionalConquestOverseers(zone:getRegionID())
 
-    xi.helm.initZone(zone, xi.helm.type.LOGGING)
+    xi.helm.initZone(zone, xi.helmType.LOGGING)
 
     local respawnTime = 900 + math.random(0, 6) * 1800 -- 0:15 to 3:15 spawn timer in 30 minute intervals
     for offset = 1, 10 do

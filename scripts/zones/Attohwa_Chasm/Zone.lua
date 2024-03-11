@@ -41,7 +41,7 @@ zoneObject.onInitialize = function(zone)
     UpdateNMSpawnPoint(ID.mob.TIAMAT)
     GetMobByID(ID.mob.TIAMAT):setRespawnTime(math.random(86400, 259200))
 
-    xi.helm.initZone(zone, xi.helm.type.EXCAVATION)
+    xi.helm.initZone(zone, xi.helmType.EXCAVATION)
 end
 
 zoneObject.onZoneIn = function(player, prevZone)
