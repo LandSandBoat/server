@@ -262,7 +262,7 @@ namespace attackutils
      *  Check for damage multiplier, relic weapons etc.                      *
      *                                                                       *
      ************************************************************************/
-    uint32 CheckForDamageMultiplier(CCharEntity* PChar, CItemWeapon* PWeapon, uint32 damage, PHYSICAL_ATTACK_TYPE attackType, uint8 weaponSlot, bool allowRelicOccDamageProc)
+    uint32 CheckForDamageMultiplier(CCharEntity* PChar, CItemWeapon* PWeapon, uint32 damage, PHYSICAL_ATTACK_TYPE attackType, uint8 weaponSlot, bool allowProc)
     {
         if (PWeapon == nullptr)
         {
@@ -294,7 +294,7 @@ namespace attackutils
         float occ_extra_dmg        = battleutils::GetScaledItemModifier(PChar, PWeapon, Mod::OCC_DO_EXTRA_DMG) / 100.f;
         int16 occ_extra_dmg_chance = battleutils::GetScaledItemModifier(PChar, PWeapon, Mod::EXTRA_DMG_CHANCE) / 10;
 
-        if (allowRelicOccDamageProc)
+        if (allowProc)
         {
             if (occ_extra_dmg > 3.f && occ_extra_dmg_chance > 0 && xirand::GetRandomNumber(100) <= occ_extra_dmg_chance)
             {
