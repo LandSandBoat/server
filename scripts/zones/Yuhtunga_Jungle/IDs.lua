@@ -51,7 +51,7 @@ zones[xi.zone.YUHTUNGA_JUNGLE] =
         NO_COMBINATION                = 7880,  -- You were unable to enter a combination.
         UNITY_WANTED_BATTLE_INTERACT  = 7942,  -- Those who have accepted % must pay # Unity accolades to participate. The content for this Wanted battle is #. [Ready to begin?/You do not have the appropriate object set, so your rewards will be limited.]
         REGIME_REGISTERED             = 10058, -- New training regime registered!
-        COMMON_SENSE_SURVIVAL         = 12052, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
+        COMMON_SENSE_SURVIVAL         = 12053, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
     mob =
     {
