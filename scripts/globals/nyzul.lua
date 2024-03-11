@@ -278,11 +278,11 @@ xi.nyzul.handleAppraisalItem = function(player, npc)
                 players:messageName(ID.text.PLAYER_OBTAINS_ITEM, player, itemID)
             end
 
-            npc:entityAnimationPacket('open')
+            npc:entityAnimationPacket(xi.animationString.OPEN_CRATE_GLOW)
             npc:setLocalVar('opened', 1)
             npc:setUntargetable(true)
             npc:queue(10000, function(npcvar)
-                npcvar:entityAnimationPacket('kesu')
+                npcvar:entityAnimationPacket(xi.animationString.STATUS_DISAPPEAR)
             end)
 
             npc:queue(12000, function(npcvar)
@@ -299,7 +299,7 @@ end
 xi.nyzul.tempBoxTrigger = function(player, npc)
     if npc:getLocalVar('itemsPicked') == 0 then
         npc:setLocalVar('itemsPicked', 1)
-        npc:entityAnimationPacket('open')
+        npc:entityAnimationPacket(xi.animationString.OPEN_CRATE_GLOW)
         npc:setAnimationSub(13)
         xi.nyzul.tempBoxPickItems(npc)
     end
@@ -420,7 +420,7 @@ xi.nyzul.tempBoxFinish = function(player, csid, option, npc)
             npc:getLocalVar('itemAmount_3') == 0
         then
             npc:queue(10000, function(npcvar)
-                npcvar:entityAnimationPacket('kesu')
+                npcvar:entityAnimationPacket(xi.animationString.STATUS_DISAPPEAR)
             end)
 
             npc:queue(12000, function(npcvar)
