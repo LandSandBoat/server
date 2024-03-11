@@ -1619,13 +1619,6 @@ namespace battleutils
             maxRatio = 3.5f;
         }
 
-        // Apply damage limit modifier
-        float damageLimitPlus = PAttacker->getMod(Mod::DAMAGE_LIMIT) / 100.0f;
-        float damageLimitPerc = (100.0f + PAttacker->getMod(Mod::DAMAGE_LIMITP)) / 100.0f;
-        maxRatio              = (maxRatio + damageLimitPlus) * damageLimitPerc;
-
-        ratio = std::clamp<float>(ratio, 0, maxRatio);
-
         // level correct (0.025 not 0.05 like for melee)
         if (PDefender->GetMLevel() > PAttacker->GetMLevel())
         {
@@ -1651,6 +1644,11 @@ namespace battleutils
             minPdif = (-3.0f / 19.0f) + ((20.0f / 19.0f) * ratio);
             maxPdif = ratio;
         }
+
+        // Apply damage limit modifier
+        float damageLimitPlus = PAttacker->getMod(Mod::DAMAGE_LIMIT) / 100.0f;
+        float damageLimitPerc = (100.0f + PAttacker->getMod(Mod::DAMAGE_LIMITP)) / 100.0f;
+        maxRatio              = (maxRatio + damageLimitPlus) * damageLimitPerc;
 
         minPdif = std::clamp<float>(minPdif, 0, maxRatio);
         maxPdif = std::clamp<float>(maxPdif, 0, maxRatio);
