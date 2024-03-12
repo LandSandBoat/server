@@ -17072,6 +17072,22 @@ bool CLuaBaseEntity::deleteRaisedChocobo()
     return true;
 }
 
+void CLuaBaseEntity::clearActionQueue()
+{
+    if (m_PBaseEntity->PAI)
+    {
+        m_PBaseEntity->PAI->ClearActionQueue();
+    }
+}
+
+void CLuaBaseEntity::clearTimerQueue()
+{
+    if (m_PBaseEntity->PAI)
+    {
+        m_PBaseEntity->PAI->ClearTimerQueue();
+    }
+}
+
 void CLuaBaseEntity::setMannequinPose(uint16 itemID, uint8 race, uint8 pose)
 {
     TracyZoneScoped;
@@ -17970,6 +17986,9 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("setClaimedTraverserStones", CLuaBaseEntity::setClaimedTraverserStones);
 
     SOL_REGISTER("getHistory", CLuaBaseEntity::getHistory);
+
+    SOL_REGISTER("clearActionQueue", CLuaBaseEntity::clearActionQueue);
+    SOL_REGISTER("clearTimerQueue", CLuaBaseEntity::clearTimerQueue);
 
     SOL_REGISTER("getChocoboRaisingInfo", CLuaBaseEntity::getChocoboRaisingInfo);
     SOL_REGISTER("setChocoboRaisingInfo", CLuaBaseEntity::setChocoboRaisingInfo);
