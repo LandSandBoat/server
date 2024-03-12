@@ -384,8 +384,8 @@ xi.combat.physical.calculateMeleePDIF = function(actor, target, weaponType, wsAt
     local wRatio       = cRatio + (isCritical and 1.0 or 0)
     local pDifUpperCap = 0
     local pDifLowerCap = 0
-    local damageLimitPlus = attacker:getMod(xi.mod.DAMAGE_LIMIT) / 100
-    local damageLimitPercent = (100 + attacker:getMod(xi.mod.DAMAGE_LIMITP)) / 100
+    local damageLimitPlus = actor:getMod(xi.mod.DAMAGE_LIMIT) / 100
+    local damageLimitPercent = (100 + actor:getMod(xi.mod.DAMAGE_LIMITP)) / 100
     local pDifFinalCap = (pDifWeaponCapTable[weaponType][1] + damageLimitPlus) * damageLimitPercent + (isCritical and 1.0 or 0) -- Added damage limit bonuses
 
     -- pDIF upper cap.
@@ -518,8 +518,8 @@ xi.combat.physical.calculateRangedPDIF = function(actor, target, weaponType, wsA
     ----------------------------------------
     -- Step 4: Apply weapon type caps.
     ----------------------------------------
-    local damageLimitPlus = attacker:getMod(xi.mod.DAMAGE_LIMIT) / 100
-    local damageLimitPercent = (100 + attacker:getMod(xi.mod.DAMAGE_LIMITP)) / 100
+    local damageLimitPlus = actor:getMod(xi.mod.DAMAGE_LIMIT) / 100
+    local damageLimitPercent = (100 + actor:getMod(xi.mod.DAMAGE_LIMITP)) / 100
     local pDifFinalCap = (pDifWeaponCapTable[weaponType][1] + damageLimitPlus) * damageLimitPercent -- Added damage limit bonuses
 
     pDif = utils.clamp(pDif, 0, pDifFinalCap)
