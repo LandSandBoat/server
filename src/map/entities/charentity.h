@@ -541,6 +541,7 @@ public:
 
     virtual bool ValidTarget(CBattleEntity* PInitiator, uint16 targetFlags) override;
     virtual bool CanUseSpell(CSpell*) override;
+    bool         IsMobOwner(CBattleEntity* PTarget);
 
     virtual void Die() override;
     void         Die(duration _duration);
@@ -600,7 +601,6 @@ public:
 
 protected:
     void changeMoghancement(uint16 moghancementID, bool isAdding);
-    bool IsMobOwner(CBattleEntity* PTarget);
     void TrackArrowUsageForScavenge(CItemWeapon* PAmmo);
 
 private:

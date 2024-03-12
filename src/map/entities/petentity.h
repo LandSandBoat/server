@@ -72,6 +72,7 @@ public:
     virtual void      OnAbility(CAbilityState&, action_t&) override;
     virtual bool      ValidTarget(CBattleEntity* PInitiator, uint16 targetFlags) override;
     void              OnPetSkillFinished(CPetSkillState& state, action_t& action);
+    virtual bool      CanAttack(CBattleEntity* PTarget, std::unique_ptr<CBasicPacket>& errMsg) override;
 
 private:
     PET_TYPE   m_PetType;      // the type of pet e.g. avatar/wyvern/jugpet etc
