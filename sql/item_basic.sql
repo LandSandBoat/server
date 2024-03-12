@@ -10599,7 +10599,7 @@ INSERT INTO `item_basic` VALUES (13192,0,'leather_belt','leather_belt',1,2084,@W
 INSERT INTO `item_basic` VALUES (13193,0,'lizard_belt','lizard_belt',1,2084,@WAIST,0,439);
 INSERT INTO `item_basic` VALUES (13194,0,'warriors_belt','warriors_belt',1,2084,@WAIST,0,336);
 INSERT INTO `item_basic` VALUES (13195,0,'magic_belt','magic_belt',1,2084,@WAIST,0,506);
-INSERT INTO `item_basic` VALUES (13196,0,'silver_belt','silver_belt',1,2084,@WAIST,0,2074);
+INSERT INTO `item_basic` VALUES (13196,0,'silver_belt','silver_belt',1,2084,@WAIST,0,357);
 INSERT INTO `item_basic` VALUES (13197,0,'koenigs_belt','koenigs_belt',1,2084,@WAIST,0,4344);
 INSERT INTO `item_basic` VALUES (13198,0,'swordbelt','swordbelt',1,2084,@WAIST,0,2178);
 INSERT INTO `item_basic` VALUES (13199,0,'blood_stone','blood_stone',1,2084,@WAIST,0,25);
@@ -10626,7 +10626,7 @@ INSERT INTO `item_basic` VALUES (13219,0,'magic_belt_+1','magic_belt_+1',1,2080,
 INSERT INTO `item_basic` VALUES (13220,0,'royal_knights_belt','ryl.kgt._belt',1,2052,@WAIST,0,3655);
 INSERT INTO `item_basic` VALUES (13221,0,'mercenary_captains_belt','mrc.cpt._belt',1,2052,@WAIST,0,1634);
 INSERT INTO `item_basic` VALUES (13222,0,'force_belt','force_belt',1,2052,@WAIST,0,1376);
-INSERT INTO `item_basic` VALUES (13223,0,'silver_belt_+1','silver_belt_+1',1,2080,@WAIST,0,2592);
+INSERT INTO `item_basic` VALUES (13223,0,'silver_belt_+1','silver_belt_+1',1,2080,@WAIST,0,441);
 INSERT INTO `item_basic` VALUES (13224,0,'silver_obi_+1','silver_obi_+1',1,2080,@WAIST,0,844);
 INSERT INTO `item_basic` VALUES (13225,0,'brave_belt','brave_belt',1,2080,@WAIST,0,660);
 INSERT INTO `item_basic` VALUES (13226,0,'blood_stone_+1','blood_stone_+1',1,2080,@WAIST,0,31);
@@ -20309,7 +20309,7 @@ INSERT INTO `item_basic` VALUES (26220,0,'crepuscular_ring','crepuscular_ring',1
 INSERT INTO `item_basic` VALUES (26221,0,'sroda_ring','sroda_ring',1,63572,@NONE,1,0);
 INSERT INTO `item_basic` VALUES (26222,0,'seabirds_ring','seabirds_ring',1,34820,@RINGS,0,2);
 INSERT INTO `item_basic` VALUES (26223,0,'patissieres_ring','patissieres_ring',1,34820,@RINGS,0,2);
-INSERT INTO `item_basic` VALUES (26224,0,'confectioners_ring','confectioners_ring',1,34820,@RINGS,0,2);
+INSERT INTO `item_basic` VALUES (26224,0,'confectioners_ring','confectioners_ring',1,34820,@RINGS,0,519);
 INSERT INTO `item_basic` VALUES (26225,0,'medadas_ring','medadas_ring',1,63552,@NONE,1,0);
 INSERT INTO `item_basic` VALUES (26226,0,'gurebu-ogurebus_ring','gurebus_ring',1,63552,@NONE,1,0);
 INSERT INTO `item_basic` VALUES (26227,0,'cornelias_ring','cornelias_ring',1,63552,@NONE,1,0);
