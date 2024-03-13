@@ -169,12 +169,6 @@ uint16 CMobSkill::getAnimationID() const
 
 uint16 CMobSkill::getPetAnimationID() const
 {
-    // garuda
-    if (m_AnimID >= 565 && m_AnimID <= 573)
-    {
-        return m_AnimID - 485;
-    }
-
     // titan
     if (m_AnimID >= 539 && m_AnimID <= 547)
     {
