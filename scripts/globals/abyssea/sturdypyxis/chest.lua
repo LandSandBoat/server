@@ -104,7 +104,7 @@ xi.pyxis.removeChest = function(player, npc, addcruor, delay)
         npcArg:setNpcFlags(3203)
         npcArg:setLocalVar('SPAWNSTATUS', 0)
         npcArg:setStatus(xi.status.DISAPPEAR)
-        npcArg:entityAnimationPacket('kesu')
+        npcArg:entityAnimationPacket(xi.animationString.STATUS_DISAPPEAR)
         npc:setUntargetable(false)
     end)
 end

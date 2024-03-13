@@ -692,15 +692,14 @@ public:
     void  handleAfflatusMiseryDamage(double damage);
 
     bool   isWeaponTwoHanded();
-    int    getMeleeHitDamage(CLuaBaseEntity* PLuaBaseEntity, sol::object const& arg1); // gets the damage of a single hit vs the specified mob
-    uint16 getWeaponDmg();                                                             // gets the current equipped weapons' DMG rating
-    uint16 getWeaponDmgRank();                                                         // gets the current equipped weapons' DMG rating for Rank calc
-    uint16 getOffhandDmg();                                                            // gets the current equipped offhand's DMG rating (used in WS calcs)
-    uint16 getOffhandDmgRank();                                                        // gets the current equipped offhand's DMG rating for Rank calc
-    uint16 getRangedDmg();                                                             // Get ranged weapon DMG rating
-    uint16 getRangedDmgRank();                                                         // Get ranged weapond DMG rating used for calculating rank
-    uint16 getAmmoDmg();                                                               // Get ammo DMG rating
-    uint16 getWeaponHitCount(bool offhand);                                            // Get PC weapon hit count (Occasionally Attacks N times weapons)
+    uint16 getWeaponDmg();                  // gets the current equipped weapons' DMG rating
+    uint16 getWeaponDmgRank();              // gets the current equipped weapons' DMG rating for Rank calc
+    uint16 getOffhandDmg();                 // gets the current equipped offhand's DMG rating (used in WS calcs)
+    uint16 getOffhandDmgRank();             // gets the current equipped offhand's DMG rating for Rank calc
+    uint16 getRangedDmg();                  // Get ranged weapon DMG rating
+    uint16 getRangedDmgRank();              // Get ranged weapond DMG rating used for calculating rank
+    uint16 getAmmoDmg();                    // Get ammo DMG rating
+    uint16 getWeaponHitCount(bool offhand); // Get PC weapon hit count (Occasionally Attacks N times weapons)
 
     void removeAmmo();
 
@@ -878,6 +877,9 @@ public:
     auto getChocoboRaisingInfo() -> sol::table;
     bool setChocoboRaisingInfo(sol::table const& table);
     bool deleteRaisedChocobo();
+
+    void clearActionQueue();
+    void clearTimerQueue();
 
     void  setMannequinPose(uint16 itemID, uint8 race, uint8 pose);
     uint8 getMannequinPose(uint16 itemID);

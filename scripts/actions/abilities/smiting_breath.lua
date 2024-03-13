@@ -7,6 +7,8 @@
 -----------------------------------
 local abilityObject = {}
 
+-- TODO: find out what checks can result in being unable to use ability on the pet --
+-- such as if the wyvern has amnesia, stun, etc
 abilityObject.onAbilityCheck = function(player, target, ability)
     -- You can't actually use Restoring Breath on retail unless your wyvern is up
     -- This is on the pet menu, but just in case...

@@ -99,16 +99,40 @@ void CAttack::SetCritical(bool value)
     }
     else
     {
-        float attBonus = 0.f;
+        float attBonus = 1.0f;
         if (m_attackType == PHYSICAL_ATTACK_TYPE::KICK)
         {
             if (CStatusEffect* footworkEffect = m_attacker->StatusEffectContainer->GetStatusEffect(EFFECT_FOOTWORK))
             {
-                attBonus = footworkEffect->GetSubPower() / 256.f; // Mod is out of 256
+                attBonus = 1 + (footworkEffect->GetSubPower() / 256.f); // Mod is out of 256
             }
         }
 
-        m_damageRatio = battleutils::GetDamageRatio(m_attacker, m_victim, m_isCritical, attBonus);
+        SKILLTYPE skilltype = SKILLTYPE::SKILL_NONE;
+
+        if (m_attacker->objtype == TYPE_PC)
+        {
+            SLOTTYPE slot = SLOT_MAIN;
+
+            if (m_attackDirection == PHYSICAL_ATTACK_DIRECTION::RIGHTATTACK)
+            {
+                slot = SLOT_SUB;
+            }
+
+            if (m_attacker->objtype == TYPE_PC)
+            {
+                if (auto* weapon = dynamic_cast<CItemWeapon*>(m_attacker->m_Weapons[slot]))
+                {
+                    skilltype = static_cast<SKILLTYPE>(weapon->getSkillType());
+                }
+                else
+                {
+                    skilltype = SKILLTYPE::SKILL_HAND_TO_HAND;
+                }
+            }
+        }
+
+        m_damageRatio = battleutils::GetDamageRatio(m_attacker, m_victim, m_isCritical, attBonus, skilltype);
     }
 }
 
@@ -547,7 +571,7 @@ void CAttack::ProcessDamage()
 
     // Get damage multipliers.
     m_damage =
-        attackutils::CheckForDamageMultiplier((CCharEntity*)m_attacker, dynamic_cast<CItemWeapon*>(m_attacker->m_Weapons[slot]), m_damage, m_attackType, slot);
+        attackutils::CheckForDamageMultiplier((CCharEntity*)m_attacker, dynamic_cast<CItemWeapon*>(m_attacker->m_Weapons[slot]), m_damage, m_attackType, slot, m_isFirstSwing);
 
     // Apply Sneak Attack Augment Mod
     if (m_attacker->getMod(Mod::AUGMENTS_SA) > 0 && m_trickAttackDamage > 0 && m_attacker->StatusEffectContainer->HasStatusEffect(EFFECT_SNEAK_ATTACK))
