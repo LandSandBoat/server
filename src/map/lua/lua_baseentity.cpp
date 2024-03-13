@@ -3427,8 +3427,8 @@ void CLuaBaseEntity::setHomePoint()
                             SET home_zone = %u, home_rot = %u, home_x = %.3f, home_y = %.3f, home_z = %.3f \
                             WHERE charid = %u;";
 
-    sql->Query(fmtQuery, PChar->profile.home_point.destination, PChar->profile.home_point.p.rotation, PChar->profile.home_point.p.x,
-               PChar->profile.home_point.p.y, PChar->profile.home_point.p.z, PChar->id);
+    _sql->Query(fmtQuery, PChar->profile.home_point.destination, PChar->profile.home_point.p.rotation, PChar->profile.home_point.p.x,
+                PChar->profile.home_point.p.y, PChar->profile.home_point.p.z, PChar->id);
 }
 
 /************************************************************************
@@ -3444,13 +3444,13 @@ void CLuaBaseEntity::resetPlayer(const char* charName)
 
     // char will not be logged in so get the id manually
     char escapedCharName[16 * 2 + 1];
-    sql->EscapeString(escapedCharName, charName);
+    _sql->EscapeString(escapedCharName, charName);
     const char* Query = "SELECT charid FROM chars WHERE charname = '%s';";
-    int32       ret   = sql->Query(Query, escapedCharName);
+    int32       ret   = _sql->Query(Query, escapedCharName);
 
-    if (ret != SQL_ERROR && sql->NumRows() != 0 && sql->NextRow() == SQL_SUCCESS)
+    if (ret != SQL_ERROR && _sql->NumRows() != 0 && _sql->NextRow() == SQL_SUCCESS)
     {
-        id = sql->GetIntData(0);
+        id = _sql->GetIntData(0);
     }
 
     // could not get player from database
@@ -3462,7 +3462,7 @@ void CLuaBaseEntity::resetPlayer(const char* charName)
 
     // delete the account session
     Query = "DELETE FROM accounts_sessions WHERE charid = %u;";
-    sql->Query(Query, id);
+    _sql->Query(Query, id);
 
     // send the player to lower jeuno
     Query = "UPDATE chars "
@@ -3477,16 +3477,16 @@ void CLuaBaseEntity::resetPlayer(const char* charName)
             "moghouse = %u "
             "WHERE charid = %u;";
 
-    sql->Query(Query,
-               245,     // lower jeuno
-               122,     // prev zone
-               86,      // rotation
-               33.464f, // x
-               -5.000f, // y
-               69.162f, // z
-               0,       // boundary,
-               0,       // moghouse,
-               id);
+    _sql->Query(Query,
+                245,     // lower jeuno
+                122,     // prev zone
+                86,      // rotation
+                33.464f, // x
+                -5.000f, // y
+                69.162f, // z
+                0,       // boundary,
+                0,       // moghouse,
+                id);
 
     ShowDebug("Player reset was successful.");
 }
@@ -3538,18 +3538,18 @@ bool CLuaBaseEntity::gotoPlayer(std::string const& playerName)
     bool found = false;
 
     char escapedCharName[16 * 2 + 1];
-    sql->EscapeString(escapedCharName, playerName.c_str());
+    _sql->EscapeString(escapedCharName, playerName.c_str());
 
     const char* fmtQuery = "SELECT charid FROM chars WHERE charname = '%s';";
-    int32       ret      = sql->Query(fmtQuery, escapedCharName);
+    int32       ret      = _sql->Query(fmtQuery, escapedCharName);
 
-    if (ret != SQL_ERROR && sql->NumRows() != 0 && sql->NextRow() == SQL_SUCCESS)
+    if (ret != SQL_ERROR && _sql->NumRows() != 0 && _sql->NextRow() == SQL_SUCCESS)
     {
         char buf[30];
         memset(&buf[0], 0, sizeof(buf));
 
-        ref<uint32>(&buf, 0) = sql->GetUIntData(0); // target char
-        ref<uint32>(&buf, 4) = m_PBaseEntity->id;   // warping to target char, their server will send us a zoning message with their pos
+        ref<uint32>(&buf, 0) = _sql->GetUIntData(0); // target char
+        ref<uint32>(&buf, 4) = m_PBaseEntity->id;    // warping to target char, their server will send us a zoning message with their pos
 
         message::send(MSG_SEND_TO_ZONE, &buf[0], sizeof(buf), nullptr);
         found = true;
@@ -3570,18 +3570,18 @@ bool CLuaBaseEntity::bringPlayer(std::string const& playerName)
     bool found = false;
 
     char escapedCharName[16 * 2 + 1];
-    sql->EscapeString(escapedCharName, playerName.c_str());
+    _sql->EscapeString(escapedCharName, playerName.c_str());
 
     const char* fmtQuery = "SELECT charid FROM chars WHERE charname = '%s';";
-    int32       ret      = sql->Query(fmtQuery, escapedCharName);
+    int32       ret      = _sql->Query(fmtQuery, escapedCharName);
 
-    if (ret != SQL_ERROR && sql->NumRows() != 0 && sql->NextRow() == SQL_SUCCESS)
+    if (ret != SQL_ERROR && _sql->NumRows() != 0 && _sql->NextRow() == SQL_SUCCESS)
     {
         char buf[30];
         memset(&buf[0], 0, sizeof(buf));
 
-        ref<uint32>(&buf, 0)  = sql->GetUIntData(0); // target char
-        ref<uint32>(&buf, 4)  = 0;                   // wanting to bring target char here so wont give our id
+        ref<uint32>(&buf, 0)  = _sql->GetUIntData(0); // target char
+        ref<uint32>(&buf, 4)  = 0;                    // wanting to bring target char here so wont give our id
         ref<uint16>(&buf, 8)  = m_PBaseEntity->getZone();
         ref<uint16>(&buf, 10) = static_cast<uint16>(m_PBaseEntity->loc.p.x);
         ref<uint16>(&buf, 14) = static_cast<uint16>(m_PBaseEntity->loc.p.y);
@@ -4057,13 +4057,13 @@ uint8 CLuaBaseEntity::incrementItemWear(uint16 itemID)
         ++PItem->m_extra[0];
 
         char extra[sizeof(PItem->m_extra) * 2 + 1];
-        sql->EscapeStringLen(extra, (const char*)PItem->m_extra, sizeof(PItem->m_extra));
+        _sql->EscapeStringLen(extra, (const char*)PItem->m_extra, sizeof(PItem->m_extra));
 
         const char* Query = "UPDATE char_inventory "
                             "SET extra = '%s' "
                             "WHERE charid = %u AND location = %u AND slot = %u;";
 
-        sql->Query(Query, extra, PChar->id, PItem->getLocationID(), PItem->getSlotID());
+        _sql->Query(Query, extra, PChar->id, PItem->getLocationID(), PItem->getSlotID());
 
         return PItem->m_extra[0];
     }
@@ -4255,17 +4255,17 @@ bool CLuaBaseEntity::breakLinkshell(std::string const& lsname)
 {
     bool found = false;
 
-    int32 ret = sql->Query("SELECT broken, linkshellid FROM linkshells WHERE name = '%s'", lsname);
-    if (ret != SQL_ERROR && sql->NumRows() != 0 && sql->NextRow() == SQL_SUCCESS)
+    int32 ret = _sql->Query("SELECT broken, linkshellid FROM linkshells WHERE name = '%s'", lsname);
+    if (ret != SQL_ERROR && _sql->NumRows() != 0 && _sql->NextRow() == SQL_SUCCESS)
     {
-        uint8 broken = sql->GetUIntData(0);
+        uint8 broken = _sql->GetUIntData(0);
 
         if (broken)
         {
             return true;
         }
 
-        uint32      lsid       = sql->GetUIntData(1);
+        uint32      lsid       = _sql->GetUIntData(1);
         CLinkshell* PLinkshell = linkshell::GetLinkshell(lsid);
 
         if (!PLinkshell)
@@ -4301,8 +4301,8 @@ bool CLuaBaseEntity::addLinkpearl(std::string const& lsname, bool equip)
     if (PItemLinkPearl != nullptr)
     {
         const char* Query = "SELECT linkshellid, color FROM linkshells WHERE name = '%s' AND broken = 0";
-        int32       ret   = sql->Query(Query, lsname);
-        if (ret != SQL_ERROR && sql->NumRows() != 0 && sql->NextRow() == SQL_SUCCESS)
+        int32       ret   = _sql->Query(Query, lsname);
+        if (ret != SQL_ERROR && _sql->NumRows() != 0 && _sql->NextRow() == SQL_SUCCESS)
         {
             // build linkpearl
             char EncodedString[LinkshellStringLength];
@@ -4310,8 +4310,8 @@ bool CLuaBaseEntity::addLinkpearl(std::string const& lsname, bool equip)
             memset(&EncodedString, 0, sizeof(EncodedString));
             EncodeStringLinkshell(lsname, EncodedString);
             ((CItem*)PItemLinkPearl)->setSignature(EncodedString);
-            PItemLinkPearl->SetLSID(sql->GetUIntData(0));
-            PItemLinkPearl->SetLSColor(sql->GetIntData(1));
+            PItemLinkPearl->SetLSID(_sql->GetUIntData(0));
+            PItemLinkPearl->SetLSColor(_sql->GetIntData(1));
             PItemLinkPearl->SetLSType(lstype);
             PItemLinkPearl->setQuantity(1);
             if (charutils::AddItem(PChar, LOC_INVENTORY, PItemLinkPearl) != ERROR_SLOTID)
@@ -4882,13 +4882,13 @@ uint8 CLuaBaseEntity::storeWithPorterMoogle(uint16 slipId, sol::table const& ext
     }
 
     char extra[sizeof(slip->m_extra) * 2 + 1];
-    sql->EscapeStringLen(extra, (const char*)slip->m_extra, sizeof(slip->m_extra));
+    _sql->EscapeStringLen(extra, (const char*)slip->m_extra, sizeof(slip->m_extra));
 
     const char* Query = "UPDATE char_inventory "
                         "SET extra = '%s' "
                         "WHERE charid = %u AND location = %u AND slot = %u;";
 
-    sql->Query(Query, extra, PChar->id, slip->getLocationID(), slip->getSlotID());
+    _sql->Query(Query, extra, PChar->id, slip->getLocationID(), slip->getSlotID());
 
     return 0;
 }
@@ -4968,13 +4968,13 @@ void CLuaBaseEntity::retrieveItemFromSlip(uint16 slipId, uint16 itemId, uint16 e
     slip->m_extra[extraId] &= extraData;
 
     char extra[sizeof(slip->m_extra) * 2 + 1];
-    sql->EscapeStringLen(extra, (const char*)slip->m_extra, sizeof(slip->m_extra));
+    _sql->EscapeStringLen(extra, (const char*)slip->m_extra, sizeof(slip->m_extra));
 
     const char* Query = "UPDATE char_inventory "
                         "SET extra = '%s' "
                         "WHERE charid = %u AND location = %u AND slot = %u;";
 
-    sql->Query(Query, extra, PChar->id, slip->getLocationID(), slip->getSlotID());
+    _sql->Query(Query, extra, PChar->id, slip->getLocationID(), slip->getSlotID());
 
     auto* item = itemutils::GetItem(itemId);
     if (item)
@@ -6215,7 +6215,7 @@ void CLuaBaseEntity::setLevelCap(uint8 cap)
     if (PChar->jobs.genkai != cap)
     {
         PChar->jobs.genkai = cap;
-        sql->Query("UPDATE char_jobs SET genkai = %u WHERE charid = %u LIMIT 1", PChar->jobs.genkai, PChar->id);
+        _sql->Query("UPDATE char_jobs SET genkai = %u WHERE charid = %u LIMIT 1", PChar->jobs.genkai, PChar->id);
     }
 }
 
@@ -7767,8 +7767,8 @@ void CLuaBaseEntity::toggleReceivedDeedRewards()
     const char* query = "UPDATE char_unlocks SET claimed_deeds = '%s' WHERE charid = %u;";
     char        buf[sizeof(PChar->m_claimedDeeds) * 2 + 1];
 
-    sql->EscapeStringLen(buf, (const char*)&PChar->m_claimedDeeds, sizeof(PChar->m_claimedDeeds));
-    sql->Query(query, buf, PChar->id);
+    _sql->EscapeStringLen(buf, (const char*)&PChar->m_claimedDeeds, sizeof(PChar->m_claimedDeeds));
+    _sql->Query(query, buf, PChar->id);
 }
 
 /************************************************************************
@@ -7794,8 +7794,8 @@ void CLuaBaseEntity::setClaimedDeed(uint16 deedBitNum)
     const char* query = "UPDATE char_unlocks SET claimed_deeds = '%s' WHERE charid = %u;";
     char        buf[sizeof(PChar->m_claimedDeeds) * 2 + 1];
 
-    sql->EscapeStringLen(buf, (const char*)&PChar->m_claimedDeeds, sizeof(PChar->m_claimedDeeds));
-    sql->Query(query, buf, PChar->id);
+    _sql->EscapeStringLen(buf, (const char*)&PChar->m_claimedDeeds, sizeof(PChar->m_claimedDeeds));
+    _sql->Query(query, buf, PChar->id);
 }
 
 /************************************************************************
@@ -7823,8 +7823,8 @@ void CLuaBaseEntity::resetClaimedDeeds()
     const char* query = "UPDATE char_unlocks SET claimed_deeds = '%s' WHERE charid = %u;";
     char        buf[sizeof(PChar->m_claimedDeeds) * 2 + 1];
 
-    sql->EscapeStringLen(buf, (const char*)&PChar->m_claimedDeeds, sizeof(PChar->m_claimedDeeds));
-    sql->Query(query, buf, PChar->id);
+    _sql->EscapeStringLen(buf, (const char*)&PChar->m_claimedDeeds, sizeof(PChar->m_claimedDeeds));
+    _sql->Query(query, buf, PChar->id);
 }
 
 /************************************************************************
@@ -7849,8 +7849,8 @@ void CLuaBaseEntity::setUniqueEvent(uint16 uniqueEventId)
     const char* query = "UPDATE char_unlocks SET unique_event = '%s' WHERE charid = %u;";
     char        buf[sizeof(PChar->m_uniqueEvents) * 2 + 1];
 
-    sql->EscapeStringLen(buf, (const char*)&PChar->m_uniqueEvents, sizeof(PChar->m_uniqueEvents));
-    sql->Query(query, buf, PChar->id);
+    _sql->EscapeStringLen(buf, (const char*)&PChar->m_uniqueEvents, sizeof(PChar->m_uniqueEvents));
+    _sql->Query(query, buf, PChar->id);
 }
 
 /************************************************************************
@@ -7876,8 +7876,8 @@ void CLuaBaseEntity::delUniqueEvent(uint16 uniqueEventId)
     const char* query = "UPDATE char_unlocks SET unique_event = '%s' WHERE charid = %u;";
     char        buf[sizeof(PChar->m_uniqueEvents) * 2 + 1];
 
-    sql->EscapeStringLen(buf, (const char*)&PChar->m_uniqueEvents, sizeof(PChar->m_uniqueEvents));
-    sql->Query(query, buf, PChar->id);
+    _sql->EscapeStringLen(buf, (const char*)&PChar->m_uniqueEvents, sizeof(PChar->m_uniqueEvents));
+    _sql->Query(query, buf, PChar->id);
 }
 
 /************************************************************************
@@ -9542,7 +9542,7 @@ void CLuaBaseEntity::capAllSkills()
                             "rank = %u "
                             "ON DUPLICATE KEY UPDATE value = %u, rank = %u;";
 
-        sql->Query(Query, PChar->id, i, 5000, PChar->RealSkills.rank[i], 5000, PChar->RealSkills.rank[i]);
+        _sql->Query(Query, PChar->id, i, 5000, PChar->RealSkills.rank[i], 5000, PChar->RealSkills.rank[i]);
 
         uint16 maxSkill               = 10 * battleutils::GetMaxSkill(static_cast<SKILLTYPE>(i), PChar->GetMJob(), PChar->GetMLevel());
         PChar->RealSkills.skill[i]    = maxSkill; // set to capped
@@ -14536,12 +14536,12 @@ void CLuaBaseEntity::setPetName(uint8 pType, uint16 value, sol::object const& ar
     {
         if (petType == PET_TYPE::WYVERN)
         {
-            sql->Query("INSERT INTO char_pet SET charid = %u, wyvernid = %u ON DUPLICATE KEY UPDATE wyvernid = %u;", m_PBaseEntity->id, value, value);
+            _sql->Query("INSERT INTO char_pet SET charid = %u, wyvernid = %u ON DUPLICATE KEY UPDATE wyvernid = %u;", m_PBaseEntity->id, value, value);
         }
         else if (petType == PET_TYPE::AUTOMATON)
         {
-            sql->Query("INSERT INTO char_pet SET charid = %u, automatonid = %u ON DUPLICATE KEY UPDATE automatonid = %u;", m_PBaseEntity->id, value,
-                       value);
+            _sql->Query("INSERT INTO char_pet SET charid = %u, automatonid = %u ON DUPLICATE KEY UPDATE automatonid = %u;", m_PBaseEntity->id, value,
+                        value);
             if (static_cast<CCharEntity*>(m_PBaseEntity)->PAutomaton != nullptr)
             {
                 puppetutils::LoadAutomaton(static_cast<CCharEntity*>(m_PBaseEntity));
@@ -14557,8 +14557,8 @@ void CLuaBaseEntity::setPetName(uint8 pType, uint16 value, sol::object const& ar
 
             uint32 nameValue = chocoboname1 + chocoboname2;
 
-            sql->Query("INSERT INTO char_pet SET charid = %u, chocoboid = %u ON DUPLICATE KEY UPDATE chocoboid = %u;", m_PBaseEntity->id, nameValue,
-                       nameValue);
+            _sql->Query("INSERT INTO char_pet SET charid = %u, chocoboid = %u ON DUPLICATE KEY UPDATE chocoboid = %u;", m_PBaseEntity->id, nameValue,
+                        nameValue);
         }
     }
 }
@@ -14573,7 +14573,7 @@ void CLuaBaseEntity::registerChocobo(uint32 value)
 
     auto* PChar           = static_cast<CCharEntity*>(m_PBaseEntity);
     PChar->m_FieldChocobo = value;
-    sql->Query("UPDATE char_pet SET field_chocobo = %u WHERE charid = %u;", value, PChar->id);
+    _sql->Query("UPDATE char_pet SET field_chocobo = %u WHERE charid = %u;", value, PChar->id);
 }
 
 /************************************************************************
@@ -14780,11 +14780,11 @@ auto CLuaBaseEntity::getAutomatonName() -> std::string
                         "char_pet LEFT JOIN pet_name ON automatonid = id "
                         "WHERE charid = %u;";
 
-    int32 ret = sql->Query(Query, m_PBaseEntity->id);
+    int32 ret = _sql->Query(Query, m_PBaseEntity->id);
 
-    if (ret != SQL_ERROR && sql->NumRows() != 0 && sql->NextRow() == SQL_SUCCESS)
+    if (ret != SQL_ERROR && _sql->NumRows() != 0 && _sql->NextRow() == SQL_SUCCESS)
     {
-        return sql->GetStringData(0);
+        return _sql->GetStringData(0);
     }
 
     return {}; // TODO: Verify this case
@@ -16921,7 +16921,7 @@ auto CLuaBaseEntity::getChocoboRaisingInfo() -> sol::table
             held_item \
             FROM char_chocobos WHERE charid = %u;";
 
-        int32 ret = sql->Query(Query, m_PBaseEntity->id);
+        int32 ret = _sql->Query(Query, m_PBaseEntity->id);
 
         if (ret == SQL_ERROR)
         {
@@ -16929,46 +16929,46 @@ auto CLuaBaseEntity::getChocoboRaisingInfo() -> sol::table
             return sol::lua_nil;
         }
 
-        if (sql->NumRows() == 0)
+        if (_sql->NumRows() == 0)
         {
             ShowDebug("No Raised Chocobo information found");
             return sol::lua_nil;
         }
 
-        if (sql->NextRow() == SQL_SUCCESS)
+        if (_sql->NextRow() == SQL_SUCCESS)
         {
             auto table = lua.create_table();
 
-            table["charid"]          = sql->GetUIntData(0);
-            table["first_name"]      = sql->GetStringData(1);
-            table["last_name"]       = sql->GetStringData(2);
-            table["sex"]             = sql->GetUIntData(3);
-            table["created"]         = sql->GetUIntData(4);
-            table["last_update_age"] = sql->GetUIntData(5);
-            table["stage"]           = sql->GetUIntData(6);
-            table["location"]        = sql->GetUIntData(7);
-            table["colour"]          = sql->GetUIntData(8);
+            table["charid"]          = _sql->GetUIntData(0);
+            table["first_name"]      = _sql->GetStringData(1);
+            table["last_name"]       = _sql->GetStringData(2);
+            table["sex"]             = _sql->GetUIntData(3);
+            table["created"]         = _sql->GetUIntData(4);
+            table["last_update_age"] = _sql->GetUIntData(5);
+            table["stage"]           = _sql->GetUIntData(6);
+            table["location"]        = _sql->GetUIntData(7);
+            table["colour"]          = _sql->GetUIntData(8);
 
-            table["dominant_gene"]  = sql->GetUIntData(9);
-            table["recessive_gene"] = sql->GetUIntData(10);
+            table["dominant_gene"]  = _sql->GetUIntData(9);
+            table["recessive_gene"] = _sql->GetUIntData(10);
 
-            table["strength"]    = sql->GetUIntData(11);
-            table["endurance"]   = sql->GetUIntData(12);
-            table["discernment"] = sql->GetUIntData(13);
-            table["receptivity"] = sql->GetUIntData(14);
+            table["strength"]    = _sql->GetUIntData(11);
+            table["endurance"]   = _sql->GetUIntData(12);
+            table["discernment"] = _sql->GetUIntData(13);
+            table["receptivity"] = _sql->GetUIntData(14);
 
-            table["affection"]          = sql->GetUIntData(15);
-            table["energy"]             = sql->GetUIntData(16);
-            table["satisfaction"]       = sql->GetUIntData(17);
-            table["conditions"]         = sql->GetUIntData(18);
-            table["ability1"]           = sql->GetUIntData(19);
-            table["ability2"]           = sql->GetUIntData(20);
-            table["personality"]        = sql->GetUIntData(21);
-            table["weather_preference"] = sql->GetUIntData(22);
-            table["hunger"]             = sql->GetUIntData(23);
+            table["affection"]          = _sql->GetUIntData(15);
+            table["energy"]             = _sql->GetUIntData(16);
+            table["satisfaction"]       = _sql->GetUIntData(17);
+            table["conditions"]         = _sql->GetUIntData(18);
+            table["ability1"]           = _sql->GetUIntData(19);
+            table["ability2"]           = _sql->GetUIntData(20);
+            table["personality"]        = _sql->GetUIntData(21);
+            table["weather_preference"] = _sql->GetUIntData(22);
+            table["hunger"]             = _sql->GetUIntData(23);
 
-            table["care_plan"] = sql->GetUIntData(24);
-            table["held_item"] = sql->GetUIntData(25);
+            table["care_plan"] = _sql->GetUIntData(24);
+            table["held_item"] = _sql->GetUIntData(25);
 
             return table;
         }
@@ -17015,33 +17015,33 @@ bool CLuaBaseEntity::setChocoboRaisingInfo(sol::table const& table)
                                 care_plan = %u, \
                                 held_item = %u;";
 
-    int32 ret = sql->Query(Query,
-                           m_PBaseEntity->id,
-                           table.get_or<std::string>("first_name", "Chocobo"),
-                           table.get_or<std::string>("last_name", "Chocobo"),
-                           table.get_or<uint32>("sex", 0),
-                           table.get_or<uint32>("created", 0),
-                           table.get_or<uint32>("last_update_age", 0),
-                           table.get_or<uint32>("stage", 1),
-                           table.get_or<uint32>("location", 0),
-                           table.get_or<uint32>("colour", 0),
-                           table.get_or<uint32>("dominant_gene", 0),
-                           table.get_or<uint32>("recessive_gene", 0),
-                           table.get_or<uint32>("strength", 0),
-                           table.get_or<uint32>("endurance", 0),
-                           table.get_or<uint32>("discernment", 0),
-                           table.get_or<uint32>("receptivity", 0),
-                           table.get_or<uint32>("affection", 0),
-                           table.get_or<uint32>("energy", 0),
-                           table.get_or<uint32>("satisfaction", 0),
-                           table.get_or<uint32>("conditions", 0),
-                           table.get_or<uint32>("ability1", 0),
-                           table.get_or<uint32>("ability2", 0),
-                           table.get_or<uint32>("personality", 0),
-                           table.get_or<uint32>("weather_preference", 0),
-                           table.get_or<uint32>("hunger", 0),
-                           table.get_or<uint32>("care_plan", 0),
-                           table.get_or<uint32>("held_item", 0));
+    int32 ret = _sql->Query(Query,
+                            m_PBaseEntity->id,
+                            table.get_or<std::string>("first_name", "Chocobo"),
+                            table.get_or<std::string>("last_name", "Chocobo"),
+                            table.get_or<uint32>("sex", 0),
+                            table.get_or<uint32>("created", 0),
+                            table.get_or<uint32>("last_update_age", 0),
+                            table.get_or<uint32>("stage", 1),
+                            table.get_or<uint32>("location", 0),
+                            table.get_or<uint32>("colour", 0),
+                            table.get_or<uint32>("dominant_gene", 0),
+                            table.get_or<uint32>("recessive_gene", 0),
+                            table.get_or<uint32>("strength", 0),
+                            table.get_or<uint32>("endurance", 0),
+                            table.get_or<uint32>("discernment", 0),
+                            table.get_or<uint32>("receptivity", 0),
+                            table.get_or<uint32>("affection", 0),
+                            table.get_or<uint32>("energy", 0),
+                            table.get_or<uint32>("satisfaction", 0),
+                            table.get_or<uint32>("conditions", 0),
+                            table.get_or<uint32>("ability1", 0),
+                            table.get_or<uint32>("ability2", 0),
+                            table.get_or<uint32>("personality", 0),
+                            table.get_or<uint32>("weather_preference", 0),
+                            table.get_or<uint32>("hunger", 0),
+                            table.get_or<uint32>("care_plan", 0),
+                            table.get_or<uint32>("held_item", 0));
 
     if (ret == SQL_ERROR)
     {
@@ -17062,7 +17062,7 @@ bool CLuaBaseEntity::deleteRaisedChocobo()
         return false;
     }
 
-    int32 ret = sql->Query("DELETE FROM char_chocobos WHERE charid = %u;", m_PBaseEntity->id);
+    int32 ret = _sql->Query("DELETE FROM char_chocobos WHERE charid = %u;", m_PBaseEntity->id);
     if (ret == SQL_ERROR)
     {
         ShowDebug("DELETE Query failed");
@@ -17113,8 +17113,8 @@ void CLuaBaseEntity::setMannequinPose(uint16 itemID, uint8 race, uint8 pose)
                                SET extra = '%s' \
                                WHERE charid = %u AND itemId = %u;";
 
-                        sql->EscapeStringLen(extra, (const char*)PMannequin->m_extra, sizeof(PMannequin->m_extra));
-                        if (sql->Query(fmtQuery, extra, PChar->id, PMannequin->getID()) == SQL_ERROR)
+                        _sql->EscapeStringLen(extra, (const char*)PMannequin->m_extra, sizeof(PMannequin->m_extra));
+                        if (_sql->Query(fmtQuery, extra, PChar->id, PMannequin->getID()) == SQL_ERROR)
                         {
                             ShowError("lua_baseentity::setMannequinPose: Cannot insert item to database");
                         }

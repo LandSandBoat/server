@@ -79,7 +79,7 @@ extern uint16  map_port;
 extern inline map_session_data_t* mapsession_getbyipp(uint64 ipp);
 extern inline map_session_data_t* mapsession_createsession(uint32 ip, uint16 port);
 
-extern std::unique_ptr<SqlConnection> sql;
+extern std::unique_ptr<SqlConnection> _sql;
 
 extern bool gLoadAllLua;
 

@@ -74,17 +74,17 @@ CTCPRequestPacket::~CTCPRequestPacket()
 #endif
 }
 
-uint8* CTCPRequestPacket::GetData()
+uint8* CTCPRequestPacket::getData()
 {
     return m_data;
 }
 
-int32 CTCPRequestPacket::GetSize() const
+int32 CTCPRequestPacket::getSize() const
 {
     return m_size;
 }
 
-int32 CTCPRequestPacket::ReceiveFromSocket()
+bool CTCPRequestPacket::receiveFromSocket()
 {
     char recvbuf[DEFAULT_BUFLEN]{};
 
@@ -96,16 +96,18 @@ int32 CTCPRequestPacket::ReceiveFromSocket()
 #else
         ShowError("recv failed with error: %d", errno);
 #endif
-        return 0;
+        return false;
     }
+
     if (m_size == 0)
     {
-        return 0;
+        return false;
     }
+
     if (m_size != ref<uint16>(recvbuf, (0x00)) || m_size < 28)
     {
         ShowError("Search packetsize wrong. Size %d should be %d.", m_size, ref<uint16>(recvbuf, (0x00)));
-        return 0;
+        return false;
     }
 
     destroy_arr(m_data);
@@ -126,7 +128,7 @@ int32 CTCPRequestPacket::ReceiveFromSocket()
  *                                                                       *
  ************************************************************************/
 
-int32 CTCPRequestPacket::SendRawToSocket(uint8* data, uint32 length)
+int32 CTCPRequestPacket::sendRawToSocket(uint8* data, uint32 length)
 {
     int32 iResult = 0;
 
@@ -143,7 +145,7 @@ int32 CTCPRequestPacket::SendRawToSocket(uint8* data, uint32 length)
     return 1;
 }
 
-int32 CTCPRequestPacket::SendToSocket(uint8* data, uint32 length)
+int32 CTCPRequestPacket::sendToSocket(uint8* data, uint32 length)
 {
     int32 iResult = 0;
 
@@ -176,10 +178,10 @@ int32 CTCPRequestPacket::SendToSocket(uint8* data, uint32 length)
 #endif
         return 0;
     }
-    return ReceiveFromSocket();
+    return receiveFromSocket();
 }
 
-int32 CTCPRequestPacket::CheckPacketHash()
+bool CTCPRequestPacket::packetHashIsValid()
 {
     uint8 PacketHash[16]{};
 
@@ -196,13 +198,14 @@ int32 CTCPRequestPacket::CheckPacketHash()
         if (m_data[m_size - 0x14 + i] != PacketHash[i])
         {
             ShowError("Search hash wrong byte %d: 0x%.2X should be 0x%.2x", i, PacketHash[i], m_data[m_size - 0x14 + i]);
-            return 0;
+            return false;
         }
     }
-    return 1;
+
+    return true;
 }
 
-uint8 CTCPRequestPacket::GetPacketType()
+uint8 CTCPRequestPacket::getPacketType()
 {
     if (m_data == nullptr)
     {
@@ -213,7 +216,7 @@ uint8 CTCPRequestPacket::GetPacketType()
     return m_data[0x0B];
 }
 
-int32 CTCPRequestPacket::decipher()
+bool CTCPRequestPacket::decipher()
 {
     md5((uint8*)(key), blowfish.hash, 20);
 
@@ -226,7 +229,8 @@ int32 CTCPRequestPacket::decipher()
     {
         blowfish_decipher((uint32*)m_data + i + 2, (uint32*)m_data + i + 3, blowfish.P, blowfish.S[0]);
     }
+
     ref<uint32>(key, (20)) = ref<uint32>(m_data, (m_size - 0x18));
 
-    return CheckPacketHash();
+    return packetHashIsValid();
 }

@@ -23,6 +23,10 @@
 
 // clang-format off
 #ifdef TRACY_ENABLE
+
+#include <cstdint>
+#include <fmt/format.h>
+
 #include "tracy/Tracy.hpp"
 #include <fmt/format.h>
 #include <string>

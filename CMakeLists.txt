@@ -59,6 +59,7 @@ link_libraries(${CMAKE_THREAD_LIBS_INIT})
 
 # Find MariaDB
 find_package(MariaDB REQUIRED)
+find_package(MariaDBCPP REQUIRED)
 
 # Find ZMQ
 find_package(ZeroMQ REQUIRED)

@@ -6,6 +6,7 @@
 
 #include "cbasetypes.h"
 
+#include <string>
 #include <thread>
 #include <unordered_map>
 
@@ -16,6 +17,9 @@
 #endif
 
 #include "logging.h"
+
+// NOTE: This is just a shim to allow easy adoption of database.h
+#include "database.h"
 
 // Return codes
 #define SQL_ERROR   -1
@@ -229,7 +233,8 @@ public:
     void FinishProfiling();
 
 private:
-    Sql_t*      self;
+    Sql_t* self;
+
     const char* m_User;
     const char* m_Passwd;
     const char* m_Host;

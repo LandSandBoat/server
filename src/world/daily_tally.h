@@ -21,9 +21,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 
 #pragma once
 
-#include "common/sql.h"
-
 namespace dailytally
 {
-    void UpdateDailyTallyPoints(std::unique_ptr<SqlConnection> const& sql);
+    void UpdateDailyTallyPoints();
 }

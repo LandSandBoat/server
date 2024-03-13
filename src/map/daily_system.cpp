@@ -98,18 +98,18 @@ namespace daily
 
     void LoadDailyItems()
     {
-        int32  ret    = sql->Query("SELECT itemid, aH, flags FROM item_basic WHERE flags & 4 > 0");
+        int32  ret    = _sql->Query("SELECT itemid, aH, flags FROM item_basic WHERE flags & 4 > 0");
         uint16 itemid = 0;
         uint16 aH     = 0;
         uint16 flags  = 0;
 
-        if (ret != SQL_ERROR && sql->NumRows() != 0)
+        if (ret != SQL_ERROR && _sql->NumRows() != 0)
         {
-            while (sql->NextRow() == SQL_SUCCESS)
+            while (_sql->NextRow() == SQL_SUCCESS)
             {
-                itemid = sql->GetUIntData(0);
-                aH     = sql->GetUIntData(1);
-                flags  = sql->GetUIntData(2);
+                itemid = _sql->GetUIntData(0);
+                aH     = _sql->GetUIntData(1);
+                flags  = _sql->GetUIntData(2);
                 specialDialItems.emplace_back(itemid);
                 switch (aH)
                 {
