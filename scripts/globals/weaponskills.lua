@@ -1158,29 +1158,6 @@ end
 -- Given the raw ratio value (atk/def) and levels, returns the cRatio (min then max)
 xi.weaponskills.cMeleeRatio = function(attacker, defender, params, ignoredDef, tp)
     local weaponType = attacker:getWeaponSkillType(xi.slot.MAIN)
-    local pDifWeaponCapTable =
-    {
-        -- [Skill/weapon type used] = {pre-randomizer_pDIF_cap}, Values from: https://www.bg-wiki.com/ffxi/PDIF
-        [xi.skill.NONE            ] = { 3    }, -- We will use this for mobs.
-        [xi.skill.HAND_TO_HAND    ] = { 3.5  },
-        [xi.skill.DAGGER          ] = { 3.25 },
-        [xi.skill.SWORD           ] = { 3.25 },
-        [xi.skill.GREAT_SWORD     ] = { 3.75 },
-        [xi.skill.AXE             ] = { 3.25 },
-        [xi.skill.GREAT_AXE       ] = { 3.75 },
-        [xi.skill.SCYTHE          ] = { 4    },
-        [xi.skill.POLEARM         ] = { 3.75 },
-        [xi.skill.KATANA          ] = { 3.25 },
-        [xi.skill.GREAT_KATANA    ] = { 3.5  },
-        [xi.skill.CLUB            ] = { 3.25 },
-        [xi.skill.STAFF           ] = { 3.75 },
-        [xi.skill.AUTOMATON_MELEE ] = { 3    }, -- Unknown value. Copy of value below.
-        [xi.skill.AUTOMATON_RANGED] = { 3    }, -- Unknown value. Reference found in an old post: https://forum.square-enix.com/ffxi/archive/index.php/t-52778.html?s=d906df07788334a185a902b0a6ae6a99
-        [xi.skill.AUTOMATON_MAGIC ] = { 3    }, -- Unknown value. Here for completion sake.
-        [xi.skill.ARCHERY         ] = { 3.25 },
-        [xi.skill.MARKSMANSHIP    ] = { 3.5  },
-        [xi.skill.THROWING        ] = { 3.25 },
-    }
     local flourishEffect = attacker:getStatusEffect(xi.effect.BUILDING_FLOURISH)
 
     if flourishEffect ~= nil and flourishEffect:getPower() >= 2 then -- 2 or more Finishing Moves used.
@@ -1203,7 +1180,7 @@ xi.weaponskills.cMeleeRatio = function(attacker, defender, params, ignoredDef, t
     cratio     = math.max(0, cratio - levelCorrection)
     local damageLimitPlus = attacker:getMod(xi.mod.DAMAGE_LIMIT) / 100
     local damageLimitPercent = (100 + attacker:getMod(xi.mod.DAMAGE_LIMITP)) / 100
-    local cratioCap = (pDifWeaponCapTable[weaponType][1] + damageLimitPlus) * damageLimitPercent -- Added damage limit bonuses
+    local cratioCap = (xi.combat.physical.pDifWeaponCapTable[weaponType][1] + damageLimitPlus) * damageLimitPercent -- Added damage limit bonuses
 
     cratio = utils.clamp(cratio, 0, cratioCap)
     local pdif = getMeleePDifRange(cratio)
