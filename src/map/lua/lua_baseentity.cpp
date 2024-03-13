@@ -3724,14 +3724,11 @@ bool CLuaBaseEntity::addItem(sol::variadic_args va)
     CCharEntity* PChar = (CCharEntity*)m_PBaseEntity;
 
     /* FORMAT 1:
-    player:addItem({id=itemID, quantity=quantity}) -- add quantity of itemID
-
-    player:addItem({id=itemID, silent=true}) -- silently add 1 of itemID
-
-    player:addItem({id=itemID, signature="Char"}) -- add 1 signed of itemID
-    player:addItem({id=itemID, augments={[4]=5,[10]=10}}) -- add 1 of itemID with augment id 4 and 10,
-        with values of 5 and 10, respectively
-    player:addItem({ id = itemID, exdata = { [10] = 10 } }) -- add 1 item of itemID, with the exdata at index 10 (0-indexed!) set to 10
+    player:addItem({ id = itemID, quantity  = quantity               }) -- add quantity of itemID
+    player:addItem({ id = itemID, silent    = true                   }) -- silently add 1 of itemID
+    player:addItem({ id = itemID, signature = "Char"                 }) -- add 1 signed of itemID
+    player:addItem({ id = itemID, augments  = { [4] = 5, [10] = 10 } }) -- add 1 of itemID with augment id 4 and 10, with values of 5 and 10, respectively
+    player:addItem({ id = itemID, exdata    = { [10] = 10 }          }) -- add 1 item of itemID, with the exdata at index 10 (0-indexed!) set to 10
     */
 
     if (va.get_type(0) == sol::type::table)
@@ -13336,8 +13333,8 @@ uint16 CLuaBaseEntity::getEVA()
  *  Function: getRACC()
  *  Purpose : Calculates and returns the Ranged Accuracy of a Weapon euipped in the Ranged slot
  *  Example : player:getRACC()
- *  Notes   : To Do: The calculation is already a public member of battleentity, shouldn't have two calculations, just call (CBattleEntity*)m_PBaseEntity)->RACC
- *and return result
+ *  Notes   : TODO: The calculation is already a public member of battleentity, shouldn't have two calculations, just call (CBattleEntity*)m_PBaseEntity)->RACC
+ *            and return result
  ************************************************************************/
 
 int CLuaBaseEntity::getRACC()
@@ -14351,7 +14348,7 @@ bool CLuaBaseEntity::isAutomaton()
     if (m_PBaseEntity->objtype == TYPE_PET)
     {
         uint32 petID = static_cast<CPetEntity*>(m_PBaseEntity)->m_PetID;
-        if (petID >= PETID_HARLEQUINFRAME and petID <= PETID_STORMWAKERFRAME)
+        if (petID >= PETID_HARLEQUINFRAME && petID <= PETID_STORMWAKERFRAME)
         {
             return true;
         }

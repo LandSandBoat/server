@@ -627,7 +627,7 @@ void SmallPacket0x011(map_session_data_t* const PSession, CCharEntity* const PCh
 
     PChar->PAI->QueueAction(queueAction_t(4000ms, false, zoneutils::AfterZoneIn));
 
-    // todo: kill player til theyre dead and bsod
+    // TODO: kill player til theyre dead and bsod
     const char* fmtQuery = "SELECT version_mismatch FROM accounts_sessions WHERE charid = %u";
     int32       ret      = sql->Query(fmtQuery, PChar->id);
     if (ret != SQL_ERROR && sql->NextRow() == SQL_SUCCESS)
@@ -2370,7 +2370,7 @@ void SmallPacket0x04B(map_session_data_t* const PSession, CCharEntity* const PCh
     PChar->pushPacket(new CServerMessagePacket(login_message, msg_language, msg_timestamp, msg_offset));
     PChar->pushPacket(new CCharSyncPacket(PChar));
 
-    // todo: kill player til theyre dead and bsod
+    // TODO: kill player til theyre dead and bsod
     const char* fmtQuery = "SELECT version_mismatch FROM accounts_sessions WHERE charid = %u";
     int32       ret      = sql->Query(fmtQuery, PChar->id);
     if (ret != SQL_ERROR && sql->NextRow() == SQL_SUCCESS)
@@ -3236,7 +3236,7 @@ void SmallPacket0x04E(map_session_data_t* const PSession, CCharEntity* const PCh
                 PChar->pushPacket(new CAuctionHousePacket(action));
 
                 // A single SQL query for the player's AH history which is stored in a Char Entity struct + vector.
-                const char* Query = "SELECT itemid, price, stack FROM auction_house WHERE seller = %u and sale=0 ORDER BY id ASC LIMIT 7;";
+                const char* Query = "SELECT itemid, price, stack FROM auction_house WHERE seller = %u AND sale=0 ORDER BY id ASC LIMIT 7;";
 
                 int32 ret = sql->Query(Query, PChar->id);
 

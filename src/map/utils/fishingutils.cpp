@@ -886,7 +886,7 @@ namespace fishingutils
         return lsb;
     }
 
-    // @TODO: figure out how to pass mobs and items and chests here...
+    // TODO: figure out how to pass mobs and items and chests here...
 
     uint8 CalculateFishSense(CCharEntity* PChar, fishresponse_t* response, uint8 fishingSkill, uint8 catchType, uint8 sizeType,
                              uint8 maxSkill, bool legendary, uint16 minLength, uint16 maxLength, uint8 ranking, rod_t* rod)
@@ -2990,7 +2990,7 @@ namespace fishingutils
                             "ff.ranking, "          // 22
                             "ff.contest "
                             "FROM fishing_fish ff "
-                            "WHERE ff.disabled = 0 and ff.ranking < 99";
+                            "WHERE ff.disabled = 0 AND ff.ranking < 99";
 
         int32 ret = sql->Query(Query);
 
