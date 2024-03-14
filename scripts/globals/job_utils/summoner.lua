@@ -35,6 +35,17 @@ local function getBaseMPCost(player, ability)
         [xi.jobAbility.TIDAL_ROAR]       = 138,
         [xi.jobAbility.SPINNING_DIVE]    = 164,
         [xi.jobAbility.GRAND_FALL]       = 182,
+        -- Garuda
+        [xi.jobAbility.CLAW]             =   7,
+        [xi.jobAbility.AERO_II]          =  24,
+        [xi.jobAbility.AERIAL_ARMOR]     =  92,
+        [xi.jobAbility.FLEET_WIND]       = 114,
+        [xi.jobAbility.AERO_IV]          = 118,
+        [xi.jobAbility.WHISPERING_WIND]  = 119,
+        [xi.jobAbility.HASTEGA]          = 129,
+        [xi.jobAbility.PREDATOR_CLAWS]   = 164,
+        [xi.jobAbility.WIND_BLADE]       = 182,
+        [xi.jobAbility.HASTEGA_II]       = 248,
         -- Siren
         [xi.jobAbility.WELT]             =   9,
         [xi.jobAbility.ROUNDHOUSE]       =  52,
