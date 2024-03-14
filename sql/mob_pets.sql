@@ -554,6 +554,7 @@ INSERT INTO `mob_pets` VALUES (17109137,1,9,'Goblin_Patrolman','Goblins_Ladybug'
 
 INSERT INTO `mob_pets` VALUES (17117241,1,9,'Gigas_Helmsman','Gigass_Tiger');
 INSERT INTO `mob_pets` VALUES (17117246,1,9,'Gigas_Helmsman','Gigass_Tiger');
+INSERT INTO `mob_pets` VALUES (17117250,1,9,'Pallas','Pallass_Tiger');  -- Pallas has 3 Tiger pets
 INSERT INTO `mob_pets` VALUES (17117256,1,9,'Goblin_Guerrilla','Goblins_Bat');
 INSERT INTO `mob_pets` VALUES (17117264,1,9,'Goblin_Guerrilla','Goblins_Bat');
 INSERT INTO `mob_pets` VALUES (17117270,1,9,'Goblin_Guerrilla','Goblins_Bat');
