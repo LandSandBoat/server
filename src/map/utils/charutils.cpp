@@ -2654,6 +2654,8 @@ namespace charutils
             }
 
             PChar->pushPacket(new CEquipPacket(slotID, equipSlotID, containerID));
+            PChar->pushPacket(new CInventoryFinishPacket(static_cast<CONTAINER_ID>(containerID)));
+            PChar->pushPacket(new CInventoryFinishPacket());
         }
         else
         {
@@ -2675,7 +2677,6 @@ namespace charutils
                         // Do not forget to update the timer when equipping the subject
 
                         PChar->pushPacket(new CInventoryItemPacket(PItem, containerID, slotID));
-                        PChar->pushPacket(new CInventoryFinishPacket());
                     }
                     PItem->setSubType(ITEM_LOCKED);
 
@@ -2695,6 +2696,8 @@ namespace charutils
 
                     PChar->pushPacket(new CEquipPacket(slotID, equipSlotID, containerID));
                     PChar->pushPacket(new CInventoryAssignPacket(PItem, INV_NODROP));
+                    PChar->pushPacket(new CInventoryFinishPacket(static_cast<CONTAINER_ID>(containerID)));
+                    PChar->pushPacket(new CInventoryFinishPacket());
                 }
             }
         }
