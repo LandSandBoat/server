@@ -1430,10 +1430,12 @@ void CCharEntity::OnAbility(CAbilityState& state, action_t& action)
     {
         if (this != PTarget && distance(this->loc.p, PTarget->loc.p) > PAbility->getRange())
         {
-            pushPacket(new CMessageBasicPacket(this, PTarget, 0, 0, MSGBASIC_TOO_FAR_AWAY));
+            setActionInterrupted(action, PTarget, MSGBASIC_TOO_FAR_AWAY, 0);
             return;
         }
-        if (PAbility->getID() >= ABILITY_HEALING_RUBY && PAbility->getID() <= ABILITY_PERFECT_DEFENSE)
+
+        // TODO: Remove me when all pet abilities are ported to PetSkill
+        if (PAbility->getID() >= ABILITY_HEALING_RUBY && PAbility->getID() <= ABILITY_PERFECT_DEFENSE && !battleutils::GetPetSkill(PAbility->getID()))
         {
             // Blood pact MP costs are stored under animation ID
             float mpCost = PAbility->getAnimationID();
@@ -1444,7 +1446,7 @@ void CCharEntity::OnAbility(CAbilityState& state, action_t& action)
 
             if (this->health.mp < mpCost)
             {
-                pushPacket(new CMessageBasicPacket(this, PTarget, 0, 0, MSGBASIC_UNABLE_TO_USE_JA));
+                setActionInterrupted(action, PTarget, MSGBASIC_UNABLE_TO_USE_JA, 0);
                 return;
             }
         }

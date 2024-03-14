@@ -193,7 +193,8 @@ bool CAbilityState::CanUseAbility()
                 return false;
             }
 
-            if (PAbility->getID() >= ABILITY_HEALING_RUBY)
+            // TODO: Remove this when all pet abilities are moved to PetSkill system.
+            if (PAbility->getID() >= ABILITY_HEALING_RUBY && !battleutils::GetPetSkill(PAbility->getID()))
             {
                 // Blood pact MP costs are stored under animation ID
                 if (PChar->health.mp < PAbility->getAnimationID())
