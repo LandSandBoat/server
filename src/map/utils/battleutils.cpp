@@ -2904,22 +2904,22 @@ namespace battleutils
 
         if (meleePDIFFunc.valid() && levelCorrectionFunc.valid())
         {
-            auto result = levelCorrectionFunc(luaAttackerEntity);
-            if (!result.valid())
+            auto levelCorrectionResult = levelCorrectionFunc(luaAttackerEntity);
+            if (!levelCorrectionResult.valid())
             {
-                sol::error err = result;
+                sol::error err = levelCorrectionResult;
                 ShowError("battleutils::GetDamageRatio(): %s", err.what());
                 return pDIF;
             }
 
-            result = meleePDIFFunc(luaAttackerEntity, CLuaBaseEntity(PDefender), weaponType, bonusAttPercent, isCritical, result.get<bool>(0), false, false);
-            if (!result.valid())
+            auto meleePDIFFuncResult = meleePDIFFunc(luaAttackerEntity, CLuaBaseEntity(PDefender), weaponType, bonusAttPercent, isCritical, levelCorrectionResult.get<bool>(0), false, 0.0, false);
+            if (!meleePDIFFuncResult.valid())
             {
-                sol::error err = result;
+                sol::error err = meleePDIFFuncResult;
                 ShowError("battleutils::GetDamageRatio(): %s", err.what());
                 return pDIF;
             }
-            pDIF = result.get<float>(0);
+            pDIF = meleePDIFFuncResult.get<float>(0);
         }
         else
         {
