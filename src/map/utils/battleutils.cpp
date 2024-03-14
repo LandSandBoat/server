@@ -2912,7 +2912,7 @@ namespace battleutils
                 return pDIF;
             }
 
-            result = meleePDIFFunc(luaAttackerEntity, CLuaBaseEntity(PDefender), weaponType, bonusAttPercent, isCritical, result.get<bool>(0), false, false);
+            result = meleePDIFFunc(luaAttackerEntity, CLuaBaseEntity(PDefender), weaponType, bonusAttPercent, isCritical, result.get<bool>(0), false, 0.0, false);
             if (!result.valid())
             {
                 sol::error err = result;
