@@ -80,7 +80,7 @@ CInstance* CInstanceLoader::LoadInstance()
             allegiance, namevis, aggro, mob_pools.skill_list_id, mob_pools.true_detection, detects, \
             mob_family_system.charmable \
             FROM instance_entities INNER JOIN mob_spawn_points ON instance_entities.id = mob_spawn_points.mobid \
-            INNER JOIN mob_groups ON mob_groups.groupid = mob_spawn_points.groupid and mob_groups.zoneid=((mob_spawn_points.mobid>>12)&0xFFF) \
+            INNER JOIN mob_groups ON mob_groups.groupid = mob_spawn_points.groupid AND mob_groups.zoneid=((mob_spawn_points.mobid>>12)&0xFFF) \
             INNER JOIN mob_pools ON mob_groups.poolid = mob_pools.poolid \
             INNER JOIN mob_resistances ON mob_resistances.resist_id = mob_pools.resist_id \
             INNER JOIN mob_family_system ON mob_pools.familyid = mob_family_system.familyID \
@@ -232,7 +232,7 @@ CInstance* CInstanceLoader::LoadInstance()
             status, entityFlags, look, name_prefix, widescan \
             FROM instance_entities INNER JOIN npc_list ON \
             (instance_entities.id = npc_list.npcid) \
-            WHERE instanceid = %u AND npcid >= %u and npcid < %u;";
+            WHERE instanceid = %u AND npcid >= %u AND npcid < %u;";
 
         uint32 zoneMin = (zone->GetID() << 12) + 0x1000000;
         uint32 zoneMax = zoneMin + 1024;
