@@ -169,12 +169,6 @@ uint16 CMobSkill::getAnimationID() const
 
 uint16 CMobSkill::getPetAnimationID() const
 {
-    // titan
-    if (m_AnimID >= 539 && m_AnimID <= 547)
-    {
-        return m_AnimID - 491;
-    }
-
     // ifrit
     if (m_AnimID >= 526 && m_AnimID <= 534)
     {
