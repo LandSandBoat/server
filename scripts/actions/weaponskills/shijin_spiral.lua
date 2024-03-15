@@ -29,7 +29,7 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
     local damage, criticalHit, tpHits, extraHits = xi.weaponskills.doPhysicalWeaponskill(player, target, wsID, params, tp, action, primary, taChar)
 
     if damage > 0 then
-        local duration = (tp / 1000) + 4
+        local duration = 3 * ((tp / 1000) + 5) -- Plague effect is -50TP/tick and lasts for 5-8 ticks.
         if not target:hasStatusEffect(xi.effect.PLAGUE) then
             target:addStatusEffect(xi.effect.PLAGUE, 5, 0, duration)
         end
