@@ -46,7 +46,7 @@ local wsElementalProperties =
 }
 
 -- Table with pDIF caps per weapon/skill type.
-local pDifWeaponCapTable =
+xi.combat.physical.pDifWeaponCapTable =
 {
     -- [Skill/weapon type used] = {pre-randomizer_pDIF_cap}, Values from: https://www.bg-wiki.com/ffxi/PDIF
     [xi.skill.NONE            ] = { 3    }, -- We will use this for mobs.
@@ -384,7 +384,9 @@ xi.combat.physical.calculateMeleePDIF = function(actor, target, weaponType, wsAt
     local wRatio       = cRatio + (isCritical and 1.0 or 0)
     local pDifUpperCap = 0
     local pDifLowerCap = 0
-    local pDifFinalCap = pDifWeaponCapTable[weaponType][1] + (isCritical and 1.0 or 0) -- TODO: Add 'Damage Limit +' Trait here.
+    local damageLimitPlus = actor:getMod(xi.mod.DAMAGE_LIMIT) / 100
+    local damageLimitPercent = (100 + actor:getMod(xi.mod.DAMAGE_LIMITP)) / 100
+    local pDifFinalCap = (xi.combat.physical.pDifWeaponCapTable[weaponType][1] + damageLimitPlus) * damageLimitPercent + (isCritical and 1.0 or 0) -- Added damage limit bonuses
 
     -- pDIF upper cap.
     if wRatio < 0.5 then
@@ -417,7 +419,7 @@ xi.combat.physical.calculateMeleePDIF = function(actor, target, weaponType, wsAt
     ----------------------------------------
     -- Step 4: Apply weapon type caps.
     ----------------------------------------
-    pDif = utils.clamp(pDif, 0, pDifFinalCap) -- TODO: Add 'Damage Limit +' Trait here.
+    pDif = utils.clamp(pDif, 0, pDifFinalCap)
 
     ----------------------------------------
     -- Step 5: Melee random factor.
@@ -516,7 +518,9 @@ xi.combat.physical.calculateRangedPDIF = function(actor, target, weaponType, wsA
     ----------------------------------------
     -- Step 4: Apply weapon type caps.
     ----------------------------------------
-    local pDifFinalCap = pDifWeaponCapTable[weaponType][1] -- TODO: Add 'Damage Limit +' Trait here.
+    local damageLimitPlus = actor:getMod(xi.mod.DAMAGE_LIMIT) / 100
+    local damageLimitPercent = (100 + actor:getMod(xi.mod.DAMAGE_LIMITP)) / 100
+    local pDifFinalCap = (xi.combat.physical.pDifWeaponCapTable[weaponType][1] + damageLimitPlus) * damageLimitPercent -- Added damage limit bonuses
 
     pDif = utils.clamp(pDif, 0, pDifFinalCap)
 
