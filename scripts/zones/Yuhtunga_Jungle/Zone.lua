@@ -18,6 +18,8 @@ zoneObject.onInitialize = function(zone)
     xi.helm.initZone(zone, xi.helmType.LOGGING)
 
     xi.bmt.updatePeddlestox(xi.zone.YUHTUNGA_JUNGLE, ID.npc.PEDDLESTOX)
+
+    GetMobByID(ID.mob.PYUU_THE_SPATEMAKER):setRespawnTime(math.random(5400, 7200))
 end
 
 zoneObject.onGameDay = function()
