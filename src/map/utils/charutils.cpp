@@ -7077,7 +7077,7 @@ namespace charutils
     {
         TracyZoneScoped;
 
-        auto ret = sql->Query("SELECT charid FROM chars WHERE charname = %s LIMIT 1", name.c_str());
+        auto ret = sql->Query("SELECT charid FROM chars WHERE charname = '%s' LIMIT 1", name.c_str());
         if (ret != SQL_ERROR && sql->NumRows() != 0 && sql->NextRow() == SQL_SUCCESS)
         {
             return sql->GetUIntData(0);

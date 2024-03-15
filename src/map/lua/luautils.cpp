@@ -224,6 +224,7 @@ namespace luautils
         lua.set_function("GetContainerFilenamesList", &luautils::GetContainerFilenamesList);
         lua.set_function("GetCachedInstanceScript", &luautils::GetCachedInstanceScript);
         lua.set_function("GetItemIDByName", &luautils::GetItemIDByName);
+        lua.set_function("SendItemToDeliveryBox", &luautils::SendItemToDeliveryBox);
         lua.set_function("SendLuaFuncStringToZone", &luautils::SendLuaFuncStringToZone);
         lua.set_function("RoeParseRecords", &roeutils::ParseRecords);
         lua.set_function("RoeParseTimed", &roeutils::ParseTimedSchedule);
@@ -5579,6 +5580,65 @@ namespace luautils
         }
 
         customMenuContext.erase(PChar->id);
+    }
+
+    SendToDBoxReturnCode SendItemToDeliveryBox(std::string const& playerName, uint16 itemId, uint32 quantity, std::string senderText)
+    {
+        uint32 playerID = charutils::getCharIdFromName(playerName);
+        if (!playerID)
+        {
+            return SendToDBoxReturnCode::PLAYER_NOT_FOUND;
+        }
+
+        auto isGil = itemId == 65535;
+
+        // Check to confirm that the item legitimately exists
+        // exclude gil as gil does not have an item pointer
+        auto* PItem = itemutils::GetItemPointer(itemId);
+        if (PItem == nullptr && !isGil)
+        {
+            return SendToDBoxReturnCode::ITEM_NOT_FOUND;
+        }
+
+        // default stack size of gil
+        uint32 stackSize = 999999999;
+        // if not gil then get the actual stack size
+        if (!isGil)
+        {
+            stackSize = PItem->getStackSize();
+        }
+
+        bool quantityMoreThanStackSize = quantity > stackSize;
+
+        // limit the quantity to the stack size of the item
+        quantity = std::clamp<uint32>(quantity, 1, stackSize);
+
+        const char* Query = "INSERT INTO delivery_box (charid, box, itemid, quantity, senderid, sender) VALUES ("
+                            "%u, "     // Player ID
+                            "1, "      // Box ID == 1
+                            "%u, "     // Item ID
+                            "%u, "     // Quantity
+                            "%u, "     // Sender ID ( =Player ID )
+                            "'%s'); "; // Sender Text
+        int32 ret = sql->Query(Query, playerID, itemId, quantity, playerID, senderText);
+
+        if (ret == SQL_ERROR)
+        {
+            return SendToDBoxReturnCode::QUERY_ERROR;
+        }
+        else
+        {
+            sql->TransactionCommit();
+        }
+
+        if (quantityMoreThanStackSize)
+        {
+            return SendToDBoxReturnCode::SUCCESS_LIMITED_TO_STACK_SIZE;
+        }
+        else
+        {
+            return SendToDBoxReturnCode::SUCCESS;
+        }
     }
 
     uint16 GetItemIDByName(std::string const& name)
