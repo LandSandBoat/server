@@ -46,6 +46,17 @@ local function getBaseMPCost(player, ability)
         [xi.jobAbility.PREDATOR_CLAWS]   = 164,
         [xi.jobAbility.WIND_BLADE]       = 182,
         [xi.jobAbility.HASTEGA_II]       = 248,
+        -- Titan
+        [xi.jobAbility.ROCK_THROW]       =  10,
+        [xi.jobAbility.STONE_II]         =  24,
+        [xi.jobAbility.ROCK_BUSTER]      =  39,
+        [xi.jobAbility.MEGALITH_THROW]   =  62,
+        [xi.jobAbility.EARTHEN_WARD]     =  92,
+        [xi.jobAbility.STONE_IV]         = 118,
+        [xi.jobAbility.CRAG_THROW]       = 124,
+        [xi.jobAbility.EARTHEN_ARMOR]    = 156,
+        [xi.jobAbility.MOUNTAIN_BUSTER]  = 164,
+        [xi.jobAbility.GEOCRUSH]         = 182,
         -- Siren
         [xi.jobAbility.WELT]             =   9,
         [xi.jobAbility.ROUNDHOUSE]       =  52,
