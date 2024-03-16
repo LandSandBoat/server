@@ -935,6 +935,10 @@ uint8 CBattleEntity::GetMLevel() const
 
 JOBTYPE CBattleEntity::GetSJob()
 {
+    if (StatusEffectContainer->HasStatusEffect({ EFFECT_OBLIVISCENCE, EFFECT_SJ_RESTRICTION }))
+    {
+        return JOB_NON;
+    }
     return m_sjob;
 }
 
