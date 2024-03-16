@@ -57,6 +57,17 @@ local function getBaseMPCost(player, ability)
         [xi.jobAbility.EARTHEN_ARMOR]    = 156,
         [xi.jobAbility.MOUNTAIN_BUSTER]  = 164,
         [xi.jobAbility.GEOCRUSH]         = 182,
+        -- Titan
+        [xi.jobAbility.PUNCH]            =   9,
+        [xi.jobAbility.FIRE_II]          =  24,
+        [xi.jobAbility.BURNING_STRIKE]   =  48,
+        [xi.jobAbility.DOUBLE_PUNCH]     =  56,
+        [xi.jobAbility.INFERNO_HOWL]     =  72,
+        [xi.jobAbility.CRIMSON_HOWL]     =  84,
+        [xi.jobAbility.FIRE_IV]          = 118,
+        [xi.jobAbility.CONFLAG_STRIKE]   = 141,
+        [xi.jobAbility.FLAMING_CRUSH]    = 164,
+        [xi.jobAbility.METEOR_STRIKE]    = 182,
         -- Siren
         [xi.jobAbility.WELT]             =   9,
         [xi.jobAbility.ROUNDHOUSE]       =  52,
