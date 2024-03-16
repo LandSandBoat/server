@@ -11,12 +11,12 @@ xi.job_utils.black_mage = xi.job_utils.black_mage or {}
 -- Ability Check Functions
 -----------------------------------
 xi.job_utils.black_mage.checkManafont = function(player, target, ability)
-    ability:setRecast(ability:getRecast() - player:getMod(xi.mod.ONE_HOUR_RECAST))
+    ability:setRecast(math.max(0, ability:getRecast() - player:getMod(xi.mod.ONE_HOUR_RECAST) * 60))
     return 0, 0
 end
 
 xi.job_utils.black_mage.checkSubtleSorcery = function(player, target, ability)
-    ability:setRecast(ability:getRecast() - player:getMod(xi.mod.ONE_HOUR_RECAST))
+    ability:setRecast(math.max(0, ability:getRecast() - player:getMod(xi.mod.ONE_HOUR_RECAST) * 60))
     return 0, 0
 end
 

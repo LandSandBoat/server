@@ -133,7 +133,7 @@ xi.job_utils.dragoon.abilityCheckRequiresPet = function(player, target, ability,
         end
 
         if ability:getID() == xi.jobAbility.SPIRIT_SURGE then
-            ability:setRecast(ability:getRecast() - player:getMod(xi.mod.ONE_HOUR_RECAST))
+            ability:setRecast(math.max(0, ability:getRecast() - player:getMod(xi.mod.ONE_HOUR_RECAST) * 60))
         end
 
         return 0, 0
