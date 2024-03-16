@@ -794,14 +794,16 @@ uint16 CBattleEntity::ACC(uint8 attackNumber, uint8 offsetAccuracy)
 
     if (this->objtype & TYPE_PC)
     {
-        uint8  skill     = 0;
-        uint16 iLvlSkill = 0;
+        uint8  skill       = 0;
+        uint16 iLvlSkill   = 0;
+        auto   PMainWeapon = dynamic_cast<CItemWeapon*>(m_Weapons[SLOT_MAIN]);
+
         if (attackNumber == 0)
         {
-            if (auto* weapon = dynamic_cast<CItemWeapon*>(m_Weapons[SLOT_MAIN]))
+            if (PMainWeapon)
             {
-                skill     = weapon->getSkillType();
-                iLvlSkill = weapon->getILvlSkill();
+                skill     = PMainWeapon->getSkillType();
+                iLvlSkill = PMainWeapon->getILvlSkill();
                 if (skill == SKILL_NONE && GetSkill(SKILL_HAND_TO_HAND) > 0)
                 {
                     skill = SKILL_HAND_TO_HAND;
@@ -822,6 +824,11 @@ uint16 CBattleEntity::ACC(uint8 attackNumber, uint8 offsetAccuracy)
                         skill = SKILL_HAND_TO_HAND;
                     }
                 }
+            }
+            else if (PMainWeapon && PMainWeapon->isHandToHand())
+            {
+                iLvlSkill = PMainWeapon->getILvlSkill();
+                skill     = SKILL_HAND_TO_HAND;
             }
         }
         else if (attackNumber == 2)
