@@ -240,7 +240,7 @@ xi.spells.enfeebling.calculatePotency = function(caster, target, spellId, spellE
 
     potency = math.floor(potency)
 
-    -- Apply Saboteur Effect when aplicable.
+    -- Apply Saboteur Effect when applicable.
     local applySaboteur = pTable[spellId][11]
 
     if
@@ -455,12 +455,12 @@ xi.spells.enfeebling.useEnfeeblingSpell = function(caster, target, spell)
             target:isMob() and
             immunobreakTable[spellEffect] and          -- Only certain effects can be immunobroken.
             skillType == xi.skill.ENFEEBLING_MAGIC and -- Only Enfeebling magic can immunobreak.
-            resistRank > 4                             -- Only mobs with a resistace rank of 5+ (50% EEM) can be immunobroken.
+            resistRank > 4                             -- Only mobs with a resistance rank of 5+ (50% EEM) can be immunobroken.
         then
             local immunobreakRandom = math.random(1, 100)
             local immunobreakChance = magicHitRate / (1 + rankModifier) + caster:getMerit(xi.merit.IMMUNOBREAK_CHANCE)
 
-            -- We successfuly trigger Immunobreak. Change tagret modifier and set correct message.
+            -- We successfully trigger Immunobreak. Change target modifier and set correct message.
             if immunobreakRandom <= immunobreakChance then
                 target:setMod(immunobreakTable[spellEffect][1], rankModifier + 1) -- TODO: Add equipment modifier (x2) here.
 
