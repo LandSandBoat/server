@@ -24,6 +24,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 
 #include "common/cbasetypes.h"
 #include "common/socket.h"
+#include "common/tracy.h"
 
 #include <stdio.h>
 #include <string.h>
@@ -68,6 +69,7 @@ public:
     , code(ref<uint16>(2))
     , owner(true)
     {
+        TracyZoneScoped;
         std::fill(data, data + PACKET_SIZE, 0);
     }
 
@@ -78,6 +80,7 @@ public:
     , code(ref<uint16>(2))
     , owner(false)
     {
+        TracyZoneScoped;
     }
 
     CBasicPacket(const CBasicPacket& other)
@@ -87,7 +90,8 @@ public:
     , code(ref<uint16>(2))
     , owner(true)
     {
-        memcpy(data, other.data, PACKET_SIZE);
+        TracyZoneScoped;
+        std::memcpy(data, other.data, PACKET_SIZE);
     }
 
     CBasicPacket(CBasicPacket&& other)
@@ -102,6 +106,7 @@ public:
 
     virtual ~CBasicPacket()
     {
+        TracyZoneScoped;
         if (owner && data)
         {
             destroy_arr(data);
