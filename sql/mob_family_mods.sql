@@ -514,11 +514,13 @@ INSERT INTO `mob_family_mods` VALUES (165,10,13,1); -- SUBLINK: 13
 INSERT INTO `mob_family_mods` VALUES (165,29,24,0); -- MDEF: 24
 INSERT INTO `mob_family_mods` VALUES (165,36,50,1); -- ROAM_COOL: 50
 INSERT INTO `mob_family_mods` VALUES (165,51,3,1);  -- ROAM_TURNS: 3
+INSERT INTO `mob_family_mods` VALUES (165,62,1,1);  -- NO_STANDBACK: 1
 
 -- Imp
 INSERT INTO `mob_family_mods` VALUES (166,10,13,1); -- SUBLINK: 13
 INSERT INTO `mob_family_mods` VALUES (166,36,50,1); -- ROAM_COOL: 50
 INSERT INTO `mob_family_mods` VALUES (166,51,3,1);  -- ROAM_TURNS: 3
+INSERT INTO `mob_family_mods` VALUES (166,62,1,1);  -- NO_STANDBACK: 1
 
 -- Kindred
 INSERT INTO `mob_family_mods` VALUES (169,10,1,1);    -- SUBLINK: 1
@@ -820,6 +822,7 @@ INSERT INTO `mob_family_mods` VALUES (294,10,14,1); -- SUBLINK: 14
 
 -- Imp-Verdelet
 INSERT INTO `mob_family_mods` VALUES (301,10,13,1); -- SUBLINK: 13
+INSERT INTO `mob_family_mods` VALUES (301,62,1,1);  -- NO_STANDBACK: 1
 
 -- Wamoura-Achamoth
 INSERT INTO `mob_family_mods` VALUES (307,10,6,1); -- SUBLINK: 6
