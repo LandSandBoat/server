@@ -202,6 +202,11 @@ uint32 CBaseEntity::GetLocalVar(std::string var)
     return m_localVars[var];
 }
 
+std::map<std::string, uint32>& CBaseEntity::GetLocalVars()
+{
+    return m_localVars;
+}
+
 void CBaseEntity::SetLocalVar(std::string var, uint32 val)
 {
     m_localVars[var] = val;
