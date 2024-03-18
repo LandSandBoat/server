@@ -48,6 +48,7 @@ CPetEntity::CPetEntity(PET_TYPE petType)
 , m_jugSpawnTime(time_point::min())
 , m_jugDuration(duration::min())
 {
+    TracyZoneScoped;
     objtype                     = TYPE_PET;
     m_EcoSystem                 = ECOSYSTEM::UNCLASSIFIED;
     allegiance                  = ALLEGIANCE_TYPE::PLAYER;
@@ -59,7 +60,10 @@ CPetEntity::CPetEntity(PET_TYPE petType)
     PAI = std::make_unique<CAIContainer>(this, std::make_unique<CPathFind>(this), std::make_unique<CPetController>(this), std::make_unique<CTargetFind>(this));
 }
 
-CPetEntity::~CPetEntity() = default;
+CPetEntity::~CPetEntity()
+{
+    TracyZoneScoped;
+}
 
 PET_TYPE CPetEntity::getPetType()
 {

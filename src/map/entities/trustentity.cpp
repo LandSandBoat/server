@@ -54,8 +54,15 @@ CTrustEntity::CTrustEntity(CCharEntity* PChar)
     m_bReleaseTargIDOnDisappear = true;
     spawnAnimation              = SPAWN_ANIMATION::SPECIAL; // Initial spawn has the special spawn-in animation
 
-    PAI = std::make_unique<CAIContainer>(this, std::make_unique<CPathFind>(this), std::make_unique<CTrustController>(PChar, this),
+    PAI = std::make_unique<CAIContainer>(this,
+                                         std::make_unique<CPathFind>(this),
+                                         std::make_unique<CTrustController>(PChar, this),
                                          std::make_unique<CTargetFind>(this));
+}
+
+CTrustEntity::~CTrustEntity()
+{
+    TracyZoneScoped;
 }
 
 void CTrustEntity::PostTick()

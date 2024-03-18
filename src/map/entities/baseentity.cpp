@@ -21,6 +21,8 @@
 
 #include "baseentity.h"
 
+#include "common/tracy.h"
+
 #include "ai/ai_container.h"
 #include "battlefield.h"
 #include "instance.h"
@@ -50,10 +52,12 @@ CBaseEntity::CBaseEntity()
 , PInstance(nullptr)
 , m_nextUpdateTimer(std::chrono::steady_clock::now())
 {
+    TracyZoneScoped;
 }
 
 CBaseEntity::~CBaseEntity()
 {
+    TracyZoneScoped;
     if (PBattlefield)
     {
         PBattlefield->RemoveEntity(this, BATTLEFIELD_LEAVE_CODE_WARPDC);
