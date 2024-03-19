@@ -1381,26 +1381,32 @@ namespace battleutils
 
                 if (PAttacker->objtype == TYPE_PC && PAttacker->PParty != nullptr)
                 {
-                    if (auto* PLeader = dynamic_cast<CCharEntity*>(PAttacker->PParty->GetLeader()))
+                    if (auto* PChar = dynamic_cast<CCharEntity*>(PAttacker))
                     {
-                        PLeader->ForPartyWithTrusts([&](CBattleEntity* PMember)
-                                                    {
+                        // clang-format off
+                        PChar->ForPartyWithTrusts([&](CBattleEntity* PMember)
+                        {
                             if (attackerID == PMember->id)
                             {
                                 power = PDefender->StatusEffectContainer->GetStatusEffect(daze)->GetPower();
-                            } });
+                            }
+                        });
+                        // clang-format on
                     }
                 }
                 else if (PAttacker->objtype == TYPE_TRUST)
                 {
-                    if (auto* PMaster = dynamic_cast<CCharEntity*>(PAttacker->PMaster))
+                    if (auto* PChar = dynamic_cast<CCharEntity*>(PAttacker->PMaster))
                     {
-                        PMaster->ForPartyWithTrusts([&](CBattleEntity* PMember)
-                                                    {
+                        // clang-format off
+                        PChar->ForPartyWithTrusts([&](CBattleEntity* PMember)
+                        {
                             if (attackerID == PMember->id)
                             {
                                 power = PDefender->StatusEffectContainer->GetStatusEffect(daze)->GetPower();
-                            } });
+                            }
+                        });
+                        // clang-format on
                     }
                 }
                 else if (PAttacker->PMaster == nullptr)
