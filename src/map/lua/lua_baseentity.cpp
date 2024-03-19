@@ -13841,6 +13841,11 @@ uint8 CLuaBaseEntity::getWeaponSkillType(uint8 slotID)
         {
             return PWeapon->getSkillType();
         }
+        else
+        {
+            // nothing in offhand or non-weapon (shield/grip)
+            return 0;
+        }
     }
 
     ShowError("lua::getWeaponSkillType :: Invalid slot specified!");
