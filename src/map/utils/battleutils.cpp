@@ -1620,7 +1620,7 @@ namespace battleutils
         float maxRatio    = 3.25f;
 
         // If null ignore the checks and fallback to 1H values
-        if (targ_weapon->getSkillType() == SKILL_MARKSMANSHIP)
+        if (targ_weapon && targ_weapon->getSkillType() == SKILL_MARKSMANSHIP)
         {
             maxRatio = 3.5f;
         }
