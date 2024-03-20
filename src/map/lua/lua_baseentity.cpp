@@ -1197,21 +1197,10 @@ void CLuaBaseEntity::release()
         return;
     }
 
-    auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
-
-    RELEASE_TYPE releaseType = RELEASE_TYPE::STANDARD;
-
-    if (PChar->isInEvent())
+    if (auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity))
     {
-        // Message: Event skipped
-        releaseType = RELEASE_TYPE::SKIPPING;
-        PChar->pushPacket(new CMessageSystemPacket(0, 0, MsgStd::EventSkipped));
+        PChar->release();
     }
-
-    PChar->inSequence = false;
-    PChar->pushPacket(new CReleasePacket(PChar, releaseType));
-    PChar->pushPacket(new CReleasePacket(PChar, RELEASE_TYPE::EVENT));
-    PChar->endCurrentEvent();
 }
 
 /************************************************************************

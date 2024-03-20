@@ -617,6 +617,14 @@ void CPetEntity::OnPetSkillFinished(CPetSkillState& state, action_t& action)
         if (PSkill->getValidTargets() & TARGET_ENEMY)
         {
             PTargetFound->StatusEffectContainer->DelStatusEffectsByFlag(EFFECTFLAG_DETECTABLE);
+
+            if (auto PChar = dynamic_cast<CCharEntity*>(PTargetFound))
+            {
+                if (PChar->isInEvent() && !PChar->m_Locked)
+                {
+                    PChar->release();
+                }
+            }
         }
 
         if (PTargetFound->isDead())

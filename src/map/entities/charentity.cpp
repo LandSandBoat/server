@@ -2876,6 +2876,23 @@ void CCharEntity::skipEvent()
     }
 }
 
+void CCharEntity::release()
+{
+    RELEASE_TYPE releaseType = RELEASE_TYPE::STANDARD;
+
+    if (isInEvent())
+    {
+        // Message: Event skipped
+        releaseType = RELEASE_TYPE::SKIPPING;
+        pushPacket(new CMessageSystemPacket(0, 0, MsgStd::EventSkipped));
+    }
+
+    inSequence = false;
+    pushPacket(new CReleasePacket(this, releaseType));
+    pushPacket(new CReleasePacket(this, RELEASE_TYPE::EVENT));
+    endCurrentEvent();
+}
+
 void CCharEntity::setLocked(bool locked)
 {
     TracyZoneScoped;

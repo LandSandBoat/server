@@ -563,6 +563,7 @@ public:
     void tryStartNextEvent();
     void skipEvent();
     void setLocked(bool locked);
+    void release();
 
     void UpdateMoghancement();
     bool hasMoghancement(uint16 moghancementID) const;
