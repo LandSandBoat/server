@@ -665,6 +665,28 @@ void CLuaBaseEntity::setVolatileCharVar(std::string const& varName, int32 value,
 }
 
 /************************************************************************
+ *  Function: getLocalVars()
+ *  Purpose : Returns all variables assigned locally to an entity
+ *  Example : local localVars = KingArthro:getLocalVars()
+ *  Notes   :
+ ************************************************************************/
+
+auto CLuaBaseEntity::getLocalVars() -> sol::table
+{
+    auto  table     = lua.create_table();
+    auto& localVars = m_PBaseEntity->GetLocalVars();
+
+    for (auto const& [varName, value] : localVars)
+    {
+        auto subtable       = lua.create_table();
+        subtable["varname"] = varName;
+        subtable["value"]   = value;
+        table.add(subtable);
+    }
+    return table;
+}
+
+/************************************************************************
  *  Function: getLocalVar()
  *  Purpose : Returns a variable assigned locally to an entity
  *  Example : if KingArthro:getLocalVar("[POP]King_Arthro") > 0 then
@@ -17203,6 +17225,7 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("setVar", CLuaBaseEntity::setCharVar); // Compatibility binding
     SOL_REGISTER("incrementCharVar", CLuaBaseEntity::incrementCharVar);
     SOL_REGISTER("setVolatileCharVar", CLuaBaseEntity::setVolatileCharVar);
+    SOL_REGISTER("getLocalVars", CLuaBaseEntity::getLocalVars);
     SOL_REGISTER("getLocalVar", CLuaBaseEntity::getLocalVar);
     SOL_REGISTER("setLocalVar", CLuaBaseEntity::setLocalVar);
     SOL_REGISTER("resetLocalVars", CLuaBaseEntity::resetLocalVars);
