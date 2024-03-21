@@ -1757,6 +1757,14 @@ void CBattleEntity::OnCastFinished(CMagicState& state, action_t& action)
         // Should not be removed by AoE effects that don't target the player or
         // buffs cast by other players or mobs.
         PActionTarget->StatusEffectContainer->DelStatusEffectsByFlag(EFFECTFLAG_DETECTABLE);
+
+        if (auto PChar = dynamic_cast<CCharEntity*>(PActionTarget))
+        {
+            if (PChar->isInEvent() && !PChar->m_Locked)
+            {
+                PChar->release();
+            }
+        }
     }
 
     this->StatusEffectContainer->DelStatusEffectsByFlag(EFFECTFLAG_MAGIC_END);
@@ -2033,6 +2041,14 @@ void CBattleEntity::OnMobSkillFinished(CMobSkillState& state, action_t& action)
         if (PSkill->getValidTargets() & TARGET_ENEMY)
         {
             PTargetFound->StatusEffectContainer->DelStatusEffectsByFlag(EFFECTFLAG_DETECTABLE);
+
+            if (auto PChar = dynamic_cast<CCharEntity*>(PTargetFound))
+            {
+                if (PChar->isInEvent() && !PChar->m_Locked)
+                {
+                    PChar->release();
+                }
+            }
         }
 
         if (PTargetFound->isDead())
@@ -2107,10 +2123,15 @@ bool CBattleEntity::OnAttack(CAttackState& state, action_t& action)
     TracyZoneScoped;
     auto* PTarget = static_cast<CBattleEntity*>(state.GetTarget());
 
-    if (PTarget->objtype == TYPE_PC)
+    if (auto PChar = dynamic_cast<CCharEntity*>(PTarget))
     {
         // TODO: Should not be removed by AoE effects that don't target the player.
-        PTarget->StatusEffectContainer->DelStatusEffectsByFlag(EFFECTFLAG_DETECTABLE);
+        PChar->StatusEffectContainer->DelStatusEffectsByFlag(EFFECTFLAG_DETECTABLE);
+
+        if (PChar->isInEvent() && !PChar->m_Locked)
+        {
+            PChar->release();
+        }
     }
 
     battleutils::ClaimMob(PTarget, this); // Mobs get claimed whether or not your attack actually is intimidated/paralyzed
