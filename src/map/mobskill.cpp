@@ -169,12 +169,6 @@ uint16 CMobSkill::getAnimationID() const
 
 uint16 CMobSkill::getPetAnimationID() const
 {
-    // ifrit
-    if (m_AnimID >= 526 && m_AnimID <= 534)
-    {
-        return m_AnimID - 494;
-    }
-
     // fenrir
     if (m_AnimID >= 513 && m_AnimID <= 521)
     {
