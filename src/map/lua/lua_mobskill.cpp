@@ -50,6 +50,27 @@ void CLuaMobSkill::setMsg(uint16 message)
     m_PLuaMobSkill->setMsg(message);
 }
 
+std::tuple<uint8, uint8, uint8> CLuaMobSkill::getSkillchainProps()
+{
+    return { m_PLuaMobSkill->getPrimarySkillchain(), m_PLuaMobSkill->getSecondarySkillchain(), m_PLuaMobSkill->getTertiarySkillchain() };
+}
+
+/************************************************************************
+ *  Function: setSkillchainProps()
+ *  Purpose : Change the skillchain properties of a mobskill
+ *  Example : skill:setSkillchainProps(xi.skillchainType.LIGHT, xi.skillchainType.COMPRESSION, xi.skillchainType.SCISSION)
+ *  Notes   : Can be used to change the properties of a particular skill based on certain conditions (mob has a partciular buff, etc)
+ *              Take care of when this is called, as doing it without a clone of the mobskill will set it globally
+ *              I.E. if used in onMobSkillCheck, this will set it globally
+ *                   but, if used within mob or mobskill onMobWeaponSkill, it will set it for this particular execution of the skill only
+ ************************************************************************/
+void CLuaMobSkill::setSkillchainProps(uint8 prop1, uint8 prop2, uint8 prop3)
+{
+    m_PLuaMobSkill->setPrimarySkillchain(prop1);
+    m_PLuaMobSkill->setSecondarySkillchain(prop2);
+    m_PLuaMobSkill->setTertiarySkillchain(prop3);
+}
+
 bool CLuaMobSkill::hasMissMsg()
 {
     return m_PLuaMobSkill->hasMissMsg();
@@ -118,6 +139,8 @@ void CLuaMobSkill::Register()
 {
     SOL_USERTYPE("CMobSkill", CLuaMobSkill);
     SOL_REGISTER("setMsg", CLuaMobSkill::setMsg);
+    SOL_REGISTER("getSkillchainProps", CLuaMobSkill::getSkillchainProps);
+    SOL_REGISTER("setSkillchainProps", CLuaMobSkill::setSkillchainProps);
     SOL_REGISTER("getMsg", CLuaMobSkill::getMsg);
     SOL_REGISTER("hasMissMsg", CLuaMobSkill::hasMissMsg);
     SOL_REGISTER("isAoE", CLuaMobSkill::isAoE);

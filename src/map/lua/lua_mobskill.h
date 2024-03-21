@@ -50,6 +50,8 @@ public:
     bool   isSingle();
     bool   hasMissMsg();
     void   setMsg(uint16 message);
+    auto   getSkillchainProps() -> std::tuple<uint8, uint8, uint8>;
+    void   setSkillchainProps(uint8 prop1, uint8 prop2, uint8 prop3);
     uint16 getMsg();
     uint16 getTotalTargets();
     uint32 getPrimaryTargetID();

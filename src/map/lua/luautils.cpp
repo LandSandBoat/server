@@ -3775,7 +3775,7 @@ namespace luautils
         return 0;
     }
 
-    int32 OnMobWeaponSkill(CBaseEntity* PTarget, CBaseEntity* PMob, CMobSkill* PMobSkill, action_t* action)
+    int32 OnMobWeaponSkill(CBaseEntity* PTarget, CBaseEntity* PMob, CMobSkill** PMobSkill, action_t* action)
     {
         TracyZoneScoped;
 
@@ -3787,7 +3787,7 @@ namespace luautils
             auto onMobWeaponSkill = lua["xi"]["zones"][zone]["mobs"][name]["onMobWeaponSkill"];
             if (onMobWeaponSkill.valid())
             {
-                auto result = onMobWeaponSkill(CLuaBaseEntity(PTarget), CLuaBaseEntity(PMob), CLuaMobSkill(PMobSkill), CLuaAction(action));
+                auto result = onMobWeaponSkill(CLuaBaseEntity(PTarget), CLuaBaseEntity(PMob), CLuaMobSkill(*PMobSkill), CLuaAction(action));
                 if (!result.valid())
                 {
                     sol::error err = result;
@@ -3798,7 +3798,7 @@ namespace luautils
         }
 
         // Mob Skill Script
-        auto mobskill_name = PMobSkill->getName();
+        auto mobskill_name = (*PMobSkill)->getName();
 
         auto onMobWeaponSkill = lua["xi"]["actions"]["mobskills"][mobskill_name]["onMobWeaponSkill"];
         if (!onMobWeaponSkill.valid())
@@ -3806,7 +3806,7 @@ namespace luautils
             return 0;
         }
 
-        auto result = onMobWeaponSkill(CLuaBaseEntity(PTarget), CLuaBaseEntity(PMob), CLuaMobSkill(PMobSkill));
+        auto result = onMobWeaponSkill(CLuaBaseEntity(PTarget), CLuaBaseEntity(PMob), CLuaMobSkill(*PMobSkill));
         if (!result.valid())
         {
             sol::error err = result;

@@ -282,7 +282,7 @@ namespace luautils
     void OnBattlefieldDestroy(CBattlefield* PBattlefield);
 
     uint16 OnMobWeaponSkillPrepare(CBattleEntity* PMob, CBattleEntity* PTarget);
-    int32  OnMobWeaponSkill(CBaseEntity* PChar, CBaseEntity* PMob, CMobSkill* PMobSkill, action_t* action);
+    int32  OnMobWeaponSkill(CBaseEntity* PChar, CBaseEntity* PMob, CMobSkill** PMobSkill, action_t* action);
     int32  OnMobSkillCheck(CBaseEntity* PChar, CBaseEntity* PMob, CMobSkill* PMobSkill); // triggers before mob weapon skill is used, returns 0 if the move is valid
     auto   OnMobSkillTarget(CBattleEntity* PTarget, CBaseEntity* PMob, CMobSkill* PMobSkill) -> CBattleEntity*;
     int32  OnAutomatonAbilityCheck(CBaseEntity* PChar, CAutomatonEntity* PAutomaton, CMobSkill* PMobSkill);
