@@ -2849,7 +2849,7 @@ namespace battleutils
             critRate = 1;
         }
 
-        // Crit rate delta from stats caps at +-15
+        // Crit rate delta from stats caps at 15
         return std::min(critRate, 15);
     }
 
@@ -2898,15 +2898,13 @@ namespace battleutils
         // https://www.bg-wiki.com/bg/Critical_Hit_Rate
         int32 attackerAgi = PAttacker->AGI();
         int32 defenderAgi = PDefender->AGI();
-        int32 dAGI        = attackerAgi - defenderAgi;
-        int32 dAgiAbs     = std::abs(dAGI);
+        int32 dAgi        = attackerAgi - defenderAgi;
+        // Only consider positive dAgi
+        int32 dAgiPositive = std::max(0, dAgi);
 
-        // Default to +0 crit rate
-        int32 critRate = 0;
+        int32 critRate = dAgiPositive / 10;
 
-        critRate = dAgiAbs / 10;
-
-        return std::min(critRate, 15);
+        return critRate;
     }
 
     /************************************************************************
