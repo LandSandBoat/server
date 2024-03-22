@@ -20,6 +20,7 @@ end
 
 entity.onMobDespawn = function(mob)
     xi.mob.phOnDespawn(mob, ID.mob.CENTURIO_X_I_PH, 10, 9000) -- 2.5 hours
+    xi.mob.phOnDespawn(mob, ID.mob.ANTICAN_MAGISTER_PH, 10, 3600) -- 1 hour
     xi.mob.phOnDespawn(mob, ID.mob.ANTICAN_PROCONSUL_PH, 10, 3600) -- 1 hour
 end
 
