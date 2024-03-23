@@ -7767,7 +7767,10 @@ void SmallPacket0x104(map_session_data_t* const PSession, CCharEntity* const PCh
                 PTarget->BazaarCustomers.erase(PTarget->BazaarCustomers.begin() + i--);
             }
         }
-        PTarget->pushPacket(new CBazaarCheckPacket(PChar, BAZAAR_LEAVE));
+        if (!PChar->m_isGMHidden || (PChar->m_isGMHidden && PTarget->m_GMlevel >= PChar->m_GMlevel))
+        {
+            PTarget->pushPacket(new CBazaarCheckPacket(PChar, BAZAAR_LEAVE));
+        }
     }
     PChar->BazaarID.clean();
 }
@@ -7804,7 +7807,10 @@ void SmallPacket0x105(map_session_data_t* const PSession, CCharEntity* const PCh
 
         EntityID_t EntityID = { PChar->id, PChar->targid };
 
-        PTarget->pushPacket(new CBazaarCheckPacket(PChar, BAZAAR_ENTER));
+        if (!PChar->m_isGMHidden || (PChar->m_isGMHidden && PTarget->m_GMlevel >= PChar->m_GMlevel))
+        {
+            PTarget->pushPacket(new CBazaarCheckPacket(PChar, BAZAAR_ENTER));
+        }
         PTarget->BazaarCustomers.emplace_back(EntityID);
 
         CItemContainer* PBazaar = PTarget->getStorage(LOC_INVENTORY);
