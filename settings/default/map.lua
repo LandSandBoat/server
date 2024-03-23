@@ -33,6 +33,9 @@ xi.settings.map =
     -- player's current state.
     PACKETGUARD_ENABLED = true,
 
+    -- If enabled (alongside PACKETGUARD_ENABLED), infringements will result in immediate player logout
+    PACKETGUARD_LOGOUT = true,
+
     -- Minimal number of 0x3A packets which uses for detect lightluggage (set 0 for disable)
     LIGHTLUGGAGE_BLOCK = 4,
 

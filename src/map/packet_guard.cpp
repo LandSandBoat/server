@@ -15,7 +15,9 @@ namespace PacketGuard
 #endif
 
     std::unordered_map<CHAR_SUBSTATE, std::unordered_map<uint16, bool>> allowList;
-    std::unordered_map<uint16, uint32>                                  ratelimitList; // Default will be 0 - No Limit
+
+    // Time in seconds (double)
+    std::unordered_map<uint16, double> ratelimitList; // Default will be 0 - No Limit
 
     void Init()
     {
@@ -54,11 +56,15 @@ namespace PacketGuard
 
         // Rate limiting
         // NOTE: You should rate limit any packet that a player can
-        //       send at will that results in an immediate database hit
-        // ratelimitList[0x03B] = 1; // Mannequin Equip
-        ratelimitList[0x05D] = 2; // Emotes
-        ratelimitList[0x11B] = 2; // Set Job Master Display
-        ratelimitList[0x11D] = 2; // Jump
+        //     : send at will that results in an immediate database hit
+        //     : or generates logs or results in file or network io.
+        ratelimitList[0x017] = 1.0; // Invalid NPC Information Response
+        ratelimitList[0x03B] = 1.0; // Mannequin Equip
+        ratelimitList[0x05D] = 2.0; // Emotes
+        ratelimitList[0x0F4] = 1.0; // Wide Scan
+        ratelimitList[0x0F5] = 1.0; // Wide Scan Track
+        ratelimitList[0x11B] = 2.0; // Set Job Master Display
+        ratelimitList[0x11D] = 2.0; // Jump
     }
 
     bool PacketIsValidForPlayerState(CCharEntity* PChar, uint16 SmallPD_Type)
@@ -85,9 +91,10 @@ namespace PacketGuard
     {
         TracyZoneScoped;
         using namespace std::chrono;
-        uint32 lastPacketRecievedTime = PChar->m_PacketRecievedTimestamps[SmallPD_Type];
-        uint32 timeNowSeconds         = static_cast<uint32>(time_point_cast<seconds>(server_clock::now()).time_since_epoch().count());
-        uint32 ratelimitTime          = ratelimitList[SmallPD_Type];
+
+        double lastPacketRecievedTime = static_cast<double>(PChar->m_PacketRecievedTimestamps[SmallPD_Type]);
+        double timeNowSeconds         = static_cast<double>(time_point_cast<seconds>(server_clock::now()).time_since_epoch().count());
+        double ratelimitTime          = ratelimitList[SmallPD_Type];
 
         PChar->m_PacketRecievedTimestamps[SmallPD_Type] = timeNowSeconds;
 
