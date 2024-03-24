@@ -18,12 +18,12 @@ local chakraStatusEffects =
 -- Ability Check Functions
 -----------------------------------
 xi.job_utils.monk.checkHundredFists = function(player, target, ability)
-    ability:setRecast(ability:getRecast() - player:getMod(xi.mod.ONE_HOUR_RECAST))
+    ability:setRecast(math.max(0, ability:getRecast() - player:getMod(xi.mod.ONE_HOUR_RECAST) * 60))
     return 0, 0
 end
 
 xi.job_utils.monk.checkInnerStrength = function(player, target, ability)
-    ability:setRecast(ability:getRecast() - player:getMod(xi.mod.ONE_HOUR_RECAST))
+    ability:setRecast(math.max(0, ability:getRecast() - player:getMod(xi.mod.ONE_HOUR_RECAST) * 60))
     return 0, 0
 end
 
