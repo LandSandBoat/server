@@ -2,6 +2,8 @@
 -- Area: AlTaieu
 --  Mob: Aw'euvhi
 -----------------------------------
+mixins = { require('scripts/mixins/families/aweuvhi') }
+-----------------------------------
 local ID = zones[xi.zone.ALTAIEU]
 -----------------------------------
 local entity = {}
