@@ -628,7 +628,9 @@ bool CBattlefield::RemoveEntity(CBaseEntity* PEntity, uint8 leavecode)
                 {
                     if (std::find(m_AllyList.begin(), m_AllyList.end(), PMobEntity) != m_AllyList.end())
                     {
-                        if (PMobEntity->isAlive() && PMobEntity->PAI->IsSpawned())
+                        // We should not put an isAlive check here because some ally can be dead at cleanup
+                        // but not despawned (for example Prishe in Dawn fight)
+                        if (PMobEntity->PAI->IsSpawned())
                         {
                             PEntity->status = STATUS_TYPE::DISAPPEAR;
                             PEntity->loc.zone->UpdateEntityPacket(PEntity, ENTITY_DESPAWN, UPDATE_NONE);
