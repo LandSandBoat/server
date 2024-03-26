@@ -8,7 +8,7 @@ local ID = zones[xi.zone.FORT_KARUGO_NARUGO_S]
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
-    xi.helm.initZone(zone, xi.helm.type.LOGGING)
+    xi.helm.initZone(zone, xi.helmType.LOGGING)
     xi.darkixion.zoneOnInit(zone)
 end
 

@@ -469,7 +469,7 @@ INSERT INTO `augments` VALUES (376,0,0,0,0,0);
 INSERT INTO `augments` VALUES (377,0,0,0,0,0);
 INSERT INTO `augments` VALUES (378,0,0,0,0,0);
 INSERT INTO `augments` VALUES (379,0,0,0,0,0); -- Enmity +1 for each Utsusemi
-INSERT INTO `augments` VALUES (380,0,0,0,0,0); -- Physical Damage Limit +1%
+INSERT INTO `augments` VALUES (380,0,1081,1,0,0); -- Physical Damage Limit +1%
 
 -- 381 to 511 currently unused. Leave at zero. Edit+move or remove this note as new augments get discovered.
 INSERT INTO `augments` VALUES (381,0,0,0,0,0);

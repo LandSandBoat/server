@@ -495,7 +495,7 @@ void CLuaBaseEntity::messageSpecial(uint16 messageID, sol::variadic_args va)
  *  Notes   :
  ************************************************************************/
 
-void CLuaBaseEntity::messageSystem(MSGSYSTEM messageID, sol::object const& p0, sol::object const& p1)
+void CLuaBaseEntity::messageSystem(MsgStd messageID, sol::object const& p0, sol::object const& p1)
 {
     if (m_PBaseEntity->objtype != TYPE_PC)
     {
@@ -662,6 +662,28 @@ void CLuaBaseEntity::setVolatileCharVar(std::string const& varName, int32 value,
 
         PChar->setVolatileCharVar(varName, value, varTimestamp);
     }
+}
+
+/************************************************************************
+ *  Function: getLocalVars()
+ *  Purpose : Returns all variables assigned locally to an entity
+ *  Example : local localVars = KingArthro:getLocalVars()
+ *  Notes   :
+ ************************************************************************/
+
+auto CLuaBaseEntity::getLocalVars() -> sol::table
+{
+    auto  table     = lua.create_table();
+    auto& localVars = m_PBaseEntity->GetLocalVars();
+
+    for (auto const& [varName, value] : localVars)
+    {
+        auto subtable       = lua.create_table();
+        subtable["varname"] = varName;
+        subtable["value"]   = value;
+        table.add(subtable);
+    }
+    return table;
 }
 
 /************************************************************************
@@ -891,6 +913,11 @@ void CLuaBaseEntity::StartEventHelper(int32 EventID, sol::variadic_args va, EVEN
         return;
     }
 
+    if (PChar->currentEvent->eventId == EventID)
+    {
+        ShowError("CLuaBaseEntity::StartEventHelper: Could not start event, Character Entity already triggered.");
+        return;
+    }
     PChar->StatusEffectContainer->DelStatusEffect(EFFECT_BOOST);
 
     PChar->queueEvent(ParseEvent(EventID, va, PChar->eventPreparation, eventType));
@@ -1200,7 +1227,7 @@ void CLuaBaseEntity::release()
     {
         // Message: Event skipped
         releaseType = RELEASE_TYPE::SKIPPING;
-        PChar->pushPacket(new CMessageSystemPacket(0, 0, MSGSYSTEM::EVENT_SKIPPED));
+        PChar->pushPacket(new CMessageSystemPacket(0, 0, MsgStd::EventSkipped));
     }
 
     PChar->inSequence = false;
@@ -2921,7 +2948,7 @@ void CLuaBaseEntity::setPos(sol::variadic_args va)
             if (ipp == 0)
             {
                 ShowWarning(fmt::format("Char {} requested zone ({}) returned IPP of 0", PChar->name, zoneid));
-                PChar->pushPacket(new CMessageSystemPacket(0, 0, MSGSYSTEM::COULD_NOT_ENTER)); // You could not enter the next area.
+                PChar->pushPacket(new CMessageSystemPacket(0, 0, MsgStd::CouldNotEnter)); // You could not enter the next area.
                 return;
             }
 
@@ -3719,14 +3746,11 @@ bool CLuaBaseEntity::addItem(sol::variadic_args va)
     CCharEntity* PChar = (CCharEntity*)m_PBaseEntity;
 
     /* FORMAT 1:
-    player:addItem({id=itemID, quantity=quantity}) -- add quantity of itemID
-
-    player:addItem({id=itemID, silent=true}) -- silently add 1 of itemID
-
-    player:addItem({id=itemID, signature="Char"}) -- add 1 signed of itemID
-    player:addItem({id=itemID, augments={[4]=5,[10]=10}}) -- add 1 of itemID with augment id 4 and 10,
-        with values of 5 and 10, respectively
-    player:addItem({ id = itemID, exdata = { [10] = 10 } }) -- add 1 item of itemID, with the exdata at index 10 (0-indexed!) set to 10
+    player:addItem({ id = itemID, quantity  = quantity               }) -- add quantity of itemID
+    player:addItem({ id = itemID, silent    = true                   }) -- silently add 1 of itemID
+    player:addItem({ id = itemID, signature = "Char"                 }) -- add 1 signed of itemID
+    player:addItem({ id = itemID, augments  = { [4] = 5, [10] = 10 } }) -- add 1 of itemID with augment id 4 and 10, with values of 5 and 10, respectively
+    player:addItem({ id = itemID, exdata    = { [10] = 10 }          }) -- add 1 item of itemID, with the exdata at index 10 (0-indexed!) set to 10
     */
 
     if (va.get_type(0) == sol::type::table)
@@ -13331,8 +13355,8 @@ uint16 CLuaBaseEntity::getEVA()
  *  Function: getRACC()
  *  Purpose : Calculates and returns the Ranged Accuracy of a Weapon euipped in the Ranged slot
  *  Example : player:getRACC()
- *  Notes   : To Do: The calculation is already a public member of battleentity, shouldn't have two calculations, just call (CBattleEntity*)m_PBaseEntity)->RACC
- *and return result
+ *  Notes   : TODO: The calculation is already a public member of battleentity, shouldn't have two calculations, just call (CBattleEntity*)m_PBaseEntity)->RACC
+ *            and return result
  ************************************************************************/
 
 int CLuaBaseEntity::getRACC()
@@ -13563,39 +13587,6 @@ bool CLuaBaseEntity::isWeaponTwoHanded()
     }
 
     return weapon->isTwoHanded();
-}
-
-/************************************************************************
- *  Function: getMeleeHitDamage()
- *  Purpose : Calculates and returns total damage for a single hit
- *  Example : getMeleeHitDamage(Attacker,Local Hit Rate)
- *  Notes   : Battleutils calculates hit rate already, so inserting hit rate
- *          : here only increases chance of missing (assuming < 100)?
- *          : Not currently used in any scripts (handled by battleutils) - Is this even needed?
- ************************************************************************/
-
-int CLuaBaseEntity::getMeleeHitDamage(CLuaBaseEntity* PLuaBaseEntity, sol::object const& arg1)
-{
-    if (m_PBaseEntity->objtype == TYPE_NPC)
-    {
-        ShowWarning("Invalid Entity (NPC: %s) calling function.", m_PBaseEntity->getName());
-        return 0;
-    }
-
-    CBattleEntity* PAttacker = static_cast<CBattleEntity*>(m_PBaseEntity);
-    CBattleEntity* PDefender = static_cast<CBattleEntity*>(PLuaBaseEntity->GetBaseEntity());
-
-    uint8 hitrate = (arg1 == sol::lua_nil) ? battleutils::GetHitRate(PAttacker, PDefender) : arg1.as<uint8>();
-
-    if (xirand::GetRandomNumber(100) < hitrate)
-    {
-        float DamageRatio = battleutils::GetDamageRatio(PAttacker, PDefender, false, 0.f);
-        int   damage      = (uint16)((PAttacker->GetMainWeaponDmg() + battleutils::GetFSTR(PAttacker, PDefender, SLOT_MAIN)) * DamageRatio);
-
-        return damage;
-    }
-
-    return -1;
 }
 
 /************************************************************************
@@ -13871,6 +13862,11 @@ uint8 CLuaBaseEntity::getWeaponSkillType(uint8 slotID)
         if (PWeapon)
         {
             return PWeapon->getSkillType();
+        }
+        else
+        {
+            // nothing in offhand or non-weapon (shield/grip)
+            return 0;
         }
     }
 
@@ -14379,7 +14375,7 @@ bool CLuaBaseEntity::isAutomaton()
     if (m_PBaseEntity->objtype == TYPE_PET)
     {
         uint32 petID = static_cast<CPetEntity*>(m_PBaseEntity)->m_PetID;
-        if (petID >= PETID_HARLEQUINFRAME and petID <= PETID_STORMWAKERFRAME)
+        if (petID >= PETID_HARLEQUINFRAME && petID <= PETID_STORMWAKERFRAME)
         {
             return true;
         }
@@ -15805,7 +15801,10 @@ void CLuaBaseEntity::setDelay(uint16 delay)
     }
 
     auto* PMobEntity = static_cast<CMobEntity*>(m_PBaseEntity);
-    static_cast<CItemWeapon*>(PMobEntity->m_Weapons[SLOT_MAIN])->setDelay(delay);
+    if (auto* PItemWeapon = dynamic_cast<CItemWeapon*>(PMobEntity->m_Weapons[SLOT_MAIN]))
+    {
+        PItemWeapon->setDelay(delay);
+    }
 }
 
 /************************************************************************
@@ -15823,7 +15822,10 @@ void CLuaBaseEntity::setDamage(uint16 damage)
     }
 
     auto* PMobEntity = static_cast<CMobEntity*>(m_PBaseEntity);
-    static_cast<CItemWeapon*>(PMobEntity->m_Weapons[SLOT_MAIN])->setDamage(damage);
+    if (auto* PItemWeapon = dynamic_cast<CItemWeapon*>(PMobEntity->m_Weapons[SLOT_MAIN]))
+    {
+        PItemWeapon->setDamage(damage);
+    }
 }
 
 /************************************************************************
@@ -17094,6 +17096,22 @@ bool CLuaBaseEntity::deleteRaisedChocobo()
     return true;
 }
 
+void CLuaBaseEntity::clearActionQueue()
+{
+    if (m_PBaseEntity->PAI)
+    {
+        m_PBaseEntity->PAI->ClearActionQueue();
+    }
+}
+
+void CLuaBaseEntity::clearTimerQueue()
+{
+    if (m_PBaseEntity->PAI)
+    {
+        m_PBaseEntity->PAI->ClearTimerQueue();
+    }
+}
+
 void CLuaBaseEntity::setMannequinPose(uint16 itemID, uint8 race, uint8 pose)
 {
     TracyZoneScoped;
@@ -17207,6 +17225,7 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("setVar", CLuaBaseEntity::setCharVar); // Compatibility binding
     SOL_REGISTER("incrementCharVar", CLuaBaseEntity::incrementCharVar);
     SOL_REGISTER("setVolatileCharVar", CLuaBaseEntity::setVolatileCharVar);
+    SOL_REGISTER("getLocalVars", CLuaBaseEntity::getLocalVars);
     SOL_REGISTER("getLocalVar", CLuaBaseEntity::getLocalVar);
     SOL_REGISTER("setLocalVar", CLuaBaseEntity::setLocalVar);
     SOL_REGISTER("resetLocalVars", CLuaBaseEntity::resetLocalVars);
@@ -17806,7 +17825,6 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("handleAfflatusMiseryDamage", CLuaBaseEntity::handleAfflatusMiseryDamage);
 
     SOL_REGISTER("isWeaponTwoHanded", CLuaBaseEntity::isWeaponTwoHanded);
-    SOL_REGISTER("getMeleeHitDamage", CLuaBaseEntity::getMeleeHitDamage);
     SOL_REGISTER("getWeaponDmg", CLuaBaseEntity::getWeaponDmg);
     SOL_REGISTER("getWeaponDmgRank", CLuaBaseEntity::getWeaponDmgRank);
     SOL_REGISTER("getOffhandDmg", CLuaBaseEntity::getOffhandDmg);
@@ -17993,6 +18011,9 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("setClaimedTraverserStones", CLuaBaseEntity::setClaimedTraverserStones);
 
     SOL_REGISTER("getHistory", CLuaBaseEntity::getHistory);
+
+    SOL_REGISTER("clearActionQueue", CLuaBaseEntity::clearActionQueue);
+    SOL_REGISTER("clearTimerQueue", CLuaBaseEntity::clearTimerQueue);
 
     SOL_REGISTER("getChocoboRaisingInfo", CLuaBaseEntity::getChocoboRaisingInfo);
     SOL_REGISTER("setChocoboRaisingInfo", CLuaBaseEntity::setChocoboRaisingInfo);

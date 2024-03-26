@@ -102,13 +102,16 @@ void CPlayerCharmController::DoRoamTick(time_point tick)
 
     if (currentDistance > RoamDistance)
     {
-        if (currentDistance < 35.0f && POwner->PAI->PathFind->PathAround(POwner->PMaster->loc.p, 2.0f, PATHFLAG_RUN | PATHFLAG_WALLHACK))
+        if (POwner->PAI->PathFind)
         {
-            POwner->PAI->PathFind->FollowPath(m_Tick);
-        }
-        else if (POwner->GetSpeed() > 0)
-        {
-            POwner->PAI->PathFind->WarpTo(POwner->PMaster->loc.p, RoamDistance);
+            if (currentDistance < 35.0f && POwner->PAI->PathFind->PathAround(POwner->PMaster->loc.p, 2.0f, PATHFLAG_RUN | PATHFLAG_WALLHACK))
+            {
+                POwner->PAI->PathFind->FollowPath(m_Tick);
+            }
+            else if (POwner->GetSpeed() > 0)
+            {
+                POwner->PAI->PathFind->WarpTo(POwner->PMaster->loc.p, RoamDistance);
+            }
         }
     }
 }

@@ -3044,6 +3044,10 @@ INSERT INTO `nm_spawn_points` VALUES (17281061,1,-299.000,0.000,192.000);
 INSERT INTO `nm_spawn_points` VALUES (17281061,2,-334.000,3.000,182.000);
 INSERT INTO `nm_spawn_points` VALUES (17281061,3,-301.000,0.000,166.000);
 INSERT INTO `nm_spawn_points` VALUES (17281149,0,-279.575,3.317,16.011); -- Mischievous Micholas
+INSERT INTO `nm_spawn_points` VALUES (17281296,0,-20.295,8.400,-113.263);   -- Pyuu the Spatemaker (H-9)
+INSERT INTO `nm_spawn_points` VALUES (17281296,1,-632.089,0.317,35.521);    -- Pyuu the Spatemaker (E-8)
+INSERT INTO `nm_spawn_points` VALUES (17281296,2,-356.919,16.282,-500.287); -- Pyuu the Spatemaker (F-12)
+INSERT INTO `nm_spawn_points` VALUES (17281296,3,154.125,8.027,500.785);    -- Pyuu the Spatemaker (I-5)
 INSERT INTO `nm_spawn_points` VALUES (17285220,0,190.942,0.345,94.828);
 INSERT INTO `nm_spawn_points` VALUES (17285220,1,219.102,0.430,45.071);
 INSERT INTO `nm_spawn_points` VALUES (17285220,2,230.358,0.043,48.605);

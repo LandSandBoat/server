@@ -36,6 +36,7 @@ class CGuild;
 namespace guildutils
 {
     void Initialize();
+    void Cleanup();
     void UpdateGuildsStock();
     void UpdateGuildPointsPattern();
 

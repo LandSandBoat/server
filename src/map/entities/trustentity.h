@@ -36,7 +36,7 @@ class CTrustEntity : public CMobEntity
 {
 public:
     explicit CTrustEntity(CCharEntity*);
-    ~CTrustEntity() override = default;
+    ~CTrustEntity() override;
 
     void PostTick() override;
     void FadeOut() override;

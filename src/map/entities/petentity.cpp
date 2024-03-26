@@ -48,6 +48,7 @@ CPetEntity::CPetEntity(PET_TYPE petType)
 , m_jugSpawnTime(time_point::min())
 , m_jugDuration(duration::min())
 {
+    TracyZoneScoped;
     objtype                     = TYPE_PET;
     m_EcoSystem                 = ECOSYSTEM::UNCLASSIFIED;
     allegiance                  = ALLEGIANCE_TYPE::PLAYER;
@@ -59,7 +60,10 @@ CPetEntity::CPetEntity(PET_TYPE petType)
     PAI = std::make_unique<CAIContainer>(this, std::make_unique<CPathFind>(this), std::make_unique<CPetController>(this), std::make_unique<CTargetFind>(this));
 }
 
-CPetEntity::~CPetEntity() = default;
+CPetEntity::~CPetEntity()
+{
+    TracyZoneScoped;
+}
 
 PET_TYPE CPetEntity::getPetType()
 {
@@ -382,6 +386,23 @@ bool CPetEntity::ValidTarget(CBattleEntity* PInitiator, uint16 targetFlags)
         return false;
     }
     return CMobEntity::ValidTarget(PInitiator, targetFlags);
+}
+
+bool CPetEntity::CanAttack(CBattleEntity* PTarget, std::unique_ptr<CBasicPacket>& errMsg)
+{
+    // prevent pets from attacking mobs that the PC master does not own
+    if (this->PMaster)
+    {
+        auto* PChar = dynamic_cast<CCharEntity*>(this->PMaster);
+        if (PChar && !PChar->IsMobOwner(PTarget))
+        {
+            errMsg = std::make_unique<CMessageBasicPacket>(this, PTarget, 0, 0, MSGBASIC_ALREADY_CLAIMED);
+            PAI->Disengage();
+            return false;
+        }
+    }
+
+    return CBattleEntity::CanAttack(PTarget, errMsg);
 }
 
 void CPetEntity::OnPetSkillFinished(CPetSkillState& state, action_t& action)

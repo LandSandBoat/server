@@ -36,7 +36,7 @@ bool CTriggerState::Update(time_point tick)
 {
     if (!IsCompleted())
     {
-        auto* PChar = static_cast<CCharEntity*>(GetTarget());
+        auto* PChar = dynamic_cast<CCharEntity*>(GetTarget());
         if (PChar && door && m_PEntity->animation == ANIMATION_CLOSE_DOOR)
         {
             close                = true;

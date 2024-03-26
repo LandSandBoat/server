@@ -50148,7 +50148,7 @@ INSERT INTO `item_mods` VALUES (23217,384,300); -- HASTE_GEAR: 3%
 INSERT INTO `item_mods` VALUES (23217,487,8);   -- MAG_BURST_BONUS: 8
 INSERT INTO `item_mods` VALUES (23217,901,13);  -- ELEMENTAL_CELERITY: -13
 
--- Futhark Mitons : 2
+-- Futhark Mitons +2
 INSERT INTO `item_mods` VALUES (23218,1,102);   -- DEF: 102
 INSERT INTO `item_mods` VALUES (23218,2,35);    -- HP: 35
 INSERT INTO `item_mods` VALUES (23218,8,16);    -- STR: 16

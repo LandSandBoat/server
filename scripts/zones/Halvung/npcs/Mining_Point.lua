@@ -5,11 +5,11 @@
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    xi.helm.onTrade(player, npc, trade, xi.helm.type.MINING, 210)
+    xi.helm.onTrade(player, npc, trade, xi.helmType.MINING, 210)
 end
 
 entity.onTrigger = function(player, npc)
-    xi.helm.onTrigger(player, xi.helm.type.MINING)
+    xi.helm.onTrigger(player, xi.helmType.MINING)
 end
 
 entity.onEventUpdate = function(player, csid, option, npc)

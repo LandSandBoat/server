@@ -58,7 +58,7 @@ void view_session::read_func()
             auto sql = std::make_unique<SqlConnection>();
 
             uint32 accountID = 0;
-            int32  ret       = sql->Query("SELECT accid FROM chars WHERE charid = %u and charname = '%s' LIMIT 1;",
+            int32  ret       = sql->Query("SELECT accid FROM chars WHERE charid = %u AND charname = '%s' LIMIT 1;",
                                           requestedCharacterID, requestedCharacter);
             if (ret != SQL_ERROR && sql->NumRows() != 0 && sql->NextRow() == SQL_SUCCESS)
             {

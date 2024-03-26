@@ -8,7 +8,7 @@ local ID = zones[xi.zone.GRAUBERG_S]
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
-    xi.helm.initZone(zone, xi.helm.type.HARVESTING)
+    xi.helm.initZone(zone, xi.helmType.HARVESTING)
     xi.darkixion.zoneOnInit(zone)
 end
 

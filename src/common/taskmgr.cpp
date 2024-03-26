@@ -27,6 +27,17 @@
 #include "common/tracy.h"
 #include "common/utils.h"
 
+CTaskMgr::~CTaskMgr()
+{
+    while (!m_TaskList.empty())
+    {
+        CTask* PTask = m_TaskList.top();
+        m_TaskList.pop();
+
+        destroy(PTask);
+    }
+}
+
 CTaskMgr::CTask* CTaskMgr::AddTask(std::string const& InitName, time_point InitTick, std::any InitData, TASKTYPE InitType, TaskFunc_t InitFunc, duration InitInterval)
 {
     TracyZoneScoped;
@@ -56,6 +67,7 @@ void CTaskMgr::RemoveTask(std::string const& TaskName)
         m_TaskList.pop();
 
         // Don't add tasks we're trying to remove to the new pq
+        // FIXME: duplicate task names AREN'T checked on insert!
         if (PTask->m_name != TaskName)
         {
             newPq.push(PTask);
@@ -63,6 +75,7 @@ void CTaskMgr::RemoveTask(std::string const& TaskName)
         else
         {
             ++tasksRemoved;
+            destroy(PTask);
         }
     }
 

@@ -31,6 +31,8 @@
  * in the messageID parameter.
  * Located in 1-27-72.xml if using MassExtractor -full-scan
  */
+
+// Todo: move to enum class
 enum MSGBASIC_ID : uint16
 {
     MSGBASIC_NONE                  = 0,   // Display nothing

@@ -12,7 +12,7 @@ commandObj.cmdprops =
 
 local function double_print(player, str)
     print(str)
-    player:PrintToPlayer(str, xi.msg.channel.SYSTEM_3, '')
+    player:printToPlayer(str, xi.msg.channel.SYSTEM_3, '')
 end
 
 commandObj.onTrigger = function(player)

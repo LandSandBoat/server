@@ -174,7 +174,7 @@ quest.sections =
             {
                 onTrade = function(player, npc, trade)
                     -- TODO: CSID for YAHSE_HUNTING_GROUNDS
-                    xi.helm.onTrade(player, npc, trade, xi.helm.type.HARVESTING, nil, nil)
+                    xi.helm.onTrade(player, npc, trade, xi.helmType.HARVESTING, nil, nil)
                     return quest:keyItem(xi.ki.BLIGHTBERRY)
                 end,
             },

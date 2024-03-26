@@ -14,6 +14,9 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
 
     mob:addTP(3000)
 
+    -- use local var counter to ensure only three mobskills count for Meikyo Shisui
+    mob:setLocalVar('[MeikyoShisui]MobSkillCount', 3)
+
     return xi.effect.MEIKYO_SHISUI
 end
 

@@ -26,6 +26,7 @@
 #include <fast_obj.h>
 #endif
 
+#include "common/tracy.h"
 #include "common/zlib.h"
 #include "entities/baseentity.h"
 

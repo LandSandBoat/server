@@ -41,6 +41,8 @@ enum class Mod
     MND = 13, // Mind
     CHR = 14, // Charisma
 
+    TWOHAND_STR = 218, // Same as STR, but only active when using a two handed weapon (e.g. Hasso)
+
     // Magic Evasion versus elements
     // This has been repeatedly mixed up with SDT - be careful!
     FIRE_MEVA    = 15, // Fire Magic Evasion
@@ -67,6 +69,8 @@ enum class Mod
 
     ACC  = 25, // Accuracy
     RACC = 26, // Ranged Accuracy
+
+    TWOHAND_ACC = 219, // Same as ACC, but only active when using a two handed weapon (e.g. Hasso)
 
     ENMITY                = 27,  // Enmity
     ENMITY_LOSS_REDUCTION = 427, // Reduces Enmity lost when taking damage
@@ -260,10 +264,11 @@ enum class Mod
     TACTICAL_GUARD = 899, // Tp increase when guarding
     GUARD_PERCENT  = 976, // Guard Percent
 
-    HASTE_MAGIC    = 167, // Haste (and Slow) from magic - 10000 base, 375 = 3.75%
-    HASTE_ABILITY  = 383, // Haste (and Slow) from abilities - 10000 base, 375 = 3.75%
-    HASTE_GEAR     = 384, // Haste (and Slow) from equipment - 10000 base, 375 = 3.75%
-    SPELLINTERRUPT = 168, // % Spell Interruption Rate
+    HASTE_MAGIC           = 167, // Haste (and Slow) from magic - 10000 base, 375 = 3.75%
+    HASTE_ABILITY         = 383, // Haste (and Slow) from abilities - 10000 base, 375 = 3.75%
+    HASTE_GEAR            = 384, // Haste (and Slow) from equipment - 10000 base, 375 = 3.75%
+    TWOHAND_HASTE_ABILITY = 217, // Haste (and Slow) from abilities - 10000 base, 375 = 3.75% - Only applies to auto attacks when using two handed weapons, additive to HASTE_ABILITY
+    SPELLINTERRUPT        = 168, // % Spell Interruption Rate
 
     // New movement speed modifiers.
     MOVE_SPEED_OVERIDE        = 169, // Modifier used to overide regular speed caps. (GM speed and Feast of Swords)
@@ -539,12 +544,13 @@ enum class Mod
     THIRD_EYE_BONUS           = 1055, // TODO: Bonus Third Eye Evasion (count)
 
     // Ninja
-    UTSUSEMI          = 307, // Everyone's favorite --tracks shadows.
-    UTSUSEMI_BONUS    = 900, // Extra shadows from gear
-    NINJA_TOOL        = 308, // Percent chance to not use a tool.
-    NIN_NUKE_BONUS    = 522, // magic attack bonus for NIN nukes
-    DAKEN             = 911, // chance to throw a shuriken without consuming it
-    NINJUTSU_DURATION = 1000,
+    UTSUSEMI             = 307, // Everyone's favorite --tracks shadows.
+    UTSUSEMI_BONUS       = 900, // Extra shadows from gear
+    NINJA_TOOL           = 308, // Percent chance to not use a tool.
+    NIN_NUKE_BONUS_INNIN = 223, // Ninjutsu damage multiplier from Innin.
+    NIN_NUKE_BONUS_GEAR  = 522, // Ninjutsu damage multiplier from gear.
+    DAKEN                = 911, // chance to throw a shuriken without consuming it
+    NINJUTSU_DURATION    = 1000,
 
     // Dragoon
     ANCIENT_CIRCLE_DURATION    = 859,  // Ancient Circle extended duration in seconds
@@ -745,6 +751,7 @@ enum class Mod
     PARRY_SPIKES                = 1022, // Battuta parry spikes rate
     PARRY_SPIKES_DMG            = 1023, // Battuta parry spikes damage
     SPECIAL_ATTACK_EVASION      = 1024, // Foil "Special Attack" evasion
+    AUGMENTS_SLEIGHT_OF_SWORD   = 277,  // Enhances bonus "Subtle Blow" per merit.
 
     // Stores the amount of elemental affinity (elemental staves mostly) - damage, acc, and perpetuation is all handled separately
     FIRE_AFFINITY_DMG    = 347, // They're stored separately due to Magian stuff - they can grant different levels of
@@ -996,6 +1003,9 @@ enum class Mod
     DIG_BYPASS_FATIGUE = 1074, // Chocobo digging modifier found in "Blue Race Silks". Modifier works as a direct percent.
     BREATH_DMG_DEALT   = 1075, // Breath damage dealt
 
+    DAMAGE_LIMIT  = 1080, // Damage Limit increase, found on some traits. It's a flat value added to max pDIF (maxpDIF + DL/100) https://www.bg-wiki.com/ffxi/Damage_Limit%2B
+    DAMAGE_LIMITP = 1081, // Damage Limit +% increase, found on some gear. It's a multiplier added after flat Damage Limit ((maxpDIF + DL/100)*(100 + DLP/100)/100) https://www.ffxiah.com/forum/topic/56649/physical-damage-limit/
+
     // IF YOU ADD ANY NEW MODIFIER HERE, ADD IT IN scripts/enum/mod.lua ASWELL!
 
     // The spares take care of finding the next ID to use so long as we don't forget to list IDs that have been freed up by refactoring.
@@ -1003,10 +1013,10 @@ enum class Mod
     //
     // SPARE IDs:
     // 141
-    // 217 to 223
-    // 273 to 277
+    // 220 to 222
+    // 273 to 276
     //
-    // SPARE = 1080 and onward
+    // SPARE = 1082 and onward
 };
 
 // temporary workaround for using enum class as unordered_map key until compilers support it

@@ -110,6 +110,18 @@ namespace traits
         }
     }
 
+    void ClearTraitsList()
+    {
+        // Manually cleanup traits list
+        for (auto jobTraitList : PTraitsList)
+        {
+            for (auto traitList : jobTraitList)
+            {
+                destroy(traitList);
+            }
+            jobTraitList.clear();
+        }
+    }
     /************************************************************************
      *                                                                       *
      *  Get List of Traits by Main Job or Sub Job                            *

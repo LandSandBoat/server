@@ -35,6 +35,7 @@ CInstance::CInstance(CZone* zone, uint16 instanceid)
 , m_instanceid(instanceid)
 , m_zone(zone)
 {
+    TracyZoneScoped;
     LoadInstance();
 
     m_startTime = server_clock::now();
@@ -43,22 +44,7 @@ CInstance::CInstance(CZone* zone, uint16 instanceid)
 
 CInstance::~CInstance()
 {
-    for (auto entity : m_mobList)
-    {
-        destroy(entity.second);
-    }
-    for (auto entity : m_npcList)
-    {
-        destroy(entity.second);
-    }
-    for (auto entity : m_petList)
-    {
-        destroy(entity.second);
-    }
-    for (auto entity : m_trustList)
-    {
-        destroy(entity.second);
-    }
+    TracyZoneScoped;
 }
 
 uint16 CInstance::GetID() const

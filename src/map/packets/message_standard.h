@@ -26,19 +26,18 @@
 
 #include "basic.h"
 
-/*
-Valid MessageIDs
-Complete list at 1/27/76.DAT
-
-NOTE: System messages do not specify the color in the packet explictly. Instead there is a different message ID
-for each of the supported chat colors (e.g. say, shout, linkshell). Each of these types have their own colors
-as configured by the client.
-*/
+// Valid MessageIDs for both standard and SYSTEM type messages
+// Found in ROM/27/76.dat or 1-27-76.xml if using mass extractor
+// Todo: move msg enums to common location out of packet headers
 enum class MsgStd
 {
-    // Used as a sentinal value. This should not be used as part of a packet.
+    // Used as a sentinel value. This should not be used as part of a packet.
     Unknown = -1,
 
+    // Keep message IDs in order OR ELSE UNSPECIFIED CONSQUENSES SHALL ENSUE
+
+    CouldNotEnter                = 2,   // You could not enter the next area. [0,1,3,4, all same message]
+    CouldNotEnterYourRoom        = 5,   // You could not enter your room.
     InvitationDeclined           = 11,  // Your invitation was declined.
     PersonIsPartyMember          = 12,  // That person is a party member.
     CannotPerformJobEmote        = 13,  // You cannot perform that job emote.
@@ -53,6 +52,7 @@ enum class MsgStd
     NoPartyMembers               = 36,  // There are no party members.
     NoLinkshellEquipped          = 37,  // You do not have a linkshell item equipped.
     WaitLonger                   = 38,  // You must wait longer to perform that action.
+    YouDontHaveAny               = 39,  // You don't have any <item>.
     DiceRoll                     = 88,  // Dice Roll! <player> rolls <roll>.
     Examine                      = 89,  // <name> examines you.
     PollProposalShout            = 100, // Player Name's proposal to all (cast vote with command: "/vote ?"):
@@ -63,10 +63,13 @@ enum class MsgStd
     LinkshellKicked              = 109, // You have been kicked out of the linkshell group.
     LinkshellNoLongerExists      = 110, // That linkshell group no longer exists. This item is unusable.
     LinkshellUnavailable         = 112, // The linkshell name you entered is already in use or otherwise unavailable.
+    EventSkipped                 = 117, // Event skipped.
     TellNotReceivedOffline       = 125, // Your tell was not received.  The recipient is currently away.
     MoghouseCantPickUp           = 137, // Kupo... I can't pick anything right now, kupo.
+    ChocoboRefusedToEnte         = 138, // The chocobo refused to enter the next area.
     CurrentPollResultsSystem     = 140, // Player Name's proposal - Current poll results:
     FinalPollResultsSystem       = 141, // Player Name's proposal - Final poll results:
+    CannotUseCommandAtTheMoment  = 142, // You cannot use that command at the moment. Please try again later.
     PollProposalSay              = 146, // Player Name's proposal to all (cast vote with command: "/vote ?"):
     CurrentPollResultsSay        = 147, // Player Name's proposal - Current poll results:
     FinalPollResultsSay          = 148, // Player Name's proposal - Final poll results:
@@ -77,8 +80,15 @@ enum class MsgStd
     CurrentPollResultsLinkshell  = 153, // Player Name's proposal - Current poll results:
     FinalPollResultsLinkshell    = 154, // Player Name's proposal - Final poll results:
     LinkshellNoAccess            = 158, // You do not have access to those linkshell commands.
+    CannotWhileInvisible         = 172, // You cannot use that command while invisible.
+    CharacterInfoHidden          = 175, // Your character information is now hidden.
+    CharacterInfoShown           = 176, // Your character information is now shown.
     ThrowAway                    = 180, // You throw away <item>.
     TellNotReceivedAway          = 181, // Your tell was not received.  The recipient is currently away.
+    PersonAlreadyInAlliance      = 182, // That person is already in an alliance.
+    UnableToProcessRequest       = 183, // Unable to process request.
+    ExpansionPackNotRegistered   = 184, // Unable to enter next area. Expansion pack not registered.
+    ExpansionPackNotInstalled    = 185, // Unable to enter next area. Expansion pack not installed.
     CannotPerformPetra           = 209, // You cannot perform that action while holding a Petra.
     CannotPerformNoPetra         = 210, // You cannot perform that action without a Petra.
     LostYourPetras               = 211, // You lost your Petras.
@@ -89,12 +99,17 @@ enum class MsgStd
     CannotPerformPreparingBattle = 216, // This action cannot be performed while preparing for battle.
     ChevronsEarned               = 219, // Chevrons earned: Gold: 0 Mythril: 0 Silver: 0 Bronze: 0 Job: 0
     ItemEx                       = 220, // You cannot possess more than one of that item.
-    BlockingAid                  = 225, // Target is currently blocking outside magical assistance
+    BlockaidActivated            = 221, // Blockaid activated. Magical assistance, trades, party invites etc. from non-party/alliance characters will be blocked. This effect will continue until changing areas, or executing the "/blockaid off" command.
+    BlockaidCanceled             = 222, // Blockaid canceled. Magical assistance, trades, party invites etc. from non-party/alliance characters will be allowed.
+    BlockaidCurrentlyActive      = 223, // Blockaid is currently active. ("/blockaid off" to cancel.)
+    BlockaidCurrentlyInactive    = 224, // Blockaid is currently inactive.
+    TargetIsCurrentlyBlocking    = 225, // Target is currently blocking outside magical assistance, trades, and party invites.
+    BlockedByBlockaid            = 226, // Interaction from a non-party character was blocked by /blockaid.
     Sell                         = 232, // You sell <item>.
     SellToShop                   = 233, // You sell <item> to the shop.
     LevelSyncWarning             = 235, // Warning! This is a Level Sync party ...
     CannotInviteLevelSync        = 236, // You cannot invite that person at this time. This player is either undergoing Level Sync...
-    CannotJoinLevelSync          = 237, // You cannot join this party.  You are either underoing Level Sync...
+    CannotJoinLevelSync          = 237, // You cannot join this party.  You are either undergoing Level Sync...
     Compass                      = 239, // The compass reads: ...
     CannotHere                   = 256, // You cannot use that command in this area.
     HeadgearShow                 = 260,
@@ -113,11 +128,11 @@ enum class MsgStd
     FinalPollResultsLinkshell2   = 291, // Player Name's proposal - Final poll results:
     TrustCannotLFP               = 296, // You cannot use Trust magic while seeking a party.
     WaitParty                    = 297, // While inviting a party member, you must wait a while before using Trust magic.
-    TrustLimit                   = 298, // You have called forth your maximum number of alter egos.
-    TrustSame                    = 299, // That alter ego has already been called forth.
+    TrustMaximumNumber           = 298, // You have called forth your maximum number of alter egos.
+    TrustAlreadyCalled           = 299, // That alter ego has already been called forth.
     TrustEnmity                  = 300, // You cannot use Trust magic while having gained enmity.
     TrustSoloOrLeader            = 301, // You cannot use Trust magic unless you are solo or the party leader.
-    AnErrorHasOccured            = 308, // An error has occured.
+    AnErrorHasOccured            = 308, // An error has occurred.
 };
 
 class CCharEntity;

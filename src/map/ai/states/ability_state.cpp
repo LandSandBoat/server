@@ -52,7 +52,8 @@ CAbilityState::CAbilityState(CBattleEntity* PEntity, uint16 targid, uint16 abili
     SetTarget(PTarget->targid);
     m_PAbility = std::make_unique<CAbility>(*PAbility);
     m_castTime = PAbility->getCastTime();
-    if (m_castTime > 0s)
+
+    if (m_castTime > 0s && CanUseAbility())
     {
         action_t action;
         action.id              = PEntity->id;
@@ -65,8 +66,12 @@ CAbilityState::CAbilityState(CBattleEntity* PEntity, uint16 targid, uint16 abili
         actionTarget.messageID = 326;
         actionTarget.param     = PAbility->getID();
         PEntity->loc.zone->PushPacket(PEntity, CHAR_INRANGE_SELF, new CActionPacket(action));
+        m_PEntity->PAI->EventHandler.triggerListener("ABILITY_START", CLuaBaseEntity(m_PEntity), CLuaAbility(PAbility));
     }
-    m_PEntity->PAI->EventHandler.triggerListener("ABILITY_START", CLuaBaseEntity(m_PEntity), CLuaAbility(PAbility));
+    else
+    {
+        m_PEntity->PAI->EventHandler.triggerListener("ABILITY_START", CLuaBaseEntity(m_PEntity), CLuaAbility(PAbility));
+    }
 }
 
 CAbility* CAbilityState::GetAbility()
@@ -77,18 +82,21 @@ CAbility* CAbilityState::GetAbility()
 void CAbilityState::ApplyEnmity()
 {
     auto* PTarget = GetTarget();
-    if (m_PAbility->getValidTarget() & TARGET_ENEMY && PTarget->allegiance != m_PEntity->allegiance)
+    if (PTarget)
     {
-        if (PTarget->objtype == TYPE_MOB && !(m_PAbility->getCE() == 0 && m_PAbility->getVE() == 0))
+        if (m_PAbility->getValidTarget() & TARGET_ENEMY && PTarget->allegiance != m_PEntity->allegiance)
         {
-            CMobEntity* mob = (CMobEntity*)PTarget;
-            mob->PEnmityContainer->UpdateEnmity(m_PEntity, m_PAbility->getCE(), m_PAbility->getVE(), false, m_PAbility->getID() == ABILITY_CHARM);
-            battleutils::ClaimMob(mob, m_PEntity);
+            if (PTarget->objtype == TYPE_MOB && !(m_PAbility->getCE() == 0 && m_PAbility->getVE() == 0))
+            {
+                CMobEntity* mob = (CMobEntity*)PTarget;
+                mob->PEnmityContainer->UpdateEnmity(m_PEntity, m_PAbility->getCE(), m_PAbility->getVE(), false, m_PAbility->getID() == ABILITY_CHARM);
+                battleutils::ClaimMob(mob, m_PEntity);
+            }
         }
-    }
-    else if (PTarget->allegiance == m_PEntity->allegiance)
-    {
-        battleutils::GenerateInRangeEnmity(m_PEntity, m_PAbility->getCE(), m_PAbility->getVE());
+        else if (PTarget->allegiance == m_PEntity->allegiance)
+        {
+            battleutils::GenerateInRangeEnmity(m_PEntity, m_PAbility->getCE(), m_PAbility->getVE());
+        }
     }
 }
 
@@ -174,7 +182,7 @@ bool CAbilityState::CanUseAbility()
             return false;
         }
 
-        if (PChar->IsValidTarget(PTarget->targid, PAbility->getValidTarget(), errMsg))
+        if (PTarget && PChar->IsValidTarget(PTarget->targid, PAbility->getValidTarget(), errMsg))
         {
             if (PChar != PTarget && distance(PChar->loc.p, PTarget->loc.p) > PAbility->getRange())
             {
@@ -188,7 +196,8 @@ bool CAbilityState::CanUseAbility()
                 return false;
             }
 
-            if (PAbility->getID() >= ABILITY_HEALING_RUBY)
+            // TODO: Remove this when all pet abilities are moved to PetSkill system.
+            if (PAbility->getID() >= ABILITY_HEALING_RUBY && !battleutils::GetPetSkill(PAbility->getID()))
             {
                 // Blood pact MP costs are stored under animation ID
                 if (PChar->health.mp < PAbility->getAnimationID())
@@ -211,19 +220,36 @@ bool CAbilityState::CanUseAbility()
     }
     else
     {
+        bool   tooFarAway      = false;
+        bool   cancelAbility   = false;
         bool   hasAmnesia      = m_PEntity->StatusEffectContainer->HasStatusEffect(EFFECT_AMNESIA);
         bool   hasImpairment   = m_PEntity->StatusEffectContainer->HasStatusEffect(EFFECT_IMPAIRMENT);
         uint16 impairmentPower = hasImpairment ? m_PEntity->StatusEffectContainer->GetStatusEffect(EFFECT_IMPAIRMENT)->GetPower() : 0;
 
+        if (!PTarget)
+        {
+            cancelAbility = true;
+        }
+
         if (hasAmnesia ||
             (hasImpairment && (impairmentPower == 0x01 || impairmentPower == 0x03)))
         {
-            return false;
+            cancelAbility = true;
         }
 
-        if (m_PEntity->IsValidTarget(PTarget->targid, PAbility->getValidTarget(), errMsg))
+        if (PTarget && m_PEntity->IsValidTarget(PTarget->targid, PAbility->getValidTarget(), errMsg))
         {
             if (m_PEntity != PTarget && distance(m_PEntity->loc.p, PTarget->loc.p) > PAbility->getRange())
+            {
+                cancelAbility = true;
+                tooFarAway    = true;
+            }
+        }
+
+        if (cancelAbility)
+        {
+            // Only create a packet if the ability isn't instant
+            if (m_castTime > 0s)
             {
                 // Create this action packet that also sort of looks like an animation cancel packet to emit a red "Target is too far away" message.
                 // Captured from a red "<target> is too far away" message from healing breath IV
@@ -241,12 +267,11 @@ bool CAbilityState::CanUseAbility()
                 actionTarget.reaction        = REACTION::MISS;
                 actionTarget.speceffect      = static_cast<SPECEFFECT>(0x24);
                 actionTarget.param           = 0; // Observed as 639 on retail, but I'm not sure that it actually does anything.
-                actionTarget.messageID       = MSGBASIC_TOO_FAR_AWAY_RED;
+                actionTarget.messageID       = tooFarAway ? MSGBASIC_TOO_FAR_AWAY_RED : 0;
 
                 m_PEntity->loc.zone->PushPacket(m_PEntity, CHAR_INRANGE_SELF, new CActionPacket(action));
-
-                return false;
             }
+            return false;
         }
 
         // TODO: should luautils::OnAbilityCheck go here too?

@@ -23,7 +23,7 @@
 
 #include "message_system.h"
 
-CMessageSystemPacket::CMessageSystemPacket(uint32 param0, uint32 param1, MSGSYSTEM messageID)
+CMessageSystemPacket::CMessageSystemPacket(uint32 param0, uint32 param1, MsgStd messageID)
 {
     this->setType(0x53);
     this->setSize(0x10);

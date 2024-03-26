@@ -102,14 +102,14 @@ m:addOverride('xi.zones.GM_Home.Zone.onInitialize', function(zone)
         onTrade = function(player, npc, trade)
             -- NOTE: We have to use getPacketName, because the regular name is modified and being used
             --     : for internal lookups
-            player:PrintToPlayer('No, thanks!', 0, npc:getPacketName())
+            player:printToPlayer('No, thanks!', 0, npc:getPacketName())
         end,
 
         -- The entity will not be 'triggerable' unless you populate onTrigger
         onTrigger = function(player, npc)
             -- NOTE: We have to use getPacketName, because the regular name is modified and being used
             --     : for internal lookups
-            player:PrintToPlayer('Welcome to GM Home!', 0, npc:getPacketName())
+            player:printToPlayer('Welcome to GM Home!', 0, npc:getPacketName())
         end,
     })
 

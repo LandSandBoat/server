@@ -12,7 +12,7 @@ zoneObject.onChocoboDig = function(player, precheck)
 end
 
 zoneObject.onInitialize = function(zone)
-    xi.helm.initZone(zone, xi.helm.type.EXCAVATION)
+    xi.helm.initZone(zone, xi.helmType.EXCAVATION)
     xi.chocobo.initZone(zone)
     xi.voidwalker.zoneOnInit(zone)
 end

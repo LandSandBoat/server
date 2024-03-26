@@ -326,7 +326,7 @@ void data_session::read_func()
 
                 if (sql->Query("SELECT * \
                                 FROM accounts_sessions \
-                                WHERE accid = %u and client_port != '0';",
+                                WHERE accid = %u AND client_port != '0';",
                                session.accountID) != SQL_ERROR &&
                     sql->NumRows() != 0)
                 {
@@ -381,7 +381,7 @@ void data_session::read_func()
                     characterSelectionResponse.cache_port = searchPort;
 
                     // If the session was not processed by the game server, then it must be deleted.
-                    sql->Query("DELETE FROM accounts_sessions WHERE accid = %u and client_port = 0", session.accountID);
+                    sql->Query("DELETE FROM accounts_sessions WHERE accid = %u AND client_port = 0", session.accountID);
 
                     char session_key[sizeof(key3) * 2 + 1];
                     bin2hex(session_key, key3, sizeof(key3));

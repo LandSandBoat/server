@@ -3,6 +3,9 @@
 #include <mutex>
 #include <shared_mutex>
 
+#include "cbasetypes.h"
+#include "tracy.h"
+
 // https://www.reddit.com/r/cpp/comments/p132c7/comment/h8b8nml/?share_id=-NRyj9iRw5TqSi4Mm381j
 template <
     class T,
@@ -19,30 +22,35 @@ struct mutex_guarded
     {
     }
 
+    DISALLOW_COPY_AND_MOVE(mutex_guarded);
+
     auto read(auto f) const
     {
         auto l = lock();
+        LockMark(mutex);
         return f(target);
     }
 
     auto write(auto f)
     {
         auto l = lock();
+        LockMark(mutex);
         return f(target);
     }
 
 private:
-    mutable M mutex;
-    T         target;
+    mutable TracyLockable(M, mutex);
+
+    T target;
 
     auto lock() const
     {
-        return RL<M>(mutex);
+        return RL<LockableBase(M)>(mutex);
     }
 
     auto lock()
     {
-        return WL<M>(mutex);
+        return WL<LockableBase(M)>(mutex);
     }
 };
 

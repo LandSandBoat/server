@@ -1844,7 +1844,13 @@ namespace charutils
                 {
                     if (PItem->isType(ITEM_WEAPON))
                     {
-                        if (((CItemWeapon*)PItem)->getSkillType() == SKILL_HAND_TO_HAND)
+                        CItemEquipment* PSub = PChar->getEquip(SLOT_SUB);
+
+                        if (static_cast<CItemWeapon*>(PItem)->getSkillType() == SKILL_HAND_TO_HAND)
+                        {
+                            PChar->look.sub = 0;
+                        }
+                        else if (!PSub)
                         {
                             PChar->look.sub = 0;
                         }
@@ -1903,7 +1909,7 @@ namespace charutils
 
     bool EquipArmor(CCharEntity* PChar, uint8 slotID, uint8 equipSlotID, uint8 containerID)
     {
-        CItemEquipment* PItem   = (CItemEquipment*)PChar->getStorage(containerID)->GetItem(slotID);
+        CItemEquipment* PItem   = dynamic_cast<CItemEquipment*>(PChar->getStorage(containerID)->GetItem(slotID));
         CItemEquipment* oldItem = PChar->getEquip((SLOTTYPE)equipSlotID);
 
         if (PItem == nullptr)
@@ -1922,7 +1928,7 @@ namespace charutils
         if (equipSlotID == SLOT_MAIN)
         {
             if (!(slotID == PItem->getSlotID() && oldItem && (oldItem->isType(ITEM_WEAPON) && PItem->isType(ITEM_WEAPON)) &&
-                  ((((CItemWeapon*)PItem)->isTwoHanded()) && (((CItemWeapon*)oldItem)->isTwoHanded()))))
+                  (static_cast<CItemWeapon*>(PItem)->isTwoHanded() && static_cast<CItemWeapon*>(oldItem)->isTwoHanded())))
             {
                 CItemEquipment* PSubItem = PChar->getEquip(SLOT_SUB);
 
@@ -1981,9 +1987,11 @@ namespace charutils
             {
                 case SLOT_MAIN:
                 {
+                    CItemWeapon* weapon = dynamic_cast<CItemWeapon*>(PChar->getEquip(SLOT_MAIN));
+
                     if (PItem->isType(ITEM_WEAPON))
                     {
-                        switch (((CItemWeapon*)PItem)->getSkillType())
+                        switch (static_cast<CItemWeapon*>(PItem)->getSkillType())
                         {
                             case SKILL_HAND_TO_HAND:
                             case SKILL_GREAT_SWORD:
@@ -1993,13 +2001,13 @@ namespace charutils
                             case SKILL_GREAT_KATANA:
                             case SKILL_STAFF:
                             {
-                                CItemEquipment* armor = PChar->getEquip(SLOT_SUB);
-                                if ((armor != nullptr) && armor->isType(ITEM_EQUIPMENT))
+                                CItemEquipment* sub = PChar->getEquip(SLOT_SUB);
+                                if (sub != nullptr && sub->isType(ITEM_EQUIPMENT))
                                 {
-                                    if (armor->isType(ITEM_WEAPON))
+                                    if (sub->isType(ITEM_WEAPON))
                                     {
-                                        CItemWeapon* PWeapon = (CItemWeapon*)armor;
-                                        if (PWeapon->getSkillType() != SKILL_NONE || ((CItemWeapon*)PItem)->getSkillType() == SKILL_HAND_TO_HAND)
+                                        CItemWeapon* PWeapon = static_cast<CItemWeapon*>(sub);
+                                        if (PWeapon->getSkillType() != SKILL_NONE || static_cast<CItemWeapon*>(PItem)->getSkillType() == SKILL_HAND_TO_HAND)
                                         {
                                             UnequipItem(PChar, SLOT_SUB, false);
                                         }
@@ -2009,7 +2017,7 @@ namespace charutils
                                         UnequipItem(PChar, SLOT_SUB, false);
                                     }
                                 }
-                                if (((CItemWeapon*)PItem)->getSkillType() == SKILL_HAND_TO_HAND)
+                                if (static_cast<CItemWeapon*>(PItem)->getSkillType() == SKILL_HAND_TO_HAND)
                                 {
                                     PChar->look.sub = PItem->getModelId() + 0x1000;
                                 }
@@ -2026,10 +2034,9 @@ namespace charutils
                         }
                         PChar->m_Weapons[SLOT_MAIN] = PItem;
 
-                        if (!((CItemWeapon*)PChar->m_Weapons[SLOT_MAIN])->isTwoHanded())
+                        if (weapon && weapon->isTwoHanded())
                         {
-                            PChar->StatusEffectContainer->DelStatusEffect(EFFECT_HASSO);
-                            PChar->StatusEffectContainer->DelStatusEffect(EFFECT_SEIGAN);
+                            PChar->StatusEffectContainer->DelStatusEffect(EFFECT_SEIGAN); // TODO: make seigan-specific effects not function without a 2H weapon so it doesn't have to be deleted if a weapon is removed
                         }
                     }
                     PChar->look.main = PItem->getModelId();
@@ -2038,13 +2045,10 @@ namespace charutils
                 break;
                 case SLOT_SUB:
                 {
-                    CItemWeapon* weapon = (CItemWeapon*)PChar->getEquip(SLOT_MAIN);
-                    if (weapon == nullptr || !weapon->isType(ITEM_WEAPON))
+                    CItemWeapon* weapon = dynamic_cast<CItemWeapon*>(PChar->getEquip(SLOT_MAIN));
+                    if (!weapon)
                     {
-                        if (PItem->isType(ITEM_WEAPON))
-                        {
-                            return false;
-                        }
+                        return false;
                     }
                     else
                     {
@@ -2065,11 +2069,11 @@ namespace charutils
                             case SKILL_CLUB:
                             {
                                 bool isWeapon = PItem->isType(ITEM_WEAPON);
-                                if (isWeapon && (!charutils::hasTrait(PChar, TRAIT_DUAL_WIELD) || ((CItemWeapon*)PItem)->getSkillType() == SKILL_NONE))
+                                if (isWeapon && (!charutils::hasTrait(PChar, TRAIT_DUAL_WIELD) || static_cast<CItemWeapon*>(PItem)->getSkillType() == SKILL_NONE))
                                 {
                                     return false;
                                 }
-                                PChar->m_Weapons[SLOT_SUB] = (CItemWeapon*)PItem;
+                                PChar->m_Weapons[SLOT_SUB] = static_cast<CItemWeapon*>(PItem);
                                 // only set m_dualWield if equipping a weapon (not for example a shield)
                                 if (isWeapon)
                                 {
@@ -2083,7 +2087,7 @@ namespace charutils
                                 {
                                     UnequipItem(PChar, SLOT_MAIN, false);
                                 }
-                                else if (!(((CItemWeapon*)PItem)->getSkillType() == SKILL_NONE))
+                                else if (static_cast<CItemWeapon*>(PItem)->getSkillType() != SKILL_NONE)
                                 {
                                     // allow Grips to be equipped
                                     return false;
@@ -2092,37 +2096,37 @@ namespace charutils
                         }
                     }
                     PChar->look.sub = PItem->getModelId();
-                    UpdateWeaponStyle(PChar, equipSlotID, (CItemWeapon*)PItem);
+                    UpdateWeaponStyle(PChar, equipSlotID, PItem);
                 }
                 break;
                 case SLOT_RANGED:
                 {
                     if (PItem->isType(ITEM_WEAPON))
                     {
-                        CItemWeapon* weapon = (CItemWeapon*)PChar->getEquip(SLOT_AMMO);
-                        if ((weapon != nullptr) && weapon->isType(ITEM_WEAPON))
+                        CItemWeapon* weapon = dynamic_cast<CItemWeapon*>(PChar->getEquip(SLOT_AMMO));
+                        if (weapon)
                         {
-                            if (((CItemWeapon*)PItem)->getSkillType() != weapon->getSkillType() ||
-                                ((CItemWeapon*)PItem)->getSubSkillType() != weapon->getSubSkillType())
+                            if (static_cast<CItemWeapon*>(PItem)->getSkillType() != weapon->getSkillType() ||
+                                static_cast<CItemWeapon*>(PItem)->getSubSkillType() != weapon->getSubSkillType())
                             {
                                 UnequipItem(PChar, SLOT_AMMO, false);
                             }
                         }
-                        PChar->m_Weapons[SLOT_RANGED] = (CItemWeapon*)PItem;
+                        PChar->m_Weapons[SLOT_RANGED] = PItem;
                     }
                     PChar->look.ranged = PItem->getModelId();
-                    UpdateWeaponStyle(PChar, equipSlotID, (CItemWeapon*)PItem);
+                    UpdateWeaponStyle(PChar, equipSlotID, PItem);
                 }
                 break;
                 case SLOT_AMMO:
                 {
                     if (PItem->isType(ITEM_WEAPON))
                     {
-                        CItemWeapon* weapon = (CItemWeapon*)PChar->getEquip(SLOT_RANGED);
-                        if ((weapon != nullptr) && weapon->isType(ITEM_WEAPON))
+                        CItemWeapon* weapon = dynamic_cast<CItemWeapon*>(PChar->getEquip(SLOT_RANGED));
+                        if (weapon)
                         {
-                            if (((CItemWeapon*)PItem)->getSkillType() != weapon->getSkillType() ||
-                                ((CItemWeapon*)PItem)->getSubSkillType() != weapon->getSubSkillType())
+                            if (static_cast<CItemWeapon*>(PItem)->getSkillType() != weapon->getSkillType() ||
+                                static_cast<CItemWeapon*>(PItem)->getSubSkillType() != weapon->getSubSkillType())
                             {
                                 UnequipItem(PChar, SLOT_RANGED, false);
                             }
@@ -2131,8 +2135,8 @@ namespace charutils
                         {
                             PChar->look.ranged = PItem->getModelId();
                         }
-                        PChar->m_Weapons[SLOT_AMMO] = (CItemWeapon*)PItem;
-                        UpdateWeaponStyle(PChar, equipSlotID, (CItemWeapon*)PItem);
+                        PChar->m_Weapons[SLOT_AMMO] = PItem;
+                        UpdateWeaponStyle(PChar, equipSlotID, PItem);
                     }
                 }
                 break;
@@ -2855,8 +2859,11 @@ namespace charutils
             {
                 PItem = dynamic_cast<CItemWeapon*>(PChar->m_Weapons[std::get<0>(slot)]);
 
-                std::get<1>(slot) = battleutils::GetScaledItemModifier(PChar, PItem, Mod::ADDS_WEAPONSKILL);
-                std::get<2>(slot) = battleutils::GetScaledItemModifier(PChar, PItem, Mod::ADDS_WEAPONSKILL_DYN);
+                if (PItem)
+                {
+                    std::get<1>(slot) = battleutils::GetScaledItemModifier(PChar, PItem, Mod::ADDS_WEAPONSKILL);
+                    std::get<2>(slot) = battleutils::GetScaledItemModifier(PChar, PItem, Mod::ADDS_WEAPONSKILL_DYN);
+                }
             }
         }
 
@@ -3117,19 +3124,19 @@ namespace charutils
                 PChar->WorkingSkills.skill[i] = 0x8000;
                 continue;
             }
-            uint16 MaxMSkill  = battleutils::GetMaxSkill((SKILLTYPE)i, PChar->GetMJob(), PChar->GetMLevel());
-            uint16 MaxSSkill  = battleutils::GetMaxSkill((SKILLTYPE)i, PChar->GetSJob(), PChar->GetSLevel());
-            uint16 skillBonus = 0;
+            uint16 maxMainSkill = battleutils::GetMaxSkill((SKILLTYPE)i, PChar->GetMJob(), PChar->GetMLevel());
+            uint16 maxSubSkill  = battleutils::GetMaxSkill((SKILLTYPE)i, PChar->GetSJob(), PChar->GetSLevel());
+            int16  skillBonus   = 0;
 
             // apply arts bonuses
             if ((i >= SKILL_DIVINE_MAGIC && i <= SKILL_ENFEEBLING_MAGIC && PChar->StatusEffectContainer->HasStatusEffect({ EFFECT_LIGHT_ARTS, EFFECT_ADDENDUM_WHITE })) ||
                 (i >= SKILL_ENFEEBLING_MAGIC && i <= SKILL_DARK_MAGIC && PChar->StatusEffectContainer->HasStatusEffect({ EFFECT_DARK_ARTS, EFFECT_ADDENDUM_BLACK })))
             {
-                uint16 artsSkill    = battleutils::GetMaxSkill(SKILL_ENHANCING_MAGIC, JOB_RDM, PChar->GetMLevel());             // B+ skill
-                uint16 skillCapD    = battleutils::GetMaxSkill((SKILLTYPE)i, JOB_SCH, PChar->GetMLevel());                      // D skill cap
-                uint16 skillCapE    = battleutils::GetMaxSkill(SKILL_DARK_MAGIC, JOB_RDM, PChar->GetMLevel());                  // E skill cap
-                auto   currentSkill = std::clamp<uint16>((PChar->RealSkills.skill[i] / 10), 0, std::max(MaxMSkill, MaxSSkill)); // working skill before bonuses
-                uint16 artsBaseline = 0;                                                                                        // Level based baseline to which to raise skills
+                uint16 artsSkill    = battleutils::GetMaxSkill(SKILL_ENHANCING_MAGIC, JOB_RDM, PChar->GetMLevel());                  // B+ skill
+                uint16 skillCapD    = battleutils::GetMaxSkill((SKILLTYPE)i, JOB_SCH, PChar->GetMLevel());                           // D skill cap
+                uint16 skillCapE    = battleutils::GetMaxSkill(SKILL_DARK_MAGIC, JOB_RDM, PChar->GetMLevel());                       // E skill cap
+                auto   currentSkill = std::clamp<uint16>((PChar->RealSkills.skill[i] / 10), 0, std::max(maxMainSkill, maxSubSkill)); // working skill before bonuses
+                uint16 artsBaseline = 0;                                                                                             // Level based baseline to which to raise skills
                 uint8  mLevel       = PChar->GetMLevel();
                 if (mLevel < 51)
                 {
@@ -3185,7 +3192,7 @@ namespace charutils
             {
                 if (PChar->PAutomaton)
                 {
-                    MaxMSkill = battleutils::GetMaxSkill(1, PChar->GetMLevel()); // A+ capped down to the Automaton's rating
+                    maxMainSkill = battleutils::GetMaxSkill(1, PChar->GetMLevel()); // A+ capped down to the Automaton's rating
                 }
             }
 
@@ -3193,7 +3200,7 @@ namespace charutils
             meritIndex++;
 
             // Add 79 to get the modifier ID
-            skillBonus += PChar->getMod(static_cast<Mod>(i + 79));
+            skillBonus += PChar->getMod(static_cast<Mod>(i + 79)); // This can be a negative value. Example: Shiva's Shotel.
 
             uint8 mainSkillRank = battleutils::GetSkillRank((SKILLTYPE)i, PChar->GetMJob());
             uint8 subSkillRank  = battleutils::GetSkillRank((SKILLTYPE)i, PChar->GetSJob());
@@ -3209,27 +3216,60 @@ namespace charutils
                 PChar->RealSkills.rank[i] = subSkillRank;
             }
 
-            if (MaxMSkill != 0)
+            uint16 currentSkill = PChar->RealSkills.skill[i] / 10;
+
+            // Main Job Skills.
+            if (maxMainSkill != 0)
             {
-                auto cap{ PChar->RealSkills.skill[i] / 10 >= MaxMSkill };
-                PChar->WorkingSkills.skill[i] = std::max(0, cap ? skillBonus + MaxMSkill : skillBonus + PChar->RealSkills.skill[i] / 10);
-                if (cap)
+                if (currentSkill > maxMainSkill)
                 {
-                    PChar->WorkingSkills.skill[i] |= 0x8000;
+                    currentSkill = maxMainSkill;
+                }
+
+                int16 newSkillValue = currentSkill + skillBonus;
+                if (newSkillValue < 0)
+                {
+                    newSkillValue = 0;
+                }
+
+                PChar->WorkingSkills.skill[i] = static_cast<uint16>(newSkillValue);
+
+                if (currentSkill >= maxMainSkill)
+                {
+                    PChar->WorkingSkills.skill[i] |= 0x8000; // Blue text.
                 }
             }
-            else if (MaxSSkill != 0)
+
+            // Sub Job Skills.
+            else if (maxSubSkill != 0)
             {
-                auto cap{ PChar->RealSkills.skill[i] / 10 >= MaxSSkill };
-                PChar->WorkingSkills.skill[i] = std::max(0, cap ? skillBonus + MaxSSkill : skillBonus + PChar->RealSkills.skill[i] / 10);
-                if (cap)
+                if (currentSkill > maxSubSkill)
                 {
-                    PChar->WorkingSkills.skill[i] |= 0x8000;
+                    currentSkill = maxSubSkill;
+                }
+
+                int16 newSkillValue = currentSkill + skillBonus;
+                if (newSkillValue < 0)
+                {
+                    newSkillValue = 0;
+                }
+
+                PChar->WorkingSkills.skill[i] = static_cast<uint16>(newSkillValue);
+
+                if (currentSkill >= maxSubSkill)
+                {
+                    PChar->WorkingSkills.skill[i] |= 0x8000; // Blue text.
                 }
             }
+
+            // Job setup doesn't have this skill.
             else
             {
-                PChar->WorkingSkills.skill[i] = std::max<uint16>(0, skillBonus) | 0x8000;
+                if (skillBonus < 0)
+                {
+                    skillBonus = 0;
+                }
+                PChar->WorkingSkills.skill[i] = static_cast<uint16>(skillBonus) | 0x8000; // New value AND Blue text.
             }
         }
 
@@ -6493,7 +6533,7 @@ namespace charutils
     {
         TracyZoneScoped;
 
-        CItemWeapon* PWeapon = (CItemWeapon*)PChar->m_Weapons[slotid];
+        CItemWeapon* PWeapon = dynamic_cast<CItemWeapon*>(PChar->m_Weapons[slotid]);
 
         if (PWeapon && PWeapon->isUnlockable() && !PWeapon->isUnlocked())
         {

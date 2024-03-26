@@ -787,28 +787,34 @@ namespace battleutils
             Action->reaction     = REACTION::HIT;
             Action->spikesEffect = SUBEFFECT_COUNTER;
 
-            if (battleutils::IsAbsorbByShadow(PAttacker)) // Struck a shadow
+            if (battleutils::IsAbsorbByShadow(PAttacker, PDefender)) // Struck a shadow
             {
                 Action->spikesMessage = 535;
             }
             else // Struck the target
             {
+                SKILLTYPE skilltype = SKILLTYPE::SKILL_NONE;
+
                 if (PDefender->objtype == TYPE_PC)
                 {
-                    // Check for skillup
-                    uint8 skilltype = 0;
                     if (auto* weapon = dynamic_cast<CItemWeapon*>(PDefender->m_Weapons[SLOT_MAIN]))
                     {
-                        skilltype = weapon->getSkillType();
+                        skilltype = static_cast<SKILLTYPE>(weapon->getSkillType());
                     }
-                    charutils::TrySkillUP((CCharEntity*)PDefender, (SKILLTYPE)skilltype, PAttacker->GetMLevel());
+                    else
+                    {
+                        skilltype = SKILLTYPE::SKILL_HAND_TO_HAND;
+                    }
+
+                    // Check for skillup
+                    charutils::TrySkillUP((CCharEntity*)PDefender, skilltype, PAttacker->GetMLevel());
                 }
 
                 // Check if crit
                 bool crit = battleutils::GetCritHitRate(PDefender, PAttacker, true) > xirand::GetRandomNumber(100);
 
                 // Dmg math.
-                float  DamageRatio = GetDamageRatio(PDefender, PAttacker, crit, 0.f);
+                float  DamageRatio = GetDamageRatio(PDefender, PAttacker, crit, 1.f, skilltype);
                 uint16 dmg         = (uint32)((PDefender->GetMainWeaponDmg() + battleutils::GetFSTR(PDefender, PAttacker, SLOT_MAIN)) * DamageRatio);
                 dmg                = attackutils::CheckForDamageMultiplier(((CCharEntity*)PDefender), dynamic_cast<CItemWeapon*>(PDefender->m_Weapons[SLOT_MAIN]), dmg,
                                                                            PHYSICAL_ATTACK_TYPE::NORMAL, SLOT_MAIN);
@@ -1375,26 +1381,32 @@ namespace battleutils
 
                 if (PAttacker->objtype == TYPE_PC && PAttacker->PParty != nullptr)
                 {
-                    if (auto* PLeader = dynamic_cast<CCharEntity*>(PAttacker->PParty->GetLeader()))
+                    if (auto* PChar = dynamic_cast<CCharEntity*>(PAttacker))
                     {
-                        PLeader->ForPartyWithTrusts([&](CBattleEntity* PMember)
-                                                    {
+                        // clang-format off
+                        PChar->ForPartyWithTrusts([&](CBattleEntity* PMember)
+                        {
                             if (attackerID == PMember->id)
                             {
                                 power = PDefender->StatusEffectContainer->GetStatusEffect(daze)->GetPower();
-                            } });
+                            }
+                        });
+                        // clang-format on
                     }
                 }
                 else if (PAttacker->objtype == TYPE_TRUST)
                 {
-                    if (auto* PMaster = dynamic_cast<CCharEntity*>(PAttacker->PMaster))
+                    if (auto* PChar = dynamic_cast<CCharEntity*>(PAttacker->PMaster))
                     {
-                        PMaster->ForPartyWithTrusts([&](CBattleEntity* PMember)
-                                                    {
+                        // clang-format off
+                        PChar->ForPartyWithTrusts([&](CBattleEntity* PMember)
+                        {
                             if (attackerID == PMember->id)
                             {
                                 power = PDefender->StatusEffectContainer->GetStatusEffect(daze)->GetPower();
-                            } });
+                            }
+                        });
+                        // clang-format on
                     }
                 }
                 else if (PAttacker->PMaster == nullptr)
@@ -1607,7 +1619,17 @@ namespace battleutils
         // get ratio (not capped for RAs)
         float ratio = (float)rAttack / (float)PDefender->DEF();
 
-        ratio = std::clamp<float>(ratio, 0, 3);
+        // Ranged damage limit caluclations
+
+        // get weapon cap
+        auto* targ_weapon = dynamic_cast<CItemWeapon*>(PAttacker->m_Weapons[SLOT_RANGED]);
+        float maxRatio    = 3.25f;
+
+        // If null ignore the checks and fallback to 1H values
+        if (targ_weapon && targ_weapon->getSkillType() == SKILL_MARKSMANSHIP)
+        {
+            maxRatio = 3.5f;
+        }
 
         // level correct (0.025 not 0.05 like for melee)
         if (PDefender->GetMLevel() > PAttacker->GetMLevel())
@@ -1635,8 +1657,13 @@ namespace battleutils
             maxPdif = ratio;
         }
 
-        minPdif = std::clamp<float>(minPdif, 0, 3);
-        maxPdif = std::clamp<float>(maxPdif, 0, 3);
+        // Apply damage limit modifier
+        float damageLimitPlus = PAttacker->getMod(Mod::DAMAGE_LIMIT) / 100.0f;
+        float damageLimitPerc = (100.0f + PAttacker->getMod(Mod::DAMAGE_LIMITP)) / 100.0f;
+        maxRatio              = (maxRatio + damageLimitPlus) * damageLimitPerc;
+
+        minPdif = std::clamp<float>(minPdif, 0, maxRatio);
+        maxPdif = std::clamp<float>(maxPdif, 0, maxRatio);
 
         // return random number between the two
         float pdif = xirand::GetRandomNumber(minPdif, maxPdif);
@@ -2888,203 +2915,36 @@ namespace battleutils
      *                                                                       *
      ************************************************************************/
 
-    float GetDamageRatio(CBattleEntity* PAttacker, CBattleEntity* PDefender, bool isCritical, float bonusAttPercent)
+    float GetDamageRatio(CBattleEntity* PAttacker, CBattleEntity* PDefender, bool isCritical, float bonusAttPercent, SKILLTYPE weaponType)
     {
-        uint16 attack = PAttacker->ATT();
-        // Bonus attack currently only from footwork
-        if (bonusAttPercent >= 1)
+        float pDIF = 1.0f;
+
+        auto levelCorrectionFunc = lua["xi"]["combat"]["levelCorrection"]["isLevelCorrectedZone"];
+        auto meleePDIFFunc       = lua["xi"]["combat"]["physical"]["calculateMeleePDIF"];
+        auto luaAttackerEntity   = CLuaBaseEntity(PAttacker);
+
+        if (meleePDIFFunc.valid() && levelCorrectionFunc.valid())
         {
-            attack = static_cast<uint16>(attack * bonusAttPercent);
-        }
-
-        // Wholly possible for DEF to be near 0 with the amount of debuffs/effects now.
-        uint16 defense = PDefender->DEF();
-        if (defense == 0)
-        {
-            defense = 1;
-        }
-
-        // https://www.bg-wiki.com/bg/PDIF
-        // https://www.bluegartr.com/threads/127523-pDIF-Changes-(Feb.-10th-2016)
-        float ratio  = (static_cast<float>(attack)) / (static_cast<float>(defense));
-        float cRatio = ratio;
-
-        // Level correction does not happen in Adoulin zones, Legion, or zones in Escha/Reisenjima
-        // Level correction is only a penalty to players, a player does not get any bonus for fighting lower level monsters
-        // Level correct does give bonuses to Monsters and Avatars. For Avatars it caps at a level difference of 38
-        // I am going to assume that the 38 level difference cap applies to monsters as well
-        // https://www.bluegartr.com/threads/114636-Monster-Avatar-Pet-damage
-        // This thread references the level correction cap for avatars and states that penalties are ignored for avatars
-        // Monster pDIF = Avatar pDIF = Pet pDIF
-        // Based on these points we know monsters and avatars ignore penalties from level correct and only get bonuses so
-        // I believe it is safe to assume all pets do this.
-
-        uint16 zoneId = PAttacker->getZone();
-        // All zones from Adoulin onward have an id of 256+
-        // This includes Escha/Reisenjima and the new Dynamis zones
-        // (Not a post Adoulin Zone) && (Not Legion_A)
-        bool shouldApplyLevelCorrection = (zoneId < 256) && (zoneId != 183);
-
-        ENTITYTYPE attackerType = PAttacker->objtype;
-
-        uint8 attackerLvl = PAttacker->GetMLevel();
-        uint8 defenderLvl = PDefender->GetMLevel();
-        uint8 dLvl        = std::abs(attackerLvl - defenderLvl);
-        float correction  = static_cast<float>(dLvl) * 0.05f;
-
-        // Assuming the cap for mobs is the same as Avatars
-        // Cap at 38 level diff so 38*0.05 = 1.9
-        float cappedCorrection = std::min(correction, 1.9f);
-
-        if (shouldApplyLevelCorrection)
-        {
-            // Players only get penalties
-            if (attackerType == TYPE_PC)
+            auto levelCorrectionResult = levelCorrectionFunc(luaAttackerEntity);
+            if (!levelCorrectionResult.valid())
             {
-                if (attackerLvl < defenderLvl)
-                {
-                    // Screw the players, no known cap
-                    cRatio -= correction;
-                }
+                sol::error err = levelCorrectionResult;
+                ShowError("battleutils::GetDamageRatio(): %s", err.what());
+                return pDIF;
             }
-            // Mobs, Avatars and pets only get bonuses, no penalties (or they are calculated differently)
-            else if (attackerType == TYPE_MOB || attackerType == TYPE_PET)
+
+            auto meleePDIFFuncResult = meleePDIFFunc(luaAttackerEntity, CLuaBaseEntity(PDefender), weaponType, bonusAttPercent, isCritical, levelCorrectionResult.get<bool>(0), false, 0.0, false);
+            if (!meleePDIFFuncResult.valid())
             {
-                if (attackerLvl > defenderLvl)
-                {
-                    cRatio += cappedCorrection;
-                }
+                sol::error err = meleePDIFFuncResult;
+                ShowError("battleutils::GetDamageRatio(): %s", err.what());
+                return pDIF;
             }
-        }
-
-        float wRatio = cRatio;
-
-        if (isCritical)
-        {
-            wRatio += 1;
-        }
-
-        float qRatio     = wRatio;
-        float upperLimit = 0.0f;
-        float lowerLimit = 0.0f;
-
-        // https://www.bg-wiki.com/bg/PDIF
-        // Pre-Randomized values excluding Damage Limit+ trait
-        // Damage Limit+ trait adds 0.1/rank to these values
-        // type : non-crit : crit
-        // 1H : 3.25 : 4.25
-        // H2H & GK : 3.5 : 4.5
-        // 2H : 3.75 : 4.75
-        // Scythe : 4 : 5
-        // Archery & Throwing : 3.25 : 3.25*1.25
-        // Marksmanship : 3.5 : 3.5*1.25
-
-        // https://www.bluegartr.com/threads/114636-Monster-Avatar-Pet-damage
-        // Monster pDIF = Avatar pDIF = Pet pDIF
-
-        auto* targ_weapon = dynamic_cast<CItemWeapon*>(PAttacker->m_Weapons[SLOT_MAIN]);
-
-        // Default for 1H is 3.25
-        float maxRatio = 3.25f;
-
-        if (attackerType == TYPE_MOB || attackerType == TYPE_PET)
-        {
-            // Mobs and pets cap at 4.25 regardless of crit so no need to bother with crits for the max
-            maxRatio = 4.25f;
+            pDIF = meleePDIFFuncResult.get<float>(0);
         }
         else
         {
-            // If null ignore the checks and fallback to 1H values
-            if (targ_weapon)
-            {
-                if (targ_weapon->isHandToHand() || targ_weapon->getSkillType() == SKILL_GREAT_KATANA)
-                {
-                    maxRatio = 3.5f;
-                }
-                else if (targ_weapon->getSkillType() == SKILL_SCYTHE)
-                {
-                    maxRatio = 4.0f;
-                }
-                else if (targ_weapon->isTwoHanded())
-                {
-                    maxRatio = 3.75f;
-                }
-            }
-            // Skipping Ranged since that is handled in a separate function
-
-            // Default to 1H and check for +1 to max from crit
-            if (isCritical)
-            {
-                maxRatio += 1.0f;
-            }
-        }
-
-        // https://www.bg-wiki.com/bg/Damage_Limit+
-        // There is an additional step here but I am skipping it for now because we do not have the data in the database.
-        // The Damage Limit+ trait adds 0.1 to the maxRatio per trait level so a level 80 DRK would get maxRatio += 0.5
-
-        if (wRatio < 0.5)
-        {
-            upperLimit = std::max(wRatio + 0.5f, 0.5f);
-        }
-        else if (wRatio < 0.7)
-        {
-            upperLimit = 1;
-        }
-        else if (wRatio < 1.2)
-        {
-            upperLimit = wRatio + 0.3f;
-        }
-        else if (wRatio < 1.5)
-        {
-            upperLimit = wRatio * 1.25f;
-        }
-        else
-        {
-            upperLimit = std::min(wRatio + 0.375f, maxRatio);
-        }
-
-        if (wRatio < 0.38)
-        {
-            lowerLimit = std::max(wRatio, 0.5f);
-        }
-        else if (wRatio < 1.25)
-        {
-            lowerLimit = (wRatio * (1176.0f / 1024.0f)) - (448.0f / 1024.0f);
-        }
-        else if (wRatio < 1.51)
-        {
-            lowerLimit = 1.0f;
-        }
-        else if (wRatio < 2.44)
-        {
-            lowerLimit = (wRatio * (1176.0f / 1024.0f)) - (755.0f / 1024.0f);
-        }
-        else
-        {
-            lowerLimit = std::min(wRatio - 0.375f, maxRatio);
-        }
-
-        // https://www.bg-wiki.com/bg/Damage_Limit+
-        // See: "Physical damage limit +n%" is a multiplier to the total pDIF cap.
-        // There is one more step here that I am skipping for Physical Damage +% from gear and augments.
-        // I don't believe support for this modifier exists yet in the project.
-        // Physical Damage +% (PDL) is a flat % increase to the final pDIF cap value
-        // Meaning if a player has PDL+10% and an uppwerLimit of 1 then this would become 1.1
-        // upperLimit = upperLimit * 1.1
-
-        qRatio = xirand::GetRandomNumber(lowerLimit, upperLimit);
-
-        float pDIF = qRatio * xirand::GetRandomNumber(1.f, 1.05f);
-
-        if (isCritical)
-        {
-            // Crit Attack Bonus caps at +100% and is a flat increase to final crit damage
-            // so this is change to increase pDIF and not the qRatio
-            int16 criticaldamage = PAttacker->getMod(Mod::CRIT_DMG_INCREASE) - PDefender->getMod(Mod::CRIT_DEF_BONUS);
-
-            criticaldamage = std::clamp<int16>(criticaldamage, 0, 100);
-            pDIF *= ((100 + criticaldamage) / 100.0f);
+            ShowError("battleutils::GetDamageRatio() failed to run lua calls");
         }
 
         return pDIF;
@@ -3491,7 +3351,7 @@ namespace battleutils
      *                                                                       *
      ************************************************************************/
 
-    bool IsAbsorbByShadow(CBattleEntity* PDefender)
+    bool IsAbsorbByShadow(CBattleEntity* PDefender, CBattleEntity* PAttacker)
     {
         // utsus always overwrites blink, so if utsus>0 then we know theres no blink.
         uint16 Shadow    = PDefender->getMod(Mod::UTSUSEMI);
@@ -3542,6 +3402,11 @@ namespace battleutils
                             case 2:
                                 icon = EFFECT_COPY_IMAGE_2;
                                 break;
+                        }
+                        // player loses 25 CE if attack absorbed by utsusemi shadow
+                        if (auto* PMob = dynamic_cast<CMobEntity*>(PAttacker))
+                        {
+                            PMob->PEnmityContainer->UpdateEnmity(PDefender, -25, 0);
                         }
                         PStatusEffect->SetIcon(icon);
                         PDefender->StatusEffectContainer->UpdateStatusIcons();
@@ -4650,169 +4515,6 @@ namespace battleutils
         }
 
         return shotCount;
-    }
-
-    /************************************************************************
-     *                                                                       *
-     *  Calculate DRG Jump ability total damage                              *
-     *                                                                       *
-     ************************************************************************/
-
-    uint16 jumpAbility(CBattleEntity* PAttacker, CBattleEntity* PVictim, uint8 tier)
-    {
-        // super jump - remove 99% of enmity
-        if (tier == 3 && PVictim->objtype == TYPE_MOB)
-        {
-            ((CMobEntity*)PVictim)->PEnmityContainer->LowerEnmityByPercent(PAttacker, 99, nullptr);
-            return 0;
-        }
-
-        // target has perfect dodge - do not go any further
-        if (PVictim->StatusEffectContainer->HasStatusEffect(EFFECT_PERFECT_DODGE, 0))
-        {
-            // Claim the mob.
-            battleutils::ClaimMob(PVictim, PAttacker);
-            return 0;
-        }
-
-        // multihit's just multiply jump damage
-        auto* sub                = dynamic_cast<CItemWeapon*>(PAttacker->m_Weapons[SLOT_SUB]);
-        uint8 numattacksLeftHand = 0;
-
-        // sub weapon is equipped
-        if (sub && sub->getDmgType() > DAMAGE_TYPE::NONE && sub->getDmgType() < DAMAGE_TYPE::HTH)
-        {
-            numattacksLeftHand = battleutils::CheckMultiHits(PAttacker, sub);
-        }
-
-        auto* PWeapon = dynamic_cast<CItemWeapon*>(PAttacker->m_Weapons[SLOT_MAIN]);
-
-        // h2h equipped
-        if (PWeapon && PWeapon->getSkillType() == SKILL_HAND_TO_HAND)
-        {
-            numattacksLeftHand = battleutils::CheckMultiHits(PAttacker, PWeapon);
-        }
-
-        // normal multi hit from left hand
-        uint8 numattacksRightHand = battleutils::CheckMultiHits(PAttacker, PWeapon);
-
-        uint8 fstrslot = SLOT_MAIN;
-
-        uint8  hitrate        = battleutils::GetHitRate(PAttacker, PVictim);
-        uint8  realHits       = 0; // to store the real number of hit for tp multipler
-        uint16 totalDamage    = 0;
-        uint16 damageForRound = 0;
-        bool   hitTarget      = false;
-
-        // Loop number of hits
-        for (uint16 i = 0; i < (numattacksLeftHand + numattacksRightHand); ++i)
-        {
-            if (i != 0)
-            {
-                if (PVictim->isDead())
-                {
-                    break;
-                }
-
-                if (PWeapon && PWeapon->getSkillType() != SKILL_HAND_TO_HAND && i >= numattacksRightHand)
-                {
-                    PWeapon  = dynamic_cast<CItemWeapon*>(PAttacker->m_Weapons[SLOT_SUB]);
-                    fstrslot = SLOT_SUB;
-                }
-            }
-
-            if (xirand::GetRandomNumber(100) < hitrate)
-            {
-                // attack hit, try to be absorbed by shadow
-                if (!battleutils::IsAbsorbByShadow(PVictim))
-                {
-                    // successful hit, add damage
-                    float AttMultiplerPercent = 0.f;
-
-                    // get jump attack bonus from gear
-                    if (PAttacker->objtype == TYPE_PC)
-                    {
-                        AttMultiplerPercent = PAttacker->getMod(Mod::JUMP_ATT_BONUS) / 100.f;
-                    }
-
-                    float DamageRatio = battleutils::GetDamageRatio(PAttacker, PVictim, false, AttMultiplerPercent);
-                    damageForRound    = (uint16)((PAttacker->GetMainWeaponDmg() + battleutils::GetFSTR(PAttacker, PVictim, SLOT_MAIN)) * DamageRatio);
-
-                    // bonus applies to jump only, not high jump
-                    if (tier == 1)
-                    {
-                        float jumpBonus = 1.f + PAttacker->VIT() / 256.f;
-                        damageForRound  = (uint16)(damageForRound * jumpBonus);
-                    }
-
-                    hitTarget = true;
-                    realHits++;
-
-                    // incase player has gungnir^^ (or any other damage increases weapons)
-                    damageForRound =
-                        attackutils::CheckForDamageMultiplier((CCharEntity*)PAttacker, PWeapon, damageForRound, PHYSICAL_ATTACK_TYPE::NORMAL, SLOT_MAIN);
-
-                    totalDamage += damageForRound;
-                }
-            }
-        }
-
-        // check for soul eater
-        if (PAttacker->objtype == TYPE_PC)
-        {
-            totalDamage = battleutils::doSoulEaterEffect((CCharEntity*)PAttacker, totalDamage);
-        }
-
-        // bonus jump tp is added even if damage is 0, will not add if jump misses
-        if (PAttacker->objtype == TYPE_PC && hitTarget)
-        {
-            int mod = PAttacker->getMod(Mod::JUMP_TP_BONUS);
-            PAttacker->addTP(mod);
-        }
-
-        // if damage is 0 then jump missed
-        if (totalDamage == 0)
-        {
-            // Claim the mob.
-            battleutils::ClaimMob(PVictim, PAttacker);
-            return 0;
-        }
-
-        // high jump removes %50 emnity + more from any gear mods
-        if (tier == 2 && PVictim->objtype == TYPE_MOB)
-        {
-            uint16 enmityReduction = PAttacker->getMod(Mod::HIGH_JUMP_ENMITY_REDUCTION) + 50;
-
-            // DRG sub has only 30% enmity removed instead of 50%.
-            if (PAttacker->GetSJob() == JOB_DRG)
-            {
-                enmityReduction = PAttacker->getMod(Mod::HIGH_JUMP_ENMITY_REDUCTION) + 30;
-            }
-
-            // cap it
-            if (enmityReduction > 100)
-            {
-                enmityReduction = 100;
-            }
-            ((CMobEntity*)PVictim)->PEnmityContainer->LowerEnmityByPercent(PAttacker, (uint8)enmityReduction, nullptr);
-        }
-
-        // Under Spirit Surge, High Jump lowers the target's TP proportionately to the amount of damage dealt (TP is reduced by damage * 20)
-        if (tier == 2 && PAttacker->StatusEffectContainer->HasStatusEffect(EFFECT_SPIRIT_SURGE))
-        {
-            PVictim->addTP(-(totalDamage * 20));
-        }
-
-        // try skill up (CharEntity only)
-        if (PAttacker->objtype == TYPE_PC)
-        {
-            charutils::TrySkillUP((CCharEntity*)PAttacker, (SKILLTYPE)PWeapon->getSkillType(), PVictim->GetMLevel());
-        }
-
-        // jump + high jump doesn't give any tp to victim
-        battleutils::TakePhysicalDamage(PAttacker, PVictim, PHYSICAL_ATTACK_TYPE::NORMAL, totalDamage, false, fstrslot, realHits, nullptr, false, true);
-
-        return totalDamage;
     }
 
     /************************************************************************
@@ -6438,12 +6140,21 @@ namespace battleutils
         }
         else if (PSpell->getSpellGroup() == SPELLGROUP_SUMMONING)
         {
-            cast -= 1000 * PEntity->getMod(Mod::SUMMONING_MAGIC_CAST);
+            int32 amount = 1000 * PEntity->getMod(Mod::SUMMONING_MAGIC_CAST);
 
             if (PEntity->objtype == TYPE_PC)
             {
                 auto* PChar = static_cast<CCharEntity*>(PEntity);
-                cast -= base * 0.01 * PChar->PMeritPoints->GetMeritValue(MERIT_SUMMONING_MAGIC_CAST_TIME, PChar);
+                amount += static_cast<int32>(base * 0.01 * PChar->PMeritPoints->GetMeritValue(MERIT_SUMMONING_MAGIC_CAST_TIME, PChar));
+            }
+
+            if (static_cast<int32>(cast) > amount)
+            {
+                cast -= static_cast<uint32>(std::max(amount, 0));
+            }
+            else
+            {
+                cast = 0;
             }
         }
         else if (PSpell->getSpellGroup() == SPELLGROUP_SONG)

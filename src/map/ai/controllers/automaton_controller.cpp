@@ -145,7 +145,7 @@ bool CAutomatonController::shouldStandBack()
 
     if (PMaster)
     {
-        CItemWeapon* animator = static_cast<CItemWeapon*>(PMaster->m_Weapons[SLOT_AMMO]);
+        CItemWeapon* animator = dynamic_cast<CItemWeapon*>(PMaster->m_Weapons[SLOT_AMMO]);
 
         if (animator && animator->getSubSkillType() == SUBSKILLTYPE::SUBSKILL_ANIMATOR_II)
         {

@@ -288,25 +288,15 @@ xi.job_utils.rune_fencer.useRuneEnchantment = function(player, target, ability, 
 end
 
 xi.job_utils.rune_fencer.useSwordplay = function(player, target, ability)
-    local power = 0 --Swordplay starts at +0 bonus without swaps
+    -- Calculate power. (Accuracy and Evasion) https://www.bg-wiki.com/ffxi/Swordplay
+    local power = 3                                               -- Naked swordplay starts at 3. Retail confirmed.
+    power       = power + power * player:getMod(xi.mod.SWORDPLAY) -- "Swordplay + X" Where X is TICKS.
 
-    -- see https://www.bg-wiki.com/ffxi/Sleight_of_Sword for levels
-    local meritBonus = player:getMerit(xi.merit.MERIT_SLEIGHT_OF_SWORD)
-    local augBonus   = 0 -- augBonus = 2 per level of merit
+    -- Calculate subPower. (Subtle blow) https://www.bg-wiki.com/ffxi/Sleight_of_Sword
+    local subPower = player:getMerit(xi.merit.MERIT_SLEIGHT_OF_SWORD)                            -- Each merit adds 5 "Subtle Blow".
+    subPower       = subPower + (subPower / 5) * player:getMod(xi.mod.AUGMENTS_SLEIGHT_OF_SWORD) -- Add augment effect IF player has augment.
 
-    -- gear bonuses from https://www.bg-wiki.com/ffxi/Swordplay
-    if player:getMainJob() == xi.job.RUN and target:getMainLvl() == 99 then -- don't bother with gear boost checks until 99 and main RUN
-        local tickPower = 3 -- Tick power appears to be 3/tick, not 6/tick if RUN main and 3/tick if RUN sub; source : https://www.ffxiah.com/forum/topic/37086/endeavoring-to-awaken-a-guide-to-rune-fencer/180/#3615377
-
-        -- add starting tick bonuses if appropriate gear is equipped
-        power = tickPower + player:getMod(xi.mod.SWORDPLAY)
-    end
-
-    if power > 0 then -- add aug bonus if appropriate gear is equipped. Note: ilvl 109+ "relic" or "AF2" gear always has the augment, so no need to check exdata. RUN does not have AF/AF2/AF3 gear below i109.
-        augBonus = (meritBonus / 5) * 2
-    end
-
-    player:addStatusEffect(xi.effect.SWORDPLAY, power, 3, 120, 0, meritBonus + augBonus, 0)
+    player:addStatusEffect(xi.effect.SWORDPLAY, power, 3, 120, 0, subPower, 0)
 end
 
 xi.job_utils.rune_fencer.onSwordplayEffectGain = function(target, effect)
@@ -337,7 +327,7 @@ xi.job_utils.rune_fencer.onSwordplayEffectTick = function(target, effect)
 
         if tickPower > 0 then
             target:addMod(xi.mod.ACC, tickPower)
-            target:addMod(xi.mod.EVASION, tickPower)
+            target:addMod(xi.mod.EVA, tickPower)
         end
 
         power = math.min(power + tickPower, maxPower)
@@ -350,7 +340,7 @@ xi.job_utils.rune_fencer.onSwordplayEffectLose = function(target, effect)
     local subPower = effect:getSubPower()
 
     target:delMod(xi.mod.ACC, power)
-    target:delMod(xi.mod.EVASION, power)
+    target:delMod(xi.mod.EVA, power)
 
     if subPower > 0 then
         target:delMod(xi.mod.SUBTLE_BLOW, subPower)

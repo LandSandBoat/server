@@ -13,10 +13,10 @@ abilityObject.onAbilityCheck = function(player, target, ability)
 
     if pet then
         petID = pet:getPetID()
-    end
 
-    if petID >= xi.petId.FIRE_SPIRIT and petID <= xi.petId.DARK_SPIRIT then -- spirits
-        return 0, 0
+        if petID >= xi.petId.FIRE_SPIRIT and petID <= xi.petId.DARK_SPIRIT then -- spirits
+            return 0, 0
+        end
     end
 
     return xi.msg.basic.UNABLE_TO_USE_JA, 0
@@ -30,6 +30,8 @@ abilityObject.onUseAbility = function(player, target, ability)
     -- element order: fire, ice, wind, earth, thunder, water, light, dark
     if spirit then
         spiritEle = spirit:getPetID() + 1
+    else
+        return 0
     end
 
     local pEquipMods = player:getMod(xi.mod.ENHANCES_ELEMENTAL_SIPHON)

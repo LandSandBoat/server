@@ -122,6 +122,8 @@ public:
 
     void QueueAction(queueAction_t&&);
     bool QueueEmpty();
+    void ClearActionQueue();
+    void ClearTimerQueue();
     void checkQueueImmediately();
 
     // stores all events and their associated lua callbacks

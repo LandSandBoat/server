@@ -1,4 +1,4 @@
-These are typically used with messageBasic. Other message types may possibly use the same index.
+These are typically used with messageSystem or messageStandard. Other message types may possibly use the same index.
 Found in ROM/27/76.dat
 
 0 - You could not enter the next area.

@@ -61,6 +61,7 @@ zones[xi.zone.YUHTUNGA_JUNGLE] =
         },
         TIPHA                   = 17281030,
         CARTHI                  = 17281031,
+        PYUU_THE_SPATEMAKER     = GetFirstID('Pyuu_the_Spatemaker'),
         ROSE_GARDEN_PH          = 17281356,
         ROSE_GARDEN             = 17281357,
         VOLUPTUOUS_VILMA        = 17281358,

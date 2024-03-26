@@ -8,7 +8,7 @@ local entity = {}
 
 entity.onMobSpawn = function(mob)
     mob:addStatusEffect(xi.effect.KILLER_INSTINCT, 40, 0, 0)
-    mob:setLocalVar('fomorHateAdj', -2)
+    mob:setLocalVar('fomorHateAdj', 2)
 end
 
 entity.onMobDeath = function(mob, player, optParams)

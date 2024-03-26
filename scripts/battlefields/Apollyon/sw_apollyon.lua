@@ -368,7 +368,7 @@ content.groups =
 
                 local swapWithCrate = function(crate)
                     crate:setPos(mob:getXPos(), mob:getYPos(), mob:getZPos(), mob:getRotPos())
-                    crate:entityAnimationPacket('deru')
+                    crate:entityAnimationPacket(xi.animationString.STATUS_VISIBLE)
                     crate:setModelId(961)
                     crate:setAnimationSub(8)
                     npcUtil.showCrate(crate)

@@ -31,13 +31,13 @@ entity.onMobFight = function(mob, target)
         end
 
         if canSpawnPet then
-            mob:entityAnimationPacket('casm')
+            mob:entityAnimationPacket(xi.animationString.CAST_SUMMONER_START)
             mob:timer(5000, function(bombQueen)
                 if bombQueen:isDead() then
                     return
                 end
 
-                bombQueen:entityAnimationPacket('shsm')
+                bombQueen:entityAnimationPacket(xi.animationString.CAST_SUMMONER_STOP)
                 local bombQueenId = mob:getID()
 
                 -- Pick a random Prince or Princess

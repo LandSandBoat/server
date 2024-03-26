@@ -28,7 +28,7 @@ entity.onMobFight = function(mob, target)
         mob:useMobAbility(1509)
         mob:setLocalVar('rejuv', 1)
     elseif lanceTime + 50 < mob:getBattleTime() and lanceOut == 0 then
-        mob:entityAnimationPacket('sp00')
+        mob:entityAnimationPacket(xi.animationString.SPECIAL_00)
         mob:setLocalVar('lanceOut', 1)
     end
 end

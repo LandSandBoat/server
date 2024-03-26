@@ -89,6 +89,9 @@ inline std::string Hex16ToString(std::uint16_t hex)
 #define TracyReportLuaMemory(L)            std::ignore = L
 #define TracyMessageStr(str)               std::ignore = str
 #define TracySetThreadName(str)            std::ignore = str
+#define TracyLockable(m, n)                m n
+#define LockableBase(type)                 type
+#define LockMark(m)                        std::ignore = m
 #endif
 // clang-format on
 

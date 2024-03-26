@@ -434,6 +434,31 @@ namespace ability
         }
     }
 
+    void CleanupAbilitiesList()
+    {
+        // Call delete on Charge_t* in PChargeslist, because these are not STL containers and will not be destructed
+        for (auto* charge : PChargesList)
+        {
+            destroy(charge);
+        }
+
+        // Delete everything in the abilities list
+        for (int i = 0; i < MAX_ABILITY_ID; i++)
+        {
+            if (PAbilityList[i])
+            {
+                destroy(PAbilityList[i]);
+            }
+        }
+
+        // Clear every vector that now has invalid pointers
+        for (auto vec : PAbilitiesList)
+        {
+            vec.clear();
+        }
+
+        PChargesList.clear();
+    }
     /************************************************************************
      *                                                                       *
      *  Get Ability By ID                                                    *

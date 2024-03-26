@@ -283,7 +283,7 @@ void CItemState::InterruptItem(action_t& action)
         action.actiontype = ACTION_ITEM_INTERRUPT;
 
         actionList_t& actionList  = action.getNewActionList();
-        actionList.ActionTargetID = (m_PEntity->IsValidTarget(m_targid, m_PItem->getValidTarget(), m_errorMsg) ? GetTarget()->id : 0);
+        actionList.ActionTargetID = (m_PEntity->IsValidTarget(m_targid, m_PItem->getValidTarget(), m_errorMsg) ? GetTarget() && GetTarget()->id : 0);
 
         actionTarget_t& actionTarget = actionList.getNewActionTarget();
 

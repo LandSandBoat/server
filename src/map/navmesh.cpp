@@ -117,7 +117,13 @@ CNavMesh::CNavMesh(uint16 zoneID)
     m_hit.maxPath = 20;
 }
 
-CNavMesh::~CNavMesh() = default;
+CNavMesh::~CNavMesh()
+{
+    if (m_navMesh)
+    {
+        dtFreeNavMesh(m_navMesh);
+    }
+}
 
 bool CNavMesh::load(std::string const& filename)
 {
@@ -142,7 +148,7 @@ bool CNavMesh::load(std::string const& filename)
         return false;
     }
 
-    m_navMesh.reset(dtAllocNavMesh());
+    m_navMesh = dtAllocNavMesh();
     if (!m_navMesh)
     {
         return false;
@@ -178,7 +184,7 @@ bool CNavMesh::load(std::string const& filename)
     }
 
     // init detour nav mesh path finder
-    status = m_navMeshQuery.init(m_navMesh.get(), MAX_NAV_POLYS);
+    status = m_navMeshQuery.init(m_navMesh, MAX_NAV_POLYS);
 
     if (dtStatusFailed(status))
     {
@@ -198,7 +204,8 @@ void CNavMesh::reload()
 
 void CNavMesh::unload()
 {
-    m_navMesh.reset();
+    dtFreeNavMesh(m_navMesh);
+    m_navMesh = nullptr;
 }
 
 std::vector<pathpoint_t> CNavMesh::findPath(const position_t& start, const position_t& end)

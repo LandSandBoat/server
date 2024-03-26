@@ -36,6 +36,7 @@
 #include "packets/inventory_finish.h"
 #include "packets/inventory_item.h"
 #include "packets/message_special.h"
+#include "packets/message_standard.h"
 #include "packets/message_system.h"
 #include "packets/message_text.h"
 #include "packets/release.h"
@@ -885,7 +886,7 @@ namespace fishingutils
         return lsb;
     }
 
-    // @TODO: figure out how to pass mobs and items and chests here...
+    // TODO: figure out how to pass mobs and items and chests here...
 
     uint8 CalculateFishSense(CCharEntity* PChar, fishresponse_t* response, uint8 fishingSkill, uint8 catchType, uint8 sizeType,
                              uint8 maxSkill, bool legendary, uint16 minLength, uint16 maxLength, uint8 ranking, rod_t* rod)
@@ -1972,7 +1973,7 @@ namespace fishingutils
             if (PChar->animation != ANIMATION_NONE)
             {
                 PChar->pushPacket(new CMessageTextPacket(PChar, MessageOffset + FISHMESSAGEOFFSET_CANNOTFISH_MOMENT));
-                PChar->pushPacket(new CMessageSystemPacket(0, 0, MSGSYSTEM::CANNOT_USE_COMMAND_AT_THE_MOMENT));
+                PChar->pushPacket(new CMessageSystemPacket(0, 0, MsgStd::CannotUseCommandAtTheMoment));
                 PChar->pushPacket(new CReleasePacket(PChar, RELEASE_TYPE::FISHING));
 
                 return;
@@ -2010,13 +2011,13 @@ namespace fishingutils
             }
             else
             {
-                PChar->pushPacket(new CMessageSystemPacket(0, 0, MSGSYSTEM::CANNOT_USE_COMMAND_AT_THE_MOMENT));
+                PChar->pushPacket(new CMessageSystemPacket(0, 0, MsgStd::CannotUseCommandAtTheMoment));
                 PChar->pushPacket(new CReleasePacket(PChar, RELEASE_TYPE::FISHING));
             }
         }
         else
         {
-            PChar->pushPacket(new CMessageSystemPacket(0, 0, MSGSYSTEM::CANNOT_USE_COMMAND_AT_THE_MOMENT));
+            PChar->pushPacket(new CMessageSystemPacket(0, 0, MsgStd::CannotUseCommandAtTheMoment));
             PChar->pushPacket(new CReleasePacket(PChar, RELEASE_TYPE::FISHING));
 
             return;
@@ -2989,7 +2990,7 @@ namespace fishingutils
                             "ff.ranking, "          // 22
                             "ff.contest "
                             "FROM fishing_fish ff "
-                            "WHERE ff.disabled = 0 and ff.ranking < 99";
+                            "WHERE ff.disabled = 0 AND ff.ranking < 99";
 
         int32 ret = sql->Query(Query);
 
@@ -3282,4 +3283,53 @@ namespace fishingutils
         LoadFishingCatchLists();
         CreateFishingPools();
     }
+
+    void CleanupFishing()
+    {
+        for (auto fish : FishList)
+        {
+            destroy(fish.second->reqFish);
+            destroy(fish.second);
+        }
+        FishList.clear();
+
+        for (auto rod : FishingRods)
+        {
+            destroy(rod.second);
+        }
+        FishingRods.clear();
+
+        for (auto bait : FishingBaits)
+        {
+            destroy(bait.second);
+        }
+        FishingBaits.clear();
+
+        for (auto fishmoblist : FishZoneMobList)
+        {
+            for (auto fishmob : fishmoblist.second)
+            {
+                destroy(fishmob.second);
+            }
+            fishmoblist.second.clear();
+        }
+        FishZoneMobList.clear();
+
+        for (auto fishArealist : FishingAreaList)
+        {
+            for (auto fishArea : fishArealist.second)
+            {
+                destroy_arr(fishArea.second->areaBounds);
+                destroy(fishArea.second);
+            }
+            fishArealist.second.clear();
+        }
+        FishingAreaList.clear();
+
+        for (auto fish : FishList)
+        {
+            destroy(fish.second);
+        }
+        FishList.clear();
+    };
 } // namespace fishingutils

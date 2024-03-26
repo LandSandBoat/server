@@ -43,6 +43,7 @@ class CTaskMgr : public Singleton<CTaskMgr>
 {
 public:
     class CTask;
+    ~CTaskMgr();
     enum TASKTYPE
     {
         TASK_INTERVAL,

@@ -961,7 +961,7 @@ end
 
 function npcUtil.disappearCrate(crate)
     if crate:isNPC() then
-        crate:entityAnimationPacket('kesu')
+        crate:entityAnimationPacket(xi.animationString.STATUS_DISAPPEAR)
         crate:timer(3000, function(npc)
             npc:setUntargetable(true)
             npc:setStatus(xi.status.DISAPPEAR)
@@ -979,7 +979,7 @@ function npcUtil.openCrate(crate, callback)
     if crate:getLocalVar('opened') == 0 then
         crate:setLocalVar('opened', 1)
         local shouldDisappear = not callback()
-        crate:entityAnimationPacket('openH')
+        crate:entityAnimationPacket(xi.animationString.OPEN_CRATE_GLOW)
 
         if shouldDisappear then
             crate:timer(7000, function(npc)

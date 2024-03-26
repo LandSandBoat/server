@@ -16,12 +16,12 @@ entity.onTrade = function(player, npc, trade)
             player:confirmTrade()
         end
     else
-        xi.helm.onTrade(player, npc, trade, xi.helm.type.EXCAVATION, 60)
+        xi.helm.onTrade(player, npc, trade, xi.helmType.EXCAVATION, 60)
     end
 end
 
 entity.onTrigger = function(player, npc)
-    xi.helm.onTrigger(player, xi.helm.type.EXCAVATION)
+    xi.helm.onTrigger(player, xi.helmType.EXCAVATION)
 end
 
 entity.onEventUpdate = function(player, csid, option, npc)

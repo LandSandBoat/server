@@ -14,7 +14,7 @@ zoneObject.onInitialize = function(zone)
     UpdateNMSpawnPoint(ID.mob.TEMPEST_TIGON)
     GetMobByID(ID.mob.TEMPEST_TIGON):setRespawnTime(math.random(900, 10800))
 
-    xi.helm.initZone(zone, xi.helm.type.LOGGING)
+    xi.helm.initZone(zone, xi.helmType.LOGGING)
     func.herculesTreeOnGameHour()
 end
 

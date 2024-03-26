@@ -20,7 +20,7 @@ xi.zoneUtil.ImperialAgent_PotHatch = function(player, npc, posX, posZ, posR)
         npc:timer(2000, function(npcArg)
             ally:setPos(posX, -1, posZ, posR)
             ally:setStatus(xi.status.NORMAL)
-            ally:entityAnimationPacket('deru')
+            ally:entityAnimationPacket(xi.animationString.STATUS_VISIBLE)
         end)
 
         npc:timer(4000, function(npcArg)
@@ -52,15 +52,15 @@ xi.zoneUtil.ImperialAgent_PotHatch = function(player, npc, posX, posZ, posR)
         end)
 
         npc:timer(20000, function(npcArg)
-            ally:entityAnimationPacket('cabk')
+            ally:entityAnimationPacket(xi.animationString.CAST_BLACK_MAGIC_START)
         end)
 
         npc:timer(22000, function(npcArg)
-            ally:entityAnimationPacket('shbk')
+            ally:entityAnimationPacket(xi.animationString.CAST_BLACK_MAGIC_STOP)
         end)
 
         npc:timer(23000, function(npcArg)
-            ally:entityAnimationPacket('kesu')
+            ally:entityAnimationPacket(xi.animationString.STATUS_DISAPPEAR)
         end)
 
         npc:timer(24500, function(npcArg)

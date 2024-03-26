@@ -38,21 +38,21 @@ xi.amk.helpers.helmTrade = function(player, helmType, broke)
         broke ~= 1
     then
         if
-            helmType == xi.helm.type.MINING and
+            helmType == xi.helmType.MINING and
             not player:hasKeyItem(xi.ki.STURDY_METAL_STRIP) and
             validRegions[regionId] and
             math.random(1, 100) <= amkChance
         then
             npcUtil.giveKeyItem(player, xi.ki.STURDY_METAL_STRIP)
         elseif
-            helmType == xi.helm.type.LOGGING and
+            helmType == xi.helmType.LOGGING and
             not player:hasKeyItem(xi.ki.PIECE_OF_RUGGED_TREE_BARK) and
             validRegions[regionId] and
             math.random(1, 100) <= amkChance
         then
             npcUtil.giveKeyItem(player, xi.ki.PIECE_OF_RUGGED_TREE_BARK)
         elseif
-            helmType == xi.helm.type.HARVESTING and
+            helmType == xi.helmType.HARVESTING and
             not player:hasKeyItem(xi.ki.SAVORY_LAMB_ROAST) and
             validRegions[regionId] and
             math.random(1, 100) <= amkChance
