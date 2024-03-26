@@ -9,12 +9,15 @@ spellObject.onMagicCastingCheck = function(caster, target, spell)
 end
 
 spellObject.onSpellCast = function(caster, target, spell)
-    local curse = target:getStatusEffect(xi.effect.CURSE_I)
+    local curse  = target:getStatusEffect(xi.effect.CURSE_I)
     local curse2 = target:getStatusEffect(xi.effect.CURSE_II)
-    local bane = target:getStatusEffect(xi.effect.BANE)
-    local bonus = caster:getMod(xi.mod.ENHANCES_CURSNA) + target:getMod(xi.mod.ENHANCES_CURSNA_RCVD)
-    local power = 25 * ((100 + bonus) / 100) -- This 25 is temp until the skill calculation is in.
-    local final = nil
+    local bane   = target:getStatusEffect(xi.effect.BANE)
+    local bonus  = caster:getMod(xi.mod.ENHANCES_CURSNA) + target:getMod(xi.mod.ENHANCES_CURSNA_RCVD)
+    local skill  = caster:getSkillLevel(xi.skill.HEALING_MAGIC)
+    local final  = nil
+
+    -- https://www.bg-wiki.com/ffxi/Cursna, https://wiki.ffo.jp/html/1962.html
+    local power = (10 + (skill / 30)) * (1 + (bonus / 100))
 
     spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
     if target:hasStatusEffect(xi.effect.DOOM) and power > math.random(1, 100) then
