@@ -28,9 +28,11 @@ zones[xi.zone.CARPENTERS_LANDING] =
         FISHING_MESSAGE_OFFSET        = 7282, -- You can't fish here.
         LOGGING_IS_POSSIBLE_HERE      = 7399, -- Logging is possible here if you have <item>.
         BEUGUNGEL_SHOP_DIALOG         = 7431, -- Hello, [sir/ma'am]! I'm selling goods direct from the Carpenters' Guild.
+        STENCH_OF_DECAY               = 7481, -- You are overwhelmed by the putrid stench of decay!
         CRYPTONBERRY_EXECUTOR_DIE     = 7483, -- ...Cleave our foesss with barren hate.
         CRYPTONBERRY_ASSASSIN_2HR     = 7484, -- ..Take up thy lanternsss. The truth we shall illuminate.
         CRYPTONBERRY_EXECUTOR_2HR     = 7485, -- Through this we ssseek our just reward...
+        POLISH                        = 7486, -- You polish the <item> with the glowing mushroom.
         MYCOPHILE_MUSHROOM            = 7502, -- There is a rotten mushroom here. There are 3 openings in its cap.
         HERCULES_TREE_NOTHING_YET     = 7504, -- There is nothing here yet. Check again in the morning.
         UNITY_WANTED_BATTLE_INTERACT  = 7547, -- Those who have accepted % must pay # Unity accolades to participate. The content for this Wanted battle is #. [Ready to begin?/You do not have the appropriate object set, so your rewards will be limited.]
@@ -45,6 +47,7 @@ zones[xi.zone.CARPENTERS_LANDING] =
         TEMPEST_TIGON         = 16785593,
         OVERGROWN_IVY         = 16785709,
         CRYPTONBERRY_EXECUTOR = 16785710,
+        PARA_OFFSET           = 16785716,
         MYCOPHILE             = 16785722,
         HERCULES_BEETLE       = 16785723,
     },
@@ -61,6 +64,8 @@ zones[xi.zone.CARPENTERS_LANDING] =
         },
 
         LOGGING = GetTableOfIDs('Logging_Point'),
+
+        QM_PARA = 16785780,
     },
 }
 
