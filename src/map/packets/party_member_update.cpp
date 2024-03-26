@@ -64,7 +64,7 @@ CPartyMemberUpdatePacket::CPartyMemberUpdatePacket(CCharEntity* PChar, uint8 Mem
         ref<uint8>(0x1D)  = PChar->GetHPP();
         ref<uint8>(0x1E)  = PChar->GetMPP();
 
-        if (!(PChar->nameflags.flags & FLAG_ANON))
+        if (!PChar->isAnon())
         {
             ref<uint8>(0x22) = PChar->GetMJob();
             ref<uint8>(0x23) = PChar->GetMLevel();

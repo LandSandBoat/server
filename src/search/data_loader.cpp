@@ -246,7 +246,7 @@ std::list<SearchEntity*> CDataLoader::GetPlayersList(search_req sr, int* count)
     }
 
     std::string fmtQuery =
-        "SELECT charid, partyid, charname, pos_zone, pos_prevzone, nation, rank_sandoria, rank_bastok, rank_windurst, race, nameflags, mjob, sjob, mlvl, slvl, languages, nnameflags, seacom_type "
+        "SELECT charid, partyid, charname, pos_zone, pos_prevzone, nation, rank_sandoria, rank_bastok, rank_windurst, race, mjob, sjob, mlvl, slvl, languages, seacom_type, settings "
         "FROM accounts_sessions "
         "LEFT JOIN accounts_parties USING (charid) "
         "LEFT JOIN chars USING (charid) "
@@ -273,20 +273,23 @@ std::list<SearchEntity*> CDataLoader::GetPlayersList(search_req sr, int* count)
             PPlayer->zone     = (uint16)sql->GetIntData(3);
             PPlayer->prevzone = (uint16)sql->GetIntData(4);
             PPlayer->nation   = (uint8)sql->GetIntData(5);
-            PPlayer->mjob     = (uint8)sql->GetIntData(11);
-            PPlayer->sjob     = (uint8)sql->GetIntData(12);
-            PPlayer->mlvl     = (uint8)sql->GetIntData(13);
-            PPlayer->slvl     = (uint8)sql->GetIntData(14);
-            PPlayer->race     = (uint8)sql->GetIntData(9);
+            PPlayer->mjob     = (uint8)sql->GetIntData(10);
+            PPlayer->sjob     = (uint8)sql->GetIntData(11);
+            PPlayer->mlvl     = (uint8)sql->GetIntData(12);
+            PPlayer->slvl     = (uint8)sql->GetIntData(13);
+            PPlayer->race     = (uint8)sql->GetIntData(9); //
             PPlayer->rank     = (uint8)sql->GetIntData(6 + PPlayer->nation);
 
             PPlayer->zone        = (PPlayer->zone == 0 ? PPlayer->prevzone : PPlayer->zone);
-            PPlayer->languages   = (uint8)sql->GetUIntData(15);
-            PPlayer->mentor      = sql->GetUIntData(16) & NFLAG_MENTOR;
-            PPlayer->seacom_type = (uint8)sql->GetUIntData(17);
+            PPlayer->languages   = (uint8)sql->GetUIntData(14);
+            PPlayer->seacom_type = (uint8)sql->GetUIntData(15);
 
             uint32 partyid  = sql->GetUIntData(1);
-            uint32 nameflag = sql->GetUIntData(10);
+            uint32 playerSettingsInt = sql->GetUIntData(16);
+            SAVE_CONF settings = {};
+            std::memcpy(&settings, &playerSettingsInt, sizeof(uint32_t));
+
+            PPlayer->mentor = settings.MentorFlg;
 
             if (PPlayer->mentor)
             {
@@ -303,27 +306,31 @@ std::list<SearchEntity*> CDataLoader::GetPlayersList(search_req sr, int* count)
                 PPlayer->flags1 |= 0x0010;
             }
 
-            if (nameflag & FLAG_AWAY)
+            if (settings.AwayFlg)
             {
                 PPlayer->flags1 |= 0x0100;
             }
 
+            // how to set DC flag?
+            /*
             if (nameflag & FLAG_DC)
             {
                 PPlayer->flags1 |= 0x0800;
             }
+            */
 
             if (partyid != 0)
             {
                 PPlayer->flags1 |= 0x2000;
             }
 
-            if (nameflag & FLAG_ANON)
+
+            if (settings.AnonymityFlg)
             {
                 PPlayer->flags1 |= 0x4000;
             }
 
-            if (nameflag & FLAG_INVITE)
+            if (settings.InviteFlg)
             {
                 PPlayer->flags1 |= 0x8000;
             }
@@ -429,10 +436,12 @@ std::list<SearchEntity*> CDataLoader::GetPlayersList(search_req sr, int* count)
                 }
             }
             // dont show hidden gm
-            if (nameflag & FLAG_ANON && nameflag & FLAG_GM)
+
+            // How to get GM level?
+            /*if (settings.AnonymityFlg && nameflag & FLAG_GM)
             {
                 continue;
-            }
+            }*/
             if (visibleResults < 40)
             {
                 PlayersList.emplace_back(PPlayer);
@@ -461,7 +470,7 @@ std::list<SearchEntity*> CDataLoader::GetPartyList(uint32 PartyID, uint32 Allian
     std::list<SearchEntity*> PartyList;
 
     const char* Query =
-        "SELECT charid, partyid, charname, pos_zone, nation, rank_sandoria, rank_bastok, rank_windurst, race, nameflags, mjob, sjob, mlvl, slvl, languages, nnameflags, seacom_type "
+        "SELECT charid, partyid, charname, pos_zone, nation, rank_sandoria, rank_bastok, rank_windurst, race, mjob, sjob, mlvl, slvl, languages, seacom_type, settings "
         "FROM accounts_sessions "
         "LEFT JOIN accounts_parties USING(charid) "
         "LEFT JOIN chars USING(charid) "
@@ -484,17 +493,20 @@ std::list<SearchEntity*> CDataLoader::GetPartyList(uint32 PartyID, uint32 Allian
             PPlayer->id          = sql->GetUIntData(0);
             PPlayer->zone        = (uint16)sql->GetIntData(3);
             PPlayer->nation      = (uint8)sql->GetIntData(4);
-            PPlayer->mjob        = (uint8)sql->GetIntData(10);
-            PPlayer->sjob        = (uint8)sql->GetIntData(11);
-            PPlayer->mlvl        = (uint8)sql->GetIntData(12);
-            PPlayer->slvl        = (uint8)sql->GetIntData(13);
+            PPlayer->mjob        = (uint8)sql->GetIntData(9);
+            PPlayer->sjob        = (uint8)sql->GetIntData(10);
+            PPlayer->mlvl        = (uint8)sql->GetIntData(11);
+            PPlayer->slvl        = (uint8)sql->GetIntData(12);
             PPlayer->race        = (uint8)sql->GetIntData(8);
             PPlayer->rank        = (uint8)sql->GetIntData(5 + PPlayer->nation);
-            PPlayer->languages   = (uint8)sql->GetUIntData(14);
-            PPlayer->mentor      = sql->GetUIntData(15) & NFLAG_MENTOR;
-            PPlayer->seacom_type = (uint8)sql->GetUIntData(16);
+            PPlayer->languages   = (uint8)sql->GetUIntData(13);
+            PPlayer->seacom_type = (uint8)sql->GetUIntData(14);
 
-            uint32 nameflag = sql->GetUIntData(9);
+            uint32 playerSettingsInt = sql->GetUIntData(15);
+            SAVE_CONF settings = {};
+            std::memcpy(&settings, &playerSettingsInt, sizeof(uint32_t));
+
+            PPlayer->mentor = settings.MentorFlg;
 
             if (PPlayer->mentor)
             {
@@ -508,27 +520,29 @@ std::list<SearchEntity*> CDataLoader::GetPartyList(uint32 PartyID, uint32 Allian
             {
                 PPlayer->flags1 |= 0x0010;
             }
-            if (nameflag & FLAG_AWAY)
+            if (settings.AwayFlg)
             {
                 PPlayer->flags1 |= 0x0100;
             }
-            if (nameflag & FLAG_DC)
+            // How to check DC?
+            /*if (nameflag & FLAG_DC)
             {
                 PPlayer->flags1 |= 0x0800;
-            }
+            }*/
             if (PartyID != 0)
             {
                 PPlayer->flags1 |= 0x2000;
             }
-            if (nameflag & FLAG_ANON)
+            if (settings.AnonymityFlg)
             {
                 PPlayer->flags1 |= 0x4000;
             }
-            if (nameflag & FLAG_INVITE)
+            if (settings.InviteFlg)
             {
                 PPlayer->flags1 |= 0x8000;
             }
 
+            // TODO: figure out why this is even a thing
             PPlayer->flags2 = PPlayer->flags1;
 
             PartyList.emplace_back(PPlayer);
@@ -546,9 +560,9 @@ std::list<SearchEntity*> CDataLoader::GetPartyList(uint32 PartyID, uint32 Allian
 std::list<SearchEntity*> CDataLoader::GetLinkshellList(uint32 LinkshellID)
 {
     std::list<SearchEntity*> LinkshellList;
-    const char*              fmtQuery = "SELECT charid, partyid, charname, pos_zone, nation, rank_sandoria, rank_bastok, rank_windurst, race, nameflags, mjob, sjob, "
+    const char*              fmtQuery = "SELECT charid, partyid, charname, pos_zone, nation, rank_sandoria, rank_bastok, rank_windurst, race, mjob, sjob, "
                                         "mlvl, slvl, linkshellid1, linkshellid2, "
-                                        "linkshellrank1, linkshellrank2 "
+                                        "linkshellrank1, linkshellrank2, settings "
                                         "FROM accounts_sessions "
                                         "LEFT JOIN accounts_parties USING (charid) "
                                         "LEFT JOIN chars USING (charid) "
@@ -571,41 +585,45 @@ std::list<SearchEntity*> CDataLoader::GetLinkshellList(uint32 LinkshellID)
             PPlayer->id             = sql->GetUIntData(0);
             PPlayer->zone           = (uint16)sql->GetIntData(3);
             PPlayer->nation         = (uint8)sql->GetIntData(4);
-            PPlayer->mjob           = (uint8)sql->GetIntData(10);
-            PPlayer->sjob           = (uint8)sql->GetIntData(11);
-            PPlayer->mlvl           = (uint8)sql->GetIntData(12);
-            PPlayer->slvl           = (uint8)sql->GetIntData(13);
+            PPlayer->mjob           = (uint8)sql->GetIntData(9);
+            PPlayer->sjob           = (uint8)sql->GetIntData(10);
+            PPlayer->mlvl           = (uint8)sql->GetIntData(11);
+            PPlayer->slvl           = (uint8)sql->GetIntData(12);
             PPlayer->race           = (uint8)sql->GetIntData(8);
             PPlayer->rank           = (uint8)sql->GetIntData(5 + PPlayer->nation);
-            PPlayer->linkshellid1   = sql->GetIntData(14);
-            PPlayer->linkshellid2   = sql->GetIntData(15);
-            PPlayer->linkshellrank1 = sql->GetIntData(16);
-            PPlayer->linkshellrank2 = sql->GetIntData(17);
+            PPlayer->linkshellid1   = sql->GetIntData(13);
+            PPlayer->linkshellid2   = sql->GetIntData(14);
+            PPlayer->linkshellrank1 = sql->GetIntData(15);
+            PPlayer->linkshellrank2 = sql->GetIntData(16);
 
             uint32 partyid  = sql->GetUIntData(1);
-            uint32 nameflag = sql->GetUIntData(9);
+
+            uint32 playerSettingsInt = sql->GetUIntData(17);
+            SAVE_CONF settings = {};
+            std::memcpy(&settings, &playerSettingsInt, sizeof(uint32_t));
 
             if (partyid == PPlayer->id)
             {
                 PPlayer->flags1 |= 0x0008;
             }
-            if (nameflag & FLAG_AWAY)
+            if (settings.AwayFlg)
             {
                 PPlayer->flags1 |= 0x0100;
             }
+            /*
             if (nameflag & FLAG_DC)
             {
                 PPlayer->flags1 |= 0x0800;
-            }
+            }*/
             if (partyid != 0)
             {
                 PPlayer->flags1 |= 0x2000;
             }
-            if (nameflag & FLAG_ANON)
+            if (settings.AnonymityFlg)
             {
                 PPlayer->flags1 |= 0x4000;
             }
-            if (nameflag & FLAG_INVITE)
+            if (settings.InviteFlg)
             {
                 PPlayer->flags1 |= 0x8000;
             }

@@ -1265,7 +1265,7 @@ void SmallPacket0x01A(map_session_data_t* const PSession, CCharEntity* const PCh
                                                                   0,
                                                                   1800,
                                                                   0,
-                                                                  FLAG_CHOCOBO),
+                                                                  0x40), // previously known as nameflag "FLAG_CHOCOBO"
                                                               true);
 
                 PChar->PRecastContainer->Add(RECAST_ABILITY, 256, 60);
@@ -5994,7 +5994,6 @@ void SmallPacket0x0C4(map_session_data_t* const PSession, CCharEntity* const PCh
                     PChar->equipLoc[slot] = 0;
                     if (lsNum == 1)
                     {
-                        PChar->nameflags.flags &= ~FLAG_LINKSHELL;
                         PChar->updatemask |= UPDATE_HP;
                     }
 
@@ -6041,7 +6040,6 @@ void SmallPacket0x0C4(map_session_data_t* const PSession, CCharEntity* const PCh
                     PChar->equipLoc[slot] = LocationID;
                     if (lsNum == 1)
                     {
-                        PChar->nameflags.flags |= FLAG_LINKSHELL;
                         PChar->updatemask |= UPDATE_HP;
                     }
 
@@ -6168,25 +6166,36 @@ void SmallPacket0x0DB(map_session_data_t* const PSession, CCharEntity* const PCh
 {
     TracyZoneScoped;
 
-    auto oldMenuConfigFlags = PChar->menuConfigFlags.flags;
-    auto oldChatFilterFlags = PChar->chatFilterFlags;
-    auto oldLanguages       = PChar->search.language;
+    uint32_t oldPlayerConfig = {};
+    uint32_t oldChatFilter1  = {};
+    uint32_t oldChatFilter2  = {};
 
-    // Extract the system filter bits and update MenuConfig
-    const uint8 systemFilterMask = (NFLAG_SYSTEM_FILTER_H | NFLAG_SYSTEM_FILTER_L) >> 8;
-    PChar->menuConfigFlags.byte2 &= ~systemFilterMask;
-    PChar->menuConfigFlags.byte2 |= data.ref<uint8>(0x09) & systemFilterMask;
+    std::memcpy(&oldPlayerConfig, &PChar->playerConfig, sizeof(uint32_t));
+    std::memcpy(&oldChatFilter1, &PChar->playerConfig.MassageFilter, sizeof(uint32_t));
+    std::memcpy(&oldChatFilter2, &PChar->playerConfig.MassageFilter2, sizeof(uint32_t));
 
-    PChar->chatFilterFlags = data.ref<uint64>(0x0C);
+    uint32_t newPlayerConfig = {};
+    uint32_t newChatFilter1  = {};
+    uint32_t newChatFilter2  = {};
+
+    std::memcpy(&newPlayerConfig, data + 0x08, sizeof(uint32_t));
+    std::memcpy(&newChatFilter1, data + 0x0C, sizeof(uint32_t));
+    std::memcpy(&newChatFilter2, data + 0x10, sizeof(uint32_t));
+
+    auto oldLanguages= PChar->search.language;
+
+    std::memcpy(&PChar->playerConfig, &newPlayerConfig, sizeof(uint32_t));
+    std::memcpy(&PChar->playerConfig.MassageFilter, &newChatFilter1, sizeof(uint32_t));
+    std::memcpy(&PChar->playerConfig.MassageFilter2, &newChatFilter2, sizeof(uint32_t));
 
     PChar->search.language = data.ref<uint8>(0x24);
 
-    if (oldMenuConfigFlags != PChar->menuConfigFlags.flags)
+    if (oldPlayerConfig != newPlayerConfig)
     {
-        charutils::SaveMenuConfigFlags(PChar);
+        charutils::SavePlayerSettings(PChar);
     }
 
-    if (oldChatFilterFlags != PChar->chatFilterFlags)
+    if (oldChatFilter1 != newChatFilter1 || oldChatFilter2 != newChatFilter2)
     {
         charutils::SaveChatFilterFlags(PChar);
     }
@@ -6210,132 +6219,126 @@ void SmallPacket0x0DC(map_session_data_t* const PSession, CCharEntity* const PCh
     TracyZoneScoped;
     switch (data.ref<uint32>(0x04))
     {
-        case NFLAG_INVITE:
+        case 0x01:
             // /invite [on|off]
             if (PChar->PParty)
             {
                 // Can't put flag up while in a party
-                PChar->nameflags.flags &= ~FLAG_INVITE;
+                PChar->playerConfig.InviteFlg = false;
             }
             else
             {
-                PChar->nameflags.flags ^= FLAG_INVITE;
+                PChar->playerConfig.InviteFlg = !PChar->playerConfig.InviteFlg;
             }
             break;
-        case NFLAG_AWAY:
+        case 0x02:
             // /away | /online
             if (data.ref<uint8>(0x10) == 1)
             {
-                PChar->nameflags.flags |= FLAG_AWAY;
+                PChar->playerConfig.AwayFlg = true;
             }
             if (data.ref<uint8>(0x10) == 2)
             {
-                PChar->nameflags.flags &= ~FLAG_AWAY;
+                PChar->playerConfig.AwayFlg = false;
             }
             break;
-        case NFLAG_ANON:
+        case 0x04:
         {
             // /anon [on|off]
-            auto flags = PChar->nameflags.flags;
+            auto oldAnon = PChar->playerConfig.AnonymityFlg;
+
             auto param = data.ref<uint8>(0x10);
             if (param == 1)
             {
-                PChar->nameflags.flags |= FLAG_ANON;
-                PChar->menuConfigFlags.flags |= NFLAG_ANON;
+                PChar->playerConfig.AnonymityFlg = true;
             }
             else if (param == 2)
             {
-                PChar->nameflags.flags &= ~FLAG_ANON;
-                PChar->menuConfigFlags.flags &= ~NFLAG_ANON;
+                PChar->playerConfig.AnonymityFlg = false;
             }
-            if (flags != PChar->nameflags.flags)
+
+            if (oldAnon != PChar->isAnon())
             {
                 PChar->pushPacket(new CMessageSystemPacket(0, 0, param == 1 ? MsgStd::CharacterInfoHidden : MsgStd::CharacterInfoShown));
             }
             break;
         }
-        case NFLAG_AUTOTARGET:
+        case 0x4000:
             // /autotarget [on|off]
             if (data.ref<uint8>(0x10) == 1)
             {
-                PChar->m_hasAutoTarget = false;
+                PChar->playerConfig.AutoTargetOffFlg = false;
             }
             if (data.ref<uint8>(0x10) == 2)
             {
-                PChar->m_hasAutoTarget = true;
+                PChar->playerConfig.AutoTargetOffFlg = true;
             }
             break;
-        case NFLAG_AUTOGROUP:
+        case 0x8000:
             // /autogroup [on|off]
             if (data.ref<uint8>(0x10) == 1)
             {
-                PChar->menuConfigFlags.flags |= NFLAG_AUTOGROUP;
+                PChar->playerConfig.AutoPartyFlg = true;
             }
             if (data.ref<uint8>(0x10) == 2)
             {
-                PChar->menuConfigFlags.flags &= ~NFLAG_AUTOGROUP;
+                PChar->playerConfig.AutoPartyFlg = false;
             }
             break;
-        case NFLAG_MENTOR:
+        case 0x2000000:
             // /mentor [on|off]
             if (data.ref<uint8>(0x10) == 1)
             {
-                PChar->menuConfigFlags.flags |= NFLAG_MENTOR;
+                PChar->playerConfig.MentorFlg = true;
             }
             else if (data.ref<uint8>(0x10) == 2)
             {
-                PChar->menuConfigFlags.flags &= ~NFLAG_MENTOR;
+                PChar->playerConfig.MentorFlg = false;
             }
             break;
-        case NFLAG_NEWPLAYER:
+        case 0x04000000:
             // Cancel new adventurer status.
             if (data.ref<uint8>(0x10) == 1)
             {
-                PChar->menuConfigFlags.flags |= NFLAG_NEWPLAYER;
+                PChar->playerConfig.NewAdventurerOffFlg = true;
             }
             break;
-        case NFLAG_DISPLAY_HEAD:
+        case 0x08000000:
         {
             // /displayhead [on|off]
-            auto flags = PChar->menuConfigFlags.byte4;
+            auto oldDisplayHeadflag = PChar->playerConfig.DisplayHeadOffFlg;
             auto param = data.ref<uint8>(0x10);
             if (param == 1)
             {
-                PChar->menuConfigFlags.flags |= NFLAG_DISPLAY_HEAD;
+                PChar->playerConfig.DisplayHeadOffFlg = true;
             }
             else if (param == 2)
             {
-                PChar->menuConfigFlags.flags &= ~NFLAG_DISPLAY_HEAD;
+                PChar->playerConfig.DisplayHeadOffFlg = false;
             }
 
-            // This should only check that the display head bit has changed, since
-            // a user gaining mentorship or losing new adventurer status at the
-            // same time this code is called. Since it is unlikely that situation
-            // would occur and the negative impact would be displaying the headgear
-            // message twice, it isn't worth checking. If additional bits are found
-            // in this flag, that assumption may need to be re-evaluated.
-            if (flags != PChar->menuConfigFlags.byte4)
+            if (oldDisplayHeadflag != PChar->playerConfig.DisplayHeadOffFlg)
             {
                 PChar->pushPacket(new CCharAppearancePacket(PChar));
                 PChar->pushPacket(new CMessageStandardPacket(param == 1 ? MsgStd::HeadgearHide : MsgStd::HeadgearShow));
             }
             break;
         }
-        case NFLAG_RECRUIT:
+        case 0x20000000:
             // /recruit [on|off]
             if (data.ref<uint8>(0x10) == 1)
             {
-                PChar->menuConfigFlags.flags |= NFLAG_RECRUIT;
+                PChar->playerConfig.RecruitFlg = true;
             }
             if (data.ref<uint8>(0x10) == 2)
             {
-                PChar->menuConfigFlags.flags &= ~NFLAG_RECRUIT;
+                PChar->playerConfig.RecruitFlg = false;
             }
             break;
     }
 
     charutils::SaveCharStats(PChar);
-    charutils::SaveMenuConfigFlags(PChar);
+    charutils::SavePlayerSettings(PChar);
     PChar->pushPacket(new CMenuConfigPacket(PChar));
     PChar->pushPacket(new CCharUpdatePacket(PChar));
     PChar->pushPacket(new CCharSyncPacket(PChar));
@@ -6664,7 +6667,8 @@ void SmallPacket0x0E7(map_session_data_t* const PSession, CCharEntity* const PCh
         return;
     }
 
-    if (PChar->m_moghouseID || PChar->nameflags.flags & FLAG_GM || PChar->m_GMlevel > 0)
+    // FIXME: Two GM level checks? visibleGmLevel is the GM level visible to other players, and m_GMLevel is the alway-invisible GM level.
+    if (PChar->m_moghouseID || PChar->visibleGmLevel >= 3 || PChar->m_GMlevel > 0)
     {
         charutils::ForceLogout(PChar);
     }
@@ -7797,7 +7801,7 @@ void SmallPacket0x105(map_session_data_t* const PSession, CCharEntity* const PCh
 
     CCharEntity* PTarget = charid != 0 ? PChar->loc.zone->GetCharByID(charid) : (CCharEntity*)PChar->GetEntity(PChar->m_TargID, TYPE_PC);
 
-    if (PTarget != nullptr && PTarget->id == charid && (PTarget->nameflags.flags & FLAG_BAZAAR))
+    if (PTarget != nullptr && PTarget->id == charid && PTarget->hasBazaar())
     {
         PChar->BazaarID.id     = PTarget->id;
         PChar->BazaarID.targid = PTarget->targid;
@@ -7946,7 +7950,6 @@ void SmallPacket0x106(map_session_data_t* const PSession, CCharEntity* const PCh
         if (BazaarIsEmpty)
         {
             PTarget->updatemask |= UPDATE_HP;
-            PTarget->nameflags.flags &= ~FLAG_BAZAAR;
         }
         return;
     }
@@ -7962,22 +7965,11 @@ void SmallPacket0x106(map_session_data_t* const PSession, CCharEntity* const PCh
 void SmallPacket0x109(map_session_data_t* const PSession, CCharEntity* const PChar, CBasicPacket& data)
 {
     TracyZoneScoped;
-    CItemContainer* PStorage = PChar->getStorage(LOC_INVENTORY);
-    if (PStorage == nullptr)
-    {
-        return;
-    }
 
-    for (uint8 slotID = 1; slotID <= PStorage->GetSize(); ++slotID)
+    if (PChar->isSettingBazaarPrices)
     {
-        CItem* PItem = PStorage->GetItem(slotID);
-
-        if ((PItem != nullptr) && (PItem->getCharPrice() != 0))
-        {
-            PChar->nameflags.flags |= FLAG_BAZAAR;
-            PChar->updatemask |= UPDATE_HP;
-            return;
-        }
+        PChar->isSettingBazaarPrices = false;
+        PChar->updatemask |= UPDATE_HP;
     }
 }
 
@@ -8044,7 +8036,7 @@ void SmallPacket0x10B(map_session_data_t* const PSession, CCharEntity* const PCh
     }
     PChar->BazaarCustomers.clear();
 
-    PChar->nameflags.flags &= ~FLAG_BAZAAR;
+    PChar->isSettingBazaarPrices = true;
     PChar->updatemask |= UPDATE_HP;
 }
 

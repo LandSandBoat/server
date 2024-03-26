@@ -33,32 +33,10 @@
 #define FIFOSIZE_SERVERLINK 256 * 1024
 
 #define FFXI_HEADER_SIZE 0x1C // common packet header size
-#define FFXI_CHANGE_ZONE 0x0A // change zone cmd
 
 // Flags shown in front of the character's name
 
-enum FLAGTYPE : uint32
-{
-    FLAG_INEVENT     = 0x00000002,
-    FLAG_CHOCOBO     = 0x00000040,
-    FLAG_WALLHACK    = 0x00000200,
-    FLAG_INVITE      = 0x00000800,
-    FLAG_ANON        = 0x00001000,
-    FLAG_UNKNOWN     = 0x00002000,
-    FLAG_AWAY        = 0x00004000,
-    FLAG_PLAYONLINE  = 0x00010000,
-    FLAG_LINKSHELL   = 0x00020000,
-    FLAG_DC          = 0x00040000,
-    FLAG_GM          = 0x04000000,
-    FLAG_GM_SUPPORT  = 0x04000000,
-    FLAG_GM_SENIOR   = 0x05000000,
-    FLAG_GM_LEAD     = 0x06000000,
-    FLAG_GM_PRODUCER = 0x07000000,
-    FLAG_BAZAAR      = 0x80000000,
-};
-DECLARE_FORMAT_AS_UNDERLYING(FLAGTYPE);
-
-enum NFLAGTYPE : uint32
+/*enum NFLAGTYPE : uint32
 {
     NFLAG_INVITE          = 0x00000001,
     NFLAG_AWAY            = 0x00000002,
@@ -72,7 +50,7 @@ enum NFLAGTYPE : uint32
     NFLAG_DISPLAY_HEAD    = 0x08000000,
     NFLAG_RECRUIT         = 0x20000000,
 };
-DECLARE_FORMAT_AS_UNDERLYING(NFLAGTYPE);
+DECLARE_FORMAT_AS_UNDERLYING(NFLAGTYPE);*/
 
 enum CHATFILTERTYPE : uint64
 {
@@ -262,6 +240,122 @@ constexpr auto msgTypeToStr = [](uint8 msgtype)
         default:
             return "Unknown";
     };
+};
+
+// For filters1_t, filters2_t and SAVE_CONF:
+// See https://github.com/atom0s/XiPackets/tree/main/world/server/0x00B4
+struct filters1_t
+{
+    uint32_t    say : 1;
+    uint32_t    shout : 1;
+    uint32_t    unused02 : 1;
+    uint32_t    emotes : 1;
+    uint32_t    special_actions_started_on_by_you : 1;
+    uint32_t    special_action_effects_on_by_you : 1;
+    uint32_t    attacks_by_you : 1;
+    uint32_t    missed_attacks_by_you : 1;
+    uint32_t    attacks_you_evade : 1;
+    uint32_t    damage_you_take : 1;
+    uint32_t    special_action_effects_on_by_npcs : 1;
+    uint32_t    attacks_by_npcs : 1;
+    uint32_t    missed_attacks_by_npcs : 1;
+    uint32_t    special_action_effects_on_by_party : 1;
+    uint32_t    attacks_by_party : 1;
+    uint32_t    missed_attacks_by_party : 1;
+    uint32_t    attacks_evaded_by_party : 1;
+    uint32_t    damage_taken_by_party : 1;
+    uint32_t    special_action_effects_on_by_allies : 1;
+    uint32_t    attacks_by_allies : 1;
+    uint32_t    missed_attacks_by_allies : 1;
+    uint32_t    attacks_evaded_by_allies : 1;
+    uint32_t    damage_taken_by_allies : 1;
+    uint32_t    special_actions_started_on_by_party : 1;
+    uint32_t    special_actions_started_on_by_allies : 1;
+    uint32_t    special_actions_started_on_by_npcs  : 1;
+    uint32_t    others_synthesis_and_fishing_results : 1;
+    uint32_t    lot_results : 1;
+    uint32_t    attacks_by_others : 1;
+    uint32_t    missed_attacks_by_others : 1;
+    uint32_t    unused30 : 1;
+    uint32_t    unused31 : 1;
+};
+
+struct filters2_t
+{
+    uint32_t    attacks_evaded_by_others : 1;
+    uint32_t    damage_taken_by_others : 1;
+    uint32_t    special_action_effects_on_by_others : 1;
+    uint32_t    special_actions_started_on_by_others : 1;
+    uint32_t    attacks_by_foes : 1;
+    uint32_t    missed_attacks_by_foes : 1;
+    uint32_t    attacks_evaded_by_foes : 1;
+    uint32_t    damage_taken_by_foes : 1;
+    uint32_t    special_action_effects_on_by_foes : 1;
+    uint32_t    special_actions_started_on_by_foes : 1;
+    uint32_t    campaign_related_data : 1;
+    uint32_t    tell_messages_deemed_spam : 1;
+    uint32_t    shout_yell_messages_deemed_spam : 1;
+    uint32_t    unused13 : 1;
+    uint32_t    unused14 : 1;
+    uint32_t    job_specific_emote : 1;
+    uint32_t    yell : 1;
+    uint32_t    messages_from_alter_egos : 1;
+    uint32_t    unused18 : 1;
+    uint32_t    assist_j : 1;
+    uint32_t    assist_e : 1;
+    uint32_t    unused21 : 1;
+    uint32_t    unused22 : 1;
+    uint32_t    unused23 : 1;
+    uint32_t    unused24 : 1;
+    uint32_t    unused25 : 1;
+    uint32_t    unused26 : 1;
+    uint32_t    unused27 : 1;
+    uint32_t    unused28 : 1;
+    uint32_t    unused29 : 1;
+    uint32_t    unused30 : 1;
+    uint32_t    unused31 : 1;
+};
+
+struct SAVE_CONF
+{
+    uint8_t     InviteFlg : 1;
+    uint8_t     AwayFlg   : 1;
+    uint8_t     AnonymityFlg : 1;
+    uint8_t     Language  : 2;
+    uint8_t     unknown05 : 3;
+
+    uint8_t     unknown08 : 1;
+    uint8_t     unknown09 : 1;
+    uint8_t     unknown10 : 1;
+    uint8_t     SysMesFilterLevel : 2;
+    uint8_t     unknown13 : 1;
+    uint8_t     AutoTargetOffFlg : 1;
+    uint8_t     AutoPartyFlg : 1;
+
+    uint8_t     unknown16 : 8;
+
+    uint8_t     MentorUnlockedFlg : 1;
+    uint8_t     MentorFlg : 1;
+    uint8_t     NewAdventurerOffFlg : 1;
+    uint8_t     DisplayHeadOffFlg : 1;
+    uint8_t     unknown28 : 1;
+    uint8_t     RecruitFlg : 1;
+    uint8_t     unused : 2;
+
+    filters1_t  MassageFilter;
+    filters2_t  MassageFilter2;
+    uint16_t    PvpFlg;
+    uint8_t     AreaCode;
+};
+
+struct languages_t
+{
+    uint8_t     Japanese    : 1;
+    uint8_t     English     : 1;
+    uint8_t     German      : 1;
+    uint8_t     French      : 1;
+    uint8_t     Other       : 1;
+    uint8_t     unused      : 3;
 };
 
 // For characters, the size is stored in `size`.

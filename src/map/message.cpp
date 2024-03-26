@@ -123,7 +123,7 @@ namespace message
                     {
                         send(MSG_DIRECT, extra.data(), sizeof(uint32), new CMessageStandardPacket(PChar, 0, 0, MsgStd::TellNotReceivedOffline));
                     }
-                    else if (PChar->nameflags.flags & FLAG_AWAY && !gm_sent)
+                    else if (PChar->isAway() && !gm_sent)
                     {
                         send(MSG_DIRECT, extra.data(), sizeof(uint32), new CMessageStandardPacket(PChar, 0, 0, MsgStd::TellNotReceivedAway));
                     }

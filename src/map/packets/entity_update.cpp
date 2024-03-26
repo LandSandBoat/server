@@ -207,6 +207,13 @@ void CEntityUpdatePacket::updateWith(CBaseEntity* PEntity, ENTITYUPDATE type, ui
                 ref<uint8>(0x2B) = PEntity->namevis;
             }
 
+            // TODO: make flags struct for 0x00E when it's decompped
+            if (PEntity->priorityRender)
+            {
+                // Enable CliPriorityFlag, see https://github.com/atom0s/XiPackets/tree/main/world/server/0x0037 (documentation for 0x00E is not on the repo yet)
+                ref<uint8>(0x28) |= 0x20;
+            }
+
             if (updatemask & UPDATE_STATUS)
             {
                 ref<uint32>(0x2C) = PMob->m_OwnerID.id;

@@ -14,7 +14,6 @@ CREATE TABLE IF NOT EXISTS `char_stats` (
   `charid` int(10) unsigned NOT NULL,
   `hp` smallint(4) unsigned NOT NULL DEFAULT '50',
   `mp` smallint(4) unsigned NOT NULL DEFAULT '50',
-  `nameflags` int(10) unsigned NOT NULL DEFAULT '0',
   `mhflag` smallint(4) unsigned NOT NULL DEFAULT '0',
   `mjob` tinyint(2) unsigned NOT NULL DEFAULT '0',
   `sjob` tinyint(2) unsigned NOT NULL DEFAULT '0',

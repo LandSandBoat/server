@@ -89,7 +89,7 @@ void CCharPacket::updateWith(CCharEntity* PChar, ENTITYUPDATE type, uint8 update
             {
                 ref<uint8>(0x1E)  = PChar->GetHPP();
                 ref<uint8>(0x1F)  = PChar->animation;
-                ref<uint32>(0x20) = PChar->nameflags.flags;
+                //std::memcpy(&data[0x27], &PChar->playerConfig, sizeof(uint32_t));
                 ref<uint8>(0x21) |= PChar->GetGender() * 128 + (1 << PChar->look.size);
 
                 if (PChar->StatusEffectContainer->HasStatusEffect(EFFECT_SNEAK))
@@ -121,7 +121,7 @@ void CCharPacket::updateWith(CCharEntity* PChar, ENTITYUPDATE type, uint8 update
                 ref<uint8>(0x29) = static_cast<uint8>(PChar->allegiance);
 
                 // Mentor flag..
-                if (PChar->menuConfigFlags.flags & NFLAG_MENTOR)
+                if (PChar->isMentor())
                 {
                     ref<uint8>(0x2B) = 0x01;
                 }
@@ -170,7 +170,7 @@ void CCharPacket::updateWith(CCharEntity* PChar, ENTITYUPDATE type, uint8 update
                 look_t* look      = (PChar->getStyleLocked() ? &PChar->mainlook : &PChar->look);
                 ref<uint8>(0x48)  = look->face;
                 ref<uint8>(0x49)  = look->race;
-                ref<uint16>(0x4A) = PChar->menuConfigFlags.flags & NFLAG_DISPLAY_HEAD ? 0 : look->head + 0x1000;
+                ref<uint16>(0x4A) = PChar->playerConfig.DisplayHeadOffFlg ? 0x0 : look->head + 0x1000;
                 ref<uint16>(0x4C) = look->body + 0x2000;
                 ref<uint16>(0x4E) = look->hands + 0x3000;
                 ref<uint16>(0x50) = look->legs + 0x4000;

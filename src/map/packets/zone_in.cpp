@@ -162,7 +162,7 @@ CZoneInPacket::CZoneInPacket(CCharEntity* PChar, const EventInfo* currentEvent)
     look_t* look      = (PChar->getStyleLocked() ? &PChar->mainlook : &PChar->look);
     ref<uint8>(0x44)  = look->face;
     ref<uint8>(0x45)  = look->race;
-    ref<uint16>(0x46) = PChar->menuConfigFlags.flags & NFLAG_DISPLAY_HEAD ? 0 : look->head + 0x1000;
+    ref<uint16>(0x46) = PChar->playerConfig.DisplayHeadOffFlg ? 0x0 : look->head + 0x1000;
     ref<uint16>(0x48) = look->body + 0x2000;
     ref<uint16>(0x4A) = look->hands + 0x3000;
     ref<uint16>(0x4C) = look->legs + 0x4000;
@@ -245,15 +245,9 @@ CZoneInPacket::CZoneInPacket(CCharEntity* PChar, const EventInfo* currentEvent)
 
     ref<uint32>(0xE8) = PChar->GetMaxHP();
     ref<uint32>(0xEC) = PChar->GetMaxMP();
+    // ref<uint8>(0xEF) = TODO: implement flag of 1 = high for "has unlocked sub and can change jobs"
 
-    // MenuConfig (F4-F7) -- see CMenuConfigPacket
-    ref<uint8>(0xF4) = 0x18 | PChar->menuConfigFlags.byte1 | (PChar->nameflags.flags & static_cast<uint32>(FLAG_INVITE) ? static_cast<uint32>(NFLAG_INVITE) : 0);
-    ref<uint8>(0xF5) = PChar->menuConfigFlags.byte2 | (PChar->m_hasAutoTarget ? 0 : NFLAG_AUTOTARGET >> 8);
-    ref<uint8>(0xF6) = PChar->menuConfigFlags.byte3;
-    ref<uint8>(0xF7) = PChar->menuConfigFlags.byte4;
-
-    // ChatFilterFlags (F8-FF)
-    ref<uint64>(0xF8) = PChar->chatFilterFlags;
+    //std::memcpy(&data[0xF4], &PChar->playerConfig, sizeof(SAVE_CONF));
 
     ref<uint8>(0x100) = 0x01; // observed: RoZ = 3, CoP = 5, ToAU = 9, WoTG = 11, SoA/original areas = 1
 
