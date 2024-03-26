@@ -63,6 +63,15 @@ extern sol::state lua;
 #include "lua_trigger_area.h"
 #include "lua_zone.h"
 
+enum class SendToDBoxReturnCode : uint8
+{
+    SUCCESS                       = 0,
+    SUCCESS_LIMITED_TO_STACK_SIZE = 1,
+    PLAYER_NOT_FOUND              = 2,
+    ITEM_NOT_FOUND                = 3,
+    QUERY_ERROR                   = 4
+};
+
 class CAbility;
 class CSpell;
 class CBaseEntity;
@@ -354,6 +363,7 @@ namespace luautils
 
     // Retrive the first itemId that matches a name
     uint16 GetItemIDByName(std::string const& name);
+    auto   SendItemToDeliveryBox(std::string const& playerName, uint16 itemId, uint32 quantity, std::string senderText) -> SendToDBoxReturnCode;
 
     std::optional<CLuaBaseEntity> GenerateDynamicEntity(CZone* PZone, CInstance* PInstance, sol::table table);
 
