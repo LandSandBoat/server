@@ -11263,7 +11263,7 @@ INSERT INTO `item_basic` VALUES (13856,0,'wizards_petasos','wizards_petasos',1,6
 INSERT INTO `item_basic` VALUES (13857,0,'choral_roundlet','choral_roundlet',1,63552,@NONE,1,0);
 INSERT INTO `item_basic` VALUES (13858,0,'prism_headband','prism_headband',1,2080,@HEAD,0,3910);
 INSERT INTO `item_basic` VALUES (13859,0,'coral_visor_+1','coral_visor_+1',1,2080,@HEAD,0,4596);
-INSERT INTO `item_basic` VALUES (13860,0,'dragon_mask_+1','dragon_mask_+1',1,2080,@HEAD,0,8000);
+INSERT INTO `item_basic` VALUES (13860,0,'dragon_mask_+1','dragon_mask_+1',1,2080,@HEAD,0,8120);
 INSERT INTO `item_basic` VALUES (13861,0,'feral_helm','feral_helm',1,2080,@HEAD,0,3794);
 INSERT INTO `item_basic` VALUES (13862,0,'torama_mask','torama_mask',1,2080,@HEAD,0,4284);
 INSERT INTO `item_basic` VALUES (13863,0,'darksteel_cap_+1','darksteel_cap_+1',1,2080,@HEAD,0,8971);
@@ -11634,7 +11634,7 @@ INSERT INTO `item_basic` VALUES (14227,0,'drachen_brais','drachen_brais',1,63552
 INSERT INTO `item_basic` VALUES (14228,0,'evokers_spats','evokers_spats',1,63552,@NONE,1,0);
 INSERT INTO `item_basic` VALUES (14229,0,'darksteel_cuisses_+1','dst._cuisses_+1',1,2080,@LEGS,0,8125);
 INSERT INTO `item_basic` VALUES (14230,0,'coral_cuisses_+1','coral_cuisses_+1',1,2080,@LEGS,0,7810);
-INSERT INTO `item_basic` VALUES (14231,0,'dragon_cuisses_+1','dragon_cuisses_+1',1,2080,@LEGS,0,9900);
+INSERT INTO `item_basic` VALUES (14231,0,'dragon_cuisses_+1','dragon_cuisses_+1',1,2080,@LEGS,0,9762);
 INSERT INTO `item_basic` VALUES (14232,0,'feral_trousers','feral_trousers',1,2080,@LEGS,0,6150);
 INSERT INTO `item_basic` VALUES (14233,0,'torama_trousers','torama_trousers',1,2080,@LEGS,0,6833);
 INSERT INTO `item_basic` VALUES (14234,0,'darksteel_subligar_+1','dst._subligar_+1',1,2080,@LEGS,0,7931);
