@@ -792,6 +792,16 @@ void CStatusEffectContainer::DelStatusEffectsByFlag(uint32 flag, bool silent)
     {
         if (PStatusEffect->HasEffectFlag(flag))
         {
+            // If this is an NM/Mob Nightmare sleep, it can be removed explictly by a cure
+            // see mobskills/nightmare.lua for full explanation
+            if (
+                flag & EFFECTFLAG_DAMAGE &&
+                PStatusEffect->GetStatusID() == EFFECT_SLEEP &&
+                PStatusEffect->GetTier() > 1)
+            {
+                continue;
+            }
+
             RemoveStatusEffect(PStatusEffect, silent);
         }
     }
@@ -1929,7 +1939,16 @@ void CStatusEffectContainer::TickRegen(time_point tick)
             {
                 DelStatusEffectSilent(EFFECT_HEALING);
                 m_POwner->takeDamage(damage);
-                WakeUp();
+
+                // If target has nightmare sleep. Don't break sleep from REGEN_DOWN damage
+                // see mobskills/nightmare.lua for full explanation
+                if (
+                    !(
+                        m_POwner->StatusEffectContainer->GetStatusEffect(EFFECT_SLEEP) &&
+                        m_POwner->StatusEffectContainer->GetStatusEffect(EFFECT_SLEEP)->GetTier() > 0))
+                {
+                    WakeUp();
+                }
             }
         }
 
