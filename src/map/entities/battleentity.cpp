@@ -25,6 +25,7 @@
 #include "battleentity.h"
 
 #include "ai/ai_container.h"
+#include "ai/controllers/mob_controller.h"
 #include "ai/states/attack_state.h"
 #include "ai/states/death_state.h"
 #include "ai/states/despawn_state.h"
@@ -1819,6 +1820,12 @@ void CBattleEntity::OnMobSkillFinished(CMobSkillState& state, action_t& action)
 
     if (auto* PMob = dynamic_cast<CMobEntity*>(this))
     {
+        auto mobController = static_cast<CMobController*>(PMob->PAI->GetController());
+        if (mobController)
+        {
+            mobController->TapLastMobSkillTime();
+        }
+
         // store the skill used
         PMob->m_UsedSkillIds[PSkill->getID()] = GetMLevel();
     }
