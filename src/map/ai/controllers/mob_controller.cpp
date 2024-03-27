@@ -599,6 +599,7 @@ void CMobController::DoCombatTick(time_point tick)
         }
         else if (m_Tick >= m_LastMobSkillTime && xirand::GetRandomNumber(1, 10000) <= PMob->TPUseChance() && MobSkill())
         {
+            TapLastMobSkillTime(); // in case mobskill is interrupted
             return;
         }
 
@@ -1202,6 +1203,13 @@ void CMobController::TapDeaggroTime()
 void CMobController::TapDeclaimTime()
 {
     m_DeclaimTime = m_Tick;
+}
+
+// To ensure mobskills don't get spammed with high regain/low hp.
+// This affects the automatic mobskill selection to give 0% chance until after this time
+void CMobController::TapLastMobSkillTime()
+{
+    m_LastMobSkillTime = m_Tick + std::chrono::milliseconds(xirand::GetRandomNumber(5000));
 }
 
 bool CMobController::Cast(uint16 targid, SpellID spellid)
