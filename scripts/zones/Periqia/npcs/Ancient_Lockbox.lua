@@ -26,6 +26,14 @@ entity.onTrigger = function(player, npc)
                 { itemid = xi.item.APPRAISAL_AXE,     droprate = 200 },
             },
         },
+
+        [xi.assault.mission.SHOOTING_DOWN_THE_BARON] =
+        {
+            {
+                { itemid = xi.item.UNAPPRAISED_BOW,     droprate = 600 },
+                { itemid = xi.item.UNAPPRAISED_BOX,     droprate = 400 },
+            },
+        },
     }
 
     local regItem =
@@ -64,6 +72,26 @@ entity.onTrigger = function(player, npc)
             {
                 { itemid = xi.item.HI_RERAISER, droprate = 500 },
                 { itemid = 0,                    droprate = 500 },
+            },
+        },
+
+        [xi.assault.mission.SHOOTING_DOWN_THE_BARON] =
+        {
+            {
+                { itemid = xi.item.HI_POTION_P2,   droprate = 850 },
+                { itemid = 0,                       droprate = 150 },
+            },
+            {
+                { itemid = xi.item.HI_POTION_P3,   droprate = 50 },
+                { itemid = 0,                       droprate = 950 },
+            },
+            {
+                { itemid = xi.item.HI_POTION_TANK, droprate = 400 },
+                { itemid = 0,                       droprate = 600 },
+            },
+            {
+                { itemid = xi.item.HI_RERAISER,    droprate = 200 },
+                { itemid = 0,                       droprate = 800 },
             },
         },
     }
