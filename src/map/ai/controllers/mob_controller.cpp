@@ -498,6 +498,15 @@ bool CMobController::CanCastSpells()
         }
     }
 
+    // worms only cast if target is outside of melee range
+    if (PMob->m_Family == 258)
+    {
+        if (PTarget && distance(PMob->loc.p, PTarget->loc.p) <= PMob->GetMeleeRange())
+        {
+            return false;
+        }
+    }
+
     return IsMagicCastingEnabled();
 }
 
@@ -960,7 +969,7 @@ void CMobController::DoRoamTick(time_point tick)
                                                                             (uint8)PMob->getMobMod(MOBMOD_ROAM_TURNS), PMob->m_roamFlags))
                 {
                     // #TODO: #AIToScript (event probably)
-                    if (PMob->m_roamFlags & ROAMFLAG_WORM)
+                    if (PMob->m_roamFlags & ROAMFLAG_WORM && !PMob->PAI->IsCurrentState<CMagicState>())
                     {
                         // move down
                         PMob->animationsub = 1;
