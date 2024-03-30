@@ -328,7 +328,7 @@ void data_session::read_func()
                                 FROM accounts_sessions \
                                 WHERE accid = %u AND client_port != '0';",
                                 session.accountID) != SQL_ERROR &&
-                    sql->NumRows() != 0)
+                    _sql->NumRows() != 0)
                 {
                     _sql->NextRow();
                     hasActiveSession = true;

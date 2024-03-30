@@ -111,7 +111,7 @@ endif()
 CPMAddPackage(
     NAME efsw
     GITHUB_REPOSITORY SpartanJ/efsw
-    GIT_TAG 74ca09bff89bc8de1f7b8bf3faaa6275ce23b4c5
+    GIT_TAG 341934765471e4074e90bb5205ff4a65c16499c6
     OPTIONS
         "VERBOSE OFF"
         "NO_ATOMICS OFF"
