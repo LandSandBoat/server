@@ -2226,7 +2226,7 @@ void SmallPacket0x03D(map_session_data_t* const PSession, CCharEntity* const PCh
     char blacklistedName[PacketNameLength] = {};
     memcpy(&blacklistedName, data[0x08], PacketNameLength - 1);
 
-    std::string name = blacklistedName;
+    std::string name = sql->EscapeString(blacklistedName);
     uint8       cmd  = data.ref<uint8>(0x18);
 
     // Attempt to locate the character by their name
@@ -2554,7 +2554,14 @@ void SmallPacket0x04D(map_session_data_t* const PSession, CCharEntity* const PCh
 
             if (PChar->UContainer->IsSlotEmpty(slotID))
             {
-                int32 ret = sql->Query("SELECT charid, accid FROM chars WHERE charname = '%s' LIMIT 1;", str(data[0x10]));
+                std::string charName = str(data[0x10]);
+                if (!std::regex_match(charName, std::regex("^([A-Z]{1}[a-z]{2,14})$")))
+                {
+                    ShowError(fmt::format("Suspicious dbox char query from '{}', query = '{}'", PChar->getName(), charName));
+                }
+                charName  = sql->EscapeString(charName);
+                int32 ret = sql->Query("SELECT charid, accid FROM chars WHERE charname = '%s' LIMIT 1;", charName);
+
                 if (ret != SQL_ERROR && sql->NumRows() > 0 && sql->NextRow() == SQL_SUCCESS)
                 {
                     uint32 charid = sql->GetUIntData(0);
@@ -2583,9 +2590,7 @@ void SmallPacket0x04D(map_session_data_t* const PSession, CCharEntity* const PCh
                         return;
                     }
 
-                    char receiver[PacketNameLength] = {};
-                    memcpy(&receiver, data[0x10], PacketNameLength - 1);
-                    PUBoxItem->setReceiver(receiver);
+                    PUBoxItem->setReceiver(charName);
                     PUBoxItem->setSender(PChar->getName());
                     PUBoxItem->setQuantity(quantity);
                     PUBoxItem->setSlotID(PItem->getSlotID());
@@ -2597,7 +2602,7 @@ void SmallPacket0x04D(map_session_data_t* const PSession, CCharEntity* const PCh
                     ret = sql->Query(
                         "INSERT INTO delivery_box(charid, charname, box, slot, itemid, itemsubid, quantity, extra, senderid, sender) VALUES(%u, "
                         "'%s', 2, %u, %u, %u, %u, '%s', %u, '%s'); ",
-                        PChar->id, PChar->getName(), slotID, PItem->getID(), PItem->getSubID(), quantity, extra, charid, str(data[0x10]));
+                        PChar->id, PChar->getName(), slotID, PItem->getID(), PItem->getSubID(), quantity, extra, charid, charName);
 
                     if (ret != SQL_ERROR && sql->AffectedRows() == 1 && charutils::UpdateItem(PChar, LOC_INVENTORY, invslot, -(int32)quantity))
                     {
@@ -3120,7 +3125,9 @@ void SmallPacket0x04D(map_session_data_t* const PSession, CCharEntity* const PCh
                 return;
             }
 
-            int32 ret = sql->Query("SELECT accid FROM chars WHERE charname = '%s' LIMIT 1", str(data[0x10]));
+            std::string charName = sql->EscapeString(str(data[0x10]));
+
+            int32 ret = sql->Query("SELECT accid FROM chars WHERE charname = '%s' LIMIT 1", charName);
 
             if (ret != SQL_ERROR && sql->NumRows() > 0 && sql->NextRow() == SQL_SUCCESS)
             {
@@ -4128,6 +4135,7 @@ void SmallPacket0x060(map_session_data_t* const PSession, CCharEntity* const PCh
 {
     TracyZoneScoped;
 
+    // TODO: can we feed this through sql->EscapeString?
     std::string updateString = std::string((char*)data[12]);
     luautils::OnEventUpdate(PChar, updateString);
 
@@ -4528,7 +4536,7 @@ void SmallPacket0x071(map_session_data_t* const PSession, CCharEntity* const PCh
                 char charName[PacketNameLength] = {};
                 memcpy(&charName, data[0x0C], PacketNameLength - 1);
 
-                CCharEntity* PVictim = dynamic_cast<CCharEntity*>(PChar->PParty->GetMemberByName(charName));
+                CCharEntity* PVictim = dynamic_cast<CCharEntity*>(PChar->PParty->GetMemberByName(sql->EscapeString(charName)));
                 if (PVictim)
                 {
                     ShowDebug("%s is trying to kick %s from party", PChar->getName(), PVictim->getName());
@@ -4566,7 +4574,7 @@ void SmallPacket0x071(map_session_data_t* const PSession, CCharEntity* const PCh
                         if (sql->Query("DELETE FROM accounts_parties WHERE partyid = %u AND charid = %u;", PChar->id, id) == SQL_SUCCESS &&
                             sql->AffectedRows())
                         {
-                            ShowDebug("%s has removed %s from party", PChar->getName(), str(data[0x0C]));
+                            ShowDebug("%s has removed %s from party", PChar->getName(), sql->EscapeString(str(data[0x0C])));
 
                             uint8 reloadData[4]{};
                             if (PChar->PParty && PChar->PParty->m_PAlliance)
@@ -4628,7 +4636,7 @@ void SmallPacket0x071(map_session_data_t* const PSession, CCharEntity* const PCh
                     char charName[PacketNameLength] = {};
                     memcpy(&charName, data[0x0C], PacketNameLength - 1);
 
-                    PVictim = dynamic_cast<CCharEntity*>(PChar->PParty->m_PAlliance->partyList[i]->GetMemberByName(charName));
+                    PVictim = dynamic_cast<CCharEntity*>(PChar->PParty->m_PAlliance->partyList[i]->GetMemberByName(sql->EscapeString(charName)));
                     if (PVictim && PVictim->PParty && PVictim->PParty->m_PAlliance) // victim is in this party
                     {
                         ShowDebug("%s is trying to kick %s party from alliance", PChar->getName(), PVictim->getName());
@@ -4670,7 +4678,8 @@ void SmallPacket0x071(map_session_data_t* const PSession, CCharEntity* const PCh
                                            PARTY_SECOND | PARTY_THIRD, partyid) == SQL_SUCCESS &&
                                 sql->AffectedRows())
                             {
-                                ShowDebug("%s has removed %s party from alliance", PChar->getName(), str(data[0x0C]));
+                                ShowDebug("%s has removed %s party from alliance", PChar->getName(), victimName);
+
                                 // notify party they were removed
                                 uint8 removeData[4]{};
                                 ref<uint32>(removeData, 0) = partyid;
@@ -4846,8 +4855,10 @@ void SmallPacket0x077(map_session_data_t* const PSession, CCharEntity* const PCh
                 char memberName[PacketNameLength] = {};
                 memcpy(&memberName, data[0x04], PacketNameLength - 1);
 
-                ShowDebug(fmt::format("(Party)Altering permissions of {} to {}", str(memberName), str(data[0x15])));
-                PChar->PParty->AssignPartyRole(memberName, data.ref<uint8>(0x15));
+                std::string memberNameString = sql->EscapeString(memberName);
+
+                ShowDebug(fmt::format("(Party)Altering permissions of {} to {}", memberNameString, str(data[0x15])));
+                PChar->PParty->AssignPartyRole(memberNameString, data.ref<uint8>(0x15));
             }
         }
         break;
@@ -4885,8 +4896,10 @@ void SmallPacket0x077(map_session_data_t* const PSession, CCharEntity* const PCh
                 char memberName[PacketNameLength] = {};
                 memcpy(&memberName, data[0x04], PacketNameLength - 1);
 
-                ShowDebug(fmt::format("(Alliance)Changing leader to {}", str(memberName)));
-                PChar->PParty->m_PAlliance->assignAllianceLeader(str(data[0x04]).c_str());
+                std::string memberNameString = sql->EscapeString(memberName);
+
+                ShowDebug(fmt::format("(Alliance)Changing leader to {}", memberNameString));
+                PChar->PParty->m_PAlliance->assignAllianceLeader(memberNameString.c_str());
 
                 uint8 allianceData[4]{};
                 ref<uint32>(allianceData, 0) = PChar->PParty->m_PAlliance->m_AllianceID;
@@ -5959,7 +5972,7 @@ void SmallPacket0x0C4(map_session_data_t* const PSession, CCharEntity* const PCh
                 const char* Query =
                     "UPDATE char_inventory SET signature = '%s', extra = '%s', itemId = 513 WHERE charid = %u AND location = 0 AND slot = %u LIMIT 1";
 
-                if (sql->Query(Query, DecodedName, extra, PChar->id, SlotID) != SQL_ERROR && sql->AffectedRows() != 0)
+                if (sql->Query(Query, sql->EscapeString(DecodedName), extra, PChar->id, SlotID) != SQL_ERROR && sql->AffectedRows() != 0)
                 {
                     PChar->pushPacket(new CInventoryItemPacket(PItemLinkshell, LocationID, SlotID));
                 }

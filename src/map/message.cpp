@@ -113,7 +113,7 @@ namespace message
                 char characterName[PacketNameLength] = {};
                 memcpy(&characterName, reinterpret_cast<char*>(extra.data()) + 4, PacketNameLength - 1);
 
-                CCharEntity* PChar = zoneutils::GetCharByName(characterName);
+                CCharEntity* PChar = zoneutils::GetCharByName(sql->EscapeString(characterName));
                 if (PChar && PChar->status != STATUS_TYPE::DISAPPEAR && !jailutils::InPrison(PChar))
                 {
                     std::unique_ptr<CBasicPacket> newPacket = std::make_unique<CBasicPacket>();
@@ -514,7 +514,7 @@ namespace message
                 {
                     char memberName[PacketNameLength] = {};
                     memcpy(&memberName, reinterpret_cast<char*>(extra.data()) + 4, PacketNameLength - 1);
-                    PLinkshell->ChangeMemberRank(memberName, ref<uint8>((uint8*)extra.data(), 28));
+                    PLinkshell->ChangeMemberRank(sql->EscapeString(memberName), ref<uint8>((uint8*)extra.data(), 28));
                 }
                 break;
             }
@@ -522,7 +522,8 @@ namespace message
             {
                 char memberName[PacketNameLength] = {};
                 memcpy(&memberName, reinterpret_cast<char*>(extra.data()) + 4, PacketNameLength - 1);
-                CCharEntity* PChar = zoneutils::GetCharByName(memberName);
+
+                CCharEntity* PChar = zoneutils::GetCharByName(sql->EscapeString(memberName));
 
                 if (PChar && PChar->PLinkshell1 && PChar->PLinkshell1->getID() == ref<uint32>((uint8*)extra.data(), 24))
                 {
@@ -530,7 +531,7 @@ namespace message
                     CItemLinkshell* targetLS   = (CItemLinkshell*)PChar->getEquip(SLOT_LINK1);
                     if (targetLS && (kickerRank == LSTYPE_LINKSHELL || (kickerRank == LSTYPE_PEARLSACK && targetLS->GetLSType() == LSTYPE_LINKPEARL)))
                     {
-                        PChar->PLinkshell1->RemoveMemberByName(memberName,
+                        PChar->PLinkshell1->RemoveMemberByName(PChar->getName(),
                                                                (targetLS->GetLSType() == (uint8)LSTYPE_LINKSHELL ? (uint8)LSTYPE_PEARLSACK : kickerRank));
                     }
                 }
@@ -540,7 +541,7 @@ namespace message
                     CItemLinkshell* targetLS   = (CItemLinkshell*)PChar->getEquip(SLOT_LINK2);
                     if (targetLS && (kickerRank == LSTYPE_LINKSHELL || (kickerRank == LSTYPE_PEARLSACK && targetLS->GetLSType() == LSTYPE_LINKPEARL)))
                     {
-                        PChar->PLinkshell2->RemoveMemberByName(memberName, kickerRank);
+                        PChar->PLinkshell2->RemoveMemberByName(PChar->getName(), kickerRank);
                     }
                 }
                 break;
