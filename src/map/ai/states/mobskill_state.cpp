@@ -21,6 +21,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 
 #include "mobskill_state.h"
 #include "ai/ai_container.h"
+#include "ai/controllers/mob_controller.h"
 #include "enmity_container.h"
 #include "entities/battleentity.h"
 #include "entities/mobentity.h"
@@ -75,6 +76,12 @@ CMobSkillState::CMobSkillState(CBattleEntity* PEntity, uint16 targid, uint16 wsi
         m_PEntity->loc.zone->PushPacket(m_PEntity, CHAR_INRANGE_SELF, new CActionPacket(action));
     }
     m_PEntity->PAI->EventHandler.triggerListener("WEAPONSKILL_STATE_ENTER", CLuaBaseEntity(m_PEntity), m_PSkill->getID());
+
+    auto mobController = dynamic_cast<CMobController*>(m_PEntity->PAI->GetController());
+    if (mobController)
+    {
+        mobController->TapLastMobSkillTime();
+    }
     SpendCost();
 }
 
@@ -126,6 +133,11 @@ bool CMobSkillState::Update(time_point tick)
             static_cast<CMobEntity*>(PTarget)->PEnmityContainer->UpdateEnmity(m_PEntity, 0, 0);
         }
         m_PEntity->PAI->EventHandler.triggerListener("WEAPONSKILL_STATE_EXIT", CLuaBaseEntity(m_PEntity), m_PSkill->getID());
+        auto mobController = dynamic_cast<CMobController*>(m_PEntity->PAI->GetController());
+        if (mobController)
+        {
+            mobController->TapLastMobSkillTime();
+        }
 
         if (m_PEntity->objtype == TYPE_PET && m_PEntity->PMaster && m_PEntity->PMaster->objtype == TYPE_PC && (m_PSkill->isBloodPactRage() || m_PSkill->isBloodPactWard()))
         {

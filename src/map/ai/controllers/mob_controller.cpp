@@ -1202,6 +1202,13 @@ void CMobController::TapDeclaimTime()
     m_DeclaimTime = m_Tick;
 }
 
+// To ensure mobskills don't get spammed with high regain/low hp.
+// This affects the automatic mobskill selection to give 0% chance until after this time
+void CMobController::TapLastMobSkillTime()
+{
+    m_LastMobSkillTime = m_Tick + std::chrono::milliseconds(PMob->getMobMod(MOBMOD_MOBSKILL_DELAY));
+}
+
 bool CMobController::Cast(uint16 targid, SpellID spellid)
 {
     TracyZoneScoped;

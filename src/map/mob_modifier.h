@@ -106,6 +106,7 @@ enum MOBMODIFIER : int
     MOBMOD_CAN_PARRY              = 75, // Check if a mob is allowed to have parry rank (Rank Value 1-5)
     MOBMOD_NO_WIDESCAN            = 76, // Disables widescan for a specific mob
     MOBMOD_TRUST_DISTANCE         = 77, // TRUSTS ONLY: Set movement type/distance. See trust.lua for details.
+    MOBMOD_MOBSKILL_DELAY         = 78, // Delay (in ms) before using a mobskill after using a mobskill.
 };
 
 #endif
