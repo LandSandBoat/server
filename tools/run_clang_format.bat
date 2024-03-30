@@ -1,5 +1,5 @@
 REM Run from repo root
-REM Uses clang-format-14
+REM Uses clang-format-15
 
 for /r %cd%\src\ %%f in (*.cpp) do clang-format -style=file -i %%f
 for /r %cd%\src\ %%f in (*.h) do clang-format -style=file -i %%f
