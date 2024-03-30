@@ -189,7 +189,18 @@ namespace db
     }
 
     template <typename T>
-    void extractBlob(std::unique_ptr<sql::ResultSet>& rset, std::string const& blobKey, T& destination)
+    std::string encodeToBlob(T& source)
+    {
+        TracyZoneScoped;
+
+        std::string blobString;
+        blobString.resize(sizeof(T));
+        std::memcpy(&blobString[0], &source, sizeof(T));
+        return blobString;
+    }
+
+    template <typename T>
+    void extractFromBlob(std::unique_ptr<sql::ResultSet>& rset, std::string const& blobKey, T& destination)
     {
         TracyZoneScoped;
 

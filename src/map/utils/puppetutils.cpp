@@ -45,7 +45,7 @@ namespace puppetutils
         auto rset = db::preparedStmt(Query, PChar->id);
         if (rset && rset->rowsCount() && rset->next())
         {
-            db::extractBlob(rset, "unlocked_attachments", PChar->m_unlockedAttachments);
+            db::extractFromBlob(rset, "unlocked_attachments", PChar->m_unlockedAttachments);
 
             if (PChar->PAutomaton != nullptr)
             {
@@ -70,7 +70,7 @@ namespace puppetutils
 
                 PChar->PAutomaton->name = rset->getString("name");
                 automaton_equip_t tempEquip;
-                db::extractBlob(rset, "equipped_attachments", tempEquip);
+                db::extractFromBlob(rset, "equipped_attachments", tempEquip);
 
                 // If any of this happens then the Automaton failed to load properly and should just reset (Should only occur with older characters or if DB is
                 // missing)

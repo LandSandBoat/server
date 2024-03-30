@@ -24,6 +24,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "common/async.h"
 #include "common/blowfish.h"
 #include "common/console_service.h"
+#include "common/database.h"
 #include "common/logging.h"
 #include "common/md52.h"
 #include "common/timer.h"
@@ -690,7 +691,7 @@ int32 recv_parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_da
             }
             else
             {
-                db::extractBlob(rset, "session_key", map_session_data->blowfish.key);
+                db::extractFromBlob(rset, "session_key", map_session_data->blowfish.key);
             }
 
             map_session_data->PChar = charutils::LoadChar(CharID);

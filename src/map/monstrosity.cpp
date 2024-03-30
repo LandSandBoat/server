@@ -190,10 +190,10 @@ void monstrosity::ReadMonstrosityData(CCharEntity* PChar)
         data->NamePrefix2 = static_cast<uint8>(rset->getUInt("current_monstrosity_name_prefix_2"));
         data->CurrentExp  = static_cast<uint32>(rset->getUInt("current_exp"));
 
-        db::extractBlob(rset, "equip", data->EquippedInstincts);
-        db::extractBlob(rset, "levels", data->levels);
-        db::extractBlob(rset, "instincts", data->instincts);
-        db::extractBlob(rset, "variants", data->variants);
+        db::extractFromBlob(rset, "equip", data->EquippedInstincts);
+        db::extractFromBlob(rset, "levels", data->levels);
+        db::extractFromBlob(rset, "instincts", data->instincts);
+        db::extractFromBlob(rset, "variants", data->variants);
 
         data->Belligerency = static_cast<bool>(rset->getUInt("belligerency"));
 

@@ -345,7 +345,7 @@ namespace blueutils
             auto rset = db::preparedStmt(Query, PChar->id);
             if (rset && rset->rowsCount() && rset->next())
             {
-                db::extractBlob(rset, "set_blue_spells", PChar->m_SetBlueSpells);
+                db::extractFromBlob(rset, "set_blue_spells", PChar->m_SetBlueSpells);
             }
 
             for (unsigned char& m_SetBlueSpell : PChar->m_SetBlueSpells)

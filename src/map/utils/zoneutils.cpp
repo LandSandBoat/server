@@ -336,7 +336,7 @@ namespace zoneutils
                                 PNpc->status  = static_cast<STATUS_TYPE>(rset->getInt("status"));
                                 PNpc->m_flags = rset->getInt("entityFlags");
 
-                                db::extractBlob(rset, "look", PNpc->look);
+                                db::extractFromBlob(rset, "look", PNpc->look);
 
                                 PNpc->name_prefix = (uint8)rset->getInt("name_prefix");
                                 PNpc->widescan    = (uint8)rset->getInt("widescan");

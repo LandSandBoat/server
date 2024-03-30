@@ -414,16 +414,16 @@ namespace charutils
 
             PChar->profile.nation = (uint8)rset->getInt("nation");
 
-            db::extractBlob(rset, "quests", PChar->m_questLog);
-            db::extractBlob(rset, "keyitems", PChar->keys);
-            db::extractBlob(rset, "abilities", PChar->m_LearnedAbilities);
-            db::extractBlob(rset, "weaponskills", PChar->m_LearnedWeaponskills);
-            db::extractBlob(rset, "titles", PChar->m_TitleList);
-            db::extractBlob(rset, "zones", PChar->m_ZonesList);
-            db::extractBlob(rset, "missions", PChar->m_missionLog);
-            db::extractBlob(rset, "assault", PChar->m_assaultLog);
-            db::extractBlob(rset, "campaign", PChar->m_campaignLog);
-            db::extractBlob(rset, "eminence", PChar->m_eminenceLog);
+            db::extractFromBlob(rset, "quests", PChar->m_questLog);
+            db::extractFromBlob(rset, "keyitems", PChar->keys);
+            db::extractFromBlob(rset, "abilities", PChar->m_LearnedAbilities);
+            db::extractFromBlob(rset, "weaponskills", PChar->m_LearnedWeaponskills);
+            db::extractFromBlob(rset, "titles", PChar->m_TitleList);
+            db::extractFromBlob(rset, "zones", PChar->m_ZonesList);
+            db::extractFromBlob(rset, "missions", PChar->m_missionLog);
+            db::extractFromBlob(rset, "assault", PChar->m_assaultLog);
+            db::extractFromBlob(rset, "campaign", PChar->m_campaignLog);
+            db::extractFromBlob(rset, "eminence", PChar->m_eminenceLog);
 
             PChar->SetPlayTime(rset->getUInt("playtime"));
             PChar->profile.campaign_allegiance = (uint8)rset->getInt("campaign_allegiance");
@@ -675,7 +675,7 @@ namespace charutils
             // TODO:
             /*
             std::array<uint8, 512> bazaarMessageArray;
-            db::extractBlob(rset, "bazaar_message", bazaarMessageArray);
+            db::extractFromBlob(rset, "bazaar_message", bazaarMessageArray);
             const char* bazaarMessageStr = reinterpret_cast<const char*>(bazaarMessageArray.data());
             if (bazaarMessageStr != nullptr)
             {
@@ -788,13 +788,13 @@ namespace charutils
             PChar->teleport.campaignBastok = rset->getUInt("campaign_bastok");
             PChar->teleport.campaignWindy  = rset->getUInt("campaign_windy");
 
-            db::extractBlob(rset, "homepoints", PChar->teleport.homepoint);
-            db::extractBlob(rset, "survivals", PChar->teleport.survival);
-            db::extractBlob(rset, "abyssea_conflux", PChar->teleport.abysseaConflux);
-            db::extractBlob(rset, "waypoints", PChar->teleport.waypoints);
-            db::extractBlob(rset, "eschan_portals", PChar->teleport.eschanPortal);
-            db::extractBlob(rset, "claimed_deeds", PChar->m_claimedDeeds);
-            db::extractBlob(rset, "unique_event", PChar->m_uniqueEvents);
+            db::extractFromBlob(rset, "homepoints", PChar->teleport.homepoint);
+            db::extractFromBlob(rset, "survivals", PChar->teleport.survival);
+            db::extractFromBlob(rset, "abyssea_conflux", PChar->teleport.abysseaConflux);
+            db::extractFromBlob(rset, "waypoints", PChar->teleport.waypoints);
+            db::extractFromBlob(rset, "eschan_portals", PChar->teleport.eschanPortal);
+            db::extractFromBlob(rset, "claimed_deeds", PChar->m_claimedDeeds);
+            db::extractFromBlob(rset, "unique_event", PChar->m_uniqueEvents);
         }
 
         // TODO: Remove raw new's
@@ -924,7 +924,7 @@ namespace charutils
                     PItem->setQuantity(rset->getUInt("quantity"));
                     PItem->setCharPrice(rset->getUInt("bazaar"));
 
-                    db::extractBlob(rset, "extra", PItem->m_extra);
+                    db::extractFromBlob(rset, "extra", PItem->m_extra);
 
                     if (PItem->getCharPrice() != 0)
                     {
