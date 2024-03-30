@@ -308,6 +308,8 @@ int32 SqlConnection::QueryStr(const char* query)
         ShowError(query);
     }
 
+    // False positive, it is detecting ";" as a macro
+    // cppcheck-suppress unknownMacro
     DebugSQL(query);
 
     if (self == nullptr)
