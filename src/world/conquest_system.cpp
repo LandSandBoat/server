@@ -192,8 +192,7 @@ bool ConquestSystem::updateInfluencePoints(int points, unsigned int nation, REGI
         std::string query = "SELECT sandoria_influence, bastok_influence, windurst_influence, beastmen_influence FROM conquest_system WHERE region_id = %d;";
 
         auto rset = db::query(fmt::sprintf(query.c_str(), static_cast<uint8>(region)));
-
-        if (!rset && rset->rowsCount())
+        if (!rset || rset->rowsCount() == 0 || !rset->next())
         {
             return false;
         }
@@ -299,7 +298,7 @@ auto ConquestSystem::getRegionControls() -> std::vector<region_control_t> const
     auto rset = db::query(query);
 
     std::vector<region_control_t> controllers;
-    if (!rset && rset->rowsCount())
+    if (rset && rset->rowsCount())
     {
         while (rset->next())
         {
