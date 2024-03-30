@@ -2,8 +2,8 @@ if(NOT WIN32)
     message(STATUS "Building MariaDB Connector/C++ from source")
     CPMAddPackage(
         NAME mariadb-connector-cpp
-        GITHUB_REPOSITORY zach2good/mariadb-connector-cpp
-        GIT_TAG 1e4b414b49fc8e346fab4b1718aaaf2eadacde2e
+        GITHUB_REPOSITORY mariadb-corporation/mariadb-connector-cpp
+        GIT_TAG b09555de99ed4b1d054a88ff85acbae996bce1d1
         DOWNLOAD_ONLY YES
     )
     if(mariadb-connector-cpp_ADDED)
