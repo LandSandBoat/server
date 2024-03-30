@@ -13286,10 +13286,10 @@ void CLuaBaseEntity::setStatDebilitation(uint16 statDebil)
  *  Function: getStat()
  *  Purpose : Returns a particular stat for an Entity
  *  Example : caster:getStat(xi.mod.INT)
- *  Notes   :
+ *  Notes   : weaponSlot param is used only for ATT (optional and defaults to SLOT_MAIN)
  ************************************************************************/
 
-uint16 CLuaBaseEntity::getStat(uint16 statId)
+uint16 CLuaBaseEntity::getStat(uint16 statId, sol::variadic_args va)
 {
     if (m_PBaseEntity->objtype == TYPE_NPC)
     {
@@ -13324,8 +13324,11 @@ uint16 CLuaBaseEntity::getStat(uint16 statId)
             value = PEntity->CHR();
             break;
         case Mod::ATT:
-            value = PEntity->ATT();
-            break;
+        {
+            SLOTTYPE weaponSlot = va[0].is<uint32>() ? va[0].as<SLOTTYPE>() : SLOTTYPE::SLOT_MAIN;
+            value               = PEntity->ATT(weaponSlot);
+        }
+        break;
         case Mod::DEF:
             value = PEntity->DEF();
             break;

@@ -555,7 +555,7 @@ public:
     uint16 MND();
     uint16 CHR();
     uint16 DEF();
-    uint16 ATT();
+    uint16 ATT(SLOTTYPE slot);
     uint16 ACC(uint8 attackNumber, uint8 offsetAccuracy);
     uint16 EVA();
     uint16 RATT(uint8 skill, uint16 bonusSkill = 0);

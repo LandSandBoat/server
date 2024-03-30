@@ -325,14 +325,14 @@ end
 
 -- WARNING: This function is used in src/utils/battleutils.cpp "GetDamageRatio" function.
 -- If you update this parameters, update them there aswell.
-xi.combat.physical.calculateMeleePDIF = function(actor, target, weaponType, wsAttackMod, isCritical, applyLevelCorrection, tpIgnoresDefense, tpFactor, isWeaponskill)
+xi.combat.physical.calculateMeleePDIF = function(actor, target, weaponType, wsAttackMod, isCritical, applyLevelCorrection, tpIgnoresDefense, tpFactor, isWeaponskill, weaponSlot)
     local pDif = 0
 
     ----------------------------------------
     -- Step 1: Attack / Defense Ratio
     ----------------------------------------
     local baseRatio     = 0
-    local actorAttack   = math.max(1, math.floor(actor:getStat(xi.mod.ATT) * wsAttackMod))
+    local actorAttack   = math.max(1, math.floor(actor:getStat(xi.mod.ATT, weaponSlot) * wsAttackMod))
     local targetDefense = math.max(1, target:getStat(xi.mod.DEF))
 
     -- Actor Weaponskill Specific Attack modifiers.
