@@ -1,7 +1,7 @@
 ﻿/*
 ===========================================================================
 
-  Copyright (c) 2023 LandSandBoat Dev Teams
+  Copyright (c) 2024 LandSandBoat Dev Teams
 
   This program is free software: you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -34,6 +34,7 @@ enum class PreparedStatement
     Search_GetSearchComment,
 };
 
+// @note Everything in database-land is 1-indexed, not 0-indexed.
 // TODO: Rename this namespace from db to sql when migration is complete.
 // mariadb-connector-cpp uses sql namespace for all of its classes, so it
 // will be clearer if we use it too.
@@ -101,9 +102,11 @@ namespace db
         }
     } // namespace detail
 
-    // If called with a PreparedStatement enum the query was prepared ahead of time, so it
-    // will be looked up and executed.
-    // TODO: This isn't thread-safe yet. Use db::query() instead.
+    // @brief Execute a prepared statement with the given arguments.
+    // @param preparedStmt The prepared statement to execute.
+    // @param args The arguments to bind to the prepared statement.
+    // @return A unique pointer to the result set of the query.
+    // @note Everything in database-land is 1-indexed, not 0-indexed.
     template <typename... Args>
     std::unique_ptr<sql::ResultSet> preparedStmt(PreparedStatement preparedStmt, Args&&... args)
     {
@@ -139,8 +142,12 @@ namespace db
         }
     }
 
-    // If called with a string query the query will be lazily prepared/looked up and executed.
-    // TODO: This isn't thread-safe yet. Use db::query() instead.
+    // @brief Execute a prepared statement with the given query string and arguments.
+    // @param query The query string to execute.
+    // @param args The arguments to bind to the prepared statement.
+    // @return A unique pointer to the result set of the query.
+    // @note If the query hasn't been seen before it will generate a prepared statement for it to be used immediately and in the future.
+    // @note Everything in database-land is 1-indexed, not 0-indexed.
     template <typename... Args>
     std::unique_ptr<sql::ResultSet> preparedStmt(std::string const& query, Args&&... args)
     {
@@ -188,6 +195,9 @@ namespace db
         }
     }
 
+    // @brief Encode a struct to a blob string.
+    // @param source The struct to encode.
+    // @return A string containing the encoded struct.
     template <typename T>
     std::string encodeToBlob(T& source)
     {
@@ -199,6 +209,10 @@ namespace db
         return blobString;
     }
 
+    // @brief Extract a struct from a blob string.
+    // @param rset The result set to extract the blob from.
+    // @param blobKey The key of the blob in the result set.
+    // @param destination The struct to extract the blob into.
     template <typename T>
     void extractFromBlob(std::unique_ptr<sql::ResultSet>& rset, std::string const& blobKey, T& destination)
     {
@@ -220,6 +234,9 @@ namespace db
         std::memcpy(&destination, buff, sizeof(T));
     }
 
-    // WARNING: Everything in database-land is 1-indexed, not 0-indexed.
+    // @brief Execute a query with the given query string.
+    // @param query The query string to execute.
+    // @return A unique pointer to the result set of the query.
+    // @note Everything in database-land is 1-indexed, not 0-indexed.
     auto query(std::string_view query) -> std::unique_ptr<sql::ResultSet>;
 } // namespace db
