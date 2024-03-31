@@ -163,10 +163,81 @@ namespace db
     {
         TracyZoneScoped;
 
-        std::string blobString;
-        blobString.resize(sizeof(T));
-        std::memcpy(&blobString[0], &source, sizeof(T));
-        return blobString;
+        char blob[sizeof(T) * 2 + 1];
+        std::memset(blob, 0x00, sizeof(blob));
+
+        // https://mariadb.com/kb/en/mysql_cset_escape_slashes/
+        // https://mariadb.com/kb/en/mysql_cset_escape_slashes_utf8/
+        // https://mariadb.com/kb/en/mysql_cset_escape_slashes_utf8mb4/
+        constexpr auto mysql_cset_escape_slashesFn = [](char* newstr, const char* escapestr, size_t escapestr_len) -> size_t
+        {
+            const char* newstr_s        = newstr;
+            const char* newstr_e        = newstr + 2 * escapestr_len;
+            const char* end             = escapestr + escapestr_len;
+            bool        escape_overflow = false;
+
+            for (; escapestr < end; escapestr++)
+            {
+                char esc = '\0';
+                // unsigned int len = 0;
+
+                switch (*escapestr)
+                {
+                    case 0:
+                        esc = '0';
+                        break;
+                    case '\n':
+                        esc = 'n';
+                        break;
+                    case '\r':
+                        esc = 'r';
+                        break;
+                    case '\\':
+                    case '\'':
+                    case '"':
+                        esc = *escapestr;
+                        break;
+                    case '\032':
+                        esc = 'Z';
+                        break;
+                }
+
+                if (esc)
+                {
+                    if (newstr + 2 > newstr_e)
+                    {
+                        escape_overflow = true;
+                        break;
+                    }
+                    /* copy escaped character */
+                    *newstr++ = '\\';
+                    *newstr++ = esc;
+                }
+                else
+                {
+                    if (newstr + 1 > newstr_e)
+                    {
+                        escape_overflow = true;
+                        break;
+                    }
+                    /* copy non escaped character */
+                    *newstr++ = *escapestr;
+                }
+            }
+
+            *newstr = '\0';
+
+            if (escape_overflow)
+            {
+                return ((size_t)~0);
+            }
+
+            return ((size_t)(newstr - newstr_s));
+        };
+
+        mysql_cset_escape_slashesFn(blob, reinterpret_cast<char*>(&source), sizeof(T));
+
+        return std::string(blob);
     }
 
     // @brief Extract a struct from a blob string.
@@ -178,20 +249,9 @@ namespace db
     {
         TracyZoneScoped;
 
-        std::unique_ptr<std::istream> inStr(rset->getBlob(blobKey.c_str()));
-        if (!inStr)
-        {
-            std::memset(&destination, 0x00, sizeof(T));
-            return;
-        }
-
-        char buff[sizeof(T)];
-        while (!inStr->eof())
-        {
-            inStr->read(buff, sizeof(buff));
-        }
-
-        std::memcpy(&destination, buff, sizeof(T));
+        auto blobStr = rset->getString(blobKey.c_str());
+        std::memset(&destination, 0x00, sizeof(T));
+        std::memcpy(&destination, blobStr.c_str(), sizeof(T));
     }
 
     // @brief Execute a query with the given query string.
