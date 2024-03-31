@@ -23,89 +23,60 @@
 
 #include "logging.h"
 #include "settings.h"
-#include "tracy.h"
 #include "utils.h"
 
 namespace
 {
-    std::recursive_mutex bottleneck;
-
-    // TODO: Have multiple pooled unique_ptr's to connections, which can be "checked out" by multiple callers.
-    // NOTE: These translation unit members are what is causing prepared statmements not to be thread-safe.
-    //       We need to maintain these listed per-connection, so one thread's connection can't access another thread's
-    //       prepared statement objects.
-    std::shared_ptr<sql::Connection> conn;
-
-    std::unordered_map<PreparedStatement, std::pair<std::string, std::unique_ptr<sql::PreparedStatement>>> preparedStatements;
-    std::unordered_map<std::string, std::unique_ptr<sql::PreparedStatement>>                               lazyPreparedStatements;
+    mutex_guarded<db::detail::State> state;
 } // namespace
 
-std::recursive_mutex& db::detail::getMutex()
-{
-    return bottleneck;
-}
-
-std::unordered_map<PreparedStatement, std::pair<std::string, std::unique_ptr<sql::PreparedStatement>>>& db::detail::getPreparedStatements()
-{
-    return preparedStatements;
-}
-
-std::unordered_map<std::string, std::unique_ptr<sql::PreparedStatement>>& db::detail::getLazyPreparedStatements()
-{
-    return lazyPreparedStatements;
-}
-
-void db::detail::populatePreparedStatements(std::shared_ptr<sql::Connection> conn)
-{
-    TracyZoneScoped;
-
-    // clang-format off
-    auto prep = [&](PreparedStatement stmt, const char* query)
-    {
-        preparedStatements[stmt] = { query, std::unique_ptr<sql::PreparedStatement>(conn->prepareStatement(query)) };
-    };
-    // clang-format on
-
-    prep(PreparedStatement::Search_GetSearchComment, "SELECT seacom_message FROM accounts_sessions WHERE charid = (?)");
-}
-
-std::shared_ptr<sql::Connection> db::detail::getConnection()
+mutex_guarded<db::detail::State>& db::detail::getState()
 {
     TracyZoneScoped;
 
     // TODO: Manual pooling?
-    // TODO: Locking of individual connections?
-    if (conn)
+    // TODO: Locking of individual connections by passing back a handle with a `*this` reference to free the connection on handle destruction?
+
+    // clang-format off
+    if (state.read([&](const auto& state) { return state.connection != nullptr; }))
     {
-        return conn;
+        return state;
     }
 
-    std::scoped_lock lock(db::detail::getMutex());
-
-    // NOTE: Driver is static, so it will only be initialized once.
-    sql::Driver* driver = sql::mariadb::get_driver_instance();
-
-    try
+    state.write([&](auto& state)
     {
-        auto login  = settings::get<std::string>("network.SQL_LOGIN");
-        auto passwd = settings::get<std::string>("network.SQL_PASSWORD");
-        auto host   = settings::get<std::string>("network.SQL_HOST");
-        auto port   = settings::get<uint16>("network.SQL_PORT");
-        auto schema = settings::get<std::string>("network.SQL_DATABASE");
-        auto url    = fmt::format("tcp://{}:{}", host, port);
+        // NOTE: Driver is static, so it will only be initialized once.
+        sql::Driver* driver = sql::mariadb::get_driver_instance();
 
-        conn = std::shared_ptr<sql::Connection>(driver->connect(url.c_str(), login.c_str(), passwd.c_str()));
-        conn->setSchema(schema.c_str());
+        try
+        {
+            auto login  = settings::get<std::string>("network.SQL_LOGIN");
+            auto passwd = settings::get<std::string>("network.SQL_PASSWORD");
+            auto host   = settings::get<std::string>("network.SQL_HOST");
+            auto port   = settings::get<uint16>("network.SQL_PORT");
+            auto schema = settings::get<std::string>("network.SQL_DATABASE");
+            auto url    = fmt::format("tcp://{}:{}", host, port);
 
-        db::detail::populatePreparedStatements(conn);
+            state.connection = std::unique_ptr<sql::Connection>(driver->connect(url.c_str(), login.c_str(), passwd.c_str()));
+            state.connection->setSchema(schema.c_str());
 
-        return conn;
-    }
-    catch (const std::exception& e)
-    {
-        ShowError(e.what());
-        return nullptr;
-    }
+            // Prepare prepared statements
+            auto prep = [&](PreparedStatement stmt, const char* query)
+            {
+                state.preparedStatements[stmt] = { query, std::unique_ptr<sql::PreparedStatement>(state.connection->prepareStatement(query)) };
+            };
+
+            prep(PreparedStatement::Search_GetSearchComment, "SELECT seacom_message FROM accounts_sessions WHERE charid = (?)");
+        }
+        catch (const std::exception& e)
+        {
+            ShowError(e.what());
+            state.connection = nullptr; // Wipe the connection so that it can't be used if it's broken
+        }
+    });
+    // clang-format on
+
+    return state;
 }
 
 std::unique_ptr<sql::ResultSet> db::query(std::string_view query)
@@ -113,20 +84,20 @@ std::unique_ptr<sql::ResultSet> db::query(std::string_view query)
     TracyZoneScoped;
     TracyZoneCString(query.data());
 
-    std::scoped_lock lock(db::detail::getMutex());
-
-    // TODO: Check this is pooled. If not; make it pooled.
-    static thread_local auto conn = db::detail::getConnection();
-
-    auto stmt = conn->createStatement();
-    try
+    // clang-format off
+    return detail::getState().write([&](detail::State& state) -> std::unique_ptr<sql::ResultSet>
     {
-        return std::unique_ptr<sql::ResultSet>(stmt->executeQuery(query.data()));
-    }
-    catch (const std::exception& e)
-    {
-        ShowError("Query Failed: %s", query.data());
-        ShowError(e.what());
-        return nullptr;
-    }
+        auto stmt = state.connection->createStatement();
+        try
+        {
+            return std::unique_ptr<sql::ResultSet>(stmt->executeQuery(query.data()));
+        }
+        catch (const std::exception& e)
+        {
+            ShowError("Query Failed: %s", query.data());
+            ShowError(e.what());
+            return nullptr;
+        }
+    });
+    // clang-format on
 }

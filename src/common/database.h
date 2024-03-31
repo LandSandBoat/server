@@ -22,10 +22,12 @@
 #pragma once
 
 #include "cbasetypes.h"
+#include "mutex_guarded.h"
+#include "tracy.h"
 
 #include <memory>
-#include <mutex>
 #include <string>
+#include <unordered_map>
 
 #include <conncpp.hpp>
 
@@ -42,14 +44,16 @@ namespace db
 {
     namespace detail
     {
-        std::recursive_mutex& getMutex();
+        struct State
+        {
+            std::unique_ptr<sql::Connection> connection;
 
-        std::unordered_map<PreparedStatement, std::pair<std::string, std::unique_ptr<sql::PreparedStatement>>>& getPreparedStatements();
-        std::unordered_map<std::string, std::unique_ptr<sql::PreparedStatement>>&                               getLazyPreparedStatements();
+            // TODO: Just make everything lazy?
+            std::unordered_map<PreparedStatement, std::pair<std::string, std::unique_ptr<sql::PreparedStatement>>> preparedStatements;
+            std::unordered_map<std::string, std::unique_ptr<sql::PreparedStatement>>                               lazyPreparedStatements;
+        };
 
-        void populatePreparedStatements(std::shared_ptr<sql::Connection> conn);
-
-        auto getConnection() -> std::shared_ptr<sql::Connection>;
+        auto getState() -> mutex_guarded<db::detail::State>&;
 
         // Base case
         inline void binder(std::unique_ptr<sql::PreparedStatement>& stmt, int& counter)
@@ -112,34 +116,34 @@ namespace db
     {
         TracyZoneScoped;
 
-        std::scoped_lock lock(db::detail::getMutex());
-
-        // TODO: Check this is pooled. If not; make it pooled.
-        static thread_local auto conn = db::detail::getConnection();
-
-        auto& preparedStatements = db::detail::getPreparedStatements();
-
-        if (preparedStatements.find(preparedStmt) == preparedStatements.end())
+        // clang-format off
+        return detail::getState().write([&](detail::State& state) -> std::unique_ptr<sql::ResultSet>
         {
-            ShowError("Bad prepared stmt");
-            return nullptr;
-        }
+            auto& preparedStatements = state.preparedStatements;
 
-        auto& stmt = preparedStatements[preparedStmt].second;
-        TracyZoneString(preparedStatements[preparedStmt].first);
-        try
-        {
-            // NOTE: 1-indexed!
-            auto counter = 1;
-            db::detail::binder(stmt, counter, std::forward<Args>(args)...);
-            return std::unique_ptr<sql::ResultSet>(stmt->executeQuery());
-        }
-        catch (const std::exception& e)
-        {
-            ShowError("Query Failed: %s", str(preparedStatements[preparedStmt].first.c_str()));
-            ShowError(e.what());
-            return nullptr;
-        }
+            if (preparedStatements.find(preparedStmt) == preparedStatements.end())
+            {
+                ShowError("Bad prepared stmt");
+                return nullptr;
+            }
+
+            auto& stmt = preparedStatements[preparedStmt].second;
+            TracyZoneString(preparedStatements[preparedStmt].first);
+            try
+            {
+                // NOTE: 1-indexed!
+                auto counter = 1;
+                db::detail::binder(stmt, counter, std::forward<Args>(args)...);
+                return std::unique_ptr<sql::ResultSet>(stmt->executeQuery());
+            }
+            catch (const std::exception& e)
+            {
+                ShowError("Query Failed: %s", str(preparedStatements[preparedStmt].first.c_str()));
+                ShowError(e.what());
+                return nullptr;
+            }
+        });
+        // clang-format on
     }
 
     // @brief Execute a prepared statement with the given query string and arguments.
@@ -154,45 +158,45 @@ namespace db
         TracyZoneScoped;
         TracyZoneString(query);
 
-        std::scoped_lock lock(db::detail::getMutex());
-
-        // TODO: Check this is pooled. If not; make it pooled.
-        static thread_local auto conn = db::detail::getConnection();
-
-        auto& lazyPreparedStatements = db::detail::getLazyPreparedStatements();
-
-        // TODO: combine the two versions of this function into one, with the string-handling version
-        // just being a wrapped which does the lookup below and then calls the enum version.
-
-        // If we don't have it, lazily make it
-        if (lazyPreparedStatements.find(query) == lazyPreparedStatements.end())
+        // clang-format off
+        return detail::getState().write([&](detail::State& state) -> std::unique_ptr<sql::ResultSet>
         {
+            auto& lazyPreparedStatements = state.lazyPreparedStatements;
+
+            // TODO: combine the two versions of this function into one, with the string-handling version
+            // just being a wrapped which does the lookup below and then calls the enum version.
+
+            // If we don't have it, lazily make it
+            if (lazyPreparedStatements.find(query) == lazyPreparedStatements.end())
+            {
+                try
+                {
+                    lazyPreparedStatements[query] = std::unique_ptr<sql::PreparedStatement>(state.connection->prepareStatement(query.c_str()));
+                }
+                catch (const std::exception& e)
+                {
+                    ShowError("Failed to lazy prepare query: %s", str(query.c_str()));
+                    ShowError(e.what());
+                    return nullptr;
+                }
+            }
+
+            auto& stmt = lazyPreparedStatements[query];
             try
             {
-                lazyPreparedStatements[query] = std::unique_ptr<sql::PreparedStatement>(conn->prepareStatement(query.c_str()));
+                // NOTE: 1-indexed!
+                auto counter = 1;
+                db::detail::binder(stmt, counter, std::forward<Args>(args)...);
+                return std::unique_ptr<sql::ResultSet>(stmt->executeQuery());
             }
             catch (const std::exception& e)
             {
-                ShowError("Failed to lazy prepare query: %s", str(query.c_str()));
+                ShowError("Query Failed: %s", str(query.c_str()));
                 ShowError(e.what());
                 return nullptr;
             }
-        }
-
-        auto& stmt = lazyPreparedStatements[query];
-        try
-        {
-            // NOTE: 1-indexed!
-            auto counter = 1;
-            db::detail::binder(stmt, counter, std::forward<Args>(args)...);
-            return std::unique_ptr<sql::ResultSet>(stmt->executeQuery());
-        }
-        catch (const std::exception& e)
-        {
-            ShowError("Query Failed: %s", str(query.c_str()));
-            ShowError(e.what());
-            return nullptr;
-        }
+        });
+        // clang-format on
     }
 
     // @brief Encode a struct to a blob string.
