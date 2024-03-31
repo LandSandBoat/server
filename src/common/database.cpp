@@ -73,6 +73,8 @@ mutex_guarded<db::detail::State>& db::detail::getState()
 
 std::string db::detail::sanitise(std::string const& query)
 {
+    TracyZoneScoped;
+
     const auto replaceAll = [](std::string const& str, std::vector<std::string> const& from, std::string const& to)
     {
         std::string result = str;

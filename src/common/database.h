@@ -49,54 +49,98 @@ namespace db
 
         auto sanitise(std::string const& query) -> std::string;
 
+        // Helpers to provide information to the static_assert below
+        template <class>
+        struct always_false : std::false_type
+        {
+        };
+
+        template <class T>
+        inline constexpr bool always_false_v = always_false<T>::value;
+
+        template <typename T>
+        void bindValue(std::unique_ptr<sql::PreparedStatement>& stmt, int counter, T&& value)
+        {
+            if constexpr (std::is_same_v<std::decay_t<T>, int32>)
+            {
+                stmt->setInt(counter, value);
+            }
+            else if constexpr (std::is_same_v<std::decay_t<T>, uint32>)
+            {
+                stmt->setUInt(counter, value);
+            }
+            else if constexpr (std::is_same_v<std::decay_t<T>, int16>)
+            {
+                stmt->setShort(counter, value);
+            }
+            else if constexpr (std::is_same_v<std::decay_t<T>, uint16>)
+            {
+                stmt->setShort(counter, value);
+            }
+            else if constexpr (std::is_same_v<std::decay_t<T>, int8>)
+            {
+                stmt->setByte(counter, value);
+            }
+            else if constexpr (std::is_same_v<std::decay_t<T>, uint8>)
+            {
+                stmt->setByte(counter, value);
+            }
+            else if constexpr (std::is_same_v<std::decay_t<T>, bool>)
+            {
+                stmt->setBoolean(counter, value);
+            }
+            else if constexpr (std::is_same_v<std::decay_t<T>, double>)
+            {
+                stmt->setDouble(counter, value);
+            }
+            else if constexpr (std::is_same_v<std::decay_t<T>, float>)
+            {
+                stmt->setFloat(counter, value);
+            }
+            else if constexpr (std::is_same_v<std::decay_t<T>, const std::string>)
+            {
+                stmt->setString(counter, value.c_str());
+            }
+            else if constexpr (std::is_same_v<std::decay_t<T>, std::string>)
+            {
+                stmt->setString(counter, value.c_str());
+            }
+            else if constexpr (std::is_same_v<std::decay_t<T>, const char*>)
+            {
+                stmt->setString(counter, value);
+            }
+            else if constexpr (std::is_same_v<std::decay_t<T>, char*>)
+            {
+                stmt->setString(counter, value);
+            }
+            else
+            {
+                static_assert(always_false_v<T>, "Unsupported type in binder");
+            }
+
+            ++counter;
+        }
+
         // Base case
         inline void binder(std::unique_ptr<sql::PreparedStatement>& stmt, int& counter)
         {
         }
 
+        // Final case
+        // TODO: Why is this needed? Why can't the regular and base case handle this?
+        template <typename T>
+        void binder(std::unique_ptr<sql::PreparedStatement>& stmt, int& counter, T&& first)
+        {
+            bindValue(stmt, counter, std::forward<T>(first));
+            binder(stmt, counter);
+        }
+
+        // Regular case
         template <typename T, typename... Args>
         void binder(std::unique_ptr<sql::PreparedStatement>& stmt, int& counter, T&& first, Args&&... rest)
         {
-            if constexpr (std::is_same_v<std::decay_t<T>, signed int>)
-            {
-                stmt->setInt(counter, first);
-            }
-            else if constexpr (std::is_same_v<std::decay_t<T>, unsigned int>)
-            {
-                stmt->setUInt(counter, first);
-            }
-            else if constexpr (std::is_same_v<std::decay_t<T>, signed short>)
-            {
-                stmt->setShort(counter, first);
-            }
-            else if constexpr (std::is_same_v<std::decay_t<T>, int8>)
-            {
-                stmt->setByte(counter, first);
-            }
-            else if constexpr (std::is_same_v<std::decay_t<T>, bool>)
-            {
-                stmt->setBoolean(counter, first);
-            }
-            else if constexpr (std::is_same_v<std::decay_t<T>, double>)
-            {
-                stmt->setDouble(counter, first);
-            }
-            else if constexpr (std::is_same_v<std::decay_t<T>, float>)
-            {
-                stmt->setFloat(counter, first);
-            }
-            else if constexpr (std::is_same_v<std::decay_t<T>, std::string>)
-            {
-                stmt->setString(counter, first.c_str());
-            }
-            else if constexpr (std::is_convertible_v<T, const char*>)
-            {
-                stmt->setString(counter, first);
-            }
-
-            ++counter;
-
-            binder(stmt, counter, rest...);
+            bindValue(stmt, counter, std::forward<T>(first));
+            binder(stmt, counter, std::forward<Args>(rest)...);
         }
     } // namespace detail
 
@@ -164,7 +208,6 @@ namespace db
         TracyZoneScoped;
 
         char blob[sizeof(T) * 2 + 1];
-        std::memset(blob, 0x00, sizeof(blob));
 
         // https://mariadb.com/kb/en/mysql_cset_escape_slashes/
         // https://mariadb.com/kb/en/mysql_cset_escape_slashes_utf8/
