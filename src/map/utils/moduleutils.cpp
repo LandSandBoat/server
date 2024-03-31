@@ -225,7 +225,7 @@ namespace moduleutils
                             auto zoneName    = parts[2];
                             auto currentPort = map_port == 0 ? settings::get<uint16>("network.MAP_PORT") : map_port;
 
-                            auto ret = _sql->Query(fmt::format("SELECT `name`, zoneport FROM zone_settings WHERE `name` = '{}' AND zoneport = {};",
+                            auto ret = _sql->Query(fmt::format("SELECT `name`, zoneport FROM zone_settings WHERE `name` = '{}' AND zoneport = {}",
                                                                zoneName, currentPort)
                                                        .c_str());
                             if (ret != SQL_ERROR && _sql->NumRows() == 0)

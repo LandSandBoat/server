@@ -35,7 +35,7 @@ namespace dailytally
 
         const char* fmtQuery = "UPDATE char_points \
             SET char_points.daily_tally = LEAST(%u, char_points.daily_tally + %u) \
-            WHERE char_points.daily_tally > -1;";
+            WHERE char_points.daily_tally > -1";
 
         if (!db::query(fmt::sprintf(fmtQuery, dailyTallyLimit, dailyTallyAmount)))
         {
@@ -46,7 +46,7 @@ namespace dailytally
             ShowDebug("Distributed daily tally points");
         }
 
-        if (!db::query("DELETE FROM char_vars WHERE varname = 'gobbieBoxUsed';"))
+        if (!db::query("DELETE FROM char_vars WHERE varname = 'gobbieBoxUsed'"))
         {
             ShowError("Failed to delete daily tally char_vars entries");
         }

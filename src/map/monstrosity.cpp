@@ -102,7 +102,7 @@ void monstrosity::LoadStaticData()
 {
     ShowInfo("Loading Monstrosity data");
 
-    int32 ret = _sql->Query("SELECT monstrosity_id, monstrosity_species_code, name, mjob, sjob, size, look FROM monstrosity_species;");
+    int32 ret = _sql->Query("SELECT monstrosity_id, monstrosity_species_code, name, mjob, sjob, size, look FROM monstrosity_species");
     if (ret != SQL_ERROR && _sql->NumRows() != 0)
     {
         while (_sql->NextRow() == SQL_SUCCESS)
@@ -121,7 +121,7 @@ void monstrosity::LoadStaticData()
         }
     }
 
-    ret = _sql->Query("SELECT monstrosity_instinct_id, cost, name FROM monstrosity_instincts;");
+    ret = _sql->Query("SELECT monstrosity_instinct_id, cost, name FROM monstrosity_instincts");
     if (ret != SQL_ERROR && _sql->NumRows() != 0)
     {
         while (_sql->NextRow() == SQL_SUCCESS)
@@ -138,7 +138,7 @@ void monstrosity::LoadStaticData()
 
     for (auto& [_, entry] : gMonstrosityInstinctMap)
     {
-        ret = _sql->Query("SELECT monstrosity_instinct_id, modId, value FROM monstrosity_instinct_mods WHERE monstrosity_instinct_id = %d;", entry.monstrosityInstinctId);
+        ret = _sql->Query("SELECT monstrosity_instinct_id, modId, value FROM monstrosity_instinct_mods WHERE monstrosity_instinct_id = %d", entry.monstrosityInstinctId);
         if (ret != SQL_ERROR && _sql->NumRows() != 0)
         {
             while (_sql->NextRow() == SQL_SUCCESS)
@@ -176,7 +176,7 @@ void monstrosity::ReadMonstrosityData(CCharEntity* PChar)
                           "entry_zone_id, "
                           "entry_mjob, "
                           "entry_sjob "
-                          "FROM char_monstrosity WHERE charid = (?) LIMIT 1;",
+                          "FROM char_monstrosity WHERE charid = (?) LIMIT 1",
                           PChar->id);
     // clang-format on
 
@@ -243,7 +243,7 @@ void monstrosity::WriteMonstrosityData(CCharEntity* PChar)
                         "entry_rot = '%u', "
                         "entry_zone_id = '%d', "
                         "entry_mjob = '%d', "
-                        "entry_sjob = '%d';";
+                        "entry_sjob = '%d'";
 
     auto equipEscaped     = _sql->ObjectToBlobString(&PChar->m_PMonstrosity->EquippedInstincts);
     auto levelsEscaped    = _sql->ObjectToBlobString(&PChar->m_PMonstrosity->levels);

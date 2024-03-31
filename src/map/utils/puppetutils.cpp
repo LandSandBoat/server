@@ -40,7 +40,7 @@ namespace puppetutils
 
         const char* Query = "SELECT unlocked_attachments, name, equipped_attachments FROM "
                             "char_pet LEFT JOIN pet_name ON automatonid = id "
-                            "WHERE charid = (?);";
+                            "WHERE charid = (?)";
 
         auto rset = db::preparedStmt(Query, PChar->id);
         if (rset && rset->rowsCount() && rset->next())
@@ -147,7 +147,7 @@ namespace puppetutils
             const char* Query = "UPDATE char_pet SET "
                                 "unlocked_attachments = '%s', "
                                 "equipped_attachments = '%s' "
-                                "WHERE charid = %u;";
+                                "WHERE charid = %u";
 
             char unlockedAttachmentsEscaped[sizeof(PChar->m_unlockedAttachments) * 2 + 1];
             char unlockedAttachments[sizeof(PChar->m_unlockedAttachments)];
@@ -165,7 +165,7 @@ namespace puppetutils
         {
             const char* Query = "UPDATE char_pet SET "
                                 "unlocked_attachments = '%s' "
-                                "WHERE charid = %u;";
+                                "WHERE charid = %u";
 
             char unlockedAttachmentsEscaped[sizeof(PChar->m_unlockedAttachments) * 2 + 1];
             char unlockedAttachments[sizeof(PChar->m_unlockedAttachments)];

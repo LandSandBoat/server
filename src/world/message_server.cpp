@@ -162,7 +162,7 @@ void message_server_parse(MSGSERVTYPE type, zmq::message_t* extra, zmq::message_
         case MSG_CHARVAR_UPDATE:
         {
             const char* query = "SELECT server_addr, server_port FROM accounts_sessions LEFT JOIN chars ON "
-                                "accounts_sessions.charid = chars.charid WHERE charname = '%s' LIMIT 1;";
+                                "accounts_sessions.charid = chars.charid WHERE charname = '%s' LIMIT 1";
             auto        rset  = db::query(fmt::sprintf(query, str((int8*)extra->data() + 4)));
             if (rset)
             {
@@ -170,7 +170,7 @@ void message_server_parse(MSGSERVTYPE type, zmq::message_t* extra, zmq::message_
             }
             else
             {
-                query = "SELECT server_addr, server_port FROM accounts_sessions WHERE charid = %d LIMIT 1;";
+                query = "SELECT server_addr, server_port FROM accounts_sessions WHERE charid = %d LIMIT 1";
                 forward_message(db::query(fmt::sprintf(query, ref<uint32>((uint8*)extra->data(), 0))));
             }
             break;
@@ -182,7 +182,7 @@ void message_server_parse(MSGSERVTYPE type, zmq::message_t* extra, zmq::message_
             // TODO: simplify query now that there's alliance versions?
             const char* query = "SELECT server_addr, server_port, MIN(charid) FROM accounts_sessions JOIN accounts_parties USING (charid) "
                                 "WHERE IF (allianceid <> 0, allianceid = (SELECT MAX(allianceid) FROM accounts_parties WHERE partyid = %d), "
-                                "partyid = %d) GROUP BY server_addr, server_port;";
+                                "partyid = %d) GROUP BY server_addr, server_port";
 
             uint32 partyid = ref<uint32>((uint8*)extra->data(), 0);
             forward_message(db::query(fmt::sprintf(query, partyid, partyid)));
@@ -194,7 +194,7 @@ void message_server_parse(MSGSERVTYPE type, zmq::message_t* extra, zmq::message_
         {
             const char* query = "SELECT server_addr, server_port, MIN(charid) FROM accounts_sessions JOIN accounts_parties USING (charid) "
                                 "WHERE allianceid = %d "
-                                "GROUP BY server_addr, server_port;";
+                                "GROUP BY server_addr, server_port";
 
             uint32 allianceid = ref<uint32>((uint8*)extra->data(), 0);
             forward_message(db::query(fmt::sprintf(query, allianceid)));
@@ -203,14 +203,14 @@ void message_server_parse(MSGSERVTYPE type, zmq::message_t* extra, zmq::message_
         case MSG_CHAT_LINKSHELL:
         {
             const char* query = "SELECT server_addr, server_port FROM accounts_sessions "
-                                "WHERE linkshellid1 = %d OR linkshellid2 = %d GROUP BY server_addr, server_port;";
+                                "WHERE linkshellid1 = %d OR linkshellid2 = %d GROUP BY server_addr, server_port";
             forward_message(db::query(fmt::sprintf(query, ref<uint32>((uint8*)extra->data(), 0), ref<uint32>((uint8*)extra->data(), 0))));
             break;
         }
         case MSG_CHAT_UNITY:
         {
             const char* query = "SELECT server_addr, server_port FROM accounts_sessions "
-                                "WHERE unitychat = %d GROUP BY server_addr, server_port;";
+                                "WHERE unitychat = %d GROUP BY server_addr, server_port";
             forward_message(db::query(fmt::sprintf(query, ref<uint32>((uint8*)extra->data(), 0), ref<uint32>((uint8*)extra->data(), 0))));
             break;
         }
@@ -238,7 +238,7 @@ void message_server_parse(MSGSERVTYPE type, zmq::message_t* extra, zmq::message_
         case MSG_DIRECT:
         case MSG_SEND_TO_ZONE:
         {
-            const char* query = "SELECT server_addr, server_port FROM accounts_sessions WHERE charid = %d;";
+            const char* query = "SELECT server_addr, server_port FROM accounts_sessions WHERE charid = %d";
             forward_message(db::query(fmt::sprintf(query, ref<uint32>((uint8*)extra->data(), 0))));
             break;
         }
@@ -328,7 +328,7 @@ void message_server_listen(bool const& requestExit)
 
 void cache_zone_settings()
 {
-    auto rset = db::query("SELECT zoneid, zoneip, zoneport, misc FROM zone_settings;");
+    auto rset = db::query("SELECT zoneid, zoneip, zoneport, misc FROM zone_settings");
     if (!rset)
     {
         ShowCritical("Error loading zone settings from DB");

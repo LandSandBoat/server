@@ -1649,7 +1649,7 @@ namespace automaton
 
     void LoadAutomatonSpellList()
     {
-        const char* Query = "SELECT spellid, skilllevel, heads, enfeeble, immunity, removes FROM automaton_spells;";
+        const char* Query = "SELECT spellid, skilllevel, heads, enfeeble, immunity, removes FROM automaton_spells";
 
         int32 ret = _sql->Query(Query);
 
@@ -1724,7 +1724,7 @@ namespace automaton
 
     void LoadAutomatonAbilities()
     {
-        const char* Query = "SELECT abilityid, abilityname, reqframe, skilllevel FROM automaton_abilities;";
+        const char* Query = "SELECT abilityid, abilityname, reqframe, skilllevel FROM automaton_abilities";
 
         int32 ret = _sql->Query(Query);
 

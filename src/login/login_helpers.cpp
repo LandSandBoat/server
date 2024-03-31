@@ -148,58 +148,58 @@ namespace loginHelpers
     {
         auto _sql = std::make_unique<SqlConnection>();
 
-        if (_sql->Query("INSERT INTO chars(charid,accid,charname,pos_zone,nation) VALUES(%u,%u,'%s',%u,%u);",
+        if (_sql->Query("INSERT INTO chars(charid,accid,charname,pos_zone,nation) VALUES(%u,%u,'%s',%u,%u)",
                         charid, accid, str(createchar->m_name), createchar->m_zone, createchar->m_nation) == SQL_ERROR)
         {
             ShowDebug(fmt::format("lobby_ccsave: char<{}>, accid: {}, charid: {}", str(createchar->m_name), accid, charid));
             return -1;
         }
 
-        if (_sql->Query("INSERT INTO char_look(charid,face,race,size) VALUES(%u,%u,%u,%u);",
+        if (_sql->Query("INSERT INTO char_look(charid,face,race,size) VALUES(%u,%u,%u,%u)",
                         charid, createchar->m_look.face, createchar->m_look.race, createchar->m_look.size) == SQL_ERROR)
         {
             ShowDebug(fmt::format("lobby_cLook: char<{}>, charid: {}", str(createchar->m_name), charid));
             return -1;
         }
 
-        if (_sql->Query("INSERT INTO char_stats(charid,mjob) VALUES(%u,%u);",
+        if (_sql->Query("INSERT INTO char_stats(charid,mjob) VALUES(%u,%u)",
                         charid, createchar->m_mjob) == SQL_ERROR)
         {
             ShowDebug(fmt::format("lobby_cStats: charid: {}", charid));
             return -1;
         }
 
-        if (_sql->Query("INSERT INTO char_exp(charid) VALUES(%u) ON DUPLICATE KEY UPDATE charid = charid;",
+        if (_sql->Query("INSERT INTO char_exp(charid) VALUES(%u) ON DUPLICATE KEY UPDATE charid = charid",
                         charid, createchar->m_mjob) == SQL_ERROR)
         {
             return -1;
         }
 
-        if (_sql->Query("INSERT INTO char_jobs(charid) VALUES(%u) ON DUPLICATE KEY UPDATE charid = charid;",
+        if (_sql->Query("INSERT INTO char_jobs(charid) VALUES(%u) ON DUPLICATE KEY UPDATE charid = charid",
                         charid, createchar->m_mjob) == SQL_ERROR)
         {
             return -1;
         }
 
-        if (_sql->Query("INSERT INTO char_points(charid) VALUES(%u) ON DUPLICATE KEY UPDATE charid = charid;",
+        if (_sql->Query("INSERT INTO char_points(charid) VALUES(%u) ON DUPLICATE KEY UPDATE charid = charid",
                         charid, createchar->m_mjob) == SQL_ERROR)
         {
             return -1;
         }
 
-        if (_sql->Query("INSERT INTO char_unlocks(charid) VALUES(%u) ON DUPLICATE KEY UPDATE charid = charid;",
+        if (_sql->Query("INSERT INTO char_unlocks(charid) VALUES(%u) ON DUPLICATE KEY UPDATE charid = charid",
                         charid, createchar->m_mjob) == SQL_ERROR)
         {
             return -1;
         }
 
-        if (_sql->Query("INSERT INTO char_profile(charid) VALUES(%u) ON DUPLICATE KEY UPDATE charid = charid;",
+        if (_sql->Query("INSERT INTO char_profile(charid) VALUES(%u) ON DUPLICATE KEY UPDATE charid = charid",
                         charid, createchar->m_mjob) == SQL_ERROR)
         {
             return -1;
         }
 
-        if (_sql->Query("INSERT INTO char_storage(charid) VALUES(%u) ON DUPLICATE KEY UPDATE charid = charid;",
+        if (_sql->Query("INSERT INTO char_storage(charid) VALUES(%u) ON DUPLICATE KEY UPDATE charid = charid",
                         charid, createchar->m_mjob) == SQL_ERROR)
         {
             return -1;
@@ -210,14 +210,14 @@ namespace loginHelpers
             return -1;
         }
 
-        if (_sql->Query("INSERT INTO char_inventory(charid) VALUES(%u);", charid, createchar->m_mjob) == SQL_ERROR)
+        if (_sql->Query("INSERT INTO char_inventory(charid) VALUES(%u)", charid, createchar->m_mjob) == SQL_ERROR)
         {
             return -1;
         }
 
         if (settings::get<bool>("main.NEW_CHARACTER_CUTSCENE"))
         {
-            if (_sql->Query("INSERT INTO char_vars(charid, varname, value) VALUES(%u, '%s', %u);",
+            if (_sql->Query("INSERT INTO char_vars(charid, varname, value) VALUES(%u, '%s', %u)",
                             charid, "HQuest[newCharacterCS]notSeen", 1) == SQL_ERROR)
             {
                 return -1;

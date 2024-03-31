@@ -1241,7 +1241,7 @@ namespace mobutils
     void LoadSqlModifiers()
     {
         // load family mods
-        const char QueryFamilyMods[] = "SELECT familyid, modid, value, is_mob_mod FROM mob_family_mods;";
+        const char QueryFamilyMods[] = "SELECT familyid, modid, value, is_mob_mod FROM mob_family_mods";
 
         int32 ret = _sql->Query(QueryFamilyMods);
 
@@ -1267,7 +1267,7 @@ namespace mobutils
         }
 
         // load pool mods
-        const char QueryPoolMods[] = "SELECT poolid, modid, value, is_mob_mod FROM mob_pool_mods;";
+        const char QueryPoolMods[] = "SELECT poolid, modid, value, is_mob_mod FROM mob_pool_mods";
 
         ret = _sql->Query(QueryPoolMods);
 
@@ -1296,7 +1296,7 @@ namespace mobutils
         }
 
         // load spawn mods
-        const char QuerySpawnMods[] = "SELECT mobid, modid, value, is_mob_mod FROM mob_spawn_mods;";
+        const char QuerySpawnMods[] = "SELECT mobid, modid, value, is_mob_mod FROM mob_spawn_mods";
 
         ret = _sql->Query(QuerySpawnMods);
 

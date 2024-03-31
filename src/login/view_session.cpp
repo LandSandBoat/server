@@ -58,7 +58,7 @@ void view_session::read_func()
             auto _sql = std::make_unique<SqlConnection>();
 
             uint32 accountID = 0;
-            int32  ret       = _sql->Query("SELECT accid FROM chars WHERE charid = %u AND charname = '%s' LIMIT 1;",
+            int32  ret       = _sql->Query("SELECT accid FROM chars WHERE charid = %u AND charname = '%s' LIMIT 1",
                                            requestedCharacterID, requestedCharacter);
             if (ret != SQL_ERROR && _sql->NumRows() != 0 && _sql->NextRow() == SQL_SUCCESS)
             {
@@ -120,7 +120,7 @@ void view_session::read_func()
                                  CharID, ipAddress));
 
             uint32 accountID = 0;
-            int32  ret       = _sql->Query("SELECT accid FROM chars WHERE charid = %u LIMIT 1;", CharID);
+            int32  ret       = _sql->Query("SELECT accid FROM chars WHERE charid = %u LIMIT 1", CharID);
 
             if (ret != SQL_ERROR && _sql->NumRows() != 0 && _sql->NextRow() == SQL_SUCCESS)
             {
@@ -237,7 +237,7 @@ void view_session::read_func()
                         "    UNION "
                         "    SELECT packet_name AS `name` FROM mob_pools "
                         ") "
-                        "SELECT * FROM results WHERE REPLACE(REPLACE(UPPER(`name`), '-', ''), '_', '') LIKE REPLACE(REPLACE(UPPER('%s'), '-', ''), '_', '');";
+                        "SELECT * FROM results WHERE REPLACE(REPLACE(UPPER(`name`), '-', ''), '_', '') LIKE REPLACE(REPLACE(UPPER('%s'), '-', ''), '_', '')";
 
                     if (_sql->Query(query, nameStr) == SQL_ERROR)
                     {

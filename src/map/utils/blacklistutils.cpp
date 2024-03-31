@@ -30,7 +30,7 @@ namespace blacklistutils
 {
     bool IsBlacklisted(uint32 ownerId, uint32 targetId)
     {
-        const char* query = "SELECT * FROM char_blacklist WHERE charid_owner = %u AND charid_target = %u;";
+        const char* query = "SELECT * FROM char_blacklist WHERE charid_owner = %u AND charid_target = %u";
         int32       ret   = _sql->Query(query, ownerId, targetId);
 
         return (ret != SQL_ERROR && _sql->NumRows() == 1);
@@ -43,7 +43,7 @@ namespace blacklistutils
             return false;
         }
 
-        const char* query = "INSERT INTO char_blacklist (charid_owner, charid_target) VALUES (%u, %u);";
+        const char* query = "INSERT INTO char_blacklist (charid_owner, charid_target) VALUES (%u, %u)";
         return (_sql->Query(query, ownerId, targetId) != SQL_ERROR && _sql->AffectedRows() == 1);
     }
 
@@ -54,7 +54,7 @@ namespace blacklistutils
             return false;
         }
 
-        const char* query = "DELETE FROM char_blacklist WHERE charid_owner = %u AND charid_target = %u;";
+        const char* query = "DELETE FROM char_blacklist WHERE charid_owner = %u AND charid_target = %u";
         return (_sql->Query(query, ownerId, targetId) != SQL_ERROR && _sql->AffectedRows() == 1);
     }
 
@@ -63,7 +63,7 @@ namespace blacklistutils
         std::vector<std::pair<uint32, std::string>> blacklist;
 
         // Obtain this users blacklist info..
-        const char* query = "SELECT c.charid, c.charname FROM char_blacklist AS b INNER JOIN chars AS c ON b.charid_target = c.charid WHERE charid_owner = %u;";
+        const char* query = "SELECT c.charid, c.charname FROM char_blacklist AS b INNER JOIN chars AS c ON b.charid_target = c.charid WHERE charid_owner = %u";
         if (_sql->Query(query, PChar->id) == SQL_ERROR || _sql->NumRows() == 0)
         {
             PChar->pushPacket(new CStopDownloadingPacket(PChar, blacklist));

@@ -28,7 +28,7 @@ namespace campaign
 {
     void LoadNations()
     {
-        std::string query = "SELECT id, reconnaissance, morale, prosperity FROM campaign_nation ORDER BY id ASC;";
+        std::string query = "SELECT id, reconnaissance, morale, prosperity FROM campaign_nation ORDER BY id ASC";
         int         ret   = _sql->Query(query.c_str());
         if (ret != SQL_ERROR && _sql->NumRows() != 0)
         {
@@ -140,7 +140,7 @@ namespace campaign
     {
         auto current = std::min(std::max((int32)amount, 0), 10);
 
-        std::string query = "UPDATE `campaign_nation` SET `reconnaissance` = %d WHERE `id` = %d;";
+        std::string query = "UPDATE `campaign_nation` SET `reconnaissance` = %d WHERE `id` = %d";
         int         ret   = _sql->Query(query.c_str(), current, (int32)army);
         if (ret == SQL_ERROR)
         {
@@ -154,7 +154,7 @@ namespace campaign
     {
         auto current = std::min(std::max((int32)amount, 0), 100);
 
-        std::string query = "UPDATE `campaign_nation` SET `morale` = %d WHERE `id` = %d;";
+        std::string query = "UPDATE `campaign_nation` SET `morale` = %d WHERE `id` = %d";
         int         ret   = _sql->Query(query.c_str(), current, (int32)army);
         if (ret == SQL_ERROR)
         {
@@ -168,7 +168,7 @@ namespace campaign
     {
         auto current = std::min(std::max((int32)amount, 0), 100);
 
-        std::string query = "UPDATE `campaign_nation` SET `prosperity` = %d WHERE `id` = %d;";
+        std::string query = "UPDATE `campaign_nation` SET `prosperity` = %d WHERE `id` = %d";
         int         ret   = _sql->Query(query.c_str(), current, (int32)army);
         if (ret == SQL_ERROR)
         {

@@ -132,7 +132,7 @@ void CCampaignHandler::SetBattleStatus(uint8 status)
 {
     auto current = std::min(std::max((int32)status, 0), 1);
 
-    std::string query = "UPDATE `campaign_map` SET `isbattle` = %d WHERE `zoneid` = %d;";
+    std::string query = "UPDATE `campaign_map` SET `isbattle` = %d WHERE `zoneid` = %d";
     int         ret   = _sql->Query(query.c_str(), current, m_PZone->GetID());
     if (ret == SQL_ERROR)
     {
@@ -145,7 +145,7 @@ void CCampaignHandler::SetBattleStatus(uint8 status)
 void CCampaignHandler::SetZoneControl(uint8 nation)
 {
     uint8       nationid = nation;
-    std::string query    = "UPDATE `campaign_map` SET `nation` = %d WHERE `zoneid` = %d;";
+    std::string query    = "UPDATE `campaign_map` SET `nation` = %d WHERE `zoneid` = %d";
     int         ret      = _sql->Query(query.c_str(), nationid, m_PZone->GetID());
     if (ret == SQL_ERROR)
     {
@@ -159,7 +159,7 @@ void CCampaignHandler::SetHeroism(int16 amount)
 {
     auto current = std::min(std::max((int32)amount, 0), 200);
 
-    std::string query = "UPDATE `campaign_map` SET `heroism` = %d WHERE `zoneid` = %d;";
+    std::string query = "UPDATE `campaign_map` SET `heroism` = %d WHERE `zoneid` = %d";
     int         ret   = _sql->Query(query.c_str(), current, m_PZone->GetID());
     if (ret == SQL_ERROR)
     {
@@ -173,7 +173,7 @@ void CCampaignHandler::SetFortification(int16 amount)
 {
     auto current = std::min(std::max((int32)amount, 0), (int32)m_maxFortifications);
 
-    std::string query = "UPDATE `campaign_map` SET `current_fortifications` = %d WHERE `zoneid` = %d;";
+    std::string query = "UPDATE `campaign_map` SET `current_fortifications` = %d WHERE `zoneid` = %d";
     int         ret   = _sql->Query(query.c_str(), current, m_PZone->GetID());
     if (ret == SQL_ERROR)
     {
@@ -187,7 +187,7 @@ void CCampaignHandler::SetResource(int16 amount)
 {
     auto current = std::min(std::max((int32)amount, 0), (int32)m_maxResources);
 
-    std::string query = "UPDATE `campaign_map` SET `current_resources` = %d WHERE `zoneid` = %d;";
+    std::string query = "UPDATE `campaign_map` SET `current_resources` = %d WHERE `zoneid` = %d";
     int         ret   = _sql->Query(query.c_str(), current, m_PZone->GetID());
     if (ret == SQL_ERROR)
     {
@@ -201,7 +201,7 @@ void CCampaignHandler::SetMaxFortification(int16 amount)
 {
     auto max = std::min(std::max((int32)amount, 0), 1023);
 
-    std::string query = "UPDATE `campaign_map` SET `max_fortifications` = %d WHERE `zoneid` = %d;";
+    std::string query = "UPDATE `campaign_map` SET `max_fortifications` = %d WHERE `zoneid` = %d";
     int         ret   = _sql->Query(query.c_str(), max, m_PZone->GetID());
     if (ret == SQL_ERROR)
     {
@@ -215,7 +215,7 @@ void CCampaignHandler::SetMaxResource(int16 amount)
 {
     auto max = std::min(std::max((int32)amount, 0), 1023);
 
-    std::string query = "UPDATE `campaign_map` SET `max_resources` = %d WHERE `zoneid` = %d;";
+    std::string query = "UPDATE `campaign_map` SET `max_resources` = %d WHERE `zoneid` = %d";
     int         ret   = _sql->Query(query.c_str(), max, m_PZone->GetID());
     if (ret == SQL_ERROR)
     {
@@ -249,7 +249,7 @@ void CCampaignHandler::SetInfluence(CampaignArmy army, int16 amount)
             break;
     }
 
-    std::string query = "UPDATE `campaign_map` SET influence_%s = %d WHERE `zoneid` = %d;";
+    std::string query = "UPDATE `campaign_map` SET influence_%s = %d WHERE `zoneid` = %d";
     int         ret   = _sql->Query(query.c_str(), type, current, m_PZone->GetID());
     if (ret == SQL_ERROR)
     {

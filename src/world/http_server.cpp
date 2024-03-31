@@ -190,7 +190,7 @@ void HTTPServer::LockingUpdate()
 
         // Total active sessions
         {
-            auto rset = db::query("SELECT COUNT(*) AS `count` FROM accounts_sessions;");
+            auto rset = db::query("SELECT COUNT(*) AS `count` FROM accounts_sessions");
             if (rset && rset->next())
             {
                 data.activeSessionCount = rset->getUInt("count");
@@ -203,7 +203,7 @@ void HTTPServer::LockingUpdate()
                                   "FROM chars "
                                   "LEFT JOIN accounts_sessions "
                                   "ON chars.charid = accounts_sessions.charid "
-                                  "GROUP BY pos_zone;");
+                                  "GROUP BY pos_zone");
             if (rset && rset->rowsCount())
             {
                 while (rset->next())

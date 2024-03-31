@@ -465,7 +465,7 @@ namespace charutils
                    "fame_adoulin,"
                    "unity_leader "
                    "FROM char_profile "
-                   "WHERE charid = (?);";
+                   "WHERE charid = (?)";
 
         rset = db::preparedStmt(fmtQuery, PChar->id);
         if (rset && rset->rowsCount() && rset->next())
@@ -513,7 +513,7 @@ namespace charutils
                    "wardrobe7,"
                    "wardrobe8 "
                    "FROM char_storage "
-                   "WHERE charid = (?);";
+                   "WHERE charid = (?)";
 
         rset = db::preparedStmt(fmtQuery, PChar->id);
         if (rset && rset->rowsCount() && rset->next())
@@ -544,7 +544,7 @@ namespace charutils
         // TODO: LoadFromCharLookSQL
         fmtQuery = "SELECT face, race, size, head, body, hands, legs, feet, main, sub, ranged "
                    "FROM char_look "
-                   "WHERE charid = (?);";
+                   "WHERE charid = (?)";
 
         rset = db::preparedStmt(fmtQuery, PChar->id);
         if (rset && rset->rowsCount() && rset->next())
@@ -566,7 +566,7 @@ namespace charutils
         }
 
         // LoadFromCharStyleSQL
-        fmtQuery = "SELECT head, body, hands, legs, feet, main, sub, ranged FROM char_style WHERE charid = (?);";
+        fmtQuery = "SELECT head, body, hands, legs, feet, main, sub, ranged FROM char_style WHERE charid = (?)";
         rset     = db::preparedStmt(fmtQuery, PChar->id);
         if (rset && rset->rowsCount() && rset->next())
         {
@@ -583,7 +583,7 @@ namespace charutils
         // LoadFromCharJobsSQL
         fmtQuery = "SELECT unlocked, genkai, war, mnk, whm, blm, rdm, thf, pld, drk, bst, brd, rng, sam, nin, drg, smn, blu, cor, pup, dnc, sch, geo, run "
                    "FROM char_jobs "
-                   "WHERE charid = (?);";
+                   "WHERE charid = (?)";
 
         rset = db::preparedStmt(fmtQuery, PChar->id);
         if (rset && rset->rowsCount() && rset->next())
@@ -618,7 +618,7 @@ namespace charutils
         // LoadFromCharExpSQL
         fmtQuery = "SELECT mode, war, mnk, whm, blm, rdm, thf, pld, drk, bst, brd, rng, sam, nin, drg, smn, blu, cor, pup, dnc, sch, geo, run, merits, limits "
                    "FROM char_exp "
-                   "WHERE charid = (?);";
+                   "WHERE charid = (?)";
 
         rset = db::preparedStmt(fmtQuery, PChar->id);
         if (rset && rset->rowsCount() && rset->next())
@@ -655,7 +655,7 @@ namespace charutils
         // TODO: LoadFromCharStatsSQL
         fmtQuery = "SELECT nameflags, mjob, sjob, hp, mp, mhflag, title, bazaar_message, zoning, "
                    "pet_id, pet_type, pet_hp, pet_mp, pet_level "
-                   "FROM char_stats WHERE charid = (?);";
+                   "FROM char_stats WHERE charid = (?)";
 
         uint8 zoning = 0;
         rset         = db::preparedStmt(fmtQuery, PChar->id);
@@ -722,7 +722,7 @@ namespace charutils
         PChar->SetSLevel(PChar->jobs.job[PChar->GetSJob()]);
 
         // TODO: LoadFromCharRecastSQL
-        fmtQuery = "SELECT id, time, recast FROM char_recast WHERE charid = (?);";
+        fmtQuery = "SELECT id, time, recast FROM char_recast WHERE charid = (?)";
 
         rset = db::preparedStmt(fmtQuery, PChar->id);
         if (rset && rset->rowsCount())
@@ -750,7 +750,7 @@ namespace charutils
         // TODO: LoadFromCharSkillsSQL
         fmtQuery = "SELECT skillid, value, rank "
                    "FROM char_skills "
-                   "WHERE charid = (?);";
+                   "WHERE charid = (?)";
 
         rset = db::preparedStmt(fmtQuery, PChar->id);
         if (rset && rset->rowsCount())
@@ -774,7 +774,7 @@ namespace charutils
                    "campaign_sandy, campaign_bastok, campaign_windy, homepoints, survivals, "
                    "abyssea_conflux, waypoints, eschan_portals, claimed_deeds, unique_event "
                    "FROM char_unlocks "
-                   "WHERE charid = (?);";
+                   "WHERE charid = (?)";
 
         rset = db::preparedStmt(fmtQuery, PChar->id);
         if (rset && rset->rowsCount() && rset->next())
@@ -803,7 +803,7 @@ namespace charutils
         PChar->PMeritPoints->SetLimitPoints(limitPoints);
         PChar->PJobPoints = new CJobPoints(PChar);
 
-        rset = db::preparedStmt("SELECT field_chocobo FROM char_pet WHERE charid = (?);", PChar->id);
+        rset = db::preparedStmt("SELECT field_chocobo FROM char_pet WHERE charid = (?)", PChar->id);
         if (rset && rset->rowsCount() && rset->next())
         {
             PChar->m_FieldChocobo = rset->getUInt("field_chocobo");
@@ -872,7 +872,7 @@ namespace charutils
                                "ON spell_list.spellid = char_spells.spellid "
                                "WHERE charid = (?) AND "
                                "(spell_list.content_tag IN (?) OR "
-                               "spell_list.content_tag IS NULL);";
+                               "spell_list.content_tag IS NULL)";
 
         // TODO: Fix db::detail::binder to allow std::strings
         auto rset = db::preparedStmt(fmtQuery, PChar->id, enabledContent.c_str());
@@ -909,7 +909,7 @@ namespace charutils
                             "extra "
                             "FROM char_inventory "
                             "WHERE charid = (?) "
-                            "ORDER BY FIELD(location,0,1,9,2,3,4,5,6,7,8,10,11,12);";
+                            "ORDER BY FIELD(location,0,1,9,2,3,4,5,6,7,8,10,11,12)";
 
         auto rset = db::preparedStmt(query, PChar->id);
         if (rset && rset->rowsCount())
@@ -1000,7 +1000,7 @@ namespace charutils
                             "equipslotid,"
                             "containerid "
                             "FROM char_equip "
-                            "WHERE charid = (?);";
+                            "WHERE charid = (?)";
 
         auto rset = db::preparedStmt(Query, PChar->id);
         if (rset && rset->rowsCount())
@@ -1500,7 +1500,7 @@ namespace charutils
         {
             const char* Query = "UPDATE char_inventory "
                                 "SET quantity = %u "
-                                "WHERE charid = %u AND location = %u AND slot = %u;";
+                                "WHERE charid = %u AND location = %u AND slot = %u";
 
             if (_sql->Query(Query, newQuantity, PChar->id, LocationID, slotID) != SQL_ERROR)
             {
@@ -1510,7 +1510,7 @@ namespace charutils
         }
         else if (newQuantity == 0)
         {
-            const char* Query = "DELETE FROM char_inventory WHERE charid = %u AND location = %u AND slot = %u;";
+            const char* Query = "DELETE FROM char_inventory WHERE charid = %u AND location = %u AND slot = %u";
 
             if (_sql->Query(Query, PChar->id, LocationID, slotID) != SQL_ERROR)
             {
@@ -2358,7 +2358,7 @@ namespace charutils
     void AddItemToRecycleBin(CCharEntity* PChar, uint32 container, uint8 slotID, uint8 quantity)
     {
         CItem*      PItem          = PChar->getStorage(container)->GetItem(slotID);
-        const char* Query          = "UPDATE char_inventory SET location = %u, slot = %u WHERE charid = %u AND location = %u AND slot = %u;";
+        const char* Query          = "UPDATE char_inventory SET location = %u, slot = %u WHERE charid = %u AND location = %u AND slot = %u";
         auto*       RecycleBin     = PChar->getStorage(LOC_RECYCLEBIN);
         auto*       OtherContainer = PChar->getStorage(container);
 
@@ -2392,7 +2392,7 @@ namespace charutils
         {
             // Evict recycle bin slot 1
             RecycleBin->InsertItem(nullptr, 1);
-            _sql->Query("DELETE FROM char_inventory WHERE charid = %u AND location = %u AND slot = %u;",
+            _sql->Query("DELETE FROM char_inventory WHERE charid = %u AND location = %u AND slot = %u",
                         PChar->id, LOC_RECYCLEBIN, 1);
 
             // Move everything around to accomodate
@@ -2434,7 +2434,7 @@ namespace charutils
         TracyZoneScoped;
 
         CItemContainer* recycleBin = PChar->getStorage(LOC_RECYCLEBIN);
-        const char*     Query      = "DELETE FROM char_inventory WHERE charid = %u AND location = 17;";
+        const char*     Query      = "DELETE FROM char_inventory WHERE charid = %u AND location = 17";
         if (_sql->Query(Query, PChar->id) != SQL_ERROR)
         {
             recycleBin->Clear();
@@ -2466,7 +2466,7 @@ namespace charutils
                                     ear2 = %u, \
                                     ring1 = %u, \
                                     ring2 = %u, \
-                                    back = %u;";
+                                    back = %u";
 
         auto getEquipIdFromSlot = [](CCharEntity* PChar, SLOTTYPE slot) -> uint16
         {
@@ -2502,7 +2502,7 @@ namespace charutils
             return;
         }
 
-        const char* Query = "SELECT main, sub, ranged, ammo, head, body, hands, legs, feet, neck, waist, ear1, ear2, ring1, ring2, back FROM char_equip_saved AS equip WHERE charid = %u AND jobid = %u;";
+        const char* Query = "SELECT main, sub, ranged, ammo, head, body, hands, legs, feet, neck, waist, ear1, ear2, ring1, ring2, back FROM char_equip_saved AS equip WHERE charid = %u AND jobid = %u";
 
         if (_sql->Query(Query, PChar->id, PChar->GetMJob()) == SQL_SUCCESS && _sql->NumRows() != 0 && _sql->NextRow() == SQL_SUCCESS)
         {
@@ -3815,7 +3815,7 @@ namespace charutils
             }
         }
 
-        ret = _sql->Query("SELECT level, exp FROM exp_base LIMIT 100;");
+        ret = _sql->Query("SELECT level, exp FROM exp_base LIMIT 100");
 
         if (ret != SQL_ERROR && _sql->NumRows() != 0)
         {
@@ -5026,7 +5026,7 @@ namespace charutils
                             "pos_y = %.3f,"
                             "pos_z = %.3f,"
                             "boundary = %u "
-                            "WHERE charid = %u;";
+                            "WHERE charid = %u";
 
         _sql->Query(Query, PChar->loc.p.rotation, PChar->loc.p.x, PChar->loc.p.y, PChar->loc.p.z, PChar->loc.boundary, PChar->id);
     }
@@ -5038,11 +5038,11 @@ namespace charutils
         {
             if (PChar->equip[lsSlot] == 0)
             {
-                sql->Query("DELETE FROM char_linkshells WHERE charid = %u AND lsslot = %u LIMIT 1;", PChar->id, lsSlot);
+                sql->Query("DELETE FROM char_linkshells WHERE charid = %u AND lsslot = %u LIMIT 1", PChar->id, lsSlot);
             }
             else
             {
-                const char* fmtQuery = "INSERT INTO char_linkshells SET charid = %u, lsslot = %u, location = %u, slot = %u ON DUPLICATE KEY UPDATE location = %u, slot = %u;";
+                const char* fmtQuery = "INSERT INTO char_linkshells SET charid = %u, lsslot = %u, location = %u, slot = %u ON DUPLICATE KEY UPDATE location = %u, slot = %u";
                 sql->Query(fmtQuery, PChar->id, lsSlot, PChar->equipLoc[lsSlot], PChar->equip[lsSlot], PChar->equipLoc[lsSlot], PChar->equip[lsSlot]);
             }
         }
@@ -5056,7 +5056,7 @@ namespace charutils
         const char* Query = "UPDATE chars "
                             "SET "
                             "quests = '%s' "
-                            "WHERE charid = %u;";
+                            "WHERE charid = %u";
 
         char questslist[sizeof(PChar->m_questLog) * 2 + 1];
         _sql->EscapeStringLen(questslist, (const char*)PChar->m_questLog, sizeof(PChar->m_questLog));
@@ -5085,7 +5085,7 @@ namespace charutils
                             "fame_aby_grauberg = %u,"
                             "fame_aby_uleguerand = %u,"
                             "fame_adoulin = %u "
-                            "WHERE charid = %u;";
+                            "WHERE charid = %u";
 
         _sql->Query(Query, PChar->profile.fame[0], PChar->profile.fame[1], PChar->profile.fame[2], PChar->profile.fame[3], PChar->profile.fame[4],
                     PChar->profile.fame[5], PChar->profile.fame[6], PChar->profile.fame[7], PChar->profile.fame[8], PChar->profile.fame[9],
@@ -5112,7 +5112,7 @@ namespace charutils
                             "rank_sandoria = %u,"
                             "rank_bastok = %u,"
                             "rank_windurst = %u "
-                            "WHERE charid = %u;";
+                            "WHERE charid = %u";
 
         char missionslist[sizeof(PChar->m_missionLog) * 2 + 1];
         _sql->EscapeStringLen(missionslist, (const char*)PChar->m_missionLog, sizeof(PChar->m_missionLog));
@@ -5145,7 +5145,7 @@ namespace charutils
         const char* Query = "UPDATE chars "
                             "SET "
                             "eminence = '%s' "
-                            "WHERE charid = %u;";
+                            "WHERE charid = %u";
 
         char eminenceList[sizeof(PChar->m_eminenceLog) * 2 + 1];
         _sql->EscapeStringLen(eminenceList, (const char*)&PChar->m_eminenceLog, sizeof(PChar->m_eminenceLog));
@@ -5204,7 +5204,7 @@ namespace charutils
     {
         TracyZoneScoped;
 
-        const char* fmtQuery = "UPDATE chars SET keyitems = '%s' WHERE charid = %u;";
+        const char* fmtQuery = "UPDATE chars SET keyitems = '%s' WHERE charid = %u";
 
         char keyitems[sizeof(PChar->keys) * 2 + 1];
         _sql->EscapeStringLen(keyitems, (const char*)&PChar->keys, sizeof(PChar->keys));
@@ -5217,7 +5217,7 @@ namespace charutils
         TracyZoneScoped;
 
         const char* Query = "INSERT IGNORE INTO char_spells "
-                            "VALUES (%u, %u);";
+                            "VALUES (%u, %u)";
 
         _sql->Query(Query, PChar->id, spellID);
     }
@@ -5227,7 +5227,7 @@ namespace charutils
         TracyZoneScoped;
 
         const char* Query = "DELETE FROM char_spells "
-                            "WHERE charid = %u AND spellid = %u;";
+                            "WHERE charid = %u AND spellid = %u";
 
         _sql->Query(Query, PChar->id, spellID);
     }
@@ -5239,7 +5239,7 @@ namespace charutils
         const char* Query = "UPDATE chars SET "
                             "abilities = '%s', "
                             "weaponskills = '%s' "
-                            "WHERE charid = %u;";
+                            "WHERE charid = %u";
 
         char abilities[sizeof(PChar->m_LearnedAbilities) * 2 + 1];
         char weaponskills[sizeof(PChar->m_LearnedWeaponskills) * 2 + 1];
@@ -5270,7 +5270,7 @@ namespace charutils
     {
         TracyZoneScoped;
 
-        const char* fmtQuery = "UPDATE chars SET zones = '%s' WHERE charid = %u;";
+        const char* fmtQuery = "UPDATE chars SET zones = '%s' WHERE charid = %u";
 
         char zones[sizeof(PChar->m_ZonesList) * 2 + 1];
         _sql->EscapeStringLen(zones, (const char*)PChar->m_ZonesList, sizeof(PChar->m_ZonesList));
@@ -5286,12 +5286,12 @@ namespace charutils
         {
             if (PChar->equip[i] == 0)
             {
-                _sql->Query("DELETE FROM char_equip WHERE charid = %u AND  equipslotid = %u LIMIT 1;", PChar->id, i);
+                _sql->Query("DELETE FROM char_equip WHERE charid = %u AND  equipslotid = %u LIMIT 1", PChar->id, i);
             }
             else
             {
                 const char* fmtQuery = "INSERT INTO char_equip SET charid = %u, equipslotid = %u , slotid  = %u, containerid = %u ON DUPLICATE KEY UPDATE "
-                                       "slotid  = %u, containerid = %u;";
+                                       "slotid  = %u, containerid = %u";
                 _sql->Query(fmtQuery, PChar->id, i, PChar->equip[i], PChar->equipLoc[i], PChar->equip[i], PChar->equipLoc[i]);
             }
         }
@@ -5303,18 +5303,18 @@ namespace charutils
 
         const char* Query = "UPDATE char_look "
                             "SET head = %u, body = %u, hands = %u, legs = %u, feet = %u, main = %u, sub = %u, ranged = %u "
-                            "WHERE charid = %u;";
+                            "WHERE charid = %u";
 
         look_t* look = (PChar->getStyleLocked() ? &PChar->mainlook : &PChar->look);
         _sql->Query(Query, look->head, look->body, look->hands, look->legs, look->feet, look->main, look->sub, look->ranged, PChar->id);
 
-        _sql->Query("UPDATE chars SET isstylelocked = %u WHERE charid = %u;", PChar->getStyleLocked() ? 1 : 0, PChar->id);
+        _sql->Query("UPDATE chars SET isstylelocked = %u WHERE charid = %u", PChar->getStyleLocked() ? 1 : 0, PChar->id);
 
         Query = "INSERT INTO char_style (charid, head, body, hands, legs, feet, main, sub, ranged) "
                 "VALUES (%u, %u, %u, %u, %u, %u, %u, %u, %u) ON DUPLICATE KEY UPDATE "
                 "charid = VALUES(charid), head = VALUES(head), body = VALUES(body), "
                 "hands = VALUES(hands), legs = VALUES(legs), feet = VALUES(feet), "
-                "main = VALUES(main), sub = VALUES(sub), ranged = VALUES(ranged);";
+                "main = VALUES(main), sub = VALUES(sub), ranged = VALUES(ranged)";
 
         _sql->Query(Query, PChar->id, PChar->styleItems[SLOT_HEAD], PChar->styleItems[SLOT_BODY], PChar->styleItems[SLOT_HANDS],
                     PChar->styleItems[SLOT_LEGS], PChar->styleItems[SLOT_FEET], PChar->styleItems[SLOT_MAIN], PChar->styleItems[SLOT_SUB],
@@ -5334,7 +5334,7 @@ namespace charutils
         const char* Query = "UPDATE char_stats "
                             "SET hp = %u, mp = %u, nameflags = %u, mhflag = %u, mjob = %u, sjob = %u, "
                             "pet_id = %u, pet_type = %u, pet_hp = %u, pet_mp = %u, pet_level = %u "
-                            "WHERE charid = %u;";
+                            "WHERE charid = %u";
 
         _sql->Query(Query, PChar->health.hp, PChar->health.mp, PChar->nameflags.flags, PChar->profile.mhflag, PChar->GetMJob(), PChar->GetSJob(),
                     PChar->petZoningInfo.petID, static_cast<uint8>(PChar->petZoningInfo.petType), PChar->petZoningInfo.petHP, PChar->petZoningInfo.petMP, PChar->petZoningInfo.petLevel, PChar->id);
@@ -5355,7 +5355,7 @@ namespace charutils
     {
         TracyZoneScoped;
 
-        const char* Query = "UPDATE %s SET %s %u WHERE charid = %u;";
+        const char* Query = "UPDATE %s SET %s %u WHERE charid = %u";
 
         _sql->Query(Query, "chars", "gmlevel =", PChar->m_GMlevel, PChar->id);
         _sql->Query(Query, "char_stats", "nameflags =", PChar->nameflags.flags, PChar->id);
@@ -5365,7 +5365,7 @@ namespace charutils
     {
         TracyZoneScoped;
 
-        const char* Query = "UPDATE %s SET %s %u WHERE charid = %u;";
+        const char* Query = "UPDATE %s SET %s %u WHERE charid = %u";
 
         _sql->Query(Query, "chars", "mentor =", PChar->m_mentorUnlocked, PChar->id);
     }
@@ -5374,7 +5374,7 @@ namespace charutils
     {
         TracyZoneScoped;
 
-        const char* Query = "UPDATE %s SET %s %u WHERE charid = %u;";
+        const char* Query = "UPDATE %s SET %s %u WHERE charid = %u";
 
         _sql->Query(Query, "chars", "job_master =", PChar->m_jobMasterDisplay, PChar->id);
     }
@@ -5388,7 +5388,7 @@ namespace charutils
     {
         TracyZoneScoped;
 
-        const char* Query = "UPDATE %s SET %s %u WHERE charid = %u;";
+        const char* Query = "UPDATE %s SET %s %u WHERE charid = %u";
 
         _sql->Query(Query, "chars", "nnameflags =", PChar->menuConfigFlags.flags, PChar->id);
     }
@@ -5403,7 +5403,7 @@ namespace charutils
     {
         TracyZoneScoped;
 
-        const char* Query = "UPDATE chars SET chatfilters = %llu WHERE charid = %u;";
+        const char* Query = "UPDATE chars SET chatfilters = %llu WHERE charid = %u";
 
         _sql->Query(Query, PChar->chatFilterFlags, PChar->id);
     }
@@ -5418,7 +5418,7 @@ namespace charutils
     {
         TracyZoneScoped;
 
-        const char* Query = "UPDATE chars SET languages = %u WHERE charid = %u;";
+        const char* Query = "UPDATE chars SET languages = %u WHERE charid = %u";
 
         _sql->Query(Query, PChar->search.language, PChar->id);
     }
@@ -5435,7 +5435,7 @@ namespace charutils
 
         const char* Query = "UPDATE chars "
                             "SET nation = %u "
-                            "WHERE charid = %u;";
+                            "WHERE charid = %u";
 
         _sql->Query(Query, PChar->profile.nation, PChar->id);
     }
@@ -5452,7 +5452,7 @@ namespace charutils
 
         const char* Query = "UPDATE chars "
                             "SET campaign_allegiance = %u "
-                            "WHERE charid = %u;";
+                            "WHERE charid = %u";
 
         _sql->Query(Query, PChar->profile.campaign_allegiance, PChar->id);
     }
@@ -5469,7 +5469,7 @@ namespace charutils
 
         const char* Query = "UPDATE chars "
                             "SET moghancement = %u "
-                            "WHERE charid = %u;";
+                            "WHERE charid = %u";
 
         _sql->Query(Query, PChar->m_moghancementID, PChar->id);
     }
@@ -5682,7 +5682,7 @@ namespace charutils
                             "skillid = %u,"
                             "value = %u,"
                             "rank = %u "
-                            "ON DUPLICATE KEY UPDATE value = %u, rank = %u;";
+                            "ON DUPLICATE KEY UPDATE value = %u, rank = %u";
 
         _sql->Query(Query, PChar->id, SkillID, PChar->RealSkills.skill[SkillID], PChar->RealSkills.rank[SkillID], PChar->RealSkills.skill[SkillID],
                     PChar->RealSkills.rank[SkillID]);
@@ -5739,7 +5739,7 @@ namespace charutils
             {
                 char buf[sizeof(PChar->teleport.homepoint) * 2 + 1];
                 _sql->EscapeStringLen(buf, (const char*)&PChar->teleport.homepoint, sizeof(PChar->teleport.homepoint));
-                const char* query = "UPDATE char_unlocks SET homepoints = '%s' WHERE charid = %u;";
+                const char* query = "UPDATE char_unlocks SET homepoints = '%s' WHERE charid = %u";
                 _sql->Query(query, buf, PChar->id);
                 return;
             }
@@ -5747,7 +5747,7 @@ namespace charutils
             {
                 char buf[sizeof(PChar->teleport.survival) * 2 + 1];
                 _sql->EscapeStringLen(buf, (const char*)&PChar->teleport.survival, sizeof(PChar->teleport.survival));
-                const char* query = "UPDATE char_unlocks SET survivals = '%s' WHERE charid = %u;";
+                const char* query = "UPDATE char_unlocks SET survivals = '%s' WHERE charid = %u";
                 _sql->Query(query, buf, PChar->id);
                 return;
             }
@@ -5755,7 +5755,7 @@ namespace charutils
             {
                 char buf[sizeof(PChar->teleport.abysseaConflux) * 2 + 1];
                 _sql->EscapeStringLen(buf, (const char*)&PChar->teleport.abysseaConflux, sizeof(PChar->teleport.abysseaConflux));
-                const char* query = "UPDATE char_unlocks SET abyssea_conflux = '%s' WHERE charid = %u;";
+                const char* query = "UPDATE char_unlocks SET abyssea_conflux = '%s' WHERE charid = %u";
                 _sql->Query(query, buf, PChar->id);
                 return;
             }
@@ -5763,7 +5763,7 @@ namespace charutils
             {
                 char buf[sizeof(PChar->teleport.waypoints) * 2 + 1];
                 _sql->EscapeStringLen(buf, (const char*)&PChar->teleport.waypoints, sizeof(PChar->teleport.waypoints));
-                const char* query = "UPDATE char_unlocks SET waypoints = '%s' WHERE charid = %u;";
+                const char* query = "UPDATE char_unlocks SET waypoints = '%s' WHERE charid = %u";
                 _sql->Query(query, buf, PChar->id);
                 return;
             }
@@ -5771,7 +5771,7 @@ namespace charutils
             {
                 char buf[sizeof(PChar->teleport.eschanPortal) * 2 + 1];
                 _sql->EscapeStringLen(buf, (const char*)&PChar->teleport.eschanPortal, sizeof(PChar->teleport.eschanPortal));
-                const char* query = "UPDATE char_unlocks SET eschan_portals = '%s' WHERE charid = %u;";
+                const char* query = "UPDATE char_unlocks SET eschan_portals = '%s' WHERE charid = %u";
                 _sql->Query(query, buf, PChar->id);
                 return;
             }
@@ -5780,7 +5780,7 @@ namespace charutils
                 return;
         }
 
-        const char* query = "UPDATE char_unlocks SET %s = %u WHERE charid = %u;";
+        const char* query = "UPDATE char_unlocks SET %s = %u WHERE charid = %u";
         _sql->Query(query, column, value, PChar->id);
     }
 
@@ -5903,7 +5903,7 @@ namespace charutils
     {
         TracyZoneScoped;
 
-        const char* fmtQuery = "UPDATE char_stats SET death = %u WHERE charid = %u LIMIT 1;";
+        const char* fmtQuery = "UPDATE char_stats SET death = %u WHERE charid = %u LIMIT 1";
         _sql->Query(fmtQuery, PChar->GetSecondsElapsedSinceDeath(), PChar->id);
     }
 
@@ -5913,7 +5913,7 @@ namespace charutils
 
         uint32 playtime = PChar->GetPlayTime();
 
-        _sql->Query("UPDATE chars SET playtime = '%u' WHERE charid = '%u' LIMIT 1;", playtime, PChar->id);
+        _sql->Query("UPDATE chars SET playtime = '%u' WHERE charid = '%u' LIMIT 1", playtime, PChar->id);
 
         // Removes new player icon if played for more than 240 hours
         if (PChar->isNewPlayer() && playtime >= 864000)
@@ -6137,7 +6137,7 @@ namespace charutils
 
         CItemContainer* Temp = PChar->getStorage(LOC_TEMPITEMS);
 
-        const char* Query = "DELETE FROM char_inventory WHERE charid = %u AND location = 3;";
+        const char* Query = "DELETE FROM char_inventory WHERE charid = %u AND location = 3";
 
         if (_sql->Query(Query, PChar->id) != SQL_ERROR)
         {
@@ -6150,7 +6150,7 @@ namespace charutils
         TracyZoneScoped;
 
         int ret = _sql->Query("SELECT partyid, allianceid, partyflag & %d FROM accounts_sessions s JOIN accounts_parties p ON "
-                              "s.charid = p.charid WHERE p.charid = %u;",
+                              "s.charid = p.charid WHERE p.charid = %u",
                               (PARTY_SECOND | PARTY_THIRD), PChar->id);
         if (ret != SQL_ERROR && _sql->NumRows() != 0 && _sql->NextRow() == SQL_SUCCESS)
         {
@@ -6301,14 +6301,14 @@ namespace charutils
     {
         TracyZoneScoped;
 
-        const char* Query = "UPDATE char_points SET %s = GREATEST(LEAST(%s+%d, %d), 0) WHERE charid = %u;";
+        const char* Query = "UPDATE char_points SET %s = GREATEST(LEAST(%s+%d, %d), 0) WHERE charid = %u";
 
         _sql->Query(Query, type, type, amount, max, PChar->id);
 
         if (strcmp(type, "unity_accolades") == 0 && amount > 0)
         {
             float       evalPoints   = static_cast<float>(amount) / 1000;
-            const char* rankingQuery = "UPDATE unity_system SET points_current = points_current+%f WHERE leader=%d;";
+            const char* rankingQuery = "UPDATE unity_system SET points_current = points_current+%f WHERE leader=%d";
 
             AddPoints(PChar, "current_accolades", amount, std::numeric_limits<int32>::max()); // Do not cap current_accolades
             _sql->Query(rankingQuery, evalPoints, PChar->profile.unity_leader);
@@ -6326,7 +6326,7 @@ namespace charutils
     {
         TracyZoneScoped;
 
-        const char* Query = "UPDATE char_points SET %s = %d WHERE charid = %u;";
+        const char* Query = "UPDATE char_points SET %s = %d WHERE charid = %u";
 
         _sql->Query(Query, type, amount, PChar->id);
 
@@ -6340,7 +6340,7 @@ namespace charutils
     {
         TracyZoneScoped;
 
-        const char* Query = "SELECT %s FROM char_points WHERE charid = %u;";
+        const char* Query = "SELECT %s FROM char_points WHERE charid = %u";
 
         int ret = _sql->Query(Query, type, PChar->id);
 
@@ -6355,7 +6355,7 @@ namespace charutils
     {
         TracyZoneScoped;
 
-        const char* leaderQuery = "UPDATE char_profile SET unity_leader=%d WHERE charid = %u;";
+        const char* leaderQuery = "UPDATE char_profile SET unity_leader=%d WHERE charid = %u";
 
         if (leaderID < 1 || leaderID > 11)
         {
@@ -6395,7 +6395,7 @@ namespace charutils
         {
             auto ip   = (uint32)ipp;
             auto port = (uint32)(ipp >> 32);
-            _sql->Query("UPDATE accounts_sessions SET server_addr = %u, server_port = %u WHERE charid = %u;",
+            _sql->Query("UPDATE accounts_sessions SET server_addr = %u, server_port = %u WHERE charid = %u",
                         ip, port, PChar->id);
 
             const char* Query = "UPDATE chars "
@@ -6408,7 +6408,7 @@ namespace charutils
                                 "pos_z = %.3f,"
                                 "moghouse = %u,"
                                 "boundary = %u "
-                                "WHERE charid = %u;";
+                                "WHERE charid = %u";
 
             _sql->Query(Query, PChar->loc.destination,
                         (PChar->m_moghouseID || PChar->loc.destination == PChar->getZone()) ? PChar->loc.prevzone : PChar->getZone(), PChar->loc.p.rotation,
@@ -6555,7 +6555,7 @@ namespace charutils
     {
         if (!localOnly)
         {
-            _sql->Query("DELETE FROM char_vars WHERE varname = '%s';", varName);
+            _sql->Query("DELETE FROM char_vars WHERE varname = '%s'", varName);
         }
 
         // clang-format off
@@ -6576,7 +6576,7 @@ namespace charutils
             return;
         }
 
-        const char* Query = "INSERT INTO char_vars SET charid = %u, varname = '%s', value = %i ON DUPLICATE KEY UPDATE value = value + %i;";
+        const char* Query = "INSERT INTO char_vars SET charid = %u, varname = '%s', value = %i ON DUPLICATE KEY UPDATE value = value + %i";
 
         _sql->Query(Query, PChar->id, var, value, value);
 
@@ -6585,7 +6585,7 @@ namespace charutils
 
     auto FetchCharVar(uint32 charId, std::string const& varName) -> std::pair<int32, uint32>
     {
-        const char* fmtQuery = "SELECT value, expiry FROM char_vars WHERE charid = %u AND varname = '%s' LIMIT 1;";
+        const char* fmtQuery = "SELECT value, expiry FROM char_vars WHERE charid = %u AND varname = '%s' LIMIT 1";
 
         int32 ret = _sql->Query(fmtQuery, charId, varName);
 
@@ -6601,7 +6601,7 @@ namespace charutils
             if (expiry > 0 && expiry <= currentTimestamp)
             {
                 value = 0;
-                _sql->Query("DELETE FROM char_vars WHERE charid = %u AND varname = '%s';", charId, varName);
+                _sql->Query("DELETE FROM char_vars WHERE charid = %u AND varname = '%s'", charId, varName);
             }
         }
 
@@ -6612,11 +6612,11 @@ namespace charutils
     {
         if (value == 0)
         {
-            _sql->Query("DELETE FROM char_vars WHERE charid = %u AND varname = '%s' LIMIT 1;", charId, var);
+            _sql->Query("DELETE FROM char_vars WHERE charid = %u AND varname = '%s' LIMIT 1", charId, var);
         }
         else
         {
-            _sql->Query("INSERT INTO char_vars SET charid = %u, varname = '%s', value = %i, expiry = %d ON DUPLICATE KEY UPDATE value = %i, expiry = %i;", charId, var, value, expiry, value, expiry);
+            _sql->Query("INSERT INTO char_vars SET charid = %u, varname = '%s', value = %i, expiry = %d ON DUPLICATE KEY UPDATE value = %i, expiry = %i", charId, var, value, expiry, value, expiry);
         }
     }
 
@@ -6716,7 +6716,7 @@ namespace charutils
     {
         TracyZoneScoped;
 
-        auto fmtQuery = "SELECT unix_timestamp(traverser_start) FROM char_unlocks WHERE charid = %u;";
+        auto fmtQuery = "SELECT unix_timestamp(traverser_start) FROM char_unlocks WHERE charid = %u";
 
         auto ret = _sql->Query(fmtQuery, PChar->id);
         if (ret != SQL_ERROR && _sql->NumRows() != 0 && _sql->NextRow() == SQL_SUCCESS)
@@ -6732,7 +6732,7 @@ namespace charutils
     {
         TracyZoneScoped;
 
-        auto fmtQuery = "UPDATE char_unlocks SET traverser_start = unix_timestamp() WHERE charid = %u;";
+        auto fmtQuery = "UPDATE char_unlocks SET traverser_start = unix_timestamp() WHERE charid = %u";
 
         _sql->Query(fmtQuery, PChar->id);
     }
@@ -6741,7 +6741,7 @@ namespace charutils
     {
         TracyZoneScoped;
 
-        auto fmtQuery = "SELECT traverser_claimed FROM char_unlocks WHERE charid = %u;";
+        auto fmtQuery = "SELECT traverser_claimed FROM char_unlocks WHERE charid = %u";
 
         auto ret = _sql->Query(fmtQuery, PChar->id);
         if (ret != SQL_ERROR && _sql->NumRows() != 0 && _sql->NextRow() == SQL_SUCCESS)
@@ -6756,7 +6756,7 @@ namespace charutils
     {
         TracyZoneScoped;
 
-        auto fmtQuery = "UPDATE char_unlocks SET traverser_claimed = traverser_claimed + %u WHERE charid = %u;";
+        auto fmtQuery = "UPDATE char_unlocks SET traverser_claimed = traverser_claimed + %u WHERE charid = %u";
 
         _sql->Query(fmtQuery, numStones, PChar->id);
     }
@@ -6765,7 +6765,7 @@ namespace charutils
     {
         TracyZoneScoped;
 
-        auto fmtQuery = "UPDATE char_unlocks SET traverser_claimed = %u WHERE charid = %u;";
+        auto fmtQuery = "UPDATE char_unlocks SET traverser_claimed = %u WHERE charid = %u";
 
         _sql->Query(fmtQuery, stoneTotal, PChar->id);
     }
@@ -6774,7 +6774,7 @@ namespace charutils
     {
         TracyZoneScoped;
 
-        auto   fmtQuery         = "SELECT unix_timestamp(traverser_start), traverser_claimed FROM char_unlocks WHERE charid = %u;";
+        auto   fmtQuery         = "SELECT unix_timestamp(traverser_start), traverser_claimed FROM char_unlocks WHERE charid = %u";
         time_t traverserEpoch   = 0;
         uint32 traverserClaimed = 0;
 
@@ -6823,7 +6823,7 @@ namespace charutils
                         "gm_calls, "          // 12
                         "distance_travelled " // 13
                         "FROM char_history "
-                        "WHERE charid = %u;";
+                        "WHERE charid = %u";
 
         auto ret = _sql->Query(fmtQuery, PChar->id);
         if (ret != SQL_ERROR && _sql->NumRows() != 0 && _sql->NextRow() == SQL_SUCCESS)
@@ -6874,7 +6874,7 @@ namespace charutils
                         "%u, " // 11 battles_fought
                         "%u, " // 12 gm_calls
                         "%u"   // 13 distance_travelled
-                        ");";
+                        ")";
 
         auto ret = _sql->Query(fmtQuery,
                                PChar->id,

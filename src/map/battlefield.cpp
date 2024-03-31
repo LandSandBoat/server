@@ -865,7 +865,7 @@ bool CBattlefield::SpawnLoot(CBaseEntity* PEntity)
 {
     if (!PEntity)
     {
-        const auto* fmtQuery = "SELECT npcId FROM bcnm_treasure_chests WHERE bcnmId = %u AND battlefieldNumber = %u;";
+        const auto* fmtQuery = "SELECT npcId FROM bcnm_treasure_chests WHERE bcnmId = %u AND battlefieldNumber = %u";
         auto        ret      = _sql->Query(fmtQuery, this->GetID(), this->GetArea());
 
         if (ret == SQL_ERROR || _sql->NumRows() == 0)

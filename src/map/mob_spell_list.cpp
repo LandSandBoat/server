@@ -53,7 +53,7 @@ namespace mobSpellList
                             spell_list.content_tag \
                             FROM mob_spell_lists JOIN spell_list ON spell_list.spellid = mob_spell_lists.spell_id \
                             WHERE spell_list_id < %u \
-                            ORDER BY min_level ASC;";
+                            ORDER BY min_level ASC";
 
         int32 ret = _sql->Query(Query, MAX_MOBSPELLLIST_ID);
 

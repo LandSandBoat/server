@@ -52,7 +52,7 @@ namespace instanceutils
             "zone_settings.name "        // 13
             "FROM instance_list INNER JOIN zone_settings "
             "ON instance_zone = zone_settings.zoneid "
-            "WHERE IF(%d <> 0, '%s' = zoneip AND %d = zoneport, TRUE);";
+            "WHERE IF(%d <> 0, '%s' = zoneip AND %d = zoneport, TRUE)";
 
         char address[INET_ADDRSTRLEN];
         inet_ntop(AF_INET, &map_ip, address, INET_ADDRSTRLEN);

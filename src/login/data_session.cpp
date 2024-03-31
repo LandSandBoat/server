@@ -61,7 +61,7 @@ void data_session::read_func()
 
                 auto   _sql          = std::make_unique<SqlConnection>();
                 uint32 numContentIds = 0;
-                int32  ret           = _sql->Query("SELECT content_ids FROM accounts WHERE id = %u;", session.accountID);
+                int32  ret           = _sql->Query("SELECT content_ids FROM accounts WHERE id = %u", session.accountID);
 
                 numContentIds = _sql->NumRows();
 
@@ -89,7 +89,7 @@ void data_session::read_func()
                         INNER JOIN char_look  USING(charid) \
                         INNER JOIN char_jobs  USING(charid) \
                         WHERE accid = %i \
-                    LIMIT %u;";
+                    LIMIT %u";
 
                 ret = _sql->Query(pfmtQuery, session.accountID, numContentIds);
                 if (ret == SQL_ERROR)
@@ -273,7 +273,7 @@ void data_session::read_func()
 
             if (_sql->Query("SELECT zoneip, zoneport, zoneid, pos_prevzone, gmlevel, accid, charname \
                                              FROM zone_settings, chars \
-                                             WHERE IF(pos_zone = 0, zoneid = pos_prevzone, zoneid = pos_zone) AND charid = %u AND accid = %u;",
+                                             WHERE IF(pos_zone = 0, zoneid = pos_prevzone, zoneid = pos_zone) AND charid = %u AND accid = %u",
                             charid, session.accountID) != SQL_ERROR &&
                 _sql->NumRows() != 0)
             {
@@ -314,7 +314,7 @@ void data_session::read_func()
 
                 if (_sql->Query("SELECT COUNT(client_addr) \
                                 FROM accounts_sessions \
-                                WHERE client_addr = %u;",
+                                WHERE client_addr = %u",
                                 accountIP) != SQL_ERROR &&
                     _sql->NumRows() != 0)
                 {
@@ -326,7 +326,7 @@ void data_session::read_func()
 
                 if (_sql->Query("SELECT * \
                                 FROM accounts_sessions \
-                                WHERE accid = %u AND client_port != '0';",
+                                WHERE accid = %u AND client_port != '0'",
                                 session.accountID) != SQL_ERROR &&
                     _sql->NumRows() != 0)
                 {
@@ -338,7 +338,7 @@ void data_session::read_func()
 
                 if (_sql->Query("SELECT UNIX_TIMESTAMP(exception) \
                                 FROM ip_exceptions \
-                                WHERE accid = %u;",
+                                WHERE accid = %u",
                                 session.accountID) != SQL_ERROR &&
                     _sql->NumRows() != 0)
                 {
@@ -374,7 +374,7 @@ void data_session::read_func()
                 {
                     if (PrevZone == 0)
                     {
-                        _sql->Query("UPDATE chars SET pos_prevzone = %d WHERE charid = %u;", ZoneID, charid);
+                        _sql->Query("UPDATE chars SET pos_prevzone = %d WHERE charid = %u", ZoneID, charid);
                     }
                     auto searchPort                       = settings::get<uint16>("network.SEARCH_PORT");
                     characterSelectionResponse.cache_ip   = session.serverIP; // search-server ip
@@ -452,7 +452,7 @@ void data_session::read_func()
                 strftime(timeAndDate, sizeof(timeAndDate), "%Y:%m:%d %H:%M:%S", &convertedTime);
 
                 if (_sql->Query("INSERT INTO account_ip_record(login_time,accid,charid,client_ip) \
-                            VALUES ('%s', %u, %u, '%s');",
+                            VALUES ('%s', %u, %u, '%s')",
                                 timeAndDate, session.accountID, charid, loginHelpers::ip2str(accountIP)) == SQL_ERROR)
                 {
                     ShowError("data_session: Could not write info to account_ip_record.");

@@ -452,7 +452,7 @@ namespace spell
     {
         const char* Query = "SELECT spellid, name, jobs, `group`, family, validTargets, skill, castTime, recastTime, animation, animationTime, mpCost, \
                              AOE, base, element, zonemisc, multiplier, message, magicBurstMessage, CE, VE, requirements, content_tag, spell_range \
-                             FROM spell_list;";
+                             FROM spell_list";
 
         int32 ret = _sql->Query(Query);
 
@@ -565,7 +565,7 @@ namespace spell
         const char* blueQuery = "SELECT blue_spell_list.spellid, blue_spell_list.mob_skill_id, blue_spell_list.set_points, \
                                 blue_spell_list.trait_category, blue_spell_list.trait_category_weight, blue_spell_list.primary_sc, \
                                 blue_spell_list.secondary_sc, blue_spell_list.tertiary_sc, spell_list.content_tag \
-                             FROM blue_spell_list JOIN spell_list on blue_spell_list.spellid = spell_list.spellid;";
+                             FROM blue_spell_list JOIN spell_list on blue_spell_list.spellid = spell_list.spellid";
 
         ret = _sql->Query(blueQuery);
 
@@ -616,7 +616,7 @@ namespace spell
             }
         }
 
-        ret = _sql->Query("SELECT spellId, meritId, content_tag FROM spell_list INNER JOIN merits ON spell_list.name = merits.name;");
+        ret = _sql->Query("SELECT spellId, meritId, content_tag FROM spell_list INNER JOIN merits ON spell_list.name = merits.name");
 
         if (ret != SQL_ERROR && _sql->NumRows() != 0)
         {

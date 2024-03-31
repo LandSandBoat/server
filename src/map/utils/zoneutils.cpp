@@ -295,7 +295,7 @@ namespace zoneutils
                         "widescan "
                         "FROM npc_list INNER JOIN zone_settings "
                         "ON (npcid & 0xFFF000) >> 12 = zone_settings.zoneid "
-                        "WHERE ((npcid & 0xFFF000) >> 12) = {};", zoneId);
+                        "WHERE ((npcid & 0xFFF000) >> 12) = {}", zoneId);
 
                     auto rset = db::query(Query);
                     if (rset && rset->rowsCount())
@@ -417,7 +417,7 @@ namespace zoneutils
                         INNER JOIN zone_settings ON mob_groups.zoneid = zone_settings.zoneid \
                         WHERE NOT (pos_x = 0 AND pos_y = 0 AND pos_z = 0) \
                         AND mob_groups.zoneid = ((mobid >> 12) & 0xFFF) \
-                        AND mob_groups.zoneid = {};", zoneId);
+                        AND mob_groups.zoneid = {}", zoneId);
 
                     int32 ret = sql->Query(Query.c_str());
 
@@ -587,7 +587,7 @@ namespace zoneutils
                         LEFT JOIN mob_groups ON mob_spawn_points.groupid = mob_groups.groupid \
                         INNER JOIN zone_settings ON mob_groups.zoneid = zone_settings.zoneid \
                         WHERE mob_groups.zoneid = ((mobid >> 12) & 0xFFF) \
-                        AND mob_groups.zoneid = {};", zoneId);
+                        AND mob_groups.zoneid = {}", zoneId);
 
                     ret = sql->Query(PetQuery.c_str());
                     if (ret != SQL_ERROR && sql->NumRows() != 0)
@@ -715,7 +715,7 @@ namespace zoneutils
         g_PTrigger = new CNpcEntity(); // you need to set the default model in the CNpcEntity constructor
 
         std::vector<uint16> zones;
-        const char*         query = "SELECT zoneid FROM zone_settings WHERE IF(%d <> 0, '%s' = zoneip AND %d = zoneport, TRUE);";
+        const char*         query = "SELECT zoneid FROM zone_settings WHERE IF(%d <> 0, '%s' = zoneip AND %d = zoneport, TRUE)";
 
         char address[INET_ADDRSTRLEN];
         inet_ntop(AF_INET, &map_ip, address, INET_ADDRSTRLEN);
@@ -1167,7 +1167,7 @@ namespace zoneutils
     uint64 GetZoneIPP(uint16 zoneID)
     {
         uint64      ipp   = 0;
-        const char* query = "SELECT zoneip, zoneport FROM zone_settings WHERE zoneid = %u;";
+        const char* query = "SELECT zoneip, zoneport FROM zone_settings WHERE zoneid = %u";
 
         int ret = _sql->Query(query, zoneID);
 

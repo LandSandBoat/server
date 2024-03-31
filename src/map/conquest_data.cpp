@@ -36,7 +36,7 @@ ConquestData::ConquestData()
 void ConquestData::load()
 {
     const char* Query = "SELECT region_id, region_control, region_control_prev, sandoria_influence, bastok_influence, windurst_influence, beastmen_influence \
-                         FROM conquest_system;";
+                         FROM conquest_system";
 
     auto rset = db::query(Query);
     while (rset && rset->next())

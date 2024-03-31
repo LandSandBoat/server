@@ -69,7 +69,7 @@ void CLinkshell::setColor(uint16 color)
 void CLinkshell::setPostRights(uint8 postrights)
 {
     m_postRights = postrights;
-    _sql->Query("UPDATE linkshells SET postrights = %u WHERE linkshellid = %d;", postrights, m_id);
+    _sql->Query("UPDATE linkshells SET postrights = %u WHERE linkshellid = %d", postrights, m_id);
 }
 
 const std::string& CLinkshell::getName()
@@ -86,7 +86,7 @@ void CLinkshell::setMessage(const std::string& message, const std::string& poste
 {
     char sqlMessage[256];
     _sql->EscapeString(sqlMessage, message.c_str());
-    _sql->Query("UPDATE linkshells SET poster = '%s', message = '%s', messagetime = %u WHERE linkshellid = %d;", poster, sqlMessage,
+    _sql->Query("UPDATE linkshells SET poster = '%s', message = '%s', messagetime = %u WHERE linkshellid = %d", poster, sqlMessage,
                 static_cast<uint32>(time(nullptr)), m_id);
 
     int8 packetData[8]{};
@@ -456,7 +456,7 @@ namespace linkshell
 
     bool IsValidLinkshellName(const std::string& name)
     {
-        auto ret = _sql->Query("SELECT linkshellid FROM linkshells WHERE name = '%s' AND broken != 1;", name);
+        auto ret = _sql->Query("SELECT linkshellid FROM linkshells WHERE name = '%s' AND broken != 1", name);
         return ret == SQL_ERROR || _sql->NumRows() == 0;
     }
 

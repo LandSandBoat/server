@@ -192,7 +192,7 @@ namespace battleutils
         const char* specialQuery = "SELECT mob_skill_id, mob_anim_id, mob_skill_name, \
         mob_skill_aoe, mob_skill_distance, mob_anim_time, mob_prepare_time, \
         mob_valid_targets, mob_skill_flag, mob_skill_param, knockback, primary_sc, secondary_sc, tertiary_sc \
-        FROM mob_skills;";
+        FROM mob_skills";
 
         int32 ret = _sql->Query(specialQuery);
 
@@ -223,7 +223,7 @@ namespace battleutils
         }
 
         const char* fmtQuery = "SELECT skill_list_id, mob_skill_id \
-        FROM mob_skill_lists;";
+        FROM mob_skill_lists";
 
         ret = _sql->Query(fmtQuery);
 
@@ -246,7 +246,7 @@ namespace battleutils
         const char* specialQuery = "SELECT pet_skill_id, pet_anim_id, pet_skill_name, \
         pet_skill_aoe, pet_skill_distance, pet_anim_time, pet_prepare_time, \
         pet_valid_targets, pet_message, pet_skill_flag, pet_skill_param, pet_skill_finish_category, knockback, primary_sc, secondary_sc, tertiary_sc \
-        FROM pet_skills;";
+        FROM pet_skills";
 
         int32 ret = _sql->Query(specialQuery);
 

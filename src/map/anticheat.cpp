@@ -101,7 +101,7 @@ namespace anticheat
         {
             cellid = 1;
         }
-        const char* fmtQuery = "INSERT INTO char_vars SET charid = %u, varname = 'inJail', value = %i ON DUPLICATE KEY UPDATE value = %i;";
+        const char* fmtQuery = "INSERT INTO char_vars SET charid = %u, varname = 'inJail', value = %i ON DUPLICATE KEY UPDATE value = %i";
         _sql->Query(fmtQuery, PChar->id, cellid, cellid);
         PChar->loc.p.x         = (float)g_jailCells[cellid - 1][0];
         PChar->loc.p.y         = (float)g_jailCells[cellid - 1][1];
@@ -133,7 +133,7 @@ namespace anticheat
         if (action & CHEAT_ACTION_LOG)
         {
             // Log intgo cheat_incidents table
-            const char* fmtQuery = "INSERT INTO cheat_incidents SET charid = %u, cheatid = %u, cheatarg = %u, description= '%s';";
+            const char* fmtQuery = "INSERT INTO cheat_incidents SET charid = %u, cheatid = %u, cheatarg = %u, description= '%s'";
             _sql->Query(fmtQuery, PChar->id, static_cast<uint32>(cheatid), cheatarg, description != nullptr ? description : "");
         }
         if (action & CHEAT_ACTION_WARN)

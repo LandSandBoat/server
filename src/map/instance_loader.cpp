@@ -84,7 +84,7 @@ CInstance* CInstanceLoader::LoadInstance()
             INNER JOIN mob_pools ON mob_groups.poolid = mob_pools.poolid \
             INNER JOIN mob_resistances ON mob_resistances.resist_id = mob_pools.resist_id \
             INNER JOIN mob_family_system ON mob_pools.familyid = mob_family_system.familyID \
-            WHERE instanceid = %u AND NOT (pos_x = 0 AND pos_y = 0 AND pos_z = 0);";
+            WHERE instanceid = %u AND NOT (pos_x = 0 AND pos_y = 0 AND pos_z = 0)";
 
     int32 ret = _sql->Query(Query, instance->GetID());
 
@@ -232,7 +232,7 @@ CInstance* CInstanceLoader::LoadInstance()
             status, entityFlags, look, name_prefix, widescan \
             FROM instance_entities INNER JOIN npc_list ON \
             (instance_entities.id = npc_list.npcid) \
-            WHERE instanceid = %u AND npcid >= %u AND npcid < %u;";
+            WHERE instanceid = %u AND npcid >= %u AND npcid < %u";
 
         uint32 zoneMin = (zone->GetID() << 12) + 0x1000000;
         uint32 zoneMax = zoneMin + 1024;

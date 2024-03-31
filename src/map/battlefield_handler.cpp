@@ -352,7 +352,7 @@ bool CBattlefieldHandler::ReachedMaxCapacity(int battlefieldId) const
     // we have at least one free area and id has been passed so lets look it up
     if (battlefieldId != -1)
     {
-        std::string query("SELECT battlefieldNumber FROM bcnm_battlefield WHERE bcnmId = %i;");
+        std::string query("SELECT battlefieldNumber FROM bcnm_battlefield WHERE bcnmId = %i");
         auto        ret = _sql->Query(query.c_str(), battlefieldId);
         if (ret != SQL_ERROR && _sql->NumRows() != 0)
         {

@@ -49,7 +49,7 @@ namespace guildutils
 {
     void Initialize()
     {
-        const char* fmtQuery = "SELECT DISTINCT id, points_name FROM guilds ORDER BY id ASC;";
+        const char* fmtQuery = "SELECT DISTINCT id, points_name FROM guilds ORDER BY id ASC";
         if (_sql->Query(fmtQuery) != SQL_ERROR && _sql->NumRows() != 0)
         {
             g_PGuildList.reserve((unsigned int)_sql->NumRows());
@@ -66,7 +66,7 @@ namespace guildutils
             return;
         }
 
-        fmtQuery = "SELECT DISTINCT guildid FROM guild_shops ORDER BY guildid ASC LIMIT 256;";
+        fmtQuery = "SELECT DISTINCT guildid FROM guild_shops ORDER BY guildid ASC LIMIT 256";
 
         if (_sql->Query(fmtQuery) != SQL_ERROR && _sql->NumRows() != 0)
         {

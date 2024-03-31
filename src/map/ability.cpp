@@ -413,7 +413,7 @@ namespace ability
             }
         }
 
-        const char* Query2 = "SELECT recastId, job, level, maxCharges, chargeTime, meritModId FROM abilities_charges ORDER BY job, level ASC;";
+        const char* Query2 = "SELECT recastId, job, level, maxCharges, chargeTime, meritModId FROM abilities_charges ORDER BY job, level ASC";
 
         ret = _sql->Query(Query2);
 

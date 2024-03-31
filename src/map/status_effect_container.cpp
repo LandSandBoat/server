@@ -1546,7 +1546,7 @@ void CStatusEffectContainer::LoadStatusEffects()
                         "flags, "
                         "timestamp "
                         "FROM char_effects "
-                        "WHERE charid = (?);";
+                        "WHERE charid = (?)";
 
     auto rset = db::preparedStmt(Query, m_POwner->id);
 
@@ -1650,7 +1650,7 @@ void CStatusEffectContainer::SaveStatusEffects(bool logout)
         if (realduration > 0s || PStatusEffect->GetDuration() == 0)
         {
             const char* Query = "INSERT INTO char_effects (charid, effectid, icon, power, tick, duration, subid, subpower, tier, flags, timestamp) "
-                                "VALUES(%u,%u,%u,%u,%u,%u,%u,%u,%u,%u,%u);";
+                                "VALUES(%u,%u,%u,%u,%u,%u,%u,%u,%u,%u,%u)";
 
             // save power of utsusemi and blink
             if (PStatusEffect->GetStatusID() == EFFECT_COPY_IMAGE)

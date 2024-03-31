@@ -162,7 +162,7 @@ map_session_data_t* mapsession_createsession(uint32 ip, uint16 port)
     map_session_list[ipp] = map_session_data;
 
     auto ipstr    = ip2str(map_session_data->client_addr);
-    auto fmtQuery = fmt::format("SELECT charid FROM accounts_sessions WHERE inet_ntoa(client_addr) = '{}' LIMIT 1;", ipstr);
+    auto fmtQuery = fmt::format("SELECT charid FROM accounts_sessions WHERE inet_ntoa(client_addr) = '{}' LIMIT 1", ipstr);
 
     int32 ret = _sql->Query(fmtQuery.c_str());
 
@@ -225,7 +225,7 @@ int32 do_init(int32 argc, char** argv)
 
     PacketParserInitialize();
 
-    _sql->Query("DELETE FROM accounts_sessions WHERE IF(%u = 0 AND %u = 0, true, server_addr = %u AND server_port = %u);",
+    _sql->Query("DELETE FROM accounts_sessions WHERE IF(%u = 0 AND %u = 0, true, server_addr = %u AND server_port = %u)",
                 map_ip.s_addr, map_port, map_ip.s_addr, map_port);
 
     ShowInfo("do_init: zlib is reading");
@@ -357,7 +357,7 @@ int32 do_init(int32 argc, char** argv)
         // our own SQL connection.
         {
             auto otherSql  = std::make_unique<SqlConnection>();
-            auto query     = "UPDATE %s SET %s %u WHERE charid = %u;";
+            auto query     = "UPDATE %s SET %s %u WHERE charid = %u";
             otherSql->Query(query, "chars", "gmlevel =", PChar->m_GMlevel, PChar->id);
             otherSql->Query(query, "char_stats", "nameflags =", PChar->nameflags.flags, PChar->id);
         }
@@ -677,14 +677,14 @@ int32 recv_parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_da
 
             std::ignore = LangID;
 
-            auto rset = db::preparedStmt("SELECT charid FROM chars WHERE charid = (?) LIMIT 1;", CharID);
+            auto rset = db::preparedStmt("SELECT charid FROM chars WHERE charid = (?) LIMIT 1", CharID);
             if (!rset || rset->rowsCount() == 0 || !rset->next())
             {
                 ShowError("recv_parse: Cannot load charid %u", CharID);
                 return -1;
             }
 
-            rset = db::preparedStmt("SELECT session_key FROM accounts_sessions WHERE charid = (?) LIMIT 1;", CharID);
+            rset = db::preparedStmt("SELECT session_key FROM accounts_sessions WHERE charid = (?) LIMIT 1", CharID);
             if (!rset || rset->rowsCount() == 0 || !rset->next())
             {
                 ShowError("recv_parse: Cannot load session_key for charid %u", CharID);
@@ -1180,7 +1180,7 @@ int32 map_cleanup(time_point tick, CTaskMgr::CTask* PTask)
                         {
                             // Player session is attached to this map process and has stopped responding.
                             map_session_data->PChar->StatusEffectContainer->SaveStatusEffects(true);
-                            _sql->Query("DELETE FROM accounts_sessions WHERE charid = %u;", map_session_data->PChar->id);
+                            _sql->Query("DELETE FROM accounts_sessions WHERE charid = %u", map_session_data->PChar->id);
                         }
 
                         ShowDebug(fmt::format("Clearing map server session for player: {} in zone: {} (On other map server = {})", PChar->name, PChar->loc.zone ? PChar->loc.zone->getName() : "None", otherMap ? "Yes" : "No"));

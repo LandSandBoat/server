@@ -386,7 +386,7 @@ void CZone::LoadZoneLines()
 void CZone::LoadZoneWeather()
 {
     TracyZoneScoped;
-    static const char* Query = "SELECT weather FROM zone_weather WHERE zone = %u;";
+    static const char* Query = "SELECT weather FROM zone_weather WHERE zone = %u";
 
     int32 ret = _sql->Query(Query, m_zoneID);
     if (ret != SQL_ERROR && _sql->NumRows() != 0)

@@ -404,7 +404,7 @@ namespace itemutils
                             "LEFT JOIN item_weapon AS w USING (itemId) "
                             "LEFT JOIN item_furnishing AS f USING (itemId) "
                             "LEFT JOIN item_puppet AS p USING (itemId) "
-                            "WHERE itemId < %u;";
+                            "WHERE itemId < %u";
 
         int32 ret = _sql->Query(Query, MAX_ITEMID);
 
@@ -590,7 +590,7 @@ namespace itemutils
 
     void LoadDropList()
     {
-        int32 ret = _sql->Query("SELECT dropId, itemId, dropType, itemRate, groupId, groupRate FROM mob_droplist WHERE dropid < %u;", MAX_DROPID);
+        int32 ret = _sql->Query("SELECT dropId, itemId, dropType, itemRate, groupId, groupRate FROM mob_droplist WHERE dropid < %u", MAX_DROPID);
 
         if (ret != SQL_ERROR && _sql->NumRows() != 0)
         {

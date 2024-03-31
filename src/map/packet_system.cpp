@@ -326,7 +326,7 @@ void SmallPacket0x00A(map_session_data_t* const PSession, CCharEntity* const PCh
 
         _sql->Query(fmtQuery, PChar->targid, session_key, currentZone->GetIP(), PSession->client_port, PChar->id);
 
-        fmtQuery  = "SELECT death FROM char_stats WHERE charid = %u;";
+        fmtQuery  = "SELECT death FROM char_stats WHERE charid = %u";
         int32 ret = _sql->Query(fmtQuery, PChar->id);
         if (_sql->NextRow() == SQL_SUCCESS)
         {
@@ -1504,7 +1504,7 @@ void SmallPacket0x029(map_session_data_t* const PSession, CCharEntity* const PCh
 
         if (NewSlotID != ERROR_SLOTID)
         {
-            const char* Query = "UPDATE char_inventory SET location = %u, slot = %u WHERE charid = %u AND location = %u AND slot = %u;";
+            const char* Query = "UPDATE char_inventory SET location = %u, slot = %u WHERE charid = %u AND location = %u AND slot = %u";
 
             if (_sql->Query(Query, ToLocationID, NewSlotID, PChar->id, FromLocationID, FromSlotID) != SQL_ERROR && _sql->AffectedRows() != 0)
             {
@@ -2476,7 +2476,7 @@ void SmallPacket0x04D(map_session_data_t* const PSession, CCharEntity* const PCh
             }
 
             const char* fmtQuery = "SELECT itemid, itemsubid, slot, quantity, sent, extra, sender, charname FROM delivery_box WHERE charid = %u AND box = %d "
-                                   "AND slot < 8 ORDER BY slot;";
+                                   "AND slot < 8 ORDER BY slot";
 
             int32 ret = _sql->Query(fmtQuery, PChar->id, boxtype);
 
@@ -2558,7 +2558,7 @@ void SmallPacket0x04D(map_session_data_t* const PSession, CCharEntity* const PCh
                 // TODO: Validate me
                 auto senderName = str(data[0x10]);
 
-                auto rset = db::preparedStmt("SELECT charid, accid FROM chars WHERE charname = '?' LIMIT 1;", senderName);
+                auto rset = db::preparedStmt("SELECT charid, accid FROM chars WHERE charname = '?' LIMIT 1", senderName);
                 if (rset && rset->rowsCount() && rset->next())
                 {
                     uint32 charid = rset->getUInt("charid");
@@ -2575,7 +2575,7 @@ void SmallPacket0x04D(map_session_data_t* const PSession, CCharEntity* const PCh
                         // clang-format off
                         auto exists = [&]() -> bool
                         {
-                            auto rset2 = db::query(fmt::format("SELECT COUNT(*) FROM chars WHERE charid = '{}' AND accid = '{}' LIMIT 1;", PChar->id, accid));
+                            auto rset2 = db::query(fmt::format("SELECT COUNT(*) FROM chars WHERE charid = '{}' AND accid = '{}' LIMIT 1", PChar->id, accid));
                             return rset2 && rset2->next() && rset2->getUInt("COUNT(*)") > 0;
                         }();
                         if (!exists)
@@ -2605,7 +2605,7 @@ void SmallPacket0x04D(map_session_data_t* const PSession, CCharEntity* const PCh
                     _sql->EscapeStringLen(extra, (const char*)PItem->m_extra, sizeof(PItem->m_extra));
 
                     auto rset3 = db::preparedStmt(
-                        "INSERT INTO delivery_box(charid, charname, box, slot, itemid, itemsubid, quantity, extra, senderid, sender) VALUES(?, ?, 2, ?, ?, ?, ?, ?, ?, ?);",
+                        "INSERT INTO delivery_box(charid, charname, box, slot, itemid, itemsubid, quantity, extra, senderid, sender) VALUES(?, ?, 2, ?, ?, ?, ?, ?, ?, ?)",
                         PChar->id, PChar->getName(), slotID, PItem->getID(), PItem->getSubID(), quantity, extra, charid, senderName);
 
                     if (rset3 && rset3->rowInserted() == 1 && charutils::UpdateItem(PChar, LOC_INVENTORY, invslot, -(int32)quantity))
@@ -2657,7 +2657,7 @@ void SmallPacket0x04D(map_session_data_t* const PSession, CCharEntity* const PCh
                         {
                             uint32 charid = _sql->GetUIntData(0);
 
-                            ret = _sql->Query("UPDATE delivery_box SET sent = 1 WHERE charid = %u AND senderid = %u AND slot = %u AND box = 2;",
+                            ret = _sql->Query("UPDATE delivery_box SET sent = 1 WHERE charid = %u AND senderid = %u AND slot = %u AND box = 2",
                                               PChar->id, charid, slotID);
 
                             if (ret != SQL_ERROR && _sql->AffectedRows() == 1)
@@ -2718,14 +2718,14 @@ void SmallPacket0x04D(map_session_data_t* const PSession, CCharEntity* const PCh
                     {
                         uint32 charid = _sql->GetUIntData(0);
                         ret           = _sql->Query(
-                            "UPDATE delivery_box SET sent = 0 WHERE charid = %u AND box = 2 AND slot = %u AND sent = 1 AND received = 0 LIMIT 1;",
-                            PChar->id, slotID);
+                                      "UPDATE delivery_box SET sent = 0 WHERE charid = %u AND box = 2 AND slot = %u AND sent = 1 AND received = 0 LIMIT 1",
+                                      PChar->id, slotID);
 
                         if (ret != SQL_ERROR && _sql->AffectedRows() == 1)
                         {
                             ret = _sql->Query(
                                 "DELETE FROM delivery_box WHERE senderid = %u AND box = 1 AND charid = %u AND itemid = %u AND quantity = %u "
-                                "AND slot >= 8 LIMIT 1;",
+                                "AND slot >= 8 LIMIT 1",
                                 PChar->id, charid, PItem->getID(), PItem->getQuantity());
 
                             if (ret != SQL_ERROR && _sql->AffectedRows() == 1)
@@ -2756,7 +2756,7 @@ void SmallPacket0x04D(map_session_data_t* const PSession, CCharEntity* const PCh
                         {
                             _sql->SetAutoCommit(true);
                             ret = _sql->Query(
-                                "DELETE FROM delivery_box WHERE box = 2 AND charid = %u AND itemid = %u AND quantity = %u AND slot = %u LIMIT 1;",
+                                "DELETE FROM delivery_box WHERE box = 2 AND charid = %u AND itemid = %u AND quantity = %u AND slot = %u LIMIT 1",
                                 PChar->id, PItem->getID(), PItem->getQuantity(), slotID);
                             if (ret != SQL_ERROR && _sql->AffectedRows() == 1)
                             {
@@ -2796,12 +2796,12 @@ void SmallPacket0x04D(map_session_data_t* const PSession, CCharEntity* const PCh
                         limit++;
                     }
                 }
-                std::string Query = "SELECT charid FROM delivery_box WHERE charid = %u AND box = 1 AND slot >= 8 ORDER BY slot ASC LIMIT %u;";
+                std::string Query = "SELECT charid FROM delivery_box WHERE charid = %u AND box = 1 AND slot >= 8 ORDER BY slot ASC LIMIT %u";
                 ret               = _sql->Query(Query.c_str(), PChar->id, limit);
             }
             else if (boxtype == 0x02)
             {
-                std::string Query = "SELECT charid FROM delivery_box WHERE charid = %u AND received = 1 AND box = 2;";
+                std::string Query = "SELECT charid FROM delivery_box WHERE charid = %u AND received = 1 AND box = 2";
                 ret               = _sql->Query(Query.c_str(), PChar->id);
             }
 
@@ -2832,7 +2832,7 @@ void SmallPacket0x04D(map_session_data_t* const PSession, CCharEntity* const PCh
                 if (_sql->SetAutoCommit(false) && _sql->TransactionStart())
                 {
                     std::string Query = "SELECT itemid, itemsubid, quantity, extra, sender, senderid FROM delivery_box WHERE charid = %u AND box = 1 AND slot "
-                                        ">= 8 ORDER BY slot ASC LIMIT 1;";
+                                        ">= 8 ORDER BY slot ASC LIMIT 1";
 
                     int32 ret = _sql->Query(Query.c_str(), PChar->id);
 
@@ -2860,18 +2860,18 @@ void SmallPacket0x04D(map_session_data_t* const PSession, CCharEntity* const PCh
 
                                 // the result of this query doesn't really matter, it can be sent from the auction house which has no sender record
                                 _sql->Query("UPDATE delivery_box SET received = 1 WHERE senderid = %u AND charid = %u AND box = 2 AND received = 0 AND quantity "
-                                            "= %u AND sent = 1 AND itemid = %u LIMIT 1;",
+                                            "= %u AND sent = 1 AND itemid = %u LIMIT 1",
                                             PChar->id, senderID, PItem->getQuantity(), PItem->getID());
 
-                                _sql->Query("SELECT slot FROM delivery_box WHERE charid = %u AND box = 1 AND slot > 7 ORDER BY slot ASC;", PChar->id);
+                                _sql->Query("SELECT slot FROM delivery_box WHERE charid = %u AND box = 1 AND slot > 7 ORDER BY slot ASC", PChar->id);
                                 if (ret != SQL_ERROR && _sql->NumRows() > 0 && _sql->NextRow() == SQL_SUCCESS)
                                 {
                                     uint8 queue = _sql->GetUIntData(0);
-                                    Query       = "UPDATE delivery_box SET slot = %u WHERE charid = %u AND box = 1 AND slot = %u;";
+                                    Query       = "UPDATE delivery_box SET slot = %u WHERE charid = %u AND box = 1 AND slot = %u";
                                     ret         = _sql->Query(Query.c_str(), slotID, PChar->id, queue);
                                     if (ret != SQL_ERROR)
                                     {
-                                        Query = "UPDATE delivery_box SET slot = slot - 1 WHERE charid = %u AND box = 1 AND slot > %u;";
+                                        Query = "UPDATE delivery_box SET slot = slot - 1 WHERE charid = %u AND box = 1 AND slot > %u";
                                         ret   = _sql->Query(Query.c_str(), PChar->id, queue);
                                         if (ret != SQL_ERROR)
                                         {
@@ -2912,7 +2912,7 @@ void SmallPacket0x04D(map_session_data_t* const PSession, CCharEntity* const PCh
             uint8 received_items = 0;
             uint8 deliverySlotID = 0;
 
-            int32 ret = _sql->Query("SELECT slot FROM delivery_box WHERE charid = %u AND received = 1 AND box = 2 ORDER BY slot ASC;", PChar->id);
+            int32 ret = _sql->Query("SELECT slot FROM delivery_box WHERE charid = %u AND received = 1 AND box = 2 ORDER BY slot ASC", PChar->id);
 
             if (ret != SQL_ERROR)
             {
@@ -2925,7 +2925,7 @@ void SmallPacket0x04D(map_session_data_t* const PSession, CCharEntity* const PCh
                         CItem* PItem = PChar->UContainer->GetItem(deliverySlotID);
                         if (PItem && PItem->isSent())
                         {
-                            ret = _sql->Query("DELETE FROM delivery_box WHERE charid = %u AND box = 2 AND slot = %u LIMIT 1;", PChar->id, deliverySlotID);
+                            ret = _sql->Query("DELETE FROM delivery_box WHERE charid = %u AND box = 2 AND slot = %u LIMIT 1", PChar->id, deliverySlotID);
                             if (ret != SQL_ERROR && _sql->AffectedRows() == 1)
                             {
                                 PChar->pushPacket(new CDeliveryBoxPacket(action, boxtype, 0, 0x02));
@@ -2978,7 +2978,7 @@ void SmallPacket0x04D(map_session_data_t* const PSession, CCharEntity* const PCh
                 if (_sql->SetAutoCommit(false) && _sql->TransactionStart())
                 {
                     // Get sender of delivery record
-                    int32 ret = _sql->Query("SELECT senderid, sender FROM delivery_box WHERE charid = %u AND slot = %u AND box = 1 LIMIT 1;",
+                    int32 ret = _sql->Query("SELECT senderid, sender FROM delivery_box WHERE charid = %u AND slot = %u AND box = 1 LIMIT 1",
                                             PChar->id, slotID);
 
                     if (ret != SQL_ERROR && _sql->NumRows() > 0 && _sql->NextRow() == SQL_SUCCESS)
@@ -3000,7 +3000,7 @@ void SmallPacket0x04D(map_session_data_t* const PSession, CCharEntity* const PCh
                             if (ret != SQL_ERROR && _sql->AffectedRows() > 0)
                             {
                                 // Remove original delivery record
-                                ret = _sql->Query("DELETE FROM delivery_box WHERE charid = %u AND slot = %u AND box = 1 LIMIT 1;", PChar->id, slotID);
+                                ret = _sql->Query("DELETE FROM delivery_box WHERE charid = %u AND slot = %u AND box = 1 LIMIT 1", PChar->id, slotID);
 
                                 if (ret != SQL_ERROR && _sql->AffectedRows() > 0)
                                 {
@@ -3134,7 +3134,7 @@ void SmallPacket0x04D(map_session_data_t* const PSession, CCharEntity* const PCh
             if (ret != SQL_ERROR && _sql->NumRows() > 0 && _sql->NextRow() == SQL_SUCCESS)
             {
                 uint32 accid = _sql->GetUIntData(0);
-                ret          = _sql->Query("SELECT COUNT(*) FROM chars WHERE charid = '%u' AND accid = '%u' LIMIT 1;", PChar->id, accid);
+                ret          = _sql->Query("SELECT COUNT(*) FROM chars WHERE charid = '%u' AND accid = '%u' LIMIT 1", PChar->id, accid);
                 if (ret != SQL_ERROR && _sql->NextRow() == SQL_SUCCESS && _sql->GetUIntData(0))
                 {
                     PChar->pushPacket(new CDeliveryBoxPacket(action, boxtype, 0xFF, 0x02));
@@ -3245,7 +3245,7 @@ void SmallPacket0x04E(map_session_data_t* const PSession, CCharEntity* const PCh
                 PChar->pushPacket(new CAuctionHousePacket(action));
 
                 // A single SQL query for the player's AH history which is stored in a Char Entity struct + vector.
-                const char* Query = "SELECT itemid, price, stack FROM auction_house WHERE seller = %u AND sale=0 ORDER BY id ASC LIMIT 7;";
+                const char* Query = "SELECT itemid, price, stack FROM auction_house WHERE seller = %u AND sale=0 ORDER BY id ASC LIMIT 7";
 
                 int32 ret = _sql->Query(Query, PChar->id);
 
@@ -3318,7 +3318,7 @@ void SmallPacket0x04E(map_session_data_t* const PSession, CCharEntity* const PCh
                 }
 
                 // Get the current number of items the player has for sale
-                const char* Query = "SELECT COUNT(*) FROM auction_house WHERE seller = %u AND sale=0;";
+                const char* Query = "SELECT COUNT(*) FROM auction_house WHERE seller = %u AND sale=0";
 
                 int32  ret         = _sql->Query(Query, PChar->id);
                 uint32 ah_listings = 0;
@@ -3420,7 +3420,7 @@ void SmallPacket0x04E(map_session_data_t* const PSession, CCharEntity* const PCh
 
                 if (_sql->SetAutoCommit(false) && _sql->TransactionStart())
                 {
-                    const char* fmtQuery = "DELETE FROM auction_house WHERE seller = %u AND itemid = %u AND stack = %u AND price = %u AND sale = 0 LIMIT 1;";
+                    const char* fmtQuery = "DELETE FROM auction_house WHERE seller = %u AND itemid = %u AND stack = %u AND price = %u AND sale = 0 LIMIT 1";
                     int32       ret      = _sql->Query(fmtQuery, PChar->id, canceledItem.itemid, canceledItem.stack, canceledItem.price);
                     if (ret != SQL_ERROR && _sql->AffectedRows())
                     {
@@ -4568,11 +4568,11 @@ void SmallPacket0x071(map_session_data_t* const PSession, CCharEntity* const PCh
                 {
                     char victimName[31]{};
                     _sql->EscapeStringLen(victimName, (const char*)data[0x0C], std::min<size_t>(strlen((const char*)data[0x0C]), 15));
-                    int32 ret = _sql->Query("SELECT charid FROM chars WHERE charname = '%s';", victimName);
+                    int32 ret = _sql->Query("SELECT charid FROM chars WHERE charname = '%s'", victimName);
                     if (ret != SQL_ERROR && _sql->NumRows() == 1 && _sql->NextRow() == SQL_SUCCESS)
                     {
                         uint32 id = _sql->GetUIntData(0);
-                        if (_sql->Query("DELETE FROM accounts_parties WHERE partyid = %u AND charid = %u;", PChar->id, id) == SQL_SUCCESS &&
+                        if (_sql->Query("DELETE FROM accounts_parties WHERE partyid = %u AND charid = %u", PChar->id, id) == SQL_SUCCESS &&
                             _sql->AffectedRows())
                         {
                             ShowDebug("%s has removed %s from party", PChar->getName(), str(data[0x0C]));
@@ -4665,17 +4665,17 @@ void SmallPacket0x071(map_session_data_t* const PSession, CCharEntity* const PCh
                     uint32 allianceID = PChar->PParty->m_PAlliance->m_AllianceID;
 
                     _sql->EscapeStringLen(victimName, (const char*)data[0x0C], std::min<size_t>(strlen((const char*)data[0x0C]), 15));
-                    int32 ret = _sql->Query("SELECT charid FROM chars WHERE charname = '%s';", victimName);
+                    int32 ret = _sql->Query("SELECT charid FROM chars WHERE charname = '%s'", victimName);
                     if (ret != SQL_ERROR && _sql->NumRows() == 1 && _sql->NextRow() == SQL_SUCCESS)
                     {
                         uint32 charid = _sql->GetUIntData(0);
                         ret           = _sql->Query(
-                            "SELECT partyid FROM accounts_parties WHERE charid = %u AND allianceid = %u AND partyflag & %d",
-                            charid, PChar->PParty->m_PAlliance->m_AllianceID, PARTY_LEADER | PARTY_SECOND | PARTY_THIRD);
+                                      "SELECT partyid FROM accounts_parties WHERE charid = %u AND allianceid = %u AND partyflag & %d",
+                                      charid, PChar->PParty->m_PAlliance->m_AllianceID, PARTY_LEADER | PARTY_SECOND | PARTY_THIRD);
                         if (ret != SQL_ERROR && _sql->NumRows() == 1 && _sql->NextRow() == SQL_SUCCESS)
                         {
                             uint32 partyid = _sql->GetUIntData(0);
-                            if (_sql->Query("UPDATE accounts_parties SET allianceid = 0, partyflag = partyflag & ~%d WHERE partyid = %u;",
+                            if (_sql->Query("UPDATE accounts_parties SET allianceid = 0, partyflag = partyflag & ~%d WHERE partyid = %u",
                                             PARTY_SECOND | PARTY_THIRD, partyid) == SQL_SUCCESS &&
                                 _sql->AffectedRows())
                             {
@@ -6548,7 +6548,7 @@ void SmallPacket0x0DE(map_session_data_t* const PSession, CCharEntity* const PCh
     char message[256];
     _sql->EscapeString(message, PChar->bazaar.message.c_str());
 
-    _sql->Query("UPDATE char_stats SET bazaar_message = '%s' WHERE charid = %u;", message, PChar->id);
+    _sql->Query("UPDATE char_stats SET bazaar_message = '%s' WHERE charid = %u", message, PChar->id);
 }
 
 /************************************************************************
@@ -6570,7 +6570,7 @@ void SmallPacket0x0E0(map_session_data_t* const PSession, CCharEntity* const PCh
         return;
     }
 
-    auto ret = _sql->Query("UPDATE accounts_sessions SET seacom_type = %u, seacom_message = '%s' WHERE charid = %u;", type, message, PChar->id);
+    auto ret = _sql->Query("UPDATE accounts_sessions SET seacom_type = %u, seacom_message = '%s' WHERE charid = %u", type, message, PChar->id);
 
     if (ret == SQL_SUCCESS)
     {
@@ -8023,7 +8023,7 @@ void SmallPacket0x10A(map_session_data_t* const PSession, CCharEntity* const PCh
 
     if ((PItem != nullptr) && !(PItem->getFlag() & ITEM_FLAG_EX) && (!PItem->isSubType(ITEM_LOCKED) || PItem->getCharPrice() != 0))
     {
-        _sql->Query("UPDATE char_inventory SET bazaar = %u WHERE charid = %u AND location = 0 AND slot = %u;", price, PChar->id, slotID);
+        _sql->Query("UPDATE char_inventory SET bazaar = %u WHERE charid = %u AND location = 0 AND slot = %u", price, PChar->id, slotID);
 
         PItem->setCharPrice(price);
         PItem->setSubType((price == 0 ? ITEM_UNLOCKED : ITEM_LOCKED));

@@ -169,7 +169,7 @@ void auth_session::read_func()
             // clang-format off
             auto passHash = [&]() -> std::string
             {
-                auto ret = _sql->Query("SELECT accounts.password FROM accounts WHERE accounts.login = '%s';", username);
+                auto ret = _sql->Query("SELECT accounts.password FROM accounts WHERE accounts.login = '%s'", username);
                 if (ret != SQL_ERROR && _sql->NumRows() != 0 && _sql->NextRow() == SQL_SUCCESS)
                 {
                     return _sql->GetStringData(0);
@@ -208,7 +208,7 @@ void auth_session::read_func()
                     else
                     {
                         passHash = BCrypt::generateHash(password);
-                        _sql->Query("UPDATE accounts SET accounts.password = '%s' WHERE accounts.login = '%s';", passHash.c_str(), username);
+                        _sql->Query("UPDATE accounts SET accounts.password = '%s' WHERE accounts.login = '%s'", passHash.c_str(), username);
 
                         if (!BCrypt::validatePassword(password, passHash))
                         {
@@ -236,7 +236,7 @@ void auth_session::read_func()
                     ret = _sql->Query("SELECT charid, server_addr, server_port \
                                         FROM accounts_sessions JOIN accounts \
                                         ON accounts_sessions.accid = accounts.id \
-                                        WHERE accounts.id = %d;",
+                                        WHERE accounts.id = %d",
                                       accountID);
 
                     if (ret != SQL_ERROR && _sql->NumRows() == 1)
@@ -267,7 +267,7 @@ void auth_session::read_func()
 
                     /* fmtQuery = "SELECT charid \
                             FROM accounts_sessions \
-                            WHERE accid = %u LIMIT 1;";
+                            WHERE accid = %u LIMIT 1";
 
                     if (_sql->Query(fmtQuery, accountID) != SQL_ERROR && _sql->NumRows() != 0 && _sql->NextRow() == SQL_SUCCESS)
                     {
@@ -343,7 +343,7 @@ void auth_session::read_func()
                 // creating new account_id
                 uint32 accid = 0;
 
-                if (_sql->Query("SELECT max(accounts.id) FROM accounts;") != SQL_ERROR && _sql->NumRows() != 0)
+                if (_sql->Query("SELECT max(accounts.id) FROM accounts") != SQL_ERROR && _sql->NumRows() != 0)
                 {
                     _sql->NextRow();
 
@@ -369,7 +369,7 @@ void auth_session::read_func()
                 strftime(strtimecreate, sizeof(strtimecreate), "%Y:%m:%d %H:%M:%S", &timecreateinfo);
 
                 if (_sql->Query("INSERT INTO accounts(id,login,password,timecreate,timelastmodify,status,priv) \
-                                VALUES(%d,'%s','%s','%s',NULL,%d,%d);",
+                                VALUES(%d,'%s','%s','%s',NULL,%d,%d)",
                                 accid, username, BCrypt::generateHash(escaped_pass), strtimecreate, ACCOUNT_STATUS_CODE::NORMAL, ACCOUNT_PRIVILEGE_CODE::USER) == SQL_ERROR)
                 {
                     ref<uint8>(data_, 0) = LOGIN_ERROR_CREATE;
@@ -434,7 +434,7 @@ void auth_session::read_func()
                     else
                     {
                         passHash = BCrypt::generateHash(password);
-                        _sql->Query("UPDATE accounts SET accounts.password = '%s' WHERE accounts.login = '%s';", passHash.c_str(), username);
+                        _sql->Query("UPDATE accounts SET accounts.password = '%s' WHERE accounts.login = '%s'", passHash.c_str(), username);
 
                         if (!BCrypt::validatePassword(password, passHash))
                         {
@@ -448,7 +448,7 @@ void auth_session::read_func()
 
             int32 ret = _sql->Query("SELECT accounts.id, accounts.status \
                                     FROM accounts \
-                                    WHERE accounts.login = '%s';",
+                                    WHERE accounts.login = '%s'",
                                     username);
             if (ret == SQL_ERROR || _sql->NumRows() == 0)
             {

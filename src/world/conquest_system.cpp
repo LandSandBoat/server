@@ -189,7 +189,7 @@ bool ConquestSystem::updateInfluencePoints(int points, unsigned int nation, REGI
     int influences[4]{};
 
     {
-        std::string query = "SELECT sandoria_influence, bastok_influence, windurst_influence, beastmen_influence FROM conquest_system WHERE region_id = %d;";
+        std::string query = "SELECT sandoria_influence, bastok_influence, windurst_influence, beastmen_influence FROM conquest_system WHERE region_id = %d";
 
         auto rset = db::query(fmt::sprintf(query.c_str(), static_cast<uint8>(region)));
         if (!rset || rset->rowsCount() == 0 || !rset->next())
@@ -226,7 +226,7 @@ bool ConquestSystem::updateInfluencePoints(int points, unsigned int nation, REGI
     influences[nation] += lost;
 
     auto rset = db::query(fmt::sprintf("UPDATE conquest_system SET sandoria_influence = %d, bastok_influence = %d, "
-                                       "windurst_influence = %d, beastmen_influence = %d WHERE region_id = %u;",
+                                       "windurst_influence = %d, beastmen_influence = %d WHERE region_id = %u",
                                        influences[0], influences[1], influences[2], influences[3], static_cast<uint8>(region)));
 
     return !rset;
@@ -246,7 +246,7 @@ void ConquestSystem::updateWeekConquest()
                             IF(bastok_influence > sandoria_influence AND bastok_influence > windurst_influence AND \
                             bastok_influence > beastmen_influence, 1, \
                             IF(windurst_influence > bastok_influence AND windurst_influence > sandoria_influence AND \
-                            windurst_influence > beastmen_influence, 2, 3)));";
+                            windurst_influence > beastmen_influence, 2, 3)))";
 
     auto rset = db::query(query);
     if (!rset)
@@ -270,7 +270,7 @@ void ConquestSystem::updateVanaHourlyConquest()
 
 auto ConquestSystem::getRegionalInfluences() -> std::vector<influence_t> const
 {
-    auto query = "SELECT sandoria_influence, bastok_influence, windurst_influence, beastmen_influence FROM conquest_system;";
+    auto query = "SELECT sandoria_influence, bastok_influence, windurst_influence, beastmen_influence FROM conquest_system";
 
     auto rset = db::query(query);
 
@@ -293,7 +293,7 @@ auto ConquestSystem::getRegionalInfluences() -> std::vector<influence_t> const
 
 auto ConquestSystem::getRegionControls() -> std::vector<region_control_t> const
 {
-    auto query = "SELECT region_control, region_control_prev FROM conquest_system;";
+    auto query = "SELECT region_control, region_control_prev FROM conquest_system";
 
     auto rset = db::query(query);
 
