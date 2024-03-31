@@ -31,11 +31,6 @@
 
 #include <conncpp.hpp>
 
-enum class PreparedStatement
-{
-    Search_GetSearchComment,
-};
-
 // @note Everything in database-land is 1-indexed, not 0-indexed.
 // TODO: Rename this namespace from db to sql when migration is complete.
 // mariadb-connector-cpp uses sql namespace for all of its classes, so it
@@ -46,11 +41,8 @@ namespace db
     {
         struct State
         {
-            std::unique_ptr<sql::Connection> connection;
-
-            // TODO: Just make everything lazy?
-            std::unordered_map<PreparedStatement, std::pair<std::string, std::unique_ptr<sql::PreparedStatement>>> preparedStatements;
-            std::unordered_map<std::string, std::unique_ptr<sql::PreparedStatement>>                               lazyPreparedStatements;
+            std::unique_ptr<sql::Connection>                                         connection;
+            std::unordered_map<std::string, std::unique_ptr<sql::PreparedStatement>> lazyPreparedStatements;
         };
 
         auto getState() -> mutex_guarded<db::detail::State>&;
@@ -105,46 +97,6 @@ namespace db
             binder(stmt, counter, rest...);
         }
     } // namespace detail
-
-    // @brief Execute a prepared statement with the given arguments.
-    // @param preparedStmt The prepared statement to execute.
-    // @param args The arguments to bind to the prepared statement.
-    // @return A unique pointer to the result set of the query.
-    // @note Everything in database-land is 1-indexed, not 0-indexed.
-    template <typename... Args>
-    std::unique_ptr<sql::ResultSet> preparedStmt(PreparedStatement preparedStmt, Args&&... args)
-    {
-        TracyZoneScoped;
-
-        // clang-format off
-        return detail::getState().write([&](detail::State& state) -> std::unique_ptr<sql::ResultSet>
-        {
-            auto& preparedStatements = state.preparedStatements;
-
-            if (preparedStatements.find(preparedStmt) == preparedStatements.end())
-            {
-                ShowError("Bad prepared stmt");
-                return nullptr;
-            }
-
-            auto& stmt = preparedStatements[preparedStmt].second;
-            TracyZoneString(preparedStatements[preparedStmt].first);
-            try
-            {
-                // NOTE: 1-indexed!
-                auto counter = 1;
-                db::detail::binder(stmt, counter, std::forward<Args>(args)...);
-                return std::unique_ptr<sql::ResultSet>(stmt->executeQuery());
-            }
-            catch (const std::exception& e)
-            {
-                ShowError("Query Failed: %s", str(preparedStatements[preparedStmt].first.c_str()));
-                ShowError(e.what());
-                return nullptr;
-            }
-        });
-        // clang-format on
-    }
 
     // @brief Execute a prepared statement with the given query string and arguments.
     // @param query The query string to execute.

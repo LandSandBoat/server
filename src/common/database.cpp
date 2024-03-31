@@ -59,14 +59,6 @@ mutex_guarded<db::detail::State>& db::detail::getState()
 
             state.connection = std::unique_ptr<sql::Connection>(driver->connect(url.c_str(), login.c_str(), passwd.c_str()));
             state.connection->setSchema(schema.c_str());
-
-            // Prepare prepared statements
-            auto prep = [&](PreparedStatement stmt, const char* query)
-            {
-                state.preparedStatements[stmt] = { query, std::unique_ptr<sql::PreparedStatement>(state.connection->prepareStatement(query)) };
-            };
-
-            prep(PreparedStatement::Search_GetSearchComment, "SELECT seacom_message FROM accounts_sessions WHERE charid = (?)");
         }
         catch (const std::exception& e)
         {
