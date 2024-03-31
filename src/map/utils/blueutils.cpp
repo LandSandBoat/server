@@ -322,14 +322,11 @@ namespace blueutils
     {
         if (PChar->GetMJob() == JOB_BLU || PChar->GetSJob() == JOB_BLU)
         {
-            const char* Query = "UPDATE chars SET "
-                                "set_blue_spells = '%s' "
-                                "WHERE charid = %u;";
+            const char* query = "UPDATE chars SET "
+                                "set_blue_spells = '?' "
+                                "WHERE charid = ?";
 
-            char spells[sizeof(PChar->m_SetBlueSpells) * 2 + 1];
-            _sql->EscapeStringLen(spells, (const char*)PChar->m_SetBlueSpells, sizeof(PChar->m_SetBlueSpells));
-
-            _sql->Query(Query, spells, PChar->id);
+            db::preparedStmt(query, db::encodeToBlob(PChar->m_SetBlueSpells), PChar->id);
         }
     }
 
@@ -339,10 +336,10 @@ namespace blueutils
 
         if (PChar->GetMJob() == JOB_BLU || PChar->GetSJob() == JOB_BLU)
         {
-            const char* Query = "SELECT set_blue_spells FROM "
-                                "chars WHERE charid = (?);";
+            const char* query = "SELECT set_blue_spells FROM "
+                                "chars WHERE charid = ?";
 
-            auto rset = db::preparedStmt(Query, PChar->id);
+            auto rset = db::preparedStmt(query, PChar->id);
             if (rset && rset->rowsCount() && rset->next())
             {
                 db::extractFromBlob(rset, "set_blue_spells", PChar->m_SetBlueSpells);
