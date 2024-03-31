@@ -47,6 +47,8 @@ namespace db
 
         auto getState() -> mutex_guarded<db::detail::State>&;
 
+        auto sanitise(std::string const& query) -> std::string;
+
         // Base case
         inline void binder(std::unique_ptr<sql::PreparedStatement>& stmt, int& counter)
         {
@@ -105,10 +107,12 @@ namespace db
     // @note If the query hasn't been seen before it will generate a prepared statement for it to be used immediately and in the future.
     // @note Everything in database-land is 1-indexed, not 0-indexed.
     template <typename... Args>
-    std::unique_ptr<sql::ResultSet> preparedStmt(std::string const& query, Args&&... args)
+    std::unique_ptr<sql::ResultSet> preparedStmt(std::string const& rawQuery, Args&&... args)
     {
         TracyZoneScoped;
-        TracyZoneString(query);
+
+        const auto safeQuery = detail::sanitise(rawQuery);
+        TracyZoneString(safeQuery);
 
         // clang-format off
         return detail::getState().write([&](detail::State& state) -> std::unique_ptr<sql::ResultSet>
@@ -119,21 +123,21 @@ namespace db
             // just being a wrapped which does the lookup below and then calls the enum version.
 
             // If we don't have it, lazily make it
-            if (lazyPreparedStatements.find(query) == lazyPreparedStatements.end())
+            if (lazyPreparedStatements.find(safeQuery) == lazyPreparedStatements.end())
             {
                 try
                 {
-                    lazyPreparedStatements[query] = std::unique_ptr<sql::PreparedStatement>(state.connection->prepareStatement(query.c_str()));
+                    lazyPreparedStatements[safeQuery] = std::unique_ptr<sql::PreparedStatement>(state.connection->prepareStatement(safeQuery.c_str()));
                 }
                 catch (const std::exception& e)
                 {
-                    ShowError("Failed to lazy prepare query: %s", str(query.c_str()));
+                    ShowError("Failed to lazy prepare query: %s", str(safeQuery.c_str()));
                     ShowError(e.what());
                     return nullptr;
                 }
             }
 
-            auto& stmt = lazyPreparedStatements[query];
+            auto& stmt = lazyPreparedStatements[safeQuery];
             try
             {
                 // NOTE: 1-indexed!
@@ -143,7 +147,7 @@ namespace db
             }
             catch (const std::exception& e)
             {
-                ShowError("Query Failed: %s", str(query.c_str()));
+                ShowError("Query Failed: %s", str(safeQuery.c_str()));
                 ShowError(e.what());
                 return nullptr;
             }
@@ -194,5 +198,5 @@ namespace db
     // @param query The query string to execute.
     // @return A unique pointer to the result set of the query.
     // @note Everything in database-land is 1-indexed, not 0-indexed.
-    auto query(std::string_view query) -> std::unique_ptr<sql::ResultSet>;
+    auto query(std::string const& rawQuery) -> std::unique_ptr<sql::ResultSet>;
 } // namespace db
