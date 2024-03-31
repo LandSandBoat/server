@@ -852,30 +852,27 @@ namespace charutils
         // disable all spells
         PChar->m_SpellList.reset();
 
-        std::string enabledContent = "\"\"";
-
-        // Compile a string of all enabled expansions
-        for (auto&& expan : { "COP", "TOAU", "WOTG", "ACP", "AMK", "ASA", "ABYSSEA", "SOA", "ROV" })
+        // Compile a list of all enabled expansions
+        std::vector<std::string> enabledExpansions;
+        for (auto const& expansion : { "COP", "TOAU", "WOTG", "ACP", "AMK", "ASA", "ABYSSEA", "SOA", "ROV", "TVR", "VOIDWATCH" })
         {
-            if (luautils::IsContentEnabled(expan))
+            if (luautils::IsContentEnabled(expansion))
             {
-                enabledContent += ",\"";
-                enabledContent += expan;
-                enabledContent += "\"";
+                enabledExpansions.push_back(fmt::format("\"{}\"", expansion));
             }
         }
 
         // Select all player spells from enabled expansions
-        const char* fmtQuery = "SELECT char_spells.spellid "
-                               "FROM char_spells "
-                               "JOIN spell_list "
-                               "ON spell_list.spellid = char_spells.spellid "
-                               "WHERE charid = (?) AND "
-                               "(spell_list.content_tag IN (?) OR "
-                               "spell_list.content_tag IS NULL)";
+        auto query = fmt::format("SELECT char_spells.spellid "
+                                 "FROM char_spells "
+                                 "JOIN spell_list "
+                                 "ON spell_list.spellid = char_spells.spellid "
+                                 "WHERE charid = (?) AND "
+                                 "(spell_list.content_tag IN ({}) OR "
+                                 "spell_list.content_tag IS NULL)",
+                                 fmt::join(enabledExpansions, ","));
 
-        // TODO: Fix db::detail::binder to allow std::strings
-        auto rset = db::preparedStmt(fmtQuery, PChar->id, enabledContent.c_str());
+        auto rset = db::preparedStmt(query, PChar->id);
         if (rset && rset->rowsCount())
         {
             while (rset->next())

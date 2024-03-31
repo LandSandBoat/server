@@ -322,10 +322,7 @@ namespace blueutils
     {
         if (PChar->GetMJob() == JOB_BLU || PChar->GetSJob() == JOB_BLU)
         {
-            const char* query = "UPDATE chars SET "
-                                "set_blue_spells = '?' "
-                                "WHERE charid = ?";
-
+            const char* query = "UPDATE chars SET set_blue_spells = '?' WHERE charid = ? LIMIT 1";
             db::preparedStmt(query, db::encodeToBlob(PChar->m_SetBlueSpells), PChar->id);
         }
     }
@@ -336,10 +333,7 @@ namespace blueutils
 
         if (PChar->GetMJob() == JOB_BLU || PChar->GetSJob() == JOB_BLU)
         {
-            const char* query = "SELECT set_blue_spells FROM "
-                                "chars WHERE charid = ?";
-
-            auto rset = db::preparedStmt(query, PChar->id);
+            auto rset = db::preparedStmt("SELECT set_blue_spells FROM chars WHERE charid = ? LIMIT 1", PChar->id);
             if (rset && rset->rowsCount() && rset->next())
             {
                 db::extractFromBlob(rset, "set_blue_spells", PChar->m_SetBlueSpells);
