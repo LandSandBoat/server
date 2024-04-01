@@ -2718,8 +2718,8 @@ void SmallPacket0x04D(map_session_data_t* const PSession, CCharEntity* const PCh
                     {
                         uint32 charid = _sql->GetUIntData(0);
                         ret           = _sql->Query(
-                                      "UPDATE delivery_box SET sent = 0 WHERE charid = %u AND box = 2 AND slot = %u AND sent = 1 AND received = 0 LIMIT 1",
-                                      PChar->id, slotID);
+                            "UPDATE delivery_box SET sent = 0 WHERE charid = %u AND box = 2 AND slot = %u AND sent = 1 AND received = 0 LIMIT 1",
+                            PChar->id, slotID);
 
                         if (ret != SQL_ERROR && _sql->AffectedRows() == 1)
                         {
@@ -4670,8 +4670,8 @@ void SmallPacket0x071(map_session_data_t* const PSession, CCharEntity* const PCh
                     {
                         uint32 charid = _sql->GetUIntData(0);
                         ret           = _sql->Query(
-                                      "SELECT partyid FROM accounts_parties WHERE charid = %u AND allianceid = %u AND partyflag & %d",
-                                      charid, PChar->PParty->m_PAlliance->m_AllianceID, PARTY_LEADER | PARTY_SECOND | PARTY_THIRD);
+                            "SELECT partyid FROM accounts_parties WHERE charid = %u AND allianceid = %u AND partyflag & %d",
+                            charid, PChar->PParty->m_PAlliance->m_AllianceID, PARTY_LEADER | PARTY_SECOND | PARTY_THIRD);
                         if (ret != SQL_ERROR && _sql->NumRows() == 1 && _sql->NextRow() == SQL_SUCCESS)
                         {
                             uint32 partyid = _sql->GetUIntData(0);

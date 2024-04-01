@@ -1234,7 +1234,7 @@ void CCharEntity::OnWeaponSkillFinished(CWeaponSkillState& state, action_t& acti
         }
 
         PAI->TargetFind->reset();
-        // #TODO: revise parameters
+        // TODO: revise parameters
         if (PWeaponSkill->isAoE())
         {
             PAI->TargetFind->findWithinArea(PBattleTarget, AOE_RADIUS::TARGET, 10);
@@ -1549,7 +1549,7 @@ void CCharEntity::OnAbility(CAbilityState& state, action_t& action)
         action.actiontype = PAbility->getActionType();
         action.actionid   = PAbility->getID();
 
-        // #TODO: get rid of this to script, too
+        // TODO: get rid of this to script, too
         if (PAbility->isPetAbility())
         {
             CPetEntity* PPetEntity = dynamic_cast<CPetEntity*>(PPet);
@@ -1639,7 +1639,7 @@ void CCharEntity::OnAbility(CAbilityState& state, action_t& action)
                 PPet->PAI->MobSkill(PPetTarget, PAbility->getMobSkillID());
             }
         }
-        // #TODO: make this generic enough to not require an if
+        // TODO: make this generic enough to not require an if
         else if ((PAbility->isAoE() || (PAbility->getID() == ABILITY_LIEMENT && getMod(Mod::LIEMENT_EXTENDS_TO_AREA) > 0)) && this->PParty != nullptr)
         {
             PAI->TargetFind->reset();
@@ -1742,7 +1742,7 @@ void CCharEntity::OnAbility(CAbilityState& state, action_t& action)
 
         pushPacket(new CCharRecastPacket(this));
 
-        // #TODO: refactor
+        // TODO: refactor
         //  if (this->getMijinGakure())
         //{
         //     m_ActionType = ACTION_FALL;

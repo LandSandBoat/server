@@ -3,7 +3,7 @@ if(WIN32)
     #
     # It's easier to do this in two fresh build folders, so create build_mariadb_32 and build_mariadb_64 folders
     # in your project root
-   #
+    #
     # cd to build_mariadb_32
     #
     # cmake -A Win32 -DCMAKE_BUILD_TYPE=Release -DBUILD_MARIADB_FROM_SOURCE=ON ..

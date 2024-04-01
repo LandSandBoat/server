@@ -31,7 +31,7 @@ CPetController::CPetController(CPetEntity* _PPet)
 : CMobController(_PPet)
 , PPet(_PPet)
 {
-    // #TODO: this probably will have to depend on pet type (automaton does WS on its own..)
+    // TODO: this probably will have to depend on pet type (automaton does WS on its own..)
     SetWeaponSkillEnabled(false);
 }
 
