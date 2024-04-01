@@ -237,12 +237,12 @@ namespace zoneutils
 
         std::vector<uint16> zonesOnThisProcess;
 
-        int32 ret = sql->Query(zonesQuery.c_str());
-        if (ret != SQL_ERROR && sql->NumRows() != 0)
+        int32 ret = _sql->Query(zonesQuery.c_str());
+        if (ret != SQL_ERROR && _sql->NumRows() != 0)
         {
-            while (sql->NextRow() == SQL_SUCCESS)
+            while (_sql->NextRow() == SQL_SUCCESS)
             {
-                uint16 zoneId = static_cast<uint16>(sql->GetUIntData(0));
+                uint16 zoneId = static_cast<uint16>(_sql->GetUIntData(0));
                 zonesOnThisProcess.emplace_back(zoneId);
             }
         }
@@ -271,46 +271,43 @@ namespace zoneutils
                 ts.schedule([zoneId]()
                 {
                     TracyZoneScoped;
-                    auto  sql   = std::make_unique<SqlConnection>();
                     auto* PZone = g_PZoneList[zoneId];
 
-                    auto Query = fmt::format("SELECT \
-                        content_tag, \
-                        npcid, \
-                        npc_list.name, \
-                        npc_list.polutils_name, \
-                        pos_rot,\
-                        pos_x,\
-                        pos_y,\
-                        pos_z,\
-                        flag,\
-                        speed,\
-                        speedsub,\
-                        animation,\
-                        animationsub,\
-                        namevis,\
-                        status,\
-                        entityFlags,\
-                        look,\
-                        name_prefix, \
-                        widescan \
-                        FROM npc_list INNER JOIN zone_settings \
-                        ON (npcid & 0xFFF000) >> 12 = zone_settings.zoneid \
-                        WHERE ((npcid & 0xFFF000) >> 12) = {}", zoneId);
+                    auto Query = fmt::format("SELECT "
+                        "content_tag, "
+                        "npcid, "
+                        "npc_list.name, "
+                        "npc_list.polutils_name, "
+                        "pos_rot, "
+                        "pos_x, "
+                        "pos_y, "
+                        "pos_z, "
+                        "flag, "
+                        "speed, "
+                        "speedsub, "
+                        "animation, "
+                        "animationsub, "
+                        "namevis, "
+                        "status, "
+                        "entityFlags,"
+                        "look,"
+                        "name_prefix, "
+                        "widescan "
+                        "FROM npc_list INNER JOIN zone_settings "
+                        "ON (npcid & 0xFFF000) >> 12 = zone_settings.zoneid "
+                        "WHERE ((npcid & 0xFFF000) >> 12) = {}", zoneId);
 
-                    int32 ret = sql->Query(Query.c_str());
-
-                    if (ret != SQL_ERROR && sql->NumRows() != 0)
+                    auto rset = db::query(Query);
+                    if (rset && rset->rowsCount())
                     {
-                        while (sql->NextRow() == SQL_SUCCESS)
+                        while (rset->next())
                         {
-                            const char* contentTag = (const char*)sql->GetData(0);
-                            if (!luautils::IsContentEnabled(contentTag))
+                            if (!luautils::IsContentEnabled(rset->getString("content_tag").c_str()))
                             {
                                 continue;
                             }
 
-                            uint32 NpcID = sql->GetUIntData(1);
+                            uint32 NpcID = rset->getUInt("npcid");
 
                             if (!(PZone->GetTypeMask() & ZONE_TYPE::INSTANCED))
                             {
@@ -318,33 +315,31 @@ namespace zoneutils
                                 PNpc->targid     = NpcID & 0xFFF;
                                 PNpc->id         = NpcID;
 
-                                PNpc->name       = sql->GetStringData(2); // Internal name
-                                PNpc->packetName = sql->GetStringData(3); // Name sent to the client (when applicable)
+                                PNpc->name       = rset->getString("name");          // Internal name
+                                PNpc->packetName = rset->getString("polutils_name"); // Name sent to the client (when applicable)
 
-                                PNpc->loc.p.rotation = (uint8)sql->GetIntData(4);
-                                PNpc->loc.p.x        = sql->GetFloatData(5);
-                                PNpc->loc.p.y        = sql->GetFloatData(6);
-                                PNpc->loc.p.z        = sql->GetFloatData(7);
-                                PNpc->loc.p.moving   = (uint16)sql->GetUIntData(8);
+                                PNpc->loc.p.rotation = (uint8)rset->getUInt("pos_rot");
+                                PNpc->loc.p.x        = rset->getFloat("pos_x");
+                                PNpc->loc.p.y        = rset->getFloat("pos_y");
+                                PNpc->loc.p.z        = rset->getFloat("pos_z");
+                                PNpc->loc.p.moving   = (uint16)rset->getUInt("flag");
 
-                                PNpc->m_TargID = sql->GetUIntData(8) >> 16;
+                                PNpc->m_TargID = rset->getUInt("flag") >> 16;
 
-                                PNpc->speed    = (uint8)sql->GetIntData(9);  // Overwrites baseentity.cpp's defined speed
-                                PNpc->speedsub = (uint8)sql->GetIntData(10); // Overwrites baseentity.cpp's defined speedsub
+                                PNpc->speed    = (uint8)rset->getInt("speed");    // Overwrites baseentity.cpp's defined speed
+                                PNpc->speedsub = (uint8)rset->getInt("speedsub"); // Overwrites baseentity.cpp's defined speedsub
 
-                                PNpc->animation    = (uint8)sql->GetIntData(11);
-                                PNpc->animationsub = (uint8)sql->GetIntData(12);
+                                PNpc->animation    = (uint8)rset->getInt("animation");
+                                PNpc->animationsub = (uint8)rset->getInt("animationsub");
 
-                                PNpc->namevis = (uint8)sql->GetIntData(13);
-                                PNpc->status  = static_cast<STATUS_TYPE>(sql->GetIntData(14));
-                                PNpc->m_flags = sql->GetUIntData(15);
+                                PNpc->namevis = (uint8)rset->getInt("namevis");
+                                PNpc->status  = static_cast<STATUS_TYPE>(rset->getInt("status"));
+                                PNpc->m_flags = rset->getInt("entityFlags");
 
-                                uint16 sqlModelID[10];
-                                memcpy(&sqlModelID, sql->GetData(16), 20);
-                                PNpc->look = look_t(sqlModelID);
+                                db::extractFromBlob(rset, "look", PNpc->look);
 
-                                PNpc->name_prefix = (uint8)sql->GetIntData(17);
-                                PNpc->widescan    = (uint8)sql->GetIntData(18);
+                                PNpc->name_prefix = (uint8)rset->getInt("name_prefix");
+                                PNpc->widescan    = (uint8)rset->getInt("widescan");
 
                                 PZone->InsertNPC(PNpc);
                             }
@@ -422,7 +417,7 @@ namespace zoneutils
                         INNER JOIN zone_settings ON mob_groups.zoneid = zone_settings.zoneid \
                         WHERE NOT (pos_x = 0 AND pos_y = 0 AND pos_z = 0) \
                         AND mob_groups.zoneid = ((mobid >> 12) & 0xFFF) \
-                        AND mob_groups.zoneid = {};", zoneId);
+                        AND mob_groups.zoneid = {}", zoneId);
 
                     int32 ret = sql->Query(Query.c_str());
 
@@ -592,7 +587,7 @@ namespace zoneutils
                         LEFT JOIN mob_groups ON mob_spawn_points.groupid = mob_groups.groupid \
                         INNER JOIN zone_settings ON mob_groups.zoneid = zone_settings.zoneid \
                         WHERE mob_groups.zoneid = ((mobid >> 12) & 0xFFF) \
-                        AND mob_groups.zoneid = {};", zoneId);
+                        AND mob_groups.zoneid = {}", zoneId);
 
                     ret = sql->Query(PetQuery.c_str());
                     if (ret != SQL_ERROR && sql->NumRows() != 0)
@@ -688,10 +683,10 @@ namespace zoneutils
         static const char* Query = "SELECT zonetype, restriction FROM zone_settings "
                                    "WHERE zoneid = %u LIMIT 1";
 
-        if (sql->Query(Query, ZoneID) != SQL_ERROR && sql->NumRows() != 0 && sql->NextRow() == SQL_SUCCESS)
+        if (_sql->Query(Query, ZoneID) != SQL_ERROR && _sql->NumRows() != 0 && _sql->NextRow() == SQL_SUCCESS)
         {
-            ZONE_TYPE zoneType    = static_cast<ZONE_TYPE>(sql->GetUIntData(0));
-            uint8     restriction = static_cast<uint8>(sql->GetUIntData(1));
+            ZONE_TYPE zoneType    = static_cast<ZONE_TYPE>(_sql->GetUIntData(0));
+            uint8     restriction = static_cast<uint8>(_sql->GetUIntData(1));
             if (zoneType & ZONE_TYPE::INSTANCED)
             {
                 return new CZoneInstance((ZONEID)ZoneID, GetCurrentRegion(ZoneID), GetCurrentContinent(ZoneID), restriction);
@@ -720,17 +715,17 @@ namespace zoneutils
         g_PTrigger = new CNpcEntity(); // you need to set the default model in the CNpcEntity constructor
 
         std::vector<uint16> zones;
-        const char*         query = "SELECT zoneid FROM zone_settings WHERE IF(%d <> 0, '%s' = zoneip AND %d = zoneport, TRUE);";
+        const char*         query = "SELECT zoneid FROM zone_settings WHERE IF(%d <> 0, '%s' = zoneip AND %d = zoneport, TRUE)";
 
         char address[INET_ADDRSTRLEN];
         inet_ntop(AF_INET, &map_ip, address, INET_ADDRSTRLEN);
-        int ret = sql->Query(query, map_ip.s_addr, address, map_port);
+        int ret = _sql->Query(query, map_ip.s_addr, address, map_port);
 
-        if (ret != SQL_ERROR && sql->NumRows() != 0)
+        if (ret != SQL_ERROR && _sql->NumRows() != 0)
         {
-            while (sql->NextRow() == SQL_SUCCESS)
+            while (_sql->NextRow() == SQL_SUCCESS)
             {
-                zones.emplace_back(static_cast<uint16>(sql->GetUIntData(0)));
+                zones.emplace_back(static_cast<uint16>(_sql->GetUIntData(0)));
             }
         }
         else
@@ -1172,14 +1167,14 @@ namespace zoneutils
     uint64 GetZoneIPP(uint16 zoneID)
     {
         uint64      ipp   = 0;
-        const char* query = "SELECT zoneip, zoneport FROM zone_settings WHERE zoneid = %u;";
+        const char* query = "SELECT zoneip, zoneport FROM zone_settings WHERE zoneid = %u";
 
-        int ret = sql->Query(query, zoneID);
+        int ret = _sql->Query(query, zoneID);
 
-        if (ret != SQL_ERROR && sql->NumRows() != 0 && sql->NextRow() == SQL_SUCCESS)
+        if (ret != SQL_ERROR && _sql->NumRows() != 0 && _sql->NextRow() == SQL_SUCCESS)
         {
-            inet_pton(AF_INET, (const char*)sql->GetData(0), &ipp);
-            uint64 port = sql->GetUIntData(1);
+            inet_pton(AF_INET, (const char*)_sql->GetData(0), &ipp);
+            uint64 port = _sql->GetUIntData(1);
             ipp |= (port << 32);
         }
         else

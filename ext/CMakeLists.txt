@@ -1,5 +1,6 @@
 # add_subdirectory(lua) # Handled globally
-# add_subdirectory(mysql) # Handled globally
+# add_subdirectory(mariadb) # Handled globally
+# add_subdirectory(mariadbcpp) # Handled globally
 # add_subdirectory(zmq) # Handled globally
 # add_subdirectory(openssl) # Handled globally
 add_subdirectory(concurrentqueue)
@@ -8,7 +9,7 @@ add_subdirectory(sol)
 option(TRACY_ENABLE "Enable Tracy profiling." OFF)
 
 # Also handle close flags:
-if (ENABLE_TRACY OR TRACY_ENABLED OR TRACY)
+if(ENABLE_TRACY OR TRACY_ENABLED OR TRACY)
     set(TRACY_ENABLE ON)
 endif()
 
@@ -34,7 +35,7 @@ if(TRACY_ENABLE)
     )
 
     # Download Win32 server executables
-    if (MSVC)
+    if(MSVC)
         message(STATUS "Downloading Tracy client")
         file(DOWNLOAD
             https://github.com/wolfpld/tracy/releases/download/v${TRACY_VERSION}/Tracy-${TRACY_VERSION}.7z
@@ -110,7 +111,7 @@ endif()
 CPMAddPackage(
     NAME efsw
     GITHUB_REPOSITORY SpartanJ/efsw
-    GIT_TAG 74ca09bff89bc8de1f7b8bf3faaa6275ce23b4c5
+    GIT_TAG 341934765471e4074e90bb5205ff4a65c16499c6
     OPTIONS
         "VERBOSE OFF"
         "NO_ATOMICS OFF"
@@ -236,6 +237,7 @@ set(EXTERNAL_LIBS
     spdlog
     concurrentqueue
     mariadbclient
+    mariadbcpp
     RecastNavigation::Recast
     RecastNavigation::Detour
     fast_obj

@@ -66,7 +66,7 @@ bool CPlayerController::Cast(uint16 targid, SpellID spellid)
 
 bool CPlayerController::Engage(uint16 targid)
 {
-    //#TODO: pet engage/disengage
+    // TODO: pet engage/disengage
     std::unique_ptr<CBasicPacket> errMsg;
     auto*                         PChar   = static_cast<CCharEntity*>(POwner);
     auto*                         PTarget = PChar->IsValidTarget(targid, TARGET_ENEMY, errMsg);
@@ -183,7 +183,7 @@ bool CPlayerController::WeaponSkill(uint16 targid, uint16 wsid)
     auto* PChar = static_cast<CCharEntity*>(POwner);
     if (PChar->PAI->CanChangeState())
     {
-        //#TODO: put all this in weaponskill_state
+        // TODO: put all this in weaponskill_state
         CWeaponSkill* PWeaponSkill = battleutils::GetWeaponSkill(wsid);
 
         if (PWeaponSkill == nullptr)

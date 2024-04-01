@@ -80,6 +80,7 @@
 
 #include "common/blowfish.h"
 #include "common/cbasetypes.h"
+#include "common/database.h"
 #include "common/kernel.h"
 #include "common/logging.h"
 #include "common/md52.h"

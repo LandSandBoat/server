@@ -322,17 +322,17 @@ void CItemEquipment::SetAugmentMod(uint16 type, uint8 value)
     // obtain augment info by querying the db
     const char* fmtQuery = "SELECT augmentId, multiplier, modId, `value`, `isPet`, `petType` FROM augments WHERE augmentId = %u";
 
-    int32 ret = sql->Query(fmtQuery, type);
+    int32 ret = _sql->Query(fmtQuery, type);
 
-    while (ret != SQL_ERROR && sql->NumRows() != 0 && sql->NextRow() == SQL_SUCCESS)
+    while (ret != SQL_ERROR && _sql->NumRows() != 0 && _sql->NextRow() == SQL_SUCCESS)
     {
-        uint8 multiplier = (uint8)sql->GetUIntData(1);
-        Mod   modId      = static_cast<Mod>(sql->GetUIntData(2));
-        int16 modValue   = (int16)sql->GetIntData(3);
+        uint8 multiplier = (uint8)_sql->GetUIntData(1);
+        Mod   modId      = static_cast<Mod>(_sql->GetUIntData(2));
+        int16 modValue   = (int16)_sql->GetIntData(3);
 
         // type is 0 unless mod is for pets
-        uint8      isPet   = (uint8)sql->GetUIntData(4);
-        PetModType petType = static_cast<PetModType>(sql->GetIntData(5));
+        uint8      isPet   = (uint8)_sql->GetUIntData(4);
+        PetModType petType = static_cast<PetModType>(_sql->GetIntData(5));
 
         // apply modifier to item. increase modifier power by 'value' (default magnitude 1 for most augments) if multiplier isn't specified
         // otherwise increase modifier power using the multiplier

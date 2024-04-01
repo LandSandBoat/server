@@ -39,8 +39,6 @@ public:
 
     void Tick() override;
 
-    std::unique_ptr<SqlConnection> sql;
-
     std::unique_ptr<HTTPServer>               httpServer;
     std::unique_ptr<message_server_wrapper_t> messageServer;
 
