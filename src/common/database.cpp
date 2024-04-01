@@ -71,34 +71,10 @@ mutex_guarded<db::detail::State>& db::detail::getState()
     return state;
 }
 
-std::string db::detail::sanitise(std::string const& query)
-{
-    TracyZoneScoped;
-
-    const auto replaceAll = [](std::string const& str, std::vector<std::string> const& from, std::string const& to)
-    {
-        std::string result = str;
-        for (auto const& substr : from)
-        {
-            size_t start_pos = 0;
-            while ((start_pos = result.find(substr, start_pos)) != std::string::npos)
-            {
-                result.replace(start_pos, substr.length(), to);
-                start_pos += to.length();
-            }
-        }
-        return result;
-    };
-
-    return replaceAll(query, { "--", "/*", "*/", ";" }, "");
-}
-
 std::unique_ptr<sql::ResultSet> db::query(std::string const& rawQuery)
 {
     TracyZoneScoped;
-
-    const auto safeQuery = detail::sanitise(rawQuery);
-    TracyZoneString(safeQuery);
+    TracyZoneString(rawQuery);
 
     // clang-format off
     return detail::getState().write([&](detail::State& state) -> std::unique_ptr<sql::ResultSet>
@@ -106,11 +82,11 @@ std::unique_ptr<sql::ResultSet> db::query(std::string const& rawQuery)
         auto stmt = state.connection->createStatement();
         try
         {
-            return std::unique_ptr<sql::ResultSet>(stmt->executeQuery(safeQuery.data()));
+            return std::unique_ptr<sql::ResultSet>(stmt->executeQuery(rawQuery.data()));
         }
         catch (const std::exception& e)
         {
-            ShowError("Query Failed: %s", safeQuery.data());
+            ShowError("Query Failed: %s", rawQuery.data());
             ShowError(e.what());
             return nullptr;
         }

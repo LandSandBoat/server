@@ -154,9 +154,7 @@ namespace db
     std::unique_ptr<sql::ResultSet> preparedStmt(std::string const& rawQuery, Args&&... args)
     {
         TracyZoneScoped;
-
-        const auto safeQuery = detail::sanitise(rawQuery);
-        TracyZoneString(safeQuery);
+        TracyZoneString(rawQuery);
 
         // clang-format off
         return detail::getState().write([&](detail::State& state) -> std::unique_ptr<sql::ResultSet>
@@ -167,21 +165,21 @@ namespace db
             // just being a wrapped which does the lookup below and then calls the enum version.
 
             // If we don't have it, lazily make it
-            if (lazyPreparedStatements.find(safeQuery) == lazyPreparedStatements.end())
+            if (lazyPreparedStatements.find(rawQuery) == lazyPreparedStatements.end())
             {
                 try
                 {
-                    lazyPreparedStatements[safeQuery] = std::unique_ptr<sql::PreparedStatement>(state.connection->prepareStatement(safeQuery.c_str()));
+                    lazyPreparedStatements[rawQuery] = std::unique_ptr<sql::PreparedStatement>(state.connection->prepareStatement(rawQuery.c_str()));
                 }
                 catch (const std::exception& e)
                 {
-                    ShowError("Failed to lazy prepare query: %s", str(safeQuery.c_str()));
+                    ShowError("Failed to lazy prepare query: %s", str(rawQuery.c_str()));
                     ShowError(e.what());
                     return nullptr;
                 }
             }
 
-            auto& stmt = lazyPreparedStatements[safeQuery];
+            auto& stmt = lazyPreparedStatements[rawQuery];
             try
             {
                 // NOTE: 1-indexed!
@@ -191,7 +189,7 @@ namespace db
             }
             catch (const std::exception& e)
             {
-                ShowError("Query Failed: %s", str(safeQuery.c_str()));
+                ShowError("Query Failed: %s", str(rawQuery.c_str()));
                 ShowError(e.what());
                 return nullptr;
             }
