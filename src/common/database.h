@@ -205,6 +205,8 @@ namespace db
     template <typename T>
     std::string encodeToBlob(T& source)
     {
+        static_assert(std::is_trivially_copyable_v<T>, "T must be trivially copyable");
+
         TracyZoneScoped;
 
         char blob[sizeof(T) * 2 + 1];
@@ -290,6 +292,8 @@ namespace db
     template <typename T>
     void extractFromBlob(std::unique_ptr<sql::ResultSet>& rset, std::string const& blobKey, T& destination)
     {
+        static_assert(std::is_trivially_copyable_v<T>, "T must be trivially copyable");
+
         TracyZoneScoped;
 
         auto blobStr = rset->getString(blobKey.c_str());
