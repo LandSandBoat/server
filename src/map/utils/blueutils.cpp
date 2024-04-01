@@ -322,8 +322,10 @@ namespace blueutils
     {
         if (PChar->GetMJob() == JOB_BLU || PChar->GetSJob() == JOB_BLU)
         {
-            const char* query = "UPDATE chars SET set_blue_spells = '?' WHERE charid = ? LIMIT 1";
-            db::preparedStmt(query, db::encodeToBlob(PChar->m_SetBlueSpells), PChar->id);
+            auto set_blue_spells = db::encodeToBlob(PChar->m_SetBlueSpells);
+            auto query           = fmt::format("UPDATE chars SET set_blue_spells = '{}' WHERE charid = {} LIMIT 1",
+                                               set_blue_spells, PChar->id);
+            db::query(query);
         }
     }
 

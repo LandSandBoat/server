@@ -202,87 +202,63 @@ namespace db
     // @brief Encode a struct to a blob string.
     // @param source The struct to encode.
     // @return A string containing the encoded struct.
+    // @note This does not yet work inline with prepared statements. If you need to use
+    //       encoded blobs you should encode your struct(s) and then build them into
+    //       a query string with fmt::format for use with db::query.
+    //       See blueutils::SaveSetSpells for an example.
     template <typename T>
-    std::string encodeToBlob(T& source)
+    auto encodeToBlob(T& source)
     {
         static_assert(std::is_trivially_copyable_v<T>, "T must be trivially copyable");
 
         TracyZoneScoped;
 
-        char blob[sizeof(T) * 2 + 1];
+        // Convert struct to vector of chars
+        std::vector<char> blob(sizeof(T));
+        std::memcpy(blob.data(), &source, sizeof(T));
 
-        // https://mariadb.com/kb/en/mysql_cset_escape_slashes/
-        // https://mariadb.com/kb/en/mysql_cset_escape_slashes_utf8/
-        // https://mariadb.com/kb/en/mysql_cset_escape_slashes_utf8mb4/
-        constexpr auto mysql_cset_escape_slashesFn = [](char* newstr, const char* escapestr, size_t escapestr_len) -> size_t
+        // Escape characters in the blob
+        std::string result;
+        result.reserve(blob.size() * 2); // Reserving space for maximum possible expansion
+
+        for (const char ch : blob)
         {
-            const char* newstr_s        = newstr;
-            const char* newstr_e        = newstr + 2 * escapestr_len;
-            const char* end             = escapestr + escapestr_len;
-            bool        escape_overflow = false;
-
-            for (; escapestr < end; escapestr++)
+            switch (ch)
             {
-                char esc = '\0';
-                // unsigned int len = 0;
-
-                switch (*escapestr)
-                {
-                    case 0:
-                        esc = '0';
-                        break;
-                    case '\n':
-                        esc = 'n';
-                        break;
-                    case '\r':
-                        esc = 'r';
-                        break;
-                    case '\\':
-                    case '\'':
-                    case '"':
-                        esc = *escapestr;
-                        break;
-                    case '\032':
-                        esc = 'Z';
-                        break;
-                }
-
-                if (esc)
-                {
-                    if (newstr + 2 > newstr_e)
-                    {
-                        escape_overflow = true;
-                        break;
-                    }
-                    /* copy escaped character */
-                    *newstr++ = '\\';
-                    *newstr++ = esc;
-                }
-                else
-                {
-                    if (newstr + 1 > newstr_e)
-                    {
-                        escape_overflow = true;
-                        break;
-                    }
-                    /* copy non escaped character */
-                    *newstr++ = *escapestr;
-                }
+                case '\0': // Null character
+                    result += "\\0";
+                    break;
+                case '\'': // Single quote
+                    result += "\\'";
+                    break;
+                case '\"': // Double quote
+                    result += "\\\"";
+                    break;
+                case '\b': // Backspace
+                    result += "\\b";
+                    break;
+                case '\n': // Newline
+                    result += "\\n";
+                    break;
+                case '\r': // Carriage return
+                    result += "\\r";
+                    break;
+                case '\t': // Tab
+                    result += "\\t";
+                    break;
+                case '\x1A': // Ctrl-Z
+                    result += "\\Z";
+                    break;
+                case '\\': // Backslash
+                    result += "\\\\";
+                    break;
+                default:
+                    result += ch;
+                    break;
             }
+        }
 
-            *newstr = '\0';
-
-            if (escape_overflow)
-            {
-                return ((size_t)~0);
-            }
-
-            return ((size_t)(newstr - newstr_s));
-        };
-
-        mysql_cset_escape_slashesFn(blob, reinterpret_cast<char*>(&source), sizeof(T));
-
-        return std::string(blob);
+        return result;
     }
 
     // @brief Extract a struct from a blob string.
