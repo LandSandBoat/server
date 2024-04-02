@@ -203,10 +203,12 @@ end
     If not, do not give items, display a message to indicate this, and return false.
 
     Examples of valid items parameter:
-        640                 -- copper ore x1
-        { 640, 641 }        -- copper ore x1, tin ore x1
-        { { 640, 2 } }         -- copper ore x2
-        { { 640, 2 }, 641 }    -- copper ore x2, tin ore x1
+        npcUtil.giveItem(player, xi.item.CHUNK_OF_COPPER_ORE, 1)                                           -- copper ore x1
+        npcUtil.giveItem(player, { xi.item.CHUNK_OF_COPPER_ORE, 1 , xi.item.CHUNK_OF_TIN_ORE, 1 })         -- copper ore x1, tin ore x1
+        npcUtil.giveItem(player, { { xi.item.CHUNK_OF_COPPER_ORE, 2 } })                                   -- copper ore x2
+        npcUtil.giveItem(player, { { xi.item.CHUNK_OF_COPPER_ORE, 12 }, { xi.item.CHUNK_OF_TIN_ORE, 3 } }) -- copper ore x12 tin ore x3
+        npcUtil.giveItem(target, { { xi.item.CHUNK_OF_COPPER_ORE, math.random(3, 15) } })                  -- random 3-15 copper ores
+        enum can be found in scripts/enum/item.lua
 
     params (table) can contain the following parameters:
 
