@@ -142,22 +142,25 @@ end
 
 -- On Ability Use Charm
 xi.job_utils.beastmaster.onUseAbilityCharm = function(player, target, ability)
-    if target:isPC() then
-        ability:setMsg(xi.msg.basic.NO_EFFECT)
-    else
-        local isTamed = false
+    local isTamed = false
 
-        if player:getLocalVar('Tamed_Mob') == target:getID() then
-            player:addMod(xi.mod.CHARM_CHANCE, 10)
-            isTamed = true
-        end
+    if player:getLocalVar('Tamed_Mob') == target:getID() then
+        player:addMod(xi.mod.CHARM_CHANCE, 10)
+        isTamed = true
+    end
 
-        player:charmPet(target)
+    -- attempt the charm and get the return message
+    local msg = xi.job_utils.beastmaster.attemptCharm(player, target)
+    ability:setMsg(msg)
 
-        if isTamed then
-            player:delMod(xi.mod.CHARM_CHANCE, 10)
-            player:setLocalVar('Tamed_Mob', 0)
-        end
+    if isTamed then
+        player:delMod(xi.mod.CHARM_CHANCE, 10)
+        player:setLocalVar('Tamed_Mob', 0)
+    end
+
+    -- if charm bound mob then need to return bind to generate correct message
+    if msg == xi.msg.basic.JA_ENFEEB_IS then
+        return xi.effect.BIND
     end
 end
 
@@ -172,7 +175,7 @@ end
 
 -- On Ability Use Gauge
 xi.job_utils.beastmaster.onUseAbilityGauge = function(player, target, ability)
-    local charmChance = player:getCharmChance(target, false)
+    local charmChance = xi.job_utils.beastmaster.getCharmChance(player, target, false)
 
     if charmChance >= 75 then
         ability:setMsg(xi.msg.basic.SHOULD_BE_ABLE_CHARM)  -- The <player> should be able to charm <target>.
@@ -516,4 +519,133 @@ xi.job_utils.beastmaster.onUseAbilityFight = function(player, target, ability)
 
         player:petAttack(target)
     end
+end
+
+local function getCharmDuration(charmer, target)
+    local charmDuration = 0
+
+    -- Calculate base duration (see https://www.bg-wiki.com/ffxi/Charm_Duration) and dLvl
+    local baseCharmDuration = math.floor(1.25 * charmer:getStat(xi.mod.CHR) + 150)
+    local dLvl = charmer:getMainLvl() - target:getMainLvl()
+
+    -- Default multiplier for dLvl -6 or lower
+    local dLvlCharmMult = 1 / 24
+
+    if dLvl >= -6 and dLvl < 9 then
+        -- Quintic least squares fitting of duration multiplier as function of dLvl (r^2 > 0.999)
+        -- Fitting on values from table at https://www.bg-wiki.com/ffxi/Charm_Duration
+        -- See fitting at https://mycurvefit.com/index.html?action=openshare&id=358a5d99-4499-4a6a-bbfe-0a667739335c
+        dLvlCharmMult = 0.9997336 + 0.3652882 * dLvl + 0.02097742 * dLvl^2
+                    - 0.004106429 * dLvl^3 + 0.000007231037 * dLvl^4
+                    + 0.00005102634 * dLvl^5
+    -- Caps at dLvl > 9
+    elseif dLvl >= 9 then
+        dLvlCharmMult = 6
+    end
+
+    -- Apply the dLvl multiplier
+    charmDuration = baseCharmDuration * dLvlCharmMult
+
+    -- Apply charm duration extension from gear
+    local charmTimeMod = charmer:getMod(xi.mod.CHARM_TIME)
+    local extraDurationFromMod = charmDuration * (charmTimeMod * 0.5 / 10) -- Assumes 5% per charmTimeMod
+    charmDuration = charmDuration + extraDurationFromMod
+
+    return math.floor(charmDuration)
+end
+
+xi.job_utils.beastmaster.getCharmChance = function(charmer, target, includeMods)
+    if
+        not charmer or                                -- Invalid charmer
+        not target or                                 -- Invalid target
+        not charmer:isPC() or                         -- Charmer not a player
+        not target:isMob() or                         -- Target not a mob
+        target:getMobMod(xi.mobMod.CHARMABLE) == 0 or -- Not charmable
+        target:getMaster() ~= nil                     -- Someone else's pet
+    then
+        return 0
+    end
+
+    -- Use the players BST level (even if subjob) for charm chance calc
+    local charmerJobLevel = charmer:getJobLevel(xi.job.BST)
+    local targetLevel     = target:getMainLvl()
+    local charmres        = target:getMod(xi.mod.CHARMRES)
+    local charmChance     = 50 - charmres
+    -- dLvl only applies when player lvl < mob lvl
+    -- and varies for different target levels
+    if charmerJobLevel < targetLevel then
+        if targetLevel >= 71 then
+            charmChance = charmChance - 10 * (targetLevel - charmerJobLevel)
+        elseif targetLevel >= 51 then
+            charmChance = charmChance - 5 * (targetLevel - charmerJobLevel)
+        else
+            charmChance = charmChance - 3 * (targetLevel - charmerJobLevel)
+        end
+    end
+
+    -- Another multiplier determined by target light res rank
+    -- as charm is a light based ability
+    local rank = target:getMod(xi.mod.LIGHT_RES_RANK)
+    if rank <= -3 then
+        charmChance = charmChance * 1.5
+    elseif rank <= -2 then
+        charmChance = charmChance * 1.4
+    elseif rank <= -1 then
+        charmChance = charmChance * 1.2
+    elseif rank <= 0 then
+        charmChance = charmChance
+    else
+        charmChance = charmChance / 2
+    end
+
+    -- Need a includeMods param because staves (which give CHARM_CHANCE) are not taken into account for Gauge
+    if includeMods then
+        charmChance = charmChance + charmer:getMod(xi.mod.CHARM_CHANCE)
+    end
+
+    -- apply the dCHR component
+    local dCHR = charmer:getStat(xi.mod.CHR) - target:getStat(xi.mod.CHR)
+    charmChance = charmChance + dCHR
+
+    return utils.clamp(charmChance, 0, 95)
+end
+
+xi.job_utils.beastmaster.attemptCharm = function(charmer, target)
+    if
+        not charmer or         -- Invalid charmer
+        not target or          -- Invalid target
+        not charmer:isPC() or  -- Charmer not a player
+        not (target:isMob() or -- Target not a mob or PC
+        target:isPC())
+    then
+        return xi.msg.basic.JA_MISS
+    elseif
+        -- Not charmable so apply bind
+        target:getMobMod(xi.mobMod.CHARMABLE) == 0 or -- Target is not charmable
+        target:isPC() or                              -- Target is a PC (ballista)
+        target:getMaster()                            -- Target already has a master
+    then
+        local resist = applyResistanceAddEffect(charmer, target, xi.element.ICE, 0)
+        if not target:hasStatusEffect(xi.effect.BIND) and resist >= 0.5 then
+            target:addStatusEffect(xi.effect.BIND, 1, 0, math.random(1, 5))
+            return xi.msg.basic.JA_ENFEEB_IS
+        else
+            return xi.msg.basic.JA_MISS
+        end
+    end
+
+    -- Calculate charm chance
+    local chance = xi.job_utils.beastmaster.getCharmChance(charmer, target, true)
+
+    -- If successful then calculate duration and charm
+    if chance > math.random(100) then
+        local duration = getCharmDuration(charmer, target)
+
+        if duration > 0 then
+            charmer:charm(target, duration)
+            return xi.msg.basic.NONE
+        end
+    end
+
+    return xi.msg.basic.JA_MISS
 end

@@ -13305,11 +13305,15 @@ bool CLuaBaseEntity::addBardSong(CLuaBaseEntity* PEntity, uint16 effectID, uint1
  *  Function: charm()
  *  Purpose : Charms an entity target
  *  Example : mob:charm(target)
+ *  Notes: optional parameter specifying the duration in seconds
+ *         (default duration of 0 implies duration is controlled
+ *         by the status effect charm, which is the case for charmed players)
  ************************************************************************/
 
-void CLuaBaseEntity::charm(CLuaBaseEntity const* target)
+void CLuaBaseEntity::charm(CLuaBaseEntity const* target, sol::object const& p0)
 {
-    battleutils::applyCharm(static_cast<CBattleEntity*>(m_PBaseEntity), static_cast<CBattleEntity*>(target->GetBaseEntity()));
+    auto charmDuration = std::chrono::seconds(p0 != sol::lua_nil ? p0.as<uint32>() : 0);
+    battleutils::applyCharm(static_cast<CBattleEntity*>(m_PBaseEntity), static_cast<CBattleEntity*>(target->GetBaseEntity()), charmDuration);
 }
 
 /************************************************************************
@@ -14717,45 +14721,6 @@ void CLuaBaseEntity::registerChocobo(uint32 value)
     auto* PChar           = static_cast<CCharEntity*>(m_PBaseEntity);
     PChar->m_FieldChocobo = value;
     _sql->Query("UPDATE char_pet SET field_chocobo = %u WHERE charid = %u", value, PChar->id);
-}
-
-/************************************************************************
- *  Function: getCharmChance()
- *  Purpose : Returns decimal value of the chances of charming an Entity
- *  Example : player:getCharmChance(target, false)
- *  Notes   : Used for Guage and Maiden's Virelai
- ************************************************************************/
-
-float CLuaBaseEntity::getCharmChance(CLuaBaseEntity const* target, sol::object const& mods)
-{
-    if (m_PBaseEntity->objtype == TYPE_NPC)
-    {
-        ShowWarning("Invalid Entity (NPC: %s) calling function.", m_PBaseEntity->getName());
-        return 0;
-    }
-
-    auto* PCharmer = static_cast<CBattleEntity*>(m_PBaseEntity);
-    auto* PTarget  = static_cast<CBattleEntity*>(target->GetBaseEntity());
-
-    bool  includeCharmAffinityAndChanceMods = (mods != sol::lua_nil) ? mods.as<bool>() : true;
-    float charmChance                       = battleutils::GetCharmChance(PCharmer, PTarget, includeCharmAffinityAndChanceMods);
-
-    return charmChance;
-}
-
-/************************************************************************
- *  Function: charmPet()
- *  Purpose : Attempts to charm a pet
- *  Example : player:charmPet(target)
- *  Notes   :
- ************************************************************************/
-
-void CLuaBaseEntity::charmPet(CLuaBaseEntity const* target)
-{
-    if (m_PBaseEntity->objtype != TYPE_MOB)
-    {
-        battleutils::tryToCharm(static_cast<CBattleEntity*>(m_PBaseEntity), static_cast<CBattleEntity*>(target->GetBaseEntity()));
-    }
 }
 
 /************************************************************************
@@ -17996,9 +17961,6 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("getPetName", CLuaBaseEntity::getPetName);
     SOL_REGISTER("setPetName", CLuaBaseEntity::setPetName);
     SOL_REGISTER("registerChocobo", CLuaBaseEntity::registerChocobo);
-
-    SOL_REGISTER("getCharmChance", CLuaBaseEntity::getCharmChance);
-    SOL_REGISTER("charmPet", CLuaBaseEntity::charmPet);
 
     SOL_REGISTER("petAttack", CLuaBaseEntity::petAttack);
     SOL_REGISTER("petAbility", CLuaBaseEntity::petAbility);
