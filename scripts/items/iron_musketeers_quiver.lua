@@ -10,7 +10,7 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    target:addItem(xi.item.IRON_MUSKETEERS_BOLT)
+    npcUtil.giveItem(target, { { xi.item.IRON_MUSKETEERS_BOLT } })
 end
 
 return itemObject

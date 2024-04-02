@@ -10,7 +10,7 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    target:addItem(xi.item.CRUDE_ARROW_P7, math.random(10, 20))
+    npcUtil.giveItem(target, { { xi.item.CRUDE_ARROW_P7, math.random(10, 20) } })
 end
 
 return itemObject

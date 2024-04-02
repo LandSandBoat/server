@@ -10,7 +10,7 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    target:addItem(xi.item.EARTH_CARD, 99)
+    npcUtil.giveItem(target, { { xi.item.EARTH_CARD, 99 } })
 end
 
 return itemObject

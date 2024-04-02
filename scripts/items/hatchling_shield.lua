@@ -28,7 +28,7 @@ end
 
 itemObject.onItemUse = function(target)
     local egg = eggTable[math.random(1, #eggTable)]
-    target:addItem(egg[1], math.random(egg[2], egg[3]))
+    npcUtil.giveItem(target, { { egg[1], math.random(egg[2], egg[3]) } })
 end
 
 return itemObject

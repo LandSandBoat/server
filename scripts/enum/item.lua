@@ -2215,6 +2215,7 @@ xi.item =
     DEATHBALL                           = 4566,
     BOWL_OF_QUADAV_STEW                 = 4569,
     BIRD_EGG                            = 4570,
+    CLUMP_OF_BEAUGREENS                 = 4571,
     SAUSAGE                             = 4578,
     LOAF_OF_PUMPERNICKEL                = 4591,
     BOWL_OF_WISDOM_SOUP                 = 4592,

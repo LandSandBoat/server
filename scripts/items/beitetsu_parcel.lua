@@ -10,7 +10,7 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    target:addItem(xi.item.BEITETSU, math.random(3, 15))
+    npcUtil.giveItem(target, { { xi.item.BEITETSU, math.random(3, 15) } })
 end
 
 return itemObject

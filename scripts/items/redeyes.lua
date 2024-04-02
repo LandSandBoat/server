@@ -9,8 +9,7 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    target:addItem(xi.item.ANGELWING, 99) -- Angelwing x99
-    target:messageBasic(xi.msg.basic.ITEM_OBTAINED, 5441)
+    npcUtil.giveItem(target, { { xi.item.ANGELWING, 99 } }) -- Angelwing x99
 end
 
 return itemObject

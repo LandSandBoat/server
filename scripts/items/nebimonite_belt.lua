@@ -10,7 +10,7 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    target:addItem(xi.item.NEBIMONITE)
+    npcUtil.giveItem(target, { { xi.item.NEBIMONITE, 1 } })
 end
 
 return itemObject

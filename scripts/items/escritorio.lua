@@ -10,7 +10,7 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    target:addItem(xi.item.CONE_CALAMARY, 1)
+    npcUtil.giveItem(target, { { xi.item.CONE_CALAMARY, 1 } })
 end
 
 return itemObject
