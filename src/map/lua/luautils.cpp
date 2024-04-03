@@ -2582,6 +2582,15 @@ namespace luautils
             return -1;
         }
 
+        // using an item removes invisible status effect
+        if (auto* PBattleEntity = dynamic_cast<CBattleEntity*>(PUser))
+        {
+            if (PBattleEntity->StatusEffectContainer->HasStatusEffect(EFFECT_INVISIBLE))
+            {
+                PBattleEntity->StatusEffectContainer->DelStatusEffect(EFFECT_INVISIBLE);
+            }
+        }
+
         auto result = onItemUse(CLuaBaseEntity(PTarget), CLuaBaseEntity(PUser), CLuaItem(PItem));
         if (!result.valid())
         {
