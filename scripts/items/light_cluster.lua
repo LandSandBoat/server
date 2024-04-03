@@ -10,7 +10,7 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    target:addItem(xi.item.LIGHT_CRYSTAL, 12)
+    npcUtil.giveItem(target, { { xi.item.LIGHT_CRYSTAL, 12 } })
 end
 
 return itemObject

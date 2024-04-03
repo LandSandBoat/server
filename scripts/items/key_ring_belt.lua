@@ -9,7 +9,7 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    target:addItem(xi.item.SKELETON_KEY)
+    npcUtil.giveItem(target, { { xi.item.SKELETON_KEY, 1 } })
 end
 
 return itemObject

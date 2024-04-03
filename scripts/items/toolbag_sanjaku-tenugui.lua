@@ -10,7 +10,7 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    target:addItem(xi.item.SANJAKU_TENUGUI, 99)
+    npcUtil.giveItem(target, { { xi.item.SANJAKU_TENUGUI, 99 } })
 end
 
 return itemObject

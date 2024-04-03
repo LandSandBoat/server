@@ -10,7 +10,7 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    target:addItem(xi.item.PLUTON, math.random(15, 30))
+    npcUtil.giveItem(target, { { xi.item.PLUTON, math.random(15, 30) } })
 end
 
 return itemObject

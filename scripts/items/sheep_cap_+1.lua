@@ -12,9 +12,22 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    local giftList = { 4363, 4505, 1845, 4366, 919, 2213, 4571, 4504, 8929, 4367, 833 }
+    local giftList =
+    {
+        xi.item.FAERIE_APPLE,
+        xi.item.SUNFLOWER_SEEDS,
+        xi.item.CLUMP_OF_RED_MOKO_GRASS,
+        xi.item.LA_THEINE_CABBAGE,
+        xi.item.CLUMP_OF_BOYAHDA_MOSS,
+        xi.item.HANDFUL_OF_PINE_NUTS,
+        xi.item.CLUMP_OF_BEAUGREENS,
+        xi.item.ACORN,
+        xi.item.CLUMP_OF_BATAGREENS,
+        xi.item.CLUMP_OF_MOKO_GRASS
+    }
+
     local gift = math.random(1, 11)
-    target:addItem(giftList[gift])
+    npcUtil.giveItem(target, { { giftList[gift], 1 } })
 end
 
 return itemObject
