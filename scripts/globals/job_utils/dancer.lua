@@ -246,9 +246,11 @@ xi.job_utils.dancer.useStepAbility = function(player, target, ability, action, s
         player:delTP(100 + player:getMod(xi.mod.STEP_TP_CONSUMED))
     end
 
-    if math.random() <= xi.weaponskills.getHitRate(player, target, true, player:getMod(xi.mod.STEP_ACCURACY)) then
-        local debuffEffect = target:getStatusEffect(stepEffect)
-        hitType            = hitId
+    if math.random() <= xi.weaponskills.getHitRate(player, target, true, 10 + player:getMod(xi.mod.STEP_ACCURACY)) then
+        local maxSteps         = player:getMainJob() == xi.job.DNC and 10 or 5
+        local debuffEffect     = target:getStatusEffect(stepEffect)
+        local origDebuffStacks = 0
+        hitType                = hitId
 
         -- Apply Finishing Moves
         local fmEffect   = player:getStatusEffect(xi.effect.FINISHING_MOVE_1)
@@ -267,16 +269,23 @@ xi.job_utils.dancer.useStepAbility = function(player, target, ability, action, s
 
         -- Handle Target Debuffs
         if debuffEffect then
-            debuffStacks   = debuffStacks + debuffEffect:getPower()
-            debuffDuration = debuffEffect:getDuration()
+            origDebuffStacks = debuffEffect:getPower()
+            debuffStacks     = debuffStacks + origDebuffStacks
+            debuffDuration   = debuffEffect:getDuration()
 
-            debuffStacks   = math.min(debuffStacks, 10)
+            debuffStacks   = math.min(debuffStacks, maxSteps)
             debuffDuration = math.min(debuffEffect:getDuration() + 30 + stepDurationGift, 120 + stepDurationGift)
 
-            target:delStatusEffectSilent(stepEffect)
+            if maxSteps >= origDebuffStacks then
+                target:delStatusEffectSilent(stepEffect)
+            end
         end
 
-        target:addStatusEffect(stepEffect, debuffStacks, 0, debuffDuration)
+        if maxSteps >= origDebuffStacks then
+            target:addStatusEffect(stepEffect, debuffStacks, 0, debuffDuration)
+        else
+            ability:setMsg(xi.msg.basic.JA_NO_EFFECT)
+        end
     else
         ability:setMsg(xi.msg.basic.JA_MISS)
     end
