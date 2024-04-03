@@ -68,6 +68,17 @@ local function getBaseMPCost(player, ability)
         [xi.jobAbility.CONFLAG_STRIKE]   = 141,
         [xi.jobAbility.FLAMING_CRUSH]    = 164,
         [xi.jobAbility.METEOR_STRIKE]    = 182,
+        -- Fenrir
+        [xi.jobAbility.MOONLIT_CHARGE]   =  17,
+        [xi.jobAbility.CRESCENT_FANG]    =  19,
+        [xi.jobAbility.LUNAR_ROAR]       =  27,
+        [xi.jobAbility.LUNAR_CRY]        =  41,
+        [xi.jobAbility.ECLIPTIC_GROWL]   =  46,
+        [xi.jobAbility.ECLIPTIC_HOWL]    =  57,
+        [xi.jobAbility.HEAVENWARD_HOWL]  =  96,
+        [xi.jobAbility.ECLIPSE_BITE]     = 109,
+        [xi.jobAbility.LUNAR_BAY]        = 174,
+        [xi.jobAbility.IMPACT]           = 222,
         -- Siren
         [xi.jobAbility.WELT]             =   9,
         [xi.jobAbility.ROUNDHOUSE]       =  52,
