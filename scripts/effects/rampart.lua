@@ -6,7 +6,7 @@ local effectObject = {}
 effectObject.onEffectGain = function(target, effect)
     local power = effect:getPower()
 
-    if target:isPC() and target:hasTrait(77) then -- Iron Will
+    if target:isPC() and target:hasTrait(xi.trait.IRON_WILL) then
         target:addMod(xi.mod.SPELLINTERRUPT, target:getMerit(xi.merit.IRON_WILL))
     end
 
@@ -38,7 +38,7 @@ effectObject.onEffectLose = function(target, effect)
     local power    = effect:getPower()
     local subPower = effect:getSubPower()
 
-    if target:isPC() and target:hasTrait(77) then -- Iron Will
+    if target:isPC() and target:hasTrait(xi.trait.IRON_WILL) then
         target:delMod(xi.mod.SPELLINTERRUPT, target:getMerit(xi.merit.IRON_WILL))
     end
 

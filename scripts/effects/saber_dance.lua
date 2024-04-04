@@ -10,7 +10,7 @@ effectObject.onEffectGain = function(target, effect)
     end
 
     -- Does not stack with warrior Double Attack trait, so disable it
-    if target:hasTrait(15) then -- TRAIT_DOUBLE_ATTACK
+    if target:hasTrait(xi.trait.DOUBLE_ATTACK) then
         target:delMod(xi.mod.DOUBLE_ATTACK, 10)
     end
 
@@ -36,7 +36,7 @@ effectObject.onEffectLose = function(target, effect)
         target:delMod(xi.mod.SAMBA_PDURATION, (saberDanceMerits - 5))
     end
 
-    if target:hasTrait(15) then -- TRAIT_DOUBLE_ATTACK
+    if target:hasTrait(xi.trait.DOUBLE_ATTACK) then
         -- put Double Attack trait back on.
         target:addMod(xi.mod.DOUBLE_ATTACK, 10)
     end
