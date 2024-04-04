@@ -411,7 +411,7 @@ xi.job_utils.thief.useSteal = function(player, target, ability, action)
 
     -- Attempt Aura steal
     -- local effect = xi.effect.NONE
-    if player:hasTrait(75) then
+    if player:hasTrait(xi.trait.AURA_STEAL) then
         local resist = applyResistanceAbility(player, target, xi.element.NONE, 0, 0)
         -- local effectStealSuccess = false
         if resist > 0.0625 then

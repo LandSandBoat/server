@@ -1,7 +1,14 @@
+-----------------------------------
+-- Job Traits
+-----------------------------------
 xi = xi or {}
 
 xi.trait =
 {
+    -- Offset by 1536 from ROM\181\72.dat
+
+    -- IF YOU ADD ANY NEW ENTRY HERE, ADD IT IN src/map/trait.h ALSO!
+
     ACCURACY_BONUS           =   1,
     EVASION_BONUS            =   2,
     ATTACK_BONUS             =   3,
