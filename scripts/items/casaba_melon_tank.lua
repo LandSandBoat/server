@@ -10,7 +10,7 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    target:addItem(xi.item.BOTTLE_OF_MELON_JUICE, 1)
+    npcUtil.giveItem(target, { { xi.item.BOTTLE_OF_MELON_JUICE, 1 } })
 end
 
 return itemObject

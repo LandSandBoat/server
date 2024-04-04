@@ -75,6 +75,11 @@ uint16 CLuaMobSkill::getTotalTargets()
     return m_PLuaMobSkill->getTotalTargets();
 }
 
+uint32 CLuaMobSkill::getPrimaryTargetID()
+{
+    return m_PLuaMobSkill->getPrimaryTargetID();
+}
+
 uint16 CLuaMobSkill::getMsg()
 {
     return m_PLuaMobSkill->getMsg();
@@ -121,6 +126,7 @@ void CLuaMobSkill::Register()
     SOL_REGISTER("getParam", CLuaMobSkill::getParam);
     SOL_REGISTER("getID", CLuaMobSkill::getID);
     SOL_REGISTER("getTotalTargets", CLuaMobSkill::getTotalTargets);
+    SOL_REGISTER("getPrimaryTargetID", CLuaMobSkill::getPrimaryTargetID);
     SOL_REGISTER("getTP", CLuaMobSkill::getTP);
     SOL_REGISTER("getMobHPP", CLuaMobSkill::getMobHPP);
 }

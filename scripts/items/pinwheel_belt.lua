@@ -9,7 +9,7 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    target:addItem(xi.item.PINWHEEL, 99) -- pinwheel
+    npcUtil.giveItem(target, { { xi.item.PINWHEEL, 99 } }) -- pinwheel
 end
 
 return itemObject

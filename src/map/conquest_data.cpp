@@ -21,42 +21,39 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 
 #include "conquest_data.h"
 
+#include "common/cbasetypes.h"
+#include "common/database.h"
 #include "common/logging.h"
-#include "common/sql.h"
 #include "conquest_system.h"
 
-ConquestData::ConquestData(std::unique_ptr<SqlConnection>& sql)
+ConquestData::ConquestData()
 : regionControls(std::vector<region_control_t>(19))
 , influences(std::vector<influence_t>(19))
 {
-    load(sql);
+    load();
 }
 
-void ConquestData::load(std::unique_ptr<SqlConnection>& sql)
+void ConquestData::load()
 {
     const char* Query = "SELECT region_id, region_control, region_control_prev, sandoria_influence, bastok_influence, windurst_influence, beastmen_influence \
-                             FROM conquest_system;";
+                         FROM conquest_system";
 
-    int32 ret = sql->Query(Query);
-
-    if (ret != SQL_ERROR && sql->NumRows() != 0)
+    auto rset = db::query(Query);
+    while (rset && rset->next())
     {
-        while (sql->NextRow() == SQL_SUCCESS)
-        {
-            uint8 regionId = sql->GetUIntData(0);
+        const auto regionId = rset->getInt("region_id");
 
-            region_control_t regionControl{};
-            regionControl.current    = sql->GetIntData(1);
-            regionControl.prev       = sql->GetIntData(2);
-            regionControls[regionId] = regionControl;
+        region_control_t regionControl{};
+        regionControl.current    = rset->getInt("region_control");
+        regionControl.prev       = rset->getInt("region_control_prev");
+        regionControls[regionId] = regionControl;
 
-            influence_t influence{};
-            influence.sandoria_influence = sql->GetIntData(3);
-            influence.bastok_influence   = sql->GetIntData(4);
-            influence.windurst_influence = sql->GetIntData(5);
-            influence.beastmen_influence = sql->GetIntData(6);
-            influences[regionId]         = influence;
-        }
+        influence_t influence{};
+        influence.sandoria_influence = rset->getInt("sandoria_influence");
+        influence.bastok_influence   = rset->getInt("bastok_influence");
+        influence.windurst_influence = rset->getInt("windurst_influence");
+        influence.beastmen_influence = rset->getInt("beastmen_influence");
+        influences[regionId]         = influence;
     }
 }
 

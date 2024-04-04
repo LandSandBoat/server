@@ -1,13 +1,15 @@
 -----------------------------------
--- Aerial Armor
+-- Lunar Cry
 -----------------------------------
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)
-    return 0, 0
+    return xi.job_utils.summoner.canUseBloodPact(player, player:getPet(), target, ability)
 end
 
-abilityObject.onPetAbility = function(target, pet, skill)
+abilityObject.onPetAbility = function(target, pet, petskill, summoner, action)
+    xi.job_utils.summoner.onUseBloodPact(target, petskill, summoner, action)
+
     local moon = VanadielMoonPhase()
     local buffvalue = 1
     if moon > 90 then
@@ -28,7 +30,11 @@ abilityObject.onPetAbility = function(target, pet, skill)
     target:delStatusEffect(xi.effect.EVASION_DOWN)
     target:addStatusEffect(xi.effect.ACCURACY_DOWN, buffvalue, 0, 180)
     target:addStatusEffect(xi.effect.EVASION_DOWN, 32-buffvalue, 0, 180)
-    skill:setMsg(xi.msg.basic.NONE)
+
+    if target:getID() == action:getPrimaryTargetID() then
+        petskill:setMsg(xi.msg.basic.ACC_EVA_DOWN)
+    end
+
     return 0
 end
 

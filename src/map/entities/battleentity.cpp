@@ -1007,7 +1007,7 @@ void CBattleEntity::SetMLevel(uint8 mlvl)
 
     if (this->objtype & TYPE_PC)
     {
-        sql->Query("UPDATE char_stats SET mlvl = %u WHERE charid = %u LIMIT 1;", m_mlvl, this->id);
+        _sql->Query("UPDATE char_stats SET mlvl = %u WHERE charid = %u LIMIT 1", m_mlvl, this->id);
     }
 }
 
@@ -1043,7 +1043,7 @@ void CBattleEntity::SetSLevel(uint8 slvl)
 
     if (this->objtype & TYPE_PC)
     {
-        sql->Query("UPDATE char_stats SET slvl = %u WHERE charid = %u LIMIT 1;", m_slvl, this->id);
+        _sql->Query("UPDATE char_stats SET slvl = %u WHERE charid = %u LIMIT 1", m_slvl, this->id);
     }
 }
 
@@ -1916,6 +1916,7 @@ void CBattleEntity::OnMobSkillFinished(CMobSkillState& state, action_t& action)
     }
 
     PSkill->setTotalTargets(targets);
+    PSkill->setPrimaryTargetID(PTarget->id);
     PSkill->setTP(state.GetSpentTP());
     PSkill->setHPP(GetHPP());
 

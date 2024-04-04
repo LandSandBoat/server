@@ -10,7 +10,7 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    target:addItem(xi.item.PEBBLE, 12)
+    npcUtil.giveItem(target, { { xi.item.PEBBLE, 12 } })
 end
 
 return itemObject

@@ -575,6 +575,7 @@
         "*.ipp": "cpp",
         "ranges": "cpp",
         "span": "cpp",
-        "expected": "cpp"
+        "expected": "cpp",
+        "string_view": "cpp"
     },
 }

@@ -207,9 +207,8 @@ xi.combat.physical.calculateWSC = function(actor, wsSTRmod, wsDEXmod, wsVITmod, 
 end
 
 -- TP factor equation. Used to determine TP modifer across all cases of 'X varies with TP'
-xi.combat.physical.calculateTPfactor = function(actor, tpModifierTable)
-    local tpFactor = 1
-    local actorTP  = actor:getTP()
+xi.combat.physical.calculateTPfactor = function(actorTP, tpModifierTable)
+    local tpFactor = 0
 
     if actorTP >= 2000 then
         tpFactor = tpModifierTable[2] + (actorTP - 2000) * (tpModifierTable[3] - tpModifierTable[2]) / 1000
@@ -342,7 +341,7 @@ xi.combat.physical.calculateMeleePDIF = function(actor, target, weaponType, wsAt
             local flourishEffect = actor:getStatusEffect(xi.effect.BUILDING_FLOURISH)
 
             if flourishEffect:getPower() >= 2 then -- 2 or more Finishing Moves used.
-                actorAttack = actorAttack + 25 + flourishEffect:getSubPower()
+                actorAttack = math.floor(actorAttack * (125 + flourishEffect:getSubPower()) / 100)
             end
         end
     end
@@ -458,7 +457,7 @@ xi.combat.physical.calculateRangedPDIF = function(actor, target, weaponType, wsA
             local flourishEffect = actor:getStatusEffect(xi.effect.BUILDING_FLOURISH)
 
             if flourishEffect:getPower() >= 2 then -- 2 or more Finishing Moves used.
-                actorAttack = actorAttack + 25 + flourishEffect:getSubPower()
+                actorAttack = math.floor(actorAttack * (125 + flourishEffect:getSubPower()) / 100)
             end
         end
     end
@@ -625,7 +624,7 @@ xi.combat.physical.criticalRateFromFlourish = function(actor)
 end
 
 -- Critical rate master function.
-xi.combat.physical.calculateSwingCriticalRate = function(actor, target, optCritModTable)
+xi.combat.physical.calculateSwingCriticalRate = function(actor, target, actorTP, optCritModTable)
     -- See reference at https://www.bg-wiki.com/ffxi/Critical_Hit_Rate
     local finalCriticalRate     = 0
     local baseCriticalRate      = 0.05
@@ -641,7 +640,7 @@ xi.combat.physical.calculateSwingCriticalRate = function(actor, target, optCritM
 
     -- For weaponskills.
     if optCritModTable then
-        tpFactor = xi.combat.physical.calculateTPfactor(actor, optCritModTable)
+        tpFactor = xi.combat.physical.calculateTPfactor(actorTP, optCritModTable)
     end
 
     -- Add all different bonuses and clamp.

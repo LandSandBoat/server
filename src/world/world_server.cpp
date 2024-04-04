@@ -75,7 +75,6 @@ int32 forward_queued_messages_to_handlers(time_point tick, CTaskMgr::CTask* PTas
 
 WorldServer::WorldServer(int argc, char** argv)
 : Application("world", argc, argv)
-, sql(std::make_unique<SqlConnection>())
 , httpServer(std::make_unique<HTTPServer>())
 , messageServer(std::make_unique<message_server_wrapper_t>(std::ref(m_RequestExit)))
 , conquestSystem(std::make_unique<ConquestSystem>())

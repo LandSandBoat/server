@@ -93,7 +93,6 @@ inline auto format_as(type v) \
 //     : logging calls, and everything else, and still have all the information we want delivered
 //     : to the logging system.
 #define BEGIN_CATCH_HANDLER \
-    TracyZoneNamed(Log);    \
     try                     \
     {
 
@@ -111,10 +110,10 @@ inline auto format_as(type v) \
     } STATEMENT_CLOSE
 
 #define LOGGER_BODY(LOG_TYPE_MACRO, LogStringName, ...) \
-    BEGIN_CATCH_HANDLER auto _msgStr = fmt::sprintf(__VA_ARGS__); TracyMessageStr(_msgStr); LOG_TYPE_MACRO(spdlog::get(LogStringName), _msgStr); END_CATCH_HANDLER
+    BEGIN_CATCH_HANDLER auto _msgStr = fmt::sprintf(__VA_ARGS__); TracyZoneScoped; TracyMessageStr(_msgStr); LOG_TYPE_MACRO(spdlog::get(LogStringName), _msgStr); END_CATCH_HANDLER
 
 #define LOGGER_BODY_FMT(LOG_TYPE_MACRO, LogStringName, ...) \
-    BEGIN_CATCH_HANDLER auto _msgStr = fmt::format(__VA_ARGS__); TracyMessageStr(_msgStr); LOG_TYPE_MACRO(spdlog::get(LogStringName), _msgStr); END_CATCH_HANDLER
+    BEGIN_CATCH_HANDLER auto _msgStr = fmt::format(__VA_ARGS__); TracyZoneScoped; TracyMessageStr(_msgStr); LOG_TYPE_MACRO(spdlog::get(LogStringName), _msgStr); END_CATCH_HANDLER
 
 #define LOGGER_ENABLE(SettingsString, ...) \
     if (settings::get<bool>(SettingsString)) { __VA_ARGS__ ; } STATEMENT_CLOSE

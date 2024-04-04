@@ -275,11 +275,16 @@ QueryByNameResult_t const& CZone::queryEntitiesByName(std::string const& pattern
 {
     TracyZoneScoped;
 
-    // Use memoization since lookups are typically for the same mob names
-    auto result = m_queryByNameResults.find(pattern);
-    if (result != m_queryByNameResults.end())
+    // Always ignore cache for queries explicitly looking for dynamic entities
+    // TODO: make this memoization work for dynamic entities somehow?
+    if (pattern.rfind("DE_", 0) != 0)
     {
-        return result->second;
+        // Use memoization since lookups are typically for the same mob names
+        auto result = m_queryByNameResults.find(pattern);
+        if (result != m_queryByNameResults.end())
+        {
+            return result->second;
+        }
     }
 
     std::vector<CBaseEntity*> entities;
@@ -349,20 +354,20 @@ void CZone::LoadZoneLines()
     TracyZoneScoped;
     static const char fmtQuery[] = "SELECT zoneline, tozone, tox, toy, toz, rotation FROM zonelines WHERE fromzone = %u";
 
-    int32 ret = sql->Query(fmtQuery, m_zoneID);
+    int32 ret = _sql->Query(fmtQuery, m_zoneID);
 
-    if (ret != SQL_ERROR && sql->NumRows() != 0)
+    if (ret != SQL_ERROR && _sql->NumRows() != 0)
     {
-        while (sql->NextRow() == SQL_SUCCESS)
+        while (_sql->NextRow() == SQL_SUCCESS)
         {
             zoneLine_t* zl = new zoneLine_t;
 
-            zl->m_zoneLineID     = (uint32)sql->GetIntData(0);
-            zl->m_toZone         = (uint16)sql->GetIntData(1);
-            zl->m_toPos.x        = sql->GetFloatData(2);
-            zl->m_toPos.y        = sql->GetFloatData(3);
-            zl->m_toPos.z        = sql->GetFloatData(4);
-            zl->m_toPos.rotation = (uint8)sql->GetIntData(5);
+            zl->m_zoneLineID     = (uint32)_sql->GetIntData(0);
+            zl->m_toZone         = (uint16)_sql->GetIntData(1);
+            zl->m_toPos.x        = _sql->GetFloatData(2);
+            zl->m_toPos.y        = _sql->GetFloatData(3);
+            zl->m_toPos.z        = _sql->GetFloatData(4);
+            zl->m_toPos.rotation = (uint8)_sql->GetIntData(5);
 
             m_zoneLineList.emplace_back(zl);
         }
@@ -386,13 +391,13 @@ void CZone::LoadZoneLines()
 void CZone::LoadZoneWeather()
 {
     TracyZoneScoped;
-    static const char* Query = "SELECT weather FROM zone_weather WHERE zone = %u;";
+    static const char* Query = "SELECT weather FROM zone_weather WHERE zone = %u";
 
-    int32 ret = sql->Query(Query, m_zoneID);
-    if (ret != SQL_ERROR && sql->NumRows() != 0)
+    int32 ret = _sql->Query(Query, m_zoneID);
+    if (ret != SQL_ERROR && _sql->NumRows() != 0)
     {
-        sql->NextRow();
-        auto* weatherBlob = reinterpret_cast<uint16*>(sql->GetData(0));
+        _sql->NextRow();
+        auto* weatherBlob = reinterpret_cast<uint16*>(_sql->GetData(0));
         for (uint16 i = 0; i < WEATHER_CYCLE; i++)
         {
             if (weatherBlob[i])
@@ -431,22 +436,22 @@ void CZone::LoadZoneSettings()
                                "WHERE zoneid = %u "
                                "LIMIT 1";
 
-    if (sql->Query(Query, m_zoneID) != SQL_ERROR && sql->NumRows() != 0 && sql->NextRow() == SQL_SUCCESS)
+    if (_sql->Query(Query, m_zoneID) != SQL_ERROR && _sql->NumRows() != 0 && _sql->NextRow() == SQL_SUCCESS)
     {
-        m_zoneName.insert(0, (const char*)sql->GetData(0));
+        m_zoneName.insert(0, (const char*)_sql->GetData(0));
 
-        inet_pton(AF_INET, (const char*)sql->GetData(1), &m_zoneIP);
-        m_zonePort              = (uint16)sql->GetUIntData(2);
-        m_zoneMusic.m_songDay   = (uint8)sql->GetUIntData(3);           // background music (day)
-        m_zoneMusic.m_songNight = (uint8)sql->GetUIntData(4);           // background music (night)
-        m_zoneMusic.m_bSongS    = (uint8)sql->GetUIntData(5);           // solo battle music
-        m_zoneMusic.m_bSongM    = (uint8)sql->GetUIntData(6);           // party battle music
-        m_tax                   = (uint16)(sql->GetFloatData(7) * 100); // tax for bazaar
-        m_miscMask              = (uint16)sql->GetUIntData(8);
+        inet_pton(AF_INET, (const char*)_sql->GetData(1), &m_zoneIP);
+        m_zonePort              = (uint16)_sql->GetUIntData(2);
+        m_zoneMusic.m_songDay   = (uint8)_sql->GetUIntData(3);           // background music (day)
+        m_zoneMusic.m_songNight = (uint8)_sql->GetUIntData(4);           // background music (night)
+        m_zoneMusic.m_bSongS    = (uint8)_sql->GetUIntData(5);           // solo battle music
+        m_zoneMusic.m_bSongM    = (uint8)_sql->GetUIntData(6);           // party battle music
+        m_tax                   = (uint16)(_sql->GetFloatData(7) * 100); // tax for bazaar
+        m_miscMask              = (uint16)_sql->GetUIntData(8);
 
-        m_zoneType = static_cast<ZONE_TYPE>(sql->GetUIntData(9));
+        m_zoneType = static_cast<ZONE_TYPE>(_sql->GetUIntData(9));
 
-        if (sql->GetData(10) != nullptr) // bcnmid cannot be used now, because they start from scratch
+        if (_sql->GetData(10) != nullptr) // bcnmid cannot be used now, because they start from scratch
         {
             m_BattlefieldHandler = new CBattlefieldHandler(this);
         }
@@ -1035,22 +1040,23 @@ void CZone::CharZoneIn(CCharEntity* PChar)
 
     PChar->ReloadPartyInc();
 
-    if (PChar->PParty != nullptr)
+    // Zone-wide treasure pool takes precendence over all others
+    if (m_TreasurePool && m_TreasurePool->GetPoolType() == TREASUREPOOL_ZONE)
     {
-        if (m_TreasurePool != nullptr)
-        {
-            PChar->PTreasurePool = m_TreasurePool;
-            PChar->PTreasurePool->AddMember(PChar);
-        }
-        else
-        {
-            PChar->PParty->ReloadTreasurePool(PChar);
-        }
+        PChar->PTreasurePool = m_TreasurePool;
+        PChar->PTreasurePool->AddMember(PChar);
     }
     else
     {
-        PChar->PTreasurePool = new CTreasurePool(TREASUREPOOL_SOLO);
-        PChar->PTreasurePool->AddMember(PChar);
+        if (PChar->PParty)
+        {
+            PChar->PParty->ReloadTreasurePool(PChar);
+        }
+        else
+        {
+            PChar->PTreasurePool = new CTreasurePool(TREASUREPOOL_SOLO);
+            PChar->PTreasurePool->AddMember(PChar);
+        }
     }
 
     if (!(m_zoneType & ZONE_TYPE::INSTANCED))

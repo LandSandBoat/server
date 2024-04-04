@@ -4,12 +4,14 @@
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)
-    return 0, 0
+    return xi.job_utils.summoner.canUseBloodPact(player, player:getPet(), target, ability)
 end
 
-abilityObject.onPetAbility = function(target, pet, skill, summoner)
+abilityObject.onPetAbility = function(target, pet, petskill, summoner, action)
     local bonusTime = utils.clamp(summoner:getSkillLevel(xi.skill.SUMMONING_MAGIC) - 300, 0, 200)
     local duration = 180 + bonusTime
+
+    xi.job_utils.summoner.onUseBloodPact(target, petskill, summoner, action)
 
     local moon = VanadielMoonPhase()
     local buffvalue = 1
@@ -41,7 +43,13 @@ abilityObject.onPetAbility = function(target, pet, skill, summoner)
     target:addStatusEffect(xi.effect.INT_BOOST, 8-buffvalue, 0, duration)
     target:addStatusEffect(xi.effect.MND_BOOST, 8-buffvalue, 0, duration)
     target:addStatusEffect(xi.effect.CHR_BOOST, 8-buffvalue, 0, duration)
-    skill:setMsg(xi.msg.basic.NONE)
+
+    if target:getID() == action:getPrimaryTargetID() then
+        petskill:setMsg(xi.msg.basic.STATUS_BOOST)
+    else
+        petskill:setMsg(xi.msg.basic.STATUS_BOOST_2)
+    end
+
     return 0
 end
 

@@ -185,8 +185,8 @@ void CMobController::TryLink()
         {
             if (PTarget->objtype == TYPE_PC)
             {
-                std::unique_ptr<CBasicPacket> errMsg;
-                if (PTarget->PPet->CanAttack(PMob, errMsg))
+                auto* PChar = dynamic_cast<CCharEntity*>(PTarget);
+                if (PChar && PChar->IsMobOwner(PMob))
                 {
                     petutils::AttackTarget(PTarget, PMob);
                 }
@@ -224,7 +224,7 @@ void CMobController::TryLink()
                 if (PPartyMember->m_roamFlags & ROAMFLAG_IGNORE)
                 {
                     // force into attack action
-                    // #TODO
+                    // TODO
                     PPartyMember->PAI->Engage(PTarget->targid);
                 }
             }
@@ -692,7 +692,7 @@ void CMobController::Move()
 
         if (((currentDistance > closeDistance) || move) && PMob->PAI->CanFollowPath())
         {
-            // #TODO: can this be moved to scripts entirely?
+            // TODO: can this be moved to scripts entirely?
             if (PMob->getMobMod(MOBMOD_DRAW_IN) > 0)
             {
                 if (currentDistance >= PMob->GetMeleeRange() * 2 && battleutils::DrawIn(PTarget, PMob, PMob->GetMeleeRange() - 0.2f))
@@ -844,7 +844,7 @@ void CMobController::DoRoamTick(time_point tick)
 
         return;
     }
-    // #TODO
+    // TODO
     else if (PMob->GetDespawnTime() > time_point::min() && PMob->GetDespawnTime() < m_Tick)
     {
         Despawn();
@@ -959,7 +959,7 @@ void CMobController::DoRoamTick(time_point tick)
                 else if (PMob->CanRoam() && PMob->PAI->PathFind->RoamAround(PMob->m_SpawnPoint, PMob->GetRoamDistance(),
                                                                             (uint8)PMob->getMobMod(MOBMOD_ROAM_TURNS), PMob->m_roamFlags))
                 {
-                    // #TODO: #AIToScript (event probably)
+                    // TODO: #AIToScript (event probably)
                     if (PMob->m_roamFlags & ROAMFLAG_WORM)
                     {
                         // move down

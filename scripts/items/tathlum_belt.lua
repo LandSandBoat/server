@@ -9,7 +9,7 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    target:addItem(xi.item.TATHLUM, 8) -- tathlum
+    npcUtil.giveItem(target, { { xi.item.TATHLUM, 8 } })
 end
 
 return itemObject

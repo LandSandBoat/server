@@ -7560,7 +7560,7 @@ INSERT INTO `mob_groups` VALUES (7,4053,106,'Tunnel_Worm',330,0,2499,0,0,1,1,0);
 INSERT INTO `mob_groups` VALUES (8,1038,106,'Ding_Bats',330,2,82,0,0,1,4,0);
 INSERT INTO `mob_groups` VALUES (9,2547,106,'Maneating_Hornet',330,0,1609,0,0,2,6,0);
 INSERT INTO `mob_groups` VALUES (10,3780,106,'Stone_Eater',330,0,0,0,0,2,6,0);
-INSERT INTO `mob_groups` VALUES (11,3058,106,'Ornery_Sheep',330,0,0,0,0,5,8,0);
+INSERT INTO `mob_groups` VALUES (11,3058,106,'Ornery_Sheep',330,0,1958,0,0,5,8,0);
 INSERT INTO `mob_groups` VALUES (12,1737,106,'Goblin_Thug',330,0,1170,0,0,4,8,0);
 INSERT INTO `mob_groups` VALUES (13,1364,106,'Fledermaus',330,2,19,0,0,3,5,0);
 INSERT INTO `mob_groups` VALUES (14,441,106,'Black_Wolf',330,1,288,0,0,5,8,0);

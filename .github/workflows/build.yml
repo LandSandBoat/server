@@ -277,30 +277,6 @@ jobs:
       run: |
         cmake --build build -j4
 
-  Windows_32bit:
-    needs: Sanity_Checks
-    runs-on: windows-latest
-    env:
-      MSBUILD_PATH: C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Current\Bin\
-    steps:
-      - uses: actions/checkout@v3
-        with:
-          fetch-depth: 1
-      - name: Cache 'build' folder
-        uses: actions/cache@v3
-        with:
-          path: build
-          key: ${{ runner.os }}-msvc32
-      - name: Configure CMake
-        shell: cmd
-        run: |
-          mkdir -p build
-          cmake -S . -B build -A Win32
-      - name: Build
-        shell: cmd
-        run: |
-          cmake --build build -j4
-
   Windows_64bit_Debug:
     needs: Sanity_Checks
     runs-on: windows-latest

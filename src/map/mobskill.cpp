@@ -25,6 +25,7 @@
 CMobSkill::CMobSkill(uint16 id)
 : m_ID(id)
 , m_TotalTargets(1)
+, m_primaryTargetID(0)
 , m_Param(0)
 , m_AnimID(0)
 , m_Aoe(0)
@@ -101,6 +102,11 @@ void CMobSkill::setTotalTargets(uint16 targets)
     m_TotalTargets = targets;
 }
 
+void CMobSkill::setPrimaryTargetID(uint32 targid)
+{
+    m_primaryTargetID = targid;
+}
+
 void CMobSkill::setAnimationID(uint16 animID)
 {
     m_AnimID = animID;
@@ -169,12 +175,6 @@ uint16 CMobSkill::getAnimationID() const
 
 uint16 CMobSkill::getPetAnimationID() const
 {
-    // fenrir
-    if (m_AnimID >= 513 && m_AnimID <= 521)
-    {
-        return m_AnimID - 497;
-    }
-
     // shiva
     if (m_AnimID >= 578 && m_AnimID <= 586)
     {
@@ -210,6 +210,11 @@ uint8 CMobSkill::getHPP() const
 uint16 CMobSkill::getTotalTargets() const
 {
     return m_TotalTargets;
+}
+
+uint32 CMobSkill::getPrimaryTargetID() const
+{
+    return m_primaryTargetID;
 }
 
 uint16 CMobSkill::getMsg() const

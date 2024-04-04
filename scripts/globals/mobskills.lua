@@ -230,8 +230,8 @@ xi.mobskills.mobPhysicalMove = function(mob, target, skill, numHits, accMod, dmg
         finaldmg   = 0
         hitslanded = 0
         skill:setMsg(xi.msg.basic.SKILL_MISS)
-    -- calculate tp return of mob skill
-    else
+    -- calculate tp return of mob skill and add if hit primary target
+    elseif skill:getPrimaryTargetID() == target:getID() then
         local tpReturn = xi.combat.tp.getSingleMeleeHitTPReturn(mob, target)
         tpReturn = tpReturn + 10 * (hitslanded - 1) -- extra hits give 10 TP each
         mob:addTP(tpReturn)
@@ -302,8 +302,8 @@ xi.mobskills.mobMagicalMove = function(mob, target, skill, damage, element, dmgm
     finaldmg       = finaldmg * resist * magicDefense
     returninfo.dmg = finaldmg
 
-    -- magical mob skills are single hit so provide single Melee hit TP return
-    if finaldmg > 0 then
+    -- magical mob skills are single hit so provide single Melee hit TP return if primary target
+    if finaldmg > 0 and skill:getPrimaryTargetID() == target:getID() then
         local tpReturn = xi.combat.tp.getSingleMeleeHitTPReturn(mob, target)
         mob:addTP(tpReturn)
     end
@@ -403,7 +403,7 @@ end
 -- base is calculated from main level to create a minimum
 -- Equation: (HP * percent) + (LVL / base)
 -- cap is optional, defines a maximum damage
-xi.mobskills.mobBreathMove = function(mob, target, percent, base, element, cap)
+xi.mobskills.mobBreathMove = function(mob, target, skill, percent, base, element, cap)
     local damage = (mob:getHP() * percent) + (mob:getMainLvl() / base)
 
     if not cap then
@@ -452,8 +452,8 @@ xi.mobskills.mobBreathMove = function(mob, target, percent, base, element, cap)
         damage = utils.clamp(utils.stoneskin(target, damage), -99999, 99999)
     end
 
-    -- breath mob skills are single hit so provide single Melee hit TP return
-    if damage > 0 then
+    -- breath mob skills are single hit so provide single Melee hit TP return if primary target
+    if damage > 0 and skill:getPrimaryTargetID() == target:getID() then
         local tpReturn = xi.combat.tp.getSingleMeleeHitTPReturn(mob, target)
         mob:addTP(tpReturn)
     end
