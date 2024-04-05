@@ -25,7 +25,7 @@ instanceObject.onInstanceCreatedCallback = function(player, instance)
 end
 
 instanceObject.onInstanceTimeUpdate = function(instance, elapsed)
-    xi.instance.updateInstanceTime(instance, elapsed, ID)
+    xi.instance.updateInstanceTime(instance, elapsed, ID.text)
 end
 
 instanceObject.onInstanceFailure = function(instance)
