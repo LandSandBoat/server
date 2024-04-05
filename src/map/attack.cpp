@@ -104,7 +104,7 @@ void CAttack::SetCritical(bool value)
         {
             if (CStatusEffect* footworkEffect = m_attacker->StatusEffectContainer->GetStatusEffect(EFFECT_FOOTWORK))
             {
-                attBonus = 1 + (footworkEffect->GetSubPower() / 256.f); // Mod is out of 256
+                attBonus += (footworkEffect->GetSubPower() / 256.f); // Mod is out of 256
             }
         }
 
