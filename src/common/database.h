@@ -270,9 +270,12 @@ namespace db
 
         TracyZoneScoped;
 
-        auto blobStr = rset->getString(blobKey.c_str());
-        std::memset(&destination, 0x00, sizeof(T));
-        std::memcpy(&destination, blobStr.c_str(), sizeof(T));
+        if (!rset->isNull(blobKey.c_str())) // This can do very bad things if the blob is NULL.
+        {
+            auto blobStr = rset->getString(blobKey.c_str());
+            std::memset(&destination, 0x00, sizeof(T));
+            std::memcpy(&destination, blobStr.c_str(), sizeof(T));
+        }
     }
 
     // @brief Execute a query with the given query string.
