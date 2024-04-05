@@ -1137,34 +1137,35 @@ xi.weaponskills.calculatedIgnoredDef = function(tp, def, ignoredDefenseTable)
     return 0
 end
 
-local function getMeleePDifRange(correctedRatio)
-    -- pDifMax
-    local pDifMax = 3
-    if correctedRatio < 0.5 then
-        pDifMax = correctedRatio + 0.5
-    elseif correctedRatio < 0.7 then
-        pDifMax = 1
-    elseif correctedRatio < 1.2 then
-        pDifMax = correctedRatio + 0.3
-    elseif correctedRatio < 1.5 then
-        pDifMax = correctedRatio * 0.25 + correctedRatio
-    elseif correctedRatio < 2.625 then
-        pDifMax = correctedRatio + 0.375
+local function getMeleePDifRange(wRatio, pDifFinalCap)
+    local pDifUpperCap       = 0
+    local pDifLowerCap       = 0
+    if wRatio < 0.5 then
+        pDifUpperCap = wRatio + 0.5
+    elseif wRatio < 0.7 then
+        pDifUpperCap = 1
+    elseif wRatio < 1.2 then
+        pDifUpperCap = wRatio + 0.3
+    elseif wRatio < 1.5 then
+        pDifUpperCap = wRatio + wRatio * 0.25
+    else
+        pDifUpperCap = math.min(wRatio + 0.375, pDifFinalCap)
     end
 
-    -- pDifMin
-    local pDifMin = correctedRatio - 0.375
-    if correctedRatio < 0.38 then
-        pDifMin = 0
-    elseif correctedRatio < 1.25 then
-        pDifMin = correctedRatio * 1176 / 1024 - 448 / 1024
-    elseif correctedRatio < 1.51 then
-        pDifMin = 1
-    elseif correctedRatio < 2.44 then
-        pDifMin = correctedRatio * 1176 / 1024 - 775 / 1024
+    -- pDIF lower cap.
+    if wRatio < 0.38 then
+        pDifLowerCap = 0
+    elseif wRatio < 1.25 then
+        pDifLowerCap = wRatio * 1176 / 1024 - 448 / 1024
+    elseif wRatio < 1.51 then
+        pDifLowerCap = 1
+    elseif wRatio < 2.44 then
+        pDifLowerCap = wRatio * 1176 / 1024 - 775 / 1024
+    else
+        pDifLowerCap = wRatio - 0.375
     end
 
-    return { pDifMin, pDifMax }
+    return { pDifLowerCap, pDifUpperCap }
 end
 
 -- Given the raw ratio value (atk/def) and levels, returns the cRatio (min then max)
@@ -1195,11 +1196,11 @@ xi.weaponskills.cMeleeRatio = function(attacker, defender, params, ignoredDef, t
     local cratioCap = (xi.combat.physical.pDifWeaponCapTable[weaponType][1] + damageLimitPlus) * damageLimitPercent -- Added damage limit bonuses
 
     cratio = utils.clamp(cratio, 0, cratioCap)
-    local pdif = getMeleePDifRange(cratio)
+    local pdif = getMeleePDifRange(cratio, cratioCap)
 
     cratio                   = cratio + 1
-    cratio                   = utils.clamp(cratio, 0, cratioCap)
-    local unadjustedPDifCrit = getMeleePDifRange(cratio)
+    cratio                   = utils.clamp(cratio, 0, cratioCap + 1)
+    local unadjustedPDifCrit = getMeleePDifRange(cratio, cratioCap + 1)
 
     local critbonus = utils.clamp(attacker:getMod(xi.mod.CRIT_DMG_INCREASE) - defender:getMod(xi.mod.CRIT_DEF_BONUS), 0, 100)
     local pdifcrit  = { unadjustedPDifCrit[1] * (100 + critbonus) / 100, unadjustedPDifCrit[2] * (100 + critbonus) / 100 }
