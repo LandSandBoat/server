@@ -270,10 +270,13 @@ namespace db
 
         TracyZoneScoped;
 
-        if (!rset->isNull(blobKey.c_str())) // This can do very bad things if the blob is NULL.
+        std::memset(&destination, 0x00, sizeof(T));
+
+        // If we use getString on a null blob we will get back garbage data.
+        // This will introduce difficult to track down crashes.
+        if (!rset->isNull(blobKey.c_str()))
         {
             auto blobStr = rset->getString(blobKey.c_str());
-            std::memset(&destination, 0x00, sizeof(T));
             std::memcpy(&destination, blobStr.c_str(), sizeof(T));
         }
     }
