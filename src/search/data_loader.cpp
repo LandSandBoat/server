@@ -24,6 +24,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "common/logging.h"
 #include "common/mmo.h"
 #include "common/settings.h"
+#include "common/sql.h"
 
 #include <algorithm>
 
@@ -646,28 +647,26 @@ void CDataLoader::ExpireAHItems(uint16 expireAgeInDays)
 {
     ShowInfo(fmt::format("Expiring auction house listings over {} days old", expireAgeInDays).c_str());
 
+    auto sql2 = std::make_unique<SqlConnection>();
+
     std::vector<ListingToExpire> listingsToExpire;
 
-    std::string qStr = "SELECT T0.id, T0.itemid, T1.stacksize, T0.stack, T0.seller FROM auction_house T0 INNER JOIN item_basic T1 ON \
-                            T0.itemid = T1.itemid WHERE datediff(now(),from_unixtime(date)) >= %u AND buyer_name IS NULL";
+    std::string qStr = "SELECT T0.id,T0.itemid,T1.stacksize, T0.stack, T0.seller FROM auction_house T0 INNER JOIN item_basic T1 ON \
+                            T0.itemid = T1.itemid WHERE datediff(now(),from_unixtime(date)) >= %u AND buyer_name IS NULL;";
 
-    auto rset = db::query(fmt::sprintf(qStr, expireAgeInDays));
-    if (!rset)
-    {
-        return;
-    }
+    int32 ret             = sql2->Query(qStr.c_str(), expireAgeInDays);
+    int64 expiredAuctions = sql2->NumRows();
 
-    int64 expiredAuctions = rset->rowsCount();
-    if (expiredAuctions > 0)
+    if (ret != SQL_ERROR && expiredAuctions > 0)
     {
-        while (rset->next())
+        while (sql2->NextRow() == SQL_SUCCESS)
         {
             // Collect the items we're going to expire
-            uint32 saleID    = rset->getUInt("id");
-            uint32 itemID    = rset->getUInt("itemid");
-            uint8  itemStack = (uint8)rset->getUInt("stacksize");
-            uint8  ahStack   = (uint8)rset->getUInt("stack");
-            uint32 sellerID  = rset->getUInt("seller");
+            uint32 saleID    = sql2->GetUIntData(0);
+            uint32 itemID    = sql2->GetUIntData(1);
+            uint8  itemStack = (uint8)sql2->GetUIntData(2);
+            uint8  ahStack   = (uint8)sql2->GetUIntData(3);
+            uint32 sellerID  = sql2->GetUIntData(4);
             // NOTE: seller name left out for now, we'll populate this later
 
             listingsToExpire.emplace_back(ListingToExpire{ saleID, itemID, itemStack, ahStack, sellerID, "?" });
@@ -675,31 +674,24 @@ void CDataLoader::ExpireAHItems(uint16 expireAgeInDays)
 
         for (auto listing : listingsToExpire)
         {
+            // Populate name now
+            qStr = fmt::format("SELECT charname FROM chars WHERE charid={}", listing.sellerID);
+            ret  = sql2->Query(qStr.c_str());
+            if (ret != SQL_ERROR && sql2->NumRows() != 0 && sql2->NextRow() == SQL_SUCCESS)
             {
-                // Populate name now
-                auto query = fmt::format("SELECT charname FROM chars WHERE charid={}", listing.sellerID);
-                auto rset2 = db::query(query);
-                if (rset2 && rset2->rowsCount() && rset2->next())
-                {
-                    listing.sellerName = rset2->getString("charname");
-                }
+                listing.sellerName = sql2->GetStringData(0);
             }
 
-            {
-                auto query = fmt::format("INSERT INTO delivery_box (charid, charname, box, itemid, itemsubid, quantity, senderid, sender) VALUES "
-                                         "({}, '{}', 1, {}, 0, {}, 0, 'AH-Jeuno')",
-                                         listing.sellerID, listing.sellerName, listing.itemID, listing.ahStack == 1 ? listing.itemStack : 1);
+            qStr = fmt::format("INSERT INTO delivery_box (charid, charname, box, itemid, itemsubid, quantity, senderid, sender) VALUES "
+                               "({}, '{}', 1, {}, 0, {}, 0, 'AH-Jeuno');",
+                               listing.sellerID, listing.sellerName, listing.itemID, listing.ahStack == 1 ? listing.itemStack : 1);
 
-                auto rset3 = db::query(query);
-                if (rset3 && rset3->rowInserted())
-                {
-                    // TODO: Is this still correct?
-                    if (!db::query(fmt::sprintf("DELETE FROM auction_house WHERE id=%u", listing.saleID)))
-                    {
-                        ShowError(fmt::format("Failed to delete expired auction house listing for item {} by {} (listing: {})",
-                                              listing.itemID, listing.sellerName, listing.saleID));
-                    }
-                }
+            ret = sql2->Query(qStr.c_str());
+
+            if (ret != SQL_ERROR && sql2->AffectedRows() > 0)
+            {
+                // delete the item from the auction house
+                sql2->Query("DELETE FROM auction_house WHERE id=%u", listing.saleID);
             }
         }
     }

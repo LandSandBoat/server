@@ -2604,11 +2604,12 @@ void SmallPacket0x04D(map_session_data_t* const PSession, CCharEntity* const PCh
                     char extra[sizeof(PItem->m_extra) * 2 + 1];
                     _sql->EscapeStringLen(extra, (const char*)PItem->m_extra, sizeof(PItem->m_extra));
 
-                    auto rset3 = db::preparedStmt(
-                        "INSERT INTO delivery_box(charid, charname, box, slot, itemid, itemsubid, quantity, extra, senderid, sender) VALUES(?, ?, 2, ?, ?, ?, ?, ?, ?, ?)",
-                        PChar->id, PChar->getName(), slotID, PItem->getID(), PItem->getSubID(), quantity, extra, charid, senderName);
+                    auto ret = _sql->Query(
+                        "INSERT INTO delivery_box(charid, charname, box, slot, itemid, itemsubid, quantity, extra, senderid, sender) VALUES(%u, "
+                        "'%s', 2, %u, %u, %u, %u, '%s', %u, '%s'); ",
+                        PChar->id, PChar->getName(), slotID, PItem->getID(), PItem->getSubID(), quantity, extra, charid, str(data[0x10]));
 
-                    if (rset3 && rset3->rowInserted() == 1 && charutils::UpdateItem(PChar, LOC_INVENTORY, invslot, -(int32)quantity))
+                    if (ret != SQL_ERROR && _sql->AffectedRows() == 1 && charutils::UpdateItem(PChar, LOC_INVENTORY, invslot, -(int32)quantity))
                     {
                         PChar->UContainer->SetItem(slotID, PUBoxItem);
                         PChar->pushPacket(new CDeliveryBoxPacket(action, boxtype, PUBoxItem, slotID, PChar->UContainer->GetItemsCount(), 1));
