@@ -70,21 +70,21 @@ zones[xi.zone.YUHTUNGA_JUNGLE] =
     },
     npc =
     {
-        BLUE_RAFFLESIA_OFFSET = 17281586,
-        TUNING_OUT_QM         = 17281590, -- qm2 in npc_list
+        BLUE_RAFFLESIA_OFFSET = 17281587,
+        TUNING_OUT_QM         = 17281591, -- qm2 in npc_list
         OVERSEER_BASE         = GetFirstID('Zorchorevi_RK'),
-        CERMET_HEADSTONE      = 17281625,
-        PEDDLESTOX            = 17281640,
+        CERMET_HEADSTONE      = 17281626,
+        PEDDLESTOX            = 17281641,
         BEASTMEN_TREASURE     =
         {
-            17281643, -- qm3
-            17281644, -- qm4
-            17281645, -- qm5
-            17281646, -- qm6
-            17281647, -- qm7
-            17281648, -- qm8
-            17281649, -- qm9
-            17281650, -- qm10
+            17281644, -- qm3
+            17281645, -- qm4
+            17281646, -- qm5
+            17281647, -- qm6
+            17281648, -- qm7
+            17281649, -- qm8
+            17281650, -- qm9
+            17281651, -- qm10
         },
 
         HARVESTING = GetTableOfIDs('Harvesting_Point'),

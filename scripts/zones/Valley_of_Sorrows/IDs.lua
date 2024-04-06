@@ -38,7 +38,7 @@ zones[xi.zone.VALLEY_OF_SORROWS] =
     },
     npc =
     {
-        ADAMANTOISE_QM = 17301567,
+        ADAMANTOISE_QM = 17301568,
     },
 }
 

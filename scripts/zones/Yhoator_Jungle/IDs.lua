@@ -63,17 +63,17 @@ zones[xi.zone.YHOATOR_JUNGLE] =
     npc =
     {
         OVERSEER_BASE     = GetFirstID('Ilieumort_RK'),
-        PEDDLESTOX        = 17285686,
+        PEDDLESTOX        = 17285687,
         BEASTMEN_TREASURE =
         {
-            17285696, -- qm4
-            17285689, -- qm5
-            17285690, -- qm6
-            17285691, -- qm7
-            17285692, -- qm8
-            17285693, -- qm9
-            17285694, -- qm10
-            17285695, -- qm11
+            17285697, -- qm4
+            17285690, -- qm5
+            17285691, -- qm6
+            17285692, -- qm7
+            17285693, -- qm8
+            17285694, -- qm9
+            17285695, -- qm10
+            17285696, -- qm11
         },
 
         HARVESTING = GetTableOfIDs('Harvesting_Point'),

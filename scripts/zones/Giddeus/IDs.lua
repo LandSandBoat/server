@@ -50,7 +50,7 @@ zones[xi.zone.GIDDEUS] =
     },
     npc =
     {
-        TREASURE_CHEST = 17371611,
+        TREASURE_CHEST = 17371612,
         HARVESTING     = GetTableOfIDs('Harvesting_Point'),
     },
 }

@@ -61,7 +61,7 @@ zones[xi.zone.CAPE_TERIGGAN] =
     npc =
     {
         OVERSEER_BASE    = GetFirstID('Salimardi_RK'),
-        CERMET_HEADSTONE = 17240497,
+        CERMET_HEADSTONE = 17240498,
     },
 }
 

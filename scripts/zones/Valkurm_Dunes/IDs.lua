@@ -65,7 +65,7 @@ zones[xi.zone.VALKURM_DUNES] =
     },
     npc =
     {
-        SUNSAND_QM    = 17199699, -- qm1 in npc_list
+        SUNSAND_QM    = 17199700, -- qm1 in npc_list
         OVERSEER_BASE = GetFirstID('Quanteilleron_RK'),
     },
 }

@@ -31,7 +31,7 @@ zones[xi.zone.VUNKERL_INLET_S] =
     },
     npc =
     {
-        INDESCRIPT_MARKINGS = 17118008,
+        INDESCRIPT_MARKINGS = 17118009,
         CAMPAIGN_NPC_OFFSET = GetFirstID('Toulsard_RK'), -- RK, LC, MC, flag +4, CA
     },
 }

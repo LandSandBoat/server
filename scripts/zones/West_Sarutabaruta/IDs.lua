@@ -117,7 +117,7 @@ zones[xi.zone.WEST_SARUTABARUTA] =
 
     npc =
     {
-        SIGNPOST_OFFSET = 17248797,
+        SIGNPOST_OFFSET = 17248798,
         OVERSEER_BASE   = GetFirstID('Naguipeillont_RK'),
         HARVESTING      = GetTableOfIDs('Harvesting_Point'),
     },

@@ -38,7 +38,7 @@ zones[xi.zone.BEARCLAW_PINNACLE] =
     },
     npc =
     {
-        ENTRANCE_OFFSET = 16801888,
+        ENTRANCE_OFFSET = 16801889,
     },
 }
 

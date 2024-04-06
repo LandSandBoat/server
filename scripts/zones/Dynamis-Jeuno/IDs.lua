@@ -84,7 +84,7 @@ zones[xi.zone.DYNAMIS_JEUNO] =
     {
         QM =
         {
-            [17547509] =
+            [17547510] =
             {
                 param = { 3356, 3419, 3420, 3421, 3422, 3423 },
                 trade =
@@ -93,10 +93,10 @@ zones[xi.zone.DYNAMIS_JEUNO] =
                     { item = { 3419, 3420, 3421, 3422, 3423 }, mob = 17547499 }, -- Arch Goblin Golem
                 }
             },
-            [17547510] = { trade = { { item = 3392, mob = 17547493 } } }, -- Quicktrix Hexhands
-            [17547511] = { trade = { { item = 3393, mob = 17547494 } } }, -- Feralox Honeylips
-            [17547512] = { trade = { { item = 3394, mob = 17547496 } } }, -- Scourquix Scaleskin
-            [17547513] = { trade = { { item = 3395, mob = 17547498 } } }, -- Wilywox Tenderpalm
+            [17547511] = { trade = { { item = 3392, mob = 17547493 } } }, -- Quicktrix Hexhands
+            [17547512] = { trade = { { item = 3393, mob = 17547494 } } }, -- Feralox Honeylips
+            [17547513] = { trade = { { item = 3394, mob = 17547496 } } }, -- Scourquix Scaleskin
+            [17547514] = { trade = { { item = 3395, mob = 17547498 } } }, -- Wilywox Tenderpalm
         },
     },
 }

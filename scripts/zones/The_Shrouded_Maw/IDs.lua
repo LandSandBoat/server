@@ -25,7 +25,7 @@ zones[xi.zone.THE_SHROUDED_MAW] =
     },
     npc =
     {
-        DARKNESS_NAMED_TILE_OFFSET = 16818259, -- _0a0 in npc_list
+        DARKNESS_NAMED_TILE_OFFSET = 16818260, -- _0a0 in npc_list
     },
 }
 

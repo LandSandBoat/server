@@ -92,7 +92,7 @@ zones[xi.zone.DYNAMIS_TAVNAZIA] =
     {
         QM =
         {
-            [16949396] =
+            [16949397] =
             {
                 param = { 3459, 3483, 3484, 3485, 3486 },
                 trade =

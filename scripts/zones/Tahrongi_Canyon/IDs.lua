@@ -109,7 +109,7 @@ zones[xi.zone.TAHRONGI_CANYON] =
 
     npc =
     {
-        SIGNPOST_OFFSET = 17257033,
+        SIGNPOST_OFFSET = 17257034,
         EXCAVATION      = GetTableOfIDs('Excavation_Point'),
     },
 }

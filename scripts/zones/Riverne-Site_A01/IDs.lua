@@ -35,7 +35,7 @@ zones[xi.zone.RIVERNE_SITE_A01] =
     },
     npc =
     {
-        DISPLACEMENT_OFFSET = 16900334,
+        DISPLACEMENT_OFFSET = 16900335,
     },
     AIATAR_PH =
     {

@@ -191,18 +191,18 @@ zones[xi.zone.NYZUL_ISLE] =
         VENDING_BOX         = GetFirstID('Vending_Box'),
 
         -- Other instances
-        WEATHER             = 17093423,
-        QM1                 = 17093472,
-        BLANK1              = 17093473,
-        BLANK2              = 17093474,
-        BLANK3              = 17093475,
-        NASHMEIRA1          = 17093476,
-        NASHMEIRA2          = 17093477,
-        RAZFAHD             = 17093478,
-        CSNPC1              = 17093479,
-        GHATSAD             = 17093480,
-        ALEXANDER           = 17093481,
-        CSNPC2              = 17093482,
+        WEATHER             = 17093424,
+        QM1                 = 17093473,
+        BLANK1              = 17093474,
+        BLANK2              = 17093475,
+        BLANK3              = 17093476,
+        NASHMEIRA1          = 17093477,
+        NASHMEIRA2          = 17093478,
+        RAZFAHD             = 17093479,
+        CSNPC1              = 17093480,
+        GHATSAD             = 17093481,
+        ALEXANDER           = 17093482,
+        CSNPC2              = 17093483,
     }
 }
 

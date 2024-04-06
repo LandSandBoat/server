@@ -74,7 +74,7 @@ zones[xi.zone.MERIPHATAUD_MOUNTAINS_S] =
     npc =
     {
         CAMPAIGN_NPC_OFFSET = GetFirstID('Raurart_RK'), -- San, Bas, Win, Flag +4, CA
-        INDESCRIPT_MARKINGS = 17175342,
+        INDESCRIPT_MARKINGS = 17175343,
     },
 }
 

@@ -55,8 +55,8 @@ zones[xi.zone.MAZE_OF_SHAKHRAMI] =
     },
     npc =
     {
-        FOSSIL_ROCK_OFFSET = 17588737,
-        TREASURE_CHEST     = 17588773,
+        FOSSIL_ROCK_OFFSET = 17588738,
+        TREASURE_CHEST     = 17588774,
         EXCAVATION         = GetTableOfIDs('Excavation_Point'),
     },
 }

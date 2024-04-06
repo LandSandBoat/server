@@ -48,7 +48,7 @@ zones[xi.zone.BEHEMOTHS_DOMINION] =
     npc =
     {
         BEHEMOTH_QM      = 17297459,
-        CERMET_HEADSTONE = 17297493,
+        CERMET_HEADSTONE = 17297494,
     },
 }
 

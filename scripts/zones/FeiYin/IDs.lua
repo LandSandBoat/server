@@ -78,8 +78,8 @@ zones[xi.zone.FEIYIN] =
     npc =
     {
         AFTERGRLOW_OFFSET       = 17613147,
-        TREASURE_CHEST          = 17613241,
-        UNDERGROUND_POOL_OFFSET = 17613246,
+        TREASURE_CHEST          = 17613242,
+        UNDERGROUND_POOL_OFFSET = 17613247,
     },
 }
 

@@ -55,7 +55,7 @@ zones[xi.zone.MISAREAUX_COAST] =
     {
         LOGGING         = GetTableOfIDs('Logging_Point'),
         ZIPHIUS_QM_BASE = 16879919,
-        ALSHA_QM        = 16879978,
+        ALSHA_QM        = 16879979,
     },
 }
 
