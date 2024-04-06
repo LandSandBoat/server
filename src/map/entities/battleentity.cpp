@@ -2234,17 +2234,17 @@ bool CBattleEntity::OnAttack(CAttackState& state, action_t& action)
                         // Calculate attack bonus for Counterstance Effect Job Points
                         // Needs verification, as there appears to be conflicting information regarding an attack bonus based on DEX
                         // vs a base damage increase.
-                        float csJpAtkBonus = 0;
+                        float attBonus = 1.0f;
                         if (PTarget->objtype == TYPE_PC && PTarget->GetMJob() == JOB_MNK && PTarget->StatusEffectContainer->HasStatusEffect(EFFECT_COUNTERSTANCE))
                         {
                             auto*  PChar        = static_cast<CCharEntity*>(PTarget);
                             uint8  csJpModifier = PChar->PJobPoints->GetJobPointValue(JP_COUNTERSTANCE_EFFECT) * 2;
                             uint16 targetDex    = PTarget->DEX();
 
-                            csJpAtkBonus = 1 + ((static_cast<float>(targetDex) / 100) * csJpModifier);
+                            attBonus += ((static_cast<float>(targetDex) / 100) * csJpModifier);
                         }
 
-                        float DamageRatio = battleutils::GetDamageRatio(PTarget, this, attack.IsCritical(), csJpAtkBonus, skilltype);
+                        float DamageRatio = battleutils::GetDamageRatio(PTarget, this, attack.IsCritical(), attBonus, skilltype);
                         auto  damage      = (int32)((PTarget->GetMainWeaponDmg() + naturalh2hDMG + battleutils::GetFSTR(PTarget, this, SLOT_MAIN)) * DamageRatio);
 
                         actionTarget.spikesParam =
