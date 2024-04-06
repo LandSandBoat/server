@@ -126,7 +126,7 @@ end
 
 -- Instance 'tick'
 instanceObject.onInstanceTimeUpdate = function(instance, elapsed)
-    xi.instance.updateInstanceTime(instance, elapsed)
+    xi.instance.updateInstanceTime(instance, elapsed, ID.text)
 end
 
 -- On fail
