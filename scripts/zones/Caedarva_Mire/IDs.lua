@@ -74,8 +74,8 @@ zones[xi.zone.CAEDARVA_MIRE] =
     npc =
     {
         LOGGING             = GetTableOfIDs('Logging_Point'),
-        RUNIC_PORTAL_AZOUPH = 17101318,
-        RUNIC_PORTAL_DVUCCA = 17101321,
+        RUNIC_PORTAL_AZOUPH = 17101319,
+        RUNIC_PORTAL_DVUCCA = 17101322,
     },
 }
 

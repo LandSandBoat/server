@@ -43,7 +43,7 @@ zones[xi.zone.RIVERNE_SITE_B01] =
     },
     npc =
     {
-        DISPLACEMENT_OFFSET = 16896183,
+        DISPLACEMENT_OFFSET = 16896184,
     },
 }
 

@@ -28,9 +28,9 @@ zones[xi.zone.MOG_GARDEN] =
     },
     npc =
     {
-        GREEN_THUMB_MOOGLE = 17924124,
-        MOG_DINGHY         = 17924125,
-        PORTER_MOOGLE      = 17924220,
+        GREEN_THUMB_MOOGLE = 17924125,
+        MOG_DINGHY         = 17924126,
+        PORTER_MOOGLE      = 17924221,
     },
 }
 

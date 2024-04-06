@@ -24,7 +24,7 @@ zones[xi.zone.LALOFF_AMPHITHEATER] =
     },
     npc =
     {
-        ENTRANCE_OFFSET = 17514791, -- used by scripts/globals/bcnm.lua
+        ENTRANCE_OFFSET = 17514792, -- used by scripts/globals/bcnm.lua
     },
 }
 

@@ -51,7 +51,7 @@ zones[xi.zone.YUHTUNGA_JUNGLE] =
         NO_COMBINATION                = 7880,  -- You were unable to enter a combination.
         UNITY_WANTED_BATTLE_INTERACT  = 7942,  -- Those who have accepted % must pay # Unity accolades to participate. The content for this Wanted battle is #. [Ready to begin?/You do not have the appropriate object set, so your rewards will be limited.]
         REGIME_REGISTERED             = 10058, -- New training regime registered!
-        COMMON_SENSE_SURVIVAL         = 12052, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
+        COMMON_SENSE_SURVIVAL         = 12053, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
     mob =
     {
@@ -70,21 +70,21 @@ zones[xi.zone.YUHTUNGA_JUNGLE] =
     },
     npc =
     {
-        BLUE_RAFFLESIA_OFFSET = 17281586,
-        TUNING_OUT_QM         = 17281590, -- qm2 in npc_list
+        BLUE_RAFFLESIA_OFFSET = 17281587,
+        TUNING_OUT_QM         = 17281591, -- qm2 in npc_list
         OVERSEER_BASE         = GetFirstID('Zorchorevi_RK'),
-        CERMET_HEADSTONE      = 17281625,
-        PEDDLESTOX            = 17281640,
+        CERMET_HEADSTONE      = 17281626,
+        PEDDLESTOX            = 17281641,
         BEASTMEN_TREASURE     =
         {
-            17281643, -- qm3
-            17281644, -- qm4
-            17281645, -- qm5
-            17281646, -- qm6
-            17281647, -- qm7
-            17281648, -- qm8
-            17281649, -- qm9
-            17281650, -- qm10
+            17281644, -- qm3
+            17281645, -- qm4
+            17281646, -- qm5
+            17281647, -- qm6
+            17281648, -- qm7
+            17281649, -- qm8
+            17281650, -- qm9
+            17281651, -- qm10
         },
 
         HARVESTING = GetTableOfIDs('Harvesting_Point'),

@@ -74,7 +74,7 @@ zones[xi.zone.THE_SANCTUARY_OF_ZITAH] =
     npc =
     {
         OVERSEER_BASE    = GetFirstID('Credaurion_RK'),
-        CERMET_HEADSTONE = 17273390,
+        CERMET_HEADSTONE = 17273391,
     },
 }
 

@@ -47,7 +47,7 @@ zones[xi.zone.WINDURST_WATERS_S] =
     npc =
     {
         CAMPAIGN_NPC_OFFSET = GetFirstID('Dynause_TK'), -- San, Bas, Win, Flag +4, CA
-        SHUVO               = 17163023,
+        SHUVO               = 17163024,
     },
 }
 

@@ -43,8 +43,8 @@ zones[xi.zone.PSOXJA] =
     },
     npc =
     {
-        STONE_DOOR_OFFSET          = 16814445, -- _090 in npc_list
-        TREASURE_CHEST             = 16814557,
+        STONE_DOOR_OFFSET          = 16814446, -- _090 in npc_list
+        TREASURE_CHEST             = 16814558,
     },
 }
 

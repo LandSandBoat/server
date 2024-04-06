@@ -53,7 +53,7 @@ zones[xi.zone.GRAUBERG_S] =
     {
         CAMPAIGN_NPC_OFFSET = GetFirstID('Ulaciont_RK'), -- San, Bas, Win, Flag +4, CA
         HARVESTING          = GetTableOfIDs('Harvesting_Point'),
-        INDESCRIPT_MARKINGS = 17142586,
+        INDESCRIPT_MARKINGS = 17142587,
     },
 }
 

@@ -113,10 +113,10 @@ zones[xi.zone.QUICKSAND_CAVES] =
             [4] = { 814.000, -14.000, -761.000 },
         },
 
-        ORNATE_DOOR_OFFSET     = 17629693,
-        CHAINS_THAT_BIND_US_QM = 17629746,
-        TREASURE_COFFER        = 17629747,
-        ANTICAN_TAG_QM         = 17629769,
+        ORNATE_DOOR_OFFSET     = 17629694,
+        CHAINS_THAT_BIND_US_QM = 17629747,
+        TREASURE_COFFER        = 17629748,
+        ANTICAN_TAG_QM         = 17629770,
     },
 }
 

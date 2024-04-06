@@ -142,7 +142,7 @@ zones[xi.zone.DYNAMIS_BEAUCEDINE] =
     {
         QM =
         {
-            [17326800] =
+            [17326801] =
             {
                 param = { 3357, 3424, 3425, 3426, 3427, 3428 },
                 trade =
@@ -152,15 +152,15 @@ zones[xi.zone.DYNAMIS_BEAUCEDINE] =
                 }
             },
 
-            [17326801] = { trade = { { item = 3396, mob = 17326093 } } }, -- Taquede
-            [17326802] = { trade = { { item = 3397, mob = 17326095 } } }, -- Pignonpausard
-            [17326803] = { trade = { { item = 3398, mob = 17326096 } } }, -- Hitaume
-            [17326804] = { trade = { { item = 3399, mob = 17326097 } } }, -- Cavanneche
-            [17326805] = { trade = { { item = 3359, mob = 17326086 } } }, -- Goublefaupe
-            [17326806] = { trade = { { item = 3360, mob = 17326087 } } }, -- Quiebitiel
-            [17326807] = { trade = { { item = 3361, mob = 17326088 } } }, -- Mildaunegeux
-            [17326808] = { trade = { { item = 3362, mob = 17326089 } } }, -- Velosareon
-            [17326809] = { trade = { { item = 3363, mob = 17326090 } } }, -- Dagourmarche
+            [17326802] = { trade = { { item = 3396, mob = 17326093 } } }, -- Taquede
+            [17326803] = { trade = { { item = 3397, mob = 17326095 } } }, -- Pignonpausard
+            [17326804] = { trade = { { item = 3398, mob = 17326096 } } }, -- Hitaume
+            [17326805] = { trade = { { item = 3399, mob = 17326097 } } }, -- Cavanneche
+            [17326806] = { trade = { { item = 3359, mob = 17326086 } } }, -- Goublefaupe
+            [17326807] = { trade = { { item = 3360, mob = 17326087 } } }, -- Quiebitiel
+            [17326808] = { trade = { { item = 3361, mob = 17326088 } } }, -- Mildaunegeux
+            [17326809] = { trade = { { item = 3362, mob = 17326089 } } }, -- Velosareon
+            [17326810] = { trade = { { item = 3363, mob = 17326090 } } }, -- Dagourmarche
         },
     },
 }

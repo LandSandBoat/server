@@ -45,8 +45,8 @@ zones[xi.zone.ATTOHWA_CHASM] =
     },
     npc =
     {
-        MIASMA_OFFSET   = 16806304, -- _071 in npc_list
-        GASPONIA_OFFSET = 16806327, -- _07n in npc_list
+        MIASMA_OFFSET   = 16806305, -- _071 in npc_list
+        GASPONIA_OFFSET = 16806328, -- _07n in npc_list
         EXCAVATION      = GetTableOfIDs('Excavation_Point'),
     },
 }

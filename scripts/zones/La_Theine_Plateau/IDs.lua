@@ -119,7 +119,7 @@ zones[xi.zone.LA_THEINE_PLATEAU] =
     npc =
     {
         FALLEN_EGG  = 17195583,
-        RAINBOW     = 17195607,
+        RAINBOW     = 17195608,
     },
 }
 

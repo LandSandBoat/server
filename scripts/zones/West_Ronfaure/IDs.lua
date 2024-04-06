@@ -66,7 +66,7 @@ zones[xi.zone.WEST_RONFAURE] =
     },
     npc =
     {
-        SIGNPOST_OFFSET = 17187505,
+        SIGNPOST_OFFSET = 17187506,
         OVERSEER_BASE   = GetFirstID('Doladepaiton_RK'),
     },
 }

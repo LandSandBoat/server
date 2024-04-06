@@ -65,8 +65,8 @@ zones[xi.zone.ROMAEVE] =
             [10] = { -160.000, -6.000, -107.000 }, -- D-10
         },
 
-        MOONGATE_OFFSET = 17277195,
-        BASTOK_7_1_QM   = 17277207,
+        MOONGATE_OFFSET = 17277196,
+        BASTOK_7_1_QM   = 17277208,
     },
 }
 

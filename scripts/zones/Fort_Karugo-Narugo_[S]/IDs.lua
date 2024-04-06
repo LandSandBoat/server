@@ -47,7 +47,7 @@ zones[xi.zone.FORT_KARUGO_NARUGO_S] =
     npc =
     {
         CAMPAIGN_NPC_OFFSET = GetFirstID('Caulaise_RK'), -- San, Bas, Win, Flag +4, CA
-        INDESCRIPT_MARKINGS = 17171272,
+        INDESCRIPT_MARKINGS = 17171273,
         LOGGING             = GetTableOfIDs('Logging_Point'),
     },
 }
