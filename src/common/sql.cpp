@@ -236,7 +236,7 @@ int32 SqlConnection::TryPing()
 
     if (m_LastPing + m_PingInterval <= nowSeconds)
     {
-        ShowInfo("Pinging SQL server to keep connection alive");
+        ShowInfo("(C) Pinging SQL server to keep connection alive");
 
         m_LastPing = nowSeconds;
 

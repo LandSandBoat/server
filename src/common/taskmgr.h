@@ -51,7 +51,7 @@ public:
         TASK_REMOVE,
         TASK_INVALID
     };
-    typedef int32 (*TaskFunc_t)(time_point tick, CTask*);
+    typedef int32 (*TaskFunc_t)(time_point tick, CTask*); // TODO: Get rid of C-style function pointers and add storage for lambdas
     typedef std::priority_queue<CTask*, std::deque<CTask*>, greater_equal<CTask*>> TaskList_t;
 
     TaskList_t& getTaskList()
