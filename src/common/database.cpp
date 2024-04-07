@@ -23,12 +23,43 @@
 
 #include "logging.h"
 #include "settings.h"
+#include "taskmgr.h"
 #include "utils.h"
+
+#include <chrono>
+using namespace std::chrono_literals;
 
 namespace
 {
     mutex_guarded<db::detail::State> state;
 } // namespace
+
+int32 ping_connection(time_point tick, CTaskMgr::CTask* task)
+{
+    auto& state = db::detail::getState();
+
+    // clang-format off
+    state.write([&](auto& state)
+    {
+        ShowInfo("(C++) Pinging database to keep connection alive");
+        try
+        {
+            if (!state.connection->isValid())
+            {
+                ShowError("Database connection is invalid, attempting to reconnect...");
+                state.connection->reconnect();
+            }
+        }
+        catch (const std::exception& e)
+        {
+            ShowError(e.what());
+            state.connection = nullptr; // Wipe the connection so that it can't be used if it's broken
+        }
+    });
+    // clang-format on
+
+    return 0;
+};
 
 mutex_guarded<db::detail::State>& db::detail::getState()
 {
@@ -67,6 +98,23 @@ mutex_guarded<db::detail::State>& db::detail::getState()
         }
     });
     // clang-format on
+
+    // NOTE: This is mostly the same logic from sql.cpp:
+    // Add periodic task to ping this db connection to keep it alive or to bring it back
+    uint32 timeout = 7200; // 2 hours
+
+    // TODO: Request the timeout value from the mysql server
+    // GetTimeout(&timeout);
+
+    timeout = std::max(timeout, 60u);
+
+    // 30-second reserve
+    uint8 reserve = 30;
+    timeout       = timeout + reserve;
+
+    auto duration = std::chrono::seconds(timeout);
+
+    CTaskMgr::getInstance()->AddTask("ping database connection", server_clock::now() + duration, nullptr, CTaskMgr::TASK_INTERVAL, ping_connection, duration);
 
     return state;
 }
