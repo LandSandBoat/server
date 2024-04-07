@@ -147,7 +147,7 @@ INSERT INTO `status_effects` VALUES (109,'barblind',41,106,0,0,0,0,7,0,500);
 INSERT INTO `status_effects` VALUES (110,'barsilence',41,106,0,0,0,0,2,0,500);
 INSERT INTO `status_effects` VALUES (111,'barpetrify',41,106,0,0,0,0,3,0,500);
 INSERT INTO `status_effects` VALUES (112,'barvirus',41,106,0,0,0,0,6,0,500);
-INSERT INTO `status_effects` VALUES (113,'reraise',41,0,0,0,0,0,7,0,900);
+INSERT INTO `status_effects` VALUES (113,'reraise',40,0,0,0,0,0,7,0,900);
 INSERT INTO `status_effects` VALUES (114,'cover',4194336,0,0,0,0,0,0,0,0);
 INSERT INTO `status_effects` VALUES (115,'unlimited_shot',4194336,73,0,0,0,0,0,0,0);
 INSERT INTO `status_effects` VALUES (116,'phalanx',33,0,0,0,0,0,7,0,1050);
