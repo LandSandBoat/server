@@ -187,6 +187,8 @@ xi.dynamis.onMobEngagedUmbralDiabolos = function(mob, target)
         for _, member in pairs(zone:getPlayers()) do
             member:changeMusic(0, 239) -- 0 Background Music (Starlight Celebration Music)
             member:changeMusic(1, 239) -- 1 Background Music (Starlight Celebration Music)
+            member:changeMusic(2, 239) -- 2 Combat Music (Starlight Celebration Music)
+            member:changeMusic(3, 239) -- 3 Combat Music (Starlight Celebration Music)
         end
     end
 
