@@ -14,7 +14,7 @@ CObjectiveUtilityPacket::CObjectiveUtilityPacket()
 
 void CObjectiveUtilityPacket::addCountdown(uint32 duration, uint32 warning /* = 0 */)
 {
-    ref<uint32>(0x04) |= 0x01;
+    ref<uint32>(0x04) = ref<uint32>(0x04) == 0 ? 0x01 : ref<uint32>(0x04);
     ref<uint32>(0x08) = CVanaTime::getInstance()->getVanaTime();
     ref<uint32>(0x0C) = duration;
     ref<uint32>(0x10) = warning; // If 0, defaults to 60.
@@ -23,11 +23,11 @@ void CObjectiveUtilityPacket::addCountdown(uint32 duration, uint32 warning /* = 
 
 void CObjectiveUtilityPacket::addBars(std::vector<std::pair<std::string, uint32>>&& bars)
 {
-    ref<uint32>(0x04) |= 0xFFFF;
+    ref<uint32>(0x04) = 0xFFFF;
     ref<uint8>(0x24) |= OBJECTIVEUTILITY_PROGRESS;
 
     uint8 pos = 0x28;
-    for (auto bar = bars.begin(); pos < 0x8C && bar != bars.end(); ++bar)
+    for (auto bar = bars.begin(); pos < 0xA0 && bar != bars.end(); ++bar)
     {
         ref<uint32>(pos) = bar->second;
 
@@ -37,6 +37,21 @@ void CObjectiveUtilityPacket::addBars(std::vector<std::pair<std::string, uint32>
         }
         pos += 0x14;
     }
+}
+
+void CObjectiveUtilityPacket::addScoreboard(const std::pair<int32, int32>& score, const std::vector<uint32>& data)
+{
+    ref<uint32>(0x04) = 0x1000; // Causes the client to show the 'Marshland' and 'Stronghold' scoreboard information.
+    ref<uint8>(0x24) |= OBJECTIVEUTILITY_PROGRESS;
+
+    ref<int32>(0x28)  = score.first;  // Marchland Score
+    ref<int32>(0x2C)  = score.second; // Stronghold Score
+    ref<uint32>(0x30) = data[0];      // Marchland Progress
+    ref<uint32>(0x34) = data[1];      // Max Marchland Progress
+    ref<uint32>(0x38) = data[2];      // Stronghold Progress
+    ref<uint32>(0x3C) = data[3];      // Max Stronghold Progress
+    ref<uint32>(0x40) = data[4];      // Marchland Name Override - not used
+    ref<uint32>(0x44) = data[5];      // Stronghold Name Override - When non-zero, replace Stronghold name with Balamor's Adumbration.
 }
 
 void CObjectiveUtilityPacket::addFence(float x, float y, float radius, float render, bool blue /* = false */)
