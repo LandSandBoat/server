@@ -70165,6 +70165,10 @@ INSERT INTO `item_mods` VALUES (27324,170,4);    -- FASTCAST: 4
 INSERT INTO `item_mods` VALUES (27324,374,10);   -- CURE_POTENCY: 10
 INSERT INTO `item_mods` VALUES (27324,384,500);  -- HASTE_GEAR: 500
 
+-- Track Pants +1
+INSERT INTO `item_mods` VALUES (27326,1,2);   -- DEF: 2
+INSERT INTO `item_mods` VALUES (27326,76,8);  -- MOVE_SPEED_GEAR_BONUS: 8
+
 -- Agoge Calligae
 INSERT INTO `item_mods` VALUES (27328,1,57);    -- DEF: 57
 INSERT INTO `item_mods` VALUES (27328,2,7);     -- HP: 7
