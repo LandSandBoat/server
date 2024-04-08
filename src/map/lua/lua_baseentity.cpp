@@ -11210,6 +11210,15 @@ void CLuaBaseEntity::countdown(sol::object const& secondsObj)
                     value = 100 -- % bar progress
                 },
             },
+            scoreboard = { -- Yorcia Alluvion Skirmish
+                marchlandScore = 0,
+                strongholdScore = 0,
+                marchlandProgress = 50180,
+                marchlandProgressMax = 50180,
+                strongholdProgress = 500180,
+                strongholdProgressMax = 500180,
+                strongholdNameOverride = 0
+            },
             fence = {
                 pos = {x = 0.000, y = 0.000}, -- center of fence
                 radius = 25.00, -- radius from pos in yalms
@@ -11222,7 +11231,8 @@ void CLuaBaseEntity::countdown(sol::object const& secondsObj)
             }
         }
         player:objectiveUtility(objective)
- *  Notes   : Can have up to 5 bars. Many of these items are optional.
+ *  Notes   : Bars and scoreboard are mutually exclusive.
+        Can have up to 6 bars. Many of these items are optional.
         Calling without arguments will clear everything.
  ************************************************************************/
 void CLuaBaseEntity::objectiveUtility(sol::object const& obj)
@@ -11243,9 +11253,9 @@ void CLuaBaseEntity::objectiveUtility(sol::object const& obj)
         {
             if (countdownObj.is<sol::table>())
             {
-                sol::object duration = countdownObj.as<sol::table>()["duration"];
-                uint32      warning  = countdownObj.as<sol::table>().get_or<uint32>("warning", 0);
-                packet->addCountdown(duration.as<uint32>(), warning);
+                uint32 duration = countdownObj.as<sol::table>().get<uint32>("duration");
+                uint32 warning  = countdownObj.as<sol::table>().get_or<uint32>("warning", 0);
+                packet->addCountdown(duration, warning);
             }
             else if (countdownObj.is<uint32>())
             {
@@ -11257,27 +11267,39 @@ void CLuaBaseEntity::objectiveUtility(sol::object const& obj)
         if (barsObj.valid() && barsObj.is<sol::table>())
         {
             std::vector<std::pair<std::string, uint32>> bars;
-            for (uint8 i = 1; i <= 5; ++i)
+            for (uint8 i = 1; i <= 6; ++i)
             {
                 sol::object barObj = barsObj.as<sol::table>()[i];
                 if (barObj.valid() && barObj.is<sol::table>())
                 {
-                    sol::object barTitle = barObj.as<sol::table>()["title"];
-                    sol::object barValue = barObj.as<sol::table>()["value"];
-                    if (barTitle.valid() && barTitle.is<std::string>() && barValue.valid() && barValue.is<uint32>())
-                    {
-                        bars.push_back(std::make_pair(barTitle.as<std::string>(), barValue.as<uint32>()));
-                    }
+                    std::string barTitle = barObj.as<sol::table>().get<std::string>("title");
+                    uint32      barValue = barObj.as<sol::table>().get<uint32>("value");
+                    bars.push_back(std::make_pair(barTitle, barValue));
                 }
                 else
                 {
-                    bars.push_back(std::make_pair("", 0x7FFFFFFF));
+                    bars.push_back(std::make_pair("", 0));
                 }
             }
-            if (!bars.empty())
-            {
-                packet->addBars(std::move(bars));
-            }
+            packet->addBars(std::move(bars));
+        }
+
+        sol::object scoreboardObj = obj.as<sol::table>()["scoreboard"];
+        if (scoreboardObj.valid() && scoreboardObj.is<sol::table>())
+        {
+            std::pair<int32, int32> score = {
+                static_cast<int32>(scoreboardObj.as<sol::table>().get_or<uint32>("marchlandScore", 0)),
+                static_cast<int32>(scoreboardObj.as<sol::table>().get_or<uint32>("strongholdScore", 0))
+            };
+            std::vector<uint32> data = {
+                scoreboardObj.as<sol::table>().get_or<uint32>("marchlandProgress", 0),
+                scoreboardObj.as<sol::table>().get_or<uint32>("marchlandProgressMax", 0),
+                scoreboardObj.as<sol::table>().get_or<uint32>("strongholdProgress", 0),
+                scoreboardObj.as<sol::table>().get_or<uint32>("strongholdProgressMax", 0),
+                scoreboardObj.as<sol::table>().get_or<uint32>("marchlandNameOverride", 0),
+                scoreboardObj.as<sol::table>().get_or<uint32>("strongholdNameOverride", 0),
+            };
+            packet->addScoreboard(score, data);
         }
 
         sol::object fenceObj = obj.as<sol::table>()["fence"];
@@ -11294,7 +11316,7 @@ void CLuaBaseEntity::objectiveUtility(sol::object const& obj)
 
             float radius = fenceObj.as<sol::table>().get_or<float>("radius", 0.00);
             float render = fenceObj.as<sol::table>().get_or<float>("render", 25.00);
-            bool  blue   = fenceObj.as<sol::table>()["blue"].valid() ? fenceObj.as<sol::table>()["blue"].get<bool>() : false;
+            bool  blue   = fenceObj.as<sol::table>().get_or<bool, std::string, bool>("blue", false);
 
             packet->addFence(posX, posY, radius, render, blue);
         }
@@ -11302,9 +11324,9 @@ void CLuaBaseEntity::objectiveUtility(sol::object const& obj)
         sol::object helpObj = obj.as<sol::table>()["help"];
         if (helpObj.valid() && helpObj.is<sol::table>())
         {
-            sol::object title       = helpObj.as<sol::table>()["title"];
-            sol::object description = helpObj.as<sol::table>()["description"];
-            packet->addHelpText(title.as<uint16>(), description.as<uint16>());
+            uint16 title       = helpObj.as<sol::table>().get<uint16>("title");
+            uint16 description = helpObj.as<sol::table>().get<uint16>("description");
+            packet->addHelpText(title, description);
         }
     }
 
