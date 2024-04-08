@@ -277,8 +277,23 @@ std::list<SearchEntity*> CDataLoader::GetPlayersList(search_req sr, int* count)
             PPlayer->slvl     = (uint8)rset->getInt("slvl");
             PPlayer->race     = (uint8)rset->getInt("race");
 
-            // TODO: This is quite fragile, replace this with a switch statement
-            PPlayer->rank = (uint8)rset->getInt(rset->findColumn("nation") + PPlayer->nation);
+            // TODO: Use a nation enum?
+            switch (PPlayer->nation)
+            {
+                case 0:
+                    PPlayer->rank = (uint8)rset->getInt("rank_sandoria");
+                    break;
+                case 1:
+                    PPlayer->rank = (uint8)rset->getInt("rank_bastok");
+                    break;
+                case 2:
+                    PPlayer->rank = (uint8)rset->getInt("rank_bastok");
+                    break;
+                default:
+                    ShowWarning("Inconsistent player nation allegiance : %d", PPlayer->nation);
+                    PPlayer->rank = (uint8)0;
+                    break;
+            }
 
             PPlayer->zone        = (PPlayer->zone == 0 ? PPlayer->prevzone : PPlayer->zone);
             PPlayer->languages   = (uint8)rset->getUInt("languages");
@@ -489,8 +504,23 @@ std::list<SearchEntity*> CDataLoader::GetPartyList(uint32 PartyID, uint32 Allian
             PPlayer->slvl   = (uint8)rset->getInt("slvl");
             PPlayer->race   = (uint8)rset->getInt("race");
 
-            // TODO: This is quite fragile, replace this with a switch statement
-            PPlayer->rank = (uint8)rset->getInt(rset->findColumn("nation") + PPlayer->nation);
+            // TODO: Use a nation enum?
+            switch (PPlayer->nation)
+            {
+                case 0:
+                    PPlayer->rank = (uint8)rset->getInt("rank_sandoria");
+                    break;
+                case 1:
+                    PPlayer->rank = (uint8)rset->getInt("rank_bastok");
+                    break;
+                case 2:
+                    PPlayer->rank = (uint8)rset->getInt("rank_bastok");
+                    break;
+                default:
+                    ShowWarning("Inconsistent player nation allegiance : %d", PPlayer->nation);
+                    PPlayer->rank = (uint8)0;
+                    break;
+            }
 
             PPlayer->languages   = (uint8)rset->getUInt("languages");
             PPlayer->mentor      = rset->getUInt("nnameflags") & NFLAG_MENTOR;
@@ -578,8 +608,23 @@ std::list<SearchEntity*> CDataLoader::GetLinkshellList(uint32 LinkshellID)
             PPlayer->slvl   = (uint8)rset->getInt("slvl");
             PPlayer->race   = (uint8)rset->getInt("race");
 
-            // TODO: This is quite fragile, replace this with a switch statement
-            PPlayer->rank = (uint8)rset->getInt(rset->findColumn("nation") + PPlayer->nation);
+            // TODO: Use a nation enum?
+            switch (PPlayer->nation)
+            {
+                case 0:
+                    PPlayer->rank = (uint8)rset->getInt("rank_sandoria");
+                    break;
+                case 1:
+                    PPlayer->rank = (uint8)rset->getInt("rank_bastok");
+                    break;
+                case 2:
+                    PPlayer->rank = (uint8)rset->getInt("rank_bastok");
+                    break;
+                default:
+                    ShowWarning("Inconsistent player nation allegiance : %d", PPlayer->nation);
+                    PPlayer->rank = (uint8)0;
+                    break;
+            }
 
             PPlayer->linkshellid1   = rset->getInt("linkshellid1");
             PPlayer->linkshellid2   = rset->getInt("linkshellid2");
