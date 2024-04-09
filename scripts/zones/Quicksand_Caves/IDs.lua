@@ -115,7 +115,7 @@ zones[xi.zone.QUICKSAND_CAVES] =
 
         ORNATE_DOOR_OFFSET     = 17629694,
         CHAINS_THAT_BIND_US_QM = 17629747,
-        TREASURE_COFFER        = 17629748,
+        TREASURE_COFFER        = GetFirstID('Treasure_Coffer'),
         ANTICAN_TAG_QM         = 17629770,
     },
 }

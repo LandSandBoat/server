@@ -30,7 +30,7 @@ zones[xi.zone.FORT_GHELSBA] =
     },
     npc =
     {
-        TREASURE_CHEST = 17355013,
+        TREASURE_CHEST = GetFirstID('Treasure_Chest'),
     },
 }
 

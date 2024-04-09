@@ -54,7 +54,7 @@ zones[xi.zone.SACRARIUM] =
         LABYRINTH_OFFSET    = 16892111,
         SMALL_KEYHOLE       = 16892143,
         QM_MARISELLE_OFFSET = 16892156, -- qm_professor_mariselle in npc_list.sql
-        TREASURE_CHEST      = 16892184,
+        TREASURE_CHEST      = GetFirstID('Treasure_Chest'),
     },
 }
 

@@ -73,7 +73,7 @@ zones[xi.zone.DEN_OF_RANCOR] =
     {
         LANTERN_OFFSET  = 17433048,
         DROP_GATE       = 17433052,
-        TREASURE_COFFER = 17433078,
+        TREASURE_COFFER = GetFirstID('Treasure_Coffer'),
     },
 }
 

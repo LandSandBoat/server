@@ -85,7 +85,7 @@ zones[xi.zone.DAVOI] =
         JAR              = GetFirstID('Jar'),
         HIDE_FLAP_OFFSET = 17388024,
         STORAGE_HOLE     = 17388026,
-        TREASURE_CHEST   = 17388028,
+        TREASURE_CHEST   = GetFirstID('Treasure_Chest'),
     },
 }
 

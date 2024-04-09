@@ -87,7 +87,7 @@ zones[xi.zone.TEMPLE_OF_UGGALEPIH] =
         BOOK_OFFSET          = 17428974,
         TEMPLE_GUARDIAN_DOOR = 17428979,
         DOOR_TO_RANCOR       = 17428990,
-        TREASURE_COFFER      = 17429008,
+        TREASURE_COFFER      = GetFirstID('Treasure_Coffer'),
     },
 }
 

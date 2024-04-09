@@ -110,7 +110,7 @@ zones[xi.zone.KUFTAL_TUNNEL] =
     {
         PHANTOM_WORM_QM = 17490253,
         DOOR_ROCK       = 17490281,
-        TREASURE_COFFER = 17490305,
+        TREASURE_COFFER = GetFirstID('Treasure_Coffer'),
     },
 }
 

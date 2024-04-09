@@ -82,8 +82,8 @@ zones[xi.zone.THE_ELDIEME_NECROPOLIS] =
     {
         GATE_OFFSET        = 17576307,
         BRAZIER            = GetFirstID('Brazier'),
-        TREASURE_CHEST     = 17576357,
-        TREASURE_COFFER    = 17576358,
+        TREASURE_CHEST     = GetFirstID('Treasure_Chest'),
+        TREASURE_COFFER    = GetFirstID('Treasure_Coffer'),
         SARCOPHAGUS_OFFSET = 17576395,
         CANDLE_OFFSET      = 17576335,
     },

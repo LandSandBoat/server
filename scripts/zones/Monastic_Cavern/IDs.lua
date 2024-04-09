@@ -35,7 +35,7 @@ zones[xi.zone.MONASTIC_CAVERN] =
     },
     npc =
     {
-        TREASURE_COFFER = 17391851,
+        TREASURE_COFFER = GetFirstID('Treasure_Coffer'),
     },
 }
 
