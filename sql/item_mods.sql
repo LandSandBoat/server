@@ -57554,6 +57554,9 @@ INSERT INTO `item_mods` VALUES (23795,1,1); -- DEF: 1
 -- Ziamet Nails
 INSERT INTO `item_mods` VALUES (23796,1,1); -- DEF: 1
 
+-- Cancrine Apron
+INSERT INTO `item_mods` VALUES (23800,1,1); -- DEF: 1
+
 -- Poroggo Cassock
 INSERT INTO `item_mods` VALUES (23803,1,1); -- DEF: 1
 
