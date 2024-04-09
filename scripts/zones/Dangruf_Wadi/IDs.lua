@@ -58,7 +58,7 @@ zones[xi.zone.DANGRUF_WADI] =
     {
         GEYSER_OFFSET      = 17559900,
         AN_EMPTY_VESSEL_QM = 17559912,
-        TREASURE_CHEST     = 17559925,
+        TREASURE_CHEST     = GetFirstID('Treasure_Chest'),
     },
 }
 

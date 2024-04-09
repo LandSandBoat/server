@@ -90,8 +90,8 @@ zones[xi.zone.CASTLE_OZTROJA] =
         TRAP_DOOR_FLOOR_4      = 17396192,
         FINAL_PASSWORD_STATUE  = 17396193,
         HINT_HANDLE_OFFSET     = 17396197,
-        TREASURE_CHEST         = 17396211,
-        TREASURE_COFFER        = 17396212,
+        TREASURE_CHEST         = GetFirstID('Treasure_Chest'),
+        TREASURE_COFFER        = GetFirstID('Treasure_Coffer'),
     },
 }
 

@@ -60,7 +60,7 @@ zones[xi.zone.OUTER_HORUTOTO_RUINS] =
     npc =
     {
         GATE_MAGICAL_GIZMO = 17572249,
-        TREASURE_CHEST     = 17572291,
+        TREASURE_CHEST     = GetFirstID('Treasure_Chest'),
     },
 }
 
