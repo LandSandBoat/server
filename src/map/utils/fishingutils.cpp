@@ -576,6 +576,7 @@ namespace fishingutils
                 bonus += 1;
                 break;
             case FISHERMANS_APRON:
+            case FISHERMANS_SMOCK:
                 bonus += 3;
                 break;
         }
@@ -2338,7 +2339,7 @@ namespace fishingutils
 
         fishing_gear_t gear = GetFishingGear(PChar);
 
-        if (gear.body == FISHERMANS_APRON && ItemPoolWeight > 0)
+        if ((gear.body == FISHERMANS_APRON || gear.body == FISHERMANS_SMOCK) && ItemPoolWeight > 0)
         {
             uint16 sub = (uint16)std::floor(ItemPoolWeight * 0.25f);
 
