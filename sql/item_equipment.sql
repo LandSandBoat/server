@@ -11699,6 +11699,7 @@ INSERT INTO `item_equipment` VALUES (23796,'ziamet_nails',1,0,4194303,172,0,0,25
 INSERT INTO `item_equipment` VALUES (23800,'cancrine_apron',1,0,4194303,475,0,0,32,0,0);
 INSERT INTO `item_equipment` VALUES (23803,'poroggo_cassock',1,0,4194303,477,0,0,32,16,0);
 INSERT INTO `item_equipment` VALUES (23804,'poroggo_cass._+1',1,0,4194303,477,0,0,32,16,0);
+INSERT INTO `item_equipment` VALUES (23805,'morbol_apron',1,0,4194303,478,0,0,32,0,0);
 INSERT INTO `item_equipment` VALUES (25414,'elite_royal_collar',99,0,4194303,0,0,0,512,0,0);
 INSERT INTO `item_equipment` VALUES (25415,'rep._plat._medal',99,0,4194303,0,0,0,512,0,0);
 INSERT INTO `item_equipment` VALUES (25416,'Sibyl_scarf',99,0,4194303,0,0,0,512,0,0);
@@ -12161,6 +12162,7 @@ INSERT INTO `item_equipment` VALUES (25905,'baayami_slops',99,119,16384,115,0,0,
 INSERT INTO `item_equipment` VALUES (25906,'baayami_slops_+1',99,119,16384,115,0,0,128,0,3);
 INSERT INTO `item_equipment` VALUES (25907,'turms_subligar',99,119,2359328,148,0,0,128,0,3);
 INSERT INTO `item_equipment` VALUES (25908,'turms_subligar_+1',99,119,2359328,148,0,0,128,0,3);
+INSERT INTO `item_equipment` VALUES (25909,'morbol_subligar',1,0,4194303,461,0,0,128,0,0);
 INSERT INTO `item_equipment` VALUES (25910,'cait_sith_subligar',1,0,4194303,463,0,0,128,0,0);
 INSERT INTO `item_equipment` VALUES (25920,'ahosi_leggings',99,119,2593826,110,0,0,256,0,0);
 INSERT INTO `item_equipment` VALUES (25921,'skaoi_boots',99,119,3850780,168,0,0,256,0,0);

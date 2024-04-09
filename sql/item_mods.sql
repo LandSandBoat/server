@@ -57563,6 +57563,9 @@ INSERT INTO `item_mods` VALUES (23803,1,1); -- DEF: 1
 -- Poroggo Cassock +1
 INSERT INTO `item_mods` VALUES (23804,1,1); -- DEF: 1
 
+-- Morbol Apron
+INSERT INTO `item_mods` VALUES (23805,1,1); -- DEF: 1
+
 -- Republic Platinum Medal
 INSERT INTO `item_mods` VALUES (25415,8,10);  -- STR: 10
 INSERT INTO `item_mods` VALUES (25415,23,30); -- ATT: 30
@@ -60580,6 +60583,9 @@ INSERT INTO `item_mods` VALUES (25896,86,55);    -- SCYTHE: 55
 INSERT INTO `item_mods` VALUES (25896,160,1200); -- DMG: 1200
 INSERT INTO `item_mods` VALUES (25896,384,500);  -- HASTE_GEAR: 500
 INSERT INTO `item_mods` VALUES (25896,840,9);    -- ALL_WSDMG_ALL_HITS: 9
+
+-- Morbol Subligar
+INSERT INTO `item_mods` VALUES (25909,1,1); -- DEF: 1
 
 -- Cait Sith Subligar
 INSERT INTO `item_mods` VALUES (25910,1,1); -- DEF: 1
