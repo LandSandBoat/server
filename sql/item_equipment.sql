@@ -11700,6 +11700,9 @@ INSERT INTO `item_equipment` VALUES (23800,'cancrine_apron',1,0,4194303,475,0,0,
 INSERT INTO `item_equipment` VALUES (23803,'poroggo_cassock',1,0,4194303,477,0,0,32,16,0);
 INSERT INTO `item_equipment` VALUES (23804,'poroggo_cass._+1',1,0,4194303,477,0,0,32,16,0);
 INSERT INTO `item_equipment` VALUES (23805,'morbol_apron',1,0,4194303,478,0,0,32,0,0);
+INSERT INTO `item_equipment` VALUES (23807,'esthetes_masque',1,0,4194303,480,0,0,16,0,0);
+INSERT INTO `item_equipment` VALUES (23808,'esthetes_coat',1,0,4194303,480,0,0,32,64,0);
+INSERT INTO `item_equipment` VALUES (23809,'esthetes_hose',1,0,4194303,480,0,0,128,256,0);
 INSERT INTO `item_equipment` VALUES (25414,'elite_royal_collar',99,0,4194303,0,0,0,512,0,0);
 INSERT INTO `item_equipment` VALUES (25415,'rep._plat._medal',99,0,4194303,0,0,0,512,0,0);
 INSERT INTO `item_equipment` VALUES (25416,'Sibyl_scarf',99,0,4194303,0,0,0,512,0,0);

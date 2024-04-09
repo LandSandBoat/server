@@ -57566,6 +57566,15 @@ INSERT INTO `item_mods` VALUES (23804,1,1); -- DEF: 1
 -- Morbol Apron
 INSERT INTO `item_mods` VALUES (23805,1,1); -- DEF: 1
 
+-- Esthete's Masque
+INSERT INTO `item_mods` VALUES (23807,1,1); -- DEF: 1
+
+-- Esthete's Coat
+INSERT INTO `item_mods` VALUES (23808,1,1); -- DEF: 1
+
+-- Esthete's Hose
+INSERT INTO `item_mods` VALUES (23809,1,1); -- DEF: 1
+
 -- Republic Platinum Medal
 INSERT INTO `item_mods` VALUES (25415,8,10);  -- STR: 10
 INSERT INTO `item_mods` VALUES (25415,23,30); -- ATT: 30
