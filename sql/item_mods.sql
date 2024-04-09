@@ -61661,6 +61661,12 @@ INSERT INTO `item_mods` VALUES (26487,160,-10); -- DMG: -10
 INSERT INTO `item_mods` VALUES (26487,168,7);   -- SPELLINTERRUPT: 7
 INSERT INTO `item_mods` VALUES (26487,374,5);   -- CURE_POTENCY: 5
 
+-- Ark Shield
+INSERT INTO `item_mods` VALUES (26490,1,1); -- DEF: 1
+
+-- Ageist
+INSERT INTO `item_mods` VALUES (26496,1,1); -- DEF: 1
+
 -- Shadow Lord Shirt
 INSERT INTO `item_mods` VALUES (26517,1,1); -- DEF: 1
 
