@@ -12169,6 +12169,7 @@ INSERT INTO `item_equipment` VALUES (25907,'turms_subligar',99,119,2359328,148,0
 INSERT INTO `item_equipment` VALUES (25908,'turms_subligar_+1',99,119,2359328,148,0,0,128,0,3);
 INSERT INTO `item_equipment` VALUES (25909,'morbol_subligar',1,0,4194303,461,0,0,128,0,0);
 INSERT INTO `item_equipment` VALUES (25910,'cait_sith_subligar',1,0,4194303,463,0,0,128,0,0);
+INSERT INTO `item_equipment` VALUES (25911,'denim_pants',1,0,4194303,479,0,0,128,0,0);
 INSERT INTO `item_equipment` VALUES (25920,'ahosi_leggings',99,119,2593826,110,0,0,256,0,0);
 INSERT INTO `item_equipment` VALUES (25921,'skaoi_boots',99,119,3850780,168,0,0,256,0,0);
 INSERT INTO `item_equipment` VALUES (25922,'navon_crackows',99,119,1589788,186,0,0,256,0,0);

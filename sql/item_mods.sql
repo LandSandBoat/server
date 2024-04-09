@@ -60605,6 +60605,9 @@ INSERT INTO `item_mods` VALUES (25909,1,1); -- DEF: 1
 -- Cait Sith Subligar
 INSERT INTO `item_mods` VALUES (25910,1,1); -- DEF: 1
 
+-- Denim Pants
+INSERT INTO `item_mods` VALUES (25911,1,1); -- DEF: 1
+
 -- Meghanada Jambeaux
 INSERT INTO `item_mods` VALUES (25927,1,68);     -- DEF: 68
 INSERT INTO `item_mods` VALUES (25927,2,20);     -- HP: 20
