@@ -12044,6 +12044,8 @@ INSERT INTO `item_equipment` VALUES (25767,'sacro_breastplate',99,119,10689,457,
 INSERT INTO `item_equipment` VALUES (25774,'fancy_gilet',1,0,4194303,447,0,0,32,64,0);
 INSERT INTO `item_equipment` VALUES (25775,'fancy_top',1,0,4194303,448,0,0,32,64,0);
 INSERT INTO `item_equipment` VALUES (25776,'bl._chocobo_suit',1,0,4194303,449,0,0,32,448,0);
+INSERT INTO `item_equipment` VALUES (25777,'iratsugo_happi',1,0,4194303,451,0,0,32,0,0);
+INSERT INTO `item_equipment` VALUES (25778,'iratsume_happi',1,0,4194303,452,0,0,32,0,0);
 INSERT INTO `item_equipment` VALUES (25779,'flamma_korazin',99,119,10433,195,0,0,32,0,0);
 INSERT INTO `item_equipment` VALUES (25780,'flamma_korazin_+1',99,119,10433,195,0,0,32,0,0);
 INSERT INTO `item_equipment` VALUES (25781,'mummu_jacket',99,119,332834,196,0,0,32,0,0);

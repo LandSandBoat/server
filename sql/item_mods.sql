@@ -59583,6 +59583,12 @@ INSERT INTO `item_mods` VALUES (25775,1,2); -- DEF: 2
 -- Black Chocobo Suit
 INSERT INTO `item_mods` VALUES (25776,1,1); -- DEF: 1
 
+-- Iratsugo Happi
+INSERT INTO `item_mods` VALUES (25777,1,1); -- DEF: 1
+
+-- Iratsume Happi
+INSERT INTO `item_mods` VALUES (25778,1,1); -- DEF: 1
+
 -- Flamma Korazin
 INSERT INTO `item_mods` VALUES (25779,1,143);   -- DEF: 143
 INSERT INTO `item_mods` VALUES (25779,2,140);   -- HP: 140

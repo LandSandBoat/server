@@ -19962,6 +19962,8 @@ INSERT INTO `item_basic` VALUES (25767,0,'sacro_breastplate','sacro_breastplate'
 INSERT INTO `item_basic` VALUES (25774,0,'fancy_gilet','fancy_gilet',1,64584,@NONE,1,0);
 INSERT INTO `item_basic` VALUES (25775,0,'fancy_top','fancy_top',1,64584,@NONE,1,0);
 INSERT INTO `item_basic` VALUES (25776,0,'black_chocobo_suit','bl._chocobo_suit',1,63552,@NONE,1,0);
+INSERT INTO `item_basic` VALUES (25777,0,'iratsugo_happi','iratsugo_happi',1,63552,@NONE,1,0);
+INSERT INTO `item_basic` VALUES (25778,0,'iratsume_happi','iratsume_happi',1,63552,@NONE,1,0);
 INSERT INTO `item_basic` VALUES (25779,0,'flamma_korazin','flamma_korazin',1,63552,@NONE,1,0);
 INSERT INTO `item_basic` VALUES (25780,0,'flamma_korazin_+1','flamma_korazin_+1',1,63552,@NONE,1,0);
 INSERT INTO `item_basic` VALUES (25781,0,'mummu_jacket','mummu_jacket',1,63552,@NONE,1,0);
