@@ -57554,11 +57554,26 @@ INSERT INTO `item_mods` VALUES (23795,1,1); -- DEF: 1
 -- Ziamet Nails
 INSERT INTO `item_mods` VALUES (23796,1,1); -- DEF: 1
 
+-- Cancrine Apron
+INSERT INTO `item_mods` VALUES (23800,1,1); -- DEF: 1
+
 -- Poroggo Cassock
 INSERT INTO `item_mods` VALUES (23803,1,1); -- DEF: 1
 
 -- Poroggo Cassock +1
 INSERT INTO `item_mods` VALUES (23804,1,1); -- DEF: 1
+
+-- Morbol Apron
+INSERT INTO `item_mods` VALUES (23805,1,1); -- DEF: 1
+
+-- Esthete's Masque
+INSERT INTO `item_mods` VALUES (23807,1,1); -- DEF: 1
+
+-- Esthete's Coat
+INSERT INTO `item_mods` VALUES (23808,1,1); -- DEF: 1
+
+-- Esthete's Hose
+INSERT INTO `item_mods` VALUES (23809,1,1); -- DEF: 1
 
 -- Republic Platinum Medal
 INSERT INTO `item_mods` VALUES (25415,8,10);  -- STR: 10
@@ -59568,6 +59583,12 @@ INSERT INTO `item_mods` VALUES (25775,1,2); -- DEF: 2
 -- Black Chocobo Suit
 INSERT INTO `item_mods` VALUES (25776,1,1); -- DEF: 1
 
+-- Iratsugo Happi
+INSERT INTO `item_mods` VALUES (25777,1,1); -- DEF: 1
+
+-- Iratsume Happi
+INSERT INTO `item_mods` VALUES (25778,1,1); -- DEF: 1
+
 -- Flamma Korazin
 INSERT INTO `item_mods` VALUES (25779,1,143);   -- DEF: 143
 INSERT INTO `item_mods` VALUES (25779,2,140);   -- HP: 140
@@ -60578,8 +60599,14 @@ INSERT INTO `item_mods` VALUES (25896,160,1200); -- DMG: 1200
 INSERT INTO `item_mods` VALUES (25896,384,500);  -- HASTE_GEAR: 500
 INSERT INTO `item_mods` VALUES (25896,840,9);    -- ALL_WSDMG_ALL_HITS: 9
 
+-- Morbol Subligar
+INSERT INTO `item_mods` VALUES (25909,1,1); -- DEF: 1
+
 -- Cait Sith Subligar
 INSERT INTO `item_mods` VALUES (25910,1,1); -- DEF: 1
+
+-- Denim Pants
+INSERT INTO `item_mods` VALUES (25911,1,1); -- DEF: 1
 
 -- Meghanada Jambeaux
 INSERT INTO `item_mods` VALUES (25927,1,68);     -- DEF: 68
@@ -61633,6 +61660,12 @@ INSERT INTO `item_mods` VALUES (26487,109,112); -- SHIELD: 112
 INSERT INTO `item_mods` VALUES (26487,160,-10); -- DMG: -10
 INSERT INTO `item_mods` VALUES (26487,168,7);   -- SPELLINTERRUPT: 7
 INSERT INTO `item_mods` VALUES (26487,374,5);   -- CURE_POTENCY: 5
+
+-- Ark Shield
+INSERT INTO `item_mods` VALUES (26490,1,1); -- DEF: 1
+
+-- Ageist
+INSERT INTO `item_mods` VALUES (26496,1,1); -- DEF: 1
 
 -- Shadow Lord Shirt
 INSERT INTO `item_mods` VALUES (26517,1,1); -- DEF: 1
