@@ -1,4 +1,4 @@
-﻿/*
+/*
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -259,8 +259,6 @@ namespace luautils
     bool  OnTrustSpellCastCheckBattlefieldTrusts(CBattleEntity* PCaster); // Triggered if spell is a trust spell during onCast to determine to interrupt spell or not
 
     void OnMobInitialize(CBaseEntity* PMob);
-    void ApplyMixins(CBaseEntity* PMob);
-    void ApplyZoneMixins(CBaseEntity* PMob);
     void OnMobSpawn(CBaseEntity* PMob);
     void OnMobRoamAction(CBaseEntity* PMob); // triggers when event mob is ready for a custom roam action
     void OnMobRoam(CBaseEntity* PMob);

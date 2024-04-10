@@ -1,4 +1,4 @@
-﻿/*
+/*
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -2920,103 +2920,6 @@ namespace luautils
         }
     }
 
-    // Called during server startup, file reads are OK!
-    void ApplyMixins(CBaseEntity* PMob)
-    {
-        TracyZoneScoped;
-
-        if (PMob == nullptr || PMob->objtype != TYPE_MOB)
-        {
-            return;
-        }
-
-        // Clear out globals
-        lua.set("mixins", sol::lua_nil);
-        lua.set("mixinOptions", sol::lua_nil);
-
-        auto zone_name = PMob->loc.zone->getName();
-        auto name      = PMob->getName();
-
-        auto filename = fmt::format("./scripts/zones/{}/mobs/{}.lua", zone_name, name);
-
-        auto script_result = lua.safe_script_file(filename);
-        if (!script_result.valid())
-        {
-            return;
-        }
-
-        // get the global function "applyMixins"
-        sol::function applyMixins = lua["applyMixins"];
-        if (!applyMixins.valid())
-        {
-            return;
-        }
-
-        // get the parameter "mixins"
-        auto mixins = lua["mixins"];
-        if (!mixins.valid())
-        {
-            return;
-        }
-
-        // get the parameter "mixinOptions" (optional)
-        auto mixinOptions = lua["mixinOptions"];
-
-        auto result = applyMixins(CLuaBaseEntity(PMob), mixins, mixinOptions);
-        if (!result.valid())
-        {
-            sol::error err = result;
-            ShowError("luautils::applyMixins: %s", err.what());
-        }
-    }
-
-    // Called during server startup, file reads are OK!
-    void ApplyZoneMixins(CBaseEntity* PMob)
-    {
-        TracyZoneScoped;
-
-        if (PMob == nullptr || PMob->objtype != TYPE_MOB)
-        {
-            return;
-        }
-
-        // Clear out any previous global definitions
-        lua.set("mixins", sol::lua_nil);
-        lua.set("mixinOptions", sol::lua_nil);
-
-        auto filename = fmt::format("./scripts/mixins/zones/{}.lua", PMob->loc.zone->getName());
-
-        auto script_result = lua.safe_script_file(filename);
-        if (!script_result.valid())
-        {
-            return;
-        }
-
-        // get the global function "applyMixins"
-        sol::function applyMixins = lua["applyMixins"];
-        if (!applyMixins.valid())
-        {
-            return;
-        }
-
-        // get the parameter "mixins"
-        auto mixins = lua["mixins"];
-        if (!mixins.valid())
-        {
-            return;
-        }
-
-        // get the parameter "mixinOptions" (optional)
-        auto mixinOptions = lua["mixinOptions"];
-
-        auto result = applyMixins(CLuaBaseEntity(PMob), mixins, mixinOptions);
-        if (!result.valid())
-        {
-            sol::error err = result;
-            ShowError("luautils::applyMixins %s", err.what());
-        }
-    }
-
     void OnPath(CBaseEntity* PEntity)
     {
         TracyZoneScoped;
@@ -5671,23 +5574,9 @@ namespace luautils
         }
         else if (auto* PMob = dynamic_cast<CMobEntity*>(PEntity))
         {
-            auto mixins = table["mixins"].get_or<sol::table>(sol::lua_nil);
-            if (mixins.valid())
-            {
-                // Use the global function "applyMixins"
-                auto result = lua["applyMixins"](CLuaBaseEntity(PMob), mixins);
-                if (!result.valid())
-                {
-                    sol::error err = result;
-                    ShowError("applyMixins: %s: %s", PMob->name.c_str(), err.what());
-                }
-            }
-
             luautils::OnEntityLoad(PMob);
 
             luautils::OnMobInitialize(PMob);
-            luautils::ApplyMixins(PMob);
-            luautils::ApplyZoneMixins(PMob);
 
             PMob->saveModifiers();
             PMob->saveMobModifiers();
