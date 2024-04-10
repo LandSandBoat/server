@@ -283,7 +283,6 @@ CInstance* CInstanceLoader::LoadInstance()
         for (auto PMob : instance->m_mobList)
         {
             luautils::OnMobInitialize(PMob.second);
-            luautils::ApplyMixins(PMob.second);
             ((CMobEntity*)PMob.second)->saveModifiers();
             ((CMobEntity*)PMob.second)->saveMobModifiers();
 
