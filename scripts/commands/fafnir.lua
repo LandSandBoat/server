@@ -56,11 +56,11 @@ commandObj.onTrigger = function(player)
         -- after this mob has died. Defaults to false.
         releaseIdOnDisappear = true,
 
-        -- You can apply mixins like you would with regular mobs. mixinOptions aren't supported yet.
+        -- You can apply mixins like you would with regular mobs.
         mixins =
         {
-            require('scripts/mixins/rage'),
-            require('scripts/mixins/job_special'),
+            'rage',
+            'job_special',
         },
 
         -- The 'whooshy' special animation that plays when Trusts or Dynamis mobs spawn

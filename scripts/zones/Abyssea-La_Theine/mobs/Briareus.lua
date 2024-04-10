@@ -2,8 +2,6 @@
 -- Area: Abyssea - La Theine
 --  Mob: Briareus
 -----------------------------------
-mixins = { require('scripts/mixins/rage') }
------------------------------------
 local entity = {}
 
 local useMeikyoShisui = function(mob)
@@ -25,8 +23,11 @@ local mercurialEffects =
     [1111] = { 2578, useMeikyoShisui }, -- Colossal Slam + 2H
 }
 
+entity.onMobInitialize = function(mob)
+    xi.applyMixins(mob, xi.mixins.rage, { rageTimer = 5400 })
+end
+
 entity.onMobSpawn = function(mob)
-    mob:setLocalVar('[rage]timer', 5400) -- 90 minutes
 end
 
 entity.onMobFight = function(mob, target)
