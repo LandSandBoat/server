@@ -10,11 +10,12 @@ https://ffxiclopedia.fandom.com/wiki/Rage
 
 require('scripts/globals/mixins')
 
-g_mixins = g_mixins or {}
+local mixin = function(rageMob, params)
+    -- TODO: Refactor everyone to use params, not setting the local var
+    local rageTimer = params.rageTimer or 1200 -- 20 minutes
 
-g_mixins.rage = function(rageMob)
     rageMob:addListener('SPAWN', 'RAGE_SPAWN', function(mob)
-        mob:setLocalVar('[rage]timer', 1200) -- 20 minutes
+        mob:setLocalVar('[rage]timer', rageTimer)
     end)
 
     rageMob:addListener('ENGAGE', 'RAGE_ENGAGE', function(mob)
@@ -36,6 +37,10 @@ g_mixins.rage = function(rageMob)
             end
 
             -- TODO: ATT, DEF, MACC, MATT, EVA, attack speed all increase
+
+            if type(params.additionalStartFn) == 'function' then
+                params.additionalStartFn(mob)
+            end
         end
     end)
 
@@ -51,8 +56,12 @@ g_mixins.rage = function(rageMob)
             end
 
             -- TODO: ATT, DEF, MACC, MATT, EVA, attack speed all decrease
+
+            if type(params.additionalEndFn) == 'function' then
+                params.additionalEndFn(mob)
+            end
         end
     end)
 end
 
-return g_mixins.rage
+return mixin
