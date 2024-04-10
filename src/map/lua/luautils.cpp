@@ -319,7 +319,16 @@ namespace luautils
             }
         }
 
-        // Load Commands
+        // Load mixins into the cache
+        for (auto const& entry : sorted_directory_iterator<std::filesystem::recursive_directory_iterator>("./scripts/mixins"))
+        {
+            if (entry.extension() == ".lua")
+            {
+                CacheLuaObjectFromFile(entry.relative_path().generic_string());
+            }
+        }
+
+        // Load commands into cache
         for (auto const& entry : sorted_directory_iterator<std::filesystem::directory_iterator>("./scripts/commands"))
         {
             if (entry.extension() == ".lua")
@@ -363,10 +372,9 @@ namespace luautils
             }
         }
 
-        // Handle settings
         moduleutils::LoadLuaModules();
 
-        filewatcher = std::make_unique<Filewatcher>(std::vector<std::string>{ "scripts", "modules", "settings" });
+        filewatcher = std::make_unique<Filewatcher>(std::vector<std::string>{ "scripts", "modules", "settings", "mixins" });
 
         TracyReportLuaMemory(lua.lua_state());
     }
