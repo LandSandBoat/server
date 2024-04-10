@@ -26801,6 +26801,9 @@ INSERT INTO `mob_droplist` VALUES (3295,0,0,1000,2816,@COMMON);   -- Aptant: Tac
 -- ZoneID 123 - Pyuu the Spatemaker
 INSERT INTO `mob_droplist` VALUES (3296,0,0,1000,2850,@UNCOMMON); -- Ingot of Sahagin gold (Uncommon, 10%)
 
+-- ZoneID:  91 - Erle
+INSERT INTO `mob_droplist` VALUES (3297,0,0,1000,19122,@UNCOMMON); -- Courser's Pugio (Uncommon, 10%)
+
 /*!40000 ALTER TABLE `mob_droplist` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
