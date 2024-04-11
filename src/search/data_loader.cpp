@@ -287,7 +287,7 @@ std::list<SearchEntity*> CDataLoader::GetPlayersList(search_req sr, int* count)
                     PPlayer->rank = (uint8)rset->getInt("rank_bastok");
                     break;
                 case 2:
-                    PPlayer->rank = (uint8)rset->getInt("rank_bastok");
+                    PPlayer->rank = (uint8)rset->getInt("rank_windurst");
                     break;
                 default:
                     ShowWarning("Inconsistent player nation allegiance : %d", PPlayer->nation);
@@ -514,7 +514,7 @@ std::list<SearchEntity*> CDataLoader::GetPartyList(uint32 PartyID, uint32 Allian
                     PPlayer->rank = (uint8)rset->getInt("rank_bastok");
                     break;
                 case 2:
-                    PPlayer->rank = (uint8)rset->getInt("rank_bastok");
+                    PPlayer->rank = (uint8)rset->getInt("rank_windurst");
                     break;
                 default:
                     ShowWarning("Inconsistent player nation allegiance : %d", PPlayer->nation);
@@ -618,7 +618,7 @@ std::list<SearchEntity*> CDataLoader::GetLinkshellList(uint32 LinkshellID)
                     PPlayer->rank = (uint8)rset->getInt("rank_bastok");
                     break;
                 case 2:
-                    PPlayer->rank = (uint8)rset->getInt("rank_bastok");
+                    PPlayer->rank = (uint8)rset->getInt("rank_windurst");
                     break;
                 default:
                     ShowWarning("Inconsistent player nation allegiance : %d", PPlayer->nation);
@@ -629,7 +629,7 @@ std::list<SearchEntity*> CDataLoader::GetLinkshellList(uint32 LinkshellID)
             PPlayer->linkshellid1   = rset->getInt("linkshellid1");
             PPlayer->linkshellid2   = rset->getInt("linkshellid2");
             PPlayer->linkshellrank1 = rset->getInt("linkshellrank1");
-            PPlayer->linkshellrank2 = rset->getInt("linkshellrank1");
+            PPlayer->linkshellrank2 = rset->getInt("linkshellrank2");
 
             uint32 partyid  = rset->getUInt("partyid");
             uint32 nameflag = rset->getUInt("nameflags");
