@@ -1097,6 +1097,12 @@ namespace charutils
         {
             ShowError("Loading error from char_equip");
         }
+
+        // Fill in the unarmed psuedo-weapons if no item was equipped
+        if (PChar->m_Weapons[SLOT_MAIN] == nullptr)
+        {
+            CheckUnarmedWeapon(PChar);
+        }
     }
 
     /************************************************************************
