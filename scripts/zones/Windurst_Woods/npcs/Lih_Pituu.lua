@@ -25,7 +25,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local skillLevel = player:getSkillLevel(xi.skill.BONECRAFT)
+    local skillLevel = xi.crafting.getRealSkill(player, xi.skill.BONECRAFT)
     local cost = xi.crafting.getAdvImageSupportCost(player, xi.skill.BONECRAFT)
 
     if xi.crafting.hasJoinedGuild(player, xi.crafting.guild.BONECRAFT) then

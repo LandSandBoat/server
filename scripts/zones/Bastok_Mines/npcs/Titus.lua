@@ -12,7 +12,7 @@ end
 
 entity.onTrigger = function(player, npc)
     local skillCap   = xi.crafting.getCraftSkillCap(player, xi.skill.ALCHEMY)
-    local skillLevel = player:getSkillLevel(xi.skill.ALCHEMY)
+    local skillLevel = xi.crafting.getRealSkill(player, xi.skill.ALCHEMY)
 
     if xi.crafting.hasJoinedGuild(player, xi.crafting.guild.ALCHEMY) then
         if not player:hasStatusEffect(xi.effect.ALCHEMY_IMAGERY) then

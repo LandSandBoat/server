@@ -12,7 +12,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local skillLevel = player:getSkillLevel(xi.skill.FISHING)
+    local skillLevel = xi.crafting.getRealSkill(player, xi.skill.FISHING)
     local cost = xi.crafting.getAdvImageSupportCost(player, xi.skill.FISHING)
 
     if xi.crafting.hasJoinedGuild(player, xi.crafting.guild.FISHING) then
