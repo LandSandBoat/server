@@ -35,7 +35,7 @@ end
 entity.onTrigger = function(player, npc)
     local craftSkill        = player:getSkillLevel(xi.skill.COOKING)
     local testItem          = xi.crafting.getTestItem(player, npc, xi.skill.COOKING)
-    local guildMember       = xi.crafting.hasJoinedGuild(player, xi.crafting.guild.COOKING) and 150995375 or 0
+    local guildMember       = xi.crafting.hasJoinedGuild(player, xi.guild.COOKING) and 150995375 or 0
     local rankCap           = xi.crafting.getCraftSkillCap(player, xi.skill.COOKING)
     local expertQuestStatus = 0
     local rank              = player:getSkillRank(xi.skill.COOKING)
@@ -69,7 +69,7 @@ end
 
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 10013 and option == 2 then
-        if xi.crafting.hasJoinedGuild(player, xi.crafting.guild.COOKING) then
+        if xi.crafting.hasJoinedGuild(player, xi.guild.COOKING) then
             player:setCharVar('CookingExpertQuest', 1)
         end
     elseif csid == 10013 and option == 1 then
@@ -79,7 +79,7 @@ entity.onEventFinish = function(player, csid, option, npc)
         else
             player:addItem(crystal)
             player:messageSpecial(ID.text.ITEM_OBTAINED, crystal)
-            xi.crafting.signupGuild(player, xi.crafting.guild.COOKING)
+            xi.crafting.signupGuild(player, xi.guild.COOKING)
         end
     else
         if player:getLocalVar('CookingTraded') == 1 then

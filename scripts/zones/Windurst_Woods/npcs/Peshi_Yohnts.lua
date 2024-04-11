@@ -35,7 +35,7 @@ end
 entity.onTrigger = function(player, npc)
     local craftSkill        = player:getSkillLevel(xi.skill.BONECRAFT)
     local testItem          = xi.crafting.getTestItem(player, npc, xi.skill.BONECRAFT)
-    local guildMember       = xi.crafting.hasJoinedGuild(player, xi.crafting.guild.BONECRAFT) and 64 or 0
+    local guildMember       = xi.crafting.hasJoinedGuild(player, xi.guild.BONECRAFT) and 64 or 0
     local rankCap           = xi.crafting.getCraftSkillCap(player, xi.skill.BONECRAFT)
     local expertQuestStatus = 0
     local rank              = player:getSkillRank(xi.skill.BONECRAFT)
@@ -69,7 +69,7 @@ end
 
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 10016 and option == 2 then
-        if xi.crafting.hasJoinedGuild(player, xi.crafting.guild.BONECRAFT) then
+        if xi.crafting.hasJoinedGuild(player, xi.guild.BONECRAFT) then
             player:setCharVar('BonecraftExpertQuest', 1)
         end
     elseif csid == 10016 and option == 1 then
@@ -79,7 +79,7 @@ entity.onEventFinish = function(player, csid, option, npc)
         else
             player:addItem(crystal)
             player:messageSpecial(ID.text.ITEM_OBTAINED, crystal)
-            xi.crafting.signupGuild(player, xi.crafting.guild.BONECRAFT)
+            xi.crafting.signupGuild(player, xi.guild.BONECRAFT)
         end
     else
         if player:getLocalVar('BonecraftTraded') == 1 then

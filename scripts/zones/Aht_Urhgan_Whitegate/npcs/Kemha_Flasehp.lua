@@ -9,7 +9,7 @@ local ID = zones[xi.zone.AHT_URHGAN_WHITEGATE]
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    if xi.crafting.hasJoinedGuild(player, xi.crafting.guild.FISHING) then
+    if xi.crafting.hasJoinedGuild(player, xi.guild.FISHING) then
         if npcUtil.tradeHas(trade, xi.item.IMPERIAL_BRONZE_PIECE) then
             if not player:hasStatusEffect(xi.effect.FISHING_IMAGERY) then
                 player:confirmTrade()
@@ -22,7 +22,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if xi.crafting.hasJoinedGuild(player, xi.crafting.guild.FISHING) then
+    if xi.crafting.hasJoinedGuild(player, xi.guild.FISHING) then
         if not player:hasStatusEffect(xi.effect.FISHING_IMAGERY) then
             player:startEvent(642, 8, 0, 0, 511, 1, 0, 0, 2184)
         else

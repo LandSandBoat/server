@@ -9,7 +9,7 @@ local ID = zones[xi.zone.AL_ZAHBI]
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    if xi.crafting.hasJoinedGuild(player, xi.crafting.guild.BONECRAFT) then
+    if xi.crafting.hasJoinedGuild(player, xi.guild.BONECRAFT) then
         if
             trade:hasItemQty(xi.item.IMPERIAL_BRONZE_PIECE, 1) and
             trade:getItemCount() == 1
@@ -27,7 +27,7 @@ end
 entity.onTrigger = function(player, npc)
     local skillLevel = xi.crafting.getRealSkill(player, xi.skill.BONECRAFT)
 
-    if xi.crafting.hasJoinedGuild(player, xi.crafting.guild.BONECRAFT) then
+    if xi.crafting.hasJoinedGuild(player, xi.guild.BONECRAFT) then
         if not player:hasStatusEffect(xi.effect.BONECRAFT_IMAGERY) then
             player:startEvent(224, 8, skillLevel, 0, 511, 188, 0, 6, xi.item.IMPERIAL_BRONZE_PIECE)
         else

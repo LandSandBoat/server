@@ -48,7 +48,7 @@ entity.onTrigger = function(player, npc)
 
     local craftSkill        = player:getSkillLevel(xi.skill.CLOTHCRAFT)
     local testItem          = xi.crafting.getTestItem(player, npc, xi.skill.CLOTHCRAFT)
-    local guildMember       = xi.crafting.hasJoinedGuild(player, xi.crafting.guild.CLOTHCRAFT) and 10000 or 0
+    local guildMember       = xi.crafting.hasJoinedGuild(player, xi.guild.CLOTHCRAFT) and 10000 or 0
     local rankCap           = xi.crafting.getCraftSkillCap(player, xi.skill.CLOTHCRAFT)
     local expertQuestStatus = 0
     local rank              = player:getSkillRank(xi.skill.CLOTHCRAFT)
@@ -104,7 +104,7 @@ entity.onEventFinish = function(player, csid, option, npc)
             player:setCharVar('moral', 4)
         end
     elseif csid == 10011 and option == 2 then
-        if xi.crafting.hasJoinedGuild(player, xi.crafting.guild.CLOTHCRAFT) then
+        if xi.crafting.hasJoinedGuild(player, xi.guild.CLOTHCRAFT) then
             player:setCharVar('ClothcraftExpertQuest', 1)
         end
     elseif csid == 10011 and option == 1 then
@@ -113,7 +113,7 @@ entity.onEventFinish = function(player, csid, option, npc)
         else
             player:addItem(xi.item.EARTH_CRYSTAL)
             player:messageSpecial(ID.text.ITEM_OBTAINED, xi.item.EARTH_CRYSTAL)
-            xi.crafting.signupGuild(player, xi.crafting.guild.CLOTHCRAFT)
+            xi.crafting.signupGuild(player, xi.guild.CLOTHCRAFT)
         end
     else
         if player:getLocalVar('ClothcraftTraded') == 1 then

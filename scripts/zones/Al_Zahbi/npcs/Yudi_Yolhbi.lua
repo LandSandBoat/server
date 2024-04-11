@@ -9,7 +9,7 @@ local ID = zones[xi.zone.AL_ZAHBI]
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    if xi.crafting.hasJoinedGuild(player, xi.crafting.guild.WOODWORKING) then
+    if xi.crafting.hasJoinedGuild(player, xi.guild.WOODWORKING) then
         if
             trade:hasItemQty(xi.item.IMPERIAL_BRONZE_PIECE, 1) and
             trade:getItemCount() == 1
@@ -27,7 +27,7 @@ end
 entity.onTrigger = function(player, npc)
     local skillLevel = xi.crafting.getRealSkill(player, xi.skill.WOODWORKING)
 
-    if xi.crafting.hasJoinedGuild(player, xi.crafting.guild.WOODWORKING) then
+    if xi.crafting.hasJoinedGuild(player, xi.guild.WOODWORKING) then
         if not player:hasStatusEffect(xi.effect.WOODWORKING_IMAGERY) then
             player:startEvent(234, 8, skillLevel, 0, 511, 188, 0, 1, xi.item.IMPERIAL_BRONZE_PIECE)
         else

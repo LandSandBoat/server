@@ -15,7 +15,7 @@ entity.onTrigger = function(player, npc)
     local skillCap = xi.crafting.getCraftSkillCap(player, xi.skill.GOLDSMITHING)
     local skillLevel = xi.crafting.getRealSkill(player, xi.skill.GOLDSMITHING)
 
-    if xi.crafting.hasJoinedGuild(player, xi.crafting.guild.GOLDSMITHING) then
+    if xi.crafting.hasJoinedGuild(player, xi.guild.GOLDSMITHING) then
         if not player:hasStatusEffect(xi.effect.GOLDSMITHING_IMAGERY) then
             player:startEvent(303, skillCap, skillLevel, 1, 201, player:getGil(), 0, 3, 0)
         else

@@ -30,7 +30,7 @@ end
 entity.onTrigger = function(player, npc)
     local craftSkill = player:getSkillLevel(xi.skill.FISHING)
     local testItem = xi.crafting.getTestItem(player, npc, xi.skill.FISHING)
-    local guildMember = xi.crafting.hasJoinedGuild(player, xi.crafting.guild.FISHING) and 150995375 or 0
+    local guildMember = xi.crafting.hasJoinedGuild(player, xi.guild.FISHING) and 150995375 or 0
     local rankCap = xi.crafting.getCraftSkillCap(player, xi.skill.FISHING)
     local expertQuestStatus = 0
     local rank = player:getSkillRank(xi.skill.FISHING)
@@ -65,7 +65,7 @@ end
 
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 10009 and option == 2 then
-        if xi.crafting.hasJoinedGuild(player, xi.crafting.guild.FISHING) then
+        if xi.crafting.hasJoinedGuild(player, xi.guild.FISHING) then
             player:setCharVar('FishingExpertQuest', 1)
         end
     elseif csid == 10009 and option == 1 then
@@ -76,7 +76,7 @@ entity.onEventFinish = function(player, csid, option, npc)
         else
             player:addItem(crystal)
             player:messageSpecial(ID.text.ITEM_OBTAINED, crystal)
-            xi.crafting.signupGuild(player, xi.crafting.guild.FISHING)
+            xi.crafting.signupGuild(player, xi.guild.FISHING)
         end
     else
         if player:getLocalVar('FishingTraded') == 1 then

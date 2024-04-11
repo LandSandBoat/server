@@ -8,21 +8,6 @@ require('scripts/globals/utils')
 xi = xi or {}
 xi.crafting = {}
 
--- Ordered by ACTUAL guild ID.
--- I'll change the actual numbers later, once I get to guild masters and I make sure I dont break stuff.
-xi.crafting.guild =
-{
-    FISHING      = 5,
-    WOODWORKING  = 9,
-    SMITHING     = 8,
-    GOLDSMITHING = 6,
-    CLOTHCRAFT   = 3,
-    LEATHERCRAFT = 7,
-    BONECRAFT    = 2,
-    ALCHEMY      = 1,
-    COOKING      = 4,
-}
-
 xi.crafting.rank =
 {
     AMATEUR    = 0,
@@ -77,13 +62,13 @@ local testItemsByNPC =
 }
 
 xi.crafting.hasJoinedGuild = function(player, guildId)
-    local joinedGuildMask = player:getCharVar('Guild_Member')
+    local joinedGuildMask = player:getCharVar('Guild_Member') + 1
 
     return utils.mask.getBit(joinedGuildMask, guildId)
 end
 
 xi.crafting.signupGuild = function(player, guildId)
-    player:incrementCharVar('Guild_Member', bit.lshift(1, guildId))
+    player:incrementCharVar('Guild_Member', bit.lshift(1, guildId + 1))
 end
 
 -----------------------------------

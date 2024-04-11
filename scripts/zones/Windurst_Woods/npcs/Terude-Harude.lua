@@ -15,7 +15,7 @@ entity.onTrigger = function(player, npc)
     local skillLevel = xi.crafting.getRealSkill(player, xi.skill.CLOTHCRAFT)
     local cost = xi.crafting.getAdvImageSupportCost(player, xi.skill.CLOTHCRAFT)
 
-    if xi.crafting.hasJoinedGuild(player, xi.crafting.guild.CLOTHCRAFT) then
+    if xi.crafting.hasJoinedGuild(player, xi.guild.CLOTHCRAFT) then
         if not player:hasStatusEffect(xi.effect.CLOTHCRAFT_IMAGERY) then
             player:startEvent(10013, cost, skillLevel, 0, 511, player:getGil(), 0, 4095, 0)
         else

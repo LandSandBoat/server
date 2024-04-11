@@ -15,7 +15,7 @@ entity.onTrigger = function(player, npc)
     local skillCap = xi.crafting.getCraftSkillCap(player, xi.skill.BONECRAFT)
     local skillLevel = xi.crafting.getRealSkill(player, xi.skill.BONECRAFT)
 
-    if xi.crafting.hasJoinedGuild(player, xi.crafting.guild.BONECRAFT) then
+    if xi.crafting.hasJoinedGuild(player, xi.guild.BONECRAFT) then
         if not player:hasStatusEffect(xi.effect.BONECRAFT_IMAGERY) then
             player:startEvent(10020, skillCap, skillLevel, 2, 509, player:getGil(), 0, 0, 0)
         else

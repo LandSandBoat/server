@@ -15,7 +15,7 @@ entity.onTrigger = function(player, npc)
     local skillLevel = xi.crafting.getRealSkill(player, xi.skill.FISHING)
     local cost = xi.crafting.getAdvImageSupportCost(player, xi.skill.FISHING)
 
-    if xi.crafting.hasJoinedGuild(player, xi.crafting.guild.FISHING) then
+    if xi.crafting.hasJoinedGuild(player, xi.guild.FISHING) then
         if not player:hasStatusEffect(xi.effect.FISHING_IMAGERY) then
             player:startEvent(10011, cost, skillLevel, 0, 239, player:getGil(), 0, 0, 0) -- p1 = skill level
         else

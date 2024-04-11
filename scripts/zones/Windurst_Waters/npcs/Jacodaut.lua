@@ -15,7 +15,7 @@ entity.onTrigger = function(player, npc)
     local skillCap = xi.crafting.getCraftSkillCap(player, xi.skill.COOKING)
     local skillLevel = xi.crafting.getRealSkill(player, xi.skill.COOKING)
 
-    if xi.crafting.hasJoinedGuild(player, xi.crafting.guild.COOKING) then
+    if xi.crafting.hasJoinedGuild(player, xi.guild.COOKING) then
         if not player:hasStatusEffect(xi.effect.COOKING_IMAGERY) then
             player:startEvent(10016, skillCap, skillLevel, 1, 495, player:getGil(), 0, 4095, 0) -- p1 = skill level
         else

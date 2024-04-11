@@ -15,7 +15,7 @@ entity.onTrigger = function(player, npc)
     local skillLevel  = player:getSkillLevel(xi.skill.ALCHEMY)
     local cost        = xi.crafting.getAdvImageSupportCost(player, xi.skill.ALCHEMY)
 
-    if xi.crafting.hasJoinedGuild(player, xi.crafting.guild.ALCHEMY) then
+    if xi.crafting.hasJoinedGuild(player, xi.guild.ALCHEMY) then
         if not player:hasStatusEffect(xi.effect.ALCHEMY_IMAGERY) then
             player:startEvent(122, cost, skillLevel, 0, 0xB0001AF, player:getGil(), 0, 0, 0) -- Event doesn't work
         else

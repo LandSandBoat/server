@@ -274,8 +274,8 @@ xi.crafting.guildPointOnEventFinish = function(player, option, target, guildId)
 
     -- Contract Dialog.
     if bit.tobit(option) == -1 and rank >= 3 then
-        local oldGuild = player:getCharVar('[GUILD]currentGuild')
-        player:setCharVar('[GUILD]currentGuild', guildId)
+        local oldGuild = player:getCharVar('[GUILD]currentGuild') - 1
+        player:setCharVar('[GUILD]currentGuild', guildId + 1)
 
         if oldGuild == -1 then
             player:messageSpecial(ID.text.GUILD_NEW_CONTRACT, guildId)

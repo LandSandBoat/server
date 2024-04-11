@@ -35,7 +35,7 @@ end
 entity.onTrigger = function(player, npc)
     local craftSkill        = player:getSkillLevel(xi.skill.LEATHERCRAFT)
     local testItem          = xi.crafting.getTestItem(player, npc, xi.skill.LEATHERCRAFT)
-    local guildMember       = xi.crafting.hasJoinedGuild(player, xi.crafting.guild.LEATHERCRAFT) and 150995375 or 0
+    local guildMember       = xi.crafting.hasJoinedGuild(player, xi.guild.LEATHERCRAFT) and 150995375 or 0
     local rankCap           = xi.crafting.getCraftSkillCap(player, xi.skill.LEATHERCRAFT)
     local expertQuestStatus = 0
     local rank              = player:getSkillRank(xi.skill.LEATHERCRAFT)
@@ -89,7 +89,7 @@ end
 
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 648 and option == 2 then
-        if xi.crafting.hasJoinedGuild(player, xi.crafting.guild.LEATHERCRAFT) then
+        if xi.crafting.hasJoinedGuild(player, xi.guild.LEATHERCRAFT) then
             player:setCharVar('LeathercraftExpertQuest', 1)
         end
     elseif csid == 648 and option == 1 then
@@ -99,7 +99,7 @@ entity.onEventFinish = function(player, csid, option, npc)
         else
             player:addItem(crystal)
             player:messageSpecial(ID.text.ITEM_OBTAINED, crystal)
-            xi.crafting.signupGuild(player, xi.crafting.guild.LEATHERCRAFT)
+            xi.crafting.signupGuild(player, xi.guild.LEATHERCRAFT)
         end
     else
         if player:getLocalVar('LeathercraftTraded') == 1 then

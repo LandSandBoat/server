@@ -15,7 +15,7 @@ entity.onTrigger = function(player, npc)
     local skillCap = xi.crafting.getCraftSkillCap(player, xi.skill.WOODWORKING)
     local skillLevel = xi.crafting.getRealSkill(player, xi.skill.WOODWORKING)
 
-    if xi.crafting.hasJoinedGuild(player, xi.crafting.guild.WOODWORKING) then
+    if xi.crafting.hasJoinedGuild(player, xi.guild.WOODWORKING) then
         if not player:hasStatusEffect(xi.effect.WOODWORKING_IMAGERY) then
             player:startEvent(624, skillCap, skillLevel, 1, 207, player:getGil(), 0, 4095, 0)
         else
