@@ -4,8 +4,6 @@
 -- Starts and Finishes Quest: The Fanged One, From Saplings Grow
 -- !pos 117 -3 92 241
 -----------------------------------
-local ID = zones[xi.zone.WINDURST_WOODS]
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
@@ -20,10 +18,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local theFangedOne = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_FANGED_ONE) -- RNG flag quest
-    local theFangedOneCS = player:getCharVar('TheFangedOne_Event')
     local sinHunting = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.SIN_HUNTING)-- RNG AF1
-    local sinHuntingCS = player:getCharVar('sinHunting')
     local fireAndBrimstone = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.FIRE_AND_BRIMSTONE)-- RNG AF2
     local fireAndBrimstoneCS = player:getCharVar('fireAndBrimstone')
     local unbridledPassion = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.UNBRIDLED_PASSION)-- RNG AF3
@@ -31,36 +26,8 @@ entity.onTrigger = function(player, npc)
     local lvl = player:getMainLvl()
     local job = player:getMainJob()
 
-    -- THE FANGED ONE
-    if
-        theFangedOne == QUEST_AVAILABLE and
-        lvl >= xi.settings.main.ADVANCED_JOB_LEVEL
-    then
-        player:startEvent(351)
-    elseif
-        theFangedOne == QUEST_ACCEPTED and
-        not player:hasKeyItem(xi.ki.OLD_TIGERS_FANG)
-    then
-        player:startEvent(352)
-    elseif player:hasKeyItem(xi.ki.OLD_TIGERS_FANG) and theFangedOneCS ~= 1 then
-        player:startEvent(357)
-    elseif theFangedOneCS == 1 then
-        player:startEvent(358)
-
-    -- SIN HUNTING
-    elseif
-        sinHunting == QUEST_AVAILABLE and
-        job == xi.job.RNG and
-        lvl >= xi.settings.main.AF1_QUEST_LEVEL
-    then
-        player:startEvent(523) -- start RNG AF1
-    elseif sinHuntingCS > 0 and sinHuntingCS < 5 then
-        player:startEvent(524) -- during quest RNG AF1
-    elseif sinHuntingCS == 5 then
-        player:startEvent(527) -- complete quest RNG AF1
-
     -- FIRE AND BRIMSTONE
-    elseif
+    if
         sinHunting == QUEST_COMPLETED and
         job == xi.job.RNG and
         lvl >= xi.settings.main.AF2_QUEST_LEVEL and
@@ -85,40 +52,15 @@ entity.onTrigger = function(player, npc)
     elseif unbridledPassionCS > 0 and unbridledPassionCS < 3 then
         player:startEvent(542)-- during RNG AF3
     elseif unbridledPassionCS < 7 then
-        player:startEvent(542)-- during RNG AF3
+        player:startEvent(542)-- during RNG AF3 this is causing dialog when it shouldn't. Will be fixed when changed to IF.
     elseif unbridledPassionCS == 7 then
         player:startEvent(546, 0, 14099) -- complete RNG AF3
     end
 end
 
 entity.onEventFinish = function(player, csid, option, npc)
-    -- THE FANGED ONE
-    if csid == 351 then
-        player:addQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_FANGED_ONE)
-        player:setCharVar('TheFangedOneCS', 1)
-    elseif
-        (csid == 357 or csid == 358) and
-        npcUtil.completeQuest(player, xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_FANGED_ONE, { item = 13117, title = xi.title.THE_FANGED_ONE, var = { 'TheFangedOne_Event', 'TheFangedOneCS' } })
-    then
-        player:delKeyItem(xi.ki.OLD_TIGERS_FANG)
-        player:unlockJob(xi.job.RNG)
-        player:messageSpecial(ID.text.PERIH_VASHAI_DIALOG)
-
-    -- SIN HUNTING
-    elseif csid == 523 then -- start quest RNG AF1
-        player:addQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.SIN_HUNTING)
-        npcUtil.giveKeyItem(player, xi.ki.CHIEFTAINNESSS_TWINSTONE_EARRING)
-        player:setCharVar('sinHunting', 1)
-    elseif
-        csid == 527 and
-        npcUtil.completeQuest(player, xi.quest.log_id.WINDURST, xi.quest.id.windurst.SIN_HUNTING, { item = 17188, var = 'sinHunting' })
-    then
-        -- complete quest RNG AF1
-        player:delKeyItem(xi.ki.CHIEFTAINNESSS_TWINSTONE_EARRING)
-        player:delKeyItem(xi.ki.PERCHONDS_ENVELOPE)
-
     -- FIRE AND BRIMSTONE
-    elseif csid == 531 then -- start RNG AF2
+    if csid == 531 then -- start RNG AF2
         player:addQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.FIRE_AND_BRIMSTONE)
         player:setCharVar('fireAndBrimstone', 1)
     elseif csid == 535 then -- start second part RNG AF2

@@ -27,6 +27,7 @@ zones[xi.zone.JUGNER_FOREST] =
         AMK_DIGGING_OFFSET            = 7797,  -- You spot some familiar footprints. You are convinced that your moogle friend has been digging in the immediate vicinity.
         LOGGING_IS_POSSIBLE_HERE      = 7909,  -- Logging is possible here if you have <item>.
         VOIDWALKER_OBTAIN_KI          = 7916,  -- Obtained key item: <keyitem>!
+        DETECT_GLITTERSAND            = 7940,  -- You detect a hint of Glittersand!
         CONQUEST                      = 8060,  -- You've earned conquest points!
         GARRISON_BASE                 = 8428,  -- Hm? What is this? %? How do I know this is not some [San d'Orian/Bastokan/Windurstian] trick?
         PLAYER_OBTAINS_ITEM           = 8651,  -- <name> obtains <item>!
