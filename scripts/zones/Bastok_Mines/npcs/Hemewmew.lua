@@ -9,22 +9,22 @@ local ID = zones[xi.zone.BASTOK_MINES]
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    xi.crafting.guildPointOnTrade(player, npc, trade, 207, 7)
+    xi.crafting.guildPointOnTrade(player, npc, trade, 207, xi.guild.ALCHEMY)
 end
 
 entity.onTrigger = function(player, npc)
-    xi.crafting.guildPointOnTrigger(player, 206, 7)
+    xi.crafting.guildPointOnTrigger(player, 206, xi.guild.ALCHEMY)
 end
 
 entity.onEventUpdate = function(player, csid, option, npc)
     if csid == 206 then
-        xi.crafting.guildPointOnEventFinish(player, option, npc, 7)
+        xi.crafting.guildPointOnEventFinish(player, option, npc, xi.guild.ALCHEMY)
     end
 end
 
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 206 then
-        xi.crafting.guildPointOnEventFinish(player, option, npc, 7)
+        xi.crafting.guildPointOnEventFinish(player, option, npc, xi.guild.ALCHEMY)
     elseif csid == 207 then
         player:messageSpecial(ID.text.GP_OBTAINED, option)
     end
