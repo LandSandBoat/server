@@ -21,7 +21,7 @@ end
 entity.onTrigger = function(player, npc)
     local sayItWithAHandbagCS = player:getCharVar('sayItWithAHandbagCS')
     local skillCap = xi.crafting.getCraftSkillCap(player, xi.skill.LEATHERCRAFT)
-    local skillLevel = player:getSkillLevel(xi.skill.LEATHERCRAFT)
+    local skillLevel = xi.crafting.getRealSkill(player, xi.skill.LEATHERCRAFT)
 
     if
         player:getQuestStatus(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.SAY_IT_WITH_A_HANDBAG) == QUEST_COMPLETED and

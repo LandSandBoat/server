@@ -12,7 +12,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local skillLevel = player:getSkillLevel(xi.skill.WOODWORKING)
+    local skillLevel = xi.crafting.getRealSkill(player, xi.skill.WOODWORKING)
     local cost = xi.crafting.getAdvImageSupportCost(player, xi.skill.WOODWORKING)
 
     if xi.crafting.hasJoinedGuild(player, xi.crafting.guild.WOODWORKING) then

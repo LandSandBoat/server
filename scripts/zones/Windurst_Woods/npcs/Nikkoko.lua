@@ -13,7 +13,7 @@ end
 
 entity.onTrigger = function(player, npc)
     local skillCap = xi.crafting.getCraftSkillCap(player, xi.skill.CLOTHCRAFT)
-    local skillLevel = player:getSkillLevel(xi.skill.CLOTHCRAFT)
+    local skillLevel = xi.crafting.getRealSkill(player, xi.skill.CLOTHCRAFT)
 
     if xi.crafting.hasJoinedGuild(player, xi.crafting.guild.CLOTHCRAFT) then
         if not player:hasStatusEffect(xi.effect.CLOTHCRAFT_IMAGERY) then
