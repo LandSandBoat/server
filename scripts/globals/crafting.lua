@@ -8,21 +8,6 @@ require('scripts/globals/utils')
 xi = xi or {}
 xi.crafting = {}
 
-xi.crafting.rank =
-{
-    AMATEUR    = 0,
-    RECRUIT    = 1,
-    INITIATE   = 2,
-    NOVICE     = 3,
-    APPRENTICE = 4,
-    JOURNEYMAN = 5,
-    CRAFTSMAN  = 6,
-    ARTISAN    = 7,
-    ADEPT      = 8,
-    VETERAN    = 9,
-    EXPERT     = 10,
-}
-
 -- Keys are based on the player's current rank in the guild in order to be eligible
 -- for the next rank-up test.  Example: At Amateur, a value of 256 is required to
 -- be eligible for the test to move to Recruit
@@ -34,16 +19,16 @@ xi.crafting.rank =
 -- So what does 256 or 2182 even mean?
 local requiredSkillForRank =
 {
-    [xi.crafting.rank.AMATEUR]    = 256,
-    [xi.crafting.rank.RECRUIT]    = 577,
-    [xi.crafting.rank.INITIATE]   = 898,
-    [xi.crafting.rank.NOVICE]     = 1219,
-    [xi.crafting.rank.APPRENTICE] = 1540,
-    [xi.crafting.rank.JOURNEYMAN] = 1861,
-    [xi.crafting.rank.CRAFTSMAN]  = 2182,
-    [xi.crafting.rank.ARTISAN]    = 2503,
-    [xi.crafting.rank.ADEPT]      = 2824,
-    [xi.crafting.rank.VETERAN]    = 3145,
+    [xi.craftRank.AMATEUR]    = 256,
+    [xi.craftRank.RECRUIT]    = 577,
+    [xi.craftRank.INITIATE]   = 898,
+    [xi.craftRank.NOVICE]     = 1219,
+    [xi.craftRank.APPRENTICE] = 1540,
+    [xi.craftRank.JOURNEYMAN] = 1861,
+    [xi.craftRank.CRAFTSMAN]  = 2182,
+    [xi.craftRank.ARTISAN]    = 2503,
+    [xi.craftRank.ADEPT]      = 2824,
+    [xi.craftRank.VETERAN]    = 3145,
 }
 
 -- Table for Test Items
@@ -174,7 +159,7 @@ xi.crafting.unionRepresentativeTriggerRenounceCheck = function(player, eventId, 
         for craftID = xi.skill.WOODWORKING, xi.skill.COOKING do
             local rank = player:getSkillRank(craftID)
 
-            if rank >= xi.crafting.rank.ARTISAN then
+            if rank >= xi.craftRank.ARTISAN then
                 count = count + 1
             else
                 -- This needs checking. Probably made-up.

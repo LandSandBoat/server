@@ -9,7 +9,7 @@ xi.crafting = {}
 
 local npcTable =
 {
-    --    ['npc_name'] = { npc_number, guild_id,            skill_id,              effect_id,                aht_uhrgan_parameter_7,        aht_uhrgan_parameter_8 },
+    --    ['npc_name'] = { message, event_Id, guild_id,     skill_id,              effect_id,                aht_uhrgan_parameter_7,        aht_uhrgan_parameter_8 },
     ['Erabu-Fumulubu'] = { 1, 10012, xi.guild.FISHING,      xi.skill.FISHING,      xi.effect.FISHING_IMAGERY,                     0,                             0 },
     ['Degong'        ] = { 2, 10013, xi.guild.FISHING,      xi.skill.FISHING,      xi.effect.FISHING_IMAGERY,                     0,                             0 },
     ['Amarefice'     ] = { 1,   624, xi.guild.WOODWORKING,  xi.skill.WOODWORKING,  xi.effect.WOODWORKING_IMAGERY,                 0,                             0 },
