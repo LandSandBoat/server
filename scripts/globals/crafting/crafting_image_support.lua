@@ -1,6 +1,8 @@
 -----------------------------------
 -- Image Support NPCs
 -----------------------------------
+require('scripts/globals/crafting/crafting_utils')
+-----------------------------------
 xi = xi or {}
 xi.crafting = {}
 

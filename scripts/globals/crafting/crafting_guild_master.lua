@@ -1,7 +1,7 @@
 -----------------------------------
--- Crafting Guilds
--- Ref: http://wiki.ffxiclopedia.org/wiki/Crafts_%26_Hobbies
+-- Guild Masters
 -----------------------------------
+require('scripts/globals/crafting/crafting_utils')
 require('scripts/globals/npc_util')
 require('scripts/globals/utils')
 -----------------------------------
@@ -45,16 +45,6 @@ local testItemsByNPC =
     ['Ghemp']          = { 16530, 12299, 16512, 16650, 16651, 16559, 12427, 16577, 12428, 19788 },
     ['Cheupirudaux']   = {    22,    23, 17354, 17348, 17053, 17156, 17054,    56, 17101, 18884 },
 }
-
-xi.crafting.hasJoinedGuild = function(player, guildId)
-    local joinedGuildMask = player:getCharVar('Guild_Member') + 1
-
-    return utils.mask.getBit(joinedGuildMask, guildId)
-end
-
-xi.crafting.signupGuild = function(player, guildId)
-    player:incrementCharVar('Guild_Member', bit.lshift(1, guildId + 1))
-end
 
 -----------------------------------
 -- getTestItem Action
@@ -117,19 +107,6 @@ end
 -- 6: ???
 -- 7: COUNT for the number of guilds at rank ARTISAN or higher. This count seems to cycle between it and 0, for rank renouncement trigger.
 -- 8: ???
-
------------------------------------
--- getCraftSkillCap
------------------------------------
-xi.crafting.getCraftSkillCap = function(player, craftID)
-    local rank = player:getSkillRank(craftID)
-
-    return (rank + 1) * 10
-end
-
-xi.crafting.getRealSkill = function(player, craftID)
-    return math.floor(player:getCharSkillLevel(craftID) / 10)
-end
 
 -----------------------------------
 -- Rank Renouncement functions
