@@ -2558,7 +2558,7 @@ void SmallPacket0x04D(map_session_data_t* const PSession, CCharEntity* const PCh
                 // TODO: Validate me
                 auto senderName = str(data[0x10]);
 
-                auto rset = db::preparedStmt("SELECT charid, accid FROM chars WHERE charname = '?' LIMIT 1", senderName);
+                auto rset = db::query(fmt::format("SELECT charid, accid FROM chars WHERE charname = '{}' LIMIT 1", senderName));
                 if (rset && rset->rowsCount() && rset->next())
                 {
                     uint32 charid = rset->getUInt("charid");
