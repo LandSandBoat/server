@@ -48,7 +48,7 @@ entity.onTrigger = function(player, npc)
         player:startEvent(908)
 
     else
-        xi.crafting.freeImageSupportOnTrigger(player, npc)
+        xi.crafting.oldImageSupportOnTrigger(player, npc)
     end
 end
 
@@ -69,7 +69,7 @@ entity.onEventFinish = function(player, csid, option, npc)
     elseif csid == 908 and option == 1 then
         player:setCharVar('sayItWithAHandbagCS', 2)
     else
-        xi.crafting.freeImageSupportOnEventFinish(player, csid, option, npc)
+        xi.crafting.oldImageSupportOnEventFinish(player, csid, option, npc)
     end
 end
 

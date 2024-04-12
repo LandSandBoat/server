@@ -132,15 +132,6 @@ xi.crafting.getRealSkill = function(player, craftID)
 end
 
 -----------------------------------
--- getAdvImageSupportCost
------------------------------------
-xi.crafting.getAdvImageSupportCost = function(player, craftID)
-    local rank = player:getSkillRank(craftID)
-
-    return (rank + 1) * 30
-end
-
------------------------------------
 -- Rank Renouncement functions
 -----------------------------------
 xi.crafting.unionRepresentativeEventUpdateRenounce = function(player, craftID)
