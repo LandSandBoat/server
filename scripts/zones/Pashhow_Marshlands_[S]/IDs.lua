@@ -98,7 +98,7 @@ zones[xi.zone.PASHHOW_MARSHLANDS_S] =
     npc =
     {
         CAMPAIGN_NPC_OFFSET        = GetFirstID('Yuvalbaux_RK'), -- San, Bas, Win, Flag +4, CA
-        INDESCRIPT_MARKINGS_OFFSET = 17146627,
+        INDESCRIPT_MARKINGS_OFFSET = GetFirstID('Indescript_Markings'),
     },
 }
 
