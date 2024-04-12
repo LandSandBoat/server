@@ -61532,7 +61532,6 @@ INSERT INTO `item_mods` VALUES (26403,109,129);  -- SHIELD: 129
 INSERT INTO `item_mods` VALUES (26403,160,-800); -- DMG: -800
 -- TODO: Null all damage
 -- Kupo Shield
-INSERT INTO `item_mods` VALUES (26406,127,3); -- FISH: 3
 INSERT INTO `item_mods` VALUES (26406,128,3); -- WOOD: 3
 INSERT INTO `item_mods` VALUES (26406,129,3); -- SMITH: 3
 INSERT INTO `item_mods` VALUES (26406,130,3); -- GOLDSMITH: 3
