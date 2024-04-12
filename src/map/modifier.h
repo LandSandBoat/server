@@ -601,6 +601,7 @@ enum class Mod
     EXP_BONUS         = 382,  //
     ROLL_RANGE        = 528,  // Additional range for COR roll abilities.
     JOB_BONUS_CHANCE  = 542,  // Chance to apply job bonus to COR roll without having the job in the party.
+    RANDOM_DEAL_BONUS = 573, // % chance to reset 2 abilities
     TRIPLE_SHOT_RATE  = 999,  // Percent increase to Triple Shot Rate
     QUICK_DRAW_RECAST = 1060, // Quick Draw Charge Reduction (seconds)
 
