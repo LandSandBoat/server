@@ -672,20 +672,17 @@ namespace charutils
             PChar->profile.mhflag = (uint16)rset->getInt("mhflag");
             PChar->profile.title  = (uint16)rset->getInt("title");
 
-            // TODO:
-            /*
             std::array<uint8, 512> bazaarMessageArray;
             db::extractFromBlob(rset, "bazaar_message", bazaarMessageArray);
             const char* bazaarMessageStr = reinterpret_cast<const char*>(bazaarMessageArray.data());
             if (bazaarMessageStr != nullptr)
             {
-                PChar->bazaar.message.insert(0, (char*)_sql->GetData(7));
+                PChar->bazaar.message.insert(0, bazaarMessageStr);
             }
             else
             {
                 PChar->bazaar.message = '\0';
             }
-            */
 
             zoning = rset->getUInt("zoning");
 
