@@ -40,7 +40,6 @@ entity.onTrigger = function(player, npc)
     local expertQuestStatus = 0
     local rank              = player:getSkillRank(xi.skill.LEATHERCRAFT)
     local realSkill         = (craftSkill - rank) / 32
-    local canRankUp         = rankCap - realSkill -- used to make sure rank up isn't overridden by ASA mission
 
     if xi.crafting.unionRepresentativeTriggerRenounceCheck(player, 648, realSkill, rankCap, 184549887) then
         return
@@ -54,26 +53,7 @@ entity.onTrigger = function(player, npc)
         end
     end
 
-    if
-        player:getCurrentMission(xi.mission.log_id.ASA) == xi.mission.id.asa.THAT_WHICH_CURDLES_BLOOD and
-        guildMember == 150995375 and
-        canRankUp >= 3
-    then
-        local item = 0
-        local asaStatus = player:getCharVar('ASA_Status')
-
-        -- TODO: Other Enfeebling Kits
-        if asaStatus == 0 then
-            item = 2779
-        else
-            printf('Error: Unknown ASA Status Encountered <%u>', asaStatus)
-        end
-
-        -- The Parameters are Item IDs for the Recipe
-        player:startEvent(944, item, 2773, 917, 917, 2776, 4103)
-    else
-        player:startEvent(648, testItem, realSkill, rankCap, guildMember, expertQuestStatus, 0, 0, 0)
-    end
+    player:startEvent(648, testItem, realSkill, rankCap, guildMember, expertQuestStatus, 0, 0, 0)
 end
 
 -- 648  649  760  761  762  763  764  765  770  771  772  773  774  775  944  914

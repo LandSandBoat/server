@@ -66,6 +66,7 @@ entity.onTrigger = function(player, npc)
         end
     end
 
+    -- TODO: Convert this quest to interaction.
     if moralManifest == xi.questStatus.QUEST_ACCEPTED and player:getCharVar('moral') == 1 then
         player:startEvent(700)
     elseif
