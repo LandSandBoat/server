@@ -647,7 +647,7 @@ xi.mod =
     SONG_DURATION_BONUS             = 454, --
     SONG_SPELLCASTING_TIME          = 455, --
 
-    AVATARS_FAVOR_ENHANCE           = 630, -- Adds 1 rank to avatars favor
+    AVATARS_FAVOR_ENHANCE           = 141, -- Adds 1 rank to avatars favor
 
     QUICK_DRAW_DMG                  = 411, --
     QUICK_DRAW_MACC                 = 191, -- Quick draw magic accuracy
@@ -885,7 +885,7 @@ xi.mod =
     COVER_DURATION                  = 967, -- Increases Cover Duration
     WYVERN_SUBJOB_TRAITS            = 974, -- Adds subjob traits to wyvern
     GARDENING_WILT_BONUS            = 975, -- Increases the number of Vanadays a plant can survive before it wilts
-    CALL_BEAST_DELAY                = 572, -- Lowers Call Beast recast
+    CALL_BEAST_DELAY                = 273, -- Lowers Call Beast recast
 
     WYVERN_BREATH_MACC              = 986,
     REGEN_BONUS                     = 989,

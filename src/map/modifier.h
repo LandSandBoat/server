@@ -486,7 +486,7 @@ enum class Mod
     CHARM_CHANCE        = 391,  // extra chance to charm (light+apollo staff ect)
     FERAL_HOWL_DURATION = 503,  // +20% duration per merit when wearing augmented Monster Jackcoat +2
     JUG_LEVEL_RANGE     = 564,  // Decreases the level range of spawned jug pets. Maxes out at 2.
-    CALL_BEAST_DELAY    = 572,  // Lowers Call Beast recast
+    CALL_BEAST_DELAY    = 273,  // Lowers Call Beast recast
     SIC_READY_RECAST    = 1052, // SIC/Ready recast reduction (seconds)
     TANDEM_STRIKE_POWER = 271,  // Grants a bonus to your and your pet's accuracy and magic accuracy when you and your pet are attacking the same target.
     TANDEM_BLOW_POWER   = 272,  // Reduces amount of TP gained by enemies when striking them if you and your pet are attacking the same target.
@@ -583,7 +583,7 @@ enum class Mod
     BP_DELAY_II               = 541,  // Blood Pact Delay Reduction II
     BP_DAMAGE                 = 126,  // Blood Pact: Rage Damage increase percentage
     BLOOD_BOON                = 913,  // Occasionally cuts down MP cost of Blood Pact abilities. Does not affect abilities that require Astral Flow.
-    AVATARS_FAVOR_ENHANCE     = 630,  // Enhances Avatars Favor Effect by 1 tier per point
+    AVATARS_FAVOR_ENHANCE     = 141,  // Enhances Avatars Favor Effect by 1 tier per point
     AVATAR_LVL_BONUS          = 1040, // Avatar: Lv.+ (Increases all avatar's base level above 99)
     CARBUNCLE_LVL_BONUS       = 1041, // Carbuncle: Lv.+ (Increases Carbuncle's base level above 99)
     CAIT_SITH_LVL_BONUS       = 1042, // Cait Sith: Lv.+ (Increases Cait Sith's base level above 99)
@@ -1012,9 +1012,8 @@ enum class Mod
     // 570 through 825 used by WS DMG mods these are not spares.
     //
     // SPARE IDs:
-    // 141
     // 220 to 222
-    // 273 to 276
+    // 274 to 276
     //
     // SPARE = 1082 and onward
 };
