@@ -130,6 +130,7 @@ std::unique_ptr<sql::ResultSet> db::query(std::string const& rawQuery)
         auto stmt = state.connection->createStatement();
         try
         {
+            DebugSQL(fmt::format("query: {}", rawQuery));
             return std::unique_ptr<sql::ResultSet>(stmt->executeQuery(rawQuery.data()));
         }
         catch (const std::exception& e)

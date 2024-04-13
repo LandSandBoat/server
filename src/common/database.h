@@ -59,8 +59,10 @@ namespace db
         inline constexpr bool always_false_v = always_false<T>::value;
 
         template <typename T>
-        void bindValue(std::unique_ptr<sql::PreparedStatement>& stmt, int counter, T&& value)
+        void bindValue(std::unique_ptr<sql::PreparedStatement>& stmt, int& counter, T&& value)
         {
+            DebugSQL(fmt::format("binding {}: {}", counter, value));
+
             if constexpr (std::is_same_v<std::decay_t<T>, int32>)
             {
                 stmt->setInt(counter, value);
@@ -117,8 +119,6 @@ namespace db
             {
                 static_assert(always_false_v<T>, "Unsupported type in binder");
             }
-
-            ++counter;
         }
 
         // Base case
@@ -131,7 +131,7 @@ namespace db
         template <typename T>
         void binder(std::unique_ptr<sql::PreparedStatement>& stmt, int& counter, T&& first)
         {
-            bindValue(stmt, counter, std::forward<T>(first));
+            bindValue(stmt, ++counter, std::forward<T>(first));
             binder(stmt, counter);
         }
 
@@ -139,7 +139,7 @@ namespace db
         template <typename T, typename... Args>
         void binder(std::unique_ptr<sql::PreparedStatement>& stmt, int& counter, T&& first, Args&&... rest)
         {
-            bindValue(stmt, counter, std::forward<T>(first));
+            bindValue(stmt, ++counter, std::forward<T>(first));
             binder(stmt, counter, std::forward<Args>(rest)...);
         }
     } // namespace detail
@@ -182,8 +182,10 @@ namespace db
             auto& stmt = lazyPreparedStatements[rawQuery];
             try
             {
-                // NOTE: 1-indexed!
-                auto counter = 1;
+                DebugSQL(fmt::format("preparedStmt: {}", rawQuery));
+
+                // NOTE: Everything is 1-indexed, but we're going to increment right away insider binder!
+                auto counter = 0;
                 db::detail::binder(stmt, counter, std::forward<Args>(args)...);
                 return std::unique_ptr<sql::ResultSet>(stmt->executeQuery());
             }
