@@ -4,7 +4,7 @@
 require('scripts/globals/crafting/crafting_utils')
 -----------------------------------
 xi = xi or {}
-xi.crafting = {}
+xi.crafting = xi.crafting or {}
 
 local npcTable =
 {

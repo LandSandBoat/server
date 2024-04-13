@@ -4,7 +4,7 @@
 require('scripts/globals/utils')
 -----------------------------------
 xi = xi or {}
-xi.crafting = {}
+xi.crafting = xi.crafting or {}
 -----------------------------------
 xi.crafting.guildTable =
 {
@@ -21,13 +21,9 @@ xi.crafting.guildTable =
 }
 
 xi.crafting.hasJoinedGuild = function(player, guildId)
-    local joinedGuildMask = player:getCharVar('Guild_Member') + 1
+    local joinedGuildMask = player:getCharVar('Guild_Member')
 
     return utils.mask.getBit(joinedGuildMask, guildId)
-end
-
-xi.crafting.signupGuild = function(player, guildId)
-    player:incrementCharVar('Guild_Member', bit.lshift(1, guildId + 1))
 end
 
 xi.crafting.getCraftSkillCap = function(player, skillId)

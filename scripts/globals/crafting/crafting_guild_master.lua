@@ -6,145 +6,241 @@ require('scripts/globals/npc_util')
 require('scripts/globals/utils')
 -----------------------------------
 xi = xi or {}
-xi.crafting = {}
-
--- Keys are based on the player's current rank in the guild in order to be eligible
--- for the next rank-up test.  Example: At Amateur, a value of 256 is required to
--- be eligible for the test to move to Recruit
-
--- This magic numbers make no sense to me. At all.
--- Example:
--- At rank Amateur (Very first rank): I should have (in the database) 80+ skill points, AKA, lvl 8+ to be eligible for next rank.
--- At rank Craftsman (Last rank before the specialitation): I should have 680+ skill points, AKA lvl 68+ to be eligible for next rank.
--- So what does 256 or 2182 even mean?
-local requiredSkillForRank =
-{
-    [xi.craftRank.AMATEUR]    = 256,
-    [xi.craftRank.RECRUIT]    = 577,
-    [xi.craftRank.INITIATE]   = 898,
-    [xi.craftRank.NOVICE]     = 1219,
-    [xi.craftRank.APPRENTICE] = 1540,
-    [xi.craftRank.JOURNEYMAN] = 1861,
-    [xi.craftRank.CRAFTSMAN]  = 2182,
-    [xi.craftRank.ARTISAN]    = 2503,
-    [xi.craftRank.ADEPT]      = 2824,
-    [xi.craftRank.VETERAN]    = 3145,
-}
-
--- Table for Test Items
-local testItemsByNPC =
-{
-    ['Abd-al-Raziq']   = {   937,  4157,  4163,   947, 16543,  4116, 16479,  4120, 16609, 10792 },
-    ['Peshi_Yohnts']   = { 13442, 13441, 13323, 13459, 13091, 17299, 16420, 12508, 13987, 11058 },
-    ['Ponono']         = { 13583, 13584, 13204, 13075, 12723, 13586, 13752, 12612, 14253, 11000 },
-    ['Piketo-Puketo']  = {  4355,  4416,  4489,  4381,  4413,  4558,  4546,  4440,  4561,  5930 },
-    ['Thubu_Parohren'] = {  4401,  4379,  4469,  4480,  4462,  4479,  4471,  4478,  4474,  5817 },
-    ['Reinberta']      = { 12496, 12497, 12495, 13082, 13446, 13084, 12545, 13125, 16515, 11060 },
-    ['Faulpie']        = { 13594, 16386, 13588, 13195, 12571, 12572, 12980, 12702, 12447, 10577 },
-    ['Mevreauche']     = { 16530, 12299, 16512, 16650, 16651, 16559, 12427, 16577, 12428, 19788 },
-    ['Ghemp']          = { 16530, 12299, 16512, 16650, 16651, 16559, 12427, 16577, 12428, 19788 },
-    ['Cheupirudaux']   = {    22,    23, 17354, 17348, 17053, 17156, 17054,    56, 17101, 18884 },
-}
+xi.crafting = xi.crafting or {}
 
 -----------------------------------
--- getTestItem Action
+-- Data
 -----------------------------------
-xi.crafting.getTestItem = function(player, npc, craftID)
-    local nextRank  = player:getSkillRank(craftID) + 1
+local npcTable =
+{
+    ['Thubu_Parohren'] = { 10009, xi.guild.FISHING,      xi.skill.FISHING,      xi.item.WATER_CRYSTAL, xi.ki.ANGLERS_ALMANAC,       'FishingExpertQuest'      },
+    ['Cheupirudaux'  ] = {   621, xi.guild.WOODWORKING,  xi.skill.WOODWORKING,  xi.item.WIND_CRYSTAL,  xi.ki.WAY_OF_THE_CARPENTER,  'WoodworkingExpertQuest'  },
+    ['Ghemp'         ] = {   101, xi.guild.SMITHING,     xi.skill.SMITHING,     xi.item.FIRE_CRYSTAL,  xi.ki.WAY_OF_THE_BLACKSMITH, 'SmithingExpertQuest'     },
+    ['Mevreauche'    ] = {   626, xi.guild.SMITHING,     xi.skill.SMITHING,     xi.item.FIRE_CRYSTAL,  xi.ki.WAY_OF_THE_BLACKSMITH, 'SmithingExpertQuest'     },
+    ['Reinberta'     ] = {   300, xi.guild.GOLDSMITHING, xi.skill.GOLDSMITHING, xi.item.FIRE_CRYSTAL,  xi.ki.WAY_OF_THE_GOLDSMITH,  'GoldsmithingExpertQuest' },
+    ['Ponono'        ] = { 10011, xi.guild.CLOTHCRAFT,   xi.skill.CLOTHCRAFT,   xi.item.EARTH_CRYSTAL, xi.ki.WAY_OF_THE_WEAVER,     'ClothcraftExpertQuest'   },
+    ['Faulpie'       ] = {   648, xi.guild.LEATHERCRAFT, xi.skill.LEATHERCRAFT, xi.item.DARK_CRYSTAL,  xi.ki.WAY_OF_THE_TANNER,     'LeathercraftExpertQuest' },
+    ['Peshi_Yohnts'  ] = { 10016, xi.guild.BONECRAFT,    xi.skill.BONECRAFT,    xi.item.WIND_CRYSTAL,  xi.ki.WAY_OF_THE_BONEWORKER, 'BonecraftExpertQuest'    },
+    ['Abd-al-Raziq'  ] = {   120, xi.guild.ALCHEMY,      xi.skill.ALCHEMY,      xi.item.WATER_CRYSTAL, xi.ki.WAY_OF_THE_ALCHEMIST,  'AlchemyExpertQuest'      },
+    ['Piketo-Puketo' ] = { 10013, xi.guild.COOKING,      xi.skill.COOKING,      xi.item.FIRE_CRYSTAL,  xi.ki.WAY_OF_THE_CULINARIAN, 'CookingExpertQuest'      },
+}
 
-    return testItemsByNPC[npc:getName()][nextRank]
-end
+-- TODO: Enum this items. This PR is already massive.
+local testItemTable =
+{
+    [xi.guild.FISHING     ] = {  4401,  4379,  4469,  4480,  4462,  4479,  4471,  4478,  4474,  5817 },
+    [xi.guild.WOODWORKING ] = {    22,    23, 17354, 17348, 17053, 17156, 17054,    56, 17101, 18884 },
+    [xi.guild.SMITHING    ] = { 16530, 12299, 16512, 16650, 16651, 16559, 12427, 16577, 12428, 19788 },
+    [xi.guild.GOLDSMITHING] = { 12496, 12497, 12495, 13082, 13446, 13084, 12545, 13125, 16515, 11060 },
+    [xi.guild.CLOTHCRAFT  ] = { 13583, 13584, 13204, 13075, 12723, 13586, 13752, 12612, 14253, 11000 },
+    [xi.guild.LEATHERCRAFT] = { 13594, 16386, 13588, 13195, 12571, 12572, 12980, 12702, 12447, 10577 },
+    [xi.guild.BONECRAFT   ] = { 13442, 13441, 13323, 13459, 13091, 17299, 16420, 12508, 13987, 11058 },
+    [xi.guild.ALCHEMY     ] = {   937,  4157,  4163,   947, 16543,  4116, 16479,  4120, 16609, 10792 },
+    [xi.guild.COOKING     ] = {  4355,  4416,  4489,  4381,  4413,  4558,  4546,  4440,  4561,  5930 },
+}
 
--- canGetNewRank Action
-local function canGetNewRank(player, skillLvl, craftId)
-    local requiredSkill = requiredSkillForRank[player:getSkillRank(craftId)]
+local function giveNewRank(player, guildId, skillId, newRank)
+    -- Raise rank.
+    player:setSkillRank(skillId, newRank)
 
-    if
-        requiredSkill and
-        skillLvl >= requiredSkill
-    then
-        return true
+    -- Reset guild points for the day.
+    if player:getCharVar('[GUILD]currentGuild') == guildId + 1 then
+        player:setCharVar('[GUILD]daily_points', 1)
     end
 
-    return false
+    -- Set local var to complete trade after event.
+    player:setLocalVar('CompleteTrade', 1)
 end
 
 -----------------------------------
--- tradeTestItem Action
+-- NPC Functions
 -----------------------------------
-xi.crafting.tradeTestItem = function(player, npc, trade, craftID)
-    local guildId    = craftID - 48
-    local skillLvL   = player:getSkillLevel(craftID)
-    local testItemId = xi.crafting.getTestItem(player, npc, craftID)
+xi.crafting.guildMasterOnTrade = function(player, npc, trade)
+    local npcName = npc:getName()
+    local eventId = npcTable[npcName][1] + 1 -- Trade event = Trigger event + 1
+    local guildId = npcTable[npcName][2]
+    local skillId = npcTable[npcName][3]
+
+    -- Get test item and new rank.
     local newRank    = 0
+    local testItem   = 0
+    local skillLevel = xi.crafting.getRealSkill(player, skillId)
+    local skillCap   = xi.crafting.getCraftSkillCap(player, skillId)
 
+    if skillLevel >= skillCap - 2 then
+        newRank  = player:getSkillRank(skillId) + 1
+        testItem = testItemTable[guildId][newRank]
+    end
+
+    -- Check trade.
     if
-        canGetNewRank(player, skillLvL, craftID) and
-        npcUtil.tradeHasExactly(trade, testItemId)
+        trade:hasItemQty(testItem, 1) and
+        trade:getItemCount() == 1
     then
-        newRank = player:getSkillRank(craftID) + 1
+        -- Expert quest.
+        if
+            newRank >= xi.craftRank.EXPERT and           -- Check if new rank is the last one. (Tied to mini-quest)
+            player:hasKeyItem(npcTable[npcName][5]) and  -- Check if player has appropiate Key Item.
+            player:getCharVar(npcTable[npcName][6]) == 2 -- Check if player has gotten quest dialog.
+        then
+            if
+                (guildId ~= xi.guild.FISHING and trade:getItem():getSignature() == player:getName()) or
+                guildId == xi.guild.FISHING
+            then
+                player:setCharVar(npcTable[npcName][6], 0)
+                giveNewRank(player, guildId, skillId, newRank)
+                player:startEvent(eventId, 0, 0, 0, 0, newRank, 1)
+            else
+                player:startEvent(eventId, 0, 0, 0, 0, newRank, 0)
+            end
 
-        if player:getCharVar('[GUILD]currentGuild') == guildId + 1 then
-            player:setCharVar('[GUILD]daily_points', 1)
+        -- All else.
+        elseif newRank ~= xi.craftRank.AMATEUR then
+            giveNewRank(player, guildId, skillId, newRank)
+            player:startEvent(eventId, 0, 0, 0, 0, newRank, 0)
+        end
+    end
+end
+
+xi.crafting.guildMasterOnTrigger = function(player, npc)
+    local npcName = npc:getName()
+    local eventId = npcTable[npcName][1]
+    local guildId = npcTable[npcName][2]
+    local skillId = npcTable[npcName][3]
+    local keyItem = npcTable[npcName][5]
+
+    -- Event parameters
+    local testItem       = os.time()                                     -- Parameter 1: Current time OR Test Item if applicable.
+    local skillLevel     = xi.crafting.getRealSkill(player, skillId)     -- Parameter 2: Player real level on concrete craft.
+    local skillCap       = xi.crafting.getCraftSkillCap(player, skillId) -- Parameter 3: Player max level on concrete craft.
+    local guildsJoined   = player:getCharVar('Guild_Member')             -- Parameter 4: Bitmask with guilds joined.
+    local questStatus    = 0                                             -- Parameter 5: Used for expert quest.
+    local artisanCount   = 0                                             -- Parameter 7: Number of crafts at Artisan rank or higher.
+    local artisanBitmask = 0                                             -- Parameter 8: Bitmask of craft guilds at Artisan rank or higher.
+
+    -- Calculate parameter 1 (Test item)
+    if skillLevel >= skillCap - 2 then
+        testItem = testItemTable[guildId][player:getSkillRank(skillId) + 1]
+    end
+
+    -- Calculate parameter 5 (Quest status)
+    local questProgress = player:getCharVar(npcTable[npcName][6])
+
+    if questProgress >= 1 then
+        questStatus = questStatus + 512 -- Set bit 9
+
+        if player:hasKeyItem(keyItem) then
+            questStatus = questStatus + 1 -- Set bit 1
+        end
+
+        if questProgress >= 2 then
+            questStatus = questStatus + 1024 -- Set bit 10
         end
     end
 
-    return newRank
-end
+    -- Calculate parameters 7 and 8 (Used for rank renouncement)
+    -- Note 1: It cycles. First time returns params. Second doesnt. Third does. And so on.
+    -- Note 2: Highest level craft cannot be renounced.
+    if
+        guildId ~= xi.guild.FISHING and
+        player:getLocalVar('skipRenounceDialog') == 0
+    then
+        local rankChecked       = 0
+        local highestSkillId    = 0
+        local highestSkillLevel = 0
+        local currentSkillLevel = 0
 
------------------------------------
--- Guild Master event parameters
------------------------------------
--- 1: Test item ID OR current vanadiel time.
--- 2: Player REAL Skill at current guild craft.
--- 3: Player REAL Skill cap at current guild craft.
--- 4: Bitmask. First 9 bits used for guilds joined.
-    -- Bit 0 = Fishing
-    -- Bit 4 = Clothcraft
-    -- Bit 8 = Cooking
-    -- Higher bits unknown, but used.
--- 5: Expert Quest status.
--- 6: ???
--- 7: COUNT for the number of guilds at rank ARTISAN or higher. This count seems to cycle between it and 0, for rank renouncement trigger.
--- 8: ???
+        -- Track highest skill. This one wont appear in renounce list.
+        for skillChecked = xi.skill.WOODWORKING, xi.skill.COOKING do
+            currentSkillLevel = player:getCharSkillLevel(skillChecked)
 
------------------------------------
--- Rank Renouncement functions
------------------------------------
-xi.crafting.unionRepresentativeEventUpdateRenounce = function(player, craftID)
-    local ID = zones[player:getZoneID()]
-
-    player:setSkillRank(craftID, 6)
-    player:setSkillLevel(craftID, 700)
-    player:messageSpecial(ID.text.RENOUNCE_CRAFTSMAN, 0, craftID - 49)
-end
-
-xi.crafting.unionRepresentativeTriggerRenounceCheck = function(player, eventId, realSkill, rankCap, param3)
-    if player:getLocalVar('skipRenounceDialog') == 0 then
-        local count   = 0
-        local bitmask = 0
-
-        for craftID = xi.skill.WOODWORKING, xi.skill.COOKING do
-            local rank = player:getSkillRank(craftID)
-
-            if rank >= xi.craftRank.ARTISAN then
-                count = count + 1
-            else
-                -- This needs checking. Probably made-up.
-                bitmask = bit.bor(bitmask, bit.lshift(1, craftID - 48))
+            if currentSkillLevel > highestSkillLevel then
+                highestSkillLevel = currentSkillLevel
+                highestSkillId    = skillChecked
             end
         end
 
-        if count >= 2 then
-            player:setLocalVar('skipRenounceDialog', 1)
+        -- Params 7 and 8.
+        for skillChecked = xi.skill.WOODWORKING, xi.skill.COOKING do
+            rankChecked = player:getSkillRank(skillChecked)
 
-            -- TODO: Param 3 is taken directly from captures, but now we know this is incorrect.
-            -- TODO: bitmask needs checking.
-            player:startEvent(eventId, VanadielTime(), realSkill, rankCap, param3, 0, 0, count, bitmask)
+            -- Param 7: Count crafts over craftsman rank.
+            if rankChecked >= xi.craftRank.ARTISAN then
+                artisanCount = artisanCount + 1
+            end
 
-            return true
+            -- Param 8: Full mask except craft ids that CAN be renounced.
+            if
+                rankChecked < xi.craftRank.ARTISAN or
+                skillChecked == highestSkillId
+            then
+                artisanBitmask = bit.bor(artisanBitmask, bit.lshift(1, skillChecked - 48))
+            end
+        end
+
+        player:setLocalVar('skipRenounceDialog', 1)
+    else
+        player:setLocalVar('skipRenounceDialog', 0)
+    end
+
+    player:startEvent(eventId, testItem, skillLevel, skillCap, guildsJoined, questStatus, 0, artisanCount, artisanBitmask)
+end
+
+xi.crafting.guildMasterOnEventFinish = function(player, csid, option, npc)
+    local ID      = zones[player:getZoneID()]
+    local npcName = npc:getName()
+    local eventId = npcTable[npcName][1]
+    local guildId = npcTable[npcName][2]
+
+    -- Trigger onEventFinish
+    if csid == eventId then
+
+        -- Signup Event.
+        if option == 1 then
+            local crystalId = npcTable[npcName][4] -- Crystal
+
+            if player:getFreeSlotsCount() == 0 then
+                player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, crystalId)
+            else
+                player:messageSpecial(ID.text.ITEM_OBTAINED, crystalId)
+                player:addItem(crystalId)
+                player:incrementCharVar('Guild_Member', bit.lshift(1, guildId))
+            end
+
+        -- Expert quest: Start.
+        elseif option == 2 then
+            if xi.crafting.hasJoinedGuild(player, guildId) then
+                player:setCharVar('FishingExpertQuest', 1)
+            end
+
+        -- Expert quest fish (after getting KI)
+        elseif option == 3 then
+            player:setCharVar('FishingExpertQuest', 2)
+
+        -- Rank renouncement.
+        elseif
+            option >= xi.skill.WOODWORKING and
+            option <= xi.skill.COOKING
+        then
+            player:setSkillRank(option, xi.craftRank.CRAFTSMAN)
+            player:setSkillLevel(option, 700)
+            player:messageSpecial(ID.text.RENOUNCE_CRAFTSMAN, 0, option - 49)
+        end
+
+    -- Trade onEventFinish
+    elseif csid == eventId + 1 then
+        if player:getLocalVar('CompleteTrade') == 1 then
+            player:tradeComplete()
+            player:setLocalVar('CompleteTrade', 0)
         end
     end
 
-    return false
+    -- Handle RoE.
+    if guildId ~= xi.guild.FISHING then
+        local recordId = guildId + 99
+
+        if player:hasEminenceRecord(recordId) then
+            xi.roe.onRecordTrigger(player, recordId)
+        end
+    end
 end
