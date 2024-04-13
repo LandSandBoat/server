@@ -5866,10 +5866,10 @@ namespace battleutils
     }
 
     /************************************************************************
-    *                                                                       *
-    *   Does the random deal effect to a specific character (reset ability) *
-    *                                                                       *
-    ************************************************************************/
+     *                                                                       *
+     *   Does the random deal effect to a specific character (reset ability) *
+     *                                                                       *
+     ************************************************************************/
     bool DoRandomDealToEntity(CCharEntity* PChar, CCharEntity* PTarget)
     {
         std::vector<uint16> ResetCandidateList;
@@ -5899,18 +5899,17 @@ namespace battleutils
             }
         }
 
-        if (ResetCandidateList.size() == 0)
+        if (ResetCandidateList.size() == 0 || ActiveCooldownList.size() == 0)
         {
             // Evade because we have no abilities that can be reset
             return false;
         }
 
-        uint8 loadedDeck = PChar->PMeritPoints->GetMeritValue(MERIT_LOADED_DECK, PChar);
+        uint8 loadedDeck       = PChar->PMeritPoints->GetMeritValue(MERIT_LOADED_DECK, PChar);
         uint8 loadedDeckChance = 50 + loadedDeck;
-        uint8 resetTwoChance = std::min<int8>(PChar->getMod(Mod::RANDOM_DEAL_BONUS), 50);
+        uint8 resetTwoChance   = std::min<int8>(PChar->getMod(Mod::RANDOM_DEAL_BONUS), 50);
 
-        // Loaded Deck Merit Version
-        if (loadedDeck && ActiveCooldownList.size() > 0)
+        if (loadedDeck > 0) // Loaded Deck Merit Version
         {
             if (ActiveCooldownList.size() > 1)
             {
@@ -5964,9 +5963,6 @@ namespace battleutils
 
             return true;
         }
-
-        // How did you get here!?
-        return false;
     }
 
     /************************************************************************

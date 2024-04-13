@@ -12,8 +12,9 @@ abilityObject.onAbilityCheck = function(player, target, ability)
 end
 
 abilityObject.onUseAbility = function(caster, target, ability, action)
+    ability:setMsg(xi.msg.basic.JA_RECEIVES_EFFECT_3)
     if not caster:doRandomDeal(target) then
-        ability:setMsg(xi.msg.basic.EVADES)
+        ability:setMsg(xi.msg.basic.JA_MISS_2)
     end
 end
 

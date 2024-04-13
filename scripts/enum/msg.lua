@@ -148,6 +148,7 @@ xi.msg.basic =
     JA_REMOVE_EFFECT_2     = 321, -- <user> uses <ability>. <target>'s <status> wears off.
     JA_NO_EFFECT_2         = 323, -- <user> uses <ability>. No effect on <target>. (2 line msg)
     JA_MISS_2              = 324, -- <user> uses <ability>, but misses <target>. (includes target name)
+    JA_RECEIVES_EFFECT_3   = 441, -- <user> receives the effect of <ability>.
     JA_RECOVERS_MP         = 451, -- <user> uses <ability>. <target> regains <amount> MP.
     JA_ATK_ENHANCED        = 285, -- <target>'s attacks are enhanced.
     STATUS_BOOST           = 364, -- <user> uses <ability>. All of <target>'s status parameters are boosted.
