@@ -26,10 +26,13 @@ zoneObject.onZoneIn = function(player, prevZone)
         player:getZPos() == 0
     then
         if prevZone == xi.zone.OPEN_SEA_ROUTE_TO_AL_ZAHBI then
+            player:setPos(-11, 5, -142, 192)
             cs = 201
-        elseif prevZone == xi.zone.SILVER_SEA_ROUTE_TO_AL_ZAHBI then
-            cs = 204
-        elseif prevZone == xi.zone.SILVER_SEA_ROUTE_TO_NASHMAU then
+        elseif
+            prevZone == xi.zone.SILVER_SEA_ROUTE_TO_AL_ZAHBI or
+            prevZone == xi.zone.SILVER_SEA_ROUTE_TO_NASHMAU
+        then
+            player:setPos(11, 5, 142, 64)
             cs = 204
         else
             -- MOG HOUSE EXIT
