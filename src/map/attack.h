@@ -111,12 +111,12 @@ private:
     bool                      m_isCountered{ false };
     bool                      m_isCovered{ false }; // Flag: Is someone covering the victim?
     bool                      m_anticipated{ false };
-    bool                      m_isFirstSwing{ false };  // Flag: Is this attack the first swing?
-    float                     m_damageRatio{ false };   // The damage ratio.
-    int32                     m_damage{ 0 };            // The damage for this attack.
-    int32                     m_trickAttackDamage{ 0 }; // The damage from trick attack.
-    int32                     m_naturalH2hDamage{ 0 };  // The damage from natural H2H.
-    int32                     m_baseDamage{ 0 };        // The base damage.
+    bool                      m_isFirstSwing{ false };        // Flag: Is this attack the first swing?
+    float                     m_damageRatio{ false };         // The damage ratio.
+    int32                     m_damage{ 0 };                  // The damage for this attack.
+    int32                     m_bonusBasePhysicalDamage{ 0 }; // The raw increase of base weapon damage from trick attack/consume mana.
+    int32                     m_naturalH2hDamage{ 0 };        // The damage from natural H2H.
+    int32                     m_baseDamage{ 0 };              // The base damage.
 };
 
 #endif
