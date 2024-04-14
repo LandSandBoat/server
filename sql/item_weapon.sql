@@ -4837,7 +4837,7 @@ INSERT INTO `item_weapon` VALUES (22279,'staunch_tathlum_+1',0,0,0,0,0,0,1,0,0,0
 INSERT INTO `item_weapon` VALUES (22280,'yamarang',0,0,0,0,0,0,1,0,0,0);                  -- Accuracy+15 Magic Accuracy+15 Evasion+15 Magic Evasion+15 "Store TP"+3 "Waltz" potency +5%
 INSERT INTO `item_weapon` VALUES (22281,'knobkierrie',0,0,0,0,0,0,1,0,0,0);               -- Attack+23 Weapon skill damage +6%
 INSERT INTO `item_weapon` VALUES (22282,'grudge',27,0,0,0,0,0,1,294,1,0);                 -- DMG:1 Delay:294
-INSERT INTO `item_weapon` VALUES (22283,'marvelous_cheer',42,0,0,0,0,0,1,240,0,0);
+INSERT INTO `item_weapon` VALUES (22283,'marvelous_cheer',0,0,0,0,0,0,1,240,0,0);         -- Says "Wind Instrument" but is actually cosmetic and should not unlock singing skill or a second song for sub BRD
 INSERT INTO `item_weapon` VALUES (22284,'abdhaljs_tome',0,0,0,0,0,0,1,0,0,0);             -- A copy of a book written by the great Abdhaljs. He has the only original copy. Hallmark Bonus: +200% Gallantry Bonus: +200%
 INSERT INTO `item_weapon` VALUES (22285,'beryllium_bolt',26,0,0,0,0,1,1,192,108,0);       -- DMG:108 Delay:192 Ranged Attack+12
 INSERT INTO `item_weapon` VALUES (22286,'c._palug_stone',0,0,0,0,0,0,0,0,0,0);
