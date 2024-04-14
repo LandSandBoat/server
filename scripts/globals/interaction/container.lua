@@ -152,6 +152,7 @@ function Container:countSetVarBits(player, name)
         if bit.band(currentValue, 1) == 1 then
             count = count + 1
         end
+
         currentValue = bit.rshift(currentValue, 1)
     end
 
