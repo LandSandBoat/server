@@ -13077,6 +13077,12 @@ bool CLuaBaseEntity::doRandomDeal(CLuaBaseEntity* PTarget)
         return false;
     }
 
+    if (!PTarget || !PTarget->m_PBaseEntity)
+    {
+        ShowWarning("Invalid entity type passed as target (%s).", m_PBaseEntity->getName());
+        return false;
+    }
+
     return battleutils::DoRandomDealToEntity(static_cast<CCharEntity*>(m_PBaseEntity), static_cast<CCharEntity*>(PTarget->m_PBaseEntity));
 }
 

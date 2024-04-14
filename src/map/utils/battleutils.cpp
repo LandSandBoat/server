@@ -5872,8 +5872,8 @@ namespace battleutils
      ************************************************************************/
     bool DoRandomDealToEntity(CCharEntity* PChar, CCharEntity* PTarget)
     {
-        std::vector<uint16> ResetCandidateList;
-        std::vector<uint16> ActiveCooldownList;
+        std::vector<uint16> resetCandidateList;
+        std::vector<uint16> activeCooldownList;
 
         if (PChar == nullptr || PTarget == nullptr)
         {
@@ -5891,15 +5891,15 @@ namespace battleutils
             // Do not reset 2hrs or Random Deal
             if (recast->ID != 0 && recast->ID != 196)
             {
-                ResetCandidateList.push_back(i);
+                resetCandidateList.push_back(i);
                 if (recast->RecastTime > 0)
                 {
-                    ActiveCooldownList.push_back(i);
+                    activeCooldownList.push_back(i);
                 }
             }
         }
 
-        if (ResetCandidateList.size() == 0 || ActiveCooldownList.size() == 0)
+        if (resetCandidateList.size() == 0 || activeCooldownList.size() == 0)
         {
             // Evade because we have no abilities that can be reset
             return false;
@@ -5911,21 +5911,21 @@ namespace battleutils
 
         if (loadedDeck > 0) // Loaded Deck Merit Version
         {
-            if (ActiveCooldownList.size() > 1)
+            if (activeCooldownList.size() > 1)
             {
                 // Shuffle active cooldowns and take first (loaded deck)
-                std::shuffle(std::begin(ActiveCooldownList), std::end(ActiveCooldownList), xirand::rng());
+                std::shuffle(std::begin(activeCooldownList), std::end(activeCooldownList), xirand::rng());
                 loadedDeckChance = 100;
             }
 
             if (loadedDeckChance >= xirand::GetRandomNumber(100))
             {
-                PTarget->PRecastContainer->DeleteByIndex(RECAST_ABILITY, ActiveCooldownList.at(0));
+                PTarget->PRecastContainer->DeleteByIndex(RECAST_ABILITY, activeCooldownList.at(0));
 
                 // Reset 2 abilities by chance
-                if (ActiveCooldownList.size() > 1 && resetTwoChance >= xirand::GetRandomNumber(100))
+                if (activeCooldownList.size() > 1 && resetTwoChance >= xirand::GetRandomNumber(100))
                 {
-                    PTarget->PRecastContainer->DeleteByIndex(RECAST_ABILITY, ActiveCooldownList.at(1));
+                    PTarget->PRecastContainer->DeleteByIndex(RECAST_ABILITY, activeCooldownList.at(1));
                 }
                 if (PChar != PTarget)
                 {
@@ -5940,19 +5940,19 @@ namespace battleutils
         }
         else // Standard Version
         {
-            if (ResetCandidateList.size() > 1)
+            if (resetCandidateList.size() > 1)
             {
                 // Shuffle if more than 1 ability
-                std::shuffle(std::begin(ResetCandidateList), std::end(ResetCandidateList), xirand::rng());
+                std::shuffle(std::begin(resetCandidateList), std::end(resetCandidateList), xirand::rng());
             }
 
             // Reset first ability (shuffled or only)
-            PTarget->PRecastContainer->DeleteByIndex(RECAST_ABILITY, ResetCandidateList.at(0));
+            PTarget->PRecastContainer->DeleteByIndex(RECAST_ABILITY, resetCandidateList.at(0));
 
             // Reset 2 abilities by chance (could be 2 abilitie that don't need resets)
-            if (ResetCandidateList.size() > 1 && ActiveCooldownList.size() > 1 && resetTwoChance >= xirand::GetRandomNumber(1, 100))
+            if (resetCandidateList.size() > 1 && activeCooldownList.size() > 1 && resetTwoChance >= xirand::GetRandomNumber(1, 100))
             {
-                PTarget->PRecastContainer->DeleteByIndex(RECAST_ABILITY, ResetCandidateList.at(1));
+                PTarget->PRecastContainer->DeleteByIndex(RECAST_ABILITY, resetCandidateList.at(1));
             }
 
             if (PChar != PTarget)
