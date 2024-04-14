@@ -603,6 +603,9 @@ namespace mobutils
         if (PMob->getMobMod(MOBMOD_DUAL_WIELD))
         {
             PMob->m_dualWield = true;
+            // if mob is going to dualWield then need to have sub slot
+            // assume it is the same damage as the main slot
+            static_cast<CItemWeapon*>(PMob->m_Weapons[SLOT_SUB])->setDamage(GetWeaponDamage(PMob, SLOT_MAIN));
         }
 
         uint16 fSTR = GetBaseToRank(PMob->strRank, mLvl);

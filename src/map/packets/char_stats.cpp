@@ -66,7 +66,7 @@ CCharStatsPacket::CCharStatsPacket(CCharEntity* PChar)
     ref<uint16>(0x2C) = std::clamp<int16>(PChar->getMod(Mod::MND), -999 + PChar->stats.MND, 999 - PChar->stats.MND);
     ref<uint16>(0x2E) = std::clamp<int16>(PChar->getMod(Mod::CHR), -999 + PChar->stats.CHR, 999 - PChar->stats.CHR);
 
-    ref<uint16>(0x30) = PChar->ATT();
+    ref<uint16>(0x30) = PChar->ATT(SLOT_MAIN);
     ref<uint16>(0x32) = PChar->DEF();
 
     ref<uint16>(0x34) = PChar->getMod(Mod::FIRE_MEVA);

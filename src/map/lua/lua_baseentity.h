@@ -677,7 +677,7 @@ public:
     void  setStatDebilitation(uint16 statDebil);
 
     // Damage Calculation
-    uint16 getStat(uint16 statId); // STR,DEX,VIT,AGI,INT,MND,CHR,ATT,DEF
+    uint16 getStat(uint16 statId, sol::variadic_args va); // STR,DEX,VIT,AGI,INT,MND,CHR,ATT,DEF
     uint16 getACC();
     uint16 getEVA();
     int    getRACC();
