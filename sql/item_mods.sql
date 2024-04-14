@@ -61366,6 +61366,12 @@ INSERT INTO `item_mods` VALUES (26218,9,3);  -- DEX: 3
 INSERT INTO `item_mods` VALUES (26218,10,3); -- VIT: 3
 INSERT INTO `item_mods` VALUES (26218,11,3); -- AGI: 3
 
+-- Naji's Loop
+INSERT INTO `item_mods` VALUES (26219,27,-1); -- ENMITY: -1
+INSERT INTO `item_mods` VALUES (26219,170,1); -- FASTCAST: 1
+INSERT INTO `item_mods` VALUES (26219,260,1); -- CURE_POTENCY_II: 1
+INSERT INTO `item_mods` VALUES (26219,374,1); -- CURE_POTENCY: 1
+
 -- Sroda Ring
 INSERT INTO `item_mods` VALUES (26221,8,15);  -- STR: 15
 INSERT INTO `item_mods` VALUES (26221,9,-20); -- DEX: -20
