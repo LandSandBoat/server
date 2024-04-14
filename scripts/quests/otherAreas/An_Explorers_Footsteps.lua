@@ -34,7 +34,7 @@ local payOut =
 
 local function handleTabletTurnInEvent(player, csid, option)
     player:confirmTrade()
-    npcUtil.giveCurrency(player, 'gil', payOut[quest:getVar(player, "currentTablet")])
+    npcUtil.giveCurrency(player, 'gil', payOut[quest:getVar(player, 'currentTablet')])
 
     if quest:countSetVarBits(player, 'tabletsTurnedIn') == 15 then
         npcUtil.giveKeyItem(player, xi.ki.MAP_OF_THE_CRAWLERS_NEST)
@@ -250,8 +250,9 @@ quest.sections =
             ['Abelard'] =
             {
                 onTrigger = function(player, npc)
-                    if not player:hasItem(xi.item.CLAY_TABLET) and
-                       not player:hasItem(xi.item.LUMP_OF_SELBINA_CLAY)
+                    if
+                        not player:hasItem(xi.item.CLAY_TABLET) and
+                        not player:hasItem(xi.item.LUMP_OF_SELBINA_CLAY)
                     then
                         if not quest:getVar(player, 'choseToKeepSearching') then
                             return quest:event(42) -- player declined to start looking for monuments when asked after turning in last clay tablet - ask player if he/she wants to start searching again
@@ -284,7 +285,7 @@ quest.sections =
 
                 onTrade = function(player, npc, trade)
                     if npcUtil.tradeHasExactly(trade, xi.item.CLAY_TABLET) then
-                        if quest:isVarBitsSet(player, 'tabletsTurnedIn', quest:getVar(player, "currentTablet") - 1) then -- player had already turned in a clay tablet from the stone monument they are trying to turn in. Not sure if retail has them keep the clay tablet or makes them drop it.
+                        if quest:isVarBitsSet(player, 'tabletsTurnedIn', quest:getVar(player, 'currentTablet') - 1) then -- player had already turned in a clay tablet from the stone monument they are trying to turn in. Not sure if retail has them keep the clay tablet or makes them drop it.
                             player:tradeComplete(false)
                             return quest:event(45)
                         end
@@ -293,7 +294,7 @@ quest.sections =
                             return quest:event(47)
                         end
 
-                        if quest:getVar(player, 'requestedTablet') == quest:getVar(player, "currentTablet") then
+                        if quest:getVar(player, 'requestedTablet') == quest:getVar(player, 'currentTablet') then
                             return quest:event(41) -- the tablet he asked for
                         else
                             return quest:event(46) -- not the one he asked for
@@ -344,6 +345,7 @@ quest.sections =
             onTrigger = function(player, npc)
                 return quest:event(48):replaceDefault()
             end,
+
             },
         },
     },
