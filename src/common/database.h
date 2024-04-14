@@ -29,7 +29,18 @@
 #include <string>
 #include <unordered_map>
 
+// TODO: mariadb-connector-cpp triggers this. Remove once they fix it.
+// 4263 'function': member function does not override any base class member functions
+#ifdef WIN32
+#pragma warning(push)
+#pragma warning(disable : 4263)
+#endif
+
 #include <conncpp.hpp>
+
+#ifdef WIN32
+#pragma warning(pop)
+#endif
 
 // @note Everything in database-land is 1-indexed, not 0-indexed.
 namespace db
@@ -211,7 +222,7 @@ namespace db
     // @note This is a workaround for the fact that MariaDB's C++ connector hasn't yet implemented ResultSet::rowUpdated(), ResultSet::rowInserted(),
     //       and ResultSet::rowDeleted().
     template <typename... Args>
-    std::pair<std::unique_ptr<sql::ResultSet>, std::size_t> preparedStmtWithRowCount(std::string const& rawQuery, Args&&... args)
+    std::pair<std::unique_ptr<sql::ResultSet>, std::size_t> preparedStmtWithAffectedRows(std::string const& rawQuery, Args&&... args)
     {
         TracyZoneScoped;
         TracyZoneString(rawQuery);
