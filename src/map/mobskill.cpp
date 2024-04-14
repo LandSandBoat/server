@@ -56,7 +56,7 @@ bool CMobSkill::isAoE() const
 
 bool CMobSkill::isConal() const
 {
-    return m_Aoe == 4;
+    return m_Aoe == 4 || m_Aoe == 8;
 }
 
 bool CMobSkill::isSingle() const
