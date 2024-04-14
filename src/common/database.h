@@ -272,14 +272,16 @@ namespace db
 
         TracyZoneScoped;
 
-        std::memset(&destination, 0x00, sizeof(T));
-
         // If we use getString on a null blob we will get back garbage data.
         // This will introduce difficult to track down crashes.
         if (!rset->isNull(blobKey.c_str()))
         {
             auto blobStr = rset->getString(blobKey.c_str());
-            std::memcpy(&destination, blobStr.c_str(), sizeof(T));
+            // Login server creates new chars with null blobs. Map server then initializes.
+            // We don't want to overwrite the initialized map data with null blobs / 0 values.
+            // See: login_helpers.cpp saveCharacter() and charutils::LoadChar
+            std::memset(&destination, 0x00, sizeof(T));
+            std::memcpy(&destination, blobStr.c_str(), std::min(sizeof(T), blobStr.length()));
         }
     }
 
