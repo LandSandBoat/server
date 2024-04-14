@@ -5035,6 +5035,11 @@ INSERT INTO `mob_spell_lists` VALUES ('Zirnitra',501,359,75,255);  -- silencega 
 INSERT INTO `mob_spell_lists` VALUES ('Pyuu_the_Spatemaker',502,171,1,255); -- water_iii (1~255)
 INSERT INTO `mob_spell_lists` VALUES ('Pyuu_the_Spatemaker',502,201,1,255); -- waterga_iii (1~255)
 
+-- Erle
+INSERT INTO `mob_spell_lists` VALUES ('Erle',503,156,1,255); -- aero_iii (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Erle',503,185,1,255); -- aeroga_ii (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Erle',503,208,1,255); -- tornado (1~255)
+
 -- Next Available: 503
 
 /*!40000 ALTER TABLE `mob_spell_lists` ENABLE KEYS */;
