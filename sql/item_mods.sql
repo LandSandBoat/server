@@ -28459,7 +28459,8 @@ INSERT INTO `item_mods` VALUES (15697,20,6); -- WATER_RES: 6
 INSERT INTO `item_mods` VALUES (15697,26,2); -- RACC: 2
 
 -- Sneaking Boots
-INSERT INTO `item_mods` VALUES (15698,1,9); -- DEF: 9
+INSERT INTO `item_mods` VALUES (15698,1,9);   -- DEF: 9
+INSERT INTO `item_mods` VALUES (15698,358,1); -- STEALTH: 1 -- TODO: Stealth trait needs retail verification, real value unknown
 
 -- Templar Sabatons
 INSERT INTO `item_mods` VALUES (15699,1,11);  -- DEF: 11
