@@ -746,7 +746,7 @@ INSERT INTO `mob_skills` VALUES (728,64,'sweet_breath',1,40.0,2000,1500,4,0,0,0,
 INSERT INTO `mob_skills` VALUES (730,438,'meikyo_shisui',0,7.0,2000,0,1,2,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (731,18,'mijin_gakure',1,20.0,2000,0,4,2,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (732,438,'call_wyvern',0,7.0,2000,0,1,2,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (733,477,'jump',0,9.5,2000,0,4,0,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (733,351,'jump',0,9.5,2000,0,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (734,438,'astral_flow',0,7.0,2000,0,1,2,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (735,19,'eagle_eye_shot',0,25.0,2000,0,4,2,0,0,0,0,0); -- goblin
 INSERT INTO `mob_skills` VALUES (736,20,'eagle_eye_shot',0,25.0,2000,0,4,2,0,0,0,0,0); -- antica
