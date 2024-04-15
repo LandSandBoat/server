@@ -42,7 +42,7 @@ local function handleTabletTurnInEvent(player, csid, option)
     end
 
     if option == 100 then -- player asked if he/she wants to keep looking for stone monuments and chooses to keep looking
-        npcUtil.giveItem(player, xi.items.LUMP_OF_SELBINA_CLAY)
+        npcUtil.giveItem(player, xi.item.LUMP_OF_SELBINA_CLAY)
         quest:setVar(player, 'choseNotToSearch', 0)
     elseif option == 110 then -- player asked if he/she wants to keep looking for stone monuments and declines to keep looking
         quest:setVar(player, 'choseNotToSearch', 1)
@@ -56,9 +56,9 @@ local function handleTabletTurnInEvent(player, csid, option)
 end
 
 local function handleStoneMonumentTrade (player, npc, trade, currentTablet)
-    if npcUtil.tradeHasExactly(trade, xi.items.LUMP_OF_SELBINA_CLAY) then
+    if npcUtil.tradeHasExactly(trade, xi.item.LUMP_OF_SELBINA_CLAY) then
         player:confirmTrade()
-        npcUtil.giveItem(player, xi.items.CLAY_TABLET)
+        npcUtil.giveItem(player, xi.item.CLAY_TABLET)
         quest:setVar(player, 'currentTablet', currentTablet)
     end
 end
@@ -78,7 +78,7 @@ quest.sections =
             {
                 [40] = function(player, csid, option, npc)
                     if option == 100 then --player answers 'of course.' to agree to do the quest
-                        npcUtil.giveItem(player, xi.items.LUMP_OF_SELBINA_CLAY)
+                        npcUtil.giveItem(player, xi.item.LUMP_OF_SELBINA_CLAY)
                         quest:begin(player)
                         quest:setVar(player, 'requestedTablet', 1) --he initially asks for tablet from West Ronfaure
                     end
@@ -252,8 +252,8 @@ quest.sections =
             {
                 onTrigger = function(player, npc)
                     if
-                        not player:hasItem(xi.items.CLAY_TABLET) and
-                        not player:hasItem(xi.items.LUMP_OF_SELBINA_CLAY)
+                        not player:hasItem(xi.item.CLAY_TABLET) and
+                        not player:hasItem(xi.item.LUMP_OF_SELBINA_CLAY)
                     then
                         if quest:getVar(player, 'choseNotToSearch') == 1 then
                             return quest:event(42) -- player declined to start looking for monuments when asked after turning in last clay tablet - ask player if he/she wants to start searching again
@@ -263,7 +263,7 @@ quest.sections =
 
                     else -- remind player of a monument to go to
                         local tabletStatus = {} -- make list of which tablets are turned in nd which aren't
-                        for i=0, 16 do
+                        for i = 0, 16 do
                             tabletStatus[i + 1] = quest:isVarBitsSet(player, 'tabletsTurnedIn', i)
                         end
 
@@ -285,7 +285,7 @@ quest.sections =
                 end,
 
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, xi.items.CLAY_TABLET) then
+                    if npcUtil.tradeHasExactly(trade, xi.item.CLAY_TABLET) then
                         if quest:isVarBitsSet(player, 'tabletsTurnedIn', quest:getVar(player, 'currentTablet') - 1) then -- player had already turned in a clay tablet from the stone monument they are trying to turn in. Not sure if retail has them keep the clay tablet or makes them drop it.
                             player:tradeComplete(false)
                             return quest:event(45)
@@ -311,14 +311,14 @@ quest.sections =
             {
                 [42] = function(player, csid, option, npc)
                     if option == 100 then -- player said they want to start searching for stone monuments
-                        npcUtil.giveItem(player, xi.items.LUMP_OF_SELBINA_CLAY)
+                        npcUtil.giveItem(player, xi.item.LUMP_OF_SELBINA_CLAY)
                         quest:setVar(player, 'choseNotToSearch', 0)
                         quest:setVar(player, 'currentTablet', 0) -- setting to nil out of abundance of caution - player should not have any stone monument tablet
                     end
                 end,
 
                 [44] = function(player, csid, option, npc)
-                    npcUtil.giveItem(player, xi.items.LUMP_OF_SELBINA_CLAY)
+                    npcUtil.giveItem(player, xi.item.LUMP_OF_SELBINA_CLAY)
                     quest:setVar(player, 'currentTablet', 0) -- setting to nil out of abundance of caution - player should not have any stone monument tablet
                 end,
 
