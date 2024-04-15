@@ -248,8 +248,10 @@ namespace battleutils
     bool    WeatherMatchesElement(WEATHER weather, uint8 element);
     bool    DrawIn(CBattleEntity* PEntity, CMobEntity* PMob, float offset);
     void    DoWildCardToEntity(CCharEntity* PCaster, CCharEntity* PTarget, uint8 roll);
-    void    AddTraits(CBattleEntity* PEntity, TraitList_t* TraitList, uint8 level);
-    bool    HasClaim(CBattleEntity* PEntity, CBattleEntity* PTarget);
+    bool    DoRandomDealToEntity(CCharEntity* PChar, CCharEntity* PTarget);
+
+    void AddTraits(CBattleEntity* PEntity, TraitList_t* TraitList, uint8 level);
+    bool HasClaim(CBattleEntity* PEntity, CBattleEntity* PTarget);
 
     uint32 CalculateSpellCastTime(CBattleEntity*, CMagicState*);
     uint16 CalculateSpellCost(CBattleEntity*, CSpell*);
