@@ -567,6 +567,7 @@ public:
     bool isAlive();
     bool isInAssault();
     bool isInDynamis();
+    bool isInMogHouse();
     bool hasImmunity(uint32 imID);
     bool isAsleep();
     bool isMounted();
