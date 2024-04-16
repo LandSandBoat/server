@@ -367,7 +367,10 @@ xi.instance.onEventUpdate = function(player, csid, option, npc)
 
     if party ~= nil then
         for _, v in pairs(party) do
-            if v:getID() ~= player:getID() then
+            if
+                v:getID() ~= player:getID() and
+                v:getZoneID() == player:getZoneID()
+            then
                 -- Check entry requirements for party
                 if not checkEntryReqs(v, instanceId) then
                     player:messageText(npc, ID.text.MEMBER_NO_REQS, false)
@@ -377,7 +380,7 @@ xi.instance.onEventUpdate = function(player, csid, option, npc)
                 end
 
                 -- Check everyone is in range
-                if v:getZoneID() == player:getZoneID() and v:checkDistance(player) > 50 then
+                if v:checkDistance(player) > 50 then
                     player:messageText(npc, ID.text.MEMBER_TOO_FAR, false)
                     player:instanceEntry(npc, 1)
 
@@ -414,19 +417,47 @@ xi.instance.onInstanceCreatedCallback = function(player, instance)
     -- If you're in the official entrance zone, try and playout the
     -- entrance animation. Otherwise: go straight to the instance
     if player:getZoneID() == instance:getEntranceZoneID() then
+        -- join initiating player as commander
+        player:setInstance(instance)
+
         -- This packet will trigger the end of the blocking
         -- cutscene and xi.instance.onEventFinish will handle
         -- the transportation
         for _, v in ipairs(player:getParty()) do
-            if v:getID() ~= player:getID() then
-                v:startEvent(unpack(lookupEntry[4]))
-            end
+            if v:getZoneID() == player:getZoneID() then
+                if v:getID() ~= player:getID() then
+                    -- player will be brought into instance either way
+                    -- this makes the animation trigger reliably
+                    v:release()
+                    v:startEvent(unpack(lookupEntry[4]))
+                end
 
-            v:setInstance(instance)
-            local npc = player:getEventTarget()
-            if npc ~= nil then
-                v:instanceEntry(npc, 4)
+                v:setInstance(instance)
+                local npc = player:getEventTarget()
+                if npc ~= nil then
+                    v:instanceEntry(npc, 4)
+                end
+
+                v:timer(35000, function(playerArg)
+                    -- failsafe to bring all players into instance
+                    -- taking care not to shadow any existing variables
+                    -- if a player doesn't receive the event packet, the whole party will be stuck in blackscreen
+                    -- timer is destroyed if onEventFinish works properly and player gets zoned
+                    -- a properly-functioning event loop will take 20s to zoning into the instance
+                    local instanceArg = playerArg:getInstance()
+                    if instanceArg then
+                        print(fmt('Player {} failed to cleanly transition into instance event, forcing entry via setPos.', playerArg:getName()))
+                        playerArg:setPos(0, 0, 0, 0, instanceArg:getZone():getID())
+                    end
+                end)
             end
+        end
+
+        -- finally, send commander in
+        player:startEvent(unpack(lookupEntry[4])) -- will fail if previous event is working as it should, otherwise catches secondary event to enter
+        local npc = player:getEventTarget()
+        if npc ~= nil then
+            player:instanceEntry(npc, 4)
         end
     else
         for _, v in ipairs(player:getParty()) do
