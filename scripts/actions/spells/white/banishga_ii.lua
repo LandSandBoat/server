@@ -14,6 +14,7 @@ spellObject.onSpellCast = function(caster, target, spell)
         local gearModifier = caster:getMod(xi.mod.BANISH_POTENCY)
         target:addStatusEffectEx(xi.effect.BANISH_SDT_DEBUFF, 0, 2, 0, duration, 0, gearModifier, 0, 0)
     end
+    
     return xi.spells.damage.useDamageSpell(caster, target, spell)
 end
 

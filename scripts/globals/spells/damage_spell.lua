@@ -312,7 +312,7 @@ xi.spells.damage.calculateBaseDamage = function(caster, target, spellId, spellGr
         then
             baseSpellDamageBonus = baseSpellDamageBonus + caster:getJobPointLevel(xi.jp.STRATEGEM_EFFECT_III) * 2
         end
-        
+
         -- Banish: Afflatus Misery
         -- Source: https://wiki.ffo.jp/html/17218.html
         if
@@ -331,7 +331,7 @@ xi.spells.damage.calculateBaseDamage = function(caster, target, spellId, spellGr
                 local range = 195 - 135 -- Damage Taken Tiers
                 local scale = (miseryValue - 135) / range -- Linear scaling between tiers based on misery.
                 miseryBonus = math.floor(scale * 50 + 50)
-            elseif misery > 45 then
+            elseif miseryValue > 45 then
                 local range = 135 - 45 -- Damage Taken Tiers
                 local scale = (miseryValue - 45) / range -- Linear scaling between tiers based on misery.
                 miseryBonus = math.floor(scale * 40 + 10)
@@ -341,9 +341,15 @@ xi.spells.damage.calculateBaseDamage = function(caster, target, spellId, spellGr
 
             if spellId == xi.magic.spell.BANISH then
                 miseryBonus = miseryBonus
-            elseif spellId == xi.magic.spell.BANISH_II or spellId == xi.magic.spell.BANISHGA then
+            elseif
+                spellId == xi.magic.spell.BANISH_II or
+                spellId == xi.magic.spell.BANISHGA
+            then
                 miseryBonus = miseryBonus * 1.5
-            elseif spellId == xi.magic.spell.BANISH_III  or spellId == xi.magic.spell.BANISHGA_II then
+            elseif
+                spellId == xi.magic.spell.BANISH_III  or
+                spellId == xi.magic.spell.BANISHGA_II
+            then
                 miseryBonus = miseryBonus * 2.0
             end
 

@@ -11,8 +11,7 @@ effectObject.onEffectGain = function(target, effect)
             local sdtModPhys    = target:getMod(physSDT[i])
             local reductionPhys = (1000 - sdtModPhys) * (0.50 * gearModifier)
 
-           effect:addMod(physSDT[i], reductionPhys)
-           print(gearModifier)
+            effect:addMod(physSDT[i], reductionPhys)
         end
 
         for i = 1, #xi.magic.specificDmgTakenMod do
@@ -62,7 +61,7 @@ effectObject.onEffectGain = function(target, effect)
             local sdtModPhys    = target:getMod(physSDT[i])
             local reductionPhys = (1000 - sdtModPhys) * (0.95 * gearModifier)
 
-           effect:addMod(physSDT[i], reductionPhys)
+            effect:addMod(physSDT[i], reductionPhys)
         end
 
         for i = 1, #xi.magic.specificDmgTakenMod do

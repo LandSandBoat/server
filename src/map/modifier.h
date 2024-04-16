@@ -1006,6 +1006,7 @@ enum class Mod
 
     DAMAGE_LIMIT  = 1080,  // Damage Limit increase, found on some traits. It's a flat value added to max pDIF (maxpDIF + DL/100) https://www.bg-wiki.com/ffxi/Damage_Limit%2B
     DAMAGE_LIMITP = 1081,  // Damage Limit +% increase, found on some gear. It's a multiplier added after flat Damage Limit ((maxpDIF + DL/100)*(100 + DLP/100)/100) https://www.ffxiah.com/forum/topic/56649/physical-damage-limit/
+
     BANISH_POTENCY = 1082, // Multiplicative % bonus to banish SDT debuff effect.
 
     // IF YOU ADD ANY NEW MODIFIER HERE, ADD IT IN scripts/enum/mod.lua ASWELL!
