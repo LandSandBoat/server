@@ -676,8 +676,9 @@ xi.effect =
     HYSTERIA                 = 804, -- Used for Hysteroanima to stop after readying a weaponskill with no msg.
     TOMAHAWK                 = 805, -- Silent status effect inflicted by a Warrior using the "Tomahawk" job ability
     NUKE_WALL                = 806, -- Custom effect for NM type mobs only.
+    BANISH_SDT_DEBUFF        = 807, -- Handles Banish SDT debuff on undead mobs.
 
     -- 789
-    -- 807-1022
+    -- 808-1022
     -- PLACEHOLDER           = 1023 -- The client dat file seems to have only this many "slots", results of exceeding that are untested.
 }

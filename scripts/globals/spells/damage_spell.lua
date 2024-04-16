@@ -312,6 +312,54 @@ xi.spells.damage.calculateBaseDamage = function(caster, target, spellId, spellGr
         then
             baseSpellDamageBonus = baseSpellDamageBonus + caster:getJobPointLevel(xi.jp.STRATEGEM_EFFECT_III) * 2
         end
+
+        
+        -- WHM Merit: Banish Effect
+        if
+            (spellId >= xi.magic.spell.BANISH and spellId <= xi.magic.spell.BANISH_V) or
+            (spellId >= xi.magic.spell.BANISHGA and spellId <= xi.magic.spell.BANISHGA_V)
+        then
+            baseSpellDamageBonus = baseSpellDamageBonus + (caster:getMerit(xi.merit.BANISH_EFFECT) * 2)
+        end
+        
+        -- Banish: Afflatus Misery
+        -- Source: https://wiki.ffo.jp/html/17218.html
+        if
+            caster:hasStatusEffect(xi.effect.AFFLATUS_MISERY) and
+            (spellId >= xi.magic.spell.BANISH and spellId <= xi.magic.spell.BANISH_III) or
+            (spellId == xi.magic.spell.BANISHGA or spellId == xi.magic.spell.BANISHGA_II)
+        then
+            local miseryValue = caster:getMod(xi.mod.AFFLATUS_MISERY)
+            local miseryBonus = 0
+            local miseryMerit = 1 + caster:getMerit(xi.merit.ANIMUS_MISERY) / 100
+            miseryValue = miseryValue * miseryMerit -- Merits increase stored damage.
+
+            if miseryValue > 195 then
+                miseryBonus = 150
+            elseif miseryValue > 135 then
+                local range = 195 - 135 -- Damage Taken Tiers
+                local scale = (miseryValue - 135) / range -- Linear scaling between tiers based on misery.
+                miseryBonus = math.floor(scale * 50 + 50)
+            elseif misery > 45 then
+                local range = 135 - 45 -- Damage Taken Tiers
+                local scale = (miseryValue - 45) / range -- Linear scaling between tiers based on misery.
+                miseryBonus = math.floor(scale * 40 + 10)
+            else
+                miseryBonus = 0
+            end
+
+            if spellId == xi.magic.spell.BANISH then
+                miseryBonus = miseryBonus
+            elseif spellId == xi.magic.spell.BANISH_II or spellId == xi.magic.spell.BANISHGA then
+                miseryBonus = miseryBonus * 1.5
+            elseif spellId == xi.magic.spell.BANISH_III  or spellId == xi.magic.spell.BANISHGA_II then
+                miseryBonus = miseryBonus * 2.0
+            end
+
+            baseSpellDamageBonus = baseSpellDamageBonus + miseryBonus
+            --Afflatus Misery Mod Gets Used Up
+            caster:setMod(xi.mod.AFFLATUS_MISERY, 0)
+        end
     end
 
     -- Bonus to spell base damage from gear.
