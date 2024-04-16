@@ -1004,8 +1004,8 @@ enum class Mod
     DIG_BYPASS_FATIGUE = 1074, // Chocobo digging modifier found in "Blue Race Silks". Modifier works as a direct percent.
     BREATH_DMG_DEALT   = 1075, // Breath damage dealt
 
-    DAMAGE_LIMIT  = 1080,  // Damage Limit increase, found on some traits. It's a flat value added to max pDIF (maxpDIF + DL/100) https://www.bg-wiki.com/ffxi/Damage_Limit%2B
-    DAMAGE_LIMITP = 1081,  // Damage Limit +% increase, found on some gear. It's a multiplier added after flat Damage Limit ((maxpDIF + DL/100)*(100 + DLP/100)/100) https://www.ffxiah.com/forum/topic/56649/physical-damage-limit/
+    DAMAGE_LIMIT  = 1080, // Damage Limit increase, found on some traits. It's a flat value added to max pDIF (maxpDIF + DL/100) https://www.bg-wiki.com/ffxi/Damage_Limit%2B
+    DAMAGE_LIMITP = 1081, // Damage Limit +% increase, found on some gear. It's a multiplier added after flat Damage Limit ((maxpDIF + DL/100)*(100 + DLP/100)/100) https://www.ffxiah.com/forum/topic/56649/physical-damage-limit/
 
     BANISH_POTENCY = 1082, // Multiplicative % bonus to banish SDT debuff effect.
 

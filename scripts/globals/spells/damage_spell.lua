@@ -347,7 +347,7 @@ xi.spells.damage.calculateBaseDamage = function(caster, target, spellId, spellGr
             then
                 miseryBonus = miseryBonus * 1.5
             elseif
-                spellId == xi.magic.spell.BANISH_III  or
+                spellId == xi.magic.spell.BANISH_III or
                 spellId == xi.magic.spell.BANISHGA_II
             then
                 miseryBonus = miseryBonus * 2.0
