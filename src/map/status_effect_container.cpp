@@ -1562,7 +1562,7 @@ void CStatusEffectContainer::LoadStatusEffects()
 
             if (flags & EFFECTFLAG_OFFLINE_TICK)
             {
-                auto timestamp = _sql->GetUIntData(9);
+                auto timestamp = rset->getUInt("timestamp");
                 if (server_clock::now() < time_point() + std::chrono::seconds(timestamp) + std::chrono::seconds(duration))
                 {
                     duration = (uint32)std::chrono::duration_cast<std::chrono::seconds>(time_point() + std::chrono::seconds(timestamp) +
