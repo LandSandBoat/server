@@ -5145,12 +5145,13 @@ uint16 CLuaBaseEntity::getModelId()
  *  Function: setModelId()
  *  Purpose : Updates the Model ID of the entity
  *  Example : mob:setModelId(1168)
- *  Notes   :
+ *  Notes   : Humanoid entities can be passed a slot to change the modelid of that equipment
+ *              npc:setModelId(47, 5) -- Vermillion cloak
  ************************************************************************/
 
 void CLuaBaseEntity::setModelId(uint16 modelId, sol::object const& slotObj)
 {
-    if (m_PBaseEntity->objtype == TYPE_PC)
+    if (m_PBaseEntity->objtype == TYPE_PC || slotObj.is<uint8>())
     {
         SLOTTYPE slot = slotObj.is<uint8>() ? slotObj.as<SLOTTYPE>() : SLOT_MAIN;
 
@@ -5184,8 +5185,11 @@ void CLuaBaseEntity::setModelId(uint16 modelId, sol::object const& slotObj)
                 break;
         }
 
-        auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
-        PChar->pushPacket(new CCharAppearancePacket(PChar));
+        if (m_PBaseEntity->objtype == TYPE_PC)
+        {
+            auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
+            PChar->pushPacket(new CCharAppearancePacket(PChar));
+        }
     }
     else
     {
