@@ -199,7 +199,7 @@ namespace battleutils
     void  unCharm(CBattleEntity* PEntity);
 
     uint16 doSoulEaterEffect(CCharEntity* m_PChar, uint32 damage);
-    uint16 doConsumeManaEffect(CCharEntity* m_PChar, uint32 damage);
+    uint16 doConsumeManaEffect(CCharEntity* m_PChar);
     int32  getOverWhelmDamageBonus(CCharEntity* m_PChar, CBattleEntity* PDefender, int32 damage);
 
     void  TransferEnmity(CBattleEntity* PHateReceiver, CBattleEntity* PHateGiver, CMobEntity* PMob, uint8 percentToTransfer);
