@@ -225,6 +225,7 @@ xi.mod =
     DARK_ABSORB                     = 466, -- Occasionally absorbs dark elemental damage.
 
     CRITHITRATE                     = 165,
+    CRITHITRATE_ONLY_WEP            = 141,
     CRIT_DMG_INCREASE               = 421,
     RANGED_CRIT_DMG_INCREASE        = 964, -- Increases ranged critical damage by a percent
     ENEMYCRITRATE                   = 166,

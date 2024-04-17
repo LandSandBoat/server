@@ -144,7 +144,7 @@ namespace battleutils
     uint8 GetHitRate(CBattleEntity* PAttacker, CBattleEntity* PDefender);
     uint8 GetHitRate(CBattleEntity* PAttacker, CBattleEntity* PDefender, uint8 attackNumber);
     uint8 GetHitRate(CBattleEntity* PAttacker, CBattleEntity* PDefender, uint8 attackNumber, int8 offsetAccuracy);
-    uint8 GetCritHitRate(CBattleEntity* PAttacker, CBattleEntity* PDefender, bool ignoreSneakTrickAttack);
+    uint8 GetCritHitRate(CBattleEntity* PAttacker, CBattleEntity* PDefender, bool ignoreSneakTrickAttack, SLOTTYPE weaponSlot = SLOT_MAIN);
     uint8 GetRangedCritHitRate(CBattleEntity* PAttacker, CBattleEntity* PDefender);
     int8  GetDexCritBonus(CBattleEntity* PAttacker, CBattleEntity* PDefender);
     int8  GetAGICritBonus(CBattleEntity* PAttacker, CBattleEntity* PDefender);

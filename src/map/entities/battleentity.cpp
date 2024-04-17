@@ -2272,8 +2272,9 @@ bool CBattleEntity::OnAttack(CAttackState& state, action_t& action)
             }
             else
             {
+                SLOTTYPE weaponSlot = static_cast<SLOTTYPE>(attack.GetWeaponSlot());
                 // Set this attack's critical flag.
-                attack.SetCritical(xirand::GetRandomNumber(100) < battleutils::GetCritHitRate(this, PTarget, !attack.IsFirstSwing()));
+                attack.SetCritical(xirand::GetRandomNumber(100) < battleutils::GetCritHitRate(this, PTarget, !attack.IsFirstSwing(), weaponSlot));
 
                 this->PAI->EventHandler.triggerListener("MELEE_SWING_HIT", CLuaBaseEntity(this), CLuaBaseEntity(PTarget), CLuaAttack(&attack));
 
