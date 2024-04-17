@@ -70,10 +70,6 @@ global_objects=(
     Limbus
     SeasonalEvent
 
-    QUEST_AVAILABLE
-    QUEST_ACCEPTED
-    QUEST_COMPLETED
-
     onBattlefieldHandlerInitialise
     applyResistanceAddEffect
 
