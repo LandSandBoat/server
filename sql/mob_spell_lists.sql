@@ -5028,19 +5028,27 @@ INSERT INTO `mob_spell_lists` VALUES ('Slendlix_Spindlethumb',499,33,1,255); -- 
 -- Toxic Tamlyn (500)
 INSERT INTO `mob_spell_lists` VALUES ('Toxic_Tamlyn',500,231,1,255);  -- bio_ii (1~255)
 
--- Zirnitra
+-- Zirnitra (501)
 INSERT INTO `mob_spell_lists` VALUES ('Zirnitra',501,359,75,255);  -- silencega (75~255)
 
--- Pyuu the Spatemaker
+-- Pyuu the Spatemaker (502)
 INSERT INTO `mob_spell_lists` VALUES ('Pyuu_the_Spatemaker',502,171,1,255); -- water_iii (1~255)
 INSERT INTO `mob_spell_lists` VALUES ('Pyuu_the_Spatemaker',502,201,1,255); -- waterga_iii (1~255)
 
--- Erle
+-- Erle (503)
 INSERT INTO `mob_spell_lists` VALUES ('Erle',503,156,1,255); -- aero_iii (1~255)
 INSERT INTO `mob_spell_lists` VALUES ('Erle',503,185,1,255); -- aeroga_ii (1~255)
 INSERT INTO `mob_spell_lists` VALUES ('Erle',503,208,1,255); -- tornado (1~255)
 
--- Next Available: 503
+-- Mountain Worm NM (504)
+INSERT INTO `mob_spell_lists` VALUES ('Mountain_Worm_NM',504,54,28,255);  -- stoneskin (28~255)
+INSERT INTO `mob_spell_lists` VALUES ('Mountain_Worm_NM',504,162,68,76);  -- stone_iv (68~76)
+INSERT INTO `mob_spell_lists` VALUES ('Mountain_Worm_NM',504,191,63,255); -- stonega_iii (63~255)
+INSERT INTO `mob_spell_lists` VALUES ('Mountain_Worm_NM',504,210,54,255); -- quake (54~255)
+INSERT INTO `mob_spell_lists` VALUES ('Mountain_Worm_NM',504,238,18,50);  -- rasp (18~50)
+INSERT INTO `mob_spell_lists` VALUES ('Mountain_Worm_NM',504,258,7,255);  -- bind (7~255)
+
+-- Next Available: 505
 
 /*!40000 ALTER TABLE `mob_spell_lists` ENABLE KEYS */;
 UNLOCK TABLES;
