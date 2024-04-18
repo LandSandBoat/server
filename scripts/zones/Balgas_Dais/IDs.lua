@@ -47,8 +47,9 @@ zones[xi.zone.BALGAS_DAIS] =
             17375493,
         },
 
-        BITOSO = GetFirstID('Bitoso'),
-        PRUNE  = GetFirstID('Prune'),
+        BITOSO   = GetFirstID('Bitoso'),
+        DVOROVOI = GetFirstID('Dvorovoi'),
+        PRUNE    = GetFirstID('Prune'),
     },
     npc =
     {
