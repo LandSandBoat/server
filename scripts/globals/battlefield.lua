@@ -403,6 +403,7 @@ function Battlefield:new(data)
     obj.requiredItems    = data.requiredItems or {}
     obj.requiredKeyItems = data.requiredKeyItems or {}
     obj.lossEventParams  = data.lossEventParams or {}
+    obj.armouryCrates    = data.armouryCrates or false
 
     obj.sections = { { [obj.zoneId] = {} } }
     obj.groups   = {}
@@ -1086,10 +1087,11 @@ function Battlefield:addEssentialMobs(mobNames)
 end
 
 function Battlefield:handleAllMonstersDefeated(battlefield, mob)
-    local crateId = battlefield:getArmouryCrate()
+    local crateId = battlefield:getArmouryCrate() > 0 and battlefield:getArmouryCrate() or self.armouryCrates[battlefield:getArea()]
 
     if crateId ~= 0 then
         local crate = GetNPCByID(crateId)
+
         npcUtil.showCrate(crate)
         crate:addListener('ON_TRIGGER', 'TRIGGER_CRATE', utils.bind(self.handleOpenArmouryCrate, self))
     else
