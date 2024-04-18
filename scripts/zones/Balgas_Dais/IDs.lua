@@ -48,6 +48,7 @@ zones[xi.zone.BALGAS_DAIS] =
         },
 
         BITOSO = GetFirstID('Bitoso'),
+        PRUNE  = GetFirstID('Prune'),
     },
     npc =
     {
