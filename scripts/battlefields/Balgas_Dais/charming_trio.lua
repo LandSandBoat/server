@@ -17,32 +17,6 @@ local content = Battlefield:new({
     requiredItems    = { xi.item.CLOUDY_ORB, wearMessage = balgasID.text.A_CRACK_HAS_FORMED },
 })
 
-content.groups =
-{
-    {
-        mobIds =
-        {
-            {
-                balgasID.mob.PRUNE,
-                balgasID.mob.PRUNE + 1,
-                balgasID.mob.PRUNE + 2,
-            },
-
-            {
-                balgasID.mob.PRUNE + 4,
-                balgasID.mob.PRUNE + 5,
-                balgasID.mob.PRUNE + 6,
-            },
-
-            {
-                balgasID.mob.PRUNE + 8,
-                balgasID.mob.PRUNE + 9,
-                balgasID.mob.PRUNE + 10,
-            },
-        },
-    },
-}
-
 content:addEssentialMobs({ 'Prune', 'Pepper', 'Phoedme' })
 
 content.loot =

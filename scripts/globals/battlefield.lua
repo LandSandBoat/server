@@ -1087,7 +1087,14 @@ function Battlefield:addEssentialMobs(mobNames)
 end
 
 function Battlefield:handleAllMonstersDefeated(battlefield, mob)
-    local crateId = battlefield:getArmouryCrate() > 0 and battlefield:getArmouryCrate() or self.armouryCrates[battlefield:getArea()]
+    local crateId = battlefield:getArmouryCrate()
+
+    -- NOTE: Default to core returning us a value, but if that fails, use the fallback
+    -- definition if available.  This should only be used where mobIds table has to be
+    -- used instead of mobs!
+    if crateId == 0 and self.armouryCrates then
+        crateId = self.armouryCrates[battlefield:getArea()]
+    end
 
     if crateId ~= 0 then
         local crate = GetNPCByID(crateId)

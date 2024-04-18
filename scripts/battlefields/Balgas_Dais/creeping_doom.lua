@@ -17,18 +17,6 @@ local content = Battlefield:new({
     requiredItems    = { xi.item.SKY_ORB, wearMessage = balgasID.text.A_CRACK_HAS_FORMED },
 })
 
-content.groups =
-{
-    {
-        mobIds =
-        {
-            { balgasID.mob.BITOSO     },
-            { balgasID.mob.BITOSO + 2 },
-            { balgasID.mob.BITOSO + 4 },
-        },
-    },
-}
-
 content:addEssentialMobs({ 'Bitoso' })
 
 content.loot =
