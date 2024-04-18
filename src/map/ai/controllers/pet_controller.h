@@ -28,7 +28,7 @@ class CPetEntity;
 class CPetController : public CMobController
 {
 public:
-    CPetController(CPetEntity* PPet);
+    CPetController(CMobEntity* PPet);
 
     static constexpr float PetRoamDistance{ 2.1f };
     virtual void           DoRoamTick(time_point tick) override;
@@ -48,7 +48,7 @@ protected:
     virtual bool Ability(uint16 targid, uint16 abilityid) override;
 
 private:
-    CPetEntity* const PPet;
+    CMobEntity* const PPet;
 };
 
 #endif // _AI_CONTROLLER_H

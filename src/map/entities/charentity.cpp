@@ -1234,7 +1234,7 @@ void CCharEntity::OnWeaponSkillFinished(CWeaponSkillState& state, action_t& acti
         }
 
         PAI->TargetFind->reset();
-        // #TODO: revise parameters
+        // TODO: revise parameters
         if (PWeaponSkill->isAoE())
         {
             PAI->TargetFind->findWithinArea(PBattleTarget, AOE_RADIUS::TARGET, 10);
@@ -1549,7 +1549,7 @@ void CCharEntity::OnAbility(CAbilityState& state, action_t& action)
         action.actiontype = PAbility->getActionType();
         action.actionid   = PAbility->getID();
 
-        // #TODO: get rid of this to script, too
+        // TODO: get rid of this to script, too
         if (PAbility->isPetAbility())
         {
             CPetEntity* PPetEntity = dynamic_cast<CPetEntity*>(PPet);
@@ -1639,7 +1639,7 @@ void CCharEntity::OnAbility(CAbilityState& state, action_t& action)
                 PPet->PAI->MobSkill(PPetTarget, PAbility->getMobSkillID());
             }
         }
-        // #TODO: make this generic enough to not require an if
+        // TODO: make this generic enough to not require an if
         else if ((PAbility->isAoE() || (PAbility->getID() == ABILITY_LIEMENT && getMod(Mod::LIEMENT_EXTENDS_TO_AREA) > 0)) && this->PParty != nullptr)
         {
             PAI->TargetFind->reset();
@@ -1742,7 +1742,7 @@ void CCharEntity::OnAbility(CAbilityState& state, action_t& action)
 
         pushPacket(new CCharRecastPacket(this));
 
-        // #TODO: refactor
+        // TODO: refactor
         //  if (this->getMijinGakure())
         //{
         //     m_ActionType = ACTION_FALL;
@@ -1843,14 +1843,7 @@ void CCharEntity::OnRangedAttack(CRangeState& state, action_t& action)
     // loop for barrage hits, if a miss occurs, the loop will end
     for (uint8 i = 1; i <= hitCount; ++i)
     {
-        if (PTarget->StatusEffectContainer->HasStatusEffect(EFFECT_PERFECT_DODGE, 0))
-        {
-            actionTarget.messageID  = 32;
-            actionTarget.reaction   = REACTION::EVADE;
-            actionTarget.speceffect = SPECEFFECT::NONE;
-            hitCount                = i; // end barrage, shot missed
-        }
-        else if (xirand::GetRandomNumber(100) < battleutils::GetRangedHitRate(this, PTarget, isBarrage)) // hit!
+        if (xirand::GetRandomNumber(100) < battleutils::GetRangedHitRate(this, PTarget, isBarrage)) // hit!
         {
             // absorbed by shadow
             if (battleutils::IsAbsorbByShadow(PTarget, this))
@@ -2203,13 +2196,13 @@ void CCharEntity::OnItemFinish(CItemState& state, action_t& action)
         PItem->setLastUseTime(CVanaTime::getInstance()->getVanaTime());
 
         char extra[sizeof(PItem->m_extra) * 2 + 1];
-        sql->EscapeStringLen(extra, (const char*)PItem->m_extra, sizeof(PItem->m_extra));
+        _sql->EscapeStringLen(extra, (const char*)PItem->m_extra, sizeof(PItem->m_extra));
 
         const char* Query = "UPDATE char_inventory "
                             "SET extra = '%s' "
-                            "WHERE charid = %u AND location = %u AND slot = %u;";
+                            "WHERE charid = %u AND location = %u AND slot = %u";
 
-        sql->Query(Query, extra, this->id, PItem->getLocationID(), PItem->getSlotID());
+        _sql->Query(Query, extra, this->id, PItem->getLocationID(), PItem->getSlotID());
 
         if (PItem->getCurrentCharges() != 0)
         {
@@ -2379,13 +2372,13 @@ int32 CCharEntity::GetTimeRemainingUntilDeathHomepoint() const
 int32 CCharEntity::GetTimeCreated()
 {
     TracyZoneScoped;
-    const char* fmtQuery = "SELECT UNIX_TIMESTAMP(timecreated) FROM chars WHERE charid = %u;";
+    const char* fmtQuery = "SELECT UNIX_TIMESTAMP(timecreated) FROM chars WHERE charid = %u";
 
-    int32 ret = sql->Query(fmtQuery, id);
+    int32 ret = _sql->Query(fmtQuery, id);
 
-    if (ret != SQL_ERROR && sql->NumRows() != 0 && sql->NextRow() == SQL_SUCCESS)
+    if (ret != SQL_ERROR && _sql->NumRows() != 0 && _sql->NextRow() == SQL_SUCCESS)
     {
-        return sql->GetIntData(0);
+        return _sql->GetIntData(0);
     }
 
     return 0;
@@ -2954,5 +2947,5 @@ void CCharEntity::clearCharVarsWithPrefix(std::string const& prefix)
         ++iter;
     }
 
-    sql->Query("DELETE FROM char_vars WHERE charid = %u AND varname LIKE '%s%%';", this->id, prefix.c_str());
+    _sql->Query("DELETE FROM char_vars WHERE charid = %u AND varname LIKE '%s%%'", this->id, prefix.c_str());
 }

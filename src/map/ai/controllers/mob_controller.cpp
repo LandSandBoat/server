@@ -24,6 +24,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "ai/ai_container.h"
 #include "ai/helpers/targetfind.h"
 #include "ai/states/ability_state.h"
+#include "ai/states/inactive_state.h"
 #include "ai/states/magic_state.h"
 #include "ai/states/weaponskill_state.h"
 #include "common/utils.h"
@@ -185,8 +186,8 @@ void CMobController::TryLink()
         {
             if (PTarget->objtype == TYPE_PC)
             {
-                std::unique_ptr<CBasicPacket> errMsg;
-                if (PTarget->PPet->CanAttack(PMob, errMsg))
+                auto* PChar = dynamic_cast<CCharEntity*>(PTarget);
+                if (PChar && PChar->IsMobOwner(PMob))
                 {
                     petutils::AttackTarget(PTarget, PMob);
                 }
@@ -210,7 +211,9 @@ void CMobController::TryLink()
         for (auto& member : PMob->PParty->members)
         {
             CMobEntity* PPartyMember = dynamic_cast<CMobEntity*>(member);
-            if (!PPartyMember)
+            // Note if the mob to link with this one is a pet then do not link
+            // Pets only link with their masters
+            if (!PPartyMember || (PPartyMember && PPartyMember->PMaster))
             {
                 continue;
             }
@@ -222,7 +225,7 @@ void CMobController::TryLink()
                 if (PPartyMember->m_roamFlags & ROAMFLAG_IGNORE)
                 {
                     // force into attack action
-                    // #TODO
+                    // TODO
                     PPartyMember->PAI->Engage(PTarget->targid);
                 }
             }
@@ -490,7 +493,7 @@ bool CMobController::CanCastSpells()
     // smn can only cast spells if it has no pet
     if (PMob->GetMJob() == JOB_SMN)
     {
-        if (PMob->PPet == nullptr || !PMob->PPet->isDead())
+        if (PMob->PPet && !PMob->PPet->isDead())
         {
             return false;
         }
@@ -586,12 +589,15 @@ void CMobController::DoCombatTick(time_point tick)
         PMob->PAI->EventHandler.triggerListener("COMBAT_TICK", CLuaBaseEntity(PMob));
         luautils::OnMobFight(PMob, PTarget);
 
-        // Try to spellcast (this is done first so things like Chainspell spam is prioritised over TP moves etc.
-        if (IsSpecialSkillReady(currentDistance) && TrySpecialSkill())
+        if (PMob->PAI->IsCurrentState<CInactiveState>())
         {
             return;
         }
-        else if (IsSpellReady(currentDistance) && TryCastSpell())
+        else if (IsSpecialSkillReady(currentDistance) && TrySpecialSkill())
+        {
+            return;
+        }
+        else if (IsSpellReady(currentDistance) && TryCastSpell()) // Try to spellcast (this is done first so things like Chainspell spam is prioritised over TP moves etc.
         {
             return;
         }
@@ -690,7 +696,7 @@ void CMobController::Move()
 
         if (((currentDistance > closeDistance) || move) && PMob->PAI->CanFollowPath())
         {
-            // #TODO: can this be moved to scripts entirely?
+            // TODO: can this be moved to scripts entirely?
             if (PMob->getMobMod(MOBMOD_DRAW_IN) > 0)
             {
                 if (currentDistance >= PMob->GetMeleeRange() * 2 && battleutils::DrawIn(PTarget, PMob, PMob->GetMeleeRange() - 0.2f))
@@ -842,7 +848,7 @@ void CMobController::DoRoamTick(time_point tick)
 
         return;
     }
-    // #TODO
+    // TODO
     else if (PMob->GetDespawnTime() > time_point::min() && PMob->GetDespawnTime() < m_Tick)
     {
         Despawn();
@@ -957,7 +963,7 @@ void CMobController::DoRoamTick(time_point tick)
                 else if (PMob->CanRoam() && PMob->PAI->PathFind->RoamAround(PMob->m_SpawnPoint, PMob->GetRoamDistance(),
                                                                             (uint8)PMob->getMobMod(MOBMOD_ROAM_TURNS), PMob->m_roamFlags))
                 {
-                    // #TODO: #AIToScript (event probably)
+                    // TODO: #AIToScript (event probably)
                     if (PMob->m_roamFlags & ROAMFLAG_WORM)
                     {
                         // move down

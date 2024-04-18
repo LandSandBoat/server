@@ -27,26 +27,26 @@ ConnectServer::ConnectServer(int argc, char** argv)
     asio::io_context io_context;
 
     // clang-format off
-        gConsoleService->RegisterCommand("stats", "Print server runtime statistics",
-        [](std::vector<std::string>& inputs)
-        {
-            size_t uniqueIPs      = loginHelpers::getAuthenticatedSessions().size();
-            size_t uniqueAccounts = 0;
+    gConsoleService->RegisterCommand("stats", "Print server runtime statistics",
+    [](std::vector<std::string>& inputs)
+    {
+        size_t uniqueIPs      = loginHelpers::getAuthenticatedSessions().size();
+        size_t uniqueAccounts = 0;
 
-            for (auto& ipAddrMap: loginHelpers::getAuthenticatedSessions())
-            {
-                uniqueAccounts += loginHelpers::getAuthenticatedSessions()[ipAddrMap.first].size();
-            }
-            ShowInfo("Serving %u IP addresses with %u accounts\n", uniqueIPs, uniqueAccounts);
-        });
-
-        gConsoleService->RegisterCommand("exit", "Safely close the login server",
-        [&](std::vector<std::string>& inputs)
+        for (auto& ipAddrMap: loginHelpers::getAuthenticatedSessions())
         {
-            m_RequestExit = true;
-            io_context.stop();
-            gConsoleService->stop();
-        });
+            uniqueAccounts += loginHelpers::getAuthenticatedSessions()[ipAddrMap.first].size();
+        }
+        ShowInfo("Serving %u IP addresses with %u accounts\n", uniqueIPs, uniqueAccounts);
+    });
+
+    gConsoleService->RegisterCommand("exit", "Safely close the login server",
+    [&](std::vector<std::string>& inputs)
+    {
+        m_RequestExit = true;
+        io_context.stop();
+        gConsoleService->stop();
+    });
     // clang-format on
 
 #ifndef _WIN32

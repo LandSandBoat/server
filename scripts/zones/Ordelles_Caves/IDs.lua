@@ -62,7 +62,7 @@ zones[xi.zone.ORDELLES_CAVES] =
     },
     npc =
     {
-        TREASURE_CHEST = 17568192,
+        TREASURE_CHEST = GetFirstID('Treasure_Chest'),
     },
 }
 

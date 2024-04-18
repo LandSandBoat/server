@@ -71,9 +71,9 @@ zones[xi.zone.DEN_OF_RANCOR] =
     },
     npc =
     {
-        LANTERN_OFFSET  = 17433047,
-        DROP_GATE       = 17433051,
-        TREASURE_COFFER = 17433077,
+        LANTERN_OFFSET  = 17433048,
+        DROP_GATE       = 17433052,
+        TREASURE_COFFER = GetFirstID('Treasure_Coffer'),
     },
 }
 

@@ -122,8 +122,8 @@ zones[xi.zone.SEA_SERPENT_GROTTO] =
     },
     npc =
     {
-        TREASURE_CHEST  = 17498625,
-        TREASURE_COFFER = 17498626,
+        TREASURE_CHEST  = GetFirstID('Treasure_Chest'),
+        TREASURE_COFFER = GetFirstID('Treasure_Coffer'),
     },
 }
 

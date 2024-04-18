@@ -32,7 +32,7 @@ zones[xi.zone.SEALIONS_DEN] =
     },
     npc =
     {
-        AIRSHIP_DOOR_OFFSET = 16908420,
+        AIRSHIP_DOOR_OFFSET = 16908421,
     },
     aWarriorsPath =
     {

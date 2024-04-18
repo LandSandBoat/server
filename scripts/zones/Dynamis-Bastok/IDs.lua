@@ -93,7 +93,7 @@ zones[xi.zone.DYNAMIS_BASTOK] =
     {
         QM =
         {
-            [17539322] =
+            [17539323] =
             {
                 param = { 3354, 3409, 3410, 3411, 3412, 3413 },
                 trade =
@@ -102,10 +102,10 @@ zones[xi.zone.DYNAMIS_BASTOK] =
                     { item = { 3409, 3410, 3411, 3412, 3413 }, mob = 17539312 }, -- Arch Gu'Dha Effigy
                 }
             },
-            [17539323] = { trade = { { item = 3384, mob = 17539307 } } }, -- Zo'Pha Forgesoul
-            [17539324] = { trade = { { item = 3385, mob = 17539308 } } }, -- Ra'Gho Darkfount
-            [17539325] = { trade = { { item = 3386, mob = 17539310 } } }, -- Va'Zhe Pummelsong
-            [17539326] = { trade = { { item = 3387, mob = 17539311 } } }, -- Bu'Bho Truesteel
+            [17539324] = { trade = { { item = 3384, mob = 17539307 } } }, -- Zo'Pha Forgesoul
+            [17539325] = { trade = { { item = 3385, mob = 17539308 } } }, -- Ra'Gho Darkfount
+            [17539326] = { trade = { { item = 3386, mob = 17539310 } } }, -- Va'Zhe Pummelsong
+            [17539327] = { trade = { { item = 3387, mob = 17539311 } } }, -- Bu'Bho Truesteel
         },
     },
 }

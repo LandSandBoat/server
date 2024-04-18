@@ -52,7 +52,7 @@ zones[xi.zone.ULEGUERAND_RANGE] =
     },
     npc =
     {
-        WATERFALL = 16798112,
+        WATERFALL = 16798113,
         RABBIT_FOOTPRINT = 16798100,
     },
 }

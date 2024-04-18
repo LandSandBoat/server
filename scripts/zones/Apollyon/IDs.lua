@@ -106,9 +106,9 @@ zones[xi.zone.APOLLYON] =
         {
             PORTAL =
             {
-                16933230,
                 16933231,
                 16933232,
+                16933233,
             },
             ITEM_CRATES =
             {
@@ -177,9 +177,9 @@ zones[xi.zone.APOLLYON] =
         {
             PORTAL =
             {
+                16933240,
                 16933239,
-                16933238,
-                16933241,
+                16933242,
             },
             ITEM_CRATES =
             {
@@ -260,10 +260,10 @@ zones[xi.zone.APOLLYON] =
         {
             PORTAL =
             {
-                16933226,
                 16933227,
                 16933228,
-                16933224,
+                16933229,
+                16933225,
             },
             ITEM_CRATES =
             {
@@ -330,10 +330,10 @@ zones[xi.zone.APOLLYON] =
         {
             PORTAL =
             {
+                16933236,
                 16933235,
                 16933234,
-                16933233,
-                16933237,
+                16933238,
             },
             ITEM_CRATES =
             {

@@ -59,10 +59,10 @@ zones[xi.zone.BEADEAUX] =
     },
     npc =
     {
-        QM1             = 17379800,
-        TREASURE_CHEST  = 17379842,
-        TREASURE_COFFER = 17379843,
-        AFFLICTOR_BASE  = 17379801,
+        QM1             = 17379801,
+        TREASURE_CHEST  = GetFirstID('Treasure_Chest'),
+        TREASURE_COFFER = GetFirstID('Treasure_Coffer'),
+        AFFLICTOR_BASE  = 17379802,
     },
 }
 

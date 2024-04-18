@@ -11,7 +11,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local skillLevel = player:getSkillLevel(xi.skill.LEATHERCRAFT)
+    local skillLevel = xi.crafting.getRealSkill(player, xi.skill.LEATHERCRAFT)
     local cost = xi.crafting.getAdvImageSupportCost(player, xi.skill.LEATHERCRAFT)
 
     if xi.crafting.hasJoinedGuild(player, xi.crafting.guild.LEATHERCRAFT) then

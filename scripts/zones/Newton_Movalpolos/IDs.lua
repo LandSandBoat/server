@@ -39,9 +39,9 @@ zones[xi.zone.NEWTON_MOVALPOLOS] =
     },
     npc =
     {
-        DOOR_OFFSET          = 16826582, -- _0c0 in npc_list
-        FURNACE_HATCH_OFFSET = 16826607,
-        TREASURE_COFFER      = 16826627,
+        DOOR_OFFSET          = 16826585, -- _0c0 in npc_list
+        FURNACE_HATCH_OFFSET = 16826610,
+        TREASURE_COFFER      = GetFirstID('Treasure_Coffer'),
         MINING               = GetTableOfIDs('Mining_Point'),
     },
 }

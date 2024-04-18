@@ -1107,12 +1107,12 @@ xi.treasure.treasureInfo =
                 {
                     {
                         test = function(player)
-                            return player:getCharVar('WildCard') == 2
+                            return not player:hasKeyItem(xi.ki.JOKER_CARD) and
+                                (player:getCharVar('[2][77]Prog') == 2 or player:getCharVar('[2][77]Prog') == 3)
                         end,
 
                         code = function(player)
                             npcUtil.giveKeyItem(player, xi.ki.JOKER_CARD)
-                            player:setCharVar('WildCard', 3)
                         end,
                     },
                 },

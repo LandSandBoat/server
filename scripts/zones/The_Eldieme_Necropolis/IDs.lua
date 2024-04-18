@@ -80,12 +80,12 @@ zones[xi.zone.THE_ELDIEME_NECROPOLIS] =
     },
     npc =
     {
-        GATE_OFFSET        = 17576306,
+        GATE_OFFSET        = 17576307,
         BRAZIER            = GetFirstID('Brazier'),
-        TREASURE_CHEST     = 17576356,
-        TREASURE_COFFER    = 17576357,
-        SARCOPHAGUS_OFFSET = 17576394,
-        CANDLE_OFFSET      = 17576334,
+        TREASURE_CHEST     = GetFirstID('Treasure_Chest'),
+        TREASURE_COFFER    = GetFirstID('Treasure_Coffer'),
+        SARCOPHAGUS_OFFSET = 17576395,
+        CANDLE_OFFSET      = 17576335,
     },
 }
 

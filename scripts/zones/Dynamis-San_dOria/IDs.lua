@@ -75,7 +75,7 @@ zones[xi.zone.DYNAMIS_SAN_DORIA] =
     {
         QM =
         {
-            [17535223] =
+            [17535224] =
             {
                 param = { 3353, 3404, 3405, 3406, 3407, 3408 },
                 trade =
@@ -84,10 +84,10 @@ zones[xi.zone.DYNAMIS_SAN_DORIA] =
                     { item = { 3404, 3405, 3406, 3407, 3408 }, mob = 17535213 }, -- Arch Overlord Tombstone
                 }
             },
-            [17535224] = { trade = { { item = 3380, mob = 17535207 } } }, -- Bladeburner Rokgevok
-            [17535225] = { trade = { { item = 3381, mob = 17535208 } } }, -- Steelshank Kratzvatz
-            [17535226] = { trade = { { item = 3382, mob = 17535210 } } }, -- Bloodfist Voshgrosh
-            [17535227] = { trade = { { item = 3383, mob = 17535211 } } }, -- Spellspear Djokvukk
+            [17535225] = { trade = { { item = 3380, mob = 17535207 } } }, -- Bladeburner Rokgevok
+            [17535226] = { trade = { { item = 3381, mob = 17535208 } } }, -- Steelshank Kratzvatz
+            [17535227] = { trade = { { item = 3382, mob = 17535210 } } }, -- Bloodfist Voshgrosh
+            [17535228] = { trade = { { item = 3383, mob = 17535211 } } }, -- Spellspear Djokvukk
         },
     },
 }

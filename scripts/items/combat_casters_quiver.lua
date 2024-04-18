@@ -10,7 +10,7 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    target:addItem(xi.item.COMBAT_CASTERS_ARROW)
+    npcUtil.giveItem(target, { { xi.item.COMBAT_CASTERS_ARROW } })
 end
 
 return itemObject

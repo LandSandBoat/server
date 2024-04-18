@@ -87,7 +87,7 @@ zones[xi.zone.THE_GARDEN_OF_RUHMET] =
         QM_JAILER_OF_FORTITUDE     = 16921027,
         QM_IXAERN_DRK              = 16921028,
         QM_JAILER_OF_FAITH         = 16921029,
-        QNZDEI_DOOR_OFFSET         = 16921068,
+        QNZDEI_DOOR_OFFSET         = 16921069,
     },
 }
 

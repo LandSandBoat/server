@@ -51,7 +51,7 @@ CCharStatsPacket::CCharStatsPacket(CCharEntity* PChar)
     memcpy(data + (0x14), &PChar->stats, 14); // TODO: it won't work with merits
 
     // Hasso gives STR only if main weapon is two handed
-    if (auto* weapon = dynamic_cast<CItemWeapon*>(PChar->m_Weapons[SLOT_MAIN]); weapon->isTwoHanded())
+    if (auto* weapon = dynamic_cast<CItemWeapon*>(PChar->m_Weapons[SLOT_MAIN]); weapon && weapon->isTwoHanded())
     {
         ref<uint16>(0x22) = std::clamp<int16>(PChar->getMod(Mod::STR) + PChar->getMod(Mod::TWOHAND_STR), -999 + PChar->stats.STR, 999 - PChar->stats.STR);
     }
@@ -66,7 +66,7 @@ CCharStatsPacket::CCharStatsPacket(CCharEntity* PChar)
     ref<uint16>(0x2C) = std::clamp<int16>(PChar->getMod(Mod::MND), -999 + PChar->stats.MND, 999 - PChar->stats.MND);
     ref<uint16>(0x2E) = std::clamp<int16>(PChar->getMod(Mod::CHR), -999 + PChar->stats.CHR, 999 - PChar->stats.CHR);
 
-    ref<uint16>(0x30) = PChar->ATT();
+    ref<uint16>(0x30) = PChar->ATT(SLOT_MAIN);
     ref<uint16>(0x32) = PChar->DEF();
 
     ref<uint16>(0x34) = PChar->getMod(Mod::FIRE_MEVA);

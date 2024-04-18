@@ -57,8 +57,8 @@ zones[xi.zone.CEIZAK_BATTLEGROUNDS] =
             },
             collision =
             {
-                17846760,
                 17846761,
+                17846762,
             },
         },
     },

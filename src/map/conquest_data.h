@@ -24,7 +24,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include <string>
 
 #include "common/cbasetypes.h"
-#include "common/sql.h"
+#include "common/database.h"
 #include "zone.h"
 
 struct region_control_t
@@ -49,7 +49,7 @@ struct influence_t
 class ConquestData
 {
 public:
-    ConquestData(std::unique_ptr<SqlConnection>& sql);
+    ConquestData();
 
     /**
      * Gets the influence points for a given nation in a given region.
@@ -101,5 +101,5 @@ private:
      * Should only ever be done on map initialization.
      * World server should be updating conquest data periodically.
      */
-    void load(std::unique_ptr<SqlConnection>& sql);
+    void load();
 };

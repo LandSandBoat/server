@@ -31,7 +31,7 @@ zones[xi.zone.PHOMIUNA_AQUEDUCTS] =
     },
     npc =
     {
-        LADDER_KNOCKING = 16888096,
+        LADDER_KNOCKING = 16888097,
     },
 }
 

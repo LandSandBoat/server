@@ -21,9 +21,9 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 
 #include "http_server.h"
 
+#include "common/database.h"
 #include "common/logging.h"
 #include "common/settings.h"
-#include "common/sql.h"
 #include "common/utils.h"
 
 #include <unordered_set>
@@ -186,31 +186,30 @@ void HTTPServer::LockingUpdate()
     {
         ShowInfo("API data is stale. Updating...");
 
-        auto sql  = std::make_unique<SqlConnection>();
         auto data = APIDataCache{};
 
         // Total active sessions
         {
-            auto ret = sql->Query("SELECT COUNT(*) FROM accounts_sessions;");
-            if (ret != SQL_ERROR && sql->NumRows() && sql->NextRow() == SQL_SUCCESS)
+            auto rset = db::query("SELECT COUNT(*) AS `count` FROM accounts_sessions");
+            if (rset && rset->next())
             {
-                data.activeSessionCount = sql->GetUIntData(0);
+                data.activeSessionCount = rset->getUInt("count");
             }
         }
 
         // Chars per zone
         {
-            auto ret = sql->Query("SELECT chars.pos_zone, COUNT(*) AS `count` "
+            auto rset = db::query("SELECT chars.pos_zone, COUNT(*) AS `count` "
                                   "FROM chars "
-                                  "LEFT JOIN accounts_sessions "
+                                  "INNER JOIN accounts_sessions "
                                   "ON chars.charid = accounts_sessions.charid "
-                                  "GROUP BY pos_zone;");
-            if (ret != SQL_ERROR && sql->NumRows())
+                                  "GROUP BY pos_zone");
+            if (rset && rset->rowsCount())
             {
-                while (sql->NextRow() == SQL_SUCCESS)
+                while (rset->next())
                 {
-                    auto zoneId = sql->GetUIntData(0);
-                    auto count  = sql->GetUIntData(1);
+                    auto zoneId = rset->getUInt("pos_zone");
+                    auto count  = rset->getUInt("count");
 
                     data.zonePlayerCounts[zoneId] = count;
                 }

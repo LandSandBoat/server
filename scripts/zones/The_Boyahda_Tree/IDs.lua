@@ -86,7 +86,7 @@ zones[xi.zone.THE_BOYAHDA_TREE] =
     },
     npc =
     {
-        TREASURE_COFFER = 17404395,
+        TREASURE_COFFER = GetFirstID('Treasure_Coffer'),
     },
 }
 

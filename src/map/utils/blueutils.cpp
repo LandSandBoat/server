@@ -322,39 +322,30 @@ namespace blueutils
     {
         if (PChar->GetMJob() == JOB_BLU || PChar->GetSJob() == JOB_BLU)
         {
-            const char* Query = "UPDATE chars SET "
-                                "set_blue_spells = '%s' "
-                                "WHERE charid = %u;";
-
-            char spells[sizeof(PChar->m_SetBlueSpells) * 2 + 1];
-            sql->EscapeStringLen(spells, (const char*)PChar->m_SetBlueSpells, sizeof(PChar->m_SetBlueSpells));
-
-            sql->Query(Query, spells, PChar->id);
+            auto set_blue_spells = db::encodeToBlob(PChar->m_SetBlueSpells);
+            auto query           = fmt::format("UPDATE chars SET set_blue_spells = '{}' WHERE charid = {} LIMIT 1",
+                                               set_blue_spells, PChar->id);
+            db::query(query);
         }
     }
 
     void LoadSetSpells(CCharEntity* PChar)
     {
+        TracyZoneScoped;
+
         if (PChar->GetMJob() == JOB_BLU || PChar->GetSJob() == JOB_BLU)
         {
-            const char* Query = "SELECT set_blue_spells FROM "
-                                "chars WHERE charid = %u;";
-
-            int32 ret = sql->Query(Query, PChar->id);
-
-            if (ret != SQL_ERROR && sql->NumRows() != 0 && sql->NextRow() == SQL_SUCCESS)
+            auto rset = db::preparedStmt("SELECT set_blue_spells FROM chars WHERE charid = ? LIMIT 1", PChar->id);
+            if (rset && rset->rowsCount() && rset->next())
             {
-                size_t length      = 0;
-                char*  blue_spells = nullptr;
-                sql->GetData(0, &blue_spells, &length);
-                memcpy(PChar->m_SetBlueSpells, blue_spells, (length > sizeof(PChar->m_SetBlueSpells) ? sizeof(PChar->m_SetBlueSpells) : length));
+                db::extractFromBlob(rset, "set_blue_spells", PChar->m_SetBlueSpells);
             }
+
             for (unsigned char& m_SetBlueSpell : PChar->m_SetBlueSpells)
             {
                 if (m_SetBlueSpell != 0)
                 {
                     CBlueSpell* PSpell = (CBlueSpell*)spell::GetSpell(static_cast<SpellID>(m_SetBlueSpell + 0x200));
-
                     if (PSpell == nullptr)
                     {
                         m_SetBlueSpell = 0;

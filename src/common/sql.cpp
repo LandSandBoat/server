@@ -202,7 +202,7 @@ void SqlConnection::SetupKeepalive()
 void SqlConnection::CheckCharset()
 {
     // Check that the SQL charset is what we require
-    auto ret = QueryStr("SELECT @@character_set_database, @@collation_database;");
+    auto ret = QueryStr("SELECT @@character_set_database, @@collation_database");
     if (ret != SQL_ERROR && NumRows())
     {
         bool foundError = false;
@@ -236,7 +236,7 @@ int32 SqlConnection::TryPing()
 
     if (m_LastPing + m_PingInterval <= nowSeconds)
     {
-        ShowInfo("Pinging SQL server to keep connection alive");
+        ShowInfo("(C) Pinging SQL server to keep connection alive");
 
         m_LastPing = nowSeconds;
 
@@ -559,7 +559,7 @@ bool SqlConnection::GetAutoCommit()
     TracyZoneScoped;
     if (self)
     {
-        int32 ret = Query("SELECT @@autocommit;");
+        int32 ret = Query("SELECT @@autocommit");
 
         if (ret != SQL_ERROR && NumRows() > 0 && NextRow() == SQL_SUCCESS)
         {
@@ -575,7 +575,7 @@ bool SqlConnection::GetAutoCommit()
 bool SqlConnection::TransactionStart()
 {
     TracyZoneScoped;
-    if (self && Query("START TRANSACTION;") != SQL_ERROR)
+    if (self && Query("START TRANSACTION") != SQL_ERROR)
     {
         return true;
     }
@@ -601,7 +601,7 @@ bool SqlConnection::TransactionCommit()
 bool SqlConnection::TransactionRollback()
 {
     TracyZoneScoped;
-    if (self && Query("ROLLBACK;") != SQL_ERROR)
+    if (self && Query("ROLLBACK") != SQL_ERROR)
     {
         return true;
     }
@@ -617,7 +617,7 @@ bool SqlConnection::TransactionRollback()
 void SqlConnection::StartProfiling()
 {
     TracyZoneScoped;
-    if (self && QueryStr("SET profiling = 1;") != SQL_ERROR)
+    if (self && QueryStr("SET profiling = 1") != SQL_ERROR)
     {
         return;
     }
@@ -639,7 +639,7 @@ void SqlConnection::FinishProfiling()
     }
 
     auto lastQuery = self->buf;
-    if (QueryStr("SHOW PROFILE;") != SQL_ERROR && NumRows() > 0)
+    if (QueryStr("SHOW PROFILE") != SQL_ERROR && NumRows() > 0)
     {
         std::string outStr = "SQL SHOW PROFILE:\n";
         outStr += fmt::format("Query: {}\n", lastQuery);
@@ -652,7 +652,7 @@ void SqlConnection::FinishProfiling()
             auto measurement = GetStringData(1);
             outStr += fmt::format("| {:<31}| {:<8} |\n", category, measurement);
         }
-        QueryStr("SET profiling = 0;");
+        QueryStr("SET profiling = 0");
         ShowInfo(outStr);
         return;
     }

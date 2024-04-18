@@ -108,13 +108,13 @@ xi.job_utils.thief.checkDespoil = function(player, target, ability)
 end
 
 xi.job_utils.thief.checkLarceny = function(player, target, ability)
-    ability:setRecast(ability:getRecast() - player:getMod(xi.mod.ONE_HOUR_RECAST))
+    ability:setRecast(math.max(0, ability:getRecast() - player:getMod(xi.mod.ONE_HOUR_RECAST) * 60))
 
     return 0, 0
 end
 
 xi.job_utils.thief.checkPerfectDodge = function(player, target, ability)
-    ability:setRecast(ability:getRecast() - player:getMod(xi.mod.ONE_HOUR_RECAST))
+    ability:setRecast(math.max(0, ability:getRecast() - player:getMod(xi.mod.ONE_HOUR_RECAST) * 60))
 
     return 0, 0
 end
@@ -411,7 +411,7 @@ xi.job_utils.thief.useSteal = function(player, target, ability, action)
 
     -- Attempt Aura steal
     -- local effect = xi.effect.NONE
-    if stolen == 0 and player:hasTrait(75) then
+    if player:hasTrait(xi.trait.AURA_STEAL) then
         local resist = applyResistanceAbility(player, target, xi.element.NONE, 0, 0)
         -- local effectStealSuccess = false
         if resist > 0.0625 then

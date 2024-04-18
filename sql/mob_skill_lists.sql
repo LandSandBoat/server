@@ -2348,7 +2348,7 @@ INSERT INTO `mob_skill_lists` VALUES ('Orc DRG',713,607);
 INSERT INTO `mob_skill_lists` VALUES ('Orc DRG',713,608);
 INSERT INTO `mob_skill_lists` VALUES ('Orc DRG',713,609);
 INSERT INTO `mob_skill_lists` VALUES ('Orc DRG',713,766);
-INSERT INTO `mob_skill_lists` VALUES ('Orc DRG',713,1064);
+INSERT INTO `mob_skill_lists` VALUES ('Orc DRG',713,733);
 INSERT INTO `mob_skill_lists` VALUES ('MobWyvern',714,900);
 INSERT INTO `mob_skill_lists` VALUES ('MobWyvern',714,901);
 INSERT INTO `mob_skill_lists` VALUES ('MobWyvern',714,902);
@@ -3780,7 +3780,7 @@ INSERT INTO `mob_skill_lists` VALUES ('Puk_M',1175,1720);
 INSERT INTO `mob_skill_lists` VALUES ('Puk_M',1175,1721);
 INSERT INTO `mob_skill_lists` VALUES ('Puk_M',1175,1722);
 INSERT INTO `mob_skill_lists` VALUES ('Puk_M',1175,1723);
-INSERT INTO `mob_skill_lists` VALUES ('Supplespine_Mujwuj',1176,1064);
+INSERT INTO `mob_skill_lists` VALUES ('Supplespine_Mujwuj',1176,733);
 INSERT INTO `mob_skill_lists` VALUES ('Supplespine_Mujwuj',1176,609);
 
 -- Trial Sized Avatars
@@ -3852,6 +3852,8 @@ INSERT INTO `mob_skill_lists` VALUES ('Copper_Borer',2002,1817); -- thermal_puls
 INSERT INTO `mob_skill_lists` VALUES ('Atkorkamuy',2003,463); -- whirlwind
 
 INSERT INTO `mob_skill_lists` VALUES ('Gharial',2004,2101); -- demoralizing_roar
+
+INSERT INTO `mob_skill_lists` VALUES ('Draketrader_Zlodgodd',2005,733);
 
 -- Next available ID: 2005
 

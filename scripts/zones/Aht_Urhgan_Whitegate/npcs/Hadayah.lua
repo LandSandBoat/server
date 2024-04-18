@@ -12,7 +12,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local skillLevel = player:getSkillLevel(xi.skill.ALCHEMY)
+    local skillLevel = xi.crafting.getRealSkill(player, xi.skill.ALCHEMY)
 
     if xi.crafting.hasJoinedGuild(player, xi.crafting.guild.ALCHEMY) then
         if not player:hasStatusEffect(xi.effect.ALCHEMY_IMAGERY) then

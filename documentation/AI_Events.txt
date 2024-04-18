@@ -29,6 +29,7 @@ TAKE_DAMAGE - Entity, amount, optionalAttacker, attackType, damageType
 CRITICAL_TAKE - Target, Attacker
 
 RANGE_START - Entity, action
+RANGE_STATE_EXIT - Entity, Target, action
 
 ABILITY_START - Entity, Ability
 ABILITY_USE - Entity, Target, Ability, action

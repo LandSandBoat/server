@@ -10,7 +10,7 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    target:addItem(xi.item.DOGBOLT, math.random(10, 20))
+    npcUtil.giveItem(target, { { xi.item.DOGBOLT, math.random(10, 20) } })
 end
 
 return itemObject

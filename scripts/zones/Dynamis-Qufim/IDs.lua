@@ -193,7 +193,7 @@ zones[xi.zone.DYNAMIS_QUFIM] =
     {
         QM =
         {
-            -- [16945638] =
+            -- [16945639] =
             -- {
             --     param = { 3458, 3479, 3480, 3481, 3482 },
             --     trade =
@@ -202,9 +202,9 @@ zones[xi.zone.DYNAMIS_QUFIM] =
             --         { item = { 3479, 3480, 3481, 3482 }, mob = 16945403 }, -- Arch Antaeus
             --     }
             -- },
-            -- [16945639] = { trade = { { item = 3468, mob = 16945421 } } }, -- Lost Stringes
-            -- [16945640] = { trade = { { item = 3467, mob = 16945457 } } }, -- Lost Scolopendra
-            -- [16945641] = { trade = { { item = 3469, mob = 16945470 } } }, -- Lost Suttung
+            -- [16945640] = { trade = { { item = 3468, mob = 16945421 } } }, -- Lost Stringes
+            -- [16945641] = { trade = { { item = 3467, mob = 16945457 } } }, -- Lost Scolopendra
+            -- [16945642] = { trade = { { item = 3469, mob = 16945470 } } }, -- Lost Suttung
         },
     },
 }

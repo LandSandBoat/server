@@ -10,7 +10,7 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    target:addItem(xi.item.SUPER_RERAISER, 1)
+    npcUtil.giveItem(target, { { xi.item.SUPER_RERAISER, 1 } })
 end
 
 return itemObject

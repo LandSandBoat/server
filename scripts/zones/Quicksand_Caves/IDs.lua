@@ -57,7 +57,15 @@ zones[xi.zone.QUICKSAND_CAVES] =
         },
         ANTICAN_MAGISTER_PH     =
         {
-            [17629280] = 17629280, -- 856.187 1.120 -657.310
+            -- Antican Magister is a lottery of various Antica at (C-6).
+            -- https://www.bg-wiki.com/ffxi/Antican_Magister
+
+            -- Antican Hastatus
+            [17629409] = GetFirstID('Antican_Magister'),
+            -- Antican Princeps
+            [17629410] = GetFirstID('Antican_Magister'),
+            -- Antican Signifier
+            [17629411] = GetFirstID('Antican_Magister'),
         },
         ANTICAN_PRAEFECTUS_PH   =
         {
@@ -113,10 +121,10 @@ zones[xi.zone.QUICKSAND_CAVES] =
             [4] = { 814.000, -14.000, -761.000 },
         },
 
-        ORNATE_DOOR_OFFSET     = 17629693,
-        CHAINS_THAT_BIND_US_QM = 17629746,
-        TREASURE_COFFER        = 17629747,
-        ANTICAN_TAG_QM         = 17629769,
+        ORNATE_DOOR_OFFSET     = 17629694,
+        CHAINS_THAT_BIND_US_QM = 17629747,
+        TREASURE_COFFER        = GetFirstID('Treasure_Coffer'),
+        ANTICAN_TAG_QM         = 17629770,
     },
 }
 

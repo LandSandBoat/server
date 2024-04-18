@@ -81,8 +81,8 @@ zones[xi.zone.IFRITS_CAULDRON] =
     },
     npc =
     {
-        FLAME_SPOUT_OFFSET = 17617204,
-        TREASURE_COFFER    = 17617224,
+        FLAME_SPOUT_OFFSET = 17617205,
+        TREASURE_COFFER    = GetFirstID('Treasure_Coffer'),
         MINING             = GetTableOfIDs('Mining_Point'),
     },
 }

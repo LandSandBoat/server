@@ -117,7 +117,7 @@ zones[xi.zone.DYNAMIS_XARCABARD] =
     {
         QM =
         {
-            [17330780] =
+            [17330781] =
             {
                 param = { 3358, 3429, 3430, 3431, 3432, 3433 },
                 trade =
@@ -127,26 +127,26 @@ zones[xi.zone.DYNAMIS_XARCABARD] =
                 }
             },
 
-            [17330781] = { trade = { { item = 3400, mob = 17330185 } } }, -- Duke Haures
-            [17330782] = { trade = { { item = 3401, mob = 17330186 } } }, -- Marquis Caim
-            [17330783] = { trade = { { item = 3402, mob = 17330188 } } }, -- Baron Avnas
-            [17330784] = { trade = { { item = 3403, mob = 17330189 } } }, -- Count Haagenti
-            [17330785] = { trade = { { item = 3364, mob = 17330199 } } }, -- Animated Knuckles
-            [17330786] = { trade = { { item = 3365, mob = 17330200 } } }, -- Animated Dagger
-            [17330787] = { trade = { { item = 3366, mob = 17330201 } } }, -- Animated Longsword
-            [17330788] = { trade = { { item = 3367, mob = 17330202 } } }, -- Animated Claymore
-            [17330789] = { trade = { { item = 3368, mob = 17330203 } } }, -- Animated Tabar
-            [17330790] = { trade = { { item = 3369, mob = 17330204 } } }, -- Animated Great Axe
-            [17330791] = { trade = { { item = 3371, mob = 17330205 } } }, -- Animated Spear
-            [17330792] = { trade = { { item = 3370, mob = 17330206 } } }, -- Animated Scythe
-            [17330793] = { trade = { { item = 3372, mob = 17330207 } } }, -- Animated Kunai
-            [17330794] = { trade = { { item = 3373, mob = 17330208 } } }, -- Animated Tachi
-            [17330795] = { trade = { { item = 3374, mob = 17330209 } } }, -- Animated Hammer
-            [17330796] = { trade = { { item = 3375, mob = 17330210 } } }, -- Animated Staff
-            [17330797] = { trade = { { item = 3376, mob = 17330211 } } }, -- Animated Longbow
-            [17330798] = { trade = { { item = 3377, mob = 17330212 } } }, -- Animated Gun
-            [17330799] = { trade = { { item = 3378, mob = 17330213 } } }, -- Animated Horn
-            [17330800] = { trade = { { item = 3379, mob = 17330214 } } }, -- Animated Shield
+            [17330782] = { trade = { { item = 3400, mob = 17330185 } } }, -- Duke Haures
+            [17330783] = { trade = { { item = 3401, mob = 17330186 } } }, -- Marquis Caim
+            [17330784] = { trade = { { item = 3402, mob = 17330188 } } }, -- Baron Avnas
+            [17330785] = { trade = { { item = 3403, mob = 17330189 } } }, -- Count Haagenti
+            [17330786] = { trade = { { item = 3364, mob = 17330199 } } }, -- Animated Knuckles
+            [17330787] = { trade = { { item = 3365, mob = 17330200 } } }, -- Animated Dagger
+            [17330788] = { trade = { { item = 3366, mob = 17330201 } } }, -- Animated Longsword
+            [17330789] = { trade = { { item = 3367, mob = 17330202 } } }, -- Animated Claymore
+            [17330790] = { trade = { { item = 3368, mob = 17330203 } } }, -- Animated Tabar
+            [17330791] = { trade = { { item = 3369, mob = 17330204 } } }, -- Animated Great Axe
+            [17330792] = { trade = { { item = 3371, mob = 17330205 } } }, -- Animated Spear
+            [17330793] = { trade = { { item = 3370, mob = 17330206 } } }, -- Animated Scythe
+            [17330794] = { trade = { { item = 3372, mob = 17330207 } } }, -- Animated Kunai
+            [17330795] = { trade = { { item = 3373, mob = 17330208 } } }, -- Animated Tachi
+            [17330796] = { trade = { { item = 3374, mob = 17330209 } } }, -- Animated Hammer
+            [17330797] = { trade = { { item = 3375, mob = 17330210 } } }, -- Animated Staff
+            [17330798] = { trade = { { item = 3376, mob = 17330211 } } }, -- Animated Longbow
+            [17330799] = { trade = { { item = 3377, mob = 17330212 } } }, -- Animated Gun
+            [17330800] = { trade = { { item = 3378, mob = 17330213 } } }, -- Animated Horn
+            [17330801] = { trade = { { item = 3379, mob = 17330214 } } }, -- Animated Shield
         },
     },
 }

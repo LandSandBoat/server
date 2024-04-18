@@ -52,11 +52,11 @@ zones[xi.zone.VELUGANNON_PALACE] =
     npc =
     {
         QM3             = 17502583,
-        Y_DOOR_OFFSET   = 17502608,
-        B_DOOR_OFFSET   = 17502616,
-        Y_LITH_OFFSET   = 17502624,
-        B_LITH_OFFSET   = 17502634,
-        TREASURE_COFFER = 17502699,
+        Y_DOOR_OFFSET   = 17502609,
+        B_DOOR_OFFSET   = 17502617,
+        Y_LITH_OFFSET   = 17502625,
+        B_LITH_OFFSET   = 17502635,
+        TREASURE_COFFER = GetFirstID('Treasure_Coffer'),
     },
 }
 

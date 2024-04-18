@@ -105,7 +105,7 @@ zones[xi.zone.SAUROMUGUE_CHAMPAIGN] =
 
     npc =
     {
-        QM2         = 17269228,
+        QM2 = 17269229,
     },
 }
 

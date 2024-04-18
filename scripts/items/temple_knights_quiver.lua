@@ -10,7 +10,7 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    target:addItem(xi.item.TEMPLE_KNIGHTS_ARROW)
+    npcUtil.giveItem(target, { { xi.item.TEMPLE_KNIGHTS_ARROW, 1 } })
 end
 
 return itemObject

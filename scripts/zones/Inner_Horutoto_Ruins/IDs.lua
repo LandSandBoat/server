@@ -55,8 +55,8 @@ zones[xi.zone.INNER_HORUTOTO_RUINS] =
     },
     npc =
     {
-        PORTAL_CIRCLE_BASE = 17563861,
-        TREASURE_CHEST     = 17563914,
+        PORTAL_CIRCLE_BASE = 17563862,
+        TREASURE_CHEST     = GetFirstID('Treasure_Chest'),
     },
 }
 

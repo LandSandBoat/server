@@ -721,13 +721,13 @@ uint16 CBattleEntity::CHR()
     return std::clamp(stats.CHR + m_modStat[Mod::CHR], 0, 999);
 }
 
-uint16 CBattleEntity::ATT()
+uint16 CBattleEntity::ATT(SLOTTYPE slot)
 {
     TracyZoneScoped;
     // TODO: consider which weapon!
     int32 ATT    = 8 + m_modStat[Mod::ATT];
     auto  ATTP   = m_modStat[Mod::ATTP];
-    auto* weapon = dynamic_cast<CItemWeapon*>(m_Weapons[SLOT_MAIN]);
+    auto* weapon = dynamic_cast<CItemWeapon*>(m_Weapons[slot]);
     if (weapon && weapon->isTwoHanded())
     {
         ATT += (STR() * 3) / 4;
@@ -1007,7 +1007,7 @@ void CBattleEntity::SetMLevel(uint8 mlvl)
 
     if (this->objtype & TYPE_PC)
     {
-        sql->Query("UPDATE char_stats SET mlvl = %u WHERE charid = %u LIMIT 1;", m_mlvl, this->id);
+        _sql->Query("UPDATE char_stats SET mlvl = %u WHERE charid = %u LIMIT 1", m_mlvl, this->id);
     }
 }
 
@@ -1043,7 +1043,7 @@ void CBattleEntity::SetSLevel(uint8 slvl)
 
     if (this->objtype & TYPE_PC)
     {
-        sql->Query("UPDATE char_stats SET slvl = %u WHERE charid = %u LIMIT 1;", m_slvl, this->id);
+        _sql->Query("UPDATE char_stats SET slvl = %u WHERE charid = %u LIMIT 1", m_slvl, this->id);
     }
 }
 
@@ -1867,7 +1867,7 @@ void CBattleEntity::OnMobSkillFinished(CMobSkillState& state, action_t& action)
         else if (PSkill->isConal())
         {
             float angle = 45.0f;
-            PAI->TargetFind->findWithinCone(PTarget, distance, angle, findFlags);
+            PAI->TargetFind->findWithinCone(PTarget, distance, angle, findFlags, PSkill->getAoe());
         }
         else
         {
@@ -1916,6 +1916,7 @@ void CBattleEntity::OnMobSkillFinished(CMobSkillState& state, action_t& action)
     }
 
     PSkill->setTotalTargets(targets);
+    PSkill->setPrimaryTargetID(PTarget->id);
     PSkill->setTP(state.GetSpentTP());
     PSkill->setHPP(GetHPP());
 
@@ -2005,7 +2006,15 @@ void CBattleEntity::OnMobSkillFinished(CMobSkillState& state, action_t& action)
         if (target.speceffect == SPECEFFECT::HIT) // Formerly bitwise and, though nothing in this function adds additional bits to the field
         {
             target.speceffect = SPECEFFECT::RECOIL;
-            target.knockback  = PSkill->getKnockback();
+            if (target.reaction == REACTION::HIT)
+            {
+                target.knockback = PSkill->getKnockback();
+            }
+            else
+            {
+                target.knockback = 0;
+            }
+
             if (first && (PSkill->getPrimarySkillchain() != 0))
             {
                 SUBEFFECT effect = battleutils::GetSkillChainEffect(PTargetFound, PSkill->getPrimarySkillchain(), PSkill->getSecondarySkillchain(),
@@ -2233,17 +2242,17 @@ bool CBattleEntity::OnAttack(CAttackState& state, action_t& action)
                         // Calculate attack bonus for Counterstance Effect Job Points
                         // Needs verification, as there appears to be conflicting information regarding an attack bonus based on DEX
                         // vs a base damage increase.
-                        float csJpAtkBonus = 0;
+                        float attBonus = 1.0f;
                         if (PTarget->objtype == TYPE_PC && PTarget->GetMJob() == JOB_MNK && PTarget->StatusEffectContainer->HasStatusEffect(EFFECT_COUNTERSTANCE))
                         {
                             auto*  PChar        = static_cast<CCharEntity*>(PTarget);
                             uint8  csJpModifier = PChar->PJobPoints->GetJobPointValue(JP_COUNTERSTANCE_EFFECT) * 2;
                             uint16 targetDex    = PTarget->DEX();
 
-                            csJpAtkBonus = 1 + ((static_cast<float>(targetDex) / 100) * csJpModifier);
+                            attBonus += ((static_cast<float>(targetDex) / 100) * csJpModifier);
                         }
 
-                        float DamageRatio = battleutils::GetDamageRatio(PTarget, this, attack.IsCritical(), csJpAtkBonus, skilltype);
+                        float DamageRatio = battleutils::GetDamageRatio(PTarget, this, attack.IsCritical(), attBonus, skilltype, SLOT_MAIN);
                         auto  damage      = (int32)((PTarget->GetMainWeaponDmg() + naturalh2hDMG + battleutils::GetFSTR(PTarget, this, SLOT_MAIN)) * DamageRatio);
 
                         actionTarget.spikesParam =
@@ -2263,8 +2272,9 @@ bool CBattleEntity::OnAttack(CAttackState& state, action_t& action)
             }
             else
             {
+                SLOTTYPE weaponSlot = static_cast<SLOTTYPE>(attack.GetWeaponSlot());
                 // Set this attack's critical flag.
-                attack.SetCritical(xirand::GetRandomNumber(100) < battleutils::GetCritHitRate(this, PTarget, !attack.IsFirstSwing()));
+                attack.SetCritical(xirand::GetRandomNumber(100) < battleutils::GetCritHitRate(this, PTarget, !attack.IsFirstSwing(), weaponSlot));
 
                 this->PAI->EventHandler.triggerListener("MELEE_SWING_HIT", CLuaBaseEntity(this), CLuaBaseEntity(PTarget), CLuaAttack(&attack));
 

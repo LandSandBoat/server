@@ -71,10 +71,10 @@ zones[xi.zone.GARLAIGE_CITADEL] =
     },
     npc =
     {
-        BANISHING_GATE_OFFSET = 17596761,
-        TREASURE_CHEST        = 17596812,
-        TREASURE_COFFER       = 17596813,
-        CHANDELIER_QM         = 17596830,
+        BANISHING_GATE_OFFSET = 17596762,
+        TREASURE_CHEST        = GetFirstID('Treasure_Chest'),
+        TREASURE_COFFER       = GetFirstID('Treasure_Coffer'),
+        CHANDELIER_QM         = 17596831,
     },
 }
 
