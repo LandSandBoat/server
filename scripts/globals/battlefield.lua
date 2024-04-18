@@ -775,6 +775,8 @@ function Battlefield:onEntryEventUpdate(player, csid, option, npc)
         -- Handle traded items if not wearing them
         if self.requiredItems.wearMessage == nil and #self.tradeItems > 0 then
             player:tradeComplete()
+        else
+            -- TODO: Wear the item
         end
 
         -- Handle party/alliance members
