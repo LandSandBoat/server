@@ -108,33 +108,23 @@ void CAttack::SetCritical(bool value)
             }
         }
 
-        SKILLTYPE skilltype = SKILLTYPE::SKILL_NONE;
+        SKILLTYPE skilltype  = SKILLTYPE::SKILL_NONE;
+        SLOTTYPE  weaponSlot = static_cast<SLOTTYPE>(GetWeaponSlot());
 
         if (m_attacker->objtype == TYPE_PC)
         {
-            SLOTTYPE slot = SLOT_MAIN;
-
-            if (m_attackDirection == PHYSICAL_ATTACK_DIRECTION::RIGHTATTACK)
+            if (auto* weapon = dynamic_cast<CItemWeapon*>(m_attacker->m_Weapons[weaponSlot]))
             {
-                slot = SLOT_SUB;
+                skilltype = static_cast<SKILLTYPE>(weapon->getSkillType());
             }
-
-            if (m_attacker->objtype == TYPE_PC)
+            else
             {
-                if (auto* weapon = dynamic_cast<CItemWeapon*>(m_attacker->m_Weapons[slot]))
-                {
-                    skilltype = static_cast<SKILLTYPE>(weapon->getSkillType());
-                }
-                else
-                {
-                    skilltype = SKILLTYPE::SKILL_HAND_TO_HAND;
-                }
+                skilltype = SKILLTYPE::SKILL_HAND_TO_HAND;
             }
         }
 
         // need to pass the weapon slot because damage ratio depends on ATT which varies by slot
-        SLOTTYPE weaponSlot = static_cast<SLOTTYPE>(GetWeaponSlot());
-        m_damageRatio       = battleutils::GetDamageRatio(m_attacker, m_victim, m_isCritical, attBonus, skilltype, weaponSlot);
+        m_damageRatio = battleutils::GetDamageRatio(m_attacker, m_victim, m_isCritical, attBonus, skilltype, weaponSlot);
     }
 }
 
