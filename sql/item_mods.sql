@@ -24212,6 +24212,7 @@ INSERT INTO `item_mods` VALUES (14911,1,17);   -- DEF: 17
 INSERT INTO `item_mods` VALUES (14911,2,20);   -- HP: 20
 INSERT INTO `item_mods` VALUES (14911,5,20);   -- MP: 20
 INSERT INTO `item_mods` VALUES (14911,27,-4);  -- ENMITY: -4
+INSERT INTO `item_mods` VALUES (14911,114,15); -- ENFEEBLE: 15
 INSERT INTO `item_mods` VALUES (14911,1082,5); -- BANISH_POTENCY: 5
 
 -- Sorcerers Gloves +1
