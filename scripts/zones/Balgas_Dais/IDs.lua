@@ -47,7 +47,8 @@ zones[xi.zone.BALGAS_DAIS] =
             17375493,
         },
 
-        DVOROVOI = GetFirstID('Dvorovoi'),
+        DVOROVOI               = GetFirstID('Dvorovoi'),
+        VOO_TOLU_THE_GHOSTFIST = GetFirstID('Voo_Tolu_the_Ghostfist')
     },
     npc =
     {
