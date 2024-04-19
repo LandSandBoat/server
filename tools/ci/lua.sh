@@ -44,6 +44,7 @@ global_objects=(
 
     set
     printf
+    fmt
     switch
     getVanaMidnight
     getMidnight
