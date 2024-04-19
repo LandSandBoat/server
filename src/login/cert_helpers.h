@@ -37,8 +37,8 @@ namespace certificateHelpers
                 {
                     ShowInfo(fmt::format("Found existing login.key"));
                 }
+                fclose(fileHandle);
             }
-            fclose(fileHandle);
         }
 
         if (std::filesystem::exists("login.cert"))
@@ -62,7 +62,6 @@ namespace certificateHelpers
                         ShowWarning("Existing login.cert is not valid for the current time. Please regenerate or obtain a new certificate.");
                     }
                 }
-
                 fclose(fileHandle);
             }
         }
