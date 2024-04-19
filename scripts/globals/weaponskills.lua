@@ -19,6 +19,13 @@ require('scripts/globals/combat/physical_utilities')
 xi = xi or {}
 xi.weaponskills = xi.weaponskills or {}
 
+local printDebug = function(player, textToPrint)
+    -- prints to map server if pet has local var
+    if player:getLocalVar('debug') == 1 then
+        player:printToPlayer(textToPrint, xi.msg.channel.SYSTEM_3)
+    end
+end
+
 -- Obtains alpha, used for working out WSC on legacy servers
 -- Retail has no alpha anymore as of 2014 Weaponskill functions
 local function getAlpha(level)
@@ -359,10 +366,15 @@ local function getSingleHitDamage(attacker, target, dmg, ftp, wsParams, calcPara
                 finaldmg = finaldmg + magicdmg
             end
 
+            printDebug(attacker, fmt('{}: dmg-{} pdif-{} min-{} max-{} critmin-{} critmax-{}', attacker:getName(), finaldmg, calcParams.pdif, calcParams.cratio[1], calcParams.cratio[2], calcParams.ccritratio[1], calcParams.ccritratio[2]))
+
             calcParams.hitsLanded = calcParams.hitsLanded + 1
         else
+            printDebug(attacker, fmt('{}: Shadow absorbed', attacker:getName()))
             calcParams.shadowsAbsorbed = calcParams.shadowsAbsorbed + 1
         end
+    else
+        printDebug(attacker, fmt('{}: Swing missed', attacker:getName()))
     end
 
     return finaldmg, calcParams
@@ -427,6 +439,7 @@ local function calculateWsMods(attacker, calcParams, wsParams)
         wsMods = wsMods + attacker:getStat(modList[1]) * paramValue
     end
 
+    printDebug(attacker, fmt('WSMods: {} Alpha: {} fSTR: {}', wsMods, calcParams.alpha, calcParams.fSTR))
     return wsMods * calcParams.alpha + calcParams.fSTR
 end
 
@@ -469,9 +482,11 @@ xi.weaponskills.calculateRawWSDmg = function(attacker, target, wsID, tp, action,
 
     local wsMods   = calculateWsMods(attacker, calcParams, wsParams)
     local mainBase = calcParams.weaponDamage[1] + wsMods + calcParams.bonusWSmods
+    printDebug(attacker, fmt('WS Base dmg: {}+{}+{}', calcParams.weaponDamage[1], wsMods, calcParams.bonusWSmods))
 
     -- Calculate fTP multiplier
     local ftp = xi.weaponskills.fTP(tp, wsParams.ftpMod) + calcParams.bonusfTP
+    printDebug(attacker, fmt('WS FTP: {}+{}', ftp - calcParams.bonusfTP, calcParams.bonusfTP))
 
     -- Calculate critrates
     -- TODO: calc per-hit with weapon crit+% on each hand (if dual wielding)
