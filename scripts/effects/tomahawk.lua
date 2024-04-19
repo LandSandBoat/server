@@ -53,7 +53,7 @@ effectObject.onEffectGain = function(target, effect)
 
             effect:addMod(xi.magic.specificDmgTakenMod[i], -reductionMagic)
         end
-        
+
     elseif effect:getPower() == 3 then -- Banish III/Banishga III (Tier 3)
         for i = 1, #physSDT do
             local gearModifier  = 1 + (effect:getSubPower() / 100)
