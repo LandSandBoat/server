@@ -2,7 +2,7 @@
 -- Area: Uleguerand Range
 --  Mob: Mountain Worm NM
 --  https://www.bg-wiki.com/ffxi/Mountain_Worm_(NM)
--- TODO allow deaggro based on distance (core CMobEntity::CanDeaggro() forces NM and Battlefield mobs to never stop chasing)
+-- TODO allow deaggro (core CMobEntity::CanDeaggro() forces NM and Battlefield mobs to never stop chasing)
 -----------------------------------
 local entity = {}
 
