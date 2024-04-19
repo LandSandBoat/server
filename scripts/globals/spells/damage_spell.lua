@@ -313,6 +313,14 @@ xi.spells.damage.calculateBaseDamage = function(caster, target, spellId, spellGr
             baseSpellDamageBonus = baseSpellDamageBonus + caster:getJobPointLevel(xi.jp.STRATEGEM_EFFECT_III) * 2
         end
 
+        -- WHM Catagory 1 Merits (Banish)
+        if
+            (spellId >= xi.magic.spell.BANISH and spellId <= xi.magic.spell.BANISH_V) or
+            (spellId >= xi.magic.spell.BANISHGA and spellId <= xi.magic.spell.BANISHGA_V)
+        then
+            baseSpellDamageBonus = baseSpellDamageBonus + caster:getMerit(xi.merit.BANISH_EFFECT)
+        end
+
         -- Banish: Afflatus Misery
         -- Source: https://wiki.ffo.jp/html/17218.html
         if
@@ -659,14 +667,6 @@ xi.spells.damage.calculateMagicBonusDiff = function(caster, target, spellId, ski
 
         -- "Enhances ninjutsu damage" ("Koga Hatsuburi" type gear)
         mab = mab + caster:getMod(xi.mod.NIN_NUKE_BONUS_INNIN)
-    end
-
-    -- WHM Catagory 1 Merits (Banish)
-    if
-        (spellId >= xi.magic.spell.BANISH and spellId <= xi.magic.spell.BANISH_V) or
-        (spellId >= xi.magic.spell.BANISHGA and spellId <= xi.magic.spell.BANISHGA_V)
-    then
-        mab = mab + (caster:getMerit(xi.merit.BANISH_EFFECT) * 2) -- +2 Magic Attack Bonus for each merit level.
     end
 
     if math.random(1, 100) <= mabCrit then
