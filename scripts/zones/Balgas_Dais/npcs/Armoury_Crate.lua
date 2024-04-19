@@ -219,51 +219,6 @@ local loot =
         },
     },
 
-    -- BCNM Rapid Raptors
-    [109] =
-    {
-        {
-            { itemid = xi.item.RAPTOR_SKIN, droprate = 1000 }, -- raptor_skin
-        },
-
-        {
-            { itemid = xi.item.ADAMAN_INGOT, droprate = 1000 }, -- adaman_ingot
-        },
-
-        {
-            { itemid = xi.item.NONE,                    droprate = 190 }, -- nothing
-            { itemid = xi.item.SLY_GAUNTLETS,           droprate = 110 }, -- sly_gauntlets
-            { itemid = xi.item.SPIKED_FINGER_GAUNTLETS, droprate = 120 }, -- spiked_finger_gauntlets
-            { itemid = xi.item.RUSH_GLOVES,             droprate = 140 }, -- rush_gloves
-            { itemid = xi.item.RIVAL_RIBBON,            droprate = 140 }, -- rival_ribbon
-            { itemid = xi.item.MANA_CIRCLET,            droprate = 150 }, -- mana_circlet
-            { itemid = xi.item.IVORY_MITTS,             droprate = 150 }, -- ivory_mitts
-        },
-
-        {
-            { itemid = xi.item.NONE,             droprate =  30 }, -- nothing
-            { itemid = xi.item.STORM_GORGET,     droprate = 100 }, -- storm_gorget
-            { itemid = xi.item.INTELLECT_TORQUE, droprate = 100 }, -- intellect_torque
-            { itemid = xi.item.BENIGN_NECKLACE,  droprate = 120 }, -- benign_necklace
-            { itemid = xi.item.HEAVY_MANTLE,     droprate = 130 }, -- heavy_mantle
-            { itemid = xi.item.HATEFUL_COLLAR,   droprate = 170 }, -- hateful_collar
-            { itemid = xi.item.ESOTERIC_MANTLE,  droprate = 170 }, -- esoteric_mantle
-            { itemid = xi.item.TEMPLARS_MANTLE,  droprate = 180 }, -- templars_mantle
-        },
-
-        {
-            { itemid = xi.item.NONE,              droprate = 230 }, -- nothing
-            { itemid = xi.item.MYTHRIL_INGOT,     droprate = 200 }, -- mythril_ingot
-            { itemid = xi.item.CHUNK_OF_IRON_ORE, droprate = 200 }, -- chunk_of_iron_ore
-            { itemid = xi.item.PETRIFIED_LOG,     droprate = 370 }, -- petrified_log
-        },
-
-        {
-            { itemid = xi.item.NONE,     droprate = 560 }, -- nothing
-            { itemid = xi.item.RERAISER, droprate = 440 }, -- reraiser
-        },
-    },
-
     -- BCNM Wild Wild Whiskers
     [110] =
     {
