@@ -685,8 +685,8 @@ function Battlefield.onEntryTrigger(player, npc)
     -- No one in party/alliance has battlefield status effect. We want to register a new battlefield.
     local options = xi.battlefield.getBattlefieldOptions(player, npc)
 
-    -- GMs get access to all BCNMs (FLAG_GM = 0x04000000)
-    if player:getGMLevel() > 0 and player:checkNameFlags(0x04000000) then
+    -- GMs get access to all BCNMs with visible GM
+    if player:getGMLevel() > 0 and player:getVisibleGMLevel() >= 3 then
         options = 268435455
     end
 

@@ -205,9 +205,9 @@ namespace fishingutils
         return 0;
     }
 
-    uint16 GetHookTime(CCharEntity* PChar)
+    uint8 GetHookTime(CCharEntity* PChar)
     {
-        uint16         waitTime  = 13;
+        uint8          waitTime  = 13;
         uint8          moonPhase = GetMoonPhase();
         uint8          hour      = (uint8)CVanaTime::getInstance()->getHour();
         fishing_gear_t gear      = GetFishingGear(PChar);

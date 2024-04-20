@@ -272,7 +272,6 @@ public:
     auto   getPacketName() -> std::string;
     void   renameEntity(std::string const& newName, sol::object const& arg2);
     void   hideName(bool isHidden);
-    bool   checkNameFlags(uint32 flags); // this is check and not get because it tests for a flag, it doesn't return all flags
     uint16 getModelId();
     void   setModelId(uint16 modelId, sol::object const& slotObj);
     uint16 getCostume();
@@ -305,8 +304,12 @@ public:
 
     uint8 getGMLevel();
     void  setGMLevel(uint8 level);
+    void  setVisibleGMLevel(uint8 level);
+    uint8 getVisibleGMLevel();
     bool  getGMHidden();
     void  setGMHidden(bool isHidden);
+    bool  getWallhack();
+    void  setWallhack(bool enable);
 
     bool isJailed();
     void jail();

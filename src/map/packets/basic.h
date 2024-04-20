@@ -29,7 +29,8 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include <stdio.h>
 #include <string.h>
 
-#define PACKET_SIZE 0x104
+// Max packet size
+#define PACKET_SIZE 0x1FF
 
 enum ENTITYUPDATE
 {
@@ -134,7 +135,7 @@ public:
 
     std::size_t getSize()
     {
-        return (size_t)2 * (ref<uint8>(1) & ~1);
+        return std::min<std::size_t>(2U * (ref<uint8>(1) & ~1), PACKET_SIZE);
     }
 
     unsigned short getSequence()
@@ -179,6 +180,18 @@ public:
     int8* operator[](const int index)
     {
         return reinterpret_cast<int8*>(data) + index;
+    }
+
+    // used for setting "proper" packet sizes rounded to the nearest four away from zero
+    uint32 roundUpToNearestFour(uint32 input)
+    {
+        int remainder = input % 4;
+        if (remainder == 0)
+        {
+            return input;
+        }
+
+        return input + 4 - remainder;
     }
 };
 

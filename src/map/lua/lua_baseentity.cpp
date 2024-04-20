@@ -1291,25 +1291,6 @@ void CLuaBaseEntity::resetGotMessage()
 }
 
 /************************************************************************
- *  Function: setFlag()
- *  Purpose : Sets a flag for a PC
- *  Example : player:setFlag(FLAG_GM)
- *  Notes   : Also used for Regain and Spike spell effects
- ************************************************************************/
-
-void CLuaBaseEntity::setFlag(uint32 flags)
-{
-    if (m_PBaseEntity->objtype != TYPE_PC)
-    {
-        ShowWarning("Invalid entity type calling function (%s).", m_PBaseEntity->getName());
-        return;
-    }
-
-    static_cast<CCharEntity*>(m_PBaseEntity)->nameflags.flags ^= flags;
-    m_PBaseEntity->updatemask |= UPDATE_HP;
-}
-
-/************************************************************************
  *  Function: getMoghouseFlag()
  *  Purpose : Returns exit flag for Mog House
  *  Example :
@@ -5107,29 +5088,6 @@ void CLuaBaseEntity::hideName(bool isHidden)
 }
 
 /************************************************************************
- *  Function: checkNameFlags()
- *  Purpose : Returns true if a player has name flags
- ************************************************************************/
-
-bool CLuaBaseEntity::checkNameFlags(uint32 flags)
-{
-    if (m_PBaseEntity->objtype != TYPE_PC)
-    {
-        ShowWarning("Invalid entity type calling function (%s).", m_PBaseEntity->getName());
-        return false;
-    }
-
-    auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
-
-    if (PChar->nameflags.flags & flags)
-    {
-        return true;
-    }
-
-    return false;
-}
-
-/************************************************************************
  *  Function: getModelId()
  *  Purpose : Returns the integer value of the entity's Model ID
  *  Example : mob:getModelId()
@@ -5529,7 +5487,7 @@ bool CLuaBaseEntity::isSeekingParty()
         return false;
     }
 
-    return (static_cast<CCharEntity*>(m_PBaseEntity)->nameflags.flags & FLAG_INVITE);
+    return (static_cast<CCharEntity*>(m_PBaseEntity)->isSeekingParty());
 }
 
 /************************************************************************
@@ -5546,7 +5504,7 @@ bool CLuaBaseEntity::getNewPlayer()
         return false;
     }
 
-    return (static_cast<CCharEntity*>(m_PBaseEntity)->menuConfigFlags.flags & NFLAG_NEWPLAYER) == 0;
+    return !static_cast<CCharEntity*>(m_PBaseEntity)->playerConfig.NewAdventurerOffFlg;
 }
 
 /************************************************************************
@@ -5565,18 +5523,18 @@ void CLuaBaseEntity::setNewPlayer(bool newplayer)
         return;
     }
 
-    if (newplayer == true)
+    if (newplayer)
     {
-        PChar->menuConfigFlags.flags |= NFLAG_NEWPLAYER;
+        PChar->playerConfig.NewAdventurerOffFlg = true;
     }
     else
     {
-        PChar->menuConfigFlags.flags &= ~NFLAG_NEWPLAYER;
+        PChar->playerConfig.NewAdventurerOffFlg = false;
     }
 
     PChar->updatemask |= UPDATE_HP;
 
-    charutils::SaveMenuConfigFlags(PChar);
+    charutils::SavePlayerSettings(PChar);
 }
 
 /************************************************************************
@@ -5657,6 +5615,46 @@ void CLuaBaseEntity::setGMLevel(uint8 level)
 }
 
 /************************************************************************
+ *  Function: setVisibleGMLevel()
+ *  Purpose : Updates a player's visible GM status (0-7), see https://github.com/atom0s/XiPackets/tree/main/world/server/0x0037
+ *  Example : player:setVisibleGMLevel(4)
+ ************************************************************************/
+
+void CLuaBaseEntity::setVisibleGMLevel(uint8 level)
+{
+    if (m_PBaseEntity->objtype != TYPE_PC)
+    {
+        ShowWarning("Invalid entity type calling function (%s).", m_PBaseEntity->getName());
+        return;
+    }
+
+    auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
+
+    PChar->visibleGmLevel = level;
+    PChar->updatemask |= UPDATE_HP;
+    charutils::SaveCharGMLevel(PChar);
+}
+
+/************************************************************************
+ *  Function: getVisibleGMLevel()
+ *  Purpose : Returns a players visible GM level
+ *  Example : player:getVisibleGMLevel()
+ ************************************************************************/
+
+uint8 CLuaBaseEntity::getVisibleGMLevel()
+{
+    if (m_PBaseEntity->objtype != TYPE_PC)
+    {
+        ShowWarning("Invalid entity type calling function (%s).", m_PBaseEntity->getName());
+        return 0;
+    }
+
+    auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
+
+    return PChar->visibleGmLevel;
+}
+
+/************************************************************************
  *  Function: getGMHidden()
  *  Purpose : Returns true if a GM is currently hidden
  *  Example : if player:getGMHidden() then
@@ -5691,6 +5689,10 @@ void CLuaBaseEntity::setGMHidden(bool isHidden)
     auto* PChar         = static_cast<CCharEntity*>(m_PBaseEntity);
     PChar->m_isGMHidden = isHidden;
 
+    PChar->updatemask |= UPDATE_HP;
+
+    _sql->Query("UPDATE char_flags SET gmHiddenEnabled = %u WHERE charid = %u", isHidden ? 1 : 0, PChar->id);
+
     if (PChar->loc.zone)
     {
         if (PChar->m_isGMHidden)
@@ -5702,6 +5704,43 @@ void CLuaBaseEntity::setGMHidden(bool isHidden)
             PChar->loc.zone->UpdateCharPacket(PChar, ENTITY_SPAWN, UPDATE_NONE);
         }
     }
+}
+
+/************************************************************************
+ *  Function: getWallhack()
+ *  Purpose : gets the wallhack variable (true/false) from a target
+ *  Example : player:getWallhack()
+ ************************************************************************/
+
+bool CLuaBaseEntity::getWallhack()
+{
+    if (m_PBaseEntity->objtype != TYPE_PC)
+    {
+        ShowWarning("Invalid entity type calling function (%s).", m_PBaseEntity->getName());
+        return false;
+    }
+
+    auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
+    return PChar->wallhackEnabled;
+}
+
+/************************************************************************
+ *  Function: setWallhack()
+ *  Purpose : Sets a GM to have wallhacking enabled/disabled
+ *  Example : player:setWallhack(1)
+ ************************************************************************/
+
+void CLuaBaseEntity::setWallhack(bool enabled)
+{
+    if (m_PBaseEntity->objtype != TYPE_PC)
+    {
+        ShowWarning("Invalid entity type calling function (%s).", m_PBaseEntity->getName());
+        return;
+    }
+
+    auto* PChar            = static_cast<CCharEntity*>(m_PBaseEntity);
+    PChar->wallhackEnabled = enabled;
+    PChar->updatemask |= UPDATE_HP;
 }
 
 /************************************************************************
@@ -17325,7 +17364,6 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("didGetMessage", CLuaBaseEntity::didGetMessage);
     SOL_REGISTER("resetGotMessage", CLuaBaseEntity::resetGotMessage);
 
-    SOL_REGISTER("setFlag", CLuaBaseEntity::setFlag);
     SOL_REGISTER("getMoghouseFlag", CLuaBaseEntity::getMoghouseFlag);
     SOL_REGISTER("setMoghouseFlag", CLuaBaseEntity::setMoghouseFlag);
     SOL_REGISTER("needToZone", CLuaBaseEntity::needToZone);
@@ -17482,7 +17520,6 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("getPacketName", CLuaBaseEntity::getPacketName);
     SOL_REGISTER("renameEntity", CLuaBaseEntity::renameEntity);
     SOL_REGISTER("hideName", CLuaBaseEntity::hideName);
-    SOL_REGISTER("checkNameFlags", CLuaBaseEntity::checkNameFlags);
     SOL_REGISTER("getModelId", CLuaBaseEntity::getModelId);
     SOL_REGISTER("setModelId", CLuaBaseEntity::setModelId);
     SOL_REGISTER("getCostume", CLuaBaseEntity::getCostume);
@@ -17514,8 +17551,12 @@ void CLuaBaseEntity::Register()
 
     SOL_REGISTER("getGMLevel", CLuaBaseEntity::getGMLevel);
     SOL_REGISTER("setGMLevel", CLuaBaseEntity::setGMLevel);
+    SOL_REGISTER("setVisibleGMLevel", CLuaBaseEntity::setVisibleGMLevel);
+    SOL_REGISTER("getVisibleGMLevel", CLuaBaseEntity::getVisibleGMLevel);
     SOL_REGISTER("getGMHidden", CLuaBaseEntity::getGMHidden);
     SOL_REGISTER("setGMHidden", CLuaBaseEntity::setGMHidden);
+    SOL_REGISTER("getWallhack", CLuaBaseEntity::getWallhack);
+    SOL_REGISTER("setWallhack", CLuaBaseEntity::setWallhack);
 
     SOL_REGISTER("isJailed", CLuaBaseEntity::isJailed);
     SOL_REGISTER("jail", CLuaBaseEntity::jail);

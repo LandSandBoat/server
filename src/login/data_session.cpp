@@ -158,6 +158,7 @@ void data_session::read_func()
                         characterInfo.character_info.hair_no    = static_cast<uint8>(_sql->GetUIntData(6)); // face, may not be calculated correctly?
                         characterInfo.character_info.size       = static_cast<uint8>(_sql->GetUIntData(38));
 
+                        // TODO: add check for DisplayHeadOffFlg
                         characterInfo.character_info.GrapIDTbl[0] = static_cast<uint16>(_sql->GetUIntData(6));  // face, may not be calculated correctly?
                         characterInfo.character_info.GrapIDTbl[1] = static_cast<uint16>(_sql->GetUIntData(7));  // head
                         characterInfo.character_info.GrapIDTbl[2] = static_cast<uint16>(_sql->GetUIntData(8));  // body
@@ -400,6 +401,7 @@ void data_session::read_func()
                         }
                     }
 
+                    _sql->Query("UPDATE char_flags SET disconnecting = 0 WHERE charid = %u", charid);
                     _sql->Query("UPDATE char_stats SET zoning = 2 WHERE charid = %u", charid);
                 }
                 else
