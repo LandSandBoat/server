@@ -844,7 +844,10 @@ namespace charutils
         BuildingCharTraitsTable(PChar);
 
         // Order matters as this uses merits and JP gifts.
-        puppetutils::LoadAutomaton(PChar);
+        if (PChar->petZoningInfo.petID >= PETID_HARLEQUINFRAME && PChar->petZoningInfo.petID <= PETID_STORMWAKERFRAME)
+        {
+            puppetutils::LoadAutomaton(PChar);
+        }
 
         PChar->animation = (HP == 0 ? ANIMATION_DEATH : ANIMATION_NONE);
 
