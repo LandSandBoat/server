@@ -6201,6 +6201,7 @@ void SmallPacket0x0DB(map_session_data_t* const PSession, CCharEntity* const PCh
     std::memcpy(&oldChatFilter1, &PChar->playerConfig.MassageFilter, sizeof(uint32_t));
     std::memcpy(&oldChatFilter2, &PChar->playerConfig.MassageFilter2, sizeof(uint32_t));
 
+    // Player updated their search language(s).
     if (packet.Kind == 1)
     {
         uint8 oldLanguages     = PChar->search.language;
@@ -6317,7 +6318,7 @@ void SmallPacket0x0DC(map_session_data_t* const PSession, CCharEntity* const PCh
             }
             break;
         case 0x04000000:
-            // Cancel new adventurer status.
+            // Cancel new adventurer status from help desk menu.
             if (data.ref<uint8>(0x10) == 1)
             {
                 PChar->playerConfig.NewAdventurerOffFlg = true;

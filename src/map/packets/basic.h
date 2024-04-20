@@ -135,7 +135,7 @@ public:
 
     std::size_t getSize()
     {
-        return std::min<std::size_t>((size_t)2 * (ref<uint8>(1) & ~1), PACKET_SIZE);
+        return std::min<std::size_t>(2U * (ref<uint8>(1) & ~1), PACKET_SIZE);
     }
 
     unsigned short getSequence()
@@ -187,7 +187,9 @@ public:
     {
         int remainder = input % 4;
         if (remainder == 0)
+        {
             return input;
+        }
 
         return input + 4 - remainder;
     }
