@@ -305,7 +305,7 @@ void CCharPacket::updateWith(CCharEntity* PChar, ENTITYUPDATE type, uint8 update
         packet.Flags1.TalkUcoffFlag   = 0; // Unknown, but used with events. // TOOD: verify how/when this is used.
         packet.Flags1.GmLevel         = PChar->visibleGmLevel;
         packet.Flags1.HackMove        = PChar->wallhackEnabled;
-        packet.Flags1.InvisFlag       = PChar->StatusEffectContainer->HasStatusEffectByFlag(EFFECTFLAG_INVISIBLE);
+        packet.Flags1.InvisFlag       = PChar->m_isGMHidden || PChar->StatusEffectContainer->HasStatusEffectByFlag(EFFECTFLAG_INVISIBLE);
         packet.Flags1.TurnFlag        = 0; // I do not believe we currently use this. // TOOD: get the lerp values from retail somehow.
         packet.Flags1.BazaarFlag      = PChar->hasBazaar();
 
@@ -335,7 +335,7 @@ void CCharPacket::updateWith(CCharEntity* PChar, ENTITYUPDATE type, uint8 update
         packet.Flags3.PetFlag          = 0;
         packet.Flags3.BallistaTeam     = static_cast<uint8_t>(PChar->allegiance); // Also used during Ballista with slightly different values.
         packet.Flags3.MonStat          = 0;                                       // Some monstrosity flag. // TODO: verify if we already use this.
-        packet.Flags3.SilenceFlag      = PChar->StatusEffectContainer->HasStatusEffect(EFFECT_SNEAK);
+        packet.Flags3.SilenceFlag      = PChar->m_isGMHidden || PChar->StatusEffectContainer->HasStatusEffect(EFFECT_SNEAK);
         packet.Flags3.NewCharacterFlag = !PChar->playerConfig.NewAdventurerOffFlg;
         packet.Flags3.MentorFlag       = PChar->playerConfig.MentorFlg;
 

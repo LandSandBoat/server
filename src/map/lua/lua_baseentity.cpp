@@ -5689,6 +5689,10 @@ void CLuaBaseEntity::setGMHidden(bool isHidden)
     auto* PChar         = static_cast<CCharEntity*>(m_PBaseEntity);
     PChar->m_isGMHidden = isHidden;
 
+    PChar->updatemask |= UPDATE_HP;
+
+    _sql->Query("UPDATE char_flags SET gmHiddenEnabled = %u WHERE charid = %u", isHidden ? 1 : 0, PChar->id);
+
     if (PChar->loc.zone)
     {
         if (PChar->m_isGMHidden)

@@ -401,6 +401,7 @@ void data_session::read_func()
                         }
                     }
 
+                    _sql->Query("UPDATE char_flags SET disconnecting = 0 WHERE charid = %u", charid);
                     _sql->Query("UPDATE char_stats SET zoning = 2 WHERE charid = %u", charid);
                 }
                 else

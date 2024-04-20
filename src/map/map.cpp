@@ -1081,6 +1081,8 @@ int32 map_cleanup(time_point tick, CTaskMgr::CTask* PTask)
         {
             if (PChar != nullptr && !PChar->isLinkDead)
             {
+                _sql->Query("UPDATE char_flags SET disconnecting = 1 WHERE charid = %u", PChar->id);
+
                 PChar->isLinkDead = true;
                 PChar->updatemask |= UPDATE_HP;
 
@@ -1215,6 +1217,8 @@ int32 map_cleanup(time_point tick, CTaskMgr::CTask* PTask)
         }
         else if (PChar != nullptr && PChar->isLinkDead)
         {
+            _sql->Query("UPDATE char_flags SET disconnecting = 0 WHERE charid = %u", PChar->id);
+
             PChar->isLinkDead = false;
             PChar->updatemask |= UPDATE_HP;
 

@@ -25,15 +25,12 @@ def needs_to_run(cur):
 def migrate(cur, db):
     try:
         # Delete old nameflags/chat filters because they cannot be converted
-        print("drop nnameflags and chatfilters")
         cur.execute(
             "ALTER TABLE `chars` \
         DROP COLUMN `nnameflags`, \
         DROP COLUMN `chatfilters`;"
         )
         db.commit()
-
-        print("drop nameflags")
 
         cur.execute(
             "ALTER TABLE `char_stats` \
@@ -42,27 +39,26 @@ def migrate(cur, db):
         db.commit()
 
         # add new columns
-        print("add settings")
-
         cur.execute(
             "ALTER TABLE `chars` \
         ADD COLUMN `settings` bigint(20) unsigned NOT NULL DEFAULT '0' AFTER `isstylelocked`;"
         )
         db.commit()
 
-        print("add chatfilters_1")
         cur.execute(
             "ALTER TABLE `chars` \
         ADD COLUMN `chatfilters_1` bigint(20) unsigned NOT NULL DEFAULT '0' AFTER `settings`;"
         )
         db.commit()
 
-        print("add chatfilters_2")
         cur.execute(
             "ALTER TABLE `chars` \
         ADD COLUMN `chatfilters_2` bigint(20) unsigned NOT NULL DEFAULT '0' AFTER `chatfilters_1`;"
         )
         db.commit()
+
+        # Add default row for each character into new char_flags table, on duplicate do nothing.
+        cur.execute("INSERT INTO char_flags (charid) SELECT charid FROM chars ON DUPLICATE KEY UPDATE char_flags.disconnecting = char_flags.disconnecting;");
 
     except mariadb.Error as err:
         print("Something went wrong: {}".format(err))

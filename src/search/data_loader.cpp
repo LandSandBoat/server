@@ -244,13 +244,14 @@ std::list<SearchEntity*> CDataLoader::GetPlayersList(search_req sr, int* count)
 
     std::string fmtQuery =
         "SELECT charid, partyid, charname, pos_zone, pos_prevzone, nation, rank_sandoria, rank_bastok, "
-        "rank_windurst, race, mjob, sjob, mlvl, slvl, languages, settings, seacom_type "
+        "rank_windurst, race, mjob, sjob, mlvl, slvl, languages, settings, seacom_type, disconnecting, gmHiddenEnabled "
         "FROM accounts_sessions "
         "LEFT JOIN accounts_parties USING (charid) "
         "LEFT JOIN chars USING (charid) "
         "LEFT JOIN char_look USING (charid) "
         "LEFT JOIN char_stats USING (charid) "
         "LEFT JOIN char_profile USING(charid) "
+        "LEFT JOIN char_flags USING(charid) "
         "WHERE charname IS NOT NULL ";
 
     fmtQuery.append(filterQry);
@@ -299,11 +300,13 @@ std::list<SearchEntity*> CDataLoader::GetPlayersList(search_req sr, int* count)
             SAVE_CONF playerSettings = {};
             std::memcpy(&playerSettings, &settingsInt, sizeof(uint32));
 
-            PPlayer->zone        = (PPlayer->zone == 0 ? PPlayer->prevzone : PPlayer->zone);
-            PPlayer->languages   = (uint8)rset->getUInt("languages");
-            PPlayer->mentor      = playerSettings.MentorFlg;
-            PPlayer->seacom_type = (uint8)rset->getUInt("seacom_type");
-            uint32 partyid       = rset->getUInt("partyid");
+            PPlayer->zone          = (PPlayer->zone == 0 ? PPlayer->prevzone : PPlayer->zone);
+            PPlayer->languages     = (uint8)rset->getUInt("languages");
+            PPlayer->mentor        = playerSettings.MentorFlg;
+            PPlayer->seacom_type   = (uint8)rset->getUInt("seacom_type");
+            PPlayer->disconnecting = rset->getUInt("disconnecting");
+            PPlayer->gmHidden      = rset->getUInt("gmHiddenEnabled");
+            uint32 partyid         = rset->getUInt("partyid");
 
             if (PPlayer->mentor)
             {
@@ -325,13 +328,10 @@ std::list<SearchEntity*> CDataLoader::GetPlayersList(search_req sr, int* count)
                 PPlayer->flags1 |= 0x0100;
             }
 
-            // TODO: Implement DC flag, probably a field in the database...?
-            /*
-            if (nameflag & FLAG_DC)
+            if (PPlayer->disconnecting)
             {
                 PPlayer->flags1 |= 0x0800;
             }
-            */
 
             if (partyid != 0)
             {
@@ -449,12 +449,10 @@ std::list<SearchEntity*> CDataLoader::GetPlayersList(search_req sr, int* count)
                 }
             }
 
-            // dont show hidden gm ; TODO!
-            /*
-            if (playerSettings.AnonymityFlg && {some way to check if !hide is on))
+            if (PPlayer->gmHidden)
             {
                 continue;
-            }*/
+            }
 
             if (visibleResults < 40)
             {
@@ -484,13 +482,14 @@ std::list<SearchEntity*> CDataLoader::GetPartyList(uint32 PartyID, uint32 Allian
     std::list<SearchEntity*> PartyList;
 
     const char* query =
-        "SELECT charid, partyid, charname, pos_zone, nation, rank_sandoria, rank_bastok, rank_windurst, race, settings, mjob, sjob, mlvl, slvl, languages, seacom_type "
+        "SELECT charid, partyid, charname, pos_zone, nation, rank_sandoria, rank_bastok, rank_windurst, race, settings, mjob, sjob, mlvl, slvl, languages, seacom_type, disconnecting "
         "FROM accounts_sessions "
         "LEFT JOIN accounts_parties USING(charid) "
         "LEFT JOIN chars USING(charid) "
         "LEFT JOIN char_look USING(charid) "
         "LEFT JOIN char_stats USING(charid) "
         "LEFT JOIN char_profile USING(charid) "
+        "LEFT JOIN char_flags USING(charid) "
         "WHERE IF (allianceid <> 0, allianceid IN (SELECT allianceid FROM accounts_parties WHERE charid = %u) , partyid = %u) "
         "ORDER BY charname ASC "
         "LIMIT 64";
@@ -534,9 +533,10 @@ std::list<SearchEntity*> CDataLoader::GetPartyList(uint32 PartyID, uint32 Allian
             SAVE_CONF playerSettings = {};
             std::memcpy(&playerSettings, &settingsInt, sizeof(uint32));
 
-            PPlayer->languages   = (uint8)rset->getUInt("languages");
-            PPlayer->mentor      = playerSettings.MentorFlg;
-            PPlayer->seacom_type = (uint8)rset->getUInt("seacom_type");
+            PPlayer->languages     = (uint8)rset->getUInt("languages");
+            PPlayer->mentor        = playerSettings.MentorFlg;
+            PPlayer->seacom_type   = (uint8)rset->getUInt("seacom_type");
+            PPlayer->disconnecting = rset->getUInt("disconnecting");
 
             if (PPlayer->mentor)
             {
@@ -554,12 +554,10 @@ std::list<SearchEntity*> CDataLoader::GetPartyList(uint32 PartyID, uint32 Allian
             {
                 PPlayer->flags1 |= 0x0100;
             }
-            // TODO
-            /*
-            if (nameflag & FLAG_DC)
+            if (PPlayer->disconnecting)
             {
                 PPlayer->flags1 |= 0x0800;
-            }*/
+            }
             if (PartyID != 0)
             {
                 PPlayer->flags1 |= 0x2000;
@@ -592,13 +590,14 @@ std::list<SearchEntity*> CDataLoader::GetLinkshellList(uint32 LinkshellID)
     std::list<SearchEntity*> LinkshellList;
     const char*              fmtQuery = "SELECT charid, partyid, charname, pos_zone, nation, rank_sandoria, rank_bastok, rank_windurst, race, settings, mjob, sjob, "
                                         "mlvl, slvl, linkshellid1, linkshellid2, "
-                                        "linkshellrank1, linkshellrank2 "
+                                        "linkshellrank1, linkshellrank2, disconnecting "
                                         "FROM accounts_sessions "
                                         "LEFT JOIN accounts_parties USING (charid) "
                                         "LEFT JOIN chars USING (charid) "
                                         "LEFT JOIN char_look USING (charid) "
                                         "LEFT JOIN char_stats USING (charid) "
                                         "LEFT JOIN char_profile USING(charid) "
+                                        "LEFT JOIN char_flags USING(charid) "
                                         "WHERE linkshellid1 = %u OR linkshellid2 = %u "
                                         "ORDER BY charname ASC "
                                         "LIMIT 18";
@@ -642,6 +641,7 @@ std::list<SearchEntity*> CDataLoader::GetLinkshellList(uint32 LinkshellID)
             PPlayer->linkshellid2   = rset->getInt("linkshellid2");
             PPlayer->linkshellrank1 = rset->getInt("linkshellrank1");
             PPlayer->linkshellrank2 = rset->getInt("linkshellrank2");
+            PPlayer->disconnecting  = rset->getInt("disconnecting");
             uint32 partyid          = rset->getUInt("partyid");
 
             uint32    settingsInt    = rset->getUInt("settings");
@@ -656,13 +656,12 @@ std::list<SearchEntity*> CDataLoader::GetLinkshellList(uint32 LinkshellID)
             {
                 PPlayer->flags1 |= 0x0100;
             }
-            // TODO
-            /*
-            if (nameflag & FLAG_DC)
+
+            if (PPlayer->disconnecting)
             {
                 PPlayer->flags1 |= 0x0800;
             }
-             */
+
             if (partyid != 0)
             {
                 PPlayer->flags1 |= 0x2000;

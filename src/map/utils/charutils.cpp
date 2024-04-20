@@ -811,6 +811,24 @@ namespace charutils
             PChar->m_FieldChocobo = rset->getUInt("field_chocobo");
         }
 
+        // TODO: LoadCharFlagsFromSQL
+        fmtQuery = "SELECT gmModeEnabled, gmHiddenEnabled FROM char_flags WHERE charid = (?)";
+
+        rset = db::preparedStmt(fmtQuery, PChar->id);
+        if (rset && rset->rowsCount() && rset->next())
+        {
+            bool gmEnabled = rset->getUInt("gmModeEnabled");
+            bool gmHidden  = rset->getUInt("gmHiddenEnabled");
+
+            if (gmEnabled)
+            {
+                // + 3 because visible GM level starts at 3 (0 is none, 1-2 are special icons)
+                PChar->visibleGmLevel = std::min(PChar->m_GMlevel + 3, 7);
+            }
+
+            PChar->m_isGMHidden = gmHidden;
+        }
+
         monstrosity::TryPopulateMonstrosityData(PChar);
 
         charutils::LoadInventory(PChar);
@@ -5358,6 +5376,8 @@ namespace charutils
         const char* Query = "UPDATE %s SET %s %u WHERE charid = %u";
 
         _sql->Query(Query, "chars", "gmlevel =", PChar->m_GMlevel, PChar->id);
+
+        _sql->Query(Query, "char_flags", "gmModeEnabled =", PChar->m_GMlevel >= 3 ? 1 : 0, PChar->id);
     }
 
     void SaveMentorFlag(CCharEntity* PChar)

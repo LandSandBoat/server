@@ -279,7 +279,7 @@ CCharUpdatePacket::CCharUpdatePacket(CCharEntity* PChar)
     flags1.Hackmove     = PChar->wallhackEnabled; // GM wallhack, walk through walls
     flags1.FreezeFlag   = 0;                      // Freeze client in place. Is this used?
     flags1.unknown_1_14 = 0;                      // Unknown.
-    flags1.InvisFlag    = PChar->StatusEffectContainer->HasStatusEffectByFlag(EFFECTFLAG_INVISIBLE);
+    flags1.InvisFlag    = PChar->m_isGMHidden || PChar->StatusEffectContainer->HasStatusEffectByFlag(EFFECTFLAG_INVISIBLE);
     flags1.unknown_2_16 = 0; // Unknown.
     flags1.SpeedBase    = PChar->speedsub;
     flags1.unknown_3_25 = 0; // Unknown
