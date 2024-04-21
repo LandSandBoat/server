@@ -2,11 +2,10 @@
 -- Area: Arrapago Reef
 --  ZNM: Velionis
 -----------------------------------
-mixins = { require('scripts/mixins/rage') }
------------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)
+    xi.applyMixins(mob, xi.mixins.rage, { rageTimer = utils.minutes(60) })
     mob:setMobMod(xi.mobMod.AUTO_SPIKES, 1)
     mob:addStatusEffect(xi.effect.BLAZE_SPIKES, 200, 0, 0) -- Wiki says "180-230" and we have NO DATA! We don't know what the players conditions/gear was.
     mob:getStatusEffect(xi.effect.BLAZE_SPIKES):setEffectFlags(xi.effectFlag.DEATH)
@@ -14,7 +13,6 @@ entity.onMobInitialize = function(mob)
 end
 
 entity.onMobSpawn = function(mob)
-    mob:setLocalVar('[rage]timer', 3600) -- 60 minutes
     mob:setAutoAttackEnabled(false)
     mob:setMod(xi.mod.FASTCAST, 15)
     mob:setLocalVar('HPP', 90)

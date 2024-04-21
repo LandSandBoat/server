@@ -4,11 +4,11 @@
 -- https://www.bg-wiki.com/ffxi/Flockbock
 -- TODO: NM has several possible spawn locations
 -----------------------------------
-mixins = { require('scripts/mixins/rage') }
------------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)
+    xi.applyMixins(mob, xi.mixins.rage, { rageTimer = utils.minutes(60) })
+
     -- Has enhanced double attack.
     -- TODO: Exact STP value needs to be researched further
     mob:setMod(xi.mod.DOUBLE_ATTACK, 50)
@@ -24,8 +24,6 @@ entity.onMobSpawn = function(mob)
             mob:resetEnmity(target)
         end
     end)
-
-    mob:setLocalVar('[rage]timer', 3600) -- 60 minutes
 end
 
 -- TODO: Mob's movement speed is increased while chasing target.

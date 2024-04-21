@@ -5,16 +5,14 @@
 -- 2.5 mins. st form mimics all spells 2nd form cast spells from list only
 -- todo: when mimics a spell will cast the next tier spell
 -----------------------------------
-mixins = { require('scripts/mixins/rage') }
------------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)
+    xi.applyMixins(mob, xi.mixins.rage, { rageTimer = utils.minutes(60) })
     mob:setMobMod(xi.mobMod.IDLE_DESPAWN, 300)
 end
 
 entity.onMobSpawn = function(mob)
-    mob:setLocalVar('[rage]timer', 3600) -- 60 minutes
     mob:setLocalVar('changeTime', 150)
     mob:setLocalVar('useWise', math.random(25, 50))
     mob:addMod(xi.mod.UFASTCAST, 150)

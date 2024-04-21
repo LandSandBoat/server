@@ -2,16 +2,14 @@
 -- Area: Garlaige Citadel (200)
 --   NM: Serket
 -----------------------------------
-mixins = { require('scripts/mixins/rage') }
------------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)
+    xi.applyMixins(mob, xi.mixins.rage, { rageTimer = utils.minutes(30) })
     mob:setMobMod(xi.mobMod.DRAW_IN, 1)
 end
 
 entity.onMobSpawn = function(mob)
-    mob:setLocalVar('[rage]timer', 1800) -- 30 minutes
 end
 
 entity.onMobDeath = function(mob, player, optParams)

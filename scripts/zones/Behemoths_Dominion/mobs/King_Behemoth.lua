@@ -3,18 +3,16 @@
 --  HNM: King Behemoth
 -----------------------------------
 local ID = zones[xi.zone.BEHEMOTHS_DOMINION]
-mixins = { require('scripts/mixins/rage') }
 -----------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)
+    xi.applyMixins(mob, xi.mixins.rage, { rageTimer = utils.minutes(60) })
     mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
     mob:setMobMod(xi.mobMod.MAGIC_COOL, 60)
 end
 
 entity.onMobSpawn = function(mob)
-    mob:setLocalVar('[rage]timer', 3600) -- 60 minutes
-
     -- Despawn the ???
     GetNPCByID(ID.npc.BEHEMOTH_QM):setStatus(xi.status.DISAPPEAR)
 end

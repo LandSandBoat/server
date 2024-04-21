@@ -2,9 +2,11 @@
 -- Area: Rolanberry Fields (110)
 --  HNM: Simurgh
 -----------------------------------
-mixins = { require('scripts/mixins/rage') }
------------------------------------
 local entity = {}
+
+entity.onMobInitialize = function(mob)
+    xi.applyMixins(mob, mixins.rage)
+end
 
 entity.onMobDeath = function(mob, player, optParams)
     player:addTitle(xi.title.SIMURGH_POACHER)

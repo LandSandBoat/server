@@ -2,15 +2,12 @@
 -- Area: Jugner Forest
 --   NM: King Arthro
 -----------------------------------
-mixins =
-{
-    require('scripts/mixins/job_special'),
-    require('scripts/mixins/rage')
-}
------------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)
+    xi.applyMixins(mob, mixins.rage, { rageTimer = utils.minutes(60) })
+    xi.applyMixins(mob, mixins.job_special)
+
     mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
     mob:setMod(xi.mod.UFASTCAST, 100)
 end

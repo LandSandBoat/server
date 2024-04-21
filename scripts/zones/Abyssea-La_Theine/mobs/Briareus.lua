@@ -24,7 +24,7 @@ local mercurialEffects =
 }
 
 entity.onMobInitialize = function(mob)
-    xi.applyMixins(mob, xi.mixins.rage, { rageTimer = 5400 })
+    xi.applyMixins(mob, xi.mixins.rage, { rageTimer = utils.minutes(90) })
 end
 
 entity.onMobSpawn = function(mob)
