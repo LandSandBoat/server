@@ -3,13 +3,15 @@
 --  HNM: Fafnir
 -----------------------------------
 local ID = zones[xi.zone.DRAGONS_AERY]
-mixins = { require('scripts/mixins/rage') }
 -----------------------------------
 ---@type TMobEntity
 local entity = {}
 
+entity.onMobInitialize = function(mob)
+    xi.applyMixins(mob, mixins.rage, { rageTimer = utils.minutes(60) })
+end
+
 entity.onMobSpawn = function(mob)
-    mob:setLocalVar('[rage]timer', 3600) -- 60 minutes
     mob:setMobMod(xi.mobMod.WEAPON_BONUS, 50) -- Level 90 + 50 = 140 Base Weapon Damage
 
     -- Despawn the ???

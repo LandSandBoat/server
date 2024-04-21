@@ -6,12 +6,11 @@
 -- Wiki: http://ffxiclopedia.wikia.com/wiki/Sarameya
 -- TODO: PostAIRewrite: Code the Howl effect and gradual resists.
 -----------------------------------
-mixins = { require('scripts/mixins/rage') }
------------------------------------
 ---@type TMobEntity
 local entity = {}
 
 entity.onMobInitialize = function(mob)
+    xi.applyMixins(mob, xi.mixins.rage, { rageTimer = utils.minutes(60) })
     mob:setMobMod(xi.mobMod.GA_CHANCE, 50)
     mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
 end
@@ -22,7 +21,6 @@ entity.onMobSpawn = function(mob)
     mob:addMod(xi.mod.SILENCE_MEVA, 20)
     mob:addMod(xi.mod.GRAVITY_MEVA, 20)
     mob:addMod(xi.mod.LULLABY_MEVA, 30)
-    mob:setLocalVar('[rage]timer', 3600) -- 60 minutes
 end
 
 entity.onMobRoam = function(mob)
