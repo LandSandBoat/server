@@ -90,6 +90,17 @@ local function getBaseMPCost(player, ability)
         [xi.jobAbility.RUSH]             = 164,
         [xi.jobAbility.HEAVENLY_STRIKE]  = 182,
         [xi.jobAbility.CRYSTAL_BLESSING] = 201,
+        -- Ramuh
+        [xi.jobAbility.SHOCK_STRIKE]     =   6,
+        [xi.jobAbility.THUNDER_II]       =  24,
+        [xi.jobAbility.THUNDERSPARK]     =  38,
+        [xi.jobAbility.ROLLING_THUNDER]  =  52,
+        [xi.jobAbility.SHOCK_SQUALL]     =  67,
+        [xi.jobAbility.LIGHTNING_ARMOR]  =  91,
+        [xi.jobAbility.THUNDER_IV]       = 118,
+        [xi.jobAbility.CHAOTIC_STRIKE]   = 164,
+        [xi.jobAbility.THUNDERSTORM]     = 182,
+        [xi.jobAbility.VOLT_STRIKE]      = 229,
         -- Siren
         [xi.jobAbility.WELT]             =   9,
         [xi.jobAbility.ROUNDHOUSE]       =  52,
