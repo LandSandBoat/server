@@ -397,6 +397,7 @@ function Battlefield:new(data)
     obj.levelCap         = data.levelCap or 0
     obj.allowSubjob      = (data.allowSubjob == nil or data.allowSubjob) or false
     obj.hasWipeGrace     = (data.hasWipeGrace == nil or data.hasWipeGrace) or false
+    obj.isMission        = data.isMission and data.isMission or false
     obj.canLoseExp       = (data.canLoseExp == nil or data.canLoseExp) or false
     obj.showTimer        = (data.showTimer == nil or data.showTimer) or false
     obj.delayToExit      = data.delayToExit or 5
@@ -764,10 +765,6 @@ function Battlefield:onEntryEventUpdate(player, csid, option, npc)
 
     if battlefield then
         name, clearTime, partySize = battlefield:getRecord()
-        print(name)
-        print(clearTime)
-        print(partySize)
-
         initiatorId, _ = battlefield:getInitiator()
     end
 
@@ -1217,8 +1214,6 @@ BattlefieldMission.__eq    = function(m1, m2)
     return m1.name == m2.name
 end
 
-BattlefieldMission.isMission = true
-
 -- Creates a new Limbus Battlefield interaction
 -- Data takes the additional following keys:
 --  - missionArea: The mission area this battlefield is associated with (optional)
@@ -1232,6 +1227,7 @@ function BattlefieldMission:new(data)
     local obj = Battlefield:new(data)
 
     setmetatable(obj, self)
+    obj.isMission             = true
     obj.missionArea           = data.missionArea
     obj.mission               = data.mission
     obj.missionStatusArea     = data.missionStatusArea

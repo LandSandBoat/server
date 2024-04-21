@@ -19,6 +19,10 @@ local content = Battlefield:new({
 })
 
 function content:checkRequirements(player, npc, isRegistrant, trade)
+    if trade then
+        return false
+    end
+
     local isCurrentMission   = player:getCurrentMission(xi.mission.log_id.SANDORIA) == xi.mission.id.sandoria.JOURNEY_TO_WINDURST2 or
         player:getCurrentMission(xi.mission.log_id.BASTOK) == xi.mission.id.bastok.THE_EMISSARY_WINDURST2
     local currentRequiremets = isCurrentMission and player:hasKeyItem(xi.ki.DARK_KEY)
