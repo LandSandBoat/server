@@ -163,6 +163,7 @@ INSERT INTO `instance_list` VALUES (25900,'behind_the_sluices',259,258,0,-153.00
 -- YORCIA_WEALD_U (zoneID: 264, starting id: 26400)
 
 -- CIRDAS_CAVERNS_U (zoneID: 271, starting id: 27100)
+INSERT INTO `instance_list` VALUES (27100,'stonewalled',271,267,30,-140,31.3,240,64,-1,-1,-1,-1);
 
 -- OUTER_RAKAZNAR_U (zoneID: 275, starting id: 27500)
 

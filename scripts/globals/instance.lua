@@ -264,7 +264,7 @@ xi.instance.lookup =
 
     [xi.zone.CIRDAS_CAVERNS_U] =
     {
-
+        { 27100, { 5511, 267, 16 }, { 5511, 8 }, { 271, 0 } }, -- SOA 3-6-3: Stonewalled
     },
 
     [xi.zone.OUTER_RAKAZNAR_U1] =
