@@ -109,12 +109,22 @@ xi.spells.enhancing.calculateSongPower = function(caster, target, spell, spellId
     local power       = pTable[spellId][7] -- The variable we want to calculate.
     local meritEffect = pTable[spellId][5]
     local jpEffect    = pTable[spellId][6]
-    local skillReq    = pTable[spellId][8]
+    local skillNeeded = pTable[spellId][8]
     local potencyCap  = pTable[spellId][9]
     local multiplier  = pTable[spellId][10]
     local divisor     = pTable[spellId][11]
+    local singingLvl  = caster:getSkillLevel(xi.skill.SINGING)
+    local rangedLvl   = caster:getWeaponSkillLevel(xi.slot.RANGED)
 
-    local singingLvl  = caster:getSkillLevel(xi.skill.SINGING) + caster:getWeaponSkillLevel(xi.slot.RANGED)
+    -- Add ranged skill level ONLY if it's an instrument.
+    local rangeType = caster:getWeaponSkillType(xi.slot.RANGED)
+
+    if
+        rangeType == xi.skill.STRING_INSTRUMENT or
+        rangeType == xi.skill.WIND_INSTRUMENT
+    then
+        singingLvl = singingLvl + rangedLvl
+    end
 
     -- Get Potency bonuses from Singing Skill and Instrument Skill. TODO: Investigate JP-Wiki. Most of this makes no sense.
     -- NOTE: Tier 1 Etudes.
@@ -143,15 +153,15 @@ xi.spells.enhancing.calculateSongPower = function(caster, target, spell, spellId
         end
     -- Other songs.
     else
-        if singingLvl > skillReq then
+        if singingLvl > skillNeeded then
             -- NOTE: Paeon
             if divisor == 0 then
-                if skillReq > 0 then
+                if skillNeeded > 0 then
                     power = power + 1
                 end
             -- NOTE: Aubade, Capriccio, Gavotte, Madrigal, March, Minne, Minuet, Operetta, Pastoral, Prelude, Round.
             else
-                power = math.floor(power + (singingLvl - skillReq) / divisor)
+                power = math.floor(power + (singingLvl - skillNeeded) / divisor)
             end
         end
 
