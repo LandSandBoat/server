@@ -175,12 +175,6 @@ uint16 CMobSkill::getAnimationID() const
 
 uint16 CMobSkill::getPetAnimationID() const
 {
-    // rumah
-    if (m_AnimID >= 591 && m_AnimID <= 599)
-    {
-        return m_AnimID - 479;
-    }
-
     // wyvern
     if (m_AnimID >= 621 && m_AnimID <= 632)
     {
