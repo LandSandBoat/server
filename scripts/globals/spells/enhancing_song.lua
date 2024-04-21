@@ -15,25 +15,25 @@ xi.spells.enhancing = xi.spells.enhancing or {}
 local pTable =
 {
 --                                          1     2                  3                       4                       5                         6                     7     8    9    10   11  12
--- Structure:                 [spellId] = { Tier, Main Effect,       subEffect,              Main Modifier,          Merit Effect,             Job-Point Effect,     power Scap Pcap Mult Div SVP },
+-- Structure:                 [spellId] = { Tier, Main Effect,       subEffect,              Main Modifier,          Merit Effect,             Job-Point Effect,     power Sreq Pcap Mult Div SVP },
     -- Ballad
     [xi.magic.spell.MAGES_BALLAD      ] = { 1, xi.effect.BALLAD,    xi.mod.AUGMENT_SONG_STAT, xi.mod.BALLAD_EFFECT,   0,                        0,                    1,   0,   1,   1,  0, true  },
     [xi.magic.spell.MAGES_BALLAD_II   ] = { 2, xi.effect.BALLAD,    xi.mod.AUGMENT_SONG_STAT, xi.mod.BALLAD_EFFECT,   0,                        0,                    2,   0,   2,   1,  0, true  },
     [xi.magic.spell.MAGES_BALLAD_III  ] = { 3, xi.effect.BALLAD,    xi.mod.AUGMENT_SONG_STAT, xi.mod.BALLAD_EFFECT,   0,                        0,                    3,   0,   3,   1,  0, true  },
     -- Carol - NOTE: CAROL II Gives a fixed elemental evasion. However, it also gives a Elemental Nullification effect, that follows regular song rules concerning power.
-    [xi.magic.spell.FIRE_CAROL        ] = { 1, xi.effect.CAROL,     xi.element.FIRE,        xi.mod.CAROL_EFFECT,    0,                        0,                   20, 200,  80,   8, 10, true  },
-    [xi.magic.spell.ICE_CAROL         ] = { 1, xi.effect.CAROL,     xi.element.ICE,         xi.mod.CAROL_EFFECT,    0,                        0,                   20, 200,  80,   8, 10, true  },
-    [xi.magic.spell.WIND_CAROL        ] = { 1, xi.effect.CAROL,     xi.element.WIND,        xi.mod.CAROL_EFFECT,    0,                        0,                   20, 200,  80,   8, 10, true  },
-    [xi.magic.spell.EARTH_CAROL       ] = { 1, xi.effect.CAROL,     xi.element.EARTH,       xi.mod.CAROL_EFFECT,    0,                        0,                   20, 200,  80,   8, 10, true  },
-    [xi.magic.spell.LIGHTNING_CAROL   ] = { 1, xi.effect.CAROL,     xi.element.THUNDER,   xi.mod.CAROL_EFFECT,    0,                        0,                   20, 200,  80,   8, 10, true  },
-    [xi.magic.spell.WATER_CAROL       ] = { 1, xi.effect.CAROL,     xi.element.WATER,       xi.mod.CAROL_EFFECT,    0,                        0,                   20, 200,  80,   8, 10, true  },
-    [xi.magic.spell.LIGHT_CAROL       ] = { 1, xi.effect.CAROL,     xi.element.LIGHT,       xi.mod.CAROL_EFFECT,    0,                        0,                   20, 200,  80,   8, 10, true  },
-    [xi.magic.spell.DARK_CAROL        ] = { 1, xi.effect.CAROL,     xi.element.DARK,        xi.mod.CAROL_EFFECT,    0,                        0,                   20, 200,  80,   8, 10, true  },
+    [xi.magic.spell.FIRE_CAROL        ] = { 1, xi.effect.CAROL,     xi.element.FIRE,          xi.mod.CAROL_EFFECT,    0,                        0,                   20, 200,  80,   8, 10, true  },
+    [xi.magic.spell.ICE_CAROL         ] = { 1, xi.effect.CAROL,     xi.element.ICE,           xi.mod.CAROL_EFFECT,    0,                        0,                   20, 200,  80,   8, 10, true  },
+    [xi.magic.spell.WIND_CAROL        ] = { 1, xi.effect.CAROL,     xi.element.WIND,          xi.mod.CAROL_EFFECT,    0,                        0,                   20, 200,  80,   8, 10, true  },
+    [xi.magic.spell.EARTH_CAROL       ] = { 1, xi.effect.CAROL,     xi.element.EARTH,         xi.mod.CAROL_EFFECT,    0,                        0,                   20, 200,  80,   8, 10, true  },
+    [xi.magic.spell.LIGHTNING_CAROL   ] = { 1, xi.effect.CAROL,     xi.element.THUNDER,       xi.mod.CAROL_EFFECT,    0,                        0,                   20, 200,  80,   8, 10, true  },
+    [xi.magic.spell.WATER_CAROL       ] = { 1, xi.effect.CAROL,     xi.element.WATER,         xi.mod.CAROL_EFFECT,    0,                        0,                   20, 200,  80,   8, 10, true  },
+    [xi.magic.spell.LIGHT_CAROL       ] = { 1, xi.effect.CAROL,     xi.element.LIGHT,         xi.mod.CAROL_EFFECT,    0,                        0,                   20, 200,  80,   8, 10, true  },
+    [xi.magic.spell.DARK_CAROL        ] = { 1, xi.effect.CAROL,     xi.element.DARK,          xi.mod.CAROL_EFFECT,    0,                        0,                   20, 200,  80,   8, 10, true  },
     -- [xi.magic.spell.FIRE_CAROL_II     ] = { 2, xi.effect.CAROL_II,  xi.element.FIRE,        xi.mod.ETUDE_EFFECT,    0,                        0,                   10, 400,  15, 1.5, 10, true  },
     -- [xi.magic.spell.ICE_CAROL_II      ] = { 2, xi.effect.CAROL_II,  xi.element.ICE,         xi.mod.ETUDE_EFFECT,    0,                        0,                   10, 400,  15, 1.5, 10, true  },
     -- [xi.magic.spell.WIND_CAROL_II     ] = { 2, xi.effect.CAROL_II,  xi.element.WIND,        xi.mod.ETUDE_EFFECT,    0,                        0,                   10, 400,  15, 1.5, 10, true  },
     -- [xi.magic.spell.EARTH_CAROL_II    ] = { 2, xi.effect.CAROL_II,  xi.element.EARTH,       xi.mod.ETUDE_EFFECT,    0,                        0,                   10, 400,  15, 1.5, 10, true  },
-    -- [xi.magic.spell.LIGHTNING_CAROL_II] = { 2, xi.effect.CAROL_II,  xi.element.THUNDER,   xi.mod.ETUDE_EFFECT,    0,                        0,                   10, 400,  15, 1.5, 10, true  },
+    -- [xi.magic.spell.LIGHTNING_CAROL_II] = { 2, xi.effect.CAROL_II,  xi.element.THUNDER,     xi.mod.ETUDE_EFFECT,    0,                        0,                   10, 400,  15, 1.5, 10, true  },
     -- [xi.magic.spell.WATER_CAROL_II    ] = { 2, xi.effect.CAROL_II,  xi.element.WATER,       xi.mod.ETUDE_EFFECT,    0,                        0,                   10, 400,  15, 1.5, 10, true  },
     -- [xi.magic.spell.LIGHT_CAROL_II    ] = { 2, xi.effect.CAROL_II,  xi.element.LIGHT,       xi.mod.ETUDE_EFFECT,    0,                        0,                   10, 400,  15, 1.5, 10, true  },
     -- [xi.magic.spell.DARK_CAROL_II     ] = { 2, xi.effect.CAROL_II,  xi.element.DARK,        xi.mod.ETUDE_EFFECT,    0,                        0,                   10, 400,  15, 1.5, 10, true  },
@@ -109,7 +109,7 @@ xi.spells.enhancing.calculateSongPower = function(caster, target, spell, spellId
     local power       = pTable[spellId][7] -- The variable we want to calculate.
     local meritEffect = pTable[spellId][5]
     local jpEffect    = pTable[spellId][6]
-    local skillCap    = pTable[spellId][8]
+    local skillReq    = pTable[spellId][8]
     local potencyCap  = pTable[spellId][9]
     local multiplier  = pTable[spellId][10]
     local divisor     = pTable[spellId][11]
@@ -143,15 +143,15 @@ xi.spells.enhancing.calculateSongPower = function(caster, target, spell, spellId
         end
     -- Other songs.
     else
-        if singingLvl > skillCap then
+        if singingLvl > skillReq then
             -- NOTE: Paeon
             if divisor == 0 then
-                if skillCap > 0 then
+                if skillReq > 0 then
                     power = power + 1
                 end
             -- NOTE: Aubade, Capriccio, Gavotte, Madrigal, March, Minne, Minuet, Operetta, Pastoral, Prelude, Round.
             else
-                power = math.floor(power + (singingLvl - skillCap) / divisor)
+                power = math.floor(power + (singingLvl - skillReq) / divisor)
             end
         end
 
