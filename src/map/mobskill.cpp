@@ -175,12 +175,6 @@ uint16 CMobSkill::getAnimationID() const
 
 uint16 CMobSkill::getPetAnimationID() const
 {
-    // shiva
-    if (m_AnimID >= 578 && m_AnimID <= 586)
-    {
-        return m_AnimID - 482;
-    }
-
     // rumah
     if (m_AnimID >= 591 && m_AnimID <= 599)
     {

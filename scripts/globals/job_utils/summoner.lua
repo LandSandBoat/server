@@ -79,6 +79,17 @@ local function getBaseMPCost(player, ability)
         [xi.jobAbility.ECLIPSE_BITE]     = 109,
         [xi.jobAbility.LUNAR_BAY]        = 174,
         [xi.jobAbility.IMPACT]           = 222,
+        -- Shiva
+        [xi.jobAbility.AXE_KICK]         =  10,
+        [xi.jobAbility.BLIZZARD_II]      =  24,
+        [xi.jobAbility.SLEEPGA]          =  56,
+        [xi.jobAbility.FROST_ARMOR]      =  63,
+        [xi.jobAbility.DOUBLE_SLAP]      =  96,
+        [xi.jobAbility.BLIZZARD_IV]      = 118,
+        [xi.jobAbility.DIAMOND_STORM]    = 138,
+        [xi.jobAbility.RUSH]             = 164,
+        [xi.jobAbility.HEAVENLY_STRIKE]  = 182,
+        [xi.jobAbility.CRYSTAL_BLESSING] = 201,
         -- Siren
         [xi.jobAbility.WELT]             =   9,
         [xi.jobAbility.ROUNDHOUSE]       =  52,
