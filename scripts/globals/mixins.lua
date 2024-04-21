@@ -5,25 +5,35 @@
 -----------------------------------
 xi = xi or {}
 
-xi.applyMixins = function(entity, mixins)
-    -- TODO: This could probably be made nicely with recursion
-    if type(mixins) == 'string' then
-        mixins = { mixins }
-    elseif type(mixins) == 'function' then
-        mixins = { mixins }
+xi.applyMixins = function(entity, mixins, params)
+    if type(mixins) == 'string' or type(mixins) == 'function' then
+        if type(mixins) == 'string' then
+            xi.mixins[mixins](entity, params)
+        else
+            mixins(entity, params)
+        end
+        return
     end
 
-    for i, v in pairs(mixins) do
-        if type(v) == 'table' then
-            if type(v[1]) == 'string' then
-                xi.mixins[v[1]](entity, v[2])
-            elseif type(v[1]) == 'function' then
-                v[1](entity, v[2])
+    if type(mixins) == 'table' then
+        if type(mixins[1]) == 'string' or type(mixins[1]) == 'function' then
+            if mixins[2] then
+                xi.applyMixins(entity, mixins[1], mixins[2])
+            else
+                for _, mixin in ipairs(mixins) do
+                    if type(mixin) == 'string' then
+                        xi.mixins[mixin](entity)
+                    elseif type(mixin) == 'function' then
+                        mixin(entity)
+                    end
+                end
             end
-        elseif type(v) == 'string' then
-            xi.mixins[v](entity)
-        elseif type(v) == 'function' then
-            v(entity)
+            return
+        elseif type(mixins[1]) == 'table' then
+            for _, mixin in ipairs(mixins) do
+                xi.applyMixins(entity, mixin[1], mixin[2])
+            end
+            return
         end
     end
 end
