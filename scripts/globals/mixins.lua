@@ -37,3 +37,17 @@ xi.applyMixins = function(entity, mixins, params)
         end
     end
 end
+
+xi.applyZoneMobMixins = function(zone, mixins, params)
+    local mobs = zone:getMobs()
+    for _, mob in ipairs(mobs) do
+        xi.applyMixins(mob, mixins, params)
+    end
+end
+
+xi.applyZoneNPCMixins = function(zone, mixins, params)
+    local npcs = zone:getNPCs()
+    for _, npc in ipairs(npcs) do
+        xi.applyMixins(npc, mixins, params)
+    end
+end
