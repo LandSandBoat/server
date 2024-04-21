@@ -764,6 +764,10 @@ function Battlefield:onEntryEventUpdate(player, csid, option, npc)
 
     if battlefield then
         name, clearTime, partySize = battlefield:getRecord()
+        print(name)
+        print(clearTime)
+        print(partySize)
+
         initiatorId, _ = battlefield:getInitiator()
     end
 
@@ -862,7 +866,7 @@ function Battlefield:onEventFinishBattlefield(player, csid, option, npc)
 end
 
 function Battlefield:onBattlefieldInitialise(battlefield)
-    if #self.loot > 0 then
+    if self.loot and #self.loot > 0 then
         battlefield:setLocalVar('loot', 1)
     end
 
