@@ -397,12 +397,14 @@ function Battlefield:new(data)
     obj.levelCap         = data.levelCap or 0
     obj.allowSubjob      = (data.allowSubjob == nil or data.allowSubjob) or false
     obj.hasWipeGrace     = (data.hasWipeGrace == nil or data.hasWipeGrace) or false
+    obj.isMission        = data.isMission and data.isMission or false
     obj.canLoseExp       = (data.canLoseExp == nil or data.canLoseExp) or false
     obj.showTimer        = (data.showTimer == nil or data.showTimer) or false
     obj.delayToExit      = data.delayToExit or 5
     obj.requiredItems    = data.requiredItems or {}
     obj.requiredKeyItems = data.requiredKeyItems or {}
     obj.lossEventParams  = data.lossEventParams or {}
+    obj.armouryCrates    = data.armouryCrates or false
 
     obj.sections = { { [obj.zoneId] = {} } }
     obj.groups   = {}
@@ -520,6 +522,12 @@ function Battlefield:isValidEntry(player, npc)
     return self.entryNpc == npc:getName()
 end
 
+-- Allow for Battlefield scripts to easily add additional requirements for entry by
+-- redefining this function
+function Battlefield:entryRequirement(player, npc, isRegistrant, trade)
+    return true
+end
+
 function Battlefield:checkRequirements(player, npc, isRegistrant, trade)
     if not self:isValidEntry(player, npc) then
         return false
@@ -562,7 +570,9 @@ function Battlefield:checkRequirements(player, npc, isRegistrant, trade)
         end
     end
 
-    return true
+    -- Additional Requirements that may be necessary for battlefield entry
+    -- contained within the script itself, defaults to True
+    return self:entryRequirement(player, npc, isRegistrant, trade)
 end
 
 function Battlefield:checkSkipCutscene(player)
@@ -859,7 +869,7 @@ function Battlefield:onEventFinishBattlefield(player, csid, option, npc)
 end
 
 function Battlefield:onBattlefieldInitialise(battlefield)
-    if #self.loot > 0 then
+    if self.loot and #self.loot > 0 then
         battlefield:setLocalVar('loot', 1)
     end
 
@@ -971,8 +981,16 @@ function Battlefield:onBattlefieldEnter(player, battlefield)
             end
         end
 
-        if self.requiredKeyItems.message ~= 0 then
+        if type(self.requiredKeyItems.message) == 'table' then
+            player:messageSpecial(self.requiredKeyItems.message[1], unpack(self.requiredKeyItems.message[2]))
+        elseif self.requiredKeyItems.message ~= 0 then
             player:messageSpecial(self.requiredKeyItems.message, unpack(items))
+        end
+
+        if not self.requiredKeyItems.keep and self.requiredKeyItems.deleteMessage then
+            for _, keyItemId in ipairs(items) do
+                player:messageSpecial(self.requiredKeyItems.deleteMessage, keyItemId)
+            end
         end
     end
 
@@ -1022,6 +1040,8 @@ end
 
 function Battlefield:onBattlefieldWin(player, battlefield)
     local _, clearTime, partySize = battlefield:getRecord()
+
+    player:setLocalVar('battlefieldWin', battlefield:getID())
     player:startEvent(32001, battlefield:getArea(), clearTime, partySize, battlefield:getTimeInside(), 1, self.index, 0)
 end
 
@@ -1088,8 +1108,16 @@ end
 function Battlefield:handleAllMonstersDefeated(battlefield, mob)
     local crateId = battlefield:getArmouryCrate()
 
+    -- NOTE: Default to core returning us a value, but if that fails, use the fallback
+    -- definition if available.  This should only be used where mobIds table has to be
+    -- used instead of mobs!
+    if crateId == 0 and self.armouryCrates then
+        crateId = self.armouryCrates[battlefield:getArea()]
+    end
+
     if crateId ~= 0 then
         local crate = GetNPCByID(crateId)
+
         npcUtil.showCrate(crate)
         crate:addListener('ON_TRIGGER', 'TRIGGER_CRATE', utils.bind(self.handleOpenArmouryCrate, self))
     else
@@ -1202,8 +1230,6 @@ BattlefieldMission.__eq    = function(m1, m2)
     return m1.name == m2.name
 end
 
-BattlefieldMission.isMission = true
-
 -- Creates a new Limbus Battlefield interaction
 -- Data takes the additional following keys:
 --  - missionArea: The mission area this battlefield is associated with (optional)
@@ -1217,6 +1243,7 @@ function BattlefieldMission:new(data)
     local obj = Battlefield:new(data)
 
     setmetatable(obj, self)
+    obj.isMission             = true
     obj.missionArea           = data.missionArea
     obj.mission               = data.mission
     obj.missionStatusArea     = data.missionStatusArea

@@ -625,27 +625,6 @@ local function checkReqs(player, npc, bfid, registrant)
             return player:hasKeyItem(xi.ki.SOUL_GEM_CLASP)
         end,
 
-        [96] = function() -- Mission 2-3
-            return player:hasKeyItem(xi.ki.DARK_KEY)
-        end,
-
-        [99] = function() -- Windurst 6-2: A Saintly Invitation
-            return windurstMission == xi.mission.id.windurst.SAINTLY_INVITATION and
-                nationStatus == 1
-        end,
-
-        [101] = function() -- Quest: Shattering Stars (MNK LB5)
-            return mainJob == xi.job.MNK and mainLevel >= 66
-        end,
-
-        [102] = function() -- Quest: Shattering Stars (WHM LB5)
-            return mainJob == xi.job.WHM and mainLevel >= 66
-        end,
-
-        [103] = function() -- Quest: Shattering Stars (SMN LB5)
-            return mainJob == xi.job.SMN and mainLevel >= 66
-        end,
-
         [116] = function() -- Quest: Beyond Infinity
             return player:hasKeyItem(xi.ki.SOUL_GEM_CLASP)
         end,
@@ -1321,24 +1300,6 @@ local function checkSkip(player, bfid)
                 (
                     bastokMission == xi.mission.id.bastok.ON_MY_WAY and
                     nationStatus > 2
-                )
-        end,
-
-        [96] = function() -- Mission 2-3
-            return player:hasCompletedMission(xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.JOURNEY_TO_WINDURST2) or
-                player:hasCompletedMission(xi.mission.log_id.BASTOK, xi.mission.id.bastok.THE_EMISSARY_WINDURST2) or
-                nationStatus > 8 and
-                (
-                    sandoriaMission == xi.mission.id.sandoria.JOURNEY_TO_WINDURST2 or
-                    bastokMission == xi.mission.id.bastok.THE_EMISSARY_WINDURST2
-                )
-        end,
-
-        [99] = function() -- Windurst 6-2: A Saintly Invitation
-            return player:hasCompletedMission(xi.mission.log_id.WINDURST, xi.mission.id.windurst.SAINTLY_INVITATION) or
-                (
-                    windurstMission == xi.mission.id.windurst.SAINTLY_INVITATION and
-                    nationStatus > 1
                 )
         end,
 

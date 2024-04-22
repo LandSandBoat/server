@@ -10934,7 +10934,13 @@ uint8 CLuaBaseEntity::registerBattlefield(sol::object const& arg0, sol::object c
         registration.levelCap   = battlefield["levelCap"];
         registration.timeLimit  = std::chrono::seconds(battlefield.get<int32>("timeLimit"));
         registration.isMission  = battlefield.get_or("isMission", false);
-        registration.showTimer  = battlefield.get_or("showTimer", true);
+
+        if (registration.isMission && settings::get<uint8>("map.LV_CAP_MISSION_BCNM") == 0)
+        {
+            registration.levelCap = settings::get<uint8>("main.MAX_LEVEL");
+        }
+
+        registration.showTimer = battlefield.get_or("showTimer", true);
         registration.rules |= battlefield.get<bool>("allowSubjob") ? RULES_ALLOW_SUBJOBS : 0;
         registration.rules |= battlefield.get<bool>("canLoseExp") ? RULES_LOSE_EXP : 0;
     }

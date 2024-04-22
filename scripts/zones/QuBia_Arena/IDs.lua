@@ -41,13 +41,8 @@ zones[xi.zone.QUBIA_ARENA] =
     },
     mob =
     {
-        HEIR_TO_THE_LIGHT_OFFSET   = 17621014,
-        ATORI_TUTORI_QM            =
-        {
-            17621302,
-            17621303,
-            17621304,
-        },
+        HEIR_TO_THE_LIGHT_OFFSET = 17621014,
+        ATORI_TUTORI             = GetFirstID('Atori-Tutori_qm')
     },
     npc =
     {
