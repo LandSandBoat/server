@@ -625,11 +625,6 @@ local function checkReqs(player, npc, bfid, registrant)
             return player:hasKeyItem(xi.ki.SOUL_GEM_CLASP)
         end,
 
-        [99] = function() -- Windurst 6-2: A Saintly Invitation
-            return windurstMission == xi.mission.id.windurst.SAINTLY_INVITATION and
-                nationStatus == 1
-        end,
-
         [101] = function() -- Quest: Shattering Stars (MNK LB5)
             return mainJob == xi.job.MNK and mainLevel >= 66
         end,
@@ -1317,14 +1312,6 @@ local function checkSkip(player, bfid)
                 (
                     bastokMission == xi.mission.id.bastok.ON_MY_WAY and
                     nationStatus > 2
-                )
-        end,
-
-        [99] = function() -- Windurst 6-2: A Saintly Invitation
-            return player:hasCompletedMission(xi.mission.log_id.WINDURST, xi.mission.id.windurst.SAINTLY_INVITATION) or
-                (
-                    windurstMission == xi.mission.id.windurst.SAINTLY_INVITATION and
-                    nationStatus > 1
                 )
         end,
 

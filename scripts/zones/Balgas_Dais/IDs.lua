@@ -47,9 +47,10 @@ zones[xi.zone.BALGAS_DAIS] =
             17375493,
         },
 
-        BLACK_DRAGON           = GetFirstID('Black_Dragon'),
-        DVOROVOI               = GetFirstID('Dvorovoi'),
-        VOO_TOLU_THE_GHOSTFIST = GetFirstID('Voo_Tolu_the_Ghostfist'),
+        BLACK_DRAGON            = GetFirstID('Black_Dragon'),
+        BUU_XOLO_THE_BLOODFACED = GetFirstID('Buu_Xolo_the_Bloodfaced'),
+        DVOROVOI                = GetFirstID('Dvorovoi'),
+        VOO_TOLU_THE_GHOSTFIST  = GetFirstID('Voo_Tolu_the_Ghostfist'),
     },
     npc =
     {
