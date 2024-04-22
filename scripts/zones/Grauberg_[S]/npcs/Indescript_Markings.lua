@@ -17,7 +17,7 @@ entity.onTrigger = function(player, npc)
 
     -- SCH AF Quest - Boots
     if
-        npc:getID() == ID.npcs.INDESCRIPT_MARKINGS and -- Second markings are bcnm entrance
+        npc:getID() == ID.npc.INDESCRIPT_MARKINGS and -- Second markings are bcnm entrance
         gownQuestProgress > 0 and
         gownQuestProgress < 3 and
         not player:hasKeyItem(xi.ki.SAMPLE_OF_GRAUBERG_CHERT)
