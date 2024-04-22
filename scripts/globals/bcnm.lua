@@ -625,18 +625,6 @@ local function checkReqs(player, npc, bfid, registrant)
             return player:hasKeyItem(xi.ki.SOUL_GEM_CLASP)
         end,
 
-        [101] = function() -- Quest: Shattering Stars (MNK LB5)
-            return mainJob == xi.job.MNK and mainLevel >= 66
-        end,
-
-        [102] = function() -- Quest: Shattering Stars (WHM LB5)
-            return mainJob == xi.job.WHM and mainLevel >= 66
-        end,
-
-        [103] = function() -- Quest: Shattering Stars (SMN LB5)
-            return mainJob == xi.job.SMN and mainLevel >= 66
-        end,
-
         [116] = function() -- Quest: Beyond Infinity
             return player:hasKeyItem(xi.ki.SOUL_GEM_CLASP)
         end,
