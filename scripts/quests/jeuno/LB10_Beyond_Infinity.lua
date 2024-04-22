@@ -16,6 +16,29 @@ quest.reward =
     title = xi.title.BUSHIN_ASPIRANT,
 }
 
+local atoriBattlefieldIds =
+{
+    [xi.zone.BALGAS_DAIS]      = xi.battlefield.id.BEYOND_INFINITY_BALGAS_DAIS,
+    [xi.zone.HORLAIS_PEAK]     = xi.battlefield.id.BEYOND_INFINITY_HORLAIS_PEAK,
+    [xi.zone.QUBIA_ARENA]      = xi.battlefield.id.BEYOND_INFINITY,
+    [xi.zone.WAUGHROON_SHRINE] = xi.battlefield.id.BEYOND_INFINITY_WAUGHROON_SHRINE,
+}
+
+local atoriBattlefieldZone =
+{
+    onEventFinish =
+    {
+        [32001] = function(player, csid, option, npc)
+            local battlefieldWin = player:getLocalVar('battlefieldWin')
+
+            if battlefieldWin == atoriBattlefieldIds[player:getZoneID()] then
+                npcUtil.giveItem(player, xi.item.SCROLL_OF_INSTANT_WARP)
+                quest:setVar(player, 'Prog', 1)
+            end
+        end,
+    },
+}
+
 quest.sections =
 {
     -- Section: Quest available.
@@ -103,6 +126,19 @@ quest.sections =
                 end,
             },
         },
+    },
+
+    -- BCNM Win Events.  Soul Gem Clasp is required for entry, and removed
+    -- after.  Separate section to not confuse with the failed event.
+    {
+        check = function(player, status, vars)
+            return status == QUEST_ACCEPTED and vars.Prog == 0
+        end,
+
+        [xi.zone.BALGAS_DAIS]      = atoriBattlefieldZone,
+        [xi.zone.HORLAIS_PEAK]     = atoriBattlefieldZone,
+        [xi.zone.QUBIA_ARENA]      = atoriBattlefieldZone,
+        [xi.zone.WAUGHROON_SHRINE] = atoriBattlefieldZone,
     },
 
     -- Section: Quest accepted. We failed BCNM.
