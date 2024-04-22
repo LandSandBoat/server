@@ -522,6 +522,12 @@ function Battlefield:isValidEntry(player, npc)
     return self.entryNpc == npc:getName()
 end
 
+-- Allow for Battlefield scripts to easily add additional requirements for entry by
+-- redefining this function
+function Battlefield:entryRequirement(player, npc, isRegistrant, trade)
+    return true
+end
+
 function Battlefield:checkRequirements(player, npc, isRegistrant, trade)
     if not self:isValidEntry(player, npc) then
         return false
@@ -564,7 +570,9 @@ function Battlefield:checkRequirements(player, npc, isRegistrant, trade)
         end
     end
 
-    return true
+    -- Additional Requirements that may be necessary for battlefield entry
+    -- contained within the script itself, defaults to True
+    return self:entryRequirement(player, npc, isRegistrant, trade)
 end
 
 function Battlefield:checkSkipCutscene(player)
@@ -1024,6 +1032,8 @@ end
 
 function Battlefield:onBattlefieldWin(player, battlefield)
     local _, clearTime, partySize = battlefield:getRecord()
+
+    player:setLocalVar('battlefieldWin', battlefield:getID())
     player:startEvent(32001, battlefield:getArea(), clearTime, partySize, battlefield:getTimeInside(), 1, self.index, 0)
 end
 

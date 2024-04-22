@@ -18,11 +18,7 @@ local content = Battlefield:new({
     exitNpc       = 'Burning_Circle',
 })
 
-function content:checkRequirements(player, npc, isRegistrant, trade)
-    if trade then
-        return false
-    end
-
+function content:entryRequirement(player, npc, isRegistrant, trade)
     local isCurrentMission   = player:getCurrentMission(xi.mission.log_id.SANDORIA) == xi.mission.id.sandoria.JOURNEY_TO_WINDURST2 or
         player:getCurrentMission(xi.mission.log_id.BASTOK) == xi.mission.id.bastok.THE_EMISSARY_WINDURST2
     local currentRequiremets = isCurrentMission and player:hasKeyItem(xi.ki.DARK_KEY)
@@ -31,26 +27,14 @@ function content:checkRequirements(player, npc, isRegistrant, trade)
     return (not isRegistrant and nonRegistrantReqs) or currentRequiremets
 end
 
-function content:onBattlefieldWin(player, battlefield)
-    if
-        player:getCurrentMission(xi.mission.log_id.SANDORIA) == xi.mission.id.sandoria.JOURNEY_TO_WINDURST2 or
-        player:getCurrentMission(xi.mission.log_id.BASTOK) == xi.mission.id.bastok.THE_EMISSARY_WINDURST2
-    then
-        player:setLocalVar('battlefieldWin', battlefield:getID())
-    end
-
-    local _, clearTime, partySize = battlefield:getRecord()
-
-    local nationStatus = player:getMissionStatus(player:getNation())
-    local canSkipCS    = player:hasCompletedMission(xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.JOURNEY_TO_WINDURST2) or
-                player:hasCompletedMission(xi.mission.log_id.BASTOK, xi.mission.id.bastok.THE_EMISSARY_WINDURST2) or
-                (nationStatus > 8 and
-                (
-                    player:getCurrentMission(xi.mission.log_id.SANDORIA) == xi.mission.id.sandoria.JOURNEY_TO_WINDURST2 or
-                    player:getCurrentMission(xi.mission.log_id.BASTOK) == xi.mission.id.bastok.THE_EMISSARY_WINDURST2
-                ))
-
-    player:startEvent(32001, battlefield:getArea(), clearTime, partySize, battlefield:getTimeInside(), 1, self.index, canSkipCS)
+function content:checkSkipCutscene(player)
+    return player:hasCompletedMission(xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.JOURNEY_TO_WINDURST2) or
+        player:hasCompletedMission(xi.mission.log_id.BASTOK, xi.mission.id.bastok.THE_EMISSARY_WINDURST2) or
+        (nationStatus > 8 and
+        (
+            player:getCurrentMission(xi.mission.log_id.SANDORIA) == xi.mission.id.sandoria.JOURNEY_TO_WINDURST2 or
+            player:getCurrentMission(xi.mission.log_id.BASTOK) == xi.mission.id.bastok.THE_EMISSARY_WINDURST2
+        ))
 end
 
 content.groups =
