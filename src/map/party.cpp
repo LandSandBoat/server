@@ -1237,6 +1237,7 @@ void CParty::RefreshSync()
         if (member->GetMLevel() != NewMLevel)
         {
             charutils::RemoveAllEquipMods(member);
+            member->m_LevelRestriction = NewMLevel;
             member->SetMLevel(NewMLevel);
             member->SetSLevel(member->jobs.job[member->GetSJob()]);
             charutils::ApplyAllEquipMods(member);
