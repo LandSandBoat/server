@@ -10940,7 +10940,7 @@ uint8 CLuaBaseEntity::registerBattlefield(sol::object const& arg0, sol::object c
             registration.levelCap = settings::get<uint8>("main.MAX_LEVEL");
         }
 
-        registration.showTimer  = battlefield.get_or("showTimer", true);
+        registration.showTimer = battlefield.get_or("showTimer", true);
         registration.rules |= battlefield.get<bool>("allowSubjob") ? RULES_ALLOW_SUBJOBS : 0;
         registration.rules |= battlefield.get<bool>("canLoseExp") ? RULES_LOSE_EXP : 0;
     }

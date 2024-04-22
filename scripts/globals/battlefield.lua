@@ -981,8 +981,16 @@ function Battlefield:onBattlefieldEnter(player, battlefield)
             end
         end
 
-        if self.requiredKeyItems.message ~= 0 then
+        if type(self.requiredKeyItems.message) == 'table' then
+            player:messageSpecial(self.requiredKeyItems.message[1], unpack(self.requiredKeyItems.message[2]))
+        elseif self.requiredKeyItems.message ~= 0 then
             player:messageSpecial(self.requiredKeyItems.message, unpack(items))
+        end
+
+        if not self.requiredKeyItems.keep and self.requiredKeyItems.deleteMessage then
+            for _, keyItemId in ipairs(items) do
+                player:messageSpecial(self.requiredKeyItems.deleteMessage, keyItemId)
+            end
         end
     end
 

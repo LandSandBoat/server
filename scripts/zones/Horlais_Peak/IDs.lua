@@ -39,12 +39,7 @@ zones[xi.zone.HORLAIS_PEAK] =
     },
     mob =
     {
-        ATORI_TUTORI_QM =
-        {
-            17346789,
-            17346790,
-            17346791,
-        },
+        ATORI_TUTORI = GetFirstID('Atori-Tutori_qm')
     },
     npc =
     {

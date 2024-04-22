@@ -16,7 +16,7 @@ entity.onMobEngage = function(mob, target)
         DespawnMob(mobId - 1)
         DespawnMob(mobId + 1)
 
-        if true then -- math.random(1, 3) == 1 then
+        if math.random(1, 3) == 1 then
             mob:setStatus(xi.status.INVISIBLE)
             mob:setHP(0)
         else

@@ -40,12 +40,7 @@ zones[xi.zone.WAUGHROON_SHRINE] =
 
     mob =
     {
-        ATORI_TUTORI_QM =
-        {
-            17367332,
-            17367333,
-            17367334,
-        },
+        ATORI_TUTORI = GetFirstID('Atori-Tutori_qm')
     },
 
     npc =

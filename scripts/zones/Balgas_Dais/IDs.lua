@@ -11,6 +11,7 @@ zones[xi.zone.BALGAS_DAIS] =
         ITEM_OBTAINED                 = 6390, -- Obtained: <item>.
         GIL_OBTAINED                  = 6391, -- Obtained <number> gil.
         KEYITEM_OBTAINED              = 6393, -- Obtained key item: <keyitem>.
+        LOST_KEYITEM                  = 6394, -- Lost key item: <keyitem>.
         CARRIED_OVER_POINTS           = 7001, -- You have carried over <number> login point[/s].
         LOGIN_CAMPAIGN_UNDERWAY       = 7002, -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!
         LOGIN_NUMBER                  = 7003, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
@@ -33,6 +34,7 @@ zones[xi.zone.BALGAS_DAIS] =
         TAKE_THAT_YOU_WHIPPERSNAPPER  = 7648, -- Take that, you whippersnapper!
         NOW_THAT_IM_WARMED_UP         = 7649, -- Now that I'm warmed up...
         THAT_LL_HURT_IN_THE_MORNING   = 7650, -- Ungh... That'll hurt in the morning...
+        SOUL_GEM_REACTS               = 7673, -- The <keyitem> reacts to the <keyitem>, sending a jolt of energy through your veins!
         PROMISE_ME_YOU_WONT_GO_DOWN   = 7688, -- Promise you won't go down too easy, okay?
         IM_JUST_GETTING_WARMED_UP     = 7689, -- Haha! I'm just getting warmed up!
         YOU_PACKED_MORE_OF_A_PUNCH    = 7690, -- Hah! You pack more of a punch than I thoughtaru. But I won't go down as easy as old Maat!
@@ -43,13 +45,7 @@ zones[xi.zone.BALGAS_DAIS] =
     },
     mob =
     {
-        ATORI_TUTORI_QM =
-        {
-            17375491,
-            17375492,
-            17375493,
-        },
-
+        ATORI_TUTORI            = GetFirstID('Atori-Tutori_qm'),
         BLACK_DRAGON            = GetFirstID('Black_Dragon'),
         BUU_XOLO_THE_BLOODFACED = GetFirstID('Buu_Xolo_the_Bloodfaced'),
         DVOROVOI                = GetFirstID('Dvorovoi'),
