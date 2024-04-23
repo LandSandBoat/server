@@ -10,7 +10,7 @@ local ID = zones[xi.zone.WINDURST_WATERS]
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    local turmoil = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.TORAIMARAI_TURMOIL)
+    local turmoil = player:getQuestStatus(xi.questLog.WINDURST, xi.quest.id.windurst.TORAIMARAI_TURMOIL)
     local count = trade:getItemCount()
 
     if turmoil == xi.questStatus.QUEST_ACCEPTED then
@@ -38,11 +38,11 @@ end
 
 entity.onTrigger = function(player, npc)
     local pfame = player:getFameLevel(xi.quest.fame_area.WINDURST)
-    local turmoil = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.TORAIMARAI_TURMOIL)
+    local turmoil = player:getQuestStatus(xi.questLog.WINDURST, xi.quest.id.windurst.TORAIMARAI_TURMOIL)
     local needToZone = player:needToZone()
-    local sayFlowers = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.SAY_IT_WITH_FLOWERS)
+    local sayFlowers = player:getQuestStatus(xi.questLog.WINDURST, xi.quest.id.windurst.SAY_IT_WITH_FLOWERS)
     local flowerProgress = player:getCharVar('FLOWER_PROGRESS')
-    local blueRibbonBlues = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.BLUE_RIBBON_BLUES)
+    local blueRibbonBlues = player:getQuestStatus(xi.questLog.WINDURST, xi.quest.id.windurst.BLUE_RIBBON_BLUES)
 
     if
         (sayFlowers == xi.questStatus.QUEST_ACCEPTED or sayFlowers == xi.questStatus.QUEST_COMPLETED) and
@@ -86,15 +86,15 @@ entity.onEventFinish = function(player, csid, option, npc)
     }
 
     -- Check Missions first (priority?)
-    local turmoil = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.TORAIMARAI_TURMOIL)
+    local turmoil = player:getQuestStatus(xi.questLog.WINDURST, xi.quest.id.windurst.TORAIMARAI_TURMOIL)
 
     if csid == 785 and option == 1 then -- Adds Toraimarai turmoil
-        player:addQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.TORAIMARAI_TURMOIL)
+        player:addQuest(xi.questLog.WINDURST, xi.quest.id.windurst.TORAIMARAI_TURMOIL)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.RHINOSTERY_CERTIFICATE)
         player:addKeyItem(xi.ki.RHINOSTERY_CERTIFICATE) -- Rhinostery Certificate
     elseif csid == 791 and turmoil == xi.questStatus.QUEST_ACCEPTED then -- Completes Toraimarai turmoil - first time
         npcUtil.giveCurrency(player, 'gil', 4500)
-        player:completeQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.TORAIMARAI_TURMOIL)
+        player:completeQuest(xi.questLog.WINDURST, xi.quest.id.windurst.TORAIMARAI_TURMOIL)
         player:addFame(xi.quest.fame_area.WINDURST, 100)
         player:addTitle(xi.title.CERTIFIED_RHINOSTERY_VENTURER)
         player:tradeComplete()

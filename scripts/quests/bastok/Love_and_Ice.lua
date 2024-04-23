@@ -6,7 +6,7 @@
 -- Mirror Pond (J-8) : !pos -96.165 1.518 -392.700 111
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.BASTOK, xi.quest.id.bastok.LOVE_AND_ICE)
+local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.LOVE_AND_ICE)
 
 quest.reward =
 {
@@ -30,7 +30,7 @@ quest.sections =
             {
                 onTrigger = function(player, npc)
                     if
-                        player:hasCompletedQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_SIRENS_TEAR) and
+                        player:hasCompletedQuest(xi.questLog.BASTOK, xi.quest.id.bastok.THE_SIRENS_TEAR) and
                         player:getFameLevel(xi.quest.fame_area.BASTOK) >= 5
                     then
                         return quest:progressEvent(185)
@@ -70,7 +70,7 @@ quest.sections =
             {
                 [186] = function(player, csid, option, npc)
                     if quest:complete(player) then
-                        xi.quest.setMustZone(player, xi.quest.log_id.BASTOK, xi.quest.id.bastok.A_TEST_OF_TRUE_LOVE)
+                        xi.quest.setMustZone(player, xi.questLog.BASTOK, xi.quest.id.bastok.A_TEST_OF_TRUE_LOVE)
                     end
                 end,
             },

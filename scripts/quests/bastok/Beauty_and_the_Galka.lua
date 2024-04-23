@@ -5,7 +5,7 @@
 -- Talib : !pos -101.133 4.649 28.803 236
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.BASTOK, xi.quest.id.bastok.BEAUTY_AND_THE_GALKA)
+local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.BEAUTY_AND_THE_GALKA)
 
 quest.reward =
 {

@@ -5,7 +5,7 @@
 -- Salimah : !pos -173 -5 64 235
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.BASTOK, xi.quest.id.bastok.GOURMET)
+local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.GOURMET)
 
 quest.reward =
 {

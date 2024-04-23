@@ -6,7 +6,7 @@
 -- Guilerme : !pos -4.5 0 99 231
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.ROSEL_THE_ARMORER)
+local quest = Quest:new(xi.questLog.SANDORIA, xi.quest.id.sandoria.ROSEL_THE_ARMORER)
 
 quest.reward =
 {

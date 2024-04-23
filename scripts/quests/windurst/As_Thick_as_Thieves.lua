@@ -20,7 +20,7 @@ local northGustabergID = zones[xi.zone.NORTH_GUSTABERG]
 local sauromugueID     = zones[xi.zone.SAUROMUGUE_CHAMPAIGN]
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.WINDURST, xi.quest.id.windurst.AS_THICK_AS_THIEVES)
+local quest = Quest:new(xi.questLog.WINDURST, xi.quest.id.windurst.AS_THICK_AS_THIEVES)
 
 quest.reward =
 {
@@ -113,7 +113,7 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == xi.questStatus.QUEST_AVAILABLE and
-                player:hasCompletedQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_TENSHODO_SHOWDOWN) and
+                player:hasCompletedQuest(xi.questLog.WINDURST, xi.quest.id.windurst.THE_TENSHODO_SHOWDOWN) and
                 player:getMainJob() == xi.job.THF and
                 player:getMainLvl() >= xi.settings.main.AF2_QUEST_LEVEL
         end,

@@ -5,7 +5,7 @@
 -- Dominion Sergeant : !pos -15.513 0.64 -482.04 254
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.ABYSSEA, xi.quest.id.abyssea.DOMINION_OP_04_GRAUBERG)
+local quest = Quest:new(xi.questLog.ABYSSEA, xi.quest.id.abyssea.DOMINION_OP_04_GRAUBERG)
 
 quest.reward = {}
 

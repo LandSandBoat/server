@@ -5,7 +5,7 @@
 -- Qm9 !pos -406 6.5 -440 68
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.WHAT_FRIENDS_ARE_FOR)
+local quest = Quest:new(xi.questLog.AHT_URHGAN, xi.quest.id.ahtUrhgan.WHAT_FRIENDS_ARE_FOR)
 
 quest.sections =
 {

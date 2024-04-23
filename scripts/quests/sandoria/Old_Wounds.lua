@@ -7,7 +7,7 @@ local chateauID = zones[xi.zone.CHATEAU_DORAGUILLE]
 local quicksandCavesID = zones[xi.zone.QUICKSAND_CAVES]
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.OLD_WOUNDS)
+local quest = Quest:new(xi.questLog.SANDORIA, xi.quest.id.sandoria.OLD_WOUNDS)
 
 quest.reward =
 {
@@ -90,7 +90,7 @@ quest.sections =
                     if option == 1 and not player:hasItem(xi.item.SAPARA_OF_TRIALS) then
                         npcUtil.giveItem(player, xi.item.SAPARA_OF_TRIALS)
                     elseif option == 2 then
-                        player:delQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.OLD_WOUNDS)
+                        player:delQuest(xi.questLog.SANDORIA, xi.quest.id.sandoria.OLD_WOUNDS)
                         player:delKeyItem(xi.ki.WEAPON_TRAINING_GUIDE)
                         player:delKeyItem(xi.ki.MAP_TO_THE_ANNALS_OF_TRUTH)
                     end

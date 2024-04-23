@@ -10,7 +10,7 @@
 local batalliaID = zones[xi.zone.BATALLIA_DOWNS]
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.A_CHOCOBOS_TALE)
+local quest = Quest:new(xi.questLog.JEUNO, xi.quest.id.jeuno.A_CHOCOBOS_TALE)
 
 quest.reward =
 {

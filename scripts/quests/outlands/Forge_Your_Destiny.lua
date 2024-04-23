@@ -13,7 +13,7 @@ local norgID      = zones[xi.zone.NORG]
 local zitahID     = zones[xi.zone.THE_SANCTUARY_OF_ZITAH]
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.FORGE_YOUR_DESTINY)
+local quest = Quest:new(xi.questLog.OUTLANDS, xi.quest.id.outlands.FORGE_YOUR_DESTINY)
 
 quest.reward =
 {

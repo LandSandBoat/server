@@ -9,7 +9,7 @@ local ID = zones[xi.zone.WINDURST_WATERS]
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    local wonderingstatus = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.WONDERING_MINSTREL)
+    local wonderingstatus = player:getQuestStatus(xi.questLog.WINDURST, xi.quest.id.windurst.WONDERING_MINSTREL)
     if
         wonderingstatus == 1 and
         trade:hasItemQty(xi.item.PIECE_OF_ROSEWOOD_LUMBER, 1) and
@@ -21,8 +21,8 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    -- player:delQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.WONDERING_MINSTREL)
-    local wonderingstatus = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.WONDERING_MINSTREL)
+    -- player:delQuest(xi.questLog.WINDURST, xi.quest.id.windurst.WONDERING_MINSTREL)
+    local wonderingstatus = player:getQuestStatus(xi.questLog.WINDURST, xi.quest.id.windurst.WONDERING_MINSTREL)
     local fame = player:getFameLevel(xi.quest.fame_area.WINDURST)
     if wonderingstatus == xi.questStatus.QUEST_AVAILABLE and fame >= 5 then
         local rand = math.random(1, 2)
@@ -55,13 +55,13 @@ end
 
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 634 then    -- WONDERING_MINSTREL: Quest Start
-        player:addQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.WONDERING_MINSTREL)
+        player:addQuest(xi.questLog.WINDURST, xi.quest.id.windurst.WONDERING_MINSTREL)
     elseif csid == 638 then  -- WONDERING_MINSTREL: Quest Finish
         if player:getFreeSlotsCount() == 0 then
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.item.FAERIE_PICCOLO)
         else
             player:tradeComplete()
-            player:completeQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.WONDERING_MINSTREL)
+            player:completeQuest(xi.questLog.WINDURST, xi.quest.id.windurst.WONDERING_MINSTREL)
             player:addItem(xi.item.FAERIE_PICCOLO)
             player:messageSpecial(ID.text.ITEM_OBTAINED, xi.item.FAERIE_PICCOLO)
             player:addFame(xi.quest.fame_area.WINDURST, 75)

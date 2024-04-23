@@ -12,7 +12,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local searchingForWords = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.SEARCHING_FOR_THE_RIGHT_WORDS)
+    local searchingForWords = player:getQuestStatus(xi.questLog.JEUNO, xi.quest.id.jeuno.SEARCHING_FOR_THE_RIGHT_WORDS)
 
     --this variable implicitly stores: JFame >= 7 and ACandlelightVigil == xi.questStatus.QUEST_COMPLETED and RubbishDay == xi.questStatus.QUEST_COMPLETED and
     --NeverToReturn == xi.questStatus.QUEST_COMPLETED and SearchingForTheRightWords == xi.questStatus.QUEST_AVAILABLE and prereq CS complete
@@ -53,7 +53,7 @@ entity.onEventFinish = function(player, csid, option, npc)
     then
         player:setCharVar('QuestSearchRightWords_prereq', 0) --remove charVar from memory
         player:setCharVar('QuestSearchRightWords_denied', 0)
-        player:addQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.SEARCHING_FOR_THE_RIGHT_WORDS)
+        player:addQuest(xi.questLog.JEUNO, xi.quest.id.jeuno.SEARCHING_FOR_THE_RIGHT_WORDS)
 
     elseif csid == 198 then --finish quest, note: no title granted
         if player:getFreeSlotsCount() == 0 then
@@ -64,7 +64,7 @@ entity.onEventFinish = function(player, csid, option, npc)
             player:addItem(xi.item.SCROLL_OF_SLEEPGA_II)
             player:messageSpecial(ID.text.ITEM_OBTAINED, xi.item.SCROLL_OF_SLEEPGA_II)
             player:addFame(xi.quest.fame_area.JEUNO, 30)
-            player:completeQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.SEARCHING_FOR_THE_RIGHT_WORDS)
+            player:completeQuest(xi.questLog.JEUNO, xi.quest.id.jeuno.SEARCHING_FOR_THE_RIGHT_WORDS)
             player:setCharVar('SearchingForRightWords_postcs', -2)
         end
     elseif csid == 196 then

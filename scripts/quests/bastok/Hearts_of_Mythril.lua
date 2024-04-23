@@ -6,7 +6,7 @@
 -- Monument : !pos 300 -62.803 498.2 106
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.BASTOK, xi.quest.id.bastok.HEARTS_OF_MYTHRIL)
+local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.HEARTS_OF_MYTHRIL)
 
 quest.reward =
 {
@@ -59,7 +59,7 @@ quest.sections =
             {
                 [42] = function(player, csid, option, npc)
                     if quest:complete(player) then
-                        xi.quest.setMustZone(player, xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_ELEVENTHS_HOUR)
+                        xi.quest.setMustZone(player, xi.questLog.BASTOK, xi.quest.id.bastok.THE_ELEVENTHS_HOUR)
                     end
                 end,
             },

@@ -6,7 +6,7 @@
 -- Mhaura, Rycharde, !pos 17.451 -16.000 88.815 249
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.UNENDING_CHASE)
+local quest = Quest:new(xi.questLog.OTHER_AREAS, xi.quest.id.otherAreas.UNENDING_CHASE)
 
 quest.reward =
 {
@@ -22,7 +22,7 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == xi.questStatus.QUEST_AVAILABLE and
-                player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.WAY_OF_THE_COOK) == xi.questStatus.QUEST_COMPLETED
+                player:getQuestStatus(xi.questLog.OTHER_AREAS, xi.quest.id.otherAreas.WAY_OF_THE_COOK) == xi.questStatus.QUEST_COMPLETED
         end,
 
         [xi.zone.MHAURA] =

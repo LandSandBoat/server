@@ -5,7 +5,7 @@
 -- Dominion Sergeant (Cornelia's Camp)
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.ABYSSEA, xi.quest.id.abyssea.DOMINION_OP_14_GRAUBERG)
+local quest = Quest:new(xi.questLog.ABYSSEA, xi.quest.id.abyssea.DOMINION_OP_14_GRAUBERG)
 
 quest.reward = {}
 

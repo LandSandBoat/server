@@ -9,7 +9,7 @@
 local ordellesCavesID = zones[xi.zone.ORDELLES_CAVES]
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.A_SQUIRES_TEST_II)
+local quest = Quest:new(xi.questLog.SANDORIA, xi.quest.id.sandoria.A_SQUIRES_TEST_II)
 
 quest.reward =
 {
@@ -24,7 +24,7 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == xi.questStatus.QUEST_AVAILABLE and
-                player:hasCompletedQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.A_SQUIRES_TEST)
+                player:hasCompletedQuest(xi.questLog.SANDORIA, xi.quest.id.sandoria.A_SQUIRES_TEST)
         end,
 
         [xi.zone.SOUTHERN_SAN_DORIA] =

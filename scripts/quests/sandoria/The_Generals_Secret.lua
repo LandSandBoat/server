@@ -5,7 +5,7 @@
 -- Hot Springs : !pos 444 -37 -18 139
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_GENERALS_SECRET)
+local quest = Quest:new(xi.questLog.SANDORIA, xi.quest.id.sandoria.THE_GENERALS_SECRET)
 
 quest.reward =
 {

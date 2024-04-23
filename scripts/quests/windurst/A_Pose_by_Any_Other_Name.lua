@@ -3,7 +3,7 @@
 -- Angelica !pos -64 -9.25 -9 238
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.WINDURST, xi.quest.id.windurst.A_POSE_BY_ANY_OTHER_NAME)
+local quest = Quest:new(xi.questLog.WINDURST, xi.quest.id.windurst.A_POSE_BY_ANY_OTHER_NAME)
 
 local poseItems =
 {
@@ -144,7 +144,7 @@ quest.sections =
                 end,
 
                 [102] = function(player, csid, option, npc) -- Quest failed.
-                    player:delQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.A_POSE_BY_ANY_OTHER_NAME)
+                    player:delQuest(xi.questLog.WINDURST, xi.quest.id.windurst.A_POSE_BY_ANY_OTHER_NAME)
                     quest:setVar(player, 'Prog', 0) -- TODO: Confirm that initial CS has to be repeated aswell upon quest failure. If not, set var to 1 here.
                     quest:setVar(player, 'Stage', 0)
                     player:addTitle(xi.title.LOWER_THAN_THE_LOWEST_TUNNEL_WORM)

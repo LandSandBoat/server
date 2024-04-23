@@ -5,7 +5,7 @@
 -- Nomad Moogle : !pos 10.012 1.453 121.883 243
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.PRELUDE_TO_PUISSANCE)
+local quest = Quest:new(xi.questLog.JEUNO, xi.quest.id.jeuno.PRELUDE_TO_PUISSANCE)
 
 -- TODO: Properly code timing minigame. Awaiting for a capture.
 -- Amount of visual qeues selected at random. Min: Probably 3. Max: 7. Camera angle keeps changing qithout hints.
@@ -100,7 +100,7 @@ quest.sections =
                                 option ~= 0 and
                                 option ~= 15
                             then
-                                player:addQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.BEYOND_INFINITY)
+                                player:addQuest(xi.questLog.JEUNO, xi.quest.id.jeuno.BEYOND_INFINITY)
                             end
 
                             -- This options also warp you to a BCNM. Note that the quest "Beyond Infinity" is already activated in this cases.

@@ -4,7 +4,7 @@
 -- Kohlo-Lakolo, !pos -26.8 -6 190 240
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_PROMISE)
+local quest = Quest:new(xi.questLog.WINDURST, xi.quest.id.windurst.THE_PROMISE)
 
 local function timedEvents(player, inTime, outATime)
     if
@@ -38,7 +38,7 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == xi.questStatus.QUEST_AVAILABLE and
-                player:hasCompletedQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.WILD_CARD)
+                player:hasCompletedQuest(xi.questLog.WINDURST, xi.quest.id.windurst.WILD_CARD)
         end,
 
         [xi.zone.PORT_WINDURST] =

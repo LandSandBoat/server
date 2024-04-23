@@ -5,7 +5,7 @@
 -- Westerly Breeze : !pos 62 32 123 256
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.THE_STARVING)
+local quest = Quest:new(xi.questLog.ADOULIN, xi.quest.id.adoulin.THE_STARVING)
 
 quest.reward =
 {
@@ -69,8 +69,8 @@ quest.sections =
         {
             [3007] = function(player, csid, option, npc)
                 if quest:complete(player) then
-                    xi.quest.setMustZone(player, xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.ALWAYS_MORE_QUOTH_THE_RAVENOUS)
-                    xi.quest.setVar(player, xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.ALWAYS_MORE_QUOTH_THE_RAVENOUS, 'Timer', VanadielUniqueDay() + 1)
+                    xi.quest.setMustZone(player, xi.questLog.ADOULIN, xi.quest.id.adoulin.ALWAYS_MORE_QUOTH_THE_RAVENOUS)
+                    xi.quest.setVar(player, xi.questLog.ADOULIN, xi.quest.id.adoulin.ALWAYS_MORE_QUOTH_THE_RAVENOUS, 'Timer', VanadielUniqueDay() + 1)
                 end
             end,
 

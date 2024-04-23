@@ -5,7 +5,7 @@
 -- Moreno-Toeno : !pos 169 -1.25 159 238
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.WINDURST, xi.quest.id.windurst.TEACHERS_PET)
+local quest = Quest:new(xi.questLog.WINDURST, xi.quest.id.windurst.TEACHERS_PET)
 
 quest.reward =
 {
@@ -79,7 +79,7 @@ quest.sections =
                     end
 
                     if quest:complete(player) then
-                        xi.quest.setMustZone(player, xi.quest.log_id.WINDURST, xi.quest.id.windurst.MAKING_THE_GRADE)
+                        xi.quest.setMustZone(player, xi.questLog.WINDURST, xi.quest.id.windurst.MAKING_THE_GRADE)
                     end
                 end,
             },

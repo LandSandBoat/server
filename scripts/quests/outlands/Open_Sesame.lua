@@ -5,7 +5,7 @@
 -- Lokpix : !pos -61.942 3.949 224.900 114
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.OPEN_SESAME)
+local quest = Quest:new(xi.questLog.OUTLANDS, xi.quest.id.outlands.OPEN_SESAME)
 
 quest.reward =
 {

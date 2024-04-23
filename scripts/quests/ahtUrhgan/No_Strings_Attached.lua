@@ -10,7 +10,7 @@
 local ahtUrhganID = zones[xi.zone.AHT_URHGAN_WHITEGATE]
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.NO_STRINGS_ATTACHED)
+local quest = Quest:new(xi.questLog.AHT_URHGAN, xi.quest.id.ahtUrhgan.NO_STRINGS_ATTACHED)
 
 quest.reward =
 {

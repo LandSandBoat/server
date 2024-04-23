@@ -9,7 +9,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local tooManyChefs = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.TOO_MANY_CHEFS)
+    local tooManyChefs = player:getQuestStatus(xi.questLog.BASTOK, xi.quest.id.bastok.TOO_MANY_CHEFS)
     local pFame = player:getFameLevel(xi.quest.fame_area.BASTOK)
 
     if tooManyChefs == xi.questStatus.QUEST_AVAILABLE and pFame >= 5 then
@@ -26,7 +26,7 @@ end
 
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 946 and option == 0 then
-        player:addQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.TOO_MANY_CHEFS)
+        player:addQuest(xi.questLog.BASTOK, xi.quest.id.bastok.TOO_MANY_CHEFS)
         player:setCharVar('TOO_MANY_CHEFS', 1)
     elseif csid == 947 then
         player:setCharVar('TOO_MANY_CHEFS', 5)

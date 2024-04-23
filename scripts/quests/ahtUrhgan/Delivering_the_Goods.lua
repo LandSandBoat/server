@@ -5,7 +5,7 @@
 -- Ulamaal, Whitegate, !pos 93 -7.5 -128 50
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.DELIVERING_THE_GOODS)
+local quest = Quest:new(xi.questLog.AHT_URHGAN, xi.quest.id.ahtUrhgan.DELIVERING_THE_GOODS)
 
 quest.reward =
 {

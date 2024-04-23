@@ -10,7 +10,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local DELM = player:getQuestStatus(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.DONT_EVER_LEAF_ME)
+    local DELM = player:getQuestStatus(xi.questLog.ADOULIN, xi.quest.id.adoulin.DONT_EVER_LEAF_ME)
 
     if DELM == xi.questStatus.QUEST_ACCEPTED and player:getCharVar('DELM_Barenngo_Branch') < 1 then
         -- Progresses Quest: 'Dont Ever Leaf Me'

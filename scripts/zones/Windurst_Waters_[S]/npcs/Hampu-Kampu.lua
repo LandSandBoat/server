@@ -10,7 +10,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local sayItWithAHandbag = player:getQuestStatus(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.SAY_IT_WITH_A_HANDBAG)
+    local sayItWithAHandbag = player:getQuestStatus(xi.questLog.CRYSTAL_WAR, xi.quest.id.crystalWar.SAY_IT_WITH_A_HANDBAG)
     local sayItWithAHandbagCS = player:getCharVar('sayItWithAHandbagCS')
 
     if sayItWithAHandbag == xi.questStatus.QUEST_COMPLETED then
@@ -37,7 +37,7 @@ end
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 174 then -- Option doesn't matter as NPC will take key item if yes or no
         if
-            npcUtil.completeQuest(player, xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.SAY_IT_WITH_A_HANDBAG, {
+            npcUtil.completeQuest(player, xi.questLog.CRYSTAL_WAR, xi.quest.id.crystalWar.SAY_IT_WITH_A_HANDBAG, {
                 item = 19110, -- Trainee's Needle
                 var = 'sayItWithAHandbagCS'
             })
@@ -48,7 +48,7 @@ entity.onEventFinish = function(player, csid, option, npc)
     elseif csid == 172 then
         npcUtil.giveKeyItem(player, xi.ki.TORN_PATCHES_OF_LEATHER)
     elseif csid == 169 then
-        player:addQuest(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.SAY_IT_WITH_A_HANDBAG)
+        player:addQuest(xi.questLog.CRYSTAL_WAR, xi.quest.id.crystalWar.SAY_IT_WITH_A_HANDBAG)
     end
 end
 

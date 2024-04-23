@@ -3,7 +3,7 @@
 -- Koblakiq !pos -64.851 21.834 -117.521 11
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.MISSIONARY_MOBLIN)
+local quest = Quest:new(xi.questLog.OTHER_AREAS, xi.quest.id.otherAreas.MISSIONARY_MOBLIN)
 
 quest.reward =
 {

@@ -356,13 +356,13 @@ xi.monstrosity.purchasableInstincts =
 
 local limitBreakQuests =
 {
-    [xi.job.BLU] = { xi.quest.log_id.AHT_URHGAN,  xi.quest.id.ahtUrhgan.THE_BEAST_WITHIN           },
-    [xi.job.COR] = { xi.quest.log_id.AHT_URHGAN,  xi.quest.id.ahtUrhgan.BREAKING_THE_BONDS_OF_FATE },
-    [xi.job.PUP] = { xi.quest.log_id.BASTOK,      xi.quest.id.bastok.ACHIEVING_TRUE_POWER          },
-    [xi.job.DNC] = { xi.quest.log_id.JEUNO,       xi.quest.id.jeuno.A_FURIOUS_FINALE               },
-    [xi.job.SCH] = { xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.SURVIVAL_OF_THE_WISEST    },
-    [xi.job.GEO] = { xi.quest.log_id.ADOULIN,     xi.quest.id.adoulin.ELEMENTARY_MY_DEAR_SYLVIE    },
-    [xi.job.RUN] = { xi.quest.log_id.ADOULIN,     xi.quest.id.adoulin.ENDEAVORING_TO_AWAKEN        },
+    [xi.job.BLU] = { xi.questLog.AHT_URHGAN,  xi.quest.id.ahtUrhgan.THE_BEAST_WITHIN           },
+    [xi.job.COR] = { xi.questLog.AHT_URHGAN,  xi.quest.id.ahtUrhgan.BREAKING_THE_BONDS_OF_FATE },
+    [xi.job.PUP] = { xi.questLog.BASTOK,      xi.quest.id.bastok.ACHIEVING_TRUE_POWER          },
+    [xi.job.DNC] = { xi.questLog.JEUNO,       xi.quest.id.jeuno.A_FURIOUS_FINALE               },
+    [xi.job.SCH] = { xi.questLog.OTHER_AREAS, xi.quest.id.otherAreas.SURVIVAL_OF_THE_WISEST    },
+    [xi.job.GEO] = { xi.questLog.ADOULIN,     xi.quest.id.adoulin.ELEMENTARY_MY_DEAR_SYLVIE    },
+    [xi.job.RUN] = { xi.questLog.ADOULIN,     xi.quest.id.adoulin.ENDEAVORING_TO_AWAKEN        },
 }
 
 -- NOTE: Cost and granted species/variant are hardcoded into Terynon's event; however, the requirements
@@ -1149,7 +1149,7 @@ end
 
 xi.monstrosity.unlockAll = function(player)
     -- Complete quest
-    local logId = xi.quest.log_id.OTHER_AREAS
+    local logId = xi.questLog.OTHER_AREAS
     player:completeQuest(logId, xi.quest.id[xi.quest.area[logId]].MONSTROSITY)
 
     -- Add Monstrosity key item

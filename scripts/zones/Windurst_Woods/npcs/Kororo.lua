@@ -13,9 +13,9 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local c2000 = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_ALL_NEW_C_2000) -- previous quest in line
-    local aGreetingCardian = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.A_GREETING_CARDIAN)
-    local lpb = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.LEGENDARY_PLAN_B)
+    local c2000 = player:getQuestStatus(xi.questLog.WINDURST, xi.quest.id.windurst.THE_ALL_NEW_C_2000) -- previous quest in line
+    local aGreetingCardian = player:getQuestStatus(xi.questLog.WINDURST, xi.quest.id.windurst.A_GREETING_CARDIAN)
+    local lpb = player:getQuestStatus(xi.questLog.WINDURST, xi.quest.id.windurst.LEGENDARY_PLAN_B)
     local agccs = player:getCharVar('AGreetingCardian_Event')
     local agcTime = player:getCharVar('AGreetingCardian_timer')
 
@@ -54,7 +54,7 @@ end
 entity.onEventFinish = function(player, csid, option, npc)
     -- A Greeting Cardian
     if csid == 296 then
-        player:addQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.A_GREETING_CARDIAN)
+        player:addQuest(xi.questLog.WINDURST, xi.quest.id.windurst.A_GREETING_CARDIAN)
         player:setCharVar('AGreetingCardian_Event', 2)
         player:setCharVar('AGreetingCardian_timer', os.time() + 60)
         player:needToZone(true) -- wait one minute and zone after this step
@@ -67,7 +67,7 @@ entity.onEventFinish = function(player, csid, option, npc)
             player:addItem(xi.item.TOURMALINE_EARRING)
             player:messageSpecial(ID.text.ITEM_OBTAINED, xi.item.TOURMALINE_EARRING) -- Tourmaline Earring
             player:addFame(xi.quest.fame_area.WINDURST, 30)
-            player:completeQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.A_GREETING_CARDIAN)
+            player:completeQuest(xi.questLog.WINDURST, xi.quest.id.windurst.A_GREETING_CARDIAN)
             player:needToZone(true) -- zone before starting Legendary Plan B
             player:setCharVar('AGreetingCardian_timer', 0)
             player:setCharVar('AGreetingCardian_Event', 0) -- finish cleanup of A Greeting Cardian variables

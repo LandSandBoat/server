@@ -10,7 +10,7 @@
 local upperJeunoID = zones[xi.zone.UPPER_JEUNO]
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.LAKESIDE_MINUET)
+local quest = Quest:new(xi.questLog.JEUNO, xi.quest.id.jeuno.LAKESIDE_MINUET)
 
 quest.reward =
 {
@@ -166,7 +166,7 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == xi.questStatus.QUEST_COMPLETED and
-                not player:hasCompletedQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_UNFINISHED_WALTZ)
+                not player:hasCompletedQuest(xi.questLog.JEUNO, xi.quest.id.jeuno.THE_UNFINISHED_WALTZ)
         end,
 
         [xi.zone.UPPER_JEUNO] =

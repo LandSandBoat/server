@@ -11,7 +11,7 @@ local davoiID            = zones[xi.zone.DAVOI]
 local southernSandoriaID = zones[xi.zone.SOUTHERN_SAN_DORIA]
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.A_KNIGHTS_TEST)
+local quest = Quest:new(xi.questLog.SANDORIA, xi.quest.id.sandoria.A_KNIGHTS_TEST)
 
 quest.reward =
 {
@@ -27,7 +27,7 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == xi.questStatus.QUEST_AVAILABLE and
-                player:hasCompletedQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.A_SQUIRES_TEST_II)
+                player:hasCompletedQuest(xi.questLog.SANDORIA, xi.quest.id.sandoria.A_SQUIRES_TEST_II)
         end,
 
         [xi.zone.SOUTHERN_SAN_DORIA] =

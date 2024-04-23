@@ -10,7 +10,7 @@ local buburimuID   = zones[xi.zone.BUBURIMU_PENINSULA]
 local lowerJeunoID = zones[xi.zone.LOWER_JEUNO]
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_OLD_MONUMENT)
+local quest = Quest:new(xi.questLog.JEUNO, xi.quest.id.jeuno.THE_OLD_MONUMENT)
 
 quest.reward =
 {

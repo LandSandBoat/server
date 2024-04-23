@@ -7,7 +7,7 @@
 local entity = {}
 
 entity.onTrigger = function(player, npc)
-    local postman = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_POSTMAN_ALWAYS_KO_S_TWICE)
+    local postman = player:getQuestStatus(xi.questLog.WINDURST, xi.quest.id.windurst.THE_POSTMAN_ALWAYS_KO_S_TWICE)
 
     if postman == xi.questStatus.QUEST_AVAILABLE then
         player:startEvent(48)
@@ -19,7 +19,7 @@ entity.onTrigger = function(player, npc)
 end
 
 entity.onTrade = function(player, npc, trade)
-    local postman = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_POSTMAN_ALWAYS_KO_S_TWICE)
+    local postman = player:getQuestStatus(xi.questLog.WINDURST, xi.quest.id.windurst.THE_POSTMAN_ALWAYS_KO_S_TWICE)
 
     if postman ~= xi.questStatus.QUEST_AVAILABLE then
         local reward = 0
@@ -76,27 +76,27 @@ end
 
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 48 and option == 0 then
-        player:addQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_POSTMAN_ALWAYS_KO_S_TWICE)
+        player:addQuest(xi.questLog.WINDURST, xi.quest.id.windurst.THE_POSTMAN_ALWAYS_KO_S_TWICE)
     elseif csid == 52 then
         player:tradeComplete()
         player:addGil(xi.settings.main.GIL_RATE * 50)
         player:addFame(xi.quest.fame_area.WINDURST, 80)
-        player:completeQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_POSTMAN_ALWAYS_KO_S_TWICE)
+        player:completeQuest(xi.questLog.WINDURST, xi.quest.id.windurst.THE_POSTMAN_ALWAYS_KO_S_TWICE)
     elseif csid == 53 then
         player:tradeComplete()
         player:addGil(xi.settings.main.GIL_RATE * 150)
         player:addFame(xi.quest.fame_area.WINDURST, 80)
-        player:completeQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_POSTMAN_ALWAYS_KO_S_TWICE)
+        player:completeQuest(xi.questLog.WINDURST, xi.quest.id.windurst.THE_POSTMAN_ALWAYS_KO_S_TWICE)
     elseif csid == 54 then
         player:tradeComplete()
         player:addGil(xi.settings.main.GIL_RATE * 250)
         player:addFame(xi.quest.fame_area.WINDURST, 80)
-        player:completeQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_POSTMAN_ALWAYS_KO_S_TWICE)
+        player:completeQuest(xi.questLog.WINDURST, xi.quest.id.windurst.THE_POSTMAN_ALWAYS_KO_S_TWICE)
     elseif csid == 55 then
         player:tradeComplete()
         player:addGil(xi.settings.main.GIL_RATE * 500)
         player:addFame(xi.quest.fame_area.WINDURST, 80)
-        player:completeQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_POSTMAN_ALWAYS_KO_S_TWICE)
+        player:completeQuest(xi.questLog.WINDURST, xi.quest.id.windurst.THE_POSTMAN_ALWAYS_KO_S_TWICE)
     elseif csid == 57 then
         player:tradeComplete()
         player:addGil(xi.settings.main.GIL_RATE * 50)

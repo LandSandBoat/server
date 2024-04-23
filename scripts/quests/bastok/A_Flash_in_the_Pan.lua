@@ -7,7 +7,7 @@
 local bastokMarketsID = zones[xi.zone.BASTOK_MARKETS]
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.BASTOK, xi.quest.id.bastok.A_FLASH_IN_THE_PAN)
+local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.A_FLASH_IN_THE_PAN)
 
 quest.reward =
 {

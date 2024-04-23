@@ -7,7 +7,7 @@
 -- Selbina, Valgeir,  !pos 57.496 -15.273 20.229 248
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.HIS_NAME_IS_VALGEIR)
+local quest = Quest:new(xi.questLog.OTHER_AREAS, xi.quest.id.otherAreas.HIS_NAME_IS_VALGEIR)
 
 quest.reward =
 {
@@ -23,7 +23,7 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == xi.questStatus.QUEST_AVAILABLE and
-                player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.UNENDING_CHASE) == xi.questStatus.QUEST_COMPLETED
+                player:getQuestStatus(xi.questLog.OTHER_AREAS, xi.quest.id.otherAreas.UNENDING_CHASE) == xi.questStatus.QUEST_COMPLETED
         end,
 
         [xi.zone.MHAURA] =

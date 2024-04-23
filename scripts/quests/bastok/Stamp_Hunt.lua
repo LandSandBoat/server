@@ -12,7 +12,7 @@
 -- Latifah       : !pos 51.241 7.499 -55.407 236
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.BASTOK, xi.quest.id.bastok.STAMP_HUNT)
+local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.STAMP_HUNT)
 
 quest.reward =
 {

@@ -7,7 +7,7 @@ local norgID         = zones[xi.zone.NORG]
 local kuftalTunnelID = zones[xi.zone.KUFTAL_TUNNEL]
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.THE_POTENTIAL_WITHIN)
+local quest = Quest:new(xi.questLog.OUTLANDS, xi.quest.id.outlands.THE_POTENTIAL_WITHIN)
 
 quest.reward =
 {
@@ -85,7 +85,7 @@ quest.sections =
             {
                 [179] = function(player, csid, option, npc)
                     if option == 2 then
-                        player:delQuest(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.THE_POTENTIAL_WITHIN)
+                        player:delQuest(xi.questLog.OUTLANDS, xi.quest.id.outlands.THE_POTENTIAL_WITHIN)
                         player:delKeyItem(xi.ki.WEAPON_TRAINING_GUIDE)
                         player:delKeyItem(xi.ki.MAP_TO_THE_ANNALS_OF_TRUTH)
                     elseif not player:hasItem(xi.item.TACHI_OF_TRIALS) then

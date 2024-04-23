@@ -9,7 +9,7 @@
 local pashhowID = zones[xi.zone.PASHHOW_MARSHLANDS_S]
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.ON_SABBATICAL)
+local quest = Quest:new(xi.questLog.CRYSTAL_WAR, xi.quest.id.crystalWar.ON_SABBATICAL)
 
 quest.reward =
 {
@@ -108,8 +108,8 @@ quest.sections =
                     if quest:complete(player) then
                         player:delKeyItem(xi.ki.ULBRECHTS_SEALED_LETTER)
                         player:delKeyItem(xi.ki.SCHULTZS_SEALED_LETTER)
-                        xi.quest.setVar(player, xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.ON_SABBATICAL, 'Timer', VanadielUniqueDay() + 1)
-                        xi.quest.setMustZone(player, xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.ON_SABBATICAL)
+                        xi.quest.setVar(player, xi.questLog.CRYSTAL_WAR, xi.quest.id.crystalWar.ON_SABBATICAL, 'Timer', VanadielUniqueDay() + 1)
+                        xi.quest.setMustZone(player, xi.questLog.CRYSTAL_WAR, xi.quest.id.crystalWar.ON_SABBATICAL)
                     end
                 end,
             }

@@ -13,7 +13,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local gates = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.GATES_TO_PARADISE)
+    local gates = player:getQuestStatus(xi.questLog.SANDORIA, xi.quest.id.sandoria.GATES_TO_PARADISE)
     if gates == xi.questStatus.QUEST_COMPLETED then
         player:showText(npc, ID.text.FAURBELLANT_4)
     elseif gates == xi.questStatus.QUEST_ACCEPTED then

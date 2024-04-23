@@ -9,7 +9,7 @@
 local zitahID = zones[xi.zone.THE_SANCTUARY_OF_ZITAH]
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.THE_SACRED_KATANA)
+local quest = Quest:new(xi.questLog.OUTLANDS, xi.quest.id.outlands.THE_SACRED_KATANA)
 
 quest.reward =
 {
@@ -23,7 +23,7 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == xi.questStatus.QUEST_AVAILABLE and
-                player:hasCompletedQuest(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.FORGE_YOUR_DESTINY) and
+                player:hasCompletedQuest(xi.questLog.OUTLANDS, xi.quest.id.outlands.FORGE_YOUR_DESTINY) and
                 player:getMainJob() == xi.job.SAM and
                 player:getMainLvl() >= xi.settings.main.AF1_QUEST_LEVEL
         end,

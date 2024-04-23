@@ -3,7 +3,7 @@
 -- Ahkk Jharcham, Whitegate , !pos 0.1 -1 -76 50
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.KEEPING_NOTES)
+local quest = Quest:new(xi.questLog.AHT_URHGAN, xi.quest.id.ahtUrhgan.KEEPING_NOTES)
 
 quest.sections =
 {

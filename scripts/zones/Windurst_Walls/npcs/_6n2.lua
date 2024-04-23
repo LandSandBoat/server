@@ -10,10 +10,10 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local thePuppetMaster = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_PUPPET_MASTER)
-    local classReunion = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CLASS_REUNION)
-    local carbuncleDebacle = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CARBUNCLE_DEBACLE)
-    local iCanHearARainbow = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.I_CAN_HEAR_A_RAINBOW)
+    local thePuppetMaster = player:getQuestStatus(xi.questLog.WINDURST, xi.quest.id.windurst.THE_PUPPET_MASTER)
+    local classReunion = player:getQuestStatus(xi.questLog.WINDURST, xi.quest.id.windurst.CLASS_REUNION)
+    local carbuncleDebacle = player:getQuestStatus(xi.questLog.WINDURST, xi.quest.id.windurst.CARBUNCLE_DEBACLE)
+    local iCanHearARainbow = player:getQuestStatus(xi.questLog.WINDURST, xi.quest.id.windurst.I_CAN_HEAR_A_RAINBOW)
 
     -- I CAN HEAR A RAINBOW
     if
@@ -54,17 +54,17 @@ end
 entity.onEventFinish = function(player, csid, option, npc)
     -- I CAN HEAR A RAINBOW
     if csid == 384 then
-        player:addQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.I_CAN_HEAR_A_RAINBOW)
+        player:addQuest(xi.questLog.WINDURST, xi.quest.id.windurst.I_CAN_HEAR_A_RAINBOW)
 
     -- CLASS REUNION
     elseif csid == 413 then
-        player:addQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CLASS_REUNION)
+        player:addQuest(xi.questLog.WINDURST, xi.quest.id.windurst.CLASS_REUNION)
         npcUtil.giveKeyItem(player, xi.ki.CARBUNCLES_TEAR)
         player:setCharVar('ClassReunionProgress', 1)
 
     -- CARBUNCLE DEBACLE
     elseif csid == 415 then
-        player:addQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CARBUNCLE_DEBACLE)
+        player:addQuest(xi.questLog.WINDURST, xi.quest.id.windurst.CARBUNCLE_DEBACLE)
         player:setCharVar('CarbuncleDebacleProgress', 1)
     end
 end

@@ -7,7 +7,7 @@
 -- Cermet Door     : !pos -183 0 190 204
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CURSES_FOILED_A_GOLEM)
+local quest = Quest:new(xi.questLog.WINDURST, xi.quest.id.windurst.CURSES_FOILED_A_GOLEM)
 
 quest.reward =
 {
@@ -35,7 +35,7 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == xi.questStatus.QUEST_AVAILABLE and
-                player:hasCompletedQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CURSES_FOILED_AGAIN_2) and
+                player:hasCompletedQuest(xi.questLog.WINDURST, xi.quest.id.windurst.CURSES_FOILED_AGAIN_2) and
                 player:getFameLevel(xi.quest.fame_area.WINDURST) >= 4 and
                 player:getMainLvl() >= 10 and
                 not quest:getMustZone(player)

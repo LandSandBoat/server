@@ -25,7 +25,7 @@ quest.sections =
     -- order to prevent needing a forever CharVar.
     {
         check = function(player, questVars, vars)
-            return player:hasCompletedQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_ROAD_TO_DIVADOM) and
+            return player:hasCompletedQuest(xi.questLog.JEUNO, xi.quest.id.jeuno.THE_ROAD_TO_DIVADOM) and
                 player:getMainJob() == xi.job.DNC
         end,
 

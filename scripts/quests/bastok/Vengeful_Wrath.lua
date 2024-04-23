@@ -5,7 +5,7 @@
 -- Goraow : !pos 38 .1 14 234
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.BASTOK, xi.quest.id.bastok.VENGEFUL_WRATH)
+local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.VENGEFUL_WRATH)
 
 quest.reward =
 {

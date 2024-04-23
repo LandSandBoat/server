@@ -6,7 +6,7 @@
 local westRonfaureID = zones[xi.zone.WEST_RONFAURE]
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.A_SENTRYS_PERIL)
+local quest = Quest:new(xi.questLog.SANDORIA, xi.quest.id.sandoria.A_SENTRYS_PERIL)
 
 quest.reward =
 {

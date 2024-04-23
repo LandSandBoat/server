@@ -13,9 +13,9 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local trustSandoria = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.TRUST_SANDORIA)
-    local trustBastok   = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.TRUST_BASTOK)
-    local trustWindurst = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.TRUST_WINDURST)
+    local trustSandoria = player:getQuestStatus(xi.questLog.SANDORIA, xi.quest.id.sandoria.TRUST_SANDORIA)
+    local trustBastok   = player:getQuestStatus(xi.questLog.BASTOK, xi.quest.id.bastok.TRUST_BASTOK)
+    local trustWindurst = player:getQuestStatus(xi.questLog.WINDURST, xi.quest.id.windurst.TRUST_WINDURST)
 
     if
         player:getMainLvl() >= 5 and
@@ -41,7 +41,7 @@ end
 
 entity.onEventFinish = function(player, csid, option, npc)
     if (csid == 863 or csid == 867) and option == 2 then
-        player:addQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.TRUST_WINDURST)
+        player:addQuest(xi.questLog.WINDURST, xi.quest.id.windurst.TRUST_WINDURST)
         npcUtil.giveKeyItem(player, xi.ki.GREEN_INSTITUTE_CARD)
     elseif csid == 862 or csid == 902 then
         local spellID = player:getLocalVar('TradingTrustCipher')

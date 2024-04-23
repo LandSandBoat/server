@@ -7,7 +7,7 @@
 local ruludeID = zones[xi.zone.RULUDE_GARDENS]
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.DORMANT_POWERS_DISLODGED)
+local quest = Quest:new(xi.questLog.JEUNO, xi.quest.id.jeuno.DORMANT_POWERS_DISLODGED)
 
 -- NOTE: Timing minigame was guesstimated! No capture available.
 -- The event seems to handle the actual timing. As in, it counts for us.

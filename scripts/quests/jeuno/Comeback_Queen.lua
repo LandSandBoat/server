@@ -7,7 +7,7 @@
 -- Harmodios    : !pos -79.928 -4.824 -135.114 235
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.COMEBACK_QUEEN)
+local quest = Quest:new(xi.questLog.JEUNO, xi.quest.id.jeuno.COMEBACK_QUEEN)
 
 quest.reward =
 {
@@ -31,7 +31,7 @@ quest.sections =
             return status == xi.questStatus.QUEST_AVAILABLE and
                 player:getMainJob() == xi.job.DNC and
                 player:getMainLvl() >= xi.settings.main.AF3_QUEST_LEVEL and
-                player:hasCompletedQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_ROAD_TO_DIVADOM) and
+                player:hasCompletedQuest(xi.questLog.JEUNO, xi.quest.id.jeuno.THE_ROAD_TO_DIVADOM) and
                 not quest:getMustZone(player) and
                 quest:getVar(player, 'Timer') <= VanadielUniqueDay()
         end,

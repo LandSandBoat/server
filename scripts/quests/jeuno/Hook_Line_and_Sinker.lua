@@ -4,7 +4,7 @@
 -- EGRET_FISHING_ROD: !additem 1726
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.HOOK_LINE_AND_SINKER)
+local quest = Quest:new(xi.questLog.JEUNO, xi.quest.id.jeuno.HOOK_LINE_AND_SINKER)
 
 quest.reward =
 {

@@ -8,7 +8,7 @@
 -- Mhaura, Numi Adaligo, !pos -80.332 -24.050 34.794 249
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.RYCHARDE_THE_CHEF)
+local quest = Quest:new(xi.questLog.OTHER_AREAS, xi.quest.id.otherAreas.RYCHARDE_THE_CHEF)
 
 quest.reward =
 {

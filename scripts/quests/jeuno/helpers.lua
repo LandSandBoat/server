@@ -14,7 +14,7 @@ setmetatable(xi.jeuno.helpers.GobbiebagQuest, { __index = Quest })
 xi.jeuno.helpers.GobbiebagQuest.__index = xi.jeuno.helpers.GobbiebagQuest
 
 function xi.jeuno.helpers.GobbiebagQuest:new(params)
-    local quest = Quest:new(xi.quest.log_id.JEUNO, params.questId)
+    local quest = Quest:new(xi.questLog.JEUNO, params.questId)
 
     quest.reward = params.reward
 
@@ -33,7 +33,7 @@ function xi.jeuno.helpers.GobbiebagQuest:new(params)
     local getReqsMet = function(player)
         return  player:getFameLevel(xi.quest.fame_area.JEUNO) >= params.fame and
                 player:getContainerSize(xi.inv.INVENTORY) == params.startInventorySize and
-                (params.prerequisite == nil or player:hasCompletedQuest(xi.quest.log_id.JEUNO, params.prerequisite))
+                (params.prerequisite == nil or player:hasCompletedQuest(xi.questLog.JEUNO, params.prerequisite))
     end
 
     quest.sections =

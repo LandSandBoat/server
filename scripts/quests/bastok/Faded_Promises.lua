@@ -8,7 +8,7 @@
 -- Alois    : !pos 96 -20 14 237
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.BASTOK, xi.quest.id.bastok.FADED_PROMISES)
+local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.FADED_PROMISES)
 
 quest.reward =
 {

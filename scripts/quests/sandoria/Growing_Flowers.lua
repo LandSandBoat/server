@@ -7,7 +7,7 @@
 local northenSandoriaID = zones[xi.zone.NORTHERN_SAN_DORIA]
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.GROWING_FLOWERS)
+local quest = Quest:new(xi.questLog.SANDORIA, xi.quest.id.sandoria.GROWING_FLOWERS)
 
 quest.reward =
 {

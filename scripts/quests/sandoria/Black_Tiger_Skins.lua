@@ -5,7 +5,7 @@
 -- Hanaa Punaa : !pos -179.726 -8.8 27.574 230
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.BLACK_TIGER_SKINS)
+local quest = Quest:new(xi.questLog.SANDORIA, xi.quest.id.sandoria.BLACK_TIGER_SKINS)
 
 quest.reward =
 {
@@ -22,7 +22,7 @@ quest.sections =
         check = function(player, status, vars)
             return status == xi.questStatus.QUEST_AVAILABLE and
                 player:getFameLevel(xi.quest.fame_area.SANDORIA) >= 3 and
-                player:hasCompletedQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.LIZARD_SKINS)
+                player:hasCompletedQuest(xi.questLog.SANDORIA, xi.quest.id.sandoria.LIZARD_SKINS)
         end,
 
         [xi.zone.SOUTHERN_SAN_DORIA] =

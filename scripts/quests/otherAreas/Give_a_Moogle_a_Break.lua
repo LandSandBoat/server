@@ -5,7 +5,7 @@
 -- Moogle : (Mog House, Home Nation)
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.GIVE_A_MOOGLE_A_BREAK)
+local quest = Quest:new(xi.questLog.OTHER_AREAS, xi.quest.id.otherAreas.GIVE_A_MOOGLE_A_BREAK)
 
 quest.reward =
 {

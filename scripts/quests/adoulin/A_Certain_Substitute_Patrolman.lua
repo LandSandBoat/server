@@ -14,7 +14,7 @@
 local westernAdoulinID = zones[xi.zone.WESTERN_ADOULIN]
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.A_CERTAIN_SUBSTITUTE_PATROLMAN)
+local quest = Quest:new(xi.questLog.ADOULIN, xi.quest.id.adoulin.A_CERTAIN_SUBSTITUTE_PATROLMAN)
 
 quest.reward =
 {

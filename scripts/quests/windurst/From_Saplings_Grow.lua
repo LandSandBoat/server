@@ -7,7 +7,7 @@ local windurstWoodsID = zones[xi.zone.WINDURST_WOODS]
 local capeTerigganID  = zones[xi.zone.CAPE_TERIGGAN]
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.WINDURST, xi.quest.id.windurst.FROM_SAPLINGS_GROW)
+local quest = Quest:new(xi.questLog.WINDURST, xi.quest.id.windurst.FROM_SAPLINGS_GROW)
 
 quest.reward =
 {
@@ -89,7 +89,7 @@ quest.sections =
                     if option == 1 and not player:hasItem(xi.item.BOW_OF_TRIALS) then
                         npcUtil.giveItem(player, xi.item.BOW_OF_TRIALS)
                     elseif option == 3 then
-                        player:delQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.FROM_SAPLINGS_GROW)
+                        player:delQuest(xi.questLog.WINDURST, xi.quest.id.windurst.FROM_SAPLINGS_GROW)
                         player:delKeyItem(xi.ki.WEAPON_TRAINING_GUIDE)
                         player:delKeyItem(xi.ki.MAP_TO_THE_ANNALS_OF_TRUTH)
                     end

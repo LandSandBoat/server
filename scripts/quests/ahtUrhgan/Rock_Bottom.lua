@@ -3,7 +3,7 @@
 -- !pos 838.243 -14.475 231.871 61
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.ROCK_BOTTOM)
+local quest = Quest:new(xi.questLog.AHT_URHGAN, xi.quest.id.ahtUrhgan.ROCK_BOTTOM)
 
 quest.sections =
 {

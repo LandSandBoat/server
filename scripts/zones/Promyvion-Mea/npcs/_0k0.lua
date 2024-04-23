@@ -8,7 +8,7 @@ local entity = {}
 
 entity.onTrigger = function(player, npc)
     if
-        player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.SHADOWS_OF_THE_DEPARTED) == xi.questStatus.QUEST_ACCEPTED and
+        player:getQuestStatus(xi.questLog.JEUNO, xi.quest.id.jeuno.SHADOWS_OF_THE_DEPARTED) == xi.questStatus.QUEST_ACCEPTED and
         not player:hasKeyItem(xi.ki.PROMYVION_MEA_SLIVER)
     then
         npcUtil.giveKeyItem(player, xi.ki.PROMYVION_MEA_SLIVER)

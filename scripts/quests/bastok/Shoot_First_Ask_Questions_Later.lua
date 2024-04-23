@@ -7,7 +7,7 @@ local metalworksID = zones[xi.zone.METALWORKS]
 local boyahdaTreeID = zones[xi.zone.THE_BOYAHDA_TREE]
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.BASTOK, xi.quest.id.bastok.SHOOT_FIRST_ASK_QUESTIONS_LATER)
+local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.SHOOT_FIRST_ASK_QUESTIONS_LATER)
 
 quest.reward =
 {
@@ -91,7 +91,7 @@ quest.sections =
                     then
                         npcUtil.giveItem(player, xi.item.GUN_OF_TRIALS)
                     elseif option == 2 then
-                        player:delQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.SHOOT_FIRST_ASK_QUESTIONS_LATER)
+                        player:delQuest(xi.questLog.BASTOK, xi.quest.id.bastok.SHOOT_FIRST_ASK_QUESTIONS_LATER)
                         player:delKeyItem(xi.ki.WEAPON_TRAINING_GUIDE)
                         player:delKeyItem(xi.ki.MAP_TO_THE_ANNALS_OF_TRUTH)
                     end

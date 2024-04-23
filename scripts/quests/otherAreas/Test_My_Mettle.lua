@@ -10,7 +10,7 @@ require('scripts/quests/otherAreas/helpers')
 local selbinaID = zones[xi.zone.SELBINA]
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.TEST_MY_METTLE)
+local quest = Quest:new(xi.questLog.OTHER_AREAS, xi.quest.id.otherAreas.TEST_MY_METTLE)
 
 quest.reward =
 {

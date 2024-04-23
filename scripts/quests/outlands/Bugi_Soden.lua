@@ -7,7 +7,7 @@ local norgID   = zones[xi.zone.NORG]
 local onzozoID = zones[xi.zone.LABYRINTH_OF_ONZOZO]
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.BUGI_SODEN)
+local quest = Quest:new(xi.questLog.OUTLANDS, xi.quest.id.outlands.BUGI_SODEN)
 
 quest.reward =
 {
@@ -85,7 +85,7 @@ quest.sections =
             {
                 [185] = function(player, csid, option, npc)
                     if option == 2 then
-                        player:delQuest(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.BUGI_SODEN)
+                        player:delQuest(xi.questLog.OUTLANDS, xi.quest.id.outlands.BUGI_SODEN)
                         player:delKeyItem(xi.ki.WEAPON_TRAINING_GUIDE)
                         player:delKeyItem(xi.ki.MAP_TO_THE_ANNALS_OF_TRUTH)
                     elseif not player:hasItem(xi.item.KODACHI_OF_TRIALS) then

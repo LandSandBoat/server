@@ -12,7 +12,7 @@ local entity = {}
 -- while True Companion is granted during the Ulmia path.
 
 entity.onTrade = function(player, npc, trade)
-    local overTheHillsAndFarAway = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.OVER_THE_HILLS_AND_FAR_AWAY)
+    local overTheHillsAndFarAway = player:getQuestStatus(xi.questLog.SANDORIA, xi.quest.id.sandoria.OVER_THE_HILLS_AND_FAR_AWAY)
 
     -- Taking a logical guess what criteria displays what message.
     if
@@ -49,7 +49,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local overTheHillsAndFarAway = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.OVER_THE_HILLS_AND_FAR_AWAY)
+    local overTheHillsAndFarAway = player:getQuestStatus(xi.questLog.SANDORIA, xi.quest.id.sandoria.OVER_THE_HILLS_AND_FAR_AWAY)
 
     if overTheHillsAndFarAway == xi.questStatus.QUEST_COMPLETED then
         player:messageSpecial(ID.text.NOTHING_OUT_OF_ORDINARY)
@@ -67,7 +67,7 @@ end
 entity.onEventFinish = function(player, csid, option, npc)
     if
         csid == 10 and
-        npcUtil.completeQuest(player, xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.OVER_THE_HILLS_AND_FAR_AWAY, { gil = 2000, xp = 2000, ki = xi.ki.MAP_OF_THE_ULEGUERAND_RANGE })
+        npcUtil.completeQuest(player, xi.questLog.SANDORIA, xi.quest.id.sandoria.OVER_THE_HILLS_AND_FAR_AWAY, { gil = 2000, xp = 2000, ki = xi.ki.MAP_OF_THE_ULEGUERAND_RANGE })
     then
         player:confirmTrade()
     end

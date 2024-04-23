@@ -7,7 +7,7 @@ local southernSandOriaID = zones[xi.zone.SOUTHERN_SAN_DORIA]
 local seaSerpentGrottoID = zones[xi.zone.SEA_SERPENT_GROTTO]
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.METHODS_CREATE_MADNESS)
+local quest = Quest:new(xi.questLog.SANDORIA, xi.quest.id.sandoria.METHODS_CREATE_MADNESS)
 
 quest.reward =
 {
@@ -94,7 +94,7 @@ quest.sections =
                     if option == 1 and not player:hasItem(xi.item.SPEAR_OF_TRIALS) then
                         npcUtil.giveItem(player, xi.item.SPEAR_OF_TRIALS)
                     elseif option == 2 then
-                        player:delQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.METHODS_CREATE_MADNESS)
+                        player:delQuest(xi.questLog.SANDORIA, xi.quest.id.sandoria.METHODS_CREATE_MADNESS)
                         player:delKeyItem(xi.ki.WEAPON_TRAINING_GUIDE)
                         player:delKeyItem(xi.ki.MAP_TO_THE_ANNALS_OF_TRUTH)
                     end

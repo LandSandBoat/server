@@ -9,7 +9,7 @@ local ID = zones[xi.zone.IFRITS_CAULDRON]
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    local guardian = player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.GREETINGS_TO_THE_GUARDIAN)
+    local guardian = player:getQuestStatus(xi.questLog.OUTLANDS, xi.quest.id.outlands.GREETINGS_TO_THE_GUARDIAN)
 
     if
         guardian == xi.questStatus.QUEST_ACCEPTED and
@@ -29,7 +29,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local guardian = player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.GREETINGS_TO_THE_GUARDIAN)
+    local guardian = player:getQuestStatus(xi.questLog.OUTLANDS, xi.quest.id.outlands.GREETINGS_TO_THE_GUARDIAN)
 
     if
         guardian == xi.questStatus.QUEST_ACCEPTED and

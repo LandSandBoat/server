@@ -31,7 +31,7 @@ local ID = zones[xi.zone.NORG]
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    if player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.MAMA_MIA) == xi.questStatus.QUEST_ACCEPTED then
+    if player:getQuestStatus(xi.questLog.OUTLANDS, xi.quest.id.outlands.MAMA_MIA) == xi.questStatus.QUEST_ACCEPTED then
         -- check whether trade is an item with id 1202 to 1208
         local tradedItem
         local bitToSet
@@ -64,8 +64,8 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local mamaMia = player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.MAMA_MIA)
-    local moonlitPath = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_MOONLIT_PATH)
+    local mamaMia = player:getQuestStatus(xi.questLog.OUTLANDS, xi.quest.id.outlands.MAMA_MIA)
+    local moonlitPath = player:getQuestStatus(xi.questLog.WINDURST, xi.quest.id.windurst.THE_MOONLIT_PATH)
     local evokersRing = player:hasItem(xi.item.EVOKERS_RING)
     local questday = player:getCharVar('MamaMia_date')
 
@@ -105,7 +105,7 @@ end
 
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 191 then
-        player:addQuest(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.MAMA_MIA)
+        player:addQuest(xi.questLog.OUTLANDS, xi.quest.id.outlands.MAMA_MIA)
     elseif csid == 193 then
         player:confirmTrade()
     elseif csid == 195 then
@@ -118,13 +118,13 @@ entity.onEventFinish = function(player, csid, option, npc)
             player:addItem(xi.item.EVOKERS_RING) -- Evokers Ring
             player:messageSpecial(ID.text.ITEM_OBTAINED, xi.item.EVOKERS_RING) -- Evokers Ring
             player:addFame(xi.quest.fame_area.NORG, 30) --idk how much fame the quest adds, just left at 30 which the levi quest gave.
-            player:completeQuest(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.MAMA_MIA)
+            player:completeQuest(xi.questLog.OUTLANDS, xi.quest.id.outlands.MAMA_MIA)
             player:setCharVar('tradesMamaMia', 0)
         end
     elseif csid == 243 then
         if option == 1 then
-            player:delQuest(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.MAMA_MIA)
-            player:addQuest(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.MAMA_MIA)
+            player:delQuest(xi.questLog.OUTLANDS, xi.quest.id.outlands.MAMA_MIA)
+            player:addQuest(xi.questLog.OUTLANDS, xi.quest.id.outlands.MAMA_MIA)
         end
     end
 end

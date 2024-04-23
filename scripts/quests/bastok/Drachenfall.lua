@@ -6,7 +6,7 @@
 -- Waterfall Base : !pos -217.594 98.644 464.722 106
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.BASTOK, xi.quest.id.bastok.DRACHENFALL)
+local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.DRACHENFALL)
 
 quest.reward =
 {

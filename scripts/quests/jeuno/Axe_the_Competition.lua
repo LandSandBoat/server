@@ -7,7 +7,7 @@ local upperJeunoID = zones[xi.zone.UPPER_JEUNO]
 local uggalepihID = zones[xi.zone.TEMPLE_OF_UGGALEPIH]
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.AXE_THE_COMPETITION)
+local quest = Quest:new(xi.questLog.JEUNO, xi.quest.id.jeuno.AXE_THE_COMPETITION)
 
 quest.reward =
 {
@@ -87,7 +87,7 @@ quest.sections =
                     if option == 1 and not player:hasItem(xi.item.PICK_OF_TRIALS) then
                         npcUtil.giveItem(player, xi.item.PICK_OF_TRIALS)
                     elseif option == 2 then
-                        player:delQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.AXE_THE_COMPETITION)
+                        player:delQuest(xi.questLog.JEUNO, xi.quest.id.jeuno.AXE_THE_COMPETITION)
                         player:delKeyItem(xi.ki.WEAPON_TRAINING_GUIDE)
                         player:delKeyItem(xi.ki.MAP_TO_THE_ANNALS_OF_TRUTH)
                     end

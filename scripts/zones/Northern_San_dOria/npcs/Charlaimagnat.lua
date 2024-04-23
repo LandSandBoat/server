@@ -10,7 +10,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local theMissingPiece = player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.THE_MISSING_PIECE)
+    local theMissingPiece = player:getQuestStatus(xi.questLog.OUTLANDS, xi.quest.id.outlands.THE_MISSING_PIECE)
 
     if
         theMissingPiece == xi.questStatus.QUEST_ACCEPTED and
@@ -47,7 +47,7 @@ entity.onEventFinish = function(player, csid, option, npc)
             player:addItem(xi.item.SCROLL_OF_TELEPORT_ALTEP)
             player:messageSpecial(ID.text.ITEM_OBTAINED, xi.item.SCROLL_OF_TELEPORT_ALTEP)
             player:addFame(xi.quest.fame_area.SELBINA_RABAO, 30)
-            player:completeQuest(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.THE_MISSING_PIECE)
+            player:completeQuest(xi.questLog.OUTLANDS, xi.quest.id.outlands.THE_MISSING_PIECE)
         end
     end
 end

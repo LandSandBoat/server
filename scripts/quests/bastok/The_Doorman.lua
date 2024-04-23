@@ -9,7 +9,7 @@
 local davoiID = zones[xi.zone.DAVOI]
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_DOORMAN)
+local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.THE_DOORMAN)
 
 quest.reward =
 {

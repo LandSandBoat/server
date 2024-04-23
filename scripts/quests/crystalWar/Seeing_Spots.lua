@@ -5,7 +5,7 @@
 -- LADYBUG_WING: !additem 2506
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.SEEING_SPOTS)
+local quest = Quest:new(xi.questLog.CRYSTAL_WAR, xi.quest.id.crystalWar.SEEING_SPOTS)
 
 quest.reward =
 {

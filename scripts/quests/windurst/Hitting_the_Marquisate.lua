@@ -18,7 +18,7 @@
 local garlaigeID = zones[xi.zone.GARLAIGE_CITADEL]
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.WINDURST, xi.quest.id.windurst.HITTING_THE_MARQUISATE)
+local quest = Quest:new(xi.questLog.WINDURST, xi.quest.id.windurst.HITTING_THE_MARQUISATE)
 
 quest.reward =
 {
@@ -66,7 +66,7 @@ quest.sections =
         check = function(player, status, vars)
             return status == xi.questStatus.QUEST_AVAILABLE and
                 not quest:getMustZone(player) and
-                player:hasCompletedQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.AS_THICK_AS_THIEVES) and
+                player:hasCompletedQuest(xi.questLog.WINDURST, xi.quest.id.windurst.AS_THICK_AS_THIEVES) and
                 player:getMainJob() == xi.job.THF and
                 player:getMainLvl() >= xi.settings.main.AF3_QUEST_LEVEL
         end,

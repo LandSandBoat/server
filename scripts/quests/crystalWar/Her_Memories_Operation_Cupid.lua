@@ -8,7 +8,7 @@
 require('scripts/missions/wotg/helpers')
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.HER_MEMORIES_OPERATION_CUPID)
+local quest = Quest:new(xi.questLog.CRYSTAL_WAR, xi.quest.id.crystalWar.HER_MEMORIES_OPERATION_CUPID)
 
 quest.reward =
 {

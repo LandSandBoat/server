@@ -47,7 +47,7 @@ local trustMemory = function(player)
         memories = memories + 8
     end
     -- 16 - Ayame and Kaede
-    if player:hasCompletedQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.AYAME_AND_KAEDE) then
+    if player:hasCompletedQuest(xi.questLog.BASTOK, xi.quest.id.bastok.AYAME_AND_KAEDE) then
         memories = memories + 16
     end
     -- 32 - Light of Judgement
@@ -55,7 +55,7 @@ local trustMemory = function(player)
         memories = memories + 32
     end
     -- 64 - True Strength
-    if player:hasCompletedQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.TRUE_STRENGTH) then
+    if player:hasCompletedQuest(xi.questLog.BASTOK, xi.quest.id.bastok.TRUE_STRENGTH) then
         memories = memories + 64
     end
     ]]--
@@ -89,7 +89,7 @@ quest.sections =
             {
                 onTrigger = function(player, npc)
                     if
-                        player:hasCompletedQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CURSES_FOILED_A_GOLEM) and
+                        player:hasCompletedQuest(xi.questLog.WINDURST, xi.quest.id.windurst.CURSES_FOILED_A_GOLEM) and
                         hasRequiredTrusts(player)
                     then
                         return quest:progressEvent(529, { [3] = trustMemory(player), [7] = 1 })

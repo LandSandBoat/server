@@ -7,7 +7,7 @@ local metalworksID = zones[xi.zone.METALWORKS]
 local ziTahID      = zones[xi.zone.THE_SANCTUARY_OF_ZITAH]
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_WEIGHT_OF_YOUR_LIMITS)
+local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.THE_WEIGHT_OF_YOUR_LIMITS)
 
 quest.reward =
 {
@@ -88,7 +88,7 @@ quest.sections =
                     if option == 1 and not player:hasItem(xi.item.AXE_OF_TRIALS) then
                         npcUtil.giveItem(player, xi.item.AXE_OF_TRIALS)
                     elseif option == 2 then
-                        player:delQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_WEIGHT_OF_YOUR_LIMITS)
+                        player:delQuest(xi.questLog.BASTOK, xi.quest.id.bastok.THE_WEIGHT_OF_YOUR_LIMITS)
                         player:delKeyItem(xi.ki.WEAPON_TRAINING_GUIDE)
                         player:delKeyItem(xi.ki.MAP_TO_THE_ANNALS_OF_TRUTH)
                     end

@@ -8,7 +8,7 @@
 -- _6t2    : !pos -88.2 -7.65 -168.8 245
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.CHOCOBOS_WOUNDS)
+local quest = Quest:new(xi.questLog.JEUNO, xi.quest.id.jeuno.CHOCOBOS_WOUNDS)
 
 quest.reward =
 {
@@ -73,7 +73,7 @@ quest.sections =
                         quest:begin(player)
                         quest:setVar(player, 'Prog', 1)
                         -- This quest is automatically flagged during this interaction.
-                        player:addQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.CHOCOBO_ON_THE_LOOSE)
+                        player:addQuest(xi.questLog.JEUNO, xi.quest.id.jeuno.CHOCOBO_ON_THE_LOOSE)
                     else
                         -- Dialogue changes if the player fails to choose the correct option.
                         quest:setVar(player, 'Declined', 1)
@@ -187,7 +187,7 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == xi.questStatus.QUEST_COMPLETED and
-                not player:hasCompletedQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.SAVE_MY_SON)
+                not player:hasCompletedQuest(xi.questLog.JEUNO, xi.quest.id.jeuno.SAVE_MY_SON)
         end,
 
         [xi.zone.UPPER_JEUNO] =

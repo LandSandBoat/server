@@ -11,7 +11,7 @@
 -- qm0                   - !pos -141 1 -9 99
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.THE_LOST_BOOK)
+local quest = Quest:new(xi.questLog.CRYSTAL_WAR, xi.quest.id.crystalWar.THE_LOST_BOOK)
 
 quest.reward =
 {

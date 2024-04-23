@@ -58,7 +58,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local transformations = player:getQuestStatus(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.TRANSFORMATIONS)
+    local transformations = player:getQuestStatus(xi.questLog.AHT_URHGAN, xi.quest.id.ahtUrhgan.TRANSFORMATIONS)
 
     -- CRAFTING OTHER 3 BLUE MAGE ARMOR PIECES
     if transformations >= xi.questStatus.QUEST_ACCEPTED then

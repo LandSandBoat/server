@@ -11,7 +11,7 @@
 -- Two-leaf Mandy Bud  : !additem 4368
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.MONSTROSITY)
+local quest = Quest:new(xi.questLog.OTHER_AREAS, xi.quest.id.otherAreas.MONSTROSITY)
 
 quest.reward = {}
 

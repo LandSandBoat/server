@@ -5,7 +5,7 @@
 -- Baudin : !pos -75 0 80 244
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.CREST_OF_DAVOI)
+local quest = Quest:new(xi.questLog.JEUNO, xi.quest.id.jeuno.CREST_OF_DAVOI)
 
 quest.reward =
 {

@@ -16,7 +16,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local rockRacketeer = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.ROCK_RACKETEER)
+    local rockRacketeer = player:getQuestStatus(xi.questLog.WINDURST, xi.quest.id.windurst.ROCK_RACKETEER)
     local rockRacketeerCS = player:getCharVar('rockracketeer_sold')
 
     if rockRacketeer == xi.questStatus.QUEST_ACCEPTED and rockRacketeerCS == 3 then
@@ -39,7 +39,7 @@ entity.onEventFinish = function(player, csid, option, npc)
         player:setCharVar('rockracketeer_sold', 5)
     elseif
         csid == 102 and
-        npcUtil.completeQuest(player, xi.quest.log_id.WINDURST, xi.quest.id.windurst.ROCK_RACKETEER, { gil = 2100, var = 'rockracketeer_sold' })
+        npcUtil.completeQuest(player, xi.questLog.WINDURST, xi.quest.id.windurst.ROCK_RACKETEER, { gil = 2100, var = 'rockracketeer_sold' })
     then
         player:confirmTrade()
     end

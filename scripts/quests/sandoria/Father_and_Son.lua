@@ -9,7 +9,7 @@ local northenSandoriaID = zones[xi.zone.NORTHERN_SAN_DORIA]
 local southernSandoriaID = zones[xi.zone.SOUTHERN_SAN_DORIA]
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.FATHER_AND_SON)
+local quest = Quest:new(xi.questLog.SANDORIA, xi.quest.id.sandoria.FATHER_AND_SON)
 
 quest.reward =
 {

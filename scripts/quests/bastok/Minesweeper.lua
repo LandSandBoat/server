@@ -5,7 +5,7 @@
 -- Gerbaum : !pos -119.899 -3.492 -74.651 234
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.BASTOK, xi.quest.id.bastok.MINESWEEPER)
+local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.MINESWEEPER)
 
 quest.reward =
 {

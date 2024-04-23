@@ -5,7 +5,7 @@
 -- Romilda : !pos 5.424 4.898 -18.699 236
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.BASTOK, xi.quest.id.bastok.TILL_DEATH_DO_US_PART)
+local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.TILL_DEATH_DO_US_PART)
 
 quest.reward =
 {
@@ -20,7 +20,7 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == xi.questStatus.QUEST_AVAILABLE and
-                player:hasCompletedQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.FOREVER_TO_HOLD)
+                player:hasCompletedQuest(xi.questLog.BASTOK, xi.quest.id.bastok.FOREVER_TO_HOLD)
         end,
 
         [xi.zone.PORT_BASTOK] =

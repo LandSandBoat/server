@@ -7,7 +7,7 @@ local portBastokID = zones[xi.zone.PORT_BASTOK]
 local bostaunieuxID = zones[xi.zone.BOSTAUNIEUX_OUBLIETTE]
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_WALLS_OF_YOUR_MIND)
+local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.THE_WALLS_OF_YOUR_MIND)
 
 quest.reward =
 {
@@ -88,7 +88,7 @@ quest.sections =
                     if option == 1 and not player:hasItem(xi.item.KNUCKLES_OF_TRIALS) then
                         npcUtil.giveItem(player, xi.item.KNUCKLES_OF_TRIALS)
                     elseif option == 2 then
-                        player:delQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_WALLS_OF_YOUR_MIND)
+                        player:delQuest(xi.questLog.BASTOK, xi.quest.id.bastok.THE_WALLS_OF_YOUR_MIND)
                         player:delKeyItem(xi.ki.WEAPON_TRAINING_GUIDE)
                         player:delKeyItem(xi.ki.MAP_TO_THE_ANNALS_OF_TRUTH)
                     end

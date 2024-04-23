@@ -42,7 +42,7 @@ end
 instanceObject.afterInstanceRegister = function(player)
     player:delKeyItem(xi.ki.MINE_SHAFT_KEY)
 
-    local questStatus = player:getQuestStatus(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.LIGHT_IN_THE_DARKNESS)
+    local questStatus = player:getQuestStatus(xi.questLog.CRYSTAL_WAR, xi.quest.id.crystalWar.LIGHT_IN_THE_DARKNESS)
     local questProgVar = player:getCharVar('Quest[7][19]Prog')
     if
         questStatus == xi.questStatus.QUEST_ACCEPTED and

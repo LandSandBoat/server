@@ -12,7 +12,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local aCraftsmansWork = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.A_CRAFTSMAN_S_WORK)
+    local aCraftsmansWork = player:getQuestStatus(xi.questLog.SANDORIA, xi.quest.id.sandoria.A_CRAFTSMAN_S_WORK)
     local quotasStatus    = player:getCharVar('ChasingQuotas_Progress')
 
     if
@@ -50,7 +50,7 @@ entity.onEventFinish = function(player, csid, option, npc)
     if csid == 73 and option == 0 then -- first part of long CS -- declines questgiver
         player:setCharVar('has_seen_drgaf1_quest_already', 1)
     elseif (csid == 73 or csid == 71) and option == 1 then
-        player:addQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.A_CRAFTSMAN_S_WORK)
+        player:addQuest(xi.questLog.SANDORIA, xi.quest.id.sandoria.A_CRAFTSMAN_S_WORK)
         player:setCharVar('has_seen_drgaf1_quest_already', 0)
         player:setCharVar('aCraftsmanWork', 1)
     elseif csid == 70 then -- This is only if player has Altepa Polishing Stone
@@ -62,7 +62,7 @@ entity.onEventFinish = function(player, csid, option, npc)
             player:addItem(xi.item.PEREGRINE)
             player:messageSpecial(ID.text.ITEM_OBTAINED, xi.item.PEREGRINE) -- Peregrine (DRG AF1)
             player:addFame(xi.quest.fame_area.SANDORIA, 20)
-            player:completeQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.A_CRAFTSMAN_S_WORK)
+            player:completeQuest(xi.questLog.SANDORIA, xi.quest.id.sandoria.A_CRAFTSMAN_S_WORK)
         end
     elseif csid == 67 then
         player:addKeyItem(xi.ki.SHINY_EARRING)

@@ -9,7 +9,7 @@
 local selbinaID = zones[xi.zone.SELBINA]
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.THE_BASICS)
+local quest = Quest:new(xi.questLog.OTHER_AREAS, xi.quest.id.otherAreas.THE_BASICS)
 
 quest.reward =
 {
@@ -25,7 +25,7 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == xi.questStatus.QUEST_AVAILABLE and player:getFameLevel(xi.quest.fame_area.WINDURST) > 4 and
-                player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.THE_CLUE) == xi.questStatus.QUEST_COMPLETED
+                player:getQuestStatus(xi.questLog.OTHER_AREAS, xi.quest.id.otherAreas.THE_CLUE) == xi.questStatus.QUEST_COMPLETED
         end,
 
         [xi.zone.MHAURA] =

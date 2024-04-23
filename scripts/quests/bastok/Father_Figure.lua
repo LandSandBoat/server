@@ -5,7 +5,7 @@
 -- Michea : !pos -298 -16 -157 235
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.BASTOK, xi.quest.id.bastok.FATHER_FIGURE)
+local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.FATHER_FIGURE)
 
 quest.reward =
 {
@@ -19,7 +19,7 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == xi.questStatus.QUEST_AVAILABLE and
-                player:hasCompletedQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_ELVAAN_GOLDSMITH) and
+                player:hasCompletedQuest(xi.questLog.BASTOK, xi.quest.id.bastok.THE_ELVAAN_GOLDSMITH) and
                 player:getFameLevel(xi.quest.fame_area.BASTOK) >= 2
         end,
 

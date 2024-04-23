@@ -15,7 +15,7 @@ local ID = zones[xi.zone.QUICKSAND_CAVES]
 local entity = {}
 
 entity.onTrigger = function(player, npc)
-    local theMissingPiece = player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.THE_MISSING_PIECE)
+    local theMissingPiece = player:getQuestStatus(xi.questLog.OUTLANDS, xi.quest.id.outlands.THE_MISSING_PIECE)
     local hasAncientFragment = player:hasKeyItem(xi.ki.ANCIENT_TABLET_FRAGMENT)
     local hasAncientTablet = player:hasKeyItem(xi.ki.TABLET_OF_ANCIENT_MAGIC)
 

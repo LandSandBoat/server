@@ -7,7 +7,7 @@
 local whitegateID = zones[xi.zone.AHT_URHGAN_WHITEGATE]
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.AN_EMPTY_VESSEL)
+local quest = Quest:new(xi.questLog.AHT_URHGAN, xi.quest.id.ahtUrhgan.AN_EMPTY_VESSEL)
 
 quest.reward =
 {
@@ -237,7 +237,7 @@ quest.sections =
                         quest:setVar(player, 'completeEvent', 0)
 
                         quest:setVar(player, 'Timer', VanadielUniqueDay() + 1)
-                        xi.quest.setMustZone(player, xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.BEGINNINGS)
+                        xi.quest.setMustZone(player, xi.questLog.AHT_URHGAN, xi.quest.id.ahtUrhgan.BEGINNINGS)
                     end
                 end,
 

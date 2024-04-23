@@ -5,7 +5,7 @@
 -- Dominion Sergeant (Nanaa Mihgo's Camp)
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.ABYSSEA, xi.quest.id.abyssea.DOMINION_OP_02_ALTEPA)
+local quest = Quest:new(xi.questLog.ABYSSEA, xi.quest.id.abyssea.DOMINION_OP_02_ALTEPA)
 
 quest.reward = {}
 

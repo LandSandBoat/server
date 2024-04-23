@@ -7,7 +7,7 @@
 local morimarID = zones[xi.zone.MORIMAR_BASALT_FIELDS]
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.A_STONES_THROW_AWAY)
+local quest = Quest:new(xi.questLog.ADOULIN, xi.quest.id.adoulin.A_STONES_THROW_AWAY)
 
 quest.reward =
 {

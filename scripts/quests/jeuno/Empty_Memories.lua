@@ -5,7 +5,7 @@
 -- Harith : !pos -4.349 1 134.014 243
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.EMPTY_MEMORIES)
+local quest = Quest:new(xi.questLog.JEUNO, xi.quest.id.jeuno.EMPTY_MEMORIES)
 
 quest.reward =
 {

@@ -5,7 +5,7 @@
 -- Metallic Hodgepodge : !pos -285.493 -7.819 -163.707 104
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.FACE_OF_THE_FUTURE)
+local quest = Quest:new(xi.questLog.CRYSTAL_WAR, xi.quest.id.crystalWar.FACE_OF_THE_FUTURE)
 
 quest.reward =
 {

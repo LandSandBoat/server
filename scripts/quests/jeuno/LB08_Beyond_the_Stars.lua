@@ -7,7 +7,7 @@
 local ruludeID = zones[xi.zone.RULUDE_GARDENS]
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.BEYOND_THE_STARS)
+local quest = Quest:new(xi.questLog.JEUNO, xi.quest.id.jeuno.BEYOND_THE_STARS)
 
 -- TODO: Properly code the rock, paper, scissors minigame. Awaiting for a capture.
 -- Probably a matter of chaining onEventUpdates and tracking Maat's and Degengard's HP. Maybe not.

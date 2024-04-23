@@ -9,7 +9,7 @@ local ID = zones[xi.zone.WINDURST_WATERS]
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    local inAPickle = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.IN_A_PICKLE)
+    local inAPickle = player:getQuestStatus(xi.questLog.WINDURST, xi.quest.id.windurst.IN_A_PICKLE)
 
     if
         (inAPickle == xi.questStatus.QUEST_ACCEPTED or inAPickle == xi.questStatus.QUEST_COMPLETED) and
@@ -35,7 +35,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local inAPickle = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.IN_A_PICKLE)
+    local inAPickle = player:getQuestStatus(xi.questLog.WINDURST, xi.quest.id.windurst.IN_A_PICKLE)
     local needToZone = player:needToZone()
 
     if inAPickle == xi.questStatus.QUEST_AVAILABLE and not needToZone then
@@ -73,10 +73,10 @@ end
 
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 654 and option == 1 then -- IN A PICKLE + RARAB TAIL: Quest Begin
-        player:addQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.IN_A_PICKLE)
+        player:addQuest(xi.questLog.WINDURST, xi.quest.id.windurst.IN_A_PICKLE)
     elseif csid == 659 then -- IN A PICKLE: Quest Turn In (1st Time)
         player:tradeComplete()
-        player:completeQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.IN_A_PICKLE)
+        player:completeQuest(xi.questLog.WINDURST, xi.quest.id.windurst.IN_A_PICKLE)
         player:needToZone(true)
         player:addItem(xi.item.BONE_HAIRPIN)
         player:messageSpecial(ID.text.ITEM_OBTAINED, xi.item.BONE_HAIRPIN)

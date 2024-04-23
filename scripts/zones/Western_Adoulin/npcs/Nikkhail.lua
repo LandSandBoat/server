@@ -12,7 +12,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local atfta = player:getQuestStatus(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.A_THIRST_FOR_THE_AGES)
+    local atfta = player:getQuestStatus(xi.questLog.ADOULIN, xi.quest.id.adoulin.A_THIRST_FOR_THE_AGES)
     local atftaNeedKI = player:getCharVar('ATFTA_Status') < 2 and not player:hasKeyItem(xi.ki.COPY_OF_THE_ALLIANCE_AGREEMENT)
     local soaMission = player:getCurrentMission(xi.mission.log_id.SOA)
 

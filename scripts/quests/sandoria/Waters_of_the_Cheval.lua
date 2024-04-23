@@ -8,7 +8,7 @@ local eastRonfaureID     = zones[xi.zone.EAST_RONFAURE]
 local northernSandoriaID = zones[xi.zone.NORTHERN_SAN_DORIA]
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.WATERS_OF_THE_CHEVAL)
+local quest = Quest:new(xi.questLog.SANDORIA, xi.quest.id.sandoria.WATERS_OF_THE_CHEVAL)
 
 quest.reward =
 {

@@ -5,7 +5,7 @@
 -- Faursel : !pos 37.985 3.118 -45.208 245
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_ROAD_TO_AHT_URHGAN)
+local quest = Quest:new(xi.questLog.JEUNO, xi.quest.id.jeuno.THE_ROAD_TO_AHT_URHGAN)
 
 quest.reward =
 {

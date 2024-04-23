@@ -8,7 +8,7 @@
 local gusgenMinesID = zones[xi.zone.GUSGEN_MINES]
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.BASTOK, xi.quest.id.bastok.GHOSTS_OF_THE_PAST)
+local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.GHOSTS_OF_THE_PAST)
 
 quest.reward =
 {
@@ -81,7 +81,7 @@ quest.sections =
                     if quest:complete(player) then
                         player:confirmTrade()
 
-                        xi.quest.setMustZone(player, xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_FIRST_MEETING)
+                        xi.quest.setMustZone(player, xi.questLog.BASTOK, xi.quest.id.bastok.THE_FIRST_MEETING)
                     end
                 end,
             },

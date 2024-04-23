@@ -5,7 +5,7 @@
 -- Leypoint !pos -200 -8.5 80 51
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.OLDUUM)
+local quest = Quest:new(xi.questLog.AHT_URHGAN, xi.quest.id.ahtUrhgan.OLDUUM)
 
 quest.reward =
 {

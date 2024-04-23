@@ -8,7 +8,7 @@
 local beadeauxID = zones[xi.zone.BEADEAUX]
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.BASTOK, xi.quest.id.bastok.BLADE_OF_DARKNESS)
+local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.BLADE_OF_DARKNESS)
 
 quest.reward =
 {

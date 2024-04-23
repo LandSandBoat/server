@@ -6,7 +6,7 @@
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    local flyHigh = player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.FLY_HIGH)
+    local flyHigh = player:getQuestStatus(xi.questLog.OTHER_AREAS, xi.quest.id.otherAreas.FLY_HIGH)
 
     if
         flyHigh == xi.questStatus.QUEST_ACCEPTED and
@@ -28,7 +28,7 @@ entity.onTrigger = function(player, npc)
         player:getCurrentMission(xi.mission.log_id.COP) == xi.mission.id.cop.THE_SAVAGE or
         player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.THE_SAVAGE)
     then
-        local flyHigh = player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.FLY_HIGH)
+        local flyHigh = player:getQuestStatus(xi.questLog.OTHER_AREAS, xi.quest.id.otherAreas.FLY_HIGH)
 
         if flyHigh == xi.questStatus.QUEST_AVAILABLE then
             player:startEvent(241)
@@ -45,10 +45,10 @@ end
 
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 241 then
-        player:addQuest(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.FLY_HIGH)
+        player:addQuest(xi.questLog.OTHER_AREAS, xi.quest.id.otherAreas.FLY_HIGH)
     elseif
         csid == 243 and
-        npcUtil.completeQuest(player, xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.FLY_HIGH, { item = xi.item.MISTMELT })
+        npcUtil.completeQuest(player, xi.questLog.OTHER_AREAS, xi.quest.id.otherAreas.FLY_HIGH, { item = xi.item.MISTMELT })
     then
         -- Mistmelt
         player:confirmTrade()

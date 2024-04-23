@@ -7,7 +7,7 @@ local bastokMinesID = zones[xi.zone.BASTOK_MINES]
 local westernAltepaID = zones[xi.zone.WESTERN_ALTEPA_DESERT]
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.BASTOK, xi.quest.id.bastok.INHERITANCE)
+local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.INHERITANCE)
 
 quest.reward =
 {
@@ -88,7 +88,7 @@ quest.sections =
                     if option == 1 and not player:hasItem(xi.item.SWORD_OF_TRIALS) then
                         npcUtil.giveItem(player, xi.item.SWORD_OF_TRIALS)
                     elseif option == 2 then
-                        player:delQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.INHERITANCE)
+                        player:delQuest(xi.questLog.BASTOK, xi.quest.id.bastok.INHERITANCE)
                         player:delKeyItem(xi.ki.WEAPON_TRAINING_GUIDE)
                         player:delKeyItem(xi.ki.MAP_TO_THE_ANNALS_OF_TRUTH)
                     end

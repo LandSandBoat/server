@@ -9,7 +9,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local guardian = player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.GREETINGS_TO_THE_GUARDIAN)
+    local guardian = player:getQuestStatus(xi.questLog.OUTLANDS, xi.quest.id.outlands.GREETINGS_TO_THE_GUARDIAN)
     local pamamas = player:getCharVar('PamamaVar')
     local pfame = player:getFameLevel(xi.quest.fame_area.WINDURST)
     local needToZone = player:needToZone()
@@ -38,13 +38,13 @@ end
 
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 68 and option == 1 then
-        player:addQuest(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.GREETINGS_TO_THE_GUARDIAN)
+        player:addQuest(xi.questLog.OUTLANDS, xi.quest.id.outlands.GREETINGS_TO_THE_GUARDIAN)
         player:setCharVar('PamamaVar', 0)
     elseif csid == 71 then
         local pamamas = player:getCharVar('PamamaVar')
         if pamamas == 1 then --First completion of quest; set title, complete quest, and give higher fame
             npcUtil.giveCurrency(player, 'gil', 5000)
-            player:completeQuest(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.GREETINGS_TO_THE_GUARDIAN)
+            player:completeQuest(xi.questLog.OUTLANDS, xi.quest.id.outlands.GREETINGS_TO_THE_GUARDIAN)
             player:addFame(xi.quest.fame_area.WINDURST, 100)
             player:addTitle(xi.title.KAZHAM_CALLER)
             player:setCharVar('PamamaVar', 0)

@@ -25,8 +25,8 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local crisisstatus = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.A_CRISIS_IN_THE_MAKING)
-    local IAS = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.IN_A_STEW)
+    local crisisstatus = player:getQuestStatus(xi.questLog.WINDURST, xi.quest.id.windurst.A_CRISIS_IN_THE_MAKING)
+    local IAS = player:getQuestStatus(xi.questLog.WINDURST, xi.quest.id.windurst.IN_A_STEW)
     local IASvar = player:getCharVar('IASvar')
 
     -- In a Stew
@@ -90,7 +90,7 @@ end
 entity.onEventFinish = function(player, csid, option, npc)
     -- A Crisis in the Making
     if csid == 258 and option == 1 then  -- A Crisis in the Making + ITEM: Quest Offer - ACCEPTED
-        player:addQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.A_CRISIS_IN_THE_MAKING)
+        player:addQuest(xi.questLog.WINDURST, xi.quest.id.windurst.A_CRISIS_IN_THE_MAKING)
         player:setCharVar('QuestCrisisMaking_var', 1)
         player:needToZone(true)
     elseif csid == 258 and option == 2 then  -- A Crisis in the Making + ITEM: Quest Offer - REFUSED
@@ -105,7 +105,7 @@ entity.onEventFinish = function(player, csid, option, npc)
         player:setCharVar('QuestCrisisMaking_var', 0)
         player:delKeyItem(xi.ki.OFF_OFFERING)
         player:addFame(xi.quest.fame_area.WINDURST, 75)
-        player:completeQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.A_CRISIS_IN_THE_MAKING)
+        player:completeQuest(xi.questLog.WINDURST, xi.quest.id.windurst.A_CRISIS_IN_THE_MAKING)
         player:needToZone(true)
     elseif csid == 268 then -- A Crisis in the Making: Repeatable Quest Finish
         npcUtil.giveCurrency(player, 'gil', 400)

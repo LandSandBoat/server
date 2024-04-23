@@ -7,7 +7,7 @@
 local ruludeID = zones[xi.zone.RULUDE_GARDENS]
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.RIDING_ON_THE_CLOUDS)
+local quest = Quest:new(xi.questLog.JEUNO, xi.quest.id.jeuno.RIDING_ON_THE_CLOUDS)
 
 local function handleSandoriaTrade(player, npc, trade)
     if npcUtil.tradeHasExactly(trade, xi.item.KINDREDS_SEAL) then

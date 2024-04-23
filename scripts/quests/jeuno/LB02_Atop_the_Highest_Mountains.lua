@@ -12,7 +12,7 @@ local ruludeID    = zones[xi.zone.RULUDE_GARDENS]
 local xarcabardID = zones[xi.zone.XARCABARD]
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.ATOP_THE_HIGHEST_MOUNTAINS)
+local quest = Quest:new(xi.questLog.JEUNO, xi.quest.id.jeuno.ATOP_THE_HIGHEST_MOUNTAINS)
 
 quest.reward =
 {

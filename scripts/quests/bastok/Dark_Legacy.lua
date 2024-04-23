@@ -11,7 +11,7 @@
 local giddeusID = zones[xi.zone.GIDDEUS]
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.BASTOK, xi.quest.id.bastok.DARK_LEGACY)
+local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.DARK_LEGACY)
 
 quest.reward =
 {

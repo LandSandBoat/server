@@ -10,7 +10,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local redeemingRocks = player:getQuestStatus(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.REDEEMING_ROCKS)
+    local redeemingRocks = player:getQuestStatus(xi.questLog.CRYSTAL_WAR, xi.quest.id.crystalWar.REDEEMING_ROCKS)
     local rocksProg = player:getCharVar('RedeemingRocksProg')
 
     if redeemingRocks == xi.questStatus.QUEST_AVAILABLE then
@@ -34,7 +34,7 @@ end
 
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 108 then -- Finish 'Redeeming Rocks' opening CS
-        player:addQuest(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.REDEEMING_ROCKS)
+        player:addQuest(xi.questLog.CRYSTAL_WAR, xi.quest.id.crystalWar.REDEEMING_ROCKS)
         player:setCharVar('RedeemingRocksProg', 1)
     elseif csid == 109 then -- Finish 'Redeeming Rocks' third CS
         player:setCharVar('RedeemingRocksProg', 3)
@@ -42,7 +42,7 @@ entity.onEventFinish = function(player, csid, option, npc)
         player:setCharVar('RedeemingRocksProg', 0)
         player:setCharVar('RedeemingDay', VanadielDayOfTheYear())
     elseif csid == 111 then -- Finish 'Redeeming Rocks' quest
-        npcUtil.completeQuest(player, xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.REDEEMING_ROCKS, {
+        npcUtil.completeQuest(player, xi.questLog.CRYSTAL_WAR, xi.quest.id.crystalWar.REDEEMING_ROCKS, {
             item = 15998,
             var = { 'RedeemingDay' }
         })

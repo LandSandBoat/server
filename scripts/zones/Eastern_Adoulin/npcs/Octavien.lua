@@ -29,7 +29,7 @@ end
 
 entity.onTrigger = function(player, npc)
     -- CHILDREN OF THE RUNE
-    local cotrQuestStatus = player:getQuestStatus(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.CHILDREN_OF_THE_RUNE)
+    local cotrQuestStatus = player:getQuestStatus(xi.questLog.ADOULIN, xi.quest.id.adoulin.CHILDREN_OF_THE_RUNE)
     -- NOTE: The if-statements are ordered in reverse order from when they occur
     -- for natural fallthrough, to avoid needing `not` statements in them.
     if cotrQuestStatus == xi.questStatus.QUEST_COMPLETED then
@@ -81,7 +81,7 @@ entity.onEventFinish = function(player, csid, option, npc)
         if option == 0 then
             player:setCharVar('RUN_COTR', cotrStates.TRIGGERED)
         elseif option == 1 then
-            player:addQuest(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.CHILDREN_OF_THE_RUNE)
+            player:addQuest(xi.questLog.ADOULIN, xi.quest.id.adoulin.CHILDREN_OF_THE_RUNE)
         end
     elseif csid == 26 then
         if option == 0 then
@@ -99,7 +99,7 @@ entity.onEventFinish = function(player, csid, option, npc)
             npcUtil.giveKeyItem(player, xi.ki.JOB_GESTURE_RUNE_FENCER)
             player:setCharVar('RUN_COTR', 0)
             player:delKeyItem(xi.ki.YAHSE_WILDFLOWER_PETAL)
-            player:completeQuest(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.CHILDREN_OF_THE_RUNE)
+            player:completeQuest(xi.questLog.ADOULIN, xi.quest.id.adoulin.CHILDREN_OF_THE_RUNE)
         end
     end
 end

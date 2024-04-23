@@ -11,7 +11,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local theMissingPiece = player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.THE_MISSING_PIECE)
+    local theMissingPiece = player:getQuestStatus(xi.questLog.OUTLANDS, xi.quest.id.outlands.THE_MISSING_PIECE)
     local fame = player:getFameLevel(xi.quest.fame_area.SELBINA_RABAO)
 
     if theMissingPiece == xi.questStatus.QUEST_AVAILABLE and fame >= 4 then -- start quest
@@ -42,7 +42,7 @@ end
 
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 6 then
-        player:addQuest(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.THE_MISSING_PIECE)
+        player:addQuest(xi.questLog.OUTLANDS, xi.quest.id.outlands.THE_MISSING_PIECE)
     elseif csid == 8 then -- give the player the key items he needs to complete the quest
         player:addKeyItem(xi.ki.TABLET_OF_ANCIENT_MAGIC)
         player:addKeyItem(xi.ki.LETTER_FROM_ALFESAR)

@@ -7,7 +7,7 @@
 -----------------------------------
 local yhoatorID = zones[xi.zone.YHOATOR_JUNGLE]
 
-local quest = Quest:new(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.STOP_YOUR_WHINING)
+local quest = Quest:new(xi.questLog.OUTLANDS, xi.quest.id.outlands.STOP_YOUR_WHINING)
 
 quest.reward =
 {

@@ -8,7 +8,7 @@
 -- qm3      : !pos -399 -10 -438 100
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_DISMAYED_CUSTOMER)
+local quest = Quest:new(xi.questLog.SANDORIA, xi.quest.id.sandoria.THE_DISMAYED_CUSTOMER)
 
 quest.reward =
 {
@@ -30,7 +30,7 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == xi.questStatus.QUEST_AVAILABLE and
-                player:hasCompletedQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.A_TASTE_FOR_MEAT)
+                player:hasCompletedQuest(xi.questLog.SANDORIA, xi.quest.id.sandoria.A_TASTE_FOR_MEAT)
         end,
 
         [xi.zone.PORT_SAN_DORIA] =

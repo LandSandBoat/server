@@ -4,7 +4,7 @@
 -- Kohlo-Lakolo, !pos -26.8 -6 190 240
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.WINDURST, xi.quest.id.windurst.ONION_RINGS)
+local quest = Quest:new(xi.questLog.WINDURST, xi.quest.id.windurst.ONION_RINGS)
 
 local function timedEvents(player, inTime, outATime)
     local daysPassed     = VanadielDayOfTheYear() - quest:getVar(player, 'DayStarted')
@@ -34,7 +34,7 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == xi.questStatus.QUEST_AVAILABLE and
-                player:hasCompletedQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.INSPECTORS_GADGET)
+                player:hasCompletedQuest(xi.questLog.WINDURST, xi.quest.id.windurst.INSPECTORS_GADGET)
         end,
 
         [xi.zone.PORT_WINDURST] =
@@ -189,7 +189,7 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == xi.questStatus.QUEST_COMPLETED and
-                player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CRYING_OVER_ONIONS) == xi.questStatus.QUEST_AVAILABLE
+                player:getQuestStatus(xi.questLog.WINDURST, xi.quest.id.windurst.CRYING_OVER_ONIONS) == xi.questStatus.QUEST_AVAILABLE
         end,
 
         [xi.zone.PORT_WINDURST] =

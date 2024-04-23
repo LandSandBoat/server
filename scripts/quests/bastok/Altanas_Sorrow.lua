@@ -7,7 +7,7 @@
 -- Eperdur : !pos 129 -6 96 231
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.BASTOK, xi.quest.id.bastok.ALTANAS_SORROW)
+local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.ALTANAS_SORROW)
 
 quest.reward =
 {

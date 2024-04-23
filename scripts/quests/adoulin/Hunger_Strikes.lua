@@ -5,7 +5,7 @@
 -- Westerly Breeze : !pos 62 32 123 256
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.HUNGER_STRIKES)
+local quest = Quest:new(xi.questLog.ADOULIN, xi.quest.id.adoulin.HUNGER_STRIKES)
 
 quest.reward =
 {
@@ -69,7 +69,7 @@ quest.sections =
                 if quest:complete(player) then
                     player:confirmTrade()
 
-                    xi.quest.setVar(player, xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.THE_STARVING, 'Timer', VanadielUniqueDay() + 1)
+                    xi.quest.setVar(player, xi.questLog.ADOULIN, xi.quest.id.adoulin.THE_STARVING, 'Timer', VanadielUniqueDay() + 1)
                 end
             end,
 

@@ -7,7 +7,7 @@
 -- qm1 (???) Ranguemont Pass !pos 54 10 -147 166
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.BLIGHTED_GLOOM)
+local quest = Quest:new(xi.questLog.JEUNO, xi.quest.id.jeuno.BLIGHTED_GLOOM)
 
 quest.reward = {}
 
@@ -56,7 +56,7 @@ quest.sections = {
     {
         check = function(player, status, vars)
             return status == xi.questStatus.QUEST_AVAILABLE
-                and player:getQuestStatus(xi.quest.log_id.JEUNO, PAST_REFLECTIONS) == xi.questStatus.QUEST_COMPLETED
+                and player:getQuestStatus(xi.questLog.JEUNO, PAST_REFLECTIONS) == xi.questStatus.QUEST_COMPLETED
                 and player:getFellowValue('bond') >= 45
         end,
 

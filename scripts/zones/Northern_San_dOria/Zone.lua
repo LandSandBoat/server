@@ -75,7 +75,7 @@ zoneObject.onEventFinish = function(player, csid, option, npc)
         player:setPos(0, 0, -13, 192, 233)
     elseif
         csid == 49 and
-        npcUtil.completeQuest(player, xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.PEACE_FOR_THE_SPIRIT, { item = 12513, fame = 60, title = xi.title.PARAGON_OF_RED_MAGE_EXCELLENCE })
+        npcUtil.completeQuest(player, xi.questLog.SANDORIA, xi.quest.id.sandoria.PEACE_FOR_THE_SPIRIT, { item = 12513, fame = 60, title = xi.title.PARAGON_OF_RED_MAGE_EXCELLENCE })
     then
         player:setCharVar('peaceForTheSpiritCS', 0)
     elseif csid == 16 then

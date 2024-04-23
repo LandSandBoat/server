@@ -12,9 +12,9 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local twentyInPirateYears = player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.TWENTY_IN_PIRATE_YEARS)
-    local illTakeTheBigBox = player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.I_LL_TAKE_THE_BIG_BOX)
-    local trueWill = player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.TRUE_WILL)
+    local twentyInPirateYears = player:getQuestStatus(xi.questLog.OUTLANDS, xi.quest.id.outlands.TWENTY_IN_PIRATE_YEARS)
+    local illTakeTheBigBox = player:getQuestStatus(xi.questLog.OUTLANDS, xi.quest.id.outlands.I_LL_TAKE_THE_BIG_BOX)
+    local trueWill = player:getQuestStatus(xi.questLog.OUTLANDS, xi.quest.id.outlands.TRUE_WILL)
     local mLvl = player:getMainLvl()
     local mJob = player:getMainJob()
 
@@ -51,7 +51,7 @@ end
 
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 133 then
-        player:addQuest(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.TWENTY_IN_PIRATE_YEARS)
+        player:addQuest(xi.questLog.OUTLANDS, xi.quest.id.outlands.TWENTY_IN_PIRATE_YEARS)
         player:setCharVar('twentyInPirateYearsCS', 1)
     elseif csid == 134 then
         if player:getFreeSlotsCount() <= 1 then
@@ -65,12 +65,12 @@ entity.onEventFinish = function(player, csid, option, npc)
             player:needToZone()
             player:setCharVar('twentyInPirateYearsCS', 0)
             player:addFame(xi.quest.fame_area.NORG, 30)
-            player:completeQuest(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.TWENTY_IN_PIRATE_YEARS)
+            player:completeQuest(xi.questLog.OUTLANDS, xi.quest.id.outlands.TWENTY_IN_PIRATE_YEARS)
         end
     elseif csid == 135 then
-        player:addQuest(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.I_LL_TAKE_THE_BIG_BOX)
+        player:addQuest(xi.questLog.OUTLANDS, xi.quest.id.outlands.I_LL_TAKE_THE_BIG_BOX)
     elseif csid == 136 then
-        player:addQuest(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.TRUE_WILL)
+        player:addQuest(xi.questLog.OUTLANDS, xi.quest.id.outlands.TRUE_WILL)
     elseif csid == 137 then
         player:setCharVar('trueWillCS', 1)
     end

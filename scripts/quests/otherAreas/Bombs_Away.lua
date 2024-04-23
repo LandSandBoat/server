@@ -5,7 +5,7 @@
 -- Buffalostalker_Dodzbraz : !pos -380.171 -24.89 -180.797 5
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.BOMBS_AWAY)
+local quest = Quest:new(xi.questLog.OTHER_AREAS, xi.quest.id.otherAreas.BOMBS_AWAY)
 
 quest.reward =
 {

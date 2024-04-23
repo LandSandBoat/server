@@ -6,7 +6,7 @@
 -- Biggorf   : !pos -211.379 1.999 -142.024 235
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_BARE_BONES)
+local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.THE_BARE_BONES)
 
 quest.reward =
 {

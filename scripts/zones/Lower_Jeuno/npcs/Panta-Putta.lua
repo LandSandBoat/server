@@ -13,9 +13,9 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local theWonderMagicSet = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_WONDER_MAGIC_SET)
+    local theWonderMagicSet = player:getQuestStatus(xi.questLog.JEUNO, xi.quest.id.jeuno.THE_WONDER_MAGIC_SET)
     local hasWonderMagicSet = player:hasKeyItem(xi.ki.WONDER_MAGIC_SET)
-    local theKindCardian    = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_KIND_CARDIAN)
+    local theKindCardian    = player:getQuestStatus(xi.questLog.JEUNO, xi.quest.id.jeuno.THE_KIND_CARDIAN)
 
     if
         player:getFameLevel(xi.quest.fame_area.JEUNO) >= 4 and
@@ -34,13 +34,13 @@ entity.onTrigger = function(player, npc)
 
     elseif
         theWonderMagicSet == xi.questStatus.QUEST_COMPLETED and
-        player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.COOK_S_PRIDE) ~= xi.questStatus.QUEST_COMPLETED
+        player:getQuestStatus(xi.questLog.JEUNO, xi.quest.id.jeuno.COOK_S_PRIDE) ~= xi.questStatus.QUEST_COMPLETED
     then
         player:startEvent(40) -- Standard dialog
 
     elseif
         theWonderMagicSet == xi.questStatus.QUEST_COMPLETED and
-        player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_LOST_CARDIAN) == xi.questStatus.QUEST_AVAILABLE
+        player:getQuestStatus(xi.questLog.JEUNO, xi.quest.id.jeuno.THE_LOST_CARDIAN) == xi.questStatus.QUEST_AVAILABLE
     then
         if player:getCharVar('theLostCardianVar') >= 1 then
             player:startEvent(30) -- Second dialog for "The lost cardien" quest
@@ -67,7 +67,7 @@ end
 
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 77 and option == 1 then
-        player:addQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_WONDER_MAGIC_SET)
+        player:addQuest(xi.questLog.JEUNO, xi.quest.id.jeuno.THE_WONDER_MAGIC_SET)
     elseif csid == 33 then
         if player:getFreeSlotsCount() == 0 then
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.item.MYTHRIL_EARRING)
@@ -78,7 +78,7 @@ entity.onEventFinish = function(player, csid, option, npc)
             player:messageSpecial(ID.text.ITEM_OBTAINED, xi.item.MYTHRIL_EARRING)
             player:addFame(xi.quest.fame_area.JEUNO, 30)
             player:needToZone(true)
-            player:completeQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_WONDER_MAGIC_SET)
+            player:completeQuest(xi.questLog.JEUNO, xi.quest.id.jeuno.THE_WONDER_MAGIC_SET)
         end
     elseif csid == 30 then
         player:setCharVar('theLostCardianVar', 2)
@@ -92,7 +92,7 @@ entity.onEventFinish = function(player, csid, option, npc)
             player:addItem(xi.item.GREEN_CAPE)
             player:messageSpecial(ID.text.ITEM_OBTAINED, xi.item.GREEN_CAPE) -- Green Cape
             player:addFame(xi.quest.fame_area.JEUNO, 30)
-            player:completeQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_KIND_CARDIAN)
+            player:completeQuest(xi.questLog.JEUNO, xi.quest.id.jeuno.THE_KIND_CARDIAN)
         end
     end
 end

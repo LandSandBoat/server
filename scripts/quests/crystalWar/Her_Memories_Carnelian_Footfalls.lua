@@ -10,7 +10,7 @@
 require('scripts/missions/wotg/helpers')
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.HER_MEMORIES_CARNELIAN_FOOTFALLS)
+local quest = Quest:new(xi.questLog.CRYSTAL_WAR, xi.quest.id.crystalWar.HER_MEMORIES_CARNELIAN_FOOTFALLS)
 
 quest.reward =
 {

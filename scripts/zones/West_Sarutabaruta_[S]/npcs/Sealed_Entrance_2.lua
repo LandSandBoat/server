@@ -8,7 +8,7 @@ local ID = zones[xi.zone.WEST_SARUTABARUTA_S]
 local entity = {}
 
 entity.onTrigger = function(player, npc)
-    local snakeOnThePlains = player:getQuestStatus(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.SNAKE_ON_THE_PLAINS)
+    local snakeOnThePlains = player:getQuestStatus(xi.questLog.CRYSTAL_WAR, xi.quest.id.crystalWar.SNAKE_ON_THE_PLAINS)
     local maskBit1 = utils.mask.getBit(player:getCharVar('SEALED_DOORS'), 0)
     local maskBit2 = utils.mask.getBit(player:getCharVar('SEALED_DOORS'), 1)
     local maskBit3 = utils.mask.getBit(player:getCharVar('SEALED_DOORS'), 2)

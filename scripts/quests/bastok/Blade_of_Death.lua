@@ -6,7 +6,7 @@
 -- qm2    : !pos 206 -60 -101 196
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.BASTOK, xi.quest.id.bastok.BLADE_OF_DEATH)
+local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.BLADE_OF_DEATH)
 
 quest.reward =
 {
@@ -21,7 +21,7 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == xi.questStatus.QUEST_AVAILABLE and
-                player:hasCompletedQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.BLADE_OF_DARKNESS) and
+                player:hasCompletedQuest(xi.questLog.BASTOK, xi.quest.id.bastok.BLADE_OF_DARKNESS) and
                 player:getFameLevel(xi.quest.fame_area.BASTOK) >= 3
         end,
 

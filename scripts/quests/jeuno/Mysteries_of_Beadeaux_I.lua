@@ -5,7 +5,7 @@
 -- Sattal-Mansal : !pos 40 3 -53 245
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.MYSTERIES_OF_BEADEAUX_I)
+local quest = Quest:new(xi.questLog.JEUNO, xi.quest.id.jeuno.MYSTERIES_OF_BEADEAUX_I)
 
 quest.reward =
 {
@@ -36,7 +36,7 @@ quest.sections =
                 -- This event flags both Mysteries of Beadeaux I and II
                 [89] = function(player, csid, option, npc)
                     quest:begin(player)
-                    player:addQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.MYSTERIES_OF_BEADEAUX_II)
+                    player:addQuest(xi.questLog.JEUNO, xi.quest.id.jeuno.MYSTERIES_OF_BEADEAUX_II)
                 end,
             },
         },

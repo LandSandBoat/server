@@ -7,7 +7,7 @@
 -- Leafy Patch : !pos -418 -33 576
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.BOY_AND_THE_BEAST)
+local quest = Quest:new(xi.questLog.CRYSTAL_WAR, xi.quest.id.crystalWar.BOY_AND_THE_BEAST)
 
 quest.reward =
 {

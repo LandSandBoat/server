@@ -7,7 +7,7 @@
 -- Ohbiru-Dohbiru : !pos 23 -5 -193 238
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.WINDURST, xi.quest.id.windurst.FOOD_FOR_THOUGHT)
+local quest = Quest:new(xi.questLog.WINDURST, xi.quest.id.windurst.FOOD_FOR_THOUGHT)
 
 quest.reward =
 {

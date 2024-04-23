@@ -21,7 +21,7 @@ local eldiemeID  = zones[xi.zone.THE_ELDIEME_NECROPOLIS]
 local garlaigeID = zones[xi.zone.GARLAIGE_CITADEL]
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.IN_DEFIANT_CHALLENGE)
+local quest = Quest:new(xi.questLog.JEUNO, xi.quest.id.jeuno.IN_DEFIANT_CHALLENGE)
 
 -- Key Item removals
 local function cleanKIMold(player)

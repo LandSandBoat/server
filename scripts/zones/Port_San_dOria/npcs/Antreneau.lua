@@ -11,8 +11,8 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local aTasteForMeat = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.A_TASTE_FOR_MEAT)
-    local medicineWoman = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_MEDICINE_WOMAN)
+    local aTasteForMeat = player:getQuestStatus(xi.questLog.SANDORIA, xi.quest.id.sandoria.A_TASTE_FOR_MEAT)
+    local medicineWoman = player:getQuestStatus(xi.questLog.SANDORIA, xi.quest.id.sandoria.THE_MEDICINE_WOMAN)
     local diaryPage = player:getCharVar('DiaryPage')
     local fameLevel = player:getFameLevel(xi.quest.fame_area.SANDORIA)
 
@@ -23,7 +23,7 @@ entity.onTrigger = function(player, npc)
         medicineWoman == xi.questStatus.QUEST_COMPLETED and
         diaryPage >= 4
     then
-        local overTheHillsAndFarAway = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.OVER_THE_HILLS_AND_FAR_AWAY)
+        local overTheHillsAndFarAway = player:getQuestStatus(xi.questLog.SANDORIA, xi.quest.id.sandoria.OVER_THE_HILLS_AND_FAR_AWAY)
 
         if overTheHillsAndFarAway == xi.questStatus.QUEST_AVAILABLE then
             player:startEvent(725) -- Start
@@ -40,7 +40,7 @@ end
 
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 725 then
-        player:addQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.OVER_THE_HILLS_AND_FAR_AWAY)
+        player:addQuest(xi.questLog.SANDORIA, xi.quest.id.sandoria.OVER_THE_HILLS_AND_FAR_AWAY)
     end
 end
 

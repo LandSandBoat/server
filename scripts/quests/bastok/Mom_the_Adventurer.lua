@@ -6,7 +6,7 @@
 -- Roh Latteh : !pos -11.823 6.999 -9.249 234
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.BASTOK, xi.quest.id.bastok.MOM_THE_ADVENTURER)
+local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.MOM_THE_ADVENTURER)
 
 quest.reward =
 {

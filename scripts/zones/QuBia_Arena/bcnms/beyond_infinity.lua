@@ -12,7 +12,7 @@ battlefieldObject.onBattlefieldRegister = function(player, battlefield)
 end
 
 battlefieldObject.onBattlefieldEnter = function(player, battlefield)
-    if player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.BEYOND_INFINITY) == xi.questStatus.QUEST_ACCEPTED then
+    if player:getQuestStatus(xi.questLog.JEUNO, xi.quest.id.jeuno.BEYOND_INFINITY) == xi.questStatus.QUEST_ACCEPTED then
         player:delKeyItem(xi.ki.SOUL_GEM_CLASP)
     end
 end

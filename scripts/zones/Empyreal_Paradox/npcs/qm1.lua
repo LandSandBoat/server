@@ -12,7 +12,7 @@ end
 entity.onTrigger = function(player, npc)
     -- TODO: Use xi.items enum and table items.
     if
-        player:hasCompletedQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.APOCALYPSE_NIGH) and
+        player:hasCompletedQuest(xi.questLog.JEUNO, xi.quest.id.jeuno.APOCALYPSE_NIGH) and
         not player:hasItem(xi.item.STATIC_EARRING) and
         not player:hasItem(xi.item.MAGNETIC_EARRING) and
         not player:hasItem(xi.item.HOLLOW_EARRING) and
@@ -35,8 +35,8 @@ entity.onEventFinish = function(player, csid, option, npc)
         player:addMission(xi.mission.log_id.ZILART, xi.mission.id.zilart.AWAKENING)
         player:setMissionStatus(xi.mission.log_id.ZILART, 3)
         player:setCharVar('PromathiaStatus', 7)
-        player:delQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.SHADOWS_OF_THE_DEPARTED)
-        player:delQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.APOCALYPSE_NIGH)
+        player:delQuest(xi.questLog.JEUNO, xi.quest.id.jeuno.SHADOWS_OF_THE_DEPARTED)
+        player:delQuest(xi.questLog.JEUNO, xi.quest.id.jeuno.APOCALYPSE_NIGH)
     end
 end
 

@@ -13,7 +13,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local wakingDreams = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.WAKING_DREAMS)
+    local wakingDreams = player:getQuestStatus(xi.questLog.WINDURST, xi.quest.id.windurst.WAKING_DREAMS)
 
     -- WAKING DREAMS
     if player:hasKeyItem(xi.ki.WHISPER_OF_DREAMS) then
@@ -46,7 +46,7 @@ end
 entity.onEventFinish = function(player, csid, option, npc)
     -- WAKING DREAMS
     if csid == 918 then
-        player:addQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.WAKING_DREAMS)
+        player:addQuest(xi.questLog.WINDURST, xi.quest.id.windurst.WAKING_DREAMS)
         npcUtil.giveKeyItem(player, xi.ki.VIAL_OF_DREAM_INCENSE)
     elseif csid == 920 then
         local reward = { fame = 0 }
@@ -66,7 +66,7 @@ entity.onEventFinish = function(player, csid, option, npc)
             player:messageSpecial(ID.text.DIABOLOS_UNLOCKED, 0, 0, 0)
         end
 
-        if npcUtil.completeQuest(player, xi.quest.log_id.WINDURST, xi.quest.id.windurst.WAKING_DREAMS, reward) then
+        if npcUtil.completeQuest(player, xi.questLog.WINDURST, xi.quest.id.windurst.WAKING_DREAMS, reward) then
             player:delKeyItem(xi.ki.WHISPER_OF_DREAMS)
             player:setCharVar('Darkness_Named_date', getMidnight())
         end

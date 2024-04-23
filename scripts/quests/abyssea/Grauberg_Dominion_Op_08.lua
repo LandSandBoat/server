@@ -5,7 +5,7 @@
 -- Dominion Sergeant (Tosuka-Porika's Camp)
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.ABYSSEA, xi.quest.id.abyssea.DOMINION_OP_08_GRAUBERG)
+local quest = Quest:new(xi.questLog.ABYSSEA, xi.quest.id.abyssea.DOMINION_OP_08_GRAUBERG)
 
 quest.reward = {}
 

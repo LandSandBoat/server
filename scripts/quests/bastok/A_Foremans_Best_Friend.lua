@@ -5,7 +5,7 @@
 -- Gudav : !pos -3.286 1.407 50.591 236
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.BASTOK, xi.quest.id.bastok.A_FOREMANS_BEST_FRIEND)
+local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.A_FOREMANS_BEST_FRIEND)
 
 quest.reward =
 {

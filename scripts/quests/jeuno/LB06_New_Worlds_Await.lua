@@ -7,7 +7,7 @@
 local ruludeID = zones[xi.zone.RULUDE_GARDENS]
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.NEW_WORLDS_AWAIT)
+local quest = Quest:new(xi.questLog.JEUNO, xi.quest.id.jeuno.NEW_WORLDS_AWAIT)
 
 quest.reward =
 {

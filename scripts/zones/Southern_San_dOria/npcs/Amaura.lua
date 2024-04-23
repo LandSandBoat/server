@@ -12,7 +12,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local toCureaCough = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.TO_CURE_A_COUGH)
+    local toCureaCough = player:getQuestStatus(xi.questLog.SANDORIA, xi.quest.id.sandoria.TO_CURE_A_COUGH)
 
     if player:getCharVar('DiaryPage') == 3 or toCureaCough == xi.questStatus.QUEST_ACCEPTED then
         if
@@ -31,7 +31,7 @@ end
 
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 645 then
-        player:addQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.TO_CURE_A_COUGH)
+        player:addQuest(xi.questLog.SANDORIA, xi.quest.id.sandoria.TO_CURE_A_COUGH)
     elseif csid == 646 then
         player:delKeyItem(xi.ki.THYME_MOSS)
         player:addKeyItem(xi.ki.COUGH_MEDICINE)

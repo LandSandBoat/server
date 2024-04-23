@@ -5,7 +5,7 @@
 -- Dabhuh: !pos 97.939 0 -91.530 50
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.SUCH_SWEET_SORROW)
+local quest = Quest:new(xi.questLog.AHT_URHGAN, xi.quest.id.ahtUrhgan.SUCH_SWEET_SORROW)
 
 quest.reward =
 {

@@ -9,7 +9,7 @@ local bastokMinesID = zones[xi.zone.BASTOK_MINES]
 local zeruhnMinesID = zones[xi.zone.ZERUHN_MINES]
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.BASTOK, xi.quest.id.bastok.GROCERIES)
+local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.GROCERIES)
 
 quest.reward =
 {

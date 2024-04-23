@@ -11,7 +11,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local raptorRapture = player:getQuestStatus(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.RAPTOR_RAPTURE)
+    local raptorRapture = player:getQuestStatus(xi.questLog.ADOULIN, xi.quest.id.adoulin.RAPTOR_RAPTURE)
     local raptorRaptureStatus = player:getCharVar('Raptor_Rapture_Status')
 
     if raptorRapture == xi.questStatus.QUEST_AVAILABLE then
@@ -68,7 +68,7 @@ entity.onEventFinish = function(player, csid, option, npc)
         player:setPos(0, 0, 0, 0, 258)
     elseif csid == 5061 and option == 1 then
         -- Starts Quest: 'Raptor Rapture'
-        player:addQuest(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.RAPTOR_RAPTURE)
+        player:addQuest(xi.questLog.ADOULIN, xi.quest.id.adoulin.RAPTOR_RAPTURE)
         player:setCharVar('Raptor_Rapture_Status', 4)
     elseif csid == 5035 then
         -- Progresses Quest: 'Raptor Rapture', spoke to Ilney, now need rockberries.
@@ -82,7 +82,7 @@ entity.onEventFinish = function(player, csid, option, npc)
     elseif csid == 5039 then
         -- Finishing Quest: 'Raptor Rapture'
         player:setCharVar('Raptor_Rapture_Status', 0)
-        player:completeQuest(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.RAPTOR_RAPTURE)
+        player:completeQuest(xi.questLog.ADOULIN, xi.quest.id.adoulin.RAPTOR_RAPTURE)
         player:addCurrency('bayld', 1000 * xi.settings.main.BAYLD_RATE)
         player:messageSpecial(ID.text.BAYLD_OBTAINED, 1000 * xi.settings.main.BAYLD_RATE)
         player:addFame(xi.quest.fame_area.ADOULIN)

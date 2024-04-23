@@ -10,7 +10,7 @@
 -- Sickle           : !additem 1020
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.FLAVORS_OF_OUR_LIVES)
+local quest = Quest:new(xi.questLog.ADOULIN, xi.quest.id.adoulin.FLAVORS_OF_OUR_LIVES)
 
 quest.reward =
 {

@@ -7,7 +7,7 @@
 local terigganID = zones[xi.zone.CAPE_TERIGGAN]
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.WANDERING_SOULS)
+local quest = Quest:new(xi.questLog.OUTLANDS, xi.quest.id.outlands.WANDERING_SOULS)
 
 quest.reward =
 {

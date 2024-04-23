@@ -7,7 +7,7 @@
 local portBastokID = zones[xi.zone.PORT_BASTOK]
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.BASTOK, xi.quest.id.bastok.OUT_OF_ONES_SHELL)
+local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.OUT_OF_ONES_SHELL)
 
 quest.reward =
 {
@@ -22,7 +22,7 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == xi.questStatus.QUEST_AVAILABLE and
-                player:hasCompletedQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_QUADAVS_CURSE) and
+                player:hasCompletedQuest(xi.questLog.BASTOK, xi.quest.id.bastok.THE_QUADAVS_CURSE) and
                 player:getFameLevel(xi.quest.fame_area.BASTOK) >= 2
         end,
 

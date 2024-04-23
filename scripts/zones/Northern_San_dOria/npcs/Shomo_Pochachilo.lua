@@ -10,7 +10,7 @@ end
 
 entity.onTrigger = function(player, npc)
     -- TODO: Verify this, and move to quest script
-    local questFatherAndSon = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.FATHER_AND_SON)
+    local questFatherAndSon = player:getQuestStatus(xi.questLog.SANDORIA, xi.quest.id.sandoria.FATHER_AND_SON)
 
     if questFatherAndSon == xi.questStatus.QUEST_COMPLETED then
         player:startEvent(696)

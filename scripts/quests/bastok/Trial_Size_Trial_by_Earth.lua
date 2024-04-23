@@ -7,7 +7,7 @@
 local tremorsID = zones[xi.zone.CLOISTER_OF_TREMORS]
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.BASTOK, xi.quest.id.bastok.TRIAL_SIZE_TRIAL_BY_EARTH)
+local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.TRIAL_SIZE_TRIAL_BY_EARTH)
 
 quest.reward =
 {

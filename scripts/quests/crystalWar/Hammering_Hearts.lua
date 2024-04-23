@@ -7,7 +7,7 @@
 -- TRAINEE_HAMMER: !additem 18855
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.HAMMERING_HEARTS)
+local quest = Quest:new(xi.questLog.CRYSTAL_WAR, xi.quest.id.crystalWar.HAMMERING_HEARTS)
 
 quest.reward =
 {

@@ -10,7 +10,7 @@ local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     if
-        player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.CHASING_QUOTAS) == xi.questStatus.QUEST_ACCEPTED and
+        player:getQuestStatus(xi.questLog.SANDORIA, xi.quest.id.sandoria.CHASING_QUOTAS) == xi.questStatus.QUEST_ACCEPTED and
         player:getCharVar('ChasingQuotas_Progress') == 0 and
         trade:getItemCount() == 1 and
         trade:hasItemQty(xi.item.GOLD_HAIRPIN, 1) and
@@ -22,15 +22,15 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local quotasStatus    = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.CHASING_QUOTAS)
+    local quotasStatus    = player:getQuestStatus(xi.questLog.SANDORIA, xi.quest.id.sandoria.CHASING_QUOTAS)
     local quotasProgress  = player:getCharVar('ChasingQuotas_Progress')
     local quotasNo        = player:getCharVar('ChasingQuotas_No')
-    local stalkerStatus   = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.KNIGHT_STALKER)
+    local stalkerStatus   = player:getQuestStatus(xi.questLog.SANDORIA, xi.quest.id.sandoria.KNIGHT_STALKER)
     local stalkerProgress = player:getCharVar('KnightStalker_Progress')
 
     if
         player:getMainLvl() >= xi.settings.main.ADVANCED_JOB_LEVEL and
-        player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_HOLY_CREST) == xi.questStatus.QUEST_AVAILABLE
+        player:getQuestStatus(xi.questLog.SANDORIA, xi.quest.id.sandoria.THE_HOLY_CREST) == xi.questStatus.QUEST_AVAILABLE
     then
         player:startEvent(24)
 
@@ -95,11 +95,11 @@ entity.onEventFinish = function(player, csid, option, npc)
         if option == 0 then
             player:setCharVar('ChasingQuotas_No', 1)
         else
-            player:addQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.CHASING_QUOTAS)
+            player:addQuest(xi.questLog.SANDORIA, xi.quest.id.sandoria.CHASING_QUOTAS)
         end
     elseif csid == 14 and option == 1 then
         player:setCharVar('ChasingQuotas_No', 0)
-        player:addQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.CHASING_QUOTAS)
+        player:addQuest(xi.questLog.SANDORIA, xi.quest.id.sandoria.CHASING_QUOTAS)
     elseif csid == 17 then
         player:setCharVar('ChasingQuotas_Progress', 1)
         player:setCharVar('ChasingQuotas_date', os.time() + 60)
@@ -114,7 +114,7 @@ entity.onEventFinish = function(player, csid, option, npc)
             player:addItem(xi.item.DRACHEN_BRAIS)
             player:messageSpecial(ID.text.ITEM_OBTAINED, xi.item.DRACHEN_BRAIS) -- Drachen Brais
             player:addFame(xi.quest.fame_area.SANDORIA, 40)
-            player:completeQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.CHASING_QUOTAS)
+            player:completeQuest(xi.questLog.SANDORIA, xi.quest.id.sandoria.CHASING_QUOTAS)
             player:setCharVar('ChasingQuotas_Progress', 0)
         end
 

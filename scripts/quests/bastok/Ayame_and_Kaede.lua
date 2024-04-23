@@ -12,7 +12,7 @@ local korrolokaID  = zones[xi.zone.KORROLOKA_TUNNEL]
 local portBastokID = zones[xi.zone.PORT_BASTOK]
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.BASTOK, xi.quest.id.bastok.AYAME_AND_KAEDE)
+local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.AYAME_AND_KAEDE)
 
 quest.reward =
 {

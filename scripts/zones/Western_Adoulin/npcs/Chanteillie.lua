@@ -8,8 +8,8 @@
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    local dngitl = player:getQuestStatus(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.DO_NOT_GO_INTO_THE_LIGHT)
-    local vvc = player:getQuestStatus(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.VEGETABLE_VEGETABLE_CRISIS)
+    local dngitl = player:getQuestStatus(xi.questLog.ADOULIN, xi.quest.id.adoulin.DO_NOT_GO_INTO_THE_LIGHT)
+    local vvc = player:getQuestStatus(xi.questLog.ADOULIN, xi.quest.id.adoulin.VEGETABLE_VEGETABLE_CRISIS)
 
     -- DO NOT GO INTO THE LIGHT (Urunday Lumber, Damascus Ingot, Fire Crystal)
     if
@@ -30,8 +30,8 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local dngitl = player:getQuestStatus(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.DO_NOT_GO_INTO_THE_LIGHT)
-    local vvc = player:getQuestStatus(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.VEGETABLE_VEGETABLE_CRISIS)
+    local dngitl = player:getQuestStatus(xi.questLog.ADOULIN, xi.quest.id.adoulin.DO_NOT_GO_INTO_THE_LIGHT)
+    local vvc = player:getQuestStatus(xi.questLog.ADOULIN, xi.quest.id.adoulin.VEGETABLE_VEGETABLE_CRISIS)
 
     -- DO NOT GO INTO THE LIGHT
     if

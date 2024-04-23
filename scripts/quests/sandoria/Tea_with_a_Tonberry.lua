@@ -11,7 +11,7 @@ local phanauetID = zones[xi.zone.PHANAUET_CHANNEL]
 local davoiID = zones[xi.zone.DAVOI]
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.TEA_WITH_A_TONBERRY)
+local quest = Quest:new(xi.questLog.SANDORIA, xi.quest.id.sandoria.TEA_WITH_A_TONBERRY)
 
 quest.reward =
 {
@@ -26,7 +26,7 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == xi.questStatus.QUEST_AVAILABLE and
-                player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.SIGNED_IN_BLOOD) == xi.questStatus.QUEST_COMPLETED and
+                player:getQuestStatus(xi.questLog.SANDORIA, xi.quest.id.sandoria.SIGNED_IN_BLOOD) == xi.questStatus.QUEST_COMPLETED and
                 player:getFameLevel(xi.quest.fame_area.SANDORIA) >= 4 and
                 not player:needToZone()
         end,

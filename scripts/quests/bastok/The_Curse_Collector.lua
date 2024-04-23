@@ -6,7 +6,7 @@
 -- The Mute  : !pos -166.230 -1 -73.685 147
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_CURSE_COLLECTOR)
+local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.THE_CURSE_COLLECTOR)
 
 quest.reward =
 {

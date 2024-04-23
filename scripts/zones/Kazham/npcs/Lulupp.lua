@@ -45,7 +45,7 @@ entity.onTrade = function(player, npc, trade)
     -- 905       Wyvern Skull
     -- 1147      Ancient Salt
     -- 4600      Lucky Egg
-    local opoOpoAndIStatus = player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.THE_OPO_OPO_AND_I)
+    local opoOpoAndIStatus = player:getQuestStatus(xi.questLog.OUTLANDS, xi.quest.id.outlands.THE_OPO_OPO_AND_I)
     local progress = player:getCharVar('OPO_OPO_PROGRESS')
     local failed = player:getCharVar('OPO_OPO_FAILED')
 
@@ -71,7 +71,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local opoOpoAndIStatus = player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.THE_OPO_OPO_AND_I)
+    local opoOpoAndIStatus = player:getQuestStatus(xi.questLog.OUTLANDS, xi.quest.id.outlands.THE_OPO_OPO_AND_I)
     local progress = player:getCharVar('OPO_OPO_PROGRESS')
     local failed = player:getCharVar('OPO_OPO_FAILED')
     local retry = player:getCharVar('OPO_OPO_RETRY')
@@ -117,7 +117,7 @@ end
 
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 217 and option == 1  then                   -- Opo Opo and I quest start CS
-        player:addQuest(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.THE_OPO_OPO_AND_I)
+        player:addQuest(xi.questLog.OUTLANDS, xi.quest.id.outlands.THE_OPO_OPO_AND_I)
     elseif csid == 219 then
         if player:getCharVar('OPO_OPO_PROGRESS') == 0 then
             player:tradeComplete()
