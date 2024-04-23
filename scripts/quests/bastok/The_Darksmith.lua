@@ -5,7 +5,7 @@
 -- Mighty Fist : !pos -47 2 -30 237
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_DARKSMITH)
+local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.THE_DARKSMITH)
 
 quest.reward =
 {

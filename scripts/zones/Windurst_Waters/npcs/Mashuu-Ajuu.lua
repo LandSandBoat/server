@@ -10,7 +10,7 @@ local ID = zones[xi.zone.WINDURST_WATERS]
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    local reapstatus = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.REAP_WHAT_YOU_SOW)
+    local reapstatus = player:getQuestStatus(xi.questLog.WINDURST, xi.quest.id.windurst.REAP_WHAT_YOU_SOW)
     if reapstatus >= 1 and trade:getItemCount() == 1 and trade:getGil() == 0 then
         if trade:hasItemQty(xi.item.SOBBING_FUNGUS, 1) then
             player:startEvent(475, 500, xi.item.STATIONERY_SET)                     -- REAP WHAT YOU SOW + GIL: Quest Turn In: Sobbing Fungus turned in
@@ -21,7 +21,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local reapstatus = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.REAP_WHAT_YOU_SOW)
+    local reapstatus = player:getQuestStatus(xi.questLog.WINDURST, xi.quest.id.windurst.REAP_WHAT_YOU_SOW)
 
     if reapstatus == xi.questStatus.QUEST_AVAILABLE then
         local rand = math.random(1, 2)
@@ -70,12 +70,12 @@ entity.onEventFinish = function(player, csid, option, npc)
         -- REAP WHAT YOU SOW + HERB SEEDS: QUEST START - ACCEPTED - INVENTORY FULL
         player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.item.BAG_OF_HERB_SEEDS)
     elseif csid == 463 and option == 3 then                      -- REAP WHAT YOU SOW + HERB SEEDS: QUEST START - ACCEPTED
-        player:addQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.REAP_WHAT_YOU_SOW)
+        player:addQuest(xi.questLog.WINDURST, xi.quest.id.windurst.REAP_WHAT_YOU_SOW)
         player:addItem(xi.item.BAG_OF_HERB_SEEDS)
         player:messageSpecial(ID.text.ITEM_OBTAINED, xi.item.BAG_OF_HERB_SEEDS)
     elseif
         (csid == 475 or csid == 477) and
-        player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.REAP_WHAT_YOU_SOW) == xi.questStatus.QUEST_ACCEPTED and
+        player:getQuestStatus(xi.questLog.WINDURST, xi.quest.id.windurst.REAP_WHAT_YOU_SOW) == xi.questStatus.QUEST_ACCEPTED and
         player:getFreeSlotsCount() == 0
     then
         -- inventory full on quest turn in
@@ -84,12 +84,12 @@ entity.onEventFinish = function(player, csid, option, npc)
         player:addGil(xi.settings.main.GIL_RATE * 500)
         player:tradeComplete()
         player:needToZone(true)
-        if player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.REAP_WHAT_YOU_SOW) == xi.questStatus.QUEST_ACCEPTED then
-            player:completeQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.REAP_WHAT_YOU_SOW)
+        if player:getQuestStatus(xi.questLog.WINDURST, xi.quest.id.windurst.REAP_WHAT_YOU_SOW) == xi.questStatus.QUEST_ACCEPTED then
+            player:completeQuest(xi.questLog.WINDURST, xi.quest.id.windurst.REAP_WHAT_YOU_SOW)
             player:addFame(xi.quest.fame_area.WINDURST, 75)
             player:addItem(xi.item.STATIONERY_SET)
             player:messageSpecial(ID.text.ITEM_OBTAINED, xi.item.STATIONERY_SET)
-        elseif player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.REAP_WHAT_YOU_SOW) == xi.questStatus.QUEST_COMPLETED then
+        elseif player:getQuestStatus(xi.questLog.WINDURST, xi.quest.id.windurst.REAP_WHAT_YOU_SOW) == xi.questStatus.QUEST_COMPLETED then
             player:addFame(xi.quest.fame_area.WINDURST, 8)
             player:setCharVar('QuestReapSow_var', 0)
         end
@@ -97,12 +97,12 @@ entity.onEventFinish = function(player, csid, option, npc)
         player:addGil(xi.settings.main.GIL_RATE * 700)
         player:tradeComplete()
         player:needToZone(true)
-        if player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.REAP_WHAT_YOU_SOW) == xi.questStatus.QUEST_ACCEPTED then
-            player:completeQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.REAP_WHAT_YOU_SOW)
+        if player:getQuestStatus(xi.questLog.WINDURST, xi.quest.id.windurst.REAP_WHAT_YOU_SOW) == xi.questStatus.QUEST_ACCEPTED then
+            player:completeQuest(xi.questLog.WINDURST, xi.quest.id.windurst.REAP_WHAT_YOU_SOW)
             player:addFame(xi.quest.fame_area.WINDURST, 75)
             player:addItem(xi.item.STATIONERY_SET)
             player:messageSpecial(ID.text.ITEM_OBTAINED, xi.item.STATIONERY_SET)
-        elseif player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.REAP_WHAT_YOU_SOW) == xi.questStatus.QUEST_COMPLETED then
+        elseif player:getQuestStatus(xi.questLog.WINDURST, xi.quest.id.windurst.REAP_WHAT_YOU_SOW) == xi.questStatus.QUEST_COMPLETED then
             player:addFame(xi.quest.fame_area.WINDURST, 8)
             player:setCharVar('QuestReapSow_var', 0)
         end

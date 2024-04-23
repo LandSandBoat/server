@@ -6,7 +6,7 @@
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    if player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THICK_SHELLS) ~= xi.questStatus.QUEST_AVAILABLE then
+    if player:getQuestStatus(xi.questLog.SANDORIA, xi.quest.id.sandoria.THICK_SHELLS) ~= xi.questStatus.QUEST_AVAILABLE then
         if
             trade:hasItemQty(xi.item.BEETLE_SHELL, 5) and
             trade:getItemCount() == 5
@@ -29,12 +29,12 @@ end
 
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 516 then
-        if player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THICK_SHELLS) == xi.questStatus.QUEST_AVAILABLE then
-            player:addQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THICK_SHELLS)
+        if player:getQuestStatus(xi.questLog.SANDORIA, xi.quest.id.sandoria.THICK_SHELLS) == xi.questStatus.QUEST_AVAILABLE then
+            player:addQuest(xi.questLog.SANDORIA, xi.quest.id.sandoria.THICK_SHELLS)
         end
     elseif csid == 514 then
-        if player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THICK_SHELLS) == xi.questStatus.QUEST_ACCEPTED then
-            player:completeQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THICK_SHELLS)
+        if player:getQuestStatus(xi.questLog.SANDORIA, xi.quest.id.sandoria.THICK_SHELLS) == xi.questStatus.QUEST_ACCEPTED then
+            player:completeQuest(xi.questLog.SANDORIA, xi.quest.id.sandoria.THICK_SHELLS)
             player:addFame(xi.quest.fame_area.SANDORIA, 30)
         else
             player:addFame(xi.quest.fame_area.SANDORIA, 5)

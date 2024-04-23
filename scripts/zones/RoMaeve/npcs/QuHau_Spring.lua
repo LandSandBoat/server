@@ -7,8 +7,8 @@ local ID = zones[xi.zone.ROMAEVE]
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    local dmFirst  = player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.DIVINE_MIGHT)
-    local dmRepeat = player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.DIVINE_MIGHT_REPEAT)
+    local dmFirst  = player:getQuestStatus(xi.questLog.OUTLANDS, xi.quest.id.outlands.DIVINE_MIGHT)
+    local dmRepeat = player:getQuestStatus(xi.questLog.OUTLANDS, xi.quest.id.outlands.DIVINE_MIGHT_REPEAT)
     local hour     = VanadielHour()
 
     if (hour >= 18 or hour < 6) and IsMoonFull() then

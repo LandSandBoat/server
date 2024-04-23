@@ -7,7 +7,7 @@
 -- Enu    : !pos -253.673 -13 -92.326 235
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.BASTOK, xi.quest.id.bastok.WISH_UPON_A_STAR)
+local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.WISH_UPON_A_STAR)
 
 quest.reward =
 {

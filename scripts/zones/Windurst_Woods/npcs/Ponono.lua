@@ -14,7 +14,7 @@ local entity = {}
 entity.onTrade = function(player, npc, trade)
     local signed        = trade:getItem():getSignature() == player:getName() and 1 or 0
     local newRank       = xi.crafting.tradeTestItem(player, npc, trade, xi.skill.CLOTHCRAFT)
-    local moralManifest = player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.A_MORAL_MANIFEST)
+    local moralManifest = player:getQuestStatus(xi.questLog.OTHER_AREAS, xi.quest.id.otherAreas.A_MORAL_MANIFEST)
 
     if
         newRank > 9 and
@@ -44,7 +44,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local moralManifest = player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.A_MORAL_MANIFEST)
+    local moralManifest = player:getQuestStatus(xi.questLog.OTHER_AREAS, xi.quest.id.otherAreas.A_MORAL_MANIFEST)
 
     local craftSkill        = player:getSkillLevel(xi.skill.CLOTHCRAFT)
     local testItem          = xi.crafting.getTestItem(player, npc, xi.skill.CLOTHCRAFT)

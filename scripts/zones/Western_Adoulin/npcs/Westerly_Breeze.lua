@@ -8,7 +8,7 @@ local ID = zones[xi.zone.WESTERN_ADOULIN]
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    local amqtr = player:getQuestStatus(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.ALWAYS_MORE_QUOTH_THE_RAVENOUS)
+    local amqtr = player:getQuestStatus(xi.questLog.ADOULIN, xi.quest.id.adoulin.ALWAYS_MORE_QUOTH_THE_RAVENOUS)
 
     if trade:getItemCount() == 1 and trade:getGil() == 0 then
         local item = trade:getItem(0)
@@ -51,7 +51,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local amqtr = player:getQuestStatus(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.ALWAYS_MORE_QUOTH_THE_RAVENOUS)
+    local amqtr = player:getQuestStatus(xi.questLog.ADOULIN, xi.quest.id.adoulin.ALWAYS_MORE_QUOTH_THE_RAVENOUS)
 
     if
         player:getFameLevel(xi.quest.fame_area.ADOULIN) >= 2 and
@@ -78,11 +78,11 @@ end
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 3010 then
         -- Starting Quest: 'Always More Quoth the Ravenous'
-        player:addQuest(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.ALWAYS_MORE_QUOTH_THE_RAVENOUS)
+        player:addQuest(xi.questLog.ADOULIN, xi.quest.id.adoulin.ALWAYS_MORE_QUOTH_THE_RAVENOUS)
     elseif csid == 3012 then
         -- Finishing Quest: 'Always More Quoth The Ravenous'
         player:tradeComplete()
-        player:completeQuest(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.ALWAYS_MORE_QUOTH_THE_RAVENOUS)
+        player:completeQuest(xi.questLog.ADOULIN, xi.quest.id.adoulin.ALWAYS_MORE_QUOTH_THE_RAVENOUS)
         player:addExp(1500 * xi.settings.main.EXP_RATE)
         player:addCurrency('bayld', 1000 * xi.settings.main.BAYLD_RATE)
         player:messageSpecial(ID.text.BAYLD_OBTAINED, 1000 * xi.settings.main.BAYLD_RATE)

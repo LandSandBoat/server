@@ -5,7 +5,7 @@
 -- Imasuke : !pos -165 11 94 246
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_ANTIQUE_COLLECTOR)
+local quest = Quest:new(xi.questLog.JEUNO, xi.quest.id.jeuno.THE_ANTIQUE_COLLECTOR)
 
 -- TODO: Quest reward has conflicting information from various resources.  Need to confirm
 -- that XP and Gil rewards are also given when the player does not have the KI reward.

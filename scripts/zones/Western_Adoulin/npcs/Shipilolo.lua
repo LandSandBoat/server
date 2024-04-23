@@ -15,9 +15,9 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local tomath = player:getQuestStatus(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.THE_OLD_MAN_AND_THE_HARPOON)
-    local fertileGround = player:getQuestStatus(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.FERTILE_GROUND)
-    local waywardWaypoints = player:getQuestStatus(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.WAYWARD_WAYPOINTS)
+    local tomath = player:getQuestStatus(xi.questLog.ADOULIN, xi.quest.id.adoulin.THE_OLD_MAN_AND_THE_HARPOON)
+    local fertileGround = player:getQuestStatus(xi.questLog.ADOULIN, xi.quest.id.adoulin.FERTILE_GROUND)
+    local waywardWaypoints = player:getQuestStatus(xi.questLog.ADOULIN, xi.quest.id.adoulin.WAYWARD_WAYPOINTS)
     waywardWaypoints = waywardWaypoints == xi.questStatus.QUEST_ACCEPTED and player:getCharVar('WW_Need_Shipilolo') > 0
     local soaMission = player:getCurrentMission(xi.mission.log_id.SOA)
 

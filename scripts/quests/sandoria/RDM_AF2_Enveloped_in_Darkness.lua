@@ -9,7 +9,7 @@
 local crawlersID = zones[xi.zone.CRAWLERS_NEST]
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.ENVELOPED_IN_DARKNESS)
+local quest = Quest:new(xi.questLog.SANDORIA, xi.quest.id.sandoria.ENVELOPED_IN_DARKNESS)
 
 quest.reward =
 {
@@ -24,7 +24,7 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == xi.questStatus.QUEST_AVAILABLE and
-                player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_CRIMSON_TRIAL) == xi.questStatus.QUEST_COMPLETED and
+                player:getQuestStatus(xi.questLog.SANDORIA, xi.quest.id.sandoria.THE_CRIMSON_TRIAL) == xi.questStatus.QUEST_COMPLETED and
                 player:getMainJob() == xi.job.RDM and
                 player:getMainLvl() >= 50
         end,

@@ -20,7 +20,7 @@ battlefieldObject.onBattlefieldLeave = function(player, battlefield, leavecode)
         local _, clearTime, partySize = battlefield:getRecord()
 
         if
-            player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.A_THIEF_IN_NORG) == xi.questStatus.QUEST_ACCEPTED and
+            player:getQuestStatus(xi.questLog.OUTLANDS, xi.quest.id.outlands.A_THIEF_IN_NORG) == xi.questStatus.QUEST_ACCEPTED and
             player:getCharVar('Quest[5][142]Prog') == 6
         then
             player:setLocalVar('battlefieldWin', battlefield:getID())

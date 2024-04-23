@@ -4,7 +4,7 @@
 -- Kohlo-Lakolo, !pos -26.8 -6 190 240
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.WINDURST, xi.quest.id.windurst.INSPECTORS_GADGET)
+local quest = Quest:new(xi.questLog.WINDURST, xi.quest.id.windurst.INSPECTORS_GADGET)
 
 quest.reward =
 {
@@ -20,7 +20,7 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == xi.questStatus.QUEST_AVAILABLE and
-                player:hasCompletedQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.KNOW_ONES_ONIONS)
+                player:hasCompletedQuest(xi.questLog.WINDURST, xi.quest.id.windurst.KNOW_ONES_ONIONS)
         end,
 
         [xi.zone.PORT_WINDURST] =
@@ -139,7 +139,7 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == xi.questStatus.QUEST_COMPLETED and
-                player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.ONION_RINGS) == xi.questStatus.QUEST_AVAILABLE
+                player:getQuestStatus(xi.questLog.WINDURST, xi.quest.id.windurst.ONION_RINGS) == xi.questStatus.QUEST_AVAILABLE
         end,
 
         [xi.zone.PORT_WINDURST] =

@@ -7,7 +7,7 @@
 local portBastokID = zones[xi.zone.PORT_BASTOK]
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.BASTOK, xi.quest.id.bastok.TRIAL_BY_EARTH)
+local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.TRIAL_BY_EARTH)
 
 quest.reward =
 {
@@ -146,7 +146,7 @@ quest.sections =
             {
                 [249] = function(player, csid, option, npc)
                     if option == 1 then
-                        player:delQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.TRIAL_BY_EARTH)
+                        player:delQuest(xi.questLog.BASTOK, xi.quest.id.bastok.TRIAL_BY_EARTH)
 
                         npcUtil.giveKeyItem(player, xi.ki.TUNING_FORK_OF_EARTH)
 

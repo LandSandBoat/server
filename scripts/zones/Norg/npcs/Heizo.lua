@@ -9,7 +9,7 @@ local ID = zones[xi.zone.NORG]
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    local shiningLeggings = player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.LIKE_A_SHINING_LEGGINGS)
+    local shiningLeggings = player:getQuestStatus(xi.questLog.OUTLANDS, xi.quest.id.outlands.LIKE_A_SHINING_LEGGINGS)
     local legging = trade:getItemQty(xi.item.RUSTY_LEGGINGS)
     local turnedInVar = player:getCharVar('shiningLeggings_nb')
     local totalLeggings = legging + turnedInVar
@@ -32,7 +32,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local shiningLeggings = player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.LIKE_A_SHINING_LEGGINGS)
+    local shiningLeggings = player:getQuestStatus(xi.questLog.OUTLANDS, xi.quest.id.outlands.LIKE_A_SHINING_LEGGINGS)
 
     if
         shiningLeggings == xi.questStatus.QUEST_AVAILABLE and
@@ -51,7 +51,7 @@ end
 
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 127 then
-        player:addQuest(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.LIKE_A_SHINING_LEGGINGS)
+        player:addQuest(xi.questLog.OUTLANDS, xi.quest.id.outlands.LIKE_A_SHINING_LEGGINGS)
     elseif csid == 129 then
         player:tradeComplete()
         player:addItem(xi.item.SCROLL_OF_DOKUMORI_ICHI)
@@ -59,7 +59,7 @@ entity.onEventFinish = function(player, csid, option, npc)
         player:addFame(xi.quest.fame_area.NORG, 100)
         player:addTitle(xi.title.LOOKS_GOOD_IN_LEGGINGS)
         player:setCharVar('shiningLeggings_nb', 0)
-        player:completeQuest(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.LIKE_A_SHINING_LEGGINGS)
+        player:completeQuest(xi.questLog.OUTLANDS, xi.quest.id.outlands.LIKE_A_SHINING_LEGGINGS)
     end
 end
 

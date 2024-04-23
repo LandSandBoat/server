@@ -18,7 +18,7 @@ local content = Battlefield:new({
 })
 
 function content:entryRequirement(player, npc, isRegistrant, trade)
-    return player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.SHATTERING_STARS) >= xi.questStatus.QUEST_ACCEPTED and
+    return player:getQuestStatus(xi.questLog.JEUNO, xi.quest.id.jeuno.SHATTERING_STARS) >= xi.questStatus.QUEST_ACCEPTED and
         player:getMainJob() == xi.job.WHM and
         player:getMainLvl() >= 66
 end

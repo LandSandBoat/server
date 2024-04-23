@@ -6,7 +6,7 @@
 -- Kotan-Purutan : !pos 40.32 -9 44.24 249
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.WINDURST, xi.quest.id.windurst.OVERNIGHT_DELIVERY)
+local quest = Quest:new(xi.questLog.WINDURST, xi.quest.id.windurst.OVERNIGHT_DELIVERY)
 
 quest.reward =
 {
@@ -20,7 +20,7 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == xi.questStatus.QUEST_AVAILABLE and
-                player:hasCompletedQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.FOOD_FOR_THOUGHT) and
+                player:hasCompletedQuest(xi.questLog.WINDURST, xi.quest.id.windurst.FOOD_FOR_THOUGHT) and
                 player:getFameLevel(xi.quest.fame_area.WINDURST) >= 2 and
                 player:getLocalVar('Quest[2][14]mustZone') == 0
         end,

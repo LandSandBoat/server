@@ -6,7 +6,7 @@
 -- qm1 : !pos -201 16 80 108
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.BASTOK, xi.quest.id.bastok.PAST_PERFECT)
+local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.PAST_PERFECT)
 
 quest.reward =
 {

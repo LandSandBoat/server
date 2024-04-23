@@ -17,7 +17,7 @@ entity.onTrade = function(player, npc, trade)
         count == 1 and
         trade:getGil() == 0
     then
-        if player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_ROOT_OF_THE_PROBLEM) == xi.questStatus.QUEST_ACCEPTED then
+        if player:getQuestStatus(xi.questLog.WINDURST, xi.quest.id.windurst.THE_ROOT_OF_THE_PROBLEM) == xi.questStatus.QUEST_ACCEPTED then
             player:startEvent(349)
             player:tradeComplete()
             player:setCharVar('rootProblem', 2)
@@ -28,7 +28,7 @@ entity.onTrade = function(player, npc, trade)
         trade:getGil() == 0
     then
         if
-            player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CLASS_REUNION) == xi.questStatus.QUEST_ACCEPTED and
+            player:getQuestStatus(xi.questLog.WINDURST, xi.quest.id.windurst.CLASS_REUNION) == xi.questStatus.QUEST_ACCEPTED and
             player:getCharVar('ClassReunionProgress') == 2
         then
             player:startEvent(407) -- now Koru remembers something that you need to inquire his former students.
@@ -37,13 +37,13 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local rootProblem = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_ROOT_OF_THE_PROBLEM)
-    local thePuppetMaster = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_PUPPET_MASTER)
-    local classReunion = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CLASS_REUNION)
+    local rootProblem = player:getQuestStatus(xi.questLog.WINDURST, xi.quest.id.windurst.THE_ROOT_OF_THE_PROBLEM)
+    local thePuppetMaster = player:getQuestStatus(xi.questLog.WINDURST, xi.quest.id.windurst.THE_PUPPET_MASTER)
+    local classReunion = player:getQuestStatus(xi.questLog.WINDURST, xi.quest.id.windurst.CLASS_REUNION)
     local classReunionProgress = player:getCharVar('ClassReunionProgress')
     local talk1 = player:getCharVar('ClassReunion_TalkedToFupepe')
     local talk2 = player:getCharVar('ClassReunion_TalkedToFurakku')
-    local carbuncleDebacle = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CARBUNCLE_DEBACLE)
+    local carbuncleDebacle = player:getQuestStatus(xi.questLog.WINDURST, xi.quest.id.windurst.CARBUNCLE_DEBACLE)
     local carbuncleDebacleProgress = player:getCharVar('CarbuncleDebacleProgress')
 
     -----------------------------------
@@ -107,7 +107,7 @@ entity.onEventFinish = function(player, csid, option, npc)
         if player:getFreeSlotsCount() ~= 0 then
             player:addItem(xi.item.EVOKERS_SPATS)
             player:messageSpecial(ID.text.ITEM_OBTAINED, xi.item.EVOKERS_SPATS)
-            player:completeQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CLASS_REUNION)
+            player:completeQuest(xi.questLog.WINDURST, xi.quest.id.windurst.CLASS_REUNION)
             player:setCharVar('ClassReunionProgress', 0)
             player:setCharVar('ClassReunion_TalkedToFurakku', 0)
             player:setCharVar('ClassReunion_TalkedToFupepe', 0)
@@ -127,7 +127,7 @@ entity.onEventFinish = function(player, csid, option, npc)
             player:addItem(xi.item.EVOKERS_HORN) -- Evoker's Horn
             player:messageSpecial(ID.text.ITEM_OBTAINED, xi.item.EVOKERS_HORN)
             player:addTitle(xi.title.PARAGON_OF_SUMMONER_EXCELLENCE)
-            player:completeQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CARBUNCLE_DEBACLE)
+            player:completeQuest(xi.questLog.WINDURST, xi.quest.id.windurst.CARBUNCLE_DEBACLE)
             player:addFame(xi.quest.fame_area.WINDURST, 60)
             player:setCharVar('CarbuncleDebacleProgress', 0)
             player:needToZone(true)

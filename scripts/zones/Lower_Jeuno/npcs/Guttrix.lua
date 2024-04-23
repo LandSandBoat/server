@@ -36,7 +36,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local questStatus = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_GOBLIN_TAILOR)
+    local questStatus = player:getQuestStatus(xi.questLog.JEUNO, xi.quest.id.jeuno.THE_GOBLIN_TAILOR)
     local rseGear     = hasRSE(player)
     local rseRace     = VanadielRSERace()
     local rseLocation = VanadielRSELocation()
@@ -68,10 +68,10 @@ entity.onEventUpdate = function(player, csid, option, npc)
 end
 
 entity.onEventFinish = function(player, csid, option, npc)
-    local questStatus = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_GOBLIN_TAILOR)
+    local questStatus = player:getQuestStatus(xi.questLog.JEUNO, xi.quest.id.jeuno.THE_GOBLIN_TAILOR)
 
     if csid == 10016 then
-        player:addQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_GOBLIN_TAILOR)
+        player:addQuest(xi.questLog.JEUNO, xi.quest.id.jeuno.THE_GOBLIN_TAILOR)
     elseif
         csid == 10018 and
         option >= 1 and
@@ -82,7 +82,7 @@ entity.onEventFinish = function(player, csid, option, npc)
         if npcUtil.giveItem(player, rseMap[player:getRace()][option]) then
             if questStatus == xi.questStatus.QUEST_ACCEPTED then
                 player:addFame(xi.quest.fame_area.JEUNO, 30)
-                player:completeQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_GOBLIN_TAILOR)
+                player:completeQuest(xi.questLog.JEUNO, xi.quest.id.jeuno.THE_GOBLIN_TAILOR)
             end
 
             player:delKeyItem(xi.ki.MAGICAL_PATTERN)

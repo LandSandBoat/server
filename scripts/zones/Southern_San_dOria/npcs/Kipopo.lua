@@ -24,7 +24,7 @@ entity.onTrigger = function(player, npc)
     local skillLevel = player:getSkillLevel(xi.skill.LEATHERCRAFT)
 
     if
-        player:getQuestStatus(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.SAY_IT_WITH_A_HANDBAG) == xi.questStatus.QUEST_COMPLETED and
+        player:getQuestStatus(xi.questLog.CRYSTAL_WAR, xi.quest.id.crystalWar.SAY_IT_WITH_A_HANDBAG) == xi.questStatus.QUEST_COMPLETED and
         player:getCharVar('sayItWithAHandbagBonusCS') == 1
     then
         player:startEvent(914)

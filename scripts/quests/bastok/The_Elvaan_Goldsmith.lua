@@ -5,7 +5,7 @@
 -- Michea : !pos -298 -16 -157 235
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_ELVAAN_GOLDSMITH)
+local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.THE_ELVAAN_GOLDSMITH)
 
 quest.reward =
 {

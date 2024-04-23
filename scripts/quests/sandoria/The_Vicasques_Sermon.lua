@@ -9,7 +9,7 @@ local eastRonfaureID     = zones[xi.zone.EAST_RONFAURE]
 local northernSandoriaID = zones[xi.zone.NORTHERN_SAN_DORIA]
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_VICASQUES_SERMON)
+local quest = Quest:new(xi.questLog.SANDORIA, xi.quest.id.sandoria.THE_VICASQUES_SERMON)
 
 quest.reward =
 {
@@ -24,7 +24,7 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == xi.questStatus.QUEST_AVAILABLE and
-                player:hasCompletedQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.WATERS_OF_THE_CHEVAL)
+                player:hasCompletedQuest(xi.questLog.SANDORIA, xi.quest.id.sandoria.WATERS_OF_THE_CHEVAL)
         end,
 
         [xi.zone.NORTHERN_SAN_DORIA] =

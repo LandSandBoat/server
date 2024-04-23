@@ -6,7 +6,7 @@
 -- qm2      : !pos -120.041 2.621 415.989 191
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.BASTOK, xi.quest.id.bastok.BREAKING_STONES)
+local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.BREAKING_STONES)
 
 quest.reward =
 {

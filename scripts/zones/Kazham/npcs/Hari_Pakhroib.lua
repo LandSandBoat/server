@@ -11,7 +11,7 @@ end
 entity.onTrigger = function(player, npc)
     local guardian = player:getQuestStatus(xi.questLog.OUTLANDS, xi.quest.id.outlands.GREETINGS_TO_THE_GUARDIAN)
     local pamamas = player:getCharVar('PamamaVar')
-    local pfame = player:getFameLevel(xi.fameArea.WINDURST)
+    local pfame = player:getFameLevel(xi.quest.fame_area.WINDURST)
     local needToZone = player:needToZone()
 
     if guardian == xi.questStatus.QUEST_ACCEPTED then
@@ -45,13 +45,13 @@ entity.onEventFinish = function(player, csid, option, npc)
         if pamamas == 1 then --First completion of quest; set title, complete quest, and give higher fame
             npcUtil.giveCurrency(player, 'gil', 5000)
             player:completeQuest(xi.questLog.OUTLANDS, xi.quest.id.outlands.GREETINGS_TO_THE_GUARDIAN)
-            player:addFame(xi.fameArea.WINDURST, 100)
+            player:addFame(xi.quest.fame_area.WINDURST, 100)
             player:addTitle(xi.title.KAZHAM_CALLER)
             player:setCharVar('PamamaVar', 0)
             player:needToZone(true)
         elseif pamamas == 2 then --Repeats of quest; give only gil and less fame
             npcUtil.giveCurrency(player, 'gil', 5000)
-            player:addFame(xi.fameArea.WINDURST, 30)
+            player:addFame(xi.quest.fame_area.WINDURST, 30)
             player:setCharVar('PamamaVar', 0)
             player:needToZone(true)
         end

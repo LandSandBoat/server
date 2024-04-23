@@ -9,7 +9,7 @@ local ID = zones[xi.zone.SOUTHERN_SAN_DORIA]
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    if player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.GRAVE_CONCERNS) == xi.questStatus.QUEST_ACCEPTED then
+    if player:getQuestStatus(xi.questLog.SANDORIA, xi.quest.id.sandoria.GRAVE_CONCERNS) == xi.questStatus.QUEST_ACCEPTED then
         if
             trade:hasItemQty(xi.item.TOMB_GUARDS_WATERSKIN, 1) and
             trade:getItemCount() == 1 and
@@ -21,7 +21,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local tomb = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.GRAVE_CONCERNS)
+    local tomb = player:getQuestStatus(xi.questLog.SANDORIA, xi.quest.id.sandoria.GRAVE_CONCERNS)
 
     if tomb == xi.questStatus.QUEST_AVAILABLE then
         player:startEvent(541)
@@ -52,7 +52,7 @@ entity.onEventFinish = function(player, csid, option, npc)
         if player:getFreeSlotsCount() == 0 then
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 567) -- Well Water
         else
-            player:addQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.GRAVE_CONCERNS)
+            player:addQuest(xi.questLog.SANDORIA, xi.quest.id.sandoria.GRAVE_CONCERNS)
             player:setCharVar('graveConcernsVar', 0)
             player:addItem(xi.item.SKIN_OF_WELL_WATER)
             player:messageSpecial(ID.text.ITEM_OBTAINED, xi.item.SKIN_OF_WELL_WATER) -- Well Water
@@ -63,7 +63,7 @@ entity.onEventFinish = function(player, csid, option, npc)
         player:addTitle(xi.title.ROYAL_GRAVE_KEEPER)
         npcUtil.giveCurrency(player, 'gil', 560)
         player:addFame(xi.quest.fame_area.SANDORIA, 30)
-        player:completeQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.GRAVE_CONCERNS)
+        player:completeQuest(xi.questLog.SANDORIA, xi.quest.id.sandoria.GRAVE_CONCERNS)
     end
 end
 

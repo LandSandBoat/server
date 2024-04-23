@@ -13,7 +13,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local gates = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.GATES_TO_PARADISE)
+    local gates = player:getQuestStatus(xi.questLog.SANDORIA, xi.quest.id.sandoria.GATES_TO_PARADISE)
 
     if player:hasKeyItem(xi.ki.SCRIPTURE_OF_WATER) then
         player:startEvent(620)
@@ -34,14 +34,14 @@ end
 
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 619 and option == 0 then
-        player:addQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.GATES_TO_PARADISE)
+        player:addQuest(xi.questLog.SANDORIA, xi.quest.id.sandoria.GATES_TO_PARADISE)
         player:addKeyItem(xi.ki.SCRIPTURE_OF_WIND)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.SCRIPTURE_OF_WIND)
     elseif csid == 620 then
         if player:getFreeSlotsCount() == 0 then
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.item.COTTON_CAPE)
         else
-            player:completeQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.GATES_TO_PARADISE)
+            player:completeQuest(xi.questLog.SANDORIA, xi.quest.id.sandoria.GATES_TO_PARADISE)
             player:addFame(xi.quest.fame_area.SANDORIA, 30)
             player:addTitle(xi.title.THE_PIOUS_ONE)
             player:delKeyItem(xi.ki.SCRIPTURE_OF_WATER)

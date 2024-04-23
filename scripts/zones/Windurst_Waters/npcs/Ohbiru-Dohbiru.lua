@@ -37,7 +37,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local pfame = player:getFameLevel(xi.fameArea.WINDURST)
+    local pfame = player:getFameLevel(xi.quest.fame_area.WINDURST)
     local turmoil = player:getQuestStatus(xi.questLog.WINDURST, xi.quest.id.windurst.TORAIMARAI_TURMOIL)
     local needToZone = player:needToZone()
     local sayFlowers = player:getQuestStatus(xi.questLog.WINDURST, xi.quest.id.windurst.SAY_IT_WITH_FLOWERS)
@@ -95,12 +95,12 @@ entity.onEventFinish = function(player, csid, option, npc)
     elseif csid == 791 and turmoil == xi.questStatus.QUEST_ACCEPTED then -- Completes Toraimarai turmoil - first time
         npcUtil.giveCurrency(player, 'gil', 4500)
         player:completeQuest(xi.questLog.WINDURST, xi.quest.id.windurst.TORAIMARAI_TURMOIL)
-        player:addFame(xi.fameArea.WINDURST, 100)
+        player:addFame(xi.quest.fame_area.WINDURST, 100)
         player:addTitle(xi.title.CERTIFIED_RHINOSTERY_VENTURER)
         player:tradeComplete()
     elseif csid == 791 and turmoil == 2 then -- Completes Toraimarai turmoil - repeats
         npcUtil.giveCurrency(player, 'gil', 4500)
-        player:addFame(xi.fameArea.WINDURST, 50)
+        player:addFame(xi.quest.fame_area.WINDURST, 50)
         player:tradeComplete()
     elseif csid == 516 then
         if option < 7 then

@@ -5,7 +5,7 @@
 -- Raimbroy : !pos -141 -3 34.6 230
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_SWEETEST_THINGS)
+local quest = Quest:new(xi.questLog.SANDORIA, xi.quest.id.sandoria.THE_SWEETEST_THINGS)
 
 quest.reward =
 {

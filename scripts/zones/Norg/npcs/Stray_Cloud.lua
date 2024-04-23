@@ -10,7 +10,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local anUndyingPledge = player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.AN_UNDYING_PLEDGE)
+    local anUndyingPledge = player:getQuestStatus(xi.questLog.OUTLANDS, xi.quest.id.outlands.AN_UNDYING_PLEDGE)
 
     if
         anUndyingPledge == xi.questStatus.QUEST_AVAILABLE and
@@ -44,11 +44,11 @@ end
 
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 225 then
-        player:addQuest(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.AN_UNDYING_PLEDGE)
+        player:addQuest(xi.questLog.OUTLANDS, xi.quest.id.outlands.AN_UNDYING_PLEDGE)
         player:setCharVar('anUndyingPledgeCS', 1)
     elseif
         csid == 227 and
-        npcUtil.completeQuest(player, xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.AN_UNDYING_PLEDGE, {
+        npcUtil.completeQuest(player, xi.questLog.OUTLANDS, xi.quest.id.outlands.AN_UNDYING_PLEDGE, {
             item = 12375,
             fameArea = xi.quest.fame_area.NORG,
             fame = 50,

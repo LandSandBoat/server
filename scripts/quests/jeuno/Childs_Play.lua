@@ -5,7 +5,7 @@
 -- Karl : !pos -60 0.1 -8 246
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.CHILDS_PLAY)
+local quest = Quest:new(xi.questLog.JEUNO, xi.quest.id.jeuno.CHILDS_PLAY)
 
 quest.reward =
 {
@@ -20,7 +20,7 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == xi.questStatus.QUEST_AVAILABLE and
-                player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_WONDER_MAGIC_SET) == xi.questStatus.QUEST_ACCEPTED
+                player:getQuestStatus(xi.questLog.JEUNO, xi.quest.id.jeuno.THE_WONDER_MAGIC_SET) == xi.questStatus.QUEST_ACCEPTED
         end,
 
         [xi.zone.PORT_JEUNO] =

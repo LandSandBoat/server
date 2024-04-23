@@ -7,7 +7,7 @@
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    if player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.TO_BEE_OR_NOT_TO_BEE) == xi.questStatus.QUEST_ACCEPTED then
+    if player:getQuestStatus(xi.questLog.WINDURST, xi.quest.id.windurst.TO_BEE_OR_NOT_TO_BEE) == xi.questStatus.QUEST_ACCEPTED then
         if trade:hasItemQty(xi.item.POT_OF_HONEY, 1) and trade:getItemCount() == 1 then
             local toBeeOrNotStatus = player:getCharVar('ToBeeOrNot_var')
             if toBeeOrNotStatus == 10 then
@@ -26,8 +26,8 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local toBee = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.TO_BEE_OR_NOT_TO_BEE)
-    local postmanKOsTwice = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_POSTMAN_ALWAYS_KO_S_TWICE)
+    local toBee = player:getQuestStatus(xi.questLog.WINDURST, xi.quest.id.windurst.TO_BEE_OR_NOT_TO_BEE)
+    local postmanKOsTwice = player:getQuestStatus(xi.questLog.WINDURST, xi.quest.id.windurst.THE_POSTMAN_ALWAYS_KO_S_TWICE)
     local toBeeOrNotStatus = player:getCharVar('ToBeeOrNot_var')
 
     if
@@ -84,7 +84,7 @@ entity.onEventFinish = function(player, csid, option, npc)
         player:tradeComplete()
         player:setCharVar('ToBeeOrNot_var', 5)
         player:addFame(xi.quest.fame_area.WINDURST, 30)
-        player:completeQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.TO_BEE_OR_NOT_TO_BEE)
+        player:completeQuest(xi.questLog.WINDURST, xi.quest.id.windurst.TO_BEE_OR_NOT_TO_BEE)
         player:needToZone(true)
     end
 end

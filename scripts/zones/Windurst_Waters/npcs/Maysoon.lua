@@ -10,7 +10,7 @@ local ID = zones[xi.zone.WINDURST_WATERS]
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    if player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.HOIST_THE_JELLY_ROGER) == xi.questStatus.QUEST_ACCEPTED then
+    if player:getQuestStatus(xi.questLog.WINDURST, xi.quest.id.windurst.HOIST_THE_JELLY_ROGER) == xi.questStatus.QUEST_ACCEPTED then
         if
             trade:hasItemQty(xi.item.SERVING_OF_ROYAL_JELLY, 1) and
             trade:getGil() == 0 and
@@ -22,8 +22,8 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local cooksPride = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.COOK_S_PRIDE)
-    local hoistTheJelly = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.HOIST_THE_JELLY_ROGER)
+    local cooksPride = player:getQuestStatus(xi.questLog.JEUNO, xi.quest.id.jeuno.COOK_S_PRIDE)
+    local hoistTheJelly = player:getQuestStatus(xi.questLog.WINDURST, xi.quest.id.windurst.HOIST_THE_JELLY_ROGER)
 
     if cooksPride == xi.questStatus.QUEST_ACCEPTED and hoistTheJelly == xi.questStatus.QUEST_AVAILABLE then
         player:startEvent(10000) -- Start quest "Hoist the Jelly, Roger"
@@ -37,9 +37,9 @@ end
 
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 10000 then
-        player:addQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.HOIST_THE_JELLY_ROGER)
+        player:addQuest(xi.questLog.WINDURST, xi.quest.id.windurst.HOIST_THE_JELLY_ROGER)
     elseif csid == 10001 then
-        player:completeQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.HOIST_THE_JELLY_ROGER)
+        player:completeQuest(xi.questLog.WINDURST, xi.quest.id.windurst.HOIST_THE_JELLY_ROGER)
         player:addKeyItem(xi.ki.SUPER_SOUP_POT)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.SUPER_SOUP_POT)
         player:addFame(xi.quest.fame_area.WINDURST, 30)

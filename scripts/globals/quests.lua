@@ -8,6 +8,29 @@ xi.quest = xi.quest or {}
 --
 -----------------------------------
 
+QUEST_AVAILABLE = 0
+QUEST_ACCEPTED  = 1
+QUEST_COMPLETED = 2
+
+-- Log IDs defined as "enums" here to tie into quest_rewrite
+-- branch that will be merged in at a later date. Used
+-- as keys for the quest ID tables below.
+
+xi.quest.log_id =
+{
+    SANDORIA    =  0,
+    BASTOK      =  1,
+    WINDURST    =  2,
+    JEUNO       =  3,
+    OTHER_AREAS =  4,
+    OUTLANDS    =  5,
+    AHT_URHGAN  =  6,
+    CRYSTAL_WAR =  7,
+    ABYSSEA     =  8,
+    ADOULIN     =  9,
+    COALITION   = 10,
+}
+
 xi.quest.area =
 {
     [xi.questLog.SANDORIA]    = 'sandoria',
@@ -21,6 +44,29 @@ xi.quest.area =
     [xi.questLog.ABYSSEA]     = 'abyssea',
     [xi.questLog.ADOULIN]     = 'adoulin',
     [xi.questLog.COALITION]   = 'coalition',
+}
+
+-- NOTE: Duplicated areas should not be used here.  For example,
+-- Mhaura and Kazham fame use WINDURST fame area.  This table
+-- follows mapping of CLuaBaseEntity::addFame()
+xi.quest.fame_area =
+{
+    SANDORIA           =  0,
+    BASTOK             =  1,
+    WINDURST           =  2, -- Mhaura, Kazham
+    JEUNO              =  3,
+    SELBINA_RABAO      =  4,
+    NORG               =  5,
+    ABYSSEA_KONSCHTAT  =  6,
+    ABYSSEA_TAHRONGI   =  7,
+    ABYSSEA_LATHEINE   =  8,
+    ABYSSEA_MISAREAUX  =  9,
+    ABYSSEA_VUNKERL    = 10,
+    ABYSSEA_ATTOHWA    = 11,
+    ABYSSEA_ALTEPA     = 12,
+    ABYSSEA_GRAUBERG   = 13,
+    ABYSSEA_ULEGUERAND = 14,
+    ADOULIN            = 15,
 }
 
 xi.quest.id =

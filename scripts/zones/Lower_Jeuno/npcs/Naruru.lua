@@ -12,11 +12,11 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local cooksPride     = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.COOK_S_PRIDE)
-    local theKindCardian = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_KIND_CARDIAN)
+    local cooksPride     = player:getQuestStatus(xi.questLog.JEUNO, xi.quest.id.jeuno.COOK_S_PRIDE)
+    local theKindCardian = player:getQuestStatus(xi.questLog.JEUNO, xi.quest.id.jeuno.THE_KIND_CARDIAN)
 
     if
-        player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_WONDER_MAGIC_SET) == xi.questStatus.QUEST_COMPLETED and
+        player:getQuestStatus(xi.questLog.JEUNO, xi.quest.id.jeuno.THE_WONDER_MAGIC_SET) == xi.questStatus.QUEST_COMPLETED and
         cooksPride == xi.questStatus.QUEST_AVAILABLE
     then
         if player:getCharVar('CooksPrideVar') == 0 then
@@ -66,7 +66,7 @@ entity.onEventFinish = function(player, csid, option, npc)
         (csid == 189 or csid == 188) and
         option == 0
     then
-        player:addQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.COOK_S_PRIDE)
+        player:addQuest(xi.questLog.JEUNO, xi.quest.id.jeuno.COOK_S_PRIDE)
 
     elseif csid == 189 and option == 1 then
         player:setCharVar('CooksPrideVar', 1)
@@ -82,7 +82,7 @@ entity.onEventFinish = function(player, csid, option, npc)
             player:addItem(xi.item.MYTHRIL_RING)
             player:messageSpecial(ID.text.ITEM_OBTAINED, xi.item.MYTHRIL_RING)
             player:addFame(xi.quest.fame_area.JEUNO, 30)
-            player:completeQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.COOK_S_PRIDE)
+            player:completeQuest(xi.questLog.JEUNO, xi.quest.id.jeuno.COOK_S_PRIDE)
         end
     end
 end

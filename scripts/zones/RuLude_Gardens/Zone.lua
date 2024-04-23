@@ -43,18 +43,18 @@ zoneObject.onTriggerAreaEnter = function(player, triggerArea)
             then
                 player:startEvent(122)
             elseif player:getCharVar('PromathiaStatus') == 7 then
-                if player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.STORMS_OF_FATE) == xi.questStatus.QUEST_AVAILABLE then
+                if player:getQuestStatus(xi.questLog.JEUNO, xi.quest.id.jeuno.STORMS_OF_FATE) == xi.questStatus.QUEST_AVAILABLE then
                     player:startEvent(142)
                 elseif
-                    player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.STORMS_OF_FATE) == xi.questStatus.QUEST_ACCEPTED and
+                    player:getQuestStatus(xi.questLog.JEUNO, xi.quest.id.jeuno.STORMS_OF_FATE) == xi.questStatus.QUEST_ACCEPTED and
                     player:getCharVar('StormsOfFate') == 3
                 then
                     player:startEvent(143)
                 elseif
-                    player:hasCompletedQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.STORMS_OF_FATE) and
+                    player:hasCompletedQuest(xi.questLog.JEUNO, xi.quest.id.jeuno.STORMS_OF_FATE) and
                     player:getCurrentMission(xi.mission.log_id.ZILART) == xi.mission.id.zilart.AWAKENING and
                     player:getMissionStatus(xi.mission.log_id.ZILART) == 3 and
-                    player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.SHADOWS_OF_THE_DEPARTED) == xi.questStatus.QUEST_AVAILABLE and
+                    player:getQuestStatus(xi.questLog.JEUNO, xi.quest.id.jeuno.SHADOWS_OF_THE_DEPARTED) == xi.questStatus.QUEST_AVAILABLE and
                     player:getCharVar('StormsOfFateWait') <= os.time()
                 then
                     player:startEvent(161)
@@ -65,8 +65,8 @@ zoneObject.onTriggerAreaEnter = function(player, triggerArea)
                 then
                     player:startEvent(162)
                 elseif
-                    player:hasCompletedQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.SHADOWS_OF_THE_DEPARTED) and
-                    player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.APOCALYPSE_NIGH) == xi.questStatus.QUEST_AVAILABLE and
+                    player:hasCompletedQuest(xi.questLog.JEUNO, xi.quest.id.jeuno.SHADOWS_OF_THE_DEPARTED) and
+                    player:getQuestStatus(xi.questLog.JEUNO, xi.quest.id.jeuno.APOCALYPSE_NIGH) == xi.questStatus.QUEST_AVAILABLE and
                     player:getLocalVar('ANZONE') == 0 and
                     player:getCharVar('ApocNighWait') <= os.time()
                 then
@@ -92,17 +92,17 @@ zoneObject.onEventFinish = function(player, csid, option, npc)
         player:setCharVar('COP_tenzen_story', 0)
         player:setCharVar('COP_jabbos_story', 0)
     elseif csid == 142 then
-        player:addQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.STORMS_OF_FATE)
+        player:addQuest(xi.questLog.JEUNO, xi.quest.id.jeuno.STORMS_OF_FATE)
     elseif csid == 143 then
-        player:completeQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.STORMS_OF_FATE)
+        player:completeQuest(xi.questLog.JEUNO, xi.quest.id.jeuno.STORMS_OF_FATE)
         player:setCharVar('StormsOfFate', 0)
         player:setCharVar('StormsOfFateWait', getVanaMidnight())
     elseif csid == 161 then
         npcUtil.giveKeyItem(player, xi.ki.NOTE_WRITTEN_BY_ESHANTARL)
-        player:addQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.SHADOWS_OF_THE_DEPARTED)
+        player:addQuest(xi.questLog.JEUNO, xi.quest.id.jeuno.SHADOWS_OF_THE_DEPARTED)
         player:setCharVar('StormsOfFateWait', 0)
     elseif csid == 162 then
-        player:completeQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.SHADOWS_OF_THE_DEPARTED)
+        player:completeQuest(xi.questLog.JEUNO, xi.quest.id.jeuno.SHADOWS_OF_THE_DEPARTED)
         player:delKeyItem(xi.ki.PROMYVION_HOLLA_SLIVER)
         player:delKeyItem(xi.ki.PROMYVION_DEM_SLIVER)
         player:delKeyItem(xi.ki.PROMYVION_MEA_SLIVER)
@@ -110,7 +110,7 @@ zoneObject.onEventFinish = function(player, csid, option, npc)
         player:setLocalVar('ANZONE', 1)
         player:setCharVar('ApocNighWait', getVanaMidnight())
     elseif csid == 123 then
-        player:addQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.APOCALYPSE_NIGH)
+        player:addQuest(xi.questLog.JEUNO, xi.quest.id.jeuno.APOCALYPSE_NIGH)
         player:setCharVar('ApocalypseNigh', 1)
         player:setCharVar('ApocNighWait', 0)
     end

@@ -7,7 +7,7 @@
 local southGustabergID = zones[xi.zone.SOUTH_GUSTABERG]
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.BASTOK, xi.quest.id.bastok.SMOKE_ON_THE_MOUNTAIN)
+local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.SMOKE_ON_THE_MOUNTAIN)
 
 quest.reward =
 {

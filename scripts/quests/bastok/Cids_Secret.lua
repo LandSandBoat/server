@@ -6,7 +6,7 @@
 -- Hilda : !pos -163 -8 13 236
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.BASTOK, xi.quest.id.bastok.CIDS_SECRET)
+local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.CIDS_SECRET)
 
 quest.reward =
 {

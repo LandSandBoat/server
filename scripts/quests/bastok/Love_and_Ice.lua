@@ -11,7 +11,7 @@ local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.LOVE_AND_ICE)
 quest.reward =
 {
     fame     = 120,
-    fameArea = xi.fameArea.BASTOK,
+    fameArea = xi.quest.fame_area.BASTOK,
     item     = xi.item.LAMIA_HARP,
     title    = xi.title.SORROW_DROWNER,
 }
@@ -31,7 +31,7 @@ quest.sections =
                 onTrigger = function(player, npc)
                     if
                         player:hasCompletedQuest(xi.questLog.BASTOK, xi.quest.id.bastok.THE_SIRENS_TEAR) and
-                        player:getFameLevel(xi.fameArea.BASTOK) >= 5
+                        player:getFameLevel(xi.quest.fame_area.BASTOK) >= 5
                     then
                         return quest:progressEvent(185)
                     else

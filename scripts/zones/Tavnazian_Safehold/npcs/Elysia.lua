@@ -10,7 +10,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local unforgiven = player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.UNFORGIVEN)
+    local unforgiven = player:getQuestStatus(xi.questLog.OTHER_AREAS, xi.quest.id.otherAreas.UNFORGIVEN)
 
     if unforgiven == xi.questStatus.QUEST_AVAILABLE then
         player:startEvent(200) -- start quest
@@ -33,7 +33,7 @@ end
 
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 200 then
-        player:addQuest(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.UNFORGIVEN)
+        player:addQuest(xi.questLog.OTHER_AREAS, xi.quest.id.otherAreas.UNFORGIVEN)
     elseif csid == 202 then
         player:setCharVar('UnforgivenVar', 1)
     end

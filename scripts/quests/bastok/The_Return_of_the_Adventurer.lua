@@ -5,7 +5,7 @@
 -- Gwill : !pos -317.829 -15.948 -177.375 235
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_RETURN_OF_THE_ADVENTURER)
+local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.THE_RETURN_OF_THE_ADVENTURER)
 
 quest.reward =
 {
@@ -20,7 +20,7 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == xi.questStatus.QUEST_AVAILABLE and
-                player:hasCompletedQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.FATHER_FIGURE) and
+                player:hasCompletedQuest(xi.questLog.BASTOK, xi.quest.id.bastok.FATHER_FIGURE) and
                 player:getFameLevel(xi.quest.fame_area.BASTOK) >= 3
         end,
 

@@ -286,7 +286,7 @@ xi.roe.records =
     [500] =
     { -- Mog House Exit: San d'Oria
         trigger = xi.roeTrigger.COMPLETE_QUEST,
-        reqs = { questComplete = { xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.GROWING_FLOWERS } },
+        reqs = { questComplete = { xi.questLog.SANDORIA, xi.quest.id.sandoria.GROWING_FLOWERS } },
         flags = set { 'retro' },
         reward = { sparks = 100, xp = 300 },
     },
@@ -294,7 +294,7 @@ xi.roe.records =
     [501] =
     { -- Mog House Exit: Bastok
         trigger = xi.roeTrigger.COMPLETE_QUEST,
-        reqs = { questComplete = { xi.quest.log_id.BASTOK, xi.quest.id.bastok.A_LADYS_HEART } },
+        reqs = { questComplete = { xi.questLog.BASTOK, xi.quest.id.bastok.A_LADYS_HEART } },
         flags = set { 'retro' },
         reward = { sparks = 100, xp = 300 },
     },
@@ -302,7 +302,7 @@ xi.roe.records =
     [502] =
     { -- Mog House Exit: Windurst
         trigger = xi.roeTrigger.COMPLETE_QUEST,
-        reqs = { questComplete = { xi.quest.log_id.WINDURST, xi.quest.id.windurst.FLOWER_CHILD } },
+        reqs = { questComplete = { xi.questLog.WINDURST, xi.quest.id.windurst.FLOWER_CHILD } },
         flags = set { 'retro' },
         reward = { sparks = 100, xp = 300 },
     },
@@ -310,7 +310,7 @@ xi.roe.records =
     [503] =
     { -- Mog House Exit: Jeuno
         trigger = xi.roeTrigger.COMPLETE_QUEST,
-        reqs = { questComplete = { xi.quest.log_id.JEUNO, xi.quest.id.jeuno.PRETTY_LITTLE_THINGS } },
+        reqs = { questComplete = { xi.questLog.JEUNO, xi.quest.id.jeuno.PRETTY_LITTLE_THINGS } },
         flags = set { 'retro' },
         reward = { sparks = 100, xp = 300 },
     },
@@ -318,7 +318,7 @@ xi.roe.records =
     [504] =
     { -- Mog House Exit: Aht Urhgan
         trigger = xi.roeTrigger.COMPLETE_QUEST,
-        reqs = { questComplete = { xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.KEEPING_NOTES } },
+        reqs = { questComplete = { xi.questLog.AHT_URHGAN, xi.quest.id.ahtUrhgan.KEEPING_NOTES } },
         flags = set { 'retro' },
         reward = { sparks = 100, xp = 300 },
     },
@@ -328,8 +328,8 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_QUEST,
         flags = set { 'retro' },
         check = function(self, player, params)
-            return player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.ELDER_MEMORIES) == xi.questStatus.QUEST_COMPLETED or
-                player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.THE_OLD_LADY) == xi.questStatus.QUEST_COMPLETED
+            return player:getQuestStatus(xi.questLog.OTHER_AREAS, xi.quest.id.otherAreas.ELDER_MEMORIES) == xi.questStatus.QUEST_COMPLETED or
+                player:getQuestStatus(xi.questLog.OTHER_AREAS, xi.quest.id.otherAreas.THE_OLD_LADY) == xi.questStatus.QUEST_COMPLETED
         end,
 
         reward = { sparks = 100, xp = 500 },
@@ -338,7 +338,7 @@ xi.roe.records =
     [506] =
     { -- Obtain an Alter Ego: San d'Oria
         trigger = xi.roeTrigger.COMPLETE_QUEST,
-        reqs = { questComplete = { xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.TRUST_SANDORIA } },
+        reqs = { questComplete = { xi.questLog.SANDORIA, xi.quest.id.sandoria.TRUST_SANDORIA } },
         flags = set { 'retro' },
         reward = { sparks = 100, xp = 500 },
     },
@@ -346,7 +346,7 @@ xi.roe.records =
     [507] =
     { -- Obtain an Alter Ego: Bastok
         trigger = xi.roeTrigger.COMPLETE_QUEST,
-        reqs = { questComplete = { xi.quest.log_id.BASTOK, xi.quest.id.bastok.TRUST_BASTOK } },
+        reqs = { questComplete = { xi.questLog.BASTOK, xi.quest.id.bastok.TRUST_BASTOK } },
         flags = set { 'retro' },
         reward = { sparks = 100, xp = 500 },
     },
@@ -354,7 +354,7 @@ xi.roe.records =
     [508] =
     { -- Obtain an Alter Ego: Windurst
         trigger = xi.roeTrigger.COMPLETE_QUEST,
-        reqs = { questComplete = { xi.quest.log_id.WINDURST, xi.quest.id.windurst.TRUST_WINDURST } },
+        reqs = { questComplete = { xi.questLog.WINDURST, xi.quest.id.windurst.TRUST_WINDURST } },
         flags = set { 'retro' },
         reward = { sparks = 100, xp = 500 },
     },
@@ -362,7 +362,7 @@ xi.roe.records =
     [509] =
     { -- Obtain a Chocobo License
         trigger = xi.roeTrigger.COMPLETE_QUEST,
-        reqs = { questComplete = { xi.quest.log_id.JEUNO, xi.quest.id.jeuno.CHOCOBOS_WOUNDS } },
+        reqs = { questComplete = { xi.questLog.JEUNO, xi.quest.id.jeuno.CHOCOBOS_WOUNDS } },
         flags = set { 'retro' },
         reward = { sparks = 100, xp = 600 },
     },
@@ -370,7 +370,7 @@ xi.roe.records =
     [510] =
     { -- Obtain Job: Paladin
         trigger = xi.roeTrigger.COMPLETE_QUEST,
-        reqs = { questComplete = { xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.A_KNIGHTS_TEST } },
+        reqs = { questComplete = { xi.questLog.SANDORIA, xi.quest.id.sandoria.A_KNIGHTS_TEST } },
         flags = set { 'retro' },
         reward = { sparks = 100, xp = 300 },
     },
@@ -378,7 +378,7 @@ xi.roe.records =
     [511] =
     { -- Obtain Job: Dark Knight
         trigger = xi.roeTrigger.COMPLETE_QUEST,
-        reqs = { questComplete = { xi.quest.log_id.BASTOK, xi.quest.id.bastok.BLADE_OF_DARKNESS } },
+        reqs = { questComplete = { xi.questLog.BASTOK, xi.quest.id.bastok.BLADE_OF_DARKNESS } },
         flags = set { 'retro' },
         reward = { sparks = 100, xp = 300 },
     },
@@ -386,7 +386,7 @@ xi.roe.records =
     [512] =
     { -- Obtain Job: Beastmaster
         trigger = xi.roeTrigger.COMPLETE_QUEST,
-        reqs = { questComplete = { xi.quest.log_id.JEUNO, xi.quest.id.jeuno.SAVE_MY_SON } },
+        reqs = { questComplete = { xi.questLog.JEUNO, xi.quest.id.jeuno.SAVE_MY_SON } },
         flags = set { 'retro' },
         reward = { sparks = 100, xp = 300 },
     },
@@ -394,7 +394,7 @@ xi.roe.records =
     [513] =
     { -- Obtain Job: Bard
         trigger = xi.roeTrigger.COMPLETE_QUEST,
-        reqs = { questComplete = { xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_OLD_MONUMENT } },
+        reqs = { questComplete = { xi.questLog.JEUNO, xi.quest.id.jeuno.THE_OLD_MONUMENT } },
         flags = set { 'retro' },
         reward = { sparks = 100, xp = 300 },
     },
@@ -402,7 +402,7 @@ xi.roe.records =
     [514] =
     { -- Obtain Job: Ranger
         trigger = xi.roeTrigger.COMPLETE_QUEST,
-        reqs = { questComplete = { xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_FANGED_ONE } },
+        reqs = { questComplete = { xi.questLog.WINDURST, xi.quest.id.windurst.THE_FANGED_ONE } },
         flags = set { 'retro' },
         reward = { sparks = 100, xp = 300 },
     },
@@ -410,7 +410,7 @@ xi.roe.records =
     [515] =
     { -- Obtain Job: Samurai
         trigger = xi.roeTrigger.COMPLETE_QUEST,
-        reqs = { questComplete = { xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.FORGE_YOUR_DESTINY } },
+        reqs = { questComplete = { xi.questLog.OUTLANDS, xi.quest.id.outlands.FORGE_YOUR_DESTINY } },
         flags = set { 'retro' },
         reward = { sparks = 100, xp = 300 },
     },
@@ -418,7 +418,7 @@ xi.roe.records =
     [516] =
     { -- Obtain Job: Ninja
         trigger = xi.roeTrigger.COMPLETE_QUEST,
-        reqs = { questComplete = { xi.quest.log_id.BASTOK, xi.quest.id.bastok.AYAME_AND_KAEDE } },
+        reqs = { questComplete = { xi.questLog.BASTOK, xi.quest.id.bastok.AYAME_AND_KAEDE } },
         flags = set { 'retro' },
         reward = { sparks = 100, xp = 300 },
     },
@@ -426,7 +426,7 @@ xi.roe.records =
     [517] =
     { -- Obtain Job: Dragoon
         trigger = xi.roeTrigger.COMPLETE_QUEST,
-        reqs = { questComplete = { xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_HOLY_CREST } },
+        reqs = { questComplete = { xi.questLog.SANDORIA, xi.quest.id.sandoria.THE_HOLY_CREST } },
         flags = set { 'retro' },
         reward = { sparks = 100, xp = 300 },
     },
@@ -434,7 +434,7 @@ xi.roe.records =
     [518] =
     { -- Obtain Job: Summoner
         trigger = xi.roeTrigger.COMPLETE_QUEST,
-        reqs = { questComplete = { xi.quest.log_id.WINDURST, xi.quest.id.windurst.I_CAN_HEAR_A_RAINBOW } },
+        reqs = { questComplete = { xi.questLog.WINDURST, xi.quest.id.windurst.I_CAN_HEAR_A_RAINBOW } },
         flags = set { 'retro' },
         reward = { sparks = 100, xp = 300 },
     },
@@ -442,7 +442,7 @@ xi.roe.records =
     [519] =
     { -- Obtain Job: Blue Mage
         trigger = xi.roeTrigger.COMPLETE_QUEST,
-        reqs = { questComplete = { xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.AN_EMPTY_VESSEL } },
+        reqs = { questComplete = { xi.questLog.AHT_URHGAN, xi.quest.id.ahtUrhgan.AN_EMPTY_VESSEL } },
         flags = set { 'retro' },
         reward = { sparks = 100, xp = 300 },
     },
@@ -450,7 +450,7 @@ xi.roe.records =
     [520] =
     { -- Obtain Job: Corsair
         trigger = xi.roeTrigger.COMPLETE_QUEST,
-        reqs = { questComplete = { xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.LUCK_OF_THE_DRAW } },
+        reqs = { questComplete = { xi.questLog.AHT_URHGAN, xi.quest.id.ahtUrhgan.LUCK_OF_THE_DRAW } },
         flags = set { 'retro' },
         reward = { sparks = 100, xp = 300 },
     },
@@ -458,7 +458,7 @@ xi.roe.records =
     [521] =
     { -- Obtain Job: Puppetmaster
         trigger = xi.roeTrigger.COMPLETE_QUEST,
-        reqs = { questComplete = { xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.NO_STRINGS_ATTACHED } },
+        reqs = { questComplete = { xi.questLog.AHT_URHGAN, xi.quest.id.ahtUrhgan.NO_STRINGS_ATTACHED } },
         flags = set { 'retro' },
         reward = { sparks = 100, xp = 300 },
     },
@@ -466,7 +466,7 @@ xi.roe.records =
     [522] =
     { -- Obtain Job: Dancer
         trigger = xi.roeTrigger.COMPLETE_QUEST,
-        reqs = { questComplete = { xi.quest.log_id.JEUNO, xi.quest.id.jeuno.LAKESIDE_MINUET } },
+        reqs = { questComplete = { xi.questLog.JEUNO, xi.quest.id.jeuno.LAKESIDE_MINUET } },
         flags = set { 'retro' },
         reward = { sparks = 100, xp = 300 },
     },
@@ -474,7 +474,7 @@ xi.roe.records =
     [523] =
     { -- Obtain Job: Scholar
         trigger = xi.roeTrigger.COMPLETE_QUEST,
-        reqs = { questComplete = { xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.A_LITTLE_KNOWLEDGE } },
+        reqs = { questComplete = { xi.questLog.CRYSTAL_WAR, xi.quest.id.crystalWar.A_LITTLE_KNOWLEDGE } },
         flags = set { 'retro' },
         reward = { sparks = 100, xp = 300 },
     },
@@ -482,7 +482,7 @@ xi.roe.records =
     [524] =
     { -- Obtain Job: Geomancer
         trigger = xi.roeTrigger.COMPLETE_QUEST,
-        reqs = { questComplete = { xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.DANCES_WITH_LUOPANS } },
+        reqs = { questComplete = { xi.questLog.ADOULIN, xi.quest.id.adoulin.DANCES_WITH_LUOPANS } },
         flags = set { 'retro' },
         reward = { sparks = 100, xp = 300 },
     },
@@ -490,7 +490,7 @@ xi.roe.records =
     [525] =
     { -- Obtain Job: Runefencer
         trigger = xi.roeTrigger.COMPLETE_QUEST,
-        reqs = { questComplete = { xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.CHILDREN_OF_THE_RUNE } },
+        reqs = { questComplete = { xi.questLog.ADOULIN, xi.quest.id.adoulin.CHILDREN_OF_THE_RUNE } },
         flags = set { 'retro' },
         reward = { sparks = 100, xp = 300 },
     },
@@ -502,7 +502,7 @@ xi.roe.records =
     [629] =
     { -- WAR Artifact Quest I
         trigger = xi.roeTrigger.COMPLETE_QUEST,
-        reqs = { questComplete = { xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_DOORMAN } },
+        reqs = { questComplete = { xi.questLog.BASTOK, xi.quest.id.bastok.THE_DOORMAN } },
         flags = set { 'retro' },
         reward = { sparks = 100, xp = 300 },
     },
@@ -510,7 +510,7 @@ xi.roe.records =
     [630] =
     { -- WAR Artifact Quest II
         trigger = xi.roeTrigger.COMPLETE_QUEST,
-        reqs = { questComplete = { xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_TALEKEEPERS_TRUTH } },
+        reqs = { questComplete = { xi.questLog.BASTOK, xi.quest.id.bastok.THE_TALEKEEPERS_TRUTH } },
         flags = set { 'retro' },
         reward = { sparks = 100, xp = 300 },
     },
@@ -518,7 +518,7 @@ xi.roe.records =
     [631] =
     { -- WAR Artifact Quest III
         trigger = xi.roeTrigger.COMPLETE_QUEST,
-        reqs = { questComplete = { xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_TALEKEEPERS_GIFT } },
+        reqs = { questComplete = { xi.questLog.BASTOK, xi.quest.id.bastok.THE_TALEKEEPERS_GIFT } },
         flags = set { 'retro' },
         reward = { sparks = 100, xp = 300 },
     },
@@ -526,7 +526,7 @@ xi.roe.records =
     [632] =
     { -- MNK Artifact Quest I
         trigger = xi.roeTrigger.COMPLETE_QUEST,
-        reqs = { questComplete = { xi.quest.log_id.BASTOK, xi.quest.id.bastok.GHOSTS_OF_THE_PAST } },
+        reqs = { questComplete = { xi.questLog.BASTOK, xi.quest.id.bastok.GHOSTS_OF_THE_PAST } },
         flags = set { 'retro' },
         reward = { sparks = 100, xp = 300 },
     },
@@ -534,7 +534,7 @@ xi.roe.records =
     [633] =
     { -- MNK Artifact Quest II
         trigger = xi.roeTrigger.COMPLETE_QUEST,
-        reqs = { questComplete = { xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_FIRST_MEETING } },
+        reqs = { questComplete = { xi.questLog.BASTOK, xi.quest.id.bastok.THE_FIRST_MEETING } },
         flags = set { 'retro' },
         reward = { sparks = 100, xp = 300 },
     },
@@ -542,7 +542,7 @@ xi.roe.records =
     [634] =
     { -- MNK Artifact Quest III
         trigger = xi.roeTrigger.COMPLETE_QUEST,
-        reqs = { questComplete = { xi.quest.log_id.BASTOK, xi.quest.id.bastok.TRUE_STRENGTH } },
+        reqs = { questComplete = { xi.questLog.BASTOK, xi.quest.id.bastok.TRUE_STRENGTH } },
         flags = set { 'retro' },
         reward = { sparks = 100, xp = 300 },
     },
@@ -550,7 +550,7 @@ xi.roe.records =
     [635] =
     { -- WHM Artifact Quest I
         trigger = xi.roeTrigger.COMPLETE_QUEST,
-        reqs = { questComplete = { xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.MESSENGER_FROM_BEYOND } },
+        reqs = { questComplete = { xi.questLog.SANDORIA, xi.quest.id.sandoria.MESSENGER_FROM_BEYOND } },
         flags = set { 'retro' },
         reward = { sparks = 100, xp = 300 },
     },
@@ -558,7 +558,7 @@ xi.roe.records =
     [636] =
     { -- WHM Artifact Quest II
         trigger = xi.roeTrigger.COMPLETE_QUEST,
-        reqs = { questComplete = { xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.PRELUDE_OF_BLACK_AND_WHITE } },
+        reqs = { questComplete = { xi.questLog.SANDORIA, xi.quest.id.sandoria.PRELUDE_OF_BLACK_AND_WHITE } },
         flags = set { 'retro' },
         reward = { sparks = 100, xp = 300 },
     },
@@ -566,7 +566,7 @@ xi.roe.records =
     [637] =
     { -- WHM Artifact Quest III
         trigger = xi.roeTrigger.COMPLETE_QUEST,
-        reqs = { questComplete = { xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.PIEUJE_S_DECISION } },
+        reqs = { questComplete = { xi.questLog.SANDORIA, xi.quest.id.sandoria.PIEUJE_S_DECISION } },
         flags = set { 'retro' },
         reward = { sparks = 100, xp = 300 },
     },
@@ -574,7 +574,7 @@ xi.roe.records =
     [638] =
     { -- BLM Artifact Quest I
         trigger = xi.roeTrigger.COMPLETE_QUEST,
-        reqs = { questComplete = { xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_THREE_MAGI } },
+        reqs = { questComplete = { xi.questLog.WINDURST, xi.quest.id.windurst.THE_THREE_MAGI } },
         flags = set { 'retro' },
         reward = { sparks = 100, xp = 300 },
     },
@@ -582,7 +582,7 @@ xi.roe.records =
     [639] =
     { -- BLM Artifact Quest II
         trigger = xi.roeTrigger.COMPLETE_QUEST,
-        reqs = { questComplete = { xi.quest.log_id.WINDURST, xi.quest.id.windurst.RECOLLECTIONS } },
+        reqs = { questComplete = { xi.questLog.WINDURST, xi.quest.id.windurst.RECOLLECTIONS } },
         flags = set { 'retro' },
         reward = { sparks = 100, xp = 300 },
     },
@@ -590,7 +590,7 @@ xi.roe.records =
     [640] =
     { -- BLM Artifact Quest III
         trigger = xi.roeTrigger.COMPLETE_QUEST,
-        reqs = { questComplete = { xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_ROOT_OF_THE_PROBLEM } },
+        reqs = { questComplete = { xi.questLog.WINDURST, xi.quest.id.windurst.THE_ROOT_OF_THE_PROBLEM } },
         flags = set { 'retro' },
         reward = { sparks = 100, xp = 300 },
     },
@@ -598,7 +598,7 @@ xi.roe.records =
     [641] =
     { -- RDM Artifact Quest I
         trigger = xi.roeTrigger.COMPLETE_QUEST,
-        reqs = { questComplete = { xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_CRIMSON_TRIAL } },
+        reqs = { questComplete = { xi.questLog.SANDORIA, xi.quest.id.sandoria.THE_CRIMSON_TRIAL } },
         flags = set { 'retro' },
         reward = { sparks = 100, xp = 300 },
     },
@@ -606,7 +606,7 @@ xi.roe.records =
     [642] =
     { -- RDM Artifact Quest II
         trigger = xi.roeTrigger.COMPLETE_QUEST,
-        reqs = { questComplete = { xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.ENVELOPED_IN_DARKNESS } },
+        reqs = { questComplete = { xi.questLog.SANDORIA, xi.quest.id.sandoria.ENVELOPED_IN_DARKNESS } },
         flags = set { 'retro' },
         reward = { sparks = 100, xp = 300 },
     },
@@ -614,7 +614,7 @@ xi.roe.records =
     [643] =
     { -- RDM Artifact Quest III
         trigger = xi.roeTrigger.COMPLETE_QUEST,
-        reqs = { questComplete = { xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.PEACE_FOR_THE_SPIRIT } },
+        reqs = { questComplete = { xi.questLog.SANDORIA, xi.quest.id.sandoria.PEACE_FOR_THE_SPIRIT } },
         flags = set { 'retro' },
         reward = { sparks = 100, xp = 300 },
     },
@@ -622,7 +622,7 @@ xi.roe.records =
     [644] =
     { -- THF Artifact Quest I
         trigger = xi.roeTrigger.COMPLETE_QUEST,
-        reqs = { questComplete = { xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_TENSHODO_SHOWDOWN } },
+        reqs = { questComplete = { xi.questLog.WINDURST, xi.quest.id.windurst.THE_TENSHODO_SHOWDOWN } },
         flags = set { 'retro' },
         reward = { sparks = 100, xp = 300 },
     },
@@ -630,7 +630,7 @@ xi.roe.records =
     [645] =
     { -- THF Artifact Quest II
         trigger = xi.roeTrigger.COMPLETE_QUEST,
-        reqs = { questComplete = { xi.quest.log_id.WINDURST, xi.quest.id.windurst.AS_THICK_AS_THIEVES } },
+        reqs = { questComplete = { xi.questLog.WINDURST, xi.quest.id.windurst.AS_THICK_AS_THIEVES } },
         flags = set { 'retro' },
         reward = { sparks = 100, xp = 300 },
     },
@@ -638,7 +638,7 @@ xi.roe.records =
     [646] =
     { -- THF Artifact Quest III
         trigger = xi.roeTrigger.COMPLETE_QUEST,
-        reqs = { questComplete = { xi.quest.log_id.WINDURST, xi.quest.id.windurst.HITTING_THE_MARQUISATE } },
+        reqs = { questComplete = { xi.questLog.WINDURST, xi.quest.id.windurst.HITTING_THE_MARQUISATE } },
         flags = set { 'retro' },
         reward = { sparks = 100, xp = 300 },
     },
@@ -646,7 +646,7 @@ xi.roe.records =
     [647] =
     { -- PLD Artifact Quest I
         trigger = xi.roeTrigger.COMPLETE_QUEST,
-        reqs = { questComplete = { xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.SHARPENING_THE_SWORD } },
+        reqs = { questComplete = { xi.questLog.SANDORIA, xi.quest.id.sandoria.SHARPENING_THE_SWORD } },
         flags = set { 'retro' },
         reward = { sparks = 100, xp = 300 },
     },
@@ -654,7 +654,7 @@ xi.roe.records =
     [648] =
     { -- PLD Artifact Quest II
         trigger = xi.roeTrigger.COMPLETE_QUEST,
-        reqs = { questComplete = { xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.A_BOY_S_DREAM } },
+        reqs = { questComplete = { xi.questLog.SANDORIA, xi.quest.id.sandoria.A_BOY_S_DREAM } },
         flags = set { 'retro' },
         reward = { sparks = 100, xp = 300 },
     },
@@ -662,7 +662,7 @@ xi.roe.records =
     [649] =
     { -- PLD Artifact Quest III
         trigger = xi.roeTrigger.COMPLETE_QUEST,
-        reqs = { questComplete = { xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.UNDER_OATH } },
+        reqs = { questComplete = { xi.questLog.SANDORIA, xi.quest.id.sandoria.UNDER_OATH } },
         flags = set { 'retro' },
         reward = { sparks = 100, xp = 300 },
     },
@@ -670,7 +670,7 @@ xi.roe.records =
     [650] =
     { -- DRK Artifact Quest I
         trigger = xi.roeTrigger.COMPLETE_QUEST,
-        reqs = { questComplete = { xi.quest.log_id.BASTOK, xi.quest.id.bastok.DARK_LEGACY } },
+        reqs = { questComplete = { xi.questLog.BASTOK, xi.quest.id.bastok.DARK_LEGACY } },
         flags = set { 'retro' },
         reward = { sparks = 100, xp = 300 },
     },
@@ -678,7 +678,7 @@ xi.roe.records =
     [651] =
     { -- DRK Artifact Quest II
         trigger = xi.roeTrigger.COMPLETE_QUEST,
-        reqs = { questComplete = { xi.quest.log_id.BASTOK, xi.quest.id.bastok.DARK_PUPPET } },
+        reqs = { questComplete = { xi.questLog.BASTOK, xi.quest.id.bastok.DARK_PUPPET } },
         flags = set { 'retro' },
         reward = { sparks = 100, xp = 300 },
     },
@@ -686,7 +686,7 @@ xi.roe.records =
     [652] =
     { -- DRK Artifact Quest III
         trigger = xi.roeTrigger.COMPLETE_QUEST,
-        reqs = { questComplete = { xi.quest.log_id.BASTOK, xi.quest.id.bastok.BLADE_OF_EVIL } },
+        reqs = { questComplete = { xi.questLog.BASTOK, xi.quest.id.bastok.BLADE_OF_EVIL } },
         flags = set { 'retro' },
         reward = { sparks = 100, xp = 300 },
     },
@@ -694,7 +694,7 @@ xi.roe.records =
     [653] =
     { -- BST Artifact Quest I
         trigger = xi.roeTrigger.COMPLETE_QUEST,
-        reqs = { questComplete = { xi.quest.log_id.JEUNO, xi.quest.id.jeuno.WINGS_OF_GOLD } },
+        reqs = { questComplete = { xi.questLog.JEUNO, xi.quest.id.jeuno.WINGS_OF_GOLD } },
         flags = set { 'retro' },
         reward = { sparks = 100, xp = 300 },
     },
@@ -702,7 +702,7 @@ xi.roe.records =
     [654] =
     { -- BST Artifact Quest II
         trigger = xi.roeTrigger.COMPLETE_QUEST,
-        reqs = { questComplete = { xi.quest.log_id.JEUNO, xi.quest.id.jeuno.SCATTERED_INTO_SHADOW } },
+        reqs = { questComplete = { xi.questLog.JEUNO, xi.quest.id.jeuno.SCATTERED_INTO_SHADOW } },
         flags = set { 'retro' },
         reward = { sparks = 100, xp = 300 },
     },
@@ -710,7 +710,7 @@ xi.roe.records =
     [655] =
     { -- BST Artifact Quest III
         trigger = xi.roeTrigger.COMPLETE_QUEST,
-        reqs = { questComplete = { xi.quest.log_id.JEUNO, xi.quest.id.jeuno.A_NEW_DAWN } },
+        reqs = { questComplete = { xi.questLog.JEUNO, xi.quest.id.jeuno.A_NEW_DAWN } },
         flags = set { 'retro' },
         reward = { sparks = 100, xp = 300 },
     },
@@ -722,7 +722,7 @@ xi.roe.records =
     [656] =
     { -- BRD Artifact Quest I
         trigger = xi.roeTrigger.COMPLETE_QUEST,
-        reqs = { questComplete = { xi.quest.log_id.JEUNO, xi.quest.id.jeuno.PAINFUL_MEMORY } },
+        reqs = { questComplete = { xi.questLog.JEUNO, xi.quest.id.jeuno.PAINFUL_MEMORY } },
         flags = set { 'retro' },
         reward = { sparks = 100, xp = 300 },
     },
@@ -730,7 +730,7 @@ xi.roe.records =
     [657] =
     { -- BRD Artifact Quest II
         trigger = xi.roeTrigger.COMPLETE_QUEST,
-        reqs = { questComplete = { xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_REQUIEM } },
+        reqs = { questComplete = { xi.questLog.JEUNO, xi.quest.id.jeuno.THE_REQUIEM } },
         flags = set { 'retro' },
         reward = { sparks = 100, xp = 300 },
     },
@@ -738,7 +738,7 @@ xi.roe.records =
     [658] =
     { -- BRD Artifact Quest III
         trigger = xi.roeTrigger.COMPLETE_QUEST,
-        reqs = { questComplete = { xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_CIRCLE_OF_TIME } },
+        reqs = { questComplete = { xi.questLog.JEUNO, xi.quest.id.jeuno.THE_CIRCLE_OF_TIME } },
         flags = set { 'retro' },
         reward = { sparks = 100, xp = 300 },
     },
@@ -746,7 +746,7 @@ xi.roe.records =
     [659] =
     { -- RNG Artifact Quest I
         trigger = xi.roeTrigger.COMPLETE_QUEST,
-        reqs = { questComplete = { xi.quest.log_id.WINDURST, xi.quest.id.windurst.SIN_HUNTING } },
+        reqs = { questComplete = { xi.questLog.WINDURST, xi.quest.id.windurst.SIN_HUNTING } },
         flags = set { 'retro' },
         reward = { sparks = 100, xp = 300 },
     },
@@ -754,7 +754,7 @@ xi.roe.records =
     [660] =
     { -- RNG Artifact Quest II
         trigger = xi.roeTrigger.COMPLETE_QUEST,
-        reqs = { questComplete = { xi.quest.log_id.WINDURST, xi.quest.id.windurst.FIRE_AND_BRIMSTONE } },
+        reqs = { questComplete = { xi.questLog.WINDURST, xi.quest.id.windurst.FIRE_AND_BRIMSTONE } },
         flags = set { 'retro' },
         reward = { sparks = 100, xp = 300 },
     },
@@ -762,7 +762,7 @@ xi.roe.records =
     [661] =
     { -- RNG Artifact Quest III
         trigger = xi.roeTrigger.COMPLETE_QUEST,
-        reqs = { questComplete = { xi.quest.log_id.WINDURST, xi.quest.id.windurst.UNBRIDLED_PASSION } },
+        reqs = { questComplete = { xi.questLog.WINDURST, xi.quest.id.windurst.UNBRIDLED_PASSION } },
         flags = set { 'retro' },
         reward = { sparks = 100, xp = 300 },
     },
@@ -770,7 +770,7 @@ xi.roe.records =
     [662] =
     { -- SAM Artifact Quest I
         trigger = xi.roeTrigger.COMPLETE_QUEST,
-        reqs = { questComplete = { xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.THE_SACRED_KATANA } },
+        reqs = { questComplete = { xi.questLog.OUTLANDS, xi.quest.id.outlands.THE_SACRED_KATANA } },
         flags = set { 'retro' },
         reward = { sparks = 100, xp = 300 },
     },
@@ -778,7 +778,7 @@ xi.roe.records =
     [663] =
     { -- SAM Artifact Quest II
         trigger = xi.roeTrigger.COMPLETE_QUEST,
-        reqs = { questComplete = { xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.YOMI_OKURI } },
+        reqs = { questComplete = { xi.questLog.OUTLANDS, xi.quest.id.outlands.YOMI_OKURI } },
         flags = set { 'retro' },
         reward = { sparks = 100, xp = 300 },
     },
@@ -786,7 +786,7 @@ xi.roe.records =
     [664] =
     { -- SAM Artifact Quest III
         trigger = xi.roeTrigger.COMPLETE_QUEST,
-        reqs = { questComplete = { xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.A_THIEF_IN_NORG } },
+        reqs = { questComplete = { xi.questLog.OUTLANDS, xi.quest.id.outlands.A_THIEF_IN_NORG } },
         flags = set { 'retro' },
         reward = { sparks = 100, xp = 300 },
     },
@@ -794,7 +794,7 @@ xi.roe.records =
     [665] =
     { -- NIN Artifact Quest I
         trigger = xi.roeTrigger.COMPLETE_QUEST,
-        reqs = { questComplete = { xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.TWENTY_IN_PIRATE_YEARS } },
+        reqs = { questComplete = { xi.questLog.OUTLANDS, xi.quest.id.outlands.TWENTY_IN_PIRATE_YEARS } },
         flags = set { 'retro' },
         reward = { sparks = 100, xp = 300 },
     },
@@ -802,7 +802,7 @@ xi.roe.records =
     [666] =
     { -- NIN Artifact Quest II
         trigger = xi.roeTrigger.COMPLETE_QUEST,
-        reqs = { questComplete = { xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.I_LL_TAKE_THE_BIG_BOX } },
+        reqs = { questComplete = { xi.questLog.OUTLANDS, xi.quest.id.outlands.I_LL_TAKE_THE_BIG_BOX } },
         flags = set { 'retro' },
         reward = { sparks = 100, xp = 300 },
     },
@@ -810,7 +810,7 @@ xi.roe.records =
     [667] =
     { -- NIN Artifact Quest III
         trigger = xi.roeTrigger.COMPLETE_QUEST,
-        reqs = { questComplete = { xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.TRUE_WILL } },
+        reqs = { questComplete = { xi.questLog.OUTLANDS, xi.quest.id.outlands.TRUE_WILL } },
         flags = set { 'retro' },
         reward = { sparks = 100, xp = 300 },
     },
@@ -818,7 +818,7 @@ xi.roe.records =
     [668] =
     { -- DRG Artifact Quest I
         trigger = xi.roeTrigger.COMPLETE_QUEST,
-        reqs = { questComplete = { xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.A_CRAFTSMAN_S_WORK } },
+        reqs = { questComplete = { xi.questLog.SANDORIA, xi.quest.id.sandoria.A_CRAFTSMAN_S_WORK } },
         flags = set { 'retro' },
         reward = { sparks = 100, xp = 300 },
     },
@@ -826,7 +826,7 @@ xi.roe.records =
     [669] =
     { -- DRG Artifact Quest II
         trigger = xi.roeTrigger.COMPLETE_QUEST,
-        reqs = { questComplete = { xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.CHASING_QUOTAS } },
+        reqs = { questComplete = { xi.questLog.SANDORIA, xi.quest.id.sandoria.CHASING_QUOTAS } },
         flags = set { 'retro' },
         reward = { sparks = 100, xp = 300 },
     },
@@ -834,7 +834,7 @@ xi.roe.records =
     [670] =
     { -- DRG Artifact Quest III
         trigger = xi.roeTrigger.COMPLETE_QUEST,
-        reqs = { questComplete = { xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.KNIGHT_STALKER } },
+        reqs = { questComplete = { xi.questLog.SANDORIA, xi.quest.id.sandoria.KNIGHT_STALKER } },
         flags = set { 'retro' },
         reward = { sparks = 100, xp = 300 },
     },
@@ -842,7 +842,7 @@ xi.roe.records =
     [671] =
     { -- SMN Artifact Quest I
         trigger = xi.roeTrigger.COMPLETE_QUEST,
-        reqs = { questComplete = { xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_PUPPET_MASTER } },
+        reqs = { questComplete = { xi.questLog.WINDURST, xi.quest.id.windurst.THE_PUPPET_MASTER } },
         flags = set { 'retro' },
         reward = { sparks = 100, xp = 300 },
     },
@@ -850,7 +850,7 @@ xi.roe.records =
     [672] =
     { -- SMN Artifact Quest II
         trigger = xi.roeTrigger.COMPLETE_QUEST,
-        reqs = { questComplete = { xi.quest.log_id.WINDURST, xi.quest.id.windurst.CLASS_REUNION } },
+        reqs = { questComplete = { xi.questLog.WINDURST, xi.quest.id.windurst.CLASS_REUNION } },
         flags = set { 'retro' },
         reward = { sparks = 100, xp = 300 },
     },
@@ -858,7 +858,7 @@ xi.roe.records =
     [673] =
     { -- SMN Artifact Quest III
         trigger = xi.roeTrigger.COMPLETE_QUEST,
-        reqs = { questComplete = { xi.quest.log_id.WINDURST, xi.quest.id.windurst.CARBUNCLE_DEBACLE } },
+        reqs = { questComplete = { xi.questLog.WINDURST, xi.quest.id.windurst.CARBUNCLE_DEBACLE } },
         flags = set { 'retro' },
         reward = { sparks = 100, xp = 300 },
     },
@@ -866,7 +866,7 @@ xi.roe.records =
     [674] =
     { -- BLU Artifact Quest I
         trigger = xi.roeTrigger.COMPLETE_QUEST,
-        reqs = { questComplete = { xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.BEGINNINGS } },
+        reqs = { questComplete = { xi.questLog.AHT_URHGAN, xi.quest.id.ahtUrhgan.BEGINNINGS } },
         flags = set { 'retro' },
         reward = { sparks = 100, xp = 300 },
     },
@@ -874,7 +874,7 @@ xi.roe.records =
     [675] =
     { -- BLU Artifact Quest II
         trigger = xi.roeTrigger.COMPLETE_QUEST,
-        reqs = { questComplete = { xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.OMENS } },
+        reqs = { questComplete = { xi.questLog.AHT_URHGAN, xi.quest.id.ahtUrhgan.OMENS } },
         flags = set { 'retro' },
         reward = { sparks = 100, xp = 300 },
     },
@@ -882,7 +882,7 @@ xi.roe.records =
     [676] =
     { -- BLU Artifact Quest III
         trigger = xi.roeTrigger.COMPLETE_QUEST,
-        reqs = { questComplete = { xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.TRANSFORMATIONS } },
+        reqs = { questComplete = { xi.questLog.AHT_URHGAN, xi.quest.id.ahtUrhgan.TRANSFORMATIONS } },
         flags = set { 'retro' },
         reward = { sparks = 100, xp = 300 },
     },
@@ -890,7 +890,7 @@ xi.roe.records =
     [677] =
     { -- COR Artifact Quest I
         trigger = xi.roeTrigger.COMPLETE_QUEST,
-        reqs = { questComplete = { xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.EQUIPPED_FOR_ALL_OCCASIONS } },
+        reqs = { questComplete = { xi.questLog.AHT_URHGAN, xi.quest.id.ahtUrhgan.EQUIPPED_FOR_ALL_OCCASIONS } },
         flags = set { 'retro' },
         reward = { sparks = 100, xp = 300 },
     },
@@ -898,7 +898,7 @@ xi.roe.records =
     [678] =
     { -- COR Artifact Quest II
         trigger = xi.roeTrigger.COMPLETE_QUEST,
-        reqs = { questComplete = { xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.NAVIGATING_THE_UNFRIENDLY_SEAS } },
+        reqs = { questComplete = { xi.questLog.AHT_URHGAN, xi.quest.id.ahtUrhgan.NAVIGATING_THE_UNFRIENDLY_SEAS } },
         flags = set { 'retro' },
         reward = { sparks = 100, xp = 300 },
     },
@@ -906,7 +906,7 @@ xi.roe.records =
     [679] =
     { -- COR Artifact Quest III
         trigger = xi.roeTrigger.COMPLETE_QUEST,
-        reqs = { questComplete = { xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.AGAINST_ALL_ODDS } },
+        reqs = { questComplete = { xi.questLog.AHT_URHGAN, xi.quest.id.ahtUrhgan.AGAINST_ALL_ODDS } },
         flags = set { 'retro' },
         reward = { sparks = 100, xp = 300 },
     },
@@ -914,7 +914,7 @@ xi.roe.records =
     [680] =
     { -- PUP Artifact Quest I
         trigger = xi.roeTrigger.COMPLETE_QUEST,
-        reqs = { questComplete = { xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.THE_WAYWARD_AUTOMATON } },
+        reqs = { questComplete = { xi.questLog.AHT_URHGAN, xi.quest.id.ahtUrhgan.THE_WAYWARD_AUTOMATON } },
         flags = set { 'retro' },
         reward = { sparks = 100, xp = 300 },
     },
@@ -922,7 +922,7 @@ xi.roe.records =
     [681] =
     { -- PUP Artifact Quest II
         trigger = xi.roeTrigger.COMPLETE_QUEST,
-        reqs = { questComplete = { xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.OPERATION_TEATIME } },
+        reqs = { questComplete = { xi.questLog.AHT_URHGAN, xi.quest.id.ahtUrhgan.OPERATION_TEATIME } },
         flags = set { 'retro' },
         reward = { sparks = 100, xp = 300 },
     },
@@ -930,7 +930,7 @@ xi.roe.records =
     [682] =
     { -- PUP Artifact Quest III
         trigger = xi.roeTrigger.COMPLETE_QUEST,
-        reqs = { questComplete = { xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.PUPPETMASTER_BLUES } },
+        reqs = { questComplete = { xi.questLog.AHT_URHGAN, xi.quest.id.ahtUrhgan.PUPPETMASTER_BLUES } },
         flags = set { 'retro' },
         reward = { sparks = 100, xp = 300 },
     },
@@ -942,7 +942,7 @@ xi.roe.records =
     [683] =
     { -- DNC Artifact Quest I
         trigger = xi.roeTrigger.COMPLETE_QUEST,
-        reqs = { questComplete = { xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_UNFINISHED_WALTZ } },
+        reqs = { questComplete = { xi.questLog.JEUNO, xi.quest.id.jeuno.THE_UNFINISHED_WALTZ } },
         flags = set { 'retro' },
         reward = { sparks = 100, xp = 300 },
     },
@@ -950,7 +950,7 @@ xi.roe.records =
     [684] =
     { -- DNC Artifact Quest II
         trigger = xi.roeTrigger.COMPLETE_QUEST,
-        reqs = { questComplete = { xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_ROAD_TO_DIVADOM } },
+        reqs = { questComplete = { xi.questLog.JEUNO, xi.quest.id.jeuno.THE_ROAD_TO_DIVADOM } },
         flags = set { 'retro' },
         reward = { sparks = 100, xp = 300 },
     },
@@ -958,7 +958,7 @@ xi.roe.records =
     [685] =
     { -- DNC Artifact Quest III
         trigger = xi.roeTrigger.COMPLETE_QUEST,
-        reqs = { questComplete = { xi.quest.log_id.JEUNO, xi.quest.id.jeuno.COMEBACK_QUEEN } },
+        reqs = { questComplete = { xi.questLog.JEUNO, xi.quest.id.jeuno.COMEBACK_QUEEN } },
         flags = set { 'retro' },
         reward = { sparks = 100, xp = 300 },
     },
@@ -966,7 +966,7 @@ xi.roe.records =
     [686] =
     { -- SCH Artifact Quest I
         trigger = xi.roeTrigger.COMPLETE_QUEST,
-        reqs = { questComplete = { xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.ON_SABBATICAL } },
+        reqs = { questComplete = { xi.questLog.CRYSTAL_WAR, xi.quest.id.crystalWar.ON_SABBATICAL } },
         flags = set { 'retro' },
         reward = { sparks = 100, xp = 300 },
     },
@@ -974,7 +974,7 @@ xi.roe.records =
     [687] =
     { -- SCH Artifact Quest II
         trigger = xi.roeTrigger.COMPLETE_QUEST,
-        reqs = { questComplete = { xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.DOWNWARD_HELIX } },
+        reqs = { questComplete = { xi.questLog.CRYSTAL_WAR, xi.quest.id.crystalWar.DOWNWARD_HELIX } },
         flags = set { 'retro' },
         reward = { sparks = 100, xp = 300 },
     },
@@ -982,7 +982,7 @@ xi.roe.records =
     [688] =
     { -- SCH Artifact Quest III
         trigger = xi.roeTrigger.COMPLETE_QUEST,
-        reqs = { questComplete = { xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.SEEING_BLOOD_RED } },
+        reqs = { questComplete = { xi.questLog.CRYSTAL_WAR, xi.quest.id.crystalWar.SEEING_BLOOD_RED } },
         flags = set { 'retro' },
         reward = { sparks = 100, xp = 300 },
     },
@@ -990,7 +990,7 @@ xi.roe.records =
     [689] =
     { -- GEO Artifact Quest I
         trigger = xi.roeTrigger.COMPLETE_QUEST,
-        reqs = { questComplete = { xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.FOR_WHOM_THE_BELL_TOLLS } },
+        reqs = { questComplete = { xi.questLog.ADOULIN, xi.quest.id.adoulin.FOR_WHOM_THE_BELL_TOLLS } },
         flags = set { 'retro' },
         reward = { sparks = 100, xp = 300 },
     },
@@ -998,7 +998,7 @@ xi.roe.records =
     [690] =
     { -- GEO Artifact Quest II
         trigger = xi.roeTrigger.COMPLETE_QUEST,
-        reqs = { questComplete = { xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.THE_BLOODLINE_OF_ZACARIAH } },
+        reqs = { questComplete = { xi.questLog.ADOULIN, xi.quest.id.adoulin.THE_BLOODLINE_OF_ZACARIAH } },
         flags = set { 'retro' },
         reward = { sparks = 100, xp = 300 },
     },
@@ -1006,7 +1006,7 @@ xi.roe.records =
     [691] =
     { -- GEO Artifact Quest III
         trigger = xi.roeTrigger.COMPLETE_QUEST,
-        reqs = { questComplete = { xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.THE_COMMUNION } },
+        reqs = { questComplete = { xi.questLog.ADOULIN, xi.quest.id.adoulin.THE_COMMUNION } },
         flags = set { 'retro' },
         reward = { sparks = 100, xp = 300 },
     },
@@ -1014,7 +1014,7 @@ xi.roe.records =
     [692] =
     { -- RUN Artifact Quest I
         trigger = xi.roeTrigger.COMPLETE_QUEST,
-        reqs = { questComplete = { xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.FORGING_NEW_BONDS } },
+        reqs = { questComplete = { xi.questLog.ADOULIN, xi.quest.id.adoulin.FORGING_NEW_BONDS } },
         flags = set { 'retro' },
         reward = { sparks = 100, xp = 300 },
     },
@@ -1022,7 +1022,7 @@ xi.roe.records =
     [693] =
     { -- RUN Artifact Quest II
         trigger = xi.roeTrigger.COMPLETE_QUEST,
-        reqs = { questComplete = { xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.LEGACIES_LOST_AND_FOUND } },
+        reqs = { questComplete = { xi.questLog.ADOULIN, xi.quest.id.adoulin.LEGACIES_LOST_AND_FOUND } },
         flags = set { 'retro' },
         reward = { sparks = 100, xp = 300 },
     },
@@ -1030,7 +1030,7 @@ xi.roe.records =
     [694] =
     { -- RUN Artifact Quest III
         trigger = xi.roeTrigger.COMPLETE_QUEST,
-        reqs = { questComplete = { xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.DESTINYS_DEVICE } },
+        reqs = { questComplete = { xi.questLog.ADOULIN, xi.quest.id.adoulin.DESTINYS_DEVICE } },
         flags = set { 'retro' },
         reward = { sparks = 100, xp = 300 },
     },
@@ -1042,7 +1042,7 @@ xi.roe.records =
     [705] =
     { -- Level Cap Increase: 55 +
         trigger = xi.roeTrigger.COMPLETE_QUEST,
-        reqs = { questComplete = { xi.quest.log_id.JEUNO, xi.quest.id.jeuno.IN_DEFIANT_CHALLENGE } },
+        reqs = { questComplete = { xi.questLog.JEUNO, xi.quest.id.jeuno.IN_DEFIANT_CHALLENGE } },
         flags = set { 'retro' },
         reward = { sparks = 100, xp = 300 },
     },
@@ -1050,7 +1050,7 @@ xi.roe.records =
     [706] =
     { -- Level Cap Increase: 60
         trigger = xi.roeTrigger.COMPLETE_QUEST,
-        reqs = { questComplete = { xi.quest.log_id.JEUNO, xi.quest.id.jeuno.ATOP_THE_HIGHEST_MOUNTAINS } },
+        reqs = { questComplete = { xi.questLog.JEUNO, xi.quest.id.jeuno.ATOP_THE_HIGHEST_MOUNTAINS } },
         flags = set { 'retro' },
         reward = { sparks = 100, xp = 300 },
     },
@@ -1058,7 +1058,7 @@ xi.roe.records =
     [707] =
     { -- Level Cap Increase: 65
         trigger = xi.roeTrigger.COMPLETE_QUEST,
-        reqs = { questComplete = { xi.quest.log_id.JEUNO, xi.quest.id.jeuno.WHENCE_BLOWS_THE_WIND } },
+        reqs = { questComplete = { xi.questLog.JEUNO, xi.quest.id.jeuno.WHENCE_BLOWS_THE_WIND } },
         flags = set { 'retro' },
         reward = { sparks = 100, xp = 300 },
     },
@@ -1066,7 +1066,7 @@ xi.roe.records =
     [708] =
     { -- Level Cap Increase: 70
         trigger = xi.roeTrigger.COMPLETE_QUEST,
-        reqs = { questComplete = { xi.quest.log_id.JEUNO, xi.quest.id.jeuno.RIDING_ON_THE_CLOUDS } },
+        reqs = { questComplete = { xi.questLog.JEUNO, xi.quest.id.jeuno.RIDING_ON_THE_CLOUDS } },
         flags = set { 'retro' },
         reward = { sparks = 100, xp = 300 },
     },
@@ -1074,7 +1074,7 @@ xi.roe.records =
     [709] =
     { -- Level Cap Increase: 75
         trigger = xi.roeTrigger.COMPLETE_QUEST,
-        reqs = { questComplete = { xi.quest.log_id.JEUNO, xi.quest.id.jeuno.SHATTERING_STARS } },
+        reqs = { questComplete = { xi.questLog.JEUNO, xi.quest.id.jeuno.SHATTERING_STARS } },
         flags = set { 'retro' },
         reward = { sparks = 100, xp = 300 },
     },
@@ -1082,7 +1082,7 @@ xi.roe.records =
     [710] =
     { -- Level Cap Increase: 80
         trigger = xi.roeTrigger.COMPLETE_QUEST,
-        reqs = { questComplete = { xi.quest.log_id.JEUNO, xi.quest.id.jeuno.NEW_WORLDS_AWAIT } },
+        reqs = { questComplete = { xi.questLog.JEUNO, xi.quest.id.jeuno.NEW_WORLDS_AWAIT } },
         flags = set { 'retro' },
         reward = { sparks = 100, xp = 300 },
     },
@@ -1090,7 +1090,7 @@ xi.roe.records =
     [711] =
     { -- Level Cap Increase: 85
         trigger = xi.roeTrigger.COMPLETE_QUEST,
-        reqs = { questComplete = { xi.quest.log_id.JEUNO, xi.quest.id.jeuno.EXPANDING_HORIZONS } },
+        reqs = { questComplete = { xi.questLog.JEUNO, xi.quest.id.jeuno.EXPANDING_HORIZONS } },
         flags = set { 'retro' },
         reward = { sparks = 100, xp = 300 },
     },
@@ -1098,7 +1098,7 @@ xi.roe.records =
     [712] =
     { -- Level Cap Increase: 90
         trigger = xi.roeTrigger.COMPLETE_QUEST,
-        reqs = { questComplete = { xi.quest.log_id.JEUNO, xi.quest.id.jeuno.BEYOND_THE_STARS } },
+        reqs = { questComplete = { xi.questLog.JEUNO, xi.quest.id.jeuno.BEYOND_THE_STARS } },
         flags = set { 'retro' },
         reward = { sparks = 100, xp = 300 },
     },
@@ -1106,7 +1106,7 @@ xi.roe.records =
     [713] =
     { -- Level Cap Increase: 95
         trigger = xi.roeTrigger.COMPLETE_QUEST,
-        reqs = { questComplete = { xi.quest.log_id.JEUNO, xi.quest.id.jeuno.DORMANT_POWERS_DISLODGED } },
+        reqs = { questComplete = { xi.questLog.JEUNO, xi.quest.id.jeuno.DORMANT_POWERS_DISLODGED } },
         flags = set { 'retro' },
         reward = { sparks = 100, xp = 300 },
     },
@@ -1114,7 +1114,7 @@ xi.roe.records =
     [714] =
     { -- Level Cap Increase: 99
         trigger = xi.roeTrigger.COMPLETE_QUEST,
-        reqs = { questComplete = { xi.quest.log_id.JEUNO, xi.quest.id.jeuno.BEYOND_INFINITY } },
+        reqs = { questComplete = { xi.questLog.JEUNO, xi.quest.id.jeuno.BEYOND_INFINITY } },
         flags = set { 'retro' },
         reward = { sparks = 100, xp = 300 },
     },
@@ -1126,7 +1126,7 @@ xi.roe.records =
     [715] =
     { -- Inventory Expansion 35
         trigger = xi.roeTrigger.COMPLETE_QUEST,
-        reqs = { questComplete = { xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_GOBBIEBAG_PART_I } },
+        reqs = { questComplete = { xi.questLog.JEUNO, xi.quest.id.jeuno.THE_GOBBIEBAG_PART_I } },
         flags = set { 'retro' },
         reward = { sparks = 100, xp = 300 },
     },
@@ -1134,7 +1134,7 @@ xi.roe.records =
     [716] =
     { -- Inventory Expansion 40
         trigger = xi.roeTrigger.COMPLETE_QUEST,
-        reqs = { questComplete = { xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_GOBBIEBAG_PART_II } },
+        reqs = { questComplete = { xi.questLog.JEUNO, xi.quest.id.jeuno.THE_GOBBIEBAG_PART_II } },
         flags = set { 'retro' },
         reward = { sparks = 100, xp = 300 },
     },
@@ -1142,7 +1142,7 @@ xi.roe.records =
     [717] =
     { -- Inventory Expansion 45
         trigger = xi.roeTrigger.COMPLETE_QUEST,
-        reqs = { questComplete = { xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_GOBBIEBAG_PART_III } },
+        reqs = { questComplete = { xi.questLog.JEUNO, xi.quest.id.jeuno.THE_GOBBIEBAG_PART_III } },
         flags = set { 'retro' },
         reward = { sparks = 100, xp = 300 },
     },
@@ -1150,7 +1150,7 @@ xi.roe.records =
     [718] =
     { -- Inventory Expansion 50
         trigger = xi.roeTrigger.COMPLETE_QUEST,
-        reqs = { questComplete = { xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_GOBBIEBAG_PART_IV } },
+        reqs = { questComplete = { xi.questLog.JEUNO, xi.quest.id.jeuno.THE_GOBBIEBAG_PART_IV } },
         flags = set { 'retro' },
         reward = { sparks = 100, xp = 300 },
     },
@@ -1158,7 +1158,7 @@ xi.roe.records =
     [719] =
     { -- Inventory Expansion 55
         trigger = xi.roeTrigger.COMPLETE_QUEST,
-        reqs = { questComplete = { xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_GOBBIEBAG_PART_V } },
+        reqs = { questComplete = { xi.questLog.JEUNO, xi.quest.id.jeuno.THE_GOBBIEBAG_PART_V } },
         flags = set { 'retro' },
         reward = { sparks = 100, xp = 300 },
     },
@@ -1166,7 +1166,7 @@ xi.roe.records =
     [720] =
     { -- Inventory Expansion 60
         trigger = xi.roeTrigger.COMPLETE_QUEST,
-        reqs = { questComplete = { xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_GOBBIEBAG_PART_VI } },
+        reqs = { questComplete = { xi.questLog.JEUNO, xi.quest.id.jeuno.THE_GOBBIEBAG_PART_VI } },
         flags = set { 'retro' },
         reward = { sparks = 100, xp = 300 },
     },
@@ -1174,7 +1174,7 @@ xi.roe.records =
     [721] =
     { -- Inventory Expansion 65
         trigger = xi.roeTrigger.COMPLETE_QUEST,
-        reqs = { questComplete = { xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_GOBBIEBAG_PART_VII } },
+        reqs = { questComplete = { xi.questLog.JEUNO, xi.quest.id.jeuno.THE_GOBBIEBAG_PART_VII } },
         flags = set { 'retro' },
         reward = { sparks = 100, xp = 300 },
     },
@@ -1182,7 +1182,7 @@ xi.roe.records =
     [722] =
     { -- Inventory Expansion 70
         trigger = xi.roeTrigger.COMPLETE_QUEST,
-        reqs = { questComplete = { xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_GOBBIEBAG_PART_VIII } },
+        reqs = { questComplete = { xi.questLog.JEUNO, xi.quest.id.jeuno.THE_GOBBIEBAG_PART_VIII } },
         flags = set { 'retro' },
         reward = { sparks = 100, xp = 300 },
     },
@@ -1190,7 +1190,7 @@ xi.roe.records =
     [723] =
     { -- Inventory Expansion 75
         trigger = xi.roeTrigger.COMPLETE_QUEST,
-        reqs = { questComplete = { xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_GOBBIEBAG_PART_IX } },
+        reqs = { questComplete = { xi.questLog.JEUNO, xi.quest.id.jeuno.THE_GOBBIEBAG_PART_IX } },
         flags = set { 'retro' },
         reward = { sparks = 100, xp = 300 },
     },
@@ -1198,7 +1198,7 @@ xi.roe.records =
     [724] =
     { -- Inventory Expansion 80
         trigger = xi.roeTrigger.COMPLETE_QUEST,
-        reqs = { questComplete = { xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_GOBBIEBAG_PART_X } },
+        reqs = { questComplete = { xi.questLog.JEUNO, xi.quest.id.jeuno.THE_GOBBIEBAG_PART_X } },
         flags = set { 'retro' },
         reward = { sparks = 100, xp = 300 },
     },
@@ -1206,7 +1206,7 @@ xi.roe.records =
     [939] =
     { -- Mog Safe Expansion: 60
         trigger = xi.roeTrigger.COMPLETE_QUEST,
-        reqs = { questComplete = { xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.GIVE_A_MOOGLE_A_BREAK } },
+        reqs = { questComplete = { xi.questLog.OTHER_AREAS, xi.quest.id.otherAreas.GIVE_A_MOOGLE_A_BREAK } },
         flags = set { 'retro' },
         reward = { sparks = 100, xp = 300 },
     },
@@ -1214,7 +1214,7 @@ xi.roe.records =
     [940] =
     { -- Mog Safe Expansion: 70
         trigger = xi.roeTrigger.COMPLETE_QUEST,
-        reqs = { questComplete = { xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.THE_MOOGLE_PICNIC } },
+        reqs = { questComplete = { xi.questLog.OTHER_AREAS, xi.quest.id.otherAreas.THE_MOOGLE_PICNIC } },
         flags = set { 'retro' },
         reward = { sparks = 100, xp = 300 },
     },
@@ -1222,7 +1222,7 @@ xi.roe.records =
     [941] =
     { -- Mog Safe Expansion: 80
         trigger = xi.roeTrigger.COMPLETE_QUEST,
-        reqs = { questComplete = { xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.MOOGLES_IN_THE_WILD } },
+        reqs = { questComplete = { xi.questLog.OTHER_AREAS, xi.quest.id.otherAreas.MOOGLES_IN_THE_WILD } },
         flags = set { 'retro' },
         reward = { sparks = 100, xp = 300 },
     },
@@ -1234,7 +1234,7 @@ xi.roe.records =
     [839] =
     { -- Asuran Fists
         trigger = xi.roeTrigger.COMPLETE_QUEST,
-        reqs = { questComplete = { xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_WALLS_OF_YOUR_MIND } },
+        reqs = { questComplete = { xi.questLog.BASTOK, xi.quest.id.bastok.THE_WALLS_OF_YOUR_MIND } },
         flags = set { 'retro' },
         reward = { sparks = 100, xp = 300 },
     },
@@ -1242,7 +1242,7 @@ xi.roe.records =
     [840] =
     { -- Evisceration
         trigger = xi.roeTrigger.COMPLETE_QUEST,
-        reqs = { questComplete = { xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.CLOAK_AND_DAGGER } },
+        reqs = { questComplete = { xi.questLog.OUTLANDS, xi.quest.id.outlands.CLOAK_AND_DAGGER } },
         flags = set { 'retro' },
         reward = { sparks = 100, xp = 300 },
     },
@@ -1250,7 +1250,7 @@ xi.roe.records =
     [841] =
     { -- Savage Blade
         trigger = xi.roeTrigger.COMPLETE_QUEST,
-        reqs = { questComplete = { xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.OLD_WOUNDS } },
+        reqs = { questComplete = { xi.questLog.SANDORIA, xi.quest.id.sandoria.OLD_WOUNDS } },
         flags = set { 'retro' },
         reward = { sparks = 100, xp = 300 },
     },
@@ -1258,7 +1258,7 @@ xi.roe.records =
     [842] =
     { -- Ground Strike
         trigger = xi.roeTrigger.COMPLETE_QUEST,
-        reqs = { questComplete = { xi.quest.log_id.BASTOK, xi.quest.id.bastok.INHERITANCE } },
+        reqs = { questComplete = { xi.questLog.BASTOK, xi.quest.id.bastok.INHERITANCE } },
         flags = set { 'retro' },
         reward = { sparks = 100, xp = 300 },
     },
@@ -1266,7 +1266,7 @@ xi.roe.records =
     [843] =
     { -- Decimation
         trigger = xi.roeTrigger.COMPLETE_QUEST,
-        reqs = { questComplete = { xi.quest.log_id.JEUNO, xi.quest.id.jeuno.AXE_THE_COMPETITION } },
+        reqs = { questComplete = { xi.questLog.JEUNO, xi.quest.id.jeuno.AXE_THE_COMPETITION } },
         flags = set { 'retro' },
         reward = { sparks = 100, xp = 300 },
     },
@@ -1274,7 +1274,7 @@ xi.roe.records =
     [844] =
     { -- Steel Cyclone
         trigger = xi.roeTrigger.COMPLETE_QUEST,
-        reqs = { questComplete = { xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_WEIGHT_OF_YOUR_LIMITS } },
+        reqs = { questComplete = { xi.questLog.BASTOK, xi.quest.id.bastok.THE_WEIGHT_OF_YOUR_LIMITS } },
         flags = set { 'retro' },
         reward = { sparks = 100, xp = 300 },
     },
@@ -1282,7 +1282,7 @@ xi.roe.records =
     [845] =
     { -- Spiral Hell
         trigger = xi.roeTrigger.COMPLETE_QUEST,
-        reqs = { questComplete = { xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.SOULS_IN_SHADOW } },
+        reqs = { questComplete = { xi.questLog.SANDORIA, xi.quest.id.sandoria.SOULS_IN_SHADOW } },
         flags = set { 'retro' },
         reward = { sparks = 100, xp = 300 },
     },
@@ -1290,7 +1290,7 @@ xi.roe.records =
     [846] =
     { -- Impulse Drive
         trigger = xi.roeTrigger.COMPLETE_QUEST,
-        reqs = { questComplete = { xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.METHODS_CREATE_MADNESS } },
+        reqs = { questComplete = { xi.questLog.SANDORIA, xi.quest.id.sandoria.METHODS_CREATE_MADNESS } },
         flags = set { 'retro' },
         reward = { sparks = 100, xp = 300 },
     },
@@ -1298,7 +1298,7 @@ xi.roe.records =
     [847] =
     { -- Blade: Ku
         trigger = xi.roeTrigger.COMPLETE_QUEST,
-        reqs = { questComplete = { xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.BUGI_SODEN } },
+        reqs = { questComplete = { xi.questLog.OUTLANDS, xi.quest.id.outlands.BUGI_SODEN } },
         flags = set { 'retro' },
         reward = { sparks = 100, xp = 300 },
     },
@@ -1306,7 +1306,7 @@ xi.roe.records =
     [848] =
     { -- Tachi: Kasha
         trigger = xi.roeTrigger.COMPLETE_QUEST,
-        reqs = { questComplete = { xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.THE_POTENTIAL_WITHIN } },
+        reqs = { questComplete = { xi.questLog.OUTLANDS, xi.quest.id.outlands.THE_POTENTIAL_WITHIN } },
         flags = set { 'retro' },
         reward = { sparks = 100, xp = 300 },
     },
@@ -1314,7 +1314,7 @@ xi.roe.records =
     [849] =
     { -- Black Halo
         trigger = xi.roeTrigger.COMPLETE_QUEST,
-        reqs = { questComplete = { xi.quest.log_id.WINDURST, xi.quest.id.windurst.ORASTERY_WOES } },
+        reqs = { questComplete = { xi.questLog.WINDURST, xi.quest.id.windurst.ORASTERY_WOES } },
         flags = set { 'retro' },
         reward = { sparks = 100, xp = 300 },
     },
@@ -1322,7 +1322,7 @@ xi.roe.records =
     [850] =
     { -- Retribution
         trigger = xi.roeTrigger.COMPLETE_QUEST,
-        reqs = { questComplete = { xi.quest.log_id.WINDURST, xi.quest.id.windurst.BLOOD_AND_GLORY } },
+        reqs = { questComplete = { xi.questLog.WINDURST, xi.quest.id.windurst.BLOOD_AND_GLORY } },
         flags = set { 'retro' },
         reward = { sparks = 100, xp = 300 },
     },
@@ -1330,7 +1330,7 @@ xi.roe.records =
     [851] =
     { -- Empyreal Arrow
         trigger = xi.roeTrigger.COMPLETE_QUEST,
-        reqs = { questComplete = { xi.quest.log_id.WINDURST, xi.quest.id.windurst.FROM_SAPLINGS_GROW } },
+        reqs = { questComplete = { xi.questLog.WINDURST, xi.quest.id.windurst.FROM_SAPLINGS_GROW } },
         flags = set { 'retro' },
         reward = { sparks = 100, xp = 300 },
     },
@@ -1338,7 +1338,7 @@ xi.roe.records =
     [852] =
     { -- Detonator
         trigger = xi.roeTrigger.COMPLETE_QUEST,
-        reqs = { questComplete = { xi.quest.log_id.BASTOK, xi.quest.id.bastok.SHOOT_FIRST_ASK_QUESTIONS_LATER } },
+        reqs = { questComplete = { xi.questLog.BASTOK, xi.quest.id.bastok.SHOOT_FIRST_ASK_QUESTIONS_LATER } },
         flags = set { 'retro' },
         reward = { sparks = 100, xp = 300 },
     },

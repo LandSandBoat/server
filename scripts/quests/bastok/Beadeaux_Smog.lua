@@ -6,7 +6,7 @@
 -- qm1 (for KI) : !pos -58.873 1.026 -116.665 147
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.BASTOK, xi.quest.id.bastok.BEADEAUX_SMOG)
+local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.BEADEAUX_SMOG)
 
 quest.reward =
 {

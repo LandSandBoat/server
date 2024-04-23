@@ -6,7 +6,7 @@
 -- TORN_OUT_PAGES !addkeyitem 626
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.SIGNED_IN_BLOOD)
+local quest = Quest:new(xi.questLog.SANDORIA, xi.quest.id.sandoria.SIGNED_IN_BLOOD)
 
 quest.reward =
 {

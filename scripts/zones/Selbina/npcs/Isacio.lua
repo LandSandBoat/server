@@ -9,7 +9,7 @@ local ID = zones[xi.zone.SELBINA]
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    local questStatus = player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.ELDER_MEMORIES)
+    local questStatus = player:getQuestStatus(xi.questLog.OTHER_AREAS, xi.quest.id.otherAreas.ELDER_MEMORIES)
 
     if questStatus == xi.questStatus.QUEST_ACCEPTED then
         local IsacioElderMemVar = player:getCharVar('IsacioElderMemVar')
@@ -34,9 +34,9 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local questStatus = player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.ELDER_MEMORIES)
+    local questStatus = player:getQuestStatus(xi.questLog.OTHER_AREAS, xi.quest.id.otherAreas.ELDER_MEMORIES)
 
-    if player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.THE_OLD_LADY) ~= xi.questStatus.QUEST_AVAILABLE then
+    if player:getQuestStatus(xi.questLog.OTHER_AREAS, xi.quest.id.otherAreas.THE_OLD_LADY) ~= xi.questStatus.QUEST_AVAILABLE then
         player:startEvent(99)
     elseif questStatus == xi.questStatus.QUEST_COMPLETED then
         player:startEvent(118)
@@ -66,7 +66,7 @@ end
 
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 111 and option == 40 then
-        player:addQuest(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.ELDER_MEMORIES)
+        player:addQuest(xi.questLog.OTHER_AREAS, xi.quest.id.otherAreas.ELDER_MEMORIES)
         player:setCharVar('IsacioElderMemVar', 1)
     elseif csid == 115 then
         player:confirmTrade()
@@ -79,7 +79,7 @@ entity.onEventFinish = function(player, csid, option, npc)
         player:unlockJob(0)
         player:setCharVar('IsacioElderMemVar', 0)
         player:messageSpecial(ID.text.SUBJOB_UNLOCKED)
-        player:completeQuest(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.ELDER_MEMORIES)
+        player:completeQuest(xi.questLog.OTHER_AREAS, xi.quest.id.otherAreas.ELDER_MEMORIES)
     end
 end
 

@@ -1494,7 +1494,7 @@ xi.helm.result = function(player, helmType, broke, itemID)
     -- Quest: Vanishing Act
     if
         helmType == xi.helmType.HARVESTING and
-        player:getQuestStatus(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.VANISHING_ACT) == xi.questStatus.QUEST_ACCEPTED and
+        player:getQuestStatus(xi.questLog.AHT_URHGAN, xi.quest.id.ahtUrhgan.VANISHING_ACT) == xi.questStatus.QUEST_ACCEPTED and
         not player:hasKeyItem(xi.ki.RAINBOW_BERRY) and
         broke ~= 1 and
         zoneId == xi.zone.WAJAOM_WOODLANDS

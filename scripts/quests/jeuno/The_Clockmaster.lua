@@ -6,7 +6,7 @@
 -- Collet : !pos -44 0 107 244
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_CLOCKMASTER)
+local quest = Quest:new(xi.questLog.JEUNO, xi.quest.id.jeuno.THE_CLOCKMASTER)
 
 quest.reward =
 {
@@ -21,7 +21,7 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == xi.questStatus.QUEST_AVAILABLE and
-                player:hasCompletedQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.SAVE_THE_CLOCK_TOWER) and
+                player:hasCompletedQuest(xi.questLog.JEUNO, xi.quest.id.jeuno.SAVE_THE_CLOCK_TOWER) and
                 player:getFameLevel(xi.quest.fame_area.JEUNO) >= 5
         end,
 

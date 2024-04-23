@@ -68,17 +68,17 @@ end
 entity.onTrade = function(player, npc, trade)
     if
         npcUtil.tradeHasExactly(trade, { 1696, 1697, 1698 }) and -- Magicked Steel Ingot, Spruce Lumber, Extra-fine File
-        player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.TUNING_IN) == xi.questStatus.QUEST_ACCEPTED
+        player:getQuestStatus(xi.questLog.WINDURST, xi.quest.id.windurst.TUNING_IN) == xi.questStatus.QUEST_ACCEPTED
     then
         player:startEvent(886)
     end
 end
 
 entity.onTrigger = function(player, npc)
-    local moonlitPath = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_MOONLIT_PATH)
-    local tuningIn = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.TUNING_IN)
-    local tuningOut = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.TUNING_OUT)
-    local turmoil = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.TORAIMARAI_TURMOIL)
+    local moonlitPath = player:getQuestStatus(xi.questLog.WINDURST, xi.quest.id.windurst.THE_MOONLIT_PATH)
+    local tuningIn = player:getQuestStatus(xi.questLog.WINDURST, xi.quest.id.windurst.TUNING_IN)
+    local tuningOut = player:getQuestStatus(xi.questLog.WINDURST, xi.quest.id.windurst.TUNING_OUT)
+    local turmoil = player:getQuestStatus(xi.questLog.WINDURST, xi.quest.id.windurst.TORAIMARAI_TURMOIL)
 
     -- Tuning In
     if
@@ -154,7 +154,7 @@ end
 entity.onEventFinish = function(player, csid, option, npc)
     -- Moonlit Path and Other Fenrir Stuff
     if csid == 842 and option == 2 then
-        player:addQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_MOONLIT_PATH)
+        player:addQuest(xi.questLog.WINDURST, xi.quest.id.windurst.THE_MOONLIT_PATH)
     elseif csid == 844 then
         player:addKeyItem(xi.ki.MOON_BAUBLE)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.MOON_BAUBLE)
@@ -164,12 +164,12 @@ entity.onEventFinish = function(player, csid, option, npc)
         player:delKeyItem(xi.ki.WHISPER_OF_GALES)
         player:delKeyItem(xi.ki.WHISPER_OF_FROST)
         player:delKeyItem(xi.ki.WHISPER_OF_STORMS)
-        player:delQuest(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.TRIAL_BY_FIRE)
-        player:delQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.TRIAL_BY_EARTH)
-        player:delQuest(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.TRIAL_BY_WATER)
-        player:delQuest(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.TRIAL_BY_WIND)
-        player:delQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.TRIAL_BY_ICE)
-        player:delQuest(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.TRIAL_BY_LIGHTNING)
+        player:delQuest(xi.questLog.OUTLANDS, xi.quest.id.outlands.TRIAL_BY_FIRE)
+        player:delQuest(xi.questLog.BASTOK, xi.quest.id.bastok.TRIAL_BY_EARTH)
+        player:delQuest(xi.questLog.OUTLANDS, xi.quest.id.outlands.TRIAL_BY_WATER)
+        player:delQuest(xi.questLog.OUTLANDS, xi.quest.id.outlands.TRIAL_BY_WIND)
+        player:delQuest(xi.questLog.SANDORIA, xi.quest.id.sandoria.TRIAL_BY_ICE)
+        player:delQuest(xi.questLog.OTHER_AREAS, xi.quest.id.otherAreas.TRIAL_BY_LIGHTNING)
     elseif csid == 846 or csid == 850 then -- Turn-in event
         local reward = 0
         if option == 1 then
@@ -199,8 +199,8 @@ entity.onEventFinish = function(player, csid, option, npc)
         player:setCharVar('MoonlitPath_date', getMidnight())
         player:addFame(xi.quest.fame_area.WINDURST, 30)
 
-        if player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_MOONLIT_PATH) == xi.questStatus.QUEST_ACCEPTED then
-            player:completeQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_MOONLIT_PATH)
+        if player:getQuestStatus(xi.questLog.WINDURST, xi.quest.id.windurst.THE_MOONLIT_PATH) == xi.questStatus.QUEST_ACCEPTED then
+            player:completeQuest(xi.questLog.WINDURST, xi.quest.id.windurst.THE_MOONLIT_PATH)
         end
 
         if reward ~= 0 then
@@ -210,7 +210,7 @@ entity.onEventFinish = function(player, csid, option, npc)
         if
             player:getNation() == xi.nation.WINDURST and
             player:getRank(player:getNation()) == 10 and
-            player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_PROMISE) == xi.questStatus.QUEST_COMPLETED
+            player:getQuestStatus(xi.questLog.WINDURST, xi.quest.id.windurst.THE_PROMISE) == xi.questStatus.QUEST_COMPLETED
         then
             npcUtil.giveKeyItem(player, xi.ki.DARK_MANA_ORB)
         end
@@ -219,11 +219,11 @@ entity.onEventFinish = function(player, csid, option, npc)
 
     -- Tuning In
     elseif csid == 884 then
-        player:addQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.TUNING_IN)
+        player:addQuest(xi.questLog.WINDURST, xi.quest.id.windurst.TUNING_IN)
 
     elseif
         csid == 886 and
-        npcUtil.completeQuest(player, xi.quest.log_id.WINDURST, xi.quest.id.windurst.TUNING_IN, {
+        npcUtil.completeQuest(player, xi.questLog.WINDURST, xi.quest.id.windurst.TUNING_IN, {
             gil = 4000,
             title = xi.title.FINE_TUNER,
         })
@@ -233,11 +233,11 @@ entity.onEventFinish = function(player, csid, option, npc)
     -- Tuning Out
     elseif csid == 888 then
         player:setCharVar('TuningOut_Progress', 1)
-        player:addQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.TUNING_OUT)
+        player:addQuest(xi.questLog.WINDURST, xi.quest.id.windurst.TUNING_OUT)
 
     elseif
         csid == 897 and
-        npcUtil.completeQuest(player, xi.quest.log_id.WINDURST, xi.quest.id.windurst.TUNING_OUT, {
+        npcUtil.completeQuest(player, xi.questLog.WINDURST, xi.quest.id.windurst.TUNING_OUT, {
             item = 15180, -- Cache-Nez
             title = xi.title.FRIEND_OF_THE_HELMED,
         })

@@ -63,7 +63,7 @@ entity.onEventFinish = function(player, csid, option, npc)
             npcUtil.giveCurrency(player, 'gil', 3000)
             player:addItem(xi.item.SCROLL_OF_SLEEPGA_II)
             player:messageSpecial(ID.text.ITEM_OBTAINED, xi.item.SCROLL_OF_SLEEPGA_II)
-            player:addFame(xi.fameArea.JEUNO, 30)
+            player:addFame(xi.quest.fame_area.JEUNO, 30)
             player:completeQuest(xi.questLog.JEUNO, xi.quest.id.jeuno.SEARCHING_FOR_THE_RIGHT_WORDS)
             player:setCharVar('SearchingForRightWords_postcs', -2)
         end

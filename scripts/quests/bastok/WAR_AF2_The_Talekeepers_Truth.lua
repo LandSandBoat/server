@@ -9,7 +9,7 @@
 local palboroughMinesID = zones[xi.zone.PALBOROUGH_MINES]
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_TALEKEEPERS_TRUTH)
+local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.THE_TALEKEEPERS_TRUTH)
 
 quest.reward =
 {
@@ -23,7 +23,7 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == xi.questStatus.QUEST_AVAILABLE and
-                player:hasCompletedQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_DOORMAN) and
+                player:hasCompletedQuest(xi.questLog.BASTOK, xi.quest.id.bastok.THE_DOORMAN) and
                 player:getMainJob() == xi.job.WAR and
                 player:getMainLvl() >= 50
         end,
@@ -122,8 +122,8 @@ quest.sections =
 
                 [165] = function(player, csid, option, npc)
                     if quest:complete(player) then
-                        xi.quest.setVar(player, xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_TALEKEEPERS_GIFT, 'Timer', VanadielUniqueDay() + 1)
-                        xi.quest.setMustZone(player, xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_TALEKEEPERS_GIFT)
+                        xi.quest.setVar(player, xi.questLog.BASTOK, xi.quest.id.bastok.THE_TALEKEEPERS_GIFT, 'Timer', VanadielUniqueDay() + 1)
+                        xi.quest.setMustZone(player, xi.questLog.BASTOK, xi.quest.id.bastok.THE_TALEKEEPERS_GIFT)
                     end
                 end,
             },

@@ -12,7 +12,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local trialByWater = player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.TRIAL_BY_WATER)
+    local trialByWater = player:getQuestStatus(xi.questLog.OUTLANDS, xi.quest.id.outlands.TRIAL_BY_WATER)
     local hasWhisperOfTides = player:hasKeyItem(xi.ki.WHISPER_OF_TIDES)
 
     if
@@ -62,11 +62,11 @@ end
 
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 109 and option == 1 then
-        if player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.TRIAL_BY_WATER) == xi.questStatus.QUEST_COMPLETED then
-            player:delQuest(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.TRIAL_BY_WATER)
+        if player:getQuestStatus(xi.questLog.OUTLANDS, xi.quest.id.outlands.TRIAL_BY_WATER) == xi.questStatus.QUEST_COMPLETED then
+            player:delQuest(xi.questLog.OUTLANDS, xi.quest.id.outlands.TRIAL_BY_WATER)
         end
 
-        player:addQuest(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.TRIAL_BY_WATER)
+        player:addQuest(xi.questLog.OUTLANDS, xi.quest.id.outlands.TRIAL_BY_WATER)
         player:setCharVar('TrialByWater_date', 0)
         player:addKeyItem(xi.ki.TUNING_FORK_OF_WATER)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.TUNING_FORK_OF_WATER)
@@ -102,7 +102,7 @@ entity.onEventFinish = function(player, csid, option, npc)
             player:delKeyItem(xi.ki.WHISPER_OF_TIDES) --Whisper of Tides, as a trade for the above rewards
             player:setCharVar('TrialByWater_date', getMidnight())
             player:addFame(xi.quest.fame_area.NORG, 30)
-            player:completeQuest(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.TRIAL_BY_WATER)
+            player:completeQuest(xi.questLog.OUTLANDS, xi.quest.id.outlands.TRIAL_BY_WATER)
         end
     end
 end

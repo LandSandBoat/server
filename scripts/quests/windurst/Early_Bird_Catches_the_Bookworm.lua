@@ -8,7 +8,7 @@
 -- Quu Bokye       : !pos -159 16 181 145
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.WINDURST, xi.quest.id.windurst.EARLY_BIRD_CATCHES_THE_BOOKWORM)
+local quest = Quest:new(xi.questLog.WINDURST, xi.quest.id.windurst.EARLY_BIRD_CATCHES_THE_BOOKWORM)
 
 quest.reward =
 {
@@ -23,7 +23,7 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == xi.questStatus.QUEST_AVAILABLE and
-                player:hasCompletedQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.GLYPH_HANGER) and
+                player:hasCompletedQuest(xi.questLog.WINDURST, xi.quest.id.windurst.GLYPH_HANGER) and
                 player:getFameLevel(xi.quest.fame_area.WINDURST) >= 2 and
                 not quest:getMustZone(player)
         end,

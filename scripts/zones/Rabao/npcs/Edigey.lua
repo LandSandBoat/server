@@ -8,7 +8,7 @@ local ID = zones[xi.zone.RABAO]
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    local forgetTheAntidote = player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.DONT_FORGET_THE_ANTIDOTE)
+    local forgetTheAntidote = player:getQuestStatus(xi.questLog.OUTLANDS, xi.quest.id.outlands.DONT_FORGET_THE_ANTIDOTE)
 
     if
         (forgetTheAntidote == xi.questStatus.QUEST_ACCEPTED or forgetTheAntidote == xi.questStatus.QUEST_COMPLETED) and
@@ -20,7 +20,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local forgetTheAntidote = player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.DONT_FORGET_THE_ANTIDOTE)
+    local forgetTheAntidote = player:getQuestStatus(xi.questLog.OUTLANDS, xi.quest.id.outlands.DONT_FORGET_THE_ANTIDOTE)
 
     if
         forgetTheAntidote == xi.questStatus.QUEST_AVAILABLE and
@@ -41,7 +41,7 @@ end
 
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 2 and option == 1 then
-        player:addQuest(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.DONT_FORGET_THE_ANTIDOTE)
+        player:addQuest(xi.questLog.OUTLANDS, xi.quest.id.outlands.DONT_FORGET_THE_ANTIDOTE)
         player:setCharVar('DontForgetAntidoteVar', 1)
     elseif csid == 4 and player:getCharVar('DontForgetAntidoteVar') == 1 then --If completing for the first time
         player:setCharVar('DontForgetAntidoteVar', 0)
@@ -49,7 +49,7 @@ entity.onEventFinish = function(player, csid, option, npc)
         player:addTitle(xi.title.DESERT_HUNTER)
         player:addItem(xi.item.DOTANUKI) -- Dotanuki
         player:messageSpecial(ID.text.ITEM_OBTAINED, xi.item.DOTANUKI)
-        player:completeQuest(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.DONT_FORGET_THE_ANTIDOTE)
+        player:completeQuest(xi.questLog.OUTLANDS, xi.quest.id.outlands.DONT_FORGET_THE_ANTIDOTE)
         player:addFame(xi.quest.fame_area.SELBINA_RABAO, 60)
     elseif csid == 4 then --Subsequent completions
         player:tradeComplete()

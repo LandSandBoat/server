@@ -5,7 +5,7 @@
 -- Unlucky Rat : -59.724 1.999 30.179 237
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.BASTOK, xi.quest.id.bastok.MEAN_MACHINE)
+local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.MEAN_MACHINE)
 
 quest.reward =
 {

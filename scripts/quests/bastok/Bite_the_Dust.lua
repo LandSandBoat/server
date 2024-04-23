@@ -5,7 +5,7 @@
 -- Yazan : !pos -20.06 -3.3 24.471 236
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.BASTOK, xi.quest.id.bastok.BITE_THE_DUST)
+local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.BITE_THE_DUST)
 
 quest.reward =
 {

@@ -5,7 +5,7 @@
 -- Kurando : !pos -23.887 3.898 0.870 236
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.BASTOK, xi.quest.id.bastok.FEAR_OF_FLYING)
+local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.FEAR_OF_FLYING)
 
 quest.reward =
 {

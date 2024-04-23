@@ -10,14 +10,14 @@ end
 
 entity.onTrigger = function(player, npc)
     if
-        player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.APOCALYPSE_NIGH) == xi.questStatus.QUEST_ACCEPTED and
+        player:getQuestStatus(xi.questLog.JEUNO, xi.quest.id.jeuno.APOCALYPSE_NIGH) == xi.questStatus.QUEST_ACCEPTED and
         player:getCharVar('ApocalypseNigh') == 6 and
         player:getCharVar('Apoc_Nigh_RewardCS1') == 0
     then
         player:startEvent(232, 252)
     elseif player:getCharVar('Apoc_Nigh_RewardCS1') == 1 then
         player:startEvent(234, 252)
-    elseif player:hasCompletedQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.APOCALYPSE_NIGH) then
+    elseif player:hasCompletedQuest(xi.questLog.JEUNO, xi.quest.id.jeuno.APOCALYPSE_NIGH) then
         player:startEvent(233)
     end
 end
@@ -47,7 +47,7 @@ entity.onEventFinish = function(player, csid, option, npc)
 
         if reward ~= 0 then
             if
-                npcUtil.completeQuest(player, xi.quest.log_id.JEUNO, xi.quest.id.jeuno.APOCALYPSE_NIGH, {
+                npcUtil.completeQuest(player, xi.questLog.JEUNO, xi.quest.id.jeuno.APOCALYPSE_NIGH, {
                     item = reward,
                     var = { 'ApocalypseNigh', 'Apoc_Nigh_Reward', 'Apoc_Nigh_RewardCS1' }
                 })

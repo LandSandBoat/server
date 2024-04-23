@@ -6,7 +6,7 @@
 -- TRAINEE_GLOVES: !additem 15008
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.ATELLOUNES_LAMENT)
+local quest = Quest:new(xi.questLog.SANDORIA, xi.quest.id.sandoria.ATELLOUNES_LAMENT)
 
 quest.reward =
 {
@@ -22,7 +22,7 @@ quest.sections =
         check = function(player, status, vars)
             return status == xi.questStatus.QUEST_AVAILABLE and
                 player:getFameLevel(xi.quest.fame_area.SANDORIA) >= 2 and
-                player:getQuestStatus(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.SEEING_SPOTS) == xi.questStatus.QUEST_COMPLETED
+                player:getQuestStatus(xi.questLog.CRYSTAL_WAR, xi.quest.id.crystalWar.SEEING_SPOTS) == xi.questStatus.QUEST_COMPLETED
         end,
 
         [xi.zone.SOUTHERN_SAN_DORIA] =

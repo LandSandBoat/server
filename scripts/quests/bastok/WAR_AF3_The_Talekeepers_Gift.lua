@@ -9,7 +9,7 @@
 local behemothsDominionID = zones[xi.zone.BEHEMOTHS_DOMINION]
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_TALEKEEPERS_GIFT)
+local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.THE_TALEKEEPERS_GIFT)
 
 quest.reward =
 {
@@ -24,7 +24,7 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == xi.questStatus.QUEST_AVAILABLE and
-                player:hasCompletedQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_TALEKEEPERS_TRUTH) and
+                player:hasCompletedQuest(xi.questLog.BASTOK, xi.quest.id.bastok.THE_TALEKEEPERS_TRUTH) and
                 player:getMainJob() == xi.job.WAR and
                 quest:getVar(player, 'Timer') <= VanadielUniqueDay() and
                 not quest:getMustZone(player)

@@ -11,7 +11,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local fangedOne = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_FANGED_ONE)
+    local fangedOne = player:getQuestStatus(xi.questLog.WINDURST, xi.quest.id.windurst.THE_FANGED_ONE)
     local fangedOneCS = player:getCharVar('TheFangedOneCS')
 
     -- THE FANGED ONE

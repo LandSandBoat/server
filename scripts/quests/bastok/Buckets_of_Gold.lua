@@ -5,7 +5,7 @@
 -- Foss : !pos -283 -12 -37 235
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.BASTOK, xi.quest.id.bastok.BUCKETS_OF_GOLD)
+local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.BUCKETS_OF_GOLD)
 
 quest.reward =
 {

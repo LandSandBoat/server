@@ -11,7 +11,7 @@ local onzozoID  = zones[xi.zone.LABYRINTH_OF_ONZOZO]
 local valkurmID = zones[xi.zone.VALKURM_DUNES]
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.YOMI_OKURI)
+local quest = Quest:new(xi.questLog.OUTLANDS, xi.quest.id.outlands.YOMI_OKURI)
 
 quest.reward =
 {
@@ -25,7 +25,7 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == xi.questStatus.QUEST_AVAILABLE and
-                player:hasCompletedQuest(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.THE_SACRED_KATANA) and
+                player:hasCompletedQuest(xi.questLog.OUTLANDS, xi.quest.id.outlands.THE_SACRED_KATANA) and
                 player:getMainJob() == xi.job.SAM and
                 player:getMainLvl() >= xi.settings.main.AF2_QUEST_LEVEL
         end,

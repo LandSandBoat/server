@@ -10,18 +10,18 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local theKindCardian = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_KIND_CARDIAN)
+    local theKindCardian = player:getQuestStatus(xi.questLog.JEUNO, xi.quest.id.jeuno.THE_KIND_CARDIAN)
 
-    if player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_WONDER_MAGIC_SET) == xi.questStatus.QUEST_AVAILABLE then
+    if player:getQuestStatus(xi.questLog.JEUNO, xi.quest.id.jeuno.THE_WONDER_MAGIC_SET) == xi.questStatus.QUEST_AVAILABLE then
         player:startEvent(34) -- Base Standard CS & dialog
-    elseif player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.COOK_S_PRIDE) ~= xi.questStatus.QUEST_COMPLETED then
+    elseif player:getQuestStatus(xi.questLog.JEUNO, xi.quest.id.jeuno.COOK_S_PRIDE) ~= xi.questStatus.QUEST_COMPLETED then
         local rand = math.random(1, 2)
         if rand == 1 then
             player:startEvent(75) -- During Panta and Naruru Quests
         else
             player:startEvent(32) -- Same
         end
-    elseif player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_LOST_CARDIAN) == xi.questStatus.QUEST_AVAILABLE then
+    elseif player:getQuestStatus(xi.questLog.JEUNO, xi.quest.id.jeuno.THE_LOST_CARDIAN) == xi.questStatus.QUEST_AVAILABLE then
         if player:getCharVar('theLostCardianVar') == 0 then
             player:startEvent(29) -- First dialog for "The lost cardian" quest
         else

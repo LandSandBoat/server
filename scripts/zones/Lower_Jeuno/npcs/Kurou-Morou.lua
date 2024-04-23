@@ -9,7 +9,7 @@ local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     if
-        player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.YOUR_CRYSTAL_BALL) == xi.questStatus.QUEST_ACCEPTED and
+        player:getQuestStatus(xi.questLog.JEUNO, xi.quest.id.jeuno.YOUR_CRYSTAL_BALL) == xi.questStatus.QUEST_ACCEPTED and
         trade:getItemCount() == 1
     then
         if trade:hasItemQty(xi.item.AHRIMAN_LENS, 1) then
@@ -19,7 +19,7 @@ entity.onTrade = function(player, npc, trade)
         end
 
     elseif
-        player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.NEVER_TO_RETURN) == xi.questStatus.QUEST_ACCEPTED and
+        player:getQuestStatus(xi.questLog.JEUNO, xi.quest.id.jeuno.NEVER_TO_RETURN) == xi.questStatus.QUEST_ACCEPTED and
         trade:hasItemQty(xi.item.HORN_HAIRPIN, 1) and
         trade:getItemCount() == 1
     then
@@ -28,10 +28,10 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local yourCrystalBall           = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.YOUR_CRYSTAL_BALL)
-    local searchingForTheRightWords = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.SEARCHING_FOR_THE_RIGHT_WORDS)
-    local rubbishDay                = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.RUBBISH_DAY)
-    local neverToReturn             = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.NEVER_TO_RETURN)
+    local yourCrystalBall           = player:getQuestStatus(xi.questLog.JEUNO, xi.quest.id.jeuno.YOUR_CRYSTAL_BALL)
+    local searchingForTheRightWords = player:getQuestStatus(xi.questLog.JEUNO, xi.quest.id.jeuno.SEARCHING_FOR_THE_RIGHT_WORDS)
+    local rubbishDay                = player:getQuestStatus(xi.questLog.JEUNO, xi.quest.id.jeuno.RUBBISH_DAY)
+    local neverToReturn             = player:getQuestStatus(xi.questLog.JEUNO, xi.quest.id.jeuno.NEVER_TO_RETURN)
     local jeunoFame                 = player:getFameLevel(xi.quest.fame_area.JEUNO)
     local searchingForWordsPrereq   = player:getCharVar('QuestSearchRightWords_prereq')
 
@@ -44,7 +44,7 @@ entity.onTrigger = function(player, npc)
     elseif
         jeunoFame >= 5 and
         yourCrystalBall == xi.questStatus.QUEST_COMPLETED and
-        player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.NEVER_TO_RETURN) == xi.questStatus.QUEST_AVAILABLE and
+        player:getQuestStatus(xi.questLog.JEUNO, xi.quest.id.jeuno.NEVER_TO_RETURN) == xi.questStatus.QUEST_AVAILABLE and
         player:getCharVar('QuestNeverToReturn_day') ~= VanadielDayOfTheYear()
     then
         local prog = player:getCharVar('QuestNeverToReturn_prog')
@@ -73,7 +73,7 @@ entity.onTrigger = function(player, npc)
 
     --conditions for searching for the right words
     elseif
-        player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.A_CANDLELIGHT_VIGIL) == xi.questStatus.QUEST_COMPLETED and
+        player:getQuestStatus(xi.questLog.JEUNO, xi.quest.id.jeuno.A_CANDLELIGHT_VIGIL) == xi.questStatus.QUEST_COMPLETED and
         rubbishDay == xi.questStatus.QUEST_COMPLETED and
         neverToReturn == xi.questStatus.QUEST_COMPLETED and
         searchingForTheRightWords == xi.questStatus.QUEST_AVAILABLE
@@ -90,20 +90,20 @@ end
 
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 194 and option == 0 then
-        player:addQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.YOUR_CRYSTAL_BALL)
+        player:addQuest(xi.questLog.JEUNO, xi.quest.id.jeuno.YOUR_CRYSTAL_BALL)
 
     elseif csid == 196 then
         player:addTitle(xi.title.FORTUNE_TELLER_IN_TRAINING)
         player:addFame(xi.quest.fame_area.JEUNO, 30)
         player:tradeComplete()
-        player:completeQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.YOUR_CRYSTAL_BALL)
+        player:completeQuest(xi.questLog.JEUNO, xi.quest.id.jeuno.YOUR_CRYSTAL_BALL)
 
     elseif csid == 204 and option == 0 then
         player:incrementCharVar('QuestNeverToReturn_prog', 1)  -- Keep track of how many times the players fortune has been read
         player:setCharVar('QuestNeverToReturn_day', VanadielDayOfTheYear()) -- new vanadiel day
 
     elseif csid == 202 and option == 0 then
-        player:addQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.NEVER_TO_RETURN)
+        player:addQuest(xi.questLog.JEUNO, xi.quest.id.jeuno.NEVER_TO_RETURN)
         player:setCharVar('QuestNeverToReturn_prog', 0)
         player:setCharVar('QuestNeverToReturn_day', 0)
 
@@ -116,7 +116,7 @@ entity.onEventFinish = function(player, csid, option, npc)
             player:messageSpecial(ID.text.ITEM_OBTAINED, xi.item.GARNET_RING)
             player:addFame(xi.quest.fame_area.JEUNO, 30)
             player:tradeComplete()
-            player:completeQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.NEVER_TO_RETURN)
+            player:completeQuest(xi.questLog.JEUNO, xi.quest.id.jeuno.NEVER_TO_RETURN)
         end
 
     elseif csid == 17 then

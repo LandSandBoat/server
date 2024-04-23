@@ -7,7 +7,7 @@
 -- Koru-Moru                : !pos -120 -6 124 239
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_PUPPET_MASTER)
+local quest = Quest:new(xi.questLog.WINDURST, xi.quest.id.windurst.THE_PUPPET_MASTER)
 
 quest.reward =
 {
@@ -68,7 +68,7 @@ quest.sections =
             {
                 [404] = function(player, csid, option, npc)
                     if quest:complete(player) then
-                        xi.quest.setMustZone(player, xi.quest.log_id.WINDURST, xi.quest.id.windurst.CLASS_REUNION)
+                        xi.quest.setMustZone(player, xi.questLog.WINDURST, xi.quest.id.windurst.CLASS_REUNION)
                     end
                 end,
             },
@@ -131,7 +131,7 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == xi.questStatus.QUEST_COMPLETED and
-                not player:hasCompletedQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CLASS_REUNION)
+                not player:hasCompletedQuest(xi.questLog.WINDURST, xi.quest.id.windurst.CLASS_REUNION)
         end,
 
         [xi.zone.WINDURST_WALLS] =

@@ -6,7 +6,7 @@
 -- _6s2   : !pos -80 0 104 244
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.A_CLOCK_MOST_DELICATE)
+local quest = Quest:new(xi.questLog.JEUNO, xi.quest.id.jeuno.A_CLOCK_MOST_DELICATE)
 
 quest.reward =
 {

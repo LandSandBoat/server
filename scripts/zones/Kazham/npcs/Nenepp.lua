@@ -82,7 +82,7 @@ entity.onEventFinish = function(player, csid, option, npc)
     if csid == 241 then    -- correct trade, finished quest and receive opo opo crown and 3 pamamas
         if player:getFreeSlotsCount() >= 4 then
             player:tradeComplete()
-            player:addFame(xi.fameArea.WINDURST, 75)
+            player:addFame(xi.quest.fame_area.WINDURST, 75)
             player:completeQuest(xi.questLog.OUTLANDS, xi.quest.id.outlands.THE_OPO_OPO_AND_I)
             player:addItem(xi.item.OPO_OPO_CROWN)   -- opo opo crown
             player:messageSpecial(ID.text.ITEM_OBTAINED, xi.item.OPO_OPO_CROWN)

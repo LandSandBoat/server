@@ -9,7 +9,7 @@ local ID = zones[xi.zone.NORTHERN_SAN_DORIA]
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    local black = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.BLACKMAIL)
+    local black = player:getQuestStatus(xi.questLog.SANDORIA, xi.quest.id.sandoria.BLACKMAIL)
     local questState = player:getCharVar('BlackMailQuest')
 
     if black == xi.questStatus.QUEST_ACCEPTED and questState == 2 or black == xi.questStatus.QUEST_COMPLETED then
@@ -24,7 +24,7 @@ end
 
 entity.onTrigger = function(player, npc)
     -- "Blackmail" quest status
-    local blackMail = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.BLACKMAIL)
+    local blackMail = player:getQuestStatus(xi.questLog.SANDORIA, xi.quest.id.sandoria.BLACKMAIL)
     local sanFame = player:getFameLevel(xi.quest.fame_area.SANDORIA)
     local homeRank = player:getRank(player:getNation())
     local questState = player:getCharVar('BlackMailQuest')
@@ -58,7 +58,7 @@ end
 
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 643 then
-        player:addQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.BLACKMAIL)
+        player:addQuest(xi.questLog.SANDORIA, xi.quest.id.sandoria.BLACKMAIL)
         player:addKeyItem(xi.ki.SUSPICIOUS_ENVELOPE)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.SUSPICIOUS_ENVELOPE)
     elseif csid == 646 and option == 1 then
@@ -66,14 +66,14 @@ entity.onEventFinish = function(player, csid, option, npc)
     elseif csid == 648 then
         player:tradeComplete()
         npcUtil.giveCurrency(player, 'gil', 900)
-        if player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.BLACKMAIL) == xi.questStatus.QUEST_ACCEPTED then
+        if player:getQuestStatus(xi.questLog.SANDORIA, xi.quest.id.sandoria.BLACKMAIL) == xi.questStatus.QUEST_ACCEPTED then
             player:addFame(xi.quest.fame_area.SANDORIA, 30)
-            player:completeQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.BLACKMAIL)
+            player:completeQuest(xi.questLog.SANDORIA, xi.quest.id.sandoria.BLACKMAIL)
         else
             player:addFame(xi.quest.fame_area.SANDORIA, 5)
         end
     elseif csid == 40 and option == 1 then
-        player:addQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.BLACKMAIL)
+        player:addQuest(xi.questLog.SANDORIA, xi.quest.id.sandoria.BLACKMAIL)
     end
 end
 

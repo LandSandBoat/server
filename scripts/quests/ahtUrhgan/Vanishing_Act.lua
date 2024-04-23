@@ -5,7 +5,7 @@
 -- Qutiba, Whitegate, !pos 92 -7.5 -130 50
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.VANISHING_ACT)
+local quest = Quest:new(xi.questLog.AHT_URHGAN, xi.quest.id.ahtUrhgan.VANISHING_ACT)
 
 quest.reward =
 {
@@ -18,7 +18,7 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == xi.questStatus.QUEST_AVAILABLE and
-                player:hasCompletedQuest(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.DELIVERING_THE_GOODS)
+                player:hasCompletedQuest(xi.questLog.AHT_URHGAN, xi.quest.id.ahtUrhgan.DELIVERING_THE_GOODS)
         end,
 
         [xi.zone.AHT_URHGAN_WHITEGATE] =

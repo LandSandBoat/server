@@ -12,7 +12,7 @@ local entity = {}
 entity.onTrade = function(player, npc, trade)
     -- THE REQUIEM (holy water)
     if
-        player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_REQUIEM) == xi.questStatus.QUEST_ACCEPTED and
+        player:getQuestStatus(xi.questLog.JEUNO, xi.quest.id.jeuno.THE_REQUIEM) == xi.questStatus.QUEST_ACCEPTED and
         player:getCharVar('TheRequiemCS') == 2 and
         trade:hasItemQty(xi.item.FLASK_OF_HOLY_WATER, 1) and
         trade:getItemCount() == 1
@@ -22,18 +22,18 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local theRequiem = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_REQUIEM)
+    local theRequiem = player:getQuestStatus(xi.questLog.JEUNO, xi.quest.id.jeuno.THE_REQUIEM)
 
     -- PATH OF THE BARD (Bard Flag)
     if
-        player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.A_MINSTREL_IN_DESPAIR) == xi.questStatus.QUEST_COMPLETED and
+        player:getQuestStatus(xi.questLog.JEUNO, xi.quest.id.jeuno.A_MINSTREL_IN_DESPAIR) == xi.questStatus.QUEST_COMPLETED and
         player:getCharVar('PathOfTheBard_Event') == 0
     then
         player:startEvent(182) -- mentions song runes in Valkurm
 
     -- THE REQUIEM (Bard AF2)
     elseif
-        player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.PAINFUL_MEMORY) == xi.questStatus.QUEST_COMPLETED and
+        player:getQuestStatus(xi.questLog.JEUNO, xi.quest.id.jeuno.PAINFUL_MEMORY) == xi.questStatus.QUEST_COMPLETED and
         theRequiem == xi.questStatus.QUEST_AVAILABLE and
         player:getMainJob() == xi.job.BRD and
         player:getMainLvl() >= xi.settings.main.AF2_QUEST_LEVEL
@@ -91,7 +91,7 @@ entity.onEventFinish = function(player, csid, option, npc)
         (csid == 145 or csid == 148) and
         option == 1
     then
-        player:addQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_REQUIEM)
+        player:addQuest(xi.questLog.JEUNO, xi.quest.id.jeuno.THE_REQUIEM)
         player:setCharVar('TheRequiemCS', 2)
 
     elseif csid == 151 then
@@ -106,7 +106,7 @@ entity.onEventFinish = function(player, csid, option, npc)
             player:addItem(xi.item.CHORAL_SLIPPERS)
             player:messageSpecial(ID.text.ITEM_OBTAINED, xi.item.CHORAL_SLIPPERS)
             player:addFame(xi.quest.fame_area.JEUNO, 30)
-            player:completeQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_REQUIEM)
+            player:completeQuest(xi.questLog.JEUNO, xi.quest.id.jeuno.THE_REQUIEM)
         end
     end
 end

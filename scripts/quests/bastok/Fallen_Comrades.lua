@@ -5,7 +5,7 @@
 -- Pavvke : !pos 16.586 6.985 -14.843 234
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.BASTOK, xi.quest.id.bastok.FALLEN_COMRADES)
+local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.FALLEN_COMRADES)
 
 quest.reward =
 {

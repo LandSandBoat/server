@@ -724,8 +724,8 @@ local function checkReqs(player, npc, bfid, registrant)
         end,
 
         [293] = function() -- ZM14 Divine Might
-            return player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.DIVINE_MIGHT) == xi.questStatus.QUEST_ACCEPTED or
-                player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.DIVINE_MIGHT_REPEAT) == xi.questStatus.QUEST_ACCEPTED
+            return player:getQuestStatus(xi.questLog.OUTLANDS, xi.quest.id.outlands.DIVINE_MIGHT) == xi.questStatus.QUEST_ACCEPTED or
+                player:getQuestStatus(xi.questLog.OUTLANDS, xi.quest.id.outlands.DIVINE_MIGHT_REPEAT) == xi.questStatus.QUEST_ACCEPTED
         end,
 
         [320] = function() -- ZM16: The Celestial Nexus
@@ -966,7 +966,7 @@ local function checkReqs(player, npc, bfid, registrant)
         end,
 
         [896] = function() -- Quest: Storms of Fate
-            return player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.STORMS_OF_FATE) == xi.questStatus.QUEST_ACCEPTED and
+            return player:getQuestStatus(xi.questLog.JEUNO, xi.quest.id.jeuno.STORMS_OF_FATE) == xi.questStatus.QUEST_ACCEPTED and
                 player:getCharVar('StormsOfFate') == 2
         end,
 
@@ -1019,7 +1019,7 @@ local function checkReqs(player, npc, bfid, registrant)
         end,
 
         [1057] = function() -- Apocalypse Nigh
-            return player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.APOCALYPSE_NIGH) == xi.questStatus.QUEST_ACCEPTED and
+            return player:getQuestStatus(xi.questLog.JEUNO, xi.quest.id.jeuno.APOCALYPSE_NIGH) == xi.questStatus.QUEST_ACCEPTED and
                 player:getCharVar('ApocalypseNigh') == 4
         end,
 
@@ -1036,8 +1036,8 @@ local function checkReqs(player, npc, bfid, registrant)
         end,
 
         [1122] = function() -- Quest: Omens (BLU AF Quest 2)
-            return player:getQuestStatus(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.OMENS) == xi.questStatus.QUEST_ACCEPTED and
-                xi.quest.getVar(player, xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.OMENS, 'Prog') == 0
+            return player:getQuestStatus(xi.questLog.AHT_URHGAN, xi.quest.id.ahtUrhgan.OMENS) == xi.questStatus.QUEST_ACCEPTED and
+                xi.quest.getVar(player, xi.questLog.AHT_URHGAN, xi.quest.id.ahtUrhgan.OMENS, 'Prog') == 0
         end,
 
         [1123] = function() -- Quest: Achieving True Power (PUP LB5)
@@ -1154,9 +1154,9 @@ local function checkReqs(player, npc, bfid, registrant)
         end,
 
         [1057] = function() -- Quest: Apocalypse Nigh
-            return player:hasCompletedQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.APOCALYPSE_NIGH) or
+            return player:hasCompletedQuest(xi.questLog.JEUNO, xi.quest.id.jeuno.APOCALYPSE_NIGH) or
                 (
-                    player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.APOCALYPSE_NIGH) == xi.questStatus.QUEST_ACCEPTED and
+                    player:getQuestStatus(xi.questLog.JEUNO, xi.quest.id.jeuno.APOCALYPSE_NIGH) == xi.questStatus.QUEST_ACCEPTED and
                     player:getCharVar('ApocalypseNigh') == 4
                 )
         end,
@@ -1303,7 +1303,7 @@ local function checkSkip(player, bfid)
         end,
 
         [33] = function() -- Quest: The Holy Crest
-            return player:hasCompletedQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_HOLY_CREST)
+            return player:hasCompletedQuest(xi.questLog.SANDORIA, xi.quest.id.sandoria.THE_HOLY_CREST)
         end,
 
         [64] = function() -- Mission 2-3
@@ -1355,7 +1355,7 @@ local function checkSkip(player, bfid)
         end,
 
         [224] = function() -- Quest: The Moonlit Path
-            return player:hasCompletedQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_MOONLIT_PATH) or
+            return player:hasCompletedQuest(xi.questLog.WINDURST, xi.quest.id.windurst.THE_MOONLIT_PATH) or
                 player:hasKeyItem(xi.ki.WHISPER_OF_THE_MOON)
         end,
 
@@ -1396,17 +1396,17 @@ local function checkSkip(player, bfid)
         end,
 
         [416] = function() -- Quest: Trial by Wind
-            return player:hasCompletedQuest(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.TRIAL_BY_WIND) or
+            return player:hasCompletedQuest(xi.questLog.OUTLANDS, xi.quest.id.outlands.TRIAL_BY_WIND) or
                 player:hasKeyItem(xi.ki.WHISPER_OF_GALES)
         end,
 
         [448] = function() -- Quest: Trial by Lightning
-            return player:hasCompletedQuest(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.TRIAL_BY_LIGHTNING) or
+            return player:hasCompletedQuest(xi.questLog.OTHER_AREAS, xi.quest.id.otherAreas.TRIAL_BY_LIGHTNING) or
                 player:hasKeyItem(xi.ki.WHISPER_OF_STORMS)
         end,
 
         [480] = function() -- Quest: Trial by Ice
-            return player:hasCompletedQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.TRIAL_BY_ICE) or
+            return player:hasCompletedQuest(xi.questLog.SANDORIA, xi.quest.id.sandoria.TRIAL_BY_ICE) or
                 player:hasKeyItem(xi.ki.WHISPER_OF_FROST)
         end,
 
@@ -1427,17 +1427,17 @@ local function checkSkip(player, bfid)
         end,
 
         [544] = function() -- Quest: Trial by Fire
-            return player:hasCompletedQuest(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.TRIAL_BY_FIRE) or
+            return player:hasCompletedQuest(xi.questLog.OUTLANDS, xi.quest.id.outlands.TRIAL_BY_FIRE) or
                 player:hasKeyItem(xi.ki.WHISPER_OF_FLAMES)
         end,
 
         [576] = function() -- Quest: Trial by Earth
-            return player:hasCompletedQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.TRIAL_BY_EARTH) or
+            return player:hasCompletedQuest(xi.questLog.BASTOK, xi.quest.id.bastok.TRIAL_BY_EARTH) or
                 player:hasKeyItem(xi.ki.WHISPER_OF_TREMORS)
         end,
 
         [608] = function() -- Quest: Trial by Water
-            return player:hasCompletedQuest(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.TRIAL_BY_WATER) or
+            return player:hasCompletedQuest(xi.questLog.OUTLANDS, xi.quest.id.outlands.TRIAL_BY_WATER) or
                 player:hasKeyItem(xi.ki.WHISPER_OF_TIDES)
         end,
 
@@ -1458,7 +1458,7 @@ local function checkSkip(player, bfid)
         end,
 
         [706] = function() -- Quest: Waking Dreams
-            return player:hasCompletedQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.WAKING_DREAMS) or
+            return player:hasCompletedQuest(xi.questLog.WINDURST, xi.quest.id.windurst.WAKING_DREAMS) or
                 player:hasKeyItem(xi.ki.WHISPER_OF_DREAMS)
         end,
 
@@ -1494,7 +1494,7 @@ local function checkSkip(player, bfid)
         end,
 
         [896] = function() -- Quest: Storms of Fate
-            local stormsOfFateStatus = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.STORMS_OF_FATE)
+            local stormsOfFateStatus = player:getQuestStatus(xi.questLog.JEUNO, xi.quest.id.jeuno.STORMS_OF_FATE)
 
             return stormsOfFateStatus == xi.questStatus.QUEST_COMPLETED or
                 (
@@ -1536,7 +1536,7 @@ local function checkSkip(player, bfid)
         end,
 
         [1057] = function() -- Apocalypse Nigh
-            return player:hasCompletedQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.APOCALYPSE_NIGH)
+            return player:hasCompletedQuest(xi.questLog.JEUNO, xi.quest.id.jeuno.APOCALYPSE_NIGH)
         end,
 
         [2721] = function() -- WOTG07: Purple, The New Black

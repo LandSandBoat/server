@@ -10,7 +10,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local apbif = player:getQuestStatus(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.A_PIONEERS_BEST_IMAGINARY_FRIEND)
+    local apbif = player:getQuestStatus(xi.questLog.ADOULIN, xi.quest.id.adoulin.A_PIONEERS_BEST_IMAGINARY_FRIEND)
     local soaMission = player:getCurrentMission(xi.mission.log_id.SOA)
 
     if soaMission >= xi.mission.id.soa.LIFE_ON_THE_FRONTIER then
