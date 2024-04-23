@@ -34,7 +34,7 @@ quest.sections =
 {
     {
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE and
+            return status == xi.questStatus.QUEST_AVAILABLE and
                 player:hasCompletedQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CURSES_FOILED_AGAIN_2) and
                 player:getFameLevel(xi.quest.fame_area.WINDURST) >= 4 and
                 player:getMainLvl() >= 10 and
@@ -60,7 +60,7 @@ quest.sections =
 
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED
+            return status == xi.questStatus.QUEST_ACCEPTED
         end,
 
         ['Leigon-Moigon'] =
@@ -190,7 +190,7 @@ quest.sections =
 
     {
         check = function(player, status, vars)
-            return status == QUEST_COMPLETED
+            return status == xi.questStatus.QUEST_COMPLETED
         end,
 
         [xi.zone.WINDURST_WALLS] =

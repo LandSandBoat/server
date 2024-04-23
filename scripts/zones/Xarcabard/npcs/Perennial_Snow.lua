@@ -15,7 +15,7 @@ entity.onTrigger = function(player, npc)
     local circleOfTime = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_CIRCLE_OF_TIME)
 
     -- CIRCLE OF TIME (Bard AF3)
-    if circleOfTime == QUEST_ACCEPTED and player:getCharVar('circleTime') == 3 then
+    if circleOfTime == xi.questStatus.QUEST_ACCEPTED and player:getCharVar('circleTime') == 3 then
         if player:getCharVar('star_ringburied') == 0 then
             player:startEvent(3)
         elseif os.time() > player:getCharVar('star_ringburied') then

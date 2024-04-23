@@ -23,7 +23,7 @@ quest.sections =
 {
     {
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE and
+            return status == xi.questStatus.QUEST_AVAILABLE and
                 player:hasCompletedQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_TALEKEEPERS_TRUTH) and
                 player:getMainJob() == xi.job.WAR and
                 quest:getVar(player, 'Timer') <= VanadielUniqueDay() and
@@ -81,7 +81,7 @@ quest.sections =
 
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED
+            return status == xi.questStatus.QUEST_ACCEPTED
         end,
 
         [xi.zone.BEHEMOTHS_DOMINION] =

@@ -17,14 +17,14 @@ entity.onTrigger = function(player, npc)
 
     -- THE FANGED ONE
     if
-        fangedOne == QUEST_ACCEPTED and
+        fangedOne == xi.questStatus.QUEST_ACCEPTED and
         fangedOneCS == 1 and
         not GetMobByID(ID.mob.OLD_SABERTOOTH):isSpawned()
     then
         SpawnMob(ID.mob.OLD_SABERTOOTH):addStatusEffect(xi.effect.POISON, 40, 10, 210)
         player:messageSpecial(ID.text.OLD_SABERTOOTH_DIALOG_I)
     elseif
-        fangedOne == QUEST_ACCEPTED and
+        fangedOne == xi.questStatus.QUEST_ACCEPTED and
         fangedOneCS == 2 and
         not player:hasKeyItem(xi.ki.OLD_TIGERS_FANG)
     then

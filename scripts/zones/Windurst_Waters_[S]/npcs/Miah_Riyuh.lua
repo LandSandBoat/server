@@ -19,22 +19,22 @@ entity.onTrigger = function(player, npc)
     local steamedRams = player:getQuestStatus(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.STEAMED_RAMS)
     local greenLetter = player:hasKeyItem(xi.ki.GREEN_RECOMMENDATION_LETTER)
 
-    if steamedRams == QUEST_ACCEPTED or theFightingFourth == QUEST_ACCEPTED then
+    if steamedRams == xi.questStatus.QUEST_ACCEPTED or theFightingFourth == xi.questStatus.QUEST_ACCEPTED then
         player:startEvent(122)
-    elseif snakeOnThePlains == QUEST_AVAILABLE and greenLetter then
+    elseif snakeOnThePlains == xi.questStatus.QUEST_AVAILABLE and greenLetter then
         player:startEvent(103)
     elseif
-        snakeOnThePlains == QUEST_AVAILABLE and
+        snakeOnThePlains == xi.questStatus.QUEST_AVAILABLE and
         player:getCharVar('GREEN_R_LETTER_USED') == 1
     then
         player:startEvent(105)
     elseif
-        snakeOnThePlains == QUEST_ACCEPTED and
+        snakeOnThePlains == xi.questStatus.QUEST_ACCEPTED and
         utils.mask.isFull(player:getCharVar('SEALED_DOORS'), 3)
     then
         player:startEvent(106)
     elseif
-        snakeOnThePlains == QUEST_ACCEPTED and
+        snakeOnThePlains == xi.questStatus.QUEST_ACCEPTED and
         player:hasKeyItem(xi.ki.ZONPA_ZIPPAS_ALL_PURPOSE_PUTTY)
     then
         local puttyUsed = 0
@@ -52,7 +52,7 @@ entity.onTrigger = function(player, npc)
         end
 
         player:startEvent(104, 0, 0, 0, 0, 0, 0, 0, puttyUsed)
-    elseif snakeOnThePlains == QUEST_COMPLETED and allegiance == 3 then
+    elseif snakeOnThePlains == xi.questStatus.QUEST_COMPLETED and allegiance == 3 then
         player:startEvent(107)
     else
         player:startEvent(121)

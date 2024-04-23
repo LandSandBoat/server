@@ -18,7 +18,7 @@ entity.onTrigger = function(player, npc)
     if
         player:getMainJob() == xi.job.DRG and
         player:getMainLvl() >= xi.settings.main.AF1_QUEST_LEVEL and
-        aCraftsmansWork == QUEST_AVAILABLE
+        aCraftsmansWork == xi.questStatus.QUEST_AVAILABLE
     then
         if player:getCharVar('has_seen_drgaf1_quest_already') == 0 then
             player:startEvent(73)
@@ -26,11 +26,11 @@ entity.onTrigger = function(player, npc)
             player:startEvent(71)
         end
     elseif
-        aCraftsmansWork == QUEST_ACCEPTED and
+        aCraftsmansWork == xi.questStatus.QUEST_ACCEPTED and
         not player:hasKeyItem(xi.ki.ALTEPA_POLISHING_STONE)
     then
         player:startEvent(69)
-    elseif aCraftsmansWork == QUEST_ACCEPTED then
+    elseif aCraftsmansWork == xi.questStatus.QUEST_ACCEPTED then
             player:startEvent(70)
     elseif quotasStatus == 2 then
         player:startEvent(67) -- I found this earring.

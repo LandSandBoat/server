@@ -33,7 +33,7 @@ entity.onTrade = function(player, npc, trade)
         player:setSkillRank(xi.skill.CLOTHCRAFT, newRank)
         player:startEvent(10012, 0, 0, 0, 0, newRank)
         player:setLocalVar('ClothcraftTraded', 1)
-    elseif moralManifest == QUEST_ACCEPTED and player:getCharVar('moral') == 2 then
+    elseif moralManifest == xi.questStatus.QUEST_ACCEPTED and player:getCharVar('moral') == 2 then
         if npcUtil.tradeHas(trade, { 828, 830, { 'gil', 10000 } }) then -- Trade Velvet Cloth, Rainbow Cloth and 10k
             player:setCharVar('moral', 3)
             player:setLocalVar('moralZone', 1)
@@ -66,11 +66,11 @@ entity.onTrigger = function(player, npc)
         end
     end
 
-    if moralManifest == QUEST_ACCEPTED and player:getCharVar('moral') == 1 then
+    if moralManifest == xi.questStatus.QUEST_ACCEPTED and player:getCharVar('moral') == 1 then
         player:startEvent(700)
     elseif
-        moralManifest == QUEST_COMPLETED or
-        moralManifest == QUEST_ACCEPTED and
+        moralManifest == xi.questStatus.QUEST_COMPLETED or
+        moralManifest == xi.questStatus.QUEST_ACCEPTED and
         player:getCharVar('moral') >= 4
     then
         player:startEvent(704)

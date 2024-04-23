@@ -8,7 +8,7 @@ local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     if
-        player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.GRAVE_CONCERNS) == QUEST_ACCEPTED and
+        player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.GRAVE_CONCERNS) == xi.questStatus.QUEST_ACCEPTED and
         npcUtil.tradeHas(trade, xi.item.SKIN_OF_WELL_WATER) -- Well Water
     then
         player:startEvent(3)
@@ -30,7 +30,7 @@ end
 entity.onEventFinish = function(player, csid, option, npc)
     if
         csid == 2 and
-        player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.GRAVE_CONCERNS) == QUEST_ACCEPTED and
+        player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.GRAVE_CONCERNS) == xi.questStatus.QUEST_ACCEPTED and
         not player:hasItem(xi.item.TOMB_GUARDS_WATERSKIN) and
         not player:hasItem(xi.item.SKIN_OF_WELL_WATER) and
         npcUtil.giveItem(player, xi.item.TOMB_GUARDS_WATERSKIN) -- Tomb Waterskin

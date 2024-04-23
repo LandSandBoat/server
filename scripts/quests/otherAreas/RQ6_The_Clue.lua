@@ -21,8 +21,8 @@ quest.sections =
     -- Section: Quest is available and never interacted.
     {
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE and player:getFameLevel(xi.quest.fame_area.WINDURST) > 4 and
-                player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.EXPERTISE) == QUEST_COMPLETED
+            return status == xi.questStatus.QUEST_AVAILABLE and player:getFameLevel(xi.quest.fame_area.WINDURST) > 4 and
+                player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.EXPERTISE) == xi.questStatus.QUEST_COMPLETED
         end,
 
         [xi.zone.MHAURA] =
@@ -79,7 +79,7 @@ quest.sections =
     -- Section: Quest accepted.
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED
+            return status == xi.questStatus.QUEST_ACCEPTED
         end,
 
         [xi.zone.MHAURA] =

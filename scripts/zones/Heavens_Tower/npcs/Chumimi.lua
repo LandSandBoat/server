@@ -10,20 +10,20 @@ local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     if
-        player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_THREE_MAGI) == QUEST_ACCEPTED and
+        player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_THREE_MAGI) == xi.questStatus.QUEST_ACCEPTED and
         trade:hasItemQty(xi.item.GLOWSTONE, 1) and
         trade:getItemCount() == 1
     then
         player:startEvent(269) -- Finish Quest "The Three Magi"
     elseif
-        player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.RECOLLECTIONS) == QUEST_ACCEPTED and
+        player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.RECOLLECTIONS) == xi.questStatus.QUEST_ACCEPTED and
         player:getCharVar('recollectionsQuest') < 2 and
         trade:hasItemQty(xi.item.BAG_OF_SEEDS, 1) and
         trade:getItemCount() == 1
     then
         player:startEvent(271, 0, 520)
     elseif
-        player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_ROOT_OF_THE_PROBLEM) == QUEST_ACCEPTED and
+        player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_ROOT_OF_THE_PROBLEM) == xi.questStatus.QUEST_ACCEPTED and
         player:getCharVar('rootProblem') == 1 and
         trade:hasItemQty(xi.item.SQUARE_OF_SILK_CLOTH, 1) and
         trade:getItemCount() == 1
@@ -40,41 +40,41 @@ entity.onTrigger = function(player, npc)
     local mJob = player:getMainJob()
 
     if
-        theThreeMagi == QUEST_AVAILABLE and
+        theThreeMagi == xi.questStatus.QUEST_AVAILABLE and
         mJob == xi.job.BLM and
         mLvl >= xi.settings.main.AF1_QUEST_LEVEL
     then
         player:startEvent(260, 0, 613, 0, 0, 0, xi.item.GLOWSTONE) -- Start Quest "The Three Magi" --- NOTE: 5th parameter is "Meteorites" but he doesn't exist ---
-    elseif theThreeMagi == QUEST_ACCEPTED then
+    elseif theThreeMagi == xi.questStatus.QUEST_ACCEPTED then
         player:startEvent(261, 0, 0, 0, 0, 0, xi.item.GLOWSTONE) -- During Quest "The Three Magi"
     elseif
-        theThreeMagi == QUEST_COMPLETED and
-        recollections == QUEST_AVAILABLE and
+        theThreeMagi == xi.questStatus.QUEST_COMPLETED and
+        recollections == xi.questStatus.QUEST_AVAILABLE and
         (mJob == xi.job.BLM and mLvl < xi.settings.main.AF2_QUEST_LEVEL or mJob ~= xi.job.BLM)
     then
         player:startEvent(268) -- New standard dialog after "The Three Magi"
     elseif
-        theThreeMagi == QUEST_COMPLETED and
+        theThreeMagi == xi.questStatus.QUEST_COMPLETED and
         mJob == xi.job.BLM and
         mLvl >= xi.settings.main.AF2_QUEST_LEVEL and
         not player:needToZone() and
-        recollections == QUEST_AVAILABLE
+        recollections == xi.questStatus.QUEST_AVAILABLE
     then
         player:startEvent(270, 0, xi.item.BAG_OF_SEEDS) -- Start Quest "Recollections"
     elseif
-        recollections == QUEST_ACCEPTED and
+        recollections == xi.questStatus.QUEST_ACCEPTED and
         player:hasKeyItem(xi.ki.FOE_FINDER_MK_I)
     then
         player:startEvent(275) -- Finish Quest "Recollections"
     elseif
-        recollections == QUEST_COMPLETED and
-        rootProblem == QUEST_AVAILABLE and
+        recollections == xi.questStatus.QUEST_COMPLETED and
+        rootProblem == xi.questStatus.QUEST_AVAILABLE and
         mJob == xi.job.BLM and
         mLvl >= 50 and
         not player:needToZone()
     then
         player:startEvent(276, 0, xi.item.SQUARE_OF_SILK_CLOTH) -- Start Quest "The Root of The problem"
-    elseif rootProblem == QUEST_ACCEPTED then
+    elseif rootProblem == xi.questStatus.QUEST_ACCEPTED then
         local rootProblemCS = player:getCharVar('rootProblem')
 
         if rootProblemCS == 1 then

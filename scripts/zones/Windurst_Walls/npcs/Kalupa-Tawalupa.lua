@@ -15,9 +15,9 @@ entity.onTrigger = function(player, npc)
 
     if toBeeOrNotStatus == 10 then
         player:startEvent(66) -- During Too Bee quest before honey given to Zayhi: 'are you alright sir'
-    elseif toBee == QUEST_ACCEPTED and toBeeOrNotStatus > 0 then
+    elseif toBee == xi.questStatus.QUEST_ACCEPTED and toBeeOrNotStatus > 0 then
         player:startEvent(72) -- During Too Bee quest after some honey was given to Zayhi: 'hey did that honey help you just now?'
-    elseif toBee == QUEST_COMPLETED and player:needToZone() then
+    elseif toBee == xi.questStatus.QUEST_COMPLETED and player:needToZone() then
         player:startEvent(77) -- After Too Bee quest but before zone: 'well I guess a tooth ache is to be expected'
     else
         player:startEvent(298) -- Normal conversation

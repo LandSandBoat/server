@@ -51,7 +51,7 @@ entity.onTrigger = function(player, npc)
         player:startEvent(89)
     elseif
         player:getMainJob() == xi.job.PLD and mLvl >= xi.settings.main.AF2_QUEST_LEVEL and
-        aBoysDream == QUEST_COMPLETED and underOath == QUEST_AVAILABLE
+        aBoysDream == xi.questStatus.QUEST_COMPLETED and underOath == xi.questStatus.QUEST_AVAILABLE
     then
         player:startEvent(90) -- Start
 

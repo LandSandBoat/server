@@ -7,7 +7,7 @@
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    if player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.TO_BEE_OR_NOT_TO_BEE) == QUEST_ACCEPTED then
+    if player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.TO_BEE_OR_NOT_TO_BEE) == xi.questStatus.QUEST_ACCEPTED then
         if trade:hasItemQty(xi.item.POT_OF_HONEY, 1) and trade:getItemCount() == 1 then
             local toBeeOrNotStatus = player:getCharVar('ToBeeOrNot_var')
             if toBeeOrNotStatus == 10 then
@@ -31,11 +31,11 @@ entity.onTrigger = function(player, npc)
     local toBeeOrNotStatus = player:getCharVar('ToBeeOrNot_var')
 
     if
-        (player:getFameLevel(xi.quest.fame_area.WINDURST) >= 2 and postmanKOsTwice == QUEST_COMPLETED and toBee == QUEST_AVAILABLE) or
-        (toBee == QUEST_ACCEPTED and toBeeOrNotStatus == 10)
+        (player:getFameLevel(xi.quest.fame_area.WINDURST) >= 2 and postmanKOsTwice == xi.questStatus.QUEST_COMPLETED and toBee == xi.questStatus.QUEST_AVAILABLE) or
+        (toBee == xi.questStatus.QUEST_ACCEPTED and toBeeOrNotStatus == 10)
     then
         player:startEvent(64)   -- Just Before Quest Start 'Too Bee or Not Too Be' (Speech given with lots of coughing)
-    elseif toBee == QUEST_ACCEPTED then
+    elseif toBee == xi.questStatus.QUEST_ACCEPTED then
         if toBeeOrNotStatus == 1 then
             player:startEvent(69) -- After Honey#1: Clearing throat
         elseif toBeeOrNotStatus == 2 then
@@ -45,7 +45,7 @@ entity.onTrigger = function(player, npc)
         elseif toBeeOrNotStatus == 4 then
             player:startEvent(74) -- After Honey#4: Feels like its getting a lot better but there is still iritaion
         end
-    elseif toBee == QUEST_COMPLETED and player:needToZone() then
+    elseif toBee == xi.questStatus.QUEST_COMPLETED and player:needToZone() then
         player:startEvent(78) -- ToBee After Quest Finish but before zone (tooth still hurts)
     else
         player:startEvent(299) -- Normal speech

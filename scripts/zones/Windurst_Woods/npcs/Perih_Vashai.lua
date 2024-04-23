@@ -33,12 +33,12 @@ entity.onTrigger = function(player, npc)
 
     -- THE FANGED ONE
     if
-        theFangedOne == QUEST_AVAILABLE and
+        theFangedOne == xi.questStatus.QUEST_AVAILABLE and
         lvl >= xi.settings.main.ADVANCED_JOB_LEVEL
     then
         player:startEvent(351)
     elseif
-        theFangedOne == QUEST_ACCEPTED and
+        theFangedOne == xi.questStatus.QUEST_ACCEPTED and
         not player:hasKeyItem(xi.ki.OLD_TIGERS_FANG)
     then
         player:startEvent(352)
@@ -49,7 +49,7 @@ entity.onTrigger = function(player, npc)
 
     -- SIN HUNTING
     elseif
-        sinHunting == QUEST_AVAILABLE and
+        sinHunting == xi.questStatus.QUEST_AVAILABLE and
         job == xi.job.RNG and
         lvl >= xi.settings.main.AF1_QUEST_LEVEL
     then
@@ -61,10 +61,10 @@ entity.onTrigger = function(player, npc)
 
     -- FIRE AND BRIMSTONE
     elseif
-        sinHunting == QUEST_COMPLETED and
+        sinHunting == xi.questStatus.QUEST_COMPLETED and
         job == xi.job.RNG and
         lvl >= xi.settings.main.AF2_QUEST_LEVEL and
-        fireAndBrimstone == QUEST_AVAILABLE
+        fireAndBrimstone == xi.questStatus.QUEST_AVAILABLE
     then
         player:startEvent(531) -- start RNG AF2
     elseif fireAndBrimstoneCS > 0 and fireAndBrimstoneCS < 4 then
@@ -76,10 +76,10 @@ entity.onTrigger = function(player, npc)
 
     -- UNBRIDLED PASSION
     elseif
-        fireAndBrimstone == QUEST_COMPLETED and
+        fireAndBrimstone == xi.questStatus.QUEST_COMPLETED and
         job == xi.job.RNG and
         lvl >= xi.settings.main.AF3_QUEST_LEVEL and
-        unbridledPassion == QUEST_AVAILABLE
+        unbridledPassion == xi.questStatus.QUEST_AVAILABLE
     then
         player:startEvent(541, 0, 13360) -- start RNG AF3
     elseif unbridledPassionCS > 0 and unbridledPassionCS < 3 then

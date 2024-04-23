@@ -30,22 +30,22 @@ entity.onTrigger = function(player, npc)
     local IASvar = player:getCharVar('IASvar')
 
     -- In a Stew
-    if IAS == QUEST_ACCEPTED and IASvar == 2 then
+    if IAS == xi.questStatus.QUEST_ACCEPTED and IASvar == 2 then
         player:startEvent(554, 0, xi.item.WOOZYSHROOM)                    -- start fetch portion of quest
-    elseif IAS == QUEST_ACCEPTED and IASvar == 3 then
+    elseif IAS == xi.questStatus.QUEST_ACCEPTED and IASvar == 3 then
         player:startEvent(555, 0, xi.item.WOOZYSHROOM)                    -- reminder dialog
-    elseif IAS == QUEST_ACCEPTED and IASvar == 4 then
+    elseif IAS == xi.questStatus.QUEST_ACCEPTED and IASvar == 4 then
         player:startEvent(557)                             -- new dialog before finish of quest
 
     -- A Crisis in the Making
     elseif
-        crisisstatus == QUEST_AVAILABLE and
+        crisisstatus == xi.questStatus.QUEST_AVAILABLE and
         player:getFameLevel(xi.quest.fame_area.WINDURST) >= 2 and
         not player:needToZone()
     then
         -- A Crisis in the Making + ITEM: Quest Offer
         player:startEvent(258, 0, 625)
-    elseif crisisstatus == QUEST_ACCEPTED then
+    elseif crisisstatus == xi.questStatus.QUEST_ACCEPTED then
         local prog = player:getCharVar('QuestCrisisMaking_var')
         if prog == 1 then -- A Crisis in the Making: Quest Objective Reminder
             player:startEvent(262, 0, 625)
@@ -53,20 +53,20 @@ entity.onTrigger = function(player, npc)
             player:startEvent(267)
         end
     elseif
-        crisisstatus == QUEST_COMPLETED and
+        crisisstatus == xi.questStatus.QUEST_COMPLETED and
         not player:needToZone() and
         player:getCharVar('QuestCrisisMaking_var') == 0
     then
         -- A Crisis in the Making + ITEM: Repeatable Quest Offer
         player:startEvent(259, 0, 625)
     elseif
-        crisisstatus == QUEST_COMPLETED and
+        crisisstatus == xi.questStatus.QUEST_COMPLETED and
         player:getCharVar('QuestCrisisMaking_var') == 1
     then
         -- A Crisis in the Making: Quest Objective Reminder
         player:startEvent(262, 0, 625)
     elseif
-        crisisstatus == QUEST_COMPLETED and
+        crisisstatus == xi.questStatus.QUEST_COMPLETED and
         player:getCharVar('QuestCrisisMaking_var') == 2
     then
         -- A Crisis in the Making: Repeatable Quest Finish

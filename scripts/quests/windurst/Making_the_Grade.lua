@@ -20,9 +20,9 @@ quest.sections =
 {
     {
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE and
+            return status == xi.questStatus.QUEST_AVAILABLE and
                 player:hasCompletedQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.TEACHERS_PET) and
-                player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.LET_SLEEPING_DOGS_LIE) ~= QUEST_ACCEPTED and
+                player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.LET_SLEEPING_DOGS_LIE) ~= xi.questStatus.QUEST_ACCEPTED and
                 player:getFameLevel(xi.quest.fame_area.WINDURST) >= 3
         end,
 
@@ -43,7 +43,7 @@ quest.sections =
 
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED
+            return status == xi.questStatus.QUEST_ACCEPTED
         end,
 
         [xi.zone.WINDURST_WATERS] =
@@ -161,7 +161,7 @@ quest.sections =
 
     {
         check = function(player, status, vars)
-            return status == QUEST_COMPLETED and
+            return status == xi.questStatus.QUEST_COMPLETED and
                 not quest:getMustZone(player)
         end,
 

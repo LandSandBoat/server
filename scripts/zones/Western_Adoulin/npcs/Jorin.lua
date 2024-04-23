@@ -14,7 +14,7 @@ end
 entity.onTrigger = function(player, npc)
     local tomath = player:getQuestStatus(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.THE_OLD_MAN_AND_THE_HARPOON)
 
-    if tomath == QUEST_ACCEPTED then
+    if tomath == xi.questStatus.QUEST_ACCEPTED then
         if player:hasKeyItem(xi.ki.EXTRAVAGANT_HARPOON) then
             -- Finishing Quest: 'The Old Man and the Harpoon'
             player:startEvent(2542)
@@ -22,7 +22,7 @@ entity.onTrigger = function(player, npc)
             -- Dialgoue during Quest: 'The Old Man and the Harpoon'
             player:startEvent(2541)
         end
-    elseif tomath == QUEST_AVAILABLE then
+    elseif tomath == xi.questStatus.QUEST_AVAILABLE then
         -- Starts Quest: 'The Old Man and the Harpoon'
         player:startEvent(2540)
     end

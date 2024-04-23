@@ -17,18 +17,18 @@ entity.onTrigger = function(player, npc)
 
     -- I CAN HEAR A RAINBOW
     if
-        iCanHearARainbow == QUEST_AVAILABLE and
+        iCanHearARainbow == xi.questStatus.QUEST_AVAILABLE and
         player:getMainLvl() >= 30 and
         player:hasItem(xi.item.CARBUNCLES_RUBY)
     then
         player:startEvent(384, xi.item.CARBUNCLES_RUBY, xi.item.CARBUNCLES_RUBY, xi.item.CARBUNCLES_RUBY, xi.item.CARBUNCLES_RUBY, xi.item.CARBUNCLES_RUBY, xi.item.CARBUNCLES_RUBY, xi.item.CARBUNCLES_RUBY, xi.item.CARBUNCLES_RUBY)
-    elseif iCanHearARainbow == QUEST_ACCEPTED then
+    elseif iCanHearARainbow == xi.questStatus.QUEST_ACCEPTED then
         player:startEvent(385, xi.item.CARBUNCLES_RUBY, xi.item.CARBUNCLES_RUBY, xi.item.CARBUNCLES_RUBY, xi.item.CARBUNCLES_RUBY, xi.item.CARBUNCLES_RUBY, xi.item.CARBUNCLES_RUBY, xi.item.CARBUNCLES_RUBY, xi.item.CARBUNCLES_RUBY)
 
     -- CLASS REUNION
     elseif
-        thePuppetMaster == QUEST_COMPLETED and
-        classReunion == QUEST_AVAILABLE and
+        thePuppetMaster == xi.questStatus.QUEST_COMPLETED and
+        classReunion == xi.questStatus.QUEST_AVAILABLE and
         player:getMainLvl() >= xi.settings.main.AF2_QUEST_LEVEL and
         player:getMainJob() == xi.job.SMN and
         not player:needToZone()
@@ -37,9 +37,9 @@ entity.onTrigger = function(player, npc)
 
     -- CARBUNCLE DEBACLE
     elseif
-        thePuppetMaster == QUEST_COMPLETED and
-        classReunion == QUEST_COMPLETED and
-        carbuncleDebacle == QUEST_AVAILABLE and
+        thePuppetMaster == xi.questStatus.QUEST_COMPLETED and
+        classReunion == xi.questStatus.QUEST_COMPLETED and
+        carbuncleDebacle == xi.questStatus.QUEST_AVAILABLE and
         player:getMainLvl() >= xi.settings.main.AF3_QUEST_LEVEL and
         player:getMainJob() == xi.job.SMN and
         not player:needToZone()

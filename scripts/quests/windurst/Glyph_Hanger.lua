@@ -20,7 +20,7 @@ quest.sections =
 {
     {
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE
+            return status == xi.questStatus.QUEST_AVAILABLE
         end,
 
         [xi.zone.WINDURST_WATERS] =
@@ -41,7 +41,7 @@ quest.sections =
 
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED
+            return status == xi.questStatus.QUEST_ACCEPTED
         end,
 
         [xi.zone.WINDURST_WATERS] =
@@ -111,7 +111,7 @@ quest.sections =
 
     {
         check = function(player, status, vars)
-            return status == QUEST_COMPLETED and
+            return status == xi.questStatus.QUEST_COMPLETED and
                 not player:hasCompletedQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CHASING_TALES)
         end,
 

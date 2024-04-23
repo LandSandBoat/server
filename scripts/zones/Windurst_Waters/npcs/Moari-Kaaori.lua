@@ -16,7 +16,7 @@ entity.onTrade = function(player, npc, trade)
             trade:hasItemQty(xi.item.TAHRONGI_CACTUS, 1) and
             trade:getItemCount() == 1
         then
-            if sayFlowers == QUEST_COMPLETED then
+            if sayFlowers == xi.questStatus.QUEST_COMPLETED then
                 player:startEvent(525, xi.settings.main.GIL_RATE * 400)
             else
                 player:startEvent(520)
@@ -40,15 +40,15 @@ entity.onTrigger = function(player, npc)
     local needToZone = player:needToZone()
 
     if
-        sayFlowers == QUEST_AVAILABLE and
+        sayFlowers == xi.questStatus.QUEST_AVAILABLE and
         player:getFameLevel(xi.quest.fame_area.WINDURST) >= 2
     then
         player:startEvent(514) -- Begin Say It with Flowers.
     elseif flowerProgress == 3 or flowerProgress == 1 then
         player:startEvent(515) -- Waiting for trade.
-    elseif sayFlowers == QUEST_COMPLETED and needToZone and flowerProgress == 0 then -- Must zone to retry quest.
+    elseif sayFlowers == xi.questStatus.QUEST_COMPLETED and needToZone and flowerProgress == 0 then -- Must zone to retry quest.
         player:startEvent(521)
-    elseif sayFlowers == QUEST_COMPLETED and flowerProgress == 0 then
+    elseif sayFlowers == xi.questStatus.QUEST_COMPLETED and flowerProgress == 0 then
         player:startEvent(523) -- Repeat Say It with Flowers.
     else
         player:startEvent(512)

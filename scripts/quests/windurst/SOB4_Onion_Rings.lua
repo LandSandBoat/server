@@ -33,7 +33,7 @@ quest.sections =
     -- Section: Quest is available.
     {
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE and
+            return status == xi.questStatus.QUEST_AVAILABLE and
                 player:hasCompletedQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.INSPECTORS_GADGET)
         end,
 
@@ -95,7 +95,7 @@ quest.sections =
     -- Section: Quest accepeted. You didn't start with the "Old Ring" Key Item.
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED and vars.Prog == 1
+            return status == xi.questStatus.QUEST_ACCEPTED and vars.Prog == 1
         end,
 
         [xi.zone.PORT_WINDURST] =
@@ -188,8 +188,8 @@ quest.sections =
     -- Section: Quest completed.
     {
         check = function(player, status, vars)
-            return status == QUEST_COMPLETED and
-                player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CRYING_OVER_ONIONS) == QUEST_AVAILABLE
+            return status == xi.questStatus.QUEST_COMPLETED and
+                player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CRYING_OVER_ONIONS) == xi.questStatus.QUEST_AVAILABLE
         end,
 
         [xi.zone.PORT_WINDURST] =

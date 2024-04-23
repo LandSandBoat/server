@@ -21,7 +21,7 @@ entity.onTrade = function(player, npc, trade)
 
     if moatCarp + forestCarp > 0 and moatCarp + forestCarp == count then
         if
-            player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_RIVALRY) == QUEST_ACCEPTED and
+            player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_RIVALRY) == xi.questStatus.QUEST_ACCEPTED and
             totalFish >= 10000
         then
             -- ultimate reward
@@ -29,7 +29,7 @@ entity.onTrade = function(player, npc, trade)
             player:addFame(xi.quest.fame_area.SANDORIA, 30)
             npcUtil.giveCurrency(player, 'gil', moatCarp * 10 + forestCarp * 15)
             player:startEvent(303)
-        elseif player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_RIVALRY) >= QUEST_ACCEPTED then -- regular turn-ins. Still allowed after completion of the quest.
+        elseif player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_RIVALRY) >= xi.questStatus.QUEST_ACCEPTED then -- regular turn-ins. Still allowed after completion of the quest.
             player:tradeComplete()
             player:addFame(xi.quest.fame_area.SANDORIA, 30)
             player:setCharVar('theCompetitionFishCountVar', totalFish)
@@ -43,14 +43,14 @@ end
 
 entity.onTrigger = function(player, npc)
     if
-        player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_COMPETITION) == QUEST_AVAILABLE and
-        player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_RIVALRY) == QUEST_AVAILABLE
+        player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_COMPETITION) == xi.questStatus.QUEST_AVAILABLE and
+        player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_RIVALRY) == xi.questStatus.QUEST_AVAILABLE
     then
         -- If you haven't started either quest yet
         player:startEvent(300, 4401, 4289) -- 4401 = Moat Carp, 4289 = Forest Carp
-    elseif player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_RIVALRY) == QUEST_ACCEPTED then
+    elseif player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_RIVALRY) == xi.questStatus.QUEST_ACCEPTED then
         player:showText(npc, ID.text.GALLIJAUX_CARP_STATUS, 0, player:getCharVar('theCompetitionFishCountVar'))
-    elseif player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_COMPETITION) == QUEST_ACCEPTED then
+    elseif player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_COMPETITION) == xi.questStatus.QUEST_ACCEPTED then
         player:showText(npc, ID.text.GALLIJAUX_HELP_OTHER_BROTHER)
     end
 end

@@ -24,7 +24,7 @@ quest.sections =
     -- Section: Talk to Berghent near the Big Bridge in Western Adoulin (J-9) to start the quest.
     {
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE
+            return status == xi.questStatus.QUEST_AVAILABLE
         end,
 
         [xi.zone.WESTERN_ADOULIN] =
@@ -62,7 +62,7 @@ quest.sections =
     -- Section: Talk to Masad inside the Mummers' Coalition.
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED and vars.Prog == 0
+            return status == xi.questStatus.QUEST_ACCEPTED and vars.Prog == 0
         end,
 
         [xi.zone.WESTERN_ADOULIN] =
@@ -95,7 +95,7 @@ quest.sections =
     -- Section: Talk to Dewalt inside the Couriers' Coalition.
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED and vars.Prog == 1
+            return status == xi.questStatus.QUEST_ACCEPTED and vars.Prog == 1
         end,
 
         [xi.zone.WESTERN_ADOULIN] =
@@ -129,7 +129,7 @@ quest.sections =
     -- Section: Head to Rala Waterways and talk to Chalvava at (F-11).
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED and vars.Prog == 2
+            return status == xi.questStatus.QUEST_ACCEPTED and vars.Prog == 2
         end,
 
         [xi.zone.WESTERN_ADOULIN] =
@@ -154,7 +154,7 @@ quest.sections =
     -- Section: Go to Yahse Hunting Grounds and harvest a Key Item Blightberry using a Sickle
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED and vars.Prog == 3 and not player:hasKeyItem(xi.ki.BLIGHTBERRY)
+            return status == xi.questStatus.QUEST_ACCEPTED and vars.Prog == 3 and not player:hasKeyItem(xi.ki.BLIGHTBERRY)
         end,
 
         [xi.zone.WESTERN_ADOULIN] =
@@ -184,7 +184,7 @@ quest.sections =
     -- Section: Return to Berghent for your reward
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED and vars.Prog == 3 and player:hasKeyItem(xi.ki.BLIGHTBERRY)
+            return status == xi.questStatus.QUEST_ACCEPTED and vars.Prog == 3 and player:hasKeyItem(xi.ki.BLIGHTBERRY)
         end,
 
         [xi.zone.WESTERN_ADOULIN] =
@@ -204,7 +204,7 @@ quest.sections =
     -- New default text
     {
         check = function(player, status, vars)
-            return status == QUEST_COMPLETED
+            return status == xi.questStatus.QUEST_COMPLETED
         end,
 
         [xi.zone.WESTERN_ADOULIN] =

@@ -15,8 +15,8 @@ entity.onTrade = function(player, npc, trade)
     if
         trade:hasItemQty(poeticParchmentID, 1) and
         trade:getItemCount() == 1 and
-        player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_OLD_MONUMENT) == QUEST_COMPLETED and
-        player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.A_MINSTREL_IN_DESPAIR) == QUEST_AVAILABLE
+        player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_OLD_MONUMENT) == xi.questStatus.QUEST_COMPLETED and
+        player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.A_MINSTREL_IN_DESPAIR) == xi.questStatus.QUEST_AVAILABLE
     then
         player:startEvent(101)
     end
@@ -30,7 +30,7 @@ entity.onTrigger = function(player, npc)
 
     -- PAINFUL MEMORY (Bard AF1)
     if
-        painfulMemory == QUEST_AVAILABLE and
+        painfulMemory == xi.questStatus.QUEST_AVAILABLE and
         job == xi.job.BRD and
         level >= xi.settings.main.AF1_QUEST_LEVEL
     then
@@ -40,23 +40,23 @@ entity.onTrigger = function(player, npc)
             player:startEvent(137) -- Short dialog for 'Painful Memory'
         end
 
-    elseif painfulMemory == QUEST_ACCEPTED then
+    elseif painfulMemory == xi.questStatus.QUEST_ACCEPTED then
         player:startEvent(136) -- During Quest 'Painful Memory'
 
     -- CIRCLE OF TIME (Bard AF3)
     elseif
-        player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_REQUIEM) == QUEST_COMPLETED and
-        circleOfTime == QUEST_AVAILABLE and
+        player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_REQUIEM) == xi.questStatus.QUEST_COMPLETED and
+        circleOfTime == xi.questStatus.QUEST_AVAILABLE and
         job == xi.job.BRD and
         level >= xi.settings.main.AF3_QUEST_LEVEL
     then
         player:startEvent(139) -- Start "The Circle of Time"
 
-    elseif circleOfTime == QUEST_ACCEPTED then
+    elseif circleOfTime == xi.questStatus.QUEST_ACCEPTED then
         player:messageSpecial(ID.text.MERTAIRE_RING)
 
     -- DEFAULT DIALOG
-    elseif painfulMemory == QUEST_COMPLETED then
+    elseif painfulMemory == xi.questStatus.QUEST_COMPLETED then
         player:startEvent(135) -- Standard dialog after completed "Painful Memory"
 
     else

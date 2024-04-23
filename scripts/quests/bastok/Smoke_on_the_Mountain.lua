@@ -21,7 +21,7 @@ quest.sections =
 {
     {
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE
+            return status == xi.questStatus.QUEST_AVAILABLE
         end,
 
         [xi.zone.METALWORKS] =
@@ -39,7 +39,7 @@ quest.sections =
 
     {
         check = function(player, status, vars)
-            return status >= QUEST_ACCEPTED
+            return status >= xi.questStatus.QUEST_ACCEPTED
         end,
 
         [xi.zone.METALWORKS] =
@@ -60,7 +60,7 @@ quest.sections =
                 [429] = function(player, csid, option, npc)
                     player:confirmTrade()
 
-                    if player:getQuestStatus(quest.areaId, quest.questId) == QUEST_ACCEPTED then
+                    if player:getQuestStatus(quest.areaId, quest.questId) == xi.questStatus.QUEST_ACCEPTED then
                         player:addFame(xi.quest.fame_area.BASTOK, 25)
                     end
 

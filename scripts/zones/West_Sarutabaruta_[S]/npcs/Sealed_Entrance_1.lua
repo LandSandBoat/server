@@ -14,7 +14,7 @@ entity.onTrigger = function(player, npc)
     local maskBit3 = utils.mask.getBit(player:getCharVar('SEALED_DOORS'), 2)
 
     if
-        snakeOnThePlains == QUEST_ACCEPTED and
+        snakeOnThePlains == xi.questStatus.QUEST_ACCEPTED and
         player:hasKeyItem(xi.ki.ZONPA_ZIPPAS_ALL_PURPOSE_PUTTY)
     then
         if not maskBit1 then
@@ -29,7 +29,7 @@ entity.onTrigger = function(player, npc)
         else
             player:messageSpecial(ID.text.DOOR_OFFSET + 2, xi.ki.ZONPA_ZIPPAS_ALL_PURPOSE_PUTTY)
         end
-    elseif snakeOnThePlains == QUEST_COMPLETED then
+    elseif snakeOnThePlains == xi.questStatus.QUEST_COMPLETED then
         player:messageSpecial(ID.text.DOOR_OFFSET + 2, xi.ki.ZONPA_ZIPPAS_ALL_PURPOSE_PUTTY)
     else
         player:messageSpecial(ID.text.DOOR_OFFSET + 3)

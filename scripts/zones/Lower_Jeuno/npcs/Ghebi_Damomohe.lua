@@ -12,7 +12,7 @@ local entity = {}
 entity.onTrade = function(player, npc, trade)
     if
         trade:getItemQty(xi.item.TENSHODO_INVITE) > 0 and
-        player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.TENSHODO_MEMBERSHIP) ~= QUEST_COMPLETED
+        player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.TENSHODO_MEMBERSHIP) ~= xi.questStatus.QUEST_COMPLETED
     then
         if player:getFreeSlotsCount() > 0 then
             if npcUtil.tradeHas(trade, xi.item.TENSHODO_INVITE) then
@@ -28,7 +28,7 @@ end
 entity.onTrigger = function(player, npc)
     if
         player:getFameLevel(xi.quest.fame_area.JEUNO) >= 2 and
-        player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.TENSHODO_MEMBERSHIP) == QUEST_AVAILABLE
+        player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.TENSHODO_MEMBERSHIP) == xi.questStatus.QUEST_AVAILABLE
     then
         -- Start Quest: Tenshodo Membership
         player:startEvent(106, 8)

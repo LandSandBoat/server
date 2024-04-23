@@ -8,12 +8,12 @@ local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     if
-        player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.THE_GIFT) == QUEST_ACCEPTED and
+        player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.THE_GIFT) == xi.questStatus.QUEST_ACCEPTED and
         npcUtil.tradeHas(trade, xi.item.DANCESHROOM)
     then
         player:startEvent(72, 0, xi.item.DANCESHROOM) -- Finish quest 'The gift'
     elseif
-        player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.THE_REAL_GIFT) == QUEST_ACCEPTED and
+        player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.THE_REAL_GIFT) == xi.questStatus.QUEST_ACCEPTED and
         npcUtil.tradeHas(trade, xi.item.SHALL_SHELL)
     then
         player:startEvent(75) -- Finish quest 'The real gift'
@@ -30,27 +30,27 @@ entity.onTrigger = function(player, npc)
         player:startEvent(32) -- During quest 'Under the sea' - 1st dialog
     elseif player:hasKeyItem(xi.ki.ETCHED_RING) then
         player:startEvent(37) -- Finish quest 'Under the sea'
-    elseif underTheSea == QUEST_COMPLETED and theSandCharm == QUEST_AVAILABLE then
+    elseif underTheSea == xi.questStatus.QUEST_COMPLETED and theSandCharm == xi.questStatus.QUEST_AVAILABLE then
         player:startEvent(38) -- New dialog after 'Under the sea'
     elseif
-        underTheSea == QUEST_COMPLETED and
-        theSandCharm ~= QUEST_AVAILABLE and
-        theGift == QUEST_AVAILABLE
+        underTheSea == xi.questStatus.QUEST_COMPLETED and
+        theSandCharm ~= xi.questStatus.QUEST_AVAILABLE and
+        theGift == xi.questStatus.QUEST_AVAILABLE
     then
         player:startEvent(70, xi.item.DANCESHROOM) -- Start quest 'The gift'
-    elseif theGift == QUEST_ACCEPTED then
+    elseif theGift == xi.questStatus.QUEST_ACCEPTED then
         player:startEvent(71) -- During quest 'The gift'
-    elseif theGift == QUEST_COMPLETED and theSandCharm == QUEST_ACCEPTED then
+    elseif theGift == xi.questStatus.QUEST_COMPLETED and theSandCharm == xi.questStatus.QUEST_ACCEPTED then
         player:startEvent(78) -- New dialog after 'The gift'
     elseif
-        theGift == QUEST_COMPLETED and
-        theSandCharm == QUEST_COMPLETED and
-        theRealGift == QUEST_AVAILABLE
+        theGift == xi.questStatus.QUEST_COMPLETED and
+        theSandCharm == xi.questStatus.QUEST_COMPLETED and
+        theRealGift == xi.questStatus.QUEST_AVAILABLE
     then
         player:startEvent(73, xi.item.SHALL_SHELL) -- Start quest 'The real gift'
-    elseif theRealGift == QUEST_ACCEPTED then
+    elseif theRealGift == xi.questStatus.QUEST_ACCEPTED then
         player:startEvent(74, xi.item.SHALL_SHELL) -- During quest 'The real gift'
-    elseif theRealGift == QUEST_COMPLETED then
+    elseif theRealGift == xi.questStatus.QUEST_COMPLETED then
         player:startEvent(76) -- Final dialog after 'The real gift'
     else
         player:startEvent(30) -- Standard dialog

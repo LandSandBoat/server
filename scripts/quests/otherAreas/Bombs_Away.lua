@@ -16,7 +16,7 @@ quest.sections =
 {
     {
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE
+            return status == xi.questStatus.QUEST_AVAILABLE
         end,
 
         [xi.zone.ULEGUERAND_RANGE] =
@@ -36,7 +36,7 @@ quest.sections =
 
     {
         check = function(player, status, vars)
-            return status ~= QUEST_AVAILABLE
+            return status ~= xi.questStatus.QUEST_AVAILABLE
         end,
 
         [xi.zone.ULEGUERAND_RANGE] =

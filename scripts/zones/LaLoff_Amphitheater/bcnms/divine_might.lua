@@ -41,10 +41,10 @@ end
 
 battlefieldObject.onEventFinish = function(player, csid, option, npc)
     if csid == 32001 then
-        if player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.DIVINE_MIGHT) == QUEST_ACCEPTED then
+        if player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.DIVINE_MIGHT) == xi.questStatus.QUEST_ACCEPTED then
             player:setCharVar('DivineMight', 2) -- Used to use 2 to track completion, so that's preserved to maintain compatibility
         elseif
-            player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.DIVINE_MIGHT_REPEAT) == QUEST_ACCEPTED and
+            player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.DIVINE_MIGHT_REPEAT) == xi.questStatus.QUEST_ACCEPTED and
             player:hasKeyItem(xi.ki.MOONLIGHT_ORE)
         then
             player:setCharVar('DivineMight', 2)

@@ -16,7 +16,7 @@ entity.onTrigger = function(player, npc)
     local theWaywardAutomatonProgress = player:getCharVar('TheWaywardAutomatonProgress')
 
     if
-        theWaywardAutomaton == QUEST_ACCEPTED and
+        theWaywardAutomaton == xi.questStatus.QUEST_ACCEPTED and
         theWaywardAutomatonProgress == 2
     then
         if player:getCharVar('TheWaywardAutomatonNM') >= 1 then

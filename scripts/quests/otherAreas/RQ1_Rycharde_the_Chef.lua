@@ -23,7 +23,7 @@ quest.sections =
     -- Section: Quest available. Talk to Numi Adaligo, Take and Rycharde.
     {
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE
+            return status == xi.questStatus.QUEST_AVAILABLE
         end,
 
         [xi.zone.MHAURA] =
@@ -82,7 +82,7 @@ quest.sections =
     -- Section: Quest accepted. Handle trade outcomes.
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED
+            return status == xi.questStatus.QUEST_ACCEPTED
         end,
 
         [xi.zone.MHAURA] =

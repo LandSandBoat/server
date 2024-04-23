@@ -19,8 +19,8 @@ quest.sections =
 {
     {
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE and
-                player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.A_CLOCK_MOST_DELICATE) == QUEST_ACCEPTED
+            return status == xi.questStatus.QUEST_AVAILABLE and
+                player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.A_CLOCK_MOST_DELICATE) == xi.questStatus.QUEST_ACCEPTED
         end,
 
         [xi.zone.LOWER_JEUNO] =
@@ -47,7 +47,7 @@ quest.sections =
 
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED
+            return status == xi.questStatus.QUEST_ACCEPTED
         end,
 
         [xi.zone.LOWER_JEUNO] =

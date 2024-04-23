@@ -6,7 +6,7 @@
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    if player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.LUFET_S_LAKE_SALT) == QUEST_ACCEPTED then
+    if player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.LUFET_S_LAKE_SALT) == xi.questStatus.QUEST_ACCEPTED then
         if
             trade:hasItemQty(xi.item.CHUNK_OF_LUFET_SALT, 3) and
             trade:getItemCount() == 3

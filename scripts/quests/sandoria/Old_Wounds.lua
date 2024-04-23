@@ -19,7 +19,7 @@ quest.sections =
 {
     {
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE and
+            return status == xi.questStatus.QUEST_AVAILABLE and
                 player:canEquipItem(xi.item.SAPARA_OF_TRIALS, true) and
                 player:getCharSkillLevel(xi.skill.SWORD) / 10 >= 240 and
                 not player:hasKeyItem(xi.keyItem.WEAPON_TRAINING_GUIDE)
@@ -54,7 +54,7 @@ quest.sections =
 
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED
+            return status == xi.questStatus.QUEST_ACCEPTED
         end,
 
         [xi.zone.CHATEAU_DORAGUILLE] =

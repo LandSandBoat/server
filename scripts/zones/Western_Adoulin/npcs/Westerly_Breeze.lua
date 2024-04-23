@@ -30,7 +30,7 @@ entity.onTrade = function(player, npc, trade)
                 end
             end
         elseif ahCategory == 58 then
-            if amqtr == QUEST_ACCEPTED then
+            if amqtr == xi.questStatus.QUEST_ACCEPTED then
                 if itemId == 4541 then
                     -- We gave him another Goblin Drink.
                     -- Special event where he refuses it.
@@ -41,7 +41,7 @@ entity.onTrade = function(player, npc, trade)
                 end
             end
         else
-            if itemId == 4234 and amqtr == QUEST_ACCEPTED then
+            if itemId == 4234 and amqtr == xi.questStatus.QUEST_ACCEPTED then
                 -- We gave him Cursed Beverage.
                 -- Finishes Quest: 'Always More Quoth the Ravenous'
                 player:startEvent(3012)
@@ -58,10 +58,10 @@ entity.onTrigger = function(player, npc)
         not player:needToZone() and VanadielUniqueDay() > player:getCharVar('Westerly_Breeze_Wait')
     then
         if
-            amqtr ~= QUEST_COMPLETED and
+            amqtr ~= xi.questStatus.QUEST_COMPLETED and
             player:getFameLevel(xi.quest.fame_area.ADOULIN) >= 3
         then
-            if amqtr == QUEST_AVAILABLE then
+            if amqtr == xi.questStatus.QUEST_AVAILABLE then
                 -- Starts Quest: 'Always More Quoth the Ravenous'
                 player:startEvent(3010)
             else

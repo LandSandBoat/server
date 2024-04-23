@@ -65,8 +65,8 @@ zoneObject.onTriggerAreaEnter = function(player, triggerArea)
 
         [5] = function() -- AH mission
             if
-                player:getQuestStatus(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.NAVIGATING_THE_UNFRIENDLY_SEAS) == QUEST_COMPLETED and
-                player:getQuestStatus(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.AGAINST_ALL_ODDS) == QUEST_AVAILABLE and
+                player:getQuestStatus(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.NAVIGATING_THE_UNFRIENDLY_SEAS) == xi.questStatus.QUEST_COMPLETED and
+                player:getQuestStatus(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.AGAINST_ALL_ODDS) == xi.questStatus.QUEST_AVAILABLE and
                 player:getMainJob() == xi.job.COR and
                 player:getMainLvl() >= xi.settings.main.AF3_QUEST_LEVEL
             then

@@ -22,7 +22,7 @@ quest.sections =
     -- Section: Begin quest
     {
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE
+            return status == xi.questStatus.QUEST_AVAILABLE
         end,
 
         [xi.zone.AHT_URHGAN_WHITEGATE] =
@@ -43,7 +43,7 @@ quest.sections =
     -- Section: Questing
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED
+            return status == xi.questStatus.QUEST_ACCEPTED
         end,
 
         [xi.zone.AHT_URHGAN_WHITEGATE] =

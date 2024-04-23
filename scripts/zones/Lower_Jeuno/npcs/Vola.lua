@@ -11,7 +11,7 @@ local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     if
-        player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.FISTFUL_OF_FURY) == QUEST_ACCEPTED and
+        player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.FISTFUL_OF_FURY) == xi.questStatus.QUEST_ACCEPTED and
         trade:hasItemQty(xi.item.NUE_FANG, 1) and
         trade:hasItemQty(xi.item.MORBOLGER_VINE, 1) and
         trade:hasItemQty(xi.item.DODO_SKIN, 1) and
@@ -27,23 +27,23 @@ entity.onTrigger = function(player, npc)
 
     if
         player:getFameLevel(xi.quest.fame_area.NORG) >= 3 and
-        fistfulOfFury == QUEST_AVAILABLE and
-        player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.SILENCE_OF_THE_RAMS) == QUEST_COMPLETED
+        fistfulOfFury == xi.questStatus.QUEST_AVAILABLE and
+        player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.SILENCE_OF_THE_RAMS) == xi.questStatus.QUEST_COMPLETED
     then
         player:startEvent(216) -- Start Quest "Fistful of Fury"
 
-    elseif fistfulOfFury == QUEST_ACCEPTED then
+    elseif fistfulOfFury == xi.questStatus.QUEST_ACCEPTED then
         player:startEvent(215) -- During Quest "Fistful of Fury"
 
     elseif
-        beatAroundTheBushin == QUEST_AVAILABLE and
+        beatAroundTheBushin == xi.questStatus.QUEST_AVAILABLE and
         player:getMainJob() == xi.job.MNK and
         player:getMainLvl() >= 71 and
         player:getFameLevel(xi.quest.fame_area.NORG) >= 6
     then
         player:startEvent(160) -- Start Quest "Beat Around the Bushin"
 
-    elseif beatAroundTheBushin ~= QUEST_AVAILABLE then
+    elseif beatAroundTheBushin ~= xi.questStatus.QUEST_AVAILABLE then
         player:startEvent(214) -- During & After Quest "Beat Around the Bushin"
 
     else
@@ -72,7 +72,7 @@ entity.onEventFinish = function(player, csid, option, npc)
 
     elseif
         csid == 160 and
-        player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.BEAT_AROUND_THE_BUSHIN) == QUEST_AVAILABLE
+        player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.BEAT_AROUND_THE_BUSHIN) == xi.questStatus.QUEST_AVAILABLE
     then
         player:setCharVar('BeatAroundTheBushin', 1) -- For the next quest "Beat around the Bushin"
     end

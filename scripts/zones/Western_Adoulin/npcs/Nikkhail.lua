@@ -17,7 +17,7 @@ entity.onTrigger = function(player, npc)
     local soaMission = player:getCurrentMission(xi.mission.log_id.SOA)
 
     if soaMission >= xi.mission.id.soa.LIFE_ON_THE_FRONTIER then
-        if atfta == QUEST_ACCEPTED and atftaNeedKI then
+        if atfta == xi.questStatus.QUEST_ACCEPTED and atftaNeedKI then
             -- Progresses Quest: 'A Thirst for the Ages'
             player:startEvent(5053)
         end

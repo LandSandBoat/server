@@ -29,23 +29,23 @@ entity.onTrigger = function(player, npc)
         player:startEvent(712, 0, xi.item.ICE_PENDULUM, 0, 0, 0, 0, 0, 0) -- lost the ice pendulum need another one
     -----------------------------------
     elseif
-        (trialByIce == QUEST_AVAILABLE and player:getFameLevel(xi.quest.fame_area.SANDORIA) >= 6) or
-        (trialByIce == QUEST_COMPLETED and os.time() > player:getCharVar('TrialByIce_date'))
+        (trialByIce == xi.questStatus.QUEST_AVAILABLE and player:getFameLevel(xi.quest.fame_area.SANDORIA) >= 6) or
+        (trialByIce == xi.questStatus.QUEST_COMPLETED and os.time() > player:getCharVar('TrialByIce_date'))
     then
         player:startEvent(706, 0, xi.ki.TUNING_FORK_OF_ICE) -- Start and restart quest 'Trial by ice'
     elseif
-        trialByIce == QUEST_ACCEPTED and
+        trialByIce == xi.questStatus.QUEST_ACCEPTED and
         not player:hasKeyItem(xi.ki.TUNING_FORK_OF_ICE) and
         not player:hasKeyItem(xi.ki.WHISPER_OF_FROST)
     then
         player:startEvent(718, 0, xi.ki.TUNING_FORK_OF_ICE) -- Defeat against Shiva : Need new Fork
     elseif
-        trialByIce == QUEST_ACCEPTED and
+        trialByIce == xi.questStatus.QUEST_ACCEPTED and
         not player:hasKeyItem(xi.ki.WHISPER_OF_FROST)
     then
         player:startEvent(707, 0, xi.ki.TUNING_FORK_OF_ICE, 4)
     elseif
-        trialByIce == QUEST_ACCEPTED and
+        trialByIce == xi.questStatus.QUEST_ACCEPTED and
         player:hasKeyItem(xi.ki.WHISPER_OF_FROST)
     then
         local numitem = 0
@@ -81,7 +81,7 @@ end
 
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 706 and option == 1 then
-        if player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.TRIAL_BY_ICE) == QUEST_COMPLETED then
+        if player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.TRIAL_BY_ICE) == xi.questStatus.QUEST_COMPLETED then
             player:delQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.TRIAL_BY_ICE)
         end
 

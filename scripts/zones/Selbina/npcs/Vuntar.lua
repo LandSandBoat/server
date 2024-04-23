@@ -7,7 +7,7 @@
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    if player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.CARGO) ~= QUEST_AVAILABLE then
+    if player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.CARGO) ~= xi.questStatus.QUEST_AVAILABLE then
         if os.time() > player:getCharVar('VuntarCanBuyItem_date') then
             if npcUtil.tradeHas(trade, xi.item.ROLANBERRY_881_CE) then
                 player:startEvent(52, 1) -- Can Buy rolanberry (881 ce)
@@ -25,7 +25,7 @@ end
 entity.onTrigger = function(player, npc)
     if
         player:getMainLvl() >= 20 and
-        player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.CARGO) == QUEST_AVAILABLE
+        player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.CARGO) == xi.questStatus.QUEST_AVAILABLE
     then
         player:startEvent(50, 4365) -- Start quest "Cargo"
     elseif player:getMainLvl() < 20 then
@@ -44,7 +44,7 @@ entity.onEventFinish = function(player, csid, option, npc)
     elseif csid == 52 then
         player:setCharVar('VuntarCanBuyItem_date', getMidnight())
 
-        if player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.CARGO) == QUEST_ACCEPTED then
+        if player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.CARGO) == xi.questStatus.QUEST_ACCEPTED then
             player:completeQuest(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.CARGO)
             player:addFame(xi.quest.fame_area.SELBINA_RABAO, 30)
         end

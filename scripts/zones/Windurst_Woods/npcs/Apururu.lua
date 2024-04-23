@@ -45,14 +45,14 @@ end
 entity.onTrade = function(player, npc, trade)
     -- THE KIND CARDIAN
     if
-        player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_KIND_CARDIAN) == QUEST_ACCEPTED and
+        player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_KIND_CARDIAN) == xi.questStatus.QUEST_ACCEPTED and
         npcUtil.tradeHas(trade, xi.item.TEN_OF_CUPS_CARD)
     then
         player:startEvent(397)
 
         -- CAN CARDIANS CRY?
     elseif
-        player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CAN_CARDIANS_CRY) == QUEST_ACCEPTED and
+        player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CAN_CARDIANS_CRY) == xi.questStatus.QUEST_ACCEPTED and
         npcUtil.tradeHas(trade, xi.item.BRUISED_STARFRUIT)
     then
         player:startEvent(325, 0, 20000, 5000)
@@ -66,7 +66,7 @@ entity.onTrigger = function(player, npc)
     local canCardiansCry = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CAN_CARDIANS_CRY)
 
         -- THE KIND CARDIAN
-    if kindCardian == QUEST_ACCEPTED then
+    if kindCardian == xi.questStatus.QUEST_ACCEPTED then
         if kindCardianCS == 0 then
             player:startEvent(392)
         elseif kindCardianCS == 1 then
@@ -77,14 +77,14 @@ entity.onTrigger = function(player, npc)
 
         -- CAN CARDIANS CRY?
     elseif
-        allNewC3000 == QUEST_COMPLETED and
-        canCardiansCry == QUEST_AVAILABLE and
+        allNewC3000 == xi.questStatus.QUEST_COMPLETED and
+        canCardiansCry == xi.questStatus.QUEST_AVAILABLE and
         player:getFameLevel(xi.quest.fame_area.WINDURST) >= 5
     then
         player:startEvent(319, 0, 20000) -- start quest
-    elseif canCardiansCry == QUEST_ACCEPTED then
+    elseif canCardiansCry == xi.questStatus.QUEST_ACCEPTED then
         player:startEvent(320, 0, 20000) -- reminder
-    elseif canCardiansCry == QUEST_COMPLETED then
+    elseif canCardiansCry == xi.questStatus.QUEST_COMPLETED then
         player:startEvent(330) -- new standard dialog
 
         -- TRUST

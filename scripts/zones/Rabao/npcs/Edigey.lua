@@ -11,7 +11,7 @@ entity.onTrade = function(player, npc, trade)
     local forgetTheAntidote = player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.DONT_FORGET_THE_ANTIDOTE)
 
     if
-        (forgetTheAntidote == QUEST_ACCEPTED or forgetTheAntidote == QUEST_COMPLETED) and
+        (forgetTheAntidote == xi.questStatus.QUEST_ACCEPTED or forgetTheAntidote == xi.questStatus.QUEST_COMPLETED) and
         trade:hasItemQty(xi.item.VIAL_OF_DESERT_VENOM, 1) and
         trade:getItemCount() == 1
     then
@@ -23,13 +23,13 @@ entity.onTrigger = function(player, npc)
     local forgetTheAntidote = player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.DONT_FORGET_THE_ANTIDOTE)
 
     if
-        forgetTheAntidote == QUEST_AVAILABLE and
+        forgetTheAntidote == xi.questStatus.QUEST_AVAILABLE and
         player:getFameLevel(xi.quest.fame_area.SELBINA_RABAO) >= 4
     then
         player:startEvent(2, 0, xi.item.VIAL_OF_DESERT_VENOM)
-    elseif forgetTheAntidote == QUEST_ACCEPTED then
+    elseif forgetTheAntidote == xi.questStatus.QUEST_ACCEPTED then
         player:startEvent(3, 0, xi.item.VIAL_OF_DESERT_VENOM)
-    elseif forgetTheAntidote == QUEST_COMPLETED then
+    elseif forgetTheAntidote == xi.questStatus.QUEST_COMPLETED then
         player:startEvent(5, 0, xi.item.VIAL_OF_DESERT_VENOM)
     else
         player:startEvent(50)

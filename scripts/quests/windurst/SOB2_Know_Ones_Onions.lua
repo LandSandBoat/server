@@ -30,7 +30,7 @@ quest.sections =
     -- Section: Quest is available.
     {
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE and
+            return status == xi.questStatus.QUEST_AVAILABLE and
                 player:hasCompletedQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.TRUTH_JUSTICE_AND_THE_ONION_WAY)
         end,
 
@@ -71,7 +71,7 @@ quest.sections =
     -- Section: Quest accepeted in time.
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED and
+            return status == xi.questStatus.QUEST_ACCEPTED and
                 vars.Prog == 1 and
                 player:getRank(xi.nation.WINDURST) < 3
         end,
@@ -110,7 +110,7 @@ quest.sections =
     -- Section: Trade performed in time.
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED and
+            return status == xi.questStatus.QUEST_ACCEPTED and
                 vars.Prog == 2 and
                 player:getRank(xi.nation.WINDURST) < 3
         end,
@@ -141,7 +141,7 @@ quest.sections =
     -- Section: Expedition complete. End quest.
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED and
+            return status == xi.questStatus.QUEST_ACCEPTED and
                 vars.Prog == 3
         end,
 
@@ -168,7 +168,7 @@ quest.sections =
     -- Section: Quest accepted. You are late at any step of the process, except very last step.
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED and
+            return status == xi.questStatus.QUEST_ACCEPTED and
                 vars.Prog < 3 and
                 player:getRank(xi.nation.WINDURST) >= 3
         end,
@@ -222,8 +222,8 @@ quest.sections =
     -- Section: Quest completed.
     {
         check = function(player, status, vars)
-            return status == QUEST_COMPLETED and
-                player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.INSPECTORS_GADGET) == QUEST_AVAILABLE
+            return status == xi.questStatus.QUEST_COMPLETED and
+                player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.INSPECTORS_GADGET) == xi.questStatus.QUEST_AVAILABLE
         end,
 
         [xi.zone.PORT_WINDURST] =

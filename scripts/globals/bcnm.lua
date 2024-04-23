@@ -703,8 +703,8 @@ local function checkReqs(player, npc, bfid, registrant)
         end,
 
         [293] = function() -- ZM14 Divine Might
-            return player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.DIVINE_MIGHT) == QUEST_ACCEPTED or
-                player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.DIVINE_MIGHT_REPEAT) == QUEST_ACCEPTED
+            return player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.DIVINE_MIGHT) == xi.questStatus.QUEST_ACCEPTED or
+                player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.DIVINE_MIGHT_REPEAT) == xi.questStatus.QUEST_ACCEPTED
         end,
 
         [320] = function() -- ZM16: The Celestial Nexus
@@ -945,7 +945,7 @@ local function checkReqs(player, npc, bfid, registrant)
         end,
 
         [896] = function() -- Quest: Storms of Fate
-            return player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.STORMS_OF_FATE) == QUEST_ACCEPTED and
+            return player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.STORMS_OF_FATE) == xi.questStatus.QUEST_ACCEPTED and
                 player:getCharVar('StormsOfFate') == 2
         end,
 
@@ -998,7 +998,7 @@ local function checkReqs(player, npc, bfid, registrant)
         end,
 
         [1057] = function() -- Apocalypse Nigh
-            return player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.APOCALYPSE_NIGH) == QUEST_ACCEPTED and
+            return player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.APOCALYPSE_NIGH) == xi.questStatus.QUEST_ACCEPTED and
                 player:getCharVar('ApocalypseNigh') == 4
         end,
 
@@ -1015,7 +1015,7 @@ local function checkReqs(player, npc, bfid, registrant)
         end,
 
         [1122] = function() -- Quest: Omens (BLU AF Quest 2)
-            return player:getQuestStatus(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.OMENS) == QUEST_ACCEPTED and
+            return player:getQuestStatus(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.OMENS) == xi.questStatus.QUEST_ACCEPTED and
                 xi.quest.getVar(player, xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.OMENS, 'Prog') == 0
         end,
 
@@ -1135,7 +1135,7 @@ local function checkReqs(player, npc, bfid, registrant)
         [1057] = function() -- Quest: Apocalypse Nigh
             return player:hasCompletedQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.APOCALYPSE_NIGH) or
                 (
-                    player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.APOCALYPSE_NIGH) == QUEST_ACCEPTED and
+                    player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.APOCALYPSE_NIGH) == xi.questStatus.QUEST_ACCEPTED and
                     player:getCharVar('ApocalypseNigh') == 4
                 )
         end,
@@ -1457,9 +1457,9 @@ local function checkSkip(player, bfid)
         [896] = function() -- Quest: Storms of Fate
             local stormsOfFateStatus = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.STORMS_OF_FATE)
 
-            return stormsOfFateStatus == QUEST_COMPLETED or
+            return stormsOfFateStatus == xi.questStatus.QUEST_COMPLETED or
                 (
-                    stormsOfFateStatus == QUEST_ACCEPTED and
+                    stormsOfFateStatus == xi.questStatus.QUEST_ACCEPTED and
                     player:getCharVar('StormsOfFate') > 2
                 )
         end,

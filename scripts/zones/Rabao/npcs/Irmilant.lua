@@ -11,12 +11,12 @@ entity.onTrade = function(player, npc, trade)
     local ImmortalLuShang = player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.THE_IMMORTAL_LU_SHANG)
 
     if
-        (ImmortalLuShang == QUEST_ACCEPTED or ImmortalLuShang == QUEST_COMPLETED) and
+        (ImmortalLuShang == xi.questStatus.QUEST_ACCEPTED or ImmortalLuShang == xi.questStatus.QUEST_COMPLETED) and
         npcUtil.tradeHas(trade, { 720, xi.item.BROKEN_LU_SHANGS_FISHING_ROD, xi.item.LIGHT_CRYSTAL })
     then
         player:startEvent(78)
     elseif
-        (Indomitable == QUEST_ACCEPTED or Indomitable == QUEST_COMPLETED) and
+        (Indomitable == xi.questStatus.QUEST_ACCEPTED or Indomitable == xi.questStatus.QUEST_COMPLETED) and
         npcUtil.tradeHas(trade, { 1837, 1826 })
     then
         player:startEvent(132)
@@ -30,19 +30,19 @@ entity.onTrigger = function(player, npc)
 
     if
         player:hasItem(xi.item.BROKEN_LU_SHANGS_FISHING_ROD) and
-        (ImmortalLuShang == QUEST_AVAILABLE or ImmortalLuShang == QUEST_COMPLETED)
+        (ImmortalLuShang == xi.questStatus.QUEST_AVAILABLE or ImmortalLuShang == xi.questStatus.QUEST_COMPLETED)
     then
         player:startEvent(77) --Offer the quest if the player has the broken rod
     elseif
         player:hasKeyItem(xi.ki.SERPENT_RUMORS) and
-        Indomitable == QUEST_AVAILABLE
+        Indomitable == xi.questStatus.QUEST_AVAILABLE
     then
         player:startEvent(131) --Begins Indomitable Spirit
     elseif indomitableTimer ~= 0 and indomitableTimer > os.time() then
         player:startEvent(133) --Asks the player to wait (next CQ tally)
     elseif indomitableTimer ~= 0 then
         player:startEvent(134) --Ends the Quest
-    elseif Indomitable == QUEST_COMPLETED then
+    elseif Indomitable == xi.questStatus.QUEST_COMPLETED then
         player:startEvent(135) --Dialogue for those who have completed Indomitable Spirit
     end
 end

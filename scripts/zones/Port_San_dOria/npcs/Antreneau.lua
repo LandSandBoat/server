@@ -18,18 +18,18 @@ entity.onTrigger = function(player, npc)
 
     if
         player:getCharVar('Quest[0][100]Option') == 0 and
-        aTasteForMeat == QUEST_COMPLETED and
+        aTasteForMeat == xi.questStatus.QUEST_COMPLETED and
         fameLevel >= 8 and
-        medicineWoman == QUEST_COMPLETED and
+        medicineWoman == xi.questStatus.QUEST_COMPLETED and
         diaryPage >= 4
     then
         local overTheHillsAndFarAway = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.OVER_THE_HILLS_AND_FAR_AWAY)
 
-        if overTheHillsAndFarAway == QUEST_AVAILABLE then
+        if overTheHillsAndFarAway == xi.questStatus.QUEST_AVAILABLE then
             player:startEvent(725) -- Start
-        elseif overTheHillsAndFarAway == QUEST_ACCEPTED then
+        elseif overTheHillsAndFarAway == xi.questStatus.QUEST_ACCEPTED then
             player:startEvent(726) -- Talks about the map.
-        elseif overTheHillsAndFarAway == QUEST_COMPLETED then
+        elseif overTheHillsAndFarAway == xi.questStatus.QUEST_COMPLETED then
             player:startEvent(727) -- Found his uncle Louverance.
         end
     end

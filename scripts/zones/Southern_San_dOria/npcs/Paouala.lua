@@ -7,7 +7,7 @@
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    if player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.SLEEPLESS_NIGHTS) == QUEST_ACCEPTED then
+    if player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.SLEEPLESS_NIGHTS) == xi.questStatus.QUEST_ACCEPTED then
         if
             trade:hasItemQty(xi.item.JUG_OF_MARYS_MILK, 1) and
             trade:getItemCount() == 1
@@ -22,12 +22,12 @@ entity.onTrigger = function(player, npc)
 
     if
         player:getFameLevel(xi.quest.fame_area.SANDORIA) >= 2 and
-        sleeplessNights == QUEST_AVAILABLE
+        sleeplessNights == xi.questStatus.QUEST_AVAILABLE
     then
         player:startEvent(85)
-    elseif sleeplessNights == QUEST_ACCEPTED then
+    elseif sleeplessNights == xi.questStatus.QUEST_ACCEPTED then
         player:startEvent(83)
-    elseif sleeplessNights == QUEST_COMPLETED then
+    elseif sleeplessNights == xi.questStatus.QUEST_COMPLETED then
         player:startEvent(81)
     else
         player:startEvent(82)

@@ -14,7 +14,7 @@ entity.onTrigger = function(player, npc)
 
     -- CLASS REUNION
     if
-        classReunion == QUEST_ACCEPTED and
+        classReunion == xi.questStatus.QUEST_ACCEPTED and
         player:getCharVar('ClassReunionProgress') >= 3 and
         player:getCharVar('ClassReunion_TalkedToFupepe') ~= 1
     then

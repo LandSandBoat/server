@@ -15,7 +15,7 @@ entity.onTrigger = function(player, npc)
     local operationTeatime = player:getQuestStatus(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.OPERATION_TEATIME)
     local operationTeatimeProgress = player:getCharVar('OperationTeatimeProgress')
 
-    if operationTeatime == QUEST_ACCEPTED and operationTeatimeProgress == 3 then
+    if operationTeatime == xi.questStatus.QUEST_ACCEPTED and operationTeatimeProgress == 3 then
         player:startEvent(15)
     else
         player:messageSpecial(ID.text.NOTHING_OUT_OF_ORDINARY)

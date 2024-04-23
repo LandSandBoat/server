@@ -45,7 +45,7 @@ instanceObject.afterInstanceRegister = function(player)
     local questStatus = player:getQuestStatus(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.LIGHT_IN_THE_DARKNESS)
     local questProgVar = player:getCharVar('Quest[7][19]Prog')
     if
-        questStatus == QUEST_ACCEPTED and
+        questStatus == xi.questStatus.QUEST_ACCEPTED and
         (questProgVar == 4 or questProgVar == 7)
     then
         -- TODO: Player is not locked during this CS and will aggro the mobs

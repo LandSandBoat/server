@@ -19,7 +19,7 @@ quest.sections =
 {
     {
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE and
+            return status == xi.questStatus.QUEST_AVAILABLE and
                 player:hasCompletedQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CURSES_FOILED_AGAIN_1) and
                 player:getFameLevel(xi.quest.fame_area.WINDURST) >= 2
         end,
@@ -61,7 +61,7 @@ quest.sections =
                         -- NOTE: There is interplay between Making Headlines and this quest for dialogue.  We should be safe with
                         -- fallthroughs in interaction, but also there may be a better method to implement both.
 
-                        if player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.MAKING_HEADLINES) == QUEST_ACCEPTED then
+                        if player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.MAKING_HEADLINES) == xi.questStatus.QUEST_ACCEPTED then
                             return quest:progressEvent(284)
                         else
                             return quest:progressEvent(179)
@@ -101,7 +101,7 @@ quest.sections =
 
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED
+            return status == xi.questStatus.QUEST_ACCEPTED
         end,
 
         [xi.zone.WINDURST_WALLS] =
@@ -141,7 +141,7 @@ quest.sections =
 
     {
         check = function(player, status, vars)
-            return status == QUEST_COMPLETED and
+            return status == xi.questStatus.QUEST_COMPLETED and
                 not player:hasCompletedQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CURSES_FOILED_A_GOLEM)
         end,
 

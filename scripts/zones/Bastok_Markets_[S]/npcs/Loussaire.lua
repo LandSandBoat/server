@@ -57,7 +57,7 @@ entity.onTrigger = function(player, npc)
 
         -- Nothing in progress and meet the starting requirements.
         elseif
-            downwardHelix == QUEST_COMPLETED and
+            downwardHelix == xi.questStatus.QUEST_COMPLETED and
             mJob == xi.job.SCH and
             mLvl >= xi.settings.main.AF2_QUEST_LEVEL
         then

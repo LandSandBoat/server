@@ -20,13 +20,13 @@ entity.onTrigger = function(player, npc)
     elseif diaryPage == 1 then
         player:startEvent(640)          -- reads page 2
     elseif diaryPage == 2 then
-        if medicineWoman == QUEST_COMPLETED and aSquiresTestII == QUEST_COMPLETED then
-            if toCureaCough == QUEST_ACCEPTED then
+        if medicineWoman == xi.questStatus.QUEST_COMPLETED and aSquiresTestII == xi.questStatus.QUEST_COMPLETED then
+            if toCureaCough == xi.questStatus.QUEST_ACCEPTED then
                 player:startEvent(641)  -- reads page 3
             else
                 player:startEvent(640)  -- reads page 2
             end
-        elseif medicineWoman == QUEST_AVAILABLE and aSquiresTestII == QUEST_AVAILABLE then
+        elseif medicineWoman == xi.questStatus.QUEST_AVAILABLE and aSquiresTestII == xi.questStatus.QUEST_AVAILABLE then
             player:startEvent(641)      -- reads page 3
         else
             player:startEvent(640)      -- reads page 2

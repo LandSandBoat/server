@@ -18,16 +18,16 @@ end
 entity.onTrigger = function(player, npc)
     local twinstoneBonding = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.TWINSTONE_BONDING)
 
-    if twinstoneBonding == QUEST_COMPLETED then
+    if twinstoneBonding == xi.questStatus.QUEST_COMPLETED then
         if player:needToZone() then
             player:startEvent(491, 0, xi.item.TWINSTONE_EARRING)
         else
             player:startEvent(488, 0, xi.item.TWINSTONE_EARRING)
         end
-    elseif twinstoneBonding == QUEST_ACCEPTED then
+    elseif twinstoneBonding == xi.questStatus.QUEST_ACCEPTED then
         player:startEvent(488, 0, xi.item.TWINSTONE_EARRING)
     elseif
-        twinstoneBonding == QUEST_AVAILABLE and
+        twinstoneBonding == xi.questStatus.QUEST_AVAILABLE and
         player:getFameLevel(xi.quest.fame_area.WINDURST) >= 2
     then
         player:startEvent(487, 0, xi.item.TWINSTONE_EARRING)
@@ -48,7 +48,7 @@ entity.onEventFinish = function(player, csid, option, npc)
         player:needToZone(true)
         player:setCharVar('GiohAijhriSpokenTo', 0)
 
-        if player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.TWINSTONE_BONDING) == QUEST_ACCEPTED then
+        if player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.TWINSTONE_BONDING) == xi.questStatus.QUEST_ACCEPTED then
             npcUtil.completeQuest(player, xi.quest.log_id.WINDURST, xi.quest.id.windurst.TWINSTONE_BONDING, { item = 17154, fame = 80, fameArea = xi.quest.fame_area.WINDURST, title = xi.title.BOND_FIXER })
         else
             player:addFame(xi.quest.fame_area.WINDURST, 10)

@@ -48,7 +48,7 @@ quest.sections =
 {
     {
         check = function(player, status, vars)
-            return status ~= QUEST_ACCEPTED and
+            return status ~= xi.questStatus.QUEST_ACCEPTED and
                 player:getMainLvl() >= 10 and
                 player:getRank(player:getNation()) >= 2 and
                 player:getFameLevel(xi.quest.fame_area.SELBINA_RABAO) >= 2 and
@@ -85,7 +85,7 @@ quest.sections =
 
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED
+            return status == xi.questStatus.QUEST_ACCEPTED
         end,
 
         [xi.zone.SELBINA] =

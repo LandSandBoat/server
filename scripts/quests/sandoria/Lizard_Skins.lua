@@ -20,7 +20,7 @@ quest.sections =
 {
     {
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE and
+            return status == xi.questStatus.QUEST_AVAILABLE and
                 player:getFameLevel(xi.quest.fame_area.SANDORIA) >= 2 and
                 player:hasCompletedQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_SEAMSTRESS)
         end,
@@ -61,7 +61,7 @@ quest.sections =
 
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED
+            return status == xi.questStatus.QUEST_ACCEPTED
         end,
 
         [xi.zone.SOUTHERN_SAN_DORIA] =
@@ -70,11 +70,11 @@ quest.sections =
         },
     },
 
-    -- These functions check the status of ~= QUEST_AVAILABLE to support repeating
+    -- These functions check the status of ~= xi.questStatus.QUEST_AVAILABLE to support repeating
     -- the quest.  Does not have to be flagged again to complete an additional time.
     {
         check = function(player, status, vars)
-            return status ~= QUEST_AVAILABLE
+            return status ~= xi.questStatus.QUEST_AVAILABLE
         end,
 
         [xi.zone.SOUTHERN_SAN_DORIA] =
@@ -107,7 +107,7 @@ quest.sections =
 
     {
         check = function(player, status, vars)
-            return status == QUEST_COMPLETED and player:getFameLevel(xi.quest.fame_area.SANDORIA) < 3
+            return status == xi.questStatus.QUEST_COMPLETED and player:getFameLevel(xi.quest.fame_area.SANDORIA) < 3
         end,
 
         [xi.zone.SOUTHERN_SAN_DORIA] =

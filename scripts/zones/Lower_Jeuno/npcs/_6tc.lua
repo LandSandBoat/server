@@ -10,7 +10,7 @@ local ID = zones[xi.zone.LOWER_JEUNO]
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    if player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.BEAT_AROUND_THE_BUSHIN) == QUEST_ACCEPTED then
+    if player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.BEAT_AROUND_THE_BUSHIN) == xi.questStatus.QUEST_ACCEPTED then
         if
             trade:hasItemQty(xi.item.WYRM_BEARD, 1) and
             trade:getItemCount() == 1 and

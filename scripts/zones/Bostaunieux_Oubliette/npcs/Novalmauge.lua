@@ -31,7 +31,7 @@ entity.onTrade = function(player, npc, trade)
     then
         player:startEvent(17)
     elseif
-        player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_RUMOR) == QUEST_ACCEPTED and
+        player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_RUMOR) == xi.questStatus.QUEST_ACCEPTED and
         npcUtil.tradeHas(trade, xi.item.VIAL_OF_BEASTMAN_BLOOD)
     then
         player:startEvent(12)
@@ -60,14 +60,14 @@ entity.onTrigger = function(player, npc)
 
     -- THE RUMOR
     elseif
-        theRumor == QUEST_AVAILABLE and
+        theRumor == xi.questStatus.QUEST_AVAILABLE and
         player:getFameLevel(xi.quest.fame_area.SANDORIA) >= 3 and
         player:getMainLvl() >= 10
     then
         player:startEvent(13)
-    elseif theRumor == QUEST_ACCEPTED then
+    elseif theRumor == xi.questStatus.QUEST_ACCEPTED then
         player:startEvent(11)
-    elseif theRumor == QUEST_COMPLETED then
+    elseif theRumor == xi.questStatus.QUEST_COMPLETED then
         player:startEvent(14) -- Standard dialog after "The Rumor"
     else
         player:startEvent(10) -- Standard dialog

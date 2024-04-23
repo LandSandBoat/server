@@ -45,7 +45,7 @@ quest.sections =
     -- Section: Quest available
     {
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE and player:needToZone() == false
+            return status == xi.questStatus.QUEST_AVAILABLE and player:needToZone() == false
         end,
 
         [xi.zone.WINDURST_WATERS] =
@@ -94,7 +94,7 @@ quest.sections =
     -- Section: Quest accepted
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED and vars.Prog == 0
+            return status == xi.questStatus.QUEST_ACCEPTED and vars.Prog == 0
         end,
 
         [xi.zone.WINDURST_WATERS] =
@@ -116,7 +116,7 @@ quest.sections =
     -- Section: Finish quest
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED and vars.Prog ~= 0
+            return status == xi.questStatus.QUEST_ACCEPTED and vars.Prog ~= 0
         end,
 
         [xi.zone.WINDURST_WATERS] =
@@ -157,7 +157,7 @@ quest.sections =
     -- Section: Quest Completed
     {
         check = function(player, status, vars)
-            return status == QUEST_COMPLETED
+            return status == xi.questStatus.QUEST_COMPLETED
         end,
 
         [xi.zone.WINDURST_WATERS] =

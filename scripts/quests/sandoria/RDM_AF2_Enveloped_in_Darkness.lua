@@ -23,8 +23,8 @@ quest.sections =
     -- Section: Quest available.
     {
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE and
-                player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_CRIMSON_TRIAL) == QUEST_COMPLETED and
+            return status == xi.questStatus.QUEST_AVAILABLE and
+                player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_CRIMSON_TRIAL) == xi.questStatus.QUEST_COMPLETED and
                 player:getMainJob() == xi.job.RDM and
                 player:getMainLvl() >= 50
         end,
@@ -71,7 +71,7 @@ quest.sections =
     -- Section: Quest accepted
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED
+            return status == xi.questStatus.QUEST_ACCEPTED
         end,
 
         [xi.zone.CHATEAU_DORAGUILLE] =

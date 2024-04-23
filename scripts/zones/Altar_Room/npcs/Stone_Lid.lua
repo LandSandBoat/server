@@ -9,7 +9,7 @@ local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     local moralmanifest = player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.A_MORAL_MANIFEST)
-    if moralmanifest == QUEST_ACCEPTED and player:getCharVar('moral') == 7 then
+    if moralmanifest == xi.questStatus.QUEST_ACCEPTED and player:getCharVar('moral') == 7 then
         if trade:hasItemQty(xi.item.YAGUDO_HEADGEAR, 1) then -- Trade Yagudo Headgear
             player:tradeComplete()
             player:startEvent(50)

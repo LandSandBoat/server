@@ -13,14 +13,14 @@ entity.onTrigger = function(player, npc)
     local redeemingRocks = player:getQuestStatus(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.REDEEMING_ROCKS)
     local rocksProg = player:getCharVar('RedeemingRocksProg')
 
-    if redeemingRocks == QUEST_AVAILABLE then
+    if redeemingRocks == xi.questStatus.QUEST_AVAILABLE then
         player:startEvent(108) -- Start quest "Redeeming Rocks"
-    elseif redeemingRocks == QUEST_ACCEPTED and rocksProg == 2 then
+    elseif redeemingRocks == xi.questStatus.QUEST_ACCEPTED and rocksProg == 2 then
         player:startEvent(109) -- 3rd CS quest "Redeeming Rocks"
-    elseif redeemingRocks == QUEST_ACCEPTED and rocksProg == 4 then
+    elseif redeemingRocks == xi.questStatus.QUEST_ACCEPTED and rocksProg == 4 then
         player:startEvent(110) -- 4th CS quest "Redeeming Rocks"
     elseif
-        redeemingRocks == QUEST_ACCEPTED and
+        redeemingRocks == xi.questStatus.QUEST_ACCEPTED and
         player:getCharVar('RedeemingDay') ~= VanadielDayOfTheYear()
     then
         player:startEvent(111) -- Last CS quest "Redeeming Rocks"

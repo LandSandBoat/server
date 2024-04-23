@@ -19,7 +19,7 @@ quest.sections =
 {
     {
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE and
+            return status == xi.questStatus.QUEST_AVAILABLE and
                 player:getFameLevel(xi.quest.fame_area.BASTOK) >= 2
         end,
 
@@ -38,7 +38,7 @@ quest.sections =
 
     {
         check = function(player, status, vars)
-            return status ~= QUEST_AVAILABLE
+            return status ~= xi.questStatus.QUEST_AVAILABLE
         end,
 
         [xi.zone.PORT_BASTOK] =
@@ -54,7 +54,7 @@ quest.sections =
                 onTrigger = function(player, npc)
                     local questStatus = player:getQuestStatus(quest.areaId, quest.questId)
 
-                    if questStatus == QUEST_ACCEPTED then
+                    if questStatus == xi.questStatus.QUEST_ACCEPTED then
                         return quest:event(192)
                     else
                         return quest:event(194):oncePerZone()
@@ -67,7 +67,7 @@ quest.sections =
                 [193] = function(player, csid, option, npc)
                     player:confirmTrade()
 
-                    if player:getQuestStatus(quest.areaId, quest.questId) == QUEST_ACCEPTED then
+                    if player:getQuestStatus(quest.areaId, quest.questId) == xi.questStatus.QUEST_ACCEPTED then
                         player:addFame(xi.quest.fame_area.BASTOK, 112)
                     end
 

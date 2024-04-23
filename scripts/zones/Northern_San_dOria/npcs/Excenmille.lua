@@ -39,23 +39,23 @@ entity.onTrigger = function(player, npc)
     local rank3 = player:getRank(player:getNation()) >= 3 and 1 or 0
 
     if
-        trustSandoria == QUEST_ACCEPTED and
-        (trustWindurst == QUEST_COMPLETED or trustBastok == QUEST_COMPLETED)
+        trustSandoria == xi.questStatus.QUEST_ACCEPTED and
+        (trustWindurst == xi.questStatus.QUEST_COMPLETED or trustBastok == xi.questStatus.QUEST_COMPLETED)
     then
         player:startEvent(897, 0, 0, 0, trustMemory(player), 0, 0, 0, rank3)
-    elseif trustSandoria == QUEST_ACCEPTED and sandoriaFirstTrust == 0 then
+    elseif trustSandoria == xi.questStatus.QUEST_ACCEPTED and sandoriaFirstTrust == 0 then
         player:startEvent(893, 0, 0, 0, trustMemory(player), 0, 0, 0, rank3)
     elseif
-        trustSandoria == QUEST_ACCEPTED and
+        trustSandoria == xi.questStatus.QUEST_ACCEPTED and
         sandoriaFirstTrust == 1 and
         excenmilleTrustChatFlag == 0
     then
         player:startEvent(894)
         player:setLocalVar('ExcenmilleTrustChatFlag', 1)
-    elseif trustSandoria == QUEST_ACCEPTED and sandoriaFirstTrust == 2 then
+    elseif trustSandoria == xi.questStatus.QUEST_ACCEPTED and sandoriaFirstTrust == 2 then
         player:startEvent(895)
     elseif
-        trustSandoria == QUEST_COMPLETED and
+        trustSandoria == xi.questStatus.QUEST_COMPLETED and
         not player:hasSpell(xi.magic.spell.CURILLA) and
         excenmilleTrustChatFlag == 0
     then

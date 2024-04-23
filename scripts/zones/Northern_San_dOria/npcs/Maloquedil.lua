@@ -7,7 +7,7 @@
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    if player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.WARDING_VAMPIRES) ~= QUEST_AVAILABLE then
+    if player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.WARDING_VAMPIRES) ~= xi.questStatus.QUEST_AVAILABLE then
         if
             trade:hasItemQty(xi.item.BULB_OF_SHAMAN_GARLIC, 2) and
             trade:getItemCount() == 2
@@ -22,19 +22,19 @@ entity.onTrigger = function(player, npc)
     local wildcatSandy = player:getCharVar('WildcatSandy')
 
     if
-        player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and
+        player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.LURE_OF_THE_WILDCAT) == xi.questStatus.QUEST_ACCEPTED and
         not utils.mask.getBit(wildcatSandy, 7)
     then
         player:startEvent(807)
     elseif
-        warding == QUEST_AVAILABLE and
+        warding == xi.questStatus.QUEST_AVAILABLE and
         player:getFameLevel(xi.quest.fame_area.SANDORIA) >= 3
     then
         -- Quest available for fame superior or equal to 3
         player:startEvent(24)
-    elseif warding == QUEST_ACCEPTED then --Quest accepted, and he just tell me where to get item.
+    elseif warding == xi.questStatus.QUEST_ACCEPTED then --Quest accepted, and he just tell me where to get item.
         player:startEvent(22)
-    elseif warding == QUEST_COMPLETED then --Since the quest is repeatable, he tells me where to find (again) the items.
+    elseif warding == xi.questStatus.QUEST_COMPLETED then --Since the quest is repeatable, he tells me where to find (again) the items.
         player:startEvent(22)
     else
         player:startEvent(21)
@@ -51,7 +51,7 @@ entity.onEventFinish = function(player, csid, option, npc)
         player:tradeComplete()
         player:addTitle(xi.title.VAMPIRE_HUNTER_D_MINUS)
         npcUtil.giveCurrency(player, 'gil', 900)
-        if player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.WARDING_VAMPIRES) == QUEST_ACCEPTED then
+        if player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.WARDING_VAMPIRES) == xi.questStatus.QUEST_ACCEPTED then
             player:addFame(xi.quest.fame_area.SANDORIA, 30)
             player:completeQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.WARDING_VAMPIRES)
         else

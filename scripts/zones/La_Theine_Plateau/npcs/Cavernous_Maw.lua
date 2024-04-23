@@ -16,8 +16,8 @@ entity.onTrigger = function(player, npc)
         local hasStone = xi.abyssea.getHeldTraverserStones(player)
         if
             hasStone >= 1 and
-            player:getQuestStatus(xi.quest.log_id.ABYSSEA, xi.quest.id.abyssea.DAWN_OF_DEATH) == QUEST_ACCEPTED and
-            player:getQuestStatus(xi.quest.log_id.ABYSSEA, xi.quest.id.abyssea.A_GOLDSTRUCK_GIGAS) == QUEST_AVAILABLE
+            player:getQuestStatus(xi.quest.log_id.ABYSSEA, xi.quest.id.abyssea.DAWN_OF_DEATH) == xi.questStatus.QUEST_ACCEPTED and
+            player:getQuestStatus(xi.quest.log_id.ABYSSEA, xi.quest.id.abyssea.A_GOLDSTRUCK_GIGAS) == xi.questStatus.QUEST_AVAILABLE
         then
             player:startEvent(9)
         else

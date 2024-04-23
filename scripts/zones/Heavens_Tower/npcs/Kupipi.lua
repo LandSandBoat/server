@@ -37,23 +37,23 @@ entity.onTrigger = function(player, npc)
     local rank3 = player:getRank(player:getNation()) >= 3 and 1 or 0
 
     if
-        trustWindurst == QUEST_ACCEPTED and
-        (trustSandoria == QUEST_COMPLETED or trustBastok == QUEST_COMPLETED)
+        trustWindurst == xi.questStatus.QUEST_ACCEPTED and
+        (trustSandoria == xi.questStatus.QUEST_COMPLETED or trustBastok == xi.questStatus.QUEST_COMPLETED)
     then
         player:startEvent(439, 0, 0, 0, trustMemory(player), 0, 0, 0, rank3)
-    elseif trustWindurst == QUEST_ACCEPTED and windurstFirstTrust == 0 then
+    elseif trustWindurst == xi.questStatus.QUEST_ACCEPTED and windurstFirstTrust == 0 then
         player:startEvent(435, 0, 0, 0, trustMemory(player), 0, 0, 0, rank3)
     elseif
-        trustWindurst == QUEST_ACCEPTED and
+        trustWindurst == xi.questStatus.QUEST_ACCEPTED and
         windurstFirstTrust == 1 and
         kupipiTrustChatFlag == 0
     then
         player:startEvent(436)
         player:setLocalVar('KupipiTrustChatFlag', 1)
-    elseif trustWindurst == QUEST_ACCEPTED and windurstFirstTrust == 2 then
+    elseif trustWindurst == xi.questStatus.QUEST_ACCEPTED and windurstFirstTrust == 2 then
         player:startEvent(437)
     elseif
-        trustWindurst == QUEST_COMPLETED and
+        trustWindurst == xi.questStatus.QUEST_COMPLETED and
         not player:hasSpell(xi.magic.spell.NANAA_MIHGO) and
         kupipiTrustChatFlag == 0
     then

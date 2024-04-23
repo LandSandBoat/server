@@ -40,7 +40,7 @@ function xi.jeuno.helpers.GobbiebagQuest:new(params)
     {
         {
             check = function(player, status, vars)
-                return status == QUEST_AVAILABLE and getReqsMet(player)
+                return status == xi.questStatus.QUEST_AVAILABLE and getReqsMet(player)
             end,
 
             [xi.zone.LOWER_JEUNO] =
@@ -48,7 +48,7 @@ function xi.jeuno.helpers.GobbiebagQuest:new(params)
                 ['Bluffnix'] =
                 {
                     onTrigger = function(player, npc)
-                        return quest:progressEvent(43, getPendingDialogueId(player), QUEST_AVAILABLE, getReqsMet(player) and 1 or 0)
+                        return quest:progressEvent(43, getPendingDialogueId(player), xi.questStatus.QUEST_AVAILABLE, getReqsMet(player) and 1 or 0)
                     end
                 },
 
@@ -65,7 +65,7 @@ function xi.jeuno.helpers.GobbiebagQuest:new(params)
 
         {
             check = function(player, status, vars)
-                return status == QUEST_ACCEPTED and getReqsMet(player)
+                return status == xi.questStatus.QUEST_ACCEPTED and getReqsMet(player)
             end,
 
             [xi.zone.LOWER_JEUNO] =
@@ -79,12 +79,12 @@ function xi.jeuno.helpers.GobbiebagQuest:new(params)
                         then
                             return quest:progressEvent(73, getCompleteDiaglogueId(player))
                         else
-                            return quest:progressEvent(43, getPendingDialogueId(player), QUEST_ACCEPTED, 1)
+                            return quest:progressEvent(43, getPendingDialogueId(player), xi.questStatus.QUEST_ACCEPTED, 1)
                         end
                     end,
 
                     onTrigger = function(player, npc)
-                        return quest:progressEvent(43, getPendingDialogueId(player), QUEST_ACCEPTED, 1)
+                        return quest:progressEvent(43, getPendingDialogueId(player), xi.questStatus.QUEST_ACCEPTED, 1)
                     end,
                 },
 

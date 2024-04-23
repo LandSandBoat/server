@@ -9,7 +9,7 @@ local ID = zones[xi.zone.SOUTHERN_SAN_DORIA]
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    if player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.GRAVE_CONCERNS) == QUEST_ACCEPTED then
+    if player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.GRAVE_CONCERNS) == xi.questStatus.QUEST_ACCEPTED then
         if
             trade:hasItemQty(xi.item.TOMB_GUARDS_WATERSKIN, 1) and
             trade:getItemCount() == 1 and
@@ -23,21 +23,21 @@ end
 entity.onTrigger = function(player, npc)
     local tomb = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.GRAVE_CONCERNS)
 
-    if tomb == QUEST_AVAILABLE then
+    if tomb == xi.questStatus.QUEST_AVAILABLE then
         player:startEvent(541)
     elseif
-        tomb == QUEST_ACCEPTED and
+        tomb == xi.questStatus.QUEST_ACCEPTED and
         not player:hasItem(xi.item.SKIN_OF_WELL_WATER) and
         player:getCharVar('OfferingWaterOK') == 0
     then
         player:startEvent(622)
     elseif
-        tomb == QUEST_ACCEPTED and
+        tomb == xi.questStatus.QUEST_ACCEPTED and
         player:hasItem(xi.item.TOMB_GUARDS_WATERSKIN) and
         player:getCharVar('OfferingWaterOK') == 0
     then
         player:startEvent(623)
-    elseif tomb == QUEST_COMPLETED then
+    elseif tomb == xi.questStatus.QUEST_COMPLETED then
         player:startEvent(558)
     else
         player:startEvent(540)

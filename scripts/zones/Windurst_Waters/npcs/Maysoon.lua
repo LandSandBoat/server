@@ -10,7 +10,7 @@ local ID = zones[xi.zone.WINDURST_WATERS]
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    if player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.HOIST_THE_JELLY_ROGER) == QUEST_ACCEPTED then
+    if player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.HOIST_THE_JELLY_ROGER) == xi.questStatus.QUEST_ACCEPTED then
         if
             trade:hasItemQty(xi.item.SERVING_OF_ROYAL_JELLY, 1) and
             trade:getGil() == 0 and
@@ -25,7 +25,7 @@ entity.onTrigger = function(player, npc)
     local cooksPride = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.COOK_S_PRIDE)
     local hoistTheJelly = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.HOIST_THE_JELLY_ROGER)
 
-    if cooksPride == QUEST_ACCEPTED and hoistTheJelly == QUEST_AVAILABLE then
+    if cooksPride == xi.questStatus.QUEST_ACCEPTED and hoistTheJelly == xi.questStatus.QUEST_AVAILABLE then
         player:startEvent(10000) -- Start quest "Hoist the Jelly, Roger"
     else
         player:startEvent(266) -- Standard dialog

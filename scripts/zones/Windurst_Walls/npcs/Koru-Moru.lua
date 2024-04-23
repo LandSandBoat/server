@@ -17,7 +17,7 @@ entity.onTrade = function(player, npc, trade)
         count == 1 and
         trade:getGil() == 0
     then
-        if player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_ROOT_OF_THE_PROBLEM) == QUEST_ACCEPTED then
+        if player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_ROOT_OF_THE_PROBLEM) == xi.questStatus.QUEST_ACCEPTED then
             player:startEvent(349)
             player:tradeComplete()
             player:setCharVar('rootProblem', 2)
@@ -28,7 +28,7 @@ entity.onTrade = function(player, npc, trade)
         trade:getGil() == 0
     then
         if
-            player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CLASS_REUNION) == QUEST_ACCEPTED and
+            player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CLASS_REUNION) == xi.questStatus.QUEST_ACCEPTED and
             player:getCharVar('ClassReunionProgress') == 2
         then
             player:startEvent(407) -- now Koru remembers something that you need to inquire his former students.
@@ -49,46 +49,46 @@ entity.onTrigger = function(player, npc)
     -----------------------------------
     -- Carbuncle Debacle
     if
-        carbuncleDebacle == QUEST_ACCEPTED and
+        carbuncleDebacle == xi.questStatus.QUEST_ACCEPTED and
         carbuncleDebacleProgress == 1 or
         carbuncleDebacleProgress == 2
     then
         player:startEvent(416) -- go and see Ripapa
-    elseif carbuncleDebacle == QUEST_ACCEPTED and carbuncleDebacleProgress == 4 then
+    elseif carbuncleDebacle == xi.questStatus.QUEST_ACCEPTED and carbuncleDebacleProgress == 4 then
         player:startEvent(417) -- now go and see Agado-Pugado
-    elseif carbuncleDebacle == QUEST_ACCEPTED and carbuncleDebacleProgress == 5 then
+    elseif carbuncleDebacle == xi.questStatus.QUEST_ACCEPTED and carbuncleDebacleProgress == 5 then
         player:startEvent(418) -- Uran-Mafran must be stopped
-    elseif carbuncleDebacle == QUEST_ACCEPTED and carbuncleDebacleProgress == 7 then
+    elseif carbuncleDebacle == xi.questStatus.QUEST_ACCEPTED and carbuncleDebacleProgress == 7 then
         player:startEvent(419) -- ending cs
     elseif
-        thePuppetMaster == QUEST_COMPLETED and
-        classReunion == QUEST_COMPLETED and
-        carbuncleDebacle == QUEST_COMPLETED
+        thePuppetMaster == xi.questStatus.QUEST_COMPLETED and
+        classReunion == xi.questStatus.QUEST_COMPLETED and
+        carbuncleDebacle == xi.questStatus.QUEST_COMPLETED
     then
         player:startEvent(420) -- new cs after all 3 SMN AFs done
     -----------------------------------
     -- Class Reunion
-    elseif classReunion == QUEST_ACCEPTED and classReunionProgress == 1 then
+    elseif classReunion == xi.questStatus.QUEST_ACCEPTED and classReunionProgress == 1 then
         player:startEvent(412, 0, 450, xi.item.ASTRAGALOS, 0, 0, 0, 0, 0) -- bring Koru 4 astragaloi
-    elseif classReunion == QUEST_ACCEPTED and classReunionProgress == 2 then
+    elseif classReunion == xi.questStatus.QUEST_ACCEPTED and classReunionProgress == 2 then
         player:startEvent(414, 0, 0, xi.item.ASTRAGALOS, 0, 0, 0, 0, 0) -- reminder to bring 4 astragaloi
     elseif
-        classReunion == QUEST_ACCEPTED and
+        classReunion == xi.questStatus.QUEST_ACCEPTED and
         classReunionProgress >= 3 and
         (talk1 ~= 1 or talk2 ~= 1)
     then
         player:startEvent(408) -- reminder to visit the students
     elseif
-        classReunion == QUEST_ACCEPTED and
+        classReunion == xi.questStatus.QUEST_ACCEPTED and
         classReunionProgress == 6 and
         talk1 == 1 and
         talk2 == 1
     then
             player:startEvent(410) -- ending cs
-    elseif thePuppetMaster == QUEST_COMPLETED and classReunion == QUEST_COMPLETED then
+    elseif thePuppetMaster == xi.questStatus.QUEST_COMPLETED and classReunion == xi.questStatus.QUEST_COMPLETED then
         player:startEvent(411) -- new cs after completed AF2
     -----------------------------------
-    elseif rootProblem == QUEST_ACCEPTED and player:getCharVar('rootProblem') == 1 then
+    elseif rootProblem == xi.questStatus.QUEST_ACCEPTED and player:getCharVar('rootProblem') == 1 then
         player:startEvent(348, 0, xi.item.SQUARE_OF_SILK_CLOTH)
     end
 end

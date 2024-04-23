@@ -19,7 +19,7 @@ entity.onTrigger = function(player, npc)
     local prog = player:getCharVar('QuestMakingHeadlines_var')
 
     if
-        makingHeadlines == QUEST_ACCEPTED and
+        makingHeadlines == xi.questStatus.QUEST_ACCEPTED and
         utils.mask.isFull(prog, 4) and
         not utils.mask.getBit(prog, 4)
     then

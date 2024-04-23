@@ -27,7 +27,7 @@ local prerequisites =
 
 local function isFirstHandsQuest(player)
     for i = 0, 14 do
-        if player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.BORGHERTZ_S_WARRING_HANDS + i) == QUEST_COMPLETED then
+        if player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.BORGHERTZ_S_WARRING_HANDS + i) == xi.questStatus.QUEST_COMPLETED then
             return false
         end
     end
@@ -47,8 +47,8 @@ entity.onTrigger = function(player, npc)
         prereq and
         player:getMainLvl() >= 50 and
         player:getCharVar('BorghertzAlreadyActiveWithJob') == 0 and
-        player:getQuestStatus(prereq.log, prereq.quest) ~= QUEST_AVAILABLE and
-        player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.BORGHERTZ_S_WARRING_HANDS + mJob - 1) == QUEST_AVAILABLE
+        player:getQuestStatus(prereq.log, prereq.quest) ~= xi.questStatus.QUEST_AVAILABLE and
+        player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.BORGHERTZ_S_WARRING_HANDS + mJob - 1) == xi.questStatus.QUEST_AVAILABLE
     then
         player:startEvent(155)
     elseif

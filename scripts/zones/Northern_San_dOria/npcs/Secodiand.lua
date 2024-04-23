@@ -7,7 +7,7 @@
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    if player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.FEAR_OF_THE_DARK) ~= QUEST_AVAILABLE then
+    if player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.FEAR_OF_THE_DARK) ~= xi.questStatus.QUEST_AVAILABLE then
         if trade:hasItemQty(xi.item.BAT_WING, 2) and trade:getItemCount() == 2 then
             player:startEvent(18)
         end
@@ -17,7 +17,7 @@ end
 entity.onTrigger = function(player, npc)
     local fearOfTheDark = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.FEAR_OF_THE_DARK)
 
-    if fearOfTheDark == QUEST_AVAILABLE then
+    if fearOfTheDark == xi.questStatus.QUEST_AVAILABLE then
         player:startEvent(19)
     else
         player:startEvent(17)
@@ -33,7 +33,7 @@ entity.onEventFinish = function(player, csid, option, npc)
     elseif csid == 18 then
         player:tradeComplete()
         npcUtil.giveCurrency(player, 'gil', 200)
-        if player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.FEAR_OF_THE_DARK) == QUEST_ACCEPTED then
+        if player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.FEAR_OF_THE_DARK) == xi.questStatus.QUEST_ACCEPTED then
             player:addFame(xi.quest.fame_area.SANDORIA, 30)
             player:completeQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.FEAR_OF_THE_DARK)
         else

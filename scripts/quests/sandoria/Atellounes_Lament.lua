@@ -20,9 +20,9 @@ quest.sections =
     -- Speak to Atelloune in Southern San d'Oria at (L-6) for a cutscene to start the quest.
     {
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE and
+            return status == xi.questStatus.QUEST_AVAILABLE and
                 player:getFameLevel(xi.quest.fame_area.SANDORIA) >= 2 and
-                player:getQuestStatus(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.SEEING_SPOTS) == QUEST_COMPLETED
+                player:getQuestStatus(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.SEEING_SPOTS) == xi.questStatus.QUEST_COMPLETED
         end,
 
         [xi.zone.SOUTHERN_SAN_DORIA] =
@@ -46,7 +46,7 @@ quest.sections =
     -- Trade her a Ladybug Wing for a cutscene and to receive your reward.
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED
+            return status == xi.questStatus.QUEST_ACCEPTED
         end,
 
         [xi.zone.SOUTHERN_SAN_DORIA] =

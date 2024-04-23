@@ -34,7 +34,7 @@ end
 
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 677 and option == 1 then
-        if player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.ECO_WARRIOR) == QUEST_AVAILABLE then
+        if player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.ECO_WARRIOR) == xi.questStatus.QUEST_AVAILABLE then
             player:addQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.ECO_WARRIOR)
         end
 

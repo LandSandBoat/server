@@ -32,7 +32,7 @@ entity.onTrigger = function(player, npc)
 
     -- A NEW DAWN (Beastmaster AF3)
     if
-        player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.A_NEW_DAWN) == QUEST_ACCEPTED and
+        player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.A_NEW_DAWN) == xi.questStatus.QUEST_ACCEPTED and
         npc:getID() == ID.npc.SARCOPHAGUS_OFFSET
     then
         local aNewDawnEvent = player:getCharVar('ANewDawn_Event')

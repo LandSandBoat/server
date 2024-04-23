@@ -61,13 +61,13 @@ entity.onTrigger = function(player, npc)
 
     -- "Lure of the Wildcat"
     elseif
-        player:getQuestStatus(xi.quest.log_id.SANDORIA, sandyQuests.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and
+        player:getQuestStatus(xi.quest.log_id.SANDORIA, sandyQuests.LURE_OF_THE_WILDCAT) == xi.questStatus.QUEST_ACCEPTED and
         not utils.mask.getBit(player:getCharVar('WildcatSandy'), 15)
     then
         player:startEvent(562)
 
     -- "Peace for the Spirit" (RDM AF Body)
-    elseif peaceForTheSpirit == QUEST_ACCEPTED then
+    elseif peaceForTheSpirit == xi.questStatus.QUEST_ACCEPTED then
         local questStatus = player:getCharVar('peaceForTheSpiritCS')
         if questStatus == 5 then
             player:startEvent(51)
@@ -79,19 +79,19 @@ entity.onTrigger = function(player, npc)
     elseif
         mJob == xi.job.RDM and
         mLvl >= xi.settings.main.AF2_QUEST_LEVEL and
-        envelopedInDarkness == QUEST_COMPLETED and
-        peaceForTheSpirit == QUEST_AVAILABLE
+        envelopedInDarkness == xi.questStatus.QUEST_COMPLETED and
+        peaceForTheSpirit == xi.questStatus.QUEST_AVAILABLE
     then
         player:startEvent(109) -- Start
 
     -- Default dialogue after "Peace for the Spirit"
-    elseif peaceForTheSpirit == QUEST_COMPLETED then
+    elseif peaceForTheSpirit == xi.questStatus.QUEST_COMPLETED then
         player:startEvent(52)
 
     -- Default dialogue after "Enveloped in Darkness"
     elseif
-        envelopedInDarkness == QUEST_COMPLETED and
-        peaceForTheSpirit == QUEST_AVAILABLE
+        envelopedInDarkness == xi.questStatus.QUEST_COMPLETED and
+        peaceForTheSpirit == xi.questStatus.QUEST_AVAILABLE
     then
         player:startEvent(114)
 

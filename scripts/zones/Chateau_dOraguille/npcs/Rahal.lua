@@ -19,7 +19,7 @@ entity.onTrigger = function(player, npc)
     local wildcatSandy = player:getCharVar('WildcatSandy')
 
     if
-        player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and
+        player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.LURE_OF_THE_WILDCAT) == xi.questStatus.QUEST_ACCEPTED and
         not utils.mask.getBit(wildcatSandy, 17)
     then
         player:startEvent(559)
@@ -31,15 +31,15 @@ entity.onTrigger = function(player, npc)
 
     -- Completed AF2, AF3 available, and currently on DRG.  No level check, since they cleared AF2.
     elseif
-        player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.CHASING_QUOTAS) == QUEST_COMPLETED and
-        stalkerQuest == QUEST_AVAILABLE and player:getMainJob() == xi.job.DRG
+        player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.CHASING_QUOTAS) == xi.questStatus.QUEST_COMPLETED and
+        stalkerQuest == xi.questStatus.QUEST_AVAILABLE and player:getMainJob() == xi.job.DRG
     then
         if player:getCharVar('KnightStalker_Declined') == 0 then
             player:startEvent(121) -- Start AF3
         else
             player:startEvent(120) -- Short version if they previously declined
         end
-    elseif stalkerQuest == QUEST_ACCEPTED then
+    elseif stalkerQuest == xi.questStatus.QUEST_ACCEPTED then
         if stalkerProgress == 0 then
             player:startEvent(119) -- Reminder to go to Brugaire/Ceraulian
         elseif player:hasKeyItem(xi.ki.CHALLENGE_TO_THE_ROYAL_KNIGHTS) then

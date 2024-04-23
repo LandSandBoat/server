@@ -19,7 +19,7 @@ quest.sections =
 {
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED
+            return status == xi.questStatus.QUEST_ACCEPTED
         end,
 
         [xi.zone.THE_SANCTUARY_OF_ZITAH] =

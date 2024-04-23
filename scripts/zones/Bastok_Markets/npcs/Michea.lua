@@ -12,7 +12,7 @@ entity.onTrade = function(player, npc, trade)
 
     -- DISTANT LOYALTIES
     if
-        distantLoyalties == QUEST_ACCEPTED and
+        distantLoyalties == xi.questStatus.QUEST_ACCEPTED and
         player:getCharVar('DistantLoyaltiesProgress') == 2 and
         npcUtil.tradeHas(trade, xi.item.MYTHRIL_INGOT)
     then
@@ -26,7 +26,7 @@ entity.onTrigger = function(player, npc)
 
     -- DISTANT LOYALTIES
     if
-        distantLoyalties == QUEST_ACCEPTED and
+        distantLoyalties == xi.questStatus.QUEST_ACCEPTED and
         distantLoyaltiesProgress >= 1 and
         distantLoyaltiesProgress <= 3
     then

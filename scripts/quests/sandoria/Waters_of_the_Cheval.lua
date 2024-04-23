@@ -24,7 +24,7 @@ quest.sections =
     -- Speak with Miageau (L-7) just past the entrance to the Cathedral.
     {
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE
+            return status == xi.questStatus.QUEST_AVAILABLE
         end,
 
         [xi.zone.NORTHERN_SAN_DORIA] =
@@ -50,7 +50,7 @@ quest.sections =
     -- Trade Cheval Water to Miageau.
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED
+            return status == xi.questStatus.QUEST_ACCEPTED
         end,
 
         [xi.zone.NORTHERN_SAN_DORIA] =

@@ -13,7 +13,7 @@ entity.onTrigger = function(player, npc)
     local circleProgress = player:getCharVar('circleTime')
 
     -- CIRCLE OF TIME
-    if circleOfTime == QUEST_ACCEPTED then
+    if circleOfTime == xi.questStatus.QUEST_ACCEPTED then
         if circleProgress == 1 then
             player:startEvent(30)
         elseif circleProgress == 2 then

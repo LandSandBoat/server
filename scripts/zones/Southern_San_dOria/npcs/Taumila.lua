@@ -7,7 +7,7 @@
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    if player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.TIGER_S_TEETH) ~= QUEST_AVAILABLE then
+    if player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.TIGER_S_TEETH) ~= xi.questStatus.QUEST_AVAILABLE then
         if
             trade:hasItemQty(xi.item.BLACK_TIGER_FANG, 3) and
             trade:getItemCount() == 3
@@ -22,12 +22,12 @@ entity.onTrigger = function(player, npc)
 
     if
         player:getFameLevel(xi.quest.fame_area.SANDORIA) >= 3 and
-        tigersTeeth == QUEST_AVAILABLE
+        tigersTeeth == xi.questStatus.QUEST_AVAILABLE
     then
         player:startEvent(574)
-    elseif tigersTeeth == QUEST_ACCEPTED then
+    elseif tigersTeeth == xi.questStatus.QUEST_ACCEPTED then
         player:startEvent(575)
-    elseif tigersTeeth == QUEST_COMPLETED then
+    elseif tigersTeeth == xi.questStatus.QUEST_COMPLETED then
         player:startEvent(573)
     else
         player:startEvent(571)
@@ -44,7 +44,7 @@ entity.onEventFinish = function(player, csid, option, npc)
         player:tradeComplete()
         player:addTitle(xi.title.FANG_FINDER)
         npcUtil.giveCurrency(player, 'gil', 2100)
-        if player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.TIGER_S_TEETH) == QUEST_ACCEPTED then
+        if player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.TIGER_S_TEETH) == xi.questStatus.QUEST_ACCEPTED then
             player:addFame(xi.quest.fame_area.SANDORIA, 30)
             player:completeQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.TIGER_S_TEETH)
         else

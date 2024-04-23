@@ -28,7 +28,7 @@ end
 
 entity.onTrade = function(player, npc, trade)
     if
-        player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_AMAZIN_SCORPIO) == QUEST_ACCEPTED and
+        player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_AMAZIN_SCORPIO) == xi.questStatus.QUEST_ACCEPTED and
         npcUtil.tradeHas(trade, xi.item.SCORPION_STINGER)
     then
         player:startEvent(484)
@@ -40,16 +40,16 @@ entity.onTrigger = function(player, npc)
     local wildcatWindurst = player:getCharVar('WildcatWindurst')
 
     if
-        player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and
+        player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.LURE_OF_THE_WILDCAT) == xi.questStatus.QUEST_ACCEPTED and
         not utils.mask.getBit(wildcatWindurst, 0)
     then
         player:startEvent(735)
-    elseif amazinScorpio == QUEST_COMPLETED then
+    elseif amazinScorpio == xi.questStatus.QUEST_COMPLETED then
         player:startEvent(485)
-    elseif amazinScorpio == QUEST_ACCEPTED then
+    elseif amazinScorpio == xi.questStatus.QUEST_ACCEPTED then
         player:startEvent(482, 0, 0, xi.item.SCORPION_STINGER)
     elseif
-        amazinScorpio == QUEST_AVAILABLE and
+        amazinScorpio == xi.questStatus.QUEST_AVAILABLE and
         player:getFameLevel(xi.quest.fame_area.WINDURST) >= 2
     then
         player:startEvent(481, 0, 0, xi.item.SCORPION_STINGER)

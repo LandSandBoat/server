@@ -328,8 +328,8 @@ xi.roe.records =
         trigger = xi.roeTrigger.COMPLETE_QUEST,
         flags = set { 'retro' },
         check = function(self, player, params)
-            return player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.ELDER_MEMORIES) == QUEST_COMPLETED or
-                player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.THE_OLD_LADY) == QUEST_COMPLETED
+            return player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.ELDER_MEMORIES) == xi.questStatus.QUEST_COMPLETED or
+                player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.THE_OLD_LADY) == xi.questStatus.QUEST_COMPLETED
         end,
 
         reward = { sparks = 100, xp = 500 },

@@ -13,7 +13,7 @@ entity.onTrade = function(player, npc, trade)
     local allNewC3000 = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_ALL_NEW_C_3000)
 
     -- THE ALL NEW C-2000
-    if allNewC2000 == QUEST_ACCEPTED then
+    if allNewC2000 == xi.questStatus.QUEST_ACCEPTED then
         if npcUtil.tradeHas(trade, { 846, 856, 4368 }) then
             player:startEvent(292, xi.settings.main.GIL_RATE * 200) -- Correct items given, complete quest.
         else
@@ -21,7 +21,7 @@ entity.onTrade = function(player, npc, trade)
         end
 
     -- LEGENDARY PLAN B
-    elseif legendaryPlanB == QUEST_ACCEPTED then
+    elseif legendaryPlanB == xi.questStatus.QUEST_ACCEPTED then
         if npcUtil.tradeHas(trade, { 529, 858, 940 }) then
             player:startEvent(314, 0, 529, 940, 858) -- Correct items given, complete quest in onEventUpdate
         else
@@ -29,7 +29,7 @@ entity.onTrade = function(player, npc, trade)
         end
 
     -- THE ALL NEW C-3000
-    elseif allNewC3000 == QUEST_ACCEPTED or allNewC3000 == QUEST_COMPLETED then
+    elseif allNewC3000 == xi.questStatus.QUEST_ACCEPTED or allNewC3000 == xi.questStatus.QUEST_COMPLETED then
         if npcUtil.tradeHas(trade, { 889, 939 }) then
             player:startEvent(657, 0, 889, 939) -- Correct items given, complete quest in onEventUpdate
         else
@@ -47,8 +47,8 @@ entity.onTrigger = function(player, npc)
 
     -- THE ALL NEW C-3000
     if
-        legendaryPlanB == QUEST_COMPLETED and
-        allNewC3000 == QUEST_AVAILABLE and
+        legendaryPlanB == xi.questStatus.QUEST_COMPLETED and
+        allNewC3000 == xi.questStatus.QUEST_AVAILABLE and
         player:getFameLevel(xi.quest.fame_area.WINDURST) >= 4
     then
         if player:needToZone() then
@@ -56,17 +56,17 @@ entity.onTrigger = function(player, npc)
         else
             player:startEvent(655, 0, 889, 939)
         end
-    elseif allNewC3000 == QUEST_COMPLETED then
+    elseif allNewC3000 == xi.questStatus.QUEST_COMPLETED then
         player:startEvent(659, 0, 889, 939)
 
     -- A GREETING CARDIAN
-    elseif aGreetingCardian == QUEST_ACCEPTED and aGreetingCardianCS == 5 then
+    elseif aGreetingCardian == xi.questStatus.QUEST_ACCEPTED and aGreetingCardianCS == 5 then
         player:startEvent(301) -- Supplemental text when aGreetingCardian in progress, right before completion
 
     -- LEGENDARY PLAN B
     elseif
-        aGreetingCardian == QUEST_COMPLETED and
-        legendaryPlanB == QUEST_AVAILABLE and
+        aGreetingCardian == xi.questStatus.QUEST_COMPLETED and
+        legendaryPlanB == xi.questStatus.QUEST_AVAILABLE and
         player:getFameLevel(xi.quest.fame_area.WINDURST) >= 3
     then
         if player:needToZone() then
@@ -74,17 +74,17 @@ entity.onTrigger = function(player, npc)
         else
             player:startEvent(308, 0, 529, 940, 858) -- legendaryPlanB start
         end
-    elseif legendaryPlanB == QUEST_ACCEPTED then
+    elseif legendaryPlanB == xi.questStatus.QUEST_ACCEPTED then
         player:startEvent(309, 0, 529, 940, 858) -- legendaryPlanB reminder
-    elseif legendaryPlanB == QUEST_COMPLETED then
+    elseif legendaryPlanB == xi.questStatus.QUEST_COMPLETED then
         player:startEvent(316)
 
     -- THE ALL NEW C-2000
-    elseif allNewC2000 == QUEST_AVAILABLE then
+    elseif allNewC2000 == xi.questStatus.QUEST_AVAILABLE then
         player:startEvent(285, 0, 856, 846, 4368) -- Start Quest
-    elseif allNewC2000 == QUEST_ACCEPTED then
+    elseif allNewC2000 == xi.questStatus.QUEST_ACCEPTED then
         player:startEvent(288, 0, 856, 846, 4368) -- Reminder Dialogue
-    elseif allNewC2000 == QUEST_COMPLETED then
+    elseif allNewC2000 == xi.questStatus.QUEST_COMPLETED then
         player:startEvent(293) -- Post Quest Finish Text
 
     -- STANDARD DIALOG

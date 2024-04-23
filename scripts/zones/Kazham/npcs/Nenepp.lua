@@ -45,7 +45,7 @@ entity.onTrade = function(player, npc, trade)
         trade:hasItemQty(xi.item.BLACKENED_TOAD, 1) or
         trade:hasItemQty(xi.item.ROCK_OF_ANCIENT_SALT, 1)
 
-    if opoOpoAndIStatus == QUEST_ACCEPTED then
+    if opoOpoAndIStatus == xi.questStatus.QUEST_ACCEPTED then
         if progress == 9 or failed == 10 then
             if goodtrade then
                 player:startEvent(241)
@@ -62,7 +62,7 @@ entity.onTrigger = function(player, npc)
     local failed = player:getCharVar('OPO_OPO_FAILED')
     local retry = player:getCharVar('OPO_OPO_RETRY')
 
-    if opoOpoAndIStatus == QUEST_ACCEPTED then
+    if opoOpoAndIStatus == xi.questStatus.QUEST_ACCEPTED then
         if retry >= 1 then                          -- has failed on future npc so disregard previous successful trade
             player:startEvent(206)
         elseif progress == 9 or failed == 10 then

@@ -23,7 +23,7 @@ quest.sections =
 {
     {
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE and
+            return status == xi.questStatus.QUEST_AVAILABLE and
                 player:getMainLvl() >= xi.settings.main.ADVANCED_JOB_LEVEL and
                 xi.settings.main.ENABLE_WOTG == 1
         end,
@@ -45,7 +45,7 @@ quest.sections =
 
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED
+            return status == xi.questStatus.QUEST_ACCEPTED
         end,
 
         [xi.zone.UPPER_JEUNO] =
@@ -165,7 +165,7 @@ quest.sections =
 
     {
         check = function(player, status, vars)
-            return status == QUEST_COMPLETED and
+            return status == xi.questStatus.QUEST_COMPLETED and
                 not player:hasCompletedQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_UNFINISHED_WALTZ)
         end,
 

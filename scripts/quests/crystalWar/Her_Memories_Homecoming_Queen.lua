@@ -58,7 +58,7 @@ quest.sections =
 {
     {
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE and
+            return status == xi.questStatus.QUEST_AVAILABLE and
                 player:getCurrentMission(xi.mission.log_id.WOTG) == xi.mission.id.wotg.HER_MEMORIES
         end,
 
@@ -85,8 +85,8 @@ quest.sections =
     -- Her Memories: Old Bean
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED and
-                player:getQuestStatus(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.HER_MEMORIES_OLD_BEAN) ~= QUEST_COMPLETED
+            return status == xi.questStatus.QUEST_ACCEPTED and
+                player:getQuestStatus(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.HER_MEMORIES_OLD_BEAN) ~= xi.questStatus.QUEST_COMPLETED
         end,
 
         [xi.zone.PORT_SAN_DORIA] =
@@ -147,8 +147,8 @@ quest.sections =
     -- Her Memories: The Faux Pas
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED and
-                player:getQuestStatus(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.HER_MEMORIES_THE_FAUX_PAS) ~= QUEST_COMPLETED
+            return status == xi.questStatus.QUEST_ACCEPTED and
+                player:getQuestStatus(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.HER_MEMORIES_THE_FAUX_PAS) ~= xi.questStatus.QUEST_COMPLETED
         end,
 
         [xi.zone.NORTHERN_SAN_DORIA] =
@@ -189,8 +189,8 @@ quest.sections =
     -- Her Memories: The Grave Resolve
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED and
-                player:getQuestStatus(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.HER_MEMORIES_THE_GRAVE_RESOLVE) ~= QUEST_COMPLETED
+            return status == xi.questStatus.QUEST_ACCEPTED and
+                player:getQuestStatus(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.HER_MEMORIES_THE_GRAVE_RESOLVE) ~= xi.questStatus.QUEST_COMPLETED
         end,
 
         [xi.zone.CHATEAU_DORAGUILLE] =

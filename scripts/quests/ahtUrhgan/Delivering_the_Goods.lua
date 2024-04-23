@@ -17,7 +17,7 @@ quest.sections =
     -- Section: Quest available
     {
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE
+            return status == xi.questStatus.QUEST_AVAILABLE
         end,
 
         [xi.zone.AHT_URHGAN_WHITEGATE] =
@@ -53,7 +53,7 @@ quest.sections =
     -- Section: Quest accepted
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED and vars.Prog == 0
+            return status == xi.questStatus.QUEST_ACCEPTED and vars.Prog == 0
         end,
 
         [xi.zone.AHT_URHGAN_WHITEGATE] =
@@ -83,7 +83,7 @@ quest.sections =
     -- Section: Complete quest
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED and vars.Prog == 1
+            return status == xi.questStatus.QUEST_ACCEPTED and vars.Prog == 1
         end,
 
         [xi.zone.AHT_URHGAN_WHITEGATE] =

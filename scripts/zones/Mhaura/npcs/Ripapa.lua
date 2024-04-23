@@ -19,10 +19,10 @@ entity.onTrigger = function(player, npc)
 
     -----------------------------------
     -- Carbunlce Debacle
-    if carbuncleDebacle == QUEST_ACCEPTED and carbuncleDebacleProgress == 2 then
+    if carbuncleDebacle == xi.questStatus.QUEST_ACCEPTED and carbuncleDebacleProgress == 2 then
         player:startEvent(10022) -- get the lighning pendulum lets go to Cloister of Storms
     elseif
-        carbuncleDebacle == QUEST_ACCEPTED and
+        carbuncleDebacle == xi.questStatus.QUEST_ACCEPTED and
         carbuncleDebacleProgress == 3 and
         not player:hasItem(xi.item.LIGHTNING_PENDULUM)
     then
@@ -30,19 +30,19 @@ entity.onTrigger = function(player, npc)
     -----------------------------------
     -- Trial by Lightning
     elseif
-        (trialByLightning == QUEST_AVAILABLE and player:getFameLevel(xi.quest.fame_area.WINDURST) >= 6) or
-        (trialByLightning == QUEST_COMPLETED and os.time() > player:getCharVar('TrialByLightning_date'))
+        (trialByLightning == xi.questStatus.QUEST_AVAILABLE and player:getFameLevel(xi.quest.fame_area.WINDURST) >= 6) or
+        (trialByLightning == xi.questStatus.QUEST_COMPLETED and os.time() > player:getCharVar('TrialByLightning_date'))
     then
         player:startEvent(10016, 0, xi.ki.TUNING_FORK_OF_LIGHTNING) -- Start and restart quest "Trial by Lightning"
     elseif
-        trialByLightning == QUEST_ACCEPTED and
+        trialByLightning == xi.questStatus.QUEST_ACCEPTED and
         not player:hasKeyItem(xi.ki.TUNING_FORK_OF_LIGHTNING) and
         not hasWhisperOfStorms
     then
         player:startEvent(10024, 0, xi.ki.TUNING_FORK_OF_LIGHTNING) -- Defeat against Ramuh : Need new Fork
-    elseif trialByLightning == QUEST_ACCEPTED and not hasWhisperOfStorms then
+    elseif trialByLightning == xi.questStatus.QUEST_ACCEPTED and not hasWhisperOfStorms then
         player:startEvent(10017, 0, xi.ki.TUNING_FORK_OF_LIGHTNING, 5)
-    elseif trialByLightning == QUEST_ACCEPTED and hasWhisperOfStorms then
+    elseif trialByLightning == xi.questStatus.QUEST_ACCEPTED and hasWhisperOfStorms then
         local numitem = 0
 
         if player:hasItem(xi.item.RAMUHS_STAFF) then
@@ -76,7 +76,7 @@ end
 
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 10016 and option == 1 then
-        if player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.TRIAL_BY_LIGHTNING) == QUEST_COMPLETED then
+        if player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.TRIAL_BY_LIGHTNING) == xi.questStatus.QUEST_COMPLETED then
             player:delQuest(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.TRIAL_BY_LIGHTNING)
         end
 

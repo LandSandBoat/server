@@ -34,7 +34,7 @@ end
 
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 278 and option == 1 then
-        if player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.ECO_WARRIOR) == QUEST_AVAILABLE then
+        if player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.ECO_WARRIOR) == xi.questStatus.QUEST_AVAILABLE then
             player:addQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.ECO_WARRIOR)
         end
 

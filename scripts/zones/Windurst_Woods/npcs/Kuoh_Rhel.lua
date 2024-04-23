@@ -18,8 +18,8 @@ entity.onTrigger = function(player, npc)
 
     -- IN A STEW
     if
-        inAStew == QUEST_AVAILABLE and
-        chocobilious == QUEST_COMPLETED and
+        inAStew == xi.questStatus.QUEST_AVAILABLE and
+        chocobilious == xi.questStatus.QUEST_COMPLETED and
         player:getFameLevel(xi.quest.fame_area.WINDURST) >= 3
     then
         if player:needToZone() then
@@ -29,28 +29,28 @@ entity.onTrigger = function(player, npc)
         end
     elseif inAStewCS == 4 and player:hasKeyItem(xi.ki.RANPI_MONPIS_SPECIAL_STEW) then
         player:startEvent(239) -- IAS turn in
-    elseif inAStew == QUEST_ACCEPTED then
+    elseif inAStew == xi.questStatus.QUEST_ACCEPTED then
         player:startEvent(236) -- reminder dialog
     -- Uncomment once conquest tally in place
-    --elseif inAStew == QUEST_COMPLETED then
+    --elseif inAStew == xi.questStatus.QUEST_COMPLETED then
         --player:startEvent(240) -- new dialog between repeats
-    elseif inAStew == QUEST_COMPLETED then
+    elseif inAStew == xi.questStatus.QUEST_COMPLETED then
         player:startEvent(234) -- start repeat
 
     -- CHOCOBILIOUS
     elseif
-        chocobilious == QUEST_AVAILABLE and
+        chocobilious == xi.questStatus.QUEST_AVAILABLE and
         player:getFameLevel(xi.quest.fame_area.WINDURST) >= 2
     then
         player:startEvent(224) -- Start quest
-    elseif chocobilious == QUEST_COMPLETED and player:needToZone() then
+    elseif chocobilious == xi.questStatus.QUEST_COMPLETED and player:needToZone() then
         player:startEvent(232) -- Quest complete
     elseif
-        chocobilious == QUEST_ACCEPTED and
+        chocobilious == xi.questStatus.QUEST_ACCEPTED and
         player:getCharVar('ChocobiliousQuest') == 2
     then
         player:startEvent(231) -- Talked to Tapoh
-    elseif chocobilious == QUEST_ACCEPTED then
+    elseif chocobilious == xi.questStatus.QUEST_ACCEPTED then
         player:startEvent(225) -- Post quest accepted
 
     -- STANDARD DIALOG

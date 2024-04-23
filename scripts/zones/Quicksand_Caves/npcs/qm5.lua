@@ -21,7 +21,7 @@ entity.onTrigger = function(player, npc)
 
     -- Need to make sure the quest is flagged the player is no further along in the quest
     if
-        theMissingPiece == QUEST_ACCEPTED and
+        theMissingPiece == xi.questStatus.QUEST_ACCEPTED and
         not hasAncientTablet and
         not hasAncientFragment and
         player:getTitle() ~= xi.title.ACQUIRER_OF_ANCIENT_ARCANUM

@@ -174,7 +174,7 @@ xi.player.onGameIn = function(player, firstLogin, zoning)
     -- Abyssea starting quest should be flagged when expansion is active
     if
         xi.settings.main.ENABLE_ABYSSEA == 1 and
-        player:getQuestStatus(xi.quest.log_id.ABYSSEA, xi.quest.id.abyssea.A_JOURNEY_BEGINS) == QUEST_AVAILABLE
+        player:getQuestStatus(xi.quest.log_id.ABYSSEA, xi.quest.id.abyssea.A_JOURNEY_BEGINS) == xi.questStatus.QUEST_AVAILABLE
     then
         player:addQuest(xi.quest.log_id.ABYSSEA, xi.quest.id.abyssea.A_JOURNEY_BEGINS)
     end

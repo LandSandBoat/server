@@ -25,7 +25,7 @@ entity.onTrade = function(player, npc, trade)
 
     for x, item in pairs(itemList) do
         if
-            questStatus == QUEST_ACCEPTED or
+            questStatus == xi.questStatus.QUEST_ACCEPTED or
             player:getLocalVar('OrlandoRepeat') == 1
         then
             if item[1] == itemID then
@@ -47,9 +47,9 @@ entity.onTrigger = function(player, npc)
 
     if player:getFameLevel(xi.quest.fame_area.WINDURST) >= 2 then
         if player:hasKeyItem(xi.ki.CHOCOBO_LICENSE) then
-            if questStatus ~= QUEST_AVAILABLE then
+            if questStatus ~= xi.questStatus.QUEST_AVAILABLE then
                 player:startEvent(103)
-            elseif questStatus == QUEST_AVAILABLE then
+            elseif questStatus == xi.questStatus.QUEST_AVAILABLE then
                 player:startEvent(101)
             end
         else
@@ -77,7 +77,7 @@ entity.onEventFinish = function(player, csid, option, npc)
         player:setCharVar('ANTIQUE_PAYOUT', 0)
         player:setLocalVar('OrlandoRepeat', 0)
     elseif csid == 103 then
-        if questStatus == QUEST_COMPLETED then
+        if questStatus == xi.questStatus.QUEST_COMPLETED then
             player:setLocalVar('OrlandoRepeat', 1)
         end
     end

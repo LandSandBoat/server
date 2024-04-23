@@ -20,8 +20,8 @@ entity.onTrigger = function(player, npc)
 
     -- WINGS OF GOLD
     if
-        pathOfTheBeastmaster == QUEST_COMPLETED and
-        wingsOfGold == QUEST_AVAILABLE and
+        pathOfTheBeastmaster == xi.questStatus.QUEST_COMPLETED and
+        wingsOfGold == xi.questStatus.QUEST_AVAILABLE and
         mJob == xi.job.BST and
         mLvl >= xi.settings.main.AF1_QUEST_LEVEL
     then
@@ -31,7 +31,7 @@ entity.onTrigger = function(player, npc)
             player:setCharVar('wingsOfGold_shortCS', 1)
             player:startEvent(139) -- Start Quest 'Wings of gold' (Long dialog)
         end
-    elseif wingsOfGold == QUEST_ACCEPTED then
+    elseif wingsOfGold == xi.questStatus.QUEST_ACCEPTED then
         if not player:hasKeyItem(xi.ki.GUIDING_BELL) then
             player:startEvent(136)
         else
@@ -40,8 +40,8 @@ entity.onTrigger = function(player, npc)
 
     -- SCATTERED INTO SHADOW
     elseif
-        wingsOfGold == QUEST_COMPLETED and
-        scatteredIntoShadow == QUEST_AVAILABLE and
+        wingsOfGold == xi.questStatus.QUEST_COMPLETED and
+        scatteredIntoShadow == xi.questStatus.QUEST_AVAILABLE and
         mJob == xi.job.BST and
         mLvl >= xi.settings.main.AF2_QUEST_LEVEL
     then
@@ -51,7 +51,7 @@ entity.onTrigger = function(player, npc)
             player:setCharVar('scatIntoShadow_shortCS', 1)
             player:startEvent(141)
         end
-    elseif scatteredIntoShadow == QUEST_ACCEPTED then
+    elseif scatteredIntoShadow == xi.questStatus.QUEST_ACCEPTED then
         if
             player:hasKeyItem(xi.ki.AQUAFLORA1) or
             player:hasKeyItem(xi.ki.AQUAFLORA2) or
@@ -67,9 +67,9 @@ entity.onTrigger = function(player, npc)
         end
 
     -- STANDARD DIALOGS
-    elseif scatteredIntoShadow == QUEST_COMPLETED then
+    elseif scatteredIntoShadow == xi.questStatus.QUEST_COMPLETED then
         player:startEvent(151)
-    elseif wingsOfGold == QUEST_COMPLETED then
+    elseif wingsOfGold == xi.questStatus.QUEST_COMPLETED then
         player:startEvent(134)
     elseif not player:hasCompletedQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.CHOCOBOS_WOUNDS) then
         player:startEvent(66, mLvl)

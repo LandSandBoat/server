@@ -1273,7 +1273,7 @@ local function getUnlockedMawTable(player)
     local unlockedMawTable = { 0, 0, 0 }
 
     for mawIndex = 0, 8 do
-        if player:getQuestStatus(xi.quest.log_id.ABYSSEA, abysseaMawQuests[mawIndex]) >= QUEST_ACCEPTED then
+        if player:getQuestStatus(xi.quest.log_id.ABYSSEA, abysseaMawQuests[mawIndex]) >= xi.questStatus.QUEST_ACCEPTED then
             local tableKey = math.floor(mawIndex / 3) + 1
 
             unlockedMawTable[tableKey] = utils.mask.setBit(unlockedMawTable[tableKey], mawIndex % 3, 1)
@@ -1328,7 +1328,7 @@ xi.abyssea.traverserNPCOnTrigger = function(player, npc)
         not player:hasCompletedQuest(xi.quest.log_id.ABYSSEA, xi.quest.id.abyssea.THE_TRUTH_BECKONS)
     then
         player:messageText(npc, ID.text.NOT_ACQUAINTED)
-    elseif player:getQuestStatus(xi.quest.log_id.ABYSSEA, xi.quest.id.abyssea.DAWN_OF_DEATH) >= QUEST_ACCEPTED then
+    elseif player:getQuestStatus(xi.quest.log_id.ABYSSEA, xi.quest.id.abyssea.DAWN_OF_DEATH) >= xi.questStatus.QUEST_ACCEPTED then
         player:startEvent(supportNPCData[zoneID][1], 0, availableStones, numTraverserHeld, messageType, 1, 1, 1, 3) -- Post 'The Truth Beckons' Menu
     end
 end

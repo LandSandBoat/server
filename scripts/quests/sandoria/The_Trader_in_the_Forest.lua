@@ -20,7 +20,7 @@ quest.sections =
 {
     {
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE
+            return status == xi.questStatus.QUEST_AVAILABLE
         end,
 
         [xi.zone.NORTHERN_SAN_DORIA] =
@@ -60,7 +60,7 @@ quest.sections =
 
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED
+            return status == xi.questStatus.QUEST_ACCEPTED
         end,
 
         [xi.zone.NORTHERN_SAN_DORIA] =
@@ -95,7 +95,7 @@ quest.sections =
 
     {
         check = function(player, status, vars)
-            return status == QUEST_COMPLETED or status == QUEST_ACCEPTED
+            return status == xi.questStatus.QUEST_COMPLETED or status == xi.questStatus.QUEST_ACCEPTED
         end,
 
         [xi.zone.WEST_RONFAURE] =
@@ -140,7 +140,7 @@ quest.sections =
                     if npcUtil.giveItem(player, xi.item.CLUMP_OF_BATAGREENS) then
                         player:confirmTrade()
 
-                        if player:getQuestStatus(quest.areaId, quest.questId) == QUEST_ACCEPTED then
+                        if player:getQuestStatus(quest.areaId, quest.questId) == xi.questStatus.QUEST_ACCEPTED then
                             quest:setVar(player, 'Prog', 2)
                         end
                     end

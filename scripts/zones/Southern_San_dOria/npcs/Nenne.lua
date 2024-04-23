@@ -16,9 +16,9 @@ entity.onTrigger = function(player, npc)
     local toCureaCough = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.TO_CURE_A_COUGH)
 
     if
-        toCureaCough == QUEST_AVAILABLE and
+        toCureaCough == xi.questStatus.QUEST_AVAILABLE and
         player:getCharVar('toCureaCough') == 0 and
-        medicineWoman == QUEST_COMPLETED
+        medicineWoman == xi.questStatus.QUEST_COMPLETED
     then
         player:startEvent(538)
     elseif player:hasKeyItem(xi.ki.COUGH_MEDICINE) then

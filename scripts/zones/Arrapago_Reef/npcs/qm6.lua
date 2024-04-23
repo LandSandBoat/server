@@ -19,8 +19,8 @@ entity.onTrigger = function(player, npc)
 
     -- NAVIGATING THE UNFRIENDLY SEAS
     if
-        efao == QUEST_COMPLETED and
-        ntus == QUEST_AVAILABLE and
+        efao == xi.questStatus.QUEST_COMPLETED and
+        ntus == xi.questStatus.QUEST_AVAILABLE and
         mJob == xi.job.COR and
         mLvl >= xi.settings.main.AF2_QUEST_LEVEL
     then

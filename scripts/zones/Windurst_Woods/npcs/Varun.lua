@@ -19,9 +19,9 @@ entity.onTrigger = function(player, npc)
     local rockRacketeer = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.ROCK_RACKETEER)
     local rockRacketeerCS = player:getCharVar('rockracketeer_sold')
 
-    if rockRacketeer == QUEST_ACCEPTED and rockRacketeerCS == 3 then
+    if rockRacketeer == xi.questStatus.QUEST_ACCEPTED and rockRacketeerCS == 3 then
         player:startEvent(100) -- talk about lost stone
-    elseif rockRacketeer == QUEST_ACCEPTED and rockRacketeerCS == 4 then
+    elseif rockRacketeer == xi.questStatus.QUEST_ACCEPTED and rockRacketeerCS == 4 then
         player:startEvent(101, 0, xi.item.SHARP_STONE) -- send player to Palborough Mines
 
     else

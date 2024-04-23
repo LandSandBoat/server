@@ -22,7 +22,7 @@ quest.sections =
 {
     {
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE and
+            return status == xi.questStatus.QUEST_AVAILABLE and
                 player:getMainLvl() >= xi.settings.main.ADVANCED_JOB_LEVEL
         end,
 
@@ -83,7 +83,7 @@ quest.sections =
     {
         check = function(player, status, vars)
             return vars.Prog == 3 or
-                status == QUEST_COMPLETED
+                status == xi.questStatus.QUEST_COMPLETED
         end,
 
         [xi.zone.BUBURIMU_PENINSULA] =

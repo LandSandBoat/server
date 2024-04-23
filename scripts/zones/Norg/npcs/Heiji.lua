@@ -15,15 +15,15 @@ entity.onTrade = function(player, npc, trade)
     local totalSubligar = subligar + turnedInVar
 
     if subligar > 0 and subligar == trade:getItemCount() then
-        if shiningSubligar == QUEST_ACCEPTED and turnedInVar + subligar >= 10 then -- complete quest
+        if shiningSubligar == xi.questStatus.QUEST_ACCEPTED and turnedInVar + subligar >= 10 then -- complete quest
             player:startEvent(125)
-        elseif shiningSubligar == QUEST_ACCEPTED and turnedInVar <= 9 then -- turning in less than the amount needed to finish the quest
+        elseif shiningSubligar == xi.questStatus.QUEST_ACCEPTED and turnedInVar <= 9 then -- turning in less than the amount needed to finish the quest
             player:tradeComplete()
             player:setCharVar('shiningSubligar_nb', totalSubligar)
             player:startEvent(124, totalSubligar) -- Update player on number of subligar turned in
         end
     else
-        if shiningSubligar == QUEST_ACCEPTED then
+        if shiningSubligar == xi.questStatus.QUEST_ACCEPTED then
             player:startEvent(124, totalSubligar) -- Update player on number of subligar turned in, but doesn't accept anything other than subligar
         else
             player:startEvent(122) -- Give standard conversation if items are traded but no quest is accepted
@@ -35,11 +35,11 @@ entity.onTrigger = function(player, npc)
     local shiningSubligar = player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.LIKE_A_SHINING_SUBLIGAR)
 
     if
-        shiningSubligar == QUEST_AVAILABLE and
+        shiningSubligar == xi.questStatus.QUEST_AVAILABLE and
         player:getFameLevel(xi.quest.fame_area.NORG) >= 3
     then
         player:startEvent(123) -- Start Like a Shining Subligar
-    elseif shiningSubligar == QUEST_ACCEPTED then
+    elseif shiningSubligar == xi.questStatus.QUEST_ACCEPTED then
         player:startEvent(124, player:getCharVar('shiningSubligar_nb')) -- Update player on number of subligar turned in
     else
         player:startEvent(122) -- Standard Conversation

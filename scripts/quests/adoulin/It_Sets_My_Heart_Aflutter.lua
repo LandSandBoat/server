@@ -28,7 +28,7 @@ quest.sections =
     -- Section: Begin quest (First time)
     {
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE and player:hasKeyItem(xi.ki.PIONEERS_BADGE)
+            return status == xi.questStatus.QUEST_AVAILABLE and player:hasKeyItem(xi.ki.PIONEERS_BADGE)
         end,
 
         [xi.zone.RALA_WATERWAYS] =
@@ -82,7 +82,7 @@ quest.sections =
     -- Section: Questing
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED
+            return status == xi.questStatus.QUEST_ACCEPTED
         end,
 
         [xi.zone.RALA_WATERWAYS] =
@@ -115,7 +115,7 @@ quest.sections =
     -- Section: Completed quest
     {
         check = function(player, status, vars)
-            return status == QUEST_COMPLETED
+            return status == xi.questStatus.QUEST_COMPLETED
         end,
 
         [xi.zone.RALA_WATERWAYS] =

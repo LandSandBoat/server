@@ -24,16 +24,16 @@ entity.onTrigger = function(player, npc)
     -- player:delQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.WONDERING_MINSTREL)
     local wonderingstatus = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.WONDERING_MINSTREL)
     local fame = player:getFameLevel(xi.quest.fame_area.WINDURST)
-    if wonderingstatus == QUEST_AVAILABLE and fame >= 5 then
+    if wonderingstatus == xi.questStatus.QUEST_AVAILABLE and fame >= 5 then
         local rand = math.random(1, 2)
         if rand == 1 then
             player:startEvent(633)          -- WONDERING_MINSTREL: Before Quest
         else
             player:startEvent(634)          -- WONDERING_MINSTREL: Quest Start
         end
-    elseif wonderingstatus == QUEST_ACCEPTED then
+    elseif wonderingstatus == xi.questStatus.QUEST_ACCEPTED then
         player:startEvent(635)                 -- WONDERING_MINSTREL: During Quest
-    elseif wonderingstatus == QUEST_COMPLETED and player:needToZone() then
+    elseif wonderingstatus == xi.questStatus.QUEST_COMPLETED and player:needToZone() then
         player:startEvent(639)                 -- WONDERING_MINSTREL: After Quest
     else
         local hour = VanadielHour()

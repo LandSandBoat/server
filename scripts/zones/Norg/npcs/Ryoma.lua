@@ -19,25 +19,25 @@ entity.onTrigger = function(player, npc)
     local mJob = player:getMainJob()
 
     if
-        twentyInPirateYears == QUEST_AVAILABLE and
+        twentyInPirateYears == xi.questStatus.QUEST_AVAILABLE and
         mJob == xi.job.NIN and
         mLvl >= 40
     then
         player:startEvent(133) -- Start Quest "20 in Pirate Years"
     elseif
-        twentyInPirateYears == QUEST_ACCEPTED and
+        twentyInPirateYears == xi.questStatus.QUEST_ACCEPTED and
         player:hasKeyItem(xi.ki.TRICK_BOX)
     then
         player:startEvent(134) -- Finish Quest "20 in Pirate Years"
     elseif
-        twentyInPirateYears == QUEST_COMPLETED and
-        illTakeTheBigBox == QUEST_AVAILABLE and
+        twentyInPirateYears == xi.questStatus.QUEST_COMPLETED and
+        illTakeTheBigBox == xi.questStatus.QUEST_AVAILABLE and
         mJob == xi.job.NIN and
         mLvl >= 50 and
         not player:needToZone()
     then
         player:startEvent(135) -- Start Quest "I'll Take the Big Box"
-    elseif illTakeTheBigBox == QUEST_COMPLETED and trueWill == QUEST_AVAILABLE then
+    elseif illTakeTheBigBox == xi.questStatus.QUEST_COMPLETED and trueWill == xi.questStatus.QUEST_AVAILABLE then
         player:startEvent(136) -- Start Quest "True Will"
     elseif
         player:hasKeyItem(xi.ki.OLD_TRICK_BOX) and

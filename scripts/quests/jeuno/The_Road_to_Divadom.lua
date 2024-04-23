@@ -18,7 +18,7 @@ quest.sections =
 {
     {
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE and
+            return status == xi.questStatus.QUEST_AVAILABLE and
                 player:hasCompletedQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_UNFINISHED_WALTZ) and
                 player:getMainJob() == xi.job.DNC and
                 player:getMainLvl() >= xi.settings.main.AF2_QUEST_LEVEL and
@@ -41,7 +41,7 @@ quest.sections =
 
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED and
+            return status == xi.questStatus.QUEST_ACCEPTED and
                 player:getMainJob() == xi.job.DNC
         end,
 
@@ -137,7 +137,7 @@ quest.sections =
 
     {
         check = function(player, status, vars)
-            return status == QUEST_COMPLETED and
+            return status == xi.questStatus.QUEST_COMPLETED and
                 not player:hasCompletedQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.COMEBACK_QUEEN)
         end,
 

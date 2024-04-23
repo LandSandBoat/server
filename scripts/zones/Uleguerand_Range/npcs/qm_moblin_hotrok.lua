@@ -16,7 +16,7 @@ entity.onTrade = function(player, npc, trade)
 
     -- Taking a logical guess what criteria displays what message.
     if
-        overTheHillsAndFarAway == QUEST_ACCEPTED and
+        overTheHillsAndFarAway == xi.questStatus.QUEST_ACCEPTED and
         npcUtil.tradeHas(trade, xi.item.MOBLIN_HOTROK)
     then
         -- 1729 = Moblin Hotrok
@@ -51,9 +51,9 @@ end
 entity.onTrigger = function(player, npc)
     local overTheHillsAndFarAway = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.OVER_THE_HILLS_AND_FAR_AWAY)
 
-    if overTheHillsAndFarAway == QUEST_COMPLETED then
+    if overTheHillsAndFarAway == xi.questStatus.QUEST_COMPLETED then
         player:messageSpecial(ID.text.NOTHING_OUT_OF_ORDINARY)
-    elseif overTheHillsAndFarAway == QUEST_ACCEPTED then
+    elseif overTheHillsAndFarAway == xi.questStatus.QUEST_ACCEPTED then
         player:messageSpecial(ID.text.SOMETHING_GLITTERING)
         player:messageSpecial(ID.text.WHAT_LIES_BENEATH, 0, xi.item.MOBLIN_HOTROK)
     else

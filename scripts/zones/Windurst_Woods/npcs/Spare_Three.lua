@@ -12,7 +12,7 @@ entity.onTrigger = function(player, npc)
     local aGreetingCardian = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.A_GREETING_CARDIAN)
     local agcCs = player:getCharVar('AGreetingCardian_Event')
 
-    if aGreetingCardian == QUEST_ACCEPTED and agcCs == 2 then
+    if aGreetingCardian == xi.questStatus.QUEST_ACCEPTED and agcCs == 2 then
         player:startEvent(295) -- A Greeting Cardian step two
     else
         player:startEvent(280) -- standard dialog

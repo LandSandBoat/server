@@ -9,11 +9,11 @@ local entity = {}
 entity.onTrigger = function(player, npc)
     local postman = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_POSTMAN_ALWAYS_KO_S_TWICE)
 
-    if postman == QUEST_AVAILABLE then
+    if postman == xi.questStatus.QUEST_AVAILABLE then
         player:startEvent(48)
-    elseif postman == QUEST_ACCEPTED then
+    elseif postman == xi.questStatus.QUEST_ACCEPTED then
         player:startEvent(49)
-    elseif postman == QUEST_COMPLETED then
+    elseif postman == xi.questStatus.QUEST_COMPLETED then
         player:startEvent(56)
     end
 end
@@ -21,7 +21,7 @@ end
 entity.onTrade = function(player, npc, trade)
     local postman = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_POSTMAN_ALWAYS_KO_S_TWICE)
 
-    if postman ~= QUEST_AVAILABLE then
+    if postman ~= xi.questStatus.QUEST_AVAILABLE then
         local reward = 0
 
         -- TODO: Table this on converting to Interaction
@@ -43,27 +43,27 @@ entity.onTrade = function(player, npc, trade)
 
         if trade:getItemCount() == reward then
             if reward == 1 then
-                if postman == QUEST_ACCEPTED then
+                if postman == xi.questStatus.QUEST_ACCEPTED then
                     player:startEvent(52, xi.settings.main.GIL_RATE * 50)
-                elseif postman == QUEST_COMPLETED then
+                elseif postman == xi.questStatus.QUEST_COMPLETED then
                     player:startEvent(57, xi.settings.main.GIL_RATE * 50)
                 end
             elseif reward == 2 then
-                if postman == QUEST_ACCEPTED then
+                if postman == xi.questStatus.QUEST_ACCEPTED then
                     player:startEvent(53, xi.settings.main.GIL_RATE * 150, 2)
-                elseif postman == QUEST_COMPLETED then
+                elseif postman == xi.questStatus.QUEST_COMPLETED then
                     player:startEvent(58, xi.settings.main.GIL_RATE * 150, 2)
                 end
             elseif reward == 3 then
-                if postman == QUEST_ACCEPTED then
+                if postman == xi.questStatus.QUEST_ACCEPTED then
                     player:startEvent(54, xi.settings.main.GIL_RATE * 250, 3)
-                elseif postman == QUEST_COMPLETED then
+                elseif postman == xi.questStatus.QUEST_COMPLETED then
                     player:startEvent(59, xi.settings.main.GIL_RATE * 250, 3)
                 end
             elseif reward == 4 then
-                if postman == QUEST_ACCEPTED then
+                if postman == xi.questStatus.QUEST_ACCEPTED then
                     player:startEvent(55, xi.settings.main.GIL_RATE * 500, 4)
-                elseif postman == QUEST_COMPLETED then
+                elseif postman == xi.questStatus.QUEST_COMPLETED then
                     player:startEvent(60, xi.settings.main.GIL_RATE * 500, 4)
                 end
             end

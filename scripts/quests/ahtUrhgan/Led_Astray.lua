@@ -22,7 +22,7 @@ quest.sections =
 
     {
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE
+            return status == xi.questStatus.QUEST_AVAILABLE
         end,
 
         [xi.zone.AHT_URHGAN_WHITEGATE] =
@@ -40,7 +40,7 @@ quest.sections =
 
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED and vars.Prog == 0
+            return status == xi.questStatus.QUEST_ACCEPTED and vars.Prog == 0
         end,
 
         [xi.zone.AHT_URHGAN_WHITEGATE] =
@@ -65,7 +65,7 @@ quest.sections =
 
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED and vars.Prog == 1
+            return status == xi.questStatus.QUEST_ACCEPTED and vars.Prog == 1
         end,
 
         [xi.zone.AHT_URHGAN_WHITEGATE] =
@@ -85,7 +85,7 @@ quest.sections =
 
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED and vars.Prog == 2
+            return status == xi.questStatus.QUEST_ACCEPTED and vars.Prog == 2
         end,
 
         [xi.zone.AHT_URHGAN_WHITEGATE] =
@@ -135,7 +135,7 @@ quest.sections =
 
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED and vars.Prog == 3
+            return status == xi.questStatus.QUEST_ACCEPTED and vars.Prog == 3
         end,
 
         [xi.zone.AHT_URHGAN_WHITEGATE] =
@@ -161,7 +161,7 @@ quest.sections =
 
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED and vars.Prog == 4
+            return status == xi.questStatus.QUEST_ACCEPTED and vars.Prog == 4
         end,
 
         [xi.zone.AHT_URHGAN_WHITEGATE] =

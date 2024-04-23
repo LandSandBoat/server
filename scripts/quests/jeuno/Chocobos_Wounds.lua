@@ -39,7 +39,7 @@ quest.sections =
 {
     {
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE and player:getMainLvl() >= 20
+            return status == xi.questStatus.QUEST_AVAILABLE and player:getMainLvl() >= 20
         end,
 
         [xi.zone.LOWER_JEUNO] =
@@ -85,7 +85,7 @@ quest.sections =
 
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED
+            return status == xi.questStatus.QUEST_ACCEPTED
         end,
 
         [xi.zone.LOWER_JEUNO] =
@@ -186,7 +186,7 @@ quest.sections =
 
     {
         check = function(player, status, vars)
-            return status == QUEST_COMPLETED and
+            return status == xi.questStatus.QUEST_COMPLETED and
                 not player:hasCompletedQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.SAVE_MY_SON)
         end,
 

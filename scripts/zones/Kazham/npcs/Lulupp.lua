@@ -49,7 +49,7 @@ entity.onTrade = function(player, npc, trade)
     local progress = player:getCharVar('OPO_OPO_PROGRESS')
     local failed = player:getCharVar('OPO_OPO_FAILED')
 
-    if opoOpoAndIStatus == QUEST_ACCEPTED then
+    if opoOpoAndIStatus == xi.questStatus.QUEST_ACCEPTED then
         if progress == 0 or failed == 1 then
             if trade:hasItemQty(xi.item.BROKEN_MITHRAN_FISHING_ROD, 1) then -- first or second time trading correctly
                 player:startEvent(219)
@@ -78,10 +78,10 @@ entity.onTrigger = function(player, npc)
 
     if
         player:getCharVar('BathedInScent') == 1 and
-        opoOpoAndIStatus == QUEST_AVAILABLE
+        opoOpoAndIStatus == xi.questStatus.QUEST_AVAILABLE
     then
         player:startEvent(217, 0, 483)  -- 483 broken mithran fishing rod
-    elseif opoOpoAndIStatus == QUEST_ACCEPTED then
+    elseif opoOpoAndIStatus == xi.questStatus.QUEST_ACCEPTED then
         if retry == 1 then
             player:startEvent(239) -- gave 1st NPC wrong item instead of "Broken Mithran Fishing Rod"
         elseif retry == 2 then

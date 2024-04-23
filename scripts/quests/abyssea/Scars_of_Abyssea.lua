@@ -13,11 +13,11 @@ quest.sections =
 {
     {
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE and
+            return status == xi.questStatus.QUEST_AVAILABLE and
                 (
-                    player:getQuestStatus(xi.quest.log_id.ABYSSEA, xi.quest.id.abyssea.THE_BEAST_OF_BASTORE) > QUEST_AVAILABLE or
-                    player:getQuestStatus(xi.quest.log_id.ABYSSEA, xi.quest.id.abyssea.A_DELECTABLE_DEMON) > QUEST_AVAILABLE or
-                    player:getQuestStatus(xi.quest.log_id.ABYSSEA, xi.quest.id.abyssea.A_FLUTTERY_FIEND) > QUEST_AVAILABLE
+                    player:getQuestStatus(xi.quest.log_id.ABYSSEA, xi.quest.id.abyssea.THE_BEAST_OF_BASTORE) > xi.questStatus.QUEST_AVAILABLE or
+                    player:getQuestStatus(xi.quest.log_id.ABYSSEA, xi.quest.id.abyssea.A_DELECTABLE_DEMON) > xi.questStatus.QUEST_AVAILABLE or
+                    player:getQuestStatus(xi.quest.log_id.ABYSSEA, xi.quest.id.abyssea.A_FLUTTERY_FIEND) > xi.questStatus.QUEST_AVAILABLE
                 )
         end,
 
@@ -41,7 +41,7 @@ quest.sections =
 
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED and
+            return status == xi.questStatus.QUEST_ACCEPTED and
                 player:hasCompletedQuest(xi.quest.log_id.ABYSSEA, xi.quest.id.abyssea.THE_BEAST_OF_BASTORE) and
                 player:hasCompletedQuest(xi.quest.log_id.ABYSSEA, xi.quest.id.abyssea.A_DELECTABLE_DEMON) and
                 player:hasCompletedQuest(xi.quest.log_id.ABYSSEA, xi.quest.id.abyssea.A_FLUTTERY_FIEND)

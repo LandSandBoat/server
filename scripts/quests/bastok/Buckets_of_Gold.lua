@@ -19,7 +19,7 @@ quest.sections =
 {
     {
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE
+            return status == xi.questStatus.QUEST_AVAILABLE
         end,
 
         [xi.zone.BASTOK_MARKETS] =
@@ -39,7 +39,7 @@ quest.sections =
 
     {
         check = function(player, status, vars)
-            return status ~= QUEST_AVAILABLE
+            return status ~= xi.questStatus.QUEST_AVAILABLE
         end,
 
         [xi.zone.BASTOK_MARKETS] =
@@ -60,7 +60,7 @@ quest.sections =
 
                     -- From previous implementation, award 75 fame (67 + 8) on first completion,
                     -- and 8 fame for any subsequent trade.
-                    if player:getQuestStatus(quest.areaId, quest.questId) == QUEST_ACCEPTED then
+                    if player:getQuestStatus(quest.areaId, quest.questId) == xi.questStatus.QUEST_ACCEPTED then
                         player:addFame(xi.quest.fame_area.BASTOK, 67)
                     end
 

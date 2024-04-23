@@ -9,14 +9,14 @@ local ID = zones[xi.zone.NORTHERN_SAN_DORIA]
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    if player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.MESSENGER_FROM_BEYOND) == QUEST_ACCEPTED then
+    if player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.MESSENGER_FROM_BEYOND) == xi.questStatus.QUEST_ACCEPTED then
         if
             trade:hasItemQty(xi.item.TAVNAZIA_PASS, 1) and
             trade:getItemCount() == 1
         then
             player:startEvent(690) -- Finish quest "Messenger from Beyond"
         end
-    elseif player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.PRELUDE_OF_BLACK_AND_WHITE) == QUEST_ACCEPTED then
+    elseif player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.PRELUDE_OF_BLACK_AND_WHITE) == xi.questStatus.QUEST_ACCEPTED then
         if
             trade:hasItemQty(xi.item.CANTEEN_OF_YAGUDO_HOLY_WATER, 1) and
             trade:hasItemQty(xi.item.MOCCASINS, 1) and
@@ -25,7 +25,7 @@ entity.onTrade = function(player, npc, trade)
             -- Trade Yagudo Holy Water & Moccasins
             player:startEvent(691) -- Finish quest "Prelude of Black and White"
         end
-    elseif player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.PIEUJE_S_DECISION) == QUEST_ACCEPTED then
+    elseif player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.PIEUJE_S_DECISION) == xi.questStatus.QUEST_ACCEPTED then
         if
             trade:hasItemQty(xi.item.TAVNAZIAN_MASK, 1) and
             trade:getItemCount() == 1
@@ -43,7 +43,7 @@ entity.onTrigger = function(player, npc)
     local mJob = player:getMainJob()
 
     if
-        messengerFromBeyond == QUEST_AVAILABLE and
+        messengerFromBeyond == xi.questStatus.QUEST_AVAILABLE and
         mJob == xi.job.WHM and
         mLvl >= xi.settings.main.AF1_QUEST_LEVEL
     then

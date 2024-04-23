@@ -11,7 +11,7 @@ local entity = {}
 entity.onTrade = function(player, npc, trade)
     local questStatus = player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.ELDER_MEMORIES)
 
-    if questStatus == QUEST_ACCEPTED then
+    if questStatus == xi.questStatus.QUEST_ACCEPTED then
         local IsacioElderMemVar = player:getCharVar('IsacioElderMemVar')
 
         if
@@ -36,11 +36,11 @@ end
 entity.onTrigger = function(player, npc)
     local questStatus = player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.ELDER_MEMORIES)
 
-    if player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.THE_OLD_LADY) ~= QUEST_AVAILABLE then
+    if player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.THE_OLD_LADY) ~= xi.questStatus.QUEST_AVAILABLE then
         player:startEvent(99)
-    elseif questStatus == QUEST_COMPLETED then
+    elseif questStatus == xi.questStatus.QUEST_COMPLETED then
         player:startEvent(118)
-    elseif questStatus == QUEST_ACCEPTED then
+    elseif questStatus == xi.questStatus.QUEST_ACCEPTED then
         local IsacioElderMemVar = player:getCharVar('IsacioElderMemVar')
 
         if player:hasKeyItem(xi.ki.GILGAMESHS_INTRODUCTORY_LETTER) then

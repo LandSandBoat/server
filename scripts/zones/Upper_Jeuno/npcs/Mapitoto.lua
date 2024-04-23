@@ -41,11 +41,11 @@ entity.onTrigger = function(player, npc)
     local fsaQuest = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.FULL_SPEED_AHEAD)
     local fullSpeedAheadStatus = player:getCharVar('[QUEST]FullSpeedAhead')
 
-    if fsaQuest == QUEST_COMPLETED then
+    if fsaQuest == xi.questStatus.QUEST_COMPLETED then
         player:startEvent(10226)
     elseif fullSpeedAheadStatus == 4 then -- Complete
         player:startEvent(10225, xi.ki.TRAINERS_WHISTLE, 15533, ID.npc.MAPITOTO)
-    elseif fsaQuest == QUEST_ACCEPTED then -- Retry
+    elseif fsaQuest == xi.questStatus.QUEST_ACCEPTED then -- Retry
         player:startEvent(10224, 1)
     elseif
         player:hasKeyItem(xi.ki.CHOCOBO_LICENSE) and

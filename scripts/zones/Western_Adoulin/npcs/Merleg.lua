@@ -13,7 +13,7 @@ end
 
 entity.onTrigger = function(player, npc)
     local apbif = player:getQuestStatus(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.A_PIONEERS_BEST_IMAGINARY_FRIEND)
-    if apbif == QUEST_ACCEPTED then
+    if apbif == xi.questStatus.QUEST_ACCEPTED then
         if player:hasStatusEffect(xi.effect.IONIS) then
             -- Finishing Quest: 'A Pioneers Best (Imaginary) Friend'
             player:startEvent(2522)
@@ -21,7 +21,7 @@ entity.onTrigger = function(player, npc)
             -- Dialgoue during Quest: 'A Pioneers Best (Imaginary) Friend'
             player:startEvent(2521)
         end
-    elseif apbif == QUEST_AVAILABLE then
+    elseif apbif == xi.questStatus.QUEST_AVAILABLE then
         player:startEvent(2520)
     end
 end

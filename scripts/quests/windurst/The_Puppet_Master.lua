@@ -20,7 +20,7 @@ quest.sections =
 {
     {
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE and
+            return status == xi.questStatus.QUEST_AVAILABLE and
                 player:getMainLvl() >= xi.settings.main.AF1_QUEST_LEVEL and
                 player:getMainJob() == xi.job.SMN and
                 not quest:getMustZone(player)
@@ -41,7 +41,7 @@ quest.sections =
 
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED
+            return status == xi.questStatus.QUEST_ACCEPTED
         end,
 
         [xi.zone.WINDURST_WALLS] =
@@ -130,7 +130,7 @@ quest.sections =
 
     {
         check = function(player, status, vars)
-            return status == QUEST_COMPLETED and
+            return status == xi.questStatus.QUEST_COMPLETED and
                 not player:hasCompletedQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CLASS_REUNION)
         end,
 

@@ -15,7 +15,7 @@ entity.onTrigger = function(player, npc)
     local catch = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CATCH_IT_IF_YOU_CAN)
     local wonderWands = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.WONDER_WANDS)
 
-    if wonderWands == QUEST_ACCEPTED then
+    if wonderWands == xi.questStatus.QUEST_ACCEPTED then
         player:startEvent(258, 0, 17053)
     elseif catch == 0 then
         local prog = player:getCharVar('QuestCatchItIfYouCan_var')
@@ -52,7 +52,7 @@ entity.onTrigger = function(player, npc)
         else
             player:startEvent(251) -- CATCH IT IF YOU CAN: During Quest 2
         end
-    elseif wonderWands == QUEST_COMPLETED then
+    elseif wonderWands == xi.questStatus.QUEST_COMPLETED then
         player:startEvent(265)
     else
         player:startEvent(230) -- STANDARD CONVERSATION
@@ -80,7 +80,7 @@ entity.onEventFinish = function(player, csid, option, npc)
 
         player:setCharVar('QuestCatchItIfYouCan_var', 0)
 
-        if player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CATCH_IT_IF_YOU_CAN) == QUEST_ACCEPTED then
+        if player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CATCH_IT_IF_YOU_CAN) == xi.questStatus.QUEST_ACCEPTED then
             player:completeQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CATCH_IT_IF_YOU_CAN)
             player:addFame(xi.quest.fame_area.WINDURST, 75)
         else

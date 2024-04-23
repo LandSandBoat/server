@@ -28,7 +28,7 @@ zoneObject.onZoneIn = function(player, prevZone)
     if
         prevZone == xi.zone.BASTOK_MARKETS_S and
         player:getCampaignAllegiance() > 0 and
-        player:getQuestStatus(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.BETTER_PART_OF_VALOR) == QUEST_AVAILABLE
+        player:getQuestStatus(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.BETTER_PART_OF_VALOR) == xi.questStatus.QUEST_AVAILABLE
     then
         cs = 1
     end

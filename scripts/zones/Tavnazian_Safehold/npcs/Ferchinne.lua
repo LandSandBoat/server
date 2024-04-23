@@ -9,13 +9,13 @@ entity.onTrade = function(player, npc, trade)
     local flyHigh = player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.FLY_HIGH)
 
     if
-        flyHigh == QUEST_ACCEPTED and
+        flyHigh == xi.questStatus.QUEST_ACCEPTED and
         npcUtil.tradeHas(trade, { { xi.item.HIPPOGRYPH_TAILFEATHER, 2 } })
     then
         -- 2x Hippogryph Tailfeather
         player:startEvent(243)
     elseif
-        flyHigh == QUEST_COMPLETED and
+        flyHigh == xi.questStatus.QUEST_COMPLETED and
         npcUtil.tradeHas(trade, { { xi.item.HIPPOGRYPH_TAILFEATHER, 2 } })
     then
         -- 2x Hippogryph Tailfeather
@@ -30,11 +30,11 @@ entity.onTrigger = function(player, npc)
     then
         local flyHigh = player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.FLY_HIGH)
 
-        if flyHigh == QUEST_AVAILABLE then
+        if flyHigh == xi.questStatus.QUEST_AVAILABLE then
             player:startEvent(241)
-        elseif flyHigh == QUEST_ACCEPTED then
+        elseif flyHigh == xi.questStatus.QUEST_ACCEPTED then
             player:startEvent(242)
-        elseif flyHigh == QUEST_COMPLETED then
+        elseif flyHigh == xi.questStatus.QUEST_COMPLETED then
             player:startEvent(244)
         end
     end

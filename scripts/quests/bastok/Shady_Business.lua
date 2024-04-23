@@ -18,7 +18,7 @@ quest.sections =
 {
     {
         check = function(player, status, vars)
-            return status >= QUEST_AVAILABLE and
+            return status >= xi.questStatus.QUEST_AVAILABLE and
                 player:hasCompletedQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.BEAUTY_AND_THE_GALKA)
         end,
 
@@ -42,7 +42,7 @@ quest.sections =
             {
                 [90] = function(player, csid, option, npc)
                     -- We can complete the quest without accepting it, but quest will NOT get re-accepted after completed.
-                    if player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.SHADY_BUSINESS) == QUEST_AVAILABLE then
+                    if player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.SHADY_BUSINESS) == xi.questStatus.QUEST_AVAILABLE then
                         quest:begin(player)
                     end
                 end,

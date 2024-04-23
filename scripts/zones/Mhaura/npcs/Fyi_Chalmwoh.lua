@@ -7,7 +7,7 @@ local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     --local rainingMannequins = player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.ITS_RAINING_MANNEQUINS)
-    --if rainingMannequins == QUEST_COMPLETED then
+    --if rainingMannequins == xi.questStatus.QUEST_COMPLETED then
     --    if
     --        (npcUtil.tradeHasExactly(trade, { xi.item.HUME_M_MANNEQUIN }) or
     --        npcUtil.tradeHasExactly(trade, { xi.item.HUME_F_MANNEQUIN }) or
@@ -31,7 +31,7 @@ entity.onTrigger = function(player, npc)
     -- Mannequin shop + exchange
     -- TODO: When you try to buy a new one, mannequins you already own aren't available
     -- TODO: Check money
-    --if rainingMannequins == QUEST_COMPLETED then
+    --if rainingMannequins == xi.questStatus.QUEST_COMPLETED then
     --    local alreadyOwnedMask = 0
     --    player:startEvent(318, 0, alreadyOwnedMask, 100000, 2000, 0, 0, 0, 0)
     --end

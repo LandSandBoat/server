@@ -15,7 +15,7 @@ entity.onTrigger = function(player, npc)
     local circleOfTime = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_CIRCLE_OF_TIME)
 
     if
-        circleOfTime == QUEST_ACCEPTED and
+        circleOfTime == xi.questStatus.QUEST_ACCEPTED and
         player:hasKeyItem(xi.ki.STAR_RING1) and
         player:hasKeyItem(xi.ki.MOON_RING)
     then

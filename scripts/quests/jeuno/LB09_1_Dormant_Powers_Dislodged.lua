@@ -41,7 +41,7 @@ quest.sections =
     -- Section: Quest available.
     {
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE and
+            return status == xi.questStatus.QUEST_AVAILABLE and
                 player:getMainLvl() >= 86 and
                 player:getLevelCap() == 90 and
                 xi.settings.main.MAX_LEVEL >= 95
@@ -73,7 +73,7 @@ quest.sections =
     -- Section: Quest accepted.
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED
+            return status == xi.questStatus.QUEST_ACCEPTED
         end,
 
         [xi.zone.RULUDE_GARDENS] =

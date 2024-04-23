@@ -25,14 +25,14 @@ entity.onTrigger = function(player, npc)
     local aNewDawnEvent = player:getCharVar('ANewDawn_Event')
 
     -- A New Dawn
-    if aNewDawn == QUEST_ACCEPTED then
+    if aNewDawn == xi.questStatus.QUEST_ACCEPTED then
         if aNewDawnEvent == 2 or aNewDawnEvent == 3 then
             player:startEvent(146)
         elseif aNewDawnEvent >= 4 then
             player:startEvent(147)
         end
 
-    elseif aNewDawn == QUEST_COMPLETED then
+    elseif aNewDawn == xi.questStatus.QUEST_COMPLETED then
         player:startEvent(145)
     end
 end

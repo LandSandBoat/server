@@ -6,7 +6,7 @@
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    if player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.MANDRAGORA_MAD) ~= QUEST_AVAILABLE then
+    if player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.MANDRAGORA_MAD) ~= xi.questStatus.QUEST_AVAILABLE then
         if npcUtil.tradeHas(trade, xi.item.CORNETTE, true) then
             player:startEvent(251, xi.settings.main.GIL_RATE * 200)
         elseif npcUtil.tradeHas(trade, xi.item.PINCH_OF_YUHTUNGA_SULFUR, true) then
@@ -27,11 +27,11 @@ entity.onTrigger = function(player, npc)
     local mandragoraMad = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.MANDRAGORA_MAD)
     local turmoil = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.TORAIMARAI_TURMOIL)
 
-    if mandragoraMad == QUEST_AVAILABLE then
+    if mandragoraMad == xi.questStatus.QUEST_AVAILABLE then
         player:startEvent(249)
-    elseif mandragoraMad == QUEST_ACCEPTED then
+    elseif mandragoraMad == xi.questStatus.QUEST_ACCEPTED then
         player:startEvent(256)
-    elseif turmoil == QUEST_ACCEPTED then
+    elseif turmoil == xi.questStatus.QUEST_ACCEPTED then
         player:startEvent(392)
     end
 end

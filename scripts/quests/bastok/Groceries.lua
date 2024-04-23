@@ -22,8 +22,8 @@ quest.sections =
 {
     {
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE or
-                (status == QUEST_ACCEPTED and vars.Prog == 0)
+            return status == xi.questStatus.QUEST_AVAILABLE or
+                (status == xi.questStatus.QUEST_ACCEPTED and vars.Prog == 0)
         end,
 
         [xi.zone.BASTOK_MINES] =
@@ -44,7 +44,7 @@ quest.sections =
 
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED
+            return status == xi.questStatus.QUEST_ACCEPTED
         end,
 
         [xi.zone.BASTOK_MINES] =

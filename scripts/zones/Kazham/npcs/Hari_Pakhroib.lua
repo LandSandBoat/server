@@ -14,21 +14,21 @@ entity.onTrigger = function(player, npc)
     local pfame = player:getFameLevel(xi.quest.fame_area.WINDURST)
     local needToZone = player:needToZone()
 
-    if guardian == QUEST_ACCEPTED then
+    if guardian == xi.questStatus.QUEST_ACCEPTED then
         if pamamas == 1 then
             player:startEvent(71) --Finish Quest
         else
             player:startEvent(69, 0, 4596) --Reminder Dialogue
         end
-    elseif guardian == QUEST_AVAILABLE and pfame >= 7 then
+    elseif guardian == xi.questStatus.QUEST_AVAILABLE and pfame >= 7 then
         player:startEvent(68, 4596, 4596, 4596) --Start Quest
-    elseif guardian == QUEST_COMPLETED and not needToZone then
+    elseif guardian == xi.questStatus.QUEST_COMPLETED and not needToZone then
         if pamamas == 2 then
             player:startEvent(71) --Finish quest dialogue (no different csid between initial and repeats)
         else
             player:startEvent(72) --Dialogue for after completion of quest
         end
-    elseif guardian == QUEST_COMPLETED and needToZone then
+    elseif guardian == xi.questStatus.QUEST_COMPLETED and needToZone then
         player:startEvent(72)
     end
 end

@@ -104,7 +104,7 @@ quest.sections =
 {
     {
         check = function(player, status, vars)
-            return status ~= QUEST_ACCEPTED and
+            return status ~= xi.questStatus.QUEST_ACCEPTED and
                 player:hasCompletedQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.BRYGID_THE_STYLIST) and
                 hasArtifactArmorEquipped(player)
         end,
@@ -137,7 +137,7 @@ quest.sections =
 
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED
+            return status == xi.questStatus.QUEST_ACCEPTED
         end,
 
         [xi.zone.BASTOK_MARKETS] =

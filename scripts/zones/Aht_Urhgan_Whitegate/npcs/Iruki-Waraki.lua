@@ -29,45 +29,45 @@ entity.onTrigger = function(player, npc)
     if
         playerJob == xi.job.PUP and
         playerLvl >= xi.settings.main.AF1_QUEST_LEVEL and
-        noStringsAttached == QUEST_COMPLETED and
-        theWaywardAutomaton == QUEST_AVAILABLE
+        noStringsAttached == xi.questStatus.QUEST_COMPLETED and
+        theWaywardAutomaton == xi.questStatus.QUEST_AVAILABLE
     then
         player:startEvent(774) -- he tells you to help find his auto
     elseif
-        theWaywardAutomaton == QUEST_ACCEPTED and
+        theWaywardAutomaton == xi.questStatus.QUEST_ACCEPTED and
         theWaywardAutomatonProgress == 1
     then
         player:startEvent(775) -- reminder about to head to Nashmau
     elseif
-        theWaywardAutomaton == QUEST_ACCEPTED and
+        theWaywardAutomaton == xi.questStatus.QUEST_ACCEPTED and
         theWaywardAutomatonProgress == 3
     then
         player:startEvent(776) -- tell him you found Automaton
     elseif
         playerJob == xi.job.PUP and
         playerLvl < xi.settings.main.AF2_QUEST_LEVEL and
-        theWaywardAutomaton == QUEST_COMPLETED
+        theWaywardAutomaton == xi.questStatus.QUEST_COMPLETED
     then
         player:startEvent(777)
-    elseif playerJob ~= xi.job.PUP and theWaywardAutomaton == QUEST_COMPLETED then
+    elseif playerJob ~= xi.job.PUP and theWaywardAutomaton == xi.questStatus.QUEST_COMPLETED then
         player:startEvent(777)
-    elseif playerJob ~= xi.job.PUP and noStringsAttached == QUEST_COMPLETED then
+    elseif playerJob ~= xi.job.PUP and noStringsAttached == xi.questStatus.QUEST_COMPLETED then
         player:startEvent(267) -- asking you how are you doing with your automaton
 
     --Quest: Operation teatime
     elseif
         playerJob == xi.job.PUP and
         playerLvl >= xi.settings.main.AF2_QUEST_LEVEL and
-        noStringsAttached == QUEST_COMPLETED and
-        theWaywardAutomaton == QUEST_COMPLETED and
-        operationTeaTime == QUEST_AVAILABLE
+        noStringsAttached == xi.questStatus.QUEST_COMPLETED and
+        theWaywardAutomaton == xi.questStatus.QUEST_COMPLETED and
+        operationTeaTime == xi.questStatus.QUEST_AVAILABLE
     then
         player:startEvent(778)
-    elseif operationTeaTime == QUEST_ACCEPTED and operationTeaTimeProgress == 1 then
+    elseif operationTeaTime == xi.questStatus.QUEST_ACCEPTED and operationTeaTimeProgress == 1 then
         player:startEvent(779) -- Reminds you to get items
-    elseif operationTeaTime == QUEST_ACCEPTED and operationTeaTimeProgress == 2 then
+    elseif operationTeaTime == xi.questStatus.QUEST_ACCEPTED and operationTeaTimeProgress == 2 then
         player:startEvent(781) -- Reminds you to get items
-    elseif operationTeaTime == QUEST_COMPLETED then
+    elseif operationTeaTime == xi.questStatus.QUEST_COMPLETED then
         player:startEvent(777)
     end
 end

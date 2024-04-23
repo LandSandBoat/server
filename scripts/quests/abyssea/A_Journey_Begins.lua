@@ -18,7 +18,7 @@ quest.sections =
     -- and is flagged if Abyssea is enabled in onGameIn.
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED and player:getMainLvl() >= 30
+            return status == xi.questStatus.QUEST_ACCEPTED and player:getMainLvl() >= 30
         end,
 
         [xi.zone.PORT_JEUNO] =

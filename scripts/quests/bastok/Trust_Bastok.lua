@@ -148,7 +148,7 @@ quest.sections =
     -- Section: Quest available
     {
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE and
+            return status == xi.questStatus.QUEST_AVAILABLE and
                 player:getMainLvl() >= 5 and
                 xi.settings.main.ENABLE_TRUST_QUESTS == 1
         end,
@@ -161,9 +161,9 @@ quest.sections =
                     local trustSandoria = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.TRUST_SANDORIA)
                     local trustWindurst = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.TRUST_WINDURST)
 
-                    if trustWindurst == QUEST_AVAILABLE and trustSandoria == QUEST_AVAILABLE then
+                    if trustWindurst == xi.questStatus.QUEST_AVAILABLE and trustSandoria == xi.questStatus.QUEST_AVAILABLE then
                         return quest:progressEvent(434)
-                    elseif trustWindurst == QUEST_COMPLETED or trustSandoria == QUEST_COMPLETED then
+                    elseif trustWindurst == xi.questStatus.QUEST_COMPLETED or trustSandoria == xi.questStatus.QUEST_COMPLETED then
                         return quest:progressEvent(438)
                     end
                 end,
@@ -191,7 +191,7 @@ quest.sections =
     -- Section: Quest accepted
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED
+            return status == xi.questStatus.QUEST_ACCEPTED
         end,
 
         [xi.zone.METALWORKS] =
@@ -203,8 +203,8 @@ quest.sections =
                     local bastokFirstTrust = quest:getVar(player, 'Prog')
 
                     if
-                        player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.TRUST_SANDORIA) == QUEST_COMPLETED or
-                        player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.TRUST_WINDURST) == QUEST_COMPLETED
+                        player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.TRUST_SANDORIA) == xi.questStatus.QUEST_COMPLETED or
+                        player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.TRUST_WINDURST) == xi.questStatus.QUEST_COMPLETED
                     then
                         return quest:progressEvent(984, 0, 0, 0, trustMemoryNaji(player), 0, 0, 0, rank3)
                     elseif bastokFirstTrust == 0 then
@@ -261,7 +261,7 @@ quest.sections =
     -- Section: Quest completed
     {
         check = function(player, status, vars)
-            return status == QUEST_COMPLETED
+            return status == xi.questStatus.QUEST_COMPLETED
         end,
 
         [xi.zone.METALWORKS] =

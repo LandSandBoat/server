@@ -21,7 +21,7 @@ entity.onTrade = function(player, npc, trade)
         end
 
     -- EXOTIC DELICACIES
-    elseif exoticDelicacies == QUEST_ACCEPTED then
+    elseif exoticDelicacies == xi.questStatus.QUEST_ACCEPTED then
         if npcUtil.tradeHas(trade, { 3916, 5949, { 5954, 2 } }) then
             player:startEvent(2861)
         elseif
@@ -39,7 +39,7 @@ entity.onTrigger = function(player, npc)
 
     -- THE WEATHERSPOON WAR
     if
-        theWeatherspoonWar == QUEST_ACCEPTED and
+        theWeatherspoonWar == xi.questStatus.QUEST_ACCEPTED and
         player:getCharVar('Weatherspoon_War_Status') == 6
     then
         player:startEvent(191)
@@ -47,12 +47,12 @@ entity.onTrigger = function(player, npc)
     -- EXOTIC DELICACIES
     -- Flapano offers his quest every other time the player talks to him
     elseif
-        exoticDelicacies ~= QUEST_COMPLETED and
+        exoticDelicacies ~= xi.questStatus.QUEST_COMPLETED and
         player:getCharVar('Flapano_Odd_Even') == 0
     then
-        if exoticDelicacies == QUEST_AVAILABLE then
+        if exoticDelicacies == xi.questStatus.QUEST_AVAILABLE then
             player:startEvent(2860)
-        elseif exoticDelicacies == QUEST_ACCEPTED then
+        elseif exoticDelicacies == xi.questStatus.QUEST_ACCEPTED then
             player:startEvent(2863)
         end
 
@@ -73,7 +73,7 @@ entity.onTrigger = function(player, npc)
         }
         xi.shop.general(player, stock)
 
-        if exoticDelicacies ~= QUEST_COMPLETED then
+        if exoticDelicacies ~= xi.questStatus.QUEST_COMPLETED then
             player:setCharVar('Flapano_Odd_Even', 0)
         end
     end

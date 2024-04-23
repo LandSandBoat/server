@@ -10,11 +10,11 @@ local ID = zones[xi.zone.LOWER_JEUNO]
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    if player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.COLLECT_TARUT_CARDS) == QUEST_ACCEPTED then
+    if player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.COLLECT_TARUT_CARDS) == xi.questStatus.QUEST_ACCEPTED then
         if npcUtil.tradeHas(trade, { xi.item.TARUT_CARD_THE_FOOL, xi.item.TARUT_CARD_DEATH, xi.item.TARUT_CARD_THE_KING, xi.item.TARUT_CARD_THE_HERMIT }, true) then
             player:startEvent(200) -- Finish quest "Collect Tarut Cards"
         end
-    elseif player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.ALL_IN_THE_CARDS) >= QUEST_ACCEPTED then
+    elseif player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.ALL_IN_THE_CARDS) >= xi.questStatus.QUEST_ACCEPTED then
         if npcUtil.tradeHas(trade, { xi.item.TARUT_CARD_THE_FOOL, xi.item.TARUT_CARD_DEATH, xi.item.TARUT_CARD_THE_KING, xi.item.TARUT_CARD_THE_HERMIT }, true) then
             player:startEvent(10114) -- Finish quest "All in the Cards"
         end
@@ -29,16 +29,16 @@ entity.onTrigger = function(player, npc)
 
     if
         player:getFameLevel(xi.quest.fame_area.JEUNO) >= 3 and
-        collectTarutCards == QUEST_AVAILABLE
+        collectTarutCards == xi.questStatus.QUEST_AVAILABLE
     then
         player:startEvent(28) -- Start quest 'Collect Tarut Cards' with option
 
-    elseif collectTarutCards == QUEST_ACCEPTED then
+    elseif collectTarutCards == xi.questStatus.QUEST_ACCEPTED then
         player:startEvent(27) -- During quest 'Collect Tarut Cards'
 
     elseif
-        collectTarutCards == QUEST_COMPLETED and
-        rubbishDay == QUEST_AVAILABLE and
+        collectTarutCards == xi.questStatus.QUEST_COMPLETED and
+        rubbishDay == xi.questStatus.QUEST_AVAILABLE and
         player:getCharVar('RubbishDay_day') ~= VanadielDayOfTheYear()
     then
         -- prog = player:getCharVar('RubbishDay_prog')
@@ -49,32 +49,32 @@ entity.onTrigger = function(player, npc)
         -- end
 
     elseif
-        collectTarutCards == QUEST_COMPLETED and
-        rubbishDay == QUEST_AVAILABLE
+        collectTarutCards == xi.questStatus.QUEST_COMPLETED and
+        rubbishDay == xi.questStatus.QUEST_AVAILABLE
     then
         player:startEvent(57) -- Standard dialog between 2 quests
 
     elseif
-        rubbishDay == QUEST_ACCEPTED and
+        rubbishDay == xi.questStatus.QUEST_ACCEPTED and
         player:getCharVar('RubbishDayVar') == 0
     then
         player:startEvent(49) -- During quest 'Rubbish Day'
 
     elseif
-        rubbishDay == QUEST_ACCEPTED and
+        rubbishDay == xi.questStatus.QUEST_ACCEPTED and
         player:getCharVar('RubbishDayVar') == 1
     then
         player:startEvent(197) -- Finish quest 'Rubbish Day'
 
     elseif
         player:getFameLevel(xi.quest.fame_area.JEUNO) >= 4 and
-        collectTarutCards == QUEST_COMPLETED and
-        allInTheCards == QUEST_AVAILABLE
+        collectTarutCards == xi.questStatus.QUEST_COMPLETED and
+        allInTheCards == xi.questStatus.QUEST_AVAILABLE
     then
         player:startEvent(10110) -- Start quest 'All in the Cards' with option
 
     elseif
-        allInTheCards >= QUEST_ACCEPTED and
+        allInTheCards >= xi.questStatus.QUEST_ACCEPTED and
         player:getLocalVar('Cardstemp') == 0
     then
         if cdate >= os.time() then
@@ -85,14 +85,14 @@ entity.onTrigger = function(player, npc)
             player:startEvent(10112) -- During quest 'All in the Cards'  THIS ONE GIVES ANOTHER BATCH
         end
 
-    elseif player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.SEARCHING_FOR_THE_RIGHT_WORDS) == QUEST_COMPLETED then
+    elseif player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.SEARCHING_FOR_THE_RIGHT_WORDS) == xi.questStatus.QUEST_COMPLETED then
         if player:getCharVar('SearchingForRightWords_postcs') < -1 then
             player:startEvent(56)
         else
             player:startEvent(57) -- final state, after all quests complete
         end
 
-    elseif rubbishDay == QUEST_COMPLETED then
+    elseif rubbishDay == xi.questStatus.QUEST_COMPLETED then
         player:startEvent(57) -- New standard dialog
 
     else

@@ -14,7 +14,7 @@ entity.onTrade = function(player, npc, trade)
     for i, wepId in pairs(xi.equipment.baseNyzulWeapons) do
         if npcUtil.tradeHasExactly(trade, wepId) then
             local unlockingAMyth = player:getQuestStatus(xi.quest.log_id.JEUNO, getQuestId(i))
-            if unlockingAMyth == QUEST_ACCEPTED then
+            if unlockingAMyth == xi.questStatus.QUEST_ACCEPTED then
                 local wsPoints = trade:getItem(0):getWeaponskillPoints()
                 if wsPoints <= 49 then
                     player:startEvent(10091)
@@ -38,7 +38,7 @@ entity.onTrigger = function(player, npc)
     local nyzulWeaponMain   = xi.equip.isBaseNyzulWeapon(player:getEquipID(xi.slot.MAIN))
     local nyzulWeaponRanged = xi.equip.isBaseNyzulWeapon(player:getEquipID(xi.slot.RANGED))
 
-    if unlockingAMyth == QUEST_AVAILABLE then
+    if unlockingAMyth == xi.questStatus.QUEST_AVAILABLE then
         if player:needToZone() and player:getCharVar('Upset_Zalsuhm') > 0 then
             player:startEvent(10090)
         else
@@ -52,7 +52,7 @@ entity.onTrigger = function(player, npc)
                 player:startEvent(10085)
             end
         end
-    elseif unlockingAMyth == QUEST_ACCEPTED then
+    elseif unlockingAMyth == xi.questStatus.QUEST_ACCEPTED then
         player:startEvent(10087)
     else
         player:startEvent(10089)

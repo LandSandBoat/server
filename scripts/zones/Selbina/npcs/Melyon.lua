@@ -8,7 +8,7 @@
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    if player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.ONLY_THE_BEST) ~= QUEST_AVAILABLE then
+    if player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.ONLY_THE_BEST) ~= xi.questStatus.QUEST_AVAILABLE then
         if npcUtil.tradeHas(trade, { { 4366, 5 } }) then -- La Theine Cabbage x5
             player:startEvent(62, 0, 4366)
         elseif npcUtil.tradeHas(trade, { { 629, 3 } }) then -- Millioncorn x3
@@ -20,7 +20,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.ONLY_THE_BEST) == QUEST_AVAILABLE then
+    if player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.ONLY_THE_BEST) == xi.questStatus.QUEST_AVAILABLE then
         player:startEvent(60, 4366, 629, xi.item.CLUMP_OF_BOYAHDA_MOSS) -- Start quest "Only the Best"
     else
         player:startEvent(61, 4366, 629, xi.item.CLUMP_OF_BOYAHDA_MOSS) -- During & after completed quest "Only the Best"

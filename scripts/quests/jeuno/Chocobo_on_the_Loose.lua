@@ -20,7 +20,7 @@ quest.sections =
     -- NOTE: This quest is flagged by Chocobo's Wounds
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED
+            return status == xi.questStatus.QUEST_ACCEPTED
         end,
 
         [xi.zone.LA_THEINE_PLATEAU] =

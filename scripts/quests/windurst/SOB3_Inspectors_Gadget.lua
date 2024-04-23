@@ -19,7 +19,7 @@ quest.sections =
     -- Section: Quest is available.
     {
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE and
+            return status == xi.questStatus.QUEST_AVAILABLE and
                 player:hasCompletedQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.KNOW_ONES_ONIONS)
         end,
 
@@ -54,7 +54,7 @@ quest.sections =
     -- Section: Quest accepeted.
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED
+            return status == xi.questStatus.QUEST_ACCEPTED
         end,
 
         [xi.zone.PORT_WINDURST] =
@@ -138,8 +138,8 @@ quest.sections =
     -- Section: Quest completed.
     {
         check = function(player, status, vars)
-            return status == QUEST_COMPLETED and
-                player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.ONION_RINGS) == QUEST_AVAILABLE
+            return status == xi.questStatus.QUEST_COMPLETED and
+                player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.ONION_RINGS) == xi.questStatus.QUEST_AVAILABLE
         end,
 
         [xi.zone.PORT_WINDURST] =

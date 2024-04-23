@@ -12,7 +12,7 @@ local entity = {}
 entity.onTrade = function(player, npc, trade)
     -- THE REQUIEM (holy water)
     if
-        player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_REQUIEM) == QUEST_ACCEPTED and
+        player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_REQUIEM) == xi.questStatus.QUEST_ACCEPTED and
         player:getCharVar('TheRequiemCS') == 2 and
         trade:hasItemQty(xi.item.FLASK_OF_HOLY_WATER, 1) and
         trade:getItemCount() == 1
@@ -26,15 +26,15 @@ entity.onTrigger = function(player, npc)
 
     -- PATH OF THE BARD (Bard Flag)
     if
-        player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.A_MINSTREL_IN_DESPAIR) == QUEST_COMPLETED and
+        player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.A_MINSTREL_IN_DESPAIR) == xi.questStatus.QUEST_COMPLETED and
         player:getCharVar('PathOfTheBard_Event') == 0
     then
         player:startEvent(182) -- mentions song runes in Valkurm
 
     -- THE REQUIEM (Bard AF2)
     elseif
-        player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.PAINFUL_MEMORY) == QUEST_COMPLETED and
-        theRequiem == QUEST_AVAILABLE and
+        player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.PAINFUL_MEMORY) == xi.questStatus.QUEST_COMPLETED and
+        theRequiem == xi.questStatus.QUEST_AVAILABLE and
         player:getMainJob() == xi.job.BRD and
         player:getMainLvl() >= xi.settings.main.AF2_QUEST_LEVEL
     then
@@ -45,13 +45,13 @@ entity.onTrigger = function(player, npc)
         end
 
     elseif
-        theRequiem == QUEST_ACCEPTED and
+        theRequiem == xi.questStatus.QUEST_ACCEPTED and
         player:getCharVar('TheRequiemCS') == 2
     then
         player:startEvent(146) -- During Quest "The Requiem" (before trading Holy Water)
 
     elseif
-        theRequiem == QUEST_ACCEPTED and
+        theRequiem == xi.questStatus.QUEST_ACCEPTED and
         player:getCharVar('TheRequiemCS') == 3 and
         not player:hasKeyItem(xi.ki.STAR_RING1)
     then
@@ -62,12 +62,12 @@ entity.onTrigger = function(player, npc)
         end
 
     elseif
-        theRequiem == QUEST_ACCEPTED and
+        theRequiem == xi.questStatus.QUEST_ACCEPTED and
         player:hasKeyItem(xi.ki.STAR_RING1)
     then
         player:startEvent(150) -- Finish Quest "The Requiem"
 
-    elseif theRequiem == QUEST_COMPLETED then
+    elseif theRequiem == xi.questStatus.QUEST_COMPLETED then
         player:startEvent(134) -- Standard dialog after "The Requiem"
 
     -- DEFAULT DIALOG

@@ -15,7 +15,7 @@ end
 entity.onTrigger = function(player, npc)
     local hour              = VanadielHour()
     local playerOnQuestId   = GetServerVariable('[JEUNO]CommService')
-    local doneCommService   = (player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.COMMUNITY_SERVICE) == QUEST_COMPLETED) and 1 or 0
+    local doneCommService   = (player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.COMMUNITY_SERVICE) == xi.questStatus.QUEST_COMPLETED) and 1 or 0
     local currCommService   = player:getCharVar('currCommService')
     local hasMembershipCard = player:hasKeyItem(xi.ki.LAMP_LIGHTERS_MEMBERSHIP_CARD) and 1 or 0
 
@@ -64,7 +64,7 @@ entity.onEventUpdate = function(player, csid, option, npc)
         -- player accepts quest
         -- if nobody else has already been assigned to the quest, including Vhana, give it to this player
 
-        local doneCommService = (player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.COMMUNITY_SERVICE) == QUEST_COMPLETED) and 1 or 0
+        local doneCommService = (player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.COMMUNITY_SERVICE) == xi.questStatus.QUEST_COMPLETED) and 1 or 0
         local playerOnQuestId = GetServerVariable('[JEUNO]CommService')
         local hour = VanadielHour()
 
@@ -88,7 +88,7 @@ entity.onEventFinish = function(player, csid, option, npc)
     -- COMMUNITY SERVICE
     if csid == 117 then
         local params = { title = xi.title.TORCHBEARER, var = 'currCommService' }
-        if player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.COMMUNITY_SERVICE) ~= QUEST_COMPLETED then
+        if player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.COMMUNITY_SERVICE) ~= xi.questStatus.QUEST_COMPLETED then
             -- first victory
             params.fame = 30
         else

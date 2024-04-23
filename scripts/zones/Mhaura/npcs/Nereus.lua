@@ -14,7 +14,7 @@ local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     if
-        player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.A_POTTER_S_PREFERENCE) == QUEST_ACCEPTED or
+        player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.A_POTTER_S_PREFERENCE) == xi.questStatus.QUEST_ACCEPTED or
         player:getCharVar('QuestAPotterPrefeRepeat_var') == 1
     then
         if npcUtil.tradeHas(trade, xi.item.DISH_OF_GUSGEN_CLAY) then
@@ -25,13 +25,13 @@ end
 
 entity.onTrigger = function(player, npc)
     if
-        player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.A_POTTER_S_PREFERENCE) == QUEST_AVAILABLE and
+        player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.A_POTTER_S_PREFERENCE) == xi.questStatus.QUEST_AVAILABLE and
         player:getFameLevel(xi.quest.fame_area.WINDURST) > 5
     then
         player:startEvent(111, xi.item.DISH_OF_GUSGEN_CLAY) -- start quest A Potter's Preference
-    elseif player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.A_POTTER_S_PREFERENCE) == QUEST_ACCEPTED then
+    elseif player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.A_POTTER_S_PREFERENCE) == xi.questStatus.QUEST_ACCEPTED then
         player:startEvent(114, xi.item.DISH_OF_GUSGEN_CLAY) -- get me dish_of_gusgen_clay  as soon as you can
-    elseif player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.A_POTTER_S_PREFERENCE) == QUEST_COMPLETED then
+    elseif player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.A_POTTER_S_PREFERENCE) == xi.questStatus.QUEST_COMPLETED then
         if
             player:getCharVar('QuestAPotterPrefeCompDay_var') + 7 < VanadielDayOfTheYear() or
             player:getCharVar('QuestAPotterPrefeCompYear_var') < VanadielYear()

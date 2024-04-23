@@ -14,7 +14,7 @@ entity.onTrigger = function(player, npc)
     local soaMission = player:getCurrentMission(xi.mission.log_id.SOA)
 
     if soaMission >= xi.mission.id.soa.LIFE_ON_THE_FRONTIER then
-        if apbif == QUEST_ACCEPTED and not player:hasStatusEffect(xi.effect.IONIS) then
+        if apbif == xi.questStatus.QUEST_ACCEPTED and not player:hasStatusEffect(xi.effect.IONIS) then
             -- Progresses Quest: 'A Pioneers Best (Imaginary) Friend'
             player:startEvent(2523)
         end

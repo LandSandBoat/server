@@ -34,7 +34,7 @@ local memoriesOnEventFinish = function(player, csid, option, npc)
             player:delGil(rewardItems[rewardItem].gil)
         end
 
-        if player:getQuestStatus(quest.areaId, quest.questId) == QUEST_ACCEPTED then
+        if player:getQuestStatus(quest.areaId, quest.questId) == xi.questStatus.QUEST_ACCEPTED then
             player:addFame(xi.quest.fame_area.JEUNO, 25)
         end
 
@@ -46,7 +46,7 @@ quest.sections =
 {
     {
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE and
+            return status == xi.questStatus.QUEST_AVAILABLE and
             (player:getCurrentMission(xi.mission.log_id.COP) > xi.mission.id.cop.THE_MOTHERCRYSTALS or
             xi.mission.getVar(player, xi.mission.log_id.COP, xi.mission.id.cop.THE_MOTHERCRYSTALS, 'Option') > 0)
         end,
@@ -66,7 +66,7 @@ quest.sections =
 
     {
         check = function(player, status, vars)
-            return status >= QUEST_ACCEPTED
+            return status >= xi.questStatus.QUEST_ACCEPTED
         end,
 
         [xi.zone.RULUDE_GARDENS] =

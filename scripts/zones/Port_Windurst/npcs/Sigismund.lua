@@ -22,12 +22,12 @@ end
 
 entity.onTrigger = function(player, npc)
     local starstatus = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.TO_CATCH_A_FALLING_STAR)
-    if starstatus == QUEST_AVAILABLE then
+    if starstatus == xi.questStatus.QUEST_AVAILABLE then
         player:startEvent(196, 0, xi.item.STARFALL_TEAR) -- Quest Start
-    elseif starstatus == QUEST_ACCEPTED then
+    elseif starstatus == xi.questStatus.QUEST_ACCEPTED then
         player:startEvent(197, 0, xi.item.STARFALL_TEAR) -- Quest Reminder
     elseif
-        starstatus == QUEST_COMPLETED and
+        starstatus == xi.questStatus.QUEST_COMPLETED and
         player:getCharVar('QuestCatchAFallingStar_prog') > 0
     then
         player:startEvent(200) -- After Quest

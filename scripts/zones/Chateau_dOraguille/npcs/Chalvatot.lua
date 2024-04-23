@@ -15,7 +15,7 @@ entity.onTrade = function(player, npc, trade)
 
     -- HER MAJESTY'S GARDEN (derfland humus)
     if
-        herMajestysGarden == QUEST_ACCEPTED and
+        herMajestysGarden == xi.questStatus.QUEST_ACCEPTED and
         trade:hasItemQty(xi.item.CHUNK_OF_DERFLAND_HUMUS, 1) and
         trade:getItemCount() == 1
     then
@@ -31,7 +31,7 @@ entity.onTrigger = function(player, npc)
     local herMajestysGarden = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.HER_MAJESTY_S_GARDEN)
 
     -- CIRCLE OF TIME (Bard AF3)
-    if circleOfTime == QUEST_ACCEPTED then
+    if circleOfTime == xi.questStatus.QUEST_ACCEPTED then
         if circleProgress == 5 then
             player:startEvent(99)
         elseif circleProgress == 6 then
@@ -44,18 +44,18 @@ entity.onTrigger = function(player, npc)
 
     -- LURE OF THE WILDCAT
     elseif
-        lureOfTheWildcat == QUEST_ACCEPTED and
+        lureOfTheWildcat == xi.questStatus.QUEST_ACCEPTED and
         not utils.mask.getBit(wildcatSandy, 19)
     then
         player:startEvent(561)
 
     -- HER MAJESTY'S GARDEN
     elseif
-        herMajestysGarden == QUEST_AVAILABLE and
+        herMajestysGarden == xi.questStatus.QUEST_AVAILABLE and
         player:getFameLevel(xi.quest.fame_area.SANDORIA) >= 4
     then
         player:startEvent(84)
-    elseif herMajestysGarden == QUEST_ACCEPTED then
+    elseif herMajestysGarden == xi.questStatus.QUEST_ACCEPTED then
         player:startEvent(82)
 
     -- DEFAULT DIALOG

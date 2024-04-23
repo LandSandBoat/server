@@ -16,11 +16,11 @@ entity.onTrigger = function(player, npc)
     local hasNeutralizerKI = player:hasKeyItem(xi.ki.NEUTRALIZER)
 
     if
-        troubleAtTheSluice == QUEST_AVAILABLE and
+        troubleAtTheSluice == xi.questStatus.QUEST_AVAILABLE and
         player:getFameLevel(xi.quest.fame_area.SANDORIA) >= 3
     then
         player:startEvent(57)
-    elseif troubleAtTheSluice == QUEST_ACCEPTED and not hasNeutralizerKI then
+    elseif troubleAtTheSluice == xi.questStatus.QUEST_ACCEPTED and not hasNeutralizerKI then
         player:startEvent(55)
     elseif hasNeutralizerKI then
         player:startEvent(56)

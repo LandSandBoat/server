@@ -14,7 +14,7 @@ entity.onTrigger = function(player, npc)
     local raptorRapture = player:getQuestStatus(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.RAPTOR_RAPTURE)
     local raptorRaptureStatus = player:getCharVar('Raptor_Rapture_Status')
 
-    if raptorRapture == QUEST_AVAILABLE then
+    if raptorRapture == xi.questStatus.QUEST_AVAILABLE then
         if raptorRaptureStatus < 3 then
             -- Starts chain of events for the introduction CS for Quest: 'Raptor Rapture'.
             -- If player somehow doesn't finish the chain of events, they can just talk to Pagnelle again to retry.
@@ -25,7 +25,7 @@ entity.onTrigger = function(player, npc)
             -- Offers Quest: 'Raptor Rapture' if player has yet to accept it.
             player:startEvent(5061)
         end
-    elseif raptorRapture == QUEST_ACCEPTED then
+    elseif raptorRapture == xi.questStatus.QUEST_ACCEPTED then
         if raptorRaptureStatus == 4 then
             -- Reminder during Quest: 'Raptor Rapture', speak to Ilney.
             player:startEvent(5033)

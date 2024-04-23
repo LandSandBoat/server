@@ -12,11 +12,11 @@ entity.onTrade = function(player, npc, trade)
     local hour     = VanadielHour()
 
     if (hour >= 18 or hour < 6) and IsMoonFull() then
-        if dmFirst == QUEST_ACCEPTED or dmRepeat == QUEST_ACCEPTED then -- allow for Ark Pentasphere on both first and repeat quests
+        if dmFirst == xi.questStatus.QUEST_ACCEPTED or dmRepeat == xi.questStatus.QUEST_ACCEPTED then -- allow for Ark Pentasphere on both first and repeat quests
             if npcUtil.tradeHasExactly(trade, { xi.item.BOTTLE_OF_ILLUMININK, xi.item.SHEET_OF_PARCHMENT }) then
                 player:startEvent(7, xi.item.SHEET_OF_PARCHMENT, xi.item.BOTTLE_OF_ILLUMININK) -- Ark Pentasphere Trade
             elseif
-                dmRepeat == QUEST_ACCEPTED and
+                dmRepeat == xi.questStatus.QUEST_ACCEPTED and
                 npcUtil.tradeHasExactly(trade, xi.item.CHUNK_OF_LIGHT_ORE) and
                 not player:hasKeyItem(xi.ki.MOONLIGHT_ORE)
             then

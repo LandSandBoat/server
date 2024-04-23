@@ -37,7 +37,7 @@ end
 
 zoneObject.onTriggerAreaEnter = function(player, triggerArea)
     if
-        player:getQuestStatus(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.AGAINST_ALL_ODDS) == QUEST_ACCEPTED and
+        player:getQuestStatus(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.AGAINST_ALL_ODDS) == xi.questStatus.QUEST_ACCEPTED and
         player:getCharVar('AgainstAllOdds') == 1
     then
         player:startEvent(237)

@@ -28,11 +28,11 @@ entity.onTrigger = function(player, npc)
         not player:hasKeyItem(xi.ki.VIAL_OF_DREAM_INCENSE) and
         (
             player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.DARKNESS_NAMED) and
-            wakingDreams == QUEST_AVAILABLE
+            wakingDreams == xi.questStatus.QUEST_AVAILABLE
         )
         or
         (
-            wakingDreams == QUEST_COMPLETED and
+            wakingDreams == xi.questStatus.QUEST_COMPLETED and
             os.time() > player:getCharVar('Darkness_Named_date')
         )
     then

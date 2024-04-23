@@ -20,7 +20,7 @@ quest.sections =
     -- Talk to Balasiel in Southern San d'Oria who will give you the Spear of Trials and the Weapon Training Guide.
     {
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE and
+            return status == xi.questStatus.QUEST_AVAILABLE and
                 player:canEquipItem(xi.item.SPEAR_OF_TRIALS, true) and
                 player:getCharSkillLevel(xi.skill.POLEARM) / 10 >= 240 and
                 not player:hasKeyItem(xi.keyItem.WEAPON_TRAINING_GUIDE)
@@ -58,7 +58,7 @@ quest.sections =
     -- Bring this back to Balasiel for your reward.
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED
+            return status == xi.questStatus.QUEST_ACCEPTED
         end,
 
         [xi.zone.SOUTHERN_SAN_DORIA] =

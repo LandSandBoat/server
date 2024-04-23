@@ -18,7 +18,7 @@ quest.sections =
 {
     {
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE
+            return status == xi.questStatus.QUEST_AVAILABLE
         end,
 
         [xi.zone.WINDURST_WATERS] =
@@ -53,7 +53,7 @@ quest.sections =
 
     {
         check = function(player, status, vars)
-            return status ~= QUEST_AVAILABLE
+            return status ~= xi.questStatus.QUEST_AVAILABLE
         end,
 
         [xi.zone.WINDURST_WATERS] =
@@ -74,7 +74,7 @@ quest.sections =
                 [440] = function(player, csid, option, npc)
                     player:confirmTrade()
 
-                    if player:getQuestStatus(quest.areaId, quest.questId) == QUEST_ACCEPTED then
+                    if player:getQuestStatus(quest.areaId, quest.questId) == xi.questStatus.QUEST_ACCEPTED then
                         player:addFame(xi.quest.fame_area.BASTOK, 67)
                     end
 

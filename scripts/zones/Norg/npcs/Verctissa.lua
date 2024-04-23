@@ -11,7 +11,7 @@ local entity = {}
 entity.onTrade = function(player, npc, trade)
     if
         trade:hasItemQty(xi.item.MINI_TUNING_FORK_OF_WATER, 1) and
-        player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.TRIAL_SIZE_TRIAL_BY_WATER) == QUEST_ACCEPTED and
+        player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.TRIAL_SIZE_TRIAL_BY_WATER) == xi.questStatus.QUEST_ACCEPTED and
         player:getMainJob() == xi.job.SMN
     then
         player:startEvent(200, 0, xi.item.MINI_TUNING_FORK_OF_WATER, 2, 20)
@@ -24,12 +24,12 @@ entity.onTrigger = function(player, npc)
     if
         player:getMainLvl() >= 20 and
         player:getMainJob() == xi.job.SMN and
-        trialSizeWater == QUEST_AVAILABLE and
+        trialSizeWater == xi.questStatus.QUEST_AVAILABLE and
         player:getFameLevel(xi.quest.fame_area.NORG) >= 2
     then
         --Requires player to be Summoner at least lvl 20
         player:startEvent(199, 0, xi.item.MINI_TUNING_FORK_OF_WATER, 2, 20)     --mini tuning fork of water, zone, level
-    elseif trialSizeWater == QUEST_ACCEPTED then
+    elseif trialSizeWater == xi.questStatus.QUEST_ACCEPTED then
         local waterFork = player:hasItem(xi.item.MINI_TUNING_FORK_OF_WATER)
 
         if waterFork then
@@ -37,7 +37,7 @@ entity.onTrigger = function(player, npc)
         else
             player:startEvent(203, 0, xi.item.MINI_TUNING_FORK_OF_WATER, 2, 20) --Need another mini tuning fork
         end
-    elseif trialSizeWater == QUEST_COMPLETED then
+    elseif trialSizeWater == xi.questStatus.QUEST_COMPLETED then
         player:startEvent(202) --Defeated Avatar
     end
 end

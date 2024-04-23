@@ -22,7 +22,7 @@ quest.sections =
 {
     {
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE and
+            return status == xi.questStatus.QUEST_AVAILABLE and
                 player:hasCompletedQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.GLYPH_HANGER) and
                 player:getFameLevel(xi.quest.fame_area.WINDURST) >= 2 and
                 not quest:getMustZone(player)
@@ -59,7 +59,7 @@ quest.sections =
 
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED
+            return status == xi.questStatus.QUEST_ACCEPTED
         end,
 
         [xi.zone.WINDURST_WATERS] =
@@ -165,7 +165,7 @@ quest.sections =
 
     {
         check = function(player, status, vars)
-            return status == QUEST_COMPLETED and
+            return status == xi.questStatus.QUEST_COMPLETED and
                 player:getLocalVar('Quest[2][13]mustZone') == 1
         end,
 

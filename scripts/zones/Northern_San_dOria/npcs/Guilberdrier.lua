@@ -16,9 +16,9 @@ entity.onTrigger = function(player, npc)
     local exitTheGambler = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.EXIT_THE_GAMBLER)
     local exitTheGamblerStat = player:getCharVar('exitTheGamblerStat')
 
-    if exitTheGambler < QUEST_COMPLETED and exitTheGamblerStat == 0 then
+    if exitTheGambler < xi.questStatus.QUEST_COMPLETED and exitTheGamblerStat == 0 then
         player:startEvent(522)
-    elseif exitTheGambler == QUEST_ACCEPTED and exitTheGamblerStat == 1 then
+    elseif exitTheGambler == xi.questStatus.QUEST_ACCEPTED and exitTheGamblerStat == 1 then
         player:startEvent(518)
     else
         player:startEvent(514)
@@ -31,7 +31,7 @@ end
 entity.onEventFinish = function(player, csid, option, npc)
     if
         csid == 522 and
-        player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.EXIT_THE_GAMBLER) == QUEST_AVAILABLE
+        player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.EXIT_THE_GAMBLER) == xi.questStatus.QUEST_AVAILABLE
     then
         player:addQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.EXIT_THE_GAMBLER)
     elseif csid == 518 then

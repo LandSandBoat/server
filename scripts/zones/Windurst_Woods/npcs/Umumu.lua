@@ -15,11 +15,11 @@ entity.onTrigger = function(player, npc)
     local wildcatWindurst = player:getCharVar('WildcatWindurst')
 
     if
-        lureOfTheWildcat == QUEST_ACCEPTED and
+        lureOfTheWildcat == xi.questStatus.QUEST_ACCEPTED and
         not utils.mask.getBit(wildcatWindurst, 3)
     then
         player:startEvent(731)
-    elseif makingHeadlines == QUEST_ACCEPTED then
+    elseif makingHeadlines == xi.questStatus.QUEST_ACCEPTED then
         -- bitmask of progress: 0 = Kyume-Romeh, 1 = Yuyuju, 2 = Hiwom-Gomoi, 3 = Umumu, 4 = Mahogany Door
         local prog = player:getCharVar('QuestMakingHeadlines_var')
 
@@ -30,7 +30,7 @@ entity.onTrigger = function(player, npc)
         else
             player:startEvent(382) -- Reminded to validate
         end
-    elseif makingHeadlines == QUEST_COMPLETED then
+    elseif makingHeadlines == xi.questStatus.QUEST_COMPLETED then
         local rand = math.random(1, 3)
 
         if rand == 1 then

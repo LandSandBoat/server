@@ -19,7 +19,7 @@ quest.sections =
     -- This quest is flagged from an event contained in Mysteries of Beadeaux I
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED
+            return status == xi.questStatus.QUEST_ACCEPTED
         end,
 
         [xi.zone.LOWER_JEUNO] =

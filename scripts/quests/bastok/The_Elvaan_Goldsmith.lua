@@ -18,7 +18,7 @@ quest.sections =
 {
     {
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE
+            return status == xi.questStatus.QUEST_AVAILABLE
         end,
 
         [xi.zone.BASTOK_MARKETS] =
@@ -36,9 +36,9 @@ quest.sections =
 
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED or
+            return status == xi.questStatus.QUEST_ACCEPTED or
                 (
-                    status == QUEST_COMPLETED and
+                    status == xi.questStatus.QUEST_COMPLETED and
                     player:getFameLevel(xi.quest.fame_area.BASTOK) == 1 and
                     not quest:getMustZone(player)
                 )

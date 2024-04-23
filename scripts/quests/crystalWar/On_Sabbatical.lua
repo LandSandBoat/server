@@ -20,7 +20,7 @@ quest.sections =
 {
     {
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE and
+            return status == xi.questStatus.QUEST_AVAILABLE and
                 player:getMainJob() == xi.job.SCH and
                 player:getMainLvl() >= xi.settings.main.AF1_QUEST_LEVEL
         end,
@@ -45,7 +45,7 @@ quest.sections =
     },
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED
+            return status == xi.questStatus.QUEST_ACCEPTED
         end,
 
         [xi.zone.BASTOK_MARKETS_S] =

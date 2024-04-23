@@ -22,7 +22,7 @@ quest.sections =
 
     {
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE and
+            return status == xi.questStatus.QUEST_AVAILABLE and
             player:hasCompletedQuest(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.ODE_TO_THE_SERPENTS)
         end,
 
@@ -42,7 +42,7 @@ quest.sections =
     },
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED and vars.Prog == 0
+            return status == xi.questStatus.QUEST_ACCEPTED and vars.Prog == 0
         end,
 
         [xi.zone.AHT_URHGAN_WHITEGATE] =
@@ -60,7 +60,7 @@ quest.sections =
     },
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED and vars.Prog == 1
+            return status == xi.questStatus.QUEST_ACCEPTED and vars.Prog == 1
         end,
 
         [xi.zone.AHT_URHGAN_WHITEGATE] =
@@ -79,7 +79,7 @@ quest.sections =
     },
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED and vars.Prog == 2
+            return status == xi.questStatus.QUEST_ACCEPTED and vars.Prog == 2
         end,
 
         [xi.zone.AHT_URHGAN_WHITEGATE] =
@@ -102,7 +102,7 @@ quest.sections =
     },
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED and vars.Prog == 3
+            return status == xi.questStatus.QUEST_ACCEPTED and vars.Prog == 3
         end,
 
         [xi.zone.AHT_URHGAN_WHITEGATE] =
@@ -132,7 +132,7 @@ quest.sections =
     },
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED and vars.Prog == 4
+            return status == xi.questStatus.QUEST_ACCEPTED and vars.Prog == 4
         end,
 
         [xi.zone.AHT_URHGAN_WHITEGATE] =
@@ -153,7 +153,7 @@ quest.sections =
     },
     {
         check = function(player, status, vars)
-            return status == QUEST_COMPLETED
+            return status == xi.questStatus.QUEST_COMPLETED
         end,
 
         [xi.zone.AHT_URHGAN_WHITEGATE] =

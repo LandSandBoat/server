@@ -17,22 +17,22 @@ entity.onTrigger = function(player, npc)
     local cooksPride = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.COOK_S_PRIDE)
 
     if
-        cooksPride == QUEST_COMPLETED and
-        theLostCardien == QUEST_AVAILABLE and
+        cooksPride == xi.questStatus.QUEST_COMPLETED and
+        theLostCardien == xi.questStatus.QUEST_AVAILABLE and
         player:getCharVar('theLostCardianVar') == 2
     then
         player:startEvent(33) -- Long CS & Finish Quest "The Lost Cardian"
 
     elseif
-        cooksPride == QUEST_COMPLETED and
-        theLostCardien == QUEST_AVAILABLE and
+        cooksPride == xi.questStatus.QUEST_COMPLETED and
+        theLostCardien == xi.questStatus.QUEST_AVAILABLE and
         player:getCharVar('theLostCardianVar') == 3
     then
         player:startEvent(34) -- Shot CS & Finish Quest "The Lost Cardian"
 
     elseif
-        theLostCardien == QUEST_COMPLETED and
-        player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_KIND_CARDIAN) == QUEST_ACCEPTED
+        theLostCardien == xi.questStatus.QUEST_COMPLETED and
+        player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_KIND_CARDIAN) == xi.questStatus.QUEST_ACCEPTED
     then
         player:startEvent(32)
     end

@@ -16,19 +16,19 @@ entity.onTrigger = function(player, npc)
     local hasWhisperOfTides = player:hasKeyItem(xi.ki.WHISPER_OF_TIDES)
 
     if
-        (trialByWater == QUEST_AVAILABLE and player:getFameLevel(xi.quest.fame_area.NORG) >= 4) or
-        (trialByWater == QUEST_COMPLETED and os.time() > player:getCharVar('TrialByWater_date'))
+        (trialByWater == xi.questStatus.QUEST_AVAILABLE and player:getFameLevel(xi.quest.fame_area.NORG) >= 4) or
+        (trialByWater == xi.questStatus.QUEST_COMPLETED and os.time() > player:getCharVar('TrialByWater_date'))
     then
         player:startEvent(109, 0, xi.ki.TUNING_FORK_OF_WATER) -- Start and restart quest 'Trial by Water'
     elseif
-        trialByWater == QUEST_ACCEPTED and
+        trialByWater == xi.questStatus.QUEST_ACCEPTED and
         not player:hasKeyItem(xi.ki.TUNING_FORK_OF_WATER) and
         not hasWhisperOfTides
     then
         player:startEvent(190, 0, xi.ki.TUNING_FORK_OF_WATER) -- Defeat against Avatar : Need new Fork
-    elseif trialByWater == QUEST_ACCEPTED and not hasWhisperOfTides then
+    elseif trialByWater == xi.questStatus.QUEST_ACCEPTED and not hasWhisperOfTides then
         player:startEvent(110, 0, xi.ki.TUNING_FORK_OF_WATER, 2)
-    elseif trialByWater == QUEST_ACCEPTED and hasWhisperOfTides then
+    elseif trialByWater == xi.questStatus.QUEST_ACCEPTED and hasWhisperOfTides then
         local numitem = 0
 
         if player:hasItem(xi.item.LEVIATHANS_ROD) then
@@ -62,7 +62,7 @@ end
 
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 109 and option == 1 then
-        if player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.TRIAL_BY_WATER) == QUEST_COMPLETED then
+        if player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.TRIAL_BY_WATER) == xi.questStatus.QUEST_COMPLETED then
             player:delQuest(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.TRIAL_BY_WATER)
         end
 

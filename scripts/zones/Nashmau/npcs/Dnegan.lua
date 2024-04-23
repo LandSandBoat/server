@@ -16,7 +16,7 @@ entity.onTrigger = function(player, npc)
 
     -- Quest: The WayWard Automaton
     if
-        theWaywardAutomaton == QUEST_ACCEPTED and
+        theWaywardAutomaton == xi.questStatus.QUEST_ACCEPTED and
         theWaywardAutomatonProgress == 1
     then
         player:startEvent(289) -- he tells u to go Caedarva Mire

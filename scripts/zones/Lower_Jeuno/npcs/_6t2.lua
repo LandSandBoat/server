@@ -16,8 +16,8 @@ entity.onTrigger = function(player, npc)
 
     -- A New Dawn (BST AF3)
     if
-        player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.SCATTERED_INTO_SHADOW) == QUEST_COMPLETED and
-        aNewDawn == QUEST_AVAILABLE
+        player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.SCATTERED_INTO_SHADOW) == xi.questStatus.QUEST_COMPLETED and
+        aNewDawn == xi.questStatus.QUEST_AVAILABLE
     then
         if
             player:getMainJob() == xi.job.BST and
@@ -32,7 +32,7 @@ entity.onTrigger = function(player, npc)
             player:startEvent(1)
         end
 
-    elseif aNewDawn == QUEST_ACCEPTED then
+    elseif aNewDawn == xi.questStatus.QUEST_ACCEPTED then
         if aNewDawnEvent == 2 then
             player:startEvent(2)
         elseif aNewDawnEvent >= 4 then
@@ -40,7 +40,7 @@ entity.onTrigger = function(player, npc)
         end
 
     elseif
-        aNewDawn == QUEST_COMPLETED and
+        aNewDawn == xi.questStatus.QUEST_COMPLETED and
         aNewDawnEvent == 6
     then
         player:startEvent(0)

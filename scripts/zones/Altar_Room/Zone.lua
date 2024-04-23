@@ -16,7 +16,7 @@ zoneObject.onZoneIn = function(player, prevZone)
     then
         cs = 10000
     elseif
-        player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.A_MORAL_MANIFEST) == QUEST_AVAILABLE and
+        player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.A_MORAL_MANIFEST) == xi.questStatus.QUEST_AVAILABLE and
         player:getMainLvl() >= 60 and
         player:getCharVar('moraldecline') == 0
     then

@@ -15,7 +15,7 @@ entity.onTrigger = function(player, npc)
 
     -- Rock Racketeer
     if
-        rockRacketeer == QUEST_ACCEPTED and
+        rockRacketeer == xi.questStatus.QUEST_ACCEPTED and
         player:hasKeyItem(xi.ki.SHARP_GRAY_STONE)
     then
         player:startEvent(261)

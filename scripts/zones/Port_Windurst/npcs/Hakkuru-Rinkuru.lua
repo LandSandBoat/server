@@ -10,7 +10,7 @@ local ID = zones[xi.zone.PORT_WINDURST]
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    if player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.MAKING_AMENDS) == QUEST_ACCEPTED then
+    if player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.MAKING_AMENDS) == xi.questStatus.QUEST_ACCEPTED then
         if
             trade:hasItemQty(xi.item.BLOCK_OF_ANIMAL_GLUE, 1) and
             trade:getItemCount() == 1
@@ -19,7 +19,7 @@ entity.onTrade = function(player, npc, trade)
         else
             player:startEvent(275, 0, xi.item.BLOCK_OF_ANIMAL_GLUE)
         end
-    elseif player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.WONDER_WANDS) == QUEST_ACCEPTED then
+    elseif player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.WONDER_WANDS) == xi.questStatus.QUEST_ACCEPTED then
         if
             trade:hasItemQty(xi.item.OAK_STAFF, 1) and
             trade:hasItemQty(xi.item.MYTHRIL_ROD, 1) and
@@ -43,24 +43,24 @@ entity.onTrigger = function(player, npc)
     local pFame        = player:getFameLevel(xi.quest.fame_area.WINDURST)
 
 -- Begin Making Amends Section
-    if makingAmends == QUEST_AVAILABLE and pFame >= 2 then
+    if makingAmends == xi.questStatus.QUEST_AVAILABLE and pFame >= 2 then
             player:startEvent(274, 0, xi.item.BLOCK_OF_ANIMAL_GLUE) -- MAKING AMENDS + ANIMAL GLUE: Quest Start
-    elseif makingAmends == QUEST_ACCEPTED then
+    elseif makingAmends == xi.questStatus.QUEST_ACCEPTED then
             player:startEvent(275, 0, xi.item.BLOCK_OF_ANIMAL_GLUE) -- MAKING AMENDS + ANIMAL GLUE: Quest Objective Reminder
-    elseif makingAmends == QUEST_COMPLETED and needToZone then
+    elseif makingAmends == xi.questStatus.QUEST_COMPLETED and needToZone then
             player:startEvent(278) -- MAKING AMENDS: After Quest
 --End Making Amends Section; Begin Wonder Wands Section
     elseif
-        makingAmends == QUEST_COMPLETED and
-        makingAmens == QUEST_COMPLETED and
-        wonderWands == QUEST_AVAILABLE and
+        makingAmends == xi.questStatus.QUEST_COMPLETED and
+        makingAmens == xi.questStatus.QUEST_COMPLETED and
+        wonderWands == xi.questStatus.QUEST_AVAILABLE and
         pFame >= 5 and
         not needToZone
     then
             player:startEvent(259) --Starts Wonder Wands
-    elseif wonderWands == QUEST_ACCEPTED then
+    elseif wonderWands == xi.questStatus.QUEST_ACCEPTED then
             player:startEvent(260) --Reminder for Wonder Wands
-    elseif wonderWands == QUEST_COMPLETED then
+    elseif wonderWands == xi.questStatus.QUEST_COMPLETED then
         if player:getCharVar('SecondRewardVar') == 1 then
             player:startEvent(267) --Initiates second reward ifWonder Wands has been completed.
         end

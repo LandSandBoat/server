@@ -23,7 +23,7 @@ quest.sections =
 {
     {
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE and
+            return status == xi.questStatus.QUEST_AVAILABLE and
                 player:hasCompletedQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.DARK_LEGACY) and
                 player:getMainJob() == xi.job.DRK and
                 player:getMainLvl() >= xi.settings.main.AF2_QUEST_LEVEL
@@ -44,7 +44,7 @@ quest.sections =
 
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED
+            return status == xi.questStatus.QUEST_ACCEPTED
         end,
 
         [xi.zone.ORDELLES_CAVES] =

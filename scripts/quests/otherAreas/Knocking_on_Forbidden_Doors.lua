@@ -19,7 +19,7 @@ quest.sections =
     -- QUEST AVAILABLE
     {
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE and
+            return status == xi.questStatus.QUEST_AVAILABLE and
                 player:hasCompletedQuest(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.BEHIND_THE_SMILE)
         end,
 
@@ -39,7 +39,7 @@ quest.sections =
     -- QUEST ACCEPTED
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED
+            return status == xi.questStatus.QUEST_ACCEPTED
         end,
 
         [xi.zone.TAVNAZIAN_SAFEHOLD] =
@@ -181,7 +181,7 @@ quest.sections =
     -- Quest complete
     {
         check = function(player, status, vars)
-            return status == QUEST_COMPLETED and
+            return status == xi.questStatus.QUEST_COMPLETED and
                 player:hasKeyItem(xi.ki.BETTER_HUMES_AND_MANNEQUINS)
         end,
 

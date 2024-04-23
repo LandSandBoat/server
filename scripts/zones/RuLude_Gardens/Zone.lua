@@ -43,10 +43,10 @@ zoneObject.onTriggerAreaEnter = function(player, triggerArea)
             then
                 player:startEvent(122)
             elseif player:getCharVar('PromathiaStatus') == 7 then
-                if player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.STORMS_OF_FATE) == QUEST_AVAILABLE then
+                if player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.STORMS_OF_FATE) == xi.questStatus.QUEST_AVAILABLE then
                     player:startEvent(142)
                 elseif
-                    player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.STORMS_OF_FATE) == QUEST_ACCEPTED and
+                    player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.STORMS_OF_FATE) == xi.questStatus.QUEST_ACCEPTED and
                     player:getCharVar('StormsOfFate') == 3
                 then
                     player:startEvent(143)
@@ -54,7 +54,7 @@ zoneObject.onTriggerAreaEnter = function(player, triggerArea)
                     player:hasCompletedQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.STORMS_OF_FATE) and
                     player:getCurrentMission(xi.mission.log_id.ZILART) == xi.mission.id.zilart.AWAKENING and
                     player:getMissionStatus(xi.mission.log_id.ZILART) == 3 and
-                    player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.SHADOWS_OF_THE_DEPARTED) == QUEST_AVAILABLE and
+                    player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.SHADOWS_OF_THE_DEPARTED) == xi.questStatus.QUEST_AVAILABLE and
                     player:getCharVar('StormsOfFateWait') <= os.time()
                 then
                     player:startEvent(161)
@@ -66,7 +66,7 @@ zoneObject.onTriggerAreaEnter = function(player, triggerArea)
                     player:startEvent(162)
                 elseif
                     player:hasCompletedQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.SHADOWS_OF_THE_DEPARTED) and
-                    player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.APOCALYPSE_NIGH) == QUEST_AVAILABLE and
+                    player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.APOCALYPSE_NIGH) == xi.questStatus.QUEST_AVAILABLE and
                     player:getLocalVar('ANZONE') == 0 and
                     player:getCharVar('ApocNighWait') <= os.time()
                 then

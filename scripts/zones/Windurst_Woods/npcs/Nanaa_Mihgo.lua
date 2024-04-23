@@ -49,9 +49,9 @@ entity.onTrade = function(player, npc, trade)
     if npcUtil.tradeHas(trade, { { 498, 4 } }) then -- Yagudo Necklace x4
         local mihgosAmigo = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.MIHGO_S_AMIGO)
 
-        if mihgosAmigo == QUEST_ACCEPTED then
+        if mihgosAmigo == xi.questStatus.QUEST_ACCEPTED then
             player:startEvent(88, xi.settings.main.GIL_RATE * 200)
-        elseif mihgosAmigo == QUEST_COMPLETED then
+        elseif mihgosAmigo == xi.questStatus.QUEST_COMPLETED then
             player:startEvent(494, xi.settings.main.GIL_RATE * 200)
         end
     end
@@ -66,7 +66,7 @@ entity.onTrigger = function(player, npc)
     -- LURE OF THE WILDCAT (WINDURST 2-1)
     -- Simply checks this NPC as talked to for the PC, should be highest priority
     if
-        player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and
+        player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.LURE_OF_THE_WILDCAT) == xi.questStatus.QUEST_ACCEPTED and
         not utils.mask.getBit(wildcatWindurst, 4)
     then
         player:startEvent(732)
@@ -77,7 +77,7 @@ entity.onTrigger = function(player, npc)
         not player:hasSpell(xi.magic.spell.NANAA_MIHGO) and
         player:getLocalVar('TrustDialogue') == 0
     then
-        local trustFlag = (player:getRank(player:getNation()) >= 3 and 1 or 0) + (mihgosAmigo == QUEST_COMPLETED and 2 or 0)
+        local trustFlag = (player:getRank(player:getNation()) >= 3 and 1 or 0) + (mihgosAmigo == xi.questStatus.QUEST_COMPLETED and 2 or 0)
 
         player:setLocalVar('TrustDialogue', 1)
 
@@ -85,8 +85,8 @@ entity.onTrigger = function(player, npc)
 
     -- ROCK RACKETEER (Mihgo's Amigo follow-up)
     elseif
-        mihgosAmigo == QUEST_COMPLETED and
-        rockRacketeer == QUEST_AVAILABLE and
+        mihgosAmigo == xi.questStatus.QUEST_COMPLETED and
+        rockRacketeer == xi.questStatus.QUEST_AVAILABLE and
         player:getFameLevel(xi.quest.fame_area.WINDURST) >= 3
     then
         if player:needToZone() then
@@ -94,27 +94,27 @@ entity.onTrigger = function(player, npc)
         else
             player:startEvent(93) -- quest start
         end
-    elseif rockRacketeer == QUEST_ACCEPTED and rockRacketeerCS == 1 then
+    elseif rockRacketeer == xi.questStatus.QUEST_ACCEPTED and rockRacketeerCS == 1 then
         player:startEvent(98) -- advance quest talk to Varun
-    elseif rockRacketeer == QUEST_ACCEPTED and rockRacketeerCS == 2 then
+    elseif rockRacketeer == xi.questStatus.QUEST_ACCEPTED and rockRacketeerCS == 2 then
         player:startEvent(95) -- not sold reminder
-    elseif rockRacketeer == QUEST_ACCEPTED then
+    elseif rockRacketeer == xi.questStatus.QUEST_ACCEPTED then
         player:startEvent(94) -- quest reminder
 
     -- MIHGO'S AMIGO
-    elseif mihgosAmigo == QUEST_AVAILABLE then
-        if player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CRYING_OVER_ONIONS) == QUEST_AVAILABLE then
+    elseif mihgosAmigo == xi.questStatus.QUEST_AVAILABLE then
+        if player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CRYING_OVER_ONIONS) == xi.questStatus.QUEST_AVAILABLE then
             player:startEvent(81) -- Start Quest "Mihgo's Amigo" with quest "Crying Over Onions" Activated
         else
             player:startEvent(80) -- Start Quest "Mihgo's Amigo"
         end
-    elseif mihgosAmigo == QUEST_ACCEPTED then
+    elseif mihgosAmigo == xi.questStatus.QUEST_ACCEPTED then
         player:startEvent(82)
 
     -- STANDARD DIALOG
-    elseif rockRacketeer == QUEST_COMPLETED then
+    elseif rockRacketeer == xi.questStatus.QUEST_COMPLETED then
         player:startEvent(99) -- new dialog after Rock Racketeer
-    elseif mihgosAmigo == QUEST_COMPLETED then
+    elseif mihgosAmigo == xi.questStatus.QUEST_COMPLETED then
         player:startEvent(89) -- new dialog after Mihgo's Amigos
     else
         player:startEvent(76) -- standard dialog

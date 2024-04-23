@@ -46,7 +46,7 @@ quest.sections =
     -- In most cases, the quest will already be accepted.
     {
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE and
+            return status == xi.questStatus.QUEST_AVAILABLE and
                 player:hasCompletedQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.PRELUDE_TO_PUISSANCE)
         end,
 
@@ -91,7 +91,7 @@ quest.sections =
     -- Section: Quest accepted.
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED and vars.Prog == 0 and
+            return status == xi.questStatus.QUEST_ACCEPTED and vars.Prog == 0 and
                 player:hasKeyItem(xi.ki.SOUL_GEM_CLASP)
         end,
 
@@ -132,7 +132,7 @@ quest.sections =
     -- after.  Separate section to not confuse with the failed event.
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED and vars.Prog == 0
+            return status == xi.questStatus.QUEST_ACCEPTED and vars.Prog == 0
         end,
 
         [xi.zone.BALGAS_DAIS]      = atoriBattlefieldZone,
@@ -144,7 +144,7 @@ quest.sections =
     -- Section: Quest accepted. We failed BCNM.
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED and
+            return status == xi.questStatus.QUEST_ACCEPTED and
                 vars.Prog == 0 and
                 not player:hasKeyItem(xi.ki.SOUL_GEM_CLASP)
         end,
@@ -220,7 +220,7 @@ quest.sections =
     -- Section: Quest accepted. We beated the BCNM.
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED and
+            return status == xi.questStatus.QUEST_ACCEPTED and
                 vars.Prog == 1
         end,
 
@@ -248,7 +248,7 @@ quest.sections =
     -- Section: Quest completed.
     {
         check = function(player, status, vars)
-            return status == QUEST_COMPLETED
+            return status == xi.questStatus.QUEST_COMPLETED
         end,
 
         [xi.zone.RULUDE_GARDENS] =

@@ -20,7 +20,7 @@ quest.sections =
 {
     {
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE and
+            return status == xi.questStatus.QUEST_AVAILABLE and
                 player:getFameLevel(xi.quest.fame_area.SANDORIA) >= 3 and
                 player:hasCompletedQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.LIZARD_SKINS)
         end,
@@ -61,7 +61,7 @@ quest.sections =
 
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED
+            return status == xi.questStatus.QUEST_ACCEPTED
         end,
 
         [xi.zone.SOUTHERN_SAN_DORIA] =
@@ -90,7 +90,7 @@ quest.sections =
 
     {
         check = function(player, status, vars)
-            return status == QUEST_COMPLETED and player:getFameLevel(xi.quest.fame_area.SANDORIA) >= 3
+            return status == xi.questStatus.QUEST_COMPLETED and player:getFameLevel(xi.quest.fame_area.SANDORIA) >= 3
         end,
 
         [xi.zone.SOUTHERN_SAN_DORIA] =

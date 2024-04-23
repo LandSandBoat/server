@@ -19,28 +19,28 @@ entity.onTrigger = function(player, npc)
     local agccs = player:getCharVar('AGreetingCardian_Event')
     local agcTime = player:getCharVar('AGreetingCardian_timer')
 
-    if c2000 == QUEST_ACCEPTED then
+    if c2000 == xi.questStatus.QUEST_ACCEPTED then
         player:startEvent(291)
 
     -- A Greeting Cardian
     elseif
-        c2000 == QUEST_COMPLETED and
-        aGreetingCardian == QUEST_AVAILABLE and
+        c2000 == xi.questStatus.QUEST_COMPLETED and
+        aGreetingCardian == xi.questStatus.QUEST_AVAILABLE and
         player:getFameLevel(xi.quest.fame_area.WINDURST) >= 3
     then
         player:startEvent(296) -- A Greeting Cardian quest start
-    elseif aGreetingCardian == QUEST_ACCEPTED and agccs == 3 then
+    elseif aGreetingCardian == xi.questStatus.QUEST_ACCEPTED and agccs == 3 then
         if player:needToZone() or os.time() < agcTime then
             player:startEvent(277) -- standard dialog if 1 minute has not passed
         else
             player:startEvent(298) -- A Greeting Cardian part two
         end
-    elseif aGreetingCardian == QUEST_ACCEPTED and agccs == 5 then
+    elseif aGreetingCardian == xi.questStatus.QUEST_ACCEPTED and agccs == 5 then
         player:startEvent(303) -- A Greeting Cardian finish
 
     -- Might be Legendary Plan B, most likely Lost Chick related.
     -- only activates before LPB completes so leaving it in as is for now
-    elseif lpb == QUEST_ACCEPTED then
+    elseif lpb == xi.questStatus.QUEST_ACCEPTED then
         player:startEvent(312, 0, 529, 940, 858)
 
     else

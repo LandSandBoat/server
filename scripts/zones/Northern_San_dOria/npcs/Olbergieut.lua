@@ -17,11 +17,11 @@ entity.onTrigger = function(player, npc)
 
     if player:hasKeyItem(xi.ki.SCRIPTURE_OF_WATER) then
         player:startEvent(620)
-    elseif gates == QUEST_ACCEPTED then
+    elseif gates == xi.questStatus.QUEST_ACCEPTED then
         player:showText(npc, ID.text.OLBERGIEUT_DIALOG, xi.ki.SCRIPTURE_OF_WIND)
     elseif
         player:getFameLevel(xi.quest.fame_area.SANDORIA) >= 2 and
-        gates == QUEST_AVAILABLE
+        gates == xi.questStatus.QUEST_AVAILABLE
     then
         player:startEvent(619)
     else

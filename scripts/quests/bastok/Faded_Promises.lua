@@ -22,7 +22,7 @@ quest.sections =
 {
     {
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE and
+            return status == xi.questStatus.QUEST_AVAILABLE and
                 player:getMainJob() == xi.job.NIN and
                 player:getMainLvl() >= 20 and
                 player:getFameLevel(xi.quest.fame_area.BASTOK) >= 4
@@ -43,7 +43,7 @@ quest.sections =
 
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED
+            return status == xi.questStatus.QUEST_ACCEPTED
         end,
 
         [xi.zone.METALWORKS] =

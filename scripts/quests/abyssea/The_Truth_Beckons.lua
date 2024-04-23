@@ -18,7 +18,7 @@ quest.sections =
     -- This quest is flagged on completion of A Journey Begins.
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED
+            return status == xi.questStatus.QUEST_ACCEPTED
         end,
 
         [xi.zone.PORT_JEUNO] =

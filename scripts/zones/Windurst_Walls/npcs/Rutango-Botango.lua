@@ -15,9 +15,9 @@ entity.onTrigger = function(player, npc)
 
     if toBeeOrNotStatus == 10 then
         player:startEvent(65) -- During Too Bee quest before honey given to Zayhi:  'Oh Crumb...lost his voice'
-    elseif toBee == QUEST_ACCEPTED and toBeeOrNotStatus > 0 then
+    elseif toBee == xi.questStatus.QUEST_ACCEPTED and toBeeOrNotStatus > 0 then
         player:startEvent(71) -- During Too Bee quest after some honey was given to Zayhi: 'lap up more honey'
-    elseif toBee == QUEST_COMPLETED and player:needToZone() then
+    elseif toBee == xi.questStatus.QUEST_COMPLETED and player:needToZone() then
         player:startEvent(76) -- After Too Bee quest but before zone: 'master let me speak for you'
     else
         player:startEvent(297) -- Standard Conversation

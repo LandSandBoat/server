@@ -15,7 +15,7 @@ quest.sections =
 {
     {
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE and player:getCharVar('AssaultPromotion') >= 25
+            return status == xi.questStatus.QUEST_AVAILABLE and player:getCharVar('AssaultPromotion') >= 25
         end,
 
         [xi.zone.AHT_URHGAN_WHITEGATE] =
@@ -32,7 +32,7 @@ quest.sections =
     },
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED
+            return status == xi.questStatus.QUEST_ACCEPTED
         end,
 
         [xi.zone.AHT_URHGAN_WHITEGATE] =
