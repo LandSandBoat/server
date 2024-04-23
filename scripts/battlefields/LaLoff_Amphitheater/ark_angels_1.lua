@@ -26,7 +26,8 @@ function content:entryRequirement(player, npc, isRegistrant, trade)
 end
 
 function content:onBattlefieldLoss(player, battlefield)
-    player:startEvent(32002, 0, 0, 0, 0, 0, battlefield:getArea(), 180)
+    local exitPosition = tonumber(string.sub(entryNpc, -1)) - 1
+    player:startEvent(32002, 0, 0, 0, 0, 0, exitPosition, 180)
 end
 
 content.groups =
