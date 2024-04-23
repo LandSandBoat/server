@@ -16,11 +16,19 @@ zones[xi.zone.LALOFF_AMPHITHEATER] =
         LOGIN_NUMBER                  = 7003, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
         MEMBERS_LEVELS_ARE_RESTRICTED = 7023, -- Your party is unable to participate because certain members' levels are restricted.
         CONQUEST_BASE                 = 7061, -- Tallying conquest results...
+        TIME_IN_THE_BATTLEFIELD_IS_UP = 7225, -- Your time in the battlefield is up! Now exiting...
+        MEMBERS_OF_YOUR_PARTY         = 7531, -- Currently, # members of your party (including yourself) have clearance to enter the battlefield.
+        MEMBERS_OF_YOUR_ALLIANCE      = 7532, -- Currently, # members of your alliance (including yourself) have clearance to enter the battlefield.
+        TIME_LIMIT_FOR_THIS_BATTLE_IS = 7534, -- The time limit for this battle is <number> minutes.
         PARTY_MEMBERS_HAVE_FALLEN     = 7570, -- All party members have fallen in battle. Now leaving the battlefield.
         THE_PARTY_WILL_BE_REMOVED     = 7577, -- If all party members' HP are still zero after # minute[/s], the party will be removed from the battlefield.
+        ENTERING_THE_BATTLEFIELD_FOR  = 7597, -- Entering the battlefield for [Ark Angels (1)/Ark Angels (2)/Ark Angels (3)/Ark Angels (4)/Ark Angels (5)/Divine Might/Ark Angels (1)/Ark Angels (2)/Ark Angels (3)/Ark Angels (4)/Ark Angels (5)/Divine Might]!
     },
     mob =
     {
+        ARK_ANGEL_HM = GetFirstID('Ark_Angel_HM'),
+        ARK_ANGEL_MR = GetFirstID('Ark_Angel_MR'),
+        ARK_ANGEL_TT = GetFirstID('Ark_Angel_TT'),
     },
     npc =
     {
