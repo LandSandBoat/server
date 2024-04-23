@@ -7,12 +7,12 @@
 -- Chomoro-Kyotoro : !pos 133 -5 167 238
 -----------------------------------
 
-local quest = Quest:new(xi.questLog.WINDURST, xi.quest.id.windurst.MAKING_THE_GRADE)
+local quest = Quest:new(xi.quest.log_id.WINDURST, xi.quest.id.windurst.MAKING_THE_GRADE)
 
 quest.reward =
 {
     fame     = 75,
-    fameArea = xi.fameArea.WINDURST,
+    fameArea = xi.quest.fame_area.WINDURST,
     item     = xi.item.SCROLL_OF_ASPIR,
 }
 
@@ -21,9 +21,9 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == xi.questStatus.QUEST_AVAILABLE and
-                player:hasCompletedQuest(xi.questLog.WINDURST, xi.quest.id.windurst.TEACHERS_PET) and
-                player:getQuestStatus(xi.questLog.WINDURST, xi.quest.id.windurst.LET_SLEEPING_DOGS_LIE) ~= xi.questStatus.QUEST_ACCEPTED and
-                player:getFameLevel(xi.fameArea.WINDURST) >= 3
+                player:hasCompletedQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.TEACHERS_PET) and
+                player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.LET_SLEEPING_DOGS_LIE) ~= xi.questStatus.QUEST_ACCEPTED and
+                player:getFameLevel(xi.quest.fame_area.WINDURST) >= 3
         end,
 
         [xi.zone.WINDURST_WATERS] =

@@ -6,12 +6,12 @@
 -- Hilda : !pos -163 -8 13 236
 -----------------------------------
 
-local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.CIDS_SECRET)
+local quest = Quest:new(xi.quest.log_id.BASTOK, xi.quest.id.bastok.CIDS_SECRET)
 
 quest.reward =
 {
     fame     = 30,
-    fameArea = xi.fameArea.BASTOK,
+    fameArea = xi.quest.fame_area.BASTOK,
     item     = xi.item.RAM_MANTLE,
 }
 
@@ -20,7 +20,7 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == xi.questStatus.QUEST_AVAILABLE and
-                player:getFameLevel(xi.fameArea.BASTOK) >= 4
+                player:getFameLevel(xi.quest.fame_area.BASTOK) >= 4
         end,
 
         [xi.zone.METALWORKS] =

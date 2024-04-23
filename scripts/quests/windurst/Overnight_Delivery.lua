@@ -6,12 +6,12 @@
 -- Kotan-Purutan : !pos 40.32 -9 44.24 249
 -----------------------------------
 
-local quest = Quest:new(xi.questLog.WINDURST, xi.quest.id.windurst.OVERNIGHT_DELIVERY)
+local quest = Quest:new(xi.quest.log_id.WINDURST, xi.quest.id.windurst.OVERNIGHT_DELIVERY)
 
 quest.reward =
 {
     fame = 100,
-    fameArea = xi.fameArea.WINDURST,
+    fameArea = xi.quest.fame_area.WINDURST,
     item = xi.item.POWER_GI,
 }
 
@@ -20,8 +20,8 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == xi.questStatus.QUEST_AVAILABLE and
-                player:hasCompletedQuest(xi.questLog.WINDURST, xi.quest.id.windurst.FOOD_FOR_THOUGHT) and
-                player:getFameLevel(xi.fameArea.WINDURST) >= 2 and
+                player:hasCompletedQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.FOOD_FOR_THOUGHT) and
+                player:getFameLevel(xi.quest.fame_area.WINDURST) >= 2 and
                 player:getLocalVar('Quest[2][14]mustZone') == 0
         end,
 
@@ -210,7 +210,7 @@ quest.sections =
             ['Ohbiru-Dohbiru'] =
             {
                 onTrigger = function(player, npc)
-                    if player:getFameLevel(xi.fameArea.WINDURST) < 6 then
+                    if player:getFameLevel(xi.quest.fame_area.WINDURST) < 6 then
                         return quest:event(351):replaceDefault()
                     end
                 end,

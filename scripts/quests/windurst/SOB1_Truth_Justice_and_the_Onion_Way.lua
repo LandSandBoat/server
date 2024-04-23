@@ -4,12 +4,12 @@
 -- Kohlo-Lakolo, !pos -26.8 -6 190 240
 -----------------------------------
 
-local quest = Quest:new(xi.questLog.WINDURST, xi.quest.id.windurst.TRUTH_JUSTICE_AND_THE_ONION_WAY)
+local quest = Quest:new(xi.quest.log_id.WINDURST, xi.quest.id.windurst.TRUTH_JUSTICE_AND_THE_ONION_WAY)
 
 quest.reward =
 {
     fame     = 10,
-    fameArea = xi.fameArea.WINDURST,
+    fameArea = xi.quest.fame_area.WINDURST,
     item     = xi.item.JUSTICE_BADGE,
     title    = xi.title.STAR_ONION_BRIGADE_MEMBER,
 }
@@ -83,7 +83,7 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == xi.questStatus.QUEST_COMPLETED and
-                player:getQuestStatus(xi.questLog.WINDURST, xi.quest.id.windurst.KNOW_ONES_ONIONS) == xi.questStatus.QUEST_AVAILABLE
+                player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.KNOW_ONES_ONIONS) == xi.questStatus.QUEST_AVAILABLE
         end,
 
         [xi.zone.PORT_WINDURST] =

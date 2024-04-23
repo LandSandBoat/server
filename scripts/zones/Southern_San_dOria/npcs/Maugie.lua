@@ -11,10 +11,10 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local grimySignpost = player:getQuestStatus(xi.questLog.SANDORIA, xi.quest.id.sandoria.GRIMY_SIGNPOSTS)
+    local grimySignpost = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.GRIMY_SIGNPOSTS)
     if
         grimySignpost == xi.questStatus.QUEST_AVAILABLE and
-        player:getFameLevel(xi.fameArea.SANDORIA) >= 2
+        player:getFameLevel(xi.quest.fame_area.SANDORIA) >= 2
     then
         player:startEvent(45)
     elseif grimySignpost == xi.questStatus.QUEST_ACCEPTED then
@@ -35,12 +35,12 @@ end
 
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 45 and option == 0 then
-        player:addQuest(xi.questLog.SANDORIA, xi.quest.id.sandoria.GRIMY_SIGNPOSTS)
+        player:addQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.GRIMY_SIGNPOSTS)
     elseif csid == 44 then
         player:setCharVar('CleanSignPost', 0)
-        player:addFame(xi.fameArea.SANDORIA, 30)
+        player:addFame(xi.quest.fame_area.SANDORIA, 30)
         npcUtil.giveCurrency(player, 'gil', 1500)
-        player:completeQuest(xi.questLog.SANDORIA, xi.quest.id.sandoria.GRIMY_SIGNPOSTS)
+        player:completeQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.GRIMY_SIGNPOSTS)
     end
 end
 

@@ -1145,8 +1145,9 @@ end
 -- Zone Global Functions
 -----------------------------------
 xi.abyssea.onZoneIn = function(player)
-    -- If the player is a GM, and has GM toggled active, give them permanent visitant status.
-    if player:getGMLevel() > 0 and player:getVisibleGMLevel() >= 3 then
+    -- If the player is a GM, and has GM toggled active, give them permanent visitant
+    -- status.  TODO: nameFlags enum
+    if player:getGMLevel() > 0 and player:checkNameFlags(0x04000000) then
         player:addStatusEffectEx(xi.effect.VISITANT, xi.effect.VISITANT, 0, 0, 0)
     end
 end
@@ -1273,7 +1274,7 @@ local function getUnlockedMawTable(player)
     local unlockedMawTable = { 0, 0, 0 }
 
     for mawIndex = 0, 8 do
-        if player:getQuestStatus(xi.questLog.ABYSSEA, abysseaMawQuests[mawIndex]) >= xi.questStatus.QUEST_ACCEPTED then
+        if player:getQuestStatus(xi.quest.log_id.ABYSSEA, abysseaMawQuests[mawIndex]) >= xi.questStatus.QUEST_ACCEPTED then
             local tableKey = math.floor(mawIndex / 3) + 1
 
             unlockedMawTable[tableKey] = utils.mask.setBit(unlockedMawTable[tableKey], mawIndex % 3, 1)
@@ -1286,7 +1287,7 @@ end
 xi.abyssea.warpNPCOnTrigger = function(player, npc)
     local totalCruor = player:getCurrency('cruor')
     local unlockedMaws = getUnlockedMawTable(player)
-    local statusParam = player:hasCompletedQuest(xi.questLog.ABYSSEA, xi.quest.id.abyssea.THE_TRUTH_BECKONS) and 2 or 0
+    local statusParam = player:hasCompletedQuest(xi.quest.log_id.ABYSSEA, xi.quest.id.abyssea.THE_TRUTH_BECKONS) and 2 or 0
 
     player:startEvent(supportNPCData[player:getZoneID()][2], statusParam, totalCruor, unlockedMaws[1], unlockedMaws[2], unlockedMaws[3])
 end
@@ -1325,10 +1326,10 @@ xi.abyssea.traverserNPCOnTrigger = function(player, npc)
 
     if
         zoneID ~= xi.zone.PORT_JEUNO and
-        not player:hasCompletedQuest(xi.questLog.ABYSSEA, xi.quest.id.abyssea.THE_TRUTH_BECKONS)
+        not player:hasCompletedQuest(xi.quest.log_id.ABYSSEA, xi.quest.id.abyssea.THE_TRUTH_BECKONS)
     then
         player:messageText(npc, ID.text.NOT_ACQUAINTED)
-    elseif player:getQuestStatus(xi.questLog.ABYSSEA, xi.quest.id.abyssea.DAWN_OF_DEATH) >= xi.questStatus.QUEST_ACCEPTED then
+    elseif player:getQuestStatus(xi.quest.log_id.ABYSSEA, xi.quest.id.abyssea.DAWN_OF_DEATH) >= xi.questStatus.QUEST_ACCEPTED then
         player:startEvent(supportNPCData[zoneID][1], 0, availableStones, numTraverserHeld, messageType, 1, 1, 1, 3) -- Post 'The Truth Beckons' Menu
     end
 end
@@ -1395,7 +1396,7 @@ xi.abyssea.getZoneKIReward = function(player)
     local numCompleted = 0
 
     for i = 0, 8 do
-        if player:hasCompletedQuest(xi.questLog.ABYSSEA, abysseaMawQuests[i]) then
+        if player:hasCompletedQuest(xi.quest.log_id.ABYSSEA, abysseaMawQuests[i]) then
             numCompleted = numCompleted + 1
         end
     end

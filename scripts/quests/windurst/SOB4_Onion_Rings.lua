@@ -4,7 +4,7 @@
 -- Kohlo-Lakolo, !pos -26.8 -6 190 240
 -----------------------------------
 
-local quest = Quest:new(xi.questLog.WINDURST, xi.quest.id.windurst.ONION_RINGS)
+local quest = Quest:new(xi.quest.log_id.WINDURST, xi.quest.id.windurst.ONION_RINGS)
 
 local function timedEvents(player, inTime, outATime)
     local daysPassed     = VanadielDayOfTheYear() - quest:getVar(player, 'DayStarted')
@@ -20,7 +20,7 @@ end
 quest.reward =
 {
     fame     = 10,
-    fameArea = xi.fameArea.WINDURST,
+    fameArea = xi.quest.fame_area.WINDURST,
     title    = xi.title.STAR_ONION_BRIGADIER,
 }
 
@@ -34,7 +34,7 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == xi.questStatus.QUEST_AVAILABLE and
-                player:hasCompletedQuest(xi.questLog.WINDURST, xi.quest.id.windurst.INSPECTORS_GADGET)
+                player:hasCompletedQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.INSPECTORS_GADGET)
         end,
 
         [xi.zone.PORT_WINDURST] =
@@ -44,7 +44,7 @@ quest.sections =
                 onTrigger = function(player, npc)
                     if
                         player:getMainLvl() >= 5 and
-                        player:getFameLevel(xi.fameArea.WINDURST) >= 3 and
+                        player:getFameLevel(xi.quest.fame_area.WINDURST) >= 3 and
                         not quest:getMustZone(player)
                     then
                         if player:hasKeyItem(xi.ki.OLD_RING) then
@@ -189,7 +189,7 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == xi.questStatus.QUEST_COMPLETED and
-                player:getQuestStatus(xi.questLog.WINDURST, xi.quest.id.windurst.CRYING_OVER_ONIONS) == xi.questStatus.QUEST_AVAILABLE
+                player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CRYING_OVER_ONIONS) == xi.questStatus.QUEST_AVAILABLE
         end,
 
         [xi.zone.PORT_WINDURST] =

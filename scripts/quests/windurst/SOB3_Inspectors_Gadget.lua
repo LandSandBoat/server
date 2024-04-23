@@ -4,12 +4,12 @@
 -- Kohlo-Lakolo, !pos -26.8 -6 190 240
 -----------------------------------
 
-local quest = Quest:new(xi.questLog.WINDURST, xi.quest.id.windurst.INSPECTORS_GADGET)
+local quest = Quest:new(xi.quest.log_id.WINDURST, xi.quest.id.windurst.INSPECTORS_GADGET)
 
 quest.reward =
 {
     fame     = 10,
-    fameArea = xi.fameArea.WINDURST,
+    fameArea = xi.quest.fame_area.WINDURST,
     item     = xi.item.HEKO_OBI,
     title    = xi.title.FAKE_MOUSTACHED_INVESTIGATOR,
 }
@@ -20,7 +20,7 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == xi.questStatus.QUEST_AVAILABLE and
-                player:hasCompletedQuest(xi.questLog.WINDURST, xi.quest.id.windurst.KNOW_ONES_ONIONS)
+                player:hasCompletedQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.KNOW_ONES_ONIONS)
         end,
 
         [xi.zone.PORT_WINDURST] =
@@ -30,7 +30,7 @@ quest.sections =
                 onTrigger = function(player, npc)
                     if
                         player:getMainLvl() >= 5 and
-                        player:getFameLevel(xi.fameArea.WINDURST) >= 2 and
+                        player:getFameLevel(xi.quest.fame_area.WINDURST) >= 2 and
                         not quest:getMustZone(player)
                     then
                         return quest:progressEvent(413) -- Quest starting event.
@@ -139,7 +139,7 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == xi.questStatus.QUEST_COMPLETED and
-                player:getQuestStatus(xi.questLog.WINDURST, xi.quest.id.windurst.ONION_RINGS) == xi.questStatus.QUEST_AVAILABLE
+                player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.ONION_RINGS) == xi.questStatus.QUEST_AVAILABLE
         end,
 
         [xi.zone.PORT_WINDURST] =

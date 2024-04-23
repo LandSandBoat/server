@@ -12,17 +12,14 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local trialByLightning = player:getQuestStatus(xi.questLog.OTHER_AREAS, xi.quest.id.otherAreas.TRIAL_BY_LIGHTNING)
+    local trialByLightning = player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.TRIAL_BY_LIGHTNING)
     local hasWhisperOfStorms = player:hasKeyItem(xi.ki.WHISPER_OF_STORMS)
-    local carbuncleDebacle = player:getQuestStatus(xi.questLog.WINDURST, xi.quest.id.windurst.CARBUNCLE_DEBACLE)
+    local carbuncleDebacle = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CARBUNCLE_DEBACLE)
     local carbuncleDebacleProgress = player:getCharVar('CarbuncleDebacleProgress')
 
     -----------------------------------
     -- Carbunlce Debacle
-    if
-        carbuncleDebacle == xi.questStatus.QUEST_ACCEPTED and
-        carbuncleDebacleProgress == 2
-    then
+    if carbuncleDebacle == xi.questStatus.QUEST_ACCEPTED and carbuncleDebacleProgress == 2 then
         player:startEvent(10022) -- get the lighning pendulum lets go to Cloister of Storms
     elseif
         carbuncleDebacle == xi.questStatus.QUEST_ACCEPTED and
@@ -33,7 +30,7 @@ entity.onTrigger = function(player, npc)
     -----------------------------------
     -- Trial by Lightning
     elseif
-        (trialByLightning == xi.questStatus.QUEST_AVAILABLE and player:getFameLevel(xi.fameArea.WINDURST) >= 6) or
+        (trialByLightning == xi.questStatus.QUEST_AVAILABLE and player:getFameLevel(xi.quest.fame_area.WINDURST) >= 6) or
         (trialByLightning == xi.questStatus.QUEST_COMPLETED and os.time() > player:getCharVar('TrialByLightning_date'))
     then
         player:startEvent(10016, 0, xi.ki.TUNING_FORK_OF_LIGHTNING) -- Start and restart quest "Trial by Lightning"
@@ -43,15 +40,9 @@ entity.onTrigger = function(player, npc)
         not hasWhisperOfStorms
     then
         player:startEvent(10024, 0, xi.ki.TUNING_FORK_OF_LIGHTNING) -- Defeat against Ramuh : Need new Fork
-    elseif
-        trialByLightning == xi.questStatus.QUEST_ACCEPTED and
-        not hasWhisperOfStorms
-    then
+    elseif trialByLightning == xi.questStatus.QUEST_ACCEPTED and not hasWhisperOfStorms then
         player:startEvent(10017, 0, xi.ki.TUNING_FORK_OF_LIGHTNING, 5)
-    elseif
-        trialByLightning == xi.questStatus.QUEST_ACCEPTED and
-        hasWhisperOfStorms
-    then
+    elseif trialByLightning == xi.questStatus.QUEST_ACCEPTED and hasWhisperOfStorms then
         local numitem = 0
 
         if player:hasItem(xi.item.RAMUHS_STAFF) then
@@ -85,11 +76,11 @@ end
 
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 10016 and option == 1 then
-        if player:getQuestStatus(xi.questLog.OTHER_AREAS, xi.quest.id.otherAreas.TRIAL_BY_LIGHTNING) == xi.questStatus.QUEST_COMPLETED then
-            player:delQuest(xi.questLog.OTHER_AREAS, xi.quest.id.otherAreas.TRIAL_BY_LIGHTNING)
+        if player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.TRIAL_BY_LIGHTNING) == xi.questStatus.QUEST_COMPLETED then
+            player:delQuest(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.TRIAL_BY_LIGHTNING)
         end
 
-        player:addQuest(xi.questLog.OTHER_AREAS, xi.quest.id.otherAreas.TRIAL_BY_LIGHTNING)
+        player:addQuest(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.TRIAL_BY_LIGHTNING)
         player:setCharVar('TrialByLightning_date', 0)
         player:addKeyItem(xi.ki.TUNING_FORK_OF_LIGHTNING)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.TUNING_FORK_OF_LIGHTNING)
@@ -124,8 +115,8 @@ entity.onEventFinish = function(player, csid, option, npc)
             player:addTitle(xi.title.HEIR_OF_THE_GREAT_LIGHTNING)
             player:delKeyItem(xi.ki.WHISPER_OF_STORMS) --Whisper of Storms, as a trade for the above rewards
             player:setCharVar('TrialByLightning_date', getMidnight())
-            player:addFame(xi.fameArea.WINDURST, 30)
-            player:completeQuest(xi.questLog.OTHER_AREAS, xi.quest.id.otherAreas.TRIAL_BY_LIGHTNING)
+            player:addFame(xi.quest.fame_area.WINDURST, 30)
+            player:completeQuest(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.TRIAL_BY_LIGHTNING)
         end
     elseif csid == 10022 or csid == 10023 then
         if player:getFreeSlotsCount() ~= 0 then

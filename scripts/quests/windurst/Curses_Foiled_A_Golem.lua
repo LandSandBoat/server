@@ -7,12 +7,12 @@
 -- Cermet Door     : !pos -183 0 190 204
 -----------------------------------
 
-local quest = Quest:new(xi.questLog.WINDURST, xi.quest.id.windurst.CURSES_FOILED_A_GOLEM)
+local quest = Quest:new(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CURSES_FOILED_A_GOLEM)
 
 quest.reward =
 {
     fame     = 120,
-    fameArea = xi.fameArea.WINDURST,
+    fameArea = xi.quest.fame_area.WINDURST,
     item     = xi.item.SCROLL_OF_WARP_II,
     title    = xi.title.DOCTOR_SHANTOTTOS_FLAVOR_OF_THE_MONTH,
 }
@@ -35,8 +35,8 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == xi.questStatus.QUEST_AVAILABLE and
-                player:hasCompletedQuest(xi.questLog.WINDURST, xi.quest.id.windurst.CURSES_FOILED_AGAIN_2) and
-                player:getFameLevel(xi.fameArea.WINDURST) >= 4 and
+                player:hasCompletedQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CURSES_FOILED_AGAIN_2) and
+                player:getFameLevel(xi.quest.fame_area.WINDURST) >= 4 and
                 player:getMainLvl() >= 10 and
                 not quest:getMustZone(player)
         end,

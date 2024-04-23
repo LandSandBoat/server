@@ -5,12 +5,12 @@
 -- Derrick : !pos -32 -1 -7 245
 -----------------------------------
 
-local quest = Quest:new(xi.questLog.JEUNO, xi.quest.id.jeuno.SAVE_THE_CLOCK_TOWER)
+local quest = Quest:new(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.SAVE_THE_CLOCK_TOWER)
 
 quest.reward =
 {
     fame     = 30,
-    fameArea = xi.fameArea.JEUNO,
+    fameArea = xi.quest.fame_area.JEUNO,
     title    = xi.title.CLOCK_TOWER_PRESERVATIONIST,
 }
 
@@ -53,8 +53,8 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == xi.questStatus.QUEST_AVAILABLE and
-                player:hasCompletedQuest(xi.questLog.JEUNO, xi.quest.id.jeuno.A_CLOCK_MOST_DELICATE) and
-                player:getFameLevel(xi.fameArea.JEUNO) >= 5
+                player:hasCompletedQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.A_CLOCK_MOST_DELICATE) and
+                player:getFameLevel(xi.quest.fame_area.JEUNO) >= 5
         end,
 
         [xi.zone.LOWER_JEUNO] =

@@ -17,7 +17,7 @@ entity.onTrigger = function(player, npc)
         if player:sendGuild(60419, 1, 23, 4) then
             player:showText(npc, ID.text.TENSHODO_SHOP_OPEN_DIALOG)
         end
-    elseif player:getQuestStatus(xi.questLog.JEUNO, xi.quest.id.jeuno.TENSHODO_MEMBERSHIP) == xi.questStatus.QUEST_ACCEPTED then
+    elseif player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.TENSHODO_MEMBERSHIP) == xi.questStatus.QUEST_ACCEPTED then
         if player:hasKeyItem(xi.ki.TENSHODO_APPLICATION_FORM) then
             player:startEvent(152)
         else

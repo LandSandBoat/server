@@ -4,12 +4,12 @@
 -- Kohlo-Lakolo, !pos -26.8 -6 190 240
 -----------------------------------
 
-local quest = Quest:new(xi.questLog.WINDURST, xi.quest.id.windurst.KNOW_ONES_ONIONS)
+local quest = Quest:new(xi.quest.log_id.WINDURST, xi.quest.id.windurst.KNOW_ONES_ONIONS)
 
 quest.reward =
 {
     fame     = 10,
-    fameArea = xi.fameArea.WINDURST,
+    fameArea = xi.quest.fame_area.WINDURST,
     item     = xi.item.SCROLL_OF_BLAZE_SPIKES,
     title    = xi.title.SOB_SUPER_HERO,
 }
@@ -31,7 +31,7 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == xi.questStatus.QUEST_AVAILABLE and
-                player:hasCompletedQuest(xi.questLog.WINDURST, xi.quest.id.windurst.TRUTH_JUSTICE_AND_THE_ONION_WAY)
+                player:hasCompletedQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.TRUTH_JUSTICE_AND_THE_ONION_WAY)
         end,
 
         [xi.zone.PORT_WINDURST] =
@@ -223,7 +223,7 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == xi.questStatus.QUEST_COMPLETED and
-                player:getQuestStatus(xi.questLog.WINDURST, xi.quest.id.windurst.INSPECTORS_GADGET) == xi.questStatus.QUEST_AVAILABLE
+                player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.INSPECTORS_GADGET) == xi.questStatus.QUEST_AVAILABLE
         end,
 
         [xi.zone.PORT_WINDURST] =

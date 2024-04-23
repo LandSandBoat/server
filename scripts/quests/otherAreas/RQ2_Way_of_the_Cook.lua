@@ -6,14 +6,14 @@
 -- Mhaura, Rycharde, !pos 17.451 -16.000 88.815 249
 -----------------------------------
 
-local quest          = Quest:new(xi.questLog.OTHER_AREAS, xi.quest.id.otherAreas.WAY_OF_THE_COOK)
+local quest          = Quest:new(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.WAY_OF_THE_COOK)
 local daysPassed     = 0
 local totalHoursLeft = 0
 
 quest.reward =
 {
     fame     = 120,
-    fameArea = xi.fameArea.WINDURST,
+    fameArea = xi.quest.fame_area.WINDURST,
     title    = xi.title.ONE_STAR_PURVEYOR,
 }
 
@@ -23,7 +23,7 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == xi.questStatus.QUEST_AVAILABLE and
-                player:getQuestStatus(xi.questLog.OTHER_AREAS, xi.quest.id.otherAreas.RYCHARDE_THE_CHEF) == xi.questStatus.QUEST_COMPLETED
+                player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.RYCHARDE_THE_CHEF) == xi.questStatus.QUEST_COMPLETED
         end,
 
         [xi.zone.MHAURA] =
@@ -33,7 +33,7 @@ quest.sections =
                 onTrigger = function(player, npc)
                     if
                         player:getCharVar('Quest[4][0]DayCompleted') + 7 < VanadielUniqueDay() and
-                        player:getFameLevel(xi.fameArea.WINDURST) > 2
+                        player:getFameLevel(xi.quest.fame_area.WINDURST) > 2
                     then
                         return quest:progressEvent(76, xi.item.BEEHIVE_CHIP, xi.item.SLICE_OF_DHALMEL_MEAT) -- Way of the Cook starting event.
                     else

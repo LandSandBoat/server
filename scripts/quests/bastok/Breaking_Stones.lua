@@ -6,13 +6,13 @@
 -- qm2      : !pos -120.041 2.621 415.989 191
 -----------------------------------
 
-local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.BREAKING_STONES)
+local quest = Quest:new(xi.quest.log_id.BASTOK, xi.quest.id.bastok.BREAKING_STONES)
 
 quest.reward =
 {
     gil      = 400,
     fame     = 30,
-    fameArea = xi.fameArea.BASTOK,
+    fameArea = xi.quest.fame_area.BASTOK,
 }
 
 quest.sections =
@@ -20,7 +20,7 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == xi.questStatus.QUEST_AVAILABLE and
-                player:getFameLevel(xi.fameArea.BASTOK) >= 2
+                player:getFameLevel(xi.quest.fame_area.BASTOK) >= 2
         end,
 
         [xi.zone.BASTOK_MARKETS] =

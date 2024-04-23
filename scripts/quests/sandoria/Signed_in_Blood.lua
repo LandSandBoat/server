@@ -6,7 +6,7 @@
 -- TORN_OUT_PAGES !addkeyitem 626
 -----------------------------------
 
-local quest = Quest:new(xi.questLog.SANDORIA, xi.quest.id.sandoria.SIGNED_IN_BLOOD)
+local quest = Quest:new(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.SIGNED_IN_BLOOD)
 
 quest.reward =
 {
@@ -20,7 +20,7 @@ quest.sections =
     -- She wants you to retrieve a Cathedral Tapestry.
     {
         check = function(player, status, vars)
-            return status == xi.questStatus.QUEST_AVAILABLE and player:getFameLevel(xi.fameArea.SANDORIA) >= 3
+            return status == xi.questStatus.QUEST_AVAILABLE and player:getFameLevel(xi.quest.fame_area.SANDORIA) >= 3
         end,
 
         [xi.zone.SOUTHERN_SAN_DORIA] =

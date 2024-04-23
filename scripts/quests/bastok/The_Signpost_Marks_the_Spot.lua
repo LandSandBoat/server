@@ -9,13 +9,13 @@
 local konschtatID = zones[xi.zone.KONSCHTAT_HIGHLANDS]
 -----------------------------------
 
-local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.THE_SIGNPOST_MARKS_THE_SPOT)
+local quest = Quest:new(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_SIGNPOST_MARKS_THE_SPOT)
 
 quest.reward =
 {
     item     = xi.item.LINEN_ROBE,
     fame     = 50,
-    fameArea = xi.fameArea.BASTOK,
+    fameArea = xi.quest.fame_area.BASTOK,
     title    = xi.title.TREASURE_SCAVENGER,
 }
 
@@ -24,8 +24,8 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == xi.questStatus.QUEST_AVAILABLE and
-                player:getFameLevel(xi.fameArea.BASTOK) >= 2 and
-                player:hasCompletedQuest(xi.questLog.BASTOK, xi.quest.id.bastok.MOM_THE_ADVENTURER)
+                player:getFameLevel(xi.quest.fame_area.BASTOK) >= 2 and
+                player:hasCompletedQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.MOM_THE_ADVENTURER)
         end,
 
         [xi.zone.BASTOK_MARKETS] =

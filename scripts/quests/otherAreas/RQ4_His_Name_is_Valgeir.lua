@@ -7,12 +7,12 @@
 -- Selbina, Valgeir,  !pos 57.496 -15.273 20.229 248
 -----------------------------------
 
-local quest = Quest:new(xi.questLog.OTHER_AREAS, xi.quest.id.otherAreas.HIS_NAME_IS_VALGEIR)
+local quest = Quest:new(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.HIS_NAME_IS_VALGEIR)
 
 quest.reward =
 {
     fame     = 120,
-    fameArea = xi.fameArea.WINDURST,
+    fameArea = xi.quest.fame_area.WINDURST,
     gil      = 2000,
     keyItem  = xi.ki.MAP_OF_THE_TORAIMARAI_CANAL,
 }
@@ -23,7 +23,7 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == xi.questStatus.QUEST_AVAILABLE and
-                player:getQuestStatus(xi.questLog.OTHER_AREAS, xi.quest.id.otherAreas.UNENDING_CHASE) == xi.questStatus.QUEST_COMPLETED
+                player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.UNENDING_CHASE) == xi.questStatus.QUEST_COMPLETED
         end,
 
         [xi.zone.MHAURA] =
@@ -33,7 +33,7 @@ quest.sections =
                 onTrigger = function(player, npc)
                     if
                         player:getCharVar('Quest[4][2]DayCompleted') + 2 < VanadielUniqueDay() and
-                        player:getFameLevel(xi.fameArea.WINDURST) > 2
+                        player:getFameLevel(xi.quest.fame_area.WINDURST) > 2
                     then
                         return quest:progressEvent(86) -- His Name is Valgeir starting event.
                     else

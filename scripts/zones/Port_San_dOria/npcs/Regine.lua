@@ -7,8 +7,8 @@
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    local flyersForRegine = player:getQuestStatus(xi.questLog.SANDORIA, xi.quest.id.sandoria.FLYERS_FOR_REGINE)
-    local theBrugaireConsortium = player:getQuestStatus(xi.questLog.SANDORIA, xi.quest.id.sandoria.THE_BRUGAIRE_CONSORTIUM)
+    local flyersForRegine = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.FLYERS_FOR_REGINE)
+    local theBrugaireConsortium = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_BRUGAIRE_CONSORTIUM)
 
     -- FLYERS FOR REGINE
     if
@@ -29,7 +29,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local ffr = player:getQuestStatus(xi.questLog.SANDORIA, xi.quest.id.sandoria.FLYERS_FOR_REGINE)
+    local ffr = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.FLYERS_FOR_REGINE)
 
     -- FLYERS FOR REGINE
     if ffr == xi.questStatus.QUEST_AVAILABLE then -- ready to accept quest
@@ -40,10 +40,7 @@ entity.onTrigger = function(player, npc)
     then
         -- all 15 flyers delivered
         player:startEvent(603)
-    elseif
-        ffr == xi.questStatus.QUEST_ACCEPTED and
-        not player:hasItem(xi.item.MAGICMART_FLYER)
-    then -- on quest but out of flyers
+    elseif ffr == xi.questStatus.QUEST_ACCEPTED and not player:hasItem(xi.item.MAGICMART_FLYER) then -- on quest but out of flyers
         player:startEvent(510, 3)
 
     -- DEFAULT MENU
@@ -59,11 +56,11 @@ entity.onEventFinish = function(player, csid, option, npc)
     -- FLYERS FOR REGINE
     if csid == 510 and option == 2 then
         if npcUtil.giveItem(player, { { xi.item.MAGICMART_FLYER, 12 }, { xi.item.MAGICMART_FLYER, 3 } }) then
-            player:addQuest(xi.questLog.SANDORIA, xi.quest.id.sandoria.FLYERS_FOR_REGINE)
+            player:addQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.FLYERS_FOR_REGINE)
         end
     elseif csid == 603 then
         npcUtil.completeQuest(
-            player, xi.questLog.SANDORIA, xi.quest.id.sandoria.FLYERS_FOR_REGINE,
+            player, xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.FLYERS_FOR_REGINE,
             {
                 gil = 440,
                 title = xi.title.ADVERTISING_EXECUTIVE,

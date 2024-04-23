@@ -20,7 +20,7 @@ end
 battlefieldObject.onBattlefieldLeave = function(player, battlefield, leavecode)
     if leavecode == xi.battlefield.leaveCode.WON then
         local _, clearTime, partySize = battlefield:getRecord()
-        local arg8 = (player:getQuestStatus(xi.questLog.SANDORIA, xi.quest.id.sandoria.THE_HOLY_CREST) ~= xi.questStatus.QUEST_ACCEPTED) and 1 or 0
+        local arg8 = (player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_HOLY_CREST) ~= xi.questStatus.QUEST_ACCEPTED) and 1 or 0
         player:startEvent(32001, battlefield:getArea(), clearTime, partySize, battlefield:getTimeInside(), 1, battlefield:getLocalVar('[cs]bit'), arg8)
     elseif leavecode == xi.battlefield.leaveCode.LOST then
         player:startEvent(32002)
@@ -36,7 +36,7 @@ battlefieldObject.onEventFinish = function(player, csid, option, npc)
         option ~= 0 and
         player:hasKeyItem(xi.ki.DRAGON_CURSE_REMEDY)
     then
-        npcUtil.completeQuest(player, xi.questLog.SANDORIA, xi.quest.id.sandoria.THE_HOLY_CREST, {
+        npcUtil.completeQuest(player, xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_HOLY_CREST, {
             title = xi.title.HEIR_TO_THE_HOLY_CREST,
             var = 'TheHolyCrest_Event',
         })

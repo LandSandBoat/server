@@ -7,7 +7,7 @@
 -- Fellow Emotes do not currently work
 -----------------------------------
 
-local quest = Quest:new(xi.questLog.JEUNO, xi.quest.id.jeuno.BLESSED_RADIANCE)
+local quest = Quest:new(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.BLESSED_RADIANCE)
 
 quest.reward = {}
 
@@ -17,7 +17,7 @@ quest.sections = {
     {
         check = function(player, status, vars)
             return status == xi.questStatus.QUEST_AVAILABLE
-                and player:getQuestStatus(xi.questLog.JEUNO, BLIGHTED_GLOOM) == xi.questStatus.QUEST_COMPLETED
+                and player:getQuestStatus(xi.quest.log_id.JEUNO, BLIGHTED_GLOOM) == xi.questStatus.QUEST_COMPLETED
                 and player:getFellowValue('bond') >= 65
         end,
 

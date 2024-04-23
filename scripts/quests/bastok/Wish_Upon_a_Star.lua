@@ -7,12 +7,12 @@
 -- Enu    : !pos -253.673 -13 -92.326 235
 -----------------------------------
 
-local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.WISH_UPON_A_STAR)
+local quest = Quest:new(xi.quest.log_id.BASTOK, xi.quest.id.bastok.WISH_UPON_A_STAR)
 
 quest.reward =
 {
     fame     = 50,
-    fameArea = xi.fameArea.BASTOK,
+    fameArea = xi.quest.fame_area.BASTOK,
     item     = { { xi.item.BAG_OF_CACTUS_STEMS, 4 } },
 }
 
@@ -21,7 +21,7 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == xi.questStatus.QUEST_AVAILABLE and
-                player:getFameLevel(xi.fameArea.BASTOK) >= 5
+                player:getFameLevel(xi.quest.fame_area.BASTOK) >= 5
         end,
 
         [xi.zone.BASTOK_MARKETS] =

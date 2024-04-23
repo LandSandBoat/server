@@ -11,7 +11,7 @@
 local southernSandoriaSID = zones[xi.zone.SOUTHERN_SAN_DORIA_S]
 -----------------------------------
 
-local quest = Quest:new(xi.questLog.CRYSTAL_WAR, xi.quest.id.crystalWar.STEAMED_RAMS)
+local quest = Quest:new(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.STEAMED_RAMS)
 
 quest.reward =
 {
@@ -59,8 +59,8 @@ quest.sections =
             {
                 onTrigger = function(player, npc)
                     if
-                        player:getQuestStatus(xi.questLog.CRYSTAL_WAR, xi.quest.id.crystalWar.THE_FIGHTING_FOURTH) == xi.questStatus.QUEST_ACCEPTED or
-                        player:getQuestStatus(xi.questLog.CRYSTAL_WAR, xi.quest.id.crystalWar.SNAKE_ON_THE_PLAINS) == xi.questStatus.QUEST_ACCEPTED
+                        player:getQuestStatus(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.THE_FIGHTING_FOURTH) == xi.questStatus.QUEST_ACCEPTED or
+                        player:getQuestStatus(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.SNAKE_ON_THE_PLAINS) == xi.questStatus.QUEST_ACCEPTED
                     then
                         return quest:event(9)
                     elseif

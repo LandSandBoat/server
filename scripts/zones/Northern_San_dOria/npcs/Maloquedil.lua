@@ -7,7 +7,7 @@
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    if player:getQuestStatus(xi.questLog.SANDORIA, xi.quest.id.sandoria.WARDING_VAMPIRES) ~= xi.questStatus.QUEST_AVAILABLE then
+    if player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.WARDING_VAMPIRES) ~= xi.questStatus.QUEST_AVAILABLE then
         if
             trade:hasItemQty(xi.item.BULB_OF_SHAMAN_GARLIC, 2) and
             trade:getItemCount() == 2
@@ -18,17 +18,17 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local warding = player:getQuestStatus(xi.questLog.SANDORIA, xi.quest.id.sandoria.WARDING_VAMPIRES)
+    local warding = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.WARDING_VAMPIRES)
     local wildcatSandy = player:getCharVar('WildcatSandy')
 
     if
-        player:getQuestStatus(xi.questLog.SANDORIA, xi.quest.id.sandoria.LURE_OF_THE_WILDCAT) == xi.questStatus.QUEST_ACCEPTED and
+        player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.LURE_OF_THE_WILDCAT) == xi.questStatus.QUEST_ACCEPTED and
         not utils.mask.getBit(wildcatSandy, 7)
     then
         player:startEvent(807)
     elseif
         warding == xi.questStatus.QUEST_AVAILABLE and
-        player:getFameLevel(xi.fameArea.SANDORIA) >= 3
+        player:getFameLevel(xi.quest.fame_area.SANDORIA) >= 3
     then
         -- Quest available for fame superior or equal to 3
         player:startEvent(24)
@@ -46,16 +46,16 @@ end
 
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 24 and option == 1 then
-        player:addQuest(xi.questLog.SANDORIA, xi.quest.id.sandoria.WARDING_VAMPIRES)
+        player:addQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.WARDING_VAMPIRES)
     elseif csid == 23 then
         player:tradeComplete()
         player:addTitle(xi.title.VAMPIRE_HUNTER_D_MINUS)
         npcUtil.giveCurrency(player, 'gil', 900)
-        if player:getQuestStatus(xi.questLog.SANDORIA, xi.quest.id.sandoria.WARDING_VAMPIRES) == xi.questStatus.QUEST_ACCEPTED then
-            player:addFame(xi.fameArea.SANDORIA, 30)
-            player:completeQuest(xi.questLog.SANDORIA, xi.quest.id.sandoria.WARDING_VAMPIRES)
+        if player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.WARDING_VAMPIRES) == xi.questStatus.QUEST_ACCEPTED then
+            player:addFame(xi.quest.fame_area.SANDORIA, 30)
+            player:completeQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.WARDING_VAMPIRES)
         else
-            player:addFame(xi.fameArea.SANDORIA, 5)
+            player:addFame(xi.quest.fame_area.SANDORIA, 5)
         end
     elseif csid == 807 then
         player:setCharVar('WildcatSandy', utils.mask.setBit(player:getCharVar('WildcatSandy'), 7, true))

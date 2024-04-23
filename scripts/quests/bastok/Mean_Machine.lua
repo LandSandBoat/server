@@ -5,12 +5,12 @@
 -- Unlucky Rat : -59.724 1.999 30.179 237
 -----------------------------------
 
-local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.MEAN_MACHINE)
+local quest = Quest:new(xi.quest.log_id.BASTOK, xi.quest.id.bastok.MEAN_MACHINE)
 
 quest.reward =
 {
     fame     = 120,
-    fameArea = xi.fameArea.BASTOK,
+    fameArea = xi.quest.fame_area.BASTOK,
     item     = xi.item.SCROLL_OF_WARP,
 }
 
@@ -19,7 +19,7 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == xi.questStatus.QUEST_AVAILABLE and
-                player:getFameLevel(xi.fameArea.BASTOK) >= 2
+                player:getFameLevel(xi.quest.fame_area.BASTOK) >= 2
         end,
 
         [xi.zone.METALWORKS] =

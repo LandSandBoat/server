@@ -5,12 +5,12 @@
 -- Romilda : !pos 5.424 4.898 -18.699 236
 -----------------------------------
 
-local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.TILL_DEATH_DO_US_PART)
+local quest = Quest:new(xi.quest.log_id.BASTOK, xi.quest.id.bastok.TILL_DEATH_DO_US_PART)
 
 quest.reward =
 {
     fame     = 160,
-    fameArea = xi.fameArea.BASTOK,
+    fameArea = xi.quest.fame_area.BASTOK,
     gil      = 2000,
     title    = xi.title.QIJIS_RIVAL,
 }
@@ -20,7 +20,7 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == xi.questStatus.QUEST_AVAILABLE and
-                player:hasCompletedQuest(xi.questLog.BASTOK, xi.quest.id.bastok.FOREVER_TO_HOLD)
+                player:hasCompletedQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.FOREVER_TO_HOLD)
         end,
 
         [xi.zone.PORT_BASTOK] =
@@ -28,7 +28,7 @@ quest.sections =
             ['Romilda'] =
             {
                 onTrigger = function(player, npc)
-                    if player:getFameLevel(xi.fameArea.BASTOK) >= 3 then
+                    if player:getFameLevel(xi.quest.fame_area.BASTOK) >= 3 then
                         return quest:progressEvent(128)
                     else
                         return quest:event(127)

@@ -5,12 +5,12 @@
 -- Hanaa Punaa : !pos -179.726 -8.8 27.574 230
 -----------------------------------
 
-local quest = Quest:new(xi.questLog.SANDORIA, xi.quest.id.sandoria.LIZARD_SKINS)
+local quest = Quest:new(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.LIZARD_SKINS)
 
 quest.reward =
 {
     fame = 30,
-    fameArea = xi.fameArea.SANDORIA,
+    fameArea = xi.quest.fame_area.SANDORIA,
     -- Repeatable Items handled within the Trigger:
     -- item = xi.item.LIZARD_GLOVES,
     -- title = xi.title.LIZARD_SKINNER,
@@ -21,8 +21,8 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == xi.questStatus.QUEST_AVAILABLE and
-                player:getFameLevel(xi.fameArea.SANDORIA) >= 2 and
-                player:hasCompletedQuest(xi.questLog.SANDORIA, xi.quest.id.sandoria.THE_SEAMSTRESS)
+                player:getFameLevel(xi.quest.fame_area.SANDORIA) >= 2 and
+                player:hasCompletedQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_SEAMSTRESS)
         end,
 
         [xi.zone.SOUTHERN_SAN_DORIA] =
@@ -97,7 +97,7 @@ quest.sections =
                         if not player:hasCompletedQuest(quest.areaId, quest.questId) then
                             quest:complete(player)
                         else
-                            player:addFame(xi.fameArea.SANDORIA, 5)
+                            player:addFame(xi.quest.fame_area.SANDORIA, 5)
                         end
                     end
                 end,
@@ -107,7 +107,7 @@ quest.sections =
 
     {
         check = function(player, status, vars)
-            return status == xi.questStatus.QUEST_COMPLETED and player:getFameLevel(xi.fameArea.SANDORIA) < 3
+            return status == xi.questStatus.QUEST_COMPLETED and player:getFameLevel(xi.quest.fame_area.SANDORIA) < 3
         end,
 
         [xi.zone.SOUTHERN_SAN_DORIA] =

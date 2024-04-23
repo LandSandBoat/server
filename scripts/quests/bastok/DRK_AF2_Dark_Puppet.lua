@@ -10,12 +10,12 @@
 local ordellesID = zones[xi.zone.ORDELLES_CAVES]
 -----------------------------------
 
-local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.DARK_PUPPET)
+local quest = Quest:new(xi.quest.log_id.BASTOK, xi.quest.id.bastok.DARK_PUPPET)
 
 quest.reward =
 {
     fame     = 40,
-    fameArea = xi.fameArea.BASTOK,
+    fameArea = xi.quest.fame_area.BASTOK,
     item     = xi.item.CHAOS_SOLLERETS,
 }
 
@@ -24,7 +24,7 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == xi.questStatus.QUEST_AVAILABLE and
-                player:hasCompletedQuest(xi.questLog.BASTOK, xi.quest.id.bastok.DARK_LEGACY) and
+                player:hasCompletedQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.DARK_LEGACY) and
                 player:getMainJob() == xi.job.DRK and
                 player:getMainLvl() >= xi.settings.main.AF2_QUEST_LEVEL
         end,

@@ -9,7 +9,7 @@
 local whitegateID = zones[xi.zone.AHT_URHGAN_WHITEGATE]
 -----------------------------------
 
-local quest = Quest:new(xi.questLog.AHT_URHGAN, xi.quest.id.ahtUrhgan.OMENS)
+local quest = Quest:new(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.OMENS)
 
 quest.reward =
 {
@@ -22,7 +22,7 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == xi.questStatus.QUEST_AVAILABLE and
-                player:hasCompletedQuest(xi.questLog.AHT_URHGAN, xi.quest.id.ahtUrhgan.BEGINNINGS) and
+                player:hasCompletedQuest(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.BEGINNINGS) and
                 player:getMainJob() == xi.job.BLU and
                 player:getMainLvl() >= xi.settings.main.AF2_QUEST_LEVEL
         end,
@@ -32,7 +32,7 @@ quest.sections =
             ['Waoud'] =
             {
                 onTrigger = function(player, npc)
-                    local lastDivination = xi.quest.getVar(player, xi.questLog.AHT_URHGAN, xi.quest.id.ahtUrhgan.AN_EMPTY_VESSEL, 'Timer')
+                    local lastDivination = xi.quest.getVar(player, xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.AN_EMPTY_VESSEL, 'Timer')
 
                     if
                         lastDivination <= VanadielUniqueDay() and
@@ -48,7 +48,7 @@ quest.sections =
                 [710] = function(player, csid, option, npc)
                     quest:begin(player)
 
-                    xi.quest.setVar(player, xi.questLog.AHT_URHGAN, xi.quest.id.ahtUrhgan.BEGINNINGS, 'Timer', VanadielUniqueDay() + 1)
+                    xi.quest.setVar(player, xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.BEGINNINGS, 'Timer', VanadielUniqueDay() + 1)
                 end,
             },
         },
@@ -65,7 +65,7 @@ quest.sections =
             {
                 onTrigger = function(player, npc)
                     local questProgress = quest:getVar(player, 'Prog')
-                    local lastDivination = xi.quest.getVar(player, xi.questLog.AHT_URHGAN, xi.quest.id.ahtUrhgan.AN_EMPTY_VESSEL, 'Timer')
+                    local lastDivination = xi.quest.getVar(player, xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.AN_EMPTY_VESSEL, 'Timer')
 
                     if questProgress == 1 then
                         return quest:progressEvent(712)
@@ -104,7 +104,7 @@ quest.sections =
                         player:delGil(1000)
                         player:messageSpecial(whitegateID.text.PAY_DIVINATION)
 
-                        xi.quest.setVar(player, xi.questLog.AHT_URHGAN, xi.quest.id.ahtUrhgan.AN_EMPTY_VESSEL, 'Timer', VanadielUniqueDay() + 1)
+                        xi.quest.setVar(player, xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.AN_EMPTY_VESSEL, 'Timer', VanadielUniqueDay() + 1)
                     end
                 end,
 
@@ -121,7 +121,7 @@ quest.sections =
                         player:delGil(1000)
                         player:messageSpecial(whitegateID.text.PAY_DIVINATION)
 
-                        xi.quest.setVar(player, xi.questLog.AHT_URHGAN, xi.quest.id.ahtUrhgan.AN_EMPTY_VESSEL, 'Timer', VanadielUniqueDay() + 1)
+                        xi.quest.setVar(player, xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.AN_EMPTY_VESSEL, 'Timer', VanadielUniqueDay() + 1)
                     end
                 end,
 
@@ -133,8 +133,8 @@ quest.sections =
                     if quest:complete(player) then
                         player:delKeyItem(xi.ki.SEALED_IMMORTAL_ENVELOPE)
 
-                        xi.quest.setVar(player, xi.questLog.AHT_URHGAN, xi.quest.id.ahtUrhgan.AN_EMPTY_VESSEL, 'Timer', VanadielUniqueDay() + 1)
-                        xi.quest.setMustZone(player, xi.questLog.AHT_URHGAN, xi.quest.id.ahtUrhgan.TRANSFORMATIONS)
+                        xi.quest.setVar(player, xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.AN_EMPTY_VESSEL, 'Timer', VanadielUniqueDay() + 1)
+                        xi.quest.setMustZone(player, xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.TRANSFORMATIONS)
                     end
                 end,
             },

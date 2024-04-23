@@ -6,7 +6,7 @@
 local tahrongiID = zones[xi.zone.TAHRONGI_CANYON]
 -----------------------------------
 
-local quest = Quest:new(xi.questLog.ABYSSEA, xi.quest.id.abyssea.MEGADRILE_MENACE)
+local quest = Quest:new(xi.quest.log_id.ABYSSEA, xi.quest.id.abyssea.MEGADRILE_MENACE)
 
 quest.reward = { }
 
@@ -16,7 +16,7 @@ quest.sections =
         check = function(player, status, vars)
             return status == xi.questStatus.QUEST_AVAILABLE and
                 xi.abyssea.getHeldTraverserStones(player) >= 1 and
-                player:getQuestStatus(xi.questLog.ABYSSEA, xi.quest.id.abyssea.DAWN_OF_DEATH) >= xi.questStatus.QUEST_ACCEPTED
+                player:getQuestStatus(xi.quest.log_id.ABYSSEA, xi.quest.id.abyssea.DAWN_OF_DEATH) >= xi.questStatus.QUEST_ACCEPTED
         end,
 
         [xi.zone.LA_THEINE_PLATEAU] =

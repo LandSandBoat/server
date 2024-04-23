@@ -7,12 +7,12 @@
 local ruludeID = zones[xi.zone.RULUDE_GARDENS]
 -----------------------------------
 
-local quest = Quest:new(xi.questLog.JEUNO, xi.quest.id.jeuno.BEYOND_INFINITY)
+local quest = Quest:new(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.BEYOND_INFINITY)
 
 quest.reward =
 {
     fame = 50,
-    fameArea = xi.fameArea.JEUNO,
+    fameArea = xi.quest.fame_area.JEUNO,
     title = xi.title.BUSHIN_ASPIRANT,
 }
 
@@ -47,7 +47,7 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == xi.questStatus.QUEST_AVAILABLE and
-                player:hasCompletedQuest(xi.questLog.JEUNO, xi.quest.id.jeuno.PRELUDE_TO_PUISSANCE)
+                player:hasCompletedQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.PRELUDE_TO_PUISSANCE)
         end,
 
         [xi.zone.RULUDE_GARDENS] =

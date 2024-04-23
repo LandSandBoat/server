@@ -9,13 +9,13 @@
 local crawlersID = zones[xi.zone.CRAWLERS_NEST]
 -----------------------------------
 
-local quest = Quest:new(xi.questLog.SANDORIA, xi.quest.id.sandoria.ENVELOPED_IN_DARKNESS)
+local quest = Quest:new(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.ENVELOPED_IN_DARKNESS)
 
 quest.reward =
 {
     item     = xi.item.WARLOCKS_BOOTS,
     fame     = 30,
-    fameArea = xi.fameArea.SANDORIA,
+    fameArea = xi.quest.fame_area.SANDORIA,
 }
 
 quest.sections =
@@ -24,9 +24,9 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == xi.questStatus.QUEST_AVAILABLE and
-                player:getQuestStatus(xi.questLog.SANDORIA, xi.quest.id.sandoria.THE_CRIMSON_TRIAL) == xi.questStatus.QUEST_COMPLETED and
+                player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_CRIMSON_TRIAL) == xi.questStatus.QUEST_COMPLETED and
                 player:getMainJob() == xi.job.RDM and
-                player:getMainLvl() >= xi.settings.main.AF2_QUEST_LEVEL
+                player:getMainLvl() >= 50
         end,
 
         [xi.zone.CHATEAU_DORAGUILLE] =

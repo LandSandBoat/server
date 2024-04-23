@@ -12,8 +12,8 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local catch = player:getQuestStatus(xi.questLog.WINDURST, xi.quest.id.windurst.CATCH_IT_IF_YOU_CAN)
-    local wonderWands = player:getQuestStatus(xi.questLog.WINDURST, xi.quest.id.windurst.WONDER_WANDS)
+    local catch = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CATCH_IT_IF_YOU_CAN)
+    local wonderWands = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.WONDER_WANDS)
 
     if wonderWands == xi.questStatus.QUEST_ACCEPTED then
         player:startEvent(258, 0, 17053)
@@ -64,7 +64,7 @@ end
 
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 231 then
-        player:addQuest(xi.questLog.WINDURST, xi.quest.id.windurst.CATCH_IT_IF_YOU_CAN)
+        player:addQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CATCH_IT_IF_YOU_CAN)
     elseif csid == 246 and option == 0 then
         player:needToZone(true)
         if player:hasStatusEffect(xi.effect.MUTE) then
@@ -80,11 +80,11 @@ entity.onEventFinish = function(player, csid, option, npc)
 
         player:setCharVar('QuestCatchItIfYouCan_var', 0)
 
-        if player:getQuestStatus(xi.questLog.WINDURST, xi.quest.id.windurst.CATCH_IT_IF_YOU_CAN) == xi.questStatus.QUEST_ACCEPTED then
-            player:completeQuest(xi.questLog.WINDURST, xi.quest.id.windurst.CATCH_IT_IF_YOU_CAN)
-            player:addFame(xi.fameArea.WINDURST, 75)
+        if player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CATCH_IT_IF_YOU_CAN) == xi.questStatus.QUEST_ACCEPTED then
+            player:completeQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CATCH_IT_IF_YOU_CAN)
+            player:addFame(xi.quest.fame_area.WINDURST, 75)
         else
-            player:addFame(xi.fameArea.WINDURST, 8)
+            player:addFame(xi.quest.fame_area.WINDURST, 8)
         end
     end
 end

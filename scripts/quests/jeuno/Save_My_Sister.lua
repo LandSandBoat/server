@@ -13,7 +13,7 @@
 local eldiemeID = zones[xi.zone.THE_ELDIEME_NECROPOLIS]
 -----------------------------------
 
-local quest = Quest:new(xi.questLog.JEUNO, xi.quest.id.jeuno.SAVE_MY_SISTER)
+local quest = Quest:new(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.SAVE_MY_SISTER)
 
 quest.reward =
 {
@@ -36,8 +36,8 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == xi.questStatus.QUEST_AVAILABLE and
-                player:hasCompletedQuest(xi.questLog.JEUNO, xi.quest.id.jeuno.CREST_OF_DAVOI) and
-                player:getFameLevel(xi.fameArea.JEUNO) >= 4
+                player:hasCompletedQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.CREST_OF_DAVOI) and
+                player:getFameLevel(xi.quest.fame_area.JEUNO) >= 4
         end,
 
         [xi.zone.UPPER_JEUNO] =

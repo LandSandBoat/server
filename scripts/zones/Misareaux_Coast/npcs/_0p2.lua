@@ -17,7 +17,7 @@ entity.onTrigger = function(player, npc)
 
     -- Bahamut Battle (requires COP to be completed)
     if
-        player:getQuestStatus(xi.questLog.JEUNO, xi.quest.id.jeuno.STORMS_OF_FATE) == xi.questStatus.QUEST_ACCEPTED and
+        player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.STORMS_OF_FATE) == xi.questStatus.QUEST_ACCEPTED and
         player:getCharVar('StormsOfFate') == 0
     then
         player:startEvent(559)

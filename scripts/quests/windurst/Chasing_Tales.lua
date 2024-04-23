@@ -9,12 +9,12 @@
 -- TODO: This quest could be simplified with expanded use of Prog questVar.
 -----------------------------------
 
-local quest = Quest:new(xi.questLog.WINDURST, xi.quest.id.windurst.CHASING_TALES)
+local quest = Quest:new(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CHASING_TALES)
 
 quest.reward =
 {
     fame = 120,
-    fameArea = xi.fameArea.WINDURST,
+    fameArea = xi.quest.fame_area.WINDURST,
     gil = 2800,
     title = xi.title.SAVIOR_OF_KNOWLEDGE,
 }
@@ -24,8 +24,8 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == xi.questStatus.QUEST_AVAILABLE and
-                player:hasCompletedQuest(xi.questLog.WINDURST, xi.quest.id.windurst.EARLY_BIRD_CATCHES_THE_BOOKWORM) and
-                player:getFameLevel(xi.fameArea.WINDURST) >= 3 and
+                player:hasCompletedQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.EARLY_BIRD_CATCHES_THE_BOOKWORM) and
+                player:getFameLevel(xi.quest.fame_area.WINDURST) >= 3 and
                 not quest:getMustZone(player)
         end,
 

@@ -9,12 +9,12 @@
 local palboroughMinesID = zones[xi.zone.PALBOROUGH_MINES]
 -----------------------------------
 
-local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.THE_TALEKEEPERS_TRUTH)
+local quest = Quest:new(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_TALEKEEPERS_TRUTH)
 
 quest.reward =
 {
     fame     = 40,
-    fameArea = xi.fameArea.BASTOK,
+    fameArea = xi.quest.fame_area.BASTOK,
     item     = xi.item.FIGHTERS_CALLIGAE,
 }
 
@@ -23,9 +23,9 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == xi.questStatus.QUEST_AVAILABLE and
-                player:hasCompletedQuest(xi.questLog.BASTOK, xi.quest.id.bastok.THE_DOORMAN) and
+                player:hasCompletedQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_DOORMAN) and
                 player:getMainJob() == xi.job.WAR and
-                player:getMainLvl() >= xi.settings.main.AF2_QUEST_LEVEL
+                player:getMainLvl() >= 50
         end,
 
         [xi.zone.BASTOK_MINES] =
@@ -122,8 +122,8 @@ quest.sections =
 
                 [165] = function(player, csid, option, npc)
                     if quest:complete(player) then
-                        xi.quest.setVar(player, xi.questLog.BASTOK, xi.quest.id.bastok.THE_TALEKEEPERS_GIFT, 'Timer', VanadielUniqueDay() + 1)
-                        xi.quest.setMustZone(player, xi.questLog.BASTOK, xi.quest.id.bastok.THE_TALEKEEPERS_GIFT)
+                        xi.quest.setVar(player, xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_TALEKEEPERS_GIFT, 'Timer', VanadielUniqueDay() + 1)
+                        xi.quest.setMustZone(player, xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_TALEKEEPERS_GIFT)
                     end
                 end,
             },

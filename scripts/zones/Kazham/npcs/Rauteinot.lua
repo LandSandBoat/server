@@ -19,12 +19,12 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local missionaryMan = player:getQuestStatus(xi.questLog.OUTLANDS, xi.quest.id.outlands.MISSIONARY_MAN)
+    local missionaryMan = player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.MISSIONARY_MAN)
     local missionaryManVar = player:getCharVar('MissionaryManVar')
 
     if
         missionaryMan == xi.questStatus.QUEST_AVAILABLE and
-        player:getFameLevel(xi.fameArea.WINDURST) >= 3
+        player:getFameLevel(xi.quest.fame_area.WINDURST) >= 3
     then
         player:startEvent(137, 0, xi.item.SLAB_OF_ELSHIMO_MARBLE) -- Start quest "Missionary Man"
     elseif missionaryMan == xi.questStatus.QUEST_ACCEPTED and missionaryManVar == 1 then
@@ -48,7 +48,7 @@ end
 
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 137 and option == 1 then
-        player:addQuest(xi.questLog.OUTLANDS, xi.quest.id.outlands.MISSIONARY_MAN)
+        player:addQuest(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.MISSIONARY_MAN)
         player:setCharVar('MissionaryManVar', 1)
     elseif csid == 139 then
         player:setCharVar('MissionaryManVar', 2)
@@ -63,8 +63,8 @@ entity.onEventFinish = function(player, csid, option, npc)
             player:delKeyItem(xi.ki.SUBLIME_STATUE_OF_THE_GODDESS)
             player:addItem(xi.item.SCROLL_OF_TELEPORT_YHOAT)
             player:messageSpecial(ID.text.ITEM_OBTAINED, xi.item.SCROLL_OF_TELEPORT_YHOAT)
-            player:addFame(xi.fameArea.WINDURST, 30)
-            player:completeQuest(xi.questLog.OUTLANDS, xi.quest.id.outlands.MISSIONARY_MAN)
+            player:addFame(xi.quest.fame_area.WINDURST, 30)
+            player:completeQuest(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.MISSIONARY_MAN)
         end
     end
 end

@@ -7,12 +7,12 @@
 -----------------------------------
 local yhoatorID = zones[xi.zone.YHOATOR_JUNGLE]
 
-local quest = Quest:new(xi.questLog.OUTLANDS, xi.quest.id.outlands.STOP_YOUR_WHINING)
+local quest = Quest:new(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.STOP_YOUR_WHINING)
 
 quest.reward =
 {
     item = xi.item.SCROLL_OF_HOJO_ICHI,
-    fameArea = xi.fameArea.NORG,
+    fameArea = xi.quest.fame_area.NORG,
     fame = 75,
     title = xi.title.APPRENTICE_SOMMELIER,
 }
@@ -22,7 +22,7 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == xi.questStatus.QUEST_AVAILABLE and
-                player:getFameLevel(xi.fameArea.NORG) >= 4 and
+                player:getFameLevel(xi.quest.fame_area.NORG) >= 4 and
                 player:getMainLvl() >= 10
         end,
 

@@ -6,12 +6,12 @@
 -- Nightflowers                  : !pos -264.775 -3.718 28.767 126
 -----------------------------------
 
-local quest = Quest:new(xi.questLog.JEUNO, xi.quest.id.jeuno.SAVE_MY_SON)
+local quest = Quest:new(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.SAVE_MY_SON)
 
 quest.reward =
 {
     fame     = 30,
-    fameArea = xi.fameArea.JEUNO,
+    fameArea = xi.quest.fame_area.JEUNO,
     gil      = 2100,
     item     = xi.item.BEAST_WHISTLE,
     title    = xi.title.LIFE_SAVER,
@@ -22,7 +22,7 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == xi.questStatus.QUEST_AVAILABLE and
-                player:hasCompletedQuest(xi.questLog.JEUNO, xi.quest.id.jeuno.CHOCOBOS_WOUNDS) and
+                player:hasCompletedQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.CHOCOBOS_WOUNDS) and
                 player:getMainLvl() >= xi.settings.main.ADVANCED_JOB_LEVEL
         end,
 
@@ -128,7 +128,7 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == xi.questStatus.QUEST_COMPLETED and
-                not player:hasCompletedQuest(xi.questLog.JEUNO, xi.quest.id.jeuno.PATH_OF_THE_BEASTMASTER)
+                not player:hasCompletedQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.PATH_OF_THE_BEASTMASTER)
         end,
 
         [xi.zone.UPPER_JEUNO] =

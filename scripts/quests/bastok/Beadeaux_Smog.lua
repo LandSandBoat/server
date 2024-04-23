@@ -6,12 +6,12 @@
 -- qm1 (for KI) : !pos -58.873 1.026 -116.665 147
 -----------------------------------
 
-local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.BEADEAUX_SMOG)
+local quest = Quest:new(xi.quest.log_id.BASTOK, xi.quest.id.bastok.BEADEAUX_SMOG)
 
 quest.reward =
 {
     fame = 30,
-    fameArea = xi.fameArea.BASTOK,
+    fameArea = xi.quest.fame_area.BASTOK,
     title = xi.title.BEADEAUX_SURVEYOR,
 }
 
@@ -20,7 +20,7 @@ quest.sections =
     -- Section: Quest available
     {
         check = function(player, status, vars)
-            return status == xi.questStatus.QUEST_AVAILABLE and player:getFameLevel(xi.fameArea.BASTOK) >= 4
+            return status == xi.questStatus.QUEST_AVAILABLE and player:getFameLevel(xi.quest.fame_area.BASTOK) >= 4
         end,
 
         [xi.zone.METALWORKS] =

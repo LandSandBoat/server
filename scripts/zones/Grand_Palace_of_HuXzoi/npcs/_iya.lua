@@ -17,7 +17,7 @@ entity.onTrigger = function(player, npc)
     then
         player:startEvent(1)
     elseif
-        player:getQuestStatus(xi.questLog.JEUNO, xi.quest.id.jeuno.APOCALYPSE_NIGH) == xi.questStatus.QUEST_ACCEPTED and
+        player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.APOCALYPSE_NIGH) == xi.questStatus.QUEST_ACCEPTED and
         player:getCharVar('ApocalypseNigh') == 2
     then
         player:startEvent(4)

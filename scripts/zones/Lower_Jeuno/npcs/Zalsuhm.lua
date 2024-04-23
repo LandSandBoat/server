@@ -13,7 +13,7 @@ end
 entity.onTrade = function(player, npc, trade)
     for i, wepId in pairs(xi.equipment.baseNyzulWeapons) do
         if npcUtil.tradeHasExactly(trade, wepId) then
-            local unlockingAMyth = player:getQuestStatus(xi.questLog.JEUNO, getQuestId(i))
+            local unlockingAMyth = player:getQuestStatus(xi.quest.log_id.JEUNO, getQuestId(i))
             if unlockingAMyth == xi.questStatus.QUEST_ACCEPTED then
                 local wsPoints = trade:getItem(0):getWeaponskillPoints()
                 if wsPoints <= 49 then
@@ -34,7 +34,7 @@ end
 
 entity.onTrigger = function(player, npc)
     local mainJobId         = player:getMainJob()
-    local unlockingAMyth    = player:getQuestStatus(xi.questLog.JEUNO, getQuestId(mainJobId))
+    local unlockingAMyth    = player:getQuestStatus(xi.quest.log_id.JEUNO, getQuestId(mainJobId))
     local nyzulWeaponMain   = xi.equip.isBaseNyzulWeapon(player:getEquipID(xi.slot.MAIN))
     local nyzulWeaponRanged = xi.equip.isBaseNyzulWeapon(player:getEquipID(xi.slot.RANGED))
 
@@ -69,7 +69,7 @@ entity.onEventFinish = function(player, csid, option, npc)
             player:setCharVar('Upset_Zalsuhm', 1)
             player:needToZone(true)
         elseif option <= xi.job.SCH then
-            player:addQuest(xi.questLog.JEUNO, questId)
+            player:addQuest(xi.quest.log_id.JEUNO, questId)
         end
     elseif csid == 10088 and option <= xi.job.SCH then
         local jobs =
@@ -97,7 +97,7 @@ entity.onEventFinish = function(player, csid, option, npc)
         }
         local skill = jobs[option]
 
-        player:completeQuest(xi.questLog.JEUNO, questId)
+        player:completeQuest(xi.quest.log_id.JEUNO, questId)
         player:messageSpecial(ID.text.MYTHIC_LEARNED, player:getMainJob())
         player:addLearnedWeaponskill(skill)
     end

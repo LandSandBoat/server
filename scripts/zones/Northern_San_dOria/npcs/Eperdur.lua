@@ -12,12 +12,12 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local healingTheLand = player:getQuestStatus(xi.questLog.SANDORIA, xi.quest.id.sandoria.HEALING_THE_LAND)
-    local sorceryOfTheNorth = player:getQuestStatus(xi.questLog.SANDORIA, xi.quest.id.sandoria.SORCERY_OF_THE_NORTH)
+    local healingTheLand = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.HEALING_THE_LAND)
+    local sorceryOfTheNorth = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.SORCERY_OF_THE_NORTH)
 
     if
         healingTheLand == xi.questStatus.QUEST_AVAILABLE and
-        player:getFameLevel(xi.fameArea.SANDORIA) >= 4 and
+        player:getFameLevel(xi.quest.fame_area.SANDORIA) >= 4 and
         player:getMainLvl() >= 10
     then
         player:startEvent(681) -- Start quest "Healing the Land"
@@ -61,7 +61,7 @@ end
 
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 681 and option == 0 then
-        player:addQuest(xi.questLog.SANDORIA, xi.quest.id.sandoria.HEALING_THE_LAND)
+        player:addQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.HEALING_THE_LAND)
         player:addKeyItem(xi.ki.SEAL_OF_BANISHING)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.SEAL_OF_BANISHING)
     elseif csid == 683 then
@@ -72,11 +72,11 @@ entity.onEventFinish = function(player, csid, option, npc)
             player:addItem(xi.item.SCROLL_OF_TELEPORT_HOLLA)
             player:messageSpecial(ID.text.ITEM_OBTAINED, xi.item.SCROLL_OF_TELEPORT_HOLLA) -- Scroll of Teleport-Holla
             player:needToZone(true)
-            player:addFame(xi.fameArea.SANDORIA, 30)
-            player:completeQuest(xi.questLog.SANDORIA, xi.quest.id.sandoria.HEALING_THE_LAND)
+            player:addFame(xi.quest.fame_area.SANDORIA, 30)
+            player:completeQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.HEALING_THE_LAND)
         end
     elseif csid == 685 and option == 0 then
-        player:addQuest(xi.questLog.SANDORIA, xi.quest.id.sandoria.SORCERY_OF_THE_NORTH)
+        player:addQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.SORCERY_OF_THE_NORTH)
     elseif csid == 687 then
         if player:getFreeSlotsCount() == 0 then
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.item.SCROLL_OF_TELEPORT_VAHZL)
@@ -84,8 +84,8 @@ entity.onEventFinish = function(player, csid, option, npc)
             player:delKeyItem(xi.ki.FEIYIN_MAGIC_TOME)
             player:addItem(xi.item.SCROLL_OF_TELEPORT_VAHZL)
             player:messageSpecial(ID.text.ITEM_OBTAINED, xi.item.SCROLL_OF_TELEPORT_VAHZL) -- Scroll of Teleport-Vahzl
-            player:addFame(xi.fameArea.SANDORIA, 30)
-            player:completeQuest(xi.questLog.SANDORIA, xi.quest.id.sandoria.SORCERY_OF_THE_NORTH)
+            player:addFame(xi.quest.fame_area.SANDORIA, 30)
+            player:completeQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.SORCERY_OF_THE_NORTH)
         end
     end
 end

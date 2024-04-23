@@ -74,79 +74,79 @@ xi.battlefield.leaveCode =
 
 xi.battlefield.id =
 {
-    RANK_2_MISSION_1                           = 0,   -- Converted
-    TAILS_OF_WOE                               = 1,   -- Converted
-    DISMEMBERMENT_BRIGADE                      = 2,   -- Converted
-    THE_SECRET_WEAPON                          = 3,   -- Converted
-    HOSTILE_HERBIVORES                         = 4,   -- Converted
-    SHATTERING_STARS_WAR                       = 5,   -- Converted
-    SHATTERING_STARS_BLM                       = 6,   -- Converted
-    SHATTERING_STARS_RNG                       = 7,   -- Converted
-    CARAPACE_COMBATANTS                        = 8,   -- Converted
-    SHOOTING_FISH                              = 9,   -- Experimental
-    DROPPING_LIKE_FLIES                        = 10,  -- Converted
-    HORNS_OF_WAR                               = 11,  -- Experimental
-    UNDER_OBSERVATION                          = 12,  -- Converted
-    EYE_OF_THE_TIGER                           = 13,  -- Converted
-    SHOTS_IN_THE_DARK                          = 14,  -- Experimental
-    DOUBLE_DRAGONIAN                           = 15,  -- Converted
+    RANK_2_MISSION_1                           = 0,
+    TAILS_OF_WOE                               = 1,
+    DISMEMBERMENT_BRIGADE                      = 2,
+    THE_SECRET_WEAPON                          = 3,
+    HOSTILE_HERBIVORES                         = 4,
+    SHATTERING_STARS_WAR                       = 5,
+    SHATTERING_STARS_BLM                       = 6,
+    SHATTERING_STARS_RNG                       = 7,
+    CARAPACE_COMBATANTS                        = 8,
+    SHOOTING_FISH                              = 9,
+    DROPPING_LIKE_FLIES                        = 10,
+    HORNS_OF_WAR                               = 11,
+    UNDER_OBSERVATION                          = 12,
+    EYE_OF_THE_TIGER                           = 13,
+    SHOTS_IN_THE_DARK                          = 14,
+    DOUBLE_DRAGONIAN                           = 15,
     TODAYS_HOROSCOPE                           = 16,
-    CONTAMINATED_COLOSSEUM                     = 17,  -- Converted
+    CONTAMINATED_COLOSSEUM                     = 17,
     KINDERGARTEN_CAP                           = 18,
     LAST_ORC_SHUNNED_HERO                      = 19,
-    BEYOND_INFINITY_HORLAIS_PEAK               = 20,  -- Converted
+    BEYOND_INFINITY_HORLAIS_PEAK               = 20,
     SAVE_THE_CHILDREN                          = 32,
     HOLY_CREST                                 = 33,
     WINGS_OF_FURY                              = 34,
     PETRIFYING_PAIR                            = 35,
     TOADAL_RECALL                              = 36,
     MIRROR_MIRROR                              = 37,
-    RANK_2_MISSION_2                           = 64,  -- Converted
-    WORMS_TURN                                 = 65,  -- Converted
-    GRIMSHELL_SHOCKTROOPERS                    = 66,  -- Converted
-    ON_MY_WAY                                  = 67,  -- Converted
-    THIEF_IN_NORG                              = 68,  -- Converted
-    THREE_TWO_ONE                              = 69,  -- Converted
-    SHATTERING_STARS_RDM                       = 70,  -- Converted
-    SHATTERING_STARS_THF                       = 71,  -- Converted
-    SHATTERING_STARS_BST                       = 72,  -- Converted
-    BIRDS_OF_A_FEATHER                         = 73,  -- Converted
-    CRUSTACEAN_CONUNDRUM                       = 74,  -- Experimental
-    GROVE_GUARDIANS                            = 75,  -- Converted
-    HILLS_ARE_ALIVE                            = 76,  -- Experimental
-    ROYAL_JELLY                                = 77,  -- Converted
-    FINAL_BOUT                                 = 78,  -- Experimental
-    UP_IN_ARMS                                 = 79,  -- Converted
+    RANK_2_MISSION_2                           = 64,
+    WORMS_TURN                                 = 65,
+    GRIMSHELL_SHOCKTROOPERS                    = 66,
+    ON_MY_WAY                                  = 67,
+    THIEF_IN_NORG                              = 68,
+    THREE_TWO_ONE                              = 69,
+    SHATTERING_STARS_RDM                       = 70,
+    SHATTERING_STARS_THF                       = 71,
+    SHATTERING_STARS_BST                       = 72,
+    BIRDS_OF_A_FEATHER                         = 73,
+    CRUSTACEAN_CONUNDRUM                       = 74,
+    GROVE_GUARDIANS                            = 75,
+    HILLS_ARE_ALIVE                            = 76,
+    ROYAL_JELLY                                = 77,
+    FINAL_BOUT                                 = 78,
+    UP_IN_ARMS                                 = 79,
     COPYCAT                                    = 80,
-    OPERATION_DESERT_SWARM                     = 81,  -- Experimental
-    PREHISTORIC_PIGEONS                        = 82,  -- Experimental
+    OPERATION_DESERT_SWARM                     = 81,
+    PREHISTORIC_PIGEONS                        = 82,
     PALBOROUGH_PROJECT                         = 83,
     SHELL_SHOCKED                              = 84,
-    BEYOND_INFINITY_WAUGHROON_SHRINE           = 85,  -- Converted
-    RANK_2_MISSION                             = 96,  -- Converted
-    STEAMED_SPROUTS                            = 97,  -- Converted
-    DIVINE_PUNISHERS                           = 98,  -- Converted
-    SAINTLY_INVITATION                         = 99,  -- Converted
-    TREASURE_AND_TRIBULATIONS                  = 100, -- Converted
-    SHATTERING_STARS_MNK                       = 101, -- Converted
-    SHATTERING_STARS_WHM                       = 102, -- Converted
-    SHATTERING_STARS_SMN                       = 103, -- Converted
-    CREEPING_DOOM                              = 104, -- Converted
-    CHARMING_TRIO                              = 105, -- Converted
-    HAREM_SCAREM                               = 106, -- Converted
-    EARLY_BIRD_CATCHES_THE_WYRM                = 107, -- Experimental
-    ROYAL_SUCCESSION                           = 108, -- Converted
-    RAPID_RAPTORS                              = 109, -- Converted
-    WILD_WILD_WHISKERS                         = 110, -- Converted
+    BEYOND_INFINITY_WAUGHROON_SHRINE           = 85,
+    RANK_2_MISSION                             = 96,
+    STEAMED_SPROUTS                            = 97,
+    DIVINE_PUNISHERS                           = 98,
+    SAINTLY_INVITATION                         = 99,
+    TREASURE_AND_TRIBULATIONS                  = 100,
+    SHATTERING_STARS_MNK                       = 101,
+    SHATTERING_STARS_WHM                       = 102,
+    SHATTERING_STARS_SMN                       = 103,
+    CREEPING_DOOM                              = 104,
+    CHARMING_TRIO                              = 105,
+    HAREM_SCAREM                               = 106,
+    EARLY_BIRD_CATCHES_THE_WYRM                = 107,
+    ROYAL_SUCCESSION                           = 108,
+    RAPID_RAPTORS                              = 109,
+    WILD_WILD_WHISKERS                         = 110,
     SEASONS_GREETINGS                          = 111,
     ROYALE_RAMBLE                              = 112,
     MOA_CONSTRICTORS                           = 113,
     V_FORMATION                                = 114,
     AVIAN_APOSTATES                            = 115,
-    BEYOND_INFINITY_BALGAS_DAIS                = 116, -- Converted
-    TEMPLE_OF_UGGALEPIH                        = 128, -- Converted
-    JUNGLE_BOOGYMEN                            = 129, -- Converted
-    AMPHIBIAN_ASSAULT                          = 130, -- Converted
+    BEYOND_INFINITY_BALGAS_DAIS                = 116,
+    TEMPLE_OF_UGGALEPIH                        = 128,
+    JUNGLE_BOOGYMEN                            = 129,
+    AMPHIBIAN_ASSAULT                          = 130,
     PROJECT_SHANTOTTOFICATION                  = 131,
     WHOM_WILT_THOU_CALL                        = 132,
     SHADOW_LORD_BATTLE                         = 160,
@@ -154,13 +154,13 @@ xi.battlefield.id =
     KINDRED_SPIRITS                            = 162,
     SURVIVAL_OF_THE_WISEST                     = 163,
     SMASH_A_MALEVOLENT_MENACE                  = 164,
-    THROUGH_THE_QUICKSAND_CAVES                = 192, -- Converted
-    LEGION_XI_COMITATENSIS                     = 193, -- Converted
-    SHATTERING_STARS_SAM                       = 194, -- Converted
-    SHATTERING_STARS_NIN                       = 195, -- Converted
-    SHATTERING_STARS_DRG                       = 196, -- Converted
+    THROUGH_THE_QUICKSAND_CAVES                = 192,
+    LEGION_XI_COMITATENSIS                     = 193,
+    SHATTERING_STARS_SAM                       = 194,
+    SHATTERING_STARS_NIN                       = 195,
+    SHATTERING_STARS_DRG                       = 196,
     CACTUAR_SUAVE                              = 197,
-    EYE_OF_THE_STORM                           = 198, -- Converted
+    EYE_OF_THE_STORM                           = 198,
     SCARLET_KING                               = 199,
     CAT_BURGLAR_BARES_FANGS                    = 200,
     DRAGON_SCALES                              = 201,
@@ -175,67 +175,67 @@ xi.battlefield.id =
     HEROINES_COMBAT                            = 260,
     MERCENARY_CAMP                             = 261,
     ODE_OF_LIFE_BESTOWING                      = 262,
-    ARK_ANGELS_1                               = 288, -- Converted
-    ARK_ANGELS_2                               = 289, -- Converted
-    ARK_ANGELS_3                               = 290, -- Converted
-    ARK_ANGELS_4                               = 291, -- Converted
-    ARK_ANGELS_5                               = 292, -- Converted
-    DIVINE_MIGHT                               = 293, -- Converted
-    CELESTIAL_NEXUS                            = 320, -- Converted
+    ARK_ANGELS_1                               = 288,
+    ARK_ANGELS_2                               = 289,
+    ARK_ANGELS_3                               = 290,
+    ARK_ANGELS_4                               = 291,
+    ARK_ANGELS_5                               = 292,
+    DIVINE_MIGHT                               = 293,
+    CELESTIAL_NEXUS                            = 320,
     FIAT_LUX                                   = 352,
     DARKNESS_DESCENDS                          = 353,
     BONDS_OF_MYTHRIL                           = 354,
     MAIDEN_OF_THE_DUSK                         = 385,
-    TRIAL_BY_WIND                              = 416, -- Converted
-    CARBUNCLE_DEBACLE_CLOISTER_OF_GALES        = 417, -- Converted
-    TRIAL_SIZE_TRIAL_BY_WIND                   = 418, -- Converted
+    TRIAL_BY_WIND                              = 416,
+    CARBUNCLE_DEBACLE_CLOISTER_OF_GALES        = 417,
+    TRIAL_SIZE_TRIAL_BY_WIND                   = 418,
     WAKING_THE_BEAST_CLOISTER_OF_GALES         = 419,
-    SUGAR_COATED_DIRECTIVE_CLOISTER_OF_GALES   = 420, -- Converted
-    TRIAL_BY_LIGHTNING                         = 448, -- Converted
-    CARBUNCLE_DEBACLE_CLOISTER_OF_STORMS       = 449, -- Converted
-    TRIAL_SIZE_TRIAL_BY_LIGHTNING              = 450, -- Converted
+    SUGAR_COATED_DIRECTIVE_CLOISTER_OF_GALES   = 420,
+    TRIAL_BY_LIGHTNING                         = 448,
+    CARBUNCLE_DEBACLE_CLOISTER_OF_STORMS       = 449,
+    TRIAL_SIZE_TRIAL_BY_LIGHTNING              = 450,
     WAKING_THE_BEAST_CLOISTER_OF_STORMS        = 451,
-    SUGAR_COATED_DIRECTIVE_CLOISTER_OF_STORMS  = 452, -- Converted
-    TRIAL_BY_ICE                               = 480, -- Converted
-    CLASS_REUNION                              = 481, -- Converted
-    TRIAL_SIZE_TRIAL_BY_ICE                    = 482, -- Converted
+    SUGAR_COATED_DIRECTIVE_CLOISTER_OF_STORMS  = 452,
+    TRIAL_BY_ICE                               = 480,
+    CLASS_REUNION                              = 481,
+    TRIAL_SIZE_TRIAL_BY_ICE                    = 482,
     WAKING_THE_BEAST_CLOISTER_OF_FROST         = 483,
-    SUGAR_COATED_DIRECTIVE_CLOISTER_OF_FROST   = 484, -- Converted
-    RANK_5_MISSION                             = 512, -- Converted
+    SUGAR_COATED_DIRECTIVE_CLOISTER_OF_FROST   = 484,
+    RANK_5_MISSION                             = 512,
     COME_INTO_MY_PARLOR                        = 513,
     E_VASE_IVE_ACTION                          = 514,
     INFERNAL_SWARM                             = 515,
-    HEIR_TO_THE_LIGHT                          = 516, -- Converted
-    SHATTERING_STARS_PLD                       = 517, -- Converted
-    SHATTERING_STARS_DRK                       = 518, -- Converted
-    SHATTERING_STARS_BRD                       = 519, -- Converted
-    DEMOLITION_SQUAD                           = 520, -- Converted
-    DIE_BY_THE_SWORD                           = 521, -- Converted
-    LET_SLEEPING_DOGS_DIE                      = 522, -- Converted
-    BROTHERS_D_AURPHE                          = 523, -- Converted
-    UNDYING_PROMISE                            = 524, -- Converted
-    FACTORY_REJECTS                            = 525, -- Converted
-    IDOL_THOUGHTS                              = 526, -- Converted
-    AWFUL_AUTOPSY                              = 527, -- Converted
-    CELERY                                     = 528, -- Experimental
+    HEIR_TO_THE_LIGHT                          = 516,
+    SHATTERING_STARS_PLD                       = 517,
+    SHATTERING_STARS_DRK                       = 518,
+    SHATTERING_STARS_BRD                       = 519,
+    DEMOLITION_SQUAD                           = 520,
+    DIE_BY_THE_SWORD                           = 521,
+    LET_SLEEPING_DOGS_DIE                      = 522,
+    BROTHERS_D_AURPHE                          = 523,
+    UNDYING_PROMISE                            = 524,
+    FACTORY_REJECTS                            = 525,
+    IDOL_THOUGHTS                              = 526,
+    AWFUL_AUTOPSY                              = 527,
+    CELERY                                     = 528,
     MIRROR_IMAGES                              = 529,
     FURIOUS_FINALE                             = 530,
     CLASH_OF_THE_COMRADES                      = 531,
-    THOSE_WHO_LURK_IN_SHADOWS                  = 532, -- Experimental
-    BEYOND_INFINITY                            = 533, -- Converted
-    TRIAL_BY_FIRE                              = 544, -- Converted
-    TRIAL_SIZE_TRIAL_BY_FIRE                   = 545, -- Converted
+    THOSE_WHO_LURK_IN_SHADOWS                  = 532,
+    BEYOND_INFINITY                            = 533,
+    TRIAL_BY_FIRE                              = 544,
+    TRIAL_SIZE_TRIAL_BY_FIRE                   = 545,
     WAKING_THE_BEAST_CLOISTER_OF_FLAMES        = 546,
-    SUGAR_COATED_DIRECTIVE_CLOISTER_OF_FLAMES  = 547, -- Converted
-    TRIAL_BY_EARTH                             = 576, -- Converted
-    PUPPET_MASTER                              = 577, -- Converted
-    TRIAL_SIZE_TRIAL_BY_EARTH                  = 578, -- Converted
+    SUGAR_COATED_DIRECTIVE_CLOISTER_OF_FLAMES  = 547,
+    TRIAL_BY_EARTH                             = 576,
+    PUPPET_MASTER                              = 577,
+    TRIAL_SIZE_TRIAL_BY_EARTH                  = 578,
     WAKING_THE_BEAST_CLOISTER_OF_TREMORS       = 579,
-    SUGAR_COATED_DIRECTIVE_CLOISTER_OF_TREMORS = 580, -- Converted
-    TRIAL_BY_WATER                             = 608, -- Converted
-    TRIAL_SIZE_TRIAL_BY_WATER                  = 609, -- Converted
+    SUGAR_COATED_DIRECTIVE_CLOISTER_OF_TREMORS = 580,
+    TRIAL_BY_WATER                             = 608,
+    TRIAL_SIZE_TRIAL_BY_WATER                  = 609,
     WAKING_THE_BEAST_CLOISTER_OF_TIDES         = 610,
-    SUGAR_COATED_DIRECTIVE_CLOISTER_OF_TIDES   = 611, -- Converted
+    SUGAR_COATED_DIRECTIVE_CLOISTER_OF_TIDES   = 611,
     FLAMES_FOR_THE_DEAD                        = 640,
     FOLLOW_THE_WHITE_RABBIT                    = 641,
     WHEN_HELL_FREEZES_OVER                     = 642,
@@ -252,22 +252,22 @@ xi.battlefield.id =
     DARKNESS_NAMED                             = 704,
     TEST_YOUR_MITE                             = 705,
     WAKING_DREAMS                              = 706,
-    CENTURY_OF_HARDSHIP                        = 736, -- Converted
+    CENTURY_OF_HARDSHIP                        = 736,
     RETURN_TO_THE_DEPTHS                       = 737,
     BIONIC_BUG                                 = 738,
     PULLING_THE_STRINGS                        = 739,
     AUTOMATON_ASSAULT                          = 740,
     MOBLINE_COMEDY                             = 741,
-    ANCIENT_FLAMES_BECKON_SPIRE_OF_HOLLA       = 768, -- Converted
+    ANCIENT_FLAMES_BECKON_SPIRE_OF_HOLLA       = 768,
     SIMULANT                                   = 769,
     EMPTY_HOPES                                = 770,
-    ANCIENT_FLAMES_BECKON_SPIRE_OF_DEM         = 800, -- Converted
+    ANCIENT_FLAMES_BECKON_SPIRE_OF_DEM         = 800,
     YOU_ARE_WHAT_YOU_EAT                       = 801,
     EMPTY_DREAMS                               = 802,
-    ANCIENT_FLAMES_BECKON_SPIRE_OF_MEA         = 832, -- Converted
+    ANCIENT_FLAMES_BECKON_SPIRE_OF_MEA         = 832,
     PLAYING_HOST                               = 833,
     EMPTY_DESIRES                              = 834,
-    DESIRES_OF_EMPTINESS                       = 864, -- Converted
+    DESIRES_OF_EMPTINESS                       = 864,
     PULLING_THE_PLUG                           = 865,
     EMPTY_ASPIRATIONS                          = 866,
     STORMS_OF_FATE                             = 896,
@@ -302,24 +302,24 @@ xi.battlefield.id =
     MOMENT_OF_TRUTH                            = 1155,
     PUPPET_IN_PERIL                            = 1156,
     RIDER_COMETH                               = 1184,
-    NW_APOLLYON                                = 1290, -- Converted
-    SW_APOLLYON                                = 1291, -- Converted
-    NE_APOLLYON                                = 1292, -- Converted
-    SE_APOLLYON                                = 1293, -- Converted
-    CS_APOLLYON                                = 1294, -- Converted
-    CS_APOLLYON_II                             = 1295, -- Converted
-    CENTRAL_APOLLYON                           = 1296, -- Converted
-    CENTRAL_APOLLYON_II                        = 1297, -- Converted
-    TEMENOS_WESTERN_TOWER                      = 1298, -- Converted
-    TEMENOS_NORTHERN_TOWER                     = 1299, -- Converted
-    TEMENOS_EASTERN_TOWER                      = 1300, -- Converted
-    CENTRAL_TEMENOS_BASEMENT                   = 1301, -- Converted
-    CENTRAL_TEMENOS_BASEMENT_II                = 1302, -- Converted
-    CENTRAL_TEMENOS_1ST_FLOOR                  = 1303, -- Converted
-    CENTRAL_TEMENOS_2ND_FLOOR                  = 1304, -- Converted
-    CENTRAL_TEMENOS_3RD_FLOOR                  = 1305, -- Converted
-    CENTRAL_TEMENOS_4TH_FLOOR                  = 1306, -- Converted
-    CENTRAL_TEMENOS_4TH_FLOOR_II               = 1307, -- Converted
+    NW_APOLLYON                                = 1290,
+    SW_APOLLYON                                = 1291,
+    NE_APOLLYON                                = 1292,
+    SE_APOLLYON                                = 1293,
+    CS_APOLLYON                                = 1294,
+    CS_APOLLYON_II                             = 1295,
+    CENTRAL_APOLLYON                           = 1296,
+    CENTRAL_APOLLYON_II                        = 1297,
+    TEMENOS_WESTERN_TOWER                      = 1298,
+    TEMENOS_NORTHERN_TOWER                     = 1299,
+    TEMENOS_EASTERN_TOWER                      = 1300,
+    CENTRAL_TEMENOS_BASEMENT                   = 1301,
+    CENTRAL_TEMENOS_BASEMENT_II                = 1302,
+    CENTRAL_TEMENOS_1ST_FLOOR                  = 1303,
+    CENTRAL_TEMENOS_2ND_FLOOR                  = 1304,
+    CENTRAL_TEMENOS_3RD_FLOOR                  = 1305,
+    CENTRAL_TEMENOS_4TH_FLOOR                  = 1306,
+    CENTRAL_TEMENOS_4TH_FLOOR_II               = 1307,
     PURPLE_THE_NEW_BLACK                       = 2721,
 }
 
@@ -383,13 +383,7 @@ function Battlefield:new(data)
     obj.maxPlayers    = data.maxPlayers
     obj.timeLimit     = data.timeLimit
     obj.index         = data.index
-
-    if data.entryNpcs then
-        obj.entryNpcs = data.entryNpcs
-    elseif data.entryNpc then
-        obj.entryNpcs = { data.entryNpc }
-    end
-
+    obj.entryNpc      = data.entryNpc
     obj.area          = data.area
 
     if data.exitNpcs then
@@ -403,15 +397,12 @@ function Battlefield:new(data)
     obj.levelCap         = data.levelCap or 0
     obj.allowSubjob      = (data.allowSubjob == nil or data.allowSubjob) or false
     obj.hasWipeGrace     = (data.hasWipeGrace == nil or data.hasWipeGrace) or false
-    obj.isMission        = data.isMission and data.isMission or false
     obj.canLoseExp       = (data.canLoseExp == nil or data.canLoseExp) or false
     obj.showTimer        = (data.showTimer == nil or data.showTimer) or false
     obj.delayToExit      = data.delayToExit or 5
     obj.requiredItems    = data.requiredItems or {}
     obj.requiredKeyItems = data.requiredKeyItems or {}
     obj.lossEventParams  = data.lossEventParams or {}
-    obj.armouryCrates    = data.armouryCrates or false
-    obj.experimental     = data.experimental or false
 
     obj.sections = { { [obj.zoneId] = {} } }
     obj.groups   = {}
@@ -434,9 +425,9 @@ end
 
 function Battlefield:register()
     -- Only hookup the entry and exit listeners if there aren't any other battlefields already registered for that entrance
-    local setupEvents    = true
-    local setupEntryNpcs = true
-    local setupExitNpcs  = true
+    local setupEvents   = true
+    local setupEntryNpc = true
+    local setupExitNpcs = true
 
     if utils.hasKey(self.zoneId, xi.battlefield.contentsByZone) then
         local contents = xi.battlefield.contentsByZone[self.zoneId]
@@ -444,9 +435,9 @@ function Battlefield:register()
         for _, content in ipairs(contents) do
             -- Always setup listeners if we're reloading a battlefield
             if self.battlefieldId == content.battlefieldId and content.hasListeners then
-                setupEvents    = true
-                setupEntryNpcs = true
-                setupExitNpcs  = true
+                setupEvents   = true
+                setupEntryNpc = true
+                setupExitNpcs = true
 
                 break
             end
@@ -455,14 +446,8 @@ function Battlefield:register()
             setupEvents = false
 
             -- Do not setup npcs if there is another battlefield using the same entry npc
-            if self.entryNpcs then
-                for _, entryNpc in ipairs(self.entryNpcs) do
-                    if utils.contains(entryNpc, content.entryNpcs) then
-                        setupEntryNpcs = false
-
-                        break
-                    end
-                end
+            if self.entryNpc == content.entryNpc then
+                setupEntryNpc = false
             end
 
             -- If there is any overlap between the exit NPCs then we do not setup the exit NPCs
@@ -499,25 +484,22 @@ function Battlefield:register()
         self.hasListeners = true
     end
 
-    if setupEntryNpcs and self.entryNpcs then
-        for _, entryNpc in ipairs(self.entryNpcs) do
-            utils.append(zoneSection, {
-                [entryNpc] =
-                {
-                    onTrade   = Battlefield.onEntryTrade,
-                    onTrigger = Battlefield.onEntryTrigger,
-                }
-            })
-        end
+    if setupEntryNpc and self.entryNpc then
+        utils.append(zoneSection, {
+            [self.entryNpc] =
+            {
+                onTrade = Battlefield.onEntryTrade,
+                onTrigger = Battlefield.onEntryTrigger,
+            }
+        })
     end
 
     if setupExitNpcs and self.exitNpcs then
-        local exitTrigger = self.onExitTrigger and self.onExitTrigger or Battlefield.onExitTrigger
         for _, exitNpc in ipairs(self.exitNpcs) do
             utils.append(zoneSection, {
                 [exitNpc] =
                 {
-                    onTrigger = exitTrigger,
+                    onTrigger = Battlefield.onExitTrigger,
                 }
             })
         end
@@ -535,13 +517,7 @@ function Battlefield:register()
 end
 
 function Battlefield:isValidEntry(player, npc)
-    return utils.contains(npc:getName(), self.entryNpcs)
-end
-
--- Allow for Battlefield scripts to easily add additional requirements for entry by
--- redefining this function
-function Battlefield:entryRequirement(player, npc, isRegistrant, trade)
-    return true
+    return self.entryNpc == npc:getName()
 end
 
 function Battlefield:checkRequirements(player, npc, isRegistrant, trade)
@@ -586,9 +562,7 @@ function Battlefield:checkRequirements(player, npc, isRegistrant, trade)
         end
     end
 
-    -- Additional Requirements that may be necessary for battlefield entry
-    -- contained within the script itself, defaults to True
-    return self:entryRequirement(player, npc, isRegistrant, trade)
+    return true
 end
 
 function Battlefield:checkSkipCutscene(player)
@@ -653,9 +627,7 @@ function Battlefield.onEntryTrade(player, npc, trade, onUpdate)
             local totalUses = xi.battlefield.itemUses[itemId] or 1
 
             if player:getWornUses(itemId) >= totalUses then
-                if type(content.requiredItems.wornMessage) == 'table' then
-                    player:messageSpecial(unpack(content.requiredItems.wornMessage))
-                elseif totalUses > 1 then
+                if totalUses > 1 then
                     player:messageSpecial(content.requiredItems.wornMessage, itemId)
                 else
                     player:messageSpecial(content.requiredItems.wornMessage, 0, 0, 0, itemId)
@@ -668,7 +640,7 @@ function Battlefield.onEntryTrade(player, npc, trade, onUpdate)
 
     if not onUpdate then
         -- Open menu of valid battlefields
-        return Battlefield:event(32000, 0, 0, 0, options, 0, 0, 0, 0)
+        player:startEvent(32000, 0, 0, 0, options, 0, 0, 0, 0)
     end
 end
 
@@ -694,7 +666,9 @@ function Battlefield.onEntryTrigger(player, npc)
         end
 
         local options = utils.mask.setBit(0, content.index, true)
-        return Battlefield:event(32000, 0, 0, 0, options, 0, 0, 0, 0)
+        player:startEvent(32000, 0, 0, 0, options, 0, 0, 0, 0)
+
+        return
     end
 
     -- Player doesn't have battlefield status effect. That means player wants to register a new battlefield OR is attempting to enter a closed one.
@@ -711,8 +685,8 @@ function Battlefield.onEntryTrigger(player, npc)
     -- No one in party/alliance has battlefield status effect. We want to register a new battlefield.
     local options = xi.battlefield.getBattlefieldOptions(player, npc)
 
-    -- GMs get access to all BCNMs with visible GM
-    if player:getGMLevel() > 0 and player:getVisibleGMLevel() >= 3 then
+    -- GMs get access to all BCNMs (FLAG_GM = 0x04000000)
+    if player:getGMLevel() > 0 and player:checkNameFlags(0x04000000) then
         options = 268435455
     end
 
@@ -727,7 +701,7 @@ function Battlefield.onEntryTrigger(player, npc)
         return
     end
 
-    return Battlefield:event(32000, 0, 0, 0, options, 0, 0, 0, 0)
+    player:startEvent(32000, 0, 0, 0, options, 0, 0, 0, 0)
 end
 
 -- Static function to lookup the correct battlefield to handle this event update
@@ -798,10 +772,7 @@ function Battlefield:onEntryEventUpdate(player, csid, option, npc)
         local zone   = player:getZoneID()
 
         -- Handle traded items if not wearing them
-        if
-            self.requiredItems.wearMessage == nil and
-            #self.tradeItems > 0
-        then
+        if self.requiredItems.wearMessage == nil and #self.tradeItems > 0 then
             player:tradeComplete()
         end
 
@@ -862,7 +833,7 @@ end
 
 function Battlefield.onExitTrigger(player, npc)
     if player:getBattlefield() then
-        return Battlefield:progressCutscene(32003)
+        player:startOptionalCutscene(32003)
     end
 end
 
@@ -888,21 +859,12 @@ function Battlefield:onEventFinishBattlefield(player, csid, option, npc)
 end
 
 function Battlefield:onBattlefieldInitialise(battlefield)
-    if self.loot and #self.loot > 0 then
+    if #self.loot > 0 then
         battlefield:setLocalVar('loot', 1)
     end
 
     local hasMultipleAreas = not self.area
     battlefield:addGroups(self.groups, hasMultipleAreas)
-
-    -- NOTE: Experimental battlefields are at most partially implemented.  Increase mob levels
-    -- for temporary tuning.
-    if self.experimental then
-        local battlefieldMobs = battlefield:getMobs(true, true)
-        for _, mobObj in ipairs(battlefieldMobs) do
-            mobObj:setMobLevel(math.min(mobObj:getMainLvl() * 2, 255))
-        end
-    end
 
     for mobId, path in pairs(self.paths) do
         GetMobByID(mobId):pathThrough(path, xi.path.flag.PATROL)
@@ -1009,16 +971,8 @@ function Battlefield:onBattlefieldEnter(player, battlefield)
             end
         end
 
-        if type(self.requiredKeyItems.message) == 'table' then
-            player:messageSpecial(self.requiredKeyItems.message[1], unpack(self.requiredKeyItems.message[2]))
-        elseif self.requiredKeyItems.message then
+        if self.requiredKeyItems.message ~= 0 then
             player:messageSpecial(self.requiredKeyItems.message, unpack(items))
-        end
-
-        if not self.requiredKeyItems.keep and self.requiredKeyItems.deleteMessage then
-            for _, keyItemId in ipairs(items) do
-                player:messageSpecial(self.requiredKeyItems.deleteMessage, keyItemId)
-            end
         end
     end
 
@@ -1053,10 +1007,6 @@ function Battlefield:onBattlefieldEnter(player, battlefield)
     end
 
     player:messageSpecial(ID.text.TIME_LIMIT_FOR_THIS_BATTLE_IS, 0, 0, 0, math.floor(self.timeLimit / 60))
-
-    if self.experimental then
-        player:printToPlayer('This battlefield has been marked as experimental.  Enemy levels have increased!', xi.msg.channel.NS_SHOUT)
-    end
 end
 
 function Battlefield:onBattlefieldDestroy(battlefield)
@@ -1072,9 +1022,7 @@ end
 
 function Battlefield:onBattlefieldWin(player, battlefield)
     local _, clearTime, partySize = battlefield:getRecord()
-
-    player:setLocalVar('battlefieldWin', battlefield:getID())
-    player:startEvent(32001, battlefield:getArea(), clearTime, partySize, battlefield:getTimeInside(), player:getZoneID(), self.index, 0)
+    player:startEvent(32001, battlefield:getArea(), clearTime, partySize, battlefield:getTimeInside(), 1, self.index, 0)
 end
 
 function Battlefield:onBattlefieldLoss(player, battlefield)
@@ -1140,17 +1088,8 @@ end
 function Battlefield:handleAllMonstersDefeated(battlefield, mob)
     local crateId = battlefield:getArmouryCrate()
 
-    -- NOTE: Default to core returning us a value, but if that fails, use the fallback
-    -- definition if available.  This should only be used where mobIds table has to be
-    -- used instead of mobs!
-    if crateId == 0 and self.armouryCrates then
-        crateId = self.armouryCrates[battlefield:getArea()]
-    end
-
     if crateId ~= 0 then
         local crate = GetNPCByID(crateId)
-
-        battlefield:insertEntity(crate:getTargID(), false, true)
         npcUtil.showCrate(crate)
         crate:addListener('ON_TRIGGER', 'TRIGGER_CRATE', utils.bind(self.handleOpenArmouryCrate, self))
     else
@@ -1232,8 +1171,7 @@ function xi.battlefield.getBattlefieldOptions(player, npc, trade)
     for _, content in ipairs(contents) do
         if
             content:checkRequirements(player, npc, true, trade) and
-            not player:battlefieldAtCapacity(content.battlefieldId) and
-            (xi.settings.map.BCNM_ENABLE_EXPERIMENTAL or not content.experimental)
+            not player:battlefieldAtCapacity(content.battlefieldId)
         then
             result = utils.mask.setBit(result, content.index, true)
         end
@@ -1264,6 +1202,8 @@ BattlefieldMission.__eq    = function(m1, m2)
     return m1.name == m2.name
 end
 
+BattlefieldMission.isMission = true
+
 -- Creates a new Limbus Battlefield interaction
 -- Data takes the additional following keys:
 --  - missionArea: The mission area this battlefield is associated with (optional)
@@ -1277,15 +1217,12 @@ function BattlefieldMission:new(data)
     local obj = Battlefield:new(data)
 
     setmetatable(obj, self)
-    obj.isMission             = true
     obj.missionArea           = data.missionArea
     obj.mission               = data.mission
     obj.missionStatusArea     = data.missionStatusArea
     obj.missionStatus         = data.missionStatus
     obj.requiredMissionStatus = data.requiredMissionStatus
     obj.skipMissionStatus     = data.skipMissionStatus or data.requiredMissionStatus
-    obj.requiredVar           = data.requiredVar
-    obj.requiredValue         = data.requiredValue
     obj.canLoseExp            = data.canLoseExp or false
 
     return obj
@@ -1306,17 +1243,6 @@ function BattlefieldMission:checkRequirements(player, npc, isRegistrant, trade)
         return (not isRegistrant and (player:hasCompletedMission(missionArea, self.mission) or
             (current == self.mission and status >= self.requiredMissionStatus))) or
             (current == self.mission and status == self.requiredMissionStatus)
-    elseif self.requiredVar ~= nil then
-        -- COP Missions use a charVar to track since missionStatus is used to define menu settings.
-        -- When converting these, allow for the same structure of status, but with defined requiredVar (str)
-        -- and requiredValue (uint requirement).  These are currently mutually exclusive, and treated
-        -- as such.
-
-        local status = player:getCharVar(self.requiredVar)
-
-        return (not isRegistrant and (player:hasCompletedMission(missionArea, self.mission) or
-            (current == self.mission and status >= self.requiredValue))) or
-            (current == self.mission and status == self.requiredValue)
     else
         return (not isRegistrant and player:hasCompletedMission(missionArea, self.mission)) or
             current == self.mission
@@ -1330,25 +1256,21 @@ function BattlefieldMission:checkSkipCutscene(player)
     local status            = player:getMissionStatus(missionStatusArea, self.missionStatus)
 
     return player:hasCompletedMission(missionArea, self.mission) or
-        (self.requiredMissionStatus and current == self.mission and status > self.skipMissionStatus) or
-        (self.requiredValue and current == self.mission and player:getCharVar(self.requiredVar) > self.requiredValue)
+        (current == self.mission and status > self.skipMissionStatus)
 end
 
 function BattlefieldMission:onBattlefieldWin(player, battlefield)
-    local missionArea       = self.missionArea or player:getNation()
-    local current           = player:getCurrentMission(missionArea)
-    local missionStatusArea = self.missionStatusArea or player:getNation()
+    local missionArea = self.missionArea or player:getNation()
+    local current     = player:getCurrentMission(missionArea)
 
     if current == self.mission then
         player:setLocalVar('battlefieldWin', battlefield:getID())
     end
 
     local _, clearTime, partySize = battlefield:getRecord()
-    local canSkipCS               = (player:hasCompletedMission(missionArea, self.mission) or
-        (self.requiredMissionStatus and current == self.mission and player:getMissionStatus(missionStatusArea, self.missionStatus) > self.skipMissionStatus) or
-        (self.requiredValue and current == self.mission and player:getCharVar(self.requiredVar) > self.requiredValue)) and 1 or 0
+    local canSkipCS               = (current ~= self.mission) and 1 or 0
 
-    player:startEvent(32001, battlefield:getArea(), clearTime, partySize, battlefield:getTimeInside(), player:getZoneID(), self.index, canSkipCS)
+    player:startEvent(32001, battlefield:getArea(), clearTime, partySize, battlefield:getTimeInside(), 1, self.index, canSkipCS)
 end
 
 function BattlefieldMission:onEventFinishWin(player, csid, option, npc)
@@ -1392,21 +1314,7 @@ function BattlefieldQuest:checkRequirements(player, npc, isRegistrant, trade)
         return false
     end
 
-    if self.requiredVar ~= nil then
-        -- COP Missions use a charVar to track since missionStatus is used to define menu settings.
-        -- When converting these, allow for the same structure of status, but with defined requiredVar (str)
-        -- and requiredValue (uint requirement).  These are currently mutually exclusive, and treated
-        -- as such.
-
-        local status      = player:getCharVar(self.requiredVar)
-        local hasAccepted = player:getQuestStatus(self.questArea, self.quest) == xi.questStatus.QUEST_ACCEPTED
-
-        return (not isRegistrant and (player:hasCompletedQuest(self.questArea, self.quest) or
-            (hasAccepted and status >= self.requiredValue))) or
-            (hasAccepted and status == self.requiredValue)
-    else
-        return player:getQuestStatus(self.questArea, self.quest) >= xi.questStatus.QUEST_ACCEPTED
-    end
+    return player:getQuestStatus(self.questArea, self.quest) >= xi.questStatus.QUEST_ACCEPTED
 end
 
 function BattlefieldQuest:checkSkipCutscene(player)
@@ -1423,7 +1331,7 @@ function BattlefieldQuest:onBattlefieldWin(player, battlefield)
     local _, clearTime, partySize = battlefield:getRecord()
     local canSkipCS               = status ~= xi.questStatus.QUEST_ACCEPTED and 1 or 0
 
-    player:startEvent(32001, battlefield:getArea(), clearTime, partySize, battlefield:getTimeInside(), player:getZoneID(), self.index, canSkipCS)
+    player:startEvent(32001, battlefield:getArea(), clearTime, partySize, battlefield:getTimeInside(), 1, self.index, canSkipCS)
 end
 
 function xi.battlefield.onBattlefieldTick(battlefield, timeinside)

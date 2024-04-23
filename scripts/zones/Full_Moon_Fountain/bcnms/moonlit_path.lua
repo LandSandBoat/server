@@ -19,7 +19,7 @@ end
 battlefieldObject.onBattlefieldLeave = function(player, battlefield, leavecode)
     if leavecode == xi.battlefield.leaveCode.WON then
         local _, clearTime, partySize = battlefield:getRecord()
-        local arg8 = (player:getQuestStatus(xi.questLog.WINDURST, xi.quest.id.windurst.THE_MOONLIT_PATH) == xi.questStatus.QUEST_COMPLETED) and 1 or 0
+        local arg8 = (player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_MOONLIT_PATH) == xi.questStatus.QUEST_COMPLETED) and 1 or 0
         player:startEvent(32001, battlefield:getArea(), clearTime, partySize, battlefield:getTimeInside(), 1, battlefield:getLocalVar('[cs]bit'), arg8)
     elseif leavecode == xi.battlefield.leaveCode.LOST then
         player:startEvent(32002)

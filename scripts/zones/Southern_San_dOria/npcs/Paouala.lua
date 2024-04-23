@@ -7,7 +7,7 @@
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    if player:getQuestStatus(xi.questLog.SANDORIA, xi.quest.id.sandoria.SLEEPLESS_NIGHTS) == xi.questStatus.QUEST_ACCEPTED then
+    if player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.SLEEPLESS_NIGHTS) == xi.questStatus.QUEST_ACCEPTED then
         if
             trade:hasItemQty(xi.item.JUG_OF_MARYS_MILK, 1) and
             trade:getItemCount() == 1
@@ -18,10 +18,10 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local sleeplessNights = player:getQuestStatus(xi.questLog.SANDORIA, xi.quest.id.sandoria.SLEEPLESS_NIGHTS)
+    local sleeplessNights = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.SLEEPLESS_NIGHTS)
 
     if
-        player:getFameLevel(xi.fameArea.SANDORIA) >= 2 and
+        player:getFameLevel(xi.quest.fame_area.SANDORIA) >= 2 and
         sleeplessNights == xi.questStatus.QUEST_AVAILABLE
     then
         player:startEvent(85)
@@ -39,13 +39,13 @@ end
 
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 85 and option == 1 then
-        player:addQuest(xi.questLog.SANDORIA, xi.quest.id.sandoria.SLEEPLESS_NIGHTS)
+        player:addQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.SLEEPLESS_NIGHTS)
     elseif csid == 84 then
         player:tradeComplete()
         player:addTitle(xi.title.SHEEPS_MILK_DELIVERER)
         npcUtil.giveCurrency(player, 'gil', 5000)
-        player:addFame(xi.fameArea.SANDORIA, 30)
-        player:completeQuest(xi.questLog.SANDORIA, xi.quest.id.sandoria.SLEEPLESS_NIGHTS)
+        player:addFame(xi.quest.fame_area.SANDORIA, 30)
+        player:completeQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.SLEEPLESS_NIGHTS)
     end
 end
 

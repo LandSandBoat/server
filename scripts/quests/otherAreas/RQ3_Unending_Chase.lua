@@ -6,12 +6,12 @@
 -- Mhaura, Rycharde, !pos 17.451 -16.000 88.815 249
 -----------------------------------
 
-local quest = Quest:new(xi.questLog.OTHER_AREAS, xi.quest.id.otherAreas.UNENDING_CHASE)
+local quest = Quest:new(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.UNENDING_CHASE)
 
 quest.reward =
 {
     fame     = 120,
-    fameArea = xi.fameArea.WINDURST,
+    fameArea = xi.quest.fame_area.WINDURST,
     title    = xi.title.TWO_STAR_PURVEYOR,
     gil      = 2100,
 }
@@ -22,7 +22,7 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == xi.questStatus.QUEST_AVAILABLE and
-                player:getQuestStatus(xi.questLog.OTHER_AREAS, xi.quest.id.otherAreas.WAY_OF_THE_COOK) == xi.questStatus.QUEST_COMPLETED
+                player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.WAY_OF_THE_COOK) == xi.questStatus.QUEST_COMPLETED
         end,
 
         [xi.zone.MHAURA] =
@@ -32,7 +32,7 @@ quest.sections =
                 onTrigger = function(player, npc)
                     if
                         player:getCharVar('Quest[4][1]DayCompleted') + 7 < VanadielUniqueDay() and
-                        player:getFameLevel(xi.fameArea.WINDURST) > 2
+                        player:getFameLevel(xi.quest.fame_area.WINDURST) > 2
                     then
                         if quest:getVar(player, 'Prog') == 0 then
                             return quest:progressEvent(82, xi.item.PUFFBALL) -- Unending Chase starting event.

@@ -206,7 +206,7 @@ xi.beastmentreasure.handleNpcOnTrigger = function(player, digsiteids)
     elseif status == xi.questStatus.QUEST_COMPLETED then
         -- Note: Quest will be 'completed' after trading the correct items,
         -- but will be set to available again after excavating the reward.
-        startMapMarkerEvent(103, player, xi.beastmentreasure.getTableOfIDs(digsiteids)) -- Peddlestox reminds you where your digsite is
+        startMapMarkerEvent(103, player, digsiteids) -- Peddlestox reminds you where your digsite is
     end
 end
 
@@ -219,7 +219,8 @@ xi.beastmentreasure.handleNpcOnTrade = function(player, trade, digsiteids)
     then
         -- Assign a random dig site to the player
         player:setCharVar(zd.dsvar, math.random(1, 8))
-        startMapMarkerEvent(101, player, xi.beastmentreasure.getTableOfIDs(digsiteids)) -- Peddlestox shows you where to dig
+
+        startMapMarkerEvent(101, player, digsiteids) -- Peddlestox shows you where to dig
     end
 end
 
@@ -261,7 +262,7 @@ xi.beastmentreasure.updatePeddlestox = function(zone, peddlestoxID)
 end
 
 xi.beastmentreasure.handleQmOnTrigger = function(player, npc, buriedtext, nothingtext, digsiteids)
-    local digsiteid = xi.beastmentreasure.getTableOfIDs(digsiteids)[getAssignedDigSite(player)]
+    local digsiteid = digsiteids[getAssignedDigSite(player)]
     local qmid = npc:getID()
 
     if digsiteid == nil or digsiteid ~= qmid then
@@ -279,7 +280,7 @@ xi.beastmentreasure.handleQmOnTrade = function(player, npc, trade, digsiteids)
     if
         npcUtil.tradeHasExactly(trade, xi.item.PICKAXE) and
         player:getCharVar(zoneData[zoneid].statusvar) == xi.questStatus.QUEST_COMPLETED and
-        npc:getID() == xi.beastmentreasure.getTableOfIDs(digsiteids)[digsite]
+        npc:getID() == digsiteids[digsite]
     then
         --[[ Event 105 needs args to spawn and animate a treasure chest
              Example args from retail capture: 105 123 450762 1745 201805 7 723 490292 4095
@@ -317,22 +318,6 @@ xi.beastmentreasure.handleQmOnEventFinish = function(player, csid)
         player:setCharVar(zoneData[zoneid].statusvar, xi.questStatus.QUEST_AVAILABLE)
         player:setCharVar(zoneData[zoneid].dsvar, 0)
     end
-end
-
-xi.beastmentreasure.getTableOfIDs = function(digsiteids)
-    -- Creates the table of IDs from the BEASTMEN_TREASURE_OFFSET in each three zone IDs.lua
-    local IDs = {
-        digsiteids,
-        digsiteids + 1,
-        digsiteids + 2,
-        digsiteids + 3,
-        digsiteids + 4,
-        digsiteids + 5,
-        digsiteids + 6,
-        digsiteids + 7
-    }
-
-    return IDs
 end
 
 xi.bmt = xi.beastmentreasure

@@ -5,12 +5,12 @@
 -- Carmelo : !pos -146.476 -7.48 -10.889 236
 -----------------------------------
 
-local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.LOVERS_IN_THE_DUSK)
+local quest = Quest:new(xi.quest.log_id.BASTOK, xi.quest.id.bastok.LOVERS_IN_THE_DUSK)
 
 quest.reward =
 {
     fame     = 120,
-    fameArea = xi.fameArea.BASTOK,
+    fameArea = xi.quest.fame_area.BASTOK,
     item     = xi.item.SIREN_FLUTE,
 }
 
@@ -19,8 +19,8 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == xi.questStatus.QUEST_AVAILABLE and
-                player:hasCompletedQuest(xi.questLog.BASTOK, xi.quest.id.bastok.A_TEST_OF_TRUE_LOVE) and
-                player:getFameLevel(xi.fameArea.BASTOK) >= 6 and
+                player:hasCompletedQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.A_TEST_OF_TRUE_LOVE) and
+                player:getFameLevel(xi.quest.fame_area.BASTOK) >= 6 and
                 not quest:getMustZone(player)
         end,
 

@@ -6,12 +6,12 @@
 -- Raibaht : !pos -27 -10 -1 237
 -----------------------------------
 
-local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.THE_USUAL)
+local quest = Quest:new(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_USUAL)
 
 quest.reward =
 {
     fame     = 30,
-    fameArea = xi.fameArea.BASTOK,
+    fameArea = xi.quest.fame_area.BASTOK,
     item     = xi.item.SPEED_BOW,
     title    = xi.title.STEAMING_SHEEP_REGULAR,
 }
@@ -21,8 +21,8 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == xi.questStatus.QUEST_AVAILABLE and
-                player:hasCompletedQuest(xi.questLog.BASTOK, xi.quest.id.bastok.CIDS_SECRET) and
-                player:getFameLevel(xi.fameArea.BASTOK) >= 5
+                player:hasCompletedQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.CIDS_SECRET) and
+                player:getFameLevel(xi.quest.fame_area.BASTOK) >= 5
         end,
 
         [xi.zone.PORT_BASTOK] =

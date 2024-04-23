@@ -9,7 +9,7 @@
 -- qm10         : !pos 352 2 376 68
 -----------------------------------
 
-local quest = Quest:new(xi.questLog.AHT_URHGAN, xi.quest.id.ahtUrhgan.SOOTHING_WATERS)
+local quest = Quest:new(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.SOOTHING_WATERS)
 
 quest.reward =
 {
@@ -23,7 +23,7 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == xi.questStatus.QUEST_AVAILABLE and
-            player:hasCompletedQuest(xi.questLog.AHT_URHGAN, xi.quest.id.ahtUrhgan.ODE_TO_THE_SERPENTS)
+            player:hasCompletedQuest(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.ODE_TO_THE_SERPENTS)
         end,
 
         [xi.zone.AHT_URHGAN_WHITEGATE] =

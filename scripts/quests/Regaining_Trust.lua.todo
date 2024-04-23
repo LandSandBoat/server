@@ -5,7 +5,7 @@
 -- Giant Footprint !pos -501 -11 354 126
 -----------------------------------
 
-local quest = Quest:new(xi.questLog.JEUNO, xi.quest.id.jeuno.REGAINING_TRUST)
+local quest = Quest:new(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.REGAINING_TRUST)
 
 quest.reward = {}
 
@@ -30,7 +30,7 @@ quest.sections = {
     {
         check = function(player, status, vars)
             return status == xi.questStatus.QUEST_AVAILABLE
-                and player:getQuestStatus(xi.questLog.OTHER_AREAS, PICTURE_PERFECT) == xi.questStatus.QUEST_COMPLETED
+                and player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, PICTURE_PERFECT) == xi.questStatus.QUEST_COMPLETED
                 and player:getFellowValue('level') >= 51
                 and player:getFellowValue('bond') >= 55
         end,

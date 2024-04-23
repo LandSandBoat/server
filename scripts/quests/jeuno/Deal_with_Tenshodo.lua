@@ -5,12 +5,12 @@
 -- Garnev : !pos 30 4 -36 245
 -----------------------------------
 
-local quest = Quest:new(xi.questLog.JEUNO, xi.quest.id.jeuno.DEAL_WITH_TENSHODO)
+local quest = Quest:new(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.DEAL_WITH_TENSHODO)
 
 quest.reward =
 {
     fame     = 30,
-    fameArea = xi.fameArea.JEUNO,
+    fameArea = xi.quest.fame_area.JEUNO,
     keyItem  = xi.ki.CLOCK_TOWER_OIL,
     title    = xi.title.TRADER_OF_RENOWN,
 }
@@ -20,7 +20,7 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == xi.questStatus.QUEST_AVAILABLE and
-                player:getQuestStatus(xi.questLog.JEUNO, xi.quest.id.jeuno.A_CLOCK_MOST_DELICATE) == xi.questStatus.QUEST_ACCEPTED
+                player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.A_CLOCK_MOST_DELICATE) == xi.questStatus.QUEST_ACCEPTED
         end,
 
         [xi.zone.LOWER_JEUNO] =
@@ -28,7 +28,7 @@ quest.sections =
             ['Garnev'] =
             {
                 onTrigger = function(player, npc)
-                    if player:getFameLevel(xi.fameArea.NORG) >= 2 then
+                    if player:getFameLevel(xi.quest.fame_area.NORG) >= 2 then
                         return quest:progressEvent(167)
                     else
                         return quest:event(168)

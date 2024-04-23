@@ -6,12 +6,12 @@
 -- qm2    : !pos 206 -60 -101 196
 -----------------------------------
 
-local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.BLADE_OF_DEATH)
+local quest = Quest:new(xi.quest.log_id.BASTOK, xi.quest.id.bastok.BLADE_OF_DEATH)
 
 quest.reward =
 {
     fame     = 30,
-    fameArea = xi.fameArea.BASTOK,
+    fameArea = xi.quest.fame_area.BASTOK,
     item     = xi.item.DEATHBRINGER,
     title    = xi.title.BLACK_DEATH,
 }
@@ -21,8 +21,8 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == xi.questStatus.QUEST_AVAILABLE and
-                player:hasCompletedQuest(xi.questLog.BASTOK, xi.quest.id.bastok.BLADE_OF_DARKNESS) and
-                player:getFameLevel(xi.fameArea.BASTOK) >= 3
+                player:hasCompletedQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.BLADE_OF_DARKNESS) and
+                player:getFameLevel(xi.quest.fame_area.BASTOK) >= 3
         end,
 
         [xi.zone.BASTOK_MINES] =

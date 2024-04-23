@@ -5,13 +5,13 @@
 -- ZONE,   NPC,      POS
 -- Mhaura, Rycharde, !pos 17.451 -16.000 88.815 249
 -----------------------------------
-local quest = Quest:new(xi.questLog.OTHER_AREAS, xi.quest.id.otherAreas.THE_CLUE)
+local quest = Quest:new(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.THE_CLUE)
 -----------------------------------
 
 quest.reward =
 {
     fame     = 120,
-    fameArea = xi.fameArea.WINDURST,
+    fameArea = xi.quest.fame_area.WINDURST,
     title    = xi.title.FOUR_STAR_PURVEYOR,
     gil      = 3000,
 }
@@ -21,8 +21,8 @@ quest.sections =
     -- Section: Quest is available and never interacted.
     {
         check = function(player, status, vars)
-            return status == xi.questStatus.QUEST_AVAILABLE and player:getFameLevel(xi.fameArea.WINDURST) > 4 and
-                player:getQuestStatus(xi.questLog.OTHER_AREAS, xi.quest.id.otherAreas.EXPERTISE) == xi.questStatus.QUEST_COMPLETED
+            return status == xi.questStatus.QUEST_AVAILABLE and player:getFameLevel(xi.quest.fame_area.WINDURST) > 4 and
+                player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.EXPERTISE) == xi.questStatus.QUEST_COMPLETED
         end,
 
         [xi.zone.MHAURA] =

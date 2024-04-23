@@ -7,12 +7,12 @@
 local shakhramiID = zones[xi.zone.MAZE_OF_SHAKHRAMI]
 -----------------------------------
 
-local quest = Quest:new(xi.questLog.WINDURST, xi.quest.id.windurst.BLAST_FROM_THE_PAST)
+local quest = Quest:new(xi.quest.log_id.WINDURST, xi.quest.id.windurst.BLAST_FROM_THE_PAST)
 
 quest.reward =
 {
     fame     = 30,
-    fameArea = xi.fameArea.WINDURST,
+    fameArea = xi.quest.fame_area.WINDURST,
     item     = xi.item.GREAT_CLUB,
     title    = xi.title.FOSSILIZED_SEA_FARER,
 }
@@ -22,9 +22,9 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == xi.questStatus.QUEST_AVAILABLE and
-                player:hasCompletedQuest(xi.questLog.WINDURST, xi.quest.id.windurst.STAR_STRUCK) and
-                player:getQuestStatus(xi.questLog.WINDURST, xi.quest.id.windurst.CLASS_REUNION) ~= xi.questStatus.QUEST_ACCEPTED and
-                player:getFameLevel(xi.fameArea.WINDURST) >= 3 and
+                player:hasCompletedQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.STAR_STRUCK) and
+                player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CLASS_REUNION) ~= xi.questStatus.QUEST_ACCEPTED and
+                player:getFameLevel(xi.quest.fame_area.WINDURST) >= 3 and
                 not quest:getMustZone(player)
         end,
 
@@ -92,7 +92,7 @@ quest.sections =
                     if quest:complete(player) then
                         player:confirmTrade()
 
-                        xi.quest.setMustZone(player, xi.questLog.WINDURST, xi.quest.id.windurst.NOTHING_MATTERS)
+                        xi.quest.setMustZone(player, xi.quest.log_id.WINDURST, xi.quest.id.windurst.NOTHING_MATTERS)
                     end
                 end,
             },
@@ -144,7 +144,7 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == xi.questStatus.QUEST_COMPLETED and
-                not xi.quest.getMustZone(player, xi.questLog.WINDURST, xi.quest.id.windurst.NOTHING_MATTERS)
+                not xi.quest.getMustZone(player, xi.quest.log_id.WINDURST, xi.quest.id.windurst.NOTHING_MATTERS)
         end,
 
         [xi.zone.WINDURST_WALLS] =

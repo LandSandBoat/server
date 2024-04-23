@@ -11,12 +11,12 @@ local onzozoID  = zones[xi.zone.LABYRINTH_OF_ONZOZO]
 local valkurmID = zones[xi.zone.VALKURM_DUNES]
 -----------------------------------
 
-local quest = Quest:new(xi.questLog.OUTLANDS, xi.quest.id.outlands.YOMI_OKURI)
+local quest = Quest:new(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.YOMI_OKURI)
 
 quest.reward =
 {
     fame = 40,
-    fameArea = xi.fameArea.NORG,
+    fameArea = xi.quest.fame_area.NORG,
     item = xi.item.MYOCHIN_SUNE_ATE,
 }
 
@@ -25,7 +25,7 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == xi.questStatus.QUEST_AVAILABLE and
-                player:hasCompletedQuest(xi.questLog.OUTLANDS, xi.quest.id.outlands.THE_SACRED_KATANA) and
+                player:hasCompletedQuest(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.THE_SACRED_KATANA) and
                 player:getMainJob() == xi.job.SAM and
                 player:getMainLvl() >= xi.settings.main.AF2_QUEST_LEVEL
         end,
@@ -207,22 +207,16 @@ quest.sections =
             {
                 onTrigger = function(player, npc)
                     local vanadielHour = VanadielHour()
-                    local domanMob     = GetMobByID(valkurmID.mob.DOMAN)
-                    local onryoMob     = GetMobByID(valkurmID.mob.ONRYO)
 
                     if
                         player:hasKeyItem(xi.ki.YOMOTSU_HIRASAKA) and
                         quest:getLocalVar(player, 'valkurmNM') == 0 and
-                        (vanadielHour >= 18 or vanadielHour < 5)
+                        (vanadielHour > 18 or vanadielHour < 5) and
+                        not GetMobByID(valkurmID.mob.DOMAN):isSpawned() and
+                        not GetMobByID(valkurmID.mob.ONRYO):isSpawned()
                     then
-                        if
-                            not domanMob:isSpawned() and
-                            not onryoMob:isSpawned()
-                        then
-                            return quest:progressEvent(10)
-                        else
-                            return quest:messageSpecial(valkurmID.text.WHAT_DO_YOU_THINK)
-                        end
+                        npc:setLocalVar('triggerInProgress', 1)
+                        return quest:progressEvent(10)
                     elseif quest:getLocalVar(player, 'valkurmNM') == 1 then
                         player:delKeyItem(xi.ki.YOMOTSU_HIRASAKA)
                         return quest:keyItem(xi.ki.FADED_YOMOTSU_HIRASAKA)

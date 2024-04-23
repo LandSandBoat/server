@@ -7,12 +7,12 @@
 local bastokMinesID = zones[xi.zone.BASTOK_MINES]
 -----------------------------------
 
-local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.RIVALS)
+local quest = Quest:new(xi.quest.log_id.BASTOK, xi.quest.id.bastok.RIVALS)
 
 quest.reward =
 {
     fame     = 30,
-    fameArea = xi.fameArea.BASTOK,
+    fameArea = xi.quest.fame_area.BASTOK,
     item     = xi.item.WOLF_GORGET,
     title    = xi.title.CONTEST_RIGGER,
 }
@@ -22,7 +22,7 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == xi.questStatus.QUEST_AVAILABLE and
-                player:getFameLevel(xi.fameArea.BASTOK) >= 3
+                player:getFameLevel(xi.quest.fame_area.BASTOK) >= 3
         end,
 
         [xi.zone.BASTOK_MINES] =

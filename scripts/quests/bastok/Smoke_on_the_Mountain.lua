@@ -3,18 +3,16 @@
 -----------------------------------
 -- Log ID: 1, Quest ID: 15
 -- Hungry Wolf : !pos -25.861 -11 -30.172 237
--- Offa: !pos -283-6 -15.9 -140.3 235
--- ??? (Campfire) !pos 461.8 -20.9 -578.5 107
 -----------------------------------
 local southGustabergID = zones[xi.zone.SOUTH_GUSTABERG]
 -----------------------------------
 
-local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.SMOKE_ON_THE_MOUNTAIN)
+local quest = Quest:new(xi.quest.log_id.BASTOK, xi.quest.id.bastok.SMOKE_ON_THE_MOUNTAIN)
 
 quest.reward =
 {
     fame     = 5,
-    fameArea = xi.fameArea.BASTOK,
+    fameArea = xi.quest.fame_area.BASTOK,
     gil      = 300,
     title    = xi.title.HOT_DOG,
 }
@@ -55,23 +53,20 @@ quest.sections =
                 end,
             },
 
+            ['Offa'] = quest:event(222),
+
             onEventFinish =
             {
                 [429] = function(player, csid, option, npc)
                     player:confirmTrade()
 
                     if player:getQuestStatus(quest.areaId, quest.questId) == xi.questStatus.QUEST_ACCEPTED then
-                        player:addFame(xi.fameArea.BASTOK, 25)
+                        player:addFame(xi.quest.fame_area.BASTOK, 25)
                     end
 
                     quest:complete(player)
                 end,
             },
-        },
-
-        [xi.zone.BASTOK_MARKETS] =
-        {
-            ['Offa'] = quest:event(222),
         },
 
         [xi.zone.SOUTH_GUSTABERG] =

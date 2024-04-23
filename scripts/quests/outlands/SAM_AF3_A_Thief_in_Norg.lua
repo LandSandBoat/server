@@ -8,12 +8,12 @@
 -- _6i8 (Door)     : !pos 70 7 2 234
 -----------------------------------
 
-local quest = Quest:new(xi.questLog.OUTLANDS, xi.quest.id.outlands.A_THIEF_IN_NORG)
+local quest = Quest:new(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.A_THIEF_IN_NORG)
 
 quest.reward =
 {
     fame = 60,
-    fameArea = xi.fameArea.NORG,
+    fameArea = xi.quest.fame_area.NORG,
     item = xi.item.MYOCHIN_KABUTO,
     title = xi.title.PARAGON_OF_SAMURAI_EXCELLENCE,
 }
@@ -23,7 +23,7 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == xi.questStatus.QUEST_AVAILABLE and
-                player:hasCompletedQuest(xi.questLog.OUTLANDS, xi.quest.id.outlands.YOMI_OKURI) and
+                player:hasCompletedQuest(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.YOMI_OKURI) and
                 player:getMainJob() == xi.job.SAM and
                 player:getMainLvl() >= xi.settings.main.AF3_QUEST_LEVEL
         end,
@@ -202,7 +202,7 @@ quest.sections =
                 end,
 
                 [32001] = function(player, csid, option, npc)
-                    if player:getLocalVar('battlefieldWin') == xi.battlefield.id.THIEF_IN_NORG then
+                    if player:getLocalVar('battlefieldWin') == 68 then
                         npcUtil.giveKeyItem(player, xi.ki.CHARRED_HELM)
                         quest:setVar(player, 'Prog', 7)
                     end

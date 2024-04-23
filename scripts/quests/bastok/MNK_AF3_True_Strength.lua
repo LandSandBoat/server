@@ -8,12 +8,12 @@
 local oztrojaID = zones[xi.zone.CASTLE_OZTROJA]
 -----------------------------------
 
-local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.TRUE_STRENGTH)
+local quest = Quest:new(xi.quest.log_id.BASTOK, xi.quest.id.bastok.TRUE_STRENGTH)
 
 quest.reward =
 {
     fame     = 60,
-    fameArea = xi.fameArea.BASTOK,
+    fameArea = xi.quest.fame_area.BASTOK,
     item     = xi.item.TEMPLE_HOSE,
     title    = xi.title.PARAGON_OF_MONK_EXCELLENCE,
 }
@@ -23,9 +23,9 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == xi.questStatus.QUEST_AVAILABLE and
-                player:hasCompletedQuest(xi.questLog.BASTOK, xi.quest.id.bastok.THE_FIRST_MEETING) and
+                player:hasCompletedQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_FIRST_MEETING) and
                 player:getMainJob() == xi.job.MNK and
-                player:getMainLvl() >= xi.settings.main.AF3_QUEST_LEVEL
+                player:getMainLvl() >= 50
         end,
 
         [xi.zone.METALWORKS] =

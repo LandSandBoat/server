@@ -11,16 +11,13 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local sandyFame = player:getFameLevel(xi.fameArea.SANDORIA)
+    local sandyFame = player:getFameLevel(xi.quest.fame_area.SANDORIA)
 
-    local questIntroToTeamwork = player:getQuestStatus(xi.questLog.SANDORIA, xi.quest.id.sandoria.INTRODUCTION_TO_TEAMWORK)
-    local questIntermediateTeamwork = player:getQuestStatus(xi.questLog.SANDORIA, xi.quest.id.sandoria.INTERMEDIATE_TEAMWORK)
-    local questAdvancedTeamwork = player:getQuestStatus(xi.questLog.SANDORIA, xi.quest.id.sandoria.ADVANCED_TEAMWORK)
+    local questIntroToTeamwork = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.INTRODUCTION_TO_TEAMWORK)
+    local questIntermediateTeamwork = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.INTERMEDIATE_TEAMWORK)
+    local questAdvancedTeamwork = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.ADVANCED_TEAMWORK)
 
-    if
-        questIntroToTeamwork == xi.questStatus.QUEST_AVAILABLE and
-        sandyFame >= 2
-    then
+    if questIntroToTeamwork == xi.questStatus.QUEST_AVAILABLE and sandyFame >= 2 then
         player:startEvent(135) -- Starts first quest - 6 members same alliance
     elseif questIntroToTeamwork == xi.questStatus.QUEST_AVAILABLE and sandyFame < 2 then
         player:startEvent(134) -- You don't have the requirements to start the first quest
@@ -68,9 +65,9 @@ end
 entity.onEventUpdate = function(player, csid, option, npc)
     -- csid 129 happens for both quests
     if csid == 129 then
-        local questIntroToTeamwork = player:getQuestStatus(xi.questLog.SANDORIA, xi.quest.id.sandoria.INTRODUCTION_TO_TEAMWORK)
-        local questIntermediateTeamwork = player:getQuestStatus(xi.questLog.SANDORIA, xi.quest.id.sandoria.INTERMEDIATE_TEAMWORK)
-        local questAdvancedTeamwork = player:getQuestStatus(xi.questLog.SANDORIA, xi.quest.id.sandoria.ADVANCED_TEAMWORK)
+        local questIntroToTeamwork = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.INTRODUCTION_TO_TEAMWORK)
+        local questIntermediateTeamwork = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.INTERMEDIATE_TEAMWORK)
+        local questAdvancedTeamwork = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.ADVANCED_TEAMWORK)
 
         -- newer versions of these quests only require a party of 2.
         -- older versions require all 6
@@ -158,15 +155,15 @@ end
 entity.onEventFinish = function(player, csid, option, npc)
     -- csid 129 is the event for when they have selected ready/not ready option is always 0
     if csid == 129 and option == 0 then
-        local questIntroToTeamwork = player:getQuestStatus(xi.questLog.SANDORIA, xi.quest.id.sandoria.INTRODUCTION_TO_TEAMWORK)
-        local questIntermediateTeamwork = player:getQuestStatus(xi.questLog.SANDORIA, xi.quest.id.sandoria.INTERMEDIATE_TEAMWORK)
-        local questAdvancedTeamwork = player:getQuestStatus(xi.questLog.SANDORIA, xi.quest.id.sandoria.ADVANCED_TEAMWORK)
+        local questIntroToTeamwork = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.INTRODUCTION_TO_TEAMWORK)
+        local questIntermediateTeamwork = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.INTERMEDIATE_TEAMWORK)
+        local questAdvancedTeamwork = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.ADVANCED_TEAMWORK)
 
         if
             questIntroToTeamwork == xi.questStatus.QUEST_ACCEPTED and
             player:getLocalVar('introToTmwrk_pass') == 1
         then
-            npcUtil.completeQuest(player, xi.questLog.SANDORIA, xi.quest.id.sandoria.INTRODUCTION_TO_TEAMWORK, {
+            npcUtil.completeQuest(player, xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.INTRODUCTION_TO_TEAMWORK, {
                 item = 13442,
                 fame = 80, -- fame defaults to 30 if not set
                 title = xi.title.THIRD_RATE_ORGANIZER,
@@ -175,7 +172,7 @@ entity.onEventFinish = function(player, csid, option, npc)
             questIntermediateTeamwork == xi.questStatus.QUEST_ACCEPTED and
             player:getLocalVar('intermedTmwrk_pass') == 1
         then
-            npcUtil.completeQuest(player, xi.questLog.SANDORIA, xi.quest.id.sandoria.INTERMEDIATE_TEAMWORK, {
+            npcUtil.completeQuest(player, xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.INTERMEDIATE_TEAMWORK, {
                 item = 4994,
                 fame = 80, -- fame defaults to 30 if not set
                 title = xi.title.SECOND_RATE_ORGANIZER,
@@ -184,7 +181,7 @@ entity.onEventFinish = function(player, csid, option, npc)
             questAdvancedTeamwork == xi.questStatus.QUEST_ACCEPTED and
             player:getLocalVar('advTmwrk_pass') == 1
         then
-            npcUtil.completeQuest(player, xi.questLog.SANDORIA, xi.quest.id.sandoria.ADVANCED_TEAMWORK, {
+            npcUtil.completeQuest(player, xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.ADVANCED_TEAMWORK, {
                 item = 13459,
                 fame = 80, -- fame defaults to 30 if not set
                 title = xi.title.FIRST_RATE_ORGANIZER,
@@ -192,13 +189,13 @@ entity.onEventFinish = function(player, csid, option, npc)
         end
     elseif csid == 131 and option == 1 then
         -- 131 is the third and last quest
-        player:addQuest(xi.questLog.SANDORIA, xi.quest.id.sandoria.ADVANCED_TEAMWORK)
+        player:addQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.ADVANCED_TEAMWORK)
     elseif csid == 133 and option == 1 then
         -- 133 is the second quest
-        player:addQuest(xi.questLog.SANDORIA, xi.quest.id.sandoria.INTERMEDIATE_TEAMWORK)
+        player:addQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.INTERMEDIATE_TEAMWORK)
     elseif csid == 135 and option == 1 then
         -- 135 is the first quest
-        player:addQuest(xi.questLog.SANDORIA, xi.quest.id.sandoria.INTRODUCTION_TO_TEAMWORK)
+        player:addQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.INTRODUCTION_TO_TEAMWORK)
     end
 end
 
