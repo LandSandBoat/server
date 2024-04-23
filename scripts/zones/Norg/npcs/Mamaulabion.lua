@@ -71,7 +71,7 @@ entity.onTrigger = function(player, npc)
 
     if
         mamaMia == xi.questStatus.QUEST_AVAILABLE and
-        player:getFameLevel(xi.quest.fame_area.NORG) >= 4 and
+        player:getFameLevel(xi.fameArea.NORG) >= 4 and
         moonlitPath == xi.questStatus.QUEST_COMPLETED
     then
         player:startEvent(191) -- Start Quest 'Mama Mia'
@@ -117,7 +117,7 @@ entity.onEventFinish = function(player, csid, option, npc)
         else
             player:addItem(xi.item.EVOKERS_RING) -- Evokers Ring
             player:messageSpecial(ID.text.ITEM_OBTAINED, xi.item.EVOKERS_RING) -- Evokers Ring
-            player:addFame(xi.quest.fame_area.NORG, 30) --idk how much fame the quest adds, just left at 30 which the levi quest gave.
+            player:addFame(xi.fameArea.NORG, 30) --idk how much fame the quest adds, just left at 30 which the levi quest gave.
             player:completeQuest(xi.questLog.OUTLANDS, xi.quest.id.outlands.MAMA_MIA)
             player:setCharVar('tradesMamaMia', 0)
         end

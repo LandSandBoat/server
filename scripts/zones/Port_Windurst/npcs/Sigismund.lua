@@ -46,7 +46,7 @@ entity.onEventFinish = function(player, csid, option, npc)
     elseif csid == 199 then
         player:tradeComplete()
         player:completeQuest(xi.questLog.WINDURST, xi.quest.id.windurst.TO_CATCH_A_FALLING_STAR)
-        player:addFame(xi.quest.fame_area.WINDURST, 75)
+        player:addFame(xi.fameArea.WINDURST, 75)
         player:addItem(xi.item.FISH_SCALE_SHIELD)
         player:messageSpecial(ID.text.ITEM_OBTAINED, xi.item.FISH_SCALE_SHIELD)
         player:setCharVar('QuestCatchAFallingStar_prog', 2)

@@ -36,7 +36,7 @@ entity.onTrigger = function(player, npc)
 
     if
         shiningSubligar == xi.questStatus.QUEST_AVAILABLE and
-        player:getFameLevel(xi.quest.fame_area.NORG) >= 3
+        player:getFameLevel(xi.fameArea.NORG) >= 3
     then
         player:startEvent(123) -- Start Like a Shining Subligar
     elseif shiningSubligar == xi.questStatus.QUEST_ACCEPTED then
@@ -58,7 +58,7 @@ entity.onEventFinish = function(player, csid, option, npc)
         player:addItem(xi.item.SCROLL_OF_KURAYAMI_ICHI)
         player:messageSpecial(ID.text.ITEM_OBTAINED, xi.item.SCROLL_OF_KURAYAMI_ICHI)
         player:setCharVar('shiningSubligar_nb', 0)
-        player:addFame(xi.quest.fame_area.NORG, 100)
+        player:addFame(xi.fameArea.NORG, 100)
         player:completeQuest(xi.questLog.OUTLANDS, xi.quest.id.outlands.LIKE_A_SHINING_SUBLIGAR)
     end
 end

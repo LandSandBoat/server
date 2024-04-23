@@ -10,7 +10,7 @@ local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.THE_QUADAVS_CURSE
 quest.reward =
 {
     fame     = 120,
-    fameArea = xi.quest.fame_area.BASTOK,
+    fameArea = xi.fameArea.BASTOK,
     item     = xi.item.BRONZE_SUBLIGAR,
 }
 

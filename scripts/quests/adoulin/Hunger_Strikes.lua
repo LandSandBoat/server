@@ -9,7 +9,7 @@ local quest = Quest:new(xi.questLog.ADOULIN, xi.quest.id.adoulin.HUNGER_STRIKES)
 
 quest.reward =
 {
-    fameArea = xi.quest.fame_area.ADOULIN,
+    fameArea = xi.fameArea.ADOULIN,
     xp       = 1000,
     bayld    = 500,
 }

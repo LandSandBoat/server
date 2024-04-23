@@ -15,7 +15,7 @@ local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.DARK_PUPPET)
 quest.reward =
 {
     fame     = 40,
-    fameArea = xi.quest.fame_area.BASTOK,
+    fameArea = xi.fameArea.BASTOK,
     item     = xi.item.CHAOS_SOLLERETS,
 }
 

@@ -18,7 +18,7 @@ local quest = Quest:new(xi.questLog.ADOULIN, xi.quest.id.adoulin.A_GOOD_PAIR_OF_
 quest.reward =
 {
     fame     = 6,
-    fameArea = xi.quest.fame_area.ADOULIN,
+    fameArea = xi.fameArea.ADOULIN,
     xp       = 500,
     bayld    = 200,
 }

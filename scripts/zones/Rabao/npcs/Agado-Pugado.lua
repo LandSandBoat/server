@@ -33,7 +33,7 @@ entity.onTrigger = function(player, npc)
     -----------------------------------
     -- Trial by Wind
     elseif
-        (trialByWind == xi.questStatus.QUEST_AVAILABLE and player:getFameLevel(xi.quest.fame_area.SELBINA_RABAO) >= 5) or
+        (trialByWind == xi.questStatus.QUEST_AVAILABLE and player:getFameLevel(xi.fameArea.SELBINA_RABAO) >= 5) or
         (trialByWind == xi.questStatus.QUEST_COMPLETED and os.time() > player:getCharVar('TrialByWind_date'))
     then
         player:startEvent(66, 0, 331) -- Start and restart quest 'Trial by Wind'
@@ -124,7 +124,7 @@ entity.onEventFinish = function(player, csid, option, npc)
             player:addTitle(xi.title.HEIR_OF_THE_GREAT_WIND)
             player:delKeyItem(xi.ki.WHISPER_OF_GALES) --Whisper of Gales, as a trade for the above rewards
             player:setCharVar('TrialByWind_date', getMidnight())
-            player:addFame(xi.quest.fame_area.SELBINA_RABAO, 30)
+            player:addFame(xi.fameArea.SELBINA_RABAO, 30)
             player:completeQuest(xi.questLog.OUTLANDS, xi.quest.id.outlands.TRIAL_BY_WIND)
         end
     elseif csid == 86 or csid == 87 then

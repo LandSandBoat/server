@@ -90,7 +90,7 @@ entity.onEventFinish = function(player, csid, option, npc)
             player:messageSpecial(ID.text.ITEM_OBTAINED, xi.item.LAUAN_SHIELD)
             player:addTitle(xi.title.COURIER_EXTRAORDINAIRE)
             player:completeQuest(xi.questLog.SANDORIA, xi.quest.id.sandoria.THE_BRUGAIRE_CONSORTIUM)
-            player:addFame(xi.quest.fame_area.SANDORIA, 30)
+            player:addFame(xi.fameArea.SANDORIA, 30)
             player:setCharVar('TheBrugaireConsortium-Parcels', 0)
         else
             player:startEvent(537)

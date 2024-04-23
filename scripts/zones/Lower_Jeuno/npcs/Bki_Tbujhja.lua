@@ -105,7 +105,7 @@ entity.onEventFinish = function(player, csid, option, npc)
         else
             player:addItem(xi.item.CHORAL_SLIPPERS)
             player:messageSpecial(ID.text.ITEM_OBTAINED, xi.item.CHORAL_SLIPPERS)
-            player:addFame(xi.quest.fame_area.JEUNO, 30)
+            player:addFame(xi.fameArea.JEUNO, 30)
             player:completeQuest(xi.questLog.JEUNO, xi.quest.id.jeuno.THE_REQUIEM)
         end
     end

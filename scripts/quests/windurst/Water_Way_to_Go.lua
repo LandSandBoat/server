@@ -11,7 +11,7 @@ local quest = Quest:new(xi.questLog.WINDURST, xi.quest.id.windurst.WATER_WAY_TO_
 quest.reward =
 {
     fame = 40,
-    fameArea = xi.quest.fame_area.WINDURST,
+    fameArea = xi.fameArea.WINDURST,
 }
 
 quest.sections =
@@ -20,7 +20,7 @@ quest.sections =
         check = function(player, status, vars)
             return status == xi.questStatus.QUEST_AVAILABLE and
                 player:hasCompletedQuest(xi.questLog.WINDURST, xi.quest.id.windurst.OVERNIGHT_DELIVERY) and
-                player:getFameLevel(xi.quest.fame_area.WINDURST) >= 3 and
+                player:getFameLevel(xi.fameArea.WINDURST) >= 3 and
                 not quest:getMustZone(player)
         end,
 

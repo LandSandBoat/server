@@ -83,7 +83,7 @@ entity.onTrigger = function(player, npc)
     -- Tuning In
     if
         tuningIn == xi.questStatus.QUEST_AVAILABLE and
-        player:getFameLevel(xi.quest.fame_area.WINDURST) >= 4 and
+        player:getFameLevel(xi.fameArea.WINDURST) >= 4 and
         (player:getCurrentMission(xi.mission.log_id.COP) >= xi.mission.id.cop.DISTANT_BELIEFS or player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.THE_LAST_VERSE))
     then
         player:startEvent(884, 0, 1696, 1697, 1698) -- Magicked Steel Ingot, Spruce Lumber, Extra-fine File
@@ -101,10 +101,10 @@ entity.onTrigger = function(player, npc)
     -- The Moonlit Path and Other Fenrir Stuff!
     elseif
         moonlitPath == xi.questStatus.QUEST_AVAILABLE and
-        player:getFameLevel(xi.quest.fame_area.WINDURST) >= 6 and
-        player:getFameLevel(xi.quest.fame_area.SANDORIA) >= 6 and
-        player:getFameLevel(xi.quest.fame_area.BASTOK) >= 6 and
-        player:getFameLevel(xi.quest.fame_area.NORG) >= 4
+        player:getFameLevel(xi.fameArea.WINDURST) >= 6 and
+        player:getFameLevel(xi.fameArea.SANDORIA) >= 6 and
+        player:getFameLevel(xi.fameArea.BASTOK) >= 6 and
+        player:getFameLevel(xi.fameArea.NORG) >= 4
     then -- Fenrir flag event
 
         player:startEvent(842, 0, 1125)
@@ -197,7 +197,7 @@ entity.onEventFinish = function(player, csid, option, npc)
         player:addTitle(xi.title.HEIR_OF_THE_NEW_MOON)
         player:delKeyItem(xi.ki.WHISPER_OF_THE_MOON)
         player:setCharVar('MoonlitPath_date', getMidnight())
-        player:addFame(xi.quest.fame_area.WINDURST, 30)
+        player:addFame(xi.fameArea.WINDURST, 30)
 
         if player:getQuestStatus(xi.questLog.WINDURST, xi.quest.id.windurst.THE_MOONLIT_PATH) == xi.questStatus.QUEST_ACCEPTED then
             player:completeQuest(xi.questLog.WINDURST, xi.quest.id.windurst.THE_MOONLIT_PATH)

@@ -79,7 +79,7 @@ entity.onTrigger = function(player, npc)
     elseif
         allNewC3000 == xi.questStatus.QUEST_COMPLETED and
         canCardiansCry == xi.questStatus.QUEST_AVAILABLE and
-        player:getFameLevel(xi.quest.fame_area.WINDURST) >= 5
+        player:getFameLevel(xi.fameArea.WINDURST) >= 5
     then
         player:startEvent(319, 0, 20000) -- start quest
     elseif canCardiansCry == xi.questStatus.QUEST_ACCEPTED then
@@ -108,7 +108,7 @@ entity.onEventFinish = function(player, csid, option, npc)
     elseif csid == 397 then
         player:delKeyItem(xi.ki.TWO_OF_SWORDS)
         player:setCharVar('theKindCardianVar', 2)
-        player:addFame(xi.quest.fame_area.WINDURST, 30)
+        player:addFame(xi.fameArea.WINDURST, 30)
         player:confirmTrade()
 
         -- CAN CARDIANS CRY?

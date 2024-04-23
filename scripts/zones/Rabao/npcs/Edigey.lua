@@ -24,7 +24,7 @@ entity.onTrigger = function(player, npc)
 
     if
         forgetTheAntidote == xi.questStatus.QUEST_AVAILABLE and
-        player:getFameLevel(xi.quest.fame_area.SELBINA_RABAO) >= 4
+        player:getFameLevel(xi.fameArea.SELBINA_RABAO) >= 4
     then
         player:startEvent(2, 0, xi.item.VIAL_OF_DESERT_VENOM)
     elseif forgetTheAntidote == xi.questStatus.QUEST_ACCEPTED then
@@ -50,11 +50,11 @@ entity.onEventFinish = function(player, csid, option, npc)
         player:addItem(xi.item.DOTANUKI) -- Dotanuki
         player:messageSpecial(ID.text.ITEM_OBTAINED, xi.item.DOTANUKI)
         player:completeQuest(xi.questLog.OUTLANDS, xi.quest.id.outlands.DONT_FORGET_THE_ANTIDOTE)
-        player:addFame(xi.quest.fame_area.SELBINA_RABAO, 60)
+        player:addFame(xi.fameArea.SELBINA_RABAO, 60)
     elseif csid == 4 then --Subsequent completions
         player:tradeComplete()
         npcUtil.giveCurrency(player, 'gil', 1800)
-        player:addFame(xi.quest.fame_area.SELBINA_RABAO, 30)
+        player:addFame(xi.fameArea.SELBINA_RABAO, 30)
     end
 end
 

@@ -28,7 +28,7 @@ end
 quest.reward =
 {
     fame     = 10,
-    fameArea = xi.quest.fame_area.WINDURST,
+    fameArea = xi.fameArea.WINDURST,
     item     = xi.item.PROMISE_BADGE,
 }
 
@@ -48,7 +48,7 @@ quest.sections =
                 onTrigger = function(player, npc)
                     if
                         player:getMainLvl() >= 5 and
-                        player:getFameLevel(xi.quest.fame_area.WINDURST) >= 5 and
+                        player:getFameLevel(xi.fameArea.WINDURST) >= 5 and
                         not quest:getMustZone(player)
                     then
                         if player:getRank(xi.nation.WINDURST) < 9 then

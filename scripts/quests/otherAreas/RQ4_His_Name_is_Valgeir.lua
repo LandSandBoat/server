@@ -12,7 +12,7 @@ local quest = Quest:new(xi.questLog.OTHER_AREAS, xi.quest.id.otherAreas.HIS_NAME
 quest.reward =
 {
     fame     = 120,
-    fameArea = xi.quest.fame_area.WINDURST,
+    fameArea = xi.fameArea.WINDURST,
     gil      = 2000,
     keyItem  = xi.ki.MAP_OF_THE_TORAIMARAI_CANAL,
 }
@@ -33,7 +33,7 @@ quest.sections =
                 onTrigger = function(player, npc)
                     if
                         player:getCharVar('Quest[4][2]DayCompleted') + 2 < VanadielUniqueDay() and
-                        player:getFameLevel(xi.quest.fame_area.WINDURST) > 2
+                        player:getFameLevel(xi.fameArea.WINDURST) > 2
                     then
                         return quest:progressEvent(86) -- His Name is Valgeir starting event.
                     else

@@ -12,7 +12,7 @@ local quest = Quest:new(xi.questLog.WINDURST, xi.quest.id.windurst.BLAST_FROM_TH
 quest.reward =
 {
     fame     = 30,
-    fameArea = xi.quest.fame_area.WINDURST,
+    fameArea = xi.fameArea.WINDURST,
     item     = xi.item.GREAT_CLUB,
     title    = xi.title.FOSSILIZED_SEA_FARER,
 }
@@ -24,7 +24,7 @@ quest.sections =
             return status == xi.questStatus.QUEST_AVAILABLE and
                 player:hasCompletedQuest(xi.questLog.WINDURST, xi.quest.id.windurst.STAR_STRUCK) and
                 player:getQuestStatus(xi.questLog.WINDURST, xi.quest.id.windurst.CLASS_REUNION) ~= xi.questStatus.QUEST_ACCEPTED and
-                player:getFameLevel(xi.quest.fame_area.WINDURST) >= 3 and
+                player:getFameLevel(xi.fameArea.WINDURST) >= 3 and
                 not quest:getMustZone(player)
         end,
 

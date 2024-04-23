@@ -12,7 +12,7 @@ local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.SMOKE_ON_THE_MOUN
 quest.reward =
 {
     fame     = 5,
-    fameArea = xi.quest.fame_area.BASTOK,
+    fameArea = xi.fameArea.BASTOK,
     gil      = 300,
     title    = xi.title.HOT_DOG,
 }
@@ -61,7 +61,7 @@ quest.sections =
                     player:confirmTrade()
 
                     if player:getQuestStatus(quest.areaId, quest.questId) == xi.questStatus.QUEST_ACCEPTED then
-                        player:addFame(xi.quest.fame_area.BASTOK, 25)
+                        player:addFame(xi.fameArea.BASTOK, 25)
                     end
 
                     quest:complete(player)

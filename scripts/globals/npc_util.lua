@@ -452,7 +452,7 @@ end
                 fromTrade = true,
             },
             ki = xi.ki.ZERUHN_REPORT,           -- see npcUtil.giveKeyItem for formats
-            fameArea = xi.quest.fame_area.NORG, -- Required for Fame to be applied
+            fameArea = xi.fameArea.NORG, -- Required for Fame to be applied
             fame = 120,                         -- fame defaults to 30 if not set
             bayld = 500,
             gil = 200,
@@ -539,7 +539,7 @@ end
                 fromTrade = true,
             },
             ki = xi.ki.ZERUHN_REPORT,           -- see npcUtil.giveKeyItem for formats
-            fameArea = xi.quest.fame_area.NORG, -- Required for Fame to be applied
+            fameArea = xi.fameArea.NORG, -- Required for Fame to be applied
             fame = 120,                         -- fame defaults to 30 if not set
             bayld = 500,
             gil = 200,

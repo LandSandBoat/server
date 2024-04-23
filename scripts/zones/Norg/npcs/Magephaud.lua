@@ -19,7 +19,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local nFame = player:getFameLevel(xi.quest.fame_area.NORG)
+    local nFame = player:getFameLevel(xi.fameArea.NORG)
 
     if
         player:getQuestStatus(xi.questLog.OUTLANDS, xi.quest.id.outlands.EVERYONES_GRUDGE) == xi.questStatus.QUEST_AVAILABLE and
@@ -46,7 +46,7 @@ entity.onEventFinish = function(player, csid, option, npc)
     elseif csid == 118 then
         player:completeQuest(xi.questLog.OUTLANDS, xi.quest.id.outlands.EVERYONES_GRUDGE)
         player:tradeComplete()
-        player:addFame(xi.quest.fame_area.NORG, 80)
+        player:addFame(xi.fameArea.NORG, 80)
         player:addKeyItem(xi.ki.TONBERRY_PRIEST_KEY)    -- Permanent Tonberry key
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.TONBERRY_PRIEST_KEY)
         player:setCharVar('EveryonesGrudgeStarted', 0)

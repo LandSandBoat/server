@@ -14,7 +14,7 @@ entity.onTrigger = function(player, npc)
 
     if
         anUndyingPledge == xi.questStatus.QUEST_AVAILABLE and
-        player:getFameLevel(xi.quest.fame_area.NORG) >= 4
+        player:getFameLevel(xi.fameArea.NORG) >= 4
     then
         player:startEvent(225) -- Start quest
     elseif
@@ -50,7 +50,7 @@ entity.onEventFinish = function(player, csid, option, npc)
         csid == 227 and
         npcUtil.completeQuest(player, xi.questLog.OUTLANDS, xi.quest.id.outlands.AN_UNDYING_PLEDGE, {
             item = 12375,
-            fameArea = xi.quest.fame_area.NORG,
+            fameArea = xi.fameArea.NORG,
             fame = 50,
             var = 'anUndyingPledgeCS',
         })

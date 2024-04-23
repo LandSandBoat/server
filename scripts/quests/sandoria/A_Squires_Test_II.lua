@@ -14,7 +14,7 @@ local quest = Quest:new(xi.questLog.SANDORIA, xi.quest.id.sandoria.A_SQUIRES_TES
 quest.reward =
 {
     fame     = 30,
-    fameArea = xi.quest.fame_area.SANDORIA,
+    fameArea = xi.fameArea.SANDORIA,
     keyItem  = xi.ki.SQUIRE_CERTIFICATE,
     title    = xi.title.SPELUNKER,
 }

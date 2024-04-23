@@ -10,7 +10,7 @@ local quest = Quest:new(xi.questLog.WINDURST, xi.quest.id.windurst.CURSES_FOILED
 quest.reward =
 {
     fame     = 80,
-    fameArea = xi.quest.fame_area.WINDURST,
+    fameArea = xi.fameArea.WINDURST,
     item     = xi.item.BRASS_ROD,
 }
 

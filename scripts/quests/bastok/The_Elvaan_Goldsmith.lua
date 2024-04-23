@@ -10,7 +10,7 @@ local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.THE_ELVAAN_GOLDSM
 quest.reward =
 {
     fame     = 30,
-    fameArea = xi.quest.fame_area.BASTOK,
+    fameArea = xi.fameArea.BASTOK,
     gil      = 180,
 }
 
@@ -39,7 +39,7 @@ quest.sections =
             return status == xi.questStatus.QUEST_ACCEPTED or
                 (
                     status == xi.questStatus.QUEST_COMPLETED and
-                    player:getFameLevel(xi.quest.fame_area.BASTOK) == 1 and
+                    player:getFameLevel(xi.fameArea.BASTOK) == 1 and
                     not quest:getMustZone(player)
                 )
         end,

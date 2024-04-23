@@ -10,7 +10,7 @@ local quest = Quest:new(xi.questLog.JEUNO, xi.quest.id.jeuno.DEAL_WITH_TENSHODO)
 quest.reward =
 {
     fame     = 30,
-    fameArea = xi.quest.fame_area.JEUNO,
+    fameArea = xi.fameArea.JEUNO,
     keyItem  = xi.ki.CLOCK_TOWER_OIL,
     title    = xi.title.TRADER_OF_RENOWN,
 }
@@ -28,7 +28,7 @@ quest.sections =
             ['Garnev'] =
             {
                 onTrigger = function(player, npc)
-                    if player:getFameLevel(xi.quest.fame_area.NORG) >= 2 then
+                    if player:getFameLevel(xi.fameArea.NORG) >= 2 then
                         return quest:progressEvent(167)
                     else
                         return quest:event(168)

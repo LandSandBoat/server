@@ -61,7 +61,7 @@ entity.onTrigger = function(player, npc)
     -- THE RUMOR
     elseif
         theRumor == xi.questStatus.QUEST_AVAILABLE and
-        player:getFameLevel(xi.quest.fame_area.SANDORIA) >= 3 and
+        player:getFameLevel(xi.fameArea.SANDORIA) >= 3 and
         player:getMainLvl() >= 10
     then
         player:startEvent(13)

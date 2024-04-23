@@ -41,7 +41,7 @@ battlefieldObject.onEventFinish = function(player, csid, option, npc)
             player:messageSpecial(ID.text.ITEM_OBTAINED, xi.item.SCROLL_OF_INSTANT_WARP)
         end
 
-        player:addFame(xi.quest.fame_area.WINDURST, 30)
+        player:addFame(xi.fameArea.WINDURST, 30)
         player:completeQuest(xi.questLog.OUTLANDS, xi.quest.id.outlands.TRIAL_SIZE_TRIAL_BY_FIRE)
     end
 end

@@ -10,7 +10,7 @@ local quest = Quest:new(xi.questLog.JEUNO, xi.quest.id.jeuno.MYSTERIES_OF_BEADEA
 quest.reward =
 {
     fame = 30,
-    fameArea = xi.quest.fame_area.JEUNO,
+    fameArea = xi.fameArea.JEUNO,
     keyItem = xi.ki.BLACK_MATINEE_NECKLACE,
 }
 

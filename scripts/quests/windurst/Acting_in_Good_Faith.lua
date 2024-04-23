@@ -14,7 +14,7 @@ local quest = Quest:new(xi.questLog.WINDURST, xi.quest.id.windurst.ACTING_IN_GOO
 quest.reward =
 {
     fame     = 30,
-    fameArea = xi.quest.fame_area.WINDURST,
+    fameArea = xi.fameArea.WINDURST,
     item     = xi.item.SCROLL_OF_TELEPORT_MEA,
     title    = xi.title.PILGRIM_TO_MEA,
 }
@@ -24,7 +24,7 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == xi.questStatus.QUEST_AVAILABLE and
-                player:getFameLevel(xi.quest.fame_area.WINDURST) >= 4 and
+                player:getFameLevel(xi.fameArea.WINDURST) >= 4 and
                 player:getMainLvl() >= 10
         end,
 

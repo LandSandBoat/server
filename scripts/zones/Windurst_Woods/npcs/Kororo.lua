@@ -26,7 +26,7 @@ entity.onTrigger = function(player, npc)
     elseif
         c2000 == xi.questStatus.QUEST_COMPLETED and
         aGreetingCardian == xi.questStatus.QUEST_AVAILABLE and
-        player:getFameLevel(xi.quest.fame_area.WINDURST) >= 3
+        player:getFameLevel(xi.fameArea.WINDURST) >= 3
     then
         player:startEvent(296) -- A Greeting Cardian quest start
     elseif aGreetingCardian == xi.questStatus.QUEST_ACCEPTED and agccs == 3 then
@@ -66,7 +66,7 @@ entity.onEventFinish = function(player, csid, option, npc)
         else
             player:addItem(xi.item.TOURMALINE_EARRING)
             player:messageSpecial(ID.text.ITEM_OBTAINED, xi.item.TOURMALINE_EARRING) -- Tourmaline Earring
-            player:addFame(xi.quest.fame_area.WINDURST, 30)
+            player:addFame(xi.fameArea.WINDURST, 30)
             player:completeQuest(xi.questLog.WINDURST, xi.quest.id.windurst.A_GREETING_CARDIAN)
             player:needToZone(true) -- zone before starting Legendary Plan B
             player:setCharVar('AGreetingCardian_timer', 0)

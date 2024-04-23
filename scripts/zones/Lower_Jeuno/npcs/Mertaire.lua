@@ -73,7 +73,7 @@ entity.onEventFinish = function(player, csid, option, npc)
         npcUtil.giveCurrency(player, 'gil', 2100)
         player:tradeComplete()
         player:completeQuest(xi.questLog.JEUNO, xi.quest.id.jeuno.A_MINSTREL_IN_DESPAIR)
-        player:addFame(xi.quest.fame_area.JEUNO, 30)
+        player:addFame(xi.fameArea.JEUNO, 30)
 
         -- Placing this here allows the player to get additional poetic
         -- parchments should they drop them until this quest is complete

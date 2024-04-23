@@ -10,7 +10,7 @@ local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.GOURMET)
 quest.reward =
 {
     fame     = 30,
-    fameArea = xi.quest.fame_area.BASTOK,
+    fameArea = xi.fameArea.BASTOK,
     title    = xi.title.MOMMYS_HELPER,
 }
 
@@ -29,7 +29,7 @@ local function tradeEventFinish(player, gilReward, additionalFame)
         player:confirmTrade()
 
         npcUtil.giveCurrency(player, 'gil', gilReward)
-        player:addFame(xi.quest.fame_area.BASTOK, additionalFame)
+        player:addFame(xi.fameArea.BASTOK, additionalFame)
         quest:setMustZone(player)
     end
 end

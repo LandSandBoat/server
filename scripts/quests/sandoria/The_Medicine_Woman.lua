@@ -14,7 +14,7 @@ local quest = Quest:new(xi.questLog.SANDORIA, xi.quest.id.sandoria.THE_MEDICINE_
 quest.reward =
 {
     fame     = 30,
-    fameArea = xi.quest.fame_area.SANDORIA,
+    fameArea = xi.fameArea.SANDORIA,
     gil      = 2100,
     title    = xi.title.TRAVELING_MEDICINE_MAN,
 }
@@ -25,7 +25,7 @@ quest.sections =
         check = function(player, status, vars)
             return status == xi.questStatus.QUEST_AVAILABLE and
                 player:hasCompletedQuest(xi.questLog.SANDORIA, xi.quest.id.sandoria.THE_TRADER_IN_THE_FOREST) and
-                player:getFameLevel(xi.quest.fame_area.SANDORIA) >= 3
+                player:getFameLevel(xi.fameArea.SANDORIA) >= 3
         end,
 
         [xi.zone.NORTHERN_SAN_DORIA] =

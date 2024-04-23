@@ -12,7 +12,7 @@ local quest = Quest:new(xi.questLog.JEUNO, xi.quest.id.jeuno.LURE_OF_THE_WILDCAT
 quest.reward =
 {
     fame     = 150,
-    fameArea = xi.quest.fame_area.JEUNO,
+    fameArea = xi.fameArea.JEUNO,
     keyItem  = xi.ki.WHITE_INVITATION_CARD,
 }
 

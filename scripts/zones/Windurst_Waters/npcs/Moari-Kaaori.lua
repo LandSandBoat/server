@@ -41,7 +41,7 @@ entity.onTrigger = function(player, npc)
 
     if
         sayFlowers == xi.questStatus.QUEST_AVAILABLE and
-        player:getFameLevel(xi.quest.fame_area.WINDURST) >= 2
+        player:getFameLevel(xi.fameArea.WINDURST) >= 2
     then
         player:startEvent(514) -- Begin Say It with Flowers.
     elseif flowerProgress == 3 or flowerProgress == 1 then
@@ -67,7 +67,7 @@ entity.onEventFinish = function(player, csid, option, npc)
             player:tradeComplete()
             player:addItem(xi.item.IRON_SWORD)
             player:completeQuest(xi.questLog.WINDURST, xi.quest.id.windurst.SAY_IT_WITH_FLOWERS)
-            player:addFame(xi.quest.fame_area.WINDURST, 30)
+            player:addFame(xi.fameArea.WINDURST, 30)
             player:messageSpecial(ID.text.ITEM_OBTAINED, xi.item.IRON_SWORD)
             player:setCharVar('FLOWER_PROGRESS', 0)
             player:needToZone(true)
@@ -79,14 +79,14 @@ entity.onEventFinish = function(player, csid, option, npc)
         player:completeQuest(xi.questLog.WINDURST, xi.quest.id.windurst.SAY_IT_WITH_FLOWERS)
         player:tradeComplete()
         npcUtil.giveCurrency(player, 'gil', 100)
-        player:addFame(xi.quest.fame_area.WINDURST, 10)
+        player:addFame(xi.fameArea.WINDURST, 10)
         player:needToZone(true)
         player:setCharVar('FLOWER_PROGRESS', 0)
     elseif csid == 523 then
         player:setCharVar('FLOWER_PROGRESS', 1)
     elseif csid == 525 then -- Repeatable quest rewards.
         player:tradeComplete()
-        player:addFame(xi.quest.fame_area.WINDURST, 30)
+        player:addFame(xi.fameArea.WINDURST, 30)
         player:addGil(xi.settings.main.GIL_RATE * 400)
         player:setCharVar('FLOWER_PROGRESS', 0)
         player:needToZone(true)

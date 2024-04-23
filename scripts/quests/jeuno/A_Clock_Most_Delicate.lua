@@ -11,7 +11,7 @@ local quest = Quest:new(xi.questLog.JEUNO, xi.quest.id.jeuno.A_CLOCK_MOST_DELICA
 quest.reward =
 {
     fame     = 30,
-    fameArea = xi.quest.fame_area.JEUNO,
+    fameArea = xi.fameArea.JEUNO,
     gil      = 1200,
     item     = xi.item.ENGINEERS_GLOVES,
     title    = xi.title.PROFESSIONAL_LOAFER,
@@ -22,7 +22,7 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == xi.questStatus.QUEST_AVAILABLE and
-                player:getFameLevel(xi.quest.fame_area.JEUNO) >= 5
+                player:getFameLevel(xi.fameArea.JEUNO) >= 5
         end,
 
         [xi.zone.UPPER_JEUNO] =

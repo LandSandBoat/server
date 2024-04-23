@@ -18,7 +18,7 @@ local quest = Quest:new(xi.questLog.ADOULIN, xi.quest.id.adoulin.THE_LONGEST_WAY
 
 quest.reward =
 {
-    fameArea = xi.quest.fame_area.ADOULIN,
+    fameArea = xi.fameArea.ADOULIN,
     xp       = 1000,
     bayld    = 500,
 }

@@ -20,7 +20,7 @@ entity.onTrigger = function(player, npc)
     elseif gates == xi.questStatus.QUEST_ACCEPTED then
         player:showText(npc, ID.text.OLBERGIEUT_DIALOG, xi.ki.SCRIPTURE_OF_WIND)
     elseif
-        player:getFameLevel(xi.quest.fame_area.SANDORIA) >= 2 and
+        player:getFameLevel(xi.fameArea.SANDORIA) >= 2 and
         gates == xi.questStatus.QUEST_AVAILABLE
     then
         player:startEvent(619)
@@ -42,7 +42,7 @@ entity.onEventFinish = function(player, csid, option, npc)
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.item.COTTON_CAPE)
         else
             player:completeQuest(xi.questLog.SANDORIA, xi.quest.id.sandoria.GATES_TO_PARADISE)
-            player:addFame(xi.quest.fame_area.SANDORIA, 30)
+            player:addFame(xi.fameArea.SANDORIA, 30)
             player:addTitle(xi.title.THE_PIOUS_ONE)
             player:delKeyItem(xi.ki.SCRIPTURE_OF_WATER)
             player:addItem(xi.item.COTTON_CAPE, 1)

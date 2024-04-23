@@ -24,7 +24,7 @@ entity.onTrigger = function(player, npc)
         player:getMainLvl() >= 20 and
         player:getMainJob() == xi.job.SMN and
         trialSizeLightning == xi.questStatus.QUEST_AVAILABLE and
-        player:getFameLevel(xi.quest.fame_area.WINDURST) >= 2
+        player:getFameLevel(xi.fameArea.WINDURST) >= 2
     then
         --Requires player to be Summoner at least lvl 20
         player:startEvent(10025, 0, xi.item.MINI_TUNING_FORK_OF_LIGHTNING, 5, 20)     --mini tuning fork of lightning, zone, level

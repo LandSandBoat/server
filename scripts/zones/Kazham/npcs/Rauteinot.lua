@@ -24,7 +24,7 @@ entity.onTrigger = function(player, npc)
 
     if
         missionaryMan == xi.questStatus.QUEST_AVAILABLE and
-        player:getFameLevel(xi.quest.fame_area.WINDURST) >= 3
+        player:getFameLevel(xi.fameArea.WINDURST) >= 3
     then
         player:startEvent(137, 0, xi.item.SLAB_OF_ELSHIMO_MARBLE) -- Start quest "Missionary Man"
     elseif missionaryMan == xi.questStatus.QUEST_ACCEPTED and missionaryManVar == 1 then
@@ -63,7 +63,7 @@ entity.onEventFinish = function(player, csid, option, npc)
             player:delKeyItem(xi.ki.SUBLIME_STATUE_OF_THE_GODDESS)
             player:addItem(xi.item.SCROLL_OF_TELEPORT_YHOAT)
             player:messageSpecial(ID.text.ITEM_OBTAINED, xi.item.SCROLL_OF_TELEPORT_YHOAT)
-            player:addFame(xi.quest.fame_area.WINDURST, 30)
+            player:addFame(xi.fameArea.WINDURST, 30)
             player:completeQuest(xi.questLog.OUTLANDS, xi.quest.id.outlands.MISSIONARY_MAN)
         end
     end

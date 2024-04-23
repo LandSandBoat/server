@@ -22,7 +22,7 @@ entity.onTrigger = function(player, npc)
     then
         player:startEvent(807)
     elseif
-        player:getFameLevel(xi.quest.fame_area.SANDORIA) >= 4 and
+        player:getFameLevel(xi.fameArea.SANDORIA) >= 4 and
         distantLoyalties == 0
     then
         player:startEvent(663)

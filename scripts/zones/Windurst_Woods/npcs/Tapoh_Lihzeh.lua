@@ -67,7 +67,7 @@ entity.onEventFinish = function(player, csid, option, npc)
         if player:getQuestStatus(xi.questLog.WINDURST, xi.quest.id.windurst.PAYING_LIP_SERVICE) == xi.questStatus.QUEST_ACCEPTED then
             npcUtil.completeQuest(player, xi.questLog.WINDURST, xi.quest.id.windurst.PAYING_LIP_SERVICE, { fame = 60, title = xi.title.KISSER_MAKE_UPPER })
         else
-            player:addFame(xi.quest.fame_area.WINDURST, 8)
+            player:addFame(xi.fameArea.WINDURST, 8)
         end
 
         if option == 1 then

@@ -2,7 +2,7 @@ xi = xi or {}
 
 xi.questStatus =
 {
-    xi.questStatus.QUEST_AVAILABLE = 0,
-    xi.questStatus.QUEST_ACCEPTED  = 1,
-    xi.questStatus.QUEST_COMPLETED = 2,
+    QUEST_AVAILABLE = 0,
+    QUEST_ACCEPTED  = 1,
+    QUEST_COMPLETED = 2,
 }

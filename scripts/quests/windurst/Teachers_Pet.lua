@@ -10,7 +10,7 @@ local quest = Quest:new(xi.questLog.WINDURST, xi.quest.id.windurst.TEACHERS_PET)
 quest.reward =
 {
     fame     = 8,
-    fameArea = xi.quest.fame_area.WINDURST,
+    fameArea = xi.fameArea.WINDURST,
     gil      = 250,
 }
 
@@ -75,7 +75,7 @@ quest.sections =
                     player:confirmTrade()
 
                     if player:getQuestStatus(quest.areaId, quest.questId) == xi.questStatus.QUEST_ACCEPTED then
-                        player:addFame(xi.quest.fame_area.BASTOK, 67)
+                        player:addFame(xi.fameArea.BASTOK, 67)
                     end
 
                     if quest:complete(player) then

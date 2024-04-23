@@ -62,7 +62,7 @@ entity.onEventFinish = function(player, csid, option, npc)
         player:setCharVar('OfferingWaterOK', 0)
         player:addTitle(xi.title.ROYAL_GRAVE_KEEPER)
         npcUtil.giveCurrency(player, 'gil', 560)
-        player:addFame(xi.quest.fame_area.SANDORIA, 30)
+        player:addFame(xi.fameArea.SANDORIA, 30)
         player:completeQuest(xi.questLog.SANDORIA, xi.quest.id.sandoria.GRAVE_CONCERNS)
     end
 end

@@ -12,7 +12,7 @@ local quest = Quest:new(xi.questLog.SANDORIA, xi.quest.id.sandoria.OLD_WOUNDS)
 quest.reward =
 {
     fame = 30,
-    fameArea = xi.quest.fame_area.SANDORIA,
+    fameArea = xi.fameArea.SANDORIA,
 }
 
 quest.sections =

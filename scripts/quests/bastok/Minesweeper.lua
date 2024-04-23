@@ -10,7 +10,7 @@ local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.MINESWEEPER)
 quest.reward =
 {
     fame     = 8,
-    fameArea = xi.quest.fame_area.BASTOK,
+    fameArea = xi.fameArea.BASTOK,
     gil      = 150,
     title    = xi.title.ZERUHN_SWEEPER,
 }
@@ -59,7 +59,7 @@ quest.sections =
                     -- From previous implementation, award 75 fame (67 + 8) on first completion,
                     -- and 8 fame for any subsequent trade.
                     if player:getQuestStatus(quest.areaId, quest.questId) == xi.questStatus.QUEST_ACCEPTED then
-                        player:addFame(xi.quest.fame_area.BASTOK, 67)
+                        player:addFame(xi.fameArea.BASTOK, 67)
                     end
 
                     quest:complete(player)

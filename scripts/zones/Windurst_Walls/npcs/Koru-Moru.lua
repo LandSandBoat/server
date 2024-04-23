@@ -112,7 +112,7 @@ entity.onEventFinish = function(player, csid, option, npc)
             player:setCharVar('ClassReunion_TalkedToFurakku', 0)
             player:setCharVar('ClassReunion_TalkedToFupepe', 0)
             player:needToZone(true)
-            player:addFame(xi.quest.fame_area.WINDURST, 40)
+            player:addFame(xi.fameArea.WINDURST, 40)
         else
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.item.EVOKERS_SPATS)
         end
@@ -128,7 +128,7 @@ entity.onEventFinish = function(player, csid, option, npc)
             player:messageSpecial(ID.text.ITEM_OBTAINED, xi.item.EVOKERS_HORN)
             player:addTitle(xi.title.PARAGON_OF_SUMMONER_EXCELLENCE)
             player:completeQuest(xi.questLog.WINDURST, xi.quest.id.windurst.CARBUNCLE_DEBACLE)
-            player:addFame(xi.quest.fame_area.WINDURST, 60)
+            player:addFame(xi.fameArea.WINDURST, 60)
             player:setCharVar('CarbuncleDebacleProgress', 0)
             player:needToZone(true)
         else

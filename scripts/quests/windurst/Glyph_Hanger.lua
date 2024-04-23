@@ -12,7 +12,7 @@ quest.reward =
 {
     xp = 2000,
     fame = 120,
-    fameArea = xi.quest.fame_area.WINDURST,
+    fameArea = xi.fameArea.WINDURST,
     keyItem = xi.ki.MAP_OF_THE_HORUTOTO_RUINS,
 }
 

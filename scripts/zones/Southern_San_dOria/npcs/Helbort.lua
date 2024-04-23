@@ -13,7 +13,7 @@ end
 
 entity.onTrigger = function(player, npc)
     if
-        player:getFameLevel(xi.quest.fame_area.SANDORIA) >= 2 and
+        player:getFameLevel(xi.fameArea.SANDORIA) >= 2 and
         player:getQuestStatus(xi.questLog.SANDORIA, xi.quest.id.sandoria.FATHER_AND_SON) == xi.questStatus.QUEST_COMPLETED and
         player:getQuestStatus(xi.questLog.SANDORIA, xi.quest.id.sandoria.A_PURCHASE_OF_ARMS) == xi.questStatus.QUEST_AVAILABLE
     then
@@ -44,7 +44,7 @@ entity.onEventFinish = function(player, csid, option, npc)
             player:delKeyItem(xi.ki.WEAPONS_RECEIPT)
             player:addItem(xi.item.ELM_STAFF)
             player:messageSpecial(ID.text.ITEM_OBTAINED, xi.item.ELM_STAFF)
-            player:addFame(xi.quest.fame_area.SANDORIA, 30)
+            player:addFame(xi.fameArea.SANDORIA, 30)
             player:completeQuest(xi.questLog.SANDORIA, xi.quest.id.sandoria.A_PURCHASE_OF_ARMS)
         end
     end

@@ -16,7 +16,7 @@ local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.DARK_LEGACY)
 quest.reward =
 {
     fame     = 20,
-    fameArea = xi.quest.fame_area.BASTOK,
+    fameArea = xi.fameArea.BASTOK,
     item     = xi.item.RAVEN_SCYTHE,
 }
 

@@ -50,7 +50,7 @@ entity.onTrigger = function(player, npc)
         player:startEvent(482, 0, 0, xi.item.SCORPION_STINGER)
     elseif
         amazinScorpio == xi.questStatus.QUEST_AVAILABLE and
-        player:getFameLevel(xi.quest.fame_area.WINDURST) >= 2
+        player:getFameLevel(xi.fameArea.WINDURST) >= 2
     then
         player:startEvent(481, 0, 0, xi.item.SCORPION_STINGER)
     else

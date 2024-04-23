@@ -13,7 +13,7 @@ local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.FADED_PROMISES)
 quest.reward =
 {
     fame     = 10,
-    fameArea = xi.quest.fame_area.BASTOK,
+    fameArea = xi.fameArea.BASTOK,
     item     = xi.item.FUKURO,
     title    = xi.title.ASSASSIN_REJECT,
 }
@@ -25,7 +25,7 @@ quest.sections =
             return status == xi.questStatus.QUEST_AVAILABLE and
                 player:getMainJob() == xi.job.NIN and
                 player:getMainLvl() >= 20 and
-                player:getFameLevel(xi.quest.fame_area.BASTOK) >= 4
+                player:getFameLevel(xi.fameArea.BASTOK) >= 4
         end,
 
         [xi.zone.METALWORKS] =

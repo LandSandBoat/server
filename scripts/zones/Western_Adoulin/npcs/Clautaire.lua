@@ -23,7 +23,7 @@ entity.onTrigger = function(player, npc)
         end
     elseif
         finao == xi.questStatus.QUEST_AVAILABLE and
-        player:getFameLevel(xi.quest.fame_area.ADOULIN) >= 4 and
+        player:getFameLevel(xi.fameArea.ADOULIN) >= 4 and
         player:hasKeyItem(xi.ki.FAIL_BADGE)
     then
         -- Starting Quest: 'F.A.I.L.ure Is Not an Option'
@@ -45,7 +45,7 @@ entity.onEventFinish = function(player, csid, option, npc)
         player:addExp(1000 * xi.settings.main.EXP_RATE)
         player:addCurrency('bayld', 500 * xi.settings.main.BAYLD_RATE)
         player:messageSpecial(ID.text.BAYLD_OBTAINED, 500 * xi.settings.main.BAYLD_RATE)
-        player:addFame(xi.quest.fame_area.ADOULIN)
+        player:addFame(xi.fameArea.ADOULIN)
     end
 end
 

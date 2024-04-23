@@ -31,7 +31,7 @@ entity.onTrigger = function(player, npc)
     local toBeeOrNotStatus = player:getCharVar('ToBeeOrNot_var')
 
     if
-        (player:getFameLevel(xi.quest.fame_area.WINDURST) >= 2 and postmanKOsTwice == xi.questStatus.QUEST_COMPLETED and toBee == xi.questStatus.QUEST_AVAILABLE) or
+        (player:getFameLevel(xi.fameArea.WINDURST) >= 2 and postmanKOsTwice == xi.questStatus.QUEST_COMPLETED and toBee == xi.questStatus.QUEST_AVAILABLE) or
         (toBee == xi.questStatus.QUEST_ACCEPTED and toBeeOrNotStatus == 10)
     then
         player:startEvent(64)   -- Just Before Quest Start 'Too Bee or Not Too Be' (Speech given with lots of coughing)
@@ -83,7 +83,7 @@ entity.onEventFinish = function(player, csid, option, npc)
     elseif csid == 75 then -- After Honey#5: ToBee quest Finish (tooth hurts from all the Honey)
         player:tradeComplete()
         player:setCharVar('ToBeeOrNot_var', 5)
-        player:addFame(xi.quest.fame_area.WINDURST, 30)
+        player:addFame(xi.fameArea.WINDURST, 30)
         player:completeQuest(xi.questLog.WINDURST, xi.quest.id.windurst.TO_BEE_OR_NOT_TO_BEE)
         player:needToZone(true)
     end

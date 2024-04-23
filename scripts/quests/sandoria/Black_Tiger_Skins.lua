@@ -10,7 +10,7 @@ local quest = Quest:new(xi.questLog.SANDORIA, xi.quest.id.sandoria.BLACK_TIGER_S
 quest.reward =
 {
     fame = 30,
-    fameArea = xi.quest.fame_area.SANDORIA,
+    fameArea = xi.fameArea.SANDORIA,
     item = xi.item.TIGER_STOLE,
     itemParams = { fromTrade = true },
     title = xi.title.CAT_SKINNER,
@@ -21,7 +21,7 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == xi.questStatus.QUEST_AVAILABLE and
-                player:getFameLevel(xi.quest.fame_area.SANDORIA) >= 3 and
+                player:getFameLevel(xi.fameArea.SANDORIA) >= 3 and
                 player:hasCompletedQuest(xi.questLog.SANDORIA, xi.quest.id.sandoria.LIZARD_SKINS)
         end,
 
@@ -90,7 +90,7 @@ quest.sections =
 
     {
         check = function(player, status, vars)
-            return status == xi.questStatus.QUEST_COMPLETED and player:getFameLevel(xi.quest.fame_area.SANDORIA) >= 3
+            return status == xi.questStatus.QUEST_COMPLETED and player:getFameLevel(xi.fameArea.SANDORIA) >= 3
         end,
 
         [xi.zone.SOUTHERN_SAN_DORIA] =

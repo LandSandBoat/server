@@ -15,7 +15,7 @@ local quest = Quest:new(xi.questLog.ADOULIN, xi.quest.id.adoulin.HIDE_AND_GO_PEA
 -- to the quest complete to cover this.
 quest.reward =
 {
-    fameArea = xi.quest.fame_area.ADOULIN,
+    fameArea = xi.fameArea.ADOULIN,
     bayld    = 500,
 }
 

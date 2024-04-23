@@ -10,7 +10,7 @@ local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.THE_RETURN_OF_THE
 quest.reward =
 {
     fame     = 80,
-    fameArea = xi.quest.fame_area.BASTOK,
+    fameArea = xi.fameArea.BASTOK,
     item     = xi.item.COTTON_HEADBAND,
     title    = xi.title.KULATZ_BRIDGE_COMPANION,
 }
@@ -21,7 +21,7 @@ quest.sections =
         check = function(player, status, vars)
             return status == xi.questStatus.QUEST_AVAILABLE and
                 player:hasCompletedQuest(xi.questLog.BASTOK, xi.quest.id.bastok.FATHER_FIGURE) and
-                player:getFameLevel(xi.quest.fame_area.BASTOK) >= 3
+                player:getFameLevel(xi.fameArea.BASTOK) >= 3
         end,
 
         [xi.zone.BASTOK_MARKETS] =

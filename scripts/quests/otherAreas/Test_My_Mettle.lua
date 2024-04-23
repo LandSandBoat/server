@@ -15,7 +15,7 @@ local quest = Quest:new(xi.questLog.OTHER_AREAS, xi.quest.id.otherAreas.TEST_MY_
 quest.reward =
 {
     fame     = 30,
-    fameArea = xi.quest.fame_area.SELBINA_RABAO,
+    fameArea = xi.fameArea.SELBINA_RABAO,
 }
 
 local betAmounts =
@@ -51,7 +51,7 @@ quest.sections =
             return status ~= xi.questStatus.QUEST_ACCEPTED and
                 player:getMainLvl() >= 10 and
                 player:getRank(player:getNation()) >= 2 and
-                player:getFameLevel(xi.quest.fame_area.SELBINA_RABAO) >= 2 and
+                player:getFameLevel(xi.fameArea.SELBINA_RABAO) >= 2 and
                 quest:getVar(player, 'Repeat') <= os.time()
         end,
 

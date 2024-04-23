@@ -66,7 +66,7 @@ entity.onTrigger = function(player, npc)
     -- AN EXPLORER'S FOOTSTEPS
     if
         anExplorersFootsteps == xi.questStatus.QUEST_AVAILABLE and
-        player:getFameLevel(xi.quest.fame_area.SELBINA_RABAO) >= 1
+        player:getFameLevel(xi.fameArea.SELBINA_RABAO) >= 1
     then
         player:startEvent(40)
     elseif anExplorersFootsteps == xi.questStatus.QUEST_ACCEPTED then

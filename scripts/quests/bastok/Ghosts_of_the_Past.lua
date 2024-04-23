@@ -13,7 +13,7 @@ local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.GHOSTS_OF_THE_PAS
 quest.reward =
 {
     fame     = 20,
-    fameArea = xi.quest.fame_area.BASTOK,
+    fameArea = xi.fameArea.BASTOK,
     item     = xi.item.BEAT_CESTI,
 }
 

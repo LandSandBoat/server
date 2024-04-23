@@ -54,12 +54,12 @@ entity.onTrigger = function(player, npc)
     local amqtr = player:getQuestStatus(xi.questLog.ADOULIN, xi.quest.id.adoulin.ALWAYS_MORE_QUOTH_THE_RAVENOUS)
 
     if
-        player:getFameLevel(xi.quest.fame_area.ADOULIN) >= 2 and
+        player:getFameLevel(xi.fameArea.ADOULIN) >= 2 and
         not player:needToZone() and VanadielUniqueDay() > player:getCharVar('Westerly_Breeze_Wait')
     then
         if
             amqtr ~= xi.questStatus.QUEST_COMPLETED and
-            player:getFameLevel(xi.quest.fame_area.ADOULIN) >= 3
+            player:getFameLevel(xi.fameArea.ADOULIN) >= 3
         then
             if amqtr == xi.questStatus.QUEST_AVAILABLE then
                 -- Starts Quest: 'Always More Quoth the Ravenous'
@@ -86,7 +86,7 @@ entity.onEventFinish = function(player, csid, option, npc)
         player:addExp(1500 * xi.settings.main.EXP_RATE)
         player:addCurrency('bayld', 1000 * xi.settings.main.BAYLD_RATE)
         player:messageSpecial(ID.text.BAYLD_OBTAINED, 1000 * xi.settings.main.BAYLD_RATE)
-        player:addFame(xi.quest.fame_area.ADOULIN)
+        player:addFame(xi.fameArea.ADOULIN)
         player:setCharVar('Westerly_Breeze_Wait', 0)
     elseif csid == 3014 then
         -- Consuming wrong food item given to him during his quests

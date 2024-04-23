@@ -10,7 +10,7 @@ local quest = Quest:new(xi.questLog.JEUNO, xi.quest.id.jeuno.EMPTY_MEMORIES)
 quest.reward =
 {
     fame     = 5,
-    fameArea = xi.quest.fame_area.JEUNO,
+    fameArea = xi.fameArea.JEUNO,
 }
 
 local rewardItems =
@@ -35,7 +35,7 @@ local memoriesOnEventFinish = function(player, csid, option, npc)
         end
 
         if player:getQuestStatus(quest.areaId, quest.questId) == xi.questStatus.QUEST_ACCEPTED then
-            player:addFame(xi.quest.fame_area.JEUNO, 25)
+            player:addFame(xi.fameArea.JEUNO, 25)
         end
 
         quest:complete(player)

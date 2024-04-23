@@ -47,7 +47,7 @@ entity.onTrigger = function(player, npc)
         player:startEvent(145, 0, magriffonGilRequest)
     elseif
         gulliblesTravelsStatus == xi.questStatus.QUEST_AVAILABLE and
-        player:getFameLevel(xi.quest.fame_area.WINDURST) >= 6
+        player:getFameLevel(xi.fameArea.WINDURST) >= 6
     then
         local gil = math.random(10, 30) * 1000
         player:setCharVar('MAGRIFFON_GIL_REQUEST', gil)
@@ -70,7 +70,7 @@ entity.onTrigger = function(player, npc)
     elseif gulliblesTravelsStatus == xi.questStatus.QUEST_COMPLETED then
         if
             evenmoreTravelsStatus == xi.questStatus.QUEST_AVAILABLE and
-            player:getFameLevel(xi.quest.fame_area.WINDURST) >= 7 and
+            player:getFameLevel(xi.fameArea.WINDURST) >= 7 and
             not player:needToZone()
         then
             player:startEvent(148, 0, 256, 0, 0, 35000)
@@ -93,7 +93,7 @@ entity.onEventFinish = function(player, csid, option, npc)
         player:confirmTrade()
         player:delGil(player:getCharVar('MAGRIFFON_GIL_REQUEST'))
         player:setCharVar('MAGRIFFON_GIL_REQUEST', 0)
-        player:addFame(xi.quest.fame_area.WINDURST, 30)
+        player:addFame(xi.fameArea.WINDURST, 30)
         player:setTitle(xi.title.GULLIBLES_TRAVELS)
         player:completeQuest(xi.questLog.OUTLANDS, xi.quest.id.outlands.GULLIBLES_TRAVELS)
         player:needToZone(true)
@@ -108,7 +108,7 @@ entity.onEventFinish = function(player, csid, option, npc)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.TREASURE_MAP)
     elseif csid == 152 then
         player:setCharVar('EVEN_MORE_GULLIBLES_PROGRESS', 0)
-        player:addFame(xi.quest.fame_area.WINDURST, 30)
+        player:addFame(xi.fameArea.WINDURST, 30)
         player:completeQuest(xi.questLog.OUTLANDS, xi.quest.id.outlands.EVEN_MORE_GULLIBLES_TRAVELS)
     end
 end

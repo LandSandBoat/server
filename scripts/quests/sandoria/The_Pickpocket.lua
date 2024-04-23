@@ -14,7 +14,7 @@ local quest = Quest:new(xi.questLog.SANDORIA, xi.quest.id.sandoria.THE_PICKPOCKE
 quest.reward =
 {
     fame = 30,
-    fameArea = xi.quest.fame_area.SANDORIA,
+    fameArea = xi.fameArea.SANDORIA,
     item = xi.item.LIGHT_AXE,
     itemParams = { fromTrade = true },
     title = xi.title.PICKPOCKET_PINCHER,

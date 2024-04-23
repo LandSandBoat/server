@@ -14,7 +14,7 @@ entity.onTrigger = function(player, npc)
 
     if
         ecoStatus == 0 and
-        player:getFameLevel(xi.quest.fame_area.BASTOK) >= 1 and
+        player:getFameLevel(xi.fameArea.BASTOK) >= 1 and
         player:getCharVar('EcoReset') == 0
     then
         player:startEvent(278) -- Offer Eco-Warrior quest

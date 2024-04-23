@@ -34,7 +34,7 @@ local poseItems =
 quest.reward =
 {
     fame = 75,
-    fameArea = xi.quest.fame_area.WINDURST,
+    fameArea = xi.fameArea.WINDURST,
     item = xi.item.COPY_OF_ANCIENT_BLOOD,
     title = xi.title.SUPER_MODEL,
     keyItem = xi.ki.ANGELICAS_AUTOGRAPH,

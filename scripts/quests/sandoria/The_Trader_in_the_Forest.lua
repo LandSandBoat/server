@@ -11,7 +11,7 @@ local quest = Quest:new(xi.questLog.SANDORIA, xi.quest.id.sandoria.THE_TRADER_IN
 quest.reward =
 {
     fame     = 30,
-    fameArea = xi.quest.fame_area.SANDORIA,
+    fameArea = xi.fameArea.SANDORIA,
     item     = xi.item.ROBE,
     title    = xi.title.GREEN_GROCER,
 }

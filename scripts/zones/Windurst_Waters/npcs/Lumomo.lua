@@ -14,7 +14,7 @@ entity.onTrigger = function(player, npc)
 
     if
         ecoStatus == 0 and
-        player:getFameLevel(xi.quest.fame_area.WINDURST) >= 1 and
+        player:getFameLevel(xi.fameArea.WINDURST) >= 1 and
         player:getCharVar('EcoReset') == 0
     then
         player:startEvent(818) -- Offer Eco-Warrior quest
@@ -46,7 +46,7 @@ entity.onEventFinish = function(player, csid, option, npc)
             item = 4198,
             title = xi.title.EMERALD_EXTERMINATOR,
             fame = 80,
-            fameArea = xi.quest.fame_area.WINDURST,
+            fameArea = xi.fameArea.WINDURST,
             var = 'EcoStatus'
         })
     then

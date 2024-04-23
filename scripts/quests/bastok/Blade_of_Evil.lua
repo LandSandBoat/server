@@ -12,7 +12,7 @@ local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.BLADE_OF_EVIL)
 quest.reward =
 {
     fame     = 60,
-    fameArea = xi.quest.fame_area.BASTOK,
+    fameArea = xi.fameArea.BASTOK,
     item     = xi.item.CHAOS_BURGEONET,
     title    = xi.title.PARAGON_OF_DARK_KNIGHT_EXCELLENCE,
 }

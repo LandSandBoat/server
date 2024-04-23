@@ -11,7 +11,7 @@ local quest = Quest:new(xi.questLog.SANDORIA, xi.quest.id.sandoria.ATELLOUNES_LA
 quest.reward =
 {
     fame = 30,
-    fameArea = xi.quest.fame_area.SANDORIA,
+    fameArea = xi.fameArea.SANDORIA,
     item = xi.item.TRAINEE_GLOVES,
 }
 
@@ -21,7 +21,7 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == xi.questStatus.QUEST_AVAILABLE and
-                player:getFameLevel(xi.quest.fame_area.SANDORIA) >= 2 and
+                player:getFameLevel(xi.fameArea.SANDORIA) >= 2 and
                 player:getQuestStatus(xi.questLog.CRYSTAL_WAR, xi.quest.id.crystalWar.SEEING_SPOTS) == xi.questStatus.QUEST_COMPLETED
         end,
 

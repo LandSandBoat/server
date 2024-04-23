@@ -71,7 +71,7 @@ local questItemSets =
 quest.reward =
 {
     fame = 50,
-    fameArea = xi.quest.fame_area.JEUNO,
+    fameArea = xi.fameArea.JEUNO,
     gil = 4000,
     title = xi.title.DUCAL_DUPE,
 }
@@ -83,7 +83,7 @@ quest.sections =
         check = function(player, status, vars)
             return status == xi.questStatus.QUEST_AVAILABLE and
                 player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.A_VESSEL_WITHOUT_A_CAPTAIN) and
-                player:getFameLevel(xi.quest.fame_area.JEUNO) >= 4
+                player:getFameLevel(xi.fameArea.JEUNO) >= 4
         end,
 
         [xi.zone.RULUDE_GARDENS] =
@@ -244,7 +244,7 @@ quest.sections =
                         quest:setMustZone(player)
                         quest:setVar(player, 'ItemSet', 0)
                         npcUtil.giveCurrency(player, 'gil', 4000)
-                        player:addFame(xi.quest.fame_area.JEUNO, 50)
+                        player:addFame(xi.fameArea.JEUNO, 50)
                     end
                 end,
             },

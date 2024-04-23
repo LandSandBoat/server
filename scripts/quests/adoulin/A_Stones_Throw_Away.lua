@@ -11,7 +11,7 @@ local quest = Quest:new(xi.questLog.ADOULIN, xi.quest.id.adoulin.A_STONES_THROW_
 
 quest.reward =
 {
-    fameArea = xi.quest.fame_area.ADOULIN,
+    fameArea = xi.fameArea.ADOULIN,
     bayld    = 500,
 }
 

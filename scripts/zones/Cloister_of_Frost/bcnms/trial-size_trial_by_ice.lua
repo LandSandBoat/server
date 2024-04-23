@@ -41,7 +41,7 @@ battlefieldObject.onEventFinish = function(player, csid, option, npc)
             player:messageSpecial(ID.text.ITEM_OBTAINED, xi.item.SCROLL_OF_INSTANT_WARP)
         end
 
-        player:addFame(xi.quest.fame_area.SANDORIA, 30)
+        player:addFame(xi.fameArea.SANDORIA, 30)
         player:completeQuest(xi.questLog.SANDORIA, xi.quest.id.sandoria.TRIAL_SIZE_TRIAL_BY_ICE)
     end
 end

@@ -12,7 +12,7 @@ local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.THE_ELEVENTHS_HOU
 quest.reward =
 {
     fame     = 30,
-    fameArea = xi.quest.fame_area.BASTOK,
+    fameArea = xi.fameArea.BASTOK,
     item     = xi.item.SMALL_SWORD,
     title    = xi.title.PURSUER_OF_THE_TRUTH,
 }
@@ -23,7 +23,7 @@ quest.sections =
         check = function(player, status, vars)
             return status == xi.questStatus.QUEST_AVAILABLE and
                 player:hasCompletedQuest(xi.questLog.BASTOK, xi.quest.id.bastok.HEARTS_OF_MYTHRIL) and
-                player:getFameLevel(xi.quest.fame_area.BASTOK) >= 3 and
+                player:getFameLevel(xi.fameArea.BASTOK) >= 3 and
                 not quest:getMustZone(player)
         end,
 

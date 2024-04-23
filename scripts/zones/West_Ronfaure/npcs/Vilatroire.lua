@@ -11,7 +11,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local sandyFame = player:getFameLevel(xi.quest.fame_area.SANDORIA)
+    local sandyFame = player:getFameLevel(xi.fameArea.SANDORIA)
 
     local questIntroToTeamwork = player:getQuestStatus(xi.questLog.SANDORIA, xi.quest.id.sandoria.INTRODUCTION_TO_TEAMWORK)
     local questIntermediateTeamwork = player:getQuestStatus(xi.questLog.SANDORIA, xi.quest.id.sandoria.INTERMEDIATE_TEAMWORK)

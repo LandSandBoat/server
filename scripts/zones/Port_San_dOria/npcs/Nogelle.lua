@@ -36,7 +36,7 @@ entity.onEventFinish = function(player, csid, option, npc)
         player:addQuest(xi.questLog.SANDORIA, xi.quest.id.sandoria.LUFET_S_LAKE_SALT)
     elseif csid == 11 then
         player:tradeComplete()
-        player:addFame(xi.quest.fame_area.SANDORIA, 30)
+        player:addFame(xi.fameArea.SANDORIA, 30)
         player:addTitle(xi.title.BEAN_CUISINE_SALTER)
         npcUtil.giveCurrency(player, 'gil', 600)
         player:completeQuest(xi.questLog.SANDORIA, xi.quest.id.sandoria.LUFET_S_LAKE_SALT)

@@ -15,7 +15,7 @@ quest.reward =
 {
     item     = xi.item.LINEN_ROBE,
     fame     = 50,
-    fameArea = xi.quest.fame_area.BASTOK,
+    fameArea = xi.fameArea.BASTOK,
     title    = xi.title.TREASURE_SCAVENGER,
 }
 
@@ -24,7 +24,7 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == xi.questStatus.QUEST_AVAILABLE and
-                player:getFameLevel(xi.quest.fame_area.BASTOK) >= 2 and
+                player:getFameLevel(xi.fameArea.BASTOK) >= 2 and
                 player:hasCompletedQuest(xi.questLog.BASTOK, xi.quest.id.bastok.MOM_THE_ADVENTURER)
         end,
 

@@ -10,7 +10,7 @@ local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.TILL_DEATH_DO_US_
 quest.reward =
 {
     fame     = 160,
-    fameArea = xi.quest.fame_area.BASTOK,
+    fameArea = xi.fameArea.BASTOK,
     gil      = 2000,
     title    = xi.title.QIJIS_RIVAL,
 }
@@ -28,7 +28,7 @@ quest.sections =
             ['Romilda'] =
             {
                 onTrigger = function(player, npc)
-                    if player:getFameLevel(xi.quest.fame_area.BASTOK) >= 3 then
+                    if player:getFameLevel(xi.fameArea.BASTOK) >= 3 then
                         return quest:progressEvent(128)
                     else
                         return quest:event(127)

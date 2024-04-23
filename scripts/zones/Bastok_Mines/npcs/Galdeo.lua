@@ -21,7 +21,7 @@ entity.onTrigger = function(player, npc)
         }
 
         player:showText(npc, ID.text.GALDEO_OPEN_DIALOG)
-        xi.shop.general(player, stock, xi.quest.fame_area.BASTOK)
+        xi.shop.general(player, stock, xi.fameArea.BASTOK)
     end
 end
 

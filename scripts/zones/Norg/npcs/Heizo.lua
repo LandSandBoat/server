@@ -36,7 +36,7 @@ entity.onTrigger = function(player, npc)
 
     if
         shiningLeggings == xi.questStatus.QUEST_AVAILABLE and
-        player:getFameLevel(xi.quest.fame_area.NORG) >= 3
+        player:getFameLevel(xi.fameArea.NORG) >= 3
     then
         player:startEvent(127) -- Start Like Shining Leggings
     elseif shiningLeggings == xi.questStatus.QUEST_ACCEPTED then
@@ -56,7 +56,7 @@ entity.onEventFinish = function(player, csid, option, npc)
         player:tradeComplete()
         player:addItem(xi.item.SCROLL_OF_DOKUMORI_ICHI)
         player:messageSpecial(ID.text.ITEM_OBTAINED, xi.item.SCROLL_OF_DOKUMORI_ICHI)
-        player:addFame(xi.quest.fame_area.NORG, 100)
+        player:addFame(xi.fameArea.NORG, 100)
         player:addTitle(xi.title.LOOKS_GOOD_IN_LEGGINGS)
         player:setCharVar('shiningLeggings_nb', 0)
         player:completeQuest(xi.questLog.OUTLANDS, xi.quest.id.outlands.LIKE_A_SHINING_LEGGINGS)

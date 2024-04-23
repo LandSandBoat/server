@@ -28,7 +28,7 @@ entity.onTrigger = function(player, npc)
         player:startEvent(807)
     elseif
         warding == xi.questStatus.QUEST_AVAILABLE and
-        player:getFameLevel(xi.quest.fame_area.SANDORIA) >= 3
+        player:getFameLevel(xi.fameArea.SANDORIA) >= 3
     then
         -- Quest available for fame superior or equal to 3
         player:startEvent(24)
@@ -52,10 +52,10 @@ entity.onEventFinish = function(player, csid, option, npc)
         player:addTitle(xi.title.VAMPIRE_HUNTER_D_MINUS)
         npcUtil.giveCurrency(player, 'gil', 900)
         if player:getQuestStatus(xi.questLog.SANDORIA, xi.quest.id.sandoria.WARDING_VAMPIRES) == xi.questStatus.QUEST_ACCEPTED then
-            player:addFame(xi.quest.fame_area.SANDORIA, 30)
+            player:addFame(xi.fameArea.SANDORIA, 30)
             player:completeQuest(xi.questLog.SANDORIA, xi.quest.id.sandoria.WARDING_VAMPIRES)
         else
-            player:addFame(xi.quest.fame_area.SANDORIA, 5)
+            player:addFame(xi.fameArea.SANDORIA, 5)
         end
     elseif csid == 807 then
         player:setCharVar('WildcatSandy', utils.mask.setBit(player:getCharVar('WildcatSandy'), 7, true))

@@ -13,7 +13,7 @@ local quest = Quest:new(xi.questLog.OTHER_AREAS, xi.quest.id.otherAreas.RYCHARDE
 quest.reward =
 {
     fame     = 120,
-    fameArea = xi.quest.fame_area.WINDURST,
+    fameArea = xi.fameArea.WINDURST,
     title    = xi.title.PURVEYOR_IN_TRAINING,
     gil      = 1500,
 }

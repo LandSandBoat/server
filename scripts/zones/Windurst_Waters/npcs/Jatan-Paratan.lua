@@ -23,7 +23,7 @@ end
 entity.onTrigger = function(player, npc)
     -- player:delQuest(xi.questLog.WINDURST, xi.quest.id.windurst.WONDERING_MINSTREL)
     local wonderingstatus = player:getQuestStatus(xi.questLog.WINDURST, xi.quest.id.windurst.WONDERING_MINSTREL)
-    local fame = player:getFameLevel(xi.quest.fame_area.WINDURST)
+    local fame = player:getFameLevel(xi.fameArea.WINDURST)
     if wonderingstatus == xi.questStatus.QUEST_AVAILABLE and fame >= 5 then
         local rand = math.random(1, 2)
         if rand == 1 then
@@ -64,7 +64,7 @@ entity.onEventFinish = function(player, csid, option, npc)
             player:completeQuest(xi.questLog.WINDURST, xi.quest.id.windurst.WONDERING_MINSTREL)
             player:addItem(xi.item.FAERIE_PICCOLO)
             player:messageSpecial(ID.text.ITEM_OBTAINED, xi.item.FAERIE_PICCOLO)
-            player:addFame(xi.quest.fame_area.WINDURST, 75)
+            player:addFame(xi.fameArea.WINDURST, 75)
             player:addTitle(xi.title.DOWN_PIPER_PIPE_UPPERER)
             player:needToZone(true)
             player:setCharVar('QuestWonderingMin_var', 0)

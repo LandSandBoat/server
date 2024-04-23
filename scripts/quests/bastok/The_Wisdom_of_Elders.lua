@@ -11,7 +11,7 @@ local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.THE_WISDOM_OF_ELD
 quest.reward =
 {
     fame     = 120,
-    fameArea = xi.quest.fame_area.BASTOK,
+    fameArea = xi.fameArea.BASTOK,
     item     = xi.item.TRAVELERS_HAT,
 }
 

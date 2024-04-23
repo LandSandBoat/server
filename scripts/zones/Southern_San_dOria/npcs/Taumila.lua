@@ -21,7 +21,7 @@ entity.onTrigger = function(player, npc)
     local tigersTeeth = player:getQuestStatus(xi.questLog.SANDORIA, xi.quest.id.sandoria.TIGER_S_TEETH)
 
     if
-        player:getFameLevel(xi.quest.fame_area.SANDORIA) >= 3 and
+        player:getFameLevel(xi.fameArea.SANDORIA) >= 3 and
         tigersTeeth == xi.questStatus.QUEST_AVAILABLE
     then
         player:startEvent(574)
@@ -45,10 +45,10 @@ entity.onEventFinish = function(player, csid, option, npc)
         player:addTitle(xi.title.FANG_FINDER)
         npcUtil.giveCurrency(player, 'gil', 2100)
         if player:getQuestStatus(xi.questLog.SANDORIA, xi.quest.id.sandoria.TIGER_S_TEETH) == xi.questStatus.QUEST_ACCEPTED then
-            player:addFame(xi.quest.fame_area.SANDORIA, 30)
+            player:addFame(xi.fameArea.SANDORIA, 30)
             player:completeQuest(xi.questLog.SANDORIA, xi.quest.id.sandoria.TIGER_S_TEETH)
         else
-            player:addFame(xi.quest.fame_area.SANDORIA, 5)
+            player:addFame(xi.fameArea.SANDORIA, 5)
         end
     end
 end

@@ -74,7 +74,7 @@ entity.onEventFinish = function(player, csid, option, npc)
         if
             npcUtil.completeQuest(player, xi.questLog.OUTLANDS, xi.quest.id.outlands.TRUE_WILL, {
                 item = 13782, -- Ninja Chainmail
-                fameArea = xi.quest.fame_area.NORG,
+                fameArea = xi.fameArea.NORG,
                 title = xi.title.PARAGON_OF_NINJA_EXCELLENCE,
                 var = 'trueWillCS'
             })

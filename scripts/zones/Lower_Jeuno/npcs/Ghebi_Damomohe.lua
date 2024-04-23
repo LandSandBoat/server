@@ -27,7 +27,7 @@ end
 
 entity.onTrigger = function(player, npc)
     if
-        player:getFameLevel(xi.quest.fame_area.JEUNO) >= 2 and
+        player:getFameLevel(xi.fameArea.JEUNO) >= 2 and
         player:getQuestStatus(xi.questLog.JEUNO, xi.quest.id.jeuno.TENSHODO_MEMBERSHIP) == xi.questStatus.QUEST_AVAILABLE
     then
         -- Start Quest: Tenshodo Membership
@@ -52,7 +52,7 @@ entity.onEventFinish = function(player, csid, option, npc)
             4467,    3, -- Garlic Cracker
         }
 
-        xi.shop.general(player, stock, xi.quest.fame_area.NORG)
+        xi.shop.general(player, stock, xi.fameArea.NORG)
 
     elseif csid == 106 and option == 2 then
         player:addQuest(xi.questLog.JEUNO, xi.quest.id.jeuno.TENSHODO_MEMBERSHIP)

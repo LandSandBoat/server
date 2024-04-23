@@ -78,7 +78,7 @@ entity.onEventFinish = function(player, csid, option, npc)
             player:addItem(xi.item.BLACK_BELT)
             player:messageSpecial(ID.text.ITEM_OBTAINED, xi.item.BLACK_BELT)
             player:setCharVar('BeatAroundTheBushin', 0)
-            player:addFame(xi.quest.fame_area.NORG, 125)
+            player:addFame(xi.fameArea.NORG, 125)
             player:tradeComplete()
             player:completeQuest(xi.questLog.JEUNO, xi.quest.id.jeuno.BEAT_AROUND_THE_BUSHIN)
         end

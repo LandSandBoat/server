@@ -35,10 +35,10 @@ entity.onEventFinish = function(player, csid, option, npc)
         player:tradeComplete()
         npcUtil.giveCurrency(player, 'gil', 100)
         if player:getQuestStatus(xi.questLog.SANDORIA, xi.quest.id.sandoria.STARTING_A_FLAME) == xi.questStatus.QUEST_ACCEPTED then
-            player:addFame(xi.quest.fame_area.SANDORIA, 30)
+            player:addFame(xi.fameArea.SANDORIA, 30)
             player:completeQuest(xi.questLog.SANDORIA, xi.quest.id.sandoria.STARTING_A_FLAME)
         else
-            player:addFame(xi.quest.fame_area.SANDORIA, 5)
+            player:addFame(xi.fameArea.SANDORIA, 5)
         end
     end
 end

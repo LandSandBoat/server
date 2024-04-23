@@ -15,7 +15,7 @@ quest.reward =
 {
     item     = xi.item.FENCING_DEGEN,
     fame     = 30,
-    fameArea = xi.quest.fame_area.SANDORIA,
+    fameArea = xi.fameArea.SANDORIA,
 }
 
 quest.sections =

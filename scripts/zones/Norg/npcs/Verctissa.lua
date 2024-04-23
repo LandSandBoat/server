@@ -25,7 +25,7 @@ entity.onTrigger = function(player, npc)
         player:getMainLvl() >= 20 and
         player:getMainJob() == xi.job.SMN and
         trialSizeWater == xi.questStatus.QUEST_AVAILABLE and
-        player:getFameLevel(xi.quest.fame_area.NORG) >= 2
+        player:getFameLevel(xi.fameArea.NORG) >= 2
     then
         --Requires player to be Summoner at least lvl 20
         player:startEvent(199, 0, xi.item.MINI_TUNING_FORK_OF_WATER, 2, 20)     --mini tuning fork of water, zone, level

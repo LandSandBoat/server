@@ -31,7 +31,7 @@ function xi.jeuno.helpers.GobbiebagQuest:new(params)
     end
 
     local getReqsMet = function(player)
-        return  player:getFameLevel(xi.quest.fame_area.JEUNO) >= params.fame and
+        return  player:getFameLevel(xi.fameArea.JEUNO) >= params.fame and
                 player:getContainerSize(xi.inv.INVENTORY) == params.startInventorySize and
                 (params.prerequisite == nil or player:hasCompletedQuest(xi.questLog.JEUNO, params.prerequisite))
     end

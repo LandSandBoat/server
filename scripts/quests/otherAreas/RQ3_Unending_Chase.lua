@@ -11,7 +11,7 @@ local quest = Quest:new(xi.questLog.OTHER_AREAS, xi.quest.id.otherAreas.UNENDING
 quest.reward =
 {
     fame     = 120,
-    fameArea = xi.quest.fame_area.WINDURST,
+    fameArea = xi.fameArea.WINDURST,
     title    = xi.title.TWO_STAR_PURVEYOR,
     gil      = 2100,
 }
@@ -32,7 +32,7 @@ quest.sections =
                 onTrigger = function(player, npc)
                     if
                         player:getCharVar('Quest[4][1]DayCompleted') + 7 < VanadielUniqueDay() and
-                        player:getFameLevel(xi.quest.fame_area.WINDURST) > 2
+                        player:getFameLevel(xi.fameArea.WINDURST) > 2
                     then
                         if quest:getVar(player, 'Prog') == 0 then
                             return quest:progressEvent(82, xi.item.PUFFBALL) -- Unending Chase starting event.

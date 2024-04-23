@@ -29,7 +29,7 @@ entity.onTrigger = function(player, npc)
         player:startEvent(712, 0, xi.item.ICE_PENDULUM, 0, 0, 0, 0, 0, 0) -- lost the ice pendulum need another one
     -----------------------------------
     elseif
-        (trialByIce == xi.questStatus.QUEST_AVAILABLE and player:getFameLevel(xi.quest.fame_area.SANDORIA) >= 6) or
+        (trialByIce == xi.questStatus.QUEST_AVAILABLE and player:getFameLevel(xi.fameArea.SANDORIA) >= 6) or
         (trialByIce == xi.questStatus.QUEST_COMPLETED and os.time() > player:getCharVar('TrialByIce_date'))
     then
         player:startEvent(706, 0, xi.ki.TUNING_FORK_OF_ICE) -- Start and restart quest 'Trial by ice'
@@ -121,7 +121,7 @@ entity.onEventFinish = function(player, csid, option, npc)
             player:addTitle(xi.title.HEIR_OF_THE_GREAT_ICE)
             player:delKeyItem(xi.ki.WHISPER_OF_FROST) --Whisper of Frost, as a trade for the above rewards
             player:setCharVar('TrialByIce_date', getMidnight())
-            player:addFame(xi.quest.fame_area.SANDORIA, 30)
+            player:addFame(xi.fameArea.SANDORIA, 30)
             player:completeQuest(xi.questLog.SANDORIA, xi.quest.id.sandoria.TRIAL_BY_ICE)
         end
     elseif csid == 713 or csid == 712 then

@@ -20,7 +20,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local sanFame = player:getFameLevel(xi.quest.fame_area.SANDORIA)
+    local sanFame = player:getFameLevel(xi.fameArea.SANDORIA)
     local undyingFlames = player:getQuestStatus(xi.questLog.SANDORIA, xi.quest.id.sandoria.UNDYING_FLAMES)
 
     if sanFame >= 2 and undyingFlames == xi.questStatus.QUEST_AVAILABLE then
@@ -48,7 +48,7 @@ entity.onEventFinish = function(player, csid, option, npc)
             player:addTitle(xi.title.FAITH_LIKE_A_CANDLE)
             player:addItem(xi.item.FRIARS_ROPE)
             player:messageSpecial(ID.text.ITEM_OBTAINED, xi.item.FRIARS_ROPE)
-            player:addFame(xi.quest.fame_area.SANDORIA, 30)
+            player:addFame(xi.fameArea.SANDORIA, 30)
             player:completeQuest(xi.questLog.SANDORIA, xi.quest.id.sandoria.UNDYING_FLAMES)
         end
     end

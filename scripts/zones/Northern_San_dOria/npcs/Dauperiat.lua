@@ -25,7 +25,7 @@ end
 entity.onTrigger = function(player, npc)
     -- "Blackmail" quest status
     local blackMail = player:getQuestStatus(xi.questLog.SANDORIA, xi.quest.id.sandoria.BLACKMAIL)
-    local sanFame = player:getFameLevel(xi.quest.fame_area.SANDORIA)
+    local sanFame = player:getFameLevel(xi.fameArea.SANDORIA)
     local homeRank = player:getRank(player:getNation())
     local questState = player:getCharVar('BlackMailQuest')
 
@@ -67,10 +67,10 @@ entity.onEventFinish = function(player, csid, option, npc)
         player:tradeComplete()
         npcUtil.giveCurrency(player, 'gil', 900)
         if player:getQuestStatus(xi.questLog.SANDORIA, xi.quest.id.sandoria.BLACKMAIL) == xi.questStatus.QUEST_ACCEPTED then
-            player:addFame(xi.quest.fame_area.SANDORIA, 30)
+            player:addFame(xi.fameArea.SANDORIA, 30)
             player:completeQuest(xi.questLog.SANDORIA, xi.quest.id.sandoria.BLACKMAIL)
         else
-            player:addFame(xi.quest.fame_area.SANDORIA, 5)
+            player:addFame(xi.fameArea.SANDORIA, 5)
         end
     elseif csid == 40 and option == 1 then
         player:addQuest(xi.questLog.SANDORIA, xi.quest.id.sandoria.BLACKMAIL)

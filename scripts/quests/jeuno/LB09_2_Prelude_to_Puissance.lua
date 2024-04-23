@@ -14,7 +14,7 @@ local quest = Quest:new(xi.questLog.JEUNO, xi.quest.id.jeuno.PRELUDE_TO_PUISSANC
 quest.reward =
 {
     fame = 50,
-    fameArea = xi.quest.fame_area.JEUNO,
+    fameArea = xi.fameArea.JEUNO,
     keyItem = xi.ki.SOUL_GEM_CLASP,
 }
 

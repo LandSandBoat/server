@@ -11,7 +11,7 @@ quest.reward =
 {
     exp      = 2000,
     fame     = 30,
-    fameArea = xi.quest.fame_area.JEUNO,
+    fameArea = xi.fameArea.JEUNO,
     gil      = 2000,
     keyItem  = xi.ki.MAP_OF_CASTLE_ZVAHL,
     title    = xi.title.ENVOY_TO_THE_NORTH,
@@ -22,7 +22,7 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == xi.questStatus.QUEST_AVAILABLE and
-                player:getFameLevel(xi.quest.fame_area.JEUNO) >= 4
+                player:getFameLevel(xi.fameArea.JEUNO) >= 4
         end,
 
         [xi.zone.RULUDE_GARDENS] =

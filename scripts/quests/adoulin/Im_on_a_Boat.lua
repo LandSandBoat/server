@@ -12,7 +12,7 @@ local quest = Quest:new(xi.questLog.ADOULIN, xi.quest.id.adoulin.IM_ON_A_BOAT)
 
 quest.reward =
 {
-    fameArea = xi.quest.fame_area.ADOULIN,
+    fameArea = xi.fameArea.ADOULIN,
     bayld    = 500,
 }
 

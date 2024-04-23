@@ -12,7 +12,7 @@ local quest = Quest:new(xi.questLog.JEUNO, xi.quest.id.jeuno.PATH_OF_THE_BEASTMA
 quest.reward =
 {
     fame     = 30,
-    fameArea = xi.quest.fame_area.JEUNO,
+    fameArea = xi.fameArea.JEUNO,
     keyItem  = xi.ki.JOB_GESTURE_BEASTMASTER,
     title    = xi.title.ANIMAL_TRAINER,
 }

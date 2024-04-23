@@ -61,7 +61,7 @@ entity.onEventFinish = function(player, csid, option, npc)
             player:delKeyItem(xi.ki.ALTEPA_POLISHING_STONE)
             player:addItem(xi.item.PEREGRINE)
             player:messageSpecial(ID.text.ITEM_OBTAINED, xi.item.PEREGRINE) -- Peregrine (DRG AF1)
-            player:addFame(xi.quest.fame_area.SANDORIA, 20)
+            player:addFame(xi.fameArea.SANDORIA, 20)
             player:completeQuest(xi.questLog.SANDORIA, xi.quest.id.sandoria.A_CRAFTSMAN_S_WORK)
         end
     elseif csid == 67 then

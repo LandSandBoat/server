@@ -11,7 +11,7 @@ local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.THE_CURSE_COLLECT
 quest.reward =
 {
     fame     = 30,
-    fameArea = xi.quest.fame_area.BASTOK,
+    fameArea = xi.fameArea.BASTOK,
     item     = xi.item.POISON_CESTI,
 }
 
@@ -39,7 +39,7 @@ quest.sections =
 {
     {
         check = function(player, status, vars)
-            return status == xi.questStatus.QUEST_AVAILABLE and player:getFameLevel(xi.quest.fame_area.BASTOK) >= 4
+            return status == xi.questStatus.QUEST_AVAILABLE and player:getFameLevel(xi.fameArea.BASTOK) >= 4
         end,
 
         [xi.zone.BASTOK_MARKETS] =

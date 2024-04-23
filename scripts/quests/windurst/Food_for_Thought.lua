@@ -12,7 +12,7 @@ local quest = Quest:new(xi.questLog.WINDURST, xi.quest.id.windurst.FOOD_FOR_THOU
 quest.reward =
 {
     fame  = 100,
-    fameArea = xi.quest.fame_area.WINDURST,
+    fameArea = xi.fameArea.WINDURST,
     title = xi.title.FAST_FOOD_DELIVERER,
 }
 

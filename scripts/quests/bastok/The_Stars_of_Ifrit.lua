@@ -11,7 +11,7 @@ local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.THE_STARS_OF_IFRI
 quest.reward =
 {
     fame     = 100,
-    fameArea = xi.quest.fame_area.BASTOK,
+    fameArea = xi.fameArea.BASTOK,
     gil      = 2100,
     title    = xi.title.STAR_OF_IFRIT,
 }
@@ -22,7 +22,7 @@ quest.sections =
         check = function(player, status, vars)
             return status == xi.questStatus.QUEST_AVAILABLE and
                 player:hasKeyItem(xi.ki.AIRSHIP_PASS) and
-                player:getFameLevel(xi.quest.fame_area.BASTOK) >= 3
+                player:getFameLevel(xi.fameArea.BASTOK) >= 3
         end,
 
         [xi.zone.PORT_BASTOK] =

@@ -10,7 +10,7 @@ local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.FATHER_FIGURE)
 quest.reward =
 {
     fame     = 120,
-    fameArea = xi.quest.fame_area.BASTOK,
+    fameArea = xi.fameArea.BASTOK,
     gil      = 2200,
 }
 
@@ -20,7 +20,7 @@ quest.sections =
         check = function(player, status, vars)
             return status == xi.questStatus.QUEST_AVAILABLE and
                 player:hasCompletedQuest(xi.questLog.BASTOK, xi.quest.id.bastok.THE_ELVAAN_GOLDSMITH) and
-                player:getFameLevel(xi.quest.fame_area.BASTOK) >= 2
+                player:getFameLevel(xi.fameArea.BASTOK) >= 2
         end,
 
         [xi.zone.BASTOK_MARKETS] =

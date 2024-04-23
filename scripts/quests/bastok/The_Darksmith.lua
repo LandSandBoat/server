@@ -10,7 +10,7 @@ local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.THE_DARKSMITH)
 quest.reward =
 {
     fame     = 5,
-    fameArea = xi.quest.fame_area.BASTOK,
+    fameArea = xi.fameArea.BASTOK,
     gil      = 8000,
 }
 
@@ -19,7 +19,7 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == xi.questStatus.QUEST_AVAILABLE and
-                player:getFameLevel(xi.quest.fame_area.BASTOK) >= 3
+                player:getFameLevel(xi.fameArea.BASTOK) >= 3
         end,
 
         [xi.zone.METALWORKS] =
@@ -59,7 +59,7 @@ quest.sections =
                     -- From previous implementation, award 30 fame (25 + 5) on first completion,
                     -- and 5 fame for any subsequent trade.
                     if player:getQuestStatus(quest.areaId, quest.questId) == xi.questStatus.QUEST_ACCEPTED then
-                        player:addFame(xi.quest.fame_area.BASTOK, 25)
+                        player:addFame(xi.fameArea.BASTOK, 25)
                     end
 
                     quest:complete(player)

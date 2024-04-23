@@ -25,7 +25,7 @@ entity.onTrigger = function(player, npc)
         player:getMainLvl() >= 20 and
         player:getMainJob() == xi.job.SMN and
         trialSizeWind == xi.questStatus.QUEST_AVAILABLE and
-        player:getFameLevel(xi.quest.fame_area.SELBINA_RABAO) >= 2
+        player:getFameLevel(xi.fameArea.SELBINA_RABAO) >= 2
     then
         --Requires player to be Summoner at least lvl 20
         player:startEvent(108, 0, xi.item.MINI_TUNING_FORK_OF_WIND, 3, 20)     --mini tuning fork, zone, level

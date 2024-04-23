@@ -17,7 +17,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if player:getFameLevel(xi.quest.fame_area.SANDORIA) >= 2 then
+    if player:getFameLevel(xi.fameArea.SANDORIA) >= 2 then
         player:startEvent(516)
     else
         player:startEvent(568)
@@ -35,9 +35,9 @@ entity.onEventFinish = function(player, csid, option, npc)
     elseif csid == 514 then
         if player:getQuestStatus(xi.questLog.SANDORIA, xi.quest.id.sandoria.THICK_SHELLS) == xi.questStatus.QUEST_ACCEPTED then
             player:completeQuest(xi.questLog.SANDORIA, xi.quest.id.sandoria.THICK_SHELLS)
-            player:addFame(xi.quest.fame_area.SANDORIA, 30)
+            player:addFame(xi.fameArea.SANDORIA, 30)
         else
-            player:addFame(xi.quest.fame_area.SANDORIA, 5)
+            player:addFame(xi.fameArea.SANDORIA, 5)
         end
 
         player:tradeComplete()

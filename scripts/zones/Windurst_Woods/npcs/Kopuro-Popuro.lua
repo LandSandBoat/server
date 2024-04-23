@@ -49,7 +49,7 @@ entity.onTrigger = function(player, npc)
     if
         legendaryPlanB == xi.questStatus.QUEST_COMPLETED and
         allNewC3000 == xi.questStatus.QUEST_AVAILABLE and
-        player:getFameLevel(xi.quest.fame_area.WINDURST) >= 4
+        player:getFameLevel(xi.fameArea.WINDURST) >= 4
     then
         if player:needToZone() then
             player:startEvent(316) -- Post quest text from legendaryPlanB
@@ -67,7 +67,7 @@ entity.onTrigger = function(player, npc)
     elseif
         aGreetingCardian == xi.questStatus.QUEST_COMPLETED and
         legendaryPlanB == xi.questStatus.QUEST_AVAILABLE and
-        player:getFameLevel(xi.quest.fame_area.WINDURST) >= 3
+        player:getFameLevel(xi.fameArea.WINDURST) >= 3
     then
         if player:needToZone() then
             player:startEvent(306) -- Supplemental text for aGreetingCardian before start of legendaryPlanB
@@ -102,7 +102,7 @@ entity.onEventFinish = function(player, csid, option, npc)
         player:addQuest(xi.questLog.WINDURST, xi.quest.id.windurst.THE_ALL_NEW_C_2000)
     elseif csid == 292 then
         player:completeQuest(xi.questLog.WINDURST, xi.quest.id.windurst.THE_ALL_NEW_C_2000)
-        player:addFame(xi.quest.fame_area.WINDURST, 80)
+        player:addFame(xi.fameArea.WINDURST, 80)
         player:addTitle(xi.title.CARDIAN_TUTOR)
         player:addGil(xi.settings.main.GIL_RATE * 200)
         player:confirmTrade()

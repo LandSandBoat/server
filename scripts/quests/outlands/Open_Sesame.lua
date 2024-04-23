@@ -9,7 +9,7 @@ local quest = Quest:new(xi.questLog.OUTLANDS, xi.quest.id.outlands.OPEN_SESAME)
 
 quest.reward =
 {
-    fameArea = xi.quest.fame_area.SELBINA_RABAO,
+    fameArea = xi.fameArea.SELBINA_RABAO,
     fame     = 30,
     keyItem  = xi.ki.LOADSTONE,
 }

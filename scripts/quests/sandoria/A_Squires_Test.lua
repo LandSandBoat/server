@@ -12,7 +12,7 @@ local quest = Quest:new(xi.questLog.SANDORIA, xi.quest.id.sandoria.A_SQUIRES_TES
 quest.reward =
 {
     fame     = 30,
-    fameArea = xi.quest.fame_area.SANDORIA,
+    fameArea = xi.fameArea.SANDORIA,
     item     = xi.item.SPATHA,
     title    = xi.title.KNIGHT_IN_TRAINING,
 }

@@ -14,7 +14,7 @@ local quest = Quest:new(xi.questLog.OUTLANDS, xi.quest.id.outlands.THE_SACRED_KA
 quest.reward =
 {
     fame = 20,
-    fameArea = xi.quest.fame_area.NORG,
+    fameArea = xi.fameArea.NORG,
     item = xi.item.MAGOROKU,
 }
 

@@ -16,7 +16,7 @@ entity.onTrigger = function(player, npc)
 
     if zPos <= 29 or zPos >= 38 or xPos <= 16 or xPos >= 32 then
         if
-            player:getFameLevel(xi.quest.fame_area.WINDURST) >= 4 and
+            player:getFameLevel(xi.fameArea.WINDURST) >= 4 and
             theSandCharm == xi.questStatus.QUEST_AVAILABLE
         then
             player:startEvent(125) -- Start quest 'The Sand Charm'

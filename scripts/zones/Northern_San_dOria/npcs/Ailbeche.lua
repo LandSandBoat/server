@@ -102,7 +102,7 @@ entity.onEventFinish = function(player, csid, option, npc)
             player:addItem(xi.item.HONOR_SWORD)
             player:messageSpecial(ID.text.ITEM_OBTAINED, xi.item.HONOR_SWORD) -- Honor Sword
             player:setCharVar('sharpeningTheSwordCS', 0)
-            player:addFame(xi.quest.fame_area.SANDORIA, 30)
+            player:addFame(xi.fameArea.SANDORIA, 30)
             player:completeQuest(xi.questLog.SANDORIA, xi.quest.id.sandoria.SHARPENING_THE_SWORD)
         end
     -- "A Boy's Dream"

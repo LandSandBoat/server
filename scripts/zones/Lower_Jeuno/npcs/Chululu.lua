@@ -28,7 +28,7 @@ entity.onTrigger = function(player, npc)
     local cdate             = player:getCharVar('AllInTheCards_date')
 
     if
-        player:getFameLevel(xi.quest.fame_area.JEUNO) >= 3 and
+        player:getFameLevel(xi.fameArea.JEUNO) >= 3 and
         collectTarutCards == xi.questStatus.QUEST_AVAILABLE
     then
         player:startEvent(28) -- Start quest 'Collect Tarut Cards' with option
@@ -67,7 +67,7 @@ entity.onTrigger = function(player, npc)
         player:startEvent(197) -- Finish quest 'Rubbish Day'
 
     elseif
-        player:getFameLevel(xi.quest.fame_area.JEUNO) >= 4 and
+        player:getFameLevel(xi.fameArea.JEUNO) >= 4 and
         collectTarutCards == xi.questStatus.QUEST_COMPLETED and
         allInTheCards == xi.questStatus.QUEST_AVAILABLE
     then
@@ -126,7 +126,7 @@ entity.onEventFinish = function(player, csid, option, npc)
 
     elseif csid == 200 then
         player:addTitle(xi.title.CARD_COLLECTOR)
-        player:addFame(xi.quest.fame_area.JEUNO, 30)
+        player:addFame(xi.fameArea.JEUNO, 30)
         player:tradeComplete()
         player:completeQuest(xi.questLog.JEUNO, xi.quest.id.jeuno.COLLECT_TARUT_CARDS)
 

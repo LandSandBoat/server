@@ -11,7 +11,7 @@ quest.reward =
 {
     exp      = 2000,
     fame     = 60,
-    fameArea = xi.quest.fame_area.BASTOK,
+    fameArea = xi.fameArea.BASTOK,
     keyItem  = xi.ki.MAP_OF_THE_GUSGEN_MINES,
 }
 

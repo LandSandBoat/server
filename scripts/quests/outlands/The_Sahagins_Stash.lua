@@ -11,7 +11,7 @@ local quest = Quest:new(xi.questLog.OUTLANDS, xi.quest.id.outlands.THE_SAHAGINS_
 quest.reward =
 {
     fame     = 75,
-    fameArea = xi.quest.fame_area.NORG,
+    fameArea = xi.fameArea.NORG,
     item     = xi.item.SCROLL_OF_UTSUSEMI_ICHI,
     title    = xi.title.TREASURE_HOUSE_RANSACKER,
 }
@@ -21,7 +21,7 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == xi.questStatus.QUEST_AVAILABLE and
-                player:getFameLevel(xi.quest.fame_area.NORG) >= 4 and
+                player:getFameLevel(xi.fameArea.NORG) >= 4 and
                 player:getMainLvl() >= 5
         end,
 

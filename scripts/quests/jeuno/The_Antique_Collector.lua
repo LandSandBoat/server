@@ -14,7 +14,7 @@ quest.reward =
 {
     exp      = 2000,
     fame     = 30,
-    fameArea = xi.quest.fame_area.JEUNO,
+    fameArea = xi.fameArea.JEUNO,
     gil      = 2000,
     keyItem  = xi.ki.MAP_OF_DELKFUTTS_TOWER,
     title    = xi.title.TRADER_OF_ANTIQUITIES,
@@ -25,7 +25,7 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == xi.questStatus.QUEST_AVAILABLE and
-                player:getFameLevel(xi.quest.fame_area.JEUNO) >= 2
+                player:getFameLevel(xi.fameArea.JEUNO) >= 2
         end,
 
         [xi.zone.PORT_JEUNO] =

@@ -11,7 +11,7 @@ local quest = Quest:new(xi.questLog.JEUNO, xi.quest.id.jeuno.THE_CLOCKMASTER)
 quest.reward =
 {
     fame     = 30,
-    fameArea = xi.quest.fame_area.JEUNO,
+    fameArea = xi.fameArea.JEUNO,
     item     = xi.item.TIME_HAMMER,
     title    = xi.title.THE_CLOCKMASTER,
 }
@@ -22,7 +22,7 @@ quest.sections =
         check = function(player, status, vars)
             return status == xi.questStatus.QUEST_AVAILABLE and
                 player:hasCompletedQuest(xi.questLog.JEUNO, xi.quest.id.jeuno.SAVE_THE_CLOCK_TOWER) and
-                player:getFameLevel(xi.quest.fame_area.JEUNO) >= 5
+                player:getFameLevel(xi.fameArea.JEUNO) >= 5
         end,
 
         [xi.zone.UPPER_JEUNO] =

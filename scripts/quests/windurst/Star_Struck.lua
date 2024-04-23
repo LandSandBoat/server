@@ -10,7 +10,7 @@ local quest = Quest:new(xi.questLog.WINDURST, xi.quest.id.windurst.STAR_STRUCK)
 quest.reward =
 {
     fame     = 20,
-    fameArea = xi.quest.fame_area.WINDURST,
+    fameArea = xi.fameArea.WINDURST,
     item     = xi.item.COMPOUND_EYE_CIRCLET,
 }
 

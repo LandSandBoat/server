@@ -12,7 +12,7 @@ local quest = Quest:new(xi.questLog.OUTLANDS, xi.quest.id.outlands.CLOAK_AND_DAG
 quest.reward =
 {
     fame = 30,
-    fameArea = xi.quest.fame_area.NORG,
+    fameArea = xi.fameArea.NORG,
 }
 
 quest.sections =

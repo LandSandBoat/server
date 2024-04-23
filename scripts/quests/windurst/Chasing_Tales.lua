@@ -14,7 +14,7 @@ local quest = Quest:new(xi.questLog.WINDURST, xi.quest.id.windurst.CHASING_TALES
 quest.reward =
 {
     fame = 120,
-    fameArea = xi.quest.fame_area.WINDURST,
+    fameArea = xi.fameArea.WINDURST,
     gil = 2800,
     title = xi.title.SAVIOR_OF_KNOWLEDGE,
 }
@@ -25,7 +25,7 @@ quest.sections =
         check = function(player, status, vars)
             return status == xi.questStatus.QUEST_AVAILABLE and
                 player:hasCompletedQuest(xi.questLog.WINDURST, xi.quest.id.windurst.EARLY_BIRD_CATCHES_THE_BOOKWORM) and
-                player:getFameLevel(xi.quest.fame_area.WINDURST) >= 3 and
+                player:getFameLevel(xi.fameArea.WINDURST) >= 3 and
                 not quest:getMustZone(player)
         end,
 

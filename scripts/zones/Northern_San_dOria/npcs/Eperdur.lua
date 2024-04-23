@@ -17,7 +17,7 @@ entity.onTrigger = function(player, npc)
 
     if
         healingTheLand == xi.questStatus.QUEST_AVAILABLE and
-        player:getFameLevel(xi.quest.fame_area.SANDORIA) >= 4 and
+        player:getFameLevel(xi.fameArea.SANDORIA) >= 4 and
         player:getMainLvl() >= 10
     then
         player:startEvent(681) -- Start quest "Healing the Land"
@@ -72,7 +72,7 @@ entity.onEventFinish = function(player, csid, option, npc)
             player:addItem(xi.item.SCROLL_OF_TELEPORT_HOLLA)
             player:messageSpecial(ID.text.ITEM_OBTAINED, xi.item.SCROLL_OF_TELEPORT_HOLLA) -- Scroll of Teleport-Holla
             player:needToZone(true)
-            player:addFame(xi.quest.fame_area.SANDORIA, 30)
+            player:addFame(xi.fameArea.SANDORIA, 30)
             player:completeQuest(xi.questLog.SANDORIA, xi.quest.id.sandoria.HEALING_THE_LAND)
         end
     elseif csid == 685 and option == 0 then
@@ -84,7 +84,7 @@ entity.onEventFinish = function(player, csid, option, npc)
             player:delKeyItem(xi.ki.FEIYIN_MAGIC_TOME)
             player:addItem(xi.item.SCROLL_OF_TELEPORT_VAHZL)
             player:messageSpecial(ID.text.ITEM_OBTAINED, xi.item.SCROLL_OF_TELEPORT_VAHZL) -- Scroll of Teleport-Vahzl
-            player:addFame(xi.quest.fame_area.SANDORIA, 30)
+            player:addFame(xi.fameArea.SANDORIA, 30)
             player:completeQuest(xi.questLog.SANDORIA, xi.quest.id.sandoria.SORCERY_OF_THE_NORTH)
         end
     end

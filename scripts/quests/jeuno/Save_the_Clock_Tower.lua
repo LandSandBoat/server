@@ -10,7 +10,7 @@ local quest = Quest:new(xi.questLog.JEUNO, xi.quest.id.jeuno.SAVE_THE_CLOCK_TOWE
 quest.reward =
 {
     fame     = 30,
-    fameArea = xi.quest.fame_area.JEUNO,
+    fameArea = xi.fameArea.JEUNO,
     title    = xi.title.CLOCK_TOWER_PRESERVATIONIST,
 }
 
@@ -54,7 +54,7 @@ quest.sections =
         check = function(player, status, vars)
             return status == xi.questStatus.QUEST_AVAILABLE and
                 player:hasCompletedQuest(xi.questLog.JEUNO, xi.quest.id.jeuno.A_CLOCK_MOST_DELICATE) and
-                player:getFameLevel(xi.quest.fame_area.JEUNO) >= 5
+                player:getFameLevel(xi.fameArea.JEUNO) >= 5
         end,
 
         [xi.zone.LOWER_JEUNO] =

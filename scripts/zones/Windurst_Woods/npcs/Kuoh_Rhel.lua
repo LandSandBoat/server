@@ -20,7 +20,7 @@ entity.onTrigger = function(player, npc)
     if
         inAStew == xi.questStatus.QUEST_AVAILABLE and
         chocobilious == xi.questStatus.QUEST_COMPLETED and
-        player:getFameLevel(xi.quest.fame_area.WINDURST) >= 3
+        player:getFameLevel(xi.fameArea.WINDURST) >= 3
     then
         if player:needToZone() then
             player:startEvent(232) -- Post quest dialog from Chocobilious
@@ -40,7 +40,7 @@ entity.onTrigger = function(player, npc)
     -- CHOCOBILIOUS
     elseif
         chocobilious == xi.questStatus.QUEST_AVAILABLE and
-        player:getFameLevel(xi.quest.fame_area.WINDURST) >= 2
+        player:getFameLevel(xi.fameArea.WINDURST) >= 2
     then
         player:startEvent(224) -- Start quest
     elseif chocobilious == xi.questStatus.QUEST_COMPLETED and player:needToZone() then

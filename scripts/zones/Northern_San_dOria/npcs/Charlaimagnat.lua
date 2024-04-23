@@ -46,7 +46,7 @@ entity.onEventFinish = function(player, csid, option, npc)
         else -- give player teleport-altep
             player:addItem(xi.item.SCROLL_OF_TELEPORT_ALTEP)
             player:messageSpecial(ID.text.ITEM_OBTAINED, xi.item.SCROLL_OF_TELEPORT_ALTEP)
-            player:addFame(xi.quest.fame_area.SELBINA_RABAO, 30)
+            player:addFame(xi.fameArea.SELBINA_RABAO, 30)
             player:completeQuest(xi.questLog.OUTLANDS, xi.quest.id.outlands.THE_MISSING_PIECE)
         end
     end

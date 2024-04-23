@@ -47,7 +47,7 @@ entity.onTrigger = function(player, npc)
 
     -- quest is available to player, nobody is currently on it, and the hour is right
     elseif
-        player:getFameLevel(xi.quest.fame_area.JEUNO) >= 1 and
+        player:getFameLevel(xi.fameArea.JEUNO) >= 1 and
         playerOnQuestId == 0 and
         (hour >= 18 or hour < 1)
     then

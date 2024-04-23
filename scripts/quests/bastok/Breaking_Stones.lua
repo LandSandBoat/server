@@ -12,7 +12,7 @@ quest.reward =
 {
     gil      = 400,
     fame     = 30,
-    fameArea = xi.quest.fame_area.BASTOK,
+    fameArea = xi.fameArea.BASTOK,
 }
 
 quest.sections =
@@ -20,7 +20,7 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == xi.questStatus.QUEST_AVAILABLE and
-                player:getFameLevel(xi.quest.fame_area.BASTOK) >= 2
+                player:getFameLevel(xi.fameArea.BASTOK) >= 2
         end,
 
         [xi.zone.BASTOK_MARKETS] =

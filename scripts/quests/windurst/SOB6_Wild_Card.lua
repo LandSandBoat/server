@@ -9,7 +9,7 @@ local quest = Quest:new(xi.questLog.WINDURST, xi.quest.id.windurst.WILD_CARD)
 quest.reward =
 {
     fame     = 10,
-    fameArea = xi.quest.fame_area.WINDURST,
+    fameArea = xi.fameArea.WINDURST,
     title    = xi.title.DREAM_DWELLER,
 }
 
@@ -29,7 +29,7 @@ quest.sections =
                 onTrigger = function(player, npc)
                     if
                         player:getMainLvl() >= 5 and
-                        player:getFameLevel(xi.quest.fame_area.WINDURST) >= 5 and
+                        player:getFameLevel(xi.fameArea.WINDURST) >= 5 and
                         not quest:getMustZone(player)
                     then
                         return quest:progressEvent(780) -- Quest starting event.

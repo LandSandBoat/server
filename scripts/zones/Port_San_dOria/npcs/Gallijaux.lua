@@ -26,12 +26,12 @@ entity.onTrade = function(player, npc, trade)
         then
             -- ultimate reward
             player:tradeComplete()
-            player:addFame(xi.quest.fame_area.SANDORIA, 30)
+            player:addFame(xi.fameArea.SANDORIA, 30)
             npcUtil.giveCurrency(player, 'gil', moatCarp * 10 + forestCarp * 15)
             player:startEvent(303)
         elseif player:getQuestStatus(xi.questLog.SANDORIA, xi.quest.id.sandoria.THE_RIVALRY) >= xi.questStatus.QUEST_ACCEPTED then -- regular turn-ins. Still allowed after completion of the quest.
             player:tradeComplete()
-            player:addFame(xi.quest.fame_area.SANDORIA, 30)
+            player:addFame(xi.fameArea.SANDORIA, 30)
             player:setCharVar('theCompetitionFishCountVar', totalFish)
             player:startEvent(301)
             npcUtil.giveCurrency(player, 'gil', moatCarp * 10 + forestCarp * 15)

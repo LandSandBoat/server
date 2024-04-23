@@ -10,7 +10,7 @@ local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.FEAR_OF_FLYING)
 quest.reward =
 {
     fame     = 30,
-    fameArea = xi.quest.fame_area.BASTOK,
+    fameArea = xi.fameArea.BASTOK,
     item     = xi.item.BLACK_SILK_NECKERCHIEF,
     title    = xi.title.AIRSHIP_DENOUNCER,
 }
@@ -20,7 +20,7 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == xi.questStatus.QUEST_AVAILABLE and
-                player:getFameLevel(xi.quest.fame_area.BASTOK) >= 3
+                player:getFameLevel(xi.fameArea.BASTOK) >= 3
         end,
 
         [xi.zone.PORT_BASTOK] =

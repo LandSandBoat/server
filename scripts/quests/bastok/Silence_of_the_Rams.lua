@@ -12,7 +12,7 @@ local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.SILENCE_OF_THE_RA
 quest.reward =
 {
     fame     = 125,
-    fameArea = xi.quest.fame_area.BASTOK,
+    fameArea = xi.fameArea.BASTOK,
     item     = xi.item.PURPLE_BELT,
     title    = xi.title.PURPLE_BELT,
 }
@@ -22,7 +22,7 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == xi.questStatus.QUEST_AVAILABLE and
-                player:getFameLevel(xi.quest.fame_area.NORG) >= 2
+                player:getFameLevel(xi.fameArea.NORG) >= 2
         end,
 
         [xi.zone.PORT_BASTOK] =

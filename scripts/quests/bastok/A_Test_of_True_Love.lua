@@ -10,7 +10,7 @@ local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.A_TEST_OF_TRUE_LO
 quest.reward =
 {
     fame     = 120,
-    fameArea = xi.quest.fame_area.BASTOK,
+    fameArea = xi.fameArea.BASTOK,
     gil      = 10000,
 }
 
@@ -39,7 +39,7 @@ quest.sections =
         check = function(player, status, vars)
             return status == xi.questStatus.QUEST_AVAILABLE and
                 player:hasCompletedQuest(xi.questLog.BASTOK, xi.quest.id.bastok.LOVE_AND_ICE) and
-                player:getFameLevel(xi.quest.fame_area.BASTOK) >= 6 and
+                player:getFameLevel(xi.fameArea.BASTOK) >= 6 and
                 not quest:getMustZone(player)
         end,
 
