@@ -2,9 +2,6 @@
 -- An Explorer's Footsteps
 -----------------------------------
 -- Log ID: 4, Quest ID: 19
--- This quest was changed to require a minimum amount of fame to combat RMTs POS-Hacking around to
--- quickly earn gil. However, as this is not a legitimate concern on private servers players may
--- complete this quest even with no fame.
 -----------------------------------
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
@@ -15,23 +12,23 @@ local quest = Quest:new(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.AN_E
 
 local payOut =
 {
-    800, -- West Ronfaure -- !gotoid 17187513
-    800, -- East Ronfaure -- !gotoid 17191526
-    1000, -- La Theine Plateau -- !gotoid 17195621
-    1000, -- Valkurm Dunes -- !gotoid 17199698
-    1000, -- Jugner Forest -- !gotoid 17203814
-    10000, -- Batallia Downs -- !gotoid 17207821
-    3000, -- North Gustaberg -- !gotoid 17212049
-    800, -- South Gustaberg -- !gotoid 17216174
-    1000, -- Konschtat Highlands -- !gotoid 17220150
-    1000, -- Pashhow Marshlands -- !gotoid 17224302
-    3000, -- Rolanberry Fields -- !gotoid 17228353
-    800, -- West Sarutabaruta -- !gotoid 17248818
-    800, -- East Sarutabaruta -- !gotoid 17253064
-    1000, -- Tahrongi Canyon -- !gotoid 17257053
-    1000, -- Buburimu Peninsula -- !gotoid 17261140
-    1000, -- Meriphataud Mountains -- !gotoid 17265242
-    10000, -- Sauromugue Champaign -- !gotoid 17269222
+    800, -- West Ronfaure -- !gotoid 17187513 !pos -183.7340 -12.6798 -395.7220 100
+    800, -- East Ronfaure -- !gotoid 17191526 !pos 77.2770 -2.8962 -517.3760 101
+    1000, -- La Theine Plateau -- !gotoid 17195621 !pos 334.1330 50.6223 141.1630 102
+    1000, -- Valkurm Dunes -- !gotoid 17199698 !pos -311.2990 -4.4211 -138.8780 103
+    1000, -- Jugner Forest -- !gotoid 17203814 !pos -65.9760 -23.8312 -661.3620 104
+    10000, -- Batallia Downs -- !gotoid 17207821 !pos 185.6690 9.0476 -614.0250 105
+    3000, -- North Gustaberg -- !gotoid 17212049 !pos -199.6350 96.0547 505.6240 106
+    800, -- South Gustaberg -- !gotoid 17216174 !pos 520.0640 -5.8831 -738.3560 107
+    1000, -- Konschtat Highlands -- !gotoid 17220150 !pos -102.3550 7.9796 253.7059 108
+    1000, -- Pashhow Marshlands -- !gotoid 17224302 !pos -300.6720 21.6038 304.1790 109
+    3000, -- Rolanberry Fields -- !gotoid 17228353 !pos 362.4790 -34.8962 -398.9940 110
+    800, -- West Sarutabaruta -- !gotoid 17248818 !pos -205.5930 -23.2401 -119.6700 115
+    800, -- East Sarutabaruta -- !gotoid 17253064 !pos 448.0450 -7.8100 319.9799 116
+    1000, -- Tahrongi Canyon -- !gotoid 17257053 !pos -499.1890 12.6524 373.5920 117
+    1000, -- Buburimu Peninsula -- !gotoid 17261140 !pos 320.7549 -4.0779 368.7219 118
+    1000, -- Meriphataud Mountains -- !gotoid 17265242 !pos 450.7409 2.1088 -290.7359 119
+    10000, -- Sauromugue Champaign -- !gotoid 17269222 !pos 77.5440 -2.7476 -184.8030 120
 }
 
 local function handleTabletTurnInEvent(player, csid, option)
@@ -67,7 +64,7 @@ quest.sections =
 {
     {
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE and player:getFameLevel(xi.quest.fame_area.SELBINA_RABAO) >= 1 --unsure where they are getting rabao fame from
+            return status == QUEST_AVAILABLE and player:getFameLevel(xi.quest.fame_area.SELBINA_RABAO) >= 1
         end,
 
         [xi.zone.SELBINA] =
