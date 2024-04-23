@@ -12,10 +12,10 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local unforgiven = player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.UNFORGIVEN)
+    local unforgiven = player:getQuestStatus(xi.questLog.OTHER_AREAS, xi.quest.id.otherAreas.UNFORGIVEN)
 
     if
-        unforgiven == QUEST_ACCEPTED and
+        unforgiven == xi.questStatus.QUEST_ACCEPTED and
         not player:hasKeyItem(xi.ki.ALABASTER_HAIRPIN)
     then
         player:addKeyItem(xi.ki.ALABASTER_HAIRPIN)

@@ -8,7 +8,7 @@ xi.soa.helpers = xi.soa.helpers or {}
 xi.soa.helpers.imprimaturGate = function(player, gateAmount)
     -- TODO: All of this
     local imprimatursSpent = 0 -- TODO: Pull from DB
-    local fame = player:getFameLevel(xi.quest.fame_area.ADOULIN)
+    local fame = player:getFameLevel(xi.fameArea.ADOULIN)
     local gate = 100 - (fame * gateAmount)
     return imprimatursSpent >= gate
 end

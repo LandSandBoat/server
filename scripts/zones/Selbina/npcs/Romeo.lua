@@ -8,7 +8,7 @@ local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     if
-        player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.DONATE_TO_RECYCLING) == QUEST_ACCEPTED and
+        player:getQuestStatus(xi.questLog.OTHER_AREAS, xi.quest.id.otherAreas.DONATE_TO_RECYCLING) == xi.questStatus.QUEST_ACCEPTED and
         (
             npcUtil.tradeHas(trade, { { 16482, 5 } }) or
             npcUtil.tradeHas(trade, { { 16483, 5 } }) or
@@ -22,11 +22,11 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local donateToRecycling = player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.DONATE_TO_RECYCLING)
+    local donateToRecycling = player:getQuestStatus(xi.questLog.OTHER_AREAS, xi.quest.id.otherAreas.DONATE_TO_RECYCLING)
 
-    if donateToRecycling == QUEST_AVAILABLE then
+    if donateToRecycling == xi.questStatus.QUEST_AVAILABLE then
         player:startEvent(20) -- Start quest "Donate to Recycling"
-    elseif donateToRecycling == QUEST_ACCEPTED then
+    elseif donateToRecycling == xi.questStatus.QUEST_ACCEPTED then
         player:startEvent(22) -- During quest "Donate to Recycling"
     else
         player:startEvent(23) -- Standard dialog
@@ -38,10 +38,10 @@ end
 
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 20 then
-        player:addQuest(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.DONATE_TO_RECYCLING)
+        player:addQuest(xi.questLog.OTHER_AREAS, xi.quest.id.otherAreas.DONATE_TO_RECYCLING)
     elseif
         csid == 21 and
-        npcUtil.completeQuest(player, xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.DONATE_TO_RECYCLING, { item = 89, fame_area = xi.quest.fame_area.SELBINA_RABAO, title = xi.title.ECOLOGIST })
+        npcUtil.completeQuest(player, xi.questLog.OTHER_AREAS, xi.quest.id.otherAreas.DONATE_TO_RECYCLING, { item = 89, fame_area = xi.fameArea.SELBINA_RABAO, title = xi.title.ECOLOGIST })
     then
         player:confirmTrade()
     end

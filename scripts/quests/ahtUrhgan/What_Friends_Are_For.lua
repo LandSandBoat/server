@@ -5,14 +5,14 @@
 -- Qm9 !pos -406 6.5 -440 68
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.WHAT_FRIENDS_ARE_FOR)
+local quest = Quest:new(xi.questLog.AHT_URHGAN, xi.quest.id.ahtUrhgan.WHAT_FRIENDS_ARE_FOR)
 
 quest.sections =
 {
     -- Section: Quest available
     {
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE and vars.Prog == 0
+            return status == xi.questStatus.QUEST_AVAILABLE and vars.Prog == 0
         end,
 
         [xi.zone.AYDEEWA_SUBTERRANE] =
@@ -46,7 +46,7 @@ quest.sections =
     -- Section: Quest available, step 2
     {
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE and vars.Prog == 1
+            return status == xi.questStatus.QUEST_AVAILABLE and vars.Prog == 1
         end,
 
         [xi.zone.NASHMAU] =
@@ -71,7 +71,7 @@ quest.sections =
     -- Section: Quest accepted
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED
+            return status == xi.questStatus.QUEST_ACCEPTED
         end,
 
         [xi.zone.NASHMAU] =
@@ -150,7 +150,7 @@ quest.sections =
     -- Section: Quest completed
     {
         check = function(player, status, vars)
-            return status == QUEST_COMPLETED
+            return status == xi.questStatus.QUEST_COMPLETED
         end,
 
         [xi.zone.NASHMAU] =

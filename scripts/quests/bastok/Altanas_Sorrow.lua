@@ -7,12 +7,12 @@
 -- Eperdur : !pos 129 -6 96 231
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.BASTOK, xi.quest.id.bastok.ALTANAS_SORROW)
+local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.ALTANAS_SORROW)
 
 quest.reward =
 {
     fame     = 30,
-    fameArea = xi.quest.fame_area.BASTOK,
+    fameArea = xi.fameArea.BASTOK,
     item     = xi.item.SCROLL_OF_TELEPORT_DEM,
     title    = xi.title.PILGRIM_TO_DEM,
 }
@@ -21,9 +21,9 @@ quest.sections =
 {
     {
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE and
+            return status == xi.questStatus.QUEST_AVAILABLE and
                 player:getMainLvl() >= 10 and
-                player:getFameLevel(xi.quest.fame_area.BASTOK) >= 4
+                player:getFameLevel(xi.fameArea.BASTOK) >= 4
         end,
 
         [xi.zone.BASTOK_MINES] =
@@ -43,7 +43,7 @@ quest.sections =
 
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED
+            return status == xi.questStatus.QUEST_ACCEPTED
         end,
 
         [xi.zone.BASTOK_MINES] =
@@ -109,7 +109,7 @@ quest.sections =
 
     {
         check = function(player, status, vars)
-            return status == QUEST_COMPLETED
+            return status == xi.questStatus.QUEST_COMPLETED
         end,
 
         [xi.zone.BASTOK_MINES] =

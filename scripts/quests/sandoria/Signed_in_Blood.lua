@@ -6,7 +6,7 @@
 -- TORN_OUT_PAGES !addkeyitem 626
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.SIGNED_IN_BLOOD)
+local quest = Quest:new(xi.questLog.SANDORIA, xi.quest.id.sandoria.SIGNED_IN_BLOOD)
 
 quest.reward =
 {
@@ -20,7 +20,7 @@ quest.sections =
     -- She wants you to retrieve a Cathedral Tapestry.
     {
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE and player:getFameLevel(xi.quest.fame_area.SANDORIA) >= 3
+            return status == xi.questStatus.QUEST_AVAILABLE and player:getFameLevel(xi.fameArea.SANDORIA) >= 3
         end,
 
         [xi.zone.SOUTHERN_SAN_DORIA] =
@@ -46,7 +46,7 @@ quest.sections =
     -- Trade the tapestry to Sobane and she'll explain the next step.
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED and vars.Prog == 0
+            return status == xi.questStatus.QUEST_ACCEPTED and vars.Prog == 0
         end,
 
         [xi.zone.SOUTHERN_SAN_DORIA] =
@@ -78,7 +78,7 @@ quest.sections =
     -- Perhaps his lips will loosen if you help him find them.
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED and vars.Prog == 1
+            return status == xi.questStatus.QUEST_ACCEPTED and vars.Prog == 1
         end,
 
         [xi.zone.SOUTHERN_SAN_DORIA] =
@@ -116,7 +116,7 @@ quest.sections =
     -- Return to Selbina and talk to the mayor. He'll reveal some information to you which will prove interesting to Sobane.
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED and vars.Prog == 2
+            return status == xi.questStatus.QUEST_ACCEPTED and vars.Prog == 2
         end,
 
         [xi.zone.SOUTHERN_SAN_DORIA] =
@@ -154,7 +154,7 @@ quest.sections =
     -- Return to Sobane to complete this quest and to receive your reward.
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED and vars.Prog == 3
+            return status == xi.questStatus.QUEST_ACCEPTED and vars.Prog == 3
         end,
 
         [xi.zone.SELBINA] =
@@ -192,7 +192,7 @@ quest.sections =
     -- Otherwise you get this event.
     {
         check = function(player, status, vars)
-            return status == QUEST_COMPLETED and player:needToZone()
+            return status == xi.questStatus.QUEST_COMPLETED and player:needToZone()
         end,
 
         [xi.zone.SOUTHERN_SAN_DORIA] =

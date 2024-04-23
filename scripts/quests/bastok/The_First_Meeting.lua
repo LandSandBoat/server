@@ -8,12 +8,12 @@
 local davoiID = zones[xi.zone.DAVOI]
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_FIRST_MEETING)
+local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.THE_FIRST_MEETING)
 
 quest.reward =
 {
     fame     = 40,
-    fameArea = xi.quest.fame_area.BASTOK,
+    fameArea = xi.fameArea.BASTOK,
     item     = xi.item.TEMPLE_GAITERS,
 }
 
@@ -21,9 +21,9 @@ quest.sections =
 {
     {
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE and
+            return status == xi.questStatus.QUEST_AVAILABLE and
                 not quest:getMustZone(player) and
-                player:hasCompletedQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.GHOSTS_OF_THE_PAST) and
+                player:hasCompletedQuest(xi.questLog.BASTOK, xi.quest.id.bastok.GHOSTS_OF_THE_PAST) and
                 player:getMainJob() == xi.job.MNK and
                 player:getMainLvl() >= 50
         end,
@@ -43,7 +43,7 @@ quest.sections =
 
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED
+            return status == xi.questStatus.QUEST_ACCEPTED
         end,
 
         [xi.zone.DAVOI] =

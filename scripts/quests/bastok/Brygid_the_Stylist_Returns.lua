@@ -5,12 +5,12 @@
 -- Brygid : !pos -90 -4 -108 235
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.BASTOK, xi.quest.id.bastok.BRYGID_THE_STYLIST_RETURNS)
+local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.BRYGID_THE_STYLIST_RETURNS)
 
 quest.reward =
 {
     fame     = 30,
-    fameArea = xi.quest.fame_area.BASTOK,
+    fameArea = xi.fameArea.BASTOK,
     title    = xi.title.BASTOKS_SECOND_BEST_DRESSED,
 }
 
@@ -104,8 +104,8 @@ quest.sections =
 {
     {
         check = function(player, status, vars)
-            return status ~= QUEST_ACCEPTED and
-                player:hasCompletedQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.BRYGID_THE_STYLIST) and
+            return status ~= xi.questStatus.QUEST_ACCEPTED and
+                player:hasCompletedQuest(xi.questLog.BASTOK, xi.quest.id.bastok.BRYGID_THE_STYLIST) and
                 hasArtifactArmorEquipped(player)
         end,
 
@@ -128,7 +128,7 @@ quest.sections =
             onEventFinish =
             {
                 [380] = function(player, csid, option, npc)
-                    player:delQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.BRYGID_THE_STYLIST_RETURNS)
+                    player:delQuest(xi.questLog.BASTOK, xi.quest.id.bastok.BRYGID_THE_STYLIST_RETURNS)
                     quest:begin(player)
                 end,
             },
@@ -137,7 +137,7 @@ quest.sections =
 
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED
+            return status == xi.questStatus.QUEST_ACCEPTED
         end,
 
         [xi.zone.BASTOK_MARKETS] =

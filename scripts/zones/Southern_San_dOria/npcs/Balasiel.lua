@@ -11,7 +11,7 @@ end
 
 entity.onTrigger = function(player, npc)
     if
-        player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.KNIGHT_STALKER) == QUEST_ACCEPTED and
+        player:getQuestStatus(xi.questLog.SANDORIA, xi.quest.id.sandoria.KNIGHT_STALKER) == xi.questStatus.QUEST_ACCEPTED and
         player:getCharVar('KnightStalker_Progress') == 2
     then
         player:startEvent(63) -- DRG AF3 cutscene, doesn't appear to have a follow up.

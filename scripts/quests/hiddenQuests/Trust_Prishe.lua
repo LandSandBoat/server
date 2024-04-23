@@ -13,7 +13,7 @@ local trustMemory = function(player)
 
     -- Now that I think about it, I remember a time when some old jeweler over in Jeuno was going on and on about what "love" really is.
     -- You know what I learned from him? That love ain't something you know about until it hits you. So that means I don't know what love is?
-    if player:hasCompletedQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.IN_THE_MOOD_FOR_LOVE) then
+    if player:hasCompletedQuest(xi.questLog.JEUNO, xi.quest.id.jeuno.IN_THE_MOOD_FOR_LOVE) then
         memories = memories + 2
     end
 
@@ -21,7 +21,7 @@ local trustMemory = function(player)
     -- Animals have hearts and souls, just like people do, and their hearts are much more pure than ours.
     -- Now if only I were as pure as a moogle, then maybe...
     -- Ah, screw it all! What's this weird heat coming from my cheeks?
-    if player:hasCompletedQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.A_CHOCOBO_S_TALE) then
+    if player:hasCompletedQuest(xi.questLog.JEUNO, xi.quest.id.jeuno.A_CHOCOBO_S_TALE) then
         memories = memories + 4
     end
 
@@ -30,14 +30,14 @@ local trustMemory = function(player)
     -- Let me share with you a little something. There's this geezer over in Jeuno, always with his fishing rod by the docks, who musta stared daggers at me for hours on end.
     -- You'd picture he'd've just told me to be careful, but oh no!
     -- If it were you in a pit of snakes, though, I wouldn't care what any old fart would have to say! I'd throw myself in after you in a heartbeat!
-    if player:hasCompletedMission(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.HOOK_LINE_AND_SINKER) then
+    if player:hasCompletedMission(xi.questLog.JEUNO, xi.quest.id.jeuno.HOOK_LINE_AND_SINKER) then
         memories = memories + 8
     end
 
     -- The Shadow Lord, Kam'lanaut, Eald'narche, Nag'Molada...doesn't matter one bit to me.
     -- They may have succumbed--but we didn't. And you remember why, don't you?
     -- The light that brought us into this world shines brighter than the sun, and continues to bless the world, its people, and our hearts.
-    if player:hasCompletedMission(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.APOCALYPSE_NIGH) then
+    if player:hasCompletedMission(xi.questLog.JEUNO, xi.quest.id.jeuno.APOCALYPSE_NIGH) then
         memories = memories + 16
     end
 

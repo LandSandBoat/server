@@ -7,12 +7,12 @@
 local windurstWallsID = zones[xi.zone.WINDURST_WALLS]
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.WINDURST, xi.quest.id.windurst.FLOWER_CHILD)
+local quest = Quest:new(xi.questLog.WINDURST, xi.quest.id.windurst.FLOWER_CHILD)
 
 quest.reward =
 {
     fame     = 120,
-    fameArea = xi.quest.fame_area.WINDURST,
+    fameArea = xi.fameArea.WINDURST,
 }
 
 local flowerItems =
@@ -54,7 +54,7 @@ quest.sections =
 {
     {
         check = function(player, status, vars)
-            return status ~= QUEST_COMPLETED
+            return status ~= xi.questStatus.QUEST_COMPLETED
         end,
 
         [xi.zone.WINDURST_WALLS] =
@@ -99,7 +99,7 @@ quest.sections =
                         end
 
                         -- Start quest if it wasn't.
-                        if player:getQuestStatus(quest.areaId, quest.questId) == QUEST_AVAILABLE then
+                        if player:getQuestStatus(quest.areaId, quest.questId) == xi.questStatus.QUEST_AVAILABLE then
                             quest:begin(player)
                         end
                     end
@@ -110,7 +110,7 @@ quest.sections =
 
     {
         check = function(player, status, vars)
-            return status == QUEST_COMPLETED
+            return status == xi.questStatus.QUEST_COMPLETED
         end,
 
         [xi.zone.WINDURST_WALLS] =

@@ -8,10 +8,10 @@ local ID = zones[xi.zone.RABAO]
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    local forgetTheAntidote = player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.DONT_FORGET_THE_ANTIDOTE)
+    local forgetTheAntidote = player:getQuestStatus(xi.questLog.OUTLANDS, xi.quest.id.outlands.DONT_FORGET_THE_ANTIDOTE)
 
     if
-        (forgetTheAntidote == QUEST_ACCEPTED or forgetTheAntidote == QUEST_COMPLETED) and
+        (forgetTheAntidote == xi.questStatus.QUEST_ACCEPTED or forgetTheAntidote == xi.questStatus.QUEST_COMPLETED) and
         trade:hasItemQty(xi.item.VIAL_OF_DESERT_VENOM, 1) and
         trade:getItemCount() == 1
     then
@@ -20,16 +20,16 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local forgetTheAntidote = player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.DONT_FORGET_THE_ANTIDOTE)
+    local forgetTheAntidote = player:getQuestStatus(xi.questLog.OUTLANDS, xi.quest.id.outlands.DONT_FORGET_THE_ANTIDOTE)
 
     if
-        forgetTheAntidote == QUEST_AVAILABLE and
-        player:getFameLevel(xi.quest.fame_area.SELBINA_RABAO) >= 4
+        forgetTheAntidote == xi.questStatus.QUEST_AVAILABLE and
+        player:getFameLevel(xi.fameArea.SELBINA_RABAO) >= 4
     then
         player:startEvent(2, 0, xi.item.VIAL_OF_DESERT_VENOM)
-    elseif forgetTheAntidote == QUEST_ACCEPTED then
+    elseif forgetTheAntidote == xi.questStatus.QUEST_ACCEPTED then
         player:startEvent(3, 0, xi.item.VIAL_OF_DESERT_VENOM)
-    elseif forgetTheAntidote == QUEST_COMPLETED then
+    elseif forgetTheAntidote == xi.questStatus.QUEST_COMPLETED then
         player:startEvent(5, 0, xi.item.VIAL_OF_DESERT_VENOM)
     else
         player:startEvent(50)
@@ -41,7 +41,7 @@ end
 
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 2 and option == 1 then
-        player:addQuest(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.DONT_FORGET_THE_ANTIDOTE)
+        player:addQuest(xi.questLog.OUTLANDS, xi.quest.id.outlands.DONT_FORGET_THE_ANTIDOTE)
         player:setCharVar('DontForgetAntidoteVar', 1)
     elseif csid == 4 and player:getCharVar('DontForgetAntidoteVar') == 1 then --If completing for the first time
         player:setCharVar('DontForgetAntidoteVar', 0)
@@ -49,12 +49,12 @@ entity.onEventFinish = function(player, csid, option, npc)
         player:addTitle(xi.title.DESERT_HUNTER)
         player:addItem(xi.item.DOTANUKI) -- Dotanuki
         player:messageSpecial(ID.text.ITEM_OBTAINED, xi.item.DOTANUKI)
-        player:completeQuest(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.DONT_FORGET_THE_ANTIDOTE)
-        player:addFame(xi.quest.fame_area.SELBINA_RABAO, 60)
+        player:completeQuest(xi.questLog.OUTLANDS, xi.quest.id.outlands.DONT_FORGET_THE_ANTIDOTE)
+        player:addFame(xi.fameArea.SELBINA_RABAO, 60)
     elseif csid == 4 then --Subsequent completions
         player:tradeComplete()
         npcUtil.giveCurrency(player, 'gil', 1800)
-        player:addFame(xi.quest.fame_area.SELBINA_RABAO, 30)
+        player:addFame(xi.fameArea.SELBINA_RABAO, 30)
     end
 end
 

@@ -8,7 +8,7 @@ local entity = {}
 
 entity.onSteal = function(player, target, ability, action)
     if
-        player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_TENSHODO_SHOWDOWN) == QUEST_ACCEPTED and
+        player:getQuestStatus(xi.questLog.WINDURST, xi.quest.id.windurst.THE_TENSHODO_SHOWDOWN) == xi.questStatus.QUEST_ACCEPTED and
         not player:hasItem(xi.item.BOWL_OF_QUADAV_STEW)
     then
         return xi.item.BOWL_OF_QUADAV_STEW

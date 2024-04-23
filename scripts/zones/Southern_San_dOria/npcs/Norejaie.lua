@@ -14,7 +14,7 @@ entity.onTrigger = function(player, npc)
 
     if
         ecoStatus == 0 and
-        player:getFameLevel(xi.quest.fame_area.SANDORIA) >= 1 and
+        player:getFameLevel(xi.fameArea.SANDORIA) >= 1 and
         player:getCharVar('EcoReset') == 0
     then
         player:startEvent(677) -- Offer Eco-Warrior quest
@@ -34,14 +34,14 @@ end
 
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 677 and option == 1 then
-        if player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.ECO_WARRIOR) == QUEST_AVAILABLE then
-            player:addQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.ECO_WARRIOR)
+        if player:getQuestStatus(xi.questLog.SANDORIA, xi.quest.id.sandoria.ECO_WARRIOR) == xi.questStatus.QUEST_AVAILABLE then
+            player:addQuest(xi.questLog.SANDORIA, xi.quest.id.sandoria.ECO_WARRIOR)
         end
 
         player:setCharVar('EcoStatus', 1) -- EcoStatus var:  1 to 3 for sandy // 101 to 103 for bastok // 201 to 203 for windurst
     elseif
         csid == 681 and
-        npcUtil.completeQuest(player, xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.ECO_WARRIOR, {
+        npcUtil.completeQuest(player, xi.questLog.SANDORIA, xi.quest.id.sandoria.ECO_WARRIOR, {
             gil = 5000,
             item = 4198,
             title = xi.title.VERMILLION_VENTURER,

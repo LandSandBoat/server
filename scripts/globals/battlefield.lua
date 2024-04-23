@@ -1341,22 +1341,22 @@ function BattlefieldQuest:checkRequirements(player, npc, isRegistrant, trade)
         return false
     end
 
-    return player:getQuestStatus(self.questArea, self.quest) >= QUEST_ACCEPTED
+    return player:getQuestStatus(self.questArea, self.quest) >= xi.questStatus.QUEST_ACCEPTED
 end
 
 function BattlefieldQuest:checkSkipCutscene(player)
-    return player:getQuestStatus(self.questArea, self.quest) == QUEST_COMPLETED
+    return player:getQuestStatus(self.questArea, self.quest) == xi.questStatus.QUEST_COMPLETED
 end
 
 function BattlefieldQuest:onBattlefieldWin(player, battlefield)
     local status = player:getQuestStatus(self.questArea, self.quest)
 
-    if status == QUEST_ACCEPTED then
+    if status == xi.questStatus.QUEST_ACCEPTED then
         player:setLocalVar('battlefieldWin', battlefield:getID())
     end
 
     local _, clearTime, partySize = battlefield:getRecord()
-    local canSkipCS               = status ~= QUEST_ACCEPTED and 1 or 0
+    local canSkipCS               = status ~= xi.questStatus.QUEST_ACCEPTED and 1 or 0
 
     player:startEvent(32001, battlefield:getArea(), clearTime, partySize, battlefield:getTimeInside(), 1, self.index, canSkipCS)
 end

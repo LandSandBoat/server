@@ -9,12 +9,12 @@ local northernSandOriaID = zones[xi.zone.NORTHERN_SAN_DORIA]
 local westRonfaureID     = zones[xi.zone.WEST_RONFAURE]
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_PICKPOCKET)
+local quest = Quest:new(xi.questLog.SANDORIA, xi.quest.id.sandoria.THE_PICKPOCKET)
 
 quest.reward =
 {
     fame = 30,
-    fameArea = xi.quest.fame_area.SANDORIA,
+    fameArea = xi.fameArea.SANDORIA,
     item = xi.item.LIGHT_AXE,
     itemParams = { fromTrade = true },
     title = xi.title.PICKPOCKET_PINCHER,
@@ -25,7 +25,7 @@ quest.sections =
     -- Speaking with the little elvaan girl, Miene, will activate a cutscene. You will see a burglar steal something from Altiret, one of the guards.
     {
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE and vars.Prog == 0
+            return status == xi.questStatus.QUEST_AVAILABLE and vars.Prog == 0
         end,
 
         [xi.zone.PORT_SAN_DORIA] =
@@ -45,8 +45,8 @@ quest.sections =
     {
         check = function(player, status, vars)
             return
-                (status == QUEST_AVAILABLE and vars.Prog == 1) or
-                (status == QUEST_ACCEPTED and not player:hasItem(xi.item.GILT_GLASSES))
+                (status == xi.questStatus.QUEST_AVAILABLE and vars.Prog == 1) or
+                (status == xi.questStatus.QUEST_ACCEPTED and not player:hasItem(xi.item.GILT_GLASSES))
         end,
 
         [xi.zone.PORT_SAN_DORIA] =
@@ -100,7 +100,7 @@ quest.sections =
     -- After the cutscene ends, speak with Altiret. He asks you to retrieve his wife's glasses for him, since he cannot leave his post.
     {
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE and vars.Prog == 1
+            return status == xi.questStatus.QUEST_AVAILABLE and vars.Prog == 1
         end,
 
         [xi.zone.PORT_SAN_DORIA] =
@@ -125,7 +125,7 @@ quest.sections =
     -- Return to Port San d'Oria and trade the Gilt Glasses to Altiret for your reward.
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED
+            return status == xi.questStatus.QUEST_ACCEPTED
         end,
 
         [xi.zone.PORT_SAN_DORIA] =
@@ -220,7 +220,7 @@ quest.sections =
     -- Section: Completed quest
     {
         check = function(player, status, vars)
-            return status == QUEST_COMPLETED
+            return status == xi.questStatus.QUEST_COMPLETED
         end,
 
         [xi.zone.PORT_SAN_DORIA] =

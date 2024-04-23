@@ -7,7 +7,7 @@
 -- Glowing Pebbles : !pos 104.2 4.1 443.6 82
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_ROAD_TO_DIVADOM)
+local quest = Quest:new(xi.questLog.JEUNO, xi.quest.id.jeuno.THE_ROAD_TO_DIVADOM)
 
 quest.reward =
 {
@@ -18,8 +18,8 @@ quest.sections =
 {
     {
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE and
-                player:hasCompletedQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_UNFINISHED_WALTZ) and
+            return status == xi.questStatus.QUEST_AVAILABLE and
+                player:hasCompletedQuest(xi.questLog.JEUNO, xi.quest.id.jeuno.THE_UNFINISHED_WALTZ) and
                 player:getMainJob() == xi.job.DNC and
                 player:getMainLvl() >= xi.settings.main.AF2_QUEST_LEVEL and
                 not quest:getMustZone(player) and
@@ -41,7 +41,7 @@ quest.sections =
 
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED and
+            return status == xi.questStatus.QUEST_ACCEPTED and
                 player:getMainJob() == xi.job.DNC
         end,
 
@@ -137,8 +137,8 @@ quest.sections =
 
     {
         check = function(player, status, vars)
-            return status == QUEST_COMPLETED and
-                not player:hasCompletedQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.COMEBACK_QUEEN)
+            return status == xi.questStatus.QUEST_COMPLETED and
+                not player:hasCompletedQuest(xi.questLog.JEUNO, xi.quest.id.jeuno.COMEBACK_QUEEN)
         end,
 
         [xi.zone.UPPER_JEUNO] =

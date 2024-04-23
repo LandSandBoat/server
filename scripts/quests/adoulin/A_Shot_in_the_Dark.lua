@@ -8,7 +8,7 @@
 -- Pudith      : !pos -109.533 -0.150 56.939 257
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.A_SHOT_IN_THE_DARK)
+local quest = Quest:new(xi.questLog.ADOULIN, xi.quest.id.adoulin.A_SHOT_IN_THE_DARK)
 
 -- NOTE:
 -- It is reported that to reach max fame (~610) you must complete this cycle of quests
@@ -17,7 +17,7 @@ local quest = Quest:new(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.A_SHOT_IN_T
 quest.reward =
 {
     fame     = 6,
-    fameArea = xi.quest.fame_area.ADOULIN,
+    fameArea = xi.fameArea.ADOULIN,
     xp       = 500,
     bayld    = 200,
 }
@@ -27,7 +27,7 @@ quest.sections =
     -- Section: Begin quest (First time)
     {
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE
+            return status == xi.questStatus.QUEST_AVAILABLE
         end,
 
         [xi.zone.EASTERN_ADOULIN] =
@@ -53,9 +53,9 @@ quest.sections =
     -- Section: Begin quest (Repeated)
     {
         check = function(player, status, vars)
-            return player:hasCompletedQuest(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.IT_SETS_MY_HEART_AFLUTTER) and
-                player:hasCompletedQuest(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.A_GOOD_PAIR_OF_CROCS) and
-                player:hasCompletedQuest(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.A_SHOT_IN_THE_DARK) and
+            return player:hasCompletedQuest(xi.questLog.ADOULIN, xi.quest.id.adoulin.IT_SETS_MY_HEART_AFLUTTER) and
+                player:hasCompletedQuest(xi.questLog.ADOULIN, xi.quest.id.adoulin.A_GOOD_PAIR_OF_CROCS) and
+                player:hasCompletedQuest(xi.questLog.ADOULIN, xi.quest.id.adoulin.A_SHOT_IN_THE_DARK) and
                 player:getCharVar('ADOULIN_FAME_QUEST_TRACKER') == 2
         end,
 
@@ -71,7 +71,7 @@ quest.sections =
             onEventFinish =
             {
                 [3013] = function(player, csid, option, npc)
-                    player:delQuest(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.A_SHOT_IN_THE_DARK)
+                    player:delQuest(xi.questLog.ADOULIN, xi.quest.id.adoulin.A_SHOT_IN_THE_DARK)
                     quest:begin(player)
                 end,
             },
@@ -81,7 +81,7 @@ quest.sections =
     -- Section: Questing
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED
+            return status == xi.questStatus.QUEST_ACCEPTED
         end,
 
         [xi.zone.EASTERN_ADOULIN] =
@@ -114,7 +114,7 @@ quest.sections =
     -- Section: Completed quest
     {
         check = function(player, status, vars)
-            return status == QUEST_COMPLETED
+            return status == xi.questStatus.QUEST_COMPLETED
         end,
 
         [xi.zone.EASTERN_ADOULIN] =

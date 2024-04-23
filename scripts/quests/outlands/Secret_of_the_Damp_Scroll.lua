@@ -6,12 +6,12 @@
 -- Hot Springs : !pos 444 -37 -18 139
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.SECRET_OF_THE_DAMP_SCROLL)
+local quest = Quest:new(xi.questLog.OUTLANDS, xi.quest.id.outlands.SECRET_OF_THE_DAMP_SCROLL)
 
 quest.reward =
 {
     fame     = 75,
-    fameArea = xi.quest.fame_area.NORG,
+    fameArea = xi.fameArea.NORG,
     item     = xi.item.SCROLL_OF_JUBAKU_ICHI,
     title    = xi.title.CRACKER_OF_THE_SECRET_CODE,
 }
@@ -20,8 +20,8 @@ quest.sections =
 {
     {
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE and
-                player:getFameLevel(xi.quest.fame_area.NORG) >= 3 and
+            return status == xi.questStatus.QUEST_AVAILABLE and
+                player:getFameLevel(xi.fameArea.NORG) >= 3 and
                 player:getMainLvl() >= 10 and
                 player:hasItem(xi.item.DAMP_SCROLL)
         end,
@@ -41,7 +41,7 @@ quest.sections =
 
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED
+            return status == xi.questStatus.QUEST_ACCEPTED
         end,
 
         [xi.zone.NORG] =

@@ -16,7 +16,7 @@ end
 entity.onTrigger = function(player, npc)
     local mLvl          = player:getMainLvl()
     local mJob          = player:getMainJob()
-    local downwardHelix = player:getQuestStatus(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.DOWNWARD_HELIX)
+    local downwardHelix = player:getQuestStatus(xi.questLog.CRYSTAL_WAR, xi.quest.id.crystalWar.DOWNWARD_HELIX)
 
     -- Controls the progress of each step. Everything will start at 1 and end at 4 (complete).
     local loafersQuestProgress = player:getCharVar('AF_SCH_BOOTS')
@@ -57,7 +57,7 @@ entity.onTrigger = function(player, npc)
 
         -- Nothing in progress and meet the starting requirements.
         elseif
-            downwardHelix == QUEST_COMPLETED and
+            downwardHelix == xi.questStatus.QUEST_COMPLETED and
             mJob == xi.job.SCH and
             mLvl >= xi.settings.main.AF2_QUEST_LEVEL
         then

@@ -15,7 +15,7 @@ local content = BattlefieldQuest:new({
     entryNpc         = 'BC_Entrance',
     exitNpc          = 'Burning_Circle',
 
-    questArea = xi.quest.log_id.JEUNO,
+    questArea = xi.questLog.JEUNO,
     quest     = xi.quest.id.jeuno.BEYOND_INFINITY,
 
     requiredKeyItems =

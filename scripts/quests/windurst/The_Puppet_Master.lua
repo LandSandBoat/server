@@ -7,12 +7,12 @@
 -- Koru-Moru                : !pos -120 -6 124 239
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_PUPPET_MASTER)
+local quest = Quest:new(xi.questLog.WINDURST, xi.quest.id.windurst.THE_PUPPET_MASTER)
 
 quest.reward =
 {
     fame     = 20,
-    fameArea = xi.quest.fame_area.WINDURST,
+    fameArea = xi.fameArea.WINDURST,
     item     = xi.item.KUKULCANS_STAFF,
 }
 
@@ -20,7 +20,7 @@ quest.sections =
 {
     {
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE and
+            return status == xi.questStatus.QUEST_AVAILABLE and
                 player:getMainLvl() >= xi.settings.main.AF1_QUEST_LEVEL and
                 player:getMainJob() == xi.job.SMN and
                 not quest:getMustZone(player)
@@ -41,7 +41,7 @@ quest.sections =
 
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED
+            return status == xi.questStatus.QUEST_ACCEPTED
         end,
 
         [xi.zone.WINDURST_WALLS] =
@@ -68,7 +68,7 @@ quest.sections =
             {
                 [404] = function(player, csid, option, npc)
                     if quest:complete(player) then
-                        xi.quest.setMustZone(player, xi.quest.log_id.WINDURST, xi.quest.id.windurst.CLASS_REUNION)
+                        xi.quest.setMustZone(player, xi.questLog.WINDURST, xi.quest.id.windurst.CLASS_REUNION)
                     end
                 end,
             },
@@ -130,8 +130,8 @@ quest.sections =
 
     {
         check = function(player, status, vars)
-            return status == QUEST_COMPLETED and
-                not player:hasCompletedQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CLASS_REUNION)
+            return status == xi.questStatus.QUEST_COMPLETED and
+                not player:hasCompletedQuest(xi.questLog.WINDURST, xi.quest.id.windurst.CLASS_REUNION)
         end,
 
         [xi.zone.WINDURST_WALLS] =

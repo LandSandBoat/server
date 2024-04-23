@@ -8,7 +8,7 @@
 local metalworksID = zones[xi.zone.METALWORKS]
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.BASTOK, xi.quest.id.bastok.TRUST_BASTOK)
+local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.TRUST_BASTOK)
 
 quest.reward =
 {
@@ -37,7 +37,7 @@ local function trustMemoryAyame(player)
     end
 
     -- 16 - Ayame and Kaede
-    if player:hasCompletedQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.AYAME_AND_KAEDE) then
+    if player:hasCompletedQuest(xi.questLog.BASTOK, xi.quest.id.bastok.AYAME_AND_KAEDE) then
         memories = memories + 16
     end
 
@@ -47,7 +47,7 @@ local function trustMemoryAyame(player)
     end
 
     -- 64 - True Strength
-    if player:hasCompletedQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.TRUE_STRENGTH) then
+    if player:hasCompletedQuest(xi.questLog.BASTOK, xi.quest.id.bastok.TRUE_STRENGTH) then
         memories = memories + 64
     end
 
@@ -70,7 +70,7 @@ local function trustMemoryIronEater(player)
         memories = memories + 8
     end
     -- 16 - Ayame and Kaede
-    if player:hasCompletedQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.AYAME_AND_KAEDE) then
+    if player:hasCompletedQuest(xi.questLog.BASTOK, xi.quest.id.bastok.AYAME_AND_KAEDE) then
         memories = memories + 16
     end
     -- 32 - Light of Judgement
@@ -78,7 +78,7 @@ local function trustMemoryIronEater(player)
         memories = memories + 32
     end
     -- 64 - True Strength
-    if player:hasCompletedQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.TRUE_STRENGTH) then
+    if player:hasCompletedQuest(xi.questLog.BASTOK, xi.quest.id.bastok.TRUE_STRENGTH) then
         memories = memories + 64
     end
     ]]--
@@ -103,7 +103,7 @@ local function trustMemoryNaji(player)
         memories = memories + 2
     end
 
-    if player:hasCompletedQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_DOORMAN) then
+    if player:hasCompletedQuest(xi.questLog.BASTOK, xi.quest.id.bastok.THE_DOORMAN) then
         memories = memories + 4
     end
 
@@ -148,7 +148,7 @@ quest.sections =
     -- Section: Quest available
     {
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE and
+            return status == xi.questStatus.QUEST_AVAILABLE and
                 player:getMainLvl() >= 5 and
                 xi.settings.main.ENABLE_TRUST_QUESTS == 1
         end,
@@ -158,12 +158,21 @@ quest.sections =
             ['Clarion_Star'] =
             {
                 onTrigger = function(player, npc)
-                    local trustSandoria = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.TRUST_SANDORIA)
-                    local trustWindurst = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.TRUST_WINDURST)
+                    local trustSandoria = player:getQuestStatus(xi.questLog.SANDORIA, xi.quest.id.sandoria.TRUST_SANDORIA)
+                    local trustWindurst = player:getQuestStatus(xi.questLog.WINDURST, xi.quest.id.windurst.TRUST_WINDURST)
 
-                    if trustWindurst == QUEST_AVAILABLE and trustSandoria == QUEST_AVAILABLE then
+                    -- Haven't started any other trust tutorial quest.
+                    if
+                        trustWindurst == xi.questStatus.QUEST_AVAILABLE and
+                        trustSandoria == xi.questStatus.QUEST_AVAILABLE
+                    then
                         return quest:progressEvent(434)
-                    elseif trustWindurst == QUEST_COMPLETED or trustSandoria == QUEST_COMPLETED then
+
+                    -- Has finished other trust quest.
+                    elseif
+                        trustWindurst == xi.questStatus.QUEST_COMPLETED or
+                        trustSandoria == xi.questStatus.QUEST_COMPLETED
+                    then
                         return quest:progressEvent(438)
                     end
                 end,
@@ -191,7 +200,7 @@ quest.sections =
     -- Section: Quest accepted
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED
+            return status == xi.questStatus.QUEST_ACCEPTED
         end,
 
         [xi.zone.METALWORKS] =
@@ -203,8 +212,8 @@ quest.sections =
                     local bastokFirstTrust = quest:getVar(player, 'Prog')
 
                     if
-                        player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.TRUST_SANDORIA) == QUEST_COMPLETED or
-                        player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.TRUST_WINDURST) == QUEST_COMPLETED
+                        player:getQuestStatus(xi.questLog.SANDORIA, xi.quest.id.sandoria.TRUST_SANDORIA) == xi.questStatus.QUEST_COMPLETED or
+                        player:getQuestStatus(xi.questLog.WINDURST, xi.quest.id.windurst.TRUST_WINDURST) == xi.questStatus.QUEST_COMPLETED
                     then
                         return quest:progressEvent(984, 0, 0, 0, trustMemoryNaji(player), 0, 0, 0, rank3)
                     elseif bastokFirstTrust == 0 then
@@ -261,7 +270,7 @@ quest.sections =
     -- Section: Quest completed
     {
         check = function(player, status, vars)
-            return status == QUEST_COMPLETED
+            return status == xi.questStatus.QUEST_COMPLETED
         end,
 
         [xi.zone.METALWORKS] =

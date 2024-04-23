@@ -11,7 +11,7 @@ local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     local count = trade:getItemCount()
-    if player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_BRUGAIRE_CONSORTIUM) == QUEST_ACCEPTED then
+    if player:getQuestStatus(xi.questLog.SANDORIA, xi.quest.id.sandoria.THE_BRUGAIRE_CONSORTIUM) == xi.questStatus.QUEST_ACCEPTED then
         if count == 1 and trade:getGil() == 100 then  -- pay to replace package
             local prog = player:getCharVar('TheBrugaireConsortium-Parcels')
             if prog == 10 and not player:hasItem(xi.item.PARCEL_FOR_THE_MAGIC_SHOP) then
@@ -29,11 +29,11 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local theBrugaireConsortium = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_BRUGAIRE_CONSORTIUM)
+    local theBrugaireConsortium = player:getQuestStatus(xi.questLog.SANDORIA, xi.quest.id.sandoria.THE_BRUGAIRE_CONSORTIUM)
 
-    if theBrugaireConsortium == QUEST_AVAILABLE then
+    if theBrugaireConsortium == xi.questStatus.QUEST_AVAILABLE then
         player:startEvent(509)
-    elseif theBrugaireConsortium == QUEST_ACCEPTED then
+    elseif theBrugaireConsortium == xi.questStatus.QUEST_ACCEPTED then
         local prog = player:getCharVar('TheBrugaireConsortium-Parcels')
 
         if prog == 11 then
@@ -61,7 +61,7 @@ entity.onEventFinish = function(player, csid, option, npc)
         if freeSlots ~= 0 then
             player:addItem(xi.item.PARCEL_FOR_THE_MAGIC_SHOP)
             player:messageSpecial(ID.text.ITEM_OBTAINED, xi.item.PARCEL_FOR_THE_MAGIC_SHOP)
-            player:addQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_BRUGAIRE_CONSORTIUM)
+            player:addQuest(xi.questLog.SANDORIA, xi.quest.id.sandoria.THE_BRUGAIRE_CONSORTIUM)
             player:setCharVar('TheBrugaireConsortium-Parcels', 10)
         else
             player:startEvent(537)
@@ -89,8 +89,8 @@ entity.onEventFinish = function(player, csid, option, npc)
             player:addItem(xi.item.LAUAN_SHIELD)
             player:messageSpecial(ID.text.ITEM_OBTAINED, xi.item.LAUAN_SHIELD)
             player:addTitle(xi.title.COURIER_EXTRAORDINAIRE)
-            player:completeQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_BRUGAIRE_CONSORTIUM)
-            player:addFame(xi.quest.fame_area.SANDORIA, 30)
+            player:completeQuest(xi.questLog.SANDORIA, xi.quest.id.sandoria.THE_BRUGAIRE_CONSORTIUM)
+            player:addFame(xi.fameArea.SANDORIA, 30)
             player:setCharVar('TheBrugaireConsortium-Parcels', 0)
         else
             player:startEvent(537)

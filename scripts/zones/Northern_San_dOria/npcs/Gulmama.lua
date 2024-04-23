@@ -13,8 +13,8 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local trialByIce = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.TRIAL_BY_ICE)
-    local classReunion = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CLASS_REUNION)
+    local trialByIce = player:getQuestStatus(xi.questLog.SANDORIA, xi.quest.id.sandoria.TRIAL_BY_ICE)
+    local classReunion = player:getQuestStatus(xi.questLog.WINDURST, xi.quest.id.windurst.CLASS_REUNION)
     local classReunionProgress = player:getCharVar('ClassReunionProgress')
 
     -----------------------------------
@@ -29,23 +29,23 @@ entity.onTrigger = function(player, npc)
         player:startEvent(712, 0, xi.item.ICE_PENDULUM, 0, 0, 0, 0, 0, 0) -- lost the ice pendulum need another one
     -----------------------------------
     elseif
-        (trialByIce == QUEST_AVAILABLE and player:getFameLevel(xi.quest.fame_area.SANDORIA) >= 6) or
-        (trialByIce == QUEST_COMPLETED and os.time() > player:getCharVar('TrialByIce_date'))
+        (trialByIce == xi.questStatus.QUEST_AVAILABLE and player:getFameLevel(xi.fameArea.SANDORIA) >= 6) or
+        (trialByIce == xi.questStatus.QUEST_COMPLETED and os.time() > player:getCharVar('TrialByIce_date'))
     then
         player:startEvent(706, 0, xi.ki.TUNING_FORK_OF_ICE) -- Start and restart quest 'Trial by ice'
     elseif
-        trialByIce == QUEST_ACCEPTED and
+        trialByIce == xi.questStatus.QUEST_ACCEPTED and
         not player:hasKeyItem(xi.ki.TUNING_FORK_OF_ICE) and
         not player:hasKeyItem(xi.ki.WHISPER_OF_FROST)
     then
         player:startEvent(718, 0, xi.ki.TUNING_FORK_OF_ICE) -- Defeat against Shiva : Need new Fork
     elseif
-        trialByIce == QUEST_ACCEPTED and
+        trialByIce == xi.questStatus.QUEST_ACCEPTED and
         not player:hasKeyItem(xi.ki.WHISPER_OF_FROST)
     then
         player:startEvent(707, 0, xi.ki.TUNING_FORK_OF_ICE, 4)
     elseif
-        trialByIce == QUEST_ACCEPTED and
+        trialByIce == xi.questStatus.QUEST_ACCEPTED and
         player:hasKeyItem(xi.ki.WHISPER_OF_FROST)
     then
         local numitem = 0
@@ -81,11 +81,11 @@ end
 
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 706 and option == 1 then
-        if player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.TRIAL_BY_ICE) == QUEST_COMPLETED then
-            player:delQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.TRIAL_BY_ICE)
+        if player:getQuestStatus(xi.questLog.SANDORIA, xi.quest.id.sandoria.TRIAL_BY_ICE) == xi.questStatus.QUEST_COMPLETED then
+            player:delQuest(xi.questLog.SANDORIA, xi.quest.id.sandoria.TRIAL_BY_ICE)
         end
 
-        player:addQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.TRIAL_BY_ICE)
+        player:addQuest(xi.questLog.SANDORIA, xi.quest.id.sandoria.TRIAL_BY_ICE)
         player:setCharVar('TrialByIce_date', 0)
         player:addKeyItem(xi.ki.TUNING_FORK_OF_ICE)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.TUNING_FORK_OF_ICE)
@@ -121,8 +121,8 @@ entity.onEventFinish = function(player, csid, option, npc)
             player:addTitle(xi.title.HEIR_OF_THE_GREAT_ICE)
             player:delKeyItem(xi.ki.WHISPER_OF_FROST) --Whisper of Frost, as a trade for the above rewards
             player:setCharVar('TrialByIce_date', getMidnight())
-            player:addFame(xi.quest.fame_area.SANDORIA, 30)
-            player:completeQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.TRIAL_BY_ICE)
+            player:addFame(xi.fameArea.SANDORIA, 30)
+            player:completeQuest(xi.questLog.SANDORIA, xi.quest.id.sandoria.TRIAL_BY_ICE)
         end
     elseif csid == 713 or csid == 712 then
         if player:getFreeSlotsCount() ~= 0 then

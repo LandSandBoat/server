@@ -7,7 +7,7 @@
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    if player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.STARTING_A_FLAME) ~= QUEST_AVAILABLE then
+    if player:getQuestStatus(xi.questLog.SANDORIA, xi.quest.id.sandoria.STARTING_A_FLAME) ~= xi.questStatus.QUEST_AVAILABLE then
         if
             trade:hasItemQty(xi.item.FLINT_STONE, 4) and
             trade:getItemCount() == 4
@@ -18,7 +18,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.STARTING_A_FLAME) == QUEST_AVAILABLE then
+    if player:getQuestStatus(xi.questLog.SANDORIA, xi.quest.id.sandoria.STARTING_A_FLAME) == xi.questStatus.QUEST_AVAILABLE then
         player:startEvent(37)
     else
         player:startEvent(35)
@@ -30,15 +30,15 @@ end
 
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 37 and option == 1 then
-        player:addQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.STARTING_A_FLAME)
+        player:addQuest(xi.questLog.SANDORIA, xi.quest.id.sandoria.STARTING_A_FLAME)
     elseif csid == 36 then
         player:tradeComplete()
         npcUtil.giveCurrency(player, 'gil', 100)
-        if player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.STARTING_A_FLAME) == QUEST_ACCEPTED then
-            player:addFame(xi.quest.fame_area.SANDORIA, 30)
-            player:completeQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.STARTING_A_FLAME)
+        if player:getQuestStatus(xi.questLog.SANDORIA, xi.quest.id.sandoria.STARTING_A_FLAME) == xi.questStatus.QUEST_ACCEPTED then
+            player:addFame(xi.fameArea.SANDORIA, 30)
+            player:completeQuest(xi.questLog.SANDORIA, xi.quest.id.sandoria.STARTING_A_FLAME)
         else
-            player:addFame(xi.quest.fame_area.SANDORIA, 5)
+            player:addFame(xi.fameArea.SANDORIA, 5)
         end
     end
 end

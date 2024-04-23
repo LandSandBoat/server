@@ -3,7 +3,7 @@
 -- Taillegeas - !gotoid 17772720
 -- Log ID [3] - Quest ID [68]
 -----------------------------------
-local quest = Quest:new(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.DUCAL_HOSPITALITY)
+local quest = Quest:new(xi.questLog.JEUNO, xi.quest.id.jeuno.DUCAL_HOSPITALITY)
 
 local questItemSets =
 {
@@ -71,7 +71,7 @@ local questItemSets =
 quest.reward =
 {
     fame = 50,
-    fameArea = xi.quest.fame_area.JEUNO,
+    fameArea = xi.fameArea.JEUNO,
     gil = 4000,
     title = xi.title.DUCAL_DUPE,
 }
@@ -81,9 +81,9 @@ quest.sections =
     -- Quest: AVAILABLE
     {
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE and
+            return status == xi.questStatus.QUEST_AVAILABLE and
                 player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.A_VESSEL_WITHOUT_A_CAPTAIN) and
-                player:getFameLevel(xi.quest.fame_area.JEUNO) >= 4
+                player:getFameLevel(xi.fameArea.JEUNO) >= 4
         end,
 
         [xi.zone.RULUDE_GARDENS] =
@@ -122,7 +122,7 @@ quest.sections =
     -- Quest: ACCEPTED
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED
+            return status == xi.questStatus.QUEST_ACCEPTED
         end,
 
         [xi.zone.RULUDE_GARDENS] =
@@ -175,7 +175,7 @@ quest.sections =
     -- Allows for repeats of the quest
     {
         check = function(player, status, vars)
-            return status == QUEST_COMPLETED
+            return status == xi.questStatus.QUEST_COMPLETED
         end,
 
         [xi.zone.RULUDE_GARDENS] =
@@ -244,7 +244,7 @@ quest.sections =
                         quest:setMustZone(player)
                         quest:setVar(player, 'ItemSet', 0)
                         npcUtil.giveCurrency(player, 'gil', 4000)
-                        player:addFame(xi.quest.fame_area.JEUNO, 50)
+                        player:addFame(xi.fameArea.JEUNO, 50)
                     end
                 end,
             },

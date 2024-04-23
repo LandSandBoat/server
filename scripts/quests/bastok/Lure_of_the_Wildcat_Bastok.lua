@@ -7,12 +7,12 @@
 local portBastokID = zones[xi.zone.PORT_BASTOK]
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.BASTOK, xi.quest.id.bastok.LURE_OF_THE_WILDCAT)
+local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.LURE_OF_THE_WILDCAT)
 
 quest.reward =
 {
     fame     = 150,
-    fameArea = xi.quest.fame_area.BASTOK,
+    fameArea = xi.fameArea.BASTOK,
     keyItem  = xi.ki.BLUE_INVITATION_CARD,
 }
 
@@ -56,7 +56,7 @@ quest.sections =
 {
     {
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE and
+            return status == xi.questStatus.QUEST_AVAILABLE and
                 xi.settings.main.ENABLE_TOAU == 1
         end,
 
@@ -76,7 +76,7 @@ quest.sections =
 
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED
+            return status == xi.questStatus.QUEST_ACCEPTED
         end,
 
         [xi.zone.BASTOK_MARKETS] =

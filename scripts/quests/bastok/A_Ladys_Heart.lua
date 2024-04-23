@@ -7,12 +7,12 @@
 local portBastokID = zones[xi.zone.PORT_BASTOK]
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.BASTOK, xi.quest.id.bastok.A_LADYS_HEART)
+local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.A_LADYS_HEART)
 
 quest.reward =
 {
     fame     = 120,
-    fameArea = xi.quest.fame_area.BASTOK,
+    fameArea = xi.fameArea.BASTOK,
 }
 
 local flowerItems =
@@ -54,7 +54,7 @@ quest.sections =
 {
     {
         check = function(player, status, vars)
-            return status ~= QUEST_COMPLETED
+            return status ~= xi.questStatus.QUEST_COMPLETED
         end,
 
         [xi.zone.PORT_BASTOK] =
@@ -97,7 +97,7 @@ quest.sections =
                             player:confirmTrade()
                         end
 
-                        if player:getQuestStatus(quest.areaId, quest.questId) == QUEST_AVAILABLE then
+                        if player:getQuestStatus(quest.areaId, quest.questId) == xi.questStatus.QUEST_AVAILABLE then
                             quest:begin(player)
                         end
                     end
@@ -108,7 +108,7 @@ quest.sections =
 
     {
         check = function(player, status, vars)
-            return status == QUEST_COMPLETED
+            return status == xi.questStatus.QUEST_COMPLETED
         end,
 
         [xi.zone.PORT_BASTOK] =

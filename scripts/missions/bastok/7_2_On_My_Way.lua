@@ -295,9 +295,9 @@ mission.sections =
             {
                 onTrigger = function(player, npc)
                     if
-                        player:hasCompletedQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.BEAUTY_AND_THE_GALKA) and
-                        player:hasCompletedQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.FALLEN_COMRADES) and
-                        player:hasCompletedQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.RIVALS)
+                        player:hasCompletedQuest(xi.questLog.BASTOK, xi.quest.id.bastok.BEAUTY_AND_THE_GALKA) and
+                        player:hasCompletedQuest(xi.questLog.BASTOK, xi.quest.id.bastok.FALLEN_COMRADES) and
+                        player:hasCompletedQuest(xi.questLog.BASTOK, xi.quest.id.bastok.RIVALS)
                     then
                         return mission:progressEvent(622)
                     else

@@ -4,7 +4,7 @@
 -- !addquest 8 163
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.ABYSSEA, xi.quest.id.abyssea.A_GOLDSTRUCK_GIGAS)
+local quest = Quest:new(xi.questLog.ABYSSEA, xi.quest.id.abyssea.A_GOLDSTRUCK_GIGAS)
 
 quest.reward = {}
 
@@ -12,9 +12,9 @@ quest.sections =
 {
     {
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE and
+            return status == xi.questStatus.QUEST_AVAILABLE and
                 xi.abyssea.getHeldTraverserStones(player) >= 1 and
-                player:getQuestStatus(xi.quest.log_id.ABYSSEA, xi.quest.id.abyssea.DAWN_OF_DEATH) >= QUEST_ACCEPTED
+                player:getQuestStatus(xi.questLog.ABYSSEA, xi.quest.id.abyssea.DAWN_OF_DEATH) >= xi.questStatus.QUEST_ACCEPTED
         end,
 
         [xi.zone.LA_THEINE_PLATEAU] =
@@ -37,7 +37,7 @@ quest.sections =
 
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED and player:hasTitle(xi.title.BRIAREUS_FELLER)
+            return status == xi.questStatus.QUEST_ACCEPTED and player:hasTitle(xi.title.BRIAREUS_FELLER)
         end,
 
         [xi.zone.LA_THEINE_PLATEAU] =

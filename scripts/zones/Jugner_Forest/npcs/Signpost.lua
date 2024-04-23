@@ -14,7 +14,7 @@ entity.onTrigger = function(player, npc)
 
     if xPos > -79.3 and xPos < -67.3 and zPos > 94.5 and zPos < 106.5 then
         if
-            player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.GRIMY_SIGNPOSTS) == QUEST_ACCEPTED and
+            player:getQuestStatus(xi.questLog.SANDORIA, xi.quest.id.sandoria.GRIMY_SIGNPOSTS) == xi.questStatus.QUEST_ACCEPTED and
             not utils.mask.getBit(player:getCharVar('CleanSignPost'), 0)
         then
             player:startEvent(6, 1)
@@ -23,7 +23,7 @@ entity.onTrigger = function(player, npc)
         end
     elseif xPos > -266.2 and xPos < -254.2 and zPos > -29.2 and zPos < -17.2 then
         if
-            player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.GRIMY_SIGNPOSTS) == QUEST_ACCEPTED and
+            player:getQuestStatus(xi.questLog.SANDORIA, xi.quest.id.sandoria.GRIMY_SIGNPOSTS) == xi.questStatus.QUEST_ACCEPTED and
             not utils.mask.getBit(player:getCharVar('CleanSignPost'), 1)
         then
             player:startEvent(7, 1)
@@ -32,7 +32,7 @@ entity.onTrigger = function(player, npc)
         end
     elseif xPos > -463.7 and xPos < -451.7 and zPos > -422.1 and zPos < -410.1 then
         if
-            player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.GRIMY_SIGNPOSTS) == QUEST_ACCEPTED and
+            player:getQuestStatus(xi.questLog.SANDORIA, xi.quest.id.sandoria.GRIMY_SIGNPOSTS) == xi.questStatus.QUEST_ACCEPTED and
             not utils.mask.getBit(player:getCharVar('CleanSignPost'), 2)
         then
             player:startEvent(8, 1)
@@ -41,7 +41,7 @@ entity.onTrigger = function(player, npc)
         end
     elseif xPos > 295.4 and xPos < 307.3 and zPos > 412.8 and zPos < 424.8 then
         if
-            player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.GRIMY_SIGNPOSTS) == QUEST_ACCEPTED and
+            player:getQuestStatus(xi.questLog.SANDORIA, xi.quest.id.sandoria.GRIMY_SIGNPOSTS) == xi.questStatus.QUEST_ACCEPTED and
             not utils.mask.getBit(player:getCharVar('CleanSignPost'), 3)
         then
             player:startEvent(9, 1)

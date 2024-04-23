@@ -6,7 +6,7 @@
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    if player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THICK_SHELLS) ~= QUEST_AVAILABLE then
+    if player:getQuestStatus(xi.questLog.SANDORIA, xi.quest.id.sandoria.THICK_SHELLS) ~= xi.questStatus.QUEST_AVAILABLE then
         if
             trade:hasItemQty(xi.item.BEETLE_SHELL, 5) and
             trade:getItemCount() == 5
@@ -17,7 +17,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if player:getFameLevel(xi.quest.fame_area.SANDORIA) >= 2 then
+    if player:getFameLevel(xi.fameArea.SANDORIA) >= 2 then
         player:startEvent(516)
     else
         player:startEvent(568)
@@ -29,15 +29,15 @@ end
 
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 516 then
-        if player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THICK_SHELLS) == QUEST_AVAILABLE then
-            player:addQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THICK_SHELLS)
+        if player:getQuestStatus(xi.questLog.SANDORIA, xi.quest.id.sandoria.THICK_SHELLS) == xi.questStatus.QUEST_AVAILABLE then
+            player:addQuest(xi.questLog.SANDORIA, xi.quest.id.sandoria.THICK_SHELLS)
         end
     elseif csid == 514 then
-        if player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THICK_SHELLS) == QUEST_ACCEPTED then
-            player:completeQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THICK_SHELLS)
-            player:addFame(xi.quest.fame_area.SANDORIA, 30)
+        if player:getQuestStatus(xi.questLog.SANDORIA, xi.quest.id.sandoria.THICK_SHELLS) == xi.questStatus.QUEST_ACCEPTED then
+            player:completeQuest(xi.questLog.SANDORIA, xi.quest.id.sandoria.THICK_SHELLS)
+            player:addFame(xi.fameArea.SANDORIA, 30)
         else
-            player:addFame(xi.quest.fame_area.SANDORIA, 5)
+            player:addFame(xi.fameArea.SANDORIA, 5)
         end
 
         player:tradeComplete()

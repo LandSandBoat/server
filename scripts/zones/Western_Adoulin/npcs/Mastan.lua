@@ -13,15 +13,15 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local tccom = player:getQuestStatus(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.THE_CURIOUS_CASE_OF_MELVIEN)
+    local tccom = player:getQuestStatus(xi.questLog.ADOULIN, xi.quest.id.adoulin.THE_CURIOUS_CASE_OF_MELVIEN)
     local tccomNeedKI = player:hasKeyItem(xi.ki.MELVIENS_TURN) and not player:hasKeyItem(xi.ki.MELVIENS_DEATH)
-    local orderUp = player:getQuestStatus(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.ORDER_UP)
+    local orderUp = player:getQuestStatus(xi.questLog.ADOULIN, xi.quest.id.adoulin.ORDER_UP)
     local orderMastan = utils.mask.getBit(player:getCharVar('Order_Up_NPCs'), 11)
 
-    if orderUp == QUEST_ACCEPTED and not orderMastan then
+    if orderUp == xi.questStatus.QUEST_ACCEPTED and not orderMastan then
         -- Progresses Quest: 'Order Up'
         player:startEvent(70)
-    elseif tccom == QUEST_ACCEPTED and tccomNeedKI then
+    elseif tccom == xi.questStatus.QUEST_ACCEPTED and tccomNeedKI then
         -- Progresses Quest: 'The Curious Case of Melvien'
         player:startEvent(184)
     end

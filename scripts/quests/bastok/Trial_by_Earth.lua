@@ -7,12 +7,12 @@
 local portBastokID = zones[xi.zone.PORT_BASTOK]
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.BASTOK, xi.quest.id.bastok.TRIAL_BY_EARTH)
+local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.TRIAL_BY_EARTH)
 
 quest.reward =
 {
     fame     = 30,
-    fameArea = xi.quest.fame_area.BASTOK,
+    fameArea = xi.fameArea.BASTOK,
 }
 
 local rewardItems =
@@ -58,8 +58,8 @@ quest.sections =
 {
     {
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE and
-                player:getFameLevel(xi.quest.fame_area.BASTOK) >= 6
+            return status == xi.questStatus.QUEST_AVAILABLE and
+                player:getFameLevel(xi.fameArea.BASTOK) >= 6
         end,
 
         [xi.zone.PORT_BASTOK] =
@@ -80,7 +80,7 @@ quest.sections =
 
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED
+            return status == xi.questStatus.QUEST_ACCEPTED
         end,
 
         [xi.zone.PORT_BASTOK] =
@@ -134,7 +134,7 @@ quest.sections =
 
     {
         check = function(player, status, vars)
-            return status == QUEST_COMPLETED and
+            return status == xi.questStatus.QUEST_COMPLETED and
                 quest:getVar(player, 'Timer') == 0
         end,
 
@@ -146,7 +146,7 @@ quest.sections =
             {
                 [249] = function(player, csid, option, npc)
                     if option == 1 then
-                        player:delQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.TRIAL_BY_EARTH)
+                        player:delQuest(xi.questLog.BASTOK, xi.quest.id.bastok.TRIAL_BY_EARTH)
 
                         npcUtil.giveKeyItem(player, xi.ki.TUNING_FORK_OF_EARTH)
 

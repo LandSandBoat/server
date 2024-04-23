@@ -5,12 +5,12 @@
 -- Shantotto : !pos 122 -2 112 239
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CURSES_FOILED_AGAIN_2)
+local quest = Quest:new(xi.questLog.WINDURST, xi.quest.id.windurst.CURSES_FOILED_AGAIN_2)
 
 quest.reward =
 {
     fame     = 90,
-    fameArea = xi.quest.fame_area.WINDURST,
+    fameArea = xi.fameArea.WINDURST,
     item     = xi.item.MISERY_STAFF,
     title    = xi.title.HEXER_VEXER,
 }
@@ -19,9 +19,9 @@ quest.sections =
 {
     {
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE and
-                player:hasCompletedQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CURSES_FOILED_AGAIN_1) and
-                player:getFameLevel(xi.quest.fame_area.WINDURST) >= 2
+            return status == xi.questStatus.QUEST_AVAILABLE and
+                player:hasCompletedQuest(xi.questLog.WINDURST, xi.quest.id.windurst.CURSES_FOILED_AGAIN_1) and
+                player:getFameLevel(xi.fameArea.WINDURST) >= 2
         end,
 
         [xi.zone.WINDURST_WALLS] =
@@ -31,7 +31,7 @@ quest.sections =
                 onTrigger = function(player, npc)
                     if
                         quest:getVar(player, 'Timer') <= VanadielUniqueDay() and
-                        not xi.quest.getMustZone(player, xi.quest.log_id.WINDURST, xi.quest.id.windurst.CURSES_FOILED_AGAIN_1)
+                        not xi.quest.getMustZone(player, xi.questLog.WINDURST, xi.quest.id.windurst.CURSES_FOILED_AGAIN_1)
                     then
                         local questProgress = quest:getVar(player, 'Prog')
 
@@ -56,12 +56,12 @@ quest.sections =
                 onTrigger = function(player, npc)
                     if
                         quest:getVar(player, 'Timer') <= VanadielUniqueDay() and
-                        not xi.quest.getMustZone(player, xi.quest.log_id.WINDURST, xi.quest.id.windurst.CURSES_FOILED_AGAIN_1)
+                        not xi.quest.getMustZone(player, xi.questLog.WINDURST, xi.quest.id.windurst.CURSES_FOILED_AGAIN_1)
                     then
                         -- NOTE: There is interplay between Making Headlines and this quest for dialogue.  We should be safe with
                         -- fallthroughs in interaction, but also there may be a better method to implement both.
 
-                        if player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.MAKING_HEADLINES) == QUEST_ACCEPTED then
+                        if player:getQuestStatus(xi.questLog.WINDURST, xi.quest.id.windurst.MAKING_HEADLINES) == xi.questStatus.QUEST_ACCEPTED then
                             return quest:progressEvent(284)
                         else
                             return quest:progressEvent(179)
@@ -101,7 +101,7 @@ quest.sections =
 
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED
+            return status == xi.questStatus.QUEST_ACCEPTED
         end,
 
         [xi.zone.WINDURST_WALLS] =
@@ -132,7 +132,7 @@ quest.sections =
                     if quest:complete(player) then
                         player:confirmTrade()
 
-                        xi.quest.setMustZone(player, xi.quest.log_id.WINDURST, xi.quest.id.windurst.CURSES_FOILED_A_GOLEM)
+                        xi.quest.setMustZone(player, xi.questLog.WINDURST, xi.quest.id.windurst.CURSES_FOILED_A_GOLEM)
                     end
                 end,
             },
@@ -141,8 +141,8 @@ quest.sections =
 
     {
         check = function(player, status, vars)
-            return status == QUEST_COMPLETED and
-                not player:hasCompletedQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CURSES_FOILED_A_GOLEM)
+            return status == xi.questStatus.QUEST_COMPLETED and
+                not player:hasCompletedQuest(xi.questLog.WINDURST, xi.quest.id.windurst.CURSES_FOILED_A_GOLEM)
         end,
 
         [xi.zone.WINDURST_WALLS] =

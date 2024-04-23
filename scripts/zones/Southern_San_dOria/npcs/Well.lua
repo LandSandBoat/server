@@ -9,7 +9,7 @@ local ID = zones[xi.zone.SOUTHERN_SAN_DORIA]
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    if player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.GRAVE_CONCERNS) == QUEST_ACCEPTED then
+    if player:getQuestStatus(xi.questLog.SANDORIA, xi.quest.id.sandoria.GRAVE_CONCERNS) == xi.questStatus.QUEST_ACCEPTED then
         if
             trade:hasItemQty(xi.item.TOMB_GUARDS_WATERSKIN, 1) and
             trade:getItemCount() == 1

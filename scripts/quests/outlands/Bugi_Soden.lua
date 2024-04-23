@@ -7,19 +7,19 @@ local norgID   = zones[xi.zone.NORG]
 local onzozoID = zones[xi.zone.LABYRINTH_OF_ONZOZO]
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.BUGI_SODEN)
+local quest = Quest:new(xi.questLog.OUTLANDS, xi.quest.id.outlands.BUGI_SODEN)
 
 quest.reward =
 {
     fame = 30,
-    fameArea = xi.quest.fame_area.NORG,
+    fameArea = xi.fameArea.NORG,
 }
 
 quest.sections =
 {
     {
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE and
+            return status == xi.questStatus.QUEST_AVAILABLE and
                 player:canEquipItem(xi.item.KODACHI_OF_TRIALS, true) and
                 player:getCharSkillLevel(xi.skill.KATANA) / 10 >= 250 and
                 not player:hasKeyItem(xi.keyItem.WEAPON_TRAINING_GUIDE)
@@ -51,7 +51,7 @@ quest.sections =
 
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED
+            return status == xi.questStatus.QUEST_ACCEPTED
         end,
 
         [xi.zone.NORG] =
@@ -85,7 +85,7 @@ quest.sections =
             {
                 [185] = function(player, csid, option, npc)
                     if option == 2 then
-                        player:delQuest(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.BUGI_SODEN)
+                        player:delQuest(xi.questLog.OUTLANDS, xi.quest.id.outlands.BUGI_SODEN)
                         player:delKeyItem(xi.ki.WEAPON_TRAINING_GUIDE)
                         player:delKeyItem(xi.ki.MAP_TO_THE_ANNALS_OF_TRUTH)
                     elseif not player:hasItem(xi.item.KODACHI_OF_TRIALS) then

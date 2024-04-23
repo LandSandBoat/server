@@ -28,7 +28,7 @@ entity.onTrigger = function(player, npc)
             614,     72,  -- Mhaura Garlic
             4445,    40   -- Yagudo Cherry
         }
-        xi.shop.general(player, stock, xi.quest.fame_area.WINDURST)
+        xi.shop.general(player, stock, xi.fameArea.WINDURST)
     end
 end
 

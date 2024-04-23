@@ -7,12 +7,12 @@
 local ruludeID = zones[xi.zone.RULUDE_GARDENS]
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.SHATTERING_STARS)
+local quest = Quest:new(xi.questLog.JEUNO, xi.quest.id.jeuno.SHATTERING_STARS)
 
 quest.reward =
 {
     fame = 80,
-    fameArea = xi.quest.fame_area.JEUNO,
+    fameArea = xi.fameArea.JEUNO,
     title = xi.title.STAR_BREAKER,
 }
 
@@ -37,7 +37,7 @@ local maatBattlefieldZone =
                     local jobId        = player:getMainJob()
                     local maatsCapMask = player:getCharVar('maatsCap')
 
-                    if player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.SHATTERING_STARS) == QUEST_ACCEPTED then
+                    if player:getQuestStatus(xi.questLog.JEUNO, xi.quest.id.jeuno.SHATTERING_STARS) == xi.questStatus.QUEST_ACCEPTED then
                         npcUtil.giveItem(player, xi.item.SCROLL_OF_INSTANT_WARP)
                         quest:setVar(player, 'Prog', jobId)
                     end
@@ -58,7 +58,7 @@ quest.sections =
     -- Section: Quest available.
     {
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE and
+            return status == xi.questStatus.QUEST_AVAILABLE and
                 player:getMainJob() <= 15 and -- Only the "old" jobs may start this quest.
                 player:getMainLvl() >= 66 and
                 player:getLevelCap() == 70 and
@@ -86,7 +86,7 @@ quest.sections =
     -- Section: Quest accepted.
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED and
+            return status == xi.questStatus.QUEST_ACCEPTED and
                 player:getMainJob() <= 15 and
                 player:getMainLvl() >= 66
         end,
@@ -146,7 +146,7 @@ quest.sections =
 
     {
         check = function(player, status, vars)
-            return status >= QUEST_ACCEPTED and
+            return status >= xi.questStatus.QUEST_ACCEPTED and
                 player:getMainJob() <= 15 and
                 player:getMainLvl() >= 66
         end,

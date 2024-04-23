@@ -42,9 +42,9 @@ commandObj.onTrigger = function(player, bagsize)
 
     for i = 1, 10 do
         if bagsize > bagparam[i].bagsize then
-            player:completeQuest(xi.quest.log_id.JEUNO, bagparam[i].questid)
+            player:completeQuest(xi.questLog.JEUNO, bagparam[i].questid)
         else
-            player:delQuest(xi.quest.log_id.JEUNO, bagparam[i].questid)
+            player:delQuest(xi.questLog.JEUNO, bagparam[i].questid)
         end
     end
 
