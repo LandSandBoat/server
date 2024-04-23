@@ -19,7 +19,7 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local dmgmod = 5
     local info = xi.mobskills.mobPhysicalMove(mob, target, skill, numhits, accmod, dmgmod, xi.mobskills.physicalTpBonus.DMG_VARIES, 1, 2, 3)
     local dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.RANGED, xi.damageType.PIERCING, xi.mobskills.shadowBehavior.IGNORE_SHADOWS)
-    target:takeDamage(dmg, mob, xi.attackType.RANGED, xi.damageType.PIERCING)
+    target:takeDamage(dmg, mob, xi.attackType.RANGED, xi.damageType.PIERCING, { breakBind = false })
     return dmg
 end
 

@@ -21,7 +21,7 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.BIND, 1, 0, 120)
     xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.AMNESIA, 1, 0, 120)
 
-    target:takeDamage(dmg, mob, xi.attackType.RANGED, xi.damageType.PIERCING)
+    target:takeDamage(dmg, mob, xi.attackType.RANGED, xi.damageType.PIERCING, { breakBind = false })
     return dmg
 end
 
