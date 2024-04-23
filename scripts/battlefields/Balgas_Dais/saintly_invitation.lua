@@ -18,6 +18,7 @@ local content = BattlefieldMission:new({
     exitNpc               = 'Burning_Circle',
     missionArea           = xi.mission.log_id.WINDURST,
     mission               = xi.mission.id.windurst.SAINTLY_INVITATION,
+    missionStatusArea     = xi.mission.log_id.WINDURST,
     requiredMissionStatus = 1,
 })
 
