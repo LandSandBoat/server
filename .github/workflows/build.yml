@@ -345,8 +345,8 @@ jobs:
 
   MacOS_64bit:
     needs: Sanity_Checks
-    # https://github.com/actions/virtual-environments/blob/main/images/macos/macos-11-Readme.md
-    runs-on: macos-latest
+    # https://github.com/actions/runner-images/blob/main/images/macos/macos-13-Readme.md
+    runs-on: macos-13
     steps:
       - uses: actions/checkout@v3
         with:
