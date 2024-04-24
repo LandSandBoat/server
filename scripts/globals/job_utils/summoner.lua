@@ -175,6 +175,18 @@ xi.job_utils.summoner.canUseBloodPact = function(player, pet, target, petAbility
             return xi.msg.basic.TARG_OUT_OF_RANGE, 0
         end
 
+        local petAction = pet:getCurrentAction()
+
+        -- check if avatar is under status effect
+        if petAction == xi.action.SLEEP or petAction == xi.action.STUN then
+            return xi.msg.basic.PET_CANNOT_DO_ACTION, 0 -- TODO: verify exact message in packet.
+        end
+
+        -- check if avatar is using a move already
+        if petAction == xi.action.PET_MOBABILITY_FINISH then
+            return xi.msg.basic.PET_CANNOT_DO_ACTION, 0 -- TODO: verify exact message in packet.
+        end
+
         local baseMPCost = getBaseMPCost(player, petAbility)
 
         if player:getMP() < baseMPCost then
