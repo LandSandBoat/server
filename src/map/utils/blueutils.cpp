@@ -398,10 +398,17 @@ namespace blueutils
         SaveSetSpells(PChar);
     }
 
+    // Adds Blue Traits based on spells set
+    // Always run on a player that has just been purged of all traits and job-related traits added
+    // Loops over all blue spells to get eligible traits based on set spells
+    // then loops over all blue traits to see if they match the eligible traits
+    // each eligible blue trait is compared against existing job traits
+    // if a higher-tier blue trait is found to be valid, lower is removed
     void CalculateTraits(CCharEntity* PChar)
     {
         TraitList_t*           PTraitsList = traits::GetTraits(JOB_BLU);
         std::map<uint8, uint8> points;
+        std::vector<CTrait*>   traitsToAdd;
 
         for (unsigned char m_SetBlueSpell : PChar->m_SetBlueSpells)
         {
@@ -438,56 +445,73 @@ namespace blueutils
                 {
                     CBlueTrait* PTrait = (CBlueTrait*)i;
 
-                    if (PTrait && PTrait->getCategory() == category)
+                    // Player is eligible for this Blue Trait
+                    if (PTrait && PTrait->getCategory() == category && totalWeight >= PTrait->getPoints())
                     {
                         bool add = true;
 
+                        // Check if any existing player Traits conflict
                         for (std::size_t j = 0; j < PChar->TraitList.size(); ++j)
                         {
                             CTrait* PExistingTrait = PChar->TraitList.at(j);
 
                             if (PExistingTrait->getID() == PTrait->getID())
                             {
-                                if (PExistingTrait->getLevel() == 0 && ((CBlueTrait*)PExistingTrait)->getCategory() == PTrait->getCategory())
+                                // Player has the real job trait, making them ineligible
+                                // TODO remove the trait and add the blu trait if it's stronger
+                                if (PExistingTrait->getLevel() > 0)
                                 {
                                     add = false;
                                     break;
                                 }
-                                if (PExistingTrait->getRank() < PTrait->getRank())
+                            }
+                        }
+
+                        if (add)
+                        {
+                            // Check all the eligible Blue Traits for conflicts
+                            std::size_t j;
+                            for (j = 0; j < traitsToAdd.size(); ++j)
+                            {
+                                auto iter = traitsToAdd.at(j);
+                                // New Trait matches a Trait already marked to add
+                                if (iter->getID() == PTrait->getID() && iter->getMod() == PTrait->getMod())
                                 {
-                                    PChar->delModifier(PExistingTrait->getMod(), PExistingTrait->getValue());
-                                    charutils::delTrait(PChar, PExistingTrait->getID());
-                                    PChar->TraitList.erase(PChar->TraitList.begin() + j);
-                                    break;
-                                }
-                                else if (PExistingTrait->getRank() > PTrait->getRank())
-                                {
-                                    add = false;
-                                    break;
-                                }
-                                else
-                                {
-                                    if (PExistingTrait->getMod() == PTrait->getMod())
+                                    if (iter->getValue() > PTrait->getValue())
                                     {
+                                        // New Trait is a lower tier
                                         add = false;
                                         break;
                                     }
                                 }
                             }
-                        }
 
-                        if (totalWeight >= PTrait->getPoints() && add)
-                        {
-                            charutils::addTrait(PChar, PTrait->getID());
-
-                            PChar->TraitList.emplace_back(PTrait);
-                            PChar->addModifier(PTrait->getMod(), PTrait->getValue());
-
-                            break;
+                            if (add)
+                            {
+                                if (j != traitsToAdd.size())
+                                {
+                                    // New Trait is higher power than one already staged
+                                    traitsToAdd.at(j) = (CBlueTrait*)PTrait;
+                                }
+                                else
+                                {
+                                    // New Trait/Mod combination is not staged yet
+                                    traitsToAdd.emplace_back((CBlueTrait*)PTrait);
+                                }
+                            }
                         }
                     }
                 }
             }
+        }
+
+        // Finally, add traits to the player
+        for (auto PTrait : traitsToAdd)
+        {
+            charutils::addTrait(PChar, PTrait->getID());
+
+            PChar->TraitList.emplace_back(PTrait);
+            PChar->addModifier(PTrait->getMod(), PTrait->getValue());
         }
     }
 
