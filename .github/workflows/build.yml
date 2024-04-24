@@ -353,13 +353,7 @@ jobs:
           fetch-depth: 1
       - name: Install Dependencies (Brew)
         run: |
-          brew install mariadb zeromq zmq
-      - name: Install Dependencies (LuaJIT)
-        run: |
-          git clone https://github.com/LuaJIT/LuaJIT.git
-          cd LuaJIT
-          sudo make install MACOSX_DEPLOYMENT_TARGET=$(sw_vers -productVersion) -j $(sysctl -n hw.physicalcpu)
-          sudo ln -sf luajit-2.1.0-beta3 /usr/local/bin/luajit
+          brew install mariadb zeromq zmq luajit
       - name: Configure CMake
         run: |
           mkdir -p build
