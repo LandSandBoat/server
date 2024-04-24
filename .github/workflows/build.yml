@@ -279,7 +279,7 @@ jobs:
 
   Windows_64bit_Debug:
     needs: Sanity_Checks
-    runs-on: windows-latest
+    runs-on: windows-2022
     env:
       MSBUILD_PATH: C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Current\Bin\
     steps:
@@ -312,7 +312,7 @@ jobs:
 
   Windows_64bit_Release_Tracy_Modules:
     needs: Sanity_Checks
-    runs-on: windows-latest
+    runs-on: windows-2022
     env:
       MSBUILD_PATH: C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Current\Bin\
     steps:
@@ -345,26 +345,15 @@ jobs:
 
   MacOS_64bit:
     needs: Sanity_Checks
-    # https://github.com/actions/virtual-environments/blob/main/images/macos/macos-11-Readme.md
-    runs-on: macos-latest
+    # https://github.com/actions/runner-images/blob/main/images/macos/macos-13-Readme.md
+    runs-on: macos-13
     steps:
       - uses: actions/checkout@v3
         with:
           fetch-depth: 1
       - name: Install Dependencies (Brew)
         run: |
-          brew install mariadb zeromq zmq
-      - name: Install Dependencies (LuaJIT)
-        run: |
-          git clone https://github.com/LuaJIT/LuaJIT.git
-          cd LuaJIT
-          sudo make install MACOSX_DEPLOYMENT_TARGET=$(sw_vers -productVersion) -j $(sysctl -n hw.physicalcpu)
-          sudo ln -sf luajit-2.1.0-beta3 /usr/local/bin/luajit
-      - name: Cache 'build' folder
-        uses: actions/cache@v3
-        with:
-          path: build
-          key: ${{ runner.os }}-osx
+          brew install mariadb zeromq zmq luajit
       - name: Configure CMake
         run: |
           mkdir -p build
@@ -640,7 +629,7 @@ jobs:
         fi
 
   Full_Startup_Checks_Windows:
-    runs-on: windows-latest
+    runs-on: windows-2022
     needs: Windows_64bit_Debug
     steps:
     - uses: actions/checkout@v3
