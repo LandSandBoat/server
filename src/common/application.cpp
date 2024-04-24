@@ -60,6 +60,7 @@ Application::Application(std::string const& serverName, int argc, char** argv)
     ShowInfo("Begin %s-server initialisation...", serverName);
 
     debug::init();
+    debug::reportSystemLocale();
 
     ShowInfo("The %s-server is ready to work...", serverName);
     ShowInfo("=======================================================================");

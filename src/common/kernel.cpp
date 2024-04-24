@@ -240,6 +240,8 @@ int main(int argc, char** argv)
 
     socket_init();
 
+    debug::reportSystemLocale();
+
     do_init(argc, argv);
 
     fd_set rfd = {};

@@ -89,4 +89,9 @@ bool debug::isRunningUnderDebugger()
     }
     return underDebugger;
 }
+
+void debug::reportSystemLocale()
+{
+    // TODO
+}
 #endif // __APPLE__
