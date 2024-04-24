@@ -185,7 +185,7 @@ local battlefields =
     [xi.zone.JADE_SEPULCHER] =
     {
     --  { 0, 1152,    0 },   -- Making a Mockery (ISNM)
-    --  { 1, 1153,    0 },   -- Shadows of the Mind (ISNM)
+        { 1, 1153,    0 },   -- Shadows of the Mind (ISNM)
         { 2, 1154, 2331 },   -- The Beast Within (BLU LB5)
     --  { 3, 1155,    0 },   -- Moment of Truth (Quest)
         { 4, 1156,    0 },   -- Puppet in Peril (TOAU29)

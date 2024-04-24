@@ -3255,7 +3255,7 @@ INSERT INTO `mob_groups` VALUES (39,3060,66,'Orochi',0,128,0,25000,0,80,82,0);
 -- ------------------------------------------------------------
 
 INSERT INTO `mob_groups` VALUES (1,2712,67,'Mocking_Colibri',0,128,0,0,0,60,60,0);
-INSERT INTO `mob_groups` VALUES (2,3128,67,'Phantom_Puk',0,128,0,0,0,75,75,0);
+INSERT INTO `mob_groups` VALUES (2,3128,67,'Phantom_Puk',0,128,0,14725,0,76,76,0);
 INSERT INTO `mob_groups` VALUES (3,3327,67,'Raubahn',0,128,0,0,0,75,75,0);
 INSERT INTO `mob_groups` VALUES (4,3567,67,'Shadowhand_Kajeel_Ja',0,128,0,0,0,75,75,0);
 INSERT INTO `mob_groups` VALUES (5,430,67,'Blacktattoo_Vedool_Ja',0,128,0,0,0,75,75,0);
@@ -3271,6 +3271,7 @@ INSERT INTO `mob_groups` VALUES (14,6957,67,'Mamool_Ja_Profligate',0,128,0,0,0,9
 INSERT INTO `mob_groups` VALUES (15,6958,67,'Mamool_Ja_Unseen',0,128,0,0,0,99,99,0);
 INSERT INTO `mob_groups` VALUES (16,6959,67,'Mamool_Ja_Flamerearer',0,128,0,0,0,99,99,0);
 INSERT INTO `mob_groups` VALUES (17,6960,67,'Scorched-snout_Wyvern',0,128,0,0,0,99,99,0);
+INSERT INTO `mob_groups` VALUES (18,3128,67,'Phantom_Puk',0,128,0,650,0,76,76,0);
 
 -- ------------------------------------------------------------
 -- Aydeewa_Subterrane (Zone 68)
