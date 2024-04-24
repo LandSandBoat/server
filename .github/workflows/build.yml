@@ -279,7 +279,7 @@ jobs:
 
   Windows_64bit_Debug:
     needs: Sanity_Checks
-    runs-on: windows-latest
+    runs-on: windows-2022
     env:
       MSBUILD_PATH: C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Current\Bin\
     steps:
@@ -312,7 +312,7 @@ jobs:
 
   Windows_64bit_Release_Tracy_Modules:
     needs: Sanity_Checks
-    runs-on: windows-latest
+    runs-on: windows-2022
     env:
       MSBUILD_PATH: C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Current\Bin\
     steps:
@@ -640,7 +640,7 @@ jobs:
         fi
 
   Full_Startup_Checks_Windows:
-    runs-on: windows-latest
+    runs-on: windows-2022
     needs: Windows_64bit_Debug
     steps:
     - uses: actions/checkout@v3
