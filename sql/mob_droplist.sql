@@ -6040,8 +6040,8 @@ INSERT INTO `mob_droplist` VALUES (726,0,0,1000,3206,30);         -- Navarchs Se
 INSERT INTO `mob_droplist` VALUES (727,0,0,1000,2956,@UNCOMMON); -- High Kindreds Crest (Uncommon, 10%)
 
 -- ZoneID:  91 - Dyinyinga
-INSERT INTO `mob_droplist` VALUES (728,0,0,1000,15759,200); -- Mahant Sandals (20.0%)
-INSERT INTO `mob_droplist` VALUES (728,0,0,1000,2509,30);   -- Slug Eye (3.0%)
+INSERT INTO `mob_droplist` VALUES (728,0,0,1000,15759,@COMMON); -- Mahant Sandals (Common, 15%)
+INSERT INTO `mob_droplist` VALUES (728,0,0,1000,2509,@VRARE);   -- Slug Eye (Very Rare, 1%)
 
 -- ZoneID: Unknown - Unknown
 INSERT INTO `mob_droplist` VALUES (729,0,0,1000,4249,@ALWAYS); -- Copy Of Schultz Stratagems (Always, 100%)
