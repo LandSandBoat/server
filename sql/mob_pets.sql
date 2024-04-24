@@ -1458,9 +1458,6 @@ INSERT INTO `mob_pets` VALUES (17506670,5,15,'Kirin','Kirins_Avatar');
 -- LaLoff_Amphitheater (Zone 180)
 -- ------------------------------------------------------------
 
-INSERT INTO `mob_pets` VALUES (17514515,3,14,'Ark_Angel_GK','Ark_Angels_Wyvern');
-INSERT INTO `mob_pets` VALUES (17514516,3,14,'Ark_Angel_GK','Ark_Angels_Wyvern');
-INSERT INTO `mob_pets` VALUES (17514517,3,14,'Ark_Angel_GK','Ark_Angels_Wyvern');
 INSERT INTO `mob_pets` VALUES (17514522,1,9,'Ark_Angel_MR','Ark_Angels_Tiger');
 INSERT INTO `mob_pets` VALUES (17514527,1,14,'Ark_Angel_GK','Ark_Angels_Wyvern');
 INSERT INTO `mob_pets` VALUES (17514530,1,9,'Ark_Angel_MR','Ark_Angels_Tiger');
