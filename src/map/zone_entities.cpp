@@ -1595,6 +1595,15 @@ void CZoneEntities::ZoneServer(time_point tick)
         //     : this way, but we need to do this to keep allies working (for now).
         if (auto* PPet = static_cast<CPetEntity*>(it->second))
         {
+            if (PPet->m_PetID > PETID::MAX_PETID)
+            {
+                // Automatons don't get destroyed in this loop, clean up invalid pointer to avoid crashes
+                // static_cast seemingly makes up properties for this PPet object
+                ShowDebug("CZoneEntities::ZoneServer: Pet: Removing stale Automaton from petlist");
+                m_petList.erase(it++);
+                continue;
+            }
+
             ShowTrace(fmt::format("CZoneEntities::ZoneServer: Pet: {} ({})", PPet->getName(), PPet->id).c_str());
 
             /*
