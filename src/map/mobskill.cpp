@@ -173,17 +173,6 @@ uint16 CMobSkill::getAnimationID() const
     return m_AnimID;
 }
 
-uint16 CMobSkill::getPetAnimationID() const
-{
-    // wyvern
-    if (m_AnimID >= 621 && m_AnimID <= 632)
-    {
-        return m_AnimID - 493;
-    }
-
-    return m_AnimID;
-}
-
 int16 CMobSkill::getTP() const
 {
     return m_TP;

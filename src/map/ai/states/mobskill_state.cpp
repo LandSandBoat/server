@@ -73,6 +73,10 @@ CMobSkillState::CMobSkillState(CBattleEntity* PEntity, uint16 targid, uint16 wsi
         actionTarget.param      = m_PSkill->getID();
         actionTarget.messageID  = 43;
         m_PEntity->loc.zone->PushPacket(m_PEntity, CHAR_INRANGE_SELF, new CActionPacket(action));
+
+        // face toward target
+        m_PEntity->loc.p.rotation = worldAngle(m_PEntity->loc.p, PTarget->loc.p);
+        m_PEntity->loc.zone->UpdateEntityPacket(m_PEntity, ENTITY_UPDATE, UPDATE_POS);
     }
     m_PEntity->PAI->EventHandler.triggerListener("WEAPONSKILL_STATE_ENTER", CLuaBaseEntity(m_PEntity), m_PSkill->getID());
     SpendCost();
@@ -109,6 +113,17 @@ void CMobSkillState::SpendCost()
 
 bool CMobSkillState::Update(time_point tick)
 {
+    // Rotate towards target during ability
+    if (m_castTime > 0s && tick < GetEntryTime() + m_castTime)
+    {
+        CBaseEntity* PTarget = GetTarget();
+        if (PTarget)
+        {
+            m_PEntity->loc.p.rotation = worldAngle(m_PEntity->loc.p, PTarget->loc.p);
+            m_PEntity->loc.zone->UpdateEntityPacket(m_PEntity, ENTITY_UPDATE, UPDATE_POS);
+        }
+    }
+
     if (m_PEntity && m_PEntity->isAlive() && (tick > GetEntryTime() + m_castTime && !IsCompleted()))
     {
         action_t action;

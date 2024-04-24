@@ -1957,11 +1957,6 @@ void CBattleEntity::OnMobSkillFinished(CMobSkillState& state, action_t& action)
         {
             PET_TYPE petType = static_cast<CPetEntity*>(this)->getPetType();
 
-            if (static_cast<CPetEntity*>(this)->getPetType() == PET_TYPE::AVATAR || static_cast<CPetEntity*>(this)->getPetType() == PET_TYPE::WYVERN)
-            {
-                target.animation = PSkill->getPetAnimationID();
-            }
-
             if (petType == PET_TYPE::AUTOMATON)
             {
                 damage = luautils::OnAutomatonAbility(PTargetFound, this, PSkill, PMaster, &action);
