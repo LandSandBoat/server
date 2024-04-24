@@ -26,6 +26,7 @@ zones[xi.zone.LALOFF_AMPHITHEATER] =
     },
     mob =
     {
+        ARK_ANGEL_EV = GetFirstID('Ark_Angel_EV'),
         ARK_ANGEL_HM = GetFirstID('Ark_Angel_HM'),
         ARK_ANGEL_MR = GetFirstID('Ark_Angel_MR'),
         ARK_ANGEL_TT = GetFirstID('Ark_Angel_TT'),
