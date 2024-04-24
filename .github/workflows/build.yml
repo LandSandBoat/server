@@ -360,11 +360,6 @@ jobs:
           cd LuaJIT
           sudo make install MACOSX_DEPLOYMENT_TARGET=$(sw_vers -productVersion) -j $(sysctl -n hw.physicalcpu)
           sudo ln -sf luajit-2.1.0-beta3 /usr/local/bin/luajit
-      - name: Cache 'build' folder
-        uses: actions/cache@v3
-        with:
-          path: build
-          key: ${{ runner.os }}-osx
       - name: Configure CMake
         run: |
           mkdir -p build
