@@ -278,9 +278,7 @@ xi.summon.avatarFinalAdjustments = function(dmg, mob, skill, target, skilltype, 
 
     -- set message to damage
     -- this is for AoE because its only set once
-    if
-        mob:getCurrentAction() == xi.action.PET_MOBABILITY_FINISH
-    then
+    if mob:getCurrentAction() == xi.action.PET_MOBABILITY_FINISH then
         if skill:getMsg() ~= xi.msg.basic.JA_MAGIC_BURST then
             skill:setMsg(xi.msg.basic.USES_JA_TAKE_DAMAGE)
         end

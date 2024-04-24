@@ -300,7 +300,7 @@ xi.mobskills.mobMagicalMove = function(mob, target, skill, damage, element, dmgm
             mob:getPetID() > 0 and
             skillchainTier > 0
         then
-            petAccBonus = petAccBonus + 30
+            petAccBonus = petAccBonus + 25
         end
     end
 
@@ -501,9 +501,7 @@ xi.mobskills.mobFinalAdjustments = function(dmg, mob, skill, target, attackType,
 
     -- set message to damage
     -- this is for AoE because its only set once
-    if
-        mob:getCurrentAction() == xi.action.PET_MOBABILITY_FINISH
-    then
+    if mob:getCurrentAction() == xi.action.PET_MOBABILITY_FINISH then
         if skill:getMsg() ~= xi.msg.basic.JA_MAGIC_BURST then
             skill:setMsg(xi.msg.basic.USES_JA_TAKE_DAMAGE)
         end

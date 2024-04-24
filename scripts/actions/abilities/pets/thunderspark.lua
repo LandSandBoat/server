@@ -21,7 +21,7 @@ abilityObject.onPetAbility = function(target, pet, petskill, summoner, action)
     --get the resisted damage
     damage.dmg = damage.dmg * resist
     --add on bonuses (staff/day/weather/jas/mab/etc all go in this function)
-    damage.dmg = xi.mobskills.mobAddBonuses(pet, target, damage.dmg, 1)
+    damage.dmg = xi.mobskills.mobAddBonuses(pet, target, damage.dmg, xi.element.THUNDER, petskill)
 
     local tp = pet:getTP()
     if tp < 1000 then
